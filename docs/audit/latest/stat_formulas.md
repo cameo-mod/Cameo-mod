@@ -139,10 +139,10 @@ Violations: **668** across 1994 roster actors (reference-clean units: gdiarcher,
 | ra1_soviets_su57attackbomber | Step 52 | expected 26 (HP 65000/2500) |
 | ra1_soviets_teslayak | Step 64 | expected 26 (HP 64000/2500) |
 | ra1_soviets_yakscoutplane | Step 32 | expected 13 (HP 32000/2500) |
-| ra2_allies_attackdog | Step 2 | expected 5 (HP 5000/1000) |
+| ra2_allies_dog | Step 2 | expected 5 (HP 5000/1000) |
 | ra2_allies_harrier | Step 72 | expected 29 (HP 72000/2500) |
 | ra2_allies_ra2spy | Step 10 | expected 5 (HP 5000/1000) |
-| ra2_soviets_attackdog | Step 2 | expected 5 (HP 5000/1000) |
+| ra2_soviets_dog | Step 2 | expected 5 (HP 5000/1000) |
 | schwarzermond_blackbomb | Step 7 | expected 15 (HP 37500/2500) |
 | schwarzermond_corruptorpiercer | Step 7 | expected 15 (HP 37500/2500) |
 | schwarzermond_dieglocke | Step 50 | expected 1500 (HP 3750000/2500) |
@@ -250,8 +250,8 @@ _267 further infantry inherit Repairable from the infantry base template (^Defau
 | ordos_rockettrooper | RegenAmount 10 | expected 24 (2 x SelfHealing 12) |
 | plymouth_cargotruck_empty | RegenAmount 10 | expected 96 (2 x SelfHealing 48) |
 | ra1_allies_alliedoretruck | RegenAmount 10 | expected 80 (2 x SelfHealing 40) |
-| ra1_soviets_sovietheavyindustrialminer | RegenAmount 10 | expected 108 (2 x SelfHealing 54) |
-| ra1_soviets_sovietoretruck | RegenAmount 10 | expected 80 (2 x SelfHealing 40) |
+| ra1_soviets_heavyindustrialminer | RegenAmount 10 | expected 108 (2 x SelfHealing 54) |
+| ra1_soviets_oretruck | RegenAmount 10 | expected 80 (2 x SelfHealing 40) |
 | ra2_allies_chronominer | RegenAmount 10 | expected 80 (2 x SelfHealing 40) |
 | ra2_soviets_warminer | RegenAmount 10 | expected 100 (2 x SelfHealing 50) |
 | schwarzermond_noidharvester | RegenAmount 10 | expected 60 (2 x SelfHealing 30) |
@@ -414,7 +414,7 @@ _267 further infantry inherit Repairable from the infantry base template (^Defau
 | ra1_allies_chronosphere | Power -200 | expected -500 (-Cost/20) |
 | ra1_oresilo | Power -10 | expected -7 (-Cost/20) |
 | ra1_soviets_ironcurtain | Power -200 | expected -250 (-Cost/20) |
-| ra1_soviets_sovietmissilesilo | Power -200 | expected -500 (-Cost/20) |
+| ra1_soviets_missilesilo | Power -200 | expected -500 (-Cost/20) |
 | ra2_allies_chronosphere | Power -200 | expected -250 (-Cost/20) |
 | ra2_allies_concretebarrier | Power missing | expected -10 |
 | ra2_allies_grandcannon | Power -200 | expected -250 (-Cost/20) |
@@ -537,9 +537,9 @@ _none found_
 
 | actor | actual | expected |
 |---|---|---|
+| ordos: ordos_autogunturret | prereqs: ordos_barracks, ordos_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
 | ordos: ordos_chemturret | prereqs: ordos_barracks, ordos_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
 | ordos: ordos_artilleryplatform | prereqs: ordos_barracks, ordos_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
-| ordos: ordos_autogunturret | prereqs: ordos_barracks, ordos_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
 | schwarzermond: schwarzermond_lasertower | prereqs: schwarzermond_barracks, schwarzermond_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
 
 
@@ -646,7 +646,7 @@ _none found_
 | ra1_allies: heavyallies | all units are Tier 1 | heavy support should mix all tiers |
 | ra1_soviets: heavysoviet | total cost 5000 | target ~10000 (±15%) |
 | ra1_soviets: heavysoviet | 5 infantry : 4 vehicles | want ~5 infantry per vehicle |
-| ra1_soviets: heavysoviet | ra1_soviets_sovietheavytank (cost 1000) x2 vs ra1_soviets_flaktruck (cost 800) x1 | pricier units must not outnumber cheaper ones |
+| ra1_soviets: heavysoviet | ra1_soviets_heavytank (cost 1000) x2 vs ra1_soviets_flaktruck (cost 800) x1 | pricier units must not outnumber cheaper ones |
 | ra1_soviets: heavysoviet | all units are Tier 1 | heavy support should mix all tiers |
 | japan: heavyjapan | total cost 6100 | target ~10000 (±15%) |
 | japan: heavyjapan | 5 infantry : 6 vehicles | want ~5 infantry per vehicle |

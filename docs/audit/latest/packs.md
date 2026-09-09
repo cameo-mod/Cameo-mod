@@ -93,7 +93,7 @@
 | swdroidheli | 0 | 1 | mods\cameo\rules\starwars.yaml |
 | swlaat | 0 | 1 | mods\cameo\rules\starwars.yaml |
 | swxwing | 0 | 1 | mods\cameo\rules\starwars.yaml |
-| td_nod | 65 | 1 | mods\cameo\rules\tiberiaalliances.yaml |
+| td_nod | 69 | 1 | mods\cameo\rules\tiberiaalliances.yaml |
 | ts | 0 | 1 | mods\cameo\rules\misc.yaml |
 | upsusagunship3 | 0 | 1 | mods\cameo\rules\shockwave.yaml |
 | upusaleaflet | 0 | 1 | mods\cameo\rules\generals.yaml |
@@ -210,10 +210,10 @@ Fully converted prefixes (76): air, asianalliance, atreides, banshee, bomber, ca
 
 ## P3 — content.yaml manifest vs disk / nonstandard filenames
 
-_clean_
+- `TiberianSun\GDI`: `misc.yaml` in content.yaml but MISSING on disk (crash risk)
 
 ## P4 — naming summary (counts; details via gen_rename_maps)
 
-- actor ids violating the lowercase grammar: **1510** (e.g. 1TNK.camea, 2100A2MAT, 2100A2PT, 2100A2TIT, 2100A2VET, 2100AA, 2100AACH, 2100AAMAT)
+- actor ids violating the lowercase grammar: **1505** (e.g. 1TNK.camea, 2100A2MAT, 2100A2PT, 2100A2TIT, 2100A2VET, 2100AA, 2100AACH, 2100AAMAT)
 
-Total findings: 689
+Total findings: 690

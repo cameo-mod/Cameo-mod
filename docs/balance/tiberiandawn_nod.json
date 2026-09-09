@@ -3448,66 +3448,7 @@
    }
   },
   "naval": {
-   "CNCRSS": {
-    "armor": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Armor.Type",
-     "v": "Light"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Valued.Cost",
-     "v": "500"
-    },
-    "design": {
-     "category": "Naval",
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Ship",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "hp": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Health.HP",
-     "v": "50000"
-    },
-    "integrity_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "name": "Transport Submarine",
-    "prerequisites": [
-     "~cncspen"
-    ],
-    "queue": [
-     "Naval",
-     "RANaval"
-    ],
-    "shield_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "sight": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#RevealsShroud.Range",
-     "v": "5000"
-    },
-    "speed": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Mobile.Speed",
-     "v": "150"
-    },
-    "turn_speed": {
-     "src": "inherited",
-     "v": "40"
-    }
-   },
-   "CNCSS": {
+   "td_nod_attacksubmarine": {
     "armaments": [
      {
       "burst": "2",
@@ -3660,7 +3601,117 @@
      "v": "32"
     }
    },
-   "nodlasercorvette": {
+   "td_nod_ballisticmissilesubmarine": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "25",
+      "damage_warheads": [
+       {
+        "damage": "50000",
+        "falloff": "100, 74, 54, 36, 0",
+        "spread": "245",
+        "tag": "MissileFire_Heavy",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "1790",
+      "pricing": true,
+      "range": "8940",
+      "reloaddelay": "225",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_MissileFire_Heavy",
+       "^Effect_Flame_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_MissileFire_Heavy"
+      ],
+      "weapon": "HonestJohn",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Valued.Cost",
+     "v": "2800"
+    },
+    "design": {
+     "category": "Naval",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ArtilleryShip",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#FirepowerMultiplier@BallisticMissileSubBuff.Modifier",
+     "trait": "FirepowerMultiplier@BallisticMissileSubBuff",
+     "v": 2.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Health.HP",
+     "v": "200000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Ballistic Missile Submarine",
+    "prerequisites": [
+     "~cncspen",
+     "td_nod_communicationscenter"
+    ],
+    "queue": [
+     "Naval",
+     "RANaval"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 200,
+      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#FirepowerMultiplier@BallisticMissileSubBuff.Modifier",
+      "trait": "FirepowerMultiplier@BallisticMissileSubBuff",
+      "types": []
+     }
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Mobile.Speed",
+     "v": "60"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Mobile.TurnSpeed",
+     "v": "24"
+    }
+   },
+   "td_nod_lasercorvette": {
     "armaments": [
      {
       "armament_name": "primary",
@@ -3800,90 +3851,39 @@
      "v": "12"
     }
    },
-   "ssmsub": {
-    "armaments": [
-     {
-      "burst": "2",
-      "burstdelays": "25",
-      "damage_warheads": [
-       {
-        "damage": "50000",
-        "falloff": "100, 74, 54, 36, 0",
-        "spread": "245",
-        "tag": "MissileFire_Heavy",
-        "type": "AreaDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "minrange": "1790",
-      "pricing": true,
-      "range": "8940",
-      "reloaddelay": "225",
-      "slot": "Armament",
-      "versus_templates": [
-       "^Warhead_MissileFire_Heavy",
-       "^Effect_Flame_Heavy"
-      ],
-      "warheads": [
-       "^Warhead_MissileFire_Heavy"
-      ],
-      "weapon": "HonestJohn",
-      "weapon_class_source": "template"
-     }
-    ],
+   "td_nod_transportsubmarine": {
     "armor": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Armor.Type",
-     "v": "Medium"
+     "v": "Light"
     },
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Valued.Cost",
-     "v": "2800"
+     "v": "500"
     },
     "design": {
      "category": "Naval",
      "class_anchor": null,
      "special": null,
-     "subtype": "ArtilleryShip",
+     "subtype": "Ship",
      "tech_tier": null,
      "unit_class": null
     },
-    "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#FirepowerMultiplier@BallisticMissileSubBuff.Modifier",
-     "trait": "FirepowerMultiplier@BallisticMissileSubBuff",
-     "v": 2.0
-    },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Health.HP",
-     "v": "200000"
+     "v": "50000"
     },
     "integrity_pct": {
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ballistic Missile Submarine",
+    "name": "Transport Submarine",
     "prerequisites": [
-     "~cncspen",
-     "td_nod_communicationscenter"
+     "~cncspen"
     ],
     "queue": [
      "Naval",
      "RANaval"
-    ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 200,
-      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#FirepowerMultiplier@BallisticMissileSubBuff.Modifier",
-      "trait": "FirepowerMultiplier@BallisticMissileSubBuff",
-      "types": []
-     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -3898,16 +3898,16 @@
      "v": "100"
     },
     "sight": {
-     "src": "inherited",
-     "v": "8000"
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#RevealsShroud.Range",
+     "v": "5000"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Mobile.Speed",
-     "v": "60"
+     "v": "150"
     },
     "turn_speed": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Mobile.TurnSpeed",
-     "v": "24"
+     "src": "inherited",
+     "v": "40"
     }
    }
   },

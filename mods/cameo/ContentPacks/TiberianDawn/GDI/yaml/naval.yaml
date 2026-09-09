@@ -1,4 +1,4 @@
-gdicarrier:
+td_gdi_supercarrier:
 	Inherits: ^BoatUnit
 	Inherits@Template: ^ArtilleryShipTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -44,11 +44,12 @@ gdicarrier:
 	Voiced:
 		VoiceSet: VehicleVoice
 	RenderSprites:
+		Image: gdicarrier
 		PlayerPalette: player
 	ActorStatValues:
 		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_cuttingedgeequipment, td_gdi_upgrade_lightweightarmorplating
 
-CNCPT:
+td_gdi_missileboat:
 	Inherits: ^BoatUnit
 	Inherits@Template: ^ScoutShipTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -103,6 +104,8 @@ CNCPT:
 	AttackTurreted:
 	WithSpriteTurret:
 	RenderDetectionCircle:
+	RenderSprites:
+		Image: cncpt
 	Selectable:
 		DecorationBounds: 1536, 1536
 	AcceptsDeliveredExperience:
@@ -110,7 +113,7 @@ CNCPT:
 	ActorStatValues:
 		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_advancedmissiletargeting, td_gdi_upgrade_cuttingedgeequipment, td_gdi_upgrade_lightweightarmorplating
 
-CNCCA:
+td_gdi_railgunbattleship:
 	Inherits: ^BoatUnit
 	Inherits@Template: ^BattleShipTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -197,11 +200,12 @@ CNCCA:
 	WithSpriteTurret@SECONDARY:
 		Turret: secondary
 	RenderSprites:
+		Image: cncca
 		PlayerPalette: player_rgba
 	ActorStatValues:
 		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_highvelocitycannons, td_gdi_upgrade_cuttingedgeequipment, td_gdi_upgrade_lightweightarmorplating
 
-LST:
+td_gdi_landingcraft:
 	Inherits: ^BoatUnit
 	Inherits@cargo: ^UnarmedCargoVehicle
 	Inherits@LongRangeSensors: ^LongRangeSensors

@@ -1940,100 +1940,6 @@
    }
   },
   "infantry": {
-   "ra2_allies_attackdog": {
-    "armaments": [
-     {
-      "damage_warheads": [
-       {
-        "damage": "100000",
-        "falloff": null,
-        "spread": null,
-        "tag": "1Dam",
-        "type": "TargetDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "2000",
-      "reloaddelay": "10",
-      "slot": "Armament",
-      "versus_templates": [],
-      "warheads": [],
-      "weapon": "DogJaw",
-      "weapon_class_source": "none"
-     }
-    ],
-    "armor": {
-     "src": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/infantry.yaml#Armor.Type",
-     "v": "None"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/infantry.yaml#Valued.Cost",
-     "v": "200"
-    },
-    "design": {
-     "category": "Infantry",
-     "class_anchor": "melee",
-     "special": null,
-     "subtype": "Dog",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "hp": {
-     "src": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/infantry.yaml#Health.HP",
-     "v": "5000"
-    },
-    "name": "Attack Dog",
-    "prerequisites": [
-     "~ra2_allies_alliedbarracks"
-    ],
-    "queue": [
-     "Infantry",
-     "RAInfantry"
-    ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@MeleeBuff",
-      "types": []
-     }
-    ],
-    "shield_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "sight": {
-     "src": "inherited",
-     "v": "5000"
-    },
-    "speed": {
-     "src": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/infantry.yaml#Mobile.Speed",
-     "v": "100"
-    }
-   },
    "ra2_allies_chronolegionnaire": {
     "armaments": [
      {
@@ -2182,6 +2088,101 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/infantry.yaml#Mobile.Speed",
      "v": "35"
+    }
+   },
+   "ra2_allies_dog": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "100000",
+        "falloff": null,
+        "spread": null,
+        "tag": "1Dam",
+        "type": "TargetDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "2000",
+      "reloaddelay": "10",
+      "slot": "Armament",
+      "versus_templates": [
+       "^DogJaw"
+      ],
+      "warheads": [],
+      "weapon": "ra2_allies_dog_bite",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/infantry.yaml#Armor.Type",
+     "v": "None"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/infantry.yaml#Valued.Cost",
+     "v": "200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Dog",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/infantry.yaml#Health.HP",
+     "v": "5000"
+    },
+    "name": "Attack Dog",
+    "prerequisites": [
+     "~ra2_allies_alliedbarracks"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@MeleeBuff",
+      "types": []
+     }
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/infantry.yaml#Mobile.Speed",
+     "v": "100"
     }
    },
    "ra2_allies_engineer": {

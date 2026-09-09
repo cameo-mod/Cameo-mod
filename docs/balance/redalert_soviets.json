@@ -154,7 +154,7 @@
     },
     "name": "Armored Yak",
     "prerequisites": [
-     "~ra1_soviets_sovietairfield",
+     "~ra1_soviets_airfield",
      "~ra1_soviets_upgrade_armoredyak"
     ],
     "queue": [
@@ -827,8 +827,8 @@
     },
     "name": "Hind Attack Helicopter",
     "prerequisites": [
-     "~ra1_soviets_sovietairfield",
-     "~!ra1_soviets_doctrine_teslaandexperimentaltechdoctrine"
+     "~ra1_soviets_airfield",
+     "~!ra1_soviets_doctrine_teslaandexperimentaltech"
     ],
     "queue": [
      "Aircraft",
@@ -909,7 +909,7 @@
     },
     "name": "Hip Transport",
     "prerequisites": [
-     "~ra1_soviets_sovietairfield"
+     "~ra1_soviets_airfield"
     ],
     "queue": [
      "Aircraft",
@@ -1459,8 +1459,8 @@
     },
     "name": "Kamov Attack Helicopter",
     "prerequisites": [
-     "~ra1_soviets_sovietairfield",
-     "~ra1_soviets_doctrine_teslaandexperimentaltechdoctrine"
+     "~ra1_soviets_airfield",
+     "~ra1_soviets_doctrine_teslaandexperimentaltech"
     ],
     "queue": [
      "Aircraft",
@@ -1799,9 +1799,9 @@
     },
     "name": "Mig Attack Bomber",
     "prerequisites": [
-     "~ra1_soviets_sovietairfield",
-     "ra1_soviets_soviettechcenter",
-     "~!ra1_soviets_doctrine_heavyarmordoctrine"
+     "~ra1_soviets_airfield",
+     "ra1_soviets_techcenter",
+     "~!ra1_soviets_doctrine_heavyarmor"
     ],
     "queue": [
      "Aircraft",
@@ -2078,7 +2078,7 @@
     },
     "name": "Nuclear Yak",
     "prerequisites": [
-     "~ra1_soviets_sovietairfield",
+     "~ra1_soviets_airfield",
      "~ra1_soviets_upgrade_nuclearyak"
     ],
     "queue": [
@@ -2367,9 +2367,9 @@
     },
     "name": "Su-57 Attack Bomber",
     "prerequisites": [
-     "~ra1_soviets_sovietairfield",
-     "ra1_soviets_soviettechcenter",
-     "~ra1_soviets_doctrine_heavyarmordoctrine"
+     "~ra1_soviets_airfield",
+     "ra1_soviets_techcenter",
+     "~ra1_soviets_doctrine_heavyarmor"
     ],
     "queue": [
      "Aircraft",
@@ -2517,8 +2517,8 @@
     },
     "name": "Supersonic Nuclear Bomber",
     "prerequisites": [
-     "~ra1_soviets_sovietairfield",
-     "ra1_soviets_soviettechcenter",
+     "~ra1_soviets_airfield",
+     "ra1_soviets_techcenter",
      "~ra1_soviets_promotion_supersonicnuclearbomber"
     ],
     "queue": [
@@ -2908,7 +2908,7 @@
     },
     "name": "Tesla Yak",
     "prerequisites": [
-     "~ra1_soviets_sovietairfield",
+     "~ra1_soviets_airfield",
      "~ra1_soviets_upgrade_teslayak"
     ],
     "queue": [
@@ -3196,7 +3196,7 @@
     },
     "name": "Yak Scout Plane",
     "prerequisites": [
-     "~ra1_soviets_sovietairfield",
+     "~ra1_soviets_airfield",
      "~!ra1_soviets_upgrade_teslayak",
      "~!ra1_soviets_upgrade_armoredyak",
      "~!ra1_soviets_upgrade_nuclearyak"
@@ -3254,63 +3254,7 @@
    }
   },
   "buildings": {
-   "ra1_soviets_largesovietairfield": {
-    "armor": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml#Armor.Type",
-     "v": "Wood"
-    },
-    "build_duration": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml#Buildable.BuildDuration",
-     "v": "625"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml#Valued.Cost",
-     "v": "2500"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Building",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "hp": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml#Health.HP",
-     "v": "500000"
-    },
-    "integrity_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "name": "Large Soviet Airfield",
-    "prerequisites": [
-     "~ra1_soviets_sovietconstructionyard",
-     "ra1_soviets_sovietradardome",
-     "~ra1_soviets_doctrine_industrialefficiencydoctrine"
-    ],
-    "queue": [
-     "Building",
-     "RABuilding"
-    ],
-    "shield_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "sight": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml#RevealsShroud.Range",
-     "v": "10000"
-    }
-   },
-   "ra1_soviets_sovietairfield": {
+   "ra1_soviets_airfield": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
@@ -3341,9 +3285,9 @@
     },
     "name": "Soviet Airfield",
     "prerequisites": [
-     "~ra1_soviets_sovietconstructionyard",
-     "ra1_soviets_sovietradardome",
-     "~!ra1_soviets_doctrine_industrialefficiencydoctrine"
+     "~ra1_soviets_constructionyard",
+     "ra1_soviets_radardome",
+     "~!ra1_soviets_doctrine_industrialefficiency"
     ],
     "queue": [
      "Building",
@@ -3366,7 +3310,7 @@
      "v": "6000"
     }
    },
-   "ra1_soviets_sovietbarracks": {
+   "ra1_soviets_barracks": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
@@ -3397,7 +3341,7 @@
     },
     "name": "Soviet Barracks",
     "prerequisites": [
-     "~ra1_soviets_sovietconstructionyard",
+     "~ra1_soviets_constructionyard",
      "ra1_powerplant"
     ],
     "queue": [
@@ -3421,7 +3365,7 @@
      "v": "5000"
     }
    },
-   "ra1_soviets_sovietconstructionyard": {
+   "ra1_soviets_constructionyard": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
@@ -3471,7 +3415,7 @@
      "v": "10000"
     }
    },
-   "ra1_soviets_sovietlargefactory": {
+   "ra1_soviets_largefactory": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
@@ -3502,9 +3446,9 @@
     },
     "name": "Soviet Large Factory",
     "prerequisites": [
-     "~ra1_soviets_sovietconstructionyard",
-     "ra1_soviets_sovietorerefinery",
-     "~ra1_soviets_doctrine_industrialefficiencydoctrine"
+     "~ra1_soviets_constructionyard",
+     "ra1_soviets_orerefinery",
+     "~ra1_soviets_doctrine_industrialefficiency"
     ],
     "queue": [
      "Building",
@@ -3527,7 +3471,63 @@
      "v": "10000"
     }
    },
-   "ra1_soviets_sovietorerefinery": {
+   "ra1_soviets_largesovietairfield": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml#Buildable.BuildDuration",
+     "v": "625"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml#Health.HP",
+     "v": "500000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Large Soviet Airfield",
+    "prerequisites": [
+     "~ra1_soviets_constructionyard",
+     "ra1_soviets_radardome",
+     "~ra1_soviets_doctrine_industrialefficiency"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "10000"
+    }
+   },
+   "ra1_soviets_orerefinery": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
@@ -3558,7 +3558,7 @@
     },
     "name": "Soviet Ore Refinery",
     "prerequisites": [
-     "~ra1_soviets_sovietconstructionyard",
+     "~ra1_soviets_constructionyard",
      "ra1_powerplant"
     ],
     "queue": [
@@ -3582,7 +3582,7 @@
      "v": "6000"
     }
    },
-   "ra1_soviets_sovietradardome": {
+   "ra1_soviets_radardome": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
@@ -3613,8 +3613,8 @@
     },
     "name": "Soviet Radar Dome",
     "prerequisites": [
-     "~ra1_soviets_sovietconstructionyard",
-     "ra1_soviets_sovietorerefinery"
+     "~ra1_soviets_constructionyard",
+     "ra1_soviets_orerefinery"
     ],
     "queue": [
      "Building",
@@ -3637,7 +3637,7 @@
      "v": "10000"
     }
    },
-   "ra1_soviets_sovietservicedepot": {
+   "ra1_soviets_servicedepot": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
@@ -3668,8 +3668,8 @@
     },
     "name": "Soviet Service Depot",
     "prerequisites": [
-     "~ra1_soviets_sovietconstructionyard",
-     "ra1_soviets_sovietwarfactory"
+     "~ra1_soviets_constructionyard",
+     "ra1_soviets_warfactory"
     ],
     "queue": [
      "Building",
@@ -3692,7 +3692,7 @@
      "v": "5000"
     }
    },
-   "ra1_soviets_soviettechcenter": {
+   "ra1_soviets_techcenter": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
@@ -3723,8 +3723,8 @@
     },
     "name": "Soviet Tech Center",
     "prerequisites": [
-     "~ra1_soviets_sovietconstructionyard",
-     "ra1_soviets_sovietradardome"
+     "~ra1_soviets_constructionyard",
+     "ra1_soviets_radardome"
     ],
     "queue": [
      "Building",
@@ -3747,7 +3747,7 @@
      "v": "10000"
     }
    },
-   "ra1_soviets_sovietwarfactory": {
+   "ra1_soviets_warfactory": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
@@ -3778,9 +3778,9 @@
     },
     "name": "Soviet War Factory",
     "prerequisites": [
-     "~ra1_soviets_sovietconstructionyard",
-     "ra1_soviets_sovietorerefinery",
-     "~!ra1_soviets_doctrine_industrialefficiencydoctrine"
+     "~ra1_soviets_constructionyard",
+     "ra1_soviets_orerefinery",
+     "~!ra1_soviets_doctrine_industrialefficiency"
     ],
     "queue": [
      "Building",
@@ -3822,7 +3822,7 @@
       "pricing": true,
       "range": "6742",
       "reloaddelay": "30",
-      "requires": "!ra1_soviets_doctrine_infernodoctrine",
+      "requires": "!ra1_soviets_doctrine_inferno",
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Flame_Medium",
@@ -3850,7 +3850,7 @@
       "pricing": true,
       "range": "6742",
       "reloaddelay": "30",
-      "requires": "ra1_soviets_doctrine_infernodoctrine",
+      "requires": "ra1_soviets_doctrine_inferno",
       "slot": "Armament@Upgrade",
       "versus_templates": [
        "^Warhead_Flame_Medium",
@@ -3891,8 +3891,8 @@
     },
     "name": "Flame Tower",
     "prerequisites": [
-     "~ra1_soviets_sovietconstructionyard",
-     "ra1_soviets_sovietbarracks"
+     "~ra1_soviets_constructionyard",
+     "ra1_soviets_barracks"
     ],
     "queue": [
      "Defence",
@@ -3961,7 +3961,7 @@
     },
     "name": "Iron Curtain",
     "prerequisites": [
-     "~ra1_soviets_soviettechcenter",
+     "~ra1_soviets_techcenter",
      "~techlevel.superweapons",
      "!ra1_soviets_ironcurtain_swlimit"
     ],
@@ -3986,7 +3986,7 @@
      "v": "10000"
     }
    },
-   "ra1_soviets_sovietmissilesilo": {
+   "ra1_soviets_missilesilo": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
@@ -4017,7 +4017,7 @@
     },
     "name": "Soviet Missile Silo",
     "prerequisites": [
-     "~ra1_soviets_soviettechcenter",
+     "~ra1_soviets_techcenter",
      "~techlevel.superweapons",
      "!abomb"
     ],
@@ -4042,7 +4042,7 @@
      "v": "10000"
     }
    },
-   "ra1_soviets_sovietsamsite": {
+   "ra1_soviets_samsite": {
     "armaments": [
      {
       "damage_warheads": [
@@ -4133,8 +4133,8 @@
     },
     "name": "Soviet SAM Site",
     "prerequisites": [
-     "~ra1_soviets_sovietconstructionyard",
-     "ra1_soviets_sovietradardome"
+     "~ra1_soviets_constructionyard",
+     "ra1_soviets_radardome"
     ],
     "queue": [
      "Defence",
@@ -4201,7 +4201,7 @@
       "pricing": true,
       "range": "9320",
       "reloaddelay": "3",
-      "requires": "!ra1_soviets_doctrine_teslaandexperimentaltechdoctrine && !ra1_soviets_upgrade_teslaarcing",
+      "requires": "!ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Tesla_Heavy",
@@ -4236,7 +4236,7 @@
       "pricing": true,
       "range": "9320",
       "reloaddelay": "3",
-      "requires": "ra1_soviets_doctrine_teslaandexperimentaltechdoctrine && !ra1_soviets_upgrade_teslaarcing",
+      "requires": "ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@Upgrade1",
       "versus_templates": [
        "TeslaZap"
@@ -4315,8 +4315,8 @@
     },
     "name": "Tesla Coil",
     "prerequisites": [
-     "~ra1_soviets_sovietconstructionyard",
-     "ra1_soviets_soviettechcenter"
+     "~ra1_soviets_constructionyard",
+     "ra1_soviets_techcenter"
     ],
     "queue": [
      "Defence",
@@ -4355,100 +4355,6 @@
    }
   },
   "infantry": {
-   "ra1_soviets_actordogname": {
-    "armaments": [
-     {
-      "damage_warheads": [
-       {
-        "damage": "100000",
-        "falloff": null,
-        "spread": null,
-        "tag": "1Dam",
-        "type": "TargetDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "2000",
-      "reloaddelay": "10",
-      "slot": "Armament",
-      "versus_templates": [],
-      "warheads": [],
-      "weapon": "DogJaw",
-      "weapon_class_source": "none"
-     }
-    ],
-    "armor": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Armor.Type",
-     "v": "None"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Valued.Cost",
-     "v": "200"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Dog",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "hp": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Health.HP",
-     "v": "5000"
-    },
-    "name": "actor_dog.name",
-    "prerequisites": [
-     "~ra1_soviets_sovietbarracks",
-     "~!ra1_soviets_promotion_cyberdog"
-    ],
-    "queue": [
-     "Infantry",
-     "RAInfantry"
-    ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@MeleeBuff",
-      "types": []
-     }
-    ],
-    "shield_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "sight": {
-     "src": "inherited",
-     "v": "5000"
-    },
-    "speed": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Mobile.Speed",
-     "v": "100"
-    }
-   },
    "ra1_soviets_ak47conscript": {
     "armaments": [
      {
@@ -4545,8 +4451,8 @@
     },
     "name": "AK-47 Conscript",
     "prerequisites": [
-     "~ra1_soviets_sovietbarracks",
-     "~ra1_soviets_doctrine_conscriptiondoctrine"
+     "~ra1_soviets_barracks",
+     "~ra1_soviets_doctrine_conscription"
     ],
     "queue": [
      "Infantry",
@@ -4698,7 +4604,7 @@
     },
     "name": "Commissar",
     "prerequisites": [
-     "~ra1_soviets_sovietbarracks",
+     "~ra1_soviets_barracks",
      "ra1_soviets_upgrade_commissar"
     ],
     "queue": [
@@ -4799,7 +4705,7 @@
     },
     "name": "Cyberdog",
     "prerequisites": [
-     "~ra1_soviets_sovietbarracks",
+     "~ra1_soviets_barracks",
      "~ra1_soviets_promotion_cyberdog"
     ],
     "queue": [
@@ -4847,6 +4753,102 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#RevealsShroud.Range",
      "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Mobile.Speed",
+     "v": "100"
+    }
+   },
+   "ra1_soviets_dog": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "100000",
+        "falloff": null,
+        "spread": null,
+        "tag": "1Dam",
+        "type": "TargetDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "2000",
+      "reloaddelay": "10",
+      "slot": "Armament",
+      "versus_templates": [
+       "^DogJaw"
+      ],
+      "warheads": [],
+      "weapon": "ra1_soviets_dog_bite",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Armor.Type",
+     "v": "None"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Valued.Cost",
+     "v": "200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Dog",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Health.HP",
+     "v": "5000"
+    },
+    "name": "actor_dog.name",
+    "prerequisites": [
+     "~ra1_soviets_barracks",
+     "~!ra1_soviets_promotion_cyberdog"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 125,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@MeleeBuff",
+      "types": []
+     }
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Mobile.Speed",
@@ -5029,8 +5031,8 @@
     },
     "name": "Dragunov Anti Material Sniper",
     "prerequisites": [
-     "~ra1_soviets_sovietbarracks",
-     "~ra1_soviets_doctrine_conscriptiondoctrine"
+     "~ra1_soviets_barracks",
+     "~ra1_soviets_doctrine_conscription"
     ],
     "queue": [
      "Infantry",
@@ -5227,8 +5229,8 @@
     },
     "name": "Fire Rocket Soldier",
     "prerequisites": [
-     "~ra1_soviets_sovietbarracks",
-     "~ra1_soviets_doctrine_infernodoctrine"
+     "~ra1_soviets_barracks",
+     "~ra1_soviets_doctrine_inferno"
     ],
     "queue": [
      "Infantry",
@@ -5279,500 +5281,7 @@
      "v": "48"
     }
    },
-   "ra1_soviets_rifleinfantry": {
-    "armaments": [
-     {
-      "burst": "3",
-      "burstdelays": "5",
-      "damage_warheads": [
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
-      "pricing": true,
-      "range": "4668",
-      "reloaddelay": "50",
-      "requires": "!ra1_soviets_upgrade_incendiarybullets",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ],
-      "warheads": [
-       "^Warhead_Bullet_Light"
-      ],
-      "weapon": "ra1_soviets_rifleinfantry_carbine",
-      "weapon_class_source": "template"
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "3",
-      "burstdelays": "5",
-      "damage_warheads": [
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
-      "pricing": false,
-      "range": "4668",
-      "reloaddelay": "50",
-      "requires": "!ra1_soviets_upgrade_incendiarybullets",
-      "slot": "Armament@GARRISONED",
-      "versus_templates": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
-      ],
-      "warheads": [
-       "^Warhead_Bullet_Light"
-      ],
-      "weapon": "ra1_soviets_rifleinfantry_carbine",
-      "weapon_class_source": "template"
-     },
-     {
-      "burst": "3",
-      "burstdelays": "5",
-      "damage_warheads": [
-       {
-        "damage": "4000",
-        "falloff": "100, 90, 78, 60, 0",
-        "spread": "200",
-        "tag": "Flame_LightFlatCompatibility",
-        "type": "AreaDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
-      "pricing": true,
-      "range": "4668",
-      "reloaddelay": "50",
-      "requires": "ra1_soviets_upgrade_incendiarybullets",
-      "slot": "Armament@Upgrade",
-      "versus_templates": [
-       "^Compatibility_Flame_LightFlat",
-       "^Warhead_Flame_Light",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light",
-       "ra1_soviets_rifleinfantry_carbine",
-       "^IncendiaryBulletProjectile"
-      ],
-      "warheads": [
-       "^Warhead_Flame_Light",
-       "^Warhead_Bullet_Light"
-      ],
-      "weapon": "ra1_soviets_rifleinfantry_carbine_incendiary",
-      "weapon_class_source": "template"
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "3",
-      "burstdelays": "5",
-      "damage_warheads": [
-       {
-        "damage": "4000",
-        "falloff": "100, 90, 78, 60, 0",
-        "spread": "200",
-        "tag": "Flame_LightFlatCompatibility",
-        "type": "AreaDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
-      "pricing": false,
-      "range": "4668",
-      "reloaddelay": "50",
-      "requires": "ra1_soviets_upgrade_incendiarybullets",
-      "slot": "Armament@UpgradeGARRISONED",
-      "versus_templates": [
-       "^Compatibility_Flame_LightFlat",
-       "^Warhead_Flame_Light",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light",
-       "ra1_soviets_rifleinfantry_carbine",
-       "^IncendiaryBulletProjectile"
-      ],
-      "warheads": [
-       "^Warhead_Flame_Light",
-       "^Warhead_Bullet_Light"
-      ],
-      "weapon": "ra1_soviets_rifleinfantry_carbine_incendiary",
-      "weapon_class_source": "template"
-     }
-    ],
-    "armor": {
-     "src": "inherited",
-     "v": "None"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "design": {
-     "category": "Infantry",
-     "class_anchor": "scout",
-     "special": 1.0,
-     "subtype": "ScoutInfantry",
-     "tech_tier": 1.0,
-     "unit_class": 1.0
-    },
-    "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#FirepowerMultiplier@ra1_soviets_rifleinfantry.Modifier",
-     "trait": "FirepowerMultiplier@ra1_soviets_rifleinfantry",
-     "v": 0.42
-    },
-    "hp": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Health.HP",
-     "v": "34000"
-    },
-    "name": "Rifle Infantry",
-    "prerequisites": [
-     "~ra1_soviets_sovietbarracks",
-     "~!ra1_soviets_doctrine_conscriptiondoctrine"
-    ],
-    "queue": [
-     "Infantry",
-     "RAInfantry"
-    ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 100,
-      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#FirepowerMultiplier@ScoutInfantryBuff.Modifier",
-      "trait": "FirepowerMultiplier@ScoutInfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 42,
-      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#FirepowerMultiplier@ra1_soviets_rifleinfantry.Modifier",
-      "trait": "FirepowerMultiplier@ra1_soviets_rifleinfantry",
-      "types": []
-     }
-    ],
-    "shield_condition": {
-     "src": "inherited",
-     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
-    },
-    "shield_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "sight": {
-     "src": "inherited",
-     "v": "8000"
-    },
-    "speed": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Mobile.Speed",
-     "v": "54"
-    }
-   },
-   "ra1_soviets_shocktrooper": {
-    "armaments": [
-     {
-      "damage_warheads": [
-       {
-        "damage": "20000",
-        "falloff": "100, 55, 0",
-        "spread": "93",
-        "tag": "Tesla_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "4652",
-      "reloaddelay": "40",
-      "requires": "!ra1_soviets_doctrine_teslaandexperimentaltechdoctrine && !ra1_soviets_upgrade_teslaarcing",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
-      ],
-      "warheads": [
-       "^Warhead_Tesla_Heavy"
-      ],
-      "weapon": "PortaTesla",
-      "weapon_class_source": "template"
-     },
-     {
-      "damage_warheads": [
-       {
-        "damage": "20000",
-        "falloff": "100, 55, 0",
-        "spread": "93",
-        "tag": "Tesla_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "4652",
-      "reloaddelay": "40",
-      "requires": "ra1_soviets_doctrine_teslaandexperimentaltechdoctrine && !ra1_soviets_upgrade_teslaarcing",
-      "slot": "Armament@Upgrade1",
-      "versus_templates": [
-       "PortaTesla"
-      ],
-      "warheads": [
-       "^Warhead_Tesla_Heavy"
-      ],
-      "weapon": "PortaTesla_EMP",
-      "weapon_class_source": "template"
-     },
-     {
-      "damage_warheads": [
-       {
-        "damage": "20000",
-        "falloff": "100, 55, 0",
-        "spread": "93",
-        "tag": "Tesla_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "4652",
-      "reloaddelay": "40",
-      "requires": "ra1_soviets_upgrade_teslaarcing",
-      "slot": "Armament@Upgrade2",
-      "versus_templates": [
-       "PortaTesla_EMP"
-      ],
-      "warheads": [
-       "^Warhead_Tesla_Heavy"
-      ],
-      "weapon": "PortaTeslaArc_EMP",
-      "weapon_class_source": "template"
-     },
-     {
-      "armament_name": "garrisoned",
-      "damage_warheads": [
-       {
-        "damage": "20000",
-        "falloff": "100, 55, 0",
-        "spread": "93",
-        "tag": "Tesla_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": false,
-      "range": "4652",
-      "reloaddelay": "40",
-      "requires": "!ra1_soviets_doctrine_teslaandexperimentaltechdoctrine && !ra1_soviets_upgrade_teslaarcing",
-      "slot": "Armament@GARRISONED",
-      "versus_templates": [
-       "^Warhead_Tesla_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
-      ],
-      "warheads": [
-       "^Warhead_Tesla_Heavy"
-      ],
-      "weapon": "PortaTesla",
-      "weapon_class_source": "template"
-     },
-     {
-      "armament_name": "garrisoned",
-      "damage_warheads": [
-       {
-        "damage": "20000",
-        "falloff": "100, 55, 0",
-        "spread": "93",
-        "tag": "Tesla_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": false,
-      "range": "4652",
-      "reloaddelay": "40",
-      "requires": "ra1_soviets_doctrine_teslaandexperimentaltechdoctrine && !ra1_soviets_upgrade_teslaarcing",
-      "slot": "Armament@Upgrade1GARRISONED",
-      "versus_templates": [
-       "PortaTesla"
-      ],
-      "warheads": [
-       "^Warhead_Tesla_Heavy"
-      ],
-      "weapon": "PortaTesla_EMP",
-      "weapon_class_source": "template"
-     },
-     {
-      "armament_name": "garrisoned",
-      "damage_warheads": [
-       {
-        "damage": "20000",
-        "falloff": "100, 55, 0",
-        "spread": "93",
-        "tag": "Tesla_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": false,
-      "range": "4652",
-      "reloaddelay": "40",
-      "requires": "ra1_soviets_upgrade_teslaarcing",
-      "slot": "Armament@Upgrade2GARRISONED",
-      "versus_templates": [
-       "PortaTesla_EMP"
-      ],
-      "warheads": [
-       "^Warhead_Tesla_Heavy"
-      ],
-      "weapon": "PortaTeslaArc_EMP",
-      "weapon_class_source": "template"
-     }
-    ],
-    "armor": {
-     "src": "inherited",
-     "v": "Plate"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Valued.Cost",
-     "v": "600"
-    },
-    "design": {
-     "category": "Infantry",
-     "class_anchor": null,
-     "special": 1.25,
-     "subtype": "HeavyInfantry",
-     "tech_tier": 0.75,
-     "unit_class": 0.8
-    },
-    "hp": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Health.HP",
-     "v": "40000"
-    },
-    "name": "Shock Trooper",
-    "prerequisites": [
-     "~ra1_soviets_sovietbarracks",
-     "ra1_soviets_soviettechcenter",
-     "~!ra1_soviets_doctrine_teslaandexperimentaltechdoctrine"
-    ],
-    "queue": [
-     "Infantry",
-     "RAInfantry"
-    ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     }
-    ],
-    "shield_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "sight": {
-     "src": "inherited",
-     "v": "6000"
-    },
-    "speed": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Mobile.Speed",
-     "v": "40"
-    }
-   },
-   "ra1_soviets_sovietflamethrower": {
+   "ra1_soviets_flamethrower": {
     "armaments": [
      {
       "damage_warheads": [
@@ -5911,8 +5420,8 @@
     },
     "name": "Soviet Flamethrower",
     "prerequisites": [
-     "~ra1_soviets_sovietbarracks",
-     "ra1_soviets_sovietradardome"
+     "~ra1_soviets_barracks",
+     "ra1_soviets_radardome"
     ],
     "queue": [
      "Infantry",
@@ -5953,7 +5462,7 @@
      "v": "56"
     }
    },
-   "ra1_soviets_sovietgrenadier": {
+   "ra1_soviets_grenadier": {
     "armaments": [
      {
       "damage_warheads": [
@@ -6124,8 +5633,8 @@
     },
     "name": "Soviet Grenadier",
     "prerequisites": [
-     "~ra1_soviets_sovietbarracks",
-     "~!ra1_soviets_doctrine_conscriptiondoctrine"
+     "~ra1_soviets_barracks",
+     "~!ra1_soviets_doctrine_conscription"
     ],
     "queue": [
      "Infantry",
@@ -6172,7 +5681,7 @@
      "v": "75"
     }
    },
-   "ra1_soviets_sovietmortarsoldier": {
+   "ra1_soviets_mortarsoldier": {
     "armaments": [
      {
       "damage_warheads": [
@@ -6320,8 +5829,8 @@
     },
     "name": "Soviet Mortar Soldier",
     "prerequisites": [
-     "~ra1_soviets_sovietbarracks",
-     "ra1_soviets_sovietradardome",
+     "~ra1_soviets_barracks",
+     "ra1_soviets_radardome",
      "~ra1_soviets_promotion_mortarsoldier"
     ],
     "queue": [
@@ -6375,7 +5884,226 @@
      "v": "48"
     }
    },
-   "ra1_soviets_sovietrocketsoldier": {
+   "ra1_soviets_rifleinfantry": {
+    "armaments": [
+     {
+      "burst": "3",
+      "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "67",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "4668",
+      "reloaddelay": "50",
+      "requires": "!ra1_soviets_upgrade_incendiarybullets",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "ra1_soviets_rifleinfantry_carbine",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "3",
+      "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "67",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": false,
+      "range": "4668",
+      "reloaddelay": "50",
+      "requires": "!ra1_soviets_upgrade_incendiarybullets",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "ra1_soviets_rifleinfantry_carbine",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "falloff": "100, 90, 78, 60, 0",
+        "spread": "200",
+        "tag": "Flame_LightFlatCompatibility",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "4668",
+      "reloaddelay": "50",
+      "requires": "ra1_soviets_upgrade_incendiarybullets",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^Compatibility_Flame_LightFlat",
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Flame_Light",
+       "ra1_soviets_rifleinfantry_carbine",
+       "^IncendiaryBulletProjectile"
+      ],
+      "warheads": [
+       "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "ra1_soviets_rifleinfantry_carbine_incendiary",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "3",
+      "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "falloff": "100, 90, 78, 60, 0",
+        "spread": "200",
+        "tag": "Flame_LightFlatCompatibility",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": false,
+      "range": "4668",
+      "reloaddelay": "50",
+      "requires": "ra1_soviets_upgrade_incendiarybullets",
+      "slot": "Armament@UpgradeGARRISONED",
+      "versus_templates": [
+       "^Compatibility_Flame_LightFlat",
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Flame_Light",
+       "ra1_soviets_rifleinfantry_carbine",
+       "^IncendiaryBulletProjectile"
+      ],
+      "warheads": [
+       "^Warhead_Flame_Light",
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "ra1_soviets_rifleinfantry_carbine_incendiary",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": "scout",
+     "special": 1.0,
+     "subtype": "ScoutInfantry",
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#FirepowerMultiplier@ra1_soviets_rifleinfantry.Modifier",
+     "trait": "FirepowerMultiplier@ra1_soviets_rifleinfantry",
+     "v": 0.42
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Health.HP",
+     "v": "34000"
+    },
+    "name": "Rifle Infantry",
+    "prerequisites": [
+     "~ra1_soviets_barracks",
+     "~!ra1_soviets_doctrine_conscription"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 100,
+      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#FirepowerMultiplier@ScoutInfantryBuff.Modifier",
+      "trait": "FirepowerMultiplier@ScoutInfantryBuff",
+      "types": []
+     },
+     {
+      "modifier": 42,
+      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#FirepowerMultiplier@ra1_soviets_rifleinfantry.Modifier",
+      "trait": "FirepowerMultiplier@ra1_soviets_rifleinfantry",
+      "types": []
+     }
+    ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Mobile.Speed",
+     "v": "54"
+    }
+   },
+   "ra1_soviets_rocketsoldier": {
     "armaments": [
      {
       "damage_warheads": [
@@ -6457,9 +6185,9 @@
     },
     "name": "Soviet Rocket Soldier",
     "prerequisites": [
-     "~ra1_soviets_sovietbarracks",
-     "~!ra1_soviets_doctrine_infernodoctrine",
-     "~!ra1_soviets_doctrine_conscriptiondoctrine"
+     "~ra1_soviets_barracks",
+     "~!ra1_soviets_doctrine_inferno",
+     "~!ra1_soviets_doctrine_conscription"
     ],
     "queue": [
      "Infantry",
@@ -6508,6 +6236,280 @@
     "speed": {
      "src": "inherited",
      "v": "55"
+    }
+   },
+   "ra1_soviets_shocktrooper": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "20000",
+        "falloff": "100, 55, 0",
+        "spread": "93",
+        "tag": "Tesla_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Tesla_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "4652",
+      "reloaddelay": "40",
+      "requires": "!ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Tesla_Heavy"
+      ],
+      "weapon": "PortaTesla",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "20000",
+        "falloff": "100, 55, 0",
+        "spread": "93",
+        "tag": "Tesla_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Tesla_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "4652",
+      "reloaddelay": "40",
+      "requires": "ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
+      "slot": "Armament@Upgrade1",
+      "versus_templates": [
+       "PortaTesla"
+      ],
+      "warheads": [
+       "^Warhead_Tesla_Heavy"
+      ],
+      "weapon": "PortaTesla_EMP",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "20000",
+        "falloff": "100, 55, 0",
+        "spread": "93",
+        "tag": "Tesla_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Tesla_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "4652",
+      "reloaddelay": "40",
+      "requires": "ra1_soviets_upgrade_teslaarcing",
+      "slot": "Armament@Upgrade2",
+      "versus_templates": [
+       "PortaTesla_EMP"
+      ],
+      "warheads": [
+       "^Warhead_Tesla_Heavy"
+      ],
+      "weapon": "PortaTeslaArc_EMP",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "20000",
+        "falloff": "100, 55, 0",
+        "spread": "93",
+        "tag": "Tesla_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Tesla_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": false,
+      "range": "4652",
+      "reloaddelay": "40",
+      "requires": "!ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Warhead_Tesla_Heavy",
+       "^Projectile_Lightning_Heavy",
+       "^Effect_Tesla_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Tesla_Heavy"
+      ],
+      "weapon": "PortaTesla",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "20000",
+        "falloff": "100, 55, 0",
+        "spread": "93",
+        "tag": "Tesla_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Tesla_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": false,
+      "range": "4652",
+      "reloaddelay": "40",
+      "requires": "ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
+      "slot": "Armament@Upgrade1GARRISONED",
+      "versus_templates": [
+       "PortaTesla"
+      ],
+      "warheads": [
+       "^Warhead_Tesla_Heavy"
+      ],
+      "weapon": "PortaTesla_EMP",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "20000",
+        "falloff": "100, 55, 0",
+        "spread": "93",
+        "tag": "Tesla_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Tesla_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": false,
+      "range": "4652",
+      "reloaddelay": "40",
+      "requires": "ra1_soviets_upgrade_teslaarcing",
+      "slot": "Armament@Upgrade2GARRISONED",
+      "versus_templates": [
+       "PortaTesla_EMP"
+      ],
+      "warheads": [
+       "^Warhead_Tesla_Heavy"
+      ],
+      "weapon": "PortaTeslaArc_EMP",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": 1.25,
+     "subtype": "HeavyInfantry",
+     "tech_tier": 0.75,
+     "unit_class": 0.8
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Health.HP",
+     "v": "40000"
+    },
+    "name": "Shock Trooper",
+    "prerequisites": [
+     "~ra1_soviets_barracks",
+     "ra1_soviets_techcenter",
+     "~!ra1_soviets_doctrine_teslaandexperimentaltech"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@InfantryBuff",
+      "types": []
+     }
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Mobile.Speed",
+     "v": "40"
     }
    },
    "ra1_soviets_volkov": {
@@ -7400,8 +7402,8 @@
     },
     "name": "Volkov",
     "prerequisites": [
-     "~ra1_soviets_sovietbarracks",
-     "ra1_soviets_soviettechcenter",
+     "~ra1_soviets_barracks",
+     "ra1_soviets_techcenter",
      "~ra1_soviets_promotion_volkov"
     ],
     "queue": [
@@ -7619,9 +7621,9 @@
     },
     "name": "Zapper",
     "prerequisites": [
-     "~ra1_soviets_sovietbarracks",
-     "ra1_soviets_soviettechcenter",
-     "~ra1_soviets_doctrine_teslaandexperimentaltechdoctrine"
+     "~ra1_soviets_barracks",
+     "ra1_soviets_techcenter",
+     "~ra1_soviets_doctrine_teslaandexperimentaltech"
     ],
     "queue": [
      "Infantry",
@@ -7679,7 +7681,7 @@
     },
     "name": "Unlock Cyberdog",
     "prerequisites": [
-     "~ra1_soviets_sovietconstructionyard",
+     "~ra1_soviets_constructionyard",
      "!ra1_soviets_promotion_cyberdog",
      "ra1_soviets_promotion_mortarsoldier",
      "rank1"
@@ -7703,7 +7705,7 @@
     },
     "name": "Unlock Gatling Tank",
     "prerequisites": [
-     "~ra1_soviets_sovietconstructionyard",
+     "~ra1_soviets_constructionyard",
      "!ra1_soviets_promotion_gatlingtank",
      "rank1"
     ],
@@ -7726,7 +7728,7 @@
     },
     "name": "Hurricane Rocket Pods",
     "prerequisites": [
-     "~ra1_soviets_sovietconstructionyard",
+     "~ra1_soviets_constructionyard",
      "!ra1_soviets_promotion_hurricanerocketpods",
      "ra1_soviets_promotion_parabombslevel2",
      "rank1"
@@ -7750,7 +7752,7 @@
     },
     "name": "Infantry Super Optics",
     "prerequisites": [
-     "~ra1_soviets_sovietconstructionyard",
+     "~ra1_soviets_constructionyard",
      "!ra1_soviets_promotion_infantrysuperoptics",
      "rank1"
     ],
@@ -7773,7 +7775,7 @@
     },
     "name": "Mammoth Tank Targeting Computer",
     "prerequisites": [
-     "~ra1_soviets_sovietconstructionyard",
+     "~ra1_soviets_constructionyard",
      "!ra1_soviets_promotion_mammothtanktargetingcomputer",
      "ra1_soviets_promotion_superspyplane",
      "rank1"
@@ -7797,7 +7799,7 @@
     },
     "name": "Unlock Monster Tank",
     "prerequisites": [
-     "~ra1_soviets_sovietconstructionyard",
+     "~ra1_soviets_constructionyard",
      "!ra1_soviets_promotion_monstertank",
      "ra1_soviets_promotion_mammothtanktargetingcomputer",
      "rank1"
@@ -7821,7 +7823,7 @@
     },
     "name": "Unlock Mortar Soldier",
     "prerequisites": [
-     "~ra1_soviets_sovietconstructionyard",
+     "~ra1_soviets_constructionyard",
      "!ra1_soviets_promotion_mortarsoldier",
      "ra1_soviets_promotion_infantrysuperoptics",
      "rank1"
@@ -7845,7 +7847,7 @@
     },
     "name": "Parabombs Level 2",
     "prerequisites": [
-     "~ra1_soviets_sovietconstructionyard",
+     "~ra1_soviets_constructionyard",
      "!ra1_soviets_promotion_parabombslevel2",
      "rank1"
     ],
@@ -7868,7 +7870,7 @@
     },
     "name": "Parabombs Level 3",
     "prerequisites": [
-     "~ra1_soviets_sovietconstructionyard",
+     "~ra1_soviets_constructionyard",
      "!ra1_soviets_promotion_parabombslevel3",
      "ra1_soviets_promotion_hurricanerocketpods",
      "rank1"
@@ -7892,7 +7894,7 @@
     },
     "name": "Unlock Supersonic Nuclear Bomber",
     "prerequisites": [
-     "~ra1_soviets_sovietconstructionyard",
+     "~ra1_soviets_constructionyard",
      "!ra1_soviets_promotion_supersonicnuclearbomber",
      "ra1_soviets_promotion_parabombslevel3",
      "rank1"
@@ -7916,7 +7918,7 @@
     },
     "name": "Super Spy Plane",
     "prerequisites": [
-     "~ra1_soviets_sovietconstructionyard",
+     "~ra1_soviets_constructionyard",
      "!ra1_soviets_promotion_superspyplane",
      "ra1_soviets_promotion_gatlingtank",
      "rank1"
@@ -7940,7 +7942,7 @@
     },
     "name": "Unlock Volkov",
     "prerequisites": [
-     "~ra1_soviets_sovietconstructionyard",
+     "~ra1_soviets_constructionyard",
      "!ra1_soviets_promotion_volkov",
      "ra1_soviets_promotion_cyberdog",
      "rank1"
@@ -7951,7 +7953,7 @@
    }
   },
   "upgrades": {
-   "ra1_soviets_doctrine_conscriptiondoctrine": {
+   "ra1_soviets_doctrine_conscription": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -7970,7 +7972,7 @@
     },
     "name": "Conscription Doctrine",
     "prerequisites": [
-     "~ra1_soviets_sovietradardome",
+     "~ra1_soviets_radardome",
      "!ra_soviet_doctrine_1",
      "!global_conscription_buff"
     ],
@@ -7978,7 +7980,7 @@
      "Upgrades"
     ]
    },
-   "ra1_soviets_doctrine_heavyarmordoctrine": {
+   "ra1_soviets_doctrine_heavyarmor": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -7997,7 +7999,7 @@
     },
     "name": "Heavy Armor Doctrine",
     "prerequisites": [
-     "~ra1_soviets_sovietradardome",
+     "~ra1_soviets_radardome",
      "ra_soviet_doctrine_1",
      "!ra_soviet_doctrine_2"
     ],
@@ -8005,7 +8007,7 @@
      "Upgrades"
     ]
    },
-   "ra1_soviets_doctrine_industrialefficiencydoctrine": {
+   "ra1_soviets_doctrine_industrialefficiency": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -8024,14 +8026,14 @@
     },
     "name": "Industrial Efficiency Doctrine",
     "prerequisites": [
-     "~ra1_soviets_sovietradardome",
+     "~ra1_soviets_radardome",
      "!ra_soviet_doctrine_1"
     ],
     "queue": [
      "Upgrades"
     ]
    },
-   "ra1_soviets_doctrine_infernodoctrine": {
+   "ra1_soviets_doctrine_inferno": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -8050,14 +8052,14 @@
     },
     "name": "Inferno Doctrine",
     "prerequisites": [
-     "~ra1_soviets_sovietradardome",
+     "~ra1_soviets_radardome",
      "!ra_soviet_doctrine_1"
     ],
     "queue": [
      "Upgrades"
     ]
    },
-   "ra1_soviets_doctrine_nuclearwardoctrine": {
+   "ra1_soviets_doctrine_nuclearwar": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -8076,7 +8078,7 @@
     },
     "name": "Nuclear War Doctrine",
     "prerequisites": [
-     "~ra1_soviets_sovietradardome",
+     "~ra1_soviets_radardome",
      "ra_soviet_doctrine_1",
      "!ra_soviet_doctrine_2"
     ],
@@ -8084,7 +8086,7 @@
      "Upgrades"
     ]
    },
-   "ra1_soviets_doctrine_teslaandexperimentaltechdoctrine": {
+   "ra1_soviets_doctrine_teslaandexperimentaltech": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -8103,7 +8105,7 @@
     },
     "name": "Tesla and Experimental Tech Doctrine",
     "prerequisites": [
-     "~ra1_soviets_sovietradardome",
+     "~ra1_soviets_radardome",
      "ra_soviet_doctrine_1",
      "!ra_soviet_doctrine_2"
     ],
@@ -8130,7 +8132,7 @@
     },
     "name": "Afterburners",
     "prerequisites": [
-     "~ra1_soviets_sovietradardome",
+     "~ra1_soviets_radardome",
      "!ra1_soviets_upgrade_afterburners"
     ],
     "queue": [
@@ -8156,8 +8158,8 @@
     },
     "name": "Unlock Armored Yak",
     "prerequisites": [
-     "~ra1_soviets_sovietradardome",
-     "~ra1_soviets_doctrine_heavyarmordoctrine",
+     "~ra1_soviets_radardome",
+     "~ra1_soviets_doctrine_heavyarmor",
      "!ra1_soviets_upgrade_armoredyak"
     ],
     "queue": [
@@ -8183,8 +8185,8 @@
     },
     "name": "Autoloaders",
     "prerequisites": [
-     "~ra1_soviets_soviettechcenter",
-     "~ra1_soviets_doctrine_heavyarmordoctrine",
+     "~ra1_soviets_techcenter",
+     "~ra1_soviets_doctrine_heavyarmor",
      "!ra1_soviets_upgrade_autoloaders"
     ],
     "queue": [
@@ -8210,15 +8212,15 @@
     },
     "name": "Unlock Commissar",
     "prerequisites": [
-     "~ra1_soviets_sovietradardome",
-     "~ra1_soviets_doctrine_conscriptiondoctrine",
+     "~ra1_soviets_radardome",
+     "~ra1_soviets_doctrine_conscription",
      "!ra1_soviets_upgrade_commissar"
     ],
     "queue": [
      "Upgrades"
     ]
    },
-   "ra1_soviets_upgrade_hammertankupgrade": {
+   "ra1_soviets_upgrade_hammertank": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -8237,8 +8239,8 @@
     },
     "name": "Hammer Tank Upgrade",
     "prerequisites": [
-     "~ra1_soviets_sovietradardome",
-     "!ra1_soviets_upgrade_hammertankupgrade"
+     "~ra1_soviets_radardome",
+     "!ra1_soviets_upgrade_hammertank"
     ],
     "queue": [
      "Upgrades"
@@ -8263,7 +8265,7 @@
     },
     "name": "Hazmat Suits",
     "prerequisites": [
-     "~ra1_soviets_soviettechcenter",
+     "~ra1_soviets_techcenter",
      "!ra1_soviets_upgrade_hazmatsuits"
     ],
     "queue": [
@@ -8289,15 +8291,15 @@
     },
     "name": "Unlock Heatray Tank",
     "prerequisites": [
-     "~ra1_soviets_sovietradardome",
-     "~ra1_soviets_doctrine_infernodoctrine",
+     "~ra1_soviets_radardome",
+     "~ra1_soviets_doctrine_inferno",
      "!ra1_soviets_upgrade_heatraytank"
     ],
     "queue": [
      "Upgrades"
     ]
    },
-   "ra1_soviets_upgrade_heavyteslatankupgrade": {
+   "ra1_soviets_upgrade_heavyteslatank": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -8316,10 +8318,10 @@
     },
     "name": "Heavy Tesla Tank Upgrade",
     "prerequisites": [
-     "~ra1_soviets_soviettechcenter",
-     "~ra1_soviets_doctrine_teslaandexperimentaltechdoctrine",
-     "ra1_soviets_upgrade_hammertankupgrade",
-     "!ra1_soviets_upgrade_heavyteslatankupgrade"
+     "~ra1_soviets_techcenter",
+     "~ra1_soviets_doctrine_teslaandexperimentaltech",
+     "ra1_soviets_upgrade_hammertank",
+     "!ra1_soviets_upgrade_heavyteslatank"
     ],
     "queue": [
      "Upgrades"
@@ -8344,15 +8346,15 @@
     },
     "name": "Incendiary Bullets",
     "prerequisites": [
-     "~ra1_soviets_soviettechcenter",
-     "~ra1_soviets_doctrine_infernodoctrine",
+     "~ra1_soviets_techcenter",
+     "~ra1_soviets_doctrine_inferno",
      "!ra1_soviets_upgrade_incendiarybullets"
     ],
     "queue": [
      "Research"
     ]
    },
-   "ra1_soviets_upgrade_kotinnucleartankupgrade": {
+   "ra1_soviets_upgrade_kotinnucleartank": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -8371,10 +8373,10 @@
     },
     "name": "Kotin Nuclear Tank Upgrade",
     "prerequisites": [
-     "~ra1_soviets_soviettechcenter",
-     "~ra1_soviets_doctrine_nuclearwardoctrine",
-     "ra1_soviets_upgrade_hammertankupgrade",
-     "!ra1_soviets_upgrade_kotinnucleartankupgrade"
+     "~ra1_soviets_techcenter",
+     "~ra1_soviets_doctrine_nuclearwar",
+     "ra1_soviets_upgrade_hammertank",
+     "!ra1_soviets_upgrade_kotinnucleartank"
     ],
     "queue": [
      "Upgrades"
@@ -8399,8 +8401,8 @@
     },
     "name": "Mass Production",
     "prerequisites": [
-     "~ra1_soviets_soviettechcenter",
-     "~ra1_soviets_doctrine_industrialefficiencydoctrine",
+     "~ra1_soviets_techcenter",
+     "~ra1_soviets_doctrine_industrialefficiency",
      "!ra1_soviets_upgrade_massproduction"
     ],
     "queue": [
@@ -8426,8 +8428,8 @@
     },
     "name": "Men Of Steel",
     "prerequisites": [
-     "~ra1_soviets_soviettechcenter",
-     "~ra1_soviets_doctrine_conscriptiondoctrine",
+     "~ra1_soviets_techcenter",
+     "~ra1_soviets_doctrine_conscription",
      "!ra1_soviets_upgrade_menofsteel"
     ],
     "queue": [
@@ -8453,8 +8455,8 @@
     },
     "name": "Nuclear Tank Shells",
     "prerequisites": [
-     "~ra1_soviets_soviettechcenter",
-     "~ra1_soviets_doctrine_nuclearwardoctrine",
+     "~ra1_soviets_techcenter",
+     "~ra1_soviets_doctrine_nuclearwar",
      "!ra1_soviets_upgrade_nucleartankshells"
     ],
     "queue": [
@@ -8480,8 +8482,8 @@
     },
     "name": "Unlock Nuclear Yak",
     "prerequisites": [
-     "~ra1_soviets_sovietradardome",
-     "~ra1_soviets_doctrine_nuclearwardoctrine",
+     "~ra1_soviets_radardome",
+     "~ra1_soviets_doctrine_nuclearwar",
      "!ra1_soviets_upgrade_nuclearyak"
     ],
     "queue": [
@@ -8507,8 +8509,8 @@
     },
     "name": "Reactor Overload",
     "prerequisites": [
-     "~ra1_soviets_soviettechcenter",
-     "~ra1_soviets_doctrine_teslaandexperimentaltechdoctrine",
+     "~ra1_soviets_techcenter",
+     "~ra1_soviets_doctrine_teslaandexperimentaltech",
      "!ra1_soviets_upgrade_reactoroverload"
     ],
     "queue": [
@@ -8534,15 +8536,15 @@
     },
     "name": "Scorched Earth",
     "prerequisites": [
-     "~ra1_soviets_soviettechcenter",
-     "~ra1_soviets_doctrine_infernodoctrine",
+     "~ra1_soviets_techcenter",
+     "~ra1_soviets_doctrine_inferno",
      "!ra1_soviets_upgrade_scorchedearth"
     ],
     "queue": [
      "Research"
     ]
    },
-   "ra1_soviets_upgrade_shtoradefensesystemupgrade": {
+   "ra1_soviets_upgrade_shtoradefensesystem": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -8561,10 +8563,10 @@
     },
     "name": "Shtora Defense System Upgrade",
     "prerequisites": [
-     "~ra1_soviets_soviettechcenter",
-     "~ra1_soviets_doctrine_heavyarmordoctrine",
-     "ra1_soviets_upgrade_hammertankupgrade",
-     "!ra1_soviets_upgrade_shtoradefensesystemupgrade"
+     "~ra1_soviets_techcenter",
+     "~ra1_soviets_doctrine_heavyarmor",
+     "ra1_soviets_upgrade_hammertank",
+     "!ra1_soviets_upgrade_shtoradefensesystem"
     ],
     "queue": [
      "Upgrades"
@@ -8589,8 +8591,8 @@
     },
     "name": "Stalinium",
     "prerequisites": [
-     "~ra1_soviets_soviettechcenter",
-     "~ra1_soviets_doctrine_heavyarmordoctrine",
+     "~ra1_soviets_techcenter",
+     "~ra1_soviets_doctrine_heavyarmor",
      "!ra1_soviets_upgrade_stalinium"
     ],
     "queue": [
@@ -8616,8 +8618,8 @@
     },
     "name": "Tesla Arcing",
     "prerequisites": [
-     "~ra1_soviets_soviettechcenter",
-     "~ra1_soviets_doctrine_teslaandexperimentaltechdoctrine",
+     "~ra1_soviets_techcenter",
+     "~ra1_soviets_doctrine_teslaandexperimentaltech",
      "!ra1_soviets_upgrade_teslaarcing"
     ],
     "queue": [
@@ -8643,8 +8645,8 @@
     },
     "name": "Tesla Rockets",
     "prerequisites": [
-     "~ra1_soviets_soviettechcenter",
-     "~ra1_soviets_doctrine_teslaandexperimentaltechdoctrine",
+     "~ra1_soviets_techcenter",
+     "~ra1_soviets_doctrine_teslaandexperimentaltech",
      "!ra1_soviets_upgrade_teslarockets"
     ],
     "queue": [
@@ -8670,8 +8672,8 @@
     },
     "name": "Unlock Tesla Yak",
     "prerequisites": [
-     "~ra1_soviets_sovietradardome",
-     "~ra1_soviets_doctrine_teslaandexperimentaltechdoctrine",
+     "~ra1_soviets_radardome",
+     "~ra1_soviets_doctrine_teslaandexperimentaltech",
      "!ra1_soviets_upgrade_teslayak"
     ],
     "queue": [
@@ -8697,8 +8699,8 @@
     },
     "name": "Thermobaric Rockets",
     "prerequisites": [
-     "~ra1_soviets_soviettechcenter",
-     "~ra1_soviets_doctrine_heavyarmordoctrine",
+     "~ra1_soviets_techcenter",
+     "~ra1_soviets_doctrine_heavyarmor",
      "!ra1_soviets_upgrade_thermobaricrockets"
     ],
     "queue": [
@@ -8724,8 +8726,8 @@
     },
     "name": "Thermonuclear Rockets",
     "prerequisites": [
-     "~ra1_soviets_soviettechcenter",
-     "~ra1_soviets_doctrine_nuclearwardoctrine",
+     "~ra1_soviets_techcenter",
+     "~ra1_soviets_doctrine_nuclearwar",
      "!ra1_soviets_upgrade_thermonuclearrockets"
     ],
     "queue": [
@@ -8751,8 +8753,8 @@
     },
     "name": "Unstable Isotopes",
     "prerequisites": [
-     "~ra1_soviets_soviettechcenter",
-     "~ra1_soviets_doctrine_nuclearwardoctrine",
+     "~ra1_soviets_techcenter",
+     "~ra1_soviets_doctrine_nuclearwar",
      "!ra1_soviets_upgrade_unstableisotopes"
     ],
     "queue": [
@@ -8778,8 +8780,8 @@
     },
     "name": "Vengeance",
     "prerequisites": [
-     "~ra1_soviets_soviettechcenter",
-     "~ra1_soviets_doctrine_conscriptiondoctrine",
+     "~ra1_soviets_techcenter",
+     "~ra1_soviets_doctrine_conscription",
      "!ra1_soviets_upgrade_vengeance"
     ],
     "queue": [
@@ -8805,8 +8807,8 @@
     },
     "name": "War Economy",
     "prerequisites": [
-     "~ra1_soviets_soviettechcenter",
-     "~ra1_soviets_doctrine_industrialefficiencydoctrine",
+     "~ra1_soviets_techcenter",
+     "~ra1_soviets_doctrine_industrialefficiency",
      "!ra1_soviets_upgrade_wareconomy"
     ],
     "queue": [
@@ -8901,7 +8903,7 @@
       "pricing": true,
       "range": "5454",
       "reloaddelay": "20",
-      "requires": "ra1_soviets_doctrine_teslaandexperimentaltechdoctrine && !ra1_soviets_upgrade_teslaarcing",
+      "requires": "ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@TeslaUpgrade1",
       "versus_templates": [
        "^Compatibility_Tesla_HeavyFlat",
@@ -8977,7 +8979,7 @@
       "pricing": true,
       "range": "8181",
       "reloaddelay": "20",
-      "requires": "ra1_soviets_doctrine_teslaandexperimentaltechdoctrine && !ra1_soviets_upgrade_teslaarcing",
+      "requires": "ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@TeslaUpgrade1AA",
       "versus_templates": [
        "BTRTeslaMachineGun"
@@ -9053,8 +9055,8 @@
     },
     "name": "BTR-80",
     "prerequisites": [
-     "~ra1_soviets_sovietwarfactory",
-     "~ra1_soviets_doctrine_conscriptiondoctrine"
+     "~ra1_soviets_warfactory",
+     "~ra1_soviets_doctrine_conscription"
     ],
     "queue": [
      "Vehicle",
@@ -9181,8 +9183,8 @@
     },
     "name": "Flak Truck",
     "prerequisites": [
-     "~ra1_soviets_sovietwarfactory",
-     "~!ra1_soviets_doctrine_conscriptiondoctrine"
+     "~ra1_soviets_warfactory",
+     "~!ra1_soviets_doctrine_conscription"
     ],
     "queue": [
      "Vehicle",
@@ -9358,7 +9360,7 @@
       "pricing": true,
       "range": "5000",
       "reloaddelay": "10",
-      "requires": "ra1_soviets_doctrine_teslaandexperimentaltechdoctrine && !ra1_soviets_upgrade_teslaarcing",
+      "requires": "ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@TeslaUpgrade1",
       "versus_templates": [
        "^Warhead_Tesla_Heavy",
@@ -9426,7 +9428,7 @@
       "pricing": true,
       "range": "7500",
       "reloaddelay": "10",
-      "requires": "ra1_soviets_doctrine_teslaandexperimentaltechdoctrine && !ra1_soviets_upgrade_teslaarcing",
+      "requires": "ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@TeslaUpgrade1AA",
       "versus_templates": [
        "TeslaRAGatlingTankCannon"
@@ -9498,9 +9500,9 @@
     },
     "name": "Gatling Tank",
     "prerequisites": [
-     "~ra1_soviets_sovietwarfactory",
+     "~ra1_soviets_warfactory",
      "~ra1_soviets_promotion_gatlingtank",
-     "~!ra1_soviets_doctrine_conscriptiondoctrine"
+     "~!ra1_soviets_doctrine_conscription"
     ],
     "queue": [
      "Vehicle",
@@ -9604,7 +9606,7 @@
     },
     "name": "Gorynych Tank",
     "prerequisites": [
-     "~ra1_soviets_sovietwarfactory"
+     "~ra1_soviets_warfactory"
     ],
     "queue": [
      "Vehicle",
@@ -9746,9 +9748,9 @@
     },
     "name": "Grad",
     "prerequisites": [
-     "~ra1_soviets_sovietwarfactory",
-     "ra1_soviets_soviettechcenter",
-     "~ra1_soviets_doctrine_heavyarmordoctrine"
+     "~ra1_soviets_warfactory",
+     "ra1_soviets_techcenter",
+     "~ra1_soviets_doctrine_heavyarmor"
     ],
     "queue": [
      "Vehicle",
@@ -9908,7 +9910,7 @@
       "pricing": true,
       "range": "6825",
       "reloaddelay": "100",
-      "requires": "ra1_soviets_upgrade_shtoradefensesystemupgrade",
+      "requires": "ra1_soviets_upgrade_shtoradefensesystem",
       "slot": "Armament@shtora",
       "versus_templates": [
        "^Warhead_Laser_Light",
@@ -9951,10 +9953,10 @@
     },
     "name": "Hammer Tank",
     "prerequisites": [
-     "~ra1_soviets_sovietwarfactory",
-     "~ra1_soviets_upgrade_hammertankupgrade",
-     "~!ra1_soviets_upgrade_heavyteslatankupgrade",
-     "~!ra1_soviets_upgrade_kotinnucleartankupgrade"
+     "~ra1_soviets_warfactory",
+     "~ra1_soviets_upgrade_hammertank",
+     "~!ra1_soviets_upgrade_heavyteslatank",
+     "~!ra1_soviets_upgrade_kotinnucleartank"
     ],
     "queue": [
      "Vehicle",
@@ -10136,7 +10138,7 @@
     },
     "name": "Heatray Tank",
     "prerequisites": [
-     "~ra1_soviets_sovietwarfactory",
+     "~ra1_soviets_warfactory",
      "ra1_soviets_upgrade_heatraytank"
     ],
     "queue": [
@@ -10186,6 +10188,206 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "12"
+    }
+   },
+   "ra1_soviets_heavyindustrialminer": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Harvester",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
+     "v": "135000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Soviet Heavy Industrial Miner",
+    "prerequisites": [
+     "~ra1_soviets_warfactory",
+     "~ra1_soviets_orerefinery",
+     "~ra1_soviets_doctrine_industrialefficiency"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "80"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "16"
+    }
+   },
+   "ra1_soviets_heavytank": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "10000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "5469",
+      "reloaddelay": "76",
+      "requires": "!ra1_soviets_upgrade_nucleartankshells",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_CannonHE_Medium"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "105mm",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "12000",
+        "falloff": "100, 90, 78, 60, 0",
+        "spread": "300",
+        "tag": "Flame_MediumFlatCompatibility",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "5469",
+      "reloaddelay": "76",
+      "requires": "ra1_soviets_upgrade_nucleartankshells",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^Compatibility_Flame_MediumFlat",
+       "^Warhead_Flame_Medium",
+       "^Projectile_Flame_Medium",
+       "^Effect_Flame_Medium",
+       "105mm"
+      ],
+      "warheads": [
+       "^Warhead_Flame_Medium",
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "105mmThermobaric",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Heavy"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "MainBattleTank",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
+     "v": "150000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Soviet Heavy Tank",
+    "prerequisites": [
+     "~ra1_soviets_warfactory",
+     "~!ra1_soviets_upgrade_hammertank"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "70"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "14"
     }
    },
    "ra1_soviets_heavyteslatank": {
@@ -10319,8 +10521,8 @@
     },
     "name": "Heavy Tesla Tank",
     "prerequisites": [
-     "~ra1_soviets_sovietwarfactory",
-     "~ra1_soviets_upgrade_heavyteslatankupgrade"
+     "~ra1_soviets_warfactory",
+     "~ra1_soviets_upgrade_heavyteslatank"
     ],
     "queue": [
      "Vehicle",
@@ -10456,8 +10658,8 @@
     },
     "name": "Kotin Nuclear Tank",
     "prerequisites": [
-     "~ra1_soviets_sovietwarfactory",
-     "~ra1_soviets_upgrade_kotinnucleartankupgrade"
+     "~ra1_soviets_warfactory",
+     "~ra1_soviets_upgrade_kotinnucleartank"
     ],
     "queue": [
      "Vehicle",
@@ -10551,8 +10753,8 @@
     },
     "name": "MAD Tank",
     "prerequisites": [
-     "~ra1_soviets_sovietwarfactory",
-     "ra1_soviets_soviettechcenter"
+     "~ra1_soviets_warfactory",
+     "ra1_soviets_techcenter"
     ],
     "queue": [
      "Vehicle",
@@ -10591,1247 +10793,7 @@
      "v": "24"
     }
    },
-   "ra1_soviets_monstertank": {
-    "armaments": [
-     {
-      "burst": "2",
-      "burstdelays": "32",
-      "damage_warheads": [
-       {
-        "damage": "80000",
-        "falloff": "100, 88, 75, 62, 52, 42, 33, 24, 16, 8, 0",
-        "spread": "400",
-        "tag": "CannonNuke_Heavy",
-        "type": "AreaDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "7833",
-      "reloaddelay": "103",
-      "requires": "!ra1_soviets_doctrine_infernodoctrine",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^Warhead_CannonNuke_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^Effect_Nuclear_Super"
-      ],
-      "warheads": [
-       "^Warhead_CannonNuke_Heavy"
-      ],
-      "weapon": "MonsterTank120mm",
-      "weapon_class_source": "template"
-     },
-     {
-      "burst": "2",
-      "burstdelays": "32",
-      "damage_warheads": [
-       {
-        "damage": "120000",
-        "falloff": "100, 76, 56, 38, 0",
-        "spread": "346",
-        "tag": "CannonFire_Heavy",
-        "type": "AreaDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "7833",
-      "reloaddelay": "103",
-      "requires": "ra1_soviets_doctrine_infernodoctrine",
-      "slot": "Armament@Upgrade",
-      "versus_templates": [
-       "^Warhead_CannonFire_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^Effect_Flame_Heavy"
-      ],
-      "warheads": [
-       "^Warhead_CannonFire_Heavy"
-      ],
-      "weapon": "MonsterTank120mmInferno",
-      "weapon_class_source": "template"
-     },
-     {
-      "burst": "4",
-      "burstdelays": "3",
-      "damage_warheads": [
-       {
-        "damage": "40000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_HeavyFlatCompatibility",
-        "type": "AreaDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "7833",
-      "reloaddelay": "125",
-      "requires": "!ra1_soviets_upgrade_teslarockets && !ra1_soviets_upgrade_thermonuclearrockets",
-      "slot": "Armament@SECONDARY",
-      "versus_templates": [
-       "^Compatibility_MissileHE_HeavyFlat",
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_MissileHE_Heavy",
-       "^Projectile_Missile_Heavy",
-       "^Effect_MissileHE_Heavy"
-      ],
-      "warheads": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_MissileHE_Heavy"
-      ],
-      "weapon": "MonsterTankTusk",
-      "weapon_class_source": "template"
-     },
-     {
-      "burst": "4",
-      "burstdelays": "3",
-      "damage_warheads": [
-       {
-        "damage": "120250",
-        "falloff": "100, 52, 0",
-        "spread": "63",
-        "tag": "MissileTesla_HeavyFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "13",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "13",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "13",
-        "falloff": null,
-        "spread": "50",
-        "tag": "TeslaWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "13",
-        "falloff": null,
-        "spread": "300",
-        "tag": "HeavyMissilePercentage",
-        "type": "AreaDamagePercentage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "7833",
-      "reloaddelay": "125",
-      "requires": "ra1_soviets_upgrade_teslarockets",
-      "slot": "Armament@TeslaSECONDARY",
-      "versus_templates": [
-       "^Compatibility_MissileTesla_HeavyFlat",
-       "^Grenade",
-       "^LightFlameWeapon",
-       "^TeslaWeapon",
-       "^HeavyMissile",
-       "^Effect_Tesla_Impact_RA2"
-      ],
-      "warheads": [],
-      "weapon": "MonsterTankTuskTesla",
-      "weapon_class_source": "none"
-     },
-     {
-      "burst": "4",
-      "burstdelays": "3",
-      "damage_warheads": [
-       {
-        "damage": "106000",
-        "falloff": "100, 76, 57, 43, 31, 17, 0",
-        "spread": "338",
-        "tag": "Thermobaric_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "7",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "7",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "7",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "7",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "7",
-        "falloff": null,
-        "spread": "125",
-        "tag": "FlakWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "7",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "7",
-        "falloff": null,
-        "spread": "200",
-        "tag": "MediumMissilePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "7",
-        "falloff": null,
-        "spread": "300",
-        "tag": "HeavyMissilePercentage",
-        "type": "AreaDamagePercentage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "7833",
-      "reloaddelay": "125",
-      "requires": "ra1_soviets_upgrade_thermonuclearrockets",
-      "slot": "Armament@NukeSECONDARY",
-      "versus_templates": [
-       "^Warhead_Thermobaric_Heavy",
-       "^LightFlameWeapon",
-       "^MediumFlameWeapon",
-       "^HeavyFlameWeapon",
-       "^Grenade",
-       "^FlakWeapon",
-       "^ShrapnelWeapon",
-       "^MediumMissile",
-       "^HeavyMissile"
-      ],
-      "warheads": [
-       "^Warhead_Thermobaric_Heavy"
-      ],
-      "weapon": "MonsterTankTuskThermobaric",
-      "weapon_class_source": "template"
-     }
-    ],
-    "armor": {
-     "src": "inherited",
-     "v": "Superheavy"
-    },
-    "build_limit": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Buildable.BuildLimit",
-     "v": "1"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Valued.Cost",
-     "v": "10000"
-    },
-    "design": {
-     "category": "Tanks",
-     "class_anchor": "epic_vehicle",
-     "special": 1.0,
-     "subtype": "EpicVehicle",
-     "tech_tier": 0.75,
-     "unit_class": 0.4
-    },
-    "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets.Modifier",
-     "trait": "FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets",
-     "v": 1.05
-    },
-    "hp": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
-     "v": "1000000"
-    },
-    "integrity_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "name": "Monster Tank",
-    "prerequisites": [
-     "~ra1_soviets_sovietwarfactory",
-     "ra1_soviets_soviettechcenter",
-     "~ra1_soviets_promotion_monstertank"
-    ],
-    "queue": [
-     "Vehicle",
-     "RAVehicle"
-    ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
-     {
-      "modifier": 105,
-      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets.Modifier",
-      "trait": "FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets",
-      "types": []
-     }
-    ],
-    "shield_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "sight": {
-     "src": "inherited",
-     "v": "8000"
-    },
-    "speed": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Mobile.Speed",
-     "v": "45"
-    },
-    "turn_speed": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Mobile.TurnSpeed",
-     "v": "9"
-    }
-   },
-   "ra1_soviets_nuclearv2launcher": {
-    "armaments": [
-     {
-      "damage_warheads": [
-       {
-        "damage": "300000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
-        "spread": "1000",
-        "tag": "Nuclear_Super",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
-        "spread": "500",
-        "tag": "Nuclear_Super_Percentage",
-        "type": "AreaDamagePercentage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
-      "minrange": "2510",
-      "pricing": true,
-      "range": "12550",
-      "reloaddelay": "158",
-      "requires": "!ra1_soviets_upgrade_thermonuclearrockets",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^Warhead_Nuclear_Super",
-       "^Effect_Nuclear_Super"
-      ],
-      "warheads": [
-       "^Warhead_Nuclear_Super"
-      ],
-      "weapon": "SCUDNUKE",
-      "weapon_class_source": "template"
-     },
-     {
-      "damage_warheads": [
-       {
-        "damage": "300000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
-        "spread": "1000",
-        "tag": "Nuclear_Super",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
-        "spread": "500",
-        "tag": "Nuclear_Super_Percentage",
-        "type": "AreaDamagePercentage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
-      "minrange": "2510",
-      "pricing": true,
-      "range": "12550",
-      "reloaddelay": "158",
-      "requires": "ra1_soviets_upgrade_thermonuclearrockets",
-      "slot": "Armament@Upgrade",
-      "versus_templates": [
-       "SCUDNUKE"
-      ],
-      "warheads": [
-       "^Warhead_Nuclear_Super"
-      ],
-      "weapon": "SCUDNUKEThermobaric",
-      "weapon_class_source": "template"
-     }
-    ],
-    "armor": {
-     "src": "inherited",
-     "v": "Light"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Valued.Cost",
-     "v": "2300"
-    },
-    "design": {
-     "category": "Vehicles",
-     "class_anchor": "artillery",
-     "special": null,
-     "subtype": "Artillery",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "hp": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
-     "v": "40000"
-    },
-    "integrity_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "name": "Nuclear V2 Launcher",
-    "prerequisites": [
-     "~ra1_soviets_sovietwarfactory",
-     "ra1_soviets_soviettechcenter",
-     "~ra1_soviets_doctrine_nuclearwardoctrine"
-    ],
-    "queue": [
-     "Vehicle",
-     "RAVehicle"
-    ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
-    "shield_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "sight": {
-     "src": "inherited",
-     "v": "9000"
-    },
-    "speed": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Mobile.Speed",
-     "v": "80"
-    },
-    "turn_speed": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Mobile.TurnSpeed",
-     "v": "32"
-    }
-   },
-   "ra1_soviets_nukedemotruck": {
-    "armaments": [
-     {
-      "damage_warheads": [],
-      "defined_in": "mods/cameo/weapons/weapons.yaml",
-      "design_weapon_class": null,
-      "extraction_note": "no_damage_warheads",
-      "pricing": false,
-      "range": "2000",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [],
-      "warheads": [],
-      "weapon": "DemoTruckTargeting",
-      "weapon_class_source": "none"
-     }
-    ],
-    "armor": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Armor.Type",
-     "v": "Light"
-    },
-    "build_duration": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Buildable.BuildDuration",
-     "v": "1500"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Valued.Cost",
-     "v": "1500"
-    },
-    "design": {
-     "category": "Vehicles",
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Vehicle",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "hp": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
-     "v": "20000"
-    },
-    "integrity_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "name": "Nuke Demo Truck",
-    "prerequisites": [
-     "~ra1_soviets_sovietwarfactory",
-     "ra1_soviets_soviettechcenter"
-    ],
-    "queue": [
-     "Vehicle",
-     "RAVehicle"
-    ],
-    "resolved_firepower_modifiers": [],
-    "shield_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "sight": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#RevealsShroud.Range",
-     "v": "5c0"
-    },
-    "speed": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Mobile.Speed",
-     "v": "100"
-    },
-    "turn_speed": {
-     "src": "inherited",
-     "v": "40"
-    }
-   },
-   "ra1_soviets_siegemammothtank": {
-    "armaments": [
-     {
-      "burst": "2",
-      "burstdelays": "10",
-      "damage_warheads": [
-       {
-        "damage": "48000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "6666",
-      "reloaddelay": "125",
-      "requires": "!ra1_soviets_upgrade_nucleartankshells && !ra1_soviets_promotion_mammothtanktargetingcomputer",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^Compatibility_CannonHE_HeavyFlat",
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^LightChemicalWeapon",
-       "^MediumFlameWeapon"
-      ],
-      "warheads": [
-       "^Warhead_CannonHE_Heavy"
-      ],
-      "weapon": "ra120mm2",
-      "weapon_class_source": "template"
-     },
-     {
-      "burst": "2",
-      "burstdelays": "10",
-      "damage_warheads": [
-       {
-        "damage": "48000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "6666",
-      "reloaddelay": "105",
-      "requires": "!ra1_soviets_upgrade_nucleartankshells && ra1_soviets_promotion_mammothtanktargetingcomputer",
-      "slot": "Armament@PRIMARYTargetingComputer",
-      "versus_templates": [
-       "ra120mm2"
-      ],
-      "warheads": [
-       "^Warhead_CannonHE_Heavy"
-      ],
-      "weapon": "ra120mm2TargetingComputer",
-      "weapon_class_source": "template"
-     },
-     {
-      "burst": "2",
-      "burstdelays": "10",
-      "damage_warheads": [
-       {
-        "damage": "48000",
-        "falloff": "100, 76, 57, 43, 31, 17, 0",
-        "spread": "338",
-        "tag": "Thermobaric_HeavyFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "800",
-        "falloff": "100, 50, 35",
-        "percentage_denominator": "10000",
-        "spread": null,
-        "tag": "Collapsedra120mm2ThermobaricCannonHE_HeavyPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "800",
-        "falloff": "100, 45, 18",
-        "percentage_denominator": "10000",
-        "spread": null,
-        "tag": "Collapsedra120mm2ThermobaricDemolition_HeavyPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "800",
-        "falloff": "100, 90, 78",
-        "percentage_denominator": "10000",
-        "spread": null,
-        "tag": "Collapsedra120mm2ThermobaricFlame_HeavyPercentage",
-        "type": "AreaDamagePercentage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "6666",
-      "reloaddelay": "125",
-      "requires": "ra1_soviets_upgrade_nucleartankshells && !ra1_soviets_promotion_mammothtanktargetingcomputer",
-      "slot": "Armament@Upgrade",
-      "versus_templates": [
-       "^Compatibility_Thermobaric_HeavyFlat",
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^Warhead_Flame_Heavy",
-       "^Warhead_Demolition_Heavy",
-       "^Projectile_Flame_Heavy",
-       "^Effect_Flame_Heavy"
-      ],
-      "warheads": [
-       "^Warhead_CannonHE_Heavy",
-       "^Warhead_Flame_Heavy",
-       "^Warhead_Demolition_Heavy"
-      ],
-      "weapon": "ra120mm2Thermobaric",
-      "weapon_class_source": "illegal_mix"
-     },
-     {
-      "burst": "2",
-      "burstdelays": "10",
-      "damage_warheads": [
-       {
-        "damage": "48000",
-        "falloff": "100, 76, 57, 43, 31, 17, 0",
-        "spread": "338",
-        "tag": "Thermobaric_HeavyFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "800",
-        "falloff": "100, 50, 35",
-        "percentage_denominator": "10000",
-        "spread": null,
-        "tag": "Collapsedra120mm2ThermobaricTargetingComputerCannonHE_HeavyPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "800",
-        "falloff": "100, 45, 18",
-        "percentage_denominator": "10000",
-        "spread": null,
-        "tag": "Collapsedra120mm2ThermobaricTargetingComputerDemolition_HeavyPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "800",
-        "falloff": "100, 90, 78",
-        "percentage_denominator": "10000",
-        "spread": null,
-        "tag": "Collapsedra120mm2ThermobaricTargetingComputerFlame_HeavyPercentage",
-        "type": "AreaDamagePercentage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "6666",
-      "reloaddelay": "105",
-      "requires": "ra1_soviets_upgrade_nucleartankshells && ra1_soviets_promotion_mammothtanktargetingcomputer",
-      "slot": "Armament@UpgradeTargetingComputer",
-      "versus_templates": [
-       "ra120mm2Thermobaric"
-      ],
-      "warheads": [
-       "^Warhead_CannonHE_Heavy",
-       "^Warhead_Flame_Heavy",
-       "^Warhead_Demolition_Heavy"
-      ],
-      "weapon": "ra120mm2ThermobaricTargetingComputer",
-      "weapon_class_source": "illegal_mix"
-     },
-     {
-      "armament_name": "secondary",
-      "burst": "2",
-      "burstdelays": "10",
-      "damage_warheads": [
-       {
-        "damage": "48000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8",
-        "falloff": null,
-        "spread": "300",
-        "tag": "HeavyMissilePercentage",
-        "type": "AreaDamagePercentage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "6666",
-      "reloaddelay": "125",
-      "requires": "!ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_promotion_mammothtanktargetingcomputer",
-      "slot": "Armament@SECONDARY",
-      "versus_templates": [
-       "^Warhead_MissileHE_Heavy",
-       "^LightFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyMissile",
-       "^ImpactGlow"
-      ],
-      "warheads": [
-       "^Warhead_MissileHE_Heavy"
-      ],
-      "weapon": "MammothTusk2",
-      "weapon_class_source": "template"
-     },
-     {
-      "armament_name": "secondary",
-      "burst": "2",
-      "burstdelays": "10",
-      "damage_warheads": [
-       {
-        "damage": "48000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8",
-        "falloff": null,
-        "spread": "300",
-        "tag": "HeavyMissilePercentage",
-        "type": "AreaDamagePercentage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "6666",
-      "reloaddelay": "105",
-      "requires": "!ra1_soviets_upgrade_thermobaricrockets && ra1_soviets_promotion_mammothtanktargetingcomputer",
-      "slot": "Armament@SECONDARYTargetingComputer",
-      "versus_templates": [
-       "MammothTusk2"
-      ],
-      "warheads": [
-       "^Warhead_MissileHE_Heavy"
-      ],
-      "weapon": "MammothTusk2TargetingComputer",
-      "weapon_class_source": "template"
-     },
-     {
-      "armament_name": "secondary",
-      "burst": "2",
-      "burstdelays": "10",
-      "damage_warheads": [
-       {
-        "damage": "48000",
-        "falloff": "100, 76, 57, 43, 31, 17, 0",
-        "spread": "338",
-        "tag": "Thermobaric_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "400",
-        "tag": "HeavyBombPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8",
-        "falloff": null,
-        "spread": "300",
-        "tag": "HeavyMissilePercentage",
-        "type": "AreaDamagePercentage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "6666",
-      "reloaddelay": "125",
-      "requires": "ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_promotion_mammothtanktargetingcomputer",
-      "slot": "Armament@UpgradeSECONDARY",
-      "versus_templates": [
-       "^Warhead_Thermobaric_Heavy",
-       "^HeavyFlameWeapon",
-       "^HeavyBomb",
-       "^HeavyMissile"
-      ],
-      "warheads": [
-       "^Warhead_Thermobaric_Heavy"
-      ],
-      "weapon": "MammothTusk2Thermobaric",
-      "weapon_class_source": "template"
-     },
-     {
-      "armament_name": "secondary",
-      "burst": "2",
-      "burstdelays": "10",
-      "damage_warheads": [
-       {
-        "damage": "48000",
-        "falloff": "100, 76, 57, 43, 31, 17, 0",
-        "spread": "338",
-        "tag": "Thermobaric_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "400",
-        "tag": "HeavyBombPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8",
-        "falloff": null,
-        "spread": "300",
-        "tag": "HeavyMissilePercentage",
-        "type": "AreaDamagePercentage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "6666",
-      "reloaddelay": "105",
-      "requires": "ra1_soviets_upgrade_thermobaricrockets && ra1_soviets_promotion_mammothtanktargetingcomputer",
-      "slot": "Armament@UpgradeSECONDARYTargetingComputer",
-      "versus_templates": [
-       "MammothTusk2Thermobaric"
-      ],
-      "warheads": [
-       "^Warhead_Thermobaric_Heavy"
-      ],
-      "weapon": "MammothTusk2ThermobaricTargetingComputer",
-      "weapon_class_source": "template"
-     }
-    ],
-    "armor": {
-     "src": "inherited",
-     "v": "Superheavy"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Valued.Cost",
-     "v": "4000"
-    },
-    "design": {
-     "category": "Vehicles",
-     "class_anchor": "high_tech_tank",
-     "special": null,
-     "subtype": "HighTechTank",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "hp": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
-     "v": "625000"
-    },
-    "integrity_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "name": "Siege Mammoth Tank",
-    "prerequisites": [
-     "~ra1_soviets_sovietwarfactory",
-     "ra1_soviets_soviettechcenter",
-     "~ra1_soviets_doctrine_heavyarmordoctrine"
-    ],
-    "queue": [
-     "Vehicle",
-     "RAVehicle"
-    ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
-    "shield_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "sight": {
-     "src": "inherited",
-     "v": "7000"
-    },
-    "speed": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Mobile.Speed",
-     "v": "45"
-    },
-    "turn_speed": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Mobile.TurnSpeed",
-     "v": "9"
-    }
-   },
-   "ra1_soviets_sovietheavyindustrialminer": {
-    "armor": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Armor.Type",
-     "v": "Medium"
-    },
-    "build_duration": {
-     "src": "inherited",
-     "v": "500"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Valued.Cost",
-     "v": "1200"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Harvester",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "hp": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
-     "v": "135000"
-    },
-    "integrity_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "name": "Soviet Heavy Industrial Miner",
-    "prerequisites": [
-     "~ra1_soviets_sovietwarfactory",
-     "~ra1_soviets_sovietorerefinery",
-     "~ra1_soviets_doctrine_industrialefficiencydoctrine"
-    ],
-    "queue": [
-     "Vehicle",
-     "RAVehicle"
-    ],
-    "shield_condition": {
-     "src": "inherited",
-     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
-    },
-    "shield_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "sight": {
-     "src": "inherited",
-     "v": "5000"
-    },
-    "speed": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Mobile.Speed",
-     "v": "80"
-    },
-    "turn_speed": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Mobile.TurnSpeed",
-     "v": "16"
-    }
-   },
-   "ra1_soviets_sovietheavytank": {
-    "armaments": [
-     {
-      "burst": "2",
-      "burstdelays": "5",
-      "damage_warheads": [
-       {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": true,
-      "range": "5469",
-      "reloaddelay": "76",
-      "requires": "!ra1_soviets_upgrade_nucleartankshells",
-      "slot": "Armament",
-      "versus_templates": [
-       "^Warhead_CannonHE_Medium",
-       "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium"
-      ],
-      "warheads": [
-       "^Warhead_CannonHE_Medium"
-      ],
-      "weapon": "105mm",
-      "weapon_class_source": "template"
-     },
-     {
-      "burst": "2",
-      "burstdelays": "5",
-      "damage_warheads": [
-       {
-        "damage": "12000",
-        "falloff": "100, 90, 78, 60, 0",
-        "spread": "300",
-        "tag": "Flame_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": true,
-      "range": "5469",
-      "reloaddelay": "76",
-      "requires": "ra1_soviets_upgrade_nucleartankshells",
-      "slot": "Armament@Upgrade",
-      "versus_templates": [
-       "^Compatibility_Flame_MediumFlat",
-       "^Warhead_Flame_Medium",
-       "^Projectile_Flame_Medium",
-       "^Effect_Flame_Medium",
-       "105mm"
-      ],
-      "warheads": [
-       "^Warhead_Flame_Medium",
-       "^Warhead_CannonHE_Medium"
-      ],
-      "weapon": "105mmThermobaric",
-      "weapon_class_source": "template"
-     }
-    ],
-    "armor": {
-     "src": "inherited",
-     "v": "Heavy"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Valued.Cost",
-     "v": "1000"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "MainBattleTank",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "hp": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
-     "v": "150000"
-    },
-    "integrity_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "name": "Soviet Heavy Tank",
-    "prerequisites": [
-     "~ra1_soviets_sovietwarfactory",
-     "~!ra1_soviets_upgrade_hammertankupgrade"
-    ],
-    "queue": [
-     "Vehicle",
-     "RAVehicle"
-    ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
-    "shield_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "sight": {
-     "src": "inherited",
-     "v": "6000"
-    },
-    "speed": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Mobile.Speed",
-     "v": "70"
-    },
-    "turn_speed": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Mobile.TurnSpeed",
-     "v": "14"
-    }
-   },
-   "ra1_soviets_sovietmammothtank": {
+   "ra1_soviets_mammothtank": {
     "armaments": [
      {
       "burst": "2",
@@ -12444,9 +11406,9 @@
     },
     "name": "Soviet Mammoth Tank",
     "prerequisites": [
-     "~ra1_soviets_sovietwarfactory",
-     "ra1_soviets_soviettechcenter",
-     "~!ra1_soviets_doctrine_heavyarmordoctrine"
+     "~ra1_soviets_warfactory",
+     "ra1_soviets_techcenter",
+     "~!ra1_soviets_doctrine_heavyarmor"
     ],
     "queue": [
      "Vehicle",
@@ -12485,7 +11447,7 @@
      "v": "10"
     }
    },
-   "ra1_soviets_sovietmobileconstructionvehicle": {
+   "ra1_soviets_mobileconstructionvehicle": {
     "armor": {
      "src": "inherited",
      "v": "Medium"
@@ -12516,8 +11478,8 @@
     },
     "name": "Soviet Mobile Construction Vehicle",
     "prerequisites": [
-     "~ra1_soviets_sovietwarfactory",
-     "ra1_soviets_sovietservicedepot"
+     "~ra1_soviets_warfactory",
+     "ra1_soviets_servicedepot"
     ],
     "queue": [
      "Vehicle",
@@ -12548,7 +11510,565 @@
      "v": "15"
     }
    },
-   "ra1_soviets_sovietoretruck": {
+   "ra1_soviets_monstertank": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "32",
+      "damage_warheads": [
+       {
+        "damage": "80000",
+        "falloff": "100, 88, 75, 62, 52, 42, 33, 24, 16, 8, 0",
+        "spread": "400",
+        "tag": "CannonNuke_Heavy",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "7833",
+      "reloaddelay": "103",
+      "requires": "!ra1_soviets_doctrine_inferno",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Warhead_CannonNuke_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
+       "^Effect_Nuclear_Super"
+      ],
+      "warheads": [
+       "^Warhead_CannonNuke_Heavy"
+      ],
+      "weapon": "MonsterTank120mm",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "32",
+      "damage_warheads": [
+       {
+        "damage": "120000",
+        "falloff": "100, 76, 56, 38, 0",
+        "spread": "346",
+        "tag": "CannonFire_Heavy",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "7833",
+      "reloaddelay": "103",
+      "requires": "ra1_soviets_doctrine_inferno",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^Warhead_CannonFire_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
+       "^Effect_Flame_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_CannonFire_Heavy"
+      ],
+      "weapon": "MonsterTank120mmInferno",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "40000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "200",
+        "tag": "MissileHE_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "7833",
+      "reloaddelay": "125",
+      "requires": "!ra1_soviets_upgrade_teslarockets && !ra1_soviets_upgrade_thermonuclearrockets",
+      "slot": "Armament@SECONDARY",
+      "versus_templates": [
+       "^Compatibility_MissileHE_HeavyFlat",
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_MissileHE_Heavy",
+       "^Projectile_Missile_Heavy",
+       "^Effect_MissileHE_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_MissileHE_Heavy"
+      ],
+      "weapon": "MonsterTankTusk",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "120250",
+        "falloff": "100, 52, 0",
+        "spread": "63",
+        "tag": "MissileTesla_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "13",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "13",
+        "falloff": "111, 33, 11, 3",
+        "spread": "250",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "13",
+        "falloff": null,
+        "spread": "50",
+        "tag": "TeslaWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "13",
+        "falloff": null,
+        "spread": "300",
+        "tag": "HeavyMissilePercentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "7833",
+      "reloaddelay": "125",
+      "requires": "ra1_soviets_upgrade_teslarockets",
+      "slot": "Armament@TeslaSECONDARY",
+      "versus_templates": [
+       "^Compatibility_MissileTesla_HeavyFlat",
+       "^Grenade",
+       "^LightFlameWeapon",
+       "^TeslaWeapon",
+       "^HeavyMissile",
+       "^Effect_Tesla_Impact_RA2"
+      ],
+      "warheads": [],
+      "weapon": "MonsterTankTuskTesla",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "106000",
+        "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "spread": "338",
+        "tag": "Thermobaric_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "7",
+        "falloff": "111, 33, 11, 3",
+        "spread": "250",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "7",
+        "falloff": "111, 33, 11, 3",
+        "spread": "375",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "7",
+        "falloff": "111, 33, 11, 3",
+        "spread": "500",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "7",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "7",
+        "falloff": null,
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "7",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "7",
+        "falloff": null,
+        "spread": "200",
+        "tag": "MediumMissilePercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "7",
+        "falloff": null,
+        "spread": "300",
+        "tag": "HeavyMissilePercentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "7833",
+      "reloaddelay": "125",
+      "requires": "ra1_soviets_upgrade_thermonuclearrockets",
+      "slot": "Armament@NukeSECONDARY",
+      "versus_templates": [
+       "^Warhead_Thermobaric_Heavy",
+       "^LightFlameWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyFlameWeapon",
+       "^Grenade",
+       "^FlakWeapon",
+       "^ShrapnelWeapon",
+       "^MediumMissile",
+       "^HeavyMissile"
+      ],
+      "warheads": [
+       "^Warhead_Thermobaric_Heavy"
+      ],
+      "weapon": "MonsterTankTuskThermobaric",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Superheavy"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Valued.Cost",
+     "v": "10000"
+    },
+    "design": {
+     "category": "Tanks",
+     "class_anchor": "epic_vehicle",
+     "special": 1.0,
+     "subtype": "EpicVehicle",
+     "tech_tier": 0.75,
+     "unit_class": 0.4
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets.Modifier",
+     "trait": "FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets",
+     "v": 1.05
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
+     "v": "1000000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Monster Tank",
+    "prerequisites": [
+     "~ra1_soviets_warfactory",
+     "ra1_soviets_techcenter",
+     "~ra1_soviets_promotion_monstertank"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 110,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@PromotionUnit",
+      "types": []
+     },
+     {
+      "modifier": 105,
+      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets.Modifier",
+      "trait": "FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets",
+      "types": []
+     }
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "45"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "9"
+    }
+   },
+   "ra1_soviets_nuclearv2launcher": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "300000",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
+        "spread": "1000",
+        "tag": "Nuclear_Super",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "10",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
+        "spread": "500",
+        "tag": "Nuclear_Super_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.5,
+      "minrange": "2510",
+      "pricing": true,
+      "range": "12550",
+      "reloaddelay": "158",
+      "requires": "!ra1_soviets_upgrade_thermonuclearrockets",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Warhead_Nuclear_Super",
+       "^Effect_Nuclear_Super"
+      ],
+      "warheads": [
+       "^Warhead_Nuclear_Super"
+      ],
+      "weapon": "SCUDNUKE",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "300000",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
+        "spread": "1000",
+        "tag": "Nuclear_Super",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "10",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
+        "spread": "500",
+        "tag": "Nuclear_Super_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.5,
+      "minrange": "2510",
+      "pricing": true,
+      "range": "12550",
+      "reloaddelay": "158",
+      "requires": "ra1_soviets_upgrade_thermonuclearrockets",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "SCUDNUKE"
+      ],
+      "warheads": [
+       "^Warhead_Nuclear_Super"
+      ],
+      "weapon": "SCUDNUKEThermobaric",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Valued.Cost",
+     "v": "2300"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": "artillery",
+     "special": null,
+     "subtype": "Artillery",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
+     "v": "40000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Nuclear V2 Launcher",
+    "prerequisites": [
+     "~ra1_soviets_warfactory",
+     "ra1_soviets_techcenter",
+     "~ra1_soviets_doctrine_nuclearwar"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "80"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "32"
+    }
+   },
+   "ra1_soviets_nukedemotruck": {
+    "armaments": [
+     {
+      "damage_warheads": [],
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
+      "extraction_note": "no_damage_warheads",
+      "pricing": false,
+      "range": "2000",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "DemoTruckTargeting",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Armor.Type",
+     "v": "Light"
+    },
+    "build_duration": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Buildable.BuildDuration",
+     "v": "1500"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Vehicle",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
+     "v": "20000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Nuke Demo Truck",
+    "prerequisites": [
+     "~ra1_soviets_warfactory",
+     "ra1_soviets_techcenter"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#RevealsShroud.Range",
+     "v": "5c0"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "100"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "40"
+    }
+   },
+   "ra1_soviets_oretruck": {
     "armor": {
      "src": "inherited",
      "v": "Medium"
@@ -12579,8 +12099,8 @@
     },
     "name": "Soviet Ore Truck",
     "prerequisites": [
-     "~ra1_soviets_sovietorerefinery",
-     "~!ra1_soviets_doctrine_industrialefficiencydoctrine"
+     "~ra1_soviets_orerefinery",
+     "~!ra1_soviets_doctrine_industrialefficiency"
     ],
     "queue": [
      "Vehicle",
@@ -12613,6 +12133,488 @@
     "turn_speed": {
      "src": "inherited",
      "v": "18"
+    }
+   },
+   "ra1_soviets_siegemammothtank": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "10",
+      "damage_warheads": [
+       {
+        "damage": "48000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8",
+        "falloff": "99, 66, 33",
+        "spread": "175",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8",
+        "falloff": "111, 33, 11, 3",
+        "spread": "375",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "6666",
+      "reloaddelay": "125",
+      "requires": "!ra1_soviets_upgrade_nucleartankshells && !ra1_soviets_promotion_mammothtanktargetingcomputer",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Compatibility_CannonHE_HeavyFlat",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
+       "^LightChemicalWeapon",
+       "^MediumFlameWeapon"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "ra120mm2",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "10",
+      "damage_warheads": [
+       {
+        "damage": "48000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8",
+        "falloff": "99, 66, 33",
+        "spread": "175",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8",
+        "falloff": "111, 33, 11, 3",
+        "spread": "375",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "6666",
+      "reloaddelay": "105",
+      "requires": "!ra1_soviets_upgrade_nucleartankshells && ra1_soviets_promotion_mammothtanktargetingcomputer",
+      "slot": "Armament@PRIMARYTargetingComputer",
+      "versus_templates": [
+       "ra120mm2"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "ra120mm2TargetingComputer",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "10",
+      "damage_warheads": [
+       {
+        "damage": "48000",
+        "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "spread": "338",
+        "tag": "Thermobaric_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "800",
+        "falloff": "100, 50, 35",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "Collapsedra120mm2ThermobaricCannonHE_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "800",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "Collapsedra120mm2ThermobaricDemolition_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "800",
+        "falloff": "100, 90, 78",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "Collapsedra120mm2ThermobaricFlame_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6666",
+      "reloaddelay": "125",
+      "requires": "ra1_soviets_upgrade_nucleartankshells && !ra1_soviets_promotion_mammothtanktargetingcomputer",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^Compatibility_Thermobaric_HeavyFlat",
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Demolition_Heavy",
+       "^Projectile_Flame_Heavy",
+       "^Effect_Flame_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy",
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Demolition_Heavy"
+      ],
+      "weapon": "ra120mm2Thermobaric",
+      "weapon_class_source": "illegal_mix"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "10",
+      "damage_warheads": [
+       {
+        "damage": "48000",
+        "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "spread": "338",
+        "tag": "Thermobaric_HeavyFlatCompatibility",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "800",
+        "falloff": "100, 50, 35",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "Collapsedra120mm2ThermobaricTargetingComputerCannonHE_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "800",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "Collapsedra120mm2ThermobaricTargetingComputerDemolition_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "800",
+        "falloff": "100, 90, 78",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "Collapsedra120mm2ThermobaricTargetingComputerFlame_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6666",
+      "reloaddelay": "105",
+      "requires": "ra1_soviets_upgrade_nucleartankshells && ra1_soviets_promotion_mammothtanktargetingcomputer",
+      "slot": "Armament@UpgradeTargetingComputer",
+      "versus_templates": [
+       "ra120mm2Thermobaric"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy",
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Demolition_Heavy"
+      ],
+      "weapon": "ra120mm2ThermobaricTargetingComputer",
+      "weapon_class_source": "illegal_mix"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "2",
+      "burstdelays": "10",
+      "damage_warheads": [
+       {
+        "damage": "48000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "200",
+        "tag": "MissileHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8",
+        "falloff": "111, 33, 11, 3",
+        "spread": "250",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8",
+        "falloff": null,
+        "spread": "300",
+        "tag": "HeavyMissilePercentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "6666",
+      "reloaddelay": "125",
+      "requires": "!ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_promotion_mammothtanktargetingcomputer",
+      "slot": "Armament@SECONDARY",
+      "versus_templates": [
+       "^Warhead_MissileHE_Heavy",
+       "^LightFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyMissile",
+       "^ImpactGlow"
+      ],
+      "warheads": [
+       "^Warhead_MissileHE_Heavy"
+      ],
+      "weapon": "MammothTusk2",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "2",
+      "burstdelays": "10",
+      "damage_warheads": [
+       {
+        "damage": "48000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "200",
+        "tag": "MissileHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8",
+        "falloff": "111, 33, 11, 3",
+        "spread": "250",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8",
+        "falloff": null,
+        "spread": "300",
+        "tag": "HeavyMissilePercentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "6666",
+      "reloaddelay": "105",
+      "requires": "!ra1_soviets_upgrade_thermobaricrockets && ra1_soviets_promotion_mammothtanktargetingcomputer",
+      "slot": "Armament@SECONDARYTargetingComputer",
+      "versus_templates": [
+       "MammothTusk2"
+      ],
+      "warheads": [
+       "^Warhead_MissileHE_Heavy"
+      ],
+      "weapon": "MammothTusk2TargetingComputer",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "2",
+      "burstdelays": "10",
+      "damage_warheads": [
+       {
+        "damage": "48000",
+        "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "spread": "338",
+        "tag": "Thermobaric_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8",
+        "falloff": "111, 33, 11, 3",
+        "spread": "500",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8",
+        "falloff": null,
+        "spread": "300",
+        "tag": "HeavyMissilePercentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "6666",
+      "reloaddelay": "125",
+      "requires": "ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_promotion_mammothtanktargetingcomputer",
+      "slot": "Armament@UpgradeSECONDARY",
+      "versus_templates": [
+       "^Warhead_Thermobaric_Heavy",
+       "^HeavyFlameWeapon",
+       "^HeavyBomb",
+       "^HeavyMissile"
+      ],
+      "warheads": [
+       "^Warhead_Thermobaric_Heavy"
+      ],
+      "weapon": "MammothTusk2Thermobaric",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "2",
+      "burstdelays": "10",
+      "damage_warheads": [
+       {
+        "damage": "48000",
+        "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "spread": "338",
+        "tag": "Thermobaric_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8",
+        "falloff": "111, 33, 11, 3",
+        "spread": "500",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8",
+        "falloff": null,
+        "spread": "300",
+        "tag": "HeavyMissilePercentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "6666",
+      "reloaddelay": "105",
+      "requires": "ra1_soviets_upgrade_thermobaricrockets && ra1_soviets_promotion_mammothtanktargetingcomputer",
+      "slot": "Armament@UpgradeSECONDARYTargetingComputer",
+      "versus_templates": [
+       "MammothTusk2Thermobaric"
+      ],
+      "warheads": [
+       "^Warhead_Thermobaric_Heavy"
+      ],
+      "weapon": "MammothTusk2ThermobaricTargetingComputer",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Superheavy"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Valued.Cost",
+     "v": "4000"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": "high_tech_tank",
+     "special": null,
+     "subtype": "HighTechTank",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
+     "v": "625000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Siege Mammoth Tank",
+    "prerequisites": [
+     "~ra1_soviets_warfactory",
+     "ra1_soviets_techcenter",
+     "~ra1_soviets_doctrine_heavyarmor"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "7000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "45"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "9"
     }
    },
    "ra1_soviets_stalinfist": {
@@ -12651,7 +12653,7 @@
     },
     "name": "Stalin Fist",
     "prerequisites": [
-     "~ra1_soviets_soviettechcenter"
+     "~ra1_soviets_techcenter"
     ],
     "queue": [
      "Vehicle",
@@ -12706,7 +12708,7 @@
       "pricing": true,
       "range": "7300",
       "reloaddelay": "80",
-      "requires": "!ra1_soviets_doctrine_teslaandexperimentaltechdoctrine && !ra1_soviets_upgrade_teslaarcing",
+      "requires": "!ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Tesla_Heavy",
@@ -12741,7 +12743,7 @@
       "pricing": true,
       "range": "7300",
       "reloaddelay": "80",
-      "requires": "ra1_soviets_doctrine_teslaandexperimentaltechdoctrine && !ra1_soviets_upgrade_teslaarcing",
+      "requires": "ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@Upgrade1",
       "versus_templates": [
        "TTankZap"
@@ -12813,8 +12815,8 @@
     },
     "name": "Tesla Tank",
     "prerequisites": [
-     "~ra1_soviets_sovietwarfactory",
-     "ra1_soviets_sovietradardome"
+     "~ra1_soviets_warfactory",
+     "ra1_soviets_radardome"
     ],
     "queue": [
      "Vehicle",
@@ -12977,9 +12979,9 @@
     },
     "name": "V1 Rocket Truck",
     "prerequisites": [
-     "~ra1_soviets_sovietwarfactory",
-     "ra1_soviets_sovietradardome",
-     "~!ra1_soviets_doctrine_heavyarmordoctrine"
+     "~ra1_soviets_warfactory",
+     "ra1_soviets_radardome",
+     "~!ra1_soviets_doctrine_heavyarmor"
     ],
     "queue": [
      "Vehicle",
@@ -13240,9 +13242,9 @@
     },
     "name": "V2 Rocket Launcher",
     "prerequisites": [
-     "~ra1_soviets_sovietwarfactory",
-     "ra1_soviets_soviettechcenter",
-     "~!ra1_soviets_doctrine_nuclearwardoctrine"
+     "~ra1_soviets_warfactory",
+     "ra1_soviets_techcenter",
+     "~!ra1_soviets_doctrine_nuclearwar"
     ],
     "queue": [
      "Vehicle",

@@ -266,7 +266,7 @@ def shape_similarity(a, b):
 
 
 # ⛔ ORIGINALS OUTRANK VARIANTS (maintainer 2026-09-07). Cameo ships more units than the source
-# games do: `ra1_soviets_sovietmammothtank` is RA1's Mammoth, and `ra1_soviets_siegemammothtank`
+# games do: `ra1_soviets_mammothtank` is RA1's Mammoth, and `ra1_soviets_siegemammothtank`
 # is a Cameo ADD-ON built on top of it. Both normalise to something CONTAINING "mammothtank", so
 # both land in the same name bucket and the reference went to whichever won on role/cost — which
 # was the add-on. The original is the unit the reference IS; the add-on is a unit the reference
@@ -303,7 +303,7 @@ def variant_rank(cameo_id, peer_name):
     # ⛔ THE TEST IS INVERTED FROM WHAT IT WAS, and the old form was whack-a-mole. It asked
     # whether the leftover text appears in a hand-kept VARIANT_WORDS list — which holds "flame"
     # but not "fire", so `ra1_soviets_firerocketsoldier` was ranked a base unit and beat the
-    # actual `ra1_soviets_sovietrocketsoldier` to Combined Arms' E3 and DTA's E3S. The real RA1
+    # actual `ra1_soviets_rocketsoldier` to Combined Arms' E3 and DTA's E3S. The real RA1
     # rocket soldier was left holding an Impaler and a Grenadier.
     #
     # A closed list of variant words can never be complete; the list of FACTION words can, because
@@ -343,7 +343,7 @@ def score(cam, rec, peer, cam_cost_pct, peer_cost_pct, home, cam_shape=None, pee
     # that carries NO damage field at all sailed past it. Every unarmed reference in the corpus is
     # exactly that shape: OpenRA TD's Mobile Construction Vehicle and Combined Arms' Thief both
     # have `w_damage=None`, and both were duly assigned to armed Cameo units (an MCV to
-    # `td_gdi_mammothtankmkiii`, a Thief to `ra1_soviets_sovietrocketsoldier`) on shape similarity
+    # `td_gdi_mammothtankmkiii`, a Thief to `ra1_soviets_rocketsoldier`) on shape similarity
     # alone. A support unit sitting in the same place in its roster as a tank does in ours is a
     # coincidence of distribution, not a counterpart.
     # ⚠ AND "UNARMED" MEANS NO WEAPON AT ALL, NOT A MISSING DAMAGE NUMBER. Refusing on
@@ -507,7 +507,7 @@ def assign(only_class=None, routing=True):
     # ⛔ AN ORIGINAL CLAIMS BEFORE AN EXPANSION EVER BIDS (maintainer, 2026-09-07).
     #
     # `ra1_soviets_firerocketsoldier` — a Cameo addition — took Combined Arms' `E3` and DTA's
-    # `E3S`, both Rocket Soldiers, while `ra1_soviets_sovietrocketsoldier`, the actual RA1 unit
+    # `E3S`, both Rocket Soldiers, while `ra1_soviets_rocketsoldier`, the actual RA1 unit
     # those rows ARE, was left with an Impaler and a Grenadier. The greedy did nothing wrong by
     # its own lights: string similarity has no idea that "soviet" is a faction prefix and "fire"
     # is a variant prefix, so the expansion scores 0.867 against "Rocket Soldier" and the original
@@ -811,9 +811,9 @@ REFERENCE_OVERRIDES = {
     ("td_gdi_rocketsoldier", "DTA Enhanced"): "E3",        # DTA calls it "Bazooka"; no shared word
     ("td_nod_rocketsoldier", "DTA Enhanced"): "E3N",       # the Nod-side row of the same pair
     ("td_nod_apacheattackhelicopter", "OpenRA Tiberian Dawn"): "HELI",   # named "Apache Longbow"
-    ("ra1_soviets_actordogname", "Combined Arms"): "DOG",
-    ("ra1_soviets_actordogname", "OpenRA Red Alert"): "DOG",
-    ("ra1_soviets_actordogname", "DTA Enhanced"): "DOG",
+    ("ra1_soviets_dog", "Combined Arms"): "DOG",
+    ("ra1_soviets_dog", "OpenRA Red Alert"): "DOG",
+    ("ra1_soviets_dog", "DTA Enhanced"): "DOG",
     # Tiberian Dawn:
     ("td_gdi_archerartillery", "DTA Enhanced"): "DISCARTY",   # "Disc Launcher", GDI
     ("td_gdi_archerartillery", "Combined Arms"): "THWK",      # Tomahawk Launcher
@@ -840,7 +840,7 @@ REFERENCE_OVERRIDES = {
     # Red Alert, Soviets:
     # ⚠ CA ships TWO rows named "SAM Site" with identical faction lists — `NSAM` (Nod's) and `SAM`
     # (the Soviet one). The NAME cannot separate them and the id can, exactly like the AA Gun pair.
-    ("ra1_soviets_sovietsamsite", "Combined Arms"): "SAM",
+    ("ra1_soviets_samsite", "Combined Arms"): "SAM",
     ("td_nod_samsite", "Combined Arms"): "NSAM",
     ("ra1_soviets_zapper", "Combined Arms"): "TTRP",         # Tesla Trooper
     ("ra1_soviets_btr80", "Combined Arms"): "BTR",           # see the note below on flaktruck

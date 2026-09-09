@@ -1301,7 +1301,7 @@ ChemTibAtomic:
 		Size: 10,10
 		Delay: 100
 
-DogJaw:
+^DogJaw:
 	ValidTargets: Infantry
 	InvalidTargets: DogImmune
 	ReloadDelay: 10
@@ -1314,6 +1314,15 @@ DogJaw:
 		ValidTargets: Infantry
 		InvalidTargets: Ant, DogImmune
 		DamageTypes: DefaultDeath
+
+ra1_soviets_dog_bite:
+	Inherits: ^DogJaw
+
+ra2_allies_dog_bite:
+	Inherits: ^DogJaw
+
+ra2_soviets_dog_bite:
+	Inherits: ^DogJaw
 
 Heal:
 	Inherits: ^HealingWeapon

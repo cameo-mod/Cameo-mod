@@ -4,27 +4,29 @@
 
 Γ¢ö This **repeals the exemption** in `tools/audit/intentional_composites.py`. Its 224 entries are no longer 'reviewed, keep' ΓÇö they are the worklist. The registry data stays useful: it says which mains someone chose on purpose.
 
-concrete weapons with inherits: **2061**
+concrete weapons with inherits: **2064**
+
+W5 counts structural flat-damage nodes, including zero/healing/ally-only nodes; the split audit counts positive non-companion damage. Both resolve the full concrete weapon corpus. Use `--compare-split` for exact differences.
 
 | check | what | count | ratchet |
 |---|---|--:|--:|
-| W1 | more than 3 inherits | **576** | 576 |
-| W2 | two or more `^Warhead_*` inherits | **210** | 210 |
+| W1 | more than 3 inherits | **574** | 576 |
+| W2 | two or more `^Warhead_*` inherits | **201** | 210 |
 | W3 | two or more `^Projectile_*` inherits | **12** | 12 |
 | W4 | two or more `^Effect_*` inherits | **51** | 51 |
-| W5 | more than one resolved MAIN warhead | **389** | 389 |
+| W5 | more than one resolved MAIN warhead | **304** | 389 |
 | W6 | effect warheads declared LOCALLY | **694** | 694 |
 
 | I7 informational ΓÇö missing template | weapons |
 |---|--:|
-| no `^Effect_*` inherit | 1244 |
-| no `^Projectile_*` inherit | 1362 |
-| no `^Warhead_*` inherit | 1156 |
+| no `^Effect_*` inherit | 1247 |
+| no `^Projectile_*` inherit | 1365 |
+| no `^Warhead_*` inherit | 1159 |
 
 _I7 is a REVIEW QUEUE, not a defect count ΓÇö an instant or utility weapon may legitimately have no projectile. Do not ratchet it without a per-weapon pass._
 
 
-## W1 ΓÇö more than 3 inherits (576 vs ratchet 576)
+## W1 ΓÇö more than 3 inherits (574 vs ratchet 576)
 
 | weapon | inherits | first four |
 |---|---|---|
@@ -70,10 +72,10 @@ _I7 is a REVIEW QUEUE, not a defect count ΓÇö an instant or utility weapon ma
 | `AsianSniperLockdown` | 4 | `^Warhead_Tesla_Super` ┬╖ `^Projectile_Lightning_Super` ┬╖ `^Effect_Tesla_Super` ┬╖ `AsianSniperAP` |
 
 
-_... and 536 more._
+_... and 534 more._
 
 
-## W2 ΓÇö two or more `^Warhead_*` inherits (210 vs ratchet 210)
+## W2 ΓÇö two or more `^Warhead_*` inherits (201 vs ratchet 210)
 
 | weapon | warhead templates |
 |---|---|
@@ -119,7 +121,7 @@ _... and 536 more._
 | `Dune_SiegeMortar` | `^Warhead_Demolition_Light` ┬╖ `^Warhead_Concussion_Medium` ┬╖ `^Warhead_CannonAP_Light` |
 
 
-_... and 170 more._
+_... and 161 more._
 
 
 ## W3 ΓÇö two or more `^Projectile_*` inherits (12 vs ratchet 12)
@@ -189,7 +191,7 @@ _... and 170 more._
 _... and 11 more._
 
 
-## W5 ΓÇö more than one resolved MAIN warhead (389 vs ratchet 389)
+## W5 ΓÇö more than one resolved MAIN warhead (304 vs ratchet 389)
 
 | weapon | mains | which |
 |---|---|---|
@@ -201,11 +203,9 @@ _... and 11 more._
 | `AlliedTankDestroyerCannon` | 2 | `CannonAP_Light` ┬╖ `CannonHE_Medium` |
 | `AphidCryo_AA` | 2 | `CryoBlast_Medium` ┬╖ `MissileCryo_Heavy` |
 | `Aphid_AA` | 2 | `Concussion_Medium` ┬╖ `MissileHE_Heavy` |
-| `ArcherArtilleryShell` | 2 | `CollapseTargetCompatibility1` ┬╖ `Concussion_Heavy` |
 | `ArmoredCarMGAAWaveforce` | 5 | `Bullet_Light` ┬╖ `Bullet_Medium` ┬╖ `CannonAP_Light` ┬╖ `CannonHE_Medium` |
 | `ArmoredCarMGWaveforce` | 2 | `Bullet_Medium` ┬╖ `Railgun_Heavy` |
 | `ArmoredCarMG_AA` | 4 | `Bullet_Light` ┬╖ `Bullet_Medium` ┬╖ `CannonAP_Light` ┬╖ `CannonHE_Medium` |
-| `ArtilleryShellUpgrade` | 2 | `CollapseTargetCompatibility1` ┬╖ `Concussion_Heavy` |
 | `AsianChaosMine` | 2 | `CannonAP_Light` ┬╖ `Chemical_Heavy` |
 | `AsianPhoenixRocket` | 3 | `Demolition_Light` ┬╖ `Flame_Medium` ┬╖ `MissileAP_Heavy` |
 | `AsianPhoenixRocket_elite` | 3 | `Demolition_Light` ┬╖ `Flame_Medium` ┬╖ `MissileAP_Heavy` |
@@ -214,28 +214,30 @@ _... and 11 more._
 | `AsianSniperLockdown` | 6 | `Bullet_Heavy` ┬╖ `Bullet_Medium` ┬╖ `SniperChaingun` ┬╖ `SniperFlak` |
 | `AsianTSIonCannon` | 4 | `IonCannon` ┬╖ `TeslaChargedWeapon` ┬╖ `TeslaWeapon` ┬╖ `Tesla_Super` |
 | `Atomic` | 2 | `Nuclear_Super` ┬╖ `Tesla_Super` |
-| `AtreusMG` | 2 | `Bullet_Medium` ┬╖ `CannonHE_Heavy` |
 | `BCLaser` | 2 | `CannonHE_Heavy` ┬╖ `Laser_HeavyFlatCompatibility` |
-| `BCYamatoCannon` | 2 | `CannonHE_Heavy` ┬╖ `Plasma_HeavyFlatCompatibility` |
 | `BallistaMultiShot` | 2 | `Arrow_Medium` ┬╖ `CollapseTargetCompatibility1` |
 | `BallistaSingleShotAirEnergized` | 4 | `Arrow_Light` ┬╖ `Arrow_LightFlatCompatibility` ┬╖ `CannonHE_Medium` ┬╖ `MissileAP_Light` |
 | `BallistaTowerMultiShot` | 2 | `Arrow_Medium` ┬╖ `CollapseTargetCompatibility1` |
 | `BarrelExplode` | 2 | `1Dam` ┬╖ `Demolition_Light` |
 | `BikeRockets` | 2 | `CollapseTargetCompatibility1` ┬╖ `MissileAP_Medium` |
-| `BlackHandLaser` | 2 | `LaserHeavyGroundRemainder` ┬╖ `Laser_Heavy` |
 | `BoxerCannon_AA` | 4 | `Bullet_Light` ┬╖ `Bullet_Medium` ┬╖ `CannonHE_Medium` ┬╖ `Flak_MediumFlatCompatibility` |
 | `BroodweaverLeech` | 2 | `ExtraHealing` ┬╖ `HealingWeapon` |
 | `CHFlameBlue` | 2 | `1Dam` ┬╖ `Flame_Medium` |
 | `CabalAscendedRockets` | 2 | `MissileHE_Heavy` ┬╖ `MissileHE_HeavyGroundBonus` |
 | `CabalEngineerRepairBeam` | 2 | `ExtraRepair` ┬╖ `RepairWeapon` |
 | `CabalMagicNuke` | 8 | `10Dam_areanuke3` ┬╖ `11Dam_areanuke3` ┬╖ `1Dam_impact` ┬╖ `4Dam_areanuke1` |
-| `ChemRockets` | 2 | `ChemRocketCompatibility` ┬╖ `Chemical_Light` |
-| `ChemRocketsExplosion` | 2 | `ChemRocketCompatibility` ┬╖ `Chemical_Light` |
 | `ChemTibAtomic` | 2 | `Nuclear_Super` ┬╖ `Tesla_Super` |
 | `Combat_Tank_F_Sound` | 2 | `1Dam` ┬╖ `2Dam` |
+| `ConsortiumMissileSystem` | 3 | `Flak_Medium` ┬╖ `MissileAA_MediumFlatCompatibility` ┬╖ `MissileAP_Medium` |
+| `ConsortiumMissileSystem_EMP` | 3 | `Flak_Medium` ┬╖ `MissileAP_Medium` ┬╖ `MissileQuantum_MediumFlatCompatibility` |
+| `CrateNuke` | 3 | `1Dam_impact` ┬╖ `4Dam_areanuke1` ┬╖ `TREEKILL` |
+| `D2KRepair` | 3 | `1Dam` ┬╖ `ExtraHealing` ┬╖ `HealingWeapon` |
+| `D2K_Rocket_AA` | 2 | `1Dam` ┬╖ `MissileAP_Heavy` |
+| `D2K_Rocket_Trooper1` | 3 | `Flak_Medium` ┬╖ `MissileAP_Heavy` ┬╖ `MissileAP_Light` |
+| `D2K_Rocket_Trooper2` | 3 | `CannonHE_Medium` ┬╖ `Demolition_Light` ┬╖ `Railgun_Heavy` |
 
 
-_... and 349 more._
+_... and 264 more._
 
 
 ## W6 ΓÇö effect warheads declared LOCALLY (694 vs ratchet 694)

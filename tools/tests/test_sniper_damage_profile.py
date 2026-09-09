@@ -143,7 +143,7 @@ class SniperDamageProfileTests(unittest.TestCase):
             self.assertGreater(values["Plate"], values["Superheavy"], name)
 
     def test_regular_snipers_lose_a_static_duel_to_baseline_mammoth(self):
-        mammoth = self.rules.resolve("ra1_soviets_sovietmammothtank")
+        mammoth = self.rules.resolve("ra1_soviets_mammothtank")
         self.assertIsNotNone(mammoth, "live Soviet Mammoth baseline")
         mammoth_armor, mammoth_hp = armor_and_hp(mammoth)
         tusk = self.rules.resolve_weapon("MammothTusk")
@@ -167,7 +167,7 @@ class SniperDamageProfileTests(unittest.TestCase):
         self.assertGreater(versus["Heavy"], versus["None"])
         self.assertGreater(versus["Superheavy"], versus["Flak"])
 
-        mammoth = self.rules.resolve("ra1_soviets_sovietmammothtank")
+        mammoth = self.rules.resolve("ra1_soviets_mammothtank")
         self.assertIsNotNone(mammoth, "live Soviet Mammoth baseline")
         mammoth_armor, mammoth_hp = armor_and_hp(mammoth)
         dragunov = self.rules.resolve("ra1_soviets_dragunovantimaterialsniper")

@@ -4,7 +4,7 @@
 
 | File | Line | Actor | Issue | Found |
 |---|---|---|---|---|
-| ContentPacks/RedAlert/Soviets/yaml/infantry.yaml | 673 | ra1_soviets_commissar | TD actor missing RankDecoration | ? |
+| ContentPacks/RedAlert/Soviets/yaml/infantry.yaml | 674 | ra1_soviets_commissar | TD actor missing RankDecoration | ? |
 | ContentPacks/RedAlert2Mod/Naxis/yaml/naval.yaml | 53 | naxis_muboat | TD actor missing RankDecoration | ? |
 | ContentPacks/TiberianDawn/Shared/yaml/templates.yaml | 30 | ^E1 | TD actor missing RankDecoration | ? |
 | ContentPacks/TiberianDawn/Shared/yaml/templates.yaml | 67 | ^E3 | TD actor missing RankDecoration | ? |

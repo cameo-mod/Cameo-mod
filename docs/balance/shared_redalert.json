@@ -932,8 +932,8 @@
     },
     "name": "Kennel",
     "prerequisites": [
-     "~ra1_soviets_sovietconstructionyard",
-     "ra1_soviets_sovietbarracks",
+     "~ra1_soviets_constructionyard",
+     "ra1_soviets_barracks",
      "~disabled"
     ],
     "queue": [
@@ -988,8 +988,8 @@
     },
     "name": "Soviet Sub Pen",
     "prerequisites": [
-     "~ra1_soviets_sovietconstructionyard",
-     "ra1_soviets_sovietorerefinery",
+     "~ra1_soviets_constructionyard",
+     "ra1_soviets_orerefinery",
      "~globalnaval"
     ],
     "queue": [
@@ -3445,7 +3445,7 @@
     "name": "Missile Submarine",
     "prerequisites": [
      "~ra1_soviets_subpen",
-     "ra1_soviets_soviettechcenter"
+     "ra1_soviets_techcenter"
     ],
     "queue": [
      "Naval",
@@ -3520,7 +3520,7 @@
       "pricing": true,
       "range": "10000",
       "reloaddelay": "100",
-      "requires": "!ra1_soviets_doctrine_infernodoctrine",
+      "requires": "!ra1_soviets_doctrine_inferno",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Concussion_Light",
@@ -3550,7 +3550,7 @@
       "pricing": true,
       "range": "10000",
       "reloaddelay": "100",
-      "requires": "ra1_soviets_doctrine_infernodoctrine",
+      "requires": "ra1_soviets_doctrine_inferno",
       "slot": "Armament@Upgrade",
       "versus_templates": [
        "^Warhead_MissileNuke_Heavy",

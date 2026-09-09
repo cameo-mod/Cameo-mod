@@ -1,7 +1,6 @@
 # TurnSpeed derivation (DESIGN.md — Vehicle turning)
 
 ## T1 — turreted ground: hull != round(Speed/5): **37** (ratchet 37) ok
-   CNCSS                                speed=80    hull=32    want=16
    EDEN_TIGER_ACIDCLOUD                 speed=45    hull=10    want=9
    PLYMOUTH_TIGER_EMP                   speed=45    hull=10    want=9
    PLYMOUTH_TIGER_ESG                   speed=45    hull=10    want=9
@@ -13,13 +12,12 @@
    atreides_apc                         speed=65    hull=16    want=13
    atreides_mongoose                    speed=64    hull=20    want=13
    atreides_siegetank                   speed=43    hull=48    want=9
+   cabal_dissolver                      speed=40    hull=16    want=8
    … and 25 more
 
 ## T2 — turretless ground: hull != round(2*Speed/5): **142** (ratchet 142) ok
-   CNCRSS                               speed=150   hull=40    want=60
    EDEN_CARGOTRUCK_EMPTY                speed=85    hull=17    want=34
    EDEN_CONVEC_STRUCTURE_FACTORY        speed=75    hull=15    want=30
-   LST                                  speed=125   hull=40    want=50
    PLYMOUTH_CARGOTRUCK_EMPTY            speed=80    hull=16    want=32
    PLYMOUTH_CONVEC_STRUCTURE_FACTORY    speed=75    hull=15    want=30
    PLYMOUTH_SCORPION                    speed=140   hull=40    want=56
@@ -28,10 +26,11 @@
    ^CivilianDriveByVehicle              speed=100   hull=20    want=40
    ^MCV                                 speed=75    hull=15    want=30
    ^Monster                             speed=50    hull=32    want=20
+   ^RAHARV                              speed=90    hull=18    want=36
+   ^RAMCV                               speed=75    hull=15    want=30
    … and 130 more
 
 ## T3 — turret turn speed != hull turn speed: **27** (ratchet 27) ok
-   CNCSS                                hull=32     turret=16
    ^IFVBase                             hull=30     turret=60
    atreides_apc                         hull=16     turret=48
    atreides_mongoose                    hull=20     turret=48
@@ -43,6 +42,7 @@
    japan_oitank                         hull=10     turret=24
    ksub.asian                           hull=50     turret=20
    lsub.asian                           hull=24     turret=12
+   naxis_assault                        hull=18     turret=16
    … and 15 more
 
 ## T4 — turreted actor with NO hull speed (immobile — own rule pending): **137** (ratchet 137) ok
