@@ -201,3 +201,66 @@ class ProposalContractTests(unittest.TestCase):
                 self.assertRaises(ValueError):
             consumer.main([str(self.path), "--write"])
         self.assertEqual(output.read_bytes(), b"original\r\n")
+
+
+class SpdStepLawTests(unittest.TestCase):
+    """Speed step law (maintainer 2026-09-07, 64dd80480): the vehicle 5-grid is
+    repealed — produced rows step Speed by 1 for ALL types, vehicle_turnrate
+    being metadata only."""
+
+    ARMAMENT = [{"slot": "Armament", "pricing": True, "weapon": "gun",
+                 "damage_warheads": [{"tag": "Bullet", "type": "SpreadDamage", "damage": 100}]}]
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.ledger = pathlib.Path(self.temp.name) / "ledger"
+        self.ledger.mkdir()
+        anchors = {"test": {
+            "spec": {"hp0": 10000, "speed0": 65, "range0_wdist": 5000,
+                     "dps0": 60, "cost0": 100},
+            "anchor_actor": "anchor", "verifier_actor": "verifier"}}
+        (self.ledger / "class_anchors.json").write_text(
+            json.dumps(anchors), encoding="utf-8")
+
+    def unit(self, actor, spd=73, turn_speed=True):
+        return (actor, {"hp": {"v": 20000}, "speed": {"v": spd}, "cost": {"v": 100},
+                        "design": {"class_anchor": "test"},
+                        "turn_speed": turn_speed, "armaments": self.ARMAMENT})
+
+    def rows_for(self, *units):
+        doc = {"ledger": "fac", "sections": {"vehicles": dict(units)}}
+        (self.ledger / "fac.json").write_text(json.dumps(doc), encoding="utf-8")
+        with patch.object(producer, "ANCHORS_FILE", self.ledger / "class_anchors.json"), \
+                patch.object(producer, "LEDGER_DIR", self.ledger):
+            return producer.load_class_rows("test")[0]
+
+    def test_produced_rows_step_speed_by_one_even_with_turn_speed(self):
+        rows = self.rows_for(self.unit("car"), self.unit("foot", turn_speed=False))
+        self.assertEqual([r["spd_step"] for r in rows], [1, 1])
+        self.assertEqual([r["vehicle_turnrate"] for r in rows], [True, False])
+
+    def test_single_vehicle_speed_73_stays_in_valid_band(self):
+        rows = self.rows_for(self.unit("car"))
+        producer.nudge_hp_spd(rows, spd_lo=52, spd_hi=78)
+        self.assertEqual(rows[0]["spd"], 73)
+
+    def test_duplicate_vehicle_speeds_separate_by_one(self):
+        rows = self.rows_for(self.unit("a"), self.unit("b"))
+        producer.nudge_hp_spd(rows, spd_lo=52, spd_hi=78)
+        self.assertEqual(len({r["spd"] for r in rows}), 2)
+        self.assertEqual(max(r["spd"] for r in rows)
+                         - min(r["spd"] for r in rows), 1)
+
+    def test_protected_vehicle_speed_is_untouched(self):
+        rows = self.rows_for(self.unit("car"), self.unit("anchor"))
+        rows[0]["protected"] = False
+        rows[1]["protected"] = True
+        producer.nudge_hp_spd(rows, spd_lo=52, spd_hi=78)
+        self.assertEqual(next(r for r in rows if r["protected"])["spd"], 73)
+
+    def test_explicit_row_step_remains_honored(self):
+        row = dict(actor="legacy", hp=1000, spd=72, spd_step=5,
+                   protected=False, cost=100, rng=5000, weapon="gun")
+        producer.nudge_hp_spd([row], hp_lo=1000, hp_hi=100000, spd_lo=48, spd_hi=72)
+        self.assertEqual(row["spd"], 70)

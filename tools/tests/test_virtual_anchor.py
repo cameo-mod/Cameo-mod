@@ -1,5 +1,6 @@
 """Virtual anchors reuse final Formula V2 and never imply gameplay approval."""
 import contextlib
+import hashlib
 import io
 import json
 import pathlib
@@ -151,3 +152,144 @@ class VirtualAnchorTests(unittest.TestCase):
         with patch.object(sys, "argv", ["fit_class", "--class", "mbt", "--spec", "1,1,1,100,1,1", "--use-k"]), \
                 contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
             fit_class.main()
+
+
+class SpeedGridTests(unittest.TestCase):
+    """Speed snaps on the global 1-grid for EVERY type — DESIGN.md 2026-09-07
+    ruling (the old per-class 5-step existed only to keep TurnSpeed = Speed/5
+    an integer, which the derived turn-rate trait removed). TurnSpeed /
+    Aircraft.Speed evidence must NOT flip the grid."""
+
+    def foot(self, actor, speed=72.5, **kw):
+        row = member(actor, **kw)
+        row["speed"] = speed
+        row["unit"]["speed"] = {"v": speed}
+        return row
+
+    def vehicle(self, actor, speed=72.5, **kw):
+        row = self.foot(actor, speed, **kw)
+        row["unit"]["turn_speed"] = {"src": "yaml#Mobile.TurnSpeed", "v": "10"}
+        return row
+
+    def aircraft(self, actor, speed=72.5, **kw):
+        row = member(actor, **kw)
+        del row["unit"]["speed"]
+        row["unit"]["speed_air"] = {"src": "yaml#Aircraft.Speed", "v": str(speed)}
+        row["speed"] = speed
+        return row
+
+    def test_foot_pool_snaps_72_5_to_73_on_grid_1(self):
+        result = tool.derive("mbt", [self.foot("a"), self.foot("b")], {})
+        evidence = result["fields"]["speed"]
+        self.assertEqual(evidence["grid_step"], 1)
+        self.assertEqual(evidence["median"], 72.5)
+        self.assertEqual(evidence["value"], 73)
+
+    def test_turn_speed_evidence_does_not_flip_grid(self):
+        result = tool.derive("mbt", [self.vehicle("a"), self.vehicle("b")], {})
+        evidence = result["fields"]["speed"]
+        self.assertEqual(evidence["grid_step"], 1)
+        self.assertEqual(evidence["median"], 72.5)
+        self.assertEqual(evidence["value"], 73)
+
+    def test_aircraft_speed_evidence_does_not_flip_grid(self):
+        result = tool.derive("mbt", [self.aircraft("a"), self.aircraft("b")], {})
+        evidence = result["fields"]["speed"]
+        self.assertEqual(evidence["grid_step"], 1)
+        self.assertEqual(evidence["value"], 73)
+
+    def test_mixed_pool_stays_on_grid_1(self):
+        result = tool.derive("mbt", [self.foot("a"), self.vehicle("b")], {})
+        evidence = result["fields"]["speed"]
+        self.assertEqual(evidence["grid_step"], 1)
+        self.assertEqual(evidence["value"], 73)
+
+    def test_nonpreferred_vehicle_row_does_not_flip_selected_foot_grid(self):
+        rows = [self.foot("a"), self.foot("b"), self.vehicle("c")]
+        assignments = {"a": {"game": dict(id="TANK1", confidence="STRONG")},
+                       "b": {"game": dict(id="TANK2", confidence="FAIR")}}
+        result = tool.derive("mbt", rows, assignments)
+        evidence = result["fields"]["speed"]
+        self.assertTrue(evidence["reference_backed"])
+        self.assertEqual(evidence["actors"], ["a", "b"])
+        self.assertEqual(evidence["grid_step"], 1)
+        self.assertEqual(evidence["value"], 73)
+
+    def test_vehicle_without_speed_value_is_not_in_the_pool(self):
+        empty = self.vehicle("c")
+        del empty["unit"]["speed"]
+        empty["speed"] = None
+        result = tool.derive("mbt", [self.foot("a"), self.foot("b"), empty], {})
+        evidence = result["fields"]["speed"]
+        self.assertEqual(evidence["actors"], ["a", "b"])
+        self.assertEqual(evidence["grid_step"], 1)
+        self.assertEqual(evidence["value"], 73)
+
+    def test_invalid_turn_speed_evidence_does_not_crash(self):
+        broken = self.foot("a")
+        broken["unit"]["turn_speed"] = {"src": "yaml#Mobile.TurnSpeed", "v": None}
+        garbage = self.foot("b")
+        garbage["unit"]["turn_speed"] = {"src": "yaml#Mobile.TurnSpeed", "v": "not-a-number"}
+        result = tool.derive("mbt", [broken, garbage], {})
+        self.assertEqual(result["fields"]["speed"]["grid_step"], 1)
+
+    def test_every_field_evidence_exposes_its_grid_step(self):
+        result = tool.derive("mbt", [self.foot("a"), self.foot("b"), self.foot("c")], {})
+        self.assertEqual(result["fields"]["hp"]["grid_step"], tool.STEPS["hp"])
+        self.assertEqual(result["fields"]["speed"]["grid_step"], tool.STEPS["speed"])
+        self.assertEqual(result["fields"]["range_wdist"]["grid_step"], tool.STEPS["range_wdist"])
+        self.assertEqual(result["fields"]["cost"]["grid_step"], tool.STEPS["cost"])
+
+    def test_resolved_ledger_mbt_speed_pool_snaps_72_5_to_73(self):
+        # Verified bug baseline: the selected (reference-backed) MBT speed pool
+        # has median 72.5, snapped to 73 on the global 1-grid. Evidence-driven:
+        # pool composition may move, and then these assertions name the new
+        # state instead of silently passing.
+        members, assignments, _ = tool.load_evidence(tool.ROOT / "docs/balance")
+        result = tool.derive("mbt", members, assignments)
+        evidence = result["fields"]["speed"]
+        self.assertTrue(evidence["reference_backed"])
+        self.assertEqual(evidence["grid_step"], 1)
+        self.assertEqual(evidence["median"], 72.5)
+        self.assertEqual(evidence["value"], 73)
+
+
+class RegistryRaceTests(unittest.TestCase):
+    def test_registry_rewrite_between_read_and_evidence_refuses_output(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = pathlib.Path(directory)
+            ledger = root / "docs/balance"
+            (ledger / "derived").mkdir(parents=True)
+            registry = ledger / "class_anchors.json"
+            registry.write_text(json.dumps({"mbt": {"spec": {}}}), encoding="utf-8")
+            (ledger / "derived/reference_assignment.json").write_text(
+                json.dumps({"assignment": {}}), encoding="utf-8")
+            real_load_evidence = tool.load_evidence
+
+            def replace_registry(_ledger):
+                registry.write_text(json.dumps({"mbt": {"spec": {"hp0": 240000}}}), encoding="utf-8")
+                return real_load_evidence(_ledger)
+
+            with patch.object(tool, "ROOT", root), \
+                    patch.object(tool, "load_evidence", side_effect=replace_registry), \
+                    contextlib.redirect_stdout(io.StringIO()) as output, \
+                    contextlib.redirect_stderr(io.StringIO()) as errors:
+                with self.assertRaises(SystemExit):
+                    tool.main(["--class", "mbt"])
+            self.assertIn("class_anchors.json changed", errors.getvalue())
+            self.assertEqual(output.getvalue(), "")
+
+    def test_stable_registry_fingerprint_allows_output(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = pathlib.Path(directory)
+            ledger = root / "docs/balance"
+            ledger.mkdir(parents=True)
+            registry = ledger / "class_anchors.json"
+            registry.write_text(json.dumps({"mbt": {"spec": {}}}), encoding="utf-8")
+            provenance = dict(ledger_sha256={"class_anchors.json":
+                hashlib.sha256(registry.read_bytes()).hexdigest()})
+            with patch.object(tool, "ROOT", root), \
+                    patch.object(tool, "load_evidence", return_value=([member("a")], {}, provenance)), \
+                    contextlib.redirect_stdout(io.StringIO()) as output:
+                self.assertEqual(tool.main(["--class", "mbt", "--factions", "tiberiandawn_gdi"]), 0)
+            self.assertIn(hashlib.sha256(registry.read_bytes()).hexdigest(), output.getvalue())

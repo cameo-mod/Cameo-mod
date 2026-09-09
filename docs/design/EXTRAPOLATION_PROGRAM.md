@@ -65,17 +65,23 @@ was re-designed once already. What is missing is not the mechanism — it is the
 
 ## 1. Why a virtual anchor is the right answer, not a workaround
 
-The 27 anchors are real actors today, and that is the source of the deadlock:
+The existing real-actor anchors are vulnerable to actor drift, which is one source of the deadlock.
 
-```
-anchor actor OFF its ruled spec               23 of 27
-satisfying the identity o0 = p0 = q0 = cost0   0 of 27
-missing a fitted cost baseline                25 of 27
-classes with LOW pricing residuals             0 of 27
-```
+> **Measurement correction 2026-09-09** (supersedes the raw-fit metrics block that stood
+> here — its "satisfying identity 0 of 27" line came from a superseded raw fit check; see
+> [ASTRA_REVIEW.md, 2026-09-09 pass](../audit/ASTRA_REVIEW.md)): the stored-fit registry
+> holds **28 class entries — 26 carry no stored `cost0`/`o0`/`p0`/`q0` at all, and 2
+> (`line_breaker`, `mbt`) carry complete legacy raw values**. Absence is NOT a failed
+> identity: the final per-stat normalized identity cannot be judged by comparing raw
+> `o0`/`p0`/`q0` to `cost0`. This stored-fit check does not refresh live off-spec counts,
+> fitted models or residual distributions. Two standing clarifications: frozen, approved **virtual**
+> specs are independent of actor stats (that independence is the point of Phase E), while
+> the diagnostic current-ledger medians remain unapproved and not frozen. This is a
+> factual measurement correction, not a change to any gate, owner or approval.
 
-A real anchor drifts every time someone edits that actor's yaml, and then the whole class reprices
-underneath everyone. `mbt`'s spec says `hp0` 240,000 while `naxis_tiger` ships 100,000; the class
+A real actor can drift from its anchor specification when its yaml changes. Recomputing or
+refitting actor-dependent anchor inputs can then reprice the class; stored fits do not refresh
+automatically. `mbt`'s spec says `hp0` 240,000 while `naxis_tiger` ships 100,000; the class
 has been waiting on a "restat the baseline actor" step that has never run.
 
 A virtual anchor cannot drift, because no yaml points at it. It is a round-number model unit
@@ -177,8 +183,9 @@ Yes, and the mechanism is worth stating precisely. Once the anchors are virtual 
 * the anchors stop moving when someone edits a unit, so adding a faction can no longer reprice an
   existing one.
 
-That last property is the real prize. Today, restatting `naxis_tiger` silently reprices all 51 `mbt`
-members. After Phase E, it reprices nothing.
+That last property is the real prize. Refitting an actor-derived baseline after restatting
+`naxis_tiger` can reprice all 51 `mbt` members. After Phase E, actor changes alone would not
+change the frozen, approved virtual specification.
 
 ---
 

@@ -178,8 +178,10 @@ def nudge_ranges(rows, lo: int, hi: int):
 
 
 def _spd_snap(r, val, lo, hi):
-    """Clamp Speed to band and snap to the row's step — a multiple of 5 for
-    vehicle-turn-rate units (turn = speed/5), unchanged (step 1) for foot."""
+    """Clamp Speed to band and snap to the row's step.
+
+    Maintainer 2026-09-07 (64dd80480, DESIGN.md speed grid): the old
+    vehicle 5-grid is REPEALED — every type steps Speed by 1."""
     step = r.get("spd_step", 1)
     val = max(lo, min(hi, val))
     if step > 1:
@@ -188,8 +190,9 @@ def _spd_snap(r, val, lo, hi):
 
 
 def nudge_hp_spd(rows, hp_lo=1000, hp_hi=100000, spd_lo=48, spd_hi=72, spd_step=1):
-    # HP steps by 1000. Speed steps PER-ROW: 1 for foot infantry, 5 for
-    # vehicle-turn-rate units (also snapped to a multiple of 5). maintainer 2026-07-22.
+    # HP steps by 1000. Speed steps by 1 for ALL types (maintainer 2026-09-07,
+    # 64dd80480: the vehicle 5-grid is repealed). Per-row `spd_step` is kept
+    # so an explicit override still works; generated rows always carry 1.
     # --- HP: uniform step 1000 ---
     for l, h, step in ((hp_lo, hp_hi, 1000),):
         groups = {}
@@ -215,7 +218,9 @@ def nudge_hp_spd(rows, hp_lo=1000, hp_hi=100000, spd_lo=48, spd_hi=72, spd_step=
                     if r.get("protected"):
                         continue
                     r["hp"] = max(l, min(h, r["hp"] + (1 if i % 2 == 0 else -1) * step))
-    # --- Speed: per-row step; snap turn-rate units to a multiple of 5 first ---
+    # --- Speed: snap to each row's OWN step; generated rows carry step 1
+    #     (maintainer 2026-09-07, 64dd80480: the turn-rate 5-grid is repealed;
+    #     an explicit per-row spd_step override still works) ---
     for r in rows:
         if not r.get("protected"):
             r["spd"] = _spd_snap(r, r["spd"], spd_lo, spd_hi)
@@ -344,14 +349,13 @@ def load_class_rows(cls: str):
                 # audit_exempt (soft) units are balanced to Δ≤1 but skipped by the
                 # uniqueness enforcement (support-power spawns like frank/undead).
                 row["soft"] = bool(design.get("audit_exempt")) and not is_protected
-                # Vehicle turn-rate logic (turn = speed/5) → Speed MUST be a
-                # multiple of 5. True (foot) infantry turn instantly and may step
-                # Speed by 1. Detected by a defined Mobile.TurnSpeed (maintainer
-                # 2026-07-22): this covers actual vehicles AND the Cabal cyborgs /
-                # FutureTech droids that use vehicle locomotion, while zerglings
-                # etc. (chem locomotor but no TurnSpeed) stay foot-stepped.
+                # `vehicle_turnrate` (a defined Mobile.TurnSpeed: real vehicles AND
+                # the Cabal cyborgs / FutureTech droids on vehicle locomotion) is
+                # kept as reporting metadata only. The old 5-speed grid keyed on
+                # it was REPEALED by the maintainer 2026-09-07 (64dd80480):
+                # ALL types step Speed by 1, HP by 1000.
                 row["vehicle_turnrate"] = bool(u.get("turn_speed"))
-                row["spd_step"] = 5 if row["vehicle_turnrate"] else 1
+                row["spd_step"] = 1
                 row["arm_rng"] = formula.wdist_value(arm.get("range"), 0)
                 # offensive warheads on the primary weapon (100-grid split target)
                 offensive = formula.main_spread_warheads(arm.get("damage_warheads", []))
@@ -375,11 +379,6 @@ def load_class_rows(cls: str):
     for r in rows:
         r["tech_tier"] = r["tier_abs"] / anchor_tech
     return rows, spec, band_lo, band_hi, spd_lo, spd_hi
-
-
-# Classes whose Speed steps by 5 (vehicles/aircraft/ships: turn rate = speed/5).
-# Infantry classes step by 1. Extend as vehicle/aircraft/naval anchors land.
-VEHICLE_TYPE_CLASSES = {"mbt"}
 
 
 def _price(spec, hp, spd, rng, dps, special, tech_tier):
@@ -503,8 +502,7 @@ def rebalance_class(cls: str):
     rows, spec, band_lo, band_hi, spd_lo, spd_hi = load_class_rows(cls)
     if not rows:
         return ""
-    spd_step = 5 if cls in VEHICLE_TYPE_CLASSES else 1
-    nudge_hp_spd(rows, spd_lo=spd_lo, spd_hi=spd_hi, spd_step=spd_step)
+    nudge_hp_spd(rows, spd_lo=spd_lo, spd_hi=spd_hi)
     # 1. Range: protected → spec; others → clamp current into band (preserve feel).
     for r in rows:
         if r["protected"]:
@@ -558,9 +556,9 @@ def rebalance_class(cls: str):
         if band_lo <= r0 <= band_hi:
             r["rng"] = r0
     nudge_ranges(rows, band_lo, band_hi)   # re-unique after snapping
-    # 2c. Speed fine-tune (FOOT infantry only, step 1): squeeze any member still
-    #     off Δ0 — the maintainer allows Speed±1 on foot infantry as a fine price
-    #     lever. Turn-rate units keep multiples of 5 (too coarse) and are left.
+    # 2c. Speed fine-tune (step 1 for ALL types, maintainer 2026-09-07
+    #     64dd80480): squeeze any member still off Δ0. The old foot-only
+    #     fine-tune exclusion for turn-rate units is repealed.
     taken_spd = {r["spd"] for r in rows}
     for r in rows:
         if (r["protected"] or r.get("soft") or r.get("over_priced")

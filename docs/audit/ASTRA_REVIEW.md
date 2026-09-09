@@ -1,5 +1,334 @@
 # Astra implementation review
 
+## 2026-09-09 pass: A3/C1 dossier integration, extrapolation join and probe handovers
+
+Implementation-worker pass under Codex/Astra planning/review; the sections below it are
+historical. Integrated source upstream `5f170ba07` at local `eb3cb60a3` in the
+`astra-balance-pipeline` worktree. PR #335 remains DRAFT/unmerged. Verified against the
+artifact, not the summary: AedisToru's PR #335 comment (2026-09-08,
+[C32 release comment](https://github.com/cameo-mod/Cameo-mod/pull/335#issuecomment-5587818907))
+releases C32 — the existing master `anchor_readiness.py` implementation is the approved
+starting point, and
+`devin/aurora/fix-anchor-readiness` (local-only, head `d14306419`, never pushed) must not be
+imported together with its 32 other files. No AURORA branch import is missing.
+
+### Implemented: A3/C1 read-only dossier and readiness integration
+
+`tools/balance/propose_anchor_spec.py` generates a fixed seven-section dossier (verified at
+its `render()` docstring). The integration is read-only: the virtual candidate and readiness
+diagnostics join live resolved YAML and the ledger for all 700 classified members — 638 fit
+eligible, 62 excluded and explicitly marked. Four axes only (hp, speed, range_wdist, cost);
+no DPS target while W24 moves. Missing K, tier, model and verifier are shown unknown, never
+invented. References are strict source+ID; the hero lane stays separate from ordinary
+synthesis. Guards verified in source: registry-race and input-change checks abort without
+writing (`propose_anchor_spec.py:362-369,408-409`), in-repo output is restricted to
+`docs/balance/anchors` (`:364-365`), and annotated diagnostics refuse overwrite
+(`diagnostic_output.py:16-31`) — regeneration must target a fresh external `--out` directory.
+
+28 dossiers were generated in the external agent workspace
+(`documents/agents/astra-pipeline-20260909/dossiers-reviewed`); this worktree contains only
+the four checked-in C3 pilots with the coordinator judgement in section 6. Keeping a
+nomination is not sign-off and not a restat.
+
+### C3 pilot blockers, read from the checked-in files
+
+- `closecombat`: evidence pool n=1 (`td_gdi_shotgunner`), zero accepted reference rows; the
+  derived aggregate K differs between anchor and verifier (0.01498 vs 0.0149625) — an open
+  precision/model-basis question; W24 raw debt 1 (`futuretech_shotgundroid`, 3 mains).
+- `commando`: every reference source is hero-only and ordinary synthesis is correctly
+  withheld; no verifier nominated; the raw live-vs-ruled range gap (+86 wdist, 8086 vs 8000)
+  must stay visible; W24 raw debt 6 (largest: `AsianSniperLockdown`/`VonSniperLockdown`, 6
+  mains each).
+- `rocket_trooper`: hp flagged BIASED (candidate at the 6.98th percentile — not a reason to
+  raise HP or move the anchor, C9); the verifier breaks the 2x/2x/2.5x template (HP 4.5x,
+  DPS ~1.32x, cost ~2.17x, different K); raw range gap +143; W24 raw debt 3.
+- `special_forces`: THIN on every axis (n=2); the diagnostic 39000 HP / 700 cost must not
+  restate the ruled 15000 / 200; verifier DPS ratio 264/143 is not 2 and K differs; W24 raw
+  debt 1 (`japan_imperialscoutsman` waveforce, 4 mains).
+
+Common to all four: the verifier identity is nowhere established; no sign-off, no restat.
+
+### Extrapolation
+
+The strict ID join removes 22 wrong-ID substitutions and loses no available ID. A fresh
+`ar.assign()` producer run (run by the coordinator; an independent worker checking committed
+JSON counts alone did not establish freshness) returned 903 actor-source pairs across 355
+actors = 863 ordinary joined + 40 hero-only excluded, matching the committed
+`docs/balance/derived/reference_assignment.json`. Virtual
+members drop 3235 to 3193, fixing identity reuse. Coverage 304 paired + 233 rankplaced =
+537/633, unchanged. New per-stat THIN diagnostics with a CLI minimum of 3; 48 THIN stat
+rows. Both-missing axes are omitted, so not every invalid pair is represented.
+
+### Stored fits (C5/C6)
+
+Verified in `docs/balance/class_anchors.json`: 28 class entries; 26 carry no stored
+cost0/o0/p0/q0 at all; `line_breaker` and `mbt` carry complete legacy raw values. A raw
+normalizer need not equal cost. The false "0/28 final identity failed" assertion was
+removed; complete/absent/partial/invalid fields and live-vs-spec gaps are now
+distinguished. No fresh fit was run and absence is not yet diagnosed.
+
+### Speed law
+
+`DESIGN.md` "Speed: steps of 1 for EVERY type" (maintainer 2026-09-07, commit `64dd80480`)
+verified in-tree at lines 1519-1523; the old vehicle 5-grid is repealed. FORMULA_V2's
+obsolete bullet was corrected; derive metadata and tests all step 1 (MBT median 72.5 → 73).
+`propose_class_rebalance.py` generated rows carry `spd_step = 1` (line 356);
+`vehicle_turnrate` remains metadata (line 355); the explicit per-row override compatibility
+path is kept (`_spd_snap` default 1, line 185). This changes FUTURE proposals — including
+speed and the damage calculations that depend on it — not live stats. The independent
+challenge caught the coordinator's initial wrong 5-step plan and it was corrected before
+publication. C8: eight role questions documented, no classification changed. Twin AA
+armaments are retained under the 2026-09-08 AA range law; the old AA damage bonus is
+retired — do not conflate the two rulings.
+
+### C49 pure-AA population (external read-only probe + coordinator fitting run)
+
+1956 buildable ledger rows = 870 unit / 460 structure / 609 upgrade / 17 other; 785
+baseline armed = 705 unit / 76 structure / 4 other. The strict Air-only-ValidTargets cohort
+is 21 = 5 mobile + 16 structures; the name heuristic finds 3 and misses 18. The fitting
+follow-up is an actual coordinator run against this worktree (`pure-aa-fitting-run.txt`;
+probe peak 145.7 MB, PC 57%; input + ledger + active-yaml SHA256 fingerprints unchanged,
+fitting inputs unchanged). `probe_pure_aa_resolved.py` now emits a fit diagnostic for all
+21 strict rows. **Fitting inputs retain nominal DPS — no signed price is calculated** by
+this path, so the earlier "the current fitter already prices" wording was wrong: it never
+states or computes a price. The 5 mobile rows carry nonzero nominal fit DPS — ADP 95.833333,
+Aegis 357.142857 (with HP/speed/range inputs above), Valkyrie 442.105263,
+Devourer 288.75, Scourge 2875. **Scourge's 2875 is raw periodic DPS, not a sustained
+valuation of a suicide unit in combat.** All 16 structures are missing speed; none have a
+zero-DPS basis (fit inputs unavailable ≠ zero DPS). 20 of 21 have no unit class — 16
+`not-a-unit` + 4 `no-class-exists` — only `harkonnen_adp` is classified
+(`anti_air_vehicle`, derived). This is the `fit_class` path only, not an exhaustive check
+of every pricing consumer. The strict mask is not a runtime hit/warhead-mask proof; the
+name heuristic's false positive is `naxis_flak88` (`Armament@AA` → `NaxFlakAG` targets
+Ground,Water). External evidence preserved: `probe_pure_aa_resolved.py`,
+`pure-aa-resolved-run.txt`, `pure-aa-fitting-run.txt`. C48 (extractor fix) is an owner
+handover only, not implemented here. No synthetic speed is invented for static defenses;
+separate structural/naval/aircraft class coverage remains owner work.
+
+Full strict cohort (21 rows from the run's `strict_air_only_rows`; hp/speed/dps null =
+not provided by fit inputs, never a zero value):
+
+| actor | section_group | cls | hp | speed | dps |
+|---|---|---|---:|---:|---:|
+| `harkonnen_adp` | units | anti_air_vehicle (derived) | 50000 | 64 | 95.833333 |
+| `ra2_allies_patriotmissilesystem` | structures | — | — | — | — |
+| `ra2_allies_aegiscruiser` | units | — | 90000 | 90 | 357.142857 |
+| `ra2_soviets_flakcannon` | structures | — | — | — | — |
+| `asianalliance_hyperionprojector` | structures | — | — | — | — |
+| `asianalliance_pulsar` | structures | — | — | — | — |
+| `steelconsortium_antiairquantummissileturret` | structures | — | — | — | — |
+| `latinsyndicate_latinaadefender` | structures | — | — | — | — |
+| `tkm_quadturretbunker` | structures | — | — | — | — |
+| `ra1_allies_alliedaagun` | structures | — | — | — | — |
+| `ra1_soviets_sovietsamsite` | structures | — | — | — | — |
+| `terran_valkyrie` | units | — | 120000 | 140 | 442.105263 |
+| `terran_missileturret` | structures | — | — | — | — |
+| `zerg_devourer` | units | — | 250000 | 90 | 288.75 |
+| `zerg_scourge` | units | — | 25000 | 200 | 2875 |
+| `td_gdi_skyshield` | structures | — | — | — | — |
+| `td_nod_samsite` | structures | — | — | — | — |
+| `cabal_obeliskofdarkness` | structures | — | — | — | — |
+| `forgotten_juggerflakwall` | structures | — | — | — | — |
+| `ts_gdi_samtower` | structures | — | — | — | — |
+| `ts_nod_samsite` | structures | — | — | — | — |
+
+**Question for the maintainer (options, not a decision):** should future signed pricing
+retain the current ground-preferred / pure-AA fallback selection (which keeps free bonus AA
+on mixed-domain units) as the diagnostic behavior on which calibration eventually runs, or
+switch to a separately calibrated AA-only basis / anchors? Recommendation: retain the
+current diagnostic selection, pending calibration — do not invent a new price factor either
+way at this point. Neither option licenses synthetic speed for static defenses.
+
+### Reference-corrections handover (external read-only counterfactual)
+
+46 input hashes unchanged; 4 fresh assignment runs; 166.4 MB peak (external
+`probe_reference_corrections.py` + `reference-counterfactual-run.txt`). OpenRA TS/E1 with an empty faction tag (`--`): the missing faction metadata filters the correct
+E1 reference out of the join (no good-metadata routing claim). In-memory gdi/nod tag correction:
+Nod CYBORG FAIR → E1 STRONG, and GDI gains E1 STRONG plus TwistedInsurrection E1 Ranger
+FAIR via id promotion; 0 assignments lost, 2 actors affected; Nod keeps one source — no
+third-source approval. The primary E1 source was verified against upstream OpenRA at
+`f3ec7f8e1593b482f85fd101652deb740c33dee6`
+([mods/ts/rules/shared-infantry.yaml](https://github.com/OpenRA/OpenRA/blob/f3ec7f8e1593b482f85fd101652deb740c33dee6/mods/ts/rules/shared-infantry.yaml)):
+E1 HP 12500, Cost 120, gdi/nod images. Proposed corpus metadata correction, NOT applied.
+
+Grizzly alias (`grizzlytank` → `grizzlybattletank`) in memory: RA2Reborn GRNDR Grinder
+FAIR → MTNK STRONG, but MTNK was consumed by PrismTank; Grizzly 2 → 5 sources, Prism 7 → 6;
+net 4 changed / 3 gained / 1 lost across 2 actors. Prism: CnC MTNK → SREF Prism FAIR is an
+improvement while RA2Reborn MTNK → GRNDR Grinder FAIR stays bad and Valiant Shades mtnk is
+lost; Grizzly gains Mental Omega BLZZ Blizzard Tank FAIR, still needing review. The alias
+alone is not a clean finished fix; the atomic Grizzly+Prism+MO identity review is handed to
+the corpus owner — do not propose blindly accepting the coverage counts.
+
+### Remaining RA2/TS reference gaps (external probe, maintainer input needed)
+
+`probe_remaining_reference_gaps.py` was run from the actual repo root, once, on a fresh
+assignment run: 5.5 s producer work inside the 6.6 s bounded run, 175.4 MB / PC 54.7%, all
+46 hashes unchanged; the evidence JSON is the first line of the external
+`C:/Users/Blackrobe/Documents/agents/astra-pipeline-20260909/remaining-reference-gaps-run.txt`.
+`ra2_allies_engineer` and `ra2_soviets_engineer` each carry 1 reference (RV/engineer,
+original true) and are NOT exempt despite their support class: both have armaments, so
+this is not a chassis-only case. Valiant Shades `aengineer`/`engineer`/`sengineer` exist
+in the ordinary pool but carry faction `—`, so `fr.allows` is false. Main-engineer raw
+INI records in Mental Omega, CnC Reloaded, RA2 Reborn and RA2 0XX exist but are
+`buildable: false` and therefore excluded — this is a metadata/source-verification
+request, not proof that `buildable` should flip. The sentry gun holds 2 references
+(RV/nalasr + VS/nalasr); its 5 INI NALASR candidates (CnC Reloaded, Mental Omega, RA2
+0XX, RA2 Reborn, Red Resurrection) are refused by EXCLUSIVE_ONLY because their owners
+span routed faction cells, and the RA2 0XX NALASR is a Soviet Flame Tower, not a
+name-identity equivalent; exclusivity must not be widened and a third source must not be
+forced — this needs a maintainer ruling on verified source identity. While probing, a
+tangible filter bug surfaced in `tools/balance/reference_distribution.py`: `_AI_NAME`
+holds four literal U+0008 backspaces instead of `\b` word boundaries at line 439
+(introduced in `d99b130aca`, whose parent has zero such bytes; the author is not at
+issue). **Measured counterfactual** (external
+`C:/Users/Blackrobe/Documents/agents/astra-pipeline-20260909/ai-name-filter-run.txt`,
+first line): ordinary pool 4384 → 4370 — exactly the 14 Red Resurrection AI-only rows
+`DECIAI`, `IFVAI1`–`7`, `SCRCHAI`, `SHADAI1`–`4`, `SUNBURSTAI` dropped, 0 added; two
+current `ar.assign()` runs report 0 source-ID/confidence changes, losses or gains (scope 686,
+chassis 67 unchanged). Direct calls: the corrected `\bAI[- ]ONLY\b` and `\bfor AI\b`
+branches go False→True, the `_AI` suffix branch stays True both ways, and the ORCAI/ZRAI
+guard rows stay False both ways — the original `(AI)`/parenthetical and `_AI` branches
+worked, so the filter was partially alive, NOT all-AI-disabled; 25 bare-`AI` rows are
+kept by the corrected form. All integrity hash comparisons are unchanged (truncated
+SHA256-16; guard 166.8 MB / 11.3 s / PC 53.7%). A zero current-assignment delta is not a
+no-impact finding: the removed rows alter the reference population, so calibration must
+regenerate AFTER the owner lands the fix. The inert owner patch + regression tests are
+packaged unapplied at
+[docs/audit/patches/ai_name_boundaries.patch](patches/ai_name_boundaries.patch); its
+eight regression tests were executed without applying it: four fail against the current
+producer (AI ONLY, AI-ONLY, for AI, and the literal-backspace invariant); all eight pass
+with only the proposed regex replacement in memory. The original pattern was restored,
+the production test file was not created, and `git apply --check` passes for the artifact.
+These eight owner-patch tests are separate from the 1,121-test repository sweep below.
+
+**Review-lead note on the buildability flag (not a conclusive corpus fix):**
+`tools/reference/extract_ini_units.py:257-260` treats `IsSelectableCombatant=no` as
+unbuildable, the same as `Selectable=no`/`TechLevel<0`, but a primary
+reverse-engineering report
+([YR selection-system Ghidra analysis](https://github.com/Yrvera/vera20k/blob/78e9deb129e51345be155fee4c7030699e258ed9/docs/research/SELECTION_SYSTEM_GHIDRA_REPORT.md#11-ini-keys-that-affect-selection))
+reads `IsSelectableCombatant` as the select-all-combatants hotkey flag versus
+`Selectable` as general clickability — that meaning is attributed to the external
+analysis, not our runtime proof: we have neither independently decompiled YR nor any
+reference INI files (the configured
+`C:/Users/Blackrobe/Documents/GitHub/Cameo-mod-reference/extraction` is absent). It is
+therefore only a candidate cause of the engineers' `buildable: false` and needs owner
+confirmation against original INI files; corpus flags must never be flipped blindly. No
+buildability code patch is proposed here.
+
+### Validation (final bounded run verified)
+
+33 ledgers zero drift; percentage runtime PASS; the canonical `latest/` refresh is done —
+weapon-shape 304 and three-way split 231 within their lower-only ratchets (raw-stack ceiling
+322 unchanged; the prior 389/322 snapshot line is removed), no ratchet or expectation waived.
+The independent challenge FINAL verdict arrived: **CLEARED WITH CAVEATS** — no remaining
+blocker on the speed law or the four C3 pilot notes; the 5 new speed-law unit tests are
+confirmed, and the earlier challenges (registry race, live-vs-ledger member display, stored
+normalizer assertion, model defaults, input mismatch) are fixed; raw W24 / hero / thin /
+unknown stay visible, and the actual seven-section output plus all code hashes were verified
+on the four pilot documents.
+
+Final bounded run VERIFIED from `docs/audit/latest/bounded_test_run.json`: complete sweep
+107/107 modules, 1121 tests, 45 skipped, 14 failing modules — not green, and no full-suite
+green is claimed. Its 21 FAIL/ERROR signatures are IDENTICAL to the published `5544cf061`
+report: no added and no removed signature; all 14 are the known baseline, reproduced before
+on untouched `a089bd3dc`, with upstream `5f170ba07` docs/helpers only since then. No new
+failing module. Seven targeted modules all pass, 190/190: dossier 28, apply 48,
+diagnostic_output 8, faction_extrapolate 46, proposal_contract 19, virtual_anchor 28,
+virtual_readiness 13. Process peaks are distinct and must not be merged: the bounded run
+peaked at 865.4 MB process tree / 60.1% PC over 639.5 s inside the 1536 MB / 84% guards;
+dossier generation is a separate process peaking at 1227.3 MB / PC 55.9%. Latest upstream
+re-fetch is unchanged at `5f170ba07` (0 commits missing), integrated at local `eb3cb60a3`;
+PR #335 was DRAFT/open at remote head `5544cf061` before this publication. No YAML, C#,
+engine, pin or approval changes, and no gameplay launch.
+
+## C43: target-dependent AA range, analysis only (2026-09-09)
+
+**Recommendation: retain generated twin armaments.** High confidence in the
+architectural conclusion; medium confidence in implementation effort. No engine
+change, compilation, shadow-binding experiment or game launch was performed.
+Inspected mod source: upstream `5f170ba07`, integrated at `eb3cb60a3` in the
+`astra-balance-pipeline` worktree. Engine sources are local, untracked content:
+`engine/VERSION` declares `462fc1fc4bfc490c42b88b429670c7f0c64c7aca`, but this is
+not proof of source/pin equivalence. Inspected Common `Traits/Armament.cs` SHA256:
+`beee0205b57f8d4a90b5b89424739d70832d911b3abc462047fab3c51697cbed`.
+
+The coordinator's recommendation is supported, but “cannot, mod-side” is too
+absolute. `CanFire(Actor, in Target)` is protected virtual and `CheckFire` and
+`FireBarrel` are virtual. A specialized armament can enforce a target-specific
+firing gate. **Overriding `MaxRange()` alone cannot distinguish targets**, and
+even an AttackBase change would miss direct armament callers and projectile reach.
+
+In particular, `Armament.cs:386,417` copies the existing range modifiers into
+projectile arguments. Missile `RangeLimit` defaults to `Weapon.Range` and receives
+those modifiers (`Projectiles/Missile.cs:270-271`); AreaBeam similarly computes
+tracking range (`Projectiles/AreaBeam.cs:161`). Letting an actor acquire/fire at
+longer range without propagating shot-effective range can create missiles that
+expire early or beams that disengage. Explicit projectile range overrides need a
+separate policy; they cannot be silently treated as weapon defaults.
+
+### Caller inventory and target availability
+
+Paths below are relative to `engine/OpenRA.Mods.Common` (**Common**),
+`engine/OpenRA.Mods.AS` (**AS**), `OpenRA.Mods.CA` (**CA**) or
+`OpenRA.Mods.Cameo` (**Cameo**). Direct queries searched with
+`rg -n '\bMaxRange\s*\(|\bGetMaximumRangeVersusTarget\s*\(|\bWeapon(?:Info)?\.Range\b'`;
+indirect range-envelope, minimum-range and aliased secondary-weapon consumers
+were then inspected. This is a source inventory, not measured runtime coverage.
+
+| Caller | Target available? | Responsibility |
+|---|---|---|
+| Common Activities/Attack.cs:77,113,203,208 | yes | approach, active/paused-ammo range fallback |
+| Common Activities/Air/FlyAttack.cs:60,101,112,153 | yes | aircraft approach and minimum range |
+| AS Activities/AttackFrontalFollowActivity.cs:63-64,99-100,119 | yes | following and min/max range |
+| Common Traits/Attack/AttackBase.cs:302 | no | targetless maximum envelope |
+| Common Traits/Attack/AttackBase.cs:336,356,412 | yes | per-target selection and feasibility |
+| Common Traits/Attack/AttackBase.cs:465,470,504,509 | yes; ground position for force-fire | weapon ordering and cursors |
+| Common Traits/Armament.cs:134,215-217 | no | static modified range and runtime envelope |
+| Common Traits/Armament.cs:306,314 | yes | actual firing gate |
+| Common Traits/AutoTarget.cs:325,457 | no at scan; yes at candidate | search envelope then exact reach |
+| Common Traits/Attack/AttackFollow.cs:97,275-276,321-322,341 | yes | follow/firing and cached range |
+| Common Traits/Air/AttackBomber.cs:64; CA Traits/Attack/AttackBomberCA.cs:65 | yes | bombing gate |
+| AS Traits/Attack/AttackFollowFrontal.cs:86; AttackLeapAS.cs:67 | yes | frontal and leap gates |
+| AS Traits/Attack/AttackPrismSupported.cs:142; CA counterpart:161 | support actor | support-beam reach |
+| AS Traits/PointDefense.cs:70 | position/projectile types only | interception, not a normal actor Target |
+| CA Traits/TargetedAttackAbility.cs:271,276,289 | no selected target | ability range circles |
+| Common Traits/Render/RenderRangeCircle.cs:83,107; Cameo Traits/Render/RenderRangeCircleCA.cs:87,138 | no | placement/selection range |
+| Cameo Traits/Render/WithTurretSearchlight.cs:276 | no | searchlight envelope |
+| AS Traits/ActorStatValues.cs:533 | no | displayed range |
+| AS Traits/SupportPowers/FireArmamentPower.cs:342,349 | no selected target | support-power envelope |
+| Common Projectiles/Missile.cs:270; AS Duplicates/Projectiles/MissileTA.cs:325 | guided target in args | missile reach |
+| Common Projectiles/AreaBeam.cs:161 | target in projectile args | beam reach/tracking |
+| Common Util.cs:371; AS Projectiles/ArcLaserZap.cs:100 | projectile args | range-scaled inaccuracy |
+| AS Projectiles/WarheadTrailProjectile.cs:199,203,270; CA Projectiles/WarheadTrailProjectileCA.cs:same | projectile args | reach, lifetime and endpoint |
+| CA Projectiles/LinearPulse.cs:452; Cameo Projectiles/LightningZap.cs:153 | projectile args | pulse reach / lightning length |
+| AS Warheads/FireRadiusWarhead.cs:67; FireReverseRadiusWarhead.cs:67; CA FireReverseRadiusWarhead.cs:69 | impact target, not chosen secondary victim | secondary geometry |
+| AS Warheads/FireShrapnelWarhead.cs:76,88,110 | candidate at 88; otherwise no chosen victim | search, exact check, random endpoint |
+| Common Lint/CheckRangeLimit.cs:34 | no | static projectile range validation |
+| AS Traits/Berserkable.cs:88 | no | indirect attack envelope |
+
+No direct queried range-API callers were found in the searched bot-module
+directories. Common `StateBase.cs:125` and CA `StateBaseCA.cs:107` check weapon
+target compatibility; reach flows through attack orders and AutoTarget. Do not
+describe this as a directly measured AI threat-range-scoring defect. Common
+`AttackMoveActivity.cs:78,96` likewise delegates acquisition/execution.
+
+If implementation is separately authorized, use an exact target-specific API
+plus an explicitly targetless upper envelope, not mutable target state hidden
+inside `MaxRange()`. Route approach, acquisition, fire and cursors consistently;
+snapshot effective range into shot arguments without mutating shared WeaponInfo.
+Define frozen targets, changing target types, ground force-fire, support beams,
+point defense, minimum range and secondary geometry. Decide whether UI displays
+ground range, air range, both or a labelled envelope. Absence of the new modifier
+must preserve current behavior. A Cameo shadow's assembly binding remains
+unproven until an authorized unique-field boot test.
+
+Required regression scenarios: stopping outside firing range, overshooting air
+range, never acquiring distant aircraft, paused-ammo fallback, KeepDistance,
+aircraft attack-run oscillation, missile expiration, beam disengagement, misleading
+cursors/circles, and rendering calls mutating synchronized targeting state.
+That cross-cutting surface is not justified merely to remove twin definitions.
+Independent challenge and primary-agent spot checks agree on this recommendation.
+
 ## Current integration: merged graph and AI logging (2026-09-07)
 
 PR #329 is reconciled with upstream `9ad1a5f77`, including merged #323 and #331

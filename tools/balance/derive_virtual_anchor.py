@@ -15,12 +15,17 @@ import statistics
 import class_membership
 import fit_class
 import formula
+import diagnostic_output
 
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_FACTIONS = ("tiberiandawn_gdi", "tiberiandawn_nod", "redalert_allies",
                     "redalert_soviets", "redalert_japan")
 FACTION_ALIASES = dict(zip(("td_gdi", "td_nod", "ra1_allies", "ra1_soviets", "japan"), DEFAULT_FACTIONS))
 FIELDS = ("hp", "speed", "range_wdist", "cost")
+# Speed stays on the 1-grid for EVERY type — DESIGN.md 2026-09-07 ruling: the
+# old 5-step for vehicles/aircraft/ships existed only to keep TurnSpeed =
+# Speed/5 an integer, which the derived turn-rate trait removed. Do not
+# reintroduce a per-class speed grid.
 STEPS = dict(hp=1000, speed=1, range_wdist=10, cost=100)
 
 
@@ -30,6 +35,43 @@ def number(value):
         return value if math.isfinite(value) and value > 0 else None
     except (ValueError, TypeError):
         return None
+
+
+def stat_values(unit):
+    """The four diagnostic axes, using exactly the fitting armament domain."""
+    ranges = [number(formula.wdist_value(a.get("range"), 0))
+              for a in fit_class.pricing_armaments(unit)]
+    speed = number((unit.get("speed") or {}).get("v"))
+    if speed is None:
+        speed = number((unit.get("speed_air") or {}).get("v"))
+    return dict(hp=number((unit.get("hp") or {}).get("v")), speed=speed,
+                range_wdist=max((r for r in ranges if r is not None), default=None),
+                cost=number((unit.get("cost") or {}).get("v")))
+
+
+def input_fingerprints(ledger):
+    assignment_path = ledger / "derived/reference_assignment.json"
+    provenance = {path.name: hashlib.sha256(path.read_bytes()).hexdigest()
+                  for path in sorted(ledger.glob("*.json"))}
+    return dict(
+        ledger_sha256=provenance,
+        sidecar_sha256={path.name: hashlib.sha256(path.read_bytes()).hexdigest()
+                       for path in sorted((ledger / "derived").glob("*.json"))
+                       if path.name in provenance},
+        assignment_sha256=hashlib.sha256(assignment_path.read_bytes()).hexdigest())
+
+
+def load_evidence(ledger):
+    """Reject missing evidence or a changed input fingerprint during collection."""
+    before = input_fingerprints(ledger)
+    assignment_doc = json.loads((ledger / "derived/reference_assignment.json").read_text(encoding="utf-8-sig"))
+    assignments = assignment_doc["assignment"]
+    if not isinstance(assignments, dict):
+        raise ValueError("reference assignment must be an object")
+    members = load_members(ledger)
+    if input_fingerprints(ledger) != before:
+        raise ValueError("input evidence changed during collection; retry on a stable tree")
+    return members, assignments, before
 
 
 def load_members(ledger):
@@ -45,16 +87,10 @@ def load_members(ledger):
                 cls, reason = class_membership.classify(unit.get("design") or {})
                 if cls is None or not fit_class.eligible_virtual_member(unit):
                     continue
-                arms = fit_class.pricing_armaments(unit)
-                ranges = [number(formula.wdist_value(a.get("range"), 0)) for a in arms]
-                ranges = [r for r in ranges if r is not None]
                 members.append(dict(actor=actor, faction=doc.get("ledger", path.stem),
                     cls=cls, membership=reason, unit=unit,
                     derived=(derived.get("sections", {}).get(section_name, {}).get(actor) or {}),
-                    hp=number((unit.get("hp") or {}).get("v")),
-                    speed=number((unit.get("speed") or unit.get("speed_air") or {}).get("v")),
-                    range_wdist=max(ranges, default=None),
-                    cost=number((unit.get("cost") or {}).get("v"))))
+                    **stat_values(unit)))
     return members
 
 
@@ -96,7 +132,7 @@ def derive(cls, members, assignments, factions=DEFAULT_FACTIONS, model_damage=No
         rank = percentile(median, population)
         # This diagnostic threshold is exposed, not an automatic approval rule.
         result["fields"][field] = dict(value=snapped, median=median, count=len(pool),
-            reference_backed=bool(preferred), percentile=rank, actors=[m["actor"] for m in pool])
+            grid_step=step, reference_backed=bool(preferred), percentile=rank, actors=[m["actor"] for m in pool])
         if rank < 10 or rank > 90:
             result["status"].append(f"BIASED {field} — do not sign")
         if len(pool) < 3:
@@ -152,8 +188,11 @@ def main(argv=None):
     parser.add_argument("--model-reload", type=int, help="required with --model-damage; no arbitrary model by default")
     parser.add_argument("--out", type=Path, help="optional diagnostic JSON output directory")
     args = parser.parse_args(argv)
-    if args.out and args.out.resolve().is_relative_to((ROOT / "mods").resolve()):
-        parser.error("diagnostic output must not be written into mods/")
+    if args.out:
+        try:
+            diagnostic_output.validate_path(ROOT, args.out / "probe.json")
+        except ValueError as exc:
+            parser.error(str(exc))
     try:
         if (args.model_damage is None) != (args.model_reload is None):
             raise ValueError("supply both --model-damage and --model-reload")
@@ -164,29 +203,33 @@ def main(argv=None):
     except ValueError as error:
         parser.error(str(error))
     ledger = ROOT / "docs/balance"
-    assignment_path = ledger / "derived/reference_assignment.json"
-    assignments = json.loads(assignment_path.read_text(encoding="utf-8"))["assignment"]
-    anchors = json.loads((ledger / "class_anchors.json").read_text(encoding="utf-8"))
+    registry = (ledger / "class_anchors.json").read_bytes()
+    anchors = json.loads(registry.decode("utf-8"))
     classes = sorted(k for k, value in anchors.items() if isinstance(value, dict) and "spec" in value)
     if args.cls and args.cls not in classes:
         parser.error(f"unknown class: {args.cls}")
-    members = load_members(ledger)
+    members, assignments, provenance = load_evidence(ledger)
+    if provenance.get("ledger_sha256", {}).get("class_anchors.json") != hashlib.sha256(registry).hexdigest():
+        parser.error("class_anchors.json changed between registry read and evidence collection; "
+                     "no output written")
     factions = [FACTION_ALIASES.get(f.strip(), f.strip()) for f in args.factions.split(",")]
     unknown = set(factions) - {m["faction"] for m in members}
     if unknown:
         parser.error(f"unknown or empty source factions: {sorted(unknown)}")
-    provenance = {path.name: hashlib.sha256(path.read_bytes()).hexdigest()
-                  for path in sorted(ledger.glob("*.json"))}
+    outputs = {}
     for cls in [args.cls] if args.cls else classes:
         result = derive(cls, members, assignments, factions, args.model_damage, args.model_reload)
-        result["ledger_sha256"] = provenance
-        result["assignment_sha256"] = hashlib.sha256(assignment_path.read_bytes()).hexdigest()
+        result.update(provenance)
         text = json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False) + "\n"
         if args.out:
-            args.out.mkdir(parents=True, exist_ok=True)
-            (args.out / f"{cls}.json").write_text(text, encoding="utf-8")
+            outputs[args.out / f"{cls}.json"] = text
         else:
             print(text, end="")
+    if outputs:
+        try:
+            diagnostic_output.write_outputs(ROOT, outputs)
+        except (OSError, ValueError) as exc:
+            parser.error(str(exc))
     return 0
 
 

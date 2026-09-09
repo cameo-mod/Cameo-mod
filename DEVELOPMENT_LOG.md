@@ -1,4 +1,43 @@
-﻿## Devin-Ember - LANE-1 W24 collapse batches 1-3: 19 weapons to single-main (2026-09-07, midday)
+﻿## OpenCode GLM 5.3 Flash - Astra pipeline batch: A3/C1 dossiers, extrapolation join, speed law, report refresh (2026-09-09)
+
+Batch under Codex/Astra planning/review coordination, no commits; both 2026-09-09 passes
+consolidated here. A3/C1: fixed seven-section `propose_anchor_spec.py` dossier generator —
+read-only virtual candidate + readiness over live resolved YAML and the ledger for 700
+classified members (638 fit-eligible, 62 excluded), four axes only, no DPS target; strict
+source+ID references with a separate hero lane; source hashes, registry race checks and
+refuse-overwrite diagnostics. Four C3 pilots checked in at `docs/balance/anchors/` with
+coordinator judgement in section 6; nomination retention is not sign-off or restat.
+Extrapolation: strict ID join drops 22 wrong-ID substitutions, none lost; fresh 903
+assignments = 863 ordinary + 40 hero-only excluded; virtual members 3235 -> 3193;
+coverage 537/633 unchanged; 48 THIN stat rows (CLI minimum 3). Stored fits: 26/28 classes
+lack stored cost0/o0/p0/q0 (line_breaker, mbt complete legacy raw); the false "0/28
+identity failed" assertion was removed. Speed law: DESIGN steps 1 for every type
+(64dd80480) wired into derive metadata/tests and `propose_class_rebalance` rows — future
+proposals only, no live stat changes. C8: eight role questions, no classification changed;
+C43 twin-AA analysis retains generated twin armaments; C49 fitting follow-up (coordinator
+run, `pure-aa-fitting-run.txt`) gives all 21 strict pure-AA rows a fit diagnostic,
+nominal DPS retained, no signed price; Scourge 2875 is raw periodic DPS, not a suicide
+valuation. Report refresh: four committed `latest/` reports updated verbatim from
+coordinator-verified toolstdout — no re-runs, no ratchet changes. Independent challenge
+FINAL: CLEARED WITH CAVEATS — no remaining blocker on the speed law or the four pilot
+notes; 5 new speed tests confirmed. Final bounded run VERIFIED from
+`docs/audit/latest/bounded_test_run.json`: 107/107 modules, 1121 tests, 45 skipped, 14
+failing modules — the 21 FAIL/ERROR signatures are identical to the published
+`5544cf061` report, all 14 known baseline (`a089bd3dc`), no new failing module, no
+full-suite-green claim; seven targeted modules 190/190. Bounded-run peak 865.4 MB / 60.1%
+PC over 639.5 s inside the 1536 MB / 84% guards; dossier generation is a separate
+1227.3 MB / 55.9% peak. Upstream re-fetch unchanged at `5f170ba07` (0 commits missing),
+integrated at local `eb3cb60a3`; PR #335 DRAFT/open at remote head `5544cf061`. No
+YAML/C#/engine/pin changes or game launch. AI owner handover: the `_AI_NAME` literal-U+0008
+counterfactual is measured — ordinary pool 4384 -> 4370 (14 Red Resurrection AI-only rows
+dropped, 0 added) with 0 current assignment deltas (scope 686, chassis 67 unchanged); owner
+patch unapplied at `docs/audit/patches/ai_name_boundaries.patch`, root regression red/green
+pending, calibration regenerates only after the fix lands. Doc correction: EXTRAPOLATION_PROGRAM
+§1's superseded raw-fit metrics block replaced with the dated 2026-09-09 stored-fit measurement
+(28 entries, 26 without stored cost0/o0/p0/q0 — absence is not failed identity). Details and
+pilot blockers: `docs/audit/ASTRA_REVIEW.md` (2026-09-09 section).
+
+## Devin-Ember - LANE-1 W24 collapse batches 1-3: 19 weapons to single-main (2026-09-07, midday)
 
 **Identity:** Devin-Ember (Devin CLI, SWE-1.7 Max), LANE-1 per .agent-id / CLAIMS.
 Branch `devin/ember/w24-lane1` (commits `62fbc0339`/`10dca3861`/`6cec3798e`).
