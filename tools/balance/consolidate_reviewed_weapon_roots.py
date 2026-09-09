@@ -69,7 +69,7 @@ ROLE = {
     "LatinSmokerCannon": "CannonHE_Medium",
     "LunarTigerCannon": "CannonHE_Medium",
     "MammothTuskTesla": "MissileTesla_Heavy",
-    "MonsterTankTuskTesla": "MissileTesla_Heavy",
+    "ra1_soviets_monstertank_missile_tesla": "MissileTesla_Heavy",
     "NaxMausCannon": "CannonHE_Heavy",
     "NaxRatteCannon": "CannonHE_Heavy",
     "NaxiShrek": "MissileAP_Medium",

@@ -1157,12 +1157,12 @@ ra1_soviets_flaktruck:
 		TurnSpeed: 24
 		Offset: -298,0,298
 	Armament@AA:
-		Weapon: FLAK-23-AA
+		Weapon: ra1_soviets_flaktruck_flak_cannon_AA
 		Recoil: 43
 		LocalOffset: 512,0,192
 		MuzzleSequence: muzzle
 	Armament@AG:
-		Weapon: FLAK-23-AG
+		Weapon: ra1_soviets_flaktruck_flak_cannon
 		Recoil: 43
 		LocalOffset: 512,0,192
 		MuzzleSequence: muzzle
@@ -1235,35 +1235,35 @@ ra1_soviets_btr80:
 		TurnSpeed: 18
 	AttackTurreted:
 	Armament:
-		Weapon: BTRMachineGun
+		Weapon: ra1_soviets_btr80_machinegun
 		Recoil: 43
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
 	Armament@AA:
-		Weapon: BTRMachineGun_AA
+		Weapon: ra1_soviets_btr80_machinegun_AA
 		Recoil: 43
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
 	Armament@TeslaUpgrade1:
-		Weapon: BTRTeslaMachineGun
+		Weapon: ra1_soviets_btr80_machinegun_tesla
 		Recoil: 43
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@TeslaUpgrade2:
-		Weapon: BTRTeslaMachineGunArc
+		Weapon: ra1_soviets_btr80_machinegun_tesla_arc
 		Recoil: 43
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_upgrade_teslaarcing
 	Armament@TeslaUpgrade1AA:
-		Weapon: BTRTeslaMachineGun_AA
+		Weapon: ra1_soviets_btr80_machinegun_tesla_AA
 		Recoil: 43
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@TeslaUpgrade2AA:
-		Weapon: BTRTeslaMachineGunArc_AA
+		Weapon: ra1_soviets_btr80_machinegun_tesla_arc_AA
 		Recoil: 43
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
@@ -1696,7 +1696,7 @@ ra1_soviets_monstertank:
 	Turreted:
 		TurnSpeed: 9
 	Armament@PRIMARY:
-		Weapon: MonsterTank120mm
+		Weapon: ra1_soviets_monstertank_120mm_cannon
 		Recoil: 125
 		RecoilRecovery: 25
 		LocalOffset: 1600,350,350, 1600,-350,350
@@ -1705,7 +1705,7 @@ ra1_soviets_monstertank:
 		PauseOnCondition: ammo < 8
 		RequiresCondition: !ra1_soviets_doctrine_inferno
 	Armament@Upgrade:
-		Weapon: MonsterTank120mmInferno
+		Weapon: ra1_soviets_monstertank_120mm_cannon_inferno
 		Recoil: 125
 		RecoilRecovery: 25
 		LocalOffset: 1600,350,350, 1600,-350,350
@@ -1714,7 +1714,7 @@ ra1_soviets_monstertank:
 		PauseOnCondition: ammo < 8
 		RequiresCondition: ra1_soviets_doctrine_inferno
 	Armament@SECONDARY:
-		Weapon: MonsterTankTusk
+		Weapon: ra1_soviets_monstertank_missile
 		Recoil: 50
 		RecoilRecovery: 25
 		LocalOffset: -400,-500,300, -400,500,300
@@ -1722,7 +1722,7 @@ ra1_soviets_monstertank:
 		PauseOnCondition: ammo < 8
 		RequiresCondition: !ra1_soviets_upgrade_teslarockets && !ra1_soviets_upgrade_thermonuclearrockets
 	Armament@TeslaSECONDARY:
-		Weapon: MonsterTankTuskTesla
+		Weapon: ra1_soviets_monstertank_missile_tesla
 		Recoil: 50
 		RecoilRecovery: 25
 		LocalOffset: -400,-500,300, -400,500,300
@@ -1730,7 +1730,7 @@ ra1_soviets_monstertank:
 		PauseOnCondition: ammo < 8
 		RequiresCondition: ra1_soviets_upgrade_teslarockets
 	Armament@NukeSECONDARY:
-		Weapon: MonsterTankTuskThermobaric
+		Weapon: ra1_soviets_monstertank_missile_thermobaric
 		Recoil: 50
 		RecoilRecovery: 25
 		LocalOffset: -400,-500,300, -400,500,300

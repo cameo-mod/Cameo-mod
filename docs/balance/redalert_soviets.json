@@ -8848,7 +8848,7 @@
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "BTRMachineGun",
+      "weapon": "ra1_soviets_btr80_machinegun",
       "weapon_class_source": "template"
      },
      {
@@ -8870,13 +8870,13 @@
       "reloaddelay": "20",
       "slot": "Armament@AA",
       "versus_templates": [
-       "BTRMachineGun"
+       "ra1_soviets_btr80_machinegun"
       ],
       "warheads": [
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "BTRMachineGun_AA",
+      "weapon": "ra1_soviets_btr80_machinegun_AA",
       "weapon_class_source": "template"
      },
      {
@@ -8916,7 +8916,7 @@
        "^Warhead_MissileAP_Light",
        "^Warhead_Tesla_Heavy"
       ],
-      "weapon": "BTRTeslaMachineGun",
+      "weapon": "ra1_soviets_btr80_machinegun_tesla",
       "weapon_class_source": "template"
      },
      {
@@ -8946,13 +8946,13 @@
       "requires": "ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@TeslaUpgrade2",
       "versus_templates": [
-       "BTRTeslaMachineGun"
+       "ra1_soviets_btr80_machinegun_tesla"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light",
        "^Warhead_Tesla_Heavy"
       ],
-      "weapon": "BTRTeslaMachineGunArc",
+      "weapon": "ra1_soviets_btr80_machinegun_tesla_arc",
       "weapon_class_source": "template"
      },
      {
@@ -8982,13 +8982,13 @@
       "requires": "ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@TeslaUpgrade1AA",
       "versus_templates": [
-       "BTRTeslaMachineGun"
+       "ra1_soviets_btr80_machinegun_tesla"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light",
        "^Warhead_Tesla_Heavy"
       ],
-      "weapon": "BTRTeslaMachineGun_AA",
+      "weapon": "ra1_soviets_btr80_machinegun_tesla_AA",
       "weapon_class_source": "template"
      },
      {
@@ -9018,13 +9018,13 @@
       "requires": "ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@TeslaUpgrade2AA",
       "versus_templates": [
-       "BTRTeslaMachineGun_AA"
+       "ra1_soviets_btr80_machinegun_tesla_AA"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light",
        "^Warhead_Tesla_Heavy"
       ],
-      "weapon": "BTRTeslaMachineGunArc_AA",
+      "weapon": "ra1_soviets_btr80_machinegun_tesla_arc_AA",
       "weapon_class_source": "template"
      }
     ],
@@ -9115,13 +9115,13 @@
       "reloaddelay": "5",
       "slot": "Armament@AA",
       "versus_templates": [
-       "FLAK-23-AG"
+       "ra1_soviets_flaktruck_flak_cannon"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium",
        "^Warhead_Flak_Medium"
       ],
-      "weapon": "FLAK-23-AA",
+      "weapon": "ra1_soviets_flaktruck_flak_cannon_AA",
       "weapon_class_source": "template"
      },
      {
@@ -9152,7 +9152,7 @@
        "^Warhead_Bullet_Medium",
        "^Warhead_Flak_Medium"
       ],
-      "weapon": "FLAK-23-AG",
+      "weapon": "ra1_soviets_flaktruck_flak_cannon",
       "weapon_class_source": "template"
      }
     ],
@@ -11540,7 +11540,7 @@
       "warheads": [
        "^Warhead_CannonNuke_Heavy"
       ],
-      "weapon": "MonsterTank120mm",
+      "weapon": "ra1_soviets_monstertank_120mm_cannon",
       "weapon_class_source": "template"
      },
      {
@@ -11571,7 +11571,7 @@
       "warheads": [
        "^Warhead_CannonFire_Heavy"
       ],
-      "weapon": "MonsterTank120mmInferno",
+      "weapon": "ra1_soviets_monstertank_120mm_cannon_inferno",
       "weapon_class_source": "template"
      },
      {
@@ -11604,7 +11604,7 @@
        "^Warhead_Demolition_Heavy",
        "^Warhead_MissileHE_Heavy"
       ],
-      "weapon": "MonsterTankTusk",
+      "weapon": "ra1_soviets_monstertank_missile",
       "weapon_class_source": "template"
      },
      {
@@ -11663,7 +11663,7 @@
        "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [],
-      "weapon": "MonsterTankTuskTesla",
+      "weapon": "ra1_soviets_monstertank_missile_tesla",
       "weapon_class_source": "none"
      },
      {
@@ -11755,7 +11755,7 @@
       "warheads": [
        "^Warhead_Thermobaric_Heavy"
       ],
-      "weapon": "MonsterTankTuskThermobaric",
+      "weapon": "ra1_soviets_monstertank_missile_thermobaric",
       "weapon_class_source": "template"
      }
     ],

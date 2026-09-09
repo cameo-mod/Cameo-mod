@@ -83,3 +83,38 @@ diagnostics are evidence, not approval to apply balance targets.
 
 Implementation: OpenCode GLM 5.3 Flash. Planning, review corrections and
 independent review: Codex. Draft publication authorized by Blackrobe; no merge.
+
+## Actor-owned weapon follow-up (10 September)
+
+13 weapons now carry their complete owner prefix: BTR80 (six), Flak Truck (two)
+and Monster Tank (five). Upgrade descriptors and the dual-weapon `_AA` suffix
+follow DESIGN. The reviewed map was applied through `safe_rename.py`; only the
+active Soviet vehicles/weapons files changed, with 33 identity replacements.
+No archive, loose map, asset, audio namespace or game-stat value was changed.
+
+Before/after census: 2,899 resolved weapons both times; 13 old IDs replaced by
+13 new IDs; every unrenamed weapon payload is identical. The 13 renamed payloads
+and all traits on their three owners are fixture-checked, allowing only the exact
+Armament weapon-reference changes. A complete pre-migration namespace fixture
+checks destination collisions. Independent review found no gameplay/reference blocker.
+
+Current converter inventories and routing/source-key tests now use the new names.
+Historical damage comparison JSON and hashes are unchanged; their set checks translate
+only the exact reviewed identity mapping. Fresh ledgers change weapon IDs only.
+The initial full run used stale ledgers and exposed those dependencies; corrected
+focused checks pass. The frozen-snapshot rerun completed: 1,341 tests, 14 failures,
+8 errors and 45 skips. Failure/error signatures exactly match the prior published
+naming baseline; sampled system memory peaked at 79.84%, without a guard stop.
+
+Raw release-drift D4 rises from 336 to 343 because seven renamed identifiers existed
+under their old names in the release baseline. The threshold remains 335 and the gate
+remains failing. This is not hidden or counted as new damage drift: D1/D2/D3 are unchanged.
+This batch does not complete whole-roster naming or change the shared-heaviness pilot.
+Implementation and follow-up review: Codex; OpenCode is suspended at Blackrobe's request.
+
+The combined runtime, including these names, passed a fresh 90-second menu observation
+starting 06:29:54 Jakarta: no new exception logs, fresh menu-load proof, peak memory
+79.62%, test process closed. No build or engine pin change was made; the isolated
+integration tree reused PR341's verified binary. No further matchup claim follows.
+Canonical audits completed with the same eight failing categories as this PR's prior
+run; no empty final Markdown report. D4's additional name-only debt remains explicit.

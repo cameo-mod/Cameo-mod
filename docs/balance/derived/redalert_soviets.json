@@ -3406,7 +3406,7 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament",
-      "weapon": "BTRMachineGun"
+      "weapon": "ra1_soviets_btr80_machinegun"
      },
      {
       "avg_versus": 1.1298,
@@ -3431,7 +3431,7 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament@AA",
-      "weapon": "BTRMachineGun_AA"
+      "weapon": "ra1_soviets_btr80_machinegun_AA"
      },
      {
       "avg_versus": 1.0516,
@@ -3456,7 +3456,7 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament@TeslaUpgrade1",
-      "weapon": "BTRTeslaMachineGun"
+      "weapon": "ra1_soviets_btr80_machinegun_tesla"
      },
      {
       "avg_versus": 1.0516,
@@ -3481,7 +3481,7 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament@TeslaUpgrade2",
-      "weapon": "BTRTeslaMachineGunArc"
+      "weapon": "ra1_soviets_btr80_machinegun_tesla_arc"
      },
      {
       "avg_versus": 1.0516,
@@ -3506,7 +3506,7 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament@TeslaUpgrade1AA",
-      "weapon": "BTRTeslaMachineGun_AA"
+      "weapon": "ra1_soviets_btr80_machinegun_tesla_AA"
      },
      {
       "avg_versus": 1.0516,
@@ -3531,7 +3531,7 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament@TeslaUpgrade2AA",
-      "weapon": "BTRTeslaMachineGunArc_AA"
+      "weapon": "ra1_soviets_btr80_machinegun_tesla_arc_AA"
      }
     ],
     "shield_always_on": false,
@@ -3565,7 +3565,7 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament@AA",
-      "weapon": "FLAK-23-AA"
+      "weapon": "ra1_soviets_flaktruck_flak_cannon_AA"
      },
      {
       "avg_versus": 0.975,
@@ -3590,7 +3590,7 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament@AG",
-      "weapon": "FLAK-23-AG"
+      "weapon": "ra1_soviets_flaktruck_flak_cannon"
      }
     ],
     "shield_always_on": false,
@@ -4567,7 +4567,7 @@
       "reliability": 0.8408,
       "sigma": 1022.2,
       "slot": "Armament@PRIMARY",
-      "weapon": "MonsterTank120mm"
+      "weapon": "ra1_soviets_monstertank_120mm_cannon"
      },
      {
       "avg_versus": 1.1129,
@@ -4590,7 +4590,7 @@
       "reliability": 0.6629,
       "sigma": 1022.2,
       "slot": "Armament@Upgrade",
-      "weapon": "MonsterTank120mmInferno"
+      "weapon": "ra1_soviets_monstertank_120mm_cannon_inferno"
      },
      {
       "avg_versus": 1.0139,
@@ -4615,7 +4615,7 @@
       "reliability": 0.3718,
       "sigma": 541.65,
       "slot": "Armament@SECONDARY",
-      "weapon": "MonsterTankTusk"
+      "weapon": "ra1_soviets_monstertank_missile"
      },
      {
       "avg_versus": 1.0588,
@@ -4639,7 +4639,7 @@
       "reliability": 0.0908,
       "sigma": 394.4,
       "slot": "Armament@TeslaSECONDARY",
-      "weapon": "MonsterTankTuskTesla"
+      "weapon": "ra1_soviets_monstertank_missile_tesla"
      },
      {
       "avg_versus": 1.0999,
@@ -4663,11 +4663,11 @@
       "reliability": 0.8599,
       "sigma": 394.4,
       "slot": "Armament@NukeSECONDARY",
-      "weapon": "MonsterTankTuskThermobaric"
+      "weapon": "ra1_soviets_monstertank_missile_thermobaric"
      }
     ],
     "physical_state_multiplier": 1.3699,
-    "physical_state_weapon": "MonsterTankTuskThermobaric",
+    "physical_state_weapon": "ra1_soviets_monstertank_missile_thermobaric",
     "physical_state_weight": 1.4794,
     "shield_always_on": false,
     "shield_gated_on_upgrade": false,

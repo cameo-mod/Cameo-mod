@@ -15,7 +15,7 @@ from miniyaml import Ruleset
 
 
 EXPECTED_VALUES = {
-    "FLAK-23-AG": {"ReloadDelay": "5"},
+    "ra1_soviets_flaktruck_flak_cannon": {"ReloadDelay": "5"},
     "Fremen_S": {"Report": "MGUN2.WAV"},
     "RA2GrenadePack": {"Report": "toss1.aud"},
     "SteelFortressWeapons": {

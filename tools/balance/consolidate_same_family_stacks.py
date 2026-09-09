@@ -74,7 +74,7 @@ ROOT_CLOSURES = {
     },
     "GuardianGIMG": {"GuardianGIMG_elite", "RA2vulcan2", "RA2vulcan3"},
     "AsianLynxMG": {"AsianLynxMG_elite"},
-    "BTRMachineGun": {"BTRMachineGun_AA"},
+    "ra1_soviets_btr80_machinegun": {"ra1_soviets_btr80_machinegun_AA"},
     "Future_Wheel_MG": {"Future_Wheel_MG_elite"},
     "LatinBuggyMG": {"LatinBuggyMG_elite"},
     "RA2NarcoAKM": {"RA2NarcoAKM_elite"},

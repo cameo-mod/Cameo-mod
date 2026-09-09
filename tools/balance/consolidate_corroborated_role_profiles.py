@@ -46,7 +46,7 @@ from miniyaml import Ruleset  # noqa: E402
 ROOTS = {
     "AsianPelicanMG": ("Bullet_Medium", {"AsianPelicanMG_elite"}, "name"),
     "light_inf_lmg_upgrade": ("Bullet_Medium", set(), "name"),
-    "FLAK-23-AG": ("Flak_Medium", {"FLAK-23-AA"}, "name"),
+    "ra1_soviets_flaktruck_flak_cannon": ("Flak_Medium", {"ra1_soviets_flaktruck_flak_cannon_AA"}, "name"),
     "NaxQuadCannon_AA": (
         "Flak_Medium",
         {
@@ -116,8 +116,8 @@ BASELINE = {
         {"Bullet_Light", "Bullet_Medium", "CannonHE_Heavy"}, 6000, 9984),
     "light_inf_lmg_upgrade": (
         {"Bullet_Light", "Bullet_Medium", "CannonHE_Heavy"}, 6000, 9984),
-    "FLAK-23-AG": ({"Bullet_Medium", "Flak_Medium"}, 4000, 9975),
-    "FLAK-23-AA": ({"Bullet_Medium", "Flak_Medium"}, 4000, 9975),
+    "ra1_soviets_flaktruck_flak_cannon": ({"Bullet_Medium", "Flak_Medium"}, 4000, 9975),
+    "ra1_soviets_flaktruck_flak_cannon_AA": ({"Bullet_Medium", "Flak_Medium"}, 4000, 9975),
     "NaxFlakAA": ({"Flak_Medium", "NaxFlakGroundWater"}, 7000, 2843),
     "NaxQuadCannon_AA": (
         {"Flak_Medium", "NaxFlakGroundWater"}, 7000, 2843),
@@ -219,8 +219,8 @@ TARGETS = {
     "AsianPelicanMG": "Ground, Water, Air",
     "AsianPelicanMG_elite": "Ground, Water, Air",
     "light_inf_lmg_upgrade": "Ground, Water, Air",
-    "FLAK-23-AG": "Ground, Water",
-    "FLAK-23-AA": "Air",
+    "ra1_soviets_flaktruck_flak_cannon": "Ground, Water",
+    "ra1_soviets_flaktruck_flak_cannon_AA": "Air",
     "NaxFlakAA": "Air",
     "NaxQuadCannon_AA": "Air",
     "NaxQuadCannon_AA_elite": "Air",

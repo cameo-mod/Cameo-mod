@@ -77,8 +77,8 @@ This residual is included in measured output but excluded from `k_flat` and `dps
 | `YakTeslaGunArc` | +1.8383 |
 | `KamovTesla` | +1.8021 |
 | `KamovTeslaArc` | +1.8021 |
-| `BTRTeslaMachineGun` | +1.7778 |
-| `BTRTeslaMachineGunArc` | +1.7778 |
+| `ra1_soviets_btr80_machinegun_tesla` | +1.7778 |
+| `ra1_soviets_btr80_machinegun_tesla_arc` | +1.7778 |
 | `edenMobileDefenceLaser` | +1.7711 |
 | `Napalm` | +1.7344 |
 | `CabalMantisGun` | +1.7296 |

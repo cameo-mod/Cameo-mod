@@ -3,8 +3,8 @@
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
 | T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (8 file(s)) | 70 | >= 24 |
-| T2 | `def test_*` in tools/tests (114 file(s)) | 1306 | >= 177 |
-| T3 | modules with no test mentioning them | 276 | <= 224 |
+| T2 | `def test_*` in tools/tests (117 file(s)) | 1337 | >= 177 |
+| T3 | modules with no test mentioning them | 274 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (276)
+## T3 — untested modules (274)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -229,7 +229,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_weapon_suffixes.py | audit_weapon_suffixes |
 | python | tools/audit/audit_weapon_uniqueness.py | audit_weapon_uniqueness |
 | python | tools/audit/check_effect_audio.py | check_effect_audio |
-| python | tools/audit/dump_resolved.py | dump_resolved |
 | python | tools/audit/effect_audit.py | effect_audit |
 | python | tools/audit/environment.py | environment |
 | python | tools/audit/extract_reference_effects.py | extract_reference_effects |
@@ -294,10 +293,9 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/rename/apply_ra1_legacy.py | apply_ra1_legacy |
 | python | tools/rename/convert_maps.py | convert_maps |
 | python | tools/rename/curate_map.py | curate_map |
-| python | tools/rename/safe_rename.py | safe_rename |
 
 
 ## FAIL
 
-- T3: 276 untested > baseline 224
+- T3: 274 untested > baseline 224
 

@@ -4,7 +4,7 @@
 
 Γ¢ö This **repeals the exemption** in `tools/audit/intentional_composites.py`. Its 224 entries are no longer 'reviewed, keep' ΓÇö they are the worklist. The registry data stays useful: it says which mains someone chose on purpose.
 
-concrete weapons with inherits: **2064**
+concrete weapons with inherits: **2066**
 
 W5 counts structural flat-damage nodes, including zero/healing/ally-only nodes; the split audit counts positive non-companion damage. Both resolve the full concrete weapon corpus. Use `--compare-split` for exact differences.
 
@@ -19,9 +19,9 @@ W5 counts structural flat-damage nodes, including zero/healing/ally-only nodes; 
 
 | I7 informational ΓÇö missing template | weapons |
 |---|--:|
-| no `^Effect_*` inherit | 1247 |
-| no `^Projectile_*` inherit | 1365 |
-| no `^Warhead_*` inherit | 1159 |
+| no `^Effect_*` inherit | 1249 |
+| no `^Projectile_*` inherit | 1367 |
+| no `^Warhead_*` inherit | 1161 |
 
 _I7 is a REVIEW QUEUE, not a defect count ΓÇö an instant or utility weapon may legitimately have no projectile. Do not ratchet it without a per-weapon pass._
 
@@ -93,8 +93,6 @@ _... and 534 more._
 | `AsianPelicanMissile` | `^Warhead_Concussion_Light` ┬╖ `^Warhead_MissileAP_Heavy` |
 | `AsianPhoenixRocket` | `^Warhead_Flame_Medium` ┬╖ `^Warhead_Demolition_Light` |
 | `AsianPulverizerGatling` | `^Warhead_Bullet_Light` ┬╖ `^Warhead_CannonHE_Heavy` |
-| `BTRMachineGun` | `^Warhead_Bullet_Light` ┬╖ `^Warhead_Bullet_Medium` |
-| `BTRTeslaMachineGun` | `^Warhead_MissileAP_Light` ┬╖ `^Warhead_Tesla_Heavy` |
 | `BigShieeTusk` | `^Warhead_MissileHE_Heavy` ┬╖ `^Warhead_Concussion_Medium` |
 | `BlackEagleMissiles` | `^Warhead_Demolition_Light` ┬╖ `^Warhead_Demolition_Heavy` |
 | `CHGuardRifle` | `^Warhead_Bullet_Light` ┬╖ `^Warhead_Bullet_Medium` |
@@ -119,6 +117,8 @@ _... and 534 more._
 | `D2K_Rocket_Trooper2` | `^Warhead_Demolition_Light` ┬╖ `^Warhead_Railgun_Heavy` ┬╖ `^Warhead_CannonHE_Medium` |
 | `DalekCannon` | `^Warhead_Tesla_Heavy` ┬╖ `^Warhead_Laser_Heavy` |
 | `Dune_SiegeMortar` | `^Warhead_Demolition_Light` ┬╖ `^Warhead_Concussion_Medium` ┬╖ `^Warhead_CannonAP_Light` |
+| `FireballLauncherBuggy2` | `^Warhead_Flame_Light` ┬╖ `^Warhead_Flame_Heavy` |
+| `FlakbusAA` | `^Warhead_MissileHE_Medium` ┬╖ `^Warhead_Flak_Medium` |
 
 
 _... and 161 more._
@@ -164,8 +164,6 @@ _... and 161 more._
 | `LatinMonkeyGrenade1` | `^Effect_Concussion_Medium` ┬╖ `^Effect_CannonHE_Heavy` |
 | `LunarNaxiJadgDestroyer` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Concussion_Medium` |
 | `MissileAttackRobotGun` | `^Effect_MissileAP_Medium` ┬╖ `^Effect_Grey_Explosion_Small_RA2` |
-| `MonsterTank120mm` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Nuclear_Super` |
-| `MonsterTank120mmInferno` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Flame_Heavy` |
 | `NaxBrummbarArty` | `^Effect_Concussion_Medium` ┬╖ `^Effect_CannonHE_Heavy` |
 | `NaxGrilleArty` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Concussion_Medium` |
 | `NaxiCowDrop` | `^Effect_Demolition_Heavy` ┬╖ `^Effect_Clsn_Medium_RA2` |
@@ -186,6 +184,8 @@ _... and 161 more._
 | `YakovlevCannon_elite` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_CannonAP_Light` |
 | `bigshieemortar` | `^Effect_Flame_Medium` ┬╖ `^Effect_Explosion_Large_RA2` |
 | `ra120mm2Thermobaric` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Flame_Heavy` |
+| `ra120mmThermobaric` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Flame_Heavy` |
+| `ra1_soviets_monstertank_120mm_cannon` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Nuclear_Super` |
 
 
 _... and 11 more._
