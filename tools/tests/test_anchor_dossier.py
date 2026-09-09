@@ -132,13 +132,16 @@ class RegistryRaceTests(unittest.TestCase):
 
 
 class DossierRenderTests(unittest.TestCase):
-    def render(self, cls="mbt", members=None, debt=None, error=None):
+    def render(self, cls="mbt", members=None, debt=None, error=None, assignments=None, factions=None,
+               excluded=()):
         members = members if members is not None else [member()]
         snapshots = {role: dict(actor=None, ledger={}, live={}, error="not nominated")
                      for role in ("anchor", "verifier")}
-        return dossier.render(cls, {}, virtual.derive(cls, members, {}), members, {},
+        return dossier.render(cls, {}, virtual.derive(cls, members, assignments or {},
+                              factions=factions or virtual.DEFAULT_FACTIONS), members,
+            assignments or {},
             {m["actor"]: dict(errors=[], used=[], targets={}) for m in members},
-            snapshots, debt or [], error, {})
+            snapshots, debt or [], error, {}, excluded_members=excluded)
 
     def test_fixed_sections_and_no_approval_or_dps_target(self):
         text = self.render()
@@ -148,7 +151,7 @@ class DossierRenderTests(unittest.TestCase):
         self.assertIn("NOT READY / UNAPPROVED", text)
         self.assertNotIn("dps0", text)
         self.assertIn("THIN hp", text)
-        self.assertIn("full-class percentile", text)
+        self.assertIn("fit-eligible class percentile", text)
 
     def test_membership_sorted_by_cost(self):
         text = self.render(members=[member("expensive", cost=1000), member("cheap", cost=100)])
@@ -158,6 +161,65 @@ class DossierRenderTests(unittest.TestCase):
         text = self.render(cls="dreadnought", members=[])
         self.assertIn("NO SOURCE", text)
         self.assertIn("unavailable", text)
+
+    def test_section1_names_pool_and_per_axis_contributors(self):
+        a, b = member("a", cost=800), member("b", cost=900)
+        b["faction"] = "starcraft_terran"
+        text = self.render(members=[a, b],
+                           assignments={"a": {"game": dict(id="T1", confidence="STRONG")}},
+                           factions=("tiberiandawn_gdi",))
+        section1 = text.split("## 1. The proposal", 1)[1].split("## 2.", 1)[0]
+        self.assertIn("Source pool: selected factions tiberiandawn_gdi", section1)
+        self.assertIn("1 of 2 fit-eligible class members are in the selected factions", section1)
+        self.assertIn("contributing actors", section1)
+        self.assertIn("| a | reference-backed ledger medians", section1)
+        # The outside-faction member carries its own REF assignment but is not a
+        # contributor: section 1 names the selected pool, not global membership.
+        self.assertNotIn("starcraft_terran", section1)
+        self.assertNotIn("| a, b |", section1)
+
+    def test_section1_denominator_is_fit_eligible_not_section4_rows(self):
+        a, b = member("a", cost=800), member("b", cost=900)
+        text = self.render(members=[a, b], excluded=[excluded_row("huge")])
+        section1 = text.split("## 1. The proposal", 1)[1].split("## 2.", 1)[0]
+        # full_count is fit-eligible only: the excluded section-4 row must not
+        # inflate the pool denominator, nor appear as a contributor.
+        self.assertIn("2 of 2 fit-eligible class members are in the selected factions", section1)
+        self.assertNotIn("huge", section1)
+        membership = text.split("## 4. Membership", 1)[1].split("## 5.", 1)[0]
+        self.assertIn("| huge |", membership)
+
+    def test_per_axis_contributor_sets_differ_when_a_member_lacks_a_stat(self):
+        a, b = member("a", cost=800), member("b", cost=900)
+        a["cost"] = None
+        text = self.render(members=[a, b])
+        section1 = text.split("## 1. The proposal", 1)[1].split("## 2.", 1)[0]
+        self.assertIn("| a, b | ledger medians / no reference preference", section1)
+        self.assertIn("| b | ledger medians / no reference preference", section1)
+
+    def test_backed_members_lacking_stat_falls_back_with_plain_basis(self):
+        a, b = member("a", cost=800), member("b", cost=900)
+        a["cost"] = None
+        text = self.render(members=[a, b],
+                           assignments={"a": {"game": dict(id="T1", confidence="STRONG")}})
+        section1 = text.split("## 1. The proposal", 1)[1].split("## 2.", 1)[0]
+        self.assertIn("| a | reference-backed ledger medians", section1)
+        self.assertIn("| b | ledger medians / no reference-backed member has this stat; "
+                      "using available selected-faction members", section1)
+
+    def test_no_source_dossier_qualifies_pool_not_global_absence(self):
+        a = member("a", cls="dreadnought")
+        a["faction"] = "starcraft_terran"
+        text = self.render(cls="dreadnought", members=[a],
+                           assignments={"a": {"game": dict(id="DN1", confidence="STRONG")}},
+                           factions=("tiberiandawn_gdi",))
+        self.assertIn("Status: NO SOURCE", text)
+        self.assertIn("NO SOURCE means no eligible member", text)
+        section1 = text.split("## 1. The proposal", 1)[1].split("## 2.", 1)[0]
+        self.assertIn("0 of 1 fit-eligible class members are in the selected factions", section1)
+        self.assertIn("tiberiandawn_gdi", section1)
+        headings = [line for line in text.splitlines() if line.startswith("## ")]
+        self.assertEqual(len(headings), 7)
 
     def test_reviewed_raw_debt_and_unavailable_gate_both_visible(self):
         self.assertIn("`HydraSpit`: 4 mains", self.render(debt=[("hydra", "HydraSpit", 4)]))
@@ -246,7 +308,7 @@ class MembershipLiveTests(unittest.TestCase):
         self.assertIn("| hp0 | 100000 |", text)
         self.assertNotIn("500000", text)
 
-    def test_anchor_ruled_spec_gap_is_absolute_and_percentage_anchor_only(self):
+    def test_anchor_ruled_spec_gap_is_signed_and_percentage_anchor_only(self):
         snapshots = {
             "anchor": dict(actor="anchor", ledger={}, live=dict(hp=100000, speed=56, range_wdist=4000, cost=800),
                            error=None),
@@ -261,7 +323,7 @@ class MembershipLiveTests(unittest.TestCase):
         self.assertEqual(len(rows), 4)
         self.assertFalse(any("verifier" in row for row in rows))
 
-    def test_stale_member_ledger_exposed_with_absolute_and_percentage_gap(self):
+    def test_stale_member_ledger_exposed_with_signed_and_percentage_gap(self):
         text = self.render(members=[member("stale")], live={
             "stale": self.live_row(hp=200000, speed=100, range_wdist=4000, cost=800)})
         self.assertIn("| stale / hp | 100000 | 200000 | +100000 | +100.0% |", text)

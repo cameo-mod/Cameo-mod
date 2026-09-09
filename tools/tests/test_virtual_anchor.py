@@ -154,6 +154,85 @@ class VirtualAnchorTests(unittest.TestCase):
             fit_class.main()
 
 
+class SourcePoolProvenanceTests(unittest.TestCase):
+    """The dossier must be able to show which faction pool and which exact actors
+    produced each median — including for NO SOURCE, where the selected factions,
+    the 0-of-N count and the pool-only qualification must survive (review finding:
+    dreadnought's NO SOURCE was unexplainable from output while five global members
+    and reference consensus existed)."""
+
+    def test_no_source_keeps_selected_factions_and_qualifies_pool(self):
+        members = [member("a", faction="starcraft_terran"), member("b", faction="starcraft_terran")]
+        assignments = {"a": {"game": dict(id="TANK1", confidence="STRONG")},
+                       "b": {"game": dict(id="TANK2", confidence="FAIR")}}
+        result = tool.derive("mbt", members, assignments, factions=("tiberiandawn_gdi",))
+        self.assertEqual(result["status"], ["NO SOURCE"])
+        self.assertEqual(result["selected_factions"], ["tiberiandawn_gdi"])
+        self.assertEqual(result["source_count"], 0)
+        self.assertEqual(result["source_actors"], [])
+        self.assertEqual(result["full_count"], 2)
+        self.assertIn("no eligible member", result["no_source"])
+        self.assertIn("selected faction pool", result["no_source"])
+        self.assertNotIn("no references", result["no_source"])
+
+    def test_reference_backed_subset_excludes_outside_faction_refs(self):
+        members = [member("a", 100000), member("b", 200000),
+                   member("c", 900000, faction="starcraft_terran")]
+        assignments = {"a": {"game": dict(id="TANK1", confidence="STRONG")},
+                       "b": {"game": dict(id="TANK2", confidence="FAIR")},
+                       "c": {"game": dict(id="TANK3", confidence="STRONG")}}
+        result = tool.derive("mbt", members, assignments, factions=("tiberiandawn_gdi",))
+        self.assertEqual(result["source_actors"], ["a", "b"])
+        self.assertEqual(result["source_count"], 2)
+        self.assertEqual(result["full_count"], 3)
+        evidence = result["fields"]["hp"]
+        self.assertEqual(evidence["actors"], ["a", "b"])
+        self.assertTrue(evidence["reference_backed"])
+        self.assertEqual(evidence["reference_preference"], "applied")
+
+    def test_missing_stat_gives_axis_its_own_pool(self):
+        a, b = member("a", 100000), member("b", 200000)
+        b["cost"] = None
+        result = tool.derive("mbt", [a, b], {})
+        self.assertEqual(result["fields"]["hp"]["actors"], ["a", "b"])
+        self.assertEqual(result["fields"]["cost"]["actors"], ["a"])
+
+    def test_preference_vacated_by_missing_stat_is_not_reported_as_applied(self):
+        a, b = member("a", 100000), member("b", 200000)
+        a["cost"] = None
+        assignments = {"a": {"game": dict(id="TANK1", confidence="STRONG")}}
+        result = tool.derive("mbt", [a, b], assignments)
+        self.assertEqual(result["fields"]["hp"]["reference_preference"], "applied")
+        self.assertTrue(result["fields"]["hp"]["reference_backed"])
+        self.assertEqual(result["fields"]["cost"]["reference_preference"], "vacated by missing stat")
+        self.assertFalse(result["fields"]["cost"]["reference_backed"])
+        self.assertEqual(result["fields"]["cost"]["actors"], ["b"])
+
+    def test_derive_records_selected_factions_verbatim(self):
+        result = tool.derive("mbt", [member("a", faction="redalert_japan")], {},
+                             factions=("redalert_japan",))
+        self.assertEqual(result["selected_factions"], ["redalert_japan"])
+        self.assertEqual(result["source_actors"], ["a"])
+
+    def test_custom_factions_cli_records_resolved_pool(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = pathlib.Path(directory)
+            ledger = root / "docs/balance"
+            ledger.mkdir(parents=True)
+            registry = ledger / "class_anchors.json"
+            registry.write_text(json.dumps({"mbt": {"spec": {}}}), encoding="utf-8")
+            provenance = dict(ledger_sha256={"class_anchors.json":
+                hashlib.sha256(registry.read_bytes()).hexdigest()})
+            with patch.object(tool, "ROOT", root), \
+                    patch.object(tool, "load_evidence",
+                                 return_value=([member("a", faction="redalert_japan")], {}, provenance)), \
+                    contextlib.redirect_stdout(io.StringIO()) as output:
+                self.assertEqual(tool.main(["--class", "mbt", "--factions", "japan"]), 0)
+            text = output.getvalue()
+            self.assertIn('"selected_factions"', text)
+            self.assertIn("redalert_japan", text)
+
+
 class SpeedGridTests(unittest.TestCase):
     """Speed snaps on the global 1-grid for EVERY type — DESIGN.md 2026-09-07
     ruling (the old per-class 5-step existed only to keep TurnSpeed = Speed/5

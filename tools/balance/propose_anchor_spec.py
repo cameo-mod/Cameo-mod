@@ -90,7 +90,7 @@ def member_live(actor, records, rules, cache=None):
 
 
 def gap_cells(live, baseline):
-    """Absolute and percentage gaps; the percentage needs a finite positive baseline."""
+    """Signed gaps (live - baseline) and percentage; the percentage needs a finite positive baseline."""
     def finite(value):
         try:
             return math.isfinite(value)
@@ -204,24 +204,40 @@ def render(cls, entry, candidate, members, assignments, references, snapshots, d
            excluded_members=(), live_by_actor=None):
     """Fixed seven-section dossier. All recommendation authority remains external."""
     fields = candidate["fields"]
+    selected = ", ".join(cell(f) for f in candidate.get("selected_factions") or [])
+    # full_count is fit-eligible class members (load_members already dropped the
+    # rest), NOT the section-4 row count which also displays excluded members.
+    pool_note = (f"Source pool: selected factions {selected or 'none'} — "
+                 f"{candidate.get('source_count', 0)} of {candidate.get('full_count', 0)} fit-eligible "
+                 "class members are in the selected factions. The reference preference and members "
+                 "missing a stat give each axis its own contributing set, named below.")
     lines = [f"# `{cls}` — NOT READY / UNAPPROVED", "",
              "Diagnostic only: current ledger medians are not approved reference-consensus targets.",
              "Faction approval/calibration, weapon structure and maintainer sign-off remain required.", "",
-             "## 1. The proposal", "", "| axis | diagnostic candidate | ruled spec | evidence count | full-class percentile | basis |",
-             "|---|--:|--:|--:|--:|---|"]
+             "## 1. The proposal", "", pool_note, "",
+             "| axis | diagnostic candidate | ruled spec | evidence count | fit-eligible class percentile | contributing actors | basis |",
+             "|---|--:|--:|--:|--:|---|---|"]
     for field in virtual.FIELDS:
         evidence = fields.get(field, {})
-        basis = ("reference-backed ledger medians" if evidence.get("reference_backed")
-                 else "ledger medians / no reference preference")
+        preference = evidence.get("reference_preference",
+                                  "applied" if evidence.get("reference_backed") else "none")
+        basis = {"applied": "reference-backed ledger medians",
+                 "vacated by missing stat":
+                     "ledger medians / no reference-backed member has this stat; "
+                     "using available selected-faction members",
+                 }.get(preference, "ledger medians / no reference preference")
         if evidence.get("grid_step"):
             # The median and the snapped candidate differ whenever the pool is not
             # already on the grid; the reviewer must see which one they are reading.
             basis += f", snapped to step {evidence['grid_step']:g}"
+        actors = ", ".join(str(actor) for actor in evidence.get("actors") or []) or None
         lines.append("| " + " | ".join(map(cell, [SPEC_KEYS[field], evidence.get("value"),
             (entry.get("spec") or {}).get(SPEC_KEYS[field]), evidence.get("count"), evidence.get("percentile"),
-            basis])) + " |")
-    lines += ["", "Status: " + "; ".join(candidate["status"]), "",
-              "## 2. DPS is deferred", "",
+            actors, basis])) + " |")
+    lines += ["", "Status: " + "; ".join(candidate["status"])]
+    if candidate.get("no_source"):
+        lines.append(f"NO SOURCE means {candidate['no_source']}.")
+    lines += ["", "## 2. DPS is deferred", "",
               "No DPS target is proposed while W24 moves. No synthetic damage/reload is assumed; "
               "there is no combat verifier or fit command to approve from this dossier.", "",
               "## 3. Anchor and verifier actors", "",
@@ -295,13 +311,13 @@ def render(cls, entry, candidate, members, assignments, references, snapshots, d
     lines += ["", "## 6. Disagreements and gates", "",
               "Anchor versus ruled spec (anchor actor only; the ruled spec is NOT applied to the verifier "
               "or to members):", "",
-              "| axis | anchor live | ruled spec | abs gap | gap % |",
+              "| axis | anchor live | ruled spec | signed gap | gap % |",
               "|---|--:|--:|--:|--:|"]
     for field in virtual.FIELDS:
         ruled = (entry.get("spec") or {}).get(SPEC_KEYS[field])
-        absolute, percent = gap_cells(snapshots["anchor"]["live"].get(field), ruled)
+        signed, percent = gap_cells(snapshots["anchor"]["live"].get(field), ruled)
         lines.append("| " + " | ".join(map(cell, [field, snapshots["anchor"]["live"].get(field),
-            ruled, absolute, percent])) + " |")
+            ruled, signed, percent])) + " |")
     lines += ["", "Live resolved YAML versus the diagnostic candidate (unchanged, ledger-based):", "",
               "| actor / axis | ledger | resolved YAML | candidate | live / candidate gap |",
               "|---|--:|--:|--:|--:|"]
@@ -314,9 +330,10 @@ def render(cls, entry, candidate, members, assignments, references, snapshots, d
             gap = f"{100 * (live / target - 1):+.1f}%" if live is not None and target else "unavailable"
             lines.append("| " + " | ".join(map(cell, [f"{snapshot['actor']} / {field}",
                 snapshot["ledger"].get(field), live, target, gap])) + " |")
-    lines += ["", "Ledger versus live discrepancies for classified members (absolute and percentage gaps; "
+    lines += ["", "Ledger versus live discrepancies for classified members (signed gaps, live minus "
+              "ledger, and percentage gaps; "
               "the percentage needs a finite positive ledger baseline; differing or unavailable axes only):", "",
-              "| actor / axis | ledger | live | abs gap | gap % |",
+              "| actor / axis | ledger | live | signed gap | gap % |",
               "|---|--:|--:|--:|--:|"]
     for member in classified:
         row = live_row(member, live_by_actor)
@@ -324,11 +341,11 @@ def render(cls, entry, candidate, members, assignments, references, snapshots, d
             ledger, live = member.get(field), row["values"].get(field)
             if ledger == live:
                 continue
-            absolute, percent = gap_cells(live, ledger)
+            signed, percent = gap_cells(live, ledger)
             if row.get("issue"):
                 percent = f"{percent} — {row['issue']}"
             lines.append("| " + " | ".join(map(cell, [f"{member['actor']} / {field}",
-                ledger, live, absolute, percent])) + " |")
+                ledger, live, signed, percent])) + " |")
     lines += ["", f"W24: {'UNAVAILABLE — ' + gate_error if gate_error else str(len(debt)) + ' class members with stacked mains (raw, no exemptions)' }."]
     for actor, weapon, count in debt:
         lines.append(f"- `{actor}` / `{weapon}`: {count} mains")

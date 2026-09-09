@@ -104,11 +104,17 @@ def derive(cls, members, assignments, factions=DEFAULT_FACTIONS, model_damage=No
         raise ValueError("supply both model damage and model reload")
     full = [m for m in members if m["cls"] == cls]
     source = [m for m in full if m["faction"] in factions]
+    # Pool provenance: the dossier must be able to show which faction pool and
+    # which exact actors produced each median, including for NO SOURCE (the
+    # selected factions are preserved so "0 of N" is followable, not implied).
     result = dict(cls=cls, status=["UNAPPROVED"], full_count=len(full), source_count=len(source),
+                  selected_factions=list(factions), source_actors=[m["actor"] for m in source],
                   method="median of current ledger stats, reference-backed members preferred",
                   fields={}, sources=[], verifier=None)
     if not source:
         result["status"] = ["NO SOURCE"]
+        result["no_source"] = ("no eligible member of this class in the selected faction pool — "
+                               "class members or references outside the pool are not borrowed")
         return result
     backed = []
     for member in source:
@@ -131,8 +137,14 @@ def derive(cls, members, assignments, factions=DEFAULT_FACTIONS, model_damage=No
         snapped = max(step, math.floor(median / step + .5) * step)
         rank = percentile(median, population)
         # This diagnostic threshold is exposed, not an automatic approval rule.
+        # reference_preference makes the per-axis pool semantics explicit: a
+        # preference that every backed member lacks the stat for is "vacated",
+        # not silently the same as no preference at all.
         result["fields"][field] = dict(value=snapped, median=median, count=len(pool),
-            grid_step=step, reference_backed=bool(preferred), percentile=rank, actors=[m["actor"] for m in pool])
+            grid_step=step, reference_backed=bool(preferred),
+            reference_preference="applied" if preferred else
+                                 ("vacated by missing stat" if backed else "none"),
+            percentile=rank, actors=[m["actor"] for m in pool])
         if rank < 10 or rank > 90:
             result["status"].append(f"BIASED {field} — do not sign")
         if len(pool) < 3:
