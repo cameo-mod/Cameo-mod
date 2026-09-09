@@ -148,3 +148,19 @@ ten geometry fixture errors are gone. Sampled memory peaked at 84.92%.
 
 The independent build tree is a copy, not a junction. Do not change engine pins or
 write through another worktree's engine. Parent controls build and publication.
+
+## Post-publication test correction
+
+The generator byte-identity test originally compared against moving Git HEAD.
+Once the generator change was committed, that reference already contained the new
+base, so the tail assertion failed despite unchanged production output. The test now
+executes generator, Shield finalizer and both profile inputs from immutable pre-change
+revision `50b7d001be845e0ac5a0812d2591e154148c94dc`. Missing history fails explicitly.
+All 22 generator-module tests pass; independent review found no blocker in this fix.
+
+An isolated combination of published PR339/340/341 plus this test correction ran
+1,867 tests: 13 failures, 8 errors, 64 skips. It has no additional failure signatures
+versus the recorded PR341 baseline; regenerating a stale firepower report removes
+one baseline failure. This is combined-snapshot evidence, not a fresh standalone
+PR341 full run or a green suite. The combined menu boot passed 90 seconds with no
+new exceptions. No generator, weapon, C# or other runtime field changed in this fix.

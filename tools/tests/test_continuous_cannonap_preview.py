@@ -8,8 +8,8 @@ Aedis approved the coexistence policy at 2026-09-10 02:10: borrow Medium Shield,
 enforce uniqueness between new bases, and keep compatibility duplicates visible.
 
   B1  LEGACY BYTE IDENTITY. The legacy portion of default stdout must match the
-      git-HEAD generator's, both executed as BOUNDED subprocesses. The comparison
-      runs the WHOLE HEAD pipeline (generator + shield_uniqueness + the frozen
+      frozen-baseline generator's, both executed as BOUNDED subprocesses. The comparison
+      runs the WHOLE baseline pipeline (generator + shield_uniqueness + the frozen
       profile JSONs) out of a temp copy so the reference cannot be contaminated by
       the worktree. A preview tool that silently rewrites the legacy output would
       strand every audit that diffs generator output against shipped yaml.
@@ -56,7 +56,6 @@ import contextlib
 import io
 import os
 import pathlib
-import shutil
 import subprocess
 import sys
 import tempfile
@@ -108,21 +107,26 @@ def _run_gen(*args, cwd=ROOT, program=None):
                           capture_output=True, timeout=SUBPROCESS_TIMEOUT, env=env)
 
 
+# The pre-migration baseline must not move when this test itself is committed.
+LEGACY_BASELINE = "50b7d001be845e0ac5a0812d2591e154148c94dc"
+
+
 def _git_show(rev_path):
-    proc = subprocess.run(["git", "show", f"HEAD:{rev_path}"], cwd=str(ROOT),
+    proc = subprocess.run(["git", "show", f"{LEGACY_BASELINE}:{rev_path}"], cwd=str(ROOT),
                           capture_output=True, timeout=SUBPROCESS_TIMEOUT)
     if proc.returncode != 0:
-        raise AssertionError(f"git show HEAD:{rev_path} failed: "
+        raise AssertionError(f"git show {LEGACY_BASELINE}:{rev_path} failed: "
                              f"{proc.stderr.decode('utf-8', 'replace')}")
     return proc.stdout
 
 
 def _head_pipeline_stdout():
-    """The git-HEAD pipeline's default stdout, run out of a self-contained temp copy.
+    """The frozen pipeline's default stdout, run out of a self-contained temp copy.
 
     The generator locates its frozen profile data at `__file__/../../..` — the temp
     copy reproduces that layout (docs/reference, docs/design, tools/balance) so the
-    HEAD generator measures against the HEAD corpus, not against nothing.
+    The baseline generator measures against the same revision's corpus.
+    Git history must include LEGACY_BASELINE; shallow clones fail explicitly.
     """
     with tempfile.TemporaryDirectory() as td:
         tmp = pathlib.Path(td)
@@ -133,13 +137,13 @@ def _head_pipeline_stdout():
             _git_show("tools/balance/gen_weapon_template.py"))
         (tmp / "tools" / "balance" / "shield_uniqueness.py").write_bytes(
             _git_show("tools/balance/shield_uniqueness.py"))
-        shutil.copy(ROOT / "docs" / "reference" / "family_profiles.json",
-                    tmp / "docs" / "reference" / "family_profiles.json")
-        shutil.copy(ROOT / "docs" / "design" / "invented_family_profiles.json",
-                    tmp / "docs" / "design" / "invented_family_profiles.json")
+        (tmp / "docs" / "reference" / "family_profiles.json").write_bytes(
+            _git_show("docs/reference/family_profiles.json"))
+        (tmp / "docs" / "design" / "invented_family_profiles.json").write_bytes(
+            _git_show("docs/design/invented_family_profiles.json"))
         proc = _run_gen(cwd=tmp, program=tmp / "tools" / "balance" / "gen_weapon_template.py")
     if proc.returncode != 0:
-        raise AssertionError("HEAD generator failed: "
+        raise AssertionError("Frozen baseline generator failed: "
                              + proc.stderr.decode("utf-8", "replace"))
     return proc.stdout
 
@@ -236,6 +240,8 @@ def _levelled_shield(block_lines):
 class DefaultByteIdentity(unittest.TestCase):
     """B1 — the default output is HEAD's legacy output PLUS the explicit new base.
 
+    Historical helper/test names say HEAD; the reference is now the immutable
+    LEGACY_BASELINE commit, including its profile JSON inputs, not current HEAD.
     The base is LIVE in the default output now (Aedis 2026-09-10 02:10/02:14), so
     byte identity is asserted SPLIT: the legacy portion before the base must be
     byte-identical to the git-HEAD pipeline's whole output, and the appended tail
