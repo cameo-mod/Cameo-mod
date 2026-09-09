@@ -20,7 +20,7 @@ sys.path.insert(0, str(ROOT / "tools/balance"))
 import formula  # noqa: E402
 import class_membership  # noqa: E402
 import tier_chain  # noqa: E402
-from proposal_contract import format_damage, table_header, table_separator
+from proposal_contract import format_current_total, format_damage, table_header, table_separator
 
 LEDGER_DIR = ROOT / "docs/balance"
 ANCHORS_FILE = LEDGER_DIR / "class_anchors.json"
@@ -597,6 +597,7 @@ def render_report(rows, cls):
         "",
         "Converter law: cost pinned, range clamped to band + made unique, "
         "eff-DPS trimmed to Δ≤1 via 100-grid warhead Damage; unconditional FirepowerMultiplier is retired.",
+        "Damage cells: A×B proposes A damage per main across B mains; AΣB shows the current total A across B selected mains for an unchanged anchor/verifier, not a damage target.",
         "",
         table_header(),
         table_separator(),
@@ -617,7 +618,13 @@ def render_report(rows, cls):
         if not r["protected"]:
             worst = max(worst, abs(r["delta"]))
         per_main = r.get('per_wh')
-        dcol = format_damage(r['dmg'] if per_main is None else per_main, r.get('n_wh', 1))
+        if per_main is None:
+            # Protected calibration row: `dmg` is the CURRENT per-shot SUM
+            # over `n_wh` mains — display it as such, never as a proposed
+            # per-main×count target (current mains may be unequal/off-grid).
+            dcol = format_current_total(r['dmg'], r.get('n_wh', 1))
+        else:
+            dcol = format_damage(per_main, r.get('n_wh', 1))
         lines.append(
             f"| `{r['actor']}` | {r['faction']} | {r['hp']} | {r['spd']} | {r['rng']} | "
             f"{r['cost']} | {dcol} | {r['rl']} | {r['burst']} | {int(round(r['fp0'] * 100))} | "

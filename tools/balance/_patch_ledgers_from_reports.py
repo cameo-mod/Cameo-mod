@@ -48,8 +48,15 @@ def parse_report(path):
                 raise ValueError(f"{row['actor']}: missing/invalid {key} target") from exc
             if row[key] < 0 or (key in ("HP", "cost", "rl", "burst") and row[key] == 0):
                 raise ValueError(f"{row['actor']}: invalid {key} target")
-        row["dmg"], row["n_wh"] = parse_damage(row[DAMAGE_COLUMN])
-        if row["dmg"] % formula.DAMAGE_STEP:
+        row["dmg"], row["n_wh"], row["calibration"] = parse_damage(row[DAMAGE_COLUMN])
+        calibration = set(row["flags"].split()) & {"anchor", "verifier"}
+        if calibration and not row["calibration"]:
+            raise ValueError(f"{row['actor']}: calibration rows must display the "
+                             "current total, not a target; regenerate the report")
+        if row["calibration"]:
+            if not calibration:
+                raise ValueError(f"{row['actor']}: current-total damage cell is calibration-only")
+        elif row["dmg"] % formula.DAMAGE_STEP:
             raise ValueError(f"{row['actor']}: off-grid damage")
         if row["dmg_filter"] not in ("all", "smallarms") or not row["weapon"]:
             raise ValueError(f"{row['actor']}: missing/invalid weapon selection")
@@ -96,6 +103,8 @@ def prepare_ledgers(fresh_docs, rows):
         if not formula.condition_holds_by_default(arm.get("requires")):
             raise ValueError(f"{actor}: primary weapon not active by default")
         mains = formula.main_spread_warheads(arm.get("damage_warheads", []))
+        if any(not (w.get("tag") or "") for w in mains):
+            raise ValueError(f"{actor}: main warhead without tag; regenerate the ledger")
         if row["dmg_filter"] == "smallarms" and any(
                 not w.get("tag", "").lower().startswith("smallarms") for w in mains):
             raise ValueError(f"{actor}: partial damage-family proposals are unsupported")

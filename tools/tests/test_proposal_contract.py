@@ -100,6 +100,21 @@ class ProposalContractTests(unittest.TestCase):
             with self.subTest(update=update), self.assertRaises(ValueError):
                 consumer.prepare_ledgers(self.doc, rows)
 
+    def test_tagless_main_warhead_refuses(self):
+        """A stale or hand-maintained main record missing its `tag` is counted by
+        `main_spread_warheads`, so the count guard passes and the damage
+        budget is split across it — but the apply loop keys on
+        `warhead.get("tag") in targets` and would silently skip its Damage,
+        staging a ledger with one stale main. Fresh extraction always emits the
+        key, so this tests helper hardening, not a reproduced CLI defect."""
+        arm = self.doc["test"]["sections"]["infantry"]["soldier"]["armaments"][0]
+        del arm["damage_warheads"][0]["tag"]
+        rows = self.report()
+        before = copy.deepcopy(self.doc)
+        with self.assertRaisesRegex(ValueError, "without tag"):
+            consumer.prepare_ledgers(self.doc, rows)
+        self.assertEqual(self.doc, before)
+
     def test_zero_damage_survives_producer_round_trip(self):
         self.row["per_wh"] = 0
         rows = self.report()
@@ -173,8 +188,44 @@ class ProposalContractTests(unittest.TestCase):
             consumer.prepare_ledgers(self.doc, rows + rows)
 
     def test_protected_row_is_not_written(self):
-        self.row.update(note="anchor", protected=True)
+        self.row.update(note="anchor", protected=True, per_wh=None)
         self.assertEqual(consumer.prepare_ledgers(self.doc, self.report()), {})
+
+    def test_protected_row_displays_current_total_never_a_target(self):
+        """render_report used to fall back to the protected row's CURRENT SUM
+        and format it as per-main×count (dmg=1200, n_wh=2 → `1200×2`,
+        implying 2400 proposed). The cell must read `1200Σ2` — current SUM
+        over mains — and stay calibration-only, never applied."""
+        self.row.update(note="anchor", protected=True, per_wh=None)
+        with patch.object(producer, "load_anchors",
+                          return_value={"scout": {"spec": dict(
+                              hp0=10000, speed0=50, range0_wdist=5000,
+                              dps0=60, cost0=100)}}):
+            text = producer.render_report([self.row], "scout")
+        cell = next(line for line in text.splitlines()
+                    if line.startswith("| `soldier` |")).split("|")[7].strip()
+        self.assertEqual(cell, "1200Σ2")
+        rows = self.report()
+        self.assertEqual((rows[0]["dmg"], rows[0]["n_wh"], rows[0]["calibration"]),
+                         (1200, 2, True))
+        self.assertEqual(consumer.prepare_ledgers(self.doc, rows), {})
+
+    def test_uneven_off_grid_protected_total_is_calibration_only(self):
+        self.row.update(note="verifier", protected=True, per_wh=None,
+                        dmg=1250, n_wh=2)
+        rows = self.report()
+        self.assertEqual((rows[0]["dmg"], rows[0]["calibration"]), (1250, True))
+        self.assertEqual(consumer.prepare_ledgers(self.doc, rows), {})
+
+    def test_current_total_cell_refused_on_editable_row(self):
+        with self.assertRaisesRegex(ValueError, "calibration-only"):
+            self.report(lambda text: text.replace("600×2", "1200Σ2"))
+
+    def test_target_cell_refused_on_calibration_row(self):
+        self.row.update(note="anchor", protected=True, per_wh=None)
+        self.report()
+        with self.assertRaisesRegex(ValueError, "regenerate the report"):
+            self.report(lambda text: text.replace("1200Σ2", "600×2"))
 
     def test_cli_dry_run_and_write(self):
         self.report()

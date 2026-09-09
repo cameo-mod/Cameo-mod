@@ -1,5 +1,7 @@
 # `special_forces` — NOT READY / UNAPPROVED
 
+> Reviewed pilot snapshot from 9 September 2026, retained with its coordinator notes. The input/code hashes below identify its original evidence; it is not regenerated output from the latest generator. Later generator improvements add selected-faction and per-axis contributors and clearer signed-gap labels. Generate a fresh comparison into an external directory rather than overwriting this annotated snapshot. No calibration or sign-off is implied.
+
 Diagnostic only: current ledger medians are not approved reference-consensus targets.
 Faction approval/calibration, weapon structure and maintainer sign-off remain required.
 
