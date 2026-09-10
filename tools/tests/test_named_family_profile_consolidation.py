@@ -45,7 +45,7 @@ class NamedFamilyProfileConsolidationTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "non-selected behavior hash changed"):
             cohort.inspect(self.rules)
         self.assertTrue(cohort.inspect(HistoricalView(self, self.rules)))
-        self.assertEqual(24, len(cohort.selections(self.rules)))
+        self.assertEqual(27, len(cohort.selections(self.rules)))
         for root, (_destination, expected, _total, _scale) in cohort.ROOTS.items():
             self.assertEqual(expected, cohort.descendants(self.rules, root), root)
 
@@ -67,6 +67,9 @@ class NamedFamilyProfileConsolidationTests(unittest.TestCase):
 
     def test_comparison_is_exactly_the_reviewed_role_change(self):
         selected = set(cohort.selections(self.rules)) - {"TSLaserHarpyMultiClaw"}
+        # Preserve historical comparison rows/hashes; only normalize the reviewed
+        # one-to-many identity split back to its original source identities.
+        selected = {cohort.YAK_OWNED_SOURCES.get(name, name) for name in selected}
         self.assertEqual(selected, set(self.report["changed"]))
         self.assertEqual([], self.report["added"])
         self.assertEqual([], self.report["removed"])

@@ -32,27 +32,27 @@ ra1_soviets_yakscoutplane:
 		AmmoUsage: 4
 		PauseOnCondition: ammo < 4
 	Armament@PRIMARY:
-		Weapon: YakChainGun
+		Weapon: ra1_soviets_yakscoutplane_chaingun
 		LocalOffset: 256,-213,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 4
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: YakChainGun
+		Weapon: ra1_soviets_yakscoutplane_chaingun
 		LocalOffset: 256,213,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 4
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@Upgrade1:
-		Weapon: IncendiaryYakChainGun
+		Weapon: ra1_soviets_yakscoutplane_chaingun_incendiary
 		LocalOffset: 256,-213,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 4
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets
 	Armament@Upgrade2:
 		Name: secondary
-		Weapon: IncendiaryYakChainGun
+		Weapon: ra1_soviets_yakscoutplane_chaingun_incendiary
 		LocalOffset: 256,213,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 4
@@ -152,27 +152,27 @@ ra1_soviets_teslayak:
 		PauseOnCondition: ammo < 16
 		RequiresCondition: ra1_soviets_upgrade_teslaarcing
 	Armament@PRIMARY:
-		Weapon: YakChainGun
+		Weapon: ra1_soviets_teslayak_chaingun
 		LocalOffset: 320,-480,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 16
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: YakChainGun
+		Weapon: ra1_soviets_teslayak_chaingun
 		LocalOffset: 320,480,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 16
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@Upgrade1:
-		Weapon: IncendiaryYakChainGun
+		Weapon: ra1_soviets_teslayak_chaingun_incendiary
 		LocalOffset: 320,-480,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 16
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets
 	Armament@Upgrade2:
 		Name: secondary
-		Weapon: IncendiaryYakChainGun
+		Weapon: ra1_soviets_teslayak_chaingun_incendiary
 		LocalOffset: 320,480,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 16
@@ -253,27 +253,27 @@ ra1_soviets_armoredyak:
 	ChangesHealth@SelfHealing:
 		Step: 80
 	Armament@PRIMARY:
-		Weapon: ArmoredYakChainGun
+		Weapon: ra1_soviets_armoredyak_chaingun
 		LocalOffset: 160,-320,-80
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: ArmoredYakChainGun
+		Weapon: ra1_soviets_armoredyak_chaingun
 		LocalOffset: 160,320,-80
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@Upgrade1:
-		Weapon: IncendiaryArmoredYakChainGun
+		Weapon: ra1_soviets_armoredyak_chaingun_incendiary
 		LocalOffset: 160,-320,-80
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets
 	Armament@Upgrade2:
 		Name: secondary
-		Weapon: IncendiaryArmoredYakChainGun
+		Weapon: ra1_soviets_armoredyak_chaingun_incendiary
 		LocalOffset: 160,320,-80
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
@@ -356,27 +356,27 @@ ra1_soviets_nuclearyak:
 		AmmoUsage: 16
 		PauseOnCondition: ammo < 16
 	Armament@PRIMARY:
-		Weapon: YakChainGun
+		Weapon: ra1_soviets_nuclearyak_chaingun
 		LocalOffset: 320,-266,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 16
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: YakChainGun
+		Weapon: ra1_soviets_nuclearyak_chaingun
 		LocalOffset: 320,266,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 16
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@Upgrade1:
-		Weapon: IncendiaryYakChainGun
+		Weapon: ra1_soviets_nuclearyak_chaingun_incendiary
 		LocalOffset: 320,-266,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 16
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets
 	Armament@Upgrade2:
 		Name: secondary
-		Weapon: IncendiaryYakChainGun
+		Weapon: ra1_soviets_nuclearyak_chaingun_incendiary
 		LocalOffset: 320,266,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 16
@@ -593,25 +593,25 @@ ra1_soviets_su57attackbomber:
 		PauseOnCondition: !ammo
 		RequiresCondition: ra1_soviets_upgrade_thermobaricrockets
 	Armament@PRIMARY:
-		Weapon: YakChainGun
+		Weapon: ra1_soviets_su57attackbomber_chaingun
 		LocalOffset: 250,-250,0, 250,250,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@SECONDARY:
-		Weapon: YakChainGun
+		Weapon: ra1_soviets_su57attackbomber_chaingun
 		LocalOffset: 250,250,0, 250,-250,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@Upgrade1:
-		Weapon: IncendiaryYakChainGun
+		Weapon: ra1_soviets_su57attackbomber_chaingun_incendiary
 		LocalOffset: 250,-250,0, 250,250,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets
 	Armament@Upgrade2:
-		Weapon: IncendiaryYakChainGun
+		Weapon: ra1_soviets_su57attackbomber_chaingun_incendiary
 		LocalOffset: 250,250,0, 250,-250,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo

@@ -27,12 +27,14 @@
       "requires": "!ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "YakChainGun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "ArmoredYakChainGun",
+      "weapon": "ra1_soviets_armoredyak_chaingun",
       "weapon_class_source": "template"
      },
      {
@@ -57,12 +59,14 @@
       "requires": "!ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "YakChainGun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "ArmoredYakChainGun",
+      "weapon": "ra1_soviets_armoredyak_chaingun",
       "weapon_class_source": "template"
      },
      {
@@ -86,13 +90,15 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade1",
       "versus_templates": [
-       "IncendiaryYakChainGun"
+       "^Compatibility_IncendiaryYakComposition",
+       "^Projectile_Flame_Light_IncendiaryBullet",
+       "^Effect_Flame_Light"
       ],
       "warheads": [
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "IncendiaryArmoredYakChainGun",
+      "weapon": "ra1_soviets_armoredyak_chaingun_incendiary",
       "weapon_class_source": "template"
      },
      {
@@ -117,13 +123,15 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade2",
       "versus_templates": [
-       "IncendiaryYakChainGun"
+       "^Compatibility_IncendiaryYakComposition",
+       "^Projectile_Flame_Light_IncendiaryBullet",
+       "^Effect_Flame_Light"
       ],
       "warheads": [
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "IncendiaryArmoredYakChainGun",
+      "weapon": "ra1_soviets_armoredyak_chaingun_incendiary",
       "weapon_class_source": "template"
      }
     ],
@@ -1939,7 +1947,7 @@
       "warheads": [
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "YakChainGun",
+      "weapon": "ra1_soviets_nuclearyak_chaingun",
       "weapon_class_source": "template"
      },
      {
@@ -1971,7 +1979,7 @@
       "warheads": [
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "YakChainGun",
+      "weapon": "ra1_soviets_nuclearyak_chaingun",
       "weapon_class_source": "template"
      },
      {
@@ -1995,18 +2003,15 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade1",
       "versus_templates": [
-       "^Compatibility_Flame_LightFlat",
-       "^Warhead_Flame_Light",
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light",
-       "^IncendiaryBulletProjectile"
+       "^Compatibility_IncendiaryYakComposition",
+       "^Projectile_Flame_Light_IncendiaryBullet",
+       "^Effect_Flame_Light"
       ],
       "warheads": [
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "IncendiaryYakChainGun",
+      "weapon": "ra1_soviets_nuclearyak_chaingun_incendiary",
       "weapon_class_source": "template"
      },
      {
@@ -2031,18 +2036,15 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade2",
       "versus_templates": [
-       "^Compatibility_Flame_LightFlat",
-       "^Warhead_Flame_Light",
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light",
-       "^IncendiaryBulletProjectile"
+       "^Compatibility_IncendiaryYakComposition",
+       "^Projectile_Flame_Light_IncendiaryBullet",
+       "^Effect_Flame_Light"
       ],
       "warheads": [
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "IncendiaryYakChainGun",
+      "weapon": "ra1_soviets_nuclearyak_chaingun_incendiary",
       "weapon_class_source": "template"
      }
     ],
@@ -2230,7 +2232,7 @@
       "warheads": [
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "YakChainGun",
+      "weapon": "ra1_soviets_su57attackbomber_chaingun",
       "weapon_class_source": "template"
      },
      {
@@ -2261,7 +2263,7 @@
       "warheads": [
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "YakChainGun",
+      "weapon": "ra1_soviets_su57attackbomber_chaingun",
       "weapon_class_source": "template"
      },
      {
@@ -2285,18 +2287,15 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade1",
       "versus_templates": [
-       "^Compatibility_Flame_LightFlat",
-       "^Warhead_Flame_Light",
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light",
-       "^IncendiaryBulletProjectile"
+       "^Compatibility_IncendiaryYakComposition",
+       "^Projectile_Flame_Light_IncendiaryBullet",
+       "^Effect_Flame_Light"
       ],
       "warheads": [
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "IncendiaryYakChainGun",
+      "weapon": "ra1_soviets_su57attackbomber_chaingun_incendiary",
       "weapon_class_source": "template"
      },
      {
@@ -2320,18 +2319,15 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade2",
       "versus_templates": [
-       "^Compatibility_Flame_LightFlat",
-       "^Warhead_Flame_Light",
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light",
-       "^IncendiaryBulletProjectile"
+       "^Compatibility_IncendiaryYakComposition",
+       "^Projectile_Flame_Light_IncendiaryBullet",
+       "^Effect_Flame_Light"
       ],
       "warheads": [
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "IncendiaryYakChainGun",
+      "weapon": "ra1_soviets_su57attackbomber_chaingun_incendiary",
       "weapon_class_source": "template"
      }
     ],
@@ -2769,7 +2765,7 @@
       "warheads": [
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "YakChainGun",
+      "weapon": "ra1_soviets_teslayak_chaingun",
       "weapon_class_source": "template"
      },
      {
@@ -2801,7 +2797,7 @@
       "warheads": [
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "YakChainGun",
+      "weapon": "ra1_soviets_teslayak_chaingun",
       "weapon_class_source": "template"
      },
      {
@@ -2825,18 +2821,15 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade1",
       "versus_templates": [
-       "^Compatibility_Flame_LightFlat",
-       "^Warhead_Flame_Light",
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light",
-       "^IncendiaryBulletProjectile"
+       "^Compatibility_IncendiaryYakComposition",
+       "^Projectile_Flame_Light_IncendiaryBullet",
+       "^Effect_Flame_Light"
       ],
       "warheads": [
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "IncendiaryYakChainGun",
+      "weapon": "ra1_soviets_teslayak_chaingun_incendiary",
       "weapon_class_source": "template"
      },
      {
@@ -2861,18 +2854,15 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade2",
       "versus_templates": [
-       "^Compatibility_Flame_LightFlat",
-       "^Warhead_Flame_Light",
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light",
-       "^IncendiaryBulletProjectile"
+       "^Compatibility_IncendiaryYakComposition",
+       "^Projectile_Flame_Light_IncendiaryBullet",
+       "^Effect_Flame_Light"
       ],
       "warheads": [
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "IncendiaryYakChainGun",
+      "weapon": "ra1_soviets_teslayak_chaingun_incendiary",
       "weapon_class_source": "template"
      }
     ],
@@ -3057,7 +3047,7 @@
       "warheads": [
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "YakChainGun",
+      "weapon": "ra1_soviets_yakscoutplane_chaingun",
       "weapon_class_source": "template"
      },
      {
@@ -3089,7 +3079,7 @@
       "warheads": [
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "YakChainGun",
+      "weapon": "ra1_soviets_yakscoutplane_chaingun",
       "weapon_class_source": "template"
      },
      {
@@ -3113,18 +3103,15 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade1",
       "versus_templates": [
-       "^Compatibility_Flame_LightFlat",
-       "^Warhead_Flame_Light",
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light",
-       "^IncendiaryBulletProjectile"
+       "^Compatibility_IncendiaryYakComposition",
+       "^Projectile_Flame_Light_IncendiaryBullet",
+       "^Effect_Flame_Light"
       ],
       "warheads": [
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "IncendiaryYakChainGun",
+      "weapon": "ra1_soviets_yakscoutplane_chaingun_incendiary",
       "weapon_class_source": "template"
      },
      {
@@ -3149,18 +3136,15 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade2",
       "versus_templates": [
-       "^Compatibility_Flame_LightFlat",
-       "^Warhead_Flame_Light",
-       "^Warhead_Bullet_Medium",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light",
-       "^IncendiaryBulletProjectile"
+       "^Compatibility_IncendiaryYakComposition",
+       "^Projectile_Flame_Light_IncendiaryBullet",
+       "^Effect_Flame_Light"
       ],
       "warheads": [
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "IncendiaryYakChainGun",
+      "weapon": "ra1_soviets_yakscoutplane_chaingun_incendiary",
       "weapon_class_source": "template"
      }
     ],

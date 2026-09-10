@@ -4,14 +4,14 @@
 
 Γ¢ö This **repeals the exemption** in `tools/audit/intentional_composites.py`. Its 224 entries are no longer 'reviewed, keep' ΓÇö they are the worklist. The registry data stays useful: it says which mains someone chose on purpose.
 
-concrete weapons with inherits: **2066**
+concrete weapons with inherits: **2072**
 
 W5 counts structural flat-damage nodes, including zero/healing/ally-only nodes; the split audit counts positive non-companion damage. Both resolve the full concrete weapon corpus. Use `--compare-split` for exact differences.
 
 | check | what | count | ratchet |
 |---|---|--:|--:|
-| W1 | more than 3 inherits | **574** | 576 |
-| W2 | two or more `^Warhead_*` inherits | **201** | 210 |
+| W1 | more than 3 inherits | **573** | 576 |
+| W2 | two or more `^Warhead_*` inherits | **200** | 210 |
 | W3 | two or more `^Projectile_*` inherits | **12** | 12 |
 | W4 | two or more `^Effect_*` inherits | **51** | 51 |
 | W5 | more than one resolved MAIN warhead | **304** | 389 |
@@ -19,14 +19,14 @@ W5 counts structural flat-damage nodes, including zero/healing/ally-only nodes; 
 
 | I7 informational ΓÇö missing template | weapons |
 |---|--:|
-| no `^Effect_*` inherit | 1249 |
-| no `^Projectile_*` inherit | 1367 |
-| no `^Warhead_*` inherit | 1161 |
+| no `^Effect_*` inherit | 1247 |
+| no `^Projectile_*` inherit | 1365 |
+| no `^Warhead_*` inherit | 1164 |
 
 _I7 is a REVIEW QUEUE, not a defect count ΓÇö an instant or utility weapon may legitimately have no projectile. Do not ratchet it without a per-weapon pass._
 
 
-## W1 ΓÇö more than 3 inherits (574 vs ratchet 576)
+## W1 ΓÇö more than 3 inherits (573 vs ratchet 576)
 
 | weapon | inherits | first four |
 |---|---|---|
@@ -72,10 +72,10 @@ _I7 is a REVIEW QUEUE, not a defect count ΓÇö an instant or utility weapon ma
 | `AsianSniperLockdown` | 4 | `^Warhead_Tesla_Super` ┬╖ `^Projectile_Lightning_Super` ┬╖ `^Effect_Tesla_Super` ┬╖ `AsianSniperAP` |
 
 
-_... and 534 more._
+_... and 533 more._
 
 
-## W2 ΓÇö two or more `^Warhead_*` inherits (201 vs ratchet 210)
+## W2 ΓÇö two or more `^Warhead_*` inherits (200 vs ratchet 210)
 
 | weapon | warhead templates |
 |---|---|
@@ -121,7 +121,7 @@ _... and 534 more._
 | `FlakbusAA` | `^Warhead_MissileHE_Medium` ┬╖ `^Warhead_Flak_Medium` |
 
 
-_... and 161 more._
+_... and 160 more._
 
 
 ## W3 ΓÇö two or more `^Projectile_*` inherits (12 vs ratchet 12)

@@ -1,6 +1,6 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **451**
+Files scanned: **453**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
