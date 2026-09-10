@@ -1,5 +1,7 @@
 # BALANCE PROGRAM — the execution plan (rev. 2026-08-28)
 
+> **Numeric evidence refresh — 2026-09-10, source339 based on `8b4f9d465`.** `multi_main_fired_weapons` = **122**; `physical_state_fired_weapons` = **531**; `unconverted_template_inheritors` = **1592**. These retain the definitions in `docs/audit/doc_claims.yaml`, with the corrected flat-health denominator for meter diagnostics; no tolerance increase, live stat change or new policy. Older dated counts below are historical; other branch combinations must remeasure their own tree. Meter figures remain nominal diagnostics, not gameplay or final-price certification.
+
 **This file is the SINGLE SOURCE OF TRUTH for what is done, what is next, and who owns
 what.** It survives compaction, agent handover and session death. Every other document
 (ROADMAP, EFFECTIVE_DAMAGE, PHYSICAL_STATE_SYSTEM, the AI handoffs) links *here* for
@@ -37,9 +39,9 @@ roster, so pricing first means pricing inputs we are about to replace:
 
 | what is still in flux | measured evidence |
 |---|---|
-| W24 — directly fired weapons with **more than one** damage main | **184** under the raw unified predicate; 2026-09-07 survey (234 including indirectly reached weapons; no reviewed exceptions subtracted) |
+| W24 — directly fired weapons with **more than one** damage main | **122** under the raw unified predicate; source339 2026-09-10 (the historical 2026-09-07 direct/indirect snapshot was 184/234; no reviewed exceptions subtracted) |
 | armament slots whose `K` moves when those collapse | **1 547** (2026-08-17 snapshot) |
-| legacy template direct inheritors (W23) | **1596** on 2026-09-07 (`audit_unconverted_templates`); historical family reach was **665 of 1622 = 41.0%** on 2026-08-17, not a current measurement |
+| legacy template direct inheritors (W23) | **1592** on source339 2026-09-10 (`audit_unconverted_templates`); historical family reach was **665 of 1622 = 41.0%** on 2026-08-17, not a current measurement |
 
 Changing the warhead structure can change both delivered damage and **`K`** — `K`
 is share-weighted over each warhead's armor profile, so picking ONE family changes
@@ -53,7 +55,7 @@ the question was asked.
 
 **The order:**
 
-1. **W24** — one damage warhead per weapon (DESIGN §11b). 184 directly fired weapons remain non-compliant; 234 remain when indirect weapon-graph reachability is included (2026-09-07 raw survey).
+1. **W24** — one damage warhead per weapon (DESIGN §11b). 122 directly fired weapons remain non-compliant in source339 (2026-09-10); the historical 2026-09-07 direct/indirect counts were 184/234.
 2. **W23** — the 25-template legacy retrofit. ⭐ **W24 DISSOLVES W23's BLOCKER.** That blocker
    is "33 weapons inherit several legacy templates mapping into the SAME family, so the rename
    merges two warheads and the smaller damage vanishes". After W24 each weapon carries ONE
@@ -585,7 +587,7 @@ mechanical and belong in the audit suite BEFORE the next batch — see the plan 
 
 ⛔ **§0a still governs: weapon STRUCTURE before pricing.** Phase A is not optional preamble; every
 delivery and price number measured before it lands is measuring the wrong object
-(`meters_filling_before_death` claimed 534/549 and is really 146/562 for exactly this reason).
+(`meters_filling_before_death` historically claimed 534/549 and was corrected to 146/562 on 2026-08-19; the current source339 qualifying count is 301 for exactly this reason).
 
 ### Phase A — finish W24 (blocks everything downstream)
 

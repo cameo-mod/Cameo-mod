@@ -1,5 +1,7 @@
 # WEAPON 3-WAY SPLIT — warhead / projectile / effect layers (2026-08-02)
 
+> **Numeric evidence refresh — 2026-09-10, source339 based on `8b4f9d465`.** `w24_multi_main_fed` = **290**. These retain the definitions in `docs/audit/doc_claims.yaml`, with the corrected flat-health denominator for meter diagnostics; no tolerance increase, live stat change or new policy. Older dated counts below are historical; other branch combinations must remeasure their own tree. Meter figures remain nominal diagnostics, not gameplay or final-price certification.
+
 > **Current authority (2026-09-06):** [DESIGN §11b.1](../DESIGN.md#11b1-tightened-and-enforced-binding-maintainer-2026-09-06)
 > replaces this document's older two-warhead/four-inherit model. Use one main
 > warhead and the current three-layer policy, including its narrow mechanic/twin

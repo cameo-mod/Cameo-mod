@@ -197,7 +197,7 @@ claims:
       print(n)
 
   - id: multi_main_fired_weapons
-    value: 184
+    value: 122
     tolerance: 0
     what: >
       Direct actor-armament weapons carrying MORE THAN ONE damage main under the unified W24
@@ -258,12 +258,12 @@ claims:
       print(n)
 
   - id: meters_filling_before_death
-    value: 269
+    value: 301
     tolerance: 0
     what: >
       Weapon/meter bindings on FIRED weapons whose meter reaches FULL effect while the target
       still has 25% HP left — the maintainer's condition for pricing a meter at all ("it is
-      able to completely freeze a unit BEFORE it dies"). **269 bindings (2026-09-05).**
+      able to completely freeze a unit BEFORE it dies"). **301 bindings in source339 (2026-09-10), after excluding concrete/percentage/nonhealth damage from the nominal health denominator. 269 was the 2026-09-05 snapshot.**
       ⛔ THE EARLIER VALUES (1, 124, 223, 534) ARE ALL VOID, for TWO different reasons, and the
       second one is the important one.
       (a) ARITHMETIC. `PhysicalState.ApplyChange` health-scales through `ScaleChangeToHealth`,
@@ -326,7 +326,7 @@ claims:
                   break
       print(n)
   - id: w24_multi_main_fed
-    value: 429
+    value: 290
     tolerance: 0
     what: >
       RATCHET — damage-scaled metered weapons whose meter is fed by LESS than 100% of their
@@ -362,7 +362,7 @@ claims:
               n += 1
       print(n)
   - id: physical_state_fired_weapons
-    value: 534
+    value: 531
     tolerance: 0
     what: >
       FIRED weapons that deliver a PhysicalState meter (Temperature or Corrosion) and are priced
@@ -499,7 +499,7 @@ claims:
                 and any(a.startswith('^Warhead_') for a in ancestors(w))))
 
   - id: unconverted_template_inheritors
-    value: 1596
+    value: 1592
     tolerance: 0
     what: >
       Direct inheritors of the 47 remaining legacy weapon templates (W23's scope).
