@@ -16,8 +16,8 @@ ContentPack-migration residue. **Fix by deleting the LEGACY copy** once the pack
 
 | weapon | defined at |
 |---|---|
-| `ChemTibAtomic` | `ContentPacks/RedAlert/Shared/yaml/weapons.yaml:1257` · `weapons/tiberiandawn.yaml:230` |
-| `RocketsG` | `ContentPacks/RedAlert/Shared/yaml/weapons.yaml:1390` · `ContentPacks/RedAlert/Shared/yaml/weapons.yaml:1394` · `weapons/weapons.yaml:12036` |
+| `ChemTibAtomic` | `ContentPacks/RedAlert/Shared/yaml/weapons.yaml:1286` · `weapons/tiberiandawn.yaml:230` |
+| `RocketsG` | `ContentPacks/RedAlert/Shared/yaml/weapons.yaml:1419` · `ContentPacks/RedAlert/Shared/yaml/weapons.yaml:1423` · `weapons/weapons.yaml:12036` |
 | `SardDeath` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2527` · `weapons/d2k.yaml:1034` |
 | `Sound` | `ContentPacks/D2k/Atreides/yaml/weapons.yaml:15` · `weapons/d2k.yaml:647` |
 | `Sound2` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2497` · `ContentPacks/D2k/Atreides/yaml/weapons.yaml:63` · `weapons/d2k.yaml:694` |

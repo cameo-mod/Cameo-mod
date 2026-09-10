@@ -1,7 +1,7 @@
-# audit_tier_weapon_class — 34 of 1127 classifiable weapons break the TYPES x LEVELS budget
+# audit_tier_weapon_class — 34 of 1129 classifiable weapons break the TYPES x LEVELS budget
 
 LEGAL shapes:
-   1044  1 type, 1 level - squarely in tier
+   1046  1 type, 1 level - squarely in tier
      31  2 types, 1 level - lore hybrid
      17  2 types, 2 adjacent levels - hybrid AND between-tier (budget 4)
       1  1 type, 2 ADJACENT levels - between-tier mix

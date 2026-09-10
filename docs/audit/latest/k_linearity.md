@@ -1,10 +1,10 @@
 # audit_k_linearity — the flat K must not move when Damage moves
 
-Analysed **2069** concrete weapons.
+Analysed **2071** concrete weapons.
 
 ## L0 — every positive offensive runtime percentage application is modeled
 
-_clean_ — modeled 1659 folded and 2441 standalone applications.
+_clean_ — modeled 1661 folded and 2441 standalone applications.
 
 ## L1 — `k_flat` is invariant under a change of flat Damage
 

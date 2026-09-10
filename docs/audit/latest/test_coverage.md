@@ -3,7 +3,7 @@
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
 | T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (8 file(s)) | 70 | >= 24 |
-| T2 | `def test_*` in tools/tests (119 file(s)) | 1348 | >= 177 |
+| T2 | `def test_*` in tools/tests (120 file(s)) | 1353 | >= 177 |
 | T3 | modules with no test mentioning them | 274 | <= 224 |
 
 

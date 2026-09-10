@@ -18,14 +18,14 @@ A number in prose is true only on the day it is written. These are the claims a 
 | `multi_main_fired_weapons` | 184 | 122 | **MISMATCH** |
 | `percentage_denominator_unset` | 183 | 183 | ✅ |
 | `unmigrated_scout_damage_multiplier` | 18 | 18 | ✅ |
-| `meters_filling_before_death` | 269 | 285 | **MISMATCH** |
+| `meters_filling_before_death` | 269 | 286 | **MISMATCH** |
 | `corrosion_meter_actors` | 817 | 817 | ✅ |
 | `w24_multi_main_fed` | 429 | 425 | **MISMATCH** |
-| `physical_state_fired_weapons` | 534 | 534 | ✅ |
+| `physical_state_fired_weapons` | 534 | 535 | **MISMATCH** |
 | `plating_row_ties` | 0 | 0 | ✅ |
 | `plating_families` | 48 | 48 | ✅ |
 | `signed_off_class_anchors` | 0 | 0 | ✅ |
-| `warhead_family_reach` | 1415 | 1421 | **MISMATCH** |
+| `warhead_family_reach` | 1415 | 1423 | **MISMATCH** |
 | `unconverted_template_inheritors` | 1596 | 1592 | **MISMATCH** |
 | `ledgers_drifted` | 0 | 0 | ✅ |
 
