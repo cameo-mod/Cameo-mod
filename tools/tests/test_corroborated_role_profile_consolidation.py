@@ -17,6 +17,7 @@ from consolidate_corroborated_role_profiles import (
     set_state_scale,
 )
 from miniyaml import Ruleset
+from reviewed_weapon_history import restore_later_profile, HistoricalView
 from percentage_damage import runtime_percentage_hp
 from survey_weapon_structure import weapon_reference_sets
 
@@ -58,7 +59,7 @@ class CorroboratedRoleProfileConsolidationTests(unittest.TestCase):
         self.assertTrue(excluded.isdisjoint(self.selected))
         for name in excluded:
             self.assertGreaterEqual(
-                len(main_warheads(self.rules.resolve_weapon(name))), 2, name)
+                len(main_warheads(restore_later_profile(self, self.rules.resolve_weapon(name)))), 2, name)
         for name in ("tkmjuggap", "tkmtechnicalmgap"):
             self.assertEqual(1, len(main_warheads(self.rules.resolve_weapon(name))), name)
 

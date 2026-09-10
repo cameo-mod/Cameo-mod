@@ -6,6 +6,8 @@ else, including child order. No live data or stored fingerprints are rewritten.
 """
 from miniyaml import Node
 import json
+import hashlib
+from functools import lru_cache
 import pathlib
 import sys
 
@@ -20,6 +22,19 @@ ALL_ENDPOINTS = ENDPOINT_COHORT | EXTENDED_ENDPOINTS | ORDOS_ENDPOINTS
 
 
 OWNED_GUNBOAT = 'ra1_allies_gunboat_cannon'
+
+# Exact PR340 routes in converter_owned_names_20260910.json. These three
+# identities intersect the later trajectory/profile checkpoints below.
+LATER_OWNED_NAMES = {
+    'BlackHandLaser': 'td_nod_lasertrooper_blackhandlaser',
+    'HindMissilesThermobaric': 'ra1_soviets_hindattackhelicopter_hindmissilesthermobaric',
+    'ThermobaricMaverick': 'ra1_soviets_migattackbomber_thermobaricmaverick',
+}
+LATER_HISTORICAL_NAMES = {new: old for old, new in LATER_OWNED_NAMES.items()}
+
+
+def current_profile_name(rules, name):
+    return name if name in rules.weapons else LATER_OWNED_NAMES.get(name, name)
 
 
 def current_endpoint_name(rules, name):
@@ -102,7 +117,7 @@ CORROSION_CLEANUP = {
     "AsianChemical": ("LightChemicalWeaponPercentage", "MediumChemicalWeaponPercentage", "HeavyChemicalWeaponPercentage"),
     "AsianHarbingerPlasma": ("LightChemicalWeaponPercentage", "MediumChemicalWeaponPercentage"),
     "FutureMechPlasma": ("MediumChemicalWeaponPercentage",),
-    "SpecterArtilleryShellUpgrade": ("MediumChemicalWeaponPercentage",),
+    "td_nod_specterartillery_specterartilleryshellupgrade": ("MediumChemicalWeaponPercentage",),
     "SteelQuantumTurretRail": ("HeavyChemicalWeaponPercentage",),
     "WyvernRockets": ("MediumChemicalWeaponPercentage",),
     "PhobosLaser": ("HeavyChemicalWeaponPercentage",),
@@ -160,7 +175,7 @@ FIELD_CHANGES = {
         (("Warhead@CannonHE_Heavy", "Versus", "COMPOSITE"), "99", "100"),
         (("Warhead@CannonHE_Heavy", "Versus", "Shield"), "168", "169"),
     ),
-    "ConscriptMolotov": (
+    "ra1_soviets_molotovconscript_conscriptmolotov": (
         (("Warhead@Flame_Light", "Versus", "COMPOSITE"), "76", "77"),
         (("Warhead@Flame_Light", "Versus", "Shield"), "205", "208"),
     ),
@@ -204,12 +219,33 @@ FIELD_CHANGES = {
 }
 
 
+@lru_cache(maxsize=1)
+def trajectory_changes():
+    rollout = json.loads((pathlib.Path(__file__).resolve().parents[2] /
+                          'docs/audit/missile-trajectory-rollout.json').read_text(encoding='utf-8'))
+    digest = hashlib.sha256(json.dumps(rollout, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+    if digest != '4f29f189969ff26e80666561572c4530ab51558443925ceae0dec912b71ef697':
+        raise AssertionError('published9a80607fe trajectory evidence changed')
+    return {row['weapon']: row['fields'] for row in rollout['changes']}
+
+
 def historical_copy(test, node):
     if node.key in ALL_ENDPOINTS or node.key == OWNED_GUNBOAT:
         node = restore_endpoint_weapon(test, node)
     if node.key == 'RA2FreedomRocket_elite':
         node = restore_freedom_elite(test, node)
     copy = node.deep_copy()
+    # Blackrobe's9a80607fe trajectory rollout is independent of older profile
+    # converters. Reverse only its exact recorded scalar deltas in this test view.
+    changes = trajectory_changes().get(LATER_HISTORICAL_NAMES.get(node.key, node.key), {})
+    if changes:
+        projectile = copy.child('Projectile')
+        test.assertEqual('Missile', projectile.value, node.key)
+        for key, change in changes.items():
+            field = projectile.child(key)
+            test.assertIsNotNone(field, (node.key, key))
+            test.assertEqual(change['after'], field.value, (node.key, key))
+            field.value = change['before']
     if node.key == "TSPulseCannon_EMP":
         # 9bfee2b85 removed an unused field from AffectsIntegrity, not damage.
         warhead = copy.child("Warhead@2Con")
@@ -246,3 +282,32 @@ class HistoricalView:
 
     def resolve_weapon(self, name):
         return historical_copy(self.test, self.rules.resolve_weapon(name))
+
+
+def restore_later_profile(test, node):
+    """Assert the complete modern ordered payload before an older lane checkpoint."""
+    fixture = json.loads((pathlib.Path(__file__).parent / 'fixtures' /
+                          'later_profile_history_20260910.json').read_text(encoding='utf-8'))
+    historical_name = LATER_HISTORICAL_NAMES.get(node.key, node.key)
+    if historical_name not in fixture:
+        return node
+    record = fixture[historical_name]
+    def ordered(n):
+        return [n.key, n.value, [ordered(c) for c in n.children]]
+    actual = ordered(node)
+    actual[0] = historical_name  # Normalize only the exact reviewed root identity.
+    test.assertEqual(record['current'], actual, node.key)
+    def rebuild(row):
+        return Node(row[0], row[1], [rebuild(c) for c in row[2]])
+    before = rebuild(record['before'])
+    before.key = node.key
+    return before
+
+
+class LaterProfileView(HistoricalView):
+    def resolve_weapon(self, name):
+        node = self.rules.resolve_weapon(name)
+        # Later lane payloads are independently frozen; do not mix their source
+        # checkpoint with the older coupling/trajectory converter view.
+        restored = restore_later_profile(self.test, node)
+        return restored if restored is not node else super().resolve_weapon(name)

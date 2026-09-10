@@ -68,12 +68,12 @@ class WeaponUpgradeContractTest(unittest.TestCase):
         self.assertEqual({p[4] for p in pairs}, {"primary", "garrisoned"})
 
     def test_cryo_cargo_bomb_preserves_bomb_delivery_and_full_raw_payload(self):
-        weapon = self.rs.resolve_weapon("ParaBombCryo")
+        weapon = self.rs.resolve_weapon("ra1_allies_cargoplanebomber_parabombcryo")
         self.assertEqual(weapon.get("ReloadDelay"), "8")
         self.assertEqual(weapon.get("Range"), "5000")
         self.assertEqual(weapon.get("Projectile"), "GravityBomb")
         self.assertEqual(weapon.get("Projectile", "Image"), "PARABOMB")
-        cryo = self._warhead("ParaBombCryo", "Warhead@CryoBlast_Heavy")
+        cryo = self._warhead("ra1_allies_cargoplanebomber_parabombcryo", "Warhead@CryoBlast_Heavy")
         self.assertEqual(cryo.get("Damage"), "40000")
         self.assertEqual(cryo.get("PhysicalStates", "Temperature"), "-67")
         self.assertEqual(
@@ -88,11 +88,11 @@ class WeaponUpgradeContractTest(unittest.TestCase):
         self._assert_not_weaker("RA2Patriot", "RA2PatriotThunderboltMissile", upgrade.AIR)
 
     def test_armor_piercing_officer_round_preserves_base_payload_and_range(self):
-        weapon = self.rs.resolve_weapon("OfficerMachineGunAP")
+        weapon = self.rs.resolve_weapon("td_gdi_officer_machinegun_ap")
         self.assertEqual(weapon.get("Range"), "5596")
-        self.assertEqual(self._warhead("OfficerMachineGunAP", "Warhead@Bullet_Medium").get("Damage"),
+        self.assertEqual(self._warhead("td_gdi_officer_machinegun_ap", "Warhead@Bullet_Medium").get("Damage"),
                          "16000")
-        self._assert_not_weaker("OfficerMachineGun", "OfficerMachineGunAP", upgrade.CORE)
+        self._assert_not_weaker("td_gdi_officer_machinegun", "td_gdi_officer_machinegun_ap", upgrade.CORE)
 
     def test_ts_paid_replacements_do_not_reduce_centered_core_damage(self):
         for base, upgraded in (
@@ -123,10 +123,15 @@ class WeaponUpgradeContractTest(unittest.TestCase):
         self.assertIsNone(kodiak_projectile.get("TrailImage"))
         self.assertIsNone(kodiak_projectile.get("PointDefenseTypes"))
 
-    def test_sonic_hellfire_remains_raw_debt_without_an_exemption(self):
+    def test_sonic_hellfire_uses_the_shipped_single_main_without_an_exemption(self):
         self.assertLessEqual(RAW_SPLIT_BASELINE, 322)
+        # e779558f5 collapsed the inherited missile main into Sonic_Medium.
+        # Keep the no-exemption contract, but do not require the superseded stack.
         mains = main_warheads(self.rs.resolve_weapon("TSHellfireSonic"))
-        self.assertEqual(["MissileAP_Heavy", "Sonic_Medium"], mains)
+        self.assertEqual(["Sonic_Medium"], mains)
+        self.assertEqual(
+            "32000", self._warhead("TSHellfireSonic", "Warhead@Sonic_Medium").get("Damage"))
+        self.assertIsNone(self.rs.resolve_weapon("TSHellfireSonic").child("Warhead@MissileAP_Heavy"))
         reviewed = validated_reviewed_predicate(self.rs, main_warhead_nodes)
         self.assertFalse(reviewed("TSHellfireSonic", mains))
         self.assertFalse(reviewed("CopiedHellfireSonic", mains))
