@@ -3612,7 +3612,7 @@
 	Mobile:
 		Speed: 56
 	Health:
-		HP: 2500
+		HP: 5000
 	RevealsShroud:
 		Range: 2c0
 	Passenger:
@@ -3729,6 +3729,7 @@
 		Categories: Critter
 
 ^ArmedCivilian:
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Armament:
 		Weapon: Pistol
 	AttackFrontal:
