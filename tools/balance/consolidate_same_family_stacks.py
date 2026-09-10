@@ -43,7 +43,7 @@ ROOT_CLOSURES = {
     # CabalCyborgChaingun and TSDevoutChainguns are excluded: merging their
     # folded percentage hits overflows at active high-health values.
     "NaxiWW2KübelwagenMachinegun": set(),
-    "OfficerMachineGun": set(),
+    "td_gdi_officer_machinegun": set(),
     # RA220mmrapid is deliberately excluded: its Light slice can hit Air while
     # its Medium slice cannot, so choosing one target contract needs role review.
     "RA2GattlingInf": set(),

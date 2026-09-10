@@ -360,7 +360,7 @@ ArcherArtilleryShell:
 		Damage: 70000
 		PercentageScale: 0
 
-MachineGunH:
+td_gdi_humvee_machinegun:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
 	Inherits@fx: ^Effect_Bullet_Light
@@ -372,7 +372,7 @@ MachineGunH:
 	Report: mgun11.aud
 	Warhead@Bullet_Light:
 		Damage: 6000
-MachineGunAPH:
+td_gdi_humvee_machinegun_ap:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
@@ -1003,7 +1003,7 @@ GrenadeExplode_EMP:
 		ImpactActors: false
 		ValidTargets: Ground, Ship
 
-GDISniperRifle:
+td_gdi_heavysniper_rifle:
 	Inherits@wh: ^Warhead_Bullet_Heavy
 	Inherits: ^SmallArms
 	Inherits@2: ^Grenade
@@ -1375,7 +1375,7 @@ ExosuitRailgun:
 	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 20000
-OfficerMachineGun:
+td_gdi_officer_machinegun:
 	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
@@ -1396,7 +1396,7 @@ OfficerMachineGun:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 		PercentageScale: 2494
-OfficerMachineGunAP:
+td_gdi_officer_machinegun_ap:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
@@ -1571,7 +1571,7 @@ GDIRigMissilePodAMT:
 	Projectile: Missile
 		VerticalRateOfTurn: 12
 
-CommandoSniper:
+td_gdi_havoc_sniper:
 	Inherits@wh: ^Warhead_Bullet_Heavy
 	Inherits: ^SniperWeapon
 	Inherits@2: ^Chaingun
@@ -1644,7 +1644,7 @@ CommandoSniper:
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
 
-CommandoRocketLauncher:
+td_gdi_havoc_rocket:
 	Inherits@finalmain: ^Compatibility_MissileHE_MediumFlat
 	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@proj: ^Projectile_Missile_Light
@@ -1678,7 +1678,7 @@ CommandoRocketLauncher:
 		Damage: 40000
 		PercentageScale: 9998
 
-CommandoGrenadeLauncher:
+td_gdi_havoc_grenade:
 	Inherits@collapsewh: ^Warhead_Concussion_Medium
 	Inherits: ^ShrapnelWeapon
 	Inherits@2: ^Grenade
@@ -1706,7 +1706,7 @@ CommandoGrenadeLauncher:
 		Damage: 40000
 		PercentageScale: 0
 
-CommandoM16:
+td_gdi_havoc_rifle:
 	Inherits@collapsewh: ^Warhead_Bullet_Medium
 	Inherits: ^SniperWeapon
 	Inherits@2: ^Chaingun

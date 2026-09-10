@@ -30,7 +30,7 @@ FlamethrowerExplode:
 	Inherits: Flamethrower
 	Warhead@Flame_Light:
 		Damage: 10000
-NodTurretLaser:
+td_nod_laserturret_laser:
 	Inherits@wh: ^Warhead_Laser_Medium
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
@@ -101,7 +101,7 @@ NodTurretLaserInferno:
 		SecondaryBeamColor: FFFFFF
 	Warhead@Inferno_Medium:
 		Damage: 12000
-NodTurretLaserBurning:
+td_nod_laserturret_laser_burning:
 	Inherits: NodTurretLaserInferno
 	Burst: 10
 	BurstDelays: 1
@@ -235,7 +235,7 @@ FireballLauncherBuggy:
 		Palette: tseffect
 	Warhead@Flame_Light:
 		Damage: 2000
-BikeRockets:
+td_nod_reconbike_rocket:
 	Inherits@collapsewh: ^Warhead_MissileAP_Medium
 	-TargetActorCenter:
 	Inherits: ^TankDestroyerCannon
@@ -419,7 +419,7 @@ StealthTankMissilesShrapnel:
 		Weapon: CHFlame
 		InvalidTargets: Water
 
-HeliGun:
+td_nod_apacheattackhelicopter_gun:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
@@ -432,7 +432,7 @@ HeliGun:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-HeliMissiles:
+td_nod_apacheattackhelicopter_missile:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
@@ -1375,7 +1375,7 @@ SpecterArtilleryShellUpgrade:
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
 
-VenomLaser:
+td_nod_venom_laser:
 	Inherits@wh: ^Warhead_Laser_Medium
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
@@ -1437,7 +1437,7 @@ VenomLaserInferno:
 	Warhead@Inferno_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-VenomLaserBurning:
+td_nod_venom_laser_burning:
 	Inherits: VenomLaserInferno
 	Burst: 10
 	BurstDelays: 1

@@ -217,7 +217,6 @@ _... and 11 more._
 | `BallistaSingleShotAirEnergized` | 4 | `Arrow_Light` ┬╖ `Arrow_LightFlatCompatibility` ┬╖ `CannonHE_Medium` ┬╖ `MissileAP_Light` |
 | `BallistaTowerMultiShot` | 2 | `Arrow_Medium` ┬╖ `CollapseTargetCompatibility1` |
 | `BarrelExplode` | 2 | `1Dam` ┬╖ `Demolition_Light` |
-| `BikeRockets` | 2 | `CollapseTargetCompatibility1` ┬╖ `MissileAP_Medium` |
 | `BoxerCannon_AA` | 4 | `Bullet_Light` ┬╖ `Bullet_Medium` ┬╖ `CannonHE_Medium` ┬╖ `Flak_MediumFlatCompatibility` |
 | `BroodweaverLeech` | 2 | `ExtraHealing` ┬╖ `HealingWeapon` |
 | `CHFlameBlue` | 2 | `1Dam` ┬╖ `Flame_Medium` |
@@ -235,6 +234,7 @@ _... and 11 more._
 | `D2K_Rocket_Trooper2` | 3 | `CannonHE_Medium` ┬╖ `Demolition_Light` ┬╖ `Railgun_Heavy` |
 | `D2K_SiegeQuad` | 4 | `CannonHE_Medium` ┬╖ `Concussion_Medium` ┬╖ `Demolition_Heavy` ┬╖ `Demolition_Light` |
 | `DRPlasmaTankWeapon` | 2 | `1Dam` ┬╖ `1DamBuildings` |
+| `DTAtomic` | 2 | `Nuclear_Super` ┬╖ `Tesla_Super` |
 
 
 _... and 264 more._

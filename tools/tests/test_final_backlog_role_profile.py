@@ -17,7 +17,7 @@ from miniyaml import Ruleset
 
 
 ROOTS = {
-    "ArmoredCarMG", "BHRedDarts", "ChemRockets", "CommandoM16", "EMPGrenade",
+    "ArmoredCarMG", "BHRedDarts", "ChemRockets", "td_gdi_havoc_rifle", "EMPGrenade",
     "GuardianShoot", "MutaliskSpore", "RashidanGun", "TDShotgun", "TurretGun",
     "eden_EMP", "japan_imperialscoutsman_rifle", "plymouthSticky", "plymouth_EMP",
     "tkmheavyaaturret",
@@ -51,7 +51,7 @@ class FinalBacklogRoleProfileTests(unittest.TestCase):
             "ArmoredCarMG": {"Bullet_Medium": 16000},
             "BHRedDarts": {"Tesla_Super": 22000, "EMPCompatibility": 5000},
             "ChemRockets": {"Chemical_Light": 24000, "ChemRocketCompatibility": 12000},
-            "CommandoM16": {"Bullet_Medium": 4000, "SniperCompatibility": 4000,
+            "td_gdi_havoc_rifle": {"Bullet_Medium": 4000, "SniperCompatibility": 4000,
                               "OpenToppedCompatibility": 4000},
             "EMPGrenade": {"Tesla_Super": 32000, "TeslaSharedCompatibility": 32000,
                             "TemperatureCompatibility": 8000, "EMPCompatibility": 32000},

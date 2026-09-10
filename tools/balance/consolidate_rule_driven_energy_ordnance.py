@@ -78,7 +78,7 @@ GROUPS = {
     },
     "MissileHE_Medium": {
         "CabalRocketCyborgRockets", "CabalRocketCyborgRocketsUpgraded",
-        "TSBikeMissile", "CommandoRocketLauncher", "RocketsRA",
+        "TSBikeMissile", "td_gdi_havoc_rocket", "RocketsRA",
     },
     "MissileAP_Heavy": {
         "RocketsHumvee2AMT", "RocketsHumvee2AMT_AA", "NaxPlaneRockets_elite",

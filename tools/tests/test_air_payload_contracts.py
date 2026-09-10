@@ -29,7 +29,7 @@ class AirPayloadContractTests(unittest.TestCase):
             "TSFiendShardBlue",
             "TSFiendShardBlueUP",
             "VenomLaserInferno",
-            "VenomLaserBurning",
+            "td_nod_venom_laser_burning",
             "CabalOverkillCharge",
             "PsionicShockwave",
         }
