@@ -24,6 +24,8 @@ sys.path[:0] = [str(ROOT / "tools/audit"), str(ROOT / "tools/balance")]
 from audit_three_way_split import main_warheads, main_warhead_nodes  # noqa: E402
 from miniyaml import Ruleset  # noqa: E402
 from percentage_damage import folded_units  # noqa: E402
+from reviewed_weapon_history import restore_endpoint_weapon
+from effective_heaviness import scale_length
 
 WEAPON = "AlliedTankDestroyerCannon"
 
@@ -49,13 +51,15 @@ class AlliedTankDestroyerRoleCorrectionTests(unittest.TestCase):
         cls.ap = cls.rules.resolve_weapon("^Warhead_CannonAP_Light")
 
     def test_live_weapon_is_a_single_ap_main_at_24000(self):
-        self.assertEqual(["CannonAP_Light"], main_warheads(self.live))
+        self.assertEqual(["CannonAP"], main_warheads(self.live))
         node = main_warhead_nodes(self.live)[0]
         self.assertEqual("24000", node.get("Damage"))
         self.assertEqual("AreaDamage", node.value)
-        self.assertEqual("80", node.get("Spread"))
+        self.assertEqual(80, scale_length(int(node.get("Spread")), int(node.get("Heaviness"))))
         self.assertEqual("100, 0", node.get("Falloff"))
-        self.assertEqual("10000", node.get("PercentageScale"))
+        self.assertEqual("2000", node.get("PercentageScale"))
+        self.assertEqual("0", node.get("Heaviness"))
+        self.assertEqual("SharedVersus", node.get("HeavinessMode"))
         self.assertIsNone(self.live.child("Warhead@CannonHE_Medium"))
 
     def test_flattotal_matches_old_sum_and_shipped_release(self):
@@ -82,7 +86,8 @@ class AlliedTankDestroyerRoleCorrectionTests(unittest.TestCase):
         self.assertEqual(-91.1, round((new_radius / old_radius - 1) * 100, 1))
 
     def test_ap_armor_table_is_unchanged_from_template(self):
-        live_versus = versus_values(self.live)["Warhead@CannonAP_Light"]
+        # Pin the first AP correction separately from the later shared h0 profile.
+        live_versus = versus_values(restore_endpoint_weapon(self, self.live))["Warhead@CannonAP_Light"]
         template_versus = versus_values(self.ap)["Warhead@CannonAP_Light"]
         self.assertEqual(template_versus, live_versus)
 
@@ -109,7 +114,8 @@ class AlliedTankDestroyerRoleCorrectionTests(unittest.TestCase):
         self.assertEqual(225, sum(he_pct.values()))
         self.assertEqual(153, sum(ap_pct.values()))
         old_units = folded_units(12000, 10000)[1]
-        live_main = self.live.child("Warhead@CannonAP_Light")
+        historical = restore_endpoint_weapon(self, self.live)
+        live_main = historical.child("Warhead@CannonAP_Light")
         new_units = folded_units(int(live_main.get("Damage")),
                                  int(live_main.get("PercentageScale")))[1]
         old_total = old_units * sum(he_pct[a] + ap_pct[a] for a in ap_pct)
@@ -118,7 +124,7 @@ class AlliedTankDestroyerRoleCorrectionTests(unittest.TestCase):
         # damage claim. Doubling AP Damage doubles its percentage magnitude.
         self.assertEqual((378, 306), (old_total / old_units, new_total / old_units))
         self.assertEqual(-19.05, round((new_total / old_total - 1) * 100, 2))
-        live_pct = pct(self.live, "CannonAP_Light")
+        live_pct = pct(historical, "CannonAP_Light")
         self.assertEqual(ap_pct, live_pct)
 
     def test_projectile_effects_timing_targets_preserved(self):

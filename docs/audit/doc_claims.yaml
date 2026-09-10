@@ -214,12 +214,14 @@ claims:
       print(inventory(rs)['counts']['stacked_main_direct_actor_armament'])
 
   - id: percentage_denominator_unset
-    value: 183
+    value: 184
     tolerance: 0
     what: >
-      W18 has NOT landed. Any nonzero here means the basis-point rebase shipped and every
-      pct_absolute / dps_floor figure in the docs is stale. 2026-09-05: measured 183 after
-      origin/master merge 4fd9937f3 — W18 appears to have partially landed on master.
+      Raw authored PercentageDenominator occurrences in active weapon files, despite
+      the historical claim id: this is not an unset or resolved-application count.
+      The 2026-09-05 snapshot measured 183 after origin/master merge 4fd9937f3.
+      The 2026-09-10 Freedom elite explicit companion adds one occurrence, giving 184;
+      it preserves that route's units and does not introduce a global unit rebase.
     docs: [docs/design/ARMOR_LAYERS.md, docs/design/BALANCE_PROGRAM_PLAN.md]
     measure: |
       import pathlib, sys

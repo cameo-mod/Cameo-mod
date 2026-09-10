@@ -4,7 +4,7 @@ Analysed **2061** concrete weapons.
 
 ## L0 — every positive offensive runtime percentage application is modeled
 
-_clean_ — modeled 1649 folded and 2441 standalone applications.
+_clean_ — modeled 1634 folded and 2442 standalone applications.
 
 ## L1 — `k_flat` is invariant under a change of flat Damage
 

@@ -300,7 +300,7 @@ TS90mmDep:
 
 TSLaser90mm:
 	# Anti-armour cannon half, as TS90mm above — this is its T3 laser variant.
-	Inherits: ^Warhead_CannonAP_Medium
+	Inherits: ^Warhead_CannonAP
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonAP_Medium
 	Inherits@4: ^LaserWeapon
@@ -310,8 +310,9 @@ TSLaser90mm:
 		SecondaryBeamWidth: 36
 	ReloadDelay: 32
 	Range: 5423
-	Warhead@CannonAP_Medium:
+	Warhead@CannonAP:
 		Damage: 12000
+		Heaviness: 1000
 	-Warhead@LaserWeapon:
 	-Warhead@LaserExtraDamage:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage

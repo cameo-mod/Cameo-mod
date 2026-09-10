@@ -1223,7 +1223,7 @@ SkyHawkChainGunWaveforce:
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 500
 
-SkyHawkCannon:
+^SkyHawkCannonLegacy:
 	Inherits@wh2: ^Warhead_CannonAP_Light
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_CannonAP_Light
@@ -1236,9 +1236,23 @@ SkyHawkCannon:
 	Warhead@CannonAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
+SkyHawkCannon:
+	Inherits@wh: ^Warhead_CannonAP
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_CannonAP_Light
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 32
+	Range: 3053
+	Report: cannon2.aud
+	Projectile: Bullet
+		Speed: 305
+	Warhead@CannonAP:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		Heaviness: 0
 SkyHawkPlasmaCannon:
 	Inherits: ^Warhead_Tesla_Heavy
-	Inherits@3: SkyHawkCannon
+	Inherits@3: ^SkyHawkCannonLegacy
 	Projectile: Bullet
 		Speed: 610
 		ContrailStartColor: 8844FFAA

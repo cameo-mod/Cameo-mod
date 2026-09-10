@@ -18,5 +18,5 @@ X5 suffix ordering violations: **0**
 | ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1876 | CabalManticoreMissilesAA | Air |
 | ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 632 | TSMammothTusk2 | Air |
 | weapons/darkreign.yaml | 404 | DRBionWeaponAA | Air |
-| weapons/tiberiansun.yaml | 1181 | TSChemAdatsMissileAA |  |
+| weapons/tiberiansun.yaml | 1182 | TSChemAdatsMissileAA |  |
 

@@ -835,6 +835,14 @@ basis points. Folded `AreaDamage.PercentageScale` defaults to denominator 10000 
 the engine's rounded derived units. The shared evaluator reads each form directly; no tag
 spelling or global denominator guess is allowed.
 
+Authored-field inventory, 2026-09-10: **184** raw `PercentageDenominator`
+occurrences in active weapon files, up from the 2026-09-05 snapshot of 183.
+The added Freedom elite explicit companion preserves its prior percentage route.
+The registry's historical `percentage_denominator_unset` name does not mean
+unset fields or resolved applications; this occurrence count does not establish
+a global unit rebase or change the per-node semantics above.
+
+
 ---
 
 ## Versus normalisation and the Shield ladder — the analysis behind §12.0c

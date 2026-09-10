@@ -177,7 +177,7 @@ ChainGunMH60Cryo:
 		Damage: 8000
 
 AlliedTankDestroyerCannon:
-	Inherits@wh2: ^Warhead_CannonAP_Light
+	Inherits@wh2: ^Warhead_CannonAP
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_CannonAP_Light
 	ReloadDelay: 60
@@ -185,8 +185,9 @@ AlliedTankDestroyerCannon:
 	Report: tank5.aud
 	Projectile: Bullet
 		Speed: 1362
-	Warhead@CannonAP_Light:
+	Warhead@CannonAP:
 		Damage: 24000
+		Heaviness: 0
 AlliedTankDestroyerCannonCryo:
 	Inherits@wh: ^Warhead_CannonCryo_Medium
 	Inherits@proj: ^Projectile_Shell_Light

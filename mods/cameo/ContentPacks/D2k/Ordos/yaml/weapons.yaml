@@ -89,7 +89,7 @@ HeavyOrdosCombatTankRockets:
 	-Warhead@TankDestroyerCannon:
 	-Warhead@CannonHE_MediumFlatCompatibility:
 120mm_cobra:
-	Inherits@finalmain: ^Compatibility_CannonAP_LightFlat
+	Inherits@finalmain: ^Warhead_CannonAP
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@wh3: ^Warhead_CannonAP_Light
@@ -232,10 +232,11 @@ HeavyOrdosCombatTankRockets:
 	-Warhead@CannonHE_Medium:
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
-	Warhead@CannonAP_LightFlatCompatibility:
+	Warhead@CannonAP:
 		ValidTargets: Ground, Water
 		Damage: 120000
-		PercentageScale: 0
+		PercentageScale: 2000
+		Heaviness: 0
 120mm_cobra_deploy:
 	Inherits: 120mm_cobra
 	Projectile: Bullet
@@ -358,10 +359,11 @@ HeavyOrdosCombatTankRockets:
 			Spaceship: 1
 		Falloff: 100, 45, 18
 		Range: 0, 233, 466
-	Warhead@CannonAP_LightFlatCompatibility:
+	Warhead@CannonAP:
 		ValidTargets: Ground, Water
 		Damage: 120000
-		PercentageScale: 0
+		PercentageScale: 2000
+		Heaviness: 0
 
 120mm_python:
 	Inherits: 120mm_cobra
@@ -497,10 +499,11 @@ HeavyOrdosCombatTankRockets:
 			Spaceship: 1
 		Falloff: 100, 45, 18
 		Range: 0, 233, 466
-	Warhead@CannonAP_LightFlatCompatibility:
+	Warhead@CannonAP:
 		ValidTargets: Ground, Water
 		Damage: 120000
-		PercentageScale: 0
+		PercentageScale: 2000
+		Heaviness: 0
 
 120mm_python_deploy:
 	Inherits: 120mm_python
@@ -624,10 +627,11 @@ HeavyOrdosCombatTankRockets:
 			Spaceship: 1
 		Falloff: 100, 45, 18
 		Range: 0, 233, 466
-	Warhead@CannonAP_LightFlatCompatibility:
+	Warhead@CannonAP:
 		ValidTargets: Ground, Water
 		Damage: 120000
-		PercentageScale: 0
+		PercentageScale: 2000
+		Heaviness: 0
 
 eye_bomberguy:
 	Inherits@collapsewh: ^Warhead_Demolition_Heavy

@@ -1864,6 +1864,15 @@ anywhere without tier restriction (W13 rule 5).
 
 ### W18 — Roll the basis-point unit out into yaml ⬜ READY (unblocked)
 
+Historical planning snapshot below, including the dated 2026-08-16 empty search.
+Current authored-field inventory (2026-09-10): **184** raw
+`PercentageDenominator` occurrences in active weapon files, compared with 183
+on 2026-09-05. Freedom elite's explicit companion adds the single occurrence
+while preserving its prior percentage units. The registry's historical
+`percentage_denominator_unset` id measures occurrences, not unset fields or
+resolved applications; this increment is not a global unit rebase.
+
+
 W15 shipped the MECHANISM; this ships the CONTENT. It *was* blocked purely by file
 ownership — every file involved is set B (`mods/cameo/weapons/**`,
 `ContentPacks/**/weapons.yaml`), which Devin held while W2 ran. **Devin's set-B lock has

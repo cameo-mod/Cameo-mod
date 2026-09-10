@@ -271,7 +271,6 @@ RA2FreedomRocket:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 RA2FreedomRocket_elite:
-	Inherits@roleflat: ^Compatibility_MissileAP_MediumFlat
 	Inherits: RA2FreedomRocket
 	Range: 8130
 	Projectile: Missile
@@ -294,15 +293,39 @@ RA2FreedomRocket_elite:
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 60
 	Warhead@MissileAP_Medium:
-		Damage: 120000
-		PercentageScale: 10000
+		Damage: 360000
+		PercentageScale: 0
 	-Warhead@FlakWeapon:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
-	Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@FreedomElitePreservedPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air, Garrisoned
-		Damage: 240000
-		PercentageScale: 0
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 6000
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Heavy: 19
+			Medium: 18
+			Light: 17
+			Scout: 16
+			Spaceship: 15
+			Helicopter: 14
+			Bomber: 13
+			Fighter: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
+		Falloff: 100, 50, 0
+		Range: 0, 32, 33
 SyndicateFireballLauncher_elite:
 	Inherits: SyndicateFireballLauncher
 	Range: 6666

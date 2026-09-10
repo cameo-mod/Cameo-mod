@@ -5508,7 +5508,7 @@
         "damage": "12000",
         "falloff": "100, 0",
         "spread": "120",
-        "tag": "CannonAP_Medium",
+        "tag": "CannonAP",
         "type": "AreaDamage"
        },
        {
@@ -5527,14 +5527,14 @@
       "requires": "undeployed && ts_nod_upgrade_tiberiumlenses",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "^Warhead_CannonAP_Medium",
+       "^Warhead_CannonAP",
        "^Projectile_Shell_Medium",
        "^Effect_CannonAP_Medium",
        "^LaserWeapon",
        "^TSLaserEffect"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Medium"
+       "^Warhead_CannonAP"
       ],
       "weapon": "TSLaser90mm",
       "weapon_class_source": "template"
@@ -5573,7 +5573,7 @@
         "damage": "12000",
         "falloff": "100, 0",
         "spread": "120",
-        "tag": "CannonAP_Medium",
+        "tag": "CannonAP",
         "type": "AreaDamage"
        },
        {
@@ -5595,7 +5595,7 @@
        "TSLaser90mm"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Medium"
+       "^Warhead_CannonAP"
       ],
       "weapon": "TSLaser90mmDep",
       "weapon_class_source": "template"

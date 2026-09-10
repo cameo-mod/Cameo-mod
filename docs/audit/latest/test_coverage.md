@@ -3,8 +3,8 @@
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
 | T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (11 file(s)) | 173 | >= 24 |
-| T2 | `def test_*` in tools/tests (123 file(s)) | 1456 | >= 177 |
-| T3 | modules with no test mentioning them | 267 | <= 224 |
+| T2 | `def test_*` in tools/tests (127 file(s)) | 1473 | >= 177 |
+| T3 | modules with no test mentioning them | 266 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (267)
+## T3 — untested modules (266)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -214,7 +214,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_task_index.py | audit_task_index |
 | python | tools/audit/audit_template_conformance.py | audit_template_conformance |
 | python | tools/audit/audit_test_coverage.py | audit_test_coverage |
-| python | tools/audit/audit_tier_weapon_class.py | audit_tier_weapon_class |
 | python | tools/audit/audit_ts_death_palette.py | audit_ts_death_palette |
 | python | tools/audit/audit_turn_speed.py | audit_turn_speed |
 | python | tools/audit/audit_unconverted_templates.py | audit_unconverted_templates |
@@ -290,5 +289,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 267 untested > baseline 224
+- T3: 266 untested > baseline 224
 

@@ -2031,7 +2031,7 @@ DepthChargeCryo:
 		ValidTargets: Submarine, Ship, Underwater
 
 2Inch:
-	Inherits@wh: ^Warhead_CannonAP_Light
+	Inherits@wh: ^Warhead_CannonAP
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_CannonAP_Light
 	ReloadDelay: 30
@@ -2040,9 +2040,10 @@ DepthChargeCryo:
 	InvalidTargets: Underwater, Submarine
 	Projectile: Bullet
 		Speed: 600
-	Warhead@CannonAP_Light:
+	Warhead@CannonAP:
 		Damage: 30000
-		Spread: 300
+		Spread: 450
+		Heaviness: 0
 2InchCryo:
 	Inherits@wh: ^Warhead_CannonCryo_Light
 	Inherits@proj: ^Projectile_Shell_Light

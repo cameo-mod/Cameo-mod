@@ -1,12 +1,16 @@
-# audit_tier_weapon_class — 34 of 1119 classifiable weapons break the TYPES x LEVELS budget
+# audit_tier_weapon_class — 34 of 1104 classifiable weapons break the TYPES x LEVELS budget
 
-LEGAL shapes:
-   1037  1 type, 1 level - squarely in tier
+Historical budget diagnostic only; DESIGN section11b.1 one-main law takes precedence.
+
+Historical budget shapes (not one-main compliance):
+   1022  1 type, 1 level - squarely in tier
      31  2 types, 1 level - lore hybrid
      16  2 types, 2 adjacent levels - hybrid AND between-tier (budget 4)
       1  1 type, 2 ADJACENT levels - between-tier mix
 
-   1034  weapons skipped — at least one LEGACY-named main warhead (no Family_Level), so the budget cannot be judged until they are 3-way split
+   1024  weapons unclassified — at least one main lacks a recognized Family_Level; this is not a balance or structural pass
+     25  continuous-profile weapons — discrete tier unclassified; runtime heaviness is checked separately
+  Continuous identities: 120mm_cobra, 120mm_cobra_deploy, 120mm_python, 120mm_python_deploy, 2Inch, AlliedTankDestroyerCannon, NaxiAntiTankCannon, NaxiAntiTankCannonCorrosion, NaxiAntiTankCannon_elite, NaxiHetzerDestroyer, NaxiHetzerDestroyerCorrosion, NaxiHetzerDestroyer_elite, RA2120xmm, RA2120xmm_elite, RA2sabot, RA2sabot_elite, SkyHawkCannon, TS90mm, TS90mmDep, TSHighVelocity, TSHighVelocity2, TSHighVelocityTur, TSLaser90mm, TSLaser90mmDep, corrino_buggy_gun
 
 VIOLATIONS by shape:
      19  3 LEVELS

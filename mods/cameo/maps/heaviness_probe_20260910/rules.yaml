@@ -74,3 +74,56 @@ probe_target_shield:
 	Inherits: probe_target
 	Armor:
 		Type: Shield
+
+probe_tankkiller:
+	Inherits: ^probe_shooter
+	Armament:
+		Weapon: ProbeTankKiller
+
+probe_warriortank:
+	Inherits: ^probe_shooter
+	Armament:
+		Weapon: ProbeWarriorTank
+
+probe_warriorturret:
+	Inherits: ^probe_shooter
+	Armament:
+		Weapon: ProbeWarriorTurret
+
+probe_freedom_old:
+	Inherits: ^probe_shooter
+	Armament:
+		Weapon: ProbeFreedomFolded
+
+probe_freedom_new:
+	Inherits: ^probe_shooter
+	Armament:
+		Weapon: ProbeFreedomCompanion
+
+probe_distance_0:
+	Inherits: probe_target
+
+probe_aim:
+	Inherits: probe_target
+	Immobile:
+		OccupiesSpace: false
+
+probe_distance_16:
+	Inherits: probe_target
+	HitShape:
+		TargetableOffsets: 0,16,0
+
+probe_distance_17:
+	Inherits: probe_target
+	HitShape:
+		TargetableOffsets: 0,17,0
+
+probe_distance_32:
+	Inherits: probe_target
+	HitShape:
+		TargetableOffsets: 0,32,0
+
+probe_distance_33:
+	Inherits: probe_target
+	HitShape:
+		TargetableOffsets: 0,33,0

@@ -98,7 +98,7 @@ class DeliveryIdentityProfileConsolidationTests(unittest.TestCase):
 
     def test_routing_and_overflow_hazards_remain_unconverted(self):
         self.assertEqual(
-            ["CannonAP_Light"],
+            ["CannonAP"],
             main_warheads(self.rules.resolve_weapon("AlliedTankDestroyerCannon")))
 
         # This AA child still carries the deferred route-specific Medium nodes,

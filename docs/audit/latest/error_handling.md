@@ -1,6 +1,6 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **459**
+Files scanned: **463**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
@@ -48,7 +48,7 @@ Files scanned: **459**
 | tools/audit/audit_rank_decoration.py | 68 | handler body discards the error |
 | tools/audit/audit_scaled_bullet_overrides.py | 41 | handler body discards the error |
 | tools/audit/audit_three_way_split.py | 119 | handler body discards the error |
-| tools/audit/audit_tier_weapon_class.py | 76 | handler body discards the error |
+| tools/audit/audit_tier_weapon_class.py | 81 | handler body discards the error |
 | tools/audit/audit_turn_speed.py | 65 | handler body discards the error |
 | tools/audit/audit_unique_traits.py | 73 | handler body discards the error |
 | tools/audit/audit_upgrades.py | 158 | handler body discards the error |

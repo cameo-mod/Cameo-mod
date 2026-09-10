@@ -2649,27 +2649,25 @@
        {
         "damage": "28000",
         "falloff": "100, 0",
-        "spread": "80",
-        "tag": "CannonAP_Light",
+        "spread": "120",
+        "tag": "CannonAP",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7361",
       "reloaddelay": "75",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_CannonHE_Medium",
-       "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium",
-       "^RA2TankDestroyerCannon"
+       "^Effect_Explosion_Small_RA2",
+       "^Projectile_Shell_Light",
+       "^Warhead_CannonAP"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium",
-       "^Warhead_CannonAP_Light"
+       "^Warhead_CannonAP"
       ],
       "weapon": "NaxiAntiTankCannon",
       "weapon_class_source": "template"
@@ -2681,13 +2679,13 @@
        {
         "damage": "28000",
         "falloff": "100, 0",
-        "spread": "80",
-        "tag": "CannonAP_Light",
+        "spread": "120",
+        "tag": "CannonAP",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8361",
       "reloaddelay": "75",
@@ -2697,8 +2695,7 @@
        "NaxiAntiTankCannon"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium",
-       "^Warhead_CannonAP_Light"
+       "^Warhead_CannonAP"
       ],
       "weapon": "NaxiAntiTankCannon_elite",
       "weapon_class_source": "template"
@@ -8451,27 +8448,25 @@
        {
         "damage": "40000",
         "falloff": "100, 0",
-        "spread": "80",
-        "tag": "CannonAP_Light",
+        "spread": "120",
+        "tag": "CannonAP",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7132",
       "reloaddelay": "80",
       "requires": "!rank-elite",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^Warhead_CannonHE_Medium",
-       "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium",
-       "^RA2TankDestroyerCannon"
+       "^Effect_Explosion_Small_RA2",
+       "^Projectile_Shell_Light",
+       "^Warhead_CannonAP"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium",
-       "^Warhead_CannonAP_Light"
+       "^Warhead_CannonAP"
       ],
       "weapon": "NaxiHetzerDestroyer",
       "weapon_class_source": "template"
@@ -8483,13 +8478,13 @@
        {
         "damage": "40000",
         "falloff": "100, 0",
-        "spread": "80",
-        "tag": "CannonAP_Light",
+        "spread": "120",
+        "tag": "CannonAP",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "80",
@@ -8500,8 +8495,7 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium",
-       "^Warhead_CannonAP_Light"
+       "^Warhead_CannonAP"
       ],
       "weapon": "NaxiHetzerDestroyer_elite",
       "weapon_class_source": "template"
@@ -9701,26 +9695,24 @@
        {
         "damage": "28000",
         "falloff": "100, 0",
-        "spread": "80",
-        "tag": "CannonAP_Light",
+        "spread": "120",
+        "tag": "CannonAP",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7361",
       "reloaddelay": "75",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_CannonHE_Medium",
-       "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium",
-       "^RA2TankDestroyerCannon"
+       "^Effect_Explosion_Small_RA2",
+       "^Projectile_Shell_Light",
+       "^Warhead_CannonAP"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium",
-       "^Warhead_CannonAP_Light"
+       "^Warhead_CannonAP"
       ],
       "weapon": "NaxiAntiTankCannon",
       "weapon_class_source": "template"

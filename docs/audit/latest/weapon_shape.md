@@ -10,11 +10,11 @@ W5 counts structural flat-damage nodes, including zero/healing/ally-only nodes; 
 
 | check | what | count | ratchet |
 |---|---|--:|--:|
-| W1 | more than 3 inherits | **573** | 576 |
+| W1 | more than 3 inherits | **571** | 576 |
 | W2 | two or more `^Warhead_*` inherits | **200** | 210 |
 | W3 | two or more `^Projectile_*` inherits | **12** | 12 |
 | W4 | two or more `^Effect_*` inherits | **51** | 51 |
-| W5 | more than one resolved MAIN warhead | **303** | 389 |
+| W5 | more than one resolved MAIN warhead | **302** | 389 |
 | W6 | effect warheads declared LOCALLY | **694** | 694 |
 
 | I7 informational ΓÇö missing template | weapons |
@@ -26,7 +26,7 @@ W5 counts structural flat-damage nodes, including zero/healing/ally-only nodes; 
 _I7 is a REVIEW QUEUE, not a defect count ΓÇö an instant or utility weapon may legitimately have no projectile. Do not ratchet it without a per-weapon pass._
 
 
-## W1 ΓÇö more than 3 inherits (573 vs ratchet 576)
+## W1 ΓÇö more than 3 inherits (571 vs ratchet 576)
 
 | weapon | inherits | first four |
 |---|---|---|
@@ -34,7 +34,7 @@ _I7 is a REVIEW QUEUE, not a defect count ΓÇö an instant or utility weapon ma
 | `110mm_Gun` | 8 | `^Compatibility_CannonAP_LightFlat` ┬╖ `^Warhead_CannonHE_Heavy` ┬╖ `^Projectile_Shell_Heavy` ┬╖ `^Effect_CannonHE_Heavy` |
 | `120mmDualHV` | 4 | `^Warhead_CannonHE_Heavy` ┬╖ `^Projectile_Shell_Heavy` ┬╖ `^Effect_CannonHE_Heavy` ┬╖ `^HVProjectile` |
 | `120mmHV` | 4 | `^Warhead_CannonHE_Medium` ┬╖ `^Projectile_Shell_Medium` ┬╖ `^Effect_CannonHE_Medium` ┬╖ `^HVProjectile` |
-| `120mm_cobra` | 7 | `^Compatibility_CannonAP_LightFlat` ┬╖ `^Warhead_Demolition_Light` ┬╖ `^Warhead_Concussion_Medium` ┬╖ `^Warhead_CannonAP_Light` |
+| `120mm_cobra` | 7 | `^Warhead_CannonAP` ┬╖ `^Warhead_Demolition_Light` ┬╖ `^Warhead_Concussion_Medium` ┬╖ `^Warhead_CannonAP_Light` |
 | `120mm_td` | 5 | `^Compatibility_CannonHE_MediumFlat` ┬╖ `^MediumChemicalWeapon` ┬╖ `^LightChemicalWeapon` ┬╖ `^D2K_Cannon` |
 | `12MissilesSpawnerScud` | 7 | `^Warhead_Demolition_Heavy` ┬╖ `^Warhead_Flame_Medium` ┬╖ `^Projectile_Flame_Medium` ┬╖ `^Effect_Flame_Medium` |
 | `155mm` | 4 | `^Warhead_Concussion_Heavy` ┬╖ `^HeavyCannon` ┬╖ `^ShrapnelWeapon` ┬╖ `^Grenade` |
@@ -72,7 +72,7 @@ _I7 is a REVIEW QUEUE, not a defect count ΓÇö an instant or utility weapon ma
 | `AsianSubmarineBomb` | 5 | `^Compatibility_Demolition_HeavyFlat` ┬╖ `^Warhead_Demolition_Heavy` ┬╖ `^Effect_Demolition_Heavy` ┬╖ `^RA2Grenade` |
 
 
-_... and 533 more._
+_... and 531 more._
 
 
 ## W2 ΓÇö two or more `^Warhead_*` inherits (200 vs ratchet 210)
@@ -80,7 +80,7 @@ _... and 533 more._
 | weapon | warhead templates |
 |---|---|
 | `110mm_Gun` | `^Warhead_CannonHE_Heavy` ┬╖ `^Warhead_CannonAP_Light` |
-| `120mm_cobra` | `^Warhead_Demolition_Light` ┬╖ `^Warhead_Concussion_Medium` ┬╖ `^Warhead_CannonAP_Light` |
+| `120mm_cobra` | `^Warhead_CannonAP` ┬╖ `^Warhead_Demolition_Light` ┬╖ `^Warhead_Concussion_Medium` ┬╖ `^Warhead_CannonAP_Light` |
 | `12MissilesSpawnerScud` | `^Warhead_Demolition_Heavy` ┬╖ `^Warhead_Flame_Medium` |
 | `APCGun` | `^Warhead_Bullet_Medium` ┬╖ `^Warhead_Flak_Medium` |
 | `APCGunAllies` | `^Warhead_Bullet_Medium` ┬╖ `^Warhead_Flak_Medium` |
@@ -191,7 +191,7 @@ _... and 160 more._
 _... and 11 more._
 
 
-## W5 ΓÇö more than one resolved MAIN warhead (303 vs ratchet 389)
+## W5 ΓÇö more than one resolved MAIN warhead (302 vs ratchet 389)
 
 | weapon | mains | which |
 |---|---|---|
@@ -237,7 +237,7 @@ _... and 11 more._
 | `D2K_SiegeQuad` | 4 | `CannonHE_Medium` ┬╖ `Concussion_Medium` ┬╖ `Demolition_Heavy` ┬╖ `Demolition_Light` |
 
 
-_... and 263 more._
+_... and 262 more._
 
 
 ## W6 ΓÇö effect warheads declared LOCALLY (694 vs ratchet 694)
