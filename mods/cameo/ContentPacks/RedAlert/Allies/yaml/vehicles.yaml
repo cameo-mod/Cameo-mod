@@ -38,8 +38,8 @@ ra1_allies_alliedlighttank:
 		RecoilRecovery: 25
 		LocalOffset: 768,0,90
 		MuzzleSequence: muzzle
-	FirepowerMultiplier@HighExplosionShell:
-		Modifier: 50
+	# FirepowerMultiplier@HighExplosionShell:
+		# Modifier: 50
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -166,8 +166,8 @@ ra1_allies_alliedheavyaatank:
 		Recoil: 43
 		LocalOffset: 800,80,360, 800,-80,360
 		MuzzleSequence: muzzle
-	FirepowerMultiplier@ra1_allies_alliedheavyaatank:
-		Modifier: 25
+	# FirepowerMultiplier@ra1_allies_alliedheavyaatank:
+		# Modifier: 25
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -357,6 +357,7 @@ ra1_allies_ranger:
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 ra1_allies_minelayer:
 	Inherits: ^Tank
+	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@mines: ^DeployToClearMines
 	Inherits@rearm: ^RearmAtServiceDepot
 	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
@@ -476,8 +477,8 @@ ra1_allies_sheridanassaulttank:
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 4
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
-	FirepowerMultiplier@MultiWeapon:
-		Modifier: 25
+	# FirepowerMultiplier@MultiWeapon:
+		# Modifier: 25
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -820,7 +821,7 @@ ra1_allies_chronotank:
 
 ra1_allies_phasetransport:
 	Inherits: ^Vehicle
-	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@Template: ^ArmedTroopTransportTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove

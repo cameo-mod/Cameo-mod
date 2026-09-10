@@ -39,8 +39,8 @@ ra1_allies_blackhawk:
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
-	FirepowerMultiplier@DualWeapon:
-		Modifier: 25
+	# FirepowerMultiplier@DualWeapon:
+		# Modifier: 25
 	AttackAircraft:
 		FacingTolerance: 10
 		AttackType: Hover
@@ -365,8 +365,8 @@ ra1_allies_rapierjumpjet:
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
-	FirepowerMultiplier@DualWeapon:
-		Modifier: 50
+	# FirepowerMultiplier@DualWeapon:
+		# Modifier: 50
 	AttackAircraft:
 		FacingTolerance: 40
 		StrafeRunLength: 2500

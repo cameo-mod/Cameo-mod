@@ -217,7 +217,21 @@ class ByteEquivalenceGoldenTest(unittest.TestCase):
 
     def test_pricing_output_matches_pre_change_golden(self):
         rs = Ruleset(ROOT)
+        # The census reads authored rows, so restore the exact reviewed source
+        # checkpoint as well as the original template set for this legacy test.
+        from reviewed_weapon_history import (
+            missile_role_changes, missile_parent_role_changes, restore_missile_role)
+        for name in missile_role_changes().keys() | missile_parent_role_changes().keys():
+            rs.weapons[name] = restore_missile_role(self, rs.weapon(name), source=True)
         rs.weapons.pop("^Warhead_CannonAP", None)
+        # The later Sonic additions alter the live diagnostic shield census.
+        # This frozen wiring-equivalence test retains its original family set.
+        sonic_additions = [name for name in rs.weapons if name.startswith((
+            '^Warhead_BulletSonic_', '^Warhead_MissileSonic_',
+            '^Warhead_CannonSonic_', '^Warhead_BlastSonic_'))]
+        self.assertEqual(len(sonic_additions), 12)
+        for name in sonic_additions:
+            rs.weapons.pop(name)
         legacy = json.loads((self.GOLDEN.parent / "heaviness_legacy_ts90mm.json").read_text(encoding="utf-8"))
 
         def from_obj(key, value):

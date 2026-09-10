@@ -249,6 +249,7 @@ eden_EMP:
 		Damage: 1000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaChargedWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -261,6 +262,7 @@ eden_EMP:
 		Damage: 1000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -274,6 +276,7 @@ eden_EMP:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -288,6 +291,7 @@ eden_EMP:
 		Damage: 1000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -296,6 +300,8 @@ eden_EMP:
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
+		InvalidTargets: Air
+		ValidTargets: Ground, Water
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumCannon: SpreadDamage
@@ -303,6 +309,8 @@ eden_EMP:
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
+		InvalidTargets: Air
+		ValidTargets: Ground, Water
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumMissile: SpreadDamage
@@ -310,6 +318,8 @@ eden_EMP:
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@HeavyMissile: SpreadDamage
@@ -317,13 +327,14 @@ eden_EMP:
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPCompatibility: AffectsIntegrity
 		Damage: 32000
 		Spread: 1600
-		InvalidTargets: Shielded
+		InvalidTargets: Shielded, Air
 		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
 		ValidRelationships: Neutral, Enemy
 	-Warhead@TeslaChargedWeapon:
@@ -340,6 +351,7 @@ eden_EMP:
 	-Warhead@Tesla_Super_ExtraDamage:
 	-Warhead@EMPUnit:
 	Warhead@Tesla_Super:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -350,7 +362,7 @@ eden_EMP:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		InvalidTargets: wall
+		InvalidTargets: wall, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		PhysicalStateName: Temperature
@@ -370,12 +382,78 @@ eden_EMP_AA:
 	Projectile: Missile
 		VerticalRateOfTurn: 12
 
+	Warhead@Tesla_Super:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@TeslaChargedWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@TeslaWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@MediumFlameWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@ShrapnelWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@HeavyCannonPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@MediumCannonPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@MediumMissilePercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@HeavyMissilePercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@EMPCompatibility:
+		InvalidTargets: Shielded
+		ValidTargets: Air
+	Warhead@TemperatureCompatibility:
+		InvalidTargets: wall
+		ValidTargets: Air
 edenTiger_EMP:
 	Inherits: eden_EMP
 	ReloadDelay: 41
 	Range: 6000
 	MinRange: 1200
 
+	Warhead@Tesla_Super:
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
+	Warhead@TeslaChargedWeaponPercentage:
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
+	Warhead@TeslaWeaponPercentage:
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
+	Warhead@MediumFlameWeaponPercentage:
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
+	Warhead@ShrapnelWeaponPercentage:
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
+	Warhead@HeavyCannonPercentage:
+		InvalidTargets: Air
+		ValidTargets: Ground, Water
+	Warhead@MediumCannonPercentage:
+		InvalidTargets: Air
+		ValidTargets: Ground, Water
+	Warhead@MediumMissilePercentage:
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
+	Warhead@HeavyMissilePercentage:
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
+	Warhead@EMPCompatibility:
+		InvalidTargets: Shielded, Air
+		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
+	Warhead@TemperatureCompatibility:
+		InvalidTargets: wall, Air
+		ValidTargets: Ground, Water, Air
 edenTiger_EMP_AA:
 	Inherits: edenTiger_EMP
 	Range: 9000
@@ -385,15 +463,84 @@ edenTiger_EMP_AA:
 	Projectile: Missile
 		VerticalRateOfTurn: 12
 
+	Warhead@Tesla_Super:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@TeslaChargedWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@TeslaWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@MediumFlameWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@ShrapnelWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@HeavyCannonPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@MediumCannonPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@MediumMissilePercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@HeavyMissilePercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@EMPCompatibility:
+		InvalidTargets: Shielded
+		ValidTargets: Air
+	Warhead@TemperatureCompatibility:
+		InvalidTargets: wall
+		ValidTargets: Air
 eden_GP_EMP:
 	Inherits: plymouth_EMP
 	ReloadDelay: 30
 	Warhead@2Ext: GrantExternalCondition
+		InvalidTargets: Air
 		Condition: empdisable
 		Duration: 150
 		Range: 768
 		ValidTargets: Vehicle
 
+	Warhead@Tesla_Super:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@TeslaChargedWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
+	Warhead@TeslaWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@MediumFlameWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@ShrapnelWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@HeavyCannonPercentage:
+		ValidTargets: Ground, Water
+		InvalidTargets: Air
+	Warhead@MediumCannonPercentage:
+		ValidTargets: Ground, Water
+		InvalidTargets: Air
+	Warhead@MediumMissilePercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@HeavyMissilePercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@EMPCompatibility:
+		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
+		InvalidTargets: Shielded, Air
+	Warhead@TemperatureCompatibility:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: wall, Air
 edenMobileThorsHammer:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
@@ -717,6 +864,7 @@ plymouth_EMP:
 		Damage: 1000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaChargedWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -729,6 +877,7 @@ plymouth_EMP:
 		Damage: 1000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -742,6 +891,7 @@ plymouth_EMP:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -756,6 +906,7 @@ plymouth_EMP:
 		Damage: 1000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -764,6 +915,8 @@ plymouth_EMP:
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
+		InvalidTargets: Air
+		ValidTargets: Ground, Water
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumCannon: SpreadDamage
@@ -771,6 +924,8 @@ plymouth_EMP:
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
+		InvalidTargets: Air
+		ValidTargets: Ground, Water
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumMissile: SpreadDamage
@@ -778,6 +933,8 @@ plymouth_EMP:
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@HeavyMissile: SpreadDamage
@@ -785,13 +942,14 @@ plymouth_EMP:
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPCompatibility: AffectsIntegrity
 		Damage: 32000
 		Spread: 1600
-		InvalidTargets: Shielded
+		InvalidTargets: Shielded, Air
 		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
 		ValidRelationships: Neutral, Enemy
 	-Warhead@TeslaChargedWeapon:
@@ -808,6 +966,7 @@ plymouth_EMP:
 	-Warhead@Tesla_Super_ExtraDamage:
 	-Warhead@EMPUnit:
 	Warhead@Tesla_Super:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -818,7 +977,7 @@ plymouth_EMP:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		InvalidTargets: wall
+		InvalidTargets: wall, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		PhysicalStateName: Temperature
@@ -836,15 +995,84 @@ plymouth_EMP_AA:
 	ValidTargets: Air
 
 #Also used by Eden
+	Warhead@Tesla_Super:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@TeslaChargedWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@TeslaWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@MediumFlameWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@ShrapnelWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@HeavyCannonPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@MediumCannonPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@MediumMissilePercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@HeavyMissilePercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@EMPCompatibility:
+		InvalidTargets: Shielded
+		ValidTargets: Air
+	Warhead@TemperatureCompatibility:
+		InvalidTargets: wall
+		ValidTargets: Air
 plymouth_Tiger_EMP:
 	Inherits: plymouth_EMP
 	ReloadDelay: 40
 	Warhead@2Ext: GrantExternalCondition
+		InvalidTargets: Air
 		Condition: empdisable
 		Duration: 150
 		Range: 768
 		ValidTargets: Vehicle
 
+	Warhead@Tesla_Super:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@TeslaChargedWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
+	Warhead@TeslaWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@MediumFlameWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@ShrapnelWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@HeavyCannonPercentage:
+		ValidTargets: Ground, Water
+		InvalidTargets: Air
+	Warhead@MediumCannonPercentage:
+		ValidTargets: Ground, Water
+		InvalidTargets: Air
+	Warhead@MediumMissilePercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@HeavyMissilePercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@EMPCompatibility:
+		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
+		InvalidTargets: Shielded, Air
+	Warhead@TemperatureCompatibility:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: wall, Air
 MiniNova:
 	Inherits: MiniNuke
 	Warhead@Effect: CreateEffect

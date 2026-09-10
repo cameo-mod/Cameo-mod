@@ -132,8 +132,18 @@
   },
   "reference_hp": 200000,
   "reference_hp_measured": 73750,
-  "shield_hp_factor": 0.5646,
-  "shield_versus_mean": 177.11
+  "shield_hp_factor": 0.5547,
+  "shield_versus_mean": 180.28
+ },
+ "weapon_efficiency": {
+  "DEADZONE_WEIGHT": 1.0,
+  "RANGE_BOUNDS": [
+   0.75,
+   1.5
+  ],
+  "RANGE_WEIGHT": 0.25,
+  "TARGETS_FLOOR": 0.5,
+  "median_weapon_range": 5938
  },
  "weapon_timing": {
   "ENGINE_DEFAULT_BURST": 1,

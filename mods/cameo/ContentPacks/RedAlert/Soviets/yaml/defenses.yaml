@@ -291,16 +291,16 @@ ra1_soviets_samsite:
 		PlayerPalette: raplayer
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
-	DamageMultiplier@2x1Shape:
-		Modifier: 75
+	# DamageMultiplier@2x1Shape:
+		# Modifier: 75
 	Power:
 		Amount: -35
 	RevealsShroud:
 		Range: 12790
 	DetectCloaked:
 		Range: 6395
-	FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets:
-		Modifier: 110
+	# FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets:
+		# Modifier: 110
 	RangeMultiplier@ra1_soviets_upgrade_thermobaricrockets:
 		Modifier: 110
 	RevealsShroudMultiplier@ra1_soviets_upgrade_thermobaricrockets:

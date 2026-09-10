@@ -61,6 +61,8 @@ def child(node, key):
     return next((item for item in node.children if item.key == key), None)
 
 
+from reviewed_weapon_history import restore_target_policy_fields
+
 class LaserBulkProfileTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -130,7 +132,7 @@ class LaserBulkProfileTests(unittest.TestCase):
             "NaxiBeetleLaser_elite",
             "NaxiTank2Laser",
         ):
-            weapon = self.rules.resolve_weapon(name)
+            weapon = restore_target_policy_fields(self, self.rules.resolve_weapon(name))
             laser = child(weapon, "Warhead@Laser_Heavy")
             self.assertEqual("Ally, Neutral, Enemy", child(laser, "ValidRelationships").value, name)
             self.assertEqual("50", child(laser, "FriendlyFireDamage").value, name)

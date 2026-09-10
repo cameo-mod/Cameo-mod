@@ -29,6 +29,8 @@ M16Laser:
 td_nod_samsite_dragon:
 	Inherits: Dragon
 
+	Warhead@MissileAA_Heavy:
+		ValidTargets: Air
 td_nod_rocketsoldier_rockets:
 	Inherits: Rockets
 
@@ -55,7 +57,10 @@ td_nod_ssmlauncher_honestjohn:
 
 td_nod_ballisticmissilesubmarine_honestjohn:
 	Inherits: HonestJohn
-
+	Warhead@MissileFire_Heavy:
+		PercentageDenominator: 10000
+		PercentageScale: 10000
+		Damage: 100000
 td_nod_flamethrower_flamethrowerexplode:
 	Inherits: Flamethrower
 	Warhead@Flame_Light:
@@ -81,8 +86,10 @@ td_nod_laserturret_laser:
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFF
 	Warhead@Laser_Medium:
+		InvalidTargets: Air
 		Damage: 12000
 	Warhead@Laser_Medium_ExtraDamage:
+		InvalidTargets: Air
 		Spread: 300
 		Damage: 600
 		Versus:
@@ -109,6 +116,8 @@ td_nod_laserturret_laser:
 	# Warhead@EffectAir: CreateEffect
 	# 	-ImpactSounds:
 
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 td_nod_laserturret_nodturretlaserinferno:
 	Inherits@wh: ^Warhead_Inferno_Medium
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -284,12 +293,14 @@ td_nod_reconbike_rocket:
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 4000
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 4000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 2000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 4000
@@ -306,7 +317,7 @@ td_nod_reconbike_rocket:
 	-Warhead@FlakWeapon:
 	-Warhead@LightMissile:
 	Warhead@MissileAP_Medium:
-		ValidTargets: Ground, Water
+		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 0
 	Warhead@CollapseTargetCompatibility1: AreaDamage
@@ -651,8 +662,13 @@ td_nod_obeliskoflight_laserobeliskburning:
 		TrackTarget: false
 		Inaccuracy: 0
 	Warhead@Inferno_Heavy:
+		InvalidTargets: Air
 		Damage: 120000
 	-Warhead@Laser_Heavy:
+	Warhead@Laser_Heavy_ExtraDamage:
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 td_nod_chemicalrocketsoldier_chemrockets:
 	Inherits@collapsewh: ^Warhead_Chemical_Light
 	Inherits: ^Grenade
@@ -906,12 +922,15 @@ td_nod_buggymkii_machinegunbuggy2:
 	Report: mgun11.aud
 	ValidTargets: Ground, Water
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
+		PercentageDenominator: 200
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
+		PercentageDenominator: 200
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@ChaingunPercentage: AreaDamagePercentage
+		PercentageDenominator: 200
 		ValidTargets: Ground, Water
 		Damage: 1
 	-TargetActorCenter:
@@ -920,7 +939,7 @@ td_nod_buggymkii_machinegunbuggy2:
 	-Warhead@Chaingun:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
-		Damage: 6000
+		Damage: 3000
 		FriendlyFireDamage: 100
 		FriendlyFireSpread: 100
 		PercentageScale: 0
@@ -938,10 +957,23 @@ td_nod_buggymkii_machinegunbuggy2_AA:
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@Bullet_Medium: AreaDamage
+		Damage: 3000
 		ValidTargets: Air
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 
+	Warhead@HeavyCannonPercentage:
+		PercentageDenominator: 200
+		Damage: 1
+		ValidTargets: Air
+	Warhead@SmallArmsPercentage:
+		PercentageDenominator: 200
+		Damage: 1
+		ValidTargets: Air
+	Warhead@ChaingunPercentage:
+		PercentageDenominator: 200
+		Damage: 1
+		ValidTargets: Air
 td_nod_buggymkii_laserbuggy2:
 	Inherits@wh: ^Warhead_Laser_Light
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -962,10 +994,16 @@ td_nod_buggymkii_laserbuggy2:
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFF
 	Warhead@Laser_Light:
-		Damage: 6000
+		PercentageDenominator: 10000
+		PercentageScale: 10000
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
+		Damage: 3000
 	Warhead@Laser_Light_ExtraDamage:
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
 		Spread: 300
-		Damage: 600
+		Damage: 300
 		Versus:
 			REFLECTOR: 50
 			Shield: 100
@@ -1006,7 +1044,9 @@ td_nod_buggymkii_laserbuggy2inferno:
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFF
 	Warhead@Inferno_Light:
-		Damage: 6000
+		PercentageDenominator: 10000
+		PercentageScale: 10000
+		Damage: 3000
 td_nod_buggymkii_laserbuggy2burning:
 	Inherits: td_nod_buggymkii_laserbuggy2inferno
 	Burst: 10
@@ -1016,23 +1056,42 @@ td_nod_buggymkii_laserbuggy2burning:
 	Projectile: LaserZap
 		TrackTarget: false
 		Inaccuracy: 0
-
+	Warhead@Inferno_Light:
+		PercentageDenominator: 10000
+		PercentageScale: 10000
+		Damage: 3000
 td_nod_buggymkii_laserbuggy2_AA:
 	Inherits: td_nod_buggymkii_laserbuggy2
 	Range: 7911
 	ValidTargets: Air
 
+	Warhead@Laser_Light:
+		PercentageDenominator: 10000
+		PercentageScale: 10000
+		Damage: 3000
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@Laser_Light_ExtraDamage:
+		Damage: 300
+		-InvalidTargets:
+		ValidTargets: Air
 td_nod_buggymkii_laserbuggy2_AAinferno:
 	Inherits: td_nod_buggymkii_laserbuggy2inferno
 	Range: 7911
 	ValidTargets: Air
 	Warhead@Inferno_Light:
+		PercentageDenominator: 10000
+		PercentageScale: 10000
+		Damage: 3000
 		ValidTargets: Air
 td_nod_buggymkii_laserbuggy2_AAburning:
 	Inherits: td_nod_buggymkii_laserbuggy2burning
 	Range: 7911
 	ValidTargets: Air
 	Warhead@Inferno_Light:
+		PercentageDenominator: 10000
+		PercentageScale: 10000
+		Damage: 3000
 		ValidTargets: Air
 td_nod_buggymkii_fireballlauncherbuggy2:
 	Inherits@roleflat: ^Compatibility_Flame_MediumFlat
@@ -1057,8 +1116,9 @@ td_nod_buggymkii_fireballlauncherbuggy2:
 	-Warhead@Flame_Light:
 	-Warhead@Flame_Medium:
 	Warhead@Flame_MediumFlatCompatibility:
+		PercentageDenominator: 10000
 		ValidTargets: Ground, Water
-		Damage: 6000
+		Damage: 3000
 		PercentageScale: 9984
 td_nod_lighttankmkii_lighttank2cannon:
 	Inherits@collapsewh: ^Warhead_CannonHE_Medium
@@ -1167,16 +1227,19 @@ td_nod_lasertrooper_blackhandlaser:
 	TargetActorCenter: false
 	-Warhead@TankDestroyerCannon:
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-		Damage: 4
+		PercentageDenominator: 2500
+		ValidTargets: Ground, Water, Air
+		Damage: 108
 	-Warhead@FlakWeapon:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
-		Damage: 4
+		PercentageDenominator: 2500
+		Damage: 108
 	-Warhead@LaserWeapon:
 	-Warhead@LaserExtraDamage:
 	Warhead@LegacyLaserExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
-		Damage: 600
+		Damage: 648
 		Versus:
 			REFLECTOR: 50
 			Shield: 100
@@ -1199,10 +1262,11 @@ td_nod_lasertrooper_blackhandlaser:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
+		PercentageDenominator: 2500
 		ValidTargets: Ground, Water, Air
-		Damage: 4
+		Damage: 108
 	Warhead@Laser_Heavy:
-		Damage: 30000
+		Damage: 32400
 		PercentageScale: 0
 	-Warhead@Laser_Heavy_ExtraDamage:
 
@@ -1251,24 +1315,29 @@ td_nod_stealthsoldier_bhreddarts:
 		ContrailEndColor: FFFFFF
 		ContrailStartColor: ff0000
 	Warhead@TeslaChargedWeaponPercentage: AreaDamagePercentage
+		PercentageDenominator: 5000
 		ValidTargets: Ground, Water, Air
-		Damage: 2
+		Damage: 81
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		PercentageDenominator: 5000
 		ValidTargets: Ground, Water, Air
-		Damage: 2
+		Damage: 81
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@ChaingunPercentage: AreaDamagePercentage
+		PercentageDenominator: 5000
 		ValidTargets: Ground, Water, Air
-		Damage: 2
+		Damage: 81
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		PercentageDenominator: 5000
 		ValidTargets: Ground, Water, Air
-		Damage: 2
+		Damage: 81
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
+		PercentageDenominator: 5000
 		ValidTargets: Ground, Water, Air
-		Damage: 2
+		Damage: 81
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPCompatibility: AffectsIntegrity
 		Damage: 5000
@@ -1286,7 +1355,7 @@ td_nod_stealthsoldier_bhreddarts:
 	-Warhead@EMPUnit:
 	Warhead@Tesla_Super:
 		ValidTargets: Ground, Water, Air
-		Damage: 22000
+		Damage: 17820
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		IntegrityScale: 0
 		PercentageScale: 0
@@ -1638,7 +1707,12 @@ td_nod_minigunner_minigun:
 	BurstDelays: 2
 	Report: mgun2.aud
 	Warhead@Bullet_Light:
-		Damage: 2000
+		PercentageDenominator: 10000
+		PercentageScale: 10000
+		InvalidTargets: Air
+		Damage: 580
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 td_nod_minigunner_minigun_laser:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits: ^SmallArms
@@ -1656,15 +1730,27 @@ td_nod_minigunner_minigun_laser:
 	TargetActorCenter: false
 	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
-		Damage: 1
+		PercentageDenominator: 10000
+		InvalidTargets: Air
+		Damage: 29
 	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
-		Damage: 1
+		PercentageDenominator: 10000
+		InvalidTargets: Air
+		Damage: 29
 	-Warhead@LaserWeapon:
 	-Warhead@LaserExtraDamage:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
-		Damage: 1
+		PercentageDenominator: 10000
+		InvalidTargets: Air
+		Damage: 29
 	Warhead@Laser_Heavy:
-		Damage: 6000
+		InvalidTargets: Air
+		Damage: 1740
 		PercentageScale: 0
 	-Warhead@Laser_Heavy_ExtraDamage:
+	Warhead@ShieldHit:
+		InvalidTargets: Air
+	Warhead@LegacyLaserExtraDamage:
+		Damage: 174
+		InvalidTargets: Air

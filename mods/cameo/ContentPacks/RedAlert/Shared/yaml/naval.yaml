@@ -663,15 +663,15 @@ ra1_soviets_missilesubmarine:
 		CloakDelay: 100
 	Voiced:
 		VoiceSet: RussianVehicleVoice
-	FirepowerMultiplier@MissileSubBuff:
-		Modifier: 200
+	# FirepowerMultiplier@MissileSubBuff:
+		# Modifier: 200
 	RangeMultiplier@MissileSubBuff:
 		Modifier: 200
 	RenderSprites:
 		Image: ramsub
 		#PlayerPalette: raplayer
-	FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets:
-		Modifier: 110
+	# FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets:
+		# Modifier: 110
 	RangeMultiplier@ra1_soviets_upgrade_thermobaricrockets:
 		Modifier: 110
 	RevealsShroudMultiplier@ra1_soviets_upgrade_thermobaricrockets:

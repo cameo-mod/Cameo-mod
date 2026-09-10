@@ -234,6 +234,11 @@ def model_limitations(resolved) -> list[str]:
     projectile = resolved.child("Projectile")
     projectile_type = projectile.value if projectile is not None else None
     limitations = []
+    if any(c.key.startswith("Warhead@") and c.value == "FireShrapnel"
+           for c in resolved.children):
+        # Separate scenario accounting exists, but canonical weapon pricing does
+        # not yet select a target-availability/random-hit convention for it.
+        limitations.append("unmodeled_secondary_payload:FireShrapnel")
     if projectile_type == "AreaBeam":
         # Cadence for one actor is modeled, but Width/line length and secondary
         # actors returned by FindActorsOnLine are not yet priced.

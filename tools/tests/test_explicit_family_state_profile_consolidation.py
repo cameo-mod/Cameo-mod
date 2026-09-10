@@ -62,7 +62,7 @@ class ExplicitFamilyStateProfileTests(unittest.TestCase):
                 cls.by_kind[change[0]][weapon] = change[1:]
 
     def test_converter_is_fully_applied_and_fail_closed(self):
-        with self.assertRaisesRegex(RuntimeError, "non-selected behavior"):
+        with self.assertRaisesRegex(RuntimeError, "route/relationship contract changed"):
             cohort.inspect(self.rules)
         self.assertTrue(cohort.inspect(HistoricalView(self, self.rules)))
         self.assertEqual(EXPECTED_EXPANSION, cohort.STATE_EXPANSION)

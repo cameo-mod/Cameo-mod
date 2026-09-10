@@ -1289,6 +1289,7 @@ ixian_farasha:
 		Damage: 1000
 		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@HeavyFlameWeapon: AreaDamage
@@ -1300,6 +1301,7 @@ ixian_farasha:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 1
 		PhysicalStateName: Temperature
@@ -1308,6 +1310,7 @@ ixian_farasha:
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Effect: CreateEffect
@@ -1324,10 +1327,14 @@ ixian_farasha:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
 	Warhead@Laser_MediumFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 8000
 		PercentageScale: 0
 
+	Warhead@EMPUnit:
+		InvalidTargets: Shielded, Air
+		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
 d2k_farasha_aa:
 	Inherits: ixian_farasha
 	-FirstBurstTargetOffset:
@@ -1341,6 +1348,7 @@ d2k_farasha_aa:
 		ValidTargets: Air
 		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@HeavyFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -1350,22 +1358,28 @@ d2k_farasha_aa:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
+		-InvalidTargets:
 		ValidTargets: Air
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@RailgunWeapon: SpreadDamage
 		ValidTargets: Air
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
+		-InvalidTargets:
 		ValidTargets: Air
 	-Warhead@HeavyFlameWeapon:
 	-Warhead@RailgunWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
 	Warhead@Laser_MediumFlatCompatibility:
+		-InvalidTargets:
 		ValidTargets: Air
 		Damage: 8000
 		PercentageScale: 0
 
+	Warhead@EMPUnit:
+		InvalidTargets: Shielded
+		ValidTargets: Air
 farasha_drone_ixian:
 	Inherits@wh: ^Warhead_Inferno_Light
 	Inherits@proj: ^Projectile_Laser_Heavy

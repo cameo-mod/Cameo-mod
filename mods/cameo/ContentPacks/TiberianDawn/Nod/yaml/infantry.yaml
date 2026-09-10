@@ -17,12 +17,12 @@ td_nod_minigunner:
 		HP: 30000
 	ChangesHealth@SelfHealing:
 		Step: 30
-	DamageMultiplier@ScoutInfantryBuff:
-		Modifier: 100
-	FirepowerMultiplier@ScoutInfantryBuff:
-		Modifier: 100
-	FirepowerMultiplier@td_nod_minigunner:
-		Modifier: 29
+	# DamageMultiplier@ScoutInfantryBuff:
+		# Modifier: 100
+	# FirepowerMultiplier@ScoutInfantryBuff:
+		# Modifier: 100
+	# FirepowerMultiplier@td_nod_minigunner:
+		# Modifier: 29
 	Tooltip:
 		Name: Nod Minigunner
 	Buildable:
@@ -357,8 +357,8 @@ td_nod_lasertrooper:
 		Step: 60
 	Mobile:
 		Speed: 51
-	FirepowerMultiplier@PromotionUnit:
-		Modifier: 108
+	# FirepowerMultiplier@PromotionUnit:
+		# Modifier: 108
 	Armament@PRIMARY:
 		Weapon: td_nod_lasertrooper_blackhandlaser
 		LocalOffset: 600,0,450
@@ -489,8 +489,8 @@ td_nod_stealthsoldier:
 	ActorStatValues:
 		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
 
-	FirepowerMultiplier:
-		Modifier: 81
+	# FirepowerMultiplier:
+		# Modifier: 81
 td_nod_lasercommando:
 	Inherits: ^Soldier
 	Inherits@deathanim: ^RA2InfantryDeathAnimations

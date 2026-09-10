@@ -164,12 +164,12 @@ class AnchorMembershipTests(unittest.TestCase):
         units = {name: record for _, _, name, record in readiness.load_units()}
         rows = readiness.anchor_membership_evidence(anchors, units)
         pending = [row for row in rows if row['status'] != 'member']
-        self.assertEqual(len(pending), 1, 'unexpected anchor membership discrepancy')
-        row = pending[0]
+        self.assertEqual(len(pending), 0, 'unexpected anchor membership discrepancy')
+        row = next(r for r in rows if r['class'] == 'armed_troop_transport')
         self.assertEqual((row['class'], row['anchor_actor'], row['actual_class'], row['status']),
-                         ('armed_troop_transport', 'td_gdi_apc', 'support', 'pending'))
-        self.assertFalse(row['membership_ready'])
-        self.assertEqual(row['current_members'], 0)
+                         ('armed_troop_transport', 'td_gdi_apc', 'armed_troop_transport', 'member'))
+        self.assertTrue(row['membership_ready'])
+        self.assertEqual(row['current_members'], 3)
         declaration = anchors['armed_troop_transport']['membership_pending']
         self.assertEqual(declaration['required_subtype'], 'ArmedTroopTransport')
         self.assertEqual(declaration['current_class'], 'support')

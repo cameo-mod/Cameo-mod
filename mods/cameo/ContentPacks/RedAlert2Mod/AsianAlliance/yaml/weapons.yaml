@@ -272,6 +272,7 @@ AsianMaidenBow:
 		DamageCalculationType: ClosestTargetablePosition
 		ValidTargets: Ground, Water, Air
 	Warhead@GrenadePercentage: AreaDamagePercentage
+		-InvalidTargets:
 		Damage: 1
 		Spread: 250
 		Falloff: 100, 75, 50, 25
@@ -286,6 +287,7 @@ AsianMaidenBow:
 		DamageCalculationType: ClosestTargetablePosition
 		ValidTargets: Ground, Water, Air
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: wall
 		Damage: 1
 		Spread: 250
 		Falloff: 100, 75, 50, 25
@@ -308,6 +310,7 @@ AsianMaidenBow:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	Warhead@Arrow_LightFlatCompatibility:
+		-InvalidTargets:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		PercentageScale: 0
@@ -471,6 +474,21 @@ AsianMaidenBow:
 	-Warhead@PreservedFlat_MediumMissile:
 	-Warhead@PreservedFlat_TeslaWeapon:
 
+	Warhead@MediumMissilePercentage:
+		-InvalidTargets:
+		ValidTargets: Ground, Water, Air
+	Warhead@FlakWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Ground, Water, Air
+	Warhead@EMPUnit:
+		InvalidTargets: Shielded
+		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
+	Warhead@TeslaWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Ground, Water, Air
+	Warhead@MagicWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Ground, Water, Air
 AsianMaidenBow_elite:
 	Inherits: AsianMaidenBow
 	Range: 7740
@@ -480,6 +498,7 @@ AsianMaidenBow_elite:
 		Spread: 125
 	-Warhead@GrenadeFriendlyFire:
 	Warhead@Arrow_LightFlatCompatibility:
+		-InvalidTargets:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		PercentageScale: 0
@@ -641,6 +660,27 @@ AsianMaidenBow_elite:
 	-Warhead@PreservedFlat_MagicWeapon:
 	-Warhead@PreservedFlat_MediumMissile:
 	-Warhead@PreservedFlat_TeslaWeapon:
+	Warhead@MediumMissilePercentage:
+		-InvalidTargets:
+		ValidTargets: Ground, Water, Air
+	Warhead@FlakWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Ground, Water, Air
+	Warhead@EMPUnit:
+		InvalidTargets: Shielded
+		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
+	Warhead@TeslaWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Ground, Water, Air
+	Warhead@MagicWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Ground, Water, Air
+	Warhead@GrenadePercentage:
+		-InvalidTargets:
+		ValidTargets: Ground, Water, Air
+	Warhead@ArrowWeaponPercentage:
+		InvalidTargets: wall
+		ValidTargets: Ground, Water, Air
 AsianNinjaStar:
 	Inherits@wh: ^Warhead_Melee_Medium
 	Inherits@proj: ^Projectile_InstantHit
@@ -785,11 +825,12 @@ AsianPhotonCannon:
 		DamageCalculationType: ClosestTargetablePosition
 		ValidTargets: Ground, Water, Air
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
+		-InvalidTargets:
 		Damage: 1
 		Falloff: 100, 75, 50, 25
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Air
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 2000
 		Falloff: 100, 75, 50, 25
@@ -797,11 +838,12 @@ AsianPhotonCannon:
 		DamageCalculationType: ClosestTargetablePosition
 		ValidTargets: Ground, Water, Air
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		-InvalidTargets:
 		Damage: 1
 		Falloff: 100, 75, 50, 25
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Air
 	Warhead@MagicWeapon: SpreadDamage
 		Damage: 2000
 		Falloff: 100, 75, 50, 25
@@ -809,11 +851,12 @@ AsianPhotonCannon:
 		DamageCalculationType: ClosestTargetablePosition
 		ValidTargets: Ground, Water, Air
 	Warhead@MagicWeaponPercentage: AreaDamagePercentage
+		-InvalidTargets:
 		Damage: 1
 		Falloff: 100, 75, 50, 25
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Air
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 2000
 		Falloff: 100, 75, 50, 25
@@ -827,12 +870,15 @@ AsianPhotonCannon:
 		DamageCalculationType: ClosestTargetablePosition
 		ValidTargets: Ground, Water, Air
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		-InvalidTargets:
 		Damage: 1
 		Falloff: 100, 75, 50, 25
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Air
 	Warhead@EMPUnit: AffectsIntegrity
+		InvalidTargets: Shielded
+		ValidTargets: Air
 		Damage: 10000
 	Warhead@Effect: CreateEffect
 		Explosions: aa_pulsexp
@@ -875,7 +921,7 @@ AsianPhotonCannon:
 		Falloff: 100, 75, 50, 25
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@PreservedFlat_MagicExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Air
 		Spread: 444
 		Damage: 888
 		Falloff: 111, 88, 44, 22, 11
@@ -952,7 +998,7 @@ AsianPhotonCannon:
 		Falloff: 100, 75, 50, 25
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@PreservedFlat_TeslaExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Air
 		Falloff: 100, 75, 50, 25
 		Spread: 200
 		Damage: 1000
@@ -1008,7 +1054,8 @@ AsianPhotonCannon:
 	-Warhead@PreservedFlat_MediumMissile:
 	-Warhead@PreservedFlat_TeslaWeapon:
 	Warhead@Plasma_HeavyFlatCompatibility:
-		ValidTargets: Ground, Water, Air
+		-InvalidTargets:
+		ValidTargets: Air
 		Damage: 8000
 		PercentageScale: 0
 
@@ -1016,13 +1063,32 @@ AsianPhotonCannon_EMP:
 	Inherits@finalmain: ^Compatibility_Quantum_HeavyFlat
 	Inherits: AsianPhotonCannon
 	Warhead@EMPUnit: AffectsIntegrity
+		InvalidTargets: Shielded
+		ValidTargets: Air
 		Damage: 20000
 	-Warhead@Plasma_HeavyFlatCompatibility:
 	Warhead@Quantum_HeavyFlatCompatibility:
-		ValidTargets: Ground, Water, Air
+		-InvalidTargets:
+		ValidTargets: Air
 		Damage: 8000
 		PercentageScale: 0
 
+	Warhead@MediumMissilePercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@FlakWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@TeslaWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@MagicWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@PreservedFlat_MagicExtraDamage:
+		ValidTargets: Air
+	Warhead@PreservedFlat_TeslaExtraDamage:
+		ValidTargets: Air
 AsianQuasarAG:
 	Inherits: AsianPhotonCannon
 	ValidTargets: Ground, Water
@@ -1036,21 +1102,66 @@ AsianQuasarAG:
 		MaximumLaunchSpeed: 250
 		Inaccuracy: 500
 	Warhead@Plasma_HeavyFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 0
 
+	Warhead@MediumMissilePercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@FlakWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@EMPUnit:
+		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
+		InvalidTargets: Shielded, Air
+	Warhead@TeslaWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@MagicWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@PreservedFlat_MagicExtraDamage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@PreservedFlat_TeslaExtraDamage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
 AsianQuasarAG_EMP:
 	Inherits@finalmain: ^Compatibility_Quantum_HeavyFlat
 	Inherits: AsianQuasarAG
 	Warhead@EMPUnit: AffectsIntegrity
+		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
+		InvalidTargets: Shielded, Air
 		Damage: 20000
 	-Warhead@Plasma_HeavyFlatCompatibility:
 	Warhead@Quantum_HeavyFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 0
 
+	Warhead@MediumMissilePercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
+	Warhead@FlakWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@TeslaWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@MagicWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@PreservedFlat_MagicExtraDamage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@PreservedFlat_TeslaExtraDamage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
 AsianQuasar_AA:
 	Inherits@finalmain: ^Compatibility_MissileAA_MediumFlat
 	Inherits: AsianPhotonCannon
@@ -1066,22 +1177,62 @@ AsianQuasar_AA:
 		Inaccuracy: 250
 	-Warhead@Plasma_HeavyFlatCompatibility:
 	Warhead@MissileAA_MediumFlatCompatibility:
-		ValidTargets: Ground, Water, Air
+		-InvalidTargets:
+		ValidTargets: Air
 		Damage: 8000
 		PercentageScale: 0
 
+	Warhead@MediumMissilePercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@FlakWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@EMPUnit:
+		InvalidTargets: Shielded
+		ValidTargets: Air
+	Warhead@TeslaWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@MagicWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@PreservedFlat_MagicExtraDamage:
+		ValidTargets: Air
+	Warhead@PreservedFlat_TeslaExtraDamage:
+		ValidTargets: Air
 AsianQuasar_EMP_AA:
 	Inherits@finalmain: ^Compatibility_MissileQuantum_MediumFlat
 	Inherits: AsianQuasar_AA
 	Warhead@EMPUnit: AffectsIntegrity
+		InvalidTargets: Shielded
+		ValidTargets: Air
 		Damage: 20000
 	-Warhead@MissileAA_MediumFlatCompatibility:
 	Warhead@MissileQuantum_MediumFlatCompatibility:
-		ValidTargets: Ground, Water, Air
+		-InvalidTargets:
+		ValidTargets: Air
 		Damage: 8000
 		PercentageScale: 0
 
+	Warhead@MediumMissilePercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@FlakWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@TeslaWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@MagicWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@PreservedFlat_MagicExtraDamage:
+		ValidTargets: Air
+	Warhead@PreservedFlat_TeslaExtraDamage:
+		ValidTargets: Air
 AsianPunisherAG:
+	Inherits@heldmissilerole: ^Warhead_MissileHE_Medium
 	Inherits@finalmain: ^Compatibility_MissileAP_MediumFlat
 	Inherits: AsianPhotonCannon
 	ValidTargets: Ground, Water
@@ -1096,20 +1247,73 @@ AsianPunisherAG:
 		Inaccuracy: 240
 	-Warhead@Plasma_HeavyFlatCompatibility:
 	Warhead@MissileAP_MediumFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 0
+
+	Warhead@MediumMissilePercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@FlakWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@EMPUnit:
+		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
+		InvalidTargets: Shielded, Air
+	Warhead@TeslaWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@MagicWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@PreservedFlat_MagicExtraDamage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@PreservedFlat_TeslaExtraDamage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	-Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@MissileHE_Medium: AreaDamage
+		Damage: 8000
+		PercentageScale: 0
+		InvalidTargets: Air
 
 AsianPunisherAG_EMP:
 	Inherits@finalmain: ^Compatibility_MissileQuantum_MediumFlat
 	Inherits: AsianPunisherAG
 	Warhead@EMPUnit: AffectsIntegrity
+		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
+		InvalidTargets: Shielded, Air
 		Damage: 20000
 	-Warhead@MissileAP_MediumFlatCompatibility:
 	Warhead@MissileQuantum_MediumFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 0
+
+	Warhead@MediumMissilePercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
+	Warhead@FlakWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@TeslaWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@MagicWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@PreservedFlat_MagicExtraDamage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@PreservedFlat_TeslaExtraDamage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	-Warhead@MissileHE_Medium:
 
 AsianQuasarBoatAG:
 	Inherits: AsianPhotonCannon
@@ -1126,21 +1330,66 @@ AsianQuasarBoatAG:
 		MinimumLaunchSpeed: 192
 		Inaccuracy: 512
 	Warhead@Plasma_HeavyFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 0
 
+	Warhead@MediumMissilePercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@FlakWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@EMPUnit:
+		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
+		InvalidTargets: Shielded, Air
+	Warhead@TeslaWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@MagicWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@PreservedFlat_MagicExtraDamage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@PreservedFlat_TeslaExtraDamage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
 AsianQuasarBoatAG_EMP:
 	Inherits@finalmain: ^Compatibility_Quantum_HeavyFlat
 	Inherits: AsianQuasarBoatAG
 	Warhead@EMPUnit: AffectsIntegrity
+		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
+		InvalidTargets: Shielded, Air
 		Damage: 20000
 	-Warhead@Plasma_HeavyFlatCompatibility:
 	Warhead@Quantum_HeavyFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 0
 
+	Warhead@MediumMissilePercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
+	Warhead@FlakWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@TeslaWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@MagicWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@PreservedFlat_MagicExtraDamage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@PreservedFlat_TeslaExtraDamage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
 AsianQuasarBoat_AA:
 	Inherits@finalmain: ^Compatibility_MissileAA_MediumFlat
 	Inherits: AsianPhotonCannon
@@ -1158,21 +1407,60 @@ AsianQuasarBoat_AA:
 		Inaccuracy: 250
 	-Warhead@Plasma_HeavyFlatCompatibility:
 	Warhead@MissileAA_MediumFlatCompatibility:
-		ValidTargets: Ground, Water, Air
+		-InvalidTargets:
+		ValidTargets: Air
 		Damage: 8000
 		PercentageScale: 0
 
+	Warhead@MediumMissilePercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@FlakWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@EMPUnit:
+		InvalidTargets: Shielded
+		ValidTargets: Air
+	Warhead@TeslaWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@MagicWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@PreservedFlat_MagicExtraDamage:
+		ValidTargets: Air
+	Warhead@PreservedFlat_TeslaExtraDamage:
+		ValidTargets: Air
 AsianQuasarBoat_EMP_AA:
 	Inherits@finalmain: ^Compatibility_MissileQuantum_MediumFlat
 	Inherits: AsianQuasarBoat_AA
 	Warhead@EMPUnit: AffectsIntegrity
+		InvalidTargets: Shielded
+		ValidTargets: Air
 		Damage: 20000
 	-Warhead@MissileAA_MediumFlatCompatibility:
 	Warhead@MissileQuantum_MediumFlatCompatibility:
-		ValidTargets: Ground, Water, Air
+		-InvalidTargets:
+		ValidTargets: Air
 		Damage: 8000
 		PercentageScale: 0
 
+	Warhead@MediumMissilePercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@FlakWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@TeslaWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@MagicWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@PreservedFlat_MagicExtraDamage:
+		ValidTargets: Air
+	Warhead@PreservedFlat_TeslaExtraDamage:
+		ValidTargets: Air
 AsianChemical:
 	Inherits@roleflat: ^Compatibility_Chemical_MediumFlat
 	Inherits: ^LightChemicalWeapon
@@ -2150,6 +2438,8 @@ AAHyperionMagnet:
 	-Warhead@EffectAir:
 	-Warhead@Smudge:
 
+	Warhead@Laser_Heavy_ExtraDamage:
+		ValidTargets: Air
 AsianTSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 	Inherits: IonCannon
 	Report: tesla1.aud
@@ -2490,9 +2780,18 @@ AAGunBoatFlak:
 	Warhead@EffectAir: CreateEffect
 		ValidTargets: Air
 	Warhead@Flak_MediumFlatCompatibility:
-		ValidTargets: Ground, Water
+		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 0
+
+	Warhead@SmallArmsPercentage:
+		ValidTargets: Ground, Water, Air
+
+	Warhead@GrenadePercentage:
+		ValidTargets: Ground, Water, Air
+
+	Warhead@ChaingunPercentage:
+		ValidTargets: Ground, Water, Air
 
 AAGunBoatFlak_elite:
 	Inherits: AAGunBoatFlak
@@ -2592,6 +2891,8 @@ AsianPhoenixRocket_elite:
 		ContrailLength: 33
 		ContrailStartWidth: 33
 		ContrailEndWidth: 1
+	Warhead@Demolition_Light:
+		ValidTargets: Ground, Water, Air
 
 ASDFGun:
 	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
@@ -2632,6 +2933,8 @@ ASDFGun2:
 		Damage: 6000
 		PercentageScale: 9984
 
+	Warhead@Railgun_Heavy_ExtraDamage:
+		ValidTargets: Ground, Water, Air
 ASDFKamikazeTargeting:
 	Range: 7250
 	ReloadDelay: 100
@@ -2850,6 +3153,7 @@ AsianSniperLockdown:
 	-Warhead@SniperMediumMissile:
 
 AsianMLRS:
+	Inherits@missilerole: ^Warhead_MissileAP_Medium
 	Inherits@roleflat: ^Compatibility_MissileAA_MediumFlat
 	Inherits: ^HeavyMissile
 	Inherits@2: ^FlakWeapon
@@ -2886,18 +3190,22 @@ AsianMLRS:
 	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@MissileAP_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	-Warhead@FlakWeapon:
 	-Warhead@HeavyMissile:
-	Warhead@MissileAA_MediumFlatCompatibility:
+	-Warhead@Demolition_Light:
+	-Warhead@MissileAA_MediumFlatCompatibility:
+	Warhead@MissileAP_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 4988
-	-Warhead@Demolition_Light:
-	-Warhead@MissileAP_Medium:
+		PercentageSpread: 50
+
 AsianSpitfireRockets:
+	Inherits@missilerole: ^Warhead_MissileAP_Medium
 	Inherits: AsianMLRS
 	Inherits@fx: ^Effect_Explosion_Large_RA2
 	ReloadDelay: 90
@@ -2922,20 +3230,21 @@ AsianSpitfireRockets:
 		PercentageScale: 5000
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@MissileAP_Medium:
-		PercentageScale: 5000
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
 	-Warhead@FlakWeapon:
 	-Warhead@HeavyMissile:
-	Warhead@MissileAA_MediumFlatCompatibility:
-		ValidTargets: Ground, Water, Air
-		Damage: 16000
-		PercentageScale: 2494
 	-Warhead@Demolition_Light:
-	-Warhead@MissileAP_Medium:
 	Projectile: Missile
 		VerticalRateOfTurn: 16
+	-Warhead@MissileAA_MediumFlatCompatibility:
+	Warhead@MissileAP_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 2494
+		PercentageSpread: 50
 
 AsianKamikazeImpactTargeting:
 	ReloadDelay: 25
@@ -2973,6 +3282,7 @@ asianalliance_fanatic_shotgun:
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
@@ -2980,14 +3290,20 @@ asianalliance_fanatic_shotgun_upgrade:
 	Inherits: asianalliance_fanatic_shotgun
 	Burst: 13
 	Warhead@Bullet_MediumFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
 
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 asianalliance_fanatic_shotgun_elite:
 	Inherits: asianalliance_fanatic_shotgun
 	Burst: 20
 	Warhead@Bullet_MediumFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
+	Warhead@ShieldHit:
+		InvalidTargets: Air

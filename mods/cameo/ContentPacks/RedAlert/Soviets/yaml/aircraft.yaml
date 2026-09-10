@@ -57,8 +57,8 @@ ra1_soviets_yakscoutplane:
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 4
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets
-	FirepowerMultiplier@DualWeapon:
-		Modifier: 25
+	# FirepowerMultiplier@DualWeapon:
+		# Modifier: 25
 	AttackAircraft:
 		FacingTolerance: 100
 	Aircraft:
@@ -177,8 +177,8 @@ ra1_soviets_teslayak:
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 16
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets
-	FirepowerMultiplier@MultiWeapon:
-		Modifier: 25
+	# FirepowerMultiplier@MultiWeapon:
+		# Modifier: 25
 	AttackAircraft:
 		FacingTolerance: 100
 	Aircraft:
@@ -381,8 +381,8 @@ ra1_soviets_nuclearyak:
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 16
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets
-	FirepowerMultiplier@DualWeapon:
-		Modifier: 50
+	# FirepowerMultiplier@DualWeapon:
+		# Modifier: 50
 	AttackAircraft:
 		FacingTolerance: 100
 	Aircraft:
@@ -659,8 +659,8 @@ ra1_soviets_su57attackbomber:
 		Condition: enable-smoke
 	RenderSprites:
 		PlayerPalette: raplayer
-	FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets:
-		Modifier: 115
+	# FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets:
+		# Modifier: 115
 	RangeMultiplier@ra1_soviets_upgrade_thermobaricrockets:
 		Modifier: 115
 	RevealsShroudMultiplier@ra1_soviets_upgrade_thermobaricrockets:
@@ -795,8 +795,8 @@ ra1_soviets_hindattackhelicopter:
 	GrantConditionOnPrerequisite@ra1_soviets_promotion_hurricanerocketpods:
 		Condition: ra1_soviets_promotion_hurricanerocketpods
 		Prerequisites: ra1_soviets_promotion_hurricanerocketpods
-	FirepowerMultiplier@DualWeapon:
-		Modifier: 50
+	# FirepowerMultiplier@DualWeapon:
+		# Modifier: 50
 	AttackAircraft:
 		FacingTolerance: 40
 		AttackType: Hover
@@ -967,8 +967,8 @@ ra1_soviets_kamovattackhelicopter:
 	GrantConditionOnPrerequisite@ra1_soviets_promotion_hurricanerocketpods:
 		Condition: ra1_soviets_promotion_hurricanerocketpods
 		Prerequisites: ra1_soviets_promotion_hurricanerocketpods
-	FirepowerMultiplier@DualWeapon:
-		Modifier: 25
+	# FirepowerMultiplier@DualWeapon:
+		# Modifier: 25
 	AttackAircraft:
 		FacingTolerance: 40
 		AttackType: Hover

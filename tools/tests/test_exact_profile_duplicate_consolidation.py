@@ -95,10 +95,10 @@ class ExactProfileDuplicateConsolidationTests(unittest.TestCase):
                 "Flak_MediumFlatCompatibility": (8000, 2488, "Ground, Water")},
             "AAGunBoatFlak": {
                 "Flak_Medium": (2000, 10000, "Ground, Water, Air"),
-                "Flak_MediumFlatCompatibility": (6000, 0, "Ground, Water")},
+                "Flak_MediumFlatCompatibility": (6000, 0, "Ground, Water, Air")},
             "AAGunBoatFlak_elite": {
                 "Flak_Medium": (2000, 10000, "Ground, Water, Air"),
-                "Flak_MediumFlatCompatibility": (6000, 0, "Ground, Water")},
+                "Flak_MediumFlatCompatibility": (6000, 0, "Ground, Water, Air")},
         }
         for name, expected in expected_flak.items():
             resolved = self.rules.resolve_weapon(name)

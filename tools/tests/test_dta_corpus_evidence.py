@@ -179,15 +179,15 @@ class ConsumerWithholdingTest(unittest.TestCase):
         self.assertEqual(srcs, {'DTA Enhanced': 156})   # lineage representative only, no AI
 
     def test_ordinary_withheld_count_is_exact_and_raws_survive(self):
-        self.assertEqual(len(self.withheld), 37)
+        self.assertEqual(len(self.withheld), 5)
         raws = [r['w_dps_raw'] for r in self.withheld]
-        self.assertGreater(sum(1 for x in raws if x > 0), 20)    # positives kept POSITIVE
+        self.assertEqual(sum(1 for x in raws if x > 0), 0)    # Remaining raw rates are healing channels.
         self.assertGreater(sum(1 for x in raws if x < 0), 0)     # healing channels too
         for r in self.withheld:
             self._withheld_checks(r)
 
     def test_ai_only_withholds_stay_out_of_the_vote(self):
-        self.assertEqual(len(self.ai_withheld), 29)
+        self.assertEqual(len(self.ai_withheld), 0)
         by_src = collections.defaultdict(set)
         for r in self.peers:
             rid = (r.get('id') or '').strip().upper()
@@ -199,7 +199,7 @@ class ConsumerWithholdingTest(unittest.TestCase):
             self.assertIsNotNone(r.get('w_dps_raw'))
 
     def test_build_limit_lane_withholds(self):
-        self.assertEqual(len(self.dta_hero), 5)
+        self.assertEqual(len(self.dta_hero), 1)  # A10 now has an explicit aircraft timer profile.
         for r in self.dta_hero:
             self.assertIsNone(r['w_dps'])
             self.assertNotEqual(r['w_dps_raw'], 0)
@@ -213,14 +213,20 @@ class ConsumerWithholdingTest(unittest.TestCase):
             self.assertEqual(r.get('hp'), raw.get('hp'), r['id'])
             self.assertEqual(r.get('cost'), raw.get('cost'), r['id'])
             self.assertEqual(r.get('speed'), raw.get('speed'), r['id'])
-            self.assertEqual(r.get('w_damage'), raw.get('w_damage'), r['id'])
+            if r['id'] == 'MTNK':
+                # Exact-row reviewed secondary selection; raw corpus is unchanged.
+                self.assertEqual(r.get('w_damage'), raw.get('w2_damage'))
+                self.assertEqual(r.get('wdummy_damage'), raw.get('w_damage'))
+            else:
+                self.assertEqual(r.get('w_damage'), raw.get('w_damage'), r['id'])
 
-    def test_a_rail_case_withheld_positive_is_exotic_not_zero(self):
-        rails = [r for r in self.rows + self.dta_hero
-                 if r.get('w_railgun') and r.get('w_dps_raw') is not None]
-        self.assertGreater(len(rails), 0)
-        self._withheld_checks(rails[0])
-        self.assertEqual(rails[0]['w_evidence_reason'], 'exotic_channels')
+    def test_reviewed_tesla_retains_original_exotic_verdict_without_armor_claim(self):
+        row = next(r for r in self.rows if r['id'] == 'RATSLA')
+        self.assertEqual(row['pre_cycle_evidence']['w_evidence_reason'], 'exotic_channels')
+        self.assertEqual(row['w_dps'], 300 / 173)
+        self.assertTrue(row['w_railgun'])
+        for lad in rd.LADDERS:
+            self.assertIsNone(row['dps_vs_' + lad])
 
     def test_nominal_direct_dta_rows_keep_the_declared_contract(self):
         good = [r for r in self.rows if r.get('w_evidence') == 'nominal_direct']
@@ -234,13 +240,13 @@ class ConsumerWithholdingTest(unittest.TestCase):
         counts = rd.evidence_counts(self.peers)
         # Selected CA and base-OpenRA sources expose incomplete ordinary rows;
         # do not hide them behind the former legacy count (base migration: +118).
-        self.assertEqual(counts['incomplete'], 428)
-        self.assertEqual(counts['nominal_direct'], 46)
+        self.assertEqual(counts['incomplete'], 208)
+        self.assertEqual(counts['nominal_direct'], 265)
         self.assertEqual(counts['legacy-unassessed'], 3895)
-        self.assertEqual(sum(counts.values()), 4369)
+        self.assertEqual(sum(counts.values()), 4368)  # TD RMBO now belongs to the explicit hero lane.
         other = rd.evidence_counts([r for r in self.peers if r['source'] != 'Combined Arms'])
-        self.assertEqual(other['incomplete'], 159)
-        self.assertEqual(other['nominal_direct'], 46)
+        self.assertEqual(other['incomplete'], 65)
+        self.assertEqual(other['nominal_direct'], 139)
         self.assertEqual(other['legacy-unassessed'], 3823)
 
 

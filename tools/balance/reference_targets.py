@@ -179,6 +179,50 @@ def family_rows(assigned, peers_by_source, faction):
     return uniq or [assigned]
 
 
+FROZEN_CAMEO_SHA256 = '726ada6afec708f8c6e9798ecbfb2758c842195f66755c2d5e683432c4a86f95'
+
+
+class FrozenCameoDistribution(dict):
+    """Projection ruler and self-votes captured together; never live feedback."""
+    def __init__(self, distribution, rows):
+        super().__init__(distribution)
+        self.cameo_votes = {row['id']: row for row in rows}
+
+
+def cameo_context():
+    import hashlib
+    path = ROOT / 'docs/reference/cameo_baselines/pre_reference_20260910.json'
+    raw = path.read_bytes()
+    if hashlib.sha256(raw).hexdigest() != FROZEN_CAMEO_SHA256:
+        raise ValueError('permanent Cameo reference snapshot changed')
+    document = json.loads(raw)
+    if document.get('schema') != 1:
+        raise ValueError('unsupported Cameo reference snapshot')
+    rows = document['rows']
+    distribution = rd.build_distributions(rows)
+    add_cost_distribution(distribution, rows)
+    return FrozenCameoDistribution(distribution['Cameo'], rows)
+
+
+FROZEN_HERO_SHA256 = '101a934792713dd6ccf5fbeb99629db0379af7b1f9a51d52d02a010795e5365c'
+
+
+def hero_cameo_context():
+    """Separate hero population recovered from the same immutable ledger inputs."""
+    import hashlib
+    path = ROOT / 'docs/reference/cameo_baselines/pre_reference_heroes_20260910.json'
+    raw = path.read_bytes()
+    if hashlib.sha256(raw).hexdigest() != FROZEN_HERO_SHA256:
+        raise ValueError('permanent hero reference snapshot changed')
+    doc = json.loads(raw)
+    if doc['parent_snapshot_sha256'] != FROZEN_CAMEO_SHA256:
+        raise ValueError('hero reference does not share the frozen baseline')
+    rows = doc['rows']
+    dist = rd.build_distributions(rows)
+    add_cost_distribution(dist, rows)
+    return FrozenCameoDistribution(dist['Cameo'], rows)
+
+
 def target_for(rows, cameo_row, stat, dist, cdist):
     """(peers_only, with_cameo, n_sources) on one stat, or (None, None, 0).
 
@@ -197,6 +241,9 @@ def target_for(rows, cameo_row, stat, dist, cdist):
     stat cannot outvote anything either. hp/speed/cost have their own eligibility and are
     unaffected. `peers_only` keeps its meaning: the peers' coordinates alone.
     """
+    frozen = getattr(cdist, 'cameo_votes', None)
+    vote_row = frozen.get(cameo_row.get('id')) if frozen is not None else cameo_row
+    projection_row = vote_row if vote_row is not None else cameo_row
     per_source = collections.defaultdict(lambda: collections.defaultdict(list))
     for r in rows:
         x = r.get(stat)
@@ -220,15 +267,15 @@ def target_for(rows, cameo_row, stat, dist, cdist):
     # undefined; every other coordinate is a ratio and pools geometrically.
     synth = {pk: (statistics.fmean(v) if pk[1] == "p_rng" else rd.gm(v)) for pk, v in pooled.items()}
     cands = []
-    for pop in ("overall", cameo_row["type"]):
+    for pop in ("overall", projection_row["type"]):
         coord = {k: v for (p_, k), v in synth.items() if p_ == pop}
         cands += list(rd.project(coord, cdist.get(pop, {}).get(stat)).values())
     cands = [c for c in cands if c and c > 0]
     if not cands:
         return None, None, 0
     peers_only = rd.gm(cands)
-    now = cameo_row.get(stat)
-    now = now if (now and now > 0 and rd.eligible(cameo_row, stat)) else None
+    now = vote_row.get(stat) if vote_row is not None else None
+    now = now if (now and now > 0 and rd.eligible(vote_row, stat)) else None
     with_cameo = rd.gm([peers_only] * len(used) + [now]) if now else peers_only
     return peers_only, with_cameo, len(used)
 
@@ -243,9 +290,7 @@ def main() -> int:
     cameo = rd.cameo_rows()
     dist = rd.build_distributions(peers)
     add_cost_distribution(dist, peers)
-    cameo_dist_all = rd.build_distributions(cameo)
-    add_cost_distribution(cameo_dist_all, cameo)
-    cdist = cameo_dist_all["Cameo"]
+    cdist = cameo_context()
     assignment = json.loads(ASSIGN.read_text(encoding="utf-8"))["assignment"]
     attached = expand_families(attach(assignment, peer_index(peers)), peers)
     crows = {c["id"]: c for c in cameo}

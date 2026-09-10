@@ -797,8 +797,8 @@ td_nod_buggymkii:
 		#FireDelay: 1
 		PauseOnCondition: ammo < 3
 		RequiresCondition: td_nod_upgrade_blackmarketupgrades
-	FirepowerMultiplier@Upgrade:
-		Modifier: 50
+	# FirepowerMultiplier@Upgrade:
+		# Modifier: 50
 	Cargo:
 		InitialUnits: td_nod_minigunner, td_nod_rocketsoldier, td_nod_flamethrower
 		Types: Infantry, Hacker, Fremen

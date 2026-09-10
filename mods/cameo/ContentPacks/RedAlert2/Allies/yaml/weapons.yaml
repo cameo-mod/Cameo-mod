@@ -1,4 +1,5 @@
 RA2Patriot:
+	Inherits@missilerole: ^Warhead_MissileAA_Medium
 	Inherits: ^RA2MediumMissile
 	ReloadDelay: 30
 	Range: 14150
@@ -10,8 +11,17 @@ RA2Patriot:
 		VerticalRateOfTurn: 16
 		Speed: 600
 		MinimumLaunchAngle: 60
-	Warhead@MissileAP_Medium:
+	-Warhead@MissileAP_Medium:
+	Warhead@MissileAA_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
 		Damage: 10000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
+
 RA2PatriotThunderboltMissile:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_AA
@@ -44,7 +54,7 @@ RA2PatriotThunderboltMissile:
 		ContrailEndColor: FFFFFF
 	Warhead@MissileAA_Heavy:
 		ValidTargets: Air
-		Damage: 10000
+		Damage: 12100
 
 HarrierMissiles:
 	Inherits: ^LightFlameWeapon
@@ -801,6 +811,7 @@ ChronoBeam_elite:
 		ValidTargets: Chronobeamable
 
 RA2Medusa_AA:
+	Inherits@missilerole: ^Warhead_MissileAA_Medium
 	Inherits: ^RA2MediumMissile
 	ReloadDelay: 100
 	Range: 13500
@@ -813,18 +824,36 @@ RA2Medusa_AA:
 		Speed: 600
 		MinimumLaunchAngle: 60
 		ContrailLength: 35
-	Warhead@MissileAP_Medium:
+	-Warhead@MissileAP_Medium:
+	Warhead@MissileAA_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Air
 		Damage: 30000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
+
 RA2MedusaAG:
+	Inherits@missilerole: ^Warhead_MissileHE_Medium
 	Inherits: RA2Medusa_AA
 	Range: 9000
 	InvalidTargets: Underwater, Submarine
 	ValidTargets: Ground, Water
-	Warhead@MissileAP_Medium:
-		ValidTargets: Ground, Water
 	Projectile: Missile
 		VerticalRateOfTurn: 30
+	-Warhead@MissileAP_Medium:
+	Warhead@MissileHE_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Damage: 30000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
+	-Warhead@MissileAA_Medium:
 
 RA2M60:
 	Inherits: ^RA2SmallArms
@@ -853,13 +882,18 @@ ra2_allies_gi_para:
 	BurstDelays: 3
 	Report: igiat2a.wav, igiat2b.wav, igiat2c.wav, igiat2d.wav
 	Warhead@Bullet_Medium:
+		InvalidTargets: Air
 		Damage: 2000
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 RA2vulcan2:
 	Inherits: GuardianGIMG
 	ReloadDelay: 25
 	Range: 5724
 	Report: bpilatta.wav, bpilattb.wav, bpilattc.wav, bpilattd.wav, bpilattc.wav
 
+	Warhead@Bullet_MediumFlatCompatibility:
+		InvalidTargets: Air
 GuardianGIMG:
 	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^RA2SmallArms
@@ -875,6 +909,7 @@ GuardianGIMG:
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
@@ -891,17 +926,26 @@ RA2para:
 GuardianGIMG2:
 	Inherits: RA2para
 	Warhead@Bullet_Medium:
+		InvalidTargets: Air
 		Damage: 4000
 GuardianGIMG_elite:
 	Inherits: GuardianGIMG
 	Range: 5762
 	Burst: 6
 
+	Warhead@Bullet_MediumFlatCompatibility:
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 GuardianGIMG2_elite:
 	Inherits: GuardianGIMG2
 	Range: 5750
 	Burst: 6
 
+	Warhead@Bullet_Medium:
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 RA2DoublePistols_elite:
 	Inherits: RA2DoublePistols
 	Range: 9000

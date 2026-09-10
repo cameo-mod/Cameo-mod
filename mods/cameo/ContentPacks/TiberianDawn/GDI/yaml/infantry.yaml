@@ -15,12 +15,12 @@ td_gdi_minigunner:
 		HP: 31000
 	ChangesHealth@SelfHealing:
 		Step: 32
-	DamageMultiplier@ScoutInfantryBuff:
-		Modifier: 100
-	FirepowerMultiplier@ScoutInfantryBuff:
-		Modifier: 100
-	FirepowerMultiplier@td_gdi_minigunner:
-		Modifier: 24
+	# DamageMultiplier@ScoutInfantryBuff:
+		# Modifier: 100
+	# FirepowerMultiplier@ScoutInfantryBuff:
+		# Modifier: 100
+	# FirepowerMultiplier@td_gdi_minigunner:
+		# Modifier: 24
 	Tooltip:
 		Name: GDI Minigunner
 	Buildable:
@@ -496,8 +496,8 @@ td_gdi_officer:
 	GrantExternalConditionToTransport:
 		Condition: ifv-healer
 
-	FirepowerMultiplier:
-		Modifier: 108
+	# FirepowerMultiplier:
+		# Modifier: 108
 td_gdi_havoc:
 	Inherits: ^Soldier
 	Inherits@anim: ^RA2InfantryDeathAnimations

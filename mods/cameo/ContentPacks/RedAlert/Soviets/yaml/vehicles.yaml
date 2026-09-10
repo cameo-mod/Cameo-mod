@@ -440,6 +440,7 @@ ra1_soviets_hammertank:
 
 ra1_soviets_gorynychtank:
 	Inherits: ^Tank
+	Inherits@Template: ^LineBreakerTemplate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Buildable:
 		Queue: Vehicle, RAVehicle
@@ -1100,8 +1101,8 @@ ra1_soviets_heatraytank:
 	Armament@4:
 		Weapon: ra1_soviets_heatraytank_heatray4
 		LocalOffset: 400,175,300, 400,-175,150, 400,125,250, 400,-125,200, 400,100,250, 400,-100,200, 400,200,300, 400,-200,150, 400,150,200, 400,-50,300, 400,50,150, 400,-150,250, 400,75,150, 400,-225,250, 400,225,200, 400,-75,300
-	FirepowerMultiplier@MultiWeapon:
-		Modifier: 25
+	# FirepowerMultiplier@MultiWeapon:
+		# Modifier: 25
 	AttackFrontal:
 		FacingTolerance: 0
 	Turreted:
@@ -1189,7 +1190,7 @@ ra1_soviets_flaktruck:
 
 ra1_soviets_btr80:
 	Inherits: ^Tank
-	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@Template: ^ArmedTroopTransportTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
@@ -1767,8 +1768,8 @@ ra1_soviets_monstertank:
 		PlayerPalette: player_rgba
 	ActorStatValues:
 		Upgrades: ra1_soviets_doctrine_heavyarmor, ra1_soviets_doctrine_nuclearwar, ra1_soviets_doctrine_inferno, ra1_soviets_doctrine_teslaandexperimentaltech, ra1_soviets_upgrade_autoloaders, ra1_soviets_upgrade_stalinium, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_nucleartankshells, ra1_soviets_upgrade_teslarockets, ra1_soviets_upgrade_thermonuclearrockets
-	FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets:
-		Modifier: 105
+	# FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets:
+		# Modifier: 105
 	RangeMultiplier@ra1_soviets_upgrade_thermobaricrockets:
 		Modifier: 105
 	RevealsShroudMultiplier@ra1_soviets_upgrade_thermobaricrockets:

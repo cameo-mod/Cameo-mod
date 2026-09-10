@@ -279,6 +279,10 @@ PHYSICS_RANK = {
     # blend in this table. A bullet couples to a shield poorly (0.34), so each blend lands just
     # above Bullet by however much its payload couples.
     "BulletFire": 0.42, "BulletThermobaric": 0.39, "BulletHE": 0.35, "BulletTesla": 0.67,
+    "BulletSonic": (0.34 + 0.60) / 2,
+    "MissileSonic": (0.32 + 0.60) / 2,
+    "CannonSonic": (0.33 + 0.60) / 2,
+    "BlastSonic": (0.35 + 0.36 + 0.60) / 3,
     # physical contact — the canonical thing a shield stops
     "Arrow": 0.24, "Melee": 0.22,
 }
@@ -1969,6 +1973,10 @@ FAMILY_DAMAGE_TYPES = {
 # {family: (condition, duration_x_reload, range_x_spread)}
 FAMILY_CONDITION = {
     "Sonic": ("SonicDebuff", 2, 2),
+    "BulletSonic": ("SonicDebuff", 2, 2),
+    "MissileSonic": ("SonicDebuff", 2, 2),
+    "CannonSonic": ("SonicDebuff", 2, 2),
+    "BlastSonic": ("SonicDebuff", 2, 2),
 }
 
 # Per-family InvalidTargets, emitted on the weapon AND its damaging warheads.
@@ -2014,6 +2022,13 @@ def emit_inherit_family(name, parent, psn, pss, levels):
 # multi-state. Plasma = Flame x Chemical Versus + Temperature 150 + Corrosion 150 ("as close as possible
 # to the flame + chemical combo"). {name: (parents, {StateName: Scale}, levels)}.
 BLEND_FAMILIES = {
+    # Aedis 2026-09-10: delivery-specific Sonic combinations. Status remains
+    # additional to direct damage; it is not a PhysicalState meter to average.
+    "BulletSonic": (["Bullet", "Sonic"], None, L3),
+    "MissileSonic": (["MissileAP", "Sonic"], None, L3),
+    "CannonSonic": (["CannonHE", "Sonic"], None, L3),
+    # Aedis 17:38 resolves grenade delivery explicitly, like CryoBlast.
+    "BlastSonic": (["Demolition", "Concussion", "Sonic"], None, L3),
     "Plasma": (["Flame", "Chemical"], {"Temperature": _m(0.50), "Corrosion": _m(0.50)}, L3),
     # Thermobaric = fuel-air incendiary blast: the per-armor AVERAGE of Demolition + Concussion +
     # Flame ("demolition + concussion + fire"). Heat = Flame 300 / 3 parents = 100 (per-parent-average
@@ -2187,7 +2202,7 @@ BLEND_FAMILIES = {
     # Carries the cryo weapons whose delivery IS the explosion — `RapierBombsCryo` (a pure
     # `Demolition_Heavy` today), and the `155mmBastionCryo` / `155mmCryo` artillery shells.
     # Meter: Cryo's -200 over 3 top-level halves = -67, the Thermobaric derivation exactly.
-    "CryoBlast": (["Laser", "Prism", "Demolition", "Demolition", "Concussion", "Concussion"],
+    "BlastCryo": (["Laser", "Prism", "Demolition", "Demolition", "Concussion", "Concussion"],
                   {"Temperature": _m(-2 / 3)}, L3),
 }
 # Fixed emission order for a blend (it has no single light/heavy direction).
@@ -2203,6 +2218,13 @@ def _family_main_pct(pname, level):
     parents' REAL profiles and cannot drift from what the parents themselves emit.
     """
     bl, d, air, lv = WEAPONS[pname]
+    # Sonic has no ordered armor ladder: build_order("FLAT", ...) is invalid.
+    # Use the same pre-finalization constants as family(mode="flat"). The
+    # blend's normal finalization still owns ordering, normalization and shield.
+    if pname == "Sonic":
+        keys = ["Shield"] + sorted(CANON16)
+        return ({a: FLAT_VALUES[level] for a in keys},
+                {a: FLAT_PCT[level] for a in keys})
     order = build_order(bl, d)
     main = _untilted_main(pname, order, level)
     # Blends average their PARENTS' profiles, and averaging their parents' Shield rows would

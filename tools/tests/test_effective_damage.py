@@ -217,6 +217,7 @@ class ReliabilityTest(unittest.TestCase):
 class ProjectileRuntimeDefaultTest(unittest.TestCase):
     class ProjectileNode:
         def __init__(self, projectile_type, weapon_range, fields=None):
+            self.children = []  # Projectile-only fixture has no warhead channels.
             self.projectile = Node(fields or {})
             self.projectile.value = projectile_type
             self.weapon_range = weapon_range

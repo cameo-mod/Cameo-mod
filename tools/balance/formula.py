@@ -548,10 +548,11 @@ def spread_damage_sum(warheads, smallarms_only: bool = False,
 # The flat-damage grid. 2000 until 2026-08-11, when the maintainer regridded it 20x finer
 # (2000 -> 200 -> 100) alongside a percentage twin measured in BASIS POINTS (0.01%).
 #
-# The law is deliberately one sentence: **100 flat damage == 0.01% of max health**, so one
-# step of the flat grid is exactly one step of the percentage grid and the twin can never
-# drift from the weapon it belongs to.
-DAMAGE_STEP = 100
+# Aedis2026-09-11 04:24: flat damage may use10-point steps. The existing
+# damage/percentage strength ratio remains100 flat ==0.01% HP. Expressing its
+# finer0.001% increment requires an explicit100000 denominator; changing this
+# flat grid alone does not alter any existing percentage weapon's units.
+DAMAGE_STEP = 10
 
 # Flat damage per ONE WHOLE PERCENT of the twin. Raised 2000 -> 10000 in the same ruling:
 # the twin's BASE percentage is now 5x smaller, and the percentage warheads' Versus values
@@ -568,6 +569,7 @@ DAMAGE_PER_PERCENT = 10000
 #   10000 = basis points, 0.01% steps (AreaDamagePercentage, PercentageDenominator: 10000)
 PERCENT_DENOMINATOR = 100
 BASIS_POINT_DENOMINATOR = 10000
+FINE_PERCENT_DENOMINATOR = 100000  #0.001% units; opt-in, never change old units implicitly.
 
 # Percentage-warhead Versus values are multiples of 5 in [5, 100] (the x5 rebase of the
 # old 1..17 band). Which 17-step window a family uses is a W13 profile decision: 5..85
@@ -901,7 +903,7 @@ def _selftest() -> None:
                                    "type": "AreaDamagePercentage",
                                    "percentage_denominator": BASIS_POINT_DENOMINATOR}])
     assert r["m"] == 16000 and r["mpercentage"] == 160, r          # 1.60%
-    assert percentage_twin(DAMAGE_STEP, BASIS_POINT_DENOMINATOR) == 1
+    assert percentage_twin(DAMAGE_STEP, FINE_PERCENT_DENOMINATOR) == 1
 
     # W15: the twin is continuous in Damage — never floored to a silent 0, and it
     # keeps tracking Damage between grid points (the old // gave 1999->0, 3500->1).

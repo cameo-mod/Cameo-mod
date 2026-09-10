@@ -30,7 +30,7 @@ import extract_stats
 import audit_three_way_split
 
 SPEC_KEYS = dict(hp="hp0", speed="speed0", range_wdist="range0_wdist", cost="cost0")
-REFERENCE_KEYS = dict(hp="hp", speed="speed", range_wdist="w_range", cost="cost")
+REFERENCE_KEYS = dict(hp="hp", speed="speed", range_wdist="w_range", cost="cost", dps="w_dps")
 
 
 def source_provenance(root):
@@ -46,11 +46,17 @@ def source_provenance(root):
     # class_membership drives displayed membership; tier_chain and firepower drive DPS/K/tier;
     # audit_three_way_split.main_warheads drives the displayed W24 stacked-main count.
     data_paths = [rd.INI_CORPUS, rd.INI_ARMOR, rd.syn.DOC1,
-                  root / "docs/design/ORIGINAL_UNITS_PEER_OPENRA.md"]
+                  root / "docs/design/ORIGINAL_UNITS_PEER_OPENRA.md",
+                  root / "docs/reference/cameo_baselines/pre_reference_20260910.json",
+                  root / "docs/reference/cameo_baselines/pre_reference_heroes_20260910.json"]
     data_paths.extend(rd.peer_corpus.input_paths(root))
+    data_paths.extend(root / module.RELATIVE for module in
+                      (rd.peer_range_evidence, rd.peer_nominal_evidence, rd.ini_weapon_selection, rd.ini_range_evidence, rd.ini_cycle_evidence, rd.peer_base_state)
+                      if (root / module.RELATIVE).exists())
     modules = [pathlib.Path(module.__file__) for module in
                (virtual, fit_class, formula, readiness, audit_three_way_split, extract_stats,
                 miniyaml, rd, rt, rt.fr, rd.reference_lineages, rd.peer_corpus, rd.syn,
+                rd.peer_range_evidence, rd.peer_nominal_evidence, rd.ini_weapon_selection, rd.ini_range_evidence, rd.ini_cycle_evidence, rd.peer_base_state,
                 virtual.class_membership, fit_class.tier_chain, firepower)]
     modules.extend([pathlib.Path(__file__), pathlib.Path(diagnostic_output.__file__)])
     revision = subprocess.run(["git", "rev-parse", "HEAD"], cwd=root, text=True,
@@ -120,6 +126,41 @@ def accepted_refs(actor, assignments):
             if ref.get("confidence") in ("STRONG", "FAIR") and ref.get("id")}
 
 
+def hero_reference_evidence(members, assignments):
+    """Hero-only projections; never add heroes to ordinary distributions."""
+    path = ROOT / 'docs/reference/cameo_baselines/pre_reference_heroes_20260910.json'
+    if not path.exists():
+        return {}
+    context = rt.hero_cameo_context()
+    selected = [m for m in members if m['actor'] in context.cameo_votes]
+    if not selected:
+        return {}
+    peers = [r for r in rd.peer_hero_rows() if r.get('hero') is True]
+    index = {}
+    for r in peers:
+        index.setdefault((r['source'], r['id']), []).append(r)
+    dist = rd.build_distributions(peers)
+    rt.add_cost_distribution(dist, peers)
+    result = {}
+    for member in selected:
+        actor = member['actor']
+        rows, errors = [], []
+        refs = accepted_refs(actor, assignments)
+        for source, ref in refs.items():
+            matches = index.get((source, ref['id']), [])
+            if len(matches) == 1:
+                rows.append(matches[0])
+            else:
+                errors.append(f"{source}/{ref['id']}: {len(matches)} exact hero rows")
+        record = dict(assigned=refs, used=[dict(source=r['source'], id=r['id']) for r in rows],
+                      hero_references=[], errors=errors, targets={}, lane='frozen hero-only')
+        for field, stat in REFERENCE_KEYS.items():
+            _, value, count = rt.target_for(rows, context.cameo_votes[actor], stat, dist, context)
+            record['targets'][field] = dict(value=value, sources=count)
+        result[actor] = record
+    return result
+
+
 def reference_evidence(members, assignments):
     """Strict ID join: never substitute a same-name peer or a rejected confidence."""
     peers = rd.peer_rows()
@@ -155,9 +196,7 @@ def reference_evidence(members, assignments):
     dist = rd.build_distributions(peers)
     rt.add_cost_distribution(dist, peers)
     cameo = rd.cameo_rows()
-    cameo_dist = rd.build_distributions(cameo)
-    rt.add_cost_distribution(cameo_dist, cameo)
-    cdist = cameo_dist.get("Cameo", {})
+    cdist = rt.cameo_context()
     by_actor = {row["id"]: row for row in cameo}
     result = {}
     for member in members:
@@ -173,6 +212,7 @@ def reference_evidence(members, assignments):
                 _, target, count = rt.target_for(rows, by_actor[actor], stat, dist, cdist)
                 record["targets"][field] = dict(value=target, sources=count)
         result[actor] = record
+    result.update(hero_reference_evidence(members, assignments))
     return result
 
 
@@ -296,15 +336,15 @@ def render(cls, entry, candidate, members, assignments, references, snapshots, d
               "", "## 5. Reference consensus", "",
               "Read-only R4 sensitivity through reference_targets.target_for's with-Cameo result; "
               "n counts external sources, plus Cameo's additional equal vote. Source families keep one vote each. "
-              "Raw cross-game stats are not averaged. These numbers do NOT replace the candidate or constitute calibration.", "",
-              "| actor | exact source IDs used | HP target | speed target | range target | cost target | issues |",
-              "|---|---|--:|--:|--:|--:|---|"]
+              "Hero actors use their separate frozen hero-only population; they never enter ordinary distributions. Raw cross-game stats are not averaged. These numbers do NOT replace the candidate or constitute calibration.", "",
+              "| actor | exact source IDs used | HP target | speed target | range target | cost target | nominal damage/tick | issues |",
+              "|---|---|--:|--:|--:|--:|--:|---|"]
     for member in members:
         actor = member["actor"]
         if not accepted_refs(actor, assignments) and not references[actor]["errors"]:
             continue
         evidence = references[actor]
-        targets = [evidence["targets"].get(f, {}) for f in virtual.FIELDS]
+        targets = [evidence["targets"].get(f, {}) for f in REFERENCE_KEYS]
         lines.append("| " + " | ".join(map(cell, [actor,
             "; ".join(f"{r['source']}/{r['id']}" for r in evidence["used"] + evidence.get("hero_references", []))] +
             [f"{cell(t.get('value'))} (n={t.get('sources', 0)})" for t in targets] +
@@ -368,7 +408,9 @@ def main(argv=None):
     mode.add_argument("--class", dest="cls")
     mode.add_argument("--all", action="store_true")
     parser.add_argument("--out", type=pathlib.Path, default=ROOT / "docs/balance/anchors")
+    parser.add_argument("--factions", nargs="+", help="Restrict dossier members and baseline pool to these ledger factions or aliases")
     args = parser.parse_args(argv)
+    faction_scope = tuple(virtual.FACTION_ALIASES.get(f, f) for f in args.factions) if args.factions else None
     ledger = ROOT / "docs/balance"
     registry = (ledger / "class_anchors.json").read_bytes()
     anchors = json.loads(registry.decode("utf-8"))
@@ -382,6 +424,8 @@ def main(argv=None):
     if args.all and output.is_relative_to(ROOT.resolve()) and output != (ledger / "anchors").resolve():
         parser.error("in-repository output must be docs/balance/anchors")
     members, assignments, provenance = virtual.load_evidence(ledger)
+    if faction_scope and not set(faction_scope) <= {m["faction"] for m in members}:
+        parser.error("unknown or empty faction in dossier scope")
     if provenance.get("ledger_sha256", {}).get("class_anchors.json") != hashlib.sha256(registry).hexdigest():
         parser.error("class_anchors.json changed between registry read and evidence collection; "
                      "no output written")
@@ -389,7 +433,8 @@ def main(argv=None):
     source_before = source_provenance(ROOT)
     provenance.update(source_before)
     selected = [args.cls] if args.cls else classes
-    selected_members = [m for m in members if m["cls"] in selected]
+    selected_members = [m for m in members if m["cls"] in selected
+                        and (faction_scope is None or m["faction"] in faction_scope)]
     references = reference_evidence(selected_members, assignments)
     all_rows = readiness.load_units()
     records = {actor: (section, rec) for _, section, actor, rec in all_rows}
@@ -410,14 +455,15 @@ def main(argv=None):
     factions = {actor: faction for faction, _, actor, _ in all_rows}
     for cls in selected:
         entry = anchors[cls]
-        candidate = virtual.derive(cls, members, assignments)
+        candidate = virtual.derive(cls, members, assignments, factions=faction_scope or virtual.DEFAULT_FACTIONS)
         snapshots = {role: actor_snapshot(entry.get(role + "_actor"), records, rules, sidecars, live_cache)
                      for role in ("anchor", "verifier")}
         cls_members = [m for m in selected_members if m["cls"] == cls]
         excluded = [dict(actor=actor, faction=factions.get(actor), **virtual.stat_values(unit))
                     for actor, unit in units.items()
                     if readiness.class_membership.classify(unit.get("design") or {})[0] == cls
-                    and not fit_class.eligible_virtual_member(unit)]
+                    and not fit_class.eligible_virtual_member(unit)
+                    and (faction_scope is None or factions.get(actor) in faction_scope)]
         live_by_actor = {member["actor"]: member_live(member["actor"], records, rules, live_cache)
                          for member in cls_members + excluded}
         results[cls] = render(cls, entry, candidate, cls_members,

@@ -112,12 +112,12 @@ ra1_soviets_rifleinfantry:
 		HP: 34000
 	ChangesHealth@SelfHealing:
 		Step: 34
-	DamageMultiplier@ScoutInfantryBuff:
-		Modifier: 100
-	FirepowerMultiplier@ScoutInfantryBuff:
-		Modifier: 100
-	FirepowerMultiplier@ra1_soviets_rifleinfantry:
-		Modifier: 42
+	# DamageMultiplier@ScoutInfantryBuff:
+		# Modifier: 100
+	# FirepowerMultiplier@ScoutInfantryBuff:
+		# Modifier: 100
+	# FirepowerMultiplier@ra1_soviets_rifleinfantry:
+		# Modifier: 42
 	Buildable:
 		Prerequisites: ~ra1_soviets_barracks, ~!ra1_soviets_doctrine_conscription
 		Description: Basic infantry unit.\n  Strong vs Infantry\n  Weak vs Vehicles
@@ -174,18 +174,18 @@ ra1_soviets_ak47conscript:
 		HP: 44000
 	ChangesHealth@SelfHealing:
 		Step: 44
-	DamageMultiplier@ScoutInfantryBuff:
-		Modifier: 100
-	FirepowerMultiplier@ScoutInfantryBuff:
-		Modifier: 100
+	# DamageMultiplier@ScoutInfantryBuff:
+		# Modifier: 100
+	# FirepowerMultiplier@ScoutInfantryBuff:
+		# Modifier: 100
 	Armament:
 		Weapon: ra1_soviets_ak47conscript_rifle
 		LocalOffset: 0,0,450
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: ra1_soviets_ak47conscript_rifle
-	FirepowerMultiplier@ra1_soviets_ak47conscript:
-		Modifier: 14
+	# FirepowerMultiplier@ra1_soviets_ak47conscript:
+		# Modifier: 14
 	FireWarheadsOnDeath@Vengeance1:
 		Weapon: VengeanceActivator1
 		RequiresCondition: !ra1_soviets_upgrade_vengeance
@@ -310,25 +310,25 @@ ra1_soviets_mortarsoldier:
 	Mobile:
 		Speed: 48
 	Armament@PRIMARY:
-		Weapon: ra1_soviets_mortarsoldier_siegemortar
+		Weapon: ra1_soviets_mortarsoldier_siegemortar_ExplicitDamage3of4
 		LocalOffset: 427,0,341
 		FireDelay: 10
 		RequiresCondition: !ra1_soviets_upgrade_scorchedearth
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: ra1_soviets_mortarsoldier_siegemortar
+		Weapon: ra1_soviets_mortarsoldier_siegemortar_ExplicitDamage3of4
 		RequiresCondition: !ra1_soviets_upgrade_scorchedearth
 	Armament@Upgrade:
-		Weapon: ra1_soviets_mortarsoldier_siegemortarthermobaric
+		Weapon: ra1_soviets_mortarsoldier_siegemortarthermobaric_ExplicitDamage3of4
 		LocalOffset: 427,0,341
 		FireDelay: 10
 		RequiresCondition: ra1_soviets_upgrade_scorchedearth
 	Armament@UpgradeGARRISONED:
 		Name: garrisoned
-		Weapon: ra1_soviets_mortarsoldier_siegemortarthermobaric
+		Weapon: ra1_soviets_mortarsoldier_siegemortarthermobaric_ExplicitDamage3of4
 		RequiresCondition: ra1_soviets_upgrade_scorchedearth
-	FirepowerMultiplier@SplashDamage:
-		Modifier: 75
+	# FirepowerMultiplier@SplashDamage:
+		# Modifier: 75
 	FireWarheadsOnDeath:
 		Weapon: ra1_soviets_mortarsoldier_siegemortarexplode
 		RequiresCondition: !ra1_soviets_upgrade_scorchedearth
@@ -418,8 +418,8 @@ ra1_soviets_dragunovantimaterialsniper:
 	ActorStatValues:
 		Upgrades: ra1_soviets_promotion_infantrysuperoptics, ra1_soviets_doctrine_conscription, ra1_soviets_upgrade_vengeance, ra1_soviets_upgrade_menofsteel
 
-	FirepowerMultiplier:
-		Modifier: 103
+	# FirepowerMultiplier:
+		# Modifier: 103
 ra1_soviets_firerocketsoldier:
 	Inherits: ^RA1AlliesAlliedRocketSoldier
 	Inherits@FireInfantry: ^FireInfantry

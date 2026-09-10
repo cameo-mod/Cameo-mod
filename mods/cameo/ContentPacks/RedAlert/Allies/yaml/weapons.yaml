@@ -79,6 +79,7 @@ ra1_allies_alliedaagun_flak:
 	Range: 11412
 	ValidTargets: Air
 	Warhead@Flak_Medium:
+		ValidTargets: Air
 		Damage: 4000
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
@@ -94,9 +95,11 @@ ra1_allies_alliedaagun_flak_cryo:
 	Range: 11412
 	ValidTargets: Air
 	Warhead@FlakCryo_Medium:
+		ValidTargets: Air
 		Damage: 4000
 
 ra1_allies_longbow_missile:
+	Inherits@missilerole: ^Warhead_MissileAP_Heavy
 	Inherits@finalmain: ^Compatibility_MissileHE_HeavyFlat
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@wh2: ^Warhead_MissileHE_Heavy
@@ -115,15 +118,21 @@ ra1_allies_longbow_missile:
 		Damage: 8000
 	-Warhead@Concussion_Medium:
 	-Warhead@MissileHE_Heavy:
-	Warhead@MissileHE_HeavyFlatCompatibility:
-		ValidTargets: Ground, Water, Air
-		Damage: 16000
-		PercentageScale: 9994
 	Projectile: Missile
 		VerticalRateOfTurn: 12
+	-Warhead@MissileHE_HeavyFlatCompatibility:
+	Warhead@MissileAP_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 9994
+		PercentageSpread: 50
 
 ra1_allies_longbow_missile_cryo:
-	Inherits@wh: ^Warhead_CryoBlast_Medium
+	Inherits@wh: ^Warhead_BlastCryo_Medium
 	Inherits@wh2: ^Warhead_MissileCryo_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_Cryo
@@ -132,7 +141,7 @@ ra1_allies_longbow_missile_cryo:
 	Range: 6540
 	MinRange: 1310
 	Report: missile6.aud
-	Warhead@CryoBlast_Medium:
+	Warhead@BlastCryo_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@MissileCryo_Heavy:
@@ -151,7 +160,9 @@ ra1_allies_blackhawk_chaingun:
 	Range: 3375
 	Report: gun13.aud
 	Warhead@Bullet_Medium:
-		Damage: 8000
+		PercentageDenominator: 10000
+		PercentageScale: 10000
+		Damage: 2000
 	Warhead@Effect: CreateEffect
 		ImpactSounds: xplos.aud
 		ImpactActors: false
@@ -174,7 +185,9 @@ ra1_allies_blackhawk_chaingun_cryo:
 	Range: 3375
 	Report: gun13.aud
 	Warhead@BulletCryo_Medium:
-		Damage: 8000
+		PercentageDenominator: 10000
+		PercentageScale: 10000
+		Damage: 2000
 
 AlliedTankDestroyerCannon:
 	Inherits@wh2: ^Warhead_CannonAP
@@ -211,9 +224,13 @@ ra1_allies_sheridanassaulttank_cannon:
 	Projectile: Bullet
 		Speed: 502
 	Warhead@CannonAP_Light:
-		Damage: 8000
+		PercentageDenominator: 10000
+		PercentageScale: 10000
+		Damage: 2000
 	Warhead@CannonHE_Medium:
-		Damage: 8000
+		PercentageDenominator: 10000
+		PercentageScale: 10000
+		Damage: 2000
 ra1_allies_sheridanassaulttank_cannon_cryo:
 	Inherits@wh: ^Warhead_CannonCryo_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
@@ -224,9 +241,12 @@ ra1_allies_sheridanassaulttank_cannon_cryo:
 	Projectile: Bullet
 		Speed: 502
 	Warhead@CannonCryo_Medium:
-		Damage: 16000
+		PercentageDenominator: 10000
+		PercentageScale: 10000
+		Damage: 4000
 		ValidTargets: Ground, Water
 ra1_allies_sheridanassaulttank_missile:
+	Inherits@missilerole: ^Warhead_MissileAP_Medium
 	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
@@ -234,11 +254,19 @@ ra1_allies_sheridanassaulttank_missile:
 	ReloadDelay: 64
 	Range: 5023
 	ValidTargets: Ground, Water, Air
-	Warhead@MissileHE_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 16000
 	Projectile: Missile
 		VerticalRateOfTurn: 20
+	-Warhead@MissileHE_Medium:
+	Warhead@MissileAP_Medium: AreaDamage
+		PercentageDenominator: 10000
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
 
 ra1_allies_sheridanassaulttank_missile_cryo:
 	Inherits@wh: ^Warhead_MissileCryo_Medium
@@ -249,7 +277,9 @@ ra1_allies_sheridanassaulttank_missile_cryo:
 	Range: 5023
 	ValidTargets: Ground, Water, Air
 	Warhead@MissileCryo_Medium:
-		Damage: 16000
+		PercentageDenominator: 10000
+		PercentageScale: 10000
+		Damage: 4000
 		ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		VerticalRateOfTurn: 20
@@ -271,8 +301,9 @@ ra1_allies_sheridanassaulttank_chaingun:
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
+		PercentageDenominator: 10000
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 1000
 		PercentageScale: 9975
 ra1_allies_sheridanassaulttank_chaingun_cryo:
 	Inherits@wh: ^Warhead_BulletCryo_Medium
@@ -285,7 +316,9 @@ ra1_allies_sheridanassaulttank_chaingun_cryo:
 	Report: gun13.aud
 	ValidTargets: Ground, Water, Air
 	Warhead@BulletCryo_Medium:
-		Damage: 4000
+		PercentageDenominator: 10000
+		PercentageScale: 10000
+		Damage: 1000
 		ValidTargets: Ground, Water, Air
 ra1_allies_rapierjumpjet_bomb:
 	Inherits@wh: ^Warhead_Demolition_Heavy
@@ -302,10 +335,12 @@ ra1_allies_rapierjumpjet_bomb:
 		Image: BOMBLET
 		Shadow: True
 	Warhead@Demolition_Heavy:
+		PercentageDenominator: 10000
+		PercentageScale: 10000
 		ValidTargets: Ground, Ship
-		Damage: 10000
+		Damage: 5000
 ra1_allies_rapierjumpjet_bomb_cryo:
-	Inherits@wh: ^Warhead_CryoBlast_Heavy
+	Inherits@wh: ^Warhead_BlastCryo_Heavy
 	Inherits@fx: ^Effect_Cryo
 	ReloadDelay: 60
 	Range: 2000
@@ -314,9 +349,11 @@ ra1_allies_rapierjumpjet_bomb_cryo:
 	Report: flamer2.aud
 	TargetActorCenter: true
 	Projectile: GravityBomb
-	Warhead@CryoBlast_Heavy:
+	Warhead@BlastCryo_Heavy:
+		PercentageDenominator: 10000
+		PercentageScale: 10000
 		ValidTargets: Ground, Ship
-		Damage: 10000
+		Damage: 5000
 	Warhead@Effect: CreateEffect
 		Explosions: cryo_artillery
 
@@ -343,17 +380,21 @@ ra1_allies_rapierjumpjet_missile_AA:
 		TrailInterval: 1
 		TrailDelay: 1
 	Warhead@Concussion_Medium:
+		PercentageDenominator: 10000
+		PercentageScale: 10000
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 4000
 	Warhead@MissileHE_Heavy:
+		PercentageDenominator: 10000
+		PercentageScale: 10000
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 4000
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
 		ImpactSounds: xplobig4.aud
 
 ra1_allies_rapierjumpjet_missile_cryo_AA:
-	Inherits@wh: ^Warhead_CryoBlast_Medium
+	Inherits@wh: ^Warhead_BlastCryo_Medium
 	Inherits@wh2: ^Warhead_MissileCryo_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_Cryo
@@ -374,12 +415,16 @@ ra1_allies_rapierjumpjet_missile_cryo_AA:
 		ContrailStartColor: 996633
 		TrailInterval: 1
 		TrailDelay: 1
-	Warhead@CryoBlast_Medium:
+	Warhead@BlastCryo_Medium:
+		PercentageDenominator: 10000
+		PercentageScale: 10000
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 4000
 	Warhead@MissileCryo_Heavy:
+		PercentageDenominator: 10000
+		PercentageScale: 10000
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 4000
 
 ra1_allies_reconranger_recoillessgun:
 	Inherits@collapseflat: ^Compatibility_MissileAP_HeavyFlat
@@ -563,6 +608,7 @@ ra1_allies_phasetransport_missile_cryo:
 		VerticalRateOfTurn: 16
 
 ra1_allies_chronotank_missile:
+	Inherits@missilerole: ^Warhead_MissileAP_Heavy
 	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
 	Inherits: ^Grenade
 	Inherits@2: ^FlakWeapon
@@ -596,22 +642,38 @@ ra1_allies_chronotank_missile:
 	-Warhead@Chaingun:
 	-Warhead@HeavyMissile:
 	-Warhead@MediumMissile:
-	Warhead@MissileHE_Heavy:
-		Damage: 20000
-		PercentageScale: 0
-
 	Projectile: Missile
 		VerticalRateOfTurn: 16
+	-Warhead@MissileHE_Heavy:
+	Warhead@MissileAP_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 20000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 0
+		PercentageSpread: 50
 
 ra1_allies_chronotank_missile_cryo:
+	Inherits@missilerole: ^Warhead_MissileAP_Heavy
 	Inherits: ra1_allies_chronotank_missile
 	Inherits@2: ^CryoMissileProjectile
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
 		Amount: -20000
 		Range: 400
-
 	Projectile: Missile
 		VerticalRateOfTurn: 16
+	-Warhead@MissileHE_Heavy:
+	Warhead@MissileAP_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 20000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 0
+		PercentageSpread: 50
 
 155mmCryo:
 	Inherits: 155mm
@@ -800,24 +862,28 @@ ra1_allies_alliedheavyaatank_cannon:
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@LightMissilePercentage: AreaDamagePercentage
+		PercentageDenominator: 400
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		PercentageDenominator: 400
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@SmallArms: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
+		PercentageDenominator: 400
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@ChaingunPercentage: AreaDamagePercentage
+		PercentageDenominator: 400
 		ValidTargets: Ground, Water
 		Damage: 1
 	-Warhead@Chaingun:
@@ -826,7 +892,7 @@ ra1_allies_alliedheavyaatank_cannon:
 	-Warhead@SmallArms:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 8000
+		Damage: 2000
 		PercentageScale: 0
 
 ra1_allies_alliedheavyaatank_cannon_AA:
@@ -837,10 +903,12 @@ ra1_allies_alliedheavyaatank_cannon_AA:
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Air
 	Warhead@LightMissilePercentage: AreaDamagePercentage
+		PercentageDenominator: 400
 		ValidTargets: Air
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Air
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		PercentageDenominator: 400
 		ValidTargets: Air
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Air
@@ -855,9 +923,15 @@ ra1_allies_alliedheavyaatank_cannon_AA:
 	-Warhead@LightMissile:
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Air
-		Damage: 8000
+		Damage: 2000
 		PercentageScale: 0
 
+	Warhead@SmallArmsPercentage:
+		PercentageDenominator: 400
+		ValidTargets: Air
+	Warhead@ChaingunPercentage:
+		PercentageDenominator: 400
+		ValidTargets: Air
 RadarJammer:
 	ReloadDelay: 150
 	Report: jammed.aud
@@ -897,7 +971,25 @@ ra1_allies_alliedsniper_lightsniper:
 
 ra1_allies_alliedlighttank_25mm:
 	Inherits: 25mm
-
+	Warhead@CannonHE_Medium:
+		PercentageDenominator: 10000
+		PercentageScale: 1659
+		Damage: 6000
+	Warhead@GrenadePercentage:
+		PercentageDenominator: 200
+		Damage: 1
+	Warhead@ShrapnelWeaponPercentage:
+		PercentageDenominator: 200
+		Damage: 1
+	Warhead@LightFlameWeaponPercentage:
+		PercentageDenominator: 200
+		Damage: 1
+	Warhead@MediumChemicalWeaponPercentage:
+		PercentageDenominator: 200
+		Damage: 1
+	Warhead@TankDestroyerCannonPercentage:
+		PercentageDenominator: 200
+		Damage: 1
 ra1_allies_alliedartillery_155mm:
 	Inherits: 155mm
 

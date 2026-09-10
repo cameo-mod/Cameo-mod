@@ -38,12 +38,26 @@ corrino_sardaukar_sword:
 	Inherits: ^Warhead_Melee_Heavy
 
 corrino_sardaukar_javelin_spear:
+	Inherits@missilerole: ^Warhead_MissileHE_Heavy
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Rocket_Trooper
 	ValidTargets: Ground, Water
 	Projectile:
 		Image: spearfire
+	Warhead@ShieldHit:
+		InvalidTargets: Air
+	-Warhead@MissileAP_Heavy:
+	Warhead@MissileHE_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
+		InvalidTargets: Air
 
 corrino_sardaukar_laser:
 	Inherits@wh: ^Warhead_Laser_Heavy

@@ -10,6 +10,14 @@
      "v": "Helicopter"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#Cargo.MaxWeight",
+     "v": "10"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#Valued.Cost",
      "v": "3600"
@@ -64,8 +72,9 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "2000",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
@@ -93,8 +102,9 @@
       "armament_name": "secondary",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "2000",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
@@ -121,8 +131,9 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "2000",
         "falloff": "100, 48, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "BulletCryo_Medium",
         "type": "AreaDamage"
@@ -150,8 +161,9 @@
       "armament_name": "secondary",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "2000",
         "falloff": "100, 48, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "BulletCryo_Medium",
         "type": "AreaDamage"
@@ -193,11 +205,6 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
-    "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#FirepowerMultiplier@DualWeapon.Modifier",
-     "trait": "FirepowerMultiplier@DualWeapon",
-     "v": 0.25
-    },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#Health.HP",
      "v": "50000"
@@ -214,32 +221,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 105,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@HelicopterBuff",
-      "types": []
-     },
-     {
-      "modifier": 25,
-      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#FirepowerMultiplier@DualWeapon.Modifier",
-      "trait": "FirepowerMultiplier@DualWeapon",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -267,14 +249,14 @@
       "damage_warheads": [
        {
         "damage": "16000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_HeavyFlatCompatibility",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "minrange": "1310",
       "pricing": true,
       "range": "6540",
@@ -282,6 +264,7 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_MissileAP_Heavy",
        "^Compatibility_MissileHE_HeavyFlat",
        "^Warhead_Concussion_Medium",
        "^Warhead_MissileHE_Heavy",
@@ -289,11 +272,12 @@
        "^Effect_MissileHE_Heavy"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_Concussion_Medium",
        "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "ra1_allies_longbow_missile",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
@@ -301,7 +285,7 @@
         "damage": "8000",
         "falloff": "100, 72, 50, 32, 19, 9, 0",
         "spread": "105",
-        "tag": "CryoBlast_Medium",
+        "tag": "BlastCryo_Medium",
         "type": "AreaDamage"
        },
        {
@@ -321,13 +305,13 @@
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Warhead_CryoBlast_Medium",
+       "^Warhead_BlastCryo_Medium",
        "^Warhead_MissileCryo_Heavy",
        "^Projectile_Missile_Heavy",
        "^Effect_Cryo"
       ],
       "warheads": [
-       "^Warhead_CryoBlast_Medium",
+       "^Warhead_BlastCryo_Medium",
        "^Warhead_MissileCryo_Heavy"
       ],
       "weapon": "ra1_allies_longbow_missile_cryo",
@@ -368,26 +352,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 105,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@HelicopterBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -416,8 +381,9 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "10000",
+        "damage": "5000",
         "falloff": "100, 45, 18, 6, 0",
+        "percentage_denominator": "10000",
         "spread": "466",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
@@ -445,10 +411,11 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "10000",
+        "damage": "5000",
         "falloff": "100, 72, 50, 32, 19, 9, 0",
+        "percentage_denominator": "10000",
         "spread": "140",
-        "tag": "CryoBlast_Heavy",
+        "tag": "BlastCryo_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -460,11 +427,11 @@
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Warhead_CryoBlast_Heavy",
+       "^Warhead_BlastCryo_Heavy",
        "^Effect_Cryo"
       ],
       "warheads": [
-       "^Warhead_CryoBlast_Heavy"
+       "^Warhead_BlastCryo_Heavy"
       ],
       "weapon": "ra1_allies_rapierjumpjet_bomb_cryo",
       "weapon_class_source": "template"
@@ -475,15 +442,17 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "4000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "percentage_denominator": "10000",
         "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "8000",
+        "damage": "4000",
         "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "MissileHE_Heavy",
         "type": "AreaDamage"
@@ -515,15 +484,17 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "4000",
         "falloff": "100, 72, 50, 32, 19, 9, 0",
+        "percentage_denominator": "10000",
         "spread": "105",
-        "tag": "CryoBlast_Medium",
+        "tag": "BlastCryo_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "8000",
+        "damage": "4000",
         "falloff": "100, 60, 27, 0",
+        "percentage_denominator": "10000",
         "spread": "53",
         "tag": "MissileCryo_Heavy",
         "type": "AreaDamage"
@@ -537,13 +508,13 @@
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@SECONDARYUpgrade",
       "versus_templates": [
-       "^Warhead_CryoBlast_Medium",
+       "^Warhead_BlastCryo_Medium",
        "^Warhead_MissileCryo_Heavy",
        "^Projectile_Missile_Heavy",
        "^Effect_Cryo"
       ],
       "warheads": [
-       "^Warhead_CryoBlast_Medium",
+       "^Warhead_BlastCryo_Medium",
        "^Warhead_MissileCryo_Heavy"
       ],
       "weapon": "ra1_allies_rapierjumpjet_missile_cryo_AA",
@@ -567,11 +538,6 @@
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
-    "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#FirepowerMultiplier@DualWeapon.Modifier",
-     "trait": "FirepowerMultiplier@DualWeapon",
-     "v": 0.5
-    },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#Health.HP",
      "v": "77500"
@@ -590,44 +556,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 200,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@RearmableAircraft",
-      "types": []
-     },
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@BomberBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
-     {
-      "modifier": 50,
-      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#FirepowerMultiplier@DualWeapon.Modifier",
-      "trait": "FirepowerMultiplier@DualWeapon",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1246,20 +1175,7 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@DefenseBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1344,20 +1260,7 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@DefenseBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1481,6 +1384,14 @@
      "v": "Steel"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml#Cargo.MaxWeight",
+     "v": "5"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml#Valued.Cost",
      "v": "2000"
@@ -1510,20 +1421,7 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@DefenseBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1547,6 +1445,14 @@
      "v": "Concrete"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml#Cargo.MaxWeight",
+     "v": "2"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml#Valued.Cost",
      "v": "1300"
@@ -1717,6 +1623,14 @@
      "v": "Concrete"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml#Cargo.MaxWeight",
+     "v": "1"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml#Valued.Cost",
      "v": "400"
@@ -1923,26 +1837,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 120,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@SniperInfantryBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1971,8 +1866,9 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "14880",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
@@ -2005,8 +1901,9 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "14880",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
@@ -2038,8 +1935,9 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "14880",
         "falloff": "100, 48, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "BulletCryo_Medium",
         "type": "AreaDamage"
@@ -2069,8 +1967,9 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "14880",
         "falloff": "100, 48, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "BulletCryo_Medium",
         "type": "AreaDamage"
@@ -2112,11 +2011,6 @@
      "tech_tier": 1.0,
      "unit_class": 0.8
     },
-    "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
-     "trait": "FirepowerMultiplier",
-     "v": 0.93
-    },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Health.HP",
      "v": "19000"
@@ -2130,32 +2024,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
-     {
-      "modifier": 93,
-      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
-      "trait": "FirepowerMultiplier",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2303,20 +2172,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2459,20 +2315,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2550,26 +2393,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@ScoutInfantryBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -2800,26 +2624,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@HeroBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3474,14 +3279,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3512,7 +3310,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_MediumFlatCompatibility",
@@ -3521,6 +3319,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "400",
         "spread": "100",
         "tag": "LightMissilePercentage",
         "type": "AreaDamagePercentage"
@@ -3528,6 +3327,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "400",
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -3535,6 +3335,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "400",
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
@@ -3542,6 +3343,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "400",
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
@@ -3567,7 +3369,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "2000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_MediumFlatCompatibility",
@@ -3576,6 +3378,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "400",
         "spread": "100",
         "tag": "LightMissilePercentage",
         "type": "AreaDamagePercentage"
@@ -3583,6 +3386,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "400",
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -3590,6 +3394,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "400",
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
@@ -3597,6 +3402,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "400",
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
@@ -3634,11 +3440,6 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
-    "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#FirepowerMultiplier@ra1_allies_alliedheavyaatank.Modifier",
-     "trait": "FirepowerMultiplier@ra1_allies_alliedheavyaatank",
-     "v": 0.25
-    },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
      "v": "125000"
@@ -3656,20 +3457,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 25,
-      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#FirepowerMultiplier@ra1_allies_alliedheavyaatank.Modifier",
-      "trait": "FirepowerMultiplier@ra1_allies_alliedheavyaatank",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3700,8 +3488,9 @@
      {
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "6000",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
@@ -3709,6 +3498,7 @@
        {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
+        "percentage_denominator": "200",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
@@ -3716,6 +3506,7 @@
        {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
+        "percentage_denominator": "200",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -3723,6 +3514,7 @@
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
+        "percentage_denominator": "200",
         "spread": "250",
         "tag": "LightFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -3730,6 +3522,7 @@
        {
         "damage": "1",
         "falloff": "99, 66, 33",
+        "percentage_denominator": "200",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -3737,6 +3530,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "200",
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
@@ -3775,11 +3569,6 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
-    "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#FirepowerMultiplier@HighExplosionShell.Modifier",
-     "trait": "FirepowerMultiplier@HighExplosionShell",
-     "v": 0.5
-    },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
      "v": "50000"
@@ -3797,20 +3586,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 50,
-      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#FirepowerMultiplier@HighExplosionShell.Modifier",
-      "trait": "FirepowerMultiplier@HighExplosionShell",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3929,14 +3705,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4187,20 +3956,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4319,20 +4075,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4366,9 +4109,9 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -4415,6 +4158,7 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileHE_Heavy",
        "^Grenade",
        "^FlakWeapon",
@@ -4423,6 +4167,7 @@
        "^MediumMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "ra1_allies_chronotank_missile",
@@ -4434,9 +4179,9 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -4483,6 +4228,7 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileHE_Heavy",
        "^Grenade",
        "^FlakWeapon",
@@ -4491,6 +4237,7 @@
        "^MediumMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "ra1_allies_chronotank_missile",
@@ -4502,9 +4249,9 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -4551,10 +4298,12 @@
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Warhead_MissileAP_Heavy",
        "ra1_allies_chronotank_missile",
        "^CryoMissileProjectile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "ra1_allies_chronotank_missile_cryo",
@@ -4566,9 +4315,9 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -4615,10 +4364,12 @@
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@UpgradeSECONDARY",
       "versus_templates": [
+       "^Warhead_MissileAP_Heavy",
        "ra1_allies_chronotank_missile",
        "^CryoMissileProjectile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "ra1_allies_chronotank_missile_cryo",
@@ -4664,20 +4415,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4717,7 +4455,7 @@
      "category": "Vehicles",
      "class_anchor": null,
      "special": null,
-     "subtype": "Vehicle",
+     "subtype": "SupportVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5064,6 +4802,14 @@
      "v": "Light"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Cargo.MaxWeight",
+     "v": "5"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Valued.Cost",
      "v": "1800"
@@ -5072,7 +4818,7 @@
      "category": "Vehicles",
      "class_anchor": null,
      "special": 1.25,
-     "subtype": "SupportVehicle",
+     "subtype": "ArmedTroopTransport",
      "tech_tier": 0.75,
      "unit_class": 1.25
     },
@@ -5094,20 +4840,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5229,14 +4962,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5458,20 +5184,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5502,15 +5215,17 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "2000",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "80",
         "tag": "CannonAP_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "8000",
+        "damage": "2000",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
@@ -5539,10 +5254,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "150",
-        "tag": "MissileHE_Medium",
+        "damage": "4000",
+        "falloff": "100, 0",
+        "percentage_denominator": "10000",
+        "spread": "64",
+        "tag": "MissileAP_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -5554,11 +5270,13 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@Missile",
       "versus_templates": [
+       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileHE_Medium",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileHE_Medium"
       ],
       "weapon": "ra1_allies_sheridanassaulttank_missile",
@@ -5567,8 +5285,9 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "4000",
         "falloff": "100, 60, 27, 0",
+        "percentage_denominator": "10000",
         "spread": "40",
         "tag": "MissileCryo_Medium",
         "type": "AreaDamage"
@@ -5597,8 +5316,9 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "1000",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
@@ -5628,8 +5348,9 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "4000",
         "falloff": "100, 61, 28, 0",
+        "percentage_denominator": "10000",
         "spread": "55",
         "tag": "CannonCryo_Medium",
         "type": "AreaDamage"
@@ -5658,8 +5379,9 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "1000",
         "falloff": "100, 48, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "BulletCryo_Medium",
         "type": "AreaDamage"
@@ -5701,11 +5423,6 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
-     "trait": "FirepowerMultiplier@MultiWeapon",
-     "v": 0.25
-    },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
      "v": "85000"
@@ -5723,26 +5440,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
-     {
-      "modifier": 25,
-      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
-      "trait": "FirepowerMultiplier@MultiWeapon",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"

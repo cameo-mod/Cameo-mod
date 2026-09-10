@@ -73,6 +73,12 @@ import sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import reference_lineages  # noqa: E402  (the shared lineage rulings)
 import peer_corpus  # noqa: E402
+import peer_range_evidence  # noqa: E402
+import ini_weapon_selection  # noqa: E402
+import peer_nominal_evidence  # noqa: E402
+import peer_base_state  # noqa: E402
+import ini_range_evidence  # noqa: E402
+import ini_cycle_evidence  # noqa: E402
 import synthesize_reference as syn  # noqa: E402  (parsers + roster loader are reused wholesale)
 
 ROOT = syn.ROOT
@@ -175,6 +181,14 @@ ELIGIBILITY = {
 
 def eligible(row, stat):
     """Does `row` belong in the population for `stat`? (see ELIGIBILITY)"""
+    if row.get('reference_base_eligible') is False:
+        return False
+    if stat == 'w_range' and 'w_range_usable' in row:
+        # Independent, exact-row range proof never certifies damage or cadence.
+        value = row.get(stat)
+        return (row['w_range_usable'] is True
+                and row.get('w_range_evidence') in (peer_range_evidence.VERDICT, peer_range_evidence.SELECTED_VERDICT, peer_nominal_evidence.RANGE_VERDICT, ini_range_evidence.VERDICT)
+                and type(value) in (int, float) and math.isfinite(value) and value > 0)
     rule = ELIGIBILITY.get(stat)
     if not rule:
         return row.get(stat) is not None
@@ -523,11 +537,15 @@ def ini_rows():
         ini_rows.sources = set()
         return []
     armor = _ini_armor_index()
+    selection_profile = ini_weapon_selection.load(ROOT)
     out, sources = [], set()
+    ini_range_profile = ini_range_evidence.load(ROOT)
+    ini_cycle_profile = ini_cycle_evidence.load(ROOT)
     for line in INI_CORPUS.read_text(encoding="utf-8").splitlines():
         if not line.strip():
             continue
-        r = json.loads(line)
+        raw_record = json.loads(line)
+        r = ini_weapon_selection.select(raw_record, selection_profile)
         sources.add(r["source"])
         kind = INI_TYPE.get(r.get("type"))
         if kind is None:
@@ -558,7 +576,15 @@ def ini_rows():
         # Evidence BEFORE any consumer value is derived from the DPS (shared helper; see
         # the policy block above `LEGACY_EVIDENCE`).
         dps = apply_weapon_evidence(row, r)
-        vs = armor.get((r["source"], r.get("id"))) or {}
+        ini_range_evidence.apply(row, raw_record, ini_range_profile)
+        cycle_applied = ini_cycle_evidence.apply(row, raw_record, ini_cycle_profile)
+        if cycle_applied:
+            dps = row["w_dps"]
+        if (r['source'], r['id']) in selection_profile:
+            row.update({k: v for k, v in r.items() if k.startswith(('wdummy_', 'w2_'))})
+        # The retained armor table describes the original weapon. Never apply
+        # its coefficients to a newly selected secondary weapon.
+        vs = {} if cycle_applied or (r['source'], r['id']) in selection_profile else armor.get((r["source"], r.get("id"))) or {}
         for lad in LADDERS:
             frac = vs.get(lad)
             row[f"dps_vs_{lad}"] = (dps * frac) if (dps and frac) else None
@@ -644,24 +670,37 @@ def is_ai_only(row, source_ids=None):
 def structured_peer_rows(corpora, *, heroes=False):
     """Adapt stable numeric fields without discarding nested source evidence."""
     rows = []
+    range_profile = peer_range_evidence.load(ROOT)
+    nominal_profile = peer_nominal_evidence.load(ROOT)
+    base_profile = peer_base_state.load(ROOT)
     for source, (_meta, records) in corpora.items():
         if source in LINEAGE_MEMBERS:
             continue
         for record in records:
-            if bool(is_hero_limit(record.get("limit"))) != heroes:
+            # Aedis 2026-09-11: TD's unlimited Commando is the named hero counterpart
+            # for both Cameo commandos. Preserve its actual limit; separate its model lane.
+            named_hero = (source, record.get('id')) == ('OpenRA Tiberian Dawn', 'RMBO')
+            if bool(is_hero_limit(record.get("limit")) or named_hero) != heroes:
                 continue
             row = dict(record)
             row.pop("record", None)
             row.update(source=source, raw_source=source)
+            peer_base_state.apply(row, record, base_profile)
+            peer_range_evidence.apply(row, record, range_profile)
             if heroes:
-                row["hero"] = is_one_off(record.get("limit"))
+                row["hero"] = named_hero or is_one_off(record.get("limit"))
+                if named_hero:
+                    row['hero_lane_reason'] = 'Explicit shared Commando identity ruling; source build limit remains unchanged.'
             speed, turn = row.get("speed"), row.get("turn_speed")
             row["turn_ratio"] = speed / turn if speed and turn else None
             if row.get("type") == "building" and row.get("w_damage"):
                 row["type"] = "defense"
             dps = apply_weapon_evidence(row, record)
+            reviewed_nominal = peer_nominal_evidence.apply(row, record, nominal_profile)
+            if reviewed_nominal:
+                dps = row['w_dps']
             for ladder in LADDERS:
-                fraction = record.get(f"eff_vs_{ladder}")
+                fraction = None if reviewed_nominal else record.get(f"eff_vs_{ladder}")
                 row[f"dps_vs_{ladder}"] = dps * fraction if dps and fraction else None
             rows.append(row)
     return rows
@@ -1165,6 +1204,8 @@ def peer_hero_rows():
     """
     corpora = peer_corpus.load(ROOT)
     rows = structured_peer_rows(corpora, heroes=True)
+    hero_range_profile = ini_range_evidence.load(ROOT)
+    hero_cycle_profile = ini_cycle_evidence.load(ROOT)
     # Doc 5 heroes: rows with `limit` present (peer_rows drops at line 508)
     source, header = None, None
     text = (ROOT / "docs/design/ORIGINAL_UNITS_PEER_OPENRA.md").read_text(encoding="utf-8")
@@ -1253,7 +1294,11 @@ def peer_hero_rows():
                    "w_dps": r.get("w_dps")}
             # Same shared evidence policy as `ini_rows`, before any `dps_vs_*` derives.
             dps = apply_weapon_evidence(row, r)
-            vs = armor.get((r["source"], r.get("id"))) or {}
+            ini_range_evidence.apply(row, r, hero_range_profile)
+            cycle_applied = ini_cycle_evidence.apply(row, r, hero_cycle_profile)
+            if cycle_applied:
+                dps = row["w_dps"]
+            vs = {} if cycle_applied else armor.get((r["source"], r.get("id"))) or {}
             for lad in LADDERS:
                 frac = vs.get(lad)
                 row[f"dps_vs_{lad}"] = (dps * frac) if (dps and frac) else None

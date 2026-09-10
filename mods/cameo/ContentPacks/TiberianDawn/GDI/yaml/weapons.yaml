@@ -72,6 +72,10 @@ td_gdi_guardtower_highvap:
 		ContrailLength: 0
 		Speed: 4000
 
+	Warhead@Bullet_Medium:
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 td_gdi_grenadier_grenadeexplode:
 	Inherits: ^Warhead_Demolition_Light
 	Inherits@2: ^Projectile_Grenade_Light
@@ -160,12 +164,14 @@ td_gdi_boxer_boxercannonag:
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
+		PercentageDenominator: 200
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@LightMissilePercentage: AreaDamagePercentage
+		PercentageDenominator: 200
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Grenade: SpreadDamage
@@ -175,24 +181,28 @@ td_gdi_boxer_boxercannonag:
 		ValidTargets: Ground, Water
 		Damage: 1000
 	Warhead@GrenadePercentage: AreaDamagePercentage
+		PercentageDenominator: 200
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@MediumCannon: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
+		PercentageDenominator: 200
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@ChaingunPercentage: AreaDamagePercentage
+		PercentageDenominator: 200
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		PercentageDenominator: 200
 		ValidTargets: Ground, Water
 		Damage: 1
 	-Warhead@Chaingun:
@@ -204,7 +214,7 @@ td_gdi_boxer_boxercannonag:
 	-Warhead@SmallArms:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 12000
+		Damage: 6000
 		PercentageScale: 0
 
 td_gdi_boxer_boxercannon_AA:
@@ -219,12 +229,14 @@ td_gdi_boxer_boxercannon_AA:
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Air
 	Warhead@LightMissilePercentage: AreaDamagePercentage
+		PercentageDenominator: 200
 		ValidTargets: Air
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Air
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Air
 	Warhead@GrenadePercentage: AreaDamagePercentage
+		PercentageDenominator: 200
 		ValidTargets: Air
 	Warhead@CannonHE_Medium: AreaDamage
 		ValidTargets: Air
@@ -237,6 +249,7 @@ td_gdi_boxer_boxercannon_AA:
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Air
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		PercentageDenominator: 200
 		ValidTargets: Air
 	-Warhead@Bullet_MediumFlatCompatibility:
 	-Warhead@FlakWeapon:
@@ -245,9 +258,18 @@ td_gdi_boxer_boxercannon_AA:
 	-Warhead@LightMissile:
 	Warhead@Flak_MediumFlatCompatibility:
 		ValidTargets: Air
-		Damage: 12000
+		Damage: 6000
 		PercentageScale: 0
 
+	Warhead@SmallArmsPercentage:
+		PercentageDenominator: 200
+		ValidTargets: Air
+	Warhead@MediumCannonPercentage:
+		PercentageDenominator: 200
+		ValidTargets: Air
+	Warhead@ChaingunPercentage:
+		PercentageDenominator: 200
+		ValidTargets: Air
 td_gdi_skyshield_skyshieldcannon:
 	Inherits@collapsewh: ^Warhead_Flak_Heavy
 	-TargetActorCenter:
@@ -498,6 +520,7 @@ td_gdi_mlrs_227mmamt:
 		VerticalRateOfTurn: 12
 
 td_gdi_orca_orcamissiles:
+	Inherits@missilerole: ^Warhead_MissileAP_Heavy
 	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
 	Inherits: ^HeavyCannon
 	Inherits@2: ^TankDestroyerCannon
@@ -558,20 +581,35 @@ td_gdi_orca_orcamissiles:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@HeavyMissile:
 	-Warhead@MediumMissile:
-	Warhead@MissileHE_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 12000
-		PercentageScale: 0
-
 	Projectile: Missile
 		VerticalRateOfTurn: 16
+	-Warhead@MissileHE_Heavy:
+	Warhead@MissileAP_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 0
+		PercentageSpread: 50
 
 td_gdi_orca_orcamissilesamt:
+	Inherits@missilerole: ^Warhead_MissileAP_Heavy
 	Inherits: td_gdi_orca_orcamissiles
 	Inherits@2: ^AMTProjectile
-
 	Projectile: Missile
 		MinimumLaunchAngle: -128
+	-Warhead@MissileHE_Heavy:
+	Warhead@MissileAP_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 0
+		PercentageSpread: 50
 
 Vulcan:
 	Inherits@wh: ^Warhead_Bullet_Medium
@@ -664,6 +702,7 @@ NapalmA10Carrier:
 		PercentageScale: 9988
 
 A10CarrierMissiles_AA:
+	Inherits@missilerole: ^Warhead_MissileAA_Heavy
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileAP_Heavy
@@ -691,16 +730,22 @@ A10CarrierMissiles_AA:
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
 		ContrailStartColor: FF8800AA
-	Warhead@MissileAP_Heavy:
-		ValidTargets: Air
-		Damage: 12000
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
 		ImpactSounds: xplobig4.aud
-
-
+	-Warhead@MissileAP_Heavy:
+	Warhead@MissileAA_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Damage: 12000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
 
 td_gdi_advancedguardtower_towermissile:
+	Inherits@missilerole: ^Warhead_MissileAP_Heavy
 	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^Grenade
@@ -798,17 +843,33 @@ td_gdi_advancedguardtower_towermissile:
 	-Warhead@HeavyAAWeapon:
 	-Warhead@HeavyMissile:
 	-Warhead@MediumMissile:
-	Warhead@MissileHE_Heavy:
+	-Warhead@MissileHE_Heavy:
+	Warhead@MissileAP_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
+		PercentageSpread: 50
 
 td_gdi_advancedguardtower_towermissileamt:
+	Inherits@missilerole: ^Warhead_MissileAP_Heavy
 	Inherits: td_gdi_advancedguardtower_towermissile
 	Inherits@2: ^AMTProjectile
-
 	Projectile: Missile
 		VerticalRateOfTurn: 12
+	-Warhead@MissileHE_Heavy:
+	Warhead@MissileAP_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 0
+		PercentageSpread: 50
 
 td_gdi_sonicmissilesoldier_missilesoldierweapon:
 	Inherits@collapsewh: ^Warhead_MissileAP_Heavy
@@ -915,23 +976,28 @@ td_gdi_empgrenadier_grenade_emp:
 		Image: BOMB
 		TrailImage: blue_smokey
 	Warhead@TeslaChargedWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
@@ -960,7 +1026,7 @@ td_gdi_empgrenadier_grenade_emp:
 	-Warhead@Tesla_Super_ExtraDamage:
 	-Warhead@EMPUnit:
 	Warhead@Tesla_Super:
-		ValidTargets: Ground, Water
+		ValidTargets: Ground, Water, Air
 		Damage: 72000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		IntegrityScale: 0
@@ -984,8 +1050,10 @@ td_gdi_empgrenadier_grenadeexplode_emp:
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 2
@@ -1141,6 +1209,7 @@ MachineGunHumvee2AP_AA:
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
 td_gdi_humveemkii_rocketshumvee2:
+	Inherits@missilerole: ^Warhead_MissileHE_Light
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileAP_Light
@@ -1148,19 +1217,40 @@ td_gdi_humveemkii_rocketshumvee2:
 	Range: 5598
 	Report: bazook1.aud
 	ValidTargets: Ground, Water
-	Warhead@MissileAP_Light:
+	-Warhead@MissileAP_Light:
+	Warhead@MissileHE_Light: AreaDamage
+		PercentageDenominator: 10000
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Damage: 16000
+		Damage: 8000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
+
 td_gdi_humveemkii_rocketshumvee2_AA:
+	Inherits@missilerole: ^Warhead_MissileAA_Light
 	Inherits: td_gdi_humveemkii_rocketshumvee2
 	Range: 8397
 	ValidTargets: Air
-	Warhead@MissileAP_Light:
-		ValidTargets: Air
 	Projectile: Missile
 		VerticalRateOfTurn: 20
+	-Warhead@MissileAP_Light:
+	Warhead@MissileAA_Light: AreaDamage
+		PercentageDenominator: 10000
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Damage: 8000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
+	-Warhead@MissileHE_Light:
 
 td_gdi_humveemkii_rocketshumvee2amt:
+	Inherits@missilerole: ^Warhead_MissileHE_Heavy
 	Inherits@finalmain: ^Compatibility_MissileAP_HeavyFlat
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -1172,11 +1262,21 @@ td_gdi_humveemkii_rocketshumvee2amt:
 		Damage: 16000
 	-Warhead@MissileAP_Heavy:
 	-Warhead@MissileAP_Light:
-	Warhead@MissileAP_HeavyFlatCompatibility:
+	-Warhead@MissileAP_HeavyFlatCompatibility:
+	Warhead@MissileHE_Heavy: AreaDamage
+		PercentageDenominator: 10000
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Damage: 32000
+		Damage: 16000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 9997
+		PercentageSpread: 50
+	-Warhead@MissileHE_Light:
+
 td_gdi_humveemkii_rocketshumvee2amt_AA:
+	Inherits@missilerole: ^Warhead_MissileAA_Heavy
 	Inherits@finalmain: ^Compatibility_MissileAA_HeavyFlat
 	Inherits: td_gdi_humveemkii_rocketshumvee2amt
 	Range: 8397
@@ -1185,12 +1285,26 @@ td_gdi_humveemkii_rocketshumvee2amt_AA:
 		ValidTargets: Air
 	-Warhead@MissileAP_Heavy:
 	-Warhead@MissileAP_HeavyFlatCompatibility:
-	Warhead@MissileAA_HeavyFlatCompatibility:
-		ValidTargets: Air
-		Damage: 32000
-		PercentageScale: 9997
 	Projectile: Missile
 		VerticalRateOfTurn: 12
+	-Warhead@MissileAA_HeavyFlatCompatibility:
+	Warhead@MissileAA_Heavy: AreaDamage
+		PercentageDenominator: 10000
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Damage: 16000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 9997
+		PercentageSpread: 50
+		Versus:
+			HAZMAT: 87
+			COMPOSITE: 67
+			BLAST: 56
+			Shield: 172
+	-Warhead@MissileHE_Heavy:
+	-Warhead@MissileHE_Light:
 
 TDShotgun:
 	Inherits@collapsewh: ^Warhead_Bullet_Medium
@@ -1393,9 +1507,10 @@ td_gdi_officer_machinegun:
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
+		PercentageDenominator: 2500
 		ValidTargets: Ground, Water, Air
-		Damage: 16000
-		PercentageScale: 2494
+		Damage: 17280
+		PercentageScale: 625
 td_gdi_officer_machinegun_ap:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -1407,8 +1522,10 @@ td_gdi_officer_machinegun_ap:
 	Range: 5596
 	Report: mgun11.aud
 	Warhead@Bullet_Medium:
+		PercentageDenominator: 10000
+		PercentageScale: 10000
 		ValidTargets: Ground, Air, Water
-		Damage: 16000
+		Damage: 17280
 GDIRigDroneTargeting:
 	# ValidTargets: SpecialRepair, Repairing, Repair, lockdowned, plagued, ivanattached
 	# ValidRelationships: Ally
@@ -1527,7 +1644,11 @@ td_gdi_defenserig_gdirigrailgun:
 	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 160000
+	Warhead@Railgun_Heavy_ExtraDamage:
+		ValidTargets: Ground, Water, Air
+
 td_gdi_defenserig_gdirigmissilepod:
+	Inherits@missilerole: ^Warhead_MissileAP_Heavy
 	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileHE_Medium
@@ -1551,8 +1672,6 @@ td_gdi_defenserig_gdirigmissilepod:
 		Speed: 500
 		ContrailStartColor: FF884400
 		ContrailEndColor: 000000FF
-	Warhead@MissileHE_Heavy:
-		Damage: 32000
 	Warhead@Effect: CreateEffect
 		Explosions: med_frag
 		ImpactSounds: kaboom25.aud
@@ -1563,13 +1682,33 @@ td_gdi_defenserig_gdirigmissilepod:
 		ImpactSounds: splash9.aud
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
+	-Warhead@MissileHE_Heavy:
+	Warhead@MissileAP_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 32000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
 
 td_gdi_defenserig_gdirigmissilepodamt:
+	Inherits@missilerole: ^Warhead_MissileAP_Heavy
 	Inherits: td_gdi_defenserig_gdirigmissilepod
 	Inherits@2: ^AMTProjectile
-
 	Projectile: Missile
 		VerticalRateOfTurn: 12
+	-Warhead@MissileHE_Heavy:
+	Warhead@MissileAP_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 32000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
 
 td_gdi_havoc_sniper:
 	Inherits@wh: ^Warhead_Bullet_Heavy
@@ -1645,6 +1784,7 @@ td_gdi_havoc_sniper:
 		ImpactSounds: xplos.aud
 
 td_gdi_havoc_rocket:
+	Inherits@missilerole: ^Warhead_MissileAP_Medium
 	Inherits@finalmain: ^Compatibility_MissileHE_MediumFlat
 	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@proj: ^Projectile_Missile_Light
@@ -1660,7 +1800,6 @@ td_gdi_havoc_rocket:
 		TrailInterval: 1
 		Image: bhreddragon
 		ContrailLength: 8
-		#ContrailDelay: 2
 		ContrailStartColor: 5500ff
 		ContrailEndColor: FFFFFF
 		ContrailEndColorUsePlayerColor: true
@@ -1673,10 +1812,16 @@ td_gdi_havoc_rocket:
 		ImpactSounds: kaboom12.aud
 		ValidTargets: Ground
 	-Warhead@MissileHE_Medium:
-	Warhead@MissileHE_MediumFlatCompatibility:
+	-Warhead@MissileHE_MediumFlatCompatibility:
+	Warhead@MissileAP_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Air, Water
 		Damage: 40000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 9998
+		PercentageSpread: 50
 
 td_gdi_havoc_grenade:
 	Inherits@collapsewh: ^Warhead_Concussion_Medium
@@ -1688,8 +1833,10 @@ td_gdi_havoc_grenade:
 	ReloadDelay: 100
 	Range: 7750
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 10
 	Warhead@GrenadePercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 10
 	Warhead@Effect: CreateEffect
 		Explosions: blue_med_frag
@@ -1697,15 +1844,19 @@ td_gdi_havoc_grenade:
 		ImpactActors: false
 		ValidTargets: Ground, Ship
 	Warhead@EMPUnit: AffectsIntegrity
+		InvalidTargets: Shielded, Air
 		Damage: 20000
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	Warhead@Concussion_Medium:
+		InvalidTargets: Air
 		Damage: 40000
 		PercentageScale: 0
 
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 td_gdi_havoc_rifle:
 	Inherits@collapsewh: ^Warhead_Bullet_Medium
 	Inherits: ^SniperWeapon
@@ -1767,6 +1918,7 @@ td_gdi_havoc_rifle:
 		PercentageScale: 0
 
 td_gdi_firehawk_firehawkmissiles_AA:
+	Inherits@missilerole: ^Warhead_MissileAA_Heavy
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileAP_Heavy
@@ -1795,12 +1947,19 @@ td_gdi_firehawk_firehawkmissiles_AA:
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
 		ContrailStartColor: FF8800AA
-	Warhead@MissileAP_Heavy:
-		ValidTargets: Air
-		Damage: 20000
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
 		ImpactSounds: xplobig4.aud
+	-Warhead@MissileAP_Heavy:
+	Warhead@MissileAA_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Damage: 20000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
 
 td_gdi_firehawk_firehawkbomb:
 	Inherits@collapsewh: ^Warhead_Nuclear_Super
@@ -1880,6 +2039,7 @@ td_gdi_railgunbattleship_gdibattleshiprailgun:
 		ValidTargets: Ground, Water
 		Damage: 50000
 td_gdi_missileboat_gunboatmissile:
+	Inherits@missilerole: ^Warhead_MissileHE_Medium
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
@@ -1897,12 +2057,31 @@ td_gdi_missileboat_gunboatmissile:
 		VerticalRateOfTurn: 50
 		Acceleration: 5
 		AllowSnapping: true
-	Warhead@MissileAP_Medium:
+	-Warhead@MissileAP_Medium:
+	Warhead@MissileHE_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Damage: 18000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
+
 td_gdi_missileboat_gunboatmissileamt:
+	Inherits@missilerole: ^Warhead_MissileHE_Medium
 	Inherits: td_gdi_missileboat_gunboatmissile
 	Inherits@2: ^AMTProjectile
+	-Warhead@MissileAP_Medium:
+	Warhead@MissileHE_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Damage: 18000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
 
 TDIonCannon:
 	Range: 12288
@@ -2011,7 +2190,12 @@ td_gdi_minigunner_minigun:
 	BurstDelays: 3
 	Report: mgun2.aud
 	Warhead@Bullet_Light:
-		Damage: 2000
+		PercentageDenominator: 10000
+		PercentageScale: 10000
+		InvalidTargets: Air
+		Damage: 480
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 td_gdi_minigunner_minigun_ap:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -2023,12 +2207,17 @@ td_gdi_minigunner_minigun_ap:
 	BurstDelays: 3
 	Report: mgun2.aud
 	Warhead@Bullet_Medium:
-		Damage: 4000
+		PercentageDenominator: 10000
+		PercentageScale: 10000
+		InvalidTargets: Air
+		Damage: 960
 # CLOSE-COMBAT BASELINE WEAPON (Formula v2, 2026-07-19): defines the
 # closecombat anchor with td_gdi_shotgunner. SmallArms+Chaingun (WC .875),
 # burst 5 pellets fire together (BurstDelays 0) = one shotgun blast;
 # SoundVolume 1/burst so the simultaneous shots aren't deafening.
 # TDShotgun stays for its vehicle/map users.
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 td_gdi_shotgunner_shotgun:
 	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
@@ -2050,10 +2239,13 @@ td_gdi_shotgunner_shotgun:
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
 
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 td_gdi_grenadier_grenade:
 	Inherits: Grenade
 
@@ -2086,15 +2278,27 @@ td_gdi_assaultapc_machinegunhumvee2ap_AA:
 
 td_gdi_humveemkii_machinegunhumvee2:
 	Inherits: MachineGunHumvee2
-
+	Warhead@Bullet_Light:
+		PercentageDenominator: 10000
+		PercentageScale: 10000
+		Damage: 1000
 td_gdi_humveemkii_machinegunhumvee2ap:
 	Inherits: MachineGunHumvee2AP
-
+	Warhead@Bullet_Medium:
+		PercentageDenominator: 10000
+		PercentageScale: 10000
+		Damage: 1000
 td_gdi_humveemkii_machinegunhumvee2_AA:
 	Inherits: MachineGunHumvee2_AA
-
+	Warhead@Bullet_Light:
+		PercentageDenominator: 10000
+		PercentageScale: 10000
+		Damage: 1000
 td_gdi_humveemkii_machinegunhumvee2ap_AA:
 	Inherits: MachineGunHumvee2AP_AA
-
+	Warhead@Bullet_Medium:
+		PercentageDenominator: 10000
+		PercentageScale: 10000
+		Damage: 1000
 td_gdi_missileboat_depthcharge:
 	Inherits: DepthCharge

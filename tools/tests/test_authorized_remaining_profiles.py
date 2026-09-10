@@ -210,7 +210,7 @@ class AuthorizedRemainingProfileTests(unittest.TestCase):
             [sys.executable, str(ROOT / "tools/balance/consolidate_authorized_remaining_profiles.py")],
             cwd=ROOT, check=False, capture_output=True, text=True)
         self.assertNotEqual(result.returncode, 0)
-        self.assertIn('TSBombSonic: expected source total 10000, found 0', result.stderr)
+        self.assertIn('TSBombSonic: expected source total 10000, found 30000', result.stderr)
         self.assertEqual(before, {path: path.read_bytes() for path in paths})
 
 

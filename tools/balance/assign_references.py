@@ -793,7 +793,17 @@ def original_actors(scope, by_source, routed_pool, routing):
 # are used exactly once. Recorded as data rather than folded into the scorer, because it is a
 # judgement about one mod's renaming, not a general principle — and a rule inferred from a single
 # case is how the reference map got into trouble in the first place.
+SHARED_COMMANDO_ACTORS = frozenset(('td_gdi_commando', 'td_nod_commando'))
+SHARED_COMMANDO_SOURCES = frozenset(('Combined Arms', 'DTA Enhanced', 'OpenRA Tiberian Dawn'))
+
 REFERENCE_OVERRIDES = {
+    # Aedis 2026-09-11 00:07: same base Commando, different Cameo upgrades.
+    **{(actor, source): 'RMBO' for actor in SHARED_COMMANDO_ACTORS for source in SHARED_COMMANDO_SOURCES},
+    # Original-unit gaps: renamed Scout Tank and RA-prefixed camouflaged pillbox.
+    ('ra1_allies_alliedlighttank', 'Combined Arms'): '1TNK',
+    ('ra1_allies_camopillbox', 'DTA Enhanced'): 'RAHBOX',
+    # Aedis 2026-09-10: original Soviet Mammoth, not the Siege expansion.
+    ("ra1_soviets_mammothtank", "DTA Enhanced"): "4TNK",
     ("ra1_allies_gunboat", "DTA Enhanced"): "DESTROYER",   # DTA "Corvette"
     ("ra1_allies_destroyer", "DTA Enhanced"): "FRIGATE",
     # ── Combined Arms, ruled by the maintainer 2026-09-07 on review of the map ──────────────
@@ -904,6 +914,9 @@ def apply_overrides(result, by_source, routed_pool, routing):
         for other, srcs in result.items():
             d = srcs.get(src)
             if other != cid and d and (d.get("id") or "").upper() == pid.upper():
+                if (pid.upper() == 'RMBO' and src in SHARED_COMMANDO_SOURCES
+                        and cid in SHARED_COMMANDO_ACTORS and other in SHARED_COMMANDO_ACTORS):
+                    continue
                 del srcs[src]
         result.setdefault(cid, {})[src] = {
             "name": p.get("name"), "id": p.get("id"), "score": None, "hp": p.get("hp"),

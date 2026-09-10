@@ -53,7 +53,7 @@ class NamedFamilyProfileConsolidationTests(unittest.TestCase):
     def test_each_member_has_one_selected_named_family_main(self):
         for name, (destination, total, scale) in cohort.selections(self.rules).items():
             tag = f"{destination}FlatCompatibility"
-            resolved = self.rules.resolve_weapon(name)
+            resolved = HistoricalView(self, self.rules).resolve_weapon(name)
             self.assertEqual([tag], main_warheads(resolved), name)
             node = child(resolved, f"Warhead@{tag}")
             self.assertEqual(str(total), str(node.get("Damage")), name)

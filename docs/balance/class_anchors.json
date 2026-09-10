@@ -39,7 +39,7 @@
   "membership_pending": {
    "current_class": "support",
    "required_subtype": "ArmedTroopTransport",
-   "reason": "C46 role template has not landed; pending_classes.py proposes this membership without changing live YAML."
+   "reason": "2026-09-10 pilot: ArmedTroopTransportTemplate is active for td_gdi_apc, ra1_soviets_btr80 and ra1_allies_phasetransport. Remaining faction rollout and contested combat roles are still pending; this does not sign off the anchor."
   },
   "armor": "Light",
   "comment": "ARMED TROOP TRANSPORT (maintainer ruling 2026-09-08). A carrier that shoots. Until now these sat in `support`, whose spec is ABILITY-priced with dps0 0 and range0_wdist 0 \u2014 so an armed APC's gun and range were worth literally nothing. 16 members: the plain APCs, BTR-80, subterranean/amphibious/latin/ordos/atreides APCs, the IFV, hover and Hind transports, the Kirov and Zeppelin transports, and td_gdi_assaultapc. Unarmed transports stay in `support`.",

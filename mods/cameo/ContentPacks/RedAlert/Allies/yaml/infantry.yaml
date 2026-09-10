@@ -371,8 +371,8 @@ ra1_allies_machinegunner:
 	GrantExternalConditionToTransport:
 		Condition: ifv-hmg
 
-	FirepowerMultiplier:
-		Modifier: 93
+	# FirepowerMultiplier:
+		# Modifier: 93
 	Armament@PRIMARYCryo:
 		LocalOffset: 128,0,256
 		Weapon: ra1_allies_machinegunner_machinegun_cryo

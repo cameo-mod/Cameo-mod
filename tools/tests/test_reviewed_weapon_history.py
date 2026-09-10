@@ -5,10 +5,33 @@ import unittest
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2] / "tools/audit"))
 from miniyaml import Node
-from reviewed_weapon_history import historical_copy
+from reviewed_weapon_history import historical_copy, restore_target_policy_fields
 
 
 class ReviewedHistoryTests(unittest.TestCase):
+    def test_sonic_history_rejects_unrecorded_damage_change(self):
+        from miniyaml import Ruleset
+        from reviewed_weapon_history import restore_sonic_family
+        root = pathlib.Path(__file__).resolve().parents[2]
+        live = Ruleset(root).resolve_weapon('TSHellfireSonic')
+        old = restore_sonic_family(self, live)
+        self.assertEqual('42000', old.get('Warhead@Sonic_Medium', 'Damage'))
+        self.assertEqual('42000', live.get('Warhead@MissileSonic_Medium', 'Damage'))
+        live.child('Warhead@MissileSonic_Medium').child('Damage').value = '42001'
+        with self.assertRaises(AssertionError):
+            restore_sonic_family(self, live)
+
+    def test_target_history_asserts_new_mask_and_preserves_live_node(self):
+        from miniyaml import Ruleset
+        root = pathlib.Path(__file__).resolve().parents[2]
+        live = Ruleset(root).resolve_weapon('RA2FlakTrackAAGun')
+        old = restore_target_policy_fields(self, live)
+        self.assertEqual('Air', live.get('Warhead@SmallArmsPercentage', 'ValidTargets'))
+        self.assertEqual('Ground, Water', old.get('Warhead@SmallArmsPercentage', 'ValidTargets'))
+        live.child('Warhead@SmallArmsPercentage').child('ValidTargets').value = 'Ground'
+        with self.assertRaises(AssertionError):
+            restore_target_policy_fields(self, live)
+
     def fixture(self, value="102"):
         return Node("GrenadeRA", "", [Node("ReloadDelay", "40"),
             Node("Warhead@Demolition_Light", "AreaDamage", [

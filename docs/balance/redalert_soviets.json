@@ -169,32 +169,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 115,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@FighterBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -221,8 +196,9 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "3000",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "64",
         "tag": "MissileAP_MediumFlatCompatibility",
         "type": "AreaDamage"
@@ -249,8 +225,9 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "3000",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "64",
         "tag": "MissileAP_MediumFlatCompatibility",
         "type": "AreaDamage"
@@ -277,8 +254,9 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "3000",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "64",
         "tag": "MissileAP_MediumFlatCompatibility",
         "type": "AreaDamage"
@@ -305,8 +283,9 @@
      {
       "damage_warheads": [
        {
-        "damage": "10000",
+        "damage": "5000",
         "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "percentage_denominator": "10000",
         "spread": "253",
         "tag": "Thermobaric_MediumFlatCompatibility",
         "type": "AreaDamage"
@@ -314,6 +293,7 @@
        {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
+        "percentage_denominator": "200",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
@@ -321,6 +301,7 @@
        {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
+        "percentage_denominator": "200",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -328,6 +309,7 @@
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
+        "percentage_denominator": "200",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -335,6 +317,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "200",
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
@@ -368,8 +351,9 @@
      {
       "damage_warheads": [
        {
-        "damage": "10000",
+        "damage": "5000",
         "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "percentage_denominator": "10000",
         "spread": "253",
         "tag": "Thermobaric_MediumFlatCompatibility",
         "type": "AreaDamage"
@@ -377,6 +361,7 @@
        {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
+        "percentage_denominator": "200",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
@@ -384,6 +369,7 @@
        {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
+        "percentage_denominator": "200",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -391,6 +377,7 @@
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
+        "percentage_denominator": "200",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -398,6 +385,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "200",
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
@@ -431,8 +419,9 @@
      {
       "damage_warheads": [
        {
-        "damage": "10000",
+        "damage": "5000",
         "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "percentage_denominator": "10000",
         "spread": "253",
         "tag": "Thermobaric_MediumFlatCompatibility",
         "type": "AreaDamage"
@@ -440,6 +429,7 @@
        {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
+        "percentage_denominator": "200",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
@@ -447,6 +437,7 @@
        {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
+        "percentage_denominator": "200",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -454,6 +445,7 @@
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
+        "percentage_denominator": "200",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -461,6 +453,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "200",
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
@@ -494,7 +487,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "4000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
         "spread": "1000",
         "tag": "Nuclear_Super",
@@ -503,6 +496,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "200",
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
@@ -510,6 +504,7 @@
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
+        "percentage_denominator": "200",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -517,6 +512,7 @@
        {
         "damage": "1",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
+        "percentage_denominator": "200",
         "spread": "500",
         "tag": "NuclearWarheadPercentage",
         "type": "AreaDamagePercentage"
@@ -524,6 +520,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "200",
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
@@ -552,7 +549,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "4000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
         "spread": "1000",
         "tag": "Nuclear_Super",
@@ -561,6 +558,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "200",
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
@@ -568,6 +566,7 @@
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
+        "percentage_denominator": "200",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -575,6 +574,7 @@
        {
         "damage": "1",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
+        "percentage_denominator": "200",
         "spread": "500",
         "tag": "NuclearWarheadPercentage",
         "type": "AreaDamagePercentage"
@@ -582,6 +582,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "200",
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
@@ -610,7 +611,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "4000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
         "spread": "1000",
         "tag": "Nuclear_Super",
@@ -619,6 +620,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "200",
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
@@ -626,6 +628,7 @@
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
+        "percentage_denominator": "200",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -633,6 +636,7 @@
        {
         "damage": "1",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
+        "percentage_denominator": "200",
         "spread": "500",
         "tag": "NuclearWarheadPercentage",
         "type": "AreaDamagePercentage"
@@ -640,6 +644,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "200",
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
@@ -668,8 +673,9 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "1000",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
@@ -695,8 +701,9 @@
       "armament_name": "secondary",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "1000",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
@@ -721,8 +728,9 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
@@ -749,8 +757,9 @@
       "armament_name": "secondary",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
@@ -791,11 +800,6 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#FirepowerMultiplier@DualWeapon.Modifier",
-     "trait": "FirepowerMultiplier@DualWeapon",
-     "v": 0.5
-    },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#Health.HP",
      "v": "100000"
@@ -813,32 +817,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 105,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@HelicopterBuff",
-      "types": []
-     },
-     {
-      "modifier": 50,
-      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#FirepowerMultiplier@DualWeapon.Modifier",
-      "trait": "FirepowerMultiplier@DualWeapon",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -866,6 +845,14 @@
      "v": "Helicopter"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#Cargo.MaxWeight",
+     "v": "8"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#Valued.Cost",
      "v": "2500"
@@ -920,14 +907,15 @@
      {
       "damage_warheads": [
        {
-        "damage": "32000",
+        "damage": "8000",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "93",
         "tag": "Tesla_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
-        "damage": "8000",
+        "damage": "2000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Tesla_Heavy_ExtraDamage",
@@ -958,14 +946,15 @@
      {
       "damage_warheads": [
        {
-        "damage": "32000",
+        "damage": "8000",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "93",
         "tag": "Tesla_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
-        "damage": "8000",
+        "damage": "2000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Tesla_Heavy_ExtraDamage",
@@ -992,8 +981,9 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "1500",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "64",
         "tag": "MissileAP_MediumFlatCompatibility",
         "type": "AreaDamage"
@@ -1020,8 +1010,9 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "1500",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "64",
         "tag": "MissileAP_MediumFlatCompatibility",
         "type": "AreaDamage"
@@ -1048,8 +1039,9 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "1500",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "64",
         "tag": "MissileAP_MediumFlatCompatibility",
         "type": "AreaDamage"
@@ -1076,7 +1068,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "11000",
+        "damage": "2750",
         "falloff": "100, 52, 0",
         "spread": "47",
         "tag": "MissileTesla_MediumFlatCompatibility",
@@ -1085,6 +1077,7 @@
        {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
+        "percentage_denominator": "400",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
@@ -1092,6 +1085,7 @@
        {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
+        "percentage_denominator": "400",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -1099,6 +1093,7 @@
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
+        "percentage_denominator": "400",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -1106,6 +1101,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "400",
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -1113,6 +1109,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "400",
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
@@ -1141,7 +1138,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "11000",
+        "damage": "2750",
         "falloff": "100, 52, 0",
         "spread": "47",
         "tag": "MissileTesla_MediumFlatCompatibility",
@@ -1150,6 +1147,7 @@
        {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
+        "percentage_denominator": "400",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
@@ -1157,6 +1155,7 @@
        {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
+        "percentage_denominator": "400",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -1164,6 +1163,7 @@
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
+        "percentage_denominator": "400",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -1171,6 +1171,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "400",
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -1178,6 +1179,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "400",
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
@@ -1206,7 +1208,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "11000",
+        "damage": "2750",
         "falloff": "100, 52, 0",
         "spread": "47",
         "tag": "MissileTesla_MediumFlatCompatibility",
@@ -1215,6 +1217,7 @@
        {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
+        "percentage_denominator": "400",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
@@ -1222,6 +1225,7 @@
        {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
+        "percentage_denominator": "400",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -1229,6 +1233,7 @@
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
+        "percentage_denominator": "400",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -1236,6 +1241,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "400",
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -1243,6 +1249,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "400",
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
@@ -1271,8 +1278,9 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "500",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
@@ -1298,8 +1306,9 @@
       "armament_name": "secondary",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "500",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
@@ -1324,8 +1333,9 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "1000",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
@@ -1352,8 +1362,9 @@
       "armament_name": "secondary",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "1000",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
@@ -1394,11 +1405,6 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#FirepowerMultiplier@DualWeapon.Modifier",
-     "trait": "FirepowerMultiplier@DualWeapon",
-     "v": 0.25
-    },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#Health.HP",
      "v": "122500"
@@ -1416,32 +1422,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 105,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@HelicopterBuff",
-      "types": []
-     },
-     {
-      "modifier": 25,
-      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#FirepowerMultiplier@DualWeapon.Modifier",
-      "trait": "FirepowerMultiplier@DualWeapon",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1757,32 +1738,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 200,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@RearmableAircraft",
-      "types": []
-     },
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@BomberBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1809,7 +1765,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "200000",
+        "damage": "100000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
         "spread": "1000",
         "tag": "Nuclear_SuperFlatCompatibility",
@@ -1818,6 +1774,7 @@
        {
         "damage": "25",
         "falloff": "100, 50, 25, 10, 5",
+        "percentage_denominator": "200",
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
@@ -1825,6 +1782,7 @@
        {
         "damage": "25",
         "falloff": "99, 66, 33",
+        "percentage_denominator": "200",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -1832,6 +1790,7 @@
        {
         "damage": "25",
         "falloff": "111, 33, 11, 3",
+        "percentage_denominator": "200",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -1839,6 +1798,7 @@
        {
         "damage": "25",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
+        "percentage_denominator": "200",
         "spread": "500",
         "tag": "NuclearWarheadPercentage",
         "type": "AreaDamagePercentage"
@@ -1866,8 +1826,9 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
@@ -1898,8 +1859,9 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
@@ -1929,8 +1891,9 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "4000",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
@@ -1962,8 +1925,9 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "4000",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
@@ -2007,11 +1971,6 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
-    "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#FirepowerMultiplier@DualWeapon.Modifier",
-     "trait": "FirepowerMultiplier@DualWeapon",
-     "v": 0.5
-    },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#Health.HP",
      "v": "64000"
@@ -2029,38 +1988,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 115,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@FighterBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
-     {
-      "modifier": 50,
-      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#FirepowerMultiplier@DualWeapon.Modifier",
-      "trait": "FirepowerMultiplier@DualWeapon",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2089,10 +2017,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "40000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
+        "damage": "46000",
+        "falloff": "100, 0",
+        "percentage_denominator": "10000",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -2105,11 +2034,13 @@
       "requires": "!ra1_soviets_upgrade_thermobaricrockets",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileHE_Heavy",
        "^Projectile_Missile_Heavy",
        "^Effect_MissileHE_Heavy"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "ra1_soviets_su57attackbomber_missile",
@@ -2120,8 +2051,9 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "42000",
+        "damage": "48300",
         "falloff": "100, 74, 51, 36, 23, 13, 0",
+        "percentage_denominator": "10000",
         "spread": "184",
         "tag": "MissileThermobaric_Heavy",
         "type": "AreaDamage"
@@ -2151,8 +2083,9 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "4600",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
@@ -2182,8 +2115,9 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "4600",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
@@ -2213,8 +2147,9 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "9200",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "500",
         "spread": "200",
         "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
@@ -2245,8 +2180,9 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "9200",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "500",
         "spread": "200",
         "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
@@ -2290,11 +2226,6 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets.Modifier",
-     "trait": "FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets",
-     "v": 1.15
-    },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#Health.HP",
      "v": "65000"
@@ -2313,38 +2244,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 200,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@RearmableAircraft",
-      "types": []
-     },
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@BomberBuff",
-      "types": []
-     },
-     {
-      "modifier": 115,
-      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets.Modifier",
-      "trait": "FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2459,38 +2359,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 200,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@RearmableAircraft",
-      "types": []
-     },
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@BomberBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2517,63 +2386,67 @@
      {
       "damage_warheads": [
        {
-        "damage": "20",
+        "damage": "5",
         "falloff": null,
+        "percentage_denominator": "100",
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "20",
+        "damage": "5",
         "falloff": "100, 50, 25, 10, 5",
+        "percentage_denominator": "100",
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "20",
+        "damage": "5",
         "falloff": "99, 66, 33",
+        "percentage_denominator": "100",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "20",
+        "damage": "5",
         "falloff": "111, 33, 11, 3",
+        "percentage_denominator": "100",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "40000",
+        "damage": "10000",
         "falloff": "100, 50, 25, 10, 5",
         "spread": "800",
         "tag": "PreservedFlat_HeavyBomb",
         "type": "SpreadDamage"
        },
        {
-        "damage": "40000",
+        "damage": "10000",
         "falloff": "99, 66, 33",
         "spread": "1050",
         "tag": "PreservedFlat_HeavyChemicalWeapon",
         "type": "AreaDamage"
        },
        {
-        "damage": "40000",
+        "damage": "10000",
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "PreservedFlat_HeavyFlameWeapon",
         "type": "AreaDamage"
        },
        {
-        "damage": "20000",
+        "damage": "5000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "PreservedFlat_TeslaExtraDamage",
         "type": "SpreadDamage"
        },
        {
-        "damage": "40000",
+        "damage": "10000",
         "falloff": null,
         "spread": "100",
         "tag": "PreservedFlat_TeslaWeapon",
@@ -2602,14 +2475,15 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "4000",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "93",
         "tag": "Tesla_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
-        "damage": "4000",
+        "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Tesla_Heavy_ExtraDamage",
@@ -2643,14 +2517,15 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "4000",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "93",
         "tag": "Tesla_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
-        "damage": "4000",
+        "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Tesla_Heavy_ExtraDamage",
@@ -2680,8 +2555,9 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "1000",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
@@ -2712,8 +2588,9 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "1000",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
@@ -2743,8 +2620,9 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "2000",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
@@ -2776,8 +2654,9 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "2000",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
@@ -2821,11 +2700,6 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
-    "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
-     "trait": "FirepowerMultiplier@MultiWeapon",
-     "v": 0.25
-    },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#Health.HP",
      "v": "64000"
@@ -2843,38 +2717,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 115,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@FighterBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
-     {
-      "modifier": 25,
-      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
-      "trait": "FirepowerMultiplier@MultiWeapon",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2903,7 +2746,7 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "40000",
+        "damage": "10000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
         "tag": "Flame_Heavy",
@@ -2912,6 +2755,7 @@
        {
         "damage": "5",
         "falloff": "100, 75, 50, 25",
+        "percentage_denominator": "400",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -2919,6 +2763,7 @@
        {
         "damage": "5",
         "falloff": "100, 50, 25, 10, 5",
+        "percentage_denominator": "400",
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
@@ -2926,6 +2771,7 @@
        {
         "damage": "5",
         "falloff": "111, 33, 11, 3",
+        "percentage_denominator": "400",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -2933,6 +2779,7 @@
        {
         "damage": "5",
         "falloff": "111, 33, 11, 3",
+        "percentage_denominator": "400",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -2962,8 +2809,9 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "1000",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
@@ -2994,8 +2842,9 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "1000",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
@@ -3025,8 +2874,9 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "2000",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
@@ -3058,8 +2908,9 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "2000",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
@@ -3103,11 +2954,6 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#FirepowerMultiplier@DualWeapon.Modifier",
-     "trait": "FirepowerMultiplier@DualWeapon",
-     "v": 0.25
-    },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#Health.HP",
      "v": "32000"
@@ -3127,32 +2973,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 115,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@FighterBuff",
-      "types": []
-     },
-     {
-      "modifier": 25,
-      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#FirepowerMultiplier@DualWeapon.Modifier",
-      "trait": "FirepowerMultiplier@DualWeapon",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3820,20 +3641,7 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@DefenseBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3969,36 +3777,40 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
+        "damage": "17600",
+        "falloff": "100, 70, 30, 0",
+        "spread": "400",
+        "tag": "MissileAA_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "22",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2",
+        "damage": "22",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "300",
         "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2",
+        "damage": "22",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2",
+        "damage": "22",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "100",
         "tag": "LightMissilePercentage",
         "type": "AreaDamagePercentage"
@@ -4011,6 +3823,7 @@
       "reloaddelay": "27",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_MissileAA_Heavy",
        "^Warhead_MissileHE_Heavy",
        "^FlakWeapon",
        "^HeavyMissile",
@@ -4018,6 +3831,7 @@
        "^LightMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Heavy",
        "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "ra1_soviets_samsite_missile_AA",
@@ -4040,11 +3854,6 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml#FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets.Modifier",
-     "trait": "FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets",
-     "v": 1.1
-    },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml#Health.HP",
      "v": "75000"
@@ -4062,26 +3871,7 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@DefenseBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml#FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets.Modifier",
-      "trait": "FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4242,20 +4032,7 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@DefenseBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4282,8 +4059,9 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "560",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
@@ -4315,8 +4093,9 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "560",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
@@ -4360,11 +4139,6 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
-    "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#FirepowerMultiplier@ra1_soviets_ak47conscript.Modifier",
-     "trait": "FirepowerMultiplier@ra1_soviets_ak47conscript",
-     "v": 0.14
-    },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Health.HP",
      "v": "44000"
@@ -4378,32 +4152,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 100,
-      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#FirepowerMultiplier@ScoutInfantryBuff.Modifier",
-      "trait": "FirepowerMultiplier@ScoutInfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 14,
-      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#FirepowerMultiplier@ra1_soviets_ak47conscript.Modifier",
-      "trait": "FirepowerMultiplier@ra1_soviets_ak47conscript",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -4531,32 +4280,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 120,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@SniperInfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4632,32 +4356,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@MeleeBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4734,26 +4433,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@MeleeBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4780,49 +4460,54 @@
      {
       "damage_warheads": [
        {
-        "damage": "200000",
+        "damage": "206000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "CannonAP_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
+        "damage": "103",
         "falloff": "100, 0",
+        "percentage_denominator": "2500",
         "spread": "1",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4",
+        "damage": "103",
         "falloff": "100, 0",
+        "percentage_denominator": "2500",
         "spread": "1",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4",
+        "damage": "103",
         "falloff": "100, 0",
+        "percentage_denominator": "2500",
         "spread": "1",
         "tag": "LightMissilePercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4",
+        "damage": "103",
         "falloff": "100, 0",
+        "percentage_denominator": "2500",
         "spread": "1",
         "tag": "HeavyCannonPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4",
+        "damage": "103",
         "falloff": "100, 0",
+        "percentage_denominator": "2500",
         "spread": "1",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1000",
+        "damage": "1030",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "LegacyRailgunExtraDamage",
@@ -4848,49 +4533,54 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "200000",
+        "damage": "206000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "CannonAP_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
+        "damage": "103",
         "falloff": "100, 0",
+        "percentage_denominator": "2500",
         "spread": "1",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4",
+        "damage": "103",
         "falloff": "100, 0",
+        "percentage_denominator": "2500",
         "spread": "1",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4",
+        "damage": "103",
         "falloff": "100, 0",
+        "percentage_denominator": "2500",
         "spread": "1",
         "tag": "LightMissilePercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4",
+        "damage": "103",
         "falloff": "100, 0",
+        "percentage_denominator": "2500",
         "spread": "1",
         "tag": "HeavyCannonPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4",
+        "damage": "103",
         "falloff": "100, 0",
+        "percentage_denominator": "2500",
         "spread": "1",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1000",
+        "damage": "1030",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "LegacyRailgunExtraDamage",
@@ -4930,11 +4620,6 @@
      "tech_tier": 0.75,
      "unit_class": null
     },
-    "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
-     "trait": "FirepowerMultiplier",
-     "v": 1.03
-    },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Health.HP",
      "v": "20000"
@@ -4948,32 +4633,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AntiTankAntiAirInfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 103,
-      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
-      "trait": "FirepowerMultiplier",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -5146,26 +4806,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AntiTankAntiAirInfantryBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -5337,20 +4978,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5550,26 +5178,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 120,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GrenadierInfantryBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5596,8 +5205,9 @@
      {
       "damage_warheads": [
        {
-        "damage": "32000",
+        "damage": "24000",
         "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "percentage_denominator": "10000",
         "spread": "253",
         "tag": "Thermobaric_Medium",
         "type": "AreaDamage"
@@ -5612,22 +5222,21 @@
       "requires": "!ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Thermobaric_Medium",
-       "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium"
+       "ra1_soviets_mortarsoldier_siegemortar"
       ],
       "warheads": [
        "^Warhead_Thermobaric_Medium"
       ],
-      "weapon": "ra1_soviets_mortarsoldier_siegemortar",
+      "weapon": "ra1_soviets_mortarsoldier_siegemortar_ExplicitDamage3of4",
       "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "32000",
+        "damage": "24000",
         "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "percentage_denominator": "10000",
         "spread": "253",
         "tag": "Thermobaric_Medium",
         "type": "AreaDamage"
@@ -5642,21 +5251,20 @@
       "requires": "!ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_Thermobaric_Medium",
-       "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium"
+       "ra1_soviets_mortarsoldier_siegemortar"
       ],
       "warheads": [
        "^Warhead_Thermobaric_Medium"
       ],
-      "weapon": "ra1_soviets_mortarsoldier_siegemortar",
+      "weapon": "ra1_soviets_mortarsoldier_siegemortar_ExplicitDamage3of4",
       "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
        {
-        "damage": "24000",
+        "damage": "18000",
         "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "percentage_denominator": "10000",
         "spread": "338",
         "tag": "Thermobaric_Heavy",
         "type": "AreaDamage"
@@ -5671,22 +5279,21 @@
       "requires": "ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Warhead_Thermobaric_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy"
+       "ra1_soviets_mortarsoldier_siegemortarthermobaric"
       ],
       "warheads": [
        "^Warhead_Thermobaric_Heavy"
       ],
-      "weapon": "ra1_soviets_mortarsoldier_siegemortarthermobaric",
+      "weapon": "ra1_soviets_mortarsoldier_siegemortarthermobaric_ExplicitDamage3of4",
       "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "24000",
+        "damage": "18000",
         "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "percentage_denominator": "10000",
         "spread": "338",
         "tag": "Thermobaric_Heavy",
         "type": "AreaDamage"
@@ -5701,14 +5308,12 @@
       "requires": "ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
-       "^Warhead_Thermobaric_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy"
+       "ra1_soviets_mortarsoldier_siegemortarthermobaric"
       ],
       "warheads": [
        "^Warhead_Thermobaric_Heavy"
       ],
-      "weapon": "ra1_soviets_mortarsoldier_siegemortarthermobaric",
+      "weapon": "ra1_soviets_mortarsoldier_siegemortarthermobaric_ExplicitDamage3of4",
       "weapon_class_source": "template"
      }
     ],
@@ -5728,11 +5333,6 @@
      "tech_tier": null,
      "unit_class": null
     },
-    "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#FirepowerMultiplier@SplashDamage.Modifier",
-     "trait": "FirepowerMultiplier@SplashDamage",
-     "v": 0.75
-    },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Health.HP",
      "v": "16000"
@@ -5747,32 +5347,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
-     {
-      "modifier": 75,
-      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#FirepowerMultiplier@SplashDamage.Modifier",
-      "trait": "FirepowerMultiplier@SplashDamage",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5801,8 +5376,9 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "840",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
@@ -5832,8 +5408,9 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "840",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
@@ -5862,8 +5439,9 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "1680",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
@@ -5897,8 +5475,9 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "1680",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
@@ -5944,11 +5523,6 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
-    "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#FirepowerMultiplier@ra1_soviets_rifleinfantry.Modifier",
-     "trait": "FirepowerMultiplier@ra1_soviets_rifleinfantry",
-     "v": 0.42
-    },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Health.HP",
      "v": "34000"
@@ -5962,32 +5536,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 100,
-      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#FirepowerMultiplier@ScoutInfantryBuff.Modifier",
-      "trait": "FirepowerMultiplier@ScoutInfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 42,
-      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#FirepowerMultiplier@ra1_soviets_rifleinfantry.Modifier",
-      "trait": "FirepowerMultiplier@ra1_soviets_rifleinfantry",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -6019,9 +5568,9 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "150",
-        "tag": "MissileHE_MediumFlatCompatibility",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -6035,7 +5584,7 @@
        "RocketsRA"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "ra1_soviets_rocketsoldier_rocketsra",
       "weapon_class_source": "template"
@@ -6045,9 +5594,9 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "150",
-        "tag": "MissileHE_MediumFlatCompatibility",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -6061,7 +5610,7 @@
        "RocketsRA"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "ra1_soviets_rocketsoldier_rocketsra",
       "weapon_class_source": "template"
@@ -6097,26 +5646,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AntiTankAntiAirInfantryBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -6377,20 +5907,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7310,32 +6827,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@HeroBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7529,20 +7021,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -8933,6 +8412,14 @@
      "v": "Heavy"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Cargo.MaxWeight",
+     "v": "7"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Valued.Cost",
      "v": "1600"
@@ -8941,7 +8428,7 @@
      "category": "Vehicles",
      "class_anchor": null,
      "special": null,
-     "subtype": "SupportVehicle",
+     "subtype": "ArmedTroopTransport",
      "tech_tier": null,
      "unit_class": null
     },
@@ -8962,14 +8449,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -9061,6 +8541,14 @@
      "v": "Medium"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Cargo.MaxWeight",
+     "v": "4"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Valued.Cost",
      "v": "800"
@@ -9090,14 +8578,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -9408,20 +8889,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -9490,7 +8958,7 @@
      "category": "Vehicles",
      "class_anchor": null,
      "special": null,
-     "subtype": "Vehicle",
+     "subtype": "LineBreaker",
      "tech_tier": null,
      "unit_class": null
     },
@@ -9525,7 +8993,7 @@
     },
     "sight": {
      "src": "inherited",
-     "v": "5c0"
+     "v": "8000"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Mobile.Speed",
@@ -9654,14 +9122,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -9860,20 +9321,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -9904,8 +9352,9 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "1500",
         "falloff": "111, 33, 11, 3",
+        "percentage_denominator": "10000",
         "spread": "500",
         "tag": "Inferno_Heavy",
         "type": "AreaDamage"
@@ -9931,8 +9380,9 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "1500",
         "falloff": "111, 33, 11, 3",
+        "percentage_denominator": "10000",
         "spread": "500",
         "tag": "Inferno_Heavy",
         "type": "AreaDamage"
@@ -9956,8 +9406,9 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "1500",
         "falloff": "111, 33, 11, 3",
+        "percentage_denominator": "10000",
         "spread": "500",
         "tag": "Inferno_Heavy",
         "type": "AreaDamage"
@@ -9981,8 +9432,9 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "1500",
         "falloff": "111, 33, 11, 3",
+        "percentage_denominator": "10000",
         "spread": "500",
         "tag": "Inferno_Heavy",
         "type": "AreaDamage"
@@ -10021,11 +9473,6 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
-    "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
-     "trait": "FirepowerMultiplier@MultiWeapon",
-     "v": 0.25
-    },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "60000"
@@ -10043,26 +9490,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
-     {
-      "modifier": 25,
-      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
-      "trait": "FirepowerMultiplier@MultiWeapon",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -10253,14 +9681,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -10424,20 +9845,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -10561,20 +9969,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -10656,14 +10051,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -10918,9 +10306,9 @@
       "damage_warheads": [
        {
         "damage": "24000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -10935,7 +10323,7 @@
        "MammothTusk"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy"
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "ra1_soviets_mammothtank_mammothtusk",
       "weapon_class_source": "template"
@@ -10947,9 +10335,9 @@
       "damage_warheads": [
        {
         "damage": "24000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -10964,7 +10352,7 @@
        "MammothTusk"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy"
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "MammothTuskTargetingComputer",
       "weapon_class_source": "template"
@@ -11284,14 +10672,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -11387,8 +10768,9 @@
       "burstdelays": "32",
       "damage_warheads": [
        {
-        "damage": "80000",
+        "damage": "84000",
         "falloff": "100, 88, 75, 62, 52, 42, 33, 24, 16, 8, 0",
+        "percentage_denominator": "10000",
         "spread": "400",
         "tag": "CannonNuke_Heavy",
         "type": "AreaDamage"
@@ -11418,8 +10800,9 @@
       "burstdelays": "32",
       "damage_warheads": [
        {
-        "damage": "120000",
+        "damage": "126000",
         "falloff": "100, 76, 56, 38, 0",
+        "percentage_denominator": "10000",
         "spread": "346",
         "tag": "CannonFire_Heavy",
         "type": "AreaDamage"
@@ -11449,21 +10832,23 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "40000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_HeavyFlatCompatibility",
+        "damage": "42000",
+        "falloff": "100, 0",
+        "percentage_denominator": "10000",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7833",
       "reloaddelay": "125",
       "requires": "!ra1_soviets_upgrade_teslarockets && !ra1_soviets_upgrade_thermonuclearrockets",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
+       "^Warhead_MissileAP_Heavy",
        "^Compatibility_MissileHE_HeavyFlat",
        "^Warhead_Demolition_Heavy",
        "^Warhead_MissileHE_Heavy",
@@ -11471,47 +10856,52 @@
        "^Effect_MissileHE_Heavy"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_Demolition_Heavy",
        "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "ra1_soviets_monstertank_missile",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "4",
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "120250",
+        "damage": "126260",
         "falloff": "100, 52, 0",
         "spread": "63",
         "tag": "MissileTesla_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
-        "damage": "13",
+        "damage": "273",
         "falloff": "100, 50, 33, 25, 20",
+        "percentage_denominator": "2000",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "13",
+        "damage": "273",
         "falloff": "111, 33, 11, 3",
+        "percentage_denominator": "2000",
         "spread": "250",
         "tag": "LightFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "13",
+        "damage": "273",
         "falloff": null,
+        "percentage_denominator": "2000",
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "13",
+        "damage": "273",
         "falloff": null,
+        "percentage_denominator": "2000",
         "spread": "300",
         "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
@@ -11541,64 +10931,72 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "106000",
+        "damage": "111300",
         "falloff": "100, 76, 57, 43, 31, 17, 0",
         "spread": "338",
         "tag": "Thermobaric_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "7",
+        "damage": "147",
         "falloff": "111, 33, 11, 3",
+        "percentage_denominator": "2000",
         "spread": "250",
         "tag": "LightFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "7",
+        "damage": "147",
         "falloff": "111, 33, 11, 3",
+        "percentage_denominator": "2000",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "7",
+        "damage": "147",
         "falloff": "111, 33, 11, 3",
+        "percentage_denominator": "2000",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "7",
+        "damage": "147",
         "falloff": "100, 50, 33, 25, 20",
+        "percentage_denominator": "2000",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "7",
+        "damage": "147",
         "falloff": null,
+        "percentage_denominator": "2000",
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "7",
+        "damage": "147",
         "falloff": "100, 75, 50, 25",
+        "percentage_denominator": "2000",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "7",
+        "damage": "147",
         "falloff": null,
+        "percentage_denominator": "2000",
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "7",
+        "damage": "147",
         "falloff": null,
+        "percentage_denominator": "2000",
         "spread": "300",
         "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
@@ -11650,11 +11048,6 @@
      "tech_tier": 0.75,
      "unit_class": 0.4
     },
-    "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets.Modifier",
-     "trait": "FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets",
-     "v": 1.05
-    },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "1000000"
@@ -11673,26 +11066,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
-     {
-      "modifier": 105,
-      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets.Modifier",
-      "trait": "FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -11825,14 +11199,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -12272,9 +11639,9 @@
       "damage_warheads": [
        {
         "damage": "48000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -12307,9 +11674,11 @@
       "requires": "!ra1_soviets_upgrade_thermobaricrockets && ra1_soviets_promotion_mammothtanktargetingcomputer",
       "slot": "Armament@SECONDARYTargetingComputer",
       "versus_templates": [
+       "^Warhead_MissileAP_Heavy",
        "ra1_soviets_siegemammothtank_mammothtusk2"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "ra1_soviets_siegemammothtank_mammothtusk2targetingcomputer",
@@ -12454,14 +11823,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -12690,14 +12052,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -12855,14 +12210,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -13116,14 +12464,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"

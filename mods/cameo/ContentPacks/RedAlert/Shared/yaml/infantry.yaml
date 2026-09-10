@@ -15,12 +15,12 @@ ra1_allies_rifleinfantry:
 		HP: 27000
 	ChangesHealth@SelfHealing:
 		Step: 28
-	DamageMultiplier@ScoutInfantryBuff:
-		Modifier: 100
-	FirepowerMultiplier@ScoutInfantryBuff:
-		Modifier: 100
-	FirepowerMultiplier@ra1_allies_rifleinfantry:
-		Modifier: 47
+	# DamageMultiplier@ScoutInfantryBuff:
+		# Modifier: 100
+	# FirepowerMultiplier@ScoutInfantryBuff:
+		# Modifier: 100
+	# FirepowerMultiplier@ra1_allies_rifleinfantry:
+		# Modifier: 47
 	Buildable:
 		Prerequisites: ~ra1_allies_alliedbarracks
 		Description: Basic infantry unit.\n  Strong vs Infantry\n  Weak vs Vehicles

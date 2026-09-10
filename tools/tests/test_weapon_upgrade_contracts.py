@@ -73,18 +73,18 @@ class WeaponUpgradeContractTest(unittest.TestCase):
         self.assertEqual(weapon.get("Range"), "5000")
         self.assertEqual(weapon.get("Projectile"), "GravityBomb")
         self.assertEqual(weapon.get("Projectile", "Image"), "PARABOMB")
-        cryo = self._warhead("ra1_allies_cargoplanebomber_parabombcryo", "Warhead@CryoBlast_Heavy")
+        cryo = self._warhead("ra1_allies_cargoplanebomber_parabombcryo", "Warhead@BlastCryo_Heavy")
         self.assertEqual(cryo.get("Damage"), "40000")
         self.assertEqual(cryo.get("PhysicalStates", "Temperature"), "-67")
         self.assertEqual(
             {c.key for c in weapon.children if c.key.startswith("Warhead")},
-            {"Warhead@CryoBlast_Heavy", "Warhead@Effect", "Warhead@EffectWater",
+            {"Warhead@BlastCryo_Heavy", "Warhead@Effect", "Warhead@EffectWater",
              "Warhead@EffectAir"})
 
     def test_thunderbolt_patriot_is_an_anti_air_upgrade(self):
         self.assertEqual(
             self._warhead("RA2PatriotThunderboltMissile", "Warhead@MissileAA_Heavy").get("Damage"),
-            "10000")
+            "12100")
         self._assert_not_weaker("RA2Patriot", "RA2PatriotThunderboltMissile", upgrade.AIR)
 
     def test_armor_piercing_officer_round_preserves_base_payload_and_range(self):
@@ -125,17 +125,38 @@ class WeaponUpgradeContractTest(unittest.TestCase):
 
     def test_sonic_hellfire_uses_the_shipped_single_main_without_an_exemption(self):
         self.assertLessEqual(RAW_SPLIT_BASELINE, 322)
-        # e779558f5 collapsed the inherited missile main into Sonic_Medium.
-        # Keep the no-exemption contract, but do not require the superseded stack.
+        # The delivery-specific replacement remains one main, with no exemption.
         mains = main_warheads(self.rs.resolve_weapon("TSHellfireSonic"))
-        self.assertEqual(["Sonic_Medium"], mains)
+        self.assertEqual(["MissileSonic_Medium"], mains)
         self.assertEqual(
-            "32000", self._warhead("TSHellfireSonic", "Warhead@Sonic_Medium").get("Damage"))
+            "42000", self._warhead("TSHellfireSonic", "Warhead@MissileSonic_Medium").get("Damage"))
         self.assertIsNone(self.rs.resolve_weapon("TSHellfireSonic").child("Warhead@MissileAP_Heavy"))
         reviewed = validated_reviewed_predicate(self.rs, main_warhead_nodes)
         self.assertFalse(reviewed("TSHellfireSonic", mains))
         self.assertFalse(reviewed("CopiedHellfireSonic", mains))
         self.assertFalse(reviewed("TSHellfireSonic", mains + ["Sonic_Heavy"]))
+
+    def test_delivery_sonic_replacements_have_one_family_and_increase_role_damage(self):
+        cases = {
+            'TSGrenadeSonic': ('TSGrenadeG', 'BlastSonic_Light'),
+            'TSHellfireSonic': ('TSHellfire', 'MissileSonic_Medium'),
+            'TSZoneHellfireSonic': ('TSZoneHellfire', 'MissileSonic_Heavy'),
+            'KodiakCannonSonic': ('KodiakCannon', 'CannonSonic_Heavy'),
+            'TSBombSonic': ('TSBomb', 'BlastSonic_Heavy'),
+            'TSAssaultCannonSonic': ('TSAssaultCannon', 'BulletSonic_Medium'),
+            'TSAssaultCannonTalSonic': ('TSAssaultCannonTal', 'BulletSonic_Medium'),
+            'TSVulcanGunSonic': ('TSVulcanGun', 'BulletSonic_Medium'),
+        }
+        for name, (base, family) in cases.items():
+            with self.subTest(weapon=name):
+                node = self.rs.resolve_weapon(name)
+                self.assertEqual([family], main_warheads(node))
+                self.assertTrue(any(c.get('Condition') == 'SonicDebuff'
+                                    for c in node.children if c.value == 'GrantExternalCondition'))
+                armors = upgrade.CORE
+                if 'Air' in (self.rs.resolve_weapon(base).get('ValidTargets') or '').split(', '):
+                    armors += upgrade.AIR
+                self._assert_not_weaker(base, name, armors)
 
     def test_quantum_emp_anti_air_replacements_increase_damage(self):
         for base, upgraded in (

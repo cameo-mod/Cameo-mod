@@ -29,7 +29,7 @@ td_gdi_tiberiumharvester:
 
 td_gdi_apc:
 	Inherits: ^Tank
-	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@Template: ^ArmedTroopTransportTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
@@ -373,8 +373,8 @@ td_gdi_boxer:
 		Recoil: 43
 		LocalOffset: 800,80,400, 800,-80,400
 		MuzzleSequence: muzzle
-	FirepowerMultiplier@ra1_allies_alliedheavyaatank:
-		Modifier: 50
+	# FirepowerMultiplier@ra1_allies_alliedheavyaatank:
+		# Modifier: 50
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -681,8 +681,8 @@ td_gdi_humveemkii:
 		LocalOffset: 150,50,50
 		MuzzleSequence: muzzle
 		RequiresCondition: td_gdi_upgrade_advancedmissiletargeting
-	FirepowerMultiplier@Upgrade:
-		Modifier: 50
+	# FirepowerMultiplier@Upgrade:
+		# Modifier: 50
 	RangeMultiplier@td_gdi_upgrade_advancedmissiletargeting:
 		Modifier: 105
 	RenderSprites:

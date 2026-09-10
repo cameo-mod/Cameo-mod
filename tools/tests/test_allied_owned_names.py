@@ -23,6 +23,8 @@ def digest(obj):
 def ordered(n): return [n.key,n.value,[ordered(c) for c in n.children]]
 
 
+from reviewed_weapon_history import restore_target_policy_fields
+
 class AlliedOwnedNameTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -40,6 +42,8 @@ class AlliedOwnedNameTests(unittest.TestCase):
                 if new == 'ra1_allies_gunboat_cannon' and node.child('Warhead@CannonAP') is not None:
                     from reviewed_weapon_history import restore_endpoint_weapon
                     node = restore_endpoint_weapon(self, node)
+                else:
+                    node = restore_target_policy_fields(self, node)
                 self.assertEqual(digest(node_to_obj(node)),self.before['weapon_hashes'][old])
                 self.assertEqual(digest([ordered(c) for c in node.children]),self.before['ordered_hashes'][old])
                 self.assertEqual(len(self.rules.inherits_of(self.rules.weapon(new))),3)

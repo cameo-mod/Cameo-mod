@@ -44,6 +44,7 @@ def current_endpoint_name(rules, name):
 
 def restore_endpoint_weapon(test, node):
     """Validate the exact h0 replacement, then restore the ordered historical view."""
+    node = restore_target_policy_fields(test, node)
     from dump_resolved import node_to_obj
     from miniyaml import load_text
     historical_name = '2Inch' if node.key == OWNED_GUNBOAT else node.key
@@ -229,9 +230,158 @@ def trajectory_changes():
     return {row['weapon']: row['fields'] for row in rollout['changes']}
 
 
+@lru_cache(maxsize=1)
+def target_policy_field_changes():
+    return json.loads((pathlib.Path(__file__).parent / 'fixtures' /
+                       'target_policy_field_history_20260910.json').read_text(encoding='utf-8'))
+
+
+@lru_cache(maxsize=1)
+def sonic_family_changes():
+    return json.loads((pathlib.Path(__file__).parent / 'fixtures' /
+                       'sonic_family_history_20260910.json').read_text(encoding='utf-8'))
+
+
+@lru_cache(maxsize=1)
+def missile_role_changes():
+    return json.loads((pathlib.Path(__file__).parent / 'fixtures' /
+                       'missile_role_history_20260910.json').read_text(encoding='utf-8'))
+
+
+@lru_cache(maxsize=1)
+def missile_parent_role_changes():
+    return json.loads((pathlib.Path(__file__).parent / 'fixtures' /
+                       'missile_parent_role_history_20260910.json').read_text(encoding='utf-8'))
+
+
+def restore_missile_role(test, node, source=False):
+    """Validate the complete new role checkpoint before exposing its predecessor."""
+    def ordered(n):
+        return [n.key, n.value, [ordered(c) for c in n.children]]
+    def rebuild(row):
+        return Node(row[0], row[1], [rebuild(c) for c in row[2]])
+    copy = node.deep_copy()
+    for history in (missile_parent_role_changes(), missile_role_changes()):
+        record = history.get(copy.key)
+        if record is None:
+            continue
+        digest = hashlib.sha256(json.dumps(ordered(copy), separators=(',', ':')).encode()).hexdigest()
+        test.assertEqual(record['source_current_hash' if source else 'current_hash'], digest, copy.key)
+        copy = rebuild(record['source_before' if source else 'before'])
+    return copy
+
+
+@lru_cache(maxsize=1)
+def secondary_target_policy_changes():
+    return json.loads((pathlib.Path(__file__).parent / 'fixtures' /
+                       'secondary_target_policy_history_20260910.json').read_text(encoding='utf-8'))
+
+
+def restore_secondary_target_policy(test, node):
+    record = secondary_target_policy_changes().get(node.key)
+    if record is None:
+        return node
+    def ordered(n):
+        return [n.key, n.value, [ordered(c) for c in n.children]]
+    def rebuild(row):
+        return Node(row[0], row[1], [rebuild(c) for c in row[2]])
+    digest = hashlib.sha256(json.dumps(ordered(node), separators=(',', ':')).encode()).hexdigest()
+    test.assertEqual(record['current_hash'], digest, node.key)
+    return rebuild(record['before'])
+
+
+def restore_sonic_family(test, node):
+    """Restore only the exact pre-Sonic-family checkpoint in a test copy."""
+    copy = restore_secondary_target_policy(test, restore_missile_role(test, node))
+    sonic = sonic_family_changes()
+    if node.key in sonic:
+        def ordered(n):
+            return [n.key, n.value, [ordered(c) for c in n.children]]
+        test.assertEqual(sonic[node.key]['current'], ordered(node), node.key)
+        def rebuild(row):
+            return Node(row[0], row[1], [rebuild(c) for c in row[2]])
+        copy = rebuild(sonic[node.key]['before'])
+    return copy
+
+
+def restore_target_policy_fields(test, node):
+    """Assert current target masks; restore only exact recorded historical fields."""
+    copy = restore_sonic_family(test, node)
+    if node.key == 'SCDevourerAA':
+        cloud = copy.child('Warhead@Cloud').child('Weapon')
+        test.assertEqual('sc_zerg_devourer_acidcloud_aa', cloud.value)
+        cloud.value = 'AnthraxCloudPurpleLarge'
+    if node.key == 'RA2PatriotThunderboltMissile':
+        damage = copy.child('Warhead@MissileAA_Heavy').child('Damage')
+        test.assertEqual('12100', damage.value, node.key)
+        damage.value = '10000'
+    # Aedis's delivery-first rename is numerical/behavioral identity. Keep old
+    # converter fingerprints intact, including their historical warhead names.
+    if node.key in {
+        'ra1_allies_cargoplanebomber_parabombcryo', 'DepthChargeCryo',
+        'ra1_allies_cruiser_8inchcryo', 'ra1_allies_longbow_missile_cryo',
+        'ra1_allies_rapierjumpjet_bomb_cryo', 'ra1_allies_rapierjumpjet_missile_cryo_AA',
+        'ra1_allies_gunboat_depthchargecryo', 'ra1_allies_destroyer_depthchargecryo',
+    }:
+        for child in copy.children:
+            if child.key.startswith('Warhead@BlastCryo_'):
+                child.key = child.key.replace('Warhead@BlastCryo_', 'Warhead@CryoBlast_', 1)
+    for tag, key, before, after in target_policy_field_changes().get(node.key, ()):
+        warhead = copy.child(tag)
+        test.assertIsNotNone(warhead, (node.key, tag))
+        field = warhead.child(key)
+        test.assertEqual(after, field.value if field else None, (node.key, tag, key))
+        if before is None:
+            warhead.children = [c for c in warhead.children if c.key != key]
+        elif field is not None:
+            field.value = before
+        else:
+            raise AssertionError(('unexpected removed historical field', node.key, tag, key))
+    return copy
+
+
+@lru_cache(maxsize=1)
+def full_air_payload_changes():
+    """The reviewed full-air payload mask additions (three dual-target leaves)."""
+    return json.loads((pathlib.Path(__file__).parent / 'fixtures' /
+                       'dual_target_payload_history_20260910.json').read_text(encoding='utf-8'))
+
+
+def restore_full_air_payload(test, node):
+    """Assert the reviewed mask additions, then reverse ONLY those in a test copy.
+
+    Test-only reconciliation, same contract as the other reviewed upstream deltas
+    here: the production converter's preserved fingerprint and its expected hashes
+    are untouched and still see the pre-review value.
+    """
+    record = full_air_payload_changes()['changed_fields'].get(node.key)
+    if not record:
+        return node
+    copy = node.deep_copy()
+    for path, before, after in record:
+        keys = [part for part in path.split('/') if part]
+        parent = copy
+        for key in keys[:-1]:
+            parent = parent.child(key)
+            test.assertIsNotNone(parent, (node.key, path))
+        field = keys[-1]
+        current = parent.child(field)
+        test.assertEqual(after, current.value if current is not None else None, (node.key, path))
+        if before is None:
+            parent.children = [c for c in parent.children if c.key != field]
+        elif current is not None:
+            current.value = before
+        else:
+            parent.children.append(Node(field, before))
+    return copy
+
+
 def historical_copy(test, node):
     if node.key in ALL_ENDPOINTS or node.key == OWNED_GUNBOAT:
         node = restore_endpoint_weapon(test, node)
+    else:
+        node = restore_target_policy_fields(test, node)
+    node = restore_full_air_payload(test, node)
     if node.key == 'RA2FreedomRocket_elite':
         node = restore_freedom_elite(test, node)
     copy = node.deep_copy()
@@ -280,8 +430,35 @@ class HistoricalView:
     def __getattr__(self, key):
         return getattr(self.rules, key)
 
+    def weapon(self, name):
+        return restore_missile_role(self.test, self.rules.weapon(name), source=True)
+
     def resolve_weapon(self, name):
         return historical_copy(self.test, self.rules.resolve_weapon(name))
+
+
+class SonicFamilyView(HistoricalView):
+    def resolve_weapon(self, name):
+        return restore_sonic_family(self.test, self.rules.resolve_weapon(name))
+
+    def weapon(self, name):
+        source = super().weapon(name)
+        if source.key not in sonic_family_changes():
+            return source
+        # Older converter selection also examines the authored family reference.
+        # Validate the complete current payload before restoring that identity.
+        old = self.resolve_weapon(name)
+        current = self.rules.resolve_weapon(name)
+        old_main = next(c for c in old.children if c.key.startswith('Warhead@Sonic_')
+                        and c.value in ('AreaDamage', 'SpreadDamage'))
+        new_main = next(c for c in current.children if c.value == 'AreaDamage'
+                        and 'Sonic_' in c.key)
+        copy = source.deep_copy()
+        family = copy.child('Inherits@sonicfamily')
+        self.test.assertIsNotNone(family, name)
+        self.test.assertEqual('^Warhead_' + new_main.key.split('@')[1], family.value)
+        family.value = '^Warhead_' + old_main.key.split('@')[1].replace('FlatCompatibility', '')
+        return copy
 
 
 def restore_later_profile(test, node):
@@ -291,6 +468,7 @@ def restore_later_profile(test, node):
     historical_name = LATER_HISTORICAL_NAMES.get(node.key, node.key)
     if historical_name not in fixture:
         return node
+    node = restore_target_policy_fields(test, node)
     record = fixture[historical_name]
     def ordered(n):
         return [n.key, n.value, [ordered(c) for c in n.children]]

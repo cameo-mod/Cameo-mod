@@ -16,8 +16,11 @@ tkm_rifleman_rifle:
 		Speed: 10000
 		Width: 50
 	Warhead@Bullet_Light:
+		InvalidTargets: Air
 		PercentageScale: 13333
 		Damage: 6000
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 tkm_rifleman_semiautorifle:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
@@ -36,7 +39,10 @@ tkm_rifleman_semiautorifle:
 		Speed: 10000
 		Width: 50
 	Warhead@Bullet_Light:
+		InvalidTargets: Air
 		Damage: 10000
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 tkm_juggernaut:
 	Inherits: ^RA2Chaingun
 	ReloadDelay: 8
@@ -139,8 +145,10 @@ tkmfirerockets:
 	Range: 6214
 	Report: bazook1.aud
 	Warhead@MissileAP_Light:
+		InvalidTargets: Air
 		Damage: 18000
 	Warhead@Flame_Light:
+		InvalidTargets: Air
 		Damage: 4000
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
@@ -151,6 +159,8 @@ tkmfirerockets:
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_napalm
 		ImpactSounds: firebl3.aud
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 tkmdronesummon:
 	Projectile: InstantExplode
 	Warhead@2: SpawnActor
@@ -806,10 +816,17 @@ tkmkatyushalalauncherrocketsfire:
 		MinimumLaunchSpeed: 125
 		Acceleration: 5
 	Warhead@Flame_Light:
+		InvalidTargets: Air
 		PercentageScale: 6667
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@MissileAP_Light:
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
+	Warhead@Concussion_Medium:
+		InvalidTargets: Air
 tkmkatyushalalauncherrocketstwin:
 	Inherits: tkmkatyushalalauncherrockets
 	Burst: 16
@@ -924,6 +941,7 @@ SandmarineTuskFire:
 		TrailInterval: 1
 		TrailDelay: 0
 	Warhead@Flame_Light:
+		InvalidTargets: Air
 		PercentageScale: 6667
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
@@ -931,9 +949,14 @@ SandmarineTuskFire:
 	-Warhead@MissileHE_Heavy:
 	-Warhead@Concussion_Medium:
 	Warhead@MissileHE_HeavyFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 80000
 		PercentageScale: 9999
+	Warhead@MissileAP_Light:
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 ^ViperMissilesLegacy:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Concussion_Medium

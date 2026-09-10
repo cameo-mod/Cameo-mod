@@ -415,9 +415,7 @@ def _load_inputs():
     cameo = rd.cameo_rows()
     dist = rd.build_distributions(peers)
     rt.add_cost_distribution(dist, peers)
-    cdist_all = rd.build_distributions(cameo)
-    rt.add_cost_distribution(cdist_all, cameo)
-    cdist = cdist_all["Cameo"]
+    cdist = rt.cameo_context()
     assignment = json.loads(ASSIGN.read_text(encoding="utf-8-sig"))["assignment"]
     crows = {c["id"]: c for c in cameo}
     return peers, cameo, dist, cdist, assignment, crows

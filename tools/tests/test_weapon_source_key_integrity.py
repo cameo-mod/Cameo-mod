@@ -80,7 +80,7 @@ class WeaponSourceKeyIntegrityTests(unittest.TestCase):
         self.assertEqual("AreaDamage", warhead.value)
         for field, expected in {
             "PhysicalStateName": "Temperature",
-            "ValidTargets": "Ground, Water, Air",
+            "ValidTargets": "Air",
             "Damage": "24000",
             "PercentageScale": "0",
         }.items():

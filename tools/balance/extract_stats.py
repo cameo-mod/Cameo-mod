@@ -491,6 +491,13 @@ def model_constants() -> dict:
             "ENGINE_DEFAULT_BURST_DELAY": formula.ENGINE_DEFAULT_BURST_DELAY,
             "ENGINE_DEFAULT_RANGE": formula.ENGINE_DEFAULT_RANGE,
         },
+        "weapon_efficiency": {
+            "median_weapon_range": we.median_weapon_range(),
+            "RANGE_WEIGHT": we.RANGE_WEIGHT,
+            "RANGE_BOUNDS": list(we.RANGE_BOUNDS),
+            "TARGETS_FLOOR": we.TARGETS_FLOOR,
+            "DEADZONE_WEIGHT": we.DEADZONE_WEIGHT,
+        },
         "percentage_damage": {
             "FOLDED_SCALE_DENOMINATOR": pd.FOLDED_SCALE_DENOMINATOR,
             "FOLDED_ROUNDING_BIAS": pd.FOLDED_ROUNDING_BIAS,
@@ -594,6 +601,12 @@ def derived_metrics(resolved, raw: dict) -> dict | None:
             if res["pct_absolute_context"] > 0:
                 out["dps_floor"] = round(
                     res["pct_absolute_context"] * burst / eff, 2)
+    if res is None:
+        # A pure emitter must not look like a fully modeled zero-damage weapon.
+        limitations = effmod.model_limitations(resolved)
+        if limitations:
+            out["model_limitations"] = limitations
+            out["model_status"] = "provisional"
     return out or None
 
 
@@ -890,6 +903,12 @@ def extract_actor(rs, key: str, section: str,
             ("sight", "RevealsShroud", "Range"),
             ("build_limit", "Buildable", "BuildLimit"),
             ("build_duration", "Buildable", "BuildDuration"),
+            # Cargo has a separate passenger-sum pricing rule. Retain these raw
+            # inputs so band checks cannot accidentally price it as an ordinary gun unit.
+            ("cargo_capacity", "Cargo", "MaxWeight"),
+            ("cargo_types", "Cargo", "Types"),
+            ("cargo_requires", "Cargo", "RequiresCondition"),
+            ("cargo_pause", "Cargo", "PauseOnCondition"),
             ("self_heal_step", "ChangesHealth", "Step"),
             # --- THE SURVIVABILITY LAYERS (E1, 2026-08-16) ---------------------------- #
             # Maintainer: *"shielded units and armored units need to have a price! it is

@@ -79,6 +79,14 @@ def weapon_role(node) -> str:
     """
     raw = next((c.value for c in node.children if c.key == "ValidTargets"), None)
     targets = {t.strip() for t in (raw or "Ground, Water").split(",") if t.strip()}
+    # A marker such as lockon can belong to aircraft and ground actors alike.
+    # Absence of the literal Air tag does not make that selector ground-only.
+    if targets - {"Ground", "Water", "Air"}:
+        return "custom"
+    invalid = {t.strip() for t in (node.get("InvalidTargets") or "").split(",") if t.strip()}
+    targets -= invalid
+    if not targets:
+        return "custom"
     air = "Air" in targets
     ground = bool(targets & {"Ground", "Water"})
     if air and ground:
@@ -116,6 +124,7 @@ def main():
     blends = collections.Counter()
     conforming = 0
     scanned = 0
+    custom_roles = []
 
     for name in sorted(rs.weapons):
         if name.startswith("^"):
@@ -131,6 +140,9 @@ def main():
             continue
         scanned += 1
         role = weapon_role(node)
+        if role == "custom":
+            custom_roles.append((name, node.get("ValidTargets"), node.get("InvalidTargets")))
+            continue
         want = ROLE_FAMILY[role]
         for family in sorted(families):
             if family not in ROLE_FAMILIES:
@@ -159,6 +171,11 @@ def main():
 
     print(f"\n{scanned} concrete weapon(s) fly a Missile* main; "
           f"{conforming} already match their role.\n")
+    if custom_roles:
+        print(h2("custom selectors - domain verdict withheld"))
+        print(table(["weapon", "valid tags", "invalid tags"],
+                    [[name, valid or "", invalid or ""] for name, valid, invalid in custom_roles]))
+        print("These selectors need recipient-type evidence; they are not certified conforming.\n")
 
     if blends:
         print(h2("payload blends - counted, never failed"))

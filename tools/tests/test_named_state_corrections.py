@@ -31,6 +31,8 @@ EMP_WALL_PINS = {
 }
 
 
+from reviewed_weapon_history import restore_target_policy_fields
+
 class NamedStateCorrectionTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -79,7 +81,7 @@ class NamedStateCorrectionTests(unittest.TestCase):
     def test_emp_wall_contract_remains_deferred_and_exact(self):
         self.assertTrue(EMP_WALL_PINS.isdisjoint(self.report["changed"]))
         for name in EMP_WALL_PINS:
-            resolved = self.rules.resolve_weapon(name)
+            resolved = restore_target_policy_fields(self, self.rules.resolve_weapon(name))
             self.assertIsNotNone(resolved, name)
             self.assertEqual({"TemperatureCompatibility", "Tesla_Super"},
                              set(main_warheads(resolved)), name)

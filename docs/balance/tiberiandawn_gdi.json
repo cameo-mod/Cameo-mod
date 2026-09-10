@@ -89,26 +89,7 @@
      "v": "50000"
     },
     "name": "A10 Bomber",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@BomberBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -199,9 +180,9 @@
       "damage_warheads": [
        {
         "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
+        "falloff": "100, 70, 30, 0",
+        "spread": "400",
+        "tag": "MissileAA_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -213,11 +194,13 @@
       "reloaddelay": "100",
       "slot": "Armament@AA",
       "versus_templates": [
+       "^Warhead_MissileAA_Heavy",
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Heavy",
        "^Effect_MissileAP_Heavy"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Heavy",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "A10CarrierMissiles_AA",
@@ -250,26 +233,7 @@
      "v": "100"
     },
     "name": "A10 Bomber",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@BomberBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -394,26 +358,7 @@
      "v": "100"
     },
     "name": "Scalpel",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 115,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@FighterBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -441,6 +386,14 @@
      "v": "Helicopter"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Cargo.MaxWeight",
+     "v": "8"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Valued.Cost",
      "v": "3000"
@@ -498,9 +451,9 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
+        "falloff": "100, 70, 30, 0",
+        "spread": "400",
+        "tag": "MissileAA_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -512,11 +465,13 @@
       "reloaddelay": "50",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_MissileAA_Heavy",
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Heavy",
        "^Effect_MissileAP_Heavy"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Heavy",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "td_gdi_firehawk_firehawkmissiles_AA",
@@ -528,9 +483,9 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
+        "falloff": "100, 70, 30, 0",
+        "spread": "400",
+        "tag": "MissileAA_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -543,11 +498,13 @@
       "requires": "td_gdi_upgrade_cuttingedgeequipment",
       "slot": "Armament@td_gdi_upgrade_advancedmissiletargeting",
       "versus_templates": [
+       "^Warhead_MissileAA_Heavy",
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Heavy",
        "^Effect_MissileAP_Heavy"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Heavy",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "td_gdi_firehawk_firehawkmissiles_AA",
@@ -653,38 +610,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 200,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@RearmableAircraft",
-      "types": []
-     },
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@BomberBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -712,9 +638,9 @@
       "damage_warheads": [
        {
         "damage": "12000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -768,6 +694,7 @@
       "requires": "!td_gdi_upgrade_advancedmissiletargeting",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileHE_Heavy",
        "^HeavyCannon",
        "^TankDestroyerCannon",
@@ -777,6 +704,7 @@
        "^MediumMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "td_gdi_orca_orcamissiles",
@@ -786,9 +714,9 @@
       "damage_warheads": [
        {
         "damage": "12000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -842,10 +770,12 @@
       "requires": "td_gdi_upgrade_advancedmissiletargeting",
       "slot": "Armament@AdvancedMissileTargeting",
       "versus_templates": [
+       "^Warhead_MissileAP_Heavy",
        "td_gdi_orca_orcamissiles",
        "^AMTProjectile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "td_gdi_orca_orcamissilesamt",
@@ -885,26 +815,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 105,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@HelicopterBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1047,9 +958,9 @@
       "damage_warheads": [
        {
         "damage": "16000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -1110,6 +1021,7 @@
       "requires": "!td_gdi_upgrade_advancedmissiletargeting",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileHE_Heavy",
        "^TankDestroyerCannon",
        "^Grenade",
@@ -1120,6 +1032,7 @@
        "^MediumMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "td_gdi_advancedguardtower_towermissile",
@@ -1131,9 +1044,9 @@
       "damage_warheads": [
        {
         "damage": "16000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -1194,10 +1107,12 @@
       "requires": "td_gdi_upgrade_advancedmissiletargeting",
       "slot": "Armament@AdvancedMissileTargeting",
       "versus_templates": [
+       "^Warhead_MissileAP_Heavy",
        "td_gdi_advancedguardtower_towermissile",
        "^AMTProjectile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "td_gdi_advancedguardtower_towermissileamt",
@@ -1238,20 +1153,7 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@DefenseBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1521,20 +1423,7 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@DefenseBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1784,20 +1673,7 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@DefenseBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1934,8 +1810,9 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "480",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
@@ -1965,8 +1842,9 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "480",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
@@ -1995,8 +1873,9 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "960",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
@@ -2026,8 +1905,9 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "960",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
@@ -2077,32 +1957,7 @@
     "prerequisites": [
      "~td_gdi_barracks"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 100,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@ScoutInfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 24,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@td_gdi_minigunner",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -2269,26 +2124,7 @@
      "~td_gdi_barracks",
      "~!td_gdi_promotion_missilesoldier"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AntiTankAntiAirInfantryBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -2544,26 +2380,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@HeroBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2802,32 +2619,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 120,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GrenadierInfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2933,26 +2725,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 120,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GrenadierInfantryBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3022,9 +2795,9 @@
       "damage_warheads": [
        {
         "damage": "40000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "150",
-        "tag": "MissileHE_MediumFlatCompatibility",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -3035,12 +2808,14 @@
       "reloaddelay": "100",
       "slot": "Armament@Rocket",
       "versus_templates": [
+       "^Warhead_MissileAP_Medium",
        "^Compatibility_MissileHE_MediumFlat",
        "^Warhead_MissileHE_Medium",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileHE_Medium"
       ],
       "weapon": "td_gdi_havoc_rocket",
@@ -3179,9 +2954,9 @@
       "damage_warheads": [
        {
         "damage": "40000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "150",
-        "tag": "MissileHE_MediumFlatCompatibility",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -3192,12 +2967,14 @@
       "reloaddelay": "100",
       "slot": "Armament@RocketGARRISONED",
       "versus_templates": [
+       "^Warhead_MissileAP_Medium",
        "^Compatibility_MissileHE_MediumFlat",
        "^Warhead_MissileHE_Medium",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileHE_Medium"
       ],
       "weapon": "td_gdi_havoc_rocket",
@@ -3346,32 +3123,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@HeroBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3558,32 +3310,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 120,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@SniperInfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3612,8 +3339,9 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "480",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
@@ -3643,8 +3371,9 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "480",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
@@ -3673,8 +3402,9 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "960",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
@@ -3704,8 +3434,9 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "960",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
@@ -3747,11 +3478,6 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
-    "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#FirepowerMultiplier@td_gdi_minigunner.Modifier",
-     "trait": "FirepowerMultiplier@td_gdi_minigunner",
-     "v": 0.24
-    },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Health.HP",
      "v": "31000"
@@ -3764,32 +3490,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 100,
-      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#FirepowerMultiplier@ScoutInfantryBuff.Modifier",
-      "trait": "FirepowerMultiplier@ScoutInfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 24,
-      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#FirepowerMultiplier@td_gdi_minigunner.Modifier",
-      "trait": "FirepowerMultiplier@td_gdi_minigunner",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -3822,8 +3523,9 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "17280",
         "falloff": "100, 0",
+        "percentage_denominator": "2500",
         "spread": "100",
         "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
@@ -3856,8 +3558,9 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "17280",
         "falloff": "100, 0",
+        "percentage_denominator": "2500",
         "spread": "100",
         "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
@@ -3889,8 +3592,9 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "17280",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
@@ -3920,8 +3624,9 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "17280",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
@@ -3963,11 +3668,6 @@
      "tech_tier": 0.75,
      "unit_class": 0.8
     },
-    "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
-     "trait": "FirepowerMultiplier",
-     "v": 1.08
-    },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Health.HP",
      "v": "32000"
@@ -3982,32 +3682,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
-     {
-      "modifier": 108,
-      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
-      "trait": "FirepowerMultiplier",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4168,26 +3843,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AntiTankAntiAirInfantryBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -4316,32 +3972,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 100,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@CloseCombatInfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4529,26 +4160,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4578,6 +4190,14 @@
      "v": "Medium"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#Cargo.MaxWeight",
+     "v": "10"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen, Vehicle"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#Valued.Cost",
      "v": "500"
@@ -4638,9 +4258,9 @@
       "damage_warheads": [
        {
         "damage": "18000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
+        "falloff": "100, 45, 15, 0",
+        "spread": "150",
+        "tag": "MissileHE_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -4652,11 +4272,13 @@
       "requires": "!td_gdi_upgrade_advancedmissiletargeting",
       "slot": "Armament@Ground",
       "versus_templates": [
+       "^Warhead_MissileHE_Medium",
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_MissileAP_Medium"
       ],
       "warheads": [
+       "^Warhead_MissileHE_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "td_gdi_missileboat_gunboatmissile",
@@ -4668,9 +4290,9 @@
       "damage_warheads": [
        {
         "damage": "18000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
+        "falloff": "100, 45, 15, 0",
+        "spread": "150",
+        "tag": "MissileHE_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -4682,10 +4304,12 @@
       "requires": "td_gdi_upgrade_advancedmissiletargeting",
       "slot": "Armament@AdvancedMissileTargeting",
       "versus_templates": [
+       "^Warhead_MissileHE_Medium",
        "td_gdi_missileboat_gunboatmissile",
        "^AMTProjectile"
       ],
       "warheads": [
+       "^Warhead_MissileHE_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "td_gdi_missileboat_gunboatmissileamt",
@@ -4774,20 +4398,7 @@
      "Naval",
      "RANaval"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@ScoutShip",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4918,14 +4529,7 @@
      "Naval",
      "RANaval"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5001,14 +4605,7 @@
      "Naval",
      "RANaval"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5609,6 +5206,14 @@
      "v": "Medium"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Cargo.MaxWeight",
+     "v": "8"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Valued.Cost",
      "v": "1200"
@@ -5617,7 +5222,7 @@
      "category": "Vehicles",
      "class_anchor": null,
      "special": null,
-     "subtype": "SupportVehicle",
+     "subtype": "ArmedTroopTransport",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5639,14 +5244,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5775,14 +5373,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5928,6 +5519,14 @@
      "v": "Superheavy"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Cargo.MaxWeight",
+     "v": "8"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Valued.Cost",
      "v": "4500"
@@ -5958,20 +5557,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6178,14 +5764,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6216,7 +5795,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_MediumFlatCompatibility",
@@ -6225,6 +5804,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "200",
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
@@ -6232,6 +5812,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "200",
         "spread": "100",
         "tag": "LightMissilePercentage",
         "type": "AreaDamagePercentage"
@@ -6239,6 +5820,7 @@
        {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
+        "percentage_denominator": "200",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
@@ -6246,6 +5828,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "200",
         "spread": "150",
         "tag": "MediumCannonPercentage",
         "type": "AreaDamagePercentage"
@@ -6253,6 +5836,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "200",
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
@@ -6260,6 +5844,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "200",
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -6287,7 +5872,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "6000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_MediumFlatCompatibility",
@@ -6296,6 +5881,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "200",
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
@@ -6303,6 +5889,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "200",
         "spread": "100",
         "tag": "LightMissilePercentage",
         "type": "AreaDamagePercentage"
@@ -6310,6 +5897,7 @@
        {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
+        "percentage_denominator": "200",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
@@ -6317,6 +5905,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "200",
         "spread": "150",
         "tag": "MediumCannonPercentage",
         "type": "AreaDamagePercentage"
@@ -6324,6 +5913,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "200",
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
@@ -6331,6 +5921,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "200",
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -6368,11 +5959,6 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
-    "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#FirepowerMultiplier@ra1_allies_alliedheavyaatank.Modifier",
-     "trait": "FirepowerMultiplier@ra1_allies_alliedheavyaatank",
-     "v": 0.5
-    },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Health.HP",
      "v": "110000"
@@ -6390,20 +5976,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 50,
-      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#FirepowerMultiplier@ra1_allies_alliedheavyaatank.Modifier",
-      "trait": "FirepowerMultiplier@ra1_allies_alliedheavyaatank",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6768,9 +6341,9 @@
       "damage_warheads": [
        {
         "damage": "32000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -6782,11 +6355,13 @@
       "requires": "!td_gdi_upgrade_advancedmissiletargeting && deployed",
       "slot": "Armament@MissilePod",
       "versus_templates": [
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileHE_Heavy",
        "^Projectile_Missile_Medium",
        "^Effect_MissileHE_Medium"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "td_gdi_defenserig_gdirigmissilepod",
@@ -6798,9 +6373,9 @@
       "damage_warheads": [
        {
         "damage": "32000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -6812,10 +6387,12 @@
       "requires": "td_gdi_upgrade_advancedmissiletargeting && deployed",
       "slot": "Armament@AdvancedMissileTargeting",
       "versus_templates": [
+       "^Warhead_MissileAP_Heavy",
        "td_gdi_defenserig_gdirigmissilepod",
        "^AMTProjectile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "td_gdi_defenserig_gdirigmissilepodamt",
@@ -6861,20 +6438,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6979,20 +6543,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7115,14 +6666,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7155,8 +6699,9 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "1000",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
@@ -7183,8 +6728,9 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "1000",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
@@ -7211,8 +6757,9 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "1000",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
@@ -7239,8 +6786,9 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "1000",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
@@ -7265,10 +6813,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
+        "damage": "8000",
+        "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
+        "spread": "100",
+        "tag": "MissileHE_Light",
         "type": "AreaDamage"
        }
       ],
@@ -7280,11 +6829,13 @@
       "requires": "!td_gdi_upgrade_advancedmissiletargeting",
       "slot": "Armament@Rockets",
       "versus_templates": [
+       "^Warhead_MissileHE_Light",
        "^Warhead_MissileAP_Light",
        "^Projectile_Missile_Light",
        "^Effect_MissileAP_Light"
       ],
       "warheads": [
+       "^Warhead_MissileHE_Light",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "td_gdi_humveemkii_rocketshumvee2",
@@ -7293,47 +6844,53 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
+        "damage": "8000",
+        "falloff": "100, 70, 30, 0",
+        "percentage_denominator": "10000",
+        "spread": "200",
+        "tag": "MissileAA_Light",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8397",
       "reloaddelay": "84",
       "requires": "!td_gdi_upgrade_advancedmissiletargeting",
       "slot": "Armament@RocketsAA",
       "versus_templates": [
+       "^Warhead_MissileAA_Light",
        "td_gdi_humveemkii_rocketshumvee2"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Light",
+       "^Warhead_MissileHE_Light",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "td_gdi_humveemkii_rocketshumvee2_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
        {
-        "damage": "32000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_HeavyFlatCompatibility",
+        "damage": "16000",
+        "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
+        "spread": "200",
+        "tag": "MissileHE_Heavy",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5598",
       "reloaddelay": "84",
       "requires": "td_gdi_upgrade_advancedmissiletargeting",
       "slot": "Armament@AdvancedMissileTargeting",
       "versus_templates": [
+       "^Warhead_MissileHE_Heavy",
        "^Compatibility_MissileAP_HeavyFlat",
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Heavy",
@@ -7342,39 +6899,46 @@
        "^AMTProjectile"
       ],
       "warheads": [
+       "^Warhead_MissileHE_Heavy",
        "^Warhead_MissileAP_Heavy",
+       "^Warhead_MissileHE_Light",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "td_gdi_humveemkii_rocketshumvee2amt",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
        {
-        "damage": "32000",
+        "damage": "16000",
         "falloff": "100, 70, 30, 0",
+        "percentage_denominator": "10000",
         "spread": "400",
-        "tag": "MissileAA_HeavyFlatCompatibility",
+        "tag": "MissileAA_Heavy",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8397",
       "reloaddelay": "84",
       "requires": "td_gdi_upgrade_advancedmissiletargeting",
       "slot": "Armament@AdvancedMissileTargetingAA",
       "versus_templates": [
+       "^Warhead_MissileAA_Heavy",
        "^Compatibility_MissileAA_HeavyFlat",
        "td_gdi_humveemkii_rocketshumvee2amt"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Heavy",
+       "^Warhead_MissileHE_Heavy",
        "^Warhead_MissileAP_Heavy",
+       "^Warhead_MissileHE_Light",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "td_gdi_humveemkii_rocketshumvee2amt_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -7382,6 +6946,14 @@
      "v": "Scout"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Cargo.MaxWeight",
+     "v": "4"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Valued.Cost",
      "v": "600"
@@ -7393,11 +6965,6 @@
      "subtype": "ScoutVehicle",
      "tech_tier": null,
      "unit_class": null
-    },
-    "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#FirepowerMultiplier@Upgrade.Modifier",
-     "trait": "FirepowerMultiplier@Upgrade",
-     "v": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Health.HP",
@@ -7416,26 +6983,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
-     {
-      "modifier": 50,
-      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#FirepowerMultiplier@Upgrade.Modifier",
-      "trait": "FirepowerMultiplier@Upgrade",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7621,14 +7169,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7814,20 +7355,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7861,9 +7389,9 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "150",
-        "tag": "MissileHE_Medium",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -7879,7 +7407,7 @@
        "227mm"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "td_gdi_mlrs_227mm",
       "weapon_class_source": "template"
@@ -7890,9 +7418,9 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "150",
-        "tag": "MissileHE_Medium",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -7909,7 +7437,7 @@
        "^AMTProjectile"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "td_gdi_mlrs_227mmamt",
       "weapon_class_source": "template"
@@ -7949,14 +7477,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -8245,20 +7766,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"

@@ -22,6 +22,8 @@ from percentage_damage import runtime_percentage_hp
 from survey_weapon_structure import weapon_reference_sets
 
 
+from reviewed_weapon_history import restore_target_policy_fields
+
 class CorroboratedRoleProfileConsolidationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -31,7 +33,7 @@ class CorroboratedRoleProfileConsolidationTests(unittest.TestCase):
     def test_selected_profiles_resolve_to_one_pinned_main(self):
         self.assertEqual(50, len(self.selected))
         for name, destination in self.selected.items():
-            nodes = main_warhead_nodes(self.rules.resolve_weapon(name))
+            nodes = main_warhead_nodes(restore_target_policy_fields(self, self.rules.resolve_weapon(name)))
             self.assertEqual(1, len(nodes), name)
             node = nodes[0]
             self.assertEqual(
