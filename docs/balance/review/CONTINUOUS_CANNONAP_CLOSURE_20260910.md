@@ -1,5 +1,23 @@
 # Continuous CannonAP follow-up: implementation and remaining decisions
 
+## Final integration receipt — 10 September 2026
+
+This receipt supersedes source-stage pending notes below; the source-specific
+measurements remain separate from this combined result. The full combined run
+executed2,033 tests:20 failures,8 errors,64 skips. All2,036 discovered identities
+were accounted for, including3 class-skipped methods. The20 prior R18 failure/error
+identities remained. Eight new historical-test compatibility failures were then
+corrected, and all25 affected tests passed. The original full result remains red;
+no second full run or synthetic green result is claimed.
+
+The combined candidate has2,969 resolved weapons and33 zero-drift ledgers.
+Independent final review passed86 focused tests and approved scoped draft
+publication, with HOLD for merges. Peak full-suite RAM57.40%; no95% guard stop.
+The new raw missile-role gate (R3=52/47,R4=55/50) and worsened release-name coverage
+(D4=562/335) remain explicit. Five previous documentation claim mismatches remain
+after the two new factual counters were co-updated; combined doc_health passes.
+Source/state/role decisions listed below are not declared complete by publication.
+
 Draft implementation, not a whole-roster balance verdict. No actor price, HP,
 movement, firing cadence or engine pin changes. Final combined validation pending.
 
