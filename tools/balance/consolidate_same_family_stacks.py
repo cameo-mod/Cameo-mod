@@ -49,7 +49,7 @@ ROOT_CLOSURES = {
     "RA2GattlingInf": set(),
     "RA2vulcan": set(),
     "RAVulcan": set(),
-    "SheridanVulcan": set(),
+    "ra1_allies_sheridanassaulttank_chaingun": set(),
     "SteelCargoshipCannons": set(),
     "TSMutVulcanTurret": set(),
     "TSVulcanGun": set(),

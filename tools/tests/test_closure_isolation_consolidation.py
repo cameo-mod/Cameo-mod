@@ -89,10 +89,26 @@ class ClosureIsolationConsolidationTests(unittest.TestCase):
 
     def test_excluded_descendants_are_byte_stable_after_isolation(self):
         for name, expected in PRESERVED_HASHES.items():
-            self.assertEqual(expected, resolved_hash(historical_copy(self, self.rules.resolve_weapon(name))), name)
+            current = "ra1_soviets_grenadier_grenade" if name == "GrenadeRA" else name
+            node = self.rules.resolve_weapon(current).deep_copy()
+            node.key = name
+            self.assertEqual(expected, resolved_hash(historical_copy(self, node)), name)
         self.assertEqual({"TSAux155mm"}, descendants(self.rules, "TS155mm"))
         self.assertEqual(set(), descendants(self.rules, "TSInfantryMortar"))
-        self.assertEqual(set(), descendants(self.rules, "GrenadeRA"))
+        self.assertEqual(set(), descendants(self.rules, "ra1_soviets_grenadier_grenade"))
+
+    def test_grenade_historical_coupling_guard_remains_strict(self):
+        current = self.rules.resolve_weapon("ra1_soviets_grenadier_grenade")
+        node = current.deep_copy()
+        node.key = "GrenadeRA"
+        self.assertEqual("102", node.child("Warhead@Demolition_Light").child("Versus").get("COMPOSITE"))
+        past = historical_copy(self, node)
+        self.assertEqual("101", past.child("Warhead@Demolition_Light").child("Versus").get("COMPOSITE"))
+        node.child("Warhead@Demolition_Light").child("Versus").child("COMPOSITE").value = "103"
+        with self.assertRaises(AssertionError):
+            historical_copy(self, node)
+        self.assertEqual("ra1_soviets_grenadier_grenade", current.key)
+        self.assertEqual("102", current.child("Warhead@Demolition_Light").child("Versus").get("COMPOSITE"))
 
     def test_kirov_uses_the_pinned_canonicalized_splash_payload(self):
         alias = self.rules.resolve_weapon("RA2KirovHowitzerSplash")

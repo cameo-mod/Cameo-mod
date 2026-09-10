@@ -94,7 +94,7 @@ SOURCE_TOTAL_OVERRIDES = {"TSBombSonic": 10000}
 
 CLEANUP_NAMES = set(SELECTED) | {
     "NaxGrilleArty", "NaxSturmArty", "SkyHawkCannon",
-    "SkyHawkPlasmaCannon", "GrenadeRA", "LightTank2Missiles",
+    "SkyHawkPlasmaCannon", "ra1_soviets_grenadier_grenade", "LightTank2Missiles",
     "TSChem120mmx", "facedancer_grenade", "TS120mmx",
     "SteelVulcan", "SandmarineTuskFire", "GradRockets",
     "Future_Cryocopter_Rocket", "GLBarrelExplode", "GuardianShoot",

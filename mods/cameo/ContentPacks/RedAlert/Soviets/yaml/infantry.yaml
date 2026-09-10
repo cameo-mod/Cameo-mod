@@ -240,13 +240,13 @@ ra1_soviets_grenadier:
 	ChangesHealth@SelfHealing:
 		Step: 8
 	Armament:
-		Weapon: GrenadeRA
+		Weapon: ra1_soviets_grenadier_grenade
 		LocalOffset: 0,0,427
 		FireDelay: 15
 		RequiresCondition: !ra1_soviets_upgrade_scorchedearth
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: GrenadeRA
+		Weapon: ra1_soviets_grenadier_grenade
 		RequiresCondition: !ra1_soviets_upgrade_scorchedearth
 	Armament@Upgrade:
 		Weapon: GrenadeThermobaric

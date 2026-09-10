@@ -470,7 +470,7 @@ ra1_allies_sheridanassaulttank:
 		PauseOnCondition: ammo < 4
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	Armament@MG:
-		Weapon: SheridanVulcan
+		Weapon: ra1_allies_sheridanassaulttank_chaingun
 		LocalOffset: 384,-64,128
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
@@ -519,7 +519,7 @@ ra1_allies_sheridanassaulttank:
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 4
-		Weapon: SheridanVulcanCryo
+		Weapon: ra1_allies_sheridanassaulttank_chaingun_cryo
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 ra1_allies_reconranger:
 	Inherits: ^Vehicle
