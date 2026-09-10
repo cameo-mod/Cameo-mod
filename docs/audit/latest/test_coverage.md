@@ -3,8 +3,8 @@
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
 | T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (11 file(s)) | 173 | >= 24 |
-| T2 | `def test_*` in tools/tests (120 file(s)) | 1433 | >= 177 |
-| T3 | modules with no test mentioning them | 270 | <= 224 |
+| T2 | `def test_*` in tools/tests (123 file(s)) | 1456 | >= 177 |
+| T3 | modules with no test mentioning them | 267 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (270)
+## T3 — untested modules (267)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -201,7 +201,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_orphans.py | audit_orphans |
 | python | tools/audit/audit_outliers.py | audit_outliers |
 | python | tools/audit/audit_packs.py | audit_packs |
-| python | tools/audit/audit_percentage_runtime.py | audit_percentage_runtime |
 | python | tools/audit/audit_plating_exclusivity.py | audit_plating_exclusivity |
 | python | tools/audit/audit_power_budget.py | audit_power_budget |
 | python | tools/audit/audit_promotion_gating.py | audit_promotion_gating |
@@ -210,7 +209,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_rename_safety.py | audit_rename_safety |
 | python | tools/audit/audit_sequences.py | audit_sequences |
 | python | tools/audit/audit_shrapnel_chains.py | audit_shrapnel_chains |
-| python | tools/audit/audit_split_definitions.py | audit_split_definitions |
 | python | tools/audit/audit_stat_uniqueness.py | audit_stat_uniqueness |
 | python | tools/audit/audit_survivability_pricing.py | audit_survivability_pricing |
 | python | tools/audit/audit_task_index.py | audit_task_index |
@@ -226,7 +224,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_weapon_suffixes.py | audit_weapon_suffixes |
 | python | tools/audit/audit_weapon_uniqueness.py | audit_weapon_uniqueness |
 | python | tools/audit/check_effect_audio.py | check_effect_audio |
-| python | tools/audit/dump_resolved.py | dump_resolved |
 | python | tools/audit/effect_audit.py | effect_audit |
 | python | tools/audit/extract_reference_effects.py | extract_reference_effects |
 | python | tools/audit/find_empty_warhead.py | find_empty_warhead |
@@ -293,5 +290,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 270 untested > baseline 224
+- T3: 267 untested > baseline 224
 

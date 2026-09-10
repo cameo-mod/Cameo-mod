@@ -1,6 +1,13 @@
 # audit_code_duplication — copy-paste clone groups
 
-Python files: **456** (min 5 statements), C# files: **353** (min 8 lines)
+Python files: **459** (min 5 statements), C# files: **353** (min 8 lines)
+
+
+## Files that do not parse (not scanned)
+
+| file | line | error |
+|---|---|---|
+| tools/tests/test_audit_k_linearity_inventory.py | 1 | invalid non-printable character U+FEFF |
 
 | code | meaning | clone groups | baseline |
 |---|---|---|---|

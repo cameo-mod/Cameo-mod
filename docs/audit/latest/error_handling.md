@@ -1,6 +1,6 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **456**
+Files scanned: **459**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
@@ -8,6 +8,13 @@ Files scanned: **456**
 | E2 | handler discards the error | 98 | 30 |
 | E3 | open() without encoding= | 98 | 90 |
 | E4 | subprocess call without check= | 31 | 9 |
+
+
+## Files that do not parse
+
+| file | line | error |
+|---|---|---|
+| tools/tests/test_audit_k_linearity_inventory.py | 1 | invalid non-printable character U+FEFF |
 
 
 ## E1 — 3 finding(s)
@@ -260,8 +267,8 @@ Files scanned: **456**
 | tools/hooks/test_bash_guard.py | 58 | `subprocess.run()` without check= |
 | tools/hooks/test_bash_guard.py | 77 | `subprocess.run()` without check= |
 | tools/reference/splice_peer_section.py | 73 | `subprocess.run()` without check= |
-| tools/tests/test_continuous_cannonap_preview.py | 107 | `subprocess.run()` without check= |
-| tools/tests/test_continuous_cannonap_preview.py | 112 | `subprocess.run()` without check= |
+| tools/tests/test_continuous_cannonap_preview.py | 106 | `subprocess.run()` without check= |
+| tools/tests/test_continuous_cannonap_preview.py | 115 | `subprocess.run()` without check= |
 
 
 ## FAIL
@@ -270,4 +277,5 @@ Files scanned: **456**
 - E2: 98 > baseline 30
 - E3: 98 > baseline 90
 - E4: 31 > baseline 9
+- 1 file(s) do not parse
 

@@ -172,8 +172,8 @@ _none found_
 | NaxiV1Rocket | mods/cameo/weapons/redalert2mod.yaml |
 | NaxisBlackBomb | mods/cameo/weapons/redalert2mod.yaml |
 | OP2bombchassisTargeting | mods/cameo/weapons/outpost2.yaml |
-| OrniBombC | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml |
-| OrniGunC | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml |
+| OrniBombC | mods/cameo/ContentPacks/D2k/Atreides/yaml/weapons.yaml |
+| OrniGunC | mods/cameo/ContentPacks/D2k/Atreides/yaml/weapons.yaml |
 | PDLaser | mods/cameo/weapons/weapons.yaml |
 | Patriot | mods/cameo/weapons/weapons.yaml |
 | PhoenixRocket | mods/cameo/weapons/d2k.yaml |
