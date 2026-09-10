@@ -15,18 +15,18 @@ A number in prose is true only on the day it is written. These are the claims a 
 | `always_on_shield_actors` | 58 | 58 | ✅ |
 | `always_on_shielded_buildings` | 16 | 16 | ✅ |
 | `live_damage_multipliers` | 356 | 356 | ✅ |
-| `multi_main_fired_weapons` | 184 | 121 | **MISMATCH** |
-| `percentage_denominator_unset` | 183 | 183 | ✅ |
+| `multi_main_fired_weapons` | 184 | 120 | **MISMATCH** |
+| `percentage_denominator_unset` | 184 | 184 | ✅ |
 | `unmigrated_scout_damage_multiplier` | 18 | 18 | ✅ |
-| `meters_filling_before_death` | 269 | 282 | **MISMATCH** |
+| `meters_filling_before_death` | 269 | 291 | **MISMATCH** |
 | `corrosion_meter_actors` | 817 | 817 | ✅ |
-| `w24_multi_main_fed` | 429 | 425 | **MISMATCH** |
-| `physical_state_fired_weapons` | 534 | 531 | **MISMATCH** |
+| `w24_multi_main_fed` | 429 | 426 | **MISMATCH** |
+| `physical_state_fired_weapons` | 534 | 542 | **MISMATCH** |
 | `plating_row_ties` | 0 | 0 | ✅ |
 | `plating_families` | 48 | 48 | ✅ |
 | `signed_off_class_anchors` | 0 | 0 | ✅ |
-| `warhead_family_reach` | 1415 | 1415 | ✅ |
-| `unconverted_template_inheritors` | 1596 | 1592 | **MISMATCH** |
+| `warhead_family_reach` | 1454 | 1454 | ✅ |
+| `unconverted_template_inheritors` | 1596 | 1590 | **MISMATCH** |
 | `ledgers_drifted` | 0 | 0 | ✅ |
 
 **FAIL — a document and the tree disagree.**

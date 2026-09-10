@@ -34,8 +34,8 @@ ROOTS = {
         "Tesla_Heavy",
         {"MissileAP_Light", "Tesla_Heavy"},
         {
-            "ra1_soviets_btr80_machinegun_tesla_arc", "BTRTeslaMachineGunArcFragment1",
-            "BTRTeslaMachineGunArcFragment1AA", "ra1_soviets_btr80_machinegun_tesla_arc_AA",
+            "ra1_soviets_btr80_machinegun_tesla_arc", "ra1_soviets_btr80_btrteslamachinegunarcfragment1",
+            "ra1_soviets_btr80_btrteslamachinegunarcfragment1aa", "ra1_soviets_btr80_machinegun_tesla_arc_AA",
             "ra1_soviets_btr80_machinegun_tesla_AA",
         },
     ),

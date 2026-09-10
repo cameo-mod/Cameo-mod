@@ -683,7 +683,7 @@ RA160mmE_tesla_elite:
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 RA2120xmm:
-	Inherits@wh: ^Warhead_CannonAP_Light
+	Inherits@wh: ^Warhead_CannonAP
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_Apoc_AP_RA2
 	Range: 6992
@@ -694,8 +694,9 @@ RA2120xmm:
 	Projectile: Bullet
 		Speed: 699
 		Inaccuracy: 150
-	Warhead@CannonAP_Light: AreaDamage
+	Warhead@CannonAP: AreaDamage
 		Damage: 12000
+		Heaviness: 0
 RA2120xmm_rad:
 	Inherits@wh: ^Warhead_CannonChem_Light
 	Inherits@proj: ^Projectile_Shell_Light

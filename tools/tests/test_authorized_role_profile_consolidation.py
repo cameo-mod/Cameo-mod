@@ -6,6 +6,7 @@ import json
 import pathlib
 import sys
 import unittest
+from owned_weapon_history import historical_weapon_names
 
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -22,7 +23,7 @@ import percentage_damage as pd
 CHANGED = set(cohort.BASELINE_MAINS)
 EXPECTED_PERCENTAGE_DELTAS = {
     "ASDFKamikazeExplosion": [[250, 24, 25]],
-    "ConscriptMolotov": [[20, 0, 1]],
+    "ra1_soviets_molotovconscript_conscriptmolotov": [[20, 0, 1]],
     "NaxiAntiTankCannon": [[250, 34, 35]],
     "NaxiAntiTankCannonCorrosion": [[250, 34, 35]],
     "NaxiAntiTankCannon_elite": [[250, 34, 35]],
@@ -46,7 +47,13 @@ class AuthorizedRoleProfileConsolidationTests(unittest.TestCase):
         self.assertEqual(12, len(CHANGED))
         for name in sorted(CHANGED):
             destination = cohort.DESTINATIONS[name]
-            nodes = main_warhead_nodes(self.rules.resolve_weapon(name))
+            resolved = self.rules.resolve_weapon(name)
+            # The endpoint regression verifies the complete modern payload first;
+            # the old cohort contract below remains a historical assertion.
+            from reviewed_weapon_history import ENDPOINT_COHORT, restore_endpoint_weapon
+            if name in ENDPOINT_COHORT:
+                resolved = restore_endpoint_weapon(self, resolved)
+            nodes = main_warhead_nodes(resolved)
             self.assertEqual([destination], [node.key.split("@", 1)[1] for node in nodes], name)
             self.assertEqual(cohort.TOTALS[name], int(nodes[0].get("Damage")), name)
             self.assertEqual("AreaDamage", nodes[0].value, name)
@@ -55,13 +62,13 @@ class AuthorizedRoleProfileConsolidationTests(unittest.TestCase):
             self.assertEqual(cohort.RUNTIME_UNITS[name], sum(
                 int(application["runtime_units"])
                 for application in pd.percentage_applications(
-                    self.rules.resolve_weapon(name), 200000)
+                    resolved, 200000)
                 if application["tag"] == destination
             ), name)
 
     def test_nominal_temperature_scale_is_compensated(self):
         expected = {
-            "ConscriptMolotov": (16000, 50, 800),
+            "ra1_soviets_molotovconscript_conscriptmolotov": (16000, 50, 800),
             "tkm_trooper_gp25": (12000, 50, 600),
         }
         for name, (damage, scale, folded_units) in expected.items():
@@ -69,11 +76,11 @@ class AuthorizedRoleProfileConsolidationTests(unittest.TestCase):
             self.assertEqual("Temperature", node.get("PhysicalStateName"), name)
             self.assertEqual(str(scale), node.get("PhysicalStateScale"), name)
             self.assertEqual(damage * scale, {
-                "ConscriptMolotov": 8000 * 100,
+                "ra1_soviets_molotovconscript_conscriptmolotov": 8000 * 100,
                 "tkm_trooper_gp25": 6000 * 100,
             }[name], name)
             self.assertEqual(folded_units * scale, {
-                "ConscriptMolotov": 400 * 100,
+                "ra1_soviets_molotovconscript_conscriptmolotov": 400 * 100,
                 "tkm_trooper_gp25": 300 * 100,
             }[name], name)
 
@@ -103,7 +110,7 @@ class AuthorizedRoleProfileConsolidationTests(unittest.TestCase):
         }, meter(after_by_tag["Demolition_Light"], 50, armors))
 
     def test_molotov_death_child_remains_exactly_preserved(self):
-        death = self.rules.resolve_weapon("ConscriptMolotovExplode")
+        death = self.rules.resolve_weapon("ra1_soviets_molotovconscript_conscriptmolotovexplode")
         self.assertEqual(
             ["Flame_LightFlatCompatibility"], main_warheads(death))
         node = main_warhead_nodes(death)[0]
@@ -112,27 +119,27 @@ class AuthorizedRoleProfileConsolidationTests(unittest.TestCase):
         self.assertEqual("Temperature", node.get("PhysicalStateName"))
         self.assertEqual("100", node.get("PhysicalStateScale"))
         self.assertEqual(
-            cohort.PRESERVED_HASHES["ConscriptMolotovExplode"],
-            cohort.resolved_hash(self.rules, "ConscriptMolotovExplode"),
+            cohort.PRESERVED_HASHES["ra1_soviets_molotovconscript_conscriptmolotovexplode"],
+            cohort.resolved_hash(self.rules, "ra1_soviets_molotovconscript_conscriptmolotovexplode"),
         )
 
     def test_comparison_contains_only_the_authorized_behavior_changes(self):
         self.assertEqual([], self.report["added"])
         self.assertEqual([], self.report["removed"])
-        self.assertEqual(CHANGED, set(self.report["changed"]))
+        self.assertEqual(historical_weapon_names(CHANGED), set(self.report["changed"]))
 
         by_kind: dict[str, set[str]] = {}
         for name, changes in self.report["changed"].items():
             for change in changes:
                 by_kind.setdefault(change[0], set()).add(name)
 
-        self.assertEqual(CHANGED, by_kind["armor_profile"])
-        self.assertEqual(CHANGED, by_kind["blast_shape"])
+        self.assertEqual(historical_weapon_names(CHANGED), by_kind["armor_profile"])
+        self.assertEqual(historical_weapon_names(CHANGED), by_kind["blast_shape"])
         self.assertEqual(
-            {"ConscriptMolotov", "tkm_trooper_gp25"},
+            historical_weapon_names({"ra1_soviets_molotovconscript_conscriptmolotov", "tkm_trooper_gp25"}),
             by_kind["physical_state_bindings"],
         )
-        self.assertEqual(set(EXPECTED_PERCENTAGE_DELTAS), by_kind["percentage_damage"])
+        self.assertEqual(historical_weapon_names(EXPECTED_PERCENTAGE_DELTAS), by_kind["percentage_damage"])
         self.assertEqual(
             {"armor_profile", "blast_shape", "physical_state_bindings", "percentage_damage"},
             set(by_kind),
@@ -141,14 +148,14 @@ class AuthorizedRoleProfileConsolidationTests(unittest.TestCase):
         for name, expected in EXPECTED_PERCENTAGE_DELTAS.items():
             actual = next(
                 change[1]
-                for change in self.report["changed"][name]
+                for change in self.report["changed"][next(iter(historical_weapon_names([name]))) ]
                 if change[0] == "percentage_damage"
             )
             self.assertEqual(expected, actual, name)
 
     def test_allied_tank_destroyer_corrected_to_single_ap_main(self):
         self.assertEqual(
-            ["CannonAP_Light"],
+            ["CannonAP"],
             main_warheads(self.rules.resolve_weapon("AlliedTankDestroyerCannon")),
         )
         node = main_warhead_nodes(self.rules.resolve_weapon("AlliedTankDestroyerCannon"))[0]

@@ -141,7 +141,7 @@ class AuthorizedRemainingProfileTests(unittest.TestCase):
     def test_kotin_uses_the_upstream_nuclear_upgrade_for_fire_and_death(self):
         # 4a1479b50 changed this role deliberately; do not impose the retired
         # thermobaric matchup guarantee on the nuclear/radiation replacement.
-        weapon = self.rules.resolve_weapon("KotinCannonNuclearShell")
+        weapon = self.rules.resolve_weapon("ra1_soviets_kotinnucleartank_kotincannonnuclearshell")
         self.assertIsNotNone(weapon)
         self.assertEqual("16000", weapon.child("Warhead@CannonNuke_Heavy").get("Damage"))
         self.assertEqual(("96", "6427", "2", "4"), tuple(
@@ -154,9 +154,9 @@ class AuthorizedRemainingProfileTests(unittest.TestCase):
         for trait in ("Armament", "FireWarheadsOnDeath"):
             base = actor.child(trait)
             upgraded = actor.child(trait + "@Upgrade")
-            self.assertEqual("KotinCannon", base.get("Weapon"))
+            self.assertEqual("ra1_soviets_kotinnucleartank_kotincannon", base.get("Weapon"))
             self.assertEqual("!ra1_soviets_upgrade_nucleartankshells", base.get("RequiresCondition"))
-            self.assertEqual("KotinCannonNuclearShell", upgraded.get("Weapon"))
+            self.assertEqual("ra1_soviets_kotinnucleartank_kotincannonnuclearshell", upgraded.get("Weapon"))
             self.assertEqual("ra1_soviets_upgrade_nucleartankshells", upgraded.get("RequiresCondition"))
 
     def test_converter_default_mode_is_read_only(self):

@@ -94,7 +94,7 @@ ra1_soviets_grenadier_grenade:
 	Warhead@Demolition_Light: AreaDamage
 		Damage: 16000
 
-GrenadeRAExplode:
+ra1_soviets_grenadier_grenaderaexplode:
 	Inherits@roleflat: ^Compatibility_Flame_LightFlat
 	Inherits: ^GrenadeRALegacy
 	Warhead@Demolition_Light: AreaDamage
@@ -107,7 +107,7 @@ GrenadeRAExplode:
 		PercentageScale: 9988
 	-Warhead@Demolition_Light:
 	-Warhead@Flame_Light:
-GrenadeThermobaric:
+ra1_soviets_grenadier_grenadethermobaric:
 	Inherits@roleflat: ^Compatibility_Thermobaric_LightFlat
 	Inherits: ^ShrapnelWeapon
 	Inherits@2: ^MediumFlameWeapon
@@ -144,8 +144,8 @@ GrenadeThermobaric:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@Demolition_Light:
 	-Warhead@Flame_Light:
-GrenadeThermobaricExplode:
-	Inherits: GrenadeThermobaric
+ra1_soviets_grenadier_grenadethermobaricexplode:
+	Inherits: ra1_soviets_grenadier_grenadethermobaric
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 2000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
@@ -190,7 +190,7 @@ GrenadeThermobaricExplode:
 	-Warhead@Grenade:
 	-Warhead@LightFlameWeapon:
 
-FireRockets:
+ra1_soviets_firerocketsoldier_firerockets:
 	Inherits@wh: ^Warhead_MissileFire_Light
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_Flame_Heavy
@@ -206,15 +206,15 @@ FireRockets:
 	Warhead@MissileFire_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
-FireRocketsExplode:
-	Inherits: FireRockets
+ra1_soviets_firerocketsoldier_firerocketsexplode:
+	Inherits: ra1_soviets_firerocketsoldier_firerockets
 	Warhead@MissileFire_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 	Projectile: Missile
 		VerticalRateOfTurn: 20
 
-FireRocketsThermobaric:
+ra1_soviets_firerocketsoldier_firerocketsthermobaric:
 	Inherits@wh: ^Warhead_MissileFire_Medium
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_Flame_Heavy
@@ -236,8 +236,8 @@ FireRocketsThermobaric:
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12
 
-FireRocketsThermobaricExplode:
-	Inherits: FireRocketsThermobaric
+ra1_soviets_firerocketsoldier_firerocketsthermobaricexplode:
+	Inherits: ra1_soviets_firerocketsoldier_firerocketsthermobaric
 	Warhead@MissileFire_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
@@ -280,7 +280,7 @@ ra1_soviets_flametower_flamethrower_thermobaric:
 		TrailDelay: 0
 	Warhead@Flame_Medium: AreaDamage
 		Damage: 20000
-FireballGun:
+ra1_soviets_flamethrower_fireballgun:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
 	Inherits@fx: ^Effect_Flame_Medium
@@ -301,11 +301,11 @@ FireballGun:
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12
 
-FireballGunExplode:
-	Inherits: FireballGun
+ra1_soviets_flamethrower_fireballgunexplode:
+	Inherits: ra1_soviets_flamethrower_fireballgun
 	Warhead@Flame_Medium: AreaDamage
 		Damage: 4000
-FireballGunThermobaric:
+ra1_soviets_flamethrower_fireballgunthermobaric:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
 	Inherits@fx: ^Effect_Flame_Medium
@@ -320,11 +320,11 @@ FireballGunThermobaric:
 		TrailDelay: 0
 	Warhead@Flame_Medium: AreaDamage
 		Damage: 8000
-FireballGunThermobaricExplode:
-	Inherits: FireballGunThermobaric
+ra1_soviets_flamethrower_fireballgunthermobaricexplode:
+	Inherits: ra1_soviets_flamethrower_fireballgunthermobaric
 	Warhead@Flame_Medium: AreaDamage
 		Damage: 4000
-SiegeMortar:
+ra1_soviets_mortarsoldier_siegemortar:
 	Inherits: ^Warhead_Thermobaric_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
@@ -344,11 +344,11 @@ SiegeMortar:
 		ContrailEndColor: 87654321
 	Warhead@Thermobaric_Medium:
 		Damage: 32000
-SiegeMortarExplode:
-	Inherits: SiegeMortar
+ra1_soviets_mortarsoldier_siegemortarexplode:
+	Inherits: ra1_soviets_mortarsoldier_siegemortar
 	Warhead@Thermobaric_Medium:
 		Damage: 16000
-SiegeMortarThermobaric:
+ra1_soviets_mortarsoldier_siegemortarthermobaric:
 	Inherits: ^Warhead_Thermobaric_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -380,28 +380,28 @@ SiegeMortarThermobaric:
 		GlowFadeFrames: 60
 		GlowFadeInFrames: 12
 
-SiegeMortarThermobaricExplode:
-	Inherits: SiegeMortarThermobaric
+ra1_soviets_mortarsoldier_siegemortarthermobaricexplode:
+	Inherits: ra1_soviets_mortarsoldier_siegemortarthermobaric
 	Warhead@Thermobaric_Heavy:
 		Damage: 12000
-PortaTesla_EMP:
+ra1_soviets_shocktrooper_portatesla_emp:
 	Inherits: PortaTesla
 	Warhead@Tesla_Heavy:
 		IntegrityScale: 150
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 10000
 
-PortaTeslaArc_EMP:
-	Inherits: PortaTesla_EMP
+ra1_soviets_shocktrooper_portateslaarc_emp:
+	Inherits: ra1_soviets_shocktrooper_portatesla_emp
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: PortaTeslaFragment
+		Weapon: ra1_soviets_shocktrooper_portateslafragment
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 
-PortaTeslaFragment:
-	Inherits: PortaTeslaArc_EMP
+ra1_soviets_shocktrooper_portateslafragment:
+	Inherits: ra1_soviets_shocktrooper_portateslaarc_emp
 	Range: 2326
 	Warhead@Tesla_Heavy:
 		Damage: 10000
@@ -412,7 +412,7 @@ PortaTeslaFragment:
 		Damage: 5000
 	-Warhead@TeslaArc:
 
-ZapperPortaTesla:
+ra1_soviets_zapper_zapperportatesla:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^Effect_Tesla_Heavy
@@ -427,17 +427,17 @@ ZapperPortaTesla:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 16000
 
-ZapperPortaTeslaArc:
-	Inherits: ZapperPortaTesla
+ra1_soviets_zapper_zapperportateslaarc:
+	Inherits: ra1_soviets_zapper_zapperportatesla
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: ZapperPortaTeslaFragment
+		Weapon: ra1_soviets_zapper_zapperportateslafragment
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 
-ZapperPortaTeslaFragment:
-	Inherits: ZapperPortaTeslaArc
+ra1_soviets_zapper_zapperportateslafragment:
+	Inherits: ra1_soviets_zapper_zapperportateslaarc
 	Range: 2500
 	Warhead@Tesla_Heavy:
 		Damage: 16000
@@ -463,24 +463,24 @@ PointDefenseTesla:
 		DamageTypes: Tesla
 		ValidTargets: Ground, Air, Missile, Bullet, BallisticMissile
 		Damage: 5000
-TTankZap_EMP:
+ra1_soviets_teslatank_ttankzap_emp:
 	Inherits: TTankZap
 	Warhead@Tesla_Heavy:
 		IntegrityScale: 150
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
 
-TTankZapArc_EMP:
-	Inherits: TTankZap_EMP
+ra1_soviets_teslatank_ttankzaparc_emp:
+	Inherits: ra1_soviets_teslatank_ttankzap_emp
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: TTankZapArcTeslaFragment1_EMP
+		Weapon: ra1_soviets_teslatank_ttankzaparcteslafragment1_emp
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 
-TTankZapArcTeslaFragment1_EMP:
-	Inherits: TTankZapArc_EMP
+ra1_soviets_teslatank_ttankzaparcteslafragment1_emp:
+	Inherits: ra1_soviets_teslatank_ttankzaparc_emp
 	Range: 3650
 	Warhead@Tesla_Heavy:
 		Damage: 20000
@@ -490,14 +490,14 @@ TTankZapArcTeslaFragment1_EMP:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 10000
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: TTankZapArcTeslaFragment2_EMP
+		Weapon: ra1_soviets_teslatank_ttankzaparcteslafragment2_emp
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 
-TTankZapArcTeslaFragment2_EMP:
-	Inherits: TTankZapArcTeslaFragment1_EMP
+ra1_soviets_teslatank_ttankzaparcteslafragment2_emp:
+	Inherits: ra1_soviets_teslatank_ttankzaparcteslafragment1_emp
 	Range: 1825
 	Warhead@Tesla_Heavy:
 		Damage: 10000
@@ -508,7 +508,7 @@ TTankZapArcTeslaFragment2_EMP:
 		Damage: 5000
 	-Warhead@TeslaArc:
 
-TTankZap2:
+ra1_soviets_heavyteslatank_ttankzap2:
 	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
 	Inherits@fx: ^Effect_Tesla_Super
@@ -520,24 +520,24 @@ TTankZap2:
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 20000
-TTankZap2_EMP:
-	Inherits: TTankZap2
+ra1_soviets_heavyteslatank_ttankzap2_emp:
+	Inherits: ra1_soviets_heavyteslatank_ttankzap2
 	Warhead@Tesla_Super:
 		IntegrityScale: 150
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
 
-TTankZap2Arc_EMP:
-	Inherits: TTankZap2_EMP
+ra1_soviets_heavyteslatank_ttankzap2arc_emp:
+	Inherits: ra1_soviets_heavyteslatank_ttankzap2_emp
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: TTankZap2ArcTeslaFragment1_EMP
+		Weapon: ra1_soviets_heavyteslatank_ttankzap2arcteslafragment1_emp
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 
-TTankZap2ArcTeslaFragment1_EMP:
-	Inherits: TTankZap2Arc_EMP
+ra1_soviets_heavyteslatank_ttankzap2arcteslafragment1_emp:
+	Inherits: ra1_soviets_heavyteslatank_ttankzap2arc_emp
 	Range: 3325
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 20000
@@ -549,14 +549,14 @@ TTankZap2ArcTeslaFragment1_EMP:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 10000
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: TTankZap2ArcTeslaFragment2_EMP
+		Weapon: ra1_soviets_heavyteslatank_ttankzap2arcteslafragment2_emp
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 
-TTankZap2ArcTeslaFragment2_EMP:
-	Inherits: TTankZap2ArcTeslaFragment1_EMP
+ra1_soviets_heavyteslatank_ttankzap2arcteslafragment2_emp:
+	Inherits: ra1_soviets_heavyteslatank_ttankzap2arcteslafragment1_emp
 	Range: 1663
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 10000
@@ -581,24 +581,24 @@ TeslaZap:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 16000
-TeslaZap_EMP:
+ra1_soviets_teslacoil_teslazap_emp:
 	Inherits: TeslaZap
 	Warhead@Tesla_Heavy:
 		IntegrityScale: 150
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 16000
 
-TeslaZapArc_EMP:
-	Inherits: TeslaZap_EMP
+ra1_soviets_teslacoil_teslazaparc_emp:
+	Inherits: ra1_soviets_teslacoil_teslazap_emp
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: TeslaZapArcTeslaFragment1_EMP
+		Weapon: ra1_soviets_teslacoil_teslazaparcteslafragment1_emp
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 
-TeslaZapArcTeslaFragment1_EMP:
-	Inherits: TeslaZapArc_EMP
+ra1_soviets_teslacoil_teslazaparcteslafragment1_emp:
+	Inherits: ra1_soviets_teslacoil_teslazaparc_emp
 	Range: 4660
 	Warhead@Tesla_Heavy:
 		Damage: 16000
@@ -608,14 +608,14 @@ TeslaZapArcTeslaFragment1_EMP:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 8000
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: TeslaZapArcTeslaFragment2_EMP
+		Weapon: ra1_soviets_teslacoil_teslazaparcteslafragment2_emp
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 
-TeslaZapArcTeslaFragment2_EMP:
-	Inherits: TeslaZapArcTeslaFragment1_EMP
+ra1_soviets_teslacoil_teslazaparcteslafragment2_emp:
+	Inherits: ra1_soviets_teslacoil_teslazaparcteslafragment1_emp
 	Range: 2330
 	Warhead@Tesla_Heavy:
 		Damage: 8000
@@ -681,7 +681,7 @@ ra1_soviets_heatraytank_heatray4:
 		Thickness: 80
 		QuantizationCount: 16
 
-v1rockets:
+ra1_soviets_v1rockettruck_v1rockets:
 	Inherits@roleflat: ^Compatibility_MissileHE_MediumFlat
 	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@wh2: ^Warhead_Demolition_Light
@@ -709,7 +709,7 @@ v1rockets:
 		PercentageScale: 9996
 	-Warhead@MissileHE_Medium:
 	-Warhead@Demolition_Light:
-v1rocketsThermobaric:
+ra1_soviets_v1rockettruck_v1rocketsthermobaric:
 	Inherits@collapsewh: ^Warhead_Thermobaric_Heavy
 	-TargetActorCenter:
 	Inherits: ^MediumMissile
@@ -851,7 +851,7 @@ SCUD:
 		Damage: 60000
 	Warhead@Flame_Heavy:
 		Damage: 60000
-SCUDThermobaric:
+ra1_soviets_v2rocketlauncher_scudthermobaric:
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@fx: ^Effect_Demolition_Heavy
 	Inherits: SCUD
@@ -886,7 +886,7 @@ SCUDThermobaric:
 		PhysicalStateScale: 100
 	Warhead@Demolition_Heavy:
 		Damage: 40000
-SCUDTesla:
+ra1_soviets_v2rocketlauncher_scudtesla:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^Effect_Tesla_Heavy
@@ -929,7 +929,7 @@ SCUDTesla:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 
-SCUDNUKE:
+ra1_soviets_nuclearv2launcher_scudnuke:
 	Inherits@wh: ^Warhead_Nuclear_Super
 	Inherits@fx: ^Effect_Nuclear_Super
 	ValidTargets: Ground, Water
@@ -981,8 +981,8 @@ SCUDNUKE:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: kaboom22.aud
 
-SCUDNUKEThermobaric:
-	Inherits: SCUDNUKE
+ra1_soviets_nuclearv2launcher_scudnukethermobaric:
+	Inherits: ra1_soviets_nuclearv2launcher_scudnuke
 	Projectile: Bullet
 		ContrailStartWidth: 125
 		ContrailEndWidth: 25
@@ -1102,7 +1102,7 @@ ra1_soviets_btr80_machinegun_tesla:
 ra1_soviets_btr80_machinegun_tesla_arc:
 	Inherits: ra1_soviets_btr80_machinegun_tesla
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: BTRTeslaMachineGunArcFragment1
+		Weapon: ra1_soviets_btr80_btrteslamachinegunarcfragment1
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
@@ -1112,7 +1112,7 @@ ra1_soviets_btr80_machinegun_tesla_arc:
 		Damage: 4000
 		PercentageScale: 9975
 
-BTRTeslaMachineGunArcFragment1:
+ra1_soviets_btr80_btrteslamachinegunarcfragment1:
 	Inherits: ra1_soviets_btr80_machinegun_tesla_arc
 	Range: 2727
 	Warhead@Tesla_HeavyFlatCompatibility:
@@ -1133,7 +1133,7 @@ ra1_soviets_btr80_machinegun_tesla_AA:
 ra1_soviets_btr80_machinegun_tesla_arc_AA:
 	Inherits: ra1_soviets_btr80_machinegun_tesla_AA
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: BTRTeslaMachineGunArcFragment1AA
+		Weapon: ra1_soviets_btr80_btrteslamachinegunarcfragment1aa
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
@@ -1143,7 +1143,7 @@ ra1_soviets_btr80_machinegun_tesla_arc_AA:
 		Damage: 4000
 		PercentageScale: 9975
 
-BTRTeslaMachineGunArcFragment1AA:
+ra1_soviets_btr80_btrteslamachinegunarcfragment1aa:
 	Inherits: ra1_soviets_btr80_machinegun_tesla_arc_AA
 	Range: 4090
 	Warhead@Tesla_HeavyFlatCompatibility:
@@ -1221,7 +1221,7 @@ HindMissiles:
 	Projectile: Missile
 		VerticalRateOfTurn: 16
 
-HindMissilesThermobaric:
+ra1_soviets_hindattackhelicopter_hindmissilesthermobaric:
 	Inherits@roleflat: ^Compatibility_Thermobaric_MediumFlat
 	Inherits@collapsewh: ^Warhead_Thermobaric_Medium
 	Inherits: ^Warhead_CannonHE_Heavy
@@ -1315,7 +1315,7 @@ HindMissilesThermobaric:
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Thermobaric_Medium:
 
-HindMissilesNuclear:
+ra1_soviets_hindattackhelicopter_hindmissilesnuclear:
 	Inherits@collapsewh: ^Warhead_Nuclear_Super
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^MediumFlameWeapon
@@ -1386,7 +1386,7 @@ HindMissilesNuclear:
 	-Warhead@TankDestroyerCannon:
 	-Warhead@Nuclear_Super_Percentage:
 
-KamovMissilesTesla:
+ra1_soviets_kamovattackhelicopter_kamovmissilestesla:
 	Inherits@roleflat: ^Compatibility_MissileTesla_MediumFlat
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
@@ -1475,7 +1475,7 @@ KamovMissilesTesla:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 5000
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: KamovTeslaArcFragment1
+		Weapon: ra1_soviets_kamovattackhelicopter_kamovteslaarcfragment1
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
@@ -1493,7 +1493,7 @@ KamovMissilesTesla:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
 
-KamovTesla:
+ra1_soviets_kamovattackhelicopter_kamovtesla:
 	Inherits@finalmain: ^Compatibility_Tesla_HeavyFlat
 	Inherits: ^Warhead_MissileAP_Light
 	Inherits@2: ^Warhead_Tesla_Heavy
@@ -1525,10 +1525,10 @@ KamovTesla:
 	-Warhead@MissileAP_Light:
 	-Warhead@Tesla_Heavy:
 
-KamovTeslaArc:
-	Inherits: KamovTesla
+ra1_soviets_kamovattackhelicopter_kamovteslaarc:
+	Inherits: ra1_soviets_kamovattackhelicopter_kamovtesla
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: KamovTeslaArcFragment1
+		Weapon: ra1_soviets_kamovattackhelicopter_kamovteslaarcfragment1
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
@@ -1538,8 +1538,8 @@ KamovTeslaArc:
 		Damage: 32000
 		PercentageScale: 9997
 
-KamovTeslaArcFragment1:
-	Inherits: KamovTeslaArc
+ra1_soviets_kamovattackhelicopter_kamovteslaarcfragment1:
+	Inherits: ra1_soviets_kamovattackhelicopter_kamovteslaarc
 	Range: 2764
 	Warhead@LightMissile: SpreadDamage
 		Damage: 8000
@@ -1556,7 +1556,7 @@ KamovTeslaArcFragment1:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 8000
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: KamovTeslaArcFragment2
+		Weapon: ra1_soviets_kamovattackhelicopter_kamovteslaarcfragment2
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
@@ -1568,8 +1568,8 @@ KamovTeslaArcFragment1:
 	-Warhead@LightMissile:
 	-Warhead@TeslaWeapon:
 
-KamovTeslaArcFragment2:
-	Inherits: KamovTeslaArcFragment1
+ra1_soviets_kamovattackhelicopter_kamovteslaarcfragment2:
+	Inherits: ra1_soviets_kamovattackhelicopter_kamovteslaarcfragment1
 	Range: 1382
 	Warhead@LightMissile: SpreadDamage
 		Damage: 4000
@@ -1765,7 +1765,7 @@ ra1_soviets_armoredyak_chaingun_incendiary:
 		Damage: 8000
 		PercentageScale: 9988
 
-YakTeslaGun:
+ra1_soviets_teslayak_yakteslagun:
 	Inherits@finalmain: ^Compatibility_Tesla_HeavyFlat
 	Inherits: ^Warhead_MissileAP_Light
 	Inherits@2: ^Warhead_Tesla_Heavy
@@ -1800,10 +1800,10 @@ YakTeslaGun:
 		PercentageScale: 9994
 	-Warhead@MissileAP_Light:
 	-Warhead@Tesla_Heavy:
-YakTeslaGunArc:
-	Inherits: YakTeslaGun
+ra1_soviets_teslayak_yakteslagunarc:
+	Inherits: ra1_soviets_teslayak_yakteslagun
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: YakTeslaArcFragment1
+		Weapon: ra1_soviets_teslayak_yakteslaarcfragment1
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
@@ -1813,8 +1813,8 @@ YakTeslaGunArc:
 		Damage: 16000
 		PercentageScale: 9994
 
-YakTeslaArcFragment1:
-	Inherits: YakTeslaGunArc
+ra1_soviets_teslayak_yakteslaarcfragment1:
+	Inherits: ra1_soviets_teslayak_yakteslagunarc
 	Range: 3500
 	Warhead@LightMissile: SpreadDamage
 		Damage: 4000
@@ -1831,7 +1831,7 @@ YakTeslaArcFragment1:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 2000
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: YakTeslaArcFragment2
+		Weapon: ra1_soviets_teslayak_yakteslaarcfragment2
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
@@ -1843,8 +1843,8 @@ YakTeslaArcFragment1:
 	-Warhead@LightMissile:
 	-Warhead@TeslaWeapon:
 
-YakTeslaArcFragment2:
-	Inherits: YakTeslaArcFragment1
+ra1_soviets_teslayak_yakteslaarcfragment2:
+	Inherits: ra1_soviets_teslayak_yakteslaarcfragment1
 	Range: 1750
 	Warhead@LightMissile: SpreadDamage
 		Damage: 2000
@@ -2115,7 +2115,7 @@ ra1_soviets_teslayak_tesla_bomb:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
 
-YakNuclearBomb:
+ra1_soviets_nuclearyak_yaknuclearbomb:
 	Inherits@roleflat: ^Compatibility_Nuclear_SuperFlat
 	Inherits: ^HeavyBomb
 	Inherits@2: ^HeavyChemicalWeapon
@@ -2180,7 +2180,7 @@ YakNuclearBomb:
 	-Warhead@HeavyFlameWeapon:
 	-Warhead@NuclearWarhead:
 
-Maverick:
+ra1_soviets_migattackbomber_maverick:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
@@ -2204,11 +2204,11 @@ Maverick:
 		TrailDelay: 1
 	Warhead@MissileAP_Medium:
 		Damage: 40000
-TeslaMaverick:
+ra1_soviets_migattackbomber_teslamaverick:
 	Inherits@finalmain: ^Compatibility_Tesla_HeavyFlat
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
-	Inherits@2: Maverick
+	Inherits@2: ra1_soviets_migattackbomber_maverick
 	Inherits@3: ^Effect_Tesla_Impact_RA2
 	Projectile: Missile
 		VerticalRateOfTurn: 16
@@ -2237,7 +2237,7 @@ TeslaMaverick:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 16000
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: TeslaMaverickFragment1
+		Weapon: ra1_soviets_migattackbomber_teslamaverickfragment1
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
@@ -2249,8 +2249,8 @@ TeslaMaverick:
 	-Warhead@MissileAP_Medium:
 	-Warhead@Tesla_Heavy:
 
-TeslaMaverickFragment1:
-	Inherits: TeslaMaverick
+ra1_soviets_migattackbomber_teslamaverickfragment1:
+	Inherits: ra1_soviets_migattackbomber_teslamaverick
 	ValidTargets: Ground, Water, Air
 	Range: 2950
 	Report: shktrop1.aud
@@ -2269,7 +2269,7 @@ TeslaMaverickFragment1:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 8000
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: TeslaMaverickFragment2
+		Weapon: ra1_soviets_migattackbomber_teslamaverickfragment2
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
@@ -2281,8 +2281,8 @@ TeslaMaverickFragment1:
 	-Warhead@MissileAP_Medium:
 	-Warhead@Tesla_Heavy:
 
-TeslaMaverickFragment2:
-	Inherits: TeslaMaverickFragment1
+ra1_soviets_migattackbomber_teslamaverickfragment2:
+	Inherits: ra1_soviets_migattackbomber_teslamaverickfragment1
 	Range: 1475
 	Warhead@Tesla_Heavy:
 		Damage: 4000
@@ -2305,13 +2305,13 @@ TeslaMaverickFragment2:
 		VerticalRateOfTurn: 30
 		MinimumLaunchAngle: 128
 
-ThermobaricMaverick:
+ra1_soviets_migattackbomber_thermobaricmaverick:
 	Inherits@roleflat: ^Compatibility_Thermobaric_HeavyFlat
 	Inherits@collapsewh: ^Warhead_Thermobaric_Heavy
 	Inherits: ^NuclearWarhead
 	Inherits@2: ^HeavyMissile
 	Inherits@3: ^MediumFlameWeapon
-	Inherits@4: Maverick
+	Inherits@4: ra1_soviets_migattackbomber_maverick
 	Projectile: Missile
 		VerticalRateOfTurn: 16
 		Acceleration: 5
@@ -2457,7 +2457,7 @@ ra1_soviets_su57attackbomber_missile_thermobaric:
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 
-105mmThermobaric:
+ra1_soviets_heavytank_105mmthermobaric:
 	Inherits@finalmain: ^Compatibility_Flame_MediumFlat
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
@@ -2586,7 +2586,7 @@ ShtoraLaser:
 	-Warhead@LaserExtraDamage:
 	-Warhead@MediumChemicalWeapon:
 
-KotinCannon:
+ra1_soviets_kotinnucleartank_kotincannon:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_CannonHE_Heavy
@@ -3176,7 +3176,7 @@ MammothTuskTeslaTargetingComputer:
 	Projectile: Missile
 		VerticalRateOfTurn: 12
 
-ra120mm2:
+ra1_soviets_siegemammothtank_ra120mm2:
 	Inherits@collapseflat: ^Compatibility_CannonHE_HeavyFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -3220,12 +3220,12 @@ ra120mm2:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@CannonHE_HeavyFlatCompatibility:
 
-ra120mm2TargetingComputer:
-	Inherits: ra120mm2
+ra1_soviets_siegemammothtank_ra120mm2targetingcomputer:
+	Inherits: ra1_soviets_siegemammothtank_ra120mm2
 	ReloadDelay: 105
 	ValidTargets: Ground, Water
 
-ra120mm2Thermobaric:
+ra1_soviets_siegemammothtank_ra120mm2thermobaric:
 	Inherits@finalmain: ^Compatibility_Thermobaric_HeavyFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -3342,8 +3342,8 @@ ra120mm2Thermobaric:
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Demolition_Heavy:
 	-Warhead@Flame_Heavy:
-ra120mm2ThermobaricTargetingComputer:
-	Inherits: ra120mm2Thermobaric
+ra1_soviets_siegemammothtank_ra120mm2thermobarictargetingcomputer:
+	Inherits: ra1_soviets_siegemammothtank_ra120mm2thermobaric
 	ReloadDelay: 105
 	ValidTargets: Ground, Water
 	Warhead@Collapsedra120mm2ThermobaricTargetingComputerCannonHE_HeavyPercentage: AreaDamagePercentage
@@ -3439,7 +3439,7 @@ ra120mm2ThermobaricTargetingComputer:
 	-Warhead@Collapsedra120mm2ThermobaricCannonHE_HeavyPercentage:
 	-Warhead@Collapsedra120mm2ThermobaricDemolition_HeavyPercentage:
 	-Warhead@Collapsedra120mm2ThermobaricFlame_HeavyPercentage:
-MammothTusk2:
+ra1_soviets_siegemammothtank_mammothtusk2:
 	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
 	Inherits: ^LightFlameWeapon
 	Inherits@2: ^MediumChemicalWeapon
@@ -3494,15 +3494,15 @@ MammothTusk2:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@HeavyMissile:
 
-MammothTusk2TargetingComputer:
-	Inherits: MammothTusk2
+ra1_soviets_siegemammothtank_mammothtusk2targetingcomputer:
+	Inherits: ra1_soviets_siegemammothtank_mammothtusk2
 	ReloadDelay: 105
 	ValidTargets: Ground, Water, Air
 
 	Projectile: Missile
 		VerticalRateOfTurn: 12
 
-MammothTusk2Thermobaric:
+ra1_soviets_siegemammothtank_mammothtusk2thermobaric:
 	Inherits@collapsewh: ^Warhead_Thermobaric_Heavy
 	Inherits: ^HeavyFlameWeapon
 	Inherits@2: ^HeavyBomb
@@ -3571,8 +3571,8 @@ MammothTusk2Thermobaric:
 	-Warhead@HeavyBomb:
 	-Warhead@HeavyMissile:
 
-MammothTusk2ThermobaricTargetingComputer:
-	Inherits: MammothTusk2Thermobaric
+ra1_soviets_siegemammothtank_mammothtusk2thermobarictargetingcomputer:
+	Inherits: ra1_soviets_siegemammothtank_mammothtusk2thermobaric
 	ReloadDelay: 105
 	ValidTargets: Ground, Water, Air
 
@@ -3869,7 +3869,7 @@ ra1_soviets_monstertank_missile_thermobaric:
 	-Warhead@MediumMissile:
 	-Warhead@HeavyMissile:
 
-VolkovMagneticWeapon:
+ra1_soviets_volkov_volkovmagneticweapon:
 	Inherits@roleflat: ^Compatibility_Railgun_HeavyFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -3918,8 +3918,8 @@ VolkovMagneticWeapon:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@MediumChemicalWeapon:
 
-VolkovMagneticWeaponTesla:
-	Inherits: VolkovMagneticWeapon
+ra1_soviets_volkov_volkovmagneticweapontesla:
+	Inherits: ra1_soviets_volkov_volkovmagneticweapon
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@2: ^Effect_Tesla_Impact_RA2
@@ -3968,7 +3968,7 @@ VolkovMagneticWeaponTesla:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 16000
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: VolkovMagneticWeaponTeslaFragment1
+		Weapon: ra1_soviets_volkov_volkovmagneticweaponteslafragment1
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
@@ -3981,8 +3981,8 @@ VolkovMagneticWeaponTesla:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@MediumChemicalWeapon:
 
-VolkovMagneticWeaponTeslaFragment1:
-	Inherits: VolkovMagneticWeaponTesla
+ra1_soviets_volkov_volkovmagneticweaponteslafragment1:
+	Inherits: ra1_soviets_volkov_volkovmagneticweapontesla
 	ValidTargets: Ground, Water, Air
 	Range: 2830
 	Report: shktrop1.aud
@@ -4009,7 +4009,7 @@ VolkovMagneticWeaponTeslaFragment1:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 8000
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: VolkovMagneticWeaponTeslaFragment2
+		Weapon: ra1_soviets_volkov_volkovmagneticweaponteslafragment2
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
@@ -4022,8 +4022,8 @@ VolkovMagneticWeaponTeslaFragment1:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@MediumChemicalWeapon:
 
-VolkovMagneticWeaponTeslaFragment2:
-	Inherits: VolkovMagneticWeaponTeslaFragment1
+ra1_soviets_volkov_volkovmagneticweaponteslafragment2:
+	Inherits: ra1_soviets_volkov_volkovmagneticweaponteslafragment1
 	Range: 1415
 	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 2000
@@ -4056,10 +4056,10 @@ VolkovMagneticWeaponTeslaFragment2:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@MediumChemicalWeapon:
 
-VolkovMagneticWeaponNuclearShells:
+ra1_soviets_volkov_volkovmagneticweaponnuclearshells:
 	Inherits@wh: ^Warhead_Nuclear_Super
 	Inherits@fx: ^Effect_Nuclear_Super
-	Inherits: VolkovMagneticWeapon
+	Inherits: ra1_soviets_volkov_volkovmagneticweapon
 	ReloadDelay: 40
 	Burst: 1
 	MinRange: 1080
@@ -4112,17 +4112,17 @@ VolkovMagneticWeaponNuclearShells:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@MediumChemicalWeapon:
 
-VolkovMagneticWeaponIncendiary:
+ra1_soviets_volkov_volkovmagneticweaponincendiary:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
 	Inherits@fx: ^Effect_Flame_Medium
-	Inherits: VolkovMagneticWeapon
+	Inherits: ra1_soviets_volkov_volkovmagneticweapon
 	Inherits@2: ^IncendiaryBulletProjectile
 	Warhead@Flame_Medium: AreaDamage
 		Damage: 10000
-VolkovMagneticWeaponIncendiaryTesla:
+ra1_soviets_volkov_volkovmagneticweaponincendiarytesla:
 	Inherits@roleflat: ^Compatibility_Quantum_HeavyFlat
-	Inherits: VolkovMagneticWeapon
+	Inherits: ra1_soviets_volkov_volkovmagneticweapon
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^TeslaWeapon
 	Inherits@fx: ^Effect_Tesla_Impact_RA2
@@ -4189,7 +4189,7 @@ VolkovMagneticWeaponIncendiaryTesla:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: VolkovMagneticWeaponIncendiaryTeslaFragment1
+		Weapon: ra1_soviets_volkov_volkovmagneticweaponincendiaryteslafragment1
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
@@ -4203,8 +4203,8 @@ VolkovMagneticWeaponIncendiaryTesla:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
 
-VolkovMagneticWeaponIncendiaryTeslaFragment1:
-	Inherits: VolkovMagneticWeaponTesla
+ra1_soviets_volkov_volkovmagneticweaponincendiaryteslafragment1:
+	Inherits: ra1_soviets_volkov_volkovmagneticweapontesla
 	ValidTargets: Ground, Water, Air
 	Range: 2830
 	Report: shktrop1.aud
@@ -4242,7 +4242,7 @@ VolkovMagneticWeaponIncendiaryTeslaFragment1:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 10000
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: VolkovMagneticWeaponIncendiaryTeslaFragment2
+		Weapon: ra1_soviets_volkov_volkovmagneticweaponincendiaryteslafragment2
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
@@ -4255,8 +4255,8 @@ VolkovMagneticWeaponIncendiaryTeslaFragment1:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@MediumChemicalWeapon:
 
-VolkovMagneticWeaponIncendiaryTeslaFragment2:
-	Inherits: VolkovMagneticWeaponIncendiaryTeslaFragment1
+ra1_soviets_volkov_volkovmagneticweaponincendiaryteslafragment2:
+	Inherits: ra1_soviets_volkov_volkovmagneticweaponincendiaryteslafragment1
 	Range: 1415
 	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 2000
@@ -4300,11 +4300,11 @@ VolkovMagneticWeaponIncendiaryTeslaFragment2:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@MediumChemicalWeapon:
 
-VolkovMagneticWeaponIncendiaryNuclearShells:
+ra1_soviets_volkov_volkovmagneticweaponincendiarynuclearshells:
 	Inherits@roleflat: ^Compatibility_CannonNuke_HeavyFlat
 	Inherits: ^MediumFlameWeapon
 	Inherits@2: ^NuclearWarhead
-	Inherits@3: VolkovMagneticWeapon
+	Inherits@3: ra1_soviets_volkov_volkovmagneticweapon
 	ReloadDelay: 40
 	Burst: 1
 	MinRange: 1080
@@ -4475,7 +4475,7 @@ ra1_soviets_samsite_missile_AA:
 	-Warhead@MediumMissile:
 	-Warhead@LightMissile:
 
-RAGatlingTankCannon:
+ra1_soviets_gatlingtank_ragatlingtankcannon:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
@@ -4486,13 +4486,13 @@ RAGatlingTankCannon:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-RAGatlingTankCannon_AA:
-	Inherits: RAGatlingTankCannon
+ra1_soviets_gatlingtank_ragatlingtankcannon_AA:
+	Inherits: ra1_soviets_gatlingtank_ragatlingtankcannon
 	Range: 7500
 	ValidTargets: Air
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
-IncendiaryRAGatlingTankCannon:
+ra1_soviets_gatlingtank_incendiaryragatlingtankcannon:
 	Inherits@roleflat: ^Compatibility_Flame_LightFlat
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
@@ -4514,8 +4514,8 @@ IncendiaryRAGatlingTankCannon:
 		PercentageScale: 9975
 	-Warhead@Bullet_Medium:
 	-Warhead@Flame_Light:
-IncendiaryRAGatlingTankCannon_AA:
-	Inherits: IncendiaryRAGatlingTankCannon
+ra1_soviets_gatlingtank_incendiaryragatlingtankcannon_AA:
+	Inherits: ra1_soviets_gatlingtank_incendiaryragatlingtankcannon
 	Range: 7500
 	ValidTargets: Air
 	Warhead@Flame_Light:
@@ -4525,7 +4525,7 @@ IncendiaryRAGatlingTankCannon_AA:
 		Damage: 4000
 		PercentageScale: 9975
 	-Warhead@Flame_Light:
-TeslaRAGatlingTankCannon:
+ra1_soviets_gatlingtank_teslaragatlingtankcannon:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@2: ^Effect_Tesla_Impact_RA2
@@ -4544,40 +4544,40 @@ TeslaRAGatlingTankCannon:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 1000
 
-TeslaRAGatlingTankCannonArc:
-	Inherits: TeslaRAGatlingTankCannon
+ra1_soviets_gatlingtank_teslaragatlingtankcannonarc:
+	Inherits: ra1_soviets_gatlingtank_teslaragatlingtankcannon
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: TeslaRAGatlingTankCannonArcFragment1
+		Weapon: ra1_soviets_gatlingtank_teslaragatlingtankcannonarcfragment1
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 
-TeslaRAGatlingTankCannonArcFragment1:
-	Inherits: TeslaRAGatlingTankCannonArc
+ra1_soviets_gatlingtank_teslaragatlingtankcannonarcfragment1:
+	Inherits: ra1_soviets_gatlingtank_teslaragatlingtankcannonarc
 	Range: 2500
 	-Warhead@TeslaArc:
 
-TeslaRAGatlingTankCannon_AA:
-	Inherits: TeslaRAGatlingTankCannon
+ra1_soviets_gatlingtank_teslaragatlingtankcannon_AA:
+	Inherits: ra1_soviets_gatlingtank_teslaragatlingtankcannon
 	Range: 7500
 	ValidTargets: Air
 
-TeslaRAGatlingTankCannonArc_AA:
-	Inherits: TeslaRAGatlingTankCannon_AA
+ra1_soviets_gatlingtank_teslaragatlingtankcannonarc_AA:
+	Inherits: ra1_soviets_gatlingtank_teslaragatlingtankcannon_AA
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: TeslaRAGatlingTankCannonArcFragment1AA
+		Weapon: ra1_soviets_gatlingtank_teslaragatlingtankcannonarcfragment1aa
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 
-TeslaRAGatlingTankCannonArcFragment1AA:
-	Inherits: TeslaRAGatlingTankCannonArc_AA
+ra1_soviets_gatlingtank_teslaragatlingtankcannonarcfragment1aa:
+	Inherits: ra1_soviets_gatlingtank_teslaragatlingtankcannonarc_AA
 	Range: 3750
 	-Warhead@TeslaArc:
 
-MADTankDetonate:
+ra1_soviets_madtank_madtankdetonate:
 	Inherits@wh: ^Warhead_Nuclear_Super
 	Inherits@fx: ^Effect_Nuclear_Super
 	InvalidTargets: MADTank, Infantry
@@ -4654,7 +4654,7 @@ ra1_soviets_rifleinfantry_carbine_incendiary:
 	-Warhead@Bullet_Light:
 	-Warhead@Flame_Light:
 
-KotinCannonNuclearShell:
+ra1_soviets_kotinnucleartank_kotincannonnuclearshell:
 	Inherits@wh: ^Warhead_CannonNuke_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_CannonHE_Heavy
@@ -4680,3 +4680,66 @@ KotinCannonNuclearShell:
 		Explosions: nuke_small
 		ImpactSounds: xplosml2.aud
 		ImpactActors: true
+
+ra1_soviets_missilesubmarine_227mm:
+	Inherits: 227mm
+
+ra1_soviets_hindattackhelicopter_hindmissiles:
+	Inherits: HindMissiles
+
+ra1_soviets_hindattackhelicopter_chaingun:
+	Inherits: ChainGun
+
+ra1_soviets_hindattackhelicopter_incendiarychaingun:
+	Inherits: IncendiaryChainGun
+
+ra1_soviets_kamovattackhelicopter_hindmissiles:
+	Inherits: HindMissiles
+
+ra1_soviets_kamovattackhelicopter_chaingun:
+	Inherits: ChainGun
+
+ra1_soviets_kamovattackhelicopter_incendiarychaingun:
+	Inherits: IncendiaryChainGun
+
+ra1_soviets_supersonicnuclearbomber_parabombnuke:
+	Inherits: ParaBombNuke
+
+ra1_soviets_teslacoil_teslazap:
+	Inherits: TeslaZap
+
+ra1_soviets_rocketsoldier_rocketsra:
+	Inherits: RocketsRA
+
+ra1_soviets_dragunovantimaterialsniper_dragunovsniper:
+	Inherits: DragunovSniper
+
+ra1_soviets_shocktrooper_portatesla:
+	Inherits: PortaTesla
+
+ra1_soviets_v2rocketlauncher_scud:
+	Inherits: SCUD
+
+ra1_soviets_heavytank_105mm:
+	Inherits: 105mm
+
+ra1_soviets_gorynychtank_bigflamer:
+	Inherits: BigFlamer
+
+ra1_soviets_mammothtank_ra120mm:
+	Inherits: ra120mm
+
+ra1_soviets_mammothtank_ra120mmthermobaric:
+	Inherits: ra120mmThermobaric
+
+ra1_soviets_mammothtank_mammothtusk:
+	Inherits: MammothTusk
+
+ra1_soviets_mammothtank_mammothtusktesla:
+	Inherits: MammothTuskTesla
+
+ra1_soviets_mammothtank_mammothtuskthermobaric:
+	Inherits: MammothTuskThermobaric
+
+ra1_soviets_teslatank_ttankzap:
+	Inherits: TTankZap

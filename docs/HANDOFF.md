@@ -1,5 +1,15 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-10 — source PR340 warhead-family reach measurement
+
+`warhead_family_reach` measures **1,454 distinct fired weapon identities** whose
+transitive inheritance reaches a `^Warhead_*` family in the current PR340 source.
+The registry's previous value was 1,415; it is updated upward to this measured
+count with the same predicate and zero tolerance. Ownership wrappers can expose
+more distinct fired identities for existing family payloads: this increase does
+not establish newly converted weapons or additional gameplay balance work.
+Earlier dated snapshots below remain historical, and the only-UP rule remains.
+
 ## ⛔⛔ 2026-09-07 — READ THIS FIRST: the reference map, and one absolute rule
 
 **SUPERWEAPONS ARE NEVER PRICED, RESTATTED OR TOUCHED** (maintainer, verbatim: *"NEVER CHANGE

@@ -468,7 +468,7 @@
       "reliability": 0.6342,
       "sigma": 1305.33,
       "slot": "Armament",
-      "weapon": "155mmBastion"
+      "weapon": "ra1_allies_bastionartillerybunker_155mmbastion"
      },
      {
       "avg_versus": 1.0924,
@@ -492,11 +492,11 @@
       "reliability": 0.6342,
       "sigma": 1305.33,
       "slot": "Armament@Upgrade",
-      "weapon": "155mmBastionCryo"
+      "weapon": "ra1_allies_bastionartillerybunker_155mmbastioncryo"
      }
     ],
     "physical_state_multiplier": 1.3693,
-    "physical_state_weapon": "155mmBastionCryo",
+    "physical_state_weapon": "ra1_allies_bastionartillerybunker_155mmbastioncryo",
     "physical_state_weight": 1.4773,
     "shield_always_on": false,
     "shield_gated_on_upgrade": false,
@@ -558,7 +558,7 @@
       "reliability": 0.0018,
       "sigma": 40.0,
       "slot": "Armament@PRIMARY",
-      "weapon": "LightSniper"
+      "weapon": "ra1_allies_alliedsniper_lightsniper"
      },
      {
       "avg_versus": 0.6685,
@@ -582,7 +582,7 @@
       "reliability": 0.0018,
       "sigma": 40.0,
       "slot": "Armament@GARRISONED",
-      "weapon": "LightSniper"
+      "weapon": "ra1_allies_alliedsniper_lightsniper"
      },
      {
       "avg_versus": 1.1176,
@@ -605,7 +605,7 @@
       "reliability": 0.0009,
       "sigma": 58.31,
       "slot": "Armament@Upgrade",
-      "weapon": "CryoLightSniper"
+      "weapon": "ra1_allies_alliedsniper_cryolightsniper"
      },
      {
       "avg_versus": 1.1176,
@@ -628,11 +628,11 @@
       "reliability": 0.0009,
       "sigma": 58.31,
       "slot": "Armament@UpgradeGARRISONED",
-      "weapon": "CryoLightSniper"
+      "weapon": "ra1_allies_alliedsniper_cryolightsniper"
      }
     ],
     "physical_state_multiplier": 1.3705,
-    "physical_state_weapon": "CryoLightSniper",
+    "physical_state_weapon": "ra1_allies_alliedsniper_cryolightsniper",
     "physical_state_weight": 1.4822,
     "shield_always_on": false,
     "shield_gated_on_upgrade": false,
@@ -1014,7 +1014,7 @@
       "reliability": 0.5705,
       "sigma": 1586.67,
       "slot": "Armament",
-      "weapon": "155mm"
+      "weapon": "ra1_allies_alliedartillery_155mm"
      },
      {
       "avg_versus": 1.0924,
@@ -1038,11 +1038,11 @@
       "reliability": 0.5705,
       "sigma": 1586.67,
       "slot": "Armament@Upgrade",
-      "weapon": "155mmCryo"
+      "weapon": "ra1_allies_alliedartillery_155mmcryo"
      }
     ],
     "physical_state_multiplier": 1.3693,
-    "physical_state_weapon": "155mmCryo",
+    "physical_state_weapon": "ra1_allies_alliedartillery_155mmcryo",
     "physical_state_weight": 1.4773,
     "shield_always_on": false,
     "shield_gated_on_upgrade": false,
@@ -1133,7 +1133,7 @@
       "reliability": 0.7034,
       "sigma": 350.0,
       "slot": "Armament",
-      "weapon": "25mm"
+      "weapon": "ra1_allies_alliedlighttank_25mm"
      }
     ],
     "shield_always_on": false,
@@ -1217,21 +1217,21 @@
    "ra1_allies_alliedtankdestroyer": {
     "armaments": [
      {
-      "avg_versus": 1.0411,
+      "avg_versus": 1.0466,
       "damage_total": 24000.0,
       "eff_reload": 60.0,
       "effective_damage": 9112.0,
-      "effective_dps": 163.7,
-      "effective_per_shot": 9822.06,
+      "effective_dps": 155.5,
+      "effective_per_shot": 9329.95,
       "factor_deadzone": 1.0,
       "factor_range": 1.0341,
       "factor_targets": 0.95,
       "footprint": 0.0064,
-      "k": 0.4166,
-      "k_context": 0.4093,
-      "k_flat": 0.4166,
-      "k_flat_context": 0.4093,
-      "overkill": 0.9526,
+      "k": 0.3957,
+      "k_context": 0.3887,
+      "k_flat": 0.3957,
+      "k_flat_context": 0.3887,
+      "overkill": 0.9572,
       "pct_absolute": 0.0,
       "pct_absolute_context": 0.0,
       "reliability": 0.3781,

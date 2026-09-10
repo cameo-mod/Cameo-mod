@@ -30,11 +30,11 @@ td_nod_attacksubmarine:
 		TurnSpeed: 16
 		Offset: 512,0,0
 	Armament@PRIMARY:
-		Weapon: NodTorpTube
+		Weapon: td_nod_attacksubmarine_nodtorptube
 		LocalOffset: 256,128,0, 256,-128,0
 		RequiresCondition: !td_nod_upgrade_blackmarketupgrades
 	Armament@Upgrade:
-		Weapon: NodTorpTubeBlackMarket
+		Weapon: td_nod_attacksubmarine_nodtorptubeblackmarket
 		LocalOffset: 256,128,0, 256,-128,0
 		RequiresCondition: td_nod_upgrade_blackmarketupgrades
 	RenderRangeCircle:
@@ -85,7 +85,7 @@ td_nod_ballisticmissilesubmarine:
 	Armor:
 		Type: Medium
 	Armament:
-		Weapon: HonestJohn
+		Weapon: td_nod_ballisticmissilesubmarine_honestjohn
 		LocalOffset: 800,200,0, 800,-200,0
 		MuzzleSequence: muzzle
 	WithMuzzleOverlay:
@@ -160,12 +160,12 @@ td_nod_lasercorvette:
 	Armament@PRIMARY:
 		Turret: primary
 		Name: primary
-		Weapon: CorvetteLaserObelisk
+		Weapon: td_nod_lasercorvette_corvettelaserobelisk
 		LocalOffset: 0,0,800
 	Armament@SECONDARY:
 		Turret: secondary
 		Name: secondary
-		Weapon: CorvetteDragon
+		Weapon: td_nod_lasercorvette_corvettedragon
 		LocalOffset: 480,-100,40, 480,100,40
 		Recoil: 88
 		RecoilRecovery: 35

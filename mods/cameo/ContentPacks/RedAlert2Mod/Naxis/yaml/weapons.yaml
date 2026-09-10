@@ -622,18 +622,17 @@ NaxiShrekCons_elite:
 		PercentageScale: 1664
 
 NaxiHetzerDestroyer:
-	Inherits: ^Warhead_CannonHE_Medium
-	Inherits@2: ^Projectile_Shell_Medium
-	Inherits@3: ^Effect_CannonHE_Medium
-	Inherits@4: ^RA2TankDestroyerCannon
+	Inherits@fx: ^Effect_Explosion_Small_RA2
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@wh: ^Warhead_CannonAP
 	Report: cannon1.aud
 	ReloadDelay: 80
 	Range: 7132
 	Projectile: Bullet
 		Speed: 713
-	Warhead@CannonAP_Light:
+	Warhead@CannonAP:
 		Damage: 40000
-	-Warhead@CannonHE_Medium:
+		Heaviness: 0
 NaxiHetzerDestroyer_elite:
 	Inherits: NaxiHetzerDestroyer
 	Inherits@Elite: ^RA2EliteEffects
@@ -681,10 +680,9 @@ NaxiJadgDestroyer_elite:
 		PercentageScale: 9999
 
 NaxiAntiTankCannon:
-	Inherits: ^Warhead_CannonHE_Medium
-	Inherits@2: ^Projectile_Shell_Medium
-	Inherits@3: ^Effect_CannonHE_Medium
-	Inherits@4: ^RA2TankDestroyerCannon
+	Inherits@fx: ^Effect_Explosion_Small_RA2
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@wh: ^Warhead_CannonAP
 	ReloadDelay: 75
 	Range: 7361
 	Report: nax_hotwizer.wav
@@ -695,9 +693,9 @@ NaxiAntiTankCannon:
 		ContrailWidth: 333
 		ContrailLength: 33
 		Speed: 3333
-	Warhead@CannonAP_Light:
+	Warhead@CannonAP:
 		Damage: 28000
-	-Warhead@CannonHE_Medium:
+		Heaviness: 0
 NaxiAntiTankCannon_elite:
 	Inherits: NaxiAntiTankCannon
 	Range: 8361

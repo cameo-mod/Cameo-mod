@@ -25,7 +25,7 @@ RESOLVED_SNIPERS = (
     "SpecterSniper", "SpecterSniperLockdown",
     "VonSniper", "VonSniperAP", "VonSniperLockdown",
     "td_gdi_heavysniper_rifle", "td_gdi_havoc_sniper", "DragunovSniper",
-    "LightSniper", "CryoLightSniper", "RA2AWP", "RA2AWP_elite",
+    "LightSniper", "ra1_allies_alliedsniper_cryolightsniper", "RA2AWP", "RA2AWP_elite",
     "NaxiSniper", "NaxiSniper_elite", "tkmawp", "VanSniper",
     "TSSniper", "td_gdi_commando_sniper", "td_gdi_commando_sniper_elite",
     "RA2Virusgun", "RA2Virusgun2", "RA2Virusgun3", "RA2Virusgun_elite",

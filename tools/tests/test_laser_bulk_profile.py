@@ -13,7 +13,7 @@ from miniyaml import Ruleset
 
 
 ROOT_LASERS = {
-    "BlackHandLaser": (96000, 48000, 3),
+    "td_nod_lasertrooper_blackhandlaser": (96000, 48000, 3),
     "CabalHunterKillerLasers": (16000, 0, 2),
     "CabalHunterKillerLasers_elite": (30000, 0, 3),
     "TSLaser25mmDep": (4000, 0, 2),

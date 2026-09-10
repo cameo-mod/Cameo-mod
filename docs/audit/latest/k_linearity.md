@@ -1,10 +1,10 @@
 # audit_k_linearity — the flat K must not move when Damage moves
 
-Analysed **2071** concrete weapons.
+Analysed **2128** concrete weapons.
 
 ## L0 — every positive offensive runtime percentage application is modeled
 
-_clean_ — modeled 1657 folded and 2441 standalone applications.
+_clean_ — modeled 1690 folded and 2483 standalone applications.
 
 ## L1 — `k_flat` is invariant under a change of flat Damage
 
@@ -18,7 +18,7 @@ _clean_ — the identity holds for every analysed weapon; 11 percentage-only wea
 
 ## L3 — weapons with a standalone percentage DPS floor
 
-681 weapon(s) carry a standalone percentage hit; **185** have a floor at or above 25% of output.
+692 weapon(s) carry a standalone percentage hit; **188** have a floor at or above 25% of output.
 
 A price target below the floor is UNREACHABLE by lowering flat Damage — `required_damage()` returns None rather than a wrong positive number. To price these lower, the standalone percentage hit has to shrink.
 
@@ -55,11 +55,11 @@ A price target below the floor is UNREACHABLE by lowering flat Damage — `requi
 | `PhobosLaser` | 87.0% |
 | `TSHSeekerBomb` | 85.7% |
 
-_... and 155 more._
+_... and 158 more._
 
 ## L4 — folded runtime quantisation residual
 
-564 weapon(s) have a non-zero current folded runtime residual.
+575 weapon(s) have a non-zero current folded runtime residual.
 This residual is included in measured output but excluded from `k_flat` and `dps_floor`; recompute it after snapping a proposed Damage value.
 
 | weapon | context-adjusted residual per shot |
@@ -69,14 +69,14 @@ This residual is included in measured output but excluded from `k_flat` and `dps
 | `AsianTwinPlasma` | +2.0535 |
 | `Tentacle` | +1.9922 |
 | `FutureMechPlasma_elite` | +1.9190 |
-| `ThermobaricMaverick` | +1.9091 |
+| `ra1_soviets_migattackbomber_thermobaricmaverick` | +1.9091 |
 | `AsianSinglePlasma_elite` | +1.8926 |
 | `FutureMechPlasma` | +1.8489 |
 | `AsianSinglePlasma` | +1.8474 |
-| `YakTeslaGun` | +1.8383 |
-| `YakTeslaGunArc` | +1.8383 |
-| `KamovTesla` | +1.8022 |
-| `KamovTeslaArc` | +1.8022 |
+| `ra1_soviets_teslayak_yakteslagun` | +1.8383 |
+| `ra1_soviets_teslayak_yakteslagunarc` | +1.8383 |
+| `ra1_soviets_kamovattackhelicopter_kamovtesla` | +1.8022 |
+| `ra1_soviets_kamovattackhelicopter_kamovteslaarc` | +1.8022 |
 | `ra1_soviets_btr80_machinegun_tesla` | +1.7778 |
 | `ra1_soviets_btr80_machinegun_tesla_arc` | +1.7778 |
 | `edenMobileDefenceLaser` | +1.7712 |

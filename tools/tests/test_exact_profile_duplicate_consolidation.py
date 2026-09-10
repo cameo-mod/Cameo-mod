@@ -10,7 +10,7 @@ sys.path.insert(0, str(ROOT / "tools" / "balance"))
 import consolidate_exact_profile_duplicates as cohort
 from audit_three_way_split import RAW_SPLIT_BASELINE, main_warheads
 from miniyaml import Ruleset
-from reviewed_weapon_history import HistoricalView
+from reviewed_weapon_history import HistoricalView, restore_endpoint_weapon
 
 
 class ExactProfileDuplicateConsolidationTests(unittest.TestCase):
@@ -47,6 +47,8 @@ class ExactProfileDuplicateConsolidationTests(unittest.TestCase):
                                "CannonTesla_Light" if "_tesla" in name else "CannonAP_Light")
                 total, scale = 12000, 10000
             resolved = self.rules.resolve_weapon(name)
+            if name in ('RA2120xmm', 'RA2120xmm_elite'):
+                resolved = restore_endpoint_weapon(self, resolved)
             self.assertEqual([destination], main_warheads(resolved), name)
             node = next(child for child in resolved.children
                         if child.key == f"Warhead@{destination}")

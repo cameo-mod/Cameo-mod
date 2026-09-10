@@ -208,15 +208,15 @@ ra1_soviets_teslacoil:
 		HP: 90000
 	WithTeslaChargeAnimation:
 	Armament:
-		Weapon: TeslaZap
+		Weapon: ra1_soviets_teslacoil_teslazap
 		LocalOffset: 0,0,896
 		RequiresCondition: !ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@Upgrade1:
-		Weapon: TeslaZap_EMP
+		Weapon: ra1_soviets_teslacoil_teslazap_emp
 		LocalOffset: 0,0,896
 		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@Upgrade2:
-		Weapon: TeslaZapArc_EMP
+		Weapon: ra1_soviets_teslacoil_teslazaparc_emp
 		LocalOffset: 0,0,896
 		RequiresCondition: ra1_soviets_upgrade_teslaarcing
 	FirepowerMultiplier@ra1_soviets_upgrade_reactoroverload:

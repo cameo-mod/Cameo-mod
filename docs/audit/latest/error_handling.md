@@ -1,12 +1,12 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **483**
+Files scanned: **510**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
 | E1 | bare except / except BaseException | 3 | 2 |
 | E2 | handler discards the error | 98 | 30 |
-| E3 | open() without encoding= | 112 | 90 |
+| E3 | open() without encoding= | 124 | 90 |
 | E4 | subprocess call without check= | 33 | 9 |
 
 
@@ -48,7 +48,7 @@ Files scanned: **483**
 | tools/audit/audit_rank_decoration.py | 68 | handler body discards the error |
 | tools/audit/audit_scaled_bullet_overrides.py | 41 | handler body discards the error |
 | tools/audit/audit_three_way_split.py | 119 | handler body discards the error |
-| tools/audit/audit_tier_weapon_class.py | 76 | handler body discards the error |
+| tools/audit/audit_tier_weapon_class.py | 81 | handler body discards the error |
 | tools/audit/audit_turn_speed.py | 65 | handler body discards the error |
 | tools/audit/audit_unique_traits.py | 73 | handler body discards the error |
 | tools/audit/audit_upgrades.py | 158 | handler body discards the error |
@@ -79,7 +79,7 @@ Files scanned: **483**
 | tools/balance/compensate_retrofit.py | 113 | handler body discards the error |
 | tools/balance/compensate_retrofit.py | 121 | handler body discards the error |
 | tools/balance/consolidate_adjacent_family_stacks.py | 65 | handler body discards the error |
-| tools/balance/consolidate_final_safe_cohorts.py | 132 | handler body discards the error |
+| tools/balance/consolidate_final_safe_cohorts.py | 133 | handler body discards the error |
 | tools/balance/consolidate_reviewed_weapon_roots.py | 268 | handler body discards the error |
 | tools/balance/consolidate_reviewed_weapon_roots.py | 320 | handler body discards the error |
 | tools/balance/consolidate_same_family_stacks.py | 136 | handler body discards the error |
@@ -130,14 +130,14 @@ Files scanned: **483**
 | tools/tilesets/generate_volcanic_tileset.py | 814 | handler body discards the error |
 
 
-## E3 — 112 finding(s)
+## E3 — 124 finding(s)
 
 | file | line | detail |
 |---|---|---|
 | tools/bake_d2k_overlay.py | 28 | `Image.open()` without encoding= |
 | tools/bake_d2k_overlay_zap.py | 10 | `Image.open()` without encoding= |
 | tools/bake_d2k_zap.py | 41 | `Image.open()` without encoding= |
-| tools/balance/peer_corpus.py | 58 | `path.open()` without encoding= |
+| tools/balance/peer_corpus.py | 64 | `path.open()` without encoding= |
 | tools/balance/pending_classes.py | 59 | `open()` without encoding= |
 | tools/d2k_to_openra.py | 153 | `Image.open()` without encoding= |
 | tools/d2k_to_openra.py | 164 | `Image.open()` without encoding= |
@@ -156,8 +156,16 @@ Files scanned: **483**
 | tools/tests/test_ai_headquarters_refinery_cleanup.py | 39 | `read_text()` without encoding= |
 | tools/tests/test_ai_logging_integration.py | 21 | `read_text()` without encoding= |
 | tools/tests/test_anchor_dossier.py | 362 | `read_text()` without encoding= |
+| tools/tests/test_chained_owned_names.py | 11 | `read_text()` without encoding= |
+| tools/tests/test_closed_remaining_names.py | 40 | `read_text()` without encoding= |
+| tools/tests/test_closed_remaining_names.py | 44 | `read_text()` without encoding= |
+| tools/tests/test_closed_remaining_names.py | 46 | `read_text()` without encoding= |
+| tools/tests/test_converter_owned_names.py | 11 | `read_text()` without encoding= |
 | tools/tests/test_defense_tooltip_accuracy.py | 30 | `read_text()` without encoding= |
 | tools/tests/test_diagnostic_output.py | 38 | `two.read_text()` without encoding= |
+| tools/tests/test_lookup_owned_names.py | 11 | `read_text()` without encoding= |
+| tools/tests/test_lookup_owned_names.py | 15 | `read_text()` without encoding= |
+| tools/tests/test_lookup_owned_names.py | 36 | `read_text()` without encoding= |
 | tools/tests/test_peer_corpus.py | 60 | `write_text()` without encoding= |
 | tools/tests/test_peer_corpus.py | 70 | `write_text()` without encoding= |
 | tools/tests/test_peer_corpus.py | 76 | `path.write_text()` without encoding= |
@@ -166,6 +174,10 @@ Files scanned: **483**
 | tools/tests/test_peer_corpus.py | 184 | `index.read_text()` without encoding= |
 | tools/tests/test_peer_corpus.py | 186 | `index.write_text()` without encoding= |
 | tools/tests/test_peer_corpus.py | 197 | `doc.write_text()` without encoding= |
+| tools/tests/test_peer_state_scenarios.py | 173 | `read_text()` without encoding= |
+| tools/tests/test_shared_owner_wrappers.py | 19 | `read_text()` without encoding= |
+| tools/tests/test_td_naval_rename.py | 258 | `read_text()` without encoding= |
+| tools/tests/test_td_naval_rename.py | 259 | `read_text()` without encoding= |
 | tools/tilesets/apply_ai_edge_correction.py | 34 | `Image.open()` without encoding= |
 | tools/tilesets/apply_ai_edge_correction.py | 78 | `Image.open()` without encoding= |
 | tools/tilesets/apply_dark_noise_cleanup.py | 79 | `Image.open()` without encoding= |
@@ -291,7 +303,7 @@ Files scanned: **483**
 
 - E1: 3 > baseline 2
 - E2: 98 > baseline 30
-- E3: 112 > baseline 90
+- E3: 124 > baseline 90
 - E4: 33 > baseline 9
 - 1 file(s) do not parse
 

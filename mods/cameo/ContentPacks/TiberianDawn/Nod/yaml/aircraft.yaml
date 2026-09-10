@@ -200,7 +200,7 @@ td_nod_venom:
 		PauseOnCondition: !ammo
 		RequiresCondition: !td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers
 	Armament@Elite:
-		Weapon: VenomLaserInferno
+		Weapon: td_nod_venom_venomlaserinferno
 		LocalOffset: 750,0,-250
 		PauseOnCondition: !ammo
 		RequiresCondition: td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers

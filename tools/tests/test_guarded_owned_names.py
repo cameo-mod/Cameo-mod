@@ -11,9 +11,11 @@ from miniyaml import Ruleset
 from dump_resolved import node_to_obj
 import extract_stats
 from weapon_name_map_checks import assert_no_old_weapon_names
+from owned_weapon_history import restore_chained_identity_fields
 
 
 def digest(obj):
+    obj = restore_chained_identity_fields(obj)
     return hashlib.sha256(json.dumps(obj, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
 
 

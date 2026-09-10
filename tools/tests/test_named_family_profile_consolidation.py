@@ -16,6 +16,7 @@ from audit_three_way_split import RAW_SPLIT_BASELINE, main_warheads
 from audit_warhead_split import BROADCAST_BASELINE
 from miniyaml import Ruleset
 from reviewed_weapon_history import HistoricalView
+from owned_weapon_history import historical_weapon_names
 
 
 ACCEPTED = {
@@ -70,7 +71,7 @@ class NamedFamilyProfileConsolidationTests(unittest.TestCase):
         # Preserve historical comparison rows/hashes; only normalize the reviewed
         # one-to-many identity split back to its original source identities.
         selected = {cohort.YAK_OWNED_SOURCES.get(name, name) for name in selected}
-        self.assertEqual(selected, set(self.report["changed"]))
+        self.assertEqual(historical_weapon_names(selected), set(self.report["changed"]))
         self.assertEqual([], self.report["added"])
         self.assertEqual([], self.report["removed"])
         self.assertEqual(set(ACCEPTED), set(self.by_kind))
@@ -81,7 +82,7 @@ class NamedFamilyProfileConsolidationTests(unittest.TestCase):
             self.assertEqual(expected_hash, hashlib.sha256(payload).hexdigest(), kind)
 
     def test_percentage_changes_are_only_the_guarded_one_hp_rounding_cases(self):
-        self.assertEqual(cohort.EXACT_PLUS_ONE,
+        self.assertEqual(historical_weapon_names(cohort.EXACT_PLUS_ONE),
                          set(self.by_kind["percentage_damage"]))
         for name, groups in self.by_kind["percentage_damage"].items():
             rows = [row for group in groups for row in group]

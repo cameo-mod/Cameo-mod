@@ -23,13 +23,15 @@
    OpenRA Tiber  RMBO          Commando                        infantry
    OpenRA Red A  Ant           Giant Ant                       infantry
    OpenRA Red A  CTNK          Chrono Tank                     vehicle
-   OpenRA Red A  TTNK          Tesla Tank                      vehicle
-   OpenRA Red A  STNK          Phase Transport                 vehicle
-   OpenRA Red A  Zombie        Zombie                          infantry
-   OpenRA Red A  FTRK          Mobile Flak                     vehicle
-   OpenRA Red A  E4            Flame Infantry                  infantry
    OpenRA Red A  DTRK          Demolition Truck                vehicle
+   OpenRA Red A  E4            Flame Infantry                  infantry
+   OpenRA Red A  FTRK          Mobile Flak                     vehicle
    OpenRA Red A  SPY.England   SPY.England                     infantry
+   OpenRA Red A  STNK          Phase Transport                 vehicle
+   OpenRA Red A  TTNK          Tesla Tank                      vehicle
+   OpenRA Red A  Zombie        Zombie                          infantry
+   OpenRA Tiber  E1            Light Infantry                  infantry
+   OpenRA Tiber  GACTWR        Component Tower                 defense
    Romanov's Ve  caeast02      Yuri Statue                     defense
    Romanov's Ve  vlad          Vladamir's Dreadnought          ship
    Romanov's Ve  yarefn        Slave Miner                     defense
@@ -58,8 +60,6 @@
    Romanov's Ve  naflak-tr     Flak Cannon                     defense
    Romanov's Ve  nasam-tr      Patriot Missile System          defense
    Romanov's Ve  tesla-tr      Tesla Coil                      defense
-   Romanov's Ve  yaggun-tr     Gatling Cannon                  defense
-   Romanov's Ve  floater       Mutant Crab                     ship
    … and 76 more
 
    gating sources: 12 (ratchet 15) · unsettled, reported only: 104

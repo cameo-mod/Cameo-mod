@@ -1,5 +1,15 @@
 # BALANCE PROGRAM — the execution plan (rev. 2026-08-28)
 
+## 2026-09-10 — source PR340 warhead-family reach measurement
+
+`warhead_family_reach` measures **1,454 distinct fired weapon identities** whose
+transitive inheritance reaches a `^Warhead_*` family in the current PR340 source.
+The registry's previous value was 1,415; it is updated upward to this measured
+count with the same predicate and zero tolerance. Ownership wrappers can expose
+more distinct fired identities for existing family payloads: this increase does
+not establish newly converted weapons or additional gameplay balance work.
+Earlier dated snapshots below remain historical, and the only-UP rule remains.
+
 **This file is the SINGLE SOURCE OF TRUTH for what is done, what is next, and who owns
 what.** It survives compaction, agent handover and session death. Every other document
 (ROADMAP, EFFECTIVE_DAMAGE, PHYSICAL_STATE_SYSTEM, the AI handoffs) links *here* for
@@ -1863,6 +1873,15 @@ anywhere without tier restriction (W13 rule 5).
 ---
 
 ### W18 — Roll the basis-point unit out into yaml ⬜ READY (unblocked)
+
+Historical planning snapshot below, including the dated 2026-08-16 empty search.
+Current authored-field inventory (2026-09-10): **184** raw
+`PercentageDenominator` occurrences in active weapon files, compared with 183
+on 2026-09-05. Freedom elite's explicit companion adds the single occurrence
+while preserving its prior percentage units. The registry's historical
+`percentage_denominator_unset` id measures occurrences, not unset fields or
+resolved applications; this increment is not a global unit rebase.
+
 
 W15 shipped the MECHANISM; this ships the CONTENT. It *was* blocked purely by file
 ownership — every file involved is set B (`mods/cameo/weapons/**`,

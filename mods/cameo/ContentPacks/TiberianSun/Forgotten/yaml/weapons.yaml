@@ -284,7 +284,7 @@ TSScoopDualTurChem:
 	-Warhead@CannonHE_HeavyFlatCompatibility:
 TSHighVelocity:
 	Inherits: ^TSCannonEffect
-	Inherits@wh: ^Warhead_CannonAP_Light
+	Inherits@wh: ^Warhead_CannonAP
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_CannonAP_Light
 	Report: cannon1.aud
@@ -292,8 +292,9 @@ TSHighVelocity:
 	Range: 7701
 	Projectile: Bullet
 		Speed: 850
-	Warhead@CannonAP_Light:
+	Warhead@CannonAP:
 		Damage: 30000
+		Heaviness: 0
 TSHighVelocityChem:
 	Inherits@collapsewh: ^Warhead_CannonChem_Light
 	Inherits: ^TSCannonEffect
@@ -326,7 +327,7 @@ TSHighVelocityChem:
 		PercentageScale: 0
 TSHighVelocity2:
 	Inherits: ^TSCannonEffect
-	Inherits@wh: ^Warhead_CannonAP_Light
+	Inherits@wh: ^Warhead_CannonAP
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_CannonAP_Light
 	Report: cannon1.aud
@@ -334,8 +335,9 @@ TSHighVelocity2:
 	Range: 8207
 	Projectile: Bullet
 		Speed: 850
-	Warhead@CannonAP_Light:
+	Warhead@CannonAP:
 		Damage: 40000
+		Heaviness: 0
 TSHighVelocity2Chem:
 	Inherits@collapsewh: ^Warhead_CannonChem_Light
 	Inherits: ^TSCannonEffect
@@ -368,7 +370,7 @@ TSHighVelocity2Chem:
 		PercentageScale: 0
 TSHighVelocityTur:
 	Inherits: ^TSCannonEffect
-	Inherits@wh: ^Warhead_CannonAP_Light
+	Inherits@wh: ^Warhead_CannonAP
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_CannonAP_Light
 	Report: cannon1.aud
@@ -376,8 +378,9 @@ TSHighVelocityTur:
 	Range: 9483
 	Projectile: Bullet
 		Speed: 1280
-	Warhead@CannonAP_Light:
+	Warhead@CannonAP:
 		Damage: 48000
+		Heaviness: 0
 TSBusMortar:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@wh2: ^Warhead_Demolition_Heavy

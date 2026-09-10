@@ -1,11 +1,17 @@
 # CannonAP runtime probe
 
 Launch with `Launch.Map=heaviness_probe_20260910` in the isolated worktree.
-Nine invisible, stationary shooters fire once at independent one-million-HP
+Twenty-four invisible, stationary shooters fire once at independent one-million-HP
 targets. Three use legacy Light/Medium/Heavy templates against Medium armor;
 three use the shared continuous base at Heaviness 0/1000/2000 against Medium;
 three repeat those shared weapons against Shield armor. Lua prints damage events,
-health loss and exact expected totals to lua.log.
+health loss and exact expected totals to lua.log. Three additional lanes use the
+actual Forgotten Tank Killer, Warrior Tank and Broken Warrior Tank Turret weapons
+against Medium armor, with only reload extended to isolate one shot.
+Six additional old/new pairs measure the Freedom elite percentage cutoff at
+enemy distances0/16/32/33 and allied distances16/17. Their test-only targetable
+offsets supply exact integer distances; positional InstantHit impacts exercise
+the spatial path rather than the direct-Actor bypass.
 The script stops shooters at tick 100. No interaction is required.
 
 This isolates real runtime damage, not visual behavior, splash at nonzero distance,
@@ -14,6 +20,15 @@ intentionally different; equality between lanes is not the pass criterion.
 The script requires every lane to hit and every measured total to match its
 independently calculated expectation (`all_lanes_hit=true all_expected=true`).
 Terrain and preview are reused from the existing TD GDI/Nod balance-test map.
+
+## Forgotten follow-up, 10 September 2026
+
+The actual Bullet projectiles produced exactly 40800, 54400 and 65280 damage:
+30000/40000/48000 authored damage times the shared h0 Medium coefficient 136%.
+Each produced one flat event and no percentage event. All nine original control
+lanes also retained their exact expectations. Peak sampled system RAM was65.34%;
+the owned game process was closed and no new exception log appeared. This proves
+the selected direct-hit runtime path, not whole-unit matchup balance or upgrades.
 
 ## Verified checkpoint, 10 September 2026
 

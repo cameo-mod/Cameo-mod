@@ -1,9 +1,9 @@
 # Warhead-split guard (multi-warhead over-damage)
 
 
-## FAIL 1 — broadcast fingerprint / every MAIN identical (54 vs baseline 69)
+## FAIL 1 — broadcast fingerprint / every MAIN identical (55 vs baseline 69)
 
-_at or below baseline_ — pre-existing **W24** debt (54 weapons), not a regression. The ratchet catches new broadcasts without blocking every commit on the existing pile. **Lower `BROADCAST_BASELINE` as W24 collapses weapons; never raise it.**
+_at or below baseline_ — pre-existing **W24** debt (55 weapons), not a regression. The ratchet catches new broadcasts without blocking every commit on the existing pile. **Lower `BROADCAST_BASELINE` as W24 collapses weapons; never raise it.**
 
 | weapon | mains | per_warhead | total |
 |---|---|---|---|
@@ -19,8 +19,6 @@ _at or below baseline_ — pre-existing **W24** debt (54 weapons), not a regress
 | MagicOrb2 | 2 | 4000 | 8000 |
 | NaxiMP40 | 3 | 2000 | 6000 |
 | NaxiMP40_elite | 3 | 2000 | 6000 |
-| NodTorpTube | 2 | 8000 | 16000 |
-| NodTorpTubeBlackMarket | 2 | 8000 | 16000 |
 | OIBigPlasmaCannon | 3 | 8000 | 24000 |
 | RA2Comet | 3 | 20000 | 60000 |
 | RA2Comet_elite | 3 | 20000 | 60000 |
@@ -47,9 +45,11 @@ _at or below baseline_ — pre-existing **W24** debt (54 weapons), not a regress
 | ThermobaricFlame | 2 | 2000 | 4000 |
 | Type97PlasmaCannon | 3 | 4000 | 12000 |
 | V2ExplodeIrak | 2 | 60000 | 120000 |
+| V3Explode | 3 | 10000 | 30000 |
+| WaveArtilleryImpact | 2 | 10000 | 20000 |
 
 
-_... and 14 more._
+_... and 15 more._
 
 
 ## Review — exact gameplay restorations (0)

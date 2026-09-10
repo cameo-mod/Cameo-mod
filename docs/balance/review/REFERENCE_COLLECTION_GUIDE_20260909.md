@@ -12,7 +12,7 @@ directory for changed results; differing existing artifacts are not overwritten.
 | RA3 | EA CnC Modding Support, `3aad8e412961ab543192ae70f8503dc8e178e095` | 75 roster records: 63 static candidates, 12 manual-review records; 452 other objects itemized separately | unsupported fragments/merges and dependency warnings remain; not verified final retail patch |
 | Dune II | OpenDUNE `9781a1c2fd14dfa09611d3502456d7918d862e96` | 27 unit-table records and 6 house records | reconstructed 1.07 static tables, not a retail executable or scenario-availability proof |
 | Emperor | archived Rules.txt, SHA-256 `a1de5044aebc837d439892a081674ceb919007b87887abdf999cf099ff5f692d` | 99 records; 52 static buildable candidates; weapon dependencies retained separately | example/hierarchy archive, file Version=1.23 is not a verified retail patch |
-| DTA | Aedis archive received 10 September 00:46; hashes in DTA research report | generated Rules/Enhance inspection and actor comparison underway; omitted X-O rail channel confirmed | selected mode and engine version unverified; no complete X-O DPS claim |
+| DTA | Aedis archive received 10 September 00:46; hashes in DTA research report | Rules/Enhance extraction and corpus refresh completed; omitted X-O rail channel retained and unsupported votes withheld | selected mode and engine version unverified; no complete X-O DPS claim |
 | Spice Wars | no versioned primary dataset acquired | pending | do not substitute an unsourced community table or another Dune game |
 
 Counts above are collection records, not unique eligible combat units. For example,

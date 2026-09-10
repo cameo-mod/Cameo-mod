@@ -11,10 +11,12 @@ sys.path[:0] = [str(ROOT / 'tools/audit'), str(ROOT / 'tools/balance')]
 from miniyaml import Ruleset
 from dump_resolved import node_to_obj
 import extract_stats
+from owned_weapon_history import restore_chained_identity_fields
 from weapon_name_map_checks import assert_no_old_weapon_names, assert_owned_weapon_consumers
 
 
 def digest(obj):
+    obj = restore_chained_identity_fields(obj)
     return hashlib.sha256(json.dumps(obj, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
 
 

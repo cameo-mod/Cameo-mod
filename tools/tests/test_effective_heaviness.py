@@ -232,6 +232,8 @@ class ByteEquivalenceGoldenTest(unittest.TestCase):
         tm.use_ruleset(rs)
         cache = {}
         for name, record in self.golden["weapons"].items():
+            if name == "FirehawkBomb" and name not in rs.weapons:
+                name = "td_gdi_firehawk_firehawkbomb"
             resolved = from_obj(name, legacy) if name == "TS90mm" else rs.resolve_weapon(name)
             self.assertIsNotNone(resolved, name)
 
@@ -525,7 +527,7 @@ class ChecklistRegressionTest(unittest.TestCase):
         self.assertEqual(radii, [400, 682, 682])
         self.assertTrue(live)
 
-    # --- the sentinel change is non-live: no authored Heaviness anywhere ---
+    # Exact live activation closure: original pilot plus Forgotten follow-up.
     def test_resolved_inventory_has_only_the_authorized_pilot_heaviness(self):
         rs = Ruleset(ROOT)
         found = {}
@@ -541,24 +543,26 @@ class ChecklistRegressionTest(unittest.TestCase):
                     found[(name, node.key)] = int(node.get("Heaviness"))
                     mode = node.get("HeavinessMode")
                     modes[(name, node.key)] = None if mode is None else mode
+        from reviewed_weapon_history import current_endpoint_name
         expected = {("^Warhead_CannonAP", "Warhead@CannonAP"): 1000}
-        expected.update({(name, "Warhead@CannonAP"): h for name, h in {
+        expected.update({(current_endpoint_name(rs, name), "Warhead@CannonAP"): h for name, h in {
             "RA2sabot": 0, "RA2sabot_elite": 0, "TS90mm": 1000,
-            "TS90mmDep": 1000, "corrino_buggy_gun": 0}.items()})
+            "TS90mmDep": 1000, "corrino_buggy_gun": 0,
+            "TSHighVelocity": 0, "TSHighVelocity2": 0,
+            "TSHighVelocityTur": 0, "RA2120xmm": 0, "RA2120xmm_elite": 0,
+            "NaxiHetzerDestroyer": 0, "NaxiHetzerDestroyer_elite": 0,
+            "NaxiHetzerDestroyerCorrosion": 0, "NaxiAntiTankCannon": 0,
+            "NaxiAntiTankCannon_elite": 0, "NaxiAntiTankCannonCorrosion": 0,
+            "AlliedTankDestroyerCannon": 0, "SkyHawkCannon": 0, "2Inch": 0,
+            "TSLaser90mm": 1000, "TSLaser90mmDep": 1000,
+            "120mm_cobra": 0, "120mm_cobra_deploy": 0,
+            "120mm_python": 0, "120mm_python_deploy": 0}.items()})
         self.assertEqual(found, expected)
-        # The SHARED PROFILE is explicit on the live base; the five pilot
+        # The SHARED PROFILE is explicit on the live base; the enumerated live
         # consumers inherit the mode through the base's resolved merge (every
         # resolved pilot node flattens it the same way).
-        expected_modes = {
-            key: ("SharedVersus" if key[0] == "^Warhead_CannonAP" or self._is_pilot(key[0]) else None)
-            for key in expected}
+        expected_modes = {key: "SharedVersus" for key in expected}
         self.assertEqual(modes, expected_modes)
-
-    @staticmethod
-    def _is_pilot(name):
-        return name in {"RA2sabot", "RA2sabot_elite", "TS90mm", "TS90mmDep",
-                        "corrino_buggy_gun"}
-
 
 class SharedProfileMirrorTest(unittest.TestCase):
     """THE SHARED PROFILE (HeavinessMode SharedVersus, Aedis 2026-09-10 03:17)."""

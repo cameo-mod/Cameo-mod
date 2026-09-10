@@ -2091,13 +2091,6 @@
       "armament_name": "secondary",
       "damage_warheads": [
        {
-        "damage": "240000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "60",
         "falloff": null,
         "spread": "125",
@@ -2112,11 +2105,19 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "120000",
+        "damage": "360000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 50, 0",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "FreedomElitePreservedPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
@@ -2127,7 +2128,6 @@
       "requires": "rank-elite",
       "slot": "Armament@ROCKETELITE",
       "versus_templates": [
-       "^Compatibility_MissileAP_MediumFlat",
        "RA2FreedomRocket"
       ],
       "warheads": [
@@ -2275,13 +2275,6 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "240000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "60",
         "falloff": null,
         "spread": "125",
@@ -2296,11 +2289,19 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "120000",
+        "damage": "360000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 50, 0",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "FreedomElitePreservedPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
@@ -2311,7 +2312,6 @@
       "requires": "rank-elite",
       "slot": "Armament@RocketGARRISONEDELITE",
       "versus_templates": [
-       "^Compatibility_MissileAP_MediumFlat",
        "RA2FreedomRocket"
       ],
       "warheads": [

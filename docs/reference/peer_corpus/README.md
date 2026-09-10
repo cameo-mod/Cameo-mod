@@ -1,7 +1,29 @@
 # Selected structured peer evidence
 
-The index explicitly replaces each selected source's legacy Doc5 slice. Currently only
-Combined Arms is enabled. Do not append these records to the old CA table population.
+The index explicitly replaces each selected source's legacy Doc5 slice. Combined Arms
+and the four base OpenRA sources (TD, RA, TS, D2k) are enabled. Do not append selected
+records to the corresponding old Markdown population. Other sources stay legacy.
+
+The four base sources use clean OpenRA commit
+`bbd36d9e6a2d7f0d3b24f102858af6dc8caf8a78`: 256 rows, including 122 armed rows
+with incomplete evidence. Their retained HP/cost/speed/type values match the old
+consumer exactly; ten old rows are removed by reviewed source/availability differences.
+No new source population, certified factory/max state or applied stat target is added.
+See [the source review](../../balance/review/BASE_OPENRA_STRUCTURED_EVIDENCE_20260910.md)
+for the exact exclusions, source identity and consumer impact.
+
+`base_rank_bbd36d9e.json` is a separate rank-axis projection, not an indexed input.
+It records 80 evaluated base/max-rank pairs, 29 production-rank scenario holds
+and 147 actors without a single rank track. Neither rank-only projections nor
+empty rank inventories certify full factory/max-upgrade states or weapon DPS.
+`base_scenarios_bbd36d9e.json` separately records 15 explicit prerequisite, terrain,
+damage, deploy, tower, submergence and fresh-attack scenarios (315 input hashes). It is also
+outside the consumer index. `tools/reference/peer_state_scenarios.py` accepts a
+JSON array of named mod/actor scenarios; the reproducible inputs are in
+`tools/tests/fixtures/base_peer_scenarios.json`. Omitted axes remain unknown.
+These settled views neither establish purchase/reachability nor certify DPS.
+Regenerate it externally with `tools/reference/extract_peer_rank_states.py
+--source <clean-pinned-OpenRA-checkout> --output <external-new-file.json>`.
 
 The CA payload was extracted read-only from clean commit
 `ab9e477c3db818e91946d4cfdc86e71012966141`, with 48 unchanged source inputs. It contains

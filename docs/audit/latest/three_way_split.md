@@ -2,7 +2,7 @@
 
 _The `intentional_composites` exemption was DELETED 2026-09-06 (DESIGN §11b.1). Nothing is subtracted — every stack is debt._
 
-   1830  correct — exactly one main warhead
+   1887  correct — exactly one main warhead
     317  none — utility / effect-only weapons
     230  RAW STACKS — structural inventory
     230  STACKS — all debt under §11b.1
@@ -16,7 +16,7 @@ _The `intentional_composites` exemption was DELETED 2026-09-06 (DESIGN §11b.1).
       7      8
       8      1
 
-132 distinct stacked combinations; the 20 most common:
+131 distinct stacked combinations; the 20 most common:
 
 | count | combination |
 |---|---|
@@ -29,13 +29,13 @@ _The `intentional_composites` exemption was DELETED 2026-09-06 (DESIGN §11b.1).
 | 5 | 1Dam + Concussion_Medium + Demolition_Heavy |
 | 4 | 1Dam + Flame_Heavy + MissileHE_Heavy |
 | 4 | 1Dam + Bullet_Light |
+| 4 | Flame_Heavy + MissileHE_Heavy |
 | 3 | 1Dam + Flame_Medium |
 | 3 | 1Dam + Demolition_Heavy + Flame_Heavy |
 | 3 | IonCannon + Tesla_Super |
 | 3 | Magic_Heavy + Tesla_Heavy |
 | 3 | Bullet_Medium + Concussion_Medium + Demolition_Light |
 | 3 | Laser_Heavy + Railgun_Heavy + Tesla_Heavy |
-| 3 | Flame_Heavy + MissileHE_Heavy |
 | 3 | Quantum_HeavyFlatCompatibility + Tesla_Heavy |
 | 3 | CannonHE_Heavy + Railgun_HeavyFlatCompatibility + Tesla_Heavy |
 | 2 | Flak_Medium + Flak_MediumFlatCompatibility |

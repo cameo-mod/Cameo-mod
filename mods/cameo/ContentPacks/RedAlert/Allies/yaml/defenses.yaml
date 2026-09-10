@@ -439,14 +439,14 @@ ra1_allies_bastionartillerybunker:
 		Turret: cannon
 		RequiresCondition: !disabled && !lowpower
 	Armament:
-		Weapon: 155mmBastion
+		Weapon: ra1_allies_bastionartillerybunker_155mmbastion
 		LocalOffset: 1000,0,900
 		MuzzleSequence: muzzle
 		Turret: cannon
 		Name: cannon
 		RequiresCondition: !disabled && !lowpower && !ra1_allies_upgrade_cryomissiles
 	Armament@Upgrade:
-		Weapon: 155mmBastionCryo
+		Weapon: ra1_allies_bastionartillerybunker_155mmbastioncryo
 		LocalOffset: 1000,0,900
 		MuzzleSequence: muzzle
 		Turret: cannon

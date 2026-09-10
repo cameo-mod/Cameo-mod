@@ -3,8 +3,8 @@
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
 | T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (11 file(s)) | 173 | >= 24 |
-| T2 | `def test_*` in tools/tests (141 file(s)) | 1895 | >= 177 |
-| T3 | modules with no test mentioning them | 264 | <= 224 |
+| T2 | `def test_*` in tools/tests (165 file(s)) | 2036 | >= 177 |
+| T3 | modules with no test mentioning them | 261 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (264)
+## T3 — untested modules (261)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -209,13 +209,11 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_rename_safety.py | audit_rename_safety |
 | python | tools/audit/audit_sequences.py | audit_sequences |
 | python | tools/audit/audit_shrapnel_chains.py | audit_shrapnel_chains |
-| python | tools/audit/audit_split_definitions.py | audit_split_definitions |
 | python | tools/audit/audit_stat_uniqueness.py | audit_stat_uniqueness |
 | python | tools/audit/audit_survivability_pricing.py | audit_survivability_pricing |
 | python | tools/audit/audit_task_index.py | audit_task_index |
 | python | tools/audit/audit_template_conformance.py | audit_template_conformance |
 | python | tools/audit/audit_test_coverage.py | audit_test_coverage |
-| python | tools/audit/audit_tier_weapon_class.py | audit_tier_weapon_class |
 | python | tools/audit/audit_ts_death_palette.py | audit_ts_death_palette |
 | python | tools/audit/audit_turn_speed.py | audit_turn_speed |
 | python | tools/audit/audit_unconverted_templates.py | audit_unconverted_templates |
@@ -248,7 +246,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/collapse_target.py | collapse_target |
 | python | tools/balance/compensate_retrofit.py | compensate_retrofit |
 | python | tools/balance/consolidate_compatibility_profiles.py | consolidate_compatibility_profiles |
-| python | tools/balance/consolidate_reviewed_weapon_roots.py | consolidate_reviewed_weapon_roots |
 | python | tools/balance/convert_apply_to_scaled_v2.py | convert_apply_to_scaled_v2 |
 | python | tools/balance/count_mixed.py | count_mixed |
 | python | tools/balance/design_invented_profiles.py | design_invented_profiles |
@@ -287,5 +284,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 264 untested > baseline 224
+- T3: 261 untested > baseline 224
 

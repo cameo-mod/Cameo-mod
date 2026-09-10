@@ -1026,6 +1026,9 @@ def write_review(klass):
     cam = {c["id"]: c for c in rd.cameo_rows()}
     members = sorted(n for n, u in led.items()
                      if cm.classify(u.get("design") or {})[0] == klass)
+    # Global explicit overrides can survive assign(klass). They must not inflate
+    # this class's summary while the actual table only displays its members.
+    result = {actor: sources for actor, sources in result.items() if actor in members}
 
     def cost_of(n):
         v = (led[n].get("cost") or {})
@@ -1034,6 +1037,16 @@ def write_review(klass):
             return float(v)
         except (TypeError, ValueError):
             return None
+
+    def display_score(value):
+        return "—" if value is None else f"{value:.2f}"
+
+    def display_order(pair):
+        # Explicit overrides / id-agreement promotions need not have a computed
+        # match score. Keep them visible without inventing numerical evidence.
+        score = pair[1].get("score")
+        return (score is None, -(score[0] or 0) if score else 0,
+                -(score[3] or 0) if score else 0)
 
     conf = collections.Counter(m["confidence"] for v in result.values() for m in v.values())
     name_backed = sum(1 for v in result.values()
@@ -1083,11 +1096,12 @@ def write_review(klass):
               "|:--:|---|---|---|---|--:|--:|--:|"]
         for m in members:
             for src, v in sorted((result.get(m) or {}).items(),
-                                 key=lambda kv: (-kv[1]["score"][0], -kv[1]["score"][3])):
+                                 key=display_order):
                 if v["confidence"] in tier_set:
                     home = " **(home)**" if v["home"] else ""
+                    score = v.get('score') or (None,) * 5
                     L.append(f"| ☐ | {v['confidence']} | `{m}` | {src}{home} | {v['name']} | "
-                             f"{v['raw_name']:.2f} | {v['score'][3]:.2f} | {v['score'][4]:.2f} |")
+                             f"{display_score(v.get('raw_name'))} | {display_score(score[3])} | {display_score(score[4])} |")
         L.append("")
     # ⛔ WEAK ROWS ARE STRUCK BEFORE REVIEW (maintainer 2026-09-04: "I strike the WEAK rows, you
     # check the rest"). They are the greedy taking the best of a bad field — clause 9 forbids a

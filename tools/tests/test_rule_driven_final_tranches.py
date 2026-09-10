@@ -2,6 +2,8 @@ import json
 import pathlib
 import sys
 import unittest
+from unittest.mock import patch
+from owned_weapon_history import historical_weapon_names
 
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -16,6 +18,7 @@ import consolidate_rule_driven_legacy_energy as legacy
 from audit_three_way_split import RAW_SPLIT_BASELINE, main_warheads
 from audit_warhead_split import BROADCAST_BASELINE
 from miniyaml import Ruleset
+from reviewed_weapon_history import HistoricalView
 from safe_rename import load_map
 
 
@@ -49,8 +52,11 @@ class RuleDrivenFinalTrancheTests(unittest.TestCase):
     def test_historical_blast_converter_rejects_the_superseding_scoop_role(self):
         # Aedis chose CannonChem in a92a4bc1bf. Do not replay the older Chemical
         # converter over that role or combine both alternatives after a merge.
-        with self.assertRaisesRegex(RuntimeError, "TSScoopDualChem: expected"):
-            blast.validate_result()
+        # Exact modern endpoint validation precedes the frozen converter view.
+        # This preserves the substantive refusal on the unadapted Scoop role.
+        with patch.object(blast, 'Ruleset', return_value=HistoricalView(self, self.rules)):
+            with self.assertRaisesRegex(RuntimeError, "TSScoopDualChem: expected"):
+                blast.validate_result()
         legacy.validate_result()
 
     def test_comparison_scope_is_exact(self):
@@ -60,7 +66,7 @@ class RuleDrivenFinalTrancheTests(unittest.TestCase):
         historical = {new: old for old, new in renamed.items()}
         guarded = json.loads((ROOT / 'tools/tests/fixtures/guarded_owned_names_20260910.json').read_text(encoding='utf-8'))
         historical.update({new: old for route in guarded['routes'].values() for old, new in route.items()})
-        self.assertEqual({historical.get(name, name) for name in self.selected},
+        self.assertEqual(historical_weapon_names({historical.get(name, name) for name in self.selected}),
                          set(self.report["changed"]))
         self.assertEqual([], self.report["added"])
         self.assertEqual([], self.report["removed"])
@@ -98,7 +104,7 @@ class RuleDrivenFinalTrancheTests(unittest.TestCase):
                         else f"{destination}FlatCompatibility")
             self.assertEqual(
                 [expected],
-                main_warheads(self.rules.resolve_weapon(name)), name)
+                main_warheads(HistoricalView(self, self.rules).resolve_weapon(name)), name)
 
     def test_generated_parent_percentage_routes_do_not_accumulate(self):
         for name in sorted(self.selected):

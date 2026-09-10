@@ -4889,25 +4889,25 @@
        {
         "damage": "12000",
         "falloff": "100, 0",
-        "spread": "80",
-        "tag": "CannonAP_Light",
+        "spread": "120",
+        "tag": "CannonAP",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6992",
       "reloaddelay": "63",
       "requires": "!rank-elite && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_CannonAP_Light",
+       "^Warhead_CannonAP",
        "^Projectile_Shell_Light",
        "^Effect_Apoc_AP_RA2"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Light"
+       "^Warhead_CannonAP"
       ],
       "weapon": "RA2120xmm",
       "weapon_class_source": "template"
@@ -5042,13 +5042,13 @@
        {
         "damage": "12000",
         "falloff": "100, 0",
-        "spread": "80",
-        "tag": "CannonAP_Light",
+        "spread": "120",
+        "tag": "CannonAP",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7992",
       "reloaddelay": "63",
@@ -5059,7 +5059,7 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Light"
+       "^Warhead_CannonAP"
       ],
       "weapon": "RA2120xmm_elite",
       "weapon_class_source": "template"

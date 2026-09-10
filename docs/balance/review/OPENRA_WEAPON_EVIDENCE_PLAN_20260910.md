@@ -8,6 +8,11 @@ pending. The CA structured transport is published in draft PR339; the bounded
 initial-state metadata follow-up below has completed source and combined validation.
 Source checkouts were read only; no source game ran.
 
+The subsequent [base-OpenRA migration](BASE_OPENRA_STRUCTURED_EVIDENCE_20260910.md)
+also selects the four existing TD/RA/TS/D2k slices. References below to CA-only
+selection and earlier population counts describe the earlier checkpoints, not the
+current index. State certification remains pending for every selected source.
+
 ### CA structured consumer migration (P3, published draft)
 
 `docs/reference/peer_corpus/index.json` explicitly selects the pinned CA JSONL payload.
@@ -124,7 +129,7 @@ carries one weapon's numbers presented as the unit's damage summary.
 (HEAD `ab9e477c3db818e91946d4cfdc86e71012966141`, 2026-07-30, clean tree; matches
 `UPSTREAM_MODS.md` "ca-engine/1.09", `Inq8/OpenRA`), `mods/ca/rules/vehicles.yaml:3224-3345`:
 
-* `HMMV` builds with `Prerequisites: ~vehicles.hmmv, ~!tow.upgrade` — **factory-ready base**,
+* `HMMV` builds with `Prerequisites: ~vehicles.hmmv, ~!tow.upgrade` — **base purchase definition**,
   one unconditional `Armament:` (M60mgTD), cost 400, speed 144; `ReplacedInQueue: hmmv.tow`.
 * `HMMV.TOW` (`Inherits: HMMV`) requires `~tow.upgrade`, cost 575, speed 126, adds
   `Armament@SECONDARY` (Weapon: TOW, `PauseOnCondition: !ammo`), `AmmoPool` (Armaments:

@@ -13,11 +13,14 @@ from miniyaml import Ruleset
 from dump_resolved import node_to_obj
 import consolidate_named_family_profiles as cohort
 import extract_stats
+from owned_weapon_history import restore_chained_identity_fields
 
 FIXTURE = ROOT / 'tools/tests/fixtures/yak_owned_weapon_baseline_20260910.json'
 
 
 def digest(payload):
+    payload = restore_chained_identity_fields(payload,
+        {'ra1_soviets_nuclearyak_yaknuclearbomb': 'YakNuclearBomb'})
     return hashlib.sha256(json.dumps(payload, sort_keys=True,
                                     separators=(',', ':')).encode()).hexdigest()
 
