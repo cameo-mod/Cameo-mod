@@ -133,3 +133,18 @@ peak RAM70.59%; this covers final Yak and Tiger changes, no rebuild or matchup t
 Targeted runtime/shape/split checks pass. Release D4 remains failing at348/335.
 Local effect debt falls694→693; other shape buckets and stacked counts stay fixed.
 Both follow-ups are independently reviewed, still draft and unmerged.
+
+## Fourteen-name Allied checkpoint (09:18 Jakarta)
+
+PR340 source/tests/map now include `243c95cd8a8694002860715ac4699f00dd3b4365`.
+All 2,911 combined weapon payloads remain exact after the fourteen identities are
+reversed. Eighteen Armament values, one muzzle-smoke binding and Survival's one
+map-local pistol reference migrate. Six new tests and four projectile-speed tests
+pass; archive member data, order and metadata are pinned. All ledger fields are
+unchanged except identity strings, and both 33-ledger checks have zero drift.
+
+Final R9: 1,913 tests, 12 failures, 8 errors, 64 skips; exact R8 signatures.
+Peak RAM86.41%, no guard stop. Targeted runtime/shape/split checks pass; release
+D4 remains failing at355/335, with all structural counts and D1/D2/D3 unchanged.
+No additional game run is claimed after this identity-only batch. The Gunboat
+geometry/heaviness hold is retained under its new cannon name, not marked resolved.

@@ -98,12 +98,12 @@ ra1_allies_tanya:
 	Passenger:
 		Voice: Move
 	Armament@PRIMARY:
-		Weapon: Colt45
+		Weapon: ra1_allies_tanya_pistol
 		LocalOffset: 256,128,384, 256,-128,384
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: Colt45
+		Weapon: ra1_allies_tanya_pistol
 		LocalOffset: 256,128,384, 256,-128,384
 		MuzzleSequence: garrison-muzzle
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
@@ -133,13 +133,13 @@ ra1_allies_tanya:
 
 	Armament@PRIMARYCryo:
 		LocalOffset: 256,128,384, 256,-128,384
-		Weapon: Colt45Cryo
+		Weapon: ra1_allies_tanya_pistol_cryo
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	Armament@GARRISONEDCryo:
 		Name: garrisoned
 		LocalOffset: 256,128,384, 256,-128,384
 		MuzzleSequence: garrison-muzzle
-		Weapon: Colt45Cryo
+		Weapon: ra1_allies_tanya_pistol_cryo
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 ra1_allies_medic:
 	Inherits: ^Soldier

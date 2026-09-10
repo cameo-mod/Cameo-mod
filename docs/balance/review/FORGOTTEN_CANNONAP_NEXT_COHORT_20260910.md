@@ -22,7 +22,8 @@ more for some armor: Wood83→123 (+48.2%), Heroic90→63 (-30%), Medium123→13
 (+10.6%). Percentage loss is additional to these flat-component changes.
 Chemical alternate weapons are separate and are not covered by this counterfactual.
 
-Do not migrate every remaining CannonAP user mechanically: 2Inch has custom geometry;
+Do not migrate every remaining CannonAP user mechanically: ra1_allies_gunboat_cannon
+(formerly 2Inch) has custom geometry; its identity rename does not resolve this hold;
 SkyHawk has air targeting and a mixed descendant; TSLaser90mm carries an additional
 3% laser damage channel. Those require explicit channel/geometry decisions.
 

@@ -2068,7 +2068,7 @@ DepthChargeCryo:
 		Damage: 60000
 		ValidTargets: Submarine, Ship, Underwater
 
-2Inch:
+ra1_allies_gunboat_cannon:
 	Inherits@wh: ^Warhead_CannonAP_Light
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_CannonAP_Light
@@ -2081,7 +2081,7 @@ DepthChargeCryo:
 	Warhead@CannonAP_Light:
 		Damage: 30000
 		Spread: 300
-2InchCryo:
+ra1_allies_gunboat_cannon_cryo:
 	Inherits@wh: ^Warhead_CannonCryo_Light
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_Cryo
@@ -2149,7 +2149,7 @@ DepthChargeCryo:
 	Warhead@CryoBlast_Heavy:
 		Damage: 80000
 		ValidTargets: Ground, Water
-Stinger:
+ra1_allies_destroyer_missile:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileAP_Heavy
@@ -2172,7 +2172,7 @@ Stinger:
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
 
-StingerCryo:
+ra1_allies_destroyer_missile_cryo:
 	Inherits@wh: ^Warhead_MissileCryo_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_Cryo
