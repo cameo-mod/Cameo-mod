@@ -96,7 +96,7 @@ ra1_allies_alliedaagun_flak_cryo:
 	Warhead@FlakCryo_Medium:
 		Damage: 4000
 
-Hellfire:
+ra1_allies_longbow_missile:
 	Inherits@finalmain: ^Compatibility_MissileHE_HeavyFlat
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@wh2: ^Warhead_MissileHE_Heavy
@@ -122,7 +122,7 @@ Hellfire:
 	Projectile: Missile
 		VerticalRateOfTurn: 12
 
-HellfireCryo:
+ra1_allies_longbow_missile_cryo:
 	Inherits@wh: ^Warhead_CryoBlast_Medium
 	Inherits@wh2: ^Warhead_MissileCryo_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -253,7 +253,7 @@ ra1_allies_sheridanassaulttank_missile_cryo:
 	Projectile: Missile
 		VerticalRateOfTurn: 20
 
-SheridanVulcan:
+ra1_allies_sheridanassaulttank_chaingun:
 	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
@@ -273,7 +273,7 @@ SheridanVulcan:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
-SheridanVulcanCryo:
+ra1_allies_sheridanassaulttank_chaingun_cryo:
 	Inherits@wh: ^Warhead_BulletCryo_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Cryo

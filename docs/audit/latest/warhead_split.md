@@ -14,7 +14,6 @@ _at or below baseline_ — pre-existing **W24** debt (54 weapons), not a regress
 | BikeRockets | 2 | 8000 | 16000 |
 | D2K_Rocket_Trooper2 | 3 | 8000 | 24000 |
 | DredMissile | 3 | 30000 | 90000 |
-| HellfireCryo | 2 | 8000 | 16000 |
 | IdolCannon | 4 | 10000 | 40000 |
 | JimRaynorMachineGun | 2 | 2000 | 4000 |
 | MagicOrb | 2 | 12000 | 24000 |
@@ -47,6 +46,7 @@ _at or below baseline_ — pre-existing **W24** debt (54 weapons), not a regress
 | TSTacticalMissileDamage | 2 | 10000 | 20000 |
 | TSVulcan | 2 | 2000 | 4000 |
 | ThermobaricFlame | 2 | 2000 | 4000 |
+| TorpTube | 2 | 16000 | 32000 |
 
 
 _... and 14 more._

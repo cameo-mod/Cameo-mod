@@ -47,12 +47,39 @@ class AdditionalOwnedNameTests(unittest.TestCase):
         for actor,route in self.before['routes'].items():
             reverse={n:o for o,n in route.items()}
             obj=node_to_obj(self.rules.resolve(actor))
+            self._reverse_later_sheridan_names(actor, obj)
             for key,trait in obj.items():
                 if key.split('@')[0]=='Armament' and trait.get('Weapon') in reverse:
                     trait['Weapon']=reverse[trait['Weapon']]
                     count+=1
             self.assertEqual(digest(obj),self.before['actor_hashes'][actor],actor)
         self.assertEqual(count,12)
+
+    def _reverse_later_sheridan_names(self, actor, obj):
+        if actor != 'ra1_allies_sheridanassaulttank':
+            return
+        for slot, old, new in (
+                ('Armament@MG', 'SheridanVulcan', 'ra1_allies_sheridanassaulttank_chaingun'),
+                ('Armament@MGCryo', 'SheridanVulcanCryo', 'ra1_allies_sheridanassaulttank_chaingun_cryo')):
+            self.assertEqual(obj[slot]['Weapon'], new)
+            obj[slot]['Weapon'] = old
+
+    def test_later_sheridan_identity_adapter_is_slot_exact(self):
+        actor = 'ra1_allies_sheridanassaulttank'
+        normal, cryo = actor + '_chaingun', actor + '_chaingun_cryo'
+        obj = {'Armament@MG': {'Weapon': normal}, 'Armament@MGCryo': {'Weapon': cryo}}
+        self._reverse_later_sheridan_names('other_actor', obj)
+        self.assertEqual(obj['Armament@MG']['Weapon'], normal)
+        self.assertEqual(obj['Armament@MGCryo']['Weapon'], cryo)
+        for wrong in ('SheridanVulcan', cryo, 'OtherWeapon'):
+            bad = {'Armament@MG': {'Weapon': wrong}, 'Armament@MGCryo': {'Weapon': cryo}}
+            with self.assertRaises(AssertionError):
+                self._reverse_later_sheridan_names(actor, bad)
+        with self.assertRaises(KeyError):
+            self._reverse_later_sheridan_names(actor, {'Armament@OTHER': {'Weapon': normal}})
+        self._reverse_later_sheridan_names(actor, obj)
+        self.assertEqual(obj['Armament@MG']['Weapon'], 'SheridanVulcan')
+        self.assertEqual(obj['Armament@MGCryo']['Weapon'], 'SheridanVulcanCryo')
 
     def test_no_other_owners_or_old_active_references(self):
         owners={n:a for a,r in self.before['routes'].items() for n in r.values()}

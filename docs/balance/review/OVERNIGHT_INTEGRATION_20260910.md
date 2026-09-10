@@ -162,3 +162,22 @@ peak86.56%, no memory guard stop. Runtime/shape/split checks pass; release D4
 remains failing at363/335, with other damage and structural counts unchanged.
 Both33-ledger checks have zero drift. No post-batch game test is claimed.
 PR340 remains draft and unmerged; this combined checkpoint is local only.
+
+## Guarded five-name checkpoint (10:25 Jakarta)
+
+PR340 source `8850c3f12a0ebebcfa9ab07b8e64048a799e3a20` is integrated locally.
+All2,911 combined weapon payloads remain identical after5 identity reversals;
+all ledger fields stay identical except names. 46 focused tests and independent
+review passed. Historical converter evidence, exact armor-value guards and the
+unrelated Hellfire support-power name are preserved.
+
+R12 was guard-stopped at90.04%, incomplete. Isolated R13 ran1,929 tests with
+12 failures,8 errors,64 skips, exact prior signatures,53.75%peak. All1,932
+discovered identities are accounted for:three methods belong to the explicit
+pre-existing optional-DTA class skip. The original runner's terminal count
+assertion was a bookkeeping error; the retained log and independent ID check
+document it. Do not call this all-green or monolithic-equivalent.
+
+Targeted runtime/shape/split checks pass; releaseD4 stays failing367/335.
+Both33-ledger checks have zero drift. No additional game proof is claimed.
+Future memory stop guards are95% per Blackrobe. This remains local-only integration.

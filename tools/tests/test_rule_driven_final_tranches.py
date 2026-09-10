@@ -58,6 +58,8 @@ class RuleDrivenFinalTrancheTests(unittest.TestCase):
         # Historical damage evidence stays byte-identical across actor-owned naming.
         renamed, _ = load_map(ROOT / 'tools/rename/rename_map_ra1_soviets_owned_weapons_20260910.yaml')
         historical = {new: old for old, new in renamed.items()}
+        guarded = json.loads((ROOT / 'tools/tests/fixtures/guarded_owned_names_20260910.json').read_text(encoding='utf-8'))
+        historical.update({new: old for route in guarded['routes'].values() for old, new in route.items()})
         self.assertEqual({historical.get(name, name) for name in self.selected},
                          set(self.report["changed"]))
         self.assertEqual([], self.report["added"])

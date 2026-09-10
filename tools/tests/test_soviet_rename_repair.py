@@ -216,6 +216,12 @@ class SovietRenameRepairTests(unittest.TestCase):
                 # Later owner-only rename; its complete resolved weapon is
                 # independently pinned by test_additional_owned_names.
                 continue
+            if (old == "ra1_soviets_sovietgrenadier"
+                    and new == "ra1_soviets_grenadier"
+                    and path in (("Armament", "Weapon"), ("Armament@GARRISONED", "Weapon"))
+                    and b == "GrenadeRA" and a == "ra1_soviets_grenadier_grenade"):
+                # Exact later owner identity; thermobaric upgrade slots excluded.
+                continue
             out.append((path, b, a))
         return out
 
@@ -229,6 +235,20 @@ class SovietRenameRepairTests(unittest.TestCase):
                 (("Armament@SECONDARY", "Weapon"), "Nike", allowed[2])):
             self.assertEqual(self._authorize([change], old, new), [change])
         self.assertEqual(self._authorize([allowed], "other_actor", new), [allowed])
+
+    def test_grenadier_weapon_authorization_is_exact(self):
+        old, new = "ra1_soviets_sovietgrenadier", "ra1_soviets_grenadier"
+        for slot in ("Armament", "Armament@GARRISONED"):
+            allowed = ((slot, "Weapon"), "GrenadeRA", new + "_grenade")
+            self.assertEqual(self._authorize([allowed], old, new), [])
+            self.assertEqual(self._authorize([allowed], "other_actor", new), [allowed])
+            self.assertEqual(self._authorize([allowed], old, "other_actor"), [allowed])
+        for change in (
+                (("Armament@Upgrade", "Weapon"), "GrenadeRA", new + "_grenade"),
+                (("Armament@UpgradeGARRISONED", "Weapon"), "GrenadeRA", new + "_grenade"),
+                (("Armament", "Weapon"), "OtherWeapon", new + "_grenade"),
+                (("Armament", "Weapon"), "GrenadeRA", "OtherWeapon")):
+            self.assertEqual(self._authorize([change], old, new), [change])
 
     def test_image_authorization_is_exact(self):
         # negative test: an arbitrary RenderSprites.Image change must NOT

@@ -68,7 +68,7 @@ GROUPS = {
     },
     "MissileAP_Heavy": {"YRBoomerSCUD"},
     "MissileHE_Heavy": {
-        "BigShieeTusk", "Hellfire", "ra1_soviets_monstertank_missile", "SandmarineTusk",
+        "BigShieeTusk", "ra1_allies_longbow_missile", "ra1_soviets_monstertank_missile", "SandmarineTusk",
         "SandmarineTuskCryo", "CabalHeavyReaperMissiles_AA",
     },
     "MissileHE_Medium": {
