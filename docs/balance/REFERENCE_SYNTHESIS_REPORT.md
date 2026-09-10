@@ -26,42 +26,42 @@ Measured first: those five vanilla copies agree with each other on **96%** of sh
 
 | source | population | stat | n | min | median | geo-mean | max |
 |---|---|---|--:|--:|--:|--:|--:|
-| CnC Reloaded | overall | hp | 267 | 3 | 300 | 291 | 6,000 |
+| CnC Reloaded | overall | hp | 261 | 3 | 300 | 290 | 6,000 |
 | CnC Reloaded | vehicle | hp | 127 | 3 | 300 | 313 | 6,000 |
 | CnC Reloaded | infantry | hp | 58 | 75 | 140 | 157 | 600 |
-| Combined Arms | overall | hp | 312 | 1,800 | 25,500 | 23,004 | 150,000 |
-| Combined Arms | vehicle | hp | 165 | 2,500 | 30,000 | 27,374 | 140,000 |
+| Combined Arms | overall | hp | 299 | 1,800 | 25,000 | 22,802 | 150,000 |
+| Combined Arms | vehicle | hp | 152 | 2,500 | 30,000 | 27,305 | 140,000 |
 | Combined Arms | infantry | hp | 61 | 1,800 | 8,000 | 8,320 | 40,000 |
 | Crystallized Nexus | overall | hp | 61 | 80 | 200 | 238 | 1,000 |
 | Crystallized Nexus | vehicle | hp | 29 | 100 | 200 | 255 | 1,000 |
 | Crystallized Nexus | infantry | hp | 14 | 80 | 105 | 114 | 200 |
-| DTA Enhanced | overall | hp | 160 | 100 | 2,900 | 2,244 | 10,000 |
-| DTA Enhanced | vehicle | hp | 70 | 1,100 | 2,000 | 2,478 | 10,000 |
+| DTA Enhanced | overall | hp | 103 | 100 | 2,300 | 1,939 | 10,000 |
+| DTA Enhanced | vehicle | hp | 40 | 1,100 | 2,000 | 2,604 | 10,000 |
 | DTA Enhanced | infantry | hp | 22 | 250 | 500 | 574 | 2,700 |
 | Generals Alpha | overall | hp | 92 | 8,000 | 24,000 | 26,727 | 400,000 |
 | Generals Alpha | vehicle | hp | 45 | 10,000 | 25,000 | 28,742 | 110,000 |
 | Generals Alpha | infantry | hp | 21 | 10,000 | 12,000 | 12,346 | 75,000 |
-| Mental Omega | overall | hp | 358 | 50 | 372 | 338 | 2,500 |
-| Mental Omega | vehicle | hp | 165 | 140 | 420 | 495 | 2,500 |
-| Mental Omega | infantry | hp | 114 | 50 | 135 | 117 | 750 |
+| Mental Omega | overall | hp | 352 | 50 | 372 | 338 | 2,500 |
+| Mental Omega | vehicle | hp | 161 | 140 | 420 | 495 | 2,500 |
+| Mental Omega | infantry | hp | 112 | 50 | 135 | 116 | 750 |
 | OpenE2140 | overall | hp | 65 | 20 | 300 | 245 | 1,000 |
 | OpenE2140 | vehicle | hp | 29 | 80 | 300 | 280 | 800 |
 | OpenE2140 | infantry | hp | 8 | 20 | 28 | 28 | 40 |
 | OpenHV | overall | hp | 91 | 8,000 | 21,000 | 24,269 | 100,000 |
 | OpenHV | vehicle | hp | 55 | 9,500 | 15,000 | 20,678 | 50,000 |
-| OpenRA Dune 2000 | overall | hp | 39 | 3,750 | 12,000 | 14,269 | 50,000 |
+| OpenRA Dune 2000 | overall | hp | 36 | 3,750 | 13,000 | 15,283 | 50,000 |
 | OpenRA Dune 2000 | vehicle | hp | 23 | 9,000 | 19,000 | 18,864 | 50,000 |
-| OpenRA Dune 2000 | infantry | hp | 10 | 3,750 | 6,500 | 6,403 | 10,000 |
+| OpenRA Dune 2000 | infantry | hp | 7 | 3,750 | 6,000 | 6,466 | 10,000 |
 | OpenRA Dune II | overall | hp | 34 | 10 | 130 | 138 | 1,000 |
 | OpenRA Dune II | vehicle | hp | 21 | 45 | 130 | 152 | 1,000 |
 | OpenRA Dune II | infantry | hp | 6 | 10 | 375 | 130 | 1,000 |
-| OpenRA Red Alert | overall | hp | 71 | 1,800 | 30,000 | 21,896 | 150,000 |
+| OpenRA Red Alert | overall | hp | 66 | 1,800 | 32,500 | 22,516 | 150,000 |
 | OpenRA Red Alert | vehicle | hp | 20 | 2,800 | 32,500 | 27,744 | 90,000 |
-| OpenRA Red Alert | infantry | hp | 17 | 1,800 | 5,000 | 6,275 | 75,000 |
-| OpenRA Tiberian Dawn | overall | hp | 36 | 3,000 | 18,500 | 22,176 | 120,000 |
+| OpenRA Red Alert | infantry | hp | 14 | 1,800 | 5,000 | 5,772 | 75,000 |
+| OpenRA Tiberian Dawn | overall | hp | 31 | 3,000 | 15,000 | 18,082 | 120,000 |
 | OpenRA Tiberian Dawn | vehicle | hp | 16 | 7,500 | 18,500 | 22,829 | 120,000 |
-| OpenRA Tiberian Dawn | infantry | hp | 12 | 3,000 | 12,000 | 18,092 | 100,000 |
-| OpenRA Tiberian Sun | overall | hp | 37 | 10,000 | 23,000 | 27,662 | 100,000 |
+| OpenRA Tiberian Dawn | infantry | hp | 7 | 3,000 | 5,000 | 6,336 | 15,000 |
+| OpenRA Tiberian Sun | overall | hp | 36 | 10,000 | 24,500 | 27,912 | 100,000 |
 | OpenRA Tiberian Sun | vehicle | hp | 20 | 15,000 | 30,000 | 32,838 | 100,000 |
 | OpenRA Tiberian Sun | infantry | hp | 7 | 10,000 | 12,500 | 13,562 | 30,000 |
 | RA2 0XX | overall | hp | 128 | 75 | 300 | 359 | 3,000 |
@@ -73,9 +73,9 @@ Measured first: those five vanilla copies agree with each other on **96%** of sh
 | Red Resurrection | overall | hp | 180 | 150 | 600 | 684 | 4,000 |
 | Red Resurrection | vehicle | hp | 85 | 250 | 800 | 857 | 4,000 |
 | Red Resurrection | infantry | hp | 46 | 150 | 305 | 318 | 500 |
-| Rise of the East | overall | hp | 323 | 1 | 280 | 301 | 1,800 |
-| Rise of the East | vehicle | hp | 174 | 1 | 340 | 342 | 1,800 |
-| Rise of the East | infantry | hp | 98 | 90 | 160 | 159 | 330 |
+| Rise of the East | overall | hp | 314 | 1 | 255 | 297 | 1,800 |
+| Rise of the East | vehicle | hp | 166 | 1 | 327 | 337 | 1,800 |
+| Rise of the East | infantry | hp | 97 | 90 | 160 | 159 | 330 |
 | Romanov's Vengeance | overall | hp | 230 | 5,000 | 20,000 | 21,884 | 400,000 |
 | Romanov's Vengeance | vehicle | hp | 91 | 10,000 | 20,000 | 23,781 | 160,000 |
 | Romanov's Vengeance | infantry | hp | 72 | 5,000 | 11,250 | 9,558 | 40,000 |
@@ -85,20 +85,20 @@ Measured first: those five vanilla copies agree with each other on **96%** of sh
 | Twisted Insurrection | overall | hp | 118 | 20 | 285 | 258 | 1,400 |
 | Twisted Insurrection | vehicle | hp | 53 | 130 | 300 | 324 | 1,400 |
 | Twisted Insurrection | infantry | hp | 32 | 45 | 100 | 116 | 550 |
-| Valiant Shades | overall | hp | 117 | 25,000 | 200,000 | 241,623 | 2,000,000 |
-| Valiant Shades | vehicle | hp | 63 | 100,000 | 210,000 | 322,708 | 2,000,000 |
+| Valiant Shades | overall | hp | 105 | 25,000 | 200,000 | 240,780 | 2,000,000 |
+| Valiant Shades | vehicle | hp | 51 | 100,000 | 250,000 | 342,968 | 2,000,000 |
 | Valiant Shades | infantry | hp | 31 | 25,000 | 125,000 | 100,251 | 200,000 |
 
 ### Cameo's own distributions
 
 | population | stat | n | min | median | geo-mean | max |
 |---|---|--:|--:|--:|--:|--:|
-| overall | hp | 871 | 5,000 | 63,000 | 65,937 | 1,350,000 |
-| overall | speed | 794 | 25 | 75 | 78 | 260 |
+| overall | hp | 893 | 5,000 | 65,000 | 64,888 | 1,350,000 |
+| overall | speed | 792 | 25 | 75 | 78 | 260 |
 | overall | turn_speed | 448 | 4 | 20 | 21 | 92 |
 | overall | turn_ratio | 448 | 1 | 5 | 4 | 14 |
-| infantry | hp | 245 | 5,000 | 30,000 | 28,398 | 400,000 |
-| infantry | speed | 245 | 30 | 60 | 61 | 195 |
+| infantry | hp | 243 | 5,000 | 30,000 | 28,223 | 400,000 |
+| infantry | speed | 243 | 30 | 59 | 61 | 195 |
 | infantry | turn_speed | 26 | 12 | 16 | 22 | 92 |
 | infantry | turn_ratio | 26 | 1 | 2 | 2 | 5 |
 | vehicle | hp | 378 | 10,000 | 80,000 | 84,683 | 1,000,000 |
@@ -111,7 +111,7 @@ Measured first: those five vanilla copies agree with each other on **96%** of sh
 | ship | speed | 48 | 35 | 62 | 72 | 150 |
 | ship | turn_speed | 48 | 7 | 23 | 19 | 50 |
 | ship | turn_ratio | 48 | 2 | 5 | 4 | 7 |
-| defense | hp | 77 | 25,000 | 100,000 | 153,514 | 1,000,000 |
+| defense | hp | 101 | 25,000 | 100,000 | 108,779 | 350,000 |
 
 ## Calibration — is the model centred?
 
@@ -119,10 +119,10 @@ If Cameo were wildly out of step with the genre, the target/now ratio would sit 
 
 | stat | HIGH-confidence rows | median ratio | geo-mean ratio | within 2× |
 |---|--:|--:|--:|--:|
-| hp | 216 | 1.26× | 1.28× | 72% |
-| speed | 191 | 0.95× | 0.95× | 97% |
-| turn_speed | 100 | 0.97× | 0.84× | 83% |
-| turn_ratio | 100 | 0.78× | 0.91× | 87% |
+| hp | 217 | 1.13× | 1.22× | 74% |
+| speed | 183 | 0.95× | 0.95× | 97% |
+| turn_speed | 97 | 0.96× | 0.84× | 79% |
+| turn_ratio | 97 | 0.80× | 0.92× | 87% |
 
 ⭐ **The turn law reproduces itself out of the reference data.** `turn_ratio` is `speed / turn_speed` — the divisor in Cameo's own law (turreted ground `Speed/5`, turretless `2×Speed/5`, helicopters and spaceships `Speed/5`, planes `Speed/15`). The reference consensus lands the Apocalypse at **5 → 5** and the Nod Buggy at **5 → 5**, and the whole HIGH-confidence population at a median of ~1.0×. Cameo legislated that divisor; thirteen independent rosters agree with it. That is a law confirmed from outside, not an artifact of the measurement.
 
@@ -132,126 +132,126 @@ If Cameo were wildly out of step with the genre, the target/now ratio would sit 
 
 | actor | type | stat | now | target | ratio | sources | confidence |
 |---|---|---|--:|--:|--:|--:|---|
-| `cabal_radar_cruiser` | ship | w_damage | 1 | 21,407 | 21407.00× | 4 | HIGH |
-| `td_nod_reconbike` | vehicle | w_damage | 1 | 14,571 | 14570.80× | 3 | HIGH |
-| `td_nod_lighttankmkii` | vehicle | w_damage | 1 | 12,717 | 12717.20× | 4 | HIGH |
-| `td_nod_reconbike` | vehicle | w_dps | 0 | 449 | 11235.00× | 3 | HIGH |
-| `td_nod_lighttankmkii` | vehicle | w_dps | 0 | 390 | 9755.00× | 4 | HIGH |
-| `cabal_radar_cruiser` | ship | w_dps | 0 | 207 | 1241.40× | 4 | HIGH |
-| `futuretech_athenacannon` | vehicle | w_dps | 193,696 | 290 | 0.00× | 1 | LOW |
-| `terran_sciencevessel` | aircraft | w_damage | 150,000 | 314 | 0.00× | 1 | LOW |
+| `futuretech_athenacannon` | vehicle | w_dps | 193,696 | 323 | 0.00× | 1 | LOW |
+| `forgotten_ruiner` | vehicle | dps_vs_INF | 466 | 1 | 0.00× | 1 | LOW |
 | `terran_sciencevessel` | aircraft | dps_vs_VEH | 555 | 1 | 0.00× | 1 | LOW |
-| `futuretech_athenacannon` | vehicle | w_reload | 1 | 239 | 238.90× | 1 | LOW |
-| `futuretech_athenacannon` | vehicle | dps_vs_VEH | 49,143 | 212 | 0.00× | 1 | LOW |
-| `yuri_magnetron` | vehicle | w_damage | 3,000 | 646,956 | 215.65× | 4 | HIGH |
-| `futuretech_athenacannon` | vehicle | dps_vs_INF | 48,770 | 303 | 0.01× | 1 | LOW |
-| `steelconsortium_megalodon` | vehicle | dps_vs_INF | 1,347 | 9 | 0.01× | 1 | LOW |
-| `steelconsortium_manta` | vehicle | w_dps | 400 | 49,459 | 123.65× | 1 | LOW |
-| `ts_nod_missilesilo` | defense | w_reload | 50 | 5,999 | 119.98× | 1 | LOW |
-| `yuri_magnetron` | vehicle | dps_vs_VEH | 277 | 31,690 | 114.53× | 3 | HIGH |
-| `futuretech_athenacannon` | vehicle | dps_vs_BLD | 47,963 | 455 | 0.01× | 1 | LOW |
+| `futuretech_athenacannon` | vehicle | w_reload | 1 | 250 | 250.00× | 1 | LOW |
+| `terran_sciencevessel` | aircraft | w_damage | 150,000 | 615 | 0.00× | 1 | LOW |
+| `futuretech_athenacannon` | vehicle | dps_vs_VEH | 49,143 | 230 | 0.00× | 1 | LOW |
+| `terran_valkyrie` | aircraft | w_damage | 128,048 | 670 | 0.01× | 1 | LOW |
+| `futuretech_athenacannon` | vehicle | dps_vs_INF | 48,770 | 322 | 0.01× | 1 | LOW |
+| `steelconsortium_megalodon` | vehicle | dps_vs_INF | 1,347 | 10 | 0.01× | 1 | LOW |
 | `yuri_magnetron` | vehicle | w_burst | 100 | 1 | 0.01× | 1 | LOW |
-| `steelconsortium_megalodon` | vehicle | dps_vs_VEH | 805 | 9 | 0.01× | 1 | LOW |
-| `atreides_fremen` | infantry | dps_vs_BLD | 3 | 233 | 83.21× | 1 | LOW |
-| `steelconsortium_megalodon` | vehicle | dps_vs_BLD | 705 | 13 | 0.02× | 1 | LOW |
-| `forgotten_mlrs` | vehicle | dps_vs_VEH | 2,222 | 47 | 0.02× | 1 | LOW |
-| `atreides_ornithopter` | aircraft | dps_vs_BLD | 521 | 20,102 | 38.60× | 1 | LOW |
-| `tkm_viper` | aircraft | dps_vs_INF | 876 | 28 | 0.03× | 1 | LOW |
-| `ra1_soviets_grad` | vehicle | dps_vs_VEH | 1,024 | 33 | 0.03× | 1 | LOW |
-| `forgotten_mlrs` | vehicle | w_dps | 1,959 | 64 | 0.03× | 1 | LOW |
-| `forgotten_mlrs` | vehicle | dps_vs_INF | 2,145 | 70 | 0.03× | 1 | LOW |
-| `terran_marine` | infantry | dps_vs_BLD | 2,450 | 81 | 0.03× | 2 | MEDIUM |
-| `terran_sciencevessel` | aircraft | w_dps | 417 | 14 | 0.03× | 1 | LOW |
-| `yuri_magnetron` | vehicle | w_dps | 432 | 12,738 | 29.51× | 4 | HIGH |
-| `protoss_archon` | vehicle | dps_vs_INF | 4,202 | 147 | 0.03× | 1 | LOW |
-| `forgotten_mlrs` | vehicle | dps_vs_BLD | 2,240 | 83 | 0.04× | 1 | LOW |
-| `tkm_viper` | aircraft | dps_vs_VEH | 3,143 | 121 | 0.04× | 1 | LOW |
-| `cabal_radar_cruiser` | ship | w_reload | 6 | 154 | 25.63× | 4 | HIGH |
-| `terran_valkyrie` | aircraft | w_damage | 8,003 | 317 | 0.04× | 1 | LOW |
-| `ra1_soviets_grad` | vehicle | dps_vs_BLD | 1,021 | 42 | 0.04× | 1 | LOW |
-| `zerg_devourer` | aircraft | dps_vs_BLD | 92 | 2,198 | 23.85× | 1 | LOW |
-| `ra1_soviets_grad` | vehicle | w_dps | 853 | 37 | 0.04× | 1 | LOW |
-| `atreides_ornithopter` | aircraft | dps_vs_VEH | 1,042 | 24,041 | 23.08× | 1 | LOW |
-| `cabal_mantis` | vehicle | dps_vs_INF | 180 | 4,120 | 22.94× | 1 | LOW |
-| `ra1_soviets_kamovattackhelicopter` | aircraft | dps_vs_INF | 1,694 | 77 | 0.05× | 1 | LOW |
-| `terran_goliath` | vehicle | w_damage | 6,000 | 128,563 | 21.43× | 1 | LOW |
-| `tkm_viper` | aircraft | w_dps | 1,969 | 93 | 0.05× | 1 | LOW |
-| `steelconsortium_megalodon` | vehicle | w_dps | 2,526 | 124 | 0.05× | 1 | LOW |
-| `protoss_legionnaire` | infantry | dps_vs_INF | 1,800 | 89 | 0.05× | 1 | LOW |
-| `ra2_allies_sniper` | infantry | dps_vs_BLD | 266 | 13 | 0.05× | 4 | HIGH |
-| `cabal_cyborgreaper` | vehicle | w_dps | 2,317 | 116 | 0.05× | 4 | HIGH |
-| `tkm_sniper` | infantry | dps_vs_BLD | 261 | 13 | 0.05× | 4 | HIGH |
+| `futuretech_athenacannon` | vehicle | dps_vs_BLD | 47,963 | 506 | 0.01× | 1 | LOW |
+| `steelconsortium_megalodon` | vehicle | dps_vs_VEH | 805 | 10 | 0.01× | 1 | LOW |
+| `steelconsortium_manta` | vehicle | w_dps | 800 | 59,553 | 74.44× | 1 | LOW |
+| `forgotten_ruiner` | vehicle | w_dps | 720 | 12 | 0.02× | 1 | LOW |
+| `ts_gdi_pitbull` | vehicle | dps_vs_INF | 267 | 14,258 | 53.47× | 1 | LOW |
+| `ixian_stormlasher` | defense | w_damage | 300,000 | 5,666 | 0.02× | 1 | LOW |
+| `steelconsortium_megalodon` | vehicle | dps_vs_BLD | 705 | 14 | 0.02× | 1 | LOW |
+| `cabal_radar_cruiser` | ship | w_damage | 3,000 | 145,075 | 48.36× | 2 | MEDIUM |
+| `forgotten_ruiner` | vehicle | w_damage | 36,000 | 924 | 0.03× | 1 | LOW |
+| `terran_siegetank` | vehicle | w_damage | 140,070 | 3,946 | 0.03× | 1 | LOW |
+| `terran_marine` | infantry | dps_vs_BLD | 2,940 | 88 | 0.03× | 2 | MEDIUM |
+| `ts_gdi_pitbull` | vehicle | w_dps | 667 | 21,067 | 31.60× | 1 | LOW |
+| `zerg_devourer` | aircraft | dps_vs_BLD | 92 | 2,777 | 30.13× | 1 | LOW |
+| `protoss_archon` | vehicle | dps_vs_INF | 4,202 | 157 | 0.04× | 1 | LOW |
+| `corrino_trooper` | infantry | w_damage | 25,200 | 989 | 0.04× | 1 | LOW |
+| `trooper` | infantry | w_damage | 25,200 | 989 | 0.04× | 1 | LOW |
+| `ts_gdi_pitbull` | vehicle | w_reload | 55 | 2 | 0.04× | 1 | LOW |
+| `yuri_gatlingcannon` | defense | dps_vs_INF | 5,500 | 226 | 0.04× | 1 | LOW |
+| `terran_sciencevessel` | aircraft | w_dps | 417 | 17 | 0.04× | 1 | LOW |
+| `yuri_gatlingcannon` | defense | dps_vs_BLD | 2,994 | 128 | 0.04× | 1 | LOW |
+| `ixian_stormraider` | vehicle | w_damage | 120,000 | 5,666 | 0.05× | 1 | LOW |
+| `ra2_allies_sniper` | infantry | dps_vs_BLD | 266 | 13 | 0.05× | 3 | HIGH |
+| `tkm_sniper` | infantry | dps_vs_BLD | 261 | 13 | 0.05× | 3 | HIGH |
+| `protoss_legionnaire` | infantry | dps_vs_INF | 1,800 | 93 | 0.05× | 1 | LOW |
+| `cabal_radar_cruiser` | ship | w_reload | 8 | 152 | 19.02× | 2 | MEDIUM |
 | `terran_valkyrie` | aircraft | w_reload | 67 | 4 | 0.05× | 1 | LOW |
-| `ra2_soviets_siegechopper` | aircraft | dps_vs_BLD | 1,089 | 58 | 0.05× | 3 | HIGH |
-| `ra2_allies_nighthawk` | aircraft | dps_vs_BLD | 1,089 | 59 | 0.05× | 3 | HIGH |
-| `zerg_scourge` | aircraft | dps_vs_BLD | 3,400 | 190 | 0.06× | 2 | MEDIUM |
-| `forgotten_ruiner` | vehicle | dps_vs_INF | 466 | 26 | 0.06× | 2 | MEDIUM |
-| `steelconsortium_manta` | vehicle | w_reload | 20 | 1 | 0.06× | 1 | LOW |
-| `steelconsortium_megalodon` | vehicle | w_damage | 60,630 | 3,662 | 0.06× | 1 | LOW |
-| `terran_goliathmk2` | vehicle | w_damage | 8,002 | 128,563 | 16.07× | 1 | LOW |
-| `atreides_ornithopter` | aircraft | dps_vs_INF | 1,458 | 23,115 | 15.85× | 1 | LOW |
-| `ts_nod_missilesilo` | defense | w_range | 10,238,976 | 666,142 | 0.07× | 1 | LOW |
-| `ra1_soviets_grad` | vehicle | dps_vs_INF | 595 | 40 | 0.07× | 1 | LOW |
-| `ra2_allies_nighthawk` | aircraft | w_reload | 3 | 44 | 14.57× | 3 | HIGH |
-| `terran_marine` | infantry | dps_vs_VEH | 2,586 | 178 | 0.07× | 2 | MEDIUM |
-| `ra1_soviets_v2rocketlauncher` | vehicle | dps_vs_VEH | 950 | 70 | 0.07× | 2 | MEDIUM |
-| `ra2_soviets_siegechopper` | aircraft | w_reload | 3 | 41 | 13.57× | 3 | HIGH |
-| `yuri_gatlingtrooper` | infantry | dps_vs_BLD | 871 | 65 | 0.07× | 1 | LOW |
-| `terran_goliathmk2` | vehicle | w_burst | 4 | 0 | 0.07× | 1 | LOW |
-| `yuri_gatlingtrooper` | infantry | dps_vs_INF | 1,600 | 121 | 0.08× | 1 | LOW |
-| `tkm_medictruck` | vehicle | w_reload | 5 | 66 | 13.26× | 9 | HIGH |
+| `ixian_stormlasher` | defense | hp | 200,000 | 10,846 | 0.05× | 1 | LOW |
+| `steelconsortium_megalodon` | vehicle | w_dps | 2,526 | 139 | 0.06× | 1 | LOW |
+| `ts_gdi_pitbull` | vehicle | dps_vs_BLD | 420 | 7,455 | 17.75× | 1 | LOW |
+| `ra2_allies_nighthawk` | aircraft | w_reload | 3 | 50 | 16.73× | 2 | MEDIUM |
+| `ra2_allies_tankdestroyer` | vehicle | dps_vs_INF | 458 | 28 | 0.06× | 3 | HIGH |
+| `terran_marine` | infantry | dps_vs_VEH | 3,103 | 193 | 0.06× | 2 | MEDIUM |
+| `ra1_allies_gunboat` | ship | dps_vs_INF | 2,460 | 156 | 0.06× | 1 | LOW |
+| `ra2_allies_nighthawk` | aircraft | dps_vs_INF | 2,000 | 128 | 0.06× | 2 | MEDIUM |
+| `ts_gdi_falconenforcer` | infantry | dps_vs_BLD | 173 | 2,700 | 15.58× | 1 | LOW |
+| `terran_marine` | infantry | dps_vs_INF | 5,400 | 364 | 0.07× | 2 | MEDIUM |
+| `ra2_allies_harrier` | aircraft | dps_vs_BLD | 247 | 3,656 | 14.81× | 4 | HIGH |
+| `zerg_devourer` | aircraft | dps_vs_INF | 162 | 2,335 | 14.45× | 1 | LOW |
+| `steelconsortium_manta` | vehicle | w_reload | 20 | 1 | 0.07× | 1 | LOW |
+| `ts_nod_mobilerepairvehicle` | vehicle | w_burst | 10 | 1 | 0.07× | 2 | MEDIUM |
+| `atreides_ornithopter` | aircraft | w_damage | 82,855 | 5,804 | 0.07× | 1 | LOW |
+| `ts_gdi_falconenforcer` | infantry | dps_vs_VEH | 214 | 3,038 | 14.22× | 1 | LOW |
+| `tkm_medictruck` | vehicle | w_reload | 5 | 70 | 14.10× | 6 | HIGH |
+| `atreides_ornithopter` | aircraft | w_dps | 1,737 | 124 | 0.07× | 1 | LOW |
+| `ra2_allies_harrier` | aircraft | dps_vs_INF | 217 | 3,017 | 13.93× | 4 | HIGH |
+| `yuri_magnetron` | vehicle | dps_vs_VEH | 643 | 8,941 | 13.90× | 5 | HIGH |
+| `ixian_stormlasher` | defense | w_burst | 1 | 13 | 13.20× | 1 | LOW |
 | `ixian_storminfantry` | infantry | w_burst | 1 | 13 | 13.20× | 1 | LOW |
 | `ixian_stormraider` | vehicle | w_burst | 1 | 13 | 13.20× | 1 | LOW |
-| `protoss_archon` | vehicle | dps_vs_VEH | 2,995 | 228 | 0.08× | 1 | LOW |
-| `ixian_stormraider` | vehicle | w_damage | 40,000 | 3,070 | 0.08× | 1 | LOW |
-| `ra2_allies_tankdestroyer` | vehicle | dps_vs_INF | 458 | 35 | 0.08× | 4 | HIGH |
-| `terran_marine` | infantry | dps_vs_INF | 4,500 | 347 | 0.08× | 2 | MEDIUM |
-| `ra2_allies_nighthawk` | aircraft | dps_vs_VEH | 1,149 | 89 | 0.08× | 3 | HIGH |
-| `ra1_soviets_v2rocketlauncher` | vehicle | dps_vs_INF | 1,071 | 84 | 0.08× | 2 | MEDIUM |
-| `ra1_soviets_v2rocketlauncher` | vehicle | dps_vs_BLD | 1,377 | 108 | 0.08× | 2 | MEDIUM |
-| `ts_nod_mobilerepairvehicle` | vehicle | w_burst | 10 | 1 | 0.08× | 3 | HIGH |
-| `zerg_devourer` | aircraft | dps_vs_INF | 162 | 2,010 | 12.44× | 1 | LOW |
-| `tkm_viper` | aircraft | dps_vs_BLD | 1,247 | 102 | 0.08× | 1 | LOW |
-| `tkm_juggernaut` | infantry | w_reload | 8 | 97 | 12.10× | 5 | HIGH |
-| `ts_gdi_disruptor` | vehicle | dps_vs_INF | 103 | 1,246 | 12.09× | 1 | LOW |
-| `ra1_soviets_v2rocketlauncher` | vehicle | w_dps | 1,000 | 83 | 0.08× | 2 | MEDIUM |
-| `naxis_transportzeppelin` | aircraft | hp | 1,250,000 | 105,357 | 0.08× | 2 | MEDIUM |
-| `ra2_allies_harrier` | aircraft | dps_vs_INF | 200 | 2,361 | 11.79× | 5 | HIGH |
-| `ra2_allies_harrier` | aircraft | dps_vs_BLD | 228 | 2,689 | 11.78× | 5 | HIGH |
-| `yuri_gatlingtrooper` | infantry | w_damage | 16,000 | 1,383 | 0.09× | 1 | LOW |
-| `terran_specter` | infantry | w_dps | 8,728 | 760 | 0.09× | 1 | LOW |
-| `terran_sciencevessel` | aircraft | w_reload | 360 | 32 | 0.09× | 1 | LOW |
-| `ordos_deviatorartillery` | vehicle | w_dps | 1,125 | 100 | 0.09× | 1 | LOW |
-| `terran_marine` | infantry | dps_vs_AIR | 2,422 | 216 | 0.09× | 2 | MEDIUM |
-| `forgotten_zombiemutant` | infantry | dps_vs_BLD | 664 | 60 | 0.09× | 1 | LOW |
-| `protoss_archon` | vehicle | w_dps | 2,250 | 202 | 0.09× | 1 | LOW |
-| `terran_specter` | infantry | dps_vs_VEH | 5,378 | 488 | 0.09× | 1 | LOW |
-| `cabal_mantis` | vehicle | dps_vs_VEH | 208 | 2,254 | 10.82× | 1 | LOW |
-| `ra2_allies_nighthawk` | aircraft | dps_vs_INF | 2,000 | 185 | 0.09× | 3 | HIGH |
-| `atreides_fremen` | infantry | dps_vs_VEH | 15 | 157 | 10.69× | 1 | LOW |
-| `forgotten_ruiner` | vehicle | w_damage | 36,000 | 3,403 | 0.09× | 2 | MEDIUM |
-| `asianalliance_railguntank` | vehicle | dps_vs_INF | 176 | 1,850 | 10.51× | 1 | LOW |
-| `ra1_allies_cruiser` | ship | dps_vs_BLD | 1,035 | 99 | 0.10× | 2 | MEDIUM |
-| `ts_gdi_cruiser` | ship | dps_vs_BLD | 1,035 | 99 | 0.10× | 2 | MEDIUM |
-| `ts_nod_cruiser` | ship | dps_vs_BLD | 1,035 | 99 | 0.10× | 2 | MEDIUM |
-| `forgotten_warriortank` | vehicle | w_damage | 40,000 | 3,835 | 0.10× | 1 | LOW |
-| `zerg_scourge` | aircraft | dps_vs_VEH | 4,504 | 433 | 0.10× | 2 | MEDIUM |
-| `ra2_allies_sniper` | infantry | dps_vs_VEH | 418 | 40 | 0.10× | 6 | HIGH |
-| `tkm_sniper` | infantry | dps_vs_VEH | 411 | 40 | 0.10× | 6 | HIGH |
+| `ra2_allies_nighthawk` | aircraft | dps_vs_BLD | 1,089 | 84 | 0.08× | 2 | MEDIUM |
+| `zerg_scourge` | aircraft | dps_vs_BLD | 3,400 | 264 | 0.08× | 2 | MEDIUM |
+| `ts_gdi_destroyer` | ship | dps_vs_INF | 3,280 | 257 | 0.08× | 7 | HIGH |
+| `atreides_siegetank` | vehicle | w_damage | 50,400 | 3,946 | 0.08× | 1 | LOW |
+| `corrino_siegetank` | vehicle | w_damage | 50,400 | 3,946 | 0.08× | 1 | LOW |
+| `yuri_gatlingtrooper` | infantry | dps_vs_INF | 1,600 | 126 | 0.08× | 1 | LOW |
+| `terran_marine` | infantry | dps_vs_AIR | 2,907 | 232 | 0.08× | 2 | MEDIUM |
+| `ra1_allies_destroyer` | ship | dps_vs_INF | 3,184 | 257 | 0.08× | 7 | HIGH |
+| `ra2_soviets_siegechopper` | aircraft | dps_vs_BLD | 866 | 70 | 0.08× | 3 | HIGH |
+| `yuri_gatlingtrooper` | infantry | dps_vs_BLD | 871 | 71 | 0.08× | 1 | LOW |
+| `naxis_transportzeppelin` | aircraft | hp | 1,250,000 | 101,589 | 0.08× | 2 | MEDIUM |
+| `tkm_juggernaut` | infantry | w_reload | 8 | 95 | 11.88× | 3 | HIGH |
+| `protoss_archon` | vehicle | dps_vs_VEH | 2,995 | 253 | 0.08× | 1 | LOW |
+| `asianalliance_railguntank` | vehicle | dps_vs_INF | 176 | 2,041 | 11.59× | 1 | LOW |
+| `cabal_cyborgreaper` | vehicle | w_dps | 1,867 | 162 | 0.09× | 4 | HIGH |
+| `ra2_allies_sniper` | infantry | dps_vs_VEH | 418 | 37 | 0.09× | 5 | HIGH |
+| `td_nod_flamethrower` | infantry | w_burst | 1 | 11 | 11.40× | 2 | MEDIUM |
+| `tkm_sniper` | infantry | dps_vs_VEH | 411 | 37 | 0.09× | 5 | HIGH |
+| `tkm_juggernaut` | infantry | w_damage | 4,000 | 43,898 | 10.97× | 3 | HIGH |
+| `latinsyndicate_hindtransport` | aircraft | w_reload | 3 | 33 | 10.87× | 1 | LOW |
+| `atreides_fremen` | infantry | hp | 15,000 | 159,776 | 10.65× | 1 | LOW |
+| `terran_sciencevessel` | aircraft | w_reload | 360 | 34 | 0.09× | 1 | LOW |
+| `ra2_allies_harrier` | aircraft | w_reload | 104 | 10 | 0.10× | 5 | HIGH |
+| `terran_valkyrie` | aircraft | w_dps | 1,348 | 130 | 0.10× | 1 | LOW |
+| `tkm_trooper` | infantry | w_damage | 10,000 | 989 | 0.10× | 1 | LOW |
+| `latinsyndicate_hindtransport` | aircraft | dps_vs_VEH | 1,149 | 114 | 0.10× | 1 | LOW |
 | `terran_goliath` | vehicle | w_burst | 3 | 0 | 0.10× | 1 | LOW |
-| `ra1_allies_mechanic` | infantry | w_burst | 10 | 1 | 0.10× | 3 | HIGH |
-| `ra2_soviets_siegechopper` | aircraft | dps_vs_INF | 2,000 | 201 | 0.10× | 3 | HIGH |
-| `cabal_mantis` | vehicle | dps_vs_BLD | 187 | 1,854 | 9.90× | 1 | LOW |
-| `td_gdi_mlrs` | vehicle | dps_vs_VEH | 433 | 47 | 0.11× | 1 | LOW |
-| `ra1_soviets_grad` | vehicle | w_damage | 16,000 | 1,747 | 0.11× | 1 | LOW |
-| `naxis_engineeringtruck` | vehicle | w_burst | 10 | 1 | 0.11× | 3 | HIGH |
-| `schwarzermond_engineeringarmor` | infantry | w_burst | 10 | 1 | 0.11× | 3 | HIGH |
-| `cabal_engineer` | infantry | w_burst | 10 | 1 | 0.11× | 3 | HIGH |
-| `forgotten_ruiner` | vehicle | w_dps | 720 | 80 | 0.11× | 2 | MEDIUM |
-| `ra1_soviets_commissar` | infantry | w_burst | 1 | 9 | 9.00× | 1 | LOW |
-| `futuretech_phalanxwip` | vehicle | w_burst | 8 | 1 | 0.11× | 1 | LOW |
-| `corrino_buggy` | vehicle | dps_vs_INF | 92 | 809 | 8.84× | 1 | LOW |
-| `ra1_allies_gunboat` | ship | dps_vs_INF | 915 | 105 | 0.12× | 3 | HIGH |
+| `ra2_allies_nighthawk` | aircraft | dps_vs_VEH | 1,149 | 116 | 0.10× | 2 | MEDIUM |
+| `zerg_devourer` | aircraft | dps_vs_VEH | 158 | 1,564 | 9.88× | 1 | LOW |
+| `ra2_soviets_teslacoil` | defense | w_dps | 32,000 | 3,244 | 0.10× | 4 | HIGH |
+| `zerg_guardian` | aircraft | w_range | 10,000 | 1,019 | 0.10× | 1 | LOW |
+| `yuri_gatlingcannon` | defense | dps_vs_VEH | 3,161 | 332 | 0.11× | 1 | LOW |
+| `protoss_archon` | vehicle | w_dps | 2,250 | 238 | 0.11× | 1 | LOW |
+| `steelconsortium_megalodon` | vehicle | w_damage | 60,630 | 6,445 | 0.11× | 1 | LOW |
+| `ra1_allies_mechanic` | infantry | w_burst | 10 | 1 | 0.11× | 1 | LOW |
+| `ra2_soviets_flaktrooper` | infantry | dps_vs_INF | 1,567 | 175 | 0.11× | 6 | HIGH |
+| `ra1_allies_gunboat` | ship | dps_vs_BLD | 3,340 | 381 | 0.11× | 1 | LOW |
+| `ordos_tankdestroyer` | vehicle | dps_vs_INF | 247 | 28 | 0.12× | 3 | HIGH |
+| `ra2_allies_harrier` | aircraft | dps_vs_VEH | 525 | 4,521 | 8.62× | 4 | HIGH |
+| `ixian_stormlasher` | defense | w_reload | 250 | 30 | 0.12× | 1 | LOW |
+| `ts_nod_bansheefighter` | aircraft | w_damage | 246,520 | 29,315 | 0.12× | 5 | HIGH |
+| `schwarzermond_corruptorpiercer` | aircraft | dps_vs_INF | 103 | 863 | 8.40× | 1 | LOW |
+| `ra2_soviets_teslacoil` | defense | dps_vs_INF | 43,360 | 5,188 | 0.12× | 4 | HIGH |
+| `naxis_engineeringtruck` | vehicle | w_burst | 10 | 1 | 0.12× | 2 | MEDIUM |
+| `schwarzermond_engineeringarmor` | infantry | w_burst | 10 | 1 | 0.12× | 2 | MEDIUM |
+| `cabal_engineer` | infantry | w_burst | 10 | 1 | 0.12× | 2 | MEDIUM |
+| `ixian_rocketturret` | defense | w_damage | 32,000 | 3,886 | 0.12× | 1 | LOW |
+| `zerg_corruptor` | aircraft | w_burst | 1 | 8 | 8.20× | 1 | LOW |
+| `yuri_lashertank` | vehicle | dps_vs_BLD | 52 | 422 | 8.17× | 3 | HIGH |
+| `ts_gdi_pitbull` | vehicle | dps_vs_VEH | 1,024 | 8,285 | 8.09× | 1 | LOW |
+| `zerg_scourge` | aircraft | dps_vs_VEH | 4,504 | 567 | 0.13× | 2 | MEDIUM |
+| `ts_gdi_cruiser` | ship | w_dps | 3,216 | 411 | 0.13× | 1 | LOW |
+| `yuri_lashertank` | vehicle | dps_vs_VEH | 54 | 419 | 7.76× | 3 | HIGH |
+| `ts_nod_cruiser` | ship | w_dps | 3,137 | 411 | 0.13× | 1 | LOW |
+| `futuretech_guardiantank` | vehicle | w_range | 7,820 | 1,027 | 0.13× | 1 | LOW |
+| `ts_gdi_falconenforcer` | infantry | w_dps | 400 | 3,042 | 7.61× | 1 | LOW |
+| `ra2_soviets_teslacoil` | defense | w_reload | 3 | 22 | 7.27× | 5 | HIGH |
+| `ra1_soviets_teslacoil` | defense | w_reload | 3 | 22 | 7.27× | 5 | HIGH |
+| `ra2_soviets_teslacoil` | defense | dps_vs_VEH | 27,424 | 3,819 | 0.14× | 4 | HIGH |
+| `tkm_rifleman` | infantry | w_dps | 80 | 563 | 7.04× | 1 | LOW |
+| `ra2_soviets_teslacoil` | defense | dps_vs_BLD | 18,347 | 2,610 | 0.14× | 4 | HIGH |
 
 ## Not in this layer, by scoping
 

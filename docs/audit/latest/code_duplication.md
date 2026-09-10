@@ -1,6 +1,6 @@
 # audit_code_duplication — copy-paste clone groups
 
-Python files: **469** (min 5 statements), C# files: **353** (min 8 lines)
+Python files: **474** (min 5 statements), C# files: **353** (min 8 lines)
 
 | code | meaning | clone groups | baseline |
 |---|---|---|---|
@@ -67,7 +67,7 @@ Python files: **469** (min 5 statements), C# files: **353** (min 8 lines)
 | 3 | 5573ff9b5f70fe4c | tools/audit/audit_original_coverage.py:42 ORIGINAL_SOURCES; tools/balance/assign_references.py:166 ORIGINAL_SOURCES; tools/balance/build_reference_report.py:31 ORIGINAL_SOURCES |
 | 3 | 6c04bed7d433482f | tools/audit/audit_stat_uniqueness.py:44 STATS; tools/balance/faction_extrapolate.py:84 RATE_STATS; tools/balance/reference_targets.py:41 STATS |
 | 3 | 985c1fe34e42db41 | tools/audit/find_empty_warhead.py:16 CENTRAL; tools/audit/weapon_families.py:23 CENTRAL; tools/balance/sweep_areadamage.py:25 CENTRAL |
-| 2 | 0ec5f6758f9956dd | tools/balance/peer_corpus.py:23 ROW_PROVENANCE; tools/reference/extract_peer_units.py:1403 ROW_PROVENANCE_KEYS |
+| 2 | 0ec5f6758f9956dd | tools/balance/peer_corpus.py:29 ROW_PROVENANCE; tools/reference/extract_peer_units.py:1403 ROW_PROVENANCE_KEYS |
 | 2 | 153d4fc74c8cdd31 | tools/tilesets/build_ra_temperate_basalt_trees.py:20 ACTORS; tools/tilesets/build_volcanic_basalt_gimp_brushes.py:20 ACTORS |
 | 2 | 245ae127cd6182e8 | tools/balance/consolidate_explicit_family_state_profiles.py:81 STATE_EXPANSION; tools/tests/test_explicit_family_state_profile_consolidation.py:31 EXPECTED_EXPANSION |
 | 2 | 2665d6950cd4417a | tools/audit/find_orphan_old_keys.py:27 OLD_TO_NEW; tools/balance/fix_orphan_old_keys.py:25 OLD_TO_NEW |

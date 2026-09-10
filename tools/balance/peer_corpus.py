@@ -16,9 +16,15 @@ SCHEMA = 1
 INDEX = pathlib.Path("docs/reference/peer_corpus/index.json")
 MAX_BYTES = 32 * 1024 * 1024
 MAX_ROWS = 10000
-# Only the reviewed CA transport is enabled in this first migration. Extending
-# this registry requires source-specific consumer and evidence review.
-SUPPORTED_SOURCES = {"ca": "Combined Arms"}
+# Explicitly reviewed migrations only; adding a source requires population and
+# evidence review, not merely finding a checkout with a compatible manifest.
+SUPPORTED_SOURCES = {
+    "ca": "Combined Arms",
+    "cnc": "OpenRA Tiberian Dawn",
+    "ra": "OpenRA Red Alert",
+    "ts": "OpenRA Tiberian Sun",
+    "d2k": "OpenRA Dune 2000",
+}
 HASH = re.compile(r"[0-9a-f]{64}\Z")
 ROW_PROVENANCE = (
     "extractor", "mode", "mod_id", "source_label", "checkout_head",

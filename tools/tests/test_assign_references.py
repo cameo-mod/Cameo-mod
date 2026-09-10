@@ -11,10 +11,32 @@ import pathlib
 import subprocess
 import sys
 import unittest
+import tempfile
+from unittest.mock import patch
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools" / "balance"))
 import assign_references as ar  # noqa: E402
+
+
+class ReviewMissingScoreTest(unittest.TestCase):
+    def test_override_without_computed_scores_remains_visible(self):
+        record = {'confidence': 'STRONG', 'home': False, 'name': 'Explicit counterpart',
+                  'raw_name': None, 'score': None}
+        with tempfile.TemporaryDirectory() as folder, patch.object(ar, 'ROOT', pathlib.Path(folder)), \
+                patch.object(ar, 'assign', return_value=({'unit': {'source': record},
+                    'outside_class_override': {'source': record}}, [], 1)) as assigned, \
+                patch.object(ar, 'ledger', return_value={'unit': {'design': {}, 'cost': 100}}), \
+                patch.object(ar.rd, 'cameo_rows', return_value=[]), \
+                patch.object(ar.cm, 'classify', return_value=('scout', 'fixture')):
+            assigned.formula_only = {}
+            self.assertEqual(ar.write_review('scout'), 0)
+            report = (pathlib.Path(folder) / 'docs/balance/review/scout_references.md').read_text(encoding='utf-8')
+            self.assertIn('Explicit counterpart | — | — | — |', report)
+            self.assertIn('STRONG', report)
+            self.assertIn('| assigned at least one reference | **1** |', report)
+            self.assertIn('| members with NO reference at all | **0** |', report)
+            self.assertNotIn('outside_class_override', report)
 
 
 class TheCascadeIsACascadeTest(unittest.TestCase):
