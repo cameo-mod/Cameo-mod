@@ -30,13 +30,13 @@ from miniyaml import Ruleset  # noqa: E402
 # Each choice is backed by the already-resolved projectile/effect identity:
 # lightning/Tesla, flak, and chaingun bullets respectively.
 ROOTS = {
-    "BTRTeslaMachineGun": (
+    "ra1_soviets_btr80_machinegun_tesla": (
         "Tesla_Heavy",
         {"MissileAP_Light", "Tesla_Heavy"},
         {
-            "BTRTeslaMachineGunArc", "BTRTeslaMachineGunArcFragment1",
-            "BTRTeslaMachineGunArcFragment1AA", "BTRTeslaMachineGunArc_AA",
-            "BTRTeslaMachineGun_AA",
+            "ra1_soviets_btr80_machinegun_tesla_arc", "BTRTeslaMachineGunArcFragment1",
+            "BTRTeslaMachineGunArcFragment1AA", "ra1_soviets_btr80_machinegun_tesla_arc_AA",
+            "ra1_soviets_btr80_machinegun_tesla_AA",
         },
     ),
     "JapaneseHovercraftFlak": (

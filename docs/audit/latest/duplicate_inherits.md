@@ -86,21 +86,6 @@ C2KPOLICEDEPARTMENT:
     -> c2kpolicedepartment -> ^techbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> c2kpolicedepartment -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
-CNCCA:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> cncca -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> cncca -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
-CNCPT:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> cncpt -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> cncpt -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
-CNCRSS:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> cncrss -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> cncrss -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
 CNCSPEN:
   parent ^^ ^globalbounty  (2 paths)
     -> cncspen -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
@@ -111,14 +96,6 @@ CNCSPEN:
   parent ^^ ^disabledoverlay  (2 paths)
     -> cncspen -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
     -> cncspen -> ^isshipyard -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-
-CNCSS:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> cncss -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> cncss -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-  parent ^^ ^gainsexperience  (2 paths)
-    -> cncss -> ^scoutshiptemplate -> ^gainsexperienceships -> ^gainsexperiencemobile -> Inherits:^GainsExperience
-    -> cncss -> Inherits@EXPERIENCE:^GainsExperience
 
 CNCSYRD:
   parent ^^ ^globalbounty  (2 paths)
@@ -880,11 +857,6 @@ LHUS:
   parent ^^ ^artilleryjammable  (2 paths)
     -> lhus -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
     -> lhus -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
-
-LST:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> lst -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> lst -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 MAMMOTHBUNKER:
   parent ^^ ^shielddomeshapevisual  (2 paths)
@@ -12064,11 +12036,6 @@ futuretech_warpgate:
     -> futuretech_warpgate -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
     -> futuretech_warpgate -> ^ra2defaultweap -> ^isweaponfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
-gdicarrier:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> gdicarrier -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> gdicarrier -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
 gdirigdrone:
   parent ^^ ^externalconditions  (2 paths)
     -> gdirigdrone -> ^raneutralplane -> Inherits@ext:^ExternalConditions
@@ -18707,11 +18674,6 @@ naxis_wirbelwind:
     -> naxis_wirbelwind -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> naxis_wirbelwind -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
-nodlasercorvette:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> nodlasercorvette -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> nodlasercorvette -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
 oldqtnk.steel:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> oldqtnk.steel -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
@@ -21983,6 +21945,17 @@ ra1_powerplant:
     -> ra1_powerplant -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> ra1_powerplant -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
+ra1_soviets_airfield:
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra1_soviets_airfield -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra1_soviets_airfield -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ra1_soviets_airfield -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra1_soviets_airfield -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^disabledoverlay  (2 paths)
+    -> ra1_soviets_airfield -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra1_soviets_airfield -> ^isaircraftfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+
 ra1_soviets_ak47conscript:
   parent ^^ ^defaultinfantry  (2 paths)
     -> ra1_soviets_ak47conscript -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
@@ -22122,6 +22095,17 @@ ra1_soviets_armoredyak:
     -> ra1_soviets_armoredyak -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
     -> ra1_soviets_armoredyak -> ^fightertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
 
+ra1_soviets_barracks:
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra1_soviets_barracks -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra1_soviets_barracks -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ra1_soviets_barracks -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra1_soviets_barracks -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^disabledoverlay  (2 paths)
+    -> ra1_soviets_barracks -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra1_soviets_barracks -> ^isbarrack -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+
 ra1_soviets_btr80:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_soviets_btr80 -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
@@ -22224,6 +22208,14 @@ ra1_soviets_commissar:
   parent ^^ ^gravityweighter  (2 paths)
     -> ra1_soviets_commissar -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
     -> ra1_soviets_commissar -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+
+ra1_soviets_constructionyard:
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra1_soviets_constructionyard -> ^rafact -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra1_soviets_constructionyard -> ^rafact -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ra1_soviets_constructionyard -> ^rafact -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra1_soviets_constructionyard -> ^rafact -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 ra1_soviets_dragunovantimaterialsniper:
   parent ^^ ^defaultinfantry  (2 paths)
@@ -22435,6 +22427,107 @@ ra1_soviets_flaktruck:
     -> ra1_soviets_flaktruck -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_soviets_flaktruck -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
+ra1_soviets_flamethrower:
+  parent ^^ ^defaultinfantry  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
+  parent ^^ ^basicunit  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
+  parent ^^ ^existsinworld  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+  parent ^^ ^spriteactor  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^selectablecombatunit  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+  parent ^^ ^botproductionbehavior  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+  parent ^^ ^lockon  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+  parent ^^ ^bombattachable  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+  parent ^^ ^shieldedshieldable  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+  parent ^^ ^chronobeamable  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+  parent ^^ ^base-reveal  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+  parent ^^ ^shroudable  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+  parent ^^ ^snareable  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+  parent ^^ ^propagandaeffectbuff  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+  parent ^^ ^cryofreezable  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+  parent ^^ ^enemyinproximity  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+  parent ^^ ^affectedbyhealingfield  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+  parent ^^ ^recallable  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+  parent ^^ ^mindcontrollable  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+  parent ^^ ^infantrydisable  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+  parent ^^ ^hospitalhealable  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+  parent ^^ ^techstructurehealable  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+  parent ^^ ^terrordronableinfantry  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+  parent ^^ ^terrordronable  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+  parent ^^ ^poisonable  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+  parent ^^ ^gravityweighter  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+  parent ^^ ^scorchedearthteamupgradera1  (2 paths)
+    -> ra1_soviets_flamethrower -> ^fireinfantry -> ^fireactor -> Inherits@ScorchedEarthTeamUpgradeRA1:^ScorchedEarthTeamUpgradeRA1
+    -> ra1_soviets_flamethrower -> Inherits@ScorchedEarthTeamUpgradeRA1:^ScorchedEarthTeamUpgradeRA1
+
 ra1_soviets_flametower:
   parent ^^ ^globalbounty  (2 paths)
     -> ra1_soviets_flametower -> ^defense -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
@@ -22460,6 +22553,104 @@ ra1_soviets_grad:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_soviets_grad -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_soviets_grad -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+ra1_soviets_grenadier:
+  parent ^^ ^defaultinfantry  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
+  parent ^^ ^basicunit  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
+  parent ^^ ^existsinworld  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+  parent ^^ ^spriteactor  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^selectablecombatunit  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+  parent ^^ ^botproductionbehavior  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+  parent ^^ ^lockon  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+  parent ^^ ^bombattachable  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+  parent ^^ ^shieldedshieldable  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+  parent ^^ ^chronobeamable  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+  parent ^^ ^base-reveal  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+  parent ^^ ^shroudable  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+  parent ^^ ^snareable  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+  parent ^^ ^propagandaeffectbuff  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+  parent ^^ ^cryofreezable  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+  parent ^^ ^enemyinproximity  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+  parent ^^ ^affectedbyhealingfield  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+  parent ^^ ^recallable  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+  parent ^^ ^mindcontrollable  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+  parent ^^ ^infantrydisable  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+  parent ^^ ^hospitalhealable  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+  parent ^^ ^techstructurehealable  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+  parent ^^ ^terrordronableinfantry  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+  parent ^^ ^terrordronable  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+  parent ^^ ^poisonable  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+  parent ^^ ^gravityweighter  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
 
 ra1_soviets_hammertank:
   parent ^^ ^acceptscloakcrate  (2 paths)
@@ -22500,6 +22691,16 @@ ra1_soviets_heatraytank:
   parent ^^ ^scorchedearthteamupgradera1  (2 paths)
     -> ra1_soviets_heatraytank -> ^fireactor -> Inherits@ScorchedEarthTeamUpgradeRA1:^ScorchedEarthTeamUpgradeRA1
     -> ra1_soviets_heatraytank -> Inherits@ScorchedEarthTeamUpgradeRA1:^ScorchedEarthTeamUpgradeRA1
+
+ra1_soviets_heavyindustrialminer:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ra1_soviets_heavyindustrialminer -> ra1_soviets_oretruck -> ^raharv -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ra1_soviets_heavyindustrialminer -> ra1_soviets_oretruck -> ^raharv -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+ra1_soviets_heavytank:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ra1_soviets_heavytank -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ra1_soviets_heavytank -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 ra1_soviets_heavyteslatank:
   parent ^^ ^acceptscloakcrate  (2 paths)
@@ -22660,22 +22861,44 @@ ra1_soviets_kotinnucleartank:
     -> ra1_soviets_kotinnucleartank -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_soviets_kotinnucleartank -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
+ra1_soviets_largefactory:
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra1_soviets_largefactory -> ra1_soviets_warfactory -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra1_soviets_largefactory -> ra1_soviets_warfactory -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (3 paths)
+    -> ra1_soviets_largefactory -> ra1_soviets_warfactory -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra1_soviets_largefactory -> ra1_soviets_warfactory -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra1_soviets_largefactory -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^disabledoverlay  (2 paths)
+    -> ra1_soviets_largefactory -> ra1_soviets_warfactory -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra1_soviets_largefactory -> ra1_soviets_warfactory -> ^isweaponfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+
 ra1_soviets_largesovietairfield:
   parent ^^ ^globalbounty  (2 paths)
-    -> ra1_soviets_largesovietairfield -> ra1_soviets_sovietairfield -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra1_soviets_largesovietairfield -> ra1_soviets_sovietairfield -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> ra1_soviets_largesovietairfield -> ra1_soviets_airfield -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra1_soviets_largesovietairfield -> ra1_soviets_airfield -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (3 paths)
-    -> ra1_soviets_largesovietairfield -> ra1_soviets_sovietairfield -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra1_soviets_largesovietairfield -> ra1_soviets_sovietairfield -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra1_soviets_largesovietairfield -> ra1_soviets_airfield -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra1_soviets_largesovietairfield -> ra1_soviets_airfield -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> ra1_soviets_largesovietairfield -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^disabledoverlay  (2 paths)
-    -> ra1_soviets_largesovietairfield -> ra1_soviets_sovietairfield -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra1_soviets_largesovietairfield -> ra1_soviets_sovietairfield -> ^isaircraftfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+    -> ra1_soviets_largesovietairfield -> ra1_soviets_airfield -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra1_soviets_largesovietairfield -> ra1_soviets_airfield -> ^isaircraftfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
 ra1_soviets_madtank:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_soviets_madtank -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_soviets_madtank -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+ra1_soviets_mammothtank:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ra1_soviets_mammothtank -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ra1_soviets_mammothtank -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+ra1_soviets_mammothtank.colorpicker:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ra1_soviets_mammothtank.colorpicker -> ra1_soviets_mammothtank -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ra1_soviets_mammothtank.colorpicker -> ra1_soviets_mammothtank -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 ra1_soviets_migattackbomber:
   parent ^^ ^externalconditions  (2 paths)
@@ -22718,6 +22941,18 @@ ra1_soviets_migattackbomber:
     -> ra1_soviets_migattackbomber -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
     -> ra1_soviets_migattackbomber -> ^bombertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
 
+ra1_soviets_missilesilo:
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra1_soviets_missilesilo -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra1_soviets_missilesilo -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ra1_soviets_missilesilo -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra1_soviets_missilesilo -> ^2x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^disabledoverlay  (3 paths)
+    -> ra1_soviets_missilesilo -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra1_soviets_missilesilo -> ^primarysuperweapon -> ^superweapon -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
+    -> ra1_soviets_missilesilo -> ^primarysuperweapon -> ^superweapon -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+
 ra1_soviets_missilesubmarine:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_soviets_missilesubmarine -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
@@ -22725,6 +22960,11 @@ ra1_soviets_missilesubmarine:
   parent ^^ ^gainsexperience  (2 paths)
     -> ra1_soviets_missilesubmarine -> ^artilleryshiptemplate -> ^gainsexperienceships -> ^gainsexperiencemobile -> Inherits:^GainsExperience
     -> ra1_soviets_missilesubmarine -> Inherits@EXPERIENCE:^GainsExperience
+
+ra1_soviets_mobileconstructionvehicle:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ra1_soviets_mobileconstructionvehicle -> ^ramcv -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ra1_soviets_mobileconstructionvehicle -> ^ramcv -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 ra1_soviets_molotovconscript:
   parent ^^ ^defaultinfantry  (2 paths)
@@ -22841,6 +23081,104 @@ ra1_soviets_monstertank:
     -> ra1_soviets_monstertank -> ^epicvehicletemplate -> Inherits@snipe:^DriverKillImmune
     -> ra1_soviets_monstertank -> Inherits@snipe:^DriverKillImmune
 
+ra1_soviets_mortarsoldier:
+  parent ^^ ^defaultinfantry  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
+  parent ^^ ^basicunit  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
+  parent ^^ ^existsinworld  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+  parent ^^ ^spriteactor  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^selectablecombatunit  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+  parent ^^ ^botproductionbehavior  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+  parent ^^ ^lockon  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+  parent ^^ ^bombattachable  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+  parent ^^ ^shieldedshieldable  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+  parent ^^ ^chronobeamable  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+  parent ^^ ^base-reveal  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+  parent ^^ ^shroudable  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+  parent ^^ ^snareable  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+  parent ^^ ^propagandaeffectbuff  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+  parent ^^ ^cryofreezable  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+  parent ^^ ^enemyinproximity  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+  parent ^^ ^affectedbyhealingfield  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+  parent ^^ ^recallable  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+  parent ^^ ^mindcontrollable  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+  parent ^^ ^infantrydisable  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+  parent ^^ ^hospitalhealable  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+  parent ^^ ^techstructurehealable  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+  parent ^^ ^terrordronableinfantry  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+  parent ^^ ^terrordronable  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+  parent ^^ ^poisonable  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+  parent ^^ ^gravityweighter  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+
 ra1_soviets_nuclearv2launcher:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_soviets_nuclearv2launcher -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
@@ -22918,6 +23256,37 @@ ra1_soviets_nukedemotruck:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_soviets_nukedemotruck -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_soviets_nukedemotruck -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+ra1_soviets_orerefinery:
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra1_soviets_orerefinery -> ^raproc -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra1_soviets_orerefinery -> ^raproc -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ra1_soviets_orerefinery -> ^raproc -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra1_soviets_orerefinery -> ^raproc -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^raspawnactorsonsell  (2 paths)
+    -> ra1_soviets_orerefinery -> ^raproc -> Inherits@sell:^RASpawnActorsOnSell
+    -> ra1_soviets_orerefinery -> ^rasovietspawnactorsonsell -> Inherits:^RASpawnActorsOnSell
+
+ra1_soviets_oretruck:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ra1_soviets_oretruck -> ^raharv -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ra1_soviets_oretruck -> ^raharv -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+ra1_soviets_radardome:
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra1_soviets_radardome -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra1_soviets_radardome -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ra1_soviets_radardome -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra1_soviets_radardome -> ^dome -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^disabledoverlay  (3 paths)
+    -> ra1_soviets_radardome -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra1_soviets_radardome -> ^radarbuilding -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
+    -> ra1_soviets_radardome -> ^radarbuilding -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+  parent ^^ ^raspawnactorsonsell  (2 paths)
+    -> ra1_soviets_radardome -> ^dome -> Inherits@sell:^RASpawnActorsOnSell
+    -> ra1_soviets_radardome -> ^rasovietspawnactorsonsell -> Inherits:^RASpawnActorsOnSell
 
 ra1_soviets_rifleinfantry:
   parent ^^ ^defaultinfantry  (2 paths)
@@ -23016,6 +23385,130 @@ ra1_soviets_rifleinfantry:
   parent ^^ ^gravityweighter  (2 paths)
     -> ra1_soviets_rifleinfantry -> ^ra1alliesrifleinfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
     -> ra1_soviets_rifleinfantry -> ^ra1alliesrifleinfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+
+ra1_soviets_rocketsoldier:
+  parent ^^ ^defaultinfantry  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
+  parent ^^ ^basicunit  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
+  parent ^^ ^existsinworld  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+  parent ^^ ^spriteactor  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^selectablecombatunit  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+  parent ^^ ^botproductionbehavior  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+  parent ^^ ^lockon  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+  parent ^^ ^bombattachable  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+  parent ^^ ^shieldedshieldable  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+  parent ^^ ^chronobeamable  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+  parent ^^ ^base-reveal  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+  parent ^^ ^shroudable  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+  parent ^^ ^snareable  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+  parent ^^ ^propagandaeffectbuff  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+  parent ^^ ^cryofreezable  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+  parent ^^ ^enemyinproximity  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+  parent ^^ ^affectedbyhealingfield  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+  parent ^^ ^recallable  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+  parent ^^ ^mindcontrollable  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+  parent ^^ ^infantrydisable  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+  parent ^^ ^hospitalhealable  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+  parent ^^ ^techstructurehealable  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+  parent ^^ ^terrordronableinfantry  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+  parent ^^ ^terrordronable  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+  parent ^^ ^poisonable  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+  parent ^^ ^gravityweighter  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+
+ra1_soviets_samsite:
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra1_soviets_samsite -> ^defense -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra1_soviets_samsite -> ^defense -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ra1_soviets_samsite -> ^defense -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra1_soviets_samsite -> ^2x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^disabledoverlay  (3 paths)
+    -> ra1_soviets_samsite -> ^defense -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra1_soviets_samsite -> ^antiairdefensetemplate -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
+    -> ra1_soviets_samsite -> ^antiairdefensetemplate -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+
+ra1_soviets_servicedepot:
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra1_soviets_servicedepot -> ^rafix -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra1_soviets_servicedepot -> ^rafix -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ra1_soviets_servicedepot -> ^rafix -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra1_soviets_servicedepot -> ^rafix -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^disabledoverlay  (2 paths)
+    -> ra1_soviets_servicedepot -> ^rafix -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra1_soviets_servicedepot -> ^rafix -> ^repairfacility -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+  parent ^^ ^raspawnactorsonsell  (2 paths)
+    -> ra1_soviets_servicedepot -> ^rafix -> Inherits@sell:^RASpawnActorsOnSell
+    -> ra1_soviets_servicedepot -> ^rasovietspawnactorsonsell -> Inherits:^RASpawnActorsOnSell
 
 ra1_soviets_shocktrooper:
   parent ^^ ^defaultinfantry  (2 paths)
@@ -23119,559 +23612,6 @@ ra1_soviets_siegemammothtank:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_soviets_siegemammothtank -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_soviets_siegemammothtank -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
-ra1_soviets_sovietairfield:
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra1_soviets_sovietairfield -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra1_soviets_sovietairfield -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra1_soviets_sovietairfield -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra1_soviets_sovietairfield -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^disabledoverlay  (2 paths)
-    -> ra1_soviets_sovietairfield -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra1_soviets_sovietairfield -> ^isaircraftfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-
-ra1_soviets_sovietbarracks:
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra1_soviets_sovietbarracks -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra1_soviets_sovietbarracks -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra1_soviets_sovietbarracks -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra1_soviets_sovietbarracks -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^disabledoverlay  (2 paths)
-    -> ra1_soviets_sovietbarracks -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra1_soviets_sovietbarracks -> ^isbarrack -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-
-ra1_soviets_sovietconstructionyard:
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra1_soviets_sovietconstructionyard -> ^rafact -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra1_soviets_sovietconstructionyard -> ^rafact -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra1_soviets_sovietconstructionyard -> ^rafact -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra1_soviets_sovietconstructionyard -> ^rafact -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-
-ra1_soviets_sovietflamethrower:
-  parent ^^ ^defaultinfantry  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
-  parent ^^ ^basicunit  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
-  parent ^^ ^existsinworld  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
-  parent ^^ ^spriteactor  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^selectablecombatunit  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
-  parent ^^ ^botproductionbehavior  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
-  parent ^^ ^lockon  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
-  parent ^^ ^bombattachable  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^shieldedshieldable  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
-  parent ^^ ^chronobeamable  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
-  parent ^^ ^base-reveal  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
-  parent ^^ ^shroudable  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
-  parent ^^ ^blindable  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
-  parent ^^ ^snareable  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
-  parent ^^ ^artilleryjammable  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
-  parent ^^ ^propagandaeffectbuff  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
-  parent ^^ ^cryofreezable  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
-  parent ^^ ^enemyinproximity  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-  parent ^^ ^affectedbyhealingfield  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
-  parent ^^ ^recallable  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
-  parent ^^ ^mindcontrollable  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
-  parent ^^ ^infantrydisable  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
-  parent ^^ ^hospitalhealable  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
-  parent ^^ ^techstructurehealable  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
-  parent ^^ ^terrordronableinfantry  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
-  parent ^^ ^terrordronable  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
-  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
-  parent ^^ ^poisonable  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
-  parent ^^ ^gravityweighter  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
-    -> ra1_soviets_sovietflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
-  parent ^^ ^scorchedearthteamupgradera1  (2 paths)
-    -> ra1_soviets_sovietflamethrower -> ^fireinfantry -> ^fireactor -> Inherits@ScorchedEarthTeamUpgradeRA1:^ScorchedEarthTeamUpgradeRA1
-    -> ra1_soviets_sovietflamethrower -> Inherits@ScorchedEarthTeamUpgradeRA1:^ScorchedEarthTeamUpgradeRA1
-
-ra1_soviets_sovietgrenadier:
-  parent ^^ ^defaultinfantry  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
-  parent ^^ ^basicunit  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
-  parent ^^ ^existsinworld  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
-  parent ^^ ^spriteactor  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^selectablecombatunit  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
-  parent ^^ ^botproductionbehavior  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
-  parent ^^ ^lockon  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
-  parent ^^ ^bombattachable  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^shieldedshieldable  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
-  parent ^^ ^chronobeamable  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
-  parent ^^ ^base-reveal  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
-  parent ^^ ^shroudable  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
-  parent ^^ ^blindable  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
-  parent ^^ ^snareable  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
-  parent ^^ ^artilleryjammable  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
-  parent ^^ ^propagandaeffectbuff  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
-  parent ^^ ^cryofreezable  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
-  parent ^^ ^enemyinproximity  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-  parent ^^ ^affectedbyhealingfield  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
-  parent ^^ ^recallable  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
-  parent ^^ ^mindcontrollable  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
-  parent ^^ ^infantrydisable  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
-  parent ^^ ^hospitalhealable  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
-  parent ^^ ^techstructurehealable  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
-  parent ^^ ^terrordronableinfantry  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
-  parent ^^ ^terrordronable  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
-  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
-  parent ^^ ^poisonable  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
-  parent ^^ ^gravityweighter  (2 paths)
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
-    -> ra1_soviets_sovietgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
-
-ra1_soviets_sovietheavyindustrialminer:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ra1_soviets_sovietheavyindustrialminer -> ra1_soviets_sovietoretruck -> ^raharv -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ra1_soviets_sovietheavyindustrialminer -> ra1_soviets_sovietoretruck -> ^raharv -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
-ra1_soviets_sovietheavytank:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ra1_soviets_sovietheavytank -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ra1_soviets_sovietheavytank -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
-ra1_soviets_sovietlargefactory:
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra1_soviets_sovietlargefactory -> ra1_soviets_sovietwarfactory -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra1_soviets_sovietlargefactory -> ra1_soviets_sovietwarfactory -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (3 paths)
-    -> ra1_soviets_sovietlargefactory -> ra1_soviets_sovietwarfactory -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra1_soviets_sovietlargefactory -> ra1_soviets_sovietwarfactory -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra1_soviets_sovietlargefactory -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^disabledoverlay  (2 paths)
-    -> ra1_soviets_sovietlargefactory -> ra1_soviets_sovietwarfactory -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra1_soviets_sovietlargefactory -> ra1_soviets_sovietwarfactory -> ^isweaponfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-
-ra1_soviets_sovietmammothtank:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ra1_soviets_sovietmammothtank -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ra1_soviets_sovietmammothtank -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
-ra1_soviets_sovietmammothtank.colorpicker:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ra1_soviets_sovietmammothtank.colorpicker -> ra1_soviets_sovietmammothtank -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ra1_soviets_sovietmammothtank.colorpicker -> ra1_soviets_sovietmammothtank -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
-ra1_soviets_sovietmissilesilo:
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra1_soviets_sovietmissilesilo -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra1_soviets_sovietmissilesilo -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra1_soviets_sovietmissilesilo -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra1_soviets_sovietmissilesilo -> ^2x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^disabledoverlay  (3 paths)
-    -> ra1_soviets_sovietmissilesilo -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra1_soviets_sovietmissilesilo -> ^primarysuperweapon -> ^superweapon -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
-    -> ra1_soviets_sovietmissilesilo -> ^primarysuperweapon -> ^superweapon -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-
-ra1_soviets_sovietmobileconstructionvehicle:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ra1_soviets_sovietmobileconstructionvehicle -> ^ramcv -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ra1_soviets_sovietmobileconstructionvehicle -> ^ramcv -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
-ra1_soviets_sovietmortarsoldier:
-  parent ^^ ^defaultinfantry  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
-  parent ^^ ^basicunit  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
-  parent ^^ ^existsinworld  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
-  parent ^^ ^spriteactor  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^selectablecombatunit  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
-  parent ^^ ^botproductionbehavior  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
-  parent ^^ ^lockon  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
-  parent ^^ ^bombattachable  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^shieldedshieldable  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
-  parent ^^ ^chronobeamable  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
-  parent ^^ ^base-reveal  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
-  parent ^^ ^shroudable  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
-  parent ^^ ^blindable  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
-  parent ^^ ^snareable  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
-  parent ^^ ^artilleryjammable  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
-  parent ^^ ^propagandaeffectbuff  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
-  parent ^^ ^cryofreezable  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
-  parent ^^ ^enemyinproximity  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-  parent ^^ ^affectedbyhealingfield  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
-  parent ^^ ^recallable  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
-  parent ^^ ^mindcontrollable  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
-  parent ^^ ^infantrydisable  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
-  parent ^^ ^hospitalhealable  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
-  parent ^^ ^techstructurehealable  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
-  parent ^^ ^terrordronableinfantry  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
-  parent ^^ ^terrordronable  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
-  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
-  parent ^^ ^poisonable  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
-  parent ^^ ^gravityweighter  (2 paths)
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
-    -> ra1_soviets_sovietmortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
-
-ra1_soviets_sovietorerefinery:
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra1_soviets_sovietorerefinery -> ^raproc -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra1_soviets_sovietorerefinery -> ^raproc -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra1_soviets_sovietorerefinery -> ^raproc -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra1_soviets_sovietorerefinery -> ^raproc -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^raspawnactorsonsell  (2 paths)
-    -> ra1_soviets_sovietorerefinery -> ^raproc -> Inherits@sell:^RASpawnActorsOnSell
-    -> ra1_soviets_sovietorerefinery -> ^rasovietspawnactorsonsell -> Inherits:^RASpawnActorsOnSell
-
-ra1_soviets_sovietoretruck:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ra1_soviets_sovietoretruck -> ^raharv -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ra1_soviets_sovietoretruck -> ^raharv -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
-ra1_soviets_sovietradardome:
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra1_soviets_sovietradardome -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra1_soviets_sovietradardome -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra1_soviets_sovietradardome -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra1_soviets_sovietradardome -> ^dome -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^disabledoverlay  (3 paths)
-    -> ra1_soviets_sovietradardome -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra1_soviets_sovietradardome -> ^radarbuilding -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
-    -> ra1_soviets_sovietradardome -> ^radarbuilding -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-  parent ^^ ^raspawnactorsonsell  (2 paths)
-    -> ra1_soviets_sovietradardome -> ^dome -> Inherits@sell:^RASpawnActorsOnSell
-    -> ra1_soviets_sovietradardome -> ^rasovietspawnactorsonsell -> Inherits:^RASpawnActorsOnSell
-
-ra1_soviets_sovietrocketsoldier:
-  parent ^^ ^defaultinfantry  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
-  parent ^^ ^basicunit  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
-  parent ^^ ^existsinworld  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
-  parent ^^ ^spriteactor  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^selectablecombatunit  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
-  parent ^^ ^botproductionbehavior  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
-  parent ^^ ^lockon  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
-  parent ^^ ^bombattachable  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^shieldedshieldable  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
-  parent ^^ ^chronobeamable  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
-  parent ^^ ^base-reveal  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
-  parent ^^ ^shroudable  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
-  parent ^^ ^blindable  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
-  parent ^^ ^snareable  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
-  parent ^^ ^artilleryjammable  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
-  parent ^^ ^propagandaeffectbuff  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
-  parent ^^ ^cryofreezable  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
-  parent ^^ ^enemyinproximity  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-  parent ^^ ^affectedbyhealingfield  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
-  parent ^^ ^recallable  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
-  parent ^^ ^mindcontrollable  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
-  parent ^^ ^infantrydisable  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
-  parent ^^ ^hospitalhealable  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
-  parent ^^ ^techstructurehealable  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
-  parent ^^ ^terrordronableinfantry  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
-  parent ^^ ^terrordronable  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
-  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
-  parent ^^ ^poisonable  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
-  parent ^^ ^gravityweighter  (2 paths)
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
-    -> ra1_soviets_sovietrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
-
-ra1_soviets_sovietsamsite:
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra1_soviets_sovietsamsite -> ^defense -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra1_soviets_sovietsamsite -> ^defense -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra1_soviets_sovietsamsite -> ^defense -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra1_soviets_sovietsamsite -> ^2x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^disabledoverlay  (3 paths)
-    -> ra1_soviets_sovietsamsite -> ^defense -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra1_soviets_sovietsamsite -> ^antiairdefensetemplate -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
-    -> ra1_soviets_sovietsamsite -> ^antiairdefensetemplate -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-
-ra1_soviets_sovietservicedepot:
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra1_soviets_sovietservicedepot -> ^rafix -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra1_soviets_sovietservicedepot -> ^rafix -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra1_soviets_sovietservicedepot -> ^rafix -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra1_soviets_sovietservicedepot -> ^rafix -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^disabledoverlay  (2 paths)
-    -> ra1_soviets_sovietservicedepot -> ^rafix -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra1_soviets_sovietservicedepot -> ^rafix -> ^repairfacility -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-  parent ^^ ^raspawnactorsonsell  (2 paths)
-    -> ra1_soviets_sovietservicedepot -> ^rafix -> Inherits@sell:^RASpawnActorsOnSell
-    -> ra1_soviets_sovietservicedepot -> ^rasovietspawnactorsonsell -> Inherits:^RASpawnActorsOnSell
-
-ra1_soviets_soviettechcenter:
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra1_soviets_soviettechcenter -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra1_soviets_soviettechcenter -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra1_soviets_soviettechcenter -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra1_soviets_soviettechcenter -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^disabledoverlay  (2 paths)
-    -> ra1_soviets_soviettechcenter -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra1_soviets_soviettechcenter -> ^istechnobuilding -> ^disableonpowerdown -> Inherits:^DisabledOverlay
-
-ra1_soviets_sovietwarfactory:
-  parent ^^ ^globalbounty  (2 paths)
-    -> ra1_soviets_sovietwarfactory -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra1_soviets_sovietwarfactory -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra1_soviets_sovietwarfactory -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra1_soviets_sovietwarfactory -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^disabledoverlay  (2 paths)
-    -> ra1_soviets_sovietwarfactory -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra1_soviets_sovietwarfactory -> ^isweaponfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
 ra1_soviets_stalinfist:
   parent ^^ ^acceptscloakcrate  (2 paths)
@@ -23818,6 +23758,17 @@ ra1_soviets_supersonicnuclearbomber:
   parent ^^ ^tiberiumadaptability  (2 paths)
     -> ra1_soviets_supersonicnuclearbomber -> ^bombertemplate -> ^aircraftbuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
     -> ra1_soviets_supersonicnuclearbomber -> ^epicairunittemplate -> ^aircraftbuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
+
+ra1_soviets_techcenter:
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra1_soviets_techcenter -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra1_soviets_techcenter -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ra1_soviets_techcenter -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra1_soviets_techcenter -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^disabledoverlay  (2 paths)
+    -> ra1_soviets_techcenter -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra1_soviets_techcenter -> ^istechnobuilding -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
 ra1_soviets_teslacoil:
   parent ^^ ^globalbounty  (2 paths)
@@ -24065,6 +24016,17 @@ ra1_soviets_volkov:
   parent ^^ ^commandoskull  (2 paths)
     -> ra1_soviets_volkov -> ^heroinfantrytemplate -> Inherits@COMMANDOSKULL:^CommandoSkull
     -> ra1_soviets_volkov -> Inherits@COMMANDOSKULL:^CommandoSkull
+
+ra1_soviets_warfactory:
+  parent ^^ ^globalbounty  (2 paths)
+    -> ra1_soviets_warfactory -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra1_soviets_warfactory -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ra1_soviets_warfactory -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra1_soviets_warfactory -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^disabledoverlay  (2 paths)
+    -> ra1_soviets_warfactory -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra1_soviets_warfactory -> ^isweaponfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
 ra1_soviets_yakscoutplane:
   parent ^^ ^externalconditions  (2 paths)
@@ -31391,14 +31353,6 @@ sietch_creep_disabled:
     -> sietch_creep_disabled -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
     -> sietch_creep_disabled -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
 
-ssmsub:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ssmsub -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ssmsub -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-  parent ^^ ^gainsexperience  (2 paths)
-    -> ssmsub -> ^artilleryshiptemplate -> ^gainsexperienceships -> ^gainsexperiencemobile -> Inherits:^GainsExperience
-    -> ssmsub -> Inherits@EXPERIENCE:^GainsExperience
-
 steelconsortium_antiairquantummissileturret:
   parent ^^ ^globalbounty  (2 paths)
     -> steelconsortium_antiairquantummissileturret -> ^ra2defense -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
@@ -33250,6 +33204,11 @@ td_gdi_humveemkii:
     -> td_gdi_humveemkii -> td_gdi_humvee -> Inherits@decoration:^GDIRankDecoration
     -> td_gdi_humveemkii -> Inherits@decoration:^GDIRankDecoration
 
+td_gdi_landingcraft:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> td_gdi_landingcraft -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> td_gdi_landingcraft -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
 td_gdi_mammothtank:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> td_gdi_mammothtank -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
@@ -33363,6 +33322,11 @@ td_gdi_minigunner:
   parent ^^ ^gravityweighter  (2 paths)
     -> td_gdi_minigunner -> ^e1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
     -> td_gdi_minigunner -> ^e1 -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+
+td_gdi_missileboat:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> td_gdi_missileboat -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> td_gdi_missileboat -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 td_gdi_mlrs:
   parent ^^ ^acceptscloakcrate  (2 paths)
@@ -33523,6 +33487,11 @@ td_gdi_predatortank:
   parent ^^ ^lightweightarmorplating  (2 paths)
     -> td_gdi_predatortank -> ^mainbattletanktemplate -> ^tankbuffs -> Inherits@upgrade:^LightWeightArmorPlating
     -> td_gdi_predatortank -> Inherits@LightWeightArmorPlating:^LightWeightArmorPlating
+
+td_gdi_railgunbattleship:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> td_gdi_railgunbattleship -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> td_gdi_railgunbattleship -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 td_gdi_repairfacility:
   parent ^^ ^globalbounty  (2 paths)
@@ -33838,6 +33807,11 @@ td_gdi_sonicmissilesoldier:
     -> td_gdi_sonicmissilesoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
     -> td_gdi_sonicmissilesoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
 
+td_gdi_supercarrier:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> td_gdi_supercarrier -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> td_gdi_supercarrier -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
 td_gdi_tiberiumharvester:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> td_gdi_tiberiumharvester -> ^tdharv -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
@@ -33945,6 +33919,22 @@ td_nod_artillery:
   parent ^^ ^tiberiumadaptability  (2 paths)
     -> td_nod_artillery -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
     -> td_nod_artillery -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
+
+td_nod_attacksubmarine:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> td_nod_attacksubmarine -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> td_nod_attacksubmarine -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^gainsexperience  (2 paths)
+    -> td_nod_attacksubmarine -> ^scoutshiptemplate -> ^gainsexperienceships -> ^gainsexperiencemobile -> Inherits:^GainsExperience
+    -> td_nod_attacksubmarine -> Inherits@EXPERIENCE:^GainsExperience
+
+td_nod_ballisticmissilesubmarine:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> td_nod_ballisticmissilesubmarine -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> td_nod_ballisticmissilesubmarine -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^gainsexperience  (2 paths)
+    -> td_nod_ballisticmissilesubmarine -> ^artilleryshiptemplate -> ^gainsexperienceships -> ^gainsexperiencemobile -> Inherits:^GainsExperience
+    -> td_nod_ballisticmissilesubmarine -> Inherits@EXPERIENCE:^GainsExperience
 
 td_nod_blackhandflamer:
   parent ^^ ^defaultinfantry  (2 paths)
@@ -34760,6 +34750,11 @@ td_nod_lasercommando:
     -> td_nod_lasercommando -> ^heroinfantrytemplate -> Inherits@COMMANDOSKULL:^CommandoSkull
     -> td_nod_lasercommando -> Inherits@COMMANDOSKULL:^CommandoSkull
 
+td_nod_lasercorvette:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> td_nod_lasercorvette -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> td_nod_lasercorvette -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
 td_nod_lasertrooper:
   parent ^^ ^defaultinfantry  (2 paths)
     -> td_nod_lasertrooper -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
@@ -35388,6 +35383,11 @@ td_nod_tiberiumrefinery:
   parent ^^ ^shielddomeshapevisual  (2 paths)
     -> td_nod_tiberiumrefinery -> ^tdproc -> ^tdbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> td_nod_tiberiumrefinery -> ^tdproc -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+td_nod_transportsubmarine:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> td_nod_transportsubmarine -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> td_nod_transportsubmarine -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 td_nod_venom:
   parent ^^ ^externalconditions  (2 paths)

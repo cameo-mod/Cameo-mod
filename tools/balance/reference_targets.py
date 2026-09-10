@@ -185,11 +185,24 @@ def target_for(rows, cameo_row, stat, dist, cdist):
     ⭐ POOLED PER SOURCE FIRST. Every source casts exactly ONE vote however many of its rows are
     in play, so a mod that happens to ship four variants of a unit cannot outvote one that ships
     a single unit. Without this, expanding to variant families would quietly re-weight R4.
+
+    ⛔ AND EVERY VOTE IS GATED BY `rd.eligible` (review, 2026-09-09). The old test was only
+    `if not x or x <= 0` — true for a withheld w_dps row's raw `w_range`/`w_damage`, which then
+    voted against the other rows' aggregates even though the weapon's DPS fold never became a
+    usable estimate. `rd.eligible` is the SAME gate `build_distributions` applies, so a row
+    that abstains from a distribution cannot re-enter through `target_for`: for `w_dps` AND
+    every stat that REQUIRES w_dps (`w_range`/`w_damage`/`w_burst`/`w_reload`, and the
+    `dps_vs_*`), an evidence-withheld row contributes no coordinate, no peer vote and no
+    source count. The optional Cameo self-vote is gated the same way, so an ineligible Cameo
+    stat cannot outvote anything either. hp/speed/cost have their own eligibility and are
+    unaffected. `peers_only` keeps its meaning: the peers' coordinates alone.
     """
     per_source = collections.defaultdict(lambda: collections.defaultdict(list))
     for r in rows:
         x = r.get(stat)
         if not x or x <= 0:
+            continue
+        if not rd.eligible(r, stat):
             continue
         for pop in ("overall", r["type"]):
             agg = dist.get(r["source"], {}).get(pop, {}).get(stat)
@@ -215,7 +228,8 @@ def target_for(rows, cameo_row, stat, dist, cdist):
         return None, None, 0
     peers_only = rd.gm(cands)
     now = cameo_row.get(stat)
-    with_cameo = rd.gm([peers_only] * len(used) + [now]) if now and now > 0 else peers_only
+    now = now if (now and now > 0 and rd.eligible(cameo_row, stat)) else None
+    with_cameo = rd.gm([peers_only] * len(used) + [now]) if now else peers_only
     return peers_only, with_cameo, len(used)
 
 

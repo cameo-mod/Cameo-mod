@@ -1,4 +1,4 @@
-CNCSS:
+td_nod_attacksubmarine:
 	Inherits: ^BoatUnit
 	Inherits@Template: ^ScoutShipTemplate
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -53,7 +53,7 @@ CNCSS:
 	ActorStatValues:
 		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_blackmarketupgrades
 
-ssmsub:
+td_nod_ballisticmissilesubmarine:
 	Inherits: ^BoatUnit
 	Inherits@Template: ^ArtilleryShipTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -123,7 +123,7 @@ ssmsub:
 	ActorStatValues:
 		Upgrades: td_nod_upgrade_elementalwarfare, td_nod_upgrade_improvedartilleries, td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics
 
-nodlasercorvette:
+td_nod_lasercorvette:
 	Inherits: ^BoatUnit
 	Inherits@Template: ^BattleShipTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -191,9 +191,10 @@ nodlasercorvette:
 		Turret: secondary
 		Palette: ra_temperat
 	RenderSprites:
+		Image: nodlasercorvette
 		PlayerPalette: player_rgba
 
-CNCRSS:
+td_nod_transportsubmarine:
 	Inherits: ^BoatUnit
 	Inherits@sub: ^Submarine
 	Inherits@cargo: ^CargoVehicle
@@ -232,4 +233,5 @@ CNCRSS:
 	Cloak@underwater:
 		PauseOnCondition: disabled || !cancloak
 	RenderSprites:
+		Image: cncrss
 		PlayerPalette: player_rgba

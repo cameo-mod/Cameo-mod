@@ -10,10 +10,12 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 REPORT = ROOT / "docs/audit/latest/multi_main_bulk1_comparison.json"
 sys.path.insert(0, str(ROOT / "tools" / "audit"))
 sys.path.insert(0, str(ROOT / "tools" / "balance"))
+sys.path.insert(0, str(ROOT / "tools" / "rename"))
 
 import consolidate_adjacent_family_stacks as adjacent
 import consolidate_same_family_stacks as bullets
 from miniyaml import Ruleset
+from safe_rename import load_map
 
 
 ACCEPTED = {
@@ -51,7 +53,11 @@ class SameFamilyStackConsolidationTests(unittest.TestCase):
             selected.update({root, *closure})
         for root, (_, _, closure) in adjacent.SPECS.items():
             selected.update({root, *closure})
-        self.assertEqual(selected, set(self.report["changed"]))
+        # Preserve historical change hashes; translate only reviewed current IDs.
+        renamed, _ = load_map(ROOT / 'tools/rename/rename_map_ra1_soviets_owned_weapons_20260910.yaml')
+        historical = {new: old for old, new in renamed.items()}
+        self.assertEqual({historical.get(name, name) for name in selected},
+                         set(self.report["changed"]))
 
     def test_percentage_rounding_delta_never_exceeds_one_hp(self):
         deltas = []

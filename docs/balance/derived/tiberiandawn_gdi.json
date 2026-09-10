@@ -1645,62 +1645,14 @@
    }
   },
   "naval": {
-   "CNCCA": {
-    "armaments": [
-     {
-      "avg_versus": 1.096,
-      "damage_total": 51000.0,
-      "eff_reload": 100.0,
-      "effective_damage": 24707.08,
-      "effective_dps": 328.48,
-      "effective_per_shot": 32848.02,
-      "factor_deadzone": 1.0,
-      "factor_range": 1.1667,
-      "factor_targets": 0.95,
-      "footprint": 0.5485,
-      "k": 0.5811,
-      "k_context": 0.6441,
-      "k_flat": 0.5811,
-      "k_flat_context": 0.6441,
-      "overkill": 0.964,
-      "pct_absolute": 0.0,
-      "pct_absolute_context": 0.0,
-      "reliability": 0.4796,
-      "sigma": 100.0,
-      "slot": "Armament@PRIMARY",
-      "weapon": "GDIBattleshipRailgun"
-     },
-     {
-      "avg_versus": 1.096,
-      "damage_total": 51000.0,
-      "eff_reload": 100.0,
-      "effective_damage": 24707.08,
-      "effective_dps": 328.48,
-      "effective_per_shot": 32848.02,
-      "factor_deadzone": 1.0,
-      "factor_range": 1.1667,
-      "factor_targets": 0.95,
-      "footprint": 0.5485,
-      "k": 0.5811,
-      "k_context": 0.6441,
-      "k_flat": 0.5811,
-      "k_flat_context": 0.6441,
-      "overkill": 0.964,
-      "pct_absolute": 0.0,
-      "pct_absolute_context": 0.0,
-      "reliability": 0.4796,
-      "sigma": 100.0,
-      "slot": "Armament@SECONDARY",
-      "weapon": "GDIBattleshipRailgun"
-     }
-    ],
+   "td_gdi_landingcraft": {
     "shield_always_on": false,
     "shield_gated_on_upgrade": false,
-    "shield_pool": 167500.0,
-    "tier_chain_cost": 14000.0,
-    "tier_multiplier": 0.6471
+    "shield_pool": 75000.0,
+    "tier_chain_cost": 11500.0,
+    "tier_multiplier": 0.8049
    },
-   "CNCPT": {
+   "td_gdi_missileboat": {
     "armaments": [
      {
       "avg_versus": 1.0168,
@@ -1801,14 +1753,62 @@
     "tier_chain_cost": 11500.0,
     "tier_multiplier": 0.8049
    },
-   "LST": {
+   "td_gdi_railgunbattleship": {
+    "armaments": [
+     {
+      "avg_versus": 1.096,
+      "damage_total": 51000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 24707.08,
+      "effective_dps": 328.48,
+      "effective_per_shot": 32848.02,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.1667,
+      "factor_targets": 0.95,
+      "footprint": 0.5485,
+      "k": 0.5811,
+      "k_context": 0.6441,
+      "k_flat": 0.5811,
+      "k_flat_context": 0.6441,
+      "overkill": 0.964,
+      "pct_absolute": 0.0,
+      "pct_absolute_context": 0.0,
+      "reliability": 0.4796,
+      "sigma": 100.0,
+      "slot": "Armament@PRIMARY",
+      "weapon": "GDIBattleshipRailgun"
+     },
+     {
+      "avg_versus": 1.096,
+      "damage_total": 51000.0,
+      "eff_reload": 100.0,
+      "effective_damage": 24707.08,
+      "effective_dps": 328.48,
+      "effective_per_shot": 32848.02,
+      "factor_deadzone": 1.0,
+      "factor_range": 1.1667,
+      "factor_targets": 0.95,
+      "footprint": 0.5485,
+      "k": 0.5811,
+      "k_context": 0.6441,
+      "k_flat": 0.5811,
+      "k_flat_context": 0.6441,
+      "overkill": 0.964,
+      "pct_absolute": 0.0,
+      "pct_absolute_context": 0.0,
+      "reliability": 0.4796,
+      "sigma": 100.0,
+      "slot": "Armament@SECONDARY",
+      "weapon": "GDIBattleshipRailgun"
+     }
+    ],
     "shield_always_on": false,
     "shield_gated_on_upgrade": false,
-    "shield_pool": 75000.0,
-    "tier_chain_cost": 11500.0,
-    "tier_multiplier": 0.8049
+    "shield_pool": 167500.0,
+    "tier_chain_cost": 14000.0,
+    "tier_multiplier": 0.6471
    },
-   "gdicarrier": {
+   "td_gdi_supercarrier": {
     "shield_always_on": false,
     "shield_gated_on_upgrade": false,
     "shield_pool": 300000.0,

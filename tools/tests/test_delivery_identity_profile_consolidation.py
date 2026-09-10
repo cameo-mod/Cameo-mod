@@ -10,12 +10,14 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 REPORT = ROOT / "docs/audit/latest/machinegun_profile_comparison.json"
 sys.path.insert(0, str(ROOT / "tools" / "audit"))
 sys.path.insert(0, str(ROOT / "tools" / "balance"))
+sys.path.insert(0, str(ROOT / "tools" / "rename"))
 
 import consolidate_delivery_identity_profiles as delivery
 import consolidate_machinegun_profiles as machineguns
 from audit_three_way_split import RAW_SPLIT_BASELINE, main_warheads
 from audit_warhead_split import BROADCAST_BASELINE
 from miniyaml import Ruleset
+from safe_rename import load_map
 
 
 ACCEPTED = {
@@ -43,7 +45,12 @@ class DeliveryIdentityProfileConsolidationTests(unittest.TestCase):
     def test_report_covers_exactly_the_selected_definitions(self):
         selected = set(machineguns.selections(self.rules)) | set(delivery.selections(self.rules))
         self.assertEqual(31, len(selected))
-        self.assertEqual(selected, set(self.report["changed"]))
+        # Keep the historical comparison and its accepted payload hashes intact.
+        # Only translate the exact reviewed identity migration for set comparison.
+        renamed, _ = load_map(ROOT / 'tools/rename/rename_map_ra1_soviets_owned_weapons_20260910.yaml')
+        historical = {new: old for old, new in renamed.items()}
+        self.assertEqual({historical.get(name, name) for name in selected},
+                         set(self.report["changed"]))
         self.assertEqual([], self.report["added"])
         self.assertEqual([], self.report["removed"])
 

@@ -1,6 +1,6 @@
 # audit_sequences — art/sequence references (B6)
 
-S1 missing images: **0**, S2 missing sequences: **0**, S3 unreferenced sequence images: **586** (of 3132 defined)
+S1 missing images: **0**, S2 missing sequences: **1**, S3 unreferenced sequence images: **587** (of 3132 defined)
 
 
 ## S1 — actor render image not defined in sequences
@@ -10,7 +10,9 @@ _none found_
 
 ## S2 — trait sequence missing from image
 
-_none found_
+| actor | trait | sequence | image | rules file |
+|---|---|---|---|---|
+| ra1_soviets_largesovietairfield | WithIdleOverlay@flag | flag | ra1_soviets_sovietairfield | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
 
 
 ## S3 — sequence images referenced by no live actor/weapon (sample, feeds B10)

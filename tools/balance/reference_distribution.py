@@ -72,6 +72,7 @@ import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import reference_lineages  # noqa: E402  (the shared lineage rulings)
+import peer_corpus  # noqa: E402
 import synthesize_reference as syn  # noqa: E402  (parsers + roster loader are reused wholesale)
 
 ROOT = syn.ROOT
@@ -343,6 +344,179 @@ def _ini_armor_index():
     return out
 
 
+# ── THE CONSUMER-SIDE EVIDENCE POLICY (2026-09-09) ────────────────────────────────────────────
+# The extractor (`tools/reference/extract_ini_units.py`) declares, per weapon slot, whether the
+# plain Damage/ROF fold may be CONSUMED: `w_evidence`, `w_evidence_reason` and `w_dps_usable`
+# (explicit unsupported verdicts fail closed; unlabeled legacy data retains compatibility),
+# and the slot-prefixed twins (`w2_*` = secondary, `wdummy_*` = demoted primary) carry the same
+# identity/status pair for the row's OTHER weapon identities. Labels assert WHAT WAS ASSESSED,
+# never completeness:
+#
+# ⛔ THE CONSUMER BUG THIS POLICY FIXES: `ini_rows` and `peer_hero_rows` copied `w_dps` and the
+# armor-adjusted `dps_vs_*` while dropping `w_evidence` — so a weapon the extractor itself
+# declined to certify arrived downstream as an authoritative DPS target with the caveat
+# deleted. A ratio built from damage the direct-channel fold cannot read is exactly the class
+# of number this file's own header forbids.
+#
+# What each state does to the CONSUMER values (`w_dps`, `dps_vs_*`). It touches NOTHING else —
+# hp, speed, cost survive verbatim, the other weapon fields (`w_range`/`w_damage`/`w_burst`/
+# `w_reload`, which matching clause 5 uses to tell "armed" from "unarmed") survive too, and
+# ELIGIBILITY's `requires: w_dps` then naturally abstains the row from every weapon-layer
+# distribution while it keeps voting on the chassis:
+#   * MISSING/absent on a legacy row -> "legacy-unassessed": ABSENT STATUS IS LEGACY —
+#     the boolean behaviour of the committed corpus is retained verbatim (compatibility)
+#     and the label asserts nothing; it is NEVER certified complete;
+#   * the extractor's own verdicts, matched EXACTLY: `nominal_direct` (underscore — its
+#     declared contract: w_dps is the plain direct Damage/ROF estimate, never a proven
+#     total) and `supported`/`conventional` -> unchanged numeric behaviour, labelled with
+#     the verdict itself;
+#   * "incomplete"/"unverified" -> WITHHELD: the raw direct estimate moves to `w_dps_raw`
+#     (kept separately for inspection, voting nowhere) and `w_dps` plus every `dps_vs_*` is
+#     withheld;
+#   * an EXPLICIT `w_dps_usable: False` -> withheld as well, whatever the label says;
+#   * any OTHER explicit status -> withheld too, labelled AS ITSELF, UNNORMALIZED. The
+#     contract is exact-string: an arbitrary unknown status is never harmlessly normalised
+#     into a trusted one nor folded into another verdict — coordination is conservative in
+#     the direction of trust: an explicit verdict the consumer does not know
+#     is not proven evidence. `evidence_counts` reports the mix so a rename upstream cannot
+#     hide here silently.
+#
+# ⛔ THE SLOT PREFIX NEVER GATES THE PRIMARY. A `wdummy_evidence: incomplete` describes the
+# DEMOTED weapon, not the one voted on here — DTA's X-O Power Suit: the promoted machine gun
+# keeps its own evidence verdict, and no comment here calls the promoted result a complete
+# UNIT measurement, because Westwood Primary/Secondary is TARGET-SELECTED and the tie the
+# slots have to each other is unresolved at extraction. Each slot keeps its verdict; the
+# unit-level fold is a later layer's decision. Evidence and diagnostics are CARRIED, never
+# silently dropped.
+LEGACY_EVIDENCE = "legacy-unassessed"
+# ⛔ EXACT STRINGS — the extractor's FINAL vocabulary. `nominal_direct` is one token with an
+# UNDERSCORE; a near-miss spelling (`nominal-direct`, `Nominal_Direct`) is NOT this verdict
+# and is withheld, reported by `evidence_counts`, never silently normalised.
+SUPPORTED_EVIDENCE = frozenset(("supported", "conventional", "nominal_direct"))
+WITHHELD_EVIDENCE = frozenset(("incomplete", "unverified"))
+# Evidence and status fields, per SLOT; and the UNFOLDED raw channel/provenance diagnostics.
+# The extractor's `relabel_weapon` spells the slot twins `w2_*`/`wdummy_*` (prefix + k[2:] of
+# the `w_*` keys, except `weapon` -> `<prefix>weapon`); identity fields ride along with the
+# statuses. Nothing numeric travels under these keys.
+EVIDENCE_SLOT_FIELDS = ("evidence", "evidence_reason", "dps_usable", "channel_ambiguity",
+                        "weapon")
+EVIDENCE_CHANNEL_FIELDS = ("ambient_damage", "railgun", "fire_particles", "spark_particles",
+                           "particle_system", "attached_particle_system")
+EVIDENCE_PASSTHROUGH = (
+    "w_evidence", "w_evidence_reason", "w_dps_usable", "w_channel_ambiguity",
+    "w_from_secondary", "w_demoted_primary",
+    # legacy extractor spellings kept for older in-memory fixtures
+    "w_dummy_primary", "w_railgun_projectile",
+    *(f"w_{f}" for f in EVIDENCE_CHANNEL_FIELDS),
+    *(f"{p}{f}" for p in ("w2_", "wdummy_")
+      for f in EVIDENCE_SLOT_FIELDS + EVIDENCE_CHANNEL_FIELDS),
+)
+
+
+def evidence_status(wev):
+    """The consumer's evidence label for one row's PRIMARY weapon — EXACT, never normalised.
+
+    An absent/None status is legacy-unassessed: ABSENT STATUS IS LEGACY. The label asserts
+    nothing about what was measured and is NEVER certified complete. Any explicit verdict
+    travels through verbatim so near-miss spellings cannot smuggle themselves into a
+    trusted class.
+    """
+    if not wev:
+        return LEGACY_EVIDENCE
+    return wev
+
+
+def apply_weapon_evidence(row, rec):
+    """Stamp `row` with `rec`'s weapon evidence; return the CONSUMER-side w_dps.
+
+    SHARED by `ini_rows` and `peer_hero_rows` — one policy, not two copies that drift (three
+    drifted copies of LINEAGE_MEMBERS is already on record here). Slot identity/status ride
+    along; slot statuses never gate the primary. Returns the w_dps the row may vote with:
+    the raw value when the evidence is legacy/absent or explicitly supported AND
+    `w_dps_usable` is not an explicit False, None when withheld — in which case the raw
+    direct estimate is retained on `row["w_dps_raw"]`.
+    """
+    for key in EVIDENCE_PASSTHROUGH:
+        v = rec.get(key)
+        if v is not None:          # a False travels too
+            row[key] = v
+    status = evidence_status(rec.get("w_evidence"))
+    row["w_evidence"] = status
+    if rec.get("w_dps_usable") is False:
+        row["w_evidence_reason"] = (rec.get("w_evidence_reason")
+                                    or f"dps_unusable: {status}")
+    dps = row.get("w_dps")
+    if (status in WITHHELD_EVIDENCE
+            or (status != LEGACY_EVIDENCE and status not in SUPPORTED_EVIDENCE)
+            or rec.get("w_dps_usable") is False):
+        if dps is not None:
+            row["w_dps_raw"] = dps
+            row["w_dps"] = None
+        return None
+    return dps
+
+
+def evidence_counts(rows):
+    """Counter of evidence statuses over rows ALREADY IN MEMORY — no corpus re-read.
+
+    A row with no extracted evidence field (Doc 1 / Doc 5 hand-or-doc rows) counts as
+    legacy-unassessed, so the reporting is honest without an expensive all-corpus loop.
+    """
+    return collections.Counter(r.get("w_evidence") or LEGACY_EVIDENCE for r in rows)
+
+
+# ── DOC 5 EVIDENCE COLUMNS (2026-09-10) ───────────────────────────────────────────────────────
+# The Doc 5 emitter (`extract_peer_units.py`) appends `Evidence | Reason` to every table so the
+# OpenRA peers can carry the SAME verdict vocabulary the INI corpus does (`nominal_direct` /
+# `incomplete` + reason). The table parser lowercases header cells and strips backticks, so the
+# parsed row dict `d` keys are `evidence` / `reason` / `usable`; this mapper turns one row into
+# the canonical rec shape `apply_weapon_evidence` consumes. The policy, its exact-string
+# vocabulary and its fail-closed direction are defined THERE — no second copy lives here.
+#
+# The `—` cell is the emitter's empty convention (`str(value or "—")`), NOT a status: a
+# placeholder or blank cell maps to ABSENT, and absent is legacy-unassessed. A legacy table
+# predating the columns has no `evidence` key at all — same destination — so the committed
+# corpus keeps its numeric behaviour verbatim until it is regenerated.
+#
+# ⛔ `usable`, WHEN the column exists, is parsed STRICTLY: exactly `True`/`true` or
+# `False`/`false`. A string "False" is a FALSE, never a truthy string, and any other non-empty
+# token (`yes`, `1`, a typo) FAILS CLOSED: the fold is withheld (`w_dps_usable: False`) with a
+# diagnostic reason, because a boolean the consumer cannot parse is not evidence the fold may
+# be consumed. An absent column, `—` cell or blank cell carries no usable verdict at all and
+# leaves the evidence label alone in charge. (An emitter that adds this column must write the
+# token `False` explicitly — the `or "—"` placeholder pattern would swallow a Python False.)
+DOC5_EMPTY_CELL = "—"
+DOC5_USABLE_TOKENS = {"true": True, "True": True, "false": False, "False": False}
+
+
+def doc5_evidence_record(d):
+    """One Doc 5 row's evidence headers -> the rec `apply_weapon_evidence` consumes.
+
+    Shared by `peer_rows` and the Doc 5 half of `peer_hero_rows` so both lanes map the
+    headers identically; legacy tables (no such headers) map to an EMPTY rec, which the
+    shared helper reads as legacy-unassessed with untouched numerics.
+    """
+    rec = {}
+    ev = (d.get("evidence") or "").strip()
+    if ev and ev != DOC5_EMPTY_CELL:
+        rec["w_evidence"] = ev
+    reason = (d.get("reason") or "").strip()
+    if reason and reason != DOC5_EMPTY_CELL:
+        rec["w_evidence_reason"] = reason
+    if "usable" in d:
+        cell = (d.get("usable") or "").strip()
+        if cell and cell != DOC5_EMPTY_CELL:
+            parsed = DOC5_USABLE_TOKENS.get(cell)
+            if parsed is None:      # malformed -> fail closed, with the refusal's reason
+                rec["w_dps_usable"] = False
+                note = f"dps_unusable: malformed_usable_cell {cell!r}"
+                rec["w_evidence_reason"] = (f"{rec['w_evidence_reason']}; {note}"
+                                            if rec.get("w_evidence_reason") else note)
+            else:
+                rec["w_dps_usable"] = parsed
+    return rec
+
+
 def ini_rows():
     """The eight Westwood/Ares mods in the peer-row shape, from `ini_corpus.json`."""
     if not INI_CORPUS.exists():
@@ -366,7 +540,6 @@ def ini_rows():
         if not r.get("cost") or r.get("build_limit") or not r.get("buildable", True):
             continue
         spd, turn = r.get("speed"), r.get("turn_speed")
-        dps = r.get("w_dps")
         row = {"source": r["source"], "raw_source": r["source"],
                "id": r.get("id", ""), "name": r.get("name", ""),
                "type": kind,
@@ -374,13 +547,17 @@ def ini_rows():
                # layer splits on that separator (`peer_factions`).
                "faction": r.get("faction", ""),
                "turreted": r.get("turreted"),
+               "weapon": r.get("weapon"),
                "hp": r.get("hp"), "speed": spd,
                "turn_speed": turn,
                "turn_ratio": (spd / turn) if (spd and turn) else None,
                "cost": r.get("cost"),
                "w_range": r.get("w_range"), "w_damage": r.get("w_damage"),
                "w_burst": r.get("w_burst"), "w_reload": r.get("w_reload"),
-               "w_dps": dps}
+               "w_dps": r.get("w_dps")}
+        # Evidence BEFORE any consumer value is derived from the DPS (shared helper; see
+        # the policy block above `LEGACY_EVIDENCE`).
+        dps = apply_weapon_evidence(row, r)
         vs = armor.get((r["source"], r.get("id"))) or {}
         for lad in LADDERS:
             frac = vs.get(lad)
@@ -464,9 +641,36 @@ def is_ai_only(row, source_ids=None):
     return False
 
 
+def structured_peer_rows(corpora, *, heroes=False):
+    """Adapt stable numeric fields without discarding nested source evidence."""
+    rows = []
+    for source, (_meta, records) in corpora.items():
+        if source in LINEAGE_MEMBERS:
+            continue
+        for record in records:
+            if bool(is_hero_limit(record.get("limit"))) != heroes:
+                continue
+            row = dict(record)
+            row.pop("record", None)
+            row.update(source=source, raw_source=source)
+            if heroes:
+                row["hero"] = is_one_off(record.get("limit"))
+            speed, turn = row.get("speed"), row.get("turn_speed")
+            row["turn_ratio"] = speed / turn if speed and turn else None
+            if row.get("type") == "building" and row.get("w_damage"):
+                row["type"] = "defense"
+            dps = apply_weapon_evidence(row, record)
+            for ladder in LADDERS:
+                fraction = record.get(f"eff_vs_{ladder}")
+                row[f"dps_vs_{ladder}"] = dps * fraction if dps and fraction else None
+            rows.append(row)
+    return rows
+
+
 def peer_rows():
     """Doc 5 rows with type, raw HP/speed/turn — the chassis corpus, after lineage de-dup."""
-    rows, source, header = [], None, None
+    corpora = peer_corpus.load(ROOT)
+    rows, source, header = structured_peer_rows(corpora), None, None
     dropped_lineage = peer_rows.dropped = set()
     text = (ROOT / "docs/design/ORIGINAL_UNITS_PEER_OPENRA.md").read_text(encoding="utf-8")
     for line in text.splitlines():
@@ -474,7 +678,7 @@ def peer_rows():
             source = line[3:].split("(")[0].strip()
             header = None
             continue
-        if not source or not line.startswith("|"):
+        if not source or source in corpora or not line.startswith("|"):
             continue
         cells = [c.strip().strip("`") for c in line.split("|")[1:-1]]
         if not cells:
@@ -498,15 +702,10 @@ def peer_rows():
         wep = {k: num(c) for k, c in (("w_range", "range"), ("w_damage", "dmg"),
                                       ("w_burst", "burst"), ("w_reload", "reload"),
                                       ("w_dps", "dps"))}
-        for lad in LADDERS:
-            # NB the header row is lowercased on read, so the column key is `vsinf`, not `vsINF`.
-            # Looking it up in the document's original case silently yields None for every row —
-            # which is how this first reported 0 armor-aware rows out of 2,256.
-            frac = num(f"vs{lad.lower()}")
-            wep[f"dps_vs_{lad}"] = (wep["w_dps"] * frac) if (wep.get("w_dps") and frac) else None
         limit = num("limit")
         if limit:                     # a mod's one-off epic/hero — see POPULATION RULE below
-            continue
+            continue                  # peer_hero_rows() picks these up under the SAME
+                                      # evidence policy, so no verdict is lost on the hero lane
         # ⛔ AN ARMED BUILDING IS A DEFENCE (2026-09-03). Found when the maintainer asked why
         # Mental Omega and CnC Reloaded showed no defences: the corpus HAS them, typed `building`.
         # 73 defence-named ARMED rows (Obelisk of Light, Flamer Tower, Gattling Tower...) sat in
@@ -525,18 +724,31 @@ def peer_rows():
             # the lineage's single vote.
             dropped_lineage.add(source)
             continue
-        rows.append({"source": source, "raw_source": source,
-                     "id": d.get("id", ""), "name": d.get("unit", ""),
-                     "type": d.get("type", "other"),
-                     # ⚠ SAME CLASS OF BUG AS `cost` ABOVE: the faction column was added to the
-                     # document by `extract_peer_units.py` and dropped here on read, so the
-                     # routing ruling had no data to route on. A column that exists upstream and
-                     # is not carried is indistinguishable from a column that was never extracted.
-                     "faction": d.get("faction", ""),
-                     "turreted": (d.get("turret", "").lower() == "y"),
-                     "hp": hp, "speed": spd, "turn_speed": turn,
-                     "turn_ratio": (spd / turn) if (spd and turn) else None,
-                     "cost": cost, **wep})
+        row = {"source": source, "raw_source": source,
+               "id": d.get("id", ""), "name": d.get("unit", ""),
+               "type": d.get("type", "other"),
+               # ⚠ SAME CLASS OF BUG AS `cost` ABOVE: the faction column was added to the
+               # document by `extract_peer_units.py` and dropped here on read, so the
+               # routing ruling had no data to route on. A column that exists upstream and
+               # is not carried is indistinguishable from a column that was never extracted.
+               "faction": d.get("faction", ""),
+               "turreted": (d.get("turret", "").lower() == "y"),
+               "hp": hp, "speed": spd, "turn_speed": turn,
+               "turn_ratio": (spd / turn) if (spd and turn) else None,
+               "cost": cost, **wep}
+        # Evidence BEFORE any consumer value is derived from the DPS — the same shared helper
+        # `ini_rows` uses (see the policy block above `LEGACY_EVIDENCE`; `doc5_evidence_record`
+        # maps the emitter's Evidence/Reason/Usable headers onto it). The armor ladders are
+        # then derived from the dps THAT policy returns, so a withheld weapon withholds every
+        # `dps_vs_*` with it, and the raw direct estimate stays on `w_dps_raw`.
+        dps = apply_weapon_evidence(row, doc5_evidence_record(d))
+        for lad in LADDERS:
+            # NB the header row is lowercased on read, so the column key is `vsinf`, not `vsINF`.
+            # Looking it up in the document's original case silently yields None for every row —
+            # which is how this first reported 0 armor-aware rows out of 2,256.
+            frac = num(f"vs{lad.lower()}")
+            row[f"dps_vs_{lad}"] = (dps * frac) if (dps and frac) else None
+        rows.append(row)
     # The extracted INI corpus joins here, and it is read FIRST: `doc1_rows()` asks it which
     # sources it covers, so the order is a dependency, not a preference.
     for row in ini_rows():
@@ -951,7 +1163,8 @@ def peer_hero_rows():
     peer_rows(), which excludes them. Wiring them into distributions would
     re-enter the epic into the vehicle ceiling.
     """
-    rows = []
+    corpora = peer_corpus.load(ROOT)
+    rows = structured_peer_rows(corpora, heroes=True)
     # Doc 5 heroes: rows with `limit` present (peer_rows drops at line 508)
     source, header = None, None
     text = (ROOT / "docs/design/ORIGINAL_UNITS_PEER_OPENRA.md").read_text(encoding="utf-8")
@@ -960,7 +1173,7 @@ def peer_hero_rows():
             source = line[3:].split("(")[0].strip()
             header = None
             continue
-        if not source or not line.startswith("|"):
+        if not source or source in corpora or not line.startswith("|"):
             continue
         cells = [c.strip().strip("`") for c in line.split("|")[1:-1]]
         if not cells:
@@ -987,19 +1200,26 @@ def peer_hero_rows():
         wep = {k: num(c) for k, c in (("w_range", "range"), ("w_damage", "dmg"),
                                       ("w_burst", "burst"), ("w_reload", "reload"),
                                       ("w_dps", "dps"))}
-        for lad in LADDERS:
-            frac = num(f"vs{lad.lower()}")
-            wep[f"dps_vs_{lad}"] = (wep["w_dps"] * frac) if (wep.get("w_dps") and frac) else None
         if d.get("type", "").strip().lower() == "building" and wep.get("w_damage"):
             d["type"] = "defense"
-        rows.append({"source": source, "raw_source": source,
-                     "id": d.get("id", ""), "name": d.get("unit", ""),
-                     "type": d.get("type", "other"),
-                     "faction": d.get("faction", ""),
-                     "turreted": (d.get("turret", "").lower() == "y"),
-                     "hp": hp, "speed": spd, "turn_speed": turn,
-                     "turn_ratio": (spd / turn) if (spd and turn) else None,
-                     "cost": cost, "hero": is_one_off(limit), **wep})
+        row = {"source": source, "raw_source": source,
+               "id": d.get("id", ""), "name": d.get("unit", ""),
+               "type": d.get("type", "other"),
+               "faction": d.get("faction", ""),
+               "turreted": (d.get("turret", "").lower() == "y"),
+               "hp": hp, "speed": spd, "turn_speed": turn,
+               "turn_ratio": (spd / turn) if (spd and turn) else None,
+               "cost": cost, "hero": is_one_off(limit), **wep}
+        # The evidence policy, shared with `ini_rows` and `peer_rows`, BEFORE any `dps_vs_*`
+        # is derived. `doc5_evidence_record` maps the emitter's Evidence/Reason/Usable
+        # headers: a table WITH those columns gates these rows exactly as it gates the
+        # ordinary ones; a legacy table without them maps to absent -> legacy-unassessed and
+        # keeps its existing numeric behaviour.
+        dps = apply_weapon_evidence(row, doc5_evidence_record(d))
+        for lad in LADDERS:
+            frac = num(f"vs{lad.lower()}")
+            row[f"dps_vs_{lad}"] = (dps * frac) if (dps and frac) else None
+        rows.append(row)
     # INI heroes: rows with build_limit present (ini_rows drops at line 366)
     if INI_CORPUS.exists():
         armor = _ini_armor_index()
@@ -1018,19 +1238,21 @@ def peer_hero_rows():
             if r["source"] in LINEAGE_MEMBERS:
                 continue
             spd, turn = r.get("speed"), r.get("turn_speed")
-            dps = r.get("w_dps")
             row = {"source": r["source"], "raw_source": r["source"],
                    "id": r.get("id", ""), "name": r.get("name", ""),
                    "type": kind,
                    "faction": r.get("faction", ""),
                    "turreted": r.get("turreted"),
+                   "weapon": r.get("weapon"),
                    "hp": r.get("hp"), "speed": spd,
                    "turn_speed": turn,
                    "turn_ratio": (spd / turn) if (spd and turn) else None,
                    "cost": r.get("cost"), "hero": is_one_off(bl),
                    "w_range": r.get("w_range"), "w_damage": r.get("w_damage"),
                    "w_burst": r.get("w_burst"), "w_reload": r.get("w_reload"),
-                   "w_dps": dps}
+                   "w_dps": r.get("w_dps")}
+            # Same shared evidence policy as `ini_rows`, before any `dps_vs_*` derives.
+            dps = apply_weapon_evidence(row, r)
             vs = armor.get((r["source"], r.get("id"))) or {}
             for lad in LADDERS:
                 frac = vs.get(lad)
@@ -1168,6 +1390,12 @@ def main():
         for source in dropped:
             print(f"lineage-collapsed   : {source} -> {collapse[source]}")
     print(f"Cameo rows          : {len(cameo)}")
+    counts = evidence_counts(peers)
+    print("weapon evidence     : "
+          + ", ".join(f"{k}={v}" for k, v in sorted(counts.items()))
+          + "   (counts EVERY peer row - OpenRA Doc 5 + INI corpus + Doc 1; "
+            "legacy-unassessed = no extractor verdict present, absent status is legacy, "
+            "never certified)")
 
     # index peers by normalized name so a Cameo actor can find its counterparts
     by_name = collections.defaultdict(list)

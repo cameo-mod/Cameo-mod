@@ -1,4 +1,4 @@
-scanned 24384 resolved warhead nodes across 2897 weapons
+scanned 24386 resolved warhead nodes across 2900 weapons
 
 DEAD FIELDS — written in yaml, silently discarded by FieldLoader.Load:
 

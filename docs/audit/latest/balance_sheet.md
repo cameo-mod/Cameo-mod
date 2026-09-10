@@ -84,7 +84,7 @@ ambiguous: Rifle Infantry -> ra1_allies_rifleinfantry, ra1_soviets_rifleinfantry
 | Eden Laser Lynx | eden_lynx_laser | Damage 8000 vs game 8629 |
 | Eden Laser Tiger | eden_tiger_laser | Damage 10000 vs game 10629 |
 | GDI Mammoth Tank | td_gdi_mammothtank | Damage 32000 vs game 32800 |
-| Soviet Mammoth Tank | ra1_soviets_sovietmammothtank | Damage 48000 vs game 193248 |
+| Soviet Mammoth Tank | ra1_soviets_mammothtank | Damage 48000 vs game 193248 |
 | Hovercraft Flametank | japan_hovercraftflametank | HP 60000 vs game 120000 |
 | Heavy Autogun Tank | ordos_heavyautoguntank | Damage 19200 vs game 48116 |
 | Deviator Tank | ordos_deviatortank | Damage 40000 vs game 41010 |
@@ -112,7 +112,7 @@ unmatched: Light Tank Mk2, Sheridan, Chi-Ha Medium Tank, Shrine Tank, Ix Combat 
 ambiguous: Lunar Tiger -> schwarzermond_lunartiger, schwarzermond_promotion_lunartiger | Quantum Tank -> steelconsortium_promotion_quantumtank, steelconsortium_quantumtank | Laser Tank -> ordos_lasertank, schwarzermond_lasertank, schwarzermond_promotion_lasertank | Katy Tank -> steelconsortium_katytank, steelconsortium_promotion_katytank
 
 
-## Vehicles: 98 matched, 47 mismatched, 50 unmatched, 9 ambiguous
+## Vehicles: 97 matched, 47 mismatched, 51 unmatched, 9 ambiguous
 
 | sheet unit | actor | mismatches |
 |---|---|---|

@@ -1126,14 +1126,7 @@
    }
   },
   "naval": {
-   "CNCRSS": {
-    "shield_always_on": false,
-    "shield_gated_on_upgrade": false,
-    "shield_pool": 50000.0,
-    "tier_chain_cost": 9300.0,
-    "tier_multiplier": 1.0
-   },
-   "CNCSS": {
+   "td_nod_attacksubmarine": {
     "armaments": [
      {
       "avg_versus": 1.0552,
@@ -1188,7 +1181,42 @@
     "tier_chain_cost": 9300.0,
     "tier_multiplier": 1.0
    },
-   "nodlasercorvette": {
+   "td_nod_ballisticmissilesubmarine": {
+    "armaments": [
+     {
+      "avg_versus": 1.0832,
+      "damage_total": 50000.0,
+      "eff_reload": 250.0,
+      "effective_damage": 30059.93,
+      "effective_dps": 170.82,
+      "effective_per_shot": 21352.22,
+      "factor_deadzone": 0.9599,
+      "factor_range": 1.1225,
+      "factor_targets": 0.95,
+      "footprint": 1.103,
+      "k": 0.4172,
+      "k_context": 0.427,
+      "k_flat": 0.4172,
+      "k_flat_context": 0.427,
+      "overkill": 0.9588,
+      "pct_absolute": 0.0,
+      "pct_absolute_context": 0.0,
+      "reliability": 0.3254,
+      "sigma": 1465.2,
+      "slot": "Armament",
+      "weapon": "HonestJohn"
+     }
+    ],
+    "physical_state_multiplier": 1.1853,
+    "physical_state_weapon": "HonestJohn",
+    "physical_state_weight": 0.7411,
+    "shield_always_on": false,
+    "shield_gated_on_upgrade": false,
+    "shield_pool": 200000.0,
+    "tier_chain_cost": 11800.0,
+    "tier_multiplier": 0.782
+   },
+   "td_nod_lasercorvette": {
     "armaments": [
      {
       "avg_versus": 1.0098,
@@ -1246,40 +1274,12 @@
     "tier_chain_cost": 21800.0,
     "tier_multiplier": 0.4015
    },
-   "ssmsub": {
-    "armaments": [
-     {
-      "avg_versus": 1.0832,
-      "damage_total": 50000.0,
-      "eff_reload": 250.0,
-      "effective_damage": 30059.93,
-      "effective_dps": 170.82,
-      "effective_per_shot": 21352.22,
-      "factor_deadzone": 0.9599,
-      "factor_range": 1.1225,
-      "factor_targets": 0.95,
-      "footprint": 1.103,
-      "k": 0.4172,
-      "k_context": 0.427,
-      "k_flat": 0.4172,
-      "k_flat_context": 0.427,
-      "overkill": 0.9588,
-      "pct_absolute": 0.0,
-      "pct_absolute_context": 0.0,
-      "reliability": 0.3254,
-      "sigma": 1465.2,
-      "slot": "Armament",
-      "weapon": "HonestJohn"
-     }
-    ],
-    "physical_state_multiplier": 1.1853,
-    "physical_state_weapon": "HonestJohn",
-    "physical_state_weight": 0.7411,
+   "td_nod_transportsubmarine": {
     "shield_always_on": false,
     "shield_gated_on_upgrade": false,
-    "shield_pool": 200000.0,
-    "tier_chain_cost": 11800.0,
-    "tier_multiplier": 0.782
+    "shield_pool": 50000.0,
+    "tier_chain_cost": 9300.0,
+    "tier_multiplier": 1.0
    }
   },
   "promotions": {

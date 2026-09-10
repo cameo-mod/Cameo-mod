@@ -6,12 +6,12 @@
    4x  hp=   50000 sp=   64 cost=   750  atreides_missiletank, atreides_mongoose, corrino_missiletank, missile_tank
    3x  hp=   40000 sp=   42 cost=   200  atreides_rockettrooper, corrino_trooper, harkonnen_rockettrooper
    3x  hp=   12000 sp=   48 cost=   300  ixian_rockettrooper, ordos_rockettrooper, trooper
-   3x  hp=    5000 sp=  100 cost=   200  ra1_soviets_actordogname, ra2_allies_attackdog, ra2_soviets_attackdog
+   3x  hp=    5000 sp=  100 cost=   200  ra1_soviets_dog, ra2_allies_dog, ra2_soviets_dog
    3x  hp=   10000 sp=   55 cost=   600  forgotten_engineer, ts_gdi_engineer, ts_nod_engineer
    2x  hp=   50000 sp=  192 cost=  1200  corrino_gunship, harkonnen_gunship
    2x  hp=   50000 sp=  150 cost=  1000  futuretech_twister, steelconsortium_twister
    2x  hp=   27500 sp=  150 cost=   400  tkm_as42, ts_gdi_pitbull
-   2x  hp=   10000 sp=   55 cost=   300  ra1_allies_alliedrocketsoldier, ra1_soviets_sovietrocketsoldier
+   2x  hp=   10000 sp=   55 cost=   300  ra1_allies_alliedrocketsoldier, ra1_soviets_rocketsoldier
    2x  hp=    9000 sp=   50 cost=   300  td_gdi_rocketsoldier, td_nod_rocketsoldier
    2x  hp=   12000 sp=   50 cost=   300  forgotten_rocketinfantry, ts_nod_rocketinfantry
    2x  hp=   16000 sp=   60 cost=   120  ts_gdi_lightinfantry, ts_nod_lightinfantry

@@ -266,7 +266,7 @@ def shape_similarity(a, b):
 
 
 # ⛔ ORIGINALS OUTRANK VARIANTS (maintainer 2026-09-07). Cameo ships more units than the source
-# games do: `ra1_soviets_sovietmammothtank` is RA1's Mammoth, and `ra1_soviets_siegemammothtank`
+# games do: `ra1_soviets_mammothtank` is RA1's Mammoth, and `ra1_soviets_siegemammothtank`
 # is a Cameo ADD-ON built on top of it. Both normalise to something CONTAINING "mammothtank", so
 # both land in the same name bucket and the reference went to whichever won on role/cost — which
 # was the add-on. The original is the unit the reference IS; the add-on is a unit the reference
@@ -303,7 +303,7 @@ def variant_rank(cameo_id, peer_name):
     # ⛔ THE TEST IS INVERTED FROM WHAT IT WAS, and the old form was whack-a-mole. It asked
     # whether the leftover text appears in a hand-kept VARIANT_WORDS list — which holds "flame"
     # but not "fire", so `ra1_soviets_firerocketsoldier` was ranked a base unit and beat the
-    # actual `ra1_soviets_sovietrocketsoldier` to Combined Arms' E3 and DTA's E3S. The real RA1
+    # actual `ra1_soviets_rocketsoldier` to Combined Arms' E3 and DTA's E3S. The real RA1
     # rocket soldier was left holding an Impaler and a Grenadier.
     #
     # A closed list of variant words can never be complete; the list of FACTION words can, because
@@ -311,7 +311,17 @@ def variant_rank(cameo_id, peer_name):
     # anything left that is not a faction prefix makes this a VARIANT. `sovietrocketsoldier`
     # leaves "soviet" and is the base; `firerocketsoldier` leaves "fire" and is not.
     residue = tail.replace(peer, "")
-    for w in FACTION_WORDS:
+    # ⛔ DETERMINISM (found 2026-09-09, regenerating for the Katyusha override). FACTION_WORDS is
+    # a frozenset, so iteration order is hash-randomized PER PROCESS — and the words OVERLAP:
+    # "japan" is a prefix of "japanese", likewise soviet/soviets, german/germany, america/american
+    # and russia/russian. Removing the shorter one first eats the longer's tail ("japanese" ->
+    # "ese", "germany" -> "y"), so the same (actor, peer) pair scored variant 1 in one process and
+    # variant 0 in the next; `japan_japaneseflamethrower | RA2 Reborn` is the row it was caught on.
+    # Sort longest-first, lexical among equals, so the longest word always consumes first and the
+    # answer is stable whatever the seed. This cannot invent a third outcome: for any overlapping
+    # pair the only two orders that ever existed are shortest-first and longest-first, so the
+    # fixed order is one of the two the data has already been flipping between.
+    for w in sorted(FACTION_WORDS, key=lambda word: (-len(word), word)):
         residue = residue.replace(w, "")
     return 1 if not residue else 0
 
@@ -343,7 +353,7 @@ def score(cam, rec, peer, cam_cost_pct, peer_cost_pct, home, cam_shape=None, pee
     # that carries NO damage field at all sailed past it. Every unarmed reference in the corpus is
     # exactly that shape: OpenRA TD's Mobile Construction Vehicle and Combined Arms' Thief both
     # have `w_damage=None`, and both were duly assigned to armed Cameo units (an MCV to
-    # `td_gdi_mammothtankmkiii`, a Thief to `ra1_soviets_sovietrocketsoldier`) on shape similarity
+    # `td_gdi_mammothtankmkiii`, a Thief to `ra1_soviets_rocketsoldier`) on shape similarity
     # alone. A support unit sitting in the same place in its roster as a tank does in ours is a
     # coincidence of distribution, not a counterpart.
     # ⚠ AND "UNARMED" MEANS NO WEAPON AT ALL, NOT A MISSING DAMAGE NUMBER. Refusing on
@@ -507,7 +517,7 @@ def assign(only_class=None, routing=True):
     # ⛔ AN ORIGINAL CLAIMS BEFORE AN EXPANSION EVER BIDS (maintainer, 2026-09-07).
     #
     # `ra1_soviets_firerocketsoldier` — a Cameo addition — took Combined Arms' `E3` and DTA's
-    # `E3S`, both Rocket Soldiers, while `ra1_soviets_sovietrocketsoldier`, the actual RA1 unit
+    # `E3S`, both Rocket Soldiers, while `ra1_soviets_rocketsoldier`, the actual RA1 unit
     # those rows ARE, was left with an Impaler and a Grenadier. The greedy did nothing wrong by
     # its own lights: string similarity has no idea that "soviet" is a faction prefix and "fire"
     # is a variant prefix, so the expansion scores 0.867 against "Rocket Soldier" and the original
@@ -811,9 +821,9 @@ REFERENCE_OVERRIDES = {
     ("td_gdi_rocketsoldier", "DTA Enhanced"): "E3",        # DTA calls it "Bazooka"; no shared word
     ("td_nod_rocketsoldier", "DTA Enhanced"): "E3N",       # the Nod-side row of the same pair
     ("td_nod_apacheattackhelicopter", "OpenRA Tiberian Dawn"): "HELI",   # named "Apache Longbow"
-    ("ra1_soviets_actordogname", "Combined Arms"): "DOG",
-    ("ra1_soviets_actordogname", "OpenRA Red Alert"): "DOG",
-    ("ra1_soviets_actordogname", "DTA Enhanced"): "DOG",
+    ("ra1_soviets_dog", "Combined Arms"): "DOG",
+    ("ra1_soviets_dog", "OpenRA Red Alert"): "DOG",
+    ("ra1_soviets_dog", "DTA Enhanced"): "DOG",
     # Tiberian Dawn:
     ("td_gdi_archerartillery", "DTA Enhanced"): "DISCARTY",   # "Disc Launcher", GDI
     ("td_gdi_archerartillery", "Combined Arms"): "THWK",      # Tomahawk Launcher
@@ -840,7 +850,7 @@ REFERENCE_OVERRIDES = {
     # Red Alert, Soviets:
     # ⚠ CA ships TWO rows named "SAM Site" with identical faction lists — `NSAM` (Nod's) and `SAM`
     # (the Soviet one). The NAME cannot separate them and the id can, exactly like the AA Gun pair.
-    ("ra1_soviets_sovietsamsite", "Combined Arms"): "SAM",
+    ("ra1_soviets_samsite", "Combined Arms"): "SAM",
     ("td_nod_samsite", "Combined Arms"): "NSAM",
     ("ra1_soviets_zapper", "Combined Arms"): "TTRP",         # Tesla Trooper
     ("ra1_soviets_btr80", "Combined Arms"): "BTR",           # see the note below on flaktruck
@@ -861,6 +871,16 @@ REFERENCE_OVERRIDES = {
     # MFLAK frees SHILKA for the Soviet gatling tank, so both get a real row and the
     # one-row-one-actor rule holds. The maintainer named this one; it is not a workaround.
     ("ra1_allies_alliedheavyaatank", "DTA Enhanced"): "MFLAK",   # "Anti-Aircraft Truck", Allies
+
+    # ── Round six, 2026-09-09. Aedis's DM 22:33 under Blackrobe's overnight authority: the
+    # V1 Rocket Truck maps to Combined Arms' KATY and is renamed Katyusha for players. The
+    # matcher can never find this pairing by itself — CA names the row "Katyusha", which shares
+    # no word with `v1rockettruck` — and the actor currently holds no name-backed reference at
+    # all (its greedy proposals were all struck). Verified before writing, per the override
+    # contract: the row exists in the de-duplicated pool (Combined Arms, vehicle, hp 13000,
+    # cost 750, factions include `soviet`), `faction_routes.allows("ra1_soviets", row)` admits
+    # it, and NO actor held CA KATY in the regenerated assignment — so this displaces nobody.
+    ("ra1_soviets_v1rockettruck", "Combined Arms"): "KATY",
 }
 
 

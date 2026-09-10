@@ -6,7 +6,7 @@ LEGAL shapes:
      16  2 types, 2 adjacent levels - hybrid AND between-tier (budget 4)
       1  1 type, 2 ADJACENT levels - between-tier mix
 
-   1034  weapons skipped — at least one LEGACY-named main warhead (no Family_Level), so the budget cannot be judged until they are 3-way split
+   1036  weapons skipped — at least one LEGACY-named main warhead (no Family_Level), so the budget cannot be judged until they are 3-way split
 
 VIOLATIONS by shape:
      19  3 LEVELS

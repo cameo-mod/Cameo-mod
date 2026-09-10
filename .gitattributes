@@ -6,5 +6,8 @@
 *.sln eol=lf
 * text=lf
 
+# Structured reference payloads are byte-hashed by their selection manifest.
+docs/reference/peer_corpus/*.jsonl -text
+
 # Custom for Visual Studio
 *.cs     diff=csharp

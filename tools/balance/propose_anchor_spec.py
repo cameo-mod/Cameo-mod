@@ -47,9 +47,10 @@ def source_provenance(root):
     # audit_three_way_split.main_warheads drives the displayed W24 stacked-main count.
     data_paths = [rd.INI_CORPUS, rd.INI_ARMOR, rd.syn.DOC1,
                   root / "docs/design/ORIGINAL_UNITS_PEER_OPENRA.md"]
+    data_paths.extend(rd.peer_corpus.input_paths(root))
     modules = [pathlib.Path(module.__file__) for module in
                (virtual, fit_class, formula, readiness, audit_three_way_split, extract_stats,
-                miniyaml, rd, rt, rt.fr, rd.reference_lineages, rd.syn,
+                miniyaml, rd, rt, rt.fr, rd.reference_lineages, rd.peer_corpus, rd.syn,
                 virtual.class_membership, fit_class.tier_chain, firepower)]
     modules.extend([pathlib.Path(__file__), pathlib.Path(diagnostic_output.__file__)])
     revision = subprocess.run(["git", "rev-parse", "HEAD"], cwd=root, text=True,

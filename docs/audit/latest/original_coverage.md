@@ -1,9 +1,11 @@
 # Original-unit reference coverage
 
-## O1 — holds an OpenRA original but fewer than three sources: **8** (ratchet 12)
+## O1 — holds an OpenRA original but fewer than three sources: **10** (ratchet 12)
 
+   ra1_allies_alliedlighttank               has DTA Enhanced, OpenRA Red A MISSING Combined Arms
    ra1_allies_blackhawk                     has OpenRA Red A               MISSING Combined Arms, DTA Enhanced
    ra1_allies_camopillbox                   has Combined Arm, OpenRA Red A MISSING DTA Enhanced
+   ra1_soviets_mammothtank                  has Combined Arm, OpenRA Red A MISSING DTA Enhanced
    ra2_allies_engineer                      has Romanov's Ve               MISSING Combined Arms, DTA Enhanced
    ra2_allies_grizzlytank                   has RA2 Reborn, Romanov's Ve   MISSING Combined Arms, DTA Enhanced
    ra2_soviets_engineer                     has Romanov's Ve               MISSING Combined Arms, DTA Enhanced

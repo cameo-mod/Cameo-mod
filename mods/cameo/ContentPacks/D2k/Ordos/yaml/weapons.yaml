@@ -2520,10 +2520,6 @@ WormSwallow:
 		Damage: 100
 		InvalidTargets: Structure, Air, DevourImmune
 
-OrniBombC:
-	Inherits: OrniBomb
-	Range: 2500
-
 SardDeath:
 	Warhead@1Dam: SpreadDamage
 		Damage: 3000
@@ -2606,16 +2602,6 @@ d2k_sardaukar_elite:
 			Medium: 75
 			Heavy: 50
 			Concrete: 10
-
-OrniGunC:
-	Inherits: OrniGun
-	Range: 6000
-	ValidTargets: Ground, Air
-	Warhead@1Dam: SpreadDamage
-		ValidTargets: Ground, Air
-		Damage: 800
-
-	MinRange: 1200
 
 Rocketeer:
 	Inherits: ^MG

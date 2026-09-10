@@ -12,6 +12,31 @@ in §0 below.
 
 ## §0 — Maintainer rulings, 2026-09-05. Do not re-litigate these.
 
+### September 9 follow-up rulings
+
+Aedis's direct instructions for the Japan pilot update the execution of the earlier
+rules, not their raw-source or one-roster/one-vote safeguards:
+
+- Initial reference placement includes **stats and price**. Classic original prices
+  may change; subsequent fitting may adjust stats and price jointly on the existing
+  permitted grids. A near-zero formula delta is not gameplay validation.
+- Implement source-relative versus fitted-target separation; freeze pilot calibration
+  inputs; expose counterpart/analogue/extrapolation status and disagreement; validate
+  withheld references; and compare representative counter/tier/TTK relationships before
+  recommending live changes. These are distinct checks, not one numeric acceptance score.
+- MCVs and harvesters are collection-only/manual-review subjects. Harvesters need their
+  separate formula. Neither may silently enter automatic combat-unit fitting.
+- Extract RA3, Dune II and Emperor reference evidence; obtain versioned Spice Wars data.
+  Exact DTA re-extraction awaits the files Aedis will provide. Unsupported damage channels
+  and unresolved source dependencies must remain visible and must not become complete
+  numeric evidence merely because a column is present.
+
+Instruction timestamps, implementation boundaries and pending evidence are recorded in
+[the September 9 ruling record](../balance/review/AEDIS_OVERNIGHT_RULINGS_20260909.md).
+These instructions do not sign off anchors or authorize merging PRs.
+
+### Earlier rulings
+
 | # | ruling |
 |---|---|
 | R1 | **Class anchors become VIRTUAL.** No class is anchored to a real actor any more. An anchor is a pure number at the **100% point of the price band** (the band is `FORMULA_V2.md` §3's 50–250% envelope of `C₀`). |

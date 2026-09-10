@@ -991,7 +991,7 @@ SCUDNUKEThermobaric:
 		ContrailStartColor: FFBB8844
 		ContrailEndColor: 33221100
 
-FLAK-23-AG:
+ra1_soviets_flaktruck_flak_cannon:
 	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@wh2: ^Warhead_Flak_Medium
@@ -1014,8 +1014,8 @@ FLAK-23-AG:
 		PercentageScale: 9975
 	-Warhead@Bullet_Medium:
 	-Warhead@Flak_Medium:
-FLAK-23-AA:
-	Inherits: FLAK-23-AG
+ra1_soviets_flaktruck_flak_cannon_AA:
+	Inherits: ra1_soviets_flaktruck_flak_cannon
 	Range: 8118
 	ValidTargets: Air
 	Warhead@Bullet_Medium:
@@ -1029,7 +1029,7 @@ FLAK-23-AA:
 	-Warhead@Bullet_Medium:
 	-Warhead@Flak_Medium:
 
-BTRMachineGun:
+ra1_soviets_btr80_machinegun:
 	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
@@ -1051,8 +1051,8 @@ BTRMachineGun:
 		PercentageScale: 9975
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-BTRMachineGun_AA:
-	Inherits: BTRMachineGun
+ra1_soviets_btr80_machinegun_AA:
+	Inherits: ra1_soviets_btr80_machinegun
 	Range: 8181
 	ValidTargets: Air
 	Warhead@Bullet_Light: AreaDamage
@@ -1065,7 +1065,7 @@ BTRMachineGun_AA:
 		PercentageScale: 9975
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-BTRTeslaMachineGun:
+ra1_soviets_btr80_machinegun_tesla:
 	Inherits@finalmain: ^Compatibility_Tesla_HeavyFlat
 	Inherits: ^Warhead_MissileAP_Light
 	Inherits@2: ^Warhead_Tesla_Heavy
@@ -1099,8 +1099,8 @@ BTRTeslaMachineGun:
 	-Warhead@MissileAP_Light:
 	-Warhead@Tesla_Heavy:
 
-BTRTeslaMachineGunArc:
-	Inherits: BTRTeslaMachineGun
+ra1_soviets_btr80_machinegun_tesla_arc:
+	Inherits: ra1_soviets_btr80_machinegun_tesla
 	Warhead@TeslaArc: FireShrapnel
 		Weapon: BTRTeslaMachineGunArcFragment1
 		Amount: 1
@@ -1113,7 +1113,7 @@ BTRTeslaMachineGunArc:
 		PercentageScale: 9975
 
 BTRTeslaMachineGunArcFragment1:
-	Inherits: BTRTeslaMachineGunArc
+	Inherits: ra1_soviets_btr80_machinegun_tesla_arc
 	Range: 2727
 	Warhead@Tesla_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
@@ -1121,8 +1121,8 @@ BTRTeslaMachineGunArcFragment1:
 		PercentageScale: 9975
 	-Warhead@TeslaArc:
 
-BTRTeslaMachineGun_AA:
-	Inherits: BTRTeslaMachineGun
+ra1_soviets_btr80_machinegun_tesla_AA:
+	Inherits: ra1_soviets_btr80_machinegun_tesla
 	Range: 8181
 	ValidTargets: Air
 	Warhead@Tesla_HeavyFlatCompatibility:
@@ -1130,8 +1130,8 @@ BTRTeslaMachineGun_AA:
 		Damage: 4000
 		PercentageScale: 9975
 
-BTRTeslaMachineGunArc_AA:
-	Inherits: BTRTeslaMachineGun_AA
+ra1_soviets_btr80_machinegun_tesla_arc_AA:
+	Inherits: ra1_soviets_btr80_machinegun_tesla_AA
 	Warhead@TeslaArc: FireShrapnel
 		Weapon: BTRTeslaMachineGunArcFragment1AA
 		Amount: 1
@@ -1144,7 +1144,7 @@ BTRTeslaMachineGunArc_AA:
 		PercentageScale: 9975
 
 BTRTeslaMachineGunArcFragment1AA:
-	Inherits: BTRTeslaMachineGunArc_AA
+	Inherits: ra1_soviets_btr80_machinegun_tesla_arc_AA
 	Range: 4090
 	Warhead@Tesla_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
@@ -3460,7 +3460,7 @@ MammothTusk2ThermobaricTargetingComputer:
 	Projectile: Missile
 		VerticalRateOfTurn: 12
 
-MonsterTank120mm:
+ra1_soviets_monstertank_120mm_cannon:
 	Inherits@wh: ^Warhead_CannonNuke_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_CannonHE_Heavy
@@ -3483,7 +3483,7 @@ MonsterTank120mm:
 		Explosions: nuke_small
 		ImpactSounds: kaboom22.aud
 		ImpactActors: true
-MonsterTank120mmInferno:
+ra1_soviets_monstertank_120mm_cannon_inferno:
 	Inherits@wh: ^Warhead_CannonFire_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_CannonHE_Heavy
@@ -3501,7 +3501,7 @@ MonsterTank120mmInferno:
 		PercentageScale: 7000
 		Damage: 120000
 		AffectsParent: true
-MonsterTankTusk:
+ra1_soviets_monstertank_missile:
 	Inherits@finalmain: ^Compatibility_MissileHE_HeavyFlat
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@wh2: ^Warhead_MissileHE_Heavy
@@ -3528,7 +3528,7 @@ MonsterTankTusk:
 	Projectile: Missile
 		VerticalRateOfTurn: 12
 
-MonsterTankTuskTesla:
+ra1_soviets_monstertank_missile_tesla:
 	Inherits@roleflat: ^Compatibility_MissileTesla_HeavyFlat
 	Inherits: ^Grenade
 	Inherits@2: ^LightFlameWeapon
@@ -3619,7 +3619,7 @@ MonsterTankTuskTesla:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
 
-MonsterTankTuskThermobaric:
+ra1_soviets_monstertank_missile_thermobaric:
 	Inherits@collapsewh: ^Warhead_Thermobaric_Heavy
 	Inherits: ^LightFlameWeapon
 	Inherits@2: ^MediumFlameWeapon

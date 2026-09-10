@@ -1,6 +1,6 @@
 # audit_k_linearity — the flat K must not move when Damage moves
 
-Analysed **2061** concrete weapons.
+Analysed **2063** concrete weapons.
 
 ## L0 — every positive offensive runtime percentage application is modeled
 
@@ -77,8 +77,8 @@ This residual is included in measured output but excluded from `k_flat` and `dps
 | `YakTeslaGunArc` | +1.8383 |
 | `KamovTesla` | +1.8022 |
 | `KamovTeslaArc` | +1.8022 |
-| `BTRTeslaMachineGun` | +1.7778 |
-| `BTRTeslaMachineGunArc` | +1.7778 |
+| `ra1_soviets_btr80_machinegun_tesla` | +1.7778 |
+| `ra1_soviets_btr80_machinegun_tesla_arc` | +1.7778 |
 | `edenMobileDefenceLaser` | +1.7712 |
 | `Napalm` | +1.7344 |
 | `CabalMantisGun` | +1.7297 |

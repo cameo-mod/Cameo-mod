@@ -1,15 +1,22 @@
 # audit_code_duplication — copy-paste clone groups
 
-Python files: **456** (min 5 statements), C# files: **353** (min 8 lines)
+Python files: **483** (min 5 statements), C# files: **353** (min 8 lines)
+
+
+## Files that do not parse (not scanned)
+
+| file | line | error |
+|---|---|---|
+| tools/tests/test_audit_k_linearity_inventory.py | 1 | invalid non-printable character U+FEFF |
 
 | code | meaning | clone groups | baseline |
 |---|---|---|---|
-| C1 | identical Python function bodies | 20 | 10 |
+| C1 | identical Python function bodies | 21 | 10 |
 | C2 | identical C# method bodies | 15 | 14 |
-| C3 | identical module-level literal tables | 24 | 10 |
+| C3 | identical module-level literal tables | 26 | 10 |
 
 
-## C1 — Python function clones (20 group(s))
+## C1 — Python function clones (21 group(s))
 
 | copies | fingerprint | sites |
 |---|---|---|
@@ -20,6 +27,7 @@ Python files: **456** (min 5 statements), C# files: **353** (min 8 lines)
 | 3 | 1126f101fc234323 | tools/tests/test_high_identity_profile_consolidation.py:55 test_full_ruleset_comparison_matches_accepted_manifest(); tools/tests/test_named_state_corrections.py:52 test_comparison_is_exactly_the_six_reviewed_definitions(); tools/tests/test_pinned_role_profile_consolidation.py:63 test_full_ruleset_comparison_matches_reviewed_manifest() |
 | 3 | e56561937b9ea65e | tools/balance/consolidate_explicit_family_state_profiles.py:300 add_removal(); tools/balance/consolidate_named_family_profiles.py:240 add_removal(); tools/balance/consolidate_pinned_role_profiles.py:209 add_removal() |
 | 3 | f3f8811ecbc48273 | tools/gen_cryo_fog.py:51 warp(); tools/gen_fire_smoke_glow.py:50 warp(); tools/gen_smoke.py:51 warp() |
+| 2 | 05c6a74eb9d37d10 | tools/reference/extract_emperor_units.py:833 write_exclusive(); tools/reference/extract_opendune_units.py:908 write_exclusive() |
 | 2 | 11d29300c3f1eadc | tools/tilesets/generate_volcanic_tileset.py:168 build_palette(); tools/tilesets/volcanic_art_utils.py:84 build_palette() |
 | 2 | 1dacd1e435667177 | tools/tilesets/generate_volcanic_tileset.py:588 base_clear_index(); tools/tilesets/volcanic_art_utils.py:132 base_clear_index() |
 | 2 | 375206ce07b9e1fe | tools/balance/consolidate_adjacent_family_stacks.py:105 combined_percentage_scale(); tools/balance/consolidate_same_family_stacks.py:159 combined_percentage_scale() |
@@ -56,7 +64,7 @@ Python files: **456** (min 5 statements), C# files: **353** (min 8 lines)
 | 2 | edf49e24a44c5bb8 | OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:825 CountQueuedBuildings(); OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:833 SellUselessRefinery() |
 
 
-## C3 — Duplicated constant tables (24 group(s))
+## C3 — Duplicated constant tables (26 group(s))
 
 | copies | fingerprint | sites |
 |---|---|---|
@@ -68,6 +76,7 @@ Python files: **456** (min 5 statements), C# files: **353** (min 8 lines)
 | 3 | 926a972c11b9232c | tools/audit/audit_heaviness_bell.py:146 AXIS_ORDER; tools/balance/effective_heaviness.py:58 BELL_AXIS_ORDER; tools/balance/gen_weapon_template.py:1019 BELL_AXIS_ORDER |
 | 3 | 985c1fe34e42db41 | tools/audit/find_empty_warhead.py:16 CENTRAL; tools/audit/weapon_families.py:23 CENTRAL; tools/balance/sweep_areadamage.py:25 CENTRAL |
 | 2 | 05b492a648a61f78 | tools/audit/audit_family_uniqueness.py:52 COMPANION; tools/audit/audit_versus_profile.py:75 COMPANION |
+| 2 | 0ec5f6758f9956dd | tools/balance/peer_corpus.py:23 ROW_PROVENANCE; tools/reference/extract_peer_units.py:1374 ROW_PROVENANCE_KEYS |
 | 2 | 153d4fc74c8cdd31 | tools/tilesets/build_ra_temperate_basalt_trees.py:20 ACTORS; tools/tilesets/build_volcanic_basalt_gimp_brushes.py:20 ACTORS |
 | 2 | 245ae127cd6182e8 | tools/balance/consolidate_explicit_family_state_profiles.py:81 STATE_EXPANSION; tools/tests/test_explicit_family_state_profile_consolidation.py:31 EXPECTED_EXPANSION |
 | 2 | 2665d6950cd4417a | tools/audit/find_orphan_old_keys.py:27 OLD_TO_NEW; tools/balance/fix_orphan_old_keys.py:25 OLD_TO_NEW |
@@ -81,6 +90,7 @@ Python files: **456** (min 5 statements), C# files: **353** (min 8 lines)
 | 2 | de57d7955065e638 | tools/balance/gen_effects.py:38 LEVELORDER; tools/balance/gen_projectiles.py:30 LEVELORDER |
 | 2 | e82cdb37ffc15514 | tools/audit/audit_versus_profile.py:67 LADDERS; tools/balance/gen_weapon_template.py:35 LADDERS |
 | 2 | eba2f9dc1c86d3e4 | tools/audit/audit_tier_weapon_class.py:59 LADDER; tools/balance/gen_weapon_template.py:2231 STORM_LEVELS |
+| 2 | ee70e291636f426f | tools/balance/build_japan_pilot.py:68 CLASSIC_FACTIONS; tools/balance/validate_reference_holdout.py:62 CLASSIC_FACTIONS |
 | 2 | ee8795bea6c56142 | tools/audit/audit_versus_profile.py:74 LEVELS; tools/reference/propose_family_profiles.py:113 LEVEL_ORDER |
 | 2 | eed204ad8ec23410 | tools/audit/propose_sonic_mapping.py:104 OLD_FAMILIES; tools/audit/weapon_families.py:29 OLD_FAMILIES |
 | 2 | efe4c032c5c937c9 | tools/audit/audit_three_way_split.py:72 MAIN_DAMAGE_TYPES; tools/audit/audit_tier_weapon_class.py:54 MAIN_DAMAGE_TYPES |
@@ -88,7 +98,7 @@ Python files: **456** (min 5 statements), C# files: **353** (min 8 lines)
 
 ## FAIL
 
-- C1: 20 > baseline 10
+- C1: 21 > baseline 10
 - C2: 15 > baseline 14
-- C3: 24 > baseline 10
+- C3: 26 > baseline 10
 

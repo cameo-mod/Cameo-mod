@@ -3,8 +3,8 @@
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
 | T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (11 file(s)) | 173 | >= 24 |
-| T2 | `def test_*` in tools/tests (120 file(s)) | 1433 | >= 177 |
-| T3 | modules with no test mentioning them | 270 | <= 224 |
+| T2 | `def test_*` in tools/tests (141 file(s)) | 1895 | >= 177 |
+| T3 | modules with no test mentioning them | 264 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (270)
+## T3 — untested modules (264)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -201,7 +201,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_orphans.py | audit_orphans |
 | python | tools/audit/audit_outliers.py | audit_outliers |
 | python | tools/audit/audit_packs.py | audit_packs |
-| python | tools/audit/audit_percentage_runtime.py | audit_percentage_runtime |
 | python | tools/audit/audit_plating_exclusivity.py | audit_plating_exclusivity |
 | python | tools/audit/audit_power_budget.py | audit_power_budget |
 | python | tools/audit/audit_promotion_gating.py | audit_promotion_gating |
@@ -226,7 +225,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_weapon_suffixes.py | audit_weapon_suffixes |
 | python | tools/audit/audit_weapon_uniqueness.py | audit_weapon_uniqueness |
 | python | tools/audit/check_effect_audio.py | check_effect_audio |
-| python | tools/audit/dump_resolved.py | dump_resolved |
 | python | tools/audit/effect_audit.py | effect_audit |
 | python | tools/audit/extract_reference_effects.py | extract_reference_effects |
 | python | tools/audit/find_empty_warhead.py | find_empty_warhead |
@@ -247,7 +245,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/_write_weapon_class.py | _write_weapon_class |
 | python | tools/balance/armor_exposure.py | armor_exposure |
 | python | tools/balance/audit_below_divider.py | audit_below_divider |
-| python | tools/balance/build_reference_report.py | build_reference_report |
 | python | tools/balance/collapse_target.py | collapse_target |
 | python | tools/balance/compensate_retrofit.py | compensate_retrofit |
 | python | tools/balance/consolidate_compatibility_profiles.py | consolidate_compatibility_profiles |
@@ -269,7 +266,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/plan_warhead_collapse.py | plan_warhead_collapse |
 | python | tools/balance/preview_bell.py | preview_bell |
 | python | tools/balance/proposal_contract.py | proposal_contract |
-| python | tools/balance/reference_targets.py | reference_targets |
 | python | tools/balance/remove_dead_weapons.py | remove_dead_weapons |
 | python | tools/balance/rename_3way_underscore.py | rename_3way_underscore |
 | python | tools/balance/report_versus_change.py | report_versus_change |
@@ -281,17 +277,15 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/strip_orphan_report.py | strip_orphan_report |
 | python | tools/balance/strip_weapon_versus.py | strip_weapon_versus |
 | python | tools/balance/sweep_areadamage.py | sweep_areadamage |
-| python | tools/balance/synthesize_reference.py | synthesize_reference |
 | python | tools/balance/verify_retrofit.py | verify_retrofit |
 | python | tools/packs/extract_shared.py | extract_shared |
 | python | tools/packs/split_faction.py | split_faction |
 | python | tools/rename/apply_ra1_legacy.py | apply_ra1_legacy |
 | python | tools/rename/convert_maps.py | convert_maps |
 | python | tools/rename/curate_map.py | curate_map |
-| python | tools/rename/safe_rename.py | safe_rename |
 
 
 ## FAIL
 
-- T3: 270 untested > baseline 224
+- T3: 264 untested > baseline 224
 

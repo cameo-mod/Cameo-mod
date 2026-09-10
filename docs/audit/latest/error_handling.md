@@ -1,13 +1,20 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **456**
+Files scanned: **483**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
 | E1 | bare except / except BaseException | 3 | 2 |
 | E2 | handler discards the error | 98 | 30 |
-| E3 | open() without encoding= | 98 | 90 |
-| E4 | subprocess call without check= | 31 | 9 |
+| E3 | open() without encoding= | 112 | 90 |
+| E4 | subprocess call without check= | 33 | 9 |
+
+
+## Files that do not parse
+
+| file | line | error |
+|---|---|---|
+| tools/tests/test_audit_k_linearity_inventory.py | 1 | invalid non-printable character U+FEFF |
 
 
 ## E1 — 3 finding(s)
@@ -64,8 +71,8 @@ Files scanned: **456**
 | tools/balance/armor_exposure.py | 105 | handler body discards the error |
 | tools/balance/armor_exposure.py | 141 | handler body discards the error |
 | tools/balance/assign_references.py | 82 | handler body discards the error |
-| tools/balance/assign_references.py | 469 | handler body discards the error |
-| tools/balance/assign_references.py | 675 | handler body discards the error |
+| tools/balance/assign_references.py | 479 | handler body discards the error |
+| tools/balance/assign_references.py | 685 | handler body discards the error |
 | tools/balance/build_reference_report.py | 216 | handler body discards the error |
 | tools/balance/class_membership.py | 232 | handler body discards the error |
 | tools/balance/collapse_target.py | 137 | handler body discards the error |
@@ -86,11 +93,11 @@ Files scanned: **456**
 | tools/balance/pending_classes.py | 35 | handler body discards the error |
 | tools/balance/plan_firepower_retirement.py | 81 | handler body discards the error |
 | tools/balance/propose_class_rebalance.py | 271 | handler body discards the error |
-| tools/balance/reference_distribution.py | 604 | handler body discards the error |
-| tools/balance/reference_distribution.py | 615 | handler body discards the error |
-| tools/balance/reference_distribution.py | 761 | handler body discards the error |
-| tools/balance/reference_distribution.py | 822 | handler body discards the error |
-| tools/balance/reference_distribution.py | 1067 | handler body discards the error |
+| tools/balance/reference_distribution.py | 816 | handler body discards the error |
+| tools/balance/reference_distribution.py | 827 | handler body discards the error |
+| tools/balance/reference_distribution.py | 973 | handler body discards the error |
+| tools/balance/reference_distribution.py | 1034 | handler body discards the error |
+| tools/balance/reference_distribution.py | 1289 | handler body discards the error |
 | tools/balance/report_versus_change.py | 74 | handler body discards the error |
 | tools/balance/retrofit_legacy_template.py | 219 | handler body discards the error |
 | tools/balance/retrofit_legacy_template.py | 322 | handler body discards the error |
@@ -99,7 +106,7 @@ Files scanned: **456**
 | tools/balance/retrofit_legacy_template.py | 536 | handler body discards the error |
 | tools/balance/retrofit_legacy_template.py | 547 | handler body discards the error |
 | tools/balance/shield_uniqueness.py | 63 | handler body discards the error |
-| tools/balance/synthesize_reference.py | 360 | handler body discards the error |
+| tools/balance/synthesize_reference.py | 370 | handler body discards the error |
 | tools/balance/target_model.py | 416 | handler body discards the error |
 | tools/balance/tier_chain.py | 48 | handler body discards the error |
 | tools/balance/tier_chain.py | 119 | handler body discards the error |
@@ -112,8 +119,8 @@ Files scanned: **456**
 | tools/hooks/bash_guard.py | 154 | handler body discards the error |
 | tools/hooks/bash_guard.py | 214 | handler body discards the error |
 | tools/reference/aggregate_archetype.py | 873 | handler body discards the error |
-| tools/reference/extract_peer_units.py | 467 | handler body discards the error |
-| tools/reference/extract_peer_units.py | 567 | handler body discards the error |
+| tools/reference/extract_peer_units.py | 901 | handler body discards the error |
+| tools/reference/extract_peer_units.py | 1001 | handler body discards the error |
 | tools/reference/extract_versus.py | 175 | handler body discards the error |
 | tools/rename/apply.py | 178 | handler body discards the error |
 | tools/rename/safe_rename.py | 132 | handler body discards the error |
@@ -123,13 +130,14 @@ Files scanned: **456**
 | tools/tilesets/generate_volcanic_tileset.py | 814 | handler body discards the error |
 
 
-## E3 — 98 finding(s)
+## E3 — 112 finding(s)
 
 | file | line | detail |
 |---|---|---|
 | tools/bake_d2k_overlay.py | 28 | `Image.open()` without encoding= |
 | tools/bake_d2k_overlay_zap.py | 10 | `Image.open()` without encoding= |
 | tools/bake_d2k_zap.py | 41 | `Image.open()` without encoding= |
+| tools/balance/peer_corpus.py | 58 | `path.open()` without encoding= |
 | tools/balance/pending_classes.py | 59 | `open()` without encoding= |
 | tools/d2k_to_openra.py | 153 | `Image.open()` without encoding= |
 | tools/d2k_to_openra.py | 164 | `Image.open()` without encoding= |
@@ -139,12 +147,25 @@ Files scanned: **456**
 | tools/hooks/exec_guard.py | 69 | `perf.read_text()` without encoding= |
 | tools/make_syndicate_insignia.py | 41 | `Image.open()` without encoding= |
 | tools/make_syndicate_insignia.py | 63 | `Image.open()` without encoding= |
+| tools/reference/extract_emperor_units.py | 477 | `path.open()` without encoding= |
+| tools/reference/extract_emperor_units.py | 842 | `os.open()` without encoding= |
 | tools/reference/extract_mix_ini.py | 78 | `path.open()` without encoding= |
+| tools/reference/extract_opendune_units.py | 532 | `path.open()` without encoding= |
+| tools/reference/extract_opendune_units.py | 917 | `os.open()` without encoding= |
+| tools/reference/extract_ra3_units.py | 1348 | `os.open()` without encoding= |
 | tools/tests/test_ai_headquarters_refinery_cleanup.py | 39 | `read_text()` without encoding= |
 | tools/tests/test_ai_logging_integration.py | 21 | `read_text()` without encoding= |
 | tools/tests/test_anchor_dossier.py | 362 | `read_text()` without encoding= |
 | tools/tests/test_defense_tooltip_accuracy.py | 30 | `read_text()` without encoding= |
 | tools/tests/test_diagnostic_output.py | 38 | `two.read_text()` without encoding= |
+| tools/tests/test_peer_corpus.py | 60 | `write_text()` without encoding= |
+| tools/tests/test_peer_corpus.py | 70 | `write_text()` without encoding= |
+| tools/tests/test_peer_corpus.py | 76 | `path.write_text()` without encoding= |
+| tools/tests/test_peer_corpus.py | 134 | `write_text()` without encoding= |
+| tools/tests/test_peer_corpus.py | 144 | `doc.write_text()` without encoding= |
+| tools/tests/test_peer_corpus.py | 184 | `index.read_text()` without encoding= |
+| tools/tests/test_peer_corpus.py | 186 | `index.write_text()` without encoding= |
+| tools/tests/test_peer_corpus.py | 197 | `doc.write_text()` without encoding= |
 | tools/tilesets/apply_ai_edge_correction.py | 34 | `Image.open()` without encoding= |
 | tools/tilesets/apply_ai_edge_correction.py | 78 | `Image.open()` without encoding= |
 | tools/tilesets/apply_dark_noise_cleanup.py | 79 | `Image.open()` without encoding= |
@@ -227,7 +248,7 @@ Files scanned: **456**
 | tools/tilesets/transfer_ai_cliff_style.py | 101 | `Image.open()` without encoding= |
 
 
-## E4 — 31 finding(s)
+## E4 — 33 finding(s)
 
 | file | line | detail |
 |---|---|---|
@@ -260,14 +281,17 @@ Files scanned: **456**
 | tools/hooks/test_bash_guard.py | 58 | `subprocess.run()` without check= |
 | tools/hooks/test_bash_guard.py | 77 | `subprocess.run()` without check= |
 | tools/reference/splice_peer_section.py | 73 | `subprocess.run()` without check= |
-| tools/tests/test_continuous_cannonap_preview.py | 107 | `subprocess.run()` without check= |
-| tools/tests/test_continuous_cannonap_preview.py | 112 | `subprocess.run()` without check= |
+| tools/tests/test_continuous_cannonap_preview.py | 106 | `subprocess.run()` without check= |
+| tools/tests/test_continuous_cannonap_preview.py | 115 | `subprocess.run()` without check= |
+| tools/tests/test_peer_export.py | 428 | `subprocess.run()` without check= |
+| tools/tests/test_peer_export.py | 515 | `subprocess.run()` without check= |
 
 
 ## FAIL
 
 - E1: 3 > baseline 2
 - E2: 98 > baseline 30
-- E3: 98 > baseline 90
-- E4: 31 > baseline 9
+- E3: 112 > baseline 90
+- E4: 33 > baseline 9
+- 1 file(s) do not parse
 

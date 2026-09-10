@@ -4582,119 +4582,38 @@
    }
   },
   "naval": {
-   "CNCCA": {
-    "armaments": [
-     {
-      "damage_warheads": [
-       {
-        "damage": "50000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "10000",
-      "reloaddelay": "100",
-      "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^Warhead_Railgun_Heavy",
-       "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
-      ],
-      "warheads": [
-       "^Warhead_Railgun_Heavy"
-      ],
-      "weapon": "GDIBattleshipRailgun",
-      "weapon_class_source": "template"
-     },
-     {
-      "armament_name": "secondary",
-      "damage_warheads": [
-       {
-        "damage": "50000",
-        "falloff": "100, 0",
-        "spread": "96",
-        "tag": "Railgun_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
-      "pricing": true,
-      "range": "10000",
-      "reloaddelay": "100",
-      "slot": "Armament@SECONDARY",
-      "versus_templates": [
-       "^Warhead_Railgun_Heavy",
-       "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
-      ],
-      "warheads": [
-       "^Warhead_Railgun_Heavy"
-      ],
-      "weapon": "GDIBattleshipRailgun",
-      "weapon_class_source": "template"
-     }
-    ],
+   "td_gdi_landingcraft": {
     "armor": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#Armor.Type",
-     "v": "Superheavy"
+     "v": "Medium"
     },
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#Valued.Cost",
-     "v": "2600"
+     "v": "500"
     },
     "design": {
-     "category": "Naval",
      "class_anchor": null,
      "special": null,
-     "subtype": "BattleShip",
+     "subtype": "Ship",
      "tech_tier": null,
      "unit_class": null
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#Health.HP",
-     "v": "167500"
+     "v": "75000"
     },
     "integrity_pct": {
      "src": "inherited",
      "v": "100"
     },
-    "name": "Railgun Battleship",
+    "name": "Landing Craft",
     "prerequisites": [
-     "~cncsyrd",
-     "td_gdi_communicationscenter"
+     "~cncsyrd"
     ],
     "queue": [
      "Naval",
      "RANaval"
-    ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -4709,19 +4628,19 @@
      "v": "100"
     },
     "sight": {
-     "src": "inherited",
-     "v": "9000"
+     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#RevealsShroud.Range",
+     "v": "7500"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#Mobile.Speed",
-     "v": "50"
+     "v": "125"
     },
     "turn_speed": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#Mobile.TurnSpeed",
-     "v": "10"
+     "src": "inherited",
+     "v": "40"
     }
    },
-   "CNCPT": {
+   "td_gdi_missileboat": {
     "armaments": [
      {
       "burst": "2",
@@ -4847,7 +4766,6 @@
      "v": "1600"
     },
     "design": {
-     "category": "Naval",
      "class_anchor": null,
      "special": null,
      "subtype": "ScoutShip",
@@ -4909,39 +4827,118 @@
      "v": "20"
     }
    },
-   "LST": {
+   "td_gdi_railgunbattleship": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "50000",
+        "falloff": "100, 0",
+        "spread": "96",
+        "tag": "Railgun_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Railgun_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "10000",
+      "reloaddelay": "100",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Railgun_Heavy"
+      ],
+      "weapon": "GDIBattleshipRailgun",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "secondary",
+      "damage_warheads": [
+       {
+        "damage": "50000",
+        "falloff": "100, 0",
+        "spread": "96",
+        "tag": "Railgun_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Railgun_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "10000",
+      "reloaddelay": "100",
+      "slot": "Armament@SECONDARY",
+      "versus_templates": [
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Railgun_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Railgun_Heavy"
+      ],
+      "weapon": "GDIBattleshipRailgun",
+      "weapon_class_source": "template"
+     }
+    ],
     "armor": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#Armor.Type",
-     "v": "Medium"
+     "v": "Superheavy"
     },
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#Valued.Cost",
-     "v": "500"
+     "v": "2600"
     },
     "design": {
-     "category": "Naval",
      "class_anchor": null,
      "special": null,
-     "subtype": "Ship",
+     "subtype": "BattleShip",
      "tech_tier": null,
      "unit_class": null
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#Health.HP",
-     "v": "75000"
+     "v": "167500"
     },
     "integrity_pct": {
      "src": "inherited",
      "v": "100"
     },
-    "name": "Landing Craft",
+    "name": "Railgun Battleship",
     "prerequisites": [
-     "~cncsyrd"
+     "~cncsyrd",
+     "td_gdi_communicationscenter"
     ],
     "queue": [
      "Naval",
      "RANaval"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
     ],
     "shield_flat": {
      "src": "inherited",
@@ -4956,19 +4953,19 @@
      "v": "100"
     },
     "sight": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#RevealsShroud.Range",
-     "v": "7500"
+     "src": "inherited",
+     "v": "9000"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#Mobile.Speed",
-     "v": "125"
+     "v": "50"
     },
     "turn_speed": {
-     "src": "inherited",
-     "v": "40"
+     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml#Mobile.TurnSpeed",
+     "v": "10"
     }
    },
-   "gdicarrier": {
+   "td_gdi_supercarrier": {
     "armaments": [
      {
       "damage_warheads": [],
@@ -4995,7 +4992,6 @@
      "v": "4000"
     },
     "design": {
-     "category": "Naval",
      "class_anchor": null,
      "special": null,
      "subtype": "ArtilleryShip",

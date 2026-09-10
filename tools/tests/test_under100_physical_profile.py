@@ -27,7 +27,7 @@ ROOTS = {
     "HeavyAATankCannontkm", "PlasmaFlamer", "SkyshieldCannon",
     "TSDestroyerMissiles", "TSHoverMissile", "TSSAPCMissiles",
     "ChemicalHonestJohn", "JapanSuperBomb", "MammothTusk2Thermobaric",
-    "MammothTuskThermobaric", "MonsterTankTuskThermobaric", "OrcaMissiles",
+    "MammothTuskThermobaric", "ra1_soviets_monstertank_missile_thermobaric", "OrcaMissiles",
     "TowerMissile", "TSBikeTibMissile", "TSHellfireTwin",
     "wc2mageBlizzard_Projectile",
     "APTusk", "MammothTusk2", "MissileSoldierWeapon", "Naxis_Komet",

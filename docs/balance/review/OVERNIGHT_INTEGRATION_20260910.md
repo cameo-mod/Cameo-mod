@@ -1,0 +1,101 @@
+# Overnight draft integration review
+
+This is a local integration checkpoint, not a merged PR or gameplay-balance approval.
+
+## Exact inputs
+
+- PR341: `4b4b354f4914305e6a248ce15f83a233970ee400` (integration HEAD).
+- PR339: `0a0b7f3d4dc8c1c1090e05d962c24b1a93bb3c76` (pending merge parent).
+- PR340: `45444296545d0a4e1aaa994e8d3086e5b6b0cfec` (reviewed binary Git patch;
+  source/test/map changes applied, generated outputs regenerated rather than patched).
+
+The newer CA structured-corpus follow-up is not included in this first snapshot.
+The engine directory is a read-only-use junction to PR341's verified engine/build.
+No build is run through that junction. The main checkout and protected PRs are untouched.
+
+## Findings and repairs
+
+The initial combined run executed 1,867 Python tests: 16 failures, 9 errors and 64 skips;
+peak sampled system memory was 78.40%, with no guard stop. This is not a green suite.
+Compared with the final PR341 run, three additional cases appeared:
+
+1. The CannonAP byte-identity test compared against moving Git HEAD. After publication,
+   HEAD already contained the appended base, making its expected tail comparison invalid.
+   The test now executes both tools and both profile JSON inputs from immutable upstream
+   `50b7d001be845e0ac5a0812d2591e154148c94dc`. All 22 module tests pass. This is test-only;
+   the generator, weapons and runtime are unchanged. Independent review found no blocker.
+   Git history must contain that baseline revision; missing history fails explicitly.
+2. Generated reference assignments retained old Soviet actor identities, breaking the
+   paired-identity check and changing the selected MBT speed pool. Regenerating the
+   assignments restores both tests without weakening their assertions. Assignment scores
+   and membership changes remain visible; this is not a pure string replacement.
+
+The existing stale firepower-input report was also regenerated. Its 770 changed-entry
+count remains unchanged. The targeted report, identity, speed-grid and actor/map naming
+checks pass together: 42 tests. A corrected full rerun is still required.
+
+## Other checks
+
+- 33 balance ledgers: zero drift.
+- Canonical audits completed with eight failing categories: inherits, basebuilder_crates,
+  buildable_order, packs, split_definitions, release_drift, doc_claims and doc_health.
+  No empty Markdown report was generated. Failures are retained, not suppressed.
+- Combined menu boot started 05:50:29 Jakarta and completed the 90-second observation:
+  fresh menu-load evidence, no new exception logs, sampled memory peak 87.66%.
+  The test process was closed. This proves loading only, not matchup balance.
+- Corrected full rerun: 1,867 tests, 13 failures, 8 errors, 64 skips; sampled
+  memory peak 77.25%, no guard stop. Failure signatures are the final PR341 baseline
+  minus the now-repaired stale firepower report test, with no additional failures.
+  Known baseline failures remain unresolved and visible; this is not a green suite.
+
+No PR merge is authorized by this report. Naval source-role holds and factory-ready /
+maximum-upgrade evidence remain distinct work items; no price or live unit-stat fitting
+has been applied by the reference collection work.
+
+## Subsequent 13-weapon name follow-up
+
+The reviewed BTR80/Flak Truck/Monster Tank identity patch applied cleanly. A fresh
+90-second combined menu boot started 06:29:54 Jakarta and passed: no exceptions,
+fresh menu-load proof, peak memory 79.62%, process closed. All 13 resolved weapon
+payloads are unchanged. The earlier 1,867-test result predates this additional patch;
+a final combined source snapshot and full rerun remain pending.
+
+## Latest source snapshot (06:50 Jakarta)
+
+The integration index now additionally contains PR339 through `09ffb2108975bbd48e1d201158c9053b0b653874`
+(including structured CA input and raw production declarations), PR340 through
+`905e9befc698f522f6268d6aa7e6a2c4ef9d1d58` for source/tests, and the PR341
+`0dba5542ff8068179066321ab1aa633a1a4cf82b` frozen-baseline test fix. The pending
+merge parent/HEAD above remain the historical starting points, not these complete inputs.
+
+Applying the new JSONL together with its new `.gitattributes` produced CRLF bytes in
+this already-populated integration checkout. The strict reader correctly rejected the
+SHA mismatch. A byte-normalized comparison proved line endings were the only difference;
+the exact published source bytes were copied back and restaged. No hash expectation was
+relaxed. Fresh assignment generation succeeds: 694 actors in scope, 362 assigned, 216
+with at least two references; 68 chassis-only and 199 formula-only. These are diagnostic
+assignments, not approved live stat changes. Firepower report remains 770 changed entries.
+
+The two source PRs separately match their baseline failure signatures: PR339 1,710 tests,
+14 failures, 8 errors, 64 skips; PR340 1,341 tests, 14 failures, 8 errors, 45 skips.
+Combined canonical audits retain the same eight failing categories, with no empty
+final reports. The full R3 suite completed: 1,892 tests, 13 failures, 8 errors and
+64 skips; exact prior integration signatures, peak memory 78.38%, no guard stop.
+
+## Final identical-definition cleanup validation
+
+The two identical OrniBombC/OrniGunC Ordos declarations were removed in the PR341
+follow-up and applied here. Both weapons still resolve from Atreides. All 2,900
+combined resolved weapons compare identical before/after removal. Three focused
+regressions pass. The targeted split-definition audit now passes: S2 4→2, S1 22,
+unchanged ratchets 2/56. The earlier canonical report set predates this line-only
+cleanup; the split-definition report was regenerated afterward.
+
+Final full R4 suite: **1,895 tests, 13 failures, 8 errors, 64 skips**, exact same
+failure/error signatures as R3. Peak memory **80.97%**, no guard stop. No new game
+run or engine build was necessary for an exactly unchanged resolved weapon set.
+The full suite is not green; the remaining baseline failures are not waived.
+
+This final source cleanup is published in PR341 as `7823fb3e0`.
+PR339 remains `09ffb2108`; PR340 remains `905e9befc`. All three are open drafts.
+This local integration checkpoint is not pushed and does not merge any GitHub PR.
