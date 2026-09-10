@@ -44,10 +44,10 @@ VIOLATIONS by shape:
 | RA2RobotmmScatter_elite | 3 TYPES (Laser, Railgun, Tesla) - max is 2 | Laser_Heavy, Railgun_Heavy, Tesla_Heavy |
 | RA2Robotmm_elite | 3 TYPES (Laser, Railgun, Tesla) - max is 2 | Laser_Heavy, Railgun_Heavy, Tesla_Heavy |
 | SkyHawkPlasmaCannon | NON-ADJACENT levels (Heavy+Light) | CannonAP_Light, Tesla_Heavy |
-| TorpTube | NON-ADJACENT levels (Heavy+Light) | Concussion_Light, MissileHE_Heavy |
 | Type97PlasmaCannon | 3 TYPES (CannonHE, Railgun, Tesla) - max is 2 | CannonHE_Heavy, Railgun_Heavy, Tesla_Heavy |
 | ViperMissilesFire | 3 TYPES (Concussion, Flame, MissileAP) - max is 2 | Concussion_Medium, Flame_Light, MissileAP_Light, MissileAP_Medium |
 | ordos_autogunturret | 3 LEVELS (Heavy+Light+Medium) - max is 2 | Bullet_Light, Bullet_Medium, CannonHE_Heavy |
+| ra1_soviets_submarine_torpedo | NON-ADJACENT levels (Heavy+Light) | Concussion_Light, MissileHE_Heavy |
 | tkmkatyushalalauncherrocketsfire | 3 TYPES (Concussion, Flame, MissileAP) - max is 2 | Concussion_Medium, Flame_Light, MissileAP_Light |
 
 WARN 34 budget violations (ratchet 48)

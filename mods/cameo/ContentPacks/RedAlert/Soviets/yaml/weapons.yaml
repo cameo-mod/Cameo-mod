@@ -244,7 +244,7 @@ FireRocketsThermobaricExplode:
 	Projectile: Missile
 		VerticalRateOfTurn: 20
 
-FireballLauncher:
+ra1_soviets_flametower_flamethrower:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
 	Inherits@fx: ^Effect_Flame_Medium
@@ -265,7 +265,7 @@ FireballLauncher:
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12
 
-FireballLauncherThermobaric:
+ra1_soviets_flametower_flamethrower_thermobaric:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
 	Inherits@fx: ^Effect_Flame_Medium
@@ -635,7 +635,7 @@ TeslaZapArcTeslaFragment2_EMP:
 		Thickness: 32
 		QuantizationCount: 16
 
-HeatRayBeam1:
+ra1_soviets_heatraytank_heatray1:
 	Inherits@wh: ^Warhead_Inferno_Heavy
 	Inherits@proj: ^Projectile_Inferno_Heavy_HeatRayBeam
 	Inherits@fx: ^Effect_Inferno_Heavy
@@ -651,8 +651,8 @@ HeatRayBeam1:
 		Explosions: small_napalm
 		Volume: 0.25
 
-HeatRayBeam2:
-	Inherits: HeatRayBeam1
+ra1_soviets_heatraytank_heatray2:
+	Inherits: ra1_soviets_heatraytank_heatray1
 	Projectile: RadBeam
 		Color: FFBB88BB
 		Amplitude: 120
@@ -661,8 +661,8 @@ HeatRayBeam2:
 		Thickness: 48
 		QuantizationCount: 16
 
-HeatRayBeam3:
-	Inherits: HeatRayBeam1
+ra1_soviets_heatraytank_heatray3:
+	Inherits: ra1_soviets_heatraytank_heatray1
 	Projectile: RadBeam
 		Color: FF884488
 		Amplitude: 80
@@ -671,8 +671,8 @@ HeatRayBeam3:
 		Thickness: 64
 		QuantizationCount: 16
 
-HeatRayBeam4:
-	Inherits: HeatRayBeam1
+ra1_soviets_heatraytank_heatray4:
+	Inherits: ra1_soviets_heatraytank_heatray1
 	Projectile: RadBeam
 		Color: FF884488
 		Amplitude: 40
@@ -772,7 +772,7 @@ v1rocketsThermobaric:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@HeavyFlameWeapon:
 
-GradRockets:
+ra1_soviets_grad_rocket:
 	Inherits@roleflat: ^Compatibility_MissileHE_HeavyFlat
 	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@wh2: ^Warhead_Concussion_Medium
@@ -800,10 +800,10 @@ GradRockets:
 		PercentageScale: 9994
 	-Warhead@MissileHE_Heavy:
 	-Warhead@Concussion_Medium:
-GradHeavyRockets:
+ra1_soviets_grad_rocket_heavy:
 	Inherits: ^MediumChemicalWeapon
 	Inherits@2: ^HeavyBomb
-	Inherits@3: GradRockets
+	Inherits@3: ra1_soviets_grad_rocket
 	Projectile: Bullet
 		TrailImage: black_smokey
 		ContrailStartWidth: 100
@@ -2374,7 +2374,7 @@ ThermobaricMaverick:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@MissileAP_Medium:
 	-Warhead@Thermobaric_Heavy:
-Su57Maverick:
+ra1_soviets_su57attackbomber_missile:
 	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileHE_Heavy
@@ -2402,7 +2402,7 @@ Su57Maverick:
 	Warhead@MissileHE_Heavy:
 		PercentageScale: 5500
 		Damage: 40000
-Su57MaverickThermobaric:
+ra1_soviets_su57attackbomber_missile_thermobaric:
 	Inherits@wh: ^Warhead_MissileThermobaric_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_Flame_Heavy
@@ -2482,7 +2482,7 @@ Su57MaverickThermobaric:
 		PhysicalStateScale: 50
 	-Warhead@CannonHE_Medium:
 	-Warhead@Flame_Medium:
-HammerTankCannon:
+ra1_soviets_hammertank_cannon:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_CannonHE_Heavy
@@ -2499,11 +2499,11 @@ HammerTankCannon:
 		Explosions: poof
 		ImpactSounds: xplosml2.aud
 
-HammerTankCannonThermobaric:
+ra1_soviets_hammertank_cannon_thermobaric:
 	Inherits@thermobaric: ^Warhead_Thermobaric_Heavy
 	Inherits@flameprojectile: ^Projectile_Flame_Medium
 	Inherits@4: ^Effect_Flame_Medium
-	Inherits@3: HammerTankCannon
+	Inherits@3: ra1_soviets_hammertank_cannon
 	Report: tnkfire6.aud
 	Warhead@Thermobaric_Heavy:
 		Damage: 16000

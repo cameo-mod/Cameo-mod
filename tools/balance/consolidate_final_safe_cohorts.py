@@ -33,7 +33,7 @@ HEALTH_VALUES = active_health_values(ROOT)
 # Root closures are explicit so a newly inherited variant fails closed.
 ROOTS = {
     "APCGun": ("Flak_Medium", {"APCGun_AA"}),
-    "APCGunAllies": ("Flak_Medium", {"APCGunAllies_AA"}),
+    "ra1_allies_alliedapc_gun": ("Flak_Medium", {"ra1_allies_alliedapc_gun_AA"}),
     "NaxHaenebuQuadCannon": ("Flak_Medium", {"NaxHaenebuQuadCannon_elite"}),
     "TKMQuadCannonAG": ("Flak_Medium", {"TKMQuadCannonAA"}),
     "TKMZazaCannonAG": ("Flak_Medium", {"TKMZazaCannonAA"}),

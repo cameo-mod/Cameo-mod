@@ -69,6 +69,7 @@ class YakOwnershipTests(unittest.TestCase):
         for actor, route in self.before['routes'].items():
             reverse = {new: old for old, new in route.items()}
             actual = node_to_obj(self.rules.resolve(actor))
+            self._reverse_later_su57_missile_names(actor, actual)
             for key, trait in actual.items():
                 if key.split('@')[0] == 'Armament' and isinstance(trait, dict):
                     if trait.get('Weapon') in reverse:
@@ -76,6 +77,31 @@ class YakOwnershipTests(unittest.TestCase):
                         count += 1
             self.assertEqual(digest(actual), self.before['actor_hashes'][actor])
         self.assertEqual(count, 20)
+
+    def _reverse_later_su57_missile_names(self, actor, obj):
+        if actor != 'ra1_soviets_su57attackbomber':
+            return
+        for slot, suffix, old in (
+                ('Armament', '_missile', 'Su57Maverick'),
+                ('Armament@HE', '_missile_thermobaric', 'Su57MaverickThermobaric')):
+            self.assertEqual(obj[slot]['Weapon'], actor + suffix)
+            obj[slot]['Weapon'] = old
+
+    def test_later_su57_adapter_preserves_missile_slots(self):
+        actor = 'ra1_soviets_su57attackbomber'
+        normal, upgraded = actor + '_missile', actor + '_missile_thermobaric'
+        obj = {'Armament': {'Weapon': normal}, 'Armament@HE': {'Weapon': upgraded}}
+        self._reverse_later_su57_missile_names('other_actor', obj)
+        self.assertEqual(obj['Armament']['Weapon'], normal)
+        for wrong in ('Su57Maverick', upgraded, 'OtherWeapon'):
+            bad = {'Armament': {'Weapon': wrong}, 'Armament@HE': {'Weapon': upgraded}}
+            with self.assertRaises(AssertionError):
+                self._reverse_later_su57_missile_names(actor, bad)
+        with self.assertRaises(KeyError):
+            self._reverse_later_su57_missile_names(actor, {'Armament@PRIMARY': {'Weapon': normal}})
+        self._reverse_later_su57_missile_names(actor, obj)
+        self.assertEqual(obj['Armament']['Weapon'], 'Su57Maverick')
+        self.assertEqual(obj['Armament@HE']['Weapon'], 'Su57MaverickThermobaric')
 
     def test_no_other_actor_borrows_the_new_guns(self):
         owners = {new: actor for actor, route in self.before['routes'].items()

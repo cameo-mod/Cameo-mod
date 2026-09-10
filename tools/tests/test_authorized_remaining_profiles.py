@@ -125,7 +125,7 @@ class AuthorizedRemainingProfileTests(unittest.TestCase):
     def test_hammer_thermobaric_route_does_not_regress_core_vehicle_damage(self):
         armors = ("Scout", "Light", "Medium", "Heavy", "Superheavy")
         for base_name, paid_name in (
-                ("HammerTankCannon", "HammerTankCannonThermobaric"),):
+                ("ra1_soviets_hammertank_cannon", "ra1_soviets_hammertank_cannon_thermobaric"),):
             base = self.rules.resolve_weapon(base_name).child("Warhead@CannonHE_Heavy")
             paid = self.rules.resolve_weapon(paid_name).child("Warhead@Thermobaric_Heavy")
             base_versus = {node.key: int(node.value) for node in base.child("Versus").children}

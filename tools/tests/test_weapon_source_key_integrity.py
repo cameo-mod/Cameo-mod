@@ -43,8 +43,8 @@ EXPECTED_PARENTS = {
         "^Projectile_Flame_Medium", "^Effect_Flame_Medium",
         "^RA2Grenade", "^RA2HeavyMissile",
     },
-    "HammerTankCannonThermobaric": {
-        "^Projectile_Flame_Medium", "HammerTankCannon",
+    "ra1_soviets_hammertank_cannon_thermobaric": {
+        "^Projectile_Flame_Medium", "ra1_soviets_hammertank_cannon",
     },
     # Upstream 4a1479b50 replaced the thermobaric role with a nuclear shell.
     "KotinCannonNuclearShell": {

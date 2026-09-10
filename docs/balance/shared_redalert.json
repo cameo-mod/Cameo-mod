@@ -3532,7 +3532,7 @@
        "^Warhead_Concussion_Light",
        "^Warhead_MissileHE_Heavy"
       ],
-      "weapon": "TorpTube",
+      "weapon": "ra1_soviets_submarine_torpedo",
       "weapon_class_source": "template"
      },
      {
@@ -3561,7 +3561,7 @@
       "warheads": [
        "^Warhead_MissileNuke_Heavy"
       ],
-      "weapon": "TorpTubeThermobaric",
+      "weapon": "ra1_soviets_submarine_torpedo_thermobaric",
       "weapon_class_source": "template"
      }
     ],
@@ -3790,7 +3790,7 @@
        "^Warhead_Bullet_Medium",
        "^Warhead_Flak_Medium"
       ],
-      "weapon": "APCGunAllies",
+      "weapon": "ra1_allies_alliedapc_gun",
       "weapon_class_source": "template"
      },
      {
@@ -3811,13 +3811,13 @@
       "reloaddelay": "10",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "APCGunAllies"
+       "ra1_allies_alliedapc_gun"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium",
        "^Warhead_Flak_Medium"
       ],
-      "weapon": "APCGunAllies_AA",
+      "weapon": "ra1_allies_alliedapc_gun_AA",
       "weapon_class_source": "template"
      }
     ],

@@ -632,7 +632,7 @@ MagicOrb2:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: thgun.wav
 
-APCGunAllies:
+ra1_allies_alliedapc_gun:
 	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@wh2: ^Warhead_Flak_Medium
@@ -654,8 +654,8 @@ APCGunAllies:
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
-APCGunAllies_AA:
-	Inherits: APCGunAllies
+ra1_allies_alliedapc_gun_AA:
+	Inherits: ra1_allies_alliedapc_gun
 	Range: 8967
 	ValidTargets: Air
 	Warhead@Bullet_Medium: AreaDamage
@@ -1937,7 +1937,7 @@ NanoReturn:
 		Speed: 277
 	Warhead@Heal: TargetDamage
 
-TorpTube:
+ra1_soviets_submarine_torpedo:
 	Inherits@wh: ^Warhead_Concussion_Light
 	Inherits@wh2: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -1979,7 +1979,7 @@ TorpTube:
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
 
-TorpTubeThermobaric:
+ra1_soviets_submarine_torpedo_thermobaric:
 	Inherits@wh: ^Warhead_MissileNuke_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_Nuclear_Super

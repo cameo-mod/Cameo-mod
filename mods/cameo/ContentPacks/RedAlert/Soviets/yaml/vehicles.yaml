@@ -109,12 +109,12 @@ ra1_soviets_grad:
 		TurnSpeed: 15
 		Offset: -600,0,200
 	Armament:
-		Weapon: GradRockets
+		Weapon: ra1_soviets_grad_rocket
 		LocalOffset: 400,300,50, 400,-75,0, 400,150,50, 400,-225,0, 400,225,50, 400,-150,0, 400,75,50, 400,-300,0
 		MuzzleSequence: muzzle
 		RequiresCondition: !(ra1_soviets_upgrade_thermobaricrockets || ra1_soviets_upgrade_scorchedearth)
 	Armament@Upgrade:
-		Weapon: GradHeavyRockets
+		Weapon: ra1_soviets_grad_rocket_heavy
 		LocalOffset: 400,300,50, 400,-75,0, 400,150,50, 400,-225,0, 400,225,50, 400,-150,0, 400,75,50, 400,-300,0
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_upgrade_thermobaricrockets || ra1_soviets_upgrade_scorchedearth
@@ -122,10 +122,10 @@ ra1_soviets_grad:
 	WithSpriteTurret:
 	WithMuzzleOverlay:
 	FireWarheadsOnDeath:
-		Weapon: GradRockets
+		Weapon: ra1_soviets_grad_rocket
 		RequiresCondition: !(ra1_soviets_upgrade_thermobaricrockets || ra1_soviets_upgrade_scorchedearth)
 	FireWarheadsOnDeath@Upgrade:
-		Weapon: GradHeavyRockets
+		Weapon: ra1_soviets_grad_rocket_heavy
 		RequiresCondition: ra1_soviets_upgrade_thermobaricrockets || ra1_soviets_upgrade_scorchedearth
 	RenderRangeCircle:
 	GrantConditionOnAttack:
@@ -394,14 +394,14 @@ ra1_soviets_hammertank:
 	Turreted:
 		TurnSpeed: 12
 	Armament:
-		Weapon: HammerTankCannon
+		Weapon: ra1_soviets_hammertank_cannon
 		Recoil: 75
 		RecoilRecovery: 25
 		LocalOffset: 1100,100,100, 1100,-100,100
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_soviets_upgrade_nucleartankshells
 	Armament@Upgrade:
-		Weapon: HammerTankCannonThermobaric
+		Weapon: ra1_soviets_hammertank_cannon_thermobaric
 		Recoil: 75
 		RecoilRecovery: 25
 		LocalOffset: 1100,100,100, 1100,-100,100
@@ -428,10 +428,10 @@ ra1_soviets_hammertank:
 	Voiced:
 		VoiceSet: RussianVehicleVoice
 	FireWarheadsOnDeath:
-		Weapon: HammerTankCannon
+		Weapon: ra1_soviets_hammertank_cannon
 		RequiresCondition: !ra1_soviets_doctrine_inferno
 	FireWarheadsOnDeath@Upgrade:
-		Weapon: HammerTankCannonThermobaric
+		Weapon: ra1_soviets_hammertank_cannon_thermobaric
 		RequiresCondition: ra1_soviets_doctrine_inferno
 	RenderSprites:
 		PlayerPalette: player_rgba
@@ -1089,16 +1089,16 @@ ra1_soviets_heatraytank:
 		Speed: 60
 		TurnSpeed: 12
 	Armament@1:
-		Weapon: HeatRayBeam1
+		Weapon: ra1_soviets_heatraytank_heatray1
 		LocalOffset: 400,-150,200, 400,50,300, 400,-50,150, 400,150,250, 400,-75,150, 400,225,250, 400,-225,200, 400,75,300, 400,-100,250, 400,100,200, 400,-200,300, 400,200,150, 400,-175,300, 400,175,150, 400,-125,250, 400,125,200
 	Armament@2:
-		Weapon: HeatRayBeam2
+		Weapon: ra1_soviets_heatraytank_heatray2
 		LocalOffset: 400,100,250, 400,-100,200, 400,200,300, 400,-200,150, 400,175,300, 400,-175,150, 400,125,250, 400,-125,200, 400,75,150, 400,-225,250, 400,225,200, 400,-75,300, 400,150,200, 400,-50,300, 400,50,150, 400,-150,250
 	Armament@3:
-		Weapon: HeatRayBeam3
+		Weapon: ra1_soviets_heatraytank_heatray3
 		LocalOffset: 400,-75,150, 400,225,250, 400,-225,200, 400,75,300, 400,-150,200, 400,50,300, 400,-50,150, 400,150,250, 400,-175,300, 400,175,150, 400,-125,250, 400,125,200, 400,-100,250, 400,100,200, 400,-200,300, 400,200,150
 	Armament@4:
-		Weapon: HeatRayBeam4
+		Weapon: ra1_soviets_heatraytank_heatray4
 		LocalOffset: 400,175,300, 400,-175,150, 400,125,250, 400,-125,200, 400,100,250, 400,-100,200, 400,200,300, 400,-200,150, 400,150,200, 400,-50,300, 400,50,150, 400,-150,250, 400,75,150, 400,-225,250, 400,225,200, 400,-75,300
 	FirepowerMultiplier@MultiWeapon:
 		Modifier: 25

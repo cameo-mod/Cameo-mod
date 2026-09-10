@@ -1,15 +1,15 @@
 # audit_code_duplication — copy-paste clone groups
 
-Python files: **457** (min 5 statements), C# files: **353** (min 8 lines)
+Python files: **458** (min 5 statements), C# files: **353** (min 8 lines)
 
 | code | meaning | clone groups | baseline |
 |---|---|---|---|
-| C1 | identical Python function bodies | 20 | 10 |
+| C1 | identical Python function bodies | 21 | 10 |
 | C2 | identical C# method bodies | 15 | 14 |
 | C3 | identical module-level literal tables | 23 | 10 |
 
 
-## C1 — Python function clones (20 group(s))
+## C1 — Python function clones (21 group(s))
 
 | copies | fingerprint | sites |
 |---|---|---|
@@ -26,6 +26,7 @@ Python files: **457** (min 5 statements), C# files: **353** (min 8 lines)
 | 2 | 3ec58372f7614926 | tools/tilesets/generate_clear_lava.py:639 lattice(); tools/tilesets/generate_sh04_alpha_beach_prototype.py:1538 lattice() |
 | 2 | 4fa9c55d9990e939 | tools/balance/consolidate_freedom_rocket_base.py:64 resolved_hash(); tools/balance/consolidate_laser_heavy_routes.py:103 resolved_hash() |
 | 2 | 6a38f8704e6495e3 | tools/tilesets/generate_volcanic_tileset.py:576 tileable_noise(); tools/tilesets/volcanic_art_utils.py:120 tileable_noise() |
+| 2 | 8ba6be38de7d5e25 | tools/tests/test_closed_owner_names.py:109 test_bundled_map_references_are_complete(); tools/tests/test_guarded_owned_names.py:88 test_bundled_maps_have_no_old_weapon_names() |
 | 2 | 91e5e00bc8dcb778 | tools/tilesets/build_volcanic_basalt_gimp_brushes.py:58 checkerboard(); tools/tilesets/fix_tc_basalt_shadow_outlines.py:60 checkerboard() |
 | 2 | 97800b303b1b47fb | tools/rename/apply.py:73 sub(); tools/rename/safe_rename.py:91 sub() |
 | 2 | 99775302ed579094 | tools/tests/test_dead_warhead_fields.py:157 setUp(); tools/tests/test_dead_warhead_fields.py:206 setUp() |
@@ -87,7 +88,7 @@ Python files: **457** (min 5 statements), C# files: **353** (min 8 lines)
 
 ## FAIL
 
-- C1: 20 > baseline 10
+- C1: 21 > baseline 10
 - C2: 15 > baseline 14
 - C3: 23 > baseline 10
 

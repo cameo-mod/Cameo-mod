@@ -34,14 +34,14 @@ ra1_allies_alliedapc:
 	Turreted:
 		TurnSpeed: 21
 	Armament@PRIMARY:
-		Weapon: APCGunAllies
+		Weapon: ra1_allies_alliedapc_gun
 		Recoil: 48
 		RecoilRecovery: 18
 		LocalOffset: 85,85,299, 85,-85,299
 		MuzzleSequence: muzzle
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: APCGunAllies_AA
+		Weapon: ra1_allies_alliedapc_gun_AA
 		Recoil: 48
 		RecoilRecovery: 18
 		LocalOffset: 85,85,299, 85,-85,299
