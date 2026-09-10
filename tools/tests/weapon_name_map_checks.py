@@ -3,6 +3,29 @@ import re
 import zipfile
 
 
+def assert_owned_weapon_consumers(test, rules, routes):
+    """Check concrete ownership and every raw active value, including abstracts."""
+    owners = {new: actor for actor, route in routes.items() for new in route.values()}
+    old = {name.casefold() for route in routes.values() for name in route}
+    test.assertTrue(old, "Owner routes must not be empty")
+    for actor in rules.actors:
+        if actor.startswith('^'):
+            continue
+        for trait in rules.resolve(actor).children:
+            name = trait.get('Weapon')
+            test.assertNotIn((name or '').casefold(), old)
+            if name in owners:
+                test.assertEqual(actor, owners[name])
+
+    def walk(node):
+        test.assertFalse(old & {v.strip().casefold() for v in node.value.split(',')}, node.key)
+        for child in node.children:
+            walk(child)
+
+    for node in list(rules.actors.values()) + list(rules.weapons.values()):
+        walk(node)
+
+
 def assert_no_old_weapon_names(test, root, names):
     names = tuple(names)
     test.assertTrue(names, "Weapon-name inventory must not be empty")

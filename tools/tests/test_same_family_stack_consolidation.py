@@ -58,6 +58,10 @@ class SameFamilyStackConsolidationTests(unittest.TestCase):
         historical = {new: old for old, new in renamed.items()}
         guarded = json.loads((ROOT / 'tools/tests/fixtures/guarded_owned_names_20260910.json').read_text(encoding='utf-8'))
         historical.update({new: old for route in guarded['routes'].values() for old, new in route.items()})
+        ifv = json.loads((ROOT / 'tools/tests/fixtures/ifv_owned_names_20260910.json').read_text(encoding='utf-8'))
+        historical.update({new: old for route in ifv['routes'].values() for old, new in route.items()})
+        td = json.loads((ROOT / 'tools/tests/fixtures/td_owned_names_20260910.json').read_text(encoding='utf-8'))
+        historical.update({new: old for route in td['routes'].values() for old, new in route.items()})
         self.assertEqual({historical.get(name, name) for name in selected},
                          set(self.report["changed"]))
 
@@ -121,7 +125,7 @@ class SameFamilyStackConsolidationTests(unittest.TestCase):
     def test_role_and_target_contract_hazards_remain_deferred(self):
         deferred = {
             "RA220mmrapid", "CabalCyborgChaingun", "TSDevoutChainguns",
-            "CommandoRocketLauncher", "RocketsRA", "SheridanMissiles",
+            "td_gdi_havoc_rocket", "RocketsRA", "SheridanMissiles",
             "CabalRocketCyborgRockets", "CabalRocketCyborgRocketsUpgraded",
             "TSBikeMissile", "TigerCannon",
             "Type97Cannon", "TSZoneHellfireSonic",

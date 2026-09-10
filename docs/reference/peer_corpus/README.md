@@ -17,6 +17,22 @@ Target existence does not prove activation or reachability. Routes must not be s
 as simultaneous actors or weapons. This is an input inventory, not an upgrade simulator.
 Custom or differently named state providers require separate source-specific review.
 
+The bounded initial-state review pilot covers exactly HARV, LST, HMMV and HMMV.TOW.
+It additionally preserves top-level condition/prerequisite uses and authored
+modifier-bearing traits. Modifier selection is heuristic, not complete provider
+coverage. Counts are declaration occurrences, not unique conditions or proven
+initial-state blockers. All expressions remain unevaluated; an empty collection
+would not certify an unmodified state. Unknown/custom runtime providers, world and
+player effects, delivery state and compatible upgrades still require review.
+The required context includes owner/faction, prerequisites, purchased upgrades,
+production level and the exact source-engine revision. The source's moving
+`ca-engine/1.09` branch name is not proof of a particular historical binary.
+
+HARV/LST have no direct weapon evidence but still carry conditional state; unarmed
+does not imply factory-ready. The pilot leaves all377 prior record payloads
+unchanged apart from its four added review inventories and exporter provenance.
+No factory/max certification, new DPS, prices or applied game-stat targets result.
+
 Regenerate with `tools/reference/extract_peer_units.py --mod ca --root <clean-checkout>
 --json <new-output.jsonl> --expect-commit <full-commit>`, review the source/population and
 evidence changes, then explicitly update the payload and index SHA-256 together. Do not

@@ -12,7 +12,7 @@ sys.path[:0] = [str(ROOT / 'tools/audit'), str(ROOT / 'tools/balance')]
 from miniyaml import Ruleset
 from dump_resolved import node_to_obj
 import extract_stats
-from weapon_name_map_checks import assert_no_old_weapon_names
+from weapon_name_map_checks import assert_no_old_weapon_names, assert_owned_weapon_consumers
 
 
 def digest(obj):
@@ -74,22 +74,7 @@ class ClosedOwnerNameTests(unittest.TestCase):
         self.assertEqual(dict(counts), {'Armament': 27, 'FireWarheadsOnDeath': 6})
 
     def test_no_other_consumers_or_old_active_references(self):
-        owners = {n: a for a, route in self.before['routes'].items() for n in route.values()}
-        old = {name.casefold() for name in self.mapping}
-        for actor in self.rules.actors:
-            if actor.startswith('^'):
-                continue
-            for trait in self.rules.resolve(actor).children:
-                name = trait.get('Weapon')
-                self.assertNotIn((name or '').casefold(), old)
-                if name in owners:
-                    self.assertEqual(actor, owners[name])
-        def walk(node):
-            self.assertFalse(old & {v.strip().casefold() for v in node.value.split(',')}, node.key)
-            for child in node.children:
-                walk(child)
-        for node in list(self.rules.actors.values()) + list(self.rules.weapons.values()):
-            walk(node)
+        assert_owned_weapon_consumers(self, self.rules, self.before['routes'])
 
     def test_external_flame_reference_selector_is_not_a_cameo_identity(self):
         tree = ast.parse((ROOT / 'tools/reference/aggregate_archetype.py').read_text(encoding='utf-8'))

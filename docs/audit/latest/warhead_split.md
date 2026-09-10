@@ -11,7 +11,6 @@ _at or below baseline_ — pre-existing **W24** debt (54 weapons), not a regress
 | AsianChaosMine | 2 | 125000 | 250000 |
 | AsianPhoenixRocket | 3 | 20000 | 60000 |
 | AsianPhoenixRocket_elite | 3 | 20000 | 60000 |
-| BikeRockets | 2 | 8000 | 16000 |
 | D2K_Rocket_Trooper2 | 3 | 8000 | 24000 |
 | DredMissile | 3 | 30000 | 90000 |
 | IdolCannon | 4 | 10000 | 40000 |
@@ -47,6 +46,7 @@ _at or below baseline_ — pre-existing **W24** debt (54 weapons), not a regress
 | TSVulcan | 2 | 2000 | 4000 |
 | ThermobaricFlame | 2 | 2000 | 4000 |
 | Type97PlasmaCannon | 3 | 4000 | 12000 |
+| V2ExplodeIrak | 2 | 60000 | 120000 |
 
 
 _... and 14 more._
@@ -91,5 +91,5 @@ Allowed, but 8000+ per-warhead x N is a big total — confirm it is intended (no
 | RA2SCUD_fire | 3 | 30000 | 90000 |
 | RA2SCUD_tesla | 3 | 30000 | 90000 |
 | V3Explode | 3 | 10000 | 30000 |
-| YakTeslaBomb | 4 | 40000 | 160000 |
+| ra1_soviets_teslayak_tesla_bomb | 4 | 40000 | 160000 |
 

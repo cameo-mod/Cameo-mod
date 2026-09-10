@@ -50,7 +50,7 @@ SELECTED = {
     "FutureEnforcerShotgunDeployed": [("ShotgunShrapnelEnemy", {"ShotgunGrenadeEnemy", "ShotgunShrapnelEnemy"})],
     "FutureEnforcerShotgunDeployed_elite": [("ShotgunShrapnelEnemy", {"ShotgunGrenadeEnemy", "ShotgunShrapnelEnemy"})],
     "FutureEnforcerShotgun_elite": [("ShotgunShrapnelEnemy", {"ShotgunGrenadeEnemy", "ShotgunShrapnelEnemy"})],
-    "GDISniperRifle": [("SniperChaingun", {"SniperFlak", "SniperChaingun"})],
+    "td_gdi_heavysniper_rifle": [("SniperChaingun", {"SniperFlak", "SniperChaingun"})],
     "GhostSniper": [("SniperChaingun", {"SniperMediumMissile", "SniperFlak", "SniperChaingun"})],
     "GhostSniperLockdown": [
         ("SniperFlak", {"SniperMediumMissile", "SniperFlak"}),

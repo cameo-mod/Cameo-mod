@@ -27,7 +27,7 @@ ra1_soviets_yakscoutplane:
 	ChangesHealth@SelfHealing:
 		Step: 32
 	Armament@BOMBS:
-		Weapon: YakNapalm
+		Weapon: ra1_soviets_yakscoutplane_napalm_bomb
 		LocalOffset: 0,-256,-32, 0,256,-32
 		AmmoUsage: 4
 		PauseOnCondition: ammo < 4
@@ -133,7 +133,7 @@ ra1_soviets_teslayak:
 	ChangesHealth@SelfHealing:
 		Step: 64
 	Armament@BOMBS:
-		Weapon: YakTeslaBomb
+		Weapon: ra1_soviets_teslayak_tesla_bomb
 		LocalOffset: 0,0,-32
 		AmmoUsage: 16
 		PauseOnCondition: ammo < 16

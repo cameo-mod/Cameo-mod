@@ -6,10 +6,29 @@ import unittest
 from unittest import mock
 import zipfile
 
-from weapon_name_map_checks import assert_no_old_weapon_names
+from weapon_name_map_checks import assert_no_old_weapon_names, assert_owned_weapon_consumers
 
 
 class WeaponNameMapCheckTests(unittest.TestCase):
+    def test_owner_scan_rejects_old_abstract_values_and_foreign_consumers(self):
+        def node(key, value='', children=()):
+            return types.SimpleNamespace(key=key, value=value, children=children,
+                                         get=lambda field: value if field == 'Weapon' else None)
+        routes = {'owner': {'OldWeapon': 'NewWeapon'}}
+        good = node('owner', children=[node('Armament', 'NewWeapon')])
+        rules = types.SimpleNamespace(actors={'owner': good}, weapons={},
+                                      resolve=lambda actor: rules.actors[actor])
+        assert_owned_weapon_consumers(self, rules, routes)
+        rules.actors['intruder'] = good
+        with self.assertRaises(AssertionError):
+            assert_owned_weapon_consumers(self, rules, routes)
+        del rules.actors['intruder']
+        rules.actors['^Abstract'] = node('^Abstract', children=[node('Weapon', 'oldweapon')])
+        with self.assertRaises(AssertionError):
+            assert_owned_weapon_consumers(self, rules, routes)
+        with self.assertRaises(AssertionError):
+            assert_owned_weapon_consumers(self, rules, {})
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)

@@ -14,7 +14,7 @@ from miniyaml import Ruleset
 
 ROOTS = {
     "CabalAscendedRockets": ("MissileHE_Heavy", 30000, 6),
-    "CommandoGrenadeLauncher": ("Concussion_Medium", 40000, 2),
+    "td_gdi_havoc_grenade": ("Concussion_Medium", 40000, 2),
     "MachineGunBuggy2": ("Bullet_Medium", 6000, 3),
     "NanoArtilleryAG": ("Concussion_Heavy", 23331, 3),
     "155mm": ("Concussion_Heavy", 30000, 3),
@@ -74,7 +74,7 @@ class ProjectileRoleBulkProfileTests(unittest.TestCase):
             self.assertFalse(flats & RETIRED, f"{name}: {flats & RETIRED}")
 
     def test_commando_keeps_integrity_damage_separate(self):
-        weapon = self.rules.resolve_weapon("CommandoGrenadeLauncher")
+        weapon = self.rules.resolve_weapon("td_gdi_havoc_grenade")
         emp = child(weapon, "Warhead@EMPUnit")
         self.assertEqual("AffectsIntegrity", emp.value)
         self.assertEqual("20000", child(emp, "Damage").value)

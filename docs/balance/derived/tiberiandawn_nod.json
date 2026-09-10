@@ -27,7 +27,7 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament@PRIMARY",
-      "weapon": "HeliGun"
+      "weapon": "td_nod_apacheattackhelicopter_gun"
      },
      {
       "avg_versus": 1.0168,
@@ -50,7 +50,7 @@
       "reliability": 0.0486,
       "sigma": 280.04,
       "slot": "Armament@Upgrade",
-      "weapon": "HeliMissiles"
+      "weapon": "td_nod_apacheattackhelicopter_missile"
      }
     ],
     "shield_always_on": false,
@@ -89,7 +89,7 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament@Base",
-      "weapon": "VenomLaser"
+      "weapon": "td_nod_venom_laser"
      },
      {
       "avg_versus": 1.1723,
@@ -135,7 +135,7 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament@Burning",
-      "weapon": "VenomLaserBurning"
+      "weapon": "td_nod_venom_laser_burning"
      }
     ],
     "physical_state_multiplier": 1.7388,
@@ -269,7 +269,7 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament@Base",
-      "weapon": "NodTurretLaser"
+      "weapon": "td_nod_laserturret_laser"
      },
      {
       "avg_versus": 1.1723,
@@ -315,7 +315,7 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament@Burning",
-      "weapon": "NodTurretLaserBurning"
+      "weapon": "td_nod_laserturret_laser_burning"
      }
     ],
     "physical_state_multiplier": 1.7396,
@@ -2099,7 +2099,7 @@
       "reliability": 0.0935,
       "sigma": 250.0,
       "slot": "Armament",
-      "weapon": "BikeRockets"
+      "weapon": "td_nod_reconbike_rocket"
      }
     ],
     "shield_always_on": false,

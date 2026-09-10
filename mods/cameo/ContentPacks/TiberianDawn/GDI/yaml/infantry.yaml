@@ -360,11 +360,11 @@ td_gdi_heavysniper:
 	ChangesHealth@SelfHealing:
 		Step: 25
 	Armament:
-		Weapon: GDISniperRifle
+		Weapon: td_gdi_heavysniper_rifle
 		LocalOffset: 0,0,427
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: GDISniperRifle
+		Weapon: td_gdi_heavysniper_rifle
 	TakeCover:
 		ProneOffset: 300,0,-227
 	WithInfantryBody:
@@ -447,20 +447,20 @@ td_gdi_officer:
 		Queue: Infantry, RAInfantry
 		Description: actor_gdiofficer.description
 	Armament@PRIMARY:
-		Weapon: OfficerMachineGun
+		Weapon: td_gdi_officer_machinegun
 		LocalOffset: 128,0,256
 		RequiresCondition: !td_gdi_upgrade_armorpiercingbullets
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: OfficerMachineGun
+		Weapon: td_gdi_officer_machinegun
 		RequiresCondition: !td_gdi_upgrade_armorpiercingbullets
 	Armament@Upgrade:
-		Weapon: OfficerMachineGunAP
+		Weapon: td_gdi_officer_machinegun_ap
 		LocalOffset: 128,0,256
 		RequiresCondition: td_gdi_upgrade_armorpiercingbullets
 	Armament@UpgradeGARRISONED:
 		Name: garrisoned
-		Weapon: OfficerMachineGunAP
+		Weapon: td_gdi_officer_machinegun_ap
 		MuzzleSequence: garrison-muzzle
 		RequiresCondition: td_gdi_upgrade_armorpiercingbullets
 	ProducibleWithLevel:
@@ -537,36 +537,36 @@ td_gdi_havoc:
 	ProducibleWithLevel:
 		InitialLevels: 1
 	Armament@ra1_allies_alliedsniper:
-		Weapon: CommandoSniper
+		Weapon: td_gdi_havoc_sniper
 		LocalOffset: 256,64,512
 		AmmoUsage: 5
 		PauseOnCondition: ammo < 5
 	Armament@Rocket:
-		Weapon: CommandoRocketLauncher
+		Weapon: td_gdi_havoc_rocket
 		LocalOffset: 128,64,384
 		AmmoUsage: 5
 		PauseOnCondition: ammo < 5
 	Armament@Grenade:
-		Weapon: CommandoGrenadeLauncher
+		Weapon: td_gdi_havoc_grenade
 		LocalOffset: 128,0,384
 		AmmoUsage: 5
 		PauseOnCondition: ammo < 5
 	Armament@M16:
-		Weapon: CommandoM16
+		Weapon: td_gdi_havoc_rifle
 		LocalOffset: 256,64,512
 		PauseOnCondition: ammo < 5
 	Armament@SniperGARRISONED:
 		Name: garrisoned
-		Weapon: CommandoSniper
+		Weapon: td_gdi_havoc_sniper
 	Armament@RocketGARRISONED:
 		Name: garrisoned
-		Weapon: CommandoRocketLauncher
+		Weapon: td_gdi_havoc_rocket
 	Armament@GrenadeGARRISONED:
 		Name: garrisoned
-		Weapon: CommandoGrenadeLauncher
+		Weapon: td_gdi_havoc_grenade
 	Armament@M16GARRISONED:
 		Name: garrisoned
-		Weapon: CommandoM16
+		Weapon: td_gdi_havoc_rifle
 	Armament@c4:
 		Weapon: GenericC4
 		Name: secondary

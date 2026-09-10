@@ -210,6 +210,14 @@ class InstalledCorpusTests(unittest.TestCase):
         states = {r['id']: r['production_state_evidence'] for r in rows}
         self.assertEqual(len(states['HMMV']['declared_routes']), 2)
         self.assertEqual(states['HMMV.TOW']['declared_routes'], [])
+        self.assertEqual({name for name, state in states.items() if 'initial_state_review' in state},
+                         {'HARV', 'LST', 'HMMV', 'HMMV.TOW'})
+        harv = states['HARV']['initial_state_review']
+        self.assertEqual(harv['status'], 'unverified')
+        self.assertTrue(harv['condition_uses'])
+        self.assertTrue(harv['prerequisite_uses'])
+        self.assertIn('DamageMultiplier@TIBSTEALTH',
+                      [x['key'] for x in harv['modifier_traits']])
         self.assertTrue(all(r['factory_ready_certification'] == 'none' and
                             r['maximum_upgrade_certification'] == 'none'
                             for r in states.values()))

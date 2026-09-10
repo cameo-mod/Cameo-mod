@@ -4,10 +4,11 @@ The findings below began as a read-only plan. Bounded P0 implementation now reta
 resolved armament evidence and withholds unsupported numeric summaries; ordinary and
 hero Doc5 consumers now honor emitted evidence columns. Legacy corpus rows remain
 unassessed for unmigrated sources. Full factory-ready/max-upgrade state evaluation remains
-pending. The CA structured transport is now implemented locally as described below.
+pending. The CA structured transport is published in draft PR339; the bounded
+initial-state metadata follow-up below has completed source and combined validation.
 Source checkouts were read only; no source game ran.
 
-### CA structured consumer migration (P3, local follow-up)
+### CA structured consumer migration (P3, published draft)
 
 `docs/reference/peer_corpus/index.json` explicitly selects the pinned CA JSONL payload.
 That source replaces, rather than supplements, the CA Doc5 slice in ordinary/hero
@@ -216,6 +217,52 @@ with the exact existing baseline signatures; sampled memory peak 80.26%, no guar
 stop. Canonical audits retain nine failing categories: inherits, upgrades,
 basebuilder_crates, buildable_order, packs, split_definitions, nuclear_flash_bindings,
 doc_claims and doc_health. No empty final Markdown reports. No live YAML or C# change.
+
+### Four-actor initial-state inventory (10 September follow-up)
+
+The explicit CA pilot is HARV, LST, HMMV and HMMV.TOW. It records authored
+top-level condition/prerequisite uses and raw modifier-bearing traits, without
+evaluating them. Collection is heuristic and intentionally not exhaustive; custom
+providers and world/player state may be missing. Exact source actor IDs are
+asserted in the installed-corpus test so an upstream rename cannot silently
+remove the selected evidence unnoticed.
+
+| Actor | Condition-use occurrences | Prerequisite-use occurrences | Modifier-trait occurrences |
+|---|---:|---:|---:|
+| HARV | 184 | 22 | 88 |
+| LST | 209 | 28 | 108 |
+| HMMV | 230 | 29 | 112 |
+| HMMV.TOW | 229 | 29 | 112 |
+
+These are declarations, not unique conditions or confirmed factory-state
+blockers. Even unarmed HARV retains damage modifiers and external dependencies.
+No absent condition is assumed false, no modifiers are multiplied together, and
+the queue/upgrade alternatives remain separate. Both certification flags stay
+`none`, including empty inventories.
+
+The clean pinned CA revision and all48 source input hashes are unchanged. All377
+pre-existing row payloads compare exactly after excluding only the four new
+review objects and updated exporter provenance. The regenerated6,802,090-byte
+payload SHA-256 is
+`e80f02b6ae603adfb5c3015045f94011a4af77ac4336f34bb35e153c30f1956f`.
+41 focused exporter/consumer tests pass; independent review found no blocker.
+Standalone isolated full suite:1,714 run,14 failures,8 errors,64 skips, exact22
+prior failure/error identities; peak57.78%, no95% guard stop. Independent ID
+accounting covers1,717 discovered identities, including3 methods under the
+pre-existing optional-DTA class skip; none missing/extra.
+Combined R17:1,957 run,12 failures,8 errors,64 skips, exact20 prior identities,
+with all1,960 discovered identities accounted for. This is not an all-green suite.
+Canonical source audits retain their prior failures, except documentation health
+now passes after restoring one missing Contents link in LESSONS_LEARNED.md.
+That index-only repair does not change the engine-update policy it links to.
+Remaining8 gates:inherits,upgrades,basebuilder_crates,buildable_order,packs,
+split_definitions,nuclear_flash_bindings,doc_claims. No thresholds changed.
+33 ledgers have zero drift; no new game test was needed for metadata/index changes.
+
+This completes a collection prerequisite, not P2 certification. The latter
+requires a defined owner/faction, prerequisites/purchased upgrades, production
+level and a verified exact source-engine revision. No live YAML/C# or numerical
+reference-stat change is included.
 
 ## 3. Non-goals
 

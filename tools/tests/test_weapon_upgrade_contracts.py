@@ -88,11 +88,11 @@ class WeaponUpgradeContractTest(unittest.TestCase):
         self._assert_not_weaker("RA2Patriot", "RA2PatriotThunderboltMissile", upgrade.AIR)
 
     def test_armor_piercing_officer_round_preserves_base_payload_and_range(self):
-        weapon = self.rs.resolve_weapon("OfficerMachineGunAP")
+        weapon = self.rs.resolve_weapon("td_gdi_officer_machinegun_ap")
         self.assertEqual(weapon.get("Range"), "5596")
-        self.assertEqual(self._warhead("OfficerMachineGunAP", "Warhead@Bullet_Medium").get("Damage"),
+        self.assertEqual(self._warhead("td_gdi_officer_machinegun_ap", "Warhead@Bullet_Medium").get("Damage"),
                          "16000")
-        self._assert_not_weaker("OfficerMachineGun", "OfficerMachineGunAP", upgrade.CORE)
+        self._assert_not_weaker("td_gdi_officer_machinegun", "td_gdi_officer_machinegun_ap", upgrade.CORE)
 
     def test_ts_paid_replacements_do_not_reduce_centered_core_damage(self):
         for base, upgraded in (

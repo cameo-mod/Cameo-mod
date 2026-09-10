@@ -1459,8 +1459,9 @@ def emit_main_warhead(tag, vt, main, *, damage, falloff, spread, damage_types,
     they sit between DamageTypes and the percentage fold, where they always sat.
     `heaviness=None` (the legacy levelled templates) omits the scalar — omitted
     MEANS the disabled sentinel in AreaDamageWarhead.cs, so absence stays legal.
-    `heaviness_mode="SharedVersus"` is the approved §12.0i SHARED PROFILE (Aedis
-    2026-09-10 03:17): the percentage half follows the SAME belled table as the
+    `heaviness_mode="SharedVersus"` implements continuous heaviness (§12.0i), with
+    the shared Versus extension approved by Aedis (2026-09-10 03:17):
+    the percentage half follows the SAME belled table as the
     flat half, so `pct_bands` MUST be empty there (the C# rejects any
     PercentageVersus* table in that mode) and `percent_scale` carries the family's
     magnitude dial (CannonAP ships 2000 — Damage 100 -> 0.01% max HP before h/2

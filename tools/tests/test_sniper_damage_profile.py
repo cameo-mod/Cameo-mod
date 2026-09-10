@@ -17,14 +17,14 @@ from percentage_damage import percentage_applications
 
 ROOT_SNIPERS = (
     "AsianSniper", "GhostSniper", "SpecterSniper", "VonSniper",
-    "GDISniperRifle", "CommandoSniper",
+    "td_gdi_heavysniper_rifle", "td_gdi_havoc_sniper",
 )
 RESOLVED_SNIPERS = (
     "AsianSniper", "AsianSniperAP", "AsianSniperLockdown",
     "GhostSniper", "GhostSniperBunker", "GhostSniperLockdown",
     "SpecterSniper", "SpecterSniperLockdown",
     "VonSniper", "VonSniperAP", "VonSniperLockdown",
-    "GDISniperRifle", "CommandoSniper", "DragunovSniper",
+    "td_gdi_heavysniper_rifle", "td_gdi_havoc_sniper", "DragunovSniper",
     "LightSniper", "CryoLightSniper", "RA2AWP", "RA2AWP_elite",
     "NaxiSniper", "NaxiSniper_elite", "tkmawp", "VanSniper",
     "TSSniper", "td_gdi_commando_sniper", "td_gdi_commando_sniper_elite",
@@ -41,11 +41,11 @@ SNIPER_ACTORS = {
     "VonSniper": "tkm_von",
 }
 RETIRED_FOLLOWUP_WARHEADS = {
-    "GDISniperRifle": {
+    "td_gdi_heavysniper_rifle": {
         "Warhead@SmallArms", "Warhead@Grenade", "Warhead@GrenadeFriendlyFire",
         "Warhead@FlakWeapon", "Warhead@Chaingun",
     },
-    "CommandoSniper": {"Warhead@SniperWeapon", "Warhead@SniperWeaponExtraDamage", "Warhead@Chaingun"},
+    "td_gdi_havoc_sniper": {"Warhead@SniperWeapon", "Warhead@SniperWeaponExtraDamage", "Warhead@Chaingun"},
     "DragunovSniper": {
         "Warhead@TankDestroyerCannon", "Warhead@RailgunWeapon",
         "Warhead@RailgunExtraDamage", "Warhead@LightMissile",

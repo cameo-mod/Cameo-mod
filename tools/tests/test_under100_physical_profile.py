@@ -48,7 +48,7 @@ ROOTS = {
     "facedancer_grenade", "ixian_airdrone", "wc2arrowFire",
     "wc2highArrowFire",
     "ArcherArtilleryShell", "ArtilleryShellUpgrade", "BallistaMultiShot",
-    "BikeRockets", "D2K_155mm2", "SwarmlingShoot", "eye_bomberguy",
+    "td_nod_reconbike_rocket", "D2K_155mm2", "SwarmlingShoot", "eye_bomberguy",
     "v1rocketsThermobaric", "wc2_dwarf_Rifle", "wc2catapultFire",
 }
 

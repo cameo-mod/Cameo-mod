@@ -1,6 +1,6 @@
 # audit_doc_health — is the documentation structurally sound?
 
-Documents scanned: **296**
+Documents scanned: **308**
 
 `audit_doc_claims.py` checks whether the NUMBERS are still true. This checks whether the documents themselves are intact.
 
@@ -12,8 +12,8 @@ Documents scanned: **296**
 | D4 | same-file anchor with no heading | 0 |
 | D5 | reference to a moved/removed document | 0 |
 | D6 | duplicate section id in DESIGN.md | 0 |
-| D7 | Contents index missing a section | 1 |
-| D8 | citation names a different section's law | 1 |
+| D7 | Contents index missing a section | 0 |
+| D8 | citation names a different section's law | 0 |
 
 
 ## D1 — Control characters (0)
@@ -46,14 +46,14 @@ _clean_
 _clean_
 
 
-## D7 — Contents index out of date (1)
+## D7 — Contents index out of date (0)
 
-- `docs/LESSONS_LEARNED.md` — Contents omits `The canonical engine update pipeline (binding, uniform process)`
-
-
-## D8 — Citation points at the wrong law (1)
-
-- `tools/balance/gen_weapon_template.py`:1462 — cites §12.0i (CONTINUOUS HEAVINESS — the global armor ) but names `PROFILE`, which is §12.0 (THE PROFILE SHAPE LAW (maintainer, 2026-)
+_clean_
 
 
-**FAIL — 2 finding(s).** Fix the document; none of these are cosmetic. D1/D2 are corruption, D6 makes a cited law ambiguous, D3–D5 send a reader to the wrong place, D7 means a document is hiding its own content from the person who was told to read it, and D8 means a citation resolves — to the wrong law.
+## D8 — Citation points at the wrong law (0)
+
+_clean_
+
+
+**PASS** — no structural defects.

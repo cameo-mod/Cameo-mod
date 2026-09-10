@@ -2,6 +2,74 @@
 
 This is a local integration checkpoint, not a merged PR or gameplay-balance approval.
 
+## Frozen batch closed — 10 September, 12:18 Jakarta
+
+Current source inputs supersede the historical snapshots below:
+
+| Draft | Source commit | Closing change |
+|---|---|---|
+| PR339 | d0c0be8848289e27c854fae1f5aae0e8df4011f2 | Four-actor CA initial-state declaration inventory; missing Contents link |
+| PR340 | 6278225df00c0aa0356961036c44670847321027 | Final30 RA1 and16 TD identity-only weapons, exact references and tests |
+| PR341 | 5a931844a3c6184fbfdd9f50fc8724b37543c5e0 | Citation-only correction; previously verified heaviness pilot unchanged |
+
+All three are published OPEN/DRAFT. This combined checkout remains local and
+unpublished. No master push, PR merge, protected PR edit, engine pin change or
+OpenCode invocation was made. Scope is frozen; no additional cohort is active.
+
+### Final evidence
+
+- R18 isolated full discovery:1,962 tests,12 failures,8 errors,64 skips. All20
+  failure/error identities are exactly R17's baseline.1,965 discovered identities
+  are accounted for, including3 methods under the pre-existing optional-DTA class
+  skip; no missing/extra tests. Peak total system RAM66.90%, no95% guard stop.
+  This is not an all-green suite or a claim of monolithic-equivalent execution.
+- The16 TD identities preserve all2,910 source/2,911 combined weapon payloads.
+  Full-field ledger comparisons are identity-only; all33 ledgers match live rules.
+  Earlier30-name preservation and R16 evidence are in the linked cohort reports.
+- Frozen final menu boot started12:07:22 Jakarta and completed90 seconds:
+  fresh MenuPostProcessEffect.PostWorldLoaded, no new exceptions, peak RAM66.85%,
+  owned process closed. No rebuild or matchup validation. The verified DLL remains
+  SHA-256 79FB7B6826E2A1F118883F1EDDA1CE0418446ED49561B5E2B521F89013B301A1.
+- The citation-only generator docstring was synchronized AFTER R18.41 focused
+  generator/fixture/citation tests then passed;146 templates regenerate with zero
+  drift. The combined documentation-health audit now passes. R18 is not presented
+  as having executed the later docstring.
+- Final targeted combined runtime/shape/uniqueness/suffix/split/K-linearity and
+  balance audits pass. Release drift remains FAIL: D1=115,D2=59,D3=17,D4=406/335,
+  D5=34. Source339 and340 full canonical runs retain eight existing gated failure
+  categories each; see their reports. No audit thresholds or original fixtures
+  were relaxed. Source340 C1 remains20. Independent final review found no remaining
+  publication blocker for this batch, not a whole-project balance endorsement.
+
+Renames do not fix historical damage outliers: Recon still33000 versus release
+32000, RAVulcan and both Officer weapons still16000 versus4000. Missing old-name
+matches remain raw debt; accepted status is not automatically transferred.
+
+### What remains, without opening more work
+
+1. **Actual balance implementation:** the next recommended bounded candidate is
+   the already-assessed Forgotten CannonAP cohort, not another naming session.
+   Its alternate weapons and material Wood/Heroic/percentage changes need targeted
+   matchup review before activation. The current five-weapon live pilot is not a
+   complete roster rebalance. See FORGOTTEN_CANNONAP_NEXT_COHORT_20260910.md.
+2. **Source-dependent state evidence:** factory/max certification still needs
+   exact source-engine provenance and a defined owner/prerequisite/upgrade/rank
+   scenario. The CA pilot records declarations only. Spice Wars source is missing;
+   RA3/Emperor coverage is not final-retail semantic certification.
+3. **Subjective naval roles:** do not apply submarine references to surface boats,
+   equate carriers with launcher DPS, or steal the RA1 Cruiser reference without
+   a reviewed assignment decision. See TD_NAVAL_REFERENCE_REVIEW_20260910.md.
+4. **Deferred implementation:** broader ownership/W24 migration remains unfinished,
+   not falsely declared source-blocked. It is outside this frozen closing batch.
+   Fingerprinted target proposals must be regenerated/reviewed before later use;
+   no new prices or stat targets have been applied here.
+
+Blackrobe's latest cadence is roughly2hours between routine Aedis updates.
+The12:08 update was delivered; closing publication news is recorded for the next
+appropriate update, not sent immediately. New-work intake after06:00 remains closed.
+
+## Historical checkpoints
+
 ## Exact inputs
 
 - PR341: `4b4b354f4914305e6a248ce15f83a233970ee400` (integration HEAD).

@@ -78,6 +78,64 @@ class ProductionStateEvidence(unittest.TestCase):
         self.assertEqual(row['factory_ready_certification'], 'none')
         self.assertEqual(row['maximum_upgrade_certification'], 'none')
 
+    def test_unarmed_modifiers_and_prerequisites_remain_unverified(self):
+        actors = """TRUCK:
+    Health:
+        HP: 100
+    SpeedMultiplier@POLICY:
+        Modifier: 125
+        RequiresCondition: policy && !driver-dead
+    ProductionCostMultiplier:
+        Prerequisites: is-hard-ai
+        Multiplier: 80
+    ChangesHealth:
+        Step: 10
+        PauseOnCondition: disabled
+"""
+        rules = build(pathlib.Path(self.add_temp()), actors, '')
+        row = epu.production_state_evidence(rules, rules.resolve('TRUCK'), review_initial_state=True)
+        review = row['initial_state_review']
+        self.assertEqual(review['status'], 'unverified')
+        self.assertEqual([x['expression'] for x in review['condition_uses']],
+                         ['policy && !driver-dead', 'disabled'])
+        self.assertTrue(all(x['initial_value'] == 'unverified' for x in review['condition_uses']))
+        self.assertEqual(review['prerequisite_uses'], [{
+            'trait': 'ProductionCostMultiplier', 'field': 'Prerequisites',
+            'expression': 'is-hard-ai', 'satisfied': 'unverified'}])
+        self.assertEqual([x['key'] for x in review['modifier_traits']],
+                         ['SpeedMultiplier@POLICY', 'ProductionCostMultiplier', 'ChangesHealth'])
+        self.assertEqual(row['factory_ready_certification'], 'none')
+        self.assertEqual(row['maximum_upgrade_certification'], 'none')
+
+    def test_state_review_is_opt_in_and_does_not_change_existing_evidence(self):
+        plain = self.evidence('BASE')
+        reviewed = epu.production_state_evidence(self.rules, self.rules.resolve('BASE'),
+                                               review_initial_state=True)
+        self.assertNotIn('initial_state_review', plain)
+        self.assertEqual(reviewed.pop('initial_state_review')['status'], 'unverified')
+        self.assertEqual(reviewed, plain)
+
+    def test_reviewed_removals_and_empty_conditions_do_not_reappear(self):
+        actors = """PARENT:
+    SpeedMultiplier:
+        Modifier: 150
+        RequiresCondition: upgraded
+CHILD:
+    Inherits: PARENT
+    -SpeedMultiplier:
+    Pausable:
+        PauseOnCondition:
+"""
+        rules = build(pathlib.Path(self.add_temp()), actors, '')
+        row = epu.production_state_evidence(rules, rules.resolve('CHILD'), review_initial_state=True)
+        self.assertEqual(row['initial_state_review']['modifier_traits'], [])
+        self.assertEqual(row['initial_state_review']['condition_uses'], [])
+        self.assertEqual(row['factory_ready_certification'], 'none')
+
+    def test_pilot_is_explicitly_four_ca_actors_only(self):
+        self.assertEqual(epu.STATE_REVIEW_COHORTS,
+                         {'ca': frozenset(('HARV', 'LST', 'HMMV', 'HMMV.TOW'))})
+
     def add_temp(self):
         tmp = tempfile.TemporaryDirectory()
         self.addCleanup(tmp.cleanup)

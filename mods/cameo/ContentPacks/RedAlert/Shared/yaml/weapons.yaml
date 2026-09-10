@@ -668,7 +668,7 @@ ra1_allies_alliedapc_gun_AA:
 		ValidTargets: Air
 		Damage: 4000
 		PercentageScale: 9975
-RAVulcan:
+ra1_allies_machinegunner_machinegun:
 	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
@@ -689,7 +689,7 @@ RAVulcan:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 		PercentageScale: 2494
-RAVulcanCryo:
+ra1_allies_machinegunner_machinegun_cryo:
 	Inherits@wh: ^Warhead_BulletCryo_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Cryo
