@@ -4,7 +4,7 @@
 
 Γ¢ö This **repeals the exemption** in `tools/audit/intentional_composites.py`. Its 224 entries are no longer 'reviewed, keep' ΓÇö they are the worklist. The registry data stays useful: it says which mains someone chose on purpose.
 
-concrete weapons with inherits: **2072**
+concrete weapons with inherits: **2074**
 
 W5 counts structural flat-damage nodes, including zero/healing/ally-only nodes; the split audit counts positive non-companion damage. Both resolve the full concrete weapon corpus. Use `--compare-split` for exact differences.
 
@@ -15,7 +15,7 @@ W5 counts structural flat-damage nodes, including zero/healing/ally-only nodes; 
 | W3 | two or more `^Projectile_*` inherits | **12** | 12 |
 | W4 | two or more `^Effect_*` inherits | **51** | 51 |
 | W5 | more than one resolved MAIN warhead | **303** | 389 |
-| W6 | effect warheads declared LOCALLY | **694** | 694 |
+| W6 | effect warheads declared LOCALLY | **693** | 694 |
 
 | I7 informational ΓÇö missing template | weapons |
 |---|--:|
@@ -240,7 +240,7 @@ _... and 11 more._
 _... and 263 more._
 
 
-## W6 ΓÇö effect warheads declared LOCALLY (694 vs ratchet 694)
+## W6 ΓÇö effect warheads declared LOCALLY (693 vs ratchet 694)
 
 | weapon | nodes | first three |
 |---|---|---|
@@ -286,7 +286,7 @@ _... and 263 more._
 | `BHBombs` | 1 | `Warhead@3Eff: CreateEffect` |
 
 
-_... and 654 more._
+_... and 653 more._
 
 
 _all buckets at or below their ratchets_ ΓÇö this is the pre-existing conversion backlog. **Lower each baseline as you convert; never raise one.**

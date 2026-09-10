@@ -120,3 +120,16 @@ not afterward. Independent review cleared the final compatibility-helper naming
 and verified no hidden class change. Five additional informational missing-direct-
 warhead-template entries are disclosed, not excused. The full suite is not green.
 This remains local integration only, not a GitHub merge or master push.
+
+## Tiger ownership checkpoint (08:54 Jakarta)
+
+PR340 source/tests now include `d598557f93f6e9585d40789778153c00113040a5`.
+The complete 2,908→2,911 combined weapon comparison passes; only the four expected
+owner identities and one effect helper replace two shared names. Five new focused
+tests pass. Final R8: 1,907 tests, 12 failures, 8 errors, 64 skips, exact R7
+signatures; peak RAM85.88%. Both source/integration have33 zero-drift ledgers.
+The08:49:30 90-second boot passed with no new exceptions, fresh menu proof and
+peak RAM70.59%; this covers final Yak and Tiger changes, no rebuild or matchup test.
+Targeted runtime/shape/split checks pass. Release D4 remains failing at348/335.
+Local effect debt falls694→693; other shape buckets and stacked counts stay fixed.
+Both follow-ups are independently reviewed, still draft and unmerged.

@@ -85,3 +85,7 @@ Canonical PR340 audits retain eight existing failing categories: inherits,
 basebuilder_crates, buildable_order, packs, split_definitions, release_drift,
 doc_claims and doc_health. Raw release D4 remains347 against335. This batch does
 not merge any PR or complete the whole-roster migration.
+
+Later integration evidence: the08:49:30 menu boot recorded in
+[the Tiger follow-up](TIGER_WEAPON_OWNERSHIP_20260910.md) also covers the final
+Yak compatibility composition and passed for90 seconds with no new exceptions.

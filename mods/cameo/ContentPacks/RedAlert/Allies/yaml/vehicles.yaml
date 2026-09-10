@@ -647,7 +647,7 @@ ra1_allies_alliedtigerheavytank:
 		TurnSpeed: 15
 		Offset: 0,0,0
 	Armament:
-		Weapon: TigerCannon
+		Weapon: ra1_allies_alliedtigerheavytank_cannon
 		Recoil: 75
 		RecoilRecovery: 50
 		LocalOffset: 1200,0,200
@@ -676,7 +676,7 @@ ra1_allies_alliedtigerheavytank:
 		RecoilRecovery: 50
 		LocalOffset: 1200,0,200
 		MuzzleSequence: muzzle
-		Weapon: TigerCannonCryo
+		Weapon: ra1_allies_alliedtigerheavytank_cannon_cryo
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 ra1_allies_alliedtankdestroyer:
 	Inherits: ^Tank
