@@ -3,8 +3,8 @@
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
 | T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (8 file(s)) | 70 | >= 24 |
-| T2 | `def test_*` in tools/tests (124 file(s)) | 1384 | >= 177 |
-| T3 | modules with no test mentioning them | 274 | <= 224 |
+| T2 | `def test_*` in tools/tests (127 file(s)) | 1399 | >= 177 |
+| T3 | modules with no test mentioning them | 273 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (274)
+## T3 — untested modules (273)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -254,7 +254,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/collapse_target.py | collapse_target |
 | python | tools/balance/compensate_retrofit.py | compensate_retrofit |
 | python | tools/balance/consolidate_compatibility_profiles.py | consolidate_compatibility_profiles |
-| python | tools/balance/consolidate_reviewed_weapon_roots.py | consolidate_reviewed_weapon_roots |
 | python | tools/balance/convert_apply_to_scaled_v2.py | convert_apply_to_scaled_v2 |
 | python | tools/balance/count_mixed.py | count_mixed |
 | python | tools/balance/design_invented_profiles.py | design_invented_profiles |
@@ -297,5 +296,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 274 untested > baseline 224
+- T3: 273 untested > baseline 224
 

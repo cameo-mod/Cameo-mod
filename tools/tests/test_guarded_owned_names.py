@@ -2,16 +2,15 @@
 import hashlib
 import json
 import pathlib
-import re
 import sys
 import unittest
-import zipfile
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT / 'tools/audit'), str(ROOT / 'tools/balance')]
 from miniyaml import Ruleset
 from dump_resolved import node_to_obj
 import extract_stats
+from weapon_name_map_checks import assert_no_old_weapon_names
 
 
 def digest(obj):
@@ -86,18 +85,7 @@ class GuardedOwnedNameTests(unittest.TestCase):
             self.assertEqual(hashlib.sha256((ROOT / path).read_bytes()).hexdigest(), expected, path)
 
     def test_bundled_maps_have_no_old_weapon_names(self):
-        pattern = re.compile(r'(?i)(?<![A-Za-z0-9_])(?:' + '|'.join(re.escape(n) for n in self.mapping) + r')(?![A-Za-z0-9_])')
-        maps = list((ROOT / 'mods/cameo/maps').rglob('*.oramap'))
-        self.assertTrue(maps)
-        for path in maps:
-            with zipfile.ZipFile(path) as archive:
-                for entry in archive.infolist():
-                    if entry.filename.lower().endswith(('.yaml', '.lua')):
-                        self.assertLessEqual(entry.file_size, 10_000_000)
-                        self.assertIsNone(pattern.search(archive.read(entry).decode('utf-8-sig')), str(path))
-        for path in (ROOT / 'mods/cameo/maps').rglob('*'):
-            if path.is_file() and path.suffix.lower() in ('.yaml', '.lua'):
-                self.assertIsNone(pattern.search(path.read_text(encoding='utf-8-sig')), str(path))
+        assert_no_old_weapon_names(self, ROOT, self.mapping)
 
 
 if __name__ == '__main__':

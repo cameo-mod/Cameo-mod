@@ -141,7 +141,7 @@ EXACT_PRESERVE = {
     "SamuraiBladeCharged",
     "SteelInfRailgun_EMP",
     "SteelRunnerPistols",
-    "YakTeslaBomb",
+    "ra1_soviets_teslayak_tesla_bomb",
 }
 
 # Descendants whose role differs from the parent flat slice.  Unlisted descendants

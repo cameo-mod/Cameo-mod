@@ -70,6 +70,7 @@ class YakOwnershipTests(unittest.TestCase):
             reverse = {new: old for old, new in route.items()}
             actual = node_to_obj(self.rules.resolve(actor))
             self._reverse_later_su57_missile_names(actor, actual)
+            self._reverse_later_bomb_names(actor, actual)
             for key, trait in actual.items():
                 if key.split('@')[0] == 'Armament' and isinstance(trait, dict):
                     if trait.get('Weapon') in reverse:
@@ -86,6 +87,32 @@ class YakOwnershipTests(unittest.TestCase):
                 ('Armament@HE', '_missile_thermobaric', 'Su57MaverickThermobaric')):
             self.assertEqual(obj[slot]['Weapon'], actor + suffix)
             obj[slot]['Weapon'] = old
+
+    def _reverse_later_bomb_names(self, actor, obj):
+        routes = {
+            'ra1_soviets_yakscoutplane': ('_napalm_bomb', 'YakNapalm'),
+            'ra1_soviets_teslayak': ('_tesla_bomb', 'YakTeslaBomb'),
+        }
+        if actor not in routes:
+            return
+        suffix, old = routes[actor]
+        self.assertEqual(obj['Armament@BOMBS']['Weapon'], actor + suffix)
+        obj['Armament@BOMBS']['Weapon'] = old
+
+    def test_later_bomb_adapter_is_actor_and_slot_exact(self):
+        for actor, suffix, old in (
+                ('ra1_soviets_yakscoutplane', '_napalm_bomb', 'YakNapalm'),
+                ('ra1_soviets_teslayak', '_tesla_bomb', 'YakTeslaBomb')):
+            obj = {'Armament@BOMBS': {'Weapon': actor + suffix}}
+            self._reverse_later_bomb_names('other_actor', obj)
+            self.assertEqual(obj['Armament@BOMBS']['Weapon'], actor + suffix)
+            for wrong in (old, 'OtherWeapon'):
+                with self.assertRaises(AssertionError):
+                    self._reverse_later_bomb_names(actor, {'Armament@BOMBS': {'Weapon': wrong}})
+            with self.assertRaises(KeyError):
+                self._reverse_later_bomb_names(actor, {'Armament@PRIMARY': {'Weapon': actor + suffix}})
+            self._reverse_later_bomb_names(actor, obj)
+            self.assertEqual(obj['Armament@BOMBS']['Weapon'], old)
 
     def test_later_su57_adapter_preserves_missile_slots(self):
         actor = 'ra1_soviets_su57attackbomber'

@@ -1868,7 +1868,7 @@ YakTeslaArcFragment2:
 	-Warhead@LightMissile:
 	-Warhead@TeslaWeapon:
 
-YakNapalm:
+ra1_soviets_yakscoutplane_napalm_bomb:
 	Inherits@collapsewh: ^Warhead_Flame_Heavy
 	Inherits: ^ShrapnelWeapon
 	Inherits@2: ^HeavyBomb
@@ -1912,7 +1912,7 @@ YakNapalm:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@HeavyFlameWeapon:
 
-YakTeslaBomb:
+ra1_soviets_teslayak_tesla_bomb:
 	Inherits: ^TeslaWeapon
 	Inherits@2: ^HeavyBomb
 	Inherits@3: ^HeavyChemicalWeapon

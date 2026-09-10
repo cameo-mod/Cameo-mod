@@ -23,7 +23,9 @@ class RuleDrivenEnergyOrdnanceTests(unittest.TestCase):
         expected = set(cohort.SELECTED) | {
             "NaxTorpTube", "NaxiJadgDestroyerCorrosion",
         }
-        self.assertEqual(expected, set(self.report["changed"]))
+        before = json.loads((ROOT / 'tools/tests/fixtures/ifv_owned_names_20260910.json').read_text(encoding='utf-8'))
+        historical = {new: old for route in before['routes'].values() for old, new in route.items()}
+        self.assertEqual({historical.get(name, name) for name in expected}, set(self.report["changed"]))
         self.assertEqual([], self.report["added"])
         self.assertEqual([], self.report["removed"])
 

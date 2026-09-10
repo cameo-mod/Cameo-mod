@@ -91,5 +91,5 @@ Allowed, but 8000+ per-warhead x N is a big total — confirm it is intended (no
 | RA2SCUD_fire | 3 | 30000 | 90000 |
 | RA2SCUD_tesla | 3 | 30000 | 90000 |
 | V3Explode | 3 | 10000 | 30000 |
-| YakTeslaBomb | 4 | 40000 | 160000 |
+| ra1_soviets_teslayak_tesla_bomb | 4 | 40000 | 160000 |
 

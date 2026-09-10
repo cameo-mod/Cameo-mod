@@ -34,7 +34,9 @@ ID verification accounts for all1,941 discovered identities, including3 methods
 covered by the pre-existing optional-DTA class skip; none missing or extra.
 Canonical audits retain8 gated baseline failures. A new advisory copy-paste
 group (C1:20 to21) identifies duplicated map-check code in two new tests;
-consolidation is planned before publication. No threshold is relaxed.
+consolidation was completed before publication, together with the later duplicated
+consumer check. The final IFV-cohort report records C1 returning to20 and the
+combined launch proof. No threshold is relaxed.
 
 Raw releaseD4 rises367 to388/335. D1 falls119 to117 only because the two Recon
 Ranger names move into D4, not because their damage was fixed: each still has

@@ -341,12 +341,12 @@ ra1_allies_machinegunner:
 	ChangesHealth@SelfHealing:
 		Step: 20
 	Armament@PRIMARY:
-		Weapon: RAVulcan
+		Weapon: ra1_allies_machinegunner_machinegun
 		LocalOffset: 128,0,256
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: RAVulcan
+		Weapon: ra1_allies_machinegunner_machinegun
 		MuzzleSequence: garrison-muzzle
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	AttackFrontal:
@@ -375,10 +375,10 @@ ra1_allies_machinegunner:
 		Modifier: 93
 	Armament@PRIMARYCryo:
 		LocalOffset: 128,0,256
-		Weapon: RAVulcanCryo
+		Weapon: ra1_allies_machinegunner_machinegun_cryo
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	Armament@GARRISONEDCryo:
 		Name: garrisoned
 		MuzzleSequence: garrison-muzzle
-		Weapon: RAVulcanCryo
+		Weapon: ra1_allies_machinegunner_machinegun_cryo
 		RequiresCondition: ra1_allies_upgrade_cryomissiles

@@ -48,7 +48,7 @@ ROOT_CLOSURES = {
     # its Medium slice cannot, so choosing one target contract needs role review.
     "RA2GattlingInf": set(),
     "RA2vulcan": set(),
-    "RAVulcan": set(),
+    "ra1_allies_machinegunner_machinegun": set(),
     "ra1_allies_sheridanassaulttank_chaingun": set(),
     "SteelCargoshipCannons": set(),
     "TSMutVulcanTurret": set(),

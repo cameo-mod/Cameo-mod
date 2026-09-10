@@ -1,12 +1,12 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **428**, files touched: **1399**
+Commits reviewed: **428**, files touched: **1402**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
 | R1 | balance yaml edited without the ledger | 18 | yes |
 | R2 | audit script never run by run_all.sh | 4 | yes |
-| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 32 | partly |
+| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 33 | partly |
 | R4 | engine/mod.config change (needs boot gate) | 1 | no |
 
 
@@ -44,10 +44,11 @@ Commits reviewed: **428**, files touched: **1399**
 | tools/audit/audit_weapon_identity.py | not invoked by run_all.sh |
 
 
-## R3 — commits without provenance (32)
+## R3 — commits without provenance (33)
 
 | commit | date | author | problem | severity |
 |---|---|---|---|---|
+| ec2631b9 | 2026-09-10 | Blackrobe | agent trailer `GPT-6 Astra <noreply@openai.com>` on a non-shared identity | review |
 | 8850c3f1 | 2026-09-10 | Blackrobe | agent trailer `GPT-6 Astra <noreply@openai.com>` on a non-shared identity | review |
 | 17022b1d | 2026-09-10 | Blackrobe | agent trailer `GPT-6 Astra <noreply@openai.com>` on a non-shared identity | review |
 | 243c95cd | 2026-09-10 | Blackrobe | agent trailer `GPT-6 Astra <noreply@openai.com>` on a non-shared identity | review |
@@ -93,21 +94,21 @@ Commits reviewed: **428**, files touched: **1399**
 
 | file | commits touching it |
 |---|---|
-| DEVELOPMENT_LOG.md | 151 |
+| DEVELOPMENT_LOG.md | 150 |
 | docs/HANDOFF.md | 64 |
 | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 32 |
-| docs/balance/derived/d2k_ordos.json | 26 |
 | docs/balance/derived/redalert_soviets.json | 25 |
+| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 25 |
+| docs/balance/derived/d2k_ordos.json | 25 |
 | tools/audit/audit_warhead_split.py | 25 |
-| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 24 |
 | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 24 |
 | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 23 |
 | docs/balance/derived/redalert_allies.json | 22 |
 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml | 22 |
-| docs/balance/derived/redalert2mod_consortium.json | 22 |
-| docs/balance/derived/tiberiansun_gdi.json | 22 |
 | mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 22 |
 | docs/balance/derived/shared_redalert.json | 21 |
+| docs/balance/derived/redalert2mod_consortium.json | 21 |
+| docs/balance/derived/tiberiansun_gdi.json | 21 |
 
 
 ## Reviewer checklist (not machine-checkable)
@@ -121,7 +122,7 @@ Commits reviewed: **428**, files touched: **1399**
 
 ## Enforcement
 
-R1/R3 block only for commits on or after **2026-08-12**: 18 R1 and 0 R3 of 18/32 findings are in scope; the rest predate the gate.
+R1/R3 block only for commits on or after **2026-08-12**: 18 R1 and 0 R3 of 18/33 findings are in scope; the rest predate the gate.
 
 
 ## FAIL

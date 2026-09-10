@@ -58,6 +58,8 @@ class SameFamilyStackConsolidationTests(unittest.TestCase):
         historical = {new: old for old, new in renamed.items()}
         guarded = json.loads((ROOT / 'tools/tests/fixtures/guarded_owned_names_20260910.json').read_text(encoding='utf-8'))
         historical.update({new: old for route in guarded['routes'].values() for old, new in route.items()})
+        ifv = json.loads((ROOT / 'tools/tests/fixtures/ifv_owned_names_20260910.json').read_text(encoding='utf-8'))
+        historical.update({new: old for route in ifv['routes'].values() for old, new in route.items()})
         self.assertEqual({historical.get(name, name) for name in selected},
                          set(self.report["changed"]))
 

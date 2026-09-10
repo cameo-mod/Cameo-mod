@@ -88,7 +88,7 @@ GROUPS = {
     },
     "CannonAP_Light": {"NaxiJadgDestroyer", "NaxiJadgDestroyer_elite"},
     "CannonHE_Heavy": {
-        "NaxBrummbarArty", "NaxBrummbarArty_elite", "RATurretGun",
+        "NaxBrummbarArty", "NaxBrummbarArty_elite", "ra1_allies_alliedgunturret_cannon",
         "TSRPGTower", "tkmtrenchcannon", "tkmtrenchdepcannon",
     },
     "Bullet_Medium": {

@@ -87,7 +87,7 @@ This residual is included in measured output but excluded from `k_flat` and `dps
 | `TSTurretLaser` | +1.6710 |
 | `TSCABALPlasmaFire` | +1.6710 |
 | `d2kChainGun_upgrade` | +1.6677 |
-| `RATurretGun` | +1.6676 |
+| `ra1_allies_alliedgunturret_cannon` | +1.6676 |
 | `schwarzermond_lunarsoldier_rifle_yellow` | +1.6550 |
 | `schwarzermond_lunarsoldier_rifle_amplified` | +1.6550 |
 | `NapalmA10Carrier` | +1.6477 |
