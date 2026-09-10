@@ -19,7 +19,7 @@ CryoLightSniper:
 		Spread: 1
 		Falloff: 100, 0
 
-M60mg:
+ra1_allies_ranger_machinegun:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
 	Inherits@fx: ^Effect_Bullet_Light
@@ -31,7 +31,7 @@ M60mg:
 	Report: pillbox1.aud
 	Warhead@Bullet_Light:
 		Damage: 4000
-M60mgCryo:
+ra1_allies_ranger_machinegun_cryo:
 	Inherits@wh: ^Warhead_BulletCryo_Light
 	Inherits@proj: ^Projectile_Bullet_Light
 	Inherits@fx: ^Effect_Cryo
@@ -68,7 +68,7 @@ RATurretGun:
 		Damage: 20000
 		PercentageScale: 9995
 
-zsu_23:
+ra1_allies_alliedaagun_flak:
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
@@ -83,7 +83,7 @@ zsu_23:
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 
-zsu_23Cryo:
+ra1_allies_alliedaagun_flak_cryo:
 	Inherits@wh: ^Warhead_FlakCryo_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Cryo
@@ -142,7 +142,7 @@ HellfireCryo:
 	Projectile: Missile
 		VerticalRateOfTurn: 12
 
-ChainGunMH60:
+ra1_allies_blackhawk_chaingun:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
@@ -165,7 +165,7 @@ ChainGunMH60:
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
 
-ChainGunMH60Cryo:
+ra1_allies_blackhawk_chaingun_cryo:
 	Inherits@wh: ^Warhead_BulletCryo_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Cryo
@@ -681,7 +681,7 @@ ChronoTuskCryo:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@TankDestroyerCannon:
 	-Warhead@CannonHE_MediumFlatCompatibility:
-90mm:
+ra1_allies_alliedmediumtank_cannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonHE_Medium
@@ -695,7 +695,7 @@ ChronoTuskCryo:
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 
-90mmCryo:
+ra1_allies_alliedmediumtank_cannon_cryo:
 	Inherits@wh: ^Warhead_CannonCryo_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_Cryo
@@ -744,7 +744,7 @@ SilencedPPK:
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
 
-Colt45:
+ra1_allies_tanya_pistol:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light
 	Inherits@fx: ^Effect_Sniper_Light
@@ -768,7 +768,7 @@ Colt45:
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 3
 
-Colt45Cryo:
+ra1_allies_tanya_pistol_cryo:
 	Inherits@wh: ^Warhead_BulletCryo_Light
 	Inherits@proj: ^Projectile_Sniper_Light
 	Inherits@fx: ^Effect_Cryo

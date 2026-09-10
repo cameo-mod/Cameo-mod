@@ -25,7 +25,7 @@
 ## Direct-hit mixed effects
 
 - Standalone plus folded: `RA2HeavyMirageGun`, `RA2HeavyMirageGun_elite`, `RA2MirageGun`, `RA2MirageGun_elite`, `SteelMegaSword_elite`, `Tentacle`, `WaveTurretImpact`
-- Physical state: `ChainGunMH60Cryo`, `M60mgCryo`, `NaxDieGlocke`, `RAVulcanCryo`, `SheridanVulcanCryo`, `wc2deathknightDeathAndDecay_Hit`, `zsu_23Cryo`
+- Physical state: `NaxDieGlocke`, `RAVulcanCryo`, `SheridanVulcanCryo`, `ra1_allies_alliedaagun_flak_cryo`, `ra1_allies_blackhawk_chaingun_cryo`, `ra1_allies_ranger_machinegun_cryo`, `wc2deathknightDeathAndDecay_Hit`
 - Integrity: `PsiStorm`, `RA2DiskDrain`, `TSSonicZapWeapon`, `WaveArtilleryImpact`, `WaveTurretImpact`
 
 _PASS — the active rules contain no invalid or double-percentage shapes._

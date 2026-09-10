@@ -27,14 +27,14 @@ ra1_allies_blackhawk:
 	ChangesHealth@SelfHealing:
 		Step: 20
 	Armament@PRIMARY:
-		Weapon: ChainGunMH60
+		Weapon: ra1_allies_blackhawk_chaingun
 		LocalOffset: 85,-213,-85, 85,213,-85
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: ChainGunMH60
+		Weapon: ra1_allies_blackhawk_chaingun
 		LocalOffset: 85,213,-85, 85,-213,-85
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
@@ -109,14 +109,14 @@ ra1_allies_blackhawk:
 		LocalOffset: 85,-213,-85, 85,213,-85
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
-		Weapon: ChainGunMH60Cryo
+		Weapon: ra1_allies_blackhawk_chaingun_cryo
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	Armament@SECONDARYCryo:
 		Name: secondary
 		LocalOffset: 85,213,-85, 85,-213,-85
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
-		Weapon: ChainGunMH60Cryo
+		Weapon: ra1_allies_blackhawk_chaingun_cryo
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 ra1_allies_longbow:
 	Inherits: ^Helicopter

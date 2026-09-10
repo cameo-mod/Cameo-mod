@@ -299,7 +299,7 @@ ra1_allies_alliedaagun:
 	-WithSpriteBody:
 	WithEmbeddedTurretSpriteBody:
 	Armament:
-		Weapon: zsu_23
+		Weapon: ra1_allies_alliedaagun_flak
 		LocalOffset: 520,150,450, 520,-150,450
 		MuzzleSequence: muzzle
 		CasingWeapon: generic_bullet_casing
@@ -329,7 +329,7 @@ ra1_allies_alliedaagun:
 		CasingWeapon: generic_bullet_casing
 		CasingSpawnLocalOffset: 260,150,450, 260,-150,450
 		CasingTargetOffset: 0,750,0, 0,-750,0
-		Weapon: zsu_23Cryo
+		Weapon: ra1_allies_alliedaagun_flak_cryo
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 ra1_allies_camopillbox:
 	Inherits: ^Defense

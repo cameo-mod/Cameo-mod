@@ -255,7 +255,6 @@ _... and 264 more._
 | `227mm` | 2 | `Warhead@Effect: CreateEffect` ┬╖ `Warhead@EffectWater: CreateEffect` |
 | `25mm` | 2 | `Warhead@Effect: CreateEffect` ┬╖ `Warhead@EffectAir: CreateEffect` |
 | `70mm` | 1 | `Warhead@Effect: CreateEffect` |
-| `90mm` | 1 | `Warhead@Effect: CreateEffect` |
 | `A10CarrierMissiles_AA` | 1 | `Warhead@EffectAir: CreateEffect` |
 | `AAGunBoatFlak` | 1 | `Warhead@EffectAir: CreateEffect` |
 | `ASDFKamikazeExplosion` | 1 | `Warhead@Effect: CreateEffect` |
@@ -284,6 +283,7 @@ _... and 264 more._
 | `AtreusMG` | 1 | `Warhead@Effect: CreateEffect` |
 | `BCYamatoCannon` | 1 | `Warhead@Effect: CreateEffect` |
 | `BHBombs` | 1 | `Warhead@3Eff: CreateEffect` |
+| `BHRedDarts` | 2 | `Warhead@Effect: CreateEffect` ┬╖ `Warhead@EffectAir: CreateEffect` |
 
 
 _... and 653 more._
