@@ -2170,7 +2170,7 @@
       "warheads": [
        "^Warhead_MissileHE_Heavy"
       ],
-      "weapon": "Su57Maverick",
+      "weapon": "ra1_soviets_su57attackbomber_missile",
       "weapon_class_source": "template"
      },
      {
@@ -2201,7 +2201,7 @@
       "warheads": [
        "^Warhead_MissileThermobaric_Heavy"
       ],
-      "weapon": "Su57MaverickThermobaric",
+      "weapon": "ra1_soviets_su57attackbomber_missile_thermobaric",
       "weapon_class_source": "template"
      },
      {
@@ -3816,7 +3816,7 @@
       "warheads": [
        "^Warhead_Flame_Medium"
       ],
-      "weapon": "FireballLauncher",
+      "weapon": "ra1_soviets_flametower_flamethrower",
       "weapon_class_source": "template"
      },
      {
@@ -3844,7 +3844,7 @@
       "warheads": [
        "^Warhead_Flame_Medium"
       ],
-      "weapon": "FireballLauncherThermobaric",
+      "weapon": "ra1_soviets_flametower_flamethrower_thermobaric",
       "weapon_class_source": "template"
      }
     ],
@@ -9655,7 +9655,7 @@
        "^Warhead_MissileHE_Heavy",
        "^Warhead_Concussion_Medium"
       ],
-      "weapon": "GradRockets",
+      "weapon": "ra1_soviets_grad_rocket",
       "weapon_class_source": "template"
      },
      {
@@ -9695,13 +9695,13 @@
       "versus_templates": [
        "^MediumChemicalWeapon",
        "^HeavyBomb",
-       "GradRockets"
+       "ra1_soviets_grad_rocket"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
        "^Warhead_Concussion_Medium"
       ],
-      "weapon": "GradHeavyRockets",
+      "weapon": "ra1_soviets_grad_rocket_heavy",
       "weapon_class_source": "template"
      }
     ],
@@ -9802,7 +9802,7 @@
       "warheads": [
        "^Warhead_CannonHE_Heavy"
       ],
-      "weapon": "HammerTankCannon",
+      "weapon": "ra1_soviets_hammertank_cannon",
       "weapon_class_source": "template"
      },
      {
@@ -9828,13 +9828,13 @@
        "^Warhead_Thermobaric_Heavy",
        "^Projectile_Flame_Medium",
        "^Effect_Flame_Medium",
-       "HammerTankCannon"
+       "ra1_soviets_hammertank_cannon"
       ],
       "warheads": [
        "^Warhead_Thermobaric_Heavy",
        "^Warhead_CannonHE_Heavy"
       ],
-      "weapon": "HammerTankCannonThermobaric",
+      "weapon": "ra1_soviets_hammertank_cannon_thermobaric",
       "weapon_class_source": "template"
      },
      {
@@ -10011,7 +10011,7 @@
       "warheads": [
        "^Warhead_Inferno_Heavy"
       ],
-      "weapon": "HeatRayBeam1",
+      "weapon": "ra1_soviets_heatraytank_heatray1",
       "weapon_class_source": "template"
      },
      {
@@ -10031,12 +10031,12 @@
       "reloaddelay": "8",
       "slot": "Armament@2",
       "versus_templates": [
-       "HeatRayBeam1"
+       "ra1_soviets_heatraytank_heatray1"
       ],
       "warheads": [
        "^Warhead_Inferno_Heavy"
       ],
-      "weapon": "HeatRayBeam2",
+      "weapon": "ra1_soviets_heatraytank_heatray2",
       "weapon_class_source": "template"
      },
      {
@@ -10056,12 +10056,12 @@
       "reloaddelay": "8",
       "slot": "Armament@3",
       "versus_templates": [
-       "HeatRayBeam1"
+       "ra1_soviets_heatraytank_heatray1"
       ],
       "warheads": [
        "^Warhead_Inferno_Heavy"
       ],
-      "weapon": "HeatRayBeam3",
+      "weapon": "ra1_soviets_heatraytank_heatray3",
       "weapon_class_source": "template"
      },
      {
@@ -10081,12 +10081,12 @@
       "reloaddelay": "8",
       "slot": "Armament@4",
       "versus_templates": [
-       "HeatRayBeam1"
+       "ra1_soviets_heatraytank_heatray1"
       ],
       "warheads": [
        "^Warhead_Inferno_Heavy"
       ],
-      "weapon": "HeatRayBeam4",
+      "weapon": "ra1_soviets_heatraytank_heatray4",
       "weapon_class_source": "template"
      }
     ],

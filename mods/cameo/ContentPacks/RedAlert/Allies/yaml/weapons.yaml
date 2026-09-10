@@ -380,7 +380,7 @@ ra1_allies_rapierjumpjet_missile_cryo_AA:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 
-ReconRangerRecoillessGun:
+ra1_allies_reconranger_recoillessgun:
 	Inherits@collapseflat: ^Compatibility_MissileAP_HeavyFlat
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
@@ -486,8 +486,8 @@ ReconRangerRecoillessGun:
 	-Warhead@RailgunExtraDamage:
 	-Warhead@MediumMissile:
 	-Warhead@MissileAP_HeavyFlatCompatibility:
-CryoReconRangerRecoillessGun:
-	Inherits: ReconRangerRecoillessGun
+ra1_allies_reconranger_recoillessgun_cryo:
+	Inherits: ra1_allies_reconranger_recoillessgun
 	Inherits@2: ^CryoMissileProjectile
 	Projectile: Bullet
 		TrailImage: blue_smokey
@@ -500,7 +500,7 @@ CryoReconRangerRecoillessGun:
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
 		Amount: -32000
 
-APTusk:
+ra1_allies_phasetransport_missile:
 	Inherits@collapsewh: ^Warhead_MissileAP_Heavy
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^Grenade
@@ -551,8 +551,8 @@ APTusk:
 	Projectile: Missile
 		VerticalRateOfTurn: 16
 
-APTuskCryo:
-	Inherits: APTusk
+ra1_allies_phasetransport_missile_cryo:
+	Inherits: ra1_allies_phasetransport_missile
 	Inherits@2: ^CryoMissileProjectile
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
 		Amount: -16000
@@ -561,7 +561,7 @@ APTuskCryo:
 	Projectile: Missile
 		VerticalRateOfTurn: 16
 
-ChronoTusk:
+ra1_allies_chronotank_missile:
 	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
 	Inherits: ^Grenade
 	Inherits@2: ^FlakWeapon
@@ -602,8 +602,8 @@ ChronoTusk:
 	Projectile: Missile
 		VerticalRateOfTurn: 16
 
-ChronoTuskCryo:
-	Inherits: ChronoTusk
+ra1_allies_chronotank_missile_cryo:
+	Inherits: ra1_allies_chronotank_missile
 	Inherits@2: ^CryoMissileProjectile
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
 		Amount: -20000
@@ -728,7 +728,7 @@ Repair:
 	Warhead@Defuse3: DetachDelayedWeapon
 		Range: 5000
 
-SilencedPPK:
+ra1_allies_raspy_pistol:
 	Inherits: ^SnipeWeapon
 	Report: ramgun2.aud
 	Warhead@1Dam: SpreadDamage
@@ -785,7 +785,7 @@ ra1_allies_tanya_pistol_cryo:
 	Warhead@BulletCryo_Light:
 		Damage: 7777
 
-HeavyAATankCannonAG:
+ra1_allies_alliedheavyaatank_cannon:
 	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^LightMissile
 	Inherits@2: ^FlakWeapon
@@ -828,9 +828,9 @@ HeavyAATankCannonAG:
 		Damage: 8000
 		PercentageScale: 0
 
-HeavyAATankCannon_AA:
+ra1_allies_alliedheavyaatank_cannon_AA:
 	Inherits@roleflat: ^Compatibility_Flak_MediumFlat
-	Inherits: HeavyAATankCannonAG
+	Inherits: ra1_allies_alliedheavyaatank_cannon
 	Range: 7119
 	ValidTargets: Air
 	Warhead@LightMissile: SpreadDamage

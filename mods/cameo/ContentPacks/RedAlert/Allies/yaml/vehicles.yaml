@@ -157,12 +157,12 @@ ra1_allies_alliedheavyaatank:
 		TurnSpeed: 15
 		Offset: -128,0,0
 	Armament@AG:
-		Weapon: HeavyAATankCannonAG
+		Weapon: ra1_allies_alliedheavyaatank_cannon
 		Recoil: 43
 		LocalOffset: 800,80,360, 800,-80,360
 		MuzzleSequence: muzzle
 	Armament@AA:
-		Weapon: HeavyAATankCannon_AA
+		Weapon: ra1_allies_alliedheavyaatank_cannon_AA
 		Recoil: 43
 		LocalOffset: 800,80,360, 800,-80,360
 		MuzzleSequence: muzzle
@@ -556,12 +556,12 @@ ra1_allies_reconranger:
 		TurnSpeed: 32
 		Offset: -366,0,166
 	Armament:
-		Weapon: ReconRangerRecoillessGun
+		Weapon: ra1_allies_reconranger_recoillessgun
 		MuzzleSequence: muzzle
 		LocalOffset: 730,0,166
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@Upgrade:
-		Weapon: CryoReconRangerRecoillessGun
+		Weapon: ra1_allies_reconranger_recoillessgun_cryo
 		MuzzleSequence: muzzle
 		LocalOffset: 730,0,166
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
@@ -778,25 +778,25 @@ ra1_allies_chronotank:
 		TurnSpeed: 40
 		Locomotor: heavywheeled
 	Armament@PRIMARY:
-		Weapon: ChronoTusk
+		Weapon: ra1_allies_chronotank_missile
 		LocalOffset: -160,-276,232
 		LocalYaw: 100
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@SECONDARY:
-		Weapon: ChronoTusk
+		Weapon: ra1_allies_chronotank_missile
 		LocalOffset: -160,276,232
 		LocalYaw: -100
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@Upgrade:
-		Weapon: ChronoTuskCryo
+		Weapon: ra1_allies_chronotank_missile_cryo
 		LocalOffset: -160,-276,232
 		LocalYaw: 100
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	Armament@UpgradeSECONDARY:
-		Weapon: ChronoTuskCryo
+		Weapon: ra1_allies_chronotank_missile_cryo
 		LocalOffset: -160,276,232
 		LocalYaw: -100
 		MuzzleSequence: muzzle
@@ -860,12 +860,12 @@ ra1_allies_phasetransport:
 		InitialStance: HoldFire
 		InitialStanceAI: AttackAnything
 	Armament:
-		Weapon: APTusk
+		Weapon: ra1_allies_phasetransport_missile
 		LocalOffset: 192,0,176
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@Upgrade:
-		Weapon: APTuskCryo
+		Weapon: ra1_allies_phasetransport_missile_cryo
 		LocalOffset: 192,0,176
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_allies_upgrade_cryomissiles

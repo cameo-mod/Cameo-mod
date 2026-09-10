@@ -2520,7 +2520,7 @@
        "^SnipeWeapon"
       ],
       "warheads": [],
-      "weapon": "SilencedPPK",
+      "weapon": "ra1_allies_raspy_pistol",
       "weapon_class_source": "none"
      }
     ],
@@ -3569,7 +3569,7 @@
        "^Chaingun"
       ],
       "warheads": [],
-      "weapon": "HeavyAATankCannonAG",
+      "weapon": "ra1_allies_alliedheavyaatank_cannon",
       "weapon_class_source": "none"
      },
      {
@@ -3618,10 +3618,10 @@
       "slot": "Armament@AA",
       "versus_templates": [
        "^Compatibility_Flak_MediumFlat",
-       "HeavyAATankCannonAG"
+       "ra1_allies_alliedheavyaatank_cannon"
       ],
       "warheads": [],
-      "weapon": "HeavyAATankCannon_AA",
+      "weapon": "ra1_allies_alliedheavyaatank_cannon_AA",
       "weapon_class_source": "none"
      }
     ],
@@ -4441,7 +4441,7 @@
       "warheads": [
        "^Warhead_MissileHE_Heavy"
       ],
-      "weapon": "ChronoTusk",
+      "weapon": "ra1_allies_chronotank_missile",
       "weapon_class_source": "template"
      },
      {
@@ -4509,7 +4509,7 @@
       "warheads": [
        "^Warhead_MissileHE_Heavy"
       ],
-      "weapon": "ChronoTusk",
+      "weapon": "ra1_allies_chronotank_missile",
       "weapon_class_source": "template"
      },
      {
@@ -4567,13 +4567,13 @@
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "ChronoTusk",
+       "ra1_allies_chronotank_missile",
        "^CryoMissileProjectile"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy"
       ],
-      "weapon": "ChronoTuskCryo",
+      "weapon": "ra1_allies_chronotank_missile_cryo",
       "weapon_class_source": "template"
      },
      {
@@ -4631,13 +4631,13 @@
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@UpgradeSECONDARY",
       "versus_templates": [
-       "ChronoTusk",
+       "ra1_allies_chronotank_missile",
        "^CryoMissileProjectile"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy"
       ],
-      "weapon": "ChronoTuskCryo",
+      "weapon": "ra1_allies_chronotank_missile_cryo",
       "weapon_class_source": "template"
      }
     ],
@@ -5014,7 +5014,7 @@
       "warheads": [
        "^Warhead_MissileAP_Heavy"
       ],
-      "weapon": "APTusk",
+      "weapon": "ra1_allies_phasetransport_missile",
       "weapon_class_source": "template"
      },
      {
@@ -5065,13 +5065,13 @@
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "APTusk",
+       "ra1_allies_phasetransport_missile",
        "^CryoMissileProjectile"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
       ],
-      "weapon": "APTuskCryo",
+      "weapon": "ra1_allies_phasetransport_missile_cryo",
       "weapon_class_source": "template"
      }
     ],
@@ -5360,7 +5360,7 @@
       "warheads": [
        "^Warhead_MissileAP_Heavy"
       ],
-      "weapon": "ReconRangerRecoillessGun",
+      "weapon": "ra1_allies_reconranger_recoillessgun",
       "weapon_class_source": "template"
      },
      {
@@ -5430,13 +5430,13 @@
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "ReconRangerRecoillessGun",
+       "ra1_allies_reconranger_recoillessgun",
        "^CryoMissileProjectile"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
       ],
-      "weapon": "CryoReconRangerRecoillessGun",
+      "weapon": "ra1_allies_reconranger_recoillessgun_cryo",
       "weapon_class_source": "template"
      }
     ],

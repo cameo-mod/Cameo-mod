@@ -149,11 +149,11 @@ ra1_soviets_flametower:
 		TurnSpeed: 1023
 		Offset: 0,0,112
 	Armament:
-		Weapon: FireballLauncher
+		Weapon: ra1_soviets_flametower_flamethrower
 		LocalOffset: 512,0,0
 		RequiresCondition: !ra1_soviets_doctrine_inferno
 	Armament@Upgrade:
-		Weapon: FireballLauncherThermobaric
+		Weapon: ra1_soviets_flametower_flamethrower_thermobaric
 		LocalOffset: 512,0,0
 		RequiresCondition: ra1_soviets_doctrine_inferno
 	AttackTurreted:
@@ -163,10 +163,10 @@ ra1_soviets_flametower:
 		QuantizedFacings: 8
 	ProvidesPrerequisite@buildingname:
 	FireWarheadsOnDeath:
-		Weapon: FireballLauncher
+		Weapon: ra1_soviets_flametower_flamethrower
 		RequiresCondition: !ra1_soviets_doctrine_inferno
 	FireWarheadsOnDeath@Upgrade:
-		Weapon: FireballLauncherThermobaric
+		Weapon: ra1_soviets_flametower_flamethrower_thermobaric
 		RequiresCondition: ra1_soviets_doctrine_inferno
 	RenderSprites:
 		PlayerPalette: raplayer

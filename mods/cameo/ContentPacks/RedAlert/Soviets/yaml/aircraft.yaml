@@ -579,14 +579,14 @@ ra1_soviets_su57attackbomber:
 	ChangesHealth@SelfHealing:
 		Step: 52
 	Armament:
-		Weapon: Su57Maverick
+		Weapon: ra1_soviets_su57attackbomber_missile
 		LocalOffset: -250,-750,0, -250,750,0
 		LocalYaw: 64, -64
 		MuzzleSequence: muzzlemissile
 		PauseOnCondition: !ammo
 		RequiresCondition: !ra1_soviets_upgrade_thermobaricrockets
 	Armament@HE:
-		Weapon: Su57MaverickThermobaric
+		Weapon: ra1_soviets_su57attackbomber_missile_thermobaric
 		LocalOffset: -250,-750,0, -250,750,0
 		LocalYaw: 64, -64
 		MuzzleSequence: muzzlemissile

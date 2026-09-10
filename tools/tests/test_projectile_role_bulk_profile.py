@@ -18,7 +18,7 @@ ROOTS = {
     "MachineGunBuggy2": ("Bullet_Medium", 6000, 3),
     "NanoArtilleryAG": ("Concussion_Heavy", 23331, 3),
     "155mm": ("Concussion_Heavy", 30000, 3),
-    "ChronoTusk": ("MissileHE_Heavy", 20000, 5),
+    "ra1_allies_chronotank_missile": ("MissileHE_Heavy", 20000, 5),
     "GDIRigPhalanx": ("Bullet_Medium", 24000, 6),
     "HMG_Duelist": ("Bullet_Medium", 12000, 6),
     "HermitShoot": ("Concussion_Medium", 12000, 6),
@@ -37,7 +37,7 @@ RETIRED = {
 
 CLOSURE = tuple(ROOTS) + (
     "155mmBastion", "155mmBastionCryo", "155mmCryo", "ArtilleryExplode",
-    "ChronoTuskCryo", "GDIRigPhalanxTower", "HermitShoot1", "HermitShoot2",
+    "ra1_allies_chronotank_missile_cryo", "GDIRigPhalanxTower", "HermitShoot1", "HermitShoot2",
     "HermitShoot3", "HermitShoot4", "MachineGunBuggy2_AA", "PatriarchShoot1",
     "PatriarchShoot2", "PatriarchShoot3", "PatriarchShoot4", "DT120mm",
     "DT120mm1", "ra120mmTargetingComputer", "ra120mmirak", "ragal120mm",

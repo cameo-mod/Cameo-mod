@@ -41,8 +41,6 @@ _I7 is a REVIEW QUEUE, not a defect count ΓÇö an instant or utility weapon ma
 | `25mm` | 9 | `^Compatibility_CannonHE_MediumFlat` ┬╖ `^Warhead_CannonHE_Medium` ┬╖ `^Projectile_Shell_Medium` ┬╖ `^Effect_CannonHE_Medium` |
 | `8Inch` | 4 | `^Compatibility_Demolition_HeavyFlat` ┬╖ `^Warhead_Demolition_Heavy` ┬╖ `^Projectile_Grenade_Light` ┬╖ `^Effect_Demolition_Light` |
 | `APCGun` | 5 | `^Compatibility_Flak_MediumFlat` ┬╖ `^Warhead_Bullet_Medium` ┬╖ `^Warhead_Flak_Medium` ┬╖ `^Projectile_Flak_Medium` |
-| `APCGunAllies` | 5 | `^Compatibility_Flak_MediumFlat` ┬╖ `^Warhead_Bullet_Medium` ┬╖ `^Warhead_Flak_Medium` ┬╖ `^Projectile_Flak_Medium` |
-| `APTusk` | 5 | `^Warhead_MissileAP_Heavy` ┬╖ `^TankDestroyerCannon` ┬╖ `^Grenade` ┬╖ `^FlakWeapon` |
 | `ASDFGun2` | 4 | `^Warhead_Railgun_Heavy` ┬╖ `^Projectile_Railgun_Heavy` ┬╖ `^Effect_Railgun_Heavy` ┬╖ `ASDFGun` |
 | `ASDFKamikazeExplosion` | 4 | `^Warhead_Demolition_Heavy` ┬╖ `^Warhead_Concussion_Medium` ┬╖ `^Effect_Concussion_Medium` ┬╖ `^Projectile_Grenade_Light` |
 | `ArcherArtilleryShell` | 6 | `^Warhead_Concussion_Heavy` ┬╖ `^MediumCannon` ┬╖ `^HeavyCannon` ┬╖ `^MediumFlameWeapon` |
@@ -70,6 +68,8 @@ _I7 is a REVIEW QUEUE, not a defect count ΓÇö an instant or utility weapon ma
 | `AsianSubmarineBomb` | 5 | `^Compatibility_Demolition_HeavyFlat` ┬╖ `^Warhead_Demolition_Heavy` ┬╖ `^Effect_Demolition_Heavy` ┬╖ `^RA2Grenade` |
 | `AthenaLaser` | 7 | `^Compatibility_Laser_HeavyFlat` ┬╖ `^LightMissile` ┬╖ `^SmallArms` ┬╖ `^Chaingun` |
 | `AtreusMG` | 8 | `^Compatibility_Bullet_MediumFlat` ┬╖ `^Warhead_CannonHE_Heavy` ┬╖ `^Projectile_Shell_Heavy` ┬╖ `^Effect_CannonHE_Heavy` |
+| `BCLaser` | 12 | `^Compatibility_Laser_HeavyFlat` ┬╖ `^Warhead_CannonHE_Heavy` ┬╖ `^Projectile_Shell_Heavy` ┬╖ `^Effect_CannonHE_Heavy` |
+| `BHRedDarts` | 6 | `^Warhead_Tesla_Super` ┬╖ `^TeslaChargedWeapon` ┬╖ `^TankDestroyerCannon` ┬╖ `^Chaingun` |
 
 
 _... and 532 more._
@@ -83,7 +83,6 @@ _... and 532 more._
 | `120mm_cobra` | `^Warhead_Demolition_Light` ┬╖ `^Warhead_Concussion_Medium` ┬╖ `^Warhead_CannonAP_Light` |
 | `12MissilesSpawnerScud` | `^Warhead_Demolition_Heavy` ┬╖ `^Warhead_Flame_Medium` |
 | `APCGun` | `^Warhead_Bullet_Medium` ┬╖ `^Warhead_Flak_Medium` |
-| `APCGunAllies` | `^Warhead_Bullet_Medium` ┬╖ `^Warhead_Flak_Medium` |
 | `ASDFKamikazeExplosion` | `^Warhead_Demolition_Heavy` ┬╖ `^Warhead_Concussion_Medium` |
 | `ArtilleryShell` | `^Warhead_Demolition_Light` ┬╖ `^Warhead_Concussion_Medium` |
 | `AsianHarbingerPlasma` | `^Warhead_Plasma_Medium` ┬╖ `^Warhead_CannonHE_Medium` |
@@ -119,6 +118,7 @@ _... and 532 more._
 | `Flamethrower` | `^Warhead_Flame_Light` ┬╖ `^Warhead_Flame_Light` |
 | `GlaveCanon` | `^Warhead_Demolition_Light` ┬╖ `^Warhead_Railgun_Heavy` |
 | `GoliathMG` | `^Warhead_Concussion_Light` ┬╖ `^Warhead_CannonHE_Heavy` |
+| `GuardianShoot` | `^Warhead_Concussion_Medium` ┬╖ `^Warhead_Concussion_Light` |
 
 
 _... and 159 more._
@@ -179,13 +179,13 @@ _... and 159 more._
 | `TS70mmTur` | `^Effect_CannonHE_Medium` ┬╖ `^Effect_CannonAP_Light` |
 | `TSGrenade` | `^Effect_CannonHE_Medium` ┬╖ `^Effect_Concussion_Medium` |
 | `TSScoopDualTur` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Concussion_Medium` |
-| `TorpTubeThermobaric` | `^Effect_Nuclear_Super` ┬╖ `^Effect_MissileAP_Heavy` |
 | `YakovlevCannon` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_CannonAP_Light` |
 | `YakovlevCannon_elite` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_CannonAP_Light` |
 | `bigshieemortar` | `^Effect_Flame_Medium` ┬╖ `^Effect_Explosion_Large_RA2` |
 | `ra120mm2Thermobaric` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Flame_Heavy` |
 | `ra120mmThermobaric` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Flame_Heavy` |
 | `ra1_soviets_monstertank_120mm_cannon` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Nuclear_Super` |
+| `ra1_soviets_monstertank_120mm_cannon_inferno` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Flame_Heavy` |
 
 
 _... and 11 more._

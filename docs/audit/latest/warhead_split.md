@@ -46,7 +46,7 @@ _at or below baseline_ — pre-existing **W24** debt (54 weapons), not a regress
 | TSTacticalMissileDamage | 2 | 10000 | 20000 |
 | TSVulcan | 2 | 2000 | 4000 |
 | ThermobaricFlame | 2 | 2000 | 4000 |
-| TorpTube | 2 | 16000 | 32000 |
+| Type97PlasmaCannon | 3 | 4000 | 12000 |
 
 
 _... and 14 more._

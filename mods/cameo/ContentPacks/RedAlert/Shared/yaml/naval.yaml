@@ -592,11 +592,11 @@ ra1_soviets_submarine:
 		TurnSpeed: 15
 		Offset: 512,0,0
 	Armament@PRIMARY:
-		Weapon: TorpTube
+		Weapon: ra1_soviets_submarine_torpedo
 		LocalOffset: 256,0,0
 		RequiresCondition: !ra1_soviets_doctrine_inferno
 	Armament@Upgrade:
-		Weapon: TorpTubeThermobaric
+		Weapon: ra1_soviets_submarine_torpedo_thermobaric
 		LocalOffset: 256,0,0
 		RequiresCondition: ra1_soviets_doctrine_inferno
 	RenderRangeCircle:
