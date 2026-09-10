@@ -1004,7 +1004,11 @@ def factions_of(node, known, rules=None, _depth=PREREQ_DEPTH, _seen=None, vfi=No
     return sorted(found)
 
 
-def production_state_evidence(rules, node):
+# Bounded authored-state review pilot. This is NOT a certified factory population.
+STATE_REVIEW_COHORTS = {"ca": frozenset(("HARV", "LST", "HMMV", "HMMV.TOW"))}
+
+
+def production_state_evidence(rules, node, *, review_initial_state=False):
     """Retain declared production/upgrade evidence without simulating activation.
 
     Queue replacements and post-purchase transformations are alternatives, not
@@ -1037,10 +1041,34 @@ def production_state_evidence(rules, node):
             "combination": 'do_not_sum_declared_target_actors' if targets
                            else 'condition_upgrade_compatibility_unverified',
         })
-    return {"factory_ready_certification": 'none', "maximum_upgrade_certification": 'none',
+    result = {"factory_ready_certification": 'none', "maximum_upgrade_certification": 'none',
             "scope": 'declared production and upgrade routes; not exhaustive state evaluation',
             "production_traits": production, "condition_grants": conditions,
             "declared_routes": routes}
+    if review_initial_state:
+        uses, prerequisites, modifiers = [], [], []
+        for item in node.children:
+            base = item.key.split('@')[0]
+            for field in item.children:
+                if field.key in ('RequiresCondition', 'PauseOnCondition') and field.value.strip():
+                    uses.append({"trait": item.key, "field": field.key,
+                                 "expression": field.value, "initial_value": 'unverified'})
+                if field.key in ('Prerequisites', 'Prerequisite') and field.value.strip():
+                    prerequisites.append({"trait": item.key, "field": field.key,
+                                          "expression": field.value, "satisfied": 'unverified'})
+            if (base.endswith('Multiplier') or base.startswith('ChangesHealth')
+                    or any(c.key in ('Modifier', 'Modifiers') for c in item.children)):
+                modifiers.append(raw(item))
+        result["initial_state_review"] = {
+            "status": 'unverified',
+            "scope": 'authored top-level conditions and modifier declarations; not exhaustive runtime semantics',
+            "required_context": ['owner/faction', 'prerequisites and purchased upgrades',
+                                 'production level', 'exact source-engine revision'],
+            "condition_uses": uses, "prerequisite_uses": prerequisites,
+            "modifier_traits": modifiers,
+            "alternatives": 'declared_routes remain separate and unverified; never sum them',
+        }
+    return result
 
 
 def extract(mod_id, root_override=None):
@@ -1121,7 +1149,8 @@ def extract(mod_id, root_override=None):
             # "Animal Alligator" from ever being a candidate.
             "faction": "/".join(factions_of(node, known_factions, rules, vfi=vfi)) or "",
             "limit": int(limit) if (limit and str(limit).strip().isdigit()) else None,
-            "production_state_evidence": production_state_evidence(rules, node),
+            "production_state_evidence": production_state_evidence(
+                rules, node, review_initial_state=actor in STATE_REVIEW_COHORTS.get(mod_id, ())),
             **wep,
             "hp": int(hp), "cost": int(cost) if cost else None,
             "speed": int(speed) if speed else None,
