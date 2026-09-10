@@ -209,8 +209,26 @@ class SovietRenameRepairTests(unittest.TestCase):
                 # exactly three DogJaw -> bite references, nothing else
                 if b == "DogJaw" and a == f"{new}_bite":
                     continue
+            if (old == "ra1_soviets_sovietsamsite"
+                    and new == "ra1_soviets_samsite"
+                    and path == ("Armament", "Weapon")
+                    and b == "Nike" and a == "ra1_soviets_samsite_missile_AA"):
+                # Later owner-only rename; its complete resolved weapon is
+                # independently pinned by test_additional_owned_names.
+                continue
             out.append((path, b, a))
         return out
+
+    def test_sam_weapon_authorization_is_exact(self):
+        old, new = "ra1_soviets_sovietsamsite", "ra1_soviets_samsite"
+        allowed = (("Armament", "Weapon"), "Nike", "ra1_soviets_samsite_missile_AA")
+        self.assertEqual(self._authorize([allowed], old, new), [])
+        for change in (
+                (("Armament", "Weapon"), "OtherWeapon", allowed[2]),
+                (("Armament", "Weapon"), "Nike", "OtherWeapon"),
+                (("Armament@SECONDARY", "Weapon"), "Nike", allowed[2])):
+            self.assertEqual(self._authorize([change], old, new), [change])
+        self.assertEqual(self._authorize([allowed], "other_actor", new), [allowed])
 
     def test_image_authorization_is_exact(self):
         # negative test: an arbitrary RenderSprites.Image change must NOT

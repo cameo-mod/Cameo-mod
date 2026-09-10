@@ -39,7 +39,7 @@ _The `intentional_composites` exemption was DELETED 2026-09-06 (DESIGN §11b.1).
 | 3 | Quantum_HeavyFlatCompatibility + Tesla_Heavy |
 | 3 | CannonHE_Heavy + Railgun_HeavyFlatCompatibility + Tesla_Heavy |
 | 2 | Flak_Medium + Flak_MediumFlatCompatibility |
-| 2 | CryoBlast_Medium + MissileCryo_Heavy |
+| 2 | Bullet_Medium + Railgun_Heavy |
 
 WARN raw 230/322; (cross-check audit_weapon_shape W5)
 Lower `RAW_SPLIT_BASELINE` as weapons are collapsed; never raise it. W5 also resolves inheritance, but includes zero/healing/ally-only flat nodes and has narrower type/name rules. Use audit_weapon_shape.py --compare-split for the exact set difference; neither count is subtracted or reclassified.

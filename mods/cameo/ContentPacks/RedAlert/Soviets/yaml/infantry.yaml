@@ -699,11 +699,11 @@ ra1_soviets_commissar:
 		Queue: Infantry, RAInfantry
 		Description: actor_gdiofficer.description
 	Armament@PRIMARY:
-		Weapon: CommissarPistol
+		Weapon: ra1_soviets_commissar_pistol
 		LocalOffset: 128,0,256
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: CommissarPistol
+		Weapon: ra1_soviets_commissar_pistol
 	FireWarheadsOnDeath@Vengeance1:
 		Weapon: VengeanceActivator1
 		RequiresCondition: !ra1_soviets_upgrade_vengeance
@@ -794,7 +794,7 @@ ra1_soviets_cyberdog:
 		RequiresCondition: !disabled
 	RenderDetectionCircle:
 	Armament:
-		Weapon: CyberneticDogJaw
+		Weapon: ra1_soviets_cyberdog_bite
 		ReloadingCondition: attack-cooldown
 	AttackLeap:
 		Voice: Attack

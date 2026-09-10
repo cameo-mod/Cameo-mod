@@ -148,3 +148,17 @@ Peak RAM86.41%, no guard stop. Targeted runtime/shape/split checks pass; release
 D4 remains failing at355/335, with all structural counts and D1/D2/D3 unchanged.
 No additional game run is claimed after this identity-only batch. The Gunboat
 geometry/heaviness hold is retained under its new cannon name, not marked resolved.
+
+## Eleven-name checkpoint (09:51 Jakarta)
+
+PR340 now includes `17022b1d5b73841df40daa5f6a2ef8c0d5170ce8`.
+Eleven names and twelve Armament values migrate, with all 2,911 combined weapon
+payloads and all numerical ledger fields preserved. The old Soviet SAM actor
+regression now recognizes only the exact reviewed Nike identity substitution;
+negative cases and the full weapon fixture keep gameplay changes detectable.
+
+R11:1,919 tests,12 failures,8 errors,64 skips, exact R9 baseline signatures;
+peak86.56%, no memory guard stop. Runtime/shape/split checks pass; release D4
+remains failing at363/335, with other damage and structural counts unchanged.
+Both33-ledger checks have zero drift. No post-batch game test is claimed.
+PR340 remains draft and unmerged; this combined checkpoint is local only.

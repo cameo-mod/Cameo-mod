@@ -202,7 +202,7 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament@PRIMARY",
-      "weapon": "RapierBombs"
+      "weapon": "ra1_allies_rapierjumpjet_bomb"
      },
      {
       "avg_versus": 1.0844,
@@ -229,7 +229,7 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament@Upgrade",
-      "weapon": "RapierBombsCryo"
+      "weapon": "ra1_allies_rapierjumpjet_bomb_cryo"
      },
      {
       "avg_versus": 1.067,
@@ -252,7 +252,7 @@
       "reliability": 0.6759,
       "sigma": 383.33,
       "slot": "Armament@SECONDARY",
-      "weapon": "Aphid_AA"
+      "weapon": "ra1_allies_rapierjumpjet_missile_AA"
      },
      {
       "avg_versus": 1.0816,
@@ -275,11 +275,11 @@
       "reliability": 0.3345,
       "sigma": 383.33,
       "slot": "Armament@SECONDARYUpgrade",
-      "weapon": "AphidCryo_AA"
+      "weapon": "ra1_allies_rapierjumpjet_missile_cryo_AA"
      }
     ],
     "physical_state_multiplier": 1.3705,
-    "physical_state_weapon": "AphidCryo_AA",
+    "physical_state_weapon": "ra1_allies_rapierjumpjet_missile_cryo_AA",
     "physical_state_weight": 1.4822,
     "shield_always_on": false,
     "shield_gated_on_upgrade": false,
@@ -1664,7 +1664,7 @@
       "reliability": 0.481,
       "sigma": 200.12,
       "slot": "Armament",
-      "weapon": "SheridanCannon"
+      "weapon": "ra1_allies_sheridanassaulttank_cannon"
      },
      {
       "avg_versus": 1.0394,
@@ -1687,7 +1687,7 @@
       "reliability": 0.6053,
       "sigma": 217.43,
       "slot": "Armament@Missile",
-      "weapon": "SheridanMissiles"
+      "weapon": "ra1_allies_sheridanassaulttank_missile"
      },
      {
       "avg_versus": 1.0551,
@@ -1710,7 +1710,7 @@
       "reliability": 0.1952,
       "sigma": 217.43,
       "slot": "Armament@Upgrade",
-      "weapon": "SheridanMissilesCryo"
+      "weapon": "ra1_allies_sheridanassaulttank_missile_cryo"
      },
      {
       "avg_versus": 1.1298,
@@ -1758,7 +1758,7 @@
       "reliability": 0.3552,
       "sigma": 200.12,
       "slot": "Armament@Cryo",
-      "weapon": "SheridanCannonCryo"
+      "weapon": "ra1_allies_sheridanassaulttank_cannon_cryo"
      },
      {
       "avg_versus": 1.1485,
@@ -1785,7 +1785,7 @@
      }
     ],
     "physical_state_multiplier": 1.3705,
-    "physical_state_weapon": "SheridanMissilesCryo",
+    "physical_state_weapon": "ra1_allies_sheridanassaulttank_missile_cryo",
     "physical_state_weight": 1.4822,
     "shield_always_on": false,
     "shield_gated_on_upgrade": false,

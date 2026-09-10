@@ -443,7 +443,7 @@ ra1_allies_sheridanassaulttank:
 	Turreted:
 		TurnSpeed: 17
 	Armament:
-		Weapon: SheridanCannon
+		Weapon: ra1_allies_sheridanassaulttank_cannon
 		Recoil: 64
 		RecoilRecovery: 26
 		LocalOffset: 640,0,128
@@ -452,7 +452,7 @@ ra1_allies_sheridanassaulttank:
 		PauseOnCondition: ammo < 4
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@Missile:
-		Weapon: SheridanMissiles
+		Weapon: ra1_allies_sheridanassaulttank_missile
 		Recoil: 32
 		RecoilRecovery: 32
 		LocalOffset: 128,64,192
@@ -461,7 +461,7 @@ ra1_allies_sheridanassaulttank:
 		PauseOnCondition: ammo < 4
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@Upgrade:
-		Weapon: SheridanMissilesCryo
+		Weapon: ra1_allies_sheridanassaulttank_missile_cryo
 		Recoil: 32
 		RecoilRecovery: 32
 		LocalOffset: 128,64,192
@@ -512,7 +512,7 @@ ra1_allies_sheridanassaulttank:
 		MuzzleSequence: muzzle
 		AmmoUsage: 4
 		PauseOnCondition: ammo < 4
-		Weapon: SheridanCannonCryo
+		Weapon: ra1_allies_sheridanassaulttank_cannon_cryo
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	Armament@MGCryo:
 		LocalOffset: 384,-64,128

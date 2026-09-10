@@ -340,18 +340,18 @@ ra1_allies_rapierjumpjet:
 	ChangesHealth@SelfHealing:
 		Step: 31
 	Armament@PRIMARY:
-		Weapon: RapierBombs
+		Weapon: ra1_allies_rapierjumpjet_bomb
 		LocalOffset: 256,213,0, 256,-213,0
 		PauseOnCondition: !ammo
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@Upgrade:
-		Weapon: RapierBombsCryo
+		Weapon: ra1_allies_rapierjumpjet_bomb_cryo
 		LocalOffset: 256,213,0, 256,-213,0
 		PauseOnCondition: !ammo
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: Aphid_AA
+		Weapon: ra1_allies_rapierjumpjet_missile_AA
 		LocalOffset: 0,-512,0, 0,512,0
 		LocalYaw: 64, -64
 		MuzzleSequence: muzzle
@@ -359,7 +359,7 @@ ra1_allies_rapierjumpjet:
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@SECONDARYUpgrade:
 		Name: secondary
-		Weapon: AphidCryo_AA
+		Weapon: ra1_allies_rapierjumpjet_missile_cryo_AA
 		LocalOffset: 0,-512,0, 0,512,0
 		LocalYaw: 64, -64
 		MuzzleSequence: muzzle

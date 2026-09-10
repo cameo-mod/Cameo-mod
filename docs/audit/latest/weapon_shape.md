@@ -45,8 +45,6 @@ _I7 is a REVIEW QUEUE, not a defect count ΓÇö an instant or utility weapon ma
 | `APTusk` | 5 | `^Warhead_MissileAP_Heavy` ┬╖ `^TankDestroyerCannon` ┬╖ `^Grenade` ┬╖ `^FlakWeapon` |
 | `ASDFGun2` | 4 | `^Warhead_Railgun_Heavy` ┬╖ `^Projectile_Railgun_Heavy` ┬╖ `^Effect_Railgun_Heavy` ┬╖ `ASDFGun` |
 | `ASDFKamikazeExplosion` | 4 | `^Warhead_Demolition_Heavy` ┬╖ `^Warhead_Concussion_Medium` ┬╖ `^Effect_Concussion_Medium` ┬╖ `^Projectile_Grenade_Light` |
-| `AphidCryo_AA` | 4 | `^Warhead_CryoBlast_Medium` ┬╖ `^Warhead_MissileCryo_Heavy` ┬╖ `^Projectile_Missile_Heavy` ┬╖ `^Effect_Cryo` |
-| `Aphid_AA` | 4 | `^Warhead_Concussion_Medium` ┬╖ `^Warhead_MissileHE_Heavy` ┬╖ `^Projectile_Missile_Heavy` ┬╖ `^Effect_MissileHE_Heavy` |
 | `ArcherArtilleryShell` | 6 | `^Warhead_Concussion_Heavy` ┬╖ `^MediumCannon` ┬╖ `^HeavyCannon` ┬╖ `^MediumFlameWeapon` |
 | `ArmoredCarMG` | 9 | `^Warhead_Bullet_Medium` ┬╖ `^ArrowWeapon` ┬╖ `^TankDestroyerCannon` ┬╖ `^SmallArms` |
 | `ArtilleryShell` | 5 | `^Compatibility_Concussion_MediumFlat` ┬╖ `^Warhead_Demolition_Light` ┬╖ `^Warhead_Concussion_Medium` ┬╖ `^Projectile_Grenade_Light` |
@@ -70,6 +68,8 @@ _I7 is a REVIEW QUEUE, not a defect count ΓÇö an instant or utility weapon ma
 | `AsianSniper` | 8 | `^Warhead_Bullet_Heavy` ┬╖ `^Projectile_Shell_Heavy` ┬╖ `^Effect_CannonHE_Heavy` ┬╖ `^MediumMissile` |
 | `AsianSniperLockdown` | 4 | `^Warhead_Tesla_Super` ┬╖ `^Projectile_Lightning_Super` ┬╖ `^Effect_Tesla_Super` ┬╖ `AsianSniperAP` |
 | `AsianSubmarineBomb` | 5 | `^Compatibility_Demolition_HeavyFlat` ┬╖ `^Warhead_Demolition_Heavy` ┬╖ `^Effect_Demolition_Heavy` ┬╖ `^RA2Grenade` |
+| `AthenaLaser` | 7 | `^Compatibility_Laser_HeavyFlat` ┬╖ `^LightMissile` ┬╖ `^SmallArms` ┬╖ `^Chaingun` |
+| `AtreusMG` | 8 | `^Compatibility_Bullet_MediumFlat` ┬╖ `^Warhead_CannonHE_Heavy` ┬╖ `^Projectile_Shell_Heavy` ┬╖ `^Effect_CannonHE_Heavy` |
 
 
 _... and 532 more._
@@ -85,8 +85,6 @@ _... and 532 more._
 | `APCGun` | `^Warhead_Bullet_Medium` ┬╖ `^Warhead_Flak_Medium` |
 | `APCGunAllies` | `^Warhead_Bullet_Medium` ┬╖ `^Warhead_Flak_Medium` |
 | `ASDFKamikazeExplosion` | `^Warhead_Demolition_Heavy` ┬╖ `^Warhead_Concussion_Medium` |
-| `AphidCryo_AA` | `^Warhead_CryoBlast_Medium` ┬╖ `^Warhead_MissileCryo_Heavy` |
-| `Aphid_AA` | `^Warhead_Concussion_Medium` ┬╖ `^Warhead_MissileHE_Heavy` |
 | `ArtilleryShell` | `^Warhead_Demolition_Light` ┬╖ `^Warhead_Concussion_Medium` |
 | `AsianHarbingerPlasma` | `^Warhead_Plasma_Medium` ┬╖ `^Warhead_CannonHE_Medium` |
 | `AsianPelicanMissile` | `^Warhead_Concussion_Light` ┬╖ `^Warhead_MissileAP_Heavy` |
@@ -119,6 +117,8 @@ _... and 532 more._
 | `FireballLauncherBuggy2` | `^Warhead_Flame_Light` ┬╖ `^Warhead_Flame_Heavy` |
 | `FlakbusAA` | `^Warhead_MissileHE_Medium` ┬╖ `^Warhead_Flak_Medium` |
 | `Flamethrower` | `^Warhead_Flame_Light` ┬╖ `^Warhead_Flame_Light` |
+| `GlaveCanon` | `^Warhead_Demolition_Light` ┬╖ `^Warhead_Railgun_Heavy` |
+| `GoliathMG` | `^Warhead_Concussion_Light` ┬╖ `^Warhead_CannonHE_Heavy` |
 
 
 _... and 159 more._
@@ -200,8 +200,6 @@ _... and 11 more._
 | `AAGunBoatFlak` | 3 | `Bullet_Light` ┬╖ `Flak_Medium` ┬╖ `Flak_MediumFlatCompatibility` |
 | `AAGunBoatFlak_elite` | 3 | `Bullet_Light` ┬╖ `Flak_Medium` ┬╖ `Flak_MediumFlatCompatibility` |
 | `ATMine` | 2 | `ATMineDemolition_Light` ┬╖ `Demolition_Light` |
-| `AphidCryo_AA` | 2 | `CryoBlast_Medium` ┬╖ `MissileCryo_Heavy` |
-| `Aphid_AA` | 2 | `Concussion_Medium` ┬╖ `MissileHE_Heavy` |
 | `ArmoredCarMGAAWaveforce` | 5 | `Bullet_Light` ┬╖ `Bullet_Medium` ┬╖ `CannonAP_Light` ┬╖ `CannonHE_Medium` |
 | `ArmoredCarMGWaveforce` | 2 | `Bullet_Medium` ┬╖ `Railgun_Heavy` |
 | `ArmoredCarMG_AA` | 4 | `Bullet_Light` ┬╖ `Bullet_Medium` ┬╖ `CannonAP_Light` ┬╖ `CannonHE_Medium` |
@@ -235,6 +233,8 @@ _... and 11 more._
 | `D2K_Rocket_Trooper1` | 3 | `Flak_Medium` ┬╖ `MissileAP_Heavy` ┬╖ `MissileAP_Light` |
 | `D2K_Rocket_Trooper2` | 3 | `CannonHE_Medium` ┬╖ `Demolition_Light` ┬╖ `Railgun_Heavy` |
 | `D2K_SiegeQuad` | 4 | `CannonHE_Medium` ┬╖ `Concussion_Medium` ┬╖ `Demolition_Heavy` ┬╖ `Demolition_Light` |
+| `DRPlasmaTankWeapon` | 2 | `1Dam` ┬╖ `1DamBuildings` |
+| `DTAtomic` | 2 | `Nuclear_Super` ┬╖ `Tesla_Super` |
 
 
 _... and 263 more._
@@ -259,7 +259,6 @@ _... and 263 more._
 | `AAGunBoatFlak` | 1 | `Warhead@EffectAir: CreateEffect` |
 | `ASDFKamikazeExplosion` | 1 | `Warhead@Effect: CreateEffect` |
 | `ATMine` | 3 | `Warhead@Effect: CreateEffect` ┬╖ `Warhead@Smudge: LeaveSmudge` ┬╖ `Warhead@Concrete: DamagesConcrete` |
-| `Aphid_AA` | 1 | `Warhead@EffectAir: CreateEffect` |
 | `ArmoredCarMG` | 1 | `Warhead@Effect: CreateEffect` |
 | `ArtilleryExplode` | 1 | `Warhead@2Eff: CreateEffect` |
 | `ArtilleryShell` | 1 | `Warhead@Effect: CreateEffect` |
@@ -284,6 +283,7 @@ _... and 263 more._
 | `BCYamatoCannon` | 1 | `Warhead@Effect: CreateEffect` |
 | `BHBombs` | 1 | `Warhead@3Eff: CreateEffect` |
 | `BHRedDarts` | 2 | `Warhead@Effect: CreateEffect` ┬╖ `Warhead@EffectAir: CreateEffect` |
+| `BallistaMultiShot` | 1 | `Warhead@Effect: CreateEffect` |
 
 
 _... and 653 more._

@@ -8,8 +8,6 @@ _at or below baseline_ — pre-existing **W24** debt (54 weapons), not a regress
 | weapon | mains | per_warhead | total |
 |---|---|---|---|
 | 12MissilesSpawnerScud | 4 | 24000 | 96000 |
-| AphidCryo_AA | 2 | 8000 | 16000 |
-| Aphid_AA | 2 | 8000 | 16000 |
 | AsianChaosMine | 2 | 125000 | 250000 |
 | AsianPhoenixRocket | 3 | 20000 | 60000 |
 | AsianPhoenixRocket_elite | 3 | 20000 | 60000 |
@@ -42,11 +40,13 @@ _at or below baseline_ — pre-existing **W24** debt (54 weapons), not a regress
 | SCUD | 2 | 60000 | 120000 |
 | SCUDIrak | 2 | 60000 | 120000 |
 | SamuraiBladeCharged | 2 | 10000 | 20000 |
-| SheridanCannon | 2 | 8000 | 16000 |
 | SkyHawkChainGun | 2 | 2000 | 4000 |
 | SkyHawkChainGunWaveforce | 3 | 2000 | 6000 |
 | TS155mm_bluenuke | 2 | 60000 | 120000 |
 | TSTacticalChemMissileDamage | 2 | 10000 | 20000 |
+| TSTacticalMissileDamage | 2 | 10000 | 20000 |
+| TSVulcan | 2 | 2000 | 4000 |
+| ThermobaricFlame | 2 | 2000 | 4000 |
 
 
 _... and 14 more._

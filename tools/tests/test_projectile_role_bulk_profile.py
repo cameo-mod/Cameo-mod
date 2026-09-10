@@ -22,7 +22,7 @@ ROOTS = {
     "GDIRigPhalanx": ("Bullet_Medium", 24000, 6),
     "HMG_Duelist": ("Bullet_Medium", 12000, 6),
     "HermitShoot": ("Concussion_Medium", 12000, 6),
-    "Nike": ("MissileHE_Heavy", 16000, 4),
+    "ra1_soviets_samsite_missile_AA": ("MissileHE_Heavy", 16000, 4),
     "PatriarchShoot": ("Concussion_Medium", 12000, 6),
     "SpithidSpit": ("Bullet_Light", 6000, 3),
     "ra120mm": ("CannonHE_Heavy", 24000, 4),
@@ -80,7 +80,7 @@ class ProjectileRoleBulkProfileTests(unittest.TestCase):
         self.assertEqual("20000", child(emp, "Damage").value)
 
     def test_nike_damage_is_air_only(self):
-        weapon = self.rules.resolve_weapon("Nike")
+        weapon = self.rules.resolve_weapon("ra1_soviets_samsite_missile_AA")
         main = child(weapon, "Warhead@MissileHE_Heavy")
         self.assertEqual("Air", child(main, "ValidTargets").value)
 
