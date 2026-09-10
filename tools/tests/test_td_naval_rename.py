@@ -56,7 +56,7 @@ EXPECTED = {
         "prereq": "~cncsyrd",
         "queue": "Naval, RANaval",
         "image": "cncpt",
-        "weapons": {"GunboatMissile", "GunboatMissileAMT", "DepthCharge"},
+        "weapons": {"td_gdi_missileboat_gunboatmissile", "td_gdi_missileboat_gunboatmissileamt", "td_gdi_missileboat_depthcharge"},
         "armor": {"Heavy", "Shield"},
     },
     "td_gdi_railgunbattleship": {
@@ -66,7 +66,7 @@ EXPECTED = {
         "prereq": "~cncsyrd, td_gdi_communicationscenter",
         "queue": "Naval, RANaval",
         "image": "cncca",
-        "weapons": {"GDIBattleshipRailgun"},
+        "weapons": {"td_gdi_railgunbattleship_gdibattleshiprailgun"},
         "armor": {"Superheavy", "Shield"},
     },
     "td_gdi_landingcraft": {
@@ -86,7 +86,7 @@ EXPECTED = {
         "prereq": "~cncspen",
         "queue": "Naval, RANaval",
         "image": "cncss",
-        "weapons": {"NodTorpTube", "NodTorpTubeBlackMarket"},
+        "weapons": {"td_nod_attacksubmarine_nodtorptube", "td_nod_attacksubmarine_nodtorptubeblackmarket"},
         "armor": {"Heavy", "Shield"},
     },
     "td_nod_ballisticmissilesubmarine": {
@@ -96,7 +96,7 @@ EXPECTED = {
         "prereq": "~cncspen, td_nod_communicationscenter",
         "queue": "Naval, RANaval",
         "image": "ssmsub",
-        "weapons": {"HonestJohn"},
+        "weapons": {"td_nod_ballisticmissilesubmarine_honestjohn"},
         "armor": {"Medium", "Shield"},
     },
     "td_nod_lasercorvette": {
@@ -106,7 +106,7 @@ EXPECTED = {
         "prereq": "~cncspen, td_nod_templeofnod",
         "queue": "Naval, RANaval",
         "image": "nodlasercorvette",
-        "weapons": {"CorvetteLaserObelisk", "CorvetteDragon"},
+        "weapons": {"td_nod_lasercorvette_corvettelaserobelisk", "td_nod_lasercorvette_corvettedragon"},
         "armor": {"Medium", "Shield"},
     },
     "td_nod_transportsubmarine": {
@@ -253,12 +253,21 @@ class TdNavalRenameTests(unittest.TestCase):
     def test_complete_normalized_resolved_payloads_match_baseline(self):
         """Whole-payload comparison (every field, not selected stats), with
         actor-ID references normalized and implicit old-image bindings made
-        explicit; zero drift beyond the four authorized Image bindings."""
+        explicit; reverse only separately pinned owner Weapon identities."""
         data = self.load_baseline_fixture()
+        owned = json.loads((ROOT / 'tools/tests/fixtures/test_lookup_owned_names_20260910.json').read_text())['routes']
+        wrappers = json.loads((ROOT / 'tools/tests/fixtures/shared_owner_wrappers_20260910.json').read_text())['routes']
         for old, new in sorted(RENAME.items()):
             with self.subTest(actor=f"{old} -> {new}"):
                 before = inject(old, unify(data["actors"][old]))
                 after = unify(node_form(self.rules.resolve(new)))
+                reverse = {current: previous for previous, current in owned.get(new, {}).items()}
+                reverse.update({current: previous for previous, current in wrappers.get(new, {}).items()})
+                for key, value in after.items():
+                    if key.split('@')[0] == 'Armament' and isinstance(value, dict):
+                        current = value.get('Weapon')
+                        if current in reverse:
+                            value['Weapon'] = reverse[current]
                 self.assertEqual([], self.tree_diff(before, after))
 
     def test_sprite_bindings_use_old_lowercase_ids(self):

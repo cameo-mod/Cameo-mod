@@ -1,6 +1,6 @@
 # audit_code_duplication — copy-paste clone groups
 
-Python files: **462** (min 5 statements), C# files: **353** (min 8 lines)
+Python files: **469** (min 5 statements), C# files: **353** (min 8 lines)
 
 | code | meaning | clone groups | baseline |
 |---|---|---|---|
@@ -13,12 +13,12 @@ Python files: **462** (min 5 statements), C# files: **353** (min 8 lines)
 
 | copies | fingerprint | sites |
 |---|---|---|
-| 6 | 41d0c91332872de3 | tools/balance/consolidate_authorized_role_profiles.py:199 descendants(); tools/balance/consolidate_corroborated_role_profiles.py:294 descendants(); tools/balance/consolidate_delivery_identity_profiles.py:76 descendants(); tools/balance/consolidate_final_safe_cohorts.py:73 descendants(); tools/balance/consolidate_machinegun_profiles.py:56 descendants(); tools/balance/consolidate_role_complete_profiles.py:85 descendants() |
+| 5 | 41d0c91332872de3 | tools/balance/consolidate_authorized_role_profiles.py:199 descendants(); tools/balance/consolidate_corroborated_role_profiles.py:294 descendants(); tools/balance/consolidate_delivery_identity_profiles.py:76 descendants(); tools/balance/consolidate_machinegun_profiles.py:56 descendants(); tools/balance/consolidate_role_complete_profiles.py:85 descendants() |
 | 4 | 0c9e5a3408c1d09c | tools/balance/consolidate_exact_profile_duplicates.py:105 descendants(); tools/balance/consolidate_freedom_rocket_base.py:43 descendants(); tools/balance/consolidate_high_identity_profiles.py:66 descendants(); tools/balance/consolidate_laser_heavy_routes.py:82 descendants() |
 | 4 | 2af465aa2475b428 | tools/gen_cryo_fog.py:29 fractal_noise(); tools/gen_fire.py:32 fractal_noise(); tools/gen_fire_smoke_glow.py:27 fractal_noise(); tools/gen_smoke.py:28 fractal_noise() |
-| 4 | b349b4fadfe93412 | tools/balance/consolidate_explicit_family_state_profiles.py:164 descendants(); tools/balance/consolidate_named_family_profiles.py:147 descendants(); tools/balance/consolidate_named_state_corrections.py:76 descendants(); tools/balance/consolidate_pinned_role_profiles.py:92 descendants() |
-| 3 | 1126f101fc234323 | tools/tests/test_high_identity_profile_consolidation.py:55 test_full_ruleset_comparison_matches_accepted_manifest(); tools/tests/test_named_state_corrections.py:52 test_comparison_is_exactly_the_six_reviewed_definitions(); tools/tests/test_pinned_role_profile_consolidation.py:63 test_full_ruleset_comparison_matches_reviewed_manifest() |
-| 3 | e56561937b9ea65e | tools/balance/consolidate_explicit_family_state_profiles.py:300 add_removal(); tools/balance/consolidate_named_family_profiles.py:259 add_removal(); tools/balance/consolidate_pinned_role_profiles.py:209 add_removal() |
+| 3 | 1126f101fc234323 | tools/tests/test_high_identity_profile_consolidation.py:55 test_full_ruleset_comparison_matches_accepted_manifest(); tools/tests/test_named_state_corrections.py:52 test_comparison_is_exactly_the_six_reviewed_definitions(); tools/tests/test_pinned_role_profile_consolidation.py:64 test_full_ruleset_comparison_matches_reviewed_manifest() |
+| 3 | b349b4fadfe93412 | tools/balance/consolidate_explicit_family_state_profiles.py:164 descendants(); tools/balance/consolidate_named_state_corrections.py:76 descendants(); tools/balance/consolidate_pinned_role_profiles.py:92 descendants() |
+| 3 | e56561937b9ea65e | tools/balance/consolidate_explicit_family_state_profiles.py:300 add_removal(); tools/balance/consolidate_named_family_profiles.py:260 add_removal(); tools/balance/consolidate_pinned_role_profiles.py:209 add_removal() |
 | 3 | f3f8811ecbc48273 | tools/gen_cryo_fog.py:51 warp(); tools/gen_fire_smoke_glow.py:50 warp(); tools/gen_smoke.py:51 warp() |
 | 2 | 11d29300c3f1eadc | tools/tilesets/generate_volcanic_tileset.py:168 build_palette(); tools/tilesets/volcanic_art_utils.py:84 build_palette() |
 | 2 | 1dacd1e435667177 | tools/tilesets/generate_volcanic_tileset.py:588 base_clear_index(); tools/tilesets/volcanic_art_utils.py:132 base_clear_index() |
@@ -67,8 +67,8 @@ Python files: **462** (min 5 statements), C# files: **353** (min 8 lines)
 | 3 | 6c04bed7d433482f | tools/audit/audit_stat_uniqueness.py:44 STATS; tools/balance/faction_extrapolate.py:84 RATE_STATS; tools/balance/reference_targets.py:41 STATS |
 | 3 | 985c1fe34e42db41 | tools/audit/find_empty_warhead.py:16 CENTRAL; tools/audit/weapon_families.py:23 CENTRAL; tools/balance/sweep_areadamage.py:25 CENTRAL |
 | 2 | 153d4fc74c8cdd31 | tools/tilesets/build_ra_temperate_basalt_trees.py:20 ACTORS; tools/tilesets/build_volcanic_basalt_gimp_brushes.py:20 ACTORS |
-| 2 | 245ae127cd6182e8 | tools/balance/consolidate_explicit_family_state_profiles.py:81 STATE_EXPANSION; tools/tests/test_explicit_family_state_profile_consolidation.py:31 EXPECTED_EXPANSION |
 | 2 | 2665d6950cd4417a | tools/audit/find_orphan_old_keys.py:27 OLD_TO_NEW; tools/balance/fix_orphan_old_keys.py:25 OLD_TO_NEW |
+| 2 | 41839a9d7e016b39 | tools/balance/consolidate_explicit_family_state_profiles.py:81 STATE_EXPANSION; tools/tests/test_explicit_family_state_profile_consolidation.py:32 EXPECTED_EXPANSION |
 | 2 | 4979d18fd8f148a1 | tools/tilesets/detect_cliff_dark_noise.py:14 BLACK; tools/tilesets/process_ai_edge_mask.py:15 BLACK |
 | 2 | 590fa5489ca5f751 | tools/audit/find_orphan_old_keys_multi.py:25 OLD_KEY_FAMILIES; tools/balance/fix_orphan_old_keys_multi.py:22 OLD_KEY_FAMILIES |
 | 2 | 783c5216cd3c1bf0 | tools/audit/audit_versus_profile.py:64 NON_ARMOR; tools/balance/preview_bell.py:45 OFF_AXIS |

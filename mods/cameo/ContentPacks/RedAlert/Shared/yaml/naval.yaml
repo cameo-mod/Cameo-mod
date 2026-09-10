@@ -37,7 +37,7 @@ ra1_allies_gunboat:
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: DepthCharge
+		Weapon: ra1_allies_gunboat_depthcharge
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	AttackTurreted:
@@ -62,7 +62,7 @@ ra1_allies_gunboat:
 	Armament@SECONDARYCryo:
 		Name: secondary
 		MuzzleSequence: muzzle
-		Weapon: DepthChargeCryo
+		Weapon: ra1_allies_gunboat_depthchargecryo
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 ra1_allies_destroyer:
 	Inherits: ^BoatUnit
@@ -111,13 +111,13 @@ ra1_allies_destroyer:
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	Armament@DC1:
-		Weapon: DepthCharge
+		Weapon: ra1_allies_destroyer_depthcharge
 		LocalOffset: 100,-100,0, 100,100,0
 		LocalYaw: 80, -80
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@DC2:
-		Weapon: DepthCharge
+		Weapon: ra1_allies_destroyer_depthcharge
 		LocalOffset: 100,100,0, 100,-100,0
 		LocalYaw: 80, -80
 		FireDelay: 5
@@ -144,14 +144,14 @@ ra1_allies_destroyer:
 		LocalOffset: 100,-100,0, 100,100,0
 		LocalYaw: 80, -80
 		MuzzleSequence: muzzle
-		Weapon: DepthChargeCryo
+		Weapon: ra1_allies_destroyer_depthchargecryo
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	Armament@DC2Cryo:
 		LocalOffset: 100,100,0, 100,-100,0
 		LocalYaw: 80, -80
 		FireDelay: 5
 		MuzzleSequence: muzzle
-		Weapon: DepthChargeCryo
+		Weapon: ra1_allies_destroyer_depthchargecryo
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 ra1_allies_cruiser:
 	Inherits: ^BoatUnit
@@ -192,7 +192,7 @@ ra1_allies_cruiser:
 		TurnSpeed: 8
 	Armament@PRIMARY:
 		Turret: primary
-		Weapon: 8Inch
+		Weapon: ra1_allies_cruiser_8inch
 		LocalOffset: 480,-100,40, 480,100,40
 		Recoil: 88
 		RecoilRecovery: 35
@@ -201,7 +201,7 @@ ra1_allies_cruiser:
 	Armament@SECONDARY:
 		Name: secondary
 		Turret: secondary
-		Weapon: 8Inch
+		Weapon: ra1_allies_cruiser_8inch
 		LocalOffset: 480,-100,40, 480,100,40
 		Recoil: 88
 		RecoilRecovery: 35
@@ -231,7 +231,7 @@ ra1_allies_cruiser:
 		Recoil: 88
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		Weapon: 8InchCryo
+		Weapon: ra1_allies_cruiser_8inchcryo
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	Armament@SECONDARYCryo:
 		Name: secondary
@@ -240,7 +240,7 @@ ra1_allies_cruiser:
 		Recoil: 88
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		Weapon: 8InchCryo
+		Weapon: ra1_allies_cruiser_8inchcryo
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 japan_japanesespeedboat:
 	Inherits: ^BoatUnit
@@ -649,7 +649,7 @@ ra1_soviets_missilesubmarine:
 	Armor:
 		Type: Medium
 	Armament@PRIMARY:
-		Weapon: 227mm
+		Weapon: ra1_soviets_missilesubmarine_227mm
 		LocalOffset: 208,128,48, 208,-128,48
 		MuzzleSequence: muzzle
 	WithMuzzleOverlay:

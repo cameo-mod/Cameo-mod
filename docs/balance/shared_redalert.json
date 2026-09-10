@@ -216,7 +216,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5000",
@@ -224,14 +224,13 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Demolition_HeavyFlat",
-       "^ParaBombLegacy"
+       "ParaBomb"
       ],
       "warheads": [
        "^Warhead_Demolition_Heavy",
        "^Warhead_Flame_Heavy"
       ],
-      "weapon": "ParaBomb",
+      "weapon": "ra1_allies_cargoplanebomber_parabomb",
       "weapon_class_source": "template"
      },
      {
@@ -259,7 +258,7 @@
       "warheads": [
        "^Warhead_CryoBlast_Heavy"
       ],
-      "weapon": "ParaBombCryo",
+      "weapon": "ra1_allies_cargoplanebomber_parabombcryo",
       "weapon_class_source": "template"
      }
     ],
@@ -1097,7 +1096,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6643",
@@ -1105,15 +1104,12 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_MissileHE_MediumFlat",
-       "^Warhead_MissileHE_Medium",
-       "^Projectile_Missile_Light",
-       "^Effect_MissileHE_Light"
+       "RocketsRA"
       ],
       "warheads": [
        "^Warhead_MissileHE_Medium"
       ],
-      "weapon": "RocketsRA",
+      "weapon": "ra1_allies_alliedrocketsoldier_rocketsra",
       "weapon_class_source": "template"
      },
      {
@@ -1127,7 +1123,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6643",
@@ -1135,15 +1131,12 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Compatibility_MissileHE_MediumFlat",
-       "^Warhead_MissileHE_Medium",
-       "^Projectile_Missile_Light",
-       "^Effect_MissileHE_Light"
+       "RocketsRA"
       ],
       "warheads": [
        "^Warhead_MissileHE_Medium"
       ],
-      "weapon": "RocketsRA",
+      "weapon": "ra1_allies_alliedrocketsoldier_rocketsra",
       "weapon_class_source": "template"
      },
      {
@@ -1171,7 +1164,7 @@
       "warheads": [
        "^Warhead_MissileCryo_Medium"
       ],
-      "weapon": "RocketsRACryo",
+      "weapon": "ra1_allies_alliedrocketsoldier_rocketsracryo",
       "weapon_class_source": "template"
      },
      {
@@ -1200,7 +1193,7 @@
       "warheads": [
        "^Warhead_MissileCryo_Medium"
       ],
-      "weapon": "RocketsRACryo",
+      "weapon": "ra1_allies_alliedrocketsoldier_rocketsracryo",
       "weapon_class_source": "template"
      }
     ],
@@ -1767,7 +1760,7 @@
        "^Warhead_Demolition_Light",
        "^Warhead_Flame_Light"
       ],
-      "weapon": "ConscriptMolotov",
+      "weapon": "ra1_soviets_molotovconscript_conscriptmolotov",
       "weapon_class_source": "template"
      },
      {
@@ -1797,7 +1790,7 @@
        "^Warhead_Demolition_Light",
        "^Warhead_Flame_Light"
       ],
-      "weapon": "ConscriptMolotov",
+      "weapon": "ra1_soviets_molotovconscript_conscriptmolotov",
       "weapon_class_source": "template"
      }
     ],
@@ -2708,7 +2701,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
@@ -2717,15 +2710,12 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Demolition_HeavyFlat",
-       "^Warhead_Demolition_Heavy",
-       "^Projectile_Grenade_Light",
-       "^Effect_Demolition_Light"
+       "8Inch"
       ],
       "warheads": [
        "^Warhead_Demolition_Heavy"
       ],
-      "weapon": "8Inch",
+      "weapon": "ra1_allies_cruiser_8inch",
       "weapon_class_source": "template"
      },
      {
@@ -2740,7 +2730,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
@@ -2749,15 +2739,12 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "^Compatibility_Demolition_HeavyFlat",
-       "^Warhead_Demolition_Heavy",
-       "^Projectile_Grenade_Light",
-       "^Effect_Demolition_Light"
+       "8Inch"
       ],
       "warheads": [
        "^Warhead_Demolition_Heavy"
       ],
-      "weapon": "8Inch",
+      "weapon": "ra1_allies_cruiser_8inch",
       "weapon_class_source": "template"
      },
      {
@@ -2787,7 +2774,7 @@
       "warheads": [
        "^Warhead_CryoBlast_Heavy"
       ],
-      "weapon": "8InchCryo",
+      "weapon": "ra1_allies_cruiser_8inchcryo",
       "weapon_class_source": "template"
      },
      {
@@ -2818,7 +2805,7 @@
       "warheads": [
        "^Warhead_CryoBlast_Heavy"
       ],
-      "weapon": "8InchCryo",
+      "weapon": "ra1_allies_cruiser_8inchcryo",
       "weapon_class_source": "template"
      }
     ],
@@ -2961,7 +2948,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
@@ -2969,14 +2956,12 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@DC1",
       "versus_templates": [
-       "^Warhead_Demolition_Light",
-       "^Projectile_Grenade_Light",
-       "^Effect_Demolition_Light"
+       "DepthCharge"
       ],
       "warheads": [
        "^Warhead_Demolition_Light"
       ],
-      "weapon": "DepthCharge",
+      "weapon": "ra1_allies_destroyer_depthcharge",
       "weapon_class_source": "template"
      },
      {
@@ -2989,7 +2974,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
@@ -2997,14 +2982,12 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@DC2",
       "versus_templates": [
-       "^Warhead_Demolition_Light",
-       "^Projectile_Grenade_Light",
-       "^Effect_Demolition_Light"
+       "DepthCharge"
       ],
       "warheads": [
        "^Warhead_Demolition_Light"
       ],
-      "weapon": "DepthCharge",
+      "weapon": "ra1_allies_destroyer_depthcharge",
       "weapon_class_source": "template"
      },
      {
@@ -3017,7 +3000,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
@@ -3025,14 +3008,12 @@
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@DC1Cryo",
       "versus_templates": [
-       "^Warhead_CryoBlast_Light",
-       "^Projectile_Grenade_Light",
-       "^Effect_Cryo"
+       "DepthChargeCryo"
       ],
       "warheads": [
        "^Warhead_CryoBlast_Light"
       ],
-      "weapon": "DepthChargeCryo",
+      "weapon": "ra1_allies_destroyer_depthchargecryo",
       "weapon_class_source": "template"
      },
      {
@@ -3045,7 +3026,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
@@ -3053,14 +3034,12 @@
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@DC2Cryo",
       "versus_templates": [
-       "^Warhead_CryoBlast_Light",
-       "^Projectile_Grenade_Light",
-       "^Effect_Cryo"
+       "DepthChargeCryo"
       ],
       "warheads": [
        "^Warhead_CryoBlast_Light"
       ],
-      "weapon": "DepthChargeCryo",
+      "weapon": "ra1_allies_destroyer_depthchargecryo",
       "weapon_class_source": "template"
      }
     ],
@@ -3172,7 +3151,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
@@ -3180,14 +3159,12 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "^Warhead_Demolition_Light",
-       "^Projectile_Grenade_Light",
-       "^Effect_Demolition_Light"
+       "DepthCharge"
       ],
       "warheads": [
        "^Warhead_Demolition_Light"
       ],
-      "weapon": "DepthCharge",
+      "weapon": "ra1_allies_gunboat_depthcharge",
       "weapon_class_source": "template"
      },
      {
@@ -3229,7 +3206,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
@@ -3237,14 +3214,12 @@
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@SECONDARYCryo",
       "versus_templates": [
-       "^Warhead_CryoBlast_Light",
-       "^Projectile_Grenade_Light",
-       "^Effect_Cryo"
+       "DepthChargeCryo"
       ],
       "warheads": [
        "^Warhead_CryoBlast_Light"
       ],
-      "weapon": "DepthChargeCryo",
+      "weapon": "ra1_allies_gunboat_depthchargecryo",
       "weapon_class_source": "template"
      }
     ],
@@ -3393,7 +3368,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "minrange": "1985",
       "pricing": true,
@@ -3401,14 +3376,12 @@
       "reloaddelay": "111",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_MissileHE_Medium",
-       "^Projectile_Missile_Medium",
-       "^Effect_MissileHE_Medium"
+       "227mm"
       ],
       "warheads": [
        "^Warhead_MissileHE_Medium"
       ],
-      "weapon": "227mm",
+      "weapon": "ra1_soviets_missilesubmarine_227mm",
       "weapon_class_source": "template"
      }
     ],

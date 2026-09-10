@@ -16,6 +16,7 @@ sys.path.insert(0, str(ROOT / "tools" / "audit"))
 from audit_three_way_split import main_warhead_nodes, main_warheads
 from miniyaml import Ruleset
 from reviewed_weapon_history import historical_copy
+from owned_weapon_history import historical_weapon_names
 
 
 CONSOLIDATED = {
@@ -28,9 +29,9 @@ CONSOLIDATED = {
 PRESERVED_HASHES = {
     "TS155mm_bluenuke": "97a6765afdf585adf92ece0bbdfec067da014575966671eada8a4ca54f46817f",
     "GrenadeRA": "19d10234019c95012015db30a27922075fb2f736510b9141b467425504839afe",
-    "GrenadeRAExplode": "463b5914bb50ab37d1d25754249953ddca938838709fb3626fecae3696d26b68",
-    "GrenadeThermobaric": "0c9a10e9feacf943e2d83ee9eeb48adec2a564ad13f2aa7795711af3bc386760",
-    "GrenadeThermobaricExplode": "d30dee2e543667518a319226aac7da2f8b7142a9da0bb3256fb5da613643946b",
+    "ra1_soviets_grenadier_grenaderaexplode": "463b5914bb50ab37d1d25754249953ddca938838709fb3626fecae3696d26b68",
+    "ra1_soviets_grenadier_grenadethermobaric": "0c9a10e9feacf943e2d83ee9eeb48adec2a564ad13f2aa7795711af3bc386760",
+    "ra1_soviets_grenadier_grenadethermobaricexplode": "d30dee2e543667518a319226aac7da2f8b7142a9da0bb3256fb5da613643946b",
 }
 
 EXPECTED_PERCENTAGE_DELTAS = {
@@ -91,7 +92,7 @@ class ClosureIsolationConsolidationTests(unittest.TestCase):
         for name, expected in PRESERVED_HASHES.items():
             current = "ra1_soviets_grenadier_grenade" if name == "GrenadeRA" else name
             node = self.rules.resolve_weapon(current).deep_copy()
-            node.key = name
+            node.key = next(iter(historical_weapon_names([name])))
             self.assertEqual(expected, resolved_hash(historical_copy(self, node)), name)
         self.assertEqual({"TSAux155mm"}, descendants(self.rules, "TS155mm"))
         self.assertEqual(set(), descendants(self.rules, "TSInfantryMortar"))

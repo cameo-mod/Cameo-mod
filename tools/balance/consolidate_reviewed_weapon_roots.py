@@ -43,7 +43,7 @@ ROLE = {
     "BCLaser": "Laser_Heavy",
     "BallistaMultiShotEnergized": "Arrow_Medium",
     "BuggyPlasmaGrenade": "Plasma_Light",
-    "BoxerCannonAG": "Bullet_Medium",
+    "td_gdi_boxer_boxercannonag": "Bullet_Medium",
     "CabalBeholderLaser": "Laser_Heavy",
     "CabalArtilleryWalkerShellUpgraded": "CannonHE_Heavy",
     "CabalCommandoPlasmaMk2Neutron": "Plasma_Heavy",
@@ -59,12 +59,12 @@ ROLE = {
     "Future_MultiMissile_Sigma": "MissileTesla_Medium",
     "GladiusCannon": "Plasma_Heavy",
     "ra1_soviets_grad_rocket_heavy": "MissileHE_Heavy",
-    "GrenadeThermobaric": "Thermobaric_Light",
+    "ra1_soviets_grenadier_grenadethermobaric": "Thermobaric_Light",
     "ra1_allies_alliedheavyaatank_cannon": "Bullet_Medium",
     "HovercraftCannon": "Bullet_Medium",
     "HovercraftPlasmaCannon": "Plasma_Medium",
     "JapanMaidenBowEnergized": "Arrow_Light",
-    "KamovMissilesTesla": "MissileTesla_Medium",
+    "ra1_soviets_kamovattackhelicopter_kamovmissilestesla": "MissileTesla_Medium",
     "IxianBomb_EMP": "Demolition_Heavy",
     "LatinSmokerCannon": "CannonHE_Medium",
     "LunarTigerCannon": "CannonHE_Medium",
@@ -97,7 +97,7 @@ ROLE = {
     "SiegeEngineCannon": "CannonHE_Heavy",
     "SiegeTankSiegeCannon": "CannonHE_Heavy",
     "SkyHawkArrowsEnergized": "Arrow_Medium",
-    "SpecterArtilleryShellUpgrade": "CannonHE_Heavy",
+    "td_nod_specterartillery_specterartilleryshellupgrade": "CannonHE_Heavy",
     "StarshipSovereignBeam": "Laser_Heavy",
     "SteelKatyCannons_EMP": "Quantum_Medium",
     "SteelAirTurret": "Laser_Heavy",
@@ -110,13 +110,13 @@ ROLE = {
     "TSRPGTowerRail": "Railgun_Heavy",
     "TSTurretLaserFire": "Laser_Medium",
     "Tentacle": "Melee_Heavy",
-    "TurretGunBlackMarket": "Concussion_Medium",
+    "td_nod_gunturret_turretgunblackmarket": "Concussion_Medium",
     "Type89PlasmaCannon": "Plasma_Medium",
     "VoidRayBeam": "Prism_Heavy",
     "VultureGrenade": "Demolition_Light",
-    "VolkovMagneticWeapon": "Railgun_Heavy",
-    "VolkovMagneticWeaponIncendiaryNuclearShells": "CannonNuke_Heavy",
-    "VolkovMagneticWeaponIncendiaryTesla": "Quantum_Heavy",
+    "ra1_soviets_volkov_volkovmagneticweapon": "Railgun_Heavy",
+    "ra1_soviets_volkov_volkovmagneticweaponincendiarynuclearshells": "CannonNuke_Heavy",
+    "ra1_soviets_volkov_volkovmagneticweaponincendiarytesla": "Quantum_Heavy",
     "WaveforceCannonDistortedBeam1": "Waveforce_Heavy",
     "bfg10kCannon": "Plasma_Heavy",
     "edenRailgun": "Railgun_Heavy",
@@ -124,7 +124,7 @@ ROLE = {
     "ra1_allies_chronovortex": "Magic_Heavy",
     "ra2roktgun": "Bullet_Medium",
     "wc2gryphonFireVisible": "MissileTesla_Medium",
-    "YakNuclearBomb": "Nuclear_Super",
+    "ra1_soviets_nuclearyak_yaknuclearbomb": "Nuclear_Super",
 }
 
 # These weapons intentionally combine several damage identities or act as broad
@@ -150,7 +150,7 @@ EXACT_PRESERVE = {
 CHILD_ROLE = {
     "AsianSpitfireRockets": "MissileAA_Medium",
     "BCYamatoCannon": "Plasma_Heavy",
-    "BoxerCannon_AA": "Flak_Medium",
+    "td_gdi_boxer_boxercannon_AA": "Flak_Medium",
     "ConsortiumMissileSystem_EMP": "MissileQuantum_Medium",
     "ra1_allies_alliedheavyaatank_cannon_AA": "Flak_Medium",
     "RA2120xmm_rad": "CannonChem_Heavy",
@@ -161,8 +161,8 @@ CHILD_ROLE = {
     "SteelStalkerRailgun_EMP": "Quantum_Heavy",
     "SteelStalkerRailgun_elite": "Quantum_Heavy",
     "SteelStalkerRailgunEScatter": "Quantum_Heavy",
-    "VolkovMagneticWeaponIncendiaryNuclearShells": "CannonNuke_Heavy",
-    "VolkovMagneticWeaponIncendiaryTesla": "Quantum_Heavy",
+    "ra1_soviets_volkov_volkovmagneticweaponincendiarynuclearshells": "CannonNuke_Heavy",
+    "ra1_soviets_volkov_volkovmagneticweaponincendiarytesla": "Quantum_Heavy",
 }
 
 # Reviewed totals for roots whose already-consolidated ancestor contributes a
@@ -172,8 +172,8 @@ COMPATIBILITY_TOTAL_OVERRIDE = {
     "HovercraftPlasmaCannon": 19000,
     "RA2120xmm_rad": 12000,
     "RA2CosmonautLaser": 11600,
-    "VolkovMagneticWeaponIncendiaryNuclearShells": 60000,
-    "VolkovMagneticWeaponIncendiaryTesla": 16000,
+    "ra1_soviets_volkov_volkovmagneticweaponincendiarynuclearshells": 60000,
+    "ra1_soviets_volkov_volkovmagneticweaponincendiarytesla": 16000,
 }
 
 # These weapons already carry deliberate fixed ApplyPhysicalState warheads.  Do

@@ -35,7 +35,7 @@ EXPECTED_ORDINARY_BULLET_SPEEDS = {
     "BlackWidowPistols_elite": 10000,
     "ra1_allies_tanya_pistol": 10000,
     "ra1_allies_tanya_pistol_cryo": 10000,
-    "CryoLightSniper": 10000,
+    "ra1_allies_alliedsniper_cryolightsniper": 10000,
     "Future_Wheel_MG_elite": 4000,
     "NaxiRifleCons_elite": 2000,
     "RA2AWP_elite": 10000,

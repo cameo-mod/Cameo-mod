@@ -138,14 +138,14 @@ ra1_soviets_teslayak:
 		AmmoUsage: 16
 		PauseOnCondition: ammo < 16
 	Armament@Tesla:
-		Weapon: YakTeslaGun
+		Weapon: ra1_soviets_teslayak_yakteslagun
 		LocalOffset: 750,0,-100
 		MuzzleSequence: muzzle
 		AmmoUsage: 4
 		PauseOnCondition: ammo < 16
 		RequiresCondition: !ra1_soviets_upgrade_teslaarcing
 	Armament@Arcing:
-		Weapon: YakTeslaGunArc
+		Weapon: ra1_soviets_teslayak_yakteslagunarc
 		LocalOffset: 750,0,-100
 		MuzzleSequence: muzzle
 		AmmoUsage: 4
@@ -351,7 +351,7 @@ ra1_soviets_nuclearyak:
 	ChangesHealth@SelfHealing:
 		Step: 64
 	Armament@BOMBS:
-		Weapon: YakNuclearBomb
+		Weapon: ra1_soviets_nuclearyak_yaknuclearbomb
 		LocalOffset: 0,0,-32
 		AmmoUsage: 16
 		PauseOnCondition: ammo < 16
@@ -460,42 +460,42 @@ ra1_soviets_migattackbomber:
 	ChangesHealth@SelfHealing:
 		Step: 16
 	Armament@Rockets1:
-		Weapon: Maverick
+		Weapon: ra1_soviets_migattackbomber_maverick
 		LocalOffset: 0,-480,0, 0,640,0
 		LocalYaw: 48, -64
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 		RequiresCondition: !ra1_soviets_upgrade_teslarockets && !ra1_soviets_upgrade_thermonuclearrockets
 	Armament@Rockets2:
-		Weapon: Maverick
+		Weapon: ra1_soviets_migattackbomber_maverick
 		LocalOffset: 0,480,0, 0,-640,0
 		LocalYaw: -48, 64
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 		RequiresCondition: !ra1_soviets_upgrade_teslarockets && !ra1_soviets_upgrade_thermonuclearrockets
 	Armament@TeslaUpgrade1:
-		Weapon: TeslaMaverick
+		Weapon: ra1_soviets_migattackbomber_teslamaverick
 		LocalOffset: 0,-480,0, 0,640,0
 		LocalYaw: 48, -64
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 		RequiresCondition: ra1_soviets_upgrade_teslarockets
 	Armament@TeslaUpgrade2:
-		Weapon: TeslaMaverick
+		Weapon: ra1_soviets_migattackbomber_teslamaverick
 		LocalOffset: 0,480,0, 0,-640,0
 		LocalYaw: -48, 64
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 		RequiresCondition: ra1_soviets_upgrade_teslarockets
 	Armament@NuclearUpgrade1:
-		Weapon: ThermobaricMaverick
+		Weapon: ra1_soviets_migattackbomber_thermobaricmaverick
 		LocalOffset: 0,-480,0, 0,640,0
 		LocalYaw: 48, -64
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 		RequiresCondition: ra1_soviets_upgrade_thermonuclearrockets
 	Armament@NuclearUpgrade2:
-		Weapon: ThermobaricMaverick
+		Weapon: ra1_soviets_migattackbomber_thermobaricmaverick
 		LocalOffset: 0,480,0, 0,-640,0
 		LocalYaw: -48, 64
 		MuzzleSequence: muzzle
@@ -700,70 +700,70 @@ ra1_soviets_hindattackhelicopter:
 	ChangesHealth@SelfHealing:
 		Step: 40
 	Armament@Missiles:
-		Weapon: HindMissiles
+		Weapon: ra1_soviets_hindattackhelicopter_hindmissiles
 		LocalOffset: 85,250,-85, 85,-250,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 2
 		PauseOnCondition: ammo < 2
 		RequiresCondition: !ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_upgrade_thermonuclearrockets && !ra1_soviets_promotion_hurricanerocketpods
 	Armament@MissilesRocketPod1:
-		Weapon: HindMissiles
+		Weapon: ra1_soviets_hindattackhelicopter_hindmissiles
 		LocalOffset: 85,250,-85, 85,-250,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 2
 		RequiresCondition: !ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_hurricanerocketpods
 	Armament@MissilesRocketPod2:
-		Weapon: HindMissiles
+		Weapon: ra1_soviets_hindattackhelicopter_hindmissiles
 		LocalOffset: 85,-250,-85, 85,250,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 2
 		RequiresCondition: !ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_hurricanerocketpods
 	Armament@MissilesHE:
-		Weapon: HindMissilesThermobaric
+		Weapon: ra1_soviets_hindattackhelicopter_hindmissilesthermobaric
 		LocalOffset: 85,250,-85, 85,-250,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 2
 		PauseOnCondition: ammo < 2
 		RequiresCondition: ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_promotion_hurricanerocketpods
 	Armament@MissilesHERocketPod1:
-		Weapon: HindMissilesThermobaric
+		Weapon: ra1_soviets_hindattackhelicopter_hindmissilesthermobaric
 		LocalOffset: 85,250,-85, 85,-250,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 2
 		RequiresCondition: ra1_soviets_upgrade_thermobaricrockets && ra1_soviets_promotion_hurricanerocketpods
 	Armament@MissilesHERocketPod2:
-		Weapon: HindMissilesThermobaric
+		Weapon: ra1_soviets_hindattackhelicopter_hindmissilesthermobaric
 		LocalOffset: 85,-250,-85, 85,250,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 2
 		RequiresCondition: ra1_soviets_upgrade_thermobaricrockets && ra1_soviets_promotion_hurricanerocketpods
 	Armament@MissilesNuke:
-		Weapon: HindMissilesNuclear
+		Weapon: ra1_soviets_hindattackhelicopter_hindmissilesnuclear
 		LocalOffset: 85,250,-85, 85,-250,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 2
 		PauseOnCondition: ammo < 2
 		RequiresCondition: ra1_soviets_upgrade_thermonuclearrockets && !ra1_soviets_promotion_hurricanerocketpods
 	Armament@MissilesNukeRocketPod1:
-		Weapon: HindMissilesNuclear
+		Weapon: ra1_soviets_hindattackhelicopter_hindmissilesnuclear
 		LocalOffset: 85,250,-85, 85,-250,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 2
 		RequiresCondition: ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_hurricanerocketpods
 	Armament@MissilesNukeRocketPod2:
-		Weapon: HindMissilesNuclear
+		Weapon: ra1_soviets_hindattackhelicopter_hindmissilesnuclear
 		LocalOffset: 85,-250,-85, 85,250,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 2
 		RequiresCondition: ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_hurricanerocketpods
 	Armament@PRIMARY:
-		Weapon: ChainGun
+		Weapon: ra1_soviets_hindattackhelicopter_chaingun
 		LocalOffset: 85,-200,-85, 85,200,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
@@ -771,14 +771,14 @@ ra1_soviets_hindattackhelicopter:
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: ChainGun
+		Weapon: ra1_soviets_hindattackhelicopter_chaingun
 		LocalOffset: 85,200,-85, 85,-200,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 2
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@Upgrade1:
-		Weapon: IncendiaryChainGun
+		Weapon: ra1_soviets_hindattackhelicopter_incendiarychaingun
 		LocalOffset: 85,-200,-85, 85,200,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
@@ -786,7 +786,7 @@ ra1_soviets_hindattackhelicopter:
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets
 	Armament@Upgrade2:
 		Name: secondary
-		Weapon: IncendiaryChainGun
+		Weapon: ra1_soviets_hindattackhelicopter_incendiarychaingun
 		LocalOffset: 85,200,-85, 85,-200,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
@@ -879,63 +879,63 @@ ra1_soviets_kamovattackhelicopter:
 	ChangesHealth@SelfHealing:
 		Step: 49
 	Armament@Tesla:
-		Weapon: KamovTesla
+		Weapon: ra1_soviets_kamovattackhelicopter_kamovtesla
 		LocalOffset: 150,0,-150
 		MuzzleSequence: muzzle
 		AmmoUsage: 8
 		PauseOnCondition: ammo < 8
 		RequiresCondition: !ra1_soviets_upgrade_teslaarcing
 	Armament@Arcing:
-		Weapon: KamovTeslaArc
+		Weapon: ra1_soviets_kamovattackhelicopter_kamovteslaarc
 		LocalOffset: 150,0,-150
 		MuzzleSequence: muzzle
 		AmmoUsage: 8
 		PauseOnCondition: ammo < 8
 		RequiresCondition: ra1_soviets_upgrade_teslaarcing
 	Armament@Missiles:
-		Weapon: HindMissiles
+		Weapon: ra1_soviets_kamovattackhelicopter_hindmissiles
 		LocalOffset: 100,400,-100, 100,-400,-100
 		MuzzleSequence: muzzle
 		AmmoUsage: 2
 		PauseOnCondition: ammo < 8
 		RequiresCondition: !ra1_soviets_upgrade_teslarockets && !ra1_soviets_promotion_hurricanerocketpods
 	Armament@MissilesRocketPod1:
-		Weapon: HindMissiles
+		Weapon: ra1_soviets_kamovattackhelicopter_hindmissiles
 		LocalOffset: 100,400,-100, 100,-400,-100
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 8
 		RequiresCondition: !ra1_soviets_upgrade_teslarockets && ra1_soviets_promotion_hurricanerocketpods
 	Armament@MissilesRocketPod2:
-		Weapon: HindMissiles
+		Weapon: ra1_soviets_kamovattackhelicopter_hindmissiles
 		LocalOffset: 100,-400,-100, 100,400,-100
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 8
 		RequiresCondition: !ra1_soviets_upgrade_teslarockets && ra1_soviets_promotion_hurricanerocketpods
 	Armament@MissilesUpgrade:
-		Weapon: KamovMissilesTesla
+		Weapon: ra1_soviets_kamovattackhelicopter_kamovmissilestesla
 		LocalOffset: 100,400,-100, 100,-400,-100
 		MuzzleSequence: muzzle
 		AmmoUsage: 2
 		PauseOnCondition: ammo < 8
 		RequiresCondition: ra1_soviets_upgrade_teslarockets && !ra1_soviets_promotion_hurricanerocketpods
 	Armament@MissilesUpgradeRocketPod1:
-		Weapon: KamovMissilesTesla
+		Weapon: ra1_soviets_kamovattackhelicopter_kamovmissilestesla
 		LocalOffset: 100,400,-100, 100,-400,-100
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 8
 		RequiresCondition: ra1_soviets_upgrade_teslarockets && ra1_soviets_promotion_hurricanerocketpods
 	Armament@MissilesUpgradeRocketPod2:
-		Weapon: KamovMissilesTesla
+		Weapon: ra1_soviets_kamovattackhelicopter_kamovmissilestesla
 		LocalOffset: 100,-400,-100, 100,400,-100
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 8
 		RequiresCondition: ra1_soviets_upgrade_teslarockets && ra1_soviets_promotion_hurricanerocketpods
 	Armament@PRIMARY:
-		Weapon: ChainGun
+		Weapon: ra1_soviets_kamovattackhelicopter_chaingun
 		LocalOffset: 85,-200,-85, 85,200,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
@@ -943,14 +943,14 @@ ra1_soviets_kamovattackhelicopter:
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: ChainGun
+		Weapon: ra1_soviets_kamovattackhelicopter_chaingun
 		LocalOffset: 85,200,-85, 85,-200,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 8
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@Upgrade1:
-		Weapon: IncendiaryChainGun
+		Weapon: ra1_soviets_kamovattackhelicopter_incendiarychaingun
 		LocalOffset: 85,-200,-85, 85,200,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
@@ -958,7 +958,7 @@ ra1_soviets_kamovattackhelicopter:
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets
 	Armament@Upgrade2:
 		Name: secondary
-		Weapon: IncendiaryChainGun
+		Weapon: ra1_soviets_kamovattackhelicopter_incendiarychaingun
 		LocalOffset: 85,200,-85, 85,-200,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
@@ -1146,7 +1146,7 @@ ra1_soviets_supersonicnuclearbomber:
 	ChangesHealth@SelfHealing:
 		Step: 50
 	Armament@Nuke:
-		Weapon: ParaBombNuke
+		Weapon: ra1_soviets_supersonicnuclearbomber_parabombnuke
 		LocalOffset: 0,-0,-64
 		PauseOnCondition: !ammo
 	AttackAircraft:

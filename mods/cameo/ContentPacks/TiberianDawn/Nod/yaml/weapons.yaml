@@ -26,7 +26,37 @@ M16Laser:
 		PercentageScale: 0
 	-Warhead@Laser_Heavy_ExtraDamage:
 
-FlamethrowerExplode:
+td_nod_samsite_dragon:
+	Inherits: Dragon
+
+td_nod_rocketsoldier_rockets:
+	Inherits: Rockets
+
+td_nod_flamethrower_flamethrower:
+	Inherits: Flamethrower
+
+td_nod_chemicalwarrior_chemspray:
+	Inherits: Chemspray
+
+td_nod_commando_td_gdi_commando_sniper:
+	Inherits: td_gdi_commando_sniper
+
+td_nod_artillery_artilleryshell:
+	Inherits: ArtilleryShell
+
+td_nod_flametank_bigflamer:
+	Inherits: BigFlamer
+
+td_nod_buggy_machinegun:
+	Inherits: MachineGun
+
+td_nod_ssmlauncher_honestjohn:
+	Inherits: HonestJohn
+
+td_nod_ballisticmissilesubmarine_honestjohn:
+	Inherits: HonestJohn
+
+td_nod_flamethrower_flamethrowerexplode:
 	Inherits: Flamethrower
 	Warhead@Flame_Light:
 		Damage: 10000
@@ -79,7 +109,7 @@ td_nod_laserturret_laser:
 	# Warhead@EffectAir: CreateEffect
 	# 	-ImpactSounds:
 
-NodTurretLaserInferno:
+td_nod_laserturret_nodturretlaserinferno:
 	Inherits@wh: ^Warhead_Inferno_Medium
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
@@ -102,7 +132,7 @@ NodTurretLaserInferno:
 	Warhead@Inferno_Medium:
 		Damage: 12000
 td_nod_laserturret_laser_burning:
-	Inherits: NodTurretLaserInferno
+	Inherits: td_nod_laserturret_nodturretlaserinferno
 	Burst: 10
 	BurstDelays: 1
 	FirstBurstTargetOffset: -500,0,0
@@ -111,7 +141,7 @@ td_nod_laserturret_laser_burning:
 		TrackTarget: false
 		Inaccuracy: 0
 
-SmallTiberiumExplosion:
+td_nod_chemicalwarrior_smalltiberiumexplosion:
 	Inherits: Chemspray
 	Warhead@Chemical_Light:
 		Damage: 24000
@@ -119,7 +149,7 @@ SmallTiberiumExplosion:
 		AddsResourceType: Tiberium
 		Size: 0,0
 
-BigTiberiumExplosion:
+td_nod_chemicalssmlauncher_bigtiberiumexplosion:
 	Inherits@wh: ^Warhead_Chemical_Heavy
 	Inherits@proj: ^Projectile_Chem_Heavy
 	Inherits@fx: ^Effect_Chem_Heavy
@@ -130,7 +160,7 @@ BigTiberiumExplosion:
 		AddsResourceType: Tiberium
 		Size: 1,0
 
-ArtilleryShellUpgrade:
+td_nod_artillery_artilleryshellupgrade:
 	Inherits@collapsewh: ^Warhead_Concussion_Heavy
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
@@ -219,7 +249,7 @@ MachineGun:
 	Report: mgun11.aud
 	Warhead@Bullet_Light:
 		Damage: 4000
-FireballLauncherBuggy:
+td_nod_buggy_fireballlauncherbuggy:
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@proj: ^Projectile_Flame_Light
 	Inherits@fx: ^Effect_Flame_Light
@@ -291,7 +321,7 @@ PDLaserBike:
 	Inherits: PDLaser
 	Range: 6000
 
-70mm:
+td_nod_lighttank_70mm:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonHE_Medium
@@ -305,7 +335,7 @@ PDLaserBike:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: xplos.aud
 
-LTNKMissiles:
+td_nod_lighttank_ltnkmissiles:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
@@ -354,7 +384,7 @@ HonestJohn:
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12
 
-StealthTankMissiles:
+td_nod_stealthtank_stealthtankmissiles:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
@@ -372,8 +402,8 @@ StealthTankMissiles:
 	Projectile: Missile
 		VerticalRateOfTurn: 16
 
-StealthTankMissilesBlackMarket:
-	Inherits: StealthTankMissiles
+td_nod_stealthtank_stealthtankmissilesblackmarket:
+	Inherits: td_nod_stealthtank_stealthtankmissiles
 	Projectile: Missile
 		VerticalRateOfTurn: 16
 		Image: d2k_missile2
@@ -381,12 +411,12 @@ StealthTankMissilesBlackMarket:
 		TrailImage: large_trail
 	Warhead@Shrapnel: FireShrapnel
 		ValidTargets: Ground, Water, Air
-		Weapon: StealthTankMissilesShrapnel
+		Weapon: td_nod_stealthtank_stealthtankmissilesshrapnel
 		Amount: 2
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
 
-StealthTankMissilesShrapnel:
+td_nod_stealthtank_stealthtankmissilesshrapnel:
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@proj: ^Projectile_Flame_Light
 	Inherits@fx: ^Effect_Flame_Light
@@ -448,7 +478,7 @@ td_nod_apacheattackhelicopter_missile:
 	Projectile: Missile
 		VerticalRateOfTurn: 16
 
-TurretGun:
+td_nod_gunturret_turretgun:
 	Inherits@collapsewh: ^Warhead_Concussion_Medium
 	Inherits: ^ShrapnelWeapon
 	Inherits@2: ^Grenade
@@ -479,11 +509,11 @@ TurretGun:
 		Damage: 19000
 		PercentageScale: 0
 
-TurretGunBlackMarket:
+td_nod_gunturret_turretgunblackmarket:
 	Inherits@roleflat: ^Compatibility_Concussion_MediumFlat
 	Inherits: ^HeavyBomb
 	Inherits@2: ^HeavyCannon
-	Inherits@3: TurretGun
+	Inherits@3: td_nod_gunturret_turretgun
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 6000
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
@@ -576,7 +606,7 @@ Dragon:
 	Warhead@RA2Crater: LeaveSmudge
 		SmudgeType: RA2Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-LaserObelisk:
+td_nod_obeliskoflight_laserobelisk:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
@@ -606,8 +636,8 @@ LaserObelisk:
 	# Warhead@EffectAir: CreateEffect
 	# 	-ImpactSounds:
 
-LaserObeliskBurning:
-	Inherits: LaserObelisk
+td_nod_obeliskoflight_laserobeliskburning:
+	Inherits: td_nod_obeliskoflight_laserobelisk
 	Inherits@inferno: ^Warhead_Inferno_Heavy
 	Report: obelray1.aud
 	ReloadDelay: 96
@@ -623,7 +653,7 @@ LaserObeliskBurning:
 	Warhead@Inferno_Heavy:
 		Damage: 120000
 	-Warhead@Laser_Heavy:
-ChemRockets:
+td_nod_chemicalrocketsoldier_chemrockets:
 	Inherits@collapsewh: ^Warhead_Chemical_Light
 	Inherits: ^Grenade
 	Inherits@2: ^LightChemicalWeapon
@@ -662,8 +692,8 @@ ChemRockets:
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PercentageScale: 0
 
-ChemRocketsExplosion:
-	Inherits: ChemRockets
+td_nod_chemicalrocketsoldier_chemrocketsexplosion:
+	Inherits: td_nod_chemicalrocketsoldier_chemrockets
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
@@ -680,7 +710,7 @@ ChemRocketsExplosion:
 	Projectile: Missile
 		VerticalRateOfTurn: 40
 
-ChemicalBikeRockets:
+td_nod_chemicalattackbike_chemicalbikerockets:
 	Inherits@collapsewh: ^Warhead_MissileChem_Medium
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^LightChemicalWeapon
@@ -730,8 +760,8 @@ ChemicalBikeRockets:
 	Warhead@MissileChem_Medium:
 		Damage: 32000
 		PercentageScale: 0
-ChemicalBikeRocketsExplosion:
-	Inherits: ChemicalBikeRockets
+td_nod_chemicalattackbike_chemicalbikerocketsexplosion:
+	Inherits: td_nod_chemicalattackbike_chemicalbikerockets
 	Warhead@Resource: CreateResource
 		AddsResourceType: Tiberium
 		Size: 0,0
@@ -739,7 +769,7 @@ ChemicalBikeRocketsExplosion:
 	Projectile: Missile
 		VerticalRateOfTurn: 30
 
-ChemicalStealthTankMissiles:
+td_nod_chemicalstealthtank_chemicalstealthtankmissiles:
 	Inherits@collapsewh: ^Warhead_MissileChem_Medium
 	Inherits: ^ShrapnelWeapon
 	Inherits@2: ^MediumChemicalWeapon
@@ -784,8 +814,8 @@ ChemicalStealthTankMissiles:
 	Warhead@MissileChem_Medium:
 		Damage: 30000
 		PercentageScale: 0
-ChemicalStealthTankExplosion:
-	Inherits: ChemicalStealthTankMissiles
+td_nod_chemicalstealthtank_chemicalstealthtankexplosion:
+	Inherits: td_nod_chemicalstealthtank_chemicalstealthtankmissiles
 	Warhead@Resource: CreateResource
 		AddsResourceType: Tiberium
 		Size: 1,1
@@ -793,7 +823,7 @@ ChemicalStealthTankExplosion:
 	Projectile: Missile
 		VerticalRateOfTurn: 30
 
-ChemicalHonestJohn:
+td_nod_chemicalssmlauncher_chemicalhonestjohn:
 	Inherits@collapsewh: ^Warhead_MissileChem_Heavy
 	Inherits: ^HeavyMissile
 	Inherits@2: ^HeavyBomb
@@ -864,7 +894,7 @@ ChemicalHonestJohn:
 		Damage: 120000
 		PercentageScale: 0
 
-MachineGunBuggy2:
+td_nod_buggymkii_machinegunbuggy2:
 	Inherits@collapsewh: ^Warhead_Bullet_Medium
 	Inherits: ^HeavyCannon
 	Inherits@2: ^SmallArms
@@ -895,8 +925,8 @@ MachineGunBuggy2:
 		FriendlyFireSpread: 100
 		PercentageScale: 0
 
-MachineGunBuggy2_AA:
-	Inherits: MachineGunBuggy2
+td_nod_buggymkii_machinegunbuggy2_AA:
+	Inherits: td_nod_buggymkii_machinegunbuggy2
 	Range: 7911
 	ValidTargets: Air
 	Warhead@CannonHE_Heavy: AreaDamage
@@ -912,7 +942,7 @@ MachineGunBuggy2_AA:
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 
-LaserBuggy2:
+td_nod_buggymkii_laserbuggy2:
 	Inherits@wh: ^Warhead_Laser_Light
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
@@ -956,7 +986,7 @@ LaserBuggy2:
 			Helicopter: 1
 			Spaceship: 1
 
-LaserBuggy2Inferno:
+td_nod_buggymkii_laserbuggy2inferno:
 	Inherits@wh: ^Warhead_Inferno_Light
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
@@ -977,8 +1007,8 @@ LaserBuggy2Inferno:
 		SecondaryBeamColor: FFFFFF
 	Warhead@Inferno_Light:
 		Damage: 6000
-LaserBuggy2Burning:
-	Inherits: LaserBuggy2Inferno
+td_nod_buggymkii_laserbuggy2burning:
+	Inherits: td_nod_buggymkii_laserbuggy2inferno
 	Burst: 10
 	BurstDelays: 1
 	FirstBurstTargetOffset: -500,0,0
@@ -987,24 +1017,24 @@ LaserBuggy2Burning:
 		TrackTarget: false
 		Inaccuracy: 0
 
-LaserBuggy2_AA:
-	Inherits: LaserBuggy2
+td_nod_buggymkii_laserbuggy2_AA:
+	Inherits: td_nod_buggymkii_laserbuggy2
 	Range: 7911
 	ValidTargets: Air
 
-LaserBuggy2_AAInferno:
-	Inherits: LaserBuggy2Inferno
+td_nod_buggymkii_laserbuggy2_AAinferno:
+	Inherits: td_nod_buggymkii_laserbuggy2inferno
 	Range: 7911
 	ValidTargets: Air
 	Warhead@Inferno_Light:
 		ValidTargets: Air
-LaserBuggy2_AABurning:
-	Inherits: LaserBuggy2Burning
+td_nod_buggymkii_laserbuggy2_AAburning:
+	Inherits: td_nod_buggymkii_laserbuggy2burning
 	Range: 7911
 	ValidTargets: Air
 	Warhead@Inferno_Light:
 		ValidTargets: Air
-FireballLauncherBuggy2:
+td_nod_buggymkii_fireballlauncherbuggy2:
 	Inherits@roleflat: ^Compatibility_Flame_MediumFlat
 	Inherits: ^Warhead_Flame_Light
 	Inherits@2: ^Warhead_Flame_Heavy
@@ -1030,7 +1060,7 @@ FireballLauncherBuggy2:
 		ValidTargets: Ground, Water
 		Damage: 6000
 		PercentageScale: 9984
-LightTank2Cannon:
+td_nod_lighttankmkii_lighttank2cannon:
 	Inherits@collapsewh: ^Warhead_CannonHE_Medium
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^MediumCannon
@@ -1059,7 +1089,7 @@ LightTank2Cannon:
 	Warhead@CannonHE_Medium:
 		Damage: 8000
 		PercentageScale: 0
-LightTank2Missiles:
+td_nod_lighttankmkii_lighttank2missiles:
 	Inherits@2: ^Warhead_MissileAP_Medium
 	Inherits@3: ^Projectile_Missile_Medium
 	Inherits@4: ^Effect_MissileAP_Medium
@@ -1079,7 +1109,7 @@ PDLaserLTNK2:
 	Inherits: PDLaser
 	Range: 4903
 
-BigFlamer2:
+td_nod_flametankmkii_bigflamer2:
 	Inherits@wh: ^Warhead_Flame_Heavy
 	Inherits@proj: ^Projectile_Flame_Heavy
 	Inherits@fx: ^Effect_Flame_Heavy
@@ -1096,7 +1126,7 @@ BigFlamer2:
 		FadeFrames: 90
 		FadeInFrames: 12
 
-FlametankExplode2:
+td_nod_flametankmkii_flametankexplode2:
 	Inherits@wh: ^Warhead_Flame_Heavy
 	Inherits@proj: ^Projectile_Flame_Heavy
 	Inherits@fx: ^Effect_Flame_Heavy
@@ -1109,7 +1139,7 @@ FlametankExplode2:
 		GlowFadeInFrames: 12
 		ImpactSounds: xplobig6.aud
 
-BlackHandLaser:
+td_nod_lasertrooper_blackhandlaser:
 	# Special-Forces T4 heavy-trooper weapon (maintainer 2026-07-20): the
 	# same light+medium+heavy weapon-class triad as the japan baseline, at 4x
 	# â€” CannonAP (light, anti-tank) + FlakWeapon (medium, anti-air) + Laser
@@ -1176,7 +1206,7 @@ BlackHandLaser:
 		PercentageScale: 0
 	-Warhead@Laser_Heavy_ExtraDamage:
 
-BlackHandFlamer:
+td_nod_blackhandflamer_blackhandflamer:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
 	Inherits@fx: ^Effect_Flame_Medium
@@ -1192,13 +1222,13 @@ BlackHandFlamer:
 		Palette: tseffect
 	Warhead@Flame_Medium:
 		Damage: 4000
-BlackHandFlamerExplode:
+td_nod_blackhandflamer_blackhandflamerexplode:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
 	Inherits@fx: ^Effect_Flame_Medium
 	Warhead@Flame_Medium:
 		Damage: 12000
-BHRedDarts:
+td_nod_stealthsoldier_bhreddarts:
 	Inherits@collapsewh: ^Warhead_Tesla_Super
 	Inherits: ^TeslaChargedWeapon
 	Inherits@2: ^TankDestroyerCannon
@@ -1299,7 +1329,7 @@ BHRedDarts:
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom15.aud
 
-SpecterArtilleryShell:
+td_nod_specterartillery_specterartilleryshell:
 	Inherits@finalmain: ^Compatibility_Concussion_MediumFlat
 	Inherits: ^SpecterArtilleryShellLegacy
 	-Warhead@Concussion_Medium:
@@ -1308,7 +1338,7 @@ SpecterArtilleryShell:
 		ValidTargets: Ground, Water
 		Damage: 32000
 		PercentageScale: 9997
-SpecterArtilleryShellUpgrade:
+td_nod_specterartillery_specterartilleryshellupgrade:
 	Inherits@roleflat: ^Compatibility_CannonHE_HeavyFlat
 	Inherits: ^MediumChemicalWeapon
 	Inherits@2: ^MediumFlameWeapon
@@ -1417,7 +1447,7 @@ td_nod_venom_laser:
 			Helicopter: 1
 			Spaceship: 1
 
-VenomLaserInferno:
+td_nod_venom_venomlaserinferno:
 	Inherits@wh: ^Warhead_Inferno_Medium
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
@@ -1438,7 +1468,7 @@ VenomLaserInferno:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 td_nod_venom_laser_burning:
-	Inherits: VenomLaserInferno
+	Inherits: td_nod_venom_venomlaserinferno
 	Burst: 10
 	BurstDelays: 1
 	FirstBurstTargetOffset: -500,0,0
@@ -1447,7 +1477,7 @@ td_nod_venom_laser_burning:
 		TrackTarget: false
 		Inaccuracy: 0
 
-NodCommandoLaser:
+td_nod_lasercommando_nodcommandolaser:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
@@ -1477,7 +1507,7 @@ NodCommandoLaser:
 		ImpactSounds: flamer2.aud
 		ImpactActors: false
 
-NodTorpTube:
+td_nod_attacksubmarine_nodtorptube:
 	Inherits@wh: ^Warhead_Concussion_Light
 	Inherits@wh2: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -1521,7 +1551,7 @@ NodTorpTube:
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
 
-NodTorpTubeBlackMarket:
+td_nod_attacksubmarine_nodtorptubeblackmarket:
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@wh2: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -1563,7 +1593,7 @@ NodTorpTubeBlackMarket:
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
 
-CorvetteLaserObelisk:
+td_nod_lasercorvette_corvettelaserobelisk:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
@@ -1572,7 +1602,7 @@ CorvetteLaserObelisk:
 	Range: 9550
 	Warhead@Laser_Heavy:
 		Damage: 120000
-CorvetteDragon:
+td_nod_lasercorvette_corvettedragon:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileAP_Heavy

@@ -4,6 +4,7 @@ import json
 import pathlib
 import sys
 import unittest
+from owned_weapon_history import historical_weapon_names
 
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -49,7 +50,7 @@ class DeliveryIdentityProfileConsolidationTests(unittest.TestCase):
         # Only translate the exact reviewed identity migration for set comparison.
         renamed, _ = load_map(ROOT / 'tools/rename/rename_map_ra1_soviets_owned_weapons_20260910.yaml')
         historical = {new: old for old, new in renamed.items()}
-        self.assertEqual({historical.get(name, name) for name in selected},
+        self.assertEqual(historical_weapon_names({historical.get(name, name) for name in selected}),
                          set(self.report["changed"]))
         self.assertEqual([], self.report["added"])
         self.assertEqual([], self.report["removed"])

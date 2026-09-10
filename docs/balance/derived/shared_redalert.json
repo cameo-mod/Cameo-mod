@@ -78,7 +78,7 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament",
-      "weapon": "ParaBomb"
+      "weapon": "ra1_allies_cargoplanebomber_parabomb"
      },
      {
       "avg_versus": 1.0843,
@@ -105,11 +105,11 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament@Cryo",
-      "weapon": "ParaBombCryo"
+      "weapon": "ra1_allies_cargoplanebomber_parabombcryo"
      }
     ],
     "physical_state_multiplier": 1.2483,
-    "physical_state_weapon": "ParaBombCryo",
+    "physical_state_weapon": "ra1_allies_cargoplanebomber_parabombcryo",
     "physical_state_weight": 0.9931,
     "shield_always_on": false,
     "shield_gated_on_upgrade": false,
@@ -285,7 +285,7 @@
       "reliability": 0.5275,
       "sigma": 271.43,
       "slot": "Armament@PRIMARY",
-      "weapon": "RocketsRA"
+      "weapon": "ra1_allies_alliedrocketsoldier_rocketsra"
      },
      {
       "avg_versus": 1.0394,
@@ -310,7 +310,7 @@
       "reliability": 0.5275,
       "sigma": 271.43,
       "slot": "Armament@GARRISONED",
-      "weapon": "RocketsRA"
+      "weapon": "ra1_allies_alliedrocketsoldier_rocketsra"
      },
      {
       "avg_versus": 1.0551,
@@ -333,7 +333,7 @@
       "reliability": 0.1359,
       "sigma": 271.43,
       "slot": "Armament@Upgrade",
-      "weapon": "RocketsRACryo"
+      "weapon": "ra1_allies_alliedrocketsoldier_rocketsracryo"
      },
      {
       "avg_versus": 1.0551,
@@ -356,11 +356,11 @@
       "reliability": 0.1359,
       "sigma": 271.43,
       "slot": "Armament@UpgradeGARRISONED",
-      "weapon": "RocketsRACryo"
+      "weapon": "ra1_allies_alliedrocketsoldier_rocketsracryo"
      }
     ],
     "physical_state_multiplier": 1.3705,
-    "physical_state_weapon": "RocketsRACryo",
+    "physical_state_weapon": "ra1_allies_alliedrocketsoldier_rocketsracryo",
     "physical_state_weight": 1.4822,
     "shield_always_on": false,
     "shield_gated_on_upgrade": true,
@@ -542,7 +542,7 @@
       "reliability": 0.4695,
       "sigma": 1163.33,
       "slot": "Armament",
-      "weapon": "ConscriptMolotov"
+      "weapon": "ra1_soviets_molotovconscript_conscriptmolotov"
      },
      {
       "avg_versus": 1.1252,
@@ -565,11 +565,11 @@
       "reliability": 0.4695,
       "sigma": 1163.33,
       "slot": "Armament@GARRISONED",
-      "weapon": "ConscriptMolotov"
+      "weapon": "ra1_soviets_molotovconscript_conscriptmolotov"
      }
     ],
     "physical_state_multiplier": 1.1853,
-    "physical_state_weapon": "ConscriptMolotov",
+    "physical_state_weapon": "ra1_soviets_molotovconscript_conscriptmolotov",
     "physical_state_weight": 0.7411,
     "shield_always_on": false,
     "shield_gated_on_upgrade": false,
@@ -961,7 +961,7 @@
       "reliability": 0.0894,
       "sigma": 3700.0,
       "slot": "Armament@PRIMARY",
-      "weapon": "8Inch"
+      "weapon": "ra1_allies_cruiser_8inch"
      },
      {
       "avg_versus": 1.0897,
@@ -986,7 +986,7 @@
       "reliability": 0.0894,
       "sigma": 3700.0,
       "slot": "Armament@SECONDARY",
-      "weapon": "8Inch"
+      "weapon": "ra1_allies_cruiser_8inch"
      },
      {
       "avg_versus": 1.0843,
@@ -1009,7 +1009,7 @@
       "reliability": 0.0324,
       "sigma": 3700.0,
       "slot": "Armament@PRIMARYCryo",
-      "weapon": "8InchCryo"
+      "weapon": "ra1_allies_cruiser_8inchcryo"
      },
      {
       "avg_versus": 1.0843,
@@ -1032,11 +1032,11 @@
       "reliability": 0.0324,
       "sigma": 3700.0,
       "slot": "Armament@SECONDARYCryo",
-      "weapon": "8InchCryo"
+      "weapon": "ra1_allies_cruiser_8inchcryo"
      }
     ],
     "physical_state_multiplier": 1.2483,
-    "physical_state_weapon": "8InchCryo",
+    "physical_state_weapon": "ra1_allies_cruiser_8inchcryo",
     "physical_state_weight": 0.9931,
     "shield_always_on": false,
     "shield_gated_on_upgrade": false,
@@ -1113,7 +1113,7 @@
       "reliability": 0.1474,
       "sigma": 1360.0,
       "slot": "Armament@DC1",
-      "weapon": "DepthCharge"
+      "weapon": "ra1_allies_destroyer_depthcharge"
      },
      {
       "avg_versus": 1.0977,
@@ -1136,7 +1136,7 @@
       "reliability": 0.1474,
       "sigma": 1360.0,
       "slot": "Armament@DC2",
-      "weapon": "DepthCharge"
+      "weapon": "ra1_allies_destroyer_depthcharge"
      },
      {
       "avg_versus": 1.0973,
@@ -1159,7 +1159,7 @@
       "reliability": 0.057,
       "sigma": 1360.0,
       "slot": "Armament@DC1Cryo",
-      "weapon": "DepthChargeCryo"
+      "weapon": "ra1_allies_destroyer_depthchargecryo"
      },
      {
       "avg_versus": 1.0973,
@@ -1182,7 +1182,7 @@
       "reliability": 0.057,
       "sigma": 1360.0,
       "slot": "Armament@DC2Cryo",
-      "weapon": "DepthChargeCryo"
+      "weapon": "ra1_allies_destroyer_depthchargecryo"
      }
     ],
     "physical_state_multiplier": 1.3705,
@@ -1240,7 +1240,7 @@
       "reliability": 0.1474,
       "sigma": 1360.0,
       "slot": "Armament@SECONDARY",
-      "weapon": "DepthCharge"
+      "weapon": "ra1_allies_gunboat_depthcharge"
      },
      {
       "avg_versus": 1.0715,
@@ -1286,7 +1286,7 @@
       "reliability": 0.057,
       "sigma": 1360.0,
       "slot": "Armament@SECONDARYCryo",
-      "weapon": "DepthChargeCryo"
+      "weapon": "ra1_allies_gunboat_depthchargecryo"
      }
     ],
     "physical_state_multiplier": 1.3705,
@@ -1328,7 +1328,7 @@
       "reliability": 0.0737,
       "sigma": 1196.8,
       "slot": "Armament@PRIMARY",
-      "weapon": "227mm"
+      "weapon": "ra1_soviets_missilesubmarine_227mm"
      }
     ],
     "shield_always_on": false,

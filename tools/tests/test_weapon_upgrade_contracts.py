@@ -68,12 +68,12 @@ class WeaponUpgradeContractTest(unittest.TestCase):
         self.assertEqual({p[4] for p in pairs}, {"primary", "garrisoned"})
 
     def test_cryo_cargo_bomb_preserves_bomb_delivery_and_full_raw_payload(self):
-        weapon = self.rs.resolve_weapon("ParaBombCryo")
+        weapon = self.rs.resolve_weapon("ra1_allies_cargoplanebomber_parabombcryo")
         self.assertEqual(weapon.get("ReloadDelay"), "8")
         self.assertEqual(weapon.get("Range"), "5000")
         self.assertEqual(weapon.get("Projectile"), "GravityBomb")
         self.assertEqual(weapon.get("Projectile", "Image"), "PARABOMB")
-        cryo = self._warhead("ParaBombCryo", "Warhead@CryoBlast_Heavy")
+        cryo = self._warhead("ra1_allies_cargoplanebomber_parabombcryo", "Warhead@CryoBlast_Heavy")
         self.assertEqual(cryo.get("Damage"), "40000")
         self.assertEqual(cryo.get("PhysicalStates", "Temperature"), "-67")
         self.assertEqual(

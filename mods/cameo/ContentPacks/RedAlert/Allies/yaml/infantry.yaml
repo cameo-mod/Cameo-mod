@@ -32,21 +32,21 @@ ra1_allies_alliedsniper:
 	AutoTargetPriority@DEFAULT:
 		ValidTargets: Infantry
 	Armament@PRIMARY:
-		Weapon: LightSniper
+		Weapon: ra1_allies_alliedsniper_lightsniper
 		LocalOffset: 128,0,256
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: LightSniper
+		Weapon: ra1_allies_alliedsniper_lightsniper
 		MuzzleSequence: garrison-muzzle
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@Upgrade:
-		Weapon: CryoLightSniper
+		Weapon: ra1_allies_alliedsniper_cryolightsniper
 		LocalOffset: 128,0,256
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	Armament@UpgradeGARRISONED:
 		Name: garrisoned
-		Weapon: CryoLightSniper
+		Weapon: ra1_allies_alliedsniper_cryolightsniper
 		MuzzleSequence: garrison-muzzle
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	WithInfantryBody:

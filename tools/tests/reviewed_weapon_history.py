@@ -11,7 +11,7 @@ CORROSION_CLEANUP = {
     "AsianChemical": ("LightChemicalWeaponPercentage", "MediumChemicalWeaponPercentage", "HeavyChemicalWeaponPercentage"),
     "AsianHarbingerPlasma": ("LightChemicalWeaponPercentage", "MediumChemicalWeaponPercentage"),
     "FutureMechPlasma": ("MediumChemicalWeaponPercentage",),
-    "SpecterArtilleryShellUpgrade": ("MediumChemicalWeaponPercentage",),
+    "td_nod_specterartillery_specterartilleryshellupgrade": ("MediumChemicalWeaponPercentage",),
     "SteelQuantumTurretRail": ("HeavyChemicalWeaponPercentage",),
     "WyvernRockets": ("MediumChemicalWeaponPercentage",),
     "PhobosLaser": ("HeavyChemicalWeaponPercentage",),
@@ -69,7 +69,7 @@ FIELD_CHANGES = {
         (("Warhead@CannonHE_Heavy", "Versus", "COMPOSITE"), "99", "100"),
         (("Warhead@CannonHE_Heavy", "Versus", "Shield"), "168", "169"),
     ),
-    "ConscriptMolotov": (
+    "ra1_soviets_molotovconscript_conscriptmolotov": (
         (("Warhead@Flame_Light", "Versus", "COMPOSITE"), "76", "77"),
         (("Warhead@Flame_Light", "Versus", "Shield"), "205", "208"),
     ),

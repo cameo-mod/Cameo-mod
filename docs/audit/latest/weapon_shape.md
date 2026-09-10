@@ -4,7 +4,7 @@
 
 Γ¢ö This **repeals the exemption** in `tools/audit/intentional_composites.py`. Its 224 entries are no longer 'reviewed, keep' ΓÇö they are the worklist. The registry data stays useful: it says which mains someone chose on purpose.
 
-concrete weapons with inherits: **2074**
+concrete weapons with inherits: **2131**
 
 W5 counts structural flat-damage nodes, including zero/healing/ally-only nodes; the split audit counts positive non-companion damage. Both resolve the full concrete weapon corpus. Use `--compare-split` for exact differences.
 
@@ -14,14 +14,14 @@ W5 counts structural flat-damage nodes, including zero/healing/ally-only nodes; 
 | W2 | two or more `^Warhead_*` inherits | **200** | 210 |
 | W3 | two or more `^Projectile_*` inherits | **12** | 12 |
 | W4 | two or more `^Effect_*` inherits | **51** | 51 |
-| W5 | more than one resolved MAIN warhead | **304** | 389 |
+| W5 | more than one resolved MAIN warhead | **307** | 389 |
 | W6 | effect warheads declared LOCALLY | **693** | 694 |
 
 | I7 informational ΓÇö missing template | weapons |
 |---|--:|
-| no `^Effect_*` inherit | 1247 |
-| no `^Projectile_*` inherit | 1365 |
-| no `^Warhead_*` inherit | 1164 |
+| no `^Effect_*` inherit | 1304 |
+| no `^Projectile_*` inherit | 1422 |
+| no `^Warhead_*` inherit | 1221 |
 
 _I7 is a REVIEW QUEUE, not a defect count ΓÇö an instant or utility weapon may legitimately have no projectile. Do not ratchet it without a per-weapon pass._
 
@@ -30,10 +30,7 @@ _I7 is a REVIEW QUEUE, not a defect count ΓÇö an instant or utility weapon ma
 
 | weapon | inherits | first four |
 |---|---|---|
-| `105mmThermobaric` | 5 | `^Compatibility_Flame_MediumFlat` ┬╖ `^Warhead_Flame_Medium` ┬╖ `^Projectile_Flame_Medium` ┬╖ `^Effect_Flame_Medium` |
 | `110mm_Gun` | 8 | `^Compatibility_CannonAP_LightFlat` ┬╖ `^Warhead_CannonHE_Heavy` ┬╖ `^Projectile_Shell_Heavy` ┬╖ `^Effect_CannonHE_Heavy` |
-| `120mmDualHV` | 4 | `^Warhead_CannonHE_Heavy` ┬╖ `^Projectile_Shell_Heavy` ┬╖ `^Effect_CannonHE_Heavy` ┬╖ `^HVProjectile` |
-| `120mmHV` | 4 | `^Warhead_CannonHE_Medium` ┬╖ `^Projectile_Shell_Medium` ┬╖ `^Effect_CannonHE_Medium` ┬╖ `^HVProjectile` |
 | `120mm_cobra` | 7 | `^Compatibility_CannonAP_LightFlat` ┬╖ `^Warhead_Demolition_Light` ┬╖ `^Warhead_Concussion_Medium` ┬╖ `^Warhead_CannonAP_Light` |
 | `120mm_td` | 5 | `^Compatibility_CannonHE_MediumFlat` ┬╖ `^MediumChemicalWeapon` ┬╖ `^LightChemicalWeapon` ┬╖ `^D2K_Cannon` |
 | `12MissilesSpawnerScud` | 7 | `^Warhead_Demolition_Heavy` ┬╖ `^Warhead_Flame_Medium` ┬╖ `^Projectile_Flame_Medium` ┬╖ `^Effect_Flame_Medium` |
@@ -44,10 +41,8 @@ _I7 is a REVIEW QUEUE, not a defect count ΓÇö an instant or utility weapon ma
 | `ASDFGun2` | 4 | `^Warhead_Railgun_Heavy` ┬╖ `^Projectile_Railgun_Heavy` ┬╖ `^Effect_Railgun_Heavy` ┬╖ `ASDFGun` |
 | `ASDFKamikazeExplosion` | 4 | `^Warhead_Demolition_Heavy` ┬╖ `^Warhead_Concussion_Medium` ┬╖ `^Effect_Concussion_Medium` ┬╖ `^Projectile_Grenade_Light` |
 | `AlliedTankDestroyerCannon` | 4 | `^Warhead_CannonHE_Medium` ┬╖ `^Warhead_CannonAP_Light` ┬╖ `^Projectile_Shell_Light` ┬╖ `^Effect_CannonAP_Light` |
-| `ArcherArtilleryShell` | 6 | `^Warhead_Concussion_Heavy` ┬╖ `^MediumCannon` ┬╖ `^HeavyCannon` ┬╖ `^MediumFlameWeapon` |
 | `ArmoredCarMG` | 9 | `^Warhead_Bullet_Medium` ┬╖ `^ArrowWeapon` ┬╖ `^TankDestroyerCannon` ┬╖ `^SmallArms` |
 | `ArtilleryShell` | 5 | `^Compatibility_Concussion_MediumFlat` ┬╖ `^Warhead_Demolition_Light` ┬╖ `^Warhead_Concussion_Medium` ┬╖ `^Projectile_Grenade_Light` |
-| `ArtilleryShellUpgrade` | 7 | `^Warhead_Concussion_Heavy` ┬╖ `^Grenade` ┬╖ `^ShrapnelWeapon` ┬╖ `^MediumChemicalWeapon` |
 | `AsianChaosMine` | 5 | `AsianChaosTurret` ┬╖ `AsianTankMine` ┬╖ `^Warhead_Chemical_Heavy` ┬╖ `^Projectile_Chem_Heavy` |
 | `AsianChemical` | 7 | `^Compatibility_Chemical_MediumFlat` ┬╖ `^LightChemicalWeapon` ┬╖ `^MediumChemicalWeapon` ┬╖ `^HeavyChemicalWeapon` |
 | `AsianGrenade` | 4 | `^Compatibility_Concussion_MediumFlat` ┬╖ `^Warhead_Concussion_Medium` ┬╖ `^Effect_Concussion_Medium` ┬╖ `^RA2MediumCannon` |
@@ -70,6 +65,11 @@ _I7 is a REVIEW QUEUE, not a defect count ΓÇö an instant or utility weapon ma
 | `AthenaLaser` | 7 | `^Compatibility_Laser_HeavyFlat` ┬╖ `^LightMissile` ┬╖ `^SmallArms` ┬╖ `^Chaingun` |
 | `AtreusMG` | 8 | `^Compatibility_Bullet_MediumFlat` ┬╖ `^Warhead_CannonHE_Heavy` ┬╖ `^Projectile_Shell_Heavy` ┬╖ `^Effect_CannonHE_Heavy` |
 | `BCLaser` | 12 | `^Compatibility_Laser_HeavyFlat` ┬╖ `^Warhead_CannonHE_Heavy` ┬╖ `^Projectile_Shell_Heavy` ┬╖ `^Effect_CannonHE_Heavy` |
+| `BallistaMultiShot` | 5 | `^Warhead_Arrow_Medium` ┬╖ `^Grenade` ┬╖ `^LightFlameWeapon` ┬╖ `^LightChemicalWeapon` |
+| `BallistaMultiShotEnergized` | 5 | `^Compatibility_Arrow_MediumFlat` ┬╖ `^TeslaWeapon` ┬╖ `^MediumFlameWeapon` ┬╖ `^MediumChemicalWeapon` |
+| `BallistaSingleShotAirEnergized` | 4 | `^Warhead_MissileAP_Light` ┬╖ `^Projectile_Missile_Light` ┬╖ `^Effect_MissileAP_Light` ┬╖ `JapanMaidenBowEnergized` |
+| `BehemothShoot` | 7 | `^Warhead_MissileHE_Heavy` ┬╖ `^LightFlameWeapon` ┬╖ `^MediumChemicalWeapon` ┬╖ `^HeavyMissile` |
+| `BigShieeTusk` | 5 | `^Compatibility_MissileHE_HeavyFlat` ┬╖ `^Warhead_MissileHE_Heavy` ┬╖ `^Warhead_Concussion_Medium` ┬╖ `^Projectile_Missile_Heavy` |
 
 
 _... and 533 more._
@@ -104,7 +104,6 @@ _... and 533 more._
 | `CabalReaperMissiles_AA` | `^Warhead_MissileHE_Light` ┬╖ `^Warhead_MissileHE_Medium` ┬╖ `^Warhead_Demolition_Light` ┬╖ `^Warhead_Concussion_Medium` |
 | `CabalRocketCyborgRockets` | `^Warhead_MissileHE_Light` ┬╖ `^Warhead_MissileHE_Medium` |
 | `CabalRocketCyborgRocketsUpgraded` | `^Warhead_MissileHE_Light` ┬╖ `^Warhead_MissileHE_Medium` |
-| `ConscriptMolotov` | `^Warhead_Demolition_Light` ┬╖ `^Warhead_Flame_Light` |
 | `CorsairFlash` | `^Warhead_Flak_Medium` ┬╖ `^Warhead_Demolition_Light` |
 | `D2K_155mm3` | `^Warhead_Demolition_Light` ┬╖ `^Warhead_Demolition_Heavy` ┬╖ `^Warhead_Concussion_Medium` |
 | `D2K_155mm_turret` | `^Warhead_Demolition_Light` ┬╖ `^Warhead_Demolition_Heavy` ┬╖ `^Warhead_Concussion_Medium` |
@@ -114,11 +113,12 @@ _... and 533 more._
 | `D2K_Rocket_Trooper2` | `^Warhead_Demolition_Light` ┬╖ `^Warhead_Railgun_Heavy` ┬╖ `^Warhead_CannonHE_Medium` |
 | `DalekCannon` | `^Warhead_Tesla_Heavy` ┬╖ `^Warhead_Laser_Heavy` |
 | `Dune_SiegeMortar` | `^Warhead_Demolition_Light` ┬╖ `^Warhead_Concussion_Medium` ┬╖ `^Warhead_CannonAP_Light` |
-| `FireballLauncherBuggy2` | `^Warhead_Flame_Light` ┬╖ `^Warhead_Flame_Heavy` |
 | `FlakbusAA` | `^Warhead_MissileHE_Medium` ┬╖ `^Warhead_Flak_Medium` |
 | `Flamethrower` | `^Warhead_Flame_Light` ┬╖ `^Warhead_Flame_Light` |
 | `GlaveCanon` | `^Warhead_Demolition_Light` ┬╖ `^Warhead_Railgun_Heavy` |
 | `GoliathMG` | `^Warhead_Concussion_Light` ┬╖ `^Warhead_CannonHE_Heavy` |
+| `GuardianShoot` | `^Warhead_Concussion_Medium` ┬╖ `^Warhead_Concussion_Light` |
+| `HMG_turret` | `^Warhead_Bullet_Light` ┬╖ `^Warhead_Bullet_Medium` |
 
 
 _... and 160 more._
@@ -138,8 +138,8 @@ _... and 160 more._
 | `TS70mmTur` | `^Projectile_Shell_Medium` ┬╖ `^Projectile_Shell_Light` |
 | `YakovlevCannon` | `^Projectile_Shell_Heavy` ┬╖ `^Projectile_Shell_Light` |
 | `YakovlevCannon_elite` | `^Projectile_Shell_Heavy` ┬╖ `^Projectile_Shell_Light` |
-| `ra120mm2Thermobaric` | `^Projectile_Shell_Heavy` ┬╖ `^Projectile_Flame_Heavy` |
 | `ra120mmThermobaric` | `^Projectile_Shell_Heavy` ┬╖ `^Projectile_Flame_Heavy` |
+| `ra1_soviets_siegemammothtank_ra120mm2thermobaric` | `^Projectile_Shell_Heavy` ┬╖ `^Projectile_Flame_Heavy` |
 
 
 ## W4 ΓÇö two or more `^Effect_*` inherits (51 vs ratchet 51)
@@ -160,7 +160,6 @@ _... and 160 more._
 | `HeavyIxianCombatTankCannon` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_CannonAP_Light` |
 | `IxianCombatTankCannon` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_CannonAP_Light` |
 | `JapanesePlasmaBomb` | `^Effect_Flame_Heavy` ┬╖ `^Effect_Demolition_Heavy` |
-| `KotinCannonNuclearShell` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Nuclear_Super` |
 | `LatinMonkeyGrenade1` | `^Effect_Concussion_Medium` ┬╖ `^Effect_CannonHE_Heavy` |
 | `LunarNaxiJadgDestroyer` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Concussion_Medium` |
 | `MissileAttackRobotGun` | `^Effect_MissileAP_Medium` ┬╖ `^Effect_Grey_Explosion_Small_RA2` |
@@ -174,7 +173,6 @@ _... and 160 more._
 | `RA2MortarBike` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Explosion_Large_RA2` |
 | `RashidanGun_upgrade` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_MissileHE_Heavy` |
 | `ReaperGrenade` | `^Effect_Concussion_Medium` ┬╖ `^Effect_CannonHE_Heavy` |
-| `SCUDTesla` | `^Effect_Tesla_Heavy` ┬╖ `^Effect_Kirov_Tesla_RA2` |
 | `TS120mmx` | `^Effect_CannonHE_Medium` ┬╖ `^Effect_Concussion_Medium` |
 | `TS70mmTur` | `^Effect_CannonHE_Medium` ┬╖ `^Effect_CannonAP_Light` |
 | `TSGrenade` | `^Effect_CannonHE_Medium` ┬╖ `^Effect_Concussion_Medium` |
@@ -182,16 +180,18 @@ _... and 160 more._
 | `YakovlevCannon` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_CannonAP_Light` |
 | `YakovlevCannon_elite` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_CannonAP_Light` |
 | `bigshieemortar` | `^Effect_Flame_Medium` ┬╖ `^Effect_Explosion_Large_RA2` |
-| `ra120mm2Thermobaric` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Flame_Heavy` |
 | `ra120mmThermobaric` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Flame_Heavy` |
+| `ra1_soviets_kotinnucleartank_kotincannonnuclearshell` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Nuclear_Super` |
 | `ra1_soviets_monstertank_120mm_cannon` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Nuclear_Super` |
 | `ra1_soviets_monstertank_120mm_cannon_inferno` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Flame_Heavy` |
+| `ra1_soviets_siegemammothtank_ra120mm2thermobaric` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Flame_Heavy` |
+| `ra1_soviets_submarine_torpedo_thermobaric` | `^Effect_Nuclear_Super` ┬╖ `^Effect_MissileAP_Heavy` |
 
 
 _... and 11 more._
 
 
-## W5 ΓÇö more than one resolved MAIN warhead (304 vs ratchet 389)
+## W5 ΓÇö more than one resolved MAIN warhead (307 vs ratchet 389)
 
 | weapon | mains | which |
 |---|---|---|
@@ -217,7 +217,6 @@ _... and 11 more._
 | `BallistaSingleShotAirEnergized` | 4 | `Arrow_Light` ┬╖ `Arrow_LightFlatCompatibility` ┬╖ `CannonHE_Medium` ┬╖ `MissileAP_Light` |
 | `BallistaTowerMultiShot` | 2 | `Arrow_Medium` ┬╖ `CollapseTargetCompatibility1` |
 | `BarrelExplode` | 2 | `1Dam` ┬╖ `Demolition_Light` |
-| `BoxerCannon_AA` | 4 | `Bullet_Light` ┬╖ `Bullet_Medium` ┬╖ `CannonHE_Medium` ┬╖ `Flak_MediumFlatCompatibility` |
 | `BroodweaverLeech` | 2 | `ExtraHealing` ┬╖ `HealingWeapon` |
 | `CHFlameBlue` | 2 | `1Dam` ┬╖ `Flame_Medium` |
 | `CabalAscendedRockets` | 2 | `MissileHE_Heavy` ┬╖ `MissileHE_HeavyGroundBonus` |
@@ -235,9 +234,10 @@ _... and 11 more._
 | `D2K_SiegeQuad` | 4 | `CannonHE_Medium` ┬╖ `Concussion_Medium` ┬╖ `Demolition_Heavy` ┬╖ `Demolition_Light` |
 | `DRPlasmaTankWeapon` | 2 | `1Dam` ┬╖ `1DamBuildings` |
 | `DTAtomic` | 2 | `Nuclear_Super` ┬╖ `Tesla_Super` |
+| `DeathHandCluster` | 3 | `1Dam` ┬╖ `Demolition_Light` ┬╖ `Flame_Light` |
 
 
-_... and 264 more._
+_... and 267 more._
 
 
 ## W6 ΓÇö effect warheads declared LOCALLY (693 vs ratchet 694)
@@ -245,16 +245,13 @@ _... and 264 more._
 | weapon | nodes | first three |
 |---|---|---|
 | `105mm` | 1 | `Warhead@Effect: CreateEffect` |
-| `105mmThermobaric` | 1 | `Warhead@Effect: CreateEffect` |
 | `120mm` | 1 | `Warhead@Effect: CreateEffect` |
-| `120mmHV` | 1 | `Warhead@Effect: CreateEffect` |
 | `12MissilesSpawnerScud` | 1 | `Warhead@Effect: CreateEffect` |
 | `155mm` | 1 | `Warhead@Effect: CreateEffect` |
 | `155mmCryo` | 1 | `Warhead@Effect: CreateEffect` |
 | `2100Tanktrap` | 1 | `Warhead@Smu: LeaveSmudge` |
 | `227mm` | 2 | `Warhead@Effect: CreateEffect` ┬╖ `Warhead@EffectWater: CreateEffect` |
 | `25mm` | 2 | `Warhead@Effect: CreateEffect` ┬╖ `Warhead@EffectAir: CreateEffect` |
-| `70mm` | 1 | `Warhead@Effect: CreateEffect` |
 | `A10CarrierMissiles_AA` | 1 | `Warhead@EffectAir: CreateEffect` |
 | `AAGunBoatFlak` | 1 | `Warhead@EffectAir: CreateEffect` |
 | `ASDFKamikazeExplosion` | 1 | `Warhead@Effect: CreateEffect` |
@@ -282,8 +279,11 @@ _... and 264 more._
 | `AtreusMG` | 1 | `Warhead@Effect: CreateEffect` |
 | `BCYamatoCannon` | 1 | `Warhead@Effect: CreateEffect` |
 | `BHBombs` | 1 | `Warhead@3Eff: CreateEffect` |
-| `BHRedDarts` | 2 | `Warhead@Effect: CreateEffect` ┬╖ `Warhead@EffectAir: CreateEffect` |
 | `BallistaMultiShot` | 1 | `Warhead@Effect: CreateEffect` |
+| `BallistaMultiShotEnergized` | 1 | `Warhead@Effect: CreateEffect` |
+| `BarrelExplode` | 2 | `Warhead@2Eff: CreateEffect` ┬╖ `Warhead@Smu: LeaveSmudge` |
+| `BehemothShoot` | 3 | `Warhead@Effect: CreateEffect` ┬╖ `Warhead@Effect2: CreateEffect` ┬╖ `Warhead@EffectAir: CreateEffect` |
+| `BigChemSpray` | 1 | `Warhead@3Eff: CreateEffect` |
 
 
 _... and 653 more._

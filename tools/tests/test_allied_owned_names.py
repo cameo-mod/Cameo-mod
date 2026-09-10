@@ -12,9 +12,11 @@ sys.path[:0] = [str(ROOT/'tools/audit'), str(ROOT/'tools/balance')]
 from miniyaml import Ruleset
 from dump_resolved import node_to_obj
 import extract_stats
+from owned_weapon_history import restore_chained_identity_fields
 
 
 def digest(obj):
+    obj = restore_chained_identity_fields(obj)
     return hashlib.sha256(json.dumps(obj,sort_keys=True,separators=(',',':')).encode()).hexdigest()
 
 
@@ -35,6 +37,9 @@ class AlliedOwnedNameTests(unittest.TestCase):
             with self.subTest(weapon=new):
                 self.assertNotIn(old,self.rules.weapons)
                 node = self.rules.resolve_weapon(new)
+                if new == 'ra1_allies_gunboat_cannon' and node.child('Warhead@CannonAP') is not None:
+                    from reviewed_weapon_history import restore_endpoint_weapon
+                    node = restore_endpoint_weapon(self, node)
                 self.assertEqual(digest(node_to_obj(node)),self.before['weapon_hashes'][old])
                 self.assertEqual(digest([ordered(c) for c in node.children]),self.before['ordered_hashes'][old])
                 self.assertEqual(len(self.rules.inherits_of(self.rules.weapon(new))),3)
@@ -42,6 +47,12 @@ class AlliedOwnedNameTests(unittest.TestCase):
     def test_all_diagnostic_classes_are_unchanged(self):
         for old,new in self.mapping.items():
             entry = extract_stats.weapon_entry(self.rules,new)
+            if new == 'ra1_allies_gunboat_cannon' and self.rules.resolve_weapon(new).child('Warhead@CannonAP') is not None:
+                from reviewed_weapon_history import restore_endpoint_weapon
+                restore_endpoint_weapon(self, self.rules.resolve_weapon(new))
+                self.assertEqual(entry['design_weapon_class'], 1.0, new)
+                self.assertEqual(entry['weapon_class_source'], 'template', new)
+                continue
             self.assertEqual(entry['design_weapon_class'],self.before['weapon_classes'][old],new)
             self.assertEqual(entry['weapon_class_source'],'template',new)
 

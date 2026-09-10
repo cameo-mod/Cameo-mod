@@ -15,6 +15,8 @@ import extract_stats
 
 
 def digest(obj):
+    from owned_weapon_history import restore_chained_identity_fields
+    obj = restore_chained_identity_fields(obj)
     return hashlib.sha256(json.dumps(obj, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
 
 

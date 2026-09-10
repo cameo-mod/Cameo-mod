@@ -24,6 +24,7 @@ import unittest
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools/audit"))
 import miniyaml
+from owned_weapon_history import restore_chained_identity_fields
 
 FIXTURE = ROOT / "tools/tests/fixtures/soviet_rename_baseline_subset.json"
 RENAMES = {  # pre-repair key -> post-repair key
@@ -184,7 +185,8 @@ class SovietRenameRepairTests(unittest.TestCase):
         diffs_seen = []
         for old, new in RENAMES.items():
             before = canonical(self.baseline[old])
-            after = canonical(self.node_to_obj(self.rules.resolve(new)))
+            after = canonical(restore_chained_identity_fields(self.node_to_obj(self.rules.resolve(new)),
+                {'ra1_soviets_heavytank_105mmthermobaric': '105mmThermobaric'}))
             diffs = self._collect(before, after)
             diffs = self._authorize(diffs, old, new)
             diffs_seen += [(new,) + d for d in diffs]

@@ -2,6 +2,7 @@ import json
 import pathlib
 import sys
 import unittest
+from owned_weapon_history import historical_weapon_names
 
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -60,7 +61,7 @@ class RuleDrivenFinalTrancheTests(unittest.TestCase):
         historical = {new: old for old, new in renamed.items()}
         guarded = json.loads((ROOT / 'tools/tests/fixtures/guarded_owned_names_20260910.json').read_text(encoding='utf-8'))
         historical.update({new: old for route in guarded['routes'].values() for old, new in route.items()})
-        self.assertEqual({historical.get(name, name) for name in self.selected},
+        self.assertEqual(historical_weapon_names({historical.get(name, name) for name in self.selected}),
                          set(self.report["changed"]))
         self.assertEqual([], self.report["added"])
         self.assertEqual([], self.report["removed"])

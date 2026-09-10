@@ -249,13 +249,13 @@ ra1_soviets_grenadier:
 		Weapon: ra1_soviets_grenadier_grenade
 		RequiresCondition: !ra1_soviets_upgrade_scorchedearth
 	Armament@Upgrade:
-		Weapon: GrenadeThermobaric
+		Weapon: ra1_soviets_grenadier_grenadethermobaric
 		LocalOffset: 0,0,427
 		FireDelay: 15
 		RequiresCondition: ra1_soviets_upgrade_scorchedearth
 	Armament@UpgradeGARRISONED:
 		Name: garrisoned
-		Weapon: GrenadeThermobaric
+		Weapon: ra1_soviets_grenadier_grenadethermobaric
 		RequiresCondition: ra1_soviets_upgrade_scorchedearth
 	TakeCover:
 		ProneOffset: 180,0,-200
@@ -266,10 +266,10 @@ ra1_soviets_grenadier:
 		StandSequences: parachute
 		RequiresCondition: parachute
 	FireWarheadsOnDeath:
-		Weapon: GrenadeRAExplode
+		Weapon: ra1_soviets_grenadier_grenaderaexplode
 		RequiresCondition: !ra1_soviets_upgrade_scorchedearth
 	FireWarheadsOnDeath@Upgrade:
-		Weapon: GrenadeThermobaricExplode
+		Weapon: ra1_soviets_grenadier_grenadethermobaricexplode
 		RequiresCondition: ra1_soviets_upgrade_scorchedearth
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
@@ -310,30 +310,30 @@ ra1_soviets_mortarsoldier:
 	Mobile:
 		Speed: 48
 	Armament@PRIMARY:
-		Weapon: SiegeMortar
+		Weapon: ra1_soviets_mortarsoldier_siegemortar
 		LocalOffset: 427,0,341
 		FireDelay: 10
 		RequiresCondition: !ra1_soviets_upgrade_scorchedearth
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: SiegeMortar
+		Weapon: ra1_soviets_mortarsoldier_siegemortar
 		RequiresCondition: !ra1_soviets_upgrade_scorchedearth
 	Armament@Upgrade:
-		Weapon: SiegeMortarThermobaric
+		Weapon: ra1_soviets_mortarsoldier_siegemortarthermobaric
 		LocalOffset: 427,0,341
 		FireDelay: 10
 		RequiresCondition: ra1_soviets_upgrade_scorchedearth
 	Armament@UpgradeGARRISONED:
 		Name: garrisoned
-		Weapon: SiegeMortarThermobaric
+		Weapon: ra1_soviets_mortarsoldier_siegemortarthermobaric
 		RequiresCondition: ra1_soviets_upgrade_scorchedearth
 	FirepowerMultiplier@SplashDamage:
 		Modifier: 75
 	FireWarheadsOnDeath:
-		Weapon: SiegeMortarExplode
+		Weapon: ra1_soviets_mortarsoldier_siegemortarexplode
 		RequiresCondition: !ra1_soviets_upgrade_scorchedearth
 	FireWarheadsOnDeath@Upgrade:
-		Weapon: SiegeMortarThermobaricExplode
+		Weapon: ra1_soviets_mortarsoldier_siegemortarthermobaricexplode
 		RequiresCondition: ra1_soviets_upgrade_scorchedearth
 	TakeCover:
 		ProneOffset: 227,0,-245
@@ -363,6 +363,10 @@ ra1_soviets_rocketsoldier:
 	ActorStatValues:
 		Upgrades: ra1_soviets_promotion_infantrysuperoptics, ra1_soviets_doctrine_conscription, ra1_soviets_upgrade_menofsteel
 
+	Armament@PRIMARY:
+		Weapon: ra1_soviets_rocketsoldier_rocketsra
+	Armament@GARRISONED:
+		Weapon: ra1_soviets_rocketsoldier_rocketsra
 ra1_soviets_dragunovantimaterialsniper:
 	Inherits: ^Soldier
 	Inherits@anim: ^RA2Infantry
@@ -391,11 +395,11 @@ ra1_soviets_dragunovantimaterialsniper:
 	ChangesHealth@SelfHealing:
 		Step: 20
 	Armament:
-		Weapon: DragunovSniper
+		Weapon: ra1_soviets_dragunovantimaterialsniper_dragunovsniper
 		LocalOffset: 0,0,427
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: DragunovSniper
+		Weapon: ra1_soviets_dragunovantimaterialsniper_dragunovsniper
 	TakeCover:
 		ProneOffset: 180,0,-200
 	WithInfantryBody@PARACHUTE:
@@ -440,28 +444,28 @@ ra1_soviets_firerocketsoldier:
 	Mobile:
 		Speed: 48
 	Armament@PRIMARY:
-		Weapon: FireRockets
+		Weapon: ra1_soviets_firerocketsoldier_firerockets
 		LocalOffset: 256,43,341
 		FireDelay: 5
 		RequiresCondition: !ra1_soviets_upgrade_scorchedearth
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: FireRockets
+		Weapon: ra1_soviets_firerocketsoldier_firerockets
 		RequiresCondition: !ra1_soviets_upgrade_scorchedearth
 	Armament@Upgrade:
-		Weapon: FireRocketsThermobaric
+		Weapon: ra1_soviets_firerocketsoldier_firerocketsthermobaric
 		LocalOffset: 256,43,341
 		FireDelay: 5
 		RequiresCondition: ra1_soviets_upgrade_scorchedearth
 	Armament@UpgradeGARRISONED:
 		Name: garrisoned
-		Weapon: FireRocketsThermobaric
+		Weapon: ra1_soviets_firerocketsoldier_firerocketsthermobaric
 		RequiresCondition: ra1_soviets_upgrade_scorchedearth
 	FireWarheadsOnDeath:
-		Weapon: FireRocketsExplode
+		Weapon: ra1_soviets_firerocketsoldier_firerocketsexplode
 		RequiresCondition: !ra1_soviets_upgrade_scorchedearth
 	FireWarheadsOnDeath@Upgrade:
-		Weapon: FireRocketsThermobaricExplode
+		Weapon: ra1_soviets_firerocketsoldier_firerocketsthermobaricexplode
 		RequiresCondition: ra1_soviets_upgrade_scorchedearth
 	RenderSprites:
 		Image: ra1_soviets_firerocketsoldier
@@ -500,22 +504,22 @@ ra1_soviets_flamethrower:
 	Mobile:
 		Speed: 56
 	Armament:
-		Weapon: FireballGun
+		Weapon: ra1_soviets_flamethrower_fireballgun
 		LocalOffset: 500,0,250
 		FireDelay: 8
 		RequiresCondition: !ra1_soviets_upgrade_scorchedearth
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: FireballGun
+		Weapon: ra1_soviets_flamethrower_fireballgun
 		RequiresCondition: !ra1_soviets_upgrade_scorchedearth
 	Armament@Upgrade:
-		Weapon: FireballGunThermobaric
+		Weapon: ra1_soviets_flamethrower_fireballgunthermobaric
 		LocalOffset: 500,0,250
 		FireDelay: 8
 		RequiresCondition: ra1_soviets_upgrade_scorchedearth
 	Armament@UpgradeGARRISONED:
 		Name: garrisoned
-		Weapon: FireballGunThermobaric
+		Weapon: ra1_soviets_flamethrower_fireballgunthermobaric
 		RequiresCondition: ra1_soviets_upgrade_scorchedearth
 	WithInfantryBody:
 		DefaultAttackSequence: shoot
@@ -528,10 +532,10 @@ ra1_soviets_flamethrower:
 	TakeCover:
 		ProneOffset: 160,0,-200
 	FireWarheadsOnDeath:
-		Weapon: FireballGunExplode
+		Weapon: ra1_soviets_flamethrower_fireballgunexplode
 		RequiresCondition: !ra1_soviets_upgrade_scorchedearth
 	FireWarheadsOnDeath@Upgrade:
-		Weapon: FireballGunThermobaricExplode
+		Weapon: ra1_soviets_flamethrower_fireballgunthermobaricexplode
 		RequiresCondition: ra1_soviets_upgrade_scorchedearth
 	RenderSprites:
 		Image: ra1_soviets_sovietflamethrower
@@ -570,28 +574,28 @@ ra1_soviets_shocktrooper:
 	Mobile:
 		Speed: 40
 	Armament@PRIMARY:
-		Weapon: PortaTesla
+		Weapon: ra1_soviets_shocktrooper_portatesla
 		LocalOffset: 427,0,341
 		RequiresCondition: !ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@Upgrade1:
-		Weapon: PortaTesla_EMP
+		Weapon: ra1_soviets_shocktrooper_portatesla_emp
 		LocalOffset: 427,0,341
 		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@Upgrade2:
-		Weapon: PortaTeslaArc_EMP
+		Weapon: ra1_soviets_shocktrooper_portateslaarc_emp
 		LocalOffset: 427,0,341
 		RequiresCondition: ra1_soviets_upgrade_teslaarcing
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: PortaTesla
+		Weapon: ra1_soviets_shocktrooper_portatesla
 		RequiresCondition: !ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@Upgrade1GARRISONED:
 		Name: garrisoned
-		Weapon: PortaTesla_EMP
+		Weapon: ra1_soviets_shocktrooper_portatesla_emp
 		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@Upgrade2GARRISONED:
 		Name: garrisoned
-		Weapon: PortaTeslaArc_EMP
+		Weapon: ra1_soviets_shocktrooper_portateslaarc_emp
 		RequiresCondition: ra1_soviets_upgrade_teslaarcing
 	TakeCover:
 		ProneOffset: 227,0,-245
@@ -637,20 +641,20 @@ ra1_soviets_zapper:
 	Mobile:
 		Speed: 30
 	Armament@PRIMARY:
-		Weapon: ZapperPortaTesla
+		Weapon: ra1_soviets_zapper_zapperportatesla
 		LocalOffset: 427,0,341
 		RequiresCondition: !ra1_soviets_upgrade_teslaarcing
 	Armament@Upgrade:
-		Weapon: ZapperPortaTeslaArc
+		Weapon: ra1_soviets_zapper_zapperportateslaarc
 		LocalOffset: 427,0,341
 		RequiresCondition: ra1_soviets_upgrade_teslaarcing
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: ZapperPortaTesla
+		Weapon: ra1_soviets_zapper_zapperportatesla
 		RequiresCondition: !ra1_soviets_upgrade_teslaarcing
 	Armament@UpgradeGARRISONED:
 		Name: garrisoned
-		Weapon: ZapperPortaTeslaArc
+		Weapon: ra1_soviets_zapper_zapperportateslaarc
 		RequiresCondition: ra1_soviets_upgrade_teslaarcing
 	TakeCover:
 		ProneOffset: 227,0,-245
@@ -887,52 +891,52 @@ ra1_soviets_volkov:
 	Valued:
 		Cost: 10000
 	Armament:
-		Weapon: VolkovMagneticWeapon
+		Weapon: ra1_soviets_volkov_volkovmagneticweapon
 		LocalOffset: 500,0,250
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets && !ra1_soviets_upgrade_teslaarcing && !ra1_soviets_upgrade_nucleartankshells
 	Armament@Tesla:
-		Weapon: VolkovMagneticWeaponTesla
+		Weapon: ra1_soviets_volkov_volkovmagneticweapontesla
 		LocalOffset: 500,0,250
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets && ra1_soviets_upgrade_teslaarcing
 	Armament@NuclearShells:
-		Weapon: VolkovMagneticWeaponNuclearShells
+		Weapon: ra1_soviets_volkov_volkovmagneticweaponnuclearshells
 		LocalOffset: 500,0,250
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets && ra1_soviets_upgrade_nucleartankshells
 	Armament@Incendiary:
-		Weapon: VolkovMagneticWeaponIncendiary
+		Weapon: ra1_soviets_volkov_volkovmagneticweaponincendiary
 		LocalOffset: 500,0,250
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets && !ra1_soviets_upgrade_teslaarcing && !ra1_soviets_upgrade_nucleartankshells
 	Armament@IncendiaryTesla:
-		Weapon: VolkovMagneticWeaponIncendiaryTesla
+		Weapon: ra1_soviets_volkov_volkovmagneticweaponincendiarytesla
 		LocalOffset: 500,0,250
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets && ra1_soviets_upgrade_teslaarcing
 	Armament@IncendiaryNuclearShells:
-		Weapon: VolkovMagneticWeaponIncendiaryNuclearShells
+		Weapon: ra1_soviets_volkov_volkovmagneticweaponincendiarynuclearshells
 		LocalOffset: 500,0,250
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets && ra1_soviets_upgrade_nucleartankshells
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: VolkovMagneticWeapon
+		Weapon: ra1_soviets_volkov_volkovmagneticweapon
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets && !ra1_soviets_upgrade_teslaarcing && !ra1_soviets_upgrade_nucleartankshells
 	Armament@GARRISONEDTesla:
 		Name: garrisoned
-		Weapon: VolkovMagneticWeaponTesla
+		Weapon: ra1_soviets_volkov_volkovmagneticweapontesla
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets && ra1_soviets_upgrade_teslaarcing
 	Armament@GARRISONEDNuclearShells:
 		Name: garrisoned
-		Weapon: VolkovMagneticWeaponNuclearShells
+		Weapon: ra1_soviets_volkov_volkovmagneticweaponnuclearshells
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets && ra1_soviets_upgrade_nucleartankshells
 	Armament@GARRISONEDIncendiary:
 		Name: garrisoned
-		Weapon: VolkovMagneticWeaponIncendiary
+		Weapon: ra1_soviets_volkov_volkovmagneticweaponincendiary
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets && !ra1_soviets_upgrade_teslaarcing && !ra1_soviets_upgrade_nucleartankshells
 	Armament@GARRISONEDIncendiaryTesla:
 		Name: garrisoned
-		Weapon: VolkovMagneticWeaponIncendiaryTesla
+		Weapon: ra1_soviets_volkov_volkovmagneticweaponincendiarytesla
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets && ra1_soviets_upgrade_teslaarcing
 	Armament@GARRISONEDIncendiaryNuclearShells:
 		Name: garrisoned
-		Weapon: VolkovMagneticWeaponIncendiaryNuclearShells
+		Weapon: ra1_soviets_volkov_volkovmagneticweaponincendiarynuclearshells
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets && ra1_soviets_upgrade_nucleartankshells
 	Health:
 		HP: 400000

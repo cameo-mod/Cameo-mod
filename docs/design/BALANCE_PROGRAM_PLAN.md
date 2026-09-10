@@ -1,5 +1,15 @@
 # BALANCE PROGRAM — the execution plan (rev. 2026-08-28)
 
+## 2026-09-10 — source PR340 warhead-family reach measurement
+
+`warhead_family_reach` measures **1,454 distinct fired weapon identities** whose
+transitive inheritance reaches a `^Warhead_*` family in the current PR340 source.
+The registry's previous value was 1,415; it is updated upward to this measured
+count with the same predicate and zero tolerance. Ownership wrappers can expose
+more distinct fired identities for existing family payloads: this increase does
+not establish newly converted weapons or additional gameplay balance work.
+Earlier dated snapshots below remain historical, and the only-UP rule remains.
+
 **This file is the SINGLE SOURCE OF TRUTH for what is done, what is next, and who owns
 what.** It survives compaction, agent handover and session death. Every other document
 (ROADMAP, EFFECTIVE_DAMAGE, PHYSICAL_STATE_SYSTEM, the AI handoffs) links *here* for

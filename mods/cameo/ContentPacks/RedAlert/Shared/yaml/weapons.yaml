@@ -139,7 +139,7 @@ VengeanceActivator3:
 		Duration: 80
 		ValidRelationships: Ally
 
-ConscriptMolotov:
+ra1_soviets_molotovconscript_conscriptmolotov:
 	Inherits: ^Warhead_Demolition_Light
 	Inherits@2: ^Warhead_Flame_Light
 	Inherits@3: ^Projectile_Grenade_Light
@@ -171,9 +171,9 @@ ConscriptMolotov:
 		InvalidTargets: Water
 	-Warhead@Demolition_Light:
 
-ConscriptMolotovExplode:
+ra1_soviets_molotovconscript_conscriptmolotovexplode:
 	Inherits@roleflat: ^Compatibility_Flame_LightFlat
-	Inherits: ConscriptMolotov
+	Inherits: ra1_soviets_molotovconscript_conscriptmolotov
 	Warhead@Demolition_Light:
 		Damage: 4000
 	Warhead@Flame_Light:
@@ -209,7 +209,7 @@ RocketsRA:
 	Projectile: Missile
 		VerticalRateOfTurn: 20
 
-RocketsRACryo:
+ra1_allies_alliedrocketsoldier_rocketsracryo:
 	Inherits@wh: ^Warhead_MissileCryo_Medium
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_Cryo
@@ -1103,7 +1103,7 @@ ParaBomb:
 		PercentageScale: 9998
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 50
-ParaBombCryo:
+ra1_allies_cargoplanebomber_parabombcryo:
 	Inherits@delivery: ^ParaBombDelivery
 	Inherits@wh: ^Warhead_CryoBlast_Heavy
 	Inherits@fx: ^Effect_Cryo
@@ -2126,7 +2126,7 @@ ra1_allies_gunboat_cannon_cryo:
 		ValidTargets: Ground, Water
 		Damage: 80000
 		PercentageScale: 9999
-8InchCryo:
+ra1_allies_cruiser_8inchcryo:
 	Inherits@wh: ^Warhead_CryoBlast_Heavy
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Cryo

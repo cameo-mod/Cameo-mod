@@ -257,7 +257,7 @@
       "warheads": [
        "^Warhead_Inferno_Medium"
       ],
-      "weapon": "VenomLaserInferno",
+      "weapon": "td_nod_venom_venomlaserinferno",
       "weapon_class_source": "template"
      },
      {
@@ -280,7 +280,7 @@
       "requires": "td_nod_upgrade_burninglasers",
       "slot": "Armament@Burning",
       "versus_templates": [
-       "VenomLaserInferno"
+       "td_nod_venom_venomlaserinferno"
       ],
       "warheads": [
        "^Warhead_Inferno_Medium"
@@ -646,7 +646,7 @@
       "warheads": [
        "^Warhead_Concussion_Medium"
       ],
-      "weapon": "TurretGun",
+      "weapon": "td_nod_gunturret_turretgun",
       "weapon_class_source": "template"
      },
      {
@@ -712,12 +712,12 @@
        "^Compatibility_Concussion_MediumFlat",
        "^HeavyBomb",
        "^HeavyCannon",
-       "TurretGun"
+       "td_nod_gunturret_turretgun"
       ],
       "warheads": [
        "^Warhead_Concussion_Medium"
       ],
-      "weapon": "TurretGunBlackMarket",
+      "weapon": "td_nod_gunturret_turretgunblackmarket",
       "weapon_class_source": "template"
      }
     ],
@@ -962,7 +962,7 @@
       "warheads": [
        "^Warhead_Inferno_Medium"
       ],
-      "weapon": "NodTurretLaserInferno",
+      "weapon": "td_nod_laserturret_nodturretlaserinferno",
       "weapon_class_source": "template"
      },
      {
@@ -985,7 +985,7 @@
       "requires": "td_nod_upgrade_burninglasers",
       "slot": "Armament@Burning",
       "versus_templates": [
-       "NodTurretLaserInferno"
+       "td_nod_laserturret_nodturretlaserinferno"
       ],
       "warheads": [
        "^Warhead_Inferno_Medium"
@@ -1121,7 +1121,7 @@
       "warheads": [
        "^Warhead_Laser_Heavy"
       ],
-      "weapon": "LaserObelisk",
+      "weapon": "td_nod_obeliskoflight_laserobelisk",
       "weapon_class_source": "template"
      },
      {
@@ -1156,7 +1156,7 @@
       "warheads": [
        "^Warhead_Laser_Heavy"
       ],
-      "weapon": "LaserObelisk",
+      "weapon": "td_nod_obeliskoflight_laserobelisk",
       "weapon_class_source": "template"
      },
      {
@@ -1186,14 +1186,14 @@
       "requires": "td_nod_upgrade_burninglasers",
       "slot": "Armament@Burning",
       "versus_templates": [
-       "LaserObelisk",
+       "td_nod_obeliskoflight_laserobelisk",
        "^Warhead_Inferno_Heavy"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy",
        "^Warhead_Inferno_Heavy"
       ],
-      "weapon": "LaserObeliskBurning",
+      "weapon": "td_nod_obeliskoflight_laserobeliskburning",
       "weapon_class_source": "template"
      }
     ],
@@ -1347,14 +1347,12 @@
       "reloaddelay": "40",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_MissileAA_Heavy",
-       "^Projectile_Missile_Heavy",
-       "^Effect_MissileHE_Heavy"
+       "Dragon"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
       ],
-      "weapon": "Dragon",
+      "weapon": "td_nod_samsite_dragon",
       "weapon_class_source": "template"
      }
     ],
@@ -1623,7 +1621,7 @@
       "warheads": [
        "^Warhead_Flame_Medium"
       ],
-      "weapon": "BlackHandFlamer",
+      "weapon": "td_nod_blackhandflamer_blackhandflamer",
       "weapon_class_source": "template"
      },
      {
@@ -1653,7 +1651,7 @@
       "warheads": [
        "^Warhead_Flame_Medium"
       ],
-      "weapon": "BlackHandFlamer",
+      "weapon": "td_nod_blackhandflamer_blackhandflamer",
       "weapon_class_source": "template"
      }
     ],
@@ -1785,7 +1783,7 @@
       "warheads": [
        "^Warhead_Chemical_Light"
       ],
-      "weapon": "ChemRockets",
+      "weapon": "td_nod_chemicalrocketsoldier_chemrockets",
       "weapon_class_source": "template"
      },
      {
@@ -1835,7 +1833,7 @@
       "warheads": [
        "^Warhead_Chemical_Light"
       ],
-      "weapon": "ChemRockets",
+      "weapon": "td_nod_chemicalrocketsoldier_chemrockets",
       "weapon_class_source": "template"
      }
     ],
@@ -1936,21 +1934,19 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
       "range": "3414",
       "reloaddelay": "48",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Chemical_Light",
-       "^Projectile_Chem_Light",
-       "^Effect_Chem_Light"
+       "Chemspray"
       ],
       "warheads": [
        "^Warhead_Chemical_Light"
       ],
-      "weapon": "Chemspray",
+      "weapon": "td_nod_chemicalwarrior_chemspray",
       "weapon_class_source": "template"
      },
      {
@@ -1964,21 +1960,19 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
       "range": "3414",
       "reloaddelay": "48",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_Chemical_Light",
-       "^Projectile_Chem_Light",
-       "^Effect_Chem_Light"
+       "Chemspray"
       ],
       "warheads": [
        "^Warhead_Chemical_Light"
       ],
-      "weapon": "Chemspray",
+      "weapon": "td_nod_chemicalwarrior_chemspray",
       "weapon_class_source": "template"
      }
     ],
@@ -2112,21 +2106,19 @@
         "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
       "range": "8086",
       "reloaddelay": "25",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Sniper_Light",
-       "^Projectile_Sniper_Light",
-       "^Effect_Sniper_Light"
+       "td_gdi_commando_sniper"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
       ],
-      "weapon": "td_gdi_commando_sniper",
+      "weapon": "td_nod_commando_td_gdi_commando_sniper",
       "weapon_class_source": "template"
      },
      {
@@ -2147,21 +2139,19 @@
         "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
       "range": "8086",
       "reloaddelay": "25",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_Sniper_Light",
-       "^Projectile_Sniper_Light",
-       "^Effect_Sniper_Light"
+       "td_gdi_commando_sniper"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
       ],
-      "weapon": "td_gdi_commando_sniper",
+      "weapon": "td_nod_commando_td_gdi_commando_sniper",
       "weapon_class_source": "template"
      }
     ],
@@ -2261,21 +2251,19 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
       "range": "2085",
       "reloaddelay": "60",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Flame_Light",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light"
+       "Flamethrower"
       ],
       "warheads": [
        "^Warhead_Flame_Light"
       ],
-      "weapon": "Flamethrower",
+      "weapon": "td_nod_flamethrower_flamethrower",
       "weapon_class_source": "template"
      },
      {
@@ -2289,21 +2277,19 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
       "range": "2085",
       "reloaddelay": "60",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_Flame_Light",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light"
+       "Flamethrower"
       ],
       "warheads": [
        "^Warhead_Flame_Light"
       ],
-      "weapon": "Flamethrower",
+      "weapon": "td_nod_flamethrower_flamethrower",
       "weapon_class_source": "template"
      }
     ],
@@ -2421,7 +2407,7 @@
       "warheads": [
        "^Warhead_Laser_Heavy"
       ],
-      "weapon": "NodCommandoLaser",
+      "weapon": "td_nod_lasercommando_nodcommandolaser",
       "weapon_class_source": "template"
      },
      {
@@ -2456,7 +2442,7 @@
       "warheads": [
        "^Warhead_Laser_Heavy"
       ],
-      "weapon": "NodCommandoLaser",
+      "weapon": "td_nod_lasercommando_nodcommandolaser",
       "weapon_class_source": "template"
      },
      {
@@ -2491,7 +2477,7 @@
       "warheads": [
        "^Warhead_Laser_Heavy"
       ],
-      "weapon": "NodCommandoLaser",
+      "weapon": "td_nod_lasercommando_nodcommandolaser",
       "weapon_class_source": "template"
      },
      {
@@ -2654,7 +2640,7 @@
       "warheads": [
        "^Warhead_Laser_Heavy"
       ],
-      "weapon": "BlackHandLaser",
+      "weapon": "td_nod_lasertrooper_blackhandlaser",
       "weapon_class_source": "template"
      },
      {
@@ -2711,7 +2697,7 @@
       "warheads": [
        "^Warhead_Laser_Heavy"
       ],
-      "weapon": "BlackHandLaser",
+      "weapon": "td_nod_lasertrooper_blackhandlaser",
       "weapon_class_source": "template"
      }
     ],
@@ -3092,21 +3078,19 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6368",
       "reloaddelay": "63",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_MissileAP_Light",
-       "^Projectile_Missile_Light",
-       "^Effect_MissileAP_Light"
+       "Rockets"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
       ],
-      "weapon": "Rockets",
+      "weapon": "td_nod_rocketsoldier_rockets",
       "weapon_class_source": "template"
      },
      {
@@ -3120,21 +3104,19 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
       "range": "6368",
       "reloaddelay": "63",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_MissileAP_Light",
-       "^Projectile_Missile_Light",
-       "^Effect_MissileAP_Light"
+       "Rockets"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
       ],
-      "weapon": "Rockets",
+      "weapon": "td_nod_rocketsoldier_rockets",
       "weapon_class_source": "template"
      }
     ],
@@ -3283,7 +3265,7 @@
       "warheads": [
        "^Warhead_Tesla_Super"
       ],
-      "weapon": "BHRedDarts",
+      "weapon": "td_nod_stealthsoldier_bhreddarts",
       "weapon_class_source": "illegal_mix"
      },
      {
@@ -3351,7 +3333,7 @@
       "warheads": [
        "^Warhead_Tesla_Super"
       ],
-      "weapon": "BHRedDarts",
+      "weapon": "td_nod_stealthsoldier_bhreddarts",
       "weapon_class_source": "illegal_mix"
      }
     ],
@@ -3486,7 +3468,7 @@
        "^Warhead_Concussion_Light",
        "^Warhead_MissileHE_Heavy"
       ],
-      "weapon": "NodTorpTube",
+      "weapon": "td_nod_attacksubmarine_nodtorptube",
       "weapon_class_source": "template"
      },
      {
@@ -3525,7 +3507,7 @@
        "^Warhead_Demolition_Heavy",
        "^Warhead_MissileHE_Heavy"
       ],
-      "weapon": "NodTorpTubeBlackMarket",
+      "weapon": "td_nod_attacksubmarine_nodtorptubeblackmarket",
       "weapon_class_source": "template"
      }
     ],
@@ -3623,13 +3605,12 @@
       "reloaddelay": "225",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_MissileFire_Heavy",
-       "^Effect_Flame_Heavy"
+       "HonestJohn"
       ],
       "warheads": [
        "^Warhead_MissileFire_Heavy"
       ],
-      "weapon": "HonestJohn",
+      "weapon": "td_nod_ballisticmissilesubmarine_honestjohn",
       "weapon_class_source": "template"
      }
     ],
@@ -3745,7 +3726,7 @@
       "warheads": [
        "^Warhead_Laser_Heavy"
       ],
-      "weapon": "CorvetteLaserObelisk",
+      "weapon": "td_nod_lasercorvette_corvettelaserobelisk",
       "weapon_class_source": "template"
      },
      {
@@ -3775,7 +3756,7 @@
       "warheads": [
        "^Warhead_MissileAP_Heavy"
       ],
-      "weapon": "CorvetteDragon",
+      "weapon": "td_nod_lasercorvette_corvettedragon",
       "weapon_class_source": "template"
      }
     ],
@@ -4468,7 +4449,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "minrange": "2470",
       "pricing": true,
@@ -4477,17 +4458,13 @@
       "requires": "!td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Concussion_MediumFlat",
-       "^Warhead_Demolition_Light",
-       "^Warhead_Concussion_Medium",
-       "^Projectile_Grenade_Light",
-       "^Effect_Concussion_Medium"
+       "ArtilleryShell"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium"
       ],
-      "weapon": "ArtilleryShell",
+      "weapon": "td_nod_artillery_artilleryshell",
       "weapon_class_source": "template"
      },
      {
@@ -4562,7 +4539,7 @@
       "warheads": [
        "^Warhead_Concussion_Heavy"
       ],
-      "weapon": "ArtilleryShellUpgrade",
+      "weapon": "td_nod_artillery_artilleryshellupgrade",
       "weapon_class_source": "template"
      }
     ],
@@ -4655,14 +4632,12 @@
       "reloaddelay": "10",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Light",
-       "^Projectile_Bullet_Light",
-       "^Effect_Bullet_Light"
+       "MachineGun"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
       ],
-      "weapon": "MachineGun",
+      "weapon": "td_nod_buggy_machinegun",
       "weapon_class_source": "template"
      },
      {
@@ -4692,7 +4667,7 @@
       "warheads": [
        "^Warhead_Flame_Light"
       ],
-      "weapon": "FireballLauncherBuggy",
+      "weapon": "td_nod_buggy_fireballlauncherbuggy",
       "weapon_class_source": "template"
      }
     ],
@@ -4813,7 +4788,7 @@
       "warheads": [
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "MachineGunBuggy2",
+      "weapon": "td_nod_buggymkii_machinegunbuggy2",
       "weapon_class_source": "template"
      },
      {
@@ -4845,7 +4820,7 @@
        "^Warhead_Flame_Light",
        "^Warhead_Flame_Heavy"
       ],
-      "weapon": "FireballLauncherBuggy2",
+      "weapon": "td_nod_buggymkii_fireballlauncherbuggy2",
       "weapon_class_source": "template"
      },
      {
@@ -4888,12 +4863,12 @@
       "reloaddelay": "60",
       "slot": "Armament@AA",
       "versus_templates": [
-       "MachineGunBuggy2"
+       "td_nod_buggymkii_machinegunbuggy2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "MachineGunBuggy2_AA",
+      "weapon": "td_nod_buggymkii_machinegunbuggy2_AA",
       "weapon_class_source": "template"
      },
      {
@@ -4930,7 +4905,7 @@
       "warheads": [
        "^Warhead_Laser_Light"
       ],
-      "weapon": "LaserBuggy2",
+      "weapon": "td_nod_buggymkii_laserbuggy2",
       "weapon_class_source": "template"
      },
      {
@@ -4960,7 +4935,7 @@
       "warheads": [
        "^Warhead_Inferno_Light"
       ],
-      "weapon": "LaserBuggy2Inferno",
+      "weapon": "td_nod_buggymkii_laserbuggy2inferno",
       "weapon_class_source": "template"
      },
      {
@@ -4983,12 +4958,12 @@
       "requires": "td_nod_upgrade_blackmarketupgrades && td_nod_upgrade_burninglasers",
       "slot": "Armament@LaserBurning",
       "versus_templates": [
-       "LaserBuggy2Inferno"
+       "td_nod_buggymkii_laserbuggy2inferno"
       ],
       "warheads": [
        "^Warhead_Inferno_Light"
       ],
-      "weapon": "LaserBuggy2Burning",
+      "weapon": "td_nod_buggymkii_laserbuggy2burning",
       "weapon_class_source": "template"
      },
      {
@@ -5018,12 +4993,12 @@
       "requires": "td_nod_upgrade_blackmarketupgrades && !td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers",
       "slot": "Armament@LaserAABase",
       "versus_templates": [
-       "LaserBuggy2"
+       "td_nod_buggymkii_laserbuggy2"
       ],
       "warheads": [
        "^Warhead_Laser_Light"
       ],
-      "weapon": "LaserBuggy2_AA",
+      "weapon": "td_nod_buggymkii_laserbuggy2_AA",
       "weapon_class_source": "template"
      },
      {
@@ -5046,12 +5021,12 @@
       "requires": "td_nod_upgrade_blackmarketupgrades && td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers",
       "slot": "Armament@LaserAAElite",
       "versus_templates": [
-       "LaserBuggy2Inferno"
+       "td_nod_buggymkii_laserbuggy2inferno"
       ],
       "warheads": [
        "^Warhead_Inferno_Light"
       ],
-      "weapon": "LaserBuggy2_AAInferno",
+      "weapon": "td_nod_buggymkii_laserbuggy2_AAinferno",
       "weapon_class_source": "template"
      },
      {
@@ -5074,12 +5049,12 @@
       "requires": "td_nod_upgrade_blackmarketupgrades && td_nod_upgrade_burninglasers",
       "slot": "Armament@LaserAABurning",
       "versus_templates": [
-       "LaserBuggy2Burning"
+       "td_nod_buggymkii_laserbuggy2burning"
       ],
       "warheads": [
        "^Warhead_Inferno_Light"
       ],
-      "weapon": "LaserBuggy2_AABurning",
+      "weapon": "td_nod_buggymkii_laserbuggy2_AAburning",
       "weapon_class_source": "template"
      }
     ],
@@ -5250,7 +5225,7 @@
       "warheads": [
        "^Warhead_MissileChem_Medium"
       ],
-      "weapon": "ChemicalBikeRockets",
+      "weapon": "td_nod_chemicalattackbike_chemicalbikerockets",
       "weapon_class_source": "template"
      }
     ],
@@ -5384,7 +5359,7 @@
       "warheads": [
        "^Warhead_MissileChem_Heavy"
       ],
-      "weapon": "ChemicalHonestJohn",
+      "weapon": "td_nod_chemicalssmlauncher_chemicalhonestjohn",
       "weapon_class_source": "template"
      }
     ],
@@ -5510,7 +5485,7 @@
       "warheads": [
        "^Warhead_MissileChem_Medium"
       ],
-      "weapon": "ChemicalStealthTankMissiles",
+      "weapon": "td_nod_chemicalstealthtank_chemicalstealthtankmissiles",
       "weapon_class_source": "template"
      }
     ],
@@ -5602,21 +5577,19 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
       "range": "2390",
       "reloaddelay": "50",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Flame_Medium",
-       "^Projectile_Flame_Medium",
-       "^Effect_Flame_Medium"
+       "BigFlamer"
       ],
       "warheads": [
        "^Warhead_Flame_Medium"
       ],
-      "weapon": "BigFlamer",
+      "weapon": "td_nod_flametank_bigflamer",
       "weapon_class_source": "template"
      }
     ],
@@ -5716,7 +5689,7 @@
       "warheads": [
        "^Warhead_Flame_Heavy"
       ],
-      "weapon": "BigFlamer2",
+      "weapon": "td_nod_flametankmkii_bigflamer2",
       "weapon_class_source": "template"
      }
     ],
@@ -5820,7 +5793,7 @@
       "warheads": [
        "^Warhead_CannonHE_Medium"
       ],
-      "weapon": "70mm",
+      "weapon": "td_nod_lighttank_70mm",
       "weapon_class_source": "template"
      },
      {
@@ -5848,7 +5821,7 @@
       "warheads": [
        "^Warhead_MissileAP_Medium"
       ],
-      "weapon": "LTNKMissiles",
+      "weapon": "td_nod_lighttank_ltnkmissiles",
       "weapon_class_source": "template"
      }
     ],
@@ -5983,7 +5956,7 @@
       "warheads": [
        "^Warhead_CannonHE_Medium"
       ],
-      "weapon": "LightTank2Cannon",
+      "weapon": "td_nod_lighttankmkii_lighttank2cannon",
       "weapon_class_source": "template"
      },
      {
@@ -6011,7 +5984,7 @@
       "warheads": [
        "^Warhead_MissileAP_Medium"
       ],
-      "weapon": "LightTank2Missiles",
+      "weapon": "td_nod_lighttankmkii_lighttank2missiles",
       "weapon_class_source": "template"
      }
     ],
@@ -6341,7 +6314,7 @@
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium"
       ],
-      "weapon": "SpecterArtilleryShell",
+      "weapon": "td_nod_specterartillery_specterartilleryshell",
       "weapon_class_source": "template"
      },
      {
@@ -6418,7 +6391,7 @@
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium"
       ],
-      "weapon": "SpecterArtilleryShellUpgrade",
+      "weapon": "td_nod_specterartillery_specterartilleryshellupgrade",
       "weapon_class_source": "template"
      }
     ],
@@ -6518,13 +6491,12 @@
       "reloaddelay": "225",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_MissileFire_Heavy",
-       "^Effect_Flame_Heavy"
+       "HonestJohn"
       ],
       "warheads": [
        "^Warhead_MissileFire_Heavy"
       ],
-      "weapon": "HonestJohn",
+      "weapon": "td_nod_ssmlauncher_honestjohn",
       "weapon_class_source": "template"
      }
     ],
@@ -6693,7 +6665,7 @@
       "warheads": [
        "^Warhead_MissileAP_Medium"
       ],
-      "weapon": "StealthTankMissiles",
+      "weapon": "td_nod_stealthtank_stealthtankmissiles",
       "weapon_class_source": "template"
      },
      {
@@ -6716,12 +6688,12 @@
       "requires": "td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "StealthTankMissiles"
+       "td_nod_stealthtank_stealthtankmissiles"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
       ],
-      "weapon": "StealthTankMissilesBlackMarket",
+      "weapon": "td_nod_stealthtank_stealthtankmissilesblackmarket",
       "weapon_class_source": "template"
      }
     ],

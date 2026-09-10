@@ -33,7 +33,7 @@ ra1_allies_alliedlighttank:
 	Turreted:
 		TurnSpeed: 24
 	Armament:
-		Weapon: 25mm
+		Weapon: ra1_allies_alliedlighttank_25mm
 		Recoil: 43
 		RecoilRecovery: 25
 		LocalOffset: 768,0,90
@@ -251,18 +251,18 @@ ra1_allies_alliedartillery:
 		TurnSpeed: 24
 		Locomotor: lighttracked
 	Armament:
-		Weapon: 155mm
+		Weapon: ra1_allies_alliedartillery_155mm
 		LocalOffset: 624,0,208
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@Upgrade:
-		Weapon: 155mmCryo
+		Weapon: ra1_allies_alliedartillery_155mmcryo
 		LocalOffset: 624,0,208
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	WithMuzzleOverlay:
 	WithMuzzleSmoke:
-		Weapons: 155mm, 155mmCryo
+		Weapons: ra1_allies_alliedartillery_155mm, ra1_allies_alliedartillery_155mmcryo
 	FireWarheadsOnDeath:
 		Weapon: ArtilleryExplode
 	Voiced:

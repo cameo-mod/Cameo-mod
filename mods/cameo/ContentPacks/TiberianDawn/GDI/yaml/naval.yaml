@@ -83,20 +83,20 @@ td_gdi_missileboat:
 		TurnSpeed: 20
 		Offset: 384,0,64
 	Armament@Ground:
-		Weapon: GunboatMissile
+		Weapon: td_gdi_missileboat_gunboatmissile
 		LocalOffset: 100,-100,0, 100,100,0
 		RequiresCondition: !td_gdi_upgrade_advancedmissiletargeting
 	Armament@AdvancedMissileTargeting:
-		Weapon: GunboatMissileAMT
+		Weapon: td_gdi_missileboat_gunboatmissileamt
 		LocalOffset: 100,-100,0, 100,100,0
 		RequiresCondition: td_gdi_upgrade_advancedmissiletargeting
 	Armament@DC1:
-		Weapon: DepthCharge
+		Weapon: td_gdi_missileboat_depthcharge
 		LocalOffset: 100,-100,0, 100,100,0
 		LocalYaw: 80, -80
 		MuzzleSequence: muzzle
 	Armament@DC2:
-		Weapon: DepthCharge
+		Weapon: td_gdi_missileboat_depthcharge
 		LocalOffset: 100,100,0, 100,-100,0
 		LocalYaw: 80, -80
 		FireDelay: 5
@@ -152,7 +152,7 @@ td_gdi_railgunbattleship:
 		TurnSpeed: 10
 	Armament@PRIMARY:
 		Turret: primary
-		Weapon: GDIBattleshipRailgun
+		Weapon: td_gdi_railgunbattleship_gdibattleshiprailgun
 		LocalOffset: 480,-100,40, 480,100,40
 		Recoil: 88
 		RecoilRecovery: 35
@@ -161,7 +161,7 @@ td_gdi_railgunbattleship:
 	Armament@SECONDARY:
 		Name: secondary
 		Turret: secondary
-		Weapon: GDIBattleshipRailgun
+		Weapon: td_gdi_railgunbattleship_gdibattleshiprailgun
 		LocalOffset: 480,-100,40, 480,100,40
 		Recoil: 88
 		RecoilRecovery: 35

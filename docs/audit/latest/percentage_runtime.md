@@ -1,7 +1,7 @@
 # Folded percentage runtime audit
 
-- Reachable direct-hit weapons activated: **189**
-- Folded direct-hit applications activated: **192**
+- Reachable direct-hit weapons activated: **195**
+- Folded direct-hit applications activated: **198**
 - Direct weapons also carrying standalone percentage hits: **7**
 - Direct weapons whose folded hit feeds physical state: **7**
 - Direct weapons whose folded hit feeds integrity: **5**

@@ -84,12 +84,12 @@ td_gdi_grenadier:
 	ChangesHealth@SelfHealing:
 		Step: 8
 	Armament:
-		Weapon: Grenade
+		Weapon: td_gdi_grenadier_grenade
 		LocalOffset: 0,0,427
 		FireDelay: 15
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: Grenade
+		Weapon: td_gdi_grenadier_grenade
 	TakeCover:
 		ProneOffset: 300,0,-227
 	WithInfantryBody:
@@ -99,7 +99,7 @@ td_gdi_grenadier:
 		StandSequences: parachute
 		RequiresCondition: parachute
 	FireWarheadsOnDeath:
-		Weapon: GrenadeExplode
+		Weapon: td_gdi_grenadier_grenadeexplode
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
 	RenderSprites:
@@ -121,28 +121,37 @@ td_gdi_rocketsoldier:
 		Prerequisites: ~td_gdi_barracks, ~!td_gdi_promotion_missilesoldier
 		Description: Anti-tank infantry.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
 	Armament@PRIMARY:
-		Weapon: Rockets
+		Weapon: td_gdi_rocketsoldier_rockets
 		LocalOffset: 256,43,341
 		FireDelay: 5
 		RequiresCondition: !td_gdi_upgrade_advancedmissiletargeting
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: Rockets
+		Weapon: td_gdi_rocketsoldier_rockets
 		RequiresCondition: !td_gdi_upgrade_advancedmissiletargeting
 	Armament@AdvancedMissileTargeting:
-		Weapon: RocketsAMT
+		Weapon: td_gdi_rocketsoldier_rocketsamt
 		LocalOffset: 256,43,341
 		FireDelay: 5
 		RequiresCondition: td_gdi_upgrade_advancedmissiletargeting
 	Armament@AdvancedMissileTargetingGARRISONED:
 		Name: garrisoned
-		Weapon: RocketsAMT
+		Weapon: td_gdi_rocketsoldier_rocketsamt
 		RequiresCondition: td_gdi_upgrade_advancedmissiletargeting
 	ActorStatValues:
 		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_advancedmissiletargeting, td_gdi_upgrade_cuttingedgeequipment
 
 E3: #map import compatibility
 	Inherits: td_gdi_rocketsoldier
+	# Keep the map-import alias on the original shared weapons.
+	Armament@PRIMARY:
+		Weapon: Rockets
+	Armament@GARRISONED:
+		Weapon: Rockets
+	Armament@AdvancedMissileTargeting:
+		Weapon: RocketsAMT
+	Armament@AdvancedMissileTargetingGARRISONED:
+		Weapon: RocketsAMT
 	Buildable:
 		Description: Anti-tank infantry.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
 		-Queue:
@@ -260,12 +269,12 @@ td_gdi_empgrenadier:
 	ChangesHealth@SelfHealing:
 		Step: 32
 	Armament:
-		Weapon: Grenade_EMP
+		Weapon: td_gdi_empgrenadier_grenade_emp
 		LocalOffset: 0,0,427
 		FireDelay: 5
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: Grenade_EMP
+		Weapon: td_gdi_empgrenadier_grenade_emp
 	FirepowerMultiplier@td_gdi_upgrade_cuttingedgeequipment:
 		Modifier: 120
 	ReloadDelayMultiplier@td_gdi_upgrade_cuttingedgeequipment:
@@ -277,7 +286,7 @@ td_gdi_empgrenadier:
 	WithInfantryBody:
 		DefaultAttackSequence: throw
 	FireWarheadsOnDeath:
-		Weapon: GrenadeExplode_EMP
+		Weapon: td_gdi_empgrenadier_grenadeexplode_emp
 	Voiced:
 		VoiceSet: TSInfantry
 	ActorStatValues:
@@ -316,12 +325,12 @@ td_gdi_sonicmissilesoldier:
 	ChangesHealth@SelfHealing:
 		Step: 25
 	Armament@PRIMARY:
-		Weapon: MissileSoldierWeapon
+		Weapon: td_gdi_sonicmissilesoldier_missilesoldierweapon
 		LocalOffset: 256,43,341
 		FireDelay: 5
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: MissileSoldierWeapon
+		Weapon: td_gdi_sonicmissilesoldier_missilesoldierweapon
 	TakeCover:
 		ProneOffset: 180,0,-200
 	WithDeathAnimation:

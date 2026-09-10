@@ -214,7 +214,7 @@
       "reliability": 0.0105,
       "sigma": 833.33,
       "slot": "Armament",
-      "weapon": "FirehawkMissiles_AA"
+      "weapon": "td_gdi_firehawk_firehawkmissiles_AA"
      },
      {
       "avg_versus": 0.9914,
@@ -237,7 +237,7 @@
       "reliability": 0.0105,
       "sigma": 833.33,
       "slot": "Armament@td_gdi_upgrade_advancedmissiletargeting",
-      "weapon": "FirehawkMissiles_AA"
+      "weapon": "td_gdi_firehawk_firehawkmissiles_AA"
      },
      {
       "avg_versus": 0.7727,
@@ -265,7 +265,7 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament@BOMBS",
-      "weapon": "FirehawkBomb"
+      "weapon": "td_gdi_firehawk_firehawkbomb"
      }
     ],
     "shield_always_on": false,
@@ -298,7 +298,7 @@
       "reliability": 0.5739,
       "sigma": 317.68,
       "slot": "Armament@PRIMARY",
-      "weapon": "OrcaMissiles"
+      "weapon": "td_gdi_orca_orcamissiles"
      },
      {
       "avg_versus": 1.0141,
@@ -322,7 +322,7 @@
       "reliability": 0.6713,
       "sigma": 236.05,
       "slot": "Armament@AdvancedMissileTargeting",
-      "weapon": "OrcaMissilesAMT"
+      "weapon": "td_gdi_orca_orcamissilesamt"
      }
     ],
     "shield_always_on": false,
@@ -371,7 +371,7 @@
       "reliability": 0.4438,
       "sigma": 450.88,
       "slot": "Armament@PRIMARY",
-      "weapon": "TowerMissile"
+      "weapon": "td_gdi_advancedguardtower_towermissile"
      },
      {
       "avg_versus": 1.0141,
@@ -395,7 +395,7 @@
       "reliability": 0.5722,
       "sigma": 319.3,
       "slot": "Armament@AdvancedMissileTargeting",
-      "weapon": "TowerMissileAMT"
+      "weapon": "td_gdi_advancedguardtower_towermissileamt"
      }
     ],
     "shield_always_on": false,
@@ -520,7 +520,7 @@
       "reliability": 0.6209,
       "sigma": 277.6,
       "slot": "Armament",
-      "weapon": "SkyshieldCannon"
+      "weapon": "td_gdi_skyshield_skyshieldcannon"
      }
     ],
     "shield_always_on": false,
@@ -872,7 +872,7 @@
       "reliability": 0.0717,
       "sigma": 845.97,
       "slot": "Armament",
-      "weapon": "Grenade_EMP"
+      "weapon": "td_gdi_empgrenadier_grenade_emp"
      },
      {
       "avg_versus": 1.1191,
@@ -896,7 +896,7 @@
       "reliability": 0.0717,
       "sigma": 845.97,
       "slot": "Armament@GARRISONED",
-      "weapon": "Grenade_EMP"
+      "weapon": "td_gdi_empgrenadier_grenade_emp"
      }
     ],
     "shield_always_on": false,
@@ -928,7 +928,7 @@
       "reliability": 0.1759,
       "sigma": 1212.93,
       "slot": "Armament",
-      "weapon": "Grenade"
+      "weapon": "td_gdi_grenadier_grenade"
      },
      {
       "avg_versus": 1.0977,
@@ -951,7 +951,7 @@
       "reliability": 0.1759,
       "sigma": 1212.93,
       "slot": "Armament@GARRISONED",
-      "weapon": "Grenade"
+      "weapon": "td_gdi_grenadier_grenade"
      }
     ],
     "shield_always_on": false,
@@ -1449,7 +1449,7 @@
       "reliability": 0.0264,
       "sigma": 262.27,
       "slot": "Armament@PRIMARY",
-      "weapon": "Rockets"
+      "weapon": "td_gdi_rocketsoldier_rockets"
      },
      {
       "avg_versus": 0.979,
@@ -1472,7 +1472,7 @@
       "reliability": 0.0264,
       "sigma": 262.27,
       "slot": "Armament@GARRISONED",
-      "weapon": "Rockets"
+      "weapon": "td_gdi_rocketsoldier_rockets"
      },
      {
       "avg_versus": 0.979,
@@ -1495,7 +1495,7 @@
       "reliability": 0.0404,
       "sigma": 209.2,
       "slot": "Armament@AdvancedMissileTargeting",
-      "weapon": "RocketsAMT"
+      "weapon": "td_gdi_rocketsoldier_rocketsamt"
      },
      {
       "avg_versus": 0.979,
@@ -1518,7 +1518,7 @@
       "reliability": 0.0404,
       "sigma": 209.2,
       "slot": "Armament@AdvancedMissileTargetingGARRISONED",
-      "weapon": "RocketsAMT"
+      "weapon": "td_gdi_rocketsoldier_rocketsamt"
      }
     ],
     "shield_always_on": false,
@@ -1610,7 +1610,7 @@
       "reliability": 0.2317,
       "sigma": 150.0,
       "slot": "Armament@PRIMARY",
-      "weapon": "MissileSoldierWeapon"
+      "weapon": "td_gdi_sonicmissilesoldier_missilesoldierweapon"
      },
      {
       "avg_versus": 0.9914,
@@ -1634,7 +1634,7 @@
       "reliability": 0.2317,
       "sigma": 150.0,
       "slot": "Armament@GARRISONED",
-      "weapon": "MissileSoldierWeapon"
+      "weapon": "td_gdi_sonicmissilesoldier_missilesoldierweapon"
      }
     ],
     "shield_always_on": false,
@@ -1675,7 +1675,7 @@
       "reliability": 0.0295,
       "sigma": 366.64,
       "slot": "Armament@Ground",
-      "weapon": "GunboatMissile"
+      "weapon": "td_gdi_missileboat_gunboatmissile"
      },
      {
       "avg_versus": 1.0167,
@@ -1698,7 +1698,7 @@
       "reliability": 0.0533,
       "sigma": 266.65,
       "slot": "Armament@AdvancedMissileTargeting",
-      "weapon": "GunboatMissileAMT"
+      "weapon": "td_gdi_missileboat_gunboatmissileamt"
      },
      {
       "avg_versus": 1.0977,
@@ -1721,7 +1721,7 @@
       "reliability": 0.1474,
       "sigma": 1360.0,
       "slot": "Armament@DC1",
-      "weapon": "DepthCharge"
+      "weapon": "td_gdi_missileboat_depthcharge"
      },
      {
       "avg_versus": 1.0977,
@@ -1744,7 +1744,7 @@
       "reliability": 0.1474,
       "sigma": 1360.0,
       "slot": "Armament@DC2",
-      "weapon": "DepthCharge"
+      "weapon": "td_gdi_missileboat_depthcharge"
      }
     ],
     "shield_always_on": false,
@@ -1776,7 +1776,7 @@
       "reliability": 0.4796,
       "sigma": 100.0,
       "slot": "Armament@PRIMARY",
-      "weapon": "GDIBattleshipRailgun"
+      "weapon": "td_gdi_railgunbattleship_gdibattleshiprailgun"
      },
      {
       "avg_versus": 1.0959,
@@ -1799,7 +1799,7 @@
       "reliability": 0.4796,
       "sigma": 100.0,
       "slot": "Armament@SECONDARY",
-      "weapon": "GDIBattleshipRailgun"
+      "weapon": "td_gdi_railgunbattleship_gdibattleshiprailgun"
      }
     ],
     "shield_always_on": false,
@@ -1926,7 +1926,7 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament@PRIMARY",
-      "weapon": "APCGun"
+      "weapon": "td_gdi_apc_apcgun"
      },
      {
       "avg_versus": 0.975,
@@ -1951,7 +1951,7 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament@SECONDARY",
-      "weapon": "APCGun_AA"
+      "weapon": "td_gdi_apc_apcgun_AA"
      }
     ],
     "shield_always_on": false,
@@ -1984,7 +1984,7 @@
       "reliability": 0.5462,
       "sigma": 1700.0,
       "slot": "Armament@PRIMARY",
-      "weapon": "ArcherArtilleryShell"
+      "weapon": "td_gdi_archerartillery_archerartilleryshell"
      }
     ],
     "shield_always_on": false,
@@ -2016,7 +2016,7 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament",
-      "weapon": "MachineGunHumvee2"
+      "weapon": "td_gdi_assaultapc_machinegunhumvee2"
      },
      {
       "avg_versus": 1.1167,
@@ -2039,7 +2039,7 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament@AA",
-      "weapon": "MachineGunHumvee2_AA"
+      "weapon": "td_gdi_assaultapc_machinegunhumvee2_AA"
      },
      {
       "avg_versus": 1.1298,
@@ -2062,7 +2062,7 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament@Upgrade",
-      "weapon": "MachineGunHumvee2AP"
+      "weapon": "td_gdi_assaultapc_machinegunhumvee2ap"
      },
      {
       "avg_versus": 1.1298,
@@ -2085,7 +2085,7 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament@UpgradeAA",
-      "weapon": "MachineGunHumvee2AP_AA"
+      "weapon": "td_gdi_assaultapc_machinegunhumvee2ap_AA"
      }
     ],
     "shield_always_on": false,
@@ -2117,7 +2117,7 @@
       "reliability": 0.8311,
       "sigma": 200.29,
       "slot": "Armament",
-      "weapon": "120mm"
+      "weapon": "td_gdi_battletank_120mm"
      },
      {
       "avg_versus": 1.0897,
@@ -2140,7 +2140,7 @@
       "reliability": 0.9181,
       "sigma": 100.15,
       "slot": "Armament@HV",
-      "weapon": "120mmHV"
+      "weapon": "td_gdi_battletank_120mmhv"
      },
      {
       "avg_versus": 1.0167,
@@ -2163,7 +2163,7 @@
       "reliability": 0.0388,
       "sigma": 316.0,
       "slot": "Armament@Missile",
-      "weapon": "M1A1Missiles"
+      "weapon": "td_gdi_battletank_m1a1missiles"
      },
      {
       "avg_versus": 1.0167,
@@ -2186,7 +2186,7 @@
       "reliability": 0.0671,
       "sigma": 235.0,
       "slot": "Armament@AdvancedMissileTargeting",
-      "weapon": "M1A1MissilesAMT"
+      "weapon": "td_gdi_battletank_m1a1missilesamt"
      },
      {
       "avg_versus": 1.1298,
@@ -2209,7 +2209,7 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament@MachineGun",
-      "weapon": "M1A1MachineGun"
+      "weapon": "td_gdi_battletank_m1a1machinegun"
      }
     ],
     "shield_always_on": false,
@@ -2242,7 +2242,7 @@
       "reliability": 0.1211,
       "sigma": 259.72,
       "slot": "Armament@AG",
-      "weapon": "BoxerCannonAG"
+      "weapon": "td_gdi_boxer_boxercannonag"
      },
      {
       "avg_versus": 0.975,
@@ -2266,7 +2266,7 @@
       "reliability": 0.5453,
       "sigma": 264.58,
       "slot": "Armament@AA",
-      "weapon": "BoxerCannon_AA"
+      "weapon": "td_gdi_boxer_boxercannon_AA"
      }
     ],
     "shield_always_on": false,
@@ -2345,7 +2345,7 @@
       "reliability": 0.1488,
       "sigma": 230.0,
       "slot": "Armament@mobile",
-      "weapon": "GDIRigPhalanx"
+      "weapon": "td_gdi_defenserig_gdirigphalanx"
      },
      {
       "avg_versus": 1.1298,
@@ -2369,7 +2369,7 @@
       "reliability": 0.1322,
       "sigma": 246.75,
       "slot": "Armament@Phalanx",
-      "weapon": "GDIRigPhalanxTower"
+      "weapon": "td_gdi_defenserig_gdirigphalanxtower"
      },
      {
       "avg_versus": 1.1028,
@@ -2392,7 +2392,7 @@
       "reliability": 0.4733,
       "sigma": 100.0,
       "slot": "Armament@Railgun",
-      "weapon": "GDIRigRailgun"
+      "weapon": "td_gdi_defenserig_gdirigrailgun"
      },
      {
       "avg_versus": 1.0141,
@@ -2415,7 +2415,7 @@
       "reliability": 0.1248,
       "sigma": 1174.0,
       "slot": "Armament@MissilePod",
-      "weapon": "GDIRigMissilePod"
+      "weapon": "td_gdi_defenserig_gdirigmissilepod"
      },
      {
       "avg_versus": 1.0141,
@@ -2438,7 +2438,7 @@
       "reliability": 0.1533,
       "sigma": 1033.75,
       "slot": "Armament@AdvancedMissileTargeting",
-      "weapon": "GDIRigMissilePodAMT"
+      "weapon": "td_gdi_defenserig_gdirigmissilepodamt"
      }
     ],
     "physical_state_multiplier": 1.1837,
@@ -2473,7 +2473,7 @@
       "reliability": 0.4927,
       "sigma": 100.0,
       "slot": "Armament@Railgun",
-      "weapon": "ExosuitRailgun"
+      "weapon": "td_gdi_exosuit_exosuitrailgun"
      }
     ],
     "shield_always_on": false,
@@ -2560,7 +2560,7 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament",
-      "weapon": "MachineGunHumvee2"
+      "weapon": "td_gdi_humveemkii_machinegunhumvee2"
      },
      {
       "avg_versus": 1.1298,
@@ -2583,7 +2583,7 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament@Upgrade",
-      "weapon": "MachineGunHumvee2AP"
+      "weapon": "td_gdi_humveemkii_machinegunhumvee2ap"
      },
      {
       "avg_versus": 1.1167,
@@ -2606,7 +2606,7 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament@AA",
-      "weapon": "MachineGunHumvee2_AA"
+      "weapon": "td_gdi_humveemkii_machinegunhumvee2_AA"
      },
      {
       "avg_versus": 1.1298,
@@ -2629,7 +2629,7 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament@UpgradeAA",
-      "weapon": "MachineGunHumvee2AP_AA"
+      "weapon": "td_gdi_humveemkii_machinegunhumvee2ap_AA"
      },
      {
       "avg_versus": 0.979,
@@ -2652,7 +2652,7 @@
       "reliability": 0.032,
       "sigma": 236.6,
       "slot": "Armament@Rockets",
-      "weapon": "RocketsHumvee2"
+      "weapon": "td_gdi_humveemkii_rocketshumvee2"
      },
      {
       "avg_versus": 0.979,
@@ -2675,7 +2675,7 @@
       "reliability": 0.0171,
       "sigma": 329.9,
       "slot": "Armament@RocketsAA",
-      "weapon": "RocketsHumvee2_AA"
+      "weapon": "td_gdi_humveemkii_rocketshumvee2_AA"
      },
      {
       "avg_versus": 0.9914,
@@ -2700,7 +2700,7 @@
       "reliability": 0.1585,
       "sigma": 189.95,
       "slot": "Armament@AdvancedMissileTargeting",
-      "weapon": "RocketsHumvee2AMT"
+      "weapon": "td_gdi_humveemkii_rocketshumvee2amt"
      },
      {
       "avg_versus": 0.9544,
@@ -2725,7 +2725,7 @@
       "reliability": 0.9037,
       "sigma": 259.93,
       "slot": "Armament@AdvancedMissileTargetingAA",
-      "weapon": "RocketsHumvee2AMT_AA"
+      "weapon": "td_gdi_humveemkii_rocketshumvee2amt_AA"
      }
     ],
     "shield_always_on": false,
@@ -2757,7 +2757,7 @@
       "reliability": 0.8747,
       "sigma": 200.03,
       "slot": "Armament@PRIMARY",
-      "weapon": "120mmDual"
+      "weapon": "td_gdi_mammothtank_120mmdual"
      },
      {
       "avg_versus": 1.0776,
@@ -2780,7 +2780,7 @@
       "reliability": 0.9398,
       "sigma": 100.02,
       "slot": "Armament@HV",
-      "weapon": "120mmDualHV"
+      "weapon": "td_gdi_mammothtank_120mmdualhv"
      },
      {
       "avg_versus": 0.9914,
@@ -2803,7 +2803,7 @@
       "reliability": 0.033,
       "sigma": 457.05,
       "slot": "Armament@SECONDARY",
-      "weapon": "MammothMissiles"
+      "weapon": "td_gdi_mammothtank_mammothmissiles"
      },
      {
       "avg_versus": 0.9914,
@@ -2826,7 +2826,7 @@
       "reliability": 0.0702,
       "sigma": 303.52,
       "slot": "Armament@AdvancedMissileTargeting",
-      "weapon": "MammothMissilesAMT"
+      "weapon": "td_gdi_mammothtank_mammothmissilesamt"
      }
     ],
     "shield_always_on": false,
@@ -2858,7 +2858,7 @@
       "reliability": 0.8748,
       "sigma": 200.0,
       "slot": "Armament@PRIMARY",
-      "weapon": "MammothTank3Cannons"
+      "weapon": "td_gdi_mammothtankmkiii_mammothtank3cannons"
      },
      {
       "avg_versus": 1.0776,
@@ -2881,7 +2881,7 @@
       "reliability": 0.9399,
       "sigma": 100.0,
       "slot": "Armament@HV",
-      "weapon": "MammothTank3CannonsHV"
+      "weapon": "td_gdi_mammothtankmkiii_mammothtank3cannonshv"
      },
      {
       "avg_versus": 0.9914,
@@ -2904,7 +2904,7 @@
       "reliability": 0.0316,
       "sigma": 467.0,
       "slot": "Armament@SECONDARY",
-      "weapon": "MammothTank3Missiles"
+      "weapon": "td_gdi_mammothtankmkiii_mammothtank3missiles"
      },
      {
       "avg_versus": 0.9914,
@@ -2927,7 +2927,7 @@
       "reliability": 0.0682,
       "sigma": 308.5,
       "slot": "Armament@AdvancedMissileTargeting",
-      "weapon": "MammothTank3MissilesAMT"
+      "weapon": "td_gdi_mammothtankmkiii_mammothtank3missilesamt"
      }
     ],
     "shield_always_on": false,
@@ -2959,7 +2959,7 @@
       "reliability": 0.0737,
       "sigma": 1196.8,
       "slot": "Armament@PRIMARY",
-      "weapon": "227mm"
+      "weapon": "td_gdi_mlrs_227mm"
      },
      {
       "avg_versus": 1.0394,
@@ -2982,7 +2982,7 @@
       "reliability": 0.0929,
       "sigma": 1048.0,
       "slot": "Armament@AdvancedMissileTargeting",
-      "weapon": "227mmAMT"
+      "weapon": "td_gdi_mlrs_227mmamt"
      }
     ],
     "shield_always_on": false,
@@ -3021,7 +3021,7 @@
       "reliability": 0.8313,
       "sigma": 200.0,
       "slot": "Armament@PRIMARY",
-      "weapon": "GDIPredatorTankCannon"
+      "weapon": "td_gdi_predatortank_gdipredatortankcannon"
      },
      {
       "avg_versus": 1.0897,
@@ -3044,7 +3044,7 @@
       "reliability": 0.9183,
       "sigma": 100.0,
       "slot": "Armament@Upgrade",
-      "weapon": "GDIPredatorTankCannonHV"
+      "weapon": "td_gdi_predatortank_gdipredatortankcannonhv"
      },
      {
       "avg_versus": 1.0167,
@@ -3067,7 +3067,7 @@
       "reliability": 0.0348,
       "sigma": 335.2,
       "slot": "Armament@SECONDARY",
-      "weapon": "GDIPredatorTankMissiles"
+      "weapon": "td_gdi_predatortank_gdipredatortankmissiles"
      },
      {
       "avg_versus": 1.0167,
@@ -3090,7 +3090,7 @@
       "reliability": 0.0613,
       "sigma": 247.0,
       "slot": "Armament@AdvancedMissileTargeting",
-      "weapon": "GDIPredatorTankMissilesAMT"
+      "weapon": "td_gdi_predatortank_gdipredatortankmissilesamt"
      },
      {
       "avg_versus": 1.1298,
@@ -3113,7 +3113,7 @@
       "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament@MachineGun",
-      "weapon": "GDIPredatorMachineGun"
+      "weapon": "td_gdi_predatortank_gdipredatormachinegun"
      }
     ],
     "shield_always_on": false,

@@ -1,4 +1,4 @@
-CryoLightSniper:
+ra1_allies_alliedsniper_cryolightsniper:
 	Inherits@wh: ^Warhead_BulletCryo_Light
 	Inherits@proj: ^Projectile_Sniper_Light
 	Inherits@fx: ^Effect_Cryo
@@ -629,12 +629,12 @@ ra1_allies_chronotank_missile_cryo:
 		Amount: -30000
 		Range: 600
 
-155mmBastion:
+ra1_allies_bastionartillerybunker_155mmbastion:
 	Inherits: 155mm
 	Range: 10185
 	MinRange: 2035
 
-155mmBastionCryo:
+ra1_allies_bastionartillerybunker_155mmbastioncryo:
 	Inherits: 155mmCryo
 	Range: 10185
 	MinRange: 2035
@@ -872,3 +872,36 @@ RadarJammer:
 		ForceGround: false
 		ValidTargets: Ground, Water
 		ImpactActors: false
+
+ra1_allies_alliedrocketsoldier_rocketsra:
+	Inherits: RocketsRA
+
+ra1_allies_cargoplanebomber_parabomb:
+	Inherits: ParaBomb
+
+ra1_allies_gunboat_depthcharge:
+	Inherits: DepthCharge
+
+ra1_allies_gunboat_depthchargecryo:
+	Inherits: DepthChargeCryo
+
+ra1_allies_destroyer_depthcharge:
+	Inherits: DepthCharge
+
+ra1_allies_destroyer_depthchargecryo:
+	Inherits: DepthChargeCryo
+
+ra1_allies_cruiser_8inch:
+	Inherits: 8Inch
+
+ra1_allies_alliedsniper_lightsniper:
+	Inherits: LightSniper
+
+ra1_allies_alliedlighttank_25mm:
+	Inherits: 25mm
+
+ra1_allies_alliedartillery_155mm:
+	Inherits: 155mm
+
+ra1_allies_alliedartillery_155mmcryo:
+	Inherits: 155mmCryo

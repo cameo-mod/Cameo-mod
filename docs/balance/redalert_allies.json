@@ -1423,7 +1423,7 @@
       "warheads": [
        "^Warhead_Concussion_Heavy"
       ],
-      "weapon": "155mmBastion",
+      "weapon": "ra1_allies_bastionartillerybunker_155mmbastion",
       "weapon_class_source": "template"
      },
      {
@@ -1472,7 +1472,7 @@
       "warheads": [
        "^Warhead_Concussion_Heavy"
       ],
-      "weapon": "155mmBastionCryo",
+      "weapon": "ra1_allies_bastionartillerybunker_155mmbastioncryo",
       "weapon_class_source": "template"
      }
     ],
@@ -1785,7 +1785,7 @@
         "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9153",
@@ -1793,14 +1793,12 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Sniper_Light",
-       "^Projectile_Sniper_Light",
-       "^Effect_Sniper_Light"
+       "LightSniper"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
       ],
-      "weapon": "LightSniper",
+      "weapon": "ra1_allies_alliedsniper_lightsniper",
       "weapon_class_source": "template"
      },
      {
@@ -1821,7 +1819,7 @@
         "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
       "range": "9153",
@@ -1829,14 +1827,12 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_Sniper_Light",
-       "^Projectile_Sniper_Light",
-       "^Effect_Sniper_Light"
+       "LightSniper"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
       ],
-      "weapon": "LightSniper",
+      "weapon": "ra1_allies_alliedsniper_lightsniper",
       "weapon_class_source": "template"
      },
      {
@@ -1864,7 +1860,7 @@
       "warheads": [
        "^Warhead_BulletCryo_Light"
       ],
-      "weapon": "CryoLightSniper",
+      "weapon": "ra1_allies_alliedsniper_cryolightsniper",
       "weapon_class_source": "template"
      },
      {
@@ -1893,7 +1889,7 @@
       "warheads": [
        "^Warhead_BulletCryo_Light"
       ],
-      "weapon": "CryoLightSniper",
+      "weapon": "ra1_allies_alliedsniper_cryolightsniper",
       "weapon_class_source": "template"
      }
     ],
@@ -3378,7 +3374,7 @@
         "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "2670",
       "pricing": true,
@@ -3387,15 +3383,12 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Concussion_Heavy",
-       "^HeavyCannon",
-       "^ShrapnelWeapon",
-       "^Grenade"
+       "155mm"
       ],
       "warheads": [
        "^Warhead_Concussion_Heavy"
       ],
-      "weapon": "155mm",
+      "weapon": "ra1_allies_alliedartillery_155mm",
       "weapon_class_source": "template"
      },
      {
@@ -3438,13 +3431,12 @@
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "155mm",
-       "^CryoMissileProjectile"
+       "155mmCryo"
       ],
       "warheads": [
        "^Warhead_Concussion_Heavy"
       ],
-      "weapon": "155mmCryo",
+      "weapon": "ra1_allies_alliedartillery_155mmcryo",
       "weapon_class_source": "template"
      }
     ],
@@ -3757,20 +3749,12 @@
       "reloaddelay": "37",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_CannonHE_MediumFlat",
-       "^Warhead_CannonHE_Medium",
-       "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^LightFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^TankDestroyerCannon"
+       "25mm"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
       ],
-      "weapon": "25mm",
+      "weapon": "ra1_allies_alliedlighttank_25mm",
       "weapon_class_source": "template"
      }
     ],

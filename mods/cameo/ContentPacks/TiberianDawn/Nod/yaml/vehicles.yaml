@@ -32,12 +32,12 @@ td_nod_specterartillery:
 	ChangesHealth@SelfHealing:
 		Step: 9
 	Armament:
-		Weapon: SpecterArtilleryShell
+		Weapon: td_nod_specterartillery_specterartilleryshell
 		LocalOffset: 500,0,500
 		MuzzleSequence: muzzle
 		RequiresCondition: !td_nod_upgrade_blackmarketupgrades
 	Armament@Upgrade:
-		Weapon: SpecterArtilleryShellUpgrade
+		Weapon: td_nod_specterartillery_specterartilleryshellupgrade
 		LocalOffset: 500,0,500
 		MuzzleSequence: muzzle
 		RequiresCondition: td_nod_upgrade_blackmarketupgrades
@@ -45,10 +45,10 @@ td_nod_specterartillery:
 	AutoTarget:
 		InitialStanceAI: Defend
 	FireWarheadsOnDeath:
-		Weapon: SpecterArtilleryShell
+		Weapon: td_nod_specterartillery_specterartilleryshell
 		RequiresCondition: !td_nod_upgrade_blackmarketupgrades
 	FireWarheadsOnDeath@Upgrade:
-		Weapon: SpecterArtilleryShellUpgrade
+		Weapon: td_nod_specterartillery_specterartilleryshellupgrade
 		RequiresCondition: td_nod_upgrade_blackmarketupgrades
 	GrantCondition@gatling:
 		Condition: cloak-force-disabled
@@ -134,12 +134,12 @@ td_nod_artillery:
 	ChangesHealth@SelfHealing:
 		Step: 7
 	Armament:
-		Weapon: ArtilleryShell
+		Weapon: td_nod_artillery_artilleryshell
 		LocalOffset: 624,0,208
 		MuzzleSequence: muzzle
 		RequiresCondition: !td_nod_upgrade_blackmarketupgrades
 	Armament@Upgrade:
-		Weapon: ArtilleryShellUpgrade
+		Weapon: td_nod_artillery_artilleryshellupgrade
 		LocalOffset: 624,0,208
 		MuzzleSequence: muzzle
 		RequiresCondition: td_nod_upgrade_blackmarketupgrades
@@ -151,10 +151,10 @@ td_nod_artillery:
 	#	OwnerType: InternalName
 	#	EffectiveOwnerFromOwner: true
 	FireWarheadsOnDeath:
-		Weapon: ArtilleryShell
+		Weapon: td_nod_artillery_artilleryshell
 		RequiresCondition: !td_nod_upgrade_blackmarketupgrades
 	FireWarheadsOnDeath@Upgrade:
-		Weapon: ArtilleryShellUpgrade
+		Weapon: td_nod_artillery_artilleryshellupgrade
 		RequiresCondition: td_nod_upgrade_blackmarketupgrades
 	ActorStatValues:
 		Upgrades: td_nod_upgrade_improvedartilleries, td_nod_upgrade_blackmarketupgrades
@@ -192,7 +192,7 @@ td_nod_flametank:
 	ChangesHealth@SelfHealing:
 		Step: 40
 	Armament:
-		Weapon: BigFlamer
+		Weapon: td_nod_flametank_bigflamer
 		LocalOffset: 512,128,42, 512,-128,42
 		MuzzleSequence: muzzle
 	AttackFrontal:
@@ -236,11 +236,11 @@ td_nod_buggy:
 		TurnSpeed: 40
 		Offset: -43,0,128
 	Armament:
-		Weapon: MachineGun
+		Weapon: td_nod_buggy_machinegun
 		LocalOffset: 171,0,43
 		MuzzleSequence: muzzle
 	Armament@Upgrade:
-		Weapon: FireballLauncherBuggy
+		Weapon: td_nod_buggy_fireballlauncherbuggy
 		LocalOffset: 175,0,50
 		MuzzleSequence: muzzle
 		RequiresCondition: td_nod_upgrade_blackmarketupgrades
@@ -341,13 +341,13 @@ td_nod_lighttank:
 	Turreted:
 		TurnSpeed: 22
 	Armament:
-		Weapon: 70mm
+		Weapon: td_nod_lighttank_70mm
 		Recoil: 43
 		RecoilRecovery: 15
 		LocalOffset: 720,0,90
 		MuzzleSequence: muzzle
 	Armament@Missile:
-		Weapon: LTNKMissiles
+		Weapon: td_nod_lighttank_ltnkmissiles
 		Recoil: 32
 		RecoilRecovery: 32
 		LocalOffset: 250,125,125
@@ -403,7 +403,7 @@ td_nod_ssmlauncher:
 		Offset: -128,0,128
 		RealignDelay: 0
 	Armament:
-		Weapon: HonestJohn
+		Weapon: td_nod_ssmlauncher_honestjohn
 		LocalOffset: 0,171,0, 0,-171,0
 		MuzzleSequence: muzzle
 	AmmoPool:
@@ -425,7 +425,7 @@ td_nod_ssmlauncher:
 	RenderSprites:
 		Image: td_gdi_mlrs
 	FireWarheadsOnDeath:
-		Weapon: HonestJohn
+		Weapon: td_nod_ssmlauncher_honestjohn
 		EmptyWeapon: ArtilleryShell
 	RenderRangeCircle:
 		RangeCircleType: vehicle
@@ -477,12 +477,12 @@ td_nod_stealthtank:
 		CloakSound: trans1.aud
 		UncloakSound: trans1.aud
 	Armament:
-		Weapon: StealthTankMissiles
+		Weapon: td_nod_stealthtank_stealthtankmissiles
 		LocalOffset: 213,43,128, 213,-43,128
 		MuzzleSequence: muzzle
 		RequiresCondition: !td_nod_upgrade_blackmarketupgrades
 	Armament@Upgrade:
-		Weapon: StealthTankMissilesBlackMarket
+		Weapon: td_nod_stealthtank_stealthtankmissilesblackmarket
 		LocalOffset: 213,43,128, 213,-43,128
 		MuzzleSequence: muzzle
 		RequiresCondition: td_nod_upgrade_blackmarketupgrades
@@ -556,7 +556,7 @@ td_nod_chemicalattackbike:
 	ChangesHealth@SelfHealing:
 		Step: 9
 	Armament:
-		Weapon: ChemicalBikeRockets
+		Weapon: td_nod_chemicalattackbike_chemicalbikerockets
 		LocalOffset: -125, -175, 175, -125, 175, 175
 		LocalYaw: 100, -100
 		MuzzleSequence: muzzle
@@ -582,7 +582,7 @@ td_nod_chemicalattackbike:
 	Voiced:
 		VoiceSet: TSVehicle
 	FireWarheadsOnDeath:
-		Weapon: ChemicalBikeRocketsExplosion
+		Weapon: td_nod_chemicalattackbike_chemicalbikerocketsexplosion
 	ActorStatValues:
 		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_elementalwarfare, td_nod_upgrade_blackmarketupgrades
 
@@ -622,14 +622,14 @@ td_nod_chemicalstealthtank:
 		Queue: Vehicle, RAVehicle
 		Description: actor_stnk.description
 	Armament:
-		Weapon: ChemicalStealthTankMissiles
+		Weapon: td_nod_chemicalstealthtank_chemicalstealthtankmissiles
 		LocalOffset: -128,0,256
 		MuzzleSequence: muzzle
 	RenderSprites:
 		Image: td_nod_chemicalstealthtank
 	WithMuzzleOverlay:
 	FireWarheadsOnDeath:
-		Weapon: ChemicalStealthTankExplosion
+		Weapon: td_nod_chemicalstealthtank_chemicalstealthtankexplosion
 	AttackTurreted:
 	Turreted:
 		TurnSpeed: 24
@@ -677,7 +677,7 @@ td_nod_chemicalssmlauncher:
 		Speed: 75
 		TurnSpeed: 30
 	Armament:
-		Weapon: ChemicalHonestJohn
+		Weapon: td_nod_chemicalssmlauncher_chemicalhonestjohn
 		LocalOffset: -128,0,128
 		ReloadingCondition: reloading
 		MuzzleSequence: muzzle
@@ -695,7 +695,7 @@ td_nod_chemicalssmlauncher:
 	RenderSprites:
 		Image: td_nod_chemicalssmlauncher
 	FireWarheadsOnDeath:
-		Weapon: BigTiberiumExplosion
+		Weapon: td_nod_chemicalssmlauncher_bigtiberiumexplosion
 		EmptyWeapon: TiberiumExplosion
 	ActorStatValues:
 		Upgrades: td_nod_upgrade_elementalwarfare, td_nod_upgrade_improvedartilleries
@@ -736,61 +736,61 @@ td_nod_buggymkii:
 	Turreted:
 		TurnSpeed: 24
 	Armament:
-		Weapon: MachineGunBuggy2
+		Weapon: td_nod_buggymkii_machinegunbuggy2
 		LocalOffset: 171,0,43
 		MuzzleSequence: muzzle
 		AmmoUsage: 0
 		PauseOnCondition: ammo < 3
 	Armament@AA:
-		Weapon: MachineGunBuggy2_AA
+		Weapon: td_nod_buggymkii_machinegunbuggy2_AA
 		LocalOffset: 171,0,43
 		MuzzleSequence: muzzle
 		AmmoUsage: 0
 		PauseOnCondition: ammo < 3
 	Armament@LaserBase:
-		Weapon: LaserBuggy2
+		Weapon: td_nod_buggymkii_laserbuggy2
 		LocalOffset: 171,0,43
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 3
 		RequiresCondition: td_nod_upgrade_blackmarketupgrades && !td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers
 	Armament@LaserElite:
-		Weapon: LaserBuggy2Inferno
+		Weapon: td_nod_buggymkii_laserbuggy2inferno
 		LocalOffset: 171,0,43
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 3
 		RequiresCondition: td_nod_upgrade_blackmarketupgrades && td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers
 	Armament@LaserBurning:
-		Weapon: LaserBuggy2Burning
+		Weapon: td_nod_buggymkii_laserbuggy2burning
 		LocalOffset: 171,0,43
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 3
 		RequiresCondition: td_nod_upgrade_blackmarketupgrades && td_nod_upgrade_burninglasers
 	Armament@LaserAABase:
-		Weapon: LaserBuggy2_AA
+		Weapon: td_nod_buggymkii_laserbuggy2_AA
 		LocalOffset: 171,0,43
 		MuzzleSequence: muzzle
 		AmmoUsage: 0
 		PauseOnCondition: ammo < 3
 		RequiresCondition: td_nod_upgrade_blackmarketupgrades && !td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers
 	Armament@LaserAAElite:
-		Weapon: LaserBuggy2_AAInferno
+		Weapon: td_nod_buggymkii_laserbuggy2_AAinferno
 		LocalOffset: 171,0,43
 		MuzzleSequence: muzzle
 		AmmoUsage: 0
 		PauseOnCondition: ammo < 3
 		RequiresCondition: td_nod_upgrade_blackmarketupgrades && td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers
 	Armament@LaserAABurning:
-		Weapon: LaserBuggy2_AABurning
+		Weapon: td_nod_buggymkii_laserbuggy2_AAburning
 		LocalOffset: 171,0,43
 		MuzzleSequence: muzzle
 		AmmoUsage: 0
 		PauseOnCondition: ammo < 3
 		RequiresCondition: td_nod_upgrade_blackmarketupgrades && td_nod_upgrade_burninglasers
 	Armament@Upgrade:
-		Weapon: FireballLauncherBuggy2
+		Weapon: td_nod_buggymkii_fireballlauncherbuggy2
 		LocalOffset: 175,0,50
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
@@ -853,13 +853,13 @@ td_nod_lighttankmkii:
 		TurnSpeed: 20
 	AttackTurreted:
 	Armament:
-		Weapon: LightTank2Cannon
+		Weapon: td_nod_lighttankmkii_lighttank2cannon
 		Recoil: 43
 		RecoilRecovery: 25
 		LocalOffset: 720,0,90
 		MuzzleSequence: muzzle
 	Armament@Missile:
-		Weapon: LightTank2Missiles
+		Weapon: td_nod_lighttankmkii_lighttank2missiles
 		Recoil: 32
 		RecoilRecovery: 32
 		LocalOffset: 250,125,125
@@ -918,7 +918,7 @@ td_nod_flametankmkii:
 	Turreted:
 		TurnSpeed: 15
 	Armament:
-		Weapon: BigFlamer2
+		Weapon: td_nod_flametankmkii_bigflamer2
 		LocalOffset: 600,250,250, 600,-250,250
 		MuzzleSequence: muzzle
 	RenderSprites:
@@ -927,7 +927,7 @@ td_nod_flametankmkii:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
 	FireWarheadsOnDeath:
-		Weapon: FlametankExplode2
+		Weapon: td_nod_flametankmkii_flametankexplode2
 	ActorStatValues:
 		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_elementalwarfare
 
