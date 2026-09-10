@@ -41,7 +41,7 @@ ra1_soviets_ak47conscript_rifle:
 		PercentageScale: 9975
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-CommissarPistol:
+ra1_soviets_commissar_pistol:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light
 	Inherits@fx: ^Effect_Sniper_Light
@@ -4425,7 +4425,7 @@ ParaBombNuke:
 	-Warhead@HeavyFlameWeapon:
 	-Warhead@NuclearWarhead:
 
-CyberneticDogJaw:
+ra1_soviets_cyberdog_bite:
 	ValidTargets: Infantry, Vehicle
 	ReloadDelay: 10
 	Range: 2500
@@ -4437,7 +4437,7 @@ CyberneticDogJaw:
 		ValidTargets: Infantry, Vehicle
 		DamageTypes: RippedApartDeath
 
-Nike:
+ra1_soviets_samsite_missile_AA:
 	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
 	Inherits: ^FlakWeapon
 	Inherits@2: ^HeavyMissile

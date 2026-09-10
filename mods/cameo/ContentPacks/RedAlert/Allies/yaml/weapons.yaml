@@ -202,7 +202,7 @@ AlliedTankDestroyerCannonCryo:
 	Warhead@CannonCryo_Medium:
 		Damage: 24000
 		ValidTargets: Ground, Water
-SheridanCannon:
+ra1_allies_sheridanassaulttank_cannon:
 	Inherits@wh: ^Warhead_CannonAP_Light
 	Inherits@wh2: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
@@ -216,7 +216,7 @@ SheridanCannon:
 		Damage: 8000
 	Warhead@CannonHE_Medium:
 		Damage: 8000
-SheridanCannonCryo:
+ra1_allies_sheridanassaulttank_cannon_cryo:
 	Inherits@wh: ^Warhead_CannonCryo_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_Cryo
@@ -228,7 +228,7 @@ SheridanCannonCryo:
 	Warhead@CannonCryo_Medium:
 		Damage: 16000
 		ValidTargets: Ground, Water
-SheridanMissiles:
+ra1_allies_sheridanassaulttank_missile:
 	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
@@ -242,7 +242,7 @@ SheridanMissiles:
 	Projectile: Missile
 		VerticalRateOfTurn: 20
 
-SheridanMissilesCryo:
+ra1_allies_sheridanassaulttank_missile_cryo:
 	Inherits@wh: ^Warhead_MissileCryo_Medium
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_Cryo
@@ -289,7 +289,7 @@ SheridanVulcanCryo:
 	Warhead@BulletCryo_Medium:
 		Damage: 4000
 		ValidTargets: Ground, Water, Air
-RapierBombs:
+ra1_allies_rapierjumpjet_bomb:
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@fx: ^Effect_Demolition_Heavy
 	ReloadDelay: 60
@@ -306,7 +306,7 @@ RapierBombs:
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 10000
-RapierBombsCryo:
+ra1_allies_rapierjumpjet_bomb_cryo:
 	Inherits@wh: ^Warhead_CryoBlast_Heavy
 	Inherits@fx: ^Effect_Cryo
 	ReloadDelay: 60
@@ -322,7 +322,7 @@ RapierBombsCryo:
 	Warhead@Effect: CreateEffect
 		Explosions: cryo_artillery
 
-Aphid_AA:
+ra1_allies_rapierjumpjet_missile_AA:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@wh2: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -354,7 +354,7 @@ Aphid_AA:
 		Explosions: small_building
 		ImpactSounds: xplobig4.aud
 
-AphidCryo_AA:
+ra1_allies_rapierjumpjet_missile_cryo_AA:
 	Inherits@wh: ^Warhead_CryoBlast_Medium
 	Inherits@wh2: ^Warhead_MissileCryo_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
