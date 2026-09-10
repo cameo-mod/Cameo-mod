@@ -1593,7 +1593,19 @@ KamovTeslaArcFragment2:
 	-Warhead@LightMissile:
 	-Warhead@TeslaWeapon:
 
-YakChainGun:
+^Compatibility_IncendiaryYakComposition:
+	Inherits@roleflat: ^Compatibility_Flame_LightFlat
+	Inherits@flame: ^Warhead_Flame_Light
+	Inherits@bullet: ^Warhead_Bullet_Medium
+	-Warhead@Bullet_Medium:
+	-Warhead@Flame_Light:
+
+^Projectile_Flame_Light_IncendiaryBullet:
+	Inherits: ^Projectile_Flame_Light
+	Inherits@incendiary: ^IncendiaryBulletProjectile
+	-TargetActorCenter:
+
+ra1_soviets_yakscoutplane_chaingun:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
@@ -1607,20 +1619,12 @@ YakChainGun:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-ArmoredYakChainGun:
-	Inherits: YakChainGun
-	ReloadDelay: 148
-	Burst: 10
-	Range: 6460
-	MinRange: 1290
 
-IncendiaryYakChainGun:
-	Inherits@roleflat: ^Compatibility_Flame_LightFlat
-	Inherits@wh: ^Warhead_Flame_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
-	Inherits@proj: ^Projectile_Flame_Light
+ra1_soviets_yakscoutplane_chaingun_incendiary:
+	Inherits@wh: ^Compatibility_IncendiaryYakComposition
+	Inherits@proj: ^Projectile_Flame_Light_IncendiaryBullet
 	Inherits@fx: ^Effect_Flame_Light
-	Inherits@3: ^IncendiaryBulletProjectile
+	TargetActorCenter: true
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 100
 	Range: 7000
@@ -1628,23 +1632,138 @@ IncendiaryYakChainGun:
 	Burst: 8
 	BurstDelays: 3
 	Report: gun13.aud
-	Warhead@Flame_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@Bullet_Medium:
-		Damage: 4000
 	Warhead@Flame_LightFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 9988
-	-Warhead@Bullet_Medium:
-	-Warhead@Flame_Light:
-IncendiaryArmoredYakChainGun:
-	Inherits: IncendiaryYakChainGun
+
+ra1_soviets_teslayak_chaingun:
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 100
+	Range: 7000
+	MinRange: 1400
+	Burst: 8
+	BurstDelays: 3
+	Report: gun13.aud
+	Warhead@Bullet_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+
+ra1_soviets_teslayak_chaingun_incendiary:
+	Inherits@wh: ^Compatibility_IncendiaryYakComposition
+	Inherits@proj: ^Projectile_Flame_Light_IncendiaryBullet
+	Inherits@fx: ^Effect_Flame_Light
+	TargetActorCenter: true
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 100
+	Range: 7000
+	MinRange: 1400
+	Burst: 8
+	BurstDelays: 3
+	Report: gun13.aud
+	Warhead@Flame_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 9988
+
+ra1_soviets_nuclearyak_chaingun:
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 100
+	Range: 7000
+	MinRange: 1400
+	Burst: 8
+	BurstDelays: 3
+	Report: gun13.aud
+	Warhead@Bullet_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+
+ra1_soviets_nuclearyak_chaingun_incendiary:
+	Inherits@wh: ^Compatibility_IncendiaryYakComposition
+	Inherits@proj: ^Projectile_Flame_Light_IncendiaryBullet
+	Inherits@fx: ^Effect_Flame_Light
+	TargetActorCenter: true
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 100
+	Range: 7000
+	MinRange: 1400
+	Burst: 8
+	BurstDelays: 3
+	Report: gun13.aud
+	Warhead@Flame_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 9988
+
+ra1_soviets_su57attackbomber_chaingun:
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 100
+	Range: 7000
+	MinRange: 1400
+	Burst: 8
+	BurstDelays: 3
+	Report: gun13.aud
+	Warhead@Bullet_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+
+ra1_soviets_su57attackbomber_chaingun_incendiary:
+	Inherits@wh: ^Compatibility_IncendiaryYakComposition
+	Inherits@proj: ^Projectile_Flame_Light_IncendiaryBullet
+	Inherits@fx: ^Effect_Flame_Light
+	TargetActorCenter: true
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 100
+	Range: 7000
+	MinRange: 1400
+	Burst: 8
+	BurstDelays: 3
+	Report: gun13.aud
+	Warhead@Flame_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 9988
+
+ra1_soviets_armoredyak_chaingun:
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
+	ValidTargets: Ground, Water, Air
 	ReloadDelay: 148
-	Burst: 10
 	Range: 6460
 	MinRange: 1290
+	Burst: 10
+	BurstDelays: 3
+	Report: gun13.aud
+	Warhead@Bullet_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+
+ra1_soviets_armoredyak_chaingun_incendiary:
+	Inherits@wh: ^Compatibility_IncendiaryYakComposition
+	Inherits@proj: ^Projectile_Flame_Light_IncendiaryBullet
+	Inherits@fx: ^Effect_Flame_Light
+	TargetActorCenter: true
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 148
+	Range: 6460
+	MinRange: 1290
+	Burst: 10
+	BurstDelays: 3
+	Report: gun13.aud
+	Warhead@Flame_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 9988
 
 YakTeslaGun:
 	Inherits@finalmain: ^Compatibility_Tesla_HeavyFlat
@@ -4561,4 +4680,3 @@ KotinCannonNuclearShell:
 		Explosions: nuke_small
 		ImpactSounds: xplosml2.aud
 		ImpactActors: true
-

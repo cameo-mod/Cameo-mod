@@ -99,3 +99,24 @@ The full suite is not green; the remaining baseline failures are not waived.
 This final source cleanup is published in PR341 as `7823fb3e0`.
 PR339 remains `09ffb2108`; PR340 remains `905e9befc`. All three are open drafts.
 This local integration checkpoint is not pushed and does not merge any GitHub PR.
+
+## Yak ownership checkpoint (08:33 Jakarta)
+
+PR340 source/tests now match published `b45546fe165af74a21dec55685ed0cf8cdb47179`.
+PR339 remains `09ffb2108` and PR341 `7823fb3e0`. Five aircraft own ten independent
+guns in place of four shared names. Complete2,900→2,908 weapon comparison preserves
+every retained and renamed concrete payload; only two abstract helpers additionally
+appear. Raw and derived Soviet ledger values remain unchanged after identity and
+direct-ancestry normalization. No extractor/class-policy change is included.
+
+Seven focused regressions pass. Final R7 suite:1,902 tests,12 failures,8 errors,
+64 skips; exact R6/R5 signatures, one stale inventory failure removed versus R4.
+Peak RAM83.72%, no guard stop. All33 ledgers have zero drift. Final targeted
+percentage-runtime, K-linearity, suffix, split, shape and balance-drift audits pass;
+release-drift remains failing with raw D4=347 and unchanged335 threshold.
+
+The07:45 90-second menu boot passed before final payload-preserving factoring,
+not afterward. Independent review cleared the final compatibility-helper naming
+and verified no hidden class change. Five additional informational missing-direct-
+warhead-template entries are disclosed, not excused. The full suite is not green.
+This remains local integration only, not a GitHub merge or master push.

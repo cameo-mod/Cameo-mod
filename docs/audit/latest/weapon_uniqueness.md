@@ -1,9 +1,9 @@
 # Weapon uniqueness (DESIGN.md §10 — faction identity)
 
-damaging armament weapons checked: 1461; W1 same-faction 39, W2 cross-faction 37, W3 carrier-only 95
+damaging armament weapons checked: 1467; W1 same-faction 37, W2 cross-faction 37, W3 carrier-only 95
 
 
-## W1 — same faction, distinct actors, identical weapon (39)
+## W1 — same faction, distinct actors, identical weapon (37)
 
 | weapon | faction(s) | actors |
 |---|---|---|
@@ -19,7 +19,6 @@ damaging armament weapons checked: 1461; W1 same-faction 39, W2 cross-faction 37
 | futuremicrotorpedos | futuretech | futuretech_phalanxwip, futuretech_riptideacv |
 | harkonnenflameturret | harkonnen | harkonnen_flametank, harkonnen_flameturret |
 | hmg | atreides | atreides_apc, atreides_sandbike |
-| incendiaryyakchaingun | ra1_soviets | ra1_soviets_nuclearyak, ra1_soviets_yakscoutplane |
 | jimraynormachinegun | terran | terran_jimraynor, terran_pythean |
 | laboratory_bioball | ordos | ordos_banshee, ordos_laboratorycrawler |
 | light_inf_lmg | atreides, corrino, harkonnen, ixian, ordos | atreides_lightinfantry, corrino_lightinfantry, harkonnen_lightinfantry, ixian_lightinfantry, light_inf, ordos_lightinfantry |
@@ -45,7 +44,6 @@ damaging armament weapons checked: 1461; W1 same-faction 39, W2 cross-faction 37
 | wc2footmanslice | wc2_humans | wc2_humans_footman, wc2_humans_militiapeasant |
 | wc2magefire | wc2_humans | wc2_humans_highelfpriest, wc2_humans_highelfsorceress |
 | wc2paladinexorcism | wc2_humans | wc2_humans_highelfpriest, wc2_humans_highelfsorceress |
-| yakchaingun | ra1_soviets | ra1_soviets_nuclearyak, ra1_soviets_yakscoutplane |
 
 
 ## W2 — identical weapon across factions (37)

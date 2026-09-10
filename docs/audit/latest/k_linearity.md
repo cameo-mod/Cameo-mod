@@ -1,10 +1,10 @@
 # audit_k_linearity — the flat K must not move when Damage moves
 
-Analysed **2063** concrete weapons.
+Analysed **2069** concrete weapons.
 
 ## L0 — every positive offensive runtime percentage application is modeled
 
-_clean_ — modeled 1649 folded and 2441 standalone applications.
+_clean_ — modeled 1655 folded and 2441 standalone applications.
 
 ## L1 — `k_flat` is invariant under a change of flat Damage
 
@@ -59,7 +59,7 @@ _... and 155 more._
 
 ## L4 — folded runtime quantisation residual
 
-561 weapon(s) have a non-zero current folded runtime residual.
+564 weapon(s) have a non-zero current folded runtime residual.
 This residual is included in measured output but excluded from `k_flat` and `dps_floor`; recompute it after snapping a proposed Damage value.
 
 | weapon | context-adjusted residual per shot |

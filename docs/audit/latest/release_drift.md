@@ -1,14 +1,14 @@
 # audit_release_drift - measured against the build players played
 
 
-baseline: **playtest-20260709** (`8c238ffc3`), 1912 weapons · 1569 shared with the tree · **1391 unchanged**
+baseline: **playtest-20260709** (`8c238ffc3`), 1912 weapons · 1565 shared with the tree · **1387 unchanged**
 
 | code | check | count | ratchet |  |
 |---|---|---|---|---|
 | D1 | INFLATED - deals more than it shipped | 119 | 133 | PASS |
 | D2 | WEAKENED - deals less than it shipped | 59 | 62 | PASS |
 | D3 | EXTREME - 3x or worse, either way | 19 | 27 | PASS |
-| D4 | UNMATCHED - in the release, gone under that name | 343 | 335 | FAIL |
+| D4 | UNMATCHED - in the release, gone under that name | 347 | 335 | FAIL |
 | D5 | ACCEPTED value edit (informational) | 35 | 43 | PASS |
 
 

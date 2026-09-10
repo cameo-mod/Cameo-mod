@@ -125,6 +125,25 @@ PRESERVED_HASHES = {
 }
 
 
+# Identity-only ownership split, 2026-09-10. Reuse the original guarded hashes;
+# the current roots are independent compositions, not descendants of another actor.
+YAK_OWNED_SOURCES = {
+    'ra1_soviets_yakscoutplane_chaingun_incendiary': 'IncendiaryYakChainGun',
+    'ra1_soviets_teslayak_chaingun_incendiary': 'IncendiaryYakChainGun',
+    'ra1_soviets_nuclearyak_chaingun_incendiary': 'IncendiaryYakChainGun',
+    'ra1_soviets_su57attackbomber_chaingun_incendiary': 'IncendiaryYakChainGun',
+    'ra1_soviets_armoredyak_chaingun_incendiary': 'IncendiaryArmoredYakChainGun',
+}
+for _owned, _original in YAK_OWNED_SOURCES.items():
+    ROOTS[_owned] = ('Flame_Light', set(), 8000, 9988)
+    BASELINE_MAINS[_owned] = BASELINE_MAINS[_original].copy()
+    PRESERVED_HASHES[_owned] = PRESERVED_HASHES[_original]
+for _original in set(YAK_OWNED_SOURCES.values()):
+    ROOTS.pop(_original, None)
+    BASELINE_MAINS.pop(_original)
+    PRESERVED_HASHES.pop(_original)
+
+
 def descendants(rs: Ruleset, root: str) -> set[str]:
     direct: dict[str, set[str]] = collections.defaultdict(set)
     for name, node in rs.weapons.items():
@@ -153,8 +172,8 @@ def selections(rs: Ruleset) -> dict[str, tuple[str, int, int]]:
             member_total = 4000 if name == "TSLaserHarpyMultiClaw" else total
             member_scale = 9975 if name == "TSLaserHarpyMultiClaw" else scale
             selected[name] = (destination, member_total, member_scale)
-    if len(selected) != 24:
-        raise RuntimeError(f"expected 24 closure members, found {len(selected)}")
+    if len(selected) != 27:
+        raise RuntimeError(f"expected 27 current closure members, found {len(selected)}")
     return selected
 
 
@@ -320,9 +339,9 @@ def main() -> int:
         return 0
     already = inspect(rs)
     if already:
-        print("Already consolidated 24 closure members (23 former multi-main definitions)")
+        print(f"Already consolidated {len(selections(rs))} current closure members (ownership splits included)")
         return 0
-    print("18 roots; 24 closure members; 23 multi-main conversions")
+    print(f"{len(ROOTS)} roots; {len(selections(rs))} current closure members (ownership splits included)")
     if not args.apply:
         print("Dry run: closures, routes, totals, rounding, overflow, and hashes pass")
         return 0
