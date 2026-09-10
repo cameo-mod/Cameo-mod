@@ -5,6 +5,7 @@ import pathlib
 import sys
 import unittest
 from owned_weapon_history import historical_weapon_names
+from unittest.mock import patch
 
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -19,6 +20,7 @@ from audit_three_way_split import RAW_SPLIT_BASELINE, main_warheads
 from audit_warhead_split import BROADCAST_BASELINE
 from miniyaml import Ruleset
 from safe_rename import load_map
+from reviewed_weapon_history import LaterProfileView
 
 
 ACCEPTED = {
@@ -40,8 +42,14 @@ class DeliveryIdentityProfileConsolidationTests(unittest.TestCase):
                 cls.by_kind[change[0]][weapon] = change[1:]
 
     def test_converters_are_fully_applied(self):
-        machineguns.validate_result()
-        delivery.validate_result()
+        # The later HMG laser role must keep the production converter closed.
+        with self.assertRaisesRegex(RuntimeError, 'HMGstealth_upgrade: expected both bullet profiles'):
+            machineguns.validate_result()
+        view = LaterProfileView(self, self.rules)
+        with patch.object(machineguns, 'Ruleset', return_value=view):
+            machineguns.validate_result()
+        with patch.object(delivery, 'Ruleset', return_value=view):
+            delivery.validate_result()
 
     def test_report_covers_exactly_the_selected_definitions(self):
         selected = set(machineguns.selections(self.rules)) | set(delivery.selections(self.rules))
@@ -94,13 +102,13 @@ class DeliveryIdentityProfileConsolidationTests(unittest.TestCase):
 
     def test_selected_old_profile_pairs_are_absent(self):
         for weapon, destination in machineguns.selections(self.rules).items():
-            mains = set(main_warheads(self.rules.resolve_weapon(weapon)))
+            mains = set(main_warheads(LaterProfileView(self, self.rules).resolve_weapon(weapon)))
             self.assertTrue(mains.isdisjoint(machineguns.PAIR), weapon)
             expected = machineguns.FINALIZED_DOWNSTREAM.get(
                 weapon, (f"{destination}FlatCompatibility", 0, 0))[0]
             self.assertIn(expected, mains, weapon)
         for weapon, (destination, pair, _root) in delivery.selections(self.rules).items():
-            mains = set(main_warheads(self.rules.resolve_weapon(weapon)))
+            mains = set(main_warheads(LaterProfileView(self, self.rules).resolve_weapon(weapon)))
             self.assertTrue(mains.isdisjoint(pair), weapon)
             self.assertIn(f"{destination}FlatCompatibility", mains, weapon)
 

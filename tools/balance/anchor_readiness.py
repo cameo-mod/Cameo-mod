@@ -256,6 +256,30 @@ def anchor_spread(anchors):
     return sorted(pairs)
 
 
+def anchor_membership_evidence(anchors, units):
+    """Report membership as a prerequisite, never infer sign-off from a proposed role."""
+    rows = []
+    for cls, entry in sorted(anchors.items()):
+        if cls.startswith('_') or not isinstance(entry, dict):
+            continue
+        actor = entry.get('anchor_actor')
+        record = units.get(actor)
+        actual = class_membership.classify((record or {}).get('design') or {})[0]
+        members = sum(class_membership.classify(u.get('design') or {})[0] == cls for u in units.values())
+        pending = entry.get('membership_pending') or {}
+        declared_pending = (record is not None and actual != cls and
+                            actual == pending.get('current_class') and
+                            class_membership.subtype_to_anchor(pending.get('required_subtype')) == cls and
+                            bool(pending.get('reason')) and not entry.get('signed_off'))
+        status = ('missing' if record is None else 'member' if actual == cls else
+                  'pending' if declared_pending else 'mismatch')
+        rows.append({'class': cls, 'anchor_actor': actor, 'actual_class': actual,
+                     'status': status, 'membership_ready': status == 'member',
+                     'current_members': members,
+                     'pending_reason': pending.get('reason') if declared_pending else None})
+    return rows
+
+
 def anchor_actor_vs_spec(anchors, units):
     """Does each class's ANCHOR ACTOR actually carry the stats its spec rules for it?
 
@@ -793,6 +817,11 @@ def main():
         return 0
 
     print("## Anchor integrity — class membership and diagnostic HP percentiles\n")
+    membership_evidence = anchor_membership_evidence(anchors, {n: r for _f, _s, n, r in units})
+    for row in membership_evidence:
+        if row['status'] == 'pending':
+            print(f"Pending membership, NOT ready: `{row['class']}` / `{row['anchor_actor']}` "
+                  f"is currently `{row['actual_class']}`. {row['pending_reason']}\n")
     print(f"anchors tagged into the class they anchor : "
           f"**{len(classes) - len(untagged_anchor)} of {len(classes)}**\n")
     if empty:
@@ -969,6 +998,7 @@ def main():
 
     if args.json:
         text = json.dumps({"rows": rows,
+                        "anchor_membership": membership_evidence,
                         "coverage": dict(coverage),
                         "split_gate_error": gate_err,
                         "stored_fit": fit_evidence,

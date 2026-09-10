@@ -1,5 +1,20 @@
 # Base OpenRA structured evidence migration
 
+## Reopened technical follow-up result
+
+The combined affected run covered55 modules/612 tests:4 failures,5 errors,
+zero skips,57.68% peak RAM. Six failure/error signatures came from three exact
+ownership intersections in historical test helpers. After those fixes, all25
+tests in the four affected modules pass. The three genuine Sonic paid-upgrade
+damage failures remain; no synthetic green full-suite result is claimed.
+
+All17 stale historical/readiness/exclusion failure identities are addressed.
+Combined33 ledgers have zero drift, all22 registry claims match the completed
+measurements after prose co-update, and doc-health passes. Raw missile/release
+gates remain unchanged and failing. Independent scoped review found no remaining
+implementation issue. This technical follow-up changes no live YAML or prices.
+Earlier full-suite receipts below remain historical. Keep drafts; HOLD merges.
+
 ## Final integration receipt — 10 September 2026
 
 This receipt supersedes source-stage pending notes below; the source-specific
@@ -238,7 +253,7 @@ changes matching rules or stored assignments. The post-regeneration assignment/
 target/holdout group passes 53 tests; the focused missing-score/outside-class
 override regression passes after both report-only fixes.
 
-The affected source documentation audits were then run against the regenerated
+At the earlier publication checkpoint, the affected source documentation audits were run against the regenerated
 diagnostics. `audit_doc_health.py` exits 0: 293 documents, zero findings in D1–D8.
 `audit_doc_claims.py` exits 1: 22 claims and five mismatches, with exactly the same
 IDs and measured values as the previously tracked source audit:
@@ -302,3 +317,51 @@ The final status is completed raw collection and validated, bounded endpoint
 engineering, with whole-unit certification and the listed source/role decisions
 still pending. The report does not certify arbitrary historical states, all
 upgrades, retail applicability, naval assignments or a joint stat/price fit.
+
+## Reopened technical corrections — source339 after `8b4f9d465`
+
+The anchor-membership failure represented an unlanded role, not a reason to change
+live gameplay. GDI APC still inherits SupportVehicle and belongs to `support`;
+the ruled `armed_troop_transport` class has no members. Its anchor entry now records
+that pending membership explicitly, without changing any anchor spec or price.
+Readiness exports actual/declared class, member count, pending/mismatch/missing
+status and `membership_ready`. The pending APC remains false. Tests check that
+exact declaration, zero current transport members, no sign-off, and failure to
+clear any undeclared mismatch or missing actor. Other anchors still must match.
+
+The T17 test wrongly required today's ChemRockets to retain an old three-main
+weapon structure. A synthetic three-part example now checks the exact numerator
+and denominator exclusions, while a separate live assertion pins the approved
+single 36000 Chemical main. This investigation exposed a real denominator bug:
+`DamagesConcrete: 100` was being counted as target HP damage, and percentage
+exclusion depended on the arbitrary instance tag instead of runtime type.
+
+Both `weapon_bindings` and `damage_split` now share the same flat-health predicate:
+positive AreaDamage, SpreadDamage or TargetDamage, excluding ally-only twins.
+Concrete-slab, integrity, open-topped, percentage and unknown damage types cannot
+be summed into this denominator. Tests include renamed percentage types,
+misleading flat-warhead names and nonhealth types. ChemRockets' nominal health
+split is consequently 36000/36000, rather than 36100/36000. No live YAML, engine,
+actor HP, cost or selected reference assignment was changed by these corrections.
+
+A same-source before/after comparison finds 1301 fired weapons with changed
+nominal flat totals. The binding inventory remains 643 rows; 282→301 qualify for
+the full-effect diagnostic and partial-fed nominal debt changes 425→290. This is
+a tooling measurement correction, not 135 newly converted weapons or gameplay
+proof. Source claim snapshots and every listed claim document are co-updated;
+historical numbers remain explicitly historical. No audit tolerance was raised.
+The exact source values are 122 directly fired stacked-main weapons, 301 qualifying
+bindings, 290 partial-fed weapons, 531 physical-state fired weapons, and 1592
+legacy direct inheritors. Other source/integration combinations must remeasure.
+
+The grouped anchor-readiness, physical-state and anchor-merge validation passes
+47 tests. Full source ledger regeneration and its check pass for all 33 ledgers,
+covering `extract_stats`' consumption of `actor_multipliers`. No raw faction ledger
+or global `_model.json` content changes. Twenty-seven derived sidecars change:
+207 physical-state multipliers, 208 weights and ten selected diagnostic weapon IDs.
+The largest multiplier movement is `cobra.steel`, 1.2601→1.3705; this changes the
+tool's estimate, not the unit's current price. Whole-unit reference certification and the existing source/scenario
+holds are not cleared by these tooling and documentation repairs.
+The final affected source audits both pass: doc-claims exits 0 with all 22 claims
+matching, and doc-health exits 0 with zero structural findings. These replace the
+earlier five-mismatch source checkpoint above; no full audit suite was rerun.

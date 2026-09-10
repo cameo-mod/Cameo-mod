@@ -1,5 +1,7 @@
 # The layered defence stack — shields, Integrity, plating, and how damage lands
 
+> **Numeric evidence refresh — 2026-09-10, combined `839cdced4` plus reopened tooling.** `meters_filling_before_death` = **310**; `physical_state_fired_weapons` = **542**. Measured on this combined tree; predicates and tolerances are unchanged. The flat-health denominator correction changes diagnostics, not live weapons or prices. Earlier branch-specific snapshots remain historical.
+
 **One document for the whole defence stack.** It replaces five separate analyses that each
 covered one slice and repeated the others' premises. `BALANCE_PROGRAM_PLAN.md` had already
 cited a `docs/design/ARMOR_LAYERS.md` that never existed; this is it.

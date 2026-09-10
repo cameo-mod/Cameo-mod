@@ -1,5 +1,6 @@
 # Cameo — THE HANDOFF
 
+
 ## 2026-09-10 — source PR340 warhead-family reach measurement
 
 `warhead_family_reach` measures **1,454 distinct fired weapon identities** whose
@@ -9,6 +10,9 @@ count with the same predicate and zero tolerance. Ownership wrappers can expose
 more distinct fired identities for existing family payloads: this increase does
 not establish newly converted weapons or additional gameplay balance work.
 Earlier dated snapshots below remain historical, and the only-UP rule remains.
+
+> **Numeric evidence refresh — 2026-09-10, combined `839cdced4` plus reopened tooling.** `multi_main_fired_weapons` = **120**; `unconverted_template_inheritors` = **1590**. Measured on this combined tree; predicates and tolerances are unchanged. The flat-health denominator correction changes diagnostics, not live weapons or prices. Earlier branch-specific snapshots remain historical.
+
 
 ## ⛔⛔ 2026-09-07 — READ THIS FIRST: the reference map, and one absolute rule
 
@@ -632,9 +636,9 @@ are still scheduled to change across most of the roster. Pricing now means prici
 are about to be replaced.
 
 ```
-W24  one damage warhead per weapon          184 directly fired weapons still carry 2+
- └─> W23  retrofit the legacy templates      1596 direct inheritors
- │        (2026-09-07 raw counts; 234 direct + indirect reachable stacks)
+W24  one damage warhead per weapon          122 directly fired weapons still carry 2+
+ └─> W23  retrofit the legacy templates      1592 direct inheritors
+ │        (source339 2026-09-10 raw counts; 234 was the historical 2026-09-07 reachable count)
  │        (its old "33-collision" blocker
  │         is DISSOLVED — W24 removes it)
  └─> A5   retire the remaining inline-Versus weapons onto templates

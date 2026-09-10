@@ -1,5 +1,20 @@
 # RA1 / Tiberian Dawn combat-weapon ownership closure
 
+## Reopened technical follow-up result
+
+The combined affected run covered55 modules/612 tests:4 failures,5 errors,
+zero skips,57.68% peak RAM. Six failure/error signatures came from three exact
+ownership intersections in historical test helpers. After those fixes, all25
+tests in the four affected modules pass. The three genuine Sonic paid-upgrade
+damage failures remain; no synthetic green full-suite result is claimed.
+
+All17 stale historical/readiness/exclusion failure identities are addressed.
+Combined33 ledgers have zero drift, all22 registry claims match the completed
+measurements after prose co-update, and doc-health passes. Raw missile/release
+gates remain unchanged and failing. Independent scoped review found no remaining
+implementation issue. This technical follow-up changes no live YAML or prices.
+Earlier full-suite receipts below remain historical. Keep drafts; HOLD merges.
+
 ## Final integration receipt — 10 September 2026
 
 This receipt supersedes source-stage pending notes below; the source-specific
@@ -236,3 +251,22 @@ The full source-versus-combined Soviet vehicle file differs only at that Tooltip
 name. No hashes or runtime values changed. Source rerun: both modules, six tests
 passed; peak RAM 49.79%; evidence ownership-continuation-katyusha.log. Combined
 modern-branch validation remains the integration coordinator's affected rerun.
+
+## Reopened technical follow-up — rename visibility
+
+The supplemental release view follows194 pinned reviewed renames and recovers156
+historical identities. It compares their current values with their original released
+identities and exposes differences rather than waiving them. Missing mappings,
+conflicts and changed provenance fail visibly. The original raw counts and exit
+gates are unchanged.
+
+The missile report now also groups exact reviewed owner wrappers whose current
+ordered payload equals their retained parent. All concrete members stay printed
+and counted in the raw gate. The five wrappers account for the new raw R3/R4
+count increase; equivalence does not establish that their inherited roles are correct.
+Changing the gating policy or gameplay families remains unresolved.
+
+Nine focused lineage/equivalence tests passed, including mutation, event order,
+provenance and raw-failure-preservation checks. Both source audits were regenerated
+and retain exit1. No runtime YAML, damage values, accepted-value pins or thresholds
+changed in this technical follow-up.

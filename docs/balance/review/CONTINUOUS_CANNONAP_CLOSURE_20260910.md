@@ -1,5 +1,20 @@
 # Continuous CannonAP follow-up: implementation and remaining decisions
 
+## Reopened technical follow-up result
+
+The combined affected run covered55 modules/612 tests:4 failures,5 errors,
+zero skips,57.68% peak RAM. Six failure/error signatures came from three exact
+ownership intersections in historical test helpers. After those fixes, all25
+tests in the four affected modules pass. The three genuine Sonic paid-upgrade
+damage failures remain; no synthetic green full-suite result is claimed.
+
+All17 stale historical/readiness/exclusion failure identities are addressed.
+Combined33 ledgers have zero drift, all22 registry claims match the completed
+measurements after prose co-update, and doc-health passes. Raw missile/release
+gates remain unchanged and failing. Independent scoped review found no remaining
+implementation issue. This technical follow-up changes no live YAML or prices.
+Earlier full-suite receipts below remain historical. Keep drafts; HOLD merges.
+
 ## Final integration receipt — 10 September 2026
 
 This receipt supersedes source-stage pending notes below; the source-specific

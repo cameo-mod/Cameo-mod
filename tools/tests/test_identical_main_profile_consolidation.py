@@ -17,7 +17,7 @@ from consolidate_identical_main_profiles import (
 )
 import consolidate_freedom_rocket_base as freedom
 from miniyaml import Ruleset
-from reviewed_weapon_history import HistoricalView, restore_freedom_elite
+from reviewed_weapon_history import HistoricalView, restore_freedom_elite, restore_later_profile
 
 
 class IdenticalMainProfileConsolidationTests(unittest.TestCase):
@@ -98,7 +98,7 @@ class IdenticalMainProfileConsolidationTests(unittest.TestCase):
 
     def test_lockdown_descendants_keep_their_original_routes(self):
         for name, (flak_damage, chaingun_damage) in LOCKDOWN_PINS.items():
-            resolved = self.rules.resolve_weapon(name)
+            resolved = restore_later_profile(self, self.rules.resolve_weapon(name))
             flak = resolved.child("Warhead@SniperFlak")
             chaingun = resolved.child("Warhead@SniperChaingun")
             self.assertEqual("AreaDamage", flak.value)

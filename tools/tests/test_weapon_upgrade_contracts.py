@@ -123,10 +123,15 @@ class WeaponUpgradeContractTest(unittest.TestCase):
         self.assertIsNone(kodiak_projectile.get("TrailImage"))
         self.assertIsNone(kodiak_projectile.get("PointDefenseTypes"))
 
-    def test_sonic_hellfire_remains_raw_debt_without_an_exemption(self):
+    def test_sonic_hellfire_uses_the_shipped_single_main_without_an_exemption(self):
         self.assertLessEqual(RAW_SPLIT_BASELINE, 322)
+        # e779558f5 collapsed the inherited missile main into Sonic_Medium.
+        # Keep the no-exemption contract, but do not require the superseded stack.
         mains = main_warheads(self.rs.resolve_weapon("TSHellfireSonic"))
-        self.assertEqual(["MissileAP_Heavy", "Sonic_Medium"], mains)
+        self.assertEqual(["Sonic_Medium"], mains)
+        self.assertEqual(
+            "32000", self._warhead("TSHellfireSonic", "Warhead@Sonic_Medium").get("Damage"))
+        self.assertIsNone(self.rs.resolve_weapon("TSHellfireSonic").child("Warhead@MissileAP_Heavy"))
         reviewed = validated_reviewed_predicate(self.rs, main_warhead_nodes)
         self.assertFalse(reviewed("TSHellfireSonic", mains))
         self.assertFalse(reviewed("CopiedHellfireSonic", mains))

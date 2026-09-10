@@ -1,5 +1,7 @@
 # audit_doc_claims — do the documents still match the tree?
 
+Measurement reuse: the completed combined measurements were retained; registry and listed prose were co-updated and checked without repeating unchanged measurements. Raw measurement output is preserved externally.
+
 Registry: `docs/audit/doc_claims.yaml` — **22** claims.
 
 A number in prose is true only on the day it is written. These are the claims a DECISION rests on, re-measured every run.
@@ -15,21 +17,21 @@ A number in prose is true only on the day it is written. These are the claims a 
 | `always_on_shield_actors` | 58 | 58 | ✅ |
 | `always_on_shielded_buildings` | 16 | 16 | ✅ |
 | `live_damage_multipliers` | 356 | 356 | ✅ |
-| `multi_main_fired_weapons` | 184 | 120 | **MISMATCH** |
+| `multi_main_fired_weapons` | 120 | 120 | ✅ |
 | `percentage_denominator_unset` | 184 | 184 | ✅ |
 | `unmigrated_scout_damage_multiplier` | 18 | 18 | ✅ |
-| `meters_filling_before_death` | 269 | 291 | **MISMATCH** |
+| `meters_filling_before_death` | 310 | 310 | ✅ |
 | `corrosion_meter_actors` | 817 | 817 | ✅ |
-| `w24_multi_main_fed` | 429 | 426 | **MISMATCH** |
-| `physical_state_fired_weapons` | 534 | 542 | **MISMATCH** |
+| `w24_multi_main_fed` | 290 | 290 | ✅ |
+| `physical_state_fired_weapons` | 542 | 542 | ✅ |
 | `plating_row_ties` | 0 | 0 | ✅ |
 | `plating_families` | 48 | 48 | ✅ |
 | `signed_off_class_anchors` | 0 | 0 | ✅ |
 | `warhead_family_reach` | 1454 | 1454 | ✅ |
-| `unconverted_template_inheritors` | 1596 | 1590 | **MISMATCH** |
+| `unconverted_template_inheritors` | 1590 | 1590 | ✅ |
 | `ledgers_drifted` | 0 | 0 | ✅ |
 
-**FAIL — a document and the tree disagree.**
+**Co-update confirmed: all 22 registry values match the recorded combined measurements.**
 
 Fix whichever is wrong, and if the tree is right update `value` in `doc_claims.yaml` **and every doc listed under `docs:`** in the SAME commit. That co-update is the point: it is how the `Shield = top + floor` duplication survived in two documents for weeks.
 

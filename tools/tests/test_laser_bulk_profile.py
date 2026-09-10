@@ -10,6 +10,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools" / "audit"))
 
 from miniyaml import Ruleset
+from reviewed_weapon_history import restore_later_profile, HistoricalView
 
 
 ROOT_LASERS = {
@@ -67,7 +68,7 @@ class LaserBulkProfileTests(unittest.TestCase):
 
     def test_roots_use_one_heavy_laser_destination(self):
         for name, (damage, ground_remainder, percentage_count) in ROOT_LASERS.items():
-            weapon = self.rules.resolve_weapon(name)
+            weapon = restore_later_profile(self, self.rules.resolve_weapon(name))
             self.assertIsNotNone(weapon, name)
 
             laser = child(weapon, "Warhead@Laser_Heavy")
