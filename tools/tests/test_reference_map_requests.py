@@ -31,7 +31,7 @@ class Requests(unittest.TestCase):
         self.assertIn('10 × 3 / (20 + 4) = 1.25 damage/tick', page)
         self.assertIn('burst delays (source ticks): unavailable', page)
         self.assertIn('&lt;B&gt;', page)
-        self.assertIn('model DPS eligible: no', page)
+        self.assertIn('model damage/tick eligible: no', page)
 
     def test_hero_projection_uses_separate_population(self):
         row={'id':'hero','type':'infantry','hero':True}

@@ -95,9 +95,9 @@ def is_original(srcs):
 
 
 def arm_note(actor, led_arms):
-    """`x3` beside a DPS the actor could fire from more than one armament.
+    """`x3` beside a damage/tick value with more than one priced armament.
 
-    The DPS shown is the HARDEST-HITTING armament, never the sum — 495 of 822 armed actors carry
+    The value shown is the HARDEST-HITTING armament, never the sum — 495 of 822 armed actors carry
     several, and `ra2_allies_ifv` carries 39 mutually-exclusive ones. Without this marker the
     reader cannot tell a single-gun tank from one whose other weapons are conditional, which is
     exactly the question the maintainer asked about `td_nod_lighttankmkii`.
@@ -237,21 +237,21 @@ def weapon_calculation_details(rows, cameo_actor=None):
         else:
             text += '; retained source rate (damage/source tick): ' + value(row.get('w_dps_raw', row.get('w_dps')))
             text += '; cycle not independently reconstructed here'
-        text += '; model DPS eligible: ' + ('yes' if rd.eligible(row, 'w_dps') else 'no')
+        text += '; model damage/tick eligible: ' + ('yes' if rd.eligible(row, 'w_dps') else 'no')
         if row.get('reference_base_eligible') is False:
             text += '; base-state exclusion: ' + row['reference_base_reason']
         text += '; evidence: ' + str(row.get('w_evidence', 'unassessed'))
         if row.get('w_evidence_reason'):
             text += '; ' + row['w_evidence_reason']
         if (row['source'], row['id']) in UNARMED_COUNTERPARTS:
-            text += '; weapon range and DPS: N/A, reviewed unarmed counterpart'
+            text += '; weapon range and damage/tick: N/A, reviewed unarmed counterpart'
         parts.append('<p><b>' + html.escape(str(row.get('source')) + ' / ' + str(row.get('id'))) +
                      '</b><br>' + html.escape(text) + '</p>')
     if not parts:
         return ''
     return ('<details><summary>Weapon calculation details</summary>'
             '<p>Raw source values are not directly comparable across games. The model normalizes each source '
-            'before projection; the rate below is not the Cameo DPS estimate. Unknown delays remain unavailable. '
+            'before projection; the rate below is a source-local damage/tick estimate, not a sustained gameplay DPS claim. Unknown delays remain unavailable. '
             'Reviewed nominal cycles exclude armor, splash totals, travel and upgrades. '
             'The separate travel sample uses fixed endpoints without scatter, blockers or speed modifiers. '
             'Tick calls start at the first projectile update, not the firing order; seconds depend on game speed. '
@@ -266,9 +266,9 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
         body.append(f'<h3>{title} <span class="muted">· {len(group)}</span></h3>')
         reference_details = []
         generic_details = []
-        # ⭐ CLASS, RANGE and DPS added 2026-09-08 at the maintainer's request. The class is what
+        # ⭐ CLASS, RANGE and damage/tick added 2026-09-08 at the maintainer's request. The class is what
         # the virtual anchor will be derived from (EXTRAPOLATION_PROGRAM.md), so a row whose class
-        # looks wrong is a finding BEFORE any anchor is signed — and range/DPS were the two stats
+        # looks wrong is a finding BEFORE any anchor is signed — and range/damage were the two stats
         # a reference actually moves that the table never showed.
         # Keep the map itself to the five direct actor stats requested by Aedis.
         # Mapping confidence, class labels and generic weapon/delivery evidence
@@ -277,7 +277,7 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
                     '<th class="n">HP (now → reference)</th>'
                     '<th class="n">Speed (now → reference)</th>'
                     '<th class="n">Range (now → reference)</th>'
-                    '<th class="n">DPS (now → reference)</th>'
+                    '<th class="n">damage/tick (now → reference)</th>'
                     '<th class="n">Cost (now → reference)</th>'
                     '</tr></thead><tbody>')
         for a in group:
