@@ -114,11 +114,18 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
         # the virtual anchor will be derived from (EXTRAPOLATION_PROGRAM.md), so a row whose class
         # looks wrong is a finding BEFORE any anchor is signed — and range/DPS were the two stats
         # a reference actually moves that the table never showed.
+        # ⛔ THIS COLUMN IS DAMAGE PER TICK, NOT DPS. `reference_distribution.armament_profile`
+        # computes `per_cycle / cycle` where `cycle` is ReloadDelay + (Burst-1) x BurstDelay, in
+        # ENGINE TICKS. OpenRA runs 25 ticks/second, so real DPS is this number x 25 and the module
+        # 's own note (reference_distribution.py:276) only ever claimed it was "proportional to real
+        # DPS within a source". It shipped mislabelled as "DPS" until Astra caught it 2026-09-11;
+        # a reader sanity-checking `td_gdi_battletank` at 222 against game feel would conclude the
+        # unit was absurdly weak. Do not rename this back without changing the arithmetic.
         body.append('<table><thead><tr><th>Cameo actor</th><th>class &nbsp;today → after C46</th><th class="n">refs</th>'
                     '<th class="n">HP now</th><th class="n">HP →</th>'
                     '<th class="n">speed now</th><th class="n">speed →</th>'
                     '<th class="n">range now</th><th class="n">range →</th>'
-                    '<th class="n">DPS now</th><th class="n">DPS →</th>'
+                    '<th class="n">dmg/tick now</th><th class="n">dmg/tick →</th>'
                     '<th class="n">cost now</th><th class="n">cost →</th>'
                     '<th>reference units chosen</th></tr></thead><tbody>')
         for a in group:

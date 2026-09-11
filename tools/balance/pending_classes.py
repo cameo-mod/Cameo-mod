@@ -10,11 +10,11 @@ This script derives the PENDING membership mechanically from the resolved rulese
 can review the reclassification BEFORE it is committed:
 
     mobile_bunker          buildable + resolved AttackOpenTopped + GROUND VEHICLE
-    armed_troop_transport  buildable + Cargo + armed + ground vehicle + NOT open-topped,
-                           and ONLY where the actor's current class is `support` or None
-    ...?                   the same test where the actor ALREADY carries a combat class --
-                           emitted with a trailing '?' because overriding a real class is a
-                           maintainer decision, not a mechanical one
+    armed_troop_transport  buildable + Cargo + armed + ground vehicle + NOT open-topped.
+                           MAINTAINER RULING 2026-09-08 ("All 17 move"): this OVERRIDES an
+                           existing combat class -- the Flak Trucks leave anti_air_vehicle and
+                           the IFV variants leave scout_vehicle. All three classes carry the
+                           1.5x AA range, so no unit's RANGE changes; its pricing anchor does.
 
     python tools/balance/pending_classes.py            # writes /tmp/pending_classes.json
     python tools/balance/build_reference_report.py --faction ... --pending <that file>
@@ -52,10 +52,16 @@ for name,r in led.items():
     if ot:
         if now!='mobile_bunker': pending[name]='mobile_bunker'; stats['mobile_bunker']+=1
     elif 'Cargo' in base and r.get('armaments'):
-        if now in (None,'support'):
-            pending[name]='armed_troop_transport'; stats['armed_troop_transport']+=1
-        else:
-            pending[name]='armed_troop_transport?'; stats['CONTESTED']+=1
+        # MAINTAINER RULING 2026-09-08: "All 17 move." Cargo + a weapon means armed troop
+        # transport, with NO exception for an existing combat class. The two Flak Trucks leave
+        # anti_air_vehicle and the six IFV variants leave scout_vehicle. All three classes carry
+        # the 1.5x AA range anyway, so no unit's range changes as a result of this move -- what
+        # changes is which class anchor prices it.
+        if now != 'armed_troop_transport':
+            pending[name] = 'armed_troop_transport'
+            stats['armed_troop_transport'] += 1
+            if now not in (None, 'support'):
+                stats[f'  (overrode {now})'] += 1
 json.dump(pending, open('/tmp/pending_classes.json','w'), indent=1, sort_keys=True)
 print(dict(stats), ' total', len(pending))
 print("\nCONTESTED — already carry a combat class, would be overridden:")
