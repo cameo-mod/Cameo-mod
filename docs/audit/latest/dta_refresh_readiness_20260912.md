@@ -28,6 +28,23 @@ Results:
   the guarded single-source provenance fields are new.
 - No repository or source file was overwritten, and no corpus row changed.
 
+### Newly attached archive
+
+Aedis supplied a newer `INI.zip` after this check. Its archive SHA-256 is
+`76765cb3fdb96ab9470abad45e828c8502701b463ba2b8bb2acb403f442a3ec4`.
+The contained raw files hash to:
+
+- `Rules.ini`: `786f0ae5babce2e9052c6a484f31c62663bf5150d0e652a3fe2efa75a5a126c9`
+- `Enhance.ini`: `d836d5a9f9ac227e6b56262e96e9f665e58af10099b63712ec210ee25176edde`
+
+The same guarded single-source commands produce 862 rows for each label. The
+raw output removes `CITY01B` and changes 453 semantic rows for DTA Classic
+relative to the committed 863-row corpus. That is expected evidence of the
+merged-product dependency: raw `Rules.ini` does not contain every field carried
+by the existing merged extraction file. It is therefore safe to read and hash,
+but **not safe to replace the corpus with** until the exact merge recipe is
+recovered and guarded.
+
 ## Map gate
 
 The corrected peer artifact from PR #349 was tested in the current checkout,
@@ -41,6 +58,7 @@ only after a current-base-compatible peer artifact with source provenance is
 available. Do not mix the corrected CA/OpenRA document with the old peer inputs
 or treat the resulting candidate as a reviewed map.
 
-The remaining DTA work is the measured nine-field flak delta and a safe,
-reviewed corpus integration; the single-source extraction itself is now proven
-safe and does not justify a gameplay or reference vote by itself.
+The remaining DTA work is the measured nine-field flak delta and recovery of
+the merged extraction recipe. Single-source extraction is safe for evidence,
+but neither archive revision justifies a corpus replacement, gameplay change
+or reference vote by itself.
