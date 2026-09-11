@@ -359,9 +359,9 @@ ra1_allies_rapierjumpjet_bomb_cryo:
 
 ra1_allies_rapierjumpjet_missile_AA:
 	Inherits@wh: ^Warhead_Concussion_Medium
-	Inherits@wh2: ^Warhead_MissileHE_Heavy
+	Inherits@wh2: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_MissileHE_Heavy
+	Inherits@fx: ^Effect_MissileAP_Heavy
 	ReloadDelay: 62
 	Range: 7000
 	Burst: 2
@@ -384,7 +384,7 @@ ra1_allies_rapierjumpjet_missile_AA:
 		PercentageScale: 10000
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@MissileHE_Heavy:
+	Warhead@MissileAP_Heavy:
 		PercentageDenominator: 10000
 		PercentageScale: 10000
 		ValidTargets: Ground, Water, Air

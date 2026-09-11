@@ -197,6 +197,28 @@ class TargetPolicyTest(unittest.TestCase):
             self.assertIn('MissileAP', warheads[0].key)
             self.assertEqual({c.key: c.value for c in warheads[0].children}['Damage'], str(total))
 
+    def test_rapier_dual_target_secondary_uses_ap_and_preserves_damage(self):
+        weapon = self.rules.resolve_weapon('ra1_allies_rapierjumpjet_missile_AA')
+        damage = [child for child in weapon.children if child.value == 'AreaDamage']
+        ap = [child for child in damage if 'MissileAP' in child.key]
+        self.assertEqual(len(ap), 1)
+        self.assertEqual(ap[0].get('Damage'), '4000')
+        self.assertEqual(sum(int(child.get('Damage') or '0') for child in damage), 8000)
+        self.assertTrue(all('Air' in (child.get('ValidTargets') or '').split(', ')
+                            for child in damage))
+
+    def test_havoc_retains_existing_air_capability_pending_role_decision(self):
+        for name in ('td_gdi_havoc_sniper', 'td_gdi_havoc_rifle'):
+            weapon = self.rules.resolve_weapon(name)
+            self.assertIn('Air', (weapon.get('ValidTargets') or '').split(', '))
+            self.assertNotIn('Air', (weapon.get(
+                'Warhead@ChaingunPercentage', 'InvalidTargets') or '').split(', '))
+        rifle = self.rules.resolve_weapon('td_gdi_havoc_rifle')
+        self.assertEqual(rifle.get('Warhead@Bullet_Medium', 'Damage'), '8000')
+        self.assertIn('Air', rifle.get('Warhead@Bullet_Medium', 'ValidTargets').split(', '))
+        rocket = self.rules.resolve_weapon('td_gdi_havoc_rocket')
+        self.assertIn('Air', (rocket.get('ValidTargets') or '').split(', '))
+
     def test_annihilator_air_only_child_has_its_own_aa_payload(self):
         weapon = self.rules.resolve_weapon('D2K_Annihilator_AA')
         self.assertEqual({c.key: c.value for c in weapon.children}['ValidTargets'], 'Air')

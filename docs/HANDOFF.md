@@ -1,5 +1,30 @@
 # Cameo — THE HANDOFF
 
+## Claude and Codex continuation — 11 September 2026
+
+For the active RA1 Allies/Soviets and TD GDI/Nod work, start with the
+[current status and ownership](balance/PROJECT_STATUS_20260911.md), then the
+[grand plan](balance/GRAND_PLAN_20260911.md). The status contains the corrected
+results, open work, checkout instructions and **CL-01**, the bounded target/payload
+review reserved for Aedis's Claude. Codex retains implementation and integration.
+
+The earlier checkpoint is upstream draft PR #342 at `33a2fb2`. The later plan,
+implementation, corrected Astra evidence and portable inputs are supplied on
+`Blackrobe/Cameo-mod:codex/overnight-integration-20260910` as a linked draft
+continuation. Fetch that fork branch; fetching upstream master or the old PR
+alone does not obtain the continuation. See the status for the exact commands.
+
+The 22:37 Discord report overstated role closure: Havoc retains its existing Air
+capability, 19 target-route cases still need review, and only 13 of the 31 numerical
+proposal rows are reviewable (18 held). The full table accounts for 163 actors;
+it does not certify 163 prices. Frozen armor-channel reconstruction remains open.
+
+The [portable input packet](balance/checkpoints/20260911/claude-continuation/README.md)
+includes the four comparison inputs and all 71 original frozen ledger inputs.
+Use the current status above instead of treating dated logs below as new orders.
+This handoff authorizes no merge, game launch, build or external agent setup.
+Scheduled Discord checks remain paused. The repository-wide history follows.
+
 
 ## 2026-09-10 — source PR340 warhead-family reach measurement
 

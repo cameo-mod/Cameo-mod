@@ -533,6 +533,19 @@ cheapest provider wins).
 - **Heavy Support**: same ratio/frequency rules at ≈ **10000**, mixing all
   tiers (at least one above-Tier-1 unit).
 
+### Transport cargo pricing (proposal policy, 2026-09-11)
+
+All unit and passenger prices use the **10-credit grid for now**. Naval
+transports have no `InitialUnits` payload and are excluded from the loaded-price
+rule; an empty starting naval payload does **not** authorize changing an
+existing `MaxWeight` value. Air transports such as Chinooks use one of each
+available infantry for their faction, including promotion variants, with early
+units listed before later and promoted options. Advanced armed transports favor
+varied infantry in that order. A modeled transport's declared capacity must
+match the actual `InitialUnits` weight before its passenger prices are summed
+into the transport price. Any capacity interpretation that would alter existing
+YAML remains an explicit design decision.
+
 ## 6. Upgrades, promotions, power curve
 
 - One source of truth per layer (class templates / faction upgrades /
@@ -1475,9 +1488,9 @@ steps so the house formulas stay integral:
   sibling unit. If many units of the same class converge on the same price,
   equally spread them across the available 100-grid slots first, then fall
   back to 10-grid only when necessary. Prices are outputs, never inputs.
-- **Damage: 100-steps.** All main class warheads carry the **identical**
-  (even-spread) value `total ÷ N` on the 100 grid — never unequal, never
-  off-grid. (The grid was 2000 until 2026-08-12; it was cut 20x finer so the
+- **Damage: 10-steps** (Aedis, 2026-09-11). All main class warheads carry the **identical**
+  (even-spread) value `total ÷ N` on the 10 grid — never unequal, never
+  off-grid. (The grid was 2000 until 2026-08-12, then 100 until 2026-09-11; finer steps let the
   pipeline lands on the exact value instead of handing a remainder to
   `FirepowerMultiplier`, whose role as a fine-tuning knob is being retired.)
   Their twins are FIXED fractions of that main value:

@@ -10227,7 +10227,7 @@
   "dta_classic": {
    "kind": "ini",
    "lineage": "TD",
-   "parsing_scope": "Declared named armor fields; section/key overlays merged, BaseSection inheritance and runtime preprocessing not resolved.",
+   "parsing_scope": "Named armor fields from supplied generated INIs; parent-key closure checked before section/key overlay merging. No runtime or exact-client-version certification.",
    "path": "C:\\Users\\Blackrobe\\Documents\\agents\\cameo-reference-sources-20260909\\dta-aedis-20260910\\extracted\\INI\\Rules.ini",
    "rows": [
     {
@@ -10255,7 +10255,7 @@
     {
      "arity": 5,
      "base_section": "NukeLaunchWH",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 0.0,
       "medium": 0.0,
@@ -10341,7 +10341,7 @@
     {
      "arity": 5,
      "base_section": "ClusterWH",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "concrete": 194.0,
       "heavy": 250.0,
@@ -10467,7 +10467,7 @@
     {
      "arity": 4,
      "base_section": "AP",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1000.0,
       "medium": 750.0,
@@ -10479,7 +10479,7 @@
     {
      "arity": 4,
      "base_section": "APRA",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1001.0,
       "medium": 751.0,
@@ -10491,7 +10491,7 @@
     {
      "arity": 4,
      "base_section": "AP",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1050.0,
       "medium": 787.0,
@@ -10503,7 +10503,7 @@
     {
      "arity": 4,
      "base_section": "APRA",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 2000.0,
       "medium": 1250.0,
@@ -10545,7 +10545,7 @@
     {
      "arity": 4,
      "base_section": "APB",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1000.0,
       "medium": 750.0,
@@ -10577,7 +10577,7 @@
     {
      "arity": 4,
      "base_section": "APAA",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1000.0,
       "medium": 770.0,
@@ -10599,7 +10599,7 @@
     {
      "arity": 4,
      "base_section": "BazAP",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1000.0,
       "medium": 770.0,
@@ -10611,7 +10611,7 @@
     {
      "arity": 4,
      "base_section": "BazAP",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1000.0,
       "medium": 770.0,
@@ -10623,7 +10623,7 @@
     {
      "arity": 4,
      "base_section": "BazAPRA",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1100.0,
       "medium": 950.0,
@@ -10635,7 +10635,7 @@
     {
      "arity": 4,
      "base_section": "BazAP",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1000.0,
       "medium": 770.0,
@@ -10657,7 +10657,7 @@
     {
      "arity": 4,
      "base_section": "BazAPAA",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1000.0,
       "medium": 770.0,
@@ -10679,7 +10679,7 @@
     {
      "arity": 4,
      "base_section": "E3AP",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1250.0,
       "medium": 770.0,
@@ -10811,7 +10811,7 @@
     {
      "arity": 4,
      "base_section": "TNKDAP",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1000.0,
       "medium": 500.0,
@@ -10833,7 +10833,7 @@
     {
      "arity": 4,
      "base_section": "GrenadeLauncherAP",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 500.0,
       "medium": 600.0,
@@ -10855,7 +10855,7 @@
     {
      "arity": 4,
      "base_section": "ScarabAP",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 700.0,
       "medium": 1200.0,
@@ -10927,7 +10927,7 @@
     {
      "arity": 4,
      "base_section": "PlasmaWH",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 8400.0,
       "medium": 7333.0,
@@ -10970,7 +10970,7 @@
     {
      "arity": 4,
      "base_section": "HA",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 225.0,
       "medium": 515.0,
@@ -10992,7 +10992,7 @@
     {
      "arity": 4,
      "base_section": "HHA",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 250.0,
       "medium": 600.0,
@@ -11024,7 +11024,7 @@
     {
      "arity": 4,
      "base_section": "SGC",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 300.0,
       "medium": 600.0,
@@ -11099,7 +11099,7 @@
     {
      "arity": 4,
      "base_section": "LUNHE",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 500.0,
       "medium": 600.0,
@@ -11121,7 +11121,7 @@
     {
      "arity": 4,
      "base_section": "HJHE",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 500.0,
       "medium": 560.0,
@@ -11164,7 +11164,7 @@
     {
      "arity": 4,
      "base_section": "GrenadeHE",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 120.0,
       "medium": 280.0,
@@ -11176,7 +11176,7 @@
     {
      "arity": 4,
      "base_section": "GrenadeHE",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 250.0,
       "medium": 616.0,
@@ -11208,7 +11208,7 @@
     {
      "arity": 4,
      "base_section": "TuskWH",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1000.0,
       "medium": 800.0,
@@ -11251,7 +11251,7 @@
     {
      "arity": 4,
      "base_section": "BoatMslHE",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 520.0,
       "medium": 560.0,
@@ -11303,7 +11303,7 @@
     {
      "arity": 4,
      "base_section": "TDARTYHE",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 300.0,
       "medium": 650.0,
@@ -11315,7 +11315,7 @@
     {
      "arity": 4,
      "base_section": "TDARTYHE",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 500.0,
       "medium": 780.0,
@@ -11357,7 +11357,7 @@
     {
      "arity": 4,
      "base_section": "FlamethWH1",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 359.0,
       "medium": 600.0,
@@ -11379,7 +11379,7 @@
     {
      "arity": 4,
      "base_section": "Napalm1",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 250.0,
       "medium": 600.0,
@@ -11391,7 +11391,7 @@
     {
      "arity": 4,
      "base_section": "Napalm1",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 500.0,
       "medium": 700.0,
@@ -11413,7 +11413,7 @@
     {
      "arity": 4,
      "base_section": "NapalmHE",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 650.0,
       "medium": 500.0,
@@ -11445,7 +11445,7 @@
     {
      "arity": 5,
      "base_section": "BehemothNapalm",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "concrete": 0.0,
       "heavy": 660.0,
@@ -11458,7 +11458,7 @@
     {
      "arity": 4,
      "base_section": "BehemothNapalm",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1100.0,
       "medium": 1000.0,
@@ -11480,7 +11480,7 @@
     {
      "arity": 4,
      "base_section": "Chemical",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 250.0,
       "medium": 560.0,
@@ -11544,7 +11544,7 @@
     {
      "arity": 5,
      "base_section": "Fire2",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 250.0,
       "medium": 400.0,
@@ -11557,7 +11557,7 @@
     {
      "arity": 5,
      "base_section": "Fire2",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 250.0,
       "medium": 400.0,
@@ -11611,7 +11611,7 @@
     {
      "arity": 5,
      "base_section": "HJFire",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 250.0,
       "medium": 690.0,
@@ -11624,7 +11624,7 @@
     {
      "arity": 5,
      "base_section": "HJFire",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 350.0,
       "medium": 193.0,
@@ -11637,7 +11637,7 @@
     {
      "arity": 5,
      "base_section": "HJChem",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 350.0,
       "medium": 193.0,
@@ -11650,7 +11650,7 @@
     {
      "arity": 5,
      "base_section": "HJFire",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 500.0,
       "medium": 375.0,
@@ -11663,7 +11663,7 @@
     {
      "arity": 5,
      "base_section": "SBOATWH",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 500.0,
       "medium": 375.0,
@@ -11687,7 +11687,7 @@
     {
      "arity": 5,
      "base_section": "P941MISSILEWH",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 450.0,
       "medium": 350.0,
@@ -11720,7 +11720,7 @@
     {
      "arity": 4,
      "base_section": "Super",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1000.0,
       "medium": 1000.0,
@@ -11732,7 +11732,7 @@
     {
      "arity": 4,
      "base_section": "Super",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1000.0,
       "medium": 1000.0,
@@ -11764,7 +11764,7 @@
     {
      "arity": 4,
      "base_section": "Super",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 25.0,
       "medium": 25.0,
@@ -11836,7 +11836,7 @@
     {
      "arity": 4,
      "base_section": "ChronoRailShot",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1500.0,
       "medium": 1500.0,
@@ -11900,7 +11900,7 @@
     {
      "arity": 5,
      "base_section": "Gas",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 257.0,
       "medium": 429.0,
@@ -11944,7 +11944,7 @@
     {
      "arity": 4,
      "base_section": "Mechanical",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 100.0,
       "medium": 100.0,
@@ -12072,7 +12072,7 @@
     {
      "arity": 5,
      "base_section": "BarrelWH",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 0.0,
       "medium": 0.0,
@@ -12085,7 +12085,7 @@
     {
      "arity": 5,
      "base_section": "BarrelWH",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 0.0,
       "medium": 0.0,
@@ -12098,7 +12098,7 @@
     {
      "arity": 5,
      "base_section": "BarrelWH",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 0.0,
       "medium": 0.0,
@@ -12111,7 +12111,7 @@
     {
      "arity": 5,
      "base_section": "BarrelWH",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 0.0,
       "medium": 0.0,
@@ -12124,7 +12124,7 @@
     {
      "arity": 5,
      "base_section": "BarrelWH",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 0.0,
       "medium": 0.0,
@@ -12137,7 +12137,7 @@
     {
      "arity": 5,
      "base_section": "BarrelWH",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 0.0,
       "medium": 0.0,
@@ -12150,7 +12150,7 @@
     {
      "arity": 5,
      "base_section": "BarrelWH",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 0.0,
       "medium": 0.0,
@@ -12186,7 +12186,7 @@
     {
      "arity": 7,
      "base_section": "QuakeWH",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1000.0,
       "medium": 550.0,
@@ -12357,7 +12357,7 @@
    "lineage": "TD",
    "overlay_merged": true,
    "overlay_sha256": "40a8a48a14239d43cf8f87e96ec9540960c44cfc5a4285f5ae986f1361256cef",
-   "parsing_scope": "Declared named armor fields; section/key overlays merged, BaseSection inheritance and runtime preprocessing not resolved.",
+   "parsing_scope": "Named armor fields from supplied generated INIs; parent-key closure checked before section/key overlay merging. No runtime or exact-client-version certification.",
    "path": "C:\\Users\\Blackrobe\\Documents\\agents\\cameo-reference-sources-20260909\\dta-aedis-20260910\\extracted\\INI\\Enhance.ini",
    "rows": [
     {
@@ -12385,7 +12385,7 @@
     {
      "arity": 5,
      "base_section": "NukeLaunchWH",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 0.0,
       "medium": 0.0,
@@ -12471,7 +12471,7 @@
     {
      "arity": 5,
      "base_section": "ClusterWH",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "concrete": 194.0,
       "heavy": 250.0,
@@ -12597,7 +12597,7 @@
     {
      "arity": 4,
      "base_section": "AP",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1000.0,
       "medium": 750.0,
@@ -12609,7 +12609,7 @@
     {
      "arity": 4,
      "base_section": "APRA",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1001.0,
       "medium": 751.0,
@@ -12621,7 +12621,7 @@
     {
      "arity": 4,
      "base_section": "AP",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1050.0,
       "medium": 787.0,
@@ -12633,7 +12633,7 @@
     {
      "arity": 4,
      "base_section": "APRA",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 2000.0,
       "medium": 1250.0,
@@ -12675,7 +12675,7 @@
     {
      "arity": 4,
      "base_section": "APB",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1000.0,
       "medium": 750.0,
@@ -12707,7 +12707,7 @@
     {
      "arity": 4,
      "base_section": "APAA",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1000.0,
       "medium": 770.0,
@@ -12729,7 +12729,7 @@
     {
      "arity": 4,
      "base_section": "BazAP",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1000.0,
       "medium": 770.0,
@@ -12741,7 +12741,7 @@
     {
      "arity": 4,
      "base_section": "BazAP",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1000.0,
       "medium": 770.0,
@@ -12753,7 +12753,7 @@
     {
      "arity": 4,
      "base_section": "BazAPRA",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1100.0,
       "medium": 950.0,
@@ -12765,7 +12765,7 @@
     {
      "arity": 4,
      "base_section": "BazAP",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1200.0,
       "medium": 900.0,
@@ -12787,7 +12787,7 @@
     {
      "arity": 4,
      "base_section": "BazAPAA",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1000.0,
       "medium": 770.0,
@@ -12809,7 +12809,7 @@
     {
      "arity": 4,
      "base_section": "E3AP",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1250.0,
       "medium": 770.0,
@@ -12941,7 +12941,7 @@
     {
      "arity": 4,
      "base_section": "TNKDAP",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1000.0,
       "medium": 500.0,
@@ -12963,7 +12963,7 @@
     {
      "arity": 4,
      "base_section": "GrenadeLauncherAP",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 500.0,
       "medium": 600.0,
@@ -12985,7 +12985,7 @@
     {
      "arity": 4,
      "base_section": "ScarabAP",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 700.0,
       "medium": 1200.0,
@@ -13057,7 +13057,7 @@
     {
      "arity": 4,
      "base_section": "PlasmaWH",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 8400.0,
       "medium": 7333.0,
@@ -13100,7 +13100,7 @@
     {
      "arity": 4,
      "base_section": "HA",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 225.0,
       "medium": 515.0,
@@ -13122,7 +13122,7 @@
     {
      "arity": 4,
      "base_section": "HHA",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 250.0,
       "medium": 600.0,
@@ -13154,7 +13154,7 @@
     {
      "arity": 4,
      "base_section": "SGC",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 300.0,
       "medium": 600.0,
@@ -13229,7 +13229,7 @@
     {
      "arity": 4,
      "base_section": "LUNHE",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 500.0,
       "medium": 600.0,
@@ -13251,7 +13251,7 @@
     {
      "arity": 4,
      "base_section": "HJHE",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 500.0,
       "medium": 560.0,
@@ -13294,7 +13294,7 @@
     {
      "arity": 4,
      "base_section": "GrenadeHE",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 288.0,
       "medium": 644.0,
@@ -13306,7 +13306,7 @@
     {
      "arity": 4,
      "base_section": "GrenadeHE",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 250.0,
       "medium": 616.0,
@@ -13338,7 +13338,7 @@
     {
      "arity": 4,
      "base_section": "TuskWH",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1000.0,
       "medium": 800.0,
@@ -13381,7 +13381,7 @@
     {
      "arity": 4,
      "base_section": "BoatMslHE",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 520.0,
       "medium": 560.0,
@@ -13433,7 +13433,7 @@
     {
      "arity": 4,
      "base_section": "TDARTYHE",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 600.0,
       "medium": 650.0,
@@ -13445,7 +13445,7 @@
     {
      "arity": 4,
      "base_section": "TDARTYHE",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 500.0,
       "medium": 780.0,
@@ -13487,7 +13487,7 @@
     {
      "arity": 4,
      "base_section": "FlamethWH1",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 359.0,
       "medium": 600.0,
@@ -13509,7 +13509,7 @@
     {
      "arity": 4,
      "base_section": "Napalm1",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 250.0,
       "medium": 630.0,
@@ -13521,7 +13521,7 @@
     {
      "arity": 4,
      "base_section": "Napalm1",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 500.0,
       "medium": 700.0,
@@ -13543,7 +13543,7 @@
     {
      "arity": 4,
      "base_section": "NapalmHE",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 650.0,
       "medium": 500.0,
@@ -13575,7 +13575,7 @@
     {
      "arity": 5,
      "base_section": "BehemothNapalm",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "concrete": 0.0,
       "heavy": 660.0,
@@ -13588,7 +13588,7 @@
     {
      "arity": 4,
      "base_section": "BehemothNapalm",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1100.0,
       "medium": 1000.0,
@@ -13610,7 +13610,7 @@
     {
      "arity": 4,
      "base_section": "Chemical",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 370.0,
       "medium": 700.0,
@@ -13674,7 +13674,7 @@
     {
      "arity": 5,
      "base_section": "Fire2",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 250.0,
       "medium": 400.0,
@@ -13687,7 +13687,7 @@
     {
      "arity": 5,
      "base_section": "Fire2",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 250.0,
       "medium": 400.0,
@@ -13741,7 +13741,7 @@
     {
      "arity": 5,
      "base_section": "HJFire",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 407.0,
       "medium": 570.0,
@@ -13754,7 +13754,7 @@
     {
      "arity": 5,
      "base_section": "HJFire",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 350.0,
       "medium": 193.0,
@@ -13767,7 +13767,7 @@
     {
      "arity": 5,
      "base_section": "HJChem",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 350.0,
       "medium": 193.0,
@@ -13780,7 +13780,7 @@
     {
      "arity": 5,
      "base_section": "HJFire",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 500.0,
       "medium": 375.0,
@@ -13793,7 +13793,7 @@
     {
      "arity": 5,
      "base_section": "SBOATWH",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 500.0,
       "medium": 375.0,
@@ -13817,7 +13817,7 @@
     {
      "arity": 5,
      "base_section": "P941MISSILEWH",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 450.0,
       "medium": 350.0,
@@ -13850,7 +13850,7 @@
     {
      "arity": 4,
      "base_section": "Super",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1000.0,
       "medium": 1000.0,
@@ -13862,7 +13862,7 @@
     {
      "arity": 4,
      "base_section": "Super",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1000.0,
       "medium": 1000.0,
@@ -13894,7 +13894,7 @@
     {
      "arity": 4,
      "base_section": "Super",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 25.0,
       "medium": 25.0,
@@ -13966,7 +13966,7 @@
     {
      "arity": 4,
      "base_section": "ChronoRailShot",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1500.0,
       "medium": 1500.0,
@@ -14030,7 +14030,7 @@
     {
      "arity": 5,
      "base_section": "Gas",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 257.0,
       "medium": 429.0,
@@ -14074,7 +14074,7 @@
     {
      "arity": 4,
      "base_section": "Mechanical",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 100.0,
       "medium": 100.0,
@@ -14202,7 +14202,7 @@
     {
      "arity": 5,
      "base_section": "BarrelWH",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 0.0,
       "medium": 0.0,
@@ -14215,7 +14215,7 @@
     {
      "arity": 5,
      "base_section": "BarrelWH",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 0.0,
       "medium": 0.0,
@@ -14228,7 +14228,7 @@
     {
      "arity": 5,
      "base_section": "BarrelWH",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 0.0,
       "medium": 0.0,
@@ -14241,7 +14241,7 @@
     {
      "arity": 5,
      "base_section": "BarrelWH",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 0.0,
       "medium": 0.0,
@@ -14254,7 +14254,7 @@
     {
      "arity": 5,
      "base_section": "BarrelWH",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 0.0,
       "medium": 0.0,
@@ -14267,7 +14267,7 @@
     {
      "arity": 5,
      "base_section": "BarrelWH",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 0.0,
       "medium": 0.0,
@@ -14280,7 +14280,7 @@
     {
      "arity": 5,
      "base_section": "BarrelWH",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 0.0,
       "medium": 0.0,
@@ -14316,7 +14316,7 @@
     {
      "arity": 7,
      "base_section": "QuakeWH",
-     "inheritance_status": "not resolved",
+     "inheritance_status": "generated parent keys present",
      "versus": {
       "heavy": 1000.0,
       "medium": 550.0,

@@ -30,7 +30,7 @@ def selected_sources(sources):
     result['dta_enhanced']['selection'] = (
         'Enhanced overlays available Classic rows; one DTA vote. '
         'Historical GlobalCode map fragment is not an independent base ruleset. '
-        'BaseSection preprocessing is not resolved here.')
+        'Per-profile generated-file inheritance audit status is retained; runtime is not certified.')
     result.pop('dta_classic', None)
     result.pop('dta_globalcode', None)
     return result

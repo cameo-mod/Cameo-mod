@@ -152,11 +152,16 @@ def estimate_cell(rows, cameo_row, stat, dist, cdist, assigned_sources):
     return f'<span title="{tooltip}">{num(value)}<small class="evidence">{status}</small></span>'
 
 
-def weapon_calculation_details(rows):
+def weapon_calculation_details(rows, cameo_actor=None):
     """Expose source scalars and reviewed cycles without inventing missing delays."""
     import peer_nominal_evidence as nominal
+    import projectile_travel_evidence as travel
     profile = nominal.load(ROOT)
+    travel_profiles = travel.load(ROOT)
     parts = []
+    if cameo_actor:
+        parts.append('<p><b>Current Cameo projectile comparison</b><br>' + html.escape(
+            travel.describe(travel_profiles.get(('Cameo current', cameo_actor), []))) + '</p>')
     def value(v):
         if isinstance(v, (int, float)):
             return f"{v:g}"
@@ -186,6 +191,9 @@ def weapon_calculation_details(rows):
                                ('ammunition and charge proof', cycle.get('ammo_charge_proof'))])
         else:
             fields.append(('burst delays (source ticks)', row.get('w_burst_delays')))
+        fields.append(('separate projectile travel comparison',
+                       'N/A, reviewed unarmed counterpart' if (row['source'], row['id']) in UNARMED_COUNTERPARTS
+                       else travel.describe(travel_profiles.get((row.get('source'), row.get('id')), []))))
         if proof and 'center_falloff_percent' in proof:
             fields.extend([('raw weapon Damage', proof['raw_weapon_damage']),
                            ('center falloff percent', proof['center_falloff_percent'])])
@@ -244,7 +252,10 @@ def weapon_calculation_details(rows):
     return ('<details><summary>Weapon calculation details</summary>'
             '<p>Raw source values are not directly comparable across games. The model normalizes each source '
             'before projection; the rate below is not the Cameo DPS estimate. Unknown delays remain unavailable. '
-            'Reviewed nominal cycles exclude armor, splash totals, travel and upgrades.</p>' + ''.join(parts) + '</details>')
+            'Reviewed nominal cycles exclude armor, splash totals, travel and upgrades. '
+            'The separate travel sample uses fixed endpoints without scatter, blockers or speed modifiers. '
+            'Tick calls start at the first projectile update, not the firing order; seconds depend on game speed. '
+            'Unmodeled guided/custom projectiles remain unavailable, and conditional slots are not summed.</p>' + ''.join(parts) + '</details>')
 
 
 def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, counts, klass, led_arms, hero_context=None):
@@ -253,17 +264,22 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
         if not group:
             continue
         body.append(f'<h3>{title} <span class="muted">· {len(group)}</span></h3>')
+        reference_details = []
+        generic_details = []
         # ⭐ CLASS, RANGE and DPS added 2026-09-08 at the maintainer's request. The class is what
         # the virtual anchor will be derived from (EXTRAPOLATION_PROGRAM.md), so a row whose class
         # looks wrong is a finding BEFORE any anchor is signed — and range/DPS were the two stats
         # a reference actually moves that the table never showed.
-        body.append('<table><thead><tr><th>Cameo actor</th><th>class &nbsp;today → after C46</th><th class="n">assigned refs</th>'
-                    '<th class="n">HP now</th><th class="n">HP →</th>'
-                    '<th class="n">speed now</th><th class="n">speed →</th>'
-                    '<th class="n">range now</th><th class="n">range →</th>'
-                    '<th class="n">damage/tick now</th><th class="n">damage/tick estimate</th>'
-                    '<th class="n">cost now</th><th class="n">cost →</th>'
-                    '<th>reference units chosen</th></tr></thead><tbody>')
+        # Keep the map itself to the five direct actor stats requested by Aedis.
+        # Mapping confidence, class labels and generic weapon/delivery evidence
+        # are emitted below as a separate review section.
+        body.append('<table><thead><tr><th>Cameo actor</th>'
+                    '<th class="n">HP (now → reference)</th>'
+                    '<th class="n">Speed (now → reference)</th>'
+                    '<th class="n">Range (now → reference)</th>'
+                    '<th class="n">DPS (now → reference)</th>'
+                    '<th class="n">Cost (now → reference)</th>'
+                    '</tr></thead><tbody>')
         for a in group:
             c = crows[a]
             rows = attached.get(a) or []
@@ -306,18 +322,32 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
             if c.get('hero'):
                 note += ' <span class="tag">hero-only model</span>'
             empty = '<span class="muted">—</span>'
+            reference_details.append((a, klass.get(a) or "—", len(srcs), chips or empty))
+            generic = weapon_calculation_details(rows, a)
+            if generic:
+                generic_details.append((a, generic))
             body.append(
                 f'<tr><td><code>{html.escape(a)}</code>{note}{flag}</td>'
-                f'<td class="cls">{html.escape(klass.get(a) or "—")}</td>'
-                f'<td class="n">{len(srcs)}</td>'
-                f'<td class="n">{num(c.get("hp"))}</td><td class="n t">{tgt["hp"]}</td>'
-                f'<td class="n">{num(c.get("speed"))}</td><td class="n t">{tgt["speed"]}</td>'
-                f'<td class="n">{num(c.get("w_range"))}</td><td class="n t">{tgt["w_range"]}</td>'
-                f'<td class="n">{num(c.get("w_dps"))}{arm_note(a, led_arms)}</td>'
-                f'<td class="n t">{tgt["w_dps"]}</td>'
-                f'<td class="n">{num(c.get("cost"))}</td><td class="n t">{tgt["cost"]}</td>'
-                f'<td>{chips or empty}{weapon_calculation_details(rows)}</td></tr>')
+                f'<td class="n">{num(c.get("hp"))} <span class="muted">→</span> {tgt["hp"]}</td>'
+                f'<td class="n">{num(c.get("speed"))} <span class="muted">→</span> {tgt["speed"]}</td>'
+                f'<td class="n">{num(c.get("w_range"))} <span class="muted">→</span> {tgt["w_range"]}</td>'
+                f'<td class="n">{num(c.get("w_dps"))}{arm_note(a, led_arms)} <span class="muted">→</span> {tgt["w_dps"]}</td>'
+                f'<td class="n">{num(c.get("cost"))} <span class="muted">→</span> {tgt["cost"]}</td></tr>')
         body.append("</tbody></table>")
+        if reference_details:
+            body.append('<h4>Reference mapping and generic group evidence</h4>')
+            body.append('<p class="lede">The table above stays focused on HP, speed, range, DPS and cost. '
+                        'This section keeps class/mapping provenance and the generic weapon, projectile, '
+                        'spread, falloff and delivery evidence separate from the actor stats.</p>')
+            body.append('<table><thead><tr><th>Cameo actor</th><th>class</th>'
+                        '<th class="n">assigned refs</th><th>reference units chosen</th></tr></thead><tbody>')
+            for actor, actor_class, ref_count, chips in reference_details:
+                body.append(f'<tr><td><code>{html.escape(actor)}</code></td>'
+                            f'<td class="cls">{html.escape(actor_class)}</td>'
+                            f'<td class="n">{ref_count}</td><td>{chips}</td></tr>')
+            body.append('</tbody></table>')
+            for actor, details in generic_details:
+                body.append(f'<div><code>{html.escape(actor)}</code>{details}</div>')
 
 
 def main() -> int:

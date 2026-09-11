@@ -164,13 +164,16 @@ def parse_ini(path: pathlib.Path, engine: str) -> list[dict]:
 def parse_dta_overlay(rules: pathlib.Path, overlay: pathlib.Path | None = None) -> list[dict]:
     """Named DTA fields after section/key overlay merging.
 
-    This does not interpret BaseSection inheritance or runtime preprocessing.
-    Inherited-only sections are not claimed as decoded profiles.
+    Already generated DTA files retain BaseSection after copying parent keys.
+    Audit that closure; do not re-inherit after overlay merging or certify runtime.
     """
     from extract_ini_units import read_ini, merge_overlay
+    from dta_preprocessing import audit
     data = read_ini(rules)
+    inherited = audit(rules)['inherited']
     if overlay is not None:
         data = merge_overlay(data, read_ini(overlay))
+        inherited.update(audit(overlay)['inherited'])
     rows = []
     for name, section in data.items():
         fields = {k.split('.', 1)[1].lower(): v for k, v in section.items()
@@ -185,7 +188,7 @@ def parse_dta_overlay(rules: pathlib.Path, overlay: pathlib.Path | None = None) 
             row["undecoded"] = [f"{k}={v}" for k, v in fields.items()]
         if section.get('BaseSection'):
             row["base_section"] = section['BaseSection']
-            row["inheritance_status"] = "not resolved"
+            row["inheritance_status"] = inherited.get(name, {}).get('status', 'not resolved')
         rows.append(row)
     return rows
 

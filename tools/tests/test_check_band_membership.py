@@ -54,6 +54,22 @@ class BandMembershipTest(unittest.TestCase):
         self.assertIn('Unresolved cargo passenger-sum checks (1): tank', output)
         self.assertNotIn('## `mbt`', output)
 
+    def test_complementary_domains_are_not_double_counted(self):
+        def arm(slot, weapon, reach):
+            return {'slot':slot,'weapon':weapon,'range':reach,'reloaddelay':10,
+                    'damage_warheads':[{'tag':'Main','type':'AreaDamage','damage':100}]}
+        ground, air = arm('Armament','gun',1000), arm('Armament@AA','gun_aa',1500)
+        unit = {'hp':{'v':100},'speed':{'v':10},'armaments':[ground,air]}
+        self.assertEqual(cb.unit_inputs(unit)[2:4], (1000,10))
+        unit['armaments']=[air]
+        self.assertEqual(cb.unit_inputs(unit)[2:4], (1500,10))
+
+    def test_legacy_nested_shape_keeps_burst_delays(self):
+        unit={'hp':{'v':100},'speed':{'v':10},'armaments':[{'slot':'Armament','weapon':'gun',
+              'stats':{'range':1000,'reload_delay':{'v':10},'burst':{'v':2},'burst_delays':[3],
+                       'damage_warheads':[{'tag':'Main','type':'AreaDamage','damage':100}]}}]}
+        self.assertAlmostEqual(cb.unit_inputs(unit)[3], 200/13)
+
 
 if __name__ == '__main__':
     unittest.main()

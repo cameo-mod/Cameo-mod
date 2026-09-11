@@ -22,6 +22,7 @@ import formula  # noqa: E402
 import tier_chain  # noqa: E402
 import class_membership  # noqa: E402
 import cargo_pricing  # noqa: E402
+import fit_class
 from fit_class import eligible_virtual_member
 from firepower import armament_firepower, priced_by_default
 
@@ -36,37 +37,28 @@ def fnum(v):
     except (TypeError, ValueError): return None
 
 
-def unit_inputs(u, du=None):
-    """(hp, speed, range_wdist, dps, special, unit_class, tech_tier) or None."""
-    hp = fnum((u.get("hp") or {}).get("v"))
-    speed = fnum((u.get("speed") or {}).get("v") or (u.get("speed_air") or {}).get("v"))
-    d = u.get("design") or {}
-    du = du or {}
-    total_dps, best_range = 0.0, 0.0
-    for arm in u.get("armaments", []):
-        if not priced_by_default(arm):
-            continue
+def fitting_unit(u):
+    """Adapt the legacy nested input shape to the canonical fitting reader."""
+    arms = []
+    for arm in u.get('armaments', []):
         st = arm.get("stats", arm)  # tolerate both nesting styles
-        dmg = formula.spread_damage_sum(st.get("damage_warheads", arm.get("damage_warheads", [])))
-        reload_ = fnum((st.get("reload_delay") or {}).get("v") if isinstance(st.get("reload_delay"), dict)
-                       else st.get("reloaddelay") or (st.get("reload_delay")))
-        if not dmg or not reload_:
-            continue
-        rng = st.get("range")
-        rng = formula.wdist_value(rng, 0.0)
-        burst = st.get("burst"); burst = int(fnum(burst.get("v") if isinstance(burst, dict) else burst) or 1)
-        # Raw ledgers use ``burstdelays``. Keep the underscored fallback only
-        # for the older nested fixture shape this reader still accepts.
-        bd = st.get("burstdelays", st.get("burst_delays"))
-        total_dps += formula.dps(dmg, reload_, burst, bd) * armament_firepower(u, arm)
-        best_range = max(best_range, rng)
-    if hp is None or speed is None or total_dps == 0:
-        return None
-    tech_tier = tier_chain.effective_tier(
-        d.get("tech_tier"), du.get("tier_multiplier"), default=1.0)
-    return (hp, speed, best_range, total_dps,
-            fnum(d.get("special")) or 1.0, fnum(d.get("unit_class")) or 1.0,
-            tech_tier)
+        normalized = {**st, **arm}
+        reload = st.get('reload_delay')
+        normalized['reloaddelay'] = (reload.get('v') if isinstance(reload, dict)
+                                      else st.get('reloaddelay') or reload)
+        normalized['damage_warheads'] = st.get('damage_warheads', arm.get('damage_warheads', []))
+        normalized['range'] = st.get('range')
+        burst = st.get('burst')
+        normalized['burst'] = burst.get('v') if isinstance(burst, dict) else burst
+        normalized['burstdelays'] = st.get('burstdelays', st.get('burst_delays'))
+        normalized.pop('stats', None)
+        arms.append(normalized)
+    return {**u, 'armaments': arms}
+
+
+def unit_inputs(u, du=None):
+    """Use the fitting pipeline's selected domain and charge-cycle handling."""
+    return fit_class.unit_inputs(fitting_unit(u), du)[0]
 
 
 def price_for(cls, anchor, inp, anchor_tier: float = 1.0):
@@ -101,6 +93,31 @@ def band_exempt(unit):
     return fnum(value) == 1
 
 
+def armament_scope_details(unit, rules):
+    """Keep inactive-variant limitations separate from the raw-DPS input domain."""
+    import effective_damage
+    unit = fitting_unit(unit)
+    selected = {id(a) for a in fit_class.pricing_armaments(unit)}
+    rows = []
+    for arm in unit.get('armaments', []):
+        st = arm.get('stats', arm)
+        name = arm.get('weapon') or st.get('weapon')
+        weapon = rules.resolve_weapon(name) if name else None
+        damage = formula.spread_damage_sum(st.get('damage_warheads', arm.get('damage_warheads', [])))
+        reload = st.get('reload_delay')
+        reload = fnum(reload.get('v') if isinstance(reload, dict) else st.get('reloaddelay') or reload)
+        eligible = priced_by_default(arm)
+        rows.append({'slot': arm.get('slot'), 'weapon': name, 'requires': arm.get('requires'),
+                     'baseline_eligible': eligible,
+                     'domain_selected': id(arm) in selected,
+                     'contributes_to_raw_armament_term': bool(id(arm) in selected and damage and reload),
+                     'authored_range': formula.wdist_value(arm.get('range'), 0.0),
+                     'raw_main_damage': damage,
+                     'source_limitations': effective_damage.model_limitations(weapon)
+                     if weapon is not None else ['unresolved_weapon']})
+    return rows
+
+
 def collect(tier_map):
     for jf in sorted(LEDGER.glob("*.json")):
         if jf.name == "class_anchors.json":
@@ -121,6 +138,7 @@ def main() -> int:
     ap.add_argument("--actor-prefix", action="append", default=[],
                     help="actor-name prefix, including actors stored in shared ledgers; repeat to combine")
     ap.add_argument("--md")
+    ap.add_argument('--json', type=pathlib.Path, help='structured diagnostic with active/inactive armament scope')
     args = ap.parse_args()
     anchors = {k: v for k, v in json.loads(ANCHORS.read_text(encoding="utf-8")).items()
                if isinstance(v, dict)}
@@ -138,6 +156,11 @@ def main() -> int:
     cargo_pending = []
     cargo_checked = []
     cargo_rules = None
+    details, scopes = [], {}
+    if args.json:
+        sys.path.insert(0, str(ROOT / 'tools/audit'))
+        from miniyaml import Ruleset
+        cargo_rules = Ruleset(ROOT)
     for fname, actor, u, du in collect(tier_map):
         if args.faction and pathlib.Path(fname).stem not in args.faction:
             continue
@@ -145,6 +168,8 @@ def main() -> int:
             continue
         if not eligible_virtual_member(u):
             continue
+        if args.json:
+            scopes[actor] = armament_scope_details(u, cargo_rules)
         cargo = u.get("cargo_capacity")
         capacity = fnum(cargo.get("v") if isinstance(cargo, dict) else cargo)
         # §8.4b: cargo vehicles/aircraft use a named full passenger load, not
@@ -181,6 +206,20 @@ def main() -> int:
             continue
         epic = band_exempt(u)
         per_class.setdefault(cls, []).append((actor, pr, pr / c0, epic))
+        if args.json:
+            active = [r for r in scopes[actor] if r['contributes_to_raw_armament_term']]
+            inactive = [r for r in scopes[actor] if not r['baseline_eligible']]
+            details.append({'actor': actor, 'class': cls, 'source_ledger': fname,
+                'class_source': _reason, 'subtype': d.get('subtype'),
+                'modeled_price': pr, 'class_cost0': c0, 'ratio': pr / c0,
+                'actual_cost': (u.get('cost') or {}).get('v'),
+                'signed_off': bool(anchor.get('signed_off')), 'band_exempt': epic,
+                'flagged': not epic and (pr / c0 < SOFT_FLOOR or pr / c0 > CEIL),
+                'inputs': dict(zip(('hp','speed','range','raw_dps','special','unit_class','tier'), inp)),
+                'comparison_domain': 'ground' if any(not fit_class.is_anti_air_armament(a)
+                    for a in fit_class.pricing_armaments(fitting_unit(u))) else 'air',
+                'active_source_limitations': sorted({v for r in active for v in r['source_limitations']}),
+                'inactive_variant_limitations': sorted({v for r in inactive for v in r['source_limitations']})})
 
     out = ["# Baseband validator (BALANCE_PIPELINE §8.1)", "",
            f"band: floor {SOFT_FLOOR:.0%} - sweet {SWEET_LO:.0%}–{SWEET_HI:.0%} - ceil {CEIL:.0%}",
@@ -224,6 +263,21 @@ def main() -> int:
     else:
         print(text)
     print(f"[{violations} band violations across {len(per_class)} classes]")
+    if args.json:
+        path = ROOT / args.json
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps({
+            'scope': 'Current raw main-channel class-band diagnostic, not gameplay certification or price writeback.',
+            'notes': ['Ratio is model price / class C0, not model price / the actor current cost.',
+                      'Inactive upgrade limitations do not explain a baseline ratio.',
+                      'Input domain matches fitting: ground when present, otherwise air. Complementary ground/AA slots are never summed together.',
+                      'AA-primary calibration for a dual-role unit requires reviewing its air domain separately.',
+                      'The raw proxy excludes percentage/armor/splash/state terms even where other helpers model them.',
+                      'Empty source-limit lists are not proof that all combat effects are represented.'],
+            'summary': {'evaluated': len(details), 'classes': len(per_class), 'band_flags': violations,
+                        'cargo_price_mismatches': cargo_violations, 'unresolved_cargo': len(cargo_pending)},
+            'rows': sorted(details, key=lambda r: r['ratio']), 'armament_scopes': scopes,
+            'cargo_checked': cargo_checked, 'cargo_pending': cargo_pending}, indent=2)+'\n', encoding='utf-8')
     return 1 if violations or cargo_pending or cargo_violations else (0 if per_class or cargo_checked else 2)
 
 
