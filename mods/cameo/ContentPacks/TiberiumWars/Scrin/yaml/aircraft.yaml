@@ -14,6 +14,8 @@
 	Inherits@shieldalignment: ^ScrinAircraftShieldAlignment
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@materialization: ^ScrinFactoryMaterialization
+	WithActorMaterialization:
+		LockFacing: false
 	Health:
 		HP: 100000
 	Armor:
@@ -38,6 +40,8 @@ scrin_drone_ship:
 	Inherits: ^Helicopter
 	Inherits@shieldalignment: ^ScrinAircraftShieldAlignment
 	Inherits@materialization: ^ScrinFactoryMaterialization
+	WithActorMaterialization:
+		LockFacing: false
 	Voiced:
 		VoiceSet: ScrinDroneShipVoice
 	DeathSounds:
@@ -114,7 +118,10 @@ scrin_stormrider:
 		VTOL: false
 		Voice: Move
 	Armament:
-		Weapon: ScrinAirZap
+		Weapon: ScrinStormriderStreak
+		# FX_Weapon_00 muzzle (KW AlienStormrider FireFX/Launch bone), fit over
+		# 32 facings: max error 1.18 px, silhouette overlap >= 0.844.
+		LocalOffset: 386,1,577
 	AttackAircraft:
 		FacingTolerance: 128
 		Voice: Attack
@@ -153,6 +160,10 @@ scrin_devastator_warship:
 		TurnSpeed: 12
 	Armament:
 		Weapon: ScrinDevastatorDiscs
+		# FX_Weapon_ numbered muzzle pair (KW AlienDevastatorWarship
+		# FireFX/Launch bone); FXFire01..05 are damage FX, not muzzles.
+		# Fit over 32 facings: max error 0.55 px, overlap >= 0.741.
+		LocalOffset: 556,0,694, -8,0,650
 	AttackAircraft:
 		FacingTolerance: 192
 		AttackType: Hover
@@ -201,7 +212,7 @@ scrin_planetary_assault_carrier:
 	CarrierMaster:
 		Actors: scrin_invader_fighter, scrin_invader_fighter, scrin_invader_fighter, scrin_invader_fighter, scrin_invader_fighter, scrin_invader_fighter, scrin_invader_fighter, scrin_invader_fighter
 		RearmTicks: 25
-		RespawnTicks: 100
+		RespawnTicks: 50
 		InstaRepair: true
 		SlaveDisposalOnKill: KillSlaves
 		SpawnAllAtOnce: false
@@ -212,14 +223,21 @@ scrin_planetary_assault_carrier:
 
 scrin_invader_fighter:
 	Inherits: ^ScrinAircraftVisual
+	# Interceptor-like hull, without inheriting ProtossPersonalShield.
+	Armor:
+		Type: Bomber
 	Tooltip:
 		Name: actor_scrin_invader_fighter.name
 	Valued:
-		Cost: 300
+		Cost: 500
 	Health:
-		HP: 25000
+		HP: 30000
 	Aircraft:
-		Speed: 180
+		Speed: 200
+		CanHover: false
+		CanSlide: false
+		AltitudeVelocity: 120
+		CruiseAltitude: 1c256
 		TurnSpeed: 32
 		VTOL: false
 		Repulsable: false
@@ -231,9 +249,15 @@ scrin_invader_fighter:
 	HasParent:
 	RejectsOrders:
 	Armament:
-		Weapon: ScrinAirZap
+		Weapon: ScrinInvaderFighterZap
+		# FX_WEAPON_ numbered muzzle pair (KW AlienInvaderFighter launch bone);
+		# fit over 32 facings: max error 1.41 px, overlap >= 0.573.
+		LocalOffset: 246,-52,522, 246,55,522
 	AttackAircraft:
-		FacingTolerance: 128
+		FacingTolerance: 20
+		PauseOnCondition: disabled
+		OpportunityFire: true
+		PersistentTargeting: true
 	Selectable:
 		Bounds: 1024, 1024, 0, -448
 	RenderSprites:
@@ -272,6 +296,9 @@ scrin_mothership:
 		TurnSpeed: 8
 	Armament:
 		Weapon: ScrinMothershipDiscs
+		# No weapon bone in KW (AlienMothership defines none): the disc leaves
+		# the CENTER core bone, fit error 0.0 px over 32 facings.
+		LocalOffset: 0,0,979
 	AttackAircraft:
 		FacingTolerance: 256
 		AttackType: Hover

@@ -410,6 +410,7 @@ scrin_photon_cannon:
 	idle:
 		Filename: scrin_sprites|scrin_photon_cannon_indexed8.png
 		Start: 0
+		Frames: 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51
 		Facings: 32
 		ShadowStart: 32
 		ShadowZOffset: -5
@@ -439,6 +440,7 @@ scrin_plasma_missile_battery:
 	idle:
 		Filename: scrin_sprites|scrin_plasma_missile_battery_indexed8.png
 		Start: 0
+		Frames: 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51
 		Facings: 32
 		ShadowStart: 32
 		ShadowZOffset: -5
@@ -1083,6 +1085,7 @@ scrin_corrupter:
 				Length: *
 				Offset: -7,8
 		Facings: 8
+		Length: 13
 
 	icon:
 		Filename: scrin_sprites|scrin_corrupter_icon.png
@@ -1095,8 +1098,8 @@ scrin_annihilator_tripod:
 		Facings: 32
 		ShadowStart: 32
 		ShadowZOffset: -5
-		Offset: 4.300,-16.000
-		Scale: 2
+		Offset: 8.600,-32.000
+		Scale: 1
 	move:
 		Filename: scrin_sprites|scrin_annihilator_tripod_walk.png
 		Length: 12
@@ -1104,8 +1107,8 @@ scrin_annihilator_tripod:
 		Tick: 160
 		ShadowStart: 384
 		ShadowZOffset: -5
-		Offset: 3.500,-17.900
-		Scale: 2
+		Offset: 7.000,-35.800
+		Scale: 1
 
 	icon:
 		Filename: scrin_sprites|scrin_annihilator_tripod_icon.png
@@ -1118,8 +1121,8 @@ scrin_reaper_tripod:
 		Facings: 32
 		ShadowStart: 32
 		ShadowZOffset: -5
-		Offset: 3.000,-19.200
-		Scale: 2
+		Offset: 6.000,-38.400
+		Scale: 1
 	move:
 		Filename: scrin_sprites|scrin_reaper_tripod_walk.png
 		Length: 12
@@ -1127,8 +1130,8 @@ scrin_reaper_tripod:
 		Tick: 160
 		ShadowStart: 384
 		ShadowZOffset: -5
-		Offset: 1.900,-19.200
-		Scale: 2
+		Offset: 3.800,-38.400
+		Scale: 1
 
 	icon:
 		Filename: scrin_sprites|scrin_reaper_tripod_icon.png
@@ -1312,6 +1315,7 @@ scrin_stormrider:
 scrin_devastator_warship:
 	idle:
 		Filename: scrin_sprites|scrin_devastator_warship.png
+		Scale: 0.85
 		Length: 1
 		Facings: 32
 		ShadowStart: 32
@@ -1325,6 +1329,7 @@ scrin_devastator_warship:
 scrin_planetary_assault_carrier:
 	idle:
 		Filename: scrin_sprites|scrin_planetary_assault_carrier.png
+		Scale: 0.85
 		Length: 1
 		Facings: 32
 		ShadowStart: 32
@@ -1356,7 +1361,7 @@ scrin_mothership:
 		ShadowStart: 32
 		ShadowZOffset: -5
 		Offset: 4.000,-32.000
-		Scale: 0.60
+		Scale: 0.85
 	icon:
 		Filename: scrin_sprites|scrin_mothership_icon.png
 		Length: 1

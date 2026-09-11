@@ -5,6 +5,8 @@
 	Inherits: ^DefaultInfantry
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@materialization: ^ScrinFactoryMaterialization
+	WithActorMaterialization:
+		LockFacing: false
 	Health:
 		HP: 10000
 	Mobile:
@@ -34,9 +36,10 @@ scrin_disintegrator:
 	Valued:
 		Cost: 200
 	Health:
-		HP: 7000
+		HP: 15000
 	Armament:
 		Weapon: ScrinDisintegratorBeam
+		LocalOffset: 252,35,227
 	AttackFrontal:
 		FacingTolerance: 64
 		Voice: Attack
@@ -106,11 +109,12 @@ scrin_shock_trooper:
 	Valued:
 		Cost: 600
 	Health:
-		HP: 26000
+		HP: 40000
 	Mobile:
 		Voice: Move
 	Armament:
 		Weapon: ScrinShockDiscs
+		LocalOffset: 143,8,228
 	AttackFrontal:
 		FacingTolerance: 64
 		Voice: Attack
@@ -135,12 +139,13 @@ scrin_shock_trooper_blink_pack:
 	Valued:
 		Cost: 900
 	Health:
-		HP: 32000
+		HP: 48000
 	Mobile:
 		Speed: 65
 		Voice: Move
 	Armament:
 		Weapon: ScrinShockDiscs
+		LocalOffset: 156,13,235
 	AttackFrontal:
 		FacingTolerance: 64
 		Voice: Attack
@@ -174,11 +179,12 @@ scrin_ravager:
 	Valued:
 		Cost: 750
 	Health:
-		HP: 22000
+		HP: 35000
 	Mobile:
 		Speed: 60
 	Armament:
 		Weapon: ScrinShardBeam
+		LocalOffset: 388,1,550
 	AttackFrontal:
 		FacingTolerance: 64
 		Voice: Attack
@@ -208,6 +214,7 @@ scrin_mastermind:
 	Armament@CONTROL:
 		Name: primary
 		Weapon: ScrinMindControl
+		LocalOffset: 46,23,292
 	AttackFrontal:
 		FacingTolerance: 128
 		Voice: Attack
@@ -246,6 +253,7 @@ scrin_prodigy:
 	Armament@CONTROL:
 		Name: primary
 		Weapon: ScrinMindControl
+		LocalOffset: 88,10,292
 	AttackFrontal:
 		FacingTolerance: 128
 		Voice: Attack

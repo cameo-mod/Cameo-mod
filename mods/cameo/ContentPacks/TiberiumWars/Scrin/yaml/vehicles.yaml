@@ -99,6 +99,7 @@ scrin_seeker:
 		Speed: 90
 	Armament:
 		Weapon: ScrinSeekerDiscs
+		LocalOffset: -27,2,490
 	AttackFrontal:
 		FacingTolerance: 128
 		Voice: Attack
@@ -129,6 +130,7 @@ scrin_devourer_tank:
 		Speed: 60
 	Armament:
 		Weapon: ScrinDevourerBeam
+		LocalOffset: 909,0,438
 	AttackFrontal:
 		FacingTolerance: 128
 		Voice: Attack
@@ -157,6 +159,9 @@ scrin_repair_drone:
 		Speed: 100
 	Armament@REPAIR:
 		Weapon: ScrinRepairBeam
+		# BONE01 body emitter fit; heals, no front weapon. Lateral parts are within
+		# registration noise, height is the stable component.
+		LocalOffset: 17,60,984
 		TargetRelationships: Ally
 		ForceTargetRelationships: Ally
 	AttackFrontal:
@@ -192,6 +197,7 @@ scrin_gun_walker:
 		Speed: 75
 	Armament:
 		Weapon: ScrinGunWalkerBeam
+		LocalOffset: 511,-54,261
 	AttackFrontal:
 		FacingTolerance: 128
 		Voice: Attack
@@ -225,7 +231,8 @@ scrin_shard_walker:
 	Mobile:
 		Speed: 75
 	Armament:
-		Weapon: ScrinShardBeam
+		Weapon: ScrinShardWalkerStreak
+		LocalOffset: 511,-54,258
 	AttackFrontal:
 		FacingTolerance: 128
 		Voice: Attack
@@ -260,8 +267,9 @@ scrin_corrupter:
 		Speed: 55
 	Armament:
 		Weapon: ScrinCorrupterSpew
-		# Authored FX_WEAPON_01 mouth position, including the sprite's visual lift.
-		LocalOffset: 512,0,960
+		# KW PRIMARY_WEAPON launch/fire bone FX_WEAPON_01 (AlienCorrupter.xml), fitted
+		# to production pixels; replaces the stale 512,0,960 authored guess.
+		LocalOffset: 622,73,348
 		MuzzleSequence: muzzle
 		MuzzlePalette: greenspark
 	Armament@REPAIR:
@@ -408,7 +416,9 @@ scrin_eradicator_hexapod:
 		PauseOnCondition: disabled || materializing
 		Voice: Move
 	Armament:
-		Weapon: ScrinMothershipBeam
+		Weapon: ScrinHexapodDiscs
+		# FX_MAINWEAPON, AIDA65; 75% sprite size and approved B_BODY screen anchor.
+		LocalOffset: 1014,56,820
 	AttackFrontal:
 		FacingTolerance: 256
 		Voice: Attack
