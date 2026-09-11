@@ -131,10 +131,11 @@ Acceptance: modeled load weight equals declared capacity; exceptions are
   Damage attachment.
 - [x] Keep the Tesla additional-payload trace and the explicit limitations on
   installed-binary applicability and cadence.
-- [x] Verify the guarded single-source DTA extraction path against the exact
-  Rules.ini/Enhance.ini pair; the semantic corpus is unchanged and the
-  destructive merged-file replacement is documented in
-  `docs/audit/latest/dta_refresh_readiness_20260912.md`.
+- [x] Verify the guarded single-source DTA extraction path against the corrected
+  Rules.ini/Enhance.ini pair; resolve `$Inherits=` per file before overlay,
+  refresh only the 1,726 DTA rows with provenance, and regenerate the static map.
+  The destructive merged-file replacement and the current-base-compatible merge
+  are documented in `docs/audit/latest/dta_refresh_readiness_20260912.md`.
 - [ ] Resolve the remaining runtime/client-version and secondary-payload
   uncertainties before using DTA as a gameplay-equivalence claim.
 

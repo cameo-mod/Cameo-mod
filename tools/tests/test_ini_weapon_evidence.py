@@ -546,6 +546,56 @@ class SingleSourceCliTests(unittest.TestCase):
             code = ex.main(list(argv))
         return code, out.getvalue(), err.getvalue()
 
+    def test_vinifera_inherits_resolves_parent_before_overlay(self):
+        base = {
+            "ARTY": {"Damage": "25", "Armor": "heavy"},
+            "RAARTY": {"$Inherits": "ARTY", "Damage": "30"},
+        }
+        overlay = {"ARTY": {"$Inherits": "RAARTY", "Damage": "40"}}
+        resolved_base = ex.resolve_inherits(base)
+        resolved_overlay = ex.resolve_inherits(overlay)
+        merged = ex.merge_overlay(resolved_base, resolved_overlay)
+        self.assertEqual(resolved_base["RAARTY"], {"Damage": "30", "Armor": "heavy"})
+        self.assertEqual(resolved_overlay["ARTY"], {"Damage": "40"})
+        self.assertEqual(merged["ARTY"], {"Damage": "40", "Armor": "heavy"})
+
+    def test_vinifera_inherits_cycle_is_refused(self):
+        cyclic = {
+            "A": {"$Inherits": "B", "Value": "a"},
+            "B": {"$Inherits": "A", "Value": "b"},
+        }
+        with self.assertRaisesRegex(ValueError, r"cyclic \$Inherits chain: A -> B -> A"):
+            ex.resolve_inherits(cyclic)
+
+    def test_named_partial_export_refuses_to_delete_other_sources(self):
+        target = self.tmp / "export" / "corpus.jsonl"
+        target.write_text(
+            json.dumps({"source": "DTA Classic", "id": "old"}) + "\n"
+            + json.dumps({"source": "Other Source", "id": "keep"}) + "\n",
+            encoding="utf-8",
+        )
+        named = self.tmp / "named"
+        named.mkdir()
+        (named / "rules_DTA_Classic.ini").write_text(SYNTHETIC_RULES, encoding="ascii")
+        with patch.object(ex, "REF", named):
+            code, _, err = self.run_cli("--source", "DTA Classic", "--json", str(target))
+        self.assertEqual(code, 1)
+        self.assertIn("--force-partial", err)
+        self.assertIn("Other Source", target.read_text(encoding="utf-8"))
+
+    def test_named_partial_export_refuses_unreadable_existing_jsonl(self):
+        named = self.tmp / "named-unreadable"
+        named.mkdir()
+        (named / "rules_DTA_Classic.ini").write_text(SYNTHETIC_RULES, encoding="ascii")
+        for existing in ("{not json}\n", "[]\n"):
+            target = self.tmp / ("export-" + str(len(existing)) + ".jsonl")
+            target.write_text(existing, encoding="utf-8")
+            with patch.object(ex, "REF", named):
+                code, _, err = self.run_cli("--source", "DTA Classic", "--json", str(target))
+            self.assertEqual(code, 1)
+            self.assertIn("use --force-partial", err)
+            self.assertEqual(target.read_text(encoding="utf-8"), existing)
+
     # ── argument contract ────────────────────────────────────────────────────────────────
 
     def test_engine_is_required_with_rules(self):

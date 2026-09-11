@@ -55,7 +55,7 @@ import unittest
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 CORPUS = ROOT / 'docs' / 'reference' / 'ini_corpus.json'
-CORPUS_SHA256 = 'b8fec564b958a2d2ccc42053fad76c8af714f433f15cc055355c51776e485d68'
+CORPUS_SHA256 = 'c1883cb04d2b42b370aa1dba3bdd12c080d909c61a3d3adf92156f5f931ed92a'
 BEFORE_ENV = 'REFERENCE_DTA_BEFORE_CORPUS'
 BEFORE_SHA256 = '204391b21a95b3c5409b9d146a33f07b8b1404e5c4e0369976ab9859db1081b1'
 # The ten primary identities the refresh corrected (the old auto-promotion had rewritten the
@@ -176,7 +176,7 @@ class ConsumerWithholdingTest(unittest.TestCase):
 
     def test_lane_composition_is_the_standing_one(self):
         srcs = collections.Counter(r['source'] for r in self.rows)
-        self.assertEqual(srcs, {'DTA Enhanced': 156})   # lineage representative only, no AI
+        self.assertEqual(srcs, {'DTA Enhanced': 155})   # lineage representative only, no AI
 
     def test_ordinary_withheld_count_is_exact_and_raws_survive(self):
         self.assertEqual(len(self.withheld), 5)
@@ -242,12 +242,12 @@ class ConsumerWithholdingTest(unittest.TestCase):
         # do not hide them behind the former legacy count (base migration: +118).
         self.assertEqual(counts['incomplete'], 208)
         self.assertEqual(counts['nominal_direct'], 265)
-        self.assertEqual(counts['legacy-unassessed'], 3895)
-        self.assertEqual(sum(counts.values()), 4368)  # TD RMBO now belongs to the explicit hero lane.
+        self.assertEqual(counts['legacy-unassessed'], 3894)
+        self.assertEqual(sum(counts.values()), 4367)  # TD RMBO now belongs to the explicit hero lane.
         other = rd.evidence_counts([r for r in self.peers if r['source'] != 'Combined Arms'])
         self.assertEqual(other['incomplete'], 65)
         self.assertEqual(other['nominal_direct'], 139)
-        self.assertEqual(other['legacy-unassessed'], 3823)
+        self.assertEqual(other['legacy-unassessed'], 3822)
 
 
 class OptionalBeforeCorpusTest(unittest.TestCase):

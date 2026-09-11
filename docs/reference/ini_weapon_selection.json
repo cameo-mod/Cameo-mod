@@ -3,8 +3,8 @@
   "scope": "Exact supplied INI data and nominal direct comparison only; OpenTS engine applicability to DTA remains unverified.",
   "reason": "MTNK explicitly binds zero-damage 90mmDummy and nominal-direct secondary 90mm. OpenTS What_Weapon_Should_I_Use compares warhead armor modifiers with a maximum 2x in-range bonus. For the four shared declared armor tags, AP is at least 100% versus dummy 1%, so the cannon wins when both are legal and ready. Does not certify target eligibility, rearm, upgrades or DTA runtime.",
   "source_files": {
-    "C:\\Users\\Blackrobe\\Documents\\agents\\cameo-reference-sources-20260909\\dta-aedis-20260910\\extracted\\INI\\Rules.ini": "6329487eecaa12fb314c31eef3f21b17812ef15b1baa39f223c8205e2d4745d9",
-    "C:\\Users\\Blackrobe\\Documents\\agents\\cameo-reference-sources-20260909\\dta-aedis-20260910\\extracted\\INI\\Enhance.ini": "40a8a48a14239d43cf8f87e96ec9540960c44cfc5a4285f5ae986f1361256cef",
+    "C:\\Users\\Blackrobe\\Documents\\agents\\cameo-reference-sources-20260909\\dta-aedis-20260910\\extracted\\INI\\Rules.ini": "786f0ae5babce2e9052c6a484f31c62663bf5150d0e652a3fe2efa75a5a126c9",
+    "C:\\Users\\Blackrobe\\Documents\\agents\\cameo-reference-sources-20260909\\dta-aedis-20260910\\extracted\\INI\\Enhance.ini": "d836d5a9f9ac227e6b56262e96e9f665e58af10099b63712ec210ee25176edde",
     "C:\\Users\\Blackrobe\\Documents\\agents\\cameo-reference-sources-20260909\\opents\\code\\techno.cpp": "9e360c1b47aea5aa1ff3235b81a025de44f136dc383bd291ce49c1557268a371"
   },
   "sections": {
@@ -134,7 +134,7 @@
     {
       "source": "DTA Classic",
       "id": "MTNK",
-      "record_sha256": "3bd025551f7d6383b0f1b37359d009edb70e6451dc158056cf984b9393e61736",
+      "record_sha256": "42c0a7843fc04daf4ae7b79a591a2958006b8a3fa2e5a62796490390949d030b",
       "primary": "90mmDummy",
       "secondary": "90mm",
       "selection": "reviewed_nominal_secondary",
@@ -143,7 +143,7 @@
     {
       "source": "DTA Enhanced",
       "id": "MTNK",
-      "record_sha256": "363c693b8f8c1372c67c545976ae5b547854baf995e167196157bb2016cf074b",
+      "record_sha256": "5f1d5b724485cf077bce78e04054c83b27b1e14fd2231f5c1d2938cc15418430",
       "primary": "90mmDummy",
       "secondary": "90mm",
       "selection": "reviewed_nominal_secondary",

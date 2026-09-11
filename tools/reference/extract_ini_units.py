@@ -102,7 +102,7 @@ RA2_ARMOR = ["none", "flak", "plate", "light", "medium", "heavy",
              "wood", "steel", "concrete", "special_1", "special_2"]
 
 SECTION = re.compile(r"^\s*\[([^\]]+)\]")
-KV = re.compile(r"^\s*([A-Za-z0-9_.]+)\s*=\s*([^;]*)")
+KV = re.compile(r"^\s*([$A-Za-z0-9_.]+)\s*=\s*([^;]*)")
 
 
 def read_ini(path: pathlib.Path) -> dict[str, dict[str, str]]:
@@ -123,6 +123,33 @@ def read_ini(path: pathlib.Path) -> dict[str, dict[str, str]]:
         if m:
             cur[m.group(1).strip()] = m.group(2).strip()
     return out
+
+
+def resolve_inherits(ini: dict[str, dict[str, str]]) -> dict[str, dict[str, str]]:
+    """Flatten Vinifera's ``$Inherits=`` section inheritance within one file."""
+    resolved: dict[str, dict[str, str]] = {}
+
+    def flatten(name: str, stack: tuple[str, ...]) -> dict[str, str]:
+        if name in resolved:
+            return dict(resolved[name])
+        if name in stack:
+            cycle = " -> ".join((*stack[stack.index(name):], name))
+            raise ValueError(f"cyclic $Inherits chain: {cycle}")
+        own = ini.get(name)
+        if own is None:
+            return {}
+        stack = (*stack, name)
+        parent = own.get("$Inherits", "").strip()
+        if parent and parent in ini:
+            merged = flatten(parent, stack)
+            merged.update(own)
+        else:
+            merged = dict(own)
+        merged.pop("$Inherits", None)
+        resolved[name] = merged
+        return dict(merged)
+
+    return {name: flatten(name, ()) for name in ini}
 
 
 def merge_overlay(base: dict, overlay: dict) -> dict:
@@ -478,7 +505,15 @@ def extract(label: str, spec: dict) -> tuple[list[dict], list[str]]:
     if digest == VANILLA_YR_MD5:
         return [], [f"{label}: REFUSED — this file is vanilla Yuri's Revenge (md5 {digest})"]
 
-    ini = read_ini(path)
+    def load(p: pathlib.Path) -> dict[str, dict[str, str]]:
+        raw = read_ini(p)
+        inherited = sum(1 for values in raw.values() if "$Inherits" in values)
+        if inherited:
+            notes.append(f"{label}: flattened {inherited} $Inherits sections in {p.name}")
+            return resolve_inherits(raw)
+        return raw
+
+    ini = load(path)
     if spec.get("overlay"):
         # ⛔ FAIL CLOSED. A missing overlay must not silently label the base file's rows with
         # the overlay's identity (DTA Classic would be extracted AS "DTA Enhanced"). Refuse
@@ -487,7 +522,7 @@ def extract(label: str, spec: dict) -> tuple[list[dict], list[str]]:
         if not ov.exists():
             return [], [f"{label}: REFUSED — overlay {spec['overlay']} missing; base "
                         f"{spec['file']} would be mislabelled as {label}"]
-        ini = merge_overlay(ini, read_ini(ov))
+        ini = merge_overlay(ini, load(ov))
         notes.append(f"{label}: applied overlay {spec['overlay']}")
     return extract_rows_from_ini(ini, label, spec["engine"]), notes
 
@@ -556,9 +591,11 @@ def extract_single_source(rules, overlay, label: str, engine: str) -> tuple[list
     sha_rules_before = sha256_file(rules)
     sha_overlay_before = sha256_file(overlay) if overlay else None
 
-    ini = read_ini(rules)
+    # Resolve each file in isolation before applying overlay precedence. Merging first can
+    # create cycles when Enhance.ini deliberately reverses a Classic inheritance relationship.
+    ini = resolve_inherits(read_ini(rules))
     if overlay:
-        ini = merge_overlay(ini, read_ini(overlay))
+        ini = merge_overlay(ini, resolve_inherits(read_ini(overlay)))
         notes.append(f"{label}: applied overlay {overlay.name}")
     rows = extract_rows_from_ini(ini, label, engine)
 
@@ -612,6 +649,29 @@ def ensure_external_output(out_path, source_paths) -> pathlib.Path:
     return out
 
 
+def existing_sources(path: pathlib.Path) -> set[str]:
+    """Read an existing JSONL corpus strictly before a named export can replace it."""
+    try:
+        lines = path.read_text(encoding="utf-8").splitlines()
+    except OSError as e:
+        raise ValueError(f"cannot inspect existing output: {e}") from e
+    sources: set[str] = set()
+    for lineno, line in enumerate(lines, 1):
+        if not line.strip():
+            continue
+        try:
+            row = json.loads(line)
+        except (TypeError, ValueError) as e:
+            raise ValueError(f"existing output line {lineno} is not valid JSON") from e
+        if not isinstance(row, dict):
+            raise ValueError(f"existing output line {lineno} is not a JSON object")
+        source = row.get("source")
+        if not isinstance(source, str) or not source.strip():
+            raise ValueError(f"existing output line {lineno} has no source label")
+        sources.add(source)
+    return sources
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--source", action="append", help="limit to these sources (repeatable)")
@@ -621,6 +681,8 @@ def main(argv=None) -> int:
     ap.add_argument("--engine", choices=("ts", "ra2"),
                     help="single-source mode: engine profile — REQUIRED with --rules")
     ap.add_argument("--json", help="write the corpus to this path")
+    ap.add_argument("--force-partial", action="store_true",
+                    help="allow named --source output to replace rows for other sources")
     ap.add_argument("--list", action="store_true", help="list sources and exit")
     args = ap.parse_args(argv)
 
@@ -686,7 +748,11 @@ def main(argv=None) -> int:
         if not spec:
             print(f"  unknown source {label!r}", file=sys.stderr)
             continue
-        rows, notes = extract(label, spec)
+        try:
+            rows, notes = extract(label, spec)
+        except ValueError as e:
+            print(f"  refused: {label}: {e}", file=sys.stderr)
+            return 1
         all_rows += rows
         all_notes += notes
         armed = sum(1 for r in rows if r.get("w_versus"))
@@ -700,6 +766,20 @@ def main(argv=None) -> int:
 
     if args.json:
         out = pathlib.Path(args.json)
+        if args.source and out.exists() and not args.force_partial:
+            try:
+                existing = existing_sources(out)
+            except ValueError as e:
+                print(f"  refused: {e}; use --force-partial for an explicit partial export",
+                      file=sys.stderr)
+                return 1
+            selected = {row.get("source") for row in all_rows if row.get("source")}
+            lost = sorted(existing - selected)
+            if lost:
+                print("  refused: --source would replace existing sources "
+                      + ", ".join(lost) + "; use --force-partial for an explicit partial export",
+                      file=sys.stderr)
+                return 1
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text("\n".join(jsonl_lines(all_rows)) + "\n", encoding="utf-8")
         print(f"  wrote {out}")

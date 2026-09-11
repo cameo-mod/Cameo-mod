@@ -108,7 +108,8 @@ merged blindly. Original baselines and the old checkpoint manifest are unchanged
 The GP-02 contract-hardening, support-armament pricing, PDLaser payload,
 reference-map tooling, built-state condition-selector, promotion-readiness,
 Sunday startup-handoff and peer-extractor corrections are committed through
-`5221a76e5` (latest reviewed batch), pushed to Blackrobe's fork and
+`09fb32e08` (latest reviewed batch, including the DTA corpus/map refresh),
+pushed to Blackrobe's fork and
 included in [draft PR #345](https://github.com/cameo-mod/Cameo-mod/pull/345).
 
 From an existing Cameo clone, use a new worktree to preserve your own edits:
@@ -219,17 +220,20 @@ scalar weapon summary now chooses the first resolved positive-damage armament,
 so utility-first slots cannot erase range, reload, damage or Versus evidence.
 The two focused regressions pass; external peer corpus re-splicing remains a
 separate evidence refresh and was not run from unavailable source checkouts.
-The current HTML map therefore does not include Aedis's external 42d8/7dd
-corpus refresh; regenerate it only after the corrected peer artifact and its
-source/provenance are available.
+The current HTML map still does not include Aedis's external 42d8/7dd peer
+corpus refresh, because that master-based artifact removes current-base rows
+and changes 122 evidence statuses. It does include the current-base-compatible
+DTA archive refresh described below.
 
-The DTA refresh investigation is complete at the safe extraction boundary:
-the original packet's single-source read reproduced the committed 863/863
-semantic rows, while Aedis's newly attached archive safely reads 862/862 but
-differs in hundreds of fields because the merged extraction dependencies are
-absent. The 2,991-field destructive replacement and the incompatible current-
-base PR #349 document are recorded in `dta_refresh_readiness_20260912.md`; no
-DTA corpus or map writeback was made.
+The DTA refresh is now complete at the static corpus/map boundary. The new
+archive resolves Vinifera `$Inherits=` per file before overlay, produces 863/863
+rows for Classic and Enhanced, updates only the DTA corpus lines plus dependent
+receipt fingerprints, regenerates the derived faction profiles, and regenerates
+the four-faction HTML map with the same 66/82/270/23 shape. The 2,991-field
+destructive replacement and the rejected wholesale PR #349 peer artifact remain
+documented in `dta_refresh_readiness_20260912.md`; DTA runtime/client-version
+applicability, secondary payload timing and the separate peer refresh remain
+unverified.
 
 ### Latest Luna Max batch — GP-02 contract hardening
 
