@@ -18,8 +18,9 @@ resolved yaml and engine source, not on observed play.
 
 | disposition | rows | which |
 |---|--:|---|
-| **retain** | 16 | 76, 77, 78, 211, 212, 213, 214, 215, 216, 217, 219, 220, 221, 222, 223 — plus 224's parent behaviour |
-| **correctness fix proposed** | 3 | 101, 102, 103 — the point-defence interception route |
+| **retain** | 17 | 76, 77, 78, 211, 212, 213, 214, 215, 216, 217, 219, 220, 221, 222, 223 — plus 224's parent behaviour |
+| **correctness fix proposed** | 2 | 101, 102 — the point-defence interception route |
+| **retracted** | 1 | 103 — I over-claimed; `PointDefenseTesla` is not broken (see §4.0) |
 | **design decision needed** | 2 | 224 (Stealth Tank spawned `CHFlame` vs air) and a system-wide anti-infantry-vs-airborne policy question surfaced by 220–222 |
 
 Rows 220–222 are counted under **retain**; the policy question they surface is listed separately
@@ -196,13 +197,49 @@ or 3 were ever chosen: every actor in the `flying_infantry` class, plus every wa
 
 ## 4. CORRECTNESS FIX PROPOSED — point-defence interception cannot damage its target
 
-**Rows 101, 102, 103. This is the one hard defect in the set.**
+### 4.0 ⛔ RETRACTION — row 103 is NOT a defect. I grouped it wrongly.
+
+**Corrected 2026-09-11 after Codex shipped `663147217`.** `PointDefenseTesla`
+(`mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml:455`) already carries the correct mask
+on its DAMAGE warheads:
+
+```yaml
+PointDefenseTesla:
+    ValidTargets: Ground, Air, Missile, Bullet, BallisticMissile
+    Warhead@Tesla_Heavy:
+        ValidTargets: Ground, Air, Missile, Bullet, BallisticMissile
+        Damage: 10000
+    Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+        ValidTargets: Ground, Air, Missile, Bullet, BallisticMissile
+        Damage: 5000
+```
+
+15,000 damage, correctly masked, against a 10,000 HP `^ShootableMissile`. **`ra1_soviets_heavyteslatank`
+intercepts correctly and nothing about it needs changing.**
+
+The row the receipt surfaced at index 103 was its `Warhead@EMPUnit` at `ValidTargets: Ground, Water`
+— an integrity side-effect that simply does not apply to a projectile. That is the same
+type-versus-domain notation artifact as §1, and it belongs in the `retain` group.
+
+**My error was one of grouping, not of measurement**: I saw three point-defence roots carrying a
+`Ground, Water` payload and wrote a single finding covering all three, when only two of them have
+their damage on that payload. The claim "the point-defence armament acquires an incoming ballistic
+missile, plays its firing effect, and delivers nothing" is **true for `PDLaserBike` and
+`PDLaserLTNK2` and false for `PointDefenseTesla`**. Everything below applies to the two PDLaser
+weapons only.
+
+⭐ And `PointDefenseTesla` is useful evidence rather than just a retraction: it is the same role
+against the same target with **15,000 damage**, which is what makes §4.3 below a real question
+rather than a nitpick.
+
+---
+
+**Rows 101 and 102. This is the one hard defect in the set.**
 
 | row | weapon | warhead | type | damage | bindings |
 |---|---|---|---|--:|---|
 | 101 | `PDLaserBike` | `Warhead@1Dam` | `SpreadDamage` | 1 | `td_nod_reconbike`, `td_nod_chemicalattackbike` — `Armament@pointdefense`, requires `td_nod_upgrade_blackmarketupgrades` |
 | 102 | `PDLaserLTNK2` | `Warhead@1Dam` | `SpreadDamage` | 1 | `td_nod_lighttankmkii` — `Armament@pointdefense`, **unconditional** |
-| 103 | `PointDefenseTesla` | `Warhead@EMPUnit` | `AffectsIntegrity` | 1000 | `ra1_soviets_heavyteslatank` — `Armament@pointdefense`, **unconditional** |
 
 ### 4.1 The masks are satisfiable only in mutually exclusive target states
 
@@ -211,11 +248,10 @@ Weapon acquisition masks:
 ```
 PDLaserBike / PDLaserLTNK2   ValidTargets:   Ground, Air, Missile, BulletAS, BallisticMissile
                              InvalidTargets: Infantry, Vehicle, Tank, Structure, wall
-PointDefenseTesla            ValidTargets:   Ground, Air, Missile, Bullet, BallisticMissile
-                             InvalidTargets: (none)
 ```
 
-Payload masks: `ValidTargets: Ground, Water` on all three.
+Payload mask: `ValidTargets: Ground, Water` on both. Both are thin subclasses of `PDLaser`
+(`Inherits: PDLaser`, overriding only `Range`), so the defect and its fix both live on the parent.
 
 The only actor in the active tree declaring an interceptable-projectile target type is the missile
 actor at `mods/cameo/rules/defaults.yaml:6986-6991`:
@@ -237,7 +273,7 @@ Therefore, for the state in which interception actually happens:
 | missile state | actor target types | weapon can acquire? | warhead can apply? |
 |---|---|---|---|
 | **airborne** (in flight) | `Air, BallisticMissile` | **yes** — `BallisticMissile` overlaps, and `Vehicle` is absent so the InvalidTargets exclusion does not bite | **no** — `{Ground, Water}` does not overlap `{Air, BallisticMissile}` |
-| not airborne | `Ground, Vehicle` | **no** for rows 101/102 — `Vehicle` is in InvalidTargets | yes — `Ground` overlaps |
+| not airborne | `Ground, Vehicle` | **no** — `Vehicle` is in InvalidTargets | yes — `Ground` overlaps |
 
 **The weapon can only select the missile in the state where its warhead cannot touch it.** Player
 impact: the point-defence armament acquires an incoming ballistic missile, plays its firing effect,
@@ -261,16 +297,36 @@ match whichever tokens the corresponding weapon acquires).
 |---|---|
 | `PDLaserBike` | `td_nod_reconbike`, `td_nod_chemicalattackbike` (both gated on `td_nod_upgrade_blackmarketupgrades`) |
 | `PDLaserLTNK2` | `td_nod_lighttankmkii` (unconditional) |
-| `PointDefenseTesla` | `ra1_soviets_heavyteslatank` (unconditional) |
 
 Each warhead is used by its own weapon only, so the blast radius is exactly these four actors and no
 shared template is touched. ⛔ `Warhead@1Dam` and `Warhead@EMPUnit` are **warhead nodes**, so under
 `CLAUDE.md` rule 4 / DESIGN.md this change needs explicit maintainer permission before anyone edits
 it, and `Versus` must not be introduced inline.
 
+### 4.2b ✅ FIXED by Codex in `663147217`, and the fix is better than the one I proposed
+
+```yaml
+PDLaser:
+    Warhead@1Dam: SpreadDamage
++       ValidTargets: Ground, Missile, BulletAS, BallisticMissile
+```
+
+Adding `BallisticMissile` without generic `Air` closes the overlap against `^ShootableMissile`'s
+airborne targetable (`Air, BallisticMissile`) **without** granting anti-air splash to a
+point-defence laser. I had suggested adding `Air`; this is the more precise change. It propagates
+to both consumers through `Inherits: PDLaser`.
+
 ### 4.3 ⚠ What I did NOT verify, and why it matters here
 
-**Widening the mask may be necessary but not sufficient.** The missile actor has `Health.HP: 10000`
+**The mask fix is necessary but — still — not sufficient.** Confirmed at `663147217`:
+
+```
+^ShootableMissile   HP: 10000   Armor.Type: Bomber
+PDLaser             Damage: 1   ReloadDelay: 25
+```
+
+One damage per shot against ten thousand HP is 10,000 hits at 25 ticks each. The warhead now
+applies, and applies 1. The missile actor has `Health.HP: 10000`
 and `Armor.Type: Bomber`. Rows 101 and 102 carry **damage 1**. Even with a correct mask, 1 damage
 against 10,000 HP destroys nothing, so interception would still fail unless a separate kill
 mechanism exists that I have not found — for example an `AffectsIntegrity`/destroy path, a
