@@ -70,7 +70,7 @@ RA2_ARMOR = ["none", "flak", "plate", "light", "medium", "heavy",
              "wood", "steel", "concrete", "special_1", "special_2"]
 
 SECTION = re.compile(r"^\s*\[([^\]]+)\]")
-KV = re.compile(r"^\s*([A-Za-z0-9_.]+)\s*=\s*([^;]*)")
+KV = re.compile(r"^\s*([$A-Za-z0-9_.]+)\s*=\s*([^;]*)")
 
 
 def read_ini(path: pathlib.Path) -> dict[str, dict[str, str]]:
@@ -91,6 +91,50 @@ def read_ini(path: pathlib.Path) -> dict[str, dict[str, str]]:
         if m:
             cur[m.group(1).strip()] = m.group(2).strip()
     return out
+
+
+def resolve_inherits(ini: dict[str, dict[str, str]]) -> dict[str, dict[str, str]]:
+    """Flatten Vinifera's `$Inherits=` section inheritance. Child keys win; chains are followed.
+
+    ⛔ THIS IS WHY A NAIVE REFRESH OF DTA DESTROYS DATA (measured 2026-09-11).
+    DTA used to ship a SELF-CONTAINED `Rules.ini`: `[AFACT]` carried `BaseSection=GFACT` as a
+    comment-grade marker AND all 29 of its own keys, `Cost=5000` among them. The Vinifera
+    rewrite turned that into real inheritance — `[AFACT]` now carries `$Inherits=GFACT`, 7 keys,
+    and the line `;Cost=5000` COMMENTED OUT, because GFACT supplies it.
+
+    Copy the new file over the old one without this function and 781 sections silently shed
+    their inherited keys: 40,967 keys -> 25,492, and 2,991 corpus fields go `value -> None`.
+    Both files report 2,322 section headers, so the swap LOOKS clean in every cheap check.
+
+    ⛔ ORDER: resolve EACH FILE FIRST, then merge the Enhanced overlay. Never the other way.
+    Measured on DTA's own files: every `$Inherits` parent in Rules.ini resolves inside Rules.ini
+    and every parent in Enhance.ini resolves inside Enhance.ini (0 dangling either way), and each
+    file alone is cycle-free. Merging first manufactures 6 cycles that exist in NEITHER file,
+    because Enhanced deliberately INVERTS a chain: Classic has `[RAARTY] $Inherits=ARTY`, and
+    Enhance.ini reverses it to `[ARTY] $Inherits=RAARTY` to make the RA gun the base. Merged,
+    those two lines are a loop; per file they are two coherent rulesets. Resolving after the
+    merge silently emptied RAARTY, AIRAARTY and COASTARTY of armor/sight/speed/warhead.
+    """
+    resolved: dict[str, dict[str, str]] = {}
+
+    def flatten(name: str, seen: frozenset[str]) -> dict[str, str]:
+        if name in resolved:
+            return resolved[name]
+        own = ini.get(name)
+        if own is None:
+            return {}
+        parent = own.get("$Inherits", "").strip()
+        # A cycle would recurse forever; a missing parent is simply nothing to inherit.
+        if parent and parent not in seen and parent in ini:
+            merged = dict(flatten(parent, seen | {name}))
+            merged.update(own)
+        else:
+            merged = dict(own)
+        merged.pop("$Inherits", None)
+        resolved[name] = merged
+        return merged
+
+    return {name: flatten(name, frozenset()) for name in ini}
 
 
 def merge_overlay(base: dict, overlay: dict) -> dict:
@@ -169,11 +213,20 @@ def extract(label: str, spec: dict) -> tuple[list[dict], list[str]]:
     if digest == VANILLA_YR_MD5:
         return [], [f"{label}: REFUSED — this file is vanilla Yuri's Revenge (md5 {digest})"]
 
-    ini = read_ini(path)
+    def load(p: pathlib.Path) -> dict:
+        """One file, flattened against ITSELF — the unit of inheritance is the file."""
+        raw = read_ini(p)
+        n = sum(1 for v in raw.values() if "$Inherits" in v)
+        if n:
+            notes.append(f"{label}: flattened {n} $Inherits sections in {p.name}")
+            return resolve_inherits(raw)
+        return raw
+
+    ini = load(path)
     if spec.get("overlay"):
         ov = REF / spec["overlay"]
         if ov.exists():
-            ini = merge_overlay(ini, read_ini(ov))
+            ini = merge_overlay(ini, load(ov))
             notes.append(f"{label}: applied overlay {spec['overlay']}")
 
     engine = spec["engine"]
@@ -277,6 +330,8 @@ def main() -> int:
     ap.add_argument("--source", action="append", help="limit to these sources (repeatable)")
     ap.add_argument("--json", help="write the corpus to this path")
     ap.add_argument("--list", action="store_true", help="list sources and exit")
+    ap.add_argument("--force-partial", action="store_true",
+                    help="allow a --source run to overwrite a corpus holding other sources")
     args = ap.parse_args()
 
     if args.list:
@@ -306,6 +361,21 @@ def main() -> int:
 
     if args.json:
         out = pathlib.Path(args.json)
+        # ⛔ `--source X --json <corpus>` used to REPLACE the whole corpus with just X, deleting
+        #    every other source's rows. The write looks successful and says nothing. Refuse it:
+        #    a partial run may only write a partial file, and a full refresh needs no flag.
+        if args.source and out.exists():
+            have = set()
+            for line in out.read_text(encoding="utf-8").splitlines():
+                if line.strip():
+                    have.add(json.loads(line).get("source"))
+            lost = have - set(wanted)
+            if lost and not args.force_partial:
+                print(f"  REFUSED: {out} holds {len(lost)} other source(s) this run would "
+                      f"delete: {', '.join(sorted(lost))}", file=sys.stderr)
+                print("  Re-run without --source for a full refresh, or write to a scratch "
+                      "path and splice.", file=sys.stderr)
+                return 2
         out.parent.mkdir(parents=True, exist_ok=True)
         # One row per line: a changed unit is a one-line diff, and it greps. An indented
         # 10k-row array is neither reviewable nor small.

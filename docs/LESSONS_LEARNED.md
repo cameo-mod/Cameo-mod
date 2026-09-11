@@ -1657,3 +1657,44 @@ in minutes, and it was not run.
 ⚠ **A bulk delete is the wrong shape for this class of cleanup entirely.** Whatever
 genuinely-dead nodes existed among those 2248 are still there after the revert; they
 have to be found per-node, by resolving each parent chain.
+
+## ⛔ A reference source can move from REPEATED to INHERITED, and every cheap check says fine (2026-09-11)
+
+Refreshing DTA by copying `INI/Rules.ini` over `extraction/rules_DTA_Classic.ini` silently
+destroyed **2,991 corpus fields** (`1TNK` damage 25 → None, `AFACT` cost 5000 → None). Every
+quick sanity check passed: both files are plain-text TS rules, both parse, and **both report
+exactly 2,322 section headers**. The header count is the number a reviewer reaches for first and
+it is the number that proves nothing.
+
+**The cause is Vinifera's `$Inherits=`.** Old DTA shipped a SELF-CONTAINED ruleset: `[AFACT]`
+carried all 29 of its own keys with `Cost=5000` among them. The Vinifera rewrite turned that into
+real section inheritance — `[AFACT]` now carries `$Inherits=GFACT`, 7 keys, and the line
+`;Cost=5000` **commented out**, because the parent supplies it. Across the file: 781 sections
+with `BaseSection=` became 782 with `$Inherits=`, and **40,967 keys became 25,492**.
+
+`extract_ini_units.py` never complained because its `KV` pattern was `[A-Za-z0-9_.]+` — no `$` —
+so it did not merely mis-handle the directive, **it never saw the line at all**. This is the
+FieldLoader trap (rule 8b) in a second engine: an unknown key costs nothing at read time and
+everything downstream.
+
+Three rules fall out of it:
+
+1. **Match the file's own count, not a proxy.** `sum(len(v) for v in ini.values())` — total KEYS —
+   catches this instantly; section headers never will.
+2. **Resolve inheritance PER FILE, then merge overlays — never merge then resolve.** Measured on
+   DTA's own files: every `$Inherits` parent in `Rules.ini` resolves inside `Rules.ini`, every
+   parent in `Enhance.ini` resolves inside `Enhance.ini`, and each file alone is cycle-free.
+   Merging first manufactures **6 cycles that exist in NEITHER file**, because Enhanced
+   deliberately INVERTS a chain: Classic has `[RAARTY] $Inherits=ARTY`, Enhance.ini reverses it to
+   `[ARTY] $Inherits=RAARTY` so the RA gun becomes the base. Resolving after the merge emptied
+   `RAARTY`, `AIRAARTY` and `COASTARTY` of armor/sight/speed/warhead — 17 fields, and it looked
+   like a plausible upstream deletion rather than a bug in the reader.
+3. **The acceptance test is "0 fields lost", not "it ran".** Resolve the new file and compare
+   field by field against the old flattened one: the correct result is **0 `value -> None`** and a
+   short list of genuine changes. DTA's real delta is **9 fields** — a flak rework (`FlakWH`
+   Spread 3→12, `Flak` ROF 40→20, a new `AGFlakWH` warhead), plus minigunner range 2.5→2.67, a
+   pillbox warhead swap and a new `special_heavy` armor. Everything else was reader damage.
+
+⚠ **`extract_ini_units.py --source X --json <corpus>` used to REPLACE the whole corpus with X**,
+deleting the other eight sources, and said nothing. It now refuses unless `--force-partial`.
+A partial run may only write a partial file.
