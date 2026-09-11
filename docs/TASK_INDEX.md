@@ -30,8 +30,8 @@ anchor validity is enforced separately by `audit_doc_health` (D3/D4).
 1. Find the row for what you are about to do.
 2. Open the **READ FIRST** document *at the named section*. Not the whole file — the section.
 3. Run the **ALREADY BUILT** tools with `--help` before you write anything new.
-4. If you still think something is missing, say so in `DEVELOPMENT_LOG.md` **before** building
-   it. Every duplicate so far would have been caught by that one sentence.
+4. If you still think something is missing, record the existing-work check in the authorized task
+   record before building it. `AGENT_WORKSPACE.md` defines intake; `DEVELOPMENT_LOG.md` is history.
 
 ---
 
@@ -42,6 +42,8 @@ anchor validity is enforced separately by `audit_doc_health` (D3/D4).
 | **Anything at all, first session** | [`README.md`](README.md) → [`LESSONS_LEARNED.md`](LESSONS_LEARNED.md) → [`AGENT_WORKSPACE.md`](AGENT_WORKSPACE.md) → [`HANDOFF.md`](HANDOFF.md) → [`DESIGN.md`](DESIGN.md) | — |
 | **Picking up work** | [`HANDOFF.md`](HANDOFF.md) §3.A, then [`design/ROADMAP.md`](design/ROADMAP.md) | — |
 | **Four-faction September balance continuation** | [`balance/GRAND_PLAN_20260911.md`](balance/GRAND_PLAN_20260911.md) §1 current authorization and §4 bounded tasks; [`balance/PROJECT_STATUS_20260911.md`](balance/PROJECT_STATUS_20260911.md) current state/ownership | Astra reviewed the Sol batch; GP-03 completion was withdrawn, original frozen ledger inputs recovered, and dependent proposal holds corrected. Continue from the status table and `astra_review_20260911` receipts. |
+| **Picking up work / coordination** | [`AGENT_WORKSPACE.md`](AGENT_WORKSPACE.md) § Cross-provider coordination, then [`HANDOFF.md`](HANDOFF.md) §3.A and [`design/ROADMAP.md`](design/ROADMAP.md) for technical context | Check the current task, reservations and linked PR before writing |
+| **Agent coordination / task claims / handoff** | [`../AGENTS.md`](../AGENTS.md) → [`AGENT_WORKSPACE.md`](AGENT_WORKSPACE.md) § Cross-provider coordination | GitHub Project item or linked issue → isolated worktree/branch → draft PR |
 | **Weapon structure (W24 / W23 / A5)** | [`design/BALANCE_PROGRAM_PLAN.md`](design/BALANCE_PROGRAM_PLAN.md) §0a **order of operations** and §1b **W24 diagnosis**; [`design/WEAPON_3WAY_SPLIT.md`](design/WEAPON_3WAY_SPLIT.md) | ⛔ **`tools/audit/audit_weapon_shape.py` FIRST** — the ONE-WARHEAD / THREE-INHERIT law (maintainer 2026-09-06). The exemption registry was retired; [`DESIGN.md`](DESIGN.md) §11b.2 preserves historical intent and taxonomy, not exemptions. Follow current §11b.1 and review ambiguous conversions; the old registry `--snapshot` command no longer exists · `tools/audit/audit_split_definitions.py` (is the weapon defined in TWO live files?) · `tools/audit/audit_warhead_split.py` · `tools/audit/audit_three_way_split.py` · `tools/audit/audit_unconverted_templates.py` · `tools/audit/review_resolve_diff.py` · `tools/audit/find_empty_warhead.py` · ⛔ **`tools/audit/audit_release_drift.py`** — the only gate that measures against a SHIPPED build instead of against the tree itself; run it after EVERY collapse |
 | **Warhead templates / families** | [`design/WEAPON_TYPE_SYSTEM.md`](design/WEAPON_TYPE_SYSTEM.md); [`DESIGN.md`](DESIGN.md) §12.0h MEAN-100, §12.0d class tilt, **the missile ROLE law** (ground->`MissileHE`, air->`MissileAA`, both->`MissileAP`; `MissileHE` never vs Air) | `tools/balance/gen_weapon_template.py` · `tools/balance/splice_templates.py` · `tools/balance/verify_generator_sync.py` · `tools/audit/audit_missile_role_family.py` |
 | **Spread / Falloff** | [`design/SPREAD_FALLOFF_PLAN.md`](design/SPREAD_FALLOFF_PLAN.md) | `tools/balance/gen_weapon_template.py` (`PHYSICS_SHAPES`) |
@@ -89,9 +91,10 @@ Put a new fact in exactly one of these. A fact in two places is a future contrad
 | binding law (naming, formulas, tiers, armor) | `DESIGN.md` |
 | a trap that cost someone time | `LESSONS_LEARNED.md` |
 | a number a decision rests on | `docs/audit/doc_claims.yaml` |
-| current state + priority queue | `HANDOFF.md` |
-| the granular task list | `design/ROADMAP.md` |
+| project state + priority rationale | `HANDOFF.md` |
+| live ownership/status after pilot activation | GitHub Project and linked task, per `AGENT_WORKSPACE.md` |
+| the program backlog and historical technical task list | `design/ROADMAP.md` |
 | a reference-pipeline ruling (R1–R15) | `design/REFERENCE_EXTRACTION_PLAN.md` |
 | the weapon/pricing board (W1–W26) | `design/BALANCE_PROGRAM_PLAN.md` |
-| what an agent did, and agent-to-agent messages | `DEVELOPMENT_LOG.md` |
+| historical implementation evidence | `DEVELOPMENT_LOG.md`; new task receipts go in the linked PR/task |
 | provenance only, never authority | `docs/history/**` |

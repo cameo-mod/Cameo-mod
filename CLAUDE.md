@@ -1,6 +1,10 @@
 # Cameo-mod
 
-## ⚡ START HERE — read before acting (the rest of this file is the full contract)
+> **Shared workflow:** Read `AGENTS.md` first, then `docs/AGENT_WORKSPACE.md` for the coordination
+> design and activation status. Human task instructions remain controlling. This file adds
+> technical context; its dated rosters and operational recipes do not grant claims or publication.
+
+## ⚡ START HERE — technical context after the shared workflow
 
 **Don't trust, verify.** Before asserting anything is done / pending / blocked / missing,
 check the artifact itself — grep the data, `ls` the file (incl. `~/Downloads`), run the tool,
@@ -40,20 +44,13 @@ never for status.
 5. **Weapon 3-way split:** preserve resolved behaviour (`Damage` verbatim, projectile fields — the
    Frankenstein merge), `find_empty_warhead.py = 0`, boot-gate per batch. Verify a conversion with
    `tools/audit/review_resolve_diff.py` (before/after resolve).
-6. **Multi-agent tree** (maintainer, co-maintainer, other agents, you): **one owner per file-set.**
-   Check a file's mtime and `git log -3 <file>` for a live agent before editing; re-verify others'
-   commits before building on them; never `git checkout -- .` or wide-add someone else's WIP.
-   The file-set boundaries are defined in `docs/design/BALANCE_PROGRAM_PLAN.md` §2.
-7. **Rebuild C# before boot** if `OpenRA.Mods.Cameo/` or `engine/` changed
-   (`DOTNET_ROLL_FORWARD=LatestMajor dotnet build -c Release --nologo -p:TargetPlatform=win-x64` → `engine/bin`).
-   ⚠ **`engine/` IS NOT PART OF THIS REPO** — it is `.gitignore`d, has no `.git`/`.gitmodules`,
-   and `git ls-files engine` returns **zero** files (`git` run from inside it silently targets
-   the PARENT repo). Editing `engine/**` produces work that **cannot be committed here** and is
-   **deleted by the next `make all`**. To change the engine, follow
-   **`docs/LESSONS_LEARNED.md` → "The canonical engine update pipeline"**: edit the SEPARATE
-   `cameo-engine` clone of `github.com/cameo-mod/OpenRA` → push → `git rev-parse cameo-engine`
-   for the full 40-char hash → set `ENGINE_VERSION` in **`mod.config`** → `make.cmd all` →
-   verify `engine/VERSION` + recreate `engine/glsl/` shaders → boot-gate → commit `mod.config`.
+6. **Use the shared claim and checkout procedure** in `docs/AGENT_WORKSPACE.md`.
+   File mtimes, Git authors and agent nicknames cannot establish live ownership. Inspect existing
+   reservations and have the designated human integrator resolve overlap. Preserve others' work.
+7. **Rebuild affected C# before runtime validation.** Follow the current engine and validation
+   procedure in `docs/AGENT_WORKSPACE.md`, including preflight before `make all`. `engine/` is
+   ignored build input; retain engine source in the separate OpenRA repository. Pin changes and
+   publication require explicit human authorization. Never infer permission from an old recipe.
    **First check whether a mod-side SHADOW avoids all of that:** `ObjectCreator.FindType` takes
    the first assembly in `mod.yaml`'s `Assemblies` list (AS, CA, **Cameo**, Cnc, D2k, Common),
    so an `OpenRA.Mods.Cameo` type of the same name wins with zero yaml changes (precedent:
@@ -207,18 +204,13 @@ Then, as the task needs them:
 - Recurring code-health audits and freshness policy: `docs/audit/PERIODIC.md`
   and `docs/audit/periodic.json`.
 
-## Commit gate (absolute — no exceptions)
+## Validation and publication
 
-**Never commit without booting the game first.** Run `launch-game.cmd`
-and confirm it reaches the main menu with NO new `exception-*.log` in
-`%APPDATA%/OpenRA/Logs` (snapshot the log list BEFORE launching; menu
-proof: perf.log ends with `MenuPostProcessEffect.PostWorldLoaded`).
-The Python resolver does not catch junk trait nodes — only the engine
-does, and it parses every faction at boot. If C# sources changed or
-were pulled, rebuild first (`dotnet build -c Release --nologo
--p:TargetPlatform=win-x64`); stale DLLs crash the boot with
-`Cannot locate type: …Info`. Commit with scoped `git add <files>`,
-never `git add -A` — the maintainer usually has live uncommitted edits.
+Use `docs/AGENT_WORKSPACE.md` for validation appropriate to the change. Documentation/templates
+need syntax and link checks; runtime changes need build/boot and relevant behavior evidence.
+Launch the game only when authorized and report pending runtime checks explicitly. A boot proves
+loading, not gameplay correctness. Stage named files and preserve the human owner's publication
+and merge boundaries.
 
 ## Balance changes: the pipeline, never by hand
 

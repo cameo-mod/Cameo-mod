@@ -40,6 +40,10 @@ Earlier dated snapshots below remain historical, and the only-UP rule remains.
 
 > **Numeric evidence refresh — 2026-09-10, combined `839cdced4` plus reopened tooling.** `multi_main_fired_weapons` = **120**; `unconverted_template_inheritors` = **1590**. Measured on this combined tree; predicates and tolerances are unchanged. The flat-health denominator correction changes diagnostics, not live weapons or prices. Earlier branch-specific snapshots remain historical.
 
+> **Coordination transition:** `AGENTS.md` and `AGENT_WORKSPACE.md` describe the proposed shared
+> pilot and its activation gate. This handoff retains technical decisions and historical evidence.
+> Dated rosters and claim tables below cannot establish current ownership on their own. Existing
+> assignments remain reserved until their human owners confirm a migration or release.
 
 ## ⛔⛔ 2026-09-07 — READ THIS FIRST: the reference map, and one absolute rule
 
@@ -368,7 +372,7 @@ shipped that many, so RV expands the roster like CA and DTA do. `OpenRA RA2 offi
 
 ⚠ **No balance number has been written to yaml.** Nothing is applied until the map is right.
 
-## ⭐ AGENT ASSIGNMENTS — who is doing what (2026-09-06)
+## ⭐ Historical agent assignments (2026-09-06)
 
 | agent | lane |
 |---|---|
@@ -381,10 +385,9 @@ shipped that many, so RV expands the roster like CA and DTA do. `OpenRA RA2 offi
 | **Blaze** | `atreides` + `corrino` + `harkonnen` + `futuretech` + `yuri` — **32 items**, incl. **14 of the 15 actor-id renames left in the whole mod** → `TASK_2026-09-06_blaze.md` |
 | **Claude-Local (Opus 5)** | rulings, review, squash-merges to master, and the gates |
 
-⚠ **Nobody merges to master except Claude-Local.** Agents commit freely on their own branch
-and report a completed work item; Claude reviews and squash-merges one meaningful commit. The
-maintainer must be able to read master — 107 commits in one day, 49 of them touching only
-`DEVELOPMENT_LOG.md`, is not reviewable.
+The 2026-09-06 arrangement had Claude-Local review and squash the fleet's branches. Its purpose
+was readable integration after a day of 107 commits, including 49 log-only updates. This is
+historical context; current human task authorization governs merges.
 
 ### ⛔ 2026-09-07 — four bugs shipped past every gate; three new audits + one hook rule
 
@@ -714,9 +717,8 @@ Rules 1–2 are enforced by hooks in `.claude/settings.json`.
 5. **Weapon 3-way split:** preserve resolved behaviour (`Damage` verbatim, projectile fields),
    `find_empty_warhead.py` = 0, boot-gate per batch. Verify with
    `tools/audit/review_resolve_diff.py` (resolve before and after).
-6. **One owner per file-set.** Check a file's mtime and `git log -3 <file>` for a live agent
-   before editing. Re-verify others' commits before building on them. Never
-   `git checkout -- .` or wide-add someone else's work.
+6. **One owner per file-set.** Follow the claim/recovery procedure in `AGENT_WORKSPACE.md`.
+   Mtimes and Git authors do not prove ownership. Re-verify commits and preserve others' work.
 7. **Rebuild C# before booting** if `OpenRA.Mods.Cameo/` or `engine/` changed. Stale DLLs crash
    the boot with `Cannot locate type: …Info`. See §5 for the engine pipeline.
 8. **Audit reports regenerate via `bash tools/audit/run_all.sh` only** — a PowerShell `>`
@@ -731,7 +733,10 @@ Rules 1–2 are enforced by hooks in `.claude/settings.json`.
     model misreport itself as an older one. A non-Claude agent signs as itself
     (`Co-Authored-By: Devin AI <devin@cognition.ai>`) and never appends the Claude trailer.
 
-### The gate before every commit
+### Historical gate snapshot (2026-08-23)
+
+Use `AGENT_WORKSPACE.md` for current scoped validation. The following commands and counts record
+the old gate; they are not a requirement to run every check for every change.
 
 ```sh
 python -m unittest discover -s tools/tests -t tools/tests   # all green (227 as of 2026-08-23)
@@ -742,13 +747,9 @@ bash tools/audit/run_all.sh                                 # bash ONLY
 python tools/balance/extract_stats.py --check               # 0 drifted
 ```
 
-…then the boot gate (rule 1). If Windows Smart App Control blocks the launch, use one of the
-four documented options in `LESSONS_LEARNED.md` § Smart App Control and **record the SAC state
-in the commit message**. Never silently skip the gate, and never claim it passed when it did not.
-
-`utility.cmd cameo --check-yaml` is a **separate lint tool**, not a boot-gate substitute. It
-takes 10+ minutes; run it once you have finished a batch and expect 0 errors and 0 warnings —
-not repeatedly.
+The old gate also required a launch and a separate YAML lint pass. Current validation is defined
+in `AGENT_WORKSPACE.md`: do not run `--check-yaml`, do not change OS security settings, and report
+any pending runtime check instead of claiming it passed.
 
 ---
 
@@ -758,28 +759,23 @@ Crashes and player-visible regressions jump everything below.
 
 ### 3.A — MULTI-AGENT COORDINATION (read this FIRST if you are an AI agent)
 
-**As of 2026-08-25, there are 5 Devin AI agents running locally.** Each agent MUST:
-1. Pick a unique name from the list below (or claim a new one in `DEVELOPMENT_LOG.md`).
-2. Read `DEVELOPMENT_LOG.md` §"Active claims" BEFORE editing any file.
-3. Claim a file-set by adding an entry to `DEVELOPMENT_LOG.md` §"Active claims" BEFORE editing.
-4. NEVER edit a file that another agent has claimed or that is in the locked list.
-5. After every step: update `DEVELOPMENT_LOG.md` with what you did, why, and what's next.
-6. Before committing: run verification (find_empty_warhead, audit_warhead_split,
-   review_resolve_diff, audit_doc_claims) and boot-gate (`launch-game.cmd`).
-7. Use scoped `git add <files>` only — never `git add -A` or `git add .`.
+Read `AGENT_WORKSPACE.md` for the current coordination proposal and activation status. The following
+roster and dated standing orders are historical evidence, not fresh claim or merge authorization.
+Do not pick an identity from them or overwrite their owners' work without confirmation.
 
-#### Agent roster and current assignments
+The 2026-08-25 workflow recorded five local Devin agents and used chosen names plus
+`DEVELOPMENT_LOG.md` entries for claims. It required frequent log updates and broad checks.
+That mechanism is retained here as history. New tasks use the current human assignment and,
+after pilot activation, the Project record and recovery procedure in `AGENT_WORKSPACE.md`.
 
-> ⭐ **THIS IS THE ONLY AUTHORITATIVE ROSTER.** Three other ownership tables exist
-> lower in this file (D2k faction completion, §3.C, §3.6); all three are marked
-> SUPERSEDED and contradict this one. Claim file-sets from HERE and nowhere else.
+#### Historical roster and assignments
 
-> **⚠ FLEET HIERARCHY (maintainer order 2026-09-05):** *"Claude AI is now your big
-> boss and controls all other AI Agents so you must always listen to him and do
-> EXACTLY as he says!"* — **Claude (Opus 5, local) is the fleet coordinator.** All
-> agents take direction from Claude. Aurora remains D2k coordinator **under Claude's
-> authority.** Claude has not yet issued consolidated fleet-wide orders in his
-> coordinator capacity; until he does, agents continue their established roles below.
+> This roster formerly superseded three conflicting tables lower in this file. It is now a
+> dated reservation record: contact the human owner before release or reassignment.
+
+> Historical hierarchy, 2026-09-05: Claude-Local coordinated that fleet, with Aurora handling
+> D2k. This records the former arrangement; it does not appoint a current coordinator or grant
+> any new write or merge authority.
 
 | Agent name | Status | Current task | Files claimed |
 |---|---|---|---|
@@ -796,10 +792,11 @@ Crashes and player-visible regressions jump everything below.
 
 ---
 
-## ⭐ STANDING ORDERS — issued by Claude-Local, 2026-09-05 (maintainer put me in coordination)
+## ⭐ Historical standing orders — Claude-Local, 2026-09-05
 
-The maintainer has asked me to coordinate this team and to review work as it completes.
-These orders supersede any conflicting instruction in a SUPERSEDED table lower in this file.
+The following dated orders record a previous fleet recovery. Their first-person instructions
+are historical quotations, not current task grants. Preserve unresolved reservations and check
+them with the human owner under `AGENT_WORKSPACE.md` before acting.
 
 ### How we work (read once, then follow it)
 
@@ -823,7 +820,7 @@ These orders supersede any conflicting instruction in a SUPERSEDED table lower i
    back short. For any presence/absence check use `git show <rev>:<file> | grep -a`.
    This nearly cost 30 live weapon nodes during the master merge.
 
-### Ownership, de-conflicted (this replaces the overlapping claims)
+### Historical ownership reconciliation
 
 Three stale tables in this file assigned D2k/Harkonnen to **two** agents and named **two**
 different coordinators. Resolved against §3.A and against who has actually been committing:
@@ -959,10 +956,9 @@ Prerequisites: ~d2k_barracks` etc.
 #### Agent assignments for D2k faction completion
 
 
-> ⛔ **SUPERSEDED — this ownership table is STALE. The single authoritative roster is
-> §3.A "Agent roster and current assignments".** It is kept only as provenance; it
-> contradicts §3.A on who owns D2k/Harkonnen and on who the coordinator is. Do NOT
-> claim a file-set from this table.
+> **Historical ownership table.** Retained as provenance only. For current assignments,
+> use `AGENT_WORKSPACE.md` and the human-approved task record. Preserve existing reservations
+> until their human owners confirm release or reassignment.
 
 | agent | faction | file-set | scope of work |
 |---|---|---|---|
@@ -1093,20 +1089,11 @@ Prerequisites: ~d2k_barracks` etc.
 5. **Do not flip `Selectable: true` prematurely.** A faction is only selectable when it has a full minimum viable tech tree: con yard, wind trap, refinery, harvester, barracks, light vehicle factory, MCV, one anti-ground unit, and `StartingUnits`.
 6. **Boot-gate and scoped commits.** `launch-game.cmd` before every commit; `git add <files>` only; never `-A`.
 
-#### How to coordinate after every step
+#### How to coordinate current work
 
-1. **Before editing**: check `DEVELOPMENT_LOG.md` §"Active claims" for file ownership.
-2. **After editing**: add an entry to `DEVELOPMENT_LOG.md` with:
-   - Your agent name
-   - What file(s) you edited
-   - What weapons you converted
-   - Why you made each decision (which rule, which pattern, which precedent)
-   - Verification results (find_empty_warhead, audit_warhead_split, review_resolve_diff)
-   - What's next
-3. **Before committing**: verify no other agent has uncommitted work in your file set
-   (`git status --short` + `git diff --name-only`).
-4. **After committing**: update your claim in `DEVELOPMENT_LOG.md` to say "COMMITTED"
-   with the commit hash.
+Follow `AGENT_WORKSPACE.md`. Record scope, evidence and commit/PR receipts in the approved task
+record. The former per-step DEVELOPMENT_LOG updates are historical; do not create a second live
+claim or status table.
 
 #### Devin-Prime handoff message (2026-08-25)
 
@@ -1148,10 +1135,9 @@ When a weapon has `Bullet_Light` + `Bullet_Medium` as two damage mains:
 **Coordinating agent:** Devin-Echo. See full plan and per-agent instructions in `DEVELOPMENT_LOG.md` §"D2k faction rollout plan — Atreides / Harkonnen / Corrino".
 
 
-> ⛔ **SUPERSEDED — this ownership table is STALE. The single authoritative roster is
-> §3.A "Agent roster and current assignments".** It is kept only as provenance; it
-> contradicts §3.A on who owns D2k/Harkonnen and on who the coordinator is. Do NOT
-> claim a file-set from this table.
+> **Historical ownership table.** Retained as provenance only. For current assignments,
+> use `AGENT_WORKSPACE.md` and the human-approved task record. Preserve existing reservations
+> until their human owners confirm release or reassignment.
 
 | Agent | Pack | Key deliverable | Verification before commit |
 |---|---|---|---|
@@ -1552,10 +1538,9 @@ another agent claimed it in the last 30 minutes, do not touch it.
 **Agent registry** (maintained in `DEVELOPMENT_LOG.md` → "Agent registry", mirrored here):
 
 
-> ⛔ **SUPERSEDED — this ownership table is STALE. The single authoritative roster is
-> §3.A "Agent roster and current assignments".** It is kept only as provenance; it
-> contradicts §3.A on who owns D2k/Harkonnen and on who the coordinator is. Do NOT
-> claim a file-set from this table.
+> **Historical ownership table.** Retained as provenance only. For current assignments,
+> use `AGENT_WORKSPACE.md` and the human-approved task record. Preserve existing reservations
+> until their human owners confirm release or reassignment.
 
 | name | identity | current file-set | current task |
 |---|---|---|---|
@@ -1574,8 +1559,8 @@ another agent claimed it in the last 30 minutes, do not touch it.
    your own batch commit, and re-read them before editing (they change every few minutes).
 4. After every commit, post a summary to `DEVELOPMENT_LOG.md` with your agent name,
    what you changed, and why.
-5. Before starting a new batch, re-read `DEVELOPMENT_LOG.md` → "Active claims" and
-   verify no other agent claimed your target files.
+5. Before starting a new batch, verify ownership using the active task record and the human
+   integrator; historical `DEVELOPMENT_LOG.md` entries are context only.
 6. **Never `git add -A` or `git add .`** — scoped adds only. Another agent's WIP is
    always in the tree.
 7. Boot-gate before every weapon commit. If another agent's uncommitted WIP is in the
@@ -1624,7 +1609,7 @@ index — read the entry before working in that area.
 | A missing `Versus` row | is not "no opinion" — an empty match returns 100, so a plated unit LOSES its armor. Every plating gets a row in EVERY template. |
 | An armor upgrade must never increase incoming damage | DESIGN §12.0e law 4. Guard: `audit_armor_upgrade_harm.py`. |
 | Bulk renames | never do a bare-identifier substitution: the same literal is a weapon, an actor, a condition and a sprite in this tree. Match the exact YAML field with a full-token comparison. |
-| Loose `*_extracted/` map folders | `.oramap` is a zip; the packaged file is what ships and silently shadows loose edits. Repack in the same session, then validate with `--check-yaml`. |
+| Loose `*_extracted/` map folders | `.oramap` is a zip; the packaged file is what ships and silently shadows loose edits. Repack, then validate the affected map using the current AGENT_WORKSPACE procedure. |
 | UTF-16 audit reports | a PowerShell `>` redirect corrupts them. `run_all.sh` only. |
 
 ---

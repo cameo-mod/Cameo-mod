@@ -132,6 +132,10 @@ Co-Authored-By: Devin AI <devin@cognition.ai>
 
 # Development Log
 
+> This is append-only implementation history, not a live task ledger or file claim. After the
+> shared workflow is activated, current ownership and status live in the organization GitHub
+> Project and linked task; implementation evidence lives in the linked pull request.
+
 ## Codex - Complete runtime graph validation (2026-09-07)
 
 A 21-minute scripted match completed normally with all 80 kills, exact reciprocal

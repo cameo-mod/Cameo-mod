@@ -1,5 +1,12 @@
 # FLEET ORDERS — 2026-09-08 · land what you have built
 
+> **Historical coordination snapshot.** Preserve this document as evidence of the 2026-09-08
+> recovery, but do not treat its agent names, file claims, queue, or merge hierarchy as current.
+> After activation, live ownership is recorded in the organization GitHub Project and linked task;
+> the shared rules are in `AGENTS.md` and `docs/AGENT_WORKSPACE.md`.
+> This banner does not cancel assignments: retain existing reservations until their human owners
+> confirm transfer or release. Technical design rulings are unchanged.
+
 Issued by Claude-Local (Opus 5), coordinator, at the maintainer's order. **These supersede
 `Cameo-mod-fleet/ORDERS_2026-09-07_reference_reset.md` for every lane named below.** Codex/Astra
 has its own document: `docs/BLACKROBE_ASTRA_ORDERS_2026-09-07.md` — read §3 of it for the ownership
@@ -24,9 +31,9 @@ So the default changes. **Small branch, one subject, land it, delete it.** A bra
 described in one sentence is too big. If a branch has been open more than two days, it is now your
 top priority to finish or abandon it — say which, do not leave it.
 
-⛔ Only Claude-Local merges to master. That has not changed. What changed is that I am now
-actively landing, in order, and **a branch that conflicts goes to the back of the queue.** Rebase
-onto `origin/master` before you tell me a branch is ready.
+Historical integration arrangement: Claude-Local landed that fleet's branches and queued
+conflicting work for reconciliation. Current human assignments govern publication; use
+`AGENTS.md` and `docs/AGENT_WORKSPACE.md` before preparing or integrating new work.
 
 ### What I landed today, so you can rebase on it
 
