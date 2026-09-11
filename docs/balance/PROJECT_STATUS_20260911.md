@@ -106,8 +106,9 @@ continuation is a linked draft from
 The new draft is an aggregate preservation checkpoint that includes #342's
 history. PRs #339–342 overlap it; none is merge-approved and they must not all be
 merged blindly. Original baselines and the old checkpoint manifest are unchanged.
-The GP-02 contract-hardening implementation is committed through
-`12ca1602d` (snapshot-HEAD identity check), pushed to Blackrobe's fork and
+The GP-02 contract-hardening and support-armament pricing implementation is
+committed through `748832569` (latest support-tag/guard batch), pushed to
+Blackrobe's fork and
 included in [draft PR #345](https://github.com/cameo-mod/Cameo-mod/pull/345).
 
 From an existing Cameo clone, use a new worktree to preserve your own edits:
@@ -198,6 +199,19 @@ mismatches retained as 20 unresolved scenario records. The snapshot explicitly
 captures dirty local ledgers, so that commit is not proof of the captured source
 state. The candidate remains unreviewed for substantive historical equivalence;
 it does not satisfy the admission contract or unlock any armor vote.
+
+### Latest Luna Max batch — armament-level support pricing
+
+Point-defense interception is now represented as an armament-level pricing
+decision. The extractor marks `pointdefense` and `pointdefensedeployed` routes
+with `support_armament: true`, `pricing: false` and a reason, while keeping
+their resolved weapon fields for route evidence. The refreshed ledgers contain
+nine such routes on eight actors, including the Light Tank Mk. II. The
+extractor also emits an `ALL_POSITIVE_ARMAMENTS_UNPRICED` guard for a buildable
+actor whose non-support positive armaments are all excluded, and
+`fit_class.pricing_armaments` refuses that guarded state. Support-only and
+non-buildable actors remain valid zero-offense cases. The dedicated support
+pricing tests pass **5/5**; no YAML or gameplay values changed.
 
 - The reviewed continuation evidence is grouped in
   [astra_review_20260911](../audit/latest/astra_review_20260911/review.json).

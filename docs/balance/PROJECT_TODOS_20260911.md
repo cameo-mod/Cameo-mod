@@ -83,6 +83,9 @@ five-stat table and separate generic evidence without changing source or YAML.
 - [x] Finish the bespoke Sonic/Cryo/status-effect route audit before any role
   vote; keep status valuation, uptime and resistance as a separate deferred
   decision.
+- [x] Tag point-defense interception as armament-level support pricing, retain
+  its resolved payload for route evidence, and fail closed when a buildable
+  actor has no priced non-support positive armament.
 
 Acceptance: every changed route has an explicit source or policy reason, and
 unresolved global cases remain visible rather than being forced into a class.
@@ -319,6 +322,11 @@ table covers all 163 actors, including separate economy, support, cargo,
 garrison, limited-unit and air/naval/defense-model routes. The Discord heartbeat
 is active every 15 minutes through 14 September 2026 at 00:16:58 WIB and uses a
 new temporary external-browser tab for each check.
+
+The support-pricing correction now marks nine point-defense armament routes on
+eight actors as support-only, keeps their payload evidence, and guards against
+buildable actors with no priced non-support positive armament. It changes no
+YAML or gameplay values.
 
 ## Current state
 
