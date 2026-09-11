@@ -23,7 +23,9 @@ The [portable input packet](balance/checkpoints/20260911/claude-continuation/REA
 includes the four comparison inputs and all 71 original frozen ledger inputs.
 Use the current status above instead of treating dated logs below as new orders.
 This handoff authorizes no merge, game launch, build or external agent setup.
-Scheduled Discord checks remain paused. The repository-wide history follows.
+Scheduled Discord checks are active every 15 minutes through 14 September 2026
+at 00:16:58 WIB, using a new temporary external-browser tab for each check.
+The repository-wide history follows.
 
 
 ## 2026-09-10 — source PR340 warhead-family reach measurement
