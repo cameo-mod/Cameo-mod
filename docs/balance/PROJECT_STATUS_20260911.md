@@ -202,6 +202,12 @@ pending class map. The published HTML now reports **66 originals, 82 expanded,
 `damage/tick`, and carries the approved `after` class column. It remains a
 static review artifact; no proposal or gameplay value was applied.
 
+The approved 1,500-per-tier promotion pilot has a separate readiness receipt:
+all 40 direct promotion-token consumers still have non-final GP-04 dispositions
+(25 scalar-coverage, seven limited-unit, four cargo-dependent, three air/naval
+class and one support exception). The receipt keeps the atomic inherit-removal
+and pricing-input batch fail-closed; no gameplay content was changed.
+
 ### Latest Luna Max batch — GP-02 contract hardening
 
 The reconstruction admission check in `tools/balance/assemble_four_voice_pilot.py`

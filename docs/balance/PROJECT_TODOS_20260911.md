@@ -257,6 +257,10 @@ factions remain explicitly out of scope.
   Revisit the accepted coefficient
   only if corrected impact materially changes the proposal; no blanket approval
   request for ordinary tool corrections.
+- [x] Check the approved 1500-per-tier batch against the current GP-04 table;
+  the readiness receipt records 0/40 promotion consumers ready, so no partial
+  gameplay batch is safe. See
+  `docs/audit/latest/promotion_batch_readiness_20260912.md`.
 
 Acceptance: the candidate reports preserve `C`, `f(C)`, promotion tier,
 relative discount and the C <= B plateau explicitly, and separate the 40
