@@ -671,21 +671,79 @@ def burst_cycle(arm, anum):
     return rel + (burst - 1) * delay
 
 
+# Tokens that mean "somebody BOUGHT this" -- an upgrade, a promotion, or a veterancy rank.
+# Everything else in a condition is RUNTIME STATE the unit reaches on its own: charge level,
+# power, deployment, parachute, cloak. The distinction is the whole point of `is_upgrade_gated`
+# and conflating the two priced 44 actors at zero DPS.
+_BOUGHT = re.compile(r"(upgrade|promotion)", re.I)
+_RANK = re.compile(r"^rank[-_]", re.I)
+_CMP = re.compile(r"[A-Za-z_][\w.]*\s*(?:==|!=|>=|<=|>|<)\s*\d+")
+
+
+def _is_bought(tok):
+    return bool(_BOUGHT.search(tok) or _RANK.match(tok))
+
+
 def is_upgrade_gated(arm):
-    """True when this armament only fires once an UPGRADE or rank is granted.
+    """True when this armament can fire ONLY after something is bought.
 
-    The ledger records the armament's condition in `requires`, and it has three shapes:
-      None            always active
-      `!upgrade_x`    active only WITHOUT the upgrade -- this IS the baseline form
-      `upgrade_x`     active only WITH it -- an upgraded form, and not what we price
+    ⛔ THIS WAS WRONG TWICE AND IT COST 44 ACTORS THEIR ENTIRE DPS (measured 2026-09-11).
+    The old body was::
 
-    A compound is gated unless every clause is a negation.
+        parts = req.replace("&"," ").replace(",", " ").replace("|"," ").split()
+        return any(not p.startswith("!") for p in parts)
+
+    1. **It never stripped parentheses.** `(!TeslaCoilCharge && !unpowered)` tokenises to
+       `(!TeslaCoilCharge`, which does not start with `!`, so EVERY parenthesised condition read
+       as gated no matter what it said.
+    2. **It treated runtime STATE as a purchase.** `ra2_soviets_teslacoil`'s baseline armament
+       requires `((!TeslaCoilCharge && !unpowered) || (TeslaCoilCharge == 1 && unpowered))
+       && (!ra2_soviets_upgrade_teslaoverload && !rank-elite)` -- no upgrade, no rank, just charge
+       and power. All six of its armaments were classified as gated, `baseline_armaments` returned
+       nothing, and the coil priced at 0 DPS. So did 43 other actors.
+
+    The question this function actually has to answer is: **can this armament fire with nothing
+    bought?** So pin every bought token FALSE, leave runtime state free, and ask whether any
+    assignment satisfies the condition. The state space is tiny (<=6 distinct tokens in practice),
+    so enumerate it rather than reason about it.
+
+    ⚠ The seam is `_is_bought`, and it IS a name rule -- `upgrade`/`promotion`/`rank-`. That is far
+    narrower than the old "anything without a leading !", but it is still a naming convention, so a
+    bought token named outside it would read as free state. Prefer widening `_BOUGHT` over
+    reintroducing a structural guess.
     """
     req = str(arm.get("requires") or "").strip()
     if not req:
         return False
-    parts = [p for p in req.replace("&", " ").replace(",", " ").replace("|", " ").split() if p]
-    return any(not p.startswith("!") for p in parts)
+
+    # Comparisons on counters (`TeslaCoilCharge == 1`) are single boolean facts, not two tokens.
+    cmps = {}
+    def _hold(m):
+        key = f"__cmp{len(cmps)}__"
+        cmps[key] = m.group(0)
+        return key
+    expr = _CMP.sub(_hold, req)
+
+    expr = expr.replace("&&", " and ").replace("||", " or ").replace("!", " not ")
+    toks = sorted(set(re.findall(r"[A-Za-z_][\w.\-]*", expr)) - {"and", "or", "not"})
+    free = [x for x in toks if not _is_bought(x)]
+    if len(free) > 16:                      # pathological; fall back to "not gated" rather than lie
+        return False
+
+    safe = expr
+    for x in toks:
+        safe = re.sub(rf"(?<![\w.]){re.escape(x)}(?![\w.])", f"v['{x}']", safe)
+
+    for mask in range(1 << len(free)):
+        env = {x: False for x in toks}
+        for i, x in enumerate(free):
+            env[x] = bool(mask & (1 << i))
+        try:
+            if eval(safe, {"__builtins__": {}}, {"v": env}):   # noqa: S307 - fixed grammar, no input
+                return False
+        except Exception:
+            return False                     # unparseable condition is not evidence of a purchase
+    return True
 
 
 def baseline_armaments(arms):
