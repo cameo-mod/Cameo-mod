@@ -105,9 +105,9 @@ continuation is a linked draft from
 The new draft is an aggregate preservation checkpoint that includes #342's
 history. PRs #339–342 overlap it; none is merge-approved and they must not all be
 merged blindly. Original baselines and the old checkpoint manifest are unchanged.
-The GP-02 contract-hardening, support-armament pricing and PDLaser payload
-correction are committed through `663147217` (latest reviewed batch), pushed to
-Blackrobe's fork and
+The GP-02 contract-hardening, support-armament pricing, PDLaser payload and
+reference-map tooling corrections are committed through `469dce61c` (latest
+reviewed batch), pushed to Blackrobe's fork and
 included in [draft PR #345](https://github.com/cameo-mod/Cameo-mod/pull/345).
 
 From an existing Cameo clone, use a new worktree to preserve your own edits:
@@ -184,6 +184,14 @@ The engine's `IPointDefense.Destroy` interception path is independent of
 warhead damage, so this static correction does not claim runtime interception
 proof. The flying-infantry target-type behavior and Stealth Tank `CHFlame`
 route remain separate policy decisions.
+
+PR #347's safe tooling corrections are integrated here: the reference map now
+labels its source-local rate as `damage/tick`, the accepted all-17 cargo-class
+move is reflected in the pending map, and its Windows temp output is portable.
+The proposed `is_upgrade_gated` rewrite remains held: its satisfiability-only
+selection would sum mutually exclusive Tesla Coil/IFV runtime modes and misses
+some purchased-token names. A bounded state-consistent parser is still needed
+before that helper can change the published comparison map.
 
 ### Latest Luna Max batch — GP-02 contract hardening
 

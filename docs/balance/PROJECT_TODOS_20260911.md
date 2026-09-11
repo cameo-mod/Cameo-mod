@@ -332,6 +332,11 @@ buildable actors with no priced non-support positive armament. It changes no
 pricing values; the same batch adds the shared `PDLaser` projectile-target
 mask correction, with runtime interception still unverified.
 
+Reference-map tooling now labels its source-local rate as `damage/tick`, applies
+the accepted all-17 cargo-class move in the pending review map, and writes its
+pending artifact through the Windows OS temp directory. The condition-gating
+rewrite from PR #347 remains held pending a state-consistent parser.
+
 ## Current state
 
 The full balance candidate is **incomplete**. The historical diagnostic milestone

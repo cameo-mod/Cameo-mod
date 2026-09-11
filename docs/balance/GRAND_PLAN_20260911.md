@@ -234,8 +234,8 @@ Never edit `mod.config` or `engine/VERSION` to make an audit pass.
 The preserved branch checkpoint is `33a2fb2e83645f18910b8155de599e5544c08ee9` on
 `codex/overnight-integration-20260910`. [PR #342](https://github.com/cameo-mod/Cameo-mod/pull/342)
 is the recorded aggregate preservation PR. The reviewed continuation and GP-02
-contract-hardening, support-pricing and PDLaser payload batches are now
-published through `663147217` in [draft PR #345](https://github.com/cameo-mod/Cameo-mod/pull/345).
+contract-hardening, support-pricing, PDLaser payload and reference-map tooling
+batches are now published through `469dce61c` in [draft PR #345](https://github.com/cameo-mod/Cameo-mod/pull/345).
 Future reviewed changes may continue on that draft PR; publication does not
 authorize merging. Inspect
 overlapping PRs #339–342 and do not merge them indiscriminately. Do not stage,
