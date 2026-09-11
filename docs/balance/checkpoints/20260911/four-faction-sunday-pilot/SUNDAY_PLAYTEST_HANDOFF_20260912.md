@@ -74,6 +74,12 @@ regression. Static mismatches, unsupported payloads and policy decisions stay
 separate from runtime findings. A failed historical suite is reported as a
 baseline limitation, never as a green runtime result.
 
+Startup evidence is now available in
+[`master_boot_baseline_20260912.md`](master_boot_baseline_20260912.md): a clean
+master worktree built and reached the menu with no new exception log. It is a
+baseline receipt only; representative gameplay scenarios for the exact Sunday
+candidate remain `UNTESTED`.
+
 The runtime section remains open until a maintainer supplies or authorizes this
 evidence. Until then, the next unblocked work is static candidate review and
 decision preparation; Phase A faction approval, numerical pricing, YAML

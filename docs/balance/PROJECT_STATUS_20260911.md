@@ -208,6 +208,11 @@ all 40 direct promotion-token consumers still have non-final GP-04 dispositions
 class and one support exception). The receipt keeps the atomic inherit-removal
 and pricing-input batch fail-closed; no gameplay content was changed.
 
+Aedis supplied a separate startup baseline at master `ae02eedc0`: a fresh C#
+build reached the menu with zero errors and no new exception log. That evidence
+is recorded in `master_boot_baseline_20260912.md`; candidate gameplay,
+promotion/cargo behavior and package provenance remain untested.
+
 ### Latest Luna Max batch — GP-02 contract hardening
 
 The reconstruction admission check in `tools/balance/assemble_four_voice_pilot.py`
