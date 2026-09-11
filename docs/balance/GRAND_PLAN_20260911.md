@@ -33,9 +33,9 @@ override the current explicit boundaries.
 
 - Blackrobe resumed implementation on Luna Max after pausing the Sol run.
   Continue the existing GP-01 through GP-08 scope without stopping for routine fixes.
-- Discord monitoring remains paused. Its saved 15-minute schedule expires at
-  21:48 WIB on 13 September 2026. Explicit monitoring authorization is needed
-  to resume it; preserve native Reply and the `[Codex]` prefix when resumed.
+- Discord monitoring is active on its saved 15-minute schedule through 00:16:58
+  WIB on 14 September 2026. Every check uses a new temporary external-browser
+  tab; preserve native Reply and the `[Codex]` prefix.
 - Blackrobe subsequently authorized publishing the scoped continuation and one
   native Discord handoff reply. Publish only to Blackrobe's fork; #342's upstream
   head cannot be updated through that route, so link a draft continuation.
@@ -233,10 +233,12 @@ Never edit `mod.config` or `engine/VERSION` to make an audit pass.
 
 The preserved branch checkpoint is `33a2fb2e83645f18910b8155de599e5544c08ee9` on
 `codex/overnight-integration-20260910`. [PR #342](https://github.com/cameo-mod/Cameo-mod/pull/342)
-is the recorded aggregate preservation PR, not a freshly verified remote state.
-Later work and these plan documents are local and uncommitted. At a later
-authorized publication, inspect overlapping PRs #339–341 and publish only the
-reviewed scope. Do not stage, reset, clean, merge or replay old batches broadly.
+is the recorded aggregate preservation PR. The reviewed continuation and GP-02
+contract-hardening batch are now published at
+`91baf120726324189f7c58822a9a86eec0a2b497` in [draft PR #345](https://github.com/cameo-mod/Cameo-mod/pull/345).
+Future changes remain local until separately authorized for publication. Inspect
+overlapping PRs #339–342 and do not merge them indiscriminately. Do not stage,
+reset, clean or replay old batches broadly.
 
 ## 8. Aedis/Claude continuation without duplicate work
 

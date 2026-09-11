@@ -315,8 +315,9 @@ inputs recovered, with original per-armor semantics still unverified. GP-04
 now propagates class-level DPS holds (13 reviewable, 18 held); GP-05 remains
 non-live until final prices. The complete `astra_review_20260911/candidate_proposals`
 table covers all 163 actors, including separate economy, support, cargo,
-garrison, limited-unit and air/naval/defense-model routes. The Discord
-heartbeat is paused; its saved expiration remains 13 September 2026 at 21:48 WIB.
+garrison, limited-unit and air/naval/defense-model routes. The Discord heartbeat
+is active every 15 minutes through 14 September 2026 at 00:16:58 WIB and uses a
+new temporary external-browser tab for each check.
 
 ## Current state
 

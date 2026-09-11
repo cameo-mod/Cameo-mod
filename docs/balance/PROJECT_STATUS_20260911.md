@@ -2,17 +2,14 @@
 
 **Current control state: implementation is continuing on GPT-5.6 Luna Max after
 the Astra review.** The continuation review corrected Sol's Havoc regression and
-several report/helper errors. Scheduled Discord monitoring remains **PAUSED**
-following Blackrobe's pause; resuming implementation has not reactivated it.
-Its saved expiration is 13 September 2026 at 21:48 WIB, without an extension
-from the pause.
+several report/helper errors. Scheduled Discord monitoring is **ACTIVE** with a
+15-minute cadence and a saved expiration of 14 September 2026 at 00:16:58 WIB.
 
 The reviewed execution plan is [GRAND_PLAN_20260911.md](GRAND_PLAN_20260911.md).
 The active model is **GPT-5.6 Luna Max**. Astra High provides occasional
 read-only milestone review; DeepSeek remains excluded. The scoped continuation
 and one native Discord handoff reply have already been published. Merge, game
-launch, engine build, scheduled monitoring and external coordination setup remain
-unauthorized.
+launch, engine build and external coordination setup remain unauthorized.
 
 ## Planning review — current conclusions
 
@@ -84,7 +81,7 @@ Codex; an empty owner does not authorize automatic claims on overlapping files.
 | GP-05 promotion and cargo batch | Codex / GPT-5.6 Luna Max | **Non-live helper corrected; content pending final prices** | Preserve atomic promotion removal/price compensation; do not treat the helper as applied gameplay |
 | GP-06 application and GP-07 playtest | Codex; maintainer playtest | Later milestones | Follow specific content and runtime authorization |
 | GP-08 portable handoff and checkpoint | Codex / GPT-6 Astra | Authorized publication batch | Publish to Blackrobe's fork and link a draft continuation to #342; retain merge hold |
-| Aedis DM heartbeat | Codex heartbeat | **PAUSED**; saved expiration 2026-09-13 21:48 WIB | Resume only on explicit monitoring instruction; preserve native Reply and `[Codex]` |
+| Aedis DM heartbeat | Codex heartbeat | **ACTIVE**; 15-minute cadence; saved expiration 2026-09-14 00:16:58 WIB | Use a new temporary external-browser tab for every check; preserve native Reply, `[Codex]` and milestone-only communication |
 
 ## Intended milestone
 
@@ -108,8 +105,9 @@ continuation is a linked draft from
 The new draft is an aggregate preservation checkpoint that includes #342's
 history. PRs #339–342 overlap it; none is merge-approved and they must not all be
 merged blindly. Original baselines and the old checkpoint manifest are unchanged.
-The GP-02 contract-hardening batch and this status update are newer local,
-uncommitted changes; PR #345 has not been updated with them.
+The GP-02 contract-hardening batch and this status update are committed in
+`91baf120726324189f7c58822a9a86eec0a2b497`, pushed to Blackrobe's fork and
+included in [draft PR #345](https://github.com/cameo-mod/Cameo-mod/pull/345).
 
 From an existing Cameo clone, use a new worktree to preserve your own edits:
 
