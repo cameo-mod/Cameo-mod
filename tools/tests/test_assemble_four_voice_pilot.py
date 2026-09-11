@@ -272,6 +272,61 @@ class AssembleFourVoicePilotTests(unittest.TestCase):
                     expected = "reconstruction_evidence_source_state_dirty_invalid"
                 self.assertEqual(result["reason"], expected)
 
+    def test_reconstruction_evidence_commit_matches_snapshot_head(self):
+        baseline_sha = "a" * 64
+        dataset_sha = "b" * 64
+        snapshot_head = "d" * 40
+        with tempfile.TemporaryDirectory() as directory:
+            evidence = reconstruction_evidence(directory, baseline_sha, dataset_sha)
+            contract = {"baseline_sha256": baseline_sha,
+                        "dataset_sha256": dataset_sha,
+                        "reconstruction_evidence": evidence}
+            baseline = {"worktree_head": snapshot_head}
+            accepted = pilot.verify_current_cameo_binding(
+                baseline, {"schema": 1}, dataset_sha,
+                binding_contract=contract, baseline_sha256=baseline_sha,
+                evidence_root=directory)
+            self.assertEqual(accepted["status"], "RESOLVED")
+
+            path = pathlib.Path(directory) / evidence["path"]
+            document = json.loads(path.read_text(encoding="utf-8"))
+            document["source_state"]["commit"] = "e" * 40
+            data = json.dumps(document, sort_keys=True).encode("utf-8")
+            path.write_bytes(data)
+            evidence["sha256"] = hashlib.sha256(data).hexdigest()
+            rejected = pilot.verify_current_cameo_binding(
+                baseline, {"schema": 1}, dataset_sha,
+                binding_contract=contract, baseline_sha256=baseline_sha,
+                evidence_root=directory)
+            self.assertEqual(
+                rejected["reason"],
+                "reconstruction_evidence_source_state_commit_mismatch",
+            )
+
+            baseline["worktree_head"] = "not-a-commit"
+            document["source_state"]["commit"] = snapshot_head
+            data = json.dumps(document, sort_keys=True).encode("utf-8")
+            path.write_bytes(data)
+            evidence["sha256"] = hashlib.sha256(data).hexdigest()
+            invalid_snapshot = pilot.verify_current_cameo_binding(
+                baseline, {"schema": 1}, dataset_sha,
+                binding_contract=contract, baseline_sha256=baseline_sha,
+                evidence_root=directory)
+            self.assertEqual(
+                invalid_snapshot["reason"],
+                "reconstruction_evidence_snapshot_commit_invalid",
+            )
+
+            baseline["worktree_head"] = None
+            null_snapshot = pilot.verify_current_cameo_binding(
+                baseline, {"schema": 1}, dataset_sha,
+                binding_contract=contract, baseline_sha256=baseline_sha,
+                evidence_root=directory)
+            self.assertEqual(
+                null_snapshot["reason"],
+                "reconstruction_evidence_snapshot_commit_invalid",
+            )
+
     def test_frozen_recovery_checks_bytes_without_certifying_channel_votes(self):
         with tempfile.TemporaryDirectory() as directory:
             path = pathlib.Path(directory) / "ledger.json"

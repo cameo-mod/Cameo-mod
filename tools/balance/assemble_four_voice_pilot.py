@@ -41,6 +41,7 @@ DEFAULT_COVERAGE_MATRIX = (
     "pilot-warhead-review.json"
 )
 DEFAULT_FROZEN_INPUT_ROOT = EXTERNAL_VALIDATION / "cameo-frozen-baseline-20260910"
+_UNSET = object()
 
 
 def _sha256(path: Path) -> str:
@@ -78,7 +79,7 @@ def _portable_evidence_path(root, value):
 
 def _validate_reconstruction_evidence(evidence, *, baseline_sha256,
                                      dataset_sha256, dataset_schema,
-                                     evidence_root):
+                                     evidence_root, snapshot_commit=_UNSET):
     """Validate a separately reviewed, portable reconstruction receipt.
 
     The receipt is an integrity and provenance contract, not a reconstruction
@@ -131,6 +132,16 @@ def _validate_reconstruction_evidence(evidence, *, baseline_sha256,
         return None, "reconstruction_evidence_source_state_kind_dirty_mismatch"
     if source_state.get("reconciled_to_snapshot") is not True:
         return None, "reconstruction_evidence_source_state_not_reconciled"
+    # The immutable actor snapshot records the checkout HEAD separately from
+    # its content hash.  When present, a reconstruction receipt must name that
+    # exact HEAD; otherwise a later checkout could be attested as the snapshot
+    # source merely by matching the dataset and baseline hashes.  Older test
+    # fixtures and snapshots without this field retain the hash-only contract.
+    if snapshot_commit is not _UNSET:
+        if not _is_git_commit(snapshot_commit):
+            return None, "reconstruction_evidence_snapshot_commit_invalid"
+        if source_state["commit"].lower() != snapshot_commit.lower():
+            return None, "reconstruction_evidence_source_state_commit_mismatch"
     for field in ("scope", "method", "normalization"):
         if not isinstance(document.get(field), str) or not document[field].strip():
             return None, "reconstruction_evidence_" + field + "_missing"
@@ -222,6 +233,8 @@ def verify_current_cameo_binding(baseline, cameo_document, cameo_sha256, *,
         dataset_sha256=cameo_sha256,
         dataset_schema=expected_schema,
         evidence_root=(evidence_root if evidence_root is not None else ROOT),
+        snapshot_commit=(baseline.get("worktree_head", _UNSET)
+                         if isinstance(baseline, Mapping) else _UNSET),
     )
     if evidence_reason:
         return {
