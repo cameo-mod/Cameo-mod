@@ -1,17 +1,18 @@
 # Four-faction balance project — current status, 11 September 2026
 
-**Current control state: implementation resumed on GPT-6 Astra after the pause.**
-The continuation review corrected Sol's Havoc regression and several report/helper
-errors. Scheduled Discord monitoring remains **PAUSED** following Blackrobe's
-pause; resuming implementation has not reactivated it. Its saved expiration is
-13 September 2026 at 21:48 WIB, without an extension from the pause.
+**Current control state: implementation is continuing on GPT-5.6 Luna Max after
+the Astra review.** The continuation review corrected Sol's Havoc regression and
+several report/helper errors. Scheduled Discord monitoring remains **PAUSED**
+following Blackrobe's pause; resuming implementation has not reactivated it.
+Its saved expiration is 13 September 2026 at 21:48 WIB, without an extension
+from the pause.
 
 The reviewed execution plan is [GRAND_PLAN_20260911.md](GRAND_PLAN_20260911.md).
-The active model is **GPT-6 Astra**. Work directly in this task; the
-Luna subagent was stopped and DeepSeek remains excluded. Blackrobe has now
-authorized publishing this scoped continuation and one native Discord reply to
-Aedis with the accessible handoff and corrections. Merge, game launch, engine
-build, scheduled monitoring and external coordination setup remain unauthorized.
+The active model is **GPT-5.6 Luna Max**. Astra High provides occasional
+read-only milestone review; DeepSeek remains excluded. The scoped continuation
+and one native Discord handoff reply have already been published. Merge, game
+launch, engine build, scheduled monitoring and external coordination setup remain
+unauthorized.
 
 ## Planning review — current conclusions
 
@@ -43,6 +44,13 @@ build, scheduled monitoring and external coordination setup remain unauthorized.
 - A class fit uses every contributor. A DPS-basis mismatch now holds all rows
   using that fitted class, correcting the previous row-only check. The 31-row
   proposal therefore has **13 reviewable rows and 18 held rows**, all unapproved.
+- **GP-02 admission hardening is complete locally.** The reconstruction contract
+  now requires a versioned, hash-checked JSON receipt under an explicit portable
+  root, exact frozen-baseline and selected-dataset identities, reviewed scope,
+  method, normalization and source SHA-256 provenance. Missing, stale, malformed,
+  path-escaping, non-integer-schema and string-only evidence fail closed. This
+  validates evidence integrity; it does not rederive historical armor channels.
+  The 29 armor groups remain withheld.
 - The [complete proposal table](../audit/latest/astra_review_20260911/candidate_proposals.md)
   now includes **all 163 active candidate actors**, with current HP/speed/cost,
   available numerical proposals and each remaining pricing rule or decision.
@@ -69,11 +77,11 @@ Codex; an empty owner does not authorize automatic claims on overlapping files.
 |---|---|---|---|
 | Plan and documentation review | Codex parent | Corrected; included in this continuation | Keep this plan as the execution authority |
 | GP-01 promotion evidence repair | Codex / GPT-6 Astra | **Corrected; included in this continuation** | Use the promotion receipts in `astra_review_20260911`; armor labels describe identity, conditions retain case, and unknown/cyclic tiers stay unresolved |
-| GP-02 source and channel evidence | Codex / GPT-6 Astra | **PARTIAL** — roster reconciled; 71/71 frozen ledger inputs recovered | Reconstruct missing original per-armor semantics before admitting channel votes; original scalar baseline remains intact |
+| GP-02 source and channel evidence | Codex / GPT-5.6 Luna Max | **PARTIAL** — roster reconciled; 71/71 frozen ledger inputs recovered; reconstruction admission contract hardened | Supply independently reviewed reconstruction evidence before admitting channel votes; original scalar baseline remains intact |
 | GP-03 role and payload closure | Codex implementation; Claude CL-01 analysis | **PARTIAL** — Rapier reviewed; Havoc regression reversed | Claude reviews the 19 target rows in its reserved report; Codex reviews findings before implementation; keep V2's existing surface role pending a design call |
 | CL-01 target/payload review | Aedis's Claude | **RESERVED; not yet acknowledged** | Follow the bounded assignment below; edit only the named report |
-| GP-04 per-unit proposals | Codex / GPT-6 Astra | **Full 163-actor table; numerical pricing still partial** | Use `astra_review_20260911/candidate_proposals.md`: 13 reviewable and 18 held numerical proposals, with explicit routes for the other 132 actors |
-| GP-05 promotion and cargo batch | Codex / GPT-6 Astra | **Non-live helper corrected; content pending final prices** | Preserve atomic promotion removal/price compensation; do not treat the helper as applied gameplay |
+| GP-04 per-unit proposals | Codex / GPT-5.6 Luna Max | **Full 163-actor table; numerical pricing still partial** | Use `astra_review_20260911/candidate_proposals.md`: 13 reviewable and 18 held numerical proposals, with explicit routes for the other 132 actors |
+| GP-05 promotion and cargo batch | Codex / GPT-5.6 Luna Max | **Non-live helper corrected; content pending final prices** | Preserve atomic promotion removal/price compensation; do not treat the helper as applied gameplay |
 | GP-06 application and GP-07 playtest | Codex; maintainer playtest | Later milestones | Follow specific content and runtime authorization |
 | GP-08 portable handoff and checkpoint | Codex / GPT-6 Astra | Authorized publication batch | Publish to Blackrobe's fork and link a draft continuation to #342; retain merge hold |
 | Aedis DM heartbeat | Codex heartbeat | **PAUSED**; saved expiration 2026-09-13 21:48 WIB | Resume only on explicit monitoring instruction; preserve native Reply and `[Codex]` |
@@ -100,6 +108,8 @@ continuation is a linked draft from
 The new draft is an aggregate preservation checkpoint that includes #342's
 history. PRs #339–342 overlap it; none is merge-approved and they must not all be
 merged blindly. Original baselines and the old checkpoint manifest are unchanged.
+The GP-02 contract-hardening batch and this status update are newer local,
+uncommitted changes; PR #345 has not been updated with them.
 
 From an existing Cameo clone, use a new worktree to preserve your own edits:
 
@@ -158,6 +168,32 @@ a domain-only warning. Reuse successful checks; run a focused check only when
 needed to resolve an actual uncertainty. Return one report for Codex review.
 
 ## Current completed work and evidence
+
+### Latest Luna Max batch — GP-02 contract hardening
+
+The reconstruction admission check in `tools/balance/assemble_four_voice_pilot.py`
+now reads a separate version-1 JSON receipt from an explicit portable evidence
+root. It verifies the receipt's SHA-256, exact frozen-baseline and selected-dataset
+hashes/schema, reviewed scope, method, normalization and source-hash provenance.
+The immutable baseline is untouched. A malformed or merely named evidence file
+cannot bind the current Cameo dataset; substantive historical channel recovery
+is still unperformed and the 29 selected groups remain withheld.
+
+The synthesis gate also returns an unresolved diagnostic for non-string source
+labels instead of raising. The affected contract test module passes **14/14**.
+A portable replay using the published packet passes through aggregation (**29/29**),
+matches all **71/71** frozen inputs and preserves the expected **0/29** gate
+resolution with `original_channel_reconstruction_not_verified`. Astra High's
+read-only review accepted the patch, with source-hash values remaining format
+validated rather than independently fetching their referenced source bytes.
+
+The frozen-head investigation also produced a portable **candidate** under the
+continuation packet: the clean source checkout at `9471672b` yields 2,306 records
+(1,726 resolved and 133 unresolved), with four Mortar Soldier slot/weapon
+mismatches retained as 20 unresolved scenario records. The snapshot explicitly
+captures dirty local ledgers, so that commit is not proof of the captured source
+state. The candidate remains unreviewed for substantive historical equivalence;
+it does not satisfy the admission contract or unlock any armor vote.
 
 - The reviewed continuation evidence is grouped in
   [astra_review_20260911](../audit/latest/astra_review_20260911/review.json).

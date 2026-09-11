@@ -14,6 +14,7 @@ import copy
 import hashlib
 import json
 import sys
+import string
 from collections.abc import Mapping
 from pathlib import Path
 
@@ -49,8 +50,95 @@ def _sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _is_sha256(value) -> bool:
+    return (isinstance(value, str) and len(value) == 64 and
+            all(character in string.hexdigits for character in value))
+
+
+def _portable_evidence_path(root, value):
+    """Resolve one evidence path under an explicit portable root."""
+    if not isinstance(value, str) or not value.strip():
+        return None
+    try:
+        candidate = Path(value)
+        if candidate.is_absolute():
+            return None
+        root = Path(root).resolve()
+        resolved = (root / candidate).resolve()
+        return resolved if resolved.is_relative_to(root) else None
+    except (OSError, RuntimeError, ValueError):
+        return None
+
+
+def _validate_reconstruction_evidence(evidence, *, baseline_sha256,
+                                     dataset_sha256, dataset_schema,
+                                     evidence_root):
+    """Validate a separately reviewed, portable reconstruction receipt.
+
+    The receipt is an integrity and provenance contract, not a reconstruction
+    engine.  Its explicit review marker and source hashes must be supplied by
+    an independent review; this validator does not rederive historical armor
+    channels or certify their substantive correctness.
+    """
+    if not isinstance(evidence, Mapping):
+        return None, "reconstruction_evidence_contract_not_object"
+    if not _is_sha256(baseline_sha256) or not _is_sha256(dataset_sha256):
+        return None, "reconstruction_evidence_binding_hash_invalid"
+    path = _portable_evidence_path(evidence_root, evidence.get("path"))
+    if path is None:
+        return None, "reconstruction_evidence_path_invalid"
+    expected_sha = evidence.get("sha256")
+    if not _is_sha256(expected_sha):
+        return None, "reconstruction_evidence_hash_invalid"
+    if not path.is_file():
+        return None, "reconstruction_evidence_missing"
+    actual_sha = _sha256(path)
+    if actual_sha.lower() != expected_sha.lower():
+        return None, "reconstruction_evidence_hash_mismatch"
+    try:
+        document = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError):
+        return None, "reconstruction_evidence_malformed"
+    if (not isinstance(document, Mapping)
+            or type(document.get("schema")) is not int
+            or document.get("schema") != 1):
+        return None, "reconstruction_evidence_schema_invalid"
+    if document.get("review_status") != "REVIEWED":
+        return None, "reconstruction_evidence_review_status_missing"
+    if document.get("baseline_sha256") != baseline_sha256:
+        return None, "reconstruction_evidence_baseline_mismatch"
+    if document.get("dataset_sha256") != dataset_sha256:
+        return None, "reconstruction_evidence_dataset_mismatch"
+    if dataset_schema is not None and document.get("dataset_schema") != dataset_schema:
+        return None, "reconstruction_evidence_dataset_schema_mismatch"
+    for field in ("scope", "method", "normalization"):
+        if not isinstance(document.get(field), str) or not document[field].strip():
+            return None, "reconstruction_evidence_" + field + "_missing"
+    source_hashes = document.get("source_hashes")
+    if not isinstance(source_hashes, Mapping) or not source_hashes:
+        return None, "reconstruction_evidence_source_provenance_missing"
+    if any(not isinstance(source, str) or not source.strip() or
+           not _is_sha256(source_hash)
+           for source, source_hash in source_hashes.items()):
+        return None, "reconstruction_evidence_source_provenance_invalid"
+    return {
+        "path": str(path),
+        "sha256": actual_sha,
+        "schema": document["schema"],
+        "review_status": document["review_status"],
+        "scope": document["scope"],
+        "method": document["method"],
+        "normalization": document["normalization"],
+        "baseline_sha256": document["baseline_sha256"],
+        "dataset_sha256": document["dataset_sha256"],
+        "dataset_schema": document.get("dataset_schema"),
+        "source_hashes": dict(document["source_hashes"]),
+    }, None
+
+
 def verify_current_cameo_binding(baseline, cameo_document, cameo_sha256, *,
-                                binding_contract=None, baseline_sha256=None):
+                                binding_contract=None, baseline_sha256=None,
+                                evidence_root=None):
     """Prove that the selected Cameo channel dataset is the frozen self-vote.
 
     A baseline hash carried beside an unrelated live dataset is provenance, not
@@ -75,8 +163,15 @@ def verify_current_cameo_binding(baseline, cameo_document, cameo_sha256, *,
             "reason": "original_channel_reconstruction_not_verified",
             "dataset_sha256": cameo_sha256,
         }
+    if (not _is_sha256(baseline_sha256)
+            or contract.get("baseline_sha256") != baseline_sha256):
+        return {
+            "status": "UNRESOLVED",
+            "reason": "baseline_channel_vote_baseline_hash_mismatch",
+            "dataset_sha256": cameo_sha256,
+        }
     expected_sha = contract.get("dataset_sha256")
-    if not isinstance(expected_sha, str) or not expected_sha:
+    if not _is_sha256(expected_sha):
         return {
             "status": "UNRESOLVED",
             "reason": "baseline_channel_vote_hash_missing",
@@ -100,11 +195,26 @@ def verify_current_cameo_binding(baseline, cameo_document, cameo_sha256, *,
             "dataset_schema": actual_schema,
             "dataset_sha256": cameo_sha256,
         }
+    evidence, evidence_reason = _validate_reconstruction_evidence(
+        contract.get("reconstruction_evidence"),
+        baseline_sha256=baseline_sha256,
+        dataset_sha256=cameo_sha256,
+        dataset_schema=expected_schema,
+        evidence_root=(evidence_root if evidence_root is not None else ROOT),
+    )
+    if evidence_reason:
+        return {
+            "status": "UNRESOLVED",
+            "reason": evidence_reason,
+            "dataset_sha256": cameo_sha256,
+        }
     return {
         "status": "RESOLVED",
-        "basis": "reviewed binding links the frozen baseline to the selected channel dataset",
+        "basis": ("integrity-checked REVIEWED reconstruction contract links the frozen baseline "
+                  "to the selected channel dataset; substantive reconstruction is not rederived here"),
         "dataset_sha256": cameo_sha256,
         "dataset_schema": actual_schema,
+        "reconstruction_evidence": evidence,
     }
 
 
@@ -599,6 +709,7 @@ def main(argv=None):
             provenance["cameo"]["sha256"],
             binding_contract=(manifest.get("policy") or {}).get("current_cameo_channel_vote"),
             baseline_sha256=provenance["current_cameo_baseline"]["sha256"],
+            evidence_root=ROOT,
         )
         result = build_document(
             manifest, datasets, input_provenance=provenance,

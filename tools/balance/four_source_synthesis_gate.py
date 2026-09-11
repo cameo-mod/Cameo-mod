@@ -306,6 +306,14 @@ def combine_group(group, *, interpolate_vehicle_axes=False, scenario_policy=Fals
             reasons.append("source_row_not_object")
             continue
         source = row.get("source")
+        # Keep malformed labels fail-closed.  A list/dict source must become an
+        # unresolved diagnostic, not a TypeError while it is used as a Counter
+        # key or tested against the allowed source set.
+        if not isinstance(source, str):
+            label = repr(source)
+            reasons.append(("unsupported_voice:" if voice_policy else
+                            "unsupported_source:") + label)
+            continue
         seen[source] += 1
         allowed = (set(REFERENCE_SOURCES) | {CURRENT_VOICE}) if voice_policy else set(SOURCES)
         if source not in allowed:

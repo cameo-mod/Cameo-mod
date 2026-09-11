@@ -3,6 +3,7 @@ import copy
 import pathlib
 import sys
 import hashlib
+import json
 import tempfile
 import unittest
 
@@ -76,21 +77,126 @@ def bound_self_vote():
     return {"status": "RESOLVED", "basis": "test fixture"}
 
 
+def reconstruction_evidence(root, baseline_sha256, dataset_sha256,
+                            *, dataset_schema=1, source_hashes=None):
+    document = {
+        "schema": 1,
+        "review_status": "REVIEWED",
+        "scope": "original current Cameo per-armor channel reconstruction",
+        "method": "independent source closure with explicit channel mapping",
+        "normalization": "none; source-local terms retained",
+        "baseline_sha256": baseline_sha256,
+        "dataset_sha256": dataset_sha256,
+        "dataset_schema": dataset_schema,
+        "source_hashes": (source_hashes if source_hashes is not None
+                           else {"source-closure.json": "c" * 64}),
+    }
+    path = pathlib.Path(root) / "reconstruction-evidence.json"
+    data = json.dumps(document, sort_keys=True).encode("utf-8")
+    path.write_bytes(data)
+    return {"path": path.name, "sha256": hashlib.sha256(data).hexdigest()}
+
+
 class AssembleFourVoicePilotTests(unittest.TestCase):
     def test_separate_reconstruction_contract_does_not_require_mutating_baseline(self):
-        baseline = {"rows": [], "inputs": {}}
-        before = copy.deepcopy(baseline)
-        contract = {"baseline_sha256": "original", "dataset_sha256": "recovered",
-                    "reconstruction_evidence": "reviewed-source-closure.json"}
-        bound = pilot.verify_current_cameo_binding(
-            baseline, {"schema": 1}, "recovered",
-            binding_contract=contract, baseline_sha256="original")
-        self.assertEqual(bound["status"], "RESOLVED")
-        self.assertEqual(baseline, before)
-        rejected = pilot.verify_current_cameo_binding(
-            baseline, {"schema": 1}, "live",
-            binding_contract=contract, baseline_sha256="original")
-        self.assertEqual(rejected["status"], "UNRESOLVED")
+        baseline_sha = "a" * 64
+        dataset_sha = "b" * 64
+        with tempfile.TemporaryDirectory() as directory:
+            baseline = {"rows": [], "inputs": {}}
+            before = copy.deepcopy(baseline)
+            evidence = reconstruction_evidence(directory, baseline_sha, dataset_sha)
+            contract = {"baseline_sha256": baseline_sha, "dataset_sha256": dataset_sha,
+                        "reconstruction_evidence": evidence}
+            bound = pilot.verify_current_cameo_binding(
+                baseline, {"schema": 1}, dataset_sha,
+                binding_contract=contract, baseline_sha256=baseline_sha,
+                evidence_root=directory)
+            self.assertEqual(bound["status"], "RESOLVED")
+            self.assertEqual(baseline, before)
+            rejected = pilot.verify_current_cameo_binding(
+                baseline, {"schema": 1}, "c" * 64,
+                binding_contract=contract, baseline_sha256=baseline_sha,
+                evidence_root=directory)
+            self.assertEqual(rejected["status"], "UNRESOLVED")
+
+    def test_reconstruction_evidence_string_is_rejected(self):
+        result = pilot.verify_current_cameo_binding(
+            {"rows": [], "inputs": {}}, {"schema": 1}, "b" * 64,
+            binding_contract={"baseline_sha256": "a" * 64,
+                              "dataset_sha256": "b" * 64,
+                              "reconstruction_evidence": "reviewed.json"},
+            baseline_sha256="a" * 64)
+        self.assertEqual(result["status"], "UNRESOLVED")
+        self.assertEqual(result["reason"], "reconstruction_evidence_contract_not_object")
+
+    def test_reconstruction_evidence_rejects_missing_changed_and_escaping_files(self):
+        baseline_sha = "a" * 64
+        dataset_sha = "b" * 64
+        with tempfile.TemporaryDirectory() as directory:
+            evidence = reconstruction_evidence(directory, baseline_sha, dataset_sha)
+            contract = {"baseline_sha256": baseline_sha, "dataset_sha256": dataset_sha,
+                        "reconstruction_evidence": evidence}
+            evidence_path = pathlib.Path(directory) / evidence["path"]
+            evidence_path.write_bytes(evidence_path.read_bytes() + b"changed")
+            changed = pilot.verify_current_cameo_binding(
+                {}, {"schema": 1}, dataset_sha, binding_contract=contract,
+                baseline_sha256=baseline_sha, evidence_root=directory)
+            self.assertEqual(changed["reason"], "reconstruction_evidence_hash_mismatch")
+            evidence["path"] = "../outside.json"
+            escaping = pilot.verify_current_cameo_binding(
+                {}, {"schema": 1}, dataset_sha, binding_contract=contract,
+                baseline_sha256=baseline_sha, evidence_root=directory)
+            self.assertEqual(escaping["reason"], "reconstruction_evidence_path_invalid")
+            evidence["path"] = "missing.json"
+            missing = pilot.verify_current_cameo_binding(
+                {}, {"schema": 1}, dataset_sha, binding_contract=contract,
+                baseline_sha256=baseline_sha, evidence_root=directory)
+            self.assertEqual(missing["reason"], "reconstruction_evidence_missing")
+
+    def test_reconstruction_evidence_rejects_noninteger_schema_and_empty_provenance(self):
+        baseline_sha = "a" * 64
+        dataset_sha = "b" * 64
+        with tempfile.TemporaryDirectory() as directory:
+            evidence = reconstruction_evidence(directory, baseline_sha, dataset_sha)
+            path = pathlib.Path(directory) / evidence["path"]
+            document = json.loads(path.read_text(encoding="utf-8"))
+            for schema in (True, 1.0):
+                document["schema"] = schema
+                data = json.dumps(document, sort_keys=True).encode("utf-8")
+                path.write_bytes(data)
+                evidence["sha256"] = hashlib.sha256(data).hexdigest()
+                contract = {"baseline_sha256": baseline_sha, "dataset_sha256": dataset_sha,
+                            "reconstruction_evidence": evidence}
+                result = pilot.verify_current_cameo_binding(
+                    {}, {"schema": 1}, dataset_sha, binding_contract=contract,
+                    baseline_sha256=baseline_sha, evidence_root=directory)
+                self.assertEqual(result["reason"], "reconstruction_evidence_schema_invalid")
+            evidence = reconstruction_evidence(directory, baseline_sha, dataset_sha,
+                                                source_hashes={})
+            contract["reconstruction_evidence"] = evidence
+            result = pilot.verify_current_cameo_binding(
+                {}, {"schema": 1}, dataset_sha, binding_contract=contract,
+                baseline_sha256=baseline_sha, evidence_root=directory)
+            self.assertEqual(result["reason"], "reconstruction_evidence_source_provenance_missing")
+
+    def test_reconstruction_evidence_rejects_wrong_identity_or_incomplete_provenance(self):
+        baseline_sha = "a" * 64
+        dataset_sha = "b" * 64
+        with tempfile.TemporaryDirectory() as directory:
+            evidence = reconstruction_evidence(directory, "d" * 64, dataset_sha)
+            contract = {"baseline_sha256": baseline_sha, "dataset_sha256": dataset_sha,
+                        "reconstruction_evidence": evidence}
+            wrong_baseline = pilot.verify_current_cameo_binding(
+                {}, {"schema": 1}, dataset_sha, binding_contract=contract,
+                baseline_sha256=baseline_sha, evidence_root=directory)
+            self.assertEqual(wrong_baseline["reason"], "reconstruction_evidence_baseline_mismatch")
+            evidence = reconstruction_evidence(directory, baseline_sha, dataset_sha,
+                                                source_hashes={"source": "not-a-sha"})
+            contract["reconstruction_evidence"] = evidence
+            incomplete = pilot.verify_current_cameo_binding(
+                {}, {"schema": 1}, dataset_sha, binding_contract=contract,
+                baseline_sha256=baseline_sha, evidence_root=directory)
+            self.assertEqual(incomplete["reason"], "reconstruction_evidence_source_provenance_invalid")
 
     def test_frozen_recovery_checks_bytes_without_certifying_channel_votes(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -181,7 +287,18 @@ class AssembleFourVoicePilotTests(unittest.TestCase):
             {"schema": 1},
             "abc",
         )
-        self.assertEqual(bound["status"], "RESOLVED")
+        self.assertEqual(bound["status"], "UNRESOLVED")
+
+    def test_embedded_contract_must_match_the_supplied_baseline_hash(self):
+        result = pilot.verify_current_cameo_binding(
+            {"current_cameo_channel_vote": {
+                "baseline_sha256": "d" * 64,
+                "dataset_sha256": "b" * 64,
+                "reconstruction_evidence": {},
+            }},
+            {"schema": 1}, "b" * 64, baseline_sha256="a" * 64)
+        self.assertEqual(result["status"], "UNRESOLVED")
+        self.assertEqual(result["reason"], "baseline_channel_vote_baseline_hash_mismatch")
 
     def test_expected_identity_guard_fails_closed(self):
         spec = manifest()

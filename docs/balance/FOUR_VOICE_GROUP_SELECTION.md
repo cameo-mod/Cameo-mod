@@ -78,9 +78,27 @@ only. `docs/audit/latest/astra_review_20260911/four_voice_comparison.json` retai
 verified. All 71 archived actor/derived-ledger inputs are recovered and match
 the frozen snapshot; they do not contain the full original channel fields.
 A separate reviewed `policy.current_cameo_channel_vote` reconstruction contract
-may bind `baseline_sha256`, `dataset_sha256`, optional `dataset_schema` and its
-`reconstruction_evidence`. Never edit the frozen actor snapshot to add a new
-schema field or substitute current channels for the original values.
+may bind `baseline_sha256`, `dataset_sha256`, optional `dataset_schema` and a
+`reconstruction_evidence` object of the form (the path is resolved under the
+driver's explicit evidence root):
+
+```json
+{
+  "path": "docs/reference/cameo_channel_reconstruction_20260911.json",
+  "sha256": "<sha256 of that JSON file>"
+}
+```
+
+The referenced portable JSON must have `schema: 1`, `review_status: "REVIEWED"`,
+the exact baseline/dataset hashes (and dataset schema when supplied), nonempty
+`scope`, `method` and `normalization` fields, and a nonempty `source_hashes`
+mapping whose values are SHA-256 digests. The driver resolves the path under its
+explicit evidence root, verifies the file hash and these identities, and rejects
+missing, malformed, stale or path-escaping evidence. A valid contract checks
+integrity and records independently supplied review metadata; it does not rederive
+historical armor channels or certify their substantive correctness. Never edit the
+frozen actor snapshot to add a new schema field or substitute current channels for
+the original values.
 
 The original vehicle pilot manifest is retained at
 `docs/balance/four_voice_selection_pilot_20260911.json` and produces the

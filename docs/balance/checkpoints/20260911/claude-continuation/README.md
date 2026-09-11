@@ -46,3 +46,27 @@ Use the commit SHA for the shared code version and this manifest for portable
 input identity; a different local checkout path is expected. The corrected
 receipts under `astra_review_20260911` supersede earlier report iterations,
 which remain in the checkpoint for provenance.
+
+## Frozen-source reconstruction candidate
+
+The packet also carries a separate **candidate** generated after inspecting the
+recorded source commit `9471672b2e908661334804dbfe022ccc267d3192`:
+
+- `frozen-source-matrix-v2.json.gz` contains the 163-actor roster with armament
+  and warhead metadata rebuilt from that clean commit. Four Mortar Soldier
+  slot/weapon mismatches are retained as explicit unresolved selections.
+- `frozen-source-candidate-v2.json.gz` contains 2,306 per-slot/scenario records:
+  1,726 `RESOLVED`, 410 `NOT_APPLICABLE`, 21 `NO_ARMAMENT`, 16
+  `RESOLVED_PRIMARY_TARGET` and 133 `UNRESOLVED` (108 TeslaArc, five
+  FireShrapnel and 20 Mortar mismatch scenario records).
+- `frozen-source-receipt-v2.json` and `.md` contain the source, matrix, adapter,
+  helper and output hashes plus the full provenance boundary.
+
+The immutable snapshot says it captured local ledgers from a dirty worktree, so
+its `worktree_head` identifies a reproducible commit candidate but does not prove
+that the clean commit contains the exact dirty source bytes used for those
+ledgers. This candidate therefore remains `CANDIDATE`; it is not recovered
+historical evidence, does not satisfy the version-1 `REVIEWED` reconstruction
+contract, and must not unlock the 29 withheld groups. Review the source-state
+reconciliation and substantive channel mapping before creating any admission
+receipt.

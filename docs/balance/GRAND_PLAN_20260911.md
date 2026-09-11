@@ -1,6 +1,7 @@
 # Four-faction balance delivery plan
 
-**Planning revision: 11 September 2026. Continued on GPT-6 Astra.**
+**Planning revision: 11 September 2026. Continued on GPT-5.6 Luna Max, with
+occasional GPT-6 Astra High read-only review.**
 
 Deliver the intended result accurately as fast as possible. The main deliverable
 is a reviewed RA1 Allies/Soviets and TD GDI/Nod balance candidate for playtesting,
@@ -30,7 +31,7 @@ override the current explicit boundaries.
 
 ### Current authorization
 
-- Blackrobe resumed implementation on Astra after pausing the Sol run.
+- Blackrobe resumed implementation on Luna Max after pausing the Sol run.
   Continue the existing GP-01 through GP-08 scope without stopping for routine fixes.
 - Discord monitoring remains paused. Its saved 15-minute schedule expires at
   21:48 WIB on 13 September 2026. Explicit monitoring authorization is needed
@@ -40,8 +41,8 @@ override the current explicit boundaries.
   head cannot be updated through that route, so link a draft continuation.
   Merge, build and game launch remain unauthorized. Preserve dirty work,
   immutable baselines, engine pins, and ownership boundaries.
-- Work directly in the selected model. DeepSeek remains excluded; subagents are
-  stopped and are not part of this plan. No services, cross-PC connections,
+- Work directly in Luna Max; use Astra High only for occasional bounded review.
+  DeepSeek remains excluded. No services, cross-PC connections,
   cloud resources, account changes, or agent-control framework are to be set up.
 
 ## 2. Define the deliverable and measure the right progress
@@ -277,7 +278,8 @@ diagnostic-only completion claim, records Aedis's accepted pilot, exposes the
 misleading promotion evidence, and keeps publication/runtime/communication
 boundaries intact. Planning edits alone do not establish gameplay readiness.
 
-**Active model:** GPT-6 Astra, selected by Blackrobe.
+**Active model:** GPT-5.6 Luna Max, selected by Blackrobe; GPT-6 Astra High is
+used for occasional read-only milestone review.
 **Continuation review:** GP-01 and the promotion helper have targeted corrections;
 GP-03's completion claim is withdrawn and Havoc's unjustified role reduction is
 reversed. All 71 frozen ledger inputs are recovered; reconstructing their original

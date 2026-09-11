@@ -126,6 +126,14 @@ class FourSourceGateTests(unittest.TestCase):
         self.assertIn("status_not_fully_resolved:DTA Enhanced", result["reasons"])
         self.assertIn("duplicate_source:Combined Arms", result["reasons"])
 
+    def test_unhashable_source_label_fails_closed_instead_of_raising(self):
+        rows = [row(source) for source in SOURCES]
+        rows[0]["source"] = ["Combined Arms"]
+        result = gate.combine_group(group(rows), interpolate_vehicle_axes=True)
+        self.assertEqual(result["status"], "UNRESOLVED")
+        self.assertIn("unsupported_source:['Combined Arms']", result["reasons"])
+        self.assertIn("missing_source:Combined Arms", result["reasons"])
+
     def test_scenario_and_state_mismatch_are_explicit(self):
         rows = [row(source) for source in SOURCES]
         rows[1]["state_key"] = "upgrade"
