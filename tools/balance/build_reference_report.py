@@ -35,7 +35,10 @@ SECTIONS = (("infantry", "Infantry"), ("vehicle", "Vehicles"), ("aircraft", "Air
 CONF_ORDER = {"STRONG": 0, "FAIR": 1, "SHAPE": 2, "WEAK": 3}
 
 STYLE = """
-.cls{font-size:11px;color:var(--muted);white-space:nowrap}
+.cls{font-size:11px;color:var(--mut);white-space:nowrap}
+.srcn{display:block;font-size:9.5px;font-weight:400;letter-spacing:.02em;white-space:nowrap;margin-top:1px}
+.srcfull{color:var(--strong)}
+.srcthin{color:var(--fair)}
 :root{--bg:#f7f6f3;--fg:#1b1a17;--mut:#6f6a60;--line:#ddd8cd;--card:#fffefb;--accent:#8a5a2b;
 --strong:#1f6b4a;--fair:#7a6320;--shape:#4a5a78;--weak:#8a4a3c;--bad:#a3312a;--tgt:#2e5c8a;}
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#161513;--fg:#eae6dd;
@@ -114,11 +117,18 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
         # the virtual anchor will be derived from (EXTRAPOLATION_PROGRAM.md), so a row whose class
         # looks wrong is a finding BEFORE any anchor is signed — and range/DPS were the two stats
         # a reference actually moves that the table never showed.
+        # ⛔ THIS COLUMN IS DAMAGE PER TICK, NOT DPS. `reference_distribution.armament_profile`
+        # computes `per_cycle / cycle` where `cycle` is ReloadDelay + (Burst-1) x BurstDelay, in
+        # ENGINE TICKS. OpenRA runs 25 ticks/second, so real DPS is this number x 25 and the module
+        # 's own note (reference_distribution.py:276) only ever claimed it was "proportional to real
+        # DPS within a source". It shipped mislabelled as "DPS" until Astra caught it 2026-09-11;
+        # a reader sanity-checking `td_gdi_battletank` at 222 against game feel would conclude the
+        # unit was absurdly weak. Do not rename this back without changing the arithmetic.
         body.append('<table><thead><tr><th>Cameo actor</th><th>class &nbsp;today → after C46</th><th class="n">refs</th>'
                     '<th class="n">HP now</th><th class="n">HP →</th>'
                     '<th class="n">speed now</th><th class="n">speed →</th>'
                     '<th class="n">range now</th><th class="n">range →</th>'
-                    '<th class="n">DPS now</th><th class="n">DPS →</th>'
+                    '<th class="n">dmg/tick now</th><th class="n">dmg/tick →</th>'
                     '<th class="n">cost now</th><th class="n">cost →</th>'
                     '<th>reference units chosen</th></tr></thead><tbody>')
         for a in group:
@@ -156,29 +166,47 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
                     if str(r.get("id")) not in {str((d or {}).get("id")) for d in chosen.values()}))
                 chips += (f'<span class="chip fam">+{extra} variant'
                           f'{"s" if extra != 1 else ""}: {html.escape(fam[:90])}</span>')
+            # ⭐ `target_for` ALREADY returns the source count as its third element and this
+            # report threw it away, so a value pooled from one source looked exactly like one
+            # pooled from three. Astra's revision surfaced it and the maintainer asked for it here
+            # (2026-09-11): a reader cannot judge an estimate without knowing how much evidence
+            # stands behind it. `n_src` is carried alongside every value from here on.
             def _t(stat):
                 if not rows:
                     return None
                 try:
-                    return rt.target_for(rows, c, stat, dist, cdist)[1]
+                    _peers, val, n_src = rt.target_for(rows, c, stat, dist, cdist)
+                    return None if val is None else (val, n_src)
                 except (KeyError, TypeError, ValueError, ZeroDivisionError):
                     # A stat the distribution does not carry is a BLANK CELL, never a crash and
                     # never a zero — a zero would read as "the reference says this unit deals no
                     # damage", which is a different and much worse claim than "not measured".
                     return None
-            tgt = {stat: _t(stat) for stat in ("hp", "speed", "cost", "w_range", "w_dps")}
+            tgt_raw = {stat: _t(stat) for stat in ("hp", "speed", "cost", "w_range", "w_dps")}
+            tgt = {k: (v[0] if v else None) for k, v in tgt_raw.items()}
+            n_assigned = len(srcs)
+
+            def srcnote(stat):
+                """`3/3 sources used` under an estimate — how much evidence it actually rests on."""
+                v = tgt_raw.get(stat)
+                if not v or not n_assigned:
+                    return ""
+                used = v[1]
+                cls = "srcfull" if used >= n_assigned else "srcthin"
+                return (f'<span class="srcn {cls}">{used}/{n_assigned} '
+                        f'source{"s" if n_assigned != 1 else ""} used</span>')
             note = ' <span class="tag">chassis-only</span>' if a in chassis_only else ""
             empty = '<span class="muted">—</span>'
             body.append(
                 f'<tr><td><code>{html.escape(a)}</code>{note}{flag}</td>'
                 f'<td class="cls">{html.escape(klass.get(a) or "—")}</td>'
                 f'<td class="n">{len(srcs)}</td>'
-                f'<td class="n">{num(c.get("hp"))}</td><td class="n t">{num(tgt["hp"])}</td>'
-                f'<td class="n">{num(c.get("speed"))}</td><td class="n t">{num(tgt["speed"])}</td>'
-                f'<td class="n">{num(c.get("w_range"))}</td><td class="n t">{num(tgt["w_range"])}</td>'
+                f'<td class="n">{num(c.get("hp"))}</td><td class="n t">{num(tgt["hp"])}{srcnote("hp")}</td>'
+                f'<td class="n">{num(c.get("speed"))}</td><td class="n t">{num(tgt["speed"])}{srcnote("speed")}</td>'
+                f'<td class="n">{num(c.get("w_range"))}</td><td class="n t">{num(tgt["w_range"])}{srcnote("w_range")}</td>'
                 f'<td class="n">{num(c.get("w_dps"))}{arm_note(a, led_arms)}</td>'
-                f'<td class="n t">{num(tgt["w_dps"])}</td>'
-                f'<td class="n">{num(c.get("cost"))}</td><td class="n t">{num(tgt["cost"])}</td>'
+                f'<td class="n t">{num(tgt["w_dps"])}{srcnote("w_dps")}</td>'
+                f'<td class="n">{num(c.get("cost"))}</td><td class="n t">{num(tgt["cost"])}{srcnote("cost")}</td>'
                 f'<td>{chips or empty}</td></tr>')
         body.append("</tbody></table>")
 
