@@ -219,6 +219,9 @@ scalar weapon summary now chooses the first resolved positive-damage armament,
 so utility-first slots cannot erase range, reload, damage or Versus evidence.
 The two focused regressions pass; external peer corpus re-splicing remains a
 separate evidence refresh and was not run from unavailable source checkouts.
+The current HTML map therefore does not include Aedis's external 42d8/7dd
+corpus refresh; regenerate it only after the corrected peer artifact and its
+source/provenance are available.
 
 ### Latest Luna Max batch — GP-02 contract hardening
 
