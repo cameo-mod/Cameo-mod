@@ -17,7 +17,8 @@ Do not run --check-yaml or make test. Launch the game only when authorized.
 Use local validation and human review; disabled CI is not a pilot activation prerequisite.
 Never bypass OS security settings.
 Stage named files, preserve others' work, and distinguish static, build/boot and in-game evidence.
-Humans decide merges; agents may execute explicitly authorized steps and must preserve HOLDs.
+Aedis's designated coordinator agent approves claims and work reviews; Blackrobe is quota fallback.
+Record takeover and handback per AGENT_WORKSPACE; agents execute only authorized steps and preserve HOLDs.
 """
 
 print(json.dumps({"hookSpecificOutput": {

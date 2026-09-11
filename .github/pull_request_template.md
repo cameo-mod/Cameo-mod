@@ -2,7 +2,8 @@
 
 - Task/issue:
 - Human owner:
-- Human integrator:
+- Current approver (Aedis's coordinator agent, or Blackrobe during quota fallback):
+- Approval or takeover receipt:
 - Agent provider and opaque session ID (no private session links):
 - Base commit:
 
@@ -38,7 +39,8 @@ Explain the selected impact:
 - [ ] The branch contains one independently mergeable outcome.
 - [ ] The changed files stay inside the approved task scope.
 - [ ] Generated files and their source changes are in the same commit where required.
-- [ ] This PR is ready for human-integrator review.
+- [ ] This PR is ready for review by the current approver.
 
-Humans decide merge readiness. An agent may execute a merge only under explicit human
+The current approver reviews technical readiness within the human-authorized scope.
+An agent may execute a merge only under explicit human
 authorization; green checks do not grant authority. Preserve all explicit holds.

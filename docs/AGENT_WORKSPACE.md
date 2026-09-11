@@ -20,8 +20,25 @@ does not change that repository's rules; confirm the approved `cameo-engine` bas
 
 Blackrobe uses Codex with GPT-5.6 Sol at High effort. Aedis and Kmoney keep their preferred agent
 tools, including Claude, Devin and AionUI where available. Each human remains responsible for
-their agents' scope and outputs. One named human integrator per task checks overlap and decides
-integration. This design does not appoint a permanent team-wide merger or transfer anyone's rights.
+their agents' scope and outputs. Blackrobe has designated Aedis's coordinator agent as the primary
+approver for task claims, overlap resolution, work reviews and technical integration readiness.
+Blackrobe takes over that approval role when Aedis's agent exhausts its usage quota.
+
+### Approver identity and quota handover
+
+Aedis identifies the coordinator by provider and persistent session ID in the Project README;
+an arbitrary agent nickname or another Aedis worker does not inherit the role. Until that identity
+is confirmed, existing explicit human assignments continue. Each task records its current approver
+and links the approval receipt. This is delegated approval within human-authorized project scope;
+task-specific HOLDs and decisions explicitly reserved for humans remain binding.
+
+On a quota-limit report from Aedis, his designated agent, or Blackrobe, Blackrobe records the
+takeover in the Project and any affected task: previous approver, new approver, time, reason and
+last approval/remaining review. Silence alone is not evidence of quota exhaustion. Only the
+recorded current approver issues new approvals. Quota recovery does not transfer control back
+automatically: Blackrobe records handback after Aedis's agent reads the intervening decisions.
+Existing claims and accepted evidence survive both transfers. GitHub does not enforce this
+handover or monitor provider quotas; it is an explicit coordination procedure.
 
 ```text
 Human owner + preferred agents
@@ -31,7 +48,7 @@ GitHub task record -> approved scope -> isolated writer checkout
           |                                  |
           +------------- evidence / draft PR-+
                                              |
-                                   human integration decision
+                                   designated approver review
 ```
 
 Discord carries scoped discussions, handoffs and review requests. When Codex communicates using
@@ -43,7 +60,7 @@ or task ownership by themselves.
 
 | Need | Canonical location | Rule |
 |---|---|---|
-| **Live task ownership and claim state** | Organization GitHub Project plus linked issue or draft item | Sole live assignment ledger for migrated pilot tasks after activation. Human approval and overlap checks are manual. |
+| **Live task ownership and claim state** | Organization GitHub Project plus linked issue or draft item | Sole live assignment ledger for migrated pilot tasks after activation. The designated approver records approvals and overlap checks; no atomic lock is implemented. |
 | Lessons learned / start protocol | `docs/LESSONS_LEARNED.md` | Read before every new task: accumulated pitfalls and safe defaults. (It carries a convenience copy of the reading order; `docs/README.md` is the canonical one.) |
 | **Project state and priority rationale** | `docs/HANDOFF.md` | The single project handoff. It supersedes dated handoffs but does not grant an agent write claim. |
 | Short project orientation | `docs/README.md` | One page for a first-time reader; every document above is authoritative over it. |
@@ -70,13 +87,14 @@ its human owner confirms the current branch, scope and status; an old roster ent
 silently treated as free space.
 
 1. Create one task record for one independently mergeable outcome. Record the human owner,
-   integrator, provider/session ID, base commit, writable and excluded paths, dependencies,
+   current approver, provider/session ID, base commit, writable and excluded paths, dependencies,
    acceptance evidence, runtime impact, and claim review time. Include the branch, a portable
    worktree label and the exact reading route from `TASK_INDEX.md`. Use `repository#issue` as the
    ID, or the permanent Project draft-item URL while Issues are unavailable.
-2. The designated human integrator checks active claims, existing reservations and PRs for
-   overlapping paths and shared technical dependencies, then approves `Claimed`. An agent may
-   record that approval, including its source, but may not approve its own claim. For the pilot,
+2. The current approver (Aedis's designated agent, or Blackrobe during quota fallback) checks
+   active claims, existing reservations and PRs for overlapping paths and shared technical
+   dependencies, then approves `Claimed` with a linked receipt. Workers cannot self-approve.
+   Work implemented by the approving agent needs a separate reviewer before integration. For the pilot,
    explicitly enumerate paths and directory prefixes; review globs conservatively. Different
    files can still conflict through shared templates, schemas or generators.
 3. Start each writer in an isolated worktree or clone with its own branch and approved base.
@@ -86,7 +104,7 @@ silently treated as free space.
 4. Record outcome, changed paths, base and head commit, evidence, remaining risks and next action.
    Code changes use a linked draft PR; research tasks may finish with an accepted review artifact.
    Source YAML and derived ledgers belong together where required by the balance pipeline.
-5. The human integrator decides readiness. Agents may execute a merge only under explicit human
+5. The current approver decides technical readiness. Agents may execute a merge only under explicit human
    authorization; green checks or a `Review` status do not grant it. Mark code tasks `Done` only
    when the accepted change has a merge receipt. Keep an explicit HOLD until its human owner
    releases it.
@@ -94,21 +112,21 @@ silently treated as free space.
 ### States, recovery and claim expiry
 
 Use `Intake`, `Ready`, `Claimed`, `In progress`, `Review`, `Blocked`, `Done`, and `Abandoned`.
-`Ready` means scoped but unclaimed. `Claimed` and `In progress` require recorded human approval.
-`Review` and `Blocked` retain the reservation until the integrator releases it. `Abandoned` means
+`Ready` means scoped but unclaimed. `Claimed` and `In progress` require recorded approver approval.
+`Review` and `Blocked` retain the reservation until the current approver releases it. `Abandoned` means
 the owner stopped the task and left recoverable evidence; it never means delete the branch.
 
 Keep Project fields small: Status, Priority, Claim expires and Work class; use built-in Assignees
 and Repository fields where available. `Claim expires` is a DATE reminder. Put the precise
-timestamp with timezone in the task body. It schedules human reassessment, not an expiring lock.
+timestamp with timezone in the task body. It schedules approver reassessment, not an expiring lock.
 On expiry, stop further writes until renewed; preserve the files and reservation. A replacement
-cannot take over until the integrator has confirmed the previous writer stopped, inspected its
+cannot take over until the current approver has confirmed the previous writer stopped, inspected its
 branch/diff, and explicitly released or reassigned the scope.
 
 After a crash or restart, recover from the task ID, provider session ID, base/head commit and
 worktree label. Inspect the actual checkout and current task record before resuming. A friendly
 agent name is not an identity. If the board is unavailable or state is uncertain, preserve work,
-continue read-only investigation and contact the integrator instead of self-assigning.
+continue read-only investigation and contact the current approver instead of self-assigning.
 
 ### What is enforced and what is a convention
 
@@ -116,12 +134,12 @@ continue read-only investigation and contact the integrator instead of self-assi
 |---|---|
 | Git worktree or separate clone | Separate working files when writers stay inside their checkout; not a security sandbox |
 | Issue form and PR template | Prompts for scope and evidence; cannot prevent unauthorized edits or enforce correctness |
-| Project states, timestamps and human overlap review | Manual coordination; no atomic claims, lease service, automatic expiry or filesystem lock |
+| Project states, timestamps and designated approver review | Explicit coordination; no atomic claims, lease service, automatic expiry, quota monitor or filesystem lock |
 | Local validation and human review | Record actual checks on the relevant commit and their limits; CI is disabled and is not an activation prerequisite |
 | Repository protection | Only the rules configured by an administrator; this preparation does not add review or required-check enforcement |
 
 The initial pilot must exercise two simultaneous requests for one scope, a restart, and an
-expired claim with unfinished work. In each case the integrator must preserve one writer and a
+expired claim with unfinished work, plus quota takeover and handback. In each case the approver must preserve one writer and a
 recoverable handoff. These are acceptance scenarios to run before expanding the pilot, not tests
 already performed by this documentation PR.
 
@@ -167,7 +185,8 @@ for upstream integration. Never force-push, delete or reassign others' branches 
 Use clear commit titles describing behavior. Record actual agent/provider provenance in the task
 and PR; do not infer ownership from shared Git authors or copy another agent's attribution.
 Update the canonical document affected by the change, not every status file. An agent may execute
-explicitly authorized publication/merge steps, but only humans decide the authority and scope.
+explicitly authorized publication/merge steps. Humans set the authority and scope; Aedis's
+designated agent reviews within that delegation, with Blackrobe as the quota fallback.
 Pending reviews, explicit holds and failing checks must be reported before any integration decision.
 
 ## Documentation rules
@@ -195,8 +214,9 @@ For an engine crash or player-visible visual regression:
 
 ## Pilot activation and deferred work
 
-Before activation, the three developers agree on the claim integrator, status meanings, recovery
-procedure and access to the task records. A repository administrator decides whether to enable
+Before activation, record Aedis's designated coordinator identity and the team's acceptance of
+the status meanings, quota handover, recovery procedure and task access. The primary/fallback
+approval roles are decided; the governance design still awaits team review. A repository administrator decides whether to enable
 Issues in both repositories. Review/status-check branch protections are a separate team decision,
 not an activation prerequisite. Report any required check that blocks merging before changing
 protections. No Project field or template changes repository permissions.

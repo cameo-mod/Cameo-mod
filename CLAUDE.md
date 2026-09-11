@@ -46,7 +46,8 @@ never for status.
    `tools/audit/review_resolve_diff.py` (before/after resolve).
 6. **Use the shared claim and checkout procedure** in `docs/AGENT_WORKSPACE.md`.
    File mtimes, Git authors and agent nicknames cannot establish live ownership. Inspect existing
-   reservations and have the designated human integrator resolve overlap. Preserve others' work.
+   reservations and have the current approver resolve overlap: Aedis's coordinator agent,
+   or Blackrobe during quota fallback. Follow AGENT_WORKSPACE for the handover record.
 7. **Rebuild affected C# before runtime validation.** Follow the current engine and validation
    procedure in `docs/AGENT_WORKSPACE.md`, including preflight before `make all`. `engine/` is
    ignored build input; retain engine source in the separate OpenRA repository. Pin changes and

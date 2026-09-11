@@ -1,11 +1,11 @@
 name: Agent task
-description: Propose a scoped task for human approval in the shared agent pilot.
+description: Propose a scoped task for the designated approver in the shared agent pilot.
 title: "[Agent task] "
 body:
   - type: markdown
     attributes:
       value: |
-        This record coordinates ownership; it is not an atomic lock. Follow AGENTS.md and docs/AGENT_WORKSPACE.md, including the pilot activation gate. Human integrators approve claims; agents may record existing approval.
+        This record coordinates ownership; it is not an atomic lock. Follow AGENTS.md and docs/AGENT_WORKSPACE.md, including activation. Aedis's designated agent is the primary approver; Blackrobe takes over when it exhausts quota. Record the active approver and approval receipt.
 
   - type: textarea
     id: outcome
@@ -27,9 +27,9 @@ body:
   - type: input
     id: integrator
     attributes:
-      label: Human integrator
-      description: GitHub username of the person authorized to approve the claim and decide merge readiness.
-      placeholder: "@username"
+      label: Current approver
+      description: Aedis's designated coordinator agent (provider/session ID), or Blackrobe during quota fallback. Link the approval or takeover record; do not assume quota recovery transfers control back.
+      placeholder: "Aedis coordinator - provider/session ID, or @Blackrobe - takeover receipt"
     validations:
       required: true
 
@@ -132,7 +132,7 @@ body:
     id: expiry
     attributes:
       label: Claim expires
-      description: Explicit date, time, and timezone. The Project DATE field is a reminder only. Stop writes on expiry until renewed; keep the reservation until a human explicitly releases it.
+      description: Explicit date, time, and timezone. The Project DATE field is a reminder only. Stop writes on expiry until renewed; keep the reservation until the current approver explicitly releases it.
       placeholder: "YYYY-MM-DD HH:MM UTC"
     validations:
       required: true
@@ -150,7 +150,7 @@ body:
     attributes:
       label: Claim acknowledgement
       options:
-        - label: The agent will remain read-only until the human integrator approves this claim.
+        - label: The worker will remain read-only until the recorded current approver approves this claim.
           required: true
         - label: Each writer will use its own branch and isolated worktree; research-only work may remain read-only.
           required: true

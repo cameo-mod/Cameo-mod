@@ -20,15 +20,16 @@ Provider files add technical context and should point here for collaboration pro
 - The organization GitHub Project and its linked issue or draft item are the live task ledger once
   the workflow is activated. `docs/HANDOFF.md` and `docs/design/ROADMAP.md` retain project context
   and priorities; they do not grant a write claim.
-- A Project item is a manual coordination record, not an atomic lock. The designated human
-  integrator approves claims after checking overlap. An agent may record that existing approval.
-- Each outcome has one task record, human owner and integrator. Each independent writer has its
+- A Project item is a coordination record, not an atomic lock. Aedis's designated coordinator
+  agent approves task claims and reviews work. Blackrobe takes over when that agent runs out of
+  quota. Record the active approver and explicit takeover/handback per `docs/AGENT_WORKSPACE.md`.
+- Each outcome has one task record, human owner and current approver. Each independent writer has its
   own branch and isolated worktree; research-only tasks need no branch or pull request.
 - Record the provider/session identity, base commit, exact writable paths, excluded paths,
   dependencies, acceptance evidence, runtime impact, and an explicit claim-expiry timestamp.
-- Expiry never transfers ownership automatically. The integrator must release or reassign a stale
+- Expiry never transfers ownership automatically. The current approver must release or reassign a stale
   claim after inspecting its branch, commits, worktree, and handoff evidence.
-- Read-only investigation may overlap. Write scopes may not. Stop and contact the integrator when
+- Read-only investigation may overlap. Write scopes may not. Stop and contact the current approver when
   scopes overlap or the task record is missing, stale, or ambiguous.
 
 Do not infer activation from the existence of a Project or issue form. The team must record its
@@ -37,7 +38,7 @@ go-live decision in `docs/AGENT_WORKSPACE.md` and the Project README.
 ## Git and worktree isolation
 
 - Never perform agent work in another person's dirty checkout or another task's worktree.
-- Create an isolated worktree from the human-approved base ref. Re-check the base and active claims
+- Create an isolated worktree from the approved base ref. Re-check the base and active claims
   immediately before the first edit.
 - Use a provider-prefixed branch containing the task number and subject, such as
   `codex/123-fix-description` or `claude/123-fix-description`.
@@ -45,8 +46,9 @@ go-live decision in `docs/AGENT_WORKSPACE.md` and the Project README.
   that may belong to another person or agent.
 - Keep each branch to one sentence-worth of purpose. Before an overnight handoff, publish a draft
   pull request or provide a recoverable commit/patch reference as authorized by the human owner.
-- Humans decide merge readiness and publication. An agent may execute an explicitly authorized
-  merge, but cannot grant itself that authority or infer it from green checks. Preserve explicit
+- Aedis's designated agent (or Blackrobe during quota fallback) approves technical readiness
+  within the human-authorized scope. An agent may execute an explicitly authorized merge, but
+  cannot expand that authority or infer it from green checks. Preserve explicit
   HOLD, no-merge, and review-only instructions.
 
 ## Engine and validation boundaries

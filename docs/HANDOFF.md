@@ -957,7 +957,7 @@ Prerequisites: ~d2k_barracks` etc.
 
 
 > **Historical ownership table.** Retained as provenance only. For current assignments,
-> use `AGENT_WORKSPACE.md` and the human-approved task record. Preserve existing reservations
+> use `AGENT_WORKSPACE.md` and the approved task record. Preserve existing reservations
 > until their human owners confirm release or reassignment.
 
 | agent | faction | file-set | scope of work |
@@ -1136,7 +1136,7 @@ When a weapon has `Bullet_Light` + `Bullet_Medium` as two damage mains:
 
 
 > **Historical ownership table.** Retained as provenance only. For current assignments,
-> use `AGENT_WORKSPACE.md` and the human-approved task record. Preserve existing reservations
+> use `AGENT_WORKSPACE.md` and the approved task record. Preserve existing reservations
 > until their human owners confirm release or reassignment.
 
 | Agent | Pack | Key deliverable | Verification before commit |
@@ -1539,7 +1539,7 @@ another agent claimed it in the last 30 minutes, do not touch it.
 
 
 > **Historical ownership table.** Retained as provenance only. For current assignments,
-> use `AGENT_WORKSPACE.md` and the human-approved task record. Preserve existing reservations
+> use `AGENT_WORKSPACE.md` and the approved task record. Preserve existing reservations
 > until their human owners confirm release or reassignment.
 
 | name | identity | current file-set | current task |
@@ -1560,7 +1560,7 @@ another agent claimed it in the last 30 minutes, do not touch it.
 4. After every commit, post a summary to `DEVELOPMENT_LOG.md` with your agent name,
    what you changed, and why.
 5. Before starting a new batch, verify ownership using the active task record and the human
-   integrator; historical `DEVELOPMENT_LOG.md` entries are context only.
+   current approver; historical `DEVELOPMENT_LOG.md` entries are context only.
 6. **Never `git add -A` or `git add .`** — scoped adds only. Another agent's WIP is
    always in the tree.
 7. Boot-gate before every weapon commit. If another agent's uncommitted WIP is in the

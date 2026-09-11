@@ -14,8 +14,9 @@ continue; do not assume that a new Project activates the pilot or cancels reserv
 During the active pilot, follow the manual claim/recovery process in AGENT_WORKSPACE.
 
 Each writer uses an isolated checkout. Agent names and file mtimes do not establish ownership.
-Stage named paths and preserve others' work. Humans decide merges; agents may execute only
-explicitly authorized publication steps. Keep explicit holds.
+Stage named paths and preserve others' work. Aedis's designated coordinator agent approves claims
+and work reviews; Blackrobe takes over on quota exhaustion. Use the documented handover process.
+Agents execute only explicitly authorized publication steps. Keep explicit holds.
 
 Use AGENT_WORKSPACE for validation appropriate to the change, including build preflight and
 engine source/pin boundaries. Do not run --check-yaml or make test. Launch the game only when authorized.
