@@ -1,5 +1,58 @@
 # Cameo — THE HANDOFF
 
+## ⭐ SUNDAY PLAYTEST BASELINE — verified 2026-09-11, master `ae02eedc0`
+
+**Master boots clean. This is the build to playtest.** Verified end to end, not assumed:
+
+```
+worktree  C:/tmp/master-boot-test @ ae02eedc0   (clean; engine/VERSION == mod.config ENGINE_VERSION)
+build     DOTNET_ROLL_FORWARD=LatestMajor dotnet build -c Release --nologo -p:TargetPlatform=win-x64
+          -> 0 errors, 8 style warnings; DLL deployed to engine/bin at 21:07:30
+launch    launch-game.cmd  (PowerShell Start-Process)
+proof     perf.log contains "MenuPostProcessEffect.PostWorldLoaded"  (1 hit, THIS run)
+          NEW exception-*.log since cutoff: 0
+          process killed once proven
+guards    find_empty_warhead.py        -> 0   (the boot-NRE class)
+          audit_duplicate_inherits.py  -> exit 0; 1917 multi-path parents are DIAMONDS, which are
+                                          legal. The blocking class is one parent twice on ONE
+                                          chain, and the successful boot proves none exists.
+```
+
+⚠ The PostWorldLoaded check read **0 hits immediately after launch** and 1 afterwards, so the marker
+is this run's and not a stale line from an earlier boot.
+
+### ⛔ DO NOT PACKAGE FROM THE MAIN CHECKOUT
+
+```
+Cameo-mod (main)   branch devin/aurora/naming-ra1_allies @ 9a6fd0690
+                   157 commits BEHIND master, 8 ahead, 364 dirty files
+                   engine/bin/OpenRA.Mods.Cameo.dll dated Sep 7 — four days stale
+                   master's C# differs from what is built there: 6 files, +13/-730
+```
+
+Packaging from there ships a four-day-old DLL built from a rename branch — and that branch carries
+the **`ra1_soviets` rename the maintainer REJECTED** ("all 32 ids got worse"). Its 8 extra commits
+are safe on `origin/devin/dawn/ra1-soviets-wip`, so nothing is at risk of loss, but it must not be
+the build source. Use the dedicated clean worktree above. Agreed with Codex 2026-09-11.
+
+### What is NOT in this build, and why
+
+| item | state |
+|---|---|
+| promotion replacement at **1,500 credits/tier** | approved as a DIRECTION, **held**. Codex: the live batch waits on GP-04 final prices and the atomic 40-unit removal / price-compensation guard. Prepared separately, deliberately not slipped into the master playtest. |
+| PR #341 · #339 · #340 · #342 · #345 | drafts, +30k to +4.5M lines. Too large to review honestly before Sunday. #340 rewrites actor and weapon identities — the class of change that caused the last player-visible regressions. |
+| PR #346 · #347 | ready, mergeable, docs/tools only, zero runtime risk. Merge authority is the maintainer's. |
+| Codex's condition-selector fix (`7ac6b7395`) | in draft #345, NOT on master. ⚠ **Master therefore still carries the old `is_upgrade_gated`**, so 37–44 actors read zero damage in any map generated from master. That is a REPORTING defect, not a gameplay one — it does not affect the playtest build. |
+
+### ⛔ What this does NOT establish
+
+A menu-load is not gameplay proof. **Nobody has verified a skirmish actually plays on this build** —
+no unit has been built, no shot fired, no AI run. The boot gate proves the ruleset parses and the
+menu renders; it cannot prove a mid-game crash does not exist. If Sunday's playtest is the first
+time anyone plays this commit, that is the risk being carried, and it is worth one human skirmish
+before the session rather than during it.
+
+
 ## ⛔⛔ 2026-09-07 — READ THIS FIRST: the reference map, and one absolute rule
 
 **SUPERWEAPONS ARE NEVER PRICED, RESTATTED OR TOUCHED** (maintainer, verbatim: *"NEVER CHANGE
