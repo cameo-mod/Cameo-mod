@@ -563,11 +563,23 @@ def weapon_stats(rules, node, source_label=""):
     reasons = list(dict.fromkeys(reasons))          # de-duped, order preserved
 
     amap, conf = armor_map(source_label)
-    audit = audits[slots[0].get("Weapon")]          # the OLD first-weapon pick
+    # Order is not evidence.  Utility armaments such as CA's capture beam can be listed before
+    # the actual gun; selecting slots[0] would publish a range/reload with no damage or Versus
+    # ladder and make the source abstain from an otherwise valid comparison.  Select the first
+    # resolved weapon with a positive direct damage channel, retaining the old first-slot
+    # fallback only for genuinely unarmed or unresolved units.
+    primary_slot = next(
+        (slot for slot in slots
+         if audits.get(slot.get("Weapon"))
+         and (audits[slot.get("Weapon")].get("damage_pos") or 0) > 0),
+        slots[0],
+    )
+    primary_weapon = primary_slot.get("Weapon")
+    audit = audits.get(primary_weapon)
     row = {}
     raw_dps = None
     if audit is not None:
-        row = {"weapon": slots[0].get("Weapon"),
+        row = {"weapon": primary_weapon,
                "w_range": audit["range"], "w_min_range": audit["min_range"],
                "w_damage": audit["damage_pos"], "w_mains": audit["mains"],
                "w_burst": audit["burst"], "w_reload": audit["reload"]}
