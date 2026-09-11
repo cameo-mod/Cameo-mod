@@ -223,6 +223,13 @@ The current HTML map therefore does not include Aedis's external 42d8/7dd
 corpus refresh; regenerate it only after the corrected peer artifact and its
 source/provenance are available.
 
+The DTA refresh investigation is complete at the safe extraction boundary:
+single-source `Rules.ini` plus `Enhance.ini` reads reproduce the 863/863
+semantic rows without overwriting the merged extraction product. The 2,991-field
+destructive replacement and the incompatible current-base PR #349 document are
+recorded in `dta_refresh_readiness_20260912.md`; no DTA corpus or map writeback
+was made.
+
 ### Latest Luna Max batch — GP-02 contract hardening
 
 The reconstruction admission check in `tools/balance/assemble_four_voice_pilot.py`
