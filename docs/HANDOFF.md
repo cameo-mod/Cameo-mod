@@ -30,10 +30,16 @@ Cameo-mod (main)   branch devin/aurora/naming-ra1_allies @ 9a6fd0690
                    master's C# differs from what is built there: 6 files, +13/-730
 ```
 
-Packaging from there ships a four-day-old DLL built from a rename branch — and that branch carries
-the **`ra1_soviets` rename the maintainer REJECTED** ("all 32 ids got worse"). Its 8 extra commits
+Packaging from there ships a four-day-old DLL whose C# does not match master. Its 8 extra commits
 are safe on `origin/devin/dawn/ra1-soviets-wip`, so nothing is at risk of loss, but it must not be
 the build source. Use the dedicated clean worktree above. Agreed with Codex 2026-09-11.
+
+⚠ **CORRECTION 2026-09-11.** An earlier revision of this section said the maintainer "REJECTED" the
+`ra1_soviets` rename. **That is wrong and it misstated their position.** The maintainer's actual
+position: the rename needed to be *fixed*, not abandoned — *"I didn't reject the rename, I wanted
+the ra1_soviets renaming to be fixed like how Codex has done it."* Codex's repair is PR #340
+(`codex/ra1-soviets-name-repair-20260910`). The reason not to package from the main checkout is the
+stale DLL and the 157-commit gap, nothing to do with the rename's merits.
 
 ### What is NOT in this build, and why
 
