@@ -1,5 +1,82 @@
 # Cameo — THE HANDOFF
 
+## ⭐ REFERENCE CORPUS — two real defects fixed 2026-09-11, and one trap that must not be repeated
+
+### FIXED — the peer extractor was reading Combined Arms' capture beam
+
+`extract_peer_units.weapon_stats` took `weapons[0]`, the FIRST armament. CA lists the capture
+utility first on its infantry:
+
+```
+N1: armaments = ['commandeer', 'M16Carbine', 'M16CarbineBATF']
+resolve_weapon('commandeer') -> Range 1c0, ReloadDelay 5, Warhead@1Change: ChangeOwner, no Damage
+```
+
+So CA rows recorded the COMMANDEER weapon — range 1,024, reload 5, **no damage and no Versus
+ladder**. The maintainer spotted it as `td_gdi_minigunner` reading "2/3 sources used".
+
+⛔ **This is the `arms[0]` defect the maintainer already caught in Cameo's own ledger** (wrong
+weapon on 86 of 822 armed actors). Fixed there, left standing here. **Order is not evidence.**
+The rule now: the primary armament is the first whose RESOLVED weapon deals positive damage;
+utility armaments (commandeer, capture, repair, heal) never qualify; genuinely unarmed units keep
+`weapons[0]`. Commit `42d8f54d0`. **102 rows corrected**, Versus ladders recovered with them.
+
+### FIXED — every "OpenRA" reference row was actually read from our own engine fork
+
+The candidate list for `cnc`/`ra`/`d2k`/`ts` ends in `~/Documents/GitHub/cameo-engine`, and that
+was the ONLY one present, so the corpus described our fork while labelling it upstream OpenRA.
+Cloned OpenRA bleed (`f3ec7f8`, 2026-08-30) to `~/Documents/GitHub/OpenRA`. **24 rows corrected** —
+`devastator` cost 1,200→1,050, `light_factory` 600→500, `combat_tank_h` hp 28,500→29,000. Commit
+`7dd49259d`. ⛔ `ENGINE_VERSION` in `mod.config` deliberately unchanged; the fork we ship and the
+upstream reference are different things and conflating them was the bug.
+
+### ⛔⛔ TRAP — DO NOT refresh DTA by copying `Rules.ini` over `rules_DTA_Classic.ini`
+
+Attempted 2026-09-11 and **reverted**. The DTA install's `INI/Rules.ini` is NOT the same artifact
+as `extraction/rules_DTA_Classic.ini`; the extraction file is a MERGED product carrying data
+Rules.ini alone does not have. Both files show 2,322 section headers, which makes the swap *look*
+safe — it is not. Measured consequence of the swap:
+
+```
+2,991 corpus fields changed, essentially all value -> None
+   1TNK  w_damage 25 -> None      AFACT cost 5000 -> None      AHPAD hp 8000 -> None
+```
+
+That is silent data destruction of exactly the kind CLAUDE.md rule 8 warns about: fewer findings,
+no error. Backups were taken first (`*.bak_20260905`) and used to restore; the corpus was restored
+with `git checkout`. **Find how `rules_DTA_Classic.ini` is actually produced before refreshing it.**
+
+⚠ `extract_ini_units.py --source X --json <corpus>` has the SAME destructive shape as
+`extract_peer_units.py --mod X`: it writes ONLY the selected sources over the whole corpus. Always
+run it across all nine sources, or not at all. There is no splice wrapper for it yet — writing one
+is the obvious follow-up.
+
+### DTA's real balance delta, measured but NOT yet in the corpus
+
+Current DTA (`INI/Rules.ini`, 2026-09-11 20:40) vs the Sep 5 extraction — **9 fields**, a flak rework:
+
+```
+[Flak]    ROF 40->20   Damage 23->14      [FlakWH] Spread 3->12     [AGFlak] Damage 11->13,
+[MFLAK]   Strength 1800->2000             [Minigun] Range 2.5->2.67  Warhead APRA->AGFlakWH
+[SCRINTNK] [VMINE]  Armor special -> special_heavy
+```
+
+`Enhance.ini`: 0 changes. These are real and still owed to the corpus once the safe refresh path is
+known.
+
+### Where the remaining gaps are
+
+234 peer rows have a range/reload but no DPS; 192 lack damage. Sampled: the large majority are
+**correctly** damage-free — gap generators, radar jammers, medics, mechanics, demo trucks,
+shipyard repair beams. CA's `ARTI` is a Scrin repair unit (Damage **-3000**, healing), not
+artillery. The genuine residue is weapons whose damage lives in a spawned `FireFragment` (CA
+`ZEUS`) or a `TargetDamage` warhead (CA `BRST`), which the extractor does not follow. That is a
+smaller, well-defined follow-up — not 192 broken rows.
+
+⚠ Sources with no local checkout (Valiant Shades, Rise of the East, Mental Omega, Red
+Resurrection) go through `extract_ini_units.py`, a different extractor, and were not touched here.
+
+
 ## ⛔⛔ 2026-09-07 — READ THIS FIRST: the reference map, and one absolute rule
 
 **SUPERWEAPONS ARE NEVER PRICED, RESTATTED OR TOUCHED** (maintainer, verbatim: *"NEVER CHANGE
