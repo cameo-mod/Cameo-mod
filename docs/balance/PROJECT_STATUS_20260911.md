@@ -228,7 +228,8 @@ DTA archive refresh described below.
 The DTA refresh is now complete at the static corpus/map boundary. The new
 archive resolves Vinifera `$Inherits=` per file before overlay, produces 863/863
 rows for Classic and Enhanced, updates only the DTA corpus lines plus dependent
-receipt fingerprints, regenerates the derived faction profiles, and regenerates
+receipt fingerprints, regenerates the derived faction and armor-normalization
+profiles, and regenerates
 the four-faction HTML map with the same 66/82/270/23 shape. The 2,991-field
 destructive replacement and the rejected wholesale PR #349 peer artifact remain
 documented in `dta_refresh_readiness_20260912.md`; DTA runtime/client-version

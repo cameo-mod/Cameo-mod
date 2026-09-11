@@ -35,6 +35,12 @@ The derived `faction_profiles.json` was regenerated from the refreshed corpus:
 96 faction profiles across nine sources. It is a diagnostic summary only; it
 does not alter the reference assignment or any gameplay value.
 
+The corpus-wide derived `armor_normalized.json` was regenerated as well; its
+nine source sections now match the current corpus. The TS adapter
+continues to admit only the shared `none`/`wood`/`concrete`/`light`/`heavy`
+vocabulary; `medium`, `special_heavy`, `rocket` and naval-specific tags remain
+explicitly unmapped rather than being assigned a ladder by assumption.
+
 ## Static map refresh
 
 The four-faction map was regenerated from the current-base corpus and selector:
@@ -55,6 +61,7 @@ gameplay changes.
 - DTA corpus, range, cycle, consumer, selection and map contracts: **52/52**
   (one external-before-corpus test remains intentionally skipped without its
   report-time input).
+- Japan-pilot provenance closure after the derived-artifact refresh: **77/77**.
 - The extractor’s direct archive run produced 863/863 rows for both labels.
 
 The current-base-compatible corpus and map are safe to review and publish. DTA

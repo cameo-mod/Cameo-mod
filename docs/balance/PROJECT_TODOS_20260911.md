@@ -136,6 +136,10 @@ Acceptance: modeled load weight equals declared capacity; exceptions are
   refresh only the 1,726 DTA rows with provenance, and regenerate the static map.
   The destructive merged-file replacement and the current-base-compatible merge
   are documented in `docs/audit/latest/dta_refresh_readiness_20260912.md`.
+- [x] Refresh the derived faction/armor profiles and close the Japan-pilot
+  provenance list for the evidence helpers they transitively consume. Keep
+  unmapped TS extension armor tags explicit until their ladder semantics are
+  reviewed.
 - [ ] Resolve the remaining runtime/client-version and secondary-payload
   uncertainties before using DTA as a gameplay-equivalence claim.
 
