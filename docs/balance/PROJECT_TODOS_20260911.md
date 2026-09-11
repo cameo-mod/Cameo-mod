@@ -9,15 +9,16 @@ for the intended balanced candidate.
 
 ## Operating boundary
 
-- Blackrobe resumed implementation on Astra and subsequently authorized this
-  scoped publication plus one handoff reply. Scheduled Discord monitoring stays
-  paused. See the project status for current ownership and the CL-01 reservation.
-- On explicit monitoring resumption, preserve native Discord **Reply** with the
+- Blackrobe resumed implementation and authorized scoped publication to the
+  existing draft PR. Scheduled Discord monitoring is **ACTIVE** every 15 minutes
+  through 14 September 2026 at 00:16:58 WIB. See the project status for current
+  ownership and the CL-01 reservation.
+- While monitoring is active, preserve native Discord **Reply** with the
   `[Codex]` prefix and substantive milestone-only communication. A completed
   small report does not automatically justify another message.
-- Preserve the dirty overnight worktree and frozen baseline artifacts. Stage only
-  the reviewed continuation files for the authorized fork publication. No reset,
-  clean, upstream push or merge is authorized.
+- Preserve the overnight worktree and frozen baseline artifacts. Stage only
+  reviewed continuation files for publication to Blackrobe's fork; do not push
+  to the upstream organization, reset, clean or merge.
 - Current Cameo/base factory-ready states are the first comparison scope;
   upgrades, alternate factions, runtime playtest and loader work remain
   separate until their prerequisites are evidenced.

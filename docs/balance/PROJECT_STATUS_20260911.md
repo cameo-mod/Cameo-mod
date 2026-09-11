@@ -8,8 +8,8 @@ several report/helper errors. Scheduled Discord monitoring is **ACTIVE** with a
 The reviewed execution plan is [GRAND_PLAN_20260911.md](GRAND_PLAN_20260911.md).
 The active model is **GPT-5.6 Luna Max**. Astra High provides occasional
 read-only milestone review; DeepSeek remains excluded. The scoped continuation
-and one native Discord handoff reply have already been published. Merge, game
-launch, engine build and external coordination setup remain unauthorized.
+and milestone-only native Discord replies have already been published. Merge,
+game launch, engine build and external coordination setup remain unauthorized.
 
 ## Planning review — current conclusions
 
@@ -106,8 +106,8 @@ continuation is a linked draft from
 The new draft is an aggregate preservation checkpoint that includes #342's
 history. PRs #339–342 overlap it; none is merge-approved and they must not all be
 merged blindly. Original baselines and the old checkpoint manifest are unchanged.
-The GP-02 contract-hardening batch and this status update are committed in
-`91baf120726324189f7c58822a9a86eec0a2b497`, pushed to Blackrobe's fork and
+The GP-02 contract-hardening implementation is committed through
+`12ca1602d` (snapshot-HEAD identity check), pushed to Blackrobe's fork and
 included in [draft PR #345](https://github.com/cameo-mod/Cameo-mod/pull/345).
 
 From an existing Cameo clone, use a new worktree to preserve your own edits:
@@ -175,14 +175,16 @@ now reads a separate version-1 JSON receipt from an explicit portable evidence
 root. It verifies the receipt's SHA-256, exact frozen-baseline and selected-dataset
 hashes/schema, reviewed scope, method, normalization and source-hash provenance,
 and validates coherent source-state fields (`clean_commit`/`dirty_worktree`,
-matching `dirty` boolean and explicit reconciliation). The immutable baseline is
-untouched. A malformed or merely named evidence file
+matching `dirty` boolean, explicit reconciliation and the baseline's exact
+`worktree_head` when supplied). The immutable baseline is untouched. A malformed
+or merely named evidence file
 cannot bind the current Cameo dataset; substantive historical channel recovery
 is still unperformed and the 29 selected groups remain withheld.
 
 The synthesis gate also returns an unresolved diagnostic for non-string source
-labels instead of raising. The affected contract test module passes **15/15**,
-including both coherent source-state kinds and contradictory/invalid states.
+labels instead of raising. The affected contract test module passes **16/16**,
+including both coherent source-state kinds, exact snapshot identity and
+contradictory/invalid states.
 A portable replay using the published packet passes through aggregation (**29/29**),
 matches all **71/71** frozen inputs and preserves the expected **0/29** gate
 resolution with `original_channel_reconstruction_not_verified`. Astra High's
