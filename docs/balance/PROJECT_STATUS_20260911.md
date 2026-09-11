@@ -196,6 +196,12 @@ battle-tank regressions. The existing strongest-armament fallback remains a
 diagnostic limitation when no priced armament is active; it does not certify an
 unknown condition as a live baseline weapon.
 
+The four-faction review map was regenerated from that selector and the current
+pending class map. The published HTML now reports **66 originals, 82 expanded,
+270 references and 23 formula-priced rows**, labels the source-local rate as
+`damage/tick`, and carries the approved `after` class column. It remains a
+static review artifact; no proposal or gameplay value was applied.
+
 ### Latest Luna Max batch — GP-02 contract hardening
 
 The reconstruction admission check in `tools/balance/assemble_four_voice_pilot.py`

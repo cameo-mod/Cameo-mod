@@ -338,7 +338,9 @@ pending artifact through the Windows OS temp directory. The condition-gating
 rewrite from PR #347 remains excluded; the reference selector now uses the
 shared built-state evaluator and has focused Tesla Coil, IFV and GDI battle-tank
 regressions. Its existing strongest-armament fallback remains a diagnostic
-limitation when no priced armament is active.
+limitation when no priced armament is active. The four-faction HTML map was
+regenerated from this selector (66 originals, 82 expanded, 270 references, 23
+formula-priced rows) and is still review-only.
 
 ## Current state
 
