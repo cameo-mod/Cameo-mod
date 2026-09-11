@@ -214,6 +214,12 @@ build reached the menu with zero errors and no new exception log. That evidence
 is recorded in `master_boot_baseline_20260912.md`; candidate gameplay,
 promotion/cargo behavior and package provenance remain untested.
 
+Aedis's peer-reference extractor correction is integrated in `184a36e29`: the
+scalar weapon summary now chooses the first resolved positive-damage armament,
+so utility-first slots cannot erase range, reload, damage or Versus evidence.
+The two focused regressions pass; external peer corpus re-splicing remains a
+separate evidence refresh and was not run from unavailable source checkouts.
+
 ### Latest Luna Max batch — GP-02 contract hardening
 
 The reconstruction admission check in `tools/balance/assemble_four_voice_pilot.py`

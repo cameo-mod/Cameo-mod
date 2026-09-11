@@ -47,6 +47,9 @@ Discord. Track M1–M5 in the grand plan; no overall percentage is currently ass
   reference voices; do not renormalize a missing voice.
 - [x] Keep the coverage inventory that distinguishes candidates from
   gate-ready rows.
+- [x] Correct the peer extractor's utility-first armament selection so a
+  capture/repair weapon cannot erase a later positive-damage weapon; retain
+  the unarmed fallback and focused regression checks.
 
 Acceptance: the map and inventory remain reproducible without mutating source
 or YAML data.
