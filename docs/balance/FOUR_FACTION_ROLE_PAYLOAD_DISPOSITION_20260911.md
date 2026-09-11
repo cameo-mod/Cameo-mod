@@ -28,6 +28,20 @@ match staged extraction; the global model is unchanged. The missile scan has
 globally. None of those strict rows has a direct consumer in these four
 factions. The four remaining R4 rows belong to CABAL, StarCraft and Japan.
 
+Point-defense is a support function at the **armament** level, not a new
+warhead family. The extractor now marks `pointdefense` and
+`pointdefensedeployed` armaments with `support_armament: true`,
+`pricing: false` and `pricing_reason: support_armament`, while retaining their
+resolved damage and delivery fields for route review. The refreshed ledgers
+cover nine support armament routes on eight actors, including the Light Tank
+Mk. II. A buildable actor with non-support positive damage but no priced
+positive armament now exposes an `ALL_POSITIVE_ARMAMENTS_UNPRICED` guard instead of
+silently presenting a zero-offense pricing input; no such guard is present in
+the refreshed ledgers. The canonical `fit_class.pricing_armaments` selector
+refuses a ledger carrying that guard, while support-only and non-buildable
+actors remain valid zero-offense cases. This changes diagnostic pricing
+selection only; no YAML or gameplay values were edited.
+
 ## Candidate target and secondary closure
 
 The corrected target-route receipt retains 19 candidate review rows:

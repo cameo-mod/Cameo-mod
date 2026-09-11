@@ -6783,11 +6783,13 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "pricing": true,
+      "pricing": false,
+      "pricing_reason": "support_armament",
       "range": "5000",
       "reloaddelay": "25",
       "requires": "tkm_upgrade_pointdefensesystem",
       "slot": "Armament@pointdefense",
+      "support_armament": true,
       "versus_templates": [
        "PDLaser"
       ],

@@ -2206,10 +2206,12 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
-      "pricing": true,
+      "pricing": false,
+      "pricing_reason": "support_armament",
       "range": "6030",
       "reloaddelay": "8",
       "slot": "Armament@pointdefense",
+      "support_armament": true,
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -4808,11 +4810,13 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "pricing": true,
+      "pricing": false,
+      "pricing_reason": "support_armament",
       "range": "6000",
       "reloaddelay": "25",
       "requires": "td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@pointdefense",
+      "support_armament": true,
       "versus_templates": [
        "PDLaser"
       ],
@@ -5492,10 +5496,12 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "pricing": true,
+      "pricing": false,
+      "pricing_reason": "support_armament",
       "range": "4903",
       "reloaddelay": "25",
       "slot": "Armament@pointdefense",
+      "support_armament": true,
       "versus_templates": [
        "PDLaser"
       ],
@@ -5712,11 +5718,13 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "pricing": true,
+      "pricing": false,
+      "pricing_reason": "support_armament",
       "range": "6000",
       "reloaddelay": "25",
       "requires": "td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@pointdefense",
+      "support_armament": true,
       "versus_templates": [
        "PDLaser"
       ],

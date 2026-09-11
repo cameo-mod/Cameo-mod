@@ -9729,10 +9729,12 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
-      "pricing": true,
+      "pricing": false,
+      "pricing_reason": "support_armament",
       "range": "6650",
       "reloaddelay": "10",
       "slot": "Armament@pointdefense",
+      "support_armament": true,
       "versus_templates": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
