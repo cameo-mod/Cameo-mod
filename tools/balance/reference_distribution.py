@@ -78,6 +78,7 @@ import ini_weapon_selection  # noqa: E402
 import peer_nominal_evidence  # noqa: E402
 import peer_base_state  # noqa: E402
 import ini_range_evidence  # noqa: E402
+import formula  # noqa: E402  (the canonical built-state condition evaluator)
 import ini_cycle_evidence  # noqa: E402
 import synthesize_reference as syn  # noqa: E402  (parsers + roster loader are reused wholesale)
 
@@ -923,20 +924,15 @@ def burst_cycle(arm, anum):
 
 
 def is_upgrade_gated(arm):
-    """True when this armament only fires once an UPGRADE or rank is granted.
+    """True when the armament is inactive in the canonical built state.
 
-    The ledger records the armament's condition in `requires`, and it has three shapes:
-      None            always active
-      `!upgrade_x`    active only WITHOUT the upgrade -- this IS the baseline form
-      `upgrade_x`     active only WITH it -- an upgraded form, and not what we price
-
-    A compound is gated unless every clause is a negation.
+    This helper keeps its historical name for callers, but requirement shape is not enough to
+    identify a baseline weapon: a Tesla Coil has numeric charge alternatives, and an IFV has
+    mutually exclusive passenger modes.  The formula module owns the shared built-state rule
+    (all named conditions false, malformed expressions fail closed), so this selector must use
+    that same evaluator instead of independently treating every positive token as an upgrade.
     """
-    req = str(arm.get("requires") or "").strip()
-    if not req:
-        return False
-    parts = [p for p in req.replace("&", " ").replace(",", " ").replace("|", " ").split() if p]
-    return any(not p.startswith("!") for p in parts)
+    return not formula.condition_holds_by_default(arm.get("requires"))
 
 
 def baseline_armaments(arms):
@@ -955,7 +951,11 @@ def baseline_armaments(arms):
     at runtime. `requires` separates the two exactly, and the baseline set is also the right
     comparison for the references, which record un-upgraded weapons.
     """
-    live = [a for a in arms if not is_upgrade_gated(a)]
+    # Evaluate every armament against one shared built-state assignment before separating the
+    # ground and AA domains.  A satisfiability test per arm would admit mutually exclusive modes
+    # (Tesla charged/un-charged variants or every IFV passenger) and sum them as if they fired
+    # together.  The formula evaluator is also the one used by fit_class.pricing_armaments.
+    live = [a for a in arms if formula.condition_holds_by_default(a.get("requires"))]
     ground = [a for a in live if not is_anti_air_armament(a)]
     if ground:
         return ground            # price on the ground weapon (DESIGN, anti_air_vehicle anchor)

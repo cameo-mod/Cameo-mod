@@ -188,10 +188,13 @@ route remain separate policy decisions.
 PR #347's safe tooling corrections are integrated here: the reference map now
 labels its source-local rate as `damage/tick`, the accepted all-17 cargo-class
 move is reflected in the pending map, and its Windows temp output is portable.
-The proposed `is_upgrade_gated` rewrite remains held: its satisfiability-only
-selection would sum mutually exclusive Tesla Coil/IFV runtime modes and misses
-some purchased-token names. A bounded state-consistent parser is still needed
-before that helper can change the published comparison map.
+The proposed `is_upgrade_gated` rewrite remains excluded. Its satisfiability-only
+selection would sum mutually exclusive Tesla Coil/IFV runtime modes and miss
+some purchased-token names. The reference selector now delegates to the shared
+built-state evaluator used by Formula V2, with focused Tesla Coil, IFV and GDI
+battle-tank regressions. The existing strongest-armament fallback remains a
+diagnostic limitation when no priced armament is active; it does not certify an
+unknown condition as a live baseline weapon.
 
 ### Latest Luna Max batch — GP-02 contract hardening
 

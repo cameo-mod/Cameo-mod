@@ -335,7 +335,10 @@ mask correction, with runtime interception still unverified.
 Reference-map tooling now labels its source-local rate as `damage/tick`, applies
 the accepted all-17 cargo-class move in the pending review map, and writes its
 pending artifact through the Windows OS temp directory. The condition-gating
-rewrite from PR #347 remains held pending a state-consistent parser.
+rewrite from PR #347 remains excluded; the reference selector now uses the
+shared built-state evaluator and has focused Tesla Coil, IFV and GDI battle-tank
+regressions. Its existing strongest-armament fallback remains a diagnostic
+limitation when no priced armament is active.
 
 ## Current state
 
