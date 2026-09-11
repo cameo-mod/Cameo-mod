@@ -89,6 +89,78 @@ class ApplyTests(unittest.TestCase):
         self.assertEqual(self.yaml.read_bytes(), self.original)
         child.assert_not_called()
 
+    def test_shadowed_values_refuse_but_consistent_noops_pass(self):
+        baseline = copy.deepcopy(self.fresh)
+        original_weapon = self.weapon.read_bytes()
+        for field in ("cost", "reload", "damage"):
+            with self.subTest(field=field):
+                self.fresh.clear()
+                self.fresh.update(copy.deepcopy(baseline))
+                self.desired = copy.deepcopy(self.fresh)
+                unit = self.desired["test"]["sections"]["infantry"]["unit"]
+                self.yaml.write_bytes(self.original)
+                self.weapon.write_bytes(original_weapon)
+                if field == "cost":
+                    unit["cost"]["v"] = 150
+                    self.yaml.write_bytes(self.original.replace(b"Cost: 100", b"Cost: 150"))
+                elif field == "reload":
+                    unit["armaments"][0]["reloaddelay"] = "30"
+                    self.weapon.write_bytes(original_weapon.replace(b"ReloadDelay: 20", b"ReloadDelay: 30"))
+                else:
+                    unit["armaments"][0]["damage_warheads"][0]["damage"] = 200
+                    self.weapon.write_bytes(original_weapon.replace(b"Damage: 100", b"Damage: 200"))
+                self.write_ledgers()
+                before = (self.yaml.read_bytes(), self.weapon.read_bytes())
+                code, text, child = self.run_apply("--confirm")
+                self.assertEqual(code, 1, text)
+                self.assertIn("SHADOWED", text)
+                child.assert_not_called()
+                self.assertEqual((self.yaml.read_bytes(), self.weapon.read_bytes()), before)
+                self.fresh.clear()
+                self.fresh.update(copy.deepcopy(self.desired))
+                code, text, child = self.run_apply("--confirm")
+                self.assertEqual(code, 0, text)
+                self.assertIn("NO CHANGES", text)
+                child.assert_not_called()
+
+    def test_retired_multiplier_change_refuses_but_preservation_passes(self):
+        unit = self.fresh["test"]["sections"]["infantry"]["unit"]
+        unit["firepower_multiplier"] = {"v": .5, "src": "inherited"}
+        self.desired = copy.deepcopy(self.fresh)
+        self.change_cost()
+        code, text, child = self.run_apply()
+        self.assertEqual(code, 0, text)
+        self.assertIn("DRY RUN: 1", text)
+        self.desired["test"]["sections"]["infantry"]["unit"]["firepower_multiplier"]["v"] = 1
+        self.write_ledgers()
+        code, text, child = self.run_apply("--confirm")
+        self.assertEqual(code, 1, text)
+        self.assertIn("RETIRED KNOB", text)
+        child.assert_not_called()
+
+    def test_untouched_inherited_stat_and_utility_arm_do_not_block(self):
+        unit = self.fresh["test"]["sections"]["infantry"]["unit"]
+        unit["hp"]["src"] = "inherited"
+        unit["armaments"].append({"slot": "Armament@UTILITY", "reloaddelay": "20"})
+        self.desired = copy.deepcopy(self.fresh)
+        self.change_cost()
+        code, text, _ = self.run_apply()
+        self.assertEqual(code, 0, text)
+        self.assertIn("DRY RUN: 1", text)
+        self.desired["test"]["sections"]["infantry"]["unit"]["hp"]["v"] = 600
+        self.write_ledgers()
+        code, text, child = self.run_apply("--confirm")
+        self.assertEqual(code, 1, text)
+        self.assertIn("inherited edit", text)
+        child.assert_not_called()
+
+    def test_represented_weapon_consumer_and_unrelated_inheritance_pass(self):
+        self.patches[-1].stop()
+        self.yaml.write_bytes(self.original + b"\tArmament:\r\n\t\tWeapon: Gun\r\n"
+                              b"unrelated:\r\n\tValued:\r\n\t\tCost: 1\r\n"
+                              b"child:\r\n\tInherits: unrelated\r\n")
+        self.assertEqual(apply.reference_problems(self.desired, {"unit"}, {"Gun"}), [])
+
     def test_noop_confirmation_does_not_refresh_ledgers(self):
         code, text, child = self.run_apply("--confirm")
         self.assertEqual(code, 0)
@@ -119,6 +191,8 @@ class ApplyTests(unittest.TestCase):
                 code, text, child = self.run_apply("--confirm")
                 self.assertEqual(code, 1, text)
                 self.assertIn("unsupported ledger edit", text)
+                if case == "change_weapon":
+                    self.assertIn("missing or stale armament provenance", text)
                 self.assertNotIn("NO CHANGES", text)
                 child.assert_not_called()
 
@@ -374,6 +448,53 @@ class ApplyTests(unittest.TestCase):
         self.assertIn("extracted ledger is missing", text)
         child.assert_not_called()
 
+    def test_missing_extraction_or_actor_refuses_and_valid_fixture_passes(self):
+        original_fresh = copy.deepcopy(self.fresh)
+        for failure in ("ledger", "actor"):
+            with self.subTest(failure=failure):
+                self.fresh.clear()
+                self.fresh.update(copy.deepcopy(original_fresh))
+                if failure == "ledger":
+                    self.fresh.clear()
+                    message = "no current extracted ledger"
+                else:
+                    self.fresh["test"]["sections"]["infantry"].clear()
+                    message = "no current resolved actor in this ledger section"
+                code, text, child = self.run_apply("--confirm")
+                self.assertEqual(code, 1, text)
+                self.assertIn(message, text)
+                self.assertEqual(self.yaml.read_bytes(), self.original)
+                child.assert_not_called()
+        self.fresh.clear()
+        self.fresh.update(original_fresh)
+        code, text, child = self.run_apply("--confirm")
+        self.assertEqual(code, 0, text)
+        self.assertIn("NO CHANGES", text)
+        child.assert_not_called()
+
+    def test_missing_local_unit_or_weapon_refuses_before_writes(self):
+        original_weapon = self.weapon.read_bytes()
+        for failure in ("unit", "weapon"):
+            with self.subTest(failure=failure):
+                self.desired = copy.deepcopy(self.fresh)
+                self.yaml.write_bytes(self.original)
+                self.weapon.write_bytes(original_weapon)
+                if failure == "unit":
+                    self.change_cost()
+                    self.yaml.write_text("unit:\n\tHealth:\n\t\tHP: 500\n", encoding="utf-8")
+                    message = "Valued.Cost` not written locally"
+                else:
+                    self.desired["test"]["sections"]["infantry"]["unit"]["armaments"][0]["reloaddelay"] = "30"
+                    self.write_ledgers()
+                    self.weapon.write_text("Other:\n\tReloadDelay: 20\n", encoding="utf-8")
+                    message = "weapon `Gun` not found"
+                before = {path: path.read_bytes() for path in (self.yaml, self.weapon)}
+                code, text, child = self.run_apply("--confirm")
+                self.assertEqual(code, 1, text)
+                self.assertIn(message, text)
+                self.assertEqual(before, {path: path.read_bytes() for path in before})
+                child.assert_not_called()
+
     def test_interrupt_during_extraction_rolls_back(self):
         self.change_cost()
         with self.assertRaises(KeyboardInterrupt):
@@ -415,6 +536,21 @@ class ApplyTests(unittest.TestCase):
         self.assertEqual(code, 1)
         self.assertIn("unselected ledger has pending changes", text)
         self.assertEqual((self.ledger / "other.json").read_bytes(), proposal)
+        self.assertEqual(self.yaml.read_bytes(), self.original)
+        child.assert_not_called()
+
+    def test_unchanged_unselected_ledger_allows_explicit_selected_faction(self):
+        other = copy.deepcopy(self.fresh["test"])
+        other["ledger"] = "other"
+        self.fresh["other"] = copy.deepcopy(other)
+        self.desired["other"] = other
+        self.change_cost()
+        before = (self.ledger / "other.json").read_bytes()
+        code, text, child = self.run_apply("--faction", "test")
+        self.assertEqual(code, 0, text)
+        self.assertIn("DRY RUN: 1", text)
+        self.assertNotIn("unselected ledger has pending changes", text)
+        self.assertEqual((self.ledger / "other.json").read_bytes(), before)
         self.assertEqual(self.yaml.read_bytes(), self.original)
         child.assert_not_called()
 

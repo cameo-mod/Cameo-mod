@@ -13,6 +13,43 @@ so nothing below is final.
 Class anchors themselves live in [`anchor_decisions_log.md`](anchor_decisions_log.md) and
 `class_anchors.json`.
 
+## Role-review tests (2026-09-09)
+
+Source tree upstream `5f170ba07`. The eight pairs singled out by C8 in the current Astra request
+([§C8](../BLACKROBE_ASTRA_ORDERS_2026-09-07.md)) are separated by intended
+role, not by stats. Each row below is a **human review question about intended role** — it is NOT
+a numeric classifier, NOT reclassification authority, NOT proof that current weapons already
+conform, and NOT a sign-off. Membership is still decided by the shared classifier/template plus a
+maintainer role ruling; the binding definitions are [`FORMULA_V2.md`](../design/FORMULA_V2.md)
+(law) and [`class_anchors.json`](class_anchors.json). Numerical weapon/damage rules from old
+registry comments are deliberately not restated here; where a stale description (e.g. the AA
+damage-bonus grant in an old registry comment) conflicts with the current AA range law
+(`DESIGN.md`, 2026-09-08), the law wins.
+
+| pair | role-review test (one sentence) |
+|---|---|
+| `anti_air_vehicle` vs `missile_vehicle` | A dedicated air-defense vehicle versus a mobile all-round missile support unit — carrying an AA weapon is not decisive, because the AA range bonus is shared by several classes under the current AA range law. |
+| `archer` vs `flying_infantry` | A ground bow/arrow projectile-arc specialist versus infantry whose defining trait is airborne/over-terrain movement — the arrow's flight is projectile tracking, not unit flight. |
+| `rocket_trooper` vs `special_forces` | A dedicated infantry AA/AT launcher versus a versatile direct-fire anti-air/anti-armor specialist — shared air access alone does not separate them. |
+| `missile_vehicle` vs `tank_destroyer` | Mobile all-round missile support versus a frontal standoff anti-tank vehicle — judge the intended firing role, not nearby stats or the missile naming alone. |
+| `archer` vs `special_forces` | A bow/arrow projectile-arc specialist versus a direct-fire versatile specialist — air capability is shared by both, so it is not deciding evidence. |
+| `flying_infantry` vs `special_forces` | Airborne/over-terrain infantry mobility versus a ground specialist role — weapon strength does not determine movement class. |
+| `heavy_sniper` vs `mortar` | Precision all-ground sniper fire versus slow indirect arcing fire infantry — a similar range does not make them interchangeable. |
+| `pure_sniper` vs `rocket_trooper` | An infantry-target specialist versus a dedicated anti-armor/anti-air launcher — who the weapon may target separates them. |
+
+Notes (review flags, not new rules):
+
+- `anti_air_vehicle` vs `missile_vehicle` — **review-needed** on the registry text only:
+  `class_anchors.json` still carries the stale AA damage-bonus description; the twin-armament
+  mechanism itself is explicitly retained (`DESIGN.md`: the twin armament IS the engine's
+  mechanism, not duplication to collapse); the role test above follows the current AA range law,
+  and no automatic reclassification is inferred — human role questions remain reviewable.
+- The request's "area-fire" wording for `mortar` was tightened to "arcing" — the sources say
+  indirect arcing fire, and no area-damage claim is made here.
+
+These are human tests, not exhaustive mechanics requirements: anything a sentence cannot decide
+stays review-needed for a maintainer ruling.
+
 ---
 
 ## Scout infantry

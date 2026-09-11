@@ -5072,6 +5072,105 @@ ra2_tractor_driveby:
 		Image: ra2tractor
 		PlayerPalette: playerra2
 
+
+##############################################
+#   Red Alert 2 Civilian Infantry
+##############################################
+
+^RA2CivInfantry:
+	Inherits: ^CivInfantry
+	Inherits@para: ^RA2Parachutes
+	-WithDeathAnimation:
+	-WithDeathAnimation@effect:
+	WithDeathAnimation:
+		DeathSequencePalette: ra2infantry
+		DeathTypes:
+			DefaultDeath: 1
+			BulletDeath: 1
+			SmallExplosionDeath: 2
+			ExplosionDeath: 2
+			RippedApartDeath: 2
+	WithDeathAnimation@effect:
+		DeathSequencePalette: ra2effect
+		DeathPaletteIsPlayerPalette: False
+		DeathTypes:
+			RadiationDeath: 4
+			PsychicDeath: 5
+			TiberiumDeath: 7
+			ElectricityDeath: 6
+			#RA2VirusDeath: 7
+	SpawnActorOnDeath@Flameguy:
+		Probability: 100
+		Actor: RA2Flameguy
+		DeathType: FireDeath
+	FireWarheadsOnDeath@Corpse:
+		DeathTypes: DefaultDeath, BulletDeath, RippedApartDeath
+		Weapon: RA2CorpseSpawner
+		EmptyWeapon: RA2CorpseSpawner
+		RequiresCondition: !chronobeamed
+	#Explodes@CorpseThrow:
+	#	DeathTypes: ExplosionDeath
+	#	Weapon: RA2CorpseThrower
+	#	EmptyWeapon: RA2CorpseThrower
+	#	RequiresCondition: !chronobeamed
+	RenderSprites:
+		PlayerPalette: ra2infantry
+	Crushable:
+		CrushSound: igensqua.wav
+
+ra2_civ1:
+	Inherits: ^RA2CivInfantry
+	Inherits@armed: ^ArmedCivilian
+	Voiced:
+		VoiceSet: CivilianFemaleVoice
+
+ra2_civ2:
+	Inherits: ^RA2CivInfantry
+	Inherits@armed: ^ArmedCivilian
+
+ra2_civ3:
+	Inherits: ^RA2CivInfantry
+	Inherits@armed: ^ArmedCivilian
+
+ra2_civa:
+	Inherits: ^RA2CivInfantry
+	Inherits@armed: ^ArmedCivilian
+
+ra2_civb:
+	Inherits: ^RA2CivInfantry
+	Inherits@armed: ^ArmedCivilian
+
+ra2_civc:
+	Inherits: ^RA2CivInfantry
+	Inherits@armed: ^ArmedCivilian
+
+ra2_civsf:
+	Inherits: ^RA2CivInfantry
+	Inherits@armed: ^ArmedCivilian
+	Voiced:
+		VoiceSet: CivilianFemaleVoice
+
+ra2_civsfm:
+	Inherits: ^RA2CivInfantry
+	Inherits@armed: ^ArmedCivilian
+
+ra2_civstm:
+	Inherits: ^RA2CivInfantry
+	Inherits@armed: ^ArmedCivilian
+
+ra2_civbf:
+	Inherits: ^RA2CivInfantry
+	Voiced:
+		VoiceSet: CivilianFemaleVoice
+
+ra2_civbtm:
+	Inherits: ^RA2CivInfantry
+
+ra2_civbfm:
+	Inherits: ^RA2CivInfantry
+
+ra2_civbbp:
+	Inherits: ^RA2CivInfantry
 # RA2 New Promotions
 
 # RA2UNIONTANK:

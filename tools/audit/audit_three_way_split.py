@@ -189,8 +189,9 @@ def run(rs: Ruleset) -> int:
               "of raising RAW_SPLIT_BASELINE.")
     else:
         print("Lower `RAW_SPLIT_BASELINE` as weapons are collapsed; never raise it. "
-              "⚠ Cross-check `audit_weapon_shape` W5, which measures the same population "
-              "from the RESOLVED node rather than the source.")
+              "W5 also resolves inheritance, but includes zero/healing/ally-only flat nodes "
+              "and has narrower type/name rules. Use audit_weapon_shape.py --compare-split "
+              "for the exact set difference; neither count is subtracted or reclassified.")
     return 1 if over else 0
 
 

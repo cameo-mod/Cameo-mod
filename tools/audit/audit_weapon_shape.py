@@ -51,6 +51,7 @@ Do not turn it into a ratchet without a per-weapon pass.
 from __future__ import annotations
 
 import collections
+import json
 import pathlib
 import re
 import sys
@@ -120,9 +121,21 @@ def scan_source():
     return inherits, local_fx
 
 
-def resolved_mains():
+def shape_main_nodes(node):
+    """W5's structural flat nodes, including zero/healing/ally-only nodes.
+
+    Unlike audit_three_way_split this is not a positive enemy-damage count.
+    Keep the historical definition explicit; --compare-split explains the delta.
+    """
+    return [c for c in node.children
+            if c.key.startswith("Warhead@") and c.value in MAIN_TYPES
+            and not c.key.lower().endswith(NOT_A_MAIN)]
+
+
+def resolved_mains(rs=None):
     """{weapon: [main warhead tags]} for weapons resolving to more than one main."""
-    rs = miniyaml.Ruleset(ROOT)
+    if rs is None:
+        rs = miniyaml.Ruleset(ROOT)
     out = {}
     for name in sorted(rs.weapons):
         if name.startswith("^"):
@@ -130,14 +143,59 @@ def resolved_mains():
         node = rs.resolve_weapon(name)
         if node is None:
             continue
-        mains = [
-            c.key.split("@", 1)[1] for c in node.children
-            if c.key.startswith("Warhead@") and c.value in MAIN_TYPES
-            and not c.key.lower().endswith(NOT_A_MAIN)
-        ]
+        mains = [c.key.split("@", 1)[1] for c in shape_main_nodes(node)]
         if len(mains) > 1:
             out[name] = sorted(mains)
     return out
+
+
+def compare_split(rs=None):
+    """Exact set difference, without changing either predicate or ratchet."""
+    import audit_three_way_split as split
+    if rs is None:
+        rs = miniyaml.Ruleset(ROOT)
+    shape, positive, differences = {}, {}, []
+    for name in sorted(rs.weapons):
+        if name.startswith("^"):
+            continue
+        node = rs.resolve_weapon(name)
+        if node is None:
+            continue
+        shape_nodes = {c.key: c for c in shape_main_nodes(node)}
+        split_nodes = {c.key: c for c in split.main_warhead_nodes(node)}
+        if len(shape_nodes) > 1:
+            shape[name] = sorted(shape_nodes)
+        if len(split_nodes) > 1:
+            positive[name] = sorted(split_nodes)
+        if (len(shape_nodes) > 1) == (len(split_nodes) > 1):
+            continue
+        nodes = []
+        for key in sorted(shape_nodes.keys() ^ split_nodes.keys()):
+            wh = shape_nodes.get(key) or split_nodes[key]
+            reasons = []
+            if not wh.key.startswith("Warhead@"):
+                reasons.append("W5 requires a named Warhead@ node")
+            if wh.value not in MAIN_TYPES:
+                reasons.append("type outside W5 flat-damage types")
+            if wh.key.lower().endswith(NOT_A_MAIN):
+                reasons.append("W5 companion-suffix exclusion")
+            if any(marker in wh.key for marker in split.COMPANION_MARKERS):
+                reasons.append("split companion-name exclusion")
+            if split.is_friendly_fire(wh):
+                reasons.append("split friendly-fire/ally-only exclusion")
+            try:
+                if int(str(wh.get("Damage"))) <= 0:
+                    reasons.append("non-positive damage")
+            except ValueError:
+                reasons.append("missing or non-integer damage")
+            nodes.append(dict(key=key, type=wh.value, damage=wh.get("Damage"),
+                              relationships=wh.get("ValidRelationships"), reasons=reasons))
+        differences.append(dict(weapon=name, shape_mains=sorted(shape_nodes),
+                                split_mains=sorted(split_nodes), differing_nodes=nodes))
+    return dict(shape_count=len(shape), split_count=len(positive),
+                shape_only=sorted(shape.keys() - positive.keys()),
+                split_only=sorted(positive.keys() - shape.keys()), differences=differences,
+                policy="informational reconciliation; neither raw count nor ratchet is changed")
 
 
 def main() -> int:
@@ -191,6 +249,9 @@ def main() -> int:
         "224 entries are no longer 'reviewed, keep' ΓÇö they are the worklist. The registry "
         "data stays useful: it says which mains someone chose on purpose.\n")
     out.append(f"concrete weapons with inherits: **{len(inherits)}**\n")
+    out.append("W5 counts structural flat-damage nodes, including zero/healing/ally-only nodes; "
+               "the split audit counts positive non-companion damage. Both resolve the full "
+               "concrete weapon corpus. Use `--compare-split` for exact differences.\n")
     out.append("| check | what | count | ratchet |\n|---|---|--:|--:|")
     for code, (n, base, what) in counts.items():
         flag = " Γ¢ö" if n > base else ""
@@ -232,4 +293,11 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    import argparse
+    parser = argparse.ArgumentParser(description="Weapon structure audit")
+    parser.add_argument("--compare-split", action="store_true", help="explain the exact W5/split inventory difference as JSON")
+    args = parser.parse_args()
+    if args.compare_split:
+        print(json.dumps(compare_split(), indent=2, ensure_ascii=False))
+    else:
+        raise SystemExit(main())

@@ -66,10 +66,12 @@ C₀ = cost). With ratios h,s,r,d (and r carrying the Special factor K):
   low edge = cheapest units, high edge = priciest; **steps of 10**
   (tank shells use bullet speed = range/10; tank destroyers = 2× that).
 - **Speed**: ±20% of baseline (provisional, maintainer will tune).
-  Vehicles, aircraft, AND ships: **steps of 5** (turn rate = speed/5, so
-  speed MUST be a multiple of 5). **Infantry: steps of 1** (free integer
-  values — instant turn, no /5 constraint) — use the freedom for faction
-  character.
+  **Steps of 1 for EVERY type** (maintainer 2026-09-07 — supersedes the
+  retired per-class 5-step for vehicles/aircraft/ships; see `DESIGN.md`
+  "Speed: steps of 1 for EVERY type"). The 5-step existed only to keep
+  `TurnSpeed = Speed/5` an integer; the derived-turn-rate law removes that
+  integer-grid requirement (its actual engine implementation is out of scope
+  here). Use the free integers for faction character.
 - **HP**: infantry in 1000 steps; self-heal Step = HP/1000. (The
   2×-health bake replaced the ScoutInfantryBuff 50% damage reduction —
   ⚠ **for 19 of 35 scouts. Measured 2026-08-17: 16 still resolve to

@@ -71,6 +71,166 @@ Next in the W24 queue: `devin/nova/w24-lane2` (57 commits, conflicts in
 `RedAlert2/Soviets/weapons.yaml` — a real per-weapon decision, not a merge tool), then
 `devin/nova/w24-naxi-pilot`, which must follow it.
 
+### ✅ CLOSED — THE ANTI-AIR CONVENTION. Ruled by the maintainer 2026-09-08.
+
+**The law is now in `docs/DESIGN.md` ("The AA range law", which REPLACES the dual-weapon AA law of
+2026-07-11). Read it there — this is a pointer, not a second copy.** In summary:
+
+1. **Three classes only** may carry an AA armament longer-ranged than its ground twin —
+   `scout_vehicle`, `armed_troop_transport`, `anti_air_vehicle` — at **1.5×**. `anti_air_vehicle`
+   SURVIVES; it is the only vehicle template carrying `AutoTargetPriority@AIR` (defaults.yaml:1829),
+   and that, not the range, is its mechanical identity.
+2. **Every other class uses one range for both domains.** The maintainer's Mammoth instinct was
+   already shipped: every mammoth's cannon and missile pod share a range (6412/6412, 6141/6141,
+   6340/6340); no `high_tech_tank` gets the bonus.
+3. **`mobile_bunker` is a new (29th) class**, populated by all 16 buildable actors with a resolved
+   `AttackOpenTopped`, and it may carry **no air-capable armament at all** — its anti-air is the
+   infantry riding inside. Ten of the sixteen are the former `line_breaker` Battle-Fortress family;
+   the 22 that stay `line_breaker` are flame tanks, disruptors and brawlers.
+4. The 1.5× is **generated** by `gen_weapon_template.py` (`AA_RANGE_MULT`), never hand-typed, and
+   enforced by `audit_aa_range.py` as a **LOWER-ONLY ratchet**.
+
+⛔ **AND THE ENGINE ANSWER, so nobody re-derives it.** The maintainer asked whether one weapon could
+serve both domains with an air-only range multiplier on the template. **It cannot, mod-side.**
+`Armament.MaxRange()` (Armament.cs:215) takes no target; `IRangeModifier.GetRangeModifier()`
+(TraitsInterfaces.cs:480) takes no target; `RangeMultiplier` scales every armament on the actor.
+Per-target range is resolved one level up in `AttackBase.GetMaximumRangeVersusTarget`
+(AttackBase.cs:336), which skips armaments whose weapon is not valid against the target. **The twin
+armament IS the mechanism — not duplication to be collapsed.** `Armament` is defined only in
+`OpenRA.Mods.Common` (not AS, not CA) and `MaxRange()` is `virtual`, so a Cameo shadow is possible
+in principle, but the call site that knows the target lives in `AttackBase`. Feasibility and cost of
+that fork are queued to Astra as **C43** — analysis only, no engine change on its strength.
+
+**Implementation queue (C44–C49, full detail in `docs/BLACKROBE_ASTRA_ORDERS_2026-09-07.md` §15):**
+generate the 1.5× · write `audit_aa_range.py` · land `^ArmedTroopTransportTemplate` +
+`^MobileBunkerTemplate` (BOOT GATE — `defaults.yaml` is engine content) · teach `extract_stats` to
+record cargo/fireports · fix the AA detector to cross-check resolved `ValidTargets` · resolve the
+three pure-AA units that price at DPS 0.
+
+⚠ **Baseline, measured 2026-09-08, re-measure before acting:** 67 actors carry a live AA armament —
+36 at exactly 1.5×, 14 at exactly 1.0×, 14 elsewhere, 3 pure-AA. `scout_vehicle` is already 10 of 10
+compliant. Roughly 13 actors need moving, and exactly one `mobile_bunker` (`td_gdi_assaultapc`,
+1.500×) must lose its AA gun.
+
+⚠ **The AA detector is a NAME heuristic** (`@AA` slot / `_AA` weapon), not a `ValidTargets` check.
+It catches `TSMammothTusk2II_AA` and misses the functionally identical `TSMammothTusk2`. Every
+number above inherits that limitation. C48 fixes it.
+
+⛔ **C32 IS CLOSED.** `devin/aurora/fix-anchor-readiness` was never pushed to any remote — it exists
+only as a local branch in one checkout — and its `anchor_readiness.py` fix is already on master by
+another route (zero `intentional_composite` references; the tool runs clean, exit 0). Astra was
+blocked on a branch that no one could reach, and was right to refuse to bypass the gate rather than
+treat the absence as permission. The reservation is released; master is the approved starting point.
+The same local branch also carries 32 files of LANE-4/LANE-5 classification work that still needs
+triage with Aurora — that is separate and unresolved.
+
+<!-- superseded discussion below, kept for provenance -->
+### (superseded) the open question as it stood before the ruling
+
+The maintainer asked: *"how can we make it consistent? giving the 1.5x range should be only for
+pure anti air vehicles. And if it is a troop transport then those don't count right?"* — and then
+paused it deliberately for a clearer head. **Nothing is blocked by it.** Measured state:
+
+```
+PURE AA (every armament anti-air):  3 actors        <- the category is nearly empty
+Ground gun AND a free AA gun:      63 actors across nine classes
+  support 15 (1.50x)  scout_vehicle 10 (1.50x)  anti_air_vehicle 10 (1.50x)
+  unclassified 19 (1.00x)  light_tank 2  epic_vehicle 2  line_breaker 1  flying_infantry 1
+41 of the 63 sit at EXACTLY 1.50x range; median damage ratio is 1.00
+```
+
+**The finding that decides it: 10 of the 11 `anti_air_vehicle` units also carry a ground gun.** A
+rule reserving 1.5x for "pure AA vehicles" would apply to ONE actor and strip the bonus from the AA
+class itself.
+
+**Two questions were tangled together, and only one mattered:**
+
+* **PRICING — settled and shipped.** An AA armament is free for all 63, excluded from the ground
+  DPS everywhere, exactly as the `anti_air_vehicle` anchor already ruled ("priced only on the
+  ground weapon"). The anchors derive from ground weapons alone. The pipeline is not waiting.
+* **DESIGN — open, and optional.** Whether a troop transport *should* have AA at all is a roster
+  feel question. It changes yaml, not the formula.
+
+⚠ The real inconsistency is not the transports: it is the **19 unclassified actors at 1.00x** —
+an AA gun with no range bonus. They fall inside the unclassified sweep the maintainer already
+deferred until TD/RA1 and Japan are done.
+
+Claude-Local's recommendation on the table: change nothing; record the convention as a GLOBAL rule
+(an AA armament is free, same damage, 1.5x range, never priced — it is not a class property), and
+revisit the 19 outliers with the unclassified sweep.
+
+### ⭐ 2026-09-08 — SIX MEASUREMENT DEFECTS, ALL THE SAME SHAPE
+
+Every one was a simplifying assumption where the ledger already held the answer. Found by the
+maintainer reading the published table, one after another:
+
+| defect | was | is |
+|---|---|---|
+| `exempt()` asked the CLASS question before the WEAPON question | armed APCs and the Vulcan "chassis-only" | armed is never chassis-only |
+| `cameo_rows` took `arms[0]` — yaml order, not importance | `td_nod_lighttankmkii` DPS 0 (its point-defense laser) | 495 of 822 armed actors carry 2+ armaments; 86 reported the wrong one |
+| `max()` over armaments | Sheridan 16,000 | simultaneous baseline armaments SUM |
+| `live or arms` fallback | siege chopper summed 10 mutually-exclusive barrels to 986,818 | falls back to the strongest single armament |
+| `BurstDelay` hardcoded to 5 | right for 78 of 1,017 burst weapons | reads `burstdelays` (3:256, 2:172, 4:160...) |
+| the AA test read the SLOT only | `td_gdi_apc`'s `Armament@SECONDARY` firing `APCGun_AA` was invisible | reads slot AND weapon; 41 -> 63 actors |
+
+⛔ And the meta-lesson, because it repeated four times in one day: **a filtered pool made me report
+things as missing.** The A10 and X-O "did not exist" (build-limited rows were dropped), 40
+references were "lost" (I compared against the non-hero pool), and `assign_references.py` writes
+only under `--write` — I read the previous evening's file and reported 30 corrections as failed
+when every one had applied. **Check the mtime; check which pool.**
+
+### ⭐ Landed 2026-09-08
+
+* **W24: 322 -> 231 stacks.** EMBER's lane 1 (22 weapons) and DAWN's lane 3 (69) merged and
+  boot-gated. Lane 3 arrived with `audit_balance_drift` red across 10 ledgers — yaml changed, no
+  re-extract — fixed with `extract_stats.py`. **Yaml and ledger in the SAME commit** is now a
+  standing fleet rule.
+* **The hero lane** (AURORA), with the `BuildLimit=0` reading corrected: zero is NOT a limit,
+  125 corpus rows carry it, and the proposed "fix" would have deleted 110 legitimate actors.
+  `td_gdi_commando` claims `RMBO`; `ra1_allies_tanya` claims `E7`/`TANYA`/`E7`.
+* **`armed_troop_transport`**, a 28th class. Anchor 50000/100/6000/1200, dps0 400 — four APCs
+  across four packs on the same number. ⚠ INERT until `^ArmedTroopTransportTemplate` exists:
+  `extract_stats` rewrites `design.class_anchor` to None every run, so SUBTYPE is the only durable
+  membership signal.
+* **Map: 261 references, O1 8 (ratchet 12), STRONG 756 / FAIR 148 / SHAPE 0 / WEAK 0.**
+
+### ⛔ NOT landed, and why
+
+* `devin/ember/vfi-signature-fix` — good work (references 904 -> 956, and Romanov's Vengeance cut
+  730 -> 200 rows costing ZERO live references) but it pushed **O1 from 8 to 13, over the ratchet
+  of 12**, stranding `minelayer`, `phasetransport`, `nukedemotruck`, `sovietoretruck` and two more.
+  Back to EMBER with the list. **Never raise a ratchet to land a branch.**
+* `devin/aurora/ini-pool-hygiene` — the `BuildLimit=0` change above. Rejected with evidence.
+* `devin/nova/w24-lane2` — 57 commits, rotted from 5 conflicts to **36** while NOVA stayed silent.
+  It is the only agent that has not pushed since 2026-09-07.
+
+### ⭐⭐ 2026-09-08 — THE EXTRAPOLATION PROGRAM IS THE PLAN NOW
+
+`docs/design/EXTRAPOLATION_PROGRAM.md` — the maintainer's method, written down with the two
+measurements that prove it works. Anchors stop being real actors and become VIRTUAL ones derived
+from the reference-mapped originals of TD, RA1 and Japan.
+
+Two findings that settle it:
+
+* **26 of 27 classes have members in TD/RA1/Japan.** Only `dreadnought` has none (its five members
+  are StarCraft/naval). Measured through `class_membership.classify()` over 700 classified rows.
+  ⚠ Two earlier attempts returned all-zeros and 8-zeros — both bugs in the CHECK, because membership
+  is DERIVED from `design.subtype` when no explicit tag exists.
+* **The virtual-anchor mechanism ALREADY EXISTS and nothing uses it**: `fit_class.py --spec
+  hp,speed,range_wdist,damage,reload,cost0`, *"a round-number model unit that need not exist in
+  game"*. `faction_extrapolate.py` (504 lines) likewise already implements the exchange rate. What
+  is missing is the INPUTS, not the mechanism.
+
+Why it is right, not a workaround: 23 of 27 real anchors are off their ruled spec, 0 of 27 satisfy
+`o0=p0=q0=cost0`, and restatting one actor silently reprices its whole class. A virtual anchor
+cannot drift. Phases A–E, owners and gates are in the program document; the approval ledger is §5.
+
+Maintainer rulings, 2026-09-08:
+* **Fogged bot observation SHIPS** (AI §9 decision #1, open since the document was written).
+* **Astra owns the RA2 + TS reference maps** — every input is committed, no game install needed.
+* **Originals are approved faction by faction**, and extrapolation starts per faction on approval.
+* **Astra ships CODE.** `docs/BLACKROBE_ASTRA_ORDERS_2026-09-07.md` §14.
+
 ### Priority queue
 
 1. **CA over-tagging** (EMBER) — unblocks ~8 known-wrong mappings at once.
