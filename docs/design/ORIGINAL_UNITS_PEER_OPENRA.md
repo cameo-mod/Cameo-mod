@@ -13,10 +13,7 @@ Checkout: `C:\Users\AedisToru\Documents\GitHub\CAmod` · rifle anchor **`E1` = 5
 | id | unit | type | faction | HP | ×rifle | Cost | ×rifle cost | Speed | Turn | Turret | Limit | Range | Dmg | Burst | Reload | DPS | vsINF | vsVEH | vsAIR | vsBLD |
 |---|---|---|---|--:|--:|--:|--:|--:|--:|:-:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
 | `AIRS` | Airstrip | building | blackh/marked/nod/scrin/shadow | 200,000 | 40.00 | 2,000 | 20.00 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `AFAC` | Construction Yard | building | — | 150,000 | 30.00 | 3,000 | 30.00 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `FACF` | Fake Construction Yard | defense | england | 150,000 | 30.00 | 250 | 2.50 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `FACT` | Construction Yard | building | — | 150,000 | 30.00 | 3,000 | 30.00 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `SFAC` | Colony Platform | building | — | 150,000 | 30.00 | 3,000 | 30.00 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `WEAF` | Fake War Factory | defense | england | 150,000 | 30.00 | 225 | 2.25 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `WEAP` | War Factory | building | allies/england/france/germany/iraq/russia/scrin/soviet/ukraine/usa/yuri | 150,000 | 30.00 | 2,000 | 20.00 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `WEAP.TD` | Weapons Factory | building | arc/blackh/eagle/gdi/legion/marked/nod/scrin/shadow/talon/zocom | 150,000 | 30.00 | 2,000 | 20.00 | — | — | n | — | — | — | — | — | — | — | — | — | — |
@@ -253,12 +250,12 @@ Checkout: `C:\Users\AedisToru\Documents\GitHub\CAmod` · rifle anchor **`E1` = 5
 | `BASI` | Basilisk | vehicle | allies/arc/blackh/collector/eagle/england/france/gdi/germany/harbinger/iraq/legion/marked/nod/reaper/russia/scrin/shadow/soviet/talon/traveler/ukraine/usa/yuri/zocom | 22,000 | 4.40 | 1,350 | 13.50 | 100 | 20 | n | — | 8,192 | 500 | 3 | 60 | 23 | 0.20 | 1.00 | — | 0.40 |
 | `HELI` | Longbow | aircraft | allies/england/france/germany/usa | 22,000 | 4.40 | 1,500 | 15.00 | 157 | 18 | n | — | 5,120 | 6,000 | 4 | 60 | 343 | 1.00 | 1.00 | — | 1.00 |
 | `MSAM` | MLRS | vehicle | allies/arc/blackh/collector/eagle/england/france/gdi/germany/harbinger/iraq/legion/marked/nod/reaper/russia/scrin/shadow/soviet/talon/traveler/ukraine/usa/yuri/zocom | 22,000 | 4.40 | 1,000 | 10.00 | 72 | 16 | Y | — | 9,216 | 800 | 2 | 130 | 12 | 1.00 | 0.48 | — | 0.78 |
-| `THWK` | Tomahawk Launcher | vehicle | allies/arc/blackh/collector/eagle/england/france/gdi/germany/harbinger/iraq/legion/marked/nod/reaper/russia/scrin/shadow/soviet/talon/traveler/ukraine/usa/yuri/zocom | 22,000 | 4.40 | 1,850 | 18.50 | 44 | 4 | Y | — | 22,015 | — | 1 | 250 | — | — | — | — | — |
+| `THWK` | Tomahawk Launcher | vehicle | allies/arc/blackh/collector/eagle/england/france/gdi/germany/harbinger/iraq/legion/marked/nod/reaper/russia/scrin/shadow/soviet/talon/traveler/ukraine/usa/yuri/zocom | 22,000 | 4.40 | 1,850 | 18.50 | 44 | 4 | Y | — | 22,015 | 50,000 | 1 | 250 | 200 | 0.00 | 0.00 | — | 0.00 |
 | `TPLR` | Templar | infantry | allies/arc/blackh/collector/eagle/england/france/gdi/germany/harbinger/iraq/legion/marked/nod/reaper/russia/scrin/shadow/soviet/talon/traveler/ukraine/usa/yuri/zocom | 21,000 | 4.20 | 550 | 5.50 | 60 | — | n | — | 6,144 | 1,900 | 2 | 42 | 84 | 1.75 | 0.73 | — | 0.48 |
 | `CYCP` | Cyclops | vehicle | allies/arc/blackh/collector/eagle/england/france/gdi/germany/harbinger/iraq/legion/marked/nod/reaper/russia/scrin/shadow/soviet/talon/traveler/ukraine/usa/yuri/zocom | 20,000 | 4.00 | 1,250 | 12.50 | 82 | 20 | n | — | 8,192 | 18,500 | 1 | 125 | 148 | 10.00 | 0.75 | — | 0.35 |
 | `ENRV` | Enervator | aircraft | traveler | 20,000 | 4.00 | 2,000 | 20.00 | 225 | 24 | n | — | 6,144 | 13,000 | 1 | 50 | 260 | 0.30 | 0.90 | — | 0.68 |
 | `MIG` | MiG Attack Plane | aircraft | iraq/russia/soviet/ukraine/yuri | 20,000 | 4.00 | 1,500 | 15.00 | 201 | 16 | n | — | 7,168 | 11,000 | 2 | 50 | 386 | 0.20 | 0.82 | — | 0.70 |
-| `N1C` | Cyborg | infantry | blackh/legion/marked/nod/shadow | 20,000 | 4.00 | 250 | 2.50 | 46 | — | n | — | 1,024 | — | 1 | 5 | — | — | — | — | — |
+| `N1C` | Cyborg | infantry | blackh/legion/marked/nod/shadow | 20,000 | 4.00 | 250 | 2.50 | 46 | — | n | — | 5,120 | 1,700 | 3 | 30 | 128 | 1.50 | 0.27 | — | 0.23 |
 | `PCAN` | Prism Cannon | vehicle | allies/arc/blackh/collector/eagle/england/france/gdi/germany/harbinger/iraq/legion/marked/nod/reaper/russia/scrin/shadow/soviet/talon/traveler/ukraine/usa/yuri/zocom | 20,000 | 4.00 | 1,350 | 13.50 | 60 | 12 | Y | — | 11,264 | 18,000 | 1 | 125 | 144 | 0.60 | 0.57 | — | 0.75 |
 | `PT` | Gunboat | ship | allies/england/france/germany/iraq/russia/scrin/soviet/ukraine/usa/yuri | 20,000 | 4.00 | 500 | 5.00 | 92 | 28 | Y | — | 5,632 | 4,000 | 1 | 40 | 100 | 0.15 | 0.82 | — | 0.33 |
 | `PTNK` | Prism Tank | vehicle | allies/arc/blackh/collector/eagle/england/france/gdi/germany/harbinger/iraq/legion/marked/nod/reaper/russia/scrin/shadow/soviet/talon/traveler/ukraine/usa/yuri/zocom | 20,000 | 4.00 | 1,350 | 13.50 | 72 | 20 | Y | — | 8,192 | 4,400 | 1 | 50 | 88 | 1.50 | 0.72 | — | 0.83 |
@@ -325,15 +322,13 @@ Checkout: `C:\Users\AedisToru\Documents\GitHub\CAmod` · rifle anchor **`E1` = 5
 | `BIKE` | Recon Bike | vehicle | blackh/legion/marked/nod/shadow | 11,000 | 2.20 | 500 | 5.00 | 170 | 40 | n | — | 5,120 | 4,000 | 2 | 50 | 145 | 0.10 | 0.72 | — | 0.57 |
 | `BORI` | Boris | infantry | iraq/russia/soviet/ukraine | 11,000 | 2.20 | 1,500 | 15.00 | 60 | — | n | 1 | 7,168 | 4,700 | 3 | 15 | 829 | 1.00 | 0.20 | — | 0.10 |
 | `E7` | Tanya | infantry | allies/arc/blackh/collector/eagle/england/france/gdi/germany/harbinger/iraq/legion/marked/nod/reaper/russia/scrin/shadow/soviet/talon/traveler/ukraine/usa/yuri/zocom | 11,000 | 2.20 | 1,500 | 15.00 | 60 | — | n | 1 | 7,168 | 4,700 | 4 | 10 | 817 | — | 0.25 | — | 0.15 |
-| `MAST` | Mastermind | infantry | collector/harbinger/reaper/scrin/traveler | 11,000 | 2.20 | 1,500 | 15.00 | 60 | — | n | 1 | 7,168 | — | 1 | 50 | — | — | — | — | — |
+| `MAST` | Mastermind | infantry | collector/harbinger/reaper/scrin/traveler | 11,000 | 2.20 | 1,500 | 15.00 | 60 | — | n | 1 | 6,144 | 7,900 | 1 | 75 | 105 | 2.40 | 0.55 | — | 0.54 |
 | `N3C` | Cyborg Rocket Soldier | infantry | blackh/legion/marked/nod/shadow | 11,000 | 2.20 | 400 | 4.00 | 46 | — | n | — | 7,168 | 11,500 | 1 | 50 | 230 | 1.00 | 1.00 | — | 1.00 |
 | `RMBO` | Commando | infantry | arc/blackh/eagle/gdi/legion/marked/nod/shadow/talon/zocom | 11,000 | 2.20 | 1,500 | 15.00 | 60 | — | n | 1 | 7,168 | 25,000 | 1 | 16 | 1,562 | — | 0.15 | — | 0.15 |
 | `S4` | Intruder | infantry | allies/arc/blackh/collector/eagle/england/france/gdi/germany/harbinger/iraq/legion/marked/nod/reaper/russia/scrin/shadow/soviet/talon/traveler/ukraine/usa/yuri/zocom | 11,000 | 2.20 | 500 | 5.00 | 54 | — | n | — | 6,144 | 2,850 | 3 | 70 | 116 | 0.15 | 0.78 | — | 0.92 |
 | `SB` | Recon Boat | ship | nod | 11,000 | 2.20 | 500 | 5.00 | 113 | 40 | n | — | 5,120 | 4,000 | 2 | 50 | 145 | 0.10 | 0.72 | — | 0.57 |
 | `SPEC` | Spectre | vehicle | shadow | 11,000 | 2.20 | 1,350 | 13.50 | 82 | 20 | n | — | 13,312 | 9,500 | 3 | 200 | 138 | 1.00 | 0.47 | — | 0.62 |
-| `TRUK` | Supply Truck | vehicle | — | 11,000 | 2.20 | 500 | 5.00 | 126 | 20 | n | — | — | — | — | — | — | — | — | — | — |
-| `TRUK.DROP` | Supply Truck | vehicle | — | 11,000 | 2.20 | 500 | 5.00 | 126 | 20 | n | — | — | — | — | — | — | — | — | — | — |
-| `YURI` | Yuri | infantry | yuri | 11,000 | 2.20 | 1,500 | 15.00 | 60 | — | n | 1 | 7,168 | — | 1 | 50 | — | — | — | — | — |
+| `YURI` | Yuri | infantry | yuri | 11,000 | 2.20 | 1,500 | 15.00 | 60 | — | n | 1 | 6,144 | 7,900 | 1 | 75 | 105 | 2.40 | 0.55 | — | 0.54 |
 | `ARTY` | Artillery | vehicle | allies/england/france/germany/usa | 10,000 | 2.00 | 650 | 6.50 | 46 | 12 | n | — | 8,960 | 9,750 | 1 | 85 | 115 | 0.70 | 0.57 | — | 0.90 |
 | `ARTY.nod` | Artillery | vehicle | blackh/legion/marked/nod/shadow | 10,000 | 2.00 | 650 | 6.50 | 46 | 12 | n | — | 8,960 | 9,750 | 1 | 85 | 115 | 0.70 | 0.57 | — | 0.90 |
 | `HOPL` | Hoplite | infantry | allies/arc/blackh/collector/eagle/england/france/gdi/germany/harbinger/iraq/legion/marked/nod/reaper/russia/scrin/shadow/soviet/talon/traveler/ukraine/usa/yuri/zocom | 10,000 | 2.00 | 650 | 6.50 | 46 | — | n | — | 7,168 | 6,000 | 1 | 75 | 80 | 1.50 | 0.70 | — | 0.60 |
@@ -347,21 +342,21 @@ Checkout: `C:\Users\AedisToru\Documents\GitHub\CAmod` · rifle anchor **`E1` = 5
 | `TIGR` | Tiger Guard | infantry | allies/arc/blackh/collector/eagle/england/france/gdi/germany/harbinger/iraq/legion/marked/nod/reaper/russia/scrin/shadow/soviet/talon/traveler/ukraine/usa/yuri/zocom | 8,000 | 1.60 | 650 | 6.50 | 46 | — | n | — | 9,216 | 20,000 | 1 | 125 | 160 | 1.00 | 1.00 | — | 1.00 |
 | `SHOK` | Shock Trooper | infantry | allies/arc/blackh/collector/eagle/england/france/gdi/germany/harbinger/iraq/legion/marked/nod/reaper/russia/scrin/shadow/soviet/talon/traveler/ukraine/usa/yuri/zocom | 7,500 | 1.50 | 425 | 4.25 | 46 | — | n | — | 6,144 | 5,300 | 1 | 100 | 53 | 2.40 | 0.93 | — | 0.45 |
 | `N4` | Nod Flamethrower | infantry | blackh/iraq/legion/marked/nod/russia/scrin/shadow/soviet/ukraine/yuri | 7,000 | 1.40 | 200 | 2.00 | 60 | — | n | — | 2,560 | 10,500 | 1 | 65 | 162 | 1.00 | 0.42 | — | 0.38 |
-| `U3` | Guardian G.I | vehicle | — | 6,500 | 1.30 | 350 | 3.50 | 41 | 1023 | Y | — | 1,024 | — | 1 | 5 | — | — | — | — | — |
-| `U3R2` | Guardian G.I | vehicle | — | 6,500 | 1.30 | 350 | 3.50 | 41 | 1023 | Y | — | 1,024 | — | 1 | 5 | — | — | — | — | — |
+| `U3` | Guardian G.I | vehicle | — | 6,500 | 1.30 | 350 | 3.50 | 41 | 1023 | Y | — | 5,120 | 1,000 | 1 | 20 | 50 | 1.50 | 0.27 | — | 0.23 |
+| `U3R2` | Guardian G.I | vehicle | — | 6,500 | 1.30 | 350 | 3.50 | 41 | 1023 | Y | — | 5,120 | 1,000 | 1 | 20 | 50 | 1.50 | 0.27 | — | 0.23 |
 | `BJET` | Bombardier | infantry | allies/arc/blackh/collector/eagle/england/france/gdi/germany/harbinger/iraq/legion/marked/nod/reaper/russia/scrin/shadow/soviet/talon/traveler/ukraine/usa/yuri/zocom | 6,000 | 1.20 | 550 | 5.50 | 100 | — | n | — | 7,168 | 7,000 | 1 | 60 | 117 | 1.00 | 0.53 | — | 0.65 |
 | `JJET` | Jump-Jet Trooper | infantry | allies/arc/blackh/collector/eagle/england/france/gdi/germany/harbinger/iraq/legion/marked/nod/reaper/russia/scrin/shadow/soviet/talon/traveler/ukraine/usa/yuri/zocom | 6,000 | 1.20 | 350 | 3.50 | 118 | — | n | — | 4,864 | 3,250 | 3 | 38 | 227 | 1.00 | 0.22 | — | 0.04 |
 | `S2` | Ravager | infantry | allies/arc/blackh/collector/eagle/england/france/gdi/germany/harbinger/iraq/legion/marked/nod/reaper/russia/scrin/shadow/soviet/talon/traveler/ukraine/usa/yuri/zocom | 6,000 | 1.20 | 275 | 2.75 | 92 | — | n | — | 5,120 | 2,000 | 5 | 45 | 200 | — | 0.38 | — | 0.12 |
 | `ARTI` | Artificer | vehicle | — | 5,000 | 1.00 | 400 | 4.00 | 46 | — | n | — | 2,560 | — | 1 | 80 | — | — | — | — | — |
 | `DTRK` | Demolition Truck | vehicle | iraq/russia/soviet/ukraine/yuri | 5,000 | 1.00 | 2,000 | 20.00 | 72 | 20 | n | — | 1,873 | — | 1 | — | — | — | — | — | — |
-| `E1` | Rifle Infantry | infantry | allies/england/france/germany/iraq/russia/soviet/ukraine/usa/yuri | 5,000 | 1.00 | 100 | 1.00 | 46 | — | n | — | 1,024 | — | 1 | 5 | — | — | — | — | — |
+| `E1` | Rifle Infantry | infantry | allies/england/france/germany/iraq/russia/soviet/ukraine/usa/yuri | 5,000 | 1.00 | 100 | 1.00 | 46 | — | n | — | 5,120 | 1,000 | 1 | 20 | 50 | 1.50 | 0.27 | — | 0.23 |
 | `E2` | Grenadier | infantry | iraq/russia/soviet/yuri | 5,000 | 1.00 | 160 | 1.60 | 60 | — | n | — | 4,821 | 6,000 | 1 | 60 | 100 | 0.60 | 0.57 | — | 0.73 |
 | `HACK` | Hacker | vehicle | — | 5,000 | 1.00 | 750 | 7.50 | 60 | — | n | — | 11,264 | — | 1 | 5 | — | — | — | — | — |
 | `MECH` | Mechanic | infantry | allies/blackh/england/france/germany/legion/marked/nod/scrin/shadow/usa | 5,000 | 1.00 | 400 | 4.00 | 46 | — | n | — | 2,560 | — | 1 | 80 | — | — | — | — | — |
 | `MEDI` | Medic | infantry | allies/arc/eagle/england/france/gdi/germany/talon/usa/zocom | 5,000 | 1.00 | 200 | 2.00 | 46 | — | n | — | 4,096 | — | 1 | 80 | — | — | — | — | — |
-| `N1` | Mini-Gunner | infantry | arc/blackh/eagle/gdi/legion/marked/nod/shadow/talon/zocom | 5,000 | 1.00 | 100 | 1.00 | 46 | — | n | — | 1,024 | — | 1 | 5 | — | — | — | — | — |
+| `N1` | Mini-Gunner | infantry | arc/blackh/eagle/gdi/legion/marked/nod/shadow/talon/zocom | 5,000 | 1.00 | 100 | 1.00 | 46 | — | n | — | 5,120 | 1,000 | 1 | 20 | 50 | 1.50 | 0.27 | — | 0.23 |
 | `N2` | Grenadier | infantry | arc/eagle/gdi/iraq/russia/scrin/soviet/talon/ukraine/yuri/zocom | 5,000 | 1.00 | 160 | 1.60 | 60 | — | n | — | 4,821 | 6,000 | 1 | 60 | 100 | 0.60 | 0.57 | — | 0.73 |
-| `S1` | Warrior | infantry | collector/harbinger/reaper/scrin/traveler | 5,000 | 1.00 | 100 | 1.00 | 46 | — | n | — | 1,024 | — | 1 | 5 | — | — | — | — | — |
+| `S1` | Warrior | infantry | collector/harbinger/reaper/scrin/traveler | 5,000 | 1.00 | 100 | 1.00 | 46 | — | n | — | 5,120 | 1,000 | 1 | 20 | 50 | 1.50 | 0.27 | — | 0.23 |
 | `SAB` | Infiltrator | infantry | allies/arc/blackh/collector/eagle/england/france/gdi/germany/harbinger/iraq/legion/marked/nod/reaper/russia/scrin/shadow/soviet/talon/traveler/ukraine/usa/yuri/zocom | 5,000 | 1.00 | 500 | 5.00 | 46 | — | n | — | 3,584 | 15,050 | 1 | 80 | 188 | — | 0.15 | — | 0.15 |
 | `SHAD` | Shadow Operative | vehicle | shadow | 5,000 | 1.00 | 500 | 5.00 | 72 | — | n | — | 4,821 | 7,000 | 1 | 50 | 140 | 0.60 | 0.88 | — | 0.82 |
 | `SMEDI` | Rejuvenator | vehicle | — | 5,000 | 1.00 | 200 | 2.00 | 46 | — | n | — | 4,096 | — | 1 | 80 | — | — | — | — | — |
@@ -387,9 +382,9 @@ Checkout: `C:\Users\AedisToru\Documents\GitHub\CAmod` · rifle anchor **`E1` = 5
 | `C7` | Civilian | vehicle | — | 2,500 | 0.50 | 50 | 0.50 | 46 | — | n | — | 3,072 | 134 | 10 | 80 | 15 | 1.00 | 0.25 | — | 0.13 |
 | `C8` | Civilian | vehicle | — | 2,500 | 0.50 | 50 | 0.50 | 46 | — | n | — | 3,072 | 134 | 10 | 80 | 15 | 1.00 | 0.25 | — | 0.13 |
 | `C9` | Civilian | vehicle | — | 2,500 | 0.50 | 50 | 0.50 | 46 | — | n | — | 3,072 | 134 | 10 | 80 | 15 | 1.00 | 0.25 | — | 0.13 |
-| `E6` | Engineer | infantry | allies/england/france/germany/iraq/russia/soviet/ukraine/usa/yuri | 2,500 | 0.50 | 400 | 4.00 | 46 | — | n | — | 2,559 | — | 1 | 50 | — | — | — | — | — |
-| `N6` | Engineer | infantry | arc/blackh/eagle/gdi/legion/marked/nod/shadow/talon/zocom | 2,500 | 0.50 | 400 | 4.00 | 46 | — | n | — | 2,559 | — | 1 | 50 | — | — | — | — | — |
-| `S6` | Assimilator | infantry | collector/harbinger/reaper/scrin/traveler | 2,500 | 0.50 | 400 | 4.00 | 46 | — | n | — | 2,559 | — | 1 | 50 | — | — | — | — | — |
+| `E6` | Engineer | infantry | allies/england/france/germany/iraq/russia/soviet/ukraine/usa/yuri | 2,500 | 0.50 | 400 | 4.00 | 46 | — | n | — | 1,536 | 12,000 | 1 | 6 | 2,000 | — | — | — | — |
+| `N6` | Engineer | infantry | arc/blackh/eagle/gdi/legion/marked/nod/shadow/talon/zocom | 2,500 | 0.50 | 400 | 4.00 | 46 | — | n | — | 1,536 | 12,000 | 1 | 6 | 2,000 | — | — | — | — |
+| `S6` | Assimilator | infantry | collector/harbinger/reaper/scrin/traveler | 2,500 | 0.50 | 400 | 4.00 | 46 | — | n | — | 1,536 | 12,000 | 1 | 6 | 2,000 | — | — | — | — |
 | `SPY` | SPY | infantry | allies/arc/blackh/collector/eagle/england/france/gdi/germany/harbinger/iraq/legion/marked/nod/reaper/russia/scrin/shadow/soviet/talon/traveler/ukraine/usa/yuri/zocom | 2,500 | 0.50 | 500 | 5.00 | 54 | — | n | — | — | — | — | — | — | — | — | — | — |
 | `TECN` | Technician | vehicle | — | 2,500 | 0.50 | 50 | 0.50 | 46 | — | n | — | 3,072 | 134 | 10 | 80 | 15 | 1.00 | 0.25 | — | 0.13 |
 | `DOG` | Attack Dog | infantry | iraq/russia/soviet/ukraine/yuri | 1,800 | 0.36 | 200 | 2.00 | 94 | — | n | — | 2,048 | 100,000 | 1 | 10 | 10,000 | — | — | — | — |
@@ -397,40 +392,38 @@ Checkout: `C:\Users\AedisToru\Documents\GitHub\CAmod` · rifle anchor **`E1` = 5
 
 ## Crystallized Nexus  (97 buildable units)
 
-Checkout: `/home/user/dogyaut/crystallized-nexus/.modsdk` · rifle anchor **`GASOL` = 125 HP / 120 credits = 1.00×**
+Checkout: `C:\Users\AedisToru\Documents\GitHub\crystallized-nexus\.modsdk` · rifle anchor **`GASOL` = 125 HP / 120 credits = 1.00×**
 
 | id | unit | type | faction | HP | ×rifle | Cost | ×rifle cost | Speed | Turn | Turret | Limit | Range | Dmg | Burst | Reload | DPS | vsINF | vsVEH | vsAIR | vsBLD |
 |---|---|---|---|--:|--:|--:|--:|--:|--:|:-:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| `GACNST` | Construction Yard | building | — | 1,500 | 12.00 | 2,500 | 20.83 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `NACNST` | Construction Yard | building | — | 1,500 | 12.00 | 2,500 | 20.83 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `GADEPT` | Service Depot | building | gdi | 1,100 | 8.80 | 1,200 | 10.00 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `GAFIRE` | Firestorm Generator | building | gdi | 1,000 | 8.00 | 1,500 | 12.50 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `GAFORT` | Fortress Garrison Bunker | building | gdf/gdi | 1,000 | 8.00 | 800 | 6.67 | — | 255 | Y | — | — | — | — | — | — | — | — | — | — |
-| `GAPLUG` | GDI Upgrade Center | building | gdi | 1,000 | 8.00 | 1,000 | 8.33 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `GARADR` | GDI Radar | building | gdi | 1,000 | 8.00 | 1,000 | 8.33 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `GAWEAP` | GDI War Factory | building | gdi | 1,000 | 8.00 | 2,000 | 16.67 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `GHARV` | Harvester | vehicle | gdi | 1,000 | 8.00 | 1,400 | 11.67 | 71 | 20 | n | — | — | — | — | — | — | — | — | — | — |
-| `GMCV` | Mobile Construction Vehicle | vehicle | gdi | 1,000 | 8.00 | 2,500 | 20.83 | 42 | 20 | n | — | — | — | — | — | — | — | — | — | — |
+| `GADEPT` | Service Depot | building | gdf/gdi/nod/steel/zocom | 1,100 | 8.80 | 1,200 | 10.00 | — | — | n | — | — | — | — | — | — | — | — | — | — |
+| `GAFIRE` | Firestorm Generator | building | gdf/gdi/steel/zocom | 1,000 | 8.00 | 1,500 | 12.50 | — | — | n | — | — | — | — | — | — | — | — | — | — |
+| `GAFORT` | Fortress Garrison Bunker | building | gdf/gdi/steel/zocom | 1,000 | 8.00 | 800 | 6.67 | — | 255 | Y | — | — | — | — | — | — | — | — | — | — |
+| `GAPLUG` | GDI Upgrade Center | building | gdf/gdi/steel/zocom | 1,000 | 8.00 | 1,000 | 8.33 | — | — | n | — | — | — | — | — | — | — | — | — | — |
+| `GARADR` | GDI Radar | building | gdf/gdi/steel/zocom | 1,000 | 8.00 | 1,000 | 8.33 | — | — | n | — | — | — | — | — | — | — | — | — | — |
+| `GAWEAP` | GDI War Factory | building | gdf/gdi/steel/zocom | 1,000 | 8.00 | 2,000 | 16.67 | — | — | n | — | — | — | — | — | — | — | — | — | — |
+| `GHARV` | Harvester | vehicle | gdf/gdi/nod/steel/zocom | 1,000 | 8.00 | 1,400 | 11.67 | 71 | 20 | n | — | — | — | — | — | — | — | — | — | — |
+| `GMCV` | Mobile Construction Vehicle | vehicle | gdf/gdi/steel/zocom | 1,000 | 8.00 | 2,500 | 20.83 | 42 | 20 | n | — | — | — | — | — | — | — | — | — | — |
 | `HMEC` | Mammoth Mk. II | vehicle | steel | 1,000 | 8.00 | 3,000 | 25.00 | 42 | 12 | n | — | 10,240 | 100 | 4 | 200 | 2 | 1.00 | 1.24 | 0.60 | 0.70 |
 | `NAMISL` | Nod Missile Silo | building | nod | 1,000 | 8.00 | 1,300 | 10.83 | — | — | n | 1 | — | — | — | — | — | — | — | — | — |
 | `NAPYRA` | Nod Pyramid | building | nod | 1,000 | 8.00 | 1,500 | 12.50 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `NARADR` | Nod Radar | building | nod | 1,000 | 8.00 | 1,000 | 8.33 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `NATMPL` | Temple of Nod | building | nod | 1,000 | 8.00 | 2,000 | 16.67 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `NAWEAP` | Nod War Factory | building | nod | 1,000 | 8.00 | 2,000 | 16.67 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `NHARV` | Harvester | vehicle | nod | 1,000 | 8.00 | 1,400 | 11.67 | 71 | 20 | n | — | — | — | — | — | — | — | — | — | — |
+| `NHARV` | Harvester | vehicle | gdi/nod | 1,000 | 8.00 | 1,400 | 11.67 | 71 | 20 | n | — | — | — | — | — | — | — | — | — | — |
 | `NMCV` | Mobile Construction Vehicle | vehicle | nod | 1,000 | 8.00 | 2,500 | 20.83 | 42 | 20 | n | — | — | — | — | — | — | — | — | — | — |
-| `GPROC` | Tiberium Refinery | building | gdi | 900 | 7.20 | 2,000 | 16.67 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `NPROC` | Tiberium Refinery | building | nod | 900 | 7.20 | 2,000 | 16.67 | — | — | n | — | — | — | — | — | — | — | — | — | — |
+| `GPROC` | Tiberium Refinery | building | gdf/gdi/nod/steel/zocom | 900 | 7.20 | 2,000 | 16.67 | — | — | n | — | — | — | — | — | — | — | — | — | — |
+| `NPROC` | Tiberium Refinery | building | gdi/nod | 900 | 7.20 | 2,000 | 16.67 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `STING` | Sting of Nod | vehicle | nod | 900 | 7.20 | 3,000 | 25.00 | 50 | 12 | n | — | 9,728 | 200 | 1 | 170 | 1 | 1.30 | 0.70 | 1.50 | 0.60 |
-| `GAPILE` | GDI Barracks | building | gdi | 800 | 6.40 | 300 | 2.50 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `MOBILEMP` | Mobile EMP Cannon | vehicle | gdi | 800 | 6.40 | 1,000 | 8.33 | 85 | 20 | n | — | — | — | — | — | — | — | — | — | — |
-| `NAHAND` | Hand of Nod | building | nod | 800 | 6.40 | 300 | 2.50 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `GAPOWR` | GDI Power Plant | building | gdi | 750 | 6.00 | 300 | 2.50 | — | — | n | — | — | — | — | — | — | — | — | — | — |
+| `GAPILE` | GDI Barracks | building | gdf/gdi/nod/steel/zocom | 800 | 6.40 | 300 | 2.50 | — | — | n | — | — | — | — | — | — | — | — | — | — |
+| `MOBILEMP` | Mobile EMP Cannon | vehicle | gdf/gdi/steel/zocom | 800 | 6.40 | 1,000 | 8.33 | 85 | 20 | n | — | — | — | — | — | — | — | — | — | — |
+| `NAHAND` | Hand of Nod | building | gdi/nod | 800 | 6.40 | 300 | 2.50 | — | — | n | — | — | — | — | — | — | — | — | — | — |
+| `GAPOWR` | GDI Power Plant | building | gdf/gdi/steel/zocom | 750 | 6.00 | 300 | 2.50 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `NAAPWR` | Nod Advanced Power Plant | building | nod | 750 | 6.00 | 500 | 4.17 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `NAPOWR` | Nod Power Plant | building | nod | 750 | 6.00 | 300 | 2.50 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `NAOBEL` | Obelisk of Light | building | nod | 725 | 5.80 | 1,500 | 12.50 | — | — | n | — | 10,752 | 125 | 1 | 120 | 1 | 1.30 | 0.70 | 1.50 | 0.60 |
-| `GAHPAD` | Helipad | building | gdi | 600 | 4.80 | 500 | 4.17 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `LPST` | Mobile Sensor Array | vehicle | — | 600 | 4.80 | 950 | 7.92 | 85 | 20 | n | — | — | — | — | — | — | — | — | — | — |
+| `GAHPAD` | Helipad | building | gdf/gdi/steel/zocom | 600 | 4.80 | 500 | 4.17 | — | — | n | — | — | — | — | — | — | — | — | — | — |
+| `LPST` | Mobile Sensor Array | vehicle | gdi/nod | 600 | 4.80 | 950 | 7.92 | 85 | 20 | n | — | — | — | — | — | — | — | — | — | — |
 | `NAFLAMER` | Flamer Tower | building | nod | 600 | 4.80 | 500 | 4.17 | — | 40 | Y | — | 6,400 | 25 | 5 | 50 | 2 | 1.37 | 0.53 | 1.50 | 1.20 |
 | `NAGAT` | Gattling Tower | building | nod | 600 | 4.80 | 600 | 5.00 | — | 40 | Y | — | 8,192 | 100 | 100 | 250 | 40 | 0.87 | 0.24 | 0.40 | 0.10 |
 | `NAHPAD` | Helipad | building | nod | 600 | 4.80 | 500 | 4.17 | — | — | n | — | — | — | — | — | — | — | — | — | — |
@@ -438,66 +431,65 @@ Checkout: `/home/user/dogyaut/crystallized-nexus/.modsdk` · rifle anchor **`GAS
 | `NASTLH` | Stealth Generator | building | nod | 600 | 4.80 | 2,500 | 20.83 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `WEED` | Weed Eater | vehicle | nod | 600 | 4.80 | 1,400 | 11.67 | 71 | 20 | n | — | — | — | — | — | — | — | — | — | — |
 | `4TNK` | Mammoth Tank | vehicle | gdf | 500 | 4.00 | 1,400 | 11.67 | 56 | 12 | Y | — | 6,912 | 50 | 1 | 80 | 1 | 0.93 | 0.91 | 1.20 | 0.80 |
-| `GAARMORY` | GDI Armory | building | gdi | 500 | 4.00 | 1,000 | 8.33 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `GACAN` | Guardian Tower | building | gdi | 500 | 4.00 | 600 | 5.00 | — | 40 | Y | — | 6,912 | 70 | 1 | 80 | 1 | 0.93 | 0.91 | 1.20 | 0.80 |
-| `GAGAT` | Vulture Tower | building | gdi/steel | 500 | 4.00 | 800 | 6.67 | — | 40 | Y | — | 7,168 | 150 | 36 | 40 | 129 | 0.87 | 0.24 | 0.40 | 0.10 |
-| `GAMG` | Vulcan Tower | building | gdi | 500 | 4.00 | 200 | 1.67 | — | 40 | Y | — | 7,168 | 150 | 12 | 40 | 41 | 0.87 | 0.24 | 0.40 | 0.10 |
-| `GAMORTAR` | Mortar Tower | building | gdf/gdi | 500 | 4.00 | 900 | 7.50 | — | 40 | Y | — | 20,480 | 250 | 1 | 110 | 2 | 1.00 | 0.78 | 1.50 | 1.50 |
-| `GASAM` | SAM Tower | building | gdi | 500 | 4.00 | 500 | 4.17 | — | 40 | Y | — | 15,360 | 50 | 1 | 55 | 1 | 0.80 | 1.02 | 1.50 | 0.60 |
-| `GASEN` | Sensor Tower | building | gdi/zocom | 500 | 4.00 | 900 | 7.50 | — | 40 | Y | — | 6,144 | 30 | 1 | 60 | 0 | 1.00 | 1.24 | 0.60 | 0.70 |
-| `GATECH` | GDI Tech Center | building | gdi | 500 | 4.00 | 1,500 | 12.50 | — | — | n | — | — | — | — | — | — | — | — | — | — |
+| `GAARMORY` | GDI Armory | building | gdf/gdi/nod/steel/zocom | 500 | 4.00 | 1,000 | 8.33 | — | — | n | — | — | — | — | — | — | — | — | — | — |
+| `GACAN` | Guardian Tower | building | gdf/gdi/steel/zocom | 500 | 4.00 | 600 | 5.00 | — | 40 | Y | — | 6,912 | 70 | 1 | 80 | 1 | 0.93 | 0.91 | 1.20 | 0.80 |
+| `GAGAT` | Vulture Tower | building | gdf/gdi/steel/zocom | 500 | 4.00 | 800 | 6.67 | — | 40 | Y | — | 7,168 | 150 | 36 | 40 | 129 | 0.87 | 0.24 | 0.40 | 0.10 |
+| `GAMG` | Vulcan Tower | building | gdf/gdi/steel/zocom | 500 | 4.00 | 200 | 1.67 | — | 40 | Y | — | 7,168 | 150 | 12 | 40 | 41 | 0.87 | 0.24 | 0.40 | 0.10 |
+| `GAMORTAR` | Mortar Tower | building | gdf/gdi/steel/zocom | 500 | 4.00 | 900 | 7.50 | — | 40 | Y | — | 20,480 | 250 | 1 | 110 | 2 | 1.00 | 0.78 | 1.50 | 1.50 |
+| `GASAM` | SAM Tower | building | gdf/gdi/steel/zocom | 500 | 4.00 | 500 | 4.17 | — | 40 | Y | — | 15,360 | 50 | 1 | 55 | 1 | 0.80 | 1.02 | 1.50 | 0.60 |
+| `GASEN` | Sensor Tower | building | gdf/gdi/steel/zocom | 500 | 4.00 | 900 | 7.50 | — | 40 | Y | — | 6,144 | 30 | 1 | 60 | 0 | 1.00 | 1.24 | 0.60 | 0.70 |
+| `GATECH` | GDI Tech Center | building | gdf/gdi/steel/zocom | 500 | 4.00 | 1,500 | 12.50 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `NAPULS` | EMP Cannon | building | nod | 500 | 4.00 | 1,000 | 8.33 | — | 40 | Y | — | 40,960 | — | 1 | 100 | — | — | — | — | — |
 | `NASAM` | S.A.M. Site | building | nod | 500 | 4.00 | 500 | 4.17 | — | 40 | Y | — | 15,360 | 50 | 1 | 55 | 1 | 0.80 | 1.02 | 1.50 | 0.60 |
-| `ORCA_TRAN` | Orca Transport | aircraft | gdi | 500 | 4.00 | 1,200 | 10.00 | 84 | 20 | n | — | — | — | — | — | — | — | — | — | — |
+| `ORCA_TRAN` | Orca Transport | aircraft | gdf/gdi/nod/steel/zocom | 500 | 4.00 | 1,200 | 10.00 | 84 | 20 | n | — | — | — | — | — | — | — | — | — | — |
 | `NAWAST` | Waste Refinery | building | nod | 400 | 3.20 | 1,600 | 13.33 | — | — | n | 1 | — | — | — | — | — | — | — | — | — |
-| `GAGATE_A` | GDI Gate | building | gdi | 350 | 2.80 | 250 | 2.08 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `GAGATE_B` | GDI Gate | building | gdi | 350 | 2.80 | 250 | 2.08 | — | — | n | — | — | — | — | — | — | — | — | — | — |
+| `GAGATE_A` | GDI Gate | building | gdf/gdi/steel/zocom | 350 | 2.80 | 250 | 2.08 | — | — | n | — | — | — | — | — | — | — | — | — | — |
+| `GAGATE_B` | GDI Gate | building | gdf/gdi/steel/zocom | 350 | 2.80 | 250 | 2.08 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `NAGATE_A` | Nod Gate | building | nod | 350 | 2.80 | 250 | 2.08 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `NAGATE_B` | Nod Gate | building | nod | 350 | 2.80 | 250 | 2.08 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `GASILO` | Silo | building | — | 300 | 2.40 | 150 | 1.25 | — | — | n | — | — | — | — | — | — | — | — | — | — |
+| `GASILO` | Silo | building | gdi/nod | 300 | 2.40 | 150 | 1.25 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `NAPOST` | Laser Fence | building | nod | 300 | 2.40 | 200 | 1.67 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `GASAND` | Sandbags | building | — | 250 | 2.00 | 25 | 0.21 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `GAWALL` | Concrete Wall | building | gdi | 225 | 1.80 | 50 | 0.42 | — | — | n | — | — | — | — | — | — | — | — | — | — |
+| `GAWALL` | Concrete Wall | building | gdf/gdi/steel/zocom | 225 | 1.80 | 50 | 0.42 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `NAWALL` | Concrete Wall | building | nod | 225 | 1.80 | 50 | 0.42 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `GTMTNK` | Archon | vehicle | gdf | 200 | 1.60 | 700 | 5.83 | 70 | 20 | Y | — | 6,912 | 40 | 1 | 60 | 1 | 0.93 | 0.91 | 1.20 | 0.80 |
-| `HORNET` | Hornet | aircraft | gdi | 200 | 1.60 | 1,500 | 12.50 | 200 | 15 | n | — | 14,336 | 150 | 2 | 80 | 3 | 0.80 | 1.02 | 1.50 | 0.60 |
+| `HORNET` | Hornet | aircraft | gdf/gdi/steel/zocom | 200 | 1.60 | 1,500 | 12.50 | 200 | 15 | n | — | 14,336 | 150 | 2 | 80 | 3 | 0.80 | 1.02 | 1.50 | 0.60 |
 | `HYDRA` | Harpy | aircraft | nod | 200 | 1.60 | 1,000 | 8.33 | 130 | 20 | n | — | 7,936 | 90 | 12 | 200 | 5 | 0.80 | 1.02 | 1.50 | 0.60 |
 | `JUGG` | Juggernaut | vehicle | steel | 200 | 1.60 | 950 | 7.92 | 71 | 20 | Y | — | 20,480 | 100 | 3 | 150 | 2 | 1.00 | 0.78 | 1.50 | 1.50 |
 | `MMCH` | Titan | vehicle | steel | 200 | 1.60 | 800 | 6.67 | 56 | 20 | Y | — | 6,912 | 70 | 1 | 80 | 1 | 0.93 | 0.91 | 1.20 | 0.80 |
-| `ORCA_B` | Orca Bomber | aircraft | gdi | 200 | 1.60 | 1,600 | 13.33 | 96 | 12 | n | — | 2,560 | 300 | 5 | 60 | 23 | 1.00 | 0.78 | 1.50 | 1.50 |
+| `ORCA_B` | Orca Bomber | aircraft | gdf/gdi/steel/zocom | 200 | 1.60 | 1,600 | 13.33 | 96 | 12 | n | — | 2,560 | 300 | 5 | 60 | 23 | 1.00 | 0.78 | 1.50 | 1.50 |
 | `SCRIN` | Banshee Fighter | aircraft | nod | 200 | 1.60 | 1,500 | 12.50 | 200 | 15 | n | — | 10,240 | 80 | 5 | 50 | 7 | 1.20 | 0.95 | 1.00 | 1.30 |
 | `SGEN` | Mobile Stealth Generator | vehicle | nod | 200 | 1.60 | 1,600 | 13.33 | 85 | 20 | n | — | — | — | — | — | — | — | — | — | — |
 | `SONIC` | Disruptor | vehicle | zocom | 200 | 1.60 | 1,300 | 10.83 | 56 | 20 | Y | — | 7,168 | 30 | 1 | 180 | 0 | 1.23 | 0.64 | 0.50 | 2.00 |
 | `TTNK` | Tick Tank | vehicle | nod | 200 | 1.60 | 800 | 6.67 | 85 | 20 | Y | — | 6,912 | 30 | 1 | 100 | 0 | 0.93 | 0.91 | 1.20 | 0.80 |
 | `ZTROOPER` | Zone Trooper | infantry | zocom | 200 | 1.60 | 1,200 | 10.00 | 71 | — | n | — | 6,144 | 30 | 1 | 60 | 0 | 1.00 | 1.24 | 0.60 | 0.70 |
 | `SAPC` | Subterranean APC | vehicle | nod | 175 | 1.40 | 800 | 6.67 | 71 | 20 | n | — | — | — | — | — | — | — | — | — | — |
-| `TRNSPORT` | Carryall | aircraft | gdi | 175 | 1.40 | 750 | 6.25 | 149 | 20 | n | — | — | — | — | — | — | — | — | — | — |
+| `TRNSPORT` | Carryall | aircraft | gdf/gdi/nod/steel/zocom | 175 | 1.40 | 750 | 6.25 | 149 | 20 | n | — | — | — | — | — | — | — | — | — | — |
 | `CYCLOPS` | Cyclops | vehicle | zocom | 150 | 1.20 | 900 | 7.50 | 99 | 15 | Y | — | 7,936 | 60 | 3 | 80 | 2 | 1.20 | 0.95 | 1.00 | 1.30 |
-| `E2` | Disc Thrower | infantry | gdi | 150 | 1.20 | 200 | 1.67 | 56 | — | n | — | 4,608 | 50 | 1 | 60 | 1 | 0.97 | 0.48 | 0.80 | 0.50 |
+| `E2` | Disc Thrower | infantry | gdf/gdi/nod/steel/zocom | 150 | 1.20 | 200 | 1.67 | 56 | — | n | — | 4,608 | 50 | 1 | 60 | 1 | 0.97 | 0.48 | 0.80 | 0.50 |
 | `LTNK` | Scorpion Tank | vehicle | nod | 150 | 1.20 | 700 | 5.83 | 90 | 20 | Y | — | 6,912 | 55 | 1 | 70 | 1 | 0.93 | 0.91 | 1.20 | 0.80 |
-| `ORCA_F1` | Orca Fighter | aircraft | gdi | 150 | 1.20 | 1,000 | 8.33 | 186 | 20 | n | — | 7,936 | 70 | 2 | 80 | 2 | 0.80 | 1.02 | 1.50 | 0.60 |
+| `ORCA_F1` | Orca Fighter | aircraft | gdf/gdi/steel/zocom | 150 | 1.20 | 1,000 | 8.33 | 186 | 20 | n | — | 7,936 | 70 | 2 | 80 | 2 | 0.80 | 1.02 | 1.50 | 0.60 |
 | `WARDEN` | Warden | vehicle | steel | 150 | 1.20 | 800 | 6.67 | 56 | 20 | Y | — | 8,192 | 120 | 4 | 120 | 4 | 0.97 | 0.48 | 1.00 | 0.50 |
 | `HVR` | Hover MLRS | vehicle | zocom | 130 | 1.04 | 900 | 7.50 | 99 | 28 | Y | — | 8,192 | 40 | 2 | 68 | 1 | 0.80 | 1.02 | 1.50 | 0.60 |
-| `GASOL` | Marine | infantry | gdi | 125 | 1.00 | 120 | 1.00 | 71 | — | n | — | 4,096 | 80 | 1 | 26 | 3 | 0.87 | 0.24 | 0.40 | 0.10 |
-| `MEDIC` | Medic | infantry | gdi | 125 | 1.00 | 600 | 5.00 | 56 | — | n | — | 2,897 | — | 1 | 80 | — | — | — | — | — |
+| `GASOL` | Marine | infantry | gdf/gdi/nod/steel/zocom | 125 | 1.00 | 120 | 1.00 | 71 | — | n | — | 4,096 | 80 | 1 | 26 | 3 | 0.87 | 0.24 | 0.40 | 0.10 |
+| `MEDIC` | Medic | infantry | gdf/gdi/nod/steel/zocom | 125 | 1.00 | 600 | 5.00 | 56 | — | n | — | 2,897 | — | 1 | 80 | — | — | — | — | — |
 | `GMISINF` | Missile Trooper | infantry | gdf | 120 | 0.96 | 250 | 2.08 | 56 | — | n | — | 6,144 | 30 | 1 | 60 | 0 | 0.80 | 1.02 | 1.50 | 0.60 |
 | `JUMPJET` | Jump Jet Infantry | infantry | zocom | 120 | 0.96 | 600 | 5.00 | 71 | — | n | — | 5,120 | 100 | 2 | 40 | 4 | 0.87 | 0.24 | 0.40 | 0.10 |
-| `ACOLYTE` | Acolyte | infantry | nod | 110 | 0.88 | 1,000 | 8.33 | 71 | — | n | — | 6,641 | 60 | 4 | 100 | 2 | 1.77 | 0.32 | 0.20 | 0.40 |
-| `APC` | Amphibious APC | vehicle | gdi | 100 | 0.80 | 800 | 6.67 | 113 | 20 | n | — | — | — | — | — | — | — | — | — | — |
+| `ACOLYTE` | Acolyte | infantry | gdi/nod | 110 | 0.88 | 1,000 | 8.33 | 71 | — | n | — | 6,641 | 60 | 4 | 100 | 2 | 1.77 | 0.32 | 0.20 | 0.40 |
+| `APC` | Amphibious APC | vehicle | gdf/gdi/nod/steel/zocom | 100 | 0.80 | 800 | 6.67 | 113 | 20 | n | — | — | — | — | — | — | — | — | — | — |
 | `BGGY` | Attack Buggy | vehicle | nod | 100 | 0.80 | 500 | 4.17 | 142 | 60 | Y | — | 6,144 | 150 | 3 | 55 | 7 | 0.87 | 0.24 | 0.40 | 0.10 |
 | `BIKE` | Attack Cycle | vehicle | nod | 100 | 0.80 | 600 | 5.00 | 170 | 50 | n | — | 5,120 | 40 | 2 | 80 | 1 | 0.80 | 1.02 | 1.50 | 0.60 |
-| `E3` | Rocket Infantry | infantry | nod | 100 | 0.80 | 250 | 2.08 | 56 | — | n | — | 6,144 | 30 | 1 | 60 | 0 | 0.80 | 1.02 | 1.50 | 0.60 |
-| `ENGINEER` | Engineer | infantry | gdi | 100 | 0.80 | 500 | 4.17 | 56 | — | n | — | — | — | — | — | — | — | — | — | — |
+| `E3` | Rocket Infantry | infantry | gdi/nod | 100 | 0.80 | 250 | 2.08 | 56 | — | n | — | 6,144 | 30 | 1 | 60 | 0 | 0.80 | 1.02 | 1.50 | 0.60 |
+| `ENGINEER` | Engineer | infantry | gdf/gdi/nod/steel/zocom | 100 | 0.80 | 500 | 4.17 | 56 | — | n | — | — | — | — | — | — | — | — | — | — |
 | `GASNIPER` | Sniper Squad | infantry | gdf | 100 | 0.80 | 500 | 4.17 | 71 | — | n | — | 11,264 | 250 | 1 | 110 | 2 | 2.83 | 0.16 | 0.20 | 0.50 |
-| `NACAD` | Elite Cadre | infantry | nod | 100 | 0.80 | 600 | 5.00 | 71 | — | n | — | 5,120 | 50 | 4 | 50 | 4 | 0.87 | 0.24 | 0.40 | 0.10 |
-| `NENGINEER` | Engineer | infantry | nod | 100 | 0.80 | 500 | 4.17 | 56 | — | n | — | — | — | — | — | — | — | — | — | — |
+| `NACAD` | Elite Cadre | infantry | gdi/nod | 100 | 0.80 | 600 | 5.00 | 71 | — | n | — | 5,120 | 50 | 4 | 50 | 4 | 0.87 | 0.24 | 0.40 | 0.10 |
+| `NENGINEER` | Engineer | infantry | gdi/nod | 100 | 0.80 | 500 | 4.17 | 56 | — | n | — | — | — | — | — | — | — | — | — | — |
 | `NHWTZ` | Artillery | vehicle | nod | 100 | 0.80 | 975 | 8.12 | 71 | 4 | Y | — | 20,480 | 250 | 1 | 110 | 2 | 1.00 | 0.78 | 1.50 | 1.50 |
 | `REPAIR` | Mobile Repair Vehicle | vehicle | nod | 100 | 0.80 | 1,000 | 8.33 | 85 | 10 | Y | — | 1,843 | — | 1 | 80 | — | — | — | — | — |
-| `SHADOW` | Shadow Trooper | infantry | nod | 100 | 0.80 | 800 | 6.67 | 71 | — | n | — | 10,240 | 200 | 1 | 90 | 2 | 2.83 | 0.16 | 0.20 | 0.50 |
+| `SHADOW` | Shadow Trooper | infantry | gdi/nod | 100 | 0.80 | 800 | 6.67 | 71 | — | n | — | 10,240 | 200 | 1 | 90 | 2 | 2.83 | 0.16 | 0.20 | 0.50 |
 | `SMECH` | Wolverine | vehicle | steel | 100 | 0.80 | 500 | 4.17 | 100 | 20 | n | — | 6,144 | 100 | 12 | 50 | 22 | 0.87 | 0.24 | 0.40 | 0.10 |
 | `STNK` | Stealth Tank | vehicle | nod | 100 | 0.80 | 1,100 | 9.17 | 85 | 10 | Y | — | 8,192 | 80 | 6 | 250 | 2 | 0.80 | 1.02 | 1.50 | 0.60 |
 | `SUBTANK` | Devil's Tongue | vehicle | nod | 100 | 0.80 | 750 | 6.25 | 71 | 24 | n | — | 6,400 | 25 | 5 | 50 | 2 | 1.37 | 0.53 | 1.50 | 1.20 |
-| `NASOL` | Rookie | infantry | nod | 80 | 0.64 | 120 | 1.00 | 71 | — | n | — | 4,096 | 60 | 1 | 21 | 3 | 0.87 | 0.24 | 0.40 | 0.10 |
+| `NASOL` | Rookie | infantry | gdi/nod | 80 | 0.64 | 120 | 1.00 | 71 | — | n | — | 4,096 | 60 | 1 | 21 | 3 | 0.87 | 0.24 | 0.40 | 0.10 |
 
 ## OpenRA Tiberian Dawn  (56 buildable units)
 
@@ -612,11 +604,11 @@ Checkout: `/home/user/openra/d2` · rifle anchor **`light_inf` = 20 HP / 60 cred
 
 ## OpenRA Dune 2000  (56 buildable units)
 
-Checkout: `/home/user/openra/openra` · rifle anchor **`light_inf` = 6,000 HP / 50 credits = 1.00×**
+Checkout: `C:\Users\AedisToru\Documents\GitHub\cameo-engine` · rifle anchor **`light_inf` = 6,000 HP / 50 credits = 1.00×**
 
 | id | unit | type | faction | HP | ×rifle | Cost | ×rifle cost | Speed | Turn | Turret | Limit | Range | Dmg | Burst | Reload | DPS | vsINF | vsVEH | vsAIR | vsBLD |
 |---|---|---|---|--:|--:|--:|--:|--:|--:|:-:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| `devastator` | Devastator | vehicle | harkonnen | 50,000 | 8.33 | 1,050 | 21.00 | 31 | 12 | n | — | 4,720 | 9,750 | 1 | 75 | 130 | 0.65 | 1.00 | — | 0.68 |
+| `devastator` | Devastator | vehicle | harkonnen | 50,000 | 8.33 | 1,200 | 24.00 | 31 | 12 | n | — | 4,720 | 9,750 | 1 | 75 | 130 | 0.65 | 1.00 | — | 0.68 |
 | `harvester` | Spice Harvester | vehicle | — | 45,000 | 7.50 | 1,200 | 24.00 | 43 | 20 | n | — | — | — | — | — | — | — | — | — | — |
 | `harvester.starport` | Spice Harvester | vehicle | — | 45,000 | 7.50 | 1,500 | 30.00 | 43 | 20 | n | — | — | — | — | — | — | — | — | — | — |
 | `mcv` | Mobile Construction Vehicle | vehicle | — | 45,000 | 7.50 | 2,000 | 40.00 | 31 | 20 | n | — | — | — | — | — | — | — | — | — | — |
@@ -626,51 +618,45 @@ Checkout: `/home/user/openra/openra` · rifle anchor **`light_inf` = 6,000 HP / 
 | `high_tech_factory` | High Tech Factory | building | — | 35,000 | 5.83 | 1,150 | 23.00 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `outpost` | Outpost | building | — | 35,000 | 5.83 | 750 | 15.00 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `starport` | Starport | building | — | 35,000 | 5.83 | 1,500 | 30.00 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `light_factory` | Light Factory | building | — | 33,000 | 5.50 | 500 | 10.00 | — | — | n | — | — | — | — | — | — | — | — | — | — |
+| `light_factory` | Light Factory | building | — | 33,000 | 5.50 | 600 | 12.00 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `barracks` | Barracks | building | — | 32,000 | 5.33 | 300 | 6.00 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `construction_yard` | Construction Yard | other | — | 30,000 | 5.00 | 2,000 | 40.00 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `conyard.atreides` | Construction Yard | building | — | 30,000 | 5.00 | 2,000 | 40.00 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `conyard.harkonnen` | Construction Yard | building | — | 30,000 | 5.00 | 2,000 | 40.00 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `conyard.ordos` | Construction Yard | building | — | 30,000 | 5.00 | 2,000 | 40.00 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `refinery` | Spice Refinery | building | — | 30,000 | 5.00 | 1,500 | 30.00 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `repair_pad` | Repair Pad | building | — | 30,000 | 5.00 | 800 | 16.00 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `sonic_tank` | Sonic Tank | vehicle | atreides | 30,000 | 5.00 | 1,100 | 22.00 | 31 | 12 | n | — | 6,144 | 2,520 | 1 | 90 | 28 | 1.00 | 0.80 | — | 0.80 |
-| `combat_tank_h` | Harkonnen Combat Tank | vehicle | harkonnen | 29,000 | 4.83 | 700 | 14.00 | 64 | 20 | Y | — | 4,720 | 3,240 | 1 | 55 | 59 | 0.30 | 0.75 | — | 0.55 |
-| `combat_tank_h.starport` | Harkonnen Combat Tank | vehicle | harkonnen | 29,000 | 4.83 | 875 | 17.50 | 64 | 20 | Y | — | 4,720 | 3,240 | 1 | 55 | 59 | 0.30 | 0.75 | — | 0.55 |
+| `combat_tank_h` | Harkonnen Combat Tank | vehicle | corrino/harkonnen | 28,500 | 4.75 | 700 | 14.00 | 64 | 20 | Y | — | 4,720 | 3,340 | 1 | 55 | 61 | 0.30 | 0.75 | — | 0.55 |
+| `combat_tank_h.starport` | Harkonnen Combat Tank | vehicle | corrino/harkonnen | 28,500 | 4.75 | 875 | 17.50 | 64 | 20 | Y | — | 4,720 | 3,340 | 1 | 55 | 61 | 0.30 | 0.75 | — | 0.55 |
 | `wind_trap` | Wind Trap | building | — | 28,000 | 4.67 | 225 | 4.50 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `large_gun_turret` | Rocket Turret | building | — | 27,000 | 4.50 | 750 | 15.00 | — | 32 | Y | — | 7,168 | 5,520 | 1 | 60 | 92 | 0.10 | 0.90 | — | 0.60 |
+| `large_gun_turret` | Rocket Turret | building | — | 27,000 | 4.50 | 750 | 15.00 | — | 32 | Y | — | 7,168 | 5,521 | 2 | 60 | 92 | 0.10 | 0.90 | — | 0.60 |
 | `research_centre` | IX Research Center | building | — | 25,000 | 4.17 | 1,000 | 20.00 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `medium_gun_turret` | Gun Turret | building | — | 24,000 | 4.00 | 550 | 11.00 | — | 24 | Y | — | 6,144 | 5,800 | 1 | 35 | 166 | 0.65 | 0.30 | — | 0.65 |
-| `combat_tank_a` | Atreides Combat Tank | vehicle | atreides | 22,000 | 3.67 | 700 | 14.00 | 75 | 20 | Y | — | 5,120 | 3,240 | 1 | 50 | 65 | 0.30 | 0.75 | — | 0.55 |
-| `combat_tank_a.starport` | Atreides Combat Tank | vehicle | atreides | 22,000 | 3.67 | 875 | 17.50 | 75 | 20 | Y | — | 5,120 | 3,240 | 1 | 50 | 65 | 0.30 | 0.75 | — | 0.55 |
+| `combat_tank_a` | Atreides Combat Tank | vehicle | atreides/fremen | 22,000 | 3.67 | 700 | 14.00 | 75 | 20 | Y | — | 5,232 | 3,340 | 1 | 50 | 67 | 0.30 | 0.75 | — | 0.55 |
+| `combat_tank_a.starport` | Atreides Combat Tank | vehicle | atreides/fremen | 22,000 | 3.67 | 875 | 17.50 | 75 | 20 | Y | — | 5,232 | 3,340 | 1 | 50 | 67 | 0.30 | 0.75 | — | 0.55 |
 | `carryall` | Carryall | aircraft | — | 20,000 | 3.33 | 1,000 | 20.00 | 170 | 16 | n | — | — | — | — | — | — | — | — | — | — |
 | `carryall.reinforce` | Carryall | aircraft | — | 20,000 | 3.33 | 1,000 | 20.00 | 170 | 16 | n | — | — | — | — | — | — | — | — | — | — |
 | `carryall.starport` | Carryall | aircraft | — | 20,000 | 3.33 | 1,500 | 30.00 | 170 | 16 | n | — | — | — | — | — | — | — | — | — | — |
 | `wall` | Concrete Wall | building | — | 20,000 | 3.33 | 100 | 2.00 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `combat_tank_o` | Ordos Combat Tank | vehicle | ordos | 19,000 | 3.17 | 700 | 14.00 | 85 | 20 | Y | — | 4,720 | 3,240 | 1 | 44 | 74 | 0.30 | 0.75 | — | 0.55 |
-| `combat_tank_o.starport` | Ordos Combat Tank | vehicle | ordos | 19,000 | 3.17 | 875 | 17.50 | 85 | 20 | Y | — | 4,720 | 3,240 | 1 | 44 | 74 | 0.30 | 0.75 | — | 0.55 |
+| `combat_tank_o` | Ordos Combat Tank | vehicle | mercenary/ordos/smuggler | 19,000 | 3.17 | 700 | 14.00 | 85 | 20 | Y | — | 4,720 | 3,340 | 1 | 44 | 76 | 0.30 | 0.75 | — | 0.55 |
+| `combat_tank_o.starport` | Ordos Combat Tank | vehicle | mercenary/ordos/smuggler | 19,000 | 3.17 | 875 | 17.50 | 85 | 20 | Y | — | 4,720 | 3,340 | 1 | 44 | 76 | 0.30 | 0.75 | — | 0.55 |
 | `silo` | Silo | building | — | 15,000 | 2.50 | 120 | 2.40 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `missile_tank` | Missile Tank | vehicle | — | 13,000 | 2.17 | 900 | 18.00 | 60 | 20 | n | — | 8,068 | 6,900 | 1 | 115 | 60 | 0.10 | 0.90 | — | 0.60 |
-| `missile_tank.starport` | Missile Tank | vehicle | — | 13,000 | 2.17 | 1,250 | 25.00 | 60 | 20 | n | — | 8,068 | 6,900 | 1 | 115 | 60 | 0.10 | 0.90 | — | 0.60 |
-| `deviator` | Deviator | vehicle | ordos | 12,000 | 2.00 | 1,000 | 20.00 | 53 | 12 | n | — | 6,144 | 3,000 | 1 | 160 | 19 | 1.00 | 1.00 | — | 1.00 |
-| `siege_tank` | Siege Tank | vehicle | — | 11,500 | 1.92 | 800 | 16.00 | 40 | 12 | Y | — | 7,044 | 10,125 | 1 | 90 | 112 | 1.00 | 0.25 | — | 0.85 |
-| `siege_tank.starport` | Siege Tank | vehicle | — | 11,500 | 1.92 | 1,075 | 21.50 | 40 | 12 | Y | — | 7,044 | 10,125 | 1 | 90 | 112 | 1.00 | 0.25 | — | 0.85 |
-| `quad` | Missile Quad | vehicle | — | 11,000 | 1.83 | 350 | 7.00 | 96 | 32 | n | — | 4,208 | 3,125 | 2 | 50 | 104 | 0.25 | 0.75 | — | 0.57 |
+| `missile_tank` | Missile Tank | vehicle | atreides/corrino/fremen/harkonnen | 13,000 | 2.17 | 900 | 18.00 | 60 | 20 | n | — | 8,068 | 6,901 | 2 | 115 | 60 | 0.10 | 0.90 | — | 0.60 |
+| `missile_tank.starport` | Missile Tank | vehicle | — | 13,000 | 2.17 | 1,250 | 25.00 | 60 | 20 | n | — | 8,068 | 6,901 | 2 | 115 | 60 | 0.10 | 0.90 | — | 0.60 |
+| `deviator` | Deviator | vehicle | ordos | 12,500 | 2.08 | 1,000 | 20.00 | 53 | 12 | n | — | 6,144 | 3,001 | 1 | 160 | 19 | 1.00 | 1.00 | — | 1.00 |
+| `siege_tank` | Siege Tank | vehicle | — | 11,500 | 1.92 | 800 | 16.00 | 40 | 12 | Y | — | 7,044 | 10,125 | 1 | 105 | 96 | 1.00 | 0.25 | — | 0.85 |
+| `siege_tank.starport` | Siege Tank | vehicle | — | 11,500 | 1.92 | 1,075 | 21.50 | 40 | 12 | Y | — | 7,044 | 10,125 | 1 | 105 | 96 | 1.00 | 0.25 | — | 0.85 |
+| `quad` | Missile Quad | vehicle | — | 11,000 | 1.83 | 400 | 8.00 | 96 | 32 | n | — | 4,208 | 3,125 | 2 | 50 | 104 | 0.25 | 0.75 | — | 0.57 |
 | `quad.starport` | Missile Quad | vehicle | — | 11,000 | 1.83 | 500 | 10.00 | 96 | 32 | n | — | 4,208 | 3,125 | 2 | 50 | 104 | 0.25 | 0.75 | — | 0.57 |
 | `mpsardaukar` | Sardaukar | infantry | harkonnen | 10,000 | 1.67 | 200 | 4.00 | 31 | — | n | — | 4,096 | 2,500 | 1 | 50 | 50 | 1.15 | 0.24 | — | 0.47 |
-| `sardaukar` | Sardaukar | infantry | — | 10,000 | 1.67 | 120 | 2.40 | 31 | — | n | — | 4,096 | 2,500 | 1 | 40 | 62 | 1.15 | 0.24 | — | 0.47 |
-| `stealth_raider` | Stealth Raider Trike | vehicle | ordos | 10,000 | 1.67 | 350 | 7.00 | 140 | 40 | n | — | 3,947 | 3,600 | 1 | 18 | 200 | 1.15 | 0.24 | — | 0.47 |
-| `raider` | Raider Trike | vehicle | — | 9,200 | 1.53 | 325 | 6.50 | 140 | 40 | n | — | 3,947 | 3,600 | 1 | 18 | 200 | 1.15 | 0.24 | — | 0.47 |
-| `trike` | Trike | vehicle | — | 9,000 | 1.50 | 275 | 5.50 | 128 | 40 | n | — | 3,947 | 3,600 | 1 | 20 | 180 | 1.15 | 0.24 | — | 0.47 |
+| `sardaukar` | Sardaukar | infantry | corrino | 10,000 | 1.67 | 120 | 2.40 | 31 | — | n | — | 4,096 | 2,500 | 1 | 40 | 62 | 1.15 | 0.24 | — | 0.47 |
+| `stealth_raider` | Stealth Raider Trike | vehicle | ordos | 10,000 | 1.67 | 400 | 8.00 | 140 | 40 | n | — | 3,947 | 3,600 | 1 | 18 | 200 | 1.15 | 0.24 | — | 0.47 |
+| `raider` | Raider Trike | vehicle | mercenary/ordos/smuggler | 9,200 | 1.53 | 330 | 6.60 | 140 | 40 | n | — | 3,947 | 3,600 | 1 | 18 | 200 | 1.15 | 0.24 | — | 0.47 |
+| `trike` | Trike | vehicle | atreides/corrino/fremen/harkonnen | 9,000 | 1.50 | 300 | 6.00 | 128 | 40 | n | — | 3,947 | 3,600 | 1 | 20 | 180 | 1.15 | 0.24 | — | 0.47 |
 | `trike.starport` | Trike | vehicle | — | 9,000 | 1.50 | 315 | 6.30 | 128 | 40 | n | — | 3,947 | 3,600 | 1 | 20 | 180 | 1.15 | 0.24 | — | 0.47 |
 | `ornithopter` | Ornithopter | aircraft | atreides | 8,000 | 1.33 | — | — | 224 | 8 | n | — | 3,584 | 16,750 | 7 | 25 | 3,782 | 0.90 | 0.80 | — | 0.68 |
-| `fremen` | Fremen | infantry | — | 7,000 | 1.17 | 200 | 4.00 | 43 | — | n | — | 3,184 | 2,500 | 1 | 40 | 62 | 1.15 | 0.24 | — | 0.47 |
-| `nsfremen` | Fremen | infantry | — | 7,000 | 1.17 | 200 | 4.00 | 43 | — | n | — | 3,184 | 2,500 | 1 | 40 | 62 | 1.15 | 0.24 | — | 0.47 |
-| `trooper` | Trooper | infantry | — | 7,000 | 1.17 | 100 | 2.00 | 31 | — | n | — | 3,696 | 3,240 | 1 | 40 | 81 | 0.10 | 0.85 | — | 0.47 |
+| `trooper` | Trooper | infantry | — | 7,000 | 1.17 | 100 | 2.00 | 31 | — | n | — | 3,942 | 3,240 | 1 | 40 | 81 | 0.10 | 0.85 | — | 0.47 |
 | `grenadier` | Grenadier | infantry | atreides | 6,000 | 1.00 | 80 | 1.60 | 43 | — | n | — | 4,321 | 3,375 | 1 | 50 | 68 | 1.35 | 0.25 | — | 0.70 |
 | `light_inf` | Light Infantry | infantry | — | 6,000 | 1.00 | 50 | 1.00 | 43 | — | n | — | 3,184 | 2,500 | 1 | 30 | 83 | 1.15 | 0.24 | — | 0.47 |
 | `engineer` | Engineer | infantry | — | 5,000 | 0.83 | 400 | 8.00 | 31 | — | n | — | — | — | — | — | — | — | — | — | — |
-| `saboteur` | Saboteur | infantry | — | 5,000 | 0.83 | 300 | 6.00 | 43 | — | n | — | — | — | — | — | — | — | — | — | — |
 | `thumper` | Thumper Infantry | infantry | — | 3,750 | 0.62 | 200 | 4.00 | 43 | — | n | — | — | — | — | — | — | — | — | — | — |
 
 ## OpenE2140  (84 buildable units)
@@ -876,7 +862,6 @@ Checkout: `C:\Users\AedisToru\Documents\GitHub\Generals-Alpha` · rifle anchor *
 | `vehicle.troop_crawler` | Troop Crawler | vehicle | nuke/prc/tank | 24,000 | 2.00 | 1,400 | 14.00 | 40 | 20 | n | — | — | — | — | — | — | — | — | — | — |
 | `aircraft.comanche` | Comanche | aircraft | air/super/usa | 22,000 | 1.83 | 1,500 | 15.00 | 120 | 32 | n | — | 5,120 | 600 | 1 | 3 | 200 | — | — | — | — |
 | `vehicle.bomb_truck` | vehicle.bomb_truck | vehicle | demo/gla/stealth/toxin | 22,000 | 1.83 | 1,200 | 12.00 | 50 | 16 | n | — | 1,792 | — | 1 | — | — | — | — | — | — |
-| `vehicle.mobile_reactor` | Mobile Reactor | vehicle | laser/usa | 22,000 | 1.83 | 800 | 8.00 | 30 | 32 | n | — | — | — | — | — | — | — | — | — | — |
 | `vehicle.quad_cannon` | Quad Cannon | vehicle | demo/gla/stealth/toxin | 21,900 | 1.82 | 700 | 7.00 | 40 | 60 | Y | — | 3,840 | 1,000 | 1 | 3 | 333 | — | — | — | — |
 | `infantry.colonel_burton` | Colonel Burton | infantry | super/usa | 20,000 | 1.67 | 1,500 | 15.00 | 30 | 64 | n | 1 | 3,200 | 4,000 | 1 | 3 | 1,333 | — | — | — | — |
 | `infantry.jarmen_kell` | Jarmen Kell | infantry | gla/stealth/toxin | 20,000 | 1.67 | 1,500 | 15.00 | 30 | 64 | n | 1 | 5,760 | 18,000 | 1 | 25 | 720 | — | — | — | — |
@@ -917,7 +902,6 @@ Checkout: `C:\Users\AedisToru\Documents\GitHub\Generals-Alpha` · rifle anchor *
 | `infantry.hacker` | Hacker | infantry | nuke/prc/tank | 10,000 | 0.83 | 625 | 6.25 | 20 | 64 | n | — | 3,840 | — | 1 | 15 | — | — | — | — | — |
 | `infantry.hijacker` | Hijacker | infantry | gla/stealth | 10,000 | 0.83 | 400 | 4.00 | 30 | 64 | n | — | — | — | — | — | — | — | — | — | — |
 | `infantry.missile_defender` | Missile Defender | infantry | super/usa | 10,000 | 0.83 | 300 | 3.00 | 20 | 64 | n | — | 4,480 | 4,000 | 1 | 25 | 160 | — | — | — | — |
-| `infantry.pilot` | Pilot | infantry | super/usa | 10,000 | 0.83 | 100 | 1.00 | 30 | 64 | n | — | — | — | — | — | — | — | — | — | — |
 | `infantry.rpg_trooper` | RPG Trooper | infantry | demo/gla/stealth/toxin | 10,000 | 0.83 | 300 | 3.00 | 20 | 64 | n | — | 4,480 | 4,000 | 1 | 25 | 160 | — | — | — | — |
 | `infantry.super_hacker` | Super Hacker | infantry | inf/prc | 10,000 | 0.83 | 625 | 6.25 | 20 | 64 | n | — | 3,840 | — | 1 | 15 | — | — | — | — | — |
 | `infantry.tank_hunter` | Tank Hunter | infantry | boss/inf/nuke/prc/tank | 10,000 | 0.83 | 300 | 3.00 | 20 | 64 | n | — | 4,480 | 4,000 | 1 | 25 | 160 | — | — | — | — |
@@ -1421,10 +1405,6 @@ Checkout: `C:\Users\AedisToru\Documents\GitHub\Romanovs-Vengeance` · rifle anch
 | `vlad` | Vladamir's Dreadnought | ship | bakupact/soviets | 250,000 | 20.00 | 2,500 | 16.67 | 135 | 12 | n | — | 25,600 | — | 2 | 150 | — | — | — | — | — |
 | `camex01` | Mayan Pyramid | building | — | 200,000 | 16.00 | — | — | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `amcv` | Mobile Construction Vehicle | vehicle | allies/germany | 160,000 | 12.80 | 4,000 | 26.67 | 75 | 20 | n | — | — | — | — | — | — | — | — | — | — |
-| `cacnst` | Debug Construction Yard | building | allies/bakupact/soviets | 160,000 | 12.80 | 4,000 | 26.67 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `cacnst.civilian` | Civilian Construction Yard | building | — | 160,000 | 12.80 | 4,000 | 26.67 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `cacnst.tech` | Tech Construction Yard | building | — | 160,000 | 12.80 | 4,000 | 26.67 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `cacnst.unused` | Debug Construction Yard | building | — | 160,000 | 12.80 | 4,000 | 26.67 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `caprs03` | Louvre | building | — | 160,000 | 12.80 | — | — | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `gacnst` | Construction Yard | building | — | 160,000 | 12.80 | 4,000 | 26.67 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `gacnst.america` | American Construction Yard | building | — | 160,000 | 12.80 | 4,000 | 26.67 | — | — | n | — | — | — | — | — | — | — | — | — | — |
@@ -1817,7 +1797,7 @@ Checkout: `C:\Users\AedisToru\Documents\GitHub\Romanovs-Vengeance` · rifle anch
 | `gapill` | Pill Box | building | allies/france | 40,000 | 3.20 | 500 | 3.33 | — | 1023 | Y | — | 6,144 | 6,500 | 1 | 35 | 186 | 1.10 | 0.47 | — | 0.30 |
 | `htnk` | Rhino Heavy Tank | vehicle | cuba/iraq/libya/soviets | 40,000 | 3.20 | 900 | 6.00 | 105 | 28 | Y | — | 6,144 | 9,000 | 1 | 65 | 138 | 0.18 | 0.84 | — | 0.57 |
 | `kamaz` | Armored Truck | vehicle | psicorps/transcaucus | 40,000 | 3.20 | 800 | 5.33 | 135 | 28 | Y | — | 5,120 | 1,800 | 4 | 60 | 96 | 1.40 | 0.68 | — | 0.00 |
-| `lart` | Annihilator Artillery | vehicle | psicorps/transcaucus | 40,000 | 3.20 | 1,600 | 10.67 | 75 | 20 | n | — | 11,264 | — | 1 | 51 | — | — | — | — | — |
+| `lart` | Annihilator Artillery | vehicle | psicorps/transcaucus | 40,000 | 3.20 | 1,600 | 10.67 | 75 | 20 | n | — | 11,264 | 15,000 | 1 | 100 | 150 | 1.00 | 1.00 | — | 1.00 |
 | `lcrf` | Amphibious Transport | ship | allies | 40,000 | 3.20 | 500 | 3.33 | 135 | 16 | n | — | — | — | — | — | — | — | — | — | — |
 | `mlyr` | Minelayer | vehicle | allies/soviets | 40,000 | 3.20 | 900 | 6.00 | 105 | 32 | n | — | — | — | — | — | — | — | — | — | — |
 | `mnly` | Minelayer | vehicle | — | 40,000 | 3.20 | 800 | 5.33 | 105 | 20 | n | — | — | — | — | — | — | — | — | — | — |
@@ -1906,7 +1886,7 @@ Checkout: `C:\Users\AedisToru\Documents\GitHub\Romanovs-Vengeance` · rifle anch
 | `dtruck` | Demolition Truck | vehicle | libya | 15,000 | 1.20 | 1,500 | 10.00 | 90 | 32 | n | — | 2,048 | — | 1 | — | — | — | — | — | — |
 | `grad` | Grad MLRS | vehicle | bakupact | 15,000 | 1.20 | 900 | 6.00 | 105 | 28 | Y | — | 12,288 | 2,500 | 10 | 90 | 266 | 0.77 | 0.50 | — | 0.82 |
 | `hmve` | Humvee | vehicle | — | 15,000 | 1.20 | 400 | 2.67 | 105 | 30 | Y | — | 5,120 | 2,000 | 1 | 20 | 100 | 0.90 | 0.47 | — | 0.30 |
-| `itrp` | Iron Trooper | infantry | bakupact/cuba/iraq/soviets/turkmen/tuva | 15,000 | 1.20 | 1,200 | 8.00 | 60 | — | n | — | 5,120 | — | 1 | 150 | — | — | — | — | — |
+| `itrp` | Iron Trooper | infantry | bakupact/cuba/iraq/soviets/turkmen/tuva | 15,000 | 1.20 | 1,200 | 8.00 | 60 | — | n | — | 5,120 | 50,000 | 1 | 150 | 333 | — | — | — | — |
 | `m3` | Meme3 Launcher | vehicle | america/aussie/belarus/canada/chile/china/cuba/england/france/germany/iraq/japan/korea/libya/mexico/mongolia/poland/psicorps/psimoon/psinepal/psisouth/psitrans/russia/soviets/turkey/ukraine/vietnam | 15,000 | 1.20 | 900 | 6.00 | 90 | 32 | n | — | 18,432 | — | 1 | 75 | — | — | — | — | — |
 | `mlrs` | Rocket Launcher | vehicle | — | 15,000 | 1.20 | 800 | 5.33 | 105 | 28 | Y | — | 8,192 | 2,500 | 8 | 90 | 213 | 0.13 | 0.74 | — | 0.70 |
 | `orca` | Harrier | aircraft | allies/korea | 15,000 | 1.20 | 1,200 | 8.00 | 225 | 20 | n | — | 6,144 | 20,000 | 1 | 3 | 6,667 | 1.33 | 0.75 | — | 0.62 |
@@ -2151,29 +2131,21 @@ Checkout: `C:\Users\AedisToru\Documents\GitHub\Shattered-Paradise-SDK` · rifle 
 | id | unit | type | faction | HP | ×rifle | Cost | ×rifle cost | Speed | Turn | Turret | Limit | Range | Dmg | Burst | Reload | DPS | vsINF | vsVEH | vsAIR | vsBLD |
 |---|---|---|---|--:|--:|--:|--:|--:|--:|:-:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
 | `DEFD` | Core Defender | building | cab | 1,100,000 | 88.00 | 35,000 | 291.67 | — | — | n | 1 | — | — | — | — | — | — | — | — | — |
-| `COREDEFENDER` | Core Defender | vehicle | cab | 650,000 | 52.00 | 35,000 | 291.67 | 60 | 30 | n | 1 | 8,192 | 1,200 | 16 | 17 | 1,067 | 1.00 | 1.00 | — | 0.78 |
 | `HMECTEST` | Mammoth Mk.III | vehicle | gdi | 650,000 | 52.00 | 35,000 | 291.67 | 60 | 16 | Y | 1 | 8,192 | 4,000 | 3 | 55 | 171 | 0.30 | 1.00 | 1.00 | 0.78 |
 | `SCRINCOUNCIL` | Scrin Council | aircraft | scr | 400,000 | 32.00 | 35,000 | 291.67 | 40 | 20 | n | 1 | 6,144 | — | 1 | 50 | — | — | — | — | — |
-| `BCOREDEF` | C.A.B.A.L. Defender | vehicle | cab | 300,000 | 24.00 | 5,000 | 41.67 | 60 | 36 | n | — | 8,192 | 10,000 | 1 | 60 | 167 | 1.00 | 1.00 | — | 0.78 |
 | `BLACKDEFD` | C.A.B.A.L. Defender | building | cab | 300,000 | 24.00 | 5,000 | 41.67 | — | — | n | 1 | 18,432 | 15,000 | 1 | 100 | 150 | 1.00 | 1.00 | — | 0.78 |
 | `HMEC` | Mammoth Mk. II | vehicle | gdi | 300,000 | 24.00 | 5,000 | 41.67 | 60 | 12 | n | 1 | 8,192 | 4,000 | 4 | 120 | 128 | 0.30 | 1.00 | 1.00 | 0.78 |
-| `SCORPION` | Lightbringer | vehicle | nod | 300,000 | 24.00 | 5,000 | 41.67 | 60 | 24 | n | 1 | 8,192 | — | 1 | 30 | — | — | — | — | — |
+| `SCORPION` | Lightbringer | vehicle | nod | 300,000 | 24.00 | 5,000 | 41.67 | 60 | 24 | n | 1 | 8,192 | 20,000 | 1 | 60 | 333 | 1.00 | 1.00 | — | 0.78 |
 | `WEASAU` | Weasaurus Lord | vehicle | mut | 300,000 | 24.00 | 5,000 | 41.67 | 60 | 64 | n | 1 | 8,192 | 10,000 | 1 | 40 | 250 | 1.00 | 1.00 | — | 0.78 |
 | `CABSW1` | Iron Savior | building | cab | 200,000 | 16.00 | 5,000 | 41.67 | — | 8 | Y | — | 614,400 | — | 1 | 200 | — | — | — | — | — |
-| `CABYARD` | C.A.B.A.L. Construction Yard | building | cab/gdi/mut/nod/scr | 200,000 | 16.00 | 4,000 | 33.33 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `DEVOURER` | Devourer | aircraft | cab | 200,000 | 16.00 | 2,500 | 20.83 | 45 | 24 | n | — | 1,024 | 20,000 | 1 | 35 | 571 | 1.00 | 0.62 | — | 1.00 |
-| `DRACHED` | Scrin Host Station | building | cab/gdi/mut/nod/scr | 200,000 | 16.00 | 4,000 | 33.33 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `GACNST` | GDI Construction Yard | building | cab/gdi/mut/nod/scr | 200,000 | 16.00 | 4,000 | 33.33 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `GAIONTUR` | Ion Turret | building | — | 200,000 | 16.00 | 1 | 0.01 | — | 40 | Y | — | 18,432 | 100,000 | 1 | 200 | 500 | 1.00 | 1.00 | — | 0.78 |
 | `GAPLUG` | Ion Cannon Control Center | building | gdi | 200,000 | 16.00 | 5,000 | 41.67 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `MUTSW1` | Meditation Hall | building | mut | 200,000 | 16.00 | 5,000 | 41.67 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `MUTYARD` | Mutant Construction Yard | building | cab/gdi/mut/nod/scr | 200,000 | 16.00 | 4,000 | 33.33 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `NAHFAC` | Advanced Mech Factory | building | nod | 200,000 | 16.00 | 2,500 | 20.83 | — | — | n | 1 | — | — | — | — | — | — | — | — | — |
 | `NATMPL` | Temple of Nod | building | nod | 200,000 | 16.00 | 5,000 | 41.67 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `NODYARD` | Nod Construction Yard | building | cab/gdi/mut/nod/scr | 200,000 | 16.00 | 4,000 | 33.33 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `SCRBATTLESHIP` | Battlecruiser | aircraft | scr | 200,000 | 16.00 | 5,000 | 41.67 | 60 | 20 | n | 1 | 5,888 | 2,000 | 14 | 25 | 1,037 | 1.00 | 1.00 | — | 0.78 |
 | `SCRSW1` | Meteor Tractor | building | scr | 200,000 | 16.00 | 5,000 | 41.67 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `TACNST` | Tech Construction Yard | building | cab/gdi/mut/nod/scr | 200,000 | 16.00 | 4,000 | 33.33 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `CABOBELISK` | Nanomachine Core | building | cab | 150,000 | 12.00 | 2,500 | 20.83 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `CABWEAP` | C.A.B.A.L. War Factory | building | cab | 150,000 | 12.00 | 2,000 | 16.67 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `GAWEAP` | GDI War Factory | building | gdi | 150,000 | 12.00 | 2,000 | 16.67 | — | — | n | — | — | — | — | — | — | — | — | — | — |
@@ -2385,7 +2357,6 @@ Checkout: `C:\Users\AedisToru\Documents\GitHub\Shattered-Paradise-SDK` · rifle 
 | `GHUMV` | Humvee | vehicle | gdi | 20,000 | 1.60 | 400 | 3.33 | 150 | 64 | Y | — | 5,120 | 4,000 | 1 | 30 | 133 | 1.00 | 0.25 | 1.00 | 0.13 |
 | `HOWTLIZER` | Specter | vehicle | nod | 20,000 | 1.60 | 1,200 | 10.00 | 90 | 20 | n | — | 15,360 | 28,000 | 1 | 150 | 187 | 1.50 | 0.62 | — | 1.00 |
 | `NCONF` | Black Hand Trooper | infantry | nod | 20,000 | 1.60 | 700 | 5.83 | 75 | — | n | — | 6,144 | 2,500 | 3 | 50 | 125 | 1.00 | 1.00 | — | 0.78 |
-| `ORCATRAN` | Orca Transport | aircraft | gdi | 20,000 | 1.60 | 1,200 | 10.00 | 90 | 20 | n | — | — | — | — | — | — | — | — | — | — |
 | `REPAIRVEHICLE` | Mobile Repair Vehicle | vehicle | cab | 20,000 | 1.60 | 500 | 4.17 | 90 | 28 | n | — | 4,096 | — | 1 | 70 | — | — | — | — | — |
 | `SAPC` | Subterranean APC | vehicle | nod | 20,000 | 1.60 | 500 | 4.17 | 105 | 20 | n | — | — | — | — | — | — | — | — | — | — |
 | `SCRGLYDER1` | Glider | aircraft | — | 20,000 | 1.60 | 800 | 6.67 | 180 | 32 | n | — | 6,144 | 3,000 | 3 | 50 | 150 | 1.40 | 0.28 | — | 0.18 |
@@ -2459,42 +2430,41 @@ Checkout: `C:\Users\AedisToru\Documents\GitHub\Shattered-Paradise-SDK` · rifle 
 
 ## OpenRA Tiberian Sun  (74 buildable units)
 
-Checkout: `/home/user/openra/openra` · rifle anchor **`E1` = 12,500 HP / 120 credits = 1.00×**
+Checkout: `C:\Users\AedisToru\Documents\GitHub\cameo-engine` · rifle anchor **`E1` = 12,500 HP / 120 credits = 1.00×**
 
 | id | unit | type | faction | HP | ×rifle | Cost | ×rifle cost | Speed | Turn | Turret | Limit | Range | Dmg | Burst | Reload | DPS | vsINF | vsVEH | vsAIR | vsBLD |
 |---|---|---|---|--:|--:|--:|--:|--:|--:|:-:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| `GACNST` | Construction Yard | building | — | 150,000 | 12.00 | 2,500 | 20.83 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `GADEPT` | Service Depot | building | gdi | 110,000 | 8.80 | 1,200 | 10.00 | — | — | n | — | — | — | — | — | — | — | — | — | — |
+| `GADEPT` | Service Depot | building | gdi/nod | 110,000 | 8.80 | 1,200 | 10.00 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `GAFIRE` | Firestorm Generator | building | gdi | 100,000 | 8.00 | 1,500 | 12.50 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `GAPLUG` | GDI Upgrade Center | building | gdi | 100,000 | 8.00 | 1,000 | 8.33 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `GARADR` | GDI Radar | building | gdi | 100,000 | 8.00 | 1,000 | 8.33 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `GAWEAP` | GDI War Factory | building | gdi | 100,000 | 8.00 | 2,000 | 16.67 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `HARV` | Harvester | vehicle | — | 100,000 | 8.00 | 1,400 | 11.67 | 71 | 20 | n | — | — | — | — | — | — | — | — | — | — |
-| `MCV` | Mobile Construction Vehicle | vehicle | — | 100,000 | 8.00 | 2,500 | 20.83 | 42 | 20 | n | — | — | — | — | — | — | — | — | — | — |
+| `HARV` | Harvester | vehicle | gdi/nod | 100,000 | 8.00 | 1,400 | 11.67 | 71 | 20 | n | — | — | — | — | — | — | — | — | — | — |
+| `MCV` | Mobile Construction Vehicle | vehicle | gdi/nod | 100,000 | 8.00 | 2,500 | 20.83 | 42 | 20 | n | — | — | — | — | — | — | — | — | — | — |
 | `NAMISL` | Nod Missile Silo | building | nod | 100,000 | 8.00 | 1,300 | 10.83 | — | — | n | 1 | — | — | — | — | — | — | — | — | — |
 | `NARADR` | Nod Radar | building | nod | 100,000 | 8.00 | 1,000 | 8.33 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `NATMPL` | Temple of Nod | building | nod | 100,000 | 8.00 | 2,000 | 16.67 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `NAWEAP` | Nod War Factory | building | nod | 100,000 | 8.00 | 2,000 | 16.67 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `PROC` | Tiberium Refinery | building | — | 90,000 | 7.20 | 2,000 | 16.67 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `GAPILE` | GDI Barracks | building | gdi | 80,000 | 6.40 | 300 | 2.50 | — | — | n | — | — | — | — | — | — | — | — | — | — |
+| `PROC` | Tiberium Refinery | building | gdi/nod | 90,000 | 7.20 | 2,000 | 16.67 | — | — | n | — | — | — | — | — | — | — | — | — | — |
+| `GAPILE` | GDI Barracks | building | gdi/nod | 80,000 | 6.40 | 300 | 2.50 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `HMEC` | Mammoth Mk. II | vehicle | gdi | 80,000 | 6.40 | 3,000 | 25.00 | 42 | 12 | n | 1 | 6,144 | 4,000 | 2 | 80 | 94 | 1.00 | 0.53 | — | 0.56 |
 | `MOBILEMP` | Mobile EMP Cannon | vehicle | gdi | 80,000 | 6.40 | 1,000 | 8.33 | 85 | 20 | n | — | — | — | — | — | — | — | — | — | — |
-| `NAHAND` | Hand of Nod | building | nod | 80,000 | 6.40 | 300 | 2.50 | — | — | n | — | — | — | — | — | — | — | — | — | — |
+| `NAHAND` | Hand of Nod | building | gdi/nod | 80,000 | 6.40 | 300 | 2.50 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `GAPOWR` | GDI Power Plant | building | gdi | 75,000 | 6.00 | 300 | 2.50 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `NAAPWR` | Nod Advanced Power Plant | building | nod | 75,000 | 6.00 | 500 | 4.17 | — | — | n | — | — | — | — | — | — | — | — | — | — |
+| `NAAPWR` | Nod Advanced Power Plant | building | gdi/nod | 75,000 | 6.00 | 500 | 4.17 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `NAPOWR` | Nod Power Plant | building | nod | 75,000 | 6.00 | 300 | 2.50 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `NAOBEL` | Obelisk of Light | building | nod | 72,500 | 5.80 | 1,500 | 12.50 | — | — | n | — | 10,752 | 25,000 | 1 | 120 | 208 | — | — | — | — |
 | `GAHPAD` | Helipad | building | gdi | 60,000 | 4.80 | 500 | 4.17 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `LPST` | Mobile Sensor Array | vehicle | — | 60,000 | 4.80 | 950 | 7.92 | 85 | 20 | n | — | — | — | — | — | — | — | — | — | — |
+| `LPST` | Mobile Sensor Array | vehicle | gdi/nod | 60,000 | 4.80 | 950 | 7.92 | 85 | 20 | n | — | — | — | — | — | — | — | — | — | — |
 | `NAHPAD` | Helipad | building | nod | 60,000 | 4.80 | 500 | 4.17 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `NASAM` | S.A.M. Site | building | nod | 60,000 | 4.80 | 500 | 4.17 | — | 40 | Y | — | 15,360 | 3,300 | 1 | 55 | 60 | 0.25 | 0.88 | — | 0.62 |
 | `NASTLH` | Stealth Generator | building | nod | 60,000 | 4.80 | 2,500 | 20.83 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `WEED` | Weed Eater | vehicle | nod | 60,000 | 4.80 | 1,400 | 11.67 | 71 | 20 | n | — | — | — | — | — | — | — | — | — | — |
-| `CYC2` | Cyborg Commando | infantry | nod | 50,000 | 4.00 | 2,000 | 16.67 | 56 | — | n | 1 | 7,168 | 12,000 | 1 | 50 | 240 | 3.50 | 1.77 | — | 1.70 |
+| `CYC2` | Cyborg Commando | infantry | gdi/nod | 50,000 | 4.00 | 2,000 | 16.67 | 56 | — | n | 1 | 7,168 | 12,000 | 1 | 50 | 240 | 3.50 | 1.77 | — | 1.70 |
 | `GACTWR` | Component Tower | building | gdi | 50,000 | 4.00 | 200 | 1.67 | — | 40 | Y | — | 6,144 | 1,800 | 2 | 26 | 116 | 1.00 | 0.33 | — | 0.35 |
 | `GATECH` | GDI Tech Center | building | gdi | 50,000 | 4.00 | 1,500 | 12.50 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `NALASR` | Laser Turret | building | nod | 50,000 | 4.00 | 300 | 2.50 | — | 40 | Y | — | 5,632 | 3,000 | 1 | 40 | 75 | — | — | — | — |
-| `NAPULS` | EMP Cannon | building | — | 50,000 | 4.00 | 1,000 | 8.33 | — | 40 | Y | — | 40,960 | — | 1 | 100 | — | — | — | — | — |
+| `NAPULS` | EMP Cannon | building | gdi/nod | 50,000 | 4.00 | 1,000 | 8.33 | — | 40 | Y | — | 40,960 | — | 1 | 100 | — | — | — | — | — |
 | `NATECH` | Nod Tech Center | building | nod | 50,000 | 4.00 | 1,500 | 12.50 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `SONIC` | Disruptor | vehicle | gdi | 50,000 | 4.00 | 1,300 | 10.83 | 56 | 20 | Y | — | 6,144 | 1,600 | 1 | 180 | 9 | — | 0.80 | — | 0.60 |
 | `MMCH` | Titan | vehicle | gdi | 40,000 | 3.20 | 800 | 6.67 | 56 | 20 | Y | — | 6,912 | 7,000 | 1 | 80 | 88 | 0.25 | 0.88 | — | 0.62 |
@@ -2506,37 +2476,34 @@ Checkout: `/home/user/openra/openra` · rifle anchor **`E1` = 12,500 HP / 120 cr
 | `NAGATE_B` | Nod Gate | building | nod | 35,000 | 2.80 | 250 | 2.08 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `TTNK` | Tick Tank | vehicle | nod | 35,000 | 2.80 | 800 | 6.67 | 85 | 24 | Y | — | 6,912 | 3,600 | 1 | 50 | 72 | 0.25 | 0.88 | — | 0.62 |
 | `ART2` | Artillery | vehicle | nod | 30,000 | 2.40 | 975 | 8.12 | 71 | 20 | Y | — | 18,432 | 15,000 | 1 | 110 | 136 | 1.00 | 0.52 | — | 0.60 |
-| `CYBORG` | Cyborg Infantry | infantry | nod | 30,000 | 2.40 | 650 | 5.42 | 56 | — | n | — | 4,096 | 1,000 | 3 | 30 | 75 | 1.00 | 0.33 | — | 0.35 |
-| `GASILO` | Silo | building | — | 30,000 | 2.40 | 150 | 1.25 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `MHIJACK` | Mutant Hijacker | infantry | nod | 30,000 | 2.40 | 1,850 | 15.42 | 99 | — | n | 1 | — | — | — | — | — | — | — | — | — |
+| `CYBORG` | Cyborg Infantry | infantry | gdi/nod | 30,000 | 2.40 | 650 | 5.42 | 56 | — | n | — | 4,096 | 1,000 | 3 | 30 | 75 | 1.00 | 0.33 | — | 0.35 |
+| `GASILO` | Silo | building | gdi/nod | 30,000 | 2.40 | 150 | 1.25 | — | — | n | — | — | — | — | — | — | — | — | — | — |
+| `MHIJACK` | Mutant Hijacker | infantry | gdi/nod | 30,000 | 2.40 | 1,850 | 15.42 | 99 | — | n | 1 | — | — | — | — | — | — | — | — | — |
 | `NAPOST` | Laser Fence | building | nod | 30,000 | 2.40 | 200 | 1.67 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `SUBTANK` | Devil's Tongue | vehicle | nod | 30,000 | 2.40 | 750 | 6.25 | 71 | 24 | n | — | 4,352 | 2,500 | 5 | 50 | 227 | 6.00 | 0.33 | — | 0.75 |
 | `SCRIN` | Banshee Fighter | aircraft | nod | 28,000 | 2.24 | 1,500 | 12.50 | 200 | 15 | n | — | 5,120 | 2,000 | 5 | 50 | 189 | 0.25 | 0.88 | — | 0.62 |
 | `ORCAB` | Orca Bomber | aircraft | gdi | 26,000 | 2.08 | 1,600 | 13.33 | 96 | 12 | n | — | 2,560 | 16,000 | 5 | 60 | 1,212 | 2.00 | 0.54 | — | 0.95 |
-| `GASAND` | Sandbags | building | — | 25,000 | 2.00 | 25 | 0.21 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `HVR` | Hover MLRS | vehicle | gdi | 23,000 | 1.84 | 900 | 7.50 | 99 | 28 | Y | — | 8,192 | 3,000 | 2 | 68 | 82 | 0.25 | 0.88 | — | 0.62 |
 | `APACHE` | Harpy | aircraft | nod | 22,500 | 1.80 | 1,000 | 8.33 | 130 | 20 | n | — | 5,120 | 6,000 | 1 | 36 | 167 | 1.00 | 0.33 | — | 0.35 |
 | `GAWALL` | Concrete Wall | building | gdi | 22,500 | 1.80 | 50 | 0.42 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `NAWALL` | Concrete Wall | building | nod | 22,500 | 1.80 | 50 | 0.42 | — | — | n | — | — | — | — | — | — | — | — | — | — |
 | `BGGY` | Attack Buggy | vehicle | nod | 22,000 | 1.76 | 500 | 4.17 | 142 | 32 | n | — | 4,096 | 4,000 | 1 | 55 | 73 | 1.00 | 0.33 | — | 0.35 |
-| `APC` | Amphibious APC | vehicle | gdi | 20,000 | 1.60 | 800 | 6.67 | 113 | 20 | n | — | — | — | — | — | — | — | — | — | — |
-| `GAFSDF` | Firestorm Wall | other | gdi | 20,000 | 1.60 | 50 | 0.42 | — | — | n | — | — | — | — | — | — | — | — | — | — |
-| `GHOST` | Ghost Stalker | infantry | gdi | 20,000 | 1.60 | 1,750 | 14.58 | 56 | — | n | 1 | 6,144 | 30,000 | 1 | 60 | 500 | 1.00 | 1.30 | — | 0.68 |
+| `APC` | Amphibious APC | vehicle | gdi/nod | 20,000 | 1.60 | 800 | 6.67 | 113 | 20 | n | — | — | — | — | — | — | — | — | — | — |
+| `GHOST` | Ghost Stalker | infantry | gdi/nod | 20,000 | 1.60 | 1,750 | 14.58 | 56 | — | n | 1 | 6,144 | 30,000 | 1 | 60 | 500 | 1.00 | 1.30 | — | 0.68 |
 | `ORCA` | Orca Fighter | aircraft | gdi | 20,000 | 1.60 | 1,000 | 8.33 | 186 | 20 | n | — | 6,144 | 3,000 | 2 | 50 | 109 | 0.30 | 1.25 | — | 0.47 |
-| `ORCATRAN` | Orca Transport | aircraft | — | 20,000 | 1.60 | 1,200 | 10.00 | 84 | 20 | n | — | — | — | — | — | — | — | — | — | — |
 | `REPAIR` | Mobile Repair Vehicle | vehicle | nod | 20,000 | 1.60 | 1,000 | 8.33 | 85 | 20 | n | — | 1,843 | — | 1 | 80 | — | — | — | — | — |
 | `SGEN` | Mobile Stealth Generator | vehicle | nod | 20,000 | 1.60 | 1,600 | 13.33 | 85 | 20 | n | — | — | — | — | — | — | — | — | — | — |
 | `STNK` | Stealth Tank | vehicle | nod | 18,000 | 1.44 | 1,100 | 9.17 | 85 | 20 | n | — | 6,144 | 3,000 | 2 | 50 | 109 | 0.25 | 0.88 | — | 0.62 |
 | `SAPC` | Subterranean APC | vehicle | nod | 17,500 | 1.40 | 800 | 6.67 | 71 | 20 | n | — | — | — | — | — | — | — | — | — | — |
 | `SMECH` | Wolverine | vehicle | gdi | 17,500 | 1.40 | 500 | 4.17 | 99 | 20 | n | — | 5,120 | 4,000 | 1 | 50 | 80 | 1.00 | 0.33 | — | 0.35 |
-| `TRNSPORT` | Carryall | aircraft | gdi | 17,500 | 1.40 | 750 | 6.25 | 149 | 20 | n | — | — | — | — | — | — | — | — | — | — |
+| `TRNSPORT` | Carryall | aircraft | gdi/nod | 17,500 | 1.40 | 750 | 6.25 | 149 | 20 | n | — | — | — | — | — | — | — | — | — | — |
 | `BIKE` | Attack Cycle | vehicle | nod | 15,000 | 1.20 | 600 | 5.00 | 170 | 32 | n | — | 5,120 | 4,000 | 1 | 60 | 67 | 0.25 | 0.88 | — | 0.62 |
-| `E2` | Disc Thrower | infantry | gdi | 15,000 | 1.20 | 200 | 1.67 | 56 | — | n | — | 4,608 | 4,000 | 1 | 60 | 67 | 1.00 | 0.53 | — | 0.56 |
-| `E1` | Light Infantry | infantry | — | 12,500 | 1.00 | 120 | 1.00 | 71 | — | n | — | 4,096 | 800 | 1 | 21 | 38 | 1.00 | 0.33 | — | 0.30 |
-| `MEDIC` | Medic | infantry | gdi | 12,500 | 1.00 | 600 | 5.00 | 56 | — | n | — | 2,897 | — | 1 | 80 | — | — | — | — | — |
-| `JUMPJET` | Jump Jet Infantry | infantry | gdi | 12,000 | 0.96 | 600 | 5.00 | 71 | — | n | — | 5,120 | 1,500 | 2 | 40 | 67 | 1.00 | 0.33 | — | 0.35 |
-| `E3` | Rocket Infantry | infantry | nod | 10,000 | 0.80 | 250 | 2.08 | 56 | — | n | — | 6,144 | 2,500 | 1 | 60 | 42 | 0.25 | 0.88 | — | 0.62 |
-| `ENGINEER` | Engineer | infantry | — | 10,000 | 0.80 | 500 | 4.17 | 56 | — | n | — | — | — | — | — | — | — | — | — | — |
+| `E2` | Disc Thrower | infantry | gdi/nod | 15,000 | 1.20 | 200 | 1.67 | 56 | — | n | — | 4,608 | 4,000 | 1 | 60 | 67 | 1.00 | 0.53 | — | 0.56 |
+| `E1` | Light Infantry | infantry | gdi/nod | 12,500 | 1.00 | 120 | 1.00 | 71 | — | n | — | 4,096 | 800 | 1 | 21 | 38 | 1.00 | 0.33 | — | 0.30 |
+| `MEDIC` | Medic | infantry | gdi/nod | 12,500 | 1.00 | 600 | 5.00 | 56 | — | n | — | 2,897 | — | 1 | 80 | — | — | — | — | — |
+| `JUMPJET` | Jump Jet Infantry | infantry | gdi/nod | 12,000 | 0.96 | 600 | 5.00 | 71 | — | n | — | 5,120 | 1,500 | 2 | 40 | 67 | 1.00 | 0.33 | — | 0.35 |
+| `E3` | Rocket Infantry | infantry | gdi/nod | 10,000 | 0.80 | 250 | 2.08 | 56 | — | n | — | 6,144 | 2,500 | 1 | 60 | 42 | 0.25 | 0.88 | — | 0.62 |
+| `ENGINEER` | Engineer | infantry | gdi/nod | 10,000 | 0.80 | 500 | 4.17 | 56 | — | n | — | — | — | — | — | — | — | — | — | — |
 
 ## Yuri's Revenge on OpenRA  (124 buildable units)
 

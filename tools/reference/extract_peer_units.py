@@ -100,10 +100,54 @@ def weapon_stats(rules, node, source_label=""):
                if c.key.split("@")[0] == "Armament" and c.get("Weapon")]
     if not weapons:
         return {}
-    try:
-        w = rules.resolve_weapon(weapons[0])
-    except Exception:
-        return {}
+
+    # ⛔ `weapons[0]` WAS WRONG AND IT COST 204 ROWS THEIR DAMAGE (measured 2026-09-11).
+    # Combined Arms lists the capture utility FIRST on its infantry:
+    #
+    #     N1: armaments = ['commandeer', 'M16Carbine', 'M16CarbineBATF']
+    #     resolve_weapon('commandeer') -> Range 1c0, ReloadDelay 5, Warhead@1Change: ChangeOwner
+    #
+    # so every CA infantry row in the peer corpus reported the COMMANDEER weapon: range 1,024,
+    # reload 5, and no damage at all. `td_gdi_minigunner` read "2/3 sources used" for damage
+    # because Combined Arms was silently voting with a capture beam.
+    #
+    # This is the same defect the maintainer caught in Cameo's own ledger, where `arms[0]`
+    # reported the wrong weapon for 86 of 822 armed actors. Order is not evidence.
+    #
+    # THE RULE: the primary armament is the first one whose resolved weapon actually deals
+    # damage. Utility armaments -- capture, commandeer, repair, infiltrate -- carry no
+    # positive-damage warhead and must never be mistaken for the combat weapon. If NOTHING
+    # deals damage the unit really is a utility unit, and the first armament is then correct.
+    def _has_damage(weapon_node):
+        if weapon_node is None:
+            return False
+        for wh in weapon_node.children:
+            if not wh.key.startswith("Warhead"):
+                continue
+            raw = wh.get("Damage")
+            if raw is None:
+                continue
+            try:
+                if float(str(raw).strip()) > 0:
+                    return True
+            except ValueError:
+                continue
+        return False
+
+    w = None
+    for candidate in weapons:
+        try:
+            node_w = rules.resolve_weapon(candidate)
+        except Exception:
+            continue
+        if _has_damage(node_w):
+            w = node_w
+            break
+    if w is None:                       # genuinely unarmed, or nothing resolved: keep the old head
+        try:
+            w = rules.resolve_weapon(weapons[0])
+        except Exception:
+            return {}
     if w is None:
         return {}
 
