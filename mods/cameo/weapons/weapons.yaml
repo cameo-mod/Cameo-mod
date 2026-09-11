@@ -12131,6 +12131,7 @@ PDLaser:
 		SecondaryBeamColor: ff000033
 		Blockable: true
 	Warhead@1Dam: SpreadDamage
+		ValidTargets: Ground, Missile, BulletAS, BallisticMissile
 		Spread: 5
 		Damage: 1
 
