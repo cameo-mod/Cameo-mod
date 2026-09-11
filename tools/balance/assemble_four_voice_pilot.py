@@ -15,6 +15,7 @@ import hashlib
 import json
 import sys
 import string
+import re
 from collections.abc import Mapping
 from pathlib import Path
 
@@ -53,6 +54,11 @@ def _sha256(path: Path) -> str:
 def _is_sha256(value) -> bool:
     return (isinstance(value, str) and len(value) == 64 and
             all(character in string.hexdigits for character in value))
+
+
+def _is_git_commit(value) -> bool:
+    return (isinstance(value, str) and len(value) == 40 and
+            bool(re.fullmatch(r"[0-9a-fA-F]{40}", value)))
 
 
 def _portable_evidence_path(root, value):
@@ -111,6 +117,20 @@ def _validate_reconstruction_evidence(evidence, *, baseline_sha256,
         return None, "reconstruction_evidence_dataset_mismatch"
     if dataset_schema is not None and document.get("dataset_schema") != dataset_schema:
         return None, "reconstruction_evidence_dataset_schema_mismatch"
+    source_state = document.get("source_state")
+    if not isinstance(source_state, Mapping):
+        return None, "reconstruction_evidence_source_state_missing"
+    if source_state.get("kind") not in ("clean_commit", "dirty_worktree"):
+        return None, "reconstruction_evidence_source_state_kind_invalid"
+    if not _is_git_commit(source_state.get("commit")):
+        return None, "reconstruction_evidence_source_state_commit_invalid"
+    if not isinstance(source_state.get("dirty"), bool):
+        return None, "reconstruction_evidence_source_state_dirty_invalid"
+    if ((source_state["kind"] == "clean_commit" and source_state["dirty"] is not False)
+            or (source_state["kind"] == "dirty_worktree" and source_state["dirty"] is not True)):
+        return None, "reconstruction_evidence_source_state_kind_dirty_mismatch"
+    if source_state.get("reconciled_to_snapshot") is not True:
+        return None, "reconstruction_evidence_source_state_not_reconciled"
     for field in ("scope", "method", "normalization"):
         if not isinstance(document.get(field), str) or not document[field].strip():
             return None, "reconstruction_evidence_" + field + "_missing"
@@ -132,6 +152,7 @@ def _validate_reconstruction_evidence(evidence, *, baseline_sha256,
         "baseline_sha256": document["baseline_sha256"],
         "dataset_sha256": document["dataset_sha256"],
         "dataset_schema": document.get("dataset_schema"),
+        "source_state": dict(document["source_state"]),
         "source_hashes": dict(document["source_hashes"]),
     }, None
 

@@ -78,7 +78,8 @@ def bound_self_vote():
 
 
 def reconstruction_evidence(root, baseline_sha256, dataset_sha256,
-                            *, dataset_schema=1, source_hashes=None):
+                            *, dataset_schema=1, source_hashes=None,
+                            source_state=None):
     document = {
         "schema": 1,
         "review_status": "REVIEWED",
@@ -88,6 +89,9 @@ def reconstruction_evidence(root, baseline_sha256, dataset_sha256,
         "baseline_sha256": baseline_sha256,
         "dataset_sha256": dataset_sha256,
         "dataset_schema": dataset_schema,
+        "source_state": (source_state if source_state is not None else
+                          {"kind": "dirty_worktree", "commit": "d" * 40,
+                           "dirty": True, "reconciled_to_snapshot": True}),
         "source_hashes": (source_hashes if source_hashes is not None
                            else {"source-closure.json": "c" * 64}),
     }
@@ -112,7 +116,24 @@ class AssembleFourVoicePilotTests(unittest.TestCase):
                 binding_contract=contract, baseline_sha256=baseline_sha,
                 evidence_root=directory)
             self.assertEqual(bound["status"], "RESOLVED")
+            self.assertEqual(bound["reconstruction_evidence"]["source_state"],
+                             {"kind": "dirty_worktree", "commit": "d" * 40,
+                              "dirty": True, "reconciled_to_snapshot": True})
             self.assertEqual(baseline, before)
+            clean_state = {"kind": "clean_commit", "commit": "e" * 40,
+                           "dirty": False, "reconciled_to_snapshot": True}
+            clean_evidence = reconstruction_evidence(
+                directory, baseline_sha, dataset_sha, source_state=clean_state)
+            clean_contract = {"baseline_sha256": baseline_sha,
+                              "dataset_sha256": dataset_sha,
+                              "reconstruction_evidence": clean_evidence}
+            clean_bound = pilot.verify_current_cameo_binding(
+                baseline, {"schema": 1}, dataset_sha,
+                binding_contract=clean_contract, baseline_sha256=baseline_sha,
+                evidence_root=directory)
+            self.assertEqual(clean_bound["status"], "RESOLVED")
+            self.assertEqual(clean_bound["reconstruction_evidence"]["source_state"],
+                             clean_state)
             rejected = pilot.verify_current_cameo_binding(
                 baseline, {"schema": 1}, "c" * 64,
                 binding_contract=contract, baseline_sha256=baseline_sha,
@@ -197,6 +218,59 @@ class AssembleFourVoicePilotTests(unittest.TestCase):
                 {}, {"schema": 1}, dataset_sha, binding_contract=contract,
                 baseline_sha256=baseline_sha, evidence_root=directory)
             self.assertEqual(incomplete["reason"], "reconstruction_evidence_source_provenance_invalid")
+
+    def test_reconstruction_evidence_requires_reconciled_source_state(self):
+        baseline_sha = "a" * 64
+        dataset_sha = "b" * 64
+        with tempfile.TemporaryDirectory() as directory:
+            evidence = reconstruction_evidence(directory, baseline_sha, dataset_sha)
+            path = pathlib.Path(directory) / evidence["path"]
+            document = json.loads(path.read_text(encoding="utf-8"))
+            for source_state in (
+                None,
+                {"kind": "clean_commit", "commit": "d" * 40,
+                 "dirty": False, "reconciled_to_snapshot": False},
+                {"kind": "clean_commit", "commit": "not-a-commit",
+                 "dirty": False, "reconciled_to_snapshot": True},
+                {"kind": "dirty_worktree", "commit": "d" * 40,
+                 "dirty": "yes", "reconciled_to_snapshot": True},
+                {"kind": "clean_commit", "commit": "d" * 40,
+                 "dirty": True, "reconciled_to_snapshot": True},
+                {"kind": "dirty_worktree", "commit": "d" * 40,
+                 "dirty": False, "reconciled_to_snapshot": True},
+                {"kind": "other", "commit": "d" * 40,
+                 "dirty": False, "reconciled_to_snapshot": True},
+                {"kind": "clean_commit", "commit": "d" * 40,
+                 "dirty": 0, "reconciled_to_snapshot": True},
+            ):
+                if source_state is None:
+                    document.pop("source_state", None)
+                else:
+                    document["source_state"] = source_state
+                data = json.dumps(document, sort_keys=True).encode("utf-8")
+                path.write_bytes(data)
+                evidence["sha256"] = hashlib.sha256(data).hexdigest()
+                contract = {"baseline_sha256": baseline_sha, "dataset_sha256": dataset_sha,
+                            "reconstruction_evidence": evidence}
+                result = pilot.verify_current_cameo_binding(
+                    {}, {"schema": 1}, dataset_sha, binding_contract=contract,
+                    baseline_sha256=baseline_sha, evidence_root=directory)
+                if source_state is None:
+                    expected = "reconstruction_evidence_source_state_missing"
+                elif source_state.get("kind") not in ("clean_commit", "dirty_worktree"):
+                    expected = "reconstruction_evidence_source_state_kind_invalid"
+                elif not isinstance(source_state.get("dirty"), bool):
+                    expected = "reconstruction_evidence_source_state_dirty_invalid"
+                elif source_state.get("reconciled_to_snapshot") is not True:
+                    expected = "reconstruction_evidence_source_state_not_reconciled"
+                elif not pilot._is_git_commit(source_state.get("commit")):
+                    expected = "reconstruction_evidence_source_state_commit_invalid"
+                elif ((source_state["kind"] == "clean_commit" and source_state["dirty"] is not False)
+                      or (source_state["kind"] == "dirty_worktree" and source_state["dirty"] is not True)):
+                    expected = "reconstruction_evidence_source_state_kind_dirty_mismatch"
+                else:
+                    expected = "reconstruction_evidence_source_state_dirty_invalid"
+                self.assertEqual(result["reason"], expected)
 
     def test_frozen_recovery_checks_bytes_without_certifying_channel_votes(self):
         with tempfile.TemporaryDirectory() as directory:

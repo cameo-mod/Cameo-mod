@@ -44,9 +44,10 @@ launch, engine build and external coordination setup remain unauthorized.
 - **GP-02 admission hardening is complete locally.** The reconstruction contract
   now requires a versioned, hash-checked JSON receipt under an explicit portable
   root, exact frozen-baseline and selected-dataset identities, reviewed scope,
-  method, normalization and source SHA-256 provenance. Missing, stale, malformed,
-  path-escaping, non-integer-schema and string-only evidence fail closed. This
-  validates evidence integrity; it does not rederive historical armor channels.
+  method, normalization, source SHA-256 provenance and reconciled source-state
+  fields. Missing, stale, malformed, path-escaping, non-integer-schema,
+  string-only and contradictory source-state evidence fail closed. This validates
+  the evidence contract; it does not rederive historical armor channels.
   The 29 armor groups remain withheld.
 - The [complete proposal table](../audit/latest/astra_review_20260911/candidate_proposals.md)
   now includes **all 163 active candidate actors**, with current HP/speed/cost,
@@ -172,13 +173,16 @@ needed to resolve an actual uncertainty. Return one report for Codex review.
 The reconstruction admission check in `tools/balance/assemble_four_voice_pilot.py`
 now reads a separate version-1 JSON receipt from an explicit portable evidence
 root. It verifies the receipt's SHA-256, exact frozen-baseline and selected-dataset
-hashes/schema, reviewed scope, method, normalization and source-hash provenance.
-The immutable baseline is untouched. A malformed or merely named evidence file
+hashes/schema, reviewed scope, method, normalization and source-hash provenance,
+and validates coherent source-state fields (`clean_commit`/`dirty_worktree`,
+matching `dirty` boolean and explicit reconciliation). The immutable baseline is
+untouched. A malformed or merely named evidence file
 cannot bind the current Cameo dataset; substantive historical channel recovery
 is still unperformed and the 29 selected groups remain withheld.
 
 The synthesis gate also returns an unresolved diagnostic for non-string source
-labels instead of raising. The affected contract test module passes **14/14**.
+labels instead of raising. The affected contract test module passes **15/15**,
+including both coherent source-state kinds and contradictory/invalid states.
 A portable replay using the published packet passes through aggregation (**29/29**),
 matches all **71/71** frozen inputs and preserves the expected **0/29** gate
 resolution with `original_channel_reconstruction_not_verified`. Astra High's

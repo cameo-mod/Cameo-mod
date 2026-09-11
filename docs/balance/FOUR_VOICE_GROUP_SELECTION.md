@@ -91,14 +91,16 @@ driver's explicit evidence root):
 
 The referenced portable JSON must have `schema: 1`, `review_status: "REVIEWED"`,
 the exact baseline/dataset hashes (and dataset schema when supplied), nonempty
-`scope`, `method` and `normalization` fields, and a nonempty `source_hashes`
-mapping whose values are SHA-256 digests. The driver resolves the path under its
-explicit evidence root, verifies the file hash and these identities, and rejects
-missing, malformed, stale or path-escaping evidence. A valid contract checks
-integrity and records independently supplied review metadata; it does not rederive
-historical armor channels or certify their substantive correctness. Never edit the
-frozen actor snapshot to add a new schema field or substitute current channels for
-the original values.
+`scope`, `method` and `normalization` fields, a nonempty `source_hashes` mapping
+whose values are SHA-256 digests, and a `source_state` object containing
+`kind` (`clean_commit` or `dirty_worktree`), a 40-hex `commit`, a boolean `dirty`,
+and `reconciled_to_snapshot: true`. The driver resolves the path under its
+explicit evidence root, verifies the file hash and identities, validates the
+source-state fields, and rejects missing, malformed, stale or path-escaping evidence. A
+valid contract checks integrity and records independently supplied review
+metadata; it does not rederive historical armor channels or certify their
+substantive correctness. Never edit the frozen actor snapshot to add a new schema
+field or substitute current channels for the original values.
 
 The original vehicle pilot manifest is retained at
 `docs/balance/four_voice_selection_pilot_20260911.json` and produces the
