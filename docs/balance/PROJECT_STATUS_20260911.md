@@ -65,19 +65,18 @@ game launch, engine build and external coordination setup remain unauthorized.
 
 ## Current task ownership
 
-Keep this table as the only live ownership record for the scoped plan. CL-01 is
-reserved for Aedis's Claude to pick up after the handoff; this is a documented
-assignment, not confirmation that Claude has started. Codex will not duplicate
-that analysis while the reservation is active. All implementation remains with
-Codex; an empty owner does not authorize automatic claims on overlapping files.
+Keep this table as the only live ownership record for the scoped plan. CL-01 was
+reserved for Aedis's Claude and is now complete in PR #346; Codex reviews that
+report without duplicating its analysis. All implementation remains with Codex;
+an empty owner does not authorize automatic claims on overlapping files.
 
 | Task | Owner | State | Next action |
 |---|---|---|---|
 | Plan and documentation review | Codex parent | Corrected; included in this continuation | Keep this plan as the execution authority |
 | GP-01 promotion evidence repair | Codex / GPT-6 Astra | **Corrected; included in this continuation** | Use the promotion receipts in `astra_review_20260911`; armor labels describe identity, conditions retain case, and unknown/cyclic tiers stay unresolved |
 | GP-02 source and channel evidence | Codex / GPT-5.6 Luna Max | **PARTIAL** — roster reconciled; 71/71 frozen ledger inputs recovered; reconstruction admission contract hardened | Supply independently reviewed reconstruction evidence before admitting channel votes; original scalar baseline remains intact |
-| GP-03 role and payload closure | Codex implementation; Claude CL-01 analysis | **PARTIAL** — Rapier reviewed; Havoc regression reversed | Claude reviews the 19 target rows in its reserved report; Codex reviews findings before implementation; keep V2's existing surface role pending a design call |
-| CL-01 target/payload review | Aedis's Claude | **RESERVED; not yet acknowledged** | Follow the bounded assignment below; edit only the named report |
+| GP-03 role and payload closure | Codex implementation; Claude CL-01 analysis | **PARTIAL** — Rapier reviewed; Havoc regression reversed; CL-01 report complete | Review PR #346's findings; the shared PDLaser payload-mask correction is now applied; keep V2's existing surface role pending a design call |
+| CL-01 target/payload review | Aedis's Claude | **COMPLETE in open PR #346** — 19 rows dispositioned | Codex reviews `db102bb16`; no duplicate edits to the report |
 | GP-04 per-unit proposals | Codex / GPT-5.6 Luna Max | **Full 163-actor table; numerical pricing still partial** | Use `astra_review_20260911/candidate_proposals.md`: 13 reviewable and 18 held numerical proposals, with explicit routes for the other 132 actors |
 | GP-05 promotion and cargo batch | Codex / GPT-5.6 Luna Max | **Non-live helper corrected; content pending final prices** | Preserve atomic promotion removal/price compensation; do not treat the helper as applied gameplay |
 | GP-06 application and GP-07 playtest | Codex; maintainer playtest | Later milestones | Follow specific content and runtime authorization |
@@ -106,8 +105,8 @@ continuation is a linked draft from
 The new draft is an aggregate preservation checkpoint that includes #342's
 history. PRs #339–342 overlap it; none is merge-approved and they must not all be
 merged blindly. Original baselines and the old checkpoint manifest are unchanged.
-The GP-02 contract-hardening and support-armament pricing implementation is
-committed through `748832569` (latest support-tag/guard batch), pushed to
+The GP-02 contract-hardening, support-armament pricing and PDLaser payload
+correction are committed through `663147217` (latest reviewed batch), pushed to
 Blackrobe's fork and
 included in [draft PR #345](https://github.com/cameo-mod/Cameo-mod/pull/345).
 
@@ -142,6 +141,10 @@ Use [target routes](../audit/latest/astra_review_20260911/target_routes.json),
 aids; resolved active YAML and engine semantics determine actual behavior.
 Inspect `mods/cameo/mod.yaml` first and follow its active include lists.
 
+**Current disposition:** complete in Aedis Claude's [PR #346](https://github.com/cameo-mod/Cameo-mod/pull/346)
+at `db102bb16`; the scope and write boundary below are the preserved assignment
+record, and Codex's review/integration follows it.
+
 **Exact row scope:** zero-based `candidates` indices in the target-route receipt:
 `76, 77, 78, 101, 102, 103, 211, 212, 213, 214, 215, 216, 217, 219, 220, 221, 222, 223, 224`.
 These are the 19 rows with an actor binding beginning `ra1_allies_`,
@@ -168,6 +171,19 @@ a domain-only warning. Reuse successful checks; run a focused check only when
 needed to resolve an actual uncertainty. Return one report for Codex review.
 
 ## Current completed work and evidence
+
+### Aedis Claude CL-01 review — open PR #346
+
+Aedis's Claude completed the reserved one-file review at commit `db102bb16` in
+[PR #346](https://github.com/cameo-mod/Cameo-mod/pull/346), with 16 rows retained,
+three correctness-fix proposals and two policy decisions. Its mask analysis
+confirms that most warnings are actor-type recipient filters rather than domain
+exclusions. The shared `PDLaser` payload-mask correction is now applied in this
+branch; `PointDefenseTesla` already carried the corresponding projectile mask.
+The engine's `IPointDefense.Destroy` interception path is independent of
+warhead damage, so this static correction does not claim runtime interception
+proof. The flying-infantry target-type behavior and Stealth Tank `CHFlame`
+route remain separate policy decisions.
 
 ### Latest Luna Max batch — GP-02 contract hardening
 
@@ -211,7 +227,10 @@ extractor also emits an `ALL_POSITIVE_ARMAMENTS_UNPRICED` guard for a buildable
 actor whose non-support positive armaments are all excluded, and
 `fit_class.pricing_armaments` refuses that guarded state. Support-only and
 non-buildable actors remain valid zero-offense cases. The dedicated support
-pricing tests pass **5/5**; no YAML or gameplay values changed.
+pricing tests pass **5/5**. The same reviewed batch adds one shared `PDLaser`
+warhead target-mask correction for grounded and airborne projectile states;
+damage, range, reload and ordinary-aircraft splash eligibility remain
+unchanged, and runtime interception is still unverified.
 
 - The reviewed continuation evidence is grouped in
   [astra_review_20260911](../audit/latest/astra_review_20260911/review.json).

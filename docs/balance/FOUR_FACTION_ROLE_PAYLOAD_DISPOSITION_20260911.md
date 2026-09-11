@@ -40,7 +40,11 @@ silently presenting a zero-offense pricing input; no such guard is present in
 the refreshed ledgers. The canonical `fit_class.pricing_armaments` selector
 refuses a ledger carrying that guard, while support-only and non-buildable
 actors remain valid zero-offense cases. This changes diagnostic pricing
-selection only; no YAML or gameplay values were edited.
+selection only. The shared `PDLaser` `Warhead@1Dam` now explicitly accepts
+`Ground`, `Missile`, `BulletAS` and `BallisticMissile`; this removes the
+inherited Ground/Water mismatch for the reported projectile states without
+adding generic Air splash eligibility. Ordinary `IPointDefense.Destroy`
+interception remains an engine path that static checks do not certify.
 
 ## Candidate target and secondary closure
 
