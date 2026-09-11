@@ -30,39 +30,68 @@ Cloned OpenRA bleed (`f3ec7f8`, 2026-08-30) to `~/Documents/GitHub/OpenRA`. **24
 `7dd49259d`. ⛔ `ENGINE_VERSION` in `mod.config` deliberately unchanged; the fork we ship and the
 upstream reference are different things and conflating them was the bug.
 
-### ⛔⛔ TRAP — DO NOT refresh DTA by copying `Rules.ini` over `rules_DTA_Classic.ini`
+### ✅ RESOLVED — DTA refresh, and why the first attempt destroyed 2,991 fields
 
-Attempted 2026-09-11 and **reverted**. The DTA install's `INI/Rules.ini` is NOT the same artifact
-as `extraction/rules_DTA_Classic.ini`; the extraction file is a MERGED product carrying data
-Rules.ini alone does not have. Both files show 2,322 section headers, which makes the swap *look*
-safe — it is not. Measured consequence of the swap:
+**Fixed 2026-09-11, `6636942a3`.** The earlier entry here said the safe production path for
+`rules_DTA_Classic.ini` was unknown and guessed the file was a "MERGED product". That was the
+right instinct and the wrong mechanism. The real cause:
+
+**DTA moved to Vinifera `$Inherits=` section inheritance.** `[AFACT]` used to carry all 29 of its
+own keys with `Cost=5000`; it now carries `$Inherits=GFACT`, 7 keys, and the line `;Cost=5000`
+**commented out**, because the parent supplies it. Across the file, 781 sections with
+`BaseSection=` became 782 with `$Inherits=`, and **40,967 keys became 25,492**. Both the old and
+new files report exactly **2,322 section headers** — the number a reviewer reaches for first, and
+the number that proves nothing. Count KEYS, not sections.
+
+`extract_ini_units.py` never complained because its `KV` pattern was `[A-Za-z0-9_.]+` — **no
+`$`** — so it did not mis-handle the directive, it never read the line. That is rule 8b's
+FieldLoader trap in a second engine.
+
+**The refresh is now routine:**
 
 ```
-2,991 corpus fields changed, essentially all value -> None
-   1TNK  w_damage 25 -> None      AFACT cost 5000 -> None      AHPAD hp 8000 -> None
+cp "Cameo-mod-reference/DTA Developer Edition/INI/Rules.ini"   .../extraction/rules_DTA_Classic.ini
+cp "Cameo-mod-reference/DTA Developer Edition/INI/Enhance.ini" .../extraction/rules_DTA_Enhance_overlay.ini
+python tools/reference/extract_ini_units.py --json docs/reference/ini_corpus.json     # FULL run
 ```
 
-That is silent data destruction of exactly the kind CLAUDE.md rule 8 warns about: fewer findings,
-no error. Backups were taken first (`*.bak_20260905`) and used to restore; the corpus was restored
-with `git checkout`. **Find how `rules_DTA_Classic.ini` is actually produced before refreshing it.**
+⚠ **Resolve inheritance PER FILE, then merge the Enhanced overlay — never merge first.** Every
+`$Inherits` parent in `Rules.ini` resolves inside `Rules.ini`, every parent in `Enhance.ini`
+inside `Enhance.ini`, and each file alone is cycle-free. Merging first manufactures **6 cycles
+that exist in NEITHER file**, because Enhanced deliberately inverts a chain: Classic has
+`[RAARTY] $Inherits=ARTY`, Enhance.ini reverses it to `[ARTY] $Inherits=RAARTY` so the RA gun
+becomes the base. A merge-first read emptied `RAARTY`, `AIRAARTY` and `COASTARTY` of
+armor/sight/speed/warhead — 17 fields that looked like a plausible upstream deletion.
 
-⚠ `extract_ini_units.py --source X --json <corpus>` has the SAME destructive shape as
-`extract_peer_units.py --mod X`: it writes ONLY the selected sources over the whole corpus. Always
-run it across all nine sources, or not at all. There is no splice wrapper for it yet — writing one
-is the obvious follow-up.
+**The acceptance test is `0 fields lost`, not "it ran."** Achieved: 0 `value -> None`, all nine
+sources keep their row counts (11,870 total), and the folder's fidelity anchor still holds — DTA
+Classic reproduces RA1 exactly (`1TNK` 3000/700, `2TNK` 4000/800, `3TNK` 4000/950).
 
-### DTA's real balance delta, measured but NOT yet in the corpus
+✅ `extract_ini_units.py --source X --json <corpus>` used to REPLACE the corpus with X, deleting
+the other eight sources in silence. **It now refuses unless `--force-partial`** — no splice
+wrapper needed. (`extract_peer_units.py --mod X` still has the shape; use `splice_peer_section.py`.)
 
-Current DTA (`INI/Rules.ini`, 2026-09-11 20:40) vs the Sep 5 extraction — **9 fields**, a flak rework:
+### DTA's real balance delta — LANDED in the corpus
+
+**9 fields**, a flak rework, now in `docs/reference/ini_corpus.json`:
 
 ```
 [Flak]    ROF 40->20   Damage 23->14      [FlakWH] Spread 3->12     [AGFlak] Damage 11->13,
 [MFLAK]   Strength 1800->2000             [Minigun] Range 2.5->2.67  Warhead APRA->AGFlakWH
-[SCRINTNK] [VMINE]  Armor special -> special_heavy
+[SCRINTNK] [VMINE]  Armor special -> special_heavy   (+ new [AGFlakWH] at a flat 750%)
 ```
 
-`Enhance.ini`: 0 changes. These are real and still owed to the corpus once the safe refresh path is
-known.
+Everything else the naive refresh appeared to "change" was reader damage. Enhanced adds a pillbox
+warhead swap (`SA` -> `MA`) and `SHPAD` becoming unbuildable.
+
+⚠ **`special_heavy` is referenced by units but is NOT in `[ArmorTypes]`**, and
+`normalize_armor.py`'s `ts` map covers only `none/wood/concrete/light/heavy` — so `medium`,
+`special`, `naval_*` and `rocket` were already unmapped before this. Pre-existing, not a
+regression, but a real gap in TS armor routing.
+
+⚠ **`faction_profiles.json` was one corpus revision stale on master** — the corpus moved at
+`ebf8f16ce` and the profiles were never rebuilt. Of its changed lines, **54,762 predate** this
+work and only **302** come from the DTA update. Regenerated in the same commit.
 
 ### Where the remaining gaps are
 
