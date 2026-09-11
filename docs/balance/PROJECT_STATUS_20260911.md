@@ -105,9 +105,9 @@ continuation is a linked draft from
 The new draft is an aggregate preservation checkpoint that includes #342's
 history. PRs #339–342 overlap it; none is merge-approved and they must not all be
 merged blindly. Original baselines and the old checkpoint manifest are unchanged.
-The GP-02 contract-hardening, support-armament pricing, PDLaser payload and
-reference-map tooling corrections are committed through `469dce61c` (latest
-reviewed batch), pushed to Blackrobe's fork and
+The GP-02 contract-hardening, support-armament pricing, PDLaser payload,
+reference-map tooling and built-state condition-selector corrections are
+committed through `7ac6b7395` (latest reviewed batch), pushed to Blackrobe's fork and
 included in [draft PR #345](https://github.com/cameo-mod/Cameo-mod/pull/345).
 
 From an existing Cameo clone, use a new worktree to preserve your own edits:
