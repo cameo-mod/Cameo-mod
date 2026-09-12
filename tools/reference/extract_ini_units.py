@@ -71,6 +71,36 @@ VANILLA_YR_MD5 = "cf7eb658327aff1fe7e6c4e7400eb87f"
 # actually applies), the demoted record whole under `wdummy_*` — and the raw `w2_*` slot is
 # re-emitted. The legacy committed corpus keeps its old promoted rows regardless: it is NOT
 # regenerated this session.
+# ⛔ STILL EMPTY, AND THE COMMITTED CORPUS DOES NOT MATCH THIS EXTRACTOR BECAUSE OF IT.
+# Measured 2026-09-12 by regenerating `docs/reference/ini_corpus.json` and diffing against
+# HEAD: 1,789 rows differ, but only **63** differ on EVIDENCE — the other 1,726 are DTA
+# provenance stamps (`source_sha256`, `extractor_python_version`, `engine_profile`). Those 63
+# carry the OLD auto-promotion shape (`w_from_secondary`, `w_dummy_primary`), so the committed
+# corpus was built while auto-promotion was still on, and regenerating today DROPS them:
+#
+#   source                 unit       committed weapon      dmg    -> declared primary    dmg
+#   Rise of the East       HTK        FlakTrackAAGun         33       FlakTrackGun        None
+#   Rise of the East       NUKCAN     200mm                 250       200mmD                 0
+#   Rise of the East       DLPH       SonicZap               80       SonicZapC              0
+#   Rise of the East       SMCV       Vulcan                 13       VulcanD                0
+#   Rise of the East       KAZNROK    MissileLauncher3       40       LockOn                 0
+#   (63 rows: Red Resurrection 20, Rise of the East 19, Mental Omega 14, CnC Reloaded 4,
+#    Twisted Insurrection 3, RA2 0XX 2, RA2 Reborn 1)
+#
+# ⚠ SO A REGENERATION TODAY IS A REGRESSION, NOT A REFRESH: those units go from a usable
+# damage figure to no weapon evidence at all, and then abstain from `w_dps` and every stat
+# that requires it. The naming is the tell — `200mmD` / `SonicZapC` / `VulcanD` / `LockOn` are
+# dummy targeting slots and the real gun IS the secondary, exactly as the committed corpus has
+# it. But that inference is the one this table exists to forbid: a zero or missing `Damage` on
+# the primary is `w_evidence: incomplete` (`direct_undeclared`) and CANNOT prove a dummy,
+# because promoting the wrong slot makes a unit vote with its anti-air gun.
+#
+# So: do NOT regenerate the INI corpus until these 63 are ruled on, one way or the other —
+# either populate this table from the source profiles (the sanctioned path) or accept losing
+# the evidence. Recorded in `docs/HANDOFF.md` as an open decision. New collect-only FIELDS
+# (`w_burst_delays`, the `w_phys_*` helpers) therefore reach the corpus only on that reviewed
+# regeneration; compute them on demand until then, which is what the maintainer asked for
+# anyway ("burst delay ... not in the reference map but calculated here so I can see it").
 EXPLICIT_DUMMY_WEAPONS: dict[str, set] = {}
 
 SOURCES = {
@@ -335,9 +365,44 @@ def channel_ambiguities(ini: dict, w: dict, warhead: str) -> list:
 #   CellSpread    on the WARHEAD section      (MO  537, DTA  10 as CellSpread + 139 as Spread)
 #   PercentAtMax  on the WARHEAD section      (MO  401, DTA   4)  -- damage at the blast edge,
 #                        the INI analogue of Cameo's `Falloff` tail
+COLLECT_ONLY_KEYS = ("w_burst_delays",)
 PHYSICS_KEYS = ("w_phys_speed", "w_phys_accel", "w_phys_rot", "w_phys_arcing",
                 "w_phys_inaccurate", "w_phys_spread", "w_phys_spread_key",
                 "w_phys_falloff_pct")
+
+
+def burst_delays_of(w: dict) -> list | None:
+    """The per-shot burst delays a weapon declares, in shot order. COLLECT-ONLY.
+
+    ⛔ I TOLD THE MAINTAINER NO SOURCE SHIPPED THIS AND I WAS WRONG. The grep behind that claim
+    was `^BurstDelay=`, which can NEVER match, because the key is INDEXED -- `BurstDelay0`,
+    `BurstDelay1`, ... `BurstDelay8` (Ares) -- or a comma list under `Burst.Delays` (Phobos).
+    Exactly the same shape of mistake as the `$Inherits` regex that silently dropped the DTA
+    directive: a key spelled differently than assumed reads as absent, and absence reads as
+    "the sources do not have it".
+
+    MEASURED over weapon sections (those declaring both `Warhead` and `Damage`) -- 386 of 8,263:
+
+        BurstDelay0..N   DTA Classic 77 · DTA Enhanced 81 · Twisted Insurrection 42   (TS engine)
+        Burst.Delays     RA2 0XX 108 · Rise of the East 48 · CnC Reloaded 30          (Phobos)
+        Mental Omega       0 -- it declares `BurstDelayN` only OUTSIDE weapon sections
+
+    Returned as a LIST in shot order, never summed and never averaged: OpenRA's own `MSAM`
+    ships `BurstDelays: 0, 4, 0`, which is two doublets rather than four evenly spaced shots,
+    and a single mean would erase the cadence that makes it that weapon.
+
+    Never joins WEAPON_STATS/ARMOR_STATS, so it cannot vote. The maintainer's instruction is
+    that burst delay is referenced and reported but deliberately NOT shown in the reference
+    map, so nothing here feeds `build_reference_report`'s table.
+    """
+    idx = sorted((int(k[len("BurstDelay"):]), w[k]) for k in w
+                 if re.fullmatch(r"BurstDelay\d+", k))
+    if idx:
+        return [num(v) for _, v in idx]
+    lst = w.get("Burst.Delays")
+    if lst:
+        return [num(x) for x in lst.split(",") if x.strip()]
+    return None
 
 
 def physics_of(ini: dict, w: dict, warhead: str, projectile: str) -> dict:
@@ -428,6 +493,8 @@ def weapon_of(ini: dict, wname: str, engine: str) -> dict:
         "w_dps": dps,
         "w_projectile": w.get("Projectile"),
         "w_warhead": warhead or None,
+        # Collect-only, reported but never mapped and never voting. See burst_delays_of.
+        "w_burst_delays": burst_delays_of(w),
         "w_versus": vs or None,
         "w_versus_notation": notation,
         **channels,

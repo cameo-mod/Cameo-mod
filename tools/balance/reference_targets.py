@@ -40,6 +40,44 @@ ROOT = rd.ROOT
 ASSIGN = ROOT / "docs" / "balance" / "derived" / "reference_assignment.json"
 STATS = ("hp", "speed", "w_range", "w_dps", "cost")
 
+# ⛔ DISCRETE COUNTS ARE TAKEN DIRECTLY, NEVER PROJECTED (maintainer caught this 2026-09-12:
+# "the mammoth tank always has 2 bursts for all weapons from all sources right? and you
+# averaged it to 1.67x?" -- correct, and the projection was the culprit, not an average).
+#
+# `target_for`'s normal path converts a raw value into its POSITION within that source's own
+# distribution and maps the position onto Cameo's. That is right for HP, speed, cost, range
+# and DPS: continuous magnitudes spanning orders of magnitude, where "this unit is a heavy in
+# its own game" is the transferable fact and the raw number is not.
+#
+# It is WRONG for `w_burst`. Burst is a small integer the engine can only take whole, the
+# distributions have wildly different supports, and they are dominated by outliers that have
+# nothing to do with the unit in hand:
+#
+#     DTA Enhanced        burst min 2  max   4
+#     OpenRA Tiberian Dawn          1        5
+#     Combined Arms                 1       30
+#     Cameo (projected onto)        1      100
+#
+# So a Mammoth's 2 -- low inside a 1..30 support -- maps low into a 1..100 support and lands
+# at 1.67, even though EVERY eligible source says exactly 2. (The three `HTNK.*` Combined Arms
+# variants that say 1 or 2 are `reference_base_eligible: False` upgraded variants and never
+# voted at all.)
+#
+# MEASURED over the 209 actors that have both a burst and a burst target: 163 have UNANIMOUS
+# agreement among their eligible sources, and projection contradicts that unanimous value on a
+# large share of them -- `cabal_plasmaturret` every source 5, projected 2.21; `forgotten_mlrs`
+# every source 8, projected 5.08; `cabal_cyborginfantry` every source 3, projected 1.92.
+#
+# Direct pooling reports a CHANGE on 98 of 209 against projection's 77, and that is the point:
+# the extra ones are real disagreements between Cameo and its sources, which is exactly what
+# the maintainer asked to see flagged in the map. `Burst` may not be touched without explicit
+# permission, so the number has to be the sources' actual burst, not a position-derived one.
+#
+# One vote per source (median across that source's eligible rows), then the median of the
+# source votes -- median, not mean, because the answer must be a count and an even split
+# between 2 and 4 should read as one of them, not as 3.
+DIRECT_STATS = ("w_burst",)
+
 
 def add_cost_distribution(dist, rows):
     """Fold a `cost` distribution into `dist` in place.
@@ -223,6 +261,30 @@ def hero_cameo_context():
     return FrozenCameoDistribution(dist['Cameo'], rows)
 
 
+def _direct_target(rows, vote_row, stat):
+    """(peers_only, with_cameo, n_sources) for a DISCRETE count -- see DIRECT_STATS.
+
+    No distribution, no projection: one vote per source (median of that source's eligible
+    rows), then the median of the source votes. Eligibility is the SAME `rd.eligible` gate the
+    projected path uses, so an upgraded variant or an evidence-withheld row abstains here too.
+
+    `with_cameo` deliberately does NOT fold Cameo's own value in. On a continuous stat the
+    self-vote damps a projection; on a count it would just drag a unanimous source answer
+    toward the status quo and hide the very disagreement this stat is shown to reveal.
+    """
+    per = collections.defaultdict(list)
+    for r in rows:
+        x = r.get(stat)
+        if not x or x <= 0 or not rd.eligible(r, stat):
+            continue
+        per[r["source"]].append(float(x))
+    if not per:
+        return None, None, 0
+    votes = [statistics.median(v) for v in per.values()]
+    value = statistics.median(votes)
+    return value, value, len(per)
+
+
 def target_for(rows, cameo_row, stat, dist, cdist):
     """(peers_only, with_cameo, n_sources) on one stat, or (None, None, 0).
 
@@ -244,6 +306,8 @@ def target_for(rows, cameo_row, stat, dist, cdist):
     frozen = getattr(cdist, 'cameo_votes', None)
     vote_row = frozen.get(cameo_row.get('id')) if frozen is not None else cameo_row
     projection_row = vote_row if vote_row is not None else cameo_row
+    if stat in DIRECT_STATS:
+        return _direct_target(rows, vote_row, stat)
     per_source = collections.defaultdict(lambda: collections.defaultdict(list))
     for r in rows:
         x = r.get(stat)

@@ -106,8 +106,17 @@ def arm_note(actor, led_arms):
     return f'<span class="muted" title="{n} priced armaments; rate uses the selected baseline armaments">&#215;{n}</span>' if n > 1 else ""
 
 
-def estimate_cell(rows, cameo_row, stat, dist, cdist, assigned_sources):
-    """Show metric evidence separately from identity matches; never relax eligibility."""
+def estimate_cell(rows, cameo_row, stat, dist, cdist, assigned_sources, flag_change=None):
+    """Show metric evidence separately from identity matches; never relax eligibility.
+
+    `flag_change` is the CURRENT value of an integer-valued stat. When given, the cell marks
+    whether the reference target would actually MOVE it once snapped to its grid, and shows
+    the unrounded projection in the tooltip. That distinction is the whole point for `Burst`:
+    its raw target on `td_gdi_mammothtank` is **1.67**, which `num()` renders as "2" -- the
+    same as the current value -- so the column reads as a change when it is not one. Burst may
+    not be touched without the maintainer's explicit permission, so "would this move?" is a
+    FLAG, not a routine number, and it has to be legible at a glance in the big table.
+    """
     try:
         _, value, used = rt.target_for(rows, cameo_row, stat, dist, cdist) if rows else (None, None, 0)
         failure = None
@@ -148,8 +157,17 @@ def estimate_cell(rows, cameo_row, stat, dist, cdist, assigned_sources):
                        'No usable source projection under the current evidence rules.')
     else:
         explanation = 'Sources counted once after pooling eligible variants; Cameo self-vote, if eligible, is additional.'
+    badge = ""
+    if flag_change is not None and value is not None:
+        explanation += f' Unrounded projection {value:.4g}.'
+        moved = round(value) != round(flag_change)
+        badge = (f' <b class="warn" title="needs explicit maintainer permission">'
+                 f'would change {round(flag_change):g}&rarr;{round(value):g}</b>' if moved
+                 else ' <span class="tag" title="raw target rounds to the current value">'
+                      'no change</span>')
     tooltip = html.escape(explanation + (' ' + '; '.join(reasons) if reasons else ''), quote=True)
-    return f'<span title="{tooltip}">{num(value)}<small class="evidence">{status}</small></span>'
+    return (f'<span title="{tooltip}">{num(value)}'
+            f'<small class="evidence">{status}</small></span>{badge}')
 
 
 def weapon_calculation_details(rows, cameo_actor=None):
@@ -270,7 +288,9 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
         # the virtual anchor will be derived from (EXTRAPOLATION_PROGRAM.md), so a row whose class
         # looks wrong is a finding BEFORE any anchor is signed — and range/damage were the two stats
         # a reference actually moves that the table never showed.
-        # Keep the map itself to the five direct actor stats requested by Aedis.
+        # ⭐ BURST added 2026-09-12 (sixth column). Burst delays deliberately stay OUT of the map at
+        # the maintainer's request — they are collected and reported separately, not shown here.
+        # Keep the map itself to the direct actor stats requested by Aedis.
         # Mapping confidence, class labels and generic weapon/delivery evidence
         # are emitted below as a separate review section.
         body.append('<table><thead><tr><th>Cameo actor</th>'
@@ -278,6 +298,7 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
                     '<th class="n">Speed (now → reference)</th>'
                     '<th class="n">Range (now → reference)</th>'
                     '<th class="n">damage/tick (now → reference)</th>'
+                    '<th class="n">Burst (now → reference)</th>'
                     '<th class="n">Cost (now → reference)</th>'
                     '</tr></thead><tbody>')
         for a in group:
@@ -318,6 +339,13 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
             selected_dist, selected_cdist = (hero_context if c.get('hero') and hero_context else (dist, cdist))
             tgt = {stat: estimate_cell(rows, c, stat, selected_dist, selected_cdist, len(srcs))
                    for stat in ('hp', 'speed', 'cost', 'w_range', 'w_dps')}
+            # ⭐ BURST added 2026-09-12 at the maintainer's request: "update the reference map to
+            # also display burst since that's important and if it should change I should know it
+            # in the big reference map table". It carries `flag_change` because `Burst` may not be
+            # touched without explicit permission, so the actionable fact is whether the target
+            # MOVES it, not the number — and the raw target rounds, which hid that distinction.
+            tgt['w_burst'] = estimate_cell(rows, c, 'w_burst', selected_dist, selected_cdist,
+                                           len(srcs), flag_change=c.get('w_burst'))
             note = ' <span class="tag">chassis-only</span>' if a in chassis_only else ""
             if c.get('hero'):
                 note += ' <span class="tag">hero-only model</span>'
@@ -332,6 +360,7 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
                 f'<td class="n">{num(c.get("speed"))} <span class="muted">→</span> {tgt["speed"]}</td>'
                 f'<td class="n">{num(c.get("w_range"))} <span class="muted">→</span> {tgt["w_range"]}</td>'
                 f'<td class="n">{num(c.get("w_dps"))}{arm_note(a, led_arms)} <span class="muted">→</span> {tgt["w_dps"]}</td>'
+                f'<td class="n">{num(c.get("w_burst"))} <span class="muted">→</span> {tgt["w_burst"]}</td>'
                 f'<td class="n">{num(c.get("cost"))} <span class="muted">→</span> {tgt["cost"]}</td></tr>')
         body.append("</tbody></table>")
         if reference_details:

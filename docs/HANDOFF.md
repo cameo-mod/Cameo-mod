@@ -35,6 +35,29 @@ units: TD/TS warheads declare `Spread` in **leptons** (`DemoAtomicWH` 512, 256 t
 RA2/YR declare `CellSpread` where `AAHE` reads 0.5 (plainly half a cell) and `BlueJammer` reads
 **225** with Ares fixed-point providers in play. Nothing is converted until that is ruled.
 
+**5. The 63 dummy-primary rows — and the INI corpus must NOT be regenerated until they are
+ruled.** Regenerating `docs/reference/ini_corpus.json` today changes 1,789 rows, but only **63**
+on evidence (the other 1,726 are DTA provenance stamps). Those 63 carry the OLD auto-promotion
+shape, so a refresh DROPS them and the units lose their weapon evidence entirely:
+`Rise of the East / HTK` goes from `FlakTrackAAGun` damage 33 to `FlakTrackGun` damage **None**;
+`NUKCAN` from `200mm` 250 to `200mmD` **0**; also `SonicZap`→`SonicZapC`, `Vulcan`→`VulcanD`.
+The naming says these ARE dummy targeting slots and the committed corpus is right — but a zero
+`Damage` on the primary is `direct_undeclared` and **cannot prove a dummy**, which is exactly
+what `EXPLICIT_DUMMY_WEAPONS` exists to keep explicit. Either populate that table from the
+source profiles or accept losing the evidence. Until then **no corpus regeneration**, which is
+also why new collect-only fields (`w_burst_delays`, `w_phys_*`) are computed on demand.
+
+**6. Burst is now taken DIRECTLY, not projected — and the map flags when it would move.**
+Maintainer caught it: *"the mammoth tank always has 2 bursts for all weapons from all sources
+right? and you averaged it to 1.67x?"* Correct, and it was the projection, not an average.
+`target_for` maps a raw value to its POSITION in its source's distribution, which is right for
+continuous magnitudes and wrong for a small integer count: DTA's burst support is 2–4, OpenRA
+TD's 1–5, Combined Arms' 1–**30**, Cameo's 1–**100**, so a 2 sitting low in one support lands at
+1.67 in another. Measured: of the 209 actors with a burst target, **163 have unanimous source
+agreement** and projection contradicted it (`cabal_plasmaturret` all sources 5 → projected 2.21;
+`forgotten_mlrs` all 8 → 5.08). `reference_targets.DIRECT_STATS` now takes burst as a pooled
+median of raw eligible values. Nothing applied — but every burst target before this is wrong.
+
 Full trace for #1 and #2, every stat and all four armaments:
 <https://claude.ai/code/artifact/67164cd7-20ae-4c62-b799-38912fa3de4c>
 
