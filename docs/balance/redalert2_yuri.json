@@ -1406,7 +1406,7 @@
         "damage": "8000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "366",
-        "tag": "Chemical_HeavyFlatCompatibility",
+        "tag": "Chemical_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -1418,7 +1418,6 @@
       "requires": "!rank-elite && yuri_upgrade_corrosiveammo",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Compatibility_Chemical_HeavyFlat",
        "^Warhead_Chemical_Heavy",
        "^Projectile_Chem_Heavy",
        "^Effect_Chem_Heavy",
@@ -1439,7 +1438,7 @@
         "damage": "8000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "366",
-        "tag": "Chemical_HeavyFlatCompatibility",
+        "tag": "Chemical_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -1500,7 +1499,7 @@
         "damage": "8000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "366",
-        "tag": "Chemical_HeavyFlatCompatibility",
+        "tag": "Chemical_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -1512,7 +1511,6 @@
       "requires": "!rank-elite && yuri_upgrade_corrosiveammo",
       "slot": "Armament@GARRISONEDUpgrade",
       "versus_templates": [
-       "^Compatibility_Chemical_HeavyFlat",
        "^Warhead_Chemical_Heavy",
        "^Projectile_Chem_Heavy",
        "^Effect_Chem_Heavy",
@@ -1534,7 +1532,7 @@
         "damage": "8000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "366",
-        "tag": "Chemical_HeavyFlatCompatibility",
+        "tag": "Chemical_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -1806,7 +1804,7 @@
         "damage": "13600",
         "falloff": "100, 0",
         "spread": "32",
-        "tag": "Laser_LightFlatCompatibility",
+        "tag": "Laser_Light",
         "type": "AreaDamage"
        },
        {
@@ -1846,18 +1844,19 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4750",
       "reloaddelay": "11",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Laser_LightFlat",
+       "^Warhead_Laser_Light",
        "^RailgunWeapon",
        "^LaserWeapon",
        "ra2roktgun"
       ],
       "warheads": [
+       "^Warhead_Laser_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2CosmonautLaser",
@@ -2440,7 +2439,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "Sniper_LightFlatCompatibility",
+        "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
@@ -2459,20 +2458,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9999",
       "reloaddelay": "74",
       "requires": "!rank-elite && !yuri_upgrade_meltingvirus",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Sniper_LightFlat",
+       "^Warhead_Sniper_Light",
        "^HeavyChemicalWeapon",
        "^SniperWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Sniper_Light"
+      ],
       "weapon": "RA2Virusgun",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -2487,7 +2488,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "Sniper_LightFlatCompatibility",
+        "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
@@ -2506,7 +2507,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "9999",
       "reloaddelay": "74",
@@ -2519,7 +2520,8 @@
        "RA2Virusgun"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium"
+       "^Warhead_Flak_Medium",
+       "^Warhead_Sniper_Light"
       ],
       "weapon": "RA2Virusgun2",
       "weapon_class_source": "template"
@@ -2544,7 +2546,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "Sniper_LightFlatCompatibility",
+        "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
@@ -2563,7 +2565,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9999",
       "reloaddelay": "74",
@@ -2577,10 +2579,11 @@
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium",
-       "^Warhead_Flak_Medium"
+       "^Warhead_Flak_Medium",
+       "^Warhead_Sniper_Light"
       ],
       "weapon": "RA2Virusgun3",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
@@ -2602,49 +2605,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "Sniper_LightFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "HeavyChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "SniperWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": true,
-      "range": "11111",
-      "reloaddelay": "74",
-      "requires": "rank-elite",
-      "slot": "Armament@ELITE",
-      "versus_templates": [
-       "RA2Virusgun3"
-      ],
-      "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_Flak_Medium"
-      ],
-      "weapon": "RA2Virusgun_elite",
-      "weapon_class_source": "template"
-     },
-     {
-      "armament_name": "garrisoned",
-      "damage_warheads": [
-       {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Sniper_LightFlatCompatibility",
+        "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
@@ -2664,35 +2625,30 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "pricing": false,
-      "range": "9999",
+      "pricing": true,
+      "range": "11111",
       "reloaddelay": "74",
-      "requires": "!rank-elite && !yuri_upgrade_meltingvirus",
-      "slot": "Armament@GARRISONED",
+      "requires": "rank-elite",
+      "slot": "Armament@ELITE",
       "versus_templates": [
-       "^Compatibility_Sniper_LightFlat",
-       "^HeavyChemicalWeapon",
-       "^SniperWeapon"
+       "RA2Virusgun3"
       ],
-      "warheads": [],
-      "weapon": "RA2Virusgun",
-      "weapon_class_source": "none"
+      "warheads": [
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_Flak_Medium",
+       "^Warhead_Sniper_Light"
+      ],
+      "weapon": "RA2Virusgun_elite",
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "Sniper_LightFlatCompatibility",
+        "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
@@ -2711,7 +2667,57 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.75,
+      "pricing": false,
+      "range": "9999",
+      "reloaddelay": "74",
+      "requires": "!rank-elite && !yuri_upgrade_meltingvirus",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Warhead_Sniper_Light",
+       "^HeavyChemicalWeapon",
+       "^SniperWeapon"
+      ],
+      "warheads": [
+       "^Warhead_Sniper_Light"
+      ],
+      "weapon": "RA2Virusgun",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "12000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "Flak_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "Sniper_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "6",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "6",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "9999",
       "reloaddelay": "74",
@@ -2724,7 +2730,8 @@
        "RA2Virusgun"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium"
+       "^Warhead_Flak_Medium",
+       "^Warhead_Sniper_Light"
       ],
       "weapon": "RA2Virusgun2",
       "weapon_class_source": "template"
@@ -2750,7 +2757,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "Sniper_LightFlatCompatibility",
+        "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
@@ -2769,7 +2776,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "9999",
       "reloaddelay": "74",
@@ -2783,10 +2790,11 @@
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium",
-       "^Warhead_Flak_Medium"
+       "^Warhead_Flak_Medium",
+       "^Warhead_Sniper_Light"
       ],
       "weapon": "RA2Virusgun3",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -2809,7 +2817,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "Sniper_LightFlatCompatibility",
+        "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
@@ -2828,7 +2836,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "11111",
       "reloaddelay": "74",
@@ -2839,10 +2847,11 @@
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium",
-       "^Warhead_Flak_Medium"
+       "^Warhead_Flak_Medium",
+       "^Warhead_Sniper_Light"
       ],
       "weapon": "RA2Virusgun_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -4442,7 +4451,7 @@
         "damage": "18000",
         "falloff": "100, 82, 61, 38, 0",
         "spread": "90",
-        "tag": "CannonChem_MediumFlatCompatibility",
+        "tag": "CannonChem_Medium",
         "type": "AreaDamage"
        },
        {
@@ -4510,14 +4519,14 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "105",
       "requires": "yuri_doctrine_lashertoxicgasshells && !rank-elite",
       "slot": "Armament@Toxic",
       "versus_templates": [
-       "^Compatibility_CannonChem_MediumFlat",
+       "^Warhead_CannonChem_Medium",
        "^Grenade",
        "^ShrapnelWeapon",
        "^HeavyBomb",
@@ -4528,9 +4537,11 @@
        "^MediumCannon",
        "^HeavyCannon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonChem_Medium"
+      ],
       "weapon": "RA2LasherToxicMortar",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -4539,7 +4550,7 @@
         "damage": "30000",
         "falloff": "100, 82, 61, 38, 0",
         "spread": "90",
-        "tag": "CannonChem_MediumFlatCompatibility",
+        "tag": "CannonChem_Medium",
         "type": "AreaDamage"
        },
        {
@@ -4635,7 +4646,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "105",
@@ -4644,9 +4655,11 @@
       "versus_templates": [
        "RA2LasherToxicMortar"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonChem_Medium"
+      ],
       "weapon": "RA2LasherToxicMortar_elite",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",

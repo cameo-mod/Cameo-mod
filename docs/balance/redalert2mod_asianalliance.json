@@ -777,7 +777,7 @@
         "damage": "4000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "366",
-        "tag": "Chemical_HeavyFlatCompatibility",
+        "tag": "Chemical_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -788,7 +788,6 @@
       "reloaddelay": "8",
       "slot": "Armament@Secondary",
       "versus_templates": [
-       "^Compatibility_Chemical_HeavyFlat",
        "^Warhead_Chemical_Heavy",
        "^RA2MediumCannon"
       ],
@@ -2239,7 +2238,6 @@
       "reloaddelay": "90",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_MissileAP_Medium",
        "AsianMLRS",
        "^Effect_Explosion_Large_RA2"
       ],
@@ -2439,7 +2437,7 @@
         "damage": "8000",
         "falloff": "100, 51, 0",
         "spread": "35",
-        "tag": "MissileQuantum_MediumFlatCompatibility",
+        "tag": "MissileQuantum_Medium",
         "type": "AreaDamage"
        },
        {
@@ -2493,10 +2491,11 @@
       "requires": "asianalliance_upgrade_celestialpower",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Compatibility_MissileQuantum_MediumFlat",
+       "^Warhead_MissileQuantum_Medium",
        "AsianPunisherAG"
       ],
       "warheads": [
+       "^Warhead_MissileQuantum_Medium",
        "^Warhead_MissileHE_Medium"
       ],
       "weapon": "AsianPunisherAG_EMP",
@@ -6603,7 +6602,7 @@
         "damage": "8000",
         "falloff": "100, 51, 0",
         "spread": "35",
-        "tag": "MissileQuantum_MediumFlatCompatibility",
+        "tag": "MissileQuantum_Medium",
         "type": "AreaDamage"
        },
        {
@@ -6650,19 +6649,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7168",
       "reloaddelay": "22",
       "requires": "asianalliance_upgrade_celestialpower",
       "slot": "Armament@UpgradeAA",
       "versus_templates": [
-       "^Compatibility_MissileQuantum_MediumFlat",
+       "^Warhead_MissileQuantum_Medium",
        "AsianQuasarBoat_AA"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileQuantum_Medium"
+      ],
       "weapon": "AsianQuasarBoat_EMP_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -8859,7 +8860,7 @@
         "damage": "8000",
         "falloff": "100, 51, 0",
         "spread": "35",
-        "tag": "MissileQuantum_MediumFlatCompatibility",
+        "tag": "MissileQuantum_Medium",
         "type": "AreaDamage"
        },
        {
@@ -8906,19 +8907,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "33",
       "requires": "asianalliance_upgrade_celestialpower",
       "slot": "Armament@UpgradeAA",
       "versus_templates": [
-       "^Compatibility_MissileQuantum_MediumFlat",
+       "^Warhead_MissileQuantum_Medium",
        "AsianQuasar_AA"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileQuantum_Medium"
+      ],
       "weapon": "AsianQuasar_EMP_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -9154,7 +9157,7 @@
        "^HeavyMissile",
        "^FlakWeapon",
        "^RA2Grenade",
-       "^RA2MediumMissile"
+       "^AsianRA2MediumMissile"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium",

@@ -1389,13 +1389,11 @@
       "reloaddelay": "32",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_MissileHE_Medium",
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
        "^Effect_Flak_Medium"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "FlakbusAA",
@@ -3055,13 +3053,11 @@
       "slot": "Armament@gp25",
       "versus_templates": [
        "^Warhead_Demolition_Light",
-       "^Warhead_Flame_Light",
        "^Projectile_Grenade_Light",
        "^Effect_Flame_Light"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Flame_Light"
+       "^Warhead_Demolition_Light"
       ],
       "weapon": "tkm_trooper_gp25",
       "weapon_class_source": "template"
@@ -3086,13 +3082,11 @@
       "slot": "Armament@GARRISONEDM203",
       "versus_templates": [
        "^Warhead_Demolition_Light",
-       "^Warhead_Flame_Light",
        "^Projectile_Grenade_Light",
        "^Effect_Flame_Light"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Flame_Light"
+       "^Warhead_Demolition_Light"
       ],
       "weapon": "tkm_trooper_gp25",
       "weapon_class_source": "template"
@@ -4982,28 +4976,29 @@
         "damage": "80000",
         "falloff": "100, 60, 27, 0",
         "spread": "53",
-        "tag": "MissileCryo_HeavyFlatCompatibility",
+        "tag": "MissileCryo_Heavy",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6464",
       "reloaddelay": "129",
       "requires": "tkm_upgrade_cryorocketsupgrade",
       "slot": "Armament@PRIMARYNATO",
       "versus_templates": [
-       "^Compatibility_MissileCryo_HeavyFlat",
+       "^Warhead_MissileCryo_Heavy",
        "SandmarineTusk",
        "^CryoMissileProjectile"
       ],
       "warheads": [
+       "^Warhead_MissileCryo_Heavy",
        "^Warhead_MissileHE_Heavy",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "SandmarineTuskCryo",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "3",
@@ -5013,28 +5008,29 @@
         "damage": "80000",
         "falloff": "100, 60, 27, 0",
         "spread": "53",
-        "tag": "MissileCryo_HeavyFlatCompatibility",
+        "tag": "MissileCryo_Heavy",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6464",
       "reloaddelay": "129",
       "requires": "tkm_upgrade_cryorocketsupgrade",
       "slot": "Armament@SECONDARYNATO",
       "versus_templates": [
-       "^Compatibility_MissileCryo_HeavyFlat",
+       "^Warhead_MissileCryo_Heavy",
        "SandmarineTusk",
        "^CryoMissileProjectile"
       ],
       "warheads": [
+       "^Warhead_MissileCryo_Heavy",
        "^Warhead_MissileHE_Heavy",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "SandmarineTuskCryo",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "8",
@@ -6069,28 +6065,29 @@
         "damage": "80000",
         "falloff": "100, 60, 27, 0",
         "spread": "53",
-        "tag": "MissileCryo_HeavyFlatCompatibility",
+        "tag": "MissileCryo_Heavy",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6464",
       "reloaddelay": "129",
       "requires": "tkm_upgrade_cryorocketsupgrade",
       "slot": "Armament@PRIMARYNATO",
       "versus_templates": [
-       "^Compatibility_MissileCryo_HeavyFlat",
+       "^Warhead_MissileCryo_Heavy",
        "SandmarineTusk",
        "^CryoMissileProjectile"
       ],
       "warheads": [
+       "^Warhead_MissileCryo_Heavy",
        "^Warhead_MissileHE_Heavy",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "SandmarineTuskCryo",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "3",
@@ -6100,28 +6097,29 @@
         "damage": "80000",
         "falloff": "100, 60, 27, 0",
         "spread": "53",
-        "tag": "MissileCryo_HeavyFlatCompatibility",
+        "tag": "MissileCryo_Heavy",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6464",
       "reloaddelay": "129",
       "requires": "tkm_upgrade_cryorocketsupgrade",
       "slot": "Armament@SECONDARYNATO",
       "versus_templates": [
-       "^Compatibility_MissileCryo_HeavyFlat",
+       "^Warhead_MissileCryo_Heavy",
        "SandmarineTusk",
        "^CryoMissileProjectile"
       ],
       "warheads": [
+       "^Warhead_MissileCryo_Heavy",
        "^Warhead_MissileHE_Heavy",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "SandmarineTuskCryo",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "8",

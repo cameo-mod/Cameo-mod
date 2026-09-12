@@ -68,7 +68,7 @@
         "damage": "45000",
         "falloff": "100, 52, 0",
         "spread": "47",
-        "tag": "MissileTesla_MediumFlatCompatibility",
+        "tag": "MissileTesla_Medium",
         "type": "AreaDamage"
        },
        {
@@ -101,21 +101,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4444",
       "reloaddelay": "100",
       "slot": "Armament@VISIBLE",
       "versus_templates": [
-       "^Compatibility_MissileTesla_MediumFlat",
+       "^Warhead_MissileTesla_Medium",
        "^LightMissile",
        "^MediumFlameWeapon",
        "^HeavyBomb",
        "^TeslaChargedWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileTesla_Medium"
+      ],
       "weapon": "wc2gryphonFireVisible",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4774,7 +4776,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "minrange": "2890",
       "pricing": true,
       "range": "14450",
@@ -4782,13 +4784,11 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Demolition_Heavy",
-       "^Warhead_Concussion_Medium",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Heavy"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Concussion_Medium"
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "wc2ballistaFire",
       "weapon_class_source": "template"

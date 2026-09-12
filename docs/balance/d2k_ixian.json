@@ -440,7 +440,7 @@
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "48",
-        "tag": "Laser_MediumFlatCompatibility",
+        "tag": "Laser_Medium",
         "type": "AreaDamage"
        },
        {
@@ -466,20 +466,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "50",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Laser_MediumFlat",
+       "^Warhead_Laser_Medium",
        "^TeslaWeapon",
        "^HeavyFlameWeapon",
        "^RailgunWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Medium"
+      ],
       "weapon": "ixian_farasha",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
@@ -490,7 +492,7 @@
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "48",
-        "tag": "Laser_MediumFlatCompatibility",
+        "tag": "Laser_Medium",
         "type": "AreaDamage"
        },
        {
@@ -516,7 +518,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "50",
@@ -524,9 +526,11 @@
       "versus_templates": [
        "ixian_farasha"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Medium"
+      ],
       "weapon": "d2k_farasha_aa",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4348,7 +4352,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "40",
@@ -4357,18 +4361,16 @@
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
-       "^Warhead_CannonAP_Light",
        "^Projectile_Shell_Light",
        "^Effect_CannonAP_Light",
        "^D2K_Cannon"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_CannonAP_Light",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "HeavyIxianCombatTankCannon",
-      "weapon_class_source": "allowlist_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4931,7 +4933,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5555",
       "reloaddelay": "35",
@@ -4940,18 +4942,16 @@
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
-       "^Warhead_CannonAP_Light",
        "^Projectile_Shell_Light",
        "^Effect_CannonAP_Light",
        "^D2K_Cannon"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_CannonAP_Light",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "IxianCombatTankCannon",
-      "weapon_class_source": "allowlist_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

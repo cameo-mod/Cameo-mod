@@ -266,7 +266,7 @@
         "damage": "72000",
         "falloff": "100, 0",
         "spread": "88",
-        "tag": "Arrow_MediumFlatCompatibility",
+        "tag": "Arrow_Medium",
         "type": "AreaDamage"
        },
        {
@@ -285,24 +285,25 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "3053",
       "reloaddelay": "128",
       "requires": "japan_upgrade_energizedarrows",
       "slot": "Armament@MissilesUpgrade",
       "versus_templates": [
-       "^Compatibility_Arrow_MediumFlat",
+       "^Warhead_Arrow_Medium",
        "^MediumFlameWeapon",
        "^TeslaWeapon",
        "SkyHawkArrows"
       ],
       "warheads": [
+       "^Warhead_Arrow_Medium",
        "^Warhead_MissileHE_Medium",
        "^Warhead_Arrow_Light"
       ],
       "weapon": "SkyHawkArrowsEnergized",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
@@ -566,7 +567,7 @@
         "damage": "36000",
         "falloff": "100, 0",
         "spread": "88",
-        "tag": "Arrow_MediumFlatCompatibility",
+        "tag": "Arrow_Medium",
         "type": "AreaDamage"
        },
        {
@@ -585,7 +586,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "minrange": "1325",
       "pricing": true,
       "range": "6615",
@@ -596,11 +597,12 @@
        "SkyHawkArrowsEnergized"
       ],
       "warheads": [
+       "^Warhead_Arrow_Medium",
        "^Warhead_MissileHE_Medium",
        "^Warhead_Arrow_Light"
       ],
       "weapon": "ZeroFighterArrowsEnergized",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "12",
@@ -1358,7 +1360,7 @@
         "damage": "45000",
         "falloff": "100, 0",
         "spread": "88",
-        "tag": "Arrow_MediumFlatCompatibility",
+        "tag": "Arrow_Medium",
         "type": "AreaDamage"
        },
        {
@@ -1391,7 +1393,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1845",
       "pricing": true,
       "range": "9214",
@@ -1401,9 +1403,11 @@
       "versus_templates": [
        "BallistaMultiShotEnergized"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Arrow_Medium"
+      ],
       "weapon": "BallistaTowerMultiShotEnergized",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -1602,7 +1606,7 @@
         "damage": "12000",
         "falloff": "100, 81, 61, 38, 0",
         "spread": "76",
-        "tag": "Waveforce_HeavyFlatCompatibility",
+        "tag": "Waveforce_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -1621,12 +1625,13 @@
       "requires": "japan_upgrade_waveforcebullets",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Compatibility_Waveforce_HeavyFlat",
+       "^Warhead_Waveforce_Heavy",
        "^WaveforceBulletWarhead",
        "JHighV",
        "^WaveforceBulletProjectile"
       ],
       "warheads": [
+       "^Warhead_Waveforce_Heavy",
        "^Warhead_Railgun_Heavy",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
@@ -4581,7 +4586,7 @@
         "damage": "45000",
         "falloff": "100, 0",
         "spread": "88",
-        "tag": "Arrow_MediumFlatCompatibility",
+        "tag": "Arrow_Medium",
         "type": "AreaDamage"
        },
        {
@@ -4614,7 +4619,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "2705",
       "pricing": true,
       "range": "13515",
@@ -4622,15 +4627,17 @@
       "requires": "japan_upgrade_energizedarrows",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Compatibility_Arrow_MediumFlat",
+       "^Warhead_Arrow_Medium",
        "^TeslaWeapon",
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
        "^ArrowWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Arrow_Medium"
+      ],
       "weapon": "BallistaMultiShotEnergized",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5746,7 +5753,7 @@
         "damage": "4000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
-        "tag": "Flame_HeavyFlatCompatibility",
+        "tag": "Flame_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -5758,15 +5765,14 @@
       "requires": "japan_upgrade_advancedplasmaweapons",
       "slot": "Armament@UpgradePRIMARYFlame",
       "versus_templates": [
-       "^Compatibility_Flame_HeavyFlat",
-       "^Warhead_Chemical_Heavy",
        "^Warhead_Flame_Heavy",
+       "^Warhead_Chemical_Heavy",
        "^Projectile_Chem_Heavy",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Chemical_Heavy",
-       "^Warhead_Flame_Heavy"
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Chemical_Heavy"
       ],
       "weapon": "OIPlasmaFlamer",
       "weapon_class_source": "template"
@@ -5780,7 +5786,7 @@
         "damage": "4000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
-        "tag": "Flame_HeavyFlatCompatibility",
+        "tag": "Flame_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -5792,15 +5798,14 @@
       "requires": "japan_upgrade_advancedplasmaweapons",
       "slot": "Armament@UpgradeSECONDARYFlame",
       "versus_templates": [
-       "^Compatibility_Flame_HeavyFlat",
-       "^Warhead_Chemical_Heavy",
        "^Warhead_Flame_Heavy",
+       "^Warhead_Chemical_Heavy",
        "^Projectile_Chem_Heavy",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Chemical_Heavy",
-       "^Warhead_Flame_Heavy"
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Chemical_Heavy"
       ],
       "weapon": "OIPlasmaFlamer",
       "weapon_class_source": "template"
@@ -5908,7 +5913,7 @@
         "damage": "60000",
         "falloff": "100, 89, 75, 55, 0",
         "spread": "191",
-        "tag": "Plasma_LightFlatCompatibility",
+        "tag": "Plasma_Light",
         "type": "AreaDamage"
        },
        {
@@ -5934,12 +5939,13 @@
       "requires": "japan_upgrade_advancedplasmaweapons",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Compatibility_Plasma_LightFlat",
+       "^Warhead_Plasma_Light",
        "^HeavyBomb",
        "^ShrapnelWeapon",
        "BuggyGrenade"
       ],
       "warheads": [
+       "^Warhead_Plasma_Light",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "BuggyPlasmaGrenade",
@@ -6046,7 +6052,7 @@
         "damage": "4000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
-        "tag": "Flame_HeavyFlatCompatibility",
+        "tag": "Flame_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -6058,15 +6064,14 @@
       "requires": "japan_upgrade_advancedplasmaweapons",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Compatibility_Flame_HeavyFlat",
-       "^Warhead_Chemical_Heavy",
        "^Warhead_Flame_Heavy",
+       "^Warhead_Chemical_Heavy",
        "^Projectile_Chem_Heavy",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Chemical_Heavy",
-       "^Warhead_Flame_Heavy"
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Chemical_Heavy"
       ],
       "weapon": "HeavyPlasmaFlamer",
       "weapon_class_source": "template"
@@ -7367,7 +7372,7 @@
         "damage": "4000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
-        "tag": "Flame_HeavyFlatCompatibility",
+        "tag": "Flame_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -7379,15 +7384,14 @@
       "requires": "japan_upgrade_advancedplasmaweapons",
       "slot": "Armament@UpgradePRIMARYFlame",
       "versus_templates": [
-       "^Compatibility_Flame_HeavyFlat",
-       "^Warhead_Chemical_Heavy",
        "^Warhead_Flame_Heavy",
+       "^Warhead_Chemical_Heavy",
        "^Projectile_Chem_Heavy",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Chemical_Heavy",
-       "^Warhead_Flame_Heavy"
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Chemical_Heavy"
       ],
       "weapon": "OIPlasmaFlamer",
       "weapon_class_source": "template"
@@ -7401,7 +7405,7 @@
         "damage": "4000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
-        "tag": "Flame_HeavyFlatCompatibility",
+        "tag": "Flame_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -7413,15 +7417,14 @@
       "requires": "japan_upgrade_advancedplasmaweapons",
       "slot": "Armament@UpgradeSECONDARYFlame",
       "versus_templates": [
-       "^Compatibility_Flame_HeavyFlat",
-       "^Warhead_Chemical_Heavy",
        "^Warhead_Flame_Heavy",
+       "^Warhead_Chemical_Heavy",
        "^Projectile_Chem_Heavy",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Chemical_Heavy",
-       "^Warhead_Flame_Heavy"
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Chemical_Heavy"
       ],
       "weapon": "OIPlasmaFlamer",
       "weapon_class_source": "template"
@@ -7527,7 +7530,7 @@
         "damage": "4000",
         "falloff": "100, 81, 61, 38, 0",
         "spread": "76",
-        "tag": "Waveforce_HeavyFlatCompatibility",
+        "tag": "Waveforce_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -7539,24 +7542,25 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5004",
       "reloaddelay": "15",
       "requires": "japan_upgrade_waveforcebullets",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Compatibility_Waveforce_HeavyFlat",
+       "^Warhead_Waveforce_Heavy",
        "^WaveforceBulletWarhead",
        "NambuMG",
        "^WaveforceBulletProjectile"
       ],
       "warheads": [
+       "^Warhead_Waveforce_Heavy",
        "^Warhead_Railgun_Heavy",
        "^Warhead_Bullet_Light"
       ],
       "weapon": "NambuMGWaveforce",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -7988,7 +7992,7 @@
         "damage": "25000",
         "falloff": "100, 81, 61, 38, 0",
         "spread": "76",
-        "tag": "Waveforce_HeavyFlatCompatibility",
+        "tag": "Waveforce_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -8007,20 +8011,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9343",
       "reloaddelay": "120",
       "requires": "japan_upgrade_advancedplasmaweapons",
       "slot": "Armament@Upgrade2",
       "versus_templates": [
-       "^Compatibility_Waveforce_HeavyFlat",
+       "^Warhead_Waveforce_Heavy",
        "^TeslaWeapon",
        "^HeavyCannon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Waveforce_Heavy"
+      ],
       "weapon": "WaveforceCannonDistortedBeam1",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [

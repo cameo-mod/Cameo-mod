@@ -402,10 +402,11 @@
        "^FlakWeapon",
        "^ArrowWeapon",
        "^RA2LightMissile",
-       "^Compatibility_MissileAP_Light_WallExcluded"
+       "^Warhead_MissileAP_Light_WallExcluded"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light"
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileAP_Light_WallExcluded"
       ],
       "weapon": "LunarNaxiDroneMissile",
       "weapon_class_source": "template"
@@ -7588,7 +7589,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "2470",
       "pricing": true,
       "range": "12345",
@@ -7599,17 +7600,15 @@
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
-       "^Warhead_Concussion_Medium",
        "^Effect_Concussion_Medium",
        "^RA2Grenade"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "NaxGrilleArty",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
@@ -7624,7 +7623,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "2470",
       "pricing": true,
       "range": "13333",
@@ -7637,11 +7636,10 @@
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "NaxGrilleArty_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -7685,7 +7683,6 @@
       "warheads": [
        "^Warhead_Tesla_Heavy",
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "Lunar_GreenGrilleArty",
@@ -7735,7 +7732,6 @@
       "warheads": [
        "^Warhead_Tesla_Heavy",
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "Lunar_GreenGrilleArty_elite",
