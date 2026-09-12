@@ -1004,13 +1004,15 @@ ra1_allies_alliedheavyaatank:
 	Defaults:
 		Scale: 1
 	idle:
-		Filename: ra1_allies_alliedheavyaatank_heavyantiairtankchassis.png
-		Facings: 64
+		Filename: ra1_allies_alliedheavyaatank_gepardchassis.png
+		Facings: 32
+		InterpolatedFacings: 64
 		#Offset: 0,0,-2048
 		Scale: 1
 	turret:
-		Filename: ra1_allies_alliedheavyaatank_heavyantiairtankturret.png
-		Facings: 64
+		Filename: ra1_allies_alliedheavyaatank_gepardturret.png
+		Facings: 32
+		InterpolatedFacings: 64
 		#Offset: 0,0,-4098
 		Scale: 1
 	muzzle:
