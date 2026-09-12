@@ -9,8 +9,8 @@ both runners when those files are present:
 python -m pytest -q tools/tests
 ```
 
-The pytest-style files currently include `test_bot_insurance_model`,
-`test_generate_chrome_scales`, and `test_band_law`.
+This bot-focused branch includes the pytest-style files `test_bot_insurance_model` and
+`test_audit_bot_insurance`; other branches may add further pytest modules.
 
 The stdlib suite remains dependency-free for the older tests. Run it from the repo root:
 Run from the repo root:
