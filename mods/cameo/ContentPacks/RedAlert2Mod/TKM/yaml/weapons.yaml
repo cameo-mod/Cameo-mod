@@ -1236,7 +1236,6 @@ tkmm16ap:
 		Damage: 2000
 tkm_trooper_gp25:
 	Inherits: ^Warhead_Demolition_Light
-	Inherits@2: ^Warhead_Flame_Light
 	Inherits@3: ^Projectile_Grenade_Light
 	Inherits@4: ^Effect_Flame_Light
 	ReloadDelay: 80
@@ -1254,7 +1253,6 @@ tkm_trooper_gp25:
 		Damage: 12000
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 50
-	-Warhead@Flame_Light:
 tkmstrykerfirerockets:
 	Inherits: ^Warhead_MissileAP_Medium
 	Inherits@2: ^Warhead_Flame_Medium
@@ -1497,7 +1495,6 @@ TKMDroneExplosion:
 		ImpactSounds: bazook1.aud
 
 FlakbusAA:
-	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium

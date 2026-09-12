@@ -2560,7 +2560,6 @@ ra1_soviets_migattackbomber_thermobaricmaverick:
 	-Warhead@Thermobaric_Heavy:
 ra1_soviets_su57attackbomber_missile:
 	Inherits@missilerole: ^Warhead_MissileAP_Heavy
-	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileHE_Heavy
 	ReloadDelay: 50
@@ -2584,7 +2583,6 @@ ra1_soviets_su57attackbomber_missile:
 		ContrailStartColor: 996633
 		TrailInterval: 1
 		TrailDelay: 1
-	-Warhead@MissileHE_Heavy:
 	Warhead@MissileAP_Heavy: AreaDamage
 		PercentageDenominator: 10000
 		ValidRelationships: Ally, Neutral, Enemy
@@ -3878,8 +3876,6 @@ ra1_soviets_monstertank_120mm_cannon_inferno:
 ra1_soviets_monstertank_missile:
 	Inherits@missilerole: ^Warhead_MissileAP_Heavy
 	Inherits@finalmain: ^Compatibility_MissileHE_HeavyFlat
-	Inherits@wh: ^Warhead_Demolition_Heavy
-	Inherits@wh2: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileHE_Heavy
 	Report: missile6.aud
@@ -4810,7 +4806,6 @@ ra1_soviets_cyberdog_bite:
 
 ra1_soviets_samsite_missile_AA:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
-	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
 	Inherits: ^FlakWeapon
 	Inherits@2: ^HeavyMissile
 	Inherits@3: ^MediumMissile
@@ -4850,7 +4845,6 @@ ra1_soviets_samsite_missile_AA:
 	-Warhead@HeavyMissile:
 	-Warhead@MediumMissile:
 	-Warhead@LightMissile:
-	-Warhead@MissileHE_Heavy:
 	Warhead@MissileAA_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50

@@ -2,7 +2,6 @@ IxianCombatTankCannon:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^Warhead_CannonAP_Light
 	Inherits@5: ^Projectile_Shell_Light
 	Inherits@6: ^Effect_CannonAP_Light
 	Inherits@7: ^D2K_Cannon
@@ -10,7 +9,6 @@ IxianCombatTankCannon:
 	ReloadDelay: 35
 	Projectile: Bullet
 		Speed: 555
-	-Warhead@CannonAP_Light:
 	Warhead@CannonHE_Heavy:
 		Damage: 12000
 	-Warhead@CannonHE_Medium:
@@ -18,7 +16,6 @@ HeavyIxianCombatTankCannon:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^Warhead_CannonAP_Light
 	Inherits@5: ^Projectile_Shell_Light
 	Inherits@6: ^Effect_CannonAP_Light
 	Inherits@7: ^D2K_Cannon
@@ -26,7 +23,6 @@ HeavyIxianCombatTankCannon:
 	ReloadDelay: 40
 	Projectile: Bullet
 		Speed: 600
-	-Warhead@CannonAP_Light:
 	Warhead@CannonHE_Heavy:
 		Damage: 18000
 	-Warhead@CannonHE_Medium:

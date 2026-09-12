@@ -2912,7 +2912,6 @@ ASDFKamikazeTargeting:
 
 ASDFKamikazeExplosion:
 	Inherits@wh: ^Warhead_Demolition_Heavy
-	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits@3: ^Projectile_Grenade_Light
 	Report: M203.aud
@@ -2922,7 +2921,6 @@ ASDFKamikazeExplosion:
 		Explosions: ivan_explosion
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexpcraa.wav
-	-Warhead@Concussion_Medium:
 
 AsianSniper:
 	Inherits: ^Warhead_Bullet_Heavy

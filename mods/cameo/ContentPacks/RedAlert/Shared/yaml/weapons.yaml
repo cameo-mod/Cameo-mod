@@ -140,7 +140,6 @@ VengeanceActivator3:
 		ValidRelationships: Ally
 
 ra1_soviets_molotovconscript_conscriptmolotov:
-	Inherits: ^Warhead_Demolition_Light
 	Inherits@2: ^Warhead_Flame_Light
 	Inherits@3: ^Projectile_Grenade_Light
 	Inherits@4: ^Effect_Flame_Light
@@ -169,7 +168,6 @@ ra1_soviets_molotovconscript_conscriptmolotov:
 		Palette: ra_temperat
 		Weapon: CHFlame
 		InvalidTargets: Water
-	-Warhead@Demolition_Light:
 
 ra1_soviets_molotovconscript_conscriptmolotovexplode:
 	Inherits@roleflat: ^Compatibility_Flame_LightFlat

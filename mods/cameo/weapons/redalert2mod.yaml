@@ -602,7 +602,6 @@ NaxGrilleArty:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@fxold: ^Effect_Concussion_Medium
 	Inherits@legacy: ^RA2Grenade
 	ReloadDelay: 111
@@ -621,7 +620,6 @@ NaxGrilleArty:
 		ContrailLength: 22
 	Warhead@CannonHE_Heavy:
 		Damage: 48000
-	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
 NaxGrilleArty_elite:
 	Inherits: NaxGrilleArty

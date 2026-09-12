@@ -987,7 +987,6 @@ RA2MirageGun:
 RA2HoverMissile:
 	Inherits@missilerole: ^Warhead_MissileHE_Light
 	Inherits@finalmain: ^Compatibility_MissileAP_LightFlat
-	Inherits: ^Warhead_Arrow_Light
 	Inherits@2: ^RA2LightMissile
 	Inherits@fx: ^Effect_Grey_Explosion_Small_RA2
 	Range: 5760
@@ -1092,7 +1091,6 @@ RA2HoverMissile_AA_elite:
 RA2ThunderboltMissile:
 	Inherits@missilerole: ^Warhead_MissileAP_Light
 	Inherits@roleflat: ^Compatibility_MissileHE_LightFlat
-	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
 	Report: bazook1.aud
@@ -1112,7 +1110,6 @@ RA2ThunderboltMissile:
 		Acceleration: 10
 		ContrailStartColor: EEEE00
 		ContrailEndColor: FFFFFF
-	-Warhead@MissileHE_Heavy:
 	-Warhead@MissileHE_LightFlatCompatibility:
 	Warhead@MissileAP_Light: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -1187,8 +1184,6 @@ RA2ThunderboltMissile_AA_elite:
 RA2MultiHoverMissile:
 	Inherits@missilerole: ^Warhead_MissileAP_Light
 	Inherits@finalmain: ^Compatibility_MissileHE_LightFlat
-	Inherits@wh: ^Warhead_CannonHE_Medium
-	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
 	Range: 6170
@@ -1207,8 +1202,6 @@ RA2MultiHoverMissile:
 		MaximumLaunchSpeed: 64
 		MinimumLaunchSpeed: 128
 		Acceleration: 16
-	-Warhead@CannonHE_Medium:
-	-Warhead@MissileHE_Light:
 	-Warhead@MissileHE_LightFlatCompatibility:
 	Warhead@MissileAP_Light: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -1298,7 +1291,6 @@ RA2MultiHoverMissile_AA_elite:
 RA2MultiThunderboltMissile:
 	Inherits@missilerole: ^Warhead_MissileAP_Light
 	Inherits@roleflat: ^Compatibility_MissileHE_LightFlat
-	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
 	Report: bazook1.aud
@@ -1318,7 +1310,6 @@ RA2MultiThunderboltMissile:
 		Acceleration: 10
 		ContrailStartColor: EEEE00
 		ContrailEndColor: FFFFFF
-	-Warhead@MissileHE_Heavy:
 	-Warhead@MissileHE_LightFlatCompatibility:
 	Warhead@MissileAP_Light: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy

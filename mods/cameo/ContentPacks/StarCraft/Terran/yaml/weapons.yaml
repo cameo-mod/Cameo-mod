@@ -234,7 +234,6 @@ CycloneRocketsLockOn:
 MarauderMissiles:
 	Inherits@missilerole: ^Warhead_MissileHE_Medium
 	Inherits@collapseflat: ^Compatibility_MissileAP_MediumFlat
-	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@4: ^TankDestroyerCannon
