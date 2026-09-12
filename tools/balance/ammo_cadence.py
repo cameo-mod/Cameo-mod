@@ -163,8 +163,8 @@ def simulate_depletion(ammo: int, ammo_usage: int, burst: int, reload_delay: int
             now += max(int(reload_delay), 1)
             position = 0
 
-    return dict(empty=False, sustained=True, shots=shots, elapsed=now,
-                final_ammo=current)
+    return dict(empty=False, sustained=False, simulation_limit=True, shots=shots,
+                elapsed=now, final_ammo=current)
 
 
 def regime(has_pool: bool, has_self_reload: bool, has_rearmable: bool = False) -> str:
@@ -200,6 +200,7 @@ def cadence(damage_per_shot: float, burst: int, reload_delay: int, burst_delays,
                                  reload_count, reload_delay_pool)
         shots, elapsed = sim["shots"], sim["elapsed"]
         out["sustained"] = sim["sustained"]
+        out["simulation_limit"] = sim.get("simulation_limit", False)
     else:
         shots = max(int(ammo) // max(int(ammo_usage), 1), 1)
         elapsed = elapsed_for_shots(shots, reload_delay, burst, burst_delays)
@@ -224,6 +225,12 @@ def cadence(damage_per_shot: float, burst: int, reload_delay: int, burst_delays,
     if kind == SELF_RELOADING and out["sustained"]:
         out["dps"] = weapon_dps
         out["sustain_factor"] = 1.0
+        return out
+
+    if kind == SELF_RELOADING and out.get("simulation_limit"):
+        out["dps"] = None
+        out["sustain_factor"] = None
+        out["cadence_status"] = "WITHHELD_SIMULATION_LIMIT"
         return out
 
     if kind in (AIRFIELD_REARM, FINITE_UNCLASSIFIED):
@@ -273,6 +280,11 @@ def _selftest() -> None:
     # A multi-delay burst uses each authored gap for a partial burst; it must not reuse the
     # first delay for the second gap.
     assert elapsed_for_shots(3, 100, 4, [1, 10, 2]) == 11
+
+    # A simulation-limit result is withheld rather than mislabeled as sustained fire.
+    r = cadence(100, 1, 1, None, ammo=3, ammo_usage=2, reload_count=2,
+                reload_delay_pool=100)
+    assert r["dps"] is None and r["cadence_status"] == "WITHHELD_SIMULATION_LIMIT"
 
     # regime 3: a total, never a rate
     r = cadence(4000, 1, 50, None, ammo=16, ammo_usage=1, rearmable=True)

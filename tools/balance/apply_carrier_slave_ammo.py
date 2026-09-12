@@ -166,9 +166,10 @@ def build_plan(rs):
                          f"\t\tPauseOnCondition: {law.preserved_pause(existing_pause, pool_condition, usage)}"))
                 else:
                     plan[local_arm.file][local_arm.line].append(
-                        ("ins", [f"\t\tPauseOnCondition: {expected_pause}"]))
+                        ("ins", [f"\t\tPauseOnCondition: {law.preserved_pause(existing_pause, pool_condition, usage)}"]))
             else:
-                add.extend([f"\t{a['key']}:", f"\t\tPauseOnCondition: {expected_pause}"])
+                add.extend([f"\t{a['key']}:",
+                            f"\t\tPauseOnCondition: {law.preserved_pause(existing_pause, pool_condition, usage)}"])
 
         # ---- the reload -------------------------------------------------- #
         reloads = [c for c in res.children if stem(c.key) in RELOAD_STEMS]
