@@ -1414,8 +1414,8 @@ DeviatorMissile_Artillery:
 		InvalidTargets: Air
 
 Wraith_ToxinMissiles:
-	Inherits@missilerole: ^Warhead_MissileAP_Heavy
 	Inherits: DeviatorMissile_Artillery
+	Inherits@missilerole: ^Warhead_MissileAP_Heavy
 	Range: 8370
 	ReloadDelay: 125
 	Burst: 4
