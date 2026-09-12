@@ -87,15 +87,48 @@ def pause_gate_sufficient(condition: str, usage: int, pause: str | None,
     return False
 
 
+def _split_top_level_or(expression: str) -> list[str]:
+    parts, start, depth, i = [], 0, 0, 0
+    while i < len(expression):
+        char = expression[i]
+        if char == "(":
+            depth += 1
+        elif char == ")":
+            depth -= 1
+        elif char == "|" and i + 1 < len(expression) and expression[i + 1] == "|" and depth == 0:
+            parts.append(expression[start:i])
+            i += 1
+            start = i + 1
+        i += 1
+    parts.append(expression[start:])
+    return parts
+
+
+def _strip_balanced_outer_parentheses(expression: str) -> str:
+    expression = expression.strip()
+    while expression.startswith("(") and expression.endswith(")"):
+        depth = 0
+        closes_at = None
+        for i, char in enumerate(expression):
+            if char == "(":
+                depth += 1
+            elif char == ")":
+                depth -= 1
+                if depth == 0:
+                    closes_at = i
+                    break
+        if closes_at != len(expression) - 1:
+            break
+        expression = expression[1:-1].strip()
+    return expression
+
+
 def _generated_or_term(expression: str | None, expected: str) -> bool:
     """Accept only an exact term or our top-level OR wrapper, never a substring."""
     if not expression:
         return False
-    for part in expression.split("||"):
-        part = part.strip()
-        while part.startswith("(") and part.endswith(")"):
-            part = part[1:-1].strip()
-        if part == expected:
+    for part in _split_top_level_or(expression):
+        if _strip_balanced_outer_parentheses(part) == expected:
             return True
     return False
 
@@ -105,7 +138,7 @@ def preserved_pause(existing: str | None, condition: str, usage: int) -> str:
     expected = minimum_ammo_pause(condition, usage)
     if not existing or existing == expected:
         return expected
-    if expected in existing:
+    if _generated_or_term(existing, expected):
         return existing
     return f"({existing}) || ({expected})"
 
@@ -288,7 +321,9 @@ def _self_test() -> int:
     assert pause_gate_sufficient("ammo", 10, "(reload_lock) || (ammo < 10)", None)
     assert not pause_gate_sufficient("ammo", 10, "lock && (ammo < 10)", None)
     assert not pause_gate_sufficient("ammo", 10, "!(ammo < 10)", None)
+    assert not pause_gate_sufficient("ammo", 10, "lock && (other || (ammo < 10) || third)", None)
     assert not pause_gate_sufficient("ammo", 1, "!ammo_other", None)
+    assert preserved_pause("lock && (ammo < 10)", "ammo", 10) == "(lock && (ammo < 10)) || (ammo < 10)"
     print("carrier_slave_ammo self-test: PASS (both of the ruling's worked examples)")
     return 0
 
