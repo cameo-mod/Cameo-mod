@@ -242,6 +242,9 @@ Player:
 	RangedGpsWatcher:
 	TeleportNetworkManager:
 		Type: nydus
+	# One bot-insurance state machine per player. Humans are ignored by the trait;
+	# the legacy construction-yard ladder remains removed from ^AIConyardCash.
+	DynamicBotInsurance:
 	GrantConditionOnPrerequisite@enable-secondaryinsurance:
 		Condition: nobase
 		Prerequisites: !conyard
