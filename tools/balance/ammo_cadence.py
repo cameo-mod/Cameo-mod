@@ -59,11 +59,11 @@ ENGINE FACTS, read from source rather than assumed (OpenRA checkout, not guessed
     lengthens the cycle. A single entry applies between every pair of shots; otherwise the list
     must be `Burst - 1` long (`Armament.cs` throws otherwise).
 
-⚠ `time_to_empty` DROPS THE TRAILING RELOAD, and that is the whole difference from the ledger.
-A pool holding exactly one burst never waits at all: the SSM launcher fires 2 rounds 25 ticks
-apart and is empty, so its per-sortie rate is `2 x damage / 25`, not `2 x damage / 250` -- a
-10x difference on one unit. Including the trailing reload would measure a cycle the unit never
-completes.
+⚠ `time_to_empty` DROPS THE TRAILING RELOAD, and includes any reload ticks that occur before
+the magazine empties. A pool holding exactly one burst never waits at all: the SSM launcher
+fires 2 rounds 25 ticks apart and is empty, so its per-sortie rate is `2 x damage / 25`, not
+`2 x damage / 250` -- a 10x difference on one unit. Including the trailing reload would measure
+a cycle the unit never completes.
 """
 from __future__ import annotations
 
@@ -99,6 +99,74 @@ def cycle_ticks(reload_delay: int, burst: int, burst_delays) -> int:
     return max(int(reload_delay) + int(within), 1)
 
 
+def _burst_gaps(burst: int, burst_delays) -> list[int]:
+    """Expand the engine's single-delay shorthand into per-shot gaps."""
+    if burst <= 1:
+        return []
+    bd = list(burst_delays) if burst_delays else [5]
+    if len(bd) == 1:
+        return [int(bd[0])] * (burst - 1)
+    if len(bd) != burst - 1:
+        raise ValueError(f"BurstDelays has {len(bd)} entries for burst {burst}")
+    return [int(x) for x in bd]
+
+
+def elapsed_for_shots(shots: int, reload_delay: int, burst: int, burst_delays) -> int:
+    """Elapsed firing ticks through the requested shot, without pool reloads."""
+    if shots <= 1:
+        return 0
+    gaps = _burst_gaps(burst, burst_delays)
+    completed, position = divmod(shots - 1, max(int(burst), 1))
+    return completed * cycle_ticks(reload_delay, burst, burst_delays) + sum(gaps[:position])
+
+
+def simulate_depletion(ammo: int, ammo_usage: int, burst: int, reload_delay: int,
+                       burst_delays, reload_count: int, reload_delay_pool: int,
+                       *, max_shots: int = 100000) -> dict:
+    """Walk shots and self-reload events until the pool empties or sustains fire."""
+    capacity = max(int(ammo), 0)
+    usage = max(int(ammo_usage or 1), 1)
+    burst = max(int(burst or 1), 1)
+    refill = max(int(reload_count or 0), 0)
+    pool_delay = max(int(reload_delay_pool or 50), 1)
+    gaps = _burst_gaps(burst, burst_delays)
+    current, now, next_reload = capacity, 0, None
+    position, shots = 0, 0
+
+    while shots < max_shots:
+        if next_reload is not None and next_reload <= now:
+            while next_reload is not None and next_reload <= now and current < capacity:
+                current = min(capacity, current + refill)
+                next_reload += pool_delay
+                if current >= capacity:
+                    current, next_reload = capacity, None
+
+        if current < usage:
+            if next_reload is None or refill <= 0:
+                return dict(empty=False, sustained=False, shots=shots, elapsed=now,
+                            final_ammo=current)
+            now = next_reload
+            continue
+
+        current -= usage
+        shots += 1
+        if current == 0:
+            return dict(empty=True, sustained=False, shots=shots, elapsed=now,
+                        final_ammo=0)
+        if current < capacity and next_reload is None:
+            next_reload = now + pool_delay
+
+        if position < burst - 1:
+            now += gaps[position]
+            position += 1
+        else:
+            now += max(int(reload_delay), 1)
+            position = 0
+
+    return dict(empty=False, sustained=True, shots=shots, elapsed=now,
+                final_ammo=current)
+
+
 def regime(has_pool: bool, has_self_reload: bool, has_rearmable: bool = False) -> str:
     if not has_pool:
         return NO_POOL
@@ -127,24 +195,18 @@ def cadence(damage_per_shot: float, burst: int, reload_delay: int, burst_delays,
     if kind == NO_POOL:
         return out
 
-    shots = max(int(ammo) // max(int(ammo_usage), 1), 1)
+    if kind == SELF_RELOADING:
+        sim = simulate_depletion(ammo, ammo_usage, burst, reload_delay, burst_delays,
+                                 reload_count, reload_delay_pool)
+        shots, elapsed = sim["shots"], sim["elapsed"]
+        out["sustained"] = sim["sustained"]
+    else:
+        shots = max(int(ammo) // max(int(ammo_usage), 1), 1)
+        elapsed = elapsed_for_shots(shots, reload_delay, burst, burst_delays)
+        out["sustained"] = False
     pool_damage = shots * damage_per_shot
     out["sortie_damage"] = pool_damage
     out["shots"] = shots
-    # ⛔ ELAPSED TIME IS EXACT, NOT `shots x cycle / burst`. The first cut averaged the reload
-    # across the burst and then subtracted one reload, which drove `time_to_empty` to its floor
-    # for any pool holding less than a full cycle -- `td_gdi_havoc` came out at a 0.0 s window
-    # and a 100x DPS. Shots INSIDE a burst are `burst_delay` apart; only the gap BETWEEN bursts
-    # costs a reload. Walking the real firing sequence for the (shots)th shot:
-    #     completed bursts before it   k   = (shots - 1) // burst
-    #     its position inside a burst  pos = (shots - 1) %  burst
-    #     elapsed = k * cycle + pos * burst_delay
-    # SSM launcher: 2 shots, burst 2, bd 25 -> k=0, pos=1 -> 25 ticks, not 250.
-    # A 12-shot burst-1 helicopter on a 20-tick reload -> k=11 -> 220 ticks.
-    bd = list(burst_delays) if burst_delays else [5]
-    within_gap = bd[0] if len(bd) == 1 else (bd[0] if bd else 5)
-    k, pos = (shots - 1) // burst, (shots - 1) % burst
-    elapsed = k * cyc + pos * within_gap
     out["seconds_at_full_rate"] = elapsed / 25.0
 
     # ⛔ ONE SHOT HAS NO RATE. A pool affording a single shot delivers its damage instantly:
@@ -158,6 +220,11 @@ def cadence(damage_per_shot: float, burst: int, reload_delay: int, burst_delays,
         out["sustain_factor"] = None
         return out
     time_to_empty = float(elapsed)
+
+    if kind == SELF_RELOADING and out["sustained"]:
+        out["dps"] = weapon_dps
+        out["sustain_factor"] = 1.0
+        return out
 
     if kind in (AIRFIELD_REARM, FINITE_UNCLASSIFIED):
         # Ruled: "reload delay means nothing there so we only compare the maximum damage per
@@ -197,11 +264,15 @@ def _selftest() -> None:
     # weapon rate 2/250 == ammo rate (1/125)/1 -> exactly sustainable
     assert abs(r["sustain_factor"] - 1.0) < 1e-9
 
-    # regime 2, a helicopter designed for ~5s of full-rate fire then half rate
+    # regime 2, a helicopter whose reload replenishes during depletion
     r = cadence(500, 1, 20, None, ammo=12, ammo_usage=1, reload_count=1, reload_delay_pool=40)
     assert r["regime"] == SELF_RELOADING
-    assert r["seconds_at_full_rate"] == (12 * 20 - 20) / 25.0
+    assert r["shots"] == 22 and r["seconds_at_full_rate"] == 420 / 25.0
     assert abs(r["sustain_factor"] - 0.5) < 1e-9            # (1/40) vs 1/20
+
+    # A multi-delay burst uses each authored gap for a partial burst; it must not reuse the
+    # first delay for the second gap.
+    assert elapsed_for_shots(3, 100, 4, [1, 10, 2]) == 11
 
     # regime 3: a total, never a rate
     r = cadence(4000, 1, 50, None, ammo=16, ammo_usage=1, rearmable=True)

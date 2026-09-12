@@ -133,23 +133,21 @@ def main() -> int:
                     global_gate = ammo_condition in {
                         token.strip() for token in attack_values.get("RequiresCondition", "").split(",")
                     }
-                    if not global_gate:
-                        pool_names = set(pool_values.get("Armaments", "primary, secondary").replace(" ", "").split(","))
-                        for arm in [c for c in res.children if c.key.split("@")[0] == "Armament"]:
-                            arm_values = kv(arm)
-                            if arm_values.get("Name", "primary") not in pool_names:
-                                continue
-                            if num(arm_values.get("AmmoUsage"), 1) <= 0:
-                                continue
-                            usage = num(arm_values.get("AmmoUsage"), 1)
-                            pause = arm_values.get("PauseOnCondition", "")
-                            requires = {token.strip() for token in arm_values.get("RequiresCondition", "").split(",")}
-                            expected_pause = "!" + ammo_condition if usage == 1 else f"{ammo_condition} < {usage}"
-                            adequate = (pause == expected_pause
-                                        or (usage == 1 and ammo_condition in requires))
-                            if not adequate:
-                                gate_defect = f"no empty-pool gate for {arm.key}"
-                                break
+                    pool_names = set(pool_values.get("Armaments", "primary, secondary").replace(" ", "").split(","))
+                    for arm in [c for c in res.children if c.key.split("@")[0] == "Armament"]:
+                        arm_values = kv(arm)
+                        if arm_values.get("Name", "primary") not in pool_names:
+                            continue
+                        if num(arm_values.get("AmmoUsage"), 1) <= 0:
+                            continue
+                        usage = num(arm_values.get("AmmoUsage"), 1)
+                        if not slave_law.pause_gate_sufficient(
+                                ammo_condition, usage,
+                                arm_values.get("PauseOnCondition"),
+                                arm_values.get("RequiresCondition"),
+                                global_gate=global_gate):
+                            gate_defect = f"no minimum-ammo gate for {arm.key}"
+                            break
             slaves.append((name, bool(pools), num(kv(pools[0]).get("Ammo")) if pools else None,
                            bool(reloads), rearmable,
                            slave_law.is_suicide(name, stems, weapons), gate_defect))

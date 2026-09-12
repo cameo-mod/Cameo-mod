@@ -67,6 +67,33 @@ RELOAD_TICKS = 100          # empty -> full, always, per the ruling
 DEFAULT_POOL_ARMAMENTS = ("primary", "secondary")
 
 
+def minimum_ammo_pause(condition: str, usage: int) -> str:
+    """Pause an armament until its whole AmmoUsage can be paid."""
+    usage = max(int(usage or 1), 1)
+    return f"!{condition}" if usage == 1 else f"{condition} < {usage}"
+
+
+def pause_gate_sufficient(condition: str, usage: int, pause: str | None,
+                          requires: str | None, *, global_gate: bool = False) -> bool:
+    """Whether a resolved armament gate prevents undercharged shots."""
+    usage = max(int(usage or 1), 1)
+    if usage == 1 and global_gate:
+        return True
+    if pause == minimum_ammo_pause(condition, usage):
+        return True
+    if usage == 1 and condition in {x.strip() for x in (requires or "").split(",")}:
+        return True
+    return False
+
+
+def preserved_pause(existing: str | None, condition: str, usage: int) -> str:
+    """Combine a required ammo threshold with an authored pause expression."""
+    expected = minimum_ammo_pause(condition, usage)
+    if not existing or existing == expected:
+        return expected
+    return f"({existing}) || ({expected})"
+
+
 def lcm_all(values) -> int:
     out = 1
     for v in values:
@@ -235,6 +262,13 @@ def _self_test() -> int:
 
     assert pool_armaments([{"name": "primary"}, {"name": "secondary"}]) is None
     assert pool_armaments([{"name": "tertiary"}]) == ["tertiary"]
+
+    # Runtime-gate regressions: a global one-token gate is not enough for a ten-token shot,
+    # and an authored pause expression is preserved when the minimum-ammo threshold is added.
+    assert not pause_gate_sufficient("ammo", 10, None, None, global_gate=True)
+    assert pause_gate_sufficient("ammo", 10, "ammo < 10", None)
+    assert minimum_ammo_pause("ammo", 10) == "ammo < 10"
+    assert preserved_pause("reload_lock", "ammo", 10) == "(reload_lock) || (ammo < 10)"
     print("carrier_slave_ammo self-test: PASS (both of the ruling's worked examples)")
     return 0
 
