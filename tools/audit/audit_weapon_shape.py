@@ -82,12 +82,13 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 #   count * 10000 > W1_RATE_BP * corpus
 # 585/2145 = 2727.3 bp, so 2728 is the current rate rounded up to the next basis point.
 # LOWER ONLY — same rule as every count ratchet.
-W1_RATE_BP = 2728
+W1_RATE_BP = 2630   # 564/2145 = 2629.4 bp; was 2728 before the dead-inherit slice
 W1_BASELINE = 576   # historical count ratchet, kept for provenance; W1_RATE_BP is what gates
 # Checks gated on a SHARE of the corpus instead of an absolute count.
 RATE_CHECKS: dict[str, int] = {"W1": W1_RATE_BP}
 RED = ' Γ¢ö'
-W2_BASELINE = 210   # dual ^Warhead_ inherit; Scooper now has one chemical cannon
+W2_BASELINE = 177   # dual ^Warhead_ inherit; 226 -> 177 by the dead-inherit slice
+                    # (was 210 before; the 226 regression is repaid and then some)
 W3_BASELINE = 12    # dual ^Projectile_ inherit (21->12: same collapse)
 W4_BASELINE = 51    # dual ^Effect_ inherit; Apocalypse effect composition owns its overrides
 W5_BASELINE = 389   # more than one resolved MAIN warhead; merge-payload repairs
