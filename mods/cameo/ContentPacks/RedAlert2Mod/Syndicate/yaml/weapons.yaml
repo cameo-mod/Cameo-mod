@@ -370,7 +370,7 @@ SyndicateFireballLauncherExplode:
 	-Warhead@LightFlameWeapon:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@HeavyFlameWeapon:
-	-Warhead@Flame_HeavyFlatCompatibility:
+	-Warhead@Flame_Heavy_Flat:
 	Warhead@PreservedFlat_Flame_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -929,9 +929,8 @@ LatinSmokerCannon_elite:
 	BurstDelays: 3
 
 RA2GrenadePack:
-	Inherits@roleflat: ^Compatibility_Concussion_LightFlat
+	Inherits@roleflat: ^Warhead_Concussion_Light_Flat
 	Inherits: ^Warhead_MissileAP_Heavy
-	Inherits@2: ^Warhead_Concussion_Light
 	Inherits@3: ^Effect_Concussion_Light
 	Inherits@4: ^RA2FlakWeapon
 	ValidTargets: blindable
@@ -962,7 +961,7 @@ RA2GrenadePack:
 	-Warhead@Concussion_Light:
 	-Warhead@Flak_Medium:
 	-Warhead@MissileAP_Heavy:
-	Warhead@Concussion_LightFlatCompatibility:
+	Warhead@Concussion_Light_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984

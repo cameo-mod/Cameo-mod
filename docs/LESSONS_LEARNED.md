@@ -1658,3 +1658,44 @@ in minutes, and it was not run.
 ⚠ **A bulk delete is the wrong shape for this class of cleanup entirely.** Whatever
 genuinely-dead nodes existed among those 2248 are still there after the revert; they
 have to be found per-node, by resolving each parent chain.
+
+## `^Warhead_` templates carry WEAPON-LEVEL fields, so a dead warhead node is not a dead inherit
+
+**2026-09-12.** Converting the `^Compatibility_*` shims, the obvious slice looked airtight: the
+weapon declares `-Warhead@<fam>:` locally, so the `^Warhead_<fam>` inherit contributes nothing
+and can go. It went, and **60+ weapons silently lost `TargetActorCenter`, some lost
+`ValidTargets`, and three warheads were left with an EMPTY TYPE** — the boot-NRE class.
+
+A `^Warhead_*` template is not only a warhead. It also supplies `ValidTargets`, `ReloadDelay`,
+`Range` and `TargetActorCenter` at the WEAPON level, and the shim supplies **none** of those.
+Removing the node says nothing about the rest of the template.
+
+⚠ **The general rule: an inherit is dead only if the RESOLVED WEAPON is byte-identical without
+it.** Do not reason about which node the parent provides — resolve both ways and compare. Every
+heuristic tried here (node absent, `Damage: 0`, `Damage` and `PercentageScale` both 0) passed
+weapons that then changed.
+
+## A rename moves a key, so a SORTED dump reports every touched node as changed
+
+Same session, the comparator that was supposed to catch the above instead cried wolf on all of
+it. It dumped each resolved weapon with `sorted(children, key=lambda c: c.key)` and diffed the
+text — but renaming `Warhead@X_FlatCompatibility` to `Warhead@X_Flat` MOVES that node in the
+sort, so the dump differs from the first moved line onward even when nothing else changed. It
+reported 470 weapons; the real number was 1.
+
+⚠ **Compare renames as an order-insensitive set of `path = value` pairs**, with the name map
+applied to the baseline first. Then a false positive is impossible and the one real failure —
+`d2k_airdefenseplatform`, which inherits from the WEAPON `HMG_turret` and declared its warhead
+BARE — was visible immediately.
+
+## `gh` resolves the repo from the WRONG remote here, and reports the PR as nonexistent
+
+`gh pr create` refused with *"No commits between master and <branch>"* and `gh pr view 354` said
+*"Could not resolve to a PullRequest"* — so the PR looked gone, and it was reported as gone.
+It was open the whole time. `gh repo view --json nameWithOwner` returns **`Zeruel87/Cameo-mod`**:
+`gh` picked the `upstream` remote, not `origin` (`cameo-mod/Cameo-mod`). Confusingly `gh pr list`
+had shown cameo-mod's PRs moments earlier.
+
+⚠ **Pass `--repo cameo-mod/Cameo-mod` explicitly for every `gh` call in this tree**, and never
+report a PR or branch as missing on a bare `gh` result — check `gh repo view --json
+nameWithOwner` first, or compare with `gh api repos/cameo-mod/Cameo-mod/compare/master...<branch>`.

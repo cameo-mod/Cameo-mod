@@ -264,7 +264,6 @@ TSCABALObeliskLaserFire:
 		InvalidTargets: Air
 TSHellfireTwin:
 	Inherits@missilerole: ^Warhead_MissileAP_Heavy
-	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
 	Inherits: ^HeavyCannon
 	Inherits@TD: ^TankDestroyerCannon
 	Inherits@SHRAP: ^ShrapnelWeapon
@@ -333,7 +332,6 @@ TSHellfireTwin:
 	-Warhead@MediumMissile:
 	Projectile: Missile
 		VerticalRateOfTurn: 16
-	-Warhead@MissileHE_Heavy:
 	Warhead@MissileAP_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2049,8 +2047,6 @@ CabalManticoreMissilesAA:
 CabalRocketCyborgRockets:
 	Inherits@missilerole: ^Warhead_MissileAP_Medium
 	Inherits@finalmain: ^Compatibility_MissileHE_MediumFlat
-	Inherits@wh: ^Warhead_MissileHE_Light
-	Inherits@wh2: ^Warhead_MissileHE_Medium
 	Inherits@proj: ^CabalMissileLight
 	Inherits@fx: ^CabalMissileEffect
 	-Warhead@EffectWater:
@@ -2070,7 +2066,6 @@ CabalRocketCyborgRockets:
 		RangeLimit: 25000
 	Warhead@MissileHE_Medium: AreaDamage
 		Damage: 6000
-	-Warhead@MissileHE_Light:
 	-Warhead@MissileHE_Medium:
 	-Warhead@MissileHE_MediumFlatCompatibility:
 	Warhead@MissileAP_Medium: AreaDamage
@@ -2086,8 +2081,6 @@ CabalRocketCyborgRockets:
 CabalRocketCyborgRocketsUpgraded:
 	Inherits@missilerole: ^Warhead_MissileAP_Medium
 	Inherits@finalmain: ^Compatibility_MissileHE_MediumFlat
-	Inherits@wh: ^Warhead_MissileHE_Light
-	Inherits@wh2: ^Warhead_MissileHE_Medium
 	Inherits@proj: ^CabalMissileLight
 	Inherits@fx: ^CabalMissileEffect
 	-Warhead@EffectWater:
@@ -2107,7 +2100,6 @@ CabalRocketCyborgRocketsUpgraded:
 		RangeLimit: 25000
 	Warhead@MissileHE_Medium: AreaDamage
 		Damage: 6000
-	-Warhead@MissileHE_Light:
 	-Warhead@MissileHE_Medium:
 	-Warhead@MissileHE_MediumFlatCompatibility:
 	Warhead@MissileAP_Medium: AreaDamage
@@ -2121,7 +2113,7 @@ CabalRocketCyborgRocketsUpgraded:
 		PercentageSpread: 50
 
 CabalMothershipRockets:
-	Inherits@roleflat: ^Compatibility_MissileTesla_HeavyFlat
+	Inherits@roleflat: ^Warhead_MissileTesla_Heavy_Flat
 	Inherits: ^TeslaWeapon
 	Inherits@HEAVYMISSILE: ^HeavyMissile
 	Inherits@FLAME: ^MediumFlameWeapon
@@ -2226,7 +2218,7 @@ CabalMothershipRockets:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@MissileTesla_HeavyFlatCompatibility:
+	Warhead@MissileTesla_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 65000
 		PercentageScale: 0

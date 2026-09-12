@@ -186,7 +186,7 @@ ConsortiumMissileSystem:
 	Warhead@EMPUnit:
 		ValidTargets: Air
 ConsortiumMissileSystem_EMP:
-	Inherits@roleflat: ^Compatibility_MissileQuantum_MediumFlat
+	Inherits@roleflat: ^Warhead_MissileQuantum_Medium_Flat
 	Inherits: ConsortiumMissileSystem
 	Warhead@TeslaWeapon: SpreadDamage
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -213,7 +213,7 @@ ConsortiumMissileSystem_EMP:
 	-Warhead@MissileAA_MediumFlatCompatibility:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@MissileQuantum_MediumFlatCompatibility:
+	Warhead@MissileQuantum_Medium_Flat:
 		ValidTargets: Air
 		Damage: 34000
 		PercentageScale: 0
@@ -588,7 +588,7 @@ SteelMakoGun_elite:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 25
 SteelMakoGun_EMP:
-	Inherits@roleflat: ^Compatibility_Quantum_MediumFlat
+	Inherits@roleflat: ^Warhead_Quantum_Medium_Flat
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^TeslaWeapon
 	Inherits@3: SteelMakoGun
@@ -637,7 +637,7 @@ SteelMakoGun_EMP:
 	-Warhead@LightChemicalWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@Quantum_MediumFlatCompatibility:
+	Warhead@Quantum_Medium_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 13000
@@ -655,7 +655,7 @@ SteelMakoGun_EMP_elite:
 	Range: 7050
 	Burst: 2
 	BurstDelays: 3
-	Warhead@Quantum_MediumFlatCompatibility:
+	Warhead@Quantum_Medium_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 13000
@@ -2588,7 +2588,7 @@ SteelKatyCannons_elite:
 		PercentageScale: 9997
 
 SteelKatyCannons_EMP:
-	Inherits@roleflat: ^Compatibility_Quantum_MediumFlat
+	Inherits@roleflat: ^Warhead_Quantum_Medium_Flat
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^TeslaWeapon
 	Inherits@3: SteelKatyCannons
@@ -2666,7 +2666,7 @@ SteelKatyCannons_EMP:
 	-Warhead@TankDestroyerCannon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@Quantum_MediumFlatCompatibility:
+	Warhead@Quantum_Medium_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 75000
@@ -2682,7 +2682,7 @@ SteelKatyCannons_EMP_elite:
 	MinRange: 1650
 	Burst: 4
 	BurstDelays: 5
-	Warhead@Quantum_MediumFlatCompatibility:
+	Warhead@Quantum_Medium_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 75000

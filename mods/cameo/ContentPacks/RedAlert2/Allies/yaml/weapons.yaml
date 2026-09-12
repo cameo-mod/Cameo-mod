@@ -63,7 +63,7 @@ HarrierMissiles:
 	Inherits@4: ^HeavyAAWeapon
 	Inherits@5: ^FlakWeapon
 	Inherits@6: ^RA2MediumMissile
-	Inherits@WallExcluded: ^Compatibility_MissileAP_Medium_WallExcluded
+	Inherits@WallExcluded: ^Warhead_MissileAP_Medium_WallExcluded
 	ReloadDelay: 104
 	Burst: 4
 	BurstDelays: 2
@@ -381,7 +381,7 @@ BlackEagleThunderboltMissiles:
 	Inherits@7: ^FlakWeapon
 	Inherits@8: ^ArrowWeapon
 	Inherits@9: ^RA2LightMissile
-	Inherits@WallExcluded: ^Compatibility_MissileAP_Light_WallExcluded
+	Inherits@WallExcluded: ^Warhead_MissileAP_Light_WallExcluded
 	ReloadDelay: 50
 	Burst: 4
 	BurstDelays: 2

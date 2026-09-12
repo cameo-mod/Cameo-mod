@@ -2,7 +2,6 @@ IxianCombatTankCannon:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^Warhead_CannonAP_Light
 	Inherits@5: ^Projectile_Shell_Light
 	Inherits@6: ^Effect_CannonAP_Light
 	Inherits@7: ^D2K_Cannon
@@ -10,7 +9,6 @@ IxianCombatTankCannon:
 	ReloadDelay: 35
 	Projectile: Bullet
 		Speed: 555
-	-Warhead@CannonAP_Light:
 	Warhead@CannonHE_Heavy:
 		Damage: 12000
 	-Warhead@CannonHE_Medium:
@@ -18,7 +16,6 @@ HeavyIxianCombatTankCannon:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^Warhead_CannonAP_Light
 	Inherits@5: ^Projectile_Shell_Light
 	Inherits@6: ^Effect_CannonAP_Light
 	Inherits@7: ^D2K_Cannon
@@ -26,7 +23,6 @@ HeavyIxianCombatTankCannon:
 	ReloadDelay: 40
 	Projectile: Bullet
 		Speed: 600
-	-Warhead@CannonAP_Light:
 	Warhead@CannonHE_Heavy:
 		Damage: 18000
 	-Warhead@CannonHE_Medium:
@@ -1253,7 +1249,7 @@ d2k_farasha_charge:
 		TrackTarget: false
 
 ixian_farasha:
-	Inherits@roleflat: ^Compatibility_Laser_MediumFlat
+	Inherits@roleflat: ^Warhead_Laser_Medium_Flat
 	Inherits: ^TeslaWeapon
 	Inherits@2: ^HeavyFlameWeapon
 	Inherits@3: ^RailgunWeapon
@@ -1326,7 +1322,7 @@ ixian_farasha:
 	-Warhead@RailgunWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@Laser_MediumFlatCompatibility:
+	Warhead@Laser_Medium_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 8000
@@ -1371,7 +1367,7 @@ d2k_farasha_aa:
 	-Warhead@RailgunWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@Laser_MediumFlatCompatibility:
+	Warhead@Laser_Medium_Flat:
 		-InvalidTargets:
 		ValidTargets: Air
 		Damage: 8000

@@ -1,5 +1,47 @@
 # Cameo — THE HANDOFF
 
+## ⛔⛔ 2026-09-12 — FOUR DECISIONS THE MAINTAINER HAS NOT MADE, all blocking real work
+
+Newest first; each one blocks a batch that is otherwise measured and ready.
+
+**1. Which weapon target is authoritative — DPS, or damage+reload?** They disagree by
+**1.42×** and it is not a bug: `reference_targets.target_for` projects every stat against its
+own distribution, so `w_dps`, `w_damage`, `w_burst` and `w_reload` are **five separate votes,
+not one decomposition**. Traced end to end on `td_gdi_mammothtank` (3 sources, 6 rows, STRONG
+on all three): DPS projected alone says **+73.7%** (400 → 695); damage +9.1% with reload −11.1%
+composes to **+21.9%** (488) through Cameo's own identity `DPS = damage-per-burst ÷ (reload +
+burst delays)`, which checks out exactly today (32,000 ÷ 80 = 400). The pipeline's *intent* is
+that DPS wins and `propose_class_rebalance.decompose_dps` solves the rest — but that has never
+been ruled, and the difference is the entire rebalance. **Nothing can be applied until this is
+answered.**
+
+**2. Formula price or reference cost?** At the reference target stats `formula.price` says
+**3,200** and the references say **2,500** — a 28% gap between the two authorities, on a unit
+the formula already reads as **40% underpriced** at its shipped 1,600 (formula 2,246). Applying
+reference stats without choosing leaves the unit priced by neither, which collides directly
+with the standing rule that *no stat moves unless the formula prices it*.
+
+**3. `^Compatibility_*` — the 36 mixed families.** 33 of 69 templates are promoted to real
+`^Warhead_*` (see `DESIGN.md` §11b.1b; W8 874 → 858, behaviour-identical). The rest are blocked
+on a **template-count ruling**: 56 of 64 families have BOTH a user that already inherits the
+twin (needs the new template to chain it) and a user that inherits no `^Warhead_` at all (would
+*gain* weapon-level fields from that chain — measured: 112 weapons would newly gain
+`Warhead@Bullet_Medium`, 11 would gain `TargetActorCenter`). One template cannot serve both, so
+each family needs a second one.
+
+**4. Projectile / warhead geometry — the review itself.** 2,894 records are collected and
+voting on nothing (`docs/reference/PROJECTILE_GEOMETRY.md`). The first substantive question is
+units: TD/TS warheads declare `Spread` in **leptons** (`DemoAtomicWH` 512, 256 to a cell) while
+RA2/YR declare `CellSpread` where `AAHE` reads 0.5 (plainly half a cell) and `BlueJammer` reads
+**225** with Ares fixed-point providers in play. Nothing is converted until that is ruled.
+
+Full trace for #1 and #2, every stat and all four armaments:
+<https://claude.ai/code/artifact/67164cd7-20ae-4c62-b799-38912fa3de4c>
+
+⚠ One pre-existing red, flagged so it is not attributed to the grid change:
+`audit_damage_grid` fails on `basis-point pct twin 187 > 0; 50% twin 379 > 353` — **identical
+numbers on a pristine worktree at HEAD**. Off-grid main damage went 65 → **0**.
+
 ## Claude and Codex continuation — 11 September 2026
 
 For the active RA1 Allies/Soviets and TD GDI/Nod work, start with the

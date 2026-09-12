@@ -1175,14 +1175,14 @@ AsianQuasar_AA:
 	Warhead@PreservedFlat_TeslaExtraDamage:
 		ValidTargets: Air
 AsianQuasar_EMP_AA:
-	Inherits@finalmain: ^Compatibility_MissileQuantum_MediumFlat
+	Inherits@finalmain: ^Warhead_MissileQuantum_Medium_Flat
 	Inherits: AsianQuasar_AA
 	Warhead@EMPUnit: AffectsIntegrity
 		InvalidTargets: Shielded
 		ValidTargets: Air
 		Damage: 20000
 	-Warhead@MissileAA_MediumFlatCompatibility:
-	Warhead@MissileQuantum_MediumFlatCompatibility:
+	Warhead@MissileQuantum_Medium_Flat:
 		ValidTargets: Air
 		Damage: 8000
 		PercentageScale: 0
@@ -1248,13 +1248,13 @@ AsianPunisherAG:
 		InvalidTargets: Air
 
 AsianPunisherAG_EMP:
-	Inherits@finalmain: ^Compatibility_MissileQuantum_MediumFlat
+	Inherits@finalmain: ^Warhead_MissileQuantum_Medium_Flat
 	Inherits: AsianPunisherAG
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
 		InvalidTargets: Shielded, Air
 		Damage: 20000
-	Warhead@MissileQuantum_MediumFlatCompatibility:
+	Warhead@MissileQuantum_Medium_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -1394,14 +1394,14 @@ AsianQuasarBoat_AA:
 	Warhead@PreservedFlat_TeslaExtraDamage:
 		ValidTargets: Air
 AsianQuasarBoat_EMP_AA:
-	Inherits@finalmain: ^Compatibility_MissileQuantum_MediumFlat
+	Inherits@finalmain: ^Warhead_MissileQuantum_Medium_Flat
 	Inherits: AsianQuasarBoat_AA
 	Warhead@EMPUnit: AffectsIntegrity
 		InvalidTargets: Shielded
 		ValidTargets: Air
 		Damage: 20000
 	-Warhead@MissileAA_MediumFlatCompatibility:
-	Warhead@MissileQuantum_MediumFlatCompatibility:
+	Warhead@MissileQuantum_Medium_Flat:
 		ValidTargets: Air
 		Damage: 8000
 		PercentageScale: 0
@@ -1526,8 +1526,7 @@ AsianChemical_elite:
 	BurstDelays: 3
 
 AsianChemicalBombs:
-	Inherits@roleflat: ^Compatibility_Chemical_HeavyFlat
-	Inherits@wh: ^Warhead_Chemical_Heavy
+	Inherits@roleflat: ^Warhead_Chemical_Heavy_Flat
 	Inherits@2: ^RA2MediumCannon
 	ValidTargets: Ground, Water
 	InvalidTargets: wall
@@ -1578,7 +1577,7 @@ AsianChemicalBombs:
 		InvalidTargets: Water
 	-Warhead@CannonHE_Medium:
 	-Warhead@Chemical_Heavy:
-	Warhead@Chemical_HeavyFlatCompatibility:
+	Warhead@Chemical_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
@@ -2912,7 +2911,6 @@ ASDFKamikazeTargeting:
 
 ASDFKamikazeExplosion:
 	Inherits@wh: ^Warhead_Demolition_Heavy
-	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits@3: ^Projectile_Grenade_Light
 	Report: M203.aud
@@ -2922,7 +2920,6 @@ ASDFKamikazeExplosion:
 		Explosions: ivan_explosion
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexpcraa.wav
-	-Warhead@Concussion_Medium:
 
 AsianSniper:
 	Inherits: ^Warhead_Bullet_Heavy

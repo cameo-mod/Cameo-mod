@@ -978,6 +978,95 @@ in both directions (`AsianTSIonCannon` 7.67x, `MarineMG` 6.00x; `wc2ogremageRune
 after 10 mains became 1). Re-check a conversion against the release tag, not against the commit
 before it.
 
+### 11b.1a TEMPLATE ONLY — never from another weapon (binding, maintainer 2026-09-12)
+
+The maintainer restated the law and closed the one hole in it:
+
+> *"every weapon needs to have exactly 1 warhead, 1 projectile, 1 effect inherited from a
+> template only and **NEVER from another weapon**"*
+
+`§11b.1` constrained the COUNT of inherits. It did not say where they must come from, so a
+weapon could satisfy it with exactly three parents and inherit all three from other weapons.
+Nothing measured that: `audit_weapon_shape.py` W1 counts arity only. Measured 2026-09-12 over
+2,448 concrete weapons:
+
+```
+W7  inherits from ANOTHER WEAPON              957   (655 distinct weapon-parents)
+W8  inherits a ^Template outside the 3 kinds  874   (198 distinct legacy templates)
+```
+
+**THIS OVERRIDES §10's variant-family exemption, for inheritance only** (maintainer ruled
+2026-09-12, asked explicitly). §10 permits two weapons in one actor's variant family to SHARE
+a weapon; it does not permit a variant to INHERIT its structure from the base weapon. So
+`X_elite: Inherits: X` is a violation and must be rewritten to carry the three `^Template`
+inherits itself. That is 481 of the 957 — `_elite` 168, `_aa` 43, `2` 24, `_emp` 13,
+`_upgrade` 11 — and it is the drift-prone half, because each variant must also reproduce
+whatever its base declared LOCALLY. Prove every batch with
+`tools/audit/review_resolve_diff.py`; a missed local override is a silent behaviour change.
+
+#### 11b.1b `^Compatibility_*` — what it is, and why the collapse is not arithmetic
+
+> *"Any of those silly compatibility warheads must be resolved and replaced by an actual new
+> warhead"* — maintainer, 2026-09-12
+
+**What it actually is.** `^Compatibility_<fam>Flat` is the **landing zone of an earlier W24
+pass**, not scaffolding. Read `YamatoCannon`:
+
+```yaml
+Warhead@Demolition_Heavy:  Damage: 20000
+Warhead@CannonHE_Heavy:    Damage: 20000
+-Warhead@CannonHE_Heavy:
+-Warhead@Demolition_Heavy:
+Warhead@CannonHE_HeavyFlatCompatibility:
+	Damage: 40000            # the two mains, already folded into one, parked on the shim
+```
+
+Someone collapsed two mains into one and parked the survivor on the shim. Those weapons are
+already single-main and already correct; their only defect is that the template they inherit is
+not spelled `^Warhead_`. Measured against its real twin, the shim's ladder is **identical on 10
+families and differs by ±1 on one or two of 16 armor rows on 49** — MEAN-100 rounding drift, not
+design. **So the fix is a RENAME and no `Versus` row, `Damage` or `Burst` changes: no warhead
+permission is needed, because no warhead changes.**
+
+⛔ **THE SHIM'S W8 VIOLATION IS LOAD-BEARING.** A blanket rename does not reduce the defect
+count, it MOVES it: 240 of the 416 users also inherit a real `^Warhead_`, so spelling the shim
+`^Warhead_` converts one W8 violation into one **W2** violation each (W2 177 -> ~400). The
+rename is only worth anything together with the structural fix, and the structural fix is where
+the difficulty sits.
+
+⛔ **AND THE `^Warhead_` INHERIT IS NOT DEAD JUST BECAUSE ITS NODE IS.** The obvious follow-up —
+"the weapon deletes `Warhead@<fam>` locally, so drop the inherit" — is wrong. A `^Warhead_`
+template also carries **weapon-level** fields (`ValidTargets`, `ReloadDelay`, `Range`,
+`TargetActorCenter`) and the shim carries **none**. Dropping the inherit silently stripped
+`TargetActorCenter` off 60+ weapons and left three warheads with an EMPTY TYPE — the boot-NRE
+class. A node-level deadness test cannot see either failure.
+
+**The shape that does work** is a new template that CHAINS the twin, so the weapon-level fields
+keep arriving once the weapon's duplicate inherit is dropped:
+
+```yaml
+^Warhead_Flame_Heavy_Flat:
+	Inherits: ^Warhead_Flame_Heavy      # weapon-level fields arrive through the chain
+	Warhead@Flame_Heavy_Flat: AreaDamage
+		...                             # the shim's own body, verbatim
+```
+
+The weapon's `-Warhead@Flame_Heavy:` line **stays where it is** — putting the removal in the
+template killed a LIVE twin main on `25mm`. The weapon's direct `Inherits: ^Warhead_Flame_Heavy`
+**must go**, or that parent sits on one root-to-ancestor path twice and the boot crashes.
+
+⛔ **ONE TEMPLATE CANNOT SERVE BOTH POPULATIONS, and that is the blocker.** A user that already
+inherits the twin needs the chain; a user that inherits NO `^Warhead_` at all would **gain**
+those weapon-level fields from it (measured: 112 weapons newly gained `Warhead@Bullet_Medium`,
+11 gained `TargetActorCenter`). **56 of 64 families have BOTH kinds of user**, so those families
+need a SECOND template each — the chained one and the standalone one — and a per-weapon routing
+decision. That is the outstanding work, and it is template-count growth, so it needs a ruling.
+
+**Landed 2026-09-12, provably behaviour-identical** (`tools/balance/promote_compatibility_warheads.py`,
+which refuses to write unless every weapon's resolved node is unchanged through the name map):
+33 of 69 templates, 55 weapons — 4 chained, 29 renamed, 36 mixed families skipped.
+W8 874 -> 858, W1 26.30% -> 26.16%, W2 held at 177.
+
 ### 11b.2 The SEVEN kinds of multi-main weapon (the codemod's taxonomy)
 
 `tools/audit/intentional_composites.py` was DELETED on 2026-09-06 — an exemption list cannot
@@ -1521,6 +1610,42 @@ steps so the house formulas stay integral:
   `Warhead@SmallArms`, `Warhead@TankDestroyerCannon`, …). The legacy
   generic `Warhead@1Dam` is RETIRED — it was renamed to the per-template
   warhead name; a bare `1Dam` (or stray non-template warhead) is a bug.
+#### The stat grids, complete (one table, one code home)
+
+⭐ **`formula.STAT_GRID` is the single source of truth** — four files used to carry their own
+quantum (`propose_class_rebalance.nudge_hp_spd` for HP and speed, `propose_reference_anchors`
+inline for range and cost, `formula.DAMAGE_STEP` for damage, and nothing at all for reload and
+burst). They all read the table now. **Never re-literalise a grid.**
+
+| stat | grid | why that number |
+|---|--:|---|
+| HP | **1000** | the only grid NOT at 1, and not by omission: `RepairsUnits` steps at `HP/20`, so HP must stay a multiple of 20; 1000 keeps that free and still gives ~100 slots per class |
+| Speed | **1** | was 5, only so `TurnSpeed = Speed/5` stayed integral; the derived-turn-rate trait handles that now |
+| Range (WDist) | **1** | was 10; 1024 WDist per cell, so a step of 1 is ~1/1000 of a cell |
+| Damage | **1** | was 2000 → 200 → 100 → 10 → 1 |
+| ReloadDelay (ticks) | **1** | always was — integer ticks, never snapped by any tool |
+| Burst | **1** | always was — a count |
+| BurstDelays (ticks) | **1** | always was |
+| Cost (credits) | **100** | with **10** permitted when the 100-slot is already taken |
+
+**The ruling behind all of it, applied over and over: a coarse grid buys nothing once the
+thing it protected is expressed differently, and it costs UNIQUENESS.** Speed stepped by 5 gave
+13 slots for 51 `mbt` units — speed 75 shared by 9 of them, and no assignment of 51 units to 13
+values can be unique. HP stepped by 2500 gave 24 distinct values for those 51 units, with HP
+100,000 shared by 10. Damage stepped by 2000 so `FirepowerMultiplier` could absorb the
+remainder — and `FirepowerMultiplier` is retired (W17), so there is nothing left to absorb.
+
+Dates: damage 2000→200→100 on 2026-08-11 (W15); HP 2500→1000 and speed 5→1 on 2026-09-07;
+damage 100→10 on 2026-09-11; **damage 10→1 and range 10→1 on 2026-09-12**, the same ruling that
+put reload / burst / burst-delay on the record at 1.
+
+⚠ **The percentage twin did NOT follow the flat grid down, and must not be inferred from it.**
+100 flat is still 0.01% HP (`DAMAGE_PER_PERCENT`), so 1 damage is 0.0001% HP — finer than even
+`FINE_PERCENT_DENOMINATOR` (100000ths) can write. `percentage_twin` returns its never-zero
+floor of 1 there, so **Damage 1..99 all twin to the same 1 basis point**. The flat grid is now
+finer than the percentage grid can follow; that is a known consequence, not a bug, and it is why
+`percentage_twin` is threaded from the resolved node rather than assumed.
+
 - **HP: 1000-steps for EVERY type** (maintainer 2026-09-07; was 2500 for
   vehicles/aircraft/ships and 1000 for infantry). The old 2500 existed only so
   `Step = HP/2500` divided evenly; once regeneration is expressed as TICKS TO FULL

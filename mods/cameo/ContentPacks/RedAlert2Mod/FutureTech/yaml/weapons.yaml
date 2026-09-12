@@ -284,7 +284,7 @@ Future_Turret_Cryo:
 	Warhead@LaserWeaponPercentage:
 		InvalidTargets: Air
 CryoLegionnaireAttack:
-	Inherits@roleflat: ^Compatibility_Cryo_LightFlat
+	Inherits@roleflat: ^Warhead_Cryo_Light_Flat
 	Inherits: ^LightMissile
 	Inherits@2: ^SmallArms
 	Inherits@3: ^Chaingun
@@ -412,7 +412,7 @@ CryoLegionnaireAttack:
 	-Warhead@SmallArms:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@Cryo_LightFlatCompatibility:
+	Warhead@Cryo_Light_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 13600
@@ -812,7 +812,7 @@ Future_MultiMissile_Frag:
 		AimTargetStances: Enemy, Neutral
 
 Future_MultiMissile_Sigma:
-	Inherits@roleflat: ^Compatibility_MissileTesla_MediumFlat
+	Inherits@roleflat: ^Warhead_MissileTesla_Medium_Flat
 	Inherits: ^TeslaChargedWeapon
 	Inherits@2: ^MagicWeapon
 	Inherits@3: ^FlakWeapon
@@ -899,7 +899,7 @@ Future_MultiMissile_Sigma:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@TeslaChargedExtraDamage:
 	-Warhead@TeslaChargedWeapon:
-	Warhead@MissileTesla_MediumFlatCompatibility:
+	Warhead@MissileTesla_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 55888
 		PercentageScale: 0

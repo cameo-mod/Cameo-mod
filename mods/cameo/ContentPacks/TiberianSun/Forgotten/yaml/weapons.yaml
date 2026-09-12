@@ -383,7 +383,6 @@ TSHighVelocityTur:
 		Heaviness: 0
 TSBusMortar:
 	Inherits@wh: ^Warhead_Concussion_Medium
-	Inherits@wh2: ^Warhead_Demolition_Heavy
 	Inherits@fx: ^Effect_Demolition_Heavy
 	ReloadDelay: 120
 	Range: 7850
@@ -400,7 +399,6 @@ TSBusMortar:
 		TrailImage: black_smokey
 	Warhead@Concussion_Medium:
 		Damage: 64000
-	-Warhead@Demolition_Heavy:
 TSBusMortarChem:
 	Inherits@collapsewh: ^Warhead_Chemical_Heavy
 	Inherits: ^ShrapnelWeapon
@@ -593,9 +591,8 @@ TSInfantryMortarChem:
 		PercentageScale: 0
 
 TS120mmxChem:
-	Inherits@finalmain: ^Compatibility_Chemical_HeavyFlat
+	Inherits@finalmain: ^Warhead_Chemical_Heavy_Flat
 	Inherits@wh: ^Warhead_Demolition_Heavy
-	Inherits@wh2: ^Warhead_Chemical_Heavy
 	Inherits@fx: ^Effect_Demolition_Heavy
 	Inherits@3: ^TSCannonEffect
 	ReloadDelay: 60
@@ -620,7 +617,7 @@ TS120mmxChem:
 		InvalidTargets: Water
 	-Warhead@Chemical_Heavy:
 	-Warhead@Demolition_Heavy:
-	Warhead@Chemical_HeavyFlatCompatibility:
+	Warhead@Chemical_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 80000
 		PercentageScale: 9999
@@ -1006,8 +1003,6 @@ TSMammothTusk:
 TSRuinerMissile:
 	Inherits@missilerole: ^Warhead_MissileAP_Medium
 	Inherits@finalmain: ^Compatibility_MissileHE_MediumFlat
-	Inherits@wh: ^Warhead_Demolition_Light
-	Inherits@wh2: ^Warhead_MissileHE_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileHE_Medium
 	Range: 5919
