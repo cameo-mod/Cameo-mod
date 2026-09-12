@@ -58,6 +58,43 @@ summary. The maintainer-approved WORK ORDER, all four confirmed in one answer:
    The genuinely decidable few today: `harkonnen_inkvine` and `naxis_slave` (accepted by NO
    class; `raw_dps` 0.0x/0.1x — data defects), `naxis_naximercenarysniper` (only `scout`
    accepts it), `naxis_skymage` (390% at tier 0.75 — a tech-tier gate may explain it).
+## ⭐ 2026-09-12 — W24 IS NOW THE FRONT, AND IT IS SPLIT WITH CODEX
+
+The queue changed: **W24 moves ahead of the baseband**, because 61 of the 114 band outliers are
+`raw_dps`-driven and DPS is deliberately unsettled until W24 closes.
+
+**State:** `audit_three_way_split` **230** stacks (ratchet 322) · `audit_tier_weapon_class`
+**39** budget violations (ratchet 48) · W5/W7/W8 305/957/858. Of the 230 stacks, **149 carry a
+legacy-named main**, concentrated: `1Dam` **48**, `1Dam_impact` 13, the four `*Dam_areanuke*`
+names 9–10 each, `TemperatureCompatibility` 8, `Railgun_HeavyFlatCompatibility` 8,
+`IonCannon` 7, `Damage` 7.
+
+⛔ **`1Dam` is not a 1-damage marker — the name is a lie.** All 48 are `SpreadDamage` carrying
+1,200–50,000 damage with NO `Versus`, so each is a genuine second main applying FLAT damage to
+every armor. Dropping one deletes real damage (the `47a66b6c2` mistake).
+
+⭐ **§12.0h MEAN-100 makes the fold mean-preserving BY CONSTRUCTION** — `mean(p)=100`, so
+`mean(D_main·p/100 + D_flat) == mean((D_main+D_flat)·p/100)`. Asserted per weapon: 8/8 within
+2%. The fold moves SPREAD, never magnitude. `tools/balance/analyse_flat_main_fold.py`.
+
+**LANE SPLIT (rule 6, by file-set), posted as PR #354 comment 5648397932:**
+* **mine** — central weapon files: `weapons.yaml` (22), `tiberiansun.yaml` (6), `d2k.yaml` (5),
+  `outpost2.yaml` (1). 8 are clean two-main flat folds; 16 have 3 mains (design call), 9 have a
+  legacy node that HAS a profile, 1 has no usable family profile.
+* **Codex** — ContentPacks: `D2k/Ordos` (9), `RedAlert2/Shared` (3), `D2k/Atreides` (1),
+  `D2k/Shared` (1); plus the self-contained `*Dam_areanuke*` 7-main cohort.
+
+⛔⛔ **THE TWO TRAPS, both already paid for:** two ADJACENT levels of one family is **LEGAL**
+(between-tier encoding; budget = TYPES × LEVELS, ceiling 4 — I nearly erased 79 correct weapons
+and every audit stayed green); and a collapse must carry the **TOTAL**, not the surviving
+warhead's number.
+
+⚠ **BLOCKED ON ONE PERMISSION (rule 4):** a fold changes per-armor damage. The 8 candidates
+sorted by flat share — `TSPistola` 9% (worst armor ×0.91), `TSGrenadeAA` 17% (×0.83),
+`GLToxinExplode` / `GLToxinExplodeBlue` 22% (×0.80), `TSVulcan` 50% (×0.65), `D2K_Rocket_AA`
+65% (×0.64), `TSVulcan2` 71% (×0.56), `TSTurretLaserFire` 79% (×0.37). Nothing written until
+the maintainer picks a share threshold.
+
 4. ✅ **DONE — separate weapon-stat targets with DPS as a verifier** (R1). Four inputs, one
    guard rail. `reference_targets.COMPONENT_STATS` / `VERIFIER_STATS` + `compose_dps`,
    `recover_burst_time`, `dps_guard`; the reference map gains **Damage/shot** and **Reload**
