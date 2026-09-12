@@ -255,7 +255,7 @@ HeavyFlamer:
 		GlowFadeInFrames: 12
 
 HeavyPlasmaFlamer:
-	Inherits@roleflat: ^Warhead_Flame_Heavy_Flat
+	Inherits@roleflat: ^Warhead_Flame_Heavy
 	Inherits@wh: ^Warhead_Chemical_Heavy
 	Inherits@proj: ^Projectile_Chem_Heavy
 	Inherits@fx: ^Effect_Flame_Heavy
@@ -274,14 +274,10 @@ HeavyPlasmaFlamer:
 	Warhead@Chemical_Heavy:
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Flame_Heavy:
-		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		Explosions: blue_building_napalm
 	-Warhead@Chemical_Heavy:
-	-Warhead@Flame_Heavy:
-	Warhead@Flame_Heavy_Flat:
+	Warhead@Flame_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
@@ -773,7 +769,7 @@ BallistaMultiShot:
 		PercentageScale: 0
 
 BallistaMultiShotEnergized:
-	Inherits@roleflat: ^Warhead_Arrow_Medium_Flat
+	Inherits@roleflat: ^Warhead_Arrow_Medium
 	Inherits: ^TeslaWeapon
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^MediumChemicalWeapon
@@ -851,7 +847,7 @@ BallistaMultiShotEnergized:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@Arrow_Medium_Flat:
+	Warhead@Arrow_Medium:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 45000
@@ -883,7 +879,7 @@ BallistaTowerMultiShotEnergized:
 	Range: 9214
 
 	MinRange: 1845
-	Warhead@Arrow_Medium_Flat:
+	Warhead@Arrow_Medium:
 		InvalidTargets: Air
 	Warhead@EMPUnit:
 		InvalidTargets: Shielded, Air
@@ -1205,7 +1201,7 @@ NambuMG:
 	Warhead@Bullet_Light:
 		Damage: 4000
 NambuMGWaveforce:
-	Inherits@roleflat: ^Warhead_Waveforce_Heavy_Flat
+	Inherits@roleflat: ^Warhead_Waveforce_Heavy
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: NambuMG
 	Inherits@3: ^WaveforceBulletProjectile
@@ -1213,7 +1209,7 @@ NambuMGWaveforce:
 		Damage: 2000
 	-Warhead@Bullet_Light:
 	-Warhead@Railgun_Heavy:
-	Warhead@Waveforce_Heavy_Flat:
+	Warhead@Waveforce_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
@@ -1272,7 +1268,7 @@ ZeroFighterArrowsEnergized:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@Arrow_Medium_Flat:
+	Warhead@Arrow_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 36000
 		PercentageScale: 4442
@@ -1398,7 +1394,7 @@ SkyHawkArrows:
 		PercentageScale: 9999
 
 SkyHawkArrowsEnergized:
-	Inherits@roleflat: ^Warhead_Arrow_Medium_Flat
+	Inherits@roleflat: ^Warhead_Arrow_Medium
 	Inherits: ^MediumFlameWeapon
 	Inherits@2: ^TeslaWeapon
 	Inherits@3: SkyHawkArrows
@@ -1453,7 +1449,7 @@ SkyHawkArrowsEnergized:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@Arrow_Medium_Flat:
+	Warhead@Arrow_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 72000
 		PercentageScale: 4444
@@ -2099,7 +2095,7 @@ OIFlamer:
 	Warhead@Flame_Medium:
 		Damage: 2000
 OIPlasmaFlamer:
-	Inherits@roleflat: ^Warhead_Flame_Heavy_Flat
+	Inherits@roleflat: ^Warhead_Flame_Heavy
 	Inherits@wh: ^Warhead_Chemical_Heavy
 	Inherits@proj: ^Projectile_Chem_Heavy
 	Inherits@fx: ^Effect_Flame_Heavy
@@ -2118,14 +2114,10 @@ OIPlasmaFlamer:
 	Warhead@Chemical_Heavy:
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Flame_Heavy:
-		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		Explosions: blue_building_napalm
 	-Warhead@Chemical_Heavy:
-	-Warhead@Flame_Heavy:
-	Warhead@Flame_Heavy_Flat:
+	Warhead@Flame_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
@@ -2168,7 +2160,7 @@ BuggyGrenade:
 	Warhead@Demolition_Light:
 		Damage: 60000
 BuggyPlasmaGrenade:
-	Inherits@roleflat: ^Warhead_Plasma_Light_Flat
+	Inherits@roleflat: ^Warhead_Plasma_Light
 	Inherits: ^HeavyBomb
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: BuggyGrenade
@@ -2203,7 +2195,7 @@ BuggyPlasmaGrenade:
 	-Warhead@HeavyBomb:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
-	Warhead@Plasma_Light_Flat:
+	Warhead@Plasma_Light:
 		ValidTargets: Ground, Water
 		Damage: 60000
 		PercentageScale: 3332
@@ -2294,7 +2286,7 @@ JHighV:
 		Damage: 8000
 		PercentageScale: 7488
 JHighVWaveforce:
-	Inherits@roleflat: ^Warhead_Waveforce_Heavy_Flat
+	Inherits@roleflat: ^Warhead_Waveforce_Heavy
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: JHighV
 	Inherits@3: ^WaveforceBulletProjectile
@@ -2307,7 +2299,7 @@ JHighVWaveforce:
 		PercentageScale: 7488
 	-Warhead@Bullet_MediumFlatCompatibility:
 	-Warhead@Railgun_Heavy:
-	Warhead@Waveforce_Heavy_Flat:
+	Warhead@Waveforce_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		PercentageScale: 8325

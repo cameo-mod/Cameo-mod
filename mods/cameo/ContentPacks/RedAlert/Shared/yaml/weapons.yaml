@@ -913,9 +913,10 @@ WaveforceCannonChargedLaser:
 		ValidTargets: Ground, Water, Air
 
 WaveforceCannonDistortedBeam1:
-	Inherits@roleflat: ^Warhead_Waveforce_Heavy_Flat
+	Inherits@roleflat: ^Warhead_Waveforce_Heavy
 	Inherits: ^TeslaWeapon
 	Inherits@2: ^HeavyCannon
+	TargetActorCenter: false
 	ReloadDelay: 120
 	Range: 9343
 	ValidTargets: Ground, Water, Air
@@ -965,7 +966,7 @@ WaveforceCannonDistortedBeam1:
 	-Warhead@HeavyCannon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@Waveforce_Heavy_Flat:
+	Warhead@Waveforce_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 25000
 		PercentageScale: 0
@@ -2233,7 +2234,7 @@ JapanSpeedBoatGun:
 		Damage: 4000
 		PercentageScale: 9975
 JapanSpeedBoatGunWaveforce:
-	Inherits@roleflat: ^Warhead_Waveforce_Heavy_Flat
+	Inherits@roleflat: ^Warhead_Waveforce_Heavy
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: JapanSpeedBoatGun
 	Inherits@3: ^WaveforceBulletProjectile
@@ -2243,7 +2244,7 @@ JapanSpeedBoatGunWaveforce:
 		PercentageScale: 9975
 	-Warhead@Bullet_MediumFlatCompatibility:
 	-Warhead@Railgun_Heavy:
-	Warhead@Waveforce_Heavy_Flat:
+	Warhead@Waveforce_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
@@ -2308,7 +2309,7 @@ ChronoVortexInit:
 		ImpactActors: false
 
 ra1_allies_chronovortex:
-	Inherits@roleflat: ^Warhead_Magic_Heavy_Flat
+	Inherits@roleflat: ^Warhead_Magic_Heavy
 	Inherits: ^HeavyBomb
 	Inherits@2: ^MagicWeapon
 	ReloadDelay: 5
@@ -2420,7 +2421,7 @@ ra1_allies_chronovortex:
 	-Warhead@HeavyBomb:
 	-Warhead@MagicExtraDamage:
 	-Warhead@MagicWeapon:
-	Warhead@Magic_Heavy_Flat:
+	Warhead@Magic_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 4888
 		PercentageScale: 0

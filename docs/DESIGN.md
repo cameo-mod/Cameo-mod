@@ -1044,27 +1044,66 @@ they exist.** The binding order of operations:
 ⛔ Steps 4 and 5 are IMPOSSIBLE before 2 and 3. `apply_balance --confirm` being a no-op is not
 a bug to route around; it is this ordering being enforced. Signed-off anchors today: **0**.
 
-**R4 — Delete the 26 `^Warhead_*_Flat` shims; the existing templates already cover it.**
-Measured: they are near-clones of their twin, differing only by `PercentageScale: 0` and ±1 on
-one or two of 16 armor rows. Of 46 users **only 23 resolve `PercentageScale: 0`** — the other 23
-override it back to ~9990, so the shim's defining property is cancelled for half of them. Users
-move to the plain `^Warhead_<fam>_<level>`; the 23 that want no percentage half declare it
-locally. ⚠ This REPLACES §11b.1b's "second template per family" plan, which is cancelled.
+**R4 — Delete the `^Warhead_*_Flat` shims; the existing templates already cover it.** DONE and
+boot-gated, via `tools/balance/retire_flat_shims.py`. Of 46 users **only 23 resolve
+`PercentageScale: 0`** — the other 23 override it back to ~9990, so the shim's defining property
+is cancelled for half of them. Users moved to the plain `^Warhead_<fam>_<level>`.
+⚠ This REPLACES §11b.1b's "second template per family" plan, which is cancelled.
+
+⚠ **Three numbers in the first draft of this ruling were wrong, and the corrections are worth
+more than the ruling.** All three came from describing the shims rather than resolving them.
+
+* **27 shims, not 26.** `^Warhead_TS30mmRail_Unscoped_Flat` is a legacy shape with no plain
+  twin and no user — deleted outright.
+* **"Near-clones differing only by `PercentageScale`" was false: ZERO of the 26 were clones,**
+  so the deletion was never a rename. Four independent differences: `Damage: 0` vs `2000`
+  (moot — all 46 users set their own); **weapon-level** fields present only in the twin
+  (`Range`, `ReloadDelay`, `TargetActorCenter`, `ValidTargets` — a `^Warhead_*` template is
+  NOT only warheads, the same trap that once stripped `TargetActorCenter` off 60+ weapons);
+  extra warhead nodes only the twin ships (`*_ExtraDamage`, `*_Percentage`, 7 user instances);
+  and Versus rows off by up to 4.
+* **The Versus delta is convergence, not regression.** `gen_weapon_template.py` never emitted
+  `_Flat` — grep it. The shims were legacy orphans outside the generator's authority, which is
+  precisely why they drifted from the regenerated twins. 34 distinct armor rows moved, worst by
+  **4 points** on a mean-100 scale. Local compensation is impossible anyway: `Versus` may live
+  only in a template.
+
+**The load-bearing discovery: 11 weapons declare `Warhead@X` and then delete it again with
+`-Warhead@X`.** That is dead code only while the live node is named `Warhead@X_Flat`. Rename it
+to `Warhead@X` and the dormant removal deletes the real main, which is then re-added at the END
+of the warhead list — a **firing-order change**, the same class as the Wraith. Any future
+rename of this shape must check whether the target name is already mentioned in the weapon.
 
 **R5 — "Flat warhead" means a profile that does not discriminate, and none exist.** The shape
 law is the **2x–8x Versus spread band with 4x the target** (§ the target-band rule). Measured
 over 190 `^Warhead_*` templates: minimum ratio **2.00x**, median 4.62x — **zero flat warheads**.
 The `_Flat` NAME was the problem, not the shape.
 
-**R6 — Nine templates exceed 8x. Ratified: `Sniper_Light` (11.00x), `Storm_Heavy` (10.14x),
-`Storm_Medium` (8.81x), `Storm_Super` (8.56x), `Tesla_Heavy` (8.36x)** — record them in
-`aggregate_archetype.SPECIALIST_RATIOS`. **To be pulled into band:
-`MissileAP_Heavy_D2K_ORocket` (12.50x) and `Laser_Medium` (8.44x).** The remaining two entries
-(`Sniper_Light_Flat`, `Laser_Medium_Flat`) disappear with R4.
+**R6 — corrected: TWO templates exceed 8x, not nine, and only ONE is real work.**
+⛔ **The "nine" came from computing max:min over ALL 22 Versus rows, including `Shield`.**
+`Shield` is not a normal armor — §12.0c gives it its own compressed [100,400] ladder — and
+`audit_versus_profile.py` has always excluded it, along with the five physical-state
+pseudo-armors: `NON_ARMOR = {Shield, HAZMAT, COMPOSITE, BLAST, REFLECTOR, ARMOR}`. Measured on
+the 16 real armor rows over 167 templates:
+
+| template | armor-only | with `Shield` folded in | verdict |
+|---|---|---|---|
+| `MissileAP_Heavy_D2K_ORocket` | **12.50x** | 12.50x | genuinely out of band — pull it in |
+| `Sniper_Light` | 10.00x | 11.00x | `HAND_TUNED`, ratified, generator skips it |
+| `MissileAA_Medium` | 7.35x | 7.35x | in band (next highest) |
+| `Laser_Medium` | **4.84x** | 8.44x | **in band, on the 4x target — do nothing** |
+
+`Storm_*` and `Tesla_Heavy` are likewise in band and were ratified against inflated figures.
+`audit_versus_profile.py` reports **spread 0/0** and has done so since 2026-08-22 — a tool
+already implementing the law disagreed with the measurement, which by the standing rule makes
+it a contradiction to check, not a finding to act on. The ratified specialists may still be
+recorded in `aggregate_archetype.SPECIALIST_RATIOS`, but as authored exceptions, not as band
+violations. **Never fold `Shield` into a spread-band ratio.**
 
 **R7 — The heaviness bell stays OFF until W24 closes.** Re-confirmed after being asked directly.
 `USE_BELL` remains false; W24 is not closed (W7 **957**, W8 **858**). Finish W24, then flip the
-bell as its own boot-gated change. ⛔ Do not enable it to fix R6 — pull those two by hand.
+bell as its own boot-gated change. ⛔ Do not enable it to fix R6 — and after R6's correction
+there is exactly **one** template to pull in by hand, not two.
 
 **R8 — CARRIER SLAVE AMMO, exactly specified.** Every `CarrierSlave` gets `AmmoPool` +
 `ReloadAmmoPool`. All 19 break this today (8 have no pool at all, which `CarrierSlave.cs:59-65`

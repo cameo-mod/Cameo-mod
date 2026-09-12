@@ -624,7 +624,7 @@ Vulcan:
 		Damage: 12000
 		Spread: 600
 Napalm:
-	Inherits@finalmain: ^Warhead_Flame_Heavy_Flat
+	Inherits@finalmain: ^Warhead_Flame_Heavy
 	Inherits: ^Warhead_Demolition_Heavy
 	Inherits@3: ^Effect_Flame_Heavy
 	ReloadDelay: 2
@@ -636,16 +636,13 @@ Napalm:
 		Shadow: true
 	Warhead@Demolition_Heavy:
 		Damage: 6000
-	Warhead@Flame_Heavy:
-		Damage: 6000
 	Warhead@Effect: CreateEffect
 		Explosions: med_napalm
 		GlowScale: 1.5
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12
 	-Warhead@Demolition_Heavy:
-	-Warhead@Flame_Heavy:
-	Warhead@Flame_Heavy_Flat:
+	Warhead@Flame_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 12000
 		PercentageScale: 9992
@@ -669,7 +666,7 @@ VulcanA10Carrier:
 		Damage: 6000
 		Spread: 300
 NapalmA10Carrier:
-	Inherits@roleflat: ^Warhead_Flame_Heavy_Flat
+	Inherits@roleflat: ^Warhead_Flame_Heavy
 	Inherits: ^Warhead_Demolition_Heavy
 	Inherits@3: ^Effect_Flame_Heavy
 	ReloadDelay: 2
@@ -681,16 +678,13 @@ NapalmA10Carrier:
 		Shadow: true
 	Warhead@Demolition_Heavy:
 		Damage: 4000
-	Warhead@Flame_Heavy:
-		Damage: 4000
 	Warhead@Effect: CreateEffect
 		Explosions: med_napalm
 		GlowScale: 1.5
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12
 	-Warhead@Demolition_Heavy:
-	-Warhead@Flame_Heavy:
-	Warhead@Flame_Heavy_Flat:
+	Warhead@Flame_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 8000
 		PercentageScale: 9988

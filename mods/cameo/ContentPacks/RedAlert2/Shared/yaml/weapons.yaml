@@ -2748,7 +2748,7 @@ RA2SCUD:
 		ValidTargets: Ground, Air
 
 RA2SCUD_rad:
-	Inherits@roleflat: ^Warhead_MissileChem_Heavy_Flat
+	Inherits@roleflat: ^Warhead_MissileChem_Heavy
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^MediumChemicalWeapon
 	Inherits@3: ^HeavyChemicalWeapon
@@ -2792,7 +2792,7 @@ RA2SCUD_rad:
 	-Warhead@HeavyChemicalWeapon:
 	-Warhead@LightChemicalWeapon:
 	-Warhead@MediumChemicalWeapon:
-	Warhead@MissileChem_Heavy_Flat:
+	Warhead@MissileChem_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 54000
 		PercentageScale: 0

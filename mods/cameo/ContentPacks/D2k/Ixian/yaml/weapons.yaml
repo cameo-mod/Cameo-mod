@@ -1249,10 +1249,11 @@ d2k_farasha_charge:
 		TrackTarget: false
 
 ixian_farasha:
-	Inherits@roleflat: ^Warhead_Laser_Medium_Flat
+	Inherits@roleflat: ^Warhead_Laser_Medium
 	Inherits: ^TeslaWeapon
 	Inherits@2: ^HeavyFlameWeapon
 	Inherits@3: ^RailgunWeapon
+	-Warhead@Laser_Medium_ExtraDamage:
 	ReloadDelay: 50
 	Range: 6400
 	Burst: 50
@@ -1322,7 +1323,7 @@ ixian_farasha:
 	-Warhead@RailgunWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@Laser_Medium_Flat:
+	Warhead@Laser_Medium:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 8000
@@ -1367,7 +1368,7 @@ d2k_farasha_aa:
 	-Warhead@RailgunWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@Laser_Medium_Flat:
+	Warhead@Laser_Medium:
 		-InvalidTargets:
 		ValidTargets: Air
 		Damage: 8000

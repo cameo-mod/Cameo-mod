@@ -371,7 +371,7 @@ MortarTeamArtilleryShell:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@CannonHE_MediumFlatCompatibility:
 wc2gryphonFireVisible:
-	Inherits@roleflat: ^Warhead_MissileTesla_Medium_Flat
+	Inherits@roleflat: ^Warhead_MissileTesla_Medium
 	Inherits: ^LightMissile
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^HeavyBomb
@@ -451,7 +451,7 @@ wc2gryphonFireVisible:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@TeslaChargedExtraDamage:
 	-Warhead@TeslaChargedWeapon:
-	Warhead@MissileTesla_Medium_Flat:
+	Warhead@MissileTesla_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 45000
 		PercentageScale: 0

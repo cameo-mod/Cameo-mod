@@ -591,7 +591,7 @@ TSInfantryMortarChem:
 		PercentageScale: 0
 
 TS120mmxChem:
-	Inherits@finalmain: ^Warhead_Chemical_Heavy_Flat
+	Inherits@finalmain: ^Warhead_Chemical_Heavy
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@fx: ^Effect_Demolition_Heavy
 	Inherits@3: ^TSCannonEffect
@@ -603,8 +603,6 @@ TS120mmxChem:
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 40000
-	Warhead@Chemical_Heavy:
-		Damage: 40000
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 5
 		Duration: 50
@@ -615,9 +613,8 @@ TS120mmxChem:
 		Palette: player
 		Weapon: TSSmoke
 		InvalidTargets: Water
-	-Warhead@Chemical_Heavy:
 	-Warhead@Demolition_Heavy:
-	Warhead@Chemical_Heavy_Flat:
+	Warhead@Chemical_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 80000
 		PercentageScale: 9999

@@ -284,13 +284,14 @@ Future_Turret_Cryo:
 	Warhead@LaserWeaponPercentage:
 		InvalidTargets: Air
 CryoLegionnaireAttack:
-	Inherits@roleflat: ^Warhead_Cryo_Light_Flat
+	Inherits@roleflat: ^Warhead_Cryo_Light
 	Inherits: ^LightMissile
 	Inherits@2: ^SmallArms
 	Inherits@3: ^Chaingun
 	Inherits@4: ^FlakWeapon
 	Inherits@5: ^TeslaWeapon
 	Inherits@6: ^LaserWeapon
+	TargetActorCenter: false
 	Range: 7000
 	ReloadDelay: 30
 	Report: AUCryoc_wea1impact2La.wav, AUCryoc_wea1impact2Lb.wav, AUCryoc_wea1impact2Lc.wav, AUCryoc_wea1impact2Ld.wav
@@ -412,7 +413,7 @@ CryoLegionnaireAttack:
 	-Warhead@SmallArms:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@Cryo_Light_Flat:
+	Warhead@Cryo_Light:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 13600
@@ -812,7 +813,7 @@ Future_MultiMissile_Frag:
 		AimTargetStances: Enemy, Neutral
 
 Future_MultiMissile_Sigma:
-	Inherits@roleflat: ^Warhead_MissileTesla_Medium_Flat
+	Inherits@roleflat: ^Warhead_MissileTesla_Medium
 	Inherits: ^TeslaChargedWeapon
 	Inherits@2: ^MagicWeapon
 	Inherits@3: ^FlakWeapon
@@ -899,7 +900,7 @@ Future_MultiMissile_Sigma:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@TeslaChargedExtraDamage:
 	-Warhead@TeslaChargedWeapon:
-	Warhead@MissileTesla_Medium_Flat:
+	Warhead@MissileTesla_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 55888
 		PercentageScale: 0

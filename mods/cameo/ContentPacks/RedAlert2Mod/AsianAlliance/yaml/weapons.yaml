@@ -1175,14 +1175,14 @@ AsianQuasar_AA:
 	Warhead@PreservedFlat_TeslaExtraDamage:
 		ValidTargets: Air
 AsianQuasar_EMP_AA:
-	Inherits@finalmain: ^Warhead_MissileQuantum_Medium_Flat
+	Inherits@finalmain: ^Warhead_MissileQuantum_Medium
 	Inherits: AsianQuasar_AA
 	Warhead@EMPUnit: AffectsIntegrity
 		InvalidTargets: Shielded
 		ValidTargets: Air
 		Damage: 20000
 	-Warhead@MissileAA_MediumFlatCompatibility:
-	Warhead@MissileQuantum_Medium_Flat:
+	Warhead@MissileQuantum_Medium:
 		ValidTargets: Air
 		Damage: 8000
 		PercentageScale: 0
@@ -1248,13 +1248,13 @@ AsianPunisherAG:
 		InvalidTargets: Air
 
 AsianPunisherAG_EMP:
-	Inherits@finalmain: ^Warhead_MissileQuantum_Medium_Flat
+	Inherits@finalmain: ^Warhead_MissileQuantum_Medium
 	Inherits: AsianPunisherAG
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
 		InvalidTargets: Shielded, Air
 		Damage: 20000
-	Warhead@MissileQuantum_Medium_Flat:
+	Warhead@MissileQuantum_Medium:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -1394,14 +1394,14 @@ AsianQuasarBoat_AA:
 	Warhead@PreservedFlat_TeslaExtraDamage:
 		ValidTargets: Air
 AsianQuasarBoat_EMP_AA:
-	Inherits@finalmain: ^Warhead_MissileQuantum_Medium_Flat
+	Inherits@finalmain: ^Warhead_MissileQuantum_Medium
 	Inherits: AsianQuasarBoat_AA
 	Warhead@EMPUnit: AffectsIntegrity
 		InvalidTargets: Shielded
 		ValidTargets: Air
 		Damage: 20000
 	-Warhead@MissileAA_MediumFlatCompatibility:
-	Warhead@MissileQuantum_Medium_Flat:
+	Warhead@MissileQuantum_Medium:
 		ValidTargets: Air
 		Damage: 8000
 		PercentageScale: 0
@@ -1526,7 +1526,7 @@ AsianChemical_elite:
 	BurstDelays: 3
 
 AsianChemicalBombs:
-	Inherits@roleflat: ^Warhead_Chemical_Heavy_Flat
+	Inherits@roleflat: ^Warhead_Chemical_Heavy
 	Inherits@2: ^RA2MediumCannon
 	ValidTargets: Ground, Water
 	InvalidTargets: wall
@@ -1549,12 +1549,6 @@ AsianChemicalBombs:
 		ContrailStartWidth: 75
 		ContrailEndWidth: 25
 		TrailInterval: 1
-	Warhead@Chemical_Heavy:
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@CannonHE_Medium:
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
@@ -1576,8 +1570,7 @@ AsianChemicalBombs:
 		Weapon: RA2Cloud
 		InvalidTargets: Water
 	-Warhead@CannonHE_Medium:
-	-Warhead@Chemical_Heavy:
-	Warhead@Chemical_Heavy_Flat:
+	Warhead@Chemical_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975

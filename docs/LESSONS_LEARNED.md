@@ -1699,3 +1699,36 @@ had shown cameo-mod's PRs moments earlier.
 ⚠ **Pass `--repo cameo-mod/Cameo-mod` explicitly for every `gh` call in this tree**, and never
 report a PR or branch as missing on a bare `gh` result — check `gh repo view --json
 nameWithOwner` first, or compare with `gh api repos/cameo-mod/Cameo-mod/compare/master...<branch>`.
+
+## A spread-band ratio that folds in `Shield` invents violations that do not exist
+
+`Shield` is not a normal armor. §12.0c gives it its own compressed `[100,400]` ladder, so its
+row sits two to three times above every real armor row in the same profile. Take `max/min`
+across all 22 Versus rows and that single row sets the numerator every time.
+
+Reported: **nine** `^Warhead_*` templates outside the 2x–8x band, and two of them were queued
+for hand repair. Measured on the 16 real armor rows: **two**, one of which is `HAND_TUNED` and
+ratified. `Laser_Medium` was filed at 8.44x and is actually **4.84x** — sitting on the 4x
+target, needing nothing. `Storm_*` and `Tesla_Heavy` were ratified as specialists against
+figures that were pure `Shield` contamination.
+
+⚠ **Use the audit's own exclusion set, never a bare `max/min`:**
+`NON_ARMOR = {Shield, HAZMAT, COMPOSITE, BLAST, REFLECTOR, ARMOR}` — the last five are
+physical-state pseudo-armors, also not ladder rungs. `audit_versus_profile.py` had reported
+**spread 0/0** throughout. A tool that implements the law and disagrees with your measurement
+makes the measurement the suspect — that rule already exists in this file and was still worth
+paying for twice.
+
+Two sibling traps from the same session:
+
+⚠ **A block node's VALUE is the empty string.** `{c.key: str(c.value) for c in node.children}`
+gives `"Versus" -> ""`, so comparing two profiles at the value level finds every armor row
+equal. A `_Flat`-shim tool printed *"VERSUS CONVERGENCE: 0 rows"* while 64 weapons were in fact
+drifting. Walk the CHILDREN of `Versus` / `PercentageVersus`, unconditionally.
+
+⚠ **Renaming `X_Flat` -> `X` can collide with a name the weapon already uses.** 11 weapons
+declare `Warhead@X` and then delete it again with `-Warhead@X`. That is dead code only while the
+live node is called `Warhead@X_Flat`; after the rename the dormant removal deletes the real main
+and it is re-appended at the END of the list — a **firing-order** change, the Wraith class. Before
+any such rename, check whether the target name already appears in the weapon, and handle the
+collision explicitly instead of letting the merge resolve it.

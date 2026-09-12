@@ -5,11 +5,18 @@
 The rulings are binding and live in **`DESIGN.md` §11b.0 (R1–R9)** — read that, not this
 summary. The maintainer-approved WORK ORDER, all four confirmed in one answer:
 
-1. **Delete the 26 `^Warhead_*_Flat` shims** (R4). Users move to the plain
-   `^Warhead_<fam>_<level>`; the 23 that genuinely want `PercentageScale: 0` declare it
-   locally. Verify with `promote_compatibility_warheads.py`'s resolved-node gate, **now also
-   order-preserving** (Codex's Wraith finding: a set comparison cannot see execution order).
-   Boot-gate. Expect W8 to fall below 858.
+1. ✅ **DONE — the 27 `^Warhead_*_Flat` shims are deleted** (R4), boot-gated, by
+   `tools/balance/retire_flat_shims.py`. 46 users re-pointed; compensations written for 11
+   dead `Warhead@X` / `-Warhead@X` pairs, 7 extra warheads and 78 weapon-level fields.
+   Verified through the new shared **`tools/balance/resolved_gate.py`**, which pairs the
+   order-INSENSITIVE field set with an order-SENSITIVE warhead-sequence check — Codex's Wraith
+   finding composed with my rename gate, as they asked. `promote_compatibility_warheads.py`
+   now uses it too. `find_empty_warhead` 0; `audit_family_uniqueness` and
+   `audit_versus_profile` green.
+   ⛔ **"Expect W8 to fall below 858" was wrong.** W8 tests the `^Warhead_` prefix, which
+   `^Warhead_*_Flat` already satisfied, so the shims were never in its count. W8 is
+   **unchanged at 858** and this change moves no ratchet at all. It removes 27 duplicate
+   templates — and the corrected R4/R6 numbers it forced out are worth more than the deletion.
 2. **Carrier slave ammo pools, 17 actors** (R8). GENERATE them, never hand-type:
    `Ammo = N x lcm(Burst_i)`, `AmmoUsage_i = lcm/Burst_i`, `Count/Delay = Ammo/100`,
    upgrade-granted weapons `AmmoUsage: 0`. Skip `tkmsuicidedrone` and `farasha_drone_ixian`.
@@ -31,7 +38,13 @@ the loss. The names (`200mmD`, `SonicZapC`, `VulcanD`) say they ARE dummy slots,
 `Damage` cannot *prove* one.
 
 ⚠ **Bell curve: the hold HOLDS** (R7). `USE_BELL` stays false until W24 closes (W7 957, W8 858).
-The two over-band templates in R6 get pulled by hand, not by enabling the bell.
+
+⛔ **R6 is corrected: ONE template is out of band, not nine.** The nine came from folding
+`Shield` into a `max/min` Versus ratio, and `Shield` is its own compressed [100,400] ladder
+(§12.0c) that `audit_versus_profile.py` has always excluded. On the 16 real armor rows only
+`MissileAP_Heavy_D2K_ORocket` (**12.50x**) is genuinely out of band; `Sniper_Light` (10.00x) is
+`HAND_TUNED` and ratified. **`Laser_Medium` is 4.84x — in band, on the 4x target, do nothing
+to it.** `Storm_*` and `Tesla_Heavy` likewise. See `DESIGN.md` R6 for the table.
 
 ### The old "open decisions" list, for provenance only — every one is now answered
 

@@ -370,7 +370,7 @@ SyndicateFireballLauncherExplode:
 	-Warhead@LightFlameWeapon:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@HeavyFlameWeapon:
-	-Warhead@Flame_Heavy_Flat:
+	-Warhead@Flame_Heavy:
 	Warhead@PreservedFlat_Flame_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -929,7 +929,7 @@ LatinSmokerCannon_elite:
 	BurstDelays: 3
 
 RA2GrenadePack:
-	Inherits@roleflat: ^Warhead_Concussion_Light_Flat
+	Inherits@roleflat: ^Warhead_Concussion_Light
 	Inherits: ^Warhead_MissileAP_Heavy
 	Inherits@3: ^Effect_Concussion_Light
 	Inherits@4: ^RA2FlakWeapon
@@ -947,9 +947,6 @@ RA2GrenadePack:
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Concussion_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -958,10 +955,9 @@ RA2GrenadePack:
 		Duration: 22
 		Range: 1310
 		ValidTargets: Ground, Water, Air
-	-Warhead@Concussion_Light:
 	-Warhead@Flak_Medium:
 	-Warhead@MissileAP_Heavy:
-	Warhead@Concussion_Light_Flat:
+	Warhead@Concussion_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984

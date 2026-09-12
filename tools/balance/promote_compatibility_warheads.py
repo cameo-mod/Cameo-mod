@@ -76,6 +76,7 @@ sys.path[:0] = ["tools/audit"]
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 import miniyaml  # noqa: E402
+import resolved_gate  # noqa: E402
 
 ROOT = pathlib.Path(".").resolve()
 COMPAT = "^Compatibility_"
@@ -109,18 +110,11 @@ def twin_of(t: str, weapons) -> str | None:
     return None
 
 
-def flatten(node, prefix="") -> set[str]:
-    """A weapon as an order-insensitive set of 'path = value'. Order-insensitive on purpose:
-    renaming a node key moves it in any sorted dump, which made attempt 1's comparator report
-    every touched weapon as changed."""
-    out: set[str] = set()
-    if node is None:
-        return out
-    for c in node.children:
-        p = prefix + "/" + c.key
-        out.add(p + " = " + str(c.value).strip())
-        out |= flatten(c, p)
-    return out
+# The comparator moved to tools/balance/resolved_gate.py, which pairs this module's
+# order-INSENSITIVE field set with an order-SENSITIVE warhead-sequence check. A set alone
+# cannot see a reorder: it accepted the Wraith change that moved a 60,000-damage main to
+# AFTER `Warhead@OwnerChange`, so the unit captured a target and then shot it (found by
+# Codex in review, PR #356). Both halves are now mandatory.
 
 
 def build_plan(rs, excluded: set[str]):
@@ -266,31 +260,32 @@ def restore(paths: list[str]) -> None:
                    capture_output=True)
 
 
-def verify(base_root: str, meta) -> list[str]:
-    """Resolved-node comparison against a pristine worktree. Returns the weapons whose
-    CONTENT moved (the name map is applied to the baseline first)."""
+def verify(base_root: str, meta) -> list[tuple[str, dict]]:
+    """Resolved-behaviour comparison against a pristine worktree.
+
+    Returns [(weapon, diff)] for every weapon whose behaviour moved. The rename map is
+    applied to the BASELINE, so the question is "is the new tree what the old tree would be
+    called under the new names" — mapping the candidate instead would accept a name the map
+    does not cover. Both halves of `resolved_gate.compare` run: the field set AND the
+    warhead firing order.
+    """
     base = miniyaml.Ruleset(base_root)
     cur = miniyaml.Ruleset(str(ROOT))
     ren = dict(meta["tmap"])
     for a, b in meta["imap"].items():
         ren["Warhead@" + a] = "Warhead@" + b
         ren["-Warhead@" + a] = "-Warhead@" + b
-    order = sorted(ren.items(), key=lambda kv: -len(kv[0]))
 
-    def norm(s: str) -> str:
-        for a, b in order:
-            s = s.replace(a, b)
-        return s
-
-    bad = []
+    bad: list[tuple[str, dict]] = []
     for w in sorted(base.weapons):
         if w.startswith("^"):
             continue
         if w not in cur.weapons:
-            bad.append(w)
+            bad.append((w, {"lost": ["the whole weapon"], "gained": []}))
             continue
-        if {norm(x) for x in flatten(base.resolve_weapon(w))} != flatten(cur.resolve_weapon(w)):
-            bad.append(w)
+        diff = resolved_gate.compare(base.resolve_weapon(w), cur.resolve_weapon(w), ren)
+        if diff:
+            bad.append((w, diff))
     return bad
 
 
@@ -333,7 +328,7 @@ def main() -> int:
             return 0
         # attribute each failure to the template(s) it inherits, and exclude those
         blame: set[str] = set()
-        for w in bad:
+        for w, _diff in bad:
             node = rs.weapon(w)
             if node is None:
                 continue
@@ -342,8 +337,9 @@ def main() -> int:
                     blame.add(c.value.strip())
         if not blame:
             print("  cannot attribute the failures to a template - aborting, tree restored.")
-            for w in bad[:15]:
-                print("   unattributed:", w)
+            for w, diff in bad[:15]:
+                for line in resolved_gate.describe(w, diff):
+                    print("   " + line)
             restore(paths)
             return 1
         print("  excluding:", ", ".join(sorted(blame)))
