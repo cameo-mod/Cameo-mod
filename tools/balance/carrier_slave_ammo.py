@@ -14,7 +14,11 @@ MAINTAINER RULING R8, quoted because the arithmetic is theirs:
    ammo pool would need to be at 20 and the ammo reload would be 1 ammo per 5 ticks instead so
    at 100 ticks it's full again"
 
-THE LAW, and it reproduces both of those worked examples exactly (see `_self_test`):
+THE LAW, and it reproduces both of those worked examples exactly (see `_self_test`). The law
+sizes the pool and reload rate; it does not by itself stop an empty pool from firing. The
+generated actor contract also carries `AmmoCondition`, `AttackAircraft.RequiresCondition`, and
+per-armament minimum-ammo pause gates (`ammo < AmmoUsage`). The carrier engine refills the pool when the slave re-enters its carrier;
+`ReloadAmmoPool` is the explicit deployed/in-flight recovery policy.
 
     share    = lcm(Burst_i) over the SCORING armaments
     usage_i  = share / Burst_i          -- so every armament spends `share` per full burst
