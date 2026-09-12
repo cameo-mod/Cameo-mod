@@ -35,6 +35,34 @@ units: TD/TS warheads declare `Spread` in **leptons** (`DemoAtomicWH` 512, 256 t
 RA2/YR declare `CellSpread` where `AAHE` reads 0.5 (plainly half a cell) and `BlueJammer` reads
 **225** with Ares fixed-point providers in play. Nothing is converted until that is ruled.
 
+**7. ⛔ AN AMMO POOL MAKES `ReloadDelay` THE WRONG CLOCK — 133 actors, and nothing knew.**
+`extract_stats`, `reference_distribution` and `formula` contain **zero** references to
+`AmmoPool`, yet 145 Cameo actors have one. Maintainer ruled the comparable figure per regime:
+a self-reloading pool is *pool damage / time to empty* (101 actors), an airfield-rearm plane is
+*damage per sortie and no rate at all* (22), and 10 have no replenishment mechanism this can
+find. **12 hold a single shot, so no rate exists for them either.** `tools/balance/ammo_cadence.py`
+implements it with a self-test; `audit_ammo_cadence.py` reports it and is in `run_all.sh`.
+`td_nod_ssmlauncher` is the proof: weapon rate 2 shots/250 ticks, ammo rate 2 shots/250 ticks —
+identical, so its reload is decorative and a pipeline-written reload change would move the
+ledger's number while changing nothing in game. **54 of 93 self-reloading actors cannot sustain
+their own weapon's rate.** Nothing applied: the ledger cannot be re-extracted yet (decision 8).
+
+**8. ⛔ ALL 19 `CarrierSlave` ACTORS BREAK THE POOL+RELOAD RULE**, in two opposite ways.
+8 have **no pool at all** → `CarrierSlave.cs:59-65` grants *"unlimited ammunitions"*, so the
+carrier's launch/expend/return cycle never runs. 11 have **a pool and no reload** → they empty
+once and are permanently unable to attack: `CarrierMaster` has no ammo path (`RearmTicks` only
+gates relaunch), none carry `Rearmable`, and `CarrierSlave.NeedToReload` is **declared and never
+called anywhere in CA**. Fix is `AmmoPool` + `ReloadAmmoPool` on each. ⚠ Two of the 8
+(`tkmsuicidedrone`, possibly `farasha_drone_ixian`) are suicide drones and may be legitimate
+exceptions — confirm before adding pools to those.
+
+**9. The ledger cannot be re-extracted until #356 lands, and `audit_balance_drift` is ALREADY
+RED on 26 of 34 ledgers.** A re-extract today picks up (a) my own Wraith reorder, which #356
+reverts — the main warhead moves from `damage_warheads[0]` to `[4]`, visible proof of Codery's
+ordering finding — and (b) five RA1 actors someone changed in yaml without re-extracting
+(`ra1_agentdelphi`/`ra1_general`/`ra1_technician`/`ra1_einstein`/`ra1_scientist`, HP 2500→5000,
+damage 100→500). Merge #356, then re-extract once, as its own commit.
+
 **5. The 63 dummy-primary rows — and the INI corpus must NOT be regenerated until they are
 ruled.** Regenerating `docs/reference/ini_corpus.json` today changes 1,789 rows, but only **63**
 on evidence (the other 1,726 are DTA provenance stamps). Those 63 carry the OLD auto-promotion

@@ -78,6 +78,32 @@ STATS = ("hp", "speed", "w_range", "w_dps", "cost")
 # between 2 and 4 should read as one of them, not as 3.
 DIRECT_STATS = ("w_burst",)
 
+# ⛔ LAW-GOVERNED STATS TAKE NO REFERENCE TARGET AT ALL.
+# `turn_speed` and `turn_ratio` are not free parameters in Cameo — DESIGN.md fixes them:
+# `TurnSpeed = Speed / 5` for turreted units, `2 x Speed / 5` for turretless/frontal ones,
+# DERIVED IN C# and not written in yaml (maintainer 2026-09-07), with a turret always matching
+# its hull and `audit_turn_speed.py` T3 guarding it. Cameo's `turn_ratio` is therefore 5.0 or
+# 2.5 BY LAW, and asking the peers what it should be is asking a question Cameo has already
+# answered — a reference target here can only contradict a shipped ruling.
+#
+# And the projection made that contradiction loud, because `turn_ratio` is DIMENSIONLESS
+# (speed / turn_speed), so the peers' raw values are directly comparable and projecting a
+# position in a distribution is meaningless. Measured 2026-09-12 on actors whose sources all
+# agree:
+#     asianalliance_howitzer      all sources 1.00   projected 3.83
+#     asianalliance_pulverizer    all sources 0.60   projected 3.51
+#     asianalliance_harbinger     all sources 4.67   projected 11.55
+# An 11.55 turn ratio is not a number any mod authored; it is an artifact.
+#
+# ⚠ Two different repairs, and the distinction matters. `w_burst` is scale-free AND a real
+# design input, so it moved to DIRECT_STATS and still produces a target. `turn_*` is scale-free
+# and NOT an input, so it produces none. Do not "fix" these by adding them to DIRECT_STATS.
+#
+# Verified safe: nothing consumes a turn target. `build_reference_report` shows hp/speed/range/
+# dps/burst/cost, `build_japan_pilot.AXES` is hp/speed/w_range/cost, and `apply_balance` writes
+# `turn_speed` from the LEDGER (where the derived law put it), never from a reference.
+LAW_GOVERNED_STATS = ("turn_speed", "turn_ratio")
+
 
 def add_cost_distribution(dist, rows):
     """Fold a `cost` distribution into `dist` in place.
@@ -306,6 +332,8 @@ def target_for(rows, cameo_row, stat, dist, cdist):
     frozen = getattr(cdist, 'cameo_votes', None)
     vote_row = frozen.get(cameo_row.get('id')) if frozen is not None else cameo_row
     projection_row = vote_row if vote_row is not None else cameo_row
+    if stat in LAW_GOVERNED_STATS:
+        return None, None, 0
     if stat in DIRECT_STATS:
         return _direct_target(rows, vote_row, stat)
     per_source = collections.defaultdict(lambda: collections.defaultdict(list))
