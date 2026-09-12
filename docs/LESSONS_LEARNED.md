@@ -1,5 +1,10 @@
 # Lessons Learned — read before every task
 
+> Current human task instructions and the shared workflow in `AGENTS.md` / `AGENT_WORKSPACE.md`
+> govern execution. Older operational examples below are historical evidence: they do not grant
+> automatic pull/merge, publication, pin changes, OS security changes, `--check-yaml`, or a game
+> launch for documentation-only work. Follow the shared procedure and its activation boundary.
+
 **Read this file, `AGENT_WORKSPACE.md`, `HANDOFF.md` and the relevant sections of `DESIGN.md`
 before touching any code, YAML, asset or balance value.**
 
@@ -15,7 +20,7 @@ add it to the Contents below: `audit_doc_health` D7 fails if the index misses on
 **`docs/README.md` is the canonical definition of the reading order.** The list below is a
 convenience copy; if they disagree, README wins and this copy gets fixed.
 
-1. `CLAUDE.md` (repo root) — the hard rules, loaded every session.
+1. `AGENTS.md` (repo root) — shared entry point; `CLAUDE.md` adds provider technical context.
 2. `docs/LESSONS_LEARNED.md` (this file) — safe defaults and pitfalls.
 3. `docs/AGENT_WORKSPACE.md` — source-of-truth map, operating sequence, incident protocol, commit gate.
 4. `docs/HANDOFF.md` — verified current state and the priority-ordered queue.
@@ -30,6 +35,8 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 ---
 
 ## Contents
+
+- [The canonical engine update pipeline (binding, uniform process)](#the-canonical-engine-update-pipeline-binding-uniform-process)
 
 **Crash classes — these end a boot, and most gates cannot see them**
 
@@ -721,17 +728,17 @@ tree with an external reference. Run it after every collapse.
 
 ## Git workflow and commit rules (2026-07-24)
 
-### Binding rules from user and co-maintainer Blackrobe
+### Current operating rule
 
-- **Always fetch, pull, and merge before any commit.** The remote may have changes from other developers. If the engine pin (`mod.config` `ENGINE_VERSION`) changed, always run `make all` to fetch and build the new engine before boot-gating. Never skip the boot-gate.
-- **Always boot-gate before committing.** Launch the game with `launch-game.cmd`, wait for the main menu (perf.log ends with `MenuPostProcessEffect.PostWorldLoaded`), kill the process, then check for NEW `exception-*.log` files in `%APPDATA%/OpenRA/Logs`. A commit that breaks the boot is not acceptable.
-- **`utility.cmd cameo --check-yaml` is a linting/YAML validation tool, NOT a boot-gate substitute.** Use it for: verifying cosmetic refactors (actor/template renames), checking broken prerequisites, and detecting gameplay-relevant YAML issues. **Goal: 0 errors AND 0 warnings.** The utility takes a VERY LONG TIME (10+ minutes) — only run it when you have completed ALL connected tasks from the last report and expect 0 errors/warnings to confirm. Do NOT run it repeatedly. Keep findings from the last report in ROADMAP and docs so they can be fixed without re-running. It is ABSOLUTELY NECESSARY — just choose wisely WHEN to run it.
-- **Always update ALL relevant documentation files BEFORE committing.** This includes `docs/design/ROADMAP.md`, `docs/DESIGN.md`, `docs/audit/SUMMARY.md`, `docs/LESSONS_LEARNED.md`, and any other docs affected by the change. Check old docs for outdated information, inconsistencies, and contradictions — fix them. A commit without updated docs is an incomplete commit.
-- **Do not spam commits on upstream master.** Use a pull request (PR) for cleaner commit history. Create a feature branch, push it, open a PR, and merge only after verification.
-- **Only merge a PR if either:** (a) you no longer detect regression caused by the changes, or (b) launching the game no longer results in a crash. Commits that do not break the master branch are a naturally acceptable outcome.
-- **Commit titles must be self-explanatory to all developers.** Terms like "Phase 5", "A2 audit", "Fix B5", or "X/Y law" are only understood internally by Aedis and their agent. If such internal pointers are necessary, elaborate where to find the definition (e.g. "see docs/audit/SUMMARY.md bug class B5") and what kind of project it links to.
-- **When a task is completely done, merge the feature branch to master.** Do not leave completed work stranded on a feature branch. Ensure boot-gate passes and docs are updated before merging.
-- See also: `docs/AGENT_WORKSPACE.md` § Git workflow and commit rules.
+Use `AGENTS.md` and `docs/AGENT_WORKSPACE.md` for claims, isolation, validation and publication.
+The 2026-07-24 recipe has been superseded: it no longer grants automatic pull/merge, engine-pin
+changes, or a game launch before every commit. Documentation-only work uses syntax/link checks.
+Do not run `--check-yaml`. Runtime changes require appropriate build/boot/behavior evidence,
+with pending checks disclosed. Humans decide publication and merge authority.
+
+Preserve the lessons that remain useful: stage named paths, use clear commit titles, update the
+affected canonical documentation, and keep unrelated work intact. A successful boot alone does
+not establish that a PR is correct. A finished implementation awaiting human review stays open.
 
 ## YAML lint rules learned (2026-07-24)
 
@@ -771,7 +778,7 @@ SpeedMultiplier@myupgrade:
 ### YAML lint cleanup header-removal bug (2026-07-24)
 
 - **The NegativeRemoval lint fix (commit d42ad53a1) accidentally removed weapon/warhead HEADERS, not just values.** When stripping values from `-Trait: value` lines, the lint script also deleted adjacent header lines (e.g., `RA2DiskSteal:`, `Warhead@Cloud: SpawnSmokeParticle`, `Warhead@LaserWeapon: SpreadDamage`). The bodies remained as orphaned child nodes, causing YAML parse errors and `MissingFieldsException` crashes.
-- **Always verify after lint cleanup**: After any bulk NegativeRemoval fix, run `utility.cmd cameo --check-yaml` and boot-gate test. The lint tool catches field errors but the game boot catches orphaned nodes.
+- **Verify after lint cleanup**: resolve the affected rules and check for orphaned headers and unknown fields with the existing targeted audits. Follow `AGENT_WORKSPACE.md` for authorized runtime checks; do not run `--check-yaml`.
 - **ContentPack migration must be complete**: When migrating weapons from `mods/cameo/weapons/*.yaml` to ContentPacks, ALL weapon definitions must be copied, not just templates. The RA2 ContentPack only had `^RA2*` templates but was missing 134 concrete weapon definitions, causing `Parent type not found` errors for weapons like `RA2CarrierTarget` that other weapons inherit from.
 - **UTF-8 encoding in YAML weapon names**: Weapon names with non-ASCII characters (e.g., `ü` in `Kübelwagen`) can become double-encoded (mojibake `Ã¼`) during file operations. Always verify encoding when files contain non-ASCII characters. The engine's YAML parser uses the file's byte-level encoding, so `NaxiWW2KÃ¼belwagenMachinegun` does not match `NaxiWW2KübelwagenMachinegun`.
 - **Engine shader files not tracked by mod git**: Custom shader files in `engine/glsl/` (e.g., `postprocess_nuclearflash.frag`) are inside the .gitignored engine directory. They must be recreated after `make all` fetches the engine. Document any custom shader requirements in the mod repo for post-fetch setup.
@@ -812,22 +819,21 @@ mid-run and a live instance locks the next build.
 
 ## The canonical engine update pipeline (binding, uniform process)
 
-The engine lives in TWO places that must stay in sync. Follow these steps IN ORDER for every engine change:
+Engine changes cross two repositories. The current procedure is governed by
+`AGENTS.md` and `docs/AGENT_WORKSPACE.md`:
 
-1. **Edit** engine C# source only in the local dev clone of the engine repository (the `cameo-engine` clone of `https://github.com/cameo-mod/OpenRA`, branch `cameo-engine`).
-2. **Commit and push** to `origin/cameo-engine`. Check `git status` for stray entries before committing (see the nested-clone pitfall below).
-3. **Get the full commit hash** with `git rev-parse cameo-engine` — never hand-type or truncate/pad a hash.
-4. **Update `mod.config`** in the mod repository: set `ENGINE_VERSION="<full-40-char-hash>"`. The engine pin lives in `mod.config`, NOT `mod.yaml`.
-5. **Run `make all`** (Windows: `make.cmd all`). Because `engine/VERSION` no longer matches, the SDK deletes `engine/`, downloads the source zip for the pinned commit from GitHub, and rebuilds everything.
-6. **Verify**: `engine/VERSION` must contain the new hash; the build must have 0 errors.
-7. **Boot-gate with `launch-game.cmd`** before committing the `mod.config` change (see AGENT_WORKSPACE.md git rules).
-   ⚠ **The old "recreate any custom `engine/glsl/` shaders, they are wiped" step is STALE — verified 2026-08-22.**
-   All 16 shaders (including `postprocess_nuclearflash.frag`) are now TRACKED in the engine repo, so the source
-   zipball carries them and the fetch restores them untouched. Measured by md5-summing `engine/glsl/*` before and
-   after a full `make.cmd all` on pin `462fc1fc4b`: identical, all 16. Still worth a `md5sum` before/after rather
-   than trusting either version of this line — if a shader is ever added WITHOUT committing it to the engine repo,
-   the wipe becomes real again.
-8. **Commit `mod.config`** together with the change's docs updates.
+1. Establish an approved engine task and isolated OpenRA checkout; verify its base and ownership.
+2. Preserve source edits in the OpenRA repository and mirror them to the intended Cameo engine
+   copy for local validation. Do not edit or publish an unrelated checkout.
+3. Run `tools/preflight-build.ps1` in the configured Cameo checkout before `make all`; stop on
+   failure. Preserve local engine work before any deliberately authorized refresh.
+4. Publish the engine change through its own reviewed PR when authorized. A Cameo pin update is
+   a separate human decision and must reference the full SHA actually merged upstream.
+5. Validate the intended engine/mod combination and record the source SHA and tested build.
+   Launch the game only when authorized, disclose missing runtime evidence, and preserve holds.
+
+The historical shader and OS observations below are evidence from the dated machine, not
+instructions to change security settings or permission to fetch over local source changes.
 
 Key facts verified 2026-07-30:
 
@@ -893,8 +899,8 @@ Applies to any script that renames a weapon/actor/condition identifier across th
 `.oramap` files are zip archives; editing a map means extracting it to a loose folder, editing `map.yaml`/`rules.yaml`/`*.lua`/etc., then **repacking it back into the same `.oramap`**. Found `mods/cameo/maps/survival_extracted/` sitting untracked in the tree with real, dated design edits in `script.lua` (2026-07-29: `RandomEventUnitScale` halving chaos/random-event spawn counts, simplified `SpawnAIBase` to MCV-only) that were **never repacked** — `survival.oramap` in the tree was a stale pre-2026-07-29 build the whole time, meaning the actual shipped map silently lacked the intended difficulty tuning.
 
 - **Always repack and delete the extraction folder in the same session as the edit.** Never leave a loose `*_extracted/` (or similarly named) folder next to its `.oramap` — OpenRA does not merge them; whichever one the engine picks up (the `.oramap`, per the packaging docs in `Cameo_Knowledge_Base_Manual.md` §"Package the map as an `.oramap`") is the only one that's actually live in-game, silently shadowing any edits left in the loose folder.
-- **Use `tools/repack-oramap.ps1 -dir <extracted_dir> -oramap <target.oramap>`, then always validate with `./utility.cmd cameo --check-yaml <absolute path to .oramap>`** before trusting the repack. Compare the error/warning counts against a `check-yaml` run on the untouched original — identical counts confirm no regression; a new `"Not a valid map"` / `InvalidDataException` means the repack corrupted the zip structure.
-- **Bug fixed in `tools/repack-oramap.ps1`**: it computed each zip entry's relative path as `$f.FullName.Substring($dir.Length + 1)`, but `Get-ChildItem`'s `.FullName` is always an absolute path while `$dir` was whatever string the caller passed in. Calling the script with a **relative** `-dir` (e.g. `mods/cameo/maps/survival_extracted` instead of the full `C:\...\survival_extracted`) silently produced zip entries with a garbage prefix baked in (e.g. `/Cameo-mod/mods/cameo/maps/survival_extracted/script.lua` instead of `script.lua`), which OpenRA's `Map` loader rejects outright as `"Not a valid map"` with no indication of why. Fixed by resolving both `-dir` and `-oramap` to absolute paths via `Resolve-Path` before computing the substring. **Always pass either path style now — the script normalizes internally — but still validate with `check-yaml` after every repack**, since a silent zip-entry corruption has no compile-time signal.
+- **Validate the repacked archive**: use `tools/repack-oramap.ps1`, inspect its zip entries and required map files, compare against the untouched original, and test the affected map when authorized. Use the current `AGENT_WORKSPACE.md` validation procedure.
+- **Bug fixed in `tools/repack-oramap.ps1`**: it computed each zip entry's relative path as `$f.FullName.Substring($dir.Length + 1)`, but `Get-ChildItem`'s `.FullName` is always an absolute path while `$dir` was whatever string the caller passed in. Calling the script with a **relative** `-dir` (e.g. `mods/cameo/maps/survival_extracted` instead of the full `C:\...\survival_extracted`) silently produced zip entries with a garbage prefix baked in (e.g. `/Cameo-mod/mods/cameo/maps/survival_extracted/script.lua` instead of `script.lua`), which OpenRA's `Map` loader rejects outright as `"Not a valid map"` with no indication of why. Fixed by resolving both `-dir` and `-oramap` to absolute paths via `Resolve-Path` before computing the substring. The script now normalizes either path style. Inspect the archive structure after every repack because zip-entry corruption has no compile-time signal.
 
 ## OpenRA Lua `Map` API: there is no `Map.Contains` (2026-07-31)
 

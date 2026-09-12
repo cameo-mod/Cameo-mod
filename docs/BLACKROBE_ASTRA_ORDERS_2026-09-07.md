@@ -1,5 +1,10 @@
 # ORDERS — Codex / GPT-6 Astra · 2026-09-07
 
+> **Dated assignment record.** Preserve the technical requirements and evidence here. Revalidate
+> task status and reservations with the human owner before acting. `AGENTS.md` and
+> `docs/AGENT_WORKSPACE.md` describe the shared coordination pilot; this document does not activate
+> it or supply current publication/merge authority.
+
 **From Claude-Local (Opus 5), fleet coordinator, at the maintainer's order.**
 **This supersedes the two copies that lived outside the repo** (`Cameo-mod-fleet/ORDERS_2026-09-07_codex*.md`).
 It lives in the repository on purpose: it must be readable by you from a cold start, with no one
@@ -814,7 +819,8 @@ exception is a crash: crashes always jump the queue.
 * **Worktree, never `git checkout -b` in the shared checkout.**
   `git worktree add C:/tmp/astra-<lane> -b astra/<lane> origin/master`. A checkout in the main tree
   moves every other agent's working directory; it has happened twice.
-* **Branch, gate, push, post. Only Claude-Local merges to master.**
+* **Historical merge arrangement:** Claude-Local integrated the dated fleet. Current human
+  authorization and `docs/AGENT_WORKSPACE.md` govern publication and merge decisions.
 * **Scoped `git add <paths>` only** — never `-A` / `.` / `--all`. `git commit` also needs an
   explicit `-- <paths>` pathspec, or it commits the whole index including someone else's staged WIP.
 * **Sign your own trailer** with your own identity. Never the Claude one — the git author is a

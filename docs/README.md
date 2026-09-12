@@ -5,7 +5,10 @@
 > below — the list tells you what to read, the index tells you *when*, and which of it applies
 > to the thing you are about to do. Guarded by `tools/audit/audit_task_index.py`.
 
-**Picking up work? Start at [`HANDOFF.md`](HANDOFF.md).** Everything else is reference.
+**Picking up work?** Read [`../AGENTS.md`](../AGENTS.md) and
+[`AGENT_WORKSPACE.md`](AGENT_WORKSPACE.md) for the shared pilot and activation status, then
+[`HANDOFF.md`](HANDOFF.md) for project context. Live task claims follow the shared workflow once
+the team activates it; dated rosters do not grant new ownership.
 
 This file is the **sole reading-order definition** and the map of which document owns which
 topic. If two documents disagree, the precedence below decides; fix the loser, never both.
@@ -24,7 +27,7 @@ Everything else under `docs/` is either **generated** (regenerate it, never hand
 
 | # | document | what it is |
 |---|---|---|
-| 1 | [`../CLAUDE.md`](../CLAUDE.md) | the hard rules, loaded every session. Top authority. |
+| 1 | [`../AGENTS.md`](../AGENTS.md) | shared workflow entry point; human task instructions remain controlling. [`../CLAUDE.md`](../CLAUDE.md) adds provider-specific technical context. |
 | 2 | [`LESSONS_LEARNED.md`](LESSONS_LEARNED.md) | every trap someone already paid for |
 | 3 | [`AGENT_WORKSPACE.md`](AGENT_WORKSPACE.md) | workflow, evidence rules, commit gate |
 | 4 | [`HANDOFF.md`](HANDOFF.md) | **the entry point** — verified state + the priority queue |
