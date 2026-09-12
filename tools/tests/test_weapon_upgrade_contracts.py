@@ -91,7 +91,7 @@ class WeaponUpgradeContractTest(unittest.TestCase):
         weapon = self.rs.resolve_weapon("td_gdi_officer_machinegun_ap")
         self.assertEqual(weapon.get("Range"), "5596")
         self.assertEqual(self._warhead("td_gdi_officer_machinegun_ap", "Warhead@Bullet_Medium").get("Damage"),
-                         "16000")
+                         "17280")
         self._assert_not_weaker("td_gdi_officer_machinegun", "td_gdi_officer_machinegun_ap", upgrade.CORE)
 
     def test_ts_paid_replacements_do_not_reduce_centered_core_damage(self):
