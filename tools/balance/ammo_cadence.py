@@ -145,6 +145,9 @@ def simulate_depletion(ammo: int, ammo_usage: int, burst: int, reload_delay: int
             if next_reload is None or refill <= 0:
                 return dict(empty=False, sustained=False, shots=shots, elapsed=now,
                             final_ammo=current)
+            if next_reload > now:
+                return dict(empty=False, sustained=False, starved=True, shots=shots,
+                            elapsed=now, final_ammo=current)
             now = next_reload
             continue
 
@@ -201,6 +204,7 @@ def cadence(damage_per_shot: float, burst: int, reload_delay: int, burst_delays,
         shots, elapsed = sim["shots"], sim["elapsed"]
         out["sustained"] = sim["sustained"]
         out["simulation_limit"] = sim.get("simulation_limit", False)
+        out["starved"] = sim.get("starved", False)
     else:
         shots = max(int(ammo) // max(int(ammo_usage), 1), 1)
         elapsed = elapsed_for_shots(shots, reload_delay, burst, burst_delays)
@@ -213,7 +217,10 @@ def cadence(damage_per_shot: float, burst: int, reload_delay: int, burst_delays,
     # ⛔ ONE SHOT HAS NO RATE. A pool affording a single shot delivers its damage instantly:
     # elapsed is 0 and a DPS would be infinite, so the comparable figure is the TOTAL, exactly
     # as the maintainer ruled for airfield planes. Reported, never divided.
-    out["single_shot"] = shots < 2 or elapsed <= 0
+    initial_shots = max(int(ammo) // max(int(ammo_usage), 1), 0)
+    out["single_shot"] = (elapsed <= 0 or
+                          (kind != SELF_RELOADING and shots < 2) or
+                          (kind == SELF_RELOADING and initial_shots == 0))
     if out["single_shot"]:
         # The REGIME LABEL IS KEPT -- an airfield plane carrying one bomb is still an airfield
         # plane, and overwriting its regime threw that away. Only the rate is withheld.
@@ -221,6 +228,14 @@ def cadence(damage_per_shot: float, burst: int, reload_delay: int, burst_delays,
         out["sustain_factor"] = None
         return out
     time_to_empty = float(elapsed)
+
+    if kind == SELF_RELOADING and out.get("starved"):
+        out["dps"] = pool_damage / time_to_empty if time_to_empty else None
+        ammo_rate = (reload_count / max(int(reload_delay_pool or 50), 1)) / max(int(ammo_usage), 1)
+        weapon_rate = burst / cyc
+        out["sustain_factor"] = min(1.0, ammo_rate / weapon_rate) if weapon_rate else None
+        out["cadence_status"] = "STARVED_AFTER_RELOAD"
+        return out
 
     if kind == SELF_RELOADING and out["sustained"]:
         out["dps"] = weapon_dps
@@ -281,10 +296,11 @@ def _selftest() -> None:
     # first delay for the second gap.
     assert elapsed_for_shots(3, 100, 4, [1, 10, 2]) == 11
 
-    # A simulation-limit result is withheld rather than mislabeled as sustained fire.
+    # An underfilled magazine starves at the next weapon cycle; it is not labeled sustained
+    # merely because a long simulation limit was reached.
     r = cadence(100, 1, 1, None, ammo=3, ammo_usage=2, reload_count=2,
                 reload_delay_pool=100)
-    assert r["dps"] is None and r["cadence_status"] == "WITHHELD_SIMULATION_LIMIT"
+    assert r["dps"] == 100 and r["cadence_status"] == "STARVED_AFTER_RELOAD"
 
     # regime 3: a total, never a rate
     r = cadence(4000, 1, 50, None, ammo=16, ammo_usage=1, rearmable=True)
