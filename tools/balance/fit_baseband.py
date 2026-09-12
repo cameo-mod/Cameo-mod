@@ -53,6 +53,7 @@ Usage: python tools/balance/fit_baseband.py [--json <band.json>] [--class X]
 from __future__ import annotations
 
 import argparse
+import collections
 import json
 import math
 import pathlib
@@ -138,10 +139,91 @@ def best_k(members, spec, anchor_tier):
     return best[1]
 
 
+
+AXES = ("hp", "speed", "range", "raw_dps")
+
+
+def worst_axis(member_inputs, core_medians):
+    """The axis on which this member deviates most from its class core, as (axis, x-factor).
+
+    Reported in multiplicative terms because the price formula is multiplicative: a unit at
+    6x its class's median range is not "a bit long", it is in the wrong class. This is the
+    evidence that makes `futuretech_blackwidow` (range 9000 in `melee`) obvious at a glance
+    rather than something a reader has to notice.
+    """
+    worst = (None, 1.0)
+    for ax in AXES:
+        cur, med = member_inputs.get(ax), core_medians.get(ax)
+        if not cur or not med:
+            continue
+        factor = cur / med
+        if abs(math.log(factor)) > abs(math.log(worst[1])):
+            worst = (ax, factor)
+    return worst
+
+
+def candidate_classes(member, specs, anchor_tiers, exclude):
+    """Every OTHER class whose CURRENT baseline would put this member in 100%-250%.
+
+    ⛔ MEASURE THIS BEFORE TREATING IT AS EVIDENCE — it is almost never discriminating.
+    Across the 404 priced members, the MEDIAN member is accepted by **6 of the 27** classes
+    that have a usable spec (mean 5.6, max 9, and only 6 members are accepted by one class or
+    none). So "another class would take it" is true of nearly everything.
+
+    The first version of this triage used it as the deciding signal and confidently labelled
+    **81 of 114** outliers MISCLASSIFIED, naming the single best-fitting class — which put
+    `terran_ghost` in `artillery` on the strength of one arbitrary pick out of six. Those
+    labels would have looked authoritative and carried no information.
+
+    `anchor_readiness.py` already says why, and it is worth quoting because it is the binding
+    limit here: the statistically indistinguishable class pairs are *"separated by what they
+    SHOOT AT, not by their stats. No stat-based check can police these boundaries."*
+
+    So the COUNT is reported, never a name — except at the two ends, where it really does
+    discriminate: 0 accepting classes, or exactly 1.
+    """
+    out = []
+    for cls, spec in specs.items():
+        if cls == exclude:
+            continue
+        r = ratio_of(member, spec, anchor_tiers.get(cls, 1.0), 1.0)
+        if SWEET_LO <= r <= SWEET_HI:
+            out.append((cls, r))
+    return sorted(out, key=lambda x: abs(x[1] - 1.5))
+
+
+def propose(band_ratio, axis, factor, cands, tier, core_tier):
+    """The EVIDENCE for one outlier, ranked by how much it actually discriminates.
+
+    Deliberately NOT a recommendation of a target class. Class membership is a role judgement
+    (what a unit shoots at) and no stat test can make it — see `candidate_classes`. What the
+    band can honestly contribute is: this member cannot share its class's baseline, here is
+    the axis responsible, and here is whether anything else would even accept it.
+    """
+    off = factor is not None and (factor > 2.0 or factor < 0.5)
+    if not cands:
+        return "NO CLASS ACCEPTS", (
+            f"outside every class baseline" +
+            (f"; {axis} {factor:.1f}x its own core" if off else ""))
+    if len(cands) == 1:
+        return "ONE CLASS ACCEPTS", f"only `{cands[0][0]}` takes it at {cands[0][1] * 100:.0f}%"
+    if off:
+        return "AXIS OUTLIER", (
+            f"{axis} {factor:.1f}x its class core — checkable; "
+            f"{len(cands)} classes would accept it, so that says nothing")
+    if band_ratio > SWEET_HI and tier and core_tier and tier < core_tier * 0.85:
+        return "LATER TECH", (f"tier {tier:.2f} vs core {core_tier:.2f} — a tech-tier gate may "
+                              f"explain the {band_ratio * 100:.0f}%")
+    return "ROLE REVIEW", (f"{band_ratio * 100:.0f}% of baseline, no axis dominates, "
+                           f"{len(cands)} classes accept it — stats cannot decide this one")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--json", type=pathlib.Path)
     ap.add_argument("--class", dest="cls")
+    ap.add_argument("--triage", action="store_true",
+                    help="per-outlier proposals with the evidence behind each")
     args = ap.parse_args()
 
     path = args.json
@@ -266,6 +348,70 @@ def main() -> int:
             vals[key] = max(step, round(spec[key] * k / step) * step)
         print(f"| `{cls}` | {vals['hp0']:g} | {vals['speed0']:g} | {vals['range0_wdist']:g} | "
               f"{vals['dps0']:g} | {spec['cost0']:g} |")
+
+    if args.triage:
+        specs = {c: a["spec"] for c, a in anchors.items()
+                 if (a.get("spec") or {}).get("dps0") and a["spec"].get("range0_wdist")}
+        print()
+        print("## Per-outlier evidence — FOR A MAINTAINER DECISION, never applied")
+        print()
+        print("A member is listed when it cannot share one baseline with its class core.")
+        print()
+        print("⛔ **The band cannot say where a member belongs, only that it does not belong "
+              "here.** Measured: the median member is accepted by **6 of 27** class baselines "
+              "(mean 5.6, max 9), so \"another class would take it\" is true of nearly "
+              "everything and is not evidence. `anchor_readiness.py` says why — these classes "
+              "are *\"separated by what they SHOOT AT, not by their stats. No stat-based check "
+              "can police these boundaries.\"* An earlier version of this table used the "
+              "best-fitting class as the deciding signal and labelled 81 of these "
+              "MISCLASSIFIED, which put `terran_ghost` in `artillery` on one arbitrary pick "
+              "out of six. The `accepts` column is therefore a COUNT, and only 0 or 1 "
+              "discriminates.")
+        print()
+        print("| class | actor | % of own baseline | worst axis vs core | accepts | signal | evidence |")
+        print("|---|---|--:|---|--:|---|---|")
+        counts = collections.Counter()
+        axes = collections.Counter()
+        for cls in sorted(by_class):
+            if cls not in specs:
+                continue
+            paired = sorted(zip(reported[cls], names[cls], by_class[cls]), key=lambda x: x[0])
+            lo, hi = core_window([r for r, _n, _m in paired])
+            core = paired[lo:hi + 1]
+            if len(core) == len(paired):
+                continue
+            med = {ax: statistics.median([n[1][ax] for _r, n, _m in core])
+                   for ax in AXES if all(n[1].get(ax) for _r, n, _m in core)}
+            core_tier = statistics.median([n[1]["tier"] for _r, n, _m in core])
+            for r, (actor, inp), member in paired[:lo] + paired[hi + 1:]:
+                ax, factor = worst_axis(inp, med)
+                cands = candidate_classes(member, specs, anchor_tiers, cls)
+                verdict, why = propose(r, ax, factor, cands, inp.get("tier"), core_tier)
+                counts[verdict] += 1
+                if ax and (factor > 1.25 or factor < 0.8):
+                    axes[ax] += 1
+                fits = str(len(cands))
+                axs = f"{ax} {factor:.1f}x" if ax else "—"
+                print(f"| `{cls}` | `{actor}` | {r * 100:.0f}% | {axs} | {fits} | "
+                      f"**{verdict}** | {why} |")
+        print()
+        print("**Signal counts:** " +
+              ", ".join(f"{v} {k}" for k, v in counts.most_common()))
+        print()
+        print("**Which axis puts them outside their core:** " +
+              ", ".join(f"{v} {k}" for k, v in axes.most_common()))
+        print()
+        print("⭐ `raw_dps` dominates, and that agrees with the binding order of operations "
+              "rather than fighting it: `BALANCE_PROGRAM_PLAN.md` §0a puts weapon STRUCTURE "
+              "before pricing, W24 is still moving, and every anchor dossier already says "
+              "*\"No DPS target is proposed while W24 moves\"*. So the majority of band "
+              "failures are attributable to the one axis the pipeline has deliberately not "
+              "settled — the band cannot be fitted before W24 closes, and the DPS-driven "
+              "outliers here are not yet evidence about class membership.")
+        print()
+        print("⚠ `AXIS OUTLIER` is the only line that is checkable without a role "
+              "judgement: one stat sits more than 2x off its class core, which is a fact "
+              "about the unit. `ROLE REVIEW` means the stats genuinely cannot decide it.")
 
     return 1 if mismatched else 0
 

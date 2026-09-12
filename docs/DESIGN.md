@@ -1116,6 +1116,29 @@ mis-stated. Fitting a baseline before that triage fits it to a population that d
 together. `anchor_readiness.py` says the same from the other end — its "statistically
 indistinguishable" class pairs are *"separated by what they SHOOT AT, not by their stats"*.
 
+**The 114 triaged, 2026-09-12 (`fit_baseband.py --triage`).** ⛔ **A stat-based test cannot
+say where an outlier belongs, only that it does not belong here.** Measured: the median member
+is accepted by **6 of the 27** class baselines (mean 5.6, max 9), so "another class would take
+it" is true of nearly everything and is worth nothing as evidence. The first version of the
+triage used the best-fitting class as its deciding signal and labelled **81 of 114
+MISCLASSIFIED**, which put `terran_ghost` in `artillery` on one arbitrary pick out of six.
+Those labels would have read as authoritative and carried no information. `anchor_readiness.py`
+already states the limit: these classes are *"separated by what they SHOOT AT, not by their
+stats. No stat-based check can police these boundaries."*
+
+What the band CAN contribute honestly: **80 AXIS OUTLIER** (one stat more than 2x off its class
+core — a checkable fact), **30 ROLE REVIEW** (stats genuinely cannot decide), **2 NO CLASS
+ACCEPTS** (`harkonnen_inkvine` at `raw_dps` 0.0x, `naxis_slave` at 0.1x — data defects, not
+class questions), **1 ONE CLASS ACCEPTS** (`naxis_naximercenarysniper`, only `scout`, at 110%),
+**1 LATER TECH** (`naxis_skymage` 390% at tier 0.75 vs a core of 1.00).
+
+⭐ **61 of the 114 are driven by `raw_dps`** (41 hp, 9 range, 2 speed) — and that AGREES with the
+binding order of operations instead of fighting it. `BALANCE_PROGRAM_PLAN.md` §0a puts weapon
+STRUCTURE before pricing, W24 is still moving, and every anchor dossier already says *"No DPS
+target is proposed while W24 moves"*. So the majority of band failures are attributable to the
+one axis the pipeline has deliberately not settled: **the band cannot be fitted before W24
+closes**, and the DPS-driven outliers are not yet evidence about class membership at all.
+
 ⚠ **`fit_baseband.py` cross-checks its own recomputation against `check_band.py` and refuses
 to be believed without it.** The first run disagreed on **257 of 404** ratios: the anchor's
 tier must come from the tier map via `anchor_actor`, not from the anchor's own `tech_tier`

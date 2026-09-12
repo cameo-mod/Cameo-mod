@@ -46,9 +46,18 @@ summary. The maintainer-approved WORK ORDER, all four confirmed in one answer:
    **114** outside their core are the real work, and the extremes are classification defects,
    not pricing ones: `futuretech_blackwidow` is in `melee` with `Range: 9000`, `corrino_buggy`
    is in `mbt`, `cabal_enlighted` has 11,184 DPS in `heavy_infantry`.
-   **→ NEXT, and it needs the maintainer:** triage those 114 — misclassified, legitimate higher
-   tier needing a tech-tier gate, or genuinely mis-stated. Fitting a baseline before that fits
-   it to a population that does not belong together. See `DESIGN.md` "R3 measured".
+   **The 114 are triaged** (`fit_baseband.py --triage`, table in `baseband_fit.md`):
+   80 AXIS OUTLIER, 30 ROLE REVIEW, 2 NO CLASS ACCEPTS, 1 ONE CLASS ACCEPTS, 1 LATER TECH.
+   ⛔ **A stat test cannot say where an outlier belongs.** The median member is accepted by
+   **6 of 27** class baselines, so "another class would take it" is worth nothing — an
+   earlier pass used it as the deciding signal and produced 81 authoritative-looking
+   MISCLASSIFIED labels, one of which put `terran_ghost` in `artillery`.
+   ⭐ **→ NEXT: W24, not the band.** **61 of the 114 are `raw_dps`-driven**, the one axis
+   §0a defers and every anchor dossier refuses to target while W24 moves. So the band cannot
+   be fitted before W24 closes, and most DPS-driven outliers are not class questions at all.
+   The genuinely decidable few today: `harkonnen_inkvine` and `naxis_slave` (accepted by NO
+   class; `raw_dps` 0.0x/0.1x — data defects), `naxis_naximercenarysniper` (only `scout`
+   accepts it), `naxis_skymage` (390% at tier 0.75 — a tech-tier gate may explain it).
 4. ✅ **DONE — separate weapon-stat targets with DPS as a verifier** (R1). Four inputs, one
    guard rail. `reference_targets.COMPONENT_STATS` / `VERIFIER_STATS` + `compose_dps`,
    `recover_burst_time`, `dps_guard`; the reference map gains **Damage/shot** and **Reload**

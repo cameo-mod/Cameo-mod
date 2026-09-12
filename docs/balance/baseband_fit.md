@@ -96,3 +96,134 @@ But the spread is concentrated, not general: below is each class's CORE (the lar
 | `scout_vehicle` | 27000 | 177 | 3990 | 399 | 300 |
 | `special_forces` | 18000 | 61 | 7290 | 292 | 200 |
 | `tank_destroyer` | 119000 | 56 | 5960 | 715 | 600 |
+
+## Per-outlier evidence — FOR A MAINTAINER DECISION, never applied
+
+A member is listed when it cannot share one baseline with its class core.
+
+⛔ **The band cannot say where a member belongs, only that it does not belong here.** Measured: the median member is accepted by **6 of 27** class baselines (mean 5.6, max 9), so "another class would take it" is true of nearly everything and is not evidence. `anchor_readiness.py` says why — these classes are *"separated by what they SHOOT AT, not by their stats. No stat-based check can police these boundaries."* An earlier version of this table used the best-fitting class as the deciding signal and labelled 81 of these MISCLASSIFIED, which put `terran_ghost` in `artillery` on one arbitrary pick out of six. The `accepts` column is therefore a COUNT, and only 0 or 1 discriminates.
+
+| class | actor | % of own baseline | worst axis vs core | accepts | signal | evidence |
+|---|---|--:|---|--:|---|---|
+| `anti_air_vehicle` | `harkonnen_adp` | 13% | raw_dps 0.4x | 6 | **AXIS OUTLIER** | raw_dps 0.4x its class core — checkable; 6 classes would accept it, so that says nothing |
+| `archer` | `wc2_humans_highelvenarcher` | 744% | raw_dps 1.8x | 5 | **ROLE REVIEW** | 744% of baseline, no axis dominates, 5 classes accept it — stats cannot decide this one |
+| `artillery` | `harkonnen_inkvine` | 17% | raw_dps 0.0x | 0 | **NO CLASS ACCEPTS** | outside every class baseline; raw_dps 0.0x its own core |
+| `artillery` | `harkonnen_buzzsaw` | 26% | range 0.4x | 6 | **AXIS OUTLIER** | range 0.4x its class core — checkable; 6 classes would accept it, so that says nothing |
+| `artillery` | `tkm_dronepodtruck` | 29% | raw_dps 0.0x | 2 | **AXIS OUTLIER** | raw_dps 0.0x its class core — checkable; 2 classes would accept it, so that says nothing |
+| `artillery` | `ra1_soviets_nuclearv2launcher` | 136% | raw_dps 3.0x | 5 | **AXIS OUTLIER** | raw_dps 3.0x its class core — checkable; 5 classes would accept it, so that says nothing |
+| `artillery` | `ts_gdi_juggernautmkii` | 174% | raw_dps 2.7x | 6 | **AXIS OUTLIER** | raw_dps 2.7x its class core — checkable; 6 classes would accept it, so that says nothing |
+| `artillery` | `ixian_ixsiegetank` | 199% | raw_dps 1.6x | 5 | **ROLE REVIEW** | 199% of baseline, no axis dominates, 5 classes accept it — stats cannot decide this one |
+| `artillery` | `wc2_humans_siegeengine` | 245% | raw_dps 2.2x | 6 | **AXIS OUTLIER** | raw_dps 2.2x its class core — checkable; 6 classes would accept it, so that says nothing |
+| `artillery` | `wc2_orcs_siegeengine` | 251% | raw_dps 2.2x | 6 | **AXIS OUTLIER** | raw_dps 2.2x its class core — checkable; 6 classes would accept it, so that says nothing |
+| `artillery` | `cabal_artilleryspider` | 421% | raw_dps 4.1x | 4 | **AXIS OUTLIER** | raw_dps 4.1x its class core — checkable; 4 classes would accept it, so that says nothing |
+| `artillery_tank` | `asianalliance_howitzer` | 22% | raw_dps 0.5x | 6 | **ROLE REVIEW** | 22% of baseline, no axis dominates, 6 classes accept it — stats cannot decide this one |
+| `artillery_tank` | `forgotten_mlrs` | 184% | raw_dps 4.8x | 6 | **AXIS OUTLIER** | raw_dps 4.8x its class core — checkable; 6 classes would accept it, so that says nothing |
+| `closecombat` | `asianalliance_fanatic` | 276% | raw_dps 2.0x | 6 | **ROLE REVIEW** | 276% of baseline, no axis dominates, 6 classes accept it — stats cannot decide this one |
+| `fire_support` | `futuretech_energizer` | 11% | speed 0.7x | 4 | **ROLE REVIEW** | 11% of baseline, no axis dominates, 4 classes accept it — stats cannot decide this one |
+| `fire_support` | `td_gdi_exosuit` | 19% | speed 1.3x | 3 | **ROLE REVIEW** | 19% of baseline, no axis dominates, 3 classes accept it — stats cannot decide this one |
+| `fire_support` | `naxis_antitankcannon` | 22% | hp 0.3x | 7 | **AXIS OUTLIER** | hp 0.3x its class core — checkable; 7 classes would accept it, so that says nothing |
+| `fire_support` | `schwarzermond_korruptesbiest` | 77% | hp 4.0x | 5 | **AXIS OUTLIER** | hp 4.0x its class core — checkable; 5 classes would accept it, so that says nothing |
+| `fire_support` | `schwarzermond_crystaltank` | 97% | hp 6.7x | 4 | **AXIS OUTLIER** | hp 6.7x its class core — checkable; 4 classes would accept it, so that says nothing |
+| `fire_support` | `protoss_reaver` | 144% | raw_dps 4.6x | 4 | **AXIS OUTLIER** | raw_dps 4.6x its class core — checkable; 4 classes would accept it, so that says nothing |
+| `flying_infantry` | `zerg_shriek` | 110% | range 0.2x | 8 | **AXIS OUTLIER** | range 0.2x its class core — checkable; 8 classes would accept it, so that says nothing |
+| `flying_infantry` | `naxis_skymage` | 390% | raw_dps 1.9x | 7 | **LATER TECH** | tier 0.75 vs core 1.00 — a tech-tier gate may explain the 390% |
+| `grenadier` | `latinsyndicate_grenademonkey` | 890% | hp 3.2x | 7 | **AXIS OUTLIER** | hp 3.2x its class core — checkable; 7 classes would accept it, so that says nothing |
+| `grenadier` | `td_gdi_empgrenadier` | 1012% | hp 3.4x | 8 | **AXIS OUTLIER** | hp 3.4x its class core — checkable; 8 classes would accept it, so that says nothing |
+| `grenadier` | `steelconsortium_hoverboardgrenadier` | 3080% | raw_dps 4.5x | 8 | **AXIS OUTLIER** | raw_dps 4.5x its class core — checkable; 8 classes would accept it, so that says nothing |
+| `heavy_infantry` | `naxis_naxiflamer` | 50% | raw_dps 0.5x | 4 | **AXIS OUTLIER** | raw_dps 0.5x its class core — checkable; 4 classes would accept it, so that says nothing |
+| `heavy_infantry` | `ixian_shockinfantry` | 55% | hp 0.8x | 5 | **ROLE REVIEW** | 55% of baseline, no axis dominates, 5 classes accept it — stats cannot decide this one |
+| `heavy_infantry` | `ra1_soviets_flamethrower` | 57% | hp 0.3x | 5 | **AXIS OUTLIER** | hp 0.3x its class core — checkable; 5 classes would accept it, so that says nothing |
+| `heavy_infantry` | `ixian_storminfantry` | 60% | range 1.2x | 6 | **ROLE REVIEW** | 60% of baseline, no axis dominates, 6 classes accept it — stats cannot decide this one |
+| `heavy_infantry` | `tkm_juggernaut` | 66% | hp 0.8x | 6 | **ROLE REVIEW** | 66% of baseline, no axis dominates, 6 classes accept it — stats cannot decide this one |
+| `heavy_infantry` | `ts_gdi_zonetrooper` | 194% | hp 1.7x | 6 | **ROLE REVIEW** | 194% of baseline, no axis dominates, 6 classes accept it — stats cannot decide this one |
+| `heavy_infantry` | `steelconsortium_quantummissiletrooper` | 198% | raw_dps 1.7x | 6 | **ROLE REVIEW** | 198% of baseline, no axis dominates, 6 classes accept it — stats cannot decide this one |
+| `heavy_infantry` | `schwarzermond_ubermensch` | 210% | raw_dps 2.4x | 6 | **AXIS OUTLIER** | raw_dps 2.4x its class core — checkable; 6 classes would accept it, so that says nothing |
+| `heavy_infantry` | `terran_marauder` | 219% | hp 1.9x | 6 | **ROLE REVIEW** | 219% of baseline, no axis dominates, 6 classes accept it — stats cannot decide this one |
+| `heavy_infantry` | `forgotten_viniferafiend` | 486% | raw_dps 4.5x | 5 | **AXIS OUTLIER** | raw_dps 4.5x its class core — checkable; 5 classes would accept it, so that says nothing |
+| `heavy_infantry` | `cabal_enlighted` | 1570% | raw_dps 28.0x | 3 | **AXIS OUTLIER** | raw_dps 28.0x its class core — checkable; 3 classes would accept it, so that says nothing |
+| `high_tech_tank` | `naxis_maus` | 104% | hp 3.3x | 5 | **AXIS OUTLIER** | hp 3.3x its class core — checkable; 5 classes would accept it, so that says nothing |
+| `high_tech_tank` | `japan_oitank` | 147% | hp 3.6x | 4 | **AXIS OUTLIER** | hp 3.6x its class core — checkable; 4 classes would accept it, so that says nothing |
+| `high_tech_tank` | `cabal_avatar` | 160% | hp 5.6x | 4 | **AXIS OUTLIER** | hp 5.6x its class core — checkable; 4 classes would accept it, so that says nothing |
+| `light_tank` | `cabal_ravager` | 232% | raw_dps 5.7x | 5 | **AXIS OUTLIER** | raw_dps 5.7x its class core — checkable; 5 classes would accept it, so that says nothing |
+| `light_tank` | `terran_vulture` | 256% | raw_dps 4.3x | 5 | **AXIS OUTLIER** | raw_dps 4.3x its class core — checkable; 5 classes would accept it, so that says nothing |
+| `line_breaker` | `ts_gdi_disruptor` | 24% | raw_dps 0.1x | 5 | **AXIS OUTLIER** | raw_dps 0.1x its class core — checkable; 5 classes would accept it, so that says nothing |
+| `line_breaker` | `ordos_heavyautoguntank` | 84% | range 3.1x | 3 | **AXIS OUTLIER** | range 3.1x its class core — checkable; 3 classes would accept it, so that says nothing |
+| `line_breaker` | `protoss_archon` | 88% | raw_dps 2.4x | 5 | **AXIS OUTLIER** | raw_dps 2.4x its class core — checkable; 5 classes would accept it, so that says nothing |
+| `mbt` | `corrino_buggy` | 23% | hp 0.2x | 6 | **AXIS OUTLIER** | hp 0.2x its class core — checkable; 6 classes would accept it, so that says nothing |
+| `mbt` | `atreides_sonictank` | 24% | raw_dps 0.2x | 7 | **AXIS OUTLIER** | raw_dps 0.2x its class core — checkable; 7 classes would accept it, so that says nothing |
+| `mbt` | `combat_tank.harkonnen` | 27% | raw_dps 0.6x | 6 | **ROLE REVIEW** | 27% of baseline, no axis dominates, 6 classes accept it — stats cannot decide this one |
+| `mbt` | `naxis_kingtigerheavytank` | 83% | hp 1.8x | 4 | **ROLE REVIEW** | 83% of baseline, no axis dominates, 4 classes accept it — stats cannot decide this one |
+| `mbt` | `harkonnen_flametank` | 151% | raw_dps 7.9x | 5 | **AXIS OUTLIER** | raw_dps 7.9x its class core — checkable; 5 classes would accept it, so that says nothing |
+| `mbt` | `cabal_widow` | 272% | raw_dps 11.7x | 5 | **AXIS OUTLIER** | raw_dps 11.7x its class core — checkable; 5 classes would accept it, so that says nothing |
+| `melee` | `naxis_slave` | 27% | raw_dps 0.1x | 0 | **NO CLASS ACCEPTS** | outside every class baseline; raw_dps 0.1x its own core |
+| `melee` | `zerg_zergling` | 64% | hp 0.2x | 4 | **AXIS OUTLIER** | hp 0.2x its class core — checkable; 4 classes would accept it, so that says nothing |
+| `melee` | `td_nod_flamethrower` | 92% | hp 0.4x | 4 | **AXIS OUTLIER** | hp 0.4x its class core — checkable; 4 classes would accept it, so that says nothing |
+| `melee` | `asianalliance_japanesesamurai` | 120% | range 0.5x | 5 | **ROLE REVIEW** | 120% of baseline, no axis dominates, 5 classes accept it — stats cannot decide this one |
+| `melee` | `asianalliance_alligator` | 127% | range 0.4x | 5 | **AXIS OUTLIER** | range 0.4x its class core — checkable; 5 classes would accept it, so that says nothing |
+| `melee` | `protoss_zealot` | 130% | range 0.4x | 4 | **AXIS OUTLIER** | range 0.4x its class core — checkable; 4 classes would accept it, so that says nothing |
+| `melee` | `japan_samurai` | 142% | range 0.5x | 4 | **ROLE REVIEW** | 142% of baseline, no axis dominates, 4 classes accept it — stats cannot decide this one |
+| `melee` | `futuretech_enforcer` | 150% | hp 0.6x | 5 | **ROLE REVIEW** | 150% of baseline, no axis dominates, 5 classes accept it — stats cannot decide this one |
+| `melee` | `wc2_humans_militiapeasant` | 154% | hp 0.4x | 4 | **AXIS OUTLIER** | hp 0.4x its class core — checkable; 4 classes would accept it, so that says nothing |
+| `melee` | `ts_nod_shadowteam` | 570% | range 2.6x | 6 | **AXIS OUTLIER** | range 2.6x its class core — checkable; 6 classes would accept it, so that says nothing |
+| `melee` | `wc2_humans_warcraft3footman` | 571% | raw_dps 2.2x | 7 | **AXIS OUTLIER** | raw_dps 2.2x its class core — checkable; 7 classes would accept it, so that says nothing |
+| `melee` | `protoss_amaranth` | 759% | raw_dps 2.7x | 7 | **AXIS OUTLIER** | raw_dps 2.7x its class core — checkable; 7 classes would accept it, so that says nothing |
+| `melee` | `wc2_orcs_warcraft3grunt` | 772% | raw_dps 2.4x | 5 | **AXIS OUTLIER** | raw_dps 2.4x its class core — checkable; 5 classes would accept it, so that says nothing |
+| `melee` | `futuretech_blackwidow` | 926% | range 2.9x | 7 | **AXIS OUTLIER** | range 2.9x its class core — checkable; 7 classes would accept it, so that says nothing |
+| `missile_vehicle` | `td_nod_stealthtank` | 14% | raw_dps 0.7x | 4 | **ROLE REVIEW** | 14% of baseline, no axis dominates, 4 classes accept it — stats cannot decide this one |
+| `missile_vehicle` | `missile_tank` | 16% | raw_dps 0.6x | 4 | **ROLE REVIEW** | 16% of baseline, no axis dominates, 4 classes accept it — stats cannot decide this one |
+| `missile_vehicle` | `ixian_ixmissiletank` | 145% | raw_dps 9.0x | 2 | **AXIS OUTLIER** | raw_dps 9.0x its class core — checkable; 2 classes would accept it, so that says nothing |
+| `mortar` | `ra1_soviets_mortarsoldier` | 46% | hp 0.6x | 6 | **ROLE REVIEW** | 46% of baseline, no axis dominates, 6 classes accept it — stats cannot decide this one |
+| `pure_sniper` | `naxis_naximercenarysniper` | 60% | raw_dps 0.3x | 1 | **ONE CLASS ACCEPTS** | only `scout` takes it at 110% |
+| `pure_sniper` | `forgotten_mutantsniper` | 129% | raw_dps 0.2x | 4 | **AXIS OUTLIER** | raw_dps 0.2x its class core — checkable; 4 classes would accept it, so that says nothing |
+| `pure_sniper` | `terran_reaper` | 1883% | hp 2.9x | 7 | **AXIS OUTLIER** | hp 2.9x its class core — checkable; 7 classes would accept it, so that says nothing |
+| `rocket_trooper` | `td_gdi_rocketsoldier` | 110% | hp 0.5x | 4 | **ROLE REVIEW** | 110% of baseline, no axis dominates, 4 classes accept it — stats cannot decide this one |
+| `rocket_trooper` | `td_nod_rocketsoldier` | 110% | hp 0.5x | 4 | **ROLE REVIEW** | 110% of baseline, no axis dominates, 4 classes accept it — stats cannot decide this one |
+| `rocket_trooper` | `tkm_rocketeer` | 119% | hp 0.5x | 3 | **ROLE REVIEW** | 119% of baseline, no axis dominates, 3 classes accept it — stats cannot decide this one |
+| `rocket_trooper` | `futuretech_missiledroid` | 411% | hp 4.1x | 3 | **AXIS OUTLIER** | hp 4.1x its class core — checkable; 3 classes would accept it, so that says nothing |
+| `rocket_trooper` | `ra2_allies_guardiangi` | 453% | hp 2.7x | 5 | **AXIS OUTLIER** | hp 2.7x its class core — checkable; 5 classes would accept it, so that says nothing |
+| `rocket_trooper` | `corrino_sardaukar_javelin` | 456% | hp 7.3x | 7 | **AXIS OUTLIER** | hp 7.3x its class core — checkable; 7 classes would accept it, so that says nothing |
+| `rocket_trooper` | `corrino_sardaukar_laser` | 456% | hp 7.3x | 7 | **AXIS OUTLIER** | hp 7.3x its class core — checkable; 7 classes would accept it, so that says nothing |
+| `rocket_trooper` | `ixian_twinrockettrooper` | 485% | raw_dps 2.3x | 7 | **AXIS OUTLIER** | raw_dps 2.3x its class core — checkable; 7 classes would accept it, so that says nothing |
+| `rocket_trooper` | `wc2_orcs_trollaxethrower` | 517% | hp 1.8x | 6 | **ROLE REVIEW** | 517% of baseline, no axis dominates, 6 classes accept it — stats cannot decide this one |
+| `rocket_trooper` | `wc2_orcs_trollberserker` | 517% | hp 1.8x | 6 | **ROLE REVIEW** | 517% of baseline, no axis dominates, 6 classes accept it — stats cannot decide this one |
+| `rocket_trooper` | `wc2_humans_elvenranger` | 631% | raw_dps 1.9x | 7 | **ROLE REVIEW** | 631% of baseline, no axis dominates, 7 classes accept it — stats cannot decide this one |
+| `rocket_trooper` | `cabal_rocketcyborg` | 695% | hp 2.7x | 7 | **AXIS OUTLIER** | hp 2.7x its class core — checkable; 7 classes would accept it, so that says nothing |
+| `rocket_trooper` | `terran_marine` | 1055% | raw_dps 2.9x | 6 | **AXIS OUTLIER** | raw_dps 2.9x its class core — checkable; 6 classes would accept it, so that says nothing |
+| `rocket_trooper` | `corrino_sardaukar_bazooka` | 1092% | hp 7.3x | 6 | **AXIS OUTLIER** | hp 7.3x its class core — checkable; 6 classes would accept it, so that says nothing |
+| `rocket_trooper` | `wc2_orcs_trollheadhunter` | 1169% | hp 2.4x | 6 | **AXIS OUTLIER** | hp 2.4x its class core — checkable; 6 classes would accept it, so that says nothing |
+| `rocket_trooper` | `cabal_ascended` | 1915% | hp 4.2x | 7 | **AXIS OUTLIER** | hp 4.2x its class core — checkable; 7 classes would accept it, so that says nothing |
+| `rocket_trooper` | `terran_madcap` | 2188% | raw_dps 4.0x | 7 | **AXIS OUTLIER** | raw_dps 4.0x its class core — checkable; 7 classes would accept it, so that says nothing |
+| `rocket_trooper` | `wc2_orcs_kodobeast` | 2221% | hp 7.6x | 4 | **AXIS OUTLIER** | hp 7.6x its class core — checkable; 4 classes would accept it, so that says nothing |
+| `rocket_trooper` | `zerg_hydralisk` | 2424% | hp 4.8x | 5 | **AXIS OUTLIER** | hp 4.8x its class core — checkable; 5 classes would accept it, so that says nothing |
+| `scout` | `forgotten_mutant` | 173% | hp 1.8x | 6 | **ROLE REVIEW** | 173% of baseline, no axis dominates, 6 classes accept it — stats cannot decide this one |
+| `scout` | `ordos_lightinfantry` | 231% | raw_dps 1.9x | 7 | **ROLE REVIEW** | 231% of baseline, no axis dominates, 7 classes accept it — stats cannot decide this one |
+| `scout` | `ra1_soviets_ak47conscript` | 281% | hp 1.8x | 6 | **ROLE REVIEW** | 281% of baseline, no axis dominates, 6 classes accept it — stats cannot decide this one |
+| `scout` | `naxis_coneheadsknights` | 303% | raw_dps 12.5x | 6 | **AXIS OUTLIER** | raw_dps 12.5x its class core — checkable; 6 classes would accept it, so that says nothing |
+| `scout` | `forgotten_mutantsoldier` | 311% | raw_dps 2.2x | 5 | **AXIS OUTLIER** | raw_dps 2.2x its class core — checkable; 5 classes would accept it, so that says nothing |
+| `scout` | `atreides_lightinfantry` | 325% | raw_dps 2.8x | 6 | **AXIS OUTLIER** | raw_dps 2.8x its class core — checkable; 6 classes would accept it, so that says nothing |
+| `scout` | `corrino_lightinfantry` | 325% | raw_dps 2.8x | 6 | **AXIS OUTLIER** | raw_dps 2.8x its class core — checkable; 6 classes would accept it, so that says nothing |
+| `scout` | `harkonnen_lightinfantry` | 325% | raw_dps 2.8x | 6 | **AXIS OUTLIER** | raw_dps 2.8x its class core — checkable; 6 classes would accept it, so that says nothing |
+| `scout` | `light_inf` | 343% | raw_dps 2.6x | 5 | **AXIS OUTLIER** | raw_dps 2.6x its class core — checkable; 5 classes would accept it, so that says nothing |
+| `scout` | `ixian_lightinfantry` | 361% | raw_dps 3.2x | 5 | **AXIS OUTLIER** | raw_dps 3.2x its class core — checkable; 5 classes would accept it, so that says nothing |
+| `scout` | `ra2_allies_gi` | 367% | hp 2.0x | 5 | **ROLE REVIEW** | 367% of baseline, no axis dominates, 5 classes accept it — stats cannot decide this one |
+| `scout` | `futuretech_scoutdroid` | 423% | raw_dps 5.4x | 6 | **AXIS OUTLIER** | raw_dps 5.4x its class core — checkable; 6 classes would accept it, so that says nothing |
+| `scout` | `tkm_marine` | 561% | raw_dps 7.0x | 5 | **AXIS OUTLIER** | raw_dps 7.0x its class core — checkable; 5 classes would accept it, so that says nothing |
+| `scout` | `zerg_spithid` | 869% | raw_dps 5.6x | 5 | **AXIS OUTLIER** | raw_dps 5.6x its class core — checkable; 5 classes would accept it, so that says nothing |
+| `scout_vehicle` | `atreides_sandbike` | 30% | raw_dps 0.2x | 5 | **AXIS OUTLIER** | raw_dps 0.2x its class core — checkable; 5 classes would accept it, so that says nothing |
+| `scout_vehicle` | `naxis_bmwbike` | 40% | raw_dps 0.3x | 6 | **AXIS OUTLIER** | raw_dps 0.3x its class core — checkable; 6 classes would accept it, so that says nothing |
+| `scout_vehicle` | `protoss_positron` | 277% | hp 2.2x | 6 | **AXIS OUTLIER** | hp 2.2x its class core — checkable; 6 classes would accept it, so that says nothing |
+| `scout_vehicle` | `ordos_raider` | 460% | raw_dps 2.2x | 7 | **AXIS OUTLIER** | raw_dps 2.2x its class core — checkable; 7 classes would accept it, so that says nothing |
+| `special_forces` | `japan_imperialscoutsman` | 105% | raw_dps 0.4x | 5 | **AXIS OUTLIER** | raw_dps 0.4x its class core — checkable; 5 classes would accept it, so that says nothing |
+| `special_forces` | `tkm_trooper` | 122% | raw_dps 0.1x | 6 | **AXIS OUTLIER** | raw_dps 0.1x its class core — checkable; 6 classes would accept it, so that says nothing |
+| `special_forces` | `cabal_eliminator800` | 725% | hp 2.8x | 7 | **AXIS OUTLIER** | hp 2.8x its class core — checkable; 7 classes would accept it, so that says nothing |
+| `special_forces` | `td_gdi_officer` | 1144% | raw_dps 3.0x | 8 | **AXIS OUTLIER** | raw_dps 3.0x its class core — checkable; 8 classes would accept it, so that says nothing |
+| `special_forces` | `terran_ghost` | 1274% | raw_dps 2.2x | 7 | **AXIS OUTLIER** | raw_dps 2.2x its class core — checkable; 7 classes would accept it, so that says nothing |
+| `special_forces` | `terran_specter` | 1915% | raw_dps 3.0x | 7 | **AXIS OUTLIER** | raw_dps 3.0x its class core — checkable; 7 classes would accept it, so that says nothing |
+
+**Signal counts:** 80 AXIS OUTLIER, 30 ROLE REVIEW, 2 NO CLASS ACCEPTS, 1 LATER TECH, 1 ONE CLASS ACCEPTS
+
+**Which axis puts them outside their core:** 61 raw_dps, 41 hp, 9 range, 2 speed
+
+⭐ `raw_dps` dominates, and that agrees with the binding order of operations rather than fighting it: `BALANCE_PROGRAM_PLAN.md` §0a puts weapon STRUCTURE before pricing, W24 is still moving, and every anchor dossier already says *"No DPS target is proposed while W24 moves"*. So the majority of band failures are attributable to the one axis the pipeline has deliberately not settled — the band cannot be fitted before W24 closes, and the DPS-driven outliers here are not yet evidence about class membership.
+
+⚠ `AXIS OUTLIER` is the only line that is checkable without a role judgement: one stat sits more than 2x off its class core, which is a fact about the unit. `ROLE REVIEW` means the stats genuinely cannot decide it.

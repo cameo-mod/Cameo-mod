@@ -1759,3 +1759,30 @@ burst 6 — the engine default). `reference_targets.recover_burst_time` does thi
 only by lengthening the cycle, so dropping burst 6 → 2 SHORTENS the cycle and nudges DPS *up*.
 A guard that treats a burst change as a proportional DPS change will flag every burst target as
 extreme.
+
+## "Another class would accept it" sounds like evidence and is worth nothing — count first
+
+Triaging the 114 baseband outliers, the obvious discriminator is: which OTHER class's baseline
+would put this unit inside 100%-250%? Used as the deciding signal it labelled **81 of 114
+MISCLASSIFIED** and named the single best-fitting class, which put `terran_ghost` in
+`artillery`.
+
+Then the population was counted: **the median member is accepted by 6 of the 27** classes with
+a usable spec (mean 5.6, max 9). Only **6 members of 404** are accepted by one class or none.
+So the signal is true of nearly everything, the "best fit" is one arbitrary pick out of six,
+and 81 authoritative-looking recommendations carried no information.
+
+`anchor_readiness.py` had already written the limit down: the statistically indistinguishable
+class pairs are *"separated by what they SHOOT AT, not by their stats. No stat-based check can
+police these boundaries."*
+
+⚠ **Before a derived signal becomes a recommendation, measure how often it fires.** A signal
+that is true of the median case cannot discriminate, however reasonable its construction. The
+two ends of the same distribution — 0 or 1 accepting class — DO discriminate, and there are
+exactly 6 of those; that is the real finding, and it is a hundred times smaller and actually
+actionable.
+
+⚠ **Then check which axis is responsible before concluding anything about membership.** 61 of
+the 114 outliers are driven by `raw_dps` — the one axis W24 has deliberately not settled, and
+which every anchor dossier already refuses to target. Most of the "misclassification" was
+unfinished weapon structure wearing a classification costume.
