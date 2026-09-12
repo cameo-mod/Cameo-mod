@@ -50,6 +50,7 @@ import json
 import pathlib
 import re
 import sys
+from dataclasses import dataclass
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -100,6 +101,10 @@ TYPE_LISTS = {
 # RA2/YR `Verses=` slot order. Fixed by the engine, not by the mod.
 RA2_ARMOR = ["none", "flak", "plate", "light", "medium", "heavy",
              "wood", "steel", "concrete", "special_1", "special_2"]
+
+# These labels describe non-playable ownership in Westwood/Ares files. They must not become
+# faction votes merely because they appear in Owner= or a prerequisite provider.
+GENERIC_FACTIONS = frozenset({"Neutral", "Special", "Civilian", "Mutant"})
 
 SECTION = re.compile(r"^\s*\[([^\]]+)\]")
 KV = re.compile(r"^\s*([$A-Za-z0-9_.]+)\s*=\s*([^;]*)")
@@ -175,6 +180,132 @@ def num(v, default=None):
         return float(v) if "." in v else int(v)
     except ValueError:
         return default
+
+
+def _side_map(ini: dict, countries: set[str]) -> dict[str, set[str]]:
+    """Expand [Sides] aliases into declared playable countries."""
+    out: dict[str, set[str]] = {}
+    for side, raw in ini.get("Sides", {}).items():
+        members = {token.strip() for token in (raw or "").split(",")
+                   if token.strip() in countries and token.strip() not in GENERIC_FACTIONS}
+        if side.strip() and members:
+            out[side.strip()] = members
+    return out
+
+
+def _expand_owner_tokens(text: str, countries: set[str], side_map: dict[str, set[str]]) -> set[str]:
+    """Expand country and side tokens while discarding generic ownership labels."""
+    out: set[str] = set()
+    for token in (text or "").split(","):
+        token = token.strip()
+        if not token or token in GENERIC_FACTIONS:
+            continue
+        if token in countries:
+            out.add(token)
+        else:
+            out.update(side_map.get(token, ()))
+    return out
+
+
+def _apply_houses_filter(owner: set[str], actor: dict, countries: set[str],
+                         side_map: dict[str, set[str]]) -> set[str]:
+    """Apply RequiredHouses/ForbiddenHouses without restoring excluded owners."""
+    required = _expand_owner_tokens(actor.get("RequiredHouses"), countries, side_map)
+    forbidden = _expand_owner_tokens(actor.get("ForbiddenHouses"), countries, side_map)
+    if required:
+        owner &= required
+    if forbidden:
+        owner -= forbidden
+    return owner
+
+
+@dataclass(frozen=True)
+class _OwnerResolution:
+    owners: frozenset[str] = frozenset()
+    known: bool = False
+    blocked: bool = False
+
+
+def _direct_owner(actor: dict, countries: set[str], side_map: dict[str, set[str]]) -> _OwnerResolution:
+    """Resolve direct ownership while preserving universal and explicitly blocked states."""
+    raw = actor.get("FactoryOwners") or actor.get("Owner") or ""
+    raw_tokens = _expand_owner_tokens(raw, countries, side_map)
+    if not raw_tokens:
+        return _OwnerResolution()
+    filtered = _apply_houses_filter(raw_tokens, actor, countries, side_map)
+    return _OwnerResolution(frozenset(filtered), known=True, blocked=not filtered)
+
+
+def _resolve_owner(actor_name: str, ini: dict[str, dict[str, str]], countries: set[str],
+                   all_actors: set[str], side_map: dict[str, set[str]],
+                   generic_prereqs: dict[str, list[str]], depth: int = 0,
+                   seen: frozenset[str] = frozenset()) -> _OwnerResolution:
+    """Resolve a bounded prerequisite conjunction; generic labels union alternatives.
+
+    Known permissions are represented as sets. OR unions valid alternatives; AND intersects
+    constraints. Unknown and explicitly blocked results remain distinct from an empty valid set.
+    """
+    if actor_name not in all_actors or depth > 2 or actor_name in seen:
+        return _OwnerResolution()
+    actor = ini.get(actor_name, {})
+    direct = _direct_owner(actor, countries, side_map)
+    playable = countries - GENERIC_FACTIONS
+    required_constraint = _expand_owner_tokens(actor.get("RequiredHouses"), countries, side_map)
+    if required_constraint:
+        required_constraint = _apply_houses_filter(required_constraint, actor, countries, side_map)
+        if not required_constraint:
+            return _OwnerResolution(known=True, blocked=True)
+    if direct.blocked and not actor.get("Prerequisite"):
+        return direct
+    if direct.known and not actor.get("Prerequisite"):
+        return direct
+
+    branches: list[_OwnerResolution] = []
+    for token in (actor.get("Prerequisite") or "").split(","):
+        token = token.strip()
+        if not token or token == actor_name:
+            continue
+        alternatives: list[str] = [token] if token in all_actors else generic_prereqs.get(token, [])
+        union: set[str] = set()
+        valid = False
+        blocked = False
+        for alternative in alternatives:
+            result = _resolve_owner(alternative, ini, countries, all_actors, side_map,
+                                    generic_prereqs, depth + 1, seen | {actor_name})
+            if result.known and not result.blocked:
+                union |= set(result.owners)
+                valid = True
+            elif result.known and result.blocked:
+                blocked = True
+        if valid:
+            branches.append(_OwnerResolution(frozenset(union), known=True))
+        elif blocked:
+            branches.append(_OwnerResolution(known=True, blocked=True))
+    if not branches:
+        if direct.known:
+            return direct
+        if required_constraint:
+            return _OwnerResolution(frozenset(required_constraint), known=True)
+        return direct
+    if any(branch.blocked for branch in branches):
+        return _OwnerResolution(known=True, blocked=True)
+    owner = set(branches[0].owners)
+    for branch in branches[1:]:
+        owner &= set(branch.owners)
+    owner = _apply_houses_filter(owner, actor, countries, side_map)
+    if not owner:
+        return _OwnerResolution(known=True, blocked=True)
+    if direct.blocked:
+        return _OwnerResolution(known=True, blocked=True)
+    if direct.known and direct.owners:
+        owner &= set(direct.owners)
+        if not owner:
+            return _OwnerResolution(known=True, blocked=True)
+    if required_constraint:
+        owner &= required_constraint
+        if not owner:
+            return _OwnerResolution(known=True, blocked=True)
+    return _OwnerResolution(frozenset(owner), known=True)
 
 
 def versus_of(ini: dict, warhead: str, engine: str) -> tuple[dict, str]:
@@ -387,6 +518,12 @@ def extract_rows_from_ini(ini: dict, label: str, engine: str) -> list[dict]:
     # first left `countries` empty for a TS source, which silently disabled the filter below
     # rather than failing — the owners were kept unvalidated. Read both.
     countries = set(listed(ini, "Countries")) | set(listed(ini, "Houses"))
+    side_map = _side_map(ini, countries)
+    all_actors = {actor for section in TYPE_LISTS for actor in listed(ini, section)}
+    generic_prereqs = {
+        key: [token.strip() for token in value.split(",") if token.strip()]
+        for key, value in ini.get("GenericPrerequisites", {}).items()
+    }
     rows: list[dict] = []
     for list_sec, utype in TYPE_LISTS.items():
         for actor in listed(ini, list_sec):
@@ -430,7 +567,40 @@ def extract_rows_from_ini(ini: dict, label: str, engine: str) -> list[dict]:
                     wep.update(relabel_weapon(demoted, "wdummy_"))
             if sw:
                 wep = {**wep, **relabel_weapon(sw, "w2_")}
-            owners = [o.strip() for o in (a.get("Owner") or "").split(",") if o.strip()]
+            direct_owner = _direct_owner(a, countries, side_map)
+            resolved_owner = _resolve_owner(actor, ini, countries, all_actors, side_map,
+                                            generic_prereqs)
+            playable = countries - GENERIC_FACTIONS
+            # A narrower prerequisite route wins. A universal direct claim remains universal,
+            # while an explicitly excluded house is never restored from raw Owner= text.
+            if resolved_owner.blocked or direct_owner.blocked:
+                owner_candidates = set()
+            elif resolved_owner.known:
+                owner_candidates = set(resolved_owner.owners)
+            else:
+                owner_candidates = set(direct_owner.owners)
+            raw_prerequisite = (a.get("Prerequisite") or "").strip()
+            required_houses = (a.get("RequiredHouses") or "").strip()
+            if not owner_candidates and required_houses and not (resolved_owner.blocked or direct_owner.blocked):
+                owner_candidates = _expand_owner_tokens(required_houses, countries, side_map)
+            owner_candidates = _apply_houses_filter(owner_candidates, a, countries, side_map)
+            owners = sorted(owner_candidates)
+            disabling_prerequisite = any(
+                token.strip().lstrip("~!").lower()
+                in ("disabled", "disable", "notbuildable", "unavailable", "unbuildable")
+                for token in raw_prerequisite.split(","))
+            tech_level = num(a.get("TechLevel"))
+            buildable_field = (a.get("Buildable") or "").strip().lower()
+            blocked_claim = direct_owner.blocked or resolved_owner.blocked
+            has_production_claim = bool(owners) or (
+                bool(raw_prerequisite or required_houses or buildable_field == "yes") and not blocked_claim)
+            is_buildable = not (
+                (tech_level is not None and tech_level < 0)
+                or (a.get("Selectable") or "").strip().lower() == "no"
+                or (a.get("IsSelectableCombatant") or "").strip().lower() == "no"
+                or buildable_field == "no"
+                or disabling_prerequisite)
+            is_buildable = is_buildable and has_production_claim
             rows.append({
                 "source": label,
                 "engine": engine,
@@ -438,7 +608,7 @@ def extract_rows_from_ini(ini: dict, label: str, engine: str) -> list[dict]:
                 "name": a.get("Name") or a.get("UIName") or actor,
                 "type": utype,
                 # ⭐ the faction column — a comma list, and every owner is its own vote
-                "faction": "/".join(o for o in owners if not countries or o in countries),
+                "faction": "/".join(owners),
                 "owners": owners,
                 "hp": num(a.get("Strength")),
                 "cost": num(a.get("Cost")),
@@ -452,7 +622,7 @@ def extract_rows_from_ini(ini: dict, label: str, engine: str) -> list[dict]:
                 # built inside ONE source, so the two scales never have to meet.
                 "turn_speed": num(a.get("ROT")),
                 "turreted": (a.get("Turret") or "").strip().lower() in ("yes", "true"),
-                "tech_level": num(a.get("TechLevel")),
+                "tech_level": tech_level,
                 "prerequisite": a.get("Prerequisite"),
                 "build_limit": num(a.get("BuildLimit")),
                 "power": num(a.get("Power")),
@@ -475,10 +645,7 @@ def extract_rows_from_ini(ini: dict, label: str, engine: str) -> list[dict]:
                 # RA2 0XX 9,999 -> 3,000, MO 6,000 -> 2,500. DTA's `civilian` roster goes to zero,
                 # which is the right answer. The rows are KEPT and FLAGGED rather than dropped —
                 # R6 says collect everything; the population rule belongs to the consumer.
-                "buildable": not (
-                    (num(a.get("TechLevel")) is not None and num(a.get("TechLevel")) < 0)
-                    or (a.get("Selectable") or "").strip().lower() == "no"
-                    or (a.get("IsSelectableCombatant") or "").strip().lower() == "no"),
+                "buildable": is_buildable,
                 **wep,
             })
     for r in rows:
