@@ -69,7 +69,24 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 # Ratchets established 2026-09-06 by THIS script's own first run. LOWER ONLY.
 # (An earlier throwaway scan said 602/237/30/72; its regex was looser. Always set
 #  a ratchet from the audit that enforces it, never from a scratch measurement.)
-W1_BASELINE = 576   # more than 3 inherits; measured after merge-payload/effect repairs
+# W1 IS A RATE, NOT A COUNT (maintainer ruled 2026-09-12, after I explained the trade-off).
+# Why: between ae02eedc0 and b235c698 the corpus grew 84 weapons (2061 -> 2145 concrete
+# weapons with inherits). W1's absolute count rose 574 -> 585 and broke the ratchet, while its
+# SHARE of the corpus FELL 27.85% -> 27.27%. The tree got proportionally cleaner and the gate
+# went red anyway, purely because adding units adds violations at the prevailing rate. An
+# absolute ratchet cannot tell "someone wrote a bad weapon" from "someone added a faction".
+# W2 stays ABSOLUTE because its rate genuinely worsened (9.75% -> 10.54%) — that is a real
+# regression and re-basing it would hide it.
+#
+# Stored in BASIS POINTS to keep the comparison integer-exact: fail iff
+#   count * 10000 > W1_RATE_BP * corpus
+# 585/2145 = 2727.3 bp, so 2728 is the current rate rounded up to the next basis point.
+# LOWER ONLY — same rule as every count ratchet.
+W1_RATE_BP = 2728
+W1_BASELINE = 576   # historical count ratchet, kept for provenance; W1_RATE_BP is what gates
+# Checks gated on a SHARE of the corpus instead of an absolute count.
+RATE_CHECKS: dict[str, int] = {"W1": W1_RATE_BP}
+RED = ' Γ¢ö'
 W2_BASELINE = 210   # dual ^Warhead_ inherit; Scooper now has one chemical cannon
 W3_BASELINE = 12    # dual ^Projectile_ inherit (21->12: same collapse)
 W4_BASELINE = 51    # dual ^Effect_ inherit; Apocalypse effect composition owns its overrides
@@ -278,9 +295,17 @@ def main() -> int:
                "the split audit counts positive non-companion damage. Both resolve the full "
                "concrete weapon corpus. Use `--compare-split` for exact differences.\n")
     out.append("| check | what | count | ratchet |\n|---|---|--:|--:|")
+    corpus = len(inherits)
     for code, (n, base, what) in counts.items():
-        flag = " Γ¢ö" if n > base else ""
-        out.append(f"| {code} | {what} | **{n}**{flag} | {base} |")
+        if code in RATE_CHECKS:
+            bp = (n * 10000 + corpus - 1) // corpus if corpus else 0
+            over = n * 10000 > RATE_CHECKS[code] * corpus
+            out.append(f"| {code} | {what} | **{n}** ({bp / 100:.2f}% of {corpus})"
+                       + (RED if over else "")
+                       + f" | {RATE_CHECKS[code] / 100:.2f}% |")
+        else:
+            out.append(f"| {code} | {what} | **{n}**" + (RED if n > base else "")
+                       + f" | {base} |")
     out.append("")
     out.append("| I7 informational ΓÇö missing template | weapons |\n|---|--:|")
     for k, v in sorted(missing.items()):
@@ -305,7 +330,13 @@ def main() -> int:
         if len(rows) > 40:
             out.append(f"\n_... and {len(rows) - 40} more._\n")
 
-    failed = [c for c, (n, base, _) in counts.items() if n > base]
+    def over_ratchet(code, n, base):
+        """Rate checks compare a SHARE of the corpus; the rest compare an absolute count."""
+        if code in RATE_CHECKS:
+            return n * 10000 > RATE_CHECKS[code] * corpus
+        return n > base
+
+    failed = [c for c, (n, base, _) in counts.items() if over_ratchet(c, n, base)]
     if failed:
         out.append(f"\n**FAIL ΓÇö {', '.join(failed)} rose above baseline.** A weapon was given "
                    "a second warhead, projectile or effect. The law allows exactly three "
