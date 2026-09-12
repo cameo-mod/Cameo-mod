@@ -1,6 +1,40 @@
 # Cameo — THE HANDOFF
 
-## ⛔⛔ 2026-09-12 — FOUR DECISIONS THE MAINTAINER HAS NOT MADE, all blocking real work
+## ⭐⭐ 2026-09-12 — ALL NINE DECISIONS ARE RULED. THE QUEUE IS UNBLOCKED.
+
+The rulings are binding and live in **`DESIGN.md` §11b.0 (R1–R9)** — read that, not this
+summary. The maintainer-approved WORK ORDER, all four confirmed in one answer:
+
+1. **Delete the 26 `^Warhead_*_Flat` shims** (R4). Users move to the plain
+   `^Warhead_<fam>_<level>`; the 23 that genuinely want `PercentageScale: 0` declare it
+   locally. Verify with `promote_compatibility_warheads.py`'s resolved-node gate, **now also
+   order-preserving** (Codex's Wraith finding: a set comparison cannot see execution order).
+   Boot-gate. Expect W8 to fall below 858.
+2. **Carrier slave ammo pools, 17 actors** (R8). GENERATE them, never hand-type:
+   `Ammo = N x lcm(Burst_i)`, `AmmoUsage_i = lcm/Burst_i`, `Count/Delay = Ammo/100`,
+   upgrade-granted weapons `AmmoUsage: 0`. Skip `tkmsuicidedrone` and `farasha_drone_ixian`.
+   Ratchet `audit_ammo_cadence` A2 **19 → 2**.
+3. **Virtual baselines + the 100–250% band** (R3) — the big connected one, and the thing that
+   unblocks pricing at all. ⭐ **Move the BASELINE, not the actors.**
+4. **Separate weapon-stat targets with DPS as a verifier** (R1). Four inputs, one guard rail.
+
+⛔ **Blocked on nothing but sequencing:** merge **#356** (Codex's Wraith order fix — my reorder
+put the 60,000-damage main *after* `Warhead@OwnerChange`, so the Wraith captured a unit and then
+shot it) into **#354**, then re-extract the ledgers ONCE as its own commit. `audit_balance_drift`
+is red on **26 of 34** and a re-extract also picks up 5 RA1 actors someone changed in yaml
+without re-extracting.
+
+⛔ **Still not to be regenerated:** `docs/reference/ini_corpus.json`. A refresh drops 63 rows'
+weapon evidence (`HTK` `FlakTrackAAGun` 33 → `FlakTrackGun` **None**). Needs
+`EXPLICIT_DUMMY_WEAPONS` populated from the source profiles, or an explicit decision to accept
+the loss. The names (`200mmD`, `SonicZapC`, `VulcanD`) say they ARE dummy slots, but a zero
+`Damage` cannot *prove* one.
+
+⚠ **Bell curve: the hold HOLDS** (R7). `USE_BELL` stays false until W24 closes (W7 957, W8 858).
+The two over-band templates in R6 get pulled by hand, not by enabling the bell.
+
+### The old "open decisions" list, for provenance only — every one is now answered
+
 
 Newest first; each one blocks a batch that is otherwise measured and ready.
 

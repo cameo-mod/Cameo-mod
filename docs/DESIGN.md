@@ -1004,6 +1004,98 @@ inherits itself. That is 481 of the 957 — `_elite` 168, `_aa` 43, `2` 24, `_em
 whatever its base declared LOCALLY. Prove every batch with
 `tools/audit/review_resolve_diff.py`; a missed local override is a silent behaviour change.
 
+### 11b.0 MAINTAINER RULINGS, 2026-09-12 (the reference/pricing/ammo session)
+
+Nine decisions, all asked and answered the same day. They supersede anything earlier that
+disagrees, and several of them CANCEL work that was already specified.
+
+**R1 — Weapon stats are referenced SEPARATELY; total DPS is a VERIFIER, not a target.**
+> *"each individual stat like damage per shot, burst, burst delay, reload delay should be
+> referenced separately but also at the same time the total DPS should kept as a verifier so
+> nothing suddenly becomes too extreme"*
+
+So `w_damage`, `w_burst`, `w_reload` (and burst delay, once referenced) are each applied from
+their own projection, and `w_dps` becomes a **guard rail**: if the composed result drifts far
+from the DPS target, that is a flag to look at, not a number to overwrite the components with.
+⛔ This CANCELS the "DPS is authoritative, decompose_dps solves the rest" reading. The five
+targets never composed — 1.42x apart on `td_gdi_mammothtank`, 1.64x on `td_gdi_mlrs` — and the
+resolution is that four of them are inputs and the fifth is a check.
+
+**R2 — Reference everything first, INCLUDING price; then fit to the formula, and BOTH may move.**
+> *"we first reference everything including prices and then try to fit everything inside the
+> balance formula as good as possible which means prices can move but so can the stats to
+> reduce the delta as much as possible"*
+
+**R3 — But the VIRTUAL BASELINE ACTORS COME FIRST, and the formula cannot do anything until
+they exist.** The binding order of operations:
+
+1. Reference every actor — stats AND price (done for 186; `reference_assignment.json`).
+2. Derive a **virtual baseline actor per class** from that reference data
+   (`derive_virtual_anchor.py`, `EXTRAPOLATION_PROGRAM.md`).
+3. **Fit the base band**: every member of a class must land inside the documented
+   **100%–250% price band**. ⭐ **The BASELINE is the free parameter, not the actors**
+   (maintainer, asked explicitly): choose the baseline so the real members already fall in
+   band. Nothing about a live unit changes to make the band fit — a member still outside
+   afterwards is a genuine outlier to look at, and that is the point of the exercise.
+4. **Parameterise the formula for that class** from the fitted baseline.
+5. **Only then price**, letting price and stats both move to shrink the reference-vs-formula
+   delta (R2).
+
+⛔ Steps 4 and 5 are IMPOSSIBLE before 2 and 3. `apply_balance --confirm` being a no-op is not
+a bug to route around; it is this ordering being enforced. Signed-off anchors today: **0**.
+
+**R4 — Delete the 26 `^Warhead_*_Flat` shims; the existing templates already cover it.**
+Measured: they are near-clones of their twin, differing only by `PercentageScale: 0` and ±1 on
+one or two of 16 armor rows. Of 46 users **only 23 resolve `PercentageScale: 0`** — the other 23
+override it back to ~9990, so the shim's defining property is cancelled for half of them. Users
+move to the plain `^Warhead_<fam>_<level>`; the 23 that want no percentage half declare it
+locally. ⚠ This REPLACES §11b.1b's "second template per family" plan, which is cancelled.
+
+**R5 — "Flat warhead" means a profile that does not discriminate, and none exist.** The shape
+law is the **2x–8x Versus spread band with 4x the target** (§ the target-band rule). Measured
+over 190 `^Warhead_*` templates: minimum ratio **2.00x**, median 4.62x — **zero flat warheads**.
+The `_Flat` NAME was the problem, not the shape.
+
+**R6 — Nine templates exceed 8x. Ratified: `Sniper_Light` (11.00x), `Storm_Heavy` (10.14x),
+`Storm_Medium` (8.81x), `Storm_Super` (8.56x), `Tesla_Heavy` (8.36x)** — record them in
+`aggregate_archetype.SPECIALIST_RATIOS`. **To be pulled into band:
+`MissileAP_Heavy_D2K_ORocket` (12.50x) and `Laser_Medium` (8.44x).** The remaining two entries
+(`Sniper_Light_Flat`, `Laser_Medium_Flat`) disappear with R4.
+
+**R7 — The heaviness bell stays OFF until W24 closes.** Re-confirmed after being asked directly.
+`USE_BELL` remains false; W24 is not closed (W7 **957**, W8 **858**). Finish W24, then flip the
+bell as its own boot-gated change. ⛔ Do not enable it to fix R6 — pull those two by hand.
+
+**R8 — CARRIER SLAVE AMMO, exactly specified.** Every `CarrierSlave` gets `AmmoPool` +
+`ReloadAmmoPool`. All 19 break this today (8 have no pool at all, which `CarrierSlave.cs:59-65`
+turns into *unlimited ammo*; 11 have a pool nothing ever refills). Fix 17 — skip
+`tkmsuicidedrone` and `farasha_drone_ixian`, which die on impact.
+
+> *"ammo pool should be made so that firing all weapons on the target in a single burst attack
+> will empty the ammo completely ... reloading from empty to full should always take 100 ticks
+> ... If the unit has more than one weapons you need to make the ammo pool and the ammo
+> consumption per weapon so that both consume the ammo pool equally fast."*
+
+The rule, mechanically:
+* **one concurrent armament:** `Ammo = Burst`, `AmmoUsage = 1`. A burst-10 MG gets `Ammo: 10`.
+* **N concurrent armaments:** give each an EQUAL share. `share = lcm(Burst_i)`,
+  `AmmoUsage_i = share / Burst_i`, `Ammo = N x share`. The worked example: MG burst 10 and a
+  dual rocket burst 2 -> share 10, MG usage 1, rocket usage 5, `Ammo: 20`.
+* **refill is ALWAYS 100 ticks empty-to-full:** `Count / Delay = Ammo / 100`. `Ammo: 10` ->
+  `Delay: 10, Count: 1`; `Ammo: 20` -> `Delay: 5, Count: 1`; a pool that does not divide 100
+  evenly uses `Count > 1` (`Ammo: 6` -> `Count: 3, Delay: 50`).
+* **upgrade-granted weapons take `AmmoUsage: 0`** so they never interfere; only CONCURRENT
+  weapons enter the share calculation.
+* ⭐ **Preferred long-term solution, and the most complicated:** a condition-driven multiplier
+  that dynamically DOUBLES the pool while an upgrade is active, so upgrade weapons can consume
+  ammo properly instead of being zeroed. Maintainer's stated preference; not yet designed.
+
+**R9 — An AMMO POOL MAKES `ReloadDelay` THE WRONG CLOCK.** See `tools/balance/ammo_cadence.py`
+for the four regimes and `audit_ammo_cadence.py` for the census. 145 actors have a pool and
+nothing in `extract_stats` / `reference_distribution` / `formula` mentioned it. Helicopters are
+compared on *pool damage / time to empty*; airfield planes on **damage per sortie with no rate
+at all**; 12 single-shot pools have no rate either.
+
 #### 11b.1b `^Compatibility_*` — what it is, and why the collapse is not arithmetic
 
 > *"Any of those silly compatibility warheads must be resolved and replaced by an actual new
