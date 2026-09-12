@@ -1,6 +1,10 @@
 # tools/tests — unit tests for the Python tooling
 
-Stdlib `unittest` only (no pip dependency, so CI and a fresh clone can run it).
+The original suite uses stdlib `unittest`, but this branch also includes pytest-style
+`test_generate_chrome_scales`, `test_bot_insurance_model`, and `test_band_law`; `unittest discover` does NOT run the whole suite. Install pytest
+and run `python -m pytest -q tools/tests` for the complete test set.
+
+The stdlib suite remains dependency-free for the older tests.
 Run from the repo root:
 
 ```sh
