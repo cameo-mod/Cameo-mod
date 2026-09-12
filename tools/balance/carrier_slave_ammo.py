@@ -80,10 +80,23 @@ def pause_gate_sufficient(condition: str, usage: int, pause: str | None,
     if usage == 1 and global_gate:
         return True
     expected = minimum_ammo_pause(condition, usage)
-    if pause == expected or (pause and expected in pause):
+    if pause == expected or _generated_or_term(pause, expected):
         return True
     if usage == 1 and condition in {x.strip() for x in (requires or "").split(",")}:
         return True
+    return False
+
+
+def _generated_or_term(expression: str | None, expected: str) -> bool:
+    """Accept only an exact term or our top-level OR wrapper, never a substring."""
+    if not expression:
+        return False
+    for part in expression.split("||"):
+        part = part.strip()
+        while part.startswith("(") and part.endswith(")"):
+            part = part[1:-1].strip()
+        if part == expected:
+            return True
     return False
 
 
@@ -273,6 +286,9 @@ def _self_test() -> int:
     assert minimum_ammo_pause("ammo", 10) == "ammo < 10"
     assert preserved_pause("reload_lock", "ammo", 10) == "(reload_lock) || (ammo < 10)"
     assert pause_gate_sufficient("ammo", 10, "(reload_lock) || (ammo < 10)", None)
+    assert not pause_gate_sufficient("ammo", 10, "lock && (ammo < 10)", None)
+    assert not pause_gate_sufficient("ammo", 10, "!(ammo < 10)", None)
+    assert not pause_gate_sufficient("ammo", 1, "!ammo_other", None)
     print("carrier_slave_ammo self-test: PASS (both of the ruling's worked examples)")
     return 0
 
