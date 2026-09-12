@@ -271,6 +271,64 @@ _MIX_ALLOWLIST = {
     "CabalRocketCyborgRockets",
 }
 
+# Armament-level support tags are deliberately separate from weapon/warhead
+# families.  Point-defense weapons intercept incoming projectiles and should
+# not inflate the carrier's ordinary offensive pricing; their actor may still
+# have a separately priced ground or anti-air armament.
+_SUPPORT_ARMAMENT_TAGS = frozenset({"pointdefense", "pointdefensedeployed"})
+
+
+def armament_tag(node) -> str:
+    """Return the authored/inherited armament tag used for pricing policy."""
+
+    name = node.get("Name")
+    if name:
+        return str(name).strip().lower()
+    key = str(node.key or "").strip().lower()
+    return key.split("@", 1)[1] if "@" in key else ""
+
+
+def is_support_armament(node) -> bool:
+    """Whether an armament is a support route rather than priced offense."""
+
+    return armament_tag(node) in _SUPPORT_ARMAMENT_TAGS
+
+
+def _has_positive_damage(armament: dict) -> bool:
+    for warhead in armament.get("damage_warheads", []):
+        try:
+            if float(warhead.get("damage")) > 0:
+                return True
+        except (TypeError, ValueError, OverflowError):
+            continue
+    return False
+
+
+def pricing_guard(armaments: list[dict], buildable: bool) -> dict[str, object]:
+    """Expose an accidental all-unpriced positive-weapon state.
+
+    Support-only and non-buildable actors are valid zero-offense cases.  A
+    buildable actor that has positive damage but no priced positive armament is
+    different: it would silently enter pricing with DPS zero, so callers must
+    keep it unresolved until one armament is explicitly retained.
+    """
+
+    positive = [arm for arm in armaments if _has_positive_damage(arm)]
+    offensive_positive = [arm for arm in positive
+                          if not arm.get("support_armament")]
+    priced_positive = [arm for arm in offensive_positive if arm.get("pricing", True)]
+    result = {
+        "status": "OK",
+        "positive_armament_count": len(offensive_positive),
+        "priced_positive_armament_count": len(priced_positive),
+    }
+    if buildable and offensive_positive and not priced_positive:
+        result.update({
+            "status": "ALL_POSITIVE_ARMAMENTS_UNPRICED",
+            "reason": "buildable actor would enter pricing with zero offensive DPS",
+        })
+    return result
+
 
 def weapon_class_from_types(types: list[str]) -> float | None:
     """Arithmetic mean of a weapon's resolved ^-class templates (DESIGN.md
@@ -491,6 +549,13 @@ def model_constants() -> dict:
             "ENGINE_DEFAULT_BURST_DELAY": formula.ENGINE_DEFAULT_BURST_DELAY,
             "ENGINE_DEFAULT_RANGE": formula.ENGINE_DEFAULT_RANGE,
         },
+        "weapon_efficiency": {
+            "median_weapon_range": we.median_weapon_range(),
+            "RANGE_WEIGHT": we.RANGE_WEIGHT,
+            "RANGE_BOUNDS": list(we.RANGE_BOUNDS),
+            "TARGETS_FLOOR": we.TARGETS_FLOOR,
+            "DEADZONE_WEIGHT": we.DEADZONE_WEIGHT,
+        },
         "percentage_damage": {
             "FOLDED_SCALE_DENOMINATOR": pd.FOLDED_SCALE_DENOMINATOR,
             "FOLDED_ROUNDING_BIAS": pd.FOLDED_ROUNDING_BIAS,
@@ -594,6 +659,12 @@ def derived_metrics(resolved, raw: dict) -> dict | None:
             if res["pct_absolute_context"] > 0:
                 out["dps_floor"] = round(
                     res["pct_absolute_context"] * burst / eff, 2)
+    if res is None:
+        # A pure emitter must not look like a fully modeled zero-damage weapon.
+        limitations = effmod.model_limitations(resolved)
+        if limitations:
+            out["model_limitations"] = limitations
+            out["model_status"] = "provisional"
     return out or None
 
 
@@ -890,6 +961,12 @@ def extract_actor(rs, key: str, section: str,
             ("sight", "RevealsShroud", "Range"),
             ("build_limit", "Buildable", "BuildLimit"),
             ("build_duration", "Buildable", "BuildDuration"),
+            # Cargo has a separate passenger-sum pricing rule. Retain these raw
+            # inputs so band checks cannot accidentally price it as an ordinary gun unit.
+            ("cargo_capacity", "Cargo", "MaxWeight"),
+            ("cargo_types", "Cargo", "Types"),
+            ("cargo_requires", "Cargo", "RequiresCondition"),
+            ("cargo_pause", "Cargo", "PauseOnCondition"),
             ("self_heal_step", "ChangesHealth", "Step"),
             # --- THE SURVIVABILITY LAYERS (E1, 2026-08-16) ---------------------------- #
             # Maintainer: *"shielded units and armored units need to have a price! it is
@@ -947,11 +1024,19 @@ def extract_actor(rs, key: str, section: str,
             if child(c, "Name") is not None:
                 entry["armament_name"] = c.get("Name") or ""
             arm_name = c.get("Name") or ""
-            entry["pricing"] = not ("garrison" in arm_name.lower()) and not (
-                entry.get("extraction_note") == "no_damage_warheads")
+            if is_support_armament(c):
+                entry["support_armament"] = True
+                entry["pricing"] = False
+                entry["pricing_reason"] = "support_armament"
+            else:
+                entry["pricing"] = not ("garrison" in arm_name.lower()) and not (
+                    entry.get("extraction_note") == "no_damage_warheads")
             arms.append(entry)
     if arms:
         u["armaments"] = arms
+        guard = pricing_guard(arms, u["buildable"])
+        if guard["status"] != "OK":
+            u["pricing_guard"] = guard
         u["resolved_firepower_modifiers"] = resolved_firepower_modifiers(resolved, local)
     fp = firepower_multiplier(resolved, local)
     if fp:

@@ -197,7 +197,7 @@ claims:
       print(n)
 
   - id: multi_main_fired_weapons
-    value: 184
+    value: 120
     tolerance: 0
     what: >
       Direct actor-armament weapons carrying MORE THAN ONE damage main under the unified W24
@@ -214,12 +214,14 @@ claims:
       print(inventory(rs)['counts']['stacked_main_direct_actor_armament'])
 
   - id: percentage_denominator_unset
-    value: 183
+    value: 184
     tolerance: 0
     what: >
-      W18 has NOT landed. Any nonzero here means the basis-point rebase shipped and every
-      pct_absolute / dps_floor figure in the docs is stale. 2026-09-05: measured 183 after
-      origin/master merge 4fd9937f3 — W18 appears to have partially landed on master.
+      Raw authored PercentageDenominator occurrences in active weapon files, despite
+      the historical claim id: this is not an unset or resolved-application count.
+      The 2026-09-05 snapshot measured 183 after origin/master merge 4fd9937f3.
+      The 2026-09-10 Freedom elite explicit companion adds one occurrence, giving 184;
+      it preserves that route's units and does not introduce a global unit rebase.
     docs: [docs/design/ARMOR_LAYERS.md, docs/design/BALANCE_PROGRAM_PLAN.md]
     measure: |
       import pathlib, sys
@@ -258,12 +260,12 @@ claims:
       print(n)
 
   - id: meters_filling_before_death
-    value: 269
+    value: 310
     tolerance: 0
     what: >
       Weapon/meter bindings on FIRED weapons whose meter reaches FULL effect while the target
       still has 25% HP left — the maintainer's condition for pricing a meter at all ("it is
-      able to completely freeze a unit BEFORE it dies"). **269 bindings (2026-09-05).**
+      able to completely freeze a unit BEFORE it dies"). **310 bindings in the combined tree (2026-09-10), after excluding concrete/percentage/nonhealth damage from the nominal health denominator. 269 was the 2026-09-05 snapshot.**
       ⛔ THE EARLIER VALUES (1, 124, 223, 534) ARE ALL VOID, for TWO different reasons, and the
       second one is the important one.
       (a) ARITHMETIC. `PhysicalState.ApplyChange` health-scales through `ScaleChangeToHealth`,
@@ -326,7 +328,7 @@ claims:
                   break
       print(n)
   - id: w24_multi_main_fed
-    value: 429
+    value: 290
     tolerance: 0
     what: >
       RATCHET — damage-scaled metered weapons whose meter is fed by LESS than 100% of their
@@ -362,7 +364,7 @@ claims:
               n += 1
       print(n)
   - id: physical_state_fired_weapons
-    value: 534
+    value: 542
     tolerance: 0
     what: >
       FIRED weapons that deliver a PhysicalState meter (Temperature or Corrosion) and are priced
@@ -461,7 +463,7 @@ claims:
                 if isinstance(v, dict) and 'spec' in v and v.get('signed_off')))
 
   - id: warhead_family_reach
-    value: 1415
+    value: 1454
     tolerance: 0
     what: >
       Fired weapons whose inherit chain reaches a `^Warhead_*` family — the W23/W24 burn-up.
@@ -499,7 +501,7 @@ claims:
                 and any(a.startswith('^Warhead_') for a in ancestors(w))))
 
   - id: unconverted_template_inheritors
-    value: 1596
+    value: 1590
     tolerance: 0
     what: >
       Direct inheritors of the 47 remaining legacy weapon templates (W23's scope).

@@ -61,7 +61,7 @@ Every classified member with its LIVE resolved-YAML stats as it ships today, sor
 | ixian_rockettrooper | d2k_ixian | FORMULA | 12000 | 48 | 6185 | 300 | live resolved YAML |
 | ordos_rockettrooper | d2k_ordos | FORMULA | 12000 | 48 | 6185 | 300 | live resolved YAML |
 | ra1_allies_alliedrocketsoldier | shared_redalert | REF | 10000 | 55 | 6643 | 300 | live resolved YAML |
-| ra1_soviets_sovietrocketsoldier | redalert_soviets | REF | 10000 | 55 | 6643 | 300 | live resolved YAML |
+| ra1_soviets_rocketsoldier | redalert_soviets | REF | 10000 | 55 | 6643 | 300 | live resolved YAML |
 | ra2sidewind | shared_redalert2 | FORMULA | 15000 | 45 | 6567 | 300 | excluded from fit (buildable=False and no explicit balance_include) |
 | td_gdi_rocketsoldier | tiberiandawn_gdi | REF | 9000 | 50 | 6368 | 300 | live resolved YAML |
 | td_nod_rocketsoldier | tiberiandawn_nod | REF | 9000 | 50 | 6368 | 300 | live resolved YAML |
@@ -106,7 +106,7 @@ Read-only R4 sensitivity through reference_targets.target_for's with-Cameo resul
 | ra2_allies_guardiangi | CnC Reloaded/GGI; Mental Omega/GGI; RA2 Reborn/GGI; Red Resurrection/GGI; Romanov's Vengeance/ggi; Valiant Shades/ggi | 26404.6 (n=6) | 49.3609 (n=6) | 4527.09 (n=6) | 379.103 (n=6) | unapproved |
 | yuri_initiate | CnC Reloaded/INIT; Combined Arms/SAB; Mental Omega/INIT; RA2 0XX/INIT; RA2 Reborn/INIT; Red Resurrection/INIT | 22195.9 (n=6) | 55.9111 (n=6) | 4242.85 (n=6) | 226.014 (n=6) | unapproved |
 | asianalliance_asiantankkiller | Rise of the East/THUND | 19495.3 (n=1) | 59.5064 (n=1) | 6109.35 (n=1) | 380.722 (n=1) | unapproved |
-| ra1_soviets_sovietrocketsoldier | Combined Arms/E3; DTA Enhanced/E3S; OpenRA Red Alert/E3 | 13698 (n=3) | 50.2715 (n=3) | 7157.2 (n=3) | 430.449 (n=3) | unapproved |
+| ra1_soviets_rocketsoldier | Combined Arms/E3; DTA Enhanced/E3S; OpenRA Red Alert/E3 | 13698 (n=3) | 50.2715 (n=3) | 7157.2 (n=3) | 430.449 (n=3) | unapproved |
 | ra1_allies_alliedrocketsoldier | Combined Arms/E3; DTA Enhanced/E3A; OpenRA Red Alert/E3 | 13698 (n=3) | 50.2715 (n=3) | 7157.2 (n=3) | 430.449 (n=3) | unapproved |
 | td_gdi_rocketsoldier | Combined Arms/N3; DTA Enhanced/E3; OpenRA Tiberian Dawn/E3 | 13906.3 (n=3) | 45.2703 (n=3) | 6569.48 (n=3) | 399.798 (n=3) | unapproved |
 | td_nod_chemicalrocketsoldier | Combined Arms/N3C | 24938 (n=1) | 54.5121 (n=1) | 6611 (n=1) | 457.511 (n=1) | unapproved |

@@ -10,6 +10,14 @@
      "v": "Helicopter"
     },
     "buildable": false,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/aircraft.yaml#Cargo.MaxWeight",
+     "v": "10"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/aircraft.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/aircraft.yaml#Valued.Cost",
      "v": "1500"

@@ -1,5 +1,62 @@
 ﻿## OpenCode GLM 5.3 Flash - Astra pipeline batch: A3/C1 dossiers, extrapolation join, speed law, report refresh (2026-09-09)
 
+### Japan pilot follow-up — Astra, 2026-09-09 (in progress)
+
+Aedis requested a Japan pilot against reference-grounded TD GDI/Nod and RA1
+Allies/Soviets; Blackrobe authorized isolated implementation and new PRs,
+while protecting his existing PRs. The shared reference map includes pending
+C46 classes, not applied runtime membership. No anchor sign-off is implied.
+
+Prior art: `reference_targets.target_for` supplies R4 targets;
+`faction_extrapolate` supplies exchange rates/rank placements;
+`derive_virtual_anchor` supplies current-ledger diagnostics; `fit_class`
+already prices virtual models. Missing: a bounded pilot comparison separating
+classic-original R4 evidence from Japan's same-class sensitivity and explicit
+holds. Reuse these functions, not another matcher or pricing formula. Proxy
+routes and synthesized cost comparisons are not approved calibration.
+
+Additional confirmed gaps: INI consumers dropped weapon incompleteness while keeping
+numeric DPS; source-target projection could bypass the population eligibility gate;
+the reference matcher removed overlapping faction words in randomized set order.
+The bounded repairs preserve chassis evidence and expose legacy uncertainty. Aedis
+accepted source/target separation, frozen inputs, disagreement and holdout checks at
+23:07–23:08; no existing tool supplies the source-held-out test without self-vote, so
+a bounded validator reusing the existing coordinate machinery is being added.
+
+One boot/menu check completed at 23:31–23:32 Asia/Jakarta: fresh
+`MenuPostProcessEffect.PostWorldLoaded`, no new exception log, 90 seconds observed,
+peak sampled system memory 76.63%. Isolated settings/logs and unchanged pinned engine;
+not a matchup or balance-validation claim. Full baseline comparison remains in progress.
+
+After refreshing to `50b7d001b`, a second 90-second isolated boot check completed at
+00:24–00:26 on 10 September: fresh menu-load evidence, no exception logs, peak sampled
+memory 70.57%, owned game process closed. Same-base full Python comparison: baseline
+1306 tests / 16 failures / 8 errors / 45 skipped; candidate 1609 / 16 / 8 / 63.
+All 24 failure/error signatures match. The subsequent holdout terminology-only change
+has focused coverage; OpenRA armament evidence work is a later validation stage.
+
+Aedis's 00:14 continuous-heaviness review request pauses unpublished W24 conversion
+drafts. See `docs/balance/review/CONTINUOUS_HEAVINESS_REVIEW_20260910.md` for the
+arithmetic-versus-weighted-mean contradiction, percentage-growth gap, active-zero
+semantics and runtime/tool parity requirements. Aedis subsequently authorized
+implementation at 00:40 and confirmed interpolation at 00:51; that implementation
+is on a separate branch, not part of this reference-data batch.
+
+Final reference Python run on 10 September: 1675 tests, 14 failures, 8 errors,
+63 skips; no added failure/error signatures versus the same-base baseline.
+Two baseline failures (ADATS and TKM) disappear because stale derived-ledger
+expectations were regenerated, not because their weapons were changed. Sampled
+system-memory peak was 85.59%, below the 90% guard. The final DTA corpus-focused
+run additionally passed 17 tests, including the external pinned-baseline checks.
+The exact-source DTA refresh retains all 10,144 non-DTA raw lines and changes
+analytical range/DPS recommendations for 63 assigned actors, not live unit stats.
+All 33 raw/derived ledgers and the complete audit set are refreshed deliberately;
+these generated artifacts are not claimed untouched. Only the Katyusha display
+name changes live actor configuration in this batch. Independent review found
+no additional DTA blocker and recommended a new review PR, not a merge claim.
+
+### Earlier pipeline batch
+
 Batch under Codex/Astra planning/review coordination, no commits; both 2026-09-09 passes
 consolidated here. A3/C1: fixed seven-section `propose_anchor_spec.py` dossier generator —
 read-only virtual candidate + readiness over live resolved YAML and the ledger for 700

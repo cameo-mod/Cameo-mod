@@ -47,7 +47,7 @@ class ReferenceJoinTests(unittest.TestCase):
         peers = [dict(source="s", id="first", name="Tank"), dict(source="s", id="second", name="Tank")]
         result, calls = self.evidence({"s": dict(id="second", confidence="STRONG")}, peers)
         self.assertEqual(result["used"], [dict(source="s", id="second")])
-        self.assertEqual(calls, 4)
+        self.assertEqual(calls, 5)  # HP, speed, range, cost and nominal DPS
         self.assertEqual(result["targets"]["hp"], dict(value=100, sources=1))
 
     def test_missing_or_duplicate_id_withholds_partial_synthesis(self):

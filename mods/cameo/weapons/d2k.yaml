@@ -332,6 +332,8 @@ D2K_Rocket_AA:
 		ValidTargets: Air
 		Damage: 3750
 
+	Warhead@MissileAP_Heavy:
+		ValidTargets: Air
 D2K_Rocket_Trooper:
 	Inherits@finalmain: ^Compatibility_MissileAP_HeavyFlat
 	Inherits@wh: ^Warhead_MissileAP_Light

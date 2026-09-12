@@ -17,12 +17,12 @@ td_nod_minigunner:
 		HP: 30000
 	ChangesHealth@SelfHealing:
 		Step: 30
-	DamageMultiplier@ScoutInfantryBuff:
-		Modifier: 100
-	FirepowerMultiplier@ScoutInfantryBuff:
-		Modifier: 100
-	FirepowerMultiplier@td_nod_minigunner:
-		Modifier: 29
+	# DamageMultiplier@ScoutInfantryBuff:
+		# Modifier: 100
+	# FirepowerMultiplier@ScoutInfantryBuff:
+		# Modifier: 100
+	# FirepowerMultiplier@td_nod_minigunner:
+		# Modifier: 29
 	Tooltip:
 		Name: Nod Minigunner
 	Buildable:
@@ -66,6 +66,10 @@ td_nod_rocketsoldier:
 	ActorStatValues:
 		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
 
+	Armament@PRIMARY:
+		Weapon: td_nod_rocketsoldier_rockets
+	Armament@GARRISONED:
+		Weapon: td_nod_rocketsoldier_rockets
 td_nod_flamethrower:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
@@ -97,16 +101,16 @@ td_nod_flamethrower:
 	ChangesHealth@SelfHealing:
 		Step: 20
 	Armament:
-		Weapon: Flamethrower
+		Weapon: td_nod_flamethrower_flamethrower
 		LocalOffset: 341,0,256
 		FireDelay: 3
 		MuzzleSequence: muzzle
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: Flamethrower
+		Weapon: td_nod_flamethrower_flamethrower
 		MuzzleSequence: muzzle
 	FireWarheadsOnDeath:
-		Weapon: FlamethrowerExplode
+		Weapon: td_nod_flamethrower_flamethrowerexplode
 	TakeCover:
 		ProneOffset: 190,0,-198
 	WithMuzzleOverlay:
@@ -154,16 +158,16 @@ td_nod_chemicalwarrior:
 	ChangesHealth@SelfHealing:
 		Step: 48
 	Armament:
-		Weapon: Chemspray
+		Weapon: td_nod_chemicalwarrior_chemspray
 		LocalOffset: 341,0,256
 		FireDelay: 3
 		MuzzleSequence: muzzle
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: Chemspray
+		Weapon: td_nod_chemicalwarrior_chemspray
 		MuzzleSequence: muzzle
 	FireWarheadsOnDeath:
-		Weapon: SmallTiberiumExplosion
+		Weapon: td_nod_chemicalwarrior_smalltiberiumexplosion
 	TakeCover:
 		ProneOffset: 190,0,-190
 	WithMuzzleOverlay:
@@ -246,11 +250,11 @@ td_nod_commando:
 	RenderSprites:
 		Image: rmbo
 	Armament:
-		Weapon: td_gdi_commando_sniper
+		Weapon: td_nod_commando_td_gdi_commando_sniper
 		LocalOffset: 128,0,256
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: td_gdi_commando_sniper
+		Weapon: td_nod_commando_td_gdi_commando_sniper
 	ActorStatValues:
 		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
 
@@ -289,14 +293,14 @@ td_nod_chemicalrocketsoldier:
 		Queue: Infantry, RAInfantry
 		Description: actor_cheme3.description
 	Armament@PRIMARY:
-		Weapon: ChemRockets
+		Weapon: td_nod_chemicalrocketsoldier_chemrockets
 		LocalOffset: 256,43,341
 		FireDelay: 5
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: ChemRockets
+		Weapon: td_nod_chemicalrocketsoldier_chemrockets
 	FireWarheadsOnDeath:
-		Weapon: ChemRocketsExplosion
+		Weapon: td_nod_chemicalrocketsoldier_chemrocketsexplosion
 	Targetable@Immune:
 		TargetTypes: ToxinImmune
 	TakeCover:
@@ -353,15 +357,15 @@ td_nod_lasertrooper:
 		Step: 60
 	Mobile:
 		Speed: 51
-	FirepowerMultiplier@PromotionUnit:
-		Modifier: 108
+	# FirepowerMultiplier@PromotionUnit:
+		# Modifier: 108
 	Armament@PRIMARY:
-		Weapon: BlackHandLaser
+		Weapon: td_nod_lasertrooper_blackhandlaser
 		LocalOffset: 600,0,450
 		FireDelay: 5
 	Armament@Garrison:
 		Name: garrisoned
-		Weapon: BlackHandLaser
+		Weapon: td_nod_lasertrooper_blackhandlaser
 	WithInfantryBody:
 		IdleSequences: idle1,idle2
 	AttackFrontal:
@@ -406,12 +410,12 @@ td_nod_blackhandflamer:
 	Mobile:
 		Speed: 66
 	Armament@PRIMARY:
-		Weapon: BlackHandFlamer
+		Weapon: td_nod_blackhandflamer_blackhandflamer
 		LocalOffset: 384,0,256
 		FireDelay: 5
 	Armament@Garrison:
 		Name: garrisoned
-		Weapon: BlackHandFlamer
+		Weapon: td_nod_blackhandflamer_blackhandflamer
 	WithInfantryBody:
 		IdleSequences: idle1,idle2
 	AttackFrontal:
@@ -424,7 +428,7 @@ td_nod_blackhandflamer:
 	WithDeathAnimation:
 		DeathSequencePalette: playerra2
 	FireWarheadsOnDeath:
-		Weapon: BlackHandFlamerExplode
+		Weapon: td_nod_blackhandflamer_blackhandflamerexplode
 	Cloak:
 		UncloakOn: Attack, Damage
 		CloakSound: trans1.aud
@@ -463,12 +467,12 @@ td_nod_stealthsoldier:
 	Mobile:
 		Speed: 72
 	Armament@PRIMARY:
-		Weapon: BHRedDarts
+		Weapon: td_nod_stealthsoldier_bhreddarts
 		LocalOffset: 450,0,350
 		FireDelay: 5
 	Armament@Garrison:
 		Name: garrisoned
-		Weapon: BHRedDarts
+		Weapon: td_nod_stealthsoldier_bhreddarts
 	-Targetable@ParachuteAir:
 	WithInfantryBody:
 		IdleSequences: idle1,idle2
@@ -485,8 +489,8 @@ td_nod_stealthsoldier:
 	ActorStatValues:
 		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
 
-	FirepowerMultiplier:
-		Modifier: 81
+	# FirepowerMultiplier:
+		# Modifier: 81
 td_nod_lasercommando:
 	Inherits: ^Soldier
 	Inherits@deathanim: ^RA2InfantryDeathAnimations
@@ -545,12 +549,12 @@ td_nod_lasercommando:
 		UncloakOn: Attack, Damage
 	Armament:
 		Name: primary
-		Weapon: NodCommandoLaser
+		Weapon: td_nod_lasercommando_nodcommandolaser
 		LocalOffset: 256,64,512
 		PauseOnCondition: !pdammo
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: NodCommandoLaser
+		Weapon: td_nod_lasercommando_nodcommandolaser
 	Armament@c4:
 		Weapon: GenericC4
 		Cursor: c4
@@ -558,7 +562,7 @@ td_nod_lasercommando:
 		Voice: Demolish
 	PointDefense:
 	Armament@pointdefense:
-		Weapon: NodCommandoLaser
+		Weapon: td_nod_lasercommando_nodcommandolaser
 	AmmoPool@pld:
 		Ammo: 24
 		Armaments: primary, pointdefense

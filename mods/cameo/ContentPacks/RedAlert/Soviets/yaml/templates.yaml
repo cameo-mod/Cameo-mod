@@ -1,51 +1,51 @@
 ^Conscription:
-	ProductionCostMultiplier@ra1_soviets_doctrine_conscriptiondoctrine:
-		Prerequisites: ra1_soviets_doctrine_conscriptiondoctrine
+	ProductionCostMultiplier@ra1_soviets_doctrine_conscription:
+		Prerequisites: ra1_soviets_doctrine_conscription
 		Multiplier: 75
-	ProductionTimeMultiplier@ra1_soviets_doctrine_conscriptiondoctrine:
-		Prerequisites: ra1_soviets_doctrine_conscriptiondoctrine
+	ProductionTimeMultiplier@ra1_soviets_doctrine_conscription:
+		Prerequisites: ra1_soviets_doctrine_conscription
 		Multiplier: 75
-	FirepowerMultiplier@ra1_soviets_doctrine_conscriptiondoctrine:
-		RequiresCondition: ra1_soviets_doctrine_conscriptiondoctrine
+	FirepowerMultiplier@ra1_soviets_doctrine_conscription:
+		RequiresCondition: ra1_soviets_doctrine_conscription
 		Modifier: 110
-	DamageMultiplier@ra1_soviets_doctrine_conscriptiondoctrine:
-		RequiresCondition: ra1_soviets_doctrine_conscriptiondoctrine
+	DamageMultiplier@ra1_soviets_doctrine_conscription:
+		RequiresCondition: ra1_soviets_doctrine_conscription
 		Modifier: 90
-	GrantConditionOnPrerequisite@ra1_soviets_doctrine_conscriptiondoctrine:
-		Condition: ra1_soviets_doctrine_conscriptiondoctrine
-		Prerequisites: ra1_soviets_doctrine_conscriptiondoctrine
+	GrantConditionOnPrerequisite@ra1_soviets_doctrine_conscription:
+		Condition: ra1_soviets_doctrine_conscription
+		Prerequisites: ra1_soviets_doctrine_conscription
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_conscriptiondoctrine
+		Upgrades: ra1_soviets_doctrine_conscription
 
 ^ExperimentalTeslaWeaponry:
-	FirepowerMultiplier@ra1_soviets_doctrine_teslaandexperimentaltechdoctrine:
-		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltechdoctrine
+	FirepowerMultiplier@ra1_soviets_doctrine_teslaandexperimentaltech:
+		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltech
 		Modifier: 150
-	GrantConditionOnPrerequisite@ra1_soviets_doctrine_teslaandexperimentaltechdoctrine:
-		Condition: ra1_soviets_doctrine_teslaandexperimentaltechdoctrine
-		Prerequisites: ra1_soviets_doctrine_teslaandexperimentaltechdoctrine
+	GrantConditionOnPrerequisite@ra1_soviets_doctrine_teslaandexperimentaltech:
+		Condition: ra1_soviets_doctrine_teslaandexperimentaltech
+		Prerequisites: ra1_soviets_doctrine_teslaandexperimentaltech
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_teslaandexperimentaltechdoctrine
+		Upgrades: ra1_soviets_doctrine_teslaandexperimentaltech
 
 ^TeslaExperimentalTechDoctrineRA1:
-	GrantConditionOnPrerequisite@ra1_soviets_doctrine_teslaandexperimentaltechdoctrine:
-		Condition: ra1_soviets_doctrine_teslaandexperimentaltechdoctrine
-		Prerequisites: ra1_soviets_doctrine_teslaandexperimentaltechdoctrine
+	GrantConditionOnPrerequisite@ra1_soviets_doctrine_teslaandexperimentaltech:
+		Condition: ra1_soviets_doctrine_teslaandexperimentaltech
+		Prerequisites: ra1_soviets_doctrine_teslaandexperimentaltech
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_teslaandexperimentaltechdoctrine
+		Upgrades: ra1_soviets_doctrine_teslaandexperimentaltech
 
 ^NuclearWarDoctrineRA1:
-	FirepowerMultiplier@ra1_soviets_doctrine_nuclearwardoctrine:
-		RequiresCondition: ra1_soviets_doctrine_nuclearwardoctrine
+	FirepowerMultiplier@ra1_soviets_doctrine_nuclearwar:
+		RequiresCondition: ra1_soviets_doctrine_nuclearwar
 		Modifier: 110
-	SpeedMultiplier@ra1_soviets_doctrine_nuclearwardoctrine:
-		RequiresCondition: ra1_soviets_doctrine_nuclearwardoctrine
+	SpeedMultiplier@ra1_soviets_doctrine_nuclearwar:
+		RequiresCondition: ra1_soviets_doctrine_nuclearwar
 		Modifier: 110
-	GrantConditionOnPrerequisite@ra1_soviets_doctrine_nuclearwardoctrine:
-		Condition: ra1_soviets_doctrine_nuclearwardoctrine
-		Prerequisites: ra1_soviets_doctrine_nuclearwardoctrine
+	GrantConditionOnPrerequisite@ra1_soviets_doctrine_nuclearwar:
+		Condition: ra1_soviets_doctrine_nuclearwar
+		Prerequisites: ra1_soviets_doctrine_nuclearwar
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_nuclearwardoctrine
+		Upgrades: ra1_soviets_doctrine_nuclearwar
 
 ####################################################################################################
 #		Upgrades Soviets

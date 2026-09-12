@@ -16,6 +16,7 @@ from audit_three_way_split import RAW_SPLIT_BASELINE, main_warheads
 from audit_warhead_split import BROADCAST_BASELINE
 from miniyaml import Ruleset
 from reviewed_weapon_history import HistoricalView
+from owned_weapon_history import historical_weapon_names
 
 
 ACCEPTED = {
@@ -45,14 +46,14 @@ class NamedFamilyProfileConsolidationTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "non-selected behavior hash changed"):
             cohort.inspect(self.rules)
         self.assertTrue(cohort.inspect(HistoricalView(self, self.rules)))
-        self.assertEqual(24, len(cohort.selections(self.rules)))
+        self.assertEqual(27, len(cohort.selections(self.rules)))
         for root, (_destination, expected, _total, _scale) in cohort.ROOTS.items():
             self.assertEqual(expected, cohort.descendants(self.rules, root), root)
 
     def test_each_member_has_one_selected_named_family_main(self):
         for name, (destination, total, scale) in cohort.selections(self.rules).items():
             tag = f"{destination}FlatCompatibility"
-            resolved = self.rules.resolve_weapon(name)
+            resolved = HistoricalView(self, self.rules).resolve_weapon(name)
             self.assertEqual([tag], main_warheads(resolved), name)
             node = child(resolved, f"Warhead@{tag}")
             self.assertEqual(str(total), str(node.get("Damage")), name)
@@ -67,7 +68,10 @@ class NamedFamilyProfileConsolidationTests(unittest.TestCase):
 
     def test_comparison_is_exactly_the_reviewed_role_change(self):
         selected = set(cohort.selections(self.rules)) - {"TSLaserHarpyMultiClaw"}
-        self.assertEqual(selected, set(self.report["changed"]))
+        # Preserve historical comparison rows/hashes; only normalize the reviewed
+        # one-to-many identity split back to its original source identities.
+        selected = {cohort.YAK_OWNED_SOURCES.get(name, name) for name in selected}
+        self.assertEqual(historical_weapon_names(selected), set(self.report["changed"]))
         self.assertEqual([], self.report["added"])
         self.assertEqual([], self.report["removed"])
         self.assertEqual(set(ACCEPTED), set(self.by_kind))
@@ -78,7 +82,7 @@ class NamedFamilyProfileConsolidationTests(unittest.TestCase):
             self.assertEqual(expected_hash, hashlib.sha256(payload).hexdigest(), kind)
 
     def test_percentage_changes_are_only_the_guarded_one_hp_rounding_cases(self):
-        self.assertEqual(cohort.EXACT_PLUS_ONE,
+        self.assertEqual(historical_weapon_names(cohort.EXACT_PLUS_ONE),
                          set(self.by_kind["percentage_damage"]))
         for name, groups in self.by_kind["percentage_damage"].items():
             rows = [row for group in groups for row in group]

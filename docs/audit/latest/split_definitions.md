@@ -1,13 +1,13 @@
 # Split definitions — one weapon, two live files, one silent merge
 
-Live weapon files in the manifest: **40** · names defined more than once: **26**
+Live weapon files in the manifest: **40** · names defined more than once: **24**
 
 The engine MERGES same-named top-level nodes across files. Editing one copy leaves the other supplying its own fields, so a removal can silently do nothing — see the `HMG` incident in this file's docstring.
 
 | bucket | count | baseline |
 |---|--:|--:|
 | S1 legacy global + ContentPack | 22 | 56 |
-| S2 same tier twice | 4 | 2 |
+| S2 same tier twice | 2 | 2 |
 
 
 ## S1 — defined in a legacy global AND a ContentPack (22)
@@ -16,38 +16,36 @@ ContentPack-migration residue. **Fix by deleting the LEGACY copy** once the pack
 
 | weapon | defined at |
 |---|---|
-| `ChemTibAtomic` | `ContentPacks/RedAlert/Shared/yaml/weapons.yaml:1250` · `weapons/tiberiandawn.yaml:226` |
-| `RocketsG` | `ContentPacks/RedAlert/Shared/yaml/weapons.yaml:1371` · `ContentPacks/RedAlert/Shared/yaml/weapons.yaml:1375` · `weapons/weapons.yaml:12036` |
-| `SardDeath` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2567` · `weapons/d2k.yaml:1034` |
-| `Sound` | `ContentPacks/D2k/Atreides/yaml/weapons.yaml:15` · `weapons/d2k.yaml:644` |
-| `Sound2` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2537` · `ContentPacks/D2k/Atreides/yaml/weapons.yaml:63` · `weapons/d2k.yaml:691` |
-| `WormSwallow` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2552` · `weapons/d2k.yaml:781` |
-| `^D2K155mmLegacy` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2381` · `weapons/d2k.yaml:156` |
-| `^OCannon` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2935` · `weapons/d2k.yaml:1856` |
-| `d2k25mm` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2612` · `weapons/d2k.yaml:1231` |
-| `d2kFlameTurret` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2769` · `weapons/d2k.yaml:1473` |
-| `d2k_APCo_AA` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2495` · `weapons/d2k.yaml:541` |
-| `d2k_APCo_AG` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2486` · `weapons/d2k.yaml:533` |
-| `d2k_aircraft_eater` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2867` · `weapons/d2k.yaml:1788` |
-| `d2k_airdefenseplatform` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2814` · `weapons/d2k.yaml:1765` |
-| `d2k_laser_qafza` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2778` · `weapons/d2k.yaml:1691` |
-| `d2k_laser_qafza_aa` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2795` · `weapons/d2k.yaml:1708` |
-| `d2k_sard_crossbow` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2907` · `weapons/d2k.yaml:1828` |
-| `d2k_sard_heatblade` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2886` · `weapons/d2k.yaml:1807` |
-| `d2k_sardaukar_elite` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2638` · `weapons/d2k.yaml:1394` |
-| `d2k_tyrant` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2423` · `weapons/d2k.yaml:494` |
-| `emperor_sardaukar_chief_c4` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2764` · `weapons/d2k.yaml:1442` |
-| `mtank_pri` | `ContentPacks/D2k/Shared/yaml/weapons.yaml:548` · `weapons/d2k.yaml:477` |
+| `ChemTibAtomic` | `ContentPacks/RedAlert/Shared/yaml/weapons.yaml:1286` · `weapons/tiberiandawn.yaml:230` |
+| `RocketsG` | `ContentPacks/RedAlert/Shared/yaml/weapons.yaml:1419` · `ContentPacks/RedAlert/Shared/yaml/weapons.yaml:1423` · `weapons/weapons.yaml:12036` |
+| `SardDeath` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2527` · `weapons/d2k.yaml:1034` |
+| `Sound` | `ContentPacks/D2k/Atreides/yaml/weapons.yaml:15` · `weapons/d2k.yaml:647` |
+| `Sound2` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2501` · `ContentPacks/D2k/Atreides/yaml/weapons.yaml:63` · `weapons/d2k.yaml:694` |
+| `WormSwallow` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2516` · `weapons/d2k.yaml:784` |
+| `^D2K155mmLegacy` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2347` · `weapons/d2k.yaml:154` |
+| `^OCannon` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2877` · `weapons/d2k.yaml:1816` |
+| `d2k25mm` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2572` · `weapons/d2k.yaml:1228` |
+| `d2kFlameTurret` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2711` · `weapons/d2k.yaml:1440` |
+| `d2k_APCo_AA` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2460` · `weapons/d2k.yaml:544` |
+| `d2k_APCo_AG` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2451` · `weapons/d2k.yaml:536` |
+| `d2k_aircraft_eater` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2809` · `weapons/d2k.yaml:1748` |
+| `d2k_airdefenseplatform` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2756` · `weapons/d2k.yaml:1725` |
+| `d2k_laser_qafza` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2720` · `weapons/d2k.yaml:1652` |
+| `d2k_laser_qafza_aa` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2737` · `weapons/d2k.yaml:1669` |
+| `d2k_sard_crossbow` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2849` · `weapons/d2k.yaml:1788` |
+| `d2k_sard_heatblade` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2828` · `weapons/d2k.yaml:1767` |
+| `d2k_sardaukar_elite` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2590` · `weapons/d2k.yaml:1372` |
+| `d2k_tyrant` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2389` · `weapons/d2k.yaml:497` |
+| `emperor_sardaukar_chief_c4` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2706` · `weapons/d2k.yaml:1420` |
+| `mtank_pri` | `ContentPacks/D2k/Shared/yaml/weapons.yaml:548` · `weapons/d2k.yaml:479` |
 
 
-## S2 — defined twice within the same tier (4)
+## S2 — defined twice within the same tier (2)
 
 | weapon | defined at |
 |---|---|
-| `Flamethrower` | `weapons/tiberiandawn.yaml:72` · `weapons/starcraft.yaml:1` |
-| `OrniBombC` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2563` · `ContentPacks/D2k/Atreides/yaml/weapons.yaml:89` |
-| `OrniGunC` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2658` · `ContentPacks/D2k/Atreides/yaml/weapons.yaml:151` |
-| `ZClaw3` | `weapons/tiberiansun.yaml:1213` · `weapons/tiberiansun.yaml:1855` |
+| `Flamethrower` | `weapons/tiberiandawn.yaml:75` · `weapons/starcraft.yaml:1` |
+| `ZClaw3` | `weapons/tiberiansun.yaml:1227` · `weapons/tiberiansun.yaml:1869` |
 
 
-**FAIL** — S1 22/56, S2 4/2. A new split definition landed. Delete the duplicate rather than editing both copies.
+_at or below baseline_ — pre-existing migration residue. **Lower `S1_BASELINE`/`S2_BASELINE` as duplicates are deleted; never raise them.**

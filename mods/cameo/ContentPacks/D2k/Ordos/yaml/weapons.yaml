@@ -17,6 +17,7 @@ HeavyOrdosCombatTankCannon:
 		PercentageScale: 10000
 		Damage: 10000
 HeavyOrdosCombatTankRockets:
+	Inherits@missilerole: ^Warhead_MissileAP_Heavy
 	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy_D2K
 	Inherits@fx: ^Effect_MissileHE_Heavy_D2K
@@ -43,12 +44,21 @@ HeavyOrdosCombatTankRockets:
 		ContrailEndColor: 000000FF
 		ContrailStartWidth: 50
 		ContrailEndWidth: 100
-	Warhead@MissileHE_Heavy:
-		Damage: 10000
 	Warhead@EffectWater: CreateEffect
 		Explosions: small_splash
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
+	-Warhead@MissileHE_Heavy:
+	Warhead@MissileAP_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
+
 120mm_td:
 	Inherits@collapseflat: ^Compatibility_CannonHE_MediumFlat
 	Inherits: ^MediumChemicalWeapon
@@ -89,7 +99,7 @@ HeavyOrdosCombatTankRockets:
 	-Warhead@TankDestroyerCannon:
 	-Warhead@CannonHE_MediumFlatCompatibility:
 120mm_cobra:
-	Inherits@finalmain: ^Compatibility_CannonAP_LightFlat
+	Inherits@finalmain: ^Warhead_CannonAP
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@wh3: ^Warhead_CannonAP_Light
@@ -232,10 +242,11 @@ HeavyOrdosCombatTankRockets:
 	-Warhead@CannonHE_Medium:
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
-	Warhead@CannonAP_LightFlatCompatibility:
+	Warhead@CannonAP:
 		ValidTargets: Ground, Water
 		Damage: 120000
-		PercentageScale: 0
+		PercentageScale: 2000
+		Heaviness: 0
 120mm_cobra_deploy:
 	Inherits: 120mm_cobra
 	Projectile: Bullet
@@ -358,10 +369,11 @@ HeavyOrdosCombatTankRockets:
 			Spaceship: 1
 		Falloff: 100, 45, 18
 		Range: 0, 233, 466
-	Warhead@CannonAP_LightFlatCompatibility:
+	Warhead@CannonAP:
 		ValidTargets: Ground, Water
 		Damage: 120000
-		PercentageScale: 0
+		PercentageScale: 2000
+		Heaviness: 0
 
 120mm_python:
 	Inherits: 120mm_cobra
@@ -497,10 +509,11 @@ HeavyOrdosCombatTankRockets:
 			Spaceship: 1
 		Falloff: 100, 45, 18
 		Range: 0, 233, 466
-	Warhead@CannonAP_LightFlatCompatibility:
+	Warhead@CannonAP:
 		ValidTargets: Ground, Water
 		Damage: 120000
-		PercentageScale: 0
+		PercentageScale: 2000
+		Heaviness: 0
 
 120mm_python_deploy:
 	Inherits: 120mm_python
@@ -624,10 +637,11 @@ HeavyOrdosCombatTankRockets:
 			Spaceship: 1
 		Falloff: 100, 45, 18
 		Range: 0, 233, 466
-	Warhead@CannonAP_LightFlatCompatibility:
+	Warhead@CannonAP:
 		ValidTargets: Ground, Water
 		Damage: 120000
-		PercentageScale: 0
+		PercentageScale: 2000
+		Heaviness: 0
 
 eye_bomberguy:
 	Inherits@collapsewh: ^Warhead_Demolition_Heavy
@@ -1007,6 +1021,7 @@ Dune_SiegeMortar:
 		PercentageScale: 0
 
 D2K_Rocket_Trooper_AGOnly:
+	Inherits@missilerole: ^Warhead_MissileHE_Heavy
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Rocket_Trooper
@@ -1027,9 +1042,17 @@ D2K_Rocket_Trooper_AGOnly:
 		ProjectileSpeedPercentage: 10
 		LaunchAngle: 66
 		Shadow: true
-	Warhead@MissileAP_Heavy:
+	-Warhead@MissileAP_Heavy:
+	Warhead@MissileHE_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Damage: 30000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
+
 D2K_Rocket_Trooper_AA:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Light
@@ -1172,14 +1195,14 @@ D2K_APC_Rocket_AA:
 	ValidTargets: Air
 	Warhead@MissileAA_MediumFlatCompatibility:
 		PhysicalStateName: Temperature
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Air
 		Damage: 24000
 		PercentageScale: 0
 	Warhead@CollapsedMissileAP_HeavyPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Air
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		Damage: 400
 		PercentageDenominator: 10000
@@ -1207,7 +1230,7 @@ D2K_APC_Rocket_AA:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Air
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		Damage: 400
 		PercentageDenominator: 10000
@@ -1235,7 +1258,7 @@ D2K_APC_Rocket_AA:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Air
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		Damage: 400
 		PercentageDenominator: 10000
@@ -1329,6 +1352,7 @@ DeviatorMissile:
 	-Warhead@MissileAP_HeavyFlatCompatibility:
 	-Warhead@CannonHE_Heavy:
 DeviatorMissile_Artillery:
+	Inherits@missilerole: ^Warhead_MissileHE_Heavy
 	Inherits: ^ShrapnelWeapon
 	Inherits@2: ^HeavyFlameWeapon
 	Inherits@3: DeviatorMissile
@@ -1348,6 +1372,7 @@ DeviatorMissile_Artillery:
 		ValidTargets: Ground, Water, Air
 		Damage: 5000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@HeavyFlameWeapon: AreaDamage
@@ -1359,27 +1384,42 @@ DeviatorMissile_Artillery:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@OwnerChange: ChangeOwner
 		Range: 1250
-
 	MinRange: 2005
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@HeavyFlameWeapon:
-	Warhead@MissileAP_Heavy:
+	Warhead@MediumChemicalWeaponPercentage:
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
+	Warhead@MediumMissilePercentage:
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
+	-Warhead@MissileAP_Heavy:
+	Warhead@MissileHE_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
 		Damage: 60000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 3332
+		PercentageSpread: 50
+		InvalidTargets: Air
+
 Wraith_ToxinMissiles:
+	Inherits@missilerole: ^Warhead_MissileAP_Heavy
 	Inherits: DeviatorMissile_Artillery
 	Range: 8370
 	ReloadDelay: 125
 	Burst: 4
 	ValidTargets: Ground, Water, Air
-	# InvalidTargets: MCImmune
 	Projectile: Missile
 		VerticalRateOfTurn: 12
 		MinimumLaunchAngle: -128
@@ -1407,8 +1447,30 @@ Wraith_ToxinMissiles:
 		Palette: alpha25
 		Weapon: AnthraxCloud
 		InvalidTargets: Water, Structure
-
 	MinRange: 1675
+	Warhead@ShrapnelWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Ground, Water, Air
+	Warhead@HeavyFlameWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Ground, Water, Air
+	Warhead@MediumChemicalWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Ground, Water, Air
+	Warhead@MediumMissilePercentage:
+		-InvalidTargets:
+		ValidTargets: Ground, Water, Air
+	Warhead@MissileAP_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 60000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 3332
+		PercentageSpread: 50
+	-Warhead@MissileHE_Heavy:
+
 contaminator_attack:
 	Inherits@wh: ^Warhead_Melee_Medium
 	Inherits@proj: ^Projectile_InstantHit
@@ -1500,6 +1562,7 @@ Laboratory_Bioball:
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 6
 		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
@@ -1513,6 +1576,7 @@ Laboratory_Bioball:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
@@ -1540,10 +1604,13 @@ Laboratory_Bioball:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@MediumChemicalWeapon:
 	Warhead@Chemical_Medium:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 50000
 		PercentageScale: 0
 
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 facedancer_grenade:
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -2273,10 +2340,15 @@ light_inf_lmg_ordos_upgrade:
 	-Warhead@Bullet_LightFlatCompatibility:
 	-Warhead@Laser_Heavy:
 	Warhead@Laser_HeavyFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
 
+	Warhead@Laser_Heavy_ExtraDamage:
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 ordos_laserturret:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -2482,6 +2554,8 @@ D2K_Annihilator:
 
 D2K_Annihilator_AA:
 	Inherits: MammothTusk
+	Inherits@aawh: ^Warhead_MissileAA_Heavy
+	-Warhead@MissileAP_Heavy:
 	Range: 10240
 	Burst: 6
 	BurstDelays: 3
@@ -2491,8 +2565,10 @@ D2K_Annihilator_AA:
 		VerticalRateOfTurn: 20
 		Speed: 280
 		RangeLimit: 12c0
-	Warhead@MissileHE_Heavy:
+	Warhead@MissileAA_Heavy:
 		Damage: 28500
+		ValidTargets: Air
+		InvalidTargets: Ground, Water
 
 Sound2:
 	Inherits: Sound
@@ -2519,10 +2595,6 @@ WormSwallow:
 		Spread: 1c0
 		Damage: 100
 		InvalidTargets: Structure, Air, DevourImmune
-
-OrniBombC:
-	Inherits: OrniBomb
-	Range: 2500
 
 SardDeath:
 	Warhead@1Dam: SpreadDamage
@@ -2606,16 +2678,6 @@ d2k_sardaukar_elite:
 			Medium: 75
 			Heavy: 50
 			Concrete: 10
-
-OrniGunC:
-	Inherits: OrniGun
-	Range: 6000
-	ValidTargets: Ground, Air
-	Warhead@1Dam: SpreadDamage
-		ValidTargets: Ground, Air
-		Damage: 800
-
-	MinRange: 1200
 
 Rocketeer:
 	Inherits: ^MG

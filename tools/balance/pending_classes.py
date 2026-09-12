@@ -10,20 +10,19 @@ This script derives the PENDING membership mechanically from the resolved rulese
 can review the reclassification BEFORE it is committed:
 
     mobile_bunker          buildable + resolved AttackOpenTopped + GROUND VEHICLE
-    armed_troop_transport  buildable + Cargo + armed + ground vehicle + NOT open-topped,
-                           and ONLY where the actor's current class is `support` or None
-    ...?                   the same test where the actor ALREADY carries a combat class --
-                           emitted with a trailing '?' because overriding a real class is a
-                           maintainer decision, not a mechanical one
+    armed_troop_transport  buildable + Cargo + armed + ground vehicle + NOT open-topped.
+                           The maintainer's "all 17 move" ruling overrides an existing combat
+                           class; the Flak Trucks leave `anti_air_vehicle` and IFVs leave
+                           `scout_vehicle`. All three classes already carry the 1.5x AA range.
 
-    python tools/balance/pending_classes.py            # writes /tmp/pending_classes.json
+    python tools/balance/pending_classes.py            # writes pending_classes.json to the OS temp dir
     python tools/balance/build_reference_report.py --faction ... --pending <that file>
 
 WARNING 26 actors resolve AttackOpenTopped, not 16: three are AIRCRAFT and seven are IMMOBILE
 bunkers/defenses. The Mobile-and-not-Aircraft filter is what makes the count 16, and dropping it
 would turn seven static defenses into "mobile bunkers".
 """
-import sys, json, glob, collections
+import sys, json, glob, collections, pathlib, tempfile
 sys.path.insert(0,'tools/audit'); sys.path.insert(0,'tools/balance')
 sys.stdout.reconfigure(encoding='utf-8')
 import miniyaml, class_membership as cm
@@ -52,12 +51,13 @@ for name,r in led.items():
     if ot:
         if now!='mobile_bunker': pending[name]='mobile_bunker'; stats['mobile_bunker']+=1
     elif 'Cargo' in base and r.get('armaments'):
-        if now in (None,'support'):
+        # Maintainer ruling 2026-09-08: cargo plus a weapon means armed troop
+        # transport, with no exception for an existing combat class.
+        if now != 'armed_troop_transport':
             pending[name]='armed_troop_transport'; stats['armed_troop_transport']+=1
-        else:
-            pending[name]='armed_troop_transport?'; stats['CONTESTED']+=1
-json.dump(pending, open('/tmp/pending_classes.json','w'), indent=1, sort_keys=True)
+            if now not in (None, 'support'):
+                stats[f'  (overrode {now})'] += 1
+output_path = pathlib.Path(tempfile.gettempdir()) / 'pending_classes.json'
+output_path.write_text(json.dumps(pending, indent=1, sort_keys=True) + '\n', encoding='utf-8')
 print(dict(stats), ' total', len(pending))
-print("\nCONTESTED — already carry a combat class, would be overridden:")
-for n in sorted(k for k,v in pending.items() if v.endswith('?')):
-    print(f"   {cm.classify(led[n].get('design') or {})[0]:20s} {n}")
+print('pending map ->', output_path)

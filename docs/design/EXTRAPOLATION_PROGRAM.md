@@ -125,7 +125,11 @@ GATE: every `k` has ≥3 backing pairs, or is marked `THIN` and excluded from Ph
 ### Phase C — extrapolate the expanded units of those four factions
 
 Owner: **Astra**. Place each expanded unit at **class anchor × tech tier × faction factor**, and let
-the formula compute the price from the placed stats. This is the first real test of the method, and
+the formula fit the placed stats and price. **Clarification, Aedis 2026-09-09:** initial reference
+placement includes price; the final fit may adjust stats, price, or both on their permitted grids
+to approach zero delta. The old classic-original price freeze is superseded; MCVs and harvesters
+remain collection/manual-review only. See [the dated ruling record](../balance/review/AEDIS_OVERNIGHT_RULINGS_20260909.md).
+This is the first real test of the method, and
 it is deliberately run on factions where we CAN check the answer: an expansion sitting next to
 approved originals is easy for a human to sanity-check.
 
@@ -133,15 +137,19 @@ GATE: maintainer eyeballs one faction's expanded roster and says the numbers are
 
 ### Phase D — Japan
 
-Owner: **Astra**. Japan has no reference data at all, which is the point: it is the honest test of
-whether extrapolation works where nothing can be checked against a source. Run the same Phase B/C
-machinery with Japan's `k` derived from the four factions rather than from references.
+Owner: **Astra**. Japan has no single original-game roster counterpart. **Source correction,
+2026-09-09:** the current ordinary pipeline has 14 proxy-paired and 24 rank-placed Japanese actors
+through Mental Omega / RA2 Reborn. These proxies do not establish direct counterparts. Aedis now
+also requests RA3 Empire and Japanese RA2-mod evidence. Run the Phase B/C machinery with explicit
+provenance for reference-backed, role-analogue, and extrapolated inputs; where `k` comes from the
+four classic factions rather than Japanese evidence, label that distinction.
 
 ⚠ Japan is also *evidence*, not only a test — it carries `archer` and `flying_infantry` members that
 TD and RA1 do not. Once its roster is placed, it feeds Phase E.
 
-GATE: maintainer reviews the Japanese roster. If it is sane, the method is proven for every
-expansion unit in the game.
+GATE: maintainer reviews the Japanese roster. A plausible roster is a pilot result, **not proof
+for every expansion unit**. Test reconstruction of withheld known references and representative
+counter/matchup behavior before generalizing. Formula fit alone does not verify gameplay balance.
 
 ### Phase E — the virtual anchors, and the first applied numbers
 
@@ -178,7 +186,7 @@ Yes, and the mechanism is worth stating precisely. Once the anchors are virtual 
 
 * a new faction does not need its own anchor argument — it needs one `k` per stat, which is a much
   smaller and much more checkable claim;
-* a faction with NO reference source (Japan, and most of the invented factions) is placed by class
+* an actor with no trustworthy reference counterpart is placed by class
   anchor × tier × a `k` borrowed from a sibling faction, which is exactly Phase D;
 * the anchors stop moving when someone edits a unit, so adding a faction can no longer reprice an
   existing one.
@@ -221,7 +229,7 @@ Filled in as the maintainer approves. Nothing downstream of a row may start unti
 | `td_nod` | — | ☐ | ☐ | ☐ | |
 | `ra1_allies` | — | ☐ | ☐ | ☐ | |
 | `ra1_soviets` | — | ☐ | ☐ | ☐ | ⚠ the `ra1_soviets` RENAME is rejected; do not confuse it with the mapping |
-| `japan` | n/a — no reference source | ☐ | ☐ | ☐ | Phase D; also supplies `archer` + `flying_infantry` evidence |
+| `japan` | proxy evidence; no single original roster | ☐ | ☐ | ☐ | Phase D; also supplies `archer` + `flying_infantry` evidence |
 | `ra2_allies` | Astra | ☐ | ☐ | ☐ | |
 | `ra2_soviets` | Astra | ☐ | ☐ | ☐ | |
 | `ts_gdi` | Astra | ☐ | ☐ | ☐ | |

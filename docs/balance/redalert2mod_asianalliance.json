@@ -124,32 +124,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 200,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@RearmableAircraft",
-      "types": []
-     },
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 115,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@FighterBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -333,26 +308,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 105,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@HelicopterBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -508,32 +464,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 200,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@RearmableAircraft",
-      "types": []
-     },
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@BomberBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -720,26 +651,7 @@
      "v": "100"
     },
     "name": "Kamikaze",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@BomberBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -804,26 +716,7 @@
      "v": "100"
     },
     "name": "Airstrike Kamikaze",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@BomberBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -933,26 +826,7 @@
      "v": "100"
     },
     "name": "Chemical Attack Plane",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@BomberBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1473,20 +1347,7 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@DefenseBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1725,20 +1586,7 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@DefenseBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1857,20 +1705,7 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@DefenseBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2063,20 +1898,7 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@DefenseBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2267,20 +2089,7 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@DefenseBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2376,20 +2185,7 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@DefenseBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2415,9 +2211,9 @@
       "damage_warheads": [
        {
         "damage": "16000",
-        "falloff": "100, 70, 30, 0",
-        "spread": "300",
-        "tag": "MissileAA_MediumFlatCompatibility",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_Medium",
         "type": "AreaDamage"
        },
        {
@@ -2443,12 +2239,13 @@
       "reloaddelay": "90",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_MissileAP_Medium",
        "AsianMLRS",
        "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_MissileAP_Medium"
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_Demolition_Light"
       ],
       "weapon": "AsianSpitfireRockets",
       "weapon_class_source": "template"
@@ -2487,20 +2284,7 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@DefenseBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2524,6 +2308,14 @@
      "v": "Concrete"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#Cargo.MaxWeight",
+     "v": "12"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#Cargo.Types",
+     "v": "OilTruck"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml#Valued.Cost",
      "v": "1500"
@@ -2575,9 +2367,9 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "falloff": "100, 45, 15, 0",
+        "spread": "150",
+        "tag": "MissileHE_Medium",
         "type": "AreaDamage"
        },
        {
@@ -2624,19 +2416,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "12",
       "requires": "!asianalliance_upgrade_celestialpower",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_MissileHE_Medium",
        "^Compatibility_MissileAP_MediumFlat",
        "AsianPhotonCannon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Medium"
+      ],
       "weapon": "AsianPunisherAG",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -2691,7 +2486,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "12",
@@ -2701,9 +2496,11 @@
        "^Compatibility_MissileQuantum_MediumFlat",
        "AsianPunisherAG"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Medium"
+      ],
       "weapon": "AsianPunisherAG_EMP",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2738,20 +2535,7 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@DefenseBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2915,26 +2699,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@MeleeBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3156,30 +2921,6 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 120,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@SniperInfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
      {
       "modifier": 109,
       "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
@@ -3688,32 +3429,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@HeroBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3952,18 +3668,6 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
      {
       "modifier": 50,
       "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
@@ -4263,18 +3967,6 @@
     ],
     "resolved_firepower_modifiers": [
      {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
       "modifier": 100,
       "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#FirepowerMultiplier@ScoutInfantryBuff.Modifier",
       "trait": "FirepowerMultiplier@ScoutInfantryBuff",
@@ -4560,26 +4252,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AntiTankAntiAirInfantryBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -4923,30 +4596,6 @@
     ],
     "resolved_firepower_modifiers": [
      {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 100,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@CloseCombatInfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
-     {
       "modifier": 100,
       "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
       "trait": "FirepowerMultiplier",
@@ -5092,32 +4741,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@MeleeBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5507,26 +5131,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5697,32 +5302,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 120,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@SniperInfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6118,32 +5698,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AntiTankAntiAirInfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -6412,7 +5967,7 @@
      "category": "Naval",
      "class_anchor": null,
      "special": null,
-     "subtype": "ScoutShip",
+     "subtype": "AntiAirShip",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6432,20 +5987,7 @@
      "Naval",
      "RANaval"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@ScoutShip",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6523,14 +6065,7 @@
      "Naval",
      "RANaval"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6605,20 +6140,7 @@
      "Naval",
      "RANaval"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@ScoutShip",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6712,20 +6234,7 @@
      "Naval",
      "RANaval"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@ScoutShip",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6816,6 +6325,14 @@
      "v": "Heavy"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Cargo.MaxWeight",
+     "v": "12"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen, Vehicle"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#Valued.Cost",
      "v": "1000"
@@ -6844,20 +6361,7 @@
      "Naval",
      "RANaval"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@ScoutShip",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7195,14 +6699,7 @@
      "Naval",
      "RANaval"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7280,14 +6777,7 @@
      "Naval",
      "RANaval"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -8067,18 +7557,6 @@
     ],
     "resolved_firepower_modifiers": [
      {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
-     {
       "modifier": 75,
       "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
       "trait": "FirepowerMultiplier@MultiWeapon",
@@ -8180,6 +7658,14 @@
      "v": "Light"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Cargo.MaxWeight",
+     "v": "4"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Valued.Cost",
      "v": "1200"
@@ -8406,20 +7892,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -8539,20 +8012,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -8808,14 +8268,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -9021,14 +8474,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -9179,20 +8625,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -9521,14 +8954,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -9663,14 +9089,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -9702,9 +9121,9 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 70, 30, 0",
-        "spread": "300",
-        "tag": "MissileAA_MediumFlatCompatibility",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_Medium",
         "type": "AreaDamage"
        },
        {
@@ -9730,6 +9149,7 @@
       "reloaddelay": "16",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_MissileAP_Medium",
        "^Compatibility_MissileAA_MediumFlat",
        "^HeavyMissile",
        "^FlakWeapon",
@@ -9737,8 +9157,8 @@
        "^RA2MediumMissile"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_MissileAP_Medium"
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_Demolition_Light"
       ],
       "weapon": "AsianMLRS",
       "weapon_class_source": "template"
@@ -9779,20 +9199,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -9985,14 +9392,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -10055,6 +9455,14 @@
      "v": "Superheavy"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Cargo.MaxWeight",
+     "v": "7"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Valued.Cost",
      "v": "5000"
@@ -10085,20 +9493,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -10318,20 +9713,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"

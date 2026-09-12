@@ -84,7 +84,7 @@ class PairedIdentityTests(unittest.TestCase):
         # Committed regression cohort; no matcher rerun or mapping changes.
         import json
         assignment = json.loads((ROOT / "docs/balance/derived/reference_assignment.json").read_text(encoding="utf-8"))["assignment"]
-        actors = ("td_gdi_apc", "td_gdi_mammothtank", "ra1_soviets_sovietsamsite", "ra2_soviets_mobileconstructionvehicle")
+        actors = ("td_gdi_apc", "td_gdi_mammothtank", "ra1_soviets_samsite", "ra2_soviets_mobileconstructionvehicle")
         cohort = {actor: assignment[actor] for actor in actors}
         peers = fe.rd.peer_rows()
         result = fe.paired_rows(cohort, peers, {})

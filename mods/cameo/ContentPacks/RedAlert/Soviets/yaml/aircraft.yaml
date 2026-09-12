@@ -12,7 +12,7 @@ ra1_soviets_yakscoutplane:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra1_soviets_sovietairfield, ~!ra1_soviets_upgrade_teslayak, ~!ra1_soviets_upgrade_armoredyak, ~!ra1_soviets_upgrade_nuclearyak
+		Prerequisites: ~ra1_soviets_airfield, ~!ra1_soviets_upgrade_teslayak, ~!ra1_soviets_upgrade_armoredyak, ~!ra1_soviets_upgrade_nuclearyak
 		Description: actor_yak.description
 	Valued:
 		Cost: 800
@@ -27,38 +27,38 @@ ra1_soviets_yakscoutplane:
 	ChangesHealth@SelfHealing:
 		Step: 32
 	Armament@BOMBS:
-		Weapon: YakNapalm
+		Weapon: ra1_soviets_yakscoutplane_napalm_bomb
 		LocalOffset: 0,-256,-32, 0,256,-32
 		AmmoUsage: 4
 		PauseOnCondition: ammo < 4
 	Armament@PRIMARY:
-		Weapon: YakChainGun
+		Weapon: ra1_soviets_yakscoutplane_chaingun
 		LocalOffset: 256,-213,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 4
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: YakChainGun
+		Weapon: ra1_soviets_yakscoutplane_chaingun
 		LocalOffset: 256,213,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 4
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@Upgrade1:
-		Weapon: IncendiaryYakChainGun
+		Weapon: ra1_soviets_yakscoutplane_chaingun_incendiary
 		LocalOffset: 256,-213,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 4
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets
 	Armament@Upgrade2:
 		Name: secondary
-		Weapon: IncendiaryYakChainGun
+		Weapon: ra1_soviets_yakscoutplane_chaingun_incendiary
 		LocalOffset: 256,213,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 4
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets
-	FirepowerMultiplier@DualWeapon:
-		Modifier: 25
+	# FirepowerMultiplier@DualWeapon:
+		# Modifier: 25
 	AttackAircraft:
 		FacingTolerance: 100
 	Aircraft:
@@ -71,7 +71,7 @@ ra1_soviets_yakscoutplane:
 	SpawnActorOnDeath:
 		Actor: YAK.Husk
 	EjectOnDeath:
-		PilotActor: ra1_soviets_sovietgrenadier
+		PilotActor: ra1_soviets_grenadier
 	LeavesTrails:
 		Offsets: -853,0,0
 		MovingInterval: 2
@@ -100,7 +100,7 @@ ra1_soviets_yakscoutplane:
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_heavyarmordoctrine, ra1_soviets_upgrade_incendiarybullets, ra1_soviets_upgrade_stalinium
+		Upgrades: ra1_soviets_doctrine_heavyarmor, ra1_soviets_upgrade_incendiarybullets, ra1_soviets_upgrade_stalinium
 
 ra1_soviets_teslayak:
 	Inherits: ^RANeutralPlane
@@ -122,7 +122,7 @@ ra1_soviets_teslayak:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra1_soviets_sovietairfield, ~ra1_soviets_upgrade_teslayak
+		Prerequisites: ~ra1_soviets_airfield, ~ra1_soviets_upgrade_teslayak
 		Description: actor_yak.description
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -133,52 +133,52 @@ ra1_soviets_teslayak:
 	ChangesHealth@SelfHealing:
 		Step: 64
 	Armament@BOMBS:
-		Weapon: YakTeslaBomb
+		Weapon: ra1_soviets_teslayak_tesla_bomb
 		LocalOffset: 0,0,-32
 		AmmoUsage: 16
 		PauseOnCondition: ammo < 16
 	Armament@Tesla:
-		Weapon: YakTeslaGun
+		Weapon: ra1_soviets_teslayak_yakteslagun
 		LocalOffset: 750,0,-100
 		MuzzleSequence: muzzle
 		AmmoUsage: 4
 		PauseOnCondition: ammo < 16
 		RequiresCondition: !ra1_soviets_upgrade_teslaarcing
 	Armament@Arcing:
-		Weapon: YakTeslaGunArc
+		Weapon: ra1_soviets_teslayak_yakteslagunarc
 		LocalOffset: 750,0,-100
 		MuzzleSequence: muzzle
 		AmmoUsage: 4
 		PauseOnCondition: ammo < 16
 		RequiresCondition: ra1_soviets_upgrade_teslaarcing
 	Armament@PRIMARY:
-		Weapon: YakChainGun
+		Weapon: ra1_soviets_teslayak_chaingun
 		LocalOffset: 320,-480,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 16
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: YakChainGun
+		Weapon: ra1_soviets_teslayak_chaingun
 		LocalOffset: 320,480,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 16
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@Upgrade1:
-		Weapon: IncendiaryYakChainGun
+		Weapon: ra1_soviets_teslayak_chaingun_incendiary
 		LocalOffset: 320,-480,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 16
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets
 	Armament@Upgrade2:
 		Name: secondary
-		Weapon: IncendiaryYakChainGun
+		Weapon: ra1_soviets_teslayak_chaingun_incendiary
 		LocalOffset: 320,480,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 16
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets
-	FirepowerMultiplier@MultiWeapon:
-		Modifier: 25
+	# FirepowerMultiplier@MultiWeapon:
+		# Modifier: 25
 	AttackAircraft:
 		FacingTolerance: 100
 	Aircraft:
@@ -191,7 +191,7 @@ ra1_soviets_teslayak:
 	SpawnActorOnDeath:
 		Actor: yaktesla.Husk
 	EjectOnDeath:
-		PilotActor: ra1_soviets_sovietgrenadier
+		PilotActor: ra1_soviets_grenadier
 	LeavesTrails:
 		Offsets: -900,0,300
 		MovingInterval: 2
@@ -220,7 +220,7 @@ ra1_soviets_teslayak:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_teslaandexperimentaltechdoctrine, ra1_soviets_upgrade_incendiarybullets, ra1_soviets_upgrade_teslaarcing, ra1_soviets_upgrade_stalinium
+		Upgrades: ra1_soviets_doctrine_teslaandexperimentaltech, ra1_soviets_upgrade_incendiarybullets, ra1_soviets_upgrade_teslaarcing, ra1_soviets_upgrade_stalinium
 
 ra1_soviets_armoredyak:
 	Inherits: ^RANeutralPlane
@@ -238,7 +238,7 @@ ra1_soviets_armoredyak:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra1_soviets_sovietairfield, ~ra1_soviets_upgrade_armoredyak
+		Prerequisites: ~ra1_soviets_airfield, ~ra1_soviets_upgrade_armoredyak
 		Description: actor_yak.description
 	Valued:
 		Cost: 1600
@@ -253,27 +253,27 @@ ra1_soviets_armoredyak:
 	ChangesHealth@SelfHealing:
 		Step: 80
 	Armament@PRIMARY:
-		Weapon: ArmoredYakChainGun
+		Weapon: ra1_soviets_armoredyak_chaingun
 		LocalOffset: 160,-320,-80
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: ArmoredYakChainGun
+		Weapon: ra1_soviets_armoredyak_chaingun
 		LocalOffset: 160,320,-80
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@Upgrade1:
-		Weapon: IncendiaryArmoredYakChainGun
+		Weapon: ra1_soviets_armoredyak_chaingun_incendiary
 		LocalOffset: 160,-320,-80
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets
 	Armament@Upgrade2:
 		Name: secondary
-		Weapon: IncendiaryArmoredYakChainGun
+		Weapon: ra1_soviets_armoredyak_chaingun_incendiary
 		LocalOffset: 160,320,-80
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
@@ -290,7 +290,7 @@ ra1_soviets_armoredyak:
 	SpawnActorOnDeath:
 		Actor: yakarmored.Husk
 	EjectOnDeath:
-		PilotActor: ra1_soviets_sovietgrenadier
+		PilotActor: ra1_soviets_grenadier
 	LeavesTrails:
 		Offsets: -900,0,150
 		MovingInterval: 2
@@ -319,7 +319,7 @@ ra1_soviets_armoredyak:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_heavyarmordoctrine, ra1_soviets_upgrade_incendiarybullets, ra1_soviets_upgrade_autoloaders, ra1_soviets_upgrade_stalinium
+		Upgrades: ra1_soviets_doctrine_heavyarmor, ra1_soviets_upgrade_incendiarybullets, ra1_soviets_upgrade_autoloaders, ra1_soviets_upgrade_stalinium
 
 ra1_soviets_nuclearyak:
 	Inherits: ^RANeutralPlane
@@ -340,7 +340,7 @@ ra1_soviets_nuclearyak:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra1_soviets_sovietairfield, ~ra1_soviets_upgrade_nuclearyak
+		Prerequisites: ~ra1_soviets_airfield, ~ra1_soviets_upgrade_nuclearyak
 		Description: actor_yak.description
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -351,38 +351,38 @@ ra1_soviets_nuclearyak:
 	ChangesHealth@SelfHealing:
 		Step: 64
 	Armament@BOMBS:
-		Weapon: YakNuclearBomb
+		Weapon: ra1_soviets_nuclearyak_yaknuclearbomb
 		LocalOffset: 0,0,-32
 		AmmoUsage: 16
 		PauseOnCondition: ammo < 16
 	Armament@PRIMARY:
-		Weapon: YakChainGun
+		Weapon: ra1_soviets_nuclearyak_chaingun
 		LocalOffset: 320,-266,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 16
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: YakChainGun
+		Weapon: ra1_soviets_nuclearyak_chaingun
 		LocalOffset: 320,266,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 16
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@Upgrade1:
-		Weapon: IncendiaryYakChainGun
+		Weapon: ra1_soviets_nuclearyak_chaingun_incendiary
 		LocalOffset: 320,-266,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 16
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets
 	Armament@Upgrade2:
 		Name: secondary
-		Weapon: IncendiaryYakChainGun
+		Weapon: ra1_soviets_nuclearyak_chaingun_incendiary
 		LocalOffset: 320,266,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 16
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets
-	FirepowerMultiplier@DualWeapon:
-		Modifier: 50
+	# FirepowerMultiplier@DualWeapon:
+		# Modifier: 50
 	AttackAircraft:
 		FacingTolerance: 100
 	Aircraft:
@@ -395,7 +395,7 @@ ra1_soviets_nuclearyak:
 	SpawnActorOnDeath:
 		Actor: YAK.Husk
 	EjectOnDeath:
-		PilotActor: ra1_soviets_sovietgrenadier
+		PilotActor: ra1_soviets_grenadier
 	LeavesTrails:
 		Offsets: -853,0,0
 		MovingInterval: 2
@@ -424,7 +424,7 @@ ra1_soviets_nuclearyak:
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_nuclearwardoctrine, ra1_soviets_upgrade_incendiarybullets, ra1_soviets_upgrade_stalinium
+		Upgrades: ra1_soviets_doctrine_nuclearwar, ra1_soviets_upgrade_incendiarybullets, ra1_soviets_upgrade_stalinium
 
 ra1_soviets_migattackbomber:
 	Inherits: ^RANeutralPlane
@@ -445,7 +445,7 @@ ra1_soviets_migattackbomber:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: ~ra1_soviets_sovietairfield, ra1_soviets_soviettechcenter, ~!ra1_soviets_doctrine_heavyarmordoctrine
+		Prerequisites: ~ra1_soviets_airfield, ra1_soviets_techcenter, ~!ra1_soviets_doctrine_heavyarmor
 		Description: actor_mig.description
 	Valued:
 		Cost: 1400
@@ -460,42 +460,42 @@ ra1_soviets_migattackbomber:
 	ChangesHealth@SelfHealing:
 		Step: 16
 	Armament@Rockets1:
-		Weapon: Maverick
+		Weapon: ra1_soviets_migattackbomber_maverick
 		LocalOffset: 0,-480,0, 0,640,0
 		LocalYaw: 48, -64
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 		RequiresCondition: !ra1_soviets_upgrade_teslarockets && !ra1_soviets_upgrade_thermonuclearrockets
 	Armament@Rockets2:
-		Weapon: Maverick
+		Weapon: ra1_soviets_migattackbomber_maverick
 		LocalOffset: 0,480,0, 0,-640,0
 		LocalYaw: -48, 64
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 		RequiresCondition: !ra1_soviets_upgrade_teslarockets && !ra1_soviets_upgrade_thermonuclearrockets
 	Armament@TeslaUpgrade1:
-		Weapon: TeslaMaverick
+		Weapon: ra1_soviets_migattackbomber_teslamaverick
 		LocalOffset: 0,-480,0, 0,640,0
 		LocalYaw: 48, -64
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 		RequiresCondition: ra1_soviets_upgrade_teslarockets
 	Armament@TeslaUpgrade2:
-		Weapon: TeslaMaverick
+		Weapon: ra1_soviets_migattackbomber_teslamaverick
 		LocalOffset: 0,480,0, 0,-640,0
 		LocalYaw: -48, 64
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 		RequiresCondition: ra1_soviets_upgrade_teslarockets
 	Armament@NuclearUpgrade1:
-		Weapon: ThermobaricMaverick
+		Weapon: ra1_soviets_migattackbomber_thermobaricmaverick
 		LocalOffset: 0,-480,0, 0,640,0
 		LocalYaw: 48, -64
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 		RequiresCondition: ra1_soviets_upgrade_thermonuclearrockets
 	Armament@NuclearUpgrade2:
-		Weapon: ThermobaricMaverick
+		Weapon: ra1_soviets_migattackbomber_thermobaricmaverick
 		LocalOffset: 0,480,0, 0,-640,0
 		LocalYaw: -48, 64
 		MuzzleSequence: muzzle
@@ -520,7 +520,7 @@ ra1_soviets_migattackbomber:
 	SpawnActorOnDeath:
 		Actor: MIG.Husk
 	EjectOnDeath:
-		PilotActor: ra1_soviets_sovietflamethrower
+		PilotActor: ra1_soviets_flamethrower
 	LeavesTrails:
 		Offsets: -853,0,171
 		MovingInterval: 2
@@ -545,7 +545,7 @@ ra1_soviets_migattackbomber:
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_heavyarmordoctrine, ra1_soviets_upgrade_teslarockets, ra1_soviets_upgrade_thermonuclearrockets, ra1_soviets_upgrade_afterburners, ra1_soviets_upgrade_stalinium
+		Upgrades: ra1_soviets_doctrine_heavyarmor, ra1_soviets_upgrade_teslarockets, ra1_soviets_upgrade_thermonuclearrockets, ra1_soviets_upgrade_afterburners, ra1_soviets_upgrade_stalinium
 
 ra1_soviets_su57attackbomber:
 	Inherits: ^RANeutralPlane
@@ -566,7 +566,7 @@ ra1_soviets_su57attackbomber:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: ~ra1_soviets_sovietairfield, ra1_soviets_soviettechcenter, ~ra1_soviets_doctrine_heavyarmordoctrine
+		Prerequisites: ~ra1_soviets_airfield, ra1_soviets_techcenter, ~ra1_soviets_doctrine_heavyarmor
 		Description: actor_su57.description
 	Valued:
 		Cost: 3000
@@ -579,39 +579,39 @@ ra1_soviets_su57attackbomber:
 	ChangesHealth@SelfHealing:
 		Step: 52
 	Armament:
-		Weapon: Su57Maverick
+		Weapon: ra1_soviets_su57attackbomber_missile
 		LocalOffset: -250,-750,0, -250,750,0
 		LocalYaw: 64, -64
 		MuzzleSequence: muzzlemissile
 		PauseOnCondition: !ammo
 		RequiresCondition: !ra1_soviets_upgrade_thermobaricrockets
 	Armament@HE:
-		Weapon: Su57MaverickThermobaric
+		Weapon: ra1_soviets_su57attackbomber_missile_thermobaric
 		LocalOffset: -250,-750,0, -250,750,0
 		LocalYaw: 64, -64
 		MuzzleSequence: muzzlemissile
 		PauseOnCondition: !ammo
 		RequiresCondition: ra1_soviets_upgrade_thermobaricrockets
 	Armament@PRIMARY:
-		Weapon: YakChainGun
+		Weapon: ra1_soviets_su57attackbomber_chaingun
 		LocalOffset: 250,-250,0, 250,250,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@SECONDARY:
-		Weapon: YakChainGun
+		Weapon: ra1_soviets_su57attackbomber_chaingun
 		LocalOffset: 250,250,0, 250,-250,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@Upgrade1:
-		Weapon: IncendiaryYakChainGun
+		Weapon: ra1_soviets_su57attackbomber_chaingun_incendiary
 		LocalOffset: 250,-250,0, 250,250,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets
 	Armament@Upgrade2:
-		Weapon: IncendiaryYakChainGun
+		Weapon: ra1_soviets_su57attackbomber_chaingun_incendiary
 		LocalOffset: 250,250,0, 250,-250,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
@@ -635,7 +635,7 @@ ra1_soviets_su57attackbomber:
 	SpawnActorOnDeath:
 		Actor: su57.Husk
 	EjectOnDeath:
-		PilotActor: ra1_soviets_sovietmortarsoldier
+		PilotActor: ra1_soviets_mortarsoldier
 	LeavesTrails:
 		Offsets: -853,0,171
 		MovingInterval: 2
@@ -659,14 +659,14 @@ ra1_soviets_su57attackbomber:
 		Condition: enable-smoke
 	RenderSprites:
 		PlayerPalette: raplayer
-	FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets:
-		Modifier: 115
+	# FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets:
+		# Modifier: 115
 	RangeMultiplier@ra1_soviets_upgrade_thermobaricrockets:
 		Modifier: 115
 	RevealsShroudMultiplier@ra1_soviets_upgrade_thermobaricrockets:
 		Modifier: 130
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_heavyarmordoctrine, ra1_soviets_upgrade_thermobaricrockets, ra1_soviets_upgrade_incendiarybullets, ra1_soviets_upgrade_afterburners, ra1_soviets_upgrade_stalinium
+		Upgrades: ra1_soviets_doctrine_heavyarmor, ra1_soviets_upgrade_thermobaricrockets, ra1_soviets_upgrade_incendiarybullets, ra1_soviets_upgrade_afterburners, ra1_soviets_upgrade_stalinium
 
 ra1_soviets_hindattackhelicopter:
 	Inherits: ^Helicopter
@@ -685,7 +685,7 @@ ra1_soviets_hindattackhelicopter:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 20
-		Prerequisites: ~ra1_soviets_sovietairfield, ~!ra1_soviets_doctrine_teslaandexperimentaltechdoctrine
+		Prerequisites: ~ra1_soviets_airfield, ~!ra1_soviets_doctrine_teslaandexperimentaltech
 		Description: actor_hind.description
 	Valued:
 		Cost: 1800
@@ -700,70 +700,70 @@ ra1_soviets_hindattackhelicopter:
 	ChangesHealth@SelfHealing:
 		Step: 40
 	Armament@Missiles:
-		Weapon: HindMissiles
+		Weapon: ra1_soviets_hindattackhelicopter_hindmissiles
 		LocalOffset: 85,250,-85, 85,-250,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 2
 		PauseOnCondition: ammo < 2
 		RequiresCondition: !ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_upgrade_thermonuclearrockets && !ra1_soviets_promotion_hurricanerocketpods
 	Armament@MissilesRocketPod1:
-		Weapon: HindMissiles
+		Weapon: ra1_soviets_hindattackhelicopter_hindmissiles
 		LocalOffset: 85,250,-85, 85,-250,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 2
 		RequiresCondition: !ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_hurricanerocketpods
 	Armament@MissilesRocketPod2:
-		Weapon: HindMissiles
+		Weapon: ra1_soviets_hindattackhelicopter_hindmissiles
 		LocalOffset: 85,-250,-85, 85,250,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 2
 		RequiresCondition: !ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_hurricanerocketpods
 	Armament@MissilesHE:
-		Weapon: HindMissilesThermobaric
+		Weapon: ra1_soviets_hindattackhelicopter_hindmissilesthermobaric
 		LocalOffset: 85,250,-85, 85,-250,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 2
 		PauseOnCondition: ammo < 2
 		RequiresCondition: ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_promotion_hurricanerocketpods
 	Armament@MissilesHERocketPod1:
-		Weapon: HindMissilesThermobaric
+		Weapon: ra1_soviets_hindattackhelicopter_hindmissilesthermobaric
 		LocalOffset: 85,250,-85, 85,-250,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 2
 		RequiresCondition: ra1_soviets_upgrade_thermobaricrockets && ra1_soviets_promotion_hurricanerocketpods
 	Armament@MissilesHERocketPod2:
-		Weapon: HindMissilesThermobaric
+		Weapon: ra1_soviets_hindattackhelicopter_hindmissilesthermobaric
 		LocalOffset: 85,-250,-85, 85,250,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 2
 		RequiresCondition: ra1_soviets_upgrade_thermobaricrockets && ra1_soviets_promotion_hurricanerocketpods
 	Armament@MissilesNuke:
-		Weapon: HindMissilesNuclear
+		Weapon: ra1_soviets_hindattackhelicopter_hindmissilesnuclear
 		LocalOffset: 85,250,-85, 85,-250,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 2
 		PauseOnCondition: ammo < 2
 		RequiresCondition: ra1_soviets_upgrade_thermonuclearrockets && !ra1_soviets_promotion_hurricanerocketpods
 	Armament@MissilesNukeRocketPod1:
-		Weapon: HindMissilesNuclear
+		Weapon: ra1_soviets_hindattackhelicopter_hindmissilesnuclear
 		LocalOffset: 85,250,-85, 85,-250,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 2
 		RequiresCondition: ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_hurricanerocketpods
 	Armament@MissilesNukeRocketPod2:
-		Weapon: HindMissilesNuclear
+		Weapon: ra1_soviets_hindattackhelicopter_hindmissilesnuclear
 		LocalOffset: 85,-250,-85, 85,250,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 2
 		RequiresCondition: ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_hurricanerocketpods
 	Armament@PRIMARY:
-		Weapon: ChainGun
+		Weapon: ra1_soviets_hindattackhelicopter_chaingun
 		LocalOffset: 85,-200,-85, 85,200,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
@@ -771,14 +771,14 @@ ra1_soviets_hindattackhelicopter:
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: ChainGun
+		Weapon: ra1_soviets_hindattackhelicopter_chaingun
 		LocalOffset: 85,200,-85, 85,-200,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 2
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@Upgrade1:
-		Weapon: IncendiaryChainGun
+		Weapon: ra1_soviets_hindattackhelicopter_incendiarychaingun
 		LocalOffset: 85,-200,-85, 85,200,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
@@ -786,7 +786,7 @@ ra1_soviets_hindattackhelicopter:
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets
 	Armament@Upgrade2:
 		Name: secondary
-		Weapon: IncendiaryChainGun
+		Weapon: ra1_soviets_hindattackhelicopter_incendiarychaingun
 		LocalOffset: 85,200,-85, 85,-200,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
@@ -795,8 +795,8 @@ ra1_soviets_hindattackhelicopter:
 	GrantConditionOnPrerequisite@ra1_soviets_promotion_hurricanerocketpods:
 		Condition: ra1_soviets_promotion_hurricanerocketpods
 		Prerequisites: ra1_soviets_promotion_hurricanerocketpods
-	FirepowerMultiplier@DualWeapon:
-		Modifier: 50
+	# FirepowerMultiplier@DualWeapon:
+		# Modifier: 50
 	AttackAircraft:
 		FacingTolerance: 40
 		AttackType: Hover
@@ -847,7 +847,7 @@ ra1_soviets_hindattackhelicopter:
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: ra1_soviets_promotion_hurricanerocketpods, ra1_soviets_doctrine_heavyarmordoctrine, ra1_soviets_upgrade_incendiarybullets, ra1_soviets_upgrade_thermobaricrockets, ra1_soviets_upgrade_thermonuclearrockets, ra1_soviets_upgrade_autoloaders, ra1_soviets_upgrade_stalinium
+		Upgrades: ra1_soviets_promotion_hurricanerocketpods, ra1_soviets_doctrine_heavyarmor, ra1_soviets_upgrade_incendiarybullets, ra1_soviets_upgrade_thermobaricrockets, ra1_soviets_upgrade_thermonuclearrockets, ra1_soviets_upgrade_autoloaders, ra1_soviets_upgrade_stalinium
 
 ra1_soviets_kamovattackhelicopter:
 	Inherits: ^Helicopter
@@ -864,7 +864,7 @@ ra1_soviets_kamovattackhelicopter:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 20
-		Prerequisites: ~ra1_soviets_sovietairfield, ~ra1_soviets_doctrine_teslaandexperimentaltechdoctrine
+		Prerequisites: ~ra1_soviets_airfield, ~ra1_soviets_doctrine_teslaandexperimentaltech
 		Description: actor_hind.description
 	Valued:
 		Cost: 2100
@@ -879,63 +879,63 @@ ra1_soviets_kamovattackhelicopter:
 	ChangesHealth@SelfHealing:
 		Step: 49
 	Armament@Tesla:
-		Weapon: KamovTesla
+		Weapon: ra1_soviets_kamovattackhelicopter_kamovtesla
 		LocalOffset: 150,0,-150
 		MuzzleSequence: muzzle
 		AmmoUsage: 8
 		PauseOnCondition: ammo < 8
 		RequiresCondition: !ra1_soviets_upgrade_teslaarcing
 	Armament@Arcing:
-		Weapon: KamovTeslaArc
+		Weapon: ra1_soviets_kamovattackhelicopter_kamovteslaarc
 		LocalOffset: 150,0,-150
 		MuzzleSequence: muzzle
 		AmmoUsage: 8
 		PauseOnCondition: ammo < 8
 		RequiresCondition: ra1_soviets_upgrade_teslaarcing
 	Armament@Missiles:
-		Weapon: HindMissiles
+		Weapon: ra1_soviets_kamovattackhelicopter_hindmissiles
 		LocalOffset: 100,400,-100, 100,-400,-100
 		MuzzleSequence: muzzle
 		AmmoUsage: 2
 		PauseOnCondition: ammo < 8
 		RequiresCondition: !ra1_soviets_upgrade_teslarockets && !ra1_soviets_promotion_hurricanerocketpods
 	Armament@MissilesRocketPod1:
-		Weapon: HindMissiles
+		Weapon: ra1_soviets_kamovattackhelicopter_hindmissiles
 		LocalOffset: 100,400,-100, 100,-400,-100
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 8
 		RequiresCondition: !ra1_soviets_upgrade_teslarockets && ra1_soviets_promotion_hurricanerocketpods
 	Armament@MissilesRocketPod2:
-		Weapon: HindMissiles
+		Weapon: ra1_soviets_kamovattackhelicopter_hindmissiles
 		LocalOffset: 100,-400,-100, 100,400,-100
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 8
 		RequiresCondition: !ra1_soviets_upgrade_teslarockets && ra1_soviets_promotion_hurricanerocketpods
 	Armament@MissilesUpgrade:
-		Weapon: KamovMissilesTesla
+		Weapon: ra1_soviets_kamovattackhelicopter_kamovmissilestesla
 		LocalOffset: 100,400,-100, 100,-400,-100
 		MuzzleSequence: muzzle
 		AmmoUsage: 2
 		PauseOnCondition: ammo < 8
 		RequiresCondition: ra1_soviets_upgrade_teslarockets && !ra1_soviets_promotion_hurricanerocketpods
 	Armament@MissilesUpgradeRocketPod1:
-		Weapon: KamovMissilesTesla
+		Weapon: ra1_soviets_kamovattackhelicopter_kamovmissilestesla
 		LocalOffset: 100,400,-100, 100,-400,-100
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 8
 		RequiresCondition: ra1_soviets_upgrade_teslarockets && ra1_soviets_promotion_hurricanerocketpods
 	Armament@MissilesUpgradeRocketPod2:
-		Weapon: KamovMissilesTesla
+		Weapon: ra1_soviets_kamovattackhelicopter_kamovmissilestesla
 		LocalOffset: 100,-400,-100, 100,400,-100
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 8
 		RequiresCondition: ra1_soviets_upgrade_teslarockets && ra1_soviets_promotion_hurricanerocketpods
 	Armament@PRIMARY:
-		Weapon: ChainGun
+		Weapon: ra1_soviets_kamovattackhelicopter_chaingun
 		LocalOffset: 85,-200,-85, 85,200,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
@@ -943,14 +943,14 @@ ra1_soviets_kamovattackhelicopter:
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: ChainGun
+		Weapon: ra1_soviets_kamovattackhelicopter_chaingun
 		LocalOffset: 85,200,-85, 85,-200,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 8
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@Upgrade1:
-		Weapon: IncendiaryChainGun
+		Weapon: ra1_soviets_kamovattackhelicopter_incendiarychaingun
 		LocalOffset: 85,-200,-85, 85,200,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
@@ -958,7 +958,7 @@ ra1_soviets_kamovattackhelicopter:
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets
 	Armament@Upgrade2:
 		Name: secondary
-		Weapon: IncendiaryChainGun
+		Weapon: ra1_soviets_kamovattackhelicopter_incendiarychaingun
 		LocalOffset: 85,200,-85, 85,-200,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
@@ -967,8 +967,8 @@ ra1_soviets_kamovattackhelicopter:
 	GrantConditionOnPrerequisite@ra1_soviets_promotion_hurricanerocketpods:
 		Condition: ra1_soviets_promotion_hurricanerocketpods
 		Prerequisites: ra1_soviets_promotion_hurricanerocketpods
-	FirepowerMultiplier@DualWeapon:
-		Modifier: 25
+	# FirepowerMultiplier@DualWeapon:
+		# Modifier: 25
 	AttackAircraft:
 		FacingTolerance: 40
 		AttackType: Hover
@@ -1053,7 +1053,7 @@ ra1_soviets_hiptransport:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~ra1_soviets_sovietairfield
+		Prerequisites: ~ra1_soviets_airfield
 		Queue: Aircraft, RAAircraft
 		Description: actor_tran.description
 	UpdatesPlayerStatistics:
@@ -1078,7 +1078,7 @@ ra1_soviets_hiptransport:
 		Offset: 0,0,400
 		Palette: ra_temperat
 	Cargo:
-		InitialUnits: ra1_soviets_actordogname, ra1_soviets_rifleinfantry, ra1_soviets_sovietgrenadier, ra1_soviets_sovietrocketsoldier, ra1_soviets_sovietflamethrower, ra1_soviets_shocktrooper, ra1_soviets_firerocketsoldier, ra1_soviets_sovietmortarsoldier
+		InitialUnits: ra1_soviets_dog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_firerocketsoldier, ra1_soviets_mortarsoldier
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 8
 		AfterLoadDelay: 0
@@ -1112,7 +1112,7 @@ ra1_soviets_hiptransport:
 	FireWarheadsOnDeath:
 		Weapon: LargeHeliExplode
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_conscriptiondoctrine, ra1_soviets_doctrine_heavyarmordoctrine, ra1_soviets_upgrade_stalinium
+		Upgrades: ra1_soviets_doctrine_conscription, ra1_soviets_doctrine_heavyarmor, ra1_soviets_upgrade_stalinium
 
 ra1_soviets_supersonicnuclearbomber:
 	Inherits: ^RANeutralPlane
@@ -1133,7 +1133,7 @@ ra1_soviets_supersonicnuclearbomber:
 		Queue: Aircraft, RAAircraft
 		BuildLimit: 1
 		BuildPaletteOrder: 50
-		Prerequisites: ~ra1_soviets_sovietairfield, ra1_soviets_soviettechcenter, ~ra1_soviets_promotion_supersonicnuclearbomber
+		Prerequisites: ~ra1_soviets_airfield, ra1_soviets_techcenter, ~ra1_soviets_promotion_supersonicnuclearbomber
 		Description: actor_mignuke.description
 	Valued:
 		Cost: 7000
@@ -1146,7 +1146,7 @@ ra1_soviets_supersonicnuclearbomber:
 	ChangesHealth@SelfHealing:
 		Step: 50
 	Armament@Nuke:
-		Weapon: ParaBombNuke
+		Weapon: ra1_soviets_supersonicnuclearbomber_parabombnuke
 		LocalOffset: 0,-0,-64
 		PauseOnCondition: !ammo
 	AttackAircraft:
@@ -1197,7 +1197,7 @@ ra1_soviets_supersonicnuclearbomber:
 		Image: ra1_soviets_supersonicnuclearbomber
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_heavyarmordoctrine, ra1_soviets_upgrade_afterburners, ra1_soviets_upgrade_scorchedearth, ra1_soviets_upgrade_stalinium
+		Upgrades: ra1_soviets_doctrine_heavyarmor, ra1_soviets_upgrade_afterburners, ra1_soviets_upgrade_scorchedearth, ra1_soviets_upgrade_stalinium
 
 	####################################################################################################
 	#		Upgrades Japan

@@ -39,6 +39,10 @@ LEDGER = ROOT / "docs/balance"
 ANCHORS = LEDGER / "class_anchors.json"
 
 
+class PricingScopeError(ValueError):
+    """Raised when a buildable actor has no priced offensive armament."""
+
+
 def eligible_virtual_member(unit):
     """Exclude unavailable variants, retain explicitly included spawn siblings."""
     return unit.get("buildable") is not False or bool((unit.get("design") or {}).get("balance_include"))
@@ -51,6 +55,11 @@ def pricing_armaments(unit):
     the existing fitting condition evaluator. Do not copy its strongest-mode
     fallback: unknown/disabled modes must not become baseline fitting inputs.
     """
+    guard = unit.get("pricing_guard")
+    if isinstance(guard, dict) and guard.get("status") not in (None, "OK"):
+        raise PricingScopeError(
+            guard.get("reason", "pricing scope has no priced offensive armament")
+        )
     live = [arm for arm in unit.get("armaments", []) if arm.get("pricing", True)
             and formula.condition_holds_by_default(arm.get("requires"))]
     ground = [arm for arm in live if not is_anti_air_armament(arm)]

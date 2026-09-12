@@ -27,7 +27,7 @@ class HeadquartersRefineryCleanupTests(unittest.TestCase):
 
     def test_normal_refineries_remain_unprotected(self):
         for name in ("protoss_assimilator", "terran_refinery", "zerg_extractor",
-                     "ixian_refineryixian", "ra1_soviets_sovietorerefinery",
+                     "ixian_refineryixian", "ra1_soviets_orerefinery",
                      "wc2_humans_elvenlumbermill", "wc2_orcs_trolllumbermill"):
             with self.subTest(actor=name):
                 actor = self.rules.resolve(name)

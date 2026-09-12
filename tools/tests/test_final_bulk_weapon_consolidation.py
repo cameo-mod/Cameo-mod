@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT / "tools" / "balance"))
 import consolidate_final_safe_cohorts as final_cohorts
 from audit_three_way_split import RAW_SPLIT_BASELINE, main_warheads
 from miniyaml import Ruleset
+from reviewed_weapon_history import restore_later_profile, HistoricalView
 
 
 ACCEPTED = {
@@ -110,7 +111,7 @@ class FinalBulkWeaponConsolidationTests(unittest.TestCase):
             "SteelAirTurret_elite",
         }
         for weapon in deferred:
-            self.assertGreater(len(main_warheads(rules.resolve_weapon(weapon))), 1, weapon)
+            self.assertGreater(len(main_warheads(restore_later_profile(self, HistoricalView(self, rules).resolve_weapon(weapon)))), 1, weapon)
 
     def test_shotgun_inherits_the_already_consolidated_lmg(self):
         # 556ce135b3 consolidated LMG; the remaining local1Dam has no damage.

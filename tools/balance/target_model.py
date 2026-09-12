@@ -108,7 +108,7 @@ def use_ruleset(rs: Ruleset) -> None:
     global _INJECTED
     _INJECTED = rs
     for fn in (_ruleset, _scan, armor_census, hp_by_macro, armor_weights,
-               measured_reference_hp):
+               measured_reference_hp, shield_damage_share, pseudo_armor_mean):
         fn.cache_clear()
 
 

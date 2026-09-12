@@ -16,7 +16,7 @@ tool or which agent produced it.  Every count is a LOWER-ONLY ratchet.
   N2 CROSS_FACTION       a filename carries two DIFFERENT factions' actor ids
                          (ra1_soviets_sovietorerefinery_ra1_allies_alliedorerefinery_raproc.shp)
   N3 FLUENT_LEAK         a fluent KEY was slugified into an id or filename
-                         (Tooltip/Name `actor_dog.name` -> ra1_soviets_actordogname)
+                         (Tooltip/Name `actor_dog.name` -> ra1_soviets_dog)
   N4 REDUNDANT_WORD      the faction is named twice, once as slug once as adjective
                          (ra1_allies_alliedaagun, japan_japanesebarracks)
   N5 DOTTED_FACTION      an actor id whose DOT SUFFIX names a faction, putting the

@@ -57,6 +57,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import miniyaml
 from gen_release_baseline import snapshot
 from report import h1, h2, table
+from ownership_lineage import load_renames, release_view
 
 # Measured 2026-09-07 against playtest-20260709, with the 43 D5-accepted value edits
 # excluded (maintainer ruling 2026-09-07). LOWER ONLY.
@@ -160,11 +161,41 @@ def main():
         print(chr(10).join("- `" + n + "`" for n in sorted(unmatched)[:400]))
         print()
 
+    # Supplemental coverage only. D1-D5 above and their exit policy remain raw.
+    lineage_error = None
+    try:
+        lineage = release_view(base, now, accepted, load_renames(repo), args.min_ratio)
+        print(h2('Supplemental reviewed rename lineage — not the raw gate'))
+        print('Only the 194 pinned ownership renames are followed. Wrapper branches, '
+              'unreviewed aliases and deleted identities are not inferred. '
+              'Current damage is compared against the original released identity; '
+              'matching an alias never exempts its damage drift.\n')
+        print(table(['measure', 'lineage view'], [[k, str(v)] for k, v in lineage['counts'].items()]))
+        recovered = lineage['recovered']
+        changed = [r for r in recovered if r['status'] not in ('unchanged', 'no-positive-baseline')]
+        print(f'\nRecovered **{len(recovered)}** release identities hidden by name-only matching. '
+              'Raw D4 and all ratchets above remain unchanged.\n')
+        if changed:
+            print(h2('Resurfaced value differences — current values, not waived drift'))
+            print(table(['released identity', 'current identity', 'shipped', 'now', 'x', 'mains', 'status'],
+                        [[r['released_name'], r['current_name'], str(r['was']['flat']), str(r['now']['flat']),
+                          f"{r['ratio']:.2f}", f"{r['was']['mains']} -> {r['now']['mains']}", r['status']]
+                         for r in sorted(changed, key=lambda r: r['released_name'])]))
+        if args.list:
+            print(h2('Reviewed rename coverage'))
+            print(table(['released identity', 'current identity'],
+                        [[r['released_name'], r['current_name']] for r in sorted(recovered, key=lambda r: r['released_name'])]))
+    except Exception as exc:
+        lineage_error = exc
+        print(f'\n**FAIL: supplemental ownership lineage unavailable:** {type(exc).__name__}: {exc}\n')
+
     over = [c for c, _d, n, b in checks if n > b and c != "D5"]
     if over:
         print(f"\n**FAIL: {', '.join(over)} above ratchet.** A rise means a weapon moved "
               "FURTHER from the shipped build, or that the gate went BLIND to more of them. "
               "Lower a baseline as the repair lands; never raise one.\n")
+        return 1
+    if lineage_error is not None:
         return 1
     print("\n_within ratchet_ — but every row above is still a weapon that does not "
           "deal what it shipped.\n")

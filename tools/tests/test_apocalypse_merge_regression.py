@@ -8,6 +8,7 @@ sys.path[:0] = [str(ROOT / "tools/audit"), str(ROOT / "tools/balance")]
 from audit_three_way_split import main_warhead_nodes, main_warheads
 from audit_impact_glow_preservation import EMISSIVE_EFFECT_ROOTS, tier_path_count
 from miniyaml import Ruleset, load
+from reviewed_weapon_history import restore_endpoint_weapon
 
 NAMES = ("RA2120xmm", "RA2120xmm_elite", "RA2120xmm_rad", "RA2120xmm_rad_elite")
 
@@ -22,7 +23,11 @@ class ApocalypseMergeTests(unittest.TestCase):
         cls.rules = Ruleset(ROOT)
 
     def test_all_four_resolved_routes_match_the_authored_parent(self):
-        actual = {name: payload(self.rules.resolve_weapon(name)) for name in NAMES}
+        # Assert the exact ordered modern endpoint before comparing the original
+        # authored-parent checkpoint; radiation routes receive no adapter.
+        actual = {name: payload(restore_endpoint_weapon(self, self.rules.resolve_weapon(name))
+                                if name in ('RA2120xmm', 'RA2120xmm_elite')
+                                else self.rules.resolve_weapon(name)) for name in NAMES}
         reference = Ruleset(ROOT)
         for node in load(pathlib.Path(__file__).parent / "fixtures/apocalypse_premerge.yaml"):
             reference.weapons[node.key] = node
@@ -64,6 +69,8 @@ class ApocalypseMergeTests(unittest.TestCase):
             with self.subTest(weapon=name):
                 resolved = self.rules.resolve_weapon(name)
                 chemical = "_rad" in name
+                if not chemical:
+                    resolved = restore_endpoint_weapon(self, resolved)
                 tag = "CannonChem_Light" if chemical else "CannonAP_Light"
                 self.assertEqual([tag], main_warheads(resolved))
                 self.assertEqual("16000" if chemical else "12000", main_warhead_nodes(resolved)[0].get("Damage"))

@@ -261,20 +261,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -325,18 +312,18 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium_GroundShipExtraDamage",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
+        "spread": "150",
+        "tag": "MissileHE_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -395,18 +382,18 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium_GroundShipExtraDamage",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
+        "spread": "150",
+        "tag": "MissileHE_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -458,18 +445,18 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium_GroundShipExtraDamage",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
+        "spread": "150",
+        "tag": "MissileHE_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -517,18 +504,18 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium_GroundShipExtraDamage",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
+        "spread": "150",
+        "tag": "MissileHE_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -576,18 +563,18 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium_GroundShipExtraDamage",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
+        "spread": "150",
+        "tag": "MissileHE_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -641,18 +628,18 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium_GroundShipExtraDamage",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
+        "spread": "150",
+        "tag": "MissileHE_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -700,18 +687,18 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium_GroundShipExtraDamage",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
+        "spread": "150",
+        "tag": "MissileHE_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -758,18 +745,18 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium_GroundShipExtraDamage",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
+        "spread": "150",
+        "tag": "MissileHE_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -795,6 +782,14 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
+        "damage": "24000",
+        "falloff": "100, 70, 30, 0",
+        "percentage_denominator": "10000",
+        "spread": "300",
+        "tag": "MissileAA_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "4",
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
@@ -814,14 +809,6 @@
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
        },
        {
         "damage": "8000",
@@ -839,9 +826,11 @@
       "requires": "!rank-elite",
       "slot": "Armament@AA",
       "versus_templates": [
+       "^Warhead_MissileAA_Medium",
        "MigMissiles"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "MigMissiles_AA",
@@ -852,6 +841,14 @@
       "burst": "8",
       "burstdelays": "2",
       "damage_warheads": [
+       {
+        "damage": "24000",
+        "falloff": "100, 70, 30, 0",
+        "percentage_denominator": "10000",
+        "spread": "300",
+        "tag": "MissileAA_Medium",
+        "type": "AreaDamage"
+       },
        {
         "damage": "4",
         "falloff": "100, 50, 25, 10, 5",
@@ -874,14 +871,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
@@ -897,9 +886,11 @@
       "requires": "rank-elite",
       "slot": "Armament@AAELITE",
       "versus_templates": [
+       "^Warhead_MissileAA_Medium",
        "MigMissiles_elite"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "MigMissiles_AA_elite",
@@ -940,32 +931,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 200,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@RearmableAircraft",
-      "types": []
-     },
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@BomberBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1390,24 +1356,6 @@
     "resolved_firepower_modifiers": [
      {
       "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 105,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@HelicopterBuff",
-      "types": []
-     },
-     {
-      "modifier": 50,
       "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#FirepowerMultiplier@FirerateCompensation.Modifier",
       "trait": "FirepowerMultiplier@FirerateCompensation",
       "types": []
@@ -1470,6 +1418,14 @@
      "v": "Helicopter"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Cargo.MaxWeight",
+     "v": "14"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen, Vehicle"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Valued.Cost",
      "v": "3600"
@@ -1499,26 +1455,7 @@
      "RAAircraft",
      "Vehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 105,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@HelicopterBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2145,6 +2082,14 @@
      "v": "Steel"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#Cargo.MaxWeight",
+     "v": "6"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#Valued.Cost",
      "v": "800"
@@ -2284,20 +2229,7 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@DefenseBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2498,20 +2430,7 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@DefenseBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2775,20 +2694,7 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@DefenseBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2808,100 +2714,6 @@
    }
   },
   "infantry": {
-   "ra2_soviets_attackdog": {
-    "armaments": [
-     {
-      "damage_warheads": [
-       {
-        "damage": "100000",
-        "falloff": null,
-        "spread": null,
-        "tag": "1Dam",
-        "type": "TargetDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "2000",
-      "reloaddelay": "10",
-      "slot": "Armament",
-      "versus_templates": [],
-      "warheads": [],
-      "weapon": "DogJaw",
-      "weapon_class_source": "none"
-     }
-    ],
-    "armor": {
-     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Armor.Type",
-     "v": "None"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Valued.Cost",
-     "v": "200"
-    },
-    "design": {
-     "category": "Infantry",
-     "class_anchor": "melee",
-     "special": null,
-     "subtype": "Dog",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "hp": {
-     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Health.HP",
-     "v": "5000"
-    },
-    "name": "Attack Dog",
-    "prerequisites": [
-     "~ra2_soviets_barracks"
-    ],
-    "queue": [
-     "Infantry",
-     "RAInfantry"
-    ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@MeleeBuff",
-      "types": []
-     }
-    ],
-    "shield_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "sight": {
-     "src": "inherited",
-     "v": "5000"
-    },
-    "speed": {
-     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Mobile.Speed",
-     "v": "100"
-    }
-   },
    "ra2_soviets_boris": {
     "armaments": [
      {
@@ -3108,26 +2920,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@HeroBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3271,18 +3064,6 @@
     ],
     "resolved_firepower_modifiers": [
      {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
       "modifier": 100,
       "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#FirepowerMultiplier@ScoutInfantryBuff.Modifier",
       "trait": "FirepowerMultiplier@ScoutInfantryBuff",
@@ -3382,26 +3163,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@MeleeBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3540,20 +3302,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3573,6 +3322,82 @@
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Mobile.Speed",
      "v": "59"
+    }
+   },
+   "ra2_soviets_dog": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "100000",
+        "falloff": null,
+        "spread": null,
+        "tag": "1Dam",
+        "type": "TargetDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "2000",
+      "reloaddelay": "10",
+      "slot": "Armament",
+      "versus_templates": [
+       "^DogJaw"
+      ],
+      "warheads": [],
+      "weapon": "ra2_soviets_dog_bite",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Armor.Type",
+     "v": "None"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Valued.Cost",
+     "v": "200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Dog",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Health.HP",
+     "v": "5000"
+    },
+    "name": "Attack Dog",
+    "prerequisites": [
+     "~ra2_soviets_barracks"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "resolved_firepower_modifiers": [],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Mobile.Speed",
+     "v": "100"
     }
    },
    "ra2_soviets_engineer": {
@@ -3931,24 +3756,6 @@
     ],
     "resolved_firepower_modifiers": [
      {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AntiTankAntiAirInfantryBuff",
-      "types": []
-     },
-     {
       "modifier": 107,
       "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
       "trait": "FirepowerMultiplier",
@@ -4238,20 +4045,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4385,14 +4179,7 @@
      "Naval",
      "RANaval"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4888,25 +4675,25 @@
        {
         "damage": "12000",
         "falloff": "100, 0",
-        "spread": "80",
-        "tag": "CannonAP_Light",
+        "spread": "120",
+        "tag": "CannonAP",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6992",
       "reloaddelay": "63",
       "requires": "!rank-elite && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_CannonAP_Light",
+       "^Warhead_CannonAP",
        "^Projectile_Shell_Light",
        "^Effect_Apoc_AP_RA2"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Light"
+       "^Warhead_CannonAP"
       ],
       "weapon": "RA2120xmm",
       "weapon_class_source": "template"
@@ -5011,9 +4798,9 @@
       "damage_warheads": [
        {
         "damage": "16000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
+        "falloff": "100, 70, 30, 0",
+        "spread": "300",
+        "tag": "MissileAA_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -5025,9 +4812,11 @@
       "requires": "!rank-elite",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
+       "^Warhead_MissileAA_Medium",
        "^RA2MediumMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "RA2MammothTusk_AA",
@@ -5041,13 +4830,13 @@
        {
         "damage": "12000",
         "falloff": "100, 0",
-        "spread": "80",
-        "tag": "CannonAP_Light",
+        "spread": "120",
+        "tag": "CannonAP",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7992",
       "reloaddelay": "63",
@@ -5058,7 +4847,7 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Light"
+       "^Warhead_CannonAP"
       ],
       "weapon": "RA2120xmm_elite",
       "weapon_class_source": "template"
@@ -5159,9 +4948,9 @@
       "damage_warheads": [
        {
         "damage": "16000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
+        "falloff": "100, 70, 30, 0",
+        "spread": "300",
+        "tag": "MissileAA_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -5173,9 +4962,11 @@
       "requires": "rank-elite",
       "slot": "Armament@SECONDARYELITE",
       "versus_templates": [
+       "^Warhead_MissileAA_Medium",
        "RA2MammothTusk_AA"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "RA2MammothTusk_AA_elite",
@@ -5221,14 +5012,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5458,6 +5242,14 @@
      "v": "Medium"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Cargo.MaxWeight",
+     "v": "5"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Valued.Cost",
      "v": "900"
@@ -5492,12 +5284,6 @@
      "RAVehicle"
     ],
     "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
      {
       "modifier": 75,
       "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
@@ -5865,14 +5651,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5980,14 +5759,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6156,14 +5928,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6262,14 +6027,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6363,14 +6121,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"

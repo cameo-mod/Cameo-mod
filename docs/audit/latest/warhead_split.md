@@ -1,36 +1,24 @@
 # Warhead-split guard (multi-warhead over-damage)
 
 
-## FAIL 1 — broadcast fingerprint / every MAIN identical (69 vs baseline 69)
+## FAIL 1 — broadcast fingerprint / every MAIN identical (55 vs baseline 69)
 
-_at or below baseline_ — pre-existing **W24** debt (69 weapons), not a regression. The ratchet catches new broadcasts without blocking every commit on the existing pile. **Lower `BROADCAST_BASELINE` as W24 collapses weapons; never raise it.**
+_at or below baseline_ — pre-existing **W24** debt (55 weapons), not a regression. The ratchet catches new broadcasts without blocking every commit on the existing pile. **Lower `BROADCAST_BASELINE` as W24 collapses weapons; never raise it.**
 
 | weapon | mains | per_warhead | total |
 |---|---|---|---|
 | 12MissilesSpawnerScud | 4 | 24000 | 96000 |
-| AlliedTankDestroyerCannon | 2 | 12000 | 24000 |
-| AphidCryo_AA | 2 | 8000 | 16000 |
-| Aphid_AA | 2 | 8000 | 16000 |
 | AsianChaosMine | 2 | 125000 | 250000 |
 | AsianPhoenixRocket | 3 | 20000 | 60000 |
 | AsianPhoenixRocket_elite | 3 | 20000 | 60000 |
-| BikeRockets | 2 | 8000 | 16000 |
-| CommandoM16 | 2 | 4000 | 8000 |
-| CommandoSniper | 2 | 20000 | 40000 |
 | D2K_Rocket_Trooper2 | 3 | 8000 | 24000 |
 | DredMissile | 3 | 30000 | 90000 |
-| GoliathMG | 3 | 2000 | 6000 |
-| HMGo_upgrade | 3 | 2000 | 6000 |
-| HellfireCryo | 2 | 8000 | 16000 |
 | IdolCannon | 4 | 10000 | 40000 |
 | JimRaynorMachineGun | 2 | 2000 | 4000 |
-| KodiakCannonSonic | 2 | 22000 | 44000 |
 | MagicOrb | 2 | 12000 | 24000 |
 | MagicOrb2 | 2 | 4000 | 8000 |
 | NaxiMP40 | 3 | 2000 | 6000 |
 | NaxiMP40_elite | 3 | 2000 | 6000 |
-| NodTorpTube | 2 | 8000 | 16000 |
-| NodTorpTubeBlackMarket | 2 | 8000 | 16000 |
 | OIBigPlasmaCannon | 3 | 8000 | 24000 |
 | RA2Comet | 3 | 20000 | 60000 |
 | RA2Comet_elite | 3 | 20000 | 60000 |
@@ -47,9 +35,21 @@ _at or below baseline_ — pre-existing **W24** debt (69 weapons), not a regress
 | RA2SCUD_tesla | 3 | 30000 | 90000 |
 | SCUD | 2 | 60000 | 120000 |
 | SCUDIrak | 2 | 60000 | 120000 |
+| SamuraiBladeCharged | 2 | 10000 | 20000 |
+| SkyHawkChainGun | 2 | 2000 | 4000 |
+| SkyHawkChainGunWaveforce | 3 | 2000 | 6000 |
+| TS155mm_bluenuke | 2 | 60000 | 120000 |
+| TSTacticalChemMissileDamage | 2 | 10000 | 20000 |
+| TSTacticalMissileDamage | 2 | 10000 | 20000 |
+| TSVulcan | 2 | 2000 | 4000 |
+| ThermobaricFlame | 2 | 2000 | 4000 |
+| Type97PlasmaCannon | 3 | 4000 | 12000 |
+| V2ExplodeIrak | 2 | 60000 | 120000 |
+| V3Explode | 3 | 10000 | 30000 |
+| WaveArtilleryImpact | 2 | 10000 | 20000 |
 
 
-_... and 29 more._
+_... and 15 more._
 
 
 ## Review — exact gameplay restorations (0)
@@ -91,5 +91,5 @@ Allowed, but 8000+ per-warhead x N is a big total — confirm it is intended (no
 | RA2SCUD_fire | 3 | 30000 | 90000 |
 | RA2SCUD_tesla | 3 | 30000 | 90000 |
 | V3Explode | 3 | 10000 | 30000 |
-| YakTeslaBomb | 4 | 40000 | 160000 |
+| ra1_soviets_teslayak_tesla_bomb | 4 | 40000 | 160000 |
 

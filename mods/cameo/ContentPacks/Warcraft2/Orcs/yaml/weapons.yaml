@@ -296,6 +296,8 @@ wc2deathknightDeathAndDecay:
 		RandomClusterCount: 5
 		Dimensions: 5, 5
 		Footprint: __x__ _xxx_ xxxxx _xxx_ __x__
+	Warhead@1Dam_impact:
+		ValidTargets: Ground, Water, Air
 
 wc2deathknightDeathAndDecay_Spread:
 	Inherits: wc2mageBlizzard_Spread

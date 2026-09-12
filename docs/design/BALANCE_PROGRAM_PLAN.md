@@ -1,5 +1,19 @@
 # BALANCE PROGRAM — the execution plan (rev. 2026-08-28)
 
+
+## 2026-09-10 — source PR340 warhead-family reach measurement
+
+`warhead_family_reach` measures **1,454 distinct fired weapon identities** whose
+transitive inheritance reaches a `^Warhead_*` family in the current PR340 source.
+The registry's previous value was 1,415; it is updated upward to this measured
+count with the same predicate and zero tolerance. Ownership wrappers can expose
+more distinct fired identities for existing family payloads: this increase does
+not establish newly converted weapons or additional gameplay balance work.
+Earlier dated snapshots below remain historical, and the only-UP rule remains.
+
+> **Numeric evidence refresh — 2026-09-10, combined `839cdced4` plus reopened tooling.** `multi_main_fired_weapons` = **120**; `physical_state_fired_weapons` = **542**; `unconverted_template_inheritors` = **1590**. Measured on this combined tree; predicates and tolerances are unchanged. The flat-health denominator correction changes diagnostics, not live weapons or prices. Earlier branch-specific snapshots remain historical.
+
+
 **This file is the SINGLE SOURCE OF TRUTH for what is done, what is next, and who owns
 what.** It survives compaction, agent handover and session death. Every other document
 (ROADMAP, EFFECTIVE_DAMAGE, PHYSICAL_STATE_SYSTEM, the AI handoffs) links *here* for
@@ -37,9 +51,9 @@ roster, so pricing first means pricing inputs we are about to replace:
 
 | what is still in flux | measured evidence |
 |---|---|
-| W24 — directly fired weapons with **more than one** damage main | **184** under the raw unified predicate; 2026-09-07 survey (234 including indirectly reached weapons; no reviewed exceptions subtracted) |
+| W24 — directly fired weapons with **more than one** damage main | **122** under the raw unified predicate; source339 2026-09-10 (the historical 2026-09-07 direct/indirect snapshot was 184/234; no reviewed exceptions subtracted) |
 | armament slots whose `K` moves when those collapse | **1 547** (2026-08-17 snapshot) |
-| legacy template direct inheritors (W23) | **1596** on 2026-09-07 (`audit_unconverted_templates`); historical family reach was **665 of 1622 = 41.0%** on 2026-08-17, not a current measurement |
+| legacy template direct inheritors (W23) | **1592** on source339 2026-09-10 (`audit_unconverted_templates`); historical family reach was **665 of 1622 = 41.0%** on 2026-08-17, not a current measurement |
 
 Changing the warhead structure can change both delivered damage and **`K`** — `K`
 is share-weighted over each warhead's armor profile, so picking ONE family changes
@@ -53,7 +67,7 @@ the question was asked.
 
 **The order:**
 
-1. **W24** — one damage warhead per weapon (DESIGN §11b). 184 directly fired weapons remain non-compliant; 234 remain when indirect weapon-graph reachability is included (2026-09-07 raw survey).
+1. **W24** — one damage warhead per weapon (DESIGN §11b). 122 directly fired weapons remain non-compliant in source339 (2026-09-10); the historical 2026-09-07 direct/indirect counts were 184/234.
 2. **W23** — the 25-template legacy retrofit. ⭐ **W24 DISSOLVES W23's BLOCKER.** That blocker
    is "33 weapons inherit several legacy templates mapping into the SAME family, so the rename
    merges two warheads and the smaller damage vanishes". After W24 each weapon carries ONE
@@ -585,7 +599,7 @@ mechanical and belong in the audit suite BEFORE the next batch — see the plan 
 
 ⛔ **§0a still governs: weapon STRUCTURE before pricing.** Phase A is not optional preamble; every
 delivery and price number measured before it lands is measuring the wrong object
-(`meters_filling_before_death` claimed 534/549 and is really 146/562 for exactly this reason).
+(`meters_filling_before_death` historically claimed 534/549 and was corrected to 146/562 on 2026-08-19; the current source339 qualifying count is 301 for exactly this reason).
 
 ### Phase A — finish W24 (blocks everything downstream)
 
@@ -1863,6 +1877,15 @@ anywhere without tier restriction (W13 rule 5).
 ---
 
 ### W18 — Roll the basis-point unit out into yaml ⬜ READY (unblocked)
+
+Historical planning snapshot below, including the dated 2026-08-16 empty search.
+Current authored-field inventory (2026-09-10): **184** raw
+`PercentageDenominator` occurrences in active weapon files, compared with 183
+on 2026-09-05. Freedom elite's explicit companion adds the single occurrence
+while preserving its prior percentage units. The registry's historical
+`percentage_denominator_unset` id measures occurrences, not unset fields or
+resolved applications; this increment is not a global unit rebase.
+
 
 W15 shipped the MECHANISM; this ships the CONTENT. It *was* blocked purely by file
 ownership — every file involved is set B (`mods/cameo/weapons/**`,

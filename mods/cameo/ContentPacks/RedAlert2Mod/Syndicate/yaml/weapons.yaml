@@ -271,7 +271,6 @@ RA2FreedomRocket:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 RA2FreedomRocket_elite:
-	Inherits@roleflat: ^Compatibility_MissileAP_MediumFlat
 	Inherits: RA2FreedomRocket
 	Range: 8130
 	Projectile: Missile
@@ -294,15 +293,39 @@ RA2FreedomRocket_elite:
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 60
 	Warhead@MissileAP_Medium:
-		Damage: 120000
-		PercentageScale: 10000
+		Damage: 360000
+		PercentageScale: 0
 	-Warhead@FlakWeapon:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
-	Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@FreedomElitePreservedPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air, Garrisoned
-		Damage: 240000
-		PercentageScale: 0
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 6000
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Heavy: 19
+			Medium: 18
+			Light: 17
+			Scout: 16
+			Spaceship: 15
+			Helicopter: 14
+			Bomber: 13
+			Fighter: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
+		Falloff: 100, 50, 0
+		Range: 0, 32, 33
 SyndicateFireballLauncher_elite:
 	Inherits: SyndicateFireballLauncher
 	Range: 6666
@@ -588,6 +611,7 @@ LatinMonkeyGrenade1:
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
 	Warhead@Demolition_LightFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 30000
 		PercentageScale: 9997
@@ -601,6 +625,7 @@ LatinMonkeyGrenade2:
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: AsianFlameFragment
 	Warhead@Demolition_LightFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 30000
 		PercentageScale: 9997
@@ -614,10 +639,13 @@ LatinMonkeyGrenade3:
 		Weapon: AsianFlameFragment
 		Amount: 4
 	Warhead@Demolition_LightFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 30000
 		PercentageScale: 9997
 
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 LatinMonkeyGrenadeExplode:
 	Inherits: LatinMonkeyGrenade2
 	Warhead@Demolition_Light:
@@ -630,6 +658,7 @@ LatinMonkeyGrenadeExplode:
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
 	Warhead@Demolition_LightFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		PercentageScale: 9992
@@ -666,6 +695,7 @@ RA2RBurritoRocket:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@MediumFlameWeapon: AreaDamage
@@ -677,6 +707,7 @@ RA2RBurritoRocket:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		PhysicalStateName: Temperature
@@ -685,6 +716,7 @@ RA2RBurritoRocket:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@MissileAP_Heavy:
@@ -703,12 +735,15 @@ RA2RBurritoRocket:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@HeavyBomb:
 	Warhead@CannonHE_HeavyFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 		PercentageScale: 3995
 	-Warhead@MissileAP_Heavy:
 	-Warhead@Demolition_Light:
 
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 RA2LarsRocket:
 	Inherits@collapseflat: ^Compatibility_MissileAP_HeavyFlat
 	Inherits: ^D2KRocket
@@ -979,21 +1014,25 @@ DiabloCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@LightMissilePercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@TankDestroyerCannon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@ChaingunPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Flak_Medium:
+		InvalidTargets: Air
 		PercentageScale: 2488
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -1017,6 +1056,20 @@ DiabloCannon_elite:
 	# guidance fields. Keeps today's resolved type verbatim.
 	Projectile: Bullet
 
+	Warhead@LightMissilePercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
+	Warhead@TankDestroyerCannonPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@ChaingunPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@Flak_Medium:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
 DiabloCannon_AA:
 	Inherits: DiabloCannon
 	Report: aacanon3.aud
@@ -1029,6 +1082,18 @@ DiabloCannon_AA:
 	# guidance fields. Keeps today's resolved type verbatim.
 	Projectile: Bullet
 
+	Warhead@LightMissilePercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@TankDestroyerCannonPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@ChaingunPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@Flak_Medium:
+		-InvalidTargets:
+		ValidTargets: Air
 DiabloCannonAAE_AA:
 	Inherits: DiabloCannon_AA
 	Report: aacanon3.aud
@@ -1040,6 +1105,14 @@ DiabloCannonAAE_AA:
 	# guidance fields. Keeps today's resolved type verbatim.
 	Projectile: Bullet
 
+	Warhead@LightMissilePercentage:
+		ValidTargets: Air
+	Warhead@TankDestroyerCannonPercentage:
+		ValidTargets: Air
+	Warhead@ChaingunPercentage:
+		ValidTargets: Air
+	Warhead@Flak_Medium:
+		ValidTargets: Air
 RA2MortarBike:
 	Inherits@finalmain: ^Compatibility_Concussion_MediumFlat
 	Inherits@roleflat: ^Compatibility_CannonHE_MediumFlat
@@ -1685,7 +1758,7 @@ LatinAADefenderCannon:
 	-Warhead@Flak_Medium:
 	-Warhead@MissileAP_Medium:
 	Warhead@MissileAP_MediumFlatCompatibility:
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Air
 		Damage: 4000
 		PercentageScale: 9975
 
@@ -1726,6 +1799,7 @@ RA2TOPOLCuba:
 		Damage: 20000
 		Falloff: 100, 85, 70, 55, 40, 25, 10
 	Warhead@NuclearWarheadPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		Falloff: 100, 85, 70, 55, 40, 25, 10
@@ -1734,6 +1808,7 @@ RA2TOPOLCuba:
 		Damage: 20000
 		Falloff: 100, 85, 70, 55, 40, 25, 10
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		Falloff: 100, 85, 70, 55, 40, 25, 10
@@ -1747,6 +1822,7 @@ RA2TOPOLCuba:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		Falloff: 100, 85, 70, 55, 40, 25, 10
@@ -1761,6 +1837,7 @@ RA2TOPOLCuba:
 		Damage: 10000
 		Falloff: 100, 85, 70, 55, 40, 25, 10
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		Falloff: 100, 85, 70, 55, 40, 25, 10
@@ -1772,6 +1849,7 @@ RA2TOPOLCuba:
 		Damage: 20000
 		Falloff: 100, 85, 70, 55, 40, 25, 10
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		Falloff: 100, 85, 70, 55, 40, 25, 10
@@ -1784,6 +1862,7 @@ RA2TOPOLCuba:
 		Damage: 10000
 		Falloff: 100, 85, 70, 55, 40, 25, 10
 	Warhead@GrenadePercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		Falloff: 100, 85, 70, 55, 40, 25, 10
@@ -1815,11 +1894,14 @@ RA2TOPOLCuba:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@Nuclear_Super:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 120000
 		PercentageScale: 0
 	-Warhead@Nuclear_Super_Percentage:
 
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 RA2APCFlakCannon:
 	Inherits@collapseflat: ^Compatibility_Flak_MediumFlat
 	Inherits: ^LightMissile
@@ -1834,21 +1916,25 @@ RA2APCFlakCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@LightMissilePercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@TankDestroyerCannon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@ChaingunPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Flak_Medium:
+		InvalidTargets: Air
 		PercentageScale: 2488
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -1872,6 +1958,20 @@ RA2APCFlakCannon_elite:
 	# guidance fields. Keeps today's resolved type verbatim.
 	Projectile: Bullet
 
+	Warhead@LightMissilePercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
+	Warhead@TankDestroyerCannonPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@ChaingunPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@Flak_Medium:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
 RA2APCFlakCannonAA:
 	Inherits: RA2APCFlakCannon
 	Report: aacanon3.aud
@@ -1884,6 +1984,18 @@ RA2APCFlakCannonAA:
 	# guidance fields. Keeps today's resolved type verbatim.
 	Projectile: Bullet
 
+	Warhead@LightMissilePercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@TankDestroyerCannonPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@ChaingunPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@Flak_Medium:
+		-InvalidTargets:
+		ValidTargets: Air
 RA2APCFlakCannonAA_elite:
 	Inherits: RA2APCFlakCannonAA
 	Report: aacanon3.aud
@@ -1895,6 +2007,14 @@ RA2APCFlakCannonAA_elite:
 	# guidance fields. Keeps today's resolved type verbatim.
 	Projectile: Bullet
 
+	Warhead@LightMissilePercentage:
+		ValidTargets: Air
+	Warhead@TankDestroyerCannonPercentage:
+		ValidTargets: Air
+	Warhead@ChaingunPercentage:
+		ValidTargets: Air
+	Warhead@Flak_Medium:
+		ValidTargets: Air
 RA2APCMachineGun:
 	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^RA2SmallArms
@@ -1921,6 +2041,7 @@ RA2APCMachineGun:
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 14975
@@ -1931,18 +2052,29 @@ RA2APCMachineGun_elite:
 	Burst: 8
 	BurstDelays: 2
 
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 RA2APCMachineGun_AA:
 	Inherits: RA2APCMachineGun
 	ValidTargets: Air
 	Range: 8610
 
+	Warhead@Bullet_MediumFlatCompatibility:
+		-InvalidTargets:
+		ValidTargets: Air
 RA2APCMachineGun_AA_elite:
 	Inherits: RA2APCMachineGun_AA
 	Range: 9610
 	Burst: 8
 	BurstDelays: 2
 
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Air
 RA2APCRocket:
+	Inherits@missilerole: ^Warhead_MissileHE_Medium
 	Inherits: ^HeavyBomb
 	Inherits@2: ^HeavyAAWeapon
 	Inherits@3: ^FlakWeapon
@@ -1969,21 +2101,19 @@ RA2APCRocket:
 		Acceleration: 10
 		ContrailStartColor: FF884400
 		ContrailEndColor: 000000FF
-	Warhead@MissileAP_Medium:
-		Damage: 8000
-		PercentageScale: 2500
-		PercentageDenominator: 10000
-		ValidTargets: Ground, Water, Air
 	-Warhead@HeavyBomb:
 	-Warhead@HeavyAAWeapon:
 	-Warhead@FlakWeapon:
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 	Warhead@Effect: CreateEffect
@@ -2014,6 +2144,18 @@ RA2APCRocket:
 		GlowScale: 1.5
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12
+	-Warhead@MissileAP_Medium:
+	Warhead@MissileHE_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 2500
+		PercentageSpread: 50
+		InvalidTargets: Air
+		PercentageDenominator: 10000
 
 RA2APCRocket_elite:
 	Inherits: RA2APCRocket
@@ -2026,14 +2168,56 @@ RA2APCRocket_elite:
 		ContrailStartColor: E60000
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
+	Warhead@HeavyBombPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
+	Warhead@HeavyAAWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@FlakWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@MissileHE_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 2500
+		PercentageSpread: 50
+		InvalidTargets: Air
+		PercentageDenominator: 10000
 
 RA2APCRocket_AA:
+	Inherits@missilerole: ^Warhead_MissileAA_Medium
 	Inherits: RA2APCRocket
 	ValidTargets: Air
 	Range: 8610
-
 	Projectile: Missile
 		VerticalRateOfTurn: 16
+	Warhead@HeavyBombPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@HeavyAAWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@FlakWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Air
+	Warhead@MissileAA_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Damage: 8000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 2500
+		PercentageSpread: 50
+		PercentageDenominator: 10000
+	-Warhead@MissileHE_Medium:
 
 RA2APCRocket_AA_elite:
 	Inherits: RA2APCRocket_AA
@@ -2047,6 +2231,22 @@ RA2APCRocket_AA_elite:
 		ContrailStartColor: E60000
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
+	Warhead@HeavyBombPercentage:
+		ValidTargets: Air
+	Warhead@HeavyAAWeaponPercentage:
+		ValidTargets: Air
+	Warhead@FlakWeaponPercentage:
+		ValidTargets: Air
+	Warhead@MissileAA_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Damage: 8000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 2500
+		PercentageSpread: 50
+		PercentageDenominator: 10000
 
 SMLLauncher:
 	ValidTargets: Ground, Air, Water
@@ -2213,10 +2413,12 @@ Rammax_Sabot:
 	Warhead@Chaingun: SpreadDamage
 		Damage: 2000
 	Warhead@ChaingunPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 10000
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 	-Warhead@Chaingun:
 	-Warhead@LaserExtraDamage:
@@ -2224,6 +2426,7 @@ Rammax_Sabot:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
 	Warhead@PreservedFlat_Chaingun: SpreadDamage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Spread: 200
 		Damage: 2000
@@ -2247,6 +2450,7 @@ Rammax_Sabot:
 			Superheavy: 25
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 	Warhead@PreservedFlat_LaserExtraDamage: SpreadDamage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Spread: 300
 		Damage: 600
@@ -2272,6 +2476,7 @@ Rammax_Sabot:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 	Warhead@PreservedFlat_LaserWeapon: SpreadDamage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Spread: 150
 		Damage: 10000
@@ -2296,6 +2501,7 @@ Rammax_Sabot:
 			Scout: 40
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@PreservedFlat_TeslaExtraDamage: SpreadDamage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Falloff: 100, 75, 50, 25
 		Spread: 200
@@ -2321,6 +2527,7 @@ Rammax_Sabot:
 			Fighter: 10
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@PreservedFlat_TeslaWeapon: SpreadDamage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Spread: 100
 		Damage: 2000
@@ -2345,6 +2552,12 @@ Rammax_Sabot:
 			Fighter: 40
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 
+	Warhead@ShieldHit:
+		InvalidTargets: Air
+	Warhead@EMPUnit:
+		InvalidTargets: Shielded, Air
+	Warhead@TeslaWeaponPercentage:
+		InvalidTargets: Air
 ScrapCarSpawner:
 	Projectile: InstantExplode
 	Warhead@1Actor: SpawnActor

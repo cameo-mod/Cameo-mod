@@ -159,17 +159,29 @@ class AnchorMembershipTests(unittest.TestCase):
         self.assertIsNone(rows[0][5])
         self.assertFalse(rows[0][7])
 
-    def test_every_anchor_belongs_to_its_declared_class(self):
+    def test_current_membership_and_explicit_pending_anchor_stay_distinct(self):
         anchors = json.loads((ROOT / "docs/balance/class_anchors.json").read_text(encoding="utf-8"))
         units = {name: record for _, _, name, record in readiness.load_units()}
-        for cls, anchor in anchors.items():
-            if cls.startswith("_"):
-                continue
-            actor = anchor["anchor_actor"]
-            with self.subTest(cls=cls, actor=actor):
-                self.assertIn(actor, units)
-                self.assertEqual(readiness.class_membership.classify(
-                    units[actor].get("design") or {})[0], cls)
+        rows = readiness.anchor_membership_evidence(anchors, units)
+        pending = [row for row in rows if row['status'] != 'member']
+        self.assertEqual(len(pending), 0, 'unexpected anchor membership discrepancy')
+        row = next(r for r in rows if r['class'] == 'armed_troop_transport')
+        self.assertEqual((row['class'], row['anchor_actor'], row['actual_class'], row['status']),
+                         ('armed_troop_transport', 'td_gdi_apc', 'armed_troop_transport', 'member'))
+        self.assertTrue(row['membership_ready'])
+        self.assertEqual(row['current_members'], 3)
+        declaration = anchors['armed_troop_transport']['membership_pending']
+        self.assertEqual(declaration['required_subtype'], 'ArmedTroopTransport')
+        self.assertEqual(declaration['current_class'], 'support')
+        self.assertFalse(anchors['armed_troop_transport']['signed_off'])
+        self.assertTrue(all(r['membership_ready'] for r in rows if r not in pending))
+
+    def test_missing_and_undeclared_mismatched_anchors_never_clear_membership(self):
+        rows = readiness.anchor_membership_evidence(
+            {'mbt': {'anchor_actor': 'wrong'}, 'support': {'anchor_actor': 'absent'}},
+            {'wrong': {'design': {'subtype': 'SupportVehicle'}}})
+        self.assertEqual([r['status'] for r in rows], ['mismatch', 'missing'])
+        self.assertTrue(all(not r['membership_ready'] for r in rows))
 
     def test_heavy_sniper_uses_explicit_role_not_template_mutation(self):
         units = {name: record for _, _, name, record in readiness.load_units()}

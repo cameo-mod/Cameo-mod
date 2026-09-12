@@ -51,6 +51,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 import miniyaml
 from report import h1, h2, table
+from ownership_lineage import missile_view
 
 # Measured 2026-09-07 on aec54e103. LOWER ONLY - never raise one to make a
 # batch pass; a batch that raises a row has broken more than it fixed.
@@ -78,6 +79,14 @@ def weapon_role(node) -> str:
     """
     raw = next((c.value for c in node.children if c.key == "ValidTargets"), None)
     targets = {t.strip() for t in (raw or "Ground, Water").split(",") if t.strip()}
+    # A marker such as lockon can belong to aircraft and ground actors alike.
+    # Absence of the literal Air tag does not make that selector ground-only.
+    if targets - {"Ground", "Water", "Air"}:
+        return "custom"
+    invalid = {t.strip() for t in (node.get("InvalidTargets") or "").split(",") if t.strip()}
+    targets -= invalid
+    if not targets:
+        return "custom"
     air = "Air" in targets
     ground = bool(targets & {"Ground", "Water"})
     if air and ground:
@@ -115,6 +124,7 @@ def main():
     blends = collections.Counter()
     conforming = 0
     scanned = 0
+    custom_roles = []
 
     for name in sorted(rs.weapons):
         if name.startswith("^"):
@@ -130,6 +140,9 @@ def main():
             continue
         scanned += 1
         role = weapon_role(node)
+        if role == "custom":
+            custom_roles.append((name, node.get("ValidTargets"), node.get("InvalidTargets")))
+            continue
         want = ROLE_FAMILY[role]
         for family in sorted(families):
             if family not in ROLE_FAMILIES:
@@ -158,6 +171,11 @@ def main():
 
     print(f"\n{scanned} concrete weapon(s) fly a Missile* main; "
           f"{conforming} already match their role.\n")
+    if custom_roles:
+        print(h2("custom selectors - domain verdict withheld"))
+        print(table(["weapon", "valid tags", "invalid tags"],
+                    [[name, valid or "", invalid or ""] for name, valid, invalid in custom_roles]))
+        print("These selectors need recipient-type evidence; they are not certified conforming.\n")
 
     if blends:
         print(h2("payload blends - counted, never failed"))
@@ -178,12 +196,35 @@ def main():
                          for w, r, f in sorted(findings[code])]))
             print()
 
+    equivalence_error = None
+    try:
+        view = missile_view(rs, findings)
+        print(h2('Supplemental exact owner-wrapper equivalence — not the raw gate'))
+        print('Groups only enumerated one-parent wrappers whose current ordered payload '
+              'equals the retained parent. Every concrete finding remains in the raw '
+              'counts and exit gate above; equivalent payload does not make its role correct.\n')
+        print(table(['code', 'raw findings', 'exact-equivalence groups'],
+                    [[code, str(len(findings[code])), str(view['counts'][code])]
+                     for code in ('R1', 'R2', 'R3', 'R4')]))
+        if view['duplicates']:
+            print(table(['code', 'retained parent', 'role', 'family', 'all concrete members'],
+                        [[r['code'], r['parent'], r['role'], r['family'], ', '.join(r['members'])]
+                         for r in view['duplicates']]))
+        if view['nontransparent_reviewed_wrappers']:
+            print('\nReviewed names now nontransparent — counted independently: ' +
+                  ', '.join(view['nontransparent_reviewed_wrappers']))
+    except Exception as exc:
+        equivalence_error = exc
+        print(f'\n**FAIL: supplemental wrapper equivalence unavailable:** {type(exc).__name__}: {exc}\n')
+
     over = [c for c, b in (("R1", R1_BASELINE), ("R2", R2_BASELINE),
                            ("R3", R3_BASELINE), ("R4", R4_BASELINE))
             if len(findings[c]) > b]
     if over:
         print(f"\n**FAIL: {', '.join(over)} above ratchet.** "
               "Lower a baseline as the conversion progresses; never raise one.\n")
+        return 1
+    if equivalence_error is not None:
         return 1
     return 0
 

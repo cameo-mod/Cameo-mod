@@ -33,9 +33,11 @@ ORIGINAL_SOURCES = ("OpenRA Red Alert", "OpenRA Tiberian Dawn",
 SECTIONS = (("infantry", "Infantry"), ("vehicle", "Vehicles"), ("aircraft", "Aircraft"),
             ("ship", "Naval"), ("defense", "Defenses"))
 CONF_ORDER = {"STRONG": 0, "FAIR": 1, "SHAPE": 2, "WEAK": 3}
+UNARMED_COUNTERPARTS = {('Combined Arms', 'SPY'), ('DTA Enhanced', 'SPY'), ('DTA Classic', 'SPY')}
 
 STYLE = """
-.cls{font-size:11px;color:var(--muted);white-space:nowrap}
+.cls{font-size:11px;color:var(--mut);white-space:nowrap}
+.evidence{display:block;font-size:10px;font-weight:400;color:var(--mut)}
 :root{--bg:#f7f6f3;--fg:#1b1a17;--mut:#6f6a60;--line:#ddd8cd;--card:#fffefb;--accent:#8a5a2b;
 --strong:#1f6b4a;--fair:#7a6320;--shape:#4a5a78;--weak:#8a4a3c;--bad:#a3312a;--tgt:#2e5c8a;}
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#161513;--fg:#eae6dd;
@@ -93,34 +95,191 @@ def is_original(srcs):
 
 
 def arm_note(actor, led_arms):
-    """`x3` beside a DPS the actor could fire from more than one armament.
+    """`x3` beside a damage/tick value with more than one priced armament.
 
-    The DPS shown is the HARDEST-HITTING armament, never the sum — 495 of 822 armed actors carry
+    The value shown is the HARDEST-HITTING armament, never the sum — 495 of 822 armed actors carry
     several, and `ra2_allies_ifv` carries 39 mutually-exclusive ones. Without this marker the
     reader cannot tell a single-gun tank from one whose other weapons are conditional, which is
     exactly the question the maintainer asked about `td_nod_lighttankmkii`.
     """
     n = led_arms.get(actor, 0)
-    return f'<span class="muted" title="{n} priced armaments; DPS shown is the strongest">&#215;{n}</span>' if n > 1 else ""
+    return f'<span class="muted" title="{n} priced armaments; rate uses the selected baseline armaments">&#215;{n}</span>' if n > 1 else ""
 
 
-def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, counts, klass, led_arms):
+def estimate_cell(rows, cameo_row, stat, dist, cdist, assigned_sources):
+    """Show metric evidence separately from identity matches; never relax eligibility."""
+    try:
+        _, value, used = rt.target_for(rows, cameo_row, stat, dist, cdist) if rows else (None, None, 0)
+        failure = None
+    except (KeyError, TypeError, ValueError, ZeroDivisionError) as exc:
+        value, used, failure = None, 0, type(exc).__name__
+    reasons = []
+    required = rd.ELIGIBILITY.get(stat, {}).get('requires')
+    for row in rows:
+        if rd.eligible(row, stat):
+            if row.get(stat) and not any(dist.get(row['source'], {}).get(pop, {}).get(stat)
+                    for pop in ('overall', row.get('type'))):
+                reasons.append(f"{row['source']} / {row['id']}: raw statistic available, but insufficient normalization population (minimum three usable rows)")
+            continue
+        if stat in ('w_range', 'w_dps') and (row['source'], row['id']) in UNARMED_COUNTERPARTS:
+            reasons.append(f"{row['source']} / {row['id']}: N/A, unarmed counterpart; identity match retained")
+            continue
+        if row.get('reference_base_eligible') is False:
+            reasons.append(f"{row['source']} / {row['id']}: upgraded variant, excluded from base estimates")
+            continue
+        if required and not (row.get(required) is not None and row[required] > 0):
+            reason = ('weapon estimate withheld' if required == 'w_dps'
+                      else required + ' unavailable')
+            raw_reason = row.get('w_evidence_reason') or ''
+            categories = []
+            if any(k in raw_reason for k in ('conditional', 'activation_trait', 'weapon_modifier', 'cadence_trait')):
+                categories.append('conditional firing or modifiers not fully resolved')
+            if any(k in raw_reason for k in ('unknown_warhead', 'nonconventional', 'non_damage', 'direct_undeclared')):
+                categories.append('weapon damage/effect evidence incomplete')
+            if 'multi_armament' in raw_reason:
+                categories.append('multiple weapon slots not fully resolved')
+            detail = ', '.join(categories) if required == 'w_dps' else None
+        else:
+            reason, detail = stat + ' unavailable', None
+        reasons.append(f"{row['source']} / {row['id']}: {reason}" + (f" ({detail})" if detail else ''))
+    status = f'{used}/{assigned_sources} sources used'
+    if value is None:
+        explanation = ('Calculation failed: ' + failure if failure else
+                       'No usable source projection under the current evidence rules.')
+    else:
+        explanation = 'Sources counted once after pooling eligible variants; Cameo self-vote, if eligible, is additional.'
+    tooltip = html.escape(explanation + (' ' + '; '.join(reasons) if reasons else ''), quote=True)
+    return f'<span title="{tooltip}">{num(value)}<small class="evidence">{status}</small></span>'
+
+
+def weapon_calculation_details(rows, cameo_actor=None):
+    """Expose source scalars and reviewed cycles without inventing missing delays."""
+    import peer_nominal_evidence as nominal
+    import projectile_travel_evidence as travel
+    profile = nominal.load(ROOT)
+    travel_profiles = travel.load(ROOT)
+    parts = []
+    if cameo_actor:
+        parts.append('<p><b>Current Cameo projectile comparison</b><br>' + html.escape(
+            travel.describe(travel_profiles.get(('Cameo current', cameo_actor), []))) + '</p>')
+    def value(v):
+        if isinstance(v, (int, float)):
+            return f"{v:g}"
+        return str(v) if v is not None else "unavailable"
+    for row in rows:
+        proof = profile.get((row.get('source'), row.get('id')))
+        cycle = row.get('w_cycle_evidence')
+        fields = [('weapon', row.get('weapon')),
+                  ('damage per shot (raw source units)', row.get('w_damage')),
+                  ('reload delay / ROF (source ticks)', row.get('w_reload')),
+                  ('burst', row.get('w_burst'))]
+        if proof:
+            fields = [('weapon', proof.get('weapon') or row.get('weapon')),
+                      ('uncapped damage against named target' if proof.get('comparison_basis') == 'named_target_uncapped' else
+                       'common authored damage basis per shot' if proof.get('comparison_basis') == 'common_authored_damage' else
+                       'damage per shot after spin-up' if proof.get('warmup_shots') else
+                       'mean damage per shot' if proof.get('shot_damage') else 'damage per shot (raw source units)', proof['damage']),
+                      ('reload delay (source ticks)', proof['reload']),
+                      ('burst', proof.get('burst', 1)),
+                      ('burst delays (source ticks)', proof.get('burst_delays', []))]
+        elif cycle:
+            fields.extend([('cycle emission delay model (source ticks)', cycle['burst_delays']),
+                           ('post-reload jitter/scheduling adjustment (source ticks)', cycle['post_burst_jitter'])])
+            if 'cycle_shots' in cycle:
+                fields.extend([('shots in modeled cycle (distinct from weapon Burst)', cycle['cycle_shots']),
+                               ('additional charge and scheduling ticks', cycle.get('charge_ticks', 0)),
+                               ('ammunition and charge proof', cycle.get('ammo_charge_proof'))])
+        else:
+            fields.append(('burst delays (source ticks)', row.get('w_burst_delays')))
+        fields.append(('separate projectile travel comparison',
+                       'N/A, reviewed unarmed counterpart' if (row['source'], row['id']) in UNARMED_COUNTERPARTS
+                       else travel.describe(travel_profiles.get((row.get('source'), row.get('id')), []))))
+        if proof and 'center_falloff_percent' in proof:
+            fields.extend([('raw weapon Damage', proof['raw_weapon_damage']),
+                           ('center falloff percent', proof['center_falloff_percent'])])
+        if proof and proof.get('damage_parts'):
+            fields.append(('included damage warheads', proof['damage_parts']))
+        if proof and proof.get('shot_damage'):
+            fields.extend([('authored weapon damage', proof.get('authored_damage')),
+                           ('damage sequence across the burst', proof['shot_damage']),
+                           ('per-shot firepower modifiers', proof.get('firepower_modifiers_by_shot'))])
+        if proof and proof.get('warmup_shots'):
+            fields.extend([('authored weapon damage', proof.get('authored_damage')),
+                           ('damage sequence before full spin-up', proof['warmup_shots']),
+                           ('first full-stage shot (ticks after first shot)', proof['first_full_stage_shot_tick']),
+                           ('cold nominal rate (damage/tick)', proof['cold_nominal_rate'])])
+        if proof and proof.get('delivery_path'):
+            fields.append(('launcher to impact delivery path', proof['delivery_path']))
+        if proof and proof.get('target_scenario'):
+            fields.append(('target scenario and alternative warheads (not summed)', proof['target_scenario']))
+        if proof and proof.get('basis_note'):
+            fields.append(('comparison convention', proof['basis_note']))
+        if proof and proof.get('linear_pulse_falloffs'):
+            fields.append(('pulse falloffs; rate uses full-damage region', proof['linear_pulse_falloffs']))
+        if proof and proof.get('charge_ticks_bounds'):
+            fields.append(('additional charge ticks, minimum/maximum; formula uses mean', proof['charge_ticks_bounds']))
+        if proof and proof.get('impact_count', 1) > 1:
+            fields.extend([('raw damage per impact', proof['damage_per_impact']),
+                           ('scheduled impacts per shot', proof['impact_count']),
+                           ('impact ticks after emission', proof['impact_ticks'])])
+        if row.get('range_selection'):
+            fields.append(('selected base range weapon', row['range_selection'].get('weapon')))
+        text = '; '.join(k + ': ' + value(v) for k, v in fields)
+        if proof and proof.get('dps_usable', True):
+            charge = f" + {proof['charge_ticks']:g} charge" if proof.get('charge_ticks') else ''
+            text += (f"; reviewed nominal calculation: {proof['damage']:g} × "
+                     f"{proof.get('burst', 1)} / ({proof['reload']:g} + "
+                     f"{sum(proof.get('burst_delays', [])):g}{charge}) = {proof['dps']:.6g} damage/tick")
+        elif cycle:
+            text += (f"; nominal cycle model: {cycle['damage']:g} × {cycle.get('cycle_shots', cycle['burst'])} / "
+                     f"{cycle['cycle_mean']:g} mean ticks = {cycle['dps']:.6g} damage/tick; "
+                     f"cycle bounds {cycle['cycle_min']:g}–{cycle['cycle_max']:g} ticks; DTA runtime applicability unverified")
+        else:
+            text += '; retained source rate (damage/source tick): ' + value(row.get('w_dps_raw', row.get('w_dps')))
+            text += '; cycle not independently reconstructed here'
+        text += '; model damage/tick eligible: ' + ('yes' if rd.eligible(row, 'w_dps') else 'no')
+        if row.get('reference_base_eligible') is False:
+            text += '; base-state exclusion: ' + row['reference_base_reason']
+        text += '; evidence: ' + str(row.get('w_evidence', 'unassessed'))
+        if row.get('w_evidence_reason'):
+            text += '; ' + row['w_evidence_reason']
+        if (row['source'], row['id']) in UNARMED_COUNTERPARTS:
+            text += '; weapon range and damage/tick: N/A, reviewed unarmed counterpart'
+        parts.append('<p><b>' + html.escape(str(row.get('source')) + ' / ' + str(row.get('id'))) +
+                     '</b><br>' + html.escape(text) + '</p>')
+    if not parts:
+        return ''
+    return ('<details><summary>Weapon calculation details</summary>'
+            '<p>Raw source values are not directly comparable across games. The model normalizes each source '
+            'before projection; the rate below is a source-local damage/tick estimate, not a sustained gameplay DPS claim. Unknown delays remain unavailable. '
+            'Reviewed nominal cycles exclude armor, splash totals, travel and upgrades. '
+            'The separate travel sample uses fixed endpoints without scatter, blockers or speed modifiers. '
+            'Tick calls start at the first projectile update, not the firing order; seconds depend on game speed. '
+            'Unmodeled guided/custom projectiles remain unavailable, and conditional slots are not summed.</p>' + ''.join(parts) + '</details>')
+
+
+def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, counts, klass, led_arms, hero_context=None):
     for kind, title in SECTIONS:
         group = [a for a in members if crows[a]["type"] == kind]
         if not group:
             continue
         body.append(f'<h3>{title} <span class="muted">· {len(group)}</span></h3>')
-        # ⭐ CLASS, RANGE and DPS added 2026-09-08 at the maintainer's request. The class is what
+        reference_details = []
+        generic_details = []
+        # ⭐ CLASS, RANGE and damage/tick added 2026-09-08 at the maintainer's request. The class is what
         # the virtual anchor will be derived from (EXTRAPOLATION_PROGRAM.md), so a row whose class
-        # looks wrong is a finding BEFORE any anchor is signed — and range/DPS were the two stats
+        # looks wrong is a finding BEFORE any anchor is signed — and range/damage were the two stats
         # a reference actually moves that the table never showed.
-        body.append('<table><thead><tr><th>Cameo actor</th><th>class &nbsp;today → after C46</th><th class="n">refs</th>'
-                    '<th class="n">HP now</th><th class="n">HP →</th>'
-                    '<th class="n">speed now</th><th class="n">speed →</th>'
-                    '<th class="n">range now</th><th class="n">range →</th>'
-                    '<th class="n">DPS now</th><th class="n">DPS →</th>'
-                    '<th class="n">cost now</th><th class="n">cost →</th>'
-                    '<th>reference units chosen</th></tr></thead><tbody>')
+        # Keep the map itself to the five direct actor stats requested by Aedis.
+        # Mapping confidence, class labels and generic weapon/delivery evidence
+        # are emitted below as a separate review section.
+        body.append('<table><thead><tr><th>Cameo actor</th>'
+                    '<th class="n">HP (now → reference)</th>'
+                    '<th class="n">Speed (now → reference)</th>'
+                    '<th class="n">Range (now → reference)</th>'
+                    '<th class="n">damage/tick (now → reference)</th>'
+                    '<th class="n">Cost (now → reference)</th>'
+                    '</tr></thead><tbody>')
         for a in group:
             c = crows[a]
             rows = attached.get(a) or []
@@ -156,37 +315,46 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
                     if str(r.get("id")) not in {str((d or {}).get("id")) for d in chosen.values()}))
                 chips += (f'<span class="chip fam">+{extra} variant'
                           f'{"s" if extra != 1 else ""}: {html.escape(fam[:90])}</span>')
-            def _t(stat):
-                if not rows:
-                    return None
-                try:
-                    return rt.target_for(rows, c, stat, dist, cdist)[1]
-                except (KeyError, TypeError, ValueError, ZeroDivisionError):
-                    # A stat the distribution does not carry is a BLANK CELL, never a crash and
-                    # never a zero — a zero would read as "the reference says this unit deals no
-                    # damage", which is a different and much worse claim than "not measured".
-                    return None
-            tgt = {stat: _t(stat) for stat in ("hp", "speed", "cost", "w_range", "w_dps")}
+            selected_dist, selected_cdist = (hero_context if c.get('hero') and hero_context else (dist, cdist))
+            tgt = {stat: estimate_cell(rows, c, stat, selected_dist, selected_cdist, len(srcs))
+                   for stat in ('hp', 'speed', 'cost', 'w_range', 'w_dps')}
             note = ' <span class="tag">chassis-only</span>' if a in chassis_only else ""
+            if c.get('hero'):
+                note += ' <span class="tag">hero-only model</span>'
             empty = '<span class="muted">—</span>'
+            reference_details.append((a, klass.get(a) or "—", len(srcs), chips or empty))
+            generic = weapon_calculation_details(rows, a)
+            if generic:
+                generic_details.append((a, generic))
             body.append(
                 f'<tr><td><code>{html.escape(a)}</code>{note}{flag}</td>'
-                f'<td class="cls">{html.escape(klass.get(a) or "—")}</td>'
-                f'<td class="n">{len(srcs)}</td>'
-                f'<td class="n">{num(c.get("hp"))}</td><td class="n t">{num(tgt["hp"])}</td>'
-                f'<td class="n">{num(c.get("speed"))}</td><td class="n t">{num(tgt["speed"])}</td>'
-                f'<td class="n">{num(c.get("w_range"))}</td><td class="n t">{num(tgt["w_range"])}</td>'
-                f'<td class="n">{num(c.get("w_dps"))}{arm_note(a, led_arms)}</td>'
-                f'<td class="n t">{num(tgt["w_dps"])}</td>'
-                f'<td class="n">{num(c.get("cost"))}</td><td class="n t">{num(tgt["cost"])}</td>'
-                f'<td>{chips or empty}</td></tr>')
+                f'<td class="n">{num(c.get("hp"))} <span class="muted">→</span> {tgt["hp"]}</td>'
+                f'<td class="n">{num(c.get("speed"))} <span class="muted">→</span> {tgt["speed"]}</td>'
+                f'<td class="n">{num(c.get("w_range"))} <span class="muted">→</span> {tgt["w_range"]}</td>'
+                f'<td class="n">{num(c.get("w_dps"))}{arm_note(a, led_arms)} <span class="muted">→</span> {tgt["w_dps"]}</td>'
+                f'<td class="n">{num(c.get("cost"))} <span class="muted">→</span> {tgt["cost"]}</td></tr>')
         body.append("</tbody></table>")
+        if reference_details:
+            body.append('<h4>Reference mapping and generic group evidence</h4>')
+            body.append('<p class="lede">The table above stays focused on HP, speed, range, DPS and cost. '
+                        'This section keeps class/mapping provenance and the generic weapon, projectile, '
+                        'spread, falloff and delivery evidence separate from the actor stats.</p>')
+            body.append('<table><thead><tr><th>Cameo actor</th><th>class</th>'
+                        '<th class="n">assigned refs</th><th>reference units chosen</th></tr></thead><tbody>')
+            for actor, actor_class, ref_count, chips in reference_details:
+                body.append(f'<tr><td><code>{html.escape(actor)}</code></td>'
+                            f'<td class="cls">{html.escape(actor_class)}</td>'
+                            f'<td class="n">{ref_count}</td><td>{chips}</td></tr>')
+            body.append('</tbody></table>')
+            for actor, details in generic_details:
+                body.append(f'<div><code>{html.escape(actor)}</code>{details}</div>')
 
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--faction", nargs="+", required=True)
     ap.add_argument("--out", default="report_td_ra1.html")
+    ap.add_argument("--include-heroes", action="store_true", help="Include a separate frozen hero comparison population.")
     ap.add_argument("--pending", help="JSON map actor -> PENDING class (C46). Renders the class "
                                       "cell as 'today -> after'. A trailing '?' marks a "
                                       "reclassification that OVERRIDES an existing combat class "
@@ -196,12 +364,24 @@ def main() -> int:
     peers, cameo = rd.peer_rows(), rd.cameo_rows()
     dist = rd.build_distributions(peers)
     rt.add_cost_distribution(dist, peers)
-    cdist_all = rd.build_distributions(cameo)
-    rt.add_cost_distribution(cdist_all, cameo)
-    cdist = cdist_all["Cameo"]
+    cdist = rt.cameo_context()
     doc = json.loads(ASSIGN.read_text(encoding="utf-8"))
     assignment, chassis_only = doc["assignment"], doc.get("chassis_only", {})
     attached = rt.expand_families(rt.attach(assignment, rt.peer_index(peers)), peers)
+    hero_context = None
+    if args.include_heroes:
+        hero_peers = [r for r in rd.peer_hero_rows() if r.get('hero') is True]
+        hero_dist = rd.build_distributions(hero_peers)
+        rt.add_cost_distribution(hero_dist, hero_peers)
+        hero_context = (hero_dist, rt.hero_cameo_context())
+        heroes = rd.cameo_hero_rows()
+        hero_index = {(r['source'], r['id']): r for r in hero_peers}
+        for hero in heroes:
+            attached[hero['id']] = [hero_index[(source, ref['id'])]
+                for source, ref in assignment.get(hero['id'], {}).items()
+                if ref.get('confidence') in ('STRONG', 'FAIR')
+                and (source, ref.get('id')) in hero_index]
+        cameo += heroes
     crows = {c["id"]: c for c in cameo}
     # The class comes from `class_membership.classify`, NEVER from the raw `design.class_anchor`
     # field: membership is DERIVED from `subtype` when no explicit tag exists, so reading the tag
@@ -227,6 +407,11 @@ def main() -> int:
         c, _why = cm.classify(design)
         if c:
             klass[actor] = c
+        else:
+            reason = {"no-class-exists": "anchor class pending",
+                      "no-template": "role template missing",
+                      "not-a-unit": "separate defense lane"}.get(_why, "class unresolved")
+            klass[actor] = f"{design.get('subtype') or 'Unknown role'} ({reason})"
 
     # ⚠ PENDING classes are NOT in the ledger and cannot be: `^ArmedTroopTransportTemplate` and
     # `^MobileBunkerTemplate` do not exist in yaml yet (C46), and `extract_stats` rewrites
@@ -264,7 +449,7 @@ def main() -> int:
             body.append(f'<h2 class="band">{label} '
                         f'<span class="muted">· {len(band)}</span></h2>'
                         f'<p class="lede">{note}</p>')
-            emit(body, band, crows, assignment, attached, chassis_only, dist, cdist, counts, klass, led_arms)
+            emit(body, band, crows, assignment, attached, chassis_only, dist, cdist, counts, klass, led_arms, hero_context)
 
     summary = (f'{counts["orig"]} originals · {counts["exp"]} expanded · '
                f'{counts["refs"]} references · {counts["none"]} priced by formula · '

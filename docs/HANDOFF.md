@@ -1,5 +1,46 @@
 # Cameo — THE HANDOFF
 
+## Claude and Codex continuation — 11 September 2026
+
+For the active RA1 Allies/Soviets and TD GDI/Nod work, start with the
+[current status and ownership](balance/PROJECT_STATUS_20260911.md), then the
+[grand plan](balance/GRAND_PLAN_20260911.md). The status contains the corrected
+results, open work, checkout instructions and **CL-01**, the bounded target/payload
+review reserved for Aedis's Claude. Codex retains implementation and integration.
+
+The earlier checkpoint is upstream draft PR #342 at `33a2fb2`. The later plan,
+implementation, corrected Astra evidence and portable inputs are supplied on
+`Blackrobe/Cameo-mod:codex/overnight-integration-20260910` as a linked draft
+continuation. Fetch that fork branch; fetching upstream master or the old PR
+alone does not obtain the continuation. See the status for the exact commands.
+
+The 22:37 Discord report overstated role closure: Havoc retains its existing Air
+capability, 19 target-route cases still need review, and only 13 of the 31 numerical
+proposal rows are reviewable (18 held). The full table accounts for 163 actors;
+it does not certify 163 prices. Frozen armor-channel reconstruction remains open.
+
+The [portable input packet](balance/checkpoints/20260911/claude-continuation/README.md)
+includes the four comparison inputs and all 71 original frozen ledger inputs.
+Use the current status above instead of treating dated logs below as new orders.
+This handoff authorizes no merge, game launch, build or external agent setup.
+Scheduled Discord checks are active every 15 minutes through 14 September 2026
+at 00:16:58 WIB, using a new temporary external-browser tab for each check.
+The repository-wide history follows.
+
+
+## 2026-09-10 — source PR340 warhead-family reach measurement
+
+`warhead_family_reach` measures **1,454 distinct fired weapon identities** whose
+transitive inheritance reaches a `^Warhead_*` family in the current PR340 source.
+The registry's previous value was 1,415; it is updated upward to this measured
+count with the same predicate and zero tolerance. Ownership wrappers can expose
+more distinct fired identities for existing family payloads: this increase does
+not establish newly converted weapons or additional gameplay balance work.
+Earlier dated snapshots below remain historical, and the only-UP rule remains.
+
+> **Numeric evidence refresh — 2026-09-10, combined `839cdced4` plus reopened tooling.** `multi_main_fired_weapons` = **120**; `unconverted_template_inheritors` = **1590**. Measured on this combined tree; predicates and tolerances are unchanged. The flat-health denominator correction changes diagnostics, not live weapons or prices. Earlier branch-specific snapshots remain historical.
+
+
 ## ⛔⛔ 2026-09-07 — READ THIS FIRST: the reference map, and one absolute rule
 
 **SUPERWEAPONS ARE NEVER PRICED, RESTATTED OR TOUCHED** (maintainer, verbatim: *"NEVER CHANGE
@@ -622,9 +663,9 @@ are still scheduled to change across most of the roster. Pricing now means prici
 are about to be replaced.
 
 ```
-W24  one damage warhead per weapon          184 directly fired weapons still carry 2+
- └─> W23  retrofit the legacy templates      1596 direct inheritors
- │        (2026-09-07 raw counts; 234 direct + indirect reachable stacks)
+W24  one damage warhead per weapon          122 directly fired weapons still carry 2+
+ └─> W23  retrofit the legacy templates      1592 direct inheritors
+ │        (source339 2026-09-10 raw counts; 234 was the historical 2026-09-07 reachable count)
  │        (its old "33-collision" blocker
  │         is DISSOLVED — W24 removes it)
  └─> A5   retire the remaining inline-Versus weapons onto templates
