@@ -260,6 +260,22 @@ def restore(paths: list[str]) -> None:
                    capture_output=True)
 
 
+def require_clean_checkout() -> None:
+    """Refuse the mutate/restore workflow when any worktree state is dirty.
+
+    ``main`` rewrites active weapon files, then restores them with
+    ``git checkout --`` during a dry run or a failed verification pass.  That
+    restoration is safe only when the caller has no edits to preserve.
+    """
+    result = subprocess.run(
+        ["git", "status", "--porcelain=v1", "--untracked-files=all"],
+        cwd=ROOT, check=True, capture_output=True, text=True)
+    if result.stdout.strip():
+        raise RuntimeError(
+            "refusing compatibility promotion in a dirty checkout; "
+            "use a clean temporary worktree")
+
+
 def verify(base_root: str, meta) -> list[tuple[str, dict]]:
     """Resolved-behaviour comparison against a pristine worktree.
 
@@ -295,6 +311,12 @@ def main() -> int:
         return 2
     base_root = sys.argv[sys.argv.index("--base") + 1]
     apply_it = "--apply" in sys.argv
+
+    try:
+        require_clean_checkout()
+    except RuntimeError as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 2
 
     rs0 = miniyaml.Ruleset(str(ROOT))
     paths = sorted({str(p.relative_to(ROOT)).replace("\\", "/")
