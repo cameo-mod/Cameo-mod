@@ -59,26 +59,7 @@
      "v": "100"
     },
     "name": "Alfayrus",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@BomberBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -281,32 +262,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 200,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@RearmableAircraft",
-      "types": []
-     },
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@BomberBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -417,38 +373,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 200,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@RearmableAircraft",
-      "types": []
-     },
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@BomberBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -643,26 +568,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -789,32 +695,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 105,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@HelicopterBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -917,32 +798,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 105,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@HelicopterBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -1200,20 +1056,7 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@DefenseBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1499,20 +1342,7 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@DefenseBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1812,20 +1642,7 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@DefenseBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2018,20 +1835,7 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@DefenseBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -2523,32 +2327,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@MeleeBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
@@ -2737,18 +2516,6 @@
     ],
     "resolved_firepower_modifiers": [
      {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
       "modifier": 100,
       "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#FirepowerMultiplier@ScoutInfantryBuff.Modifier",
       "trait": "FirepowerMultiplier@ScoutInfantryBuff",
@@ -2932,26 +2699,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AntiTankAntiAirInfantryBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
@@ -3066,20 +2814,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
@@ -3194,26 +2929,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
@@ -3468,32 +3184,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AntiTankAntiAirInfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
@@ -4117,32 +3808,7 @@
      "v": "100"
     },
     "name": "Apparition",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@MeleeBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4454,12 +4120,6 @@
     "resolved_firepower_modifiers": [
      {
       "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 50,
       "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#FirepowerMultiplier@DualWeapon.Modifier",
       "trait": "FirepowerMultiplier@DualWeapon",
       "types": []
@@ -4595,6 +4255,14 @@
      "v": "Heavy"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Cargo.MaxWeight",
+     "v": "5"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
      "v": "2000"
@@ -4631,18 +4299,6 @@
      "Starport"
     ],
     "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
      {
       "modifier": 50,
       "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#FirepowerMultiplier@DualWeapon.Modifier",
@@ -4749,20 +4405,7 @@
      "RAVehicle",
      "Starport"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -4886,14 +4529,7 @@
      "RAVehicle",
      "Starport"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -4989,14 +4625,7 @@
      "RAVehicle",
      "Starport"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -5126,14 +4755,7 @@
      "RAVehicle",
      "Starport"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -5266,20 +4888,7 @@
      "RAVehicle",
      "Starport"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -5379,14 +4988,7 @@
      "RAVehicle",
      "Starport"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -5593,20 +5195,7 @@
      "RAVehicle",
      "Starport"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5763,18 +5352,6 @@
     "resolved_firepower_modifiers": [
      {
       "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
-     {
-      "modifier": 50,
       "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#FirepowerMultiplier@DualWeapon.Modifier",
       "trait": "FirepowerMultiplier@DualWeapon",
       "types": []
@@ -5875,14 +5452,7 @@
      "RAVehicle",
      "Starport"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -6079,18 +5649,6 @@
     "resolved_firepower_modifiers": [
      {
       "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
-     {
-      "modifier": 50,
       "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#FirepowerMultiplier@StormEffect.Modifier",
       "trait": "FirepowerMultiplier@StormEffect",
       "types": []
@@ -6159,6 +5717,14 @@
      "v": "Medium"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Cargo.MaxWeight",
+     "v": "5"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
      "v": "1200"
@@ -6189,14 +5755,7 @@
      "RAVehicle",
      "Starport"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"

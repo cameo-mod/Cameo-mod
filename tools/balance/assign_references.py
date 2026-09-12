@@ -266,7 +266,7 @@ def shape_similarity(a, b):
 
 
 # ⛔ ORIGINALS OUTRANK VARIANTS (maintainer 2026-09-07). Cameo ships more units than the source
-# games do: `ra1_soviets_sovietmammothtank` is RA1's Mammoth, and `ra1_soviets_siegemammothtank`
+# games do: `ra1_soviets_mammothtank` is RA1's Mammoth, and `ra1_soviets_siegemammothtank`
 # is a Cameo ADD-ON built on top of it. Both normalise to something CONTAINING "mammothtank", so
 # both land in the same name bucket and the reference went to whichever won on role/cost — which
 # was the add-on. The original is the unit the reference IS; the add-on is a unit the reference
@@ -303,7 +303,7 @@ def variant_rank(cameo_id, peer_name):
     # ⛔ THE TEST IS INVERTED FROM WHAT IT WAS, and the old form was whack-a-mole. It asked
     # whether the leftover text appears in a hand-kept VARIANT_WORDS list — which holds "flame"
     # but not "fire", so `ra1_soviets_firerocketsoldier` was ranked a base unit and beat the
-    # actual `ra1_soviets_sovietrocketsoldier` to Combined Arms' E3 and DTA's E3S. The real RA1
+    # actual `ra1_soviets_rocketsoldier` to Combined Arms' E3 and DTA's E3S. The real RA1
     # rocket soldier was left holding an Impaler and a Grenadier.
     #
     # A closed list of variant words can never be complete; the list of FACTION words can, because
@@ -311,7 +311,17 @@ def variant_rank(cameo_id, peer_name):
     # anything left that is not a faction prefix makes this a VARIANT. `sovietrocketsoldier`
     # leaves "soviet" and is the base; `firerocketsoldier` leaves "fire" and is not.
     residue = tail.replace(peer, "")
-    for w in FACTION_WORDS:
+    # ⛔ DETERMINISM (found 2026-09-09, regenerating for the Katyusha override). FACTION_WORDS is
+    # a frozenset, so iteration order is hash-randomized PER PROCESS — and the words OVERLAP:
+    # "japan" is a prefix of "japanese", likewise soviet/soviets, german/germany, america/american
+    # and russia/russian. Removing the shorter one first eats the longer's tail ("japanese" ->
+    # "ese", "germany" -> "y"), so the same (actor, peer) pair scored variant 1 in one process and
+    # variant 0 in the next; `japan_japaneseflamethrower | RA2 Reborn` is the row it was caught on.
+    # Sort longest-first, lexical among equals, so the longest word always consumes first and the
+    # answer is stable whatever the seed. This cannot invent a third outcome: for any overlapping
+    # pair the only two orders that ever existed are shortest-first and longest-first, so the
+    # fixed order is one of the two the data has already been flipping between.
+    for w in sorted(FACTION_WORDS, key=lambda word: (-len(word), word)):
         residue = residue.replace(w, "")
     return 1 if not residue else 0
 
@@ -343,7 +353,7 @@ def score(cam, rec, peer, cam_cost_pct, peer_cost_pct, home, cam_shape=None, pee
     # that carries NO damage field at all sailed past it. Every unarmed reference in the corpus is
     # exactly that shape: OpenRA TD's Mobile Construction Vehicle and Combined Arms' Thief both
     # have `w_damage=None`, and both were duly assigned to armed Cameo units (an MCV to
-    # `td_gdi_mammothtankmkiii`, a Thief to `ra1_soviets_sovietrocketsoldier`) on shape similarity
+    # `td_gdi_mammothtankmkiii`, a Thief to `ra1_soviets_rocketsoldier`) on shape similarity
     # alone. A support unit sitting in the same place in its roster as a tank does in ours is a
     # coincidence of distribution, not a counterpart.
     # ⚠ AND "UNARMED" MEANS NO WEAPON AT ALL, NOT A MISSING DAMAGE NUMBER. Refusing on
@@ -507,7 +517,7 @@ def assign(only_class=None, routing=True):
     # ⛔ AN ORIGINAL CLAIMS BEFORE AN EXPANSION EVER BIDS (maintainer, 2026-09-07).
     #
     # `ra1_soviets_firerocketsoldier` — a Cameo addition — took Combined Arms' `E3` and DTA's
-    # `E3S`, both Rocket Soldiers, while `ra1_soviets_sovietrocketsoldier`, the actual RA1 unit
+    # `E3S`, both Rocket Soldiers, while `ra1_soviets_rocketsoldier`, the actual RA1 unit
     # those rows ARE, was left with an Impaler and a Grenadier. The greedy did nothing wrong by
     # its own lights: string similarity has no idea that "soviet" is a faction prefix and "fire"
     # is a variant prefix, so the expansion scores 0.867 against "Rocket Soldier" and the original
@@ -783,7 +793,17 @@ def original_actors(scope, by_source, routed_pool, routing):
 # are used exactly once. Recorded as data rather than folded into the scorer, because it is a
 # judgement about one mod's renaming, not a general principle — and a rule inferred from a single
 # case is how the reference map got into trouble in the first place.
+SHARED_COMMANDO_ACTORS = frozenset(('td_gdi_commando', 'td_nod_commando'))
+SHARED_COMMANDO_SOURCES = frozenset(('Combined Arms', 'DTA Enhanced', 'OpenRA Tiberian Dawn'))
+
 REFERENCE_OVERRIDES = {
+    # Aedis 2026-09-11 00:07: same base Commando, different Cameo upgrades.
+    **{(actor, source): 'RMBO' for actor in SHARED_COMMANDO_ACTORS for source in SHARED_COMMANDO_SOURCES},
+    # Original-unit gaps: renamed Scout Tank and RA-prefixed camouflaged pillbox.
+    ('ra1_allies_alliedlighttank', 'Combined Arms'): '1TNK',
+    ('ra1_allies_camopillbox', 'DTA Enhanced'): 'RAHBOX',
+    # Aedis 2026-09-10: original Soviet Mammoth, not the Siege expansion.
+    ("ra1_soviets_mammothtank", "DTA Enhanced"): "4TNK",
     ("ra1_allies_gunboat", "DTA Enhanced"): "DESTROYER",   # DTA "Corvette"
     ("ra1_allies_destroyer", "DTA Enhanced"): "FRIGATE",
     # ── Combined Arms, ruled by the maintainer 2026-09-07 on review of the map ──────────────
@@ -811,9 +831,9 @@ REFERENCE_OVERRIDES = {
     ("td_gdi_rocketsoldier", "DTA Enhanced"): "E3",        # DTA calls it "Bazooka"; no shared word
     ("td_nod_rocketsoldier", "DTA Enhanced"): "E3N",       # the Nod-side row of the same pair
     ("td_nod_apacheattackhelicopter", "OpenRA Tiberian Dawn"): "HELI",   # named "Apache Longbow"
-    ("ra1_soviets_actordogname", "Combined Arms"): "DOG",
-    ("ra1_soviets_actordogname", "OpenRA Red Alert"): "DOG",
-    ("ra1_soviets_actordogname", "DTA Enhanced"): "DOG",
+    ("ra1_soviets_dog", "Combined Arms"): "DOG",
+    ("ra1_soviets_dog", "OpenRA Red Alert"): "DOG",
+    ("ra1_soviets_dog", "DTA Enhanced"): "DOG",
     # Tiberian Dawn:
     ("td_gdi_archerartillery", "DTA Enhanced"): "DISCARTY",   # "Disc Launcher", GDI
     ("td_gdi_archerartillery", "Combined Arms"): "THWK",      # Tomahawk Launcher
@@ -840,7 +860,7 @@ REFERENCE_OVERRIDES = {
     # Red Alert, Soviets:
     # ⚠ CA ships TWO rows named "SAM Site" with identical faction lists — `NSAM` (Nod's) and `SAM`
     # (the Soviet one). The NAME cannot separate them and the id can, exactly like the AA Gun pair.
-    ("ra1_soviets_sovietsamsite", "Combined Arms"): "SAM",
+    ("ra1_soviets_samsite", "Combined Arms"): "SAM",
     ("td_nod_samsite", "Combined Arms"): "NSAM",
     ("ra1_soviets_zapper", "Combined Arms"): "TTRP",         # Tesla Trooper
     ("ra1_soviets_btr80", "Combined Arms"): "BTR",           # see the note below on flaktruck
@@ -861,6 +881,16 @@ REFERENCE_OVERRIDES = {
     # MFLAK frees SHILKA for the Soviet gatling tank, so both get a real row and the
     # one-row-one-actor rule holds. The maintainer named this one; it is not a workaround.
     ("ra1_allies_alliedheavyaatank", "DTA Enhanced"): "MFLAK",   # "Anti-Aircraft Truck", Allies
+
+    # ── Round six, 2026-09-09. Aedis's DM 22:33 under Blackrobe's overnight authority: the
+    # V1 Rocket Truck maps to Combined Arms' KATY and is renamed Katyusha for players. The
+    # matcher can never find this pairing by itself — CA names the row "Katyusha", which shares
+    # no word with `v1rockettruck` — and the actor currently holds no name-backed reference at
+    # all (its greedy proposals were all struck). Verified before writing, per the override
+    # contract: the row exists in the de-duplicated pool (Combined Arms, vehicle, hp 13000,
+    # cost 750, factions include `soviet`), `faction_routes.allows("ra1_soviets", row)` admits
+    # it, and NO actor held CA KATY in the regenerated assignment — so this displaces nobody.
+    ("ra1_soviets_v1rockettruck", "Combined Arms"): "KATY",
 }
 
 
@@ -884,6 +914,9 @@ def apply_overrides(result, by_source, routed_pool, routing):
         for other, srcs in result.items():
             d = srcs.get(src)
             if other != cid and d and (d.get("id") or "").upper() == pid.upper():
+                if (pid.upper() == 'RMBO' and src in SHARED_COMMANDO_SOURCES
+                        and cid in SHARED_COMMANDO_ACTORS and other in SHARED_COMMANDO_ACTORS):
+                    continue
                 del srcs[src]
         result.setdefault(cid, {})[src] = {
             "name": p.get("name"), "id": p.get("id"), "score": None, "hp": p.get("hp"),
@@ -1006,6 +1039,9 @@ def write_review(klass):
     cam = {c["id"]: c for c in rd.cameo_rows()}
     members = sorted(n for n, u in led.items()
                      if cm.classify(u.get("design") or {})[0] == klass)
+    # Global explicit overrides can survive assign(klass). They must not inflate
+    # this class's summary while the actual table only displays its members.
+    result = {actor: sources for actor, sources in result.items() if actor in members}
 
     def cost_of(n):
         v = (led[n].get("cost") or {})
@@ -1014,6 +1050,16 @@ def write_review(klass):
             return float(v)
         except (TypeError, ValueError):
             return None
+
+    def display_score(value):
+        return "—" if value is None else f"{value:.2f}"
+
+    def display_order(pair):
+        # Explicit overrides / id-agreement promotions need not have a computed
+        # match score. Keep them visible without inventing numerical evidence.
+        score = pair[1].get("score")
+        return (score is None, -(score[0] or 0) if score else 0,
+                -(score[3] or 0) if score else 0)
 
     conf = collections.Counter(m["confidence"] for v in result.values() for m in v.values())
     name_backed = sum(1 for v in result.values()
@@ -1063,11 +1109,12 @@ def write_review(klass):
               "|:--:|---|---|---|---|--:|--:|--:|"]
         for m in members:
             for src, v in sorted((result.get(m) or {}).items(),
-                                 key=lambda kv: (-kv[1]["score"][0], -kv[1]["score"][3])):
+                                 key=display_order):
                 if v["confidence"] in tier_set:
                     home = " **(home)**" if v["home"] else ""
+                    score = v.get('score') or (None,) * 5
                     L.append(f"| ☐ | {v['confidence']} | `{m}` | {src}{home} | {v['name']} | "
-                             f"{v['raw_name']:.2f} | {v['score'][3]:.2f} | {v['score'][4]:.2f} |")
+                             f"{display_score(v.get('raw_name'))} | {display_score(score[3])} | {display_score(score[4])} |")
         L.append("")
     # ⛔ WEAK ROWS ARE STRUCK BEFORE REVIEW (maintainer 2026-09-04: "I strike the WEAK rows, you
     # check the rest"). They are the greedy taking the best of a bad field — clause 9 forbids a

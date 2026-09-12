@@ -1,6 +1,6 @@
 # audit_fluent — localization drift (B12)
 
-Fluent messages loaded: **5254** — unresolved fluent refs in rules: **0**, orphaned actor-* messages: **527**
+Fluent messages loaded: **5254** — unresolved fluent refs in rules: **0**, orphaned actor-* messages: **529**
 
 
 ## F1 — rules reference fluent keys that don't exist (shows raw key in-game)
@@ -180,6 +180,7 @@ _none found_
 | actor_latin_sml |
 | actor_latin_topol |
 | actor_latin_yakovlev |
+| actor_lst |
 | actor_ltnk |
 | actor_ltnk2 |
 | actor_mech |
@@ -235,6 +236,7 @@ _none found_
 | actor_nax_slavemaster |
 | actor_nax_sturmtiger |
 | actor_nax_wirbelwind |
+| actor_nodlasercorvette |
 | actor_obli |
 | actor_oitank |
 | actor_orca |

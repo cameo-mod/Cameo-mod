@@ -142,26 +142,7 @@
     "prerequisites": [
      "~yuri_barracks"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@MeleeBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -341,6 +322,14 @@
      "v": "Scout"
     },
     "buildable": false,
+    "cargo_capacity": {
+     "src": "inherited",
+     "v": "3"
+    },
+    "cargo_types": {
+     "src": "inherited",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "inherited",
      "v": "1000"
@@ -361,20 +350,7 @@
      "v": "100"
     },
     "name": "Drive By Car",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -584,6 +560,14 @@
      "v": "Scout"
     },
     "buildable": false,
+    "cargo_capacity": {
+     "src": "inherited",
+     "v": "3"
+    },
+    "cargo_types": {
+     "src": "inherited",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "inherited",
      "v": "1000"
@@ -604,20 +588,7 @@
      "v": "100"
     },
     "name": "Drive By Car",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -797,6 +768,14 @@
      "v": "Scout"
     },
     "buildable": false,
+    "cargo_capacity": {
+     "src": "inherited",
+     "v": "3"
+    },
+    "cargo_types": {
+     "src": "inherited",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "inherited",
      "v": "1000"
@@ -817,20 +796,7 @@
      "v": "100"
     },
     "name": "Drive By Car",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -977,14 +943,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1103,14 +1062,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1229,14 +1181,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1411,14 +1356,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1598,6 +1536,14 @@
      "v": "Scout"
     },
     "buildable": false,
+    "cargo_capacity": {
+     "src": "inherited",
+     "v": "3"
+    },
+    "cargo_types": {
+     "src": "inherited",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "inherited",
      "v": "1000"
@@ -1618,20 +1564,7 @@
      "v": "100"
     },
     "name": "Drive By Car",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1811,6 +1744,14 @@
      "v": "Scout"
     },
     "buildable": false,
+    "cargo_capacity": {
+     "src": "inherited",
+     "v": "3"
+    },
+    "cargo_types": {
+     "src": "inherited",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "inherited",
      "v": "1000"
@@ -1831,20 +1772,7 @@
      "v": "100"
     },
     "name": "Drive By Car",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2024,6 +1952,14 @@
      "v": "Scout"
     },
     "buildable": false,
+    "cargo_capacity": {
+     "src": "inherited",
+     "v": "3"
+    },
+    "cargo_types": {
+     "src": "inherited",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "inherited",
      "v": "1000"
@@ -2044,20 +1980,7 @@
      "v": "100"
     },
     "name": "Drive By Car",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2237,6 +2160,14 @@
      "v": "Scout"
     },
     "buildable": false,
+    "cargo_capacity": {
+     "src": "inherited",
+     "v": "3"
+    },
+    "cargo_types": {
+     "src": "inherited",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "inherited",
      "v": "1000"
@@ -2257,20 +2188,7 @@
      "v": "100"
     },
     "name": "Drive By Car",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2450,6 +2368,14 @@
      "v": "Scout"
     },
     "buildable": false,
+    "cargo_capacity": {
+     "src": "inherited",
+     "v": "3"
+    },
+    "cargo_types": {
+     "src": "inherited",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "inherited",
      "v": "1000"
@@ -2470,20 +2396,7 @@
      "v": "100"
     },
     "name": "Drive By Car",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2663,6 +2576,14 @@
      "v": "Scout"
     },
     "buildable": false,
+    "cargo_capacity": {
+     "src": "inherited",
+     "v": "3"
+    },
+    "cargo_types": {
+     "src": "inherited",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "inherited",
      "v": "1000"
@@ -2683,20 +2604,7 @@
      "v": "100"
     },
     "name": "Drive By Car",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2876,6 +2784,14 @@
      "v": "Scout"
     },
     "buildable": false,
+    "cargo_capacity": {
+     "src": "inherited",
+     "v": "3"
+    },
+    "cargo_types": {
+     "src": "inherited",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "inherited",
      "v": "1000"
@@ -2896,20 +2812,7 @@
      "v": "100"
     },
     "name": "Drive By Car",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3089,6 +2992,14 @@
      "v": "Scout"
     },
     "buildable": false,
+    "cargo_capacity": {
+     "src": "inherited",
+     "v": "3"
+    },
+    "cargo_types": {
+     "src": "inherited",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "inherited",
      "v": "1000"
@@ -3109,20 +3020,7 @@
      "v": "100"
     },
     "name": "Drive By Car",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3302,6 +3200,14 @@
      "v": "Scout"
     },
     "buildable": false,
+    "cargo_capacity": {
+     "src": "inherited",
+     "v": "3"
+    },
+    "cargo_types": {
+     "src": "inherited",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "inherited",
      "v": "1000"
@@ -3322,20 +3228,7 @@
      "v": "100"
     },
     "name": "Drive By Car",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3515,6 +3408,14 @@
      "v": "Scout"
     },
     "buildable": false,
+    "cargo_capacity": {
+     "src": "inherited",
+     "v": "3"
+    },
+    "cargo_types": {
+     "src": "inherited",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "inherited",
      "v": "1000"
@@ -3535,20 +3436,7 @@
      "v": "100"
     },
     "name": "Drive By Car",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3728,6 +3616,14 @@
      "v": "Scout"
     },
     "buildable": false,
+    "cargo_capacity": {
+     "src": "inherited",
+     "v": "3"
+    },
+    "cargo_types": {
+     "src": "inherited",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "inherited",
      "v": "1000"
@@ -3748,20 +3644,7 @@
      "v": "100"
     },
     "name": "Drive By Car",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3971,6 +3854,14 @@
      "v": "Scout"
     },
     "buildable": false,
+    "cargo_capacity": {
+     "src": "inherited",
+     "v": "3"
+    },
+    "cargo_types": {
+     "src": "inherited",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "inherited",
      "v": "1000"
@@ -3991,20 +3882,7 @@
      "v": "100"
     },
     "name": "Drive By Car",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4184,6 +4062,14 @@
      "v": "Scout"
     },
     "buildable": false,
+    "cargo_capacity": {
+     "src": "inherited",
+     "v": "3"
+    },
+    "cargo_types": {
+     "src": "inherited",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "inherited",
      "v": "1000"
@@ -4204,20 +4090,7 @@
      "v": "100"
     },
     "name": "Drive By Car",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4397,6 +4270,14 @@
      "v": "Scout"
     },
     "buildable": false,
+    "cargo_capacity": {
+     "src": "inherited",
+     "v": "3"
+    },
+    "cargo_types": {
+     "src": "inherited",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "inherited",
      "v": "1000"
@@ -4417,20 +4298,7 @@
      "v": "100"
     },
     "name": "Drive By Car",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4610,6 +4478,14 @@
      "v": "Scout"
     },
     "buildable": false,
+    "cargo_capacity": {
+     "src": "inherited",
+     "v": "3"
+    },
+    "cargo_types": {
+     "src": "inherited",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "inherited",
      "v": "1000"
@@ -4630,20 +4506,7 @@
      "v": "100"
     },
     "name": "Drive By Car",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4823,6 +4686,14 @@
      "v": "Scout"
     },
     "buildable": false,
+    "cargo_capacity": {
+     "src": "inherited",
+     "v": "3"
+    },
+    "cargo_types": {
+     "src": "inherited",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "inherited",
      "v": "1000"
@@ -4843,20 +4714,7 @@
      "v": "100"
     },
     "name": "Drive By Car",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4976,24 +4834,6 @@
     "resolved_firepower_modifiers": [
      {
       "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@BomberBuff",
-      "types": []
-     },
-     {
-      "modifier": 50,
       "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#FirepowerMultiplier@ScoutShip.Modifier",
       "trait": "FirepowerMultiplier@ScoutShip",
       "types": []
@@ -5070,14 +4910,7 @@
      "Naval",
      "RANaval"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5109,6 +4942,10 @@
      "v": "Bomber"
     },
     "buildable": false,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Cargo.MaxWeight",
+     "v": "10"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
      "v": "4000"
@@ -5152,6 +4989,10 @@
      "v": "Bomber"
     },
     "buildable": false,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Cargo.MaxWeight",
+     "v": "10"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
      "v": "4000"
@@ -5296,20 +5137,7 @@
      "Naval",
      "RANaval"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@ScoutShip",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5415,20 +5243,7 @@
      "Naval",
      "RANaval"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@ScoutShip",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5514,14 +5329,7 @@
      "Naval",
      "RANaval"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5661,26 +5469,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@ScoutInfantryBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -5846,24 +5635,6 @@
     "resolved_firepower_modifiers": [
      {
       "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@BomberBuff",
-      "types": []
-     },
-     {
-      "modifier": 50,
       "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#FirepowerMultiplier@ra2hornet.Modifier",
       "trait": "FirepowerMultiplier@ra2hornet",
       "types": []
@@ -5896,6 +5667,14 @@
      "v": "Heavy"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Cargo.MaxWeight",
+     "v": "15"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen, Vehicle"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
      "v": "750"
@@ -6069,14 +5848,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6179,6 +5951,14 @@
      "v": "Heavy"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Cargo.MaxWeight",
+     "v": "15"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen, Vehicle"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
      "v": "750"
@@ -6269,20 +6049,7 @@
      "v": "48000"
     },
     "name": "Tesla Coil Charger",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6568,20 +6335,7 @@
      "v": "45000"
     },
     "name": "Tesla Commando",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6742,26 +6496,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AntiTankAntiAirInfantryBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -6854,20 +6589,7 @@
      "Naval",
      "RANaval"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@ScoutShip",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6987,20 +6709,7 @@
      "Naval",
      "RANaval"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@ScoutShip",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7082,18 +6791,18 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium_GroundShipExtraDamage",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
+        "spread": "150",
+        "tag": "MissileHE_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -7152,18 +6861,18 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium_GroundShipExtraDamage",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
+        "spread": "150",
+        "tag": "MissileHE_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -7215,18 +6924,18 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium_GroundShipExtraDamage",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
+        "spread": "150",
+        "tag": "MissileHE_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -7274,18 +6983,18 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium_GroundShipExtraDamage",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
+        "spread": "150",
+        "tag": "MissileHE_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -7333,26 +7042,7 @@
      "v": "100000"
     },
     "name": "MiG Bomber",
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@BomberBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7380,6 +7070,14 @@
      "v": "Heavy"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Cargo.MaxWeight",
+     "v": "15"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen, Vehicle"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
      "v": "750"
@@ -7609,18 +7307,6 @@
     },
     "name": "Robot Tank",
     "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
      {
       "modifier": 110,
       "src": "inherited",

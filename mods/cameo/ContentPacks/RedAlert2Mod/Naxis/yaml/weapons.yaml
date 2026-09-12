@@ -203,6 +203,7 @@ naxis_naxiriflesoldier_rifle:
 		Speed: 10000
 		Width: 50
 	Warhead@Bullet_Light:
+		InvalidTargets: Air
 		Damage: 4000
 naxis_naxiriflesoldier_rifle_elite:
 	Inherits: naxis_naxiriflesoldier_rifle
@@ -213,6 +214,10 @@ naxis_naxiriflesoldier_rifle_elite:
 	Projectile: Bullet
 		ContrailStartColor: FFAA55
 
+	Warhead@Bullet_Light:
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 naxis_naxiriflerecruit_rifle:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
@@ -222,6 +227,7 @@ naxis_naxiriflerecruit_rifle:
 	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
 	ValidTargets: Ground, Water
 	Warhead@Bullet_Light:
+		InvalidTargets: Air
 		PercentageScale: 5000
 		Damage: 8000
 naxis_naxiriflerecruit_rifle_elite:
@@ -230,6 +236,10 @@ naxis_naxiriflerecruit_rifle_elite:
 	Burst: 2
 	BurstDelays: 3
 
+	Warhead@Bullet_Light:
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 NaxiRifleT:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
@@ -250,7 +260,10 @@ NaxiRifleT:
 		Speed: 6666
 		Width: 55
 	Warhead@Bullet_Light:
+		InvalidTargets: Air
 		Damage: 32000
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 NaxiRifleCons:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
@@ -424,6 +437,7 @@ NaxiSniper_elite:
 	BurstDelays: 3
 
 NaxiShrek:
+	Inherits@missilerole: ^Warhead_MissileHE_Medium
 	Inherits@roleflat: ^Compatibility_MissileAP_MediumFlat
 	Inherits: ^HeavyBomb
 	Inherits@2: ^HeavyFlameWeapon
@@ -498,11 +512,18 @@ NaxiShrek:
 	-Warhead@HeavyFlameWeapon:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@TankDestroyerCannon:
-	Warhead@MissileAP_MediumFlatCompatibility:
+	-Warhead@MissileAP_Medium:
+	-Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@MissileHE_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Damage: 48000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 1665
-	-Warhead@MissileAP_Medium:
+		PercentageSpread: 50
+
 NaxiShrek_elite:
 	Inherits: NaxiShrek
 	Report: bazook1.aud
@@ -517,12 +538,18 @@ NaxiShrek_elite:
 		ContrailStartColor: E60000
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-	Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@MissileHE_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Damage: 48000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 1665
+		PercentageSpread: 50
 
 NaxiShrekCons:
+	Inherits@missilerole: ^Warhead_MissileHE_Medium
 	Inherits@roleflat: ^Compatibility_MissileAP_MediumFlat
 	Inherits: ^HeavyBomb
 	Inherits@2: ^HeavyFlameWeapon
@@ -597,11 +624,18 @@ NaxiShrekCons:
 	-Warhead@HeavyFlameWeapon:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@TankDestroyerCannon:
-	Warhead@MissileAP_MediumFlatCompatibility:
+	-Warhead@MissileAP_Medium:
+	-Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@MissileHE_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Damage: 36000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 1664
-	-Warhead@MissileAP_Medium:
+		PercentageSpread: 50
+
 NaxiShrekCons_elite:
 	Inherits: NaxiShrekCons
 	Report: bazook1.aud
@@ -616,24 +650,28 @@ NaxiShrekCons_elite:
 		ContrailStartColor: E60000
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-	Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@MissileHE_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Damage: 36000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 1664
+		PercentageSpread: 50
 
 NaxiHetzerDestroyer:
-	Inherits: ^Warhead_CannonHE_Medium
-	Inherits@2: ^Projectile_Shell_Medium
-	Inherits@3: ^Effect_CannonHE_Medium
-	Inherits@4: ^RA2TankDestroyerCannon
+	Inherits@fx: ^Effect_Explosion_Small_RA2
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@wh: ^Warhead_CannonAP
 	Report: cannon1.aud
 	ReloadDelay: 80
 	Range: 7132
 	Projectile: Bullet
 		Speed: 713
-	Warhead@CannonAP_Light:
+	Warhead@CannonAP:
 		Damage: 40000
-	-Warhead@CannonHE_Medium:
+		Heaviness: 0
 NaxiHetzerDestroyer_elite:
 	Inherits: NaxiHetzerDestroyer
 	Inherits@Elite: ^RA2EliteEffects
@@ -681,10 +719,9 @@ NaxiJadgDestroyer_elite:
 		PercentageScale: 9999
 
 NaxiAntiTankCannon:
-	Inherits: ^Warhead_CannonHE_Medium
-	Inherits@2: ^Projectile_Shell_Medium
-	Inherits@3: ^Effect_CannonHE_Medium
-	Inherits@4: ^RA2TankDestroyerCannon
+	Inherits@fx: ^Effect_Explosion_Small_RA2
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@wh: ^Warhead_CannonAP
 	ReloadDelay: 75
 	Range: 7361
 	Report: nax_hotwizer.wav
@@ -695,9 +732,9 @@ NaxiAntiTankCannon:
 		ContrailWidth: 333
 		ContrailLength: 33
 		Speed: 3333
-	Warhead@CannonAP_Light:
+	Warhead@CannonAP:
 		Damage: 28000
-	-Warhead@CannonHE_Medium:
+		Heaviness: 0
 NaxiAntiTankCannon_elite:
 	Inherits: NaxiAntiTankCannon
 	Range: 8361
@@ -1004,12 +1041,16 @@ NaxQuadCannon_AA:
 		Damage: 7000
 		PercentageScale: 2843
 
+	Warhead@ChaingunPercentage:
+		ValidTargets: Air
 NaxQuadCannon_AA_elite:
 	Inherits: NaxQuadCannon_AA
 	Range: 9052
 	Burst: 8
 	BurstDelays: 3
 
+	Warhead@ChaingunPercentage:
+		ValidTargets: Air
 SkyMageCannon:
 	Inherits: NaxQuadCannon
 	Range: 5000
@@ -1030,12 +1071,16 @@ SkyMageCannon_AA:
 	Burst: 6
 	BurstDelays: 4
 
+	Warhead@ChaingunPercentage:
+		ValidTargets: Air
 SkyMageCannon_AA_elite:
 	Inherits: SkyMageCannon_AA
 	Range: 8500
 	Burst: 8
 	BurstDelays: 3
 
+	Warhead@ChaingunPercentage:
+		ValidTargets: Air
 NaxQuadCannonTargeting:
 	Inherits: ^AADeployTargeting
 	Range: 8888
@@ -1044,10 +1089,14 @@ PortableFlak:
 	Inherits: NaxQuadCannon_AA
 	Range: 8888
 
+	Warhead@ChaingunPercentage:
+		ValidTargets: Air
 PortableFlak_elite:
 	Inherits: NaxQuadCannon_AA_elite
 	Range: 9999
 
+	Warhead@ChaingunPercentage:
+		ValidTargets: Air
 NaxFlakAG:
 	Inherits: NaxQuadCannon
 	ReloadDelay: 88
@@ -1084,6 +1133,8 @@ NaxFlakAA:
 		Width: 44
 		Inaccuracy: 888
 
+	Warhead@ChaingunPercentage:
+		ValidTargets: Air
 NaxPlanegun_elite:
 	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^Warhead_Concussion_Light
@@ -1218,7 +1269,7 @@ NaxiInterceptorGun:
 		Spread: 1
 		Falloff: 100, 0
 	Warhead@InterceptorCannonPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
+		ValidTargets: Ground, Water, Air
 		Spread: 1
 		Falloff: 100, 0
 		Damage: 3

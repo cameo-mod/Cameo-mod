@@ -64,6 +64,7 @@ import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import reference_lineages  # noqa: E402  (the shared lineage rulings — data only)
+import peer_corpus  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 LEDGER = ROOT / "docs" / "balance"
@@ -287,15 +288,24 @@ def parse_doc4():
 
 def parse_doc5():
     """[(row)] from ORIGINAL_UNITS_PEER_OPENRA.md — the two OpenRA peer crossovers."""
-    if not DOC5.exists():
-        return []
+    corpora = peer_corpus.load(ROOT)
     out, source, header = [], None, None
-    for line in DOC5.read_text(encoding="utf-8").splitlines():
+    for label, (meta, records) in corpora.items():
+        anchor = meta["rifle"]
+        for record in records:
+            xhp = record["hp"] / anchor["hp"]
+            xcost = record.get("cost") / anchor["cost"] if record.get("cost") and anchor.get("cost") else None
+            out.append({"source": label, "unit": record.get("name") or record["id"],
+                        "kind": "", "role": "", "category": "",
+                        "x_hp": xhp, "hp": xhp * RIFLE_HP,
+                        "x_cost": xcost, "cost": xcost * RIFLE_COST if xcost else None,
+                        "x_speed": None, "speed": None})
+    for line in (DOC5.read_text(encoding="utf-8") if DOC5.exists() else "").splitlines():
         if line.startswith("## "):
             source = line[3:].split("(")[0].strip()
             header = None
             continue
-        if not source or not line.startswith("|"):
+        if not source or source in corpora or not line.startswith("|"):
             continue
         cells = [c.strip().strip("`") for c in line.split("|")[1:-1]]
         if not cells:

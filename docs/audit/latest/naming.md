@@ -21,9 +21,9 @@
 | plymouth | 44/44 | 100% | 0 | 0 | 0 |
 | protoss | 72/72 | 100% | 0 | 0 | 0 |
 | ra1_allies | 62/62 | 100% | 0 | 0 | 0 |
-| ra1_soviets | 106/106 | 100% | 0 | 3 | 14 |
-| ra2_allies | 66/66 | 100% | 0 | 0 | 0 |
-| ra2_soviets | 56/56 | 100% | 0 | 1 | 0 |
+| ra1_soviets | 106/106 | 100% | 0 | 24 | 45 |
+| ra2_allies | 66/66 | 100% | 0 | 1 | 2 |
+| ra2_soviets | 56/56 | 100% | 0 | 2 | 2 |
 | schwarzermond | 59/59 | 100% | 0 | 0 | 0 |
 | steelconsortium | 60/60 | 100% | 0 | 6 | 0 |
 | td_gdi | 60/60 | 100% | 0 | 0 | 0 |
@@ -58,7 +58,7 @@
 | plymouth | 44/44 | 100% |
 | protoss | 53/53 | 100% |
 | ra1_allies | 42/42 | 100% |
-| ra1_soviets | 84/84 | 100% |
+| ra1_soviets | 87/87 | 100% |
 | ra2_allies | 51/51 | 100% |
 | ra2_soviets | 48/49 | 97% |
 | schwarzermond | 47/47 | 100% |

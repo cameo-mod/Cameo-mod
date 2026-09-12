@@ -181,7 +181,7 @@ number appears exactly as the yaml states it, with provenance:
   writes per-warhead Damage through the ONE canonical reducer
   `formula.distribute_damage`, which applies the fixed DESIGN.md law:
   **every main class warhead gets the IDENTICAL value `total ÷ N` snapped
-  to the 100-damage grid** ("all class warheads carry the identical
+  to the 10-damage grid** (Aedis2026-09-11 04:24; "all class warheads carry the identical
   value" — never proportional, never off-grid), `*FriendlyFire` and
   `*ExtraDamage` twins = **50%** of the main. Standalone `*Percentage`
   companions track **0.01% per 100 flat Damage** in their own denominator;
@@ -190,7 +190,7 @@ number appears exactly as the yaml states it, with provenance:
   folded hit exactly once, with wide intermediate arithmetic and checked final results.
   `*ExtraDamage` (the energy-weapon shield/AoE-compensation chip) is
   always 50% of the main but is **excluded from the damage total**.
-  Fine-tuning is done on the 100-Damage grid or with reload timing;
+  Fine-tuning is done on the 10-Damage grid or with reload timing;
   unconditional actor `FirepowerMultiplier` is retired as a tuning knob. A single number can therefore never be
   broadcast identically onto every warhead (the 2026-07-22 over-damage
   regression, commit `04de392b3`). `audit_warhead_split` fails the suite if
@@ -467,6 +467,17 @@ Two unit kinds are NOT priced by the class-baseline formula:
   `cost target = Σ(passenger costs at Cargo.MaxWeight)`. `check_band` must detect `Cargo:` and check
   the passenger-sum, not the class formula. (Verified: Battle Fortress MaxWeight 6 @ 4000¢.) So an
   unarmed transport is *balanced* (passenger-sum), unlike exempt support.
+
+Maintainer clarification (Aedis, 2026-09-11 04:16 WIB): use a **varied infantry
+load**, with early transports weighted toward early infantry and late/promotion
+transports toward late/promotion infantry. Existing `Cargo.InitialUnits` provides
+a concrete starting load, but validate passenger **weight**, not just headcount,
+against `Cargo.MaxWeight`; empty or overweight loads cannot establish the price.
+Retain the named load and its tier/prerequisite evidence alongside the valuation.
+For armed transports the purchase price remains the passenger sum; **K = 1.25
+belongs inside the combat formula**, giving a combat stat budget of sum / 1.25.
+It is not an extra purchase-price surcharge. No transport prices are changed by
+this clarification.
 
 ### 8.5 New guards to build (wire all into `run_all.sh`)
 

@@ -49,34 +49,34 @@ ra1_allies_upgrade_gpssatellitesupport_proxy_actor:
 	####################################################################################################
 
 ^IndustrialEfficiencyDoctrineRA1:
-	GrantConditionOnPrerequisite@ra1_soviets_doctrine_industrialefficiencydoctrine:
-		Condition: ra1_soviets_doctrine_industrialefficiencydoctrine
-		Prerequisites: ra1_soviets_doctrine_industrialefficiencydoctrine
+	GrantConditionOnPrerequisite@ra1_soviets_doctrine_industrialefficiency:
+		Condition: ra1_soviets_doctrine_industrialefficiency
+		Prerequisites: ra1_soviets_doctrine_industrialefficiency
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_industrialefficiencydoctrine
+		Upgrades: ra1_soviets_doctrine_industrialefficiency
 
 ^InfernoDoctrineRA1:
-	GrantConditionOnPrerequisite@ra1_soviets_doctrine_infernodoctrine:
-		Condition: ra1_soviets_doctrine_infernodoctrine
-		Prerequisites: ra1_soviets_doctrine_infernodoctrine
-	FirepowerMultiplier@ra1_soviets_doctrine_infernodoctrine:
-		RequiresCondition: ra1_soviets_doctrine_infernodoctrine
+	GrantConditionOnPrerequisite@ra1_soviets_doctrine_inferno:
+		Condition: ra1_soviets_doctrine_inferno
+		Prerequisites: ra1_soviets_doctrine_inferno
+	FirepowerMultiplier@ra1_soviets_doctrine_inferno:
+		RequiresCondition: ra1_soviets_doctrine_inferno
 		Modifier: 125
-	DamageMultiplier@ra1_soviets_doctrine_infernodoctrine:
-		RequiresCondition: ra1_soviets_doctrine_infernodoctrine
+	DamageMultiplier@ra1_soviets_doctrine_inferno:
+		RequiresCondition: ra1_soviets_doctrine_inferno
 		Modifier: 80
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_infernodoctrine
+		Upgrades: ra1_soviets_doctrine_inferno
 
 ^HeavyArmorDoctrineRA1:
-	DamageMultiplier@ra1_soviets_doctrine_heavyarmordoctrine:
-		RequiresCondition: ra1_soviets_doctrine_heavyarmordoctrine
+	DamageMultiplier@ra1_soviets_doctrine_heavyarmor:
+		RequiresCondition: ra1_soviets_doctrine_heavyarmor
 		Modifier: 90
-	GrantConditionOnPrerequisite@ra1_soviets_doctrine_heavyarmordoctrine:
-		Condition: ra1_soviets_doctrine_heavyarmordoctrine
-		Prerequisites: ra1_soviets_doctrine_heavyarmordoctrine
+	GrantConditionOnPrerequisite@ra1_soviets_doctrine_heavyarmor:
+		Condition: ra1_soviets_doctrine_heavyarmor
+		Prerequisites: ra1_soviets_doctrine_heavyarmor
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_heavyarmordoctrine
+		Upgrades: ra1_soviets_doctrine_heavyarmor
 
 ^VengeanceUpgradeRA1:
 	GrantConditionOnPrerequisite@ra1_soviets_upgrade_vengeance:

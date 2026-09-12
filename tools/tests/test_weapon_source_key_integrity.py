@@ -15,7 +15,7 @@ from miniyaml import Ruleset
 
 
 EXPECTED_VALUES = {
-    "FLAK-23-AG": {"ReloadDelay": "5"},
+    "ra1_soviets_flaktruck_flak_cannon": {"ReloadDelay": "5"},
     "Fremen_S": {"Report": "MGUN2.WAV"},
     "RA2GrenadePack": {"Report": "toss1.aud"},
     "SteelFortressWeapons": {
@@ -43,11 +43,11 @@ EXPECTED_PARENTS = {
         "^Projectile_Flame_Medium", "^Effect_Flame_Medium",
         "^RA2Grenade", "^RA2HeavyMissile",
     },
-    "HammerTankCannonThermobaric": {
-        "^Projectile_Flame_Medium", "HammerTankCannon",
+    "ra1_soviets_hammertank_cannon_thermobaric": {
+        "^Projectile_Flame_Medium", "ra1_soviets_hammertank_cannon",
     },
     # Upstream 4a1479b50 replaced the thermobaric role with a nuclear shell.
-    "KotinCannonNuclearShell": {
+    "ra1_soviets_kotinnucleartank_kotincannonnuclearshell": {
         "^Warhead_CannonNuke_Heavy", "^Projectile_Shell_Heavy",
         "^Effect_CannonHE_Heavy", "^Effect_Nuclear_Super",
     },
@@ -80,7 +80,7 @@ class WeaponSourceKeyIntegrityTests(unittest.TestCase):
         self.assertEqual("AreaDamage", warhead.value)
         for field, expected in {
             "PhysicalStateName": "Temperature",
-            "ValidTargets": "Ground, Water, Air",
+            "ValidTargets": "Air",
             "Damage": "24000",
             "PercentageScale": "0",
         }.items():

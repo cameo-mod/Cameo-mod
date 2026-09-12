@@ -98,12 +98,12 @@ td_nod_apacheattackhelicopter:
 	ChangesHealth@SelfHealing:
 		Step: 18
 	Armament@PRIMARY:
-		Weapon: HeliGun
+		Weapon: td_nod_apacheattackhelicopter_gun
 		LocalOffset: 128,-213,-85, 128,213,-85
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 	Armament@Upgrade:
-		Weapon: HeliMissiles
+		Weapon: td_nod_apacheattackhelicopter_missile
 		LocalOffset: 100,-250,-100, 100,250,-100
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
@@ -195,17 +195,17 @@ td_nod_venom:
 	ChangesHealth@SelfHealing:
 		Step: 11
 	Armament@Base:
-		Weapon: VenomLaser
+		Weapon: td_nod_venom_laser
 		LocalOffset: 750,0,-250
 		PauseOnCondition: !ammo
 		RequiresCondition: !td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers
 	Armament@Elite:
-		Weapon: VenomLaserInferno
+		Weapon: td_nod_venom_venomlaserinferno
 		LocalOffset: 750,0,-250
 		PauseOnCondition: !ammo
 		RequiresCondition: td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers
 	Armament@Burning:
-		Weapon: VenomLaserBurning
+		Weapon: td_nod_venom_laser_burning
 		LocalOffset: 750,0,-250
 		PauseOnCondition: !ammo
 		RequiresCondition: td_nod_upgrade_burninglasers

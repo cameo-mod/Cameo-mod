@@ -17,6 +17,7 @@ from audit_three_way_split import RAW_SPLIT_BASELINE, main_warheads
 from audit_warhead_split import BROADCAST_BASELINE
 from miniyaml import Ruleset
 from reviewed_weapon_history import HistoricalView
+from owned_weapon_history import historical_weapon_names
 
 
 ACCEPTED = {
@@ -26,7 +27,7 @@ ACCEPTED = {
 
 STATE_DEFERRED = {
     "AsianChemicalBombs", "TSSAPCCoreMissiles", "PhobosLaser",
-    "ThermobaricMaverick", "d2kCarryallChainGun_upgrade",
+    "ra1_soviets_migattackbomber_thermobaricmaverick", "d2kCarryallChainGun_upgrade",
     "d2kChainGun_upgrade", "ra1_soviets_rifleinfantry_carbine_incendiary",
     "IncendiaryM1Carbine", "LMG_ordos_upgrade", "SteelFighterRailgun",
 }
@@ -61,7 +62,7 @@ class PinnedRoleProfileConsolidationTests(unittest.TestCase):
             self.assertEqual(scale, int(str(node.get("PercentageScale"))), name)
 
     def test_full_ruleset_comparison_matches_reviewed_manifest(self):
-        self.assertEqual(set(cohort.selections(self.rules)), set(self.report["changed"]))
+        self.assertEqual(historical_weapon_names(cohort.selections(self.rules)), set(self.report["changed"]))
         self.assertEqual([], self.report["added"])
         self.assertEqual([], self.report["removed"])
         self.assertEqual(set(ACCEPTED), set(self.by_kind))
@@ -73,7 +74,7 @@ class PinnedRoleProfileConsolidationTests(unittest.TestCase):
             self.assertEqual(expected_hash, hashlib.sha256(payload).hexdigest(), kind)
 
     def test_percentage_deltas_are_only_bounded_plus_one_rounding(self):
-        self.assertEqual(set(cohort.selections(self.rules)) - {"SpecterArtilleryShellUpgrade"},
+        self.assertEqual(set(cohort.selections(self.rules)) - {"td_nod_specterartillery_specterartilleryshellupgrade"},
                          set(self.by_kind["percentage_damage"]))
         for name, groups in self.by_kind["percentage_damage"].items():
             rows = [row for group in groups for row in group]

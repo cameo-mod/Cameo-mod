@@ -95,7 +95,7 @@ CRATE:
 	GiveBaseBuilderCrateAction@ra1_soviets:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: ra1_soviets_sovietmobileconstructionvehicle
+		Units: ra1_soviets_mobileconstructionvehicle
 		ValidFactions: ra1_soviets
 	GiveBaseBuilderCrateAction@japan:
 		SelectionShares: 0
@@ -388,8 +388,8 @@ rafactj.colorpicker:
 		Image: rafactj
 		Palette: colorpicker
 
-ra1_soviets_sovietmammothtank.colorpicker:
-	Inherits: ra1_soviets_sovietmammothtank
+ra1_soviets_mammothtank.colorpicker:
+	Inherits: ra1_soviets_mammothtank
 	-Buildable:
 	-MapEditorData:
 	RenderSprites:

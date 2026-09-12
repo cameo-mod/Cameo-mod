@@ -225,20 +225,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -266,6 +253,14 @@
      "v": "Helicopter"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Cargo.MaxWeight",
+     "v": "8"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen, Vehicle"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Valued.Cost",
      "v": "3600"
@@ -361,6 +356,14 @@
      "v": "Helicopter"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Cargo.MaxWeight",
+     "v": "8"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen, Vehicle"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Valued.Cost",
      "v": "5000"
@@ -390,26 +393,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 105,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@HelicopterBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -662,26 +646,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -753,6 +718,14 @@
      "v": "1"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Cargo.MaxWeight",
+     "v": "9"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen, Vehicle"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Valued.Cost",
      "v": "5500"
@@ -782,26 +755,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -899,26 +853,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 105,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@HelicopterBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1038,26 +973,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 105,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@HelicopterBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1212,30 +1128,6 @@
     "resolved_firepower_modifiers": [
      {
       "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 105,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@HelicopterBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
-     {
-      "modifier": 50,
       "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#FirepowerMultiplier@DualWeapon.Modifier",
       "trait": "FirepowerMultiplier@DualWeapon",
       "types": []
@@ -1269,6 +1161,14 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
+        "damage": "8000",
+        "falloff": "100, 70, 30, 0",
+        "percentage_denominator": "10000",
+        "spread": "400",
+        "tag": "MissileAA_Heavy",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "125",
@@ -1288,14 +1188,6 @@
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -1305,12 +1197,14 @@
       "reloaddelay": "67",
       "slot": "Armament@SECONDARY1",
       "versus_templates": [
+       "^Warhead_MissileAA_Heavy",
        "^FlakWeapon",
        "^MediumMissile",
        "^HeavyAAWeapon",
        "^D2KRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Heavy",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "ValkyrieRockets",
@@ -1321,6 +1215,14 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
+        "damage": "8000",
+        "falloff": "100, 70, 30, 0",
+        "percentage_denominator": "10000",
+        "spread": "400",
+        "tag": "MissileAA_Heavy",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "125",
@@ -1340,14 +1242,6 @@
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -1357,12 +1251,14 @@
       "reloaddelay": "67",
       "slot": "Armament@SECONDARY2",
       "versus_templates": [
+       "^Warhead_MissileAA_Heavy",
        "^FlakWeapon",
        "^MediumMissile",
        "^HeavyAAWeapon",
        "^D2KRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Heavy",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "ValkyrieRockets",
@@ -1410,24 +1306,6 @@
      "RAAircraft"
     ],
     "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 105,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@HelicopterBuff",
-      "types": []
-     },
      {
       "modifier": 50,
       "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#FirepowerMultiplier@DualWeapon.Modifier",
@@ -1581,26 +1459,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 105,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@HelicopterBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1820,32 +1679,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 105,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@HelicopterBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2460,6 +2294,14 @@
      "v": "Steel"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml#Cargo.MaxWeight",
+     "v": "4"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml#Valued.Cost",
      "v": "1200"
@@ -2655,20 +2497,7 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@DefenseBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2789,20 +2618,7 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@DefenseBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2979,24 +2795,6 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@MeleeBuff",
-      "types": []
-     },
      {
       "modifier": 50,
       "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#FirepowerMultiplier@DualWeapon.Modifier",
@@ -3264,24 +3062,6 @@
     ],
     "resolved_firepower_modifiers": [
      {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 120,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@SniperInfantryBuff",
-      "types": []
-     },
-     {
       "modifier": 103,
       "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
       "trait": "FirepowerMultiplier",
@@ -3523,30 +3303,6 @@
     ],
     "resolved_firepower_modifiers": [
      {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@MeleeBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
-     {
       "modifier": 25,
       "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#FirepowerMultiplier@DualWeapon.Modifier",
       "trait": "FirepowerMultiplier@DualWeapon",
@@ -3687,26 +3443,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@HeroBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3833,30 +3570,6 @@
     ],
     "resolved_firepower_modifiers": [
      {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AntiTankAntiAirInfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
-     {
       "modifier": 108,
       "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
       "trait": "FirepowerMultiplier",
@@ -3894,9 +3607,9 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "falloff": "100, 45, 15, 0",
+        "spread": "150",
+        "tag": "MissileHE_Medium",
         "type": "AreaDamage"
        },
        {
@@ -3915,12 +3628,13 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7010",
       "reloaddelay": "60",
       "slot": "Armament@1",
       "versus_templates": [
+       "^Warhead_MissileHE_Medium",
        "^Compatibility_MissileAP_MediumFlat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
@@ -3929,6 +3643,7 @@
        "^MediumMissile"
       ],
       "warheads": [
+       "^Warhead_MissileHE_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "MarauderMissiles",
@@ -3939,9 +3654,9 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "falloff": "100, 45, 15, 0",
+        "spread": "150",
+        "tag": "MissileHE_Medium",
         "type": "AreaDamage"
        },
        {
@@ -3960,12 +3675,13 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.125,
       "pricing": false,
       "range": "7010",
       "reloaddelay": "60",
       "slot": "Armament@GARRISONED1",
       "versus_templates": [
+       "^Warhead_MissileHE_Medium",
        "^Compatibility_MissileAP_MediumFlat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
@@ -3974,6 +3690,7 @@
        "^MediumMissile"
       ],
       "warheads": [
+       "^Warhead_MissileHE_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "MarauderMissiles",
@@ -4009,20 +3726,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4152,24 +3856,6 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AntiTankAntiAirInfantryBuff",
-      "types": []
-     },
      {
       "modifier": 31,
       "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#FirepowerMultiplier@TripleShot.Modifier",
@@ -4434,20 +4120,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4710,26 +4383,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 120,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@SniperInfantryBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4989,30 +4643,6 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 120,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@SniperInfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
      {
       "modifier": 106,
       "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
@@ -5841,27 +5471,27 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_LightFlatCompatibility",
+        "falloff": "100, 0",
+        "spread": "43",
+        "tag": "MissileAP_Light",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "7320",
       "reloaddelay": "35",
       "requires": "!lockedon",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_MissileAP_Light",
        "^Compatibility_MissileHE_LightFlat",
-       "^Warhead_MissileHE_Medium",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "CycloneRockets",
       "weapon_class_source": "template"
@@ -5872,24 +5502,25 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_LightFlatCompatibility",
+        "falloff": "100, 0",
+        "spread": "43",
+        "tag": "MissileAP_Light",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "35",
       "requires": "lockedon",
       "slot": "Armament@lockedon",
       "versus_templates": [
+       "^Warhead_MissileAP_Light",
        "CycloneRockets"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "CycloneRocketsLockOn",
       "weapon_class_source": "template"
@@ -5929,14 +5560,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6125,12 +5749,6 @@
      "RAVehicle"
     ],
     "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
      {
       "modifier": 33,
       "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#FirepowerMultiplier@DualWeapon.Modifier",
@@ -6401,18 +6019,6 @@
     ],
     "resolved_firepower_modifiers": [
      {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
-     {
       "modifier": 33,
       "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#FirepowerMultiplier@DualWeapon.Modifier",
       "trait": "FirepowerMultiplier@DualWeapon",
@@ -6551,20 +6157,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6759,12 +6352,6 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
      {
       "modifier": 25,
       "src": "inherited",
@@ -7011,14 +6598,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7140,14 +6720,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7317,20 +6890,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"

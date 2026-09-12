@@ -134,6 +134,19 @@ class VirtualAnchorTests(unittest.TestCase):
             (ledger / "test.json").write_text(json.dumps({"sections": {"units": {"a": unit}}}), encoding="utf-8")
             self.assertEqual(len(tool.load_members(ledger)), 1)
 
+    def test_shared_ledger_actor_stays_in_its_faction_calibration_pool(self):
+        with tempfile.TemporaryDirectory() as directory:
+            ledger = pathlib.Path(directory)
+            unit = member('a')['unit']
+            unit['design'] = {'subtype': 'ScoutInfantry'}
+            (ledger / 'shared_redalert.json').write_text(json.dumps({
+                'ledger': 'shared_redalert', 'sections': {'infantry': {
+                    'ra1_allies_rifleinfantry': unit, 'unaffiliated_actor': unit}}}))
+            rows = {row['actor']: row for row in tool.load_members(ledger)}
+            self.assertEqual(rows['ra1_allies_rifleinfantry']['faction'], 'redalert_allies')
+            self.assertEqual(rows['ra1_allies_rifleinfantry']['source_ledger'], 'shared_redalert')
+            self.assertEqual(rows['unaffiliated_actor']['faction'], 'shared_redalert')
+
     def test_spec_cli_does_not_write_anchor_table(self):
         with tempfile.TemporaryDirectory() as directory:
             ledger = pathlib.Path(directory)

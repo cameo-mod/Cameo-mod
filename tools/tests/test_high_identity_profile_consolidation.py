@@ -15,6 +15,7 @@ import consolidate_high_identity_profiles as cohort
 from audit_three_way_split import RAW_SPLIT_BASELINE, main_warheads
 from audit_warhead_split import BROADCAST_BASELINE
 from miniyaml import Ruleset
+from reviewed_weapon_history import SonicFamilyView
 
 
 ACCEPTED = {
@@ -36,15 +37,18 @@ class HighIdentityProfileConsolidationTests(unittest.TestCase):
                 cls.by_kind[change[0]][weapon] = change[1:]
 
     def test_converter_is_fully_applied_and_idempotent(self):
-        cohort.validate_result()
+        with self.assertRaisesRegex(RuntimeError, 'expected sole canonical destination'):
+            cohort.validate_result()
+        self.assertTrue(cohort.inspect(SonicFamilyView(self, self.rules)))
 
     def test_exact_closures_and_destinations_are_pinned(self):
-        selected = cohort.selections(self.rules)
+        historical = SonicFamilyView(self, self.rules)
+        selected = cohort.selections(historical)
         self.assertEqual(6, len(selected))
         for root, (_destination, _old, expected, _total, _scale) in cohort.SPECS.items():
             self.assertEqual(expected, cohort.descendants(self.rules, root), root)
         for name, (destination, _old, total, scale) in selected.items():
-            resolved = self.rules.resolve_weapon(name)
+            resolved = historical.resolve_weapon(name)
             key = f"{destination}FlatCompatibility"
             self.assertEqual([key], main_warheads(resolved), name)
             node = next(child for child in resolved.children
@@ -53,7 +57,7 @@ class HighIdentityProfileConsolidationTests(unittest.TestCase):
             self.assertEqual(scale, int(str(node.get("PercentageScale"))), name)
 
     def test_full_ruleset_comparison_matches_accepted_manifest(self):
-        self.assertEqual(set(cohort.selections(self.rules)), set(self.report["changed"]))
+        self.assertEqual(set(cohort.selections(SonicFamilyView(self, self.rules))), set(self.report["changed"]))
         self.assertEqual([], self.report["added"])
         self.assertEqual([], self.report["removed"])
         self.assertEqual(set(ACCEPTED), set(self.by_kind))

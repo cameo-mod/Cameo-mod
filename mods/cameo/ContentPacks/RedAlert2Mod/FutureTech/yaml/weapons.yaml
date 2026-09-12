@@ -166,24 +166,28 @@ Future_Cryocopter_Cryo:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@LightMissilePercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@SmallArms: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@ChaingunPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@TeslaWeapon: SpreadDamage
@@ -194,12 +198,14 @@ Future_Cryocopter_Cryo:
 		Damage: 1000
 		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@LaserWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@PhysicalStateCryo1: ApplyPhysicalState
@@ -246,16 +252,37 @@ Future_Cryocopter_Cryo:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
 	Warhead@Cryo_MediumFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 12600
 		PercentageScale: 0
 		-PhysicalStateName:
 		-PhysicalStateScale:
 
+	Warhead@EMPUnit:
+		InvalidTargets: Shielded, Air
 Future_Turret_Cryo:
 	Inherits: Future_Cryocopter_Cryo
 	Range: 7124
 
+	Warhead@Cryo_MediumFlatCompatibility:
+		InvalidTargets: Air
+	Warhead@LightMissilePercentage:
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
+	Warhead@SmallArmsPercentage:
+		InvalidTargets: Air
+	Warhead@ChaingunPercentage:
+		InvalidTargets: Air
+	Warhead@FlakWeaponPercentage:
+		InvalidTargets: Air
+	Warhead@EMPUnit:
+		InvalidTargets: Shielded, Air
+	Warhead@TeslaWeaponPercentage:
+		InvalidTargets: Air
+	Warhead@LaserWeaponPercentage:
+		InvalidTargets: Air
 CryoLegionnaireAttack:
 	Inherits@roleflat: ^Compatibility_Cryo_LightFlat
 	Inherits: ^LightMissile
@@ -290,6 +317,7 @@ CryoLegionnaireAttack:
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
 	Warhead@LightMissilePercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
@@ -298,6 +326,7 @@ CryoLegionnaireAttack:
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
@@ -306,6 +335,7 @@ CryoLegionnaireAttack:
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
 	Warhead@ChaingunPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
@@ -314,6 +344,7 @@ CryoLegionnaireAttack:
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
@@ -327,6 +358,7 @@ CryoLegionnaireAttack:
 		ValidRelationships: Neutral, Enemy
 		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
@@ -335,6 +367,7 @@ CryoLegionnaireAttack:
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
@@ -380,12 +413,17 @@ CryoLegionnaireAttack:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
 	Warhead@Cryo_LightFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 13600
 		PercentageScale: 0
 		-PhysicalStateName:
 		-PhysicalStateScale:
 
+	Warhead@ShieldHit:
+		InvalidTargets: Air
+	Warhead@EMPUnit:
+		InvalidTargets: Shielded, Air
 FutureMicrotorpedos:
 	Inherits@finalmain: ^Compatibility_MissileAP_HeavyFlat
 	Inherits: ^RA2Grenade
@@ -454,6 +492,7 @@ AthenaLaser:
 		Damage: 32000
 		ValidRelationships: Neutral, Enemy
 	Warhead@LightMissilePercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 16
 		ValidRelationships: Neutral, Enemy
@@ -462,6 +501,7 @@ AthenaLaser:
 		Damage: 32000
 		ValidRelationships: Neutral, Enemy
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 16
 		ValidRelationships: Neutral, Enemy
@@ -470,6 +510,7 @@ AthenaLaser:
 		Damage: 32000
 		ValidRelationships: Neutral, Enemy
 	Warhead@ChaingunPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 16
 		ValidRelationships: Neutral, Enemy
@@ -478,6 +519,7 @@ AthenaLaser:
 		Damage: 32000
 		ValidRelationships: Neutral, Enemy
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 16
 		ValidRelationships: Neutral, Enemy
@@ -491,6 +533,7 @@ AthenaLaser:
 		ValidRelationships: Neutral, Enemy
 		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 16
 		ValidRelationships: Neutral, Enemy
@@ -499,6 +542,7 @@ AthenaLaser:
 		Damage: 32000
 		ValidRelationships: Neutral, Enemy
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 16
 		ValidRelationships: Neutral, Enemy
@@ -560,9 +604,14 @@ AthenaLaser:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
 	Warhead@Laser_HeavyFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 193600
 		PercentageScale: 0
+	Warhead@ShieldHit:
+		InvalidTargets: Air
+	Warhead@EMPUnit:
+		InvalidTargets: Shielded, Air
 AthenaVisualLaser:
 	ReloadDelay: 4
 	Range: 16000
@@ -872,53 +921,143 @@ FutureEnforcerShotgun:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	Warhead@GrenadePercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 1
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 1
 	-Warhead@TankDestroyerCannon:
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 1
 	Warhead@CannonHE_Medium:
+		InvalidTargets: Air
 		Damage: 2000
 	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 1
 	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 1
 	Warhead@ShotgunShrapnelEnemy:
+		InvalidTargets: Air
 		Damage: 4000
 		PercentageScale: 0
 	-Warhead@ShotgunGrenadeEnemy:
 
+	Warhead@ShotgunGrenadeAlly:
+		InvalidTargets: Air
+	Warhead@ShotgunShrapnelAlly:
+		InvalidTargets: Air
+	Warhead@ShotgunTankDestroyer:
+		InvalidTargets: Air
+	Warhead@ShotgunSmallArms:
+		InvalidTargets: BulletImmune, Air
+	Warhead@ShotgunChaingun:
+		InvalidTargets: Air
 FutureEnforcerShotgun_elite:
 	Inherits: FutureEnforcerShotgun
 	Range: 4000
 	Burst: 2
 	BurstDelays: 3
 	Warhead@ShotgunShrapnelEnemy:
+		InvalidTargets: Air
 		Damage: 4000
 		PercentageScale: 0
 
+	Warhead@CannonHE_Medium:
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
+	Warhead@GrenadePercentage:
+		InvalidTargets: Air
+	Warhead@ShrapnelWeaponPercentage:
+		InvalidTargets: Air
+	Warhead@TankDestroyerCannonPercentage:
+		InvalidTargets: Air
+	Warhead@SmallArmsPercentage:
+		InvalidTargets: Air
+	Warhead@ChaingunPercentage:
+		InvalidTargets: Air
+	Warhead@ShotgunGrenadeAlly:
+		InvalidTargets: Air
+	Warhead@ShotgunShrapnelAlly:
+		InvalidTargets: Air
+	Warhead@ShotgunTankDestroyer:
+		InvalidTargets: Air
+	Warhead@ShotgunSmallArms:
+		InvalidTargets: BulletImmune, Air
+	Warhead@ShotgunChaingun:
+		InvalidTargets: Air
 FutureEnforcerShotgunDeployed:
 	Inherits: FutureEnforcerShotgun
 	ReloadDelay: 65
 	Range: 6150
 	Warhead@ShotgunShrapnelEnemy:
+		InvalidTargets: Air
 		Damage: 4000
 		PercentageScale: 0
 
+	Warhead@CannonHE_Medium:
+		InvalidTargets: Air
+	Warhead@GrenadePercentage:
+		InvalidTargets: Air
+	Warhead@ShrapnelWeaponPercentage:
+		InvalidTargets: Air
+	Warhead@TankDestroyerCannonPercentage:
+		InvalidTargets: Air
+	Warhead@SmallArmsPercentage:
+		InvalidTargets: Air
+	Warhead@ChaingunPercentage:
+		InvalidTargets: Air
+	Warhead@ShotgunGrenadeAlly:
+		InvalidTargets: Air
+	Warhead@ShotgunShrapnelAlly:
+		InvalidTargets: Air
+	Warhead@ShotgunTankDestroyer:
+		InvalidTargets: Air
+	Warhead@ShotgunSmallArms:
+		InvalidTargets: BulletImmune, Air
+	Warhead@ShotgunChaingun:
+		InvalidTargets: Air
 FutureEnforcerShotgunDeployed_elite:
 	Inherits: FutureEnforcerShotgunDeployed
 	Range: 7150
 	Burst: 2
 	BurstDelays: 3
 	Warhead@ShotgunShrapnelEnemy:
+		InvalidTargets: Air
 		Damage: 4000
 		PercentageScale: 0
 
+	Warhead@CannonHE_Medium:
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
+	Warhead@GrenadePercentage:
+		InvalidTargets: Air
+	Warhead@ShrapnelWeaponPercentage:
+		InvalidTargets: Air
+	Warhead@TankDestroyerCannonPercentage:
+		InvalidTargets: Air
+	Warhead@SmallArmsPercentage:
+		InvalidTargets: Air
+	Warhead@ChaingunPercentage:
+		InvalidTargets: Air
+	Warhead@ShotgunGrenadeAlly:
+		InvalidTargets: Air
+	Warhead@ShotgunShrapnelAlly:
+		InvalidTargets: Air
+	Warhead@ShotgunTankDestroyer:
+		InvalidTargets: Air
+	Warhead@ShotgunSmallArms:
+		InvalidTargets: BulletImmune, Air
+	Warhead@ShotgunChaingun:
+		InvalidTargets: Air
 FutureJavelinRockets:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
@@ -1058,24 +1197,36 @@ ShotgunAttackRobotGun:
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 1000
 	Warhead@GrenadePercentage: AreaDamagePercentage
+		InvalidTargets: Air
+		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 2000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 1000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
+		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 2000
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		InvalidTargets: Air
+		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@CannonHE_Medium:
+		InvalidTargets: Air
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@SmallArms: SpreadDamage
 		Damage: 2000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Medium:
+		InvalidTargets: Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
@@ -1088,6 +1239,7 @@ ShotgunAttackRobotGun:
 	-Warhead@SmallArms:
 	-Warhead@TankDestroyerCannon:
 	Warhead@Bullet_LightFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 8000
 		PercentageScale: 0
@@ -1100,6 +1252,27 @@ ShotgunAttackRobotGun_elite:
 	Burst: 2
 	BurstDelays: 3
 
+	Warhead@Bullet_LightFlatCompatibility:
+		-InvalidTargets:
+		ValidTargets: Ground, Water
+	Warhead@CannonHE_Medium:
+		-InvalidTargets:
+		ValidTargets: Ground, Water
+	Warhead@GrenadePercentage:
+		-InvalidTargets:
+		ValidTargets: Ground, Water
+	Warhead@ShrapnelWeaponPercentage:
+		-InvalidTargets:
+		ValidTargets: Ground, Water
+	Warhead@TankDestroyerCannonPercentage:
+		-InvalidTargets:
+		ValidTargets: Ground, Water
+	Warhead@SmallArmsPercentage:
+		-InvalidTargets:
+		ValidTargets: Ground, Water, Air
+	Warhead@Bullet_Medium:
+		-InvalidTargets:
+		ValidTargets: Ground, Water, Air
 CannonAttackRobotGun:
 	Inherits@collapseflat: ^Compatibility_CannonHE_MediumFlat
 	Inherits: ^TankDestroyerCannon
@@ -1346,6 +1519,7 @@ FutureTankCannons:
 	Inherits@4: ^TeslaWeapon
 	Inherits@5: ^MagicWeapon
 	Inherits@6: ^SteelHeavyCannon
+	ValidTargets: Ground, Water
 	ReloadDelay: 65
 	Burst: 2
 	BurstDelays: 10
@@ -1368,71 +1542,72 @@ FutureTankCannons:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 		Damage: 100000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 		Damage: 50
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 		Damage: 100000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 		Damage: 50
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 		Damage: 100000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 		Damage: 50000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 		Damage: 50
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 		Damage: 100000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 		Damage: 50000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 		Damage: 50
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MagicWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 		Damage: 100000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MagicWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 		Damage: 50
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@CannonHE_Heavy:
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 		Damage: 100000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
+		InvalidTargets: Shielded, Air
 		Damage: 100000
 		Spread: 1000
 	Warhead@Effect: CreateEffect
 		Explosions: drneutronexp
 		ImpactSounds: AUFutur_Wea1FireV3a.wav,AUFutur_Wea1FireV3b.wav,AUFutur_Wea1FireV3c.wav,AUFutur_Wea1FireV3d.wav,AUFutur_Wea1FireV3e.wav
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 	-Warhead@MagicExtraDamage:
 	-Warhead@MagicWeapon:
 	-Warhead@MediumChemicalWeapon:
@@ -1445,6 +1620,9 @@ FutureTankCannons:
 		ValidTargets: Ground, Water
 		Damage: 550888
 		PercentageScale: 0
+
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 
 FutureTankCannons_elite:
 	Inherits: FutureTankCannons
@@ -1488,6 +1666,7 @@ FutureHarbingerCannon:
 		FriendlyFireSpread: 50
 		Damage: 4000
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@HeavyFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -1497,12 +1676,14 @@ FutureHarbingerCannon:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 4000
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Ship, Air
 		Damage: 2
 	Warhead@TeslaChargedWeapon: SpreadDamage
 		Damage: 4000
@@ -1510,6 +1691,7 @@ FutureHarbingerCannon:
 		Damage: 2000
 		DamageTypes: Tesla
 	Warhead@TeslaChargedWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 4000
@@ -1529,12 +1711,14 @@ FutureHarbingerCannon:
 	Warhead@RailgunWeapon: SpreadDamage
 		Damage: 4000
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@HeavyMissile: SpreadDamage
 		Damage: 4000
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@CannonHE_Heavy:
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@Effect1:
 		Explosions: blue_big_frag
@@ -1566,6 +1750,18 @@ FutureHarbingerCannon_elite:
 	Inherits: FutureHarbingerCannon
 	Range: 7030
 	Burst: 4
+	Warhead@CannonHE_Heavy:
+		ValidTargets: Ground, Water, Air
+	Warhead@HeavyChemicalWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+	Warhead@HeavyFlameWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+	Warhead@TeslaChargedWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+	Warhead@RailgunWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+	Warhead@HeavyBombPercentage:
+		ValidTargets: Ground, Ship, Air
 
 HarbingerChainguns:
 	Inherits@wh: ^Warhead_Flak_Medium

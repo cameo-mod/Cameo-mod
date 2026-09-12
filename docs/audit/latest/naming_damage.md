@@ -2,10 +2,10 @@
 
 | code | pathology | count | ratchet |  |
 |---|---|---|---|---|
-| N1 | DOUBLED_ID (file carries one actor id twice) | 25 | 25 | PASS |
-| N2 | CROSS_FACTION (file carries two factions' ids) | 16 | 16 | PASS |
-| N3 | FLUENT_LEAK (a fluent key became an id) | 5 | 5 | PASS |
-| N4 | REDUNDANT_WORD (faction named twice) | 345 | 345 | PASS |
+| N1 | DOUBLED_ID (file carries one actor id twice) | 22 | 25 | PASS |
+| N2 | CROSS_FACTION (file carries two factions' ids) | 0 | 16 | PASS |
+| N3 | FLUENT_LEAK (a fluent key became an id) | 4 | 5 | PASS |
+| N4 | REDUNDANT_WORD (faction named twice) | 324 | 345 | PASS |
 | N5 | DOTTED_FACTION (dot carries a faction, not a variant) | 109 | 109 | PASS |
 | N6 | HYPHEN (DESIGN rule 9) | 1 | 1 | PASS |
 
@@ -15,8 +15,8 @@
 | faction | N1 | N2 | N3 | N4 | N5 | N6 |
 |---|---|---|---|---|---|---|
 | asianalliance | 0 | 0 | 0 | 73 | 27 | 0 |
-| ra1_soviets | 19 | 0 | 5 | 69 | 0 | 0 |
-| ra1_allies | 0 | 16 | 0 | 55 | 0 | 0 |
+| ra1_soviets | 16 | 0 | 4 | 48 | 0 | 0 |
+| ra1_allies | 0 | 0 | 0 | 55 | 0 | 0 |
 | ra2_allies | 0 | 0 | 0 | 51 | 1 | 0 |
 | japan | 0 | 0 | 0 | 49 | 0 | 0 |
 | latinsyndicate | 0 | 0 | 0 | 19 | 18 | 0 |

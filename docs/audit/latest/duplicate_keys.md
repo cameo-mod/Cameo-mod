@@ -1,6 +1,6 @@
 # audit_duplicate_keys — duplicate keys in one node (ambiguous merges)
 
-Files scanned: **650** — D1 ambiguous inheritance labels: **0**, D2 merged duplicates: **258**
+Files scanned: **652** — D1 ambiguous inheritance labels: **0**, D2 merged duplicates: **258**
 
 
 ## D1 — duplicate inheritance labels with different parent values

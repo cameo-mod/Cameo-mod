@@ -176,30 +176,6 @@
     ],
     "resolved_firepower_modifiers": [
      {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 105,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@HelicopterBuff",
-      "types": []
-     },
-     {
       "modifier": 12,
       "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/aircraft.yaml#FirepowerMultiplier@Cryo.Modifier",
       "trait": "FirepowerMultiplier@Cryo",
@@ -540,24 +516,6 @@
     ],
     "resolved_firepower_modifiers": [
      {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
       "modifier": 50,
       "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/aircraft.yaml#FirepowerMultiplier@DualWeapon.Modifier",
       "trait": "FirepowerMultiplier@DualWeapon",
@@ -742,26 +700,7 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 115,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@FighterBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -851,24 +790,6 @@
     },
     "name": "Hornet",
     "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AircraftBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@BomberBuff",
-      "types": []
-     },
      {
       "modifier": 50,
       "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/aircraft.yaml#FirepowerMultiplier@ra2hornet.Modifier",
@@ -1111,18 +1032,6 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@DefenseBuffs",
-      "types": []
-     },
      {
       "modifier": 48,
       "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/buildings.yaml#FirepowerMultiplier@Cryo.Modifier",
@@ -1433,6 +1342,14 @@
      "v": "Concrete"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/buildings.yaml#Cargo.MaxWeight",
+     "v": "1"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/buildings.yaml#Cargo.Types",
+     "v": "Infantry"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/buildings.yaml#Valued.Cost",
      "v": "800"
@@ -1461,20 +1378,7 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@DefenseBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2016,32 +1920,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@MeleeBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2205,18 +2084,6 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
      {
       "modifier": 110,
       "src": "inherited",
@@ -2436,30 +2303,6 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@HeroBuff",
-      "types": []
-     },
      {
       "modifier": 50,
       "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
@@ -3174,26 +3017,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 125,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@MeleeBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3526,26 +3350,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AntiTankAntiAirInfantryBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -3675,18 +3480,6 @@
      {
       "modifier": 110,
       "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
       "trait": "FirepowerMultiplier@RobotControllable",
       "types": []
      }
@@ -3794,12 +3587,6 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
      {
       "modifier": 110,
       "src": "inherited",
@@ -3931,12 +3718,6 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
      {
       "modifier": 110,
       "src": "inherited",
@@ -4308,18 +4089,6 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
      {
       "modifier": 110,
       "src": "inherited",
@@ -4924,14 +4693,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5010,14 +4772,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5132,14 +4887,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5367,18 +5115,6 @@
      {
       "modifier": 110,
       "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
       "trait": "FirepowerMultiplier@RobotControllable",
       "types": []
      },
@@ -5541,14 +5277,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5662,12 +5391,6 @@
      "RAVehicle"
     ],
     "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
      {
       "modifier": 110,
       "src": "inherited",
@@ -5885,20 +5608,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6053,14 +5763,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6216,12 +5919,6 @@
      "RAVehicle"
     ],
     "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
      {
       "modifier": 110,
       "src": "inherited",
@@ -6460,6 +6157,14 @@
      "v": "Light"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Cargo.MaxWeight",
+     "v": "5"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Cargo.Types",
+     "v": "Infantry, Hacker, Fremen"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Valued.Cost",
      "v": "1700"
@@ -6488,14 +6193,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6693,18 +6391,6 @@
      "RAVehicle"
     ],
     "resolved_firepower_modifiers": [
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
      {
       "modifier": 110,
       "src": "inherited",
@@ -7376,20 +7062,21 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_LightFlatCompatibility",
+        "falloff": "100, 0",
+        "spread": "43",
+        "tag": "MissileAP_Light",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6170",
       "reloaddelay": "20",
       "requires": "ifv-miss && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missile",
       "versus_templates": [
+       "^Warhead_MissileAP_Light",
        "^Compatibility_MissileHE_LightFlat",
        "^Warhead_CannonHE_Medium",
        "^Warhead_MissileHE_Light",
@@ -7397,11 +7084,12 @@
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light",
        "^Warhead_CannonHE_Medium",
        "^Warhead_MissileHE_Light"
       ],
       "weapon": "RA2MultiHoverMissile",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [],
@@ -7549,31 +7237,33 @@
       "damage_warheads": [
        {
         "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_LightFlatCompatibility",
+        "falloff": "100, 45, 15, 0",
+        "spread": "100",
+        "tag": "MissileHE_Light",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5760",
       "reloaddelay": "28",
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primary",
       "versus_templates": [
+       "^Warhead_MissileHE_Light",
        "^Compatibility_MissileAP_LightFlat",
        "^Warhead_Arrow_Light",
        "^RA2LightMissile",
        "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
+       "^Warhead_MissileHE_Light",
        "^Warhead_Arrow_Light",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "primary",
@@ -7582,29 +7272,31 @@
       "damage_warheads": [
        {
         "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_LightFlatCompatibility",
+        "falloff": "100, 45, 15, 0",
+        "spread": "100",
+        "tag": "MissileHE_Light",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6760",
       "reloaddelay": "28",
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryelite",
       "versus_templates": [
+       "^Warhead_MissileHE_Light",
        "RA2HoverMissile",
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
+       "^Warhead_MissileHE_Light",
        "^Warhead_Arrow_Light",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "primary",
@@ -7615,27 +7307,30 @@
         "damage": "12000",
         "falloff": "100, 70, 30, 0",
         "spread": "200",
-        "tag": "MissileAA_LightFlatCompatibility",
+        "tag": "MissileAA_Light",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8640",
       "reloaddelay": "28",
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryAA",
       "versus_templates": [
+       "^Warhead_MissileAA_Light",
        "^Compatibility_MissileAA_LightFlat",
        "RA2HoverMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Light",
+       "^Warhead_MissileHE_Light",
        "^Warhead_Arrow_Light",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "primary",
@@ -7646,53 +7341,58 @@
         "damage": "12000",
         "falloff": "100, 70, 30, 0",
         "spread": "200",
-        "tag": "MissileAA_LightFlatCompatibility",
+        "tag": "MissileAA_Light",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9640",
       "reloaddelay": "28",
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryeliteAA",
       "versus_templates": [
+       "^Warhead_MissileAA_Light",
        "^Compatibility_MissileAA_LightFlat",
        "RA2HoverMissile_elite"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Light",
+       "^Warhead_MissileHE_Light",
        "^Warhead_Arrow_Light",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "primary",
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_LightFlatCompatibility",
+        "falloff": "100, 0",
+        "spread": "43",
+        "tag": "MissileAP_Light",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5120",
       "reloaddelay": "25",
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryThunderbolt",
       "versus_templates": [
+       "^Warhead_MissileAP_Light",
        "^Compatibility_MissileHE_LightFlat",
        "^Warhead_MissileHE_Heavy",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light",
        "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "RA2ThunderboltMissile",
@@ -7704,24 +7404,26 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_LightFlatCompatibility",
+        "falloff": "100, 0",
+        "spread": "43",
+        "tag": "MissileAP_Light",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6760",
       "reloaddelay": "25",
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryeliteThunderbolt",
       "versus_templates": [
+       "^Warhead_MissileAP_Light",
        "RA2ThunderboltMissile",
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light",
        "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "RA2ThunderboltMissile_elite",
@@ -7732,27 +7434,30 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_LightFlatCompatibility",
+        "falloff": "100, 70, 30, 0",
+        "spread": "200",
+        "tag": "MissileAA_Light",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8640",
       "reloaddelay": "25",
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryAAThunderbolt",
       "versus_templates": [
+       "^Warhead_MissileAA_Light",
        "RA2ThunderboltMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Light",
+       "^Warhead_MissileAP_Light",
        "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "RA2ThunderboltMissile_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "primary",
@@ -7760,56 +7465,61 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_LightFlatCompatibility",
+        "falloff": "100, 70, 30, 0",
+        "spread": "200",
+        "tag": "MissileAA_Light",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9640",
       "reloaddelay": "25",
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryeliteAAThunderbolt",
       "versus_templates": [
+       "^Warhead_MissileAA_Light",
        "RA2ThunderboltMissile_elite"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Light",
+       "^Warhead_MissileAP_Light",
        "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "RA2ThunderboltMissile_AA_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "4",
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_LightFlatCompatibility",
+        "falloff": "100, 0",
+        "spread": "43",
+        "tag": "MissileAP_Light",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7170",
       "reloaddelay": "20",
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileelite",
       "versus_templates": [
+       "^Warhead_MissileAP_Light",
        "RA2MultiHoverMissile",
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light",
        "^Warhead_CannonHE_Medium",
        "^Warhead_MissileHE_Light"
       ],
       "weapon": "RA2MultiHoverMissile_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "4",
@@ -7818,27 +7528,30 @@
         "damage": "4000",
         "falloff": "100, 70, 30, 0",
         "spread": "200",
-        "tag": "MissileAA_LightFlatCompatibility",
+        "tag": "MissileAA_Light",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "20",
       "requires": "ifv-miss && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileAA",
       "versus_templates": [
+       "^Warhead_MissileAA_Light",
        "^Compatibility_MissileAA_LightFlat",
        "RA2MultiHoverMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Light",
+       "^Warhead_MissileAP_Light",
        "^Warhead_CannonHE_Medium",
        "^Warhead_MissileHE_Light"
       ],
       "weapon": "RA2MultiHoverMissile_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "4",
@@ -7847,52 +7560,57 @@
         "damage": "4000",
         "falloff": "100, 70, 30, 0",
         "spread": "200",
-        "tag": "MissileAA_LightFlatCompatibility",
+        "tag": "MissileAA_Light",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "20",
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileeliteAA",
       "versus_templates": [
+       "^Warhead_MissileAA_Light",
        "^Compatibility_MissileAA_LightFlat",
        "RA2MultiHoverMissile_elite"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Light",
+       "^Warhead_MissileAP_Light",
        "^Warhead_CannonHE_Medium",
        "^Warhead_MissileHE_Light"
       ],
       "weapon": "RA2MultiHoverMissile_AA_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_LightFlatCompatibility",
+        "falloff": "100, 0",
+        "spread": "43",
+        "tag": "MissileAP_Light",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5120",
       "reloaddelay": "25",
       "requires": "ifv-miss && !rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileThunderbolt",
       "versus_templates": [
+       "^Warhead_MissileAP_Light",
        "^Compatibility_MissileHE_LightFlat",
        "^Warhead_MissileHE_Heavy",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light",
        "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "RA2MultiThunderboltMissile",
@@ -7903,24 +7621,26 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_LightFlatCompatibility",
+        "falloff": "100, 0",
+        "spread": "43",
+        "tag": "MissileAP_Light",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7170",
       "reloaddelay": "25",
       "requires": "ifv-miss && rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileeliteThunderbolt",
       "versus_templates": [
+       "^Warhead_MissileAP_Light",
        "RA2MultiThunderboltMissile",
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light",
        "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "RA2MultiThunderboltMissile_elite",
@@ -7930,54 +7650,60 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_LightFlatCompatibility",
+        "falloff": "100, 70, 30, 0",
+        "spread": "200",
+        "tag": "MissileAA_Light",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "25",
       "requires": "ifv-miss && !rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileAAThunderbolt",
       "versus_templates": [
+       "^Warhead_MissileAA_Light",
        "RA2MultiThunderboltMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Light",
+       "^Warhead_MissileAP_Light",
        "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "RA2MultiThunderboltMissile_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "4",
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_LightFlatCompatibility",
+        "falloff": "100, 70, 30, 0",
+        "spread": "200",
+        "tag": "MissileAA_Light",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "25",
       "requires": "ifv-miss && rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileeliteAAThunderbolt",
       "versus_templates": [
+       "^Warhead_MissileAA_Light",
        "RA2MultiThunderboltMissile_elite"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Light",
+       "^Warhead_MissileAP_Light",
        "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "RA2MultiThunderboltMissile_AA_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
@@ -8058,6 +7784,14 @@
      "v": "Scout"
     },
     "buildable": true,
+    "cargo_capacity": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cargo_types": {
+     "src": "inherited",
+     "v": "Infantry"
+    },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#Valued.Cost",
      "v": "950"
@@ -8093,18 +7827,6 @@
      "RAVehicle"
     ],
     "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@PromotionUnit",
-      "types": []
-     },
      {
       "modifier": 150,
       "src": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml#FirepowerMultiplier@futuretech_salamanderifv.Modifier",

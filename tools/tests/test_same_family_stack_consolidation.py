@@ -10,10 +10,12 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 REPORT = ROOT / "docs/audit/latest/multi_main_bulk1_comparison.json"
 sys.path.insert(0, str(ROOT / "tools" / "audit"))
 sys.path.insert(0, str(ROOT / "tools" / "balance"))
+sys.path.insert(0, str(ROOT / "tools" / "rename"))
 
 import consolidate_adjacent_family_stacks as adjacent
 import consolidate_same_family_stacks as bullets
 from miniyaml import Ruleset
+from safe_rename import load_map
 
 
 ACCEPTED = {
@@ -51,7 +53,17 @@ class SameFamilyStackConsolidationTests(unittest.TestCase):
             selected.update({root, *closure})
         for root, (_, _, closure) in adjacent.SPECS.items():
             selected.update({root, *closure})
-        self.assertEqual(selected, set(self.report["changed"]))
+        # Preserve historical change hashes; translate only reviewed current IDs.
+        renamed, _ = load_map(ROOT / 'tools/rename/rename_map_ra1_soviets_owned_weapons_20260910.yaml')
+        historical = {new: old for old, new in renamed.items()}
+        guarded = json.loads((ROOT / 'tools/tests/fixtures/guarded_owned_names_20260910.json').read_text(encoding='utf-8'))
+        historical.update({new: old for route in guarded['routes'].values() for old, new in route.items()})
+        ifv = json.loads((ROOT / 'tools/tests/fixtures/ifv_owned_names_20260910.json').read_text(encoding='utf-8'))
+        historical.update({new: old for route in ifv['routes'].values() for old, new in route.items()})
+        td = json.loads((ROOT / 'tools/tests/fixtures/td_owned_names_20260910.json').read_text(encoding='utf-8'))
+        historical.update({new: old for route in td['routes'].values() for old, new in route.items()})
+        self.assertEqual({historical.get(name, name) for name in selected},
+                         set(self.report["changed"]))
 
     def test_percentage_rounding_delta_never_exceeds_one_hp(self):
         deltas = []
@@ -113,7 +125,7 @@ class SameFamilyStackConsolidationTests(unittest.TestCase):
     def test_role_and_target_contract_hazards_remain_deferred(self):
         deferred = {
             "RA220mmrapid", "CabalCyborgChaingun", "TSDevoutChainguns",
-            "CommandoRocketLauncher", "RocketsRA", "SheridanMissiles",
+            "td_gdi_havoc_rocket", "RocketsRA", "SheridanMissiles",
             "CabalRocketCyborgRockets", "CabalRocketCyborgRocketsUpgraded",
             "TSBikeMissile", "TigerCannon",
             "Type97Cannon", "TSZoneHellfireSonic",

@@ -401,7 +401,7 @@ SCDevourerAA:
 	-Warhead@shrapnel:
 	Warhead@Cloud: SpawnSmokeParticle
 		Sequences: purple_toxins
-		Weapon: AnthraxCloudPurpleLarge
+		Weapon: sc_zerg_devourer_acidcloud_aa
 		ValidTargets: Air
 		Duration: 100
 		Count: 1
@@ -420,9 +420,22 @@ SCDevourerAA:
 	-Warhead@DevourerChemicalAirCompatibility:
 	-Warhead@MutaliskCompatibility:
 	Warhead@Chemical_MediumFlatCompatibility:
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Air
 		Damage: 44000
 		PercentageScale: 0
+
+	Warhead@SwordWeaponPercentage:
+		ValidTargets: Air
+	Warhead@SmallArmsPercentage:
+		ValidTargets: Air
+	Warhead@ArrowWeaponPercentage:
+		ValidTargets: Air
+sc_zerg_devourer_acidcloud_aa:
+	Inherits: AnthraxCloudPurpleLarge
+	ValidTargets: Air
+	# SmokeParticle impacts directly: the warhead mask controls collateral.
+	Warhead@Toxic_Light:
+		ValidTargets: Air
 
 ScourgeExplosion:
 	Inherits: SCScourgeExplosion
@@ -1000,6 +1013,7 @@ BehemothShoot:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		PhysicalStateName: Temperature
@@ -1011,12 +1025,14 @@ BehemothShoot:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@HeavyMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Grenade: SpreadDamage
@@ -1026,6 +1042,7 @@ BehemothShoot:
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
 	Warhead@GrenadePercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -1035,12 +1052,14 @@ BehemothShoot:
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@HeavyBomb: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	-Warhead@Effect1:
@@ -1064,10 +1083,13 @@ BehemothShoot:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@HeavyBomb:
 	Warhead@MissileHE_Heavy:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		PercentageScale: 0
 
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 zerg_kerrigan:
 	Inherits@wh: ^Warhead_Melee_Medium
 	Inherits@proj: ^Projectile_InstantHit
@@ -1123,14 +1145,17 @@ Spore_AA:
 	Warhead@MediumMissile: SpreadDamage
 		Damage: 12000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
+		ValidTargets: Air
 		Damage: 6
 	Warhead@Chaingun: SpreadDamage
 		Damage: 12000
 	Warhead@ChaingunPercentage: AreaDamagePercentage
+		ValidTargets: Air
 		Damage: 6
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 12000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Air
 		Damage: 6
 	Warhead@Effect: CreateEffect
 		Explosions: small_frag
@@ -1141,7 +1166,7 @@ Spore_AA:
 	-Warhead@Chaingun:
 	-Warhead@FlakWeapon:
 	Warhead@Chemical_Medium:
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Air
 		Damage: 36000
 		PercentageScale: 0
 
@@ -1157,11 +1182,14 @@ Tentacle:
 	Range: 7680
 	Report: zlufir00.aud
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 3
 	Warhead@ChaingunPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 3
 	-Warhead@CannonHE_Heavy:
 	Warhead@SwordWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 3
 	Warhead@Effect: CreateEffect
 		Explosions: sctentacle
@@ -1173,10 +1201,13 @@ Tentacle:
 	-Warhead@SwordWeapon:
 	-Warhead@SwordWeaponFriendlyFire:
 	Warhead@Melee_HeavyFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground
 		Damage: 25000
 		PercentageScale: 2396
 
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 DroneAttack:
 	Inherits: ^WorkerAttack
 	Report: zerglinghit.wav
@@ -1204,6 +1235,7 @@ DefilerPlague:
 	Projectile: Bullet
 		Speed: 900
 	Warhead@Chemical_Heavy:
+		ValidTargets: Ground, Water, Air
 		Damage: 30000
 	#Warhead@2: GrantExternalCondition
 	#	Range: 3c512

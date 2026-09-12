@@ -143,6 +143,7 @@ NEEDS_A_NEW_CLASS = {
     "fighter": "air",
     "spaceship": "air",
     "scoutship": "naval",
+    "antiairship": "naval",
     "artilleryship": "naval",
     "battleship": "naval",
     "harvester": "economy -- FORMULA_V2 §6c does not cover it",

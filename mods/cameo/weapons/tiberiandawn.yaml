@@ -179,7 +179,7 @@ FlametankExplode:
 		ImpactSounds: xplobig6.aud
 
 227mm:
-	Inherits@wh: ^Warhead_MissileHE_Medium
+	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileHE_Medium
 	ValidTargets: Ground, Water, Air
@@ -202,7 +202,7 @@ FlametankExplode:
 		Speed: 500
 		ContrailStartColor: FF884400
 		ContrailEndColor: 000000FF
-	Warhead@MissileHE_Medium:
+	Warhead@MissileAP_Medium:
 		Damage: 8000
 	Warhead@Effect: CreateEffect
 		Explosions: med_frag
@@ -226,6 +226,7 @@ HighVAP:
 	Range: 6720
 	StartBurstReport: gun8.aud
 	Warhead@Bullet_Medium:
+		InvalidTargets: Air
 		Damage: 4000
 ChemTibAtomic:
 	Inherits: Atomic

@@ -87,7 +87,12 @@ def load_members(ledger):
                 cls, reason = class_membership.classify(unit.get("design") or {})
                 if cls is None or not fit_class.eligible_virtual_member(unit):
                     continue
-                members.append(dict(actor=actor, faction=doc.get("ledger", path.stem),
+                ledger_name = doc.get("ledger", path.stem)
+                # Shared content files are storage locations, not the actor's
+                # faction. Keep canonical pilot actors in their faction pool.
+                faction = next((name for prefix, name in FACTION_ALIASES.items()
+                                if actor.startswith(prefix + "_")), ledger_name)
+                members.append(dict(actor=actor, faction=faction, source_ledger=ledger_name,
                     cls=cls, membership=reason, unit=unit,
                     derived=(derived.get("sections", {}).get(section_name, {}).get(actor) or {}),
                     **stat_values(unit)))

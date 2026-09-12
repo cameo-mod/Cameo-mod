@@ -174,8 +174,8 @@ MatadorLaser:
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
 CycloneRockets:
+	Inherits@heldmissilerole: ^Warhead_MissileAP_Light
 	Inherits@roleflat: ^Compatibility_MissileHE_LightFlat
-	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
 	Report: cycloneshoot1.wav, cycloneshoot2.wav, cycloneshoot3.wav
@@ -215,6 +215,10 @@ CycloneRockets:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
+	-Warhead@MissileHE_LightFlatCompatibility:
+	Warhead@MissileAP_Light: AreaDamage
+		Damage: 4000
+		PercentageScale: 9975
 
 CycloneRocketsLockOn:
 	Inherits: CycloneRockets
@@ -223,8 +227,12 @@ CycloneRocketsLockOn:
 
 	Projectile: Missile
 		VerticalRateOfTurn: 40
+	Warhead@MissileAP_Light: AreaDamage
+		Damage: 4000
+		PercentageScale: 9975
 
 MarauderMissiles:
+	Inherits@missilerole: ^Warhead_MissileHE_Medium
 	Inherits@collapseflat: ^Compatibility_MissileAP_MediumFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -260,14 +268,19 @@ MarauderMissiles:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 5
-
 	-Warhead@TankDestroyerCannon:
 	-Warhead@MediumMissile:
-	Warhead@MissileAP_MediumFlatCompatibility:
+	-Warhead@CannonHE_Heavy:
+	-Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@MissileHE_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Damage: 30000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 3330
-	-Warhead@CannonHE_Heavy:
+		PercentageSpread: 50
 
 SCTyr:
 	Inherits@collapseflat: ^Compatibility_CannonHE_HeavyFlat
@@ -745,22 +758,26 @@ VultureGrenade:
 	Warhead@SmallArms: SpreadDamage
 		Damage: 4000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 2
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 4000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 2
 	Warhead@Grenade: SpreadDamage
 		Damage: 4000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 2000
 	Warhead@GrenadePercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 2
 	Warhead@CannonHE_Medium:
 		Damage: 4000
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 4000
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 2
 	Warhead@Effect: CreateEffect
 		ImpactSounds: tvuHit00.aud,tvuHit01.aud,tvuHit02.aud
@@ -770,11 +787,14 @@ VultureGrenade:
 	-Warhead@SmallArms:
 	-Warhead@TankDestroyerCannon:
 	Warhead@Demolition_LightFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 20000
 		PercentageScale: 1995
 	-Warhead@CannonHE_Medium:
 
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 SiegeTankCannon:
 	Inherits@finalmain: ^Compatibility_CannonHE_HeavyFlat
 	Inherits@wh: ^Warhead_CannonHE_Heavy
@@ -816,12 +836,14 @@ SiegeTankSiegeCannon:
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@NuclearWarheadPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@LightMissile: SpreadDamage
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@LightMissilePercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@LightChemicalWeapon: AreaDamage
@@ -831,6 +853,7 @@ SiegeTankSiegeCannon:
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MediumChemicalWeapon: AreaDamage
@@ -840,6 +863,7 @@ SiegeTankSiegeCannon:
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyChemicalWeapon: AreaDamage
@@ -849,6 +873,7 @@ SiegeTankSiegeCannon:
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@LightFlameWeapon: AreaDamage
@@ -860,6 +885,7 @@ SiegeTankSiegeCannon:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
@@ -873,6 +899,7 @@ SiegeTankSiegeCannon:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
@@ -886,6 +913,7 @@ SiegeTankSiegeCannon:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
@@ -897,6 +925,7 @@ SiegeTankSiegeCannon:
 		Damage: 5000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@GrenadePercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -906,30 +935,35 @@ SiegeTankSiegeCannon:
 		Damage: 5000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyCannon: SpreadDamage
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MediumCannon: SpreadDamage
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	-Warhead@Effect1:
@@ -956,9 +990,12 @@ SiegeTankSiegeCannon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@TankDestroyerCannon:
 	Warhead@CannonHE_HeavyFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 140000
 		PercentageScale: 0
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 GoliathMG:
 	Inherits: ^Warhead_Concussion_Light
 	Inherits@2: ^Warhead_CannonHE_Heavy
@@ -1004,6 +1041,7 @@ GoliathRockets_AA:
 		ContrailStartWidth: 50
 		ContrailEndWidth: 100
 	Warhead@MissileAA_Heavy:
+		ValidTargets: Air
 		Damage: 30000
 	Warhead@EffectWater: CreateEffect
 		Explosions: small_splash
@@ -1195,6 +1233,7 @@ WraithRockets_AA:
 		ContrailStartWidth: 50
 		ContrailEndWidth: 100
 	Warhead@MissileAA_Heavy:
+		ValidTargets: Air
 		Damage: 10000
 	Warhead@EffectWater: CreateEffect
 		Explosions: small_splash
@@ -1213,8 +1252,13 @@ WraithLaser:
 		ContrailLength: 5
 		ContrailStartColorUsePlayerColor: true
 	Warhead@Laser_Heavy:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 16000
+	Warhead@Laser_Heavy_ExtraDamage:
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 SunDogRockets:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy_D2K
@@ -1261,6 +1305,7 @@ SunDogLaser:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 ValkyrieRockets:
+	Inherits@missilerole: ^Warhead_MissileAA_Heavy
 	Inherits: ^FlakWeapon
 	Inherits@2: ^MediumMissile
 	Inherits@3: ^HeavyAAWeapon
@@ -1283,23 +1328,34 @@ ValkyrieRockets:
 		AllowSnapping: true
 		ContrailStartColor: 4488FF88
 		ContrailEndColor: 88BBFF44
-	Warhead@MissileAP_Heavy:
-		Damage: 8000
-		PercentageScale: 2500
-		PercentageDenominator: 10000
 	-Warhead@FlakWeapon:
 	-Warhead@MediumMissile:
 	-Warhead@HeavyAAWeapon:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Air
 		Damage: 1
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
+		ValidTargets: Air
 		Damage: 1
 	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Air
 		Damage: 1
 	Warhead@EffectWater: CreateEffect
 		Explosions: small_splash
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
+	-Warhead@MissileAP_Heavy:
+	Warhead@MissileAA_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Damage: 8000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 2500
+		PercentageSpread: 50
+		PercentageDenominator: 10000
+
 WyvernRockets:
 	Inherits@collapseflat: ^Compatibility_MissileAP_HeavyFlat
 	Inherits: ^Warhead_CannonHE_Heavy
@@ -1693,6 +1749,7 @@ MissileTurret:
 		ContrailStartWidth: 50
 		ContrailEndWidth: 100
 	Warhead@MissileAA_Heavy:
+		ValidTargets: Air
 		Damage: 20000
 	Warhead@EffectWater: CreateEffect
 		Explosions: small_splash

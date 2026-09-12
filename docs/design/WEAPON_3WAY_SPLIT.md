@@ -1,5 +1,7 @@
 # WEAPON 3-WAY SPLIT — warhead / projectile / effect layers (2026-08-02)
 
+> **Numeric evidence refresh — 2026-09-10, combined `839cdced4` plus reopened tooling.** `w24_multi_main_fed` = **290**. Measured on this combined tree; predicates and tolerances are unchanged. The flat-health denominator correction changes diagnostics, not live weapons or prices. Earlier branch-specific snapshots remain historical.
+
 > **Current authority (2026-09-06):** [DESIGN §11b.1](../DESIGN.md#11b1-tightened-and-enforced-binding-maintainer-2026-09-06)
 > replaces this document's older two-warhead/four-inherit model. Use one main
 > warhead and the current three-layer policy, including its narrow mechanic/twin

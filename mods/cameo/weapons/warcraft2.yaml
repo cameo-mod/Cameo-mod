@@ -167,12 +167,14 @@ SiegeEngineCannon:
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@NuclearWarheadPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@LightMissile: SpreadDamage
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@LightMissilePercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@LightChemicalWeapon: AreaDamage
@@ -182,6 +184,7 @@ SiegeEngineCannon:
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MediumChemicalWeapon: AreaDamage
@@ -191,6 +194,7 @@ SiegeEngineCannon:
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyChemicalWeapon: AreaDamage
@@ -200,6 +204,7 @@ SiegeEngineCannon:
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@LightFlameWeapon: AreaDamage
@@ -211,6 +216,7 @@ SiegeEngineCannon:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
@@ -224,6 +230,7 @@ SiegeEngineCannon:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
@@ -237,6 +244,7 @@ SiegeEngineCannon:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
@@ -248,6 +256,7 @@ SiegeEngineCannon:
 		Damage: 5000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@GrenadePercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -257,30 +266,35 @@ SiegeEngineCannon:
 		Damage: 5000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyCannon: SpreadDamage
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MediumCannon: SpreadDamage
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	-Warhead@Effect1:
@@ -309,9 +323,12 @@ SiegeEngineCannon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@TankDestroyerCannon:
 	Warhead@CannonHE_HeavyFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 140000
 		PercentageScale: 0
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 wc2demolitionsquadMelee:
 	Inherits: wc2footmanslice
 
@@ -727,6 +744,7 @@ wc2lightshipFire:
 			Concrete: 50
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 	Warhead@Percentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
 		Damage: 8
 		Spread: 128
 		Delay: 5

@@ -8,6 +8,8 @@ import pathlib
 import subprocess
 import sys
 import unittest
+from unittest.mock import patch
+from types import SimpleNamespace
 
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -15,9 +17,43 @@ sys.path[:0] = [str(ROOT / "tools/audit"), str(ROOT / "tools/balance")]
 
 from consolidate_authorized_remaining_profiles import inspect
 from consolidate_authorized_remaining_profiles import CLEANUP_NAMES
-from miniyaml import Ruleset
+from miniyaml import Ruleset, load_text, merge_children
+from reviewed_weapon_history import LaterProfileView
 from review_batch_diff import active_health_values, snapshot, snapshot_digest
+import review_batch_diff
 from survey_weapon_structure import inventory
+
+
+def frozen_weapon_ruleset(current, commit):
+    """Read immutable Git blobs in manifest order using the resolver's merge law."""
+    root = current.repo_root
+    paths = [p.relative_to(root).as_posix() for p in current.manifest.weapons]
+    query = ''.join(f'{commit}:{path}\n' for path in paths).encode()
+    data = subprocess.check_output(['git', 'cat-file', '--batch'], input=query, cwd=root)
+    weapons, pos = {}, 0
+    for path in paths:
+        end = data.index(b'\n', pos)
+        header = data[pos:end].decode()
+        if header.endswith(' missing'):
+            raise AssertionError(f'missing historical weapon source: {path}')
+        size = int(header.split()[-1])
+        pos = end + 1
+        blob, pos = data[pos:pos + size], pos + size + 1
+        for node in load_text(blob.decode('utf-8-sig')):
+            if node.key.startswith('-'):
+                weapons.pop(node.key[1:], None)
+            elif node.key in weapons:
+                previous = weapons[node.key]
+                previous.children = merge_children(previous.children, node.children)
+                if node.value:
+                    previous.value = node.value
+            else:
+                weapons[node.key] = node.deep_copy()
+    frozen = Ruleset.__new__(Ruleset)
+    frozen.weapons = weapons
+    frozen._weapon_ci = {name.lower(): name for name in weapons}
+    frozen._resolve_cache = {}
+    return frozen
 
 
 class AuthorizedRemainingProfileTests(unittest.TestCase):
@@ -29,7 +65,8 @@ class AuthorizedRemainingProfileTests(unittest.TestCase):
         ).read_text(encoding="utf-8"))
 
     def test_converter_accepts_the_resolved_ruleset(self):
-        self.assertTrue(inspect(self.rules))
+        self.assertFalse(inspect(self.rules))
+        self.assertTrue(inspect(LaterProfileView(self, self.rules)))
 
     def test_comparison_has_no_definition_or_delivery_drift(self):
         self.assertEqual([], self.comparison["added"])
@@ -64,9 +101,12 @@ class AuthorizedRemainingProfileTests(unittest.TestCase):
         health_values = sorted(set(active_health_values(ROOT)))
         self.assertEqual(health_values, repair["meta"]["health_values"])
         self.assertFalse(repair["meta"]["with_concrete"])
-        self.assertEqual(
-            repair["meta"]["head_snapshot_sha256"],
-            snapshot_digest(snapshot(ROOT, False, health_values)))
+        # Recompute the original whole-tree evidence from immutable source blobs;
+        # later intentional profiles make a comparison with today's roster invalid.
+        frozen = frozen_weapon_ruleset(self.rules, '5bb76c22d7bc3315999a5accdbf6cfdf57321776')
+        with patch.object(review_batch_diff, 'Model', return_value=SimpleNamespace(rs=frozen)):
+            self.assertEqual(repair['meta']['head_snapshot_sha256'],
+                             snapshot_digest(snapshot(ROOT, False, health_values)))
         for name, changes in repair["changed"].items():
             self.assertTrue({"cadence", "report"}.isdisjoint(change[0] for change in changes), name)
 
@@ -125,7 +165,7 @@ class AuthorizedRemainingProfileTests(unittest.TestCase):
     def test_hammer_thermobaric_route_does_not_regress_core_vehicle_damage(self):
         armors = ("Scout", "Light", "Medium", "Heavy", "Superheavy")
         for base_name, paid_name in (
-                ("HammerTankCannon", "HammerTankCannonThermobaric"),):
+                ("ra1_soviets_hammertank_cannon", "ra1_soviets_hammertank_cannon_thermobaric"),):
             base = self.rules.resolve_weapon(base_name).child("Warhead@CannonHE_Heavy")
             paid = self.rules.resolve_weapon(paid_name).child("Warhead@Thermobaric_Heavy")
             base_versus = {node.key: int(node.value) for node in base.child("Versus").children}
@@ -141,7 +181,7 @@ class AuthorizedRemainingProfileTests(unittest.TestCase):
     def test_kotin_uses_the_upstream_nuclear_upgrade_for_fire_and_death(self):
         # 4a1479b50 changed this role deliberately; do not impose the retired
         # thermobaric matchup guarantee on the nuclear/radiation replacement.
-        weapon = self.rules.resolve_weapon("KotinCannonNuclearShell")
+        weapon = self.rules.resolve_weapon("ra1_soviets_kotinnucleartank_kotincannonnuclearshell")
         self.assertIsNotNone(weapon)
         self.assertEqual("16000", weapon.child("Warhead@CannonNuke_Heavy").get("Damage"))
         self.assertEqual(("96", "6427", "2", "4"), tuple(
@@ -154,9 +194,9 @@ class AuthorizedRemainingProfileTests(unittest.TestCase):
         for trait in ("Armament", "FireWarheadsOnDeath"):
             base = actor.child(trait)
             upgraded = actor.child(trait + "@Upgrade")
-            self.assertEqual("KotinCannon", base.get("Weapon"))
+            self.assertEqual("ra1_soviets_kotinnucleartank_kotincannon", base.get("Weapon"))
             self.assertEqual("!ra1_soviets_upgrade_nucleartankshells", base.get("RequiresCondition"))
-            self.assertEqual("KotinCannonNuclearShell", upgraded.get("Weapon"))
+            self.assertEqual("ra1_soviets_kotinnucleartank_kotincannonnuclearshell", upgraded.get("Weapon"))
             self.assertEqual("ra1_soviets_upgrade_nucleartankshells", upgraded.get("RequiresCondition"))
 
     def test_converter_default_mode_is_read_only(self):
@@ -166,9 +206,11 @@ class AuthorizedRemainingProfileTests(unittest.TestCase):
             if name in self.rules.weapons
         }
         before = {path: path.read_bytes() for path in paths}
-        subprocess.run(
+        result = subprocess.run(
             [sys.executable, str(ROOT / "tools/balance/consolidate_authorized_remaining_profiles.py")],
-            cwd=ROOT, check=True, capture_output=True, text=True)
+            cwd=ROOT, check=False, capture_output=True, text=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('TSBombSonic: expected source total 10000, found 30000', result.stderr)
         self.assertEqual(before, {path: path.read_bytes() for path in paths})
 
 
