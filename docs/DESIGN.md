@@ -1044,6 +1044,52 @@ they exist.** The binding order of operations:
 ⛔ Steps 4 and 5 are IMPOSSIBLE before 2 and 3. `apply_balance --confirm` being a no-op is not
 a bug to route around; it is this ordering being enforced. Signed-off anchors today: **0**.
 
+### R3 measured, 2026-09-12 — `tools/balance/fit_baseband.py`, report `docs/balance/baseband_fit.md`
+
+Step 3 is governed by two facts about the band that are geometric, not statistical, and both
+change what "fit the band" can mean.
+
+⛔ **`cost0` CANNOT MOVE THE BAND.** The ratio is `class price / cost0`, and
+`class_baseline_estimators` multiplies every estimator BY `cost0`, so it cancels exactly:
+ratio = `[(h+s+r+d)/4 + (h·s+r·d)/2 + h·s·r·d] / 3`. Re-pricing a baseline changes what the
+class costs and moves **nothing** into band. Only `hp0`, `speed0`, `range0_wdist` and `dps0`
+do, through `h = hp/hp0` and its siblings.
+
+⛔ **THE BAND DOES NOT SURROUND THE BASELINE — IT STARTS AT IT.** At the baseline
+h=s=r=d=1, so the ratio is exactly **1.000**; the 2×HP/2×DPS verifier is exactly **2.500**. So
+100%–250% means *"from the baseline to its verifier"*, and "every member in band" requires the
+baseline to sit at or **below** the weakest member. The decay is steep and has no shoulder: a
+member weaker by 10% on every axis already prices at **78.9%**, under the 75% floor.
+
+⚠ **Therefore a MEDIAN-derived baseline can never satisfy the band** — it puts half the class
+below 100% by construction. `derive_virtual_anchor.py` proposes reference-backed class medians,
+which correctly answers *"what is typical"* and cannot answer *"where does the band start"*.
+Those are different questions; step 2 currently supplies the first to step 3.
+
+**Measured over 404 priced members in 24 formula-priced classes:** 115 (28%) in the sweet spot
+today; re-scaling every class baseline uniformly reaches only **271 (67%)**, short of the ≥80%
+target. **21 of 24 classes span more than the 2.5× envelope** — up to **33.7×** (`melee`).
+
+⭐ **But the spread is concentrated, and that is the finding.** Every class has a CORE — the
+largest subset able to share one baseline — and every core already fits: spans **1.4×–2.5×**,
+holding **290 of 404** members. The remaining **114** sit outside their own class core, and the
+extremes are plainly classification defects rather than pricing ones: `futuretech_blackwidow`
+is in **`melee`** with `Range: 9000`; `corrino_buggy` is in **`mbt`** (25k HP, 100 DPS, cost
+300); `cabal_enlighted` carries **11,184 DPS** in `heavy_infantry` against a flamer's 181.
+`steelconsortium_hoverboardgrenadier` prices at **3080%** of its class baseline.
+
+**So the band is a MISCLASSIFICATION DETECTOR, and step 3 is blocked on membership triage, not
+on baseline arithmetic.** Each of the 114 is one of three things and only a maintainer can say
+which: misclassified, a legitimate higher tier needing a tech-tier gate, or genuinely
+mis-stated. Fitting a baseline before that triage fits it to a population that does not belong
+together. `anchor_readiness.py` says the same from the other end — its "statistically
+indistinguishable" class pairs are *"separated by what they SHOOT AT, not by their stats"*.
+
+⚠ **`fit_baseband.py` cross-checks its own recomputation against `check_band.py` and refuses
+to be believed without it.** The first run disagreed on **257 of 404** ratios: the anchor's
+tier must come from the tier map via `anchor_actor`, not from the anchor's own `tech_tier`
+field. Every number above is from the run that matches 404/404.
+
 **R4 — Delete the `^Warhead_*_Flat` shims; the existing templates already cover it.** DONE and
 boot-gated, via `tools/balance/retire_flat_shims.py`. Of 46 users **only 23 resolve
 `PercentageScale: 0`** — the other 23 override it back to ~9990, so the shim's defining property

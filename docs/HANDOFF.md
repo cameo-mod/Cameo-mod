@@ -31,8 +31,24 @@ summary. The maintainer-approved WORK ORDER, all four confirmed in one answer:
    `X` and `!X` are a swap, not an addition; `japan_zerofighter_slave` runs both live
    armaments on the `X` side, so zeroing them would have left the upgraded unit firing with
    no ammo cost forever. See `DESIGN.md` R8.
-3. **Virtual baselines + the 100–250% band** (R3) — the big connected one, and the thing that
-   unblocks pricing at all. ⭐ **Move the BASELINE, not the actors.**
+3. **Virtual baselines + the 100–250% band** (R3) — MEASURED; the blocker is not baseline
+   arithmetic. All **28 anchor dossiers** now exist under `docs/balance/anchors/`
+   (`propose_anchor_spec.py`; the 4 dated 2026-09-09 are annotated review snapshots and were
+   deliberately NOT regenerated — they say so in their own text). New:
+   `tools/balance/fit_baseband.py` → `docs/balance/baseband_fit.md`.
+   ⛔ **`cost0` cannot move the band** — it cancels out of the ratio exactly. Only
+   `hp0/speed0/range0_wdist/dps0` move it.
+   ⛔ **The band starts AT the baseline** (ratio 1.000 there, 2.500 at the 2×/2× verifier), so
+   "all members in band" requires the baseline at or below the weakest member. A **median**
+   baseline therefore cannot satisfy the band — and medians are what `derive_virtual_anchor.py`
+   proposes. 115/404 in band today; re-scaling every baseline reaches only 271/404 (67%).
+   ⭐ **Every class already has a core that fits** (span 1.4×–2.5×, 290 of 404 members). The
+   **114** outside their core are the real work, and the extremes are classification defects,
+   not pricing ones: `futuretech_blackwidow` is in `melee` with `Range: 9000`, `corrino_buggy`
+   is in `mbt`, `cabal_enlighted` has 11,184 DPS in `heavy_infantry`.
+   **→ NEXT, and it needs the maintainer:** triage those 114 — misclassified, legitimate higher
+   tier needing a tech-tier gate, or genuinely mis-stated. Fitting a baseline before that fits
+   it to a population that does not belong together. See `DESIGN.md` "R3 measured".
 4. **Separate weapon-stat targets with DPS as a verifier** (R1). Four inputs, one guard rail.
 
 ⛔ **Blocked on nothing but sequencing:** merge **#356** (Codex's Wraith order fix — my reorder
