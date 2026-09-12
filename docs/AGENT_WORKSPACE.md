@@ -18,8 +18,9 @@ does not change that repository's rules; confirm the approved `cameo-engine` bas
 
 ## Design and responsibilities
 
-Blackrobe uses Codex with GPT-5.6 Sol at High effort. Aedis and Kmoney keep their preferred agent
-tools, including Claude, Devin and AionUI where available. Each human remains responsible for
+Blackrobe uses the task-selected Codex model and reasoning effort; that selection remains
+configuration, not a coordination identity. Aedis and Kmoney keep their preferred agent tools,
+including Claude, Devin and AionUI where available. Each human remains responsible for
 their agents' scope and outputs. Blackrobe has designated Aedis's coordinator agent as the primary
 approver for task claims, overlap resolution, work reviews and technical integration readiness.
 Blackrobe takes over that approval role when Aedis's agent exhausts its usage quota.
