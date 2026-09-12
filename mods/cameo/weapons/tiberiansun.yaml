@@ -1003,13 +1003,11 @@ TSAegisMissile:
 		FriendlyFireSpread: 100
 
 TSMammothTusk_elite:
-	Inherits@missilerole: ^Warhead_MissileAA_Heavy
 	Inherits: TSMammothTusk2
 	Burst: 8
 	Range: 9216
 	Projectile: Missile
 		VerticalRateOfTurn: 25
-	-Warhead@MissileAP_Heavy:
 	Warhead@MissileAA_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1162,7 +1160,6 @@ TSSAPCCoreMissiles:
 		Damage: 8000
 		ValidTargets: Ground, Water, Air
 	-Warhead@Chemical_Light:
-	-Warhead@MissileHE_Medium:
 	Warhead@Chemical_LightFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000

@@ -1149,7 +1149,6 @@ ra1_soviets_btr80_machinegun_tesla:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		InvalidTargets: Air
-		-ValidTargets:
 		Damage: 1000
 	Warhead@Tesla_HeavyFlatCompatibility:
 		InvalidTargets: Air
@@ -1177,7 +1176,6 @@ ra1_soviets_btr80_machinegun_tesla_arc:
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Air
 	Warhead@EMPUnit:
-		-ValidTargets:
 		InvalidTargets: Air
 ra1_soviets_btr80_btrteslamachinegunarcfragment1:
 	Inherits: ra1_soviets_btr80_machinegun_tesla_arc
@@ -1193,7 +1191,6 @@ ra1_soviets_btr80_btrteslamachinegunarcfragment1:
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Air
 	Warhead@EMPUnit:
-		-ValidTargets:
 		InvalidTargets: Air
 ra1_soviets_btr80_machinegun_tesla_AA:
 	Inherits: ra1_soviets_btr80_machinegun_tesla
@@ -1222,32 +1219,26 @@ ra1_soviets_btr80_machinegun_tesla_arc_AA:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 	Warhead@Tesla_HeavyFlatCompatibility:
-		-InvalidTargets:
 		ValidTargets: Air
 		Damage: 4000
 		PercentageScale: 9975
 
 	Warhead@Tesla_Heavy_ExtraDamage:
-		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@EMPUnit:
-		-InvalidTargets:
 		ValidTargets: Air
 ra1_soviets_btr80_btrteslamachinegunarcfragment1aa:
 	Inherits: ra1_soviets_btr80_machinegun_tesla_arc_AA
 	Range: 4090
 	Warhead@Tesla_HeavyFlatCompatibility:
-		-InvalidTargets:
 		ValidTargets: Air
 		Damage: 4000
 		PercentageScale: 9975
 	-Warhead@TeslaArc:
 
 	Warhead@Tesla_Heavy_ExtraDamage:
-		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@EMPUnit:
-		-InvalidTargets:
 		ValidTargets: Air
 ChainGun:
 	Inherits@wh: ^Warhead_Bullet_Medium
@@ -4258,7 +4249,6 @@ ra1_soviets_volkov_volkovmagneticweapontesla:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		InvalidTargets: Air
-		-ValidTargets:
 		Damage: 16000
 	Warhead@TeslaArc: FireShrapnel
 		InvalidTargets: wall
@@ -4314,7 +4304,6 @@ ra1_soviets_volkov_volkovmagneticweaponteslafragment1:
 		Damage: 2000
 	Warhead@EMPUnit: AffectsIntegrity
 		-InvalidTargets:
-		-ValidTargets:
 		Damage: 8000
 	Warhead@TeslaArc: FireShrapnel
 		InvalidTargets: wall
@@ -4368,8 +4357,6 @@ ra1_soviets_volkov_volkovmagneticweaponteslafragment2:
 		DamageTypes: Tesla
 		Damage: 1000
 	Warhead@EMPUnit: AffectsIntegrity
-		-InvalidTargets:
-		-ValidTargets:
 		Damage: 4000
 	Warhead@Railgun_HeavyFlatCompatibility:
 		InvalidTargets: Air
@@ -4598,7 +4585,6 @@ ra1_soviets_volkov_volkovmagneticweaponincendiaryteslafragment1:
 		Damage: 2000
 	Warhead@EMPUnit: AffectsIntegrity
 		-InvalidTargets:
-		-ValidTargets:
 		Damage: 10000
 	Warhead@TeslaArc: FireShrapnel
 		InvalidTargets: wall
@@ -4663,8 +4649,6 @@ ra1_soviets_volkov_volkovmagneticweaponincendiaryteslafragment2:
 		DamageTypes: Tesla
 		Damage: 1000
 	Warhead@EMPUnit: AffectsIntegrity
-		-InvalidTargets:
-		-ValidTargets:
 		Damage: 5000
 	Warhead@Railgun_HeavyFlatCompatibility:
 		InvalidTargets: Air
@@ -4947,7 +4931,6 @@ ra1_soviets_gatlingtank_teslaragatlingtankcannon:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		InvalidTargets: Air
-		-ValidTargets:
 		Damage: 1000
 
 ra1_soviets_gatlingtank_teslaragatlingtankcannonarc:
@@ -4966,7 +4949,6 @@ ra1_soviets_gatlingtank_teslaragatlingtankcannonarc:
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Air
 	Warhead@EMPUnit:
-		-ValidTargets:
 		InvalidTargets: Air
 ra1_soviets_gatlingtank_teslaragatlingtankcannonarcfragment1:
 	Inherits: ra1_soviets_gatlingtank_teslaragatlingtankcannonarc
@@ -4980,7 +4962,6 @@ ra1_soviets_gatlingtank_teslaragatlingtankcannonarcfragment1:
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Air
 	Warhead@EMPUnit:
-		-ValidTargets:
 		InvalidTargets: Air
 ra1_soviets_gatlingtank_teslaragatlingtankcannon_AA:
 	Inherits: ra1_soviets_gatlingtank_teslaragatlingtankcannon
@@ -5008,13 +4989,10 @@ ra1_soviets_gatlingtank_teslaragatlingtankcannonarc_AA:
 		AimTargetStances: Enemy, Neutral
 
 	Warhead@Tesla_Heavy:
-		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@Tesla_Heavy_ExtraDamage:
-		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@EMPUnit:
-		-InvalidTargets:
 		ValidTargets: Air
 ra1_soviets_gatlingtank_teslaragatlingtankcannonarcfragment1aa:
 	Inherits: ra1_soviets_gatlingtank_teslaragatlingtankcannonarc_AA
@@ -5022,13 +5000,10 @@ ra1_soviets_gatlingtank_teslaragatlingtankcannonarcfragment1aa:
 	-Warhead@TeslaArc:
 
 	Warhead@Tesla_Heavy:
-		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@Tesla_Heavy_ExtraDamage:
-		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@EMPUnit:
-		-InvalidTargets:
 		ValidTargets: Air
 ra1_soviets_madtank_madtankdetonate:
 	Inherits@wh: ^Warhead_Nuclear_Super

@@ -1106,16 +1106,12 @@ DiabloCannonAAE_AA:
 	Projectile: Bullet
 
 	Warhead@LightMissilePercentage:
-		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@TankDestroyerCannonPercentage:
-		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@ChaingunPercentage:
-		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@Flak_Medium:
-		-InvalidTargets:
 		ValidTargets: Air
 RA2MortarBike:
 	Inherits@finalmain: ^Compatibility_Concussion_MediumFlat
@@ -2012,16 +2008,12 @@ RA2APCFlakCannonAA_elite:
 	Projectile: Bullet
 
 	Warhead@LightMissilePercentage:
-		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@TankDestroyerCannonPercentage:
-		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@ChaingunPercentage:
-		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@Flak_Medium:
-		-InvalidTargets:
 		ValidTargets: Air
 RA2APCMachineGun:
 	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
@@ -2080,7 +2072,6 @@ RA2APCMachineGun_AA_elite:
 	BurstDelays: 2
 
 	Warhead@Bullet_MediumFlatCompatibility:
-		-InvalidTargets:
 		ValidTargets: Air
 RA2APCRocket:
 	Inherits@missilerole: ^Warhead_MissileHE_Medium
@@ -2167,7 +2158,6 @@ RA2APCRocket:
 		PercentageDenominator: 10000
 
 RA2APCRocket_elite:
-	Inherits@missilerole: ^Warhead_MissileHE_Medium
 	Inherits: RA2APCRocket
 	Range: 6740
 	Burst: 8
@@ -2189,7 +2179,6 @@ RA2APCRocket_elite:
 	Warhead@FlakWeaponPercentage:
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Air
-	-Warhead@MissileAP_Medium:
 	Warhead@MissileHE_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2218,7 +2207,6 @@ RA2APCRocket_AA:
 	Warhead@FlakWeaponPercentage:
 		-InvalidTargets:
 		ValidTargets: Air
-	-Warhead@MissileAP_Medium:
 	Warhead@MissileAA_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2232,7 +2220,6 @@ RA2APCRocket_AA:
 	-Warhead@MissileHE_Medium:
 
 RA2APCRocket_AA_elite:
-	Inherits@missilerole: ^Warhead_MissileAA_Medium
 	Inherits: RA2APCRocket_AA
 	Range: 9610
 	Burst: 8
@@ -2245,15 +2232,11 @@ RA2APCRocket_AA_elite:
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
 	Warhead@HeavyBombPercentage:
-		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@HeavyAAWeaponPercentage:
-		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@FlakWeaponPercentage:
-		-InvalidTargets:
 		ValidTargets: Air
-	-Warhead@MissileAP_Medium:
 	Warhead@MissileAA_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2264,7 +2247,6 @@ RA2APCRocket_AA_elite:
 		PercentageScale: 2500
 		PercentageSpread: 50
 		PercentageDenominator: 10000
-	-Warhead@MissileHE_Medium:
 
 SMLLauncher:
 	ValidTargets: Ground, Air, Water

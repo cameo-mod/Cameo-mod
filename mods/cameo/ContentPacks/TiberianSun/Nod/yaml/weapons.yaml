@@ -289,12 +289,10 @@ TSNODRedEye:
 		PercentageSpread: 50
 
 TSNODTibRedEye:
-	Inherits@missilerole: ^Warhead_MissileAA_Heavy
 	Inherits: TSNODRedEye
 	Projectile: Missile
 		VerticalRateOfTurn: 12
 		TrailImage: spittrail
-	-Warhead@MissileAP_Heavy:
 	Warhead@MissileAA_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50

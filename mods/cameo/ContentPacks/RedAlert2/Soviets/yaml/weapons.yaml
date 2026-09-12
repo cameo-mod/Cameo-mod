@@ -1064,13 +1064,11 @@ RA2MammothTusk_AA:
 		PercentageSpread: 50
 
 RA2MammothTusk_AA_elite:
-	Inherits@missilerole: ^Warhead_MissileAA_Medium
 	Inherits: RA2MammothTusk_AA
 	Range: 7100
 	Burst: 4
 	Projectile: Missile
 		VerticalRateOfTurn: 16
-	-Warhead@MissileAP_Medium:
 	Warhead@MissileAA_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50

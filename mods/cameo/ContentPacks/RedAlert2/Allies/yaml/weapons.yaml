@@ -843,7 +843,6 @@ RA2MedusaAG:
 	ValidTargets: Ground, Water
 	Projectile: Missile
 		VerticalRateOfTurn: 30
-	-Warhead@MissileAP_Medium:
 	Warhead@MissileHE_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50

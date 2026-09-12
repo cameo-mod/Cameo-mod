@@ -720,7 +720,6 @@ SteelManta_AA:
 		ValidTargets: Air
 	-Warhead@Bullet_MediumFlatCompatibility:
 	Warhead@Flak_MediumFlatCompatibility:
-		-InvalidTargets:
 		ValidTargets: Air
 		Damage: 8000
 		PercentageScale: 9988
@@ -766,7 +765,6 @@ SteelMantaAAResonance_AA:
 		ValidTargets: Ground, Water, Air
 
 	Warhead@Flak_MediumFlatCompatibility:
-		-InvalidTargets:
 		ValidTargets: Air
 SteelMantaAAResonanceBounce1:
 	Inherits: SteelMantaAAResonance_AA
@@ -775,7 +773,6 @@ SteelMantaAAResonanceBounce1:
 		Weapon: SteelMantaAAResonanceBounce2
 
 	Warhead@Flak_MediumFlatCompatibility:
-		-InvalidTargets:
 		ValidTargets: Air
 SteelMantaAAResonanceBounce2:
 	Inherits: SteelMantaAAResonance_AA
@@ -783,7 +780,6 @@ SteelMantaAAResonanceBounce2:
 	-Warhead@shrapnel:
 
 	Warhead@Flak_MediumFlatCompatibility:
-		-InvalidTargets:
 		ValidTargets: Air
 SteelMantaHunterCannons:
 	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
@@ -828,7 +824,6 @@ SteelMantaHunterCannons_AA:
 		Damage: 2000
 	-Warhead@Bullet_MediumFlatCompatibility:
 	Warhead@Flak_MediumFlatCompatibility:
-		-InvalidTargets:
 		ValidTargets: Air
 		Damage: 6000
 		PercentageScale: 9984
@@ -879,7 +874,6 @@ SteelMantaHunterCannonsAAResonance_AA:
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water, Air
 	Warhead@Flak_MediumFlatCompatibility:
-		-InvalidTargets:
 		ValidTargets: Air
 		Damage: 6000
 		PercentageScale: 9984
@@ -890,7 +884,6 @@ SteelMantaHunterCannonsAAResonanceBounce1:
 	Warhead@shrapnel: FireShrapnel
 		Weapon: SteelMantaHunterCannonsAAResonanceBounce2
 	Warhead@Flak_MediumFlatCompatibility:
-		-InvalidTargets:
 		ValidTargets: Air
 		Damage: 6000
 		PercentageScale: 9984
@@ -900,7 +893,6 @@ SteelMantaHunterCannonsAAResonanceBounce2:
 	Range: 2222
 	-Warhead@shrapnel:
 	Warhead@Flak_MediumFlatCompatibility:
-		-InvalidTargets:
 		ValidTargets: Air
 		Damage: 6000
 		PercentageScale: 9984

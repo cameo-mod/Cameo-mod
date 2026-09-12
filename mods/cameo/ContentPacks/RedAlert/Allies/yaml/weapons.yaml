@@ -656,7 +656,6 @@ ra1_allies_chronotank_missile:
 		PercentageSpread: 50
 
 ra1_allies_chronotank_missile_cryo:
-	Inherits@missilerole: ^Warhead_MissileAP_Heavy
 	Inherits: ra1_allies_chronotank_missile
 	Inherits@2: ^CryoMissileProjectile
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
@@ -664,7 +663,6 @@ ra1_allies_chronotank_missile_cryo:
 		Range: 400
 	Projectile: Missile
 		VerticalRateOfTurn: 16
-	-Warhead@MissileHE_Heavy:
 	Warhead@MissileAP_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50

@@ -595,12 +595,10 @@ td_gdi_orca_orcamissiles:
 		PercentageSpread: 50
 
 td_gdi_orca_orcamissilesamt:
-	Inherits@missilerole: ^Warhead_MissileAP_Heavy
 	Inherits: td_gdi_orca_orcamissiles
 	Inherits@2: ^AMTProjectile
 	Projectile: Missile
 		MinimumLaunchAngle: -128
-	-Warhead@MissileHE_Heavy:
 	Warhead@MissileAP_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -855,12 +853,10 @@ td_gdi_advancedguardtower_towermissile:
 		PercentageSpread: 50
 
 td_gdi_advancedguardtower_towermissileamt:
-	Inherits@missilerole: ^Warhead_MissileAP_Heavy
 	Inherits: td_gdi_advancedguardtower_towermissile
 	Inherits@2: ^AMTProjectile
 	Projectile: Missile
 		VerticalRateOfTurn: 12
-	-Warhead@MissileHE_Heavy:
 	Warhead@MissileAP_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1236,7 +1232,6 @@ td_gdi_humveemkii_rocketshumvee2_AA:
 	ValidTargets: Air
 	Projectile: Missile
 		VerticalRateOfTurn: 20
-	-Warhead@MissileAP_Light:
 	Warhead@MissileAA_Light: AreaDamage
 		PercentageDenominator: 10000
 		ValidRelationships: Ally, Neutral, Enemy
@@ -1261,7 +1256,6 @@ td_gdi_humveemkii_rocketshumvee2amt:
 		ValidTargets: Ground, Water
 		Damage: 16000
 	-Warhead@MissileAP_Heavy:
-	-Warhead@MissileAP_Light:
 	-Warhead@MissileAP_HeavyFlatCompatibility:
 	Warhead@MissileHE_Heavy: AreaDamage
 		PercentageDenominator: 10000
@@ -1284,7 +1278,6 @@ td_gdi_humveemkii_rocketshumvee2amt_AA:
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Air
 	-Warhead@MissileAP_Heavy:
-	-Warhead@MissileAP_HeavyFlatCompatibility:
 	Projectile: Missile
 		VerticalRateOfTurn: 12
 	-Warhead@MissileAA_HeavyFlatCompatibility:
@@ -1304,7 +1297,6 @@ td_gdi_humveemkii_rocketshumvee2amt_AA:
 			BLAST: 56
 			Shield: 172
 	-Warhead@MissileHE_Heavy:
-	-Warhead@MissileHE_Light:
 
 TDShotgun:
 	Inherits@collapsewh: ^Warhead_Bullet_Medium
@@ -1694,12 +1686,10 @@ td_gdi_defenserig_gdirigmissilepod:
 		PercentageSpread: 50
 
 td_gdi_defenserig_gdirigmissilepodamt:
-	Inherits@missilerole: ^Warhead_MissileAP_Heavy
 	Inherits: td_gdi_defenserig_gdirigmissilepod
 	Inherits@2: ^AMTProjectile
 	Projectile: Missile
 		VerticalRateOfTurn: 12
-	-Warhead@MissileHE_Heavy:
 	Warhead@MissileAP_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2069,10 +2059,8 @@ td_gdi_missileboat_gunboatmissile:
 		PercentageSpread: 50
 
 td_gdi_missileboat_gunboatmissileamt:
-	Inherits@missilerole: ^Warhead_MissileHE_Medium
 	Inherits: td_gdi_missileboat_gunboatmissile
 	Inherits@2: ^AMTProjectile
-	-Warhead@MissileAP_Medium:
 	Warhead@MissileHE_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50

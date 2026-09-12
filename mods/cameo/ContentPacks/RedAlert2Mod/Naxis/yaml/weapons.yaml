@@ -525,7 +525,6 @@ NaxiShrek:
 		PercentageSpread: 50
 
 NaxiShrek_elite:
-	Inherits@missilerole: ^Warhead_MissileHE_Medium
 	Inherits: NaxiShrek
 	Report: bazook1.aud
 	Range: 7805
@@ -539,7 +538,6 @@ NaxiShrek_elite:
 		ContrailStartColor: E60000
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-	-Warhead@MissileAP_MediumFlatCompatibility:
 	Warhead@MissileHE_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -639,7 +637,6 @@ NaxiShrekCons:
 		PercentageSpread: 50
 
 NaxiShrekCons_elite:
-	Inherits@missilerole: ^Warhead_MissileHE_Medium
 	Inherits: NaxiShrekCons
 	Report: bazook1.aud
 	Range: 6512
@@ -653,7 +650,6 @@ NaxiShrekCons_elite:
 		ContrailStartColor: E60000
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-	-Warhead@MissileAP_MediumFlatCompatibility:
 	Warhead@MissileHE_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50

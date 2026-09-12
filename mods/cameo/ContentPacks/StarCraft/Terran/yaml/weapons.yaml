@@ -221,14 +221,12 @@ CycloneRockets:
 		PercentageScale: 9975
 
 CycloneRocketsLockOn:
-	Inherits@heldmissilerole: ^Warhead_MissileAP_Light
 	Inherits: CycloneRockets
 	ValidTargets: lockon
 	Range: 10000
 
 	Projectile: Missile
 		VerticalRateOfTurn: 40
-	-Warhead@MissileHE_LightFlatCompatibility:
 	Warhead@MissileAP_Light: AreaDamage
 		Damage: 4000
 		PercentageScale: 9975
