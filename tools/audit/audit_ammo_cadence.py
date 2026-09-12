@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """audit_ammo_cadence.py — an AMMO POOL makes `ReloadDelay` the wrong clock, and every carrier
-slave must have a pool AND a reload.
+slave must have a pool, an explicit ammo-dependent firing gate, and a reload policy.
 
 MAINTAINER RULINGS, 2026-09-12:
   * "the SSM launcher reload delay in cameo doesn't matter since it requires ammo to shoot
@@ -28,11 +28,14 @@ A2  CARRIER SLAVES. Every `CarrierSlave` must carry an `AmmoPool` and a reload t
         so the slave never expends, never needs to dock, and the carrier's launch/expend/return
         cycle never runs. It is a permanent free attacker.
 
-      * POOL BUT NO RELOAD -> the slave fires until empty and is then PERMANENTLY unable to
-        attack. Nothing refills it: `CarrierMaster` has no `GiveAmmo`/`TakeAmmo` path at all
-        (`RearmTicks` only gates RELAUNCH timing), these actors carry no `Rearmable`, and
-        `CarrierSlave.NeedToReload` is **declared and never called anywhere in CA** — the
-        return-to-rearm logic does not exist.
+      * POOL BUT NO RELOAD -> the slave has no explicit in-flight reload policy. The carrier
+        engine refills every pool when a slave re-enters its carrier; the reload trait is the
+        separate policy for recovery while the slave is deployed.
+
+      * POOL WITHOUT A FIRING GATE -> `AmmoPool` spends ammo from its attack notification after
+        the attack is selected, so a newly added pool alone does not stop an empty slave from
+        firing. `AmmoCondition` plus `AttackAircraft.RequiresCondition` (and armament pause
+        gates where needed) is required.
 
 ⚠ READ BOTH RELOAD TRAIT SPELLINGS. `ReloadAmmoPool` (92 actors) and `ReloadAmmoPoolCA` (25)
 are both in use. The first version of this measurement read only the former and misclassified
@@ -118,9 +121,34 @@ def main() -> int:
             stems = {c.key.split("@")[0] for c in res.children}
             weapons = [next((str(g.value).strip() for g in c.children if g.key == "Weapon"), "")
                        for c in res.children if c.key.split("@")[0] == "Armament"]
+            gate_defect = None
+            if pools:
+                pool_values = kv(pools[0])
+                ammo_condition = pool_values.get("AmmoCondition")
+                if not ammo_condition:
+                    gate_defect = "missing AmmoCondition"
+                else:
+                    attack = next((c for c in res.children if c.key == "AttackAircraft"), None)
+                    attack_values = kv(attack) if attack is not None else {}
+                    global_gate = ammo_condition in {
+                        token.strip() for token in attack_values.get("RequiresCondition", "").split(",")
+                    }
+                    if not global_gate:
+                        pool_names = set(pool_values.get("Armaments", "primary, secondary").replace(" ", "").split(","))
+                        for arm in [c for c in res.children if c.key.split("@")[0] == "Armament"]:
+                            arm_values = kv(arm)
+                            if arm_values.get("Name", "primary") not in pool_names:
+                                continue
+                            if num(arm_values.get("AmmoUsage"), 1) <= 0:
+                                continue
+                            pause = arm_values.get("PauseOnCondition", "")
+                            requires = {token.strip() for token in arm_values.get("RequiresCondition", "").split(",")}
+                            if pause != "!" + ammo_condition and ammo_condition not in requires:
+                                gate_defect = f"no empty-pool gate for {arm.key}"
+                                break
             slaves.append((name, bool(pools), num(kv(pools[0]).get("Ammo")) if pools else None,
                            bool(reloads), rearmable,
-                           slave_law.is_suicide(name, stems, weapons)))
+                           slave_law.is_suicide(name, stems, weapons), gate_defect))
         if not pools:
             continue
         pool, rl = kv(pools[0]), (kv(reloads[0]) if reloads else None)
@@ -184,20 +212,20 @@ def main() -> int:
 
     in_scope = [s for s in slaves if not s[5]]
     suicide = [s for s in slaves if s[5]]
-    bad = [s for s in in_scope if not (s[1] and s[3])]
+    bad = [s for s in in_scope if not (s[1] and s[3]) or s[6]]
     out += [h2(f"A2 — carrier slaves: {len(bad)} of {len(in_scope)} in scope break the rule "
                f"(ratchet {A2_BASELINE})"),
-            "Every `CarrierSlave` must have an `AmmoPool` **and** a reload. The two failures are "
+            "Every `CarrierSlave` must have an `AmmoPool`, an empty-pool firing gate, and a reload. The failures are "
             "opposite: no pool means the engine grants unlimited ammo (`CarrierSlave.cs:59-65`) "
-            "so the carrier cycle never runs; a pool with no reload means the slave empties once "
-            "and is permanently unable to attack, because nothing refills it — `CarrierMaster` "
-            "has no ammo path, these actors carry no `Rearmable`, and `NeedToReload` is dead "
-            "code in CA.", ""]
+            "so the carrier cycle never runs; a pool without a gate still permits an empty shot "
+            "because ammo is consumed after attack selection. Carrier re-entry refills pools; "
+            "`ReloadAmmoPool` is the explicit in-flight recovery policy.", ""]
     if bad:
         out += [table(["actor", "pool", "ammo", "reload", "rearmable", "defect"],
                       [[a, str(p), str(am or "—"), str(r), str(re_),
-                        "unlimited ammo — no pool" if not p else "runs dry forever — no reload"]
-                       for a, p, am, r, re_, _s in bad]), ""]
+                        ("unlimited ammo — no pool" if not p else
+                         "missing reload" if not r else _gate)]
+                       for a, p, am, r, re_, _s, _gate in bad]), ""]
     else:
         out += ["_All in-scope slaves carry a sized pool and a reload_ — sized by "
                 "`tools/balance/carrier_slave_ammo.py` (R8: one full burst attack empties the "
@@ -207,7 +235,7 @@ def main() -> int:
             "their self-destruct lives in the WEAPON and appears in no trait, which is why the "
             "detector alone would miss them.", "",
             table(["actor", "why out of scope", "pool", "reload"],
-                  [[a, s, str(p), str(r)] for a, p, _am, r, _re, s in suicide]),
+                  [[a, s, str(p), str(r)] for a, p, _am, r, _re, s, _gate in suicide]),
             ""]
 
     (ROOT / "docs" / "audit" / "latest").mkdir(parents=True, exist_ok=True)
