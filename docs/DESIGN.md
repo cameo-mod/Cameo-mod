@@ -1125,6 +1125,32 @@ The rule, mechanically:
   evenly uses `Count > 1` (`Ammo: 6` -> `Count: 3, Delay: 50`).
 * **upgrade-granted weapons take `AmmoUsage: 0`** so they never interfere; only CONCURRENT
   weapons enter the share calculation.
+
+✅ **DONE 2026-09-12, boot-gated** — `tools/balance/carrier_slave_ammo.py` (the law, with both
+worked examples as its self-test) + `apply_carrier_slave_ammo.py` (placement only).
+`audit_ammo_cadence` A2 ratchet **19 → 0**. Two refinements the data forced, both of which the
+ruling as written would have got wrong:
+
+* ⛔ **A REPLACEMENT PAIR IS ONE SLOT, AND BOTH SIDES MUST SPEND AMMO.** "Upgrade weapons take
+  `AmmoUsage: 0`" is right for an ADDITIVE upgrade (`RequiresCondition: X` with no sibling on
+  `!X`) — `cruiser_f.steel`'s quantum secondary. It is WRONG when siblings carry `X` and `!X`,
+  which is a swap, not an addition: `japan_zerofighter_slave` runs both its live armaments on
+  the `X` side, so zeroing them would leave the upgraded unit consuming **no ammo at all** and
+  firing forever. Detect the negated sibling; give both sides the same usage; count the slot
+  once.
+* ⛔ **N IS NOT THE ARMAMENT COUNT — it is the largest group sharing a target class.**
+  `A10Carrier`'s `Armament@AA` is `ValidTargets: Air` and its `@BOMBS` is `Ground, Water`; they
+  can never fire at one target, so N=3 would build a pool no single attack could empty. With
+  N=2 both engagements empty it exactly: ground `10x1 + 1x10 = 20`, air `10x1 + 2x5 = 20`.
+* **Scope is 14, not 17.** 19 − 2 assumed the maintainer's two names were all the suicide
+  drones; three more qualify under the same rule (`SCSCOURGEDRONE` self-destruct weapon,
+  `kami.asian` and `tsprobe` via `SpawnedExplodes`). The two NAMED ones carry no suicide trait
+  at all — their self-destruct is in the weapon — so the explicit list and the detector are
+  both required, and neither alone suffices.
+* ⚠ **`AmmoPool.Armaments` defaults to `primary, secondary`** and `AmmoPool.Attacking` only
+  calls `TakeAmmo` when the list contains the armament's `Name`. An armament named anything
+  else spends nothing and the pool never empties. Write the list whenever the default does not
+  cover every armament.
 * ⭐ **Preferred long-term solution, and the most complicated:** a condition-driven multiplier
   that dynamically DOUBLES the pool while an upgrade is active, so upgrade weapons can consume
   ammo properly instead of being zeroed. Maintainer's stated preference; not yet designed.

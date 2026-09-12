@@ -468,6 +468,9 @@ japan_zerofighter_slave:
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@WaveforceBullets: ^WaveforceBullets
 	Inherits@DivineWindProtocol: ^DivineWindProtocol
+	ReloadAmmoPool:
+		Delay: 25
+		Count: 9
 	Valued:
 		Cost: 150
 	Tooltip:
@@ -486,24 +489,28 @@ japan_zerofighter_slave:
 	Health:
 		HP: 7500
 	Armament@PRIMARY:
+		AmmoUsage: 1
 		Weapon: ZeroFighterChainGun
 		LocalOffset: 128,128,0, 128,-128,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 		RequiresCondition: !japan_upgrade_waveforcebullets
 	Armament@SECONDARY:
+		AmmoUsage: 1
 		Weapon: ZeroFighterChainGun
 		LocalOffset: 128,128,0, 128,-128,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 		RequiresCondition: !japan_upgrade_waveforcebullets
 	Armament@Upgrade:
+		AmmoUsage: 1
 		Weapon: ZeroFighterChainGunWaveforce
 		LocalOffset: 128,128,0, 128,-128,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 		RequiresCondition: japan_upgrade_waveforcebullets
 	Armament@UpgradeSECONDARY:
+		AmmoUsage: 1
 		Weapon: ZeroFighterChainGunWaveforce
 		LocalOffset: 128,128,0, 128,-128,0
 		MuzzleSequence: muzzle
@@ -512,9 +519,10 @@ japan_zerofighter_slave:
 	FirepowerMultiplier@doublecannons:
 		Modifier: 50
 	Armament:
+		AmmoUsage: 12
 		Weapon: JapanCarrierFighterBomb
 	AmmoPool:
-		Ammo: 30
+		Ammo: 36
 		AmmoCondition: ammo
 	WithAmmoPipsDecoration:
 		Position: BottomLeft

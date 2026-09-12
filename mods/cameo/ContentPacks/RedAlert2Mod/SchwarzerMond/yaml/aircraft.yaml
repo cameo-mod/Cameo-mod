@@ -2,6 +2,9 @@ schwarzermond_drone:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^FighterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	ReloadAmmoPool:
+		Delay: 25
+		Count: 2
 	Valued:
 		Cost: 120
 	Tooltip:
@@ -25,18 +28,20 @@ schwarzermond_drone:
 		Range: 7500
 		Type: GroundPosition
 	Armament@PRIMARY:
+		AmmoUsage: 1
 		Name: primary
 		Weapon: LunarNaxiDroneLaser
 		LocalOffset: 400,-200,-200, 400,200,-200
 		PauseOnCondition: !ammo
 	Armament@Rockets:
+		AmmoUsage: 2
 		Name: primary
 		Weapon: LunarNaxiDroneMissile
 		LocalOffset: 425,-350,-225, 425,350,-225
 		LocalYaw: 50, -50, 25, -25
 		PauseOnCondition: !ammo
 	AmmoPool:
-		Ammo: 6
+		Ammo: 8
 		AmmoCondition: ammo
 	SpawnActorOnDeath:
 		Actor: schwarzermond_drone_husk

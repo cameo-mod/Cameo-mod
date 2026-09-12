@@ -2,6 +2,9 @@ naxis_interceptor:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^FighterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	ReloadAmmoPool:
+		Delay: 25
+		Count: 2
 	Valued:
 		Cost: 200
 	Tooltip:
@@ -25,11 +28,13 @@ naxis_interceptor:
 		Range: 7500
 		Type: GroundPosition
 	Armament@PRIMARY:
+		AmmoUsage: 1
 		Name: primary
 		Weapon: NaxiInterceptorGun
 		LocalOffset: 400,-200,-200, 400,200,-200
 		PauseOnCondition: !ammo
 	Armament@Rockets:
+		AmmoUsage: 2
 		Name: primary
 		Weapon: NaxInterceptorRockets
 		LocalOffset: 425,-350,-225, 425,350,-225
@@ -38,7 +43,7 @@ naxis_interceptor:
 	FirepowerMultiplier@MultiWeapon:
 		Modifier: 50
 	AmmoPool:
-		Ammo: 6
+		Ammo: 8
 		AmmoCondition: ammo
 	WithAmmoPipsDecoration:
 		Position: BottomLeft

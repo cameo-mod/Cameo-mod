@@ -53,13 +53,22 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 import ammo_cadence as ac  # noqa: E402
+import carrier_slave_ammo as slave_law  # noqa: E402
 import miniyaml  # noqa: E402
 from report import h1, h2, table  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 
-# Set by THIS script's own first run, 2026-09-12. LOWER ONLY.
-A2_BASELINE = 19          # CarrierSlave actors missing a pool or a reload (of 19 — all of them)
+# CLEARED 2026-09-12 by tools/balance/apply_carrier_slave_ammo.py: all 14 in-scope slaves now
+# carry a sized pool and a reload. LOWER ONLY.
+#
+# ⚠ The 5 SUICIDE slaves are out of scope, not fixed, and are reported separately below. A
+# reload trait is dead weight on a unit that dies when it attacks. The maintainer named two of
+# them (`tkmsuicidedrone`, `farasha_drone_ixian`) — whose self-destruct is in the WEAPON and so
+# appears in no trait — and `carrier_slave_ammo.is_suicide` finds three more under the same
+# rule. Counting them as defects would have left this ratchet stuck at 5 forever, reporting a
+# backlog that the ruling says should not be worked.
+A2_BASELINE = 0           # CarrierSlave actors IN SCOPE missing a pool or a reload
 MAIN = ("AreaDamage", "SpreadDamage")
 NOT_A_MAIN = ("percentage", "friendlyfire", "extradamage")
 RELOAD_STEMS = ("ReloadAmmoPool",)   # matches ReloadAmmoPool AND ReloadAmmoPoolCA
@@ -106,8 +115,12 @@ def main() -> int:
         rearmable = bool(trait(res, "Rearmable"))
         is_slave = any(c.key.split("@")[0] == "CarrierSlave" for c in res.children)
         if is_slave:
+            stems = {c.key.split("@")[0] for c in res.children}
+            weapons = [next((str(g.value).strip() for g in c.children if g.key == "Weapon"), "")
+                       for c in res.children if c.key.split("@")[0] == "Armament"]
             slaves.append((name, bool(pools), num(kv(pools[0]).get("Ammo")) if pools else None,
-                           bool(reloads), rearmable))
+                           bool(reloads), rearmable,
+                           slave_law.is_suicide(name, stems, weapons)))
         if not pools:
             continue
         pool, rl = kv(pools[0]), (kv(reloads[0]) if reloads else None)
@@ -169,19 +182,32 @@ def main() -> int:
                    for a, l, o, w in sorted(af, key=lambda x: -x[2]["sortie_damage"])[:20]]),
             ""]
 
-    bad = [s for s in slaves if not (s[1] and s[3])]
-    out += [h2(f"A2 — carrier slaves: {len(bad)} of {len(slaves)} break the rule "
+    in_scope = [s for s in slaves if not s[5]]
+    suicide = [s for s in slaves if s[5]]
+    bad = [s for s in in_scope if not (s[1] and s[3])]
+    out += [h2(f"A2 — carrier slaves: {len(bad)} of {len(in_scope)} in scope break the rule "
                f"(ratchet {A2_BASELINE})"),
             "Every `CarrierSlave` must have an `AmmoPool` **and** a reload. The two failures are "
             "opposite: no pool means the engine grants unlimited ammo (`CarrierSlave.cs:59-65`) "
             "so the carrier cycle never runs; a pool with no reload means the slave empties once "
             "and is permanently unable to attack, because nothing refills it — `CarrierMaster` "
             "has no ammo path, these actors carry no `Rearmable`, and `NeedToReload` is dead "
-            "code in CA.", "",
-            table(["actor", "pool", "ammo", "reload", "rearmable", "defect"],
-                  [[a, str(p), str(am or "—"), str(r), str(re_),
-                    "unlimited ammo — no pool" if not p else "runs dry forever — no reload"]
-                   for a, p, am, r, re_ in bad]),
+            "code in CA.", ""]
+    if bad:
+        out += [table(["actor", "pool", "ammo", "reload", "rearmable", "defect"],
+                      [[a, str(p), str(am or "—"), str(r), str(re_),
+                        "unlimited ammo — no pool" if not p else "runs dry forever — no reload"]
+                       for a, p, am, r, re_, _s in bad]), ""]
+    else:
+        out += ["_All in-scope slaves carry a sized pool and a reload_ — sized by "
+                "`tools/balance/carrier_slave_ammo.py` (R8: one full burst attack empties the "
+                "pool, empty to full in exactly 100 ticks).", ""]
+    out += [f"**{len(suicide)} suicide slaves are OUT OF SCOPE**, not a backlog — a reload is "
+            "dead weight on a unit that dies when it attacks. Two were named by the maintainer; "
+            "their self-destruct lives in the WEAPON and appears in no trait, which is why the "
+            "detector alone would miss them.", "",
+            table(["actor", "why out of scope", "pool", "reload"],
+                  [[a, s, str(p), str(r)] for a, p, _am, r, _re, s in suicide]),
             ""]
 
     (ROOT / "docs" / "audit" / "latest").mkdir(parents=True, exist_ok=True)
