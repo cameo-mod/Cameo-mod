@@ -85,6 +85,10 @@ def main():
         print(f"expected exactly one section from the extractor, got {len(fresh)}")
         return 1
     header, body = fresh[0]
+    if any("⚠ not extracted" in line for line in body):
+        print(f"source {label_of(header)!r} was not extracted; refusing to replace its existing "
+              "corpus section with a missing-checkout placeholder")
+        return 1
     label = label_of(header)
     if label not in before_counts:
         print(f"source {label!r} is not in the corpus; refusing to append a new section blindly")

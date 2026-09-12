@@ -700,15 +700,23 @@ PEERS = {
                      "~/Documents/GitHub/Generals-Alpha", "../Generals-Alpha"]},
     # The four OpenRA BASE mods — the original games as the engine ships them. They are the
     # closest thing to a neutral reading of Westwood's own balance, and `versus_raw.json` already
-    # samples all four for warheads; these are their unit stats.
+    # samples all four for warheads; these are their unit stats. The legacy route deliberately
+    # has no Cameo-engine fallback: that checkout is our fork, not upstream OpenRA, and reading it
+    # under an OpenRA label silently changes the evidence source. If an upstream checkout is not
+    # available, the extractor must report no checkout and leave the source absent. Use explicit
+    # `--root` when a reviewed checkout needs to be selected.
     "ra": {"label": "OpenRA Red Alert", "rifle": "E1", "expect": 5000,
-           "root": ["/home/user/openra/openra", "~/Documents/GitHub/OpenRA", "../OpenRA", "~/Documents/GitHub/cameo-engine"]},
+           "requires_explicit_root": True,
+           "root": []},
     "cnc": {"label": "OpenRA Tiberian Dawn", "rifle": "E1", "expect": 5000,
-            "root": ["/home/user/openra/openra", "~/Documents/GitHub/OpenRA", "../OpenRA", "~/Documents/GitHub/cameo-engine"]},
+            "requires_explicit_root": True,
+            "root": []},
     "ts": {"label": "OpenRA Tiberian Sun", "rifle": "E1", "expect": 12500,
-           "root": ["/home/user/openra/openra", "~/Documents/GitHub/OpenRA", "../OpenRA", "~/Documents/GitHub/cameo-engine"]},
+           "requires_explicit_root": True,
+           "root": []},
     "d2k": {"label": "OpenRA Dune 2000", "rifle": "light_inf", "expect": 6000,
-            "root": ["/home/user/openra/openra", "~/Documents/GitHub/OpenRA", "../OpenRA", "~/Documents/GitHub/cameo-engine"]},
+            "requires_explicit_root": True,
+            "root": []},
 
     # ── Found 2026-08-30 by searching GitHub's `topic:openra`, all cloned from source ────────
     # `e1` (G.I.) and `e2` (Conscript) are both 125 HP in the RA2 family; `e1` is used as the
@@ -1085,10 +1093,15 @@ def production_state_evidence(rules, node, *, review_initial_state=False):
 
 def extract(mod_id, root_override=None):
     """`root_override` is the explicit `--root` route (P4): it wins outright and there is
-    NO fallback to the PEERS candidates. The legacy candidate walk is unchanged when it
-    is None, and PEERS itself is never mutated — the override travels as a parameter."""
+    NO fallback to the PEERS candidates. The legacy candidate walk is used only for peers that
+    allow automatic discovery, and PEERS itself is never mutated — the override travels as a
+    parameter."""
     spec = PEERS[mod_id]
     label, cands, rifle_id, expect = spec["label"], spec["root"], spec["rifle"], spec["expect"]
+    if root_override is None and spec.get("requires_explicit_root"):
+        return (label, None,
+                "automatic extraction disabled; use --root with --expect-commit for a reviewed "
+                "upstream checkout")
     T = traits_for(spec)
     root = pathlib.Path(root_override).resolve() if root_override is not None \
         else find_checkout(cands, mod_id)
@@ -1569,8 +1582,17 @@ def main(argv=None):
            "**Each mod sets its own power level**, so `×rifle` is the only comparable column. "
            "Anchors are verified against the checkout, never trusted from a document.", ""]
 
+    selected_mods = args.mod or sorted(PEERS)
+    explicit_only = [mod_id for mod_id in selected_mods
+                     if PEERS[mod_id].get("requires_explicit_root")]
+    if explicit_only:
+        names = ", ".join(PEERS[mod_id]["label"] for mod_id in explicit_only)
+        print("REFUSED — automatic extraction is disabled for " + names + "; use explicit "
+              "--root with --expect-commit, then splice the reviewed source section", file=sys.stderr)
+        return 1
+
     total = 0
-    for mod_id in (args.mod or sorted(PEERS)):
+    for mod_id in selected_mods:
         label, data, err = extract(mod_id)
         if err:
             print(f"{label}: {err}")
