@@ -49,7 +49,17 @@ summary. The maintainer-approved WORK ORDER, all four confirmed in one answer:
    **→ NEXT, and it needs the maintainer:** triage those 114 — misclassified, legitimate higher
    tier needing a tech-tier gate, or genuinely mis-stated. Fitting a baseline before that fits
    it to a population that does not belong together. See `DESIGN.md` "R3 measured".
-4. **Separate weapon-stat targets with DPS as a verifier** (R1). Four inputs, one guard rail.
+4. ✅ **DONE — separate weapon-stat targets with DPS as a verifier** (R1). Four inputs, one
+   guard rail. `reference_targets.COMPONENT_STATS` / `VERIFIER_STATS` + `compose_dps`,
+   `recover_burst_time`, `dps_guard`; the reference map gains **Damage/shot** and **Reload**
+   columns and a **DPS verifier** column. Burst delay stays out of the map as ruled, but is in
+   the arithmetic. TD GDI: 8 `DISAGREES`, 3 `EXTREME`, 18 unchanged; the mammoth reads
+   **488, DISAGREES 122%** against the projection's 174%.
+   ⛔ **`w_damage` means different things in different sources** — per-SHOT in
+   `extract_peer_units`, burst-INCLUSIVE in the frozen Cameo snapshot. The cycle and per-shot
+   burst delay are now RECOVERED from each row's own identity, never assumed. Getting this
+   wrong gave the mammoth 800 DPS against a true 400 and called the MLRS `EXTREME 34%` when
+   its real move is `+19%`. See `DESIGN.md` "R1 implemented" and `LESSONS_LEARNED.md`.
 
 ⛔ **Blocked on nothing but sequencing:** merge **#356** (Codex's Wraith order fix — my reorder
 put the 60,000-damage main *after* `Warhead@OwnerChange`, so the Wraith captured a unit and then

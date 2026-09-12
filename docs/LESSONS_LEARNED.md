@@ -1732,3 +1732,30 @@ live node is called `Warhead@X_Flat`; after the rename the dormant removal delet
 and it is re-appended at the END of the list — a **firing-order** change, the Wraith class. Before
 any such rename, check whether the target name already appears in the weapon, and handle the
 collision explicitly instead of letting the merge resolve it.
+
+## `w_damage` means different things in different sources, and reading it wrong doubles burst
+
+Two conventions live side by side in the reference corpus, and neither file says so:
+
+* `tools/reference/extract_peer_units.py` sets `w_damage = audit["damage_pos"]` — damage per
+  **shot** — and computes `w_dps = damage_pos * burst / cycle`.
+* the frozen Cameo snapshot (`docs/reference/cameo_baselines/pre_reference_*.json`) stores a
+  **burst-inclusive** `w_damage`, with `w_dps = w_damage / cycle` and no burst factor at all.
+
+Composing DPS as `damage * burst / cycle` therefore gives the mammoth **800** against a true
+**400**, and reported `td_gdi_mlrs` as `EXTREME 34%` when its actual move is `+19%` — a verdict
+that would have sent someone to "fix" a weapon that was fine.
+
+⚠ **Recover the cycle from the row's own identity instead of assuming a convention:**
+`cycle = w_damage / w_dps`, then `burst_time = cycle - w_reload`, then
+`per_shot_delay = burst_time / (w_burst - 1)`. That is correct under either convention because
+it never assumes one. It also recovers the burst delays that are deliberately absent from the
+reference map. Verified on the shipped rows: mammoth `32000/400 = 80` against `w_reload 72`
+(8 ticks/shot at burst 2); MLRS `48000/352.94 = 136` against `w_reload 111` (5 ticks/shot at
+burst 6 — the engine default). `reference_targets.recover_burst_time` does this, and
+`_guard_self_test` pins both rows.
+
+⚠ **And burst is not a DPS multiplier under the burst-inclusive convention.** It reaches DPS
+only by lengthening the cycle, so dropping burst 6 → 2 SHORTENS the cycle and nudges DPS *up*.
+A guard that treats a burst change as a proportional DPS change will flag every burst target as
+extreme.

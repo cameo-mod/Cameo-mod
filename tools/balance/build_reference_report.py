@@ -18,6 +18,7 @@ from __future__ import annotations
 import argparse
 import html
 import json
+import re
 import pathlib
 import sys
 
@@ -106,6 +107,64 @@ def arm_note(actor, led_arms):
     return f'<span class="muted" title="{n} priced armaments; rate uses the selected baseline armaments">&#215;{n}</span>' if n > 1 else ""
 
 
+def dps_verifier_cell(cameo_row, rows, tgt):
+    """Total DPS as R1's GUARD RAIL: never a target, only a verdict on the components.
+
+    Three things can come back, and the middle one is why the ruling exists:
+
+      no change / a ratio  composing the component targets moves DPS by this much.
+      DISAGREES            the components and the independent DPS projection tell materially
+                           different stories. `td_gdi_mammothtank` produced the ruling: the
+                           DPS projection alone said +73.7%, damage-plus-reload said +21.2%,
+                           1.43x apart. Neither is wrong — they are separate votes, and a
+                           human picks.
+      EXTREME              the composed move alone exceeds EXTREME_RATIO.
+
+    Burst delays are deliberately NOT a column (maintainer: "the burst delay should be
+    referenced but not in the reference map"), but they ARE in the cycle. They are RECOVERED
+    from each row's own identity rather than looked up, which also makes the cell immune to
+    the per-shot-vs-burst-inclusive `w_damage` difference between sources — see
+    `reference_targets.recover_burst_time`.
+    """
+    keys = ("w_damage", "w_burst", "w_reload")
+    cur = {k: cameo_row.get(k) for k in keys}
+    cur["w_dps"] = cameo_row.get("w_dps")
+    comp = {k: _cell_value(tgt.get(k)) for k in keys}
+    g = rt.dps_guard(cur, comp, _cell_value(tgt.get("w_dps")))
+    if g is None:
+        return '<span class="muted">—</span>'
+    pct = f'{g["composed_ratio"] * 100:.0f}%'
+    bd = f'burst delay {g["burst_delay_per_shot"]:.0f}t/shot (recovered, not a column)'
+    if g["verdict"] == "ok":
+        tag = (f'<span class="tag" title="{bd}">no change</span>'
+               if abs(g["composed_ratio"] - 1) < 0.02
+               else f'<span class="tag" title="{bd}">{pct} of now</span>')
+    elif g["verdict"] == "extreme":
+        tag = (f'<b class="warn" title="the composed move alone exceeds '
+               f'{rt.EXTREME_RATIO:g}x; {bd}">EXTREME {pct}</b>')
+    else:
+        tag = (f'<b class="warn" title="components say {pct} of now, the DPS projection says '
+               f'{g["projected_ratio"] * 100:.0f}% — {1 / g["disagreement"]:.2f}x apart; '
+               f'separate votes, pick one. {bd}">DISAGREES {pct}</b>')
+    return f'{g["composed_dps"]:.0f} {tag}'
+
+
+def _cell_value(cell):
+    """Pull the unrounded projection back out of a rendered estimate cell.
+
+    `estimate_cell` returns HTML, and the guard needs the NUMBER. Parsing display output would
+    be fragile, so `estimate_cell` stashes the value it used on the string via a data
+    attribute; absent that, there is nothing to verify and the guard abstains rather than
+    guessing.
+    """
+    if isinstance(cell, (int, float)):
+        return cell
+    if not isinstance(cell, str):
+        return None
+    m = re.search(r'data-v="([-0-9.eE+]+)"', cell)
+    return float(m.group(1)) if m else None
+
+
 def estimate_cell(rows, cameo_row, stat, dist, cdist, assigned_sources, flag_change=None):
     """Show metric evidence separately from identity matches; never relax eligibility.
 
@@ -166,7 +225,11 @@ def estimate_cell(rows, cameo_row, stat, dist, cdist, assigned_sources, flag_cha
                  else ' <span class="tag" title="raw target rounds to the current value">'
                       'no change</span>')
     tooltip = html.escape(explanation + (' ' + '; '.join(reasons) if reasons else ''), quote=True)
-    return (f'<span title="{tooltip}">{num(value)}'
+    # `data-v` carries the UNROUNDED projection so the DPS verifier can compose the component
+    # targets arithmetically. Re-deriving it by parsing the displayed number would silently
+    # feed the guard a rounded value, and rounding is exactly what hid the burst 1.67 -> "2".
+    dv = "" if value is None else f' data-v="{value:.10g}"'
+    return (f'<span{dv} title="{tooltip}">{num(value)}'
             f'<small class="evidence">{status}</small></span>{badge}')
 
 
@@ -297,8 +360,10 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
                     '<th class="n">HP (now → reference)</th>'
                     '<th class="n">Speed (now → reference)</th>'
                     '<th class="n">Range (now → reference)</th>'
-                    '<th class="n">damage/tick (now → reference)</th>'
+                    '<th class="n">Damage/shot (now → reference)</th>'
+                    '<th class="n">Reload (now → reference)</th>'
                     '<th class="n">Burst (now → reference)</th>'
+                    '<th class="n">DPS verifier</th>'
                     '<th class="n">Cost (now → reference)</th>'
                     '</tr></thead><tbody>')
         for a in group:
@@ -339,6 +404,16 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
             selected_dist, selected_cdist = (hero_context if c.get('hero') and hero_context else (dist, cdist))
             tgt = {stat: estimate_cell(rows, c, stat, selected_dist, selected_cdist, len(srcs))
                    for stat in ('hp', 'speed', 'cost', 'w_range', 'w_dps')}
+            # ⭐ R1, 2026-09-12: the WEAPON COMPONENTS are the referenced inputs and total DPS
+            # is only a guard rail. Damage and reload therefore get their own columns, and the
+            # old `damage/tick` column becomes the verifier — it reports whether composing the
+            # components produces something extreme, or something that disagrees with what the
+            # DPS projection independently claims (the mammoth was 1.43x apart).
+            for stat in rt.COMPONENT_STATS:
+                if stat == 'w_burst':
+                    continue
+                tgt[stat] = estimate_cell(rows, c, stat, selected_dist, selected_cdist,
+                                          len(srcs), flag_change=c.get(stat))
             # ⭐ BURST added 2026-09-12 at the maintainer's request: "update the reference map to
             # also display burst since that's important and if it should change I should know it
             # in the big reference map table". It carries `flag_change` because `Burst` may not be
@@ -359,8 +434,10 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
                 f'<td class="n">{num(c.get("hp"))} <span class="muted">→</span> {tgt["hp"]}</td>'
                 f'<td class="n">{num(c.get("speed"))} <span class="muted">→</span> {tgt["speed"]}</td>'
                 f'<td class="n">{num(c.get("w_range"))} <span class="muted">→</span> {tgt["w_range"]}</td>'
-                f'<td class="n">{num(c.get("w_dps"))}{arm_note(a, led_arms)} <span class="muted">→</span> {tgt["w_dps"]}</td>'
+                f'<td class="n">{num(c.get("w_damage"))}{arm_note(a, led_arms)} <span class="muted">→</span> {tgt["w_damage"]}</td>'
+                f'<td class="n">{num(c.get("w_reload"))} <span class="muted">→</span> {tgt["w_reload"]}</td>'
                 f'<td class="n">{num(c.get("w_burst"))} <span class="muted">→</span> {tgt["w_burst"]}</td>'
+                f'<td class="n">{dps_verifier_cell(c, rows, tgt)}</td>'
                 f'<td class="n">{num(c.get("cost"))} <span class="muted">→</span> {tgt["cost"]}</td></tr>')
         body.append("</tbody></table>")
         if reference_details:

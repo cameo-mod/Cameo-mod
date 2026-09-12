@@ -1021,6 +1021,37 @@ from the DPS target, that is a flag to look at, not a number to overwrite the co
 targets never composed — 1.42x apart on `td_gdi_mammothtank`, 1.64x on `td_gdi_mlrs` — and the
 resolution is that four of them are inputs and the fifth is a check.
 
+### R1 implemented, 2026-09-12
+
+`reference_targets.COMPONENT_STATS` / `VERIFIER_STATS`, `compose_dps`, `recover_burst_time`,
+`dps_guard` (+ `_guard_self_test`), and a **DPS verifier column** in the reference map, which
+now also carries **Damage/shot** and **Reload** as their own columns. Burst delay stays OUT of
+the map, as ruled, but IS in the arithmetic. Verdicts on TD GDI: 8 `DISAGREES`, 3 `EXTREME`,
+18 unchanged.
+
+`EXTREME_RATIO` 2.00, `DISAGREE_RATIO` 1.25 — the latter deliberately BELOW the mammoth's own
+1.43x component-vs-aggregate gap, so the case that produced the ruling is flagged rather than
+waved through. The mammoth now reads **488, DISAGREES 122%** against the projection's 174%.
+
+⛔ **`w_damage` MEANS DIFFERENT THINGS IN DIFFERENT SOURCES, and reading it wrong
+double-counts burst.** `extract_peer_units` sets `w_damage = audit["damage_pos"]` — damage per
+SHOT — with `w_dps = damage_pos x burst / cycle`. The frozen Cameo snapshot's `w_damage` is
+**burst-INCLUSIVE**, with `w_dps = w_damage / cycle` and no burst factor at all. Proven on the
+shipped rows: mammoth `32000/400 = 80` ticks against `w_reload 72`; MLRS
+`48000/352.94 = 136` against `w_reload 111`.
+
+So the cycle and the per-shot burst delay are **RECOVERED from each row's own identity**
+(`recover_burst_time`), never assumed — which makes the guard correct under either convention.
+The first implementation multiplied by burst regardless and gave the mammoth 800 DPS against a
+true 400, and reported the MLRS as `EXTREME 34%` when its real move is `+19%`. A projected
+target arrives in the SAME units as the Cameo row it was projected onto, so composing in
+Cameo's convention is correct by construction.
+
+⚠ **A burst change alone barely moves DPS, and must not read as extreme.** Burst reaches DPS
+only by lengthening the cycle through burst delays; under a burst-inclusive `w_damage` it is
+not a multiplier. The MLRS target drops burst 6 → 2, which SHORTENS the cycle and nudges DPS
+*up*. `_guard_self_test` asserts this case permanently.
+
 **R2 — Reference everything first, INCLUDING price; then fit to the formula, and BOTH may move.**
 > *"we first reference everything including prices and then try to fit everything inside the
 > balance formula as good as possible which means prices can move but so can the stats to
