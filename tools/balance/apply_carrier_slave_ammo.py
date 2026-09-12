@@ -145,18 +145,17 @@ def build_plan(rs):
         pool_names = set(want_arms or law.DEFAULT_POOL_ARMAMENTS)
         for a in arms:
             try:
-                usage = int(str(a.get("cur_usage") or "1").split(",")[0])
+                usage = int(str(p["usage"].get(a["key"], a.get("cur_usage") or "1")).split(",")[0])
             except ValueError:
                 usage = 1
             if a["name"] not in pool_names or usage <= 0:
                 continue
-            expected_pause = "!" + pool_condition if usage == 1 else f"{pool_condition} < {usage}"
+            expected_pause = law.minimum_ammo_pause(pool_condition, usage)
             existing_pause = kv(a["resolved"]).get("PauseOnCondition")
             existing_requires = kv(a["resolved"]).get("RequiresCondition", "")
-            if (existing_pause == expected_pause
-                    or (usage == 1 and pool_condition in {
-                        token.strip() for token in existing_requires.split(",")
-                    })):
+            if law.pause_gate_sufficient(pool_condition, usage, existing_pause,
+                                         existing_requires,
+                                         global_gate=False):
                 continue
             local_arm = a["local"]
             if local_arm is not None:
@@ -164,7 +163,7 @@ def build_plan(rs):
                 if existing_pause is not None and pause_node is not None:
                     plan[pause_node.file][pause_node.line].append(
                         ("sub", f"\t\tPauseOnCondition: {existing_pause}",
-                         f"\t\tPauseOnCondition: {expected_pause}"))
+                         f"\t\tPauseOnCondition: {law.preserved_pause(existing_pause, pool_condition, usage)}"))
                 else:
                     plan[local_arm.file][local_arm.line].append(
                         ("ins", [f"\t\tPauseOnCondition: {expected_pause}"]))
