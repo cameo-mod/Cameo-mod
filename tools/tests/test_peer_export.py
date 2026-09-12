@@ -393,6 +393,32 @@ class RefusalTest(ExportTestBase):
         finally:
             epu.find_checkout = orig
 
+    def test_openra_legacy_route_has_no_cameo_engine_fallback(self):
+        """Upstream OpenRA rows must go absent unless a reviewed root is explicit.
+
+        `cameo-engine` is the fork we ship, so allowing any automatic candidate to satisfy an
+        OpenRA base peer would emit fork data under an upstream label. The explicit route remains
+        available for a reviewed checkout and commit; the automatic route must stay fail-closed.
+        """
+        for mod_id in ("ra", "cnc", "ts", "d2k"):
+            label, data, err = epu.extract(mod_id)
+            self.assertIsNone(data, mod_id)
+            self.assertIn("automatic extraction disabled", err, label)
+
+    def test_openra_legacy_cli_refuses_before_corpus_write(self):
+        out = self.out_dir / "corpus.md"
+        out.write_bytes(b"existing corpus sentinel\n")
+        before = out.read_bytes()
+        original_out = epu.OUT
+        epu.OUT = out
+        try:
+            rc, _, err = self.run_main(["--mod", "ra"])
+        finally:
+            epu.OUT = original_out
+        self.assertEqual(rc, 1)
+        self.assertIn("automatic extraction is disabled", err)
+        self.assertEqual(out.read_bytes(), before)
+
     def test_source_change_refused(self):
         out = self.out_dir / "changed.jsonl"
         orig = epu.extract
