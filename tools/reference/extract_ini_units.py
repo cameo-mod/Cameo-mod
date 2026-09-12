@@ -296,6 +296,68 @@ def channel_ambiguities(ini: dict, w: dict, warhead: str) -> list:
     return sorted(found)
 
 
+# ── PHYSICS: projectile speed / acceleration / spread / falloff ─────────────────────────────
+# Maintainer, 2026-09-12: "check reference data for projectile speed, acceleration and spread
+# and falloff ... those should all be also collected but not automatically be applied, only
+# after I review and approve them" and "all the requested data must always be collected for
+# every unit".
+#
+# ⛔ AND IT IS NOT A UNIT STAT. Maintainer, same day: "it's for later when we review
+# projectiles and warhead template spread and damage falloff but it has nothing to do with
+# the unit itself. It's a SEPARATE review process." So `physics_of` is a helper for
+# `extract_projectile_geometry.py`, which emits its OWN corpus keyed by projectile and by
+# warhead -- NOT a field on the unit row. It was briefly wired into `weapon_of` and that was
+# wrong: a projectile is shared by many weapons, so hanging its geometry off one unit both
+# duplicates it and implies the unit owns it.
+#
+# Nothing here joins WEAPON_STATS or ARMOR_STATS, so none of it can vote: those two tuples
+# are what `reference_distribution` builds distributions from and what `target_for` is ever
+# called on. Wiring any of it into a unit target is a deliberate, separate approval.
+#
+# ⛔ VERBATIM, NEVER NORMALISED, because the UNITS DIFFER PER ENGINE and the corpus has no
+# business guessing:
+#   * TD-era (DTA) warheads declare `Spread` in LEPTONS (`DemoAtomicWH` 512, `MultiClusterWH`
+#     48, `NukeLaunchWH` 4) -- 256 leptons to a cell.
+#   * RA2/YR-era warheads declare `CellSpread` (`BlueJammer` 225, `TrueSuperIronWeaponWH`
+#     200), and those magnitudes are NOT plain cells; Ares fixed-point providers are in play.
+#     Deciding what 225 means is exactly the review this data is being collected for.
+# `w_phys_spread_key` therefore records WHICH key supplied the value, so a reviewer never has
+# to guess which engine's units they are reading. Reads are EXACT-CASE like every other read
+# in this file (OpenTS looks INI names up by raw bytes; a near-miss spelling reads as absent).
+#
+# Where each one lives, measured over the corpus:
+#   Speed         on the WEAPON section       (MO 1037, DTA 212)  -- the authored projectile speed
+#   Acceleration  on the PROJECTILE section   (MO  174, DTA  54)
+#   ROT           on the PROJECTILE section   (MO  213, DTA  80)  -- guided-missile turn rate,
+#                        which is the movement model PROJECTILE_TRAVEL.md flags as missing
+#   Arcing/Inaccurate on the PROJECTILE section (MO 84/66, DTA 15/8) -- qualifiers that say
+#                        whether a speed number even describes a straight line
+#   CellSpread    on the WARHEAD section      (MO  537, DTA  10 as CellSpread + 139 as Spread)
+#   PercentAtMax  on the WARHEAD section      (MO  401, DTA   4)  -- damage at the blast edge,
+#                        the INI analogue of Cameo's `Falloff` tail
+PHYSICS_KEYS = ("w_phys_speed", "w_phys_accel", "w_phys_rot", "w_phys_arcing",
+                "w_phys_inaccurate", "w_phys_spread", "w_phys_spread_key",
+                "w_phys_falloff_pct")
+
+
+def physics_of(ini: dict, w: dict, warhead: str, projectile: str) -> dict:
+    """Collect-only travel and blast geometry. Verbatim values, with the key that supplied
+    the spread, so a reviewer can tell TD leptons from RA2 cell-spread."""
+    proj = ini.get((projectile or "").strip()) or {}
+    wh = ini.get((warhead or "").strip()) or {}
+    spread_key = "CellSpread" if "CellSpread" in wh else ("Spread" if "Spread" in wh else None)
+    return {
+        "w_phys_speed": num(w.get("Speed")),
+        "w_phys_accel": num(proj.get("Acceleration")),
+        "w_phys_rot": num(proj.get("ROT")),
+        "w_phys_arcing": bool_value(proj.get("Arcing")),
+        "w_phys_inaccurate": bool_value(proj.get("Inaccurate")),
+        "w_phys_spread": num(wh.get(spread_key)) if spread_key else None,
+        "w_phys_spread_key": spread_key,
+        "w_phys_falloff_pct": num(wh.get("PercentAtMax")),
+    }
+
+
 def relabel_weapon(rec: dict, prefix: str) -> dict:
     """Copy a weapon record under another slot prefix (`w2_*`, `wdummy_*`), keeping only the
     fields that carry a value — the same shape the `w2_` merge has always used."""
