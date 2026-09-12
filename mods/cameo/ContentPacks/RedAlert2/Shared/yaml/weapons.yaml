@@ -2257,7 +2257,7 @@ MigMissiles:
 	Inherits@2: ^HeavyAAWeapon
 	Inherits@3: ^FlakWeapon
 	Inherits@4: ^RA2MediumMissile
-	Inherits@compat: ^Compatibility_MissileAP_Medium_GroundShip
+	Inherits@compat: ^Warhead_MissileAP_Medium_GroundShip
 	Inherits@fx: ^Effect_Explosion_Large_RA2
 	ReloadDelay: 50
 	Burst: 4
@@ -2748,7 +2748,7 @@ RA2SCUD:
 		ValidTargets: Ground, Air
 
 RA2SCUD_rad:
-	Inherits@roleflat: ^Compatibility_MissileChem_HeavyFlat
+	Inherits@roleflat: ^Warhead_MissileChem_Heavy_Flat
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^MediumChemicalWeapon
 	Inherits@3: ^HeavyChemicalWeapon
@@ -2792,7 +2792,7 @@ RA2SCUD_rad:
 	-Warhead@HeavyChemicalWeapon:
 	-Warhead@LightChemicalWeapon:
 	-Warhead@MediumChemicalWeapon:
-	Warhead@MissileChem_HeavyFlatCompatibility:
+	Warhead@MissileChem_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 54000
 		PercentageScale: 0

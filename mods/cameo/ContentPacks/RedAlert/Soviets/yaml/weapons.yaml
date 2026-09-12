@@ -112,7 +112,7 @@ ra1_soviets_grenadier_grenaderaexplode:
 	-Warhead@Demolition_Light:
 	-Warhead@Flame_Light:
 ra1_soviets_grenadier_grenadethermobaric:
-	Inherits@roleflat: ^Compatibility_Thermobaric_LightFlat
+	Inherits@roleflat: ^Warhead_Thermobaric_Light_Flat
 	Inherits: ^ShrapnelWeapon
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^GrenadeRALegacy
@@ -139,7 +139,7 @@ ra1_soviets_grenadier_grenadethermobaric:
 		PhysicalStateScale: 100
 	Warhead@Flame_Light:
 		Damage: 4000
-	Warhead@Thermobaric_LightFlatCompatibility:
+	Warhead@Thermobaric_Light_Flat:
 		ValidTargets: Ground, Water
 		Damage: 16000
 		PercentageScale: 4994
@@ -184,7 +184,7 @@ ra1_soviets_grenadier_grenadethermobaricexplode:
 		Damage: 1
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@Thermobaric_LightFlatCompatibility:
+	Warhead@Thermobaric_Light_Flat:
 		ValidTargets: Ground, Water
 		Damage: 16000
 		PercentageScale: 4994
@@ -1310,8 +1310,7 @@ HindMissiles:
 		VerticalRateOfTurn: 16
 
 ra1_soviets_hindattackhelicopter_hindmissilesthermobaric:
-	Inherits@roleflat: ^Compatibility_Thermobaric_MediumFlat
-	Inherits@collapsewh: ^Warhead_Thermobaric_Medium
+	Inherits@roleflat: ^Warhead_Thermobaric_Medium_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1394,7 +1393,7 @@ ra1_soviets_hindattackhelicopter_hindmissilesthermobaric:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 0
-	Warhead@Thermobaric_MediumFlatCompatibility:
+	Warhead@Thermobaric_Medium_Flat:
 		PercentageDenominator: 10000
 		ValidTargets: Ground, Water, Air
 		Damage: 5000
@@ -1484,7 +1483,7 @@ ra1_soviets_hindattackhelicopter_hindmissilesnuclear:
 	-Warhead@Nuclear_Super_Percentage:
 
 ra1_soviets_kamovattackhelicopter_kamovmissilestesla:
-	Inherits@roleflat: ^Compatibility_MissileTesla_MediumFlat
+	Inherits@roleflat: ^Warhead_MissileTesla_Medium_Flat
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^MediumFlameWeapon
@@ -1584,7 +1583,7 @@ ra1_soviets_kamovattackhelicopter_kamovmissilestesla:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	Warhead@MissileTesla_MediumFlatCompatibility:
+	Warhead@MissileTesla_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 2750
 		PercentageScale: 0
@@ -1713,7 +1712,7 @@ ra1_soviets_kamovattackhelicopter_kamovteslaarcfragment2:
 	-Warhead@LightMissile:
 	-Warhead@TeslaWeapon:
 
-^Compatibility_IncendiaryYakComposition:
+^Warhead_IncendiaryYakComposition:
 	Inherits@roleflat: ^Compatibility_Flame_LightFlat
 	Inherits@flame: ^Warhead_Flame_Light
 	Inherits@bullet: ^Warhead_Bullet_Medium
@@ -1743,7 +1742,7 @@ ra1_soviets_yakscoutplane_chaingun:
 		Damage: 1000
 
 ra1_soviets_yakscoutplane_chaingun_incendiary:
-	Inherits@wh: ^Compatibility_IncendiaryYakComposition
+	Inherits@wh: ^Warhead_IncendiaryYakComposition
 	Inherits@proj: ^Projectile_Flame_Light_IncendiaryBullet
 	Inherits@fx: ^Effect_Flame_Light
 	TargetActorCenter: true
@@ -1778,7 +1777,7 @@ ra1_soviets_teslayak_chaingun:
 		Damage: 1000
 
 ra1_soviets_teslayak_chaingun_incendiary:
-	Inherits@wh: ^Compatibility_IncendiaryYakComposition
+	Inherits@wh: ^Warhead_IncendiaryYakComposition
 	Inherits@proj: ^Projectile_Flame_Light_IncendiaryBullet
 	Inherits@fx: ^Effect_Flame_Light
 	TargetActorCenter: true
@@ -1813,7 +1812,7 @@ ra1_soviets_nuclearyak_chaingun:
 		Damage: 2000
 
 ra1_soviets_nuclearyak_chaingun_incendiary:
-	Inherits@wh: ^Compatibility_IncendiaryYakComposition
+	Inherits@wh: ^Warhead_IncendiaryYakComposition
 	Inherits@proj: ^Projectile_Flame_Light_IncendiaryBullet
 	Inherits@fx: ^Effect_Flame_Light
 	TargetActorCenter: true
@@ -1848,7 +1847,7 @@ ra1_soviets_su57attackbomber_chaingun:
 		Damage: 4600
 
 ra1_soviets_su57attackbomber_chaingun_incendiary:
-	Inherits@wh: ^Compatibility_IncendiaryYakComposition
+	Inherits@wh: ^Warhead_IncendiaryYakComposition
 	Inherits@proj: ^Projectile_Flame_Light_IncendiaryBullet
 	Inherits@fx: ^Effect_Flame_Light
 	TargetActorCenter: true
@@ -1881,7 +1880,7 @@ ra1_soviets_armoredyak_chaingun:
 		Damage: 4000
 
 ra1_soviets_armoredyak_chaingun_incendiary:
-	Inherits@wh: ^Compatibility_IncendiaryYakComposition
+	Inherits@wh: ^Warhead_IncendiaryYakComposition
 	Inherits@proj: ^Projectile_Flame_Light_IncendiaryBullet
 	Inherits@fx: ^Effect_Flame_Light
 	TargetActorCenter: true
@@ -2291,7 +2290,7 @@ ra1_soviets_teslayak_tesla_bomb:
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 ra1_soviets_nuclearyak_yaknuclearbomb:
-	Inherits@roleflat: ^Compatibility_Nuclear_SuperFlat
+	Inherits@roleflat: ^Warhead_Nuclear_Super_Flat
 	Inherits: ^HeavyBomb
 	Inherits@2: ^HeavyChemicalWeapon
 	Inherits@3: ^HeavyFlameWeapon
@@ -2350,7 +2349,7 @@ ra1_soviets_nuclearyak_yaknuclearbomb:
 		Explosions: nuke_small
 		ImpactSounds: kaboom22.aud
 		ImpactActors: true
-	Warhead@Nuclear_SuperFlatCompatibility:
+	Warhead@Nuclear_Super_Flat:
 		ValidTargets: Ground, Water
 		Damage: 100000
 		PercentageScale: 0
@@ -3171,7 +3170,7 @@ MammothTuskThermobaricTargetingComputer:
 		VerticalRateOfTurn: 12
 
 MammothTuskTesla:
-	Inherits@roleflat: ^Compatibility_MissileTesla_HeavyFlat
+	Inherits@roleflat: ^Warhead_MissileTesla_Heavy_Flat
 	Inherits: ^Grenade
 	Inherits@2: ^LightFlameWeapon
 	Inherits@3: ^TeslaWeapon
@@ -3250,7 +3249,7 @@ MammothTuskTesla:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	Warhead@MissileTesla_HeavyFlatCompatibility:
+	Warhead@MissileTesla_Heavy_Flat:
 		ValidTargets: Ground, Water, Infantry, Monster, Air
 		Damage: 36000
 		PercentageScale: 0
@@ -3265,7 +3264,7 @@ MammothTuskTesla:
 MammothTuskTeslaFragment1Ground:
 	Inherits: MammothTuskTeslaFragment1
 	ValidTargets: Ground, Water
-	Warhead@MissileTesla_HeavyFlatCompatibility:
+	Warhead@MissileTesla_Heavy_Flat:
 		InvalidTargets: Air
 	Warhead@GrenadePercentage:
 		InvalidTargets: Air
@@ -3285,7 +3284,7 @@ MammothTuskTeslaFragment1Ground:
 MammothTuskTeslaFragment2Ground:
 	Inherits: MammothTuskTeslaFragment2
 	ValidTargets: Ground, Water
-	Warhead@MissileTesla_HeavyFlatCompatibility:
+	Warhead@MissileTesla_Heavy_Flat:
 		InvalidTargets: Air
 	Warhead@GrenadePercentage:
 		InvalidTargets: Air
@@ -3345,7 +3344,7 @@ MammothTuskTeslaFragment1:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	Warhead@MissileTesla_HeavyFlatCompatibility:
+	Warhead@MissileTesla_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 18000
 		PercentageScale: 0
@@ -3389,7 +3388,7 @@ MammothTuskTeslaFragment2:
 		Damage: 1
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
-	Warhead@MissileTesla_HeavyFlatCompatibility:
+	Warhead@MissileTesla_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 9000
 		PercentageScale: 0
@@ -3907,7 +3906,7 @@ ra1_soviets_monstertank_missile:
 		PercentageSpread: 50
 
 ra1_soviets_monstertank_missile_tesla:
-	Inherits@roleflat: ^Compatibility_MissileTesla_HeavyFlat
+	Inherits@roleflat: ^Warhead_MissileTesla_Heavy_Flat
 	Inherits: ^Grenade
 	Inherits@2: ^LightFlameWeapon
 	Inherits@3: ^TeslaWeapon
@@ -3992,7 +3991,7 @@ ra1_soviets_monstertank_missile_tesla:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	Warhead@MissileTesla_HeavyFlatCompatibility:
+	Warhead@MissileTesla_Heavy_Flat:
 		ValidTargets: Ground, Water, Infantry, Monster, Air
 		Damage: 126260
 		PercentageScale: 0
@@ -4657,7 +4656,7 @@ ra1_soviets_volkov_volkovmagneticweaponincendiaryteslafragment2:
 	-Warhead@MediumChemicalWeapon:
 
 ra1_soviets_volkov_volkovmagneticweaponincendiarynuclearshells:
-	Inherits@roleflat: ^Compatibility_CannonNuke_HeavyFlat
+	Inherits@roleflat: ^Warhead_CannonNuke_Heavy_Flat
 	Inherits: ^MediumFlameWeapon
 	Inherits@2: ^NuclearWarhead
 	Inherits@3: ra1_soviets_volkov_volkovmagneticweapon
@@ -4726,7 +4725,7 @@ ra1_soviets_volkov_volkovmagneticweaponincendiarynuclearshells:
 		Explosions: nuke_small
 		ImpactSounds: kaboom22.aud
 		ImpactActors: true
-	Warhead@CannonNuke_HeavyFlatCompatibility:
+	Warhead@CannonNuke_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 60000
@@ -4738,7 +4737,7 @@ ra1_soviets_volkov_volkovmagneticweaponincendiarynuclearshells:
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 ParaBombNuke:
-	Inherits@roleflat: ^Compatibility_Nuclear_SuperFlat
+	Inherits@roleflat: ^Warhead_Nuclear_Super_Flat
 	Inherits: ^HeavyBomb
 	Inherits@2: ^HeavyChemicalWeapon
 	Inherits@3: ^HeavyFlameWeapon
@@ -4783,7 +4782,7 @@ ParaBombNuke:
 		AffectsParent: false
 	Warhead@Effect: CreateEffect
 		ImpactSounds: kaboom22.aud
-	Warhead@Nuclear_SuperFlatCompatibility:
+	Warhead@Nuclear_Super_Flat:
 		ValidTargets: Ground, Water
 		Damage: 400000
 		PercentageScale: 0
@@ -5156,7 +5155,7 @@ ra1_soviets_kamovattackhelicopter_incendiarychaingun:
 ra1_soviets_supersonicnuclearbomber_parabombnuke:
 	Inherits: ParaBombNuke
 
-	Warhead@Nuclear_SuperFlatCompatibility:
+	Warhead@Nuclear_Super_Flat:
 		InvalidTargets: Air
 	Warhead@HeavyBombPercentage:
 		InvalidTargets: Air
@@ -5285,7 +5284,7 @@ MammothTuskTeslaInfantryFragment2:
 	Inherits: MammothTuskTeslaFragment2
 	ValidTargets: Ground, Water, Infantry, Monster, Air
 	InvalidTargets: wall
-	Warhead@MissileTesla_HeavyFlatCompatibility:
+	Warhead@MissileTesla_Heavy_Flat:
 		Damage: 9450
 	Warhead@GrenadePercentage:
 		PercentageDenominator: 2000
@@ -5315,7 +5314,7 @@ ra1_soviets_v2rocketlauncher_scudteslafragment2:
 
 MammothTuskTeslaInfantryFragment1_ExplicitDamage21of20:
 	Inherits: MammothTuskTeslaInfantryFragment1
-	Warhead@MissileTesla_HeavyFlatCompatibility:
+	Warhead@MissileTesla_Heavy_Flat:
 		Damage: 18900
 	Warhead@GrenadePercentage:
 		Damage: 21
@@ -5346,7 +5345,7 @@ ra1_soviets_mortarsoldier_siegemortarthermobaric_ExplicitDamage3of4:
 
 MammothTuskTeslaFragment1Ground_ExplicitDamage1of4:
 	Inherits: MammothTuskTeslaFragment1Ground
-	Warhead@MissileTesla_HeavyFlatCompatibility:
+	Warhead@MissileTesla_Heavy_Flat:
 		Damage: 4500
 	Warhead@GrenadePercentage:
 		Damage: 1
@@ -5365,7 +5364,7 @@ MammothTuskTeslaFragment1Ground_ExplicitDamage1of4:
 
 MammothTuskTeslaFragment2Ground_ExplicitDamage1of4:
 	Inherits: MammothTuskTeslaFragment2Ground
-	Warhead@MissileTesla_HeavyFlatCompatibility:
+	Warhead@MissileTesla_Heavy_Flat:
 		Damage: 2250
 	Warhead@GrenadePercentage:
 		Damage: 1

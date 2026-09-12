@@ -82,7 +82,8 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 #   count * 10000 > W1_RATE_BP * corpus
 # 585/2145 = 2727.3 bp, so 2728 is the current rate rounded up to the next basis point.
 # LOWER ONLY — same rule as every count ratchet.
-W1_RATE_BP = 2630   # 564/2145 = 2629.4 bp; was 2728 before the dead-inherit slice
+W1_RATE_BP = 2616   # 561/2145 = 2615.4 bp; 2630 before the compatibility promotion,
+                    # 2728 before the dead-inherit slice
 W1_BASELINE = 576   # historical count ratchet, kept for provenance; W1_RATE_BP is what gates
 # Checks gated on a SHARE of the corpus instead of an absolute count.
 RATE_CHECKS: dict[str, int] = {"W1": W1_RATE_BP}
@@ -98,7 +99,8 @@ W6_BASELINE = 694   # weapons declaring an effect warhead locally
 # W1 could pass a weapon that inherits all three of its parents from other weapons. Both
 # ratchets are set by THIS script's own first run, never from a scratch scan.
 W7_BASELINE = 957   # inherits from another WEAPON (655 distinct weapon-parents)
-W8_BASELINE = 874   # inherits a ^Template outside the three kinds (198 distinct)
+W8_BASELINE = 858   # inherits a ^Template outside the three kinds; 874 -> 858 by promoting
+                    # 33 ^Compatibility_* shims into real ^Warhead_* templates
                     # 687 -> 694: the TOP_LEVEL regex was fixed to match
                     # digit-starting keys (120mm_*, 8Inch, etc.), exposing
                     # 7 weapons previously hidden. LOWER ONLY.

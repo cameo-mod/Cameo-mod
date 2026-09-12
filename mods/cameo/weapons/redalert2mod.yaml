@@ -1174,7 +1174,7 @@ NaxisBlackBomb:
 		AimTargetStances: Enemy, Neutral
 
 NaxisBlackBombSmaller:
-	Inherits@roleflat: ^Compatibility_Demolition_MediumFlat
+	Inherits@roleflat: ^Warhead_Demolition_Medium_Flat
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^HeavyBomb
 	Inherits@3: ^RA2MediumCannon
@@ -1227,7 +1227,7 @@ NaxisBlackBombSmaller:
 ####################################################################################################
 	-Warhead@HeavyBomb:
 	-Warhead@LightChemicalWeapon:
-	Warhead@Demolition_MediumFlatCompatibility:
+	Warhead@Demolition_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 75000
 		PercentageScale: 2666
@@ -1272,9 +1272,8 @@ Lunar_Green105mm:
 		PercentageScale: 9994
 
 SyndicateFireballLauncher:
-	Inherits@roleflat: ^Compatibility_Flame_HeavyFlat
+	Inherits@roleflat: ^Warhead_Flame_Heavy_Flat
 	Inherits: ^Warhead_Flame_Light
-	Inherits@3: ^Warhead_Flame_Heavy
 	Inherits@4: ^Effect_Flame_Heavy
 	ReloadDelay: 44
 	Burst: 4
@@ -1290,7 +1289,7 @@ SyndicateFireballLauncher:
 		Damage: 2000
 	-Warhead@Flame_Heavy:
 	-Warhead@Flame_Light:
-	Warhead@Flame_HeavyFlatCompatibility:
+	Warhead@Flame_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 6000
 		PercentageScale: 9984

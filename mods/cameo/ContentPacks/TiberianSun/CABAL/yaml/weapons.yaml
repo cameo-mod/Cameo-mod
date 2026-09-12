@@ -2113,7 +2113,7 @@ CabalRocketCyborgRocketsUpgraded:
 		PercentageSpread: 50
 
 CabalMothershipRockets:
-	Inherits@roleflat: ^Compatibility_MissileTesla_HeavyFlat
+	Inherits@roleflat: ^Warhead_MissileTesla_Heavy_Flat
 	Inherits: ^TeslaWeapon
 	Inherits@HEAVYMISSILE: ^HeavyMissile
 	Inherits@FLAME: ^MediumFlameWeapon
@@ -2218,7 +2218,7 @@ CabalMothershipRockets:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@MissileTesla_HeavyFlatCompatibility:
+	Warhead@MissileTesla_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 65000
 		PercentageScale: 0

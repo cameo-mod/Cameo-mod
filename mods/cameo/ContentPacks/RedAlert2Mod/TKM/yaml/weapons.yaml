@@ -920,11 +920,11 @@ SandmarineTuskTwin:
 		Damage: 4000
 	-Warhead@FlakWeapon:
 SandmarineTuskCryo:
-	Inherits@finalmain: ^Compatibility_MissileCryo_HeavyFlat
+	Inherits@finalmain: ^Warhead_MissileCryo_Heavy_Flat
 	Inherits: SandmarineTusk
 	Inherits@2: ^CryoMissileProjectile
 	-Warhead@MissileHE_HeavyFlatCompatibility:
-	Warhead@MissileCryo_HeavyFlatCompatibility:
+	Warhead@MissileCryo_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 80000
 		PercentageScale: 9999

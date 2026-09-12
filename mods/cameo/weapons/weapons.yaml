@@ -3885,8 +3885,8 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 
-^Compatibility_TS30mmRail_UnscopedFlat:
-	Warhead@TS30mmRailUnscopedCompatibility: AreaDamage
+^Warhead_TS30mmRail_Unscoped_Flat:
+	Warhead@TS30mmRailUnscoped: AreaDamage
 		Damage: 2000
 		PercentageScale: 0
 
@@ -3895,14 +3895,14 @@ DefuseKit:
 		Damage: 8000
 		PercentageScale: 0
 
-^Compatibility_CabalLaser_GroundSlice:
-	Warhead@CabalLaserGroundCompatibility: AreaDamage
+^Warhead_CabalLaser_GroundSlice:
+	Warhead@CabalLaserGround: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 210000
 		PercentageScale: 0
 
-^Compatibility_ProtonLaser_GroundSlice:
-	Warhead@ProtonLaserGroundCompatibility: AreaDamage
+^Warhead_ProtonLaser_GroundSlice:
+	Warhead@ProtonLaserGround: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 30000
 		PercentageScale: 0
@@ -4503,7 +4503,7 @@ DefuseKit:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 75
 
-^Compatibility_MissileAP_Light_WallExcluded:
+^Warhead_MissileAP_Light_WallExcluded:
 	Warhead@MissileAP_Light_WallExcludedExtraDamage: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -4538,7 +4538,7 @@ DefuseKit:
 			Heroic: 35
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
-^Compatibility_MissileAP_Medium_WallExcluded:
+^Warhead_MissileAP_Medium_WallExcluded:
 	Warhead@MissileAP_Medium_WallExcludedExtraDamage: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -4573,7 +4573,7 @@ DefuseKit:
 			None: 33
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
-^Compatibility_MissileAP_Medium_GroundShip:
+^Warhead_MissileAP_Medium_GroundShip:
 	Warhead@MissileAP_Medium_GroundShipExtraDamage: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -12921,7 +12921,7 @@ LeechDisinfect:
 		DamageTypes: Prone60Percent, TriggerProne, ElectricityDeath
 
 TSTurretLaserFire:
-	Inherits@roleflat: ^Compatibility_Laser_MediumFlat
+	Inherits@roleflat: ^Warhead_Laser_Medium_Flat
 	Inherits: ^SmallArms
 	Inherits@2: ^Chaingun
 	Inherits@3: ^HeavyCannon
@@ -12978,7 +12978,7 @@ TSTurretLaserFire:
 	-Warhead@LaserWeapon:
 	-Warhead@LightFlameWeapon:
 	-Warhead@SmallArms:
-	Warhead@Laser_MediumFlatCompatibility:
+	Warhead@Laser_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 6600
 		PercentageScale: 0
@@ -16610,8 +16610,8 @@ generic_bullet_casing:
 # retired-family consolidation. Percentage applications stay on their
 # legacy nodes to preserve shipped per-node rounding and overflow.
 
-^Compatibility_Arrow_MediumFlat:
-	Warhead@Arrow_MediumFlatCompatibility: AreaDamage
+^Warhead_Arrow_Medium_Flat:
+	Warhead@Arrow_Medium_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -16772,8 +16772,8 @@ generic_bullet_casing:
 			Bomber: 2
 			Fighter: 1
 
-^Compatibility_CannonChem_HeavyFlat:
-	Warhead@CannonChem_HeavyFlatCompatibility: AreaDamage
+^Warhead_CannonChem_Heavy_Flat:
+	Warhead@CannonChem_Heavy_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -16938,8 +16938,8 @@ generic_bullet_casing:
 			Helicopter: 6
 			Spaceship: 5
 
-^Compatibility_Cryo_LightFlat:
-	Warhead@Cryo_LightFlatCompatibility: AreaDamage
+^Warhead_Cryo_Light_Flat:
+	Warhead@Cryo_Light_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -17104,8 +17104,8 @@ generic_bullet_casing:
 			Helicopter: 2
 			Spaceship: 1
 
-^Compatibility_Demolition_MediumFlat:
-	Warhead@Demolition_MediumFlatCompatibility: AreaDamage
+^Warhead_Demolition_Medium_Flat:
+	Warhead@Demolition_Medium_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -17214,8 +17214,8 @@ generic_bullet_casing:
 			Fighter: 11
 			Scout: 10
 
-^Compatibility_Laser_LightFlat:
-	Warhead@Laser_LightFlatCompatibility: AreaDamage
+^Warhead_Laser_Light_Flat:
+	Warhead@Laser_Light_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -17270,8 +17270,8 @@ generic_bullet_casing:
 			Fighter: 2
 			Scout: 1
 
-^Compatibility_Laser_MediumFlat:
-	Warhead@Laser_MediumFlatCompatibility: AreaDamage
+^Warhead_Laser_Medium_Flat:
+	Warhead@Laser_Medium_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -17326,8 +17326,8 @@ generic_bullet_casing:
 			Fighter: 6
 			Scout: 5
 
-^Compatibility_Magic_HeavyFlat:
-	Warhead@Magic_HeavyFlatCompatibility: AreaDamage
+^Warhead_Magic_Heavy_Flat:
+	Warhead@Magic_Heavy_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -17488,8 +17488,8 @@ generic_bullet_casing:
 			Flak: 2
 			None: 1
 
-^Compatibility_MissileChem_HeavyFlat:
-	Warhead@MissileChem_HeavyFlatCompatibility: AreaDamage
+^Warhead_MissileChem_Heavy_Flat:
+	Warhead@MissileChem_Heavy_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -17598,8 +17598,8 @@ generic_bullet_casing:
 			Plate: 11
 			Heroic: 10
 
-^Compatibility_MissileTesla_HeavyFlat:
-	Warhead@MissileTesla_HeavyFlatCompatibility: AreaDamage
+^Warhead_MissileTesla_Heavy_Flat:
+	Warhead@MissileTesla_Heavy_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -17653,8 +17653,8 @@ generic_bullet_casing:
 			Bomber: 14
 			Fighter: 13
 
-^Compatibility_MissileTesla_MediumFlat:
-	Warhead@MissileTesla_MediumFlatCompatibility: AreaDamage
+^Warhead_MissileTesla_Medium_Flat:
+	Warhead@MissileTesla_Medium_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -17708,8 +17708,8 @@ generic_bullet_casing:
 			Bomber: 9
 			Fighter: 8
 
-^Compatibility_Nuclear_SuperFlat:
-	Warhead@Nuclear_SuperFlatCompatibility: AreaDamage
+^Warhead_Nuclear_Super_Flat:
+	Warhead@Nuclear_Super_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		ValidTargets: Ground, Water, Air
 		Spread: 1000
@@ -17799,8 +17799,8 @@ generic_bullet_casing:
 			Helicopter: 11
 			Spaceship: 11
 
-^Compatibility_Plasma_LightFlat:
-	Warhead@Plasma_LightFlatCompatibility: AreaDamage
+^Warhead_Plasma_Light_Flat:
+	Warhead@Plasma_Light_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -17913,8 +17913,8 @@ generic_bullet_casing:
 			Helicopter: 6
 			Spaceship: 6
 
-^Compatibility_Prism_HeavyFlat:
-	Warhead@Prism_HeavyFlatCompatibility: AreaDamage
+^Warhead_Prism_Heavy_Flat:
+	Warhead@Prism_Heavy_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -18021,8 +18021,8 @@ generic_bullet_casing:
 			Bomber: 11
 			Fighter: 10
 
-^Compatibility_Waveforce_HeavyFlat:
-	Warhead@Waveforce_HeavyFlatCompatibility: AreaDamage
+^Warhead_Waveforce_Heavy_Flat:
+	Warhead@Waveforce_Heavy_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -18136,8 +18136,8 @@ generic_bullet_casing:
 			Helicopter: 11
 			Spaceship: 10
 
-^Compatibility_Quantum_MediumFlat:
-	Warhead@Quantum_MediumFlatCompatibility: AreaDamage
+^Warhead_Quantum_Medium_Flat:
+	Warhead@Quantum_Medium_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -18251,8 +18251,8 @@ generic_bullet_casing:
 			Steel: 2
 			Concrete: 1
 
-^Compatibility_CannonChem_MediumFlat:
-	Warhead@CannonChem_MediumFlatCompatibility: AreaDamage
+^Warhead_CannonChem_Medium_Flat:
+	Warhead@CannonChem_Medium_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -18307,8 +18307,8 @@ generic_bullet_casing:
 			Bomber: 6
 			Fighter: 5
 
-^Compatibility_CannonNuke_HeavyFlat:
-	Warhead@CannonNuke_HeavyFlatCompatibility: AreaDamage
+^Warhead_CannonNuke_Heavy_Flat:
+	Warhead@CannonNuke_Heavy_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -18415,8 +18415,8 @@ generic_bullet_casing:
 			Flak: 6
 			None: 5
 
-^Compatibility_MissileQuantum_MediumFlat:
-	Warhead@MissileQuantum_MediumFlatCompatibility: AreaDamage
+^Warhead_MissileQuantum_Medium_Flat:
+	Warhead@MissileQuantum_Medium_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -18529,8 +18529,8 @@ generic_bullet_casing:
 			Bomber: 12
 			Fighter: 10
 
-^Compatibility_Sniper_LightFlat:
-	Warhead@Sniper_LightFlatCompatibility: AreaDamage
+^Warhead_Sniper_Light_Flat:
+	Warhead@Sniper_Light_Flat: AreaDamage
 		ValidTargets: Infantry, Monster, Garrisoned
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -18559,8 +18559,8 @@ generic_bullet_casing:
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		PercentageScale: 0
 
-^Compatibility_Thermobaric_LightFlat:
-	Warhead@Thermobaric_LightFlatCompatibility: AreaDamage
+^Warhead_Thermobaric_Light_Flat:
+	Warhead@Thermobaric_Light_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -18619,8 +18619,9 @@ generic_bullet_casing:
 # Concrete weapons combine folded percentage units; the converter bounds
 # active-health rounding drift and rejects runtime overflow.
 
-^Compatibility_Chemical_HeavyFlat:
-	Warhead@Chemical_HeavyFlatCompatibility: AreaDamage
+^Warhead_Chemical_Heavy_Flat:
+	Inherits: ^Warhead_Chemical_Heavy
+	Warhead@Chemical_Heavy_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -18852,8 +18853,8 @@ generic_bullet_casing:
 # retired-family consolidation. Percentage applications stay on their
 # legacy nodes to preserve shipped per-node rounding and overflow.
 
-^Compatibility_Sonic_MediumFlat:
-	Warhead@Sonic_MediumFlatCompatibility: AreaDamage
+^Warhead_Sonic_Medium_Flat:
+	Warhead@Sonic_Medium_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -18909,8 +18910,9 @@ generic_bullet_casing:
 # Canonical named-family flat profiles used by the reviewed elemental,
 # energy, and sonic role consolidation.
 
-^Compatibility_Flame_HeavyFlat:
-	Warhead@Flame_HeavyFlatCompatibility: AreaDamage
+^Warhead_Flame_Heavy_Flat:
+	Inherits: ^Warhead_Flame_Heavy
+	Warhead@Flame_Heavy_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -18965,8 +18967,9 @@ generic_bullet_casing:
 			Helicopter: 11
 			Spaceship: 10
 
-^Compatibility_Thermobaric_MediumFlat:
-	Warhead@Thermobaric_MediumFlatCompatibility: AreaDamage
+^Warhead_Thermobaric_Medium_Flat:
+	Inherits: ^Warhead_Thermobaric_Medium
+	Warhead@Thermobaric_Medium_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -19023,8 +19026,9 @@ generic_bullet_casing:
 
 # Canonical flat profiles for the reviewed pinned-role cohort.
 
-^Compatibility_Concussion_LightFlat:
-	Warhead@Concussion_LightFlatCompatibility: AreaDamage
+^Warhead_Concussion_Light_Flat:
+	Inherits: ^Warhead_Concussion_Light
+	Warhead@Concussion_Light_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -19481,8 +19485,8 @@ generic_bullet_casing:
 			Helicopter: 11
 			Spaceship: 10
 
-^Compatibility_MissileCryo_HeavyFlat:
-	Warhead@MissileCryo_HeavyFlatCompatibility: AreaDamage
+^Warhead_MissileCryo_Heavy_Flat:
+	Warhead@MissileCryo_Heavy_Flat: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
