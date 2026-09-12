@@ -75,9 +75,18 @@ W3_BASELINE = 12    # dual ^Projectile_ inherit (21->12: same collapse)
 W4_BASELINE = 51    # dual ^Effect_ inherit; Apocalypse effect composition owns its overrides
 W5_BASELINE = 389   # more than one resolved MAIN warhead; merge-payload repairs
 W6_BASELINE = 694   # weapons declaring an effect warhead locally
+# W7/W8 added 2026-09-12 after the maintainer restated the law: the three inherits must come
+# from a TEMPLATE, "and NEVER from another weapon". Nothing measured that clause before, so
+# W1 could pass a weapon that inherits all three of its parents from other weapons. Both
+# ratchets are set by THIS script's own first run, never from a scratch scan.
+W7_BASELINE = 957   # inherits from another WEAPON (655 distinct weapon-parents)
+W8_BASELINE = 874   # inherits a ^Template outside the three kinds (198 distinct)
                     # 687 -> 694: the TOP_LEVEL regex was fixed to match
                     # digit-starting keys (120mm_*, 8Inch, etc.), exposing
                     # 7 weapons previously hidden. LOWER ONLY.
+
+KIND_PREFIXES = ("^Warhead_", "^Projectile_", "^Effect_")
+SEP = " " + chr(0x00B7) + " "
 
 MAIN_TYPES = ("SpreadDamage", "AreaDamage")
 EFFECT_TYPES = {
@@ -202,7 +211,7 @@ def main() -> int:
     inherits, local_fx = scan_source()
     multi = resolved_mains()
 
-    w1, w2, w3, w4, w6 = [], [], [], [], []
+    w1, w2, w3, w4, w6, w7, w8 = [], [], [], [], [], [], []
     missing = collections.Counter()
     for name, parents in sorted(inherits.items()):
         wh = [p for p in parents if p.startswith("^Warhead_")]
@@ -216,6 +225,20 @@ def main() -> int:
             w3.append([f"`{name}`", " ┬╖ ".join(f"`{p}`" for p in pr)])
         if len(fx) > 1:
             w4.append([f"`{name}`", " ┬╖ ".join(f"`{p}`" for p in fx)])
+        # W7/W8 - the maintainer restated the law 2026-09-12: the three inherits must come
+        # from a TEMPLATE, "and NEVER from another weapon". Nothing measured that clause, so
+        # weapon-to-weapon inheritance had no ratchet at all while W1 counted only ARITY.
+        # A weapon can satisfy W1-W4 with exactly three parents and still inherit all three
+        # from other weapons.
+        from_weapon = [pp for pp in parents if not pp.startswith("^")]
+        legacy = [pp for pp in parents
+                  if pp.startswith("^") and not pp.startswith(KIND_PREFIXES)]
+        if from_weapon:
+            w7.append([f"`{name}`", str(len(from_weapon)),
+                       SEP.join(f"`{pp}`" for pp in from_weapon[:4])])
+        if legacy:
+            w8.append([f"`{name}`", str(len(legacy)),
+                       SEP.join(f"`{pp}`" for pp in legacy[:4])])
         if not wh:
             missing["^Warhead_*"] += 1
         if not pr:
@@ -235,6 +258,8 @@ def main() -> int:
         "W4": (len(w4), W4_BASELINE, "two or more `^Effect_*` inherits"),
         "W5": (len(w5), W5_BASELINE, "more than one resolved MAIN warhead"),
         "W6": (len(w6), W6_BASELINE, "effect warheads declared LOCALLY"),
+        "W7": (len(w7), W7_BASELINE, "inherits from ANOTHER WEAPON, not a template"),
+        "W8": (len(w8), W8_BASELINE, "inherits a `^Template` that is not one of the three kinds"),
     }
 
     out = [h1("Weapon shape ΓÇö the ONE-WARHEAD / THREE-INHERIT law")]
@@ -265,6 +290,8 @@ def main() -> int:
         "legitimately have no projectile. Do not ratchet it without a per-weapon pass._\n")
 
     for code, rows, cols in (
+        ("W7", w7, ["weapon", "weapon-parents", "first four"]),
+        ("W8", w8, ["weapon", "legacy templates", "first four"]),
         ("W1", w1, ["weapon", "inherits", "first four"]),
         ("W2", w2, ["weapon", "warhead templates"]),
         ("W3", w3, ["weapon", "projectile templates"]),
