@@ -1261,6 +1261,60 @@ nothing in `extract_stats` / `reference_distribution` / `formula` mentioned it. 
 compared on *pool damage / time to empty*; airfield planes on **damage per sortie with no rate
 at all**; 12 single-shot pools have no rate either.
 
+### R10-R15 — the DEPRECATED-NAME sweep (maintainer, 2026-09-12)
+
+> *"those names are already deprecated and weapons like those should no longer exist. If you
+> find anything like that it is a bug"* — and, asked which cohort first: **"all of the above"**.
+
+⛔ **Finding a deprecated warhead name is a BUG REPORT, not a balance question.** The framing
+that treats `1Dam` or `*FlatCompatibility` as "a legacy main we might fold" is wrong: these
+names were retired, so their presence is debt to be cleared, not a trade-off to be priced.
+
+Measured 2026-09-12 across the resolved ruleset — **~983 deprecated warhead-node instances**:
+
+| cohort | instances | note |
+|---|--:|---|
+| `*Compatibility` nodes | **586** (43 distinct) | `Bullet_MediumFlatCompatibility` 130, `Laser_Heavy…` 47, `Flak_Medium…` 46 |
+| legacy `<n>Dam` / `Damage` / `IonCannon` / `Temperature…` | **397** (17 distinct) | **`1Dam` alone on 277 weapons** |
+| `^Compatibility_*` templates | **36** defined | 35 have users, 369 (weapon, shim) pairs |
+
+**R10 — A PURE RENAME NEEDS NO WARHEAD PERMISSION.** Rule 4 governs changes to a warhead; it
+does not govern its NAME. When the resolved node is identical except for its key, this is
+naming work (rule 9). Every batch is still gated by `resolved_gate` (field SET **and** firing
+ORDER) and boot-gated. A fold or merge that actually moves per-armor damage still needs
+explicit permission.
+
+**R11 — `1Dam` is RENAMED to the family the weapon already inherits.** On the ~229 weapons
+where it is the only main: `Warhead@1Dam` -> `Warhead@<Family>_<Level>` matching the
+`^Warhead_` the weapon already has. The name is a legacy damage index from the source game, not
+a family. ⚠ `1Dam` is NOT a 1-damage marker — the 48 stacked ones carry 1,200-50,000 damage.
+
+**R12 — DELETE the 36 `^Compatibility_*` templates; the 214 exposed users get a per-weapon
+suppression line.** Of 369 (weapon, shim) pairs: **139** already inherit the matching twin (chain
+it, drop the weapon's duplicate direct inherit or that parent sits on one root-to-ancestor path
+twice and the boot crashes); **214** do not and would silently GAIN the twin's content — up to
+132 extra warhead nodes and 378 weapon-level field instances (`TargetActorCenter` 200,
+`ValidTargets` 91, `ReloadDelay` 48, `Range` 39). Each of those gets a local line instead.
+⭐ **MEASURE the suppressions, never predict them:** the same prediction on the `_Flat` shims
+said 78 and the measured answer was **2**, because a later inherit already supplied the value.
+⚠ This SUPERSEDES §11b.1b's "second template per family" blocker below, which was written when
+56 of 64 families had both kinds of user; re-measured today it is **28 of 35**, and R12 resolves
+it without new templates.
+
+**R13 — the 16 orphan shims get their MISSING TEMPLATE GENERATED.** Where a
+`^Compatibility_*` has no matching `^Warhead_<fam>_<level>` at all, run `gen_weapon_template`
+for that family/level rather than inventing a local profile.
+
+**R14 — the 7-main nuke cohort: check whether `AreaDamage` already expresses it.**
+`4Dam_areanuke1` + `7/8Dam_areanuke2` + `10/11Dam_areanuke3` + `1Dam_impact` + `Damage` looks
+like an imported three-ring blast. The maintainer's instruction is explicit: *"investigate if
+that behavior can already be done with our new area damage warhead that we created to replace
+those legacy things and if so do that then"*. So: read the real `Spread`/`Falloff` on each of
+the seven, and if `AreaDamage`'s expanding rings reproduce it, convert — do not merely rename.
+
+**R15 — boot-gate cadence: ONE PER COHORT.** Batch a whole cohort, verify with `resolved_gate`,
+then one boot gate and one commit; bisect within the batch if boot fails.
+
 #### 11b.1b `^Compatibility_*` — what it is, and why the collapse is not arithmetic
 
 > *"Any of those silly compatibility warheads must be resolved and replaced by an actual new
