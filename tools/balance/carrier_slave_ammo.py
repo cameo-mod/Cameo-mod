@@ -79,7 +79,8 @@ def pause_gate_sufficient(condition: str, usage: int, pause: str | None,
     usage = max(int(usage or 1), 1)
     if usage == 1 and global_gate:
         return True
-    if pause == minimum_ammo_pause(condition, usage):
+    expected = minimum_ammo_pause(condition, usage)
+    if pause == expected or (pause and expected in pause):
         return True
     if usage == 1 and condition in {x.strip() for x in (requires or "").split(",")}:
         return True
@@ -91,6 +92,8 @@ def preserved_pause(existing: str | None, condition: str, usage: int) -> str:
     expected = minimum_ammo_pause(condition, usage)
     if not existing or existing == expected:
         return expected
+    if expected in existing:
+        return existing
     return f"({existing}) || ({expected})"
 
 
@@ -269,6 +272,7 @@ def _self_test() -> int:
     assert pause_gate_sufficient("ammo", 10, "ammo < 10", None)
     assert minimum_ammo_pause("ammo", 10) == "ammo < 10"
     assert preserved_pause("reload_lock", "ammo", 10) == "(reload_lock) || (ammo < 10)"
+    assert pause_gate_sufficient("ammo", 10, "(reload_lock) || (ammo < 10)", None)
     print("carrier_slave_ammo self-test: PASS (both of the ruling's worked examples)")
     return 0
 
