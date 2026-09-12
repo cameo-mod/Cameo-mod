@@ -517,8 +517,11 @@ SCWRAITHDRONE:
 	Inherits@CLOAK: ^CloakedAircraft
 	Inherits@armor: ^TerranShipWeaponUpgrades
 	Inherits@weapon: ^TerranShipArmorUpgrades
+	AttackAircraft:
+		RequiresCondition: ammo
 	AmmoPool:
 		Ammo: 1
+		AmmoCondition: ammo
 	ReloadAmmoPool:
 		Delay: 100
 		Count: 1
@@ -546,6 +549,7 @@ SCWRAITHDRONE:
 		Step: 20
 	Armament@PRIMARY:
 		AmmoUsage: 1
+		PauseOnCondition: !ammo
 		Weapon: WraithDroneLaser
 		LocalOffset: 200,0,0
 	CarrierSlave:
@@ -845,8 +849,11 @@ SCINTERCEPTOR:
 	Inherits@weapon: ^ProtossAirWeaponUpgrades
 	Inherits@armor: ^ProtossAirArmorUpgrades
 	Inherits@speed: ^GraviticUpgrade
+	AttackAircraft:
+		RequiresCondition: ammo
 	AmmoPool:
 		Ammo: 4
+		AmmoCondition: ammo
 	ReloadAmmoPool:
 		Delay: 25
 		Count: 1
@@ -888,6 +895,7 @@ SCINTERCEPTOR:
 		RegenAmount: 24
 	Armament@PRIMARY:
 		AmmoUsage: 1
+		PauseOnCondition: !ammo
 		Weapon: InterceptorCannon
 		LocalOffset: 200,0,0
 	AttackAircraft:
