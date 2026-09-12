@@ -978,6 +978,39 @@ in both directions (`AsianTSIonCannon` 7.67x, `MarineMG` 6.00x; `wc2ogremageRune
 after 10 mains became 1). Re-check a conversion against the release tag, not against the commit
 before it.
 
+### 11b.1a TEMPLATE ONLY — never from another weapon (binding, maintainer 2026-09-12)
+
+The maintainer restated the law and closed the one hole in it:
+
+> *"every weapon needs to have exactly 1 warhead, 1 projectile, 1 effect inherited from a
+> template only and **NEVER from another weapon**"*
+
+`§11b.1` constrained the COUNT of inherits. It did not say where they must come from, so a
+weapon could satisfy it with exactly three parents and inherit all three from other weapons.
+Nothing measured that: `audit_weapon_shape.py` W1 counts arity only. Measured 2026-09-12 over
+2,448 concrete weapons:
+
+```
+W7  inherits from ANOTHER WEAPON              957   (655 distinct weapon-parents)
+W8  inherits a ^Template outside the 3 kinds  874   (198 distinct legacy templates)
+```
+
+**THIS OVERRIDES §10's variant-family exemption, for inheritance only** (maintainer ruled
+2026-09-12, asked explicitly). §10 permits two weapons in one actor's variant family to SHARE
+a weapon; it does not permit a variant to INHERIT its structure from the base weapon. So
+`X_elite: Inherits: X` is a violation and must be rewritten to carry the three `^Template`
+inherits itself. That is 481 of the 957 — `_elite` 168, `_aa` 43, `2` 24, `_emp` 13,
+`_upgrade` 11 — and it is the drift-prone half, because each variant must also reproduce
+whatever its base declared LOCALLY. Prove every batch with
+`tools/audit/review_resolve_diff.py`; a missed local override is a silent behaviour change.
+
+⛔ **`^Compatibility_*Flat` is not the cheap slice it looks like.** The template supplies a
+`Damage: 0` warhead, which reads as inert. It is not: of the 416 weapons inheriting one, **365
+resolve a NONZERO damage on that warhead and 361 declare it locally** (`8Inch` 80000,
+`ArtilleryShell` 32000, `110mm_Gun` 30000). The shim is the damage carrier — dropping the
+inherit deletes the damage. Collapsing those is damage-preserving arithmetic per weapon and
+needs warhead permission.
+
 ### 11b.2 The SEVEN kinds of multi-main weapon (the codemod's taxonomy)
 
 `tools/audit/intentional_composites.py` was DELETED on 2026-09-06 — an exemption list cannot
