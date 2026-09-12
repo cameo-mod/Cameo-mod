@@ -1,6 +1,6 @@
 # R1 weapon-stat targets
 
-**Read-only diagnostic.** Damage per shot, reload, and burst are reported as separate reference targets. DPS is retained as an independent verifier; it is never decomposed into those inputs and no ledger or YAML value is written.
+**Read-only diagnostic.** The source damage coordinate (legacy armament-profile burst aggregate; no per-shot claim), reload, and burst are reported as separate reference targets. DPS is retained as an independent verifier; it is never decomposed into those inputs and no ledger or YAML value is written.
 
 Rows with reference families: **348**; source rows scanned: **4367**.
 
@@ -16,7 +16,7 @@ The current reference rows do not expose a common `w_burst_delays` target. There
 
 ## Sample target rows
 
-| actor | damage | reload | burst | DPS verifier | status |
+| actor | damage coordinate | reload | burst | DPS verifier | status |
 |---|---:|---:|---:|---:|---|
 | `asianalliance_alligator` | 35678.8 | 34.6139 | — | 813.638 | `WITHHELD_MISSING_SEPARATE_INPUT` |
 | `asianalliance_asianflametank` | 25015.3 | 16.6407 | 2 | 963.372 | `WITHHELD_MISSING_BURST_DELAYS` |

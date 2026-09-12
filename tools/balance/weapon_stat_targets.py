@@ -21,6 +21,11 @@ import reference_targets as rt  # noqa: E402
 
 INPUT_STATS = ("w_damage", "w_reload", "w_burst")
 VERIFIER_STAT = "w_dps"
+INPUT_LABELS = {
+    "w_damage": "source damage coordinate (legacy armament-profile burst aggregate; not per-shot)",
+    "w_reload": "source reload delay",
+    "w_burst": "source burst count",
+}
 
 
 def _load():
@@ -78,6 +83,7 @@ def build_report():
         "schema": 1,
         "scope": "R1 separate weapon-stat targets; read-only diagnostic",
         "inputs": list(INPUT_STATS),
+        "input_labels": INPUT_LABELS,
         "verifier": VERIFIER_STAT,
         "source_rows": len(_peers),
         "rows": rows,
@@ -93,7 +99,7 @@ def markdown(report):
     lines = [
         "# R1 weapon-stat targets",
         "",
-        "**Read-only diagnostic.** Damage per shot, reload, and burst are reported as separate reference targets. DPS is retained as an independent verifier; it is never decomposed into those inputs and no ledger or YAML value is written.",
+        "**Read-only diagnostic.** The source damage coordinate (legacy armament-profile burst aggregate; no per-shot claim), reload, and burst are reported as separate reference targets. DPS is retained as an independent verifier; it is never decomposed into those inputs and no ledger or YAML value is written.",
         "",
         f"Rows with reference families: **{len(rows)}**; source rows scanned: **{report['source_rows']}**.",
         "",
@@ -106,7 +112,7 @@ def markdown(report):
     ]
     for key, value in counts.items():
         lines.append(f"| `{key}` | {value} |")
-    lines += ["", "## Sample target rows", "", "| actor | damage | reload | burst | DPS verifier | status |", "|---|---:|---:|---:|---:|---|"]
+    lines += ["", "## Sample target rows", "", "| actor | damage coordinate | reload | burst | DPS verifier | status |", "|---|---:|---:|---:|---:|---|"]
     for row in rows[:40]:
         t = row["targets"]
         v = row["dps_verifier"]

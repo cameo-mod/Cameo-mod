@@ -6,6 +6,11 @@
     "w_reload",
     "w_burst"
   ],
+  "input_labels": {
+    "w_damage": "source damage coordinate (legacy armament-profile burst aggregate; not per-shot)",
+    "w_reload": "source reload delay",
+    "w_burst": "source burst count"
+  },
   "verifier": "w_dps",
   "source_rows": 4367,
   "rows": [
