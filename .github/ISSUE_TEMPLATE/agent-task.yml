@@ -77,7 +77,7 @@ body:
     id: checkout
     attributes:
       label: Branch and worktree label
-      description: Branch/ref plus a portable label for the isolated checkout. Use pending before creation; never publish an absolute personal path.
+      description: Branch/ref plus the pushed remote ref and a portable checkout label. Use pending before creation; never publish an absolute personal path. The claim is not valid until its approved empty claim commit is pushed.
     validations:
       required: true
 

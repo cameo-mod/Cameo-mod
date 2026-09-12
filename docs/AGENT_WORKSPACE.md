@@ -26,10 +26,12 @@ Blackrobe takes over that approval role when Aedis's agent exhausts its usage qu
 
 ### Approver identity and quota handover
 
-Aedis identifies the coordinator by provider and persistent session ID in the Project README;
-an arbitrary agent nickname or another Aedis worker does not inherit the role. Until that identity
-is confirmed, existing explicit human assignments continue. Each task records its current approver
-and links the approval receipt. This is delegated approval within human-authorized project scope;
+Aedis identifies the coordinator by human plus provider/tool (for example, Aedis's Claude Code
+coordinator). The session ID is provenance, not the role identity, because a new session may have
+a new ID after restart. An arbitrary agent nickname or another Aedis worker does not inherit the
+role. Until the coordinator identity is confirmed, existing explicit human assignments continue.
+Each task records its current approver and links the approval receipt. This is delegated approval
+within human-authorized project scope;
 task-specific HOLDs and decisions explicitly reserved for humans remain binding.
 
 On a quota-limit report from Aedis, his designated agent, or Blackrobe, Blackrobe records the
@@ -91,13 +93,18 @@ silently treated as free space.
    acceptance evidence, runtime impact, and claim review time. Include the branch, a portable
    worktree label and the exact reading route from `TASK_INDEX.md`. Use `repository#issue` as the
    ID, or the permanent Project draft-item URL while Issues are unavailable.
-2. The current approver (Aedis's designated agent, or Blackrobe during quota fallback) checks
+2. After approval, the writer creates the provider-prefixed branch, an empty claim commit, and
+   pushes that ref to the agreed remote. The remote branch ref is the verifiable claim receipt;
+   a local branch name alone is not a claim. If pushing is not authorized or fails, remain
+   read-only and record the blocker. The current approver (Aedis's designated agent, or Blackrobe
+   during quota fallback) then checks
    active claims, existing reservations and PRs for overlapping paths and shared technical
    dependencies, then approves `Claimed` with a linked receipt. Workers cannot self-approve.
    Work implemented by the approving agent needs a separate reviewer before integration. For the pilot,
    explicitly enumerate paths and directory prefixes; review globs conservatively. Different
    files can still conflict through shared templates, schemas or generators.
-3. Start each writer in an isolated worktree or clone with its own branch and approved base.
+3. Start each writer in an isolated worktree or clone from the pushed branch/base with its own
+   branch and approved base.
    Read-only reviewers may overlap. Start the pilot with at most one write task per human; expand
    only after the handoff process works. A local supervisor may use workers, but must isolate each
    independent writer and partition the parent's approved scope.
@@ -143,6 +150,10 @@ expired claim with unfinished work, plus quota takeover and handback. In each ca
 recoverable handoff. These are acceptance scenarios to run before expanding the pilot, not tests
 already performed by this documentation PR.
 
+With two agents, review can be mutual rather than independent: each side may review the other's
+work while the current approver also integrates it. Record that limitation on consequential tasks
+and escalate to a third reviewer when the pilot's humans decide it is needed.
+
 ## Required operating sequence
 
 Read `AGENTS.md`, use `TASK_INDEX.md` to locate existing tools and technical decisions, then read
@@ -169,7 +180,9 @@ Keep packaging, deployment and other workflows unchanged. Use relevant local che
 review; do not enable CI, add replacement CI, or make CI a pilot activation condition without a
 new explicit human request. PR #343 added a branch filter only; it did not enable that workflow.
 
-For runtime-affecting changes, keep build, menu-load and in-game proof distinct. A menu-load test
+For engine-content changes, a merge requires the applicable boot evidence. If launch authorization
+or the runtime environment is unavailable, hold the engine change for a human rather than merging
+it without proof. For other runtime-affecting changes, keep build, menu-load and in-game proof distinct. A menu-load test
 must identify the tested commit/build and new logs; it cannot establish gameplay correctness.
 Launch the game only when authorized. If runtime review is pending, say so in the PR instead of
 claiming complete validation. Never change OS security settings or bypass a blocked launch as

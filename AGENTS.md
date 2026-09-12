@@ -42,6 +42,9 @@ go-live decision in `docs/AGENT_WORKSPACE.md` and the Project README.
   immediately before the first edit.
 - Use a provider-prefixed branch containing the task number and subject, such as
   `codex/123-fix-description` or `claude/123-fix-description`.
+- After the current approver approves a write claim, create an empty claim commit and push the
+  branch ref to the agreed remote. A local branch name alone is not a verifiable claim. If push
+  authorization or connectivity is missing, remain read-only and record the blocker.
 - Stage named paths only. Never broadly stage, reset, clean, restore, rebase, delete, or move work
   that may belong to another person or agent.
 - Keep each branch to one sentence-worth of purpose. Before an overnight handoff, publish a draft
