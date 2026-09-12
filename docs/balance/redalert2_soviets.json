@@ -339,11 +339,12 @@
        "^HeavyAAWeapon",
        "^FlakWeapon",
        "^RA2MediumMissile",
-       "^Compatibility_MissileAP_Medium_GroundShip",
+       "^Warhead_MissileAP_Medium_GroundShip",
        "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium"
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_MissileAP_Medium_GroundShip"
       ],
       "weapon": "MigMissiles",
       "weapon_class_source": "template"
@@ -398,7 +399,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7600",
       "reloaddelay": "50",
@@ -413,10 +414,11 @@
       ],
       "warheads": [
        "^Warhead_Chemical_Medium",
-       "^Warhead_MissileAP_Medium"
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_MissileAP_Medium_GroundShip"
       ],
       "weapon": "MigMissiles_rad",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "primary",
@@ -472,7 +474,8 @@
        "^Effect_Terrorist_Explosion_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium"
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_MissileAP_Medium_GroundShip"
       ],
       "weapon": "MigMissiles_fire",
       "weapon_class_source": "template"
@@ -531,7 +534,8 @@
        "^Effect_Kirov_Tesla_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium"
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_MissileAP_Medium_GroundShip"
       ],
       "weapon": "MigMissiles_tesla",
       "weapon_class_source": "template"
@@ -589,7 +593,8 @@
        "MigMissiles"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium"
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_MissileAP_Medium_GroundShip"
       ],
       "weapon": "MigMissiles_elite",
       "weapon_class_source": "template"
@@ -644,7 +649,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8600",
       "reloaddelay": "50",
@@ -655,10 +660,11 @@
       ],
       "warheads": [
        "^Warhead_Chemical_Medium",
-       "^Warhead_MissileAP_Medium"
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_MissileAP_Medium_GroundShip"
       ],
       "weapon": "MigMissiles_rad_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "primary",
@@ -713,7 +719,8 @@
        "MigMissiles_fire"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium"
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_MissileAP_Medium_GroundShip"
       ],
       "weapon": "MigMissiles_fire_elite",
       "weapon_class_source": "template"
@@ -771,7 +778,8 @@
        "MigMissiles_tesla"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium"
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_MissileAP_Medium_GroundShip"
       ],
       "weapon": "MigMissiles_tesla_elite",
       "weapon_class_source": "template"
@@ -819,7 +827,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7600",
       "reloaddelay": "50",
@@ -831,10 +839,11 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Medium",
-       "^Warhead_MissileAP_Medium"
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_MissileAP_Medium_GroundShip"
       ],
       "weapon": "MigMissiles_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "secondary",
@@ -879,7 +888,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8600",
       "reloaddelay": "50",
@@ -891,10 +900,11 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Medium",
-       "^Warhead_MissileAP_Medium"
+       "^Warhead_MissileAP_Medium",
+       "^Warhead_MissileAP_Medium_GroundShip"
       ],
       "weapon": "MigMissiles_AA_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -4962,7 +4972,6 @@
       "requires": "rank-elite",
       "slot": "Armament@SECONDARYELITE",
       "versus_templates": [
-       "^Warhead_MissileAA_Medium",
        "RA2MammothTusk_AA"
       ],
       "warheads": [

@@ -1,0 +1,282 @@
+{
+  "cls": "scout_vehicle",
+  "status": [
+    "UNAPPROVED",
+    "NO MODEL — calibrated damage/reload not supplied"
+  ],
+  "full_count": 28,
+  "source_count": 7,
+  "selected_factions": [
+    "tiberiandawn_gdi",
+    "tiberiandawn_nod",
+    "redalert_allies",
+    "redalert_soviets",
+    "redalert_japan"
+  ],
+  "source_actors": [
+    "ra1_allies_ranger",
+    "japan_grenadebuggy",
+    "japan_scoutcar",
+    "td_gdi_humvee",
+    "td_gdi_humveemkii",
+    "td_nod_buggy",
+    "td_nod_buggymkii"
+  ],
+  "method": "median of current ledger stats, reference-backed members preferred",
+  "fields": {
+    "hp": {
+      "value": 26000,
+      "median": 26250.0,
+      "count": 6,
+      "grid_step": 1000,
+      "reference_backed": true,
+      "reference_preference": "applied",
+      "percentile": 46.42857142857143,
+      "actors": [
+        "ra1_allies_ranger",
+        "japan_grenadebuggy",
+        "td_gdi_humvee",
+        "td_gdi_humveemkii",
+        "td_nod_buggy",
+        "td_nod_buggymkii"
+      ]
+    },
+    "speed": {
+      "value": 135,
+      "median": 135.0,
+      "count": 6,
+      "grid_step": 1,
+      "reference_backed": true,
+      "reference_preference": "applied",
+      "percentile": 25.0,
+      "actors": [
+        "ra1_allies_ranger",
+        "japan_grenadebuggy",
+        "td_gdi_humvee",
+        "td_gdi_humveemkii",
+        "td_nod_buggy",
+        "td_nod_buggymkii"
+      ]
+    },
+    "range_wdist": {
+      "value": 4990,
+      "median": 4988.0,
+      "count": 6,
+      "grid_step": 10,
+      "reference_backed": true,
+      "reference_preference": "applied",
+      "percentile": 35.714285714285715,
+      "actors": [
+        "ra1_allies_ranger",
+        "japan_grenadebuggy",
+        "td_gdi_humvee",
+        "td_gdi_humveemkii",
+        "td_nod_buggy",
+        "td_nod_buggymkii"
+      ]
+    },
+    "cost": {
+      "value": 500,
+      "median": 500.0,
+      "count": 6,
+      "grid_step": 100,
+      "reference_backed": true,
+      "reference_preference": "applied",
+      "percentile": 51.785714285714285,
+      "actors": [
+        "ra1_allies_ranger",
+        "japan_grenadebuggy",
+        "td_gdi_humvee",
+        "td_gdi_humveemkii",
+        "td_nod_buggy",
+        "td_nod_buggymkii"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "actor": "ra1_allies_ranger",
+      "faction": "redalert_allies",
+      "references": [
+        {
+          "source": "Combined Arms",
+          "id": "JEEP",
+          "confidence": "STRONG"
+        },
+        {
+          "source": "DTA Enhanced",
+          "id": "RANG",
+          "confidence": "STRONG"
+        },
+        {
+          "source": "OpenRA Red Alert",
+          "id": "JEEP",
+          "confidence": "STRONG"
+        }
+      ]
+    },
+    {
+      "actor": "japan_grenadebuggy",
+      "faction": "redalert_japan",
+      "references": [
+        {
+          "source": "RA2 Reborn",
+          "id": "COBRA",
+          "confidence": "FAIR"
+        }
+      ]
+    },
+    {
+      "actor": "japan_scoutcar",
+      "faction": "redalert_japan",
+      "references": []
+    },
+    {
+      "actor": "td_gdi_humvee",
+      "faction": "tiberiandawn_gdi",
+      "references": [
+        {
+          "source": "Combined Arms",
+          "id": "HMMV",
+          "confidence": "STRONG"
+        },
+        {
+          "source": "DTA Enhanced",
+          "id": "JEEP",
+          "confidence": "STRONG"
+        },
+        {
+          "source": "OpenRA Tiberian Dawn",
+          "id": "JEEP",
+          "confidence": "STRONG"
+        }
+      ]
+    },
+    {
+      "actor": "td_gdi_humveemkii",
+      "faction": "tiberiandawn_gdi",
+      "references": [
+        {
+          "source": "Combined Arms",
+          "id": "HMMV.TOW",
+          "confidence": "STRONG"
+        }
+      ]
+    },
+    {
+      "actor": "td_nod_buggy",
+      "faction": "tiberiandawn_nod",
+      "references": [
+        {
+          "source": "Combined Arms",
+          "id": "BGGY",
+          "confidence": "STRONG"
+        },
+        {
+          "source": "DTA Enhanced",
+          "id": "BGGY",
+          "confidence": "STRONG"
+        },
+        {
+          "source": "OpenRA Tiberian Dawn",
+          "id": "BGGY",
+          "confidence": "STRONG"
+        }
+      ]
+    },
+    {
+      "actor": "td_nod_buggymkii",
+      "faction": "tiberiandawn_nod",
+      "references": [
+        {
+          "source": "DTA Enhanced",
+          "id": "RAIDER",
+          "confidence": "STRONG"
+        }
+      ]
+    }
+  ],
+  "verifier": null,
+  "ledger_sha256": {
+    "band-scope-20260911.json": "c751e78ecb932eeda1faa1db6b072d1888ec2e71a7ec152f25d51714b836ae98",
+    "building-shape-review-20260911.json": "b964fa9408bcbf5458eaf944791a665b048fe811fc1feac8973df14f512fd275",
+    "cargo-load-proposal-20260911.json": "8bd26b318068bb171ebef0321f2c15f07d90c4c7a8e79aac68b2289c0f6559c7",
+    "class_anchors.json": "c815917c536ddf7c695133a482279b7a320281542243d9f8d2a17153ecafd393",
+    "d2k_atreides.json": "48d8ed8ef876fff3964676995411827d90f0550cbb8ae6472ff0f6e7c42493e5",
+    "d2k_corrino.json": "efbd384ac03937d6e0139d722bea4465ee4d245c7f66f13a5f37250e1fb76bb1",
+    "d2k_harkonnen.json": "ee95fedba22568adc175cfe3ed416bb1fdc8924b38c658edbf50fafb0c36c00b",
+    "d2k_ixian.json": "81afd8058fa278e4f3f8ad8a59208adfe5f04dac4c4afd2de8ccb8b1d27920bf",
+    "d2k_ordos.json": "12908ebd6b7ab2a2c391f5632ab701e7c493d4da2866431e15ba794dc0a0c209",
+    "defense-armor-curves-20260911.json": "7a196ee55d46c04d3ebbf684f123172bfffd638fe1507fedffbe16175bd05f05",
+    "four_voice_selection_pilot_20260911.json": "560b106eb0800459b28ce5bcc10908f16b25ef1b10cf81ced8cc5bf715f6752c",
+    "four_voice_selection_pilot_aircraft_20260911.json": "2778deb4ae05a5913bd333b88148e762785ce1c1c1bdde320cdc858f7bea5ce7",
+    "four_voice_selection_pilot_infantry_20260911.json": "4a056be11792d5aa57693f27858f09a507b422e3c5405242eb01f1d53764d41b",
+    "infantry_artillery_pressure_manifest_20260911.json": "6ca42db4ff43f57c61a76a9c455c788f60e7c99fdf6c0c07558c62a37a6103a4",
+    "redalert2_allies.json": "3bd9c3fac17fccede66a4531c3ba069fc72a2f6eaee9c6b0cf53426fa87699a3",
+    "redalert2_soviets.json": "c7fd8c308003e7eafd983d221c8b065ec64131791dd8826dae12f3bf2a9c3043",
+    "redalert2_yuri.json": "971490d3766c3b0646096e04d4172ee1b66c31b62d7a9a618ced162e1a1b5a12",
+    "redalert2mod_asianalliance.json": "e8042e77990bef590f08b5958f62d5db35e10ec112c29abf7fd699c8017c2eff",
+    "redalert2mod_consortium.json": "6bf2bed5d1a1755c58c63f3043c094e1fcd1f6079749bea135ef126a1782e2f1",
+    "redalert2mod_futuretech.json": "c13429a79281db60dad9ad6b1f04f2742bc3cbde9e92015dfc277f7e8883293b",
+    "redalert2mod_naxis.json": "a35959ffcb39fa3ff303ba422b3ec87bd1778ba1711419c933cb99b71af2b89b",
+    "redalert2mod_schwarzermond.json": "deeab1802f2aa82515cdac0320b863f0bde71e276602944e65f303b54a4b0488",
+    "redalert2mod_syndicate.json": "7a959d53aaca8ed5cdc94d7c9b842f8c76e318ab46fda8f0ab7d8a65360a497c",
+    "redalert2mod_tkm.json": "220b28abe98d3e1eb4b7f3f3e2a11097fad8bd1d358980da5b529f572c55bd11",
+    "redalert_allies.json": "554f0c53bb546222c46e4d60f05875223c7165e2f55deab217b03a0d5e92c8bb",
+    "redalert_japan.json": "d4656e051df5db8d7005e44edb5cebc230d08a8827b2b35de05e0568479a10bf",
+    "redalert_soviets.json": "c7ef37a1eeee04c8f4e0a8cb1deb5bb805016db967879df88616fe821e691969",
+    "shared_d2k.json": "dc9ce08010fc235b87cb6c4b452179204f56c68536f5da2fe92392d280322f0b",
+    "shared_redalert.json": "7514321877a4eeb96564f401702a5726a4fbd13a88ccca148f4e3bc6454cee19",
+    "shared_redalert2.json": "2d199ad7e9bcfb8405b804415025d4546a3b2b34e13262965ea0e28b593a2545",
+    "shared_tiberiandawn.json": "92ec8da6ccdb2c68ca4a9a05ee2366648ba1583f144b64e6885e401cbf85731f",
+    "shared_tiberiansun.json": "c0d2ef36b8015de9c2fadf5cb96255fb77847269a8f81ea6273295644fb388ec",
+    "starcraft_protoss.json": "22b7d24ddc80319f78dc25bba5e444d2d7a4a95952589bf13c94384425cb879d",
+    "starcraft_terran.json": "da61424c0e5dbbdfb6528280b4a9ad26502c69395d8def0eec3cefda245aa5e4",
+    "starcraft_zerg.json": "fdab7ab3c98d1b0a9d364ec95fb549329a75927b60d444b9c539c7817d801a6f",
+    "tiberiandawn_gdi.json": "2d44e0f5888be6b55ff82364d9d0c62d7bbfd3171fe229c5a086f4b3f33ff441",
+    "tiberiandawn_nod.json": "b3b2d38e250c336fb7770b169a534562ff00af5ab69c2202bdfd49b6183ab835",
+    "tiberiansun_cabal.json": "e755f853c3e9bc75eb7afffaa834b1de701aefbec3d66cb86f318e45ed16c05e",
+    "tiberiansun_forgotten.json": "14a5f0e42838b5016754cd46a9b35f762273d4113dedfecfb3f97631ee7c759a",
+    "tiberiansun_gdi.json": "d9841410d40646bb548915c4a957917e31df1c62e4e75a3bc47c0b481e85139b",
+    "tiberiansun_nod.json": "832a26cc329f9b64ef69283279db9def5abf565ab44c3cc509a015de1d7a29e5",
+    "warcraft2_humans.json": "c5b2741099b529635b50e25a723b4276f2c3c6df168efea8827c3f15a551ae67",
+    "warcraft2_orcs.json": "53a0bfbec9cdde30cc25bc1cf9b0271b57091cf6d2a8c3b62ac7fda32be2932d"
+  },
+  "sidecar_sha256": {
+    "d2k_atreides.json": "01f2a6901f996d0e8c81a5cf5e8d6b75e3eb9a54396f8d13891582330412ed39",
+    "d2k_corrino.json": "0c2e08cdee36822423bd03d50557cb3e9340353d848ef7e20615b2a9ef3cec4b",
+    "d2k_harkonnen.json": "aca77d1e511632ec8fea336814ef1e41dc121775af999932f80be6a0a0e98a0e",
+    "d2k_ixian.json": "9743888dfce81e7acaada7a74b2f45bf7a757ea94a1adb2ca4ebab5f37916539",
+    "d2k_ordos.json": "9f56267e9417c788a0e786fe7d4a784dfa669775591717d8091fc50e39e653ee",
+    "redalert2_allies.json": "6017013d8fea35048c4a418dadf47e0d4fde1e5e4ce4058812052c29434741fb",
+    "redalert2_soviets.json": "800d9c785877409a1bbebf53d597e58adb684d02366cce9cf812219c8eaee2b0",
+    "redalert2_yuri.json": "05b7f8b2b5fa9de18ea15012be59ff63aec8dc84f5a247521372c37fbc3fee22",
+    "redalert2mod_asianalliance.json": "1823f7ac5037b1f7091314fda339b8b095cc7cabf25e7a6cc7993056bfae6ae6",
+    "redalert2mod_consortium.json": "10cfa84ec2772085b4ecc625638610bceee7b0703883a3d0c9adf6caa6ee7269",
+    "redalert2mod_futuretech.json": "eba327b5fc4f47a9438633168a3670196dfc656e0011f2700148db6c683cce3a",
+    "redalert2mod_naxis.json": "4c8eb687276732ae673f6b57b41e29d9946dbc78a75e99ddbea022317409271e",
+    "redalert2mod_schwarzermond.json": "c592b80d6bc9183fc3a7f0d3d25aac527a5e31924fdc01a3d207e6ca7a0b7acb",
+    "redalert2mod_syndicate.json": "09605c557ffde2a3ae2c959a82c9aab2e6b26e47c1719142ec4da4ef14a20b05",
+    "redalert2mod_tkm.json": "b4f25ceffc9af046748a5f9218cbeadd64798ce42848e5a73b8cf6e84cf795e2",
+    "redalert_allies.json": "160b0bd36f390aba8e2f1ebb9d7a0da97c573dd94b8cc438f0bae1350693d02e",
+    "redalert_japan.json": "62a174402ca2df5b29dac0ff8cc5dcb85fa003cb077979bb152f3b3fc38cac10",
+    "redalert_soviets.json": "14fa67ca9fecf59a85d88a83698a705a2a76c278a086ac52929c18e20aea1697",
+    "shared_d2k.json": "677410b27749606669421489f7c6de26dad4e21afe4c3bd2a7105ae0274e0a4b",
+    "shared_redalert.json": "963aa8e349435c95c873505f3e50b9c82b442ef3b11d6a1b559e045c49e75a6e",
+    "shared_redalert2.json": "f1fcb73eb0698d27856ad4806aad2434b2cc98c8d6ad414ef98417b33d668590",
+    "shared_tiberiandawn.json": "c14608cdb9dc319c3b8bcee9f8a679e65b350743568aff2cf9826cf0489b6a05",
+    "shared_tiberiansun.json": "1607ef593b9ef727c90df7df271e1a95078b7439c49d48f2b177b05e4ceddaf0",
+    "starcraft_protoss.json": "40b05b40a018e7e9c0ce32ec40d2b262803465d2c371e2361cf4daef434c55bd",
+    "starcraft_terran.json": "d9b358c9f70814426cfe23da849b566544af2868fb4ea89c4a57faa6b9308419",
+    "starcraft_zerg.json": "a80a9ddaa0fbab208f716f7ca32f8589d9225eec707a182ce1470afdaac06ef9",
+    "tiberiandawn_gdi.json": "039635ace0be9bfe7161bfc8480223d6f944e072a0ac1e8377547cfa890d4c05",
+    "tiberiandawn_nod.json": "2a30c9732fc6bd1be5400ef58a5d175f1671761d01d8e63ac81aa6d3a210334b",
+    "tiberiansun_cabal.json": "bb2231e481cd710fcb4720d8d53101174de47497170361da905cee13f12b3fce",
+    "tiberiansun_forgotten.json": "9617ceb31e3529b1b3ccaaf5a82a0d207f80674e0272c8c34783693e05408ea0",
+    "tiberiansun_gdi.json": "87aa333c5b2a844726cb70c07b08011edad1feacbff86474e7ff92a18daca094",
+    "tiberiansun_nod.json": "2806dbc62f5a748268a48191323783061303c48f49f7b50a2a9687a7c3a36591",
+    "warcraft2_humans.json": "e587ffe80a0dedfc45f1d44d603358dcfc52e4fa17524cc1676b00adb9ec343d",
+    "warcraft2_orcs.json": "2d642a470700786b60c28dd0604a4c448ddfdfcb0a524179efbb1109dcebb009"
+  },
+  "assignment_sha256": "6a16ad71a1f5e1e90705370f8c5bda8e4eb32b996fa4eec00a0f327eae9cac3a"
+}

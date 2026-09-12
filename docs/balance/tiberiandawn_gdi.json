@@ -43,7 +43,7 @@
         "damage": "12000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
-        "tag": "Flame_HeavyFlatCompatibility",
+        "tag": "Flame_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -54,14 +54,13 @@
       "reloaddelay": "2",
       "slot": "Armament@BOMBS",
       "versus_templates": [
-       "^Compatibility_Flame_HeavyFlat",
-       "^Warhead_Demolition_Heavy",
        "^Warhead_Flame_Heavy",
+       "^Warhead_Demolition_Heavy",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Flame_Heavy"
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "Napalm",
       "weapon_class_source": "template"
@@ -150,7 +149,7 @@
         "damage": "8000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
-        "tag": "Flame_HeavyFlatCompatibility",
+        "tag": "Flame_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -161,14 +160,13 @@
       "reloaddelay": "2",
       "slot": "Armament@BOMBS",
       "versus_templates": [
-       "^Compatibility_Flame_HeavyFlat",
-       "^Warhead_Demolition_Heavy",
        "^Warhead_Flame_Heavy",
+       "^Warhead_Demolition_Heavy",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Flame_Heavy"
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "NapalmA10Carrier",
       "weapon_class_source": "template"
@@ -195,13 +193,11 @@
       "slot": "Armament@AA",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
-       "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Heavy",
        "^Effect_MissileAP_Heavy"
       ],
       "warheads": [
-       "^Warhead_MissileAA_Heavy",
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAA_Heavy"
       ],
       "weapon": "A10CarrierMissiles_AA",
       "weapon_class_source": "template"
@@ -468,13 +464,11 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
-       "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Heavy",
        "^Effect_MissileAP_Heavy"
       ],
       "warheads": [
-       "^Warhead_MissileAA_Heavy",
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAA_Heavy"
       ],
       "weapon": "td_gdi_firehawk_firehawkmissiles_AA",
       "weapon_class_source": "template"
@@ -501,13 +495,11 @@
       "slot": "Armament@td_gdi_upgrade_advancedmissiletargeting",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
-       "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Heavy",
        "^Effect_MissileAP_Heavy"
       ],
       "warheads": [
-       "^Warhead_MissileAA_Heavy",
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAA_Heavy"
       ],
       "weapon": "td_gdi_firehawk_firehawkmissiles_AA",
       "weapon_class_source": "template"
@@ -697,7 +689,6 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
-       "^Warhead_MissileHE_Heavy",
        "^HeavyCannon",
        "^TankDestroyerCannon",
        "^ShrapnelWeapon",
@@ -706,8 +697,7 @@
        "^MediumMissile"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy",
-       "^Warhead_MissileHE_Heavy"
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "td_gdi_orca_orcamissiles",
       "weapon_class_source": "template"
@@ -772,13 +762,11 @@
       "requires": "td_gdi_upgrade_advancedmissiletargeting",
       "slot": "Armament@AdvancedMissileTargeting",
       "versus_templates": [
-       "^Warhead_MissileAP_Heavy",
        "td_gdi_orca_orcamissiles",
        "^AMTProjectile"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy",
-       "^Warhead_MissileHE_Heavy"
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "td_gdi_orca_orcamissilesamt",
       "weapon_class_source": "template"
@@ -1024,7 +1012,6 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
-       "^Warhead_MissileHE_Heavy",
        "^TankDestroyerCannon",
        "^Grenade",
        "^ShrapnelWeapon",
@@ -1034,8 +1021,7 @@
        "^MediumMissile"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy",
-       "^Warhead_MissileHE_Heavy"
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "td_gdi_advancedguardtower_towermissile",
       "weapon_class_source": "template"
@@ -1109,13 +1095,11 @@
       "requires": "td_gdi_upgrade_advancedmissiletargeting",
       "slot": "Armament@AdvancedMissileTargeting",
       "versus_templates": [
-       "^Warhead_MissileAP_Heavy",
        "td_gdi_advancedguardtower_towermissile",
        "^AMTProjectile"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy",
-       "^Warhead_MissileHE_Heavy"
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "td_gdi_advancedguardtower_towermissileamt",
       "weapon_class_source": "template"
@@ -2812,13 +2796,11 @@
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
        "^Compatibility_MissileHE_MediumFlat",
-       "^Warhead_MissileHE_Medium",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileHE_Medium"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "td_gdi_havoc_rocket",
       "weapon_class_source": "template"
@@ -2971,13 +2953,11 @@
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
        "^Compatibility_MissileHE_MediumFlat",
-       "^Warhead_MissileHE_Medium",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileHE_Medium"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "td_gdi_havoc_rocket",
       "weapon_class_source": "template"
@@ -4275,13 +4255,11 @@
       "slot": "Armament@Ground",
       "versus_templates": [
        "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_MissileAP_Medium"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileAP_Medium"
+       "^Warhead_MissileHE_Medium"
       ],
       "weapon": "td_gdi_missileboat_gunboatmissile",
       "weapon_class_source": "template"
@@ -4306,13 +4284,11 @@
       "requires": "td_gdi_upgrade_advancedmissiletargeting",
       "slot": "Armament@AdvancedMissileTargeting",
       "versus_templates": [
-       "^Warhead_MissileHE_Medium",
        "td_gdi_missileboat_gunboatmissile",
        "^AMTProjectile"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileAP_Medium"
+       "^Warhead_MissileHE_Medium"
       ],
       "weapon": "td_gdi_missileboat_gunboatmissileamt",
       "weapon_class_source": "template"
@@ -6362,13 +6338,11 @@
       "slot": "Armament@MissilePod",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
-       "^Warhead_MissileHE_Heavy",
        "^Projectile_Missile_Medium",
        "^Effect_MissileHE_Medium"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy",
-       "^Warhead_MissileHE_Heavy"
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "td_gdi_defenserig_gdirigmissilepod",
       "weapon_class_source": "template"
@@ -6393,13 +6367,11 @@
       "requires": "td_gdi_upgrade_advancedmissiletargeting && deployed",
       "slot": "Armament@AdvancedMissileTargeting",
       "versus_templates": [
-       "^Warhead_MissileAP_Heavy",
        "td_gdi_defenserig_gdirigmissilepod",
        "^AMTProjectile"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy",
-       "^Warhead_MissileHE_Heavy"
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "td_gdi_defenserig_gdirigmissilepodamt",
       "weapon_class_source": "template"
@@ -6836,13 +6808,11 @@
       "slot": "Armament@Rockets",
       "versus_templates": [
        "^Warhead_MissileHE_Light",
-       "^Warhead_MissileAP_Light",
        "^Projectile_Missile_Light",
        "^Effect_MissileAP_Light"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Light",
-       "^Warhead_MissileAP_Light"
+       "^Warhead_MissileHE_Light"
       ],
       "weapon": "td_gdi_humveemkii_rocketshumvee2",
       "weapon_class_source": "template"
@@ -6859,7 +6829,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "8397",
       "reloaddelay": "84",
@@ -6871,11 +6841,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileHE_Light",
-       "^Warhead_MissileAP_Light"
+       "^Warhead_MissileHE_Light"
       ],
       "weapon": "td_gdi_humveemkii_rocketshumvee2_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -6889,7 +6858,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5598",
       "reloaddelay": "84",
@@ -6898,7 +6867,6 @@
       "versus_templates": [
        "^Warhead_MissileHE_Heavy",
        "^Compatibility_MissileAP_HeavyFlat",
-       "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Heavy",
        "^Effect_MissileAP_Heavy",
        "td_gdi_humveemkii_rocketshumvee2",
@@ -6906,12 +6874,10 @@
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileAP_Heavy",
-       "^Warhead_MissileHE_Light",
-       "^Warhead_MissileAP_Light"
+       "^Warhead_MissileHE_Light"
       ],
       "weapon": "td_gdi_humveemkii_rocketshumvee2amt",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -6939,9 +6905,7 @@
       "warheads": [
        "^Warhead_MissileAA_Heavy",
        "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileAP_Heavy",
-       "^Warhead_MissileHE_Light",
-       "^Warhead_MissileAP_Light"
+       "^Warhead_MissileHE_Light"
       ],
       "weapon": "td_gdi_humveemkii_rocketshumvee2amt_AA",
       "weapon_class_source": "illegal_mix"

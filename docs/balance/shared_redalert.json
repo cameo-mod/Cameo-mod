@@ -1059,7 +1059,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "100",
+        "damage": "500",
         "falloff": null,
         "spread": "200",
         "tag": "1Dam",
@@ -1099,7 +1099,7 @@
     },
     "hp": {
      "src": "inherited",
-     "v": "2500"
+     "v": "5000"
     },
     "name": "Agent Delphi",
     "resolved_firepower_modifiers": [],
@@ -1496,7 +1496,7 @@
     },
     "hp": {
      "src": "inherited",
-     "v": "2500"
+     "v": "5000"
     },
     "name": "Prof. Einstein",
     "shield_flat": {
@@ -1618,7 +1618,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "100",
+        "damage": "500",
         "falloff": null,
         "spread": "200",
         "tag": "1Dam",
@@ -1658,7 +1658,7 @@
     },
     "hp": {
      "src": "inherited",
-     "v": "2500"
+     "v": "5000"
     },
     "name": "General",
     "resolved_firepower_modifiers": [],
@@ -1703,7 +1703,7 @@
     },
     "hp": {
      "src": "inherited",
-     "v": "2500"
+     "v": "5000"
     },
     "name": "Scientist",
     "shield_flat": {
@@ -1746,13 +1746,11 @@
       "reloaddelay": "50",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Demolition_Light",
        "^Warhead_Flame_Light",
        "^Projectile_Grenade_Light",
        "^Effect_Flame_Light"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
        "^Warhead_Flame_Light"
       ],
       "weapon": "ra1_soviets_molotovconscript_conscriptmolotov",
@@ -1776,13 +1774,11 @@
       "reloaddelay": "50",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_Demolition_Light",
        "^Warhead_Flame_Light",
        "^Projectile_Grenade_Light",
        "^Effect_Flame_Light"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
        "^Warhead_Flame_Light"
       ],
       "weapon": "ra1_soviets_molotovconscript_conscriptmolotov",
@@ -1846,7 +1842,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "100",
+        "damage": "500",
         "falloff": null,
         "spread": "200",
         "tag": "1Dam",
@@ -1886,7 +1882,7 @@
     },
     "hp": {
      "src": "inherited",
-     "v": "2500"
+     "v": "5000"
     },
     "name": "Technician",
     "resolved_firepower_modifiers": [],
@@ -2029,7 +2025,7 @@
         "damage": "6000",
         "falloff": "100, 81, 61, 38, 0",
         "spread": "76",
-        "tag": "Waveforce_HeavyFlatCompatibility",
+        "tag": "Waveforce_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -2048,12 +2044,13 @@
       "requires": "japan_upgrade_waveforcebullets",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Compatibility_Waveforce_HeavyFlat",
+       "^Warhead_Waveforce_Heavy",
        "^WaveforceBulletWarhead",
        "JapanSpeedBoatGun",
        "^WaveforceBulletProjectile"
       ],
       "warheads": [
+       "^Warhead_Waveforce_Heavy",
        "^Warhead_Railgun_Heavy",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"

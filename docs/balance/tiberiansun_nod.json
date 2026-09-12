@@ -1512,13 +1512,11 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
-       "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Heavy",
        "^Effect_MissileAP_Heavy"
       ],
       "warheads": [
-       "^Warhead_MissileAA_Heavy",
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAA_Heavy"
       ],
       "weapon": "TSNODRedEye",
       "weapon_class_source": "template"
@@ -1543,12 +1541,10 @@
       "requires": "ts_nod_upgrade_tiberiumcoremissiles",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "^Warhead_MissileAA_Heavy",
        "TSNODRedEye"
       ],
       "warheads": [
-       "^Warhead_MissileAA_Heavy",
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAA_Heavy"
       ],
       "weapon": "TSNODTibRedEye",
       "weapon_class_source": "template"
@@ -3552,7 +3548,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6385",
       "reloaddelay": "60",
@@ -3561,18 +3557,14 @@
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
        "^Compatibility_MissileHE_MediumFlat",
-       "^Warhead_CannonHE_Medium",
-       "^Warhead_MissileHE_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_MissileHE_Medium"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_CannonHE_Medium",
-       "^Warhead_MissileHE_Medium"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "TSSBoatTusk",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
@@ -4341,7 +4333,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6554",
       "reloaddelay": "40",
@@ -4350,18 +4342,14 @@
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
        "^Compatibility_MissileHE_MediumFlat",
-       "^Warhead_MissileHE_Light",
-       "^Warhead_MissileHE_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_MissileHE_Medium"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileHE_Light",
-       "^Warhead_MissileHE_Medium"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "TSBikeMissile",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
@@ -4816,7 +4804,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6385",
       "reloaddelay": "60",
@@ -4825,18 +4813,14 @@
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
        "^Compatibility_MissileHE_MediumFlat",
-       "^Warhead_CannonHE_Medium",
-       "^Warhead_MissileHE_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_MissileHE_Medium"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_CannonHE_Medium",
-       "^Warhead_MissileHE_Medium"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "TSStankTusk",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
