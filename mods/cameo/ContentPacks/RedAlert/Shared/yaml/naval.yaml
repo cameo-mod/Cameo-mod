@@ -519,6 +519,7 @@ japan_zerofighter_slave:
 	FirepowerMultiplier@doublecannons:
 		Modifier: 50
 	Armament:
+		PauseOnCondition: ammo < 12
 		AmmoUsage: 12
 		Weapon: JapanCarrierFighterBomb
 	AmmoPool:

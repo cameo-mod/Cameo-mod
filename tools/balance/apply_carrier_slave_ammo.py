@@ -150,14 +150,26 @@ def build_plan(rs):
                 usage = 1
             if a["name"] not in pool_names or usage <= 0:
                 continue
-            if kv(a["resolved"]).get("PauseOnCondition") is not None:
+            expected_pause = "!" + pool_condition if usage == 1 else f"{pool_condition} < {usage}"
+            existing_pause = kv(a["resolved"]).get("PauseOnCondition")
+            existing_requires = kv(a["resolved"]).get("RequiresCondition", "")
+            if (existing_pause == expected_pause
+                    or (usage == 1 and pool_condition in {
+                        token.strip() for token in existing_requires.split(",")
+                    })):
                 continue
             local_arm = a["local"]
             if local_arm is not None:
-                plan[local_arm.file][local_arm.line].append(
-                    ("ins", [f"\t\tPauseOnCondition: !{pool_condition}"]))
+                pause_node = local_arm.child("PauseOnCondition")
+                if existing_pause is not None and pause_node is not None:
+                    plan[pause_node.file][pause_node.line].append(
+                        ("sub", f"\t\tPauseOnCondition: {existing_pause}",
+                         f"\t\tPauseOnCondition: {expected_pause}"))
+                else:
+                    plan[local_arm.file][local_arm.line].append(
+                        ("ins", [f"\t\tPauseOnCondition: {expected_pause}"]))
             else:
-                add.extend([f"\t{a['key']}:", f"\t\tPauseOnCondition: !{pool_condition}"])
+                add.extend([f"\t{a['key']}:", f"\t\tPauseOnCondition: {expected_pause}"])
 
         # ---- the reload -------------------------------------------------- #
         reloads = [c for c in res.children if stem(c.key) in RELOAD_STEMS]

@@ -39,7 +39,7 @@ schwarzermond_drone:
 		Weapon: LunarNaxiDroneMissile
 		LocalOffset: 425,-350,-225, 425,350,-225
 		LocalYaw: 50, -50, 25, -25
-		PauseOnCondition: !ammo
+		PauseOnCondition: ammo < 2
 	AmmoPool:
 		Ammo: 8
 		AmmoCondition: ammo

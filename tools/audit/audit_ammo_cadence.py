@@ -141,9 +141,13 @@ def main() -> int:
                                 continue
                             if num(arm_values.get("AmmoUsage"), 1) <= 0:
                                 continue
+                            usage = num(arm_values.get("AmmoUsage"), 1)
                             pause = arm_values.get("PauseOnCondition", "")
                             requires = {token.strip() for token in arm_values.get("RequiresCondition", "").split(",")}
-                            if pause != "!" + ammo_condition and ammo_condition not in requires:
+                            expected_pause = "!" + ammo_condition if usage == 1 else f"{ammo_condition} < {usage}"
+                            adequate = (pause == expected_pause
+                                        or (usage == 1 and ammo_condition in requires))
+                            if not adequate:
                                 gate_defect = f"no empty-pool gate for {arm.key}"
                                 break
             slaves.append((name, bool(pools), num(kv(pools[0]).get("Ammo")) if pools else None,
