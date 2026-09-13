@@ -121,10 +121,10 @@ def dps_verifier_cell(cameo_row, rows, tgt):
       EXTREME              the composed move alone exceeds EXTREME_RATIO.
 
     Burst delays are deliberately NOT a column (maintainer: "the burst delay should be
-    referenced but not in the reference map"), but they ARE in the cycle. They are RECOVERED
-    from each row's own identity rather than looked up, which also makes the cell immune to
-    the per-shot-vs-burst-inclusive `w_damage` difference between sources — see
-    `reference_targets.recover_burst_time`.
+    referenced but not in the reference map"). The verifier is therefore shown only when the
+    row carries an explicit damage convention and a complete burst-delay sequence. The source
+    corpus currently lacks that compatible evidence, so a missing guard is an honest hold rather
+    than an inferred conversion between per-shot and burst-inclusive damage.
     """
     keys = ("w_damage", "w_burst", "w_reload")
     cur = {k: cameo_row.get(k) for k in keys}
@@ -132,9 +132,10 @@ def dps_verifier_cell(cameo_row, rows, tgt):
     comp = {k: _cell_value(tgt.get(k)) for k in keys}
     g = rt.dps_guard(cur, comp, _cell_value(tgt.get("w_dps")))
     if g is None:
-        return '<span class="muted">—</span>'
+        return ('<span class="muted" title="withheld: explicit damage convention and complete '
+                'burst-delay evidence required">WITHHELD</span>')
     pct = f'{g["composed_ratio"] * 100:.0f}%'
-    bd = f'burst delay {g["burst_delay_per_shot"]:.0f}t/shot (recovered, not a column)'
+    bd = f'burst delays {g["burst_delays"]!r} (evidence, not a column)'
     if g["verdict"] == "ok":
         tag = (f'<span class="tag" title="{bd}">no change</span>'
                if abs(g["composed_ratio"] - 1) < 0.02
@@ -251,7 +252,7 @@ def weapon_calculation_details(rows, cameo_actor=None):
         proof = profile.get((row.get('source'), row.get('id')))
         cycle = row.get('w_cycle_evidence')
         fields = [('weapon', row.get('weapon')),
-                  ('damage per shot (raw source units)', row.get('w_damage')),
+            ('source damage coordinate (legacy armament-profile burst aggregate; not per-shot)', row.get('w_damage')),
                   ('reload delay / ROF (source ticks)', row.get('w_reload')),
                   ('burst', row.get('w_burst'))]
         if proof:
@@ -360,7 +361,7 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
                     '<th class="n">HP (now → reference)</th>'
                     '<th class="n">Speed (now → reference)</th>'
                     '<th class="n">Range (now → reference)</th>'
-                    '<th class="n">Damage/shot (now → reference)</th>'
+                    '<th class="n">Damage coordinate (now → reference)</th>'
                     '<th class="n">Reload (now → reference)</th>'
                     '<th class="n">Burst (now → reference)</th>'
                     '<th class="n">DPS verifier</th>'

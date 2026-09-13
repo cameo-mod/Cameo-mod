@@ -42,10 +42,12 @@ summary. The maintainer-approved WORK ORDER, all four confirmed in one answer:
    "all members in band" requires the baseline at or below the weakest member. A **median**
    baseline therefore cannot satisfy the band — and medians are what `derive_virtual_anchor.py`
    proposes. 115/404 in band today; re-scaling every baseline reaches only 271/404 (67%).
-   ⭐ **Every class already has a core that fits** (span 1.4×–2.5×, 290 of 404 members). The
-   **114** outside their core are the real work, and the extremes are classification defects,
-   not pricing ones: `futuretech_blackwidow` is in `melee` with `Range: 9000`, `corrino_buggy`
-   is in `mbt`, `cabal_enlighted` has 11,184 DPS in `heavy_infantry`.
+   ⭐ **Every class already has a current-anchor ratio window** (span 1.4×–2.5×, 290 of 404
+   members). The **114** outside those windows are the real work. They are triage signals, not
+   proof of a classification defect: `futuretech_blackwidow` is in `melee` with `Range: 9000`,
+   `corrino_buggy` is in `mbt`, `cabal_enlighted` has 11,184 DPS in `heavy_infantry`.
+   Uniform rescaling changes the nonlinear spread, and an anisotropic baseline or role split
+   requires separate design evidence.
    **The 114 are triaged** (`fit_baseband.py --triage`, table in `baseband_fit.md`):
    80 AXIS OUTLIER, 30 ROLE REVIEW, 2 NO CLASS ACCEPTS, 1 ONE CLASS ACCEPTS, 1 LATER TECH.
    ⛔ **A stat test cannot say where an outlier belongs.** The median member is accepted by
@@ -95,17 +97,15 @@ sorted by flat share — `TSPistola` 9% (worst armor ×0.91), `TSGrenadeAA` 17% 
 65% (×0.64), `TSVulcan2` 71% (×0.56), `TSTurretLaserFire` 79% (×0.37). Nothing written until
 the maintainer picks a share threshold.
 
-4. ✅ **DONE — separate weapon-stat targets with DPS as a verifier** (R1). Four inputs, one
+4. ⚠ **R1 tooling is present, but the DPS verifier remains diagnostic-only.** Four inputs, one
    guard rail. `reference_targets.COMPONENT_STATS` / `VERIFIER_STATS` + `compose_dps`,
-   `recover_burst_time`, `dps_guard`; the reference map gains **Damage/shot** and **Reload**
-   columns and a **DPS verifier** column. Burst delay stays out of the map as ruled, but is in
-   the arithmetic. TD GDI: 8 `DISAGREES`, 3 `EXTREME`, 18 unchanged; the mammoth reads
-   **488, DISAGREES 122%** against the projection's 174%.
+   `recover_burst_time`, `dps_guard`; the reference map gains a **source damage coordinate** and
+   **Reload** columns. A verifier result is emitted only when the damage convention and complete burst-delay
+   sequence are explicit; the current peer corpus does not provide that compatible evidence, so
+   the map withholds the previous `DISAGREES`/`EXTREME` claims.
    ⛔ **`w_damage` means different things in different sources** — per-SHOT in
-   `extract_peer_units`, burst-INCLUSIVE in the frozen Cameo snapshot. The cycle and per-shot
-   burst delay are now RECOVERED from each row's own identity, never assumed. Getting this
-   wrong gave the mammoth 800 DPS against a true 400 and called the MLRS `EXTREME 34%` when
-   its real move is `+19%`. See `DESIGN.md` "R1 implemented" and `LESSONS_LEARNED.md`.
+   `extract_peer_units`, burst-INCLUSIVE in the frozen Cameo snapshot. The corrected guard refuses
+   to infer a convention from `damage / DPS`, and it refuses to reuse a partial delay model.
 
 ⛔ **Blocked on nothing but sequencing:** merge **#356** (Codex's Wraith order fix — my reorder
 put the 60,000-damage main *after* `Warhead@OwnerChange`, so the Wraith captured a unit and then

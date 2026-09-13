@@ -7,37 +7,37 @@ recomputation cross-check against check_band: 404/404 ratios identical
 
 | class | members | in band now | best single-k | k* | min% | max% | span | verdict |
 |---|--:|--:|--:|--:|--:|--:|--:|---|
-| `melee` | 35 | 15 (43%) | 21 (60%) | 1.111 | 24% | 680% | 33.7x | CANNOT FIT — span > 2.5 |
-| `heavy_infantry` | 35 | 19 (54%) | 22 (63%) | 0.745 | 81% | 4079% | 31.6x | CANNOT FIT — span > 2.5 |
-| `pure_sniper` | 9 | 2 (22%) | 6 (67%) | 1.284 | 38% | 861% | 31.5x | CANNOT FIT — span > 2.5 |
-| `artillery` | 30 | 9 (30%) | 20 (67%) | 0.752 | 26% | 956% | 24.3x | CANNOT FIT — span > 2.5 |
-| `rocket_trooper` | 39 | 15 (38%) | 21 (54%) | 1.168 | 78% | 1401% | 22.0x | CANNOT FIT — span > 2.5 |
-| `special_forces` | 16 | 3 (19%) | 10 (62%) | 1.215 | 68% | 960% | 18.3x | CANNOT FIT — span > 2.5 |
-| `scout_vehicle` | 16 | 11 (69%) | 11 (69%) | 0.887 | 36% | 673% | 15.2x | CANNOT FIT — span > 2.5 |
-| `fire_support` | 28 | 1 (4%) | 17 (61%) | 0.475 | 38% | 1138% | 13.6x | CANNOT FIT — span > 2.5 |
-| `scout` | 27 | 13 (48%) | 14 (52%) | 1.145 | 53% | 560% | 12.6x | CANNOT FIT — span > 2.5 |
-| `grenadier` | 7 | 2 (29%) | 4 (57%) | 1.433 | 101% | 895% | 12.6x | CANNOT FIT — span > 2.5 |
-| `mbt` | 42 | 1 (2%) | 32 (76%) | 0.580 | 48% | 1164% | 11.9x | CANNOT FIT — span > 2.5 |
-| `missile_vehicle` | 14 | 1 (7%) | 9 (64%) | 0.432 | 64% | 1231% | 10.7x | CANNOT FIT — span > 2.5 |
-| `artillery_tank` | 7 | 1 (14%) | 5 (71%) | 0.667 | 47% | 487% | 8.3x | CANNOT FIT — span > 2.5 |
-| `closecombat` | 4 | 1 (25%) | 3 (75%) | 0.811 | 101% | 526% | 4.6x | CANNOT FIT — span > 2.5 |
-| `anti_air_vehicle` | 9 | 0 (0%) | 7 (78%) | 0.458 | 46% | 372% | 4.5x | CANNOT FIT — span > 2.5 |
-| `mortar` | 5 | 2 (40%) | 4 (80%) | 0.896 | 58% | 249% | 3.9x | CANNOT FIT — span > 2.5 |
-| `high_tech_tank` | 24 | 3 (12%) | 21 (88%) | 0.657 | 89% | 442% | 3.9x | CANNOT FIT — span > 2.5 |
-| `light_tank` | 15 | 6 (40%) | 12 (80%) | 0.839 | 96% | 413% | 3.8x | CANNOT FIT — span > 2.5 |
-| `line_breaker` | 16 | 0 (0%) | 9 (56%) | 0.423 | 81% | 948% | 3.7x | CANNOT FIT — span > 2.5 |
-| `archer` | 4 | 2 (50%) | 3 (75%) | 1.384 | 101% | 287% | 3.6x | CANNOT FIT — span > 2.5 |
-| `flying_infantry` | 9 | 6 (67%) | 7 (78%) | 1.057 | 98% | 330% | 3.6x | CANNOT FIT — span > 2.5 |
+| `melee` | 35 | 15 (43%) | 21 (60%) | 1.111 | 24% | 680% | 33.7x | CURRENT-ANCHOR SPAN > 2.5 |
+| `heavy_infantry` | 35 | 19 (54%) | 22 (63%) | 0.745 | 81% | 4079% | 31.6x | CURRENT-ANCHOR SPAN > 2.5 |
+| `pure_sniper` | 9 | 2 (22%) | 6 (67%) | 1.284 | 38% | 861% | 31.5x | CURRENT-ANCHOR SPAN > 2.5 |
+| `artillery` | 30 | 9 (30%) | 20 (67%) | 0.752 | 26% | 956% | 24.3x | CURRENT-ANCHOR SPAN > 2.5 |
+| `rocket_trooper` | 39 | 15 (38%) | 21 (54%) | 1.168 | 78% | 1401% | 22.0x | CURRENT-ANCHOR SPAN > 2.5 |
+| `special_forces` | 16 | 3 (19%) | 10 (62%) | 1.215 | 68% | 960% | 18.3x | CURRENT-ANCHOR SPAN > 2.5 |
+| `scout_vehicle` | 16 | 11 (69%) | 11 (69%) | 0.887 | 36% | 673% | 15.2x | CURRENT-ANCHOR SPAN > 2.5 |
+| `fire_support` | 28 | 1 (4%) | 17 (61%) | 0.475 | 38% | 1138% | 13.6x | CURRENT-ANCHOR SPAN > 2.5 |
+| `scout` | 27 | 13 (48%) | 14 (52%) | 1.145 | 53% | 560% | 12.6x | CURRENT-ANCHOR SPAN > 2.5 |
+| `grenadier` | 7 | 2 (29%) | 4 (57%) | 1.433 | 101% | 895% | 12.6x | CURRENT-ANCHOR SPAN > 2.5 |
+| `mbt` | 42 | 1 (2%) | 32 (76%) | 0.580 | 48% | 1164% | 11.9x | CURRENT-ANCHOR SPAN > 2.5 |
+| `missile_vehicle` | 14 | 1 (7%) | 9 (64%) | 0.432 | 64% | 1231% | 10.7x | CURRENT-ANCHOR SPAN > 2.5 |
+| `artillery_tank` | 7 | 1 (14%) | 5 (71%) | 0.667 | 47% | 487% | 8.3x | CURRENT-ANCHOR SPAN > 2.5 |
+| `closecombat` | 4 | 1 (25%) | 3 (75%) | 0.811 | 101% | 526% | 4.6x | CURRENT-ANCHOR SPAN > 2.5 |
+| `anti_air_vehicle` | 9 | 0 (0%) | 7 (78%) | 0.458 | 46% | 372% | 4.5x | CURRENT-ANCHOR SPAN > 2.5 |
+| `mortar` | 5 | 2 (40%) | 4 (80%) | 0.896 | 58% | 249% | 3.9x | CURRENT-ANCHOR SPAN > 2.5 |
+| `high_tech_tank` | 24 | 3 (12%) | 21 (88%) | 0.657 | 89% | 442% | 3.9x | CURRENT-ANCHOR SPAN > 2.5 |
+| `light_tank` | 15 | 6 (40%) | 12 (80%) | 0.839 | 96% | 413% | 3.8x | CURRENT-ANCHOR SPAN > 2.5 |
+| `line_breaker` | 16 | 0 (0%) | 9 (56%) | 0.423 | 81% | 948% | 3.7x | CURRENT-ANCHOR SPAN > 2.5 |
+| `archer` | 4 | 2 (50%) | 3 (75%) | 1.384 | 101% | 287% | 3.6x | CURRENT-ANCHOR SPAN > 2.5 |
+| `flying_infantry` | 9 | 6 (67%) | 7 (78%) | 1.057 | 98% | 330% | 3.6x | CURRENT-ANCHOR SPAN > 2.5 |
 | `heavy_sniper` | 3 | 2 (67%) | 3 (100%) | 0.942 | 101% | 231% | 2.2x | fits fully |
 | `dreadnought` | 5 | 0 (0%) | 5 (100%) | 0.440 | 100% | 231% | 1.7x | fits fully |
 | `tank_destroyer` | 5 | 0 (0%) | 5 (100%) | 0.795 | 101% | 154% | 1.6x | fits fully |
 
 **115/404 (28%) of priced members sit in the sweet spot today; re-scaling each class baseline alone reaches 271/404 (67%).**
 
-**21 of 24 classes cannot fit the band as currently constituted** — their own spread exceeds the 2.5x baseline-to-verifier envelope.
-But the spread is concentrated, not general: below is each class's CORE (the largest set that can share one baseline) and the members that cannot join it.
+**21 of 24 classes exceed the 2.5x envelope at the recorded current anchor** — this is a current-anchor observation, not a feasibility proof.
+The spread is concentrated, not general: below is each class's current-anchor ratio window and the members outside that window.
 
-| class | core | core span | members that cannot share the core baseline |
+| class | current-anchor window | window span | members outside the current-anchor ratio window |
 |---|--:|--:|---|
 | `melee` | 21/35 | 2.4x | `naxis_slave` (27%), `zerg_zergling` (64%), `td_nod_flamethrower` (92%), `asianalliance_japanesesamurai` (120%), `asianalliance_alligator` (127%) +9 more |
 | `heavy_infantry` | 24/35 | 2.4x | `naxis_naxiflamer` (50%), `ixian_shockinfantry` (55%), `ra1_soviets_flamethrower` (57%), `ixian_storminfantry` (60%), `tkm_juggernaut` (66%) +6 more |
@@ -61,12 +61,12 @@ But the spread is concentrated, not general: below is each class's CORE (the lar
 | `archer` | 3/4 | 1.9x | `wc2_humans_highelvenarcher` (744%) |
 | `flying_infantry` | 7/9 | 2.2x | `zerg_shriek` (110%), `naxis_skymage` (390%) |
 
-**114 members across those classes sit outside their own class core.** Each is one of three things, and only a maintainer can say which:
+**114 members across those classes sit outside their current-anchor ratio window.** Each is one of three things, and only a maintainer can say which:
   * misclassified — `futuretech_blackwidow` is in `melee` with a range of 9000, and `corrino_buggy` is in `mbt`;
   * a legitimate higher tier that needs a tech-tier gate rather than a wider band;
   * genuinely mis-stated, which is what the pipeline exists to fix.
 
-⛔ Until that triage happens, no baseline for these classes can be signed: the band would be fitted to a population that does not belong together.
+⛔ Until that triage happens, no baseline for these classes can be signed: the current-anchor window does not determine class membership or baseline feasibility.
 
 ## The fitted baselines, on the grid
 
@@ -99,9 +99,9 @@ But the spread is concentrated, not general: below is each class's CORE (the lar
 
 ## Per-outlier evidence — FOR A MAINTAINER DECISION, never applied
 
-A member is listed when it cannot share one baseline with its class core.
+A member is listed when it sits outside its current-anchor ratio window.
 
-⛔ **The band cannot say where a member belongs, only that it does not belong here.** Measured: the median member is accepted by **6 of 27** class baselines (mean 5.6, max 9), so "another class would take it" is true of nearly everything and is not evidence. `anchor_readiness.py` says why — these classes are *"separated by what they SHOOT AT, not by their stats. No stat-based check can police these boundaries."* An earlier version of this table used the best-fitting class as the deciding signal and labelled 81 of these MISCLASSIFIED, which put `terran_ghost` in `artillery` on one arbitrary pick out of six. The `accepts` column is therefore a COUNT, and only 0 or 1 discriminates.
+⛔ **The band does not determine class membership or baseline feasibility.** Measured: the median member is accepted by **6 of 27** class baselines (mean 5.6, max 9), so "another class would take it" is true of nearly everything and is not evidence. `anchor_readiness.py` says why — these classes are *"separated by what they SHOOT AT, not by their stats. No stat-based check can police these boundaries."* An earlier version of this table used the best-fitting class as the deciding signal and labelled 81 of these MISCLASSIFIED, which put `terran_ghost` in `artillery` on one arbitrary pick out of six. The `accepts` column is therefore a COUNT, and only 0 or 1 discriminates.
 
 | class | actor | % of own baseline | worst axis vs core | accepts | signal | evidence |
 |---|---|--:|---|--:|---|---|
