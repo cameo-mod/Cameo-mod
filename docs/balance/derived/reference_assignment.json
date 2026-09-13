@@ -3628,6 +3628,26 @@
     ]
    }
   },
+  "ra1_allies_phasetransport": {
+   "OpenRA Red Alert": {
+    "confidence": "STRONG",
+    "cost": 1000,
+    "home": true,
+    "hp": 35000,
+    "id": "STNK",
+    "name": "Phase Transport",
+    "raw_name": 1.0,
+    "score": [
+     4,
+     1,
+     1,
+     0.0,
+     0.594,
+     0.735,
+     1.0
+    ]
+   }
+  },
   "ra1_allies_pillbox": {
    "Combined Arms": {
     "confidence": "FAIR",
@@ -4710,6 +4730,24 @@
      0.895,
      0.643
     ]
+   },
+   "OpenRA Red Alert": {
+    "confidence": "FAIR",
+    "cost": 2500,
+    "home": true,
+    "hp": 2800,
+    "id": "DTRK",
+    "name": "Demolition Truck",
+    "raw_name": 0.643,
+    "score": [
+     1,
+     1,
+     1,
+     0.0,
+     0.739,
+     0.62,
+     0.643
+    ]
    }
   },
   "ra1_soviets_oretruck": {
@@ -5136,6 +5174,24 @@
      0.0,
      0.839,
      0.682,
+     1.0
+    ]
+   },
+   "OpenRA Red Alert": {
+    "confidence": "STRONG",
+    "cost": 1350,
+    "home": true,
+    "hp": 40000,
+    "id": "TTNK",
+    "name": "Tesla Tank",
+    "raw_name": 1.0,
+    "score": [
+     4,
+     1,
+     1,
+     0.0,
+     0.748,
+     0.968,
      1.0
     ]
    }
