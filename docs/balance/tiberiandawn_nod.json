@@ -679,7 +679,6 @@
        "td_nod_gunturret_turretgun"
       ],
       "warheads": [
-       "^Warhead_Concussion_Medium_Flat",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "td_nod_gunturret_turretgunblackmarket",
@@ -4121,7 +4120,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "minrange": "2470",
       "pricing": true,
       "range": "12345",
@@ -4132,12 +4131,11 @@
        "ArtilleryShell"
       ],
       "warheads": [
-       "^Warhead_Concussion_Medium_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "td_nod_artillery_artilleryshell",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -4466,7 +4464,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5274",
       "reloaddelay": "60",
@@ -4479,12 +4477,11 @@
        "^Effect_Flame_Medium"
       ],
       "warheads": [
-       "^Warhead_Flame_Medium_Flat",
        "^Warhead_Flame_Light",
        "^Warhead_Flame_Heavy"
       ],
       "weapon": "td_nod_buggymkii_fireballlauncherbuggy2",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "3",
@@ -5875,7 +5872,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "minrange": "2530",
       "pricing": true,
       "range": "12640",
@@ -5887,12 +5884,11 @@
        "^SpecterArtilleryShellLegacy"
       ],
       "warheads": [
-       "^Warhead_Concussion_Medium_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "td_nod_specterartillery_specterartilleryshell",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -5947,7 +5943,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "minrange": "2530",
       "pricing": true,
       "range": "12640",
@@ -5965,12 +5961,11 @@
        "^SpecterArtilleryShellLegacy"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "td_nod_specterartillery_specterartilleryshellupgrade",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

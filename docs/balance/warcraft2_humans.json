@@ -2186,7 +2186,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6936",
       "reloaddelay": "60",
@@ -2199,8 +2199,7 @@
        "^TankDestroyerCannon"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium",
-       "^Warhead_Railgun_ExtraDamage"
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "wc2_dwarf_Rifle",
       "weapon_class_source": "template"
@@ -2245,7 +2244,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6936",
       "reloaddelay": "60",
@@ -2258,8 +2257,7 @@
        "^TankDestroyerCannon"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium",
-       "^Warhead_Railgun_ExtraDamage"
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "wc2_dwarf_Rifle",
       "weapon_class_source": "template"
@@ -2398,7 +2396,6 @@
        "^ArrowWeapon"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "wc2arrowFire",
@@ -2468,7 +2465,6 @@
        "^ArrowWeapon"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "wc2arrowFire",
@@ -2609,7 +2605,6 @@
        "^ArrowWeapon"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "wc2arrowFire",
@@ -2679,7 +2674,6 @@
        "^ArrowWeapon"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "wc2arrowFire",
@@ -3195,8 +3189,6 @@
        "wc2arrowFire"
       ],
       "warheads": [
-       "^Warhead_Laser_ExtraDamage",
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "wc2highArrowFire",
@@ -3290,8 +3282,6 @@
        "wc2arrowFire"
       ],
       "warheads": [
-       "^Warhead_Laser_ExtraDamage",
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "wc2highArrowFire",
@@ -3891,7 +3881,6 @@
        "^ShrapnelWeapon"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "MortarTeamArtilleryShell",
@@ -3946,7 +3935,6 @@
        "^ShrapnelWeapon"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "MortarTeamArtilleryShell",
@@ -5378,7 +5366,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "2240",
       "pricing": true,
       "range": "11200",
@@ -5401,11 +5389,9 @@
        "^MediumCannon",
        "^TankDestroyerCannon"
       ],
-      "warheads": [
-       "^Warhead_CannonHE_Heavy_Flat"
-      ],
+      "warheads": [],
       "weapon": "SiegeEngineCannon",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {

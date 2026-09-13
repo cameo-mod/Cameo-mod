@@ -46,7 +46,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4280",
       "reloaddelay": "25",
@@ -54,11 +54,9 @@
       "versus_templates": [
        "PhotonCannon"
       ],
-      "warheads": [
-       "^Warhead_Plasma_Heavy_Flat"
-      ],
+      "warheads": [],
       "weapon": "ArbiterCannon",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "secondary",
@@ -276,7 +274,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5500",
       "reloaddelay": "65",
@@ -289,12 +287,11 @@
        "^Effect_Flak_Medium"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Flak_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "CorsairFlash",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
@@ -308,7 +305,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5500",
       "reloaddelay": "65",
@@ -321,12 +318,11 @@
        "^Effect_Flak_Medium"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Flak_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "CorsairFlash",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -468,7 +464,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5077",
       "reloaddelay": "36",
@@ -489,7 +485,6 @@
        "^Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "EpigraphMG",
@@ -569,7 +564,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5077",
       "reloaddelay": "36",
@@ -590,7 +585,6 @@
        "^Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "EpigraphMG",
@@ -763,7 +757,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "80",
@@ -775,11 +769,9 @@
        "^ShrapnelWeapon",
        "PhotonCannon"
       ],
-      "warheads": [
-       "^Warhead_Plasma_Heavy_Flat"
-      ],
+      "warheads": [],
       "weapon": "GladiusCannon",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -935,7 +927,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "32",
@@ -948,12 +940,11 @@
        "^Effect_Flak_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Flak_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "ScoutMG",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -967,7 +958,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "32",
@@ -980,12 +971,11 @@
        "^Effect_Flak_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Flak_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "ScoutMG",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
@@ -1234,7 +1224,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8475",
       "reloaddelay": "10",
@@ -1248,11 +1238,9 @@
        "^TeslaWeapon",
        "^LaserWeapon"
       ],
-      "warheads": [
-       "^Warhead_Laser_Heavy_Flat"
-      ],
+      "warheads": [],
       "weapon": "StarshipSovereignBeam",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2533,7 +2521,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8228",
       "reloaddelay": "28",
@@ -2542,11 +2530,9 @@
        "^Warhead_Plasma_Heavy_Flat",
        "^PhotonCannonLegacy"
       ],
-      "warheads": [
-       "^Warhead_Plasma_Heavy_Flat"
-      ],
+      "warheads": [],
       "weapon": "PhotonCannon",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2631,7 +2617,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5250",
       "reloaddelay": "40",
@@ -2644,12 +2630,11 @@
        "^Effect_Railgun_Heavy"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy"
       ],
       "weapon": "GlaveCanon",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -2670,7 +2655,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5250",
       "reloaddelay": "40",
@@ -2683,12 +2668,11 @@
        "^Effect_Railgun_Heavy"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy"
       ],
       "weapon": "GlaveCanon",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4740,7 +4724,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "28",
@@ -4756,12 +4740,11 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "AtreusMG",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4873,7 +4856,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "40",
@@ -4881,11 +4864,9 @@
       "versus_templates": [
        "PhotonCannon"
       ],
-      "warheads": [
-       "^Warhead_Plasma_Heavy_Flat"
-      ],
+      "warheads": [],
       "weapon": "DragoonCannon",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -5200,7 +5181,6 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Concussion_Light",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
@@ -5228,7 +5208,6 @@
        "ManifoldMG"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Concussion_Light",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
@@ -5674,7 +5653,6 @@
        "^MediumMissile"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "ScarabLaunch",

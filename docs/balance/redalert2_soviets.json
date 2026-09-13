@@ -343,8 +343,7 @@
        "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Medium_GroundShip"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "MigMissiles",
       "weapon_class_source": "template"
@@ -399,7 +398,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7600",
       "reloaddelay": "50",
@@ -414,11 +413,10 @@
       ],
       "warheads": [
        "^Warhead_Chemical_Medium",
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Medium_GroundShip"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "MigMissiles_rad",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -474,8 +472,7 @@
        "^Effect_Terrorist_Explosion_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Medium_GroundShip"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "MigMissiles_fire",
       "weapon_class_source": "template"
@@ -534,8 +531,7 @@
        "^Effect_Kirov_Tesla_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Medium_GroundShip"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "MigMissiles_tesla",
       "weapon_class_source": "template"
@@ -593,8 +589,7 @@
        "MigMissiles"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Medium_GroundShip"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "MigMissiles_elite",
       "weapon_class_source": "template"
@@ -649,7 +644,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8600",
       "reloaddelay": "50",
@@ -660,11 +655,10 @@
       ],
       "warheads": [
        "^Warhead_Chemical_Medium",
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Medium_GroundShip"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "MigMissiles_rad_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -719,8 +713,7 @@
        "MigMissiles_fire"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Medium_GroundShip"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "MigMissiles_fire_elite",
       "weapon_class_source": "template"
@@ -778,8 +771,7 @@
        "MigMissiles_tesla"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Medium_GroundShip"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "MigMissiles_tesla_elite",
       "weapon_class_source": "template"
@@ -827,7 +819,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7600",
       "reloaddelay": "50",
@@ -839,11 +831,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Medium",
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Medium_GroundShip"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "MigMissiles_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
@@ -888,7 +879,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8600",
       "reloaddelay": "50",
@@ -900,11 +891,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Medium",
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Medium_GroundShip"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "MigMissiles_AA_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -976,7 +966,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4750",
       "reloaddelay": "3",
@@ -988,12 +978,11 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "BlackHawkCannon",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [],
@@ -1024,7 +1013,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "minrange": "2222",
       "pricing": true,
       "range": "11111",
@@ -1036,12 +1025,11 @@
        "^RA160mmLegacy"
       ],
       "warheads": [
-       "^Warhead_Concussion_Medium_Flat",
        "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "RA160mm",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "deployed",
@@ -1091,7 +1079,6 @@
        "^RA160mmRadLegacy"
       ],
       "warheads": [
-       "^Warhead_Chemical_Light_Flat",
        "^Warhead_Chemical_Light",
        "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Light"
@@ -1111,7 +1098,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "minrange": "2222",
       "pricing": true,
       "range": "11111",
@@ -1123,13 +1110,11 @@
        "RA160mm"
       ],
       "warheads": [
-       "^Warhead_CannonFire_Heavy_Flat",
-       "^Warhead_Concussion_Medium_Flat",
        "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "RA160mm_fire",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "deployed",
@@ -1143,7 +1128,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "minrange": "2222",
       "pricing": true,
       "range": "11111",
@@ -1155,13 +1140,11 @@
        "RA160mm"
       ],
       "warheads": [
-       "^Warhead_Tesla_Heavy_Flat",
-       "^Warhead_Concussion_Medium_Flat",
        "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "RA160mm_tesla",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "deployed",
@@ -1177,7 +1160,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "minrange": "2222",
       "pricing": true,
       "range": "12345",
@@ -1189,12 +1172,11 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       "^Warhead_Concussion_Medium_Flat",
        "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "RA160mmE_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "deployed",
@@ -1261,7 +1243,6 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       "^Warhead_Chemical_Light_Flat",
        "^Warhead_Nuclear_Super",
        "^Warhead_Chemical_Light",
        "^Warhead_Concussion_Medium",
@@ -1282,7 +1263,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "minrange": "2222",
       "pricing": true,
       "range": "12345",
@@ -1295,13 +1276,11 @@
        "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
-       "^Warhead_CannonFire_Heavy_Flat",
-       "^Warhead_Concussion_Medium_Flat",
        "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "RA160mmE_fire_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "deployed",
@@ -1315,7 +1294,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "minrange": "2222",
       "pricing": true,
       "range": "12345",
@@ -1328,13 +1307,11 @@
        "^Effect_Kirov_Tesla_RA2"
       ],
       "warheads": [
-       "^Warhead_Tesla_Heavy_Flat",
-       "^Warhead_Concussion_Medium_Flat",
        "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "RA160mmE_tesla_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1418,7 +1395,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4750",
       "reloaddelay": "3",
@@ -1429,12 +1406,11 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "BlackHawkCannon",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2402,7 +2378,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6577",
       "reloaddelay": "18",
@@ -2413,12 +2389,11 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2vulcan",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2754,7 +2729,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "8167",
       "reloaddelay": "18",
@@ -2766,12 +2741,11 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "BorisAKM",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "8",
@@ -2786,7 +2760,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "9167",
       "reloaddelay": "18",
@@ -2796,12 +2770,11 @@
        "BorisAKM"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "BorisAKM_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -2816,7 +2789,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "9167",
       "reloaddelay": "18",
@@ -2826,12 +2799,11 @@
        "BorisAKM"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "BorisAKM2",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
@@ -2865,7 +2837,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "8167",
       "reloaddelay": "18",
@@ -2877,12 +2849,11 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "BorisAKM",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -2898,7 +2869,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "9167",
       "reloaddelay": "18",
@@ -2908,12 +2879,11 @@
        "BorisAKM"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "BorisAKM_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3042,7 +3012,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "5724",
       "reloaddelay": "50",
@@ -3051,12 +3021,11 @@
        "RA2vulcan2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2vulcan3",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5261,8 +5230,7 @@
        "^Warhead_Flak_Medium_Flat"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium",
-       "^Warhead_Flak_Medium_Flat"
+       "^Warhead_Flak_Medium"
       ],
       "weapon": "RA2FlakTrackGun_elite",
       "weapon_class_source": "template"
@@ -5452,7 +5420,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5374",
       "reloaddelay": "54",
@@ -5467,12 +5435,11 @@
        "^RA2RadShell"
       ],
       "warheads": [
-       "^Warhead_Chemical_Medium_Flat",
        "^Warhead_Chemical_Medium",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "RA2120mm_rad",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -5572,7 +5539,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6374",
       "reloaddelay": "54",
@@ -5583,12 +5550,11 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       "^Warhead_Chemical_Medium_Flat",
        "^Warhead_Chemical_Medium",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "RA2120mm_rad_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -6099,7 +6065,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
@@ -6110,12 +6076,11 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

@@ -1354,7 +1354,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6574",
       "reloaddelay": "10",
@@ -1371,12 +1371,11 @@
        "^Effect_CannonAP_Light"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Light_Flat",
        "^Warhead_CannonHE_Medium",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "TS70mmTur",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -1419,7 +1418,6 @@
        "^TankDestroyerCannon"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "TS70mmTurChem",
@@ -1493,7 +1491,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6404",
       "reloaddelay": "48",
@@ -1509,12 +1507,11 @@
        "^Effect_Concussion_Medium"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "TSScoopDualTur",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
@@ -1559,7 +1556,6 @@
        "^ShrapnelWeapon"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "TSScoopDualTurChem",
@@ -1798,7 +1794,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6272",
       "reloaddelay": "6",
@@ -1811,12 +1807,11 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "TSMutVulcanTurret",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3383,7 +3378,6 @@
        "^Effect_Chem_Medium"
       ],
       "warheads": [
-       "^Warhead_Chemical_Medium_Flat",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Concussion_Medium",
        "^Warhead_Chemical_Medium"
@@ -3471,7 +3465,6 @@
        "^Effect_Chem_Medium"
       ],
       "warheads": [
-       "^Warhead_Chemical_Medium_Flat",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Concussion_Medium",
        "^Warhead_Chemical_Medium"
@@ -3545,7 +3538,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5611",
       "reloaddelay": "8",
@@ -3558,12 +3551,11 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "TSSergGun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -3577,7 +3569,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "5611",
       "reloaddelay": "8",
@@ -3590,12 +3582,11 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "TSSergGun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6890,7 +6881,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6147",
       "reloaddelay": "12",
@@ -6903,12 +6894,11 @@
        "^Effect_Flak_Medium"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Bullet_Medium",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "TSMutApcCannon",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6991,7 +6981,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6603",
       "reloaddelay": "5",
@@ -7004,12 +6994,11 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "TSBowlerCannon",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7705,7 +7694,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5606",
       "reloaddelay": "54",
@@ -7719,12 +7708,11 @@
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Light_Flat",
        "^Warhead_Flak_Medium",
        "^Warhead_MissileHE_Light"
       ],
       "weapon": "TSAdatsMissile",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -7739,7 +7727,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "8409",
       "reloaddelay": "54",
@@ -7750,13 +7738,11 @@
        "^Warhead_Flak_Medium_Flat"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Light_Flat",
        "^Warhead_Flak_Medium",
-       "^Warhead_MissileHE_Light",
-       "^Warhead_Flak_Medium_Flat"
+       "^Warhead_MissileHE_Light"
       ],
       "weapon": "TSAdatsMissile_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -7823,7 +7809,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "8409",
       "reloaddelay": "54",
@@ -7833,13 +7819,11 @@
        "TSAdatsMissile_AA"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Light_Flat",
        "^Warhead_Flak_Medium",
-       "^Warhead_MissileHE_Light",
-       "^Warhead_Flak_Medium_Flat"
+       "^Warhead_MissileHE_Light"
       ],
       "weapon": "TSChemAdatsMissileAA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -8552,8 +8536,7 @@
        "^Effect_MissileHE_Medium"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileHE_Medium_Flat"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "TSRuinerMissile",
       "weapon_class_source": "template"
@@ -8748,7 +8731,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5300",
       "reloaddelay": "18",
@@ -8761,12 +8744,11 @@
        "TSSAPCMissiles"
       ],
       "warheads": [
-       "^Warhead_Chemical_Light_Flat",
        "^Warhead_Chemical_Light",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "TSSAPCCoreMissiles",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

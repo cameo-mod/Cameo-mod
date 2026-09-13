@@ -2800,8 +2800,7 @@
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileHE_Medium_Flat"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "td_gdi_havoc_rocket",
       "weapon_class_source": "template"
@@ -2958,8 +2957,7 @@
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileHE_Medium_Flat"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "td_gdi_havoc_rocket",
       "weapon_class_source": "template"
@@ -3516,7 +3514,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5596",
       "reloaddelay": "20",
@@ -3530,12 +3528,11 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "td_gdi_officer_machinegun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -3552,7 +3549,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "5596",
       "reloaddelay": "20",
@@ -3566,12 +3563,11 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "td_gdi_officer_machinegun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -3870,7 +3866,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "3500",
       "reloaddelay": "70",
@@ -3883,12 +3879,11 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "td_gdi_shotgunner_shotgun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -3904,7 +3899,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "3500",
       "reloaddelay": "70",
@@ -3917,12 +3912,11 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "td_gdi_shotgunner_shotgun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5142,7 +5136,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5668",
       "reloaddelay": "10",
@@ -5151,12 +5145,11 @@
        "APCGun"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Bullet_Medium",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "td_gdi_apc_apcgun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
@@ -5170,7 +5163,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8502",
       "reloaddelay": "10",
@@ -5179,12 +5172,11 @@
        "APCGun"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Bullet_Medium",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "td_gdi_apc_apcgun_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5837,7 +5829,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4860",
       "reloaddelay": "11",
@@ -5851,11 +5843,9 @@
        "^Chaingun",
        "^FlakWeapon"
       ],
-      "warheads": [
-       "^Warhead_Bullet_Medium_Flat"
-      ],
+      "warheads": [],
       "weapon": "td_gdi_boxer_boxercannonag",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "damage_warheads": [
@@ -5916,7 +5906,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7290",
       "reloaddelay": "11",
@@ -5925,12 +5915,9 @@
        "^Warhead_Flak_Medium_Flat",
        "td_gdi_boxer_boxercannonag"
       ],
-      "warheads": [
-       "^Warhead_Flak_Medium_Flat",
-       "^Warhead_Bullet_Medium_Flat"
-      ],
+      "warheads": [],
       "weapon": "td_gdi_boxer_boxercannon_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -6871,7 +6858,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5598",
       "reloaddelay": "84",
@@ -6887,11 +6874,10 @@
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_MissileHE_Light"
       ],
       "weapon": "td_gdi_humveemkii_rocketshumvee2amt",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -6918,9 +6904,7 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy",
-       "^Warhead_MissileAA_Heavy_Flat",
        "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_MissileHE_Light"
       ],
       "weapon": "td_gdi_humveemkii_rocketshumvee2amt_AA",

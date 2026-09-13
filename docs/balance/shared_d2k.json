@@ -609,7 +609,6 @@
        "HMG"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "HMG_fremen",
@@ -704,7 +703,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5475",
       "reloaddelay": "20",
@@ -717,7 +716,6 @@
        "^Effect_Bullet_Light"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light_Flat",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "light_inf_lmg",
@@ -734,7 +732,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "20",
@@ -749,12 +747,11 @@
        "^HeavyMachineGunProjectile"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "light_inf_lmg_upgrade",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -768,7 +765,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5475",
       "reloaddelay": "20",
@@ -781,7 +778,6 @@
        "^Effect_Bullet_Light"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light_Flat",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "light_inf_lmg",
@@ -799,7 +795,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": false,
       "range": "4500",
       "reloaddelay": "20",
@@ -814,12 +810,11 @@
        "^HeavyMachineGunProjectile"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "light_inf_lmg_upgrade",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -948,7 +943,6 @@
        "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
@@ -1006,7 +1000,6 @@
        "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
@@ -1309,7 +1302,6 @@
        "^D2K155mmLegacy"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Concussion_Medium",

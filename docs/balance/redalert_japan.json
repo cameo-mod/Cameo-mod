@@ -240,7 +240,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "3053",
       "reloaddelay": "128",
@@ -254,12 +254,11 @@
        "^Effect_Arrow_Light"
       ],
       "warheads": [
-       "^Warhead_Arrow_Light_Flat",
        "^Warhead_MissileHE_Medium",
        "^Warhead_Arrow_Light"
       ],
       "weapon": "SkyHawkArrows",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -300,7 +299,6 @@
       ],
       "warheads": [
        "^Warhead_Arrow_Medium",
-       "^Warhead_Arrow_Light_Flat",
        "^Warhead_MissileHE_Medium",
        "^Warhead_Arrow_Light"
       ],
@@ -544,7 +542,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "minrange": "1325",
       "pricing": true,
       "range": "6615",
@@ -555,12 +553,11 @@
        "SkyHawkArrows"
       ],
       "warheads": [
-       "^Warhead_Arrow_Light_Flat",
        "^Warhead_MissileHE_Medium",
        "^Warhead_Arrow_Light"
       ],
       "weapon": "ZeroFighterArrows",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
@@ -601,7 +598,6 @@
       ],
       "warheads": [
        "^Warhead_Arrow_Medium",
-       "^Warhead_Arrow_Light_Flat",
        "^Warhead_MissileHE_Medium",
        "^Warhead_Arrow_Light"
       ],
@@ -1487,7 +1483,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "minrange": "1845",
       "pricing": true,
       "range": "9214",
@@ -1502,11 +1498,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAP_Light",
-       "^Warhead_Arrow_Light_Flat",
        "^Warhead_Arrow_Light"
       ],
       "weapon": "BallistaSingleShotAirEnergized",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1582,7 +1577,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6696",
       "reloaddelay": "25",
@@ -1596,12 +1591,11 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "JHighV",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -1639,7 +1633,6 @@
       "warheads": [
        "^Warhead_Waveforce_Heavy",
        "^Warhead_Railgun_Heavy",
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
@@ -1987,7 +1980,6 @@
        "JapanMaidenBow"
       ],
       "warheads": [
-       "^Warhead_Arrow_Light_Flat",
        "^Warhead_Arrow_Light"
       ],
       "weapon": "JapanMaidenBowEnergized",
@@ -2078,7 +2070,6 @@
        "JapanMaidenBow"
       ],
       "warheads": [
-       "^Warhead_Arrow_Light_Flat",
        "^Warhead_Arrow_Light"
       ],
       "weapon": "JapanMaidenBowEnergized",
@@ -2957,8 +2948,7 @@
        "^ArrowWeapon"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAA_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RocketAngelRockets",
       "weapon_class_source": "template"
@@ -3348,7 +3338,6 @@
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy",
-       "^Warhead_Railgun_ExtraDamage",
        "^Warhead_TankBusterBeam_Unscoped_Flat"
       ],
       "weapon": "TankBusterBeamCannon",
@@ -3423,7 +3412,6 @@
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy",
-       "^Warhead_Railgun_ExtraDamage",
        "^Warhead_TankBusterBeam_Unscoped_Flat"
       ],
       "weapon": "TankBusterBeamCannon",
@@ -5569,7 +5557,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "45",
@@ -5582,11 +5570,9 @@
        "^RailgunWeapon",
        "^HeavyCannon"
       ],
-      "warheads": [
-       "^Warhead_Plasma_Medium_Flat"
-      ],
+      "warheads": [],
       "weapon": "OISmallPlasmaCannon",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "damage_warheads": [
@@ -5627,7 +5613,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "45",
@@ -5640,11 +5626,9 @@
        "^RailgunWeapon",
        "^HeavyCannon"
       ],
-      "warheads": [
-       "^Warhead_Plasma_Medium_Flat"
-      ],
+      "warheads": [],
       "weapon": "OISmallPlasmaCannon",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "damage_warheads": [
@@ -5685,7 +5669,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "45",
@@ -5698,11 +5682,9 @@
        "^RailgunWeapon",
        "^HeavyCannon"
       ],
-      "warheads": [
-       "^Warhead_Plasma_Medium_Flat"
-      ],
+      "warheads": [],
       "weapon": "OISmallPlasmaCannon",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "burst": "20",
@@ -6213,7 +6195,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4876",
       "reloaddelay": "25",
@@ -6228,11 +6210,9 @@
        "^TankDestroyerCannon",
        "^MediumCannon"
       ],
-      "warheads": [
-       "^Warhead_Bullet_Medium_Flat"
-      ],
+      "warheads": [],
       "weapon": "HovercraftCannon",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "damage_warheads": [
@@ -6336,7 +6316,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4876",
       "reloaddelay": "25",
@@ -6349,12 +6329,9 @@
        "^HeavyCannon",
        "HovercraftCannon"
       ],
-      "warheads": [
-       "^Warhead_Plasma_Medium_Flat",
-       "^Warhead_Bullet_Medium_Flat"
-      ],
+      "warheads": [],
       "weapon": "HovercraftPlasmaCannon",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "damage_warheads": [
@@ -6367,7 +6344,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4876",
       "reloaddelay": "8",
@@ -6381,12 +6358,11 @@
        "^Effect_Flak_Medium"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "JapaneseHovercraftFlak",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -6426,7 +6402,6 @@
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy",
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Flak_Medium"
       ],
@@ -6444,7 +6419,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7314",
       "reloaddelay": "8",
@@ -6454,12 +6429,11 @@
        "JapaneseHovercraftFlak"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "JapaneseHovercraftFlakAA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -6499,7 +6473,6 @@
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy",
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Flak_Medium"
       ],
@@ -6657,7 +6630,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5243",
       "reloaddelay": "52",
@@ -6669,11 +6642,9 @@
        "^TankDestroyerCannon",
        "^HeavyCannon"
       ],
-      "warheads": [
-       "^Warhead_Plasma_Medium_Flat"
-      ],
+      "warheads": [],
       "weapon": "Type89PlasmaCannon",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -7205,7 +7176,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "45",
@@ -7218,11 +7189,9 @@
        "^RailgunWeapon",
        "^HeavyCannon"
       ],
-      "warheads": [
-       "^Warhead_Plasma_Medium_Flat"
-      ],
+      "warheads": [],
       "weapon": "OISmallPlasmaCannon",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "damage_warheads": [
@@ -7263,7 +7232,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "45",
@@ -7276,11 +7245,9 @@
        "^RailgunWeapon",
        "^HeavyCannon"
       ],
-      "warheads": [
-       "^Warhead_Plasma_Medium_Flat"
-      ],
+      "warheads": [],
       "weapon": "OISmallPlasmaCannon",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "damage_warheads": [
@@ -7321,7 +7288,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "45",
@@ -7334,11 +7301,9 @@
        "^RailgunWeapon",
        "^HeavyCannon"
       ],
-      "warheads": [
-       "^Warhead_Plasma_Medium_Flat"
-      ],
+      "warheads": [],
       "weapon": "OISmallPlasmaCannon",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "burst": "20",

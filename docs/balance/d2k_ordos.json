@@ -56,7 +56,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4000",
       "reloaddelay": "20",
@@ -70,12 +70,11 @@
        "d2kCarryallChainGun"
       ],
       "warheads": [
-       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Laser_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "d2kCarryallChainGun_upgrade",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -182,7 +181,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4000",
       "reloaddelay": "20",
@@ -196,12 +195,11 @@
        "d2kCarryallChainGun"
       ],
       "warheads": [
-       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Laser_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "d2kCarryallChainGun_upgrade",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -332,7 +330,6 @@
        "^D2KMissile"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "ordos_airmine",
@@ -485,8 +482,6 @@
        "D2K_APC_Rocket"
       ],
       "warheads": [
-       "^Warhead_MissileAA_Medium_Flat",
-       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
@@ -539,8 +534,6 @@
        "D2K_APC_Rocket"
       ],
       "warheads": [
-       "^Warhead_MissileAA_Medium_Flat",
-       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
@@ -790,7 +783,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6184",
       "reloaddelay": "60",
@@ -804,12 +797,11 @@
        "d2kChainGun"
       ],
       "warheads": [
-       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Laser_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "d2kChainGun_upgrade",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -929,7 +921,6 @@
        "^Warhead_MissileAP_Heavy_WraithOrder",
        "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "Wraith_ToxinMissiles",
@@ -1063,7 +1054,6 @@
        "^D2K_Cannon"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Concussion_Medium",
@@ -2826,7 +2816,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5475",
       "reloaddelay": "20",
@@ -2839,7 +2829,6 @@
        "^Effect_Bullet_Light"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light_Flat",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "light_inf_lmg",
@@ -2863,7 +2852,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5475",
       "reloaddelay": "20",
@@ -2877,13 +2866,11 @@
        "light_inf_lmg"
       ],
       "warheads": [
-       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Laser_Heavy",
-       "^Warhead_Bullet_Light_Flat",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "light_inf_lmg_ordos_upgrade",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -2897,7 +2884,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5475",
       "reloaddelay": "20",
@@ -2910,7 +2897,6 @@
        "^Effect_Bullet_Light"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light_Flat",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "light_inf_lmg",
@@ -2935,7 +2921,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": false,
       "range": "5475",
       "reloaddelay": "20",
@@ -2949,13 +2935,11 @@
        "light_inf_lmg"
       ],
       "warheads": [
-       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Laser_Heavy",
-       "^Warhead_Bullet_Light_Flat",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "light_inf_lmg_ordos_upgrade",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3092,7 +3076,6 @@
        "^D2K_Cannon"
       ],
       "warheads": [
-       "^Warhead_Concussion_Medium_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonAP_Light",
@@ -3161,7 +3144,6 @@
        "^D2K_Cannon"
       ],
       "warheads": [
-       "^Warhead_Concussion_Medium_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonAP_Light",
@@ -3274,7 +3256,6 @@
        "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
@@ -3332,7 +3313,6 @@
        "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
@@ -4147,7 +4127,6 @@
        "^D2KRocket"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
@@ -4464,7 +4443,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1245",
       "pricing": true,
       "range": "6220",
@@ -4474,12 +4453,11 @@
        "autogun_tank"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "autogun_tank_small",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4710,7 +4688,6 @@
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_MissileAP_Heavy"
       ],
@@ -4810,7 +4787,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1415",
       "pricing": true,
       "range": "7070",
@@ -4826,12 +4803,11 @@
        "^D2KMissile"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "DeviatorMissile",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4951,7 +4927,6 @@
        "^D2KRocket"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
@@ -5068,7 +5043,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1495",
       "pricing": true,
       "range": "7480",
@@ -5086,12 +5061,11 @@
        "^Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "autogun_tank",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5385,8 +5359,6 @@
        "D2K_APC_Rocket"
       ],
       "warheads": [
-       "^Warhead_MissileAA_Medium_Flat",
-       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
@@ -5439,8 +5411,6 @@
        "D2K_APC_Rocket"
       ],
       "warheads": [
-       "^Warhead_MissileAA_Medium_Flat",
-       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
@@ -6141,7 +6111,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4857",
       "reloaddelay": "33",
@@ -6155,12 +6125,11 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "HMGstealth",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -6196,7 +6165,6 @@
       ],
       "warheads": [
        "^Warhead_Laser_Heavy",
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
@@ -6324,7 +6292,6 @@
        "^TankDestroyerCannon"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "120mm_td",

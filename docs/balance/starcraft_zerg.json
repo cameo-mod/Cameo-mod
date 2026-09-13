@@ -376,7 +376,6 @@
        "MutaliskSpore"
       ],
       "warheads": [
-       "^Warhead_Chemical_Medium_Flat",
        "^Warhead_Chemical_Medium"
       ],
       "weapon": "SCDevourerAA",
@@ -511,8 +510,7 @@
        "^LaserWeapon"
       ],
       "warheads": [
-       "^Warhead_Chemical_Medium",
-       "^Warhead_Laser_ExtraDamage"
+       "^Warhead_Chemical_Medium"
       ],
       "weapon": "DreadshroudSpore",
       "weapon_class_source": "template"
@@ -684,7 +682,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "60",
@@ -698,12 +696,11 @@
        "^HeavyBomb"
       ],
       "warheads": [
-       "^Warhead_Concussion_Medium_Flat",
        "^Warhead_Concussion_Medium",
        "^Warhead_Concussion_Light"
       ],
       "weapon": "GuardianShoot",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -811,7 +808,6 @@
        "^ArrowWeapon"
       ],
       "warheads": [
-       "^Warhead_Chemical_Medium_Flat",
        "^Warhead_Chemical_Medium"
       ],
       "weapon": "MutaliskSpore",
@@ -1045,7 +1041,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "2000",
       "reloaddelay": "25",
@@ -1054,12 +1050,11 @@
        "SCScourgeExplosion"
       ],
       "warheads": [
-       "^Warhead_MissileAA_Heavy_Flat",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "ScourgeExplosion",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1962,7 +1957,6 @@
        "^SwordWeapon"
       ],
       "warheads": [
-       "^Warhead_Melee_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "Tentacle",
@@ -2121,7 +2115,6 @@
        "^SwordWeapon"
       ],
       "warheads": [
-       "^Warhead_Melee_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "Tentacle",
@@ -2279,7 +2272,6 @@
        "^SwordWeapon"
       ],
       "warheads": [
-       "^Warhead_Melee_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "Tentacle",
@@ -2438,7 +2430,6 @@
        "^SwordWeapon"
       ],
       "warheads": [
-       "^Warhead_Melee_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "Tentacle",

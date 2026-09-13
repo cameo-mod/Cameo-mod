@@ -63,9 +63,7 @@
        "^SteelLightMissile"
       ],
       "warheads": [
-       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Laser_Heavy",
-       "^Warhead_Laser_ExtraDamage",
        "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium",
        "^Warhead_MissileAP_Light"
@@ -126,7 +124,6 @@
       ],
       "warheads": [
        "^Warhead_Quantum_Medium",
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
@@ -236,8 +233,6 @@
        "SteelInfRailgun_elite"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium_Flat",
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Railgun_Heavy",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium",
@@ -340,9 +335,6 @@
        "SteelInfRailgun_EMP_elite"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium_Flat",
-       "^Warhead_Quantum_Heavy_Flat",
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Railgun_Heavy",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium",
@@ -425,7 +417,6 @@
        "^SteelChaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
@@ -546,7 +537,6 @@
        "^SteelHeavyCannon"
       ],
       "warheads": [
-       "^Warhead_Quantum_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "SteelQuantumTurretRail",
@@ -608,7 +598,6 @@
        "SteelQuantumTurretRail"
       ],
       "warheads": [
-       "^Warhead_Quantum_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "SteelQuantumTurretRail_EMP",
@@ -676,7 +665,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4750",
       "reloaddelay": "3",
@@ -687,12 +676,11 @@
        "^SteelChaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelCargoshipCannons",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -806,7 +794,6 @@
        "^SteelChaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelCruiserCannons",
@@ -856,7 +843,6 @@
        "SteelCruiserCannons"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelCruiserCannons_elite",
@@ -873,7 +859,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -886,12 +872,11 @@
        "^RA2Grenade"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "SteelCruiserArtillery",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
@@ -906,7 +891,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "minrange": "1600",
       "pricing": true,
       "range": "8000",
@@ -917,12 +902,11 @@
        "SteelCruiserArtillery"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "SteelCruiserArtillery_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1173,7 +1157,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "60",
@@ -1184,11 +1168,9 @@
        "^LaserWeapon",
        "^RailgunWeapon"
       ],
-      "warheads": [
-       "^Warhead_Laser_Heavy_Flat"
-      ],
+      "warheads": [],
       "weapon": "SteelAirTurret",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "damage_warheads": [
@@ -1229,7 +1211,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "60",
@@ -1243,12 +1225,10 @@
        "SteelAirTurret"
       ],
       "warheads": [
-       "^Warhead_Quantum_Heavy_Flat",
-       "^Warhead_Tesla_Heavy",
-       "^Warhead_Laser_Heavy_Flat"
+       "^Warhead_Tesla_Heavy"
       ],
       "weapon": "SteelAirTurret_EMP",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -1289,7 +1269,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "60",
@@ -1299,12 +1279,10 @@
        "SteelAirTurret_EMP"
       ],
       "warheads": [
-       "^Warhead_Quantum_Heavy_Flat",
-       "^Warhead_Tesla_Heavy",
-       "^Warhead_Laser_Heavy_Flat"
+       "^Warhead_Tesla_Heavy"
       ],
       "weapon": "SteelAirTurret_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1431,7 +1409,6 @@
        "^SteelMediumMissile"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "SteelTwisterMissiles",
@@ -1490,7 +1467,6 @@
        "SteelTwisterMissiles"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "SteelTwisterMissiles_elite",
@@ -1614,7 +1590,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "60",
@@ -1628,12 +1604,11 @@
        "^SteelMediumMissile"
       ],
       "warheads": [
-       "^Warhead_MissileAA_Medium_Flat",
        "^Warhead_Flak_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "ConsortiumMissileSystem",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -1689,7 +1664,6 @@
       ],
       "warheads": [
        "^Warhead_MissileQuantum_Medium",
-       "^Warhead_MissileAA_Medium_Flat",
        "^Warhead_Flak_Medium",
        "^Warhead_MissileAP_Medium"
       ],
@@ -1803,7 +1777,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "25000",
       "reloaddelay": "750",
@@ -1815,11 +1789,9 @@
        "^LaserWeapon",
        "^RailgunWeapon"
       ],
-      "warheads": [
-       "^Warhead_Plasma_Heavy_Flat"
-      ],
+      "warheads": [],
       "weapon": "bfg10kCannon",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "superweapon",
@@ -1878,7 +1850,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10238976",
       "reloaddelay": "750",
@@ -1886,11 +1858,9 @@
       "versus_templates": [
        "bfg10kCannon"
       ],
-      "warheads": [
-       "^Warhead_Plasma_Heavy_Flat"
-      ],
+      "warheads": [],
       "weapon": "superbfg10kCannon",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2352,7 +2322,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "10",
@@ -2363,12 +2333,11 @@
        "^SteelChaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelVulcan",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -2382,7 +2351,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "10",
@@ -2392,12 +2361,11 @@
        "SteelVulcan"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelVulcanResonance",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2705,7 +2673,6 @@
        "^SteelHeavyCannon"
       ],
       "warheads": [
-       "^Warhead_Quantum_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "SteelQuantumTurretRail",
@@ -2774,7 +2741,6 @@
        "^SteelHeavyCannon"
       ],
       "warheads": [
-       "^Warhead_Quantum_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "SteelQuantumTurretRail",
@@ -2837,7 +2803,6 @@
        "SteelQuantumTurretRail"
       ],
       "warheads": [
-       "^Warhead_Quantum_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "SteelQuantumTurretRail_EMP",
@@ -2900,7 +2865,6 @@
        "SteelQuantumTurretRail"
       ],
       "warheads": [
-       "^Warhead_Quantum_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "SteelQuantumTurretRail_EMP",
@@ -3041,7 +3005,6 @@
        "^SteelSmallArms"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_MissileAP_Medium",
        "^Warhead_Bullet_Light"
@@ -3072,7 +3035,6 @@
        "SteelCloneGun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_MissileAP_Medium",
        "^Warhead_Bullet_Light"
@@ -3105,7 +3067,6 @@
        "^SteelSmallArms"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_MissileAP_Medium",
        "^Warhead_Bullet_Light"
@@ -3137,7 +3098,6 @@
        "SteelCloneGun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_MissileAP_Medium",
        "^Warhead_Bullet_Light"
@@ -3166,7 +3126,6 @@
        "SteelCloneGun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_MissileAP_Medium",
        "^Warhead_Bullet_Light"
@@ -3197,7 +3156,6 @@
        "SteelCloneGun_elite"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_MissileAP_Medium",
        "^Warhead_Bullet_Light"
@@ -3227,7 +3185,6 @@
        "SteelCloneGun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_MissileAP_Medium",
        "^Warhead_Bullet_Light"
@@ -3259,7 +3216,6 @@
        "SteelCloneGun_elite"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_MissileAP_Medium",
        "^Warhead_Bullet_Light"
@@ -3463,7 +3419,6 @@
        "^SteelMakoGunCannonCompatibility"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
@@ -3508,7 +3463,6 @@
        "SteelMakoGun"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
@@ -3557,7 +3511,6 @@
        "^SteelMakoGunCannonCompatibility"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
@@ -3603,7 +3556,6 @@
        "SteelMakoGun"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
@@ -3664,7 +3616,6 @@
       ],
       "warheads": [
        "^Warhead_Quantum_Medium",
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
@@ -3724,7 +3675,6 @@
       ],
       "warheads": [
        "^Warhead_Quantum_Medium",
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
@@ -3786,7 +3736,6 @@
       ],
       "warheads": [
        "^Warhead_Quantum_Medium",
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
@@ -3847,7 +3796,6 @@
       ],
       "warheads": [
        "^Warhead_Quantum_Medium",
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
@@ -3956,7 +3904,6 @@
        "^SteelLightMissile"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Railgun_Heavy",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium",
@@ -3995,7 +3942,6 @@
        "SteelInfRailgun"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Railgun_Heavy",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium",
@@ -4136,8 +4082,6 @@
        "SteelInfRailgun"
       ],
       "warheads": [
-       "^Warhead_Quantum_Heavy_Flat",
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Railgun_Heavy",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium",
@@ -4271,8 +4215,6 @@
        "SteelInfRailgun_EMP"
       ],
       "warheads": [
-       "^Warhead_Quantum_Heavy_Flat",
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Railgun_Heavy",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium",
@@ -4334,7 +4276,6 @@
        "^SteelLightMissile"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Railgun_Heavy",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium",
@@ -4374,7 +4315,6 @@
        "SteelInfRailgun"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Railgun_Heavy",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium",
@@ -4516,8 +4456,6 @@
        "SteelInfRailgun"
       ],
       "warheads": [
-       "^Warhead_Quantum_Heavy_Flat",
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Railgun_Heavy",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium",
@@ -4652,8 +4590,6 @@
        "SteelInfRailgun_EMP"
       ],
       "warheads": [
-       "^Warhead_Quantum_Heavy_Flat",
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Railgun_Heavy",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium",
@@ -4697,7 +4633,6 @@
        "^SteelLightMissile"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Railgun_Heavy",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium",
@@ -4737,7 +4672,6 @@
        "SteelInfRailgun"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Railgun_Heavy",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium",
@@ -4879,8 +4813,6 @@
        "SteelInfRailgun"
       ],
       "warheads": [
-       "^Warhead_Quantum_Heavy_Flat",
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Railgun_Heavy",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium",
@@ -5015,8 +4947,6 @@
        "SteelInfRailgun_EMP"
       ],
       "warheads": [
-       "^Warhead_Quantum_Heavy_Flat",
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Railgun_Heavy",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium",
@@ -5135,7 +5065,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6200",
       "reloaddelay": "8",
@@ -5147,11 +5077,9 @@
        "^LaserWeapon",
        "^RailgunWeapon"
       ],
-      "warheads": [
-       "^Warhead_Tesla_Heavy_Flat"
-      ],
+      "warheads": [],
       "weapon": "SteelRunnerPistols",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "burst": "4",
@@ -5208,7 +5136,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7200",
       "reloaddelay": "8",
@@ -5217,11 +5145,9 @@
       "versus_templates": [
        "SteelRunnerPistols"
       ],
-      "warheads": [
-       "^Warhead_Tesla_Heavy_Flat"
-      ],
+      "warheads": [],
       "weapon": "SteelRunnerPistols_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
@@ -5279,7 +5205,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6200",
       "reloaddelay": "8",
@@ -5291,11 +5217,9 @@
        "^LaserWeapon",
        "^RailgunWeapon"
       ],
-      "warheads": [
-       "^Warhead_Tesla_Heavy_Flat"
-      ],
+      "warheads": [],
       "weapon": "SteelRunnerPistols",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
@@ -5353,7 +5277,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "7200",
       "reloaddelay": "8",
@@ -5362,11 +5286,9 @@
       "versus_templates": [
        "SteelRunnerPistols"
       ],
-      "warheads": [
-       "^Warhead_Tesla_Heavy_Flat"
-      ],
+      "warheads": [],
       "weapon": "SteelRunnerPistols_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "burst": "2",
@@ -5423,7 +5345,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6200",
       "reloaddelay": "8",
@@ -5432,11 +5354,9 @@
       "versus_templates": [
        "SteelRunnerPistols"
       ],
-      "warheads": [
-       "^Warhead_Tesla_Heavy_Flat"
-      ],
+      "warheads": [],
       "weapon": "SteelRunnerPistolsResonance",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "burst": "4",
@@ -5493,7 +5413,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7200",
       "reloaddelay": "8",
@@ -5502,11 +5422,9 @@
       "versus_templates": [
        "SteelRunnerPistols_elite"
       ],
-      "warheads": [
-       "^Warhead_Tesla_Heavy_Flat"
-      ],
+      "warheads": [],
       "weapon": "SteelRunnerPistolsResonance_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
@@ -5564,7 +5482,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6200",
       "reloaddelay": "8",
@@ -5573,11 +5491,9 @@
       "versus_templates": [
        "SteelRunnerPistols"
       ],
-      "warheads": [
-       "^Warhead_Tesla_Heavy_Flat"
-      ],
+      "warheads": [],
       "weapon": "SteelRunnerPistolsResonance",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
@@ -5635,7 +5551,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "7200",
       "reloaddelay": "8",
@@ -5644,11 +5560,9 @@
       "versus_templates": [
        "SteelRunnerPistols_elite"
       ],
-      "warheads": [
-       "^Warhead_Tesla_Heavy_Flat"
-      ],
+      "warheads": [],
       "weapon": "SteelRunnerPistolsResonance_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -6293,7 +6207,6 @@
        "SteelQuantumTurretRail"
       ],
       "warheads": [
-       "^Warhead_Quantum_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "SteelQuantumTurretRail_EMP",
@@ -6354,7 +6267,6 @@
        "SteelQuantumTurretRail"
       ],
       "warheads": [
-       "^Warhead_Quantum_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "SteelQuantumTurretRail_EMP",
@@ -6443,7 +6355,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "10",
@@ -6454,12 +6366,11 @@
        "^SteelChaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelVulcan",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6594,7 +6505,6 @@
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "SteelHoverMissile_elite",
@@ -6728,7 +6638,6 @@
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy",
-       "^Warhead_Quantum_Heavy_Flat",
        "^Warhead_Laser_Heavy",
        "^Warhead_Railgun_Heavy"
       ],
@@ -6819,7 +6728,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "8",
@@ -6830,12 +6739,11 @@
        "^SteelChaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelMantaHunterCannons",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -6849,7 +6757,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "8",
@@ -6860,12 +6768,11 @@
        "^SteelChaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelMantaHunterCannons",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -6890,9 +6797,7 @@
        "SteelMantaHunterCannons"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_MissileAP_Medium",
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
@@ -6922,9 +6827,7 @@
        "SteelMantaHunterCannons"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_MissileAP_Medium",
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
@@ -6943,7 +6846,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "8",
@@ -6953,12 +6856,11 @@
        "SteelMantaHunterCannons"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelMantaHunterCannonsResonance",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -6972,7 +6874,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "8",
@@ -6982,12 +6884,11 @@
        "SteelMantaHunterCannons"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelMantaHunterCannonsResonance",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -7011,9 +6912,7 @@
        "SteelMantaHunterCannons_AA"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_MissileAP_Medium",
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
@@ -7042,9 +6941,7 @@
        "SteelMantaHunterCannons_AA"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_MissileAP_Medium",
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
@@ -7284,7 +7181,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "4000",
       "pricing": true,
       "range": "20000",
@@ -7299,12 +7196,11 @@
        "^SteelHeavyCannon"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "SteelDaggerCannon",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "8",
@@ -7333,7 +7229,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "5000",
       "pricing": true,
       "range": "25000",
@@ -7344,12 +7240,11 @@
        "SteelDaggerCannon"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "SteelDaggerCannon_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7454,7 +7349,6 @@
        "^SteelLightMissile"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Railgun_Heavy",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium",
@@ -7493,7 +7387,6 @@
        "SteelInfRailgun"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Railgun_Heavy",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium",
@@ -7634,8 +7527,6 @@
        "SteelInfRailgun"
       ],
       "warheads": [
-       "^Warhead_Quantum_Heavy_Flat",
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Railgun_Heavy",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium",
@@ -7769,8 +7660,6 @@
        "SteelInfRailgun_EMP"
       ],
       "warheads": [
-       "^Warhead_Quantum_Heavy_Flat",
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Railgun_Heavy",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium",
@@ -7888,7 +7777,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "minrange": "2220",
       "pricing": true,
       "range": "11111",
@@ -7903,12 +7792,11 @@
        "^Effect_Demolition_Heavy"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_Demolition_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "HammerheadArtillery",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "targeting",
@@ -8005,7 +7893,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1450",
       "pricing": true,
       "range": "7250",
@@ -8020,12 +7908,11 @@
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_CannonFire_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Flame_Heavy"
       ],
       "weapon": "SteelKatyCannons",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -8041,7 +7928,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1650",
       "pricing": true,
       "range": "8250",
@@ -8052,12 +7939,11 @@
        "SteelKatyCannons"
       ],
       "warheads": [
-       "^Warhead_CannonFire_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Flame_Heavy"
       ],
       "weapon": "SteelKatyCannons_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -8116,7 +8002,6 @@
       ],
       "warheads": [
        "^Warhead_Quantum_Medium",
-       "^Warhead_CannonFire_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Flame_Heavy"
       ],
@@ -8177,7 +8062,6 @@
       ],
       "warheads": [
        "^Warhead_Quantum_Medium",
-       "^Warhead_CannonFire_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Flame_Heavy"
       ],
@@ -8296,7 +8180,6 @@
        "^SteelMakoGunCannonCompatibility"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
@@ -8341,7 +8224,6 @@
        "SteelMakoGun"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
@@ -8402,7 +8284,6 @@
       ],
       "warheads": [
        "^Warhead_Quantum_Medium",
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
@@ -8462,7 +8343,6 @@
       ],
       "warheads": [
        "^Warhead_Quantum_Medium",
-       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
@@ -8556,7 +8436,6 @@
        "^SteelChaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
@@ -8587,7 +8466,6 @@
        "^SteelChaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
@@ -8616,8 +8494,6 @@
        "SteelMantaAG"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium_Flat",
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
@@ -8646,8 +8522,6 @@
        "SteelMantaAG"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium_Flat",
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
@@ -8676,7 +8550,6 @@
        "SteelMantaAG"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
@@ -8705,7 +8578,6 @@
        "SteelMantaAG"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
@@ -8734,8 +8606,6 @@
        "SteelManta_AA"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium_Flat",
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
@@ -8764,8 +8634,6 @@
        "SteelManta_AA"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium_Flat",
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
@@ -8880,7 +8748,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "1600",
       "reloaddelay": "24",
@@ -8892,11 +8760,9 @@
        "^LaserWeapon",
        "^SwordWeapon"
       ],
-      "warheads": [
-       "^Warhead_Melee_Heavy_Flat"
-      ],
+      "warheads": [],
       "weapon": "SteelMegaSword",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "damage_warheads": [
@@ -8930,7 +8796,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "2400",
       "reloaddelay": "16",
@@ -8942,11 +8808,9 @@
        "^LaserWeapon",
        "^TeslaWeapon"
       ],
-      "warheads": [
-       "^Warhead_Quantum_Heavy_Flat"
-      ],
+      "warheads": [],
       "weapon": "SteelMegaSword_EMP",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "damage_warheads": [
@@ -9000,8 +8864,7 @@
        "SteelMegaSword_EMP"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_Quantum_Heavy_Flat"
+       "^Warhead_Railgun_Heavy"
       ],
       "weapon": "SteelMegaSword_elite",
       "weapon_class_source": "template"
@@ -9193,7 +9056,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "65",
@@ -9207,12 +9070,11 @@
        "^Effect_Railgun_Heavy"
       ],
       "warheads": [
-       "^Warhead_Quantum_Heavy_Flat",
        "^Warhead_Laser_Heavy",
        "^Warhead_Railgun_Heavy"
       ],
       "weapon": "SteelQuantumCannon",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -9275,7 +9137,6 @@
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy",
-       "^Warhead_Quantum_Heavy_Flat",
        "^Warhead_Laser_Heavy",
        "^Warhead_Railgun_Heavy"
       ],
@@ -9340,7 +9201,6 @@
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy",
-       "^Warhead_Quantum_Heavy_Flat",
        "^Warhead_Laser_Heavy",
        "^Warhead_Railgun_Heavy"
       ],
@@ -9435,7 +9295,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "103",
@@ -9446,11 +9306,9 @@
        "^LaserWeapon",
        "^RailgunWeapon"
       ],
-      "warheads": [
-       "^Warhead_Railgun_Heavy_Flat"
-      ],
+      "warheads": [],
       "weapon": "SteelStalkerRailgun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "damage_warheads": [
@@ -9497,8 +9355,7 @@
        "SteelStalkerRailgun"
       ],
       "warheads": [
-       "^Warhead_Tesla_Heavy",
-       "^Warhead_Railgun_Heavy_Flat"
+       "^Warhead_Tesla_Heavy"
       ],
       "weapon": "SteelStalkerRailgun_EMP",
       "weapon_class_source": "template"
@@ -9545,8 +9402,7 @@
        "SteelStalkerRailgun_EMP"
       ],
       "warheads": [
-       "^Warhead_Tesla_Heavy",
-       "^Warhead_Railgun_Heavy_Flat"
+       "^Warhead_Tesla_Heavy"
       ],
       "weapon": "SteelStalkerRailgun_elite",
       "weapon_class_source": "template"
@@ -9765,7 +9621,6 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "WhiteRabbitGatling",

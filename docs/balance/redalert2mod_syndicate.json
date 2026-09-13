@@ -17,7 +17,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4750",
       "reloaddelay": "3",
@@ -28,12 +28,11 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "BlackHawkCannon",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -163,8 +162,7 @@
        "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Medium_GroundShip"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "MigMissiles",
       "weapon_class_source": "template"
@@ -222,8 +220,7 @@
        "MigMissiles"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Medium_GroundShip"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "MigMissiles_elite",
       "weapon_class_source": "template"
@@ -271,7 +268,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7600",
       "reloaddelay": "50",
@@ -283,11 +280,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Medium",
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Medium_GroundShip"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "MigMissiles_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
@@ -332,7 +328,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8600",
       "reloaddelay": "50",
@@ -344,11 +340,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Medium",
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Medium_GroundShip"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "MigMissiles_AA_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -474,7 +469,6 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_CannonAP_Light",
        "^Warhead_Flak_Medium",
@@ -546,7 +540,6 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_CannonAP_Light",
        "^Warhead_Flak_Medium",
@@ -618,7 +611,6 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_CannonAP_Light",
        "^Warhead_Flak_Medium",
@@ -1001,7 +993,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "15000",
       "reloaddelay": "20",
@@ -1014,12 +1006,11 @@
        "^RA2FlakWeapon"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Medium",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "LatinAADefenderCannon",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
@@ -1034,7 +1025,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "15000",
       "reloaddelay": "20",
@@ -1047,12 +1038,11 @@
        "^RA2FlakWeapon"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Medium",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "LatinAADefenderCannon",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1180,7 +1170,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "30",
@@ -1194,12 +1184,11 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "LatinSentryMG",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "3",
@@ -1214,7 +1203,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7777",
       "reloaddelay": "30",
@@ -1224,12 +1213,11 @@
        "LatinSentryMG"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "LatinSentryMG_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1920,7 +1908,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7130",
       "reloaddelay": "42",
@@ -1936,7 +1924,6 @@
        "^Effect_Bullet_Light_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "RA2FreedomAK47",
@@ -1969,7 +1956,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8130",
       "reloaddelay": "42",
@@ -1979,7 +1966,6 @@
        "RA2FreedomAK47"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "RA2FreedomAK47_elite",
@@ -2105,7 +2091,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "7130",
       "reloaddelay": "42",
@@ -2121,7 +2107,6 @@
        "^Effect_Bullet_Light_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "RA2FreedomAK47",
@@ -2155,7 +2140,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "8130",
       "reloaddelay": "42",
@@ -2165,7 +2150,6 @@
        "RA2FreedomAK47"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "RA2FreedomAK47_elite",
@@ -2363,7 +2347,6 @@
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Heavy"
@@ -2395,7 +2378,6 @@
        "LatinMonkeyGrenade1"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Heavy"
@@ -2427,7 +2409,6 @@
        "LatinMonkeyGrenade2"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Heavy"
@@ -2465,7 +2446,6 @@
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Heavy"
@@ -2498,7 +2478,6 @@
        "LatinMonkeyGrenade1"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Heavy"
@@ -2531,7 +2510,6 @@
        "LatinMonkeyGrenade2"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Heavy"
@@ -2837,7 +2815,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "93",
@@ -2851,12 +2829,11 @@
        "^Effect_Flame_Light"
       ],
       "warheads": [
-       "^Warhead_Flame_Light_Flat",
        "^Warhead_Flame_Light",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "latinsyndicate_latinmilitia_molotov",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
@@ -2871,7 +2848,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5500",
       "reloaddelay": "93",
@@ -2881,12 +2858,11 @@
        "latinsyndicate_latinmilitia_molotov"
       ],
       "warheads": [
-       "^Warhead_Flame_Light_Flat",
        "^Warhead_Flame_Light",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "latinsyndicate_latinmilitia_molotov_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -2958,7 +2934,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "4500",
       "reloaddelay": "93",
@@ -2972,12 +2948,11 @@
        "^Effect_Flame_Light"
       ],
       "warheads": [
-       "^Warhead_Flame_Light_Flat",
        "^Warhead_Flame_Light",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "latinsyndicate_latinmilitia_molotov",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -2993,7 +2968,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5500",
       "reloaddelay": "93",
@@ -3003,12 +2978,11 @@
        "latinsyndicate_latinmilitia_molotov"
       ],
       "warheads": [
-       "^Warhead_Flame_Light_Flat",
        "^Warhead_Flame_Light",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "latinsyndicate_latinmilitia_molotov_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3917,7 +3891,6 @@
        "^Effect_Terrorist_Explosion_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Medium"
@@ -4006,7 +3979,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "30",
@@ -4020,12 +3993,11 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "LatinSentryMG",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "3",
@@ -4040,7 +4012,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7777",
       "reloaddelay": "30",
@@ -4050,12 +4022,11 @@
        "LatinSentryMG"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "LatinSentryMG_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4723,7 +4694,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "2400",
       "pricing": true,
       "range": "12000",
@@ -4739,12 +4710,11 @@
        "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "RA2RBurritoRocket",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "8",
@@ -4780,7 +4750,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "2400",
       "pricing": true,
       "range": "12000",
@@ -4797,12 +4767,11 @@
        "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "RA2RBurritoRocket",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5195,7 +5164,6 @@
        "^RA2FlakWeapon"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "DiabloCannon",
@@ -5246,7 +5214,6 @@
        "DiabloCannon"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "DiabloCannon_elite",
@@ -5295,7 +5262,6 @@
        "DiabloCannon"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "DiabloCannon_AA",
@@ -5346,7 +5312,6 @@
        "DiabloCannon_AA"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "DiabloCannonAAE_AA",
@@ -5448,7 +5413,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "minrange": "2025",
       "pricing": true,
       "range": "10130",
@@ -5464,12 +5429,11 @@
        "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "RA2LarsRocket",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "10",
@@ -5505,7 +5469,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "minrange": "2025",
       "pricing": true,
       "range": "10130",
@@ -5522,12 +5486,11 @@
        "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "RA2LarsRocket",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5644,7 +5607,6 @@
        "^RA2FlakWeapon"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "RA2APCFlakCannon",
@@ -5694,7 +5656,6 @@
        "RA2APCFlakCannon"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "RA2APCFlakCannon_elite",
@@ -5742,7 +5703,6 @@
        "RA2APCFlakCannon"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "RA2APCFlakCannonAA",
@@ -5792,7 +5752,6 @@
        "RA2APCFlakCannonAA"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "RA2APCFlakCannonAA_elite",
@@ -5811,7 +5770,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5740",
       "reloaddelay": "12",
@@ -5823,12 +5782,11 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2APCMachineGun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "8",
@@ -5843,7 +5801,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6740",
       "reloaddelay": "12",
@@ -5853,12 +5811,11 @@
        "RA2APCMachineGun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2APCMachineGun_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -5873,7 +5830,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "8610",
       "reloaddelay": "12",
@@ -5883,12 +5840,11 @@
        "RA2APCMachineGun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2APCMachineGun_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "8",
@@ -5903,7 +5859,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "9610",
       "reloaddelay": "12",
@@ -5913,12 +5869,11 @@
        "RA2APCMachineGun_AA"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2APCMachineGun_AA_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -6380,7 +6335,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1500",
       "pricing": true,
       "range": "7500",
@@ -6401,12 +6356,10 @@
        "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
-       "^Warhead_Concussion_Medium_Flat",
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "RA2MortarBike",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
@@ -6456,7 +6409,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1500",
       "pricing": true,
       "range": "8500",
@@ -6467,12 +6420,10 @@
        "RA2MortarBike"
       ],
       "warheads": [
-       "^Warhead_Concussion_Medium_Flat",
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "RA2MortarBike_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6562,7 +6513,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5800",
       "reloaddelay": "10",
@@ -6574,12 +6525,11 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2NarcoAKM",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
@@ -6594,7 +6544,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6800",
       "reloaddelay": "10",
@@ -6604,12 +6554,11 @@
        "RA2NarcoAKM"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2NarcoAKM_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6777,7 +6726,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "35",
@@ -6789,12 +6738,11 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "LatinBuggyMG",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "10",
@@ -6809,7 +6757,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "35",
@@ -6819,12 +6767,11 @@
        "LatinBuggyMG"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "LatinBuggyMG_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -6884,7 +6831,6 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonAP_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
@@ -6945,7 +6891,6 @@
        "LatinBuggyChaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonAP_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
@@ -7012,7 +6957,6 @@
        "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Warhead_MissileAP_Light",
@@ -7076,7 +7020,6 @@
        "LatinBuggyRocket"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Warhead_MissileAP_Light",
@@ -7185,7 +7128,6 @@
        "^RA2TankDestroyerCannon"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Light_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_CannonHE_Medium",
        "^Warhead_CannonAP_Light"
@@ -7217,7 +7159,6 @@
        "RA2Gren60mm"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Light_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_CannonHE_Medium",
        "^Warhead_CannonAP_Light"
@@ -7380,7 +7321,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6550",
       "reloaddelay": "65",
@@ -7395,7 +7336,6 @@
        "^RA2HeavyCannon"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "LatinSmokerCannon",
@@ -7443,7 +7383,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7550",
       "reloaddelay": "65",
@@ -7454,7 +7394,6 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "LatinSmokerCannon_elite",
@@ -7886,7 +7825,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "35",
@@ -7898,12 +7837,11 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "LatinBuggyMG",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "10",
@@ -7918,7 +7856,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "35",
@@ -7928,12 +7866,11 @@
        "LatinBuggyMG"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "LatinBuggyMG_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -7993,7 +7930,6 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonAP_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
@@ -8054,7 +7990,6 @@
        "LatinBuggyChaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonAP_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
@@ -8306,7 +8241,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
@@ -8317,12 +8252,11 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -8466,7 +8400,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
@@ -8477,12 +8411,11 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

@@ -129,7 +129,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4096",
       "reloaddelay": "30",
@@ -142,12 +142,11 @@
        "^Effect_Bullet_Light"
       ],
       "warheads": [
-       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "CabalOverkillDroneLaser",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1964,8 +1963,7 @@
        "^TSLaserEffect"
       ],
       "warheads": [
-       "^Warhead_Laser_Heavy",
-       "^Warhead_Laser_ExtraDamage"
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "TSCABALObeliskLaserFire",
       "weapon_class_source": "template"
@@ -2231,7 +2229,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6487",
       "reloaddelay": "25",
@@ -2240,12 +2238,11 @@
        "TSTurretLaser"
       ],
       "warheads": [
-       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Bullet_Medium",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "TSCABALPlasmaFire",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2755,7 +2752,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5219",
       "reloaddelay": "90",
@@ -2770,11 +2767,9 @@
        "^MagicWeapon",
        "^RailgunWeapon"
       ],
-      "warheads": [
-       "^Warhead_Plasma_Heavy_Flat"
-      ],
+      "warheads": [],
       "weapon": "CabalCommandoPlasmaNeutron",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
@@ -2881,7 +2876,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5219",
       "reloaddelay": "90",
@@ -2896,11 +2891,9 @@
        "^MagicWeapon",
        "^RailgunWeapon"
       ],
-      "warheads": [
-       "^Warhead_Plasma_Heavy_Flat"
-      ],
+      "warheads": [],
       "weapon": "CabalCommandoPlasmaNeutron",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3081,7 +3074,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6264",
       "reloaddelay": "90",
@@ -3096,11 +3089,9 @@
        "^MagicWeapon",
        "^RailgunWeapon"
       ],
-      "warheads": [
-       "^Warhead_Plasma_Heavy_Flat"
-      ],
+      "warheads": [],
       "weapon": "CabalCommandoPlasmaMk2Neutron",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "garrisoned",
@@ -3207,7 +3198,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6264",
       "reloaddelay": "90",
@@ -3222,11 +3213,9 @@
        "^MagicWeapon",
        "^RailgunWeapon"
       ],
-      "warheads": [
-       "^Warhead_Plasma_Heavy_Flat"
-      ],
+      "warheads": [],
       "weapon": "CabalCommandoPlasmaMk2Neutron",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -3315,7 +3304,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5800",
       "reloaddelay": "60",
@@ -3328,12 +3317,11 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "CabalCyborgChaingun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -3347,7 +3335,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "5800",
       "reloaddelay": "60",
@@ -3360,12 +3348,11 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "CabalCyborgChaingun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3451,7 +3438,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6200",
       "reloaddelay": "45",
@@ -3464,12 +3451,11 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "TSDevoutChainguns",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -3485,7 +3471,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "6200",
       "reloaddelay": "45",
@@ -3498,12 +3484,11 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "TSDevoutChainguns",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4017,8 +4002,7 @@
        "^TSLaserEffect"
       ],
       "warheads": [
-       "^Warhead_Laser_Heavy",
-       "^Warhead_Laser_ExtraDamage"
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "TSCABALEnlightedLaser",
       "weapon_class_source": "template"
@@ -4107,8 +4091,7 @@
        "^TSLaserEffect"
       ],
       "warheads": [
-       "^Warhead_Laser_Heavy",
-       "^Warhead_Laser_ExtraDamage"
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "TSCABALEnlightedLaser",
       "weapon_class_source": "template"
@@ -4359,8 +4342,7 @@
        "^CabalMissileEffect"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileHE_Medium_Flat"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "CabalRocketCyborgRockets",
       "weapon_class_source": "template"
@@ -4391,8 +4373,7 @@
        "^CabalMissileEffect"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileHE_Medium_Flat"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "CabalRocketCyborgRocketsUpgraded",
       "weapon_class_source": "template"
@@ -4423,8 +4404,7 @@
        "^CabalMissileEffect"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileHE_Medium_Flat"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "CabalRocketCyborgRockets",
       "weapon_class_source": "template"
@@ -5774,7 +5754,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "2315",
       "pricing": true,
       "range": "11580",
@@ -5792,11 +5772,9 @@
        "^MagicWeapon",
        "^RailgunWeapon"
       ],
-      "warheads": [
-       "^Warhead_CannonHE_Heavy_Flat"
-      ],
+      "warheads": [],
       "weapon": "CabalArtilleryWalkerShellUpgraded",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -6034,7 +6012,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "2500",
       "reloaddelay": "50",
@@ -6046,11 +6024,9 @@
        "^RailgunWeapon",
        "^LaserWeapon"
       ],
-      "warheads": [
-       "^Warhead_Laser_Heavy_Flat"
-      ],
+      "warheads": [],
       "weapon": "CabalBeholderLaser",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -6459,7 +6435,6 @@
        "^CabalMissileEffect"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium_Flat",
        "^Warhead_MissileHE_Light",
        "^Warhead_MissileHE_Medium",
        "^Warhead_Demolition_Light",
@@ -6528,7 +6503,6 @@
        "^CabalMissileEffect"
       ],
       "warheads": [
-       "^Warhead_MissileAA_Medium_Flat",
        "^Warhead_MissileHE_Light",
        "^Warhead_MissileHE_Medium",
        "^Warhead_Demolition_Light",
@@ -6692,7 +6666,6 @@
        "^CabalMissileEffect"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy_Flat",
        "^Warhead_MissileHE_Medium",
        "^Warhead_MissileHE_Heavy",
        "^Warhead_Demolition_Light",
@@ -6761,7 +6734,6 @@
        "^CabalMissileEffect"
       ],
       "warheads": [
-       "^Warhead_MissileAA_Heavy_Flat",
        "^Warhead_MissileHE_Medium",
        "^Warhead_MissileHE_Heavy",
        "^Warhead_Demolition_Light",
@@ -7039,7 +7011,6 @@
        "^CabalManticoreMissiles"
       ],
       "warheads": [
-       "^Warhead_MissileAA_Medium_Flat",
        "^Warhead_MissileHE_Medium",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium"
@@ -7128,7 +7099,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7082",
       "reloaddelay": "40",
@@ -7141,12 +7112,11 @@
        "^Effect_Bullet_Light"
       ],
       "warheads": [
-       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "CabalMantisGun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7771,7 +7741,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6813",
       "reloaddelay": "40",
@@ -7784,12 +7754,11 @@
        "^Effect_Bullet_Light"
       ],
       "warheads": [
-       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "CabalLegionGun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

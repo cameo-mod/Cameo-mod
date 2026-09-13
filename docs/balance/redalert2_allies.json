@@ -59,7 +59,6 @@
        "^RA2MediumMissile"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Demolition_Heavy",
        "^Warhead_MissileAP_Medium"
@@ -115,7 +114,6 @@
        "BlackEagleMissiles"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Demolition_Heavy",
        "^Warhead_MissileAP_Medium"
@@ -220,8 +218,7 @@
        "^Warhead_MissileAP_Light_WallExcluded"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Light_WallExcluded"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "BlackEagleThunderboltMissiles",
       "weapon_class_source": "template"
@@ -314,8 +311,7 @@
        "BlackEagleThunderboltMissiles"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Light_WallExcluded"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "BlackEagleThunderboltMissiles_elite",
       "weapon_class_source": "template"
@@ -453,8 +449,7 @@
        "^Warhead_MissileAP_Medium_WallExcluded"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Medium_WallExcluded"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "HarrierMissiles",
       "weapon_class_source": "template"
@@ -527,8 +522,7 @@
        "HarrierMissiles"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Medium_WallExcluded"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "HarrierMissiles_elite",
       "weapon_class_source": "template"
@@ -614,7 +608,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4750",
       "reloaddelay": "3",
@@ -625,12 +619,11 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "BlackHawkCannon",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1446,7 +1439,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "2360",
       "pricing": true,
       "range": "11800",
@@ -1465,12 +1458,11 @@
        "^Effect_Clsn_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "RA2GrandCannonWeapon",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2272,7 +2264,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "5724",
       "reloaddelay": "25",
@@ -2281,12 +2273,11 @@
        "GuardianGIMG"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2vulcan2",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2377,7 +2368,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4762",
       "reloaddelay": "20",
@@ -2389,12 +2380,11 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "GuardianGIMG",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "3",
@@ -2437,7 +2427,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5762",
       "reloaddelay": "20",
@@ -2447,12 +2437,11 @@
        "GuardianGIMG"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "GuardianGIMG_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "6",
@@ -2766,7 +2755,6 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ra2roktgun",
@@ -4178,7 +4166,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
@@ -4189,12 +4177,11 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4278,7 +4265,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
@@ -4289,12 +4276,11 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4377,7 +4363,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
@@ -4388,12 +4374,11 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4705,7 +4690,6 @@
        "^Effect_Iron_Fx_RA2"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Light_Flat",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "RA2HeavyMirageGun",
@@ -4757,7 +4741,6 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Light_Flat",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "RA2HeavyMirageGun_elite",
@@ -4840,7 +4823,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5660",
       "reloaddelay": "14",
@@ -4852,12 +4835,11 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2CRM60",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "6",
@@ -4879,7 +4861,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4692",
       "reloaddelay": "10",
@@ -4894,12 +4876,11 @@
        "^SniperWeapon"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2CRM60H",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -5190,7 +5171,6 @@
        "^Effect_Iron_Fx_RA2"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Light_Flat",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "RA2MirageGun",
@@ -5487,8 +5467,7 @@
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiHoverMissile",
       "weapon_class_source": "template"
@@ -5646,7 +5625,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5760",
       "reloaddelay": "28",
@@ -5660,11 +5639,10 @@
       ],
       "warheads": [
        "^Warhead_MissileHE_Light",
-       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -5680,7 +5658,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6760",
       "reloaddelay": "28",
@@ -5692,11 +5670,10 @@
       ],
       "warheads": [
        "^Warhead_MissileHE_Light",
-       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -5725,9 +5702,7 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAA_Light_Flat",
        "^Warhead_MissileHE_Light",
-       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA",
@@ -5760,9 +5735,7 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAA_Light_Flat",
        "^Warhead_MissileHE_Light",
-       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA_elite",
@@ -5793,8 +5766,7 @@
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2ThunderboltMissile",
       "weapon_class_source": "template"
@@ -5823,8 +5795,7 @@
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2ThunderboltMissile_elite",
       "weapon_class_source": "template"
@@ -5841,7 +5812,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "8640",
       "reloaddelay": "25",
@@ -5853,11 +5824,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2ThunderboltMissile_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -5872,7 +5842,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9640",
       "reloaddelay": "25",
@@ -5884,11 +5854,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2ThunderboltMissile_AA_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -5913,8 +5882,7 @@
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiHoverMissile_elite",
       "weapon_class_source": "template"
@@ -5931,7 +5899,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "20",
@@ -5944,12 +5912,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAA_Light_Flat",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiHoverMissile_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -5963,7 +5929,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "20",
@@ -5976,12 +5942,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAA_Light_Flat",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiHoverMissile_AA_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -6007,8 +5971,7 @@
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiThunderboltMissile",
       "weapon_class_source": "template"
@@ -6036,8 +5999,7 @@
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiThunderboltMissile_elite",
       "weapon_class_source": "template"
@@ -6053,7 +6015,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "25",
@@ -6065,11 +6027,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiThunderboltMissile_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -6083,7 +6044,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "25",
@@ -6095,11 +6056,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiThunderboltMissile_AA_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -6257,7 +6217,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5660",
       "reloaddelay": "14",
@@ -6269,12 +6229,11 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2CRM60",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "6",
@@ -6296,7 +6255,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4692",
       "reloaddelay": "10",
@@ -6311,12 +6270,11 @@
        "^SniperWeapon"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2CRM60H",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -6607,7 +6565,6 @@
        "^Effect_Iron_Fx_RA2"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Light_Flat",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "RA2MirageGun",
@@ -6904,8 +6861,7 @@
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiHoverMissile",
       "weapon_class_source": "template"
@@ -7063,7 +7019,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5760",
       "reloaddelay": "28",
@@ -7077,11 +7033,10 @@
       ],
       "warheads": [
        "^Warhead_MissileHE_Light",
-       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -7097,7 +7052,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6760",
       "reloaddelay": "28",
@@ -7109,11 +7064,10 @@
       ],
       "warheads": [
        "^Warhead_MissileHE_Light",
-       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -7142,9 +7096,7 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAA_Light_Flat",
        "^Warhead_MissileHE_Light",
-       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA",
@@ -7177,9 +7129,7 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAA_Light_Flat",
        "^Warhead_MissileHE_Light",
-       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA_elite",
@@ -7210,8 +7160,7 @@
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2ThunderboltMissile",
       "weapon_class_source": "template"
@@ -7240,8 +7189,7 @@
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2ThunderboltMissile_elite",
       "weapon_class_source": "template"
@@ -7258,7 +7206,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "8640",
       "reloaddelay": "25",
@@ -7270,11 +7218,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2ThunderboltMissile_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -7289,7 +7236,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9640",
       "reloaddelay": "25",
@@ -7301,11 +7248,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2ThunderboltMissile_AA_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -7330,8 +7276,7 @@
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiHoverMissile_elite",
       "weapon_class_source": "template"
@@ -7348,7 +7293,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "20",
@@ -7361,12 +7306,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAA_Light_Flat",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiHoverMissile_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -7380,7 +7323,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "20",
@@ -7393,12 +7336,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAA_Light_Flat",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiHoverMissile_AA_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -7424,8 +7365,7 @@
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiThunderboltMissile",
       "weapon_class_source": "template"
@@ -7453,8 +7393,7 @@
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiThunderboltMissile_elite",
       "weapon_class_source": "template"
@@ -7470,7 +7409,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "25",
@@ -7482,11 +7421,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiThunderboltMissile_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -7500,7 +7438,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "25",
@@ -7512,11 +7450,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiThunderboltMissile_AA_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -7676,7 +7613,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5660",
       "reloaddelay": "14",
@@ -7688,12 +7625,11 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2CRM60",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "6",
@@ -7715,7 +7651,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4692",
       "reloaddelay": "10",
@@ -7730,12 +7666,11 @@
        "^SniperWeapon"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2CRM60H",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -8026,7 +7961,6 @@
        "^Effect_Iron_Fx_RA2"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Light_Flat",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "RA2MirageGun",
@@ -8323,8 +8257,7 @@
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiHoverMissile",
       "weapon_class_source": "template"
@@ -8482,7 +8415,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5760",
       "reloaddelay": "28",
@@ -8496,11 +8429,10 @@
       ],
       "warheads": [
        "^Warhead_MissileHE_Light",
-       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -8516,7 +8448,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6760",
       "reloaddelay": "28",
@@ -8528,11 +8460,10 @@
       ],
       "warheads": [
        "^Warhead_MissileHE_Light",
-       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -8561,9 +8492,7 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAA_Light_Flat",
        "^Warhead_MissileHE_Light",
-       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA",
@@ -8596,9 +8525,7 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAA_Light_Flat",
        "^Warhead_MissileHE_Light",
-       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA_elite",
@@ -8629,8 +8556,7 @@
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2ThunderboltMissile",
       "weapon_class_source": "template"
@@ -8659,8 +8585,7 @@
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2ThunderboltMissile_elite",
       "weapon_class_source": "template"
@@ -8677,7 +8602,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "8640",
       "reloaddelay": "25",
@@ -8689,11 +8614,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2ThunderboltMissile_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -8708,7 +8632,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9640",
       "reloaddelay": "25",
@@ -8720,11 +8644,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2ThunderboltMissile_AA_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -8749,8 +8672,7 @@
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiHoverMissile_elite",
       "weapon_class_source": "template"
@@ -8767,7 +8689,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "20",
@@ -8780,12 +8702,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAA_Light_Flat",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiHoverMissile_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -8799,7 +8719,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "20",
@@ -8812,12 +8732,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAA_Light_Flat",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiHoverMissile_AA_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -8843,8 +8761,7 @@
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiThunderboltMissile",
       "weapon_class_source": "template"
@@ -8872,8 +8789,7 @@
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiThunderboltMissile_elite",
       "weapon_class_source": "template"
@@ -8889,7 +8805,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "25",
@@ -8901,11 +8817,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiThunderboltMissile_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -8919,7 +8834,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "25",
@@ -8931,11 +8846,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiThunderboltMissile_AA_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -9095,7 +9009,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5660",
       "reloaddelay": "14",
@@ -9107,12 +9021,11 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2CRM60",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "6",
@@ -9134,7 +9047,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4692",
       "reloaddelay": "10",
@@ -9149,12 +9062,11 @@
        "^SniperWeapon"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2CRM60H",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -9445,7 +9357,6 @@
        "^Effect_Iron_Fx_RA2"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Light_Flat",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "RA2MirageGun",
@@ -9742,8 +9653,7 @@
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiHoverMissile",
       "weapon_class_source": "template"
@@ -9901,7 +9811,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5760",
       "reloaddelay": "28",
@@ -9915,11 +9825,10 @@
       ],
       "warheads": [
        "^Warhead_MissileHE_Light",
-       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -9935,7 +9844,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6760",
       "reloaddelay": "28",
@@ -9947,11 +9856,10 @@
       ],
       "warheads": [
        "^Warhead_MissileHE_Light",
-       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -9980,9 +9888,7 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAA_Light_Flat",
        "^Warhead_MissileHE_Light",
-       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA",
@@ -10015,9 +9921,7 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAA_Light_Flat",
        "^Warhead_MissileHE_Light",
-       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA_elite",
@@ -10048,8 +9952,7 @@
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2ThunderboltMissile",
       "weapon_class_source": "template"
@@ -10078,8 +9981,7 @@
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2ThunderboltMissile_elite",
       "weapon_class_source": "template"
@@ -10096,7 +9998,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "8640",
       "reloaddelay": "25",
@@ -10108,11 +10010,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2ThunderboltMissile_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -10127,7 +10028,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9640",
       "reloaddelay": "25",
@@ -10139,11 +10040,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2ThunderboltMissile_AA_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -10168,8 +10068,7 @@
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiHoverMissile_elite",
       "weapon_class_source": "template"
@@ -10186,7 +10085,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "20",
@@ -10199,12 +10098,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAA_Light_Flat",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiHoverMissile_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -10218,7 +10115,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "20",
@@ -10231,12 +10128,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAA_Light_Flat",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiHoverMissile_AA_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -10262,8 +10157,7 @@
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiThunderboltMissile",
       "weapon_class_source": "template"
@@ -10291,8 +10185,7 @@
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiThunderboltMissile_elite",
       "weapon_class_source": "template"
@@ -10308,7 +10201,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "25",
@@ -10320,11 +10213,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiThunderboltMissile_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -10338,7 +10230,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "25",
@@ -10350,11 +10242,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiThunderboltMissile_AA_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -10513,7 +10404,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5660",
       "reloaddelay": "14",
@@ -10525,12 +10416,11 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2CRM60",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "6",
@@ -10552,7 +10442,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4692",
       "reloaddelay": "10",
@@ -10567,12 +10457,11 @@
        "^SniperWeapon"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2CRM60H",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -10863,7 +10752,6 @@
        "^Effect_Iron_Fx_RA2"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Light_Flat",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "RA2MirageGun",
@@ -11160,8 +11048,7 @@
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiHoverMissile",
       "weapon_class_source": "template"
@@ -11319,7 +11206,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5760",
       "reloaddelay": "28",
@@ -11333,11 +11220,10 @@
       ],
       "warheads": [
        "^Warhead_MissileHE_Light",
-       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -11353,7 +11239,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6760",
       "reloaddelay": "28",
@@ -11365,11 +11251,10 @@
       ],
       "warheads": [
        "^Warhead_MissileHE_Light",
-       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -11398,9 +11283,7 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAA_Light_Flat",
        "^Warhead_MissileHE_Light",
-       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA",
@@ -11433,9 +11316,7 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAA_Light_Flat",
        "^Warhead_MissileHE_Light",
-       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA_elite",
@@ -11466,8 +11347,7 @@
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2ThunderboltMissile",
       "weapon_class_source": "template"
@@ -11496,8 +11376,7 @@
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2ThunderboltMissile_elite",
       "weapon_class_source": "template"
@@ -11514,7 +11393,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "8640",
       "reloaddelay": "25",
@@ -11526,11 +11405,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2ThunderboltMissile_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -11545,7 +11423,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9640",
       "reloaddelay": "25",
@@ -11557,11 +11435,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2ThunderboltMissile_AA_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -11586,8 +11463,7 @@
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiHoverMissile_elite",
       "weapon_class_source": "template"
@@ -11604,7 +11480,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "20",
@@ -11617,12 +11493,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAA_Light_Flat",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiHoverMissile_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -11636,7 +11510,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "20",
@@ -11649,12 +11523,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAA_Light_Flat",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiHoverMissile_AA_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -11680,8 +11552,7 @@
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiThunderboltMissile",
       "weapon_class_source": "template"
@@ -11709,8 +11580,7 @@
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiThunderboltMissile_elite",
       "weapon_class_source": "template"
@@ -11726,7 +11596,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "25",
@@ -11738,11 +11608,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiThunderboltMissile_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -11756,7 +11625,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "25",
@@ -11768,11 +11637,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiThunderboltMissile_AA_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -11931,7 +11799,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5660",
       "reloaddelay": "14",
@@ -11943,12 +11811,11 @@
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2CRM60",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "6",
@@ -11970,7 +11837,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4692",
       "reloaddelay": "10",
@@ -11985,12 +11852,11 @@
        "^SniperWeapon"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2CRM60H",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -12281,7 +12147,6 @@
        "^Effect_Iron_Fx_RA2"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Light_Flat",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "RA2MirageGun",
@@ -12578,8 +12443,7 @@
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiHoverMissile",
       "weapon_class_source": "template"
@@ -12737,7 +12601,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5760",
       "reloaddelay": "28",
@@ -12751,11 +12615,10 @@
       ],
       "warheads": [
        "^Warhead_MissileHE_Light",
-       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -12771,7 +12634,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6760",
       "reloaddelay": "28",
@@ -12783,11 +12646,10 @@
       ],
       "warheads": [
        "^Warhead_MissileHE_Light",
-       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -12816,9 +12678,7 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAA_Light_Flat",
        "^Warhead_MissileHE_Light",
-       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA",
@@ -12851,9 +12711,7 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAA_Light_Flat",
        "^Warhead_MissileHE_Light",
-       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA_elite",
@@ -12884,8 +12742,7 @@
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2ThunderboltMissile",
       "weapon_class_source": "template"
@@ -12914,8 +12771,7 @@
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2ThunderboltMissile_elite",
       "weapon_class_source": "template"
@@ -12932,7 +12788,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "8640",
       "reloaddelay": "25",
@@ -12944,11 +12800,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2ThunderboltMissile_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -12963,7 +12818,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9640",
       "reloaddelay": "25",
@@ -12975,11 +12830,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2ThunderboltMissile_AA_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -13004,8 +12858,7 @@
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiHoverMissile_elite",
       "weapon_class_source": "template"
@@ -13022,7 +12875,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "20",
@@ -13035,12 +12888,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAA_Light_Flat",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiHoverMissile_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -13054,7 +12905,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "20",
@@ -13067,12 +12918,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAA_Light_Flat",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiHoverMissile_AA_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -13098,8 +12947,7 @@
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiThunderboltMissile",
       "weapon_class_source": "template"
@@ -13127,8 +12975,7 @@
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiThunderboltMissile_elite",
       "weapon_class_source": "template"
@@ -13144,7 +12991,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "25",
@@ -13156,11 +13003,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiThunderboltMissile_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -13174,7 +13020,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "25",
@@ -13186,11 +13032,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileHE_Light_Flat"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2MultiThunderboltMissile_AA_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -13378,7 +13223,6 @@
        "^Effect_Iron_Fx_RA2"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Light_Flat",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "RA2MirageGun",
@@ -13423,7 +13267,6 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Light_Flat",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "RA2MirageGun_elite",

@@ -229,7 +229,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "8",
@@ -239,12 +239,11 @@
        "ParaBomb"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy_Flat",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Flame_Heavy"
       ],
       "weapon": "ra1_allies_cargoplanebomber_parabomb",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -430,7 +429,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "8",
@@ -440,12 +439,11 @@
        "^ParaBombLegacy"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy_Flat",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Flame_Heavy"
       ],
       "weapon": "ParaBomb",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1149,7 +1147,6 @@
        "RocketsRA"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "ra1_allies_alliedrocketsoldier_rocketsra",
@@ -1177,7 +1174,6 @@
        "RocketsRA"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "ra1_allies_alliedrocketsoldier_rocketsra",
@@ -2003,7 +1999,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5750",
       "reloaddelay": "4",
@@ -2017,12 +2013,11 @@
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "JapanSpeedBoatGun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -2057,7 +2052,6 @@
       "warheads": [
        "^Warhead_Waveforce_Heavy",
        "^Warhead_Railgun_Heavy",
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
@@ -2192,7 +2186,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "2500",
       "pricing": true,
       "range": "12500",
@@ -2206,12 +2200,11 @@
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy_Flat",
        "^Warhead_Demolition_Heavy",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "YamatoCannon",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
@@ -2226,7 +2219,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "2500",
       "pricing": true,
       "range": "12500",
@@ -2240,12 +2233,11 @@
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy_Flat",
        "^Warhead_Demolition_Heavy",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "YamatoCannon",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -2649,7 +2641,6 @@
        "8Inch"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy_Flat",
        "^Warhead_Demolition_Heavy"
       ],
       "weapon": "ra1_allies_cruiser_8inch",
@@ -2679,7 +2670,6 @@
        "8Inch"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy_Flat",
        "^Warhead_Demolition_Heavy"
       ],
       "weapon": "ra1_allies_cruiser_8inch",
@@ -3630,7 +3620,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5978",
       "reloaddelay": "10",
@@ -3643,12 +3633,11 @@
        "^Effect_Flak_Medium"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Bullet_Medium",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "ra1_allies_alliedapc_gun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
@@ -3662,7 +3651,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8967",
       "reloaddelay": "10",
@@ -3671,12 +3660,11 @@
        "ra1_allies_alliedapc_gun"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Bullet_Medium",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "ra1_allies_alliedapc_gun_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

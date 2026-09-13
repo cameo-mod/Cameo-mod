@@ -2000,7 +2000,6 @@
        "wc2arrowFire"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "wc2axeFire",
@@ -2062,7 +2061,6 @@
        "wc2arrowFire"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "wc2axeFire",
@@ -2345,7 +2343,6 @@
        "wc2arrowFire"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "wc2axeFire",
@@ -2407,7 +2404,6 @@
        "wc2arrowFire"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "wc2axeFire",
@@ -2527,7 +2523,6 @@
        "wc2arrowFire"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "wc2axeFire",
@@ -2589,7 +2584,6 @@
        "wc2arrowFire"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "wc2axeFire",
@@ -2738,8 +2732,6 @@
        "wc2highArrowFire"
       ],
       "warheads": [
-       "^Warhead_Laser_ExtraDamage",
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "wc2axeFirespear",
@@ -2829,8 +2821,6 @@
        "wc2highArrowFire"
       ],
       "warheads": [
-       "^Warhead_Laser_ExtraDamage",
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "wc2axeFirespear",
@@ -4492,7 +4482,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "2240",
       "pricing": true,
       "range": "11200",
@@ -4515,11 +4505,9 @@
        "^MediumCannon",
        "^TankDestroyerCannon"
       ],
-      "warheads": [
-       "^Warhead_CannonHE_Heavy_Flat"
-      ],
+      "warheads": [],
       "weapon": "SiegeEngineCannon",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
