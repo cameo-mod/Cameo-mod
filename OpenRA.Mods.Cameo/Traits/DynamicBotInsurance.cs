@@ -273,7 +273,12 @@ namespace OpenRA.Mods.Cameo.Traits
 		/// <summary>Linear interpolation across the difficulty list by index.</summary>
 		int ByRank(int min, int max)
 		{
-			var steps = info.Difficulties.Length - 1;
+			return InterpolateByRank(min, max, rank, info.Difficulties.Length);
+		}
+
+		internal static int InterpolateByRank(int min, int max, int rank, int difficultyCount)
+		{
+			var steps = difficultyCount - 1;
 			if (steps <= 0)
 				return min;
 
@@ -364,7 +369,13 @@ namespace OpenRA.Mods.Cameo.Traits
 		/// <summary>Expected net worth for this difficulty at this game time. Integer throughout.</summary>
 		int ParWorth()
 		{
-			var midpoint = ByRank(info.ParMidpointEasiest, info.ParMidpointHardest);
+			return ParWorthAt(info, rank, gameTicks);
+		}
+
+		internal static int ParWorthAt(DynamicBotInsuranceInfo info, int rank, int gameTicks)
+		{
+			var midpoint = InterpolateByRank(
+				info.ParMidpointEasiest, info.ParMidpointHardest, rank, info.Difficulties.Length);
 			if (midpoint <= 0 || info.ParShape.Length < 2 || info.ParShapeStep <= 0)
 				return info.ParBaseWorth;
 
@@ -444,14 +455,49 @@ namespace OpenRA.Mods.Cameo.Traits
 		/// </remarks>
 		int DepthPermille(int liquidity)
 		{
-			if (liquidity >= info.MaxThreshold)
+			return DepthPermille(liquidity, info.MaxThreshold);
+		}
+
+		internal static int DepthPermille(int liquidity, int maxThreshold)
+		{
+			if (liquidity >= maxThreshold)
 				return 0;
 
 			// Keep a sub-cap owner recoverable even when integer permille rounding would turn a
 			// one-credit gap into zero depth. The accumulator still makes this a fractional payout,
 			// but it cannot strand the Paying phase at MaxThreshold - 1.
 			return Math.Max(1, (int)Math.Clamp(
-				(1000L * (info.MaxThreshold - (long)liquidity)) / info.MaxThreshold, 0L, 1000L));
+				(1000L * (maxThreshold - (long)liquidity)) / maxThreshold, 0L, 1000L));
+		}
+
+		internal static bool ShouldStartDelay(int liquidity, int threshold) { return liquidity < threshold; }
+
+		internal static bool ShouldCancelDelay(int liquidity, int threshold) { return liquidity > threshold; }
+
+		internal static bool ShouldStopPaying(int liquidity, int maxThreshold) { return liquidity >= maxThreshold; }
+
+		internal static int DelayTicks(int average, int divisor, int minimum, int maximum)
+		{
+			return Math.Clamp(average / Math.Max(1, divisor), minimum, maximum);
+		}
+
+		internal static (int Grant, int Accumulator) CashPayout(
+			int accumulator, int cashPerTick, int depth, int liquidity, int maxThreshold)
+		{
+			var accumulated = (long)accumulator + (long)cashPerTick * depth;
+			var grant = accumulated / 1000L;
+			var remainder = (int)(accumulated - grant * 1000L);
+			var cappedGrant = (int)Math.Min(grant, Math.Max(0L, maxThreshold - (long)liquidity));
+			return (cappedGrant, remainder);
+		}
+
+		internal static int PurifierPayout(
+			int amount, int modifier, int depth, int liquidity, int cashGrant, int maxThreshold)
+		{
+			var modified = Util.ApplyPercentageModifiers(amount, new[] { modifier });
+			var bonus = ((long)modified * depth) / 1000L;
+			return (int)Math.Min(bonus,
+				Math.Max(0L, maxThreshold - (long)liquidity - cashGrant));
 		}
 
 		int RollingAverage()
@@ -466,19 +512,31 @@ namespace OpenRA.Mods.Cameo.Traits
 			else
 				historyCount++;
 
-			historyHash ^= HistorySlotHash(historyIndex, history[historyIndex]);
+			historyHash ^= MixedHistorySlotHash(historyIndex, history[historyIndex]);
 			history[historyIndex] = liquidity;
-			historyHash ^= HistorySlotHash(historyIndex, liquidity);
+			historyHash ^= MixedHistorySlotHash(historyIndex, liquidity);
 			historySum += liquidity;
 			historyIndex = (historyIndex + 1) % history.Length;
 		}
 
-		static int HistorySlotHash(int index, int value)
+		internal static int MixedHistorySlotHash(int index, int value)
 		{
 			if (value == 0)
 				return 0;
 
-			unchecked { return ((index + 1) * 486187739) ^ value; }
+			// Mix the slot and value before XORing it into the aggregate. Keeping them as two
+			// independent XOR terms makes permutations collide because every occupied slot and
+			// every value then contributes the same terms regardless of their pairing.
+			unchecked
+			{
+				var hash = (uint)value ^ ((uint)(index + 1) * 0x9E3779B9u);
+				hash ^= hash >> 16;
+				hash *= 0x85EBCA6Bu;
+				hash ^= hash >> 13;
+				hash *= 0xC2B2AE35u;
+				hash ^= hash >> 16;
+				return (int)hash;
+			}
 		}
 
 		void Grant(Actor self)
@@ -565,9 +623,9 @@ namespace OpenRA.Mods.Cameo.Traits
 					// ⛔ STRICTLY below. With `<=` the bar converges to the average, the average
 					// converges to a stable liquid-funds pile, and every owner under the cap eventually
 					// insures itself -- baseline income rather than an emergency measure.
-					if (liquidity < threshold)
+					if (ShouldStartDelay(liquidity, threshold))
 					{
-						delayRemaining = Math.Clamp(RollingAverage() / delayDivisor,
+						delayRemaining = DelayTicks(RollingAverage(), delayDivisor,
 							info.MinDelayTicks, info.MaxDelayTicks);
 						phase = Phase.Delaying;
 					}
@@ -578,7 +636,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				case Phase.Delaying:
 				{
 					// Recovering above the frozen bar during the wait cancels it outright.
-					if (liquidity > threshold)
+					if (ShouldCancelDelay(liquidity, threshold))
 					{
 						// Unfreeze only. Slamming the bar back to zero would discard the tracker and
 						// start the next arming cycle from a lie about the economy.
@@ -598,7 +656,7 @@ namespace OpenRA.Mods.Cameo.Traits
 					// rather than at the frozen bar is what makes the rescue actually useful: a bot
 					// released at its own poverty line has too little to rebuild with, which is the
 					// whole point of the trait.
-					if (liquidity >= info.MaxThreshold)
+					if (ShouldStopPaying(liquidity, info.MaxThreshold))
 					{
 						amtAwaitingPurification = 0;
 						accumulator = 0;
@@ -609,23 +667,20 @@ namespace OpenRA.Mods.Cameo.Traits
 
 					// Proportional to depth, accumulated in milli-credits so a fractional rate is
 					// actually paid instead of being truncated to nothing every tick.
-			var depth = Math.Max(1, (DepthPermille(liquidity) * worthFactor + 999) / 1000);
-					accumulator += cashPerTick * depth;
-					var grant = accumulator / 1000;
-					accumulator -= grant * 1000;
-					var cappedGrant = Math.Min(grant, Math.Max(0, info.MaxThreshold - liquidity));
+					var depth = Math.Max(1, (DepthPermille(liquidity) * worthFactor + 999) / 1000);
+					var payout = CashPayout(accumulator, cashPerTick, depth, liquidity, info.MaxThreshold);
+					accumulator = payout.Accumulator;
+					var cappedGrant = payout.Grant;
 					if (cappedGrant > 0)
 						playerResources.GiveCash(cappedGrant);
 
 					// The purifier bonus rides the same depth signal, as the stacked purifiers did.
 					if (amtAwaitingPurification >= info.PurifierMinAmount)
 					{
-						var purifierBonus = (Util.ApplyPercentageModifiers(amtAwaitingPurification,
-							new[] { purifierModifier }) * depth) / 1000;
-						// Deliveries can arrive in a burst.  Do not let the purifier bonus overshoot the
+						// Deliveries can arrive in a burst. Do not let the purifier bonus overshoot the
 						// same liquid-funds cap that ends the normal payout.
-						var cappedBonus = Math.Min(purifierBonus,
-							Math.Max(0, info.MaxThreshold - liquidity - cappedGrant));
+						var cappedBonus = PurifierPayout(amtAwaitingPurification, purifierModifier,
+							depth, liquidity, cappedGrant, info.MaxThreshold);
 						if (cappedBonus > 0)
 							playerResources.GiveCash(cappedBonus);
 						amtAwaitingPurification = 0;

@@ -108,11 +108,11 @@ def test_the_csharp_uses_total_liquid_funds_and_bounds_every_payout():
     src = csharp_source()
     assert "var liquidity = playerResources.GetCashAndResources();" in src
     assert "Record(liquidity);" in src
-    assert "if (liquidity < threshold)" in src
-    assert "if (liquidity >= info.MaxThreshold)" in src
+    assert "if (ShouldStartDelay(liquidity, threshold))" in src
+    assert "if (ShouldStopPaying(liquidity, info.MaxThreshold))" in src
     assert "DepthPermille(liquidity)" in src
-    assert "var cappedGrant = Math.Min(grant" in src
-    assert "var cappedBonus = Math.Min(purifierBonus" in src
+    assert "CashPayout(accumulator, cashPerTick, depth, liquidity, info.MaxThreshold)" in src
+    assert "PurifierPayout(amtAwaitingPurification, purifierModifier" in src
 
 
 def test_the_csharp_banks_purifier_deliveries_only_while_paying_and_hashes_hidden_state():
