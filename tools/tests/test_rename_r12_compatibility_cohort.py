@@ -1,5 +1,6 @@
-"""Focused proof checks for the R12 pure-rename writer."""
+"""Focused proof checks for the R12 pure-rename writer and landed cohort."""
 
+import json
 import pathlib
 import sys
 import tempfile
@@ -10,18 +11,33 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools" / "balance"))
 
 import rename_r12_compatibility_cohort as writer  # noqa: E402
-from rename_r12_compatibility_cohort import rename_maps, resolved_dump  # noqa: E402
+from rename_r12_compatibility_cohort import resolved_dump, stale_source_references  # noqa: E402
 from miniyaml import Ruleset  # noqa: E402
 
 
-def test_current_maps_are_complete_unique_and_collision_free():
-    rs = Ruleset(str(ROOT))
-    templates, payloads, full = rename_maps(rs)
+PROOF = json.loads((
+    ROOT / "docs" / "audit" / "latest" / "r12_pure_rename_proof_20260913.json"
+).read_text(encoding="utf-8"))
+
+
+def test_frozen_maps_are_complete_unique_and_collision_free():
+    templates = PROOF["template_renames"]
+    payloads = PROOF["payload_renames"]
     assert len(templates) == len(set(templates.values())) == 36
     assert len(payloads) == len(set(payloads.values())) == 36
     assert payloads["LaserExtraDamageCompatibility"] == "LaserExtraDamage_Auxiliary"
     assert payloads["RailgunExtraDamageCompatibility"] == "RailgunExtraDamage_Auxiliary"
-    assert len(full) == 108
+    assert PROOF["counts"]["source_replacements"] == 1027
+    assert PROOF["resolved_dump"]["byte_identical_after_baseline_name_map"] is True
+
+
+def test_current_tree_contains_only_the_renamed_cohort():
+    rs = Ruleset(str(ROOT))
+    templates = PROOF["template_renames"]
+    payloads = PROOF["payload_renames"]
+    assert not (set(templates) & set(rs.weapons))
+    assert set(templates.values()) <= set(rs.weapons)
+    assert stale_source_references(writer.active_sources(rs), templates, payloads) == []
 
 
 def test_canonical_dump_covers_templates_and_concrete_weapons():
@@ -95,7 +111,8 @@ def test_proof_output_cannot_overlap_active_source():
 
 
 if __name__ == "__main__":
-    test_current_maps_are_complete_unique_and_collision_free()
+    test_frozen_maps_are_complete_unique_and_collision_free()
+    test_current_tree_contains_only_the_renamed_cohort()
     test_canonical_dump_covers_templates_and_concrete_weapons()
     test_interrupted_write_restores_affected_file()
     test_dirty_file_refuses_before_rewrite()

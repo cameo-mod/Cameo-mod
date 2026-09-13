@@ -1,5 +1,6 @@
-"""Focused checks for the R12 complete-consumer reconciliation."""
+"""Focused checks for the frozen R12 audit and the landed rename state."""
 
+import json
 import pathlib
 import sys
 
@@ -10,11 +11,14 @@ sys.path.insert(0, str(ROOT / "tools" / "balance"))
 from reconcile_r12_consumer_closure import build_report  # noqa: E402
 
 
-REPORT = build_report()
+FROZEN_REPORT = json.loads((
+    ROOT / "docs" / "audit" / "latest" / "r12_consumer_closure_20260913.json"
+).read_text(encoding="utf-8"))
+CURRENT_REPORT = build_report()
 
 
-def test_current_inventory_includes_the_template_consumer():
-    report = REPORT
+def test_frozen_inventory_includes_the_template_consumer():
+    report = FROZEN_REPORT
     assert report["counts"] == {
         "compatibility_templates": 36,
         "all_direct_relationships": 370,
@@ -38,7 +42,7 @@ def test_current_inventory_includes_the_template_consumer():
 
 
 def test_literal_chain_proposal_fails_the_order_aware_gate():
-    simulation = REPORT["simulation"]
+    simulation = FROZEN_REPORT["simulation"]
     assert simulation["changed_concrete_weapons_in_full_descendant_closure"] == 290
     assert simulation["warhead_order_changes"] == 287
     assert simulation["pure_warhead_reorders"] == 101
@@ -49,7 +53,7 @@ def test_literal_chain_proposal_fails_the_order_aware_gate():
 
 
 def test_pure_rename_preserves_every_resolved_weapon_and_avoids_payload_collisions():
-    rename = REPORT["pure_rename_simulation"]
+    rename = FROZEN_REPORT["pure_rename_simulation"]
     assert rename["changed_concrete_weapons"] == 0
     assert rename["collision_avoidance"] == {
         "LaserExtraDamageCompatibility": "LaserExtraDamage_Auxiliary",
@@ -57,20 +61,29 @@ def test_pure_rename_preserves_every_resolved_weapon_and_avoids_payload_collisio
     }
 
 
-def test_pure_rename_preserves_resolved_fields_and_order_without_key_collisions():
-    rename = build_report()["pure_rename_simulation"]
-    assert rename["changed_concrete_weapons"] == 0
-    assert len(rename["template_renames"]) == 36
-    assert len(rename["payload_renames"]) == 36
-    assert rename["collision_avoidance"] == {
-        "LaserExtraDamageCompatibility": "LaserExtraDamage_Auxiliary",
-        "RailgunExtraDamageCompatibility": "RailgunExtraDamage_Auxiliary",
+def test_current_tree_has_no_compatibility_cohort_left_to_reconcile():
+    assert CURRENT_REPORT["counts"] == {
+        "compatibility_templates": 0,
+        "all_direct_relationships": 0,
+        "concrete_weapon_relationships": 0,
+        "template_relationships": 0,
+        "distinct_concrete_weapons": 0,
+        "distinct_template_consumers": 0,
+        "already_inherits_twin_all_consumers": 0,
+        "exposed_without_twin_all_consumers": 0,
+        "missing_twin_all_consumers": 0,
     }
+    assert CURRENT_REPORT["template_consumers"] == []
+    assert CURRENT_REPORT["templates"] == []
+    assert CURRENT_REPORT["simulation"][
+        "changed_concrete_weapons_in_full_descendant_closure"] == 0
+    assert CURRENT_REPORT["pure_rename_simulation"]["template_renames"] == {}
+    assert CURRENT_REPORT["pure_rename_simulation"]["payload_renames"] == {}
 
 
 if __name__ == "__main__":
-    test_current_inventory_includes_the_template_consumer()
+    test_frozen_inventory_includes_the_template_consumer()
     test_literal_chain_proposal_fails_the_order_aware_gate()
     test_pure_rename_preserves_every_resolved_weapon_and_avoids_payload_collisions()
-    test_pure_rename_preserves_resolved_fields_and_order_without_key_collisions()
+    test_current_tree_has_no_compatibility_cohort_left_to_reconcile()
     print("R12 consumer closure fixtures: PASS")

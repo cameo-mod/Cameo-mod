@@ -1,5 +1,5 @@
 IncendiaryM1Carbine:
-	Inherits@roleflat: ^Compatibility_Flame_LightFlat
+	Inherits@roleflat: ^Warhead_Flame_Light_Flat
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@proj: ^Projectile_Flame_Light
 	Inherits@fx: ^Effect_Flame_Light
@@ -12,14 +12,14 @@ IncendiaryM1Carbine:
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Flame_LightFlatCompatibility:
+	Warhead@Flame_Light_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
 	-Warhead@Bullet_Light:
 	-Warhead@Flame_Light:
 ra1_soviets_ak47conscript_rifle:
-	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
+	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -35,7 +35,7 @@ ra1_soviets_ak47conscript_rifle:
 		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		PercentageDenominator: 10000
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
@@ -99,13 +99,13 @@ ra1_soviets_grenadier_grenade:
 		Damage: 16000
 
 ra1_soviets_grenadier_grenaderaexplode:
-	Inherits@roleflat: ^Compatibility_Flame_LightFlat
+	Inherits@roleflat: ^Warhead_Flame_Light_Flat
 	Inherits: ^GrenadeRALegacy
 	Warhead@Demolition_Light: AreaDamage
 		Damage: 4000
 	Warhead@Flame_Light:
 		Damage: 4000
-	Warhead@Flame_LightFlatCompatibility:
+	Warhead@Flame_Light_Flat:
 		ValidTargets: Ground, Water
 		Damage: 8000
 		PercentageScale: 9988
@@ -697,7 +697,7 @@ ra1_soviets_heatraytank_heatray4:
 		PercentageScale: 10000
 		Damage: 1500
 ra1_soviets_v1rockettruck_v1rockets:
-	Inherits@roleflat: ^Compatibility_MissileHE_MediumFlat
+	Inherits@roleflat: ^Warhead_MissileHE_Medium_Flat
 	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@wh2: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Grenade_Light
@@ -718,7 +718,7 @@ ra1_soviets_v1rockettruck_v1rockets:
 		TrailInterval: 1
 		Speed: 300
 		LaunchAngle: 60
-	Warhead@MissileHE_MediumFlatCompatibility:
+	Warhead@MissileHE_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 24000
 		PercentageScale: 9996
@@ -795,7 +795,7 @@ ra1_soviets_v1rockettruck_v1rocketsthermobaric:
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 ra1_soviets_grad_rocket:
-	Inherits@roleflat: ^Compatibility_MissileHE_HeavyFlat
+	Inherits@roleflat: ^Warhead_MissileHE_Heavy_Flat
 	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -816,7 +816,7 @@ ra1_soviets_grad_rocket:
 		TrailInterval: 1
 		Speed: 300
 		LaunchAngle: 60
-	Warhead@MissileHE_HeavyFlatCompatibility:
+	Warhead@MissileHE_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 16000
 		PercentageScale: 9994
@@ -845,7 +845,7 @@ ra1_soviets_grad_rocket_heavy:
 		Damage: 4000
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@MissileHE_HeavyFlatCompatibility:
+	Warhead@MissileHE_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 16000
 		PercentageScale: 4994
@@ -1046,7 +1046,7 @@ ra1_soviets_nuclearv2launcher_scudnukethermobaric:
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 ra1_soviets_flaktruck_flak_cannon:
-	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
+	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
@@ -1062,7 +1062,7 @@ ra1_soviets_flaktruck_flak_cannon:
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Flak_MediumFlatCompatibility:
+	Warhead@Flak_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
@@ -1076,7 +1076,7 @@ ra1_soviets_flaktruck_flak_cannon_AA:
 		ValidTargets: Air
 	Warhead@Flak_Medium:
 		ValidTargets: Air
-	Warhead@Flak_MediumFlatCompatibility:
+	Warhead@Flak_Medium_Flat:
 		ValidTargets: Air
 		Damage: 4000
 		PercentageScale: 9975
@@ -1084,7 +1084,7 @@ ra1_soviets_flaktruck_flak_cannon_AA:
 	-Warhead@Flak_Medium:
 
 ra1_soviets_btr80_machinegun:
-	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -1099,7 +1099,7 @@ ra1_soviets_btr80_machinegun:
 		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -1114,7 +1114,7 @@ ra1_soviets_btr80_machinegun_AA:
 		ValidTargets: Air
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		-InvalidTargets:
 		ValidTargets: Air
 		Damage: 4000
@@ -1122,7 +1122,7 @@ ra1_soviets_btr80_machinegun_AA:
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 ra1_soviets_btr80_machinegun_tesla:
-	Inherits@finalmain: ^Compatibility_Tesla_HeavyFlat
+	Inherits@finalmain: ^Warhead_Tesla_Heavy_Flat
 	Inherits: ^Warhead_MissileAP_Light
 	Inherits@2: ^Warhead_Tesla_Heavy
 	Inherits@3: ^Projectile_Lightning_Heavy
@@ -1150,7 +1150,7 @@ ra1_soviets_btr80_machinegun_tesla:
 	Warhead@EMPUnit: AffectsIntegrity
 		InvalidTargets: Air
 		Damage: 1000
-	Warhead@Tesla_HeavyFlatCompatibility:
+	Warhead@Tesla_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -1166,7 +1166,7 @@ ra1_soviets_btr80_machinegun_tesla_arc:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	Warhead@Tesla_HeavyFlatCompatibility:
+	Warhead@Tesla_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -1180,7 +1180,7 @@ ra1_soviets_btr80_machinegun_tesla_arc:
 ra1_soviets_btr80_btrteslamachinegunarcfragment1:
 	Inherits: ra1_soviets_btr80_machinegun_tesla_arc
 	Range: 2727
-	Warhead@Tesla_HeavyFlatCompatibility:
+	Warhead@Tesla_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -1196,7 +1196,7 @@ ra1_soviets_btr80_machinegun_tesla_AA:
 	Inherits: ra1_soviets_btr80_machinegun_tesla
 	Range: 8181
 	ValidTargets: Air
-	Warhead@Tesla_HeavyFlatCompatibility:
+	Warhead@Tesla_Heavy_Flat:
 		-InvalidTargets:
 		ValidTargets: Air
 		Damage: 4000
@@ -1218,7 +1218,7 @@ ra1_soviets_btr80_machinegun_tesla_arc_AA:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	Warhead@Tesla_HeavyFlatCompatibility:
+	Warhead@Tesla_Heavy_Flat:
 		ValidTargets: Air
 		Damage: 4000
 		PercentageScale: 9975
@@ -1230,7 +1230,7 @@ ra1_soviets_btr80_machinegun_tesla_arc_AA:
 ra1_soviets_btr80_btrteslamachinegunarcfragment1aa:
 	Inherits: ra1_soviets_btr80_machinegun_tesla_arc_AA
 	Range: 4090
-	Warhead@Tesla_HeavyFlatCompatibility:
+	Warhead@Tesla_Heavy_Flat:
 		ValidTargets: Air
 		Damage: 4000
 		PercentageScale: 9975
@@ -1252,7 +1252,7 @@ ChainGun:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 IncendiaryChainGun:
-	Inherits@roleflat: ^Compatibility_Flame_LightFlat
+	Inherits@roleflat: ^Warhead_Flame_Light_Flat
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Flame_Light
@@ -1267,14 +1267,14 @@ IncendiaryChainGun:
 		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Flame_LightFlatCompatibility:
+	Warhead@Flame_Light_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
 	-Warhead@Bullet_Medium:
 	-Warhead@Flame_Light:
 HindMissiles:
-	Inherits@finalmain: ^Compatibility_MissileAP_MediumFlat
+	Inherits@finalmain: ^Warhead_MissileAP_Medium_Flat
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_MissileAP_Medium
 	Inherits@wh3: ^Warhead_Concussion_Medium
@@ -1298,7 +1298,7 @@ HindMissiles:
 		ImpactSounds: xplos.aud
 		ValidTargets: Ground, Ship
 		ImpactActors: false
-	Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@MissileAP_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
@@ -1592,7 +1592,7 @@ ra1_soviets_kamovattackhelicopter_kamovmissilestesla:
 	-Warhead@TeslaWeapon:
 
 ra1_soviets_kamovattackhelicopter_kamovtesla:
-	Inherits@finalmain: ^Compatibility_Tesla_HeavyFlat
+	Inherits@finalmain: ^Warhead_Tesla_Heavy_Flat
 	Inherits: ^Warhead_MissileAP_Light
 	Inherits@2: ^Warhead_Tesla_Heavy
 	Inherits@3: ^Projectile_Lightning_Heavy
@@ -1617,7 +1617,7 @@ ra1_soviets_kamovattackhelicopter_kamovtesla:
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
-	Warhead@Tesla_HeavyFlatCompatibility:
+	Warhead@Tesla_Heavy_Flat:
 		PercentageDenominator: 10000
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -1635,7 +1635,7 @@ ra1_soviets_kamovattackhelicopter_kamovteslaarc:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	Warhead@Tesla_HeavyFlatCompatibility:
+	Warhead@Tesla_Heavy_Flat:
 		PercentageDenominator: 10000
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -1671,7 +1671,7 @@ ra1_soviets_kamovattackhelicopter_kamovteslaarcfragment1:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	Warhead@Tesla_HeavyFlatCompatibility:
+	Warhead@Tesla_Heavy_Flat:
 		PercentageDenominator: 10000
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
@@ -1698,7 +1698,7 @@ ra1_soviets_kamovattackhelicopter_kamovteslaarcfragment2:
 		Damage: 1
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
-	Warhead@Tesla_HeavyFlatCompatibility:
+	Warhead@Tesla_Heavy_Flat:
 		PercentageDenominator: 10000
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
@@ -1708,7 +1708,7 @@ ra1_soviets_kamovattackhelicopter_kamovteslaarcfragment2:
 	-Warhead@TeslaWeapon:
 
 ^Warhead_IncendiaryYakComposition:
-	Inherits@roleflat: ^Compatibility_Flame_LightFlat
+	Inherits@roleflat: ^Warhead_Flame_Light_Flat
 	Inherits@flame: ^Warhead_Flame_Light
 	Inherits@bullet: ^Warhead_Bullet_Medium
 	-Warhead@Bullet_Medium:
@@ -1748,7 +1748,7 @@ ra1_soviets_yakscoutplane_chaingun_incendiary:
 	Burst: 8
 	BurstDelays: 3
 	Report: gun13.aud
-	Warhead@Flame_LightFlatCompatibility:
+	Warhead@Flame_Light_Flat:
 		PercentageDenominator: 10000
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -1783,7 +1783,7 @@ ra1_soviets_teslayak_chaingun_incendiary:
 	Burst: 8
 	BurstDelays: 3
 	Report: gun13.aud
-	Warhead@Flame_LightFlatCompatibility:
+	Warhead@Flame_Light_Flat:
 		PercentageDenominator: 10000
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -1818,7 +1818,7 @@ ra1_soviets_nuclearyak_chaingun_incendiary:
 	Burst: 8
 	BurstDelays: 3
 	Report: gun13.aud
-	Warhead@Flame_LightFlatCompatibility:
+	Warhead@Flame_Light_Flat:
 		PercentageDenominator: 10000
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -1853,7 +1853,7 @@ ra1_soviets_su57attackbomber_chaingun_incendiary:
 	Burst: 8
 	BurstDelays: 3
 	Report: gun13.aud
-	Warhead@Flame_LightFlatCompatibility:
+	Warhead@Flame_Light_Flat:
 		PercentageDenominator: 500
 		ValidTargets: Ground, Water, Air
 		Damage: 9200
@@ -1886,13 +1886,13 @@ ra1_soviets_armoredyak_chaingun_incendiary:
 	Burst: 10
 	BurstDelays: 3
 	Report: gun13.aud
-	Warhead@Flame_LightFlatCompatibility:
+	Warhead@Flame_Light_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 9988
 
 ra1_soviets_teslayak_yakteslagun:
-	Inherits@finalmain: ^Compatibility_Tesla_HeavyFlat
+	Inherits@finalmain: ^Warhead_Tesla_Heavy_Flat
 	Inherits: ^Warhead_MissileAP_Light
 	Inherits@2: ^Warhead_Tesla_Heavy
 	Inherits@3: ^Projectile_Lightning_Heavy
@@ -1921,7 +1921,7 @@ ra1_soviets_teslayak_yakteslagun:
 		Damage: 4000
 
 	MinRange: 1400
-	Warhead@Tesla_HeavyFlatCompatibility:
+	Warhead@Tesla_Heavy_Flat:
 		PercentageDenominator: 10000
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -1938,7 +1938,7 @@ ra1_soviets_teslayak_yakteslagunarc:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	Warhead@Tesla_HeavyFlatCompatibility:
+	Warhead@Tesla_Heavy_Flat:
 		PercentageDenominator: 10000
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -1978,7 +1978,7 @@ ra1_soviets_teslayak_yakteslaarcfragment1:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	Warhead@Tesla_HeavyFlatCompatibility:
+	Warhead@Tesla_Heavy_Flat:
 		PercentageDenominator: 10000
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
@@ -2008,7 +2008,7 @@ ra1_soviets_teslayak_yakteslaarcfragment2:
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
-	Warhead@Tesla_HeavyFlatCompatibility:
+	Warhead@Tesla_Heavy_Flat:
 		PercentageDenominator: 10000
 		ValidTargets: Ground, Water, Air
 		Damage: 5000
@@ -2379,7 +2379,7 @@ ra1_soviets_migattackbomber_maverick:
 	Warhead@MissileAP_Medium:
 		Damage: 40000
 ra1_soviets_migattackbomber_teslamaverick:
-	Inherits@finalmain: ^Compatibility_Tesla_HeavyFlat
+	Inherits@finalmain: ^Warhead_Tesla_Heavy_Flat
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@2: ra1_soviets_migattackbomber_maverick
@@ -2419,7 +2419,7 @@ ra1_soviets_migattackbomber_teslamaverick:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	Warhead@Tesla_HeavyFlatCompatibility:
+	Warhead@Tesla_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
 		PercentageScale: 9997
@@ -2453,7 +2453,7 @@ ra1_soviets_migattackbomber_teslamaverickfragment1:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	Warhead@Tesla_HeavyFlatCompatibility:
+	Warhead@Tesla_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 		PercentageScale: 9994
@@ -2472,7 +2472,7 @@ ra1_soviets_migattackbomber_teslamaverickfragment2:
 		Damage: 4000
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
-	Warhead@Tesla_HeavyFlatCompatibility:
+	Warhead@Tesla_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 9988
@@ -2485,7 +2485,7 @@ ra1_soviets_migattackbomber_teslamaverickfragment2:
 		MinimumLaunchAngle: 128
 
 ra1_soviets_migattackbomber_thermobaricmaverick:
-	Inherits@roleflat: ^Compatibility_Thermobaric_HeavyFlat
+	Inherits@roleflat: ^Warhead_Thermobaric_Heavy_Flat
 	Inherits@collapsewh: ^Warhead_Thermobaric_Heavy
 	Inherits: ^NuclearWarhead
 	Inherits@2: ^HeavyMissile
@@ -2544,7 +2544,7 @@ ra1_soviets_migattackbomber_thermobaricmaverick:
 		ValidTargets: Ground, Water, Air
 		Damage: 36000
 		PercentageScale: 0
-	Warhead@Thermobaric_HeavyFlatCompatibility:
+	Warhead@Thermobaric_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 48000
 		PercentageScale: 2498
@@ -2649,7 +2649,7 @@ ra1_soviets_su57attackbomber_missile_thermobaric:
 		Explosions: small_poof
 
 ra1_soviets_heavytank_105mmthermobaric:
-	Inherits@finalmain: ^Compatibility_Flame_MediumFlat
+	Inherits@finalmain: ^Warhead_Flame_Medium_Flat
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
 	Inherits@fx: ^Effect_Flame_Medium
@@ -2664,7 +2664,7 @@ ra1_soviets_heavytank_105mmthermobaric:
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12
 		ImpactSounds: firebl3.aud
-	Warhead@Flame_MediumFlatCompatibility:
+	Warhead@Flame_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 12000
 		PercentageScale: 9992
@@ -2714,7 +2714,7 @@ ra1_soviets_hammertank_cannon_thermobaric:
 
 ShtoraLaser:
 	Inherits@collapsewh: ^Warhead_Laser_Light
-	Inherits@collapseextra: ^Compatibility_Laser_ExtraDamage
+	Inherits@collapseextra: ^Warhead_Laser_ExtraDamage
 	-TargetActorCenter:
 	Inherits: ^LightFlameWeapon
 	Inherits@2: ^FlakWeapon
@@ -2808,7 +2808,7 @@ ra120mmTargetingComputer:
 	ValidTargets: Ground, Water
 
 ra120mmThermobaric:
-	Inherits@finalmain: ^Compatibility_Thermobaric_HeavyFlat
+	Inherits@finalmain: ^Warhead_Thermobaric_Heavy_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -2916,7 +2916,7 @@ ra120mmThermobaric:
 			Spaceship: 10
 		Falloff: 100, 90, 78
 		Range: 0, 400, 800
-	Warhead@Thermobaric_HeavyFlatCompatibility:
+	Warhead@Thermobaric_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 24000
 		PercentageScale: 0
@@ -3013,7 +3013,7 @@ ra120mmThermobaricTargetingComputer:
 			Spaceship: 10
 		Falloff: 100, 90, 78
 		Range: 0, 400, 800
-	Warhead@Thermobaric_HeavyFlatCompatibility:
+	Warhead@Thermobaric_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 24000
 		PercentageScale: 0
@@ -3410,7 +3410,7 @@ MammothTuskTeslaTargetingComputer:
 		InvalidTargets: wall
 		ValidTargets: Ground, Water, Air
 ra1_soviets_siegemammothtank_ra120mm2:
-	Inherits@collapseflat: ^Compatibility_CannonHE_HeavyFlat
+	Inherits@collapseflat: ^Warhead_CannonHE_Heavy_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -3451,7 +3451,7 @@ ra1_soviets_siegemammothtank_ra120mm2:
 		ValidTargets: Ground
 	-Warhead@LightChemicalWeapon:
 	-Warhead@MediumFlameWeapon:
-	-Warhead@CannonHE_HeavyFlatCompatibility:
+	-Warhead@CannonHE_Heavy_Flat:
 
 ra1_soviets_siegemammothtank_ra120mm2targetingcomputer:
 	Inherits: ra1_soviets_siegemammothtank_ra120mm2
@@ -3459,7 +3459,7 @@ ra1_soviets_siegemammothtank_ra120mm2targetingcomputer:
 	ValidTargets: Ground, Water
 
 ra1_soviets_siegemammothtank_ra120mm2thermobaric:
-	Inherits@finalmain: ^Compatibility_Thermobaric_HeavyFlat
+	Inherits@finalmain: ^Warhead_Thermobaric_Heavy_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -3567,7 +3567,7 @@ ra1_soviets_siegemammothtank_ra120mm2thermobaric:
 			Spaceship: 10
 		Falloff: 100, 90, 78
 		Range: 0, 400, 800
-	Warhead@Thermobaric_HeavyFlatCompatibility:
+	Warhead@Thermobaric_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 48000
 		PercentageScale: 0
@@ -3665,7 +3665,7 @@ ra1_soviets_siegemammothtank_ra120mm2thermobarictargetingcomputer:
 			Spaceship: 10
 		Falloff: 100, 90, 78
 		Range: 0, 400, 800
-	Warhead@Thermobaric_HeavyFlatCompatibility:
+	Warhead@Thermobaric_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 48000
 		PercentageScale: 0
@@ -3870,7 +3870,7 @@ ra1_soviets_monstertank_120mm_cannon_inferno:
 		AffectsParent: true
 ra1_soviets_monstertank_missile:
 	Inherits@missilerole: ^Warhead_MissileAP_Heavy
-	Inherits@finalmain: ^Compatibility_MissileHE_HeavyFlat
+	Inherits@finalmain: ^Warhead_MissileHE_Heavy_Flat
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileHE_Heavy
 	Report: missile6.aud
@@ -3889,7 +3889,7 @@ ra1_soviets_monstertank_missile:
 	-Warhead@MissileHE_Heavy:
 	Projectile: Missile
 		VerticalRateOfTurn: 12
-	-Warhead@MissileHE_HeavyFlatCompatibility:
+	-Warhead@MissileHE_Heavy_Flat:
 	Warhead@MissileAP_Heavy: AreaDamage
 		PercentageDenominator: 10000
 		ValidRelationships: Ally, Neutral, Enemy
@@ -4138,7 +4138,7 @@ ra1_soviets_monstertank_missile_thermobaric:
 	-Warhead@HeavyMissile:
 
 ra1_soviets_volkov_volkovmagneticweapon:
-	Inherits@roleflat: ^Compatibility_Railgun_HeavyFlat
+	Inherits@roleflat: ^Warhead_Railgun_Heavy_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -4178,7 +4178,7 @@ ra1_soviets_volkov_volkovmagneticweapon:
 	Warhead@Effect: CreateEffect
 		Explosions: poof
 		ImpactSounds: kaboom25.aud
-	Warhead@Railgun_HeavyFlatCompatibility:
+	Warhead@Railgun_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 20000
 		PercentageScale: 0
@@ -4249,7 +4249,7 @@ ra1_soviets_volkov_volkovmagneticweapontesla:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	Warhead@Railgun_HeavyFlatCompatibility:
+	Warhead@Railgun_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 16000
@@ -4304,7 +4304,7 @@ ra1_soviets_volkov_volkovmagneticweaponteslafragment1:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	Warhead@Railgun_HeavyFlatCompatibility:
+	Warhead@Railgun_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -4349,7 +4349,7 @@ ra1_soviets_volkov_volkovmagneticweaponteslafragment2:
 		Damage: 1000
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
-	Warhead@Railgun_HeavyFlatCompatibility:
+	Warhead@Railgun_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -4412,7 +4412,7 @@ ra1_soviets_volkov_volkovmagneticweaponnuclearshells:
 		Explosions: nuke_small
 		ImpactSounds: kaboom22.aud
 		ImpactActors: true
-	Warhead@Railgun_HeavyFlatCompatibility:
+	Warhead@Railgun_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 80000
@@ -4432,7 +4432,7 @@ ra1_soviets_volkov_volkovmagneticweaponincendiary:
 	Warhead@Flame_Medium: AreaDamage
 		Damage: 10000
 ra1_soviets_volkov_volkovmagneticweaponincendiarytesla:
-	Inherits@roleflat: ^Compatibility_Quantum_HeavyFlat
+	Inherits@roleflat: ^Warhead_Quantum_Heavy_Flat
 	Inherits: ra1_soviets_volkov_volkovmagneticweapon
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^TeslaWeapon
@@ -4516,13 +4516,13 @@ ra1_soviets_volkov_volkovmagneticweaponincendiarytesla:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	Warhead@Quantum_HeavyFlatCompatibility:
+	Warhead@Quantum_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 16000
 		PercentageScale: 0
 	-Warhead@MediumFlameWeapon:
-	-Warhead@Railgun_HeavyFlatCompatibility:
+	-Warhead@Railgun_Heavy_Flat:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
 
@@ -4585,7 +4585,7 @@ ra1_soviets_volkov_volkovmagneticweaponincendiaryteslafragment1:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	Warhead@Railgun_HeavyFlatCompatibility:
+	Warhead@Railgun_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -4641,7 +4641,7 @@ ra1_soviets_volkov_volkovmagneticweaponincendiaryteslafragment2:
 		Damage: 1000
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 5000
-	Warhead@Railgun_HeavyFlatCompatibility:
+	Warhead@Railgun_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -4728,7 +4728,7 @@ ra1_soviets_volkov_volkovmagneticweaponincendiarynuclearshells:
 		PercentageScale: 0
 	-Warhead@MediumFlameWeapon:
 	-Warhead@NuclearWarhead:
-	-Warhead@Railgun_HeavyFlatCompatibility:
+	-Warhead@Railgun_Heavy_Flat:
 
 	Warhead@ShieldHit:
 		InvalidTargets: Air
@@ -4869,7 +4869,7 @@ ra1_soviets_gatlingtank_ragatlingtankcannon_AA:
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
 ra1_soviets_gatlingtank_incendiaryragatlingtankcannon:
-	Inherits@roleflat: ^Compatibility_Flame_LightFlat
+	Inherits@roleflat: ^Warhead_Flame_Light_Flat
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Flame_Light
@@ -4884,7 +4884,7 @@ ra1_soviets_gatlingtank_incendiaryragatlingtankcannon:
 		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Flame_LightFlatCompatibility:
+	Warhead@Flame_Light_Flat:
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
@@ -4896,7 +4896,7 @@ ra1_soviets_gatlingtank_incendiaryragatlingtankcannon_AA:
 	ValidTargets: Air
 	Warhead@Flame_Light:
 		ValidTargets: Air
-	Warhead@Flame_LightFlatCompatibility:
+	Warhead@Flame_Light_Flat:
 		ValidTargets: Air
 		Damage: 4000
 		PercentageScale: 9975
@@ -5055,7 +5055,7 @@ ra1_soviets_rifleinfantry_carbine:
 		InvalidTargets: Air
 		Damage: 840
 ra1_soviets_rifleinfantry_carbine_incendiary:
-	Inherits@roleflat: ^Compatibility_Flame_LightFlat
+	Inherits@roleflat: ^Warhead_Flame_Light_Flat
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@proj: ^Projectile_Flame_Light
 	Inherits@fx: ^Effect_Flame_Light
@@ -5068,7 +5068,7 @@ ra1_soviets_rifleinfantry_carbine_incendiary:
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Flame_LightFlatCompatibility:
+	Warhead@Flame_Light_Flat:
 		PercentageDenominator: 10000
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
@@ -5115,7 +5115,7 @@ ra1_soviets_missilesubmarine_227mm:
 		Damage: 17600
 ra1_soviets_hindattackhelicopter_hindmissiles:
 	Inherits: HindMissiles
-	Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@MissileAP_Medium_Flat:
 		PercentageDenominator: 10000
 		PercentageScale: 9984
 		Damage: 3000
@@ -5127,13 +5127,13 @@ ra1_soviets_hindattackhelicopter_chaingun:
 		Damage: 1000
 ra1_soviets_hindattackhelicopter_incendiarychaingun:
 	Inherits: IncendiaryChainGun
-	Warhead@Flame_LightFlatCompatibility:
+	Warhead@Flame_Light_Flat:
 		PercentageDenominator: 10000
 		PercentageScale: 9975
 		Damage: 2000
 ra1_soviets_kamovattackhelicopter_hindmissiles:
 	Inherits: HindMissiles
-	Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@MissileAP_Medium_Flat:
 		PercentageDenominator: 10000
 		PercentageScale: 9984
 		Damage: 1500
@@ -5145,7 +5145,7 @@ ra1_soviets_kamovattackhelicopter_chaingun:
 		Damage: 500
 ra1_soviets_kamovattackhelicopter_incendiarychaingun:
 	Inherits: IncendiaryChainGun
-	Warhead@Flame_LightFlatCompatibility:
+	Warhead@Flame_Light_Flat:
 		PercentageDenominator: 10000
 		PercentageScale: 9975
 		Damage: 1000
@@ -5240,7 +5240,7 @@ ra1_soviets_kamovattackhelicopter_kamovmissileteslaarcfragment1:
 		Weapon: ra1_soviets_kamovattackhelicopter_kamovmissileteslaarcfragment2
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: wall
-	Warhead@Tesla_HeavyFlatCompatibility:
+	Warhead@Tesla_Heavy_Flat:
 		PercentageDenominator: 10000
 		PercentageScale: 6665
 		Damage: 12000
@@ -5256,7 +5256,7 @@ ra1_soviets_kamovattackhelicopter_kamovmissileteslaarcfragment2:
 	Inherits: ra1_soviets_kamovattackhelicopter_kamovteslaarcfragment2
 	ValidTargets: Ground, Water, Air
 	InvalidTargets: wall
-	Warhead@Tesla_HeavyFlatCompatibility:
+	Warhead@Tesla_Heavy_Flat:
 		PercentageDenominator: 10000
 		PercentageScale: 7998
 		Damage: 10000

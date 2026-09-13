@@ -325,13 +325,13 @@ InterceptorLauncher:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
 PhotonCannon:
-	Inherits@finalmain: ^Compatibility_Plasma_HeavyFlat
+	Inherits@finalmain: ^Warhead_Plasma_Heavy_Flat
 	Inherits: ^PhotonCannonLegacy
 	-Warhead@PreservedFlat_FlakWeapon:
 	-Warhead@PreservedFlat_HeavyCannon:
 	-Warhead@PreservedFlat_MediumCannon:
 	-Warhead@PreservedFlat_TankDestroyerCannon:
-	Warhead@Plasma_HeavyFlatCompatibility:
+	Warhead@Plasma_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 40000
 		PercentageScale: 0
@@ -343,7 +343,7 @@ DragoonCannon:
 		Speed: 500
 		CloseEnough: 500
 		AllowSnapping: true
-	Warhead@Plasma_HeavyFlatCompatibility:
+	Warhead@Plasma_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 40000
 		PercentageScale: 0
@@ -439,7 +439,7 @@ GladiusCannon:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
-	Warhead@Plasma_HeavyFlatCompatibility:
+	Warhead@Plasma_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 110000
 		PercentageScale: 0
@@ -551,13 +551,13 @@ ArbiterCannon:
 		Speed: 428
 		CloseEnough: 428
 		AllowSnapping: true
-	Warhead@Plasma_HeavyFlatCompatibility:
+	Warhead@Plasma_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 40000
 		PercentageScale: 0
 
 GlaveCanon:
-	Inherits@finalmain: ^Compatibility_Railgun_HeavyFlat
+	Inherits@finalmain: ^Warhead_Railgun_Heavy_Flat
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
@@ -575,7 +575,7 @@ GlaveCanon:
 		AllowSnapping: true
 	-Warhead@Demolition_Light:
 	-Warhead@Railgun_Heavy:
-	Warhead@Railgun_HeavyFlatCompatibility:
+	Warhead@Railgun_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 16000
 		PercentageScale: 9994
@@ -663,7 +663,7 @@ PsionicShockwave:
 		ValidTargets: Ground, Water, Air
 
 ScarabLaunch:
-	Inherits@collapseflat: ^Compatibility_CannonHE_HeavyFlat
+	Inherits@collapseflat: ^Warhead_CannonHE_Heavy_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -724,7 +724,7 @@ ScarabLaunch:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@MediumMissile:
-	-Warhead@CannonHE_HeavyFlatCompatibility:
+	-Warhead@CannonHE_Heavy_Flat:
 ScarabLaunchDummy:
 	ReloadDelay: 90
 	Range: 7777
@@ -804,7 +804,7 @@ ZeratulSlice:
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
 CorsairFlash:
-	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
+	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@wh2: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Flak_Medium
@@ -833,7 +833,7 @@ CorsairFlash:
 		Explosions: steel_bluepiffs
 	-Warhead@Demolition_Light:
 	-Warhead@Flak_Medium:
-	Warhead@Flak_MediumFlatCompatibility:
+	Warhead@Flak_Medium_Flat:
 		ValidTargets: Air
 		Damage: 4000
 		PercentageScale: 9975
@@ -987,7 +987,7 @@ VoidRayBeam:
 		PercentageScale: 0
 
 StarshipSovereignBeam:
-	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
+	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
 	Inherits: ^LightMissile
 	Inherits@2: ^SmallArms
 	Inherits@3: ^Chaingun
@@ -1102,7 +1102,7 @@ StarshipSovereignBeam:
 	-Warhead@SmallArms:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@Laser_HeavyFlatCompatibility:
+	Warhead@Laser_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 13600
 		PercentageScale: 0
@@ -1139,7 +1139,7 @@ SCWorkerExplodeProtoss:
 	Warhead@Demolition_Light:
 		Damage: 12000
 ScoutMG:
-	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
+	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@wh2: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Flak_Medium
@@ -1162,13 +1162,13 @@ ScoutMG:
 		Explosions: steel_bluepiffs
 	-Warhead@Demolition_Light:
 	-Warhead@Flak_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
 
 EpigraphMG:
-	Inherits@collapseflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@collapseflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1273,10 +1273,10 @@ EpigraphMG:
 	-Warhead@HeavyAAWeapon:
 	-Warhead@FlakWeapon:
 	-Warhead@Chaingun:
-	-Warhead@Bullet_MediumFlatCompatibility:
+	-Warhead@Bullet_Medium_Flat:
 
 ManifoldMG:
-	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
+	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^Warhead_Concussion_Light
 	Inherits@2: ^Warhead_CannonHE_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1310,7 +1310,7 @@ ManifoldMG:
 	-Warhead@Bullet_Medium:
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Concussion_Light:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 6000
 		PercentageScale: 9984
@@ -1330,13 +1330,13 @@ ManifoldMG_AA:
 	-Warhead@Bullet_Medium:
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Concussion_Light:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Air
 		Damage: 6000
 		PercentageScale: 9984
 
 AtreusMG:
-	Inherits@collapseflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@collapseflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1393,7 +1393,7 @@ AtreusMG:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@MediumMissile:
 	-Warhead@FlakWeapon:
-	-Warhead@Bullet_MediumFlatCompatibility:
+	-Warhead@Bullet_Medium_Flat:
 PatriarchShoot:
 	Inherits@collapsewh: ^Warhead_Concussion_Medium
 	Inherits: ^Grenade

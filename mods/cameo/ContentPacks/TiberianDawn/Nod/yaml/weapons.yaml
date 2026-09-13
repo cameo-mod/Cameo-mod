@@ -521,7 +521,7 @@ td_nod_gunturret_turretgun:
 		PercentageScale: 0
 
 td_nod_gunturret_turretgunblackmarket:
-	Inherits@roleflat: ^Compatibility_Concussion_MediumFlat
+	Inherits@roleflat: ^Warhead_Concussion_Medium_Flat
 	Inherits: ^HeavyBomb
 	Inherits@2: ^HeavyCannon
 	Inherits@3: td_nod_gunturret_turretgun
@@ -539,7 +539,7 @@ td_nod_gunturret_turretgunblackmarket:
 	Warhead@Concussion_Medium:
 		Damage: 31000
 		PercentageScale: 0
-	-Warhead@Concussion_MediumFlatCompatibility:
+	-Warhead@Concussion_Medium_Flat:
 Dragon:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -1094,7 +1094,7 @@ td_nod_buggymkii_laserbuggy2_AAburning:
 		Damage: 3000
 		ValidTargets: Air
 td_nod_buggymkii_fireballlauncherbuggy2:
-	Inherits@roleflat: ^Compatibility_Flame_MediumFlat
+	Inherits@roleflat: ^Warhead_Flame_Medium_Flat
 	Inherits: ^Warhead_Flame_Light
 	Inherits@2: ^Warhead_Flame_Heavy
 	Inherits@4: ^Effect_Flame_Medium
@@ -1115,7 +1115,7 @@ td_nod_buggymkii_fireballlauncherbuggy2:
 	-Warhead@Flame_Heavy:
 	-Warhead@Flame_Light:
 	-Warhead@Flame_Medium:
-	Warhead@Flame_MediumFlatCompatibility:
+	Warhead@Flame_Medium_Flat:
 		PercentageDenominator: 10000
 		ValidTargets: Ground, Water
 		Damage: 3000
@@ -1399,16 +1399,16 @@ td_nod_stealthsoldier_bhreddarts:
 		ImpactSounds: kaboom15.aud
 
 td_nod_specterartillery_specterartilleryshell:
-	Inherits@finalmain: ^Compatibility_Concussion_MediumFlat
+	Inherits@finalmain: ^Warhead_Concussion_Medium_Flat
 	Inherits: ^SpecterArtilleryShellLegacy
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
-	Warhead@Concussion_MediumFlatCompatibility:
+	Warhead@Concussion_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 32000
 		PercentageScale: 9997
 td_nod_specterartillery_specterartilleryshellupgrade:
-	Inherits@roleflat: ^Compatibility_CannonHE_HeavyFlat
+	Inherits@roleflat: ^Warhead_CannonHE_Heavy_Flat
 	Inherits: ^MediumChemicalWeapon
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^HeavyBomb
@@ -1467,7 +1467,7 @@ td_nod_specterartillery_specterartilleryshellupgrade:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@TankDestroyerCannon:
-	Warhead@CannonHE_HeavyFlatCompatibility:
+	Warhead@CannonHE_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 32000
 		PercentageScale: 2497

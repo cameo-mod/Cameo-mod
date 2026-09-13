@@ -1,5 +1,5 @@
 RA2LasherCannon:
-	Inherits@collapseflat: ^Compatibility_CannonHE_MediumFlat
+	Inherits@collapseflat: ^Warhead_CannonHE_Medium_Flat
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^LightFlameWeapon
@@ -23,7 +23,7 @@ RA2LasherCannon:
 	-Warhead@LightFlameWeapon:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@TankDestroyerCannon:
-	-Warhead@CannonHE_MediumFlatCompatibility:
+	-Warhead@CannonHE_Medium_Flat:
 RA2LasherCannon_elite:
 	Inherits: RA2LasherCannon
 	Inherits@Elite: ^RA2EliteEffects
@@ -234,7 +234,7 @@ RA2LasherToxicMortar_elite:
 	-Warhead@CannonHE_Heavy:
 
 RA2LasherLaser:
-	Inherits@finalmain: ^Compatibility_Laser_HeavyFlat
+	Inherits@finalmain: ^Warhead_Laser_Heavy_Flat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Warhead_Laser_Heavy
 	Inherits@3: ^Projectile_Laser_Heavy
@@ -259,7 +259,7 @@ RA2LasherLaser:
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	-Warhead@CannonHE_Medium:
 	-Warhead@Laser_Heavy:
-	Warhead@Laser_HeavyFlatCompatibility:
+	Warhead@Laser_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 		PercentageScale: 9994
@@ -281,7 +281,7 @@ RA2LasherLaser_elite:
 		Damage: 8
 	-Warhead@CannonHE_Medium:
 	-Warhead@LaserWeapon:
-	Warhead@Laser_HeavyFlatCompatibility:
+	Warhead@Laser_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 40000
 		PercentageScale: 5998
@@ -421,7 +421,7 @@ RA2MagnetAA_elite:
 		InvalidTargets: Paratrooper
 
 RA2PsychicJab:
-	Inherits@collapseflat: ^Compatibility_CannonHE_MediumFlat
+	Inherits@collapseflat: ^Warhead_CannonHE_Medium_Flat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@4: ^TankDestroyerCannon
@@ -478,7 +478,7 @@ RA2PsychicJab:
 	-Warhead@TankDestroyerCannon:
 	-Warhead@LightFlameWeapon:
 	-Warhead@FlakWeapon:
-	Warhead@CannonHE_MediumFlatCompatibility:
+	Warhead@CannonHE_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 2488
@@ -602,7 +602,7 @@ BoomerLaunch:
 	BurstDelays: 8
 
 YRBoomerTorpedo:
-	Inherits@finalmain: ^Compatibility_MissileAP_HeavyFlat
+	Inherits@finalmain: ^Warhead_MissileAP_Heavy_Flat
 	Inherits: ^RA2Grenade
 	Inherits@2: ^RA2HeavyMissile
 	Inherits@fx: ^Effect_Watersplash_Large_RA2
@@ -642,7 +642,7 @@ YRBoomerTorpedo:
 	-Warhead@EffectAir:
 	-Warhead@Demolition_Light:
 	-Warhead@MissileAP_Heavy:
-	Warhead@MissileAP_HeavyFlatCompatibility:
+	Warhead@MissileAP_Heavy_Flat:
 		ValidTargets: Water, Underwater, Bridge, Structure
 		Damage: 40000
 		PercentageScale: 9998
@@ -692,7 +692,7 @@ RA2GattlingMG3_AA:
 		ValidTargets: Air
 		Damage: 4000
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Air
 		Damage: 8000
 		PercentageScale: 9988
@@ -705,7 +705,7 @@ YuriGatlingCannonMG3_AA:
 	Inherits@ProjectileStreak: ^YuriGatlingCannonProjectileStreak
 
 RA2GattlingInf:
-	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	ReloadDelay: 15
@@ -727,7 +727,7 @@ RA2GattlingInf:
 		Damage: 8000
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Air, Water
 		Damage: 16000
 		PercentageScale: 2494
@@ -984,7 +984,7 @@ RA2CosmonautLaser:
 		ValidTargets: Ground, Water, Air
 		Damage: 13600
 		PercentageScale: 1464
-	-Warhead@Bullet_MediumFlatCompatibility:
+	-Warhead@Bullet_Medium_Flat:
 	-Warhead@FlakWeapon:
 	-Warhead@LightMissile:
 	-Warhead@Bullet_Medium:
