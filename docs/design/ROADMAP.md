@@ -98,7 +98,8 @@ sign-off and boot gates. Evidence and delivery status are in
 ## AI ARCHITECTURE (2026-08-31)
 
 Design: [`AI_ARCHITECTURE.md`](AI_ARCHITECTURE.md). Record-only completed-match telemetry
-is implemented on the follow-up branch; adaptive decision behavior remains proposed.
+and the first adaptive personality behavior are implemented on the follow-up branches;
+later adaptive decision behavior remains proposed.
 Ordered so each item is independently
 verifiable. §10 of the design is the module-by-module build plan: what every loaded
 bot module owns, what it reads from the master's snapshot, and the phase order
@@ -124,14 +125,20 @@ the fog sequencing.
   `BuildingFractions`).
 - [ ] **S** Personality-specific compositions via condition-gated
   `ProvidesPrerequisite` tokens plus group tokens for OR - zero C#.
-- [ ] **M** Guerrilla as the sixth personality (many small simultaneous raids).
+- [ ] **M** Add `personality-guerrilla` as a sixth personality for many small simultaneous
+  raids, gated on phase-3 log evidence that the computed rule fires often enough to justify it.
+  Tune a `SquadManagerBotModuleCA` instance using the existing `GuerrillaTypes`,
+  `MaxGuerrillaSize`, and `JoinGuerrilla` knobs, then add its notification block and audit
+  expected-set entries; no new C# is expected.
 - [x] **M** Phase 2 observe-only `MasterAiBotModule` and situation logging:
   [`BotSituation.cs`](../../OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs),
   [`AiSituationLogWriter.cs`](../../OpenRA.Mods.Cameo/Traits/AiSituationLogWriter.cs).
   Pre-fog, record-only; no orders, conditions, or synced-state changes.
+- [x] **M** Phase 3 synced `BotPersonalityController` and difficulty-gated dynamic
+  personality switching through `SetBotPersonality`; lower tiers retain fixed
+  random personalities.
 - [ ] **M** `MasterAiBotModule`: fogged per-enemy signals, main-target scoring,
-  personality choice. Switches travel as a `SetBotPersonality` order resolved by
-  a synced controller trait, because bot logic may not touch synced state.
+  and later personality refinements.
 - [ ] **M** Per-enemy pairwise damage ledger (`PlayerStatistics` is aggregate and
   cannot attribute losses to a specific opponent).
   - [x] **M** Record-only AI match logging: [`AI_MATCH_LOG.md`](AI_MATCH_LOG.md),

@@ -15,6 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using NUnit.Framework;
+using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 
@@ -168,6 +169,71 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void CostCountersBaselineCumulativeStatsBeforeProducingDeltas()
+		{
+			var previousDeaths = 0;
+			var previousKills = 0;
+			var initialized = false;
+			Assert.That(MasterAiBotModule.CostDeltas(5000, 2000,
+				ref previousDeaths, ref previousKills, ref initialized), Is.EqualTo((0, 0)));
+			Assert.That((previousDeaths, previousKills, initialized), Is.EqualTo((5000, 2000, true)));
+			Assert.That(MasterAiBotModule.CostDeltas(5600, 2250,
+				ref previousDeaths, ref previousKills, ref initialized), Is.EqualTo((600, 250)));
+		}
+
+		[Test]
+		public void FreshGameCostCountersCountLossesBeforeTheFirstStaggeredCheck()
+		{
+			var previousDeaths = 0;
+			var previousKills = 0;
+			var initialized = true;
+			Assert.That(MasterAiBotModule.CostDeltas(700, 100,
+				ref previousDeaths, ref previousKills, ref initialized), Is.EqualTo((700, 100)));
+		}
+
+		[Test]
+		public void MasterAiSaveStateRoundTripsEmergencyWindowsAndPersonalityHold()
+		{
+			var original = new MasterAiBotSavedState
+			{
+				CostCountersInitialized = true,
+				PreviousDeathsCost = 5600,
+				PreviousKillsCost = 2250,
+				CurrentUrgency = BotUrgency.Emergency,
+				LastPersonalitySwitchTick = 4321,
+				EmergencyPersonalityHandled = true,
+				LossSamples = new[] { (4100, 250), (4250, 350) },
+				KillSamples = new[] { (4200, 125), (4300, 125) },
+				ProductionLossTicks = new[] { 4150, 4275 },
+				ProductionBuildings = new uint[] { 17, 29 }
+			};
+			var nodes = new List<MiniYamlNode>
+			{
+				new("State", "", MasterAiBotModule.SerializeState(original))
+			};
+			var serialized = nodes.WriteToString();
+			var restored = MasterAiBotModule.DeserializeState(
+				MiniYaml.FromString(serialized, "test").Single().Value);
+
+			Assert.That(restored.CostCountersInitialized, Is.True);
+			Assert.That(restored.PreviousDeathsCost, Is.EqualTo(5600));
+			Assert.That(restored.PreviousKillsCost, Is.EqualTo(2250));
+			Assert.That(restored.CurrentUrgency, Is.EqualTo(BotUrgency.Emergency));
+			Assert.That(restored.LastPersonalitySwitchTick, Is.EqualTo(4321));
+			Assert.That(restored.EmergencyPersonalityHandled, Is.True);
+			Assert.That(restored.LossSamples, Is.EqualTo(original.LossSamples));
+			Assert.That(restored.KillSamples, Is.EqualTo(original.KillSamples));
+			Assert.That(restored.ProductionLossTicks, Is.EqualTo(original.ProductionLossTicks));
+			Assert.That(restored.ProductionBuildings, Is.EqualTo(original.ProductionBuildings));
+
+			var previousDeaths = restored.PreviousDeathsCost;
+			var previousKills = restored.PreviousKillsCost;
+			var initialized = restored.CostCountersInitialized;
+			Assert.That(MasterAiBotModule.CostDeltas(5600, 2250,
+				ref previousDeaths, ref previousKills, ref initialized), Is.EqualTo((0, 0)));
+		}
+
+		[Test]
 		public void TargetScoreStaysBoundedForExtremeProfiles()
 		{
 			var info = new MasterAiBotModuleInfo();
@@ -241,26 +307,88 @@ namespace OpenRA.Mods.Cameo.Test
 		public void CandidatePersonalityRulesAreOrdered()
 		{
 			var info = new MasterAiBotModuleInfo();
+			var available = new[] { "rush", "turtle", "tech", "expansion", "steamroller" };
+			var availableWithGuerrilla = available.Append("guerrilla");
 			var target = new EnemyProfile { Alive = true, NearestCells = 10, ArmyValue = 1000 };
-			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Emergency, target, 0, new[] { target }, "", info), Is.EqualTo("turtle"));
+			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Emergency, target, 0, new[] { target }, "",
+				available, info), Is.EqualTo("turtle"));
 			target.DefenceCount = 6;
-			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 3000, new[] { target }, "", info), Is.EqualTo("steamroller"));
+			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 3000, new[] { target }, "",
+				available, info), Is.EqualTo("steamroller"));
 			target.DefenceCount = 0;
 			target.ExpansionClusters = 3;
-			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "", info), Is.EqualTo("guerrilla"));
-			target.ExpansionClusters = 0;
 			target.TechBuildings = 4;
-			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "", info), Is.EqualTo("tech"));
+			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "",
+				available, info), Is.EqualTo("tech"));
+			Assert.That(MasterAiBotModule.UnfilteredCandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "", info),
+				Is.EqualTo("guerrilla"));
+			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "",
+				availableWithGuerrilla, info), Is.EqualTo("guerrilla"));
 			target.TechBuildings = 0;
+			target.ExpansionClusters = 0;
 			target.ArmyValue = 1500;
 			target.DefenceCount = 2;
-			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "", info), Is.EqualTo("rush"));
+			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "",
+				available, info), Is.EqualTo("rush"));
 			target.ArmyValue = 5000;
 			target.DefenceCount = 5;
 			target.NearestCells = -1;
-			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "", info), Is.EqualTo("expansion"));
+			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "",
+				available, info), Is.EqualTo("expansion"));
 			target.NearestCells = 10;
-			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "turtle", info), Is.EqualTo("turtle"));
+			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "turtle",
+				available, info), Is.EqualTo("turtle"));
+			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "guerrilla",
+				available, info), Is.EqualTo(""));
+		}
+
+		[Test]
+		public void PersonalityControllerMapsKnownConditionsAndIgnoresUnknownNames()
+		{
+			var info = new BotPersonalityControllerInfo();
+			Assert.That(BotPersonalityController.PersonalityName("personality-rush", info.PersonalityPrefix), Is.EqualTo("rush"));
+			Assert.That(info.Conditions.Any(c => BotPersonalityController.PersonalityName(c, info.PersonalityPrefix) == "steamroller"), Is.True);
+			Assert.That(info.Conditions.Any(c => BotPersonalityController.PersonalityName(c, info.PersonalityPrefix) == "guerrilla"), Is.False);
+		}
+
+		[TestCase("rush", "turtle", 1000, 1000 + 2999, false, true, false)]
+		[TestCase("rush", "turtle", 1000, 1000 + 3000, false, true, true)]
+		[TestCase("rush", "turtle", 1000, 1000 + 1, true, true, true)]
+		[TestCase("rush", "turtle", 1000, 1000 + 3000, false, false, false)]
+		public void PersonalitySwitchPolicyRespectsHoldAndDifficulty(string current, string candidate, int lastSwitchTick,
+			int tick, bool emergencyTransition, bool allowSwitching, bool expected)
+		{
+			Assert.That(MasterAiBotModule.ShouldSwitchPersonality(current, candidate, lastSwitchTick, tick,
+				emergencyTransition, allowSwitching, new MasterAiBotModuleInfo()), Is.EqualTo(expected));
+		}
+
+		[Test]
+		public void EmergencyPersonalitySwitchLatchesPerEpisode()
+		{
+			var handled = false;
+			var switches = 0;
+			foreach (var urgency in new[] { BotUrgency.Emergency, BotUrgency.Emergency, BotUrgency.Emergency })
+				if (MasterAiBotModule.ShouldEvaluatePersonality(false, urgency, handled))
+				{
+					switches++;
+					handled = true;
+				}
+
+			Assert.That(switches, Is.EqualTo(1));
+			handled = false;
+			if (MasterAiBotModule.ShouldEvaluatePersonality(false, BotUrgency.Emergency, handled))
+				switches++;
+
+			Assert.That(switches, Is.EqualTo(2));
+			Assert.That(MasterAiBotModule.ShouldEvaluatePersonality(false, BotUrgency.Normal, handled), Is.False);
+			Assert.That(MasterAiBotModule.ShouldEvaluatePersonality(true, BotUrgency.Normal, handled), Is.True);
+		}
+
+		[Test]
+		public void RelativeInitialAttackDelayPreservesStartAndRemovesElapsedDelay()
+		{
+			Assert.That(SquadManagerBotModuleCA.RemainingInitialAttackDelay(12000, 0), Is.EqualTo(12000));
+			Assert.That(SquadManagerBotModuleCA.RemainingInitialAttackDelay(12000, 12001), Is.Zero);
 		}
 	}
 }

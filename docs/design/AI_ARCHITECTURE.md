@@ -409,9 +409,9 @@ existing condition consumers: SquadManagerBotModuleCA@<P>, ProvidesPrerequisite@
 ```
 
 This keeps every existing consumer unchanged, keeps the synced state machine tiny and
-deterministic, and makes each switch a replay-visible event. `GrantRandomCondition@personality`
-becomes the *initial* draw only, which also preserves current behaviour if the manager is absent
-or disabled.
+deterministic, and makes each switch a replay-visible event. `BotPersonalityController` owns
+the initial draw as well as later switches; when switching is disabled, the lower tiers preserve
+the fixed random personality.
 
 The observer notification in §19 fires per trait instance once, so it needs a small change to
 announce repeat switches; live players must still see nothing.
@@ -913,14 +913,13 @@ interpret that cache as synchronized world state or bypass it through a new prod
 
 **Loaded, observe-only:** `MasterAiBotModule` publishes the immutable local snapshot
 at the §10.5 cadence (emergency ~25, rebuild ~150, decisions ~1500 ticks).
-It has **no consumers and no hint reads**, queues no orders, makes no synced-state changes,
-and logs candidate personality and target values only. `ScoutBotModule` remains a later owner of explicitly
-allocated scouting tasks after contact memory and the visibility gate (§11.3), not a current
-capability. `BotPersonalityController` would be the synced `IResolveOrder` bridge: validate
-the token, ignore repeats, and manage its condition through replayed orders. It must solve
-initial-token ownership with `GrantRandomCondition` before switching ships; reading an unsynced
-personality field from simulation code is forbidden. The master module is loaded only for observation;
-no controller is implemented by this contract.
+It has **no consumers and no hint reads**, and logs candidate personality and target values only.
+On hard and above it issues `SetBotPersonality` at the decision cadence; the synced
+`BotPersonalityController` validates the order, ignores repeats, and owns the sole condition token.
+`ScoutBotModule` remains a later owner of explicitly allocated scouting tasks after contact memory
+and the visibility gate (§11.3), not a current capability. Reading an unsynced personality field
+from simulation code is forbidden. Lower tiers keep switching disabled through
+`AllowPersonalitySwitching: false`, preserving the fixed random personality fallback.
 
 ```text
 Current synced world / rule data
@@ -1004,9 +1003,10 @@ existing consumers, unchanged:
     ObserverConditionNotification@<p>           (observer-only switch announcement)
 ```
 
-`GrantRandomCondition@personality` (`ai.yaml:5-6`) stays as the **initial draw**. If the manager is
-absent, disabled, or difficulty-gated off, the bot behaves exactly as it does today — a random
-fixed personality — which is the degradation rule of 10.1 applied to the riskiest change here.
+The controller owns the initial draw as well as every later switch: deleting
+`GrantRandomCondition@personality` prevents an unrecoverable first token from surviving a switch.
+If switching is difficulty-gated off, the bot behaves exactly as it does today — a random fixed
+personality — which is the degradation rule of 10.1 applied to the riskiest change here.
 
 Two consequences to accept: every switch is a replay-visible order (good — it is auditable and it
 is how the observer indicator learns about it), and the switch costs one order per change, so the
@@ -1036,8 +1036,11 @@ allow it.
    nothing, and no module reads it yet. Logged per rebuild. This is intentionally pre-fog, and the
    score omits `w_hurt` until phase 4 adds pairwise attribution. The signal derivations can be
    validated against replays cheaply without touching gameplay.
-3. **`BotPersonalityController` + dynamic switching.** The first behaviour change. Difficulty-gated
-   so the lower tiers keep today's fixed personality.
+3. **`BotPersonalityController` + dynamic switching (implemented).** The first behaviour change.
+   Difficulty-gated so the lower tiers keep today's fixed personality.
+   The guerrilla rule is currently a computed-but-unavailable candidate: it remains in the
+   situation log's candidate field, while the active five-personality controller falls through
+   to the next grantable rule.
 4. **Main target selection**, consumed by the squad managers and support powers.
 5. **Counter demand and hints**, consumed by the unit builder, base builder and compositions
    (`ProvidesPrerequisite` tokens, zero C#).
@@ -1060,7 +1063,7 @@ the one that needs a tuning pass on everything before it.
 | Personality thrash | §4.5 hold time + momentum + slow cadence; and every switch costs an order (10.4) |
 | Desync from learning | §6.1 tiers; learned data is read at load or never touches synced state |
 | Learned weights overfitted to bot-vs-bot play | §8.4 distribution shift; priors stay small and are reviewed as balance data |
-| Losing today's behaviour on a bad phase | degradation rule in 10.1; `GrantRandomCondition` remains the fallback |
+| Losing today's behaviour on a bad phase | degradation rule in 10.1; `AllowPersonalitySwitching: false` remains the fallback |
 | Tuning invalidated by the fog switch | fog is phase 6, and phases 1-5 are labelled pre-fog rather than pretending otherwise |
 | Stale reference to a personality-gated module after a switch | §1.6; CN shipped this bug and documented it — every such reference is re-resolved whenever the cached instance is not enabled |
 | A borrowed detection threshold that never fires | §11.4; detection thresholds are fitted from phase-2 logs, only the hysteresis constants are imported |
