@@ -156,6 +156,17 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(MasterAiBotModule.ShouldEvaluateDecision(0, 1, info.DecisionInterval), Is.False);
 		}
 
+		[TestCase(true, false, true)]
+		[TestCase(true, true, false)]
+		[TestCase(false, false, false)]
+		public void MissingIncumbentBypassesTargetDecisionCadenceOnlyWhenOneWasSet(
+			bool hasIncumbent, bool incumbentAvailable, bool expected)
+		{
+			var info = new MasterAiBotModuleInfo();
+			Assert.That(MasterAiBotModule.ShouldEvaluateTargetDecision(
+				hasIncumbent, incumbentAvailable, 0, 1, info.DecisionInterval), Is.EqualTo(expected));
+		}
+
 		[Test]
 		public void TargetScoreStaysBoundedForExtremeProfiles()
 		{

@@ -172,23 +172,26 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			foreach (var profile in profiles.Values.Where(p => p.Alive))
 				profile.Score = TargetScore(profile, ownArmy, AlliedCommitments(profile.Player), econTotal, Info);
 
-			var decision = ShouldEvaluateDecision(lastDecisionTick, tick, Info.DecisionInterval);
+			var targetProfile = profiles.Values.FirstOrDefault(p => p.Player == incumbentTarget);
+			var decision = ShouldEvaluateTargetDecision(
+				incumbentTarget != null, targetProfile != null,
+				lastDecisionTick, tick, Info.DecisionInterval);
 			OpenRA.Player target = incumbentTarget;
 			if (decision)
 			{
 				var candidates = profiles.Values.Where(p => p.Alive && p.NearestCells >= 0).ToArray();
-				var incumbent = candidates.FirstOrDefault(p => p.Player == incumbentTarget);
-				var chosen = ChooseTarget(candidates, incumbent, incumbentSince, tick, Info);
+				var chosen = ChooseTarget(candidates, targetProfile, incumbentSince, tick, Info);
 				target = chosen?.Player;
+				targetProfile = chosen;
 				if (target != incumbentTarget)
 					incumbentSince = tick;
 				incumbentTarget = target;
-				incumbentPersonality = CandidatePersonality(urgency, target == null ? null : profiles[target], ownArmy,
+				incumbentPersonality = CandidatePersonality(urgency, targetProfile, ownArmy,
 					profiles.Values, incumbentPersonality, Info);
 				lastDecisionTick = tick;
 			}
 
-			var demand = BuildDemand(profiles.Values, target == null ? null : profiles[target], enemyArmy);
+			var demand = BuildDemand(profiles.Values, targetProfile, enemyArmy);
 			var situation = new BotSituation
 			{
 				Tick = tick,
@@ -377,6 +380,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		internal static bool ShouldEvaluateDecision(int lastDecisionTick, int tick, int decisionInterval)
 		{
 			return tick - lastDecisionTick >= Math.Max(1, decisionInterval);
+		}
+
+		internal static bool ShouldEvaluateTargetDecision(bool hasIncumbent, bool incumbentAvailable,
+			int lastDecisionTick, int tick, int decisionInterval)
+		{
+			return hasIncumbent && !incumbentAvailable ||
+				ShouldEvaluateDecision(lastDecisionTick, tick, decisionInterval);
 		}
 
 		int AlliedCommitments(OpenRA.Player enemy)
