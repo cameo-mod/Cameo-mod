@@ -422,15 +422,15 @@
 		Type: Nuke
 	NuclearFlashRenderer:
 	RotationPaletteEffect@water:
-		ExcludePalettes: effect, chrome, d2k, d2kunit, playerd2k, d2kcloak, deviatorgas, ra2, cnc, ra, player, terrain, staticterrain, volcanic, windows256, tscameo
+		ExcludePalettes: effect, chrome, d2k, d2kunit, playerd2k, d2kcloak, deviatorgas, ra2, cnc, ra, player, scrin, terrain, staticterrain, volcanic, windows256, tscameo
 		RotationBase: 32
 		ExcludeTilesets: RA_SNOW, RA_TEMPERAT, RA_DESERT, ARRAKIS, BARREN, TEMPERAT, SNOW, WINTER, DESERT, RA_PLAINS
 	RotationPaletteEffect@actorswater:
-		ExcludePalettes: effect, chrome, d2k, d2kunit, playerd2k, d2kcloak, deviatorgas, ra2, cnc, ra, player, terrain, staticterrain, volcanic, windows256, tscameo
+		ExcludePalettes: effect, chrome, d2k, d2kunit, playerd2k, d2kcloak, deviatorgas, ra2, cnc, ra, player, scrin, terrain, staticterrain, volcanic, windows256, tscameo
 		RotationBase: 32
 		ExcludeTilesets: ARRAKIS, BARREN
 	RotationPaletteEffect@rawater:
-		ExcludePalettes: effect, chrome, d2k, d2kunit, playerd2k, d2kcloak, deviatorgas, ra2, cnc, player, terrain, staticterrain, td_temperat, volcanic, windows256, tscameo
+		ExcludePalettes: effect, chrome, d2k, d2kunit, playerd2k, d2kcloak, deviatorgas, ra2, cnc, player, scrin, terrain, staticterrain, td_temperat, volcanic, windows256, tscameo
 		Tilesets: RA_SNOW, RA_TEMPERAT, BARREN, TEMPERAT, SNOW, WINTER, JUNGLE, RA_PLAINS, RA_INHOSP, CAMEO
 	PaletteFromPaletteWithAlpha@placelinesegment:
 		Name: placelinesegment

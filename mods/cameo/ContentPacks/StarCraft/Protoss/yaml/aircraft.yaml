@@ -500,6 +500,13 @@ protoss_corsair:
 
 protoss_carrier:
 	Inherits: ^AirProtoss
+	WithIdleOverlay@shield1:
+		Image: hexshield_directional_oval
+		Sequence: aircraft-colossal
+		StartSequence: aircraft-colossal
+	WithIdleOverlay@shield_damage:
+		Image: hexshield_directional_oval
+		Sequence: aircraft-colossal
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -563,6 +570,13 @@ protoss_carrier:
 
 protoss_starshipsovereign:
 	Inherits: ^AirProtoss
+	WithIdleOverlay@shield1:
+		Image: hexshield_directional_oval
+		Sequence: aircraft-colossal
+		StartSequence: aircraft-colossal
+	WithIdleOverlay@shield_damage:
+		Image: hexshield_directional_oval
+		Sequence: aircraft-colossal
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@Epic: ^EpicAirUnitTemplate
