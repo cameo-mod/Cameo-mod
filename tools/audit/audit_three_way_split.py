@@ -62,7 +62,7 @@ from miniyaml import Ruleset  # noqa: E402
 # 340 -> 339 on 2026-09-02: HydraSpit collapsed from four damage mains onto the new
 # ^Warhead_BulletChem_Light family (maintainer ruling; docs/design/W24_COLLAPSE_REVIEW.md
 # ┬º8). Structural consolidation, which is the only reason this number may move.
-RAW_SPLIT_BASELINE = 329  # 335 -> 329; the exemption was deleted 2026-09-06 so nothing is
+RAW_SPLIT_BASELINE = 322  # Merge-payload repairs; the exemption was deleted 2026-09-06 so nothing is
                           # subtracted. LOWER ONLY.
 REPORT = pathlib.Path(__file__).resolve().parents[2] / "docs/audit/latest/three_way_split.md"
 
@@ -189,8 +189,9 @@ def run(rs: Ruleset) -> int:
               "of raising RAW_SPLIT_BASELINE.")
     else:
         print("Lower `RAW_SPLIT_BASELINE` as weapons are collapsed; never raise it. "
-              "⚠ Cross-check `audit_weapon_shape` W5, which measures the same population "
-              "from the RESOLVED node rather than the source.")
+              "W5 also resolves inheritance, but includes zero/healing/ally-only flat nodes "
+              "and has narrower type/name rules. Use audit_weapon_shape.py --compare-split "
+              "for the exact set difference; neither count is subtracted or reclassified.")
     return 1 if over else 0
 
 

@@ -17,7 +17,7 @@ _none found_
 | Aircraft.TurnSpeed | japan_rocketangel_husk | 160 | 20 | 18.9 |
 | Aircraft.TurnSpeed | ra2rock.husk | 160 | 20 | 18.9 |
 | Aircraft.TurnSpeed | yrlunr.husk | 160 | 20 | 18.9 |
-| Aircraft.TurnSpeed | litt_husk.nax | 160 | 20 | 18.9 |
+| Aircraft.TurnSpeed | naxis_litt_husk | 160 | 20 | 18.9 |
 | Aircraft.TurnSpeed | cabal_overkillgunship_husk | 80 | 20 | 8.1 |
 | Aircraft.TurnSpeed | cabal_hunterdronecarrier_husk | 80 | 20 | 8.1 |
 | Aircraft.TurnSpeed | cabal_hunterdrone_husk | 80 | 20 | 8.1 |
@@ -80,8 +80,8 @@ _none found_
 | Health.HP | td_nod_templeofnod | 1000000 | 60000 | 15.9 |
 | Health.HP | japan_japaneseconstructionyard | 1000000 | 60000 | 15.9 |
 | Health.HP | japan_japaneseshrine | 1000000 | 60000 | 15.9 |
-| Health.HP | ra1_soviets_sovietconstructionyard | 1000000 | 60000 | 15.9 |
-| Health.HP | ra1_soviets_sovietmissilesilo | 1000000 | 60000 | 15.9 |
+| Health.HP | ra1_soviets_constructionyard | 1000000 | 60000 | 15.9 |
+| Health.HP | ra1_soviets_missilesilo | 1000000 | 60000 | 15.9 |
 | Health.HP | ra1_soviets_ironcurtain | 1000000 | 60000 | 15.9 |
 | Health.HP | ra1_soviets_monstertank | 1000000 | 60000 | 15.9 |
 | Health.HP | ra1_allies_alliedconstructionyard | 1000000 | 60000 | 15.9 |
@@ -90,8 +90,8 @@ _none found_
 | Health.HP | cabal_core | 1000000 | 60000 | 15.9 |
 | Health.HP | cabal_constructionyard | 1000000 | 60000 | 15.9 |
 | Health.HP | cabal_avatar | 1000000 | 60000 | 15.9 |
-| Mobile.TurnSpeed | hole_small.nax2 | 255 | 20 | 22.6 |
-| Mobile.TurnSpeed | hole.nax2 | 255 | 20 | 22.6 |
+| Mobile.TurnSpeed | schwarzermond_hole_small | 255 | 20 | 22.6 |
+| Mobile.TurnSpeed | schwarzermond_hole | 255 | 20 | 22.6 |
 | Mobile.TurnSpeed | SCSPIDERMINE | 200 | 20 | 17.3 |
 | Power.Amount | asianalliance_tankreactor | 2700 | -40 | 61.6 |
 | Power.Amount | wc2_humans_sunwell | 2500 | -40 | 57.1 |
@@ -138,7 +138,7 @@ _none found_
 | RevealsShroud.Range | td_gdi_skyshield | 13800 | 2048 | 10.3 |
 | RevealsShroud.Range | ts_nod_samsite | 13176 | 2048 | 9.8 |
 | RevealsShroud.Range | ra2_soviets_flakcannon | 12936 | 2048 | 9.6 |
-| RevealsShroud.Range | ra1_soviets_sovietsamsite | 12790 | 2048 | 9.4 |
+| RevealsShroud.Range | ra1_soviets_samsite | 12790 | 2048 | 9.4 |
 | RevealsShroud.Range | td_nod_samsite | 12588 | 2048 | 9.3 |
 | RevealsShroud.Range | ts_gdi_samtower | 12440 | 2048 | 9.1 |
 | RevealsShroud.Range | cabal_hunterdronecarrier | 12345 | 2048 | 9.0 |

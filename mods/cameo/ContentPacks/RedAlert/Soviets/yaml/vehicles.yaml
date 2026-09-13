@@ -11,12 +11,12 @@ ra1_soviets_v1rockettruck:
 	Valued:
 		Cost: 850
 	Tooltip:
-		Name: V1 Rocket Truck
+		Name: Katyusha
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ra1_soviets_sovietradardome, ~!ra1_soviets_doctrine_heavyarmordoctrine
+		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_radardome, ~!ra1_soviets_doctrine_heavyarmor
 		Queue: Vehicle, RAVehicle
 		Description: actor_v1truck.description
 	Mobile:
@@ -33,12 +33,12 @@ ra1_soviets_v1rockettruck:
 		#Offset: -128,0,128
 		RealignDelay: 0
 	Armament:
-		Weapon: v1rockets
+		Weapon: ra1_soviets_v1rockettruck_v1rockets
 		LocalOffset: -512,256,256, -512,128,256, -512,-128,256, -512,-256,256
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_soviets_upgrade_scorchedearth
 	Armament@Upgrade:
-		Weapon: v1rocketsThermobaric
+		Weapon: ra1_soviets_v1rockettruck_v1rocketsthermobaric
 		LocalOffset: -512,256,256, -512,128,256, -512,-128,256, -512,-256,256
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_upgrade_scorchedearth
@@ -64,10 +64,10 @@ ra1_soviets_v1rockettruck:
 		RequiresCondition: !ammo
 		Sequence: turret0
 	FireWarheadsOnDeath:
-		Weapon: v1rockets
+		Weapon: ra1_soviets_v1rockettruck_v1rockets
 		RequiresCondition: !ra1_soviets_upgrade_scorchedearth
 	FireWarheadsOnDeath@Upgrade:
-		Weapon: v1rocketsThermobaric
+		Weapon: ra1_soviets_v1rockettruck_v1rocketsthermobaric
 		RequiresCondition: ra1_soviets_upgrade_scorchedearth
 	ReloadAmmoPool:
 		Delay: 25
@@ -75,7 +75,7 @@ ra1_soviets_v1rockettruck:
 	Selectable:
 		DecorationBounds: 1280, 1280
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_infernodoctrine, ra1_soviets_doctrine_heavyarmordoctrine, ra1_soviets_doctrine_nuclearwardoctrine, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_scorchedearth
+		Upgrades: ra1_soviets_doctrine_inferno, ra1_soviets_doctrine_heavyarmor, ra1_soviets_doctrine_nuclearwar, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_scorchedearth
 
 ra1_soviets_grad:
 	Inherits: ^Tank
@@ -93,7 +93,7 @@ ra1_soviets_grad:
 		Name: Grad
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ra1_soviets_soviettechcenter, ~ra1_soviets_doctrine_heavyarmordoctrine
+		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_techcenter, ~ra1_soviets_doctrine_heavyarmor
 		Queue: Vehicle, RAVehicle
 		Description: actor_v2rl.description
 	Mobile:
@@ -109,12 +109,12 @@ ra1_soviets_grad:
 		TurnSpeed: 15
 		Offset: -600,0,200
 	Armament:
-		Weapon: GradRockets
+		Weapon: ra1_soviets_grad_rocket
 		LocalOffset: 400,300,50, 400,-75,0, 400,150,50, 400,-225,0, 400,225,50, 400,-150,0, 400,75,50, 400,-300,0
 		MuzzleSequence: muzzle
 		RequiresCondition: !(ra1_soviets_upgrade_thermobaricrockets || ra1_soviets_upgrade_scorchedearth)
 	Armament@Upgrade:
-		Weapon: GradHeavyRockets
+		Weapon: ra1_soviets_grad_rocket_heavy
 		LocalOffset: 400,300,50, 400,-75,0, 400,150,50, 400,-225,0, 400,225,50, 400,-150,0, 400,75,50, 400,-300,0
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_upgrade_thermobaricrockets || ra1_soviets_upgrade_scorchedearth
@@ -122,10 +122,10 @@ ra1_soviets_grad:
 	WithSpriteTurret:
 	WithMuzzleOverlay:
 	FireWarheadsOnDeath:
-		Weapon: GradRockets
+		Weapon: ra1_soviets_grad_rocket
 		RequiresCondition: !(ra1_soviets_upgrade_thermobaricrockets || ra1_soviets_upgrade_scorchedearth)
 	FireWarheadsOnDeath@Upgrade:
-		Weapon: GradHeavyRockets
+		Weapon: ra1_soviets_grad_rocket_heavy
 		RequiresCondition: ra1_soviets_upgrade_thermobaricrockets || ra1_soviets_upgrade_scorchedearth
 	RenderRangeCircle:
 	GrantConditionOnAttack:
@@ -145,7 +145,7 @@ ra1_soviets_grad:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_infernodoctrine, ra1_soviets_doctrine_heavyarmordoctrine, ra1_soviets_upgrade_thermobaricrockets, ra1_soviets_upgrade_scorchedearth, ra1_soviets_upgrade_stalinium
+		Upgrades: ra1_soviets_doctrine_inferno, ra1_soviets_doctrine_heavyarmor, ra1_soviets_upgrade_thermobaricrockets, ra1_soviets_upgrade_scorchedearth, ra1_soviets_upgrade_stalinium
 
 ra1_soviets_v2rocketlauncher:
 	Inherits: ^Vehicle
@@ -160,7 +160,7 @@ ra1_soviets_v2rocketlauncher:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ra1_soviets_soviettechcenter, ~!ra1_soviets_doctrine_nuclearwardoctrine
+		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_techcenter, ~!ra1_soviets_doctrine_nuclearwar
 		Description: actor_v2rl.description
 	Valued:
 		Cost: 1600
@@ -178,19 +178,19 @@ ra1_soviets_v2rocketlauncher:
 		Speed: 85
 		TurnSpeed: 34
 	Armament@PRIMARY:
-		Weapon: SCUD
+		Weapon: ra1_soviets_v2rocketlauncher_scud
 		ReloadingCondition: reloading
 		LocalOffset: -256,0,128
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_upgrade_teslarockets
 	Armament@HE:
-		Weapon: SCUDThermobaric
+		Weapon: ra1_soviets_v2rocketlauncher_scudthermobaric
 		ReloadingCondition: reloading
 		LocalOffset: -256,0,128
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_upgrade_thermobaricrockets
 	Armament@Tesla:
-		Weapon: SCUDTesla
+		Weapon: ra1_soviets_v2rocketlauncher_scudtesla
 		ReloadingCondition: reloading
 		LocalOffset: -256,0,128
 		MuzzleSequence: muzzle
@@ -205,13 +205,13 @@ ra1_soviets_v2rocketlauncher:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	FireWarheadsOnDeath:
-		Weapon: SCUD
+		Weapon: ra1_soviets_v2rocketlauncher_scud
 		RequiresCondition: !ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_upgrade_teslarockets
 	FireWarheadsOnDeath@HE:
-		Weapon: SCUDThermobaric
+		Weapon: ra1_soviets_v2rocketlauncher_scudthermobaric
 		RequiresCondition: ra1_soviets_upgrade_thermobaricrockets
 	FireWarheadsOnDeath@Tesla:
-		Weapon: SCUDTesla
+		Weapon: ra1_soviets_v2rocketlauncher_scudtesla
 		RequiresCondition: ra1_soviets_upgrade_teslarockets
 	Selectable:
 		DecorationBounds: 1280, 1280
@@ -220,7 +220,7 @@ ra1_soviets_v2rocketlauncher:
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_infernodoctrine, ra1_soviets_doctrine_heavyarmordoctrine, ra1_soviets_upgrade_teslarockets, ra1_soviets_upgrade_thermobaricrockets, ra1_soviets_upgrade_scorchedearth
+		Upgrades: ra1_soviets_doctrine_inferno, ra1_soviets_doctrine_heavyarmor, ra1_soviets_upgrade_teslarockets, ra1_soviets_upgrade_thermobaricrockets, ra1_soviets_upgrade_scorchedearth
 
 ra1_soviets_nuclearv2launcher:
 	Inherits: ^Vehicle
@@ -235,7 +235,7 @@ ra1_soviets_nuclearv2launcher:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ra1_soviets_soviettechcenter, ~ra1_soviets_doctrine_nuclearwardoctrine
+		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_techcenter, ~ra1_soviets_doctrine_nuclearwar
 		Description: actor_v2rl.description
 	Valued:
 		Cost: 2300
@@ -253,13 +253,13 @@ ra1_soviets_nuclearv2launcher:
 		Speed: 80
 		TurnSpeed: 32
 	Armament@PRIMARY:
-		Weapon: SCUDNUKE
+		Weapon: ra1_soviets_nuclearv2launcher_scudnuke
 		ReloadingCondition: reloading
 		LocalOffset: -512,0,128
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_soviets_upgrade_thermonuclearrockets
 	Armament@Upgrade:
-		Weapon: SCUDNUKEThermobaric
+		Weapon: ra1_soviets_nuclearv2launcher_scudnukethermobaric
 		ReloadingCondition: reloading
 		LocalOffset: -512,0,128
 		MuzzleSequence: muzzle
@@ -276,10 +276,10 @@ ra1_soviets_nuclearv2launcher:
 	SelectionDecorations:
 	WithMuzzleOverlay:
 	FireWarheadsOnDeath:
-		Weapon: SCUDNUKE
+		Weapon: ra1_soviets_nuclearv2launcher_scudnuke
 		RequiresCondition: !ra1_soviets_upgrade_thermonuclearrockets
 	FireWarheadsOnDeath@Upgrade:
-		Weapon: SCUDNUKEThermobaric
+		Weapon: ra1_soviets_nuclearv2launcher_scudnukethermobaric
 		RequiresCondition: ra1_soviets_upgrade_thermonuclearrockets
 	Selectable:
 		DecorationBounds: 1280, 1280
@@ -288,9 +288,9 @@ ra1_soviets_nuclearv2launcher:
 	-DamagedByTintedCells@rad:
 	-DamagedByTintedCells@genrad:
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_infernodoctrine, ra1_soviets_doctrine_nuclearwardoctrine, ra1_soviets_upgrade_thermonuclearrockets, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_scorchedearth
+		Upgrades: ra1_soviets_doctrine_inferno, ra1_soviets_doctrine_nuclearwar, ra1_soviets_upgrade_thermonuclearrockets, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_scorchedearth
 
-ra1_soviets_sovietheavytank:
+ra1_soviets_heavytank:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -303,7 +303,7 @@ ra1_soviets_sovietheavytank:
 	Inherits@UnstableIsotopesUpgradeRA1: ^UnstableIsotopesUpgradeRA1
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ~!ra1_soviets_upgrade_hammertankupgrade
+		Prerequisites: ~ra1_soviets_warfactory, ~!ra1_soviets_upgrade_hammertank
 		BuildPaletteOrder: 120
 		Description: actor_3tnk.description
 	Valued:
@@ -324,14 +324,14 @@ ra1_soviets_sovietheavytank:
 	Turreted:
 		TurnSpeed: 14
 	Armament:
-		Weapon: 105mm
+		Weapon: ra1_soviets_heavytank_105mm
 		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_soviets_upgrade_nucleartankshells
 	Armament@Upgrade:
-		Weapon: 105mmThermobaric
+		Weapon: ra1_soviets_heavytank_105mmthermobaric
 		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 768,85,90, 768,-85,90
@@ -340,7 +340,7 @@ ra1_soviets_sovietheavytank:
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithMuzzleSmoke:
-		Weapons: 105mm, 105mmThermobaric
+		Weapons: ra1_soviets_heavytank_105mm, ra1_soviets_heavytank_105mmthermobaric
 	WithSpriteTurret:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplode
@@ -352,9 +352,10 @@ ra1_soviets_sovietheavytank:
 	Voiced:
 		VoiceSet: RussianVehicleVoice
 	RenderSprites:
+		Image: ra1_soviets_sovietheavytank
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_heavyarmordoctrine, ra1_soviets_doctrine_nuclearwardoctrine, ra1_soviets_upgrade_autoloaders, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_nucleartankshells
+		Upgrades: ra1_soviets_doctrine_heavyarmor, ra1_soviets_doctrine_nuclearwar, ra1_soviets_upgrade_autoloaders, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_nucleartankshells
 
 ra1_soviets_hammertank:
 	Inherits: ^Tank
@@ -372,7 +373,7 @@ ra1_soviets_hammertank:
 	Inherits@UnstableIsotopesUpgradeRA1: ^UnstableIsotopesUpgradeRA1
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ~ra1_soviets_upgrade_hammertankupgrade, ~!ra1_soviets_upgrade_heavyteslatankupgrade, ~!ra1_soviets_upgrade_kotinnucleartankupgrade
+		Prerequisites: ~ra1_soviets_warfactory, ~ra1_soviets_upgrade_hammertank, ~!ra1_soviets_upgrade_heavyteslatank, ~!ra1_soviets_upgrade_kotinnucleartank
 		BuildPaletteOrder: 120
 		Description: actor_kotin.description
 	Valued:
@@ -393,14 +394,14 @@ ra1_soviets_hammertank:
 	Turreted:
 		TurnSpeed: 12
 	Armament:
-		Weapon: HammerTankCannon
+		Weapon: ra1_soviets_hammertank_cannon
 		Recoil: 75
 		RecoilRecovery: 25
 		LocalOffset: 1100,100,100, 1100,-100,100
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_soviets_upgrade_nucleartankshells
 	Armament@Upgrade:
-		Weapon: HammerTankCannonThermobaric
+		Weapon: ra1_soviets_hammertank_cannon_thermobaric
 		Recoil: 75
 		RecoilRecovery: 25
 		LocalOffset: 1100,100,100, 1100,-100,100
@@ -412,10 +413,10 @@ ra1_soviets_hammertank:
 		RecoilRecovery: 10
 		LocalOffset: 0,200,50
 		MuzzleSequence: muzzle
-		RequiresCondition: ra1_soviets_upgrade_shtoradefensesystemupgrade
-	GrantConditionOnPrerequisite@ra1_soviets_upgrade_shtoradefensesystemupgrade:
-		Condition: ra1_soviets_upgrade_shtoradefensesystemupgrade
-		Prerequisites: ra1_soviets_upgrade_shtoradefensesystemupgrade
+		RequiresCondition: ra1_soviets_upgrade_shtoradefensesystem
+	GrantConditionOnPrerequisite@ra1_soviets_upgrade_shtoradefensesystem:
+		Condition: ra1_soviets_upgrade_shtoradefensesystem
+		Prerequisites: ra1_soviets_upgrade_shtoradefensesystem
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -427,23 +428,24 @@ ra1_soviets_hammertank:
 	Voiced:
 		VoiceSet: RussianVehicleVoice
 	FireWarheadsOnDeath:
-		Weapon: HammerTankCannon
-		RequiresCondition: !ra1_soviets_doctrine_infernodoctrine
+		Weapon: ra1_soviets_hammertank_cannon
+		RequiresCondition: !ra1_soviets_doctrine_inferno
 	FireWarheadsOnDeath@Upgrade:
-		Weapon: HammerTankCannonThermobaric
-		RequiresCondition: ra1_soviets_doctrine_infernodoctrine
+		Weapon: ra1_soviets_hammertank_cannon_thermobaric
+		RequiresCondition: ra1_soviets_doctrine_inferno
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: ra1_soviets_upgrade_shtoradefensesystemupgrade, ra1_soviets_upgrade_autoloaders, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_nucleartankshells, ra1_soviets_upgrade_stalinium
+		Upgrades: ra1_soviets_upgrade_shtoradefensesystem, ra1_soviets_upgrade_autoloaders, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_nucleartankshells, ra1_soviets_upgrade_stalinium
 
 ra1_soviets_gorynychtank:
 	Inherits: ^Tank
+	Inherits@Template: ^LineBreakerTemplate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 190
-		Prerequisites: ~ra1_soviets_sovietwarfactory
+		Prerequisites: ~ra1_soviets_warfactory
 		Description: Heavy assault tank with multiple weapons.\n  Strong vs Vehicles, Infantry
 	Valued:
 		Cost: 1300
@@ -470,7 +472,7 @@ ra1_soviets_gorynychtank:
 		TurnSpeed: 14
 	WithSpriteTurret:
 	Armament:
-		Weapon: BigFlamer
+		Weapon: ra1_soviets_gorynychtank_bigflamer
 		LocalOffset: 512,128,42, 512,-128,42
 	AttackTurreted:
 	FireWarheadsOnDeath:
@@ -489,7 +491,7 @@ ra1_soviets_heavyteslatank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 170
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ~ra1_soviets_upgrade_heavyteslatankupgrade
+		Prerequisites: ~ra1_soviets_warfactory, ~ra1_soviets_upgrade_heavyteslatank
 		Description: actor_ttnk2.description
 	Valued:
 		Cost: 3500
@@ -513,13 +515,13 @@ ra1_soviets_heavyteslatank:
 		TurnSpeed: 12
 		Offset: -110,0,90
 	Armament:
-		Weapon: TTankZap2_EMP
+		Weapon: ra1_soviets_heavyteslatank_ttankzap2_emp
 		LocalOffset: 50,0,200
 		AmmoUsage: 8
 		PauseOnCondition: pdammo < 8
 		RequiresCondition: !ra1_soviets_upgrade_teslaarcing
 	Armament@Arcing:
-		Weapon: TTankZap2Arc_EMP
+		Weapon: ra1_soviets_heavyteslatank_ttankzap2arc_emp
 		LocalOffset: 50,0,200
 		AmmoUsage: 8
 		PauseOnCondition: pdammo < 8
@@ -572,7 +574,7 @@ ra1_soviets_heavyteslatank:
 	ProducibleWithLevel:
 		Prerequisites: vehicles.upgraded
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_teslaandexperimentaltechdoctrine, ra1_soviets_upgrade_teslaarcing, ra1_soviets_upgrade_stalinium
+		Upgrades: ra1_soviets_doctrine_teslaandexperimentaltech, ra1_soviets_upgrade_teslaarcing, ra1_soviets_upgrade_stalinium
 
 ra1_soviets_kotinnucleartank:
 	Inherits: ^Tank
@@ -588,7 +590,7 @@ ra1_soviets_kotinnucleartank:
 	Inherits@UnstableIsotopesUpgradeRA1: ^UnstableIsotopesUpgradeRA1
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ~ra1_soviets_upgrade_kotinnucleartankupgrade
+		Prerequisites: ~ra1_soviets_warfactory, ~ra1_soviets_upgrade_kotinnucleartank
 		BuildPaletteOrder: 120
 		Description: actor_kotin.description
 	Valued:
@@ -609,14 +611,14 @@ ra1_soviets_kotinnucleartank:
 	Turreted:
 		TurnSpeed: 13
 	Armament:
-		Weapon: KotinCannon
+		Weapon: ra1_soviets_kotinnucleartank_kotincannon
 		Recoil: 75
 		RecoilRecovery: 25
 		LocalOffset: 1100,100,200, 1100,-100,200
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_soviets_upgrade_nucleartankshells
 	Armament@Upgrade:
-		Weapon: KotinCannonNuclearShell
+		Weapon: ra1_soviets_kotinnucleartank_kotincannonnuclearshell
 		Recoil: 75
 		RecoilRecovery: 25
 		LocalOffset: 1100,100,200, 1100,-100,200
@@ -636,19 +638,19 @@ ra1_soviets_kotinnucleartank:
 	Voiced:
 		VoiceSet: RussianVehicleVoice
 	FireWarheadsOnDeath:
-		Weapon: KotinCannon
+		Weapon: ra1_soviets_kotinnucleartank_kotincannon
 		RequiresCondition: !ra1_soviets_upgrade_nucleartankshells
 	FireWarheadsOnDeath@Upgrade:
-		Weapon: KotinCannonNuclearShell
+		Weapon: ra1_soviets_kotinnucleartank_kotincannonnuclearshell
 		RequiresCondition: ra1_soviets_upgrade_nucleartankshells
 	SpeedMultiplier@ra1_soviets_upgrade_unstableisotopes:
 		Modifier: 140
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_nuclearwardoctrine, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_nucleartankshells, ra1_soviets_upgrade_stalinium
+		Upgrades: ra1_soviets_doctrine_nuclearwar, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_nucleartankshells, ra1_soviets_upgrade_stalinium
 
-ra1_soviets_sovietmammothtank:
+ra1_soviets_mammothtank:
 	Inherits: ^Tank
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -665,7 +667,7 @@ ra1_soviets_sovietmammothtank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 180
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ra1_soviets_soviettechcenter, ~!ra1_soviets_doctrine_heavyarmordoctrine
+		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_techcenter, ~!ra1_soviets_doctrine_heavyarmor
 		Description: actor_htnk.description
 	Valued:
 		Cost: 2000
@@ -687,7 +689,7 @@ ra1_soviets_sovietmammothtank:
 	Turreted:
 		TurnSpeed: 10
 	Armament@PRIMARY:
-		Weapon: ra120mm
+		Weapon: ra1_soviets_mammothtank_ra120mm
 		LocalOffset: 900,180,340, 900,-180,340
 		Recoil: 88
 		RecoilRecovery: 30
@@ -701,7 +703,7 @@ ra1_soviets_sovietmammothtank:
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_soviets_upgrade_nucleartankshells && ra1_soviets_promotion_mammothtanktargetingcomputer
 	Armament@Upgrade:
-		Weapon: ra120mmThermobaric
+		Weapon: ra1_soviets_mammothtank_ra120mmthermobaric
 		LocalOffset: 900,180,340, 900,-180,340
 		Recoil: 88
 		RecoilRecovery: 30
@@ -716,7 +718,7 @@ ra1_soviets_sovietmammothtank:
 		RequiresCondition: ra1_soviets_upgrade_nucleartankshells && ra1_soviets_promotion_mammothtanktargetingcomputer
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: MammothTusk
+		Weapon: ra1_soviets_mammothtank_mammothtusk
 		LocalOffset: -85,384,340, -85,-384,340
 		LocalYaw: -50,50
 		Recoil: 25
@@ -734,7 +736,7 @@ ra1_soviets_sovietmammothtank:
 		RequiresCondition: !ra1_soviets_upgrade_teslarockets && !ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_mammothtanktargetingcomputer
 	Armament@TeslaSECONDARY:
 		Name: secondary
-		Weapon: MammothTuskTesla
+		Weapon: ra1_soviets_mammothtank_mammothtusktesla
 		LocalOffset: -85,384,340, -85,-384,340
 		LocalYaw: -50,50
 		Recoil: 25
@@ -752,7 +754,7 @@ ra1_soviets_sovietmammothtank:
 		RequiresCondition: ra1_soviets_upgrade_teslarockets && ra1_soviets_promotion_mammothtanktargetingcomputer
 	Armament@NukeSECONDARY:
 		Name: secondary
-		Weapon: MammothTuskThermobaric
+		Weapon: ra1_soviets_mammothtank_mammothtuskthermobaric
 		LocalOffset: -85,384,340, -85,-384,340
 		LocalYaw: -50,50
 		Recoil: 25
@@ -784,6 +786,7 @@ ra1_soviets_sovietmammothtank:
 	Voiced:
 		VoiceSet: RussianVehicleVoice
 	RenderSprites:
+		Image: ra1_soviets_sovietmammothtank
 		PlayerPalette: raplayer
 	ActorStatValues:
 		Upgrades: ra1_soviets_promotion_mammothtanktargetingcomputer, ra1_soviets_upgrade_teslarockets, ra1_soviets_upgrade_thermonuclearrockets, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_nucleartankshells
@@ -802,7 +805,7 @@ ra1_soviets_siegemammothtank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 180
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ra1_soviets_soviettechcenter, ~ra1_soviets_doctrine_heavyarmordoctrine
+		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_techcenter, ~ra1_soviets_doctrine_heavyarmor
 		Description: actor_htnk.description
 	Valued:
 		Cost: 4000
@@ -825,7 +828,7 @@ ra1_soviets_siegemammothtank:
 	Turreted:
 		TurnSpeed: 9
 	Armament@PRIMARY:
-		Weapon: ra120mm2
+		Weapon: ra1_soviets_siegemammothtank_ra120mm2
 		LocalOffset: 960,144,272, 960,-144,272
 		Recoil: 70
 		RecoilRecovery: 30
@@ -833,7 +836,7 @@ ra1_soviets_siegemammothtank:
 		PauseOnCondition: ammo < 2
 		RequiresCondition: !ra1_soviets_upgrade_nucleartankshells && !ra1_soviets_promotion_mammothtanktargetingcomputer
 	Armament@PRIMARYTargetingComputer:
-		Weapon: ra120mm2TargetingComputer
+		Weapon: ra1_soviets_siegemammothtank_ra120mm2targetingcomputer
 		LocalOffset: 960,144,272, 960,-144,272
 		Recoil: 70
 		RecoilRecovery: 30
@@ -841,7 +844,7 @@ ra1_soviets_siegemammothtank:
 		PauseOnCondition: ammo < 2
 		RequiresCondition: !ra1_soviets_upgrade_nucleartankshells && ra1_soviets_promotion_mammothtanktargetingcomputer
 	Armament@Upgrade:
-		Weapon: ra120mm2Thermobaric
+		Weapon: ra1_soviets_siegemammothtank_ra120mm2thermobaric
 		LocalOffset: 960,144,272, 960,-144,272
 		Recoil: 70
 		RecoilRecovery: 30
@@ -849,7 +852,7 @@ ra1_soviets_siegemammothtank:
 		PauseOnCondition: ammo < 2
 		RequiresCondition: ra1_soviets_upgrade_nucleartankshells && !ra1_soviets_promotion_mammothtanktargetingcomputer
 	Armament@UpgradeTargetingComputer:
-		Weapon: ra120mm2ThermobaricTargetingComputer
+		Weapon: ra1_soviets_siegemammothtank_ra120mm2thermobarictargetingcomputer
 		LocalOffset: 960,144,272, 960,-144,272
 		Recoil: 70
 		RecoilRecovery: 30
@@ -858,7 +861,7 @@ ra1_soviets_siegemammothtank:
 		RequiresCondition: ra1_soviets_upgrade_nucleartankshells && ra1_soviets_promotion_mammothtanktargetingcomputer
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: MammothTusk2
+		Weapon: ra1_soviets_siegemammothtank_mammothtusk2
 		LocalOffset: -68,307,272, -68,-307,272
 		LocalYaw: -50,50
 		Recoil: 20
@@ -868,7 +871,7 @@ ra1_soviets_siegemammothtank:
 		RequiresCondition: !ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_promotion_mammothtanktargetingcomputer
 	Armament@SECONDARYTargetingComputer:
 		Name: secondary
-		Weapon: MammothTusk2TargetingComputer
+		Weapon: ra1_soviets_siegemammothtank_mammothtusk2targetingcomputer
 		LocalOffset: -68,307,272, -68,-307,272
 		LocalYaw: -50,50
 		Recoil: 20
@@ -878,7 +881,7 @@ ra1_soviets_siegemammothtank:
 		RequiresCondition: !ra1_soviets_upgrade_thermobaricrockets && ra1_soviets_promotion_mammothtanktargetingcomputer
 	Armament@UpgradeSECONDARY:
 		Name: secondary
-		Weapon: MammothTusk2Thermobaric
+		Weapon: ra1_soviets_siegemammothtank_mammothtusk2thermobaric
 		LocalOffset: -68,307,272, -68,-307,272
 		LocalYaw: -50,50
 		Recoil: 20
@@ -888,7 +891,7 @@ ra1_soviets_siegemammothtank:
 		RequiresCondition: ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_promotion_mammothtanktargetingcomputer
 	Armament@UpgradeSECONDARYTargetingComputer:
 		Name: secondary
-		Weapon: MammothTusk2ThermobaricTargetingComputer
+		Weapon: ra1_soviets_siegemammothtank_mammothtusk2thermobarictargetingcomputer
 		LocalOffset: -68,307,272, -68,-307,272
 		LocalYaw: -50,50
 		Recoil: 20
@@ -929,26 +932,26 @@ ra1_soviets_siegemammothtank:
 	ActorStatValues:
 		Upgrades: ra1_soviets_promotion_mammothtanktargetingcomputer, ra1_soviets_upgrade_autoloaders, ra1_soviets_upgrade_thermobaricrockets, ra1_soviets_upgrade_nucleartankshells, ra1_soviets_upgrade_stalinium
 
-ra1_soviets_sovietoretruck:
+ra1_soviets_oretruck:
 	Inherits: ^RAHARV
 	Inherits@HeavyArmorDoctrineRA1: ^HeavyArmorDoctrineRA1
 	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
 	Tooltip:
 		Name: Soviet Ore Truck
 	Buildable:
-		Prerequisites: ~ra1_soviets_sovietorerefinery, ~!ra1_soviets_doctrine_industrialefficiencydoctrine
+		Prerequisites: ~ra1_soviets_orerefinery, ~!ra1_soviets_doctrine_industrialefficiency
 		Description: Harvests ore for processing.\n  Unarmed
 	Voiced:
 		VoiceSet: RussianVehicleVoice
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_industrialefficiencydoctrine, ra1_soviets_doctrine_heavyarmordoctrine, ra1_soviets_upgrade_wareconomy, ra1_soviets_upgrade_stalinium
+		Upgrades: ra1_soviets_doctrine_industrialefficiency, ra1_soviets_doctrine_heavyarmor, ra1_soviets_upgrade_wareconomy, ra1_soviets_upgrade_stalinium
 
-ra1_soviets_sovietheavyindustrialminer:
-	Inherits: ra1_soviets_sovietoretruck
+ra1_soviets_heavyindustrialminer:
+	Inherits: ra1_soviets_oretruck
 	Tooltip:
 		Name: Soviet Heavy Industrial Miner
 	Buildable:
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ~ra1_soviets_sovietorerefinery, ~ra1_soviets_doctrine_industrialefficiencydoctrine
+		Prerequisites: ~ra1_soviets_warfactory, ~ra1_soviets_orerefinery, ~ra1_soviets_doctrine_industrialefficiency
 		Description: Soviet Heavy Industrial Miner
 	Valued:
 		Cost: 1200
@@ -975,21 +978,21 @@ ra1_soviets_sovietheavyindustrialminer:
 		Image: ra1_soviets_sovietheavyindustrialminer
 		PlayerPalette: player_rgba
 
-ra1_soviets_sovietmobileconstructionvehicle:
+ra1_soviets_mobileconstructionvehicle:
 	Inherits: ^RAMCV
 	Inherits@HeavyArmorDoctrineRA1: ^HeavyArmorDoctrineRA1
 	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
 	Tooltip:
 		Name: Soviet Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ra1_soviets_sovietservicedepot
+		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_servicedepot
 		Description: Deploys into a Construction Yard.\n  Unarmed
 	Transforms:
-		IntoActor: ra1_soviets_sovietconstructionyard
+		IntoActor: ra1_soviets_constructionyard
 	Voiced:
 		VoiceSet: RussianVehicleVoice
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_heavyarmordoctrine, ra1_soviets_upgrade_stalinium
+		Upgrades: ra1_soviets_doctrine_heavyarmor, ra1_soviets_upgrade_stalinium
 
 ra1_soviets_teslatank:
 	Inherits: ^Tank
@@ -1010,7 +1013,7 @@ ra1_soviets_teslatank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 170
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ra1_soviets_sovietradardome
+		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_radardome
 		Description: actor_ttnk.description
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -1024,15 +1027,15 @@ ra1_soviets_teslatank:
 		Speed: 80
 		TurnSpeed: 16
 	Armament:
-		Weapon: TTankZap
+		Weapon: ra1_soviets_teslatank_ttankzap
 		LocalOffset: 0,0,213
-		RequiresCondition: !ra1_soviets_doctrine_teslaandexperimentaltechdoctrine && !ra1_soviets_upgrade_teslaarcing
+		RequiresCondition: !ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@Upgrade1:
-		Weapon: TTankZap_EMP
+		Weapon: ra1_soviets_teslatank_ttankzap_emp
 		LocalOffset: 0,0,213
-		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltechdoctrine && !ra1_soviets_upgrade_teslaarcing
+		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@Upgrade2:
-		Weapon: TTankZapArc_EMP
+		Weapon: ra1_soviets_teslatank_ttankzaparc_emp
 		LocalOffset: 0,0,213
 		RequiresCondition: ra1_soviets_upgrade_teslaarcing
 	AttackFrontal:
@@ -1050,7 +1053,7 @@ ra1_soviets_teslatank:
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_teslaandexperimentaltechdoctrine, ra1_soviets_doctrine_heavyarmordoctrine, ra1_soviets_doctrine_nuclearwardoctrine, ra1_soviets_upgrade_teslaarcing, ra1_soviets_upgrade_unstableisotopes
+		Upgrades: ra1_soviets_doctrine_teslaandexperimentaltech, ra1_soviets_doctrine_heavyarmor, ra1_soviets_doctrine_nuclearwar, ra1_soviets_upgrade_teslaarcing, ra1_soviets_upgrade_unstableisotopes
 
 ra1_soviets_heatraytank:
 	Inherits: ^Tank
@@ -1073,7 +1076,7 @@ ra1_soviets_heatraytank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 170
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ra1_soviets_upgrade_heatraytank
+		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_upgrade_heatraytank
 		Description: actor_ttnk.description
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -1087,19 +1090,19 @@ ra1_soviets_heatraytank:
 		Speed: 60
 		TurnSpeed: 12
 	Armament@1:
-		Weapon: HeatRayBeam1
+		Weapon: ra1_soviets_heatraytank_heatray1
 		LocalOffset: 400,-150,200, 400,50,300, 400,-50,150, 400,150,250, 400,-75,150, 400,225,250, 400,-225,200, 400,75,300, 400,-100,250, 400,100,200, 400,-200,300, 400,200,150, 400,-175,300, 400,175,150, 400,-125,250, 400,125,200
 	Armament@2:
-		Weapon: HeatRayBeam2
+		Weapon: ra1_soviets_heatraytank_heatray2
 		LocalOffset: 400,100,250, 400,-100,200, 400,200,300, 400,-200,150, 400,175,300, 400,-175,150, 400,125,250, 400,-125,200, 400,75,150, 400,-225,250, 400,225,200, 400,-75,300, 400,150,200, 400,-50,300, 400,50,150, 400,-150,250
 	Armament@3:
-		Weapon: HeatRayBeam3
+		Weapon: ra1_soviets_heatraytank_heatray3
 		LocalOffset: 400,-75,150, 400,225,250, 400,-225,200, 400,75,300, 400,-150,200, 400,50,300, 400,-50,150, 400,150,250, 400,-175,300, 400,175,150, 400,-125,250, 400,125,200, 400,-100,250, 400,100,200, 400,-200,300, 400,200,150
 	Armament@4:
-		Weapon: HeatRayBeam4
+		Weapon: ra1_soviets_heatraytank_heatray4
 		LocalOffset: 400,175,300, 400,-175,150, 400,125,250, 400,-125,200, 400,100,250, 400,-100,200, 400,200,300, 400,-200,150, 400,150,200, 400,-50,300, 400,50,150, 400,-150,250, 400,75,150, 400,-225,250, 400,225,200, 400,-75,300
-	FirepowerMultiplier@MultiWeapon:
-		Modifier: 25
+	# FirepowerMultiplier@MultiWeapon:
+		# Modifier: 25
 	AttackFrontal:
 		FacingTolerance: 0
 	Turreted:
@@ -1113,7 +1116,7 @@ ra1_soviets_heatraytank:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_infernodoctrine, ra1_soviets_doctrine_heavyarmordoctrine, ra1_soviets_doctrine_nuclearwardoctrine, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_scorchedearth
+		Upgrades: ra1_soviets_doctrine_inferno, ra1_soviets_doctrine_heavyarmor, ra1_soviets_doctrine_nuclearwar, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_scorchedearth
 
 ra1_soviets_flaktruck:
 	Inherits: ^Vehicle
@@ -1133,7 +1136,7 @@ ra1_soviets_flaktruck:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 60
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ~!ra1_soviets_doctrine_conscriptiondoctrine
+		Prerequisites: ~ra1_soviets_warfactory, ~!ra1_soviets_doctrine_conscription
 		Description: actor_ftrk.description
 	Valued:
 		Cost: 800
@@ -1155,12 +1158,12 @@ ra1_soviets_flaktruck:
 		TurnSpeed: 24
 		Offset: -298,0,298
 	Armament@AA:
-		Weapon: FLAK-23-AA
+		Weapon: ra1_soviets_flaktruck_flak_cannon_AA
 		Recoil: 43
 		LocalOffset: 512,0,192
 		MuzzleSequence: muzzle
 	Armament@AG:
-		Weapon: FLAK-23-AG
+		Weapon: ra1_soviets_flaktruck_flak_cannon
 		Recoil: 43
 		LocalOffset: 512,0,192
 		MuzzleSequence: muzzle
@@ -1170,7 +1173,7 @@ ra1_soviets_flaktruck:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 4
-		InitialUnits: ra1_soviets_rifleinfantry, ra1_soviets_sovietgrenadier, ra1_soviets_sovietrocketsoldier, ra1_soviets_sovietflamethrower
+		InitialUnits: ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower
 	SelectionDecorations:
 	Selectable:
 		Class: ra1_soviets_flaktruck
@@ -1183,11 +1186,11 @@ ra1_soviets_flaktruck:
 		Image: ra1_soviets_flaktruck
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_heavyarmordoctrine, ra1_soviets_doctrine_nuclearwardoctrine, ra1_soviets_upgrade_autoloaders, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_stalinium
+		Upgrades: ra1_soviets_doctrine_heavyarmor, ra1_soviets_doctrine_nuclearwar, ra1_soviets_upgrade_autoloaders, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_stalinium
 
 ra1_soviets_btr80:
 	Inherits: ^Tank
-	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@Template: ^ArmedTroopTransportTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
@@ -1206,10 +1209,10 @@ ra1_soviets_btr80:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 120
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ~ra1_soviets_doctrine_conscriptiondoctrine
+		Prerequisites: ~ra1_soviets_warfactory, ~ra1_soviets_doctrine_conscription
 		Description: actor_btr.description
 	Valued:
-		Cost: 1600
+		Cost: 1620
 	Tooltip:
 		Name: BTR-80
 		RequiresCondition: !ra1_soviets_promotion_gatlingtank
@@ -1233,47 +1236,47 @@ ra1_soviets_btr80:
 		TurnSpeed: 18
 	AttackTurreted:
 	Armament:
-		Weapon: BTRMachineGun
+		Weapon: ra1_soviets_btr80_machinegun
 		Recoil: 43
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
 	Armament@AA:
-		Weapon: BTRMachineGun_AA
+		Weapon: ra1_soviets_btr80_machinegun_AA
 		Recoil: 43
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
 	Armament@TeslaUpgrade1:
-		Weapon: BTRTeslaMachineGun
+		Weapon: ra1_soviets_btr80_machinegun_tesla
 		Recoil: 43
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
-		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltechdoctrine && !ra1_soviets_upgrade_teslaarcing
+		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@TeslaUpgrade2:
-		Weapon: BTRTeslaMachineGunArc
+		Weapon: ra1_soviets_btr80_machinegun_tesla_arc
 		Recoil: 43
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_upgrade_teslaarcing
 	Armament@TeslaUpgrade1AA:
-		Weapon: BTRTeslaMachineGun_AA
+		Weapon: ra1_soviets_btr80_machinegun_tesla_AA
 		Recoil: 43
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
-		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltechdoctrine && !ra1_soviets_upgrade_teslaarcing
+		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@TeslaUpgrade2AA:
-		Weapon: BTRTeslaMachineGunArc_AA
+		Weapon: ra1_soviets_btr80_machinegun_tesla_arc_AA
 		Recoil: 43
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_upgrade_teslaarcing
 	ReloadDelayMultiplier@Gatling:
 		Modifier: 200
-		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltechdoctrine
+		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltech
 	WithMuzzleOverlay:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 7
-		InitialUnits: ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_sovietgrenadier, ra1_soviets_molotovconscript, ra1_soviets_sovietrocketsoldier, ra1_soviets_dragunovantimaterialsniper, ra1_soviets_sovietflamethrower
+		InitialUnits: ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra1_soviets_molotovconscript, ra1_soviets_rocketsoldier, ra1_soviets_dragunovantimaterialsniper, ra1_soviets_flamethrower
 	RenderSprites:
 		Image: ra1_soviets_btr80
 	Voiced:
@@ -1313,7 +1316,7 @@ ra1_soviets_btr80:
 		Condition: ra1_soviets_promotion_gatlingtank
 		Prerequisites: ra1_soviets_promotion_gatlingtank
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_conscriptiondoctrine, ra1_soviets_doctrine_teslaandexperimentaltechdoctrine, ra1_soviets_doctrine_heavyarmordoctrine, ra1_soviets_doctrine_nuclearwardoctrine, ra1_soviets_promotion_gatlingtank, ra1_soviets_upgrade_teslaarcing, ra1_soviets_upgrade_autoloaders, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_stalinium
+		Upgrades: ra1_soviets_doctrine_conscription, ra1_soviets_doctrine_teslaandexperimentaltech, ra1_soviets_doctrine_heavyarmor, ra1_soviets_doctrine_nuclearwar, ra1_soviets_promotion_gatlingtank, ra1_soviets_upgrade_teslaarcing, ra1_soviets_upgrade_autoloaders, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_stalinium
 
 ra1_soviets_nukedemotruck:
 	Inherits: ^Vehicle
@@ -1330,7 +1333,7 @@ ra1_soviets_nukedemotruck:
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		BuildPaletteOrder: 160
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ra1_soviets_soviettechcenter
+		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_techcenter
 		Description: actor_dtrk.description
 	Valued:
 		Cost: 1500
@@ -1372,7 +1375,7 @@ ra1_soviets_nukedemotruck:
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_infernodoctrine, ra1_soviets_doctrine_heavyarmordoctrine, ra1_soviets_doctrine_nuclearwardoctrine, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_scorchedearth
+		Upgrades: ra1_soviets_doctrine_inferno, ra1_soviets_doctrine_heavyarmor, ra1_soviets_doctrine_nuclearwar, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_scorchedearth
 
 ra1_soviets_madtank:
 	Inherits: ^Tank
@@ -1390,7 +1393,7 @@ ra1_soviets_madtank:
 		BuildLimit: 1
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 190
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ra1_soviets_soviettechcenter
+		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_techcenter
 		Description: actor_qtnk.description
 	Valued:
 		Cost: 3000
@@ -1430,7 +1433,7 @@ ra1_soviets_madtank:
 		ChargeDelay: 60
 		DetonationDelay: 40
 		DetonationSequence: piston
-		DetonationWeapon: MADTankDetonate
+		DetonationWeapon: ra1_soviets_madtank_madtankdetonate
 		FirstDetonationImmediate: true
 		ExclusiveDeploy: true
 		DeployType: Detonate
@@ -1448,14 +1451,14 @@ ra1_soviets_madtank:
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_infernodoctrine, ra1_soviets_doctrine_heavyarmordoctrine, ra1_soviets_doctrine_nuclearwardoctrine, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_scorchedearth
+		Upgrades: ra1_soviets_doctrine_inferno, ra1_soviets_doctrine_heavyarmor, ra1_soviets_doctrine_nuclearwar, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_scorchedearth
 
 ra1_soviets_stalinfist:
 	Inherits: ^RAMCV
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 190
-		Prerequisites: ~ra1_soviets_soviettechcenter
+		Prerequisites: ~ra1_soviets_techcenter
 		Description: Mobile command vehicle.\n  Strong vs Vehicles, Infantry
 		BuildLimit: 1
 	Valued:
@@ -1476,7 +1479,7 @@ ra1_soviets_stalinfist:
 		Bounds: 3072, 3072
 		DecorationBounds: 3072, 3072
 	Transforms:
-		IntoActor: ra1_soviets_sovietlargefactory
+		IntoActor: ra1_soviets_largefactory
 		Offset: -1,0
 		Facing: 0
 	Voiced:
@@ -1510,16 +1513,16 @@ ra1_soviets_gatlingtank:
 		Name: Gatling Tank
 	Valued:
 		Cost: 1100
-	ProductionCostMultiplier@ra1_soviets_doctrine_industrialefficiencydoctrine:
-		Prerequisites: ra1_soviets_doctrine_industrialefficiencydoctrine
+	ProductionCostMultiplier@ra1_soviets_doctrine_industrialefficiency:
+		Prerequisites: ra1_soviets_doctrine_industrialefficiency
 		Multiplier: 75
-	ProductionTimeMultiplier@ra1_soviets_doctrine_industrialefficiencydoctrine:
-		Prerequisites: ra1_soviets_doctrine_industrialefficiencydoctrine
+	ProductionTimeMultiplier@ra1_soviets_doctrine_industrialefficiency:
+		Prerequisites: ra1_soviets_doctrine_industrialefficiency
 		Multiplier: 75
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 60
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ~ra1_soviets_promotion_gatlingtank, ~!ra1_soviets_doctrine_conscriptiondoctrine
+		Prerequisites: ~ra1_soviets_warfactory, ~ra1_soviets_promotion_gatlingtank, ~!ra1_soviets_doctrine_conscription
 		Description: actor_gtnk.description
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -1536,56 +1539,56 @@ ra1_soviets_gatlingtank:
 		TurnSpeed: 15
 		Offset: -128,0,0
 	Armament@AG:
-		Weapon: RAGatlingTankCannon
+		Weapon: ra1_soviets_gatlingtank_ragatlingtankcannon
 		Recoil: 43
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@AA:
-		Weapon: RAGatlingTankCannon_AA
+		Weapon: ra1_soviets_gatlingtank_ragatlingtankcannon_AA
 		Recoil: 43
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@UpgradeAG:
-		Weapon: IncendiaryRAGatlingTankCannon
+		Weapon: ra1_soviets_gatlingtank_incendiaryragatlingtankcannon
 		Recoil: 43
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets
 	Armament@UpgradeAA:
-		Weapon: IncendiaryRAGatlingTankCannon_AA
+		Weapon: ra1_soviets_gatlingtank_incendiaryragatlingtankcannon_AA
 		Recoil: 43
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets
 	Armament@TeslaUpgrade1:
-		Weapon: TeslaRAGatlingTankCannon
+		Weapon: ra1_soviets_gatlingtank_teslaragatlingtankcannon
 		Recoil: 43
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
-		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltechdoctrine && !ra1_soviets_upgrade_teslaarcing
+		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@TeslaUpgrade2:
-		Weapon: TeslaRAGatlingTankCannonArc
+		Weapon: ra1_soviets_gatlingtank_teslaragatlingtankcannonarc
 		Recoil: 43
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_upgrade_teslaarcing
 	Armament@TeslaUpgrade1AA:
-		Weapon: TeslaRAGatlingTankCannon_AA
+		Weapon: ra1_soviets_gatlingtank_teslaragatlingtankcannon_AA
 		Recoil: 43
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
-		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltechdoctrine && !ra1_soviets_upgrade_teslaarcing
+		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@TeslaUpgrade2AA:
-		Weapon: TeslaRAGatlingTankCannonArc_AA
+		Weapon: ra1_soviets_gatlingtank_teslaragatlingtankcannonarc_AA
 		Recoil: 43
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_soviets_upgrade_teslaarcing
 	ReloadDelayMultiplier@Gatling:
 		Modifier: 200
-		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltechdoctrine
+		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltech
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -1636,7 +1639,7 @@ ra1_soviets_gatlingtank:
 	ReloadDelayMultiplier@ra1_soviets_upgrade_autoloaders:
 		Modifier: 80
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_industrialefficiencydoctrine, ra1_soviets_doctrine_teslaandexperimentaltechdoctrine, ra1_soviets_doctrine_heavyarmordoctrine, ra1_soviets_doctrine_nuclearwardoctrine, ra1_soviets_promotion_gatlingtank, ra1_soviets_upgrade_incendiarybullets, ra1_soviets_upgrade_teslaarcing, ra1_soviets_upgrade_autoloaders, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_stalinium
+		Upgrades: ra1_soviets_doctrine_industrialefficiency, ra1_soviets_doctrine_teslaandexperimentaltech, ra1_soviets_doctrine_heavyarmor, ra1_soviets_doctrine_nuclearwar, ra1_soviets_promotion_gatlingtank, ra1_soviets_upgrade_incendiarybullets, ra1_soviets_upgrade_teslaarcing, ra1_soviets_upgrade_autoloaders, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_stalinium
 
 ra1_soviets_monstertank:
 	Inherits: ^Tank
@@ -1672,7 +1675,7 @@ ra1_soviets_monstertank:
 	Buildable:
 		BuildLimit: 1
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~ra1_soviets_sovietwarfactory, ra1_soviets_soviettechcenter, ~ra1_soviets_promotion_monstertank
+		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_techcenter, ~ra1_soviets_promotion_monstertank
 		BuildPaletteOrder: 120
 		Description: actor_monstertank.description
 	Valued:
@@ -1694,25 +1697,25 @@ ra1_soviets_monstertank:
 	Turreted:
 		TurnSpeed: 9
 	Armament@PRIMARY:
-		Weapon: MonsterTank120mm
+		Weapon: ra1_soviets_monstertank_120mm_cannon
 		Recoil: 125
 		RecoilRecovery: 25
 		LocalOffset: 1600,350,350, 1600,-350,350
 		MuzzleSequence: muzzle
 		AmmoUsage: 8
 		PauseOnCondition: ammo < 8
-		RequiresCondition: !ra1_soviets_doctrine_infernodoctrine
+		RequiresCondition: !ra1_soviets_doctrine_inferno
 	Armament@Upgrade:
-		Weapon: MonsterTank120mmInferno
+		Weapon: ra1_soviets_monstertank_120mm_cannon_inferno
 		Recoil: 125
 		RecoilRecovery: 25
 		LocalOffset: 1600,350,350, 1600,-350,350
 		MuzzleSequence: muzzle
 		AmmoUsage: 8
 		PauseOnCondition: ammo < 8
-		RequiresCondition: ra1_soviets_doctrine_infernodoctrine
+		RequiresCondition: ra1_soviets_doctrine_inferno
 	Armament@SECONDARY:
-		Weapon: MonsterTankTusk
+		Weapon: ra1_soviets_monstertank_missile
 		Recoil: 50
 		RecoilRecovery: 25
 		LocalOffset: -400,-500,300, -400,500,300
@@ -1720,7 +1723,7 @@ ra1_soviets_monstertank:
 		PauseOnCondition: ammo < 8
 		RequiresCondition: !ra1_soviets_upgrade_teslarockets && !ra1_soviets_upgrade_thermonuclearrockets
 	Armament@TeslaSECONDARY:
-		Weapon: MonsterTankTuskTesla
+		Weapon: ra1_soviets_monstertank_missile_tesla
 		Recoil: 50
 		RecoilRecovery: 25
 		LocalOffset: -400,-500,300, -400,500,300
@@ -1728,7 +1731,7 @@ ra1_soviets_monstertank:
 		PauseOnCondition: ammo < 8
 		RequiresCondition: ra1_soviets_upgrade_teslarockets
 	Armament@NukeSECONDARY:
-		Weapon: MonsterTankTuskThermobaric
+		Weapon: ra1_soviets_monstertank_missile_thermobaric
 		Recoil: 50
 		RecoilRecovery: 25
 		LocalOffset: -400,-500,300, -400,500,300
@@ -1764,9 +1767,9 @@ ra1_soviets_monstertank:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_heavyarmordoctrine, ra1_soviets_doctrine_nuclearwardoctrine, ra1_soviets_doctrine_infernodoctrine, ra1_soviets_doctrine_teslaandexperimentaltechdoctrine, ra1_soviets_upgrade_autoloaders, ra1_soviets_upgrade_stalinium, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_nucleartankshells, ra1_soviets_upgrade_teslarockets, ra1_soviets_upgrade_thermonuclearrockets
-	FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets:
-		Modifier: 105
+		Upgrades: ra1_soviets_doctrine_heavyarmor, ra1_soviets_doctrine_nuclearwar, ra1_soviets_doctrine_inferno, ra1_soviets_doctrine_teslaandexperimentaltech, ra1_soviets_upgrade_autoloaders, ra1_soviets_upgrade_stalinium, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_nucleartankshells, ra1_soviets_upgrade_teslarockets, ra1_soviets_upgrade_thermonuclearrockets
+	# FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets:
+		# Modifier: 105
 	RangeMultiplier@ra1_soviets_upgrade_thermobaricrockets:
 		Modifier: 105
 	RevealsShroudMultiplier@ra1_soviets_upgrade_thermobaricrockets:

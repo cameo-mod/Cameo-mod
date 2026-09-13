@@ -1,2 +1,1 @@
-FAIL: directional nuclear-flash contract
-  - ra1_soviets_missilesilo: active NukePowerCA must launch RAAtomic through MissileWeapons
+PASS: RA1, Ixian, and CABAL launchers retain their active nuclear flashes

@@ -28,6 +28,45 @@
 #    how the `Shield = top + floor` duplication survived for weeks.
 
 claims:
+  - id: ai_contract_distinct_module_types
+    value: 21
+    tolerance: 0
+    what: Distinct active Player/World decision-module and coordination/provider types in AI_ARCHITECTURE section 10.2; conditional instances count as loaded, not enabled.
+    docs: [docs/design/AI_ARCHITECTURE.md]
+    measure: |
+      import sys, pathlib
+      sys.path.insert(0, 'tools/audit')
+      from miniyaml import Ruleset
+      rs = Ruleset(pathlib.Path('.').resolve())
+      included = lambda key: 'BotModule' in key.split('@')[0] or key.split('@')[0] in {'SupportPowerBotASModule', 'ExternalBotOrdersManager', 'BotLimits', 'BotGlobalUnitBudget'}
+      print(len({n.key.split('@')[0] for actor in ('player', 'world') for n in rs.resolve(actor).children if included(n.key)}))
+
+  - id: ai_contract_player_module_instances
+    value: 36
+    tolerance: 0
+    what: Active resolved Player instances in the section 10.2 module/provider scope, including all ten conditional BotLimits instances.
+    docs: [docs/design/AI_ARCHITECTURE.md]
+    measure: |
+      import sys, pathlib
+      sys.path.insert(0, 'tools/audit')
+      from miniyaml import Ruleset
+      rs = Ruleset(pathlib.Path('.').resolve())
+      included = lambda key: 'BotModule' in key.split('@')[0] or key.split('@')[0] in {'SupportPowerBotASModule', 'ExternalBotOrdersManager', 'BotLimits', 'BotGlobalUnitBudget'}
+      print(sum(included(n.key) for n in rs.resolve('player').children))
+
+  - id: ai_contract_world_module_instances
+    value: 1
+    tolerance: 0
+    what: Active resolved World instances in the same section 10.2 module/provider scope; currently the composition singleton.
+    docs: [docs/design/AI_ARCHITECTURE.md]
+    measure: |
+      import sys, pathlib
+      sys.path.insert(0, 'tools/audit')
+      from miniyaml import Ruleset
+      rs = Ruleset(pathlib.Path('.').resolve())
+      included = lambda key: 'BotModule' in key.split('@')[0] or key.split('@')[0] in {'SupportPowerBotASModule', 'ExternalBotOrdersManager', 'BotLimits', 'BotGlobalUnitBudget'}
+      print(sum(included(n.key) for n in rs.resolve('world').children))
+
   - id: shield_versus_mean
     value: 175.919
     tolerance: 0.01
@@ -158,7 +197,7 @@ claims:
       print(n)
 
   - id: multi_main_fired_weapons
-    value: 189
+    value: 120
     tolerance: 0
     what: >
       Direct actor-armament weapons carrying MORE THAN ONE damage main under the unified W24
@@ -175,12 +214,14 @@ claims:
       print(inventory(rs)['counts']['stacked_main_direct_actor_armament'])
 
   - id: percentage_denominator_unset
-    value: 183
+    value: 184
     tolerance: 0
     what: >
-      W18 has NOT landed. Any nonzero here means the basis-point rebase shipped and every
-      pct_absolute / dps_floor figure in the docs is stale. 2026-09-05: measured 183 after
-      origin/master merge 4fd9937f3 — W18 appears to have partially landed on master.
+      Raw authored PercentageDenominator occurrences in active weapon files, despite
+      the historical claim id: this is not an unset or resolved-application count.
+      The 2026-09-05 snapshot measured 183 after origin/master merge 4fd9937f3.
+      The 2026-09-10 Freedom elite explicit companion adds one occurrence, giving 184;
+      it preserves that route's units and does not introduce a global unit rebase.
     docs: [docs/design/ARMOR_LAYERS.md, docs/design/BALANCE_PROGRAM_PLAN.md]
     measure: |
       import pathlib, sys
@@ -219,12 +260,12 @@ claims:
       print(n)
 
   - id: meters_filling_before_death
-    value: 269
+    value: 310
     tolerance: 0
     what: >
       Weapon/meter bindings on FIRED weapons whose meter reaches FULL effect while the target
       still has 25% HP left — the maintainer's condition for pricing a meter at all ("it is
-      able to completely freeze a unit BEFORE it dies"). **269 bindings (2026-09-05).**
+      able to completely freeze a unit BEFORE it dies"). **310 bindings in the combined tree (2026-09-10), after excluding concrete/percentage/nonhealth damage from the nominal health denominator. 269 was the 2026-09-05 snapshot.**
       ⛔ THE EARLIER VALUES (1, 124, 223, 534) ARE ALL VOID, for TWO different reasons, and the
       second one is the important one.
       (a) ARITHMETIC. `PhysicalState.ApplyChange` health-scales through `ScaleChangeToHealth`,
@@ -287,7 +328,7 @@ claims:
                   break
       print(n)
   - id: w24_multi_main_fed
-    value: 429
+    value: 290
     tolerance: 0
     what: >
       RATCHET — damage-scaled metered weapons whose meter is fed by LESS than 100% of their
@@ -323,7 +364,7 @@ claims:
               n += 1
       print(n)
   - id: physical_state_fired_weapons
-    value: 534
+    value: 542
     tolerance: 0
     what: >
       FIRED weapons that deliver a PhysicalState meter (Temperature or Corrosion) and are priced
@@ -422,7 +463,7 @@ claims:
                 if isinstance(v, dict) and 'spec' in v and v.get('signed_off')))
 
   - id: warhead_family_reach
-    value: 1415
+    value: 1454
     tolerance: 0
     what: >
       Fired weapons whose inherit chain reaches a `^Warhead_*` family — the W23/W24 burn-up.
@@ -460,7 +501,7 @@ claims:
                 and any(a.startswith('^Warhead_') for a in ancestors(w))))
 
   - id: unconverted_template_inheritors
-    value: 1601
+    value: 1590
     tolerance: 0
     what: >
       Direct inheritors of the 47 remaining legacy weapon templates (W23's scope).
@@ -484,7 +525,13 @@ claims:
     docs: [docs/HANDOFF.md, docs/design/BALANCE_PIPELINE.md]
     measure: |
       import re, subprocess, sys
-      out = subprocess.run([sys.executable, 'tools/audit/audit_balance_drift.py'],
-                           capture_output=True, text=True).stdout
-      m = re.search(r'\*\*(\d+) ledger\(s\) drifted\*\*', out)
-      print(m.group(1) if m else 0)
+      result = subprocess.run([sys.executable, 'tools/audit/audit_balance_drift.py'],
+                              capture_output=True, text=True, timeout=540)
+      drift = re.findall(r'^\*\*(\d+) ledger\(s\) drifted\*\*', result.stdout, re.MULTILINE)
+      clean = re.findall(r'^_clean_ .* (\d+) ledgers match the live rules exactly\.$', result.stdout, re.MULTILINE)
+      if result.returncode == 0 and len(clean) == 1 and int(clean[0]) > 0 and not drift:
+          print(0)
+      elif result.returncode == 1 and len(drift) == 1 and int(drift[0]) > 0 and not clean:
+          print(int(drift[0]))
+      else:
+          raise SystemExit(f'balance drift measurement unavailable: unexpected output/exit {result.returncode}')

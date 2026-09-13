@@ -65,12 +65,21 @@ import argparse
 import collections
 import json
 import math
+import re
 import pathlib
 import statistics
 import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import reference_lineages  # noqa: E402  (the shared lineage rulings)
+import peer_corpus  # noqa: E402
+import peer_range_evidence  # noqa: E402
+import ini_weapon_selection  # noqa: E402
+import peer_nominal_evidence  # noqa: E402
+import peer_base_state  # noqa: E402
+import ini_range_evidence  # noqa: E402
+import formula  # noqa: E402  (the canonical built-state condition evaluator)
+import ini_cycle_evidence  # noqa: E402
 import synthesize_reference as syn  # noqa: E402  (parsers + roster loader are reused wholesale)
 
 ROOT = syn.ROOT
@@ -173,6 +182,14 @@ ELIGIBILITY = {
 
 def eligible(row, stat):
     """Does `row` belong in the population for `stat`? (see ELIGIBILITY)"""
+    if row.get('reference_base_eligible') is False:
+        return False
+    if stat == 'w_range' and 'w_range_usable' in row:
+        # Independent, exact-row range proof never certifies damage or cadence.
+        value = row.get(stat)
+        return (row['w_range_usable'] is True
+                and row.get('w_range_evidence') in (peer_range_evidence.VERDICT, peer_range_evidence.SELECTED_VERDICT, peer_nominal_evidence.RANGE_VERDICT, ini_range_evidence.VERDICT)
+                and type(value) in (int, float) and math.isfinite(value) and value > 0)
     rule = ELIGIBILITY.get(stat)
     if not rule:
         return row.get(stat) is not None
@@ -342,17 +359,194 @@ def _ini_armor_index():
     return out
 
 
+# ── THE CONSUMER-SIDE EVIDENCE POLICY (2026-09-09) ────────────────────────────────────────────
+# The extractor (`tools/reference/extract_ini_units.py`) declares, per weapon slot, whether the
+# plain Damage/ROF fold may be CONSUMED: `w_evidence`, `w_evidence_reason` and `w_dps_usable`
+# (explicit unsupported verdicts fail closed; unlabeled legacy data retains compatibility),
+# and the slot-prefixed twins (`w2_*` = secondary, `wdummy_*` = demoted primary) carry the same
+# identity/status pair for the row's OTHER weapon identities. Labels assert WHAT WAS ASSESSED,
+# never completeness:
+#
+# ⛔ THE CONSUMER BUG THIS POLICY FIXES: `ini_rows` and `peer_hero_rows` copied `w_dps` and the
+# armor-adjusted `dps_vs_*` while dropping `w_evidence` — so a weapon the extractor itself
+# declined to certify arrived downstream as an authoritative DPS target with the caveat
+# deleted. A ratio built from damage the direct-channel fold cannot read is exactly the class
+# of number this file's own header forbids.
+#
+# What each state does to the CONSUMER values (`w_dps`, `dps_vs_*`). It touches NOTHING else —
+# hp, speed, cost survive verbatim, the other weapon fields (`w_range`/`w_damage`/`w_burst`/
+# `w_reload`, which matching clause 5 uses to tell "armed" from "unarmed") survive too, and
+# ELIGIBILITY's `requires: w_dps` then naturally abstains the row from every weapon-layer
+# distribution while it keeps voting on the chassis:
+#   * MISSING/absent on a legacy row -> "legacy-unassessed": ABSENT STATUS IS LEGACY —
+#     the boolean behaviour of the committed corpus is retained verbatim (compatibility)
+#     and the label asserts nothing; it is NEVER certified complete;
+#   * the extractor's own verdicts, matched EXACTLY: `nominal_direct` (underscore — its
+#     declared contract: w_dps is the plain direct Damage/ROF estimate, never a proven
+#     total) and `supported`/`conventional` -> unchanged numeric behaviour, labelled with
+#     the verdict itself;
+#   * "incomplete"/"unverified" -> WITHHELD: the raw direct estimate moves to `w_dps_raw`
+#     (kept separately for inspection, voting nowhere) and `w_dps` plus every `dps_vs_*` is
+#     withheld;
+#   * an EXPLICIT `w_dps_usable: False` -> withheld as well, whatever the label says;
+#   * any OTHER explicit status -> withheld too, labelled AS ITSELF, UNNORMALIZED. The
+#     contract is exact-string: an arbitrary unknown status is never harmlessly normalised
+#     into a trusted one nor folded into another verdict — coordination is conservative in
+#     the direction of trust: an explicit verdict the consumer does not know
+#     is not proven evidence. `evidence_counts` reports the mix so a rename upstream cannot
+#     hide here silently.
+#
+# ⛔ THE SLOT PREFIX NEVER GATES THE PRIMARY. A `wdummy_evidence: incomplete` describes the
+# DEMOTED weapon, not the one voted on here — DTA's X-O Power Suit: the promoted machine gun
+# keeps its own evidence verdict, and no comment here calls the promoted result a complete
+# UNIT measurement, because Westwood Primary/Secondary is TARGET-SELECTED and the tie the
+# slots have to each other is unresolved at extraction. Each slot keeps its verdict; the
+# unit-level fold is a later layer's decision. Evidence and diagnostics are CARRIED, never
+# silently dropped.
+LEGACY_EVIDENCE = "legacy-unassessed"
+# ⛔ EXACT STRINGS — the extractor's FINAL vocabulary. `nominal_direct` is one token with an
+# UNDERSCORE; a near-miss spelling (`nominal-direct`, `Nominal_Direct`) is NOT this verdict
+# and is withheld, reported by `evidence_counts`, never silently normalised.
+SUPPORTED_EVIDENCE = frozenset(("supported", "conventional", "nominal_direct"))
+WITHHELD_EVIDENCE = frozenset(("incomplete", "unverified"))
+# Evidence and status fields, per SLOT; and the UNFOLDED raw channel/provenance diagnostics.
+# The extractor's `relabel_weapon` spells the slot twins `w2_*`/`wdummy_*` (prefix + k[2:] of
+# the `w_*` keys, except `weapon` -> `<prefix>weapon`); identity fields ride along with the
+# statuses. Nothing numeric travels under these keys.
+EVIDENCE_SLOT_FIELDS = ("evidence", "evidence_reason", "dps_usable", "channel_ambiguity",
+                        "weapon")
+EVIDENCE_CHANNEL_FIELDS = ("ambient_damage", "railgun", "fire_particles", "spark_particles",
+                           "particle_system", "attached_particle_system")
+EVIDENCE_PASSTHROUGH = (
+    "w_evidence", "w_evidence_reason", "w_dps_usable", "w_channel_ambiguity",
+    "w_from_secondary", "w_demoted_primary",
+    # legacy extractor spellings kept for older in-memory fixtures
+    "w_dummy_primary", "w_railgun_projectile",
+    *(f"w_{f}" for f in EVIDENCE_CHANNEL_FIELDS),
+    *(f"{p}{f}" for p in ("w2_", "wdummy_")
+      for f in EVIDENCE_SLOT_FIELDS + EVIDENCE_CHANNEL_FIELDS),
+)
+
+
+def evidence_status(wev):
+    """The consumer's evidence label for one row's PRIMARY weapon — EXACT, never normalised.
+
+    An absent/None status is legacy-unassessed: ABSENT STATUS IS LEGACY. The label asserts
+    nothing about what was measured and is NEVER certified complete. Any explicit verdict
+    travels through verbatim so near-miss spellings cannot smuggle themselves into a
+    trusted class.
+    """
+    if not wev:
+        return LEGACY_EVIDENCE
+    return wev
+
+
+def apply_weapon_evidence(row, rec):
+    """Stamp `row` with `rec`'s weapon evidence; return the CONSUMER-side w_dps.
+
+    SHARED by `ini_rows` and `peer_hero_rows` — one policy, not two copies that drift (three
+    drifted copies of LINEAGE_MEMBERS is already on record here). Slot identity/status ride
+    along; slot statuses never gate the primary. Returns the w_dps the row may vote with:
+    the raw value when the evidence is legacy/absent or explicitly supported AND
+    `w_dps_usable` is not an explicit False, None when withheld — in which case the raw
+    direct estimate is retained on `row["w_dps_raw"]`.
+    """
+    for key in EVIDENCE_PASSTHROUGH:
+        v = rec.get(key)
+        if v is not None:          # a False travels too
+            row[key] = v
+    status = evidence_status(rec.get("w_evidence"))
+    row["w_evidence"] = status
+    if rec.get("w_dps_usable") is False:
+        row["w_evidence_reason"] = (rec.get("w_evidence_reason")
+                                    or f"dps_unusable: {status}")
+    dps = row.get("w_dps")
+    if (status in WITHHELD_EVIDENCE
+            or (status != LEGACY_EVIDENCE and status not in SUPPORTED_EVIDENCE)
+            or rec.get("w_dps_usable") is False):
+        if dps is not None:
+            row["w_dps_raw"] = dps
+            row["w_dps"] = None
+        return None
+    return dps
+
+
+def evidence_counts(rows):
+    """Counter of evidence statuses over rows ALREADY IN MEMORY — no corpus re-read.
+
+    A row with no extracted evidence field (Doc 1 / Doc 5 hand-or-doc rows) counts as
+    legacy-unassessed, so the reporting is honest without an expensive all-corpus loop.
+    """
+    return collections.Counter(r.get("w_evidence") or LEGACY_EVIDENCE for r in rows)
+
+
+# ── DOC 5 EVIDENCE COLUMNS (2026-09-10) ───────────────────────────────────────────────────────
+# The Doc 5 emitter (`extract_peer_units.py`) appends `Evidence | Reason` to every table so the
+# OpenRA peers can carry the SAME verdict vocabulary the INI corpus does (`nominal_direct` /
+# `incomplete` + reason). The table parser lowercases header cells and strips backticks, so the
+# parsed row dict `d` keys are `evidence` / `reason` / `usable`; this mapper turns one row into
+# the canonical rec shape `apply_weapon_evidence` consumes. The policy, its exact-string
+# vocabulary and its fail-closed direction are defined THERE — no second copy lives here.
+#
+# The `—` cell is the emitter's empty convention (`str(value or "—")`), NOT a status: a
+# placeholder or blank cell maps to ABSENT, and absent is legacy-unassessed. A legacy table
+# predating the columns has no `evidence` key at all — same destination — so the committed
+# corpus keeps its numeric behaviour verbatim until it is regenerated.
+#
+# ⛔ `usable`, WHEN the column exists, is parsed STRICTLY: exactly `True`/`true` or
+# `False`/`false`. A string "False" is a FALSE, never a truthy string, and any other non-empty
+# token (`yes`, `1`, a typo) FAILS CLOSED: the fold is withheld (`w_dps_usable: False`) with a
+# diagnostic reason, because a boolean the consumer cannot parse is not evidence the fold may
+# be consumed. An absent column, `—` cell or blank cell carries no usable verdict at all and
+# leaves the evidence label alone in charge. (An emitter that adds this column must write the
+# token `False` explicitly — the `or "—"` placeholder pattern would swallow a Python False.)
+DOC5_EMPTY_CELL = "—"
+DOC5_USABLE_TOKENS = {"true": True, "True": True, "false": False, "False": False}
+
+
+def doc5_evidence_record(d):
+    """One Doc 5 row's evidence headers -> the rec `apply_weapon_evidence` consumes.
+
+    Shared by `peer_rows` and the Doc 5 half of `peer_hero_rows` so both lanes map the
+    headers identically; legacy tables (no such headers) map to an EMPTY rec, which the
+    shared helper reads as legacy-unassessed with untouched numerics.
+    """
+    rec = {}
+    ev = (d.get("evidence") or "").strip()
+    if ev and ev != DOC5_EMPTY_CELL:
+        rec["w_evidence"] = ev
+    reason = (d.get("reason") or "").strip()
+    if reason and reason != DOC5_EMPTY_CELL:
+        rec["w_evidence_reason"] = reason
+    if "usable" in d:
+        cell = (d.get("usable") or "").strip()
+        if cell and cell != DOC5_EMPTY_CELL:
+            parsed = DOC5_USABLE_TOKENS.get(cell)
+            if parsed is None:      # malformed -> fail closed, with the refusal's reason
+                rec["w_dps_usable"] = False
+                note = f"dps_unusable: malformed_usable_cell {cell!r}"
+                rec["w_evidence_reason"] = (f"{rec['w_evidence_reason']}; {note}"
+                                            if rec.get("w_evidence_reason") else note)
+            else:
+                rec["w_dps_usable"] = parsed
+    return rec
+
+
 def ini_rows():
     """The eight Westwood/Ares mods in the peer-row shape, from `ini_corpus.json`."""
     if not INI_CORPUS.exists():
         ini_rows.sources = set()
         return []
     armor = _ini_armor_index()
+    selection_profile = ini_weapon_selection.load(ROOT)
     out, sources = [], set()
+    ini_range_profile = ini_range_evidence.load(ROOT)
+    ini_cycle_profile = ini_cycle_evidence.load(ROOT)
     for line in INI_CORPUS.read_text(encoding="utf-8").splitlines():
         if not line.strip():
             continue
-        r = json.loads(line)
+        raw_record = json.loads(line)
+        r = ini_weapon_selection.select(raw_record, selection_profile)
         sources.add(r["source"])
         kind = INI_TYPE.get(r.get("type"))
         if kind is None:
@@ -365,7 +559,6 @@ def ini_rows():
         if not r.get("cost") or r.get("build_limit") or not r.get("buildable", True):
             continue
         spd, turn = r.get("speed"), r.get("turn_speed")
-        dps = r.get("w_dps")
         row = {"source": r["source"], "raw_source": r["source"],
                "id": r.get("id", ""), "name": r.get("name", ""),
                "type": kind,
@@ -373,14 +566,26 @@ def ini_rows():
                # layer splits on that separator (`peer_factions`).
                "faction": r.get("faction", ""),
                "turreted": r.get("turreted"),
+               "weapon": r.get("weapon"),
                "hp": r.get("hp"), "speed": spd,
                "turn_speed": turn,
                "turn_ratio": (spd / turn) if (spd and turn) else None,
                "cost": r.get("cost"),
                "w_range": r.get("w_range"), "w_damage": r.get("w_damage"),
                "w_burst": r.get("w_burst"), "w_reload": r.get("w_reload"),
-               "w_dps": dps}
-        vs = armor.get((r["source"], r.get("id"))) or {}
+               "w_dps": r.get("w_dps")}
+        # Evidence BEFORE any consumer value is derived from the DPS (shared helper; see
+        # the policy block above `LEGACY_EVIDENCE`).
+        dps = apply_weapon_evidence(row, r)
+        ini_range_evidence.apply(row, raw_record, ini_range_profile)
+        cycle_applied = ini_cycle_evidence.apply(row, raw_record, ini_cycle_profile)
+        if cycle_applied:
+            dps = row["w_dps"]
+        if (r['source'], r['id']) in selection_profile:
+            row.update({k: v for k, v in r.items() if k.startswith(('wdummy_', 'w2_'))})
+        # The retained armor table describes the original weapon. Never apply
+        # its coefficients to a newly selected secondary weapon.
+        vs = {} if cycle_applied or (r['source'], r['id']) in selection_profile else armor.get((r["source"], r.get("id"))) or {}
         for lad in LADDERS:
             frac = vs.get(lad)
             row[f"dps_vs_{lad}"] = (dps * frac) if (dps and frac) else None
@@ -423,9 +628,89 @@ def doc1_rows():
     return out
 
 
+# ⛔ AI-ONLY VARIANTS ARE NOT REFERENCES (maintainer, 2026-09-07). Several mods ship a duplicate
+# actor that only the computer player can build — DTA's `TWR_AI`/`GUN1_AI`, CnC Reloaded's
+# `NABNKR_AI` ("Soviet Battle Bunker (for AI)"), Red Resurrection's "AI ONLY" rows. They are
+# balance crutches for the bot, not units a player ever faces on equal terms, and the real actor
+# they shadow is sitting right next to them in the same source. The assignment was handing
+# `td_gdi_guardtower` DTA's `TWR1_AI` while DTA's actual `TWR` went unused.
+#
+# ⚠ THE TEST MUST NOT BE `id.endswith("AI")`. Shattered Paradise's `ORCAI` is an Orca Interceptor
+# and Combined Arms' `ZRAI` is a Zone Raider — real units whose names simply end in those letters.
+# A separator before the suffix (`_AI`, `.AI`) is what marks the variant, and the mods that use a
+# bare suffix say so in the NAME instead ("(AI)", "AI ONLY", "for AI").
+_AI_ID = re.compile(r"[._]AI\d*$", re.I)
+_AI_NAME = re.compile(r"\(\s*AI\s*\)|AI[- ]ONLY|for AI", re.I)
+
+
+def is_ai_only(row, source_ids=None):
+    """True when a corpus row is an AI-exclusive duplicate and must never be a reference.
+
+    ⚠ THE MARKER IS ALSO A PREFIX, not only a suffix. DTA ships 37 of them — `AIMSAM`, `AIMLRS`,
+    `AILTNK`, `AIMTNK` — beside the real `MSAM`, `MLRS`, `LTNK`, `MTNK`, and the first pass of
+    this filter looked only for a trailing `_AI`, so every one of them stayed in the pool. Here
+    the sibling test is REQUIRED rather than advisory: `AI` at the front of an id is far too
+    common to act on alone (a bare prefix rule would strike `AIRCRAFT`), so the row is refused
+    only when stripping the prefix names a unit the same source actually ships.
+    """
+    if _AI_ID.search(row.get("id") or "") or _AI_NAME.search(row.get("name") or ""):
+        return True
+    rid = (row.get("id") or "").upper()
+    if source_ids and rid.startswith("AI") and len(rid) > 3:
+        known = source_ids.get(row.get("source"), ())
+        base = rid[2:]
+        # ⚠ AND THE SIBLING MAY CARRY A TRAILING INDEX THE REAL UNIT DOES NOT. DTA ships
+        # `AIHTNK2` beside `HTNK` — there is no `HTNK2` — so an exact sibling test let it through
+        # and `td_gdi_mammothtankmkiii` drew an AI-only Mammoth. The maintainer's objection is the
+        # substantive one: AI variants are deliberately CHEAPER, so using one as a price reference
+        # is worse than having no reference at all.
+        return base in known or base.rstrip("0123456789") in known
+    return False
+
+
+def structured_peer_rows(corpora, *, heroes=False):
+    """Adapt stable numeric fields without discarding nested source evidence."""
+    rows = []
+    range_profile = peer_range_evidence.load(ROOT)
+    nominal_profile = peer_nominal_evidence.load(ROOT)
+    base_profile = peer_base_state.load(ROOT)
+    for source, (_meta, records) in corpora.items():
+        if source in LINEAGE_MEMBERS:
+            continue
+        for record in records:
+            # Aedis 2026-09-11: TD's unlimited Commando is the named hero counterpart
+            # for both Cameo commandos. Preserve its actual limit; separate its model lane.
+            named_hero = (source, record.get('id')) == ('OpenRA Tiberian Dawn', 'RMBO')
+            if bool(is_hero_limit(record.get("limit")) or named_hero) != heroes:
+                continue
+            row = dict(record)
+            row.pop("record", None)
+            row.update(source=source, raw_source=source)
+            peer_base_state.apply(row, record, base_profile)
+            peer_range_evidence.apply(row, record, range_profile)
+            if heroes:
+                row["hero"] = named_hero or is_one_off(record.get("limit"))
+                if named_hero:
+                    row['hero_lane_reason'] = 'Explicit shared Commando identity ruling; source build limit remains unchanged.'
+            speed, turn = row.get("speed"), row.get("turn_speed")
+            row["turn_ratio"] = speed / turn if speed and turn else None
+            if row.get("type") == "building" and row.get("w_damage"):
+                row["type"] = "defense"
+            dps = apply_weapon_evidence(row, record)
+            reviewed_nominal = peer_nominal_evidence.apply(row, record, nominal_profile)
+            if reviewed_nominal:
+                dps = row['w_dps']
+            for ladder in LADDERS:
+                fraction = None if reviewed_nominal else record.get(f"eff_vs_{ladder}")
+                row[f"dps_vs_{ladder}"] = dps * fraction if dps and fraction else None
+            rows.append(row)
+    return rows
+
+
 def peer_rows():
     """Doc 5 rows with type, raw HP/speed/turn — the chassis corpus, after lineage de-dup."""
-    rows, source, header = [], None, None
+    corpora = peer_corpus.load(ROOT)
+    rows, source, header = structured_peer_rows(corpora), None, None
     dropped_lineage = peer_rows.dropped = set()
     text = (ROOT / "docs/design/ORIGINAL_UNITS_PEER_OPENRA.md").read_text(encoding="utf-8")
     for line in text.splitlines():
@@ -433,7 +718,7 @@ def peer_rows():
             source = line[3:].split("(")[0].strip()
             header = None
             continue
-        if not source or not line.startswith("|"):
+        if not source or source in corpora or not line.startswith("|"):
             continue
         cells = [c.strip().strip("`") for c in line.split("|")[1:-1]]
         if not cells:
@@ -457,15 +742,10 @@ def peer_rows():
         wep = {k: num(c) for k, c in (("w_range", "range"), ("w_damage", "dmg"),
                                       ("w_burst", "burst"), ("w_reload", "reload"),
                                       ("w_dps", "dps"))}
-        for lad in LADDERS:
-            # NB the header row is lowercased on read, so the column key is `vsinf`, not `vsINF`.
-            # Looking it up in the document's original case silently yields None for every row —
-            # which is how this first reported 0 armor-aware rows out of 2,256.
-            frac = num(f"vs{lad.lower()}")
-            wep[f"dps_vs_{lad}"] = (wep["w_dps"] * frac) if (wep.get("w_dps") and frac) else None
         limit = num("limit")
         if limit:                     # a mod's one-off epic/hero — see POPULATION RULE below
-            continue
+            continue                  # peer_hero_rows() picks these up under the SAME
+                                      # evidence policy, so no verdict is lost on the hero lane
         # ⛔ AN ARMED BUILDING IS A DEFENCE (2026-09-03). Found when the maintainer asked why
         # Mental Omega and CnC Reloaded showed no defences: the corpus HAS them, typed `building`.
         # 73 defence-named ARMED rows (Obelisk of Light, Flamer Tower, Gattling Tower...) sat in
@@ -484,18 +764,31 @@ def peer_rows():
             # the lineage's single vote.
             dropped_lineage.add(source)
             continue
-        rows.append({"source": source, "raw_source": source,
-                     "id": d.get("id", ""), "name": d.get("unit", ""),
-                     "type": d.get("type", "other"),
-                     # ⚠ SAME CLASS OF BUG AS `cost` ABOVE: the faction column was added to the
-                     # document by `extract_peer_units.py` and dropped here on read, so the
-                     # routing ruling had no data to route on. A column that exists upstream and
-                     # is not carried is indistinguishable from a column that was never extracted.
-                     "faction": d.get("faction", ""),
-                     "turreted": (d.get("turret", "").lower() == "y"),
-                     "hp": hp, "speed": spd, "turn_speed": turn,
-                     "turn_ratio": (spd / turn) if (spd and turn) else None,
-                     "cost": cost, **wep})
+        row = {"source": source, "raw_source": source,
+               "id": d.get("id", ""), "name": d.get("unit", ""),
+               "type": d.get("type", "other"),
+               # ⚠ SAME CLASS OF BUG AS `cost` ABOVE: the faction column was added to the
+               # document by `extract_peer_units.py` and dropped here on read, so the
+               # routing ruling had no data to route on. A column that exists upstream and
+               # is not carried is indistinguishable from a column that was never extracted.
+               "faction": d.get("faction", ""),
+               "turreted": (d.get("turret", "").lower() == "y"),
+               "hp": hp, "speed": spd, "turn_speed": turn,
+               "turn_ratio": (spd / turn) if (spd and turn) else None,
+               "cost": cost, **wep}
+        # Evidence BEFORE any consumer value is derived from the DPS — the same shared helper
+        # `ini_rows` uses (see the policy block above `LEGACY_EVIDENCE`; `doc5_evidence_record`
+        # maps the emitter's Evidence/Reason/Usable headers onto it). The armor ladders are
+        # then derived from the dps THAT policy returns, so a withheld weapon withholds every
+        # `dps_vs_*` with it, and the raw direct estimate stays on `w_dps_raw`.
+        dps = apply_weapon_evidence(row, doc5_evidence_record(d))
+        for lad in LADDERS:
+            # NB the header row is lowercased on read, so the column key is `vsinf`, not `vsINF`.
+            # Looking it up in the document's original case silently yields None for every row —
+            # which is how this first reported 0 armor-aware rows out of 2,256.
+            frac = num(f"vs{lad.lower()}")
+            row[f"dps_vs_{lad}"] = (dps * frac) if (dps and frac) else None
+        rows.append(row)
     # The extracted INI corpus joins here, and it is read FIRST: `doc1_rows()` asks it which
     # sources it covers, so the order is a dependency, not a preference.
     for row in ini_rows():
@@ -511,7 +804,15 @@ def peer_rows():
             dropped_lineage.add(row["source"])
             continue
         rows.append(row)
-    return rows
+    # Applied once, here, so EVERY consumer sees the same corpus: the assignment, the coverage
+    # audit and the distributions alike. An AI-only row must not shape a distribution either.
+    by_src = collections.defaultdict(set)
+    for r in rows:
+        rid = (r.get("id") or "").strip().upper()
+        if rid:
+            by_src[r["source"]].add(rid)
+    peer_rows.ai_only = [r for r in rows if is_ai_only(r, by_src)]
+    return [r for r in rows if not is_ai_only(r, by_src)]
 
 
 # Cameo's own 16 armor rows, grouped by the ladder DESIGN.md puts them in.
@@ -568,6 +869,199 @@ def cameo_weapon_ladders(weapon_name):
     return {k: sum(v) / len(v) / 100.0 for k, v in hits.items() if v}
 
 
+AA_SLOT = re.compile(r"(^|[@_.])aa($|[0-9_.])", re.I)
+
+
+def is_anti_air_armament(arm):
+    """An `@AA` armament engages a different DOMAIN and must not be summed with the ground gun.
+
+    ⛔ FOUND ON `ra1_soviets_btr80` (maintainer, 2026-09-08). Its two unconditional armaments are
+    `Armament` (ground) and `Armament@AA`, each 4,000 x burst 4 = 16,000, and summing them reported
+    32,000 for a transport whose ground gun delivers 16,000. They can never fire at the same
+    target: one shoots aircraft, the other cannot.
+
+    ⭐ THIS IS NOT A NEW RULE, it is one DESIGN.md already made. The `anti_air_vehicle` anchor
+    reads: "Dedicated AA; keeps a SEPARATE FREE air weapon (+50% range/+100% dmg) priced only on
+    the ground weapon." Pricing on the ground weapon is the ruling; this makes the measurement obey
+    it. 63 of 2,245 priced armaments are affected.
+
+    ⛔ AND THE TEST MUST READ THE WEAPON, NOT ONLY THE SLOT. The first version matched the slot
+    alone and missed `td_gdi_apc`, whose AA gun sits in a slot called `Armament@SECONDARY` while
+    the WEAPON is `APCGun_AA` — range 8,502 against the primary's 5,668, which is 1.500 exactly.
+    The maintainer spotted it immediately: *"I'm pretty sure they have Anti Air and also the +50%
+    range against air right?"* They do. Matching the slot name alone is the same name-blocklist
+    mistake this file warns about elsewhere; `_AA` on the weapon is the normalised convention here.
+
+    ⚠ A unit whose armaments are ALL anti-air keeps them — that is its weapon, not a bonus. Exactly
+    one actor is in that state today (`tkm_quadturretbunker`), and a dedicated AA unit reporting
+    zero DPS would be the same class of error this whole sequence has been about.
+    """
+    return bool(AA_SLOT.search(str(arm.get("slot") or ""))
+                or AA_SLOT.search(str(arm.get("weapon") or "")))
+
+
+def burst_cycle(arm, anum):
+    """Ticks between the START of one burst and the next: ReloadDelay + (Burst-1) x BurstDelay.
+
+    ⛔ `BurstDelay` WAS HARDCODED TO 5 AND THE LEDGER CARRIES IT. Measured 2026-09-08 after the
+    maintainer said the Sheridan number "has to do with our burst values": 1,017 priced armaments
+    declare a burst, and their `burstdelays` are 3 (256 of them), 2 (172), 4 (160), 5 (78), 1 (62),
+    0 (55), 8 (36)... so the hardcoded 5 was right for 78 weapons and wrong for the rest. A burst
+    of 4 at delay 2 finishes in 6 ticks, not 15, and the DPS was understated by the difference.
+
+    DESIGN.md's burst rule is the authority: "sheet ReloadDelay = weapon ReloadDelay + (bursts - 1)
+    x BurstDelay". OpenRA cycles through several delays when several are given, so their mean is
+    the honest single number.
+    """
+    rel = anum(arm.get("reloaddelay")) or 0
+    burst = anum(arm.get("burst")) or 1
+    if burst <= 1:
+        return rel or None
+    raw = str(arm.get("burstdelays") or "").replace(",", " ").split()
+    delays = [d for d in (anum(x) for x in raw) if d is not None]
+    delay = (sum(delays) / len(delays)) if delays else 5.0   # OpenRA's own default
+    return rel + (burst - 1) * delay
+
+
+def is_upgrade_gated(arm):
+    """True when the armament is inactive in the canonical built state.
+
+    This helper keeps its historical name for callers, but requirement shape is not enough to
+    identify a baseline weapon: a Tesla Coil has numeric charge alternatives, and an IFV has
+    mutually exclusive passenger modes.  The formula module owns the shared built-state rule
+    (all named conditions false, malformed expressions fail closed), so this selector must use
+    that same evaluator instead of independently treating every positive token as an upgrade.
+    """
+    return not formula.condition_holds_by_default(arm.get("requires"))
+
+
+def baseline_armaments(arms):
+    """The armaments a unit fires AT ONCE with no upgrades and no rank.
+
+    ⛔ `max()` WAS WRONG AND THE MAINTAINER CAUGHT IT (2026-09-08): *"What if there are two weapons
+    that are fired at the same time? Like the GDI battle tank with cannon + rocket or the Sheridan
+    that even has 3 parallel weapons all active at the same time!"* Measured on exactly those:
+
+        td_gdi_battletank             cannon 8000 (!highvelocitycannons)
+                                    + missiles 8000 (!advancedmissiletargeting)   = 16000, max gave 8000
+        ra1_allies_sheridanassaulttank  16000 + 16000 + 4000, all `!cryomissiles`  = 36000, max gave 16000
+
+    So simultaneous armaments SUM. What must never be summed is the alternatives: an upgraded
+    barrel, an elite rank, or `ra2_allies_ifv`'s 39 passenger weapons, which are mutually exclusive
+    at runtime. `requires` separates the two exactly, and the baseline set is also the right
+    comparison for the references, which record un-upgraded weapons.
+    """
+    # Evaluate every armament against one shared built-state assignment before separating the
+    # ground and AA domains.  A satisfiability test per arm would admit mutually exclusive modes
+    # (Tesla charged/un-charged variants or every IFV passenger) and sum them as if they fired
+    # together.  The formula evaluator is also the one used by fit_class.pricing_armaments.
+    live = [a for a in arms if formula.condition_holds_by_default(a.get("requires"))]
+    ground = [a for a in live if not is_anti_air_armament(a)]
+    if ground:
+        return ground            # price on the ground weapon (DESIGN, anti_air_vehicle anchor)
+    if live:
+        return live              # a dedicated AA unit keeps its only weapon
+    # ⛔ EVERY ARMAMENT IS CONDITIONAL — so fall back to the STRONGEST ONE, never to the sum.
+    # `ra2_soviets_siegechopper` is the case: it has no unconditional armament at all, because
+    # each is gated on a MODE and a doctrine and a rank at once
+    # (`!rank-elite && !doctrine_nuclearmunitions && ... && deployed`). Returning the whole set
+    # summed 10 mutually-exclusive barrels into 986,818 damage for a unit that fires one. A
+    # fallback that is too PERMISSIVE is as wrong as a guard that is too restrictive; when the
+    # data cannot say which armament is live, the honest answer is the single best one.
+    return [max(arms, key=_armament_damage)]
+
+
+def armament_profile(arms, anum):
+    """(w_range, w_damage, w_burst, w_reload, w_dps, debt, primary) over the BASELINE set."""
+    live = baseline_armaments(arms)
+    dps_total, dmg_total, debt = 0.0, 0.0, False
+    for a in live:
+        mains = [wh for wh in (a.get("damage_warheads") or [])
+                 if (anum(wh.get("damage")) or 0) > 0]
+        if len(mains) > 1:
+            debt = True          # §0a structure debt: `K` moves under W24
+        # ⛔ DAMAGE IS PER SHOT; A BURST FIRES SEVERAL. DESIGN.md's burst rule is explicit —
+        # "sheet Damage = single-burst damage x bursts" — and this used to apply the burst to the
+        # DPS but not to the damage column, so a 4-shot machine gun reported a quarter of what it
+        # delivers. The Sheridan read 36,000 (16,000 + 16,000 + 4,000) when its MG alone puts out
+        # 4,000 x 4.
+        dmg = sum(anum(wh.get("damage")) or 0 for wh in mains)
+        burst = anum(a.get("burst")) or 1
+        cycle = burst_cycle(a, anum)
+        per_cycle = dmg * burst
+        if per_cycle and cycle:
+            dps_total += per_cycle / cycle
+        dmg_total += per_cycle
+    primary = max(live, key=lambda a: sum(anum(wh.get("damage")) or 0
+                                          for wh in (a.get("damage_warheads") or [])
+                                          if (anum(wh.get("damage")) or 0) > 0))
+    ranges = [anum(a.get("range")) for a in live if anum(a.get("range"))]
+    return {"w_range": max(ranges) if ranges else None,
+            "w_damage": dmg_total or None,
+            "w_burst": anum(primary.get("burst")) or 1,
+            "w_reload": anum(primary.get("reloaddelay")),
+            "w_dps": dps_total or None}, debt, primary
+
+
+def _armament_damage(arm):
+    """Total damage over an armament's POSITIVE main warheads."""
+    total = 0.0
+    for wh in (arm.get("damage_warheads") or []):
+        try:
+            d = float(str(wh.get("damage")))
+        except (TypeError, ValueError):
+            continue
+        if d > 0:
+            total += d
+    return total
+
+
+def primary_armament(arms):
+    """The armament that represents this actor's firepower: the HARDEST-HITTING one.
+
+    ⛔ THIS USED TO BE `arms[0]` AND THAT IS YAML ORDER, NOT IMPORTANCE. Found by the maintainer
+    2026-09-08 on `td_nod_lighttankmkii`, whose reported DPS was 0: its first priced armament is
+    `Armament@pointdefense` firing `PDLaserLTNK2` for **1** damage, while the actual gun
+    (`LightTank2Cannon`) and missiles (`LightTank2Missiles`) each deal 8,000. The table was showing
+    a point-defense laser as the tank's weapon.
+
+    Measured across the tree: 822 buildable actors carry a priced armament, **495 of them carry
+    more than one**, and on **86** the first armament deals under half what the best one does. So
+    this was never one unit — it is a sixth of every armed actor reporting the wrong weapon.
+
+    ⚠ MAX, NEVER SUM. `ra2_allies_ifv` has THIRTY-NINE priced armaments — one per passenger type,
+    mutually exclusive at runtime. Summing them would claim 200,000+ damage for a transport that
+    can only ever fire one. The maintainer's own framing is the rule: the conditional armaments
+    exist, but only one of them is the unit's weapon at any moment.
+    """
+    return max(arms, key=_armament_damage)
+
+
+# ⛔⛔ SUPERWEAPONS ARE NEVER PRICED, NEVER RESTATTED, NEVER TOUCHED (maintainer, 2026-09-07):
+#
+#     "exclude super weapons from this balance formula since they are all fixed HP!
+#      NEVER CHANGE THEM!! SO EXCLUDE THEM BEFORE ANYTHING IS CHANGED ON ACCIDENT!!!"
+#
+# They are gated on `~techlevel.superweapons` (or a `_swlimit` negation), and that prerequisite is
+# the mechanical test — 32 actors carry it, and EVERY one whose HP is recorded holds exactly
+# 1,000,000. That uniform value is the point: it is a deliberate constant, not a balance figure,
+# and a pipeline that treats it as a stat to normalise would drag it toward a building average
+# and quietly destroy it.
+#
+# Excluded HERE, at the single point every consumer reads, so the reference map, the
+# distributions, the targets and the uniqueness audit all agree that these actors do not exist.
+SUPERWEAPON_TOKENS = ("techlevel.superweapon", "swlimit")
+
+
+def is_superweapon(rec):
+    """True when a ledger record is gated on a superweapon prerequisite."""
+    for pre in (rec.get("prerequisites") or []):
+        low = str(pre).lower()
+        if any(tok in low for tok in SUPERWEAPON_TOKENS):
+            return True
+    return False
+
+
 def cameo_rows():
     """Cameo's own roster in the same shape, so it has real distributions to project onto."""
     out = []
@@ -580,12 +1074,25 @@ def cameo_rows():
             continue
         for section, units in (doc.get("sections") or {}).items():
             kind = CAMEO_SECTION_TYPE.get(section)
-            if not kind or not isinstance(units, dict):
+            # ⛔ `buildings` has NO entry in CAMEO_SECTION_TYPE, and for most of its contents that
+            # is right — a refinery is not a combat unit. But Cameo files its defences by pack
+            # CONVENTION, not by rule: the RedAlert packs have a `defenses.yaml`, the TiberianDawn
+            # ones keep theirs in `buildings.yaml`. Gating on the section name alone therefore
+            # dropped every armed structure in the second group — 38 buildable actors, INCLUDING
+            # ALL SEVEN TD DEFENCES (Obelisk, both Guard Towers, Gun Turret, SAM, Skyshield).
+            # They were not mismatched; they never entered the population, so nothing could claim
+            # OpenTD's OBLI/GTWR/ATWR/GUN/SAM and audit_original_coverage reported them unclaimed.
+            # This is the SAME rule the peer side already applies (see the `building` -> `defense`
+            # retype below): armed means defence, on BOTH sides, or Cameo's `defense` population is
+            # measured against a peer population built to a wider definition.
+            if (kind is None and section != "buildings") or not isinstance(units, dict):
                 continue
             for name, rec in units.items():
                 if not isinstance(rec, dict):
                     continue
                 if rec.get("buildable") is not True:
+                    continue
+                if is_superweapon(rec):
                     continue
                 if rec.get("build_limit") is not None:      # check_band.py's epic/hero predicate
                     continue
@@ -608,6 +1115,14 @@ def cameo_rows():
                 # way as the peers': damage summed over POSITIVE mains, burst inside the cycle.
                 arms = [a for a in (rec.get("armaments") or [])
                         if isinstance(a, dict) and a.get("pricing")]
+                # An actor from `buildings` earns a place only by being armed; production and
+                # economy structures stay out. `row_kind` is local because `kind` is the section's
+                # and must not leak from one actor to the next.
+                row_kind = kind
+                if row_kind is None:
+                    if not arms:
+                        continue
+                    row_kind = "defense"
 
                 def anum(v):
                     try:
@@ -617,21 +1132,8 @@ def cameo_rows():
 
                 w, debt = {}, False
                 if arms:
-                    a = arms[0]
-                    mains = [wh for wh in (a.get("damage_warheads") or [])
-                             if (anum(wh.get("damage")) or 0) > 0]
-                    # §0a STRUCTURE DEBT: a weapon still firing 2+ damage mains has a `K` that is
-                    # scheduled to move under W24, so its weapon numbers are not a stable target
-                    # yet. The flag rides along on the signature so a later pricing pass can
-                    # refuse to trust them, rather than silently pricing an input about to change.
-                    debt = len(mains) > 1
-                    dmg = sum(anum(wh.get("damage")) or 0 for wh in mains)
-                    rel = anum(a.get("reloaddelay"))
-                    burst = anum(a.get("burst")) or 1
-                    cycle = (rel or 0) + (burst - 1) * 5
-                    dps = ((dmg * burst) / cycle) if (dmg and cycle) else None
-                    w = {"w_range": anum(a.get("range")), "w_damage": dmg or None,
-                         "w_burst": burst, "w_reload": rel, "w_dps": dps}
+                    w, debt, a = armament_profile(arms, anum)
+                    dps = w["w_dps"]
                     tpl = a.get("versus_templates") or []
                     wname = a.get("weapon") or (tpl[-1] if tpl else None)
                     if dps and wname:
@@ -643,9 +1145,246 @@ def cameo_rows():
                 # it all along. `cost` is not in ALL_STATS (this module is the chassis layer), so
                 # a consumer that wants price must build that aggregate itself; carrying the value
                 # here is what makes that possible at all.
-                out.append({"source": "Cameo", "id": name, "name": name, "type": kind,
+                out.append({"source": "Cameo", "id": name, "name": name, "type": row_kind,
                             "hp": hp, "speed": spd, "turn_speed": turn, "cost": val("cost"),
                             "structure_debt": debt,
+                            "turn_ratio": (spd / turn) if (spd and turn) else None, **w})
+    return out
+
+
+def is_one_off(limit):
+    """A HERO is a limit of exactly one. A cap of 2+ is a scarce unit, not a one-off.
+
+    Maintainer's ruling 2026-09-08: build-limited rows all become visible to the assignment,
+    TAGGED — heroes (limit 1) match only Cameo heroes, while a capped unit matches normally.
+    DTA's `A10` A-10 Warthog is capped at 3 and is an ordinary GDI aircraft; its `XO` X-O Power
+    Suit is capped at 1 and is a one-off. Both were invisible before, which is why the maintainer
+    had to point out twice that they exist.
+
+    ⚠ Neither ever enters a pricing DISTRIBUTION — `ini_rows`/`peer_rows` still drop every
+    build-limited row, so the population rule is untouched and the 3,000,000 HP epic cannot
+    distort a ceiling. This flag governs MATCHING only.
+    """
+    try:
+        return limit is not None and float(limit) == 1
+    except (TypeError, ValueError):
+        return False
+
+
+def is_hero_limit(limit):
+    """A one-off is `BuildLimit` PRESENT AND GREATER THAN ZERO. Zero is not a limit.
+
+    ⛔ MEASURED 2026-09-08, and it is the difference between a hero lane and deleting 110 units.
+    125 corpus rows carry `build_limit == 0`: Mental Omega's Flame Tower (400cr), Instant Shelter
+    (500cr) and Deployed Grumble (2000cr), DTA's `RAAGUN_AI`, and Twisted Insurrection's deployed
+    forms. Ordinary buildable units at ordinary prices — `BuildLimit=0` means NO LIMIT in Westwood
+    INI, not "one only".
+
+    A proposed fix read the falsy-zero as a bug and changed `ini_rows`' test to `is not None`,
+    which would have dropped all 110 costed, buildable ones out of every distribution. The truthy
+    test was right. Heroes are `> 0`, and this function is the only place that decides it.
+    """
+    try:
+        return limit is not None and float(limit) > 0
+    except (TypeError, ValueError):
+        return False
+
+
+def peer_hero_rows():
+    """Hero/epic peer rows that peer_rows() drops, with a `hero` flag.
+
+    The population rule excludes heroes from distributions (a 3,000,000 HP epic
+    must never re-enter the vehicle ceiling), but the ASSIGNMENT may see them so
+    a Cameo hero matches a peer hero. This returns the rows peer_rows() drops
+    -- Doc 5 rows with `limit`, INI rows with `build_limit` -- flagged `hero: True`.
+
+    These rows are for assign_references ONLY. Distributions still call
+    peer_rows(), which excludes them. Wiring them into distributions would
+    re-enter the epic into the vehicle ceiling.
+    """
+    corpora = peer_corpus.load(ROOT)
+    rows = structured_peer_rows(corpora, heroes=True)
+    hero_range_profile = ini_range_evidence.load(ROOT)
+    hero_cycle_profile = ini_cycle_evidence.load(ROOT)
+    # Doc 5 heroes: rows with `limit` present (peer_rows drops at line 508)
+    source, header = None, None
+    text = (ROOT / "docs/design/ORIGINAL_UNITS_PEER_OPENRA.md").read_text(encoding="utf-8")
+    for line in text.splitlines():
+        if line.startswith("## "):
+            source = line[3:].split("(")[0].strip()
+            header = None
+            continue
+        if not source or source in corpora or not line.startswith("|"):
+            continue
+        cells = [c.strip().strip("`") for c in line.split("|")[1:-1]]
+        if not cells:
+            continue
+        if cells[0].lower() == "id":
+            header = [c.lower() for c in cells]
+            continue
+        if not header or len(cells) != len(header) or set("".join(cells)) <= set("-: "):
+            continue
+        d = dict(zip(header, cells))
+        def num(key):
+            v = (d.get(key) or "").replace(",", "")
+            try:
+                return float(v)
+            except ValueError:
+                return None
+        limit = num("limit")
+        if not is_hero_limit(limit):      # ONLY heroes -- the rows peer_rows() drops
+            continue
+        if source in LINEAGE_MEMBERS:
+            continue
+        hp, spd, turn = num("hp"), num("speed"), num("turn")
+        cost = num("cost")
+        wep = {k: num(c) for k, c in (("w_range", "range"), ("w_damage", "dmg"),
+                                      ("w_burst", "burst"), ("w_reload", "reload"),
+                                      ("w_dps", "dps"))}
+        if d.get("type", "").strip().lower() == "building" and wep.get("w_damage"):
+            d["type"] = "defense"
+        row = {"source": source, "raw_source": source,
+               "id": d.get("id", ""), "name": d.get("unit", ""),
+               "type": d.get("type", "other"),
+               "faction": d.get("faction", ""),
+               "turreted": (d.get("turret", "").lower() == "y"),
+               "hp": hp, "speed": spd, "turn_speed": turn,
+               "turn_ratio": (spd / turn) if (spd and turn) else None,
+               "cost": cost, "hero": is_one_off(limit), **wep}
+        # The evidence policy, shared with `ini_rows` and `peer_rows`, BEFORE any `dps_vs_*`
+        # is derived. `doc5_evidence_record` maps the emitter's Evidence/Reason/Usable
+        # headers: a table WITH those columns gates these rows exactly as it gates the
+        # ordinary ones; a legacy table without them maps to absent -> legacy-unassessed and
+        # keeps its existing numeric behaviour.
+        dps = apply_weapon_evidence(row, doc5_evidence_record(d))
+        for lad in LADDERS:
+            frac = num(f"vs{lad.lower()}")
+            row[f"dps_vs_{lad}"] = (dps * frac) if (dps and frac) else None
+        rows.append(row)
+    # INI heroes: rows with build_limit present (ini_rows drops at line 366)
+    if INI_CORPUS.exists():
+        armor = _ini_armor_index()
+        for line in INI_CORPUS.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            r = json.loads(line)
+            kind = INI_TYPE.get(r.get("type"))
+            if kind is None:
+                continue
+            bl = r.get("build_limit")
+            if not is_hero_limit(bl):       # ONLY heroes -- the rows ini_rows() drops
+                continue
+            if not r.get("cost") or not r.get("buildable", True):
+                continue
+            if r["source"] in LINEAGE_MEMBERS:
+                continue
+            spd, turn = r.get("speed"), r.get("turn_speed")
+            row = {"source": r["source"], "raw_source": r["source"],
+                   "id": r.get("id", ""), "name": r.get("name", ""),
+                   "type": kind,
+                   "faction": r.get("faction", ""),
+                   "turreted": r.get("turreted"),
+                   "weapon": r.get("weapon"),
+                   "hp": r.get("hp"), "speed": spd,
+                   "turn_speed": turn,
+                   "turn_ratio": (spd / turn) if (spd and turn) else None,
+                   "cost": r.get("cost"), "hero": is_one_off(bl),
+                   "w_range": r.get("w_range"), "w_damage": r.get("w_damage"),
+                   "w_burst": r.get("w_burst"), "w_reload": r.get("w_reload"),
+                   "w_dps": r.get("w_dps")}
+            # Same shared evidence policy as `ini_rows`, before any `dps_vs_*` derives.
+            dps = apply_weapon_evidence(row, r)
+            ini_range_evidence.apply(row, r, hero_range_profile)
+            cycle_applied = ini_cycle_evidence.apply(row, r, hero_cycle_profile)
+            if cycle_applied:
+                dps = row["w_dps"]
+            vs = {} if cycle_applied else armor.get((r["source"], r.get("id"))) or {}
+            for lad in LADDERS:
+                frac = vs.get(lad)
+                row[f"dps_vs_{lad}"] = (dps * frac) if (dps and frac) else None
+            rows.append(row)
+    # Apply the same AI-only filter as peer_rows()
+    by_src = collections.defaultdict(set)
+    for r in rows:
+        rid = (r.get("id") or "").strip().upper()
+        if rid:
+            by_src[r["source"]].add(rid)
+    rows = [r for r in rows if not is_ai_only(r, by_src)]
+    return rows
+
+
+def cameo_hero_rows():
+    """Hero/epic Cameo rows that cameo_rows() drops, with a `hero` flag.
+
+    cameo_rows() drops every actor with `build_limit` (line 677) -- the 83 hero/epic
+    combat rows the maintainer ruled are balanced separately. This returns them
+    flagged `hero: True` so assign_references can match hero-to-hero only.
+
+    NO EXCLUDE_CLASSES FILTER: the hero lane is specifically for heroes and epics,
+    which `epic_vehicle` class_anchor marks. cameo_rows() excludes them from the
+    normal population; the hero lane includes them so a Cameo epic can match a
+    peer epic.
+    """
+    out = []
+    for path in sorted((ROOT / "docs/balance").glob("*.json")):
+        if "class_anchors" in path.name:
+            continue
+        try:
+            doc = json.loads(path.read_text(encoding="utf-8"))
+        except ValueError:
+            continue
+        for section, units in (doc.get("sections") or {}).items():
+            kind = CAMEO_SECTION_TYPE.get(section)
+            if (kind is None and section != "buildings") or not isinstance(units, dict):
+                continue
+            for name, rec in units.items():
+                if not isinstance(rec, dict):
+                    continue
+                if rec.get("buildable") is not True:
+                    continue
+                if is_superweapon(rec):
+                    continue
+                if not is_hero_limit((rec.get("build_limit") or {}).get("v")
+                                     if isinstance(rec.get("build_limit"), dict)
+                                     else rec.get("build_limit")):   # ONLY heroes
+                    continue
+                def val(field):
+                    slot = rec.get(field)
+                    if isinstance(slot, dict):
+                        slot = slot.get("v")
+                    try:
+                        return float(str(slot))
+                    except (TypeError, ValueError):
+                        return None
+                hp = val("hp")
+                spd = val("speed") or val("speed_air")
+                turn = val("turn_speed") or val("turn_speed_air")
+                if hp is None:
+                    continue
+                arms = [a for a in (rec.get("armaments") or [])
+                        if isinstance(a, dict) and a.get("pricing")]
+                row_kind = kind
+                if row_kind is None:
+                    if not arms:
+                        continue
+                    row_kind = "defense"
+                def anum(v):
+                    try:
+                        return float(str(v))
+                    except (TypeError, ValueError):
+                        return None
+                w, debt = {}, False
+                if arms:
+                    w, debt, a = armament_profile(arms, anum)
+                    dps = w["w_dps"]
+                    tpl = a.get("versus_templates") or []
+                    wname = a.get("weapon") or (tpl[-1] if tpl else None)
+                    if dps and wname:
+                        for lad, frac in cameo_weapon_ladders(wname).items():
+                            w[f"dps_vs_{lad}"] = dps * frac
+                out.append({"source": "Cameo", "id": name, "name": name, "type": row_kind,
+                            "hp": hp, "speed": spd, "turn_speed": turn, "cost": val("cost"),
+                            "structure_debt": debt, "hero": True,
                             "turn_ratio": (spd / turn) if (spd and turn) else None, **w})
     return out
 
@@ -696,6 +1435,12 @@ def main():
         for source in dropped:
             print(f"lineage-collapsed   : {source} -> {collapse[source]}")
     print(f"Cameo rows          : {len(cameo)}")
+    counts = evidence_counts(peers)
+    print("weapon evidence     : "
+          + ", ".join(f"{k}={v}" for k, v in sorted(counts.items()))
+          + "   (counts EVERY peer row - OpenRA Doc 5 + INI corpus + Doc 1; "
+            "legacy-unassessed = no extractor verdict present, absent status is legacy, "
+            "never certified)")
 
     # index peers by normalized name so a Cameo actor can find its counterparts
     by_name = collections.defaultdict(list)

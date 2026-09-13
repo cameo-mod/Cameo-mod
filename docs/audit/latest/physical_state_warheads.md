@@ -1,6 +1,6 @@
 # Physical-state warhead audit
 
-Active concrete weapons checked: 2367
+Active concrete weapons checked: 2434
 Formula percentage templates checked: 6
 
 ## PASS

@@ -1,6 +1,6 @@
 # audit_orphans — dead content (B10)
 
-Live weapons: **2894** — orphans: **367**, dangling weapon refs (BLOCKING): **0**, conditions granted-never-consumed: **16**
+Live weapons: **2969** — orphans: **390**, dangling weapon refs (BLOCKING): **0**, conditions granted-never-consumed: **16**
 
 
 ## O2 — dangling weapon references (crash-on-use class)
@@ -12,9 +12,15 @@ _none found_
 
 | weapon | file |
 |---|---|
+| 105mm | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |
 | 105mmirak | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
+| 120mm | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml |
 | 12MissilesActivate | mods/cameo/weapons/redalert2mod.yaml |
+| 155mm | mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml |
+| 155mmCryo | mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml |
 | 2100Tanktrap | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml |
+| 227mm | mods/cameo/weapons/tiberiandawn.yaml |
+| 25mm | mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml |
 | 25mmWaveforce | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
 | AngryMobTargeting | mods/cameo/weapons/weapons.yaml |
 | Arrakis_Tanya_Guns | mods/cameo/weapons/d2k.yaml |
@@ -30,6 +36,7 @@ _none found_
 | CHGuardRifle | mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml |
 | CabalMagicNuke | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml |
 | CabalWidowPlasma | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml |
+| ChainGun | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |
 | ChemTibAtomic | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
 | ChronoAI | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
 | ChronoMinerTeleport | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml |
@@ -77,6 +84,8 @@ _none found_
 | Debris4 | mods/cameo/weapons/d2k.yaml |
 | DebrisMissile | mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml |
 | Demolish | mods/cameo/weapons/weapons.yaml |
+| DepthChargeCryo | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
+| Dragon | mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml |
 | DroneJump | mods/cameo/weapons/d2k.yaml |
 | DroneJumpH | mods/cameo/weapons/d2k.yaml |
 | DropPodExplode | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml |
@@ -123,10 +132,12 @@ _none found_
 | HMGo | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml |
 | HeavyAATankCannontkm | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml |
 | HeliCrash | mods/cameo/weapons/weapons.yaml |
-| HighV | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml |
+| HindMissiles | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |
+| HonestJohn | mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml |
 | Horn | mods/cameo/weapons/weapons.yaml |
 | IFVAttach | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml |
 | IdolCannon | mods/cameo/weapons/starcraft.yaml |
+| IncendiaryChainGun | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |
 | IncendiaryM1Carbine | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |
 | IonCannon | mods/cameo/weapons/weapons.yaml |
 | IonPulseDischarge | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml |
@@ -148,9 +159,16 @@ _none found_
 | M_HMG_H | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml |
 | M_LMG | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml |
 | M_LMG_H | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml |
+| MachineGun | mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml |
+| MachineGunHumvee2 | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml |
+| MachineGunHumvee2AP | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml |
+| MachineGunHumvee2AP_AA | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml |
+| MachineGunHumvee2_AA | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml |
 | MagicOrbHailstormActivate | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
 | MammothTankCannon | mods/cameo/weapons/tiberiansun.yaml |
 | MammothTuskGal | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
+| MammothTuskTesla | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |
+| MammothTuskThermobaric | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |
 | MutAPRifle | mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml |
 | MutAPRifle_elite | mods/cameo/weapons/tiberiansun.yaml |
 | MutSAPCSpawner | mods/cameo/weapons/tiberiansun.yaml |
@@ -172,8 +190,8 @@ _none found_
 | NaxiV1Rocket | mods/cameo/weapons/redalert2mod.yaml |
 | NaxisBlackBomb | mods/cameo/weapons/redalert2mod.yaml |
 | OP2bombchassisTargeting | mods/cameo/weapons/outpost2.yaml |
-| OrniBombC | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml |
-| OrniGunC | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml |
+| OrniBombC | mods/cameo/ContentPacks/D2k/Atreides/yaml/weapons.yaml |
+| OrniGunC | mods/cameo/ContentPacks/D2k/Atreides/yaml/weapons.yaml |
 | PDLaser | mods/cameo/weapons/weapons.yaml |
 | Patriot | mods/cameo/weapons/weapons.yaml |
 | PhoenixRocket | mods/cameo/weapons/d2k.yaml |
@@ -234,6 +252,8 @@ _none found_
 | Rocketeer_o | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml |
 | Rocketeer_t | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml |
 | RocketsG | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
+| RocketsRA | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
+| SCUD | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |
 | SCUDIrak | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
 | SWGreenLaser | mods/cameo/weapons/weapons.yaml |
 | SWLaser | mods/cameo/weapons/weapons.yaml |
@@ -278,10 +298,10 @@ _none found_
 | TSVulcan2 | mods/cameo/weapons/tiberiansun.yaml |
 | TSVulcanTower | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml |
 | TSZapWeapon_EMP | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml |
-| TTankZap2 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |
 | Tail | mods/cameo/weapons/weapons.yaml |
 | Teeth | mods/cameo/weapons/weapons.yaml |
 | TeslaArmorDischargeDummy | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml |
+| TeslaZap | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |
 | ToxicEngineCloudSpawner | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml |
 | TractorGLAnthraxBlue | mods/cameo/weapons/weapons.yaml |
 | TractorGLAnthraxGreen | mods/cameo/weapons/weapons.yaml |
@@ -366,10 +386,13 @@ _none found_
 | omtank_pri | mods/cameo/weapons/d2k.yaml |
 | plymouth_EMP_AA | mods/cameo/weapons/outpost2.yaml |
 | psireveal | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml |
+| ra120mmThermobaric | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |
 | ra120mmirak | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
 | ra1_allies_alliedsniper | mods/cameo/weapons/tiberiandawn.yaml |
+| ra1_soviets_heavyteslatank_ttankzap2 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |
 | ragal120mm | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
 | supernova_missile_super | mods/cameo/weapons/outpost2.yaml |
+| td_gdi_guardtower_highv_base | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml |
 | tkmabramscannon | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml |
 | tkmakap | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml |
 | tkmheavyaaturret | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml |

@@ -451,7 +451,7 @@ NUK2.camea:
 		Image: NUK2
 
 stek.camea:
-	Inherits: ra1_soviets_soviettechcenter
+	Inherits: ra1_soviets_techcenter
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 150
@@ -564,7 +564,7 @@ SILO.camea:
 		Image: silo
 
 mslo.camea:
-	Inherits: ra1_soviets_sovietmissilesilo
+	Inherits: ra1_soviets_missilesilo
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -751,7 +751,7 @@ HBOX.camea:
 		Image: ra1_allies_camopillbox
 
 RASAM.camea:
-	Inherits: ra1_soviets_sovietsamsite
+	Inherits: ra1_soviets_samsite
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 100
@@ -893,7 +893,7 @@ MTNK.camea:
 		Image: td_gdi_battletank
 
 3TNK.camea:
-	Inherits: ra1_soviets_sovietheavytank
+	Inherits: ra1_soviets_heavytank
 	Buildable:
 		Prerequisites:
 		Queue: Vehicle, RAVehicle
@@ -1041,7 +1041,7 @@ TRAN.camea:
 		Queue: Aircraft, RAAircraft
 		Description: Fast Infantry Transport Helicopter.\nAlready with 12 crewmen on board\n  Unarmed
 	Cargo:
-		InitialUnits: e1, e1, td_gdi_grenadier, td_gdi_grenadier, td_nod_flamethrower, td_nod_flamethrower, td_nod_chemicalwarrior, td_nod_chemicalwarrior, ra1_soviets_sovietflamethrower, ra1_soviets_sovietflamethrower, ra1_soviets_shocktrooper, ra1_soviets_shocktrooper
+		InitialUnits: e1, e1, td_gdi_grenadier, td_gdi_grenadier, td_nod_flamethrower, td_nod_flamethrower, td_nod_chemicalwarrior, td_nod_chemicalwarrior, ra1_soviets_flamethrower, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_shocktrooper
 		LoadedCondition: loaded
 	Armament:
 		Weapon: deploytargeting_5c0

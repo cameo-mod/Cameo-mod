@@ -191,14 +191,19 @@ def _parent_inherits(rs, name: str):
 
 
 def actor_subtype(rs, local, section: str) -> str:
-    """Derive the unit subtype from the defaults.yaml role template chain.
+    """Derive the subtype from recognized active role templates.
 
     Walks the actor's inheritance chain and returns the nearest
-    ^<Name>Template it inherits from defaults.yaml.  Units that do not
+    role template from defaults.yaml or the explicit active D2K engineer role. Units that do not
     inherit a role template get a generic section label rather than
     "Unclassified".
     """
-    roles = defaults_role_templates()
+    roles = dict(defaults_role_templates())
+    # This role lives in the active D2K pack, not defaults.yaml. Engineers are
+    # explicitly support units (FORMULA_V2 §6b); do not infer arbitrary pack
+    # *Template names, which can describe behavior rather than a unit role.
+    if rs.actor("^EngineerInfantryTemplate") is not None:
+        roles["^EngineerInfantryTemplate"] = "EngineerInfantry"
     # Start from the actor's own Inherits and walk upward breadth-first so
     # the nearest (most specific) role template wins.
     queue = list(_parent_inherits(rs, local.key)) if local is not None else []
@@ -265,6 +270,64 @@ _MIX_ALLOWLIST = {
     "CabalReaperMissiles", "CabalHeavyReaperMissiles", "CabalManticoreMissiles",
     "CabalRocketCyborgRockets",
 }
+
+# Armament-level support tags are deliberately separate from weapon/warhead
+# families.  Point-defense weapons intercept incoming projectiles and should
+# not inflate the carrier's ordinary offensive pricing; their actor may still
+# have a separately priced ground or anti-air armament.
+_SUPPORT_ARMAMENT_TAGS = frozenset({"pointdefense", "pointdefensedeployed"})
+
+
+def armament_tag(node) -> str:
+    """Return the authored/inherited armament tag used for pricing policy."""
+
+    name = node.get("Name")
+    if name:
+        return str(name).strip().lower()
+    key = str(node.key or "").strip().lower()
+    return key.split("@", 1)[1] if "@" in key else ""
+
+
+def is_support_armament(node) -> bool:
+    """Whether an armament is a support route rather than priced offense."""
+
+    return armament_tag(node) in _SUPPORT_ARMAMENT_TAGS
+
+
+def _has_positive_damage(armament: dict) -> bool:
+    for warhead in armament.get("damage_warheads", []):
+        try:
+            if float(warhead.get("damage")) > 0:
+                return True
+        except (TypeError, ValueError, OverflowError):
+            continue
+    return False
+
+
+def pricing_guard(armaments: list[dict], buildable: bool) -> dict[str, object]:
+    """Expose an accidental all-unpriced positive-weapon state.
+
+    Support-only and non-buildable actors are valid zero-offense cases.  A
+    buildable actor that has positive damage but no priced positive armament is
+    different: it would silently enter pricing with DPS zero, so callers must
+    keep it unresolved until one armament is explicitly retained.
+    """
+
+    positive = [arm for arm in armaments if _has_positive_damage(arm)]
+    offensive_positive = [arm for arm in positive
+                          if not arm.get("support_armament")]
+    priced_positive = [arm for arm in offensive_positive if arm.get("pricing", True)]
+    result = {
+        "status": "OK",
+        "positive_armament_count": len(offensive_positive),
+        "priced_positive_armament_count": len(priced_positive),
+    }
+    if buildable and offensive_positive and not priced_positive:
+        result.update({
+            "status": "ALL_POSITIVE_ARMAMENTS_UNPRICED",
+            "reason": "buildable actor would enter pricing with zero offensive DPS",
+        })
+    return result
 
 
 def weapon_class_from_types(types: list[str]) -> float | None:
@@ -486,6 +549,13 @@ def model_constants() -> dict:
             "ENGINE_DEFAULT_BURST_DELAY": formula.ENGINE_DEFAULT_BURST_DELAY,
             "ENGINE_DEFAULT_RANGE": formula.ENGINE_DEFAULT_RANGE,
         },
+        "weapon_efficiency": {
+            "median_weapon_range": we.median_weapon_range(),
+            "RANGE_WEIGHT": we.RANGE_WEIGHT,
+            "RANGE_BOUNDS": list(we.RANGE_BOUNDS),
+            "TARGETS_FLOOR": we.TARGETS_FLOOR,
+            "DEADZONE_WEIGHT": we.DEADZONE_WEIGHT,
+        },
         "percentage_damage": {
             "FOLDED_SCALE_DENOMINATOR": pd.FOLDED_SCALE_DENOMINATOR,
             "FOLDED_ROUNDING_BIAS": pd.FOLDED_ROUNDING_BIAS,
@@ -589,6 +659,12 @@ def derived_metrics(resolved, raw: dict) -> dict | None:
             if res["pct_absolute_context"] > 0:
                 out["dps_floor"] = round(
                     res["pct_absolute_context"] * burst / eff, 2)
+    if res is None:
+        # A pure emitter must not look like a fully modeled zero-damage weapon.
+        limitations = effmod.model_limitations(resolved)
+        if limitations:
+            out["model_limitations"] = limitations
+            out["model_status"] = "provisional"
     return out or None
 
 
@@ -885,6 +961,12 @@ def extract_actor(rs, key: str, section: str,
             ("sight", "RevealsShroud", "Range"),
             ("build_limit", "Buildable", "BuildLimit"),
             ("build_duration", "Buildable", "BuildDuration"),
+            # Cargo has a separate passenger-sum pricing rule. Retain these raw
+            # inputs so band checks cannot accidentally price it as an ordinary gun unit.
+            ("cargo_capacity", "Cargo", "MaxWeight"),
+            ("cargo_types", "Cargo", "Types"),
+            ("cargo_requires", "Cargo", "RequiresCondition"),
+            ("cargo_pause", "Cargo", "PauseOnCondition"),
             ("self_heal_step", "ChangesHealth", "Step"),
             # --- THE SURVIVABILITY LAYERS (E1, 2026-08-16) ---------------------------- #
             # Maintainer: *"shielded units and armored units need to have a price! it is
@@ -942,11 +1024,19 @@ def extract_actor(rs, key: str, section: str,
             if child(c, "Name") is not None:
                 entry["armament_name"] = c.get("Name") or ""
             arm_name = c.get("Name") or ""
-            entry["pricing"] = not ("garrison" in arm_name.lower()) and not (
-                entry.get("extraction_note") == "no_damage_warheads")
+            if is_support_armament(c):
+                entry["support_armament"] = True
+                entry["pricing"] = False
+                entry["pricing_reason"] = "support_armament"
+            else:
+                entry["pricing"] = not ("garrison" in arm_name.lower()) and not (
+                    entry.get("extraction_note") == "no_damage_warheads")
             arms.append(entry)
     if arms:
         u["armaments"] = arms
+        guard = pricing_guard(arms, u["buildable"])
+        if guard["status"] != "OK":
+            u["pricing_guard"] = guard
         u["resolved_firepower_modifiers"] = resolved_firepower_modifiers(resolved, local)
     fp = firepower_multiplier(resolved, local)
     if fp:
@@ -1121,10 +1211,14 @@ def main() -> int:
     ap.add_argument("--check", action="store_true",
                     help="diff against the committed ledger; exit 1 on drift")
     ap.add_argument("--faction", help="ledger-name substring filter")
+    ap.add_argument("--output-dir", type=pathlib.Path,
+                    help="stage generated raw/derived ledgers here; still read design inputs from docs/balance")
     ap.add_argument("--check-weapon-classes", action="store_true",
                     help="fail if any weapon references a class template missing "
                          "from docs/balance/weapon_classes.yaml (the sidecar)")
     args = ap.parse_args()
+    if args.output_dir and args.check:
+        ap.error("--output-dir cannot be combined with --check")
 
     ledgers, sidecars = build_both(Model(), args.faction)
 
@@ -1149,7 +1243,9 @@ def main() -> int:
     # Both trees are checked, but they are reported apart because they answer
     # different questions: raw drift = the GAME changed (someone hand-edited yaml),
     # model drift = a TOOL changed (re-run the extractor and commit the sidecar).
-    targets = [("raw", OUT, ledgers), ("model", DERIVED_OUT, sidecars)]
+    output = args.output_dir if args.output_dir is not None else OUT
+    derived_output = output / "derived"
+    targets = [("raw", output, ledgers), ("model", derived_output, sidecars)]
 
     if args.check:
         drift = 0
@@ -1180,10 +1276,10 @@ def main() -> int:
                 n = sum(len(s) for s in doc["sections"].values())
                 total += n
                 print(f"  {name}.json: {n} actors")
-    (DERIVED_OUT / "_model.json").write_text(serialize(model_constants()),
+    (derived_output / "_model.json").write_text(serialize(model_constants()),
                                              encoding="utf-8", newline="\n")
-    print(f"wrote {len(ledgers)} ledgers, {total} actors -> {rel(OUT)}")
-    print(f"wrote {len(sidecars)} derived sidecars -> {rel(DERIVED_OUT)}")
+    print(f"wrote {len(ledgers)} ledgers, {total} actors -> {output}")
+    print(f"wrote {len(sidecars)} derived sidecars -> {derived_output}")
 
     # `_model.json` above is GLOBAL — its armor census and weights are measured
     # across the whole roster — but a filtered run only rewrites the sidecars it

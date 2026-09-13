@@ -1,14 +1,15 @@
-ra1_soviets_sovietmissilesilo:
+ra1_soviets_missilesilo:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x1Shape
 	Inherits@SW: ^PrimarySuperweapon
 	Inherits@sell: ^RASovietSpawnActorsOnSell
 	RenderSprites:
+		Image: ra1_soviets_sovietmissilesilo
 		PlayerPalette: playerra
 	Tooltip:
 		Name: Soviet Missile Silo
 	Buildable:
-		Prerequisites: ~ra1_soviets_soviettechcenter, ~techlevel.superweapons, !abomb
+		Prerequisites: ~ra1_soviets_techcenter, ~techlevel.superweapons, !abomb
 		Description: actor_mslo.description
 	Building:
 		Footprint: xx
@@ -68,7 +69,7 @@ ra1_soviets_ironcurtain:
 	Inherits@sell: ^RASovietSpawnActorsOnSell
 	Buildable:
 		Queue: Defence, RADefence
-		Prerequisites: ~ra1_soviets_soviettechcenter, ~techlevel.superweapons, !ra1_soviets_ironcurtain_swlimit
+		Prerequisites: ~ra1_soviets_techcenter, ~techlevel.superweapons, !ra1_soviets_ironcurtain_swlimit
 		Description: actor_iron.description
 	Tooltip:
 		Name: Iron Curtain
@@ -132,7 +133,7 @@ ra1_soviets_flametower:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 60
-		Prerequisites: ~ra1_soviets_sovietconstructionyard, ra1_soviets_sovietbarracks
+		Prerequisites: ~ra1_soviets_constructionyard, ra1_soviets_barracks
 		Description: actor_ftur.description
 	Valued:
 		Cost: 600
@@ -148,13 +149,13 @@ ra1_soviets_flametower:
 		TurnSpeed: 1023
 		Offset: 0,0,112
 	Armament:
-		Weapon: FireballLauncher
+		Weapon: ra1_soviets_flametower_flamethrower
 		LocalOffset: 512,0,0
-		RequiresCondition: !ra1_soviets_doctrine_infernodoctrine
+		RequiresCondition: !ra1_soviets_doctrine_inferno
 	Armament@Upgrade:
-		Weapon: FireballLauncherThermobaric
+		Weapon: ra1_soviets_flametower_flamethrower_thermobaric
 		LocalOffset: 512,0,0
-		RequiresCondition: ra1_soviets_doctrine_infernodoctrine
+		RequiresCondition: ra1_soviets_doctrine_inferno
 	AttackTurreted:
 		RequiresCondition: !build-incomplete
 	-QuantizeFacingsFromSequence:
@@ -162,11 +163,11 @@ ra1_soviets_flametower:
 		QuantizedFacings: 8
 	ProvidesPrerequisite@buildingname:
 	FireWarheadsOnDeath:
-		Weapon: FireballLauncher
-		RequiresCondition: !ra1_soviets_doctrine_infernodoctrine
+		Weapon: ra1_soviets_flametower_flamethrower
+		RequiresCondition: !ra1_soviets_doctrine_inferno
 	FireWarheadsOnDeath@Upgrade:
-		Weapon: FireballLauncherThermobaric
-		RequiresCondition: ra1_soviets_doctrine_infernodoctrine
+		Weapon: ra1_soviets_flametower_flamethrower_thermobaric
+		RequiresCondition: ra1_soviets_doctrine_inferno
 	RenderSprites:
 		PlayerPalette: raplayer
 	WithDeathAnimation:
@@ -176,7 +177,7 @@ ra1_soviets_flametower:
 	RevealsShroud:
 		Range: 6742
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_infernodoctrine, ra1_soviets_upgrade_scorchedearth, ra1_soviets_upgrade_stalinium
+		Upgrades: ra1_soviets_doctrine_inferno, ra1_soviets_upgrade_scorchedearth, ra1_soviets_upgrade_stalinium
 
 ra1_soviets_teslacoil:
 	Inherits: ^Defense
@@ -194,7 +195,7 @@ ra1_soviets_teslacoil:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 80
-		Prerequisites: ~ra1_soviets_sovietconstructionyard, ra1_soviets_soviettechcenter
+		Prerequisites: ~ra1_soviets_constructionyard, ra1_soviets_techcenter
 		Description: actor_tsla.description
 	Valued:
 		Cost: 1500
@@ -207,15 +208,15 @@ ra1_soviets_teslacoil:
 		HP: 90000
 	WithTeslaChargeAnimation:
 	Armament:
-		Weapon: TeslaZap
+		Weapon: ra1_soviets_teslacoil_teslazap
 		LocalOffset: 0,0,896
-		RequiresCondition: !ra1_soviets_doctrine_teslaandexperimentaltechdoctrine && !ra1_soviets_upgrade_teslaarcing
+		RequiresCondition: !ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@Upgrade1:
-		Weapon: TeslaZap_EMP
+		Weapon: ra1_soviets_teslacoil_teslazap_emp
 		LocalOffset: 0,0,896
-		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltechdoctrine && !ra1_soviets_upgrade_teslaarcing
+		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
 	Armament@Upgrade2:
-		Weapon: TeslaZapArc_EMP
+		Weapon: ra1_soviets_teslacoil_teslazaparc_emp
 		LocalOffset: 0,0,896
 		RequiresCondition: ra1_soviets_upgrade_teslaarcing
 	FirepowerMultiplier@ra1_soviets_upgrade_reactoroverload:
@@ -239,9 +240,9 @@ ra1_soviets_teslacoil:
 	DetectCloaked:
 		Range: 4659
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_teslaandexperimentaltechdoctrine, ra1_soviets_upgrade_teslaarcing, ra1_soviets_upgrade_reactoroverload, ra1_soviets_upgrade_stalinium
+		Upgrades: ra1_soviets_doctrine_teslaandexperimentaltech, ra1_soviets_upgrade_teslaarcing, ra1_soviets_upgrade_reactoroverload, ra1_soviets_upgrade_stalinium
 
-ra1_soviets_sovietsamsite:
+ra1_soviets_samsite:
 	Inherits: ^Defense
 	Inherits@exp: ^GainsExperienceRABuilding
 	Inherits@Template: ^AntiAirDefenseTemplate
@@ -257,7 +258,7 @@ ra1_soviets_sovietsamsite:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 100
-		Prerequisites: ~ra1_soviets_sovietconstructionyard, ra1_soviets_sovietradardome
+		Prerequisites: ~ra1_soviets_constructionyard, ra1_soviets_radardome
 		Description: actor_sam.description
 	Valued:
 		Cost: 700
@@ -278,7 +279,7 @@ ra1_soviets_sovietsamsite:
 	-WithSpriteBody:
 	WithEmbeddedTurretSpriteBody:
 	Armament:
-		Weapon: Nike
+		Weapon: ra1_soviets_samsite_missile_AA
 		LocalOffset: 0,0,320
 		MuzzleSequence: muzzle
 	AttackTurreted:
@@ -286,19 +287,20 @@ ra1_soviets_sovietsamsite:
 		PauseOnCondition: lowpower || disabled
 	WithMuzzleOverlay:
 	RenderSprites:
+		Image: ra1_soviets_sovietsamsite
 		PlayerPalette: raplayer
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
-	DamageMultiplier@2x1Shape:
-		Modifier: 75
+	# DamageMultiplier@2x1Shape:
+		# Modifier: 75
 	Power:
 		Amount: -35
 	RevealsShroud:
 		Range: 12790
 	DetectCloaked:
 		Range: 6395
-	FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets:
-		Modifier: 110
+	# FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets:
+		# Modifier: 110
 	RangeMultiplier@ra1_soviets_upgrade_thermobaricrockets:
 		Modifier: 110
 	RevealsShroudMultiplier@ra1_soviets_upgrade_thermobaricrockets:

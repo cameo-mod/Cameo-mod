@@ -132,6 +132,8 @@ DarkObeliskLaser:
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
 
+	Warhead@Laser_Heavy_ExtraDamage:
+		ValidTargets: Air
 TSCABALCharge_EMP:
 	ReloadDelay: 6
 	Range: 8000
@@ -180,7 +182,6 @@ TSCABALDisable_EMP:
 TSCABALObeliskLaserFire:
 	Inherits@collapsewh: ^Warhead_Laser_Heavy
 	Inherits@collapseextra: ^Compatibility_Laser_ExtraDamage
-	Inherits@collapseground: ^Compatibility_CabalLaser_GroundSlice
 	-TargetActorCenter:
 	Inherits: ^TankDestroyerCannon
 	Inherits@LASER: ^LaserWeapon
@@ -210,10 +211,12 @@ TSCABALObeliskLaserFire:
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 70000
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 35
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 70000
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 35
 	Warhead@MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -223,6 +226,7 @@ TSCABALObeliskLaserFire:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 35
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
@@ -232,6 +236,7 @@ TSCABALObeliskLaserFire:
 		FriendlyFireSpread: 50
 		Damage: 70000
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 35
 	-Warhead@EffectAir:
 	Warhead@Effect: CreateEffect
@@ -246,11 +251,19 @@ TSCABALObeliskLaserFire:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@MediumChemicalWeapon:
 	Warhead@Laser_Heavy:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
-		Damage: 69000
+		Damage: 104000
 		PercentageScale: 0
 
+	Warhead@Laser_Heavy_ExtraDamage:
+		InvalidTargets: Air
+	Warhead@LaserExtraDamageCompatibility:
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 TSHellfireTwin:
+	Inherits@missilerole: ^Warhead_MissileAP_Heavy
 	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
 	Inherits: ^HeavyCannon
 	Inherits@TD: ^TankDestroyerCannon
@@ -318,14 +331,22 @@ TSHellfireTwin:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@HeavyMissile:
 	-Warhead@MediumMissile:
-	Warhead@MissileHE_Heavy:
+	Projectile: Missile
+		VerticalRateOfTurn: 16
+	-Warhead@MissileHE_Heavy:
+	Warhead@MissileAP_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
+		PercentageSpread: 50
+
 TSCABALEnlightedLaser:
 	Inherits@collapsewh: ^Warhead_Laser_Heavy
 	Inherits@collapseextra: ^Compatibility_Laser_ExtraDamage
-	Inherits@collapseground: ^Compatibility_CabalLaser_GroundSlice
 	-TargetActorCenter:
 	Range: 10088
 	ReloadDelay: 120
@@ -347,10 +368,12 @@ TSCABALEnlightedLaser:
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 70000
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 35
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 70000
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 35
 	Warhead@MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -360,6 +383,7 @@ TSCABALEnlightedLaser:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 35
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
@@ -369,6 +393,7 @@ TSCABALEnlightedLaser:
 		FriendlyFireSpread: 50
 		Damage: 70000
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 35
 	-Warhead@EffectAir:
 	Warhead@Effect: CreateEffect
@@ -383,14 +408,21 @@ TSCABALEnlightedLaser:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@MediumChemicalWeapon:
 	Warhead@Laser_Heavy:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
-		Damage: 69000
+		Damage: 279000
 		PercentageScale: 0
 
 ####################################################################################################
 #		Tiberian Sun Other
 ####################################################################################################
 
+	Warhead@Laser_Heavy_ExtraDamage:
+		InvalidTargets: Air
+	Warhead@LaserExtraDamageCompatibility:
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 TSRobotHackingControl:
 	ReloadDelay: 50
 	Report: tsrobothacking.wav
@@ -503,7 +535,7 @@ TSDevoutChainguns:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 24000
+		Damage: 3200
 		PercentageScale: 9996
 
 CabalEliminatorGatling:
@@ -556,6 +588,7 @@ CabalReaperMissiles:
 		HomingActivationDelay: 2
 		RangeLimit: 25000
 	Warhead@CollapsedCabalReaperMissilesConcussion_MediumPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -584,6 +617,7 @@ CabalReaperMissiles:
 		Falloff: 100, 72, 50, 32
 		Range: 0, 350, 700, 1050
 	Warhead@CollapsedCabalReaperMissilesDemolition_LightPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -612,6 +646,7 @@ CabalReaperMissiles:
 		Falloff: 100, 45, 18
 		Range: 0, 233, 466
 	Warhead@CollapsedCabalReaperMissilesMissileHE_LightPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -640,6 +675,7 @@ CabalReaperMissiles:
 		Falloff: 100, 45, 30
 		Range: 0, 100, 150
 	Warhead@CollapsedCabalReaperMissilesMissileHE_MediumPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -672,6 +708,7 @@ CabalReaperMissiles:
 	-Warhead@MissileHE_Light:
 	-Warhead@MissileHE_Medium:
 	Warhead@MissileHE_MediumFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 32000
 		PercentageScale: 0
@@ -854,6 +891,7 @@ CabalHeavyReaperMissiles:
 		HomingActivationDelay: 3
 		RangeLimit: 30000
 	Warhead@CollapsedCabalHeavyReaperMissilesConcussion_MediumPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -882,6 +920,7 @@ CabalHeavyReaperMissiles:
 		Falloff: 100, 72, 50, 32
 		Range: 0, 350, 700, 1050
 	Warhead@CollapsedCabalHeavyReaperMissilesDemolition_LightPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -910,6 +949,7 @@ CabalHeavyReaperMissiles:
 		Falloff: 100, 45, 18
 		Range: 0, 233, 466
 	Warhead@CollapsedCabalHeavyReaperMissilesMissileHE_HeavyPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -938,6 +978,7 @@ CabalHeavyReaperMissiles:
 		Falloff: 100, 45, 30
 		Range: 0, 200, 300
 	Warhead@CollapsedCabalHeavyReaperMissilesMissileHE_MediumPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -970,6 +1011,7 @@ CabalHeavyReaperMissiles:
 	-Warhead@MissileHE_Heavy:
 	-Warhead@MissileHE_Medium:
 	Warhead@MissileHE_HeavyFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 48000
 		PercentageScale: 0
@@ -1550,6 +1592,8 @@ CabalLaserBoatLaserAA:
 		Explosions: cabal_laserimpact_l
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
+	Warhead@Laser_Heavy_ExtraDamage:
+		ValidTargets: Air
 CabalDissolverSpray:
 	Inherits@collapsewh: ^Warhead_CannonChem_Light
 	Inherits: ^LightChemicalWeapon
@@ -2003,6 +2047,7 @@ CabalManticoreMissilesAA:
 		Damage: 48000
 		PercentageScale: 0
 CabalRocketCyborgRockets:
+	Inherits@missilerole: ^Warhead_MissileAP_Medium
 	Inherits@finalmain: ^Compatibility_MissileHE_MediumFlat
 	Inherits@wh: ^Warhead_MissileHE_Light
 	Inherits@wh2: ^Warhead_MissileHE_Medium
@@ -2027,11 +2072,19 @@ CabalRocketCyborgRockets:
 		Damage: 6000
 	-Warhead@MissileHE_Light:
 	-Warhead@MissileHE_Medium:
-	Warhead@MissileHE_MediumFlatCompatibility:
+	-Warhead@MissileHE_MediumFlatCompatibility:
+	Warhead@MissileAP_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 9992
+		PercentageSpread: 50
+
 CabalRocketCyborgRocketsUpgraded:
+	Inherits@missilerole: ^Warhead_MissileAP_Medium
 	Inherits@finalmain: ^Compatibility_MissileHE_MediumFlat
 	Inherits@wh: ^Warhead_MissileHE_Light
 	Inherits@wh2: ^Warhead_MissileHE_Medium
@@ -2056,10 +2109,17 @@ CabalRocketCyborgRocketsUpgraded:
 		Damage: 6000
 	-Warhead@MissileHE_Light:
 	-Warhead@MissileHE_Medium:
-	Warhead@MissileHE_MediumFlatCompatibility:
+	-Warhead@MissileHE_MediumFlatCompatibility:
+	Warhead@MissileAP_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 9992
+		PercentageSpread: 50
+
 CabalMothershipRockets:
 	Inherits@roleflat: ^Compatibility_MissileTesla_HeavyFlat
 	Inherits: ^TeslaWeapon
@@ -2938,6 +2998,7 @@ CabalCommandoPlasmaNeutron:
 	Warhead@HeavyCannon: SpreadDamage
 		Damage: 50000
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 25
 	Warhead@MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -2947,6 +3008,7 @@ CabalCommandoPlasmaNeutron:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 25
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
@@ -2956,18 +3018,22 @@ CabalCommandoPlasmaNeutron:
 		FriendlyFireSpread: 50
 		Damage: 50000
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 25
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 50000
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 25
 	Warhead@MagicWeapon: SpreadDamage
 		Damage: 50000
 	Warhead@MagicWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 25
 	Warhead@RailgunWeapon: SpreadDamage
 		Damage: 50000
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 25
 	Warhead@Effect: CreateEffect
 		Explosions: magicnuke_med
@@ -2982,10 +3048,15 @@ CabalCommandoPlasmaNeutron:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
 	Warhead@Plasma_HeavyFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 302888
 		PercentageScale: 0
 
+	Warhead@ShieldHit:
+		InvalidTargets: Air
+	Warhead@EMPUnit:
+		InvalidTargets: Shielded, Air
 CabalCommandoPlasmaMk2Neutron:
 	Inherits@roleflat: ^Compatibility_Plasma_HeavyFlat
 	Inherits: ^HeavyCannon
@@ -3006,6 +3077,7 @@ CabalCommandoPlasmaMk2Neutron:
 	Warhead@HeavyCannon: SpreadDamage
 		Damage: 50000
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 25
 	Warhead@MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -3015,6 +3087,7 @@ CabalCommandoPlasmaMk2Neutron:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 25
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
@@ -3024,18 +3097,22 @@ CabalCommandoPlasmaMk2Neutron:
 		FriendlyFireSpread: 50
 		Damage: 50000
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 25
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 50000
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 25
 	Warhead@MagicWeapon: SpreadDamage
 		Damage: 50000
 	Warhead@MagicWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 25
 	Warhead@RailgunWeapon: SpreadDamage
 		Damage: 50000
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 25
 	Warhead@Effect: CreateEffect
 		Explosions: magicnuke_med
@@ -3050,10 +3127,15 @@ CabalCommandoPlasmaMk2Neutron:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
 	Warhead@Plasma_HeavyFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 302888
 		PercentageScale: 0
 
+	Warhead@ShieldHit:
+		InvalidTargets: Air
+	Warhead@EMPUnit:
+		InvalidTargets: Shielded, Air
 CabalRavagerPlasmaNeutron:
 	Inherits@wh: ^Warhead_Chemical_Medium
 	Inherits@proj: ^Projectile_Chem_Medium
@@ -3094,6 +3176,7 @@ CabalBeholderLaser:
 		Damage: 10000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaWeapon: SpreadDamage
@@ -3103,18 +3186,21 @@ CabalBeholderLaser:
 		Damage: 5000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@RailgunWeapon: SpreadDamage
 		Damage: 10000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 10000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
@@ -3129,10 +3215,15 @@ CabalBeholderLaser:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
 	Warhead@Laser_HeavyFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 46600
 		PercentageScale: 0
 
+	Warhead@ShieldHit:
+		InvalidTargets: Air
+	Warhead@EMPUnit:
+		InvalidTargets: Shielded, Air
 CabalOverkillDroneLauncher:
 	ReloadDelay: 25
 	Range: 6400

@@ -181,7 +181,7 @@ number appears exactly as the yaml states it, with provenance:
   writes per-warhead Damage through the ONE canonical reducer
   `formula.distribute_damage`, which applies the fixed DESIGN.md law:
   **every main class warhead gets the IDENTICAL value `total ÷ N` snapped
-  to the 100-damage grid** ("all class warheads carry the identical
+  to the 10-damage grid** (Aedis2026-09-11 04:24; "all class warheads carry the identical
   value" — never proportional, never off-grid), `*FriendlyFire` and
   `*ExtraDamage` twins = **50%** of the main. Standalone `*Percentage`
   companions track **0.01% per 100 flat Damage** in their own denominator;
@@ -190,7 +190,7 @@ number appears exactly as the yaml states it, with provenance:
   folded hit exactly once, with wide intermediate arithmetic and checked final results.
   `*ExtraDamage` (the energy-weapon shield/AoE-compensation chip) is
   always 50% of the main but is **excluded from the damage total**.
-  Fine-tuning is done on the 100-Damage grid or with reload timing;
+  Fine-tuning is done on the 10-Damage grid or with reload timing;
   unconditional actor `FirepowerMultiplier` is retired as a tuning knob. A single number can therefore never be
   broadcast identically onto every warhead (the 2026-07-22 over-damage
   regression, commit `04de392b3`). `audit_warhead_split` fails the suite if
@@ -240,14 +240,35 @@ indented WEAPON row per armament (mirroring yaml structure):
 | command | direction | gate / notes |
 |---|---|---|
 | `python tools/balance/extract_stats.py [--faction X]` | yaml → ledger | overwrites `docs/balance/*.json`; run `--check` to detect drift |
+| `python tools/balance/extract_stats.py --output-dir DIR` | yaml → staged ledgers | reads design inputs from the usual ledger; writes raw/derived outputs only to DIR; incompatible with `--check` |
 | `python tools/balance/build_workbook.py` | ledger → `docs/design/cameo_balance_*.xlsx` | tracked generated workbenches; regenerate and review the binary diff |
 | `python tools/balance/import_workbook.py` | xlsx → ledger | validates and prints every input-cell diff |
 | `python tools/balance/apply_balance.py [--faction X]` | ledger → yaml (dry-run) | prints diff; **does not write** |
-| `python tools/balance/apply_balance.py --confirm [--faction X]` | ledger → yaml | **maintainer order only**; auto-runs `extract_stats.py` + `tools/audit/audit_multiplier_modifiers.py`; full `run_all.sh` + boot gate before commit |
+| `python tools/balance/apply_balance.py --confirm [--faction X]` | ledger → yaml | **maintainer order only**; all-plan preflight, staged extraction and checked multiplier audit; full `run_all.sh` + boot gate before commit |
 | `python tools/balance/propose_class_rebalance.py --class <cls>` | ledger → `docs/balance/proposal_<cls>_infantry.md` | generates a markdown report; does not touch yaml/ledger |
 | `python tools/balance/_patch_ledgers_from_reports.py` | `proposal_*.md` → ledger | patches `docs/balance/*.json` from the three class reports |
 
 Round-trip invariants tested in CI-style: `extract_stats.py` ∘ `apply_balance.py --confirm` = identity, `build_workbook.py` ∘ `import_workbook.py` = identity.
+
+**Apply safety (2026-09-07):** unsupported edits, missing/stale provenance,
+ambiguous local definitions and inconsistent shared-weapon requests refuse the
+whole plan. Unchanged rows also constrain shared weapons; inherited actors and
+non-roster weapon consumers require separate review. An unselected ledger with
+pending edits blocks a filtered apply rather than losing that proposal.
+
+Confirmation snapshots active rule/weapon files, their include manifests and
+ledger inputs. It writes planned YAML, extracts in a separate process to a
+temporary output directory, and compares every resulting raw ledger to the
+requested roster before publishing derived updates. Any extraction/audit failure
+returns nonzero and restores transaction-owned bytes, including BOM/newlines.
+Concurrent edits are not overwritten; conflicts retain recovery originals and
+print their location. No-op confirmation writes nothing and launches no children.
+
+This is exception-safe, not a filesystem-wide atomic transaction: run with the
+game closed and no other writer. A hard process kill can leave intermediate YAML;
+recovery originals are created before the first write and their location is printed.
+Map/script-generated references remain manual review limits. A successful apply
+does not approve its balance targets or replace the full audits and boot gate.
 Each generated workbook also carries a SHA-256 fingerprint of the builder,
 formula/tier helpers, active ordering files, and raw/derived ledgers. `--check`
 rejects a workbook that predates any of those inputs; manual formula edits still
@@ -446,6 +467,17 @@ Two unit kinds are NOT priced by the class-baseline formula:
   `cost target = Σ(passenger costs at Cargo.MaxWeight)`. `check_band` must detect `Cargo:` and check
   the passenger-sum, not the class formula. (Verified: Battle Fortress MaxWeight 6 @ 4000¢.) So an
   unarmed transport is *balanced* (passenger-sum), unlike exempt support.
+
+Maintainer clarification (Aedis, 2026-09-11 04:16 WIB): use a **varied infantry
+load**, with early transports weighted toward early infantry and late/promotion
+transports toward late/promotion infantry. Existing `Cargo.InitialUnits` provides
+a concrete starting load, but validate passenger **weight**, not just headcount,
+against `Cargo.MaxWeight`; empty or overweight loads cannot establish the price.
+Retain the named load and its tier/prerequisite evidence alongside the valuation.
+For armed transports the purchase price remains the passenger sum; **K = 1.25
+belongs inside the combat formula**, giving a combat stat budget of sum / 1.25.
+It is not an extra purchase-price surcharge. No transport prices are changed by
+this clarification.
 
 ### 8.5 New guards to build (wire all into `run_all.sh`)
 

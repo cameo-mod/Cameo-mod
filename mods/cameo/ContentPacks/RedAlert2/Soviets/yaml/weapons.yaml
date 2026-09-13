@@ -5,6 +5,7 @@ RA2TURRETFLAKAA:
 	ReloadDelay: 15
 	ValidTargets: Air
 	Warhead@Flak_Medium:
+		ValidTargets: Air
 		Damage: 10000
 SeaScorpion_AA:
 	Inherits: ^RA2FlakWeapon
@@ -13,6 +14,7 @@ SeaScorpion_AA:
 	ReloadDelay: 17
 	ValidTargets: Air
 	Warhead@Flak_Medium:
+		ValidTargets: Air
 		Damage: 8000
 RA2KirovBomb:
 	Inherits@wh: ^Warhead_Demolition_Heavy
@@ -109,10 +111,12 @@ RA2KirovBomb_nuclear:
 	Inherits@fx: ^Effect_Nuclear_Super
 	Inherits: RA2KirovBomb
 	Warhead@Nuclear_Super:
+		InvalidTargets: Air
 		Damage: 80000
 		Spread: 800
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Nuclear_Super_Percentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 40
 		Spread: 4000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
@@ -129,17 +133,22 @@ RA2KirovBomb_nuclear:
 		Level: 800
 		LayerName: ra2radiation
 
+	Warhead@Demolition_Heavy:
+		InvalidTargets: Air
 RA2KirovBomb_nuclear_elite:
 	Inherits: RA2KirovBomb_nuclear
 	Warhead@Demolition_Heavy:
+		InvalidTargets: Air
 		Damage: 100000
 		Spread: 1000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Nuclear_Super:
+		InvalidTargets: Air
 		Damage: 100000
 		Spread: 1000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Nuclear_Super_Percentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 50
 		Spread: 5000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
@@ -155,6 +164,8 @@ RA2KirovBomb_nuclear_elite:
 		Level: 1000
 		LayerName: ra2radiation
 
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 RA2120mm_rad:
 	Inherits@finalmain: ^Compatibility_Chemical_MediumFlat
 	Inherits@wh: ^Warhead_Chemical_Medium
@@ -414,12 +425,15 @@ RA160mmE_rad_elite:
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 12345
 	Warhead@Nuclear_Super:
+		InvalidTargets: Air
 		Damage: 36000
 	Warhead@Nuclear_Super_Percentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 18
 	Warhead@Effect: CreateEffect
 		Explosions: ra2nukesmall
 	Warhead@CollapsedRA160mmE_rad_eliteChemical_LightPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -450,6 +464,7 @@ RA160mmE_rad_elite:
 		Falloff: 100, 88, 72
 		Range: 0, 183, 366
 	Warhead@CollapsedRA160mmE_rad_eliteConcussion_MediumPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -478,6 +493,7 @@ RA160mmE_rad_elite:
 		Falloff: 100, 72, 50, 32
 		Range: 0, 350, 700, 1050
 	Warhead@CollapsedRA160mmE_rad_eliteDemolition_LightPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -509,10 +525,13 @@ RA160mmE_rad_elite:
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
 	Warhead@Chemical_LightFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 108000
 		PercentageScale: 0
 
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 RA160mmE_fire_elite:
 	Inherits: RA160mm_fire
 	Inherits@Elite: ^RA2EliteEffects
@@ -539,11 +558,153 @@ RA160mmE_tesla_elite:
 		Damage: 120000
 		PercentageScale: 10000
 
+# Faction-local effect compositions preserve the authored Apocalypse visuals
+# without repeating effect overrides on each concrete weapon/rank route.
+# Materialized in resolved order from the authored generic + Apocalypse effects:
+# one heavy glow path, with exact fields/order protected by the premerge fixture.
+^Effect_Apoc_AP_RA2:
+	Inherits@glow: ^ImpactGlow
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_apoc_explosion
+		ImpactSounds: gexpapoa.wav
+		ValidTargets: Ground, Ship
+		ExplosionPalette: ra2effect
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_large_watersplash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+		ExplosionPalette: ra2effect
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 15
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 250
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Smudge1: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Effect1: CreateEffect
+		Explosions: building
+		ImpactSounds: siege_impact.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+	Warhead@Effect2: CreateEffect
+		Delay: 6
+		Explosions: napalm
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+
+^Effect_Apoc_Chem_RA2:
+	Inherits@glow: ^ImpactGlow
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_apoc_explosion
+		ImpactSounds: gexpapoa.wav
+		ExplosionPalette: ra2effect
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+		GlowScale: 2.0
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 15
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 250
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Smudge1: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Effect1: CreateEffect
+		Explosions: building
+		ImpactSounds: siege_impact.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+	Warhead@Effect2: CreateEffect
+		Delay: 6
+		Explosions: napalm
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_large_watersplash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		ExplosionPalette: ra2effect
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
 RA2120xmm:
-	Inherits@wh: ^Warhead_CannonAP_Light
+	Inherits@wh: ^Warhead_CannonAP
 	Inherits@proj: ^Projectile_Shell_Light
-	Inherits@fx: ^Effect_CannonAP_Light
-	Inherits@fx2: ^Effect_Apoc_Explosion_RA2
+	Inherits@fx: ^Effect_Apoc_AP_RA2
 	Range: 6992
 	ReloadDelay: 63
 	Burst: 2
@@ -551,72 +712,28 @@ RA2120xmm:
 	Report: vapoat1a.wav
 	Projectile: Bullet
 		Speed: 699
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 4000
-	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-		Damage: 2
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		Damage: 2
-	Warhead@CannonHE_Heavy: AreaDamage
+		Inaccuracy: 150
+	Warhead@CannonAP: AreaDamage
 		Damage: 12000
-		PercentageScale: 3325
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@TankDestroyerCannon:
+		Heaviness: 0
 RA2120xmm_rad:
-	Inherits@roleflat: ^Compatibility_CannonChem_HeavyFlat
-	Inherits: ^LightChemicalWeapon
-	Inherits@2: ^MediumChemicalWeapon
-	Inherits@3: ^HeavyChemicalWeapon
-	Inherits@4: RA2120xmm
+	Inherits@wh: ^Warhead_CannonChem_Light
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_Apoc_Chem_RA2
 	Inherits@rad: ^RA2RadShell
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 2000
-	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 1
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 2000
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 1
-	Warhead@HeavyChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 2000
-	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 1
-	Warhead@CannonAP_Light: AreaDamage
-		Damage: 2000
-	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
-		Damage: 1
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		Damage: 1
-	Warhead@CannonHE_Heavy: AreaDamage
-		Damage: 2000
-		PercentageScale: 10000
-	-Warhead@HeavyChemicalWeapon:
-	-Warhead@LightChemicalWeapon:
-	-Warhead@MediumChemicalWeapon:
-	Warhead@CannonChem_HeavyFlatCompatibility:
-		ValidTargets: Ground, Water
-		Damage: 12000
-		PercentageScale: 0
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
+	Range: 6992
+	ReloadDelay: 63
+	Burst: 2
+	BurstDelays: 5
+	Report: vapoat1a.wav
+	InvalidTargets: wall
+	Projectile: Bullet
+		Speed: 699
+		Inaccuracy: 150
+	Warhead@CannonChem_Light: AreaDamage
+		Damage: 16000
+		PhysicalStates:
+			Corrosion: 100
 RA2120xmm_fire:
 	Inherits@wh: ^Warhead_CannonFire_Light
 	Inherits@proj: ^Projectile_Shell_Light
@@ -897,20 +1014,70 @@ MigMissiles_tesla_elite:
 	Range: 8600
 	Burst: 8
 
+	Projectile: Missile
+		VerticalRateOfTurn: 16
+		MinimumLaunchAngle: -128
+
+	Warhead@HeavyBombPercentage:
+		ValidTargets: Ground, Ship
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
+	Warhead@HeavyAAWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@FlakWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@MissileAP_Medium:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Air
+	Warhead@MissileAP_Medium_GroundShipExtraDamage:
+		ValidTargets: Ground, Ship
+		InvalidTargets: Air
+	-Warhead@MissileAP_Medium:
+	Warhead@MissileHE_Medium: AreaDamage
+		Damage: 24000
+		PercentageScale: 3333
+		InvalidTargets: Air
+		PercentageDenominator: 10000
+
 RA2MammothTusk_AA:
+	Inherits@missilerole: ^Warhead_MissileAA_Medium
 	Inherits: ^RA2MediumMissile
 	ValidTargets: Air
 	Range: 6100
 	ReloadDelay: 68
 	Report: vapoat2a.wav, vapoat2b.wav, vapoat2c.wav
 	Burst: 2
-	Warhead@MissileAP_Medium:
+	Projectile: Missile
+		VerticalRateOfTurn: 16
+	-Warhead@MissileAP_Medium:
+	Warhead@MissileAA_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Air
 		Damage: 16000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
+
 RA2MammothTusk_AA_elite:
 	Inherits: RA2MammothTusk_AA
 	Range: 7100
 	Burst: 4
+	Projectile: Missile
+		VerticalRateOfTurn: 16
+	Warhead@MissileAA_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Damage: 16000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
 
 V3Launch_elite:
 	ReloadDelay: 50
@@ -935,10 +1102,13 @@ RA2vulcan:
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
 
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 RA2CRFlakGuyGun:
 	Inherits: RA2FLAKAG
 	ReloadDelay: 17
@@ -1013,12 +1183,20 @@ RA2FlakTrackAAGun:
 		ValidTargets: Air
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
+	Warhead@SmallArmsPercentage:
+		ValidTargets: Air
+	Warhead@ChaingunPercentage:
+		ValidTargets: Air
 RA2FlakTrackAAGun_elite:
 	Inherits: RA2FlakTrackAAGun
 	Range: 9292
 	Burst: 2
 	BurstDelays: 3
 
+	Warhead@SmallArmsPercentage:
+		ValidTargets: Air
+	Warhead@ChaingunPercentage:
+		ValidTargets: Air
 IvanAttachAir:
 	Inherits: IvanAttach
 	ValidTargets: Aircraft

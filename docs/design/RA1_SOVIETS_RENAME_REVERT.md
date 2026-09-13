@@ -1,5 +1,29 @@
 # Revert the ra1_soviets rename — all 32 ids got WORSE
 
+## Current implementation note — 2026-09-10
+
+The historical instructions below are provenance, not a script to rerun. The
+verified inventory is **31 Soviet root IDs plus the mammoth color-picker variant**.
+The maintainer's September10 ruling changes the dog target to `ra1_soviets_dog`,
+and separately requests `ra2_allies_dog` and `ra2_soviets_dog`.
+
+The current generator skips already-prefix-compliant IDs, so it does not produce
+this entire restoration map merely by rerunning step1 below. The implementation
+uses the original commit's paired identities, namespace-aware reference edits,
+explicit old sprite bindings, resolved comparisons and map-member preservation.
+Do not rerun a blanket rename or revert the entire original commit: its unrelated
+removal-node changes must remain repaired.
+
+**Correction to the historical Tooltip claim:** the active
+`mods/cameo/fluent/rules/en.ftl` defines `actor_dog.name = Attack Dog`. The path
+quoted in step4 below was not the active file. Keep that valid name key; the
+broken actor-ID-valued GenericName is repaired separately. Naming syntax compliance
+alone neither validates Fluent resolution nor proves semantic naming quality.
+
+The wider naval and weapon-ownership requests are separately inventoried and
+tested; the Soviet restoration must remain distinguishable from those changes.
+Final validation/publication status is recorded in the accompanying change report.
+
 **Maintainer, 2026-09-07:** *"Why the hell would it be renamed? The name was already nice,
 short and unique! Now soviets are like double in the name which should not be the case!"*
 

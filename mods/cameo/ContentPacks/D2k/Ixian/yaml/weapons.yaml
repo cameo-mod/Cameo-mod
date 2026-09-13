@@ -10,10 +10,9 @@ IxianCombatTankCannon:
 	ReloadDelay: 35
 	Projectile: Bullet
 		Speed: 555
-	Warhead@CannonAP_Light:
-		Damage: 4000
+	-Warhead@CannonAP_Light:
 	Warhead@CannonHE_Heavy:
-		Damage: 8000
+		Damage: 12000
 	-Warhead@CannonHE_Medium:
 HeavyIxianCombatTankCannon:
 	Inherits: ^Warhead_CannonHE_Heavy
@@ -27,10 +26,9 @@ HeavyIxianCombatTankCannon:
 	ReloadDelay: 40
 	Projectile: Bullet
 		Speed: 600
-	Warhead@CannonAP_Light:
-		Damage: 6000
+	-Warhead@CannonAP_Light:
 	Warhead@CannonHE_Heavy:
-		Damage: 12000
+		Damage: 18000
 	-Warhead@CannonHE_Medium:
 DuelistTankCannon:
 	Inherits: ^Warhead_CannonHE_Heavy
@@ -82,7 +80,7 @@ DuelistTankCannon:
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 7
 	Warhead@CannonHE_Heavy:
-		Damage: 28000
+		Damage: 84000
 	-Warhead@CannonHE_Medium:
 	-Warhead@Effect1:
 	-Warhead@Effect2:
@@ -95,138 +93,6 @@ DuelistTankCannon:
 	-Warhead@HeavyBomb:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@TankDestroyerCannon:
-	Warhead@PreservedFlat_Grenade: SpreadDamage
-		ValidRelationships: Neutral, Enemy
-		ValidTargets: Ground, Water
-		Spread: 400
-		Damage: 14000
-		Falloff: 100, 50, 33, 25, 20
-		Versus:
-			HAZMAT: 50
-			Shield: 110
-			None: 100
-			Wood: 94
-			Flak: 88
-			Concrete: 82
-			Plate: 76
-			Steel: 70
-			Heroic: 64
-			Scout: 58
-			Light: 52
-			Medium: 46
-			Heavy: 40
-			Superheavy: 34
-			Fighter: 28
-			Bomber: 22
-			Helicopter: 16
-			Spaceship: 10
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@PreservedFlat_GrenadeFriendlyFire: SpreadDamage
-		ValidRelationships: Ally
-		ValidTargets: Ground, Water
-		Spread: 200
-		Damage: 7000
-		Falloff: 100, 50, 33, 25, 20
-		Versus:
-			HAZMAT: 25
-			Shield: 110
-			None: 100
-			Wood: 94
-			Flak: 88
-			Concrete: 82
-			Plate: 76
-			Steel: 70
-			Heroic: 64
-			Scout: 58
-			Light: 52
-			Medium: 46
-			Heavy: 40
-			Superheavy: 34
-			Fighter: 28
-			Bomber: 22
-			Helicopter: 16
-			Spaceship: 10
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		UpdatesUnitStatistics: false
-	Warhead@PreservedFlat_HeavyBomb: SpreadDamage
-		ValidTargets: Ground, Ship
-		Spread: 800
-		Damage: 14000
-		Falloff: 100, 50, 25, 10, 5
-		Versus:
-			HAZMAT: 50
-			Shield: 140
-			Wood: 100
-			Concrete: 96
-			Steel: 92
-			None: 88
-			Flak: 84
-			Plate: 80
-			Heroic: 76
-			Scout: 72
-			Light: 68
-			Medium: 64
-			Heavy: 60
-			Superheavy: 56
-			Fighter: 52
-			Bomber: 48
-			Helicopter: 44
-			Spaceship: 40
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@PreservedFlat_MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water
-		InvalidTargets: wall
-		Spread: 750
-		Damage: 14000
-		Falloff: 111, 33, 11, 3
-		Versus:
-			HAZMAT: 50
-			Shield: 125
-			None: 100
-			Flak: 95
-			Plate: 90
-			Heroic: 85
-			Wood: 80
-			Concrete: 75
-			Steel: 70
-			Scout: 65
-			Light: 60
-			Medium: 55
-			Heavy: 50
-			Superheavy: 45
-			Fighter: 40
-			Bomber: 35
-			Helicopter: 30
-			Spaceship: 25
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@PreservedFlat_TankDestroyerCannon: SpreadDamage
-		ValidTargets: Ground, Water
-		Spread: 150
-		Damage: 14000
-		Versus:
-			Shield: 110
-			Superheavy: 100
-			Heavy: 94
-			Medium: 88
-			Light: 82
-			Scout: 76
-			Steel: 70
-			Concrete: 64
-			Wood: 58
-			Plate: 52
-			Flak: 46
-			None: 40
-			Heroic: 34
-			Spaceship: 28
-			Helicopter: 22
-			Bomber: 16
-			Fighter: 10
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
 D2K_155mm2:
 	Inherits@collapsewh: ^Warhead_CannonHE_Heavy
@@ -303,14 +169,7 @@ D2K_155mm2:
 	-Warhead@HeavyBomb:
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water
-		Damage: 36000
-		PercentageScale: 0
-	Warhead@CollapseTargetCompatibility1: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Ship
-		Damage: 12000
+		Damage: 48000
 		PercentageScale: 0
 
 D2K_155mm3:
@@ -441,6 +300,7 @@ D2K_Bazooka2:
 	ReloadDelay: 5
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
+		VerticalRateOfTurn: 12
 		Blockable: false
 		Inaccuracy: 33
 		InaccuracyType: PerCellIncrement
@@ -506,7 +366,7 @@ D2K_Rocket_Trooper1:
 		MaximumLaunchSpeed: 222
 		MinimumLaunchSpeed: 222
 		HorizontalRateOfTurn: 22
-		VerticalRateOfTurn: 22
+		VerticalRateOfTurn: 12
 		Acceleration: 6
 	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
@@ -537,7 +397,7 @@ mtank_pri2:
 		AllowSnapping: true
 		Shadow: true
 		HorizontalRateOfTurn: 25
-		VerticalRateOfTurn: 25
+		VerticalRateOfTurn: 12
 		TrailImage: large_trail
 		TrailInterval: 1
 		ContrailLength: 0
@@ -1104,13 +964,11 @@ HMG_Duelist_upgrade:
 		Damage: 1
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 18000
 	-Warhead@LaserWeapon:
 	-Warhead@LaserExtraDamage:
 	-Warhead@HeavyMissile:
-	Warhead@Bullet_Medium:
-		Damage: 16000
-		PercentageScale: 0
+	-Warhead@Bullet_Medium:
 	-Warhead@Bullet_MediumFlatCompatibility:
 d2kStormLasher:
 	# Ixian superweapon-class storm. Wired to Storm blend (2026-08-10).
@@ -1289,6 +1147,7 @@ D2K_RocketsCymek:
 	Range: 6787
 	Report: vintatta.wav
 	Projectile: Missile
+		VerticalRateOfTurn: 16
 		Speed: 400
 		Arm: 2
 		Inaccuracy: 800
@@ -1333,12 +1192,10 @@ d2k_air_drone_guns:
 	-Report:
 	StartBurstReport: 20MMGUN1.WAV
 	ValidTargets: Ground, Water, Air
-	Warhead@MissileAP_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
+	-Warhead@MissileAP_Heavy:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 12000
 	MinRange: 1300
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
@@ -1354,10 +1211,8 @@ d2k_air_drone_guns_upgrade:
 	ValidTargets: Ground, Water, Air
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@Bullet_Medium: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 10000
+	-Warhead@Bullet_Medium:
 	MinRange: 1300
 d2k_laser:
 	Inherits@wh: ^Warhead_Laser_Heavy
@@ -1434,6 +1289,7 @@ ixian_farasha:
 		Damage: 1000
 		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@HeavyFlameWeapon: AreaDamage
@@ -1445,6 +1301,7 @@ ixian_farasha:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 1
 		PhysicalStateName: Temperature
@@ -1453,6 +1310,7 @@ ixian_farasha:
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Effect: CreateEffect
@@ -1469,10 +1327,14 @@ ixian_farasha:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
 	Warhead@Laser_MediumFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 8000
 		PercentageScale: 0
 
+	Warhead@EMPUnit:
+		InvalidTargets: Shielded, Air
+		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
 d2k_farasha_aa:
 	Inherits: ixian_farasha
 	-FirstBurstTargetOffset:
@@ -1486,6 +1348,7 @@ d2k_farasha_aa:
 		ValidTargets: Air
 		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@HeavyFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -1495,22 +1358,28 @@ d2k_farasha_aa:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
+		-InvalidTargets:
 		ValidTargets: Air
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@RailgunWeapon: SpreadDamage
 		ValidTargets: Air
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
+		-InvalidTargets:
 		ValidTargets: Air
 	-Warhead@HeavyFlameWeapon:
 	-Warhead@RailgunWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
 	Warhead@Laser_MediumFlatCompatibility:
+		-InvalidTargets:
 		ValidTargets: Air
 		Damage: 8000
 		PercentageScale: 0
 
+	Warhead@EMPUnit:
+		InvalidTargets: Shielded
+		ValidTargets: Air
 farasha_drone_ixian:
 	Inherits@wh: ^Warhead_Inferno_Light
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -1614,7 +1483,7 @@ MongooseRocket:
 		RangeLimit: 25000
 		PointDefenseTypes: Missile
 		HorizontalRateOfTurn: 22
-		VerticalRateOfTurn: 22
+		VerticalRateOfTurn: 12
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 33000

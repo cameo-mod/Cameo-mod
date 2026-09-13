@@ -65,7 +65,7 @@ schwarzermond_barracks:
 	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^SpaceNaxisSpawnActorsOnSell
-	Inherits@ra1_soviets_sovietbarracks: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	SelectionDecorations:
 	Tooltip:
 		Name: Schwarzer Mond Barracks
@@ -216,7 +216,7 @@ schwarzermond_lasertower:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
 		Prerequisites: ~schwarzermond_constructionyard, schwarzermond_barracks
-		Description: template_anti_infantry_defense.description
+		Description: actor_schwarzermond_lasertower.description
 	Valued:
 		Cost: 800
 	Tooltip:

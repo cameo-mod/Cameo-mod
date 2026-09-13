@@ -345,6 +345,7 @@ SteelHoverMissile_elite:
 	Range: 7000
 	Burst: 4
 	Projectile: Missile
+		VerticalRateOfTurn: 20
 		Image: red_dragon
 		Shadow: true
 		TrailImage: red_smokey
@@ -402,6 +403,7 @@ SteelTwisterMissiles:
 	Report: twisterfire.wav
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
+		VerticalRateOfTurn: 16
 		Inaccuracy: 500
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -469,6 +471,7 @@ SteelTwisterMissiles_elite:
 	Range: 6000
 	Burst: 10
 	Projectile: Missile
+		VerticalRateOfTurn: 16
 		Inaccuracy: 600
 		Image: red_dragon
 		TrailImage: red_smokey
@@ -1305,8 +1308,11 @@ RA2RTruckRocket:
 	Report: vintatta.wav
 	ValidTargets: Ground, Water
 	Warhead@MissileHE_Medium:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 LatinBuggyRocket:
 	Inherits@finalmain: ^Compatibility_MissileAP_MediumFlat
 	Inherits@wh: ^Warhead_Demolition_Light
@@ -1320,6 +1326,7 @@ LatinBuggyRocket:
 	Report: vintatta.wav
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
+		VerticalRateOfTurn: 16
 		Speed: 480
 		Arm: 2
 		Inaccuracy: 120
@@ -1459,6 +1466,9 @@ LatinBuggyRocket_elite:
 	Range: 7000
 	Burst: 2
 	BurstDelays: 3
+
+	Projectile: Missile
+		VerticalRateOfTurn: 16
 
 12MissilesActivate:
 	Warhead@1Dam: FireFragment
@@ -1613,17 +1623,27 @@ RA2Robotmm:
 		BeamColor: 00EEFF88
 		Railgun: 96
 	Warhead@Tesla_Heavy:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 4000
 	Warhead@Laser_Heavy:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@Railgun_Heavy: AreaDamage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 8000
+	Warhead@Laser_Heavy_ExtraDamage:
+		InvalidTargets: Air
+	Warhead@EMPUnit:
+		InvalidTargets: Shielded, Air
+	Warhead@Railgun_Heavy_ExtraDamage:
+		InvalidTargets: Air
 RA2Robotmm_elite:
 	Inherits: RA2Robotmm
 	Range: 6780
@@ -1642,9 +1662,24 @@ RA2Robotmm_elite:
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water
 
+	Warhead@Tesla_Heavy:
+		InvalidTargets: Air
+	Warhead@Tesla_Heavy_ExtraDamage:
+		InvalidTargets: Air
+	Warhead@Laser_Heavy:
+		InvalidTargets: Air
+	Warhead@Laser_Heavy_ExtraDamage:
+		InvalidTargets: Air
+	Warhead@EMPUnit:
+		InvalidTargets: Shielded, Air
+	Warhead@Railgun_Heavy:
+		InvalidTargets: Air
+	Warhead@Railgun_Heavy_ExtraDamage:
+		InvalidTargets: Air
 RA2RobotmmScatter_elite:
 	Inherits: RA2Robotmm_elite
 	Warhead@Tesla_Heavy:
+		InvalidTargets: Air
 		PercentageScale: 5000
 	Range: 2260
 	-Report:
@@ -1652,10 +1687,13 @@ RA2RobotmmScatter_elite:
 		-HitAnim:
 		Damage: 4000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		InvalidTargets: Air
 		Damage: 2000
 	Warhead@Laser_Heavy:
+		InvalidTargets: Air
 		Damage: 4000
 	Warhead@Railgun_Heavy:
+		InvalidTargets: Air
 		Damage: 4000
 	-Warhead@Scatter:
 	Warhead@Effect: CreateEffect
@@ -1668,6 +1706,12 @@ RA2RobotmmScatter_elite:
 # SmallArms+Chaingun class convention (was Grenade+HeavyCannon+Chaingun);
 # burst 10 rapid spray, no-air. NaxiMP40 kept for nothing else â€” renamed
 # with its elite pair per the rename law.
+	Warhead@Laser_Heavy_ExtraDamage:
+		InvalidTargets: Air
+	Warhead@EMPUnit:
+		InvalidTargets: Shielded, Air
+	Warhead@Railgun_Heavy_ExtraDamage:
+		InvalidTargets: Air
 naxis_sssoldier_smg:
 	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
@@ -1688,6 +1732,7 @@ naxis_sssoldier_smg:
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
@@ -1695,3 +1740,7 @@ naxis_sssoldier_smg_elite:
 	Inherits: naxis_sssoldier_smg
 	Burst: 20
 	BurstDelays: 4
+	Warhead@Bullet_MediumFlatCompatibility:
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air

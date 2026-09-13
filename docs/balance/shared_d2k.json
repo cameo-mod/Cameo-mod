@@ -73,6 +73,14 @@
      "v": "10"
     },
     "buildable": false,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Cargo.MaxWeight",
+     "v": "30"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Cargo.Types",
+     "v": "Infantry, Vehicle, Tank"
+    },
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -173,6 +181,10 @@
      "v": "Spaceship"
     },
     "buildable": false,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Cargo.MaxWeight",
+     "v": "20"
+    },
     "cost": {
      "src": "inherited",
      "v": "0"
@@ -216,6 +228,14 @@
      "v": "Spaceship"
     },
     "buildable": false,
+    "cargo_capacity": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Cargo.MaxWeight",
+     "v": "30"
+    },
+    "cargo_types": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Cargo.Types",
+     "v": "Infantry, Vehicle, Tank"
+    },
     "cost": {
      "src": "inherited",
      "v": "0"
@@ -597,18 +617,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "4200",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "3200",
-        "falloff": null,
-        "spread": null,
-        "tag": "1Dam",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
@@ -842,18 +855,6 @@
     ],
     "resolved_firepower_modifiers": [
      {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
       "modifier": 100,
       "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#FirepowerMultiplier@ScoutInfantryBuff.Modifier",
       "trait": "FirepowerMultiplier@ScoutInfantryBuff",
@@ -1040,26 +1041,7 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@InfantryBuff",
-      "types": []
-     },
-     {
-      "modifier": 110,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@AntiTankAntiAirInfantryBuff",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
@@ -1364,14 +1346,7 @@
      "RAVehicle",
      "Starport"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 50,
-      "src": "inherited",
-      "trait": "FirepowerMultiplier@GlobalBuffs",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"

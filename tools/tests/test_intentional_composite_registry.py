@@ -127,7 +127,7 @@ class IntentionalCompositeRegistryTests(unittest.TestCase):
 
     def test_bulk_technical_review_does_not_bless_redesign_hazards(self):
         reviewed_signatures = {
-            "VolkovMagneticWeapon", "RA2SCUD", "WaveTurretImpact",
+            "ra1_soviets_volkov_volkovmagneticweapon", "RA2SCUD", "WaveTurretImpact",
             "RA2Virusgun3", "FutureTankCannons", "SamuraiBladeCharged",
             "wc2deathknightFire", "RA2Robotmm", "Laboratory_Bioball",
             "TSRPGTowerRail", "TankBusterBeamCannon", "ExplosiveDebris",

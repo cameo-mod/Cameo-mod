@@ -33,13 +33,13 @@ ra1_allies_alliedlighttank:
 	Turreted:
 		TurnSpeed: 24
 	Armament:
-		Weapon: 25mm
+		Weapon: ra1_allies_alliedlighttank_25mm
 		Recoil: 43
 		RecoilRecovery: 25
 		LocalOffset: 768,0,90
 		MuzzleSequence: muzzle
-	FirepowerMultiplier@HighExplosionShell:
-		Modifier: 50
+	# FirepowerMultiplier@HighExplosionShell:
+		# Modifier: 50
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -89,7 +89,7 @@ ra1_allies_alliedmediumtank:
 	Turreted:
 		TurnSpeed: 20
 	Armament:
-		Weapon: 90mm
+		Weapon: ra1_allies_alliedmediumtank_cannon
 		Recoil: 64
 		RecoilRecovery: 38
 		LocalOffset: 720,0,80
@@ -98,7 +98,7 @@ ra1_allies_alliedmediumtank:
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithMuzzleSmoke:
-		Weapons: 90mm
+		Weapons: ra1_allies_alliedmediumtank_cannon
 	WithSpriteTurret:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplode
@@ -119,7 +119,7 @@ ra1_allies_alliedmediumtank:
 		RecoilRecovery: 38
 		LocalOffset: 720,0,80
 		MuzzleSequence: muzzle
-		Weapon: 90mmCryo
+		Weapon: ra1_allies_alliedmediumtank_cannon_cryo
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 ra1_allies_alliedheavyaatank:
 	Inherits: ^Vehicle
@@ -157,17 +157,17 @@ ra1_allies_alliedheavyaatank:
 		TurnSpeed: 15
 		Offset: -128,0,0
 	Armament@AG:
-		Weapon: HeavyAATankCannonAG
+		Weapon: ra1_allies_alliedheavyaatank_cannon
 		Recoil: 43
 		LocalOffset: 800,80,360, 800,-80,360
 		MuzzleSequence: muzzle
 	Armament@AA:
-		Weapon: HeavyAATankCannon_AA
+		Weapon: ra1_allies_alliedheavyaatank_cannon_AA
 		Recoil: 43
 		LocalOffset: 800,80,360, 800,-80,360
 		MuzzleSequence: muzzle
-	FirepowerMultiplier@ra1_allies_alliedheavyaatank:
-		Modifier: 25
+	# FirepowerMultiplier@ra1_allies_alliedheavyaatank:
+		# Modifier: 25
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -251,18 +251,18 @@ ra1_allies_alliedartillery:
 		TurnSpeed: 24
 		Locomotor: lighttracked
 	Armament:
-		Weapon: 155mm
+		Weapon: ra1_allies_alliedartillery_155mm
 		LocalOffset: 624,0,208
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@Upgrade:
-		Weapon: 155mmCryo
+		Weapon: ra1_allies_alliedartillery_155mmcryo
 		LocalOffset: 624,0,208
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	WithMuzzleOverlay:
 	WithMuzzleSmoke:
-		Weapons: 155mm, 155mmCryo
+		Weapons: ra1_allies_alliedartillery_155mm, ra1_allies_alliedartillery_155mmcryo
 	FireWarheadsOnDeath:
 		Weapon: ArtilleryExplode
 	Voiced:
@@ -334,7 +334,7 @@ ra1_allies_ranger:
 		TurnSpeed: 35
 		Offset: 0,0,128
 	Armament:
-		Weapon: M60mg
+		Weapon: ra1_allies_ranger_machinegun
 		MuzzleSequence: muzzle
 		LocalOffset: 128,0,43
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
@@ -353,10 +353,11 @@ ra1_allies_ranger:
 	Armament@Cryo:
 		MuzzleSequence: muzzle
 		LocalOffset: 128,0,43
-		Weapon: M60mgCryo
+		Weapon: ra1_allies_ranger_machinegun_cryo
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 ra1_allies_minelayer:
 	Inherits: ^Tank
+	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@mines: ^DeployToClearMines
 	Inherits@rearm: ^RearmAtServiceDepot
 	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
@@ -443,7 +444,7 @@ ra1_allies_sheridanassaulttank:
 	Turreted:
 		TurnSpeed: 17
 	Armament:
-		Weapon: SheridanCannon
+		Weapon: ra1_allies_sheridanassaulttank_cannon
 		Recoil: 64
 		RecoilRecovery: 26
 		LocalOffset: 640,0,128
@@ -452,7 +453,7 @@ ra1_allies_sheridanassaulttank:
 		PauseOnCondition: ammo < 4
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@Missile:
-		Weapon: SheridanMissiles
+		Weapon: ra1_allies_sheridanassaulttank_missile
 		Recoil: 32
 		RecoilRecovery: 32
 		LocalOffset: 128,64,192
@@ -461,7 +462,7 @@ ra1_allies_sheridanassaulttank:
 		PauseOnCondition: ammo < 4
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@Upgrade:
-		Weapon: SheridanMissilesCryo
+		Weapon: ra1_allies_sheridanassaulttank_missile_cryo
 		Recoil: 32
 		RecoilRecovery: 32
 		LocalOffset: 128,64,192
@@ -470,14 +471,14 @@ ra1_allies_sheridanassaulttank:
 		PauseOnCondition: ammo < 4
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	Armament@MG:
-		Weapon: SheridanVulcan
+		Weapon: ra1_allies_sheridanassaulttank_chaingun
 		LocalOffset: 384,-64,128
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 4
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
-	FirepowerMultiplier@MultiWeapon:
-		Modifier: 25
+	# FirepowerMultiplier@MultiWeapon:
+		# Modifier: 25
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -512,14 +513,14 @@ ra1_allies_sheridanassaulttank:
 		MuzzleSequence: muzzle
 		AmmoUsage: 4
 		PauseOnCondition: ammo < 4
-		Weapon: SheridanCannonCryo
+		Weapon: ra1_allies_sheridanassaulttank_cannon_cryo
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	Armament@MGCryo:
 		LocalOffset: 384,-64,128
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 4
-		Weapon: SheridanVulcanCryo
+		Weapon: ra1_allies_sheridanassaulttank_chaingun_cryo
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 ra1_allies_reconranger:
 	Inherits: ^Vehicle
@@ -556,12 +557,12 @@ ra1_allies_reconranger:
 		TurnSpeed: 32
 		Offset: -366,0,166
 	Armament:
-		Weapon: ReconRangerRecoillessGun
+		Weapon: ra1_allies_reconranger_recoillessgun
 		MuzzleSequence: muzzle
 		LocalOffset: 730,0,166
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@Upgrade:
-		Weapon: CryoReconRangerRecoillessGun
+		Weapon: ra1_allies_reconranger_recoillessgun_cryo
 		MuzzleSequence: muzzle
 		LocalOffset: 730,0,166
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
@@ -647,7 +648,7 @@ ra1_allies_alliedtigerheavytank:
 		TurnSpeed: 15
 		Offset: 0,0,0
 	Armament:
-		Weapon: TigerCannon
+		Weapon: ra1_allies_alliedtigerheavytank_cannon
 		Recoil: 75
 		RecoilRecovery: 50
 		LocalOffset: 1200,0,200
@@ -676,7 +677,7 @@ ra1_allies_alliedtigerheavytank:
 		RecoilRecovery: 50
 		LocalOffset: 1200,0,200
 		MuzzleSequence: muzzle
-		Weapon: TigerCannonCryo
+		Weapon: ra1_allies_alliedtigerheavytank_cannon_cryo
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 ra1_allies_alliedtankdestroyer:
 	Inherits: ^Tank
@@ -778,25 +779,25 @@ ra1_allies_chronotank:
 		TurnSpeed: 40
 		Locomotor: heavywheeled
 	Armament@PRIMARY:
-		Weapon: ChronoTusk
+		Weapon: ra1_allies_chronotank_missile
 		LocalOffset: -160,-276,232
 		LocalYaw: 100
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@SECONDARY:
-		Weapon: ChronoTusk
+		Weapon: ra1_allies_chronotank_missile
 		LocalOffset: -160,276,232
 		LocalYaw: -100
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@Upgrade:
-		Weapon: ChronoTuskCryo
+		Weapon: ra1_allies_chronotank_missile_cryo
 		LocalOffset: -160,-276,232
 		LocalYaw: 100
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	Armament@UpgradeSECONDARY:
-		Weapon: ChronoTuskCryo
+		Weapon: ra1_allies_chronotank_missile_cryo
 		LocalOffset: -160,276,232
 		LocalYaw: -100
 		MuzzleSequence: muzzle
@@ -820,7 +821,7 @@ ra1_allies_chronotank:
 
 ra1_allies_phasetransport:
 	Inherits: ^Vehicle
-	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@Template: ^ArmedTroopTransportTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -840,7 +841,7 @@ ra1_allies_phasetransport:
 		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ~ra1_allies_promotion_phasetransport
 		Description: actor_sapc.description
 	Valued:
-		Cost: 1800
+		Cost: 1960
 	Tooltip:
 		Name: Phase Transport
 	UpdatesPlayerStatistics:
@@ -860,12 +861,12 @@ ra1_allies_phasetransport:
 		InitialStance: HoldFire
 		InitialStanceAI: AttackAnything
 	Armament:
-		Weapon: APTusk
+		Weapon: ra1_allies_phasetransport_missile
 		LocalOffset: 192,0,176
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@Upgrade:
-		Weapon: APTuskCryo
+		Weapon: ra1_allies_phasetransport_missile_cryo
 		LocalOffset: 192,0,176
 		MuzzleSequence: muzzle
 		RequiresCondition: ra1_allies_upgrade_cryomissiles

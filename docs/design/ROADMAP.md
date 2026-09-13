@@ -3,6 +3,37 @@
 _Entry point for a new session: **[`docs/HANDOFF.md`](../HANDOFF.md)**. This file is the
 granular, resumable task queue that the handoff points into._
 
+## Reference evidence and Japan pilot (2026-09-09) — in review
+
+Owner: Astra coordination, OpenCode GLM 5.3 Flash implementation, under Blackrobe's
+overnight authorization. [Current instructions](REFERENCE_EXTRACTION_PLAN.md#september-9-follow-up-rulings)
+and [DTA investigation](../balance/review/DTA_INI_EXTRACTOR_RESEARCH_20260909.md).
+
+- [x] Review INI damage-channel preservation and consumer eligibility gates (local batch).
+  Reproduced: X-O's zero-direct-damage primary was replaced by its secondary; loaders
+  discarded incompleteness metadata. Received DTA files now match chassis values
+  across 863 actor records per variant; ten primary identities need correction.
+- [x] Implement and review external-source RA3/Dune II/Emperor extractors and regression coverage;
+  raw collection must not be presented as verified automatic balance eligibility.
+- [x] Complete the Katyusha display-name/reference correction and deterministic
+  assignment regeneration. Internal actor identity and firing operation stay unchanged.
+- [x] Implement a source/target-separated, input-pinned Japan diagnostic plus bounded
+  withheld-reference checks. These do not sign anchors or apply unit-stat changes.
+- [ ] Complete evidence-backed fitted proposals and representative matchup validation
+  after the source, class and weapon gates pass. No fabricated missing-source targets.
+- [ ] Obtain versioned Spice Wars data. DTA files arrived at 00:46 on 10 September;
+  selected mode and executable/extension version remain unverified.
+- [ ] Finish the new OpenRA all-armament evidence repair requested at 00:08 on
+  10 September. Factory-ready and maximum-upgrade states remain distinct; unknown
+  activation cannot be replaced with an all-conditions-false assumption.
+- [ ] Implement and validate the continuous-heaviness runtime/tool contract before
+  scoped W24 activation (Aedis authorized implementation 00:40, interpolation 00:51);
+  see [the reviewed findings](../balance/review/CONTINUOUS_HEAVINESS_REVIEW_20260910.md).
+
+Completed boxes above describe reviewed local implementation, not publication, anchor
+approval or an applied rebalance. Same-base full-suite comparison at `50b7d001b` retains
+all 24 baseline failure/error signatures; the later OpenRA repair needs its own final run.
+
 ## STAT GRANULARITY + REGENERATION (2026-09-07) — maintainer rulings, IN FLIGHT
 
 - [x] DESIGN.md: HP to **1000-steps for every type** (was 2500 vehicles / 1000 infantry),
@@ -30,6 +61,19 @@ granular, resumable task queue that the handoff points into._
 - [ ] Generate `Mobile` / `Turreted` / `Aircraft` TurnSpeed from Speed and drive the
   T1/T2 ratchets down. 40% of vehicles currently disobey the rule.
 
+## Balance apply failure safety (2026-09-07)
+
+- [x] Repair `apply_balance.py` confirmation: reject incomplete plans, validate
+  provenance/shared consumers, stage extraction outside proposal ledgers, propagate
+  failed subprocesses, and restore transaction-owned writes on failure.
+- [x] Add failure-injection regressions and verify an unchanged live faction dry run.
+
+The former writer could save YAML despite planning errors, invoke the extractor
+with an obsolete positional argument, and report success after subprocess failure.
+The repair is independently reviewed; balance targets still require the normal
+sign-off and boot gates. Evidence and delivery status are in
+`docs/audit/ASTRA_REVIEW.md`.
+
 ## AI PERSONALITY SELECTOR (2026-08-21)
 
 - [x] Add synchronized random Rush/Turtle/Tech/Expansion/Steamroller selection
@@ -53,8 +97,9 @@ granular, resumable task queue that the handoff points into._
 
 ## AI ARCHITECTURE (2026-08-31)
 
-Design: [`AI_ARCHITECTURE.md`](AI_ARCHITECTURE.md). Nothing here is implemented; the
-design document is the deliverable so far. Ordered so each item is independently
+Design: [`AI_ARCHITECTURE.md`](AI_ARCHITECTURE.md). Record-only completed-match telemetry
+is implemented on the follow-up branch; adaptive decision behavior remains proposed.
+Ordered so each item is independently
 verifiable. §10 of the design is the module-by-module build plan: what every loaded
 bot module owns, what it reads from the master's snapshot, and the phase order
 (logging → observe-only master → switching → targeting → hints → fog → learning),

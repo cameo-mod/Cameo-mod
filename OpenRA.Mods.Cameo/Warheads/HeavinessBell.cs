@@ -126,13 +126,19 @@ namespace OpenRA.Mods.Cameo.Warheads
 			}
 
 			// Re-derive the product armors LAST from the finished profile (§12.0b).
-			var peak = values
+			// ⚠ Two guards: an empty candidate set (a table with ONLY derived / non-slot
+			// rows) must not call Max() — it would THROW — and the ORIGINAL peak > 0 rule
+			// must stay, because a non-positive peak (zero or negative values) would
+			// divide by zero or flip the product below. Fail safe: skip in both cases.
+			var peakValues = values
 				.Where(kv => !NonArmorRows.Contains(kv.Key) && !DerivedArmors.Contains(kv.Key))
 				.Select(kv => kv.Value)
-				.Max();
+				.ToList();
 
-			if (peak > 0)
+			if (peakValues.Count > 0 && peakValues.Max() > 0)
 			{
+				var peak = peakValues.Max();
+
 				foreach (var (name, first, second) in new[]
 				{
 					("Heroic", "Plate", "Scout"),

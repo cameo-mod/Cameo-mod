@@ -1,4 +1,278 @@
+﻿## OpenCode GLM 5.3 Flash - Astra pipeline batch: A3/C1 dossiers, extrapolation join, speed law, report refresh (2026-09-09)
+
+### Japan pilot follow-up — Astra, 2026-09-09 (in progress)
+
+Aedis requested a Japan pilot against reference-grounded TD GDI/Nod and RA1
+Allies/Soviets; Blackrobe authorized isolated implementation and new PRs,
+while protecting his existing PRs. The shared reference map includes pending
+C46 classes, not applied runtime membership. No anchor sign-off is implied.
+
+Prior art: `reference_targets.target_for` supplies R4 targets;
+`faction_extrapolate` supplies exchange rates/rank placements;
+`derive_virtual_anchor` supplies current-ledger diagnostics; `fit_class`
+already prices virtual models. Missing: a bounded pilot comparison separating
+classic-original R4 evidence from Japan's same-class sensitivity and explicit
+holds. Reuse these functions, not another matcher or pricing formula. Proxy
+routes and synthesized cost comparisons are not approved calibration.
+
+Additional confirmed gaps: INI consumers dropped weapon incompleteness while keeping
+numeric DPS; source-target projection could bypass the population eligibility gate;
+the reference matcher removed overlapping faction words in randomized set order.
+The bounded repairs preserve chassis evidence and expose legacy uncertainty. Aedis
+accepted source/target separation, frozen inputs, disagreement and holdout checks at
+23:07–23:08; no existing tool supplies the source-held-out test without self-vote, so
+a bounded validator reusing the existing coordinate machinery is being added.
+
+One boot/menu check completed at 23:31–23:32 Asia/Jakarta: fresh
+`MenuPostProcessEffect.PostWorldLoaded`, no new exception log, 90 seconds observed,
+peak sampled system memory 76.63%. Isolated settings/logs and unchanged pinned engine;
+not a matchup or balance-validation claim. Full baseline comparison remains in progress.
+
+After refreshing to `50b7d001b`, a second 90-second isolated boot check completed at
+00:24–00:26 on 10 September: fresh menu-load evidence, no exception logs, peak sampled
+memory 70.57%, owned game process closed. Same-base full Python comparison: baseline
+1306 tests / 16 failures / 8 errors / 45 skipped; candidate 1609 / 16 / 8 / 63.
+All 24 failure/error signatures match. The subsequent holdout terminology-only change
+has focused coverage; OpenRA armament evidence work is a later validation stage.
+
+Aedis's 00:14 continuous-heaviness review request pauses unpublished W24 conversion
+drafts. See `docs/balance/review/CONTINUOUS_HEAVINESS_REVIEW_20260910.md` for the
+arithmetic-versus-weighted-mean contradiction, percentage-growth gap, active-zero
+semantics and runtime/tool parity requirements. Aedis subsequently authorized
+implementation at 00:40 and confirmed interpolation at 00:51; that implementation
+is on a separate branch, not part of this reference-data batch.
+
+Final reference Python run on 10 September: 1675 tests, 14 failures, 8 errors,
+63 skips; no added failure/error signatures versus the same-base baseline.
+Two baseline failures (ADATS and TKM) disappear because stale derived-ledger
+expectations were regenerated, not because their weapons were changed. Sampled
+system-memory peak was 85.59%, below the 90% guard. The final DTA corpus-focused
+run additionally passed 17 tests, including the external pinned-baseline checks.
+The exact-source DTA refresh retains all 10,144 non-DTA raw lines and changes
+analytical range/DPS recommendations for 63 assigned actors, not live unit stats.
+All 33 raw/derived ledgers and the complete audit set are refreshed deliberately;
+these generated artifacts are not claimed untouched. Only the Katyusha display
+name changes live actor configuration in this batch. Independent review found
+no additional DTA blocker and recommended a new review PR, not a merge claim.
+
+### Earlier pipeline batch
+
+Batch under Codex/Astra planning/review coordination, no commits; both 2026-09-09 passes
+consolidated here. A3/C1: fixed seven-section `propose_anchor_spec.py` dossier generator —
+read-only virtual candidate + readiness over live resolved YAML and the ledger for 700
+classified members (638 fit-eligible, 62 excluded), four axes only, no DPS target; strict
+source+ID references with a separate hero lane; source hashes, registry race checks and
+refuse-overwrite diagnostics. Four C3 pilots checked in at `docs/balance/anchors/` with
+coordinator judgement in section 6; nomination retention is not sign-off or restat.
+Extrapolation: strict ID join drops 22 wrong-ID substitutions, none lost; fresh 903
+assignments = 863 ordinary + 40 hero-only excluded; virtual members 3235 -> 3193;
+coverage 537/633 unchanged; 48 THIN stat rows (CLI minimum 3). Stored fits: 26/28 classes
+lack stored cost0/o0/p0/q0 (line_breaker, mbt complete legacy raw); the false "0/28
+identity failed" assertion was removed. Speed law: DESIGN steps 1 for every type
+(64dd80480) wired into derive metadata/tests and `propose_class_rebalance` rows — future
+proposals only, no live stat changes. C8: eight role questions, no classification changed;
+C43 twin-AA analysis retains generated twin armaments; C49 fitting follow-up (coordinator
+run, `pure-aa-fitting-run.txt`) gives all 21 strict pure-AA rows a fit diagnostic,
+nominal DPS retained, no signed price; Scourge 2875 is raw periodic DPS, not a suicide
+valuation. Report refresh: four committed `latest/` reports updated verbatim from
+coordinator-verified toolstdout — no re-runs, no ratchet changes. Independent challenge
+FINAL: CLEARED WITH CAVEATS — no remaining blocker on the speed law or the four pilot
+notes; 5 new speed tests confirmed. Final bounded run VERIFIED from
+`docs/audit/latest/bounded_test_run.json`: 107/107 modules, 1121 tests, 45 skipped, 14
+failing modules — the 21 FAIL/ERROR signatures are identical to the published
+`5544cf061` report, all 14 known baseline (`a089bd3dc`), no new failing module, no
+full-suite-green claim; seven targeted modules 190/190. Bounded-run peak 865.4 MB / 60.1%
+PC over 639.5 s inside the 1536 MB / 84% guards; dossier generation is a separate
+1227.3 MB / 55.9% peak. Upstream re-fetch unchanged at `5f170ba07` (0 commits missing),
+integrated at local `eb3cb60a3`; PR #335 DRAFT/open at remote head `5544cf061`. No
+YAML/C#/engine/pin changes or game launch. AI owner handover: the `_AI_NAME` literal-U+0008
+counterfactual is measured — ordinary pool 4384 -> 4370 (14 Red Resurrection AI-only rows
+dropped, 0 added) with 0 current assignment deltas (scope 686, chassis 67 unchanged); owner
+patch unapplied at `docs/audit/patches/ai_name_boundaries.patch`, root regression red/green
+pending, calibration regenerates only after the fix lands. Doc correction: EXTRAPOLATION_PROGRAM
+§1's superseded raw-fit metrics block replaced with the dated 2026-09-09 stored-fit measurement
+(28 entries, 26 without stored cost0/o0/p0/q0 — absence is not failed identity). Details and
+pilot blockers: `docs/audit/ASTRA_REVIEW.md` (2026-09-09 section).
+
+## Devin-Ember - LANE-1 W24 collapse batches 1-3: 19 weapons to single-main (2026-09-07, midday)
+
+**Identity:** Devin-Ember (Devin CLI, SWE-1.7 Max), LANE-1 per .agent-id / CLAIMS.
+Branch `devin/ember/w24-lane1` (commits `62fbc0339`/`10dca3861`/`6cec3798e`).
+
+Collapsed 19 TiberianSun/Consortium broadcast weapons to one main each per
+`collapse_target.py` targets + `plan_warhead_collapse.py` family picks.
+Mechanics used: same-block inherit+node drops, `-Warhead@X:` cancellations of
+parent-inherited mains (TSHellfireSonic, TSZoneHellfireSonic, SteelMegaSword_elite),
+and one forced chain collapse (SteelStalkerRailgun_EMP/_elite/EScatter share an
+untyped `Warhead@Quantum_HeavyFlatCompatibility` node - removing the parent's
+`@roleflat` orphans all descendants, so all three went to Tesla).
+
+New traps for the fleet:
+- The planner's NAME heuristic fires on name substrings even when the family is
+  absent from the resolved mains (TSBoatcannon 'cannon'->CannonHE vs Concussion+
+  Demolition; TSSonicZapWeapon 'sonic'->Sonic vs Tesla+Magic; three Consortium
+  cases). Gate NAME rows by "family must appear in resolved mains".
+- `Inherits@roleflat` overrides down a chain mean removing it reverts to the
+  grandparent's flat template - check for an existing `-Warhead@` cancel.
+- `audit_release_drift` reads raw `Damage`, not `PercentageScale`-adjusted
+  runtime: a shrapnel child at 16.67% scale looked 6.05x shipped until its flat
+  `Damage` was set to the tool's 30000 target.
+
+Skipped (ruling-blocked, detailed in fleet report
+`ember_2026-09-07_lane1_batch1.md`): shotgun trio (same-block -Warhead@
+self-cancel), SteelAirTurret chain (NONE-confidence elite), TSScoopDualChem
+(ambiguous chem-vs-chem), 5 planner NAME-misfires, TSCABALObeliskLaserFire
+(deliberate 2.68x), CabalAscendedRockets (conditional bonus main), 14
+not-planner-covered weapons.
+
+Gates on branch tip: empty-warhead 0, drift D1 128/133 D2 61/62 D3 27/27
+D4 335/335, weapon_shape W5 377/394, shrapnel 193 clean, boot-gate PASS x3.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
+
 # Development Log
+
+## Codex - Complete runtime graph validation (2026-09-07)
+
+A 21-minute scripted match completed normally with all 80 kills, exact reciprocal
+value accounting and no new exceptions. Its replay verified positive/negative
+trade, flat history, the shortened selector label and both scroll arrows at
+1024x768 (1–21 minutes to 0–20 and back). Replay recording exclusion also held.
+The final rebuild and all 76 C# tests pass. Raw Python/audit failures remain in
+the published evidence; no prices or anchor sign-offs were forced. Detailed
+runtime scope and cleanup evidence are in ASTRA_REVIEW.md.
+
+## Codex - Reconcile conflicting weapon-conversion directions (2026-09-07)
+
+Removed the stale exemption/snapshot routing from TASK_INDEX and aligned DESIGN's
+older SUM paragraph, the old four-inherit split plan and program-plan instructions
+with current DESIGN section 11b.1. Historical examples remain labeled as history;
+no new survivor family or payload policy is invented. Independent review confirmed
+these contradictions. Ambiguous staged/routed conversions remain review decisions,
+not grounds for automatic arithmetic changes. Scope and open decisions are recorded
+in ASTRA_REVIEW.md; this is not a claim that every repo document is reconciled.
+
+## Codex - Fail-closed audit and equivalent weapon source cleanup (2026-09-07)
+
+Ledger claim measurement can no longer report zero drift after a failed audit;
+three regression methods cover 15 output/exit scenarios. The Ordos APC AA weapon's
+duplicate compatibility key is merged without changing any of 2,894 resolved
+weapon definitions. Duplicate findings fall 261 to the unchanged limit of 260;
+33 ledgers remain drift-free. Fresh menu boot passes without new exceptions.
+Two exact Soviet Barracks test references follow the upstream rename, retaining
+their assertions. Final Python run: 823 tests, zero skipped, 42 failed modules
+versus 43 upstream, no newly failing methods; all 76 C# tests pass. Overall audits
+remain red and no unsupported prices or anchor approvals were applied.
+
+## Codex - Active engineer roles and complete readiness output (2026-09-07)
+
+The three D2K engineers now extract as EngineerInfantry from their exact active
+pack template and classify as support, as Formula V2 already rules. Exactly three
+ledger subtype strings change; no numbers or gameplay change. Independent review
+approved the scope; three new inheritance tests plus existing assignment/firepower
+checks pass. Buildable unit-like coverage: 632/886 to 635/886 (71.7%).
+
+The full readiness CLI exposed a missing-baseline formatting crash and a reused
+variable that replaced JSON fit rows with a weapon list. Twelve readiness tests,
+including command-level JSON coverage, now pass; the real command exits zero and
+emits all 27 class rows. Zero anchors are signed. This corrects the earlier overly
+broad CLI-completion statement; detailed source evidence is in ASTRA_REVIEW.md.
+
+## Codex - Record-only match telemetry and AI integration (2026-09-07)
+
+Implemented Aedis's first AI delivery phase: bounded local completed-match JSONL,
+existing personality observation, explicit missing values and limited source/code
+fingerprints. No AI decisions, orders, balance numbers or network uploads change.
+76 Cameo C# tests pass; fresh build has zero errors. A deterministic test match
+recorded expected outcomes/accounting; its normal-exit replay wrote no duplicate;
+menu boot wrote no match record. No new exceptions, peak PC memory 71.6%.
+Temporary fixtures and synthetic output moved out of game folders for recovery.
+
+Adapted PR 323's observer graph in its own commit and repaired the unrelated
+upstream Soviet actor IDs that prevented the mandatory shellmap boot. Independent
+review approved the integration; visual review was still pending at that checkpoint
+(the final runtime follow-up in ASTRA_REVIEW.md records the later checks).
+Expanded the existing AI module contract, prepared five distinct external research
+briefs (answers not yet received), and clarified record-only versus future phases.
+Readiness coverage now reports its non-structural denominator honestly; no anchors
+were signed or factions repriced. Full evidence: `docs/audit/ASTRA_REVIEW.md`.
+
+## Codex - Safe balance apply completion (2026-09-07)
+
+Repaired the existing writer rather than adding a parallel pricing framework.
+It now preflights the complete plan, checks fresh provenance and shared consumers,
+stages extraction outside proposal ledgers, verifies the full requested raw roster,
+and checks validation exit codes before success. Failure/interrupt recovery preserves
+transaction-owned bytes and preserves detected external edits. These are optimistic
+checks, not an OS lock or atomic compare-and-swap; exclusive file ownership is required.
+
+35 focused tests pass. Full suite: 800 tests, zero skips, 43 failed modules;
+failure identities match merged PR 328 exactly. Real staged extraction reproduces
+all 67 artifacts semantically without touching live ledgers. Canonical audits
+complete with existing failures and no empty reports. Independent review approved
+the scoped repair. No gameplay values were applied and no game was launched for
+this tools-only commit. Dossier: `docs/audit/ASTRA_REVIEW.md`.
+
+## Devin-DAWN (A4) — LANE-3 batch 1: 10 multi-main collapses (2026-09-07)
+
+**Identity:** Devin-DAWN (Devin CLI, SWE-1.7 Max). Formerly the "second Nova" —
+re-slotted per `Cameo-mod-fleet/AGENTS.md` (`.agent-id` = A4/DAWN/`devin/dawn/`).
+
+Batch 1 of LANE-3 (D2k/StarCraft/Warcraft2/TiberianDawn W24 + drift repair),
+commit `5be0ad305` on `devin/dawn/w24-lane3`:
+
+- 10 weapons collapsed to one resolved main each, survivor `Damage` set to the
+  `collapse_target.py` number: CommandoM16, CommandoSniper,
+  td_gdi_commando_sniper_elite, GDISniperRifle (TD); wc2_dwarf_Rifle,
+  wc2catapultFire, wc2deathknightFire (WC2); ArcherArtilleryShell,
+  ArtilleryShellUpgrade (TD); GoliathMk2MG (SC).
+- Mechanic: delete local `Warhead@CollapseTargetCompatibility1` / `*Compatibility`
+  placeholder blocks, or add `-Warhead@X:` markers where an ancestor still
+  provides the node (verified providers exist — no dangling removals).
+- Gates: `find_empty_warhead` 0; `audit_release_drift` all ratchets hold;
+  `audit_weapon_shape` W5 394→382, nothing rose; boot-gate PASS from the
+  worktree (engine `462fc1fc` copied in for the launch).
+- Deferred: `JimRaynorMachineGun` (planner family Bullet but resolves
+  MissileHE+CannonHE — needs a family swap, not a drop); 12 NONE-confidence
+  weapons listed in the fleet report.
+
+Batch 2 (`5ab072593`): 3 shipped-damage repairs (wc2ogremageRunes_Hit,
+d2k_grenade, D2K_Rocket_Trooper_AGOnly) + 7 collapses (D2K_155mm2, AtreusMG,
+EpigraphMG, HMG_Duelist_upgrade, DuelistTankCannon, BlackHandLaser, BCLaser).
+Drift improved: D1 131(-2), D2 59(-3), D3 23(-4); W5 377(-5). Boot PASS.
+Deferred for ruling: `BikeRockets` split-definition, `AGOnly` AP-vs-HE role
+conflict with `df01cb590`, the `^D2KMissile`/`PhoenixRocket` family-swap
+cluster, and the `D2K_Rocket_Trooper1/2` three-family weapons.
+
+Batch 3 (`334cff6ef`): 10 collapses incl. the two 6-main Lockdowns
+(GhostSniper/SpecterSniper families — parent collapse propagates cancels into
+the children; their local overrides had to be deleted, not `-`'d, or they
+either resurrect untyped (NRE) or dangle (boot crash). `find_empty_warhead`
+caught the same class in `ChemRocketsExplosion`/`GrenadeExplode_EMP`, fixed in
+the same commit.) Drift: D2 60(-2), D5 41(-2); W5 365(-12). Boot PASS under
+Nova's BOOT.lock protocol.
+
+Batch 4 (`22a88fc52`): 8 collapses — Laboratory_Bioball, autogun_tank (its
+child autogun_tank_small collapsed free via inheritance), d2k_air_drone_guns +
+_upgrade, IxianCombatTankCannon, LaserObeliskBurning (SUM 120k, Inferno),
+eye_bomberguy, BCYamatoCannon (SHIPPED 144k). W5 356(-9), D1 130(-1). Boot
+PASS. New deferral: `ordos_airmine` (no Chemical main exists — a conversion,
+not a collapse). Gotcha logged in the fleet report: a weapon can carry TWO
+overrides of the same warhead key in its own block — later wins; dump the full
+resolved block before editing.
+
+Batches 5+6 (`b13f1e413`, `4c5410915`): 28 collapses through the legacy
+`weapons/d2k.yaml` + Ordos pack — mostly `Warhead@1Dam` bespoke-Versus legacy
+channels folded into the family survivor, plus the `^D2KMissile` `1Dam`
+cluster (kept MissileAP; the AA/AG role-law question is flagged for ruling —
+`*_AA` wants MissileAA, `*_AG` wants MissileHE per `audit_missile_role_family`).
+`D2K_Rocket_Fremen` collapsed free via its parent. Found a systemic class:
+25 weapons are defined in BOTH a ContentPack file and a legacy file and the
+merge combines them (`d2k25mm`, `d2kFlameTurret` fixed in both; `mtank_pri`,
+`BikeRockets`, `d2k_tyrant`, ~20 more need a canonical-file ruling — details
+in the fleet report). W5 328(-15), drift flat. Both boot-gates PASS.
+
+Co-Authored-By: Devin AI <devin@cognition.ai>
 
 ## Codex - PR 328 current-upstream integration and scoped review (2026-09-06)
 
@@ -10577,6 +10851,31 @@ Maintainer repealed intentional_composites exemption 2026-09-06 night. Impact on
 BLOCKED: maintainer has active -Warhead@ sweep across 31 files touching my Ordos (114 lines) and Shared (18 lines). Must wait for sweep to commit.
 
 — Devin-Aurora
+# 2026-09-07 — Astra: readiness command and Heavy Sniper class correction
+
+Repaired the readiness crash on the removed composite-exemption API, retained raw
+stack counts, failed closed for unknown weapon inputs, and separated diagnostic
+residuals from sign-off. Applied the existing Heavy Sniper role ruling to its
+ledger metadata only: no actor stats/template changes. Nine readiness tests and
+13 membership tests pass; extraction reports 33 ledgers with zero drift. All 27
+anchors now belong to their declared class; zero anchors signed. Evidence and
+remaining pricing gates: `docs/audit/ASTRA_REVIEW.md`.
+# 2026-09-07 — Astra: repair packaged shellmap references after Soviet rename
+
+The required menu boot caught 25 missing placed actor references across desert
+shellmap 2 and shellmap v3. Corrected 82 references across their placements, Lua
+and local rules plus survival's script, using upstream ad7c5e232's exact actor
+renames. No actor definitions or map balance values changed. Added shared archive
+MiniYAML parsing and regression checks. Menu now loads with zero new exception
+logs; 69.2% peak PC memory. Detailed evidence: `docs/audit/ASTRA_REVIEW.md`.
+# 2026-09-07 — Astra: integrate PR 323 observer combat-value graph
+
+Adapted Devin AI's PR 323 graph for coordinator review, preserving attribution.
+Fixed enum/dropdown hotkey alignment and the accounting label; added signed-axis
+and sampling regressions. Fresh DLL verified, 63 C# tests pass, and the menu boot
+passes after the separately committed packaged-map repair. Independent source
+review approved; live observer visual layout remains pending. No gameplay balance
+or bot-decision changes. Evidence: `docs/audit/ASTRA_REVIEW.md`.
 
 ## Devin-Nova — boot-gate fix: dangling ra1_soviets_* refs in 7 oramaps (2026-09-06, ~18:00)
 
@@ -10624,3 +10923,133 @@ the whole `SpreadDamage.Amount` kind), at ratchet. Complements the parallel Nova
 (`15321fe2b`) — different kind, no overlap. Boot-gate PASS.
 
 Co-Authored-By: Devin AI <devin@cognition.ai>
+
+## Codex — PR #329 upstream integration and safe balance inputs (2026-09-07)
+
+Integrated upstream `648f62f7c6`, retaining restored warhead removal nodes and
+the Ordos APC AA duplicate-key repair. Its complete resolved weapon is identical
+to upstream. Corrected Bastion's five-soldier tooltip and Laser Tower's omitted
+aircraft targeting, with two resolved-rule regressions. The balance writer now
+rejects wrong engine scalar types, overflow and invalid burst cadence before
+touching YAML (39 tests). Readiness includes aircraft speed, cell-based ranges
+and full burst cycles, and refuses malformed delays instead of inventing DPS
+(16 tests). No numeric gameplay stats or anchor approvals changed.
+
+Independent review challenged the edge cases; its malformed-delay finding was
+fixed before publication. Build and all 76 Cameo C# tests pass. Integrated game
+boot is pending; earlier replay evidence predates this merge. The full-suite
+upstream comparison and current audit limitations are recorded in the existing
+`docs/audit/ASTRA_REVIEW.md` dossier. PR #329 remains open/unmerged.
+
+Co-Authored-By: Codex <noreply@openai.com>
+
+## 2026-09-07 — Restore merge-damaged payloads and reconcile inherited regression tests
+
+Completed Blackrobe's integrated runtime smoke and inherited-failure triage for
+PR #329. Merge4fd9937f3 combined alternative Scooper and Apocalypse weapon work;
+restored the authored chemical/AP roles across five concrete definitions, with
+resolved-inheritance regression coverage. This changes live damage/profile/state
+behavior, not actor prices or firing cadence. Two effect compositions preserve
+the Apocalypse visuals without exceeding structural ratchets. The whole-roster
+comparison explicitly reports the intended gameplay differences.
+
+Reconciled retired audit imports, identities and historical fingerprints without
+weakening converter guards or changing historical reports. Independent review
+challenged retained field/closure coverage and the cosmetic ordering boundary;
+all findings were addressed. The strict engine caught obsolete removal nodes in
+an intermediate repair; they were fixed and guarded before the final runtime pass.
+
+Final-state match and replay complete normally with no new exceptions and no
+duplicate match record; the observer graph shows signed values and the final
++600 plateau. Final dependency-enabled Python: 930 passed, 44 existing retired-
+feature skips, zero failures (974 tests across 98 modules). All 76 C# tests and all
+33 raw/derived ledger checks pass. Canonical findings remain visible rather than
+being exempted. Runtime artifacts are recoverably removed from live folders.
+Full evidence, limitations and revert boundaries: `docs/audit/ASTRA_REVIEW.md`.
+PR #329 remains draft and unmerged for coordinator review.
+
+Co-Authored-By: Codex <noreply@openai.com>
+
+## 2026-09-07 — Reconcile PR 329 with the merged observer graph and AI logger
+
+Integrated upstream `9ad1a5f77`, including PRs 323/331 and the JSON separator fix.
+Retired the competing CameoMatch recorder and its schema-specific tests; upstream
+AiMatchLogWriter is the sole active writer. Retained a permanent loaded-save
+exclusion, graph sampling/range tests, fitting labels and the enum/dropdown hotkey
+ordering repair. Adopted current design rulings and reconciled logging contracts.
+No new weapon or actor-stat edits. The build, 70 C# tests and 33 zero-drift ledger
+checks pass; the integrated menu reaches WorldLoaded with no new exception.
+Independent integration review found no blocker. Bot-match/replay emission remains
+unverified on this replacement writer; old recorder runtime evidence is historical.
+Full-suite/audit completion is recorded in `docs/audit/ASTRA_REVIEW.md`.
+PR 329 remains draft and unmerged.
+
+Co-Authored-By: Codex <noreply@openai.com>
+
+## 2026-09-08 — Astra: tested pipeline implementation, pending publication
+
+Isolated branch `codex/astra-pipeline-implementation`, based on `a089bd3dc`.
+No commits, pushes, gameplay YAML changes, anchor signatures or game launches.
+
+- A4: shared report-column contract; per-main damage/count semantics; explicit report
+  selection and dry-run default; refuses incomplete/stale/unsupported selections.
+  Existing staged ledgers are preserved by refusal, and writes reuse `Transaction`.
+- A2: `derive_virtual_anchor.py` gathers classified eligible members, reference IDs,
+  rounded current-stat medians, bias and thin-sample diagnostics. All are unapproved:
+  these are NOT calibrated reference targets. Missing explicit damage/reload emits
+  `NO MODEL`, not invented prices. With explicit synthetic inputs, virtual `fit_class`
+  now uses the existing final per-stat formula, proving baseline O=P=Q=cost and the
+  2.5x verifier. Real-actor fitting is unchanged. A3 awaits C32 reconciliation; the
+  named AURORA readiness branch was not present on upstream when checked.
+- A5: paired refusal/pass tests cover shadowed unit/weapon/warhead values, preserved
+  retired multipliers, untouched inherited/utility fields, and a real allowed-consumer
+  graph. This is targeted coverage, not a claim every refusal is exhaustively paired.
+- B2: `audit_weapon_shape.py --compare-split` explains 304 versus 231: 73 shape-only
+  weapons, zero split-only. Both predicates and every ratchet remain unchanged.
+
+Independent challenge found and drove fixes for staged-proposal erasure, sidecar and
+population mismatch, off-grid model cost, spawn-sibling inclusion, and arbitrary model
+DPS defaults. Resolved-inheritance producer/extractor/consumer coverage was added.
+Combined isolated unittest run: 103 modules, 1017 tests, 45 skips, 15 failing modules.
+All 15 also fail on clean `a089bd3dc`; failures were NOT waived or repaired by changing
+weapon expectations. Details remain in `docs/audit/latest/bounded_test_run.json`.
+33 ledgers have zero drift; percentage-runtime audit and structure ratchets pass.
+Test-runner sampled peak: 839.6 MB process tree, 45.4% PC memory.
+
+Open boundaries: the current MBT replacement-damage producer still refuses retained
+inherited/scoped firepower; this guard was not bypassed. The new armed-transport class
+has no classified members until its template migration lands. Support has no combat
+verifier. Faction approval/calibration and model choices are still required before any
+signable anchor. Chrome/hook/compatibility-splice defects refer to the old PR code,
+not the current-master implementations; no disputed PR payload was imported here.
+
+## 2026-09-08 — Ground-domain fitting follow-up for draft PR 335
+
+Both real and virtual fitting now reuse the reference pipeline's AA slot/weapon
+naming predicate. Active ground weapons supply DPS, range, K coverage and charge
+fallback; pure-AA domains remain represented. Baseline condition evaluation is
+unchanged: no strongest-conditional-mode fallback was imported. Virtual derivation
+uses the same armament selection. No gameplay YAML or actor prices changed.
+
+Comparison: 44 of 638 eligible classified ledger actors change fitting inputs.
+APC range/nominal DPS: 8502/400 -> 5668/200; BTR80: 8181/500 -> 5454/250.
+These are fitting units, not measured gameplay DPS or approved prices. Ten new
+tests cover domain selection, condition filtering, K/fallback semantics and actual
+APC/BTR resolved inheritance. The generated firepower-input report was refreshed.
+
+Independent challenge found no AA blocker. Expanded focused run: 117 passed,
+229 subtests passed. Full isolated suite: 104/104 modules, 1027 tests, 45 skipped,
+14 failing modules, all from the previously reproduced upstream failure set.
+The refreshed report fixes the fifteenth failing module; no new failing module.
+33 ledgers: zero drift. Percentage-runtime audit and diff checks pass. Full-suite
+sampled peak: 882.7 MB process tree / 47.6% PC memory; guards 1536 MB / 84%.
+
+Limitations: AA detection follows naming, not actual target masks. Existing
+physical-state sidecars can select upgrade/passenger modes outside baseline;
+none of the excluded AA weapons supplies that surcharge in this population.
+That broader issue is not changed here. A3 readiness remains untouched: AURORA's
+named branch is absent from both GitHub remotes and no identifiable patch was
+found in reachable history. Requested Aedis's C32 reconciliation on PR 335;
+absence is not permission to release the ownership gate. PR remains draft.
+
+Co-Authored-By: Codex <noreply@openai.com>

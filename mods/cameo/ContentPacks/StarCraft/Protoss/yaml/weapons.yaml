@@ -38,20 +38,24 @@ PositronGrenade:
 	Warhead@SmallArms: SpreadDamage
 		Damage: 8000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 1
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 8000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 1
 	Warhead@Grenade: SpreadDamage
 		Damage: 8000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 4000
 	Warhead@GrenadePercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 1
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 8000
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 1
 	Warhead@Effect: CreateEffect
 		Explosions: scblueexplosion
@@ -69,6 +73,7 @@ PositronGrenade:
 	-Warhead@SmallArms:
 	-Warhead@TankDestroyerCannon:
 	Warhead@Quantum_MediumFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 40000
 		PercentageScale: 498
@@ -80,24 +85,30 @@ PositronBounce1:
 	Warhead@Bullet_Light: AreaDamage
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 2
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 4000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 2
 	Warhead@Grenade: SpreadDamage
 		Damage: 4000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 2000
 	Warhead@GrenadePercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 2
 	Warhead@CannonHE_Medium: AreaDamage
+		InvalidTargets: Air
 		PercentageScale: 10000
 		Damage: 4000
 	Warhead@CannonAP_Light: AreaDamage
+		InvalidTargets: Air
 		Damage: 8000
 		PercentageScale: 0
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 2
 	Warhead@shrapnel: FireShrapnel
 		Weapon: PositronBounce2
@@ -105,11 +116,16 @@ PositronBounce1:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	Warhead@Quantum_MediumFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 24000
 		PercentageScale: 0
 	-Warhead@Bullet_Light:
 
+	Warhead@SmallArmsPercentage:
+		InvalidTargets: Air
+	Warhead@TankDestroyerCannonPercentage:
+		InvalidTargets: Air
 PositronBounce2:
 	Inherits@pinnedcannon: ^Warhead_CannonHE_Medium
 	Inherits: PositronGrenade
@@ -117,35 +133,46 @@ PositronBounce2:
 	Warhead@Bullet_Light: AreaDamage
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 1
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 2000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 1
 	Warhead@Grenade: SpreadDamage
 		Damage: 2000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 1000
 	Warhead@GrenadePercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 1
 	Warhead@CannonHE_Medium: AreaDamage
+		InvalidTargets: Air
 		PercentageScale: 10000
 		Damage: 2000
 	Warhead@CannonAP_Light: AreaDamage
+		InvalidTargets: Air
 		Damage: 4000
 		PercentageScale: 0
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 1
 	-Warhead@shrapnel:
 	-Warhead@FlakWeapon:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	Warhead@Quantum_MediumFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 20000
 		PercentageScale: 0
 	-Warhead@Bullet_Light:
 
+	Warhead@SmallArmsPercentage:
+		InvalidTargets: Air
+	Warhead@TankDestroyerCannonPercentage:
+		InvalidTargets: Air
 InterceptorLauncher:
 	ReloadDelay: 100
 	Burst: 5
@@ -729,6 +756,7 @@ ScoutRockets_AA:
 		ContrailStartWidth: 50
 		ContrailEndWidth: 100
 	Warhead@MissileAA_Heavy:
+		ValidTargets: Air
 		Damage: 10000
 	Warhead@EffectWater: CreateEffect
 		Explosions: small_splash
@@ -1215,7 +1243,7 @@ EpigraphMG:
 		Damage: 1
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 20000
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -1245,10 +1273,7 @@ EpigraphMG:
 	-Warhead@HeavyAAWeapon:
 	-Warhead@FlakWeapon:
 	-Warhead@Chaingun:
-	Warhead@Bullet_MediumFlatCompatibility:
-		ValidTargets: Ground, Water, Air
-		Damage: 18000
-		PercentageScale: 0
+	-Warhead@Bullet_MediumFlatCompatibility:
 
 ManifoldMG:
 	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
@@ -1346,7 +1371,7 @@ AtreusMG:
 		Damage: 1
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 10000
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -1359,10 +1384,7 @@ AtreusMG:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Bullet_Medium:
-		PercentageScale: 2488
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
+	-Warhead@Bullet_Medium:
 	Warhead@Effect: CreateEffect
 		Explosions: steel_bluepiffs
 		ValidTargets: Ground, Water, Air

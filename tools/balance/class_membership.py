@@ -83,6 +83,13 @@ SUBTYPE_TO_CLASS: dict[str, str] = {
     # inflated that population by 40 units in the workbook and the range tool.
     "linebreaker": "line_breaker",              # 30/31 -- was wrongly `mbt`
     "supportvehicle": "support",                # 1/1; support is ability-priced (FORMULA_V2 §6b)
+    # ⛔ INERT UNTIL THE TEMPLATE EXISTS, AND THAT IS THE POINT. `extract_stats` rewrites
+    # `design.class_anchor` to None on every run (extract_stats.py:967), so a hand tag cannot make
+    # an actor a member of anything — SUBTYPE is the only durable membership signal, and subtype
+    # comes from the nearest `^...Template` the actor inherits. So the 16 armed transports become
+    # members by inheriting `^ArmedTroopTransportTemplate`, not by being listed anywhere.
+    # The maintainer asked for exactly this ("maybe they need a new TroopTransport Template?").
+    "armedtrooptransport": "armed_troop_transport",
 
     # --- infantry -----------------------------------------------------------------------------
     "scoutinfantry": "scout",
@@ -98,6 +105,7 @@ SUBTYPE_TO_CLASS: dict[str, str] = {
     "archerinfantry": "archer",
     "rockettrooperinfantry": "rocket_trooper",
     "supportinfantry": "support",
+    "engineerinfantry": "support",             # active D2K role; FORMULA_V2 §6b engineers
     "heroinfantry": "commando",
     "flyinginfantry": "flying_infantry",
     "medic": "support",                         # 3/3
@@ -135,6 +143,7 @@ NEEDS_A_NEW_CLASS = {
     "fighter": "air",
     "spaceship": "air",
     "scoutship": "naval",
+    "antiairship": "naval",
     "artilleryship": "naval",
     "battleship": "naval",
     "harvester": "economy -- FORMULA_V2 §6c does not cover it",
@@ -252,14 +261,13 @@ def main() -> int:
     out = []
     w = out.append
     w("# Class membership - deriving the balance class from the unit template\n")
-    w("⛔ PRIORITY 0 item 1. `anchor_readiness.py` reports **336 of 1870 buildable units tagged")
-    w("(18%)** and fits every anchor against that 18%. The class was always derivable from")
-    w("`design.subtype` - the `^<Name>Template` the actor inherits - and three incomplete,")
-    w("mutually disagreeing copies of the map were the reason it was not derived.\n")
+    w("Membership uses an explicit reviewed tag when present, otherwise the active unit")
+    w("template recorded in `design.subtype`. Counts below describe the current ledger rows,")
+    w("not a historical hand-tag-only snapshot or deduplicated unit roster.\n")
     w(f"* ledger rows: **{len(rows)}**, of which **{why['not-a-unit']}** are buildings, defences")
     w(f"  or upgrades - leaving **{units}** units\n")
     w(f"* **CLASSED: {classed} of {units} ({classed / units:.0%})** - "
-      f"{why['explicit']} explicit + **{why['derived']} newly derived**")
+      f"{why['explicit']} explicit + **{why['derived']} template-derived**")
     w(f"* ⛔ no template at all (PRIORITY 0 item 2): **{why['no-template']}**")
     w(f"* ⛔ template exists, but no class exists for it: **{why['no-class-exists']}**")
     w(f"* ⚠ template mapped to nothing here: **{why['unmapped']}**\n")
@@ -267,7 +275,7 @@ def main() -> int:
     if disagree:
         w(f"## ⚠ Hand tag disagrees with the template - {sum(disagree.values())} rows\n")
         w("The explicit tag WINS (a maintainer override must survive a re-derivation), so these")
-        w("are reported, never auto-resolved. They are where the 18% copy drifted.\n")
+        w("are reported, never auto-resolved. Differences can be deliberate role overrides.\n")
         w("| subtype | hand tag | template implies | rows |")
         w("|---|---|---|--:|")
         for (sub, tag, der), n in disagree.most_common():

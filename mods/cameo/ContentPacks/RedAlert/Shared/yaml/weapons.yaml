@@ -139,7 +139,7 @@ VengeanceActivator3:
 		Duration: 80
 		ValidRelationships: Ally
 
-ConscriptMolotov:
+ra1_soviets_molotovconscript_conscriptmolotov:
 	Inherits: ^Warhead_Demolition_Light
 	Inherits@2: ^Warhead_Flame_Light
 	Inherits@3: ^Projectile_Grenade_Light
@@ -171,9 +171,9 @@ ConscriptMolotov:
 		InvalidTargets: Water
 	-Warhead@Demolition_Light:
 
-ConscriptMolotovExplode:
+ra1_soviets_molotovconscript_conscriptmolotovexplode:
 	Inherits@roleflat: ^Compatibility_Flame_LightFlat
-	Inherits: ConscriptMolotov
+	Inherits: ra1_soviets_molotovconscript_conscriptmolotov
 	Warhead@Demolition_Light:
 		Damage: 4000
 	Warhead@Flame_Light:
@@ -189,24 +189,27 @@ ConscriptMolotovExplode:
 		PercentageScale: 9988
 
 RocketsRA:
-	Inherits@finalmain: ^Compatibility_MissileHE_MediumFlat
-	Inherits@wh: ^Warhead_MissileHE_Medium
+	Inherits@finalmain: ^Compatibility_MissileAP_MediumFlat
+	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
 	ReloadDelay: 50
 	Range: 6643
 	Report: missile6.aud
-	Warhead@MissileHE_Medium:
+	Warhead@MissileAP_Medium:
 		Damage: 10000
-	Warhead@MissileHE_Light:
+	Warhead@MissileAP_Light:
 		Damage: 10000
-	-Warhead@MissileHE_Light:
-	-Warhead@MissileHE_Medium:
-	Warhead@MissileHE_MediumFlatCompatibility:
+	-Warhead@MissileAP_Light:
+	-Warhead@MissileAP_Medium:
+	Warhead@MissileAP_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 		PercentageScale: 9995
-RocketsRACryo:
+	Projectile: Missile
+		VerticalRateOfTurn: 20
+
+ra1_allies_alliedrocketsoldier_rocketsracryo:
 	Inherits@wh: ^Warhead_MissileCryo_Medium
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_Cryo
@@ -216,6 +219,9 @@ RocketsRACryo:
 	Warhead@MissileCryo_Medium:
 		Damage: 20000
 		ValidTargets: Ground, Water, Air
+	Projectile: Missile
+		VerticalRateOfTurn: 20
+
 DragunovSniper:
 	Inherits@wh: ^Warhead_CannonAP_Heavy
 	Inherits: ^TankDestroyerCannon
@@ -372,6 +378,7 @@ ReimuYinYangOrb:
 		LaunchAngle: 128
 		Acceleration: 0
 	Warhead@Magic_Heavy:
+		ValidTargets: Air, Ground, Water
 		Spread: 320
 		Damage: 64000
 	Warhead@Effect: CreateEffect
@@ -626,7 +633,7 @@ MagicOrb2:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: thgun.wav
 
-APCGunAllies:
+ra1_allies_alliedapc_gun:
 	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@wh2: ^Warhead_Flak_Medium
@@ -648,8 +655,8 @@ APCGunAllies:
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
-APCGunAllies_AA:
-	Inherits: APCGunAllies
+ra1_allies_alliedapc_gun_AA:
+	Inherits: ra1_allies_alliedapc_gun
 	Range: 8967
 	ValidTargets: Air
 	Warhead@Bullet_Medium: AreaDamage
@@ -662,7 +669,7 @@ APCGunAllies_AA:
 		ValidTargets: Air
 		Damage: 4000
 		PercentageScale: 9975
-RAVulcan:
+ra1_allies_machinegunner_machinegun:
 	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
@@ -680,10 +687,14 @@ RAVulcan:
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_MediumFlatCompatibility:
+		PercentageDenominator: 10000
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
-		Damage: 16000
+		Damage: 14880
 		PercentageScale: 2494
-RAVulcanCryo:
+	Warhead@ShieldHit:
+		InvalidTargets: Air
+ra1_allies_machinegunner_machinegun_cryo:
 	Inherits@wh: ^Warhead_BulletCryo_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Cryo
@@ -694,7 +705,10 @@ RAVulcanCryo:
 	Range: 6500
 	Report: gun13.aud
 	Warhead@BulletCryo_Medium:
-		Damage: 16000
+		PercentageDenominator: 10000
+		PercentageScale: 10000
+		InvalidTargets: Air
+		Damage: 14880
 		ValidTargets: Ground, Water, Air
 ZeroFighterChainGun:
 	Inherits@wh: ^Warhead_Bullet_Medium
@@ -796,10 +810,16 @@ ZeroFighterChainGunWaveforce:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 
-TigerCannon:
+^Effect_AlliedTigerCannon:
+	Inherits: ^Effect_CannonHE_Heavy
+	Warhead@Effect: CreateEffect
+		Explosions: poof
+		ImpactSounds: xplosml2.aud
+
+ra1_allies_alliedtigerheavytank_cannon:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
-	Inherits@fx: ^Effect_CannonHE_Heavy
+	Inherits@fx: ^Effect_AlliedTigerCannon
 	ReloadDelay: 60
 	Range: 5915
 	Report: cannon1.aud
@@ -807,11 +827,8 @@ TigerCannon:
 		Speed: 591
 	Warhead@CannonHE_Heavy:
 		Damage: 16000
-	Warhead@Effect: CreateEffect
-		Explosions: poof
-		ImpactSounds: xplosml2.aud
 
-TigerCannonCryo:
+ra1_allies_alliedtigerheavytank_cannon_cryo:
 	Inherits@wh: ^Warhead_CannonCryo_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_Cryo
@@ -823,6 +840,32 @@ TigerCannonCryo:
 	Warhead@CannonCryo_Heavy:
 		Damage: 16000
 		ValidTargets: Ground, Water
+
+ra1_allies_alliedcybertank_cannon:
+	Inherits@wh: ^Warhead_CannonHE_Heavy
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_AlliedTigerCannon
+	ReloadDelay: 60
+	Range: 5915
+	Report: cannon1.aud
+	Projectile: Bullet
+		Speed: 591
+	Warhead@CannonHE_Heavy:
+		Damage: 16000
+
+ra1_allies_alliedcybertank_cannon_cryo:
+	Inherits@wh: ^Warhead_CannonCryo_Heavy
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_Cryo
+	ReloadDelay: 60
+	Range: 5915
+	Report: cannon1.aud
+	Projectile: Bullet
+		Speed: 591
+	Warhead@CannonCryo_Heavy:
+		Damage: 16000
+		ValidTargets: Ground, Water
+
 25mmWaveforce:
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: 25mm
@@ -868,6 +911,8 @@ WaveforceCannonChargedLaser:
 		ImpactSounds: psahit00.aud
 		Explosions: purple_plasma
 		ValidTargets: Air
+	Warhead@Railgun_Heavy_ExtraDamage:
+		ValidTargets: Ground, Water, Air
 
 WaveforceCannonDistortedBeam1:
 	Inherits@roleflat: ^Compatibility_Waveforce_HeavyFlat
@@ -1005,7 +1050,7 @@ ra120mm:
 		PercentageScale: 0
 
 MammothTusk:
-	Inherits@wh: ^Warhead_MissileHE_Heavy
+	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileHE_Heavy
 	ValidTargets: Ground, Water, Infantry, Monster, Air
@@ -1015,10 +1060,11 @@ MammothTusk:
 	Range: 6412
 	Report: missile6.aud
 	Projectile: Missile
+		VerticalRateOfTurn: 12
 		Speed: 641
 		ContrailStartColor: FF884400
 		ContrailEndColor: 000000FF
-	Warhead@MissileHE_Heavy:
+	Warhead@MissileAP_Heavy:
 		Damage: 24000
 	Warhead@Effect: CreateEffect
 		Explosions: artillery_explosion
@@ -1067,13 +1113,13 @@ ParaBomb:
 		PercentageScale: 9998
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 50
-ParaBombCryo:
+ra1_allies_cargoplanebomber_parabombcryo:
 	Inherits@delivery: ^ParaBombDelivery
-	Inherits@wh: ^Warhead_CryoBlast_Heavy
+	Inherits@wh: ^Warhead_BlastCryo_Heavy
 	Inherits@fx: ^Effect_Cryo
 	ReloadDelay: 8
 	Range: 5000
-	Warhead@CryoBlast_Heavy:
+	Warhead@BlastCryo_Heavy:
 		Damage: 40000
 
 JapanSuperBomb:
@@ -1099,6 +1145,7 @@ JapanSuperBomb:
 		ValidTargets: Ground, Water, Air
 		Damage: 5000
 	Warhead@GrenadePercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -1108,6 +1155,7 @@ JapanSuperBomb:
 		ValidTargets: Ground, Water, Air
 		Damage: 5000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@MediumChemicalWeapon: AreaDamage
@@ -1117,6 +1165,7 @@ JapanSuperBomb:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@MediumFlameWeapon: AreaDamage
@@ -1128,6 +1177,7 @@ JapanSuperBomb:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		PhysicalStateName: Temperature
@@ -1136,6 +1186,7 @@ JapanSuperBomb:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	-Warhead@Grenade:
@@ -1146,10 +1197,13 @@ JapanSuperBomb:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@HeavyBomb:
 	Warhead@Demolition_Heavy:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 50000
 		PercentageScale: 0
 
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 JapanCarrierFighterBomb:
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@fx: ^Effect_Demolition_Heavy
@@ -1163,8 +1217,11 @@ JapanCarrierFighterBomb:
 		Image: Dragon
 		Shadow: True
 	Warhead@Demolition_Heavy:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 JapanCarrierTarget:
 	ReloadDelay: 25
 	Range: 20000
@@ -1294,7 +1351,7 @@ ChemTibAtomic:
 		Size: 10,10
 		Delay: 100
 
-DogJaw:
+^DogJaw:
 	ValidTargets: Infantry
 	InvalidTargets: DogImmune
 	ReloadDelay: 10
@@ -1307,6 +1364,15 @@ DogJaw:
 		ValidTargets: Infantry
 		InvalidTargets: Ant, DogImmune
 		DamageTypes: DefaultDeath
+
+ra1_soviets_dog_bite:
+	Inherits: ^DogJaw
+
+ra2_allies_dog_bite:
+	Inherits: ^DogJaw
+
+ra2_soviets_dog_bite:
+	Inherits: ^DogJaw
 
 Heal:
 	Inherits: ^HealingWeapon
@@ -1363,6 +1429,9 @@ MammothTuskGal:
 	ReloadDelay: 55
 	Range: 5675
 	ValidTargets: Air, Ground
+
+	Projectile: Missile
+		VerticalRateOfTurn: 20
 
 DT120mm1:
 	Inherits: DT120mm
@@ -1889,7 +1958,7 @@ NanoReturn:
 		Speed: 277
 	Warhead@Heal: TargetDamage
 
-TorpTube:
+ra1_soviets_submarine_torpedo:
 	Inherits@wh: ^Warhead_Concussion_Light
 	Inherits@wh2: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -1931,7 +2000,7 @@ TorpTube:
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
 
-TorpTubeThermobaric:
+ra1_soviets_submarine_torpedo_thermobaric:
 	Inherits@wh: ^Warhead_MissileNuke_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_Nuclear_Super
@@ -2006,7 +2075,7 @@ DepthCharge:
 		ValidTargets: Submarine, Ship, Underwater
 
 DepthChargeCryo:
-	Inherits@wh: ^Warhead_CryoBlast_Light
+	Inherits@wh: ^Warhead_BlastCryo_Light
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Cryo
 	Report: M203.aud
@@ -2016,12 +2085,12 @@ DepthChargeCryo:
 	Projectile: Bullet
 		Speed: 125
 		Image: BOMB
-	Warhead@CryoBlast_Light:
+	Warhead@BlastCryo_Light:
 		Damage: 60000
 		ValidTargets: Submarine, Ship, Underwater
 
-2Inch:
-	Inherits@wh: ^Warhead_CannonAP_Light
+ra1_allies_gunboat_cannon:
+	Inherits@wh: ^Warhead_CannonAP
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_CannonAP_Light
 	ReloadDelay: 30
@@ -2030,10 +2099,11 @@ DepthChargeCryo:
 	InvalidTargets: Underwater, Submarine
 	Projectile: Bullet
 		Speed: 600
-	Warhead@CannonAP_Light:
+	Warhead@CannonAP:
 		Damage: 30000
-		Spread: 300
-2InchCryo:
+		Spread: 450
+		Heaviness: 0
+ra1_allies_gunboat_cannon_cryo:
 	Inherits@wh: ^Warhead_CannonCryo_Light
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_Cryo
@@ -2078,8 +2148,8 @@ DepthChargeCryo:
 		ValidTargets: Ground, Water
 		Damage: 80000
 		PercentageScale: 9999
-8InchCryo:
-	Inherits@wh: ^Warhead_CryoBlast_Heavy
+ra1_allies_cruiser_8inchcryo:
+	Inherits@wh: ^Warhead_BlastCryo_Heavy
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Cryo
 	ReloadDelay: 250
@@ -2098,10 +2168,10 @@ DepthChargeCryo:
 		ContrailEndWidth: 1
 		ContrailStartColor: FF9933
 		ContrailEndColor: FFFFFF
-	Warhead@CryoBlast_Heavy:
+	Warhead@BlastCryo_Heavy:
 		Damage: 80000
 		ValidTargets: Ground, Water
-Stinger:
+ra1_allies_destroyer_missile:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileAP_Heavy
@@ -2113,6 +2183,7 @@ Stinger:
 	Burst: 2
 	BurstDelays: 7
 	Projectile: Missile
+		VerticalRateOfTurn: 12
 		Speed: 500
 		MinimumLaunchAngle: 50
 		Acceleration: 5
@@ -2123,7 +2194,7 @@ Stinger:
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
 
-StingerCryo:
+ra1_allies_destroyer_missile_cryo:
 	Inherits@wh: ^Warhead_MissileCryo_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_Cryo
@@ -2135,6 +2206,7 @@ StingerCryo:
 	Burst: 2
 	BurstDelays: 7
 	Projectile: Missile
+		VerticalRateOfTurn: 12
 		Speed: 500
 		MinimumLaunchAngle: 50
 		Acceleration: 5
@@ -2177,6 +2249,8 @@ JapanSpeedBoatGunWaveforce:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
+	Warhead@Railgun_Heavy_ExtraDamage:
+		ValidTargets: Ground, Water, Air
 
 YamatoCannon:
 	Inherits@finalmain: ^Compatibility_CannonHE_HeavyFlat
@@ -2363,7 +2437,12 @@ ra1_allies_rifleinfantry_carbine:
 	BurstDelays: 4
 	Report: gun11.aud
 	Warhead@Bullet_Light:
-		Damage: 2000
+		PercentageDenominator: 10000
+		PercentageScale: 10000
+		InvalidTargets: Air
+		Damage: 940
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 ra1_allies_rifleinfantry_carbine_cryo:
 	Inherits@wh: ^Warhead_BulletCryo_Light
 	Inherits@proj: ^Projectile_Bullet_Light
@@ -2384,4 +2463,7 @@ ra1_allies_rifleinfantry_carbine_cryo:
 		ContrailEndWidth: 25
 		ContrailLength: 10
 	Warhead@BulletCryo_Light:
-		Damage: 2000
+		PercentageDenominator: 10000
+		PercentageScale: 10000
+		InvalidTargets: Air
+		Damage: 940

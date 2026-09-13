@@ -1,5 +1,7 @@
 # The layered defence stack — shields, Integrity, plating, and how damage lands
 
+> **Numeric evidence refresh — 2026-09-10, combined `839cdced4` plus reopened tooling.** `meters_filling_before_death` = **310**; `physical_state_fired_weapons` = **542**. Measured on this combined tree; predicates and tolerances are unchanged. The flat-health denominator correction changes diagnostics, not live weapons or prices. Earlier branch-specific snapshots remain historical.
+
 **One document for the whole defence stack.** It replaces five separate analyses that each
 covered one slice and repeated the others' premises. `BALANCE_PROGRAM_PLAN.md` had already
 cited a `docs/design/ARMOR_LAYERS.md` that never existed; this is it.
@@ -834,6 +836,14 @@ units; its C# type has no denominator field. Legacy `AreaDamagePercentage` defau
 basis points. Folded `AreaDamage.PercentageScale` defaults to denominator 10000 and uses
 the engine's rounded derived units. The shared evaluator reads each form directly; no tag
 spelling or global denominator guess is allowed.
+
+Authored-field inventory, 2026-09-10: **184** raw `PercentageDenominator`
+occurrences in active weapon files, up from the 2026-09-05 snapshot of 183.
+The added Freedom elite explicit companion preserves its prior percentage route.
+The registry's historical `percentage_denominator_unset` name does not mean
+unset fields or resolved applications; this occurrence count does not establish
+a global unit rebase or change the per-node semantics above.
+
 
 ---
 

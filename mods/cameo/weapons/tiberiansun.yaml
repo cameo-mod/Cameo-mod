@@ -169,11 +169,13 @@ TSLaser25mmDep:
 	TargetActorCenter: false
 	-Warhead@FlakWeapon:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 	-Warhead@LaserWeapon:
 	-Warhead@LaserExtraDamage:
 	Warhead@LegacyLaserExtraDamage: SpreadDamage
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Spread: 300
 		Damage: 600
@@ -199,13 +201,17 @@ TSLaser25mmDep:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 	Warhead@Laser_Heavy:
+		InvalidTargets: Air
 		Damage: 4000
 		PercentageScale: 0
 		ValidTargets: Ground, Water
 	-Warhead@Laser_Heavy_ExtraDamage:
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 TS90mm:
 	# ⭐ ANTI-ARMOUR, NOT ANTI-EVERYTHING. Destined 2026-08-22: the tick tank *"should be tanky
 	# ... but not do any damage against infantry ... Only good against other tanks/buildings."*
@@ -215,14 +221,19 @@ TS90mm:
 	# `Warhead@CannonHE_Medium` would orphan it into a bare override of a warhead the new
 	# parent never defines — an abstract warhead, which is the documented empty-warhead boot
 	# crash (find_empty_warhead.py).
+	# PILOT (Aedis 2026-09-10 02:10/02:14, scoped): repointed onto the live
+	# ^Warhead_CannonAP continuous base at the base's own h=1000 (thousandths,
+	# active Medium). Only the warhead template moves; Damage 6000, ReloadDelay 26,
+	# Range 5319, projectile and effect resolve exactly as before; main key is renamed
+	# (h=1000 scales Spread 120 x 1 = 120, the old Medium geometry).
 	Inherits: ^TSCannonEffect
-	Inherits@wh: ^Warhead_CannonAP_Medium
+	Inherits@wh: ^Warhead_CannonAP
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonAP_Medium
 	Report: tnkfire6.aud
 	ReloadDelay: 26
 	Range: 5319
-	Warhead@CannonAP_Medium:
+	Warhead@CannonAP:
 		Damage: 6000
 TS90mmDep:
 	Inherits: TS90mm
@@ -295,22 +306,24 @@ TS90mmDep:
 
 TSLaser90mm:
 	# Anti-armour cannon half, as TS90mm above — this is its T3 laser variant.
-	Inherits: ^Warhead_CannonAP_Medium
+	Inherits: ^Warhead_CannonAP
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonAP_Medium
 	Inherits@4: ^LaserWeapon
 	Inherits@5: ^TSLaserEffect
-	Inherits@compat: ^TSLaser90mmCannonCompatibility
 	Projectile: LaserZap
 		Width: 72
 		SecondaryBeamWidth: 36
 	ReloadDelay: 32
 	Range: 5423
-	Warhead@CannonAP_Medium:
-		Damage: 6000
+	Warhead@CannonAP:
+		InvalidTargets: Air
+		Damage: 12000
+		Heaviness: 1000
 	-Warhead@LaserWeapon:
 	-Warhead@LaserExtraDamage:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
 		Damage: 3
 
 TSLaser90mmDep:
@@ -318,6 +331,12 @@ TSLaser90mmDep:
 	ReloadDelay: 26
 	Range: 6754
 
+	Warhead@CannonAP:
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
+	Warhead@LaserWeaponPercentage:
+		InvalidTargets: Air
 TS120mm:
 	Inherits: ^TSCannonEffect
 	Inherits@wh: ^Warhead_CannonHE_Medium
@@ -482,10 +501,9 @@ TSGrenade:
 		PercentageScale: 9996
 
 TSGrenadeSonic:
-	Inherits@wh: ^Warhead_Concussion_Light
-	Inherits@wh2: ^Warhead_Sonic_Light
 	Inherits@proj: ^Projectile_Sonic_Shell
 	Inherits@fx: ^Effect_Sonic_Shell
+	Inherits@sonicfamily: ^Warhead_BlastSonic_Light
 	ReloadDelay: 45
 	Range: 6656
 	Report: toss1.aud
@@ -500,12 +518,17 @@ TSGrenadeSonic:
 		ContrailEndWidth: 44
 		ContrailStartColor: 8888FFFF
 		ContrailEndColor: FFFFFF22
-	Warhead@Concussion_Light:
+	Warhead@BlastSonic_Light: AreaDamage
 		ValidTargets: Ground, Water
-		Damage: 18000
-	Warhead@Sonic_Light:
-		ValidTargets: Ground, Water
-		Damage: 18000
+		Damage: 45000
+		PercentageScale: 10000
+	Warhead@BlastSonic_Light_Debuff: GrantExternalCondition
+		Condition: SonicDebuff
+		Duration: 50
+		Range: 532
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Structure, wall
+
 TSGrenadeAA:
 	Inherits: TSGrenade
 	Range: 6512
@@ -637,21 +660,29 @@ TSTurretLaser:
 	-Warhead@Bullet_Medium:
 	-Warhead@Laser_Heavy:
 	Warhead@Laser_HeavyFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 		PercentageScale: 9995
 		PhysicalStateScale: 38
+	Warhead@Laser_Heavy_ExtraDamage:
+		InvalidTargets: Air
 TSCABALPlasmaFire:
 	Inherits: TSTurretLaser
 	Projectile: LaserZap
 		Color: 0040FF
 		SecondaryBeamColor: 80C0FF
 	Warhead@Laser_HeavyFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 		PercentageScale: 9995
 		PhysicalStateScale: 38
 
+	Warhead@Laser_Heavy_ExtraDamage:
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 TSLaserTurretLaser:
 	Inherits@finalmain: ^Compatibility_Laser_HeavyFlat
 	Inherits: ^Warhead_Bullet_Medium
@@ -684,11 +715,16 @@ TSLaserTurretLaser:
 	-Warhead@Bullet_Medium:
 	-Warhead@Laser_Heavy:
 	Warhead@Laser_HeavyFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
 		PercentageScale: 9997
 		PhysicalStateScale: 38
 
+	Warhead@Laser_Heavy_ExtraDamage:
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 TurretLaserFragment:
 	Inherits@finalmain: ^Compatibility_Laser_HeavyFlat
 	Inherits: ^Warhead_Bullet_Medium
@@ -710,13 +746,17 @@ TurretLaserFragment:
 	-Warhead@Bullet_Medium:
 	-Warhead@Laser_Heavy:
 	Warhead@Laser_HeavyFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 		PercentageScale: 9994
 		PhysicalStateScale: 38
+	InvalidTargets: Air
+	Warhead@Laser_Heavy_ExtraDamage:
+		InvalidTargets: Air
+
 TSObeliskLaserFire:
-	Inherits@wh: ^Warhead_CannonAP_Light
-	Inherits@wh2: ^Warhead_Laser_Heavy
+	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
 	Inherits@3: ^TSLaserEffect
@@ -736,10 +776,9 @@ TSObeliskLaserFire:
 		SourceFlareSize: 64, 72
 		SourceFlareWidth: 2.5
 		SourceFlareCoreSize: 5
-	Warhead@CannonAP_Light:
-		Damage: 52000
 	Warhead@Laser_Heavy:
-		Damage: 52000
+		InvalidTargets: Air
+		Damage: 104000
 	Warhead@2Eff: CreateEffect
 		Explosions: med_napalm
 		GlowScale: 1.5
@@ -747,9 +786,12 @@ TSObeliskLaserFire:
 		GlowFadeInFrames: 12
 		ImpactActors: false
 
+	Warhead@Laser_Heavy_ExtraDamage:
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 TSLaserObeliskLaserFire:
-	Inherits@wh: ^Warhead_CannonAP_Light
-	Inherits@wh2: ^Warhead_Laser_Heavy
+	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
 	Inherits@3: ^TSLaserEffect
@@ -769,10 +811,9 @@ TSLaserObeliskLaserFire:
 	Range: 10435
 	Report: obelray1.aud
 	ValidTargets: Ground, Water
-	Warhead@CannonAP_Light:
-		Damage: 80000
 	Warhead@Laser_Heavy:
-		Damage: 80000
+		InvalidTargets: Air
+		Damage: 160000
 	Warhead@2Eff: CreateEffect
 		Explosions: med_napalm
 		GlowScale: 1.5
@@ -786,6 +827,10 @@ TSLaserObeliskLaserFire:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 
+	Warhead@Laser_Heavy_ExtraDamage:
+		InvalidTargets: Air
+	Warhead@ShieldHit:
+		InvalidTargets: Air
 ObeliskLaserFragment:
 	Inherits@finalmain: ^Compatibility_Laser_HeavyFlat
 	Inherits: ^Warhead_Bullet_Medium
@@ -809,10 +854,15 @@ ObeliskLaserFragment:
 	-Warhead@Bullet_Medium:
 	-Warhead@Laser_Heavy:
 	Warhead@Laser_HeavyFlatCompatibility:
+		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 80000
 		PercentageScale: 9999
 		PhysicalStateScale: 38
+	InvalidTargets: Air
+	Warhead@Laser_Heavy_ExtraDamage:
+		InvalidTargets: Air
+
 TSLaserFence:
 	TargetActorCenter: true
 	Projectile: InstantHit
@@ -878,11 +928,15 @@ TSBazooka:
 	ReloadDelay: 52
 	Range: 6694
 	Projectile: Missile
+		VerticalRateOfTurn: 20
 	Warhead@MissileAP_Light:
 		Damage: 24000
 TSBazookaG:
 	Inherits: TSBazooka
 	Range: 9216
+
+	Projectile: Missile
+		VerticalRateOfTurn: 40
 
 TSReaperTusk:
 	Inherits: ^TSDefaultMissile
@@ -933,6 +987,7 @@ TSAegisMissile:
 	Range: 9216
 	Report: vaegatta.wav, vaegattb.wav
 	Projectile: Missile
+		VerticalRateOfTurn: 20
 		RangeLimit: 18c0
 	-Warhead@MediumMissile:
 	-Warhead@LightMissile:
@@ -951,8 +1006,20 @@ TSMammothTusk_elite:
 	Inherits: TSMammothTusk2
 	Burst: 8
 	Range: 9216
+	Projectile: Missile
+		VerticalRateOfTurn: 25
+	Warhead@MissileAA_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Damage: 42000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
 
 TSBikeMissile:
+	Inherits@missilerole: ^Warhead_MissileAP_Medium
 	Inherits@finalmain: ^Compatibility_MissileHE_MediumFlat
 	Inherits@wh: ^Warhead_MissileHE_Light
 	Inherits@wh2: ^Warhead_MissileHE_Medium
@@ -964,6 +1031,7 @@ TSBikeMissile:
 	ReloadDelay: 40
 	Report: misl1.aud
 	Projectile: Missile
+		VerticalRateOfTurn: 16
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
 	Warhead@MissileHE_Medium:
@@ -971,10 +1039,17 @@ TSBikeMissile:
 		ValidTargets: Ground, Water, Air
 	-Warhead@MissileHE_Light:
 	-Warhead@MissileHE_Medium:
-	Warhead@MissileHE_MediumFlatCompatibility:
+	-Warhead@MissileHE_MediumFlatCompatibility:
+	Warhead@MissileAP_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 9992
+		PercentageSpread: 50
+
 TSBikeTibMissile:
 	Inherits@collapsewh: ^Warhead_MissileChem_Medium
 	Inherits: ^LightChemicalWeapon
@@ -987,6 +1062,7 @@ TSBikeTibMissile:
 	ReloadDelay: 40
 	Report: misl1.aud
 	Projectile: Missile
+		VerticalRateOfTurn: 16
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
 		TrailImage: spittrail
@@ -1030,7 +1106,7 @@ TSBikeTibMissile:
 		PercentageScale: 0
 
 TSSAPCMissiles:
-	Inherits@collapsewh: ^Warhead_MissileHE_Medium
+	Inherits@heldmissilerole: ^Warhead_MissileAP_Medium
 	Inherits: ^Grenade
 	Inherits@2: ^LightMissile
 	Range: 5300
@@ -1039,6 +1115,7 @@ TSSAPCMissiles:
 	ReloadDelay: 18
 	Report: misl1.aud
 	Projectile: Missile
+		VerticalRateOfTurn: 20
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
 	Warhead@Grenade: SpreadDamage
@@ -1063,6 +1140,10 @@ TSSAPCMissiles:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 		PercentageScale: 0
+	-Warhead@MissileHE_Medium:
+	Warhead@MissileAP_Medium: AreaDamage
+		Damage: 16000
+		PercentageScale: 0
 
 TSSAPCCoreMissiles:
 	Inherits@roleflat: ^Compatibility_Chemical_LightFlat
@@ -1071,6 +1152,7 @@ TSSAPCCoreMissiles:
 	Inherits@fx: ^Effect_Chem_Light
 	Inherits: TSSAPCMissiles
 	Projectile: Missile
+		VerticalRateOfTurn: 20
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
 		TrailImage: spittrail
@@ -1078,11 +1160,12 @@ TSSAPCCoreMissiles:
 		Damage: 8000
 		ValidTargets: Ground, Water, Air
 	-Warhead@Chemical_Light:
-	-Warhead@MissileHE_Medium:
 	Warhead@Chemical_LightFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
 		PercentageScale: 3330
+	-Warhead@MissileAP_Medium:
+
 TSDragon:
 	Inherits: ^TSDefaultMissile
 	ReloadDelay: 50
@@ -1115,6 +1198,9 @@ TSHellfire:
 	Warhead@ShieldHit:
 		Duration: 8
 
+	Projectile: Missile
+		VerticalRateOfTurn: 16
+
 TSRedEye2:
 	Inherits: Dragon
 	Report: rocket2.aud
@@ -1122,6 +1208,9 @@ TSRedEye2:
 	Warhead@2Eff: CreateEffect
 		ImpactSounds: expnew13.aud
 		ImpactActors: false
+
+	Projectile: Missile
+		VerticalRateOfTurn: 25
 
 TSChemAdatsMissile:
 	Inherits@collapsewh: ^Warhead_MissileChem_Light
@@ -1169,6 +1258,7 @@ TSChemAdatsMissile:
 TSChemAdatsMissileAA:
 	Inherits: TSAdatsMissile_AA
 	Projectile: Missile
+		VerticalRateOfTurn: 20
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
 		TrailImage: spittrail
@@ -1438,12 +1528,15 @@ forgotten_mutant_dualwield:
 	Report: infgun3.aud, slvkgun1.aud
 	ValidTargets: Ground, Water
 	Warhead@Bullet_Light:
+		InvalidTargets: Air
 		Damage: 2000
 forgotten_mutant_dualwield_elite:
 	Inherits: forgotten_mutant_dualwield
 	Burst: 4
 	Range: 5120
 
+	Warhead@Bullet_Light:
+		InvalidTargets: Air
 MutAPRifle_elite:
 	Inherits: MutAPRifle
 	ReloadDelay: 30
