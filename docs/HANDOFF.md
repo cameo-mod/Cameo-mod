@@ -858,8 +858,10 @@ weapons, sequences, and icon all present. Dawn is **unblocked** for Corrino Phas
 and triage. `audit_doc_claims` is now **fully green (19/19)** — `ledgers_drifted` is 0 after the D2k re-extract, and `meters_filling_before_death` (269) and `multi_main_fired_weapons` (192) both match the committed tree. `audit_doc_health` D1 control chars in `DEVELOPMENT_LOG.md` are CLEAN (Aurora cleaned them 2026-09-06). Remaining D1 findings are 4 non-UTF-8 files in Claude-Local's reference docs (`scout_references.md`, `FACTION_REFERENCE_MATRIX.md`, `RTS_BALANCE_REFERENCE.md`, `WARHEAD_REFERENCE.md`) — route to Claude. ⚠ Read the `exit=` line in the output file; never trust
 a background task's notification code.
 
-**P1 — Devin-Blaze, Devin-Aurora, Devin-Echo, Devin-Dawn: D2k faction completion** — the
-maintainer's standing priority. Stay strictly in the lanes above. ~~Dawn is gated on Cyrus (P0)~~ — **Cyrus P0 RESOLVED, Dawn is UNBLOCKED for Corrino Phase 3.**
+**P1 — Devin-Blaze, Devin-Aurora, Devin-Echo: D2k faction completion** — the
+maintainer's standing priority. Stay strictly in the lanes above. **Dawn's lane is now
+INI reference extraction** (`devin/dawn/ini-untagged-breakdown-v2` PR #365). Corrino
+Phase 3 remains with Blaze/Aurora per `docs/FLEET_ORDERS_2026-09-08.md`.
 
 ⛔ **Maintainer ruling for everyone, 2026-09-05:** the EBFD sprites were to be added as **NEW
 actors only**; the **Ordos Face Dancer was the sole approved update to an existing actor.** An
