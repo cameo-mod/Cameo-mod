@@ -13,6 +13,7 @@ import json
 import pathlib
 import subprocess
 import sys
+import zipfile
 
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -25,6 +26,10 @@ from resolved_gate import apply_map  # noqa: E402
 
 
 PREFIX = "^Compatibility_"
+RUNTIME_SOURCE_SUFFIXES = {
+    ".config", ".cs", ".ftl", ".json", ".lua", ".toml", ".xml", ".yaml", ".yml",
+}
+RUNTIME_SOURCE_PREFIXES = ("engine/", "mods/", "OpenRA.Mods.")
 
 
 def norm(path: pathlib.Path) -> str:
@@ -68,6 +73,58 @@ def source_replacements(template_map: dict[str, str], inner_map: dict[str, str])
 
 def active_sources(rs: Ruleset) -> list[pathlib.Path]:
     return sorted(set(rs.manifest.rules + rs.manifest.weapons))
+
+
+def tracked_runtime_sources() -> list[pathlib.Path]:
+    """Tracked runtime/configuration sources that may name a weapon template or payload.
+
+    This deliberately includes dormant mod YAML and C# outside the active manifest. A resolved
+    weapon dump cannot see those consumers, so the rename must refuse them for separate review.
+    """
+    proc = subprocess.run(
+        ["git", "ls-files", "-z"], cwd=ROOT, check=True, capture_output=True)
+    paths = []
+    for raw in proc.stdout.decode("utf-8").split("\0"):
+        if not raw:
+            continue
+        path = ROOT / raw
+        if path.suffix.lower() not in RUNTIME_SOURCE_SUFFIXES:
+            continue
+        if raw == "mod.config" or raw.startswith(RUNTIME_SOURCE_PREFIXES):
+            paths.append(path)
+    return sorted(paths)
+
+
+def tracked_oramap_archives() -> list[pathlib.Path]:
+    proc = subprocess.run(
+        ["git", "ls-files", "*.oramap", "-z"], cwd=ROOT,
+        check=True, capture_output=True)
+    return sorted(ROOT / raw for raw in proc.stdout.decode("utf-8").split("\0") if raw)
+
+
+def stale_oramap_references(paths: list[pathlib.Path], template_map: dict[str, str],
+                            inner_map: dict[str, str]) -> list[dict]:
+    """Old cohort IDs inside tracked map-package text members."""
+    tokens = list(template_map) + list(inner_map)
+    out = []
+    for path in paths:
+        with zipfile.ZipFile(path) as archive:
+            for member in archive.namelist():
+                if pathlib.PurePosixPath(member).suffix.lower() not in RUNTIME_SOURCE_SUFFIXES:
+                    continue
+                try:
+                    text = archive.read(member).decode("utf-8-sig")
+                except UnicodeDecodeError as exc:
+                    raise RuntimeError(
+                        f"could not decode tracked map member {norm(path)}!{member}") from exc
+                for line_no, line in enumerate(text.splitlines(), 1):
+                    found = [token for token in tokens if token in line]
+                    if found:
+                        out.append({
+                            "file": norm(path), "member": member,
+                            "line": line_no, "tokens": found,
+                        })
+    return out
 
 
 def affected_sources(paths: list[pathlib.Path], replacements: dict[str, str]) -> list[pathlib.Path]:
@@ -123,7 +180,7 @@ def resolved_dump(rs: Ruleset, name_map: dict[str, str]) -> bytes:
 
 def stale_source_references(paths: list[pathlib.Path], template_map: dict[str, str],
                             inner_map: dict[str, str]) -> list[dict]:
-    tokens = list(template_map) + ["Warhead@" + old for old in inner_map]
+    tokens = list(template_map) + list(inner_map)
     out = []
     for path in paths:
         for line_no, line in enumerate(path.read_text(encoding="utf-8-sig").splitlines(), 1):
@@ -177,8 +234,29 @@ def run(*, apply: bool, proof_path: pathlib.Path | None = None) -> dict:
     before = Ruleset(str(ROOT))
     template_map, inner_map, full_map = rename_maps(before)
     replacements = source_replacements(template_map, inner_map)
+    runtime_replacements = {**replacements, **inner_map}
     sources = active_sources(before)
     affected = affected_sources(sources, replacements)
+    runtime_sources = tracked_runtime_sources()
+    active_set = {path.resolve() for path in sources}
+    outside_runtime_consumers = [
+        path for path in affected_sources(runtime_sources, runtime_replacements)
+        if path.resolve() not in active_set
+    ]
+    if outside_runtime_consumers:
+        names = "\n".join(norm(path) for path in outside_runtime_consumers)
+        raise RuntimeError(
+            "old cohort names exist outside active rule/weapon sources; review these runtime "
+            f"consumers before renaming:\n{names}")
+    archive_consumers = stale_oramap_references(
+        tracked_oramap_archives(), template_map, inner_map)
+    if archive_consumers:
+        names = "\n".join(
+            f"{row['file']}!{row['member']}:{row['line']}"
+            for row in archive_consumers)
+        raise RuntimeError(
+            "old cohort names exist inside tracked map archives; review these consumers "
+            f"before renaming:\n{names}")
     proof_target = (ROOT / proof_path).resolve() if proof_path else None
     if proof_target is not None and proof_target in {path.resolve() for path in sources}:
         raise RuntimeError(f"proof output overlaps active source: {proof_target}")

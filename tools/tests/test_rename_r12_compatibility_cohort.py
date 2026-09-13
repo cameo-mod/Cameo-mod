@@ -38,6 +38,12 @@ def test_current_tree_contains_only_the_renamed_cohort():
     assert not (set(templates) & set(rs.weapons))
     assert set(templates.values()) <= set(rs.weapons)
     assert stale_source_references(writer.active_sources(rs), templates, payloads) == []
+    runtime_sources = writer.tracked_runtime_sources()
+    assert len(runtime_sources) >= 1000
+    assert stale_source_references(runtime_sources, templates, payloads) == []
+    archives = writer.tracked_oramap_archives()
+    assert len(archives) >= 300
+    assert writer.stale_oramap_references(archives, templates, payloads) == []
 
 
 def test_canonical_dump_covers_templates_and_concrete_weapons():
@@ -58,6 +64,61 @@ def transaction_patches(path, *, dirty=(), rewrite_side_effect=None):
         mock.patch.object(writer, "dirty_paths", return_value=list(dirty)),
         mock.patch.object(writer, "rewrite", side_effect=rewrite_side_effect),
     )
+
+
+def test_runtime_consumer_outside_active_sources_refuses_before_rewrite():
+    with tempfile.TemporaryDirectory() as directory:
+        active = pathlib.Path(directory) / "active.yaml"
+        outside = pathlib.Path(directory) / "consumer.cs"
+        active.write_text("^Compatibility_X", encoding="utf-8")
+        outside.write_text("XCompatibility", encoding="utf-8")
+        with (
+            mock.patch.object(writer, "Ruleset", return_value=object()),
+            mock.patch.object(writer, "rename_maps", return_value=(
+                {"^Compatibility_X": "^Warhead_X"}, {"XCompatibility": "X"}, {})),
+            mock.patch.object(writer, "active_sources", return_value=[active]),
+            mock.patch.object(writer, "tracked_runtime_sources", return_value=[active, outside]),
+            mock.patch.object(writer, "norm", side_effect=lambda path: path.name),
+            mock.patch.object(writer, "rewrite") as rewrite,
+        ):
+            try:
+                writer.run(apply=False)
+            except RuntimeError as exc:
+                assert "outside active rule/weapon sources" in str(exc)
+            else:
+                raise AssertionError("outside runtime consumer must refuse")
+            rewrite.assert_not_called()
+
+
+def test_bare_payload_inside_oramap_is_detected():
+    with tempfile.TemporaryDirectory() as directory:
+        path = pathlib.Path(directory) / "consumer.oramap"
+        with writer.zipfile.ZipFile(path, "w") as archive:
+            archive.writestr("rules.yaml", "Payload: XCompatibility\n")
+        with mock.patch.object(writer, "norm", return_value="consumer.oramap"):
+            rows = writer.stale_oramap_references(
+                [path], {"^Compatibility_X": "^Warhead_X"},
+                {"XCompatibility": "X"})
+        assert rows == [{
+            "file": "consumer.oramap", "member": "rules.yaml",
+            "line": 1, "tokens": ["XCompatibility"],
+        }]
+
+
+def test_undecodable_oramap_text_member_refuses():
+    with tempfile.TemporaryDirectory() as directory:
+        path = pathlib.Path(directory) / "consumer.oramap"
+        with writer.zipfile.ZipFile(path, "w") as archive:
+            archive.writestr("rules.yaml", b"\xff\xfe\x00")
+        with mock.patch.object(writer, "norm", return_value="consumer.oramap"):
+            try:
+                writer.stale_oramap_references(
+                    [path], {"^Compatibility_X": "^Warhead_X"},
+                    {"XCompatibility": "X"})
+            except RuntimeError as exc:
+                assert "consumer.oramap!rules.yaml" in str(exc)
+            else:
+                raise AssertionError("undecodable tracked map text must refuse")
 
 
 def test_interrupted_write_restores_affected_file():
@@ -113,6 +174,9 @@ def test_proof_output_cannot_overlap_active_source():
 if __name__ == "__main__":
     test_frozen_maps_are_complete_unique_and_collision_free()
     test_current_tree_contains_only_the_renamed_cohort()
+    test_runtime_consumer_outside_active_sources_refuses_before_rewrite()
+    test_bare_payload_inside_oramap_is_detected()
+    test_undecodable_oramap_text_member_refuses()
     test_canonical_dump_covers_templates_and_concrete_weapons()
     test_interrupted_write_restores_affected_file()
     test_dirty_file_refuses_before_rewrite()
