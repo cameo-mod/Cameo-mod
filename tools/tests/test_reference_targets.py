@@ -171,13 +171,27 @@ class WithheldStatLeakTest(unittest.TestCase):
         self.assertIsNone(rt.dps_guard(
             current, {"w_damage": 200, "w_burst": 2, "w_reload": 100}, None))
 
-    def test_frozen_weapon_population_is_fixed_and_fail_closed(self):
-        frozen = [dict(id="a", hp=10, w_damage=10, w_burst=2, w_reload=20, w_dps=.8)]
-        marked = rt._withhold_unproven_frozen_weapon_model(frozen)
-        self.assertFalse(marked[0]["weapon_model_eligible"])
-        self.assertEqual(marked[0]["hp"], 10)
-        # No mutable current row is consulted, so a live edit cannot change this population.
-        self.assertEqual(marked, rt._withhold_unproven_frozen_weapon_model(frozen))
+    def test_multi_armament_actors_are_the_only_ones_withheld(self):
+        """The weapon model abstains for MIXED armaments, and for nothing else.
+
+        ⛔ THIS REPLACES `test_frozen_weapon_population_is_fixed_and_fail_closed`, which asserted
+        that EVERY frozen row is stamped ineligible. Measured on the rebuilt map, that blanket
+        stamp took live weapon targets from 266 to 0 and WITHHELD from 38 to 354 while leaving the
+        headline counts identical — green-looking and empty. The eligibility flag itself is right
+        and is kept; `armament_profile` sets it from `len(live) == 1`, which is exactly the
+        maintainer's rule that a cannon and a missile may not be averaged into one number.
+        """
+        eligible = [r for r in rd.cameo_rows()
+                    if r.get("weapon_model_eligible") is not False and r.get("w_damage")]
+        withheld = [r for r in rd.cameo_rows() if r.get("weapon_model_eligible") is False]
+        # Both populations must be non-empty: all-eligible means the guard is inert, and
+        # all-withheld is the failure this test exists to catch.
+        self.assertTrue(eligible, "no actor can be projected — the weapon model is blanket-withheld")
+        self.assertTrue(withheld, "no actor is withheld — the multi-armament guard is inert")
+        for row in withheld:
+            self.assertFalse(rd.eligible(row, "w_damage"))
+        for row in eligible:
+            self.assertTrue(rd.eligible(row, "w_damage"))
 
     def test_missing_frozen_actor_cannot_receive_weapon_target(self):
         current = dict(CAM[0], id="new", weapon_model_eligible=True,

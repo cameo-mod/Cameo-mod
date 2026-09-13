@@ -624,9 +624,35 @@ class FrozenCameoDistribution(dict):
         self.cameo_votes = {row['id']: row for row in rows}
 
 
-def _withhold_unproven_frozen_weapon_model(rows):
-    """Keep the frozen population fixed while withholding uncaptured armament structure."""
-    return [dict(row, weapon_model_eligible=False) for row in rows]
+# ⛔ `_withhold_unproven_frozen_weapon_model` WAS HERE AND IS DELETED. MEASURED 2026-09-13.
+#
+# PR #369 stamped `weapon_model_eligible: False` on EVERY row of the frozen Cameo snapshot — both
+# the ordinary and the hero context — and `target_for` then refuses every `WEAPON_STATS` projection
+# whose Cameo row is ineligible. Since every actor's `cameo_row` comes from that snapshot, the
+# stamp is universal. Rebuilt the map on the merge to measure it rather than argue about it:
+#
+#     live weapon targets ("would change")   266 -> 0
+#     WITHHELD                                38 -> 354
+#     "No usable source projection"          437 -> 910
+#     EXTREME / DISAGREES                  68/42 -> 0/0
+#
+# ⚠ AND IT LOOKS GREEN, which is the dangerous part: the report still builds, and the headline
+# counts (73 originals, 116 expanded, 305 references) are IDENTICAL, because references and chassis
+# stats are untouched. Only the weapon numbers the map exists to show are gone — and the verifier
+# columns fall silent too, so the guard rails report no problems by having nothing left to guard.
+#
+# This is the SECOND time this exact shape has arrived: `41d0dad57` withheld on the premise that
+# "the source corpus currently lacks that compatible evidence" and printed WITHHELD on every row of
+# the verifier column. Both changes had a genuinely better half, and both were reconciled, not
+# reverted — #369's `dps_guard` fail-closed on an unrecoverable burst delay is KEPT below.
+#
+# ⭐ THE INTENT IS RIGHT AND THE INSTRUMENT IS WRONG. What #369 wanted to withhold is "uncaptured
+# armament structure" — a cannon+missile tank whose single projected number mixes two weapons,
+# which the maintainer raised the same day: *"Those two weapons are so different they should not be
+# mixed ... this should be true for any dual or multi weapon units."* That is a real defect, it
+# affects the multi-armament actors ONLY, and the fix the maintainer asked for is to MAP THEM PER
+# WEAPON — not to blank every single-weapon unit alongside them. A blanket stamp cannot express
+# "this actor's armaments were not separated"; per-armament pairing can, and that is the live task.
 
 
 def cameo_context():
@@ -644,7 +670,7 @@ def cameo_context():
     # different quantities. The bytes are untouched and still hash.
     # The snapshot already stores the burst TOTAL, which IS the referenced coordinate, so it is
     # normalised only to attach the derived per-shot figure. See `reference_distribution.to_per_cycle`.
-    rows = _withhold_unproven_frozen_weapon_model(rd.to_per_cycle(document['rows']))
+    rows = rd.to_per_cycle(document['rows'])
     distribution = rd.build_distributions(rows)
     add_cost_distribution(distribution, rows)
     return FrozenCameoDistribution(distribution['Cameo'], rows)
@@ -663,7 +689,7 @@ def hero_cameo_context():
     doc = json.loads(raw)
     if doc['parent_snapshot_sha256'] != FROZEN_CAMEO_SHA256:
         raise ValueError('hero reference does not share the frozen baseline')
-    rows = _withhold_unproven_frozen_weapon_model(rd.to_per_cycle(doc['rows']))
+    rows = rd.to_per_cycle(doc['rows'])
     dist = rd.build_distributions(rows)
     add_cost_distribution(dist, rows)
     return FrozenCameoDistribution(dist['Cameo'], rows)
