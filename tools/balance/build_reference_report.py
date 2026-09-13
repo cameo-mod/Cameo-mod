@@ -104,7 +104,158 @@ def arm_note(actor, led_arms):
     exactly the question the maintainer asked about `td_nod_lighttankmkii`.
     """
     n = led_arms.get(actor, 0)
-    return f'<span class="muted" title="{n} priced armaments; rate uses the selected baseline armaments">&#215;{n}</span>' if n > 1 else ""
+    if n <= 1:
+        return ""
+    # ⭐ SAY HOW MANY FIRE TOGETHER, not just how many exist. `x4` on the mammoth was answering a
+    # question nobody asked: it has four priced armaments and can only ever fire two, because the
+    # cannons and the missiles are each an upgrade pair gated on `C` / `!C`. Reading "x4" as "this
+    # tank has four guns" is the mistake the maintainer was worried about when they asked whether
+    # a single collapsed damage number would be better.
+    sim, total = simultaneous_armaments(actor)
+    if sim and total and sim < total:
+        return (f'<span class="muted" title="{total} priced armaments, but only {sim} can fire at '
+                f'once — the rest are mutually exclusive upgrade variants gated on a condition. '
+                f'The figure shown is ONE armament, never a sum.">{sim} of {total} guns</span>')
+    return (f'<span class="muted" title="{n} priced armaments, all able to fire; the figure shown '
+            f'is ONE armament, never a sum">&#215;{n}</span>')
+
+
+_SIM_CACHE = {}
+_RULESET = []
+
+
+def _ruleset():
+    """The resolved ruleset, loaded once — the only place armament CONDITIONS exist."""
+    if not _RULESET:
+        sys.path.insert(0, str(ROOT / "tools" / "audit"))
+        import miniyaml
+        _RULESET.append(miniyaml.Ruleset(str(ROOT)))
+    return _RULESET[0]
+
+
+def simultaneous_armaments(actor):
+    """(fire together, priced total) — because `x4` on the mammoth means neither.
+
+    ⛔ THE PRICED COUNT IS NOT THE SIMULTANEOUS COUNT, and the maintainer spotted the problem
+    from the other end: *"it gets more complicated for dual weapons then like the mammoth tank
+    dual cannons and dual missiles"*. `td_gdi_mammothtank` carries four priced armaments and
+    fires exactly TWO of them, ever:
+
+        Armament@PRIMARY                    !td_gdi_upgrade_highvelocitycannons
+        Armament@HV                          td_gdi_upgrade_highvelocitycannons
+        Armament@SECONDARY                  !td_gdi_upgrade_advancedmissiletargeting
+        Armament@AdvancedMissileTargeting    td_gdi_upgrade_advancedmissiletargeting
+
+    Two mutually exclusive PAIRS — one cannon and one missile launcher, whichever upgrades are
+    held. Summing four would describe a tank that cannot exist, which is exactly why the damage
+    column shows one armament rather than a total.
+
+    The rule is the condition's polarity: `C` and `!C` are the same slot in two states, so a
+    group keyed on the condition with any leading `!` stripped contributes ONE. Unconditioned
+    armaments each contribute one. ⚠ The LEDGER cannot answer this — its armament records carry
+    `requires_condition: None` for all four — so it is read from the resolved yaml, through
+    `miniyaml` rather than by hand.
+    """
+    if actor in _SIM_CACHE:
+        return _SIM_CACHE[actor]
+    try:
+        node = _ruleset().resolve(actor)
+    except Exception:                                   # a missing actor is not a report failure
+        node = None
+    if node is None:
+        return _SIM_CACHE.setdefault(actor, (None, None))
+    groups, loose = set(), 0
+    total = 0
+    for child in node.children:
+        if not child.key.startswith("Armament"):
+            continue
+        fields = {g.key: g.value for g in child.children}
+        if not fields.get("Weapon"):
+            continue
+        total += 1
+        cond = (fields.get("RequiresCondition") or "").strip()
+        if cond:
+            groups.add(cond.lstrip("!").strip())
+        else:
+            loose += 1
+    return _SIM_CACHE.setdefault(actor, (len(groups) + loose, total))
+
+
+def burst_note(cameo_row):
+    """`(x2)` after a per-shot damage figure — the maintainer's own format.
+
+    Requested 2026-09-12: *"show the damage per shot and then in brackets behind it the bursts
+    for example 10k damage (2x) which means the total damage is 2x of 10k so 20k"*. The column
+    now holds damage PER SHOT on both sides (see `reference_distribution.cameo_rows`), so the
+    bracket is the multiplier that reconstructs the per-cycle total, and nothing is hidden.
+
+    ⭐ BURST STAYS VISIBLE RATHER THAN FOLDED IN, and that is deliberate. `Burst` is a separately
+    referenced component under R1 and may not be changed without explicit permission, so a column
+    that silently multiplied it away would hide the one number that needs sign-off. It also makes
+    the rate legible at a glance: damage x burst over the cycle IS the formula.
+    """
+    burst = float(cameo_row.get("w_burst") or 1)
+    dmg = cameo_row.get("w_damage")
+    if burst <= 1 or not dmg:
+        return ""
+    return (f'<span class="muted" title="per cycle: {dmg:,.0f} x {burst:.0f} '
+            f'= {dmg * burst:,.0f}">(&#215;{burst:.0f})</span>')
+
+
+def recovered_burst_delay(row):
+    """Ticks between shots INSIDE a burst, recovered from the row's own identity.
+
+    ⛔ IT IS RECOVERED, NOT READ, and that is the only safe way to get it. No source publishes a
+    usable per-shot delay on the unit row, and `w_damage` does not even mean the same thing on
+    both sides of the map — per SHOT in `extract_peer_units`, BURST-INCLUSIVE in the frozen Cameo
+    snapshot. `reference_targets.recover_burst_time` sidesteps that by never assuming either: the
+    cycle falls out of `damage / dps` whatever those two mean, and the burst time is whatever is
+    left after reload. Reading `w_damage` as damage-per-shot instead once gave the mammoth 800
+    DPS against a true 400.
+
+    ⚠ A SINGLE-SHOT WEAPON HAS NO BURST DELAY, so this returns None rather than a number. With
+    `Burst: 1` there is no gap to measure, and the leftover cycle time is charge-up or rounding
+    rather than a delay between shots. Measured across the tree, all 477 single-shot rows recover
+    exactly 0.00, so printing "0" would read as a real measurement of something that does not
+    exist; 245 rows carry a genuine burst.
+    """
+    # ⛔ ASK `reference_targets.burst_delay_of`, never `recover_burst_time` directly. The latter
+    # computes `damage / dps - reload`, which was the cycle only while Cameo's `w_damage` was a
+    # burst TOTAL. Now that every row is per shot the cycle is `damage * burst / dps`, and the old
+    # call quietly returned 0 for every burst weapon in the map — the mammoth's 8 and the MLRS's 5
+    # both went to nothing, which reads as "no burst delay" rather than as a broken calculation.
+    return rt.burst_delay_of(row)
+
+
+def burst_delay_cell(cameo_row, rows):
+    """`now -> reference` for burst delay, marked as RECOVERED rather than projected.
+
+    ⭐ ADDED 2026-09-12 at the maintainer's request: "with damage per shot, burst, burst delay,
+    reload delay instead of just the DPS". That REVERSES an earlier instruction recorded in this
+    file — "the burst delay should be referenced but not in the reference map" — and the newer
+    one wins. The old claim is struck rather than left sitting next to the new behaviour.
+
+    ⚠ THIS CELL DELIBERATELY DOES NOT GO THROUGH `estimate_cell`. Every other target is normalised
+    against a per-source distribution before projection; burst delay has no such population,
+    because it is not a published statistic anywhere — it is derived per row. Forcing it through
+    that pipeline would mean inventing a distribution for it and would dress a recovered quantity
+    up as a projected one. The reference figure is the plain MEDIAN of whatever the assigned
+    reference rows recover, and the cell says exactly that in its tooltip.
+    """
+    cur = recovered_burst_delay(cameo_row)
+    vals = sorted(v for v in (recovered_burst_delay(r) for r in rows) if v is not None)
+    if cur is None and not vals:
+        return '<span class="muted">—</span>'
+    left = f'{cur:.0f}' if cur is not None else '<span class="muted">—</span>'
+    if not vals:
+        return (f'{left} <span class="muted">→</span> '
+                f'<span class="muted" title="no assigned reference carries a burst">—</span>')
+    mid = len(vals) // 2
+    med = vals[mid] if len(vals) % 2 else (vals[mid - 1] + vals[mid]) / 2
+    title = (f'median of {len(vals)} reference row(s) that carry a burst; RECOVERED from each '
+             f'row&#39;s own damage/dps/reload identity, not a normalised projection')
+    return (f'{left} <span class="muted">→</span> <span title="{title}">{med:.0f}'
+            f'<small class="evidence">{len(vals)} recovered</small></span>')
 
 
 def dps_verifier_cell(cameo_row, rows, tgt):
@@ -120,11 +271,24 @@ def dps_verifier_cell(cameo_row, rows, tgt):
                            human picks.
       EXTREME              the composed move alone exceeds EXTREME_RATIO.
 
-    Burst delays are deliberately NOT a column (maintainer: "the burst delay should be
-    referenced but not in the reference map"). The verifier is therefore shown only when the
-    row carries an explicit damage convention and a complete burst-delay sequence. The source
-    corpus currently lacks that compatible evidence, so a missing guard is an honest hold rather
-    than an inferred conversion between per-shot and burst-inclusive damage.
+    ⭐ THE CONVENTION IS KNOWN, SO THE VERIFIER IS NOT WITHHELD. A parallel fix (`41d0dad57`)
+    made this cell fail closed on the premise that "the source corpus currently lacks that
+    compatible evidence", which would print WITHHELD on every row. The premise is falsifiable and
+    the AUTHORED YAML falsifies it: `td_gdi_mammothtank_120mmdualhv` declares `Damage: 16000`,
+    `Burst: 2`, `BurstDelays: 8`, `ReloadDelay: 72` and the snapshot carries `w_damage` 32,000 —
+    so Cameo stores the burst TOTAL, provably, and `td_gdi_mlrs_227mm` (8,000 x 6 = 48,000) says
+    the same. The cure for an ambiguous unit is to resolve it, not to stop reporting.
+
+    So rows are normalised to per shot at construction (`reference_distribution.to_per_shot`) and
+    there is only ONE convention downstream. What IS kept from that fix is its genuinely better
+    refusal: a recovered burst time below zero means the row's own DPS identity is shorter than
+    its ReloadDelay, which is impossible, and clamping it to zero would certify a broken timing
+    model. That still withholds.
+
+    Burst delays ARE in the cycle and, as of 2026-09-12, are also their own column — see
+    `burst_delay_cell`, which supersedes the earlier "referenced but not in the reference map"
+    instruction (maintainer, 2026-09-12: "with damage per shot, burst, burst delay, reload delay
+    instead of just the DPS").
     """
     keys = ("w_damage", "w_burst", "w_reload")
     cur = {k: cameo_row.get(k) for k in keys}
@@ -252,7 +416,13 @@ def weapon_calculation_details(rows, cameo_actor=None):
         proof = profile.get((row.get('source'), row.get('id')))
         cycle = row.get('w_cycle_evidence')
         fields = [('weapon', row.get('weapon')),
-            ('source damage coordinate (legacy armament-profile burst aggregate; not per-shot)', row.get('w_damage')),
+            # ⚠ THESE ARE REFERENCE ROWS, AND THEY REALLY ARE PER SHOT. A parallel fix
+            # relabelled this "source damage coordinate ... not per-shot", which is true of the
+            # CAMEO snapshot and false of every peer: `extract_peer_units` sets
+            # `w_damage = audit["damage_pos"]` and rates it `damage_pos * burst / cycle`. OpenRA
+            # TD's `HTNK` proves it arithmetically — read as a burst total it gives a 24-tick
+            # cycle against a declared ReloadDelay of 40, which cannot happen.
+                  ('damage per shot (raw source units)', row.get('w_damage')),
                   ('reload delay / ROF (source ticks)', row.get('w_reload')),
                   ('burst', row.get('w_burst'))]
         if proof:
@@ -361,9 +531,10 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
                     '<th class="n">HP (now → reference)</th>'
                     '<th class="n">Speed (now → reference)</th>'
                     '<th class="n">Range (now → reference)</th>'
-                    '<th class="n">Damage coordinate (now → reference)</th>'
+                    '<th class="n">Damage/shot <span class="muted">(&#215;burst)</span></th>'
                     '<th class="n">Reload (now → reference)</th>'
                     '<th class="n">Burst (now → reference)</th>'
+                    '<th class="n">Burst delay <span class="muted">t/shot, recovered</span></th>'
                     '<th class="n">DPS verifier</th>'
                     '<th class="n">Cost (now → reference)</th>'
                     '</tr></thead><tbody>')
@@ -435,9 +606,10 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
                 f'<td class="n">{num(c.get("hp"))} <span class="muted">→</span> {tgt["hp"]}</td>'
                 f'<td class="n">{num(c.get("speed"))} <span class="muted">→</span> {tgt["speed"]}</td>'
                 f'<td class="n">{num(c.get("w_range"))} <span class="muted">→</span> {tgt["w_range"]}</td>'
-                f'<td class="n">{num(c.get("w_damage"))}{arm_note(a, led_arms)} <span class="muted">→</span> {tgt["w_damage"]}</td>'
+                f'<td class="n">{num(c.get("w_damage"))} {burst_note(c)}{arm_note(a, led_arms)} <span class="muted">→</span> {tgt["w_damage"]}</td>'
                 f'<td class="n">{num(c.get("w_reload"))} <span class="muted">→</span> {tgt["w_reload"]}</td>'
                 f'<td class="n">{num(c.get("w_burst"))} <span class="muted">→</span> {tgt["w_burst"]}</td>'
+                f'<td class="n">{burst_delay_cell(c, rows)}</td>'
                 f'<td class="n">{dps_verifier_cell(c, rows, tgt)}</td>'
                 f'<td class="n">{num(c.get("cost"))} <span class="muted">→</span> {tgt["cost"]}</td></tr>')
         body.append("</tbody></table>")
@@ -474,7 +646,14 @@ def main() -> int:
     cdist = rt.cameo_context()
     doc = json.loads(ASSIGN.read_text(encoding="utf-8"))
     assignment, chassis_only = doc["assignment"], doc.get("chassis_only", {})
-    attached = rt.expand_families(rt.attach(assignment, rt.peer_index(peers)), peers)
+    # ⚠ THE INDEX MUST HOLD EVERY POOL THE ASSIGNMENT COULD DRAW FROM. It is built from
+    # `peer_rows()`, which by construction EXCLUDES the hero and variant lanes — so a row either
+    # lane assigned cannot be recovered here and silently renders as no reference at all. The
+    # variant lane made that visible: `td_gdi_humveemkii` holds DTA's `JEEPPTNK` and the page
+    # showed the cell empty, which is the worst of both worlds — a mapping that exists in the
+    # data and reads as missing work in the report.
+    index_rows = peers + rd.peer_variant_rows()
+    attached = rt.expand_families(rt.attach(assignment, rt.peer_index(index_rows)), peers)
     hero_context = None
     if args.include_heroes:
         hero_peers = [r for r in rd.peer_hero_rows() if r.get('hero') is True]

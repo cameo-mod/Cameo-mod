@@ -532,11 +532,59 @@ def doc5_evidence_record(d):
     return rec
 
 
-def ini_rows():
-    """The eight Westwood/Ares mods in the peer-row shape, from `ini_corpus.json`."""
+def _ini_burst(rec):
+    """An absent `Burst=` is ONE SHOT, not an unknown.
+
+    ⭐ The maintainer spotted this from the map itself (2026-09-13): *"still shows that not all
+    the references were used for the burst"*. `td_gdi_minigunner` read "2/3 sources used" on burst
+    while reading 3/3 on everything else, because DTA Enhanced abstained.
+
+    ⛔ THIS IS NOT AN INFERENCE — it makes the corpus self-consistent. `extract_ini_units` reads
+    `num(w.get("Burst"))`, so a weapon that never declares the key records None. But that row's
+    OWN rate was already computed as one shot per cycle: DTA's `E1` carries the working
+    `15 x 1 / 21 mean ticks = 0.714286`. The row rated itself at burst 1 and then withheld burst
+    as a stat nobody could vote on. Only TWO DTA rows declare `Burst=1` explicitly, which is
+    exactly what an omitted default looks like — authors do not write defaults.
+
+    ⚠ SCOPED TO ROWS THE CORPUS ITSELF TREATED AS ONE SHOT. Anything flagged `burst_unfolded`
+    declared `Burst > 1` and had its cadence withheld for that reason; those keep abstaining, and
+    a row with no usable rate has nothing to be consistent with. Measured across the corpus:
+    2,315 rows over all nine INI sources qualify and NONE are `burst_unfolded`.
+
+    ⚠ Done at LOAD time, never by regenerating `ini_corpus.json` — a full re-run of that
+    extractor drops the weapon evidence on 63 rows.
+    """
+    burst = rec.get("w_burst")
+    if burst is not None or not rec.get("w_dps"):
+        return burst
+    if "burst_unfolded" in str(rec.get("w_evidence_reason") or ""):
+        return None
+    return 1
+
+
+def ini_rows(*, variants=False):
+    """The eight Westwood/Ares mods in the peer-row shape, from `ini_corpus.json`.
+
+    `variants=True` INVERTS the population rule below instead of applying it, returning the
+    chassis variants `tools/reference/variant_pool.py` certifies — rows the rule drops that are
+    still unit counterparts (DTA's `JEEPPTNK` "Rocket Hum-vee": a Hum-vee hull carrying `APTusk`
+    instead of `RaiderCannon`, at TechLevel -1 so no sidebar ever offers it). Everything else
+    about the row is identical — same evidence path, same armor index, same selection profile —
+    so a variant row and an ordinary row are comparable by construction.
+
+    ⛔ THESE ROWS ARE FOR `assign_references` ONLY, exactly as `peer_hero_rows()` is. A variant is
+    by definition unbuildable, so putting one into a DISTRIBUTION would price a ceiling against a
+    unit nobody can buy — the same error as letting a 3,000,000 HP epic back into the vehicle mean.
+    """
     if not INI_CORPUS.exists():
         ini_rows.sources = set()
         return []
+    variant_ids = None
+    if variants:
+        sys.path.insert(0, str(ROOT / "tools" / "reference"))
+        import variant_pool
+        variant_ids = {(v["source"], (v.get("id") or "")): v["variant_of"]
+                       for v in variant_pool.classify()[0]}
     armor = _ini_armor_index()
     selection_profile = ini_weapon_selection.load(ROOT)
     out, sources = [], set()
@@ -556,7 +604,11 @@ def ini_rows():
         # said so. The corpus carries `build_limit`, so the epic/hero exclusion is exact here.
         # `buildable` is the extractor's TechLevel/Selectable verdict — see its comment. Without
         # it a costed 10,000,000 HP dummy sits in the arithmetic mean of a 443-unit population.
-        if not r.get("cost") or r.get("build_limit") or not r.get("buildable", True):
+        if variants:
+            # The inverted rule: certified chassis variants only, and nothing the rule keeps.
+            if (r["source"], r.get("id", "")) not in variant_ids:
+                continue
+        elif not r.get("cost") or r.get("build_limit") or not r.get("buildable", True):
             continue
         spd, turn = r.get("speed"), r.get("turn_speed")
         row = {"source": r["source"], "raw_source": r["source"],
@@ -572,7 +624,7 @@ def ini_rows():
                "turn_ratio": (spd / turn) if (spd and turn) else None,
                "cost": r.get("cost"),
                "w_range": r.get("w_range"), "w_damage": r.get("w_damage"),
-               "w_burst": r.get("w_burst"), "w_reload": r.get("w_reload"),
+               "w_burst": _ini_burst(r), "w_reload": r.get("w_reload"),
                "w_dps": r.get("w_dps")}
         # Evidence BEFORE any consumer value is derived from the DPS (shared helper; see
         # the policy block above `LEGACY_EVIDENCE`).
@@ -589,6 +641,14 @@ def ini_rows():
         for lad in LADDERS:
             frac = vs.get(lad)
             row[f"dps_vs_{lad}"] = (dps * frac) if (dps and frac) else None
+        if variant_ids is not None:
+            # ⭐ CARRY THE BASE ID. This is the whole reason the variant lane can be DERIVED
+            # rather than scored: `JEEPPTNK` knows it is a variant of `JEEP`, and `td_gdi_humvee`
+            # already holds `JEEP`, so `td_gdi_humveemkii` -> `JEEPPTNK` follows without anyone
+            # scoring "Rocket Hum-vee" against "humveemkii" (which lands at 0.545 — under the
+            # 0.6 name bucket, so the greedy saw a tie at zero and handed the Hum-vee MkII a
+            # Heavy Artillery instead).
+            row["variant_of"] = variant_ids.get((r["source"], r.get("id", "")))
         out.append(row)
     ini_rows.sources = sources
     return out
@@ -1062,6 +1122,31 @@ def is_superweapon(rec):
     return False
 
 
+def to_per_shot(rows):
+    """Normalise Cameo rows' burst-total `w_damage` to PER SHOT, in memory.
+
+    ⛔ THE FROZEN SNAPSHOT NEEDS THIS TOO, and missing that is what made the first attempt at the
+    universal formula inconsistent. `reference_targets.cameo_context()` loads a SHA256-pinned
+    baseline and builds the distribution every damage target is projected onto — so normalising
+    only `cameo_rows()` left the map showing a per-shot "now" against a burst-total "reference",
+    an arrow between two different units. The mammoth read `16,000 -> 34,915` when the target
+    meant 17,457.
+
+    The pin is not touched: the file is read byte-identically and still hashes, and the
+    conversion happens after load. `w_damage_cycle` keeps the authored per-cycle figure for
+    display.
+    """
+    out = []
+    for r in rows:
+        d, burst = r.get("w_damage"), float(r.get("w_burst") or 1)
+        if d and burst > 1:
+            r = dict(r, w_damage=float(d) / burst, w_damage_cycle=d)
+        else:
+            r = dict(r, w_damage_cycle=d)
+        out.append(r)
+    return out
+
+
 def cameo_rows():
     """Cameo's own roster in the same shape, so it has real distributions to project onto."""
     out = []
@@ -1145,9 +1230,32 @@ def cameo_rows():
                 # it all along. `cost` is not in ALL_STATS (this module is the chassis layer), so
                 # a consumer that wants price must build that aggregate itself; carrying the value
                 # here is what makes that possible at all.
+                # ⛔ NORMALISED TO DAMAGE PER SHOT RIGHT HERE, so that every corpus in the
+                # project speaks one language and ONE formula applies to all of them (maintainer,
+                # 2026-09-12: "I want this formula to be used universally no matter what the
+                # reference is. Any OpenRA mod or cnc based ini mod should work the same way").
+                #
+                # Cameo's frozen snapshot stores `w_damage` as the WHOLE BURST; every other
+                # corpus stores it per SHOT. Verified against the AUTHORED YAML rather than
+                # inferred: `td_gdi_mammothtank_120mmdualhv` declares `Damage: 16000` with
+                # `Burst: 2`, and the snapshot carries 32,000.
+                #
+                # ⚠ CONVERTING HERE RATHER THAN AT THE POINT OF USE IS THE WHOLE FIX. A flag read
+                # by the last consumer looked equivalent and is not: the DISTRIBUTIONS and every
+                # projection through `target_for` are built from these rows, so leaving them in
+                # burst-total units means a projected damage target comes back in burst-total
+                # units too, and the formula then multiplies by burst a second time. Normalising
+                # at construction makes per-shot the only convention that exists downstream.
+                #
+                # The authored per-cycle figure is kept beside it for display — it is what the
+                # ledger holds — but nothing computes from it.
+                w_cycle = w.get("w_damage")
+                burst = float(w.get("w_burst") or 1)
+                if w_cycle and burst > 1:
+                    w = dict(w, w_damage=float(w_cycle) / burst)
                 out.append({"source": "Cameo", "id": name, "name": name, "type": row_kind,
                             "hp": hp, "speed": spd, "turn_speed": turn, "cost": val("cost"),
-                            "structure_debt": debt,
+                            "structure_debt": debt, "w_damage_cycle": w_cycle,
                             "turn_ratio": (spd / turn) if (spd and turn) else None, **w})
     return out
 
@@ -1290,7 +1398,7 @@ def peer_hero_rows():
                    "turn_ratio": (spd / turn) if (spd and turn) else None,
                    "cost": r.get("cost"), "hero": is_one_off(bl),
                    "w_range": r.get("w_range"), "w_damage": r.get("w_damage"),
-                   "w_burst": r.get("w_burst"), "w_reload": r.get("w_reload"),
+                   "w_burst": _ini_burst(r), "w_reload": r.get("w_reload"),
                    "w_dps": r.get("w_dps")}
             # Same shared evidence policy as `ini_rows`, before any `dps_vs_*` derives.
             dps = apply_weapon_evidence(row, r)
@@ -1311,6 +1419,36 @@ def peer_hero_rows():
             by_src[r["source"]].add(rid)
     rows = [r for r in rows if not is_ai_only(r, by_src)]
     return rows
+
+
+def peer_variant_rows():
+    """Chassis-variant peer rows that `peer_rows()` drops, flagged `variant: True`.
+
+    The THIRD population in the family `peer_rows()` / `peer_hero_rows()` already established,
+    and it exists for the same reason the hero lane does: the maintainer's population rule is a
+    statement about DISTRIBUTIONS, and the assignment keeps inheriting it by accident. A unit
+    nobody can buy has no place in a ceiling. It can still be the unit a Cameo actor IS.
+
+    The maintainer found this one by eye, 2026-09-12:
+
+        "there are some additional units from DTA that might be unbuildable. What are those and
+         can some of them be mapped? Like I've seen a drone carrier and a missile humvee.
+         Maybe useful for our promotion units?"
+
+    They were right, and the population is small and sharp: 40 rows across nine sources, six of
+    them DTA's. `variant_pool.py` carries the ten gates that get it from 11,000 raw records down
+    to those 40 and the count each one refused — the important ones being that critters carry no
+    faction at all, and that a RANK state (Rise of the East's `_E` elite suffix, 418 rows) is not
+    a chassis. Read that module before widening anything here.
+    """
+    rows = [dict(r, variant=True) for r in ini_rows(variants=True)
+            if r["source"] not in LINEAGE_MEMBERS]
+    by_src = collections.defaultdict(set)
+    for r in rows:
+        rid = (r.get("id") or "").strip().upper()
+        if rid:
+            by_src[r["source"]].add(rid)
+    return [r for r in rows if not is_ai_only(r, by_src)]
 
 
 def cameo_hero_rows():
