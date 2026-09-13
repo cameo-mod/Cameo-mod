@@ -182,24 +182,24 @@ def simultaneous_armaments(actor):
 
 
 def burst_note(cameo_row):
-    """`(x2)` after a per-shot damage figure — the maintainer's own format.
+    """`= 16,000 x 2` beneath a per-CYCLE damage figure — the breakdown, not a multiplier.
 
-    Requested 2026-09-12: *"show the damage per shot and then in brackets behind it the bursts
-    for example 10k damage (2x) which means the total damage is 2x of 10k so 20k"*. The column
-    now holds damage PER SHOT on both sides (see `reference_distribution.cameo_rows`), so the
-    bracket is the multiplier that reconstructs the per-cycle total, and nothing is hidden.
+    ⛔ THE BRACKET USED TO BE A MULTIPLIER AND THAT IS NOW WRONG. The maintainer asked for
+    "10k damage (2x) which means the total damage is 2x of 10k so 20k", and while the column held
+    damage PER SHOT that is exactly what `(x2)` meant. The column now holds damage PER CYCLE — the
+    quantity the reference actually projects, because burst is a delivery choice and the cycle
+    total is the comparable magnitude — so `32,000 (x2)` would read as "multiply by two" on a
+    number that already includes the burst, and invite a reader to double it.
 
-    ⭐ BURST STAYS VISIBLE RATHER THAN FOLDED IN, and that is deliberate. `Burst` is a separately
-    referenced component under R1 and may not be changed without explicit permission, so a column
-    that silently multiplied it away would hide the one number that needs sign-off. It also makes
-    the rate legible at a glance: damage x burst over the cycle IS the formula.
+    Same information, stated the way round the value now demands: the cycle total leads, and the
+    shot it is built from is shown underneath.
     """
     burst = float(cameo_row.get("w_burst") or 1)
-    dmg = cameo_row.get("w_damage")
-    if burst <= 1 or not dmg:
+    cycle = cameo_row.get("w_damage")
+    if burst <= 1 or not cycle:
         return ""
-    return (f'<span class="muted" title="per cycle: {dmg:,.0f} x {burst:.0f} '
-            f'= {dmg * burst:,.0f}">(&#215;{burst:.0f})</span>')
+    return (f'<small class="evidence" title="the figure above is one full cycle; this is the '
+            f'shot it is built from">= {cycle / burst:,.0f} &#215; {burst:.0f}</small>')
 
 
 def recovered_burst_delay(row):
@@ -531,7 +531,7 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
                     '<th class="n">HP (now → reference)</th>'
                     '<th class="n">Speed (now → reference)</th>'
                     '<th class="n">Range (now → reference)</th>'
-                    '<th class="n">Damage/shot <span class="muted">(&#215;burst)</span></th>'
+                    '<th class="n">Damage/cycle <span class="muted">= shot &#215; burst</span></th>'
                     '<th class="n">Reload (now → reference)</th>'
                     '<th class="n">Burst (now → reference)</th>'
                     '<th class="n">Burst delay <span class="muted">t/shot, recovered</span></th>'
