@@ -454,7 +454,6 @@
       "slot": "Armament@ROCKETS",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
-       "^Warhead_MissileHE_Heavy",
        "^HeavyCannon",
        "^TankDestroyerCannon",
        "^ShrapnelWeapon",
@@ -463,8 +462,7 @@
        "^MediumMissile"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy",
-       "^Warhead_MissileHE_Heavy"
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "TSHellfireTwin",
       "weapon_class_source": "template"
@@ -652,7 +650,6 @@
       "slot": "Armament@ROCKETS",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
-       "^Warhead_MissileHE_Heavy",
        "^HeavyCannon",
        "^TankDestroyerCannon",
        "^ShrapnelWeapon",
@@ -661,8 +658,7 @@
        "^MediumMissile"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy",
-       "^Warhead_MissileHE_Heavy"
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "TSHellfireTwin",
       "weapon_class_source": "template"
@@ -768,7 +764,7 @@
         "damage": "65000",
         "falloff": "100, 52, 0",
         "spread": "63",
-        "tag": "MissileTesla_HeavyFlatCompatibility",
+        "tag": "MissileTesla_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -815,14 +811,14 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1170",
       "pricing": true,
       "range": "5846",
       "reloaddelay": "34",
       "slot": "Armament@ROCKETS",
       "versus_templates": [
-       "^Compatibility_MissileTesla_HeavyFlat",
+       "^Warhead_MissileTesla_Heavy",
        "^TeslaWeapon",
        "^HeavyMissile",
        "^MediumFlameWeapon",
@@ -830,9 +826,11 @@
        "^Grenade",
        "^ArrowWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileTesla_Heavy"
+      ],
       "weapon": "CabalMothershipRockets",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4331,7 +4329,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8753",
       "reloaddelay": "52",
@@ -4340,18 +4338,14 @@
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
        "^Compatibility_MissileHE_MediumFlat",
-       "^Warhead_MissileHE_Light",
-       "^Warhead_MissileHE_Medium",
        "^CabalMissileLight",
        "^CabalMissileEffect"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileHE_Light",
-       "^Warhead_MissileHE_Medium"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "CabalRocketCyborgRockets",
-      "weapon_class_source": "allowlist_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -4366,7 +4360,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8753",
       "reloaddelay": "52",
@@ -4375,18 +4369,14 @@
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
        "^Compatibility_MissileHE_MediumFlat",
-       "^Warhead_MissileHE_Light",
-       "^Warhead_MissileHE_Medium",
        "^CabalMissileLight",
        "^CabalMissileEffect"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileHE_Light",
-       "^Warhead_MissileHE_Medium"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "CabalRocketCyborgRocketsUpgraded",
-      "weapon_class_source": "allowlist_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -4402,7 +4392,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "8753",
       "reloaddelay": "52",
@@ -4410,18 +4400,14 @@
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
        "^Compatibility_MissileHE_MediumFlat",
-       "^Warhead_MissileHE_Light",
-       "^Warhead_MissileHE_Medium",
        "^CabalMissileLight",
        "^CabalMissileEffect"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileHE_Light",
-       "^Warhead_MissileHE_Medium"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "CabalRocketCyborgRockets",
-      "weapon_class_source": "allowlist_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

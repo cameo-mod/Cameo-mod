@@ -166,17 +166,47 @@ def norm_words(text):
 ORIGINAL_SOURCES = ("OpenRA Red Alert", "OpenRA Tiberian Dawn",
                     "OpenRA Tiberian Sun", "Romanov's Vengeance")
 
+# ⛔ TWO TABLES, BECAUSE AN ALIAS IS EITHER A NAME OR AN ID AND MIXING THEM COSTS REAL MAPPINGS.
+# `name_score` is called TWICE per pair — once against the peer's display NAME and once against
+# its ID — and a single shared table applies to both, which is how one entry can be right in one
+# direction and wrong in the other.
+#
+# ⭐ THE SSM LAUNCHER IS THE CASE THAT PROVES IT (maintainer, 2026-09-13, twice). First:
+# "td_nod_ssmlauncher still uses the wrong references. It should use the SSM launcher and not the
+# combined arms MLRS". Then, after I removed the alias outright: "mobile sam was the correct
+# reference for the SSM Launcher so your first reference was correct but now that it's removed
+# it's wrong". Both are true, and the split is what satisfies both:
+#
+#   OpenRA TD  id MLRS   name "Mobile SAM"     <- CORRECT, and reachable only through the ID
+#   DTA        id MLRS   name "SSM Launcher"   <- correct by NAME anyway
+#   Combined   id MLRS   name "SSM Launcher"   <- correct by NAME anyway
+#   Combined   id MSAM   name "MLRS"           <- WRONG, and it was reachable only through NAME
+#   Romanov's  id mlrs   name "Rocket Launcher"<- WRONG by name
+#   Twisted    id MLRSW  name "Bullfrog"       <- WRONG by name
+#
+# As one table the alias scored ALL of them 1.00 and the tie-break picked by cost. Split, the id
+# alias reaches the two rows whose ID is `MLRS` and the name table never sees "MLRS" at all.
 NAME_ALIASES = {
     "battletank": ("mediumtank",),
     "mediumtank": ("battletank",),
-    "mlrs": ("msam", "rocketlauncher"),
-    "ssmlauncher": ("mlrs",),
+    # DTA and OpenRA both NAME the MLRS "Rocket Launcher".
+    "mlrs": ("rocketlauncher",),
     # DTA writes it out in full where OpenRA and Combined Arms both abbreviate: `AGUN` "AA Gun"
     # and `CRAM` "AA Gun" against DTA's `RAAGUN` "Anti-aircraft Gun". Confirmed by the maintainer
     # as the same unit.
     "aagun": ("antiaircraftgun", "antiaircraft"),
     "alliedaagun": ("antiaircraftgun",),
 }
+
+# Applied to the peer's ID ONLY. A mod's id frequently preserves the unit's original identity
+# while its display name has been localised, expanded or renamed outright.
+ID_ALIASES = {
+    # Tiberian Dawn's SSM Launcher ships under the id `MLRS`, whatever the display says.
+    "ssmlauncher": ("mlrs",),
+    # Combined Arms and OpenRA both id the MLRS `MSAM`.
+    "mlrs": ("msam",),
+}
+
 
 
 def _substantial_containment(a, b):
@@ -199,14 +229,20 @@ def _substantial_containment(a, b):
     return lo >= 5 and lo / hi >= 0.4
 
 
-def name_score(cameo_id, peer_name):
-    """0..1. Exact and alias matches sit at the top; a shared distinctive word still counts."""
+def name_score(cameo_id, peer_name, aliases=None):
+    """0..1. Exact and alias matches sit at the top; a shared distinctive word still counts.
+
+    `aliases` selects WHICH table applies — `NAME_ALIASES` when comparing against the peer's
+    display name, `ID_ALIASES` when comparing against its id. Defaults to the name table so an
+    existing caller keeps its behaviour.
+    """
+    aliases = NAME_ALIASES if aliases is None else aliases
     tail = syn.norm(cameo_id.split("_")[-1])
     peer = syn.norm(peer_name)
     if not tail or not peer:
         return 0.0
     best = 0.0
-    for cand in (tail,) + NAME_ALIASES.get(tail, ()):
+    for cand in (tail,) + aliases.get(tail, ()):
         if cand == peer:
             return 1.0
         if cand.startswith(peer) or peer.startswith(cand):
@@ -392,8 +428,8 @@ def score(cam, rec, peer, cam_cost_pct, peer_cost_pct, home, cam_shape=None, pee
     # unused, and handed `td_gdi_mlrs` a Drone Launcher while DTA's real MLRS went unclaimed. Both
     # were then recorded as SHAPE matches — the scorer knew they were bad and the assignment kept
     # them anyway, which is the other half of this bug.
-    raw_name = max(name_score(cam["id"], peer.get("name", "")),
-                   name_score(cam["id"], peer.get("id", "")))
+    raw_name = max(name_score(cam["id"], peer.get("name", ""), NAME_ALIASES),
+                   name_score(cam["id"], peer.get("id", ""), ID_ALIASES))
     name = (4 if raw_name >= 1.0 else 3 if raw_name >= 0.9 else
             2 if raw_name >= 0.75 else 1 if raw_name >= 0.6 else 0)
     TIER_UNAVAILABLE = 0.0
@@ -414,6 +450,46 @@ def score(cam, rec, peer, cam_cost_pct, peer_cost_pct, home, cam_shape=None, pee
     # actually IS outranks which faction lineage it came from.
     return (name, variant_rank(cam["id"], peer.get("name", "")), 1 if home else 0,
             TIER_UNAVAILABLE, round(role, 3), round(cost, 3), round(raw_name, 3))
+
+
+VARIANT_MARKER = re.compile(r"_(?:elite|veteran|deployed|empty|undeployed|husk)$", re.I)
+
+
+def cameo_variant_ids(scope):
+    """Cameo actors that are a VARIANT of another Cameo actor — the mirror of `variant_pool`.
+
+    Same test as the peer side, which is the point: an id that EXTENDS a sibling's id inside the
+    same faction. `td_gdi_humvee` -> `td_gdi_humveemkii`, `td_nod_lighttank` ->
+    `td_nod_lighttankmkii`, `ts_gdi_titan` -> `ts_gdi_titanmkii`. Applying one test to both sides
+    is what keeps this a rule; a hand-kept list of "promotion units" would go stale the first time
+    somebody added one.
+
+    ⚠ THE SUFFIX EXCLUSIONS ARE THE SAME EXCLUSIONS, TOO. `_elite` is a veterancy rank and
+    `_deployed` / `_empty` are stances or cargo states — the same two populations `variant_pool`
+    refuses on the peer side (`MARATNK2` "(Elite)", `THRASHERD` "(Deployed)"). A rank is not a
+    chassis on either side of the map.
+
+    ⚠ A FALSE POSITIVE HERE IS CHEAP AND A FALSE NEGATIVE IS NOT. `forgotten_mutant` ->
+    `forgotten_mutantsniper` is not really a variant — a Mutant Sniper is its own unit — but all
+    this list does is decide who may BID. The scorer and `drop_unbacked_shape` still require a
+    NAME-backed match, and no peer variant is called "Mutant Sniper", so the row simply never
+    appears. Excluding a real variant, by contrast, silently restores the gap this lane exists to
+    close.
+    """
+    by_faction = collections.defaultdict(set)
+    for c in scope:
+        by_faction[fr.faction_of(c["id"])].add(c["id"])
+    out = {}
+    for fac, ids in by_faction.items():
+        prefix = len(fac) + 1 if fac else 0
+        for cid in ids:
+            if VARIANT_MARKER.search(cid):
+                continue
+            # The base must be a real unit name, not just the faction prefix plus a letter.
+            bases = [b for b in ids if b != cid and cid.startswith(b) and len(b) - prefix >= 4]
+            if bases:
+                out[cid] = max(bases, key=len)
+    return out
 
 
 def assign(only_class=None, routing=True):
@@ -559,9 +635,30 @@ def assign(only_class=None, routing=True):
                           cam_shapes.get(c["id"]), peer_shapes.get(id(p)))
                 if s:
                     cands.append((s, c["id"], p))
-        # clause 9: greedy descent — best remaining wins, both sides then spoken for
-        # Originals first, then score. `reverse=True` puts True ahead of False.
-        cands.sort(key=lambda t: (t[1] in originals, t[0], t[1]), reverse=True)
+        # clause 9: greedy descent — best remaining wins, both sides then spoken for.
+        #
+        # ⛔ THE ORIGINALS PREFERENCE SITS INSIDE THE NAME BUCKET, NOT ABOVE IT (fixed 2026-09-12).
+        # It used to be the outermost key — `(t[1] in originals, t[0], t[1])` — which made it a
+        # hard precedence rather than a tie-break: EVERY bid by an original actor, including a
+        # worthless shape-only one, was processed before ANY bid by an expansion actor, including
+        # an exact name match. Measured cost of that:
+        #
+        #   `ra2_allies_nighthawk` (an original) took Valiant Shades' `beag` and CnC Reloaded's
+        #   `BEAG` — both named "Black Eagle" — at name 0.154, SHAPE. `ra2_allies_blackeagle`
+        #   scored 1.0 on both and was refused them because the rows were already spent. Then
+        #   `drop_unbacked_shape` correctly binned the nighthawk rows for being shape-only, and
+        #   the two Black Eagles ended the run held by NOBODY.
+        #
+        # That is the "right candidate was deleted from the pool" failure in a new shape: the row
+        # was not deleted, it was consumed by an actor that then had it taken away again.
+        #
+        # ⭐ AND THE MAINTAINER'S RULE STILL HOLDS, which is why this is a fix and not a reversal.
+        # The case it was written for — `ra1_soviets_firerocketsoldier` scoring 0.867 against
+        # "Rocket Soldier" while `ra1_soviets_rocketsoldier`, the actual RA1 unit, scored 0.850 —
+        # is a contest WITHIN one name bucket (both >= 0.75, so both bucket 2). Ordering by bucket
+        # first and originals second still hands that row to the original. What no longer happens
+        # is a 0.15 beating a 1.0 because of who bid it.
+        cands.sort(key=lambda t: (t[0][0], t[1] in originals, t[0][1:], t[1]), reverse=True)
         used_cam, used_peer = set(), set()
         for s, cid, p in cands:
             # ⛔ CLAUSE 3 IS SCOPED PER CAMEO FACTION, not globally (maintainer 2026-09-07).
@@ -732,6 +829,100 @@ def assign(only_class=None, routing=True):
                                            "home": bool(s[2]), "raw_name": s[6], "confidence": conf}
         assign.hero_count = sum(1 for k in result if any(c.get("hero") for c in hero_cameo if c["id"] == k))
 
+    # ── VARIANT PASS (maintainer, 2026-09-12) ────────────────────────────────────────────────
+    #
+    #     "there are some additional units from DTA that might be unbuildable. What are those and
+    #      can some of them be mapped? Like I've seen a drone carrier and a missile humvee.
+    #      Maybe useful for our promotion units?"
+    #
+    # A third lane, built exactly like the hero lane and for the same reason: the population rule
+    # ("only buildable units, no epic units with build limits") is a rule about DISTRIBUTIONS that
+    # the ASSIGNMENT kept inheriting by accident. DTA ships `JEEPPTNK` "Rocket Hum-vee" — a Hum-vee
+    # hull carrying `APTusk` — at TechLevel -1. Cameo ships `td_gdi_humveemkii`. That is a
+    # counterpart and the population rule had hidden it.
+    #
+    # ⛔ VARIANT-TO-VARIANT ONLY, and the test is SYMMETRIC — the same test on both sides, which
+    # is what makes it a rule rather than a heuristic. A variant is an id that EXTENDS a sibling's
+    # id within the same roster: `JEEP` -> `JEEPPTNK` on the peer side, `td_gdi_humvee` ->
+    # `td_gdi_humveemkii` on ours. Letting a BASE Cameo unit bid would be the defect this is meant
+    # to fix, running backwards: `td_gdi_humvee` scores against "Rocket Hum-vee" just as well as
+    # `td_gdi_humveemkii` does, so the base would take the variant's reference and the MkII would
+    # be left with the leftovers — "the right candidate was deleted from the pool" again.
+    #
+    # ⛔ THE PAIRING IS DERIVED, NOT SCORED — and the first attempt at this lane is why.
+    #
+    # Scoring variant against variant does not work, and it fails in a way worth writing down.
+    # `name_score("td_gdi_humveemkii", "Rocket Hum-vee")` is 0.545: the scorer RANKS it first of
+    # DTA's six, correctly, but 0.545 sits under the 0.6 floor of name bucket 1. So every pair in
+    # the lane tied at bucket 0, the cascade fell through to shape and cost, and the Hum-vee MkII
+    # was handed a HEAVY ARTILLERY while the Rocket Hum-vee sat unused two rows away. The reason
+    # is structural rather than a bad threshold: a variant's name carries the MODIFIER and drops
+    # the chassis ("Rocket" vs "mkii"), so the two names genuinely do not look alike.
+    #
+    # But the map already knows the answer. `td_gdi_humvee` holds DTA's `JEEP`, and `JEEPPTNK`
+    # records that it is a variant OF `JEEP`. Both sides state their base, so the pairing is a
+    # lookup:
+    #
+    #     Cameo variant V (base B)  +  B already references peer row R in source S
+    #     +  peer variant P in S with variant_of == R        =>        V references P
+    #
+    # That is how a person reads it — "DTA's Hum-vee is our Hum-vee, so DTA's variant of the
+    # Hum-vee is our variant of the Hum-vee" — and it cannot invent junk: with no assigned base
+    # there is no candidate, so the slot stays empty and O1 reports it as work, exactly as
+    # `drop_unbacked_shape` intends. Name score is used ONLY to break a tie when one base carries
+    # two variants (`HTNK` -> both `HTNKARTY` "Mammoth Artillery" and `HTNKMSAM` "Disruptor").
+    #
+    # ⛔ STRICTLY ADDITIVE: it writes ONLY into an empty (actor, source) slot. The hero lane used
+    # `setdefault(cid, {})[source] = ...`, which overwrites, and needed a two-pass design plus an
+    # acceptance test to prove it changed no non-hero mapping. Refusing to overwrite makes that
+    # guarantee structural instead of measured — no existing mapping can change, because none is
+    # ever written over.
+    variant_peers = rd.peer_variant_rows()
+    variant_cameo = cameo_variant_ids(scope)
+    assign.variant_cameo = variant_cameo
+    assign.variant_filled = filled = []
+    assign.variant_unmatched = unmatched = []
+    by_base = collections.defaultdict(list)
+    for p in variant_peers:
+        by_base[(p["source"], (p.get("variant_of") or "").upper())].append(p)
+    used_peer = set()
+    for cid, base in sorted(variant_cameo.items()):
+        if cid not in led or base not in result:
+            continue
+        if only_class and cm.classify(led[cid].get("design") or {})[0] != only_class:
+            continue
+        fac = fr.faction_of(cid)
+        for source, base_row in sorted(result[base].items()):
+            if result.get(cid, {}).get(source):
+                continue                                  # additive only
+            cands = [p for p in by_base.get((source, (base_row.get("id") or "").upper()), ())
+                     if (not routing or fr.allows(fac, p))
+                     and (fac, p["source"], p.get("id", "")) not in used_peer]
+            if not cands:
+                continue
+            # Tie-break only: one base can carry two variants, and the NAME decides which is
+            # which. `HTNK` -> `HTNKARTY` (0.562) beats `HTNKMSAM` (0.417) for a Mammoth MkIII.
+            p = max(cands, key=lambda p: (max(name_score(cid, p.get("name", "")),
+                                              name_score(cid, p.get("id", ""))), p.get("id", "")))
+            used_peer.add((fac, p["source"], p.get("id", "")))
+            raw = max(name_score(cid, p.get("name", "")), name_score(cid, p.get("id", "")))
+            # ⚠ THE CONFIDENCE IS THE BASE'S, CAPPED AT FAIR — never invented and never promoted.
+            # The evidence for this row is the base pairing (which IS name-backed, or it would
+            # have been dropped) plus a structural variant link on both sides. That is real, and
+            # it is weaker than an outright name match, so it must never present as STRONG.
+            conf = "FAIR" if base_row.get("confidence") in ("STRONG", "FAIR") else "WEAK"
+            result.setdefault(cid, {})[source] = {
+                "name": p.get("name"), "id": p.get("id"),
+                "score": (1, 0, 0, 0.0, 0.0, 0.0, round(raw, 3)),
+                "hp": p.get("hp"), "cost": p.get("cost"), "home": False,
+                "raw_name": round(raw, 3), "confidence": conf, "variant": True,
+                "variant_of": p.get("variant_of"), "derived_from": base}
+            filled.append((cid, source, p.get("id"), p.get("name"), base, base_row.get("id")))
+    for cid, base in sorted(variant_cameo.items()):
+        if not any(f[0] == cid for f in filled):
+            unmatched.append((cid, base, "base has no reference" if base not in result
+                              else "no peer variant of the base's row"))
+
     # ⛔ THE HERO PASS RUNS AFTER `apply_overrides` AND `drop_unbacked_shape`, so on its own it
     # bypasses BOTH. Measured when the lane first landed: 12 SHAPE rows came back into a map that
     # had been 100% name-backed for a day, and the maintainer's own overrides for DTA's `A10` and
@@ -741,8 +932,12 @@ def assign(only_class=None, routing=True):
     hero_by_source = collections.defaultdict(list)
     for p in (hero_peers or ()):
         hero_by_source[p["source"]].append(p)
+    variant_by_source = collections.defaultdict(list)
+    for p in (variant_peers or ()):
+        variant_by_source[p["source"]].append(p)
     combined = collections.defaultdict(list)
-    for src, rows_ in list(by_source.items()) + list(hero_by_source.items()):
+    for src, rows_ in (list(by_source.items()) + list(hero_by_source.items())
+                       + list(variant_by_source.items())):
         combined[src].extend(rows_)
     result = apply_overrides(result, combined, routed_pool, routing)
     result, hero_dropped = drop_unbacked_shape(result)
@@ -1190,6 +1385,13 @@ def main():
         n = sum(1 for v in result.values()
                 if sum(1 for m in v.values() if m["confidence"] in tiers) >= 2)
         print(f"⭐ actors with >=2 {label} references: {n}")
+    filled = getattr(assign, "variant_filled", [])
+    vc = getattr(assign, "variant_cameo", {})
+    print(f"variant lane           : {len(filled)} filled of {len(vc)} Cameo variant actors "
+          f"(chassis variants the population rule drops; derived from the base's pairing)")
+    for cid, src, pid, pname, base, bid in filled:
+        print(f"   + {cid:34s} {src:16s} {pid:12s} {str(pname)[:24]:24s} "
+              f"via {base} -> {bid}")
     for cid, src, pid in getattr(apply_overrides, "missing", ()):
         print(f"⛔ OVERRIDE UNRESOLVED  {cid:38s} {src:24s} {pid}  — not in the routed pool")
 

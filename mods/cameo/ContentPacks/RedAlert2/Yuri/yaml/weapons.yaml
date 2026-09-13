@@ -32,7 +32,7 @@ RA2LasherCannon_elite:
 	BurstDelays: 3
 
 RA2LasherToxicMortar:
-	Inherits@roleflat: ^Compatibility_CannonChem_MediumFlat
+	Inherits@roleflat: ^Warhead_CannonChem_Medium
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^HeavyBomb
@@ -156,7 +156,7 @@ RA2LasherToxicMortar:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@TankDestroyerCannon:
-	Warhead@CannonChem_MediumFlatCompatibility:
+	Warhead@CannonChem_Medium:
 		ValidTargets: Ground, Water
 		Damage: 18000
 		PercentageScale: 0
@@ -226,7 +226,7 @@ RA2LasherToxicMortar_elite:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
-	Warhead@CannonChem_MediumFlatCompatibility:
+	Warhead@CannonChem_Medium:
 		ValidTargets: Ground, Water
 		Damage: 30000
 		PercentageScale: 0
@@ -732,9 +732,11 @@ RA2GattlingInf:
 		Damage: 16000
 		PercentageScale: 2494
 RA2Virusgun:
-	Inherits@roleflat: ^Compatibility_Sniper_LightFlat
+	Inherits@roleflat: ^Warhead_Sniper_Light
 	Inherits: ^HeavyChemicalWeapon
 	Inherits@2: ^SniperWeapon
+	-Warhead@Sniper_Light_Percentage:
+	-Warhead@Sniper_Light_ExtraDamage:
 	ReloadDelay: 74
 	Range: 9999
 	Report: iviratta.wav
@@ -792,7 +794,7 @@ RA2Virusgun:
 		InvalidTargets: Water
 	-Warhead@HeavyChemicalWeapon:
 	-Warhead@SniperWeapon:
-	Warhead@Sniper_LightFlatCompatibility:
+	Warhead@Sniper_Light:
 		ValidTargets: Infantry
 		Damage: 24000
 		PercentageScale: 0
@@ -830,7 +832,7 @@ RA2Virusgun2:
 		Duration: 150
 	-Warhead@HeavyChemicalWeapon:
 	-Warhead@SniperWeapon:
-	Warhead@Sniper_LightFlatCompatibility:
+	Warhead@Sniper_Light:
 		ValidTargets: Ground, Ship, Garrisoned
 		Damage: 24000
 		PercentageScale: 0
@@ -898,15 +900,11 @@ RA2Chemspray:
 		InvalidTargets: Water
 
 RA2Chemspray2:
-	Inherits@roleflat: ^Compatibility_Chemical_HeavyFlat
-	Inherits@wh: ^Warhead_Chemical_Heavy
+	Inherits@roleflat: ^Warhead_Chemical_Heavy
 	Inherits@proj: ^Projectile_Chem_Heavy
 	Inherits@fx: ^Effect_Chem_Heavy
 	Inherits: RA2Chemspray
 	Report: flamer2.aud
-	Warhead@Chemical_Heavy:
-		Damage: 8000
-		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@Condition: GrantExternalCondition
 		Range: 2000
 		Condition: corroded
@@ -916,9 +914,8 @@ RA2Chemspray2:
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 4
 		Duration: 200
-	-Warhead@Chemical_Heavy:
 	-Warhead@Chemical_Medium:
-	Warhead@Chemical_HeavyFlatCompatibility:
+	Warhead@Chemical_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 8000
 		PercentageScale: 9988
@@ -929,10 +926,11 @@ RA2Chemspray_elite:
 	Range: 5840
 
 RA2CosmonautLaser:
-	Inherits@roleflat: ^Compatibility_Laser_LightFlat
+	Inherits@roleflat: ^Warhead_Laser_Light
 	Inherits: ^RailgunWeapon
 	Inherits@2: ^LaserWeapon
 	Inherits@3: ra2roktgun
+	-Warhead@Laser_Light_ExtraDamage:
 	Report: ilasatta.wav
 	ReloadDelay: 11
 	Range: 4750
@@ -982,7 +980,7 @@ RA2CosmonautLaser:
 	-Warhead@LaserWeapon:
 	-Warhead@RailgunExtraDamage:
 	-Warhead@RailgunWeapon:
-	Warhead@Laser_LightFlatCompatibility:
+	Warhead@Laser_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 13600
 		PercentageScale: 1464

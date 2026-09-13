@@ -762,6 +762,65 @@ Memory: `cameo-engine-submodule`.
 
 ---
 
+## ⭐ NEW — a unique FACTION TRAIT for every faction (maintainer, 2026-09-12)
+
+Maintainer order: *"give each faction a unique faction trait as a bonus"*.
+
+**Scope: 24 factions**, each getting one. `asianalliance · atreides · cabal · corrino ·
+forgotten · futuretech · harkonnen · ixian · japan · latinsyndicate · naxis · ordos ·
+ra1_allies · ra1_soviets · ra2_allies · ra2_soviets · schwarzermond · steelconsortium ·
+td_gdi · td_nod · tkm · ts_gdi · ts_nod · yuri`
+
+### ⛔ FIRST: this is a THIRD layer, not a rename of either existing one
+
+[`DESIGN.md` §6](../DESIGN.md) already rules two upgrade layers, and the whole risk in this
+item is that someone reads "faction trait" as one of them and re-implements it. State the
+difference before writing any yaml:
+
+| layer | how you get it | who it affects | magnitude | status |
+|---|---|---|---|---|
+| **faction upgrade** | BUILT, costs credits | own faction | **15–25%** | shipped, many exist |
+| **team upgrade** | BUILT, costs credits | every ALLIED army | **5–10%** (≈ half the faction one) | one per faction eventually; SM's still unpicked (below) |
+| **faction trait** ← *this item* | **INNATE — never built, never bought, on from tick 0** | own faction | **TBD — needs a ruling** | none exist |
+
+The trait is the RA2/StarCraft-style identity bonus a player gets simply for picking the
+faction. Nothing in the tree currently occupies that layer.
+
+### Open rulings needed before any implementation
+
+- [ ] **Magnitude.** The §6 ladder is 15–25% built / 5–10% team. A free permanent bonus has to
+  sit UNDER a paid one or the upgrade economy inverts — but it is also always-on, so a flat
+  percentage is worth more than the same number on an upgrade. Recommend a ruling that keeps
+  traits **non-numeric wherever possible** (a capability, not a multiplier) precisely to dodge
+  that comparison.
+- [ ] **Does a trait interact with pricing?** ⛔ If a trait is a stat multiplier it enters
+  effective DPS/HP and the formula must price it, exactly as `FirepowerMultiplier` does
+  (`docs/design/FORMULA_V2.md`). A CAPABILITY trait does not. This is the strongest argument
+  for capability-shaped traits and should be settled first — it decides whether this item
+  blocks on the balance program or runs beside it.
+- [ ] **Uniqueness law.** "Unique" needs the same treatment the warhead families got
+  (`audit_family_uniqueness.py`): no two factions may share a trait, and near-duplicates
+  ("+10% speed" vs "+10% movement") are the failure mode. Wants an audit, not a review.
+
+### Why it is NOT just "pick 24 good effects"
+
+The lesson `DESIGN.md` §6 already paid for, on the SM team upgrade: *"The mistake was
+reasoning from an available mechanic instead of from faction identity."* A trait derived from
+what the engine happens to expose produces 24 multipliers that could belong to anyone. Each
+trait must be derivable from the faction's existing roster and lore — which for most factions
+is already written down, so this starts from the identity documents rather than a mechanics list.
+
+⚠ **Cabal, Forgotten, Yuri and the D2K houses need checking first** — several are sub-factions
+or AI-only in places, and a trait on a faction nobody can pick in the lobby is dead content.
+Confirm lobby-selectable factions before committing to 24.
+
+### Related, already ruled — do not re-derive
+
+* the two existing layers and the **team ≈ half of faction** magnitude law: `DESIGN.md` §6
+* **a team upgrade must fit faction identity**: `DESIGN.md` §6, 2026-08-15
+* the `<Delivery><Tech>` blend grid **is** the faction upgrade matrix: `DESIGN.md` §1444
+* platings are mutually exclusive, team upgrades are not: `DESIGN.md` §2317
+
 ## ❓ OPEN DESIGN — Schwarzer Mond team upgrade + faction lore pass (2026-08-15)
 
 Two maintainer questions raised while reworking the SM upgrades (`d58cd8603`).

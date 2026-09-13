@@ -978,6 +978,408 @@ in both directions (`AsianTSIonCannon` 7.67x, `MarineMG` 6.00x; `wc2ogremageRune
 after 10 mains became 1). Re-check a conversion against the release tag, not against the commit
 before it.
 
+### 11b.1a TEMPLATE ONLY — never from another weapon (binding, maintainer 2026-09-12)
+
+The maintainer restated the law and closed the one hole in it:
+
+> *"every weapon needs to have exactly 1 warhead, 1 projectile, 1 effect inherited from a
+> template only and **NEVER from another weapon**"*
+
+`§11b.1` constrained the COUNT of inherits. It did not say where they must come from, so a
+weapon could satisfy it with exactly three parents and inherit all three from other weapons.
+Nothing measured that: `audit_weapon_shape.py` W1 counts arity only. Measured 2026-09-12 over
+2,448 concrete weapons:
+
+```
+W7  inherits from ANOTHER WEAPON              957   (655 distinct weapon-parents)
+W8  inherits a ^Template outside the 3 kinds  874   (198 distinct legacy templates)
+```
+
+**THIS OVERRIDES §10's variant-family exemption, for inheritance only** (maintainer ruled
+2026-09-12, asked explicitly). §10 permits two weapons in one actor's variant family to SHARE
+a weapon; it does not permit a variant to INHERIT its structure from the base weapon. So
+`X_elite: Inherits: X` is a violation and must be rewritten to carry the three `^Template`
+inherits itself. That is 481 of the 957 — `_elite` 168, `_aa` 43, `2` 24, `_emp` 13,
+`_upgrade` 11 — and it is the drift-prone half, because each variant must also reproduce
+whatever its base declared LOCALLY. Prove every batch with
+`tools/audit/review_resolve_diff.py`; a missed local override is a silent behaviour change.
+
+### 11b.0 MAINTAINER RULINGS, 2026-09-12 (the reference/pricing/ammo session)
+
+Nine decisions, all asked and answered the same day. They supersede anything earlier that
+disagrees, and several of them CANCEL work that was already specified.
+
+**R1 — Weapon stats are referenced SEPARATELY; total DPS is a VERIFIER, not a target.**
+> *"each individual stat like damage per shot, burst, burst delay, reload delay should be
+> referenced separately but also at the same time the total DPS should kept as a verifier so
+> nothing suddenly becomes too extreme"*
+
+So `w_damage`, `w_burst`, `w_reload` (and burst delay, once referenced) are each applied from
+their own projection, and `w_dps` becomes a **guard rail**: if the composed result drifts far
+from the DPS target, that is a flag to look at, not a number to overwrite the components with.
+⛔ This CANCELS the "DPS is authoritative, decompose_dps solves the rest" reading. The five
+targets never composed — 1.42x apart on `td_gdi_mammothtank`, 1.64x on `td_gdi_mlrs` — and the
+resolution is that four of them are inputs and the fifth is a check.
+
+### R1 implemented, 2026-09-12
+
+`reference_targets.COMPONENT_STATS` / `VERIFIER_STATS`, `compose_dps`, `recover_burst_time`,
+`dps_guard` (+ `_guard_self_test`), and a **DPS verifier column** in the reference map, which
+now also carries the **source damage coordinate** and **Reload** as their own columns. Burst delay stays OUT of
+the map, as ruled. The verifier is diagnostic-only and is withheld unless the row carries an
+explicit damage convention plus a complete burst-delay sequence; the current peer corpus does
+not provide that compatible evidence.
+
+`EXTREME_RATIO` 2.00, `DISAGREE_RATIO` 1.25 remain the proposed diagnostic thresholds; they are
+not currently producing verifier claims because the compatible convention and delay evidence is
+missing from the peer corpus.
+
+⛔ **`w_damage` MEANS DIFFERENT THINGS IN DIFFERENT SOURCES, and reading it wrong
+double-counts burst.** `extract_peer_units` sets `w_damage = audit["damage_pos"]` — damage per
+SHOT — with `w_dps = damage_pos x burst / cycle`. The frozen Cameo snapshot's `w_damage` is
+**burst-INCLUSIVE**, with `w_dps = w_damage / cycle` and no burst factor at all. Proven on the
+shipped rows: mammoth `32000/400 = 80` ticks against `w_reload 72`; MLRS
+`48000/352.94 = 136` against `w_reload 111`.
+
+The cycle is recoverable only after the row's damage convention is explicit: per-shot rows
+multiply by `Burst`, while burst-inclusive rows do not. A complete delay sequence is still
+required for composition because burst delays may vary. The first implementation inferred the
+convention from `damage / DPS` and could silently compare unlike rows; the corrected guard now
+withholds that case instead of manufacturing a verifier result.
+
+⚠ **A burst change alone barely moves DPS, and must not read as extreme.** Burst reaches DPS
+only by lengthening the cycle through burst delays; under a burst-inclusive `w_damage` it is
+not a multiplier. The MLRS target drops burst 6 → 2, which SHORTENS the cycle and nudges DPS
+*up*. `_guard_self_test` asserts this case permanently.
+
+**R2 — Reference everything first, INCLUDING price; then fit to the formula, and BOTH may move.**
+> *"we first reference everything including prices and then try to fit everything inside the
+> balance formula as good as possible which means prices can move but so can the stats to
+> reduce the delta as much as possible"*
+
+**R3 — But the VIRTUAL BASELINE ACTORS COME FIRST, and the formula cannot do anything until
+they exist.** The binding order of operations:
+
+1. Reference every actor — stats AND price (done for 186; `reference_assignment.json`).
+2. Derive a **virtual baseline actor per class** from that reference data
+   (`derive_virtual_anchor.py`, `EXTRAPOLATION_PROGRAM.md`).
+3. **Fit the base band**: every member of a class must land inside the documented
+   **100%–250% price band**. ⭐ **The BASELINE is the free parameter, not the actors**
+   (maintainer, asked explicitly): choose the baseline so the real members already fall in
+   band. Nothing about a live unit changes to make the band fit — a member still outside
+   afterwards is a genuine outlier to look at, and that is the point of the exercise.
+4. **Parameterise the formula for that class** from the fitted baseline.
+5. **Only then price**, letting price and stats both move to shrink the reference-vs-formula
+   delta (R2).
+
+⛔ Steps 4 and 5 are IMPOSSIBLE before 2 and 3. `apply_balance --confirm` being a no-op is not
+a bug to route around; it is this ordering being enforced. Signed-off anchors today: **0**.
+
+### R3 measured, 2026-09-12 — `tools/balance/fit_baseband.py`, report `docs/balance/baseband_fit.md`
+
+Step 3 is governed by two facts about the band that are geometric, not statistical, and both
+change what "fit the band" can mean.
+
+⛔ **`cost0` CANNOT MOVE THE BAND.** The ratio is `class price / cost0`, and
+`class_baseline_estimators` multiplies every estimator BY `cost0`, so it cancels exactly:
+ratio = `[(h+s+r+d)/4 + (h·s+r·d)/2 + h·s·r·d] / 3`. Re-pricing a baseline changes what the
+class costs and moves **nothing** into band. Only `hp0`, `speed0`, `range0_wdist` and `dps0`
+do, through `h = hp/hp0` and its siblings.
+
+⛔ **THE BAND DOES NOT SURROUND THE BASELINE — IT STARTS AT IT.** At the baseline
+h=s=r=d=1, so the ratio is exactly **1.000**; the 2×HP/2×DPS verifier is exactly **2.500**. So
+100%–250% means *"from the baseline to its verifier"*, and "every member in band" requires the
+baseline to sit at or **below** the weakest member. The decay is steep and has no shoulder: a
+member weaker by 10% on every axis already prices at **78.9%**, under the 75% floor.
+
+⚠ **Therefore a MEDIAN-derived baseline can never satisfy the band** — it puts half the class
+below 100% by construction. `derive_virtual_anchor.py` proposes reference-backed class medians,
+which correctly answers *"what is typical"* and cannot answer *"where does the band start"*.
+Those are different questions; step 2 currently supplies the first to step 3.
+
+**Measured over 404 priced members in 24 formula-priced classes:** 115 (28%) in the sweet spot
+today; re-scaling every class baseline uniformly reaches only **271 (67%)**, short of the ≥80%
+target. **21 of 24 classes span more than the 2.5× envelope** — up to **33.7×** (`melee`).
+
+⭐ **But the spread is concentrated, and that is the finding.** Every class has a current-anchor
+ratio window — the largest observed subset inside the 2.5× envelope — and those windows span
+**1.4×–2.5×**, holding **290 of 404** members. The remaining **114** sit outside those
+current-anchor windows. The extremes are triage signals, not proofs of a role or pricing defect:
+`futuretech_blackwidow` is in **`melee`** with `Range: 9000`;
+`corrino_buggy` is in **`mbt`** (25k HP, 100 DPS, cost 300); `cabal_enlighted` carries
+**11,184 DPS** in `heavy_infantry` against a flamer's 181. `steelconsortium_hoverboardgrenadier`
+prices at **3080%** of its class baseline.
+
+**So the band is a CURRENT-ANCHOR TRIAGE SIGNAL, and step 3 is blocked on membership triage, not
+on arithmetic alone.** Each of the 114 is one of three things and only a maintainer can say
+which: misclassified, a legitimate higher tier needing a tech-tier gate, or genuinely
+mis-stated. Uniform rescaling can change the nonlinear ratio spread, and an anisotropic baseline
+could change it further; both need their own evidence before the window is treated as a fit.
+`anchor_readiness.py` says the same from the other end — its "statistically
+indistinguishable" class pairs are *"separated by what they SHOOT AT, not by their stats"*.
+
+**The 114 triaged, 2026-09-12 (`fit_baseband.py --triage`).** ⛔ **A stat-based test does not
+determine class membership or baseline feasibility.** Measured: the median member
+is accepted by **6 of the 27** class baselines (mean 5.6, max 9), so "another class would take
+it" is true of nearly everything and is worth nothing as evidence. The first version of the
+triage used the best-fitting class as its deciding signal and labelled **81 of 114
+MISCLASSIFIED**, which put `terran_ghost` in `artillery` on one arbitrary pick out of six.
+Those labels would have read as authoritative and carried no information. `anchor_readiness.py`
+already states the limit: these classes are *"separated by what they SHOOT AT, not by their
+stats. No stat-based check can police these boundaries."*
+
+What the band CAN contribute honestly: **80 AXIS OUTLIER** (one stat more than 2x off its class
+core — a checkable fact), **30 ROLE REVIEW** (stats genuinely cannot decide), **2 NO CLASS
+ACCEPTS** (`harkonnen_inkvine` at `raw_dps` 0.0x, `naxis_slave` at 0.1x — data defects, not
+class questions), **1 ONE CLASS ACCEPTS** (`naxis_naximercenarysniper`, only `scout`, at 110%),
+**1 LATER TECH** (`naxis_skymage` 390% at tier 0.75 vs a core of 1.00).
+
+⭐ **61 of the 114 are driven by `raw_dps`** (41 hp, 9 range, 2 speed) — and that AGREES with the
+binding order of operations instead of fighting it. `BALANCE_PROGRAM_PLAN.md` §0a puts weapon
+STRUCTURE before pricing, W24 is still moving, and every anchor dossier already says *"No DPS
+target is proposed while W24 moves"*. So the majority of band failures are attributable to the
+one axis the pipeline has deliberately not settled: **the band cannot be fitted before W24
+closes**, and the DPS-driven outliers are not yet evidence about class membership at all.
+
+⚠ **`fit_baseband.py` cross-checks its own recomputation against `check_band.py` and refuses
+to be believed without it.** The first run disagreed on **257 of 404** ratios: the anchor's
+tier must come from the tier map via `anchor_actor`, not from the anchor's own `tech_tier`
+field. Every number above is from the run that matches 404/404.
+
+**R4 — Delete the `^Warhead_*_Flat` shims; the existing templates already cover it.** DONE and
+boot-gated, via `tools/balance/retire_flat_shims.py`. Of 46 users **only 23 resolve
+`PercentageScale: 0`** — the other 23 override it back to ~9990, so the shim's defining property
+is cancelled for half of them. Users moved to the plain `^Warhead_<fam>_<level>`.
+⚠ This REPLACES §11b.1b's "second template per family" plan, which is cancelled.
+
+⚠ **Three numbers in the first draft of this ruling were wrong, and the corrections are worth
+more than the ruling.** All three came from describing the shims rather than resolving them.
+
+* **27 shims, not 26.** `^Warhead_TS30mmRail_Unscoped_Flat` is a legacy shape with no plain
+  twin and no user — deleted outright.
+* **"Near-clones differing only by `PercentageScale`" was false: ZERO of the 26 were clones,**
+  so the deletion was never a rename. Four independent differences: `Damage: 0` vs `2000`
+  (moot — all 46 users set their own); **weapon-level** fields present only in the twin
+  (`Range`, `ReloadDelay`, `TargetActorCenter`, `ValidTargets` — a `^Warhead_*` template is
+  NOT only warheads, the same trap that once stripped `TargetActorCenter` off 60+ weapons);
+  extra warhead nodes only the twin ships (`*_ExtraDamage`, `*_Percentage`, 7 user instances);
+  and Versus rows off by up to 4.
+* **The Versus delta is convergence, not regression.** `gen_weapon_template.py` never emitted
+  `_Flat` — grep it. The shims were legacy orphans outside the generator's authority, which is
+  precisely why they drifted from the regenerated twins. 34 distinct armor rows moved, worst by
+  **4 points** on a mean-100 scale. Local compensation is impossible anyway: `Versus` may live
+  only in a template.
+
+**The load-bearing discovery: 11 weapons declare `Warhead@X` and then delete it again with
+`-Warhead@X`.** That is dead code only while the live node is named `Warhead@X_Flat`. Rename it
+to `Warhead@X` and the dormant removal deletes the real main, which is then re-added at the END
+of the warhead list — a **firing-order change**, the same class as the Wraith. Any future
+rename of this shape must check whether the target name is already mentioned in the weapon.
+
+**R5 — "Flat warhead" means a profile that does not discriminate, and none exist.** The shape
+law is the **2x–8x Versus spread band with 4x the target** (§ the target-band rule). Measured
+over 190 `^Warhead_*` templates: minimum ratio **2.00x**, median 4.62x — **zero flat warheads**.
+The `_Flat` NAME was the problem, not the shape.
+
+**R6 — corrected: TWO templates exceed 8x, not nine, and only ONE is real work.**
+⛔ **The "nine" came from computing max:min over ALL 22 Versus rows, including `Shield`.**
+`Shield` is not a normal armor — §12.0c gives it its own compressed [100,400] ladder — and
+`audit_versus_profile.py` has always excluded it, along with the five physical-state
+pseudo-armors: `NON_ARMOR = {Shield, HAZMAT, COMPOSITE, BLAST, REFLECTOR, ARMOR}`. Measured on
+the 16 real armor rows over 167 templates:
+
+| template | armor-only | with `Shield` folded in | verdict |
+|---|---|---|---|
+| `MissileAP_Heavy_D2K_ORocket` | **12.50x** | 12.50x | genuinely out of band — pull it in |
+| `Sniper_Light` | 10.00x | 11.00x | `HAND_TUNED`, ratified, generator skips it |
+| `MissileAA_Medium` | 7.35x | 7.35x | in band (next highest) |
+| `Laser_Medium` | **4.84x** | 8.44x | **in band, on the 4x target — do nothing** |
+
+`Storm_*` and `Tesla_Heavy` are likewise in band and were ratified against inflated figures.
+`audit_versus_profile.py` reports **spread 0/0** and has done so since 2026-08-22 — a tool
+already implementing the law disagreed with the measurement, which by the standing rule makes
+it a contradiction to check, not a finding to act on. The ratified specialists may still be
+recorded in `aggregate_archetype.SPECIALIST_RATIOS`, but as authored exceptions, not as band
+violations. **Never fold `Shield` into a spread-band ratio.**
+
+**R7 — The heaviness bell stays OFF until W24 closes.** Re-confirmed after being asked directly.
+`USE_BELL` remains false; W24 is not closed (W7 **957**, W8 **858**). Finish W24, then flip the
+bell as its own boot-gated change. ⛔ Do not enable it to fix R6 — and after R6's correction
+there is exactly **one** template to pull in by hand, not two.
+
+**R8 — CARRIER SLAVE AMMO, exactly specified.** Every `CarrierSlave` gets `AmmoPool` +
+`ReloadAmmoPool`. All 19 break this today (8 have no pool at all, which `CarrierSlave.cs:59-65`
+turns into *unlimited ammo*; 11 have a pool nothing ever refills). Fix 17 — skip
+`tkmsuicidedrone` and `farasha_drone_ixian`, which die on impact.
+
+> *"ammo pool should be made so that firing all weapons on the target in a single burst attack
+> will empty the ammo completely ... reloading from empty to full should always take 100 ticks
+> ... If the unit has more than one weapons you need to make the ammo pool and the ammo
+> consumption per weapon so that both consume the ammo pool equally fast."*
+
+The rule, mechanically:
+* **one concurrent armament:** `Ammo = Burst`, `AmmoUsage = 1`. A burst-10 MG gets `Ammo: 10`.
+* **N concurrent armaments:** give each an EQUAL share. `share = lcm(Burst_i)`,
+  `AmmoUsage_i = share / Burst_i`, `Ammo = N x share`. The worked example: MG burst 10 and a
+  dual rocket burst 2 -> share 10, MG usage 1, rocket usage 5, `Ammo: 20`.
+* **refill is ALWAYS 100 ticks empty-to-full:** `Count / Delay = Ammo / 100`. `Ammo: 10` ->
+  `Delay: 10, Count: 1`; `Ammo: 20` -> `Delay: 5, Count: 1`; a pool that does not divide 100
+  evenly uses `Count > 1` (`Ammo: 6` -> `Count: 3, Delay: 50`).
+* **upgrade-granted weapons take `AmmoUsage: 0`** so they never interfere; only CONCURRENT
+  weapons enter the share calculation.
+
+✅ **DONE 2026-09-12, boot-gated** — `tools/balance/carrier_slave_ammo.py` (the law, with both
+worked examples as its self-test) + `apply_carrier_slave_ammo.py` (placement only).
+`audit_ammo_cadence` A2 ratchet **19 → 0**. Two refinements the data forced, both of which the
+ruling as written would have got wrong:
+
+* ⛔ **A REPLACEMENT PAIR IS ONE SLOT, AND BOTH SIDES MUST SPEND AMMO.** "Upgrade weapons take
+  `AmmoUsage: 0`" is right for an ADDITIVE upgrade (`RequiresCondition: X` with no sibling on
+  `!X`) — `cruiser_f.steel`'s quantum secondary. It is WRONG when siblings carry `X` and `!X`,
+  which is a swap, not an addition: `japan_zerofighter_slave` runs both its live armaments on
+  the `X` side, so zeroing them would leave the upgraded unit consuming **no ammo at all** and
+  firing forever. Detect the negated sibling; give both sides the same usage; count the slot
+  once.
+* ⛔ **N IS NOT THE ARMAMENT COUNT — it is the largest group sharing a target class.**
+  `A10Carrier`'s `Armament@AA` is `ValidTargets: Air` and its `@BOMBS` is `Ground, Water`; they
+  can never fire at one target, so N=3 would build a pool no single attack could empty. With
+  N=2 both engagements empty it exactly: ground `10x1 + 1x10 = 20`, air `10x1 + 2x5 = 20`.
+* **Scope is 14, not 17.** 19 − 2 assumed the maintainer's two names were all the suicide
+  drones; three more qualify under the same rule (`SCSCOURGEDRONE` self-destruct weapon,
+  `kami.asian` and `tsprobe` via `SpawnedExplodes`). The two NAMED ones carry no suicide trait
+  at all — their self-destruct is in the weapon — so the explicit list and the detector are
+  both required, and neither alone suffices.
+* ⚠ **`AmmoPool.Armaments` defaults to `primary, secondary`** and `AmmoPool.Attacking` only
+  calls `TakeAmmo` when the list contains the armament's `Name`. An armament named anything
+  else spends nothing and the pool never empties. Write the list whenever the default does not
+  cover every armament.
+* ⭐ **Preferred long-term solution, and the most complicated:** a condition-driven multiplier
+  that dynamically DOUBLES the pool while an upgrade is active, so upgrade weapons can consume
+  ammo properly instead of being zeroed. Maintainer's stated preference; not yet designed.
+
+**R9 — An AMMO POOL MAKES `ReloadDelay` THE WRONG CLOCK.** See `tools/balance/ammo_cadence.py`
+for the four regimes and `audit_ammo_cadence.py` for the census. 145 actors have a pool and
+nothing in `extract_stats` / `reference_distribution` / `formula` mentioned it. Helicopters are
+compared on *pool damage / time to empty*; airfield planes on **damage per sortie with no rate
+at all**; 12 single-shot pools have no rate either.
+
+### R10-R15 — the DEPRECATED-NAME sweep (maintainer, 2026-09-12)
+
+> *"those names are already deprecated and weapons like those should no longer exist. If you
+> find anything like that it is a bug"* — and, asked which cohort first: **"all of the above"**.
+
+⛔ **Finding a deprecated warhead name is a BUG REPORT, not a balance question.** The framing
+that treats `1Dam` or `*FlatCompatibility` as "a legacy main we might fold" is wrong: these
+names were retired, so their presence is debt to be cleared, not a trade-off to be priced.
+
+Measured 2026-09-12 across the resolved ruleset — **~983 deprecated warhead-node instances**:
+
+| cohort | instances | note |
+|---|--:|---|
+| `*Compatibility` nodes | **586** (43 distinct) | `Bullet_MediumFlatCompatibility` 130, `Laser_Heavy…` 47, `Flak_Medium…` 46 |
+| legacy `<n>Dam` / `Damage` / `IonCannon` / `Temperature…` | **397** (17 distinct) | **`1Dam` alone on 277 weapons** |
+| `^Compatibility_*` templates | **36** defined | 35 have users, 369 (weapon, shim) pairs |
+
+**R10 — A PURE RENAME NEEDS NO WARHEAD PERMISSION.** Rule 4 governs changes to a warhead; it
+does not govern its NAME. When the resolved node is identical except for its key, this is
+naming work (rule 9). Every batch is still gated by `resolved_gate` (field SET **and** firing
+ORDER) and boot-gated. A fold or merge that actually moves per-armor damage still needs
+explicit permission.
+
+**R11 — `1Dam` is RENAMED to the family the weapon already inherits.** On the ~229 weapons
+where it is the only main: `Warhead@1Dam` -> `Warhead@<Family>_<Level>` matching the
+`^Warhead_` the weapon already has. The name is a legacy damage index from the source game, not
+a family. ⚠ `1Dam` is NOT a 1-damage marker — the 48 stacked ones carry 1,200-50,000 damage.
+
+**R12 — DELETE the 36 `^Compatibility_*` templates; the 214 exposed users get a per-weapon
+suppression line.** Of 369 (weapon, shim) pairs: **139** already inherit the matching twin (chain
+it, drop the weapon's duplicate direct inherit or that parent sits on one root-to-ancestor path
+twice and the boot crashes); **214** do not and would silently GAIN the twin's content — up to
+132 extra warhead nodes and 378 weapon-level field instances (`TargetActorCenter` 200,
+`ValidTargets` 91, `ReloadDelay` 48, `Range` 39). Each of those gets a local line instead.
+⭐ **MEASURE the suppressions, never predict them:** the same prediction on the `_Flat` shims
+said 78 and the measured answer was **2**, because a later inherit already supplied the value.
+⚠ This SUPERSEDES §11b.1b's "second template per family" blocker below, which was written when
+56 of 64 families had both kinds of user; re-measured today it is **28 of 35**, and R12 resolves
+it without new templates.
+
+**R13 — the 16 orphan shims get their MISSING TEMPLATE GENERATED.** Where a
+`^Compatibility_*` has no matching `^Warhead_<fam>_<level>` at all, run `gen_weapon_template`
+for that family/level rather than inventing a local profile.
+
+**R14 — the 7-main nuke cohort: check whether `AreaDamage` already expresses it.**
+`4Dam_areanuke1` + `7/8Dam_areanuke2` + `10/11Dam_areanuke3` + `1Dam_impact` + `Damage` looks
+like an imported three-ring blast. The maintainer's instruction is explicit: *"investigate if
+that behavior can already be done with our new area damage warhead that we created to replace
+those legacy things and if so do that then"*. So: read the real `Spread`/`Falloff` on each of
+the seven, and if `AreaDamage`'s expanding rings reproduce it, convert — do not merely rename.
+
+**R15 — boot-gate cadence: ONE PER COHORT.** Batch a whole cohort, verify with `resolved_gate`,
+then one boot gate and one commit; bisect within the batch if boot fails.
+
+#### 11b.1b `^Compatibility_*` — what it is, and why the collapse is not arithmetic
+
+> *"Any of those silly compatibility warheads must be resolved and replaced by an actual new
+> warhead"* — maintainer, 2026-09-12
+
+**What it actually is.** `^Compatibility_<fam>Flat` is the **landing zone of an earlier W24
+pass**, not scaffolding. Read `YamatoCannon`:
+
+```yaml
+Warhead@Demolition_Heavy:  Damage: 20000
+Warhead@CannonHE_Heavy:    Damage: 20000
+-Warhead@CannonHE_Heavy:
+-Warhead@Demolition_Heavy:
+Warhead@CannonHE_HeavyFlatCompatibility:
+	Damage: 40000            # the two mains, already folded into one, parked on the shim
+```
+
+Someone collapsed two mains into one and parked the survivor on the shim. Those weapons are
+already single-main and already correct; their only defect is that the template they inherit is
+not spelled `^Warhead_`. Measured against its real twin, the shim's ladder is **identical on 10
+families and differs by ±1 on one or two of 16 armor rows on 49** — MEAN-100 rounding drift, not
+design. **So the fix is a RENAME and no `Versus` row, `Damage` or `Burst` changes: no warhead
+permission is needed, because no warhead changes.**
+
+⛔ **THE SHIM'S W8 VIOLATION IS LOAD-BEARING.** A blanket rename does not reduce the defect
+count, it MOVES it: 240 of the 416 users also inherit a real `^Warhead_`, so spelling the shim
+`^Warhead_` converts one W8 violation into one **W2** violation each (W2 177 -> ~400). The
+rename is only worth anything together with the structural fix, and the structural fix is where
+the difficulty sits.
+
+⛔ **AND THE `^Warhead_` INHERIT IS NOT DEAD JUST BECAUSE ITS NODE IS.** The obvious follow-up —
+"the weapon deletes `Warhead@<fam>` locally, so drop the inherit" — is wrong. A `^Warhead_`
+template also carries **weapon-level** fields (`ValidTargets`, `ReloadDelay`, `Range`,
+`TargetActorCenter`) and the shim carries **none**. Dropping the inherit silently stripped
+`TargetActorCenter` off 60+ weapons and left three warheads with an EMPTY TYPE — the boot-NRE
+class. A node-level deadness test cannot see either failure.
+
+**The shape that does work** is a new template that CHAINS the twin, so the weapon-level fields
+keep arriving once the weapon's duplicate inherit is dropped:
+
+```yaml
+^Warhead_Flame_Heavy_Flat:
+	Inherits: ^Warhead_Flame_Heavy      # weapon-level fields arrive through the chain
+	Warhead@Flame_Heavy_Flat: AreaDamage
+		...                             # the shim's own body, verbatim
+```
+
+The weapon's `-Warhead@Flame_Heavy:` line **stays where it is** — putting the removal in the
+template killed a LIVE twin main on `25mm`. The weapon's direct `Inherits: ^Warhead_Flame_Heavy`
+**must go**, or that parent sits on one root-to-ancestor path twice and the boot crashes.
+
+⛔ **ONE TEMPLATE CANNOT SERVE BOTH POPULATIONS, and that is the blocker.** A user that already
+inherits the twin needs the chain; a user that inherits NO `^Warhead_` at all would **gain**
+those weapon-level fields from it (measured: 112 weapons newly gained `Warhead@Bullet_Medium`,
+11 gained `TargetActorCenter`). **56 of 64 families have BOTH kinds of user**, so those families
+need a SECOND template each — the chained one and the standalone one — and a per-weapon routing
+decision. That is the outstanding work, and it is template-count growth, so it needs a ruling.
+
+**Landed 2026-09-12, provably behaviour-identical** (`tools/balance/promote_compatibility_warheads.py`,
+which refuses to write unless every weapon's resolved node is unchanged through the name map):
+33 of 69 templates, 55 weapons — 4 chained, 29 renamed, 36 mixed families skipped.
+W8 874 -> 858, W1 26.30% -> 26.16%, W2 held at 177.
+
 ### 11b.2 The SEVEN kinds of multi-main weapon (the codemod's taxonomy)
 
 `tools/audit/intentional_composites.py` was DELETED on 2026-09-06 — an exemption list cannot
@@ -1521,6 +1923,42 @@ steps so the house formulas stay integral:
   `Warhead@SmallArms`, `Warhead@TankDestroyerCannon`, …). The legacy
   generic `Warhead@1Dam` is RETIRED — it was renamed to the per-template
   warhead name; a bare `1Dam` (or stray non-template warhead) is a bug.
+#### The stat grids, complete (one table, one code home)
+
+⭐ **`formula.STAT_GRID` is the single source of truth** — four files used to carry their own
+quantum (`propose_class_rebalance.nudge_hp_spd` for HP and speed, `propose_reference_anchors`
+inline for range and cost, `formula.DAMAGE_STEP` for damage, and nothing at all for reload and
+burst). They all read the table now. **Never re-literalise a grid.**
+
+| stat | grid | why that number |
+|---|--:|---|
+| HP | **1000** | the only grid NOT at 1, and not by omission: `RepairsUnits` steps at `HP/20`, so HP must stay a multiple of 20; 1000 keeps that free and still gives ~100 slots per class |
+| Speed | **1** | was 5, only so `TurnSpeed = Speed/5` stayed integral; the derived-turn-rate trait handles that now |
+| Range (WDist) | **1** | was 10; 1024 WDist per cell, so a step of 1 is ~1/1000 of a cell |
+| Damage | **1** | was 2000 → 200 → 100 → 10 → 1 |
+| ReloadDelay (ticks) | **1** | always was — integer ticks, never snapped by any tool |
+| Burst | **1** | always was — a count |
+| BurstDelays (ticks) | **1** | always was |
+| Cost (credits) | **100** | with **10** permitted when the 100-slot is already taken |
+
+**The ruling behind all of it, applied over and over: a coarse grid buys nothing once the
+thing it protected is expressed differently, and it costs UNIQUENESS.** Speed stepped by 5 gave
+13 slots for 51 `mbt` units — speed 75 shared by 9 of them, and no assignment of 51 units to 13
+values can be unique. HP stepped by 2500 gave 24 distinct values for those 51 units, with HP
+100,000 shared by 10. Damage stepped by 2000 so `FirepowerMultiplier` could absorb the
+remainder — and `FirepowerMultiplier` is retired (W17), so there is nothing left to absorb.
+
+Dates: damage 2000→200→100 on 2026-08-11 (W15); HP 2500→1000 and speed 5→1 on 2026-09-07;
+damage 100→10 on 2026-09-11; **damage 10→1 and range 10→1 on 2026-09-12**, the same ruling that
+put reload / burst / burst-delay on the record at 1.
+
+⚠ **The percentage twin did NOT follow the flat grid down, and must not be inferred from it.**
+100 flat is still 0.01% HP (`DAMAGE_PER_PERCENT`), so 1 damage is 0.0001% HP — finer than even
+`FINE_PERCENT_DENOMINATOR` (100000ths) can write. `percentage_twin` returns its never-zero
+floor of 1 there, so **Damage 1..99 all twin to the same 1 basis point**. The flat grid is now
+finer than the percentage grid can follow; that is a known consequence, not a bug, and it is why
+`percentage_twin` is threaded from the resolved node rather than assumed.
+
 - **HP: 1000-steps for EVERY type** (maintainer 2026-09-07; was 2500 for
   vehicles/aircraft/ships and 1000 for infantry). The old 2500 existed only so
   `Step = HP/2500` divided evenly; once regeneration is expressed as TICKS TO FULL

@@ -245,7 +245,11 @@ someone LOOKS: it has gone red twice now because yaml commits landed without a
 re-extract. Re-extract before every commit that moves a balance number, not at the
 end of a session.
 
-**The damage grid is 100, not 2000.** `formula.DAMAGE_STEP = 100` (W15), and
+**The damage grid is 10.** `formula.DAMAGE_STEP = 10` — the maintainer regridded it
+2000 -> 200 -> 100 (W15, 2026-08-11) and then **100 -> 10 on 2026-09-11**, landed in
+`b235c6980`. Five documents still teach 100; the constant is the artifact and it wins. The
+percentage twin did NOT move with it: 100 flat is still 0.01% HP, so a finer 0.001%
+increment needs an explicit 100000 denominator. And
 `FirepowerMultiplier` is retired as a pricing/fine-tuning knob (W17): `apply_balance`
 cannot write it, and `propose_class_rebalance.decompose_dps` always solves at
 `fp = 1.0`. Older documents that teach the 2000-step grid plus an FP fine-tune are

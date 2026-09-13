@@ -278,7 +278,6 @@ wc2paladinexorcism:
 
 wc2ballistaFire:
 	Inherits@wh2: ^Warhead_Demolition_Heavy
-	Inherits@wh3: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Demolition_Heavy
 	ReloadDelay: 180
@@ -372,7 +371,7 @@ MortarTeamArtilleryShell:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@CannonHE_MediumFlatCompatibility:
 wc2gryphonFireVisible:
-	Inherits@roleflat: ^Compatibility_MissileTesla_MediumFlat
+	Inherits@roleflat: ^Warhead_MissileTesla_Medium
 	Inherits: ^LightMissile
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^HeavyBomb
@@ -452,7 +451,7 @@ wc2gryphonFireVisible:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@TeslaChargedExtraDamage:
 	-Warhead@TeslaChargedWeapon:
-	Warhead@MissileTesla_MediumFlatCompatibility:
+	Warhead@MissileTesla_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 45000
 		PercentageScale: 0

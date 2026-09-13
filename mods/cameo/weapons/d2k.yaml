@@ -1156,7 +1156,6 @@ light_inf_lmg:
 		PercentageScale: 9975
 LMG_upgrade:
 	Inherits: ^Warhead_Bullet_Medium
-	Inherits@3: ^Warhead_CannonHE_Heavy
 	Inherits@4: ^Projectile_Shell_Heavy
 	Inherits@5: ^Effect_CannonHE_Heavy
 	Inherits@6: ^HeavyMachineGunProjectile
@@ -1164,7 +1163,6 @@ LMG_upgrade:
 	Range: 4448
 	Report: gun11.aud
 	ValidTargets: Ground, Water, Air
-	-Warhead@CannonHE_Heavy:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000

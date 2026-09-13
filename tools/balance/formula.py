@@ -548,11 +548,26 @@ def spread_damage_sum(warheads, smallarms_only: bool = False,
 # The flat-damage grid. 2000 until 2026-08-11, when the maintainer regridded it 20x finer
 # (2000 -> 200 -> 100) alongside a percentage twin measured in BASIS POINTS (0.01%).
 #
-# Aedis2026-09-11 04:24: flat damage may use10-point steps. The existing
-# damage/percentage strength ratio remains100 flat ==0.01% HP. Expressing its
-# finer0.001% increment requires an explicit100000 denominator; changing this
+# Aedis 2026-09-11 04:24: flat damage may use 10-point steps. The existing
+# damage/percentage strength ratio remains 100 flat == 0.01% HP. Expressing its
+# finer 0.001% increment requires an explicit 100000 denominator; changing this
 # flat grid alone does not alter any existing percentage weapon's units.
-DAMAGE_STEP = 10
+#
+# Aedis 2026-09-12: "we can change the damage grid to 1 per step since it doesn't matter
+# anymore". So the grid is RETIRED as a constraint -- step 1 means every integer Damage is
+# legal and `snap_damage_step` is the identity above zero. It is deliberately kept as a
+# named constant rather than deleted: `distribute_damage` divides a DPS budget across a
+# weapon's mains and still needs a quantum to divide onto, callers assert `v % DAMAGE_STEP`,
+# and a future ruling can re-coarsen the grid by editing this ONE line. What it stops
+# buying is protection from off-grid remainders -- there is no remainder at step 1, which is
+# precisely why FirepowerMultiplier is no longer needed to absorb one (W17).
+#
+# ⚠ The percentage ratio did NOT move with it, and must not be inferred from it:
+# 100 flat is still 0.01% HP (`DAMAGE_PER_PERCENT`). A 1-damage change is 0.0001% HP, finer
+# than even FINE_PERCENT_DENOMINATOR can write, so `percentage_twin` returns its never-zero
+# floor of 1 rather than the true ratio down there. Damage 1..99 therefore all twin to the
+# same 1 basis point: the flat grid got finer than the percentage grid can follow.
+DAMAGE_STEP = 1
 
 # Flat damage per ONE WHOLE PERCENT of the twin. Raised 2000 -> 10000 in the same ruling:
 # the twin's BASE percentage is now 5x smaller, and the percentage warheads' Versus values
@@ -574,6 +589,48 @@ FINE_PERCENT_DENOMINATOR = 100000  #0.001% units; opt-in, never change old units
 # Percentage-warhead Versus values are multiples of 5 in [5, 100] (the x5 rebase of the
 # old 1..17 band). Which 17-step window a family uses is a W13 profile decision: 5..85
 # reproduces today's balance exactly, 20..100 is the deliberately generalist band.
+# ---------------------------------------------------------------------------- #
+# THE STAT GRIDS, in ONE place (DESIGN.md "stat granularity").
+#
+# Every authored stat used to carry its own quantum, and they were scattered: HP and speed
+# in `propose_class_rebalance.nudge_hp_spd`, range and cost inline in
+# `propose_reference_anchors`, damage here, and reload/burst nowhere at all. Four files had
+# to agree and nothing checked that they did. They live here now; read the grid from this
+# table, never re-literalise one.
+#
+# The direction of travel is one ruling, applied repeatedly: a coarse grid buys nothing once
+# the thing it protected is expressed differently, and it costs UNIQUENESS. Speed stepped by
+# 5 only so `TurnSpeed = Speed/5` stayed an integer -- 13 slots for 51 `mbt` units, speed 75
+# shared by 9 of them, and no assignment of 51 units to 13 values can be unique. HP stepped
+# by 2500 only so `Step = HP/2500` divided evenly -- 51 members, 24 distinct HP values, HP
+# 100,000 shared by 10 units. Damage stepped by 2000 so FirepowerMultiplier could absorb the
+# remainder -- and FirepowerMultiplier is retired (W17).
+#
+# Maintainer rulings, in order:
+#   2026-08-11  damage 2000 -> 200 -> 100                            (W15)
+#   2026-09-07  HP 2500 -> 1000 (all types), speed 5 -> 1 (all types)
+#   2026-09-11  damage 100 -> 10
+#   2026-09-12  "damage grid to 1 ... reload delay grid to 1, same for burst and burst delay
+#                and range" -- damage 10 -> 1, range 10 -> 1, and reload/burst/burst-delay
+#                RECORDED at 1, which is what they always were: integer ticks and counts
+#                that no tool ever snapped. Writing them down is the point -- an unwritten
+#                grid is what let four files disagree.
+#
+# ⚠ HP is the one grid that did NOT go to 1, and not by omission: `RepairsUnits` steps at
+# `HP/20`, so an HP value must stay a multiple of 20, and 1000 keeps that true for free
+# while still giving ~100 slots across a class. Anything finer has to re-derive repair.
+STAT_GRID = {
+    "hp":                1000,   # multiple of 20 required by RepairsUnits (HP/20)
+    "speed":                1,
+    "range_wdist":          1,   # WDist; 1024 per cell, so this is ~1/1000th of a cell
+    "cost":               100,   # credits; DESIGN allows 10 when the 100-slot is taken
+    "cost_fine":           10,
+    "damage":               1,   # == DAMAGE_STEP, kept as its own name for callers
+    "reload_ticks":         1,
+    "burst":                1,
+    "burst_delay_ticks":    1,
+}
+
 PERCENTAGE_VERSUS_STEP = 5
 PERCENTAGE_VERSUS_BOUNDS = (5, 100)
 
@@ -903,6 +960,10 @@ def _selftest() -> None:
                                    "type": "AreaDamagePercentage",
                                    "percentage_denominator": BASIS_POINT_DENOMINATOR}])
     assert r["m"] == 16000 and r["mpercentage"] == 160, r          # 1.60%
+    # One grid step twins to one unit of the finest denominator. At DAMAGE_STEP = 1 this
+    # holds via the never-zero FLOOR, not via the ratio (1 flat is 0.0001% HP, below what
+    # 100000ths can write) -- so it is no longer evidence that the grid and the percentage
+    # unit are aligned. Kept because a re-coarsened grid must still satisfy it.
     assert percentage_twin(DAMAGE_STEP, FINE_PERCENT_DENOMINATOR) == 1
 
     # W15: the twin is continuous in Damage — never floored to a silent 0, and it

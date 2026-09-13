@@ -1,5 +1,432 @@
 # Cameo — THE HANDOFF
 
+## ⭐⭐ 2026-09-13 — FLEET SYNC, THE CODEX RECONCILIATION, AND THE REFERENCE MAP CLOSED OUT
+
+Written by **Claude-Local (Opus 5)** on `claude/weapon_inherit_audit_and_map`, 28 commits ahead of
+`master` and 0 behind. Read `docs/AGENT_WORKSPACE.md` → "Live agent roster" for who owns what.
+
+### Where master actually is, and why every branch looks wrong
+
+`master` is `b235c6980`, which took PR #345 as a **SQUASH**. That single fact explains most of the
+confusion on this tree right now, so it is the first thing to internalise:
+
+⛔ **AHEAD-COUNT IS NOT WORK-COUNT.** Every branch that fed #345 still reports its own commits as
+"ahead of master" because the hashes differ, even though the content landed. `git merge-base
+--is-ancestor` therefore answers the WRONG QUESTION. Verify by content:
+
+    git show origin/master:tools/balance/build_reference_report.py | grep -c "sources used"   # 1
+
+Measured 2026-09-13, four `claude/*` branches from 09-11 are in exactly that state and are
+**effectively landed — close them**: `refmap_damage_tick_fix`, `fix_peer_armament_selection`,
+`playtest_baseline`, `cl01_target_payload_review`. Their content is in master, and
+`is_upgrade_gated` is correctly ABSENT because its own author reverted it (`3a75e831f`).
+
+⚠ `codex/recovery-pr345-merge-20260912` reports **47 ahead / 828 files / 4.5M insertions** and
+that number is an illusion for the same reason — it carries #345's ORIGINAL merge commit. The
+genuinely new part is **118 tool files, ~22k lines**, and that part is real and is NOT on master.
+
+### What Codex (Blackrobe) has been doing — and what of it is duplicate
+
+**On MY branch, two commits, and one of them collided with me head-on:**
+
+* `41d0dad57` *"make R1 and R3 diagnostics fail closed"* — Codex solved the SAME damage-convention
+  problem I was solving, by a different design: keep both conventions alive, make the convention an
+  explicit parameter (`DAMAGE_PER_SHOT` / `DAMAGE_BURST_INCLUSIVE`), and withhold whenever it is
+  not stated. Its own comment states the premise: *"The source corpus currently lacks that
+  compatible evidence, so a missing guard is an honest hold."*
+  ⛔ **That premise is false and the AUTHORED YAML disproves it.**
+  `td_gdi_mammothtank_120mmdualhv` declares `Damage: 16000`, `Burst: 2`, `BurstDelays: 8`,
+  `ReloadDelay: 72`, and the snapshot carries `w_damage` 32,000 — so Cameo stores the burst TOTAL,
+  provably; `td_gdi_mlrs_227mm` (8,000 × 6 = 48,000) agrees. The convention is knowable, so the
+  cure is to RESOLVE it, not to stop reporting. Left as shipped it printed **WITHHELD on every
+  row** of the verifier column the maintainer had just asked to keep.
+  **Reconciled, not reverted:** I kept its genuinely better half — refusing a recovered burst time
+  below zero, because a cycle shorter than `ReloadDelay` is impossible and clamping it to 0 would
+  certify a broken timing model — and replaced the blanket hold with normalisation at row
+  construction. WITHHELD is now **36 targeted cells, not all of them**.
+* `8819225e7` *"measure deprecated-name lane"* — `tools/balance/audit_deprecated_name_lane.py` +
+  a 5,495-line report. **Complementary, not duplicate**: it measures the R10–R15 population that
+  `DESIGN.md` §11b.0 already rules. Keep.
+
+**On `codex/recovery-pr345-merge-20260912`, genuinely new and worth landing:** new audits
+(`audit_promotion_superiority`, `content_pack_dependencies`, `target_payload_routes`,
+`secondary_payload_routes`, `status_effect_inventory`, `ownership_lineage`), `armor_projection.py`,
+`assemble_four_voice_pilot.py`, an RA3 extractor (1,448 lines), and a large `tools/tests/` suite.
+
+⚠ **One duplication risk to check before landing it:** it adds `tools/tests/test_virtual_anchor.py`.
+`docs/TASK_INDEX.md` line 11 warns that a virtual-anchor mechanism was once re-designed when
+`fit_class.py --spec` already implemented it. Confirm the test targets the EXISTING mechanism.
+
+### The reference map is closed out for the five playtest factions
+
+Scope is `td_gdi · td_nod · ra1_allies · ra1_soviets · japan` — the four-faction project
+(`docs/balance/FOUR_FACTION_ROLE_PAYLOAD_DISPOSITION_20260911.md`) plus the Japan pilot. **845 of
+872 cells now use ALL their available sources; 27 use only some.**
+
+⛔ **"Every reference used" is NOT REACHABLE, and the arithmetic is the answer, not an excuse.**
+4,780 reference rows exist; clauses 2+3 permit at most **1,870** assignments; only **2,241** rows
+are ever visible to a same-type routed actor. So **2,539 rows can never be claimed by anybody** —
+Romanov's Vengeance alone contributes 614, because it ships a full RA2 navy and the factions routed
+to it field almost no ships. That is a CONTENT fact. `tools/balance/reference_coverage.py` reports
+every empty slot with its CAUSE, which is the actionable form: in scope, 157 TAKEN, 97 NOT
+NAME-BACKED, 8 NO CANDIDATE.
+
+**Defects found and fixed this session, each measured before and after:**
+
+1. **An original's worthless bid outranked an exact name match.** The greedy sorted with "is this
+   an original?" as the OUTERMOST key, above the name score. `ra2_allies_nighthawk` took two rows
+   named "Black Eagle" at name **0.154** while `ra2_allies_blackeagle` scored **1.0** and was
+   refused; the shape-only rows were then correctly binned and both Black Eagles ended the run held
+   by NOBODY. The preference now sits INSIDE the name bucket, so the `firerocketsoldier` 0.867 vs
+   `rocketsoldier` 0.850 case it was written for still resolves the same way. **+17 mappings.**
+2. **An SSM Launcher is not an MLRS.** `NAME_ALIASES["ssmlauncher"] = ("mlrs",)` scored a PERFECT
+   1.00 against anything merely NAMED "MLRS". Measured: every genuine SSM Launcher already matched
+   at 1.00 on its own name, and the alias ONLY ever added wrong units — CA's `MSAM` "MLRS", OpenRA
+   TD's `MLRS` **"Mobile SAM"** (an anti-air unit), RV's "Rocket Launcher", TI's "Bullfrog".
+   Removed. The reverse direction (`mlrs` → `msam`/`rocketlauncher`) is legitimate and stays.
+3. **The RA1 COUNTRIES are sides.** OpenRA RA tags country-specific units with their COUNTRY, never
+   their side, and the route tokens were only `("allies",)` / `("soviet",)` — so `TTNK` Tesla Tank
+   (russia), `DTRK` Demolition Truck (ukraine), `CTNK` Chrono Tank (germany), `STNK` Phase
+   Transport (france) and `MGG` Mobile Gap Generator (england) were invisible to every faction.
+   `ra1_soviets_teslatank` scores an EXACT 1.000 against "Tesla Tank" and was holding Combined
+   Arms' `TTRA` **"Tesla Track"** instead. **+3, nothing lost. O2 113 → 110, gating 11 → 8.**
+4. **The recovery index was missing the HERO lane.** `td_gdi_exosuit` read "1 of 2 sources" on HP,
+   SPEED and COST while DTA's `XO` sat there fully eligible. I had fixed exactly this for the
+   VARIANT lane one commit earlier and forgot heroes in the same line.
+5. **334 of 621 burst rows publish a rate that never folded burst in** — they satisfy
+   `rate == damage / reload` while declaring `Burst > 1`. Inverting one for a burst delay returns a
+   confident, meaningless number: DTA's `MLRS` (damage 100, burst 2, reload 400, rate 0.25) implies
+   an 800-tick cycle and a 400-tick "burst delay" equal to its own reload. `burst_delay_of` now
+   withholds on those (280 recover, 424 withheld).
+
+### THE ONE FORMULA (maintainer, 2026-09-12/13) — binding
+
+    rate = damage_per_shot × burst / (reload_delay + sum of the Burst − 1 delays)
+
+The unit is **damage per TICK**, not per second — every term in the divisor is authored in engine
+ticks. The stored field is still called `w_dps` across the ledgers; renaming it is its own
+migration, so the FUNCTION and every label say "per tick" to stop the misnomer spreading.
+
+⭐ **`formula.dps` has implemented this all along** and already owns `ENGINE_DEFAULT_BURST_DELAY`
+and the varying-delay sum, so `reference_targets.burst_time` DELEGATES to
+`formula.burst_delay_sum`. I briefly shipped a second copy including a duplicate constant — the
+`allows()` mistake this repo has already paid for twice. **Do not add a fourth implementation.**
+
+Engine semantics, checked against source rather than assumed — they are STRICTER than
+"repeat the last entry":
+
+    Armament.cs:146   Burst > 1 && BurstDelays.Length > 1 && Length != Burst-1 -> YamlException
+    Armament.cs:476   length 1 -> that value every gap; else walked in order
+    WeaponInfo.cs:129 BurstDelays = [5]
+
+Measured in the tree: 829 weapons single-entry, 36 declare none (they run on `[5]`), **0 vary, 0
+illegal**. Varying delays ARE live in the REFERENCE corpora, which is why the support was needed.
+
+### ⛔ TWO THINGS BLOCKED ON A MAINTAINER RULING — do not proceed past these
+
+1. **`audit_original_coverage` O1 is 13 against its ratchet of 12, so it EXITS 1.** I did not raise
+   the ratchet and did not revert a correct fix. The single new row is `ra1_allies_phasetransport`,
+   and it DISPROVES the premise O1 rests on — *"an original exists in OpenRA, so CA and DTA, being
+   supersets, must have it too"*. They ship the id and give it to the wrong side: CA's `STNK.Nod`
+   and DTA's `STNK` are both **Nod's Stealth Tank**, a different unit, so routing correctly refuses
+   them and the gap can never be closed by matching. That is the same shape as the existing
+   `O2_UNSETTLED` carve-out for Romanov's Vengeance — report it, do not gate on it. One line.
+2. **A DATA asymmetry, not a bug.** `ra1_allies_chronotank` and `ra1_allies_mobilegapgenerator`
+   both carry `BuildLimit: 1`, so by the ruled test (*"a hero is a limit of exactly one"*) they are
+   heroes on the Cameo side, while OpenRA's `CTNK` and `MGG` are ordinary buildable units.
+   Hero-to-hero-only then refuses a perfect 1.000 name match on both. Either Cameo's limits are
+   wrong or the rule needs a carve-out; both are gameplay calls.
+
+Also outstanding, not blocking: **OpenRA is not a complete authority on originals.**
+`td_nod_ssmlauncher` is matched "SSM Launcher" by BOTH supersets and by no OpenRA source, because
+OpenRA TD ships no SSM Launcher at all (verified across all 49 of its raw rows). The
+originals/expansions split rests on a premise with at least one counterexample.
+
+### What is still necessary before the balance pipeline can run
+
+⛔ **GREP `docs/TASK_INDEX.md` FIRST — the virtual-anchor MECHANISM ALREADY EXISTS.**
+`fit_class.py --spec hp,speed,range_wdist,damage,reload,cost0` **is** the virtual anchor, and
+`derive_virtual_anchor.py` already defaults to exactly the five playtest factions. HANDOFF has said
+it for days: *"What is missing is the INPUTS, not the mechanism."* Ran it 2026-09-13, 28 classes:
+
+| blocker | classes |
+|---|---|
+| no calibrated model damage/reload supplied | **26 of 28** |
+| THIN range / hp / speed / cost (too few sources to trust a median) | 12 / 10 / 10 / 10 |
+| **BIASED — the tool itself says "do not sign"** | 3 fields |
+| NO SOURCE at all | 1 |
+| UNAPPROVED (approval is the maintainer's act, by design) | 27 |
+
+So the order is: **model damage/reload inputs → per-class approval (holding the 3 BIASED back) →
+`apply_balance --confirm`.** Nothing writes yaml until then.
+
+### ⛔ ONE STEP LEFT ON THE CHRONO TANK — a design annotation, deliberately not changed
+
+Maintainer ruled 2026-09-13: *"make the CTNK a regular unit without build limit. Like a fire
+support so then it can match the reference."* Done and verified, in three parts — and it still
+does not match, for a fourth reason that is a DESIGN decision rather than a bug:
+
+1. `BuildLimit: 1` removed from `ra1_allies_chronotank`, `_mobilegapgenerator`, `_mobileradarjammer`.
+2. `Inherits@Template: ^EpicVehicleTemplate` → `^FireSupportTemplate`. The ledger now reads
+   `subtype: FireSupport` and `build_limit: None`, so both took effect.
+3. ⭐ A REAL BUG this uncovered, fixed: `cameo_rows()` dropped on `build_limit is not None`, while
+   the repo's own `is_hero_limit` has said since 2026-09-08 that a limit is "PRESENT AND GREATER
+   THAN ZERO — `BuildLimit=0` means NO LIMIT". An actor written `BuildLimit: 0` therefore fell out
+   of the ordinary population AND was refused by the hero lane for not being a one-off: it landed
+   in NEITHER pool and could match nothing. Measured blast radius before changing it: exactly ONE
+   actor in the whole ledger carries a zero limit.
+
+**What still blocks it:** the ledger carries `design.class_anchor: epic_vehicle`, and
+`EXCLUDE_CLASSES = {"epic_vehicle"}` removes the actor from `cameo_rows()` outright.
+`class_anchor` is a PRESERVED DESIGN ANNOTATION — `extract_stats` writes `None` and the value is
+carried forward from the design pass, so it does not follow the template. Changing it to
+`fire_support` reprices the unit into another class, which is a balance judgement and needs the
+maintainer's word, not a quiet edit. **Both gap generator and radar jammer DID land:** the gap
+generator now has three sources (CA `MGG`, DTA `MSA` "Mobile Sensor Array", OpenRA `MGG`) and the
+jammer has two, with DTA shipping no jammer at all — hence its `O1_UNSETTLED` entry.
+
+### ⭐ NEXT, AND ALREADY RULED — recompute the 334 rows that ignore burst
+
+Maintainer chose "recompute them to obey the formula" over withholding. 334 of 621 reference rows
+with `Burst > 1` publish `rate == damage / reload`, never folding burst in, so their rate
+understates the unit by roughly its burst. They currently withhold a burst-delay recovery but
+their `w_dps` is untouched. Recomputing moves every DPS-derived target that draws on them, so it
+wants its own before/after measurement — it is the first thing to pick up.
+
+### Instructions for the rest of the fleet
+
+* **Do not touch `tools/balance/{assign_references,reference_targets,reference_distribution,
+  reference_coverage,build_reference_report,faction_routes}.py` or `tools/reference/variant_pool.py`
+  without saying so on the roster first.** Codex and I collided on `reference_targets.py` today and
+  it cost a hand-merge; one owner per file-set (`BALANCE_PROGRAM_PLAN.md` §2) exists for this.
+* **Never read a background task's notification exit code** — read the `exit=` line in the output.
+* **Never raise a ratchet.** If a correct fix trips one, say so and ask, as done above.
+* **The reference map is one artifact, not many.** Update the existing page rather than publishing
+  a new one; find it with the Artifact `list` action instead of guessing.
+
+
+## ⭐⭐ 2026-09-12 — ALL NINE DECISIONS ARE RULED. THE QUEUE IS UNBLOCKED.
+
+The rulings are binding and live in **`DESIGN.md` §11b.0 (R1–R9)** — read that, not this
+summary. The maintainer-approved WORK ORDER, all four confirmed in one answer:
+
+1. ✅ **DONE — the 27 `^Warhead_*_Flat` shims are deleted** (R4), boot-gated, by
+   `tools/balance/retire_flat_shims.py`. 46 users re-pointed; compensations written for 11
+   dead `Warhead@X` / `-Warhead@X` pairs, 7 extra warheads and 78 weapon-level fields.
+   Verified through the new shared **`tools/balance/resolved_gate.py`**, which pairs the
+   order-INSENSITIVE field set with an order-SENSITIVE warhead-sequence check — Codex's Wraith
+   finding composed with my rename gate, as they asked. `promote_compatibility_warheads.py`
+   now uses it too. `find_empty_warhead` 0; `audit_family_uniqueness` and
+   `audit_versus_profile` green.
+   ⛔ **"Expect W8 to fall below 858" was wrong.** W8 tests the `^Warhead_` prefix, which
+   `^Warhead_*_Flat` already satisfied, so the shims were never in its count. W8 is
+   **unchanged at 858** and this change moves no ratchet at all. It removes 27 duplicate
+   templates — and the corrected R4/R6 numbers it forced out are worth more than the deletion.
+2. ✅ **DONE — carrier slave ammo pools** (R8), boot-gated. Generated by
+   `tools/balance/carrier_slave_ammo.py` (the law; its self-test reproduces both of the
+   maintainer's worked examples) + `apply_carrier_slave_ammo.py` (placement only).
+   10 pools resized, 4 created, 14 reloads added. `audit_ammo_cadence` A2 ratchet
+   **19 → 0**, with the suicide slaves reported as out of scope instead of as a backlog
+   nobody is allowed to work.
+   ⛔ **Scope was 14, not 17** — 19−2 assumed the maintainer's two names covered every
+   suicide drone; three more qualify under the same rule. And the two NAMED ones carry no
+   suicide trait at all (their self-destruct is in the weapon), so the explicit list and the
+   detector are both needed.
+   ⛔ **"Upgrade weapons get `AmmoUsage: 0`" is wrong for a REPLACEMENT pair.** Siblings on
+   `X` and `!X` are a swap, not an addition; `japan_zerofighter_slave` runs both live
+   armaments on the `X` side, so zeroing them would have left the upgraded unit firing with
+   no ammo cost forever. See `DESIGN.md` R8.
+3. **Virtual baselines + the 100–250% band** (R3) — MEASURED; the blocker is not baseline
+   arithmetic. All **28 anchor dossiers** now exist under `docs/balance/anchors/`
+   (`propose_anchor_spec.py`; the 4 dated 2026-09-09 are annotated review snapshots and were
+   deliberately NOT regenerated — they say so in their own text). New:
+   `tools/balance/fit_baseband.py` → `docs/balance/baseband_fit.md`.
+   ⛔ **`cost0` cannot move the band** — it cancels out of the ratio exactly. Only
+   `hp0/speed0/range0_wdist/dps0` move it.
+   ⛔ **The band starts AT the baseline** (ratio 1.000 there, 2.500 at the 2×/2× verifier), so
+   "all members in band" requires the baseline at or below the weakest member. A **median**
+   baseline therefore cannot satisfy the band — and medians are what `derive_virtual_anchor.py`
+   proposes. 115/404 in band today; re-scaling every baseline reaches only 271/404 (67%).
+   ⭐ **Every class already has a current-anchor ratio window** (span 1.4×–2.5×, 290 of 404
+   members). The **114** outside those windows are the real work. They are triage signals, not
+   proof of a classification defect: `futuretech_blackwidow` is in `melee` with `Range: 9000`,
+   `corrino_buggy` is in `mbt`, `cabal_enlighted` has 11,184 DPS in `heavy_infantry`.
+   Uniform rescaling changes the nonlinear spread, and an anisotropic baseline or role split
+   requires separate design evidence.
+   **The 114 are triaged** (`fit_baseband.py --triage`, table in `baseband_fit.md`):
+   80 AXIS OUTLIER, 30 ROLE REVIEW, 2 NO CLASS ACCEPTS, 1 ONE CLASS ACCEPTS, 1 LATER TECH.
+   ⛔ **A stat test cannot say where an outlier belongs.** The median member is accepted by
+   **6 of 27** class baselines, so "another class would take it" is worth nothing — an
+   earlier pass used it as the deciding signal and produced 81 authoritative-looking
+   MISCLASSIFIED labels, one of which put `terran_ghost` in `artillery`.
+   ⭐ **→ NEXT: W24, not the band.** **61 of the 114 are `raw_dps`-driven**, the one axis
+   §0a defers and every anchor dossier refuses to target while W24 moves. So the band cannot
+   be fitted before W24 closes, and most DPS-driven outliers are not class questions at all.
+   The genuinely decidable few today: `harkonnen_inkvine` and `naxis_slave` (accepted by NO
+   class; `raw_dps` 0.0x/0.1x — data defects), `naxis_naximercenarysniper` (only `scout`
+   accepts it), `naxis_skymage` (390% at tier 0.75 — a tech-tier gate may explain it).
+## ⭐ 2026-09-12 — W24 IS NOW THE FRONT, AND IT IS SPLIT WITH CODEX
+
+The queue changed: **W24 moves ahead of the baseband**, because 61 of the 114 band outliers are
+`raw_dps`-driven and DPS is deliberately unsettled until W24 closes.
+
+**State:** `audit_three_way_split` **230** stacks (ratchet 322) · `audit_tier_weapon_class`
+**39** budget violations (ratchet 48) · W5/W7/W8 305/957/858. Of the 230 stacks, **149 carry a
+legacy-named main**, concentrated: `1Dam` **48**, `1Dam_impact` 13, the four `*Dam_areanuke*`
+names 9–10 each, `TemperatureCompatibility` 8, `Railgun_HeavyFlatCompatibility` 8,
+`IonCannon` 7, `Damage` 7.
+
+⛔ **`1Dam` is not a 1-damage marker — the name is a lie.** All 48 are `SpreadDamage` carrying
+1,200–50,000 damage with NO `Versus`, so each is a genuine second main applying FLAT damage to
+every armor. Dropping one deletes real damage (the `47a66b6c2` mistake).
+
+⭐ **§12.0h MEAN-100 makes the fold mean-preserving BY CONSTRUCTION** — `mean(p)=100`, so
+`mean(D_main·p/100 + D_flat) == mean((D_main+D_flat)·p/100)`. Asserted per weapon: 8/8 within
+2%. The fold moves SPREAD, never magnitude. `tools/balance/analyse_flat_main_fold.py`.
+
+**LANE SPLIT (rule 6, by file-set), posted as PR #354 comment 5648397932:**
+* **mine** — central weapon files: `weapons.yaml` (22), `tiberiansun.yaml` (6), `d2k.yaml` (5),
+  `outpost2.yaml` (1). 8 are clean two-main flat folds; 16 have 3 mains (design call), 9 have a
+  legacy node that HAS a profile, 1 has no usable family profile.
+* **Codex** — ContentPacks: `D2k/Ordos` (9), `RedAlert2/Shared` (3), `D2k/Atreides` (1),
+  `D2k/Shared` (1); plus the self-contained `*Dam_areanuke*` 7-main cohort.
+
+⛔⛔ **THE TWO TRAPS, both already paid for:** two ADJACENT levels of one family is **LEGAL**
+(between-tier encoding; budget = TYPES × LEVELS, ceiling 4 — I nearly erased 79 correct weapons
+and every audit stayed green); and a collapse must carry the **TOTAL**, not the surviving
+warhead's number.
+
+⚠ **BLOCKED ON ONE PERMISSION (rule 4):** a fold changes per-armor damage. The 8 candidates
+sorted by flat share — `TSPistola` 9% (worst armor ×0.91), `TSGrenadeAA` 17% (×0.83),
+`GLToxinExplode` / `GLToxinExplodeBlue` 22% (×0.80), `TSVulcan` 50% (×0.65), `D2K_Rocket_AA`
+65% (×0.64), `TSVulcan2` 71% (×0.56), `TSTurretLaserFire` 79% (×0.37). Nothing written until
+the maintainer picks a share threshold.
+
+4. ⚠ **R1 tooling is present, but the DPS verifier remains diagnostic-only.** Four inputs, one
+   guard rail. `reference_targets.COMPONENT_STATS` / `VERIFIER_STATS` + `compose_dps`,
+   `recover_burst_time`, `dps_guard`; the reference map gains a **source damage coordinate** and
+   **Reload** columns. A verifier result is emitted only when the damage convention and complete burst-delay
+   sequence are explicit; the current peer corpus does not provide that compatible evidence, so
+   the map withholds the previous `DISAGREES`/`EXTREME` claims.
+   ⛔ **`w_damage` means different things in different sources** — per-SHOT in
+   `extract_peer_units`, burst-INCLUSIVE in the frozen Cameo snapshot. The corrected guard refuses
+   to infer a convention from `damage / DPS`, and it refuses to reuse a partial delay model.
+
+⛔ **Blocked on nothing but sequencing:** merge **#356** (Codex's Wraith order fix — my reorder
+put the 60,000-damage main *after* `Warhead@OwnerChange`, so the Wraith captured a unit and then
+shot it) into **#354**, then re-extract the ledgers ONCE as its own commit. `audit_balance_drift`
+is red on **26 of 34** and a re-extract also picks up 5 RA1 actors someone changed in yaml
+without re-extracting.
+
+⛔ **Still not to be regenerated:** `docs/reference/ini_corpus.json`. A refresh drops 63 rows'
+weapon evidence (`HTK` `FlakTrackAAGun` 33 → `FlakTrackGun` **None**). Needs
+`EXPLICIT_DUMMY_WEAPONS` populated from the source profiles, or an explicit decision to accept
+the loss. The names (`200mmD`, `SonicZapC`, `VulcanD`) say they ARE dummy slots, but a zero
+`Damage` cannot *prove* one.
+
+⚠ **Bell curve: the hold HOLDS** (R7). `USE_BELL` stays false until W24 closes (W7 957, W8 858).
+
+⛔ **R6 is corrected: ONE template is out of band, not nine.** The nine came from folding
+`Shield` into a `max/min` Versus ratio, and `Shield` is its own compressed [100,400] ladder
+(§12.0c) that `audit_versus_profile.py` has always excluded. On the 16 real armor rows only
+`MissileAP_Heavy_D2K_ORocket` (**12.50x**) is genuinely out of band; `Sniper_Light` (10.00x) is
+`HAND_TUNED` and ratified. **`Laser_Medium` is 4.84x — in band, on the 4x target, do nothing
+to it.** `Storm_*` and `Tesla_Heavy` likewise. See `DESIGN.md` R6 for the table.
+
+### The old "open decisions" list, for provenance only — every one is now answered
+
+
+Newest first; each one blocks a batch that is otherwise measured and ready.
+
+**1. Which weapon target is authoritative — DPS, or damage+reload?** They disagree by
+**1.42×** and it is not a bug: `reference_targets.target_for` projects every stat against its
+own distribution, so `w_dps`, `w_damage`, `w_burst` and `w_reload` are **five separate votes,
+not one decomposition**. Traced end to end on `td_gdi_mammothtank` (3 sources, 6 rows, STRONG
+on all three): DPS projected alone says **+73.7%** (400 → 695); damage +9.1% with reload −11.1%
+composes to **+21.9%** (488) through Cameo's own identity `DPS = damage-per-burst ÷ (reload +
+burst delays)`, which checks out exactly today (32,000 ÷ 80 = 400). The pipeline's *intent* is
+that DPS wins and `propose_class_rebalance.decompose_dps` solves the rest — but that has never
+been ruled, and the difference is the entire rebalance. **Nothing can be applied until this is
+answered.**
+
+**2. Formula price or reference cost?** At the reference target stats `formula.price` says
+**3,200** and the references say **2,500** — a 28% gap between the two authorities, on a unit
+the formula already reads as **40% underpriced** at its shipped 1,600 (formula 2,246). Applying
+reference stats without choosing leaves the unit priced by neither, which collides directly
+with the standing rule that *no stat moves unless the formula prices it*.
+
+**3. `^Compatibility_*` — the 36 mixed families.** 33 of 69 templates are promoted to real
+`^Warhead_*` (see `DESIGN.md` §11b.1b; W8 874 → 858, behaviour-identical). The rest are blocked
+on a **template-count ruling**: 56 of 64 families have BOTH a user that already inherits the
+twin (needs the new template to chain it) and a user that inherits no `^Warhead_` at all (would
+*gain* weapon-level fields from that chain — measured: 112 weapons would newly gain
+`Warhead@Bullet_Medium`, 11 would gain `TargetActorCenter`). One template cannot serve both, so
+each family needs a second one.
+
+**4. Projectile / warhead geometry — the review itself.** 2,894 records are collected and
+voting on nothing (`docs/reference/PROJECTILE_GEOMETRY.md`). The first substantive question is
+units: TD/TS warheads declare `Spread` in **leptons** (`DemoAtomicWH` 512, 256 to a cell) while
+RA2/YR declare `CellSpread` where `AAHE` reads 0.5 (plainly half a cell) and `BlueJammer` reads
+**225** with Ares fixed-point providers in play. Nothing is converted until that is ruled.
+
+**7. ⛔ AN AMMO POOL MAKES `ReloadDelay` THE WRONG CLOCK — 133 actors, and nothing knew.**
+`extract_stats`, `reference_distribution` and `formula` contain **zero** references to
+`AmmoPool`, yet 145 Cameo actors have one. Maintainer ruled the comparable figure per regime:
+a self-reloading pool is *pool damage / time to empty* (101 actors), an airfield-rearm plane is
+*damage per sortie and no rate at all* (22), and 10 have no replenishment mechanism this can
+find. **12 hold a single shot, so no rate exists for them either.** `tools/balance/ammo_cadence.py`
+implements it with a self-test; `audit_ammo_cadence.py` reports it and is in `run_all.sh`.
+`td_nod_ssmlauncher` is the proof: weapon rate 2 shots/250 ticks, ammo rate 2 shots/250 ticks —
+identical, so its reload is decorative and a pipeline-written reload change would move the
+ledger's number while changing nothing in game. **54 of 93 self-reloading actors cannot sustain
+their own weapon's rate.** Nothing applied: the ledger cannot be re-extracted yet (decision 8).
+
+**8. ⛔ ALL 19 `CarrierSlave` ACTORS BREAK THE POOL+RELOAD RULE**, in two opposite ways.
+8 have **no pool at all** → `CarrierSlave.cs:59-65` grants *"unlimited ammunitions"*, so the
+carrier's launch/expend/return cycle never runs. 11 have **a pool and no reload** → they empty
+once and are permanently unable to attack: `CarrierMaster` has no ammo path (`RearmTicks` only
+gates relaunch), none carry `Rearmable`, and `CarrierSlave.NeedToReload` is **declared and never
+called anywhere in CA**. Fix is `AmmoPool` + `ReloadAmmoPool` on each. ⚠ Two of the 8
+(`tkmsuicidedrone`, possibly `farasha_drone_ixian`) are suicide drones and may be legitimate
+exceptions — confirm before adding pools to those.
+
+**9. The ledger cannot be re-extracted until #356 lands, and `audit_balance_drift` is ALREADY
+RED on 26 of 34 ledgers.** A re-extract today picks up (a) my own Wraith reorder, which #356
+reverts — the main warhead moves from `damage_warheads[0]` to `[4]`, visible proof of Codery's
+ordering finding — and (b) five RA1 actors someone changed in yaml without re-extracting
+(`ra1_agentdelphi`/`ra1_general`/`ra1_technician`/`ra1_einstein`/`ra1_scientist`, HP 2500→5000,
+damage 100→500). Merge #356, then re-extract once, as its own commit.
+
+**5. The 63 dummy-primary rows — and the INI corpus must NOT be regenerated until they are
+ruled.** Regenerating `docs/reference/ini_corpus.json` today changes 1,789 rows, but only **63**
+on evidence (the other 1,726 are DTA provenance stamps). Those 63 carry the OLD auto-promotion
+shape, so a refresh DROPS them and the units lose their weapon evidence entirely:
+`Rise of the East / HTK` goes from `FlakTrackAAGun` damage 33 to `FlakTrackGun` damage **None**;
+`NUKCAN` from `200mm` 250 to `200mmD` **0**; also `SonicZap`→`SonicZapC`, `Vulcan`→`VulcanD`.
+The naming says these ARE dummy targeting slots and the committed corpus is right — but a zero
+`Damage` on the primary is `direct_undeclared` and **cannot prove a dummy**, which is exactly
+what `EXPLICIT_DUMMY_WEAPONS` exists to keep explicit. Either populate that table from the
+source profiles or accept losing the evidence. Until then **no corpus regeneration**, which is
+also why new collect-only fields (`w_burst_delays`, `w_phys_*`) are computed on demand.
+
+**6. Burst is now taken DIRECTLY, not projected — and the map flags when it would move.**
+Maintainer caught it: *"the mammoth tank always has 2 bursts for all weapons from all sources
+right? and you averaged it to 1.67x?"* Correct, and it was the projection, not an average.
+`target_for` maps a raw value to its POSITION in its source's distribution, which is right for
+continuous magnitudes and wrong for a small integer count: DTA's burst support is 2–4, OpenRA
+TD's 1–5, Combined Arms' 1–**30**, Cameo's 1–**100**, so a 2 sitting low in one support lands at
+1.67 in another. Measured: of the 209 actors with a burst target, **163 have unanimous source
+agreement** and projection contradicted it (`cabal_plasmaturret` all sources 5 → projected 2.21;
+`forgotten_mlrs` all 8 → 5.08). `reference_targets.DIRECT_STATS` now takes burst as a pooled
+median of raw eligible values. Nothing applied — but every burst target before this is wrong.
+
+Full trace for #1 and #2, every stat and all four armaments:
+<https://claude.ai/code/artifact/67164cd7-20ae-4c62-b799-38912fa3de4c>
+
+⚠ One pre-existing red, flagged so it is not attributed to the grid change:
+`audit_damage_grid` fails on `basis-point pct twin 187 > 0; 50% twin 379 > 353` — **identical
+numbers on a pristine worktree at HEAD**. Off-grid main damage went 65 → **0**.
+
 ## Claude and Codex continuation — 11 September 2026
 
 For the active RA1 Allies/Soviets and TD GDI/Nod work, start with the

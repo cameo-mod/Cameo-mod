@@ -12,7 +12,7 @@ ArbiterStasis:
 		Duration: 125
 
 PositronGrenade:
-	Inherits@roleflat: ^Compatibility_Quantum_MediumFlat
+	Inherits@roleflat: ^Warhead_Quantum_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
 	Inherits@4: ^SmallArms
@@ -72,7 +72,7 @@ PositronGrenade:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@SmallArms:
 	-Warhead@TankDestroyerCannon:
-	Warhead@Quantum_MediumFlatCompatibility:
+	Warhead@Quantum_Medium:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 40000
@@ -115,7 +115,7 @@ PositronBounce1:
 	-Warhead@FlakWeapon:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
-	Warhead@Quantum_MediumFlatCompatibility:
+	Warhead@Quantum_Medium:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 24000
@@ -162,7 +162,7 @@ PositronBounce2:
 	-Warhead@FlakWeapon:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
-	Warhead@Quantum_MediumFlatCompatibility:
+	Warhead@Quantum_Medium:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 20000
@@ -880,7 +880,7 @@ Corsair_EMP:
 		ImpactActors: false
 
 VoidRayBeam:
-	Inherits@roleflat: ^Compatibility_Prism_HeavyFlat
+	Inherits@roleflat: ^Warhead_Prism_Heavy
 	Inherits: ^LightMissile
 	Inherits@2: ^SmallArms
 	Inherits@3: ^Chaingun
@@ -981,7 +981,7 @@ VoidRayBeam:
 	-Warhead@SmallArms:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@Prism_HeavyFlatCompatibility:
+	Warhead@Prism_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 13600
 		PercentageScale: 0

@@ -7071,7 +7071,7 @@
         "damage": "80000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "366",
-        "tag": "Chemical_HeavyFlatCompatibility",
+        "tag": "Chemical_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -7082,15 +7082,14 @@
       "reloaddelay": "60",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Chemical_HeavyFlat",
-       "^Warhead_Demolition_Heavy",
        "^Warhead_Chemical_Heavy",
+       "^Warhead_Demolition_Heavy",
        "^Effect_Demolition_Heavy",
        "^TSCannonEffect"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Chemical_Heavy"
+       "^Warhead_Chemical_Heavy",
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "TS120mmxChem",
       "weapon_class_source": "template"
@@ -8524,7 +8523,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5919",
       "reloaddelay": "50",
@@ -8533,18 +8532,14 @@
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
        "^Compatibility_MissileHE_MediumFlat",
-       "^Warhead_Demolition_Light",
-       "^Warhead_MissileHE_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_MissileHE_Medium"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_Demolition_Light",
-       "^Warhead_MissileHE_Medium"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "TSRuinerMissile",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -9099,7 +9094,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7850",
       "reloaddelay": "120",
@@ -9107,12 +9102,10 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Concussion_Medium",
-       "^Warhead_Demolition_Heavy",
        "^Effect_Demolition_Heavy"
       ],
       "warheads": [
-       "^Warhead_Concussion_Medium",
-       "^Warhead_Demolition_Heavy"
+       "^Warhead_Concussion_Medium"
       ],
       "weapon": "TSBusMortar",
       "weapon_class_source": "template"

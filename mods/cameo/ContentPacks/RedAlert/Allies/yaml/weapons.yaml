@@ -101,8 +101,6 @@ ra1_allies_alliedaagun_flak_cryo:
 ra1_allies_longbow_missile:
 	Inherits@missilerole: ^Warhead_MissileAP_Heavy
 	Inherits@finalmain: ^Compatibility_MissileHE_HeavyFlat
-	Inherits@wh: ^Warhead_Concussion_Medium
-	Inherits@wh2: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileHE_Heavy
 	ValidTargets: Ground, Water, Air
@@ -247,7 +245,6 @@ ra1_allies_sheridanassaulttank_cannon_cryo:
 		ValidTargets: Ground, Water
 ra1_allies_sheridanassaulttank_missile:
 	Inherits@missilerole: ^Warhead_MissileAP_Medium
-	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
 	Report: bazook1.aud
@@ -256,7 +253,6 @@ ra1_allies_sheridanassaulttank_missile:
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		VerticalRateOfTurn: 20
-	-Warhead@MissileHE_Medium:
 	Warhead@MissileAP_Medium: AreaDamage
 		PercentageDenominator: 10000
 		ValidRelationships: Ally, Neutral, Enemy
@@ -609,7 +605,6 @@ ra1_allies_phasetransport_missile_cryo:
 
 ra1_allies_chronotank_missile:
 	Inherits@missilerole: ^Warhead_MissileAP_Heavy
-	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
 	Inherits: ^Grenade
 	Inherits@2: ^FlakWeapon
 	Inherits@3: ^Chaingun
@@ -644,7 +639,6 @@ ra1_allies_chronotank_missile:
 	-Warhead@MediumMissile:
 	Projectile: Missile
 		VerticalRateOfTurn: 16
-	-Warhead@MissileHE_Heavy:
 	Warhead@MissileAP_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50

@@ -34,11 +34,417 @@ import sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "audit"))
 import faction_routes as fr  # noqa: E402
+import formula  # noqa: E402  — the ONE owner of the burst-cycle arithmetic
 import reference_distribution as rd  # noqa: E402
 
 ROOT = rd.ROOT
 ASSIGN = ROOT / "docs" / "balance" / "derived" / "reference_assignment.json"
 STATS = ("hp", "speed", "w_range", "w_dps", "cost")
+
+# ⛔ DISCRETE COUNTS ARE TAKEN DIRECTLY, NEVER PROJECTED (maintainer caught this 2026-09-12:
+# "the mammoth tank always has 2 bursts for all weapons from all sources right? and you
+# averaged it to 1.67x?" -- correct, and the projection was the culprit, not an average).
+#
+# `target_for`'s normal path converts a raw value into its POSITION within that source's own
+# distribution and maps the position onto Cameo's. That is right for HP, speed, cost, range
+# and DPS: continuous magnitudes spanning orders of magnitude, where "this unit is a heavy in
+# its own game" is the transferable fact and the raw number is not.
+#
+# It is WRONG for `w_burst`. Burst is a small integer the engine can only take whole, the
+# distributions have wildly different supports, and they are dominated by outliers that have
+# nothing to do with the unit in hand:
+#
+#     DTA Enhanced        burst min 2  max   4
+#     OpenRA Tiberian Dawn          1        5
+#     Combined Arms                 1       30
+#     Cameo (projected onto)        1      100
+#
+# So a Mammoth's 2 -- low inside a 1..30 support -- maps low into a 1..100 support and lands
+# at 1.67, even though EVERY eligible source says exactly 2. (The three `HTNK.*` Combined Arms
+# variants that say 1 or 2 are `reference_base_eligible: False` upgraded variants and never
+# voted at all.)
+#
+# MEASURED over the 209 actors that have both a burst and a burst target: 163 have UNANIMOUS
+# agreement among their eligible sources, and projection contradicts that unanimous value on a
+# large share of them -- `cabal_plasmaturret` every source 5, projected 2.21; `forgotten_mlrs`
+# every source 8, projected 5.08; `cabal_cyborginfantry` every source 3, projected 1.92.
+#
+# Direct pooling reports a CHANGE on 98 of 209 against projection's 77, and that is the point:
+# the extra ones are real disagreements between Cameo and its sources, which is exactly what
+# the maintainer asked to see flagged in the map. `Burst` may not be touched without explicit
+# permission, so the number has to be the sources' actual burst, not a position-derived one.
+#
+# One vote per source (median across that source's eligible rows), then the median of the
+# source votes -- median, not mean, because the answer must be a count and an even split
+# between 2 and 4 should read as one of them, not as 3.
+DIRECT_STATS = ("w_burst",)
+
+# ⛔ LAW-GOVERNED STATS TAKE NO REFERENCE TARGET AT ALL.
+# `turn_speed` and `turn_ratio` are not free parameters in Cameo — DESIGN.md fixes them:
+# `TurnSpeed = Speed / 5` for turreted units, `2 x Speed / 5` for turretless/frontal ones,
+# DERIVED IN C# and not written in yaml (maintainer 2026-09-07), with a turret always matching
+# its hull and `audit_turn_speed.py` T3 guarding it. Cameo's `turn_ratio` is therefore 5.0 or
+# 2.5 BY LAW, and asking the peers what it should be is asking a question Cameo has already
+# answered — a reference target here can only contradict a shipped ruling.
+#
+# And the projection made that contradiction loud, because `turn_ratio` is DIMENSIONLESS
+# (speed / turn_speed), so the peers' raw values are directly comparable and projecting a
+# position in a distribution is meaningless. Measured 2026-09-12 on actors whose sources all
+# agree:
+#     asianalliance_howitzer      all sources 1.00   projected 3.83
+#     asianalliance_pulverizer    all sources 0.60   projected 3.51
+#     asianalliance_harbinger     all sources 4.67   projected 11.55
+# An 11.55 turn ratio is not a number any mod authored; it is an artifact.
+#
+# ⚠ Two different repairs, and the distinction matters. `w_burst` is scale-free AND a real
+# design input, so it moved to DIRECT_STATS and still produces a target. `turn_*` is scale-free
+# and NOT an input, so it produces none. Do not "fix" these by adding them to DIRECT_STATS.
+#
+# Verified safe: nothing consumes a turn target. `build_reference_report` shows hp/speed/range/
+# dps/burst/cost, `build_japan_pilot.AXES` is hp/speed/w_range/cost, and `apply_balance` writes
+# `turn_speed` from the LEDGER (where the derived law put it), never from a reference.
+LAW_GOVERNED_STATS = ("turn_speed", "turn_ratio")
+
+# ---------------------------------------------------------------------------------------- #
+# R1 — THE WEAPON STATS ARE THE INPUTS; TOTAL DPS IS A GUARD RAIL, NOT A FIFTH INPUT.
+#
+# Maintainer ruling, 2026-09-12, asked directly: "each individual stat like damage per shot,
+# burst, burst delay, reload delay should be referenced separately but also at the same time
+# the total DPS should kept as a verifier so nothing suddenly becomes too extreme right?"
+#
+# ⛔ WHY THIS HAD TO BE RULED. `target_for` projects EVERY stat against its own distribution
+# independently, so `w_dps`, `w_damage`, `w_burst`, `w_reload` and `w_range` were five separate
+# votes with nothing tying them together — and they are mutually inconsistent BY CONSTRUCTION,
+# not by accident. On `td_gdi_mammothtank` (3 sources, STRONG on all three):
+#
+#     w_dps projected alone            400 -> 695   (+73.7%)
+#     damage +9.1% with reload -11.1%  400 -> 485   (+21.2%)  through the identity below
+#     the two answers are 1.43x apart
+#
+# Applying more than one of them at once silently picks a rebalance nobody chose. R1 resolves
+# it: the COMPONENTS are applied, and `w_dps` is only ever consulted to ask "did composing the
+# components produce something extreme?".
+COMPONENT_STATS = ("w_damage", "w_burst", "w_reload")   # separately referenced, applied
+VERIFIER_STATS = ("w_dps",)                             # consulted, never applied
+
+# The composed target may not be wilder than this against the CURRENT value. DISAGREE_RATIO
+# sits BELOW the mammoth's own 1.43x component-vs-aggregate gap, so the case that motivated
+# the ruling is flagged rather than waved through.
+EXTREME_RATIO = 2.00
+DISAGREE_RATIO = 1.25
+
+
+def recover_burst_time(damage, dps, reload_ticks):
+    """The ticks spent INSIDE the burst, recovered from the row's own identity.
+
+    ⛔ DO NOT TAKE `w_damage` AS DAMAGE PER SHOT. The convention differs by source and reading
+    it wrong double-counts burst:
+      * `extract_peer_units` sets `w_damage = audit["damage_pos"]`, damage per SHOT, and its
+        `w_dps = damage_pos * burst / cycle`.
+      * the frozen Cameo snapshot's `w_damage` is BURST-INCLUSIVE, and its identity is
+        `w_dps = w_damage / cycle` with no burst factor at all.
+    Proven on the shipped rows: mammoth `32000/400 = 80` ticks against `w_reload 72`, and
+    MLRS `48000/352.94 = 136` against `w_reload 111`. Multiplying by burst as well gives the
+    mammoth 800 dps against a true 400, and reported a bogus "EXTREME" verdict for the MLRS.
+
+    This is safe across both conventions because it never assumes one: the cycle comes out of
+    `damage / dps`, whatever those two mean, and the burst time is what is left after reload.
+    A target projected by `target_for` arrives in the SAME units as the Cameo row it is
+    projected onto, so composing in Cameo's convention is correct by construction.
+    """
+    if not damage or not dps:
+        return None
+    return max(0.0, float(damage) / float(dps) - float(reload_ticks or 0))
+
+
+def burst_delay_of(row):
+    """Per-shot burst delay recovered from a row, under the ONE formula.
+
+    Invert `damage_per_tick`: the cycle is `per_shot * burst / rate`, and what is left after
+    `ReloadDelay` is spread across the `burst - 1` gaps. Single-shot weapons return None — there
+    is no gap to measure, and all 477 such rows in the tree recover exactly 0.00, so a printed
+    zero would look like a measurement of something that does not exist.
+    """
+    burst = float(row.get("w_burst") or 1)
+    per_shot, rate = damage_per_shot(row), row.get("w_dps")
+    if burst <= 1 or not per_shot or not rate:
+        return None
+    reload_ticks = float(row.get("w_reload") or 0)
+    # ⛔ 334 OF 621 BURST ROWS PUBLISH A RATE THAT NEVER FOLDED BURST IN, and recovering a delay
+    # from one of those produces a confident, meaningless number. Measured 2026-09-13 across the
+    # peer corpus: those rows satisfy `rate == damage / reload` exactly — the burst-1 identity —
+    # while declaring `Burst > 1`, so the cadence they describe is one shot per cycle no matter
+    # what their own `w_burst` says. DTA's `MLRS` is the case the maintainer surfaced: damage 100,
+    # burst 2, reload 400, rate 0.25 = 100/400. Treating that rate as `damage * burst / cycle`
+    # implies a cycle of 800 ticks and hands back a 400-tick "burst delay" — exactly its reload,
+    # which is the signature of the arithmetic folding back on itself.
+    #
+    # This is NOT the same as the negative-remainder case below: there the numbers contradict each
+    # other, here they are self-consistent under a DIFFERENT formula. Both are withheld, and both
+    # for the same reason — a recovered value is only meaningful if the row's own rate was built
+    # the way this function inverts it.
+    if reload_ticks and abs(float(rate) - per_shot / reload_ticks) < 1e-9 * max(1.0, float(rate)):
+        return None
+    remaining = per_shot * burst / float(rate) - reload_ticks
+    # ⭐ AN IMPOSSIBLE TIMING MODEL IS REFUSED, NOT CLAMPED (adopted from `41d0dad57`, and the
+    # better half of that change). A cycle SHORTER than the row's own `ReloadDelay` cannot
+    # happen — the reload is a floor — so a negative remainder means the row's damage, rate and
+    # reload do not describe one weapon. `max(0.0, ...)` would quietly turn that contradiction
+    # into "this weapon has no burst delay" and certify it.
+    if remaining < -1e-6:
+        return None
+    return max(0.0, remaining) / (burst - 1.0)
+
+
+def damage_per_shot(row):
+    """The row's damage PER SHOT — derived, because `w_damage` is now per CYCLE.
+
+    ⭐ THE REFERENCED COORDINATE IS PER CYCLE (maintainer, 2026-09-13) — burst is a delivery
+    choice and the whole-burst total is the comparable magnitude. `reference_distribution.
+    to_per_cycle` therefore puts every corpus in per-cycle units and carries the per-shot figure
+    alongside as `w_damage_per_shot`, so the formula can still be written the way it was ruled:
+
+        rate = damage_per_shot * burst / (reload + sum of the Burst - 1 delays)
+
+    Both spellings are the same number — `per_shot * burst` IS the cycle total — so nothing about
+    the anchors moves. What changes is which quantity gets PROJECTED, and that had to change:
+    Shattered Paradise ships the Mammoth Mk. II at Burst 4 where OpenRA TS ships it at Burst 2,
+    and per shot both read 4,000, so projecting per-shot called them identical while their real
+    output differs 16,000 to 8,000.
+    """
+    d = row.get("w_damage_per_shot")
+    if d is not None:
+        return float(d)
+    # A row that never went through `to_per_cycle` still answers correctly.
+    raw, burst = row.get("w_damage"), float(row.get("w_burst") or 1)
+    return None if raw is None else float(raw) / burst if burst > 1 else float(raw)
+
+
+def damage_per_cycle(row):
+    """The row's damage for one FULL cycle — the quantity the reference map projects."""
+    d = row.get("w_damage")
+    return None if d is None else float(d)
+
+
+def burst_time(burst, burst_delays):
+    """Total ticks spent INSIDE the burst — the sum of its `Burst - 1` gaps.
+
+    ⛔ THIS DELEGATES TO `formula.burst_delay_sum` AND MUST KEEP DOING SO. The pricing pipeline
+    has owned this arithmetic since long before the reference layer existed, it already reads
+    `WeaponInfo.BurstDelays = [5]` as its default, and it already implements exactly the rule the
+    maintainer stated on 2026-09-13: *"if burst delays vary between bursts then you need to simply
+    add all the burst delays up together with the reload delay"*. I briefly shipped a second copy
+    here — including a duplicate `ENGINE_DEFAULT_BURST_DELAY` — which is the `allows()` mistake
+    this repo has already paid for twice: two implementations agree until one of them is fixed.
+
+    ⭐ THE ENGINE'S RULE, checked against source rather than assumed
+    (`OpenRA.Mods.Common/Traits/Armament.cs`):
+
+        line 146  if (Burst > 1 && BurstDelays.Length > 1 && BurstDelays.Length != Burst - 1)
+                      throw new YamlException("... must be single entry or Burst - 1");
+        line 476  if (BurstDelays.Length == 1) FireDelay = BurstDelays[0];
+                  else                         FireDelay = BurstDelays[Burst - (remaining + 1)];
+
+    An array is legal ONLY at length 1 (used for every gap) or exactly `Burst - 1` (walked in
+    order). There is no "repeat the last entry" — a partial array refuses to boot. So the
+    maintainer's "the number of burst delays should always be bursts - 1" is the engine's own
+    rule, with the single entry as its shorthand, and `WeaponInfo.cs:129` supplies `[5]` to the
+    36 Cameo weapons with `Burst > 1` that declare none.
+
+    ⚠ ONE DIFFERENCE, AND IT IS UNREACHABLE TODAY. On an ILLEGAL array length `formula` returns
+    `sum(values[:gaps])` for a deterministic diagnostic, where withholding would arguably be
+    safer. Measured across the tree: 829 weapons use a single entry, 36 declare none, 0 vary and
+    **0 carry an illegal length** — nothing in Cameo reaches that branch, and a weapon that did
+    would fail the boot gate before it could reach a ledger.
+    """
+    return formula.burst_delay_sum(int(float(burst or 1)), burst_delays)
+
+
+def damage_per_tick(damage_per_shot_value, burst, reload_ticks, burst_delay):
+    """⭐ THE RATE FORMULA. One formula, everywhere, for Cameo and reference alike.
+
+        rate = damage_per_shot * burst / (reload_delay + (burst - 1) * burst_delay)
+
+    ⚠ THE UNIT IS DAMAGE PER **TICK**, NOT PER SECOND (maintainer, 2026-09-12: *"Actually it's
+    damage per tick and not damage per second so the term is misleading"*). Every term in the
+    divisor — `ReloadDelay`, `BurstDelays` — is authored in engine ticks, so the quotient is
+    per tick and converting to seconds needs the tick rate, which is a separate question and
+    varies with game speed. The stored FIELD is still called `w_dps` across the ledgers and
+    corpora and renaming it is a migration of its own; this function, and every label it feeds,
+    say "per tick" so the misnomer stops spreading.
+
+    Maintainer's ruling, 2026-09-12: *"That cameo formula must always be used even for the
+    reference for checking! ... and that same formula should be used everywhere so yeah please
+    use that one formula for all the DPS calculation"*.
+
+    It is the engine's own cycle, and both extractors already agreed with it — they simply said
+    it differently. `extract_peer_units` computes `damage_pos * burst / (reload + burst_time)`,
+    which is this verbatim. The Cameo snapshot computes `w_damage / cycle` with no burst factor,
+    which is the SAME NUMBER only because its `w_damage` is already the burst total. Feeding this
+    function a burst total would therefore multiply by burst twice and hand the mammoth 800 DPS
+    against a true 400 — so damage comes in through `damage_per_shot()`, never off the row.
+
+    Pinned to the authored yaml in `_rate_self_test`:
+      mammoth  16,000 x 2 / (72 + 1x8)  = 400    damage/tick
+      MLRS      8,000 x 6 / (111 + 5x5) = 352.94 damage/tick
+    """
+    b = float(burst or 1)
+    bt = burst_time(b, 0 if burst_delay is None else burst_delay)
+    if bt is None:
+        return None                       # cadence unresolved — withheld, never inferred
+    cycle = float(reload_ticks or 0) + bt
+    if cycle <= 0 or not damage_per_shot_value:
+        return None
+    return float(damage_per_shot_value) * b / cycle
+
+
+def rate_of(row, burst_delay):
+    """`damage_per_tick` straight off a row, in whichever convention that row uses."""
+    return damage_per_tick(damage_per_shot(row), row.get("w_burst") or 1,
+                           row.get("w_reload"), burst_delay)
+
+
+def compose_dps(damage, reload_ticks, burst=1, burst_delay_per_shot=0.0):
+    """Deprecated alias kept for callers that already hold a PER-SHOT damage figure.
+
+    ⚠ It forwards to `damage_per_tick()`, so it now MULTIPLIES BY BURST where the old
+    implementation did not. That is the correction the maintainer ruled, not a regression: the
+    old version was only ever right because every caller happened to hand it Cameo's
+    burst-inclusive `w_damage`, which already had the burst folded in.
+    """
+    return damage_per_tick(damage, burst, reload_ticks, burst_delay_per_shot)
+
+
+def dps_guard(current, component_targets, dps_target):
+    """Check a set of component targets against the DPS verifier.
+
+    `current` carries `w_damage` / `w_burst` / `w_reload` / `w_dps`; `component_targets` the
+    same keys, and a MISSING one falls back to the current value — a stat with no reference is
+    not a stat being changed to zero, and zeroing it would make every partial row look extreme.
+
+    Returns a dict, or None when there is not enough to judge. `verdict` is one of:
+      ok         composing the components moves DPS by less than EXTREME_RATIO and lands
+                 within DISAGREE_RATIO of what the DPS projection independently says.
+      extreme    the composed move is itself wilder than EXTREME_RATIO.
+      disagrees  the composed move and the DPS projection tell materially different stories —
+                 the mammoth class. NOT an error: the components and the aggregate are
+                 separate votes, and a human has to choose which to believe.
+    """
+    def pick(key):
+        v = component_targets.get(key)
+        return v if v not in (None, 0) else current.get(key)
+
+    cur_dps = current.get("w_dps")
+    if cur_dps is None:
+        return None
+    # Everything below is per shot, on both sides, so the ONE formula applies literally.
+    per_shot = burst_delay_of(current)
+    if per_shot is None:
+        per_shot = 0.0
+    # ⛔ `pick("w_damage")` IS PER CYCLE, and `damage_per_tick` multiplies by burst, so the cycle
+    # total must be divided back down first or burst is counted twice — 969.86 instead of 485 on
+    # the mammoth. Dividing by the TARGET burst is what makes the two spellings identical:
+    # `(cycle/burst) * burst / ticks` is `cycle / ticks`.
+    tgt_burst = float(pick("w_burst") or 1)
+    tgt_cycle_damage = pick("w_damage")
+    new = damage_per_tick(
+        (tgt_cycle_damage / tgt_burst) if (tgt_cycle_damage and tgt_burst) else None,
+        tgt_burst, pick("w_reload"), per_shot)
+    if not new or not cur_dps:
+        return None
+    out = dict(current_dps=float(cur_dps), composed_dps=new, composed_ratio=new / cur_dps,
+               burst_delay_per_shot=per_shot, projected_dps=dps_target,
+               projected_ratio=None, disagreement=None, verdict="ok")
+    if out["composed_ratio"] > EXTREME_RATIO or out["composed_ratio"] < 1 / EXTREME_RATIO:
+        out["verdict"] = "extreme"
+    if dps_target:
+        out["projected_ratio"] = float(dps_target) / cur_dps
+        d = new / float(dps_target)
+        out["disagreement"] = d
+        if (d > DISAGREE_RATIO or d < 1 / DISAGREE_RATIO) and out["verdict"] == "ok":
+            out["verdict"] = "disagrees"
+    return out
+
+
+def _guard_self_test():
+    """The shipped mammoth and MLRS rows are the regression cases — both were got wrong once."""
+    # conventions recovered from the frozen snapshot, not assumed
+    assert recover_burst_time(32000, 400, 72) == 8.0, "mammoth burst time"
+    assert abs(recover_burst_time(48000, 352.94117647058823, 111) - 25.0) < 1e-6, "MLRS"
+    # ⭐ THE ONE FORMULA, against the AUTHORED YAML rather than against the derived snapshot.
+    # `td_gdi_mammothtank_120mmdualhv` declares Damage 16000 / Burst 2 / BurstDelays 8 /
+    # ReloadDelay 72; `td_gdi_mlrs_227mm` declares 8000 / 6 / 5 / 111. Both are damage per TICK.
+    assert damage_per_tick(16000, 2, 72, 8) == 400, "mammoth, from authored yaml"
+    assert abs(damage_per_tick(8000, 6, 111, 5) - 352.941) < 0.01, "MLRS, from authored yaml"
+
+    # ⭐ VARYING BURST DELAYS (maintainer, 2026-09-13). A list is summed rather than multiplied,
+    # and the constant case is just the list with every entry equal — so the anchors above are
+    # unchanged and both spellings of the SAME cadence agree exactly.
+    assert burst_time(6, 5) == 25, "a single entry covers all Burst-1 gaps"
+    assert burst_time(6, [5]) == 25, "the one-entry array is the same shorthand"
+    assert burst_time(6, [5, 5, 5, 5, 5]) == 25, "spelled out in full, identical"
+    assert burst_time(4, [10, 2, 3]) == 15, "varying gaps are SUMMED"
+    assert burst_time(1, None) == 0.0, "a single shot has no gap to declare"
+    # ⚠ NO DECLARED CADENCE FALLS BACK TO THE ENGINE DEFAULT `[5]`, it is not withheld — 36 Cameo
+    # weapons with Burst > 1 declare no BurstDelays and really do run at 5 ticks a gap in game.
+    assert burst_time(3, None) == 10, "two gaps at the engine default of 5"
+    # ⚠ An ILLEGAL length consumes what the engine would consume, for a deterministic diagnostic
+    # rather than a withheld one. Unreachable in this tree — 0 weapons carry an illegal array, and
+    # one that did would fail the boot gate before reaching a ledger.
+    assert burst_time(6, [5, 5]) == 10, "formula's documented diagnostic behaviour"
+    assert damage_per_tick(8000, 6, 111, [5, 5, 5, 5, 5]) == damage_per_tick(8000, 6, 111, 5)
+    # a front-loaded burst lands the same damage in a shorter cycle, so the rate is higher
+    assert damage_per_tick(1000, 4, 100, [1, 1, 1]) > damage_per_tick(1000, 4, 100, [9, 9, 9])
+    assert damage_per_tick(1000, 4, 100, [2, 4, 6]) == 1000 * 4 / (100 + 12)
+    # ⭐ `w_damage` IS PER CYCLE on every row — that is the referenced coordinate. Per shot is
+    # derived from it, and both spellings reach the same rate.
+    assert damage_per_cycle(dict(w_damage=32000, w_burst=2)) == 32000, "the mammoth's cycle"
+    assert damage_per_shot(dict(w_damage=32000, w_burst=2)) == 16000, "derived back to one shot"
+    assert damage_per_shot(dict(w_damage=32000, w_burst=2, w_damage_per_shot=16000)) == 16000
+    # a single-shot row is the same number either way
+    assert damage_per_cycle(dict(w_damage=4000, w_burst=1)) == 4000
+    assert compose_dps(16000, 72, 2, 8) == 400, "the per-shot alias"
+    # ⚠ feeding the BURST TOTAL in would double-count burst — the bug this convention prevents
+    assert damage_per_tick(32000, 2, 72, 8) == 800, "burst counted twice, as expected"
+
+    # PER SHOT, like every row in the project: authored Damage 16000 with Burst 2.
+    mam = dict(w_damage=32000, w_damage_per_shot=16000, w_burst=2, w_reload=72, w_dps=400)
+    # components: damage +9.1%, reload -11.1%, burst unanimous at 2 (a DIRECT stat)
+    g = dps_guard(mam, dict(w_damage=34915, w_burst=2, w_reload=64), dps_target=695)
+    assert abs(g["burst_delay_per_shot"] - 8) < 1e-9, g
+    assert abs(g["composed_dps"] - 485) < 1, g["composed_dps"]
+    assert abs(g["projected_ratio"] - 1.7375) < 0.01, g["projected_ratio"]
+    assert g["verdict"] == "disagrees", g          # ~1.43x apart, the documented gap
+    assert abs(1 / g["disagreement"] - 1.43) < 0.02, g["disagreement"]
+
+    # ⛔ A BURST CHANGE ALONE *IS* A LARGE CHANGE, and this expectation was REVERSED on
+    # 2026-09-12 when the maintainer ruled the one universal formula. The earlier version of this
+    # test asserted the opposite — "a burst change alone must not look extreme" — because under
+    # the old burst-total convention `Burst` only lengthened the CYCLE and never multiplied the
+    # damage. Under `damage_per_shot * burst / cycle` it does both, and the engine agrees: the
+    # MLRS fires 6 rockets of 8,000 over 136 ticks (352.9/tick), and at Burst 2 it fires 2 of
+    # them over 116 (137.9/tick). Firing a third as many rockets really is a 61% cut, and a guard
+    # that called it "ok" was hiding the largest change in the row.
+    mlrs = dict(w_damage=48000, w_damage_per_shot=8000, w_burst=6, w_reload=111,
+                w_dps=352.94117647058823)
+    m = dps_guard(mlrs, dict(w_damage=16000, w_burst=2, w_reload=111), dps_target=None)
+    assert abs(m["burst_delay_per_shot"] - 5) < 1e-6, m
+    assert abs(m["composed_dps"] - 137.93) < 0.05, m["composed_dps"]
+    assert m["verdict"] == "extreme", m          # 0.39x — correctly loud
+
+    # a component set that agrees with the aggregate passes
+    ok = dps_guard(mam, dict(w_damage=32000 * 1.7, w_reload=72), 680)
+    assert ok["verdict"] == "ok", ok
+
+    # a genuine 2.5x move through the components alone is flagged
+    ex = dps_guard(mam, dict(w_damage=32000 * 2.5, w_reload=72), None)
+    assert ex["verdict"] == "extreme", ex
+
+    # a missing component is the CURRENT value, never zero
+    same = dps_guard(mam, dict(w_damage=None, w_burst=None, w_reload=None), None)
+    assert same["composed_ratio"] == 1.0, same
+    return ("reference_targets R1 guard self-test: PASS "
+            "(one formula, per shot; mammoth 1.43x gap; MLRS burst cut correctly loud)")
 
 
 def add_cost_distribution(dist, rows):
@@ -198,7 +604,13 @@ def cameo_context():
     document = json.loads(raw)
     if document.get('schema') != 1:
         raise ValueError('unsupported Cameo reference snapshot')
-    rows = document['rows']
+    # ⛔ NORMALISED TO PER SHOT AFTER the hash check, never before. The pin guarantees the FILE
+    # is unchanged; the formula needs the ROWS in the one convention the whole project uses, or
+    # every damage target comes back in burst-total units and the map draws an arrow between two
+    # different quantities. The bytes are untouched and still hash.
+    # The snapshot already stores the burst TOTAL, which IS the referenced coordinate, so it is
+    # normalised only to attach the derived per-shot figure. See `reference_distribution.to_per_cycle`.
+    rows = rd.to_per_cycle(document['rows'])
     distribution = rd.build_distributions(rows)
     add_cost_distribution(distribution, rows)
     return FrozenCameoDistribution(distribution['Cameo'], rows)
@@ -223,6 +635,30 @@ def hero_cameo_context():
     return FrozenCameoDistribution(dist['Cameo'], rows)
 
 
+def _direct_target(rows, vote_row, stat):
+    """(peers_only, with_cameo, n_sources) for a DISCRETE count -- see DIRECT_STATS.
+
+    No distribution, no projection: one vote per source (median of that source's eligible
+    rows), then the median of the source votes. Eligibility is the SAME `rd.eligible` gate the
+    projected path uses, so an upgraded variant or an evidence-withheld row abstains here too.
+
+    `with_cameo` deliberately does NOT fold Cameo's own value in. On a continuous stat the
+    self-vote damps a projection; on a count it would just drag a unanimous source answer
+    toward the status quo and hide the very disagreement this stat is shown to reveal.
+    """
+    per = collections.defaultdict(list)
+    for r in rows:
+        x = r.get(stat)
+        if not x or x <= 0 or not rd.eligible(r, stat):
+            continue
+        per[r["source"]].append(float(x))
+    if not per:
+        return None, None, 0
+    votes = [statistics.median(v) for v in per.values()]
+    value = statistics.median(votes)
+    return value, value, len(per)
+
+
 def target_for(rows, cameo_row, stat, dist, cdist):
     """(peers_only, with_cameo, n_sources) on one stat, or (None, None, 0).
 
@@ -244,6 +680,10 @@ def target_for(rows, cameo_row, stat, dist, cdist):
     frozen = getattr(cdist, 'cameo_votes', None)
     vote_row = frozen.get(cameo_row.get('id')) if frozen is not None else cameo_row
     projection_row = vote_row if vote_row is not None else cameo_row
+    if stat in LAW_GOVERNED_STATS:
+        return None, None, 0
+    if stat in DIRECT_STATS:
+        return _direct_target(rows, vote_row, stat)
     per_source = collections.defaultdict(lambda: collections.defaultdict(list))
     for r in rows:
         x = r.get(stat)

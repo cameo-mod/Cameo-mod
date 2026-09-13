@@ -1658,3 +1658,131 @@ in minutes, and it was not run.
 ⚠ **A bulk delete is the wrong shape for this class of cleanup entirely.** Whatever
 genuinely-dead nodes existed among those 2248 are still there after the revert; they
 have to be found per-node, by resolving each parent chain.
+
+## `^Warhead_` templates carry WEAPON-LEVEL fields, so a dead warhead node is not a dead inherit
+
+**2026-09-12.** Converting the `^Compatibility_*` shims, the obvious slice looked airtight: the
+weapon declares `-Warhead@<fam>:` locally, so the `^Warhead_<fam>` inherit contributes nothing
+and can go. It went, and **60+ weapons silently lost `TargetActorCenter`, some lost
+`ValidTargets`, and three warheads were left with an EMPTY TYPE** — the boot-NRE class.
+
+A `^Warhead_*` template is not only a warhead. It also supplies `ValidTargets`, `ReloadDelay`,
+`Range` and `TargetActorCenter` at the WEAPON level, and the shim supplies **none** of those.
+Removing the node says nothing about the rest of the template.
+
+⚠ **The general rule: an inherit is dead only if the RESOLVED WEAPON is byte-identical without
+it.** Do not reason about which node the parent provides — resolve both ways and compare. Every
+heuristic tried here (node absent, `Damage: 0`, `Damage` and `PercentageScale` both 0) passed
+weapons that then changed.
+
+## A rename moves a key, so a SORTED dump reports every touched node as changed
+
+Same session, the comparator that was supposed to catch the above instead cried wolf on all of
+it. It dumped each resolved weapon with `sorted(children, key=lambda c: c.key)` and diffed the
+text — but renaming `Warhead@X_FlatCompatibility` to `Warhead@X_Flat` MOVES that node in the
+sort, so the dump differs from the first moved line onward even when nothing else changed. It
+reported 470 weapons; the real number was 1.
+
+⚠ **Compare renames as an order-insensitive set of `path = value` pairs**, with the name map
+applied to the baseline first. Then a false positive is impossible and the one real failure —
+`d2k_airdefenseplatform`, which inherits from the WEAPON `HMG_turret` and declared its warhead
+BARE — was visible immediately.
+
+## `gh` resolves the repo from the WRONG remote here, and reports the PR as nonexistent
+
+`gh pr create` refused with *"No commits between master and <branch>"* and `gh pr view 354` said
+*"Could not resolve to a PullRequest"* — so the PR looked gone, and it was reported as gone.
+It was open the whole time. `gh repo view --json nameWithOwner` returns **`Zeruel87/Cameo-mod`**:
+`gh` picked the `upstream` remote, not `origin` (`cameo-mod/Cameo-mod`). Confusingly `gh pr list`
+had shown cameo-mod's PRs moments earlier.
+
+⚠ **Pass `--repo cameo-mod/Cameo-mod` explicitly for every `gh` call in this tree**, and never
+report a PR or branch as missing on a bare `gh` result — check `gh repo view --json
+nameWithOwner` first, or compare with `gh api repos/cameo-mod/Cameo-mod/compare/master...<branch>`.
+
+## A spread-band ratio that folds in `Shield` invents violations that do not exist
+
+`Shield` is not a normal armor. §12.0c gives it its own compressed `[100,400]` ladder, so its
+row sits two to three times above every real armor row in the same profile. Take `max/min`
+across all 22 Versus rows and that single row sets the numerator every time.
+
+Reported: **nine** `^Warhead_*` templates outside the 2x–8x band, and two of them were queued
+for hand repair. Measured on the 16 real armor rows: **two**, one of which is `HAND_TUNED` and
+ratified. `Laser_Medium` was filed at 8.44x and is actually **4.84x** — sitting on the 4x
+target, needing nothing. `Storm_*` and `Tesla_Heavy` were ratified as specialists against
+figures that were pure `Shield` contamination.
+
+⚠ **Use the audit's own exclusion set, never a bare `max/min`:**
+`NON_ARMOR = {Shield, HAZMAT, COMPOSITE, BLAST, REFLECTOR, ARMOR}` — the last five are
+physical-state pseudo-armors, also not ladder rungs. `audit_versus_profile.py` had reported
+**spread 0/0** throughout. A tool that implements the law and disagrees with your measurement
+makes the measurement the suspect — that rule already exists in this file and was still worth
+paying for twice.
+
+Two sibling traps from the same session:
+
+⚠ **A block node's VALUE is the empty string.** `{c.key: str(c.value) for c in node.children}`
+gives `"Versus" -> ""`, so comparing two profiles at the value level finds every armor row
+equal. A `_Flat`-shim tool printed *"VERSUS CONVERGENCE: 0 rows"* while 64 weapons were in fact
+drifting. Walk the CHILDREN of `Versus` / `PercentageVersus`, unconditionally.
+
+⚠ **Renaming `X_Flat` -> `X` can collide with a name the weapon already uses.** 11 weapons
+declare `Warhead@X` and then delete it again with `-Warhead@X`. That is dead code only while the
+live node is called `Warhead@X_Flat`; after the rename the dormant removal deletes the real main
+and it is re-appended at the END of the list — a **firing-order** change, the Wraith class. Before
+any such rename, check whether the target name already appears in the weapon, and handle the
+collision explicitly instead of letting the merge resolve it.
+
+## `w_damage` means different things in different sources, and reading it wrong doubles burst
+
+Two conventions live side by side in the reference corpus, and neither file says so:
+
+* `tools/reference/extract_peer_units.py` sets `w_damage = audit["damage_pos"]` — damage per
+  **shot** — and computes `w_dps = damage_pos * burst / cycle`.
+* the frozen Cameo snapshot (`docs/reference/cameo_baselines/pre_reference_*.json`) stores a
+  **burst-inclusive** `w_damage`, with `w_dps = w_damage / cycle` and no burst factor at all.
+
+Composing DPS as `damage * burst / cycle` therefore gives the mammoth **800** against a true
+**400**, and reported `td_gdi_mlrs` as `EXTREME 34%` when its actual move is `+19%` — a verdict
+that would have sent someone to "fix" a weapon that was fine.
+
+⚠ **Recover the cycle from the row's own identity instead of assuming a convention:**
+`cycle = w_damage / w_dps`, then `burst_time = cycle - w_reload`, then
+`per_shot_delay = burst_time / (w_burst - 1)`. That is correct under either convention because
+it never assumes one. It also recovers the burst delays that are deliberately absent from the
+reference map. Verified on the shipped rows: mammoth `32000/400 = 80` against `w_reload 72`
+(8 ticks/shot at burst 2); MLRS `48000/352.94 = 136` against `w_reload 111` (5 ticks/shot at
+burst 6 — the engine default). `reference_targets.recover_burst_time` does this, and
+`_guard_self_test` pins both rows.
+
+⚠ **And burst is not a DPS multiplier under the burst-inclusive convention.** It reaches DPS
+only by lengthening the cycle, so dropping burst 6 → 2 SHORTENS the cycle and nudges DPS *up*.
+A guard that treats a burst change as a proportional DPS change will flag every burst target as
+extreme.
+
+## "Another class would accept it" sounds like evidence and is worth nothing — count first
+
+Triaging the 114 baseband outliers, the obvious discriminator is: which OTHER class's baseline
+would put this unit inside 100%-250%? Used as the deciding signal it labelled **81 of 114
+MISCLASSIFIED** and named the single best-fitting class, which put `terran_ghost` in
+`artillery`.
+
+Then the population was counted: **the median member is accepted by 6 of the 27** classes with
+a usable spec (mean 5.6, max 9). Only **6 members of 404** are accepted by one class or none.
+So the signal is true of nearly everything, the "best fit" is one arbitrary pick out of six,
+and 81 authoritative-looking recommendations carried no information.
+
+`anchor_readiness.py` had already written the limit down: the statistically indistinguishable
+class pairs are *"separated by what they SHOOT AT, not by their stats. No stat-based check can
+police these boundaries."*
+
+⚠ **Before a derived signal becomes a recommendation, measure how often it fires.** A signal
+that is true of the median case cannot discriminate, however reasonable its construction. The
+two ends of the same distribution — 0 or 1 accepting class — DO discriminate, and there are
+exactly 6 of those; that is the real finding, and it is a hundred times smaller and actually
+actionable.
+
+⚠ **Then check which axis is responsible before concluding anything about membership.** 61 of
+the 114 outliers are driven by `raw_dps` — the one axis W24 has deliberately not settled, and
+which every anchor dossier already refuses to target. Most of the "misclassification" was
+unfinished weapon structure wearing a classification costume.

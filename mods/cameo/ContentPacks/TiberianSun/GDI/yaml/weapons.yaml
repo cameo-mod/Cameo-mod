@@ -560,7 +560,6 @@ PitbullRockets:
 
 TSHoverMissile:
 	Inherits@missilerole: ^Warhead_MissileAP_Medium
-	Inherits@collapsewh: ^Warhead_MissileHE_Medium
 	Inherits: ^FlakWeapon
 	Inherits@2: ^MediumMissile
 	Inherits@3: ^ShrapnelWeapon
@@ -600,7 +599,6 @@ TSHoverMissile:
 	-Warhead@MediumMissile:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@MissileHE_Medium:
 	Warhead@MissileAP_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -613,7 +611,6 @@ TSHoverMissile:
 
 TSDestroyerMissiles:
 	Inherits@missilerole: ^Warhead_MissileAP_Medium
-	Inherits@collapsewh: ^Warhead_MissileHE_Medium
 	Inherits@flak: ^FlakWeapon
 	Inherits@missile: ^MediumMissile
 	Inherits@shrapnel: ^ShrapnelWeapon
@@ -653,7 +650,6 @@ TSDestroyerMissiles:
 	-Warhead@MediumMissile:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@MissileHE_Medium:
 	Warhead@MissileAP_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -666,7 +662,6 @@ TSDestroyerMissiles:
 
 TSMammothTusk2:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
-	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileAP_Heavy
 	ValidTargets: Air
@@ -686,7 +681,6 @@ TSMammothTusk2:
 	Report: misl1.aud
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
-	-Warhead@MissileAP_Heavy:
 	Warhead@MissileAA_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -699,7 +693,6 @@ TSMammothTusk2:
 
 TSMammothTusk2II_AA:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
-	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileAP_Heavy
 	ValidTargets: Air
@@ -719,7 +712,6 @@ TSMammothTusk2II_AA:
 	BurstDelays: 8
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
-	-Warhead@MissileAP_Heavy:
 	Warhead@MissileAA_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -792,7 +784,6 @@ TSZoneHellfireSonic:
 
 TSGDIRedEye:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
-	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileAP_Heavy
 	ReloadDelay: 30
@@ -812,7 +803,6 @@ TSGDIRedEye:
 	Warhead@2Eff: CreateEffect
 		ImpactSounds: expnew13.aud
 		ImpactActors: false
-	-Warhead@MissileAP_Heavy:
 	Warhead@MissileAA_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1008,7 +998,6 @@ TSJumpCannon:
 		PercentageScale: 9988
 
 TSAssaultCannonSonic:
-	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Sonic_Shell
 	Inherits@fx: ^Effect_Sonic_Shell
 	Inherits@sonicfamily: ^Warhead_BulletSonic_Medium
@@ -1097,7 +1086,6 @@ TSVulcanGun:
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 TSVulcanGunSonic:
-	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Sonic_Shell
 	Inherits@fx: ^Effect_Sonic_Shell
 	Inherits@sonicfamily: ^Warhead_BulletSonic_Medium

@@ -140,7 +140,6 @@ VengeanceActivator3:
 		ValidRelationships: Ally
 
 ra1_soviets_molotovconscript_conscriptmolotov:
-	Inherits: ^Warhead_Demolition_Light
 	Inherits@2: ^Warhead_Flame_Light
 	Inherits@3: ^Projectile_Grenade_Light
 	Inherits@4: ^Effect_Flame_Light
@@ -169,7 +168,6 @@ ra1_soviets_molotovconscript_conscriptmolotov:
 		Palette: ra_temperat
 		Weapon: CHFlame
 		InvalidTargets: Water
-	-Warhead@Demolition_Light:
 
 ra1_soviets_molotovconscript_conscriptmolotovexplode:
 	Inherits@roleflat: ^Compatibility_Flame_LightFlat
@@ -915,9 +913,10 @@ WaveforceCannonChargedLaser:
 		ValidTargets: Ground, Water, Air
 
 WaveforceCannonDistortedBeam1:
-	Inherits@roleflat: ^Compatibility_Waveforce_HeavyFlat
+	Inherits@roleflat: ^Warhead_Waveforce_Heavy
 	Inherits: ^TeslaWeapon
 	Inherits@2: ^HeavyCannon
+	TargetActorCenter: false
 	ReloadDelay: 120
 	Range: 9343
 	ValidTargets: Ground, Water, Air
@@ -967,7 +966,7 @@ WaveforceCannonDistortedBeam1:
 	-Warhead@HeavyCannon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@Waveforce_HeavyFlatCompatibility:
+	Warhead@Waveforce_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 25000
 		PercentageScale: 0
@@ -2235,7 +2234,7 @@ JapanSpeedBoatGun:
 		Damage: 4000
 		PercentageScale: 9975
 JapanSpeedBoatGunWaveforce:
-	Inherits@roleflat: ^Compatibility_Waveforce_HeavyFlat
+	Inherits@roleflat: ^Warhead_Waveforce_Heavy
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: JapanSpeedBoatGun
 	Inherits@3: ^WaveforceBulletProjectile
@@ -2245,7 +2244,7 @@ JapanSpeedBoatGunWaveforce:
 		PercentageScale: 9975
 	-Warhead@Bullet_MediumFlatCompatibility:
 	-Warhead@Railgun_Heavy:
-	Warhead@Waveforce_HeavyFlatCompatibility:
+	Warhead@Waveforce_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
@@ -2310,7 +2309,7 @@ ChronoVortexInit:
 		ImpactActors: false
 
 ra1_allies_chronovortex:
-	Inherits@roleflat: ^Compatibility_Magic_HeavyFlat
+	Inherits@roleflat: ^Warhead_Magic_Heavy
 	Inherits: ^HeavyBomb
 	Inherits@2: ^MagicWeapon
 	ReloadDelay: 5
@@ -2422,7 +2421,7 @@ ra1_allies_chronovortex:
 	-Warhead@HeavyBomb:
 	-Warhead@MagicExtraDamage:
 	-Warhead@MagicWeapon:
-	Warhead@Magic_HeavyFlatCompatibility:
+	Warhead@Magic_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 4888
 		PercentageScale: 0

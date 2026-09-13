@@ -77,7 +77,7 @@
         "damage": "13000",
         "falloff": "100, 52, 0",
         "spread": "39",
-        "tag": "Quantum_MediumFlatCompatibility",
+        "tag": "Quantum_Medium",
         "type": "AreaDamage"
        },
        {
@@ -117,12 +117,13 @@
       "requires": "steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@Secondary",
       "versus_templates": [
-       "^Compatibility_Quantum_MediumFlat",
+       "^Warhead_Quantum_Medium",
        "^LightChemicalWeapon",
        "^TeslaWeapon",
        "SteelMakoGun"
       ],
       "warheads": [
+       "^Warhead_Quantum_Medium",
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
@@ -1618,7 +1619,7 @@
         "damage": "34000",
         "falloff": "100, 51, 0",
         "spread": "35",
-        "tag": "MissileQuantum_MediumFlatCompatibility",
+        "tag": "MissileQuantum_Medium",
         "type": "AreaDamage"
        },
        {
@@ -1651,22 +1652,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "60",
       "requires": "steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Compatibility_MissileQuantum_MediumFlat",
+       "^Warhead_MissileQuantum_Medium",
        "ConsortiumMissileSystem"
       ],
       "warheads": [
+       "^Warhead_MissileQuantum_Medium",
        "^Warhead_Flak_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "ConsortiumMissileSystem_EMP",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -3567,7 +3569,7 @@
         "damage": "13000",
         "falloff": "100, 52, 0",
         "spread": "39",
-        "tag": "Quantum_MediumFlatCompatibility",
+        "tag": "Quantum_Medium",
         "type": "AreaDamage"
        },
        {
@@ -3607,12 +3609,13 @@
       "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@UpgradePRIMARY",
       "versus_templates": [
-       "^Compatibility_Quantum_MediumFlat",
+       "^Warhead_Quantum_Medium",
        "^LightChemicalWeapon",
        "^TeslaWeapon",
        "SteelMakoGun"
       ],
       "warheads": [
+       "^Warhead_Quantum_Medium",
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
@@ -3628,7 +3631,7 @@
         "damage": "13000",
         "falloff": "100, 52, 0",
         "spread": "39",
-        "tag": "Quantum_MediumFlatCompatibility",
+        "tag": "Quantum_Medium",
         "type": "AreaDamage"
        },
        {
@@ -3671,6 +3674,7 @@
        "SteelMakoGun_EMP"
       ],
       "warheads": [
+       "^Warhead_Quantum_Medium",
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
@@ -3685,7 +3689,7 @@
         "damage": "13000",
         "falloff": "100, 52, 0",
         "spread": "39",
-        "tag": "Quantum_MediumFlatCompatibility",
+        "tag": "Quantum_Medium",
         "type": "AreaDamage"
        },
        {
@@ -3725,12 +3729,13 @@
       "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
-       "^Compatibility_Quantum_MediumFlat",
+       "^Warhead_Quantum_Medium",
        "^LightChemicalWeapon",
        "^TeslaWeapon",
        "SteelMakoGun"
       ],
       "warheads": [
+       "^Warhead_Quantum_Medium",
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
@@ -3747,7 +3752,7 @@
         "damage": "13000",
         "falloff": "100, 52, 0",
         "spread": "39",
-        "tag": "Quantum_MediumFlatCompatibility",
+        "tag": "Quantum_Medium",
         "type": "AreaDamage"
        },
        {
@@ -3790,6 +3795,7 @@
        "SteelMakoGun_EMP"
       ],
       "warheads": [
+       "^Warhead_Quantum_Medium",
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
@@ -7948,7 +7954,7 @@
         "damage": "75000",
         "falloff": "100, 52, 0",
         "spread": "39",
-        "tag": "Quantum_MediumFlatCompatibility",
+        "tag": "Quantum_Medium",
         "type": "AreaDamage"
        },
        {
@@ -7981,7 +7987,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "1450",
       "pricing": true,
       "range": "7250",
@@ -7989,17 +7995,18 @@
       "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Compatibility_Quantum_MediumFlat",
+       "^Warhead_Quantum_Medium",
        "^TankDestroyerCannon",
        "^TeslaWeapon",
        "SteelKatyCannons"
       ],
       "warheads": [
+       "^Warhead_Quantum_Medium",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Flame_Heavy"
       ],
       "weapon": "SteelKatyCannons_EMP",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "primary",
@@ -8010,7 +8017,7 @@
         "damage": "75000",
         "falloff": "100, 52, 0",
         "spread": "39",
-        "tag": "Quantum_MediumFlatCompatibility",
+        "tag": "Quantum_Medium",
         "type": "AreaDamage"
        },
        {
@@ -8043,7 +8050,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "1650",
       "pricing": true,
       "range": "8250",
@@ -8054,11 +8061,12 @@
        "SteelKatyCannons_EMP"
       ],
       "warheads": [
+       "^Warhead_Quantum_Medium",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Flame_Heavy"
       ],
       "weapon": "SteelKatyCannons_EMP_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -8229,7 +8237,7 @@
         "damage": "13000",
         "falloff": "100, 52, 0",
         "spread": "39",
-        "tag": "Quantum_MediumFlatCompatibility",
+        "tag": "Quantum_Medium",
         "type": "AreaDamage"
        },
        {
@@ -8269,12 +8277,13 @@
       "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@UpgradePRIMARY",
       "versus_templates": [
-       "^Compatibility_Quantum_MediumFlat",
+       "^Warhead_Quantum_Medium",
        "^LightChemicalWeapon",
        "^TeslaWeapon",
        "SteelMakoGun"
       ],
       "warheads": [
+       "^Warhead_Quantum_Medium",
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
@@ -8290,7 +8299,7 @@
         "damage": "13000",
         "falloff": "100, 52, 0",
         "spread": "39",
-        "tag": "Quantum_MediumFlatCompatibility",
+        "tag": "Quantum_Medium",
         "type": "AreaDamage"
        },
        {
@@ -8333,6 +8342,7 @@
        "SteelMakoGun_EMP"
       ],
       "warheads": [
+       "^Warhead_Quantum_Medium",
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"

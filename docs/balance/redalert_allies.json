@@ -256,7 +256,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1310",
       "pricing": true,
       "range": "6540",
@@ -266,18 +266,14 @@
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
        "^Compatibility_MissileHE_HeavyFlat",
-       "^Warhead_Concussion_Medium",
-       "^Warhead_MissileHE_Heavy",
        "^Projectile_Missile_Heavy",
        "^Effect_MissileHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy",
-       "^Warhead_Concussion_Medium",
-       "^Warhead_MissileHE_Heavy"
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "ra1_allies_longbow_missile",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -4159,7 +4155,6 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
-       "^Warhead_MissileHE_Heavy",
        "^Grenade",
        "^FlakWeapon",
        "^Chaingun",
@@ -4167,8 +4162,7 @@
        "^MediumMissile"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy",
-       "^Warhead_MissileHE_Heavy"
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "ra1_allies_chronotank_missile",
       "weapon_class_source": "template"
@@ -4229,7 +4223,6 @@
       "slot": "Armament@SECONDARY",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
-       "^Warhead_MissileHE_Heavy",
        "^Grenade",
        "^FlakWeapon",
        "^Chaingun",
@@ -4237,8 +4230,7 @@
        "^MediumMissile"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy",
-       "^Warhead_MissileHE_Heavy"
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "ra1_allies_chronotank_missile",
       "weapon_class_source": "template"
@@ -4298,13 +4290,11 @@
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Warhead_MissileAP_Heavy",
        "ra1_allies_chronotank_missile",
        "^CryoMissileProjectile"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy",
-       "^Warhead_MissileHE_Heavy"
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "ra1_allies_chronotank_missile_cryo",
       "weapon_class_source": "template"
@@ -4364,13 +4354,11 @@
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@UpgradeSECONDARY",
       "versus_templates": [
-       "^Warhead_MissileAP_Heavy",
        "ra1_allies_chronotank_missile",
        "^CryoMissileProjectile"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy",
-       "^Warhead_MissileHE_Heavy"
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "ra1_allies_chronotank_missile_cryo",
       "weapon_class_source": "template"
@@ -4378,11 +4366,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "Superheavy"
-    },
-    "build_limit": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Buildable.BuildLimit",
-     "v": "1"
+     "v": "Light"
     },
     "buildable": true,
     "cost": {
@@ -4393,7 +4377,7 @@
      "category": "Tanks",
      "class_anchor": "epic_vehicle",
      "special": 2.0,
-     "subtype": "EpicVehicle",
+     "subtype": "FireSupport",
      "tech_tier": 0.75,
      "unit_class": 0.4
     },
@@ -4525,10 +4509,6 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Buildable.BuildDuration",
      "v": "1500"
     },
-    "build_limit": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Buildable.BuildLimit",
-     "v": "1"
-    },
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Valued.Cost",
@@ -4610,10 +4590,6 @@
     "build_duration": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Buildable.BuildDuration",
      "v": "1500"
-    },
-    "build_limit": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Buildable.BuildLimit",
-     "v": "1"
     },
     "buildable": true,
     "charge_up": {
@@ -5271,13 +5247,11 @@
       "slot": "Armament@Missile",
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileHE_Medium",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileHE_Medium"
+       "^Warhead_MissileAP_Medium"
       ],
       "weapon": "ra1_allies_sheridanassaulttank_missile",
       "weapon_class_source": "template"

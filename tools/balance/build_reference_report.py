@@ -18,6 +18,7 @@ from __future__ import annotations
 import argparse
 import html
 import json
+import re
 import pathlib
 import sys
 
@@ -103,11 +104,243 @@ def arm_note(actor, led_arms):
     exactly the question the maintainer asked about `td_nod_lighttankmkii`.
     """
     n = led_arms.get(actor, 0)
-    return f'<span class="muted" title="{n} priced armaments; rate uses the selected baseline armaments">&#215;{n}</span>' if n > 1 else ""
+    if n <= 1:
+        return ""
+    # ⭐ SAY HOW MANY FIRE TOGETHER, not just how many exist. `x4` on the mammoth was answering a
+    # question nobody asked: it has four priced armaments and can only ever fire two, because the
+    # cannons and the missiles are each an upgrade pair gated on `C` / `!C`. Reading "x4" as "this
+    # tank has four guns" is the mistake the maintainer was worried about when they asked whether
+    # a single collapsed damage number would be better.
+    sim, total = simultaneous_armaments(actor)
+    if sim and total and sim < total:
+        return (f'<span class="muted" title="{total} priced armaments, but only {sim} can fire at '
+                f'once — the rest are mutually exclusive upgrade variants gated on a condition. '
+                f'The figure shown is ONE armament, never a sum.">{sim} of {total} guns</span>')
+    return (f'<span class="muted" title="{n} priced armaments, all able to fire; the figure shown '
+            f'is ONE armament, never a sum">&#215;{n}</span>')
 
 
-def estimate_cell(rows, cameo_row, stat, dist, cdist, assigned_sources):
-    """Show metric evidence separately from identity matches; never relax eligibility."""
+_SIM_CACHE = {}
+_RULESET = []
+
+
+def _ruleset():
+    """The resolved ruleset, loaded once — the only place armament CONDITIONS exist."""
+    if not _RULESET:
+        sys.path.insert(0, str(ROOT / "tools" / "audit"))
+        import miniyaml
+        _RULESET.append(miniyaml.Ruleset(str(ROOT)))
+    return _RULESET[0]
+
+
+def simultaneous_armaments(actor):
+    """(fire together, priced total) — because `x4` on the mammoth means neither.
+
+    ⛔ THE PRICED COUNT IS NOT THE SIMULTANEOUS COUNT, and the maintainer spotted the problem
+    from the other end: *"it gets more complicated for dual weapons then like the mammoth tank
+    dual cannons and dual missiles"*. `td_gdi_mammothtank` carries four priced armaments and
+    fires exactly TWO of them, ever:
+
+        Armament@PRIMARY                    !td_gdi_upgrade_highvelocitycannons
+        Armament@HV                          td_gdi_upgrade_highvelocitycannons
+        Armament@SECONDARY                  !td_gdi_upgrade_advancedmissiletargeting
+        Armament@AdvancedMissileTargeting    td_gdi_upgrade_advancedmissiletargeting
+
+    Two mutually exclusive PAIRS — one cannon and one missile launcher, whichever upgrades are
+    held. Summing four would describe a tank that cannot exist, which is exactly why the damage
+    column shows one armament rather than a total.
+
+    The rule is the condition's polarity: `C` and `!C` are the same slot in two states, so a
+    group keyed on the condition with any leading `!` stripped contributes ONE. Unconditioned
+    armaments each contribute one. ⚠ The LEDGER cannot answer this — its armament records carry
+    `requires_condition: None` for all four — so it is read from the resolved yaml, through
+    `miniyaml` rather than by hand.
+    """
+    if actor in _SIM_CACHE:
+        return _SIM_CACHE[actor]
+    try:
+        node = _ruleset().resolve(actor)
+    except Exception:                                   # a missing actor is not a report failure
+        node = None
+    if node is None:
+        return _SIM_CACHE.setdefault(actor, (None, None))
+    groups, loose = set(), 0
+    total = 0
+    for child in node.children:
+        if not child.key.startswith("Armament"):
+            continue
+        fields = {g.key: g.value for g in child.children}
+        if not fields.get("Weapon"):
+            continue
+        total += 1
+        cond = (fields.get("RequiresCondition") or "").strip()
+        if cond:
+            groups.add(cond.lstrip("!").strip())
+        else:
+            loose += 1
+    return _SIM_CACHE.setdefault(actor, (len(groups) + loose, total))
+
+
+def burst_note(cameo_row):
+    """`= 16,000 x 2` beneath a per-CYCLE damage figure — the breakdown, not a multiplier.
+
+    ⛔ THE BRACKET USED TO BE A MULTIPLIER AND THAT IS NOW WRONG. The maintainer asked for
+    "10k damage (2x) which means the total damage is 2x of 10k so 20k", and while the column held
+    damage PER SHOT that is exactly what `(x2)` meant. The column now holds damage PER CYCLE — the
+    quantity the reference actually projects, because burst is a delivery choice and the cycle
+    total is the comparable magnitude — so `32,000 (x2)` would read as "multiply by two" on a
+    number that already includes the burst, and invite a reader to double it.
+
+    Same information, stated the way round the value now demands: the cycle total leads, and the
+    shot it is built from is shown underneath.
+    """
+    burst = float(cameo_row.get("w_burst") or 1)
+    cycle = cameo_row.get("w_damage")
+    if burst <= 1 or not cycle:
+        return ""
+    return (f'<small class="evidence" title="the figure above is one full cycle; this is the '
+            f'shot it is built from">= {cycle / burst:,.0f} &#215; {burst:.0f}</small>')
+
+
+def recovered_burst_delay(row):
+    """Ticks between shots INSIDE a burst, recovered from the row's own identity.
+
+    ⛔ IT IS RECOVERED, NOT READ, and that is the only safe way to get it. No source publishes a
+    usable per-shot delay on the unit row, and `w_damage` does not even mean the same thing on
+    both sides of the map — per SHOT in `extract_peer_units`, BURST-INCLUSIVE in the frozen Cameo
+    snapshot. `reference_targets.recover_burst_time` sidesteps that by never assuming either: the
+    cycle falls out of `damage / dps` whatever those two mean, and the burst time is whatever is
+    left after reload. Reading `w_damage` as damage-per-shot instead once gave the mammoth 800
+    DPS against a true 400.
+
+    ⚠ A SINGLE-SHOT WEAPON HAS NO BURST DELAY, so this returns None rather than a number. With
+    `Burst: 1` there is no gap to measure, and the leftover cycle time is charge-up or rounding
+    rather than a delay between shots. Measured across the tree, all 477 single-shot rows recover
+    exactly 0.00, so printing "0" would read as a real measurement of something that does not
+    exist; 245 rows carry a genuine burst.
+    """
+    # ⛔ ASK `reference_targets.burst_delay_of`, never `recover_burst_time` directly. The latter
+    # computes `damage / dps - reload`, which was the cycle only while Cameo's `w_damage` was a
+    # burst TOTAL. Now that every row is per shot the cycle is `damage * burst / dps`, and the old
+    # call quietly returned 0 for every burst weapon in the map — the mammoth's 8 and the MLRS's 5
+    # both went to nothing, which reads as "no burst delay" rather than as a broken calculation.
+    return rt.burst_delay_of(row)
+
+
+def burst_delay_cell(cameo_row, rows):
+    """`now -> reference` for burst delay, marked as RECOVERED rather than projected.
+
+    ⭐ ADDED 2026-09-12 at the maintainer's request: "with damage per shot, burst, burst delay,
+    reload delay instead of just the DPS". That REVERSES an earlier instruction recorded in this
+    file — "the burst delay should be referenced but not in the reference map" — and the newer
+    one wins. The old claim is struck rather than left sitting next to the new behaviour.
+
+    ⚠ THIS CELL DELIBERATELY DOES NOT GO THROUGH `estimate_cell`. Every other target is normalised
+    against a per-source distribution before projection; burst delay has no such population,
+    because it is not a published statistic anywhere — it is derived per row. Forcing it through
+    that pipeline would mean inventing a distribution for it and would dress a recovered quantity
+    up as a projected one. The reference figure is the plain MEDIAN of whatever the assigned
+    reference rows recover, and the cell says exactly that in its tooltip.
+    """
+    cur = recovered_burst_delay(cameo_row)
+    vals = sorted(v for v in (recovered_burst_delay(r) for r in rows) if v is not None)
+    if cur is None and not vals:
+        return '<span class="muted">—</span>'
+    left = f'{cur:.0f}' if cur is not None else '<span class="muted">—</span>'
+    if not vals:
+        return (f'{left} <span class="muted">→</span> '
+                f'<span class="muted" title="no assigned reference carries a burst">—</span>')
+    mid = len(vals) // 2
+    med = vals[mid] if len(vals) % 2 else (vals[mid - 1] + vals[mid]) / 2
+    title = (f'median of {len(vals)} reference row(s) that carry a burst; RECOVERED from each '
+             f'row&#39;s own damage/dps/reload identity, not a normalised projection')
+    return (f'{left} <span class="muted">→</span> <span title="{title}">{med:.0f}'
+            f'<small class="evidence">{len(vals)} recovered</small></span>')
+
+
+def dps_verifier_cell(cameo_row, rows, tgt):
+    """Total DPS as R1's GUARD RAIL: never a target, only a verdict on the components.
+
+    Three things can come back, and the middle one is why the ruling exists:
+
+      no change / a ratio  composing the component targets moves DPS by this much.
+      DISAGREES            the components and the independent DPS projection tell materially
+                           different stories. `td_gdi_mammothtank` produced the ruling: the
+                           DPS projection alone said +73.7%, damage-plus-reload said +21.2%,
+                           1.43x apart. Neither is wrong — they are separate votes, and a
+                           human picks.
+      EXTREME              the composed move alone exceeds EXTREME_RATIO.
+
+    ⭐ THE CONVENTION IS KNOWN, SO THE VERIFIER IS NOT WITHHELD. A parallel fix (`41d0dad57`)
+    made this cell fail closed on the premise that "the source corpus currently lacks that
+    compatible evidence", which would print WITHHELD on every row. The premise is falsifiable and
+    the AUTHORED YAML falsifies it: `td_gdi_mammothtank_120mmdualhv` declares `Damage: 16000`,
+    `Burst: 2`, `BurstDelays: 8`, `ReloadDelay: 72` and the snapshot carries `w_damage` 32,000 —
+    so Cameo stores the burst TOTAL, provably, and `td_gdi_mlrs_227mm` (8,000 x 6 = 48,000) says
+    the same. The cure for an ambiguous unit is to resolve it, not to stop reporting.
+
+    So rows are normalised to per shot at construction (`reference_distribution.to_per_shot`) and
+    there is only ONE convention downstream. What IS kept from that fix is its genuinely better
+    refusal: a recovered burst time below zero means the row's own DPS identity is shorter than
+    its ReloadDelay, which is impossible, and clamping it to zero would certify a broken timing
+    model. That still withholds.
+
+    Burst delays ARE in the cycle and, as of 2026-09-12, are also their own column — see
+    `burst_delay_cell`, which supersedes the earlier "referenced but not in the reference map"
+    instruction (maintainer, 2026-09-12: "with damage per shot, burst, burst delay, reload delay
+    instead of just the DPS").
+    """
+    keys = ("w_damage", "w_burst", "w_reload")
+    cur = {k: cameo_row.get(k) for k in keys}
+    cur["w_dps"] = cameo_row.get("w_dps")
+    comp = {k: _cell_value(tgt.get(k)) for k in keys}
+    g = rt.dps_guard(cur, comp, _cell_value(tgt.get("w_dps")))
+    if g is None:
+        return ('<span class="muted" title="withheld: explicit damage convention and complete '
+                'burst-delay evidence required">WITHHELD</span>')
+    pct = f'{g["composed_ratio"] * 100:.0f}%'
+    bd = f'burst delay {g["burst_delay_per_shot"]:.0f}t/shot (recovered)'
+    if g["verdict"] == "ok":
+        tag = (f'<span class="tag" title="{bd}">no change</span>'
+               if abs(g["composed_ratio"] - 1) < 0.02
+               else f'<span class="tag" title="{bd}">{pct} of now</span>')
+    elif g["verdict"] == "extreme":
+        tag = (f'<b class="warn" title="the composed move alone exceeds '
+               f'{rt.EXTREME_RATIO:g}x; {bd}">EXTREME {pct}</b>')
+    else:
+        tag = (f'<b class="warn" title="components say {pct} of now, the DPS projection says '
+               f'{g["projected_ratio"] * 100:.0f}% — {1 / g["disagreement"]:.2f}x apart; '
+               f'separate votes, pick one. {bd}">DISAGREES {pct}</b>')
+    return f'{g["composed_dps"]:.0f} {tag}'
+
+
+def _cell_value(cell):
+    """Pull the unrounded projection back out of a rendered estimate cell.
+
+    `estimate_cell` returns HTML, and the guard needs the NUMBER. Parsing display output would
+    be fragile, so `estimate_cell` stashes the value it used on the string via a data
+    attribute; absent that, there is nothing to verify and the guard abstains rather than
+    guessing.
+    """
+    if isinstance(cell, (int, float)):
+        return cell
+    if not isinstance(cell, str):
+        return None
+    m = re.search(r'data-v="([-0-9.eE+]+)"', cell)
+    return float(m.group(1)) if m else None
+
+
+def estimate_cell(rows, cameo_row, stat, dist, cdist, assigned_sources, flag_change=None):
+    """Show metric evidence separately from identity matches; never relax eligibility.
+
+    `flag_change` is the CURRENT value of an integer-valued stat. When given, the cell marks
+    whether the reference target would actually MOVE it once snapped to its grid, and shows
+    the unrounded projection in the tooltip. That distinction is the whole point for `Burst`:
+    its raw target on `td_gdi_mammothtank` is **1.67**, which `num()` renders as "2" -- the
+    same as the current value -- so the column reads as a change when it is not one. Burst may
+    not be touched without the maintainer's explicit permission, so "would this move?" is a
+    FLAG, not a routine number, and it has to be legible at a glance in the big table.
+    """
     try:
         _, value, used = rt.target_for(rows, cameo_row, stat, dist, cdist) if rows else (None, None, 0)
         failure = None
@@ -148,8 +381,21 @@ def estimate_cell(rows, cameo_row, stat, dist, cdist, assigned_sources):
                        'No usable source projection under the current evidence rules.')
     else:
         explanation = 'Sources counted once after pooling eligible variants; Cameo self-vote, if eligible, is additional.'
+    badge = ""
+    if flag_change is not None and value is not None:
+        explanation += f' Unrounded projection {value:.4g}.'
+        moved = round(value) != round(flag_change)
+        badge = (f' <b class="warn" title="needs explicit maintainer permission">'
+                 f'would change {round(flag_change):g}&rarr;{round(value):g}</b>' if moved
+                 else ' <span class="tag" title="raw target rounds to the current value">'
+                      'no change</span>')
     tooltip = html.escape(explanation + (' ' + '; '.join(reasons) if reasons else ''), quote=True)
-    return f'<span title="{tooltip}">{num(value)}<small class="evidence">{status}</small></span>'
+    # `data-v` carries the UNROUNDED projection so the DPS verifier can compose the component
+    # targets arithmetically. Re-deriving it by parsing the displayed number would silently
+    # feed the guard a rounded value, and rounding is exactly what hid the burst 1.67 -> "2".
+    dv = "" if value is None else f' data-v="{value:.10g}"'
+    return (f'<span{dv} title="{tooltip}">{num(value)}'
+            f'<small class="evidence">{status}</small></span>{badge}')
 
 
 def weapon_calculation_details(rows, cameo_actor=None):
@@ -170,6 +416,12 @@ def weapon_calculation_details(rows, cameo_actor=None):
         proof = profile.get((row.get('source'), row.get('id')))
         cycle = row.get('w_cycle_evidence')
         fields = [('weapon', row.get('weapon')),
+            # ⚠ THESE ARE REFERENCE ROWS, AND THEY REALLY ARE PER SHOT. A parallel fix
+            # relabelled this "source damage coordinate ... not per-shot", which is true of the
+            # CAMEO snapshot and false of every peer: `extract_peer_units` sets
+            # `w_damage = audit["damage_pos"]` and rates it `damage_pos * burst / cycle`. OpenRA
+            # TD's `HTNK` proves it arithmetically — read as a burst total it gives a 24-tick
+            # cycle against a declared ReloadDelay of 40, which cannot happen.
                   ('damage per shot (raw source units)', row.get('w_damage')),
                   ('reload delay / ROF (source ticks)', row.get('w_reload')),
                   ('burst', row.get('w_burst'))]
@@ -270,14 +522,20 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
         # the virtual anchor will be derived from (EXTRAPOLATION_PROGRAM.md), so a row whose class
         # looks wrong is a finding BEFORE any anchor is signed — and range/damage were the two stats
         # a reference actually moves that the table never showed.
-        # Keep the map itself to the five direct actor stats requested by Aedis.
+        # ⭐ BURST added 2026-09-12 (sixth column). Burst delays deliberately stay OUT of the map at
+        # the maintainer's request — they are collected and reported separately, not shown here.
+        # Keep the map itself to the direct actor stats requested by Aedis.
         # Mapping confidence, class labels and generic weapon/delivery evidence
         # are emitted below as a separate review section.
         body.append('<table><thead><tr><th>Cameo actor</th>'
                     '<th class="n">HP (now → reference)</th>'
                     '<th class="n">Speed (now → reference)</th>'
                     '<th class="n">Range (now → reference)</th>'
-                    '<th class="n">damage/tick (now → reference)</th>'
+                    '<th class="n">Damage/cycle <span class="muted">= shot &#215; burst</span></th>'
+                    '<th class="n">Reload (now → reference)</th>'
+                    '<th class="n">Burst (now → reference)</th>'
+                    '<th class="n">Burst delay <span class="muted">t/shot, recovered</span></th>'
+                    '<th class="n">DPS verifier</th>'
                     '<th class="n">Cost (now → reference)</th>'
                     '</tr></thead><tbody>')
         for a in group:
@@ -318,6 +576,23 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
             selected_dist, selected_cdist = (hero_context if c.get('hero') and hero_context else (dist, cdist))
             tgt = {stat: estimate_cell(rows, c, stat, selected_dist, selected_cdist, len(srcs))
                    for stat in ('hp', 'speed', 'cost', 'w_range', 'w_dps')}
+            # ⭐ R1, 2026-09-12: the WEAPON COMPONENTS are the referenced inputs and total DPS
+            # is only a guard rail. Damage and reload therefore get their own columns, and the
+            # old `damage/tick` column becomes the verifier — it reports whether composing the
+            # components produces something extreme, or something that disagrees with what the
+            # DPS projection independently claims (the mammoth was 1.43x apart).
+            for stat in rt.COMPONENT_STATS:
+                if stat == 'w_burst':
+                    continue
+                tgt[stat] = estimate_cell(rows, c, stat, selected_dist, selected_cdist,
+                                          len(srcs), flag_change=c.get(stat))
+            # ⭐ BURST added 2026-09-12 at the maintainer's request: "update the reference map to
+            # also display burst since that's important and if it should change I should know it
+            # in the big reference map table". It carries `flag_change` because `Burst` may not be
+            # touched without explicit permission, so the actionable fact is whether the target
+            # MOVES it, not the number — and the raw target rounds, which hid that distinction.
+            tgt['w_burst'] = estimate_cell(rows, c, 'w_burst', selected_dist, selected_cdist,
+                                           len(srcs), flag_change=c.get('w_burst'))
             note = ' <span class="tag">chassis-only</span>' if a in chassis_only else ""
             if c.get('hero'):
                 note += ' <span class="tag">hero-only model</span>'
@@ -331,7 +606,11 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
                 f'<td class="n">{num(c.get("hp"))} <span class="muted">→</span> {tgt["hp"]}</td>'
                 f'<td class="n">{num(c.get("speed"))} <span class="muted">→</span> {tgt["speed"]}</td>'
                 f'<td class="n">{num(c.get("w_range"))} <span class="muted">→</span> {tgt["w_range"]}</td>'
-                f'<td class="n">{num(c.get("w_dps"))}{arm_note(a, led_arms)} <span class="muted">→</span> {tgt["w_dps"]}</td>'
+                f'<td class="n">{num(c.get("w_damage"))} {burst_note(c)}{arm_note(a, led_arms)} <span class="muted">→</span> {tgt["w_damage"]}</td>'
+                f'<td class="n">{num(c.get("w_reload"))} <span class="muted">→</span> {tgt["w_reload"]}</td>'
+                f'<td class="n">{num(c.get("w_burst"))} <span class="muted">→</span> {tgt["w_burst"]}</td>'
+                f'<td class="n">{burst_delay_cell(c, rows)}</td>'
+                f'<td class="n">{dps_verifier_cell(c, rows, tgt)}</td>'
                 f'<td class="n">{num(c.get("cost"))} <span class="muted">→</span> {tgt["cost"]}</td></tr>')
         body.append("</tbody></table>")
         if reference_details:
@@ -367,7 +646,25 @@ def main() -> int:
     cdist = rt.cameo_context()
     doc = json.loads(ASSIGN.read_text(encoding="utf-8"))
     assignment, chassis_only = doc["assignment"], doc.get("chassis_only", {})
-    attached = rt.expand_families(rt.attach(assignment, rt.peer_index(peers)), peers)
+    # ⚠ THE INDEX MUST HOLD EVERY POOL THE ASSIGNMENT COULD DRAW FROM. It is built from
+    # `peer_rows()`, which by construction EXCLUDES the hero and variant lanes — so a row either
+    # lane assigned cannot be recovered here and silently renders as no reference at all. The
+    # variant lane made that visible: `td_gdi_humveemkii` holds DTA's `JEEPPTNK` and the page
+    # showed the cell empty, which is the worst of both worlds — a mapping that exists in the
+    # data and reads as missing work in the report.
+    #
+    # ⛔ AND I MADE EXACTLY THAT MISTAKE AGAIN ONE LINE LATER, which is why this comment is now
+    # a list rather than a sentence. The first fix added the VARIANT lane and forgot the HERO
+    # lane, so `td_gdi_exosuit` reported "1 of 2 sources used" on HP, speed AND cost while DTA's
+    # `XO` — a perfectly good row with hp 7,000, speed 6, cost 2,000 — sat unrecoverable. The
+    # maintainer spotted it from the map. Every lane the ASSIGNMENT can write must be here:
+    #   peer_rows()          the ordinary corpus
+    #   peer_variant_rows()  chassis variants the population rule drops
+    #   peer_hero_rows()     heroes and build-limited units
+    # ⚠ This is the RECOVERY index and is independent of `--include-heroes`, which controls a
+    # separate hero comparison POPULATION. Recovering a row is not the same as pooling it.
+    index_rows = peers + rd.peer_variant_rows() + rd.peer_hero_rows()
+    attached = rt.expand_families(rt.attach(assignment, rt.peer_index(index_rows)), peers)
     hero_context = None
     if args.include_heroes:
         hero_peers = [r for r in rd.peer_hero_rows() if r.get('hero') is True]

@@ -139,8 +139,6 @@ TSTibBazooka:
 TSStankTusk:
 	Inherits@missilerole: ^Warhead_MissileAP_Medium
 	Inherits@finalmain: ^Compatibility_MissileHE_MediumFlat
-	Inherits@wh: ^Warhead_CannonHE_Medium
-	Inherits@wh2: ^Warhead_MissileHE_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileHE_Medium
 	Range: 6385
@@ -174,8 +172,6 @@ TSStankTusk:
 TSSBoatTusk:
 	Inherits@missilerole: ^Warhead_MissileAP_Medium
 	Inherits@finalmain: ^Compatibility_MissileHE_MediumFlat
-	Inherits@wh: ^Warhead_CannonHE_Medium
-	Inherits@wh2: ^Warhead_MissileHE_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileHE_Medium
 	Range: 6385
@@ -257,7 +253,6 @@ TSStankTibTusk:
 
 TSNODRedEye:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
-	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileAP_Heavy
 	ReloadDelay: 50
@@ -277,7 +272,6 @@ TSNODRedEye:
 	Warhead@2Eff: CreateEffect
 		ImpactSounds: expnew13.aud
 		ImpactActors: false
-	-Warhead@MissileAP_Heavy:
 	Warhead@MissileAA_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
