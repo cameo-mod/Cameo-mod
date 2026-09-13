@@ -1,5 +1,7 @@
 import collections
+import contextlib
 import hashlib
+import io
 import json
 import pathlib
 import sys
@@ -20,7 +22,6 @@ from audit_three_way_split import RAW_SPLIT_BASELINE, main_warheads
 from audit_warhead_split import BROADCAST_BASELINE
 from miniyaml import Ruleset
 from safe_rename import load_map
-from reviewed_weapon_history import LaterProfileView
 
 
 ACCEPTED = {
@@ -28,6 +29,13 @@ ACCEPTED = {
         31, "52ddc6c3670fd48cc02c82d4de5491d9278004f6e51828f3004471ac6f58690a"),
     "percentage_damage": (
         29, "b947767d35f79bac2e778cd02d3d371ba3ab43f7bcf7a68d040d5fe4663d52c6"),
+}
+
+MACHINE_CURRENT_MAIN_OVERRIDES = {
+    "HMGstealth_upgrade": "Laser_Heavy",
+    "JHighVWaveforce": "Waveforce_Heavy",
+    "JapanSpeedBoatGunWaveforce": "Waveforce_Heavy",
+    "light_inf_lmg_ordos_upgrade": "Laser_Heavy_Flat",
 }
 
 
@@ -41,15 +49,17 @@ class DeliveryIdentityProfileConsolidationTests(unittest.TestCase):
             for change in changes:
                 cls.by_kind[change[0]][weapon] = change[1:]
 
-    def test_converters_are_fully_applied(self):
-        # The later HMG laser role must keep the production converter closed.
-        with self.assertRaisesRegex(RuntimeError, 'HMGstealth_upgrade: expected both bullet profiles'):
-            machineguns.validate_result()
-        view = LaterProfileView(self, self.rules)
-        with patch.object(machineguns, 'Ruleset', return_value=view):
-            machineguns.validate_result()
-        with patch.object(delivery, 'Ruleset', return_value=view):
-            delivery.validate_result()
+    def test_retired_delivery_cli_refuses_before_loading_or_writing_rules(self):
+        for argv in ([], ["--apply"]):
+            stderr = io.StringIO()
+            with (
+                    patch.object(delivery, "Ruleset") as ruleset,
+                    patch.object(delivery, "apply_changes") as apply_changes,
+                    contextlib.redirect_stderr(stderr)):
+                self.assertEqual(1, delivery.main(argv))
+            ruleset.assert_not_called()
+            apply_changes.assert_not_called()
+            self.assertIn("one-shot delivery-identity migration has already landed", stderr.getvalue())
 
     def test_report_covers_exactly_the_selected_definitions(self):
         selected = set(machineguns.selections(self.rules)) | set(delivery.selections(self.rules))
@@ -93,24 +103,24 @@ class DeliveryIdentityProfileConsolidationTests(unittest.TestCase):
         }
         for weapon in ground:
             mains = main_warheads(self.rules.resolve_weapon(weapon))
-            self.assertIn("Bullet_MediumFlatCompatibility", mains, weapon)
-            self.assertNotIn("Flak_MediumFlatCompatibility", mains, weapon)
+            self.assertIn("Bullet_Medium_Flat", mains, weapon)
+            self.assertNotIn("Flak_Medium_Flat", mains, weapon)
         for weapon in air:
             mains = main_warheads(self.rules.resolve_weapon(weapon))
-            self.assertIn("Flak_MediumFlatCompatibility", mains, weapon)
-            self.assertNotIn("Bullet_MediumFlatCompatibility", mains, weapon)
+            self.assertIn("Flak_Medium_Flat", mains, weapon)
+            self.assertNotIn("Bullet_Medium_Flat", mains, weapon)
 
     def test_selected_old_profile_pairs_are_absent(self):
         for weapon, destination in machineguns.selections(self.rules).items():
-            mains = set(main_warheads(LaterProfileView(self, self.rules).resolve_weapon(weapon)))
+            mains = set(main_warheads(self.rules.resolve_weapon(weapon)))
             self.assertTrue(mains.isdisjoint(machineguns.PAIR), weapon)
-            expected = machineguns.FINALIZED_DOWNSTREAM.get(
-                weapon, (f"{destination}FlatCompatibility", 0, 0))[0]
+            expected = MACHINE_CURRENT_MAIN_OVERRIDES.get(
+                weapon, f"{destination}_Flat")
             self.assertIn(expected, mains, weapon)
         for weapon, (destination, pair, _root) in delivery.selections(self.rules).items():
-            mains = set(main_warheads(LaterProfileView(self, self.rules).resolve_weapon(weapon)))
+            mains = set(main_warheads(self.rules.resolve_weapon(weapon)))
             self.assertTrue(mains.isdisjoint(pair), weapon)
-            self.assertIn(f"{destination}FlatCompatibility", mains, weapon)
+            self.assertIn(f"{destination}_Flat", mains, weapon)
 
     def test_routing_and_overflow_hazards_remain_unconverted(self):
         self.assertEqual(

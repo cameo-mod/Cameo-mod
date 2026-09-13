@@ -42,6 +42,13 @@ from consolidate_reviewed_weapon_roots import (  # noqa: E402
 from miniyaml import Ruleset  # noqa: E402
 
 
+RETIRED_MESSAGE = (
+    "this one-shot corroborated-role migration has already landed and its compatibility "
+    "identifiers were retired by R12; the writer is retained only for imported helpers and "
+    "historical regression fixtures"
+)
+
+
 # root: (destination profile, exact concrete descendant closure, evidence)
 ROOTS = {
     "AsianPelicanMG": ("Bullet_Medium", {"AsianPelicanMG_elite"}, "name"),
@@ -329,7 +336,7 @@ def selections(rs: Ruleset) -> dict[str, str]:
                     f"{root}: expected sole canonical family {destination}; "
                     f"found {sorted(canonical)}")
         elif evidence == "existing-roleflat":
-            compatibility = f"^Compatibility_{destination}Flat"
+            compatibility = f"^Warhead_{destination}_Flat"
             if not any(str(child.value).strip() == compatibility
                        for child in rs.weapon(root).children
                        if child.key == "Inherits" or child.key.startswith("Inherits@")):
@@ -665,24 +672,12 @@ def apply_changes(rs: Ruleset, selected: dict[str, str], plans) -> None:
     cleanup_duplicate_template_inherits(set(selected))
 
 
-def main() -> int:
+def main(argv=None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--apply", action="store_true")
-    args = parser.parse_args()
-    rules = Ruleset(ROOT)
-    selected = selections(rules)
-    plans, applied = inspect(rules, selected)
-    if applied:
-        print(f"Already consolidated {len(selected)} concrete definitions")
-        return 0
-    print(f"{len(ROOTS)} roots; {len(selected)} concrete definitions")
-    if not args.apply:
-        print("Dry run: closures, routes, states, and percentage arithmetic pass")
-        return 0
-    apply_changes(rules, selected, plans)
-    validate_result()
-    print(f"Applied and validated {len(selected)} concrete definitions")
-    return 0
+    parser.parse_args(argv)
+    print(f"REFUSED: {RETIRED_MESSAGE}", file=sys.stderr)
+    return 1
 
 
 if __name__ == "__main__":
