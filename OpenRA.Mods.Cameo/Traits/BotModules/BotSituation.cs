@@ -22,12 +22,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	public sealed class EnemyProfile
 	{
 		public OpenRA.Player Player;
+		public string Name;
+		public string FactionName;
 		public bool Alive;
 		public int ArmyValue;
 		public int InfantryValue, VehicleValue, AirValue, NavalValue;
 		public int DefenceCount, DefenceValue;
 		public int TechBuildings;
 		public int ProductionBuildings;
+		public int BuildingCount;
 		public int ExpansionClusters;
 		public int Harvesters, Refineries;
 		public int PressureValue;
@@ -53,6 +56,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public int DefenceFractionHint, ExpansionAppetiteHint;
 		internal int OwnArmyValue, OwnDefenceValue, OwnBuildings, OwnHarvesters;
 		internal int OwnKillsCostWindow, OwnDeathsCostWindow;
+		internal string OwnPersonality = "";
 	}
 
 	public class MasterAiBotModuleInfo : ConditionalTraitInfo
@@ -84,6 +88,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public readonly int TechEnemyTechBuildings = 4;
 		public readonly int RushMaxEnemyArmyValue = 1500;
 		public readonly int RushMaxEnemyDefenceCount = 2;
+		public readonly int EliminationBuildingSaturation = 8;
 
 		public override object Create(ActorInitializer init) { return new MasterAiBotModule(init.Self, this); }
 	}
@@ -143,7 +148,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		void Rebuild(int tick)
 		{
 			var actors = player.World.Actors.Where(a => a.IsInWorld && !a.IsDead).ToArray();
-			var ownActors = actors.Where(a => a.Owner == player).ToArray();
+			var actorsByOwner = actors.GroupBy(a => a.Owner).ToDictionary(g => g.Key, g => g.ToArray());
+			var ownActors = actorsByOwner.TryGetValue(player, out var ownedActors) ? ownedActors : Array.Empty<Actor>();
 			var ownBuildings = ownActors.Where(IsBuilding).ToArray();
 			var ownArmy = ownActors.Where(IsCombatUnit).Sum(Value);
 			var ownDefence = ownBuildings.Where(IsDefence).Sum(Value);
@@ -151,8 +157,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var profiles = new Dictionary<OpenRA.Player, EnemyProfile>();
 			foreach (var enemy in player.World.Players.Where(IsEligible).Where(p => p != player && player.RelationshipWith(p) == PlayerRelationship.Enemy))
 			{
-				var enemyActors = actors.Where(a => a.Owner == enemy).ToArray();
-				var profile = BuildProfile(enemy, enemyActors, ownBuildings, ownArmy, tick);
+				var enemyActors = actorsByOwner.TryGetValue(enemy, out var ownedEnemyActors) ? ownedEnemyActors : Array.Empty<Actor>();
+				var profile = BuildProfile(enemy, enemyActors, ownBuildings, tick);
 				profiles.Add(enemy, profile);
 			}
 
@@ -164,16 +170,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					? BotUrgency.Pressured : BotUrgency.Normal;
 			currentUrgency = urgency;
 
+			var econTotal = profiles.Values.Where(p => p.Alive).Sum(EconProxy);
+			foreach (var profile in profiles.Values.Where(p => p.Alive))
+				profile.Score = TargetScore(profile, ownArmy, enemyArmy, AlliedCommitments(profile.Player), econTotal, Info);
+
 			var decision = tick - lastDecisionTick >= Math.Max(1, Info.DecisionInterval);
 			OpenRA.Player target = incumbentTarget;
 			if (decision)
 			{
-				foreach (var profile in profiles.Values.Where(p => p.Alive))
-					profile.Score = TargetScore(profile, ownArmy, enemyArmy, AlliedCommitments(profile.Player), Info);
-
-				target = ChooseTarget(profiles.Values.Where(p => p.Alive && p.NearestCells >= 0), tick);
+				var candidates = profiles.Values.Where(p => p.Alive && p.NearestCells >= 0).ToArray();
+				var incumbent = candidates.FirstOrDefault(p => p.Player == incumbentTarget);
+				var chosen = ChooseTarget(candidates, incumbent, incumbentSince, tick, Info);
+				target = chosen?.Player;
+				if (target != incumbentTarget)
+					incumbentSince = tick;
 				incumbentTarget = target;
-				incumbentSince = tick;
 				incumbentPersonality = CandidatePersonality(urgency, target == null ? null : profiles[target], ownArmy,
 					profiles.Values, incumbentPersonality, Info);
 				lastDecisionTick = tick;
@@ -195,7 +206,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				OwnBuildings = ownBuildings.Length,
 				OwnHarvesters = ownHarvesters,
 				OwnKillsCostWindow = KillsCostWindow,
-				OwnDeathsCostWindow = DeathsCostWindow
+				OwnDeathsCostWindow = DeathsCostWindow,
+				OwnPersonality = player.PlayerActor.TraitOrDefault<AiMatchLogRecorder>()?.CurrentPersonality ?? ""
 			};
 			Situation = situation;
 			pendingSituations.Add(situation);
@@ -222,7 +234,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			while (killSamples.Count > 0 && tick - killSamples.Peek().Tick > Info.LossWindowTicks)
 				killSamples.Dequeue();
 
-			var liveProduction = player.World.Actors
+			var liveProduction = player.World.ActorsHavingTrait<Production>()
 				.Where(a => a.IsInWorld && !a.IsDead && a.Owner == player && a.Info.HasTraitInfo<ProductionInfo>())
 				.Select(a => a.ActorID)
 				.ToHashSet();
@@ -241,17 +253,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				: BotUrgency.Normal;
 		}
 
-		EnemyProfile BuildProfile(OpenRA.Player enemy, Actor[] enemyActors, Actor[] ownBuildings, int ownArmy, int tick)
+		EnemyProfile BuildProfile(OpenRA.Player enemy, Actor[] enemyActors, Actor[] ownBuildings, int tick)
 		{
 			var profile = new EnemyProfile
 			{
 				Player = enemy,
+				Name = enemy.InternalName,
+				FactionName = enemy.Faction?.InternalName ?? "",
 				Alive = enemy.WinState == WinState.Undefined && enemyActors.Length > 0,
 				NearestCells = -1,
-				LastSeenTick = tick
+				LastSeenTick = tick,
+				BuildingCount = enemyActors.Count(IsBuilding)
 			};
 			var enemyBuildings = enemyActors.Where(IsBuilding).ToArray();
 			var combat = enemyActors.Where(IsCombatUnit).ToArray();
+			profile.Harvesters = enemyActors.Count(a => a.Info.HasTraitInfo<HarvesterInfo>());
 			foreach (var actor in combat)
 			{
 				var value = Value(actor);
@@ -286,8 +302,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					profile.TechBuildings++;
 				if (building.Info.HasTraitInfo<ProductionInfo>())
 					profile.ProductionBuildings++;
-				if (building.Info.HasTraitInfo<HarvesterInfo>())
-					profile.Harvesters++;
 				if (building.Info.HasTraitInfo<RefineryInfo>())
 					profile.Refineries++;
 			}
@@ -317,17 +331,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return seeds.Count;
 		}
 
-		OpenRA.Player ChooseTarget(IEnumerable<EnemyProfile> candidates, int tick)
+		internal static EnemyProfile ChooseTarget(IEnumerable<EnemyProfile> candidates, EnemyProfile incumbent,
+			int incumbentSince, int tick, MasterAiBotModuleInfo info)
 		{
 			var list = candidates.ToList();
-			if (incumbentTarget != null && tick - incumbentSince < Info.MinimumHoldTicks)
+			if (incumbent != null && tick - incumbentSince < info.MinimumHoldTicks)
 			{
-				var incumbent = list.FirstOrDefault(p => p.Player == incumbentTarget);
-				if (incumbent != null)
-					return incumbentTarget;
+				if (list.Contains(incumbent))
+					return incumbent;
 			}
-			return list.OrderByDescending(p => Momentum(p, p.Player == incumbentTarget ? Info.IncumbentMomentum : 0))
-				.ThenBy(p => p.Player.InternalName, StringComparer.Ordinal).FirstOrDefault()?.Player;
+			return list.OrderByDescending(p => Momentum(p, p == incumbent ? info.IncumbentMomentum : 0))
+				.ThenBy(p => p.Name ?? p.Player?.InternalName ?? "", StringComparer.Ordinal).FirstOrDefault();
 		}
 
 		internal static int Momentum(EnemyProfile profile, int bonus)
@@ -345,16 +359,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		internal static int TargetScore(EnemyProfile profile, int ownArmy, int enemyArmy, MasterAiBotModuleInfo info)
-			=> TargetScore(profile, ownArmy, enemyArmy, 0, info);
+			=> TargetScore(profile, ownArmy, enemyArmy, 0, 0, info);
 
-		static int TargetScore(EnemyProfile profile, int ownArmy, int enemyArmy, int ally, MasterAiBotModuleInfo info)
+		static int TargetScore(EnemyProfile profile, int ownArmy, int enemyArmy, int ally, long econTotal,
+			MasterAiBotModuleInfo info)
 		{
 			var reach = profile.NearestCells < 0 ? 0 : 100 - Saturate(profile.NearestCells, 25);
 			var weak = Saturate(ownArmy, profile.ArmyValue);
 			var econProxy = profile.Harvesters + profile.Refineries * 2;
-			var econTotal = Math.Max(1, enemyArmy);
-			var econ = ClampSignal((long)econProxy * 100 / econTotal);
-			var kill = 100 - Saturate(profile.DefenceCount, 5);
+			var econ = econTotal <= 0 ? 0 : ClampSignal((long)econProxy * 100 / econTotal);
+			var kill = 100 - Saturate(profile.BuildingCount, info.EliminationBuildingSaturation);
 			var fort = Saturate(profile.DefenceValue, 1500);
 			var total = Math.Max(1, info.WeightReach + info.WeightWeak + info.WeightEcon + info.WeightKill + info.WeightDefence + info.WeightAlly);
 			var score = (long)info.WeightReach * reach + (long)info.WeightWeak * weak + (long)info.WeightEcon * econ +
@@ -408,6 +422,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		static bool IsEligible(OpenRA.Player p) => !p.NonCombatant && p.Playable;
+		static int EconProxy(EnemyProfile profile) => profile.Harvesters + profile.Refineries * 2;
 		static bool IsBuilding(Actor a) => a.Info.HasTraitInfo<BuildingInfo>();
 		bool IsDefence(Actor a) => IsBuilding(a) && (a.Info.HasTraitInfo<AttackBaseInfo>() ||
 			a.GetEnabledTargetTypes().Overlaps(Info.DefenceTargetTypes));

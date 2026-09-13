@@ -8,8 +8,8 @@
  */
 #endregion
 
+using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -22,6 +22,30 @@ namespace OpenRA.Mods.Cameo.Test
 	[TestFixture]
 	public sealed class MasterAiBotModuleTest
 	{
+		sealed class EnemyProfiles : IReadOnlyDictionary<OpenRA.Player, EnemyProfile>
+		{
+			readonly EnemyProfile profile;
+
+			public EnemyProfiles(EnemyProfile profile) { this.profile = profile; }
+			public IEnumerable<OpenRA.Player> Keys { get { yield return null; } }
+			public IEnumerable<EnemyProfile> Values { get { yield return profile; } }
+			public int Count => 1;
+			public EnemyProfile this[OpenRA.Player key] => profile;
+			public bool ContainsKey(OpenRA.Player key) => true;
+			public bool TryGetValue(OpenRA.Player key, out EnemyProfile value)
+			{
+				value = profile;
+				return true;
+			}
+
+			public IEnumerator<KeyValuePair<OpenRA.Player, EnemyProfile>> GetEnumerator()
+			{
+				yield return new KeyValuePair<OpenRA.Player, EnemyProfile>(null, profile);
+			}
+
+			IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+		}
+
 		static BotSituation Situation(BotUrgency urgency = BotUrgency.Normal, string personality = "",
 			OpenRA.Player target = null, IReadOnlyDictionary<OpenRA.Player, EnemyProfile> enemies = null)
 		{
@@ -41,7 +65,7 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var b = new StringBuilder();
 			AiSituationLogWriter.AppendSituation(b, "game", "", "map", "Multi0", "td_gdi", "medium", "rush",
-				Situation(), 5400, 1200, 14, 4, 900, 1500);
+				Situation());
 			using var doc = JsonDocument.Parse(b.ToString());
 			Assert.That(doc.RootElement.GetProperty("kind").GetString(), Is.EqualTo("situation"));
 			Assert.That(doc.RootElement.GetProperty("main_target").GetString(), Is.Empty);
@@ -59,7 +83,8 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var enemy = new EnemyProfile
 			{
-				Player = (OpenRA.Player)RuntimeHelpers.GetUninitializedObject(typeof(OpenRA.Player)),
+				Name = "Multi1",
+				FactionName = "td_nod",
 				Alive = true,
 				ArmyValue = 8100,
 				InfantryValue = 2000,
@@ -69,6 +94,7 @@ namespace OpenRA.Mods.Cameo.Test
 				DefenceValue = 3500,
 				TechBuildings = 4,
 				ProductionBuildings = 3,
+				BuildingCount = 9,
 				ExpansionClusters = 2,
 				Harvesters = 5,
 				Refineries = 2,
@@ -80,14 +106,35 @@ namespace OpenRA.Mods.Cameo.Test
 			};
 			var b = new StringBuilder();
 			var situation = Situation(BotUrgency.Pressured, "steamroller", null,
-				new Dictionary<OpenRA.Player, EnemyProfile> { [enemy.Player] = enemy });
+				new EnemyProfiles(enemy));
 			AiSituationLogWriter.AppendSituation(b, "game", "", "map", "Multi0", "td_gdi", "medium", "rush",
-				situation, 5400, 1200, 14, 4, 900, 1500);
+				situation);
 			using var doc = JsonDocument.Parse(b.ToString());
 			var enemyJson = doc.RootElement.GetProperty("enemies")[0];
+			Assert.That(enemyJson.GetProperty("name").GetString(), Is.EqualTo("Multi1"));
+			Assert.That(enemyJson.GetProperty("faction").GetString(), Is.EqualTo("td_nod"));
 			Assert.That(enemyJson.GetProperty("army_value").GetInt32(), Is.EqualTo(8100));
+			Assert.That(enemyJson.GetProperty("buildings").GetInt32(), Is.EqualTo(9));
 			Assert.That(doc.RootElement.GetProperty("urgency").GetString(), Is.EqualTo("pressured"));
 			Assert.That(doc.RootElement.GetProperty("personality_candidate").GetString(), Is.EqualTo("steamroller"));
+			Assert.That(enemyJson.EnumerateObject().Select(p => p.Name), Is.EqualTo(new[]
+			{
+				"name", "faction", "alive", "army_value", "infantry_value", "vehicle_value", "air_value",
+				"naval_value", "defence_count", "defence_value", "tech_buildings", "production_buildings",
+				"buildings", "expansion_clusters", "harvesters", "refineries", "pressure_value",
+				"stealth_share", "nearest_cells", "last_seen_tick", "score"
+			}));
+		}
+
+		[TestCase(false, false, true, true)]
+		[TestCase(true, false, true, false)]
+		[TestCase(false, true, true, false)]
+		[TestCase(false, false, false, false)]
+		public void SituationLogEligibilityExcludesReplaySaveAndNonHost(bool replay, bool save, bool host, bool expected)
+		{
+			Assert.That(AiSituationLogWriter.Eligible(WorldType.Regular, replay, save, host), Is.EqualTo(expected));
+			Assert.That(AiSituationLogWriter.Eligible(WorldType.Shellmap, replay, save, host), Is.False);
+			Assert.That(AiSituationLogWriter.Eligible(WorldType.Editor, replay, save, host), Is.False);
 		}
 
 		[Test]
@@ -111,6 +158,48 @@ namespace OpenRA.Mods.Cameo.Test
 				Assert.That(MasterAiBotModule.TargetScore(profile, int.MaxValue, int.MaxValue, info), Is.InRange(0, 1000));
 			Assert.That(MasterAiBotModule.Momentum(new EnemyProfile { Score = 1000 }, info.IncumbentMomentum),
 				Is.EqualTo(1000));
+		}
+
+		[Test]
+		public void TargetChoiceHoldsIncumbentWithinMinimumHold()
+		{
+			var info = new MasterAiBotModuleInfo();
+			var incumbent = new EnemyProfile { Name = "Multi0", Score = 100, NearestCells = 10 };
+			var better = new EnemyProfile { Name = "Multi1", Score = 900, NearestCells = 10 };
+			Assert.That(MasterAiBotModule.ChooseTarget(new[] { incumbent, better }, incumbent, 1000, 1000 + info.MinimumHoldTicks - 1, info),
+				Is.SameAs(incumbent));
+		}
+
+		[Test]
+		public void TargetChoiceSelectsBetterCandidateAfterHold()
+		{
+			var info = new MasterAiBotModuleInfo();
+			var incumbent = new EnemyProfile { Name = "Multi0", Score = 100, NearestCells = 10 };
+			var better = new EnemyProfile { Name = "Multi1", Score = 900, NearestCells = 10 };
+			Assert.That(MasterAiBotModule.ChooseTarget(new[] { incumbent, better }, incumbent, 1000, 1000 + info.MinimumHoldTicks, info),
+				Is.SameAs(better));
+		}
+
+		[Test]
+		public void TargetChoiceSwitchesWhenIncumbentIsInvalid()
+		{
+			var info = new MasterAiBotModuleInfo();
+			var incumbent = new EnemyProfile { Name = "Multi0", Score = 100, NearestCells = -1 };
+			var better = new EnemyProfile { Name = "Multi1", Score = 900, NearestCells = 10 };
+			Assert.That(MasterAiBotModule.ChooseTarget(new[] { better }, incumbent, 1000, 1000 + 1, info),
+				Is.SameAs(better));
+		}
+
+		[Test]
+		public void TargetChoiceDoesNotExtendHoldWhenChoiceIsUnchanged()
+		{
+			var info = new MasterAiBotModuleInfo();
+			var incumbent = new EnemyProfile { Name = "Multi0", Score = 900, NearestCells = 10 };
+			var better = new EnemyProfile { Name = "Multi1", Score = 100, NearestCells = 10 };
+			var chosen = MasterAiBotModule.ChooseTarget(new[] { incumbent, better }, incumbent, 1000, 1000 + info.MinimumHoldTicks, info);
+			Assert.That(chosen, Is.SameAs(incumbent));
+			Assert.That(MasterAiBotModule.ChooseTarget(new[] { incumbent, better }, chosen, 1000,
+				1000 + info.MinimumHoldTicks + 1, info), Is.SameAs(incumbent));
 		}
 
 		[Test]

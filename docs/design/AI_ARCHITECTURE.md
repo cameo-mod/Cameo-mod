@@ -911,15 +911,16 @@ Disabled/nonpositive budget returns no pause; otherwise existing clamps and excl
 Cached results may wait for the next configured recalculation; no other local module may
 interpret that cache as synchronized world state or bypass it through a new production path.
 
-**Proposed, not loaded:** `MasterAiBotModule` alone would publish the immutable local snapshot
-at the §10.5 proposed cadence (emergency ~25, rebuild ~150, decisions ~1500 ticks).
-Observe-only deployment has **no consumers and no behavior changes**. Later consumers pull hints,
-not orders; no snapshot means old policy. `ScoutBotModule` remains a later owner of explicitly
+**Loaded, observe-only:** `MasterAiBotModule` publishes the immutable local snapshot
+at the §10.5 cadence (emergency ~25, rebuild ~150, decisions ~1500 ticks).
+It has **no consumers and no hint reads**, queues no orders, makes no synced-state changes,
+and logs candidate personality and target values only. `ScoutBotModule` remains a later owner of explicitly
 allocated scouting tasks after contact memory and the visibility gate (§11.3), not a current
 capability. `BotPersonalityController` would be the synced `IResolveOrder` bridge: validate
 the token, ignore repeats, and manage its condition through replayed orders. It must solve
 initial-token ownership with `GrantRandomCondition` before switching ships; reading an unsynced
-personality field from simulation code is forbidden. No controller is implemented by this contract.
+personality field from simulation code is forbidden. The master module is loaded only for observation;
+no controller is implemented by this contract.
 
 ```text
 Current synced world / rule data

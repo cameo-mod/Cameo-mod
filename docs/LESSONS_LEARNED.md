@@ -45,6 +45,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [⛔ A ZERO-BYTE audit report is a clean green board (2026-09-06)](#-a-zero-byte-audit-report-is-a-clean-green-board-2026-09-06)
 - [⛔ A 0% compliance row is a bug report about the CHECKER (2026-09-06)](#-a-0-compliance-row-is-a-bug-report-about-the-checker-2026-09-06)
 - [A hand-edit to generated output has a countdown on it (2026-09-05)](#a-hand-edit-to-generated-output-has-a-countdown-on-it-2026-09-05)
+- [Hand-built JSON emitters need native parse tests (2026-09-07)](#hand-built-json-emitters-need-native-parse-tests-2026-09-07)
 - [⛔ An override is a CANCELLATION — never judge it by the node it sits in (2026-09-06)](#-an-override-is-a-cancellation--never-judge-it-by-the-node-it-sits-in-2026-09-06)
 - [Walk the bisect back until the symptom is GONE, not until it appears (2026-09-07)](#walk-the-bisect-back-until-the-symptom-is-gone-not-until-it-appears)
 - [⛔ Fix the TOOL, not its output — six defects hid behind one patched map (2026-09-06)](#-fix-the-tool-not-its-output--six-defects-hid-behind-one-patched-map-2026-09-06)
@@ -1658,3 +1659,10 @@ in minutes, and it was not run.
 ⚠ **A bulk delete is the wrong shape for this class of cleanup entirely.** Whatever
 genuinely-dead nodes existed among those 2248 are still there after the revert; they
 have to be found per-node, by resolving each parent chain.
+
+## Hand-built JSON emitters need native parse tests (2026-09-07)
+
+Commit `9ad1a5f77` showed that a hand-built emitter can emit invalid JSON while
+Python fixtures built with `json.dumps` still pass: those fixtures exercise the
+reader's serializer, not the writer. Every such emitter needs a parse test in
+its own language; `AiMatchLogWriterTest.cs` catches separator defects at source.

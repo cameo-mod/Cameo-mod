@@ -33,7 +33,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (OperatingSystem.IsWindows())
 				canonicalPath = canonicalPath.ToUpperInvariant();
 
-			mutexName = "OpenRA-CameoAiMatchLog-" + Convert.ToHexString(
+			mutexName = "OpenRA-CameoAiLog-" + Convert.ToHexString(
 				SHA256.HashData(Encoding.UTF8.GetBytes(canonicalPath)));
 		}
 

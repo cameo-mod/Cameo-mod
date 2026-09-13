@@ -14,8 +14,6 @@ using System.Linq;
 using System.Text;
 using OpenRA.Graphics;
 using OpenRA.Mods.Cameo.Traits.BotModules;
-using OpenRA.Mods.Common.Traits;
-using OpenRA.Primitives;
 using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Traits
@@ -36,12 +34,20 @@ namespace OpenRA.Mods.Cameo.Traits
 		string pendingText;
 		AiLogFileAppender appender;
 		bool written;
+		bool eligibleAtWorldLoad;
 		int nextAttemptTick;
 
 		public AiSituationLogWriter(AiSituationLogWriterInfo info) { this.info = info; }
 
 		void IWorldLoaded.WorldLoaded(World world, WorldRenderer worldRenderer)
 		{
+			eligibleAtWorldLoad = Eligible(world.Type, world.IsReplay, world.IsLoadingGameSave, Game.IsHost);
+			if (!eligibleAtWorldLoad)
+			{
+				written = true;
+				return;
+			}
+
 			fallbackGameUid = Guid.NewGuid().ToString("N");
 			appender = new AiLogFileAppender(info.FileName);
 		}
@@ -60,13 +66,18 @@ namespace OpenRA.Mods.Cameo.Traits
 				CaptureAndAppend(world);
 		}
 
-		void IGameOver.GameOver(World world) { CaptureAndAppend(world); }
+		void IGameOver.GameOver(World world)
+		{
+			// World.EndGame pauses before dispatching IGameOver, and paused worlds do not advance ticks.
+			// A retry scheduled here may therefore never run; retries matter for live all-bots-resolved capture.
+			CaptureAndAppend(world);
+		}
 
 		void CaptureAndAppend(World world)
 		{
 			if (written)
 				return;
-			if (world.Type != WorldType.Regular || world.IsReplay || !Game.IsHost)
+			if (!eligibleAtWorldLoad || world.Type != WorldType.Regular || world.IsReplay || !Game.IsHost)
 			{
 				written = true;
 				return;
@@ -79,6 +90,11 @@ namespace OpenRA.Mods.Cameo.Traits
 				return;
 			}
 			TryAppend(world.WorldTick);
+		}
+
+		internal static bool Eligible(WorldType type, bool replay, bool loadingSave, bool host)
+		{
+			return AiMatchLogWriter.Eligible(type, replay, loadingSave, host);
 		}
 
 		void TryAppend(int worldTick)
@@ -112,32 +128,14 @@ namespace OpenRA.Mods.Cameo.Traits
 				foreach (var situation in module.PendingSituations)
 					AppendSituation(lines, gameUid, world.LobbyInfo.GlobalSettings.GameUid ?? "", world.Map.Uid,
 						player.InternalName, player.Faction.InternalName, player.BotType ?? "",
-						player.PlayerActor.TraitOrDefault<AiMatchLogRecorder>()?.CurrentPersonality ?? "",
-						situation,
-						situation.OwnArmyValue, situation.OwnDefenceValue,
-						situation.OwnBuildings, situation.OwnHarvesters,
-						situation.OwnKillsCostWindow, situation.OwnDeathsCostWindow);
+						situation.OwnPersonality, situation);
 			}
 			return lines.ToString();
 		}
 
-		internal static void AppendSituation(StringBuilder builder, string gameUid, World world,
-			OpenRA.Player player, BotSituation situation, bool first = false)
-		{
-			var ownActors = world.Actors.Where(a => a.IsInWorld && !a.IsDead && a.Owner == player).ToArray();
-			var ownStats = player.PlayerActor.TraitOrDefault<PlayerStatistics>();
-			AppendSituation(builder, gameUid, world.LobbyInfo.GlobalSettings.GameUid ?? "", world.Map.Uid,
-				player.InternalName, player.Faction.InternalName, player.BotType ?? "",
-				player.PlayerActor.TraitOrDefault<AiMatchLogRecorder>()?.CurrentPersonality ?? "",
-				situation, ownActors.Where(IsCombatUnit).Sum(Value), ownActors.Where(IsDefence).Sum(Value),
-				ownActors.Count(IsBuilding), ownActors.Count(a => a.Info.HasTraitInfo<HarvesterInfo>()),
-				ownStats?.KillsCost ?? 0, ownStats?.DeathsCost ?? 0, first);
-		}
-
 		internal static void AppendSituation(StringBuilder builder, string gameUid, string worldGameUid,
 			string mapUid, string playerName, string faction, string botType, string currentPersonality,
-			BotSituation situation, int ownArmyValue, int ownDefenceValue, int ownBuildings,
-			int ownHarvesters, int killsCostWindow, int deathsCostWindow, bool first = false)
+			BotSituation situation)
 		{
 			AiMatchLogWriter.AppendObjectStart(builder);
 			AiMatchLogWriter.AppendNumber(builder, "schema", 1, true);
@@ -169,24 +167,24 @@ namespace OpenRA.Mods.Cameo.Traits
 			builder.Append('}');
 
 			AiMatchLogWriter.AppendObjectPropertyStart(builder, "own");
-			AiMatchLogWriter.AppendNumber(builder, "army_value", ownArmyValue, true);
-			AiMatchLogWriter.AppendNumber(builder, "defence_value", ownDefenceValue);
-			AiMatchLogWriter.AppendNumber(builder, "buildings", ownBuildings);
-			AiMatchLogWriter.AppendNumber(builder, "harvesters", ownHarvesters);
-			AiMatchLogWriter.AppendNumber(builder, "kills_cost_window", killsCostWindow);
-			AiMatchLogWriter.AppendNumber(builder, "deaths_cost_window", deathsCostWindow);
+			AiMatchLogWriter.AppendNumber(builder, "army_value", situation.OwnArmyValue, true);
+			AiMatchLogWriter.AppendNumber(builder, "defence_value", situation.OwnDefenceValue);
+			AiMatchLogWriter.AppendNumber(builder, "buildings", situation.OwnBuildings);
+			AiMatchLogWriter.AppendNumber(builder, "harvesters", situation.OwnHarvesters);
+			AiMatchLogWriter.AppendNumber(builder, "kills_cost_window", situation.OwnKillsCostWindow);
+			AiMatchLogWriter.AppendNumber(builder, "deaths_cost_window", situation.OwnDeathsCostWindow);
 			builder.Append('}');
 
-			builder.Append(",\"enemies\":[");
-			var enemies = situation.Enemies.Values.OrderBy(e => e.Player?.InternalName ?? "", StringComparer.Ordinal).ToArray();
+			AiMatchLogWriter.AppendArrayPropertyStart(builder, "enemies");
+			var enemies = situation.Enemies.Values.OrderBy(e => e.Name ?? "", StringComparer.Ordinal).ToArray();
 			for (var i = 0; i < enemies.Length; i++)
 			{
 				if (i > 0)
 					builder.Append(',');
 				var enemy = enemies[i];
 				AiMatchLogWriter.AppendObjectStart(builder);
-				AiMatchLogWriter.AppendString(builder, "name", enemy.Player?.InternalName ?? "", true);
-				AiMatchLogWriter.AppendString(builder, "faction", enemy.Player?.Faction?.InternalName ?? "");
+				AiMatchLogWriter.AppendString(builder, "name", enemy.Name ?? "", true);
+				AiMatchLogWriter.AppendString(builder, "faction", enemy.FactionName ?? "");
 				AiMatchLogWriter.AppendBoolean(builder, "alive", enemy.Alive);
 				AiMatchLogWriter.AppendNumber(builder, "army_value", enemy.ArmyValue);
 				AiMatchLogWriter.AppendNumber(builder, "infantry_value", enemy.InfantryValue);
@@ -197,6 +195,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				AiMatchLogWriter.AppendNumber(builder, "defence_value", enemy.DefenceValue);
 				AiMatchLogWriter.AppendNumber(builder, "tech_buildings", enemy.TechBuildings);
 				AiMatchLogWriter.AppendNumber(builder, "production_buildings", enemy.ProductionBuildings);
+				AiMatchLogWriter.AppendNumber(builder, "buildings", enemy.BuildingCount);
 				AiMatchLogWriter.AppendNumber(builder, "expansion_clusters", enemy.ExpansionClusters);
 				AiMatchLogWriter.AppendNumber(builder, "harvesters", enemy.Harvesters);
 				AiMatchLogWriter.AppendNumber(builder, "refineries", enemy.Refineries);
@@ -209,11 +208,5 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 			builder.Append("]}\n");
 		}
-
-		static bool IsBuilding(Actor a) => a.Info.HasTraitInfo<BuildingInfo>();
-		static bool IsDefence(Actor a) => IsBuilding(a) && (a.Info.HasTraitInfo<AttackBaseInfo>() ||
-			a.GetEnabledTargetTypes().Overlaps(new BitSet<TargetableType>("Defense")));
-		static bool IsCombatUnit(Actor a) => a.Info.HasTraitInfo<AttackBaseInfo>() && !IsBuilding(a) && !a.Info.HasTraitInfo<HarvesterInfo>();
-		static int Value(Actor a) => a.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
 	}
 }

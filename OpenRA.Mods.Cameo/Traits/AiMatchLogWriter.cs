@@ -189,9 +189,7 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		static void AppendRelationships(StringBuilder builder, World world, OpenRA.Player subject, string property, bool allies, bool first = false)
 		{
-			if (!first)
-				builder.Append(',');
-			builder.Append('"').Append(property).Append("\":[");
+			AppendArrayPropertyStart(builder, property, first);
 			var relationships = world.Players
 				.Where(IsEligiblePlayer)
 				.Where(p => p != subject && p.IsAlliedWith(subject) == allies)
@@ -221,9 +219,7 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		internal static void AppendTimeline(StringBuilder builder, IReadOnlyList<AiMatchLogPersonalityTransition> timeline, bool first = false)
 		{
-			if (!first)
-				builder.Append(',');
-			builder.Append("\"personality_timeline\":[");
+			AppendArrayPropertyStart(builder, "personality_timeline", first);
 			if (timeline != null)
 				for (var i = 0; i < timeline.Count; i++)
 				{
@@ -260,6 +256,13 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (!first)
 				builder.Append(',');
 			builder.Append('"').Append(name).Append("\":{");
+		}
+
+		internal static void AppendArrayPropertyStart(StringBuilder builder, string name, bool first = false)
+		{
+			if (!first)
+				builder.Append(',');
+			builder.Append('"').Append(name).Append("\":[");
 		}
 
 		internal static void AppendString(StringBuilder builder, string name, string value, bool first = false)
