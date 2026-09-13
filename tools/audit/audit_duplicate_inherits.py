@@ -65,8 +65,20 @@ def audit(rs, templates_too: bool = False) -> dict[str, list[list[tuple[str, tup
 # and `main()` always returned 0. Two things made that insufficient on 2026-09-12:
 #
 #   1. it walked ACTORS ONLY. Weapons are a separate namespace and the crash class is
-#      identical there. Master `b235c698` shipped with SIX blocking weapons and this
-#      audit exited 0 on it; the game did not reach the menu.
+#      identical there. Master `b235c698` ships exactly ONE blocking node and this audit
+#      exited 0 on it; the game did not reach the menu. MEASURED 2026-09-13 by running this
+#      file against a clean `origin/master` worktree:
+#
+#          # BLOCKING - 1 node(s) ...
+#            Wraith_ToxinMissiles  ->  ^Warhead_MissileAP_Heavy
+#              Wraith_ToxinMissiles -> Inherits:DeviatorMissile_Artillery
+#                -> Inherits@3:DeviatorMissile -> Inherits@6:^D2KMissile
+#                -> Inherits@wh:^Warhead_MissileAP_Heavy
+#
+#      ⚠ THIS LINE PREVIOUSLY SAID "SIX" AND THAT WAS WRONG — an unmeasured number written
+#      alongside the fix. PR #361 said ONE, the two comments disagreed in the same tree, and
+#      the measurement settles it in #361's favour. One weapon is enough: the engine throws on
+#      the first, so a count above one could only ever be found by fixing them one at a time.
 #   2. "reached twice" is not the engine's rule, so it could not be gated.
 #
 # MiniYaml.cs:463-476 is the rule. Resolving a node, `inherited` accumulates each
