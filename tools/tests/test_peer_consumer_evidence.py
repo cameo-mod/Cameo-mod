@@ -153,7 +153,11 @@ class Doc5ConsumerEvidenceTest(PatchedDoc, unittest.TestCase):
                 self.assertIsNone(row[f"dps_vs_{lad}"])
             self.assertEqual(row["hp"], 400)
             self.assertEqual(row["cost"], 800)
-            self.assertEqual(row["w_damage"], 20)
+            # ⛔ PER CYCLE since 2026-09-13: the fixture declares Burst 2, so the referenced
+            # coordinate is 20 x 2 and the per-shot figure rides alongside. See
+            # `reference_distribution.to_per_cycle`.
+            self.assertEqual(row["w_damage_per_shot"], 20)
+            self.assertEqual(row["w_damage"], 20 * float(row.get("w_burst") or 1))
 
     def test_incomplete_withholds_w_dps_and_every_dps_vs(self):
         out, heroes = self._loaders()
@@ -166,7 +170,9 @@ class Doc5ConsumerEvidenceTest(PatchedDoc, unittest.TestCase):
                 self.assertIsNone(row[f"dps_vs_{lad}"])   # withheld even though a frac exists
             self.assertEqual(row["hp"], 400)              # chassis intact
             self.assertEqual(row["cost"], 800)
-            self.assertEqual(row["w_damage"], 20)         # clause-5 armed test still sees it
+            # clause-5's armed test still sees the damage; it is now the PER-CYCLE total.
+            self.assertEqual(row["w_damage_per_shot"], 20)
+            self.assertEqual(row["w_damage"], 20 * float(row.get("w_burst") or 1))
 
     def test_unknown_explicit_status_is_refused_not_trusted(self):
         out, heroes = self._loaders()
