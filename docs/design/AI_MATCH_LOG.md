@@ -140,8 +140,10 @@ queue orders, grant conditions, mutate synced state, or read either log back.
 The snapshot is intentionally **pre-fog**: it scans `world.Actors` without
 shroud gating. Future fogged observation is a later phase.
 
-The situation writer emits one line per snapshot rebuild per bot player. Field
-order is stable and all numeric values are integers:
+The situation writer emits one line per snapshot rebuild per bot player. For
+matches exceeding 2000 rebuilds, the buffer retains the first 1000 and most
+recent 1000 lines and silently drops the middle. Field order is stable and all
+numeric values are integers:
 
 ```json
 {"schema":1,"kind":"situation","record_id":"<game_uid>|<player>|<tick>","game_uid":"","map_uid":"...","player":"Multi0","faction":"td_gdi","bot_type":"medium","tick":1500,"urgency":"normal","personality_current":"rush","personality_candidate":"steamroller","main_target":"Multi1","main_target_score":730,"hints":{"defence_fraction":35,"expansion_appetite":20},"demand":{"anti_air":10,"anti_armour":40,"anti_infantry":25,"detector":0,"artillery":60},"own":{"army_value":5400,"defence_value":1200,"buildings":14,"harvesters":4,"kills_cost_window":900,"deaths_cost_window":1500},"enemies":[{"name":"Multi1","faction":"td_nod","alive":true,"army_value":8100,"infantry_value":2000,"vehicle_value":5000,"air_value":1100,"naval_value":0,"defence_count":7,"defence_value":3500,"tech_buildings":4,"production_buildings":3,"buildings":9,"expansion_clusters":2,"harvesters":5,"refineries":2,"pressure_value":800,"stealth_share":10,"nearest_cells":42,"last_seen_tick":1500,"score":730}]}

@@ -95,7 +95,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick
 	{
-		readonly Actor self;
 		readonly OpenRA.Player player;
 		readonly List<BotSituation> pendingSituations = [];
 		readonly Queue<(int Tick, int Delta)> lossSamples = new();
@@ -120,7 +119,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public MasterAiBotModule(Actor self, MasterAiBotModuleInfo info)
 			: base(info)
 		{
-			this.self = self;
 			player = self.Owner;
 			incumbentPersonality = player.PlayerActor.TraitOrDefault<AiMatchLogRecorder>()?.CurrentPersonality ?? "";
 			nextSnapshotTick = Math.Abs(player.ClientIndex * 37) % Math.Max(1, info.SnapshotInterval);
@@ -172,7 +170,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			var econTotal = profiles.Values.Where(p => p.Alive).Sum(EconProxy);
 			foreach (var profile in profiles.Values.Where(p => p.Alive))
-				profile.Score = TargetScore(profile, ownArmy, enemyArmy, AlliedCommitments(profile.Player), econTotal, Info);
+				profile.Score = TargetScore(profile, ownArmy, AlliedCommitments(profile.Player), econTotal, Info);
 
 			var decision = tick - lastDecisionTick >= Math.Max(1, Info.DecisionInterval);
 			OpenRA.Player target = incumbentTarget;
@@ -358,10 +356,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return ClampSignal((long)100 * x / (x + (long)k));
 		}
 
-		internal static int TargetScore(EnemyProfile profile, int ownArmy, int enemyArmy, MasterAiBotModuleInfo info)
-			=> TargetScore(profile, ownArmy, enemyArmy, 0, 0, info);
+		internal static int TargetScore(EnemyProfile profile, int ownArmy, MasterAiBotModuleInfo info)
+			=> TargetScore(profile, ownArmy, 0, 0, info);
 
-		static int TargetScore(EnemyProfile profile, int ownArmy, int enemyArmy, int ally, long econTotal,
+		static int TargetScore(EnemyProfile profile, int ownArmy, int ally, long econTotal,
 			MasterAiBotModuleInfo info)
 		{
 			var reach = profile.NearestCells < 0 ? 0 : 100 - Saturate(profile.NearestCells, 25);

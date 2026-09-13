@@ -155,7 +155,7 @@ namespace OpenRA.Mods.Cameo.Test
 				new EnemyProfile { ArmyValue = 0, DefenceCount = 0, NearestCells = -1 },
 				new EnemyProfile { ArmyValue = int.MaxValue, DefenceValue = int.MaxValue, DefenceCount = int.MaxValue, NearestCells = int.MaxValue }
 			})
-				Assert.That(MasterAiBotModule.TargetScore(profile, int.MaxValue, int.MaxValue, info), Is.InRange(0, 1000));
+				Assert.That(MasterAiBotModule.TargetScore(profile, int.MaxValue, info), Is.InRange(0, 1000));
 			Assert.That(MasterAiBotModule.Momentum(new EnemyProfile { Score = 1000 }, info.IncumbentMomentum),
 				Is.EqualTo(1000));
 		}
