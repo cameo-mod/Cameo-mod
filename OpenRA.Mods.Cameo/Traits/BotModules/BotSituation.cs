@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Primitives;
 using OpenRA.Traits;
@@ -89,6 +90,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public readonly int RushMaxEnemyArmyValue = 1500;
 		public readonly int RushMaxEnemyDefenceCount = 2;
 		public readonly int EliminationBuildingSaturation = 8;
+		public readonly int PersonalityHoldTicks = 3000;
 
 		public override object Create(ActorInitializer init) { return new MasterAiBotModule(init.Self, this); }
 	}
@@ -110,6 +112,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int previousDeathsCost;
 		int previousKillsCost;
 		BotUrgency currentUrgency;
+		BotUrgency previousUrgency;
+		int lastPersonalitySwitchTick;
 
 		public BotSituation Situation { get; private set; }
 		internal int DeathsCostWindow { get; private set; }
@@ -120,7 +124,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			: base(info)
 		{
 			player = self.Owner;
-			incumbentPersonality = player.PlayerActor.TraitOrDefault<AiMatchLogRecorder>()?.CurrentPersonality ?? "";
+			incumbentPersonality = CurrentPersonality();
 			nextSnapshotTick = Math.Abs(player.ClientIndex * 37) % Math.Max(1, info.SnapshotInterval);
 			nextEmergencyTick = nextSnapshotTick;
 		}
@@ -140,10 +144,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 
 			nextSnapshotTick = tick + Math.Max(1, Info.SnapshotInterval);
-			Rebuild(tick);
+			Rebuild(tick, bot);
 		}
 
-		void Rebuild(int tick)
+		void Rebuild(int tick, IBot bot)
 		{
 			var actors = player.World.Actors.Where(a => a.IsInWorld && !a.IsDead).ToArray();
 			var actorsByOwner = actors.GroupBy(a => a.Owner).ToDictionary(g => g.Key, g => g.ToArray());
@@ -183,8 +187,24 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (target != incumbentTarget)
 					incumbentSince = tick;
 				incumbentTarget = target;
-				incumbentPersonality = CandidatePersonality(urgency, target == null ? null : profiles[target], ownArmy,
-					profiles.Values, incumbentPersonality, Info);
+				var currentPersonality = CurrentPersonality();
+				var candidatePersonality = CandidatePersonality(urgency, target == null ? null : profiles[target], ownArmy,
+					profiles.Values, currentPersonality, Info);
+				incumbentPersonality = candidatePersonality;
+
+				var botLimits = player.PlayerActor.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
+				if (ShouldSwitchPersonality(currentPersonality, candidatePersonality, lastPersonalitySwitchTick, tick,
+					urgency == BotUrgency.Emergency && previousUrgency != BotUrgency.Emergency,
+					botLimits?.Info.AllowPersonalitySwitching ?? false, Info))
+				{
+					bot.QueueOrder(new Order("SetBotPersonality", player.PlayerActor, false)
+					{
+						TargetString = candidatePersonality,
+						SuppressVisualFeedback = true
+					});
+					lastPersonalitySwitchTick = tick;
+				}
+
 				lastDecisionTick = tick;
 			}
 
@@ -205,12 +225,20 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				OwnHarvesters = ownHarvesters,
 				OwnKillsCostWindow = KillsCostWindow,
 				OwnDeathsCostWindow = DeathsCostWindow,
-				OwnPersonality = player.PlayerActor.TraitOrDefault<AiMatchLogRecorder>()?.CurrentPersonality ?? ""
+				OwnPersonality = CurrentPersonality()
 			};
 			Situation = situation;
+			previousUrgency = urgency;
 			pendingSituations.Add(situation);
 			if (pendingSituations.Count > 2000)
 				pendingSituations.RemoveRange(1000, pendingSituations.Count - 2000);
+		}
+
+		string CurrentPersonality()
+		{
+			return player.PlayerActor.TraitOrDefault<BotPersonalityController>()?.CurrentPersonality
+				?? player.PlayerActor.TraitOrDefault<AiMatchLogRecorder>()?.CurrentPersonality
+				?? "";
 		}
 
 		void CheckEmergency(int tick)
@@ -345,6 +373,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		internal static int Momentum(EnemyProfile profile, int bonus)
 		{
 			return ClampScore(profile.Score + profile.Score * bonus / 1000);
+		}
+
+		internal static bool ShouldSwitchPersonality(string current, string candidate, int lastSwitchTick, int tick,
+			bool emergencyTransition, bool allowSwitching, MasterAiBotModuleInfo info)
+		{
+			if (!allowSwitching || string.IsNullOrEmpty(candidate) || candidate == current)
+				return false;
+
+			return emergencyTransition || tick - lastSwitchTick >= info.PersonalityHoldTicks;
 		}
 
 		internal static int Saturate(int x, int k)

@@ -115,9 +115,12 @@ def main() -> int:
         failures.append("Player does not inherit ^AIDifficulties")
 
     selector = lines_for_block(lines, "GrantRandomCondition@personality")
-    granted = condition_values(selector)
-    if granted != CONDITIONS:
-        failures.append(f"selector conditions {sorted(granted)} != {sorted(CONDITIONS)}")
+    controller = lines_for_block(player, "BotPersonalityController")
+    granted = condition_values(selector) if selector else CONDITIONS if controller else set()
+    if selector:
+        failures.append("legacy GrantRandomCondition@personality remains")
+    if not controller:
+        failures.append("Player does not wire BotPersonalityController")
 
     blocks = {
         name: lines_for_block(lines, f"SquadManagerBotModuleCA@{name}")
@@ -200,7 +203,7 @@ def main() -> int:
         return 1
     print("## PASS")
     print("- Shared non-tuning fields are byte-identical across all five instances.")
-    print("- GrantRandomCondition and squad-manager condition sets match exactly.")
+    print("- BotPersonalityController and squad-manager condition sets match exactly.")
     print("- Personality conditions have exactly one matching notification block each.")
     print("- No dead RushInterval/RushAttackScanRadius keys remain.")
     return 0

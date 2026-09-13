@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using NUnit.Framework;
+using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 
@@ -226,6 +227,33 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "", info), Is.EqualTo("expansion"));
 			target.NearestCells = 10;
 			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "turtle", info), Is.EqualTo("turtle"));
+		}
+
+		[Test]
+		public void PersonalityControllerMapsKnownConditionsAndIgnoresUnknownNames()
+		{
+			var info = new BotPersonalityControllerInfo();
+			Assert.That(BotPersonalityController.PersonalityName("personality-rush", info.PersonalityPrefix), Is.EqualTo("rush"));
+			Assert.That(info.Conditions.Any(c => BotPersonalityController.PersonalityName(c, info.PersonalityPrefix) == "steamroller"), Is.True);
+			Assert.That(info.Conditions.Any(c => BotPersonalityController.PersonalityName(c, info.PersonalityPrefix) == "guerrilla"), Is.False);
+		}
+
+		[TestCase("rush", "turtle", 1000, 1000 + 2999, false, true, false)]
+		[TestCase("rush", "turtle", 1000, 1000 + 3000, false, true, true)]
+		[TestCase("rush", "turtle", 1000, 1000 + 1, true, true, true)]
+		[TestCase("rush", "turtle", 1000, 1000 + 3000, false, false, false)]
+		public void PersonalitySwitchPolicyRespectsHoldAndDifficulty(string current, string candidate, int lastSwitchTick,
+			int tick, bool emergencyTransition, bool allowSwitching, bool expected)
+		{
+			Assert.That(MasterAiBotModule.ShouldSwitchPersonality(current, candidate, lastSwitchTick, tick,
+				emergencyTransition, allowSwitching, new MasterAiBotModuleInfo()), Is.EqualTo(expected));
+		}
+
+		[Test]
+		public void RelativeInitialAttackDelayPreservesStartAndRemovesElapsedDelay()
+		{
+			Assert.That(SquadManagerBotModuleCA.RemainingInitialAttackDelay(12000, 0), Is.EqualTo(12000));
+			Assert.That(SquadManagerBotModuleCA.RemainingInitialAttackDelay(12000, 12001), Is.Zero);
 		}
 	}
 }

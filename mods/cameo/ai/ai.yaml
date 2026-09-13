@@ -2,8 +2,6 @@
 	GrantConditionOnBotOwner@generic:
 		Condition: genericbot
 		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod
-	GrantRandomCondition@personality:
-		Conditions: personality-rush, personality-turtle, personality-tech, personality-expansion, personality-steamroller
 	GrantConditionOnBotOwner@easiest:
 		Condition: easiestbot
 		Bots: easiest
@@ -88,6 +86,7 @@
 		UnitDelayModifier: 150
 		UnitIntervalModifier: 150
 		PrioritizeBarracksBeforeRefinery: true
+		AllowPersonalitySwitching: true
 		RequiresCondition: hardbot
 	BotLimits@veryhard:
 		ProductionTypeLimit: 4
@@ -99,6 +98,7 @@
 		UnitDelayModifier: 125
 		UnitIntervalModifier: 125
 		PrioritizeBarracksBeforeRefinery: true
+		AllowPersonalitySwitching: true
 		RequiresCondition: veryhardbot
 	BotLimits@brutal:
 		ProductionTypeLimit: 4
@@ -106,6 +106,7 @@
 		RefineryLimit: 7
 		HarvesterLimit: 21
 		PrioritizeBarracksBeforeRefinery: true
+		AllowPersonalitySwitching: true
 		RequiresCondition: brutalbot
 	BotLimits@challenger:
 		ProductionTypeLimit: 5
@@ -117,6 +118,7 @@
 		UnitDelayModifier: 75
 		UnitIntervalModifier: 75
 		PrioritizeBarracksBeforeRefinery: true
+		AllowPersonalitySwitching: true
 		RequiresCondition: challengerbot
 	BotLimits@unbeatable:
 		ProductionTypeLimit: 6
@@ -128,6 +130,7 @@
 		UnitDelayModifier: 50
 		UnitIntervalModifier: 50
 		PrioritizeBarracksBeforeRefinery: true
+		AllowPersonalitySwitching: true
 		RequiresCondition: unbeatablebot
 	BotLimits@god:
 		ProductionTypeLimit: 7
@@ -139,6 +142,7 @@
 		UnitDelayModifier: 25
 		UnitIntervalModifier: 25
 		PrioritizeBarracksBeforeRefinery: true
+		AllowPersonalitySwitching: true
 		RequiresCondition: cameogodbot
 
 Player:
@@ -3139,6 +3143,8 @@ Player:
 	BuildingRepairBotModule:
 		RequiresCondition: genericbot
 	BuildingRepairBotModuleCA:
+		RequiresCondition: genericbot
+	BotPersonalityController:
 		RequiresCondition: genericbot
 	MasterAiBotModule:
 		RequiresCondition: genericbot

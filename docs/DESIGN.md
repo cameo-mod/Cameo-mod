@@ -2908,9 +2908,12 @@ fictional sci-fi faction, not an endorsement of any real-world ideology.
 ## 19. AI bot personalities
 
 Each bot draws one of five squad-manager personalities per match: Rush,
-Turtle, Tech, Expansion, or Steamroller. Selection is implemented by the
-existing synchronized `GrantRandomCondition` trait on `Player`; the lobby
-continues to expose only difficulty bot types.
+Turtle, Tech, Expansion, or Steamroller. Hard-and-above bots can switch
+dynamically through a `SetBotPersonality` order; the synced controller keeps
+exactly one personality condition active at a time. Switching observes a
+`PersonalityHoldTicks` minimum hold and bypasses it when entering Emergency.
+Lower tiers retain the fixed random personality because
+`AllowPersonalitySwitching` defaults to false.
 
 The personality effect is currently confined to the squad manager. Each
 personality has its own `SquadManagerBotModuleCA` instance gated by
