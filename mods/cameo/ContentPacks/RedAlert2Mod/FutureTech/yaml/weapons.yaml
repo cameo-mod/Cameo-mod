@@ -1,5 +1,5 @@
 ACV_Machinegun:
-	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water
@@ -13,7 +13,7 @@ ACV_Machinegun:
 		Damage: 2000
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
@@ -82,7 +82,7 @@ ACV_Machinegun:
 		UpdatesUnitStatistics: false
 
 Future_Cryocopter_Rocket:
-	Inherits@roleflat: ^Compatibility_MissileAP_MediumFlat
+	Inherits@roleflat: ^Warhead_MissileAP_Medium_Flat
 	Inherits: ^Grenade
 	Inherits@2: ^D2KRocket
 	Inherits@3: ^SteelMediumMissile
@@ -100,7 +100,7 @@ Future_Cryocopter_Rocket:
 		Damage: 8
 	-Warhead@MissileAP_Heavy:
 	-Warhead@MissileAP_Medium:
-	Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@MissileAP_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
 		PercentageScale: 9997
@@ -139,7 +139,7 @@ Future_Cryocopter_Rocket:
 		VerticalRateOfTurn: 16
 
 Future_Cryocopter_Cryo:
-	Inherits@roleflat: ^Compatibility_Cryo_MediumFlat
+	Inherits@roleflat: ^Warhead_Cryo_Medium_Flat
 	Inherits: ^LightMissile
 	Inherits@2: ^SmallArms
 	Inherits@3: ^Chaingun
@@ -251,7 +251,7 @@ Future_Cryocopter_Cryo:
 	-Warhead@SmallArms:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@Cryo_MediumFlatCompatibility:
+	Warhead@Cryo_Medium_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 12600
@@ -265,7 +265,7 @@ Future_Turret_Cryo:
 	Inherits: Future_Cryocopter_Cryo
 	Range: 7124
 
-	Warhead@Cryo_MediumFlatCompatibility:
+	Warhead@Cryo_Medium_Flat:
 		InvalidTargets: Air
 	Warhead@LightMissilePercentage:
 		InvalidTargets: Air
@@ -284,13 +284,14 @@ Future_Turret_Cryo:
 	Warhead@LaserWeaponPercentage:
 		InvalidTargets: Air
 CryoLegionnaireAttack:
-	Inherits@roleflat: ^Compatibility_Cryo_LightFlat
+	Inherits@roleflat: ^Warhead_Cryo_Light
 	Inherits: ^LightMissile
 	Inherits@2: ^SmallArms
 	Inherits@3: ^Chaingun
 	Inherits@4: ^FlakWeapon
 	Inherits@5: ^TeslaWeapon
 	Inherits@6: ^LaserWeapon
+	TargetActorCenter: false
 	Range: 7000
 	ReloadDelay: 30
 	Report: AUCryoc_wea1impact2La.wav, AUCryoc_wea1impact2Lb.wav, AUCryoc_wea1impact2Lc.wav, AUCryoc_wea1impact2Ld.wav
@@ -412,7 +413,7 @@ CryoLegionnaireAttack:
 	-Warhead@SmallArms:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@Cryo_LightFlatCompatibility:
+	Warhead@Cryo_Light:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 13600
@@ -425,7 +426,7 @@ CryoLegionnaireAttack:
 	Warhead@EMPUnit:
 		InvalidTargets: Shielded, Air
 FutureMicrotorpedos:
-	Inherits@finalmain: ^Compatibility_MissileAP_HeavyFlat
+	Inherits@finalmain: ^Warhead_MissileAP_Heavy_Flat
 	Inherits: ^RA2Grenade
 	Inherits@2: ^RA2HeavyMissile
 	Inherits@fx: ^Effect_Watersplash_Large_RA2
@@ -466,13 +467,13 @@ FutureMicrotorpedos:
 	-Warhead@EffectAir:
 	-Warhead@Demolition_Light:
 	-Warhead@MissileAP_Heavy:
-	Warhead@MissileAP_HeavyFlatCompatibility:
+	Warhead@MissileAP_Heavy_Flat:
 		ValidTargets: Water, Underwater, Bridge, Structure
 		Damage: 12000
 		PercentageScale: 19992
 
 AthenaLaser:
-	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
+	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
 	Inherits: ^LightMissile
 	Inherits@2: ^SmallArms
 	Inherits@3: ^Chaingun
@@ -603,7 +604,7 @@ AthenaLaser:
 	-Warhead@SmallArms:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@Laser_HeavyFlatCompatibility:
+	Warhead@Laser_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 193600
@@ -688,7 +689,7 @@ Future_CoilerFriendFrag2:
 		Amount: 1
 
 Future_MultiMissile:
-	Inherits@finalmain: ^Compatibility_MissileAP_LightFlat
+	Inherits@finalmain: ^Warhead_MissileAP_Light_Flat
 	Inherits: ^Warhead_Arrow_Light
 	Inherits@2: ^RA2LightMissile
 	Inherits@fx: ^Effect_Grey_Explosion_Small_RA2
@@ -703,7 +704,7 @@ Future_MultiMissile:
 		Damage: 4000
 	-Warhead@Arrow_Light:
 	-Warhead@MissileAP_Light:
-	Warhead@MissileAP_LightFlatCompatibility:
+	Warhead@MissileAP_Light_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 9988
@@ -812,7 +813,7 @@ Future_MultiMissile_Frag:
 		AimTargetStances: Enemy, Neutral
 
 Future_MultiMissile_Sigma:
-	Inherits@roleflat: ^Compatibility_MissileTesla_MediumFlat
+	Inherits@roleflat: ^Warhead_MissileTesla_Medium
 	Inherits: ^TeslaChargedWeapon
 	Inherits@2: ^MagicWeapon
 	Inherits@3: ^FlakWeapon
@@ -899,7 +900,7 @@ Future_MultiMissile_Sigma:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@TeslaChargedExtraDamage:
 	-Warhead@TeslaChargedWeapon:
-	Warhead@MissileTesla_MediumFlatCompatibility:
+	Warhead@MissileTesla_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 55888
 		PercentageScale: 0
@@ -1148,7 +1149,7 @@ FutureJavelinRocketsDeployed_elite:
 		VerticalRateOfTurn: 16
 
 Future_Wheel_MG:
-	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	ReloadDelay: 40
@@ -1160,7 +1161,7 @@ Future_Wheel_MG:
 		Damage: 2000
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
@@ -1173,13 +1174,13 @@ Future_Wheel_MG_elite:
 	Projectile: Bullet
 		Speed: 4000
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
 
 ShotgunAttackRobotGun:
-	Inherits@roleflat: ^Compatibility_Bullet_LightFlat
+	Inherits@roleflat: ^Warhead_Bullet_Light_Flat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
@@ -1238,7 +1239,7 @@ ShotgunAttackRobotGun:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@SmallArms:
 	-Warhead@TankDestroyerCannon:
-	Warhead@Bullet_LightFlatCompatibility:
+	Warhead@Bullet_Light_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 8000
@@ -1252,7 +1253,7 @@ ShotgunAttackRobotGun_elite:
 	Burst: 2
 	BurstDelays: 3
 
-	Warhead@Bullet_LightFlatCompatibility:
+	Warhead@Bullet_Light_Flat:
 		-InvalidTargets:
 		ValidTargets: Ground, Water
 	Warhead@CannonHE_Medium:
@@ -1274,7 +1275,7 @@ ShotgunAttackRobotGun_elite:
 		-InvalidTargets:
 		ValidTargets: Ground, Water, Air
 CannonAttackRobotGun:
-	Inherits@collapseflat: ^Compatibility_CannonHE_MediumFlat
+	Inherits@collapseflat: ^Warhead_CannonHE_Medium_Flat
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^RA2RailgunWeapon
@@ -1312,7 +1313,7 @@ CannonAttackRobotGun:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@CannonHE_Medium:
 	-Warhead@Railgun_Heavy:
-	Warhead@CannonHE_MediumFlatCompatibility:
+	Warhead@CannonHE_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 8000
 		PercentageScale: 4988
@@ -1323,7 +1324,7 @@ CannonAttackRobotGun_elite:
 	BurstDelays: 3
 
 MissileAttackRobotGun:
-	Inherits@finalmain: ^Compatibility_MissileAP_MediumFlat
+	Inherits@finalmain: ^Warhead_MissileAP_Medium_Flat
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
@@ -1336,7 +1337,7 @@ MissileAttackRobotGun:
 	Warhead@MissileAP_Medium:
 		Damage: 24000
 	-Warhead@MissileAP_Medium:
-	Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@MissileAP_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
 		PercentageScale: 9996
@@ -1354,13 +1355,13 @@ MissileAttackRobotGun_elite:
 		Shadow: true
 		TrailImage: red_smokey
 		ContrailStartColor: e60000
-	Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@MissileAP_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
 		PercentageScale: 9996
 
 FutureMechGatling:
-	Inherits@collapseflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@collapseflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^LightMissile
 	Inherits@3: ^FlakWeapon
@@ -1404,9 +1405,9 @@ FutureMechGatling:
 	-Warhead@TankDestroyerCannon:
 	-Warhead@LightMissile:
 	-Warhead@FlakWeapon:
-	-Warhead@Bullet_MediumFlatCompatibility:
+	-Warhead@Bullet_Medium_Flat:
 FutureMechPlasma:
-	Inherits@roleflat: ^Compatibility_Plasma_HeavyFlat
+	Inherits@roleflat: ^Warhead_Plasma_Heavy_Flat
 	Inherits@collapsewh: ^Warhead_Plasma_Heavy
 	Inherits: ^Grenade
 	Inherits@2: ^MediumChemicalWeapon
@@ -1459,7 +1460,7 @@ FutureMechPlasma:
 		PercentageScale: 0
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Plasma_Heavy:
-	Warhead@Plasma_HeavyFlatCompatibility:
+	Warhead@Plasma_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 30000
 		PercentageScale: 3330
@@ -1469,7 +1470,7 @@ FutureMechPlasma_elite:
 	Range: 8000
 	Burst: 4
 	BurstDelays: 5
-	Warhead@Plasma_HeavyFlatCompatibility:
+	Warhead@Plasma_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 30000
 		PercentageScale: 3330
@@ -1512,7 +1513,7 @@ Future_MBT_DebuffLaser_elite:
 	Range: 8820
 
 FutureTankCannons:
-	Inherits@roleflat: ^Compatibility_CannonHE_HeavyFlat
+	Inherits@roleflat: ^Warhead_CannonHE_Heavy_Flat
 	Inherits: ^MediumFlameWeapon
 	Inherits@2: ^MediumChemicalWeapon
 	Inherits@3: ^ShrapnelWeapon
@@ -1616,7 +1617,7 @@ FutureTankCannons:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@CannonHE_HeavyFlatCompatibility:
+	Warhead@CannonHE_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 550888
 		PercentageScale: 0
@@ -1631,7 +1632,7 @@ FutureTankCannons_elite:
 	BurstDelays: 5
 
 FutureHarbingerCannon:
-	Inherits@roleflat: ^Compatibility_Plasma_HeavyFlat
+	Inherits@roleflat: ^Warhead_Plasma_Heavy_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1741,7 +1742,7 @@ FutureHarbingerCannon:
 	-Warhead@TeslaChargedWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@Plasma_HeavyFlatCompatibility:
+	Warhead@Plasma_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 42488
 		PercentageScale: 0
@@ -1808,7 +1809,7 @@ BlackWidowPistols_elite:
 	Burst: 8
 
 OrionRailgun:
-	Inherits@finalmain: ^Compatibility_Railgun_HeavyFlat
+	Inherits@finalmain: ^Warhead_Railgun_Heavy_Flat
 	Inherits: ^Warhead_Railgun_Heavy
 	Inherits@2: ^Projectile_Railgun_Heavy
 	Inherits@3: ^Effect_Railgun_Heavy
@@ -1834,7 +1835,7 @@ OrionRailgun:
 		ImpactSounds: gexp14a.wav
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Railgun_Heavy:
-	Warhead@Railgun_HeavyFlatCompatibility:
+	Warhead@Railgun_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 60000
 		PercentageScale: 9999
@@ -1858,7 +1859,7 @@ OrionRailgun_elite:
 		Damage: 60000
 	-Warhead@CannonHE_Heavy:
 	-Warhead@RailgunWeapon:
-	Warhead@Railgun_HeavyFlatCompatibility:
+	Warhead@Railgun_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 150000
 		PercentageScale: 6000

@@ -160,7 +160,7 @@ members after Phases A–D:
 
 1. **`hp0`, `speed0`, `range0_wdist`, `cost0`** — from the class's members in those factions,
    preferring reference-backed originals, rounded onto the nice-number grid (`docs/DESIGN.md`, the
-   nice-number law; damage on the **100** grid, `formula.DAMAGE_STEP`).
+   nice-number law; damage on the **10** grid, `formula.DAMAGE_STEP`, regridded from 100 on 2026-09-11).
 2. **The identity `o0 = p0 = q0 = cost0` must hold by construction.** It is a virtual unit — if the
    identity does not hold, the spec is wrong, not the actor. This is the single cleanest advantage
    over a real anchor and it must be asserted, not hoped for.

@@ -140,7 +140,6 @@ VengeanceActivator3:
 		ValidRelationships: Ally
 
 ra1_soviets_molotovconscript_conscriptmolotov:
-	Inherits: ^Warhead_Demolition_Light
 	Inherits@2: ^Warhead_Flame_Light
 	Inherits@3: ^Projectile_Grenade_Light
 	Inherits@4: ^Effect_Flame_Light
@@ -169,10 +168,9 @@ ra1_soviets_molotovconscript_conscriptmolotov:
 		Palette: ra_temperat
 		Weapon: CHFlame
 		InvalidTargets: Water
-	-Warhead@Demolition_Light:
 
 ra1_soviets_molotovconscript_conscriptmolotovexplode:
-	Inherits@roleflat: ^Compatibility_Flame_LightFlat
+	Inherits@roleflat: ^Warhead_Flame_Light_Flat
 	Inherits: ra1_soviets_molotovconscript_conscriptmolotov
 	Warhead@Demolition_Light:
 		Damage: 4000
@@ -183,13 +181,13 @@ ra1_soviets_molotovconscript_conscriptmolotovexplode:
 		Duration: 25
 	-Warhead@Demolition_Light:
 	-Warhead@Flame_Light:
-	Warhead@Flame_LightFlatCompatibility:
+	Warhead@Flame_Light_Flat:
 		ValidTargets: Ground, Water
 		Damage: 8000
 		PercentageScale: 9988
 
 RocketsRA:
-	Inherits@finalmain: ^Compatibility_MissileAP_MediumFlat
+	Inherits@finalmain: ^Warhead_MissileAP_Medium_Flat
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
@@ -202,7 +200,7 @@ RocketsRA:
 		Damage: 10000
 	-Warhead@MissileAP_Light:
 	-Warhead@MissileAP_Medium:
-	Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@MissileAP_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 		PercentageScale: 9995
@@ -634,7 +632,7 @@ MagicOrb2:
 		ImpactSounds: thgun.wav
 
 ra1_allies_alliedapc_gun:
-	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
+	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
@@ -651,7 +649,7 @@ ra1_allies_alliedapc_gun:
 		Damage: 2000
 	-Warhead@Bullet_Medium:
 	-Warhead@Flak_Medium:
-	Warhead@Flak_MediumFlatCompatibility:
+	Warhead@Flak_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
@@ -665,12 +663,12 @@ ra1_allies_alliedapc_gun_AA:
 		ValidTargets: Air
 	-Warhead@Bullet_Medium:
 	-Warhead@Flak_Medium:
-	Warhead@Flak_MediumFlatCompatibility:
+	Warhead@Flak_Medium_Flat:
 		ValidTargets: Air
 		Damage: 4000
 		PercentageScale: 9975
 ra1_allies_machinegunner_machinegun:
-	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -686,7 +684,7 @@ ra1_allies_machinegunner_machinegun:
 		Damage: 8000
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		PercentageDenominator: 10000
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
@@ -915,9 +913,10 @@ WaveforceCannonChargedLaser:
 		ValidTargets: Ground, Water, Air
 
 WaveforceCannonDistortedBeam1:
-	Inherits@roleflat: ^Compatibility_Waveforce_HeavyFlat
+	Inherits@roleflat: ^Warhead_Waveforce_Heavy
 	Inherits: ^TeslaWeapon
 	Inherits@2: ^HeavyCannon
+	TargetActorCenter: false
 	ReloadDelay: 120
 	Range: 9343
 	ValidTargets: Ground, Water, Air
@@ -967,7 +966,7 @@ WaveforceCannonDistortedBeam1:
 	-Warhead@HeavyCannon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@Waveforce_HeavyFlatCompatibility:
+	Warhead@Waveforce_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 25000
 		PercentageScale: 0
@@ -1103,11 +1102,11 @@ MammothTusk:
 		ValidTargets: Ground, Ship
 
 ParaBomb:
-	Inherits@finalmain: ^Compatibility_Demolition_HeavyFlat
+	Inherits@finalmain: ^Warhead_Demolition_Heavy_Flat
 	Inherits: ^ParaBombLegacy
 	-Warhead@Demolition_Heavy:
 	-Warhead@Flame_Heavy:
-	Warhead@Demolition_HeavyFlatCompatibility:
+	Warhead@Demolition_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 40000
 		PercentageScale: 9998
@@ -2118,7 +2117,7 @@ ra1_allies_gunboat_cannon_cryo:
 		Spread: 300
 
 8Inch:
-	Inherits@finalmain: ^Compatibility_Demolition_HeavyFlat
+	Inherits@finalmain: ^Warhead_Demolition_Heavy_Flat
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Demolition_Light
@@ -2144,7 +2143,7 @@ ra1_allies_gunboat_cannon_cryo:
 		Damage: 40000
 	-Warhead@Demolition_Heavy:
 	-Warhead@Demolition_Light:
-	Warhead@Demolition_HeavyFlatCompatibility:
+	Warhead@Demolition_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 80000
 		PercentageScale: 9999
@@ -2216,7 +2215,7 @@ ra1_allies_destroyer_missile_cryo:
 		Damage: 10000
 
 JapanSpeedBoatGun:
-	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
+	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -2230,22 +2229,22 @@ JapanSpeedBoatGun:
 		Damage: 2000
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
 JapanSpeedBoatGunWaveforce:
-	Inherits@roleflat: ^Compatibility_Waveforce_HeavyFlat
+	Inherits@roleflat: ^Warhead_Waveforce_Heavy
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: JapanSpeedBoatGun
 	Inherits@3: ^WaveforceBulletProjectile
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
-	-Warhead@Bullet_MediumFlatCompatibility:
+	-Warhead@Bullet_Medium_Flat:
 	-Warhead@Railgun_Heavy:
-	Warhead@Waveforce_HeavyFlatCompatibility:
+	Warhead@Waveforce_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
@@ -2253,7 +2252,7 @@ JapanSpeedBoatGunWaveforce:
 		ValidTargets: Ground, Water, Air
 
 YamatoCannon:
-	Inherits@finalmain: ^Compatibility_CannonHE_HeavyFlat
+	Inherits@finalmain: ^Warhead_CannonHE_Heavy_Flat
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@wh2: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
@@ -2280,7 +2279,7 @@ YamatoCannon:
 		Damage: 20000
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Demolition_Heavy:
-	Warhead@CannonHE_HeavyFlatCompatibility:
+	Warhead@CannonHE_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 40000
 		PercentageScale: 9998
@@ -2310,7 +2309,7 @@ ChronoVortexInit:
 		ImpactActors: false
 
 ra1_allies_chronovortex:
-	Inherits@roleflat: ^Compatibility_Magic_HeavyFlat
+	Inherits@roleflat: ^Warhead_Magic_Heavy
 	Inherits: ^HeavyBomb
 	Inherits@2: ^MagicWeapon
 	ReloadDelay: 5
@@ -2422,7 +2421,7 @@ ra1_allies_chronovortex:
 	-Warhead@HeavyBomb:
 	-Warhead@MagicExtraDamage:
 	-Warhead@MagicWeapon:
-	Warhead@Magic_HeavyFlatCompatibility:
+	Warhead@Magic_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 4888
 		PercentageScale: 0

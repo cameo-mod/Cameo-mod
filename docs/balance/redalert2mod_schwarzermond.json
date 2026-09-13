@@ -87,7 +87,7 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "tag": "MissileAP_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -99,7 +99,7 @@
       "reloaddelay": "50",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_MissileAP_MediumFlat",
+       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_Concussion_Light",
        "^Warhead_MissileAP_Heavy",
        "^Effect_MissileAP_Heavy",
@@ -402,7 +402,7 @@
        "^FlakWeapon",
        "^ArrowWeapon",
        "^RA2LightMissile",
-       "^Compatibility_MissileAP_Light_WallExcluded"
+       "^Warhead_MissileAP_Light_WallExcluded"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -470,7 +470,7 @@
         "damage": "6000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_MediumFlatCompatibility",
+        "tag": "Flak_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -482,7 +482,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Flak_MediumFlat",
+       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Concussion_Light",
        "^Warhead_MissileAP_Heavy",
        "^Effect_MissileAP_Heavy",
@@ -505,7 +505,7 @@
         "damage": "6000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_MediumFlatCompatibility",
+        "tag": "Flak_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -595,7 +595,7 @@
         "damage": "6000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_MediumFlatCompatibility",
+        "tag": "Flak_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -607,7 +607,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Flak_MediumFlat",
+       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Concussion_Light",
        "^Warhead_MissileAP_Heavy",
        "^Effect_MissileAP_Heavy",
@@ -630,7 +630,7 @@
         "damage": "6000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_MediumFlatCompatibility",
+        "tag": "Flak_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -2872,7 +2872,7 @@
         "damage": "16000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "tag": "MissileAP_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -2948,7 +2948,7 @@
         "damage": "16000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "tag": "MissileAP_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -3025,7 +3025,7 @@
         "damage": "16000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "tag": "MissileAP_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -3102,7 +3102,7 @@
         "damage": "16000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "tag": "MissileAP_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -3234,7 +3234,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -3253,7 +3253,7 @@
       "requires": "!rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Laser_HeavyFlat",
+       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Bullet_Medium",
        "NaxiRifle",
        "^RA2LaserWeapon"
@@ -3274,7 +3274,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -3311,7 +3311,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -3348,7 +3348,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -3385,7 +3385,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -3422,7 +3422,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -3458,7 +3458,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -3477,7 +3477,7 @@
       "requires": "!rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Compatibility_Laser_HeavyFlat",
+       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Bullet_Medium",
        "NaxiRifle",
        "^RA2LaserWeapon"
@@ -3499,7 +3499,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -3537,7 +3537,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -3575,7 +3575,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -3613,7 +3613,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -3651,7 +3651,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -3764,7 +3764,7 @@
         "damage": "12000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -3837,7 +3837,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Laser_HeavyFlat",
+       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Bullet_Light",
        "NaxiMP40",
        "^RA2LaserWeapon"
@@ -3860,7 +3860,7 @@
         "damage": "12000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -4023,7 +4023,7 @@
         "damage": "12000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -4096,7 +4096,7 @@
       "requires": "!rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Laser_HeavyFlat",
+       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Bullet_Light",
        "NaxiMP40",
        "^RA2LaserWeapon"
@@ -4119,7 +4119,7 @@
         "damage": "12000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -4212,7 +4212,7 @@
         "damage": "12000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -4305,7 +4305,7 @@
         "damage": "12000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -4398,7 +4398,7 @@
         "damage": "12000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -4491,7 +4491,7 @@
         "damage": "12000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -4858,7 +4858,7 @@
         "damage": "16000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -4901,7 +4901,7 @@
         "damage": "16000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -4945,7 +4945,7 @@
         "damage": "16000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -4989,7 +4989,7 @@
         "damage": "16000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -5032,7 +5032,7 @@
         "damage": "16000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -5075,7 +5075,7 @@
         "damage": "16000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -5119,7 +5119,7 @@
         "damage": "16000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -5163,7 +5163,7 @@
         "damage": "16000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -5206,7 +5206,7 @@
         "damage": "16000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -5249,7 +5249,7 @@
         "damage": "16000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -5293,7 +5293,7 @@
         "damage": "16000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -5337,7 +5337,7 @@
         "damage": "16000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -6106,7 +6106,7 @@
         "damage": "300000",
         "falloff": "100, 0",
         "spread": "96",
-        "tag": "Railgun_HeavyFlatCompatibility",
+        "tag": "Railgun_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -6139,7 +6139,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Railgun_HeavyFlat",
+       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Tesla_Heavy",
        "^Warhead_Laser_Heavy",
        "^Projectile_Lightning_Heavy",
@@ -6161,7 +6161,7 @@
         "damage": "600000",
         "falloff": "100, 0",
         "spread": "96",
-        "tag": "Railgun_HeavyFlatCompatibility",
+        "tag": "Railgun_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -6554,7 +6554,7 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "tag": "MissileAP_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -6585,7 +6585,7 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "tag": "MissileAP_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -7588,7 +7588,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "2470",
       "pricing": true,
       "range": "12345",
@@ -7599,17 +7599,15 @@
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
-       "^Warhead_Concussion_Medium",
        "^Effect_Concussion_Medium",
        "^RA2Grenade"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "NaxGrilleArty",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
@@ -7624,7 +7622,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "2470",
       "pricing": true,
       "range": "13333",
@@ -7637,11 +7635,10 @@
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "NaxGrilleArty_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -7685,7 +7682,6 @@
       "warheads": [
        "^Warhead_Tesla_Heavy",
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "Lunar_GreenGrilleArty",
@@ -7735,7 +7731,6 @@
       "warheads": [
        "^Warhead_Tesla_Heavy",
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "Lunar_GreenGrilleArty_elite",
@@ -7868,7 +7863,7 @@
         "damage": "16000",
         "falloff": "100, 55, 0",
         "spread": "93",
-        "tag": "Tesla_HeavyFlatCompatibility",
+        "tag": "Tesla_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -7887,7 +7882,7 @@
       "requires": "!rank-elite && schwarzermond_upgrade_vrilpoweredweapons",
       "slot": "Armament@upgraded",
       "versus_templates": [
-       "^Compatibility_Tesla_HeavyFlat",
+       "^Warhead_Tesla_Heavy_Flat",
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
        "^Effect_Tesla_Heavy",
@@ -7910,7 +7905,7 @@
         "damage": "16000",
         "falloff": "100, 55, 0",
         "spread": "93",
-        "tag": "Tesla_HeavyFlatCompatibility",
+        "tag": "Tesla_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -8041,7 +8036,7 @@
       "requires": "!rank-elite && !schwarzermond_upgrade_vrilpoweredweapons",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_CannonHE_MediumFlat",
+       "^Warhead_CannonHE_Medium_Flat",
        "^LightChemicalWeapon",
        "^HeavyBomb",
        "^MediumFlameWeapon",
@@ -8460,7 +8455,7 @@
         "damage": "90000",
         "falloff": "100, 0",
         "spread": "80",
-        "tag": "CannonAP_LightFlatCompatibility",
+        "tag": "CannonAP_Light_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -8472,7 +8467,7 @@
       "requires": "!rank-elite && !schwarzermond_upgrade_vrilpoweredweapons",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^Compatibility_CannonAP_LightFlat",
+       "^Warhead_CannonAP_Light_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -8496,7 +8491,7 @@
         "damage": "90000",
         "falloff": "100, 0",
         "spread": "80",
-        "tag": "CannonAP_LightFlatCompatibility",
+        "tag": "CannonAP_Light_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -8525,7 +8520,7 @@
         "damage": "120000",
         "falloff": "100, 55, 0",
         "spread": "93",
-        "tag": "Tesla_HeavyFlatCompatibility",
+        "tag": "Tesla_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -8576,7 +8571,7 @@
       "requires": "!rank-elite && schwarzermond_upgrade_vrilpoweredweapons",
       "slot": "Armament@AG-upgraded",
       "versus_templates": [
-       "^Compatibility_Tesla_HeavyFlat",
+       "^Warhead_Tesla_Heavy_Flat",
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
        "^Effect_Tesla_Heavy",
@@ -8600,7 +8595,7 @@
         "damage": "120000",
         "falloff": "100, 55, 0",
         "spread": "93",
-        "tag": "Tesla_HeavyFlatCompatibility",
+        "tag": "Tesla_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -8651,7 +8646,7 @@
       "requires": "rank-elite && schwarzermond_upgrade_vrilpoweredweapons",
       "slot": "Armament@elite-upgrade",
       "versus_templates": [
-       "^Compatibility_Tesla_HeavyFlat",
+       "^Warhead_Tesla_Heavy_Flat",
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
        "^Effect_Tesla_Heavy",

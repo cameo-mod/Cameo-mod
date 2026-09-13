@@ -62,8 +62,24 @@ ROUTES = {
     # Tier 1 — TD and RA1, ruled 1/3 each. DTA is the missing third; see PENDING.
     "td_gdi":      (("Combined Arms", ("gdi",)), ("OpenRA Tiberian Dawn", ("gdi",))),
     "td_nod":      (("Combined Arms", ("nod",)), ("OpenRA Tiberian Dawn", ("nod",))),
-    "ra1_allies":  (("Combined Arms", ("allies",)), ("OpenRA Red Alert", ("allies",))),
-    "ra1_soviets": (("Combined Arms", ("soviet",)), ("OpenRA Red Alert", ("soviet",))),
+    # ⭐ THE RA1 COUNTRIES ARE SIDES, and leaving them out made real originals unreachable.
+    # OpenRA Red Alert tags a country-specific unit with its COUNTRY, not its side, so a token set
+    # of ("allies",)/("soviet",) alone cannot see any of them. Measured on the corpus — these are
+    # every country-only row it ships:
+    #     russia   TTNK Tesla Tank
+    #     ukraine  DTRK Demolition Truck · AFLD.Ukraine Airfield
+    #     germany  CTNK Chrono Tank
+    #     france   STNK Phase Transport · the whole Fake-structure set
+    #     england  MGG  Mobile Gap Generator
+    # Every one sat unclaimed in O2 while the Cameo actor it belongs to sat BLANK:
+    # `ra1_soviets_teslatank` scores an exact 1.000 against "Tesla Tank" and could not see it;
+    # `ra1_allies_chronotank`, `ra1_allies_phasetransport` and `ra1_allies_mobilegapgenerator`
+    # had no reference at all. The side each country belongs to is Red Alert's own faction
+    # selection, not a judgement call.
+    "ra1_allies":  (("Combined Arms", ("allies",)),
+                    ("OpenRA Red Alert", ("allies", "england", "france", "germany", "spain"))),
+    "ra1_soviets": (("Combined Arms", ("soviet",)),
+                    ("OpenRA Red Alert", ("soviet", "russia", "ukraine", "iraq"))),
 
     # Tier 2 — RA2, ruled 1/6 and achievable 1/4. RV and Valiant Shades are the two genuine
     # voices; MO and CnC Reloaded are ruled in and blocked on a faction column (PENDING).

@@ -743,7 +743,7 @@ ra1_allies_alliedtankdestroyer:
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 ra1_allies_chronotank:
 	Inherits: ^Vehicle
-	Inherits@Template: ^EpicVehicleTemplate
+	Inherits@Template: ^FireSupportTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -756,7 +756,6 @@ ra1_allies_chronotank:
 	Inherits@CryoMissiles: ^CryoMissiles
 	Inherits@ChronoArmor: ^ChronoArmor
 	Buildable:
-		BuildLimit: 1
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 200
 		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ~ra1_allies_promotion_chronotank
@@ -818,7 +817,6 @@ ra1_allies_chronotank:
 		Weapon: UnitExplodeBig
 	ActorStatValues:
 		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
-
 ra1_allies_phasetransport:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ArmedTroopTransportTemplate
@@ -906,7 +904,6 @@ ra1_allies_mobilegapgenerator:
 	-ExternalCondition@shrouded:
 	-ExternalCondition@lockon:
 	Buildable:
-		BuildLimit: 1
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Queue: Vehicle, RAVehicle
@@ -998,7 +995,6 @@ ra1_allies_mobileradarjammer:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildLimit: 1
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Queue: Vehicle, RAVehicle

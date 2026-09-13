@@ -7,7 +7,10 @@ Import ``DAMAGE_STEP`` and ``percentage_twin`` rather than ever re-literalising 
 
 Rule (DESIGN.md §12, formula.distribute_damage):
 - Main SpreadDamage/AreaDamage warheads must all carry the SAME value.
-- That value must sit on the flat-damage grid (Damage % DAMAGE_STEP == 0; DAMAGE_STEP = 100).
+- That value must sit on the flat-damage grid (Damage % DAMAGE_STEP == 0). DAMAGE_STEP is
+  **1** since the maintainer retired the grid on 2026-09-12, so every integer Damage is on
+  it and this check can only fail on a NEGATIVE or non-integer value. It is kept because the
+  grid is one editable constant and a future ruling can re-coarsen it.
 - The percentage twin must equal ``percentage_twin(D, denominator)`` where ``denominator``
   is the node's own unit (read from the resolved ``PercentageDenominator`` field).
 - SpreadDamage/AreaDamage twins (*FriendlyFire, *ExtraDamage) must equal D // 2 (50 %).
@@ -57,7 +60,9 @@ from report import h1, h2, table  # noqa: E402
 
 # Debt ratchets — measured 2026-08-25. Lower as the debt is paid; never raise.
 # A count ABOVE its baseline is a regression (exit 1); at-or-below is accepted.
-OFFGRID_BASELINE = 83        # main Damage off the DAMAGE_STEP grid (hand-tuned/measured)
+OFFGRID_BASELINE = 0         # was 83, then 65 at DAMAGE_STEP 10; at step 1 nothing can be
+                             # off-grid. LOWER ONLY -- if this ever goes red again the grid
+                             # was re-coarsened, and that is a design decision to look at.
 UNEQUAL_BASELINE = 216       # weapons whose main warheads carry DIFFERENT values
 PCT_TWIN_BASELINE = 0        # basis-point *Percentage twins disobeying percentage_twin
 TWIN50_BASELINE = 353        # *FriendlyFire/*ExtraDamage twins != D // 2

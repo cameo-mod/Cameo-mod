@@ -462,7 +462,7 @@ TS155mm_bluenuke:
 		Explosions: magicnuke_med
 
 TSGrenade:
-	Inherits@finalmain: ^Compatibility_Concussion_MediumFlat
+	Inherits@finalmain: ^Warhead_Concussion_Medium_Flat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
@@ -495,7 +495,7 @@ TSGrenade:
 		ImpactSounds: expnew13.aud
 	-Warhead@CannonHE_Medium:
 	-Warhead@Concussion_Medium:
-	Warhead@Concussion_MediumFlatCompatibility:
+	Warhead@Concussion_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 24000
 		PercentageScale: 9996
@@ -636,7 +636,7 @@ MammothTankCannon:
 		InvalidTargets: Vehicle, Building, wall
 
 TSTurretLaser:
-	Inherits@finalmain: ^Compatibility_Laser_HeavyFlat
+	Inherits@finalmain: ^Warhead_Laser_Heavy_Flat
 	Inherits: ^Warhead_Bullet_Medium
 	Inherits@2: ^Warhead_Laser_Heavy
 	Inherits@3: ^Projectile_Laser_Heavy
@@ -659,7 +659,7 @@ TSTurretLaser:
 		Damage: 10000
 	-Warhead@Bullet_Medium:
 	-Warhead@Laser_Heavy:
-	Warhead@Laser_HeavyFlatCompatibility:
+	Warhead@Laser_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
@@ -672,7 +672,7 @@ TSCABALPlasmaFire:
 	Projectile: LaserZap
 		Color: 0040FF
 		SecondaryBeamColor: 80C0FF
-	Warhead@Laser_HeavyFlatCompatibility:
+	Warhead@Laser_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
@@ -684,7 +684,7 @@ TSCABALPlasmaFire:
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 TSLaserTurretLaser:
-	Inherits@finalmain: ^Compatibility_Laser_HeavyFlat
+	Inherits@finalmain: ^Warhead_Laser_Heavy_Flat
 	Inherits: ^Warhead_Bullet_Medium
 	Inherits@2: ^Warhead_Laser_Heavy
 	Inherits@3: ^Projectile_Laser_Heavy
@@ -714,7 +714,7 @@ TSLaserTurretLaser:
 		AimTargetStances: Enemy, Neutral
 	-Warhead@Bullet_Medium:
 	-Warhead@Laser_Heavy:
-	Warhead@Laser_HeavyFlatCompatibility:
+	Warhead@Laser_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
@@ -726,7 +726,7 @@ TSLaserTurretLaser:
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 TurretLaserFragment:
-	Inherits@finalmain: ^Compatibility_Laser_HeavyFlat
+	Inherits@finalmain: ^Warhead_Laser_Heavy_Flat
 	Inherits: ^Warhead_Bullet_Medium
 	Inherits@2: ^Warhead_Laser_Heavy
 	Inherits@3: ^Projectile_Laser_Heavy
@@ -745,7 +745,7 @@ TurretLaserFragment:
 		Damage: 8000
 	-Warhead@Bullet_Medium:
 	-Warhead@Laser_Heavy:
-	Warhead@Laser_HeavyFlatCompatibility:
+	Warhead@Laser_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
@@ -832,7 +832,7 @@ TSLaserObeliskLaserFire:
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 ObeliskLaserFragment:
-	Inherits@finalmain: ^Compatibility_Laser_HeavyFlat
+	Inherits@finalmain: ^Warhead_Laser_Heavy_Flat
 	Inherits: ^Warhead_Bullet_Medium
 	Inherits@2: ^Warhead_Laser_Heavy
 	Inherits@3: ^Projectile_Laser_Heavy
@@ -853,7 +853,7 @@ ObeliskLaserFragment:
 		Damage: 40000
 	-Warhead@Bullet_Medium:
 	-Warhead@Laser_Heavy:
-	Warhead@Laser_HeavyFlatCompatibility:
+	Warhead@Laser_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 80000
@@ -980,7 +980,7 @@ TSReaperTusk:
 		ValidTargets: Ground
 
 TSAegisMissile:
-	Inherits@roleflat: ^Compatibility_MissileAA_MediumFlat
+	Inherits@roleflat: ^Warhead_MissileAA_Medium_Flat
 	Inherits: ^TSDefaultMissile
 	ValidTargets: Air
 	Burst: 2
@@ -995,7 +995,7 @@ TSAegisMissile:
 		ValidTargets: Air
 	Warhead@LightMissilePercentage:
 		ValidTargets: Air
-	Warhead@MissileAA_MediumFlatCompatibility:
+	Warhead@MissileAA_Medium_Flat:
 		ValidTargets: Air
 		Damage: 25000
 		PercentageScale: 0
@@ -1020,9 +1020,7 @@ TSMammothTusk_elite:
 
 TSBikeMissile:
 	Inherits@missilerole: ^Warhead_MissileAP_Medium
-	Inherits@finalmain: ^Compatibility_MissileHE_MediumFlat
-	Inherits@wh: ^Warhead_MissileHE_Light
-	Inherits@wh2: ^Warhead_MissileHE_Medium
+	Inherits@finalmain: ^Warhead_MissileHE_Medium_Flat
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileHE_Medium
 	Range: 6554
@@ -1037,9 +1035,8 @@ TSBikeMissile:
 	Warhead@MissileHE_Medium:
 		Damage: 12000
 		ValidTargets: Ground, Water, Air
-	-Warhead@MissileHE_Light:
 	-Warhead@MissileHE_Medium:
-	-Warhead@MissileHE_MediumFlatCompatibility:
+	-Warhead@MissileHE_Medium_Flat:
 	Warhead@MissileAP_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1146,7 +1143,7 @@ TSSAPCMissiles:
 		PercentageScale: 0
 
 TSSAPCCoreMissiles:
-	Inherits@roleflat: ^Compatibility_Chemical_LightFlat
+	Inherits@roleflat: ^Warhead_Chemical_Light_Flat
 	Inherits@wh: ^Warhead_Chemical_Light
 	Inherits@proj: ^Projectile_Chem_Light
 	Inherits@fx: ^Effect_Chem_Light
@@ -1160,7 +1157,7 @@ TSSAPCCoreMissiles:
 		Damage: 8000
 		ValidTargets: Ground, Water, Air
 	-Warhead@Chemical_Light:
-	Warhead@Chemical_LightFlatCompatibility:
+	Warhead@Chemical_Light_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
 		PercentageScale: 3330
@@ -1262,7 +1259,7 @@ TSChemAdatsMissileAA:
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
 		TrailImage: spittrail
-	Warhead@Flak_MediumFlatCompatibility:
+	Warhead@Flak_Medium_Flat:
 		Damage: 12000
 		PercentageScale: 9992
 		ValidTargets: Air
@@ -1430,7 +1427,7 @@ TSVulcan2:
 		Damage: 5000
 
 TSAssaultCannon:
-	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
+	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -1451,12 +1448,12 @@ TSAssaultCannon:
 		Damage: 2000
 	-Warhead@Bullet_Medium:
 	-Warhead@Flak_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
 TSLaserRaiderCannon:
-	Inherits@finalmain: ^Compatibility_Laser_HeavyFlat
+	Inherits@finalmain: ^Warhead_Laser_Heavy_Flat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -1478,7 +1475,7 @@ TSLaserRaiderCannon:
 		Damage: 6000
 	-Warhead@Bullet_Light:
 	-Warhead@Laser_Heavy:
-	Warhead@Laser_HeavyFlatCompatibility:
+	Warhead@Laser_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		PercentageScale: 9992

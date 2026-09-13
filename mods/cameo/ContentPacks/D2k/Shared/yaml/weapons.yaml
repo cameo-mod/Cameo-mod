@@ -425,7 +425,7 @@
 ## ContentPacks are lobby-selected (dynamic faction loading).
 
 110mm_Gun:
-	Inherits@finalmain: ^Compatibility_CannonAP_LightFlat
+	Inherits@finalmain: ^Warhead_CannonAP_Light_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -441,7 +441,7 @@
 	-Warhead@CannonAP_Light:
 	-Warhead@CannonHE_Heavy:
 	-Warhead@CannonHE_Medium:
-	Warhead@CannonAP_LightFlatCompatibility:
+	Warhead@CannonAP_Light_Flat:
 		ValidTargets: Ground, Water
 		Damage: 30000
 		PercentageScale: 9997

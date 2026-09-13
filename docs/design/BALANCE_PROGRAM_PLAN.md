@@ -1660,7 +1660,7 @@ the ratio makes it deal **five times**. Never land one alone — see W18.
   Validated at load through a new `AreaDamageWarhead.ValidateFields()` hook —
   implementing `IRulesetLoaded<WeaponInfo>` in the subclass instead would REPLACE the
   base's explicit implementation, leaving `effectiveRange` unbuilt and every ring empty.
-- Tools: `formula.DAMAGE_STEP = 100`, `DAMAGE_PER_PERCENT = 10000`,
+- Tools: `formula.DAMAGE_STEP = 10` (regridded from 100 on 2026-09-11), `DAMAGE_PER_PERCENT = 10000`,
   `BASIS_POINT_DENOMINATOR = 10000`, `PERCENTAGE_VERSUS_STEP = 5`;
   `percentage_twin(per, denominator)` takes the unit from the node, `twin_denominator()`
   reads it from the ledger record, and `extract_stats` records
@@ -1801,7 +1801,7 @@ run changes nothing), and `extract_stats` now prints a loud warning after any fi
 ### W17 — Retire FirepowerMultiplier 🔵 TOOLING DONE (2026-08-15) · content half ⛔ set B
 
 ⚠ **Partly superseded by W15's regrid.** The maintainer chose a **grid "for sanity"** (100,
-`formula.DAMAGE_STEP`), not free-valued Damage, so "remove the grid" is now "the grid is 100
+`formula.DAMAGE_STEP`), not free-valued Damage, so "remove the grid" is now "the grid is 10
 and the %-twin tracks it exactly". What remains of W17 is the SECOND half: retiring
 `FirepowerMultiplier` as a fine-tuning knob, which the finer grid makes possible.
 

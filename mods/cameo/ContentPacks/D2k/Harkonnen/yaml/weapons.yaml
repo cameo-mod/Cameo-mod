@@ -21,7 +21,7 @@ HarkonnenFlameTurret:
 		Damage: 25135
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 harkonnen_autogunturret:
-	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
+	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Inherits: ordos_autogunturret
 	ReloadDelay: 132
 	Burst: 26
@@ -29,7 +29,7 @@ harkonnen_autogunturret:
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	-Warhead@CannonHE_Heavy:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984

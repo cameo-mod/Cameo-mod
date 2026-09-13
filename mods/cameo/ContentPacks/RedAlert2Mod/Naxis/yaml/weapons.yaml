@@ -1,5 +1,5 @@
 NaxBrummbarArty:
-	Inherits@finalmain: ^Compatibility_CannonHE_HeavyFlat
+	Inherits@finalmain: ^Warhead_CannonHE_Heavy_Flat
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Concussion_Medium
@@ -29,7 +29,7 @@ NaxBrummbarArty:
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Heavy:
-	Warhead@CannonHE_HeavyFlatCompatibility:
+	Warhead@CannonHE_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 42000
 		PercentageScale: 9998
@@ -39,13 +39,13 @@ NaxBrummbarArty_elite:
 	Range: 15000
 	Burst: 2
 	BurstDelays: 3
-	Warhead@CannonHE_HeavyFlatCompatibility:
+	Warhead@CannonHE_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 42000
 		PercentageScale: 9998
 
 NaxiWW2KübelwagenMachinegun:
-	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
@@ -69,12 +69,12 @@ NaxiWW2KübelwagenMachinegun:
 		ValidTargets: Ground, Water, Air
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
 NaxiWW2Machinegun:
-	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
@@ -98,7 +98,7 @@ NaxiWW2Machinegun:
 		ValidTargets: Ground, Water
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 8000
 		PercentageScale: 9988
@@ -109,7 +109,7 @@ NaxiWW2Machinegun_AA:
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Air
 		Damage: 8000
 		PercentageScale: 9988
@@ -122,7 +122,7 @@ NaxiWW2MachinegunSmall:
 		Damage: 4000
 		ValidTargets: Ground, Water
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
@@ -133,7 +133,7 @@ NaxiWW2MachinegunSmall_AA:
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Air
 		Damage: 4000
 		PercentageScale: 9975
@@ -150,7 +150,7 @@ NaxiWW2MachinegunTop_AA:
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Air
 		Damage: 8000
 		PercentageScale: 9988
@@ -325,7 +325,7 @@ LunarNaxiDroneMissile:
 	Inherits@4: ^FlakWeapon
 	Inherits@5: ^ArrowWeapon
 	Inherits@6: ^RA2LightMissile
-	Inherits@WallExcluded: ^Compatibility_MissileAP_Light_WallExcluded
+	Inherits@WallExcluded: ^Warhead_MissileAP_Light_WallExcluded
 	Range: 5760
 	ReloadDelay: 100
 	Burst: 2
@@ -438,7 +438,7 @@ NaxiSniper_elite:
 
 NaxiShrek:
 	Inherits@missilerole: ^Warhead_MissileHE_Medium
-	Inherits@roleflat: ^Compatibility_MissileAP_MediumFlat
+	Inherits@roleflat: ^Warhead_MissileAP_Medium_Flat
 	Inherits: ^HeavyBomb
 	Inherits@2: ^HeavyFlameWeapon
 	Inherits@3: ^Grenade
@@ -513,7 +513,7 @@ NaxiShrek:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@TankDestroyerCannon:
 	-Warhead@MissileAP_Medium:
-	-Warhead@MissileAP_MediumFlatCompatibility:
+	-Warhead@MissileAP_Medium_Flat:
 	Warhead@MissileHE_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -550,7 +550,7 @@ NaxiShrek_elite:
 
 NaxiShrekCons:
 	Inherits@missilerole: ^Warhead_MissileHE_Medium
-	Inherits@roleflat: ^Compatibility_MissileAP_MediumFlat
+	Inherits@roleflat: ^Warhead_MissileAP_Medium_Flat
 	Inherits: ^HeavyBomb
 	Inherits@2: ^HeavyFlameWeapon
 	Inherits@3: ^Grenade
@@ -625,7 +625,7 @@ NaxiShrekCons:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@TankDestroyerCannon:
 	-Warhead@MissileAP_Medium:
-	-Warhead@MissileAP_MediumFlatCompatibility:
+	-Warhead@MissileAP_Medium_Flat:
 	Warhead@MissileHE_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -681,7 +681,7 @@ NaxiHetzerDestroyer_elite:
 	BurstDelays: 3
 
 NaxiJadgDestroyer:
-	Inherits@finalmain: ^Compatibility_CannonAP_LightFlat
+	Inherits@finalmain: ^Warhead_CannonAP_Light_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -702,7 +702,7 @@ NaxiJadgDestroyer:
 	-Warhead@CannonAP_Light:
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Concussion_Medium:
-	Warhead@CannonAP_LightFlatCompatibility:
+	Warhead@CannonAP_Light_Flat:
 		ValidTargets: Ground, Water
 		Damage: 60000
 		PercentageScale: 9999
@@ -713,7 +713,7 @@ NaxiJadgDestroyer_elite:
 	Range: 8396
 	Burst: 2
 	BurstDelays: 3
-	Warhead@CannonAP_LightFlatCompatibility:
+	Warhead@CannonAP_Light_Flat:
 		ValidTargets: Ground, Water
 		Damage: 60000
 		PercentageScale: 9999
@@ -742,7 +742,7 @@ NaxiAntiTankCannon_elite:
 	BurstDelays: 3
 
 NaxMausCannon:
-	Inherits@roleflat: ^Compatibility_CannonHE_HeavyFlat
+	Inherits@roleflat: ^Warhead_CannonHE_Heavy_Flat
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^HeavyFlameWeapon
 	Inherits@3: ^ShrapnelWeapon
@@ -807,7 +807,7 @@ NaxMausCannon:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@TankDestroyerCannon:
-	Warhead@CannonHE_HeavyFlatCompatibility:
+	Warhead@CannonHE_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 60000
 		PercentageScale: 1665
@@ -820,7 +820,7 @@ NaxMausCannon_elite:
 	BurstDelays: 3
 
 NaxRatteCannon:
-	Inherits@roleflat: ^Compatibility_CannonHE_HeavyFlat
+	Inherits@roleflat: ^Warhead_CannonHE_Heavy_Flat
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^HeavyBomb
 	Inherits@3: ^RA2MediumCannon
@@ -859,7 +859,7 @@ NaxRatteCannon:
 		Damage: 50000
 	-Warhead@HeavyBomb:
 	-Warhead@LightChemicalWeapon:
-	Warhead@CannonHE_HeavyFlatCompatibility:
+	Warhead@CannonHE_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 150000
 		PercentageScale: 3333
@@ -1007,7 +1007,7 @@ NaxQuadCannon_elite:
 	BurstDelays: 3
 
 NaxQuadCannon_AA:
-	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
+	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
 	Inherits: NaxQuadCannon
 	Inherits@compat: ^NaxQuadCannonFlakGroundWaterCompatibility
 	ValidTargets: Air
@@ -1036,7 +1036,7 @@ NaxQuadCannon_AA:
 		ValidTargets: Air
 	-Warhead@Flak_Medium:
 	-Warhead@NaxFlakGroundWater:
-	Warhead@Flak_MediumFlatCompatibility:
+	Warhead@Flak_Medium_Flat:
 		ValidTargets: Air
 		Damage: 7000
 		PercentageScale: 2843
@@ -1136,7 +1136,7 @@ NaxFlakAA:
 	Warhead@ChaingunPercentage:
 		ValidTargets: Air
 NaxPlanegun_elite:
-	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
+	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^Warhead_Concussion_Light
 	Inherits@2: ^Warhead_CannonHE_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1169,12 +1169,12 @@ NaxPlanegun_elite:
 	-Warhead@Bullet_Medium:
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Concussion_Light:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
 NaxPlaneRockets_elite:
-	Inherits@finalmain: ^Compatibility_MissileAP_HeavyFlat
+	Inherits@finalmain: ^Warhead_MissileAP_Heavy_Flat
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
@@ -1200,13 +1200,13 @@ NaxPlaneRockets_elite:
 		Damage: 10000
 	-Warhead@MissileAP_Heavy:
 	-Warhead@MissileAP_Medium:
-	Warhead@MissileAP_HeavyFlatCompatibility:
+	Warhead@MissileAP_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 		PercentageScale: 9995
 
 NaxInterceptorRockets:
-	Inherits@finalmain: ^Compatibility_MissileAA_HeavyFlat
+	Inherits@finalmain: ^Warhead_MissileAA_Heavy_Flat
 	Inherits: NaxPlaneRockets_elite
 	ValidTargets: Air
 	Warhead@MissileAP_Medium:
@@ -1214,9 +1214,9 @@ NaxInterceptorRockets:
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Air
 	-Warhead@MissileAP_Heavy:
-	-Warhead@MissileAP_HeavyFlatCompatibility:
+	-Warhead@MissileAP_Heavy_Flat:
 	-Warhead@MissileAP_Medium:
-	Warhead@MissileAA_HeavyFlatCompatibility:
+	Warhead@MissileAA_Heavy_Flat:
 		ValidTargets: Air
 		Damage: 20000
 		PercentageScale: 9995
@@ -1226,7 +1226,7 @@ NaxInterceptorRockets:
 		MinimumLaunchAngle: 128
 
 NaxiInterceptorGun:
-	Inherits@collapseflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@collapseflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1297,7 +1297,7 @@ NaxiInterceptorGun:
 	-Warhead@Chaingun:
 	-Warhead@SmallArms:
 	-Warhead@CannonHE_Heavy:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Spread: 1
 		Falloff: 100, 0
@@ -1310,7 +1310,7 @@ NaxiInterceptorGun:
 			Heroic: 100
 
 NaxShoeRocket:
-	Inherits@finalmain: ^Compatibility_MissileAP_MediumFlat
+	Inherits@finalmain: ^Warhead_MissileAP_Medium_Flat
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@2: ^RA2Grenade
 	Inherits@3: ^RA2MediumMissile
@@ -1429,7 +1429,7 @@ NaxShoeRocket:
 	-Warhead@Demolition_Heavy:
 	-Warhead@Demolition_Light:
 	-Warhead@MissileAP_Medium:
-	Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@MissileAP_Medium_Flat:
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 24000
 		PercentageScale: 0
@@ -1482,13 +1482,13 @@ NaxiAlienPistol_elite:
 	Range: 3500
 	Burst: 4
 	BurstDelays: 3
-	Warhead@Laser_HeavyFlatCompatibility:
+	Warhead@Laser_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 24000
 		PercentageScale: 4163
 
 NaxiMissileUboat:
-	Inherits@finalmain: ^Compatibility_MissileAP_MediumFlat
+	Inherits@finalmain: ^Warhead_MissileAP_Medium_Flat
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Demolition_Heavy
 	Inherits@proj: ^Projectile_Grenade_Light
@@ -1606,7 +1606,7 @@ NaxiMissileUboat:
 	-Warhead@Demolition_Heavy:
 	-Warhead@Demolition_Light:
 	-Warhead@MissileAP_Medium:
-	Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@MissileAP_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 48000
 		PercentageScale: 0

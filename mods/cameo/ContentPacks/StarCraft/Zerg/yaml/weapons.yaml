@@ -115,7 +115,7 @@ SpithidSpit:
 		PercentageScale: 0
 
 MutaliskSpore:
-	Inherits@finalmain: ^Compatibility_Chemical_MediumFlat
+	Inherits@finalmain: ^Warhead_Chemical_Medium_Flat
 	Inherits@collapsewh: ^Warhead_Chemical_Medium
 	Inherits: ^SwordWeapon
 	Inherits@2: ^MediumChemicalWeapon
@@ -174,7 +174,7 @@ MutaliskSpore:
 		Damage: 16000
 	-Warhead@Chemical_Medium:
 	-Warhead@MutaliskCompatibility:
-	Warhead@Chemical_MediumFlatCompatibility:
+	Warhead@Chemical_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
 		PercentageScale: 0
@@ -202,7 +202,7 @@ MutaBounce1:
 	-Warhead@Chemical_Medium:
 	-Warhead@MutaWildcardCompatibility:
 	-Warhead@MutaliskCompatibility:
-	Warhead@Chemical_MediumFlatCompatibility:
+	Warhead@Chemical_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
 		PercentageScale: 0
@@ -229,7 +229,7 @@ MutaBounce2:
 	-Warhead@Chemical_Medium:
 	-Warhead@MutaWildcardCompatibility:
 	-Warhead@MutaliskCompatibility:
-	Warhead@Chemical_MediumFlatCompatibility:
+	Warhead@Chemical_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 		PercentageScale: 0
@@ -270,7 +270,7 @@ CorruptorSpore:
 
 DreadshroudSpore:
 	Inherits@collapsewh: ^Warhead_Chemical_Medium
-	Inherits@collapseextra: ^Compatibility_Laser_ExtraDamage
+	Inherits@collapseextra: ^Warhead_Laser_ExtraDamage
 	Inherits: ^LightFlameWeapon
 	Inherits@2: ^MediumMissile
 	Inherits@3: ^ShrapnelWeapon
@@ -419,7 +419,7 @@ SCDevourerAA:
 	-Warhead@Chemical_Medium:
 	-Warhead@DevourerChemicalAirCompatibility:
 	-Warhead@MutaliskCompatibility:
-	Warhead@Chemical_MediumFlatCompatibility:
+	Warhead@Chemical_Medium_Flat:
 		ValidTargets: Air
 		Damage: 44000
 		PercentageScale: 0
@@ -449,7 +449,7 @@ ScourgeExplosion:
 		ImpactSounds: zavdth00.aud
 
 SCScourgeExplosion:
-	Inherits@finalmain: ^Compatibility_MissileAA_HeavyFlat
+	Inherits@finalmain: ^Warhead_MissileAA_Heavy_Flat
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Concussion_Medium
@@ -461,13 +461,13 @@ SCScourgeExplosion:
 		ImpactSounds: zavdth00.aud
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Heavy:
-	Warhead@MissileAA_HeavyFlatCompatibility:
+	Warhead@MissileAA_Heavy_Flat:
 		ValidTargets: Air
 		Damage: 100000
 		PercentageScale: 9999
 
 GuardianShoot:
-	Inherits@roleflat: ^Compatibility_Concussion_MediumFlat
+	Inherits@roleflat: ^Warhead_Concussion_Medium_Flat
 	Inherits@collapsewh: ^Warhead_Concussion_Medium
 	Inherits@compatwh: ^Warhead_Concussion_Light
 	Inherits: ^Grenade
@@ -510,7 +510,7 @@ GuardianShoot:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@Concussion_Medium:
 	-Warhead@Concussion_Light:
-	Warhead@Concussion_MediumFlatCompatibility:
+	Warhead@Concussion_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 24000
 		PercentageScale: 0
@@ -951,7 +951,7 @@ LurkerSpinesImpact:
 		PercentageScale: 0
 
 InfestedExplosion:
-	Inherits@finalmain: ^Compatibility_Demolition_HeavyFlat
+	Inherits@finalmain: ^Warhead_Demolition_Heavy_Flat
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Demolition_Heavy
 	Inherits@wh3: ^Warhead_Concussion_Medium
@@ -970,7 +970,7 @@ InfestedExplosion:
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Heavy:
 	-Warhead@Demolition_Light:
-	Warhead@Demolition_HeavyFlatCompatibility:
+	Warhead@Demolition_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 150000
 		PercentageScale: 10000
@@ -1171,7 +1171,7 @@ Spore_AA:
 		PercentageScale: 0
 
 Tentacle:
-	Inherits@roleflat: ^Compatibility_Melee_HeavyFlat
+	Inherits@roleflat: ^Warhead_Melee_Heavy_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1200,7 +1200,7 @@ Tentacle:
 	-Warhead@RailgunWeapon:
 	-Warhead@SwordWeapon:
 	-Warhead@SwordWeaponFriendlyFire:
-	Warhead@Melee_HeavyFlatCompatibility:
+	Warhead@Melee_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground
 		Damage: 25000

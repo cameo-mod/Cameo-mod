@@ -45,7 +45,7 @@ ra1_allies_ranger_machinegun_cryo:
 		Damage: 4000
 
 ra1_allies_alliedgunturret_cannon:
-	Inherits@finalmain: ^Compatibility_CannonHE_HeavyFlat
+	Inherits@finalmain: ^Warhead_CannonHE_Heavy_Flat
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@wh2: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
@@ -63,7 +63,7 @@ ra1_allies_alliedgunturret_cannon:
 		Explosions: small_poof
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Concussion_Medium:
-	Warhead@CannonHE_HeavyFlatCompatibility:
+	Warhead@CannonHE_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 20000
 		PercentageScale: 9995
@@ -100,9 +100,7 @@ ra1_allies_alliedaagun_flak_cryo:
 
 ra1_allies_longbow_missile:
 	Inherits@missilerole: ^Warhead_MissileAP_Heavy
-	Inherits@finalmain: ^Compatibility_MissileHE_HeavyFlat
-	Inherits@wh: ^Warhead_Concussion_Medium
-	Inherits@wh2: ^Warhead_MissileHE_Heavy
+	Inherits@finalmain: ^Warhead_MissileHE_Heavy_Flat
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileHE_Heavy
 	ValidTargets: Ground, Water, Air
@@ -120,7 +118,7 @@ ra1_allies_longbow_missile:
 	-Warhead@MissileHE_Heavy:
 	Projectile: Missile
 		VerticalRateOfTurn: 12
-	-Warhead@MissileHE_HeavyFlatCompatibility:
+	-Warhead@MissileHE_Heavy_Flat:
 	Warhead@MissileAP_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -247,7 +245,6 @@ ra1_allies_sheridanassaulttank_cannon_cryo:
 		ValidTargets: Ground, Water
 ra1_allies_sheridanassaulttank_missile:
 	Inherits@missilerole: ^Warhead_MissileAP_Medium
-	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
 	Report: bazook1.aud
@@ -256,7 +253,6 @@ ra1_allies_sheridanassaulttank_missile:
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		VerticalRateOfTurn: 20
-	-Warhead@MissileHE_Medium:
 	Warhead@MissileAP_Medium: AreaDamage
 		PercentageDenominator: 10000
 		ValidRelationships: Ally, Neutral, Enemy
@@ -285,7 +281,7 @@ ra1_allies_sheridanassaulttank_missile_cryo:
 		VerticalRateOfTurn: 20
 
 ra1_allies_sheridanassaulttank_chaingun:
-	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -300,7 +296,7 @@ ra1_allies_sheridanassaulttank_chaingun:
 		Damage: 2000
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		PercentageDenominator: 10000
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
@@ -427,7 +423,7 @@ ra1_allies_rapierjumpjet_missile_cryo_AA:
 		Damage: 4000
 
 ra1_allies_reconranger_recoillessgun:
-	Inherits@collapseflat: ^Compatibility_MissileAP_HeavyFlat
+	Inherits@collapseflat: ^Warhead_MissileAP_Heavy_Flat
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^Chaingun
@@ -531,7 +527,7 @@ ra1_allies_reconranger_recoillessgun:
 	-Warhead@RailgunWeapon:
 	-Warhead@RailgunExtraDamage:
 	-Warhead@MediumMissile:
-	-Warhead@MissileAP_HeavyFlatCompatibility:
+	-Warhead@MissileAP_Heavy_Flat:
 ra1_allies_reconranger_recoillessgun_cryo:
 	Inherits: ra1_allies_reconranger_recoillessgun
 	Inherits@2: ^CryoMissileProjectile
@@ -609,7 +605,6 @@ ra1_allies_phasetransport_missile_cryo:
 
 ra1_allies_chronotank_missile:
 	Inherits@missilerole: ^Warhead_MissileAP_Heavy
-	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
 	Inherits: ^Grenade
 	Inherits@2: ^FlakWeapon
 	Inherits@3: ^Chaingun
@@ -644,7 +639,6 @@ ra1_allies_chronotank_missile:
 	-Warhead@MediumMissile:
 	Projectile: Missile
 		VerticalRateOfTurn: 16
-	-Warhead@MissileHE_Heavy:
 	Warhead@MissileAP_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -698,7 +692,7 @@ ra1_allies_bastionartillerybunker_155mmbastioncryo:
 	MinRange: 2035
 
 25mm:
-	Inherits@collapseflat: ^Compatibility_CannonHE_MediumFlat
+	Inherits@collapseflat: ^Warhead_CannonHE_Medium_Flat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
@@ -738,7 +732,7 @@ ra1_allies_bastionartillerybunker_155mmbastioncryo:
 	-Warhead@LightFlameWeapon:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@TankDestroyerCannon:
-	-Warhead@CannonHE_MediumFlatCompatibility:
+	-Warhead@CannonHE_Medium_Flat:
 ra1_allies_alliedmediumtank_cannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
@@ -847,7 +841,7 @@ ra1_allies_tanya_pistol_cryo:
 		Damage: 7777
 
 ra1_allies_alliedheavyaatank_cannon:
-	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^LightMissile
 	Inherits@2: ^FlakWeapon
 	Inherits@3: ^SmallArms
@@ -888,13 +882,13 @@ ra1_allies_alliedheavyaatank_cannon:
 	-Warhead@FlakWeapon:
 	-Warhead@LightMissile:
 	-Warhead@SmallArms:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 2000
 		PercentageScale: 0
 
 ra1_allies_alliedheavyaatank_cannon_AA:
-	Inherits@roleflat: ^Compatibility_Flak_MediumFlat
+	Inherits@roleflat: ^Warhead_Flak_Medium_Flat
 	Inherits: ra1_allies_alliedheavyaatank_cannon
 	Range: 7119
 	ValidTargets: Air
@@ -916,10 +910,10 @@ ra1_allies_alliedheavyaatank_cannon_AA:
 		ValidTargets: Air
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
-	-Warhead@Bullet_MediumFlatCompatibility:
+	-Warhead@Bullet_Medium_Flat:
 	-Warhead@FlakWeapon:
 	-Warhead@LightMissile:
-	Warhead@Flak_MediumFlatCompatibility:
+	Warhead@Flak_Medium_Flat:
 		ValidTargets: Air
 		Damage: 2000
 		PercentageScale: 0

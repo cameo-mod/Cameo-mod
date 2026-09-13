@@ -12,7 +12,7 @@
 > Use [TASK_INDEX.md](../TASK_INDEX.md) for current tools and gates; remeasure dated
 > counts. The historical conversion plans below do not authorize a new collapse.
 
-> ⚠ **SUPERSEDED (W15/W17, 2026-08-15).** The grid is now `formula.DAMAGE_STEP` = **100**, the `%`-twin comes from `formula.percentage_twin()` (not `damage // 2000`), and `FirepowerMultiplier` is retired as a fine-tuning knob — `apply_balance` cannot write it and `decompose_dps` always solves at `fp = 1.0`. Read every "multiple of 2000" mention below as history.
+> ⚠ **SUPERSEDED (W15/W17, 2026-08-15).** The grid is now `formula.DAMAGE_STEP` = **10** (100 until the maintainer regridded it on 2026-09-11), the `%`-twin comes from `formula.percentage_twin()` (not `damage // 2000`), and `FirepowerMultiplier` is retired as a fine-tuning knob — `apply_balance` cannot write it and `decompose_dps` always solves at `fp = 1.0`. Read every "multiple of 2000" mention below as history.
 > Current collapse-value authority is DESIGN §11b.1: preserve total resolved main
 > output and check the shipped-release baseline. Verbatim applies when only one
 > resolved main exists; it is not a general rule for discarding stacked damage.

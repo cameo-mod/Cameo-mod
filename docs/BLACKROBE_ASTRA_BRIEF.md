@@ -200,7 +200,8 @@ zero point for its class. The 13 vehicle classes were locked on 2026-08-01.
 
 **2. The formula.** `tools/balance/formula.py` prices a unit from HP, DPS, speed and range
 against its class anchor. Its laws are in `docs/design/FORMULA_V2.md`. Two rulings you must
-not re-derive: **`DAMAGE_STEP = 100`** (the damage grid is 100, not the 2000 that older
+not re-derive: **`DAMAGE_STEP = 10`** (regridded 100 -> 10 by the maintainer on 2026-09-11,
+landed in `b235c6980`; not the 100 this brief used to say, and not the 2000 that older
 documents describe), and **`FirepowerMultiplier` is retired as a pricing knob** — older docs
 teaching a 2000-grid plus a firepower fine-tune are describing a law that was repealed.
 

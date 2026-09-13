@@ -2655,7 +2655,7 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamageCompatibility",
+        "tag": "LaserExtraDamage_Auxiliary",
         "type": "SpreadDamage"
        },
        {
@@ -2744,7 +2744,7 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamageCompatibility",
+        "tag": "LaserExtraDamage_Auxiliary",
         "type": "SpreadDamage"
        },
        {
@@ -4379,7 +4379,7 @@
         "damage": "140000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
-        "tag": "CannonHE_HeavyFlatCompatibility",
+        "tag": "CannonHE_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -4489,7 +4489,7 @@
       "reloaddelay": "100",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_CannonHE_HeavyFlat",
+       "^Warhead_CannonHE_Heavy_Flat",
        "^NuclearWarhead",
        "^LightMissile",
        "^LightChemicalWeapon",

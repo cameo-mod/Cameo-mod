@@ -17,6 +17,7 @@ import class_membership
 import derive_virtual_anchor as va
 import diagnostic_output
 import fit_class
+import formula
 import reference_distribution as rd
 import reference_targets as rt
 
@@ -482,8 +483,12 @@ def build():
     candidates = []
     for cls, group in sorted(groups.items()):
         median = lambda stat: statistics.median(m['target'][stat] for m in group)
-        spec = {'hp0': snap(median('hp'),1000), 'speed0': snap(median('speed'),1),
-                'range0_wdist': snap(median('w_range'),10), 'dps0': median('w_dps'), 'cost0': 1}
+        # Grids come from formula.STAT_GRID, never re-literalised here: range used to be
+        # snapped to 10 WDist in this line alone, which no other file knew about.
+        G = formula.STAT_GRID
+        spec = {'hp0': snap(median('hp'), G['hp']), 'speed0': snap(median('speed'), G['speed']),
+                'range0_wdist': snap(median('w_range'), G['range_wdist']),
+                'dps0': median('w_dps'), 'cost0': 1}
         cost_normalizers = []
         for m in group:
             factor = price(m['unit'], m['derived'], m['projected_inputs'], spec)
@@ -491,7 +496,7 @@ def build():
                 raise ValueError('Invalid price normalizer: ' + m['actor'])
             cost_normalizers.append(m['target']['cost'] / factor)
         raw_c0 = statistics.median(cost_normalizers)
-        spec['cost0'] = snap(raw_c0, 100)
+        spec['cost0'] = snap(raw_c0, G['cost'])
         base = (spec['hp0'], spec['speed0'], spec['range0_wdist'], spec['dps0'], 1, 1, 1)
         verifier = (2*base[0], base[1], base[2], 2*base[3], 1, 1, 1)
         baseline_price, verifier_price = price({}, {}, base, spec), price({}, {}, verifier, spec)

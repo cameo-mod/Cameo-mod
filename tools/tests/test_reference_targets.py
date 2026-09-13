@@ -144,6 +144,70 @@ class WithheldStatLeakTest(unittest.TestCase):
         self.assertGreaterEqual(w, min(p, CAM[0]["w_dps"]))
         self.assertLessEqual(w, max(p, CAM[0]["w_dps"]))
 
+    def test_multi_armament_cameo_row_withholds_weapon_model_only(self):
+        row = dict(CAM[0], weapon_model_eligible=False, w_damage=20, w_burst=2,
+                   w_reload=30)
+        self.assertFalse(rd.eligible(row, "w_damage"))
+        self.assertTrue(rd.eligible(row, "hp"))
+        self.assertEqual(self._t(VALID_PEERS, row, "w_damage"), (None, None, 0))
+
+    def test_unknown_burst_cadence_cannot_become_zero_delay(self):
+        current = dict(w_damage=200, w_damage_per_shot=100,
+                       w_burst=2, w_reload=400, w_dps=.25)
+        self.assertIsNone(rt.burst_delay_of(current))
+        self.assertIsNone(rt.dps_guard(current, {}, None))
+        self.assertIsNone(rt.dps_guard(current, {}, None, burst_delay_target=5))
+
+    def test_reference_burst_delay_is_used_when_available(self):
+        current = dict(w_damage=200, w_damage_per_shot=100,
+                       w_burst=2, w_reload=90, w_dps=2)
+        guarded = rt.dps_guard(current, {}, None, burst_delay_target=5)
+        self.assertAlmostEqual(guarded["composed_dps"], 200 / 95)
+        self.assertEqual(guarded["burst_delay_per_shot"], 5)
+
+    def test_target_burst_without_delay_stays_withheld(self):
+        current = dict(w_damage=100, w_damage_per_shot=100,
+                       w_burst=1, w_reload=100, w_dps=1)
+        self.assertIsNone(rt.dps_guard(
+            current, {"w_damage": 200, "w_burst": 2, "w_reload": 100}, None))
+
+    def test_multi_armament_actors_are_the_only_ones_withheld(self):
+        """The weapon model abstains for MIXED armaments, and for nothing else.
+
+        ⛔ THIS REPLACES `test_frozen_weapon_population_is_fixed_and_fail_closed`, which asserted
+        that EVERY frozen row is stamped ineligible. Measured on the rebuilt map, that blanket
+        stamp took live weapon targets from 266 to 0 and WITHHELD from 38 to 354 while leaving the
+        headline counts identical — green-looking and empty. The eligibility flag itself is right
+        and is kept; `armament_profile` sets it from `len(live) == 1`, which is exactly the
+        maintainer's rule that a cannon and a missile may not be averaged into one number.
+        """
+        eligible = [r for r in rd.cameo_rows()
+                    if r.get("weapon_model_eligible") is not False and r.get("w_damage")]
+        withheld = [r for r in rd.cameo_rows() if r.get("weapon_model_eligible") is False]
+        # Both populations must be non-empty: all-eligible means the guard is inert, and
+        # all-withheld is the failure this test exists to catch.
+        self.assertTrue(eligible, "no actor can be projected — the weapon model is blanket-withheld")
+        self.assertTrue(withheld, "no actor is withheld — the multi-armament guard is inert")
+        for row in withheld:
+            self.assertFalse(rd.eligible(row, "w_damage"))
+        for row in eligible:
+            self.assertTrue(rd.eligible(row, "w_damage"))
+
+    def test_missing_frozen_actor_cannot_receive_weapon_target(self):
+        current = dict(CAM[0], id="new", weapon_model_eligible=True,
+                       w_damage=20, w_burst=2, w_reload=30)
+        frozen = rt.FrozenCameoDistribution(CDIST, [])
+        self.assertEqual(self._t(VALID_PEERS, current, "w_burst", cdist=frozen),
+                         (None, None, 0))
+
+    def test_live_hero_rows_carry_cycle_and_per_shot_damage(self):
+        rows = [row for row in rd.cameo_hero_rows()
+                if row.get("w_damage") and float(row.get("w_burst") or 1) > 1]
+        self.assertTrue(rows)
+        for row in rows:
+            self.assertAlmostEqual(
+                row["w_damage_per_shot"], row["w_damage"] / float(row["w_burst"]))
+
 
 if __name__ == "__main__":
     unittest.main()

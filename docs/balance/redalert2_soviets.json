@@ -339,7 +339,7 @@
        "^HeavyAAWeapon",
        "^FlakWeapon",
        "^RA2MediumMissile",
-       "^Compatibility_MissileAP_Medium_GroundShip",
+       "^Warhead_MissileAP_Medium_GroundShip",
        "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
@@ -961,7 +961,7 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -973,7 +973,7 @@
       "requires": "undeployed",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^RA2SmallArms",
        "^RA2Chaingun"
       ],
@@ -1008,7 +1008,7 @@
         "damage": "120000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_MediumFlatCompatibility",
+        "tag": "Concussion_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -1021,7 +1021,7 @@
       "requires": "!rank-elite && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions && deployed",
       "slot": "Armament@Deployed",
       "versus_templates": [
-       "^Compatibility_Concussion_MediumFlat",
+       "^Warhead_Concussion_Medium_Flat",
        "^RA160mmLegacy"
       ],
       "warheads": [
@@ -1038,7 +1038,7 @@
         "damage": "108000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "183",
-        "tag": "Chemical_LightFlatCompatibility",
+        "tag": "Chemical_Light_Flat",
         "type": "AreaDamage"
        },
        {
@@ -1075,7 +1075,7 @@
       "requires": "!rank-elite && ra2_soviets_doctrine_nuclearmunitions && deployed",
       "slot": "Armament@DeployedRad",
       "versus_templates": [
-       "^Compatibility_Chemical_LightFlat",
+       "^Warhead_Chemical_Light_Flat",
        "^RA160mmRadLegacy"
       ],
       "warheads": [
@@ -1093,7 +1093,7 @@
         "damage": "120000",
         "falloff": "100, 76, 56, 38, 0",
         "spread": "346",
-        "tag": "CannonFire_HeavyFlatCompatibility",
+        "tag": "CannonFire_Heavy_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -1106,7 +1106,7 @@
       "requires": "!rank-elite && ra2_soviets_doctrine_firemunitions && deployed",
       "slot": "Armament@DeployedFire",
       "versus_templates": [
-       "^Compatibility_CannonFire_HeavyFlat",
+       "^Warhead_CannonFire_Heavy_Flat",
        "RA160mm"
       ],
       "warheads": [
@@ -1123,7 +1123,7 @@
         "damage": "120000",
         "falloff": "100, 55, 0",
         "spread": "93",
-        "tag": "Tesla_HeavyFlatCompatibility",
+        "tag": "Tesla_Heavy_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -1136,7 +1136,7 @@
       "requires": "!rank-elite && ra2_soviets_doctrine_teslamunitions && deployed",
       "slot": "Armament@DeployedTesla",
       "versus_templates": [
-       "^Compatibility_Tesla_HeavyFlat",
+       "^Warhead_Tesla_Heavy_Flat",
        "RA160mm"
       ],
       "warheads": [
@@ -1155,7 +1155,7 @@
         "damage": "120000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_MediumFlatCompatibility",
+        "tag": "Concussion_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -1185,7 +1185,7 @@
         "damage": "108000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "183",
-        "tag": "Chemical_LightFlatCompatibility",
+        "tag": "Chemical_Light_Flat",
         "type": "AreaDamage"
        },
        {
@@ -1236,7 +1236,7 @@
       "requires": "rank-elite && ra2_soviets_doctrine_nuclearmunitions && deployed",
       "slot": "Armament@DeployedEliteRad",
       "versus_templates": [
-       "^Compatibility_Chemical_LightFlat",
+       "^Warhead_Chemical_Light_Flat",
        "^Warhead_Nuclear_Super",
        "^Effect_Nuclear_Super",
        "^RA160mmRadLegacy",
@@ -1258,7 +1258,7 @@
         "damage": "120000",
         "falloff": "100, 76, 56, 38, 0",
         "spread": "346",
-        "tag": "CannonFire_HeavyFlatCompatibility",
+        "tag": "CannonFire_Heavy_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -1289,7 +1289,7 @@
         "damage": "120000",
         "falloff": "100, 55, 0",
         "spread": "93",
-        "tag": "Tesla_HeavyFlatCompatibility",
+        "tag": "Tesla_Heavy_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -1390,7 +1390,7 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -1401,7 +1401,7 @@
       "reloaddelay": "3",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^RA2SmallArms",
        "^RA2Chaingun"
       ],
@@ -2373,7 +2373,7 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -2384,7 +2384,7 @@
       "reloaddelay": "18",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^RA2SmallArms",
        "^RA2Chaingun"
       ],
@@ -2724,7 +2724,7 @@
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -2736,7 +2736,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^RA2SmallArms",
        "^RA2Chaingun"
       ],
@@ -2755,7 +2755,7 @@
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -2784,7 +2784,7 @@
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -2832,7 +2832,7 @@
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -2844,7 +2844,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^RA2SmallArms",
        "^RA2Chaingun"
       ],
@@ -2864,7 +2864,7 @@
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -3007,7 +3007,7 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -4962,7 +4962,6 @@
       "requires": "rank-elite",
       "slot": "Armament@SECONDARYELITE",
       "versus_templates": [
-       "^Warhead_MissileAA_Medium",
        "RA2MammothTusk_AA"
       ],
       "warheads": [
@@ -5215,7 +5214,7 @@
         "damage": "8000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_MediumFlatCompatibility",
+        "tag": "Flak_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -5228,7 +5227,7 @@
       "slot": "Armament@AGE",
       "versus_templates": [
        "RA2FlakTrackGun",
-       "^Compatibility_Flak_MediumFlat"
+       "^Warhead_Flak_Medium_Flat"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -5416,7 +5415,7 @@
         "damage": "12000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "275",
-        "tag": "Chemical_MediumFlatCompatibility",
+        "tag": "Chemical_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -5428,7 +5427,7 @@
       "requires": "!rank-elite && ra2_soviets_doctrine_nuclearmunitions",
       "slot": "Armament@PRIMARYRad",
       "versus_templates": [
-       "^Compatibility_Chemical_MediumFlat",
+       "^Warhead_Chemical_Medium_Flat",
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
        "^Effect_Chem_Medium",
@@ -5535,7 +5534,7 @@
         "damage": "12000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "275",
-        "tag": "Chemical_MediumFlatCompatibility",
+        "tag": "Chemical_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -6061,7 +6060,7 @@
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -6072,7 +6071,7 @@
       "reloaddelay": "15",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^RA2SmallArms",
        "^RA2Chaingun"
       ],

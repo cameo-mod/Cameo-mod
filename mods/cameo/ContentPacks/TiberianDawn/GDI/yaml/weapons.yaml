@@ -113,7 +113,7 @@ td_gdi_commando_sniper_elite:
 		Explosions: small_poof
 
 APCGun:
-	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
+	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
@@ -130,7 +130,7 @@ APCGun:
 		Damage: 2000
 	-Warhead@Bullet_Medium:
 	-Warhead@Flak_Medium:
-	Warhead@Flak_MediumFlatCompatibility:
+	Warhead@Flak_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
@@ -144,12 +144,12 @@ td_gdi_apc_apcgun_AA:
 		ValidTargets: Air
 	-Warhead@Bullet_Medium:
 	-Warhead@Flak_Medium:
-	Warhead@Flak_MediumFlatCompatibility:
+	Warhead@Flak_Medium_Flat:
 		ValidTargets: Air
 		Damage: 4000
 		PercentageScale: 9975
 td_gdi_boxer_boxercannonag:
-	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^SmallArms
 	Inherits@2: ^LightMissile
 	Inherits@3: ^Grenade
@@ -212,13 +212,13 @@ td_gdi_boxer_boxercannonag:
 	-Warhead@LightMissile:
 	-Warhead@MediumCannon:
 	-Warhead@SmallArms:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 6000
 		PercentageScale: 0
 
 td_gdi_boxer_boxercannon_AA:
-	Inherits@roleflat: ^Compatibility_Flak_MediumFlat
+	Inherits@roleflat: ^Warhead_Flak_Medium_Flat
 	Inherits: td_gdi_boxer_boxercannonag
 	Range: 7290
 	ValidTargets: Air
@@ -251,12 +251,12 @@ td_gdi_boxer_boxercannon_AA:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		PercentageDenominator: 200
 		ValidTargets: Air
-	-Warhead@Bullet_MediumFlatCompatibility:
+	-Warhead@Bullet_Medium_Flat:
 	-Warhead@FlakWeapon:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@LightMissile:
-	Warhead@Flak_MediumFlatCompatibility:
+	Warhead@Flak_Medium_Flat:
 		ValidTargets: Air
 		Damage: 6000
 		PercentageScale: 0
@@ -521,7 +521,6 @@ td_gdi_mlrs_227mmamt:
 
 td_gdi_orca_orcamissiles:
 	Inherits@missilerole: ^Warhead_MissileAP_Heavy
-	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
 	Inherits: ^HeavyCannon
 	Inherits@2: ^TankDestroyerCannon
 	Inherits@3: ^ShrapnelWeapon
@@ -583,7 +582,6 @@ td_gdi_orca_orcamissiles:
 	-Warhead@MediumMissile:
 	Projectile: Missile
 		VerticalRateOfTurn: 16
-	-Warhead@MissileHE_Heavy:
 	Warhead@MissileAP_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -626,9 +624,8 @@ Vulcan:
 		Damage: 12000
 		Spread: 600
 Napalm:
-	Inherits@finalmain: ^Compatibility_Flame_HeavyFlat
+	Inherits@finalmain: ^Warhead_Flame_Heavy
 	Inherits: ^Warhead_Demolition_Heavy
-	Inherits@2: ^Warhead_Flame_Heavy
 	Inherits@3: ^Effect_Flame_Heavy
 	ReloadDelay: 2
 	Range: 2000
@@ -639,16 +636,13 @@ Napalm:
 		Shadow: true
 	Warhead@Demolition_Heavy:
 		Damage: 6000
-	Warhead@Flame_Heavy:
-		Damage: 6000
 	Warhead@Effect: CreateEffect
 		Explosions: med_napalm
 		GlowScale: 1.5
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12
 	-Warhead@Demolition_Heavy:
-	-Warhead@Flame_Heavy:
-	Warhead@Flame_HeavyFlatCompatibility:
+	Warhead@Flame_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 12000
 		PercentageScale: 9992
@@ -672,9 +666,8 @@ VulcanA10Carrier:
 		Damage: 6000
 		Spread: 300
 NapalmA10Carrier:
-	Inherits@roleflat: ^Compatibility_Flame_HeavyFlat
+	Inherits@roleflat: ^Warhead_Flame_Heavy
 	Inherits: ^Warhead_Demolition_Heavy
-	Inherits@2: ^Warhead_Flame_Heavy
 	Inherits@3: ^Effect_Flame_Heavy
 	ReloadDelay: 2
 	Range: 1000
@@ -685,23 +678,19 @@ NapalmA10Carrier:
 		Shadow: true
 	Warhead@Demolition_Heavy:
 		Damage: 4000
-	Warhead@Flame_Heavy:
-		Damage: 4000
 	Warhead@Effect: CreateEffect
 		Explosions: med_napalm
 		GlowScale: 1.5
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12
 	-Warhead@Demolition_Heavy:
-	-Warhead@Flame_Heavy:
-	Warhead@Flame_HeavyFlatCompatibility:
+	Warhead@Flame_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 8000
 		PercentageScale: 9988
 
 A10CarrierMissiles_AA:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
-	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileAP_Heavy
 	ValidTargets: Air
@@ -731,7 +720,6 @@ A10CarrierMissiles_AA:
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
 		ImpactSounds: xplobig4.aud
-	-Warhead@MissileAP_Heavy:
 	Warhead@MissileAA_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -744,7 +732,6 @@ A10CarrierMissiles_AA:
 
 td_gdi_advancedguardtower_towermissile:
 	Inherits@missilerole: ^Warhead_MissileAP_Heavy
-	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^Grenade
 	Inherits@3: ^ShrapnelWeapon
@@ -841,7 +828,6 @@ td_gdi_advancedguardtower_towermissile:
 	-Warhead@HeavyAAWeapon:
 	-Warhead@HeavyMissile:
 	-Warhead@MediumMissile:
-	-Warhead@MissileHE_Heavy:
 	Warhead@MissileAP_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1206,14 +1192,12 @@ MachineGunHumvee2AP_AA:
 		ValidTargets: Air
 td_gdi_humveemkii_rocketshumvee2:
 	Inherits@missilerole: ^Warhead_MissileHE_Light
-	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileAP_Light
 	ReloadDelay: 84
 	Range: 5598
 	Report: bazook1.aud
 	ValidTargets: Ground, Water
-	-Warhead@MissileAP_Light:
 	Warhead@MissileHE_Light: AreaDamage
 		PercentageDenominator: 10000
 		ValidRelationships: Ally, Neutral, Enemy
@@ -1246,8 +1230,7 @@ td_gdi_humveemkii_rocketshumvee2_AA:
 
 td_gdi_humveemkii_rocketshumvee2amt:
 	Inherits@missilerole: ^Warhead_MissileHE_Heavy
-	Inherits@finalmain: ^Compatibility_MissileAP_HeavyFlat
-	Inherits@wh: ^Warhead_MissileAP_Heavy
+	Inherits@finalmain: ^Warhead_MissileAP_Heavy_Flat
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileAP_Heavy
 	Inherits: td_gdi_humveemkii_rocketshumvee2
@@ -1256,7 +1239,7 @@ td_gdi_humveemkii_rocketshumvee2amt:
 		ValidTargets: Ground, Water
 		Damage: 16000
 	-Warhead@MissileAP_Heavy:
-	-Warhead@MissileAP_HeavyFlatCompatibility:
+	-Warhead@MissileAP_Heavy_Flat:
 	Warhead@MissileHE_Heavy: AreaDamage
 		PercentageDenominator: 10000
 		ValidRelationships: Ally, Neutral, Enemy
@@ -1271,7 +1254,7 @@ td_gdi_humveemkii_rocketshumvee2amt:
 
 td_gdi_humveemkii_rocketshumvee2amt_AA:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
-	Inherits@finalmain: ^Compatibility_MissileAA_HeavyFlat
+	Inherits@finalmain: ^Warhead_MissileAA_Heavy_Flat
 	Inherits: td_gdi_humveemkii_rocketshumvee2amt
 	Range: 8397
 	ValidTargets: Air
@@ -1280,7 +1263,7 @@ td_gdi_humveemkii_rocketshumvee2amt_AA:
 	-Warhead@MissileAP_Heavy:
 	Projectile: Missile
 		VerticalRateOfTurn: 12
-	-Warhead@MissileAA_HeavyFlatCompatibility:
+	-Warhead@MissileAA_Heavy_Flat:
 	Warhead@MissileAA_Heavy: AreaDamage
 		PercentageDenominator: 10000
 		ValidRelationships: Ally, Neutral, Enemy
@@ -1482,7 +1465,7 @@ td_gdi_exosuit_exosuitrailgun:
 		ValidTargets: Ground, Water
 		Damage: 20000
 td_gdi_officer_machinegun:
-	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -1498,7 +1481,7 @@ td_gdi_officer_machinegun:
 		Damage: 8000
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		PercentageDenominator: 2500
 		ValidTargets: Ground, Water, Air
 		Damage: 17280
@@ -1641,7 +1624,6 @@ td_gdi_defenserig_gdirigrailgun:
 
 td_gdi_defenserig_gdirigmissilepod:
 	Inherits@missilerole: ^Warhead_MissileAP_Heavy
-	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileHE_Medium
 	ValidTargets: Ground, Water, Air
@@ -1674,7 +1656,6 @@ td_gdi_defenserig_gdirigmissilepod:
 		ImpactSounds: splash9.aud
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
-	-Warhead@MissileHE_Heavy:
 	Warhead@MissileAP_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1775,8 +1756,7 @@ td_gdi_havoc_sniper:
 
 td_gdi_havoc_rocket:
 	Inherits@missilerole: ^Warhead_MissileAP_Medium
-	Inherits@finalmain: ^Compatibility_MissileHE_MediumFlat
-	Inherits@wh: ^Warhead_MissileHE_Medium
+	Inherits@finalmain: ^Warhead_MissileHE_Medium_Flat
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
 	Report: bazook1.aud
@@ -1802,7 +1782,7 @@ td_gdi_havoc_rocket:
 		ImpactSounds: kaboom12.aud
 		ValidTargets: Ground
 	-Warhead@MissileHE_Medium:
-	-Warhead@MissileHE_MediumFlatCompatibility:
+	-Warhead@MissileHE_Medium_Flat:
 	Warhead@MissileAP_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1909,7 +1889,6 @@ td_gdi_havoc_rifle:
 
 td_gdi_firehawk_firehawkmissiles_AA:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
-	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileAP_Heavy
 	ValidTargets: Air
@@ -1940,7 +1919,6 @@ td_gdi_firehawk_firehawkmissiles_AA:
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
 		ImpactSounds: xplobig4.aud
-	-Warhead@MissileAP_Heavy:
 	Warhead@MissileAA_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2030,7 +2008,6 @@ td_gdi_railgunbattleship_gdibattleshiprailgun:
 		Damage: 50000
 td_gdi_missileboat_gunboatmissile:
 	Inherits@missilerole: ^Warhead_MissileHE_Medium
-	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
 	ReloadDelay: 33
@@ -2047,7 +2024,6 @@ td_gdi_missileboat_gunboatmissile:
 		VerticalRateOfTurn: 50
 		Acceleration: 5
 		AllowSnapping: true
-	-Warhead@MissileAP_Medium:
 	Warhead@MissileHE_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2207,7 +2183,7 @@ td_gdi_minigunner_minigun_ap:
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 td_gdi_shotgunner_shotgun:
-	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
+	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -2226,7 +2202,7 @@ td_gdi_shotgunner_shotgun:
 		Damage: 2000
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 4000

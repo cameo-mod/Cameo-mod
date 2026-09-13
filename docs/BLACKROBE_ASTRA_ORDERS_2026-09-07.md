@@ -367,7 +367,8 @@ tier (DESIGN.md, design 2026-07-11) and are never re-discounted when tiers move.
 ### C11 — Cross-check every proposed number against the nice-number law
 
 HP in clean steps, speed on the step-1 grid, damage on the **100** grid
-(`formula.DAMAGE_STEP = 100`, W15). ⚠ Older documents teach a 2,000-step damage grid plus a
+(`formula.DAMAGE_STEP = 100`, W15). ⚠ **STALE as of 2026-09-11 — the grid is now 10**; this
+file is dated provenance, read `CLAUDE.md` for the live value. ⚠ Older documents teach a 2,000-step damage grid plus a
 `FirepowerMultiplier` fine-tune; **that is a retired law** — W17 retired FP as a pricing knob,
 `apply_balance` cannot write it, and `propose_class_rebalance.decompose_dps` always solves at
 `fp = 1.0`. If you find a live document still teaching it, fix the document in the same commit.

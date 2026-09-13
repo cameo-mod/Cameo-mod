@@ -224,7 +224,7 @@
         "damage": "40000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
-        "tag": "Demolition_HeavyFlatCompatibility",
+        "tag": "Demolition_Heavy_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -424,7 +424,7 @@
         "damage": "40000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
-        "tag": "Demolition_HeavyFlatCompatibility",
+        "tag": "Demolition_Heavy_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -435,7 +435,7 @@
       "reloaddelay": "8",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Demolition_HeavyFlat",
+       "^Warhead_Demolition_Heavy_Flat",
        "^ParaBombLegacy"
       ],
       "warheads": [
@@ -1059,7 +1059,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "100",
+        "damage": "500",
         "falloff": null,
         "spread": "200",
         "tag": "1Dam",
@@ -1099,7 +1099,7 @@
     },
     "hp": {
      "src": "inherited",
-     "v": "2500"
+     "v": "5000"
     },
     "name": "Agent Delphi",
     "resolved_firepower_modifiers": [],
@@ -1132,7 +1132,7 @@
         "damage": "20000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "tag": "MissileAP_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -1159,7 +1159,7 @@
         "damage": "20000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "tag": "MissileAP_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -1496,7 +1496,7 @@
     },
     "hp": {
      "src": "inherited",
-     "v": "2500"
+     "v": "5000"
     },
     "name": "Prof. Einstein",
     "shield_flat": {
@@ -1618,7 +1618,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "100",
+        "damage": "500",
         "falloff": null,
         "spread": "200",
         "tag": "1Dam",
@@ -1658,7 +1658,7 @@
     },
     "hp": {
      "src": "inherited",
-     "v": "2500"
+     "v": "5000"
     },
     "name": "General",
     "resolved_firepower_modifiers": [],
@@ -1703,7 +1703,7 @@
     },
     "hp": {
      "src": "inherited",
-     "v": "2500"
+     "v": "5000"
     },
     "name": "Scientist",
     "shield_flat": {
@@ -1746,13 +1746,11 @@
       "reloaddelay": "50",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Demolition_Light",
        "^Warhead_Flame_Light",
        "^Projectile_Grenade_Light",
        "^Effect_Flame_Light"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
        "^Warhead_Flame_Light"
       ],
       "weapon": "ra1_soviets_molotovconscript_conscriptmolotov",
@@ -1776,13 +1774,11 @@
       "reloaddelay": "50",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_Demolition_Light",
        "^Warhead_Flame_Light",
        "^Projectile_Grenade_Light",
        "^Effect_Flame_Light"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
        "^Warhead_Flame_Light"
       ],
       "weapon": "ra1_soviets_molotovconscript_conscriptmolotov",
@@ -1846,7 +1842,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "100",
+        "damage": "500",
         "falloff": null,
         "spread": "200",
         "tag": "1Dam",
@@ -1886,7 +1882,7 @@
     },
     "hp": {
      "src": "inherited",
-     "v": "2500"
+     "v": "5000"
     },
     "name": "Technician",
     "resolved_firepower_modifiers": [],
@@ -1998,7 +1994,7 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -2010,7 +2006,7 @@
       "requires": "!japan_upgrade_waveforcebullets",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -2029,7 +2025,7 @@
         "damage": "6000",
         "falloff": "100, 81, 61, 38, 0",
         "spread": "76",
-        "tag": "Waveforce_HeavyFlatCompatibility",
+        "tag": "Waveforce_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -2048,12 +2044,13 @@
       "requires": "japan_upgrade_waveforcebullets",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Compatibility_Waveforce_HeavyFlat",
+       "^Warhead_Waveforce_Heavy",
        "^WaveforceBulletWarhead",
        "JapanSpeedBoatGun",
        "^WaveforceBulletProjectile"
       ],
       "warheads": [
+       "^Warhead_Waveforce_Heavy",
        "^Warhead_Railgun_Heavy",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
@@ -2184,7 +2181,7 @@
         "damage": "40000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
-        "tag": "CannonHE_HeavyFlatCompatibility",
+        "tag": "CannonHE_Heavy_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -2196,7 +2193,7 @@
       "reloaddelay": "125",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_CannonHE_HeavyFlat",
+       "^Warhead_CannonHE_Heavy_Flat",
        "^Warhead_Demolition_Heavy",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
@@ -2217,7 +2214,7 @@
         "damage": "40000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
-        "tag": "CannonHE_HeavyFlatCompatibility",
+        "tag": "CannonHE_Heavy_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -2229,7 +2226,7 @@
       "reloaddelay": "125",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "^Compatibility_CannonHE_HeavyFlat",
+       "^Warhead_CannonHE_Heavy_Flat",
        "^Warhead_Demolition_Heavy",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
@@ -2628,7 +2625,7 @@
         "damage": "80000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
-        "tag": "Demolition_HeavyFlatCompatibility",
+        "tag": "Demolition_Heavy_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -2657,7 +2654,7 @@
         "damage": "80000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
-        "tag": "Demolition_HeavyFlatCompatibility",
+        "tag": "Demolition_Heavy_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -3618,7 +3615,7 @@
         "damage": "4000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_MediumFlatCompatibility",
+        "tag": "Flak_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -3629,7 +3626,7 @@
       "reloaddelay": "10",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Flak_MediumFlat",
+       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Bullet_Medium",
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
@@ -3649,7 +3646,7 @@
         "damage": "4000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_MediumFlatCompatibility",
+        "tag": "Flak_Medium_Flat",
         "type": "AreaDamage"
        }
       ],

@@ -13,7 +13,7 @@
         "damage": "40000",
         "falloff": "100, 89, 75, 55, 0",
         "spread": "383",
-        "tag": "Plasma_HeavyFlatCompatibility",
+        "tag": "Plasma_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -269,7 +269,7 @@
         "damage": "4000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_MediumFlatCompatibility",
+        "tag": "Flak_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -280,7 +280,7 @@
       "reloaddelay": "65",
       "slot": "Armament@SECONDARY1",
       "versus_templates": [
-       "^Compatibility_Flak_MediumFlat",
+       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Flak_Medium",
        "^Warhead_Demolition_Light",
        "^Projectile_Flak_Medium",
@@ -300,7 +300,7 @@
         "damage": "4000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_MediumFlatCompatibility",
+        "tag": "Flak_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -311,7 +311,7 @@
       "reloaddelay": "65",
       "slot": "Armament@SECONDARY2",
       "versus_templates": [
-       "^Compatibility_Flak_MediumFlat",
+       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Flak_Medium",
        "^Warhead_Demolition_Light",
        "^Projectile_Flak_Medium",
@@ -470,7 +470,7 @@
       "reloaddelay": "36",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -570,7 +570,7 @@
       "reloaddelay": "36",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -703,7 +703,7 @@
         "damage": "110000",
         "falloff": "100, 89, 75, 55, 0",
         "spread": "383",
-        "tag": "Plasma_HeavyFlatCompatibility",
+        "tag": "Plasma_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -922,7 +922,7 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -933,7 +933,7 @@
       "reloaddelay": "32",
       "slot": "Armament@PRIMARY1",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Flak_Medium",
        "^Warhead_Demolition_Light",
        "^Projectile_Flak_Medium",
@@ -953,7 +953,7 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -964,7 +964,7 @@
       "reloaddelay": "32",
       "slot": "Armament@PRIMARY2",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Flak_Medium",
        "^Warhead_Demolition_Light",
        "^Projectile_Flak_Medium",
@@ -1177,7 +1177,7 @@
         "damage": "13600",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -1230,7 +1230,7 @@
       "reloaddelay": "10",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Laser_HeavyFlat",
+       "^Warhead_Laser_Heavy_Flat",
        "^LightMissile",
        "^SmallArms",
        "^Chaingun",
@@ -1335,7 +1335,7 @@
         "damage": "13600",
         "falloff": "100, 40, 0",
         "spread": "100",
-        "tag": "Prism_HeavyFlatCompatibility",
+        "tag": "Prism_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -1382,13 +1382,13 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6474",
       "reloaddelay": "6",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Prism_HeavyFlat",
+       "^Warhead_Prism_Heavy",
        "^LightMissile",
        "^SmallArms",
        "^Chaingun",
@@ -1396,9 +1396,11 @@
        "^TeslaWeapon",
        "^LaserWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Prism_Heavy"
+      ],
       "weapon": "VoidRayBeam",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2486,7 +2488,7 @@
         "damage": "40000",
         "falloff": "100, 89, 75, 55, 0",
         "spread": "383",
-        "tag": "Plasma_HeavyFlatCompatibility",
+        "tag": "Plasma_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -2525,7 +2527,7 @@
       "reloaddelay": "28",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Plasma_HeavyFlat",
+       "^Warhead_Plasma_Heavy_Flat",
        "^PhotonCannonLegacy"
       ],
       "warheads": [],
@@ -2603,7 +2605,7 @@
         "damage": "16000",
         "falloff": "100, 0",
         "spread": "96",
-        "tag": "Railgun_HeavyFlatCompatibility",
+        "tag": "Railgun_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -2621,7 +2623,7 @@
       "reloaddelay": "40",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Railgun_HeavyFlat",
+       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
@@ -2641,7 +2643,7 @@
         "damage": "16000",
         "falloff": "100, 0",
         "spread": "96",
-        "tag": "Railgun_HeavyFlatCompatibility",
+        "tag": "Railgun_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -2659,7 +2661,7 @@
       "reloaddelay": "40",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Compatibility_Railgun_HeavyFlat",
+       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
@@ -4728,7 +4730,7 @@
       "reloaddelay": "28",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -4821,7 +4823,7 @@
         "damage": "40000",
         "falloff": "100, 89, 75, 55, 0",
         "spread": "383",
-        "tag": "Plasma_HeavyFlatCompatibility",
+        "tag": "Plasma_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -4997,7 +4999,7 @@
         "damage": "25000",
         "falloff": "100, 81, 61, 38, 0",
         "spread": "76",
-        "tag": "Waveforce_HeavyFlatCompatibility",
+        "tag": "Waveforce_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -5016,19 +5018,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9343",
       "reloaddelay": "120",
       "slot": "Armament@Upgrade2",
       "versus_templates": [
-       "^Compatibility_Waveforce_HeavyFlat",
+       "^Warhead_Waveforce_Heavy",
        "^TeslaWeapon",
        "^HeavyCannon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Waveforce_Heavy"
+      ],
       "weapon": "WaveforceCannonDistortedBeam1",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -5159,7 +5163,7 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -5170,7 +5174,7 @@
       "reloaddelay": "20",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Concussion_Light",
        "^Warhead_CannonHE_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -5190,7 +5194,7 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -5359,7 +5363,7 @@
         "damage": "40000",
         "falloff": "100, 52, 0",
         "spread": "39",
-        "tag": "Quantum_MediumFlatCompatibility",
+        "tag": "Quantum_Medium",
         "type": "AreaDamage"
        },
        {
@@ -5392,13 +5396,13 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5044",
       "reloaddelay": "30",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Quantum_MediumFlat",
+       "^Warhead_Quantum_Medium",
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",
        "^SmallArms",
@@ -5406,9 +5410,11 @@
        "^Grenade",
        "^TankDestroyerCannon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Quantum_Medium"
+      ],
       "weapon": "PositronGrenade",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5638,7 +5644,7 @@
       "reloaddelay": "90",
       "slot": "Armament@primary",
       "versus_templates": [
-       "^Compatibility_CannonHE_HeavyFlat",
+       "^Warhead_CannonHE_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",

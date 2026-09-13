@@ -116,7 +116,7 @@ ra1_allies_alliedsniper:
 		Damage: 20
 
 ArtilleryShell:
-	Inherits@finalmain: ^Compatibility_Concussion_MediumFlat
+	Inherits@finalmain: ^Warhead_Concussion_Medium_Flat
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Grenade_Light
@@ -143,7 +143,7 @@ ArtilleryShell:
 		ImpactSounds: xplosml2.aud
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
-	Warhead@Concussion_MediumFlatCompatibility:
+	Warhead@Concussion_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 32000
 		PercentageScale: 9997

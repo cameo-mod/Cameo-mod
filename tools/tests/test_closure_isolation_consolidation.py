@@ -26,12 +26,37 @@ CONSOLIDATED = {
     "TSInfantryMortar": ("Concussion_Medium", 32000),
 }
 
+# ⛔ RE-PINNED 2026-09-13, ON THE MAINTAINER'S EXPLICIT APPROVAL AND NOT BEFORE.
+#
+# Three of the five moved when R4 retired the 27 `^Warhead_*_Flat` shims. Re-pinning a
+# byte-stability guard is exactly what that guard exists to prevent, so the change was held for a
+# ruling and the FULL resolved diff was measured against a clean `origin/master` worktree first.
+# It is 28 lines across the three weapons, and nothing else:
+#
+#   ra1_soviets_grenadier_grenaderaexplode
+#       Warhead@Flame_LightFlatCompatibility -> Warhead@Flame_Light_Flat   RENAME ONLY, no values
+#   ra1_soviets_grenadier_grenadethermobaric  and  ...thermobaricexplode  (they share one warhead)
+#       Warhead@Thermobaric_LightFlatCompatibility -> Warhead@Thermobaric_Light
+#       COMPOSITE  92 -> 93
+#       Shield    179 -> 180
+#
+# ⭐ AND THE TWO VALUES THAT MOVED CANNOT BREAK §12.0h MEAN-100 BY CONSTRUCTION. The maintainer
+# asked the right question — *"make sure the sum of all versus values is the same across all
+# warheads, right?"* — and the answer is yes, over the SIXTEEN canonical armor rows, which sum to
+# 1602 (mean 100.125) on this warhead. `audit_versus_profile.NON_ARMOR` excludes exactly
+# `ARMOR, BLAST, COMPOSITE, HAZMAT, REFLECTOR, Shield` from that sum, so COMPOSITE and Shield are
+# precisely the two rows sitting OUTSIDE it. `audit_versus_profile` reports 0 unexpected mean
+# violations, and §12.0c gives Shield its own compressed ladder in any case.
+#
+# ⚠ THE TEST STOPS AT THE FIRST MISMATCH, which hid two of the three from the first report — it
+# named only `...thermobaric`. When re-pinning, compute ALL of them and diff the resolved weapons;
+# never trust the single name a failure happens to print.
 PRESERVED_HASHES = {
     "TS155mm_bluenuke": "97a6765afdf585adf92ece0bbdfec067da014575966671eada8a4ca54f46817f",
     "GrenadeRA": "19d10234019c95012015db30a27922075fb2f736510b9141b467425504839afe",
-    "ra1_soviets_grenadier_grenaderaexplode": "463b5914bb50ab37d1d25754249953ddca938838709fb3626fecae3696d26b68",
-    "ra1_soviets_grenadier_grenadethermobaric": "0c9a10e9feacf943e2d83ee9eeb48adec2a564ad13f2aa7795711af3bc386760",
-    "ra1_soviets_grenadier_grenadethermobaricexplode": "d30dee2e543667518a319226aac7da2f8b7142a9da0bb3256fb5da613643946b",
+    "ra1_soviets_grenadier_grenaderaexplode": "741d9c8aff8cfc6d3344cf9eb42789f0ded5c4f7868db31057d87b16c269775c",
+    "ra1_soviets_grenadier_grenadethermobaric": "c7c62b007109b0fca33b5f7447b71082a6aec4250f8d3a8c63bff2a68e8faa4f",
+    "ra1_soviets_grenadier_grenadethermobaricexplode": "d0abb1db0186c3e65afd822bfdce93c6499dfe059f5f41438904cf4528445ee8",
 }
 
 EXPECTED_PERCENTAGE_DELTAS = {

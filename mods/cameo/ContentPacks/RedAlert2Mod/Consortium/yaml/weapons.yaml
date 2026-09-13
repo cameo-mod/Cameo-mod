@@ -1,5 +1,5 @@
 SteelCloneGun:
-	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
+	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^SteelHeavyCannon
 	Inherits@2: ^SteelMediumMissile
 	Inherits@3: ^SteelSmallArms
@@ -18,7 +18,7 @@ SteelCloneGun:
 	-Warhead@Bullet_Light:
 	-Warhead@CannonHE_Heavy:
 	-Warhead@MissileAP_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
@@ -27,7 +27,7 @@ SteelCloneGun_elite:
 	Range: 6000
 	Burst: 2
 	BurstDelays: 3
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
@@ -41,7 +41,7 @@ SteelCloneGunResonance:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water, Air
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
@@ -51,7 +51,7 @@ SteelCloneGunResonanceBounce1:
 	Range: 2500
 	Warhead@shrapnel: FireShrapnel
 		Weapon: SteelCloneGunResonanceBounce2
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
@@ -60,7 +60,7 @@ SteelCloneGunResonanceBounce2:
 	Inherits: SteelCloneGunResonance
 	Range: 1250
 	-Warhead@shrapnel:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
@@ -74,7 +74,7 @@ SteelCloneGunResonance_elite:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water, Air
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
@@ -84,7 +84,7 @@ SteelCloneGunResonanceBounce1_elite:
 	Range: 3000
 	Warhead@shrapnel: FireShrapnel
 		Weapon: SteelCloneGunResonanceBounce2_elite
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
@@ -93,13 +93,13 @@ SteelCloneGunResonanceBounce2_elite:
 	Inherits: SteelCloneGunResonance_elite
 	Range: 2000
 	-Warhead@shrapnel:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
 
 SteelVulcan:
-	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^SteelHeavyCannon
 	Inherits@2: ^SteelChaingun
 	ValidTargets: Ground, Water
@@ -109,7 +109,7 @@ SteelVulcan:
 	Projectile: ScaledBullet
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 6000
 		PercentageScale: 9984
@@ -139,7 +139,7 @@ SteelVulcanResonanceBounce2:
 	-Warhead@shrapnel:
 
 ConsortiumMissileSystem:
-	Inherits@roleflat: ^Compatibility_MissileAA_MediumFlat
+	Inherits@roleflat: ^Warhead_MissileAA_Medium_Flat
 	Inherits: ^TeslaWeapon
 	Inherits@2: ^ArrowWeapon
 	Inherits@3: ^RA2FlakWeapon
@@ -179,14 +179,14 @@ ConsortiumMissileSystem:
 	-Warhead@ArrowWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@MissileAA_MediumFlatCompatibility:
+	Warhead@MissileAA_Medium_Flat:
 		ValidTargets: Air
 		Damage: 15000
 		PercentageScale: 0
 	Warhead@EMPUnit:
 		ValidTargets: Air
 ConsortiumMissileSystem_EMP:
-	Inherits@roleflat: ^Compatibility_MissileQuantum_MediumFlat
+	Inherits@roleflat: ^Warhead_MissileQuantum_Medium
 	Inherits: ConsortiumMissileSystem
 	Warhead@TeslaWeapon: SpreadDamage
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -210,10 +210,10 @@ ConsortiumMissileSystem_EMP:
 		ValidTargets: Air
 		Damage: 12000
 	-Warhead@ArrowWeapon:
-	-Warhead@MissileAA_MediumFlatCompatibility:
+	-Warhead@MissileAA_Medium_Flat:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@MissileQuantum_MediumFlatCompatibility:
+	Warhead@MissileQuantum_Medium:
 		ValidTargets: Air
 		Damage: 34000
 		PercentageScale: 0
@@ -222,7 +222,7 @@ ConsortiumMissileSystem_EMP:
 		VerticalRateOfTurn: 16
 
 SteelQuantumCannon:
-	Inherits@finalmain: ^Compatibility_Quantum_HeavyFlat
+	Inherits@finalmain: ^Warhead_Quantum_Heavy_Flat
 	Inherits: ^Warhead_Laser_Heavy
 	Inherits@2: ^Warhead_Railgun_Heavy
 	Inherits@3: ^Projectile_Railgun_Heavy
@@ -246,7 +246,7 @@ SteelQuantumCannon:
 		ImpactSounds: makoexplose.wav
 	-Warhead@Laser_Heavy:
 	-Warhead@Railgun_Heavy:
-	Warhead@Quantum_HeavyFlatCompatibility:
+	Warhead@Quantum_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 24000
@@ -296,7 +296,7 @@ SteelQuantumCannon_EMP:
 	-Warhead@LaserWeapon:
 	-Warhead@RailgunWeapon:
 	-Warhead@Tesla_Heavy:
-	Warhead@Quantum_HeavyFlatCompatibility:
+	Warhead@Quantum_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 48000
@@ -345,7 +345,7 @@ SteelQuantumCannon_elite:
 	-Warhead@LaserWeapon:
 	-Warhead@RailgunWeapon:
 	-Warhead@Tesla_Heavy:
-	Warhead@Quantum_HeavyFlatCompatibility:
+	Warhead@Quantum_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 60000
@@ -392,7 +392,7 @@ SteelQuantumCannonScatter_elite:
 	-Warhead@LaserWeapon:
 	-Warhead@RailgunWeapon:
 	-Warhead@Tesla_Heavy:
-	Warhead@Quantum_HeavyFlatCompatibility:
+	Warhead@Quantum_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 40000
@@ -416,7 +416,7 @@ superbfg10kCannonDummy:
 	Range: 10238976
 
 bfg10kCannon:
-	Inherits@roleflat: ^Compatibility_Plasma_HeavyFlat
+	Inherits@roleflat: ^Warhead_Plasma_Heavy_Flat
 	Inherits: ^TeslaChargedWeapon
 	Inherits@2: ^MagicWeapon
 	Inherits@3: ^LaserWeapon
@@ -494,7 +494,7 @@ bfg10kCannon:
 	-Warhead@RailgunWeapon:
 	-Warhead@TeslaChargedExtraDamage:
 	-Warhead@TeslaChargedWeapon:
-	Warhead@Plasma_HeavyFlatCompatibility:
+	Warhead@Plasma_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 1127488
 		PercentageScale: 0
@@ -541,7 +541,7 @@ superbfg10kCannon:
 		PhysicalStateScale: 100
 
 SteelMakoGun:
-	Inherits@finalmain: ^Compatibility_Railgun_HeavyFlat
+	Inherits@finalmain: ^Warhead_Railgun_Heavy_Flat
 	Inherits: ^MediumFlameWeapon
 	Inherits@2: ^RA2Grenade
 	Inherits@3: ^RA2RailgunWeapon
@@ -568,7 +568,7 @@ SteelMakoGun:
 	-Warhead@Demolition_Light:
 	-Warhead@Railgun_Heavy:
 	-Warhead@SteelMakoCannonHE_Medium_NoWall:
-	Warhead@Railgun_HeavyFlatCompatibility:
+	Warhead@Railgun_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 8000
 		PercentageScale: 7488
@@ -580,7 +580,7 @@ SteelMakoGun_elite:
 	Range: 7050
 	Burst: 2
 	BurstDelays: 3
-	Warhead@Railgun_HeavyFlatCompatibility:
+	Warhead@Railgun_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 8000
 		PercentageScale: 7488
@@ -588,7 +588,7 @@ SteelMakoGun_elite:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 25
 SteelMakoGun_EMP:
-	Inherits@roleflat: ^Compatibility_Quantum_MediumFlat
+	Inherits@roleflat: ^Warhead_Quantum_Medium
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^TeslaWeapon
 	Inherits@3: SteelMakoGun
@@ -637,7 +637,7 @@ SteelMakoGun_EMP:
 	-Warhead@LightChemicalWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@Quantum_MediumFlatCompatibility:
+	Warhead@Quantum_Medium:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 13000
@@ -645,7 +645,7 @@ SteelMakoGun_EMP:
 	-Warhead@CannonHE_Medium:
 	-Warhead@Demolition_Light:
 	-Warhead@Railgun_Heavy:
-	-Warhead@Railgun_HeavyFlatCompatibility:
+	-Warhead@Railgun_Heavy_Flat:
 	-Warhead@SteelMakoCannonHE_Medium_NoWall:
 
 	Warhead@Railgun_Heavy_ExtraDamage:
@@ -655,7 +655,7 @@ SteelMakoGun_EMP_elite:
 	Range: 7050
 	Burst: 2
 	BurstDelays: 3
-	Warhead@Quantum_MediumFlatCompatibility:
+	Warhead@Quantum_Medium:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 13000
@@ -674,7 +674,7 @@ SteelMakoGun_EMP_elite:
 	Warhead@Railgun_Heavy_ExtraDamage:
 		InvalidTargets: Air
 SteelMantaAG:
-	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
+	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^SteelLightMissile
 	Inherits@2: ^RA2FlakWeapon
 	Inherits@3: ^SteelChaingun
@@ -703,13 +703,13 @@ SteelMantaAG:
 	-Warhead@Bullet_Medium:
 	-Warhead@Flak_Medium:
 	-Warhead@MissileAP_Light:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 9988
 SteelManta_AA:
-	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
+	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
 	Inherits: SteelMantaAG
 	Report: steel_chaingunfire.wav
 	Range: 9999
@@ -718,8 +718,8 @@ SteelManta_AA:
 		Explosions: steel_bluepiffs
 		ExplosionPalette: ra2effect
 		ValidTargets: Air
-	-Warhead@Bullet_MediumFlatCompatibility:
-	Warhead@Flak_MediumFlatCompatibility:
+	-Warhead@Bullet_Medium_Flat:
+	Warhead@Flak_Medium_Flat:
 		ValidTargets: Air
 		Damage: 8000
 		PercentageScale: 9988
@@ -734,7 +734,7 @@ SteelMantaAGResonance:
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water, Air
 
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Air
 SteelMantaAGResonanceBounce1:
@@ -743,7 +743,7 @@ SteelMantaAGResonanceBounce1:
 	Warhead@shrapnel: FireShrapnel
 		Weapon: SteelMantaAGResonanceBounce2
 
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Air
 SteelMantaAGResonanceBounce2:
@@ -751,7 +751,7 @@ SteelMantaAGResonanceBounce2:
 	Range: 2222
 	-Warhead@shrapnel:
 
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Air
 SteelMantaAAResonance_AA:
@@ -764,7 +764,7 @@ SteelMantaAAResonance_AA:
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water, Air
 
-	Warhead@Flak_MediumFlatCompatibility:
+	Warhead@Flak_Medium_Flat:
 		ValidTargets: Air
 SteelMantaAAResonanceBounce1:
 	Inherits: SteelMantaAAResonance_AA
@@ -772,17 +772,17 @@ SteelMantaAAResonanceBounce1:
 	Warhead@shrapnel: FireShrapnel
 		Weapon: SteelMantaAAResonanceBounce2
 
-	Warhead@Flak_MediumFlatCompatibility:
+	Warhead@Flak_Medium_Flat:
 		ValidTargets: Air
 SteelMantaAAResonanceBounce2:
 	Inherits: SteelMantaAAResonance_AA
 	Range: 2222
 	-Warhead@shrapnel:
 
-	Warhead@Flak_MediumFlatCompatibility:
+	Warhead@Flak_Medium_Flat:
 		ValidTargets: Air
 SteelMantaHunterCannons:
-	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
+	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^RA2FlakWeapon
 	Inherits@2: ^SteelChaingun
 	Range: 8000
@@ -806,13 +806,13 @@ SteelMantaHunterCannons:
 		Damage: 2000
 	-Warhead@Bullet_Medium:
 	-Warhead@Flak_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
 SteelMantaHunterCannons_AA:
-	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
+	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
 	Inherits: ^SteelMediumMissile
 	Inherits@2: SteelMantaHunterCannons
 	Range: 12000
@@ -822,8 +822,8 @@ SteelMantaHunterCannons_AA:
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	-Warhead@Bullet_MediumFlatCompatibility:
-	Warhead@Flak_MediumFlatCompatibility:
+	-Warhead@Bullet_Medium_Flat:
+	Warhead@Flak_Medium_Flat:
 		ValidTargets: Air
 		Damage: 6000
 		PercentageScale: 9984
@@ -837,7 +837,7 @@ SteelMantaHunterCannonsResonance:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water, Air
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -848,7 +848,7 @@ SteelMantaHunterCannonsResonanceBounce1:
 	Range: 3333
 	Warhead@shrapnel: FireShrapnel
 		Weapon: SteelMantaHunterCannonsResonanceBounce2
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -858,7 +858,7 @@ SteelMantaHunterCannonsResonanceBounce2:
 	Inherits: SteelMantaHunterCannonsResonance
 	Range: 2222
 	-Warhead@shrapnel:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -873,7 +873,7 @@ SteelMantaHunterCannonsAAResonance_AA:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water, Air
-	Warhead@Flak_MediumFlatCompatibility:
+	Warhead@Flak_Medium_Flat:
 		ValidTargets: Air
 		Damage: 6000
 		PercentageScale: 9984
@@ -883,7 +883,7 @@ SteelMantaHunterCannonsAAResonanceBounce1:
 	Range: 3333
 	Warhead@shrapnel: FireShrapnel
 		Weapon: SteelMantaHunterCannonsAAResonanceBounce2
-	Warhead@Flak_MediumFlatCompatibility:
+	Warhead@Flak_Medium_Flat:
 		ValidTargets: Air
 		Damage: 6000
 		PercentageScale: 9984
@@ -892,13 +892,13 @@ SteelMantaHunterCannonsAAResonanceBounce2:
 	Inherits: SteelMantaHunterCannonsAAResonance_AA
 	Range: 2222
 	-Warhead@shrapnel:
-	Warhead@Flak_MediumFlatCompatibility:
+	Warhead@Flak_Medium_Flat:
 		ValidTargets: Air
 		Damage: 6000
 		PercentageScale: 9984
 
 SteelRunnerPistols:
-	Inherits@finalmain: ^Compatibility_Tesla_HeavyFlat
+	Inherits@finalmain: ^Warhead_Tesla_Heavy_Flat
 	Inherits: ^TeslaWeapon
 	Inherits@2: ^LaserWeapon
 	Inherits@3: ^RailgunWeapon
@@ -1105,7 +1105,7 @@ SteelRunnerPistols:
 	-Warhead@PreservedFlat_LaserWeapon:
 	-Warhead@PreservedFlat_RailgunWeapon:
 	-Warhead@PreservedFlat_TeslaWeapon:
-	Warhead@Tesla_HeavyFlatCompatibility:
+	Warhead@Tesla_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		PercentageScale: 0
@@ -1114,7 +1114,7 @@ SteelRunnerPistols_elite:
 	Inherits: SteelRunnerPistols
 	Range: 7200
 	Burst: 4
-	Warhead@Tesla_HeavyFlatCompatibility:
+	Warhead@Tesla_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		PercentageScale: 0
@@ -1128,7 +1128,7 @@ SteelRunnerPistolsResonance:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water, Air
-	Warhead@Tesla_HeavyFlatCompatibility:
+	Warhead@Tesla_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		PercentageScale: 0
@@ -1138,7 +1138,7 @@ SteelRunnerPistolsResonanceBounce1:
 	Range: 3100
 	Warhead@shrapnel: FireShrapnel
 		Weapon: SteelRunnerPistolsResonanceBounce2
-	Warhead@Tesla_HeavyFlatCompatibility:
+	Warhead@Tesla_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		PercentageScale: 0
@@ -1147,7 +1147,7 @@ SteelRunnerPistolsResonanceBounce2:
 	Inherits: SteelRunnerPistolsResonance
 	Range: 1550
 	-Warhead@shrapnel:
-	Warhead@Tesla_HeavyFlatCompatibility:
+	Warhead@Tesla_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		PercentageScale: 0
@@ -1161,7 +1161,7 @@ SteelRunnerPistolsResonance_elite:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water, Air
-	Warhead@Tesla_HeavyFlatCompatibility:
+	Warhead@Tesla_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		PercentageScale: 0
@@ -1171,7 +1171,7 @@ SteelRunnerPistolsResonanceBounce1_elite:
 	Range: 3600
 	Warhead@shrapnel: FireShrapnel
 		Weapon: SteelRunnerPistolsResonanceBounce2_elite
-	Warhead@Tesla_HeavyFlatCompatibility:
+	Warhead@Tesla_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		PercentageScale: 0
@@ -1180,13 +1180,13 @@ SteelRunnerPistolsResonanceBounce2_elite:
 	Inherits: SteelRunnerPistolsResonance_elite
 	Range: 2400
 	-Warhead@shrapnel:
-	Warhead@Tesla_HeavyFlatCompatibility:
+	Warhead@Tesla_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		PercentageScale: 0
 
 SteelInfRailgun:
-	Inherits@finalmain: ^Compatibility_Railgun_HeavyFlat
+	Inherits@finalmain: ^Warhead_Railgun_Heavy_Flat
 	Inherits: ^RA2RailgunWeapon
 	Inherits@2: ^RA2FlakWeapon
 	Inherits@3: ^SteelChaingun
@@ -1219,7 +1219,7 @@ SteelInfRailgun:
 	-Warhead@Flak_Medium:
 	-Warhead@MissileAP_Light:
 	-Warhead@Railgun_Heavy:
-	Warhead@Railgun_HeavyFlatCompatibility:
+	Warhead@Railgun_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 		PercentageScale: 9994
@@ -1228,21 +1228,21 @@ SteelInfRailgun_elite:
 	Inherits: SteelInfRailgun
 	Range: 9000
 	Burst: 4
-	Warhead@Railgun_HeavyFlatCompatibility:
+	Warhead@Railgun_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 		PercentageScale: 9994
 
 SteelScalpelRailgunAA:
-	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
+	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
 	Inherits: SteelInfRailgun_elite
 	ValidTargets: Air
 	Warhead@EffectAir: CreateEffect
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
-	-Warhead@Railgun_HeavyFlatCompatibility:
-	Warhead@Flak_MediumFlatCompatibility:
+	-Warhead@Railgun_Heavy_Flat:
+	Warhead@Flak_Medium_Flat:
 		ValidTargets: Air
 		Damage: 16000
 		PercentageScale: 9994
@@ -1250,7 +1250,7 @@ SteelScalpelRailgunAA:
 	Warhead@Railgun_Heavy_ExtraDamage:
 		ValidTargets: Air
 SteelInfRailgun_EMP:
-	Inherits@finalmain: ^Compatibility_Quantum_HeavyFlat
+	Inherits@finalmain: ^Warhead_Quantum_Heavy_Flat
 	Inherits: ^Grenade
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^MediumChemicalWeapon
@@ -1719,8 +1719,8 @@ SteelInfRailgun_EMP:
 	-Warhead@PreservedFlat_ShrapnelWeapon:
 	-Warhead@PreservedFlat_TeslaWeapon:
 	-Warhead@Railgun_Heavy:
-	-Warhead@Railgun_HeavyFlatCompatibility:
-	Warhead@Quantum_HeavyFlatCompatibility:
+	-Warhead@Railgun_Heavy_Flat:
+	Warhead@Quantum_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 		PercentageScale: 0
@@ -1845,13 +1845,13 @@ SteelInfRailgun_EMP_elite:
 			Fighter: 10
 		Falloff: 100, 50
 		Range: 0, 48
-	Warhead@Quantum_HeavyFlatCompatibility:
+	Warhead@Quantum_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 		PercentageScale: 0
 
 SteelScalpelRailgun_EMP_AA:
-	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
+	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
 	Inherits: SteelInfRailgun_EMP_elite
 	ValidTargets: Air
 	Warhead@Railgun_Heavy:
@@ -1873,9 +1873,9 @@ SteelScalpelRailgun_EMP_AA:
 	-Warhead@Bullet_Medium:
 	-Warhead@Flak_Medium:
 	-Warhead@MissileAP_Light:
-	-Warhead@Quantum_HeavyFlatCompatibility:
+	-Warhead@Quantum_Heavy_Flat:
 	-Warhead@Railgun_Heavy:
-	Warhead@Flak_MediumFlatCompatibility:
+	Warhead@Flak_Medium_Flat:
 		ValidTargets: Air
 		Damage: 28000
 		PercentageScale: 5711
@@ -1903,9 +1903,9 @@ SteelScalpelRailgun_EMP_AA:
 	Warhead@PreservedFlat_TeslaExtraDamage:
 		ValidTargets: Air
 SteelFighterRailgun:
-	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
+	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
 	Inherits@collapsewh: ^Warhead_Laser_Heavy
-	Inherits@collapseextra1: ^Compatibility_Laser_ExtraDamage
+	Inherits@collapseextra1: ^Warhead_Laser_ExtraDamage
 	Inherits: ^LaserWeapon
 	Inherits@2: ^RA2RailgunWeapon
 	Inherits@3: ^SteelMediumCannon
@@ -1962,7 +1962,7 @@ SteelFighterRailgun:
 	-Warhead@Laser_Heavy:
 	-Warhead@MissileAP_Light:
 	-Warhead@Railgun_Heavy:
-	Warhead@Laser_HeavyFlatCompatibility:
+	Warhead@Laser_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		PercentageScale: 5990
@@ -1970,7 +1970,7 @@ SteelFighterRailgun:
 	Warhead@Railgun_Heavy_ExtraDamage:
 		ValidTargets: Ground, Water, Air
 SteelMegaSword:
-	Inherits@roleflat: ^Compatibility_Melee_HeavyFlat
+	Inherits@roleflat: ^Warhead_Melee_Heavy_Flat
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^LaserWeapon
 	Inherits@3: ^SwordWeapon
@@ -2017,7 +2017,7 @@ SteelMegaSword:
 	-Warhead@LightChemicalWeapon:
 	-Warhead@SwordWeapon:
 	-Warhead@SwordWeaponFriendlyFire:
-	Warhead@Melee_HeavyFlatCompatibility:
+	Warhead@Melee_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground
 		Damage: 60600
@@ -2026,7 +2026,7 @@ SteelMegaSword:
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 SteelMegaSword_EMP:
-	Inherits@roleflat: ^Compatibility_Quantum_HeavyFlat
+	Inherits@roleflat: ^Warhead_Quantum_Heavy_Flat
 	Inherits: ^HeavyChemicalWeapon
 	Inherits@2: ^LaserWeapon
 	Inherits@3: ^TeslaWeapon
@@ -2073,7 +2073,7 @@ SteelMegaSword_EMP:
 	-Warhead@LaserWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@Quantum_HeavyFlatCompatibility:
+	Warhead@Quantum_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 105600
@@ -2122,14 +2122,14 @@ SteelMegaSword_elite:
 	-Warhead@LaserWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	-Warhead@Quantum_HeavyFlatCompatibility:
+	-Warhead@Quantum_Heavy_Flat:
 
 	Warhead@Railgun_Heavy_ExtraDamage:
 		InvalidTargets: Air
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 SteelAirTurret:
-	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
+	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
 	Inherits: ^LaserWeapon
 	Inherits@2: ^RailgunWeapon
 	Range: 8000
@@ -2159,13 +2159,13 @@ SteelAirTurret:
 	-Warhead@LaserWeapon:
 	-Warhead@RailgunExtraDamage:
 	-Warhead@RailgunWeapon:
-	Warhead@Laser_HeavyFlatCompatibility:
+	Warhead@Laser_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 49600
 		PercentageScale: 0
 
 SteelAirTurret_EMP:
-	Inherits@roleflat: ^Compatibility_Quantum_HeavyFlat
+	Inherits@roleflat: ^Warhead_Quantum_Heavy_Flat
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^Effect_Tesla_Heavy
@@ -2198,9 +2198,9 @@ SteelAirTurret_EMP:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
 	-Warhead@LaserWeapon:
-	-Warhead@Laser_HeavyFlatCompatibility:
+	-Warhead@Laser_Heavy_Flat:
 	-Warhead@RailgunWeapon:
-	Warhead@Quantum_HeavyFlatCompatibility:
+	Warhead@Quantum_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 33600
 		PercentageScale: 0
@@ -2238,7 +2238,7 @@ SteelAirTurret_elite:
 		AimTargetStances: Enemy, Neutral
 	-Warhead@LaserWeapon:
 	-Warhead@RailgunWeapon:
-	Warhead@Quantum_HeavyFlatCompatibility:
+	Warhead@Quantum_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 49600
 		PercentageScale: 0
@@ -2275,7 +2275,7 @@ SteelAirTurretEScatter:
 		ValidTargets: Ground, Ship
 	-Warhead@LaserWeapon:
 	-Warhead@RailgunWeapon:
-	Warhead@Quantum_HeavyFlatCompatibility:
+	Warhead@Quantum_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 9600
 		PercentageScale: 0
@@ -2299,7 +2299,7 @@ SteelFortressWeapons:
 		ImpactSounds: gexp14a.wav
 
 SteelQuantumTurretRail:
-	Inherits@roleflat: ^Compatibility_Quantum_HeavyFlat
+	Inherits@roleflat: ^Warhead_Quantum_Heavy_Flat
 	Inherits: ^TeslaWeapon
 	Inherits@2: ^HeavyChemicalWeapon
 	Inherits@3: ^HeavyFlameWeapon
@@ -2361,7 +2361,7 @@ SteelQuantumTurretRail:
 	-Warhead@RailgunWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@Quantum_HeavyFlatCompatibility:
+	Warhead@Quantum_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 14600
@@ -2421,7 +2421,7 @@ SteelQuantumTurretRail_EMP:
 	-Warhead@RailgunWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@Quantum_HeavyFlatCompatibility:
+	Warhead@Quantum_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 14600
@@ -2533,7 +2533,7 @@ SteelHoverMissile:
 		VerticalRateOfTurn: 20
 
 SteelKatyCannons:
-	Inherits@finalmain: ^Compatibility_CannonFire_HeavyFlat
+	Inherits@finalmain: ^Warhead_CannonFire_Heavy_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Warhead_Flame_Heavy
 	Inherits@3: ^Projectile_Shell_Heavy
@@ -2571,7 +2571,7 @@ SteelKatyCannons:
 		ExplosionPalette: ra2effect
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Flame_Heavy:
-	Warhead@CannonFire_HeavyFlatCompatibility:
+	Warhead@CannonFire_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 30000
 		PercentageScale: 9997
@@ -2582,13 +2582,13 @@ SteelKatyCannons_elite:
 	MinRange: 1650
 	Burst: 4
 	BurstDelays: 5
-	Warhead@CannonFire_HeavyFlatCompatibility:
+	Warhead@CannonFire_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 30000
 		PercentageScale: 9997
 
 SteelKatyCannons_EMP:
-	Inherits@roleflat: ^Compatibility_Quantum_MediumFlat
+	Inherits@roleflat: ^Warhead_Quantum_Medium
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^TeslaWeapon
 	Inherits@3: SteelKatyCannons
@@ -2666,12 +2666,12 @@ SteelKatyCannons_EMP:
 	-Warhead@TankDestroyerCannon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@Quantum_MediumFlatCompatibility:
+	Warhead@Quantum_Medium:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 75000
 		PercentageScale: 3999
-	-Warhead@CannonFire_HeavyFlatCompatibility:
+	-Warhead@CannonFire_Heavy_Flat:
 	-Warhead@CannonHE_Heavy:
 	-Warhead@LightFlameWeapon:
 	-Warhead@MediumChemicalWeapon:
@@ -2682,7 +2682,7 @@ SteelKatyCannons_EMP_elite:
 	MinRange: 1650
 	Burst: 4
 	BurstDelays: 5
-	Warhead@Quantum_MediumFlatCompatibility:
+	Warhead@Quantum_Medium:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 75000
@@ -2701,7 +2701,7 @@ SteelKatyCannons_EMP_elite:
 	Warhead@MediumChemicalWeaponPercentage:
 		InvalidTargets: Air
 SteelStalkerRailgun:
-	Inherits@roleflat: ^Compatibility_Railgun_HeavyFlat
+	Inherits@roleflat: ^Warhead_Railgun_Heavy_Flat
 	Inherits: ^LaserWeapon
 	Inherits@2: ^RailgunWeapon
 	Range: 9000
@@ -2730,7 +2730,7 @@ SteelStalkerRailgun:
 	-Warhead@LaserWeapon:
 	-Warhead@RailgunExtraDamage:
 	-Warhead@RailgunWeapon:
-	Warhead@Railgun_HeavyFlatCompatibility:
+	Warhead@Railgun_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 121600
 		PercentageScale: 0
@@ -2769,7 +2769,7 @@ SteelStalkerRailgun_EMP:
 		Damage: 60000
 	-Warhead@LaserWeapon:
 	-Warhead@RailgunWeapon:
-	-Warhead@Railgun_HeavyFlatCompatibility:
+	-Warhead@Railgun_Heavy_Flat:
 
 SteelStalkerRailgun_elite:
 	Inherits: SteelStalkerRailgun_EMP
@@ -2840,7 +2840,7 @@ SteelStalkerRailgunEScatter:
 	-Warhead@RailgunWeapon:
 
 WhiteRabbitGatling:
-	Inherits@collapseflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@collapseflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^HeavyCannon
 	Inherits@2: ^SmallArms
 	Inherits@3: ^MediumMissile
@@ -2891,7 +2891,7 @@ WhiteRabbitGatling:
 	-Warhead@SmallArms:
 	-Warhead@MediumMissile:
 	-Warhead@FlakWeapon:
-	-Warhead@Bullet_MediumFlatCompatibility:
+	-Warhead@Bullet_Medium_Flat:
 HammerheadTankCannon:
 	Inherits: ^RA2MediumCannon
 	ReloadDelay: 55
@@ -2902,7 +2902,7 @@ HammerheadTankCannon:
 	Warhead@CannonHE_Medium:
 		Damage: 24000
 HammerheadArtillery:
-	Inherits@finalmain: ^Compatibility_CannonHE_MediumFlat
+	Inherits@finalmain: ^Warhead_CannonHE_Medium_Flat
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@wh2: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
@@ -3003,13 +3003,13 @@ HammerheadArtillery:
 		ValidTargets: Shielded
 	-Warhead@CannonHE_Medium:
 	-Warhead@Demolition_Heavy:
-	Warhead@CannonHE_MediumFlatCompatibility:
+	Warhead@CannonHE_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 33333
 		PercentageScale: 19798
 
 SteelDaggerCannon:
-	Inherits@collapseflat: ^Compatibility_CannonHE_HeavyFlat
+	Inherits@collapseflat: ^Warhead_CannonHE_Heavy_Flat
 	Inherits: ^MediumFlameWeapon
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^RA2Grenade
@@ -3065,7 +3065,7 @@ SteelDaggerCannon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Demolition_Light:
-	Warhead@CannonHE_HeavyFlatCompatibility:
+	Warhead@CannonHE_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 8000
 		PercentageScale: 4988
@@ -3076,7 +3076,7 @@ SteelDaggerCannon_elite:
 	Burst: 8
 
 SteelCruiserArtillery:
-	Inherits@finalmain: ^Compatibility_CannonHE_MediumFlat
+	Inherits@finalmain: ^Warhead_CannonHE_Medium_Flat
 	Inherits: ^SteelMediumCannon
 	Inherits@2: ^RA2Grenade
 	ReloadDelay: 20
@@ -3098,7 +3098,7 @@ SteelCruiserArtillery:
 		ImpactSounds: makoexplose.wav
 	-Warhead@CannonHE_Medium:
 	-Warhead@Demolition_Light:
-	Warhead@CannonHE_MediumFlatCompatibility:
+	Warhead@CannonHE_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 32000
 		PercentageScale: 9997
@@ -3109,13 +3109,13 @@ SteelCruiserArtillery_elite:
 	MinRange: 1600
 	Burst: 2
 	BurstDelays: 3
-	Warhead@CannonHE_MediumFlatCompatibility:
+	Warhead@CannonHE_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 32000
 		PercentageScale: 9997
 
 SteelCruiserCannons:
-	Inherits@collapseflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@collapseflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^LightMissile
 	Inherits@2: ^SmallArms
 	Inherits@3: ^FlakWeapon
@@ -3158,7 +3158,7 @@ SteelCruiserCannons:
 	-Warhead@LightMissile:
 	-Warhead@SmallArms:
 	-Warhead@FlakWeapon:
-	-Warhead@Bullet_MediumFlatCompatibility:
+	-Warhead@Bullet_Medium_Flat:
 SteelCruiserCannons_elite:
 	Inherits: SteelCruiserCannons
 	Range: 8000
@@ -3166,7 +3166,7 @@ SteelCruiserCannons_elite:
 	BurstDelays: 1
 
 SteelCargoshipCannons:
-	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^SteelSmallArms
 	Inherits@2: ^SteelChaingun
 	ReloadDelay: 3
@@ -3190,7 +3190,7 @@ SteelCargoshipCannons:
 ####################################################################################################
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Air, Water
 		Damage: 4000
 		PercentageScale: 9975

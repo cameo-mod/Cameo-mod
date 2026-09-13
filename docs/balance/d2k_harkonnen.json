@@ -204,7 +204,7 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -215,7 +215,7 @@
       "reloaddelay": "132",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "ordos_autogunturret"
       ],
       "warheads": [
@@ -1298,7 +1298,7 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "67",
-        "tag": "Bullet_LightFlatCompatibility",
+        "tag": "Bullet_Light_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -1309,7 +1309,7 @@
       "reloaddelay": "20",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Bullet_LightFlat",
+       "^Warhead_Bullet_Light_Flat",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Light",
        "^Effect_Bullet_Light"
@@ -1327,7 +1327,7 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "67",
-        "tag": "Bullet_LightFlatCompatibility",
+        "tag": "Bullet_Light_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -1338,7 +1338,7 @@
       "reloaddelay": "20",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Compatibility_Bullet_LightFlat",
+       "^Warhead_Bullet_Light_Flat",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Light",
        "^Effect_Bullet_Light"
@@ -1412,7 +1412,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "85",
-        "tag": "MissileAP_HeavyFlatCompatibility",
+        "tag": "MissileAP_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -1447,7 +1447,7 @@
       "reloaddelay": "64",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_MissileAP_HeavyFlat",
+       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy",
@@ -1469,7 +1469,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "85",
-        "tag": "MissileAP_HeavyFlatCompatibility",
+        "tag": "MissileAP_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -1504,7 +1504,7 @@
       "reloaddelay": "64",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Compatibility_MissileAP_HeavyFlat",
+       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy",
@@ -1589,7 +1589,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "85",
-        "tag": "MissileAP_HeavyFlatCompatibility",
+        "tag": "MissileAP_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -1625,7 +1625,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_MissileAP_HeavyFlat",
+       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy",
@@ -1678,7 +1678,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "85",
-        "tag": "MissileAP_HeavyFlatCompatibility",
+        "tag": "MissileAP_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -1714,7 +1714,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Compatibility_MissileAP_HeavyFlat",
+       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy",

@@ -448,7 +448,18 @@ def warheads(rs, wname: str, _seen=None) -> list[str]:
     """Resolved ^-prefixed warhead templates (^Warhead_*) in the weapon's
     inheritance chain (deduped, document order). Other ^-parents are
     recursed but not emitted, so the list records only the actual
-    new-split warhead carriers."""
+    new-split warhead carriers.
+
+    ⛔ STRUCTURAL MIGRATION HELPERS ARE RECURSED BUT NOT EMITTED. A helper gives every damage
+    warhead it declares `Damage: 0`; it carries a `Versus` shape across a migration and applies
+    nothing. Emitting one puts it into `weapon_class_from_types`, which takes the arithmetic MEAN
+    of a weapon's class templates — so a helper drags the weapon's class toward its own.
+
+    ⚠ THESE USED TO BE NAMED `^Compatibility_*` AND WERE EXCLUDED BY THAT PREFIX. R12 renamed all
+    34 to `^Warhead_*_Flat`, which walks straight into the `startswith("^Warhead_")` test above,
+    and **33 `design_weapon_class` values moved**. Selection is now semantic
+    (`target_model.is_damage_inert`) and survives any rename. Caught by Astra on PR #372;
+    guarded by `tools/tests/test_shield_class_invariance.py`."""
     _seen = _seen if _seen is not None else set()
     if wname.lower() in _seen:
         return []
@@ -461,7 +472,8 @@ def warheads(rs, wname: str, _seen=None) -> list[str]:
         if c.key == "Inherits" or c.key.startswith("Inherits@"):
             parent = c.value
             if parent.startswith("^"):
-                if parent.startswith("^Warhead_") and parent not in out:
+                if (parent.startswith("^Warhead_") and parent not in out
+                        and parent not in tm.non_class_templates(rs)):
                     out.append(parent)
                 # recurse into every ^-parent to find nested ^Warhead_* carriers
                 for t in warheads(rs, parent, _seen):

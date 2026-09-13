@@ -12,7 +12,7 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -23,7 +23,7 @@
       "reloaddelay": "3",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^RA2SmallArms",
        "^RA2Chaingun"
       ],
@@ -158,7 +158,7 @@
        "^HeavyAAWeapon",
        "^FlakWeapon",
        "^RA2MediumMissile",
-       "^Compatibility_MissileAP_Medium_GroundShip",
+       "^Warhead_MissileAP_Medium_GroundShip",
        "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
@@ -413,7 +413,7 @@
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -458,7 +458,7 @@
       "requires": "!rank-elite && !latinsyndicate_upgrade_yuristolentechchainguns",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -484,7 +484,7 @@
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -529,7 +529,7 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -555,7 +555,7 @@
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -600,7 +600,7 @@
       "requires": "latinsyndicate_upgrade_yuristolentechchainguns",
       "slot": "Armament@latinsyndicate_upgrade_yuristolentechchainguns",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -988,7 +988,7 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "tag": "MissileAP_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -999,7 +999,7 @@
       "reloaddelay": "20",
       "slot": "Armament@1",
       "versus_templates": [
-       "^Compatibility_MissileAP_MediumFlat",
+       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_MissileAP_Medium",
@@ -1020,7 +1020,7 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "tag": "MissileAP_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -1031,7 +1031,7 @@
       "reloaddelay": "20",
       "slot": "Armament@2",
       "versus_templates": [
-       "^Compatibility_MissileAP_MediumFlat",
+       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_MissileAP_Medium",
@@ -1165,7 +1165,7 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -1177,7 +1177,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -1198,7 +1198,7 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -1889,7 +1889,7 @@
         "damage": "18000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -1915,7 +1915,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -1937,7 +1937,7 @@
         "damage": "18000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -2072,7 +2072,7 @@
         "damage": "18000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -2098,7 +2098,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -2121,7 +2121,7 @@
         "damage": "18000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -2324,7 +2324,7 @@
         "damage": "30000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "233",
-        "tag": "Demolition_LightFlatCompatibility",
+        "tag": "Demolition_Light_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -2337,7 +2337,7 @@
       "requires": "(!latinsyndicate_upgrade_asianalliancestolentechhotfire && !rank-elite)",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Demolition_LightFlat",
+       "^Warhead_Demolition_Light_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Projectile_Grenade_Light",
@@ -2362,7 +2362,7 @@
         "damage": "30000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "233",
-        "tag": "Demolition_LightFlatCompatibility",
+        "tag": "Demolition_Light_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -2393,7 +2393,7 @@
         "damage": "30000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "233",
-        "tag": "Demolition_LightFlatCompatibility",
+        "tag": "Demolition_Light_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -2423,7 +2423,7 @@
         "damage": "30000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "233",
-        "tag": "Demolition_LightFlatCompatibility",
+        "tag": "Demolition_Light_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -2436,7 +2436,7 @@
       "requires": "(!latinsyndicate_upgrade_asianalliancestolentechhotfire && !rank-elite)",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Compatibility_Demolition_LightFlat",
+       "^Warhead_Demolition_Light_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Projectile_Grenade_Light",
@@ -2462,7 +2462,7 @@
         "damage": "30000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "233",
-        "tag": "Demolition_LightFlatCompatibility",
+        "tag": "Demolition_Light_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -2494,7 +2494,7 @@
         "damage": "30000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "233",
-        "tag": "Demolition_LightFlatCompatibility",
+        "tag": "Demolition_Light_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -2579,7 +2579,7 @@
         "damage": "6000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
-        "tag": "Flame_HeavyFlatCompatibility",
+        "tag": "Flame_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -2591,14 +2591,13 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Flame_HeavyFlat",
-       "^Warhead_Flame_Light",
        "^Warhead_Flame_Heavy",
+       "^Warhead_Flame_Light",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Flame_Light",
-       "^Warhead_Flame_Heavy"
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Flame_Light"
       ],
       "weapon": "SyndicateFireballLauncher",
       "weapon_class_source": "template"
@@ -2611,7 +2610,7 @@
         "damage": "6000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
-        "tag": "Flame_HeavyFlatCompatibility",
+        "tag": "Flame_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -2626,8 +2625,8 @@
        "SyndicateFireballLauncher"
       ],
       "warheads": [
-       "^Warhead_Flame_Light",
-       "^Warhead_Flame_Heavy"
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Flame_Light"
       ],
       "weapon": "SyndicateFireballLauncher_elite",
       "weapon_class_source": "template"
@@ -2641,7 +2640,7 @@
         "damage": "6000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
-        "tag": "Flame_HeavyFlatCompatibility",
+        "tag": "Flame_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -2653,14 +2652,13 @@
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Compatibility_Flame_HeavyFlat",
-       "^Warhead_Flame_Light",
        "^Warhead_Flame_Heavy",
+       "^Warhead_Flame_Light",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Flame_Light",
-       "^Warhead_Flame_Heavy"
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Flame_Light"
       ],
       "weapon": "SyndicateFireballLauncher",
       "weapon_class_source": "template"
@@ -2674,7 +2672,7 @@
         "damage": "6000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
-        "tag": "Flame_HeavyFlatCompatibility",
+        "tag": "Flame_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -2689,8 +2687,8 @@
        "SyndicateFireballLauncher"
       ],
       "warheads": [
-       "^Warhead_Flame_Light",
-       "^Warhead_Flame_Heavy"
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Flame_Light"
       ],
       "weapon": "SyndicateFireballLauncher_elite",
       "weapon_class_source": "template"
@@ -2812,7 +2810,7 @@
         "damage": "8000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
-        "tag": "Flame_LightFlatCompatibility",
+        "tag": "Flame_Light_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -2824,7 +2822,7 @@
       "requires": "latinsyndicate_doctrine_eliteguerillas && !rank-elite",
       "slot": "Armament@Molotov",
       "versus_templates": [
-       "^Compatibility_Flame_LightFlat",
+       "^Warhead_Flame_Light_Flat",
        "^Warhead_Flame_Light",
        "^Warhead_Demolition_Light",
        "^Projectile_Flame_Light",
@@ -2845,7 +2843,7 @@
         "damage": "8000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
-        "tag": "Flame_LightFlatCompatibility",
+        "tag": "Flame_Light_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -2931,7 +2929,7 @@
         "damage": "8000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
-        "tag": "Flame_LightFlatCompatibility",
+        "tag": "Flame_Light_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -2943,7 +2941,7 @@
       "requires": "latinsyndicate_doctrine_eliteguerillas && !rank-elite",
       "slot": "Armament@MolotovGARRISONED",
       "versus_templates": [
-       "^Compatibility_Flame_LightFlat",
+       "^Warhead_Flame_Light_Flat",
        "^Warhead_Flame_Light",
        "^Warhead_Demolition_Light",
        "^Projectile_Flame_Light",
@@ -2965,7 +2963,7 @@
         "damage": "8000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
-        "tag": "Flame_LightFlatCompatibility",
+        "tag": "Flame_Light_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -3850,7 +3848,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "tag": "MissileAP_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -3885,7 +3883,7 @@
       "reloaddelay": "500",
       "slot": "Armament@ARTILLERY",
       "versus_templates": [
-       "^Compatibility_MissileAP_MediumFlat",
+       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_Demolition_Heavy",
        "^RA2Grenade",
        "^RA2MediumMissile",
@@ -3976,7 +3974,7 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -3988,7 +3986,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -4009,7 +4007,7 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -4670,7 +4668,7 @@
         "damage": "20000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
-        "tag": "CannonHE_HeavyFlatCompatibility",
+        "tag": "CannonHE_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -4703,7 +4701,7 @@
       "reloaddelay": "122",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_CannonHE_HeavyFlat",
+       "^Warhead_CannonHE_Heavy_Flat",
        "^RA2Grenade",
        "^ShrapnelWeapon",
        "^MediumFlameWeapon",
@@ -4726,7 +4724,7 @@
         "damage": "20000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
-        "tag": "CannonHE_HeavyFlatCompatibility",
+        "tag": "CannonHE_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -4760,7 +4758,7 @@
       "requires": "rank-elite",
       "slot": "Armament@PRIMARYELITE",
       "versus_templates": [
-       "^Compatibility_CannonHE_HeavyFlat",
+       "^Warhead_CannonHE_Heavy_Flat",
        "^RA2Grenade",
        "^ShrapnelWeapon",
        "^MediumFlameWeapon",
@@ -5159,7 +5157,7 @@
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Flak_MediumFlat",
+       "^Warhead_Flak_Medium_Flat",
        "^LightMissile",
        "^TankDestroyerCannon",
        "^Chaingun",
@@ -5389,7 +5387,7 @@
         "damage": "10000",
         "falloff": "100, 0",
         "spread": "85",
-        "tag": "MissileAP_HeavyFlatCompatibility",
+        "tag": "MissileAP_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -5422,7 +5420,7 @@
       "reloaddelay": "139",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_MissileAP_HeavyFlat",
+       "^Warhead_MissileAP_Heavy_Flat",
        "^D2KRocket",
        "^HeavyAAWeapon",
        "^LightMissile",
@@ -5445,7 +5443,7 @@
         "damage": "10000",
         "falloff": "100, 0",
         "spread": "85",
-        "tag": "MissileAP_HeavyFlatCompatibility",
+        "tag": "MissileAP_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -5479,7 +5477,7 @@
       "requires": "rank-elite",
       "slot": "Armament@PRIMARYELITE",
       "versus_templates": [
-       "^Compatibility_MissileAP_HeavyFlat",
+       "^Warhead_MissileAP_Heavy_Flat",
        "^D2KRocket",
        "^HeavyAAWeapon",
        "^LightMissile",
@@ -5602,7 +5600,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@Flak",
       "versus_templates": [
-       "^Compatibility_Flak_MediumFlat",
+       "^Warhead_Flak_Medium_Flat",
        "^LightMissile",
        "^TankDestroyerCannon",
        "^Chaingun",
@@ -5767,7 +5765,7 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -5779,7 +5777,7 @@
       "requires": "latinsyndicate_upgrade_yuristolentechchainguns && !rank-elite",
       "slot": "Armament@Machinegun",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^RA2SmallArms",
        "^RA2Chaingun"
       ],
@@ -5798,7 +5796,7 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -5827,7 +5825,7 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -5856,7 +5854,7 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -5975,7 +5973,6 @@
       "requires": "latinsyndicate_doctrine_cartelrockets && rank-elite",
       "slot": "Armament@RocketsELITE",
       "versus_templates": [
-       "^Warhead_MissileHE_Medium",
        "RA2APCRocket"
       ],
       "warheads": [
@@ -6080,7 +6077,6 @@
       "requires": "latinsyndicate_doctrine_cartelrockets && rank-elite",
       "slot": "Armament@RocketsAAELITE",
       "versus_templates": [
-       "^Warhead_MissileAA_Medium",
        "RA2APCRocket_AA"
       ],
       "warheads": [
@@ -6299,7 +6295,7 @@
         "damage": "36000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_MediumFlatCompatibility",
+        "tag": "Concussion_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -6347,8 +6343,8 @@
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Concussion_MediumFlat",
-       "^Compatibility_CannonHE_MediumFlat",
+       "^Warhead_Concussion_Medium_Flat",
+       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -6373,7 +6369,7 @@
         "damage": "36000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_MediumFlatCompatibility",
+        "tag": "Concussion_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -6512,7 +6508,7 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -6524,7 +6520,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^RA2SmallArms",
        "^RA2Chaingun"
       ],
@@ -6543,7 +6539,7 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -6725,7 +6721,7 @@
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -6737,7 +6733,7 @@
       "requires": "!rank-elite && !latinsyndicate_upgrade_yuristolentechchainguns",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^RA2SmallArms",
        "^RA2Chaingun"
       ],
@@ -6756,7 +6752,7 @@
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -6783,7 +6779,7 @@
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -6827,7 +6823,7 @@
       "requires": "!rank-elite && latinsyndicate_upgrade_yuristolentechchainguns",
       "slot": "Armament@Gatling",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonAP_Light",
        "^Warhead_Flak_Medium",
        "^Projectile_Shell_Light",
@@ -6848,7 +6844,7 @@
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -6908,7 +6904,7 @@
         "damage": "40000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "tag": "MissileAP_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -6952,7 +6948,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@Rocket",
       "versus_templates": [
-       "^Compatibility_MissileAP_MediumFlat",
+       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Projectile_Grenade_Light",
@@ -6977,7 +6973,7 @@
         "damage": "40000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "tag": "MissileAP_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -7114,7 +7110,7 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "80",
-        "tag": "CannonAP_LightFlatCompatibility",
+        "tag": "CannonAP_Light_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -7126,7 +7122,7 @@
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_CannonAP_LightFlat",
+       "^Warhead_CannonAP_Light_Flat",
        "^RA2HeavyCannon",
        "^RA2MediumCannon",
        "^RA2TankDestroyerCannon"
@@ -7148,7 +7144,7 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "80",
-        "tag": "CannonAP_LightFlatCompatibility",
+        "tag": "CannonAP_Light_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -7292,7 +7288,7 @@
         "damage": "13000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
-        "tag": "CannonHE_MediumFlatCompatibility",
+        "tag": "CannonHE_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -7332,7 +7328,7 @@
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_CannonHE_MediumFlat",
+       "^Warhead_CannonHE_Medium_Flat",
        "^RailgunWeapon",
        "^MediumFlameWeapon",
        "^HeavyBomb",
@@ -7354,7 +7350,7 @@
         "damage": "13000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
-        "tag": "CannonHE_MediumFlatCompatibility",
+        "tag": "CannonHE_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -7411,7 +7407,7 @@
         "damage": "6000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "233",
-        "tag": "Concussion_LightFlatCompatibility",
+        "tag": "Concussion_Light",
         "type": "AreaDamage"
        }
       ],
@@ -7423,15 +7419,14 @@
       "requires": "!rank-elite",
       "slot": "Armament@GrenadePack",
       "versus_templates": [
-       "^Compatibility_Concussion_LightFlat",
-       "^Warhead_MissileAP_Heavy",
        "^Warhead_Concussion_Light",
+       "^Warhead_MissileAP_Heavy",
        "^Effect_Concussion_Light",
        "^RA2FlakWeapon"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy",
        "^Warhead_Concussion_Light",
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "RA2GrenadePack",
@@ -7445,7 +7440,7 @@
         "damage": "6000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "233",
-        "tag": "Concussion_LightFlatCompatibility",
+        "tag": "Concussion_Light",
         "type": "AreaDamage"
        }
       ],
@@ -7461,8 +7456,8 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy",
        "^Warhead_Concussion_Light",
+       "^Warhead_MissileAP_Heavy",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "RA2GrenadePack_elite",
@@ -7825,7 +7820,7 @@
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -7837,7 +7832,7 @@
       "requires": "!rank-elite && !latinsyndicate_upgrade_yuristolentechchainguns",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^RA2SmallArms",
        "^RA2Chaingun"
       ],
@@ -7856,7 +7851,7 @@
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -7883,7 +7878,7 @@
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -7927,7 +7922,7 @@
       "requires": "!rank-elite && latinsyndicate_upgrade_yuristolentechchainguns",
       "slot": "Armament@Gatling",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonAP_Light",
        "^Warhead_Flak_Medium",
        "^Projectile_Shell_Light",
@@ -7948,7 +7943,7 @@
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -8241,7 +8236,7 @@
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -8252,7 +8247,7 @@
       "reloaddelay": "15",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^RA2SmallArms",
        "^RA2Chaingun"
       ],
@@ -8400,7 +8395,7 @@
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -8411,7 +8406,7 @@
       "reloaddelay": "15",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^RA2SmallArms",
        "^RA2Chaingun"
       ],

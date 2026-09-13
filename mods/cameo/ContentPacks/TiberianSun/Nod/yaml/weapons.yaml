@@ -59,7 +59,7 @@ TSRaiderGrenade:
 
 TSProton:
 	Inherits@collapsewh: ^Warhead_Laser_Heavy
-	Inherits@collapseextra: ^Compatibility_Laser_ExtraDamage
+	Inherits@collapseextra: ^Warhead_Laser_ExtraDamage
 	-TargetActorCenter:
 	Inherits: ^TSEnergyBlast
 	Inherits@2: ^MediumFlameWeapon
@@ -138,9 +138,7 @@ TSTibBazooka:
 		ValidTargets: Shielded
 TSStankTusk:
 	Inherits@missilerole: ^Warhead_MissileAP_Medium
-	Inherits@finalmain: ^Compatibility_MissileHE_MediumFlat
-	Inherits@wh: ^Warhead_CannonHE_Medium
-	Inherits@wh2: ^Warhead_MissileHE_Medium
+	Inherits@finalmain: ^Warhead_MissileHE_Medium_Flat
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileHE_Medium
 	Range: 6385
@@ -160,7 +158,7 @@ TSStankTusk:
 		ValidTargets: Ground, Water, Air
 	-Warhead@CannonHE_Medium:
 	-Warhead@MissileHE_Medium:
-	-Warhead@MissileHE_MediumFlatCompatibility:
+	-Warhead@MissileHE_Medium_Flat:
 	Warhead@MissileAP_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -173,9 +171,7 @@ TSStankTusk:
 
 TSSBoatTusk:
 	Inherits@missilerole: ^Warhead_MissileAP_Medium
-	Inherits@finalmain: ^Compatibility_MissileHE_MediumFlat
-	Inherits@wh: ^Warhead_CannonHE_Medium
-	Inherits@wh2: ^Warhead_MissileHE_Medium
+	Inherits@finalmain: ^Warhead_MissileHE_Medium_Flat
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileHE_Medium
 	Range: 6385
@@ -197,7 +193,7 @@ TSSBoatTusk:
 		ValidTargets: Ground, Water, Air
 	-Warhead@CannonHE_Medium:
 	-Warhead@MissileHE_Medium:
-	-Warhead@MissileHE_MediumFlatCompatibility:
+	-Warhead@MissileHE_Medium_Flat:
 	Warhead@MissileAP_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -209,7 +205,7 @@ TSSBoatTusk:
 		PercentageSpread: 50
 
 TSStankTibTusk:
-	Inherits@collapseflat: ^Compatibility_MissileAP_MediumFlat
+	Inherits@collapseflat: ^Warhead_MissileAP_Medium_Flat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
@@ -249,7 +245,7 @@ TSStankTibTusk:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@MediumMissile:
 	-Warhead@MediumCannonFriendlyFire:
-	Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@MissileAP_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 35000
 		PercentageScale: 2855
@@ -257,7 +253,6 @@ TSStankTibTusk:
 
 TSNODRedEye:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
-	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileAP_Heavy
 	ReloadDelay: 50
@@ -277,7 +272,6 @@ TSNODRedEye:
 	Warhead@2Eff: CreateEffect
 		ImpactSounds: expnew13.aud
 		ImpactActors: false
-	-Warhead@MissileAP_Heavy:
 	Warhead@MissileAA_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -321,7 +315,7 @@ TSFireballLauncher:
 	Warhead@Flame_Medium:
 		Damage: 8000
 TSLasergun:
-	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
+	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -340,7 +334,7 @@ TSLasergun:
 		Damage: 2000
 	-Warhead@Bullet_Light:
 	-Warhead@Laser_Heavy:
-	Warhead@Laser_HeavyFlatCompatibility:
+	Warhead@Laser_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
@@ -409,7 +403,7 @@ TSCommandoShotgun:
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 elitecadregun:
-	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
+	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -425,7 +419,7 @@ elitecadregun:
 		Damage: 8000
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 		PercentageScale: 2494
@@ -587,7 +581,7 @@ TSHarpyAOEClaw:
 		Spread: 300
 		Falloff: 100, 50, 25
 TSLaserHarpyClaw:
-	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
+	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
 	Inherits: ^Warhead_Bullet_Medium
 	Inherits@2: ^Warhead_Laser_Heavy
 	Inherits@3: ^Projectile_Laser_Heavy
@@ -612,7 +606,7 @@ TSLaserHarpyClaw:
 		ValidTargets: Ground, Air
 	-Warhead@Bullet_Medium:
 	-Warhead@Laser_Heavy:
-	Warhead@Laser_HeavyFlatCompatibility:
+	Warhead@Laser_Heavy_Flat:
 		ValidTargets: Ground, Air
 		Damage: 8000
 		PercentageScale: 9988
@@ -634,7 +628,7 @@ TSLaserHarpyMultiClaw:
 		Damage: 0
 		ValidTargets: Ground, Air
 	-Warhead@Bullet_Medium:
-	Warhead@Laser_HeavyFlatCompatibility:
+	Warhead@Laser_Heavy_Flat:
 		ValidTargets: Ground, Air
 		Damage: 4000
 		PercentageScale: 9975
@@ -651,7 +645,7 @@ TSLaserHarpyAOEClaw:
 		Spread: 300
 		Falloff: 100, 50, 25
 	-Warhead@Bullet_Medium:
-	Warhead@Laser_HeavyFlatCompatibility:
+	Warhead@Laser_Heavy_Flat:
 		Spread: 300
 		Falloff: 100, 50, 25
 		ValidTargets: Ground, Air

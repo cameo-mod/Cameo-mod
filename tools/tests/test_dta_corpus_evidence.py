@@ -213,12 +213,22 @@ class ConsumerWithholdingTest(unittest.TestCase):
             self.assertEqual(r.get('hp'), raw.get('hp'), r['id'])
             self.assertEqual(r.get('cost'), raw.get('cost'), r['id'])
             self.assertEqual(r.get('speed'), raw.get('speed'), r['id'])
+            # ⛔ `w_damage` IS PER CYCLE SINCE 2026-09-13 (maintainer: the referenced coordinate
+            # is the whole burst, because burst is a delivery choice and SP ships the Mammoth
+            # Mk. II at Burst 4 where TS ships it at Burst 2 — per shot they look identical).
+            # `to_per_cycle` carries the raw per-shot figure alongside as `w_damage_per_shot`,
+            # so THAT is what still matches the corpus verbatim. Comparing `w_damage` to the raw
+            # value asserts the superseded convention and fails by exactly the burst (150 vs 75
+            # on `MSAM`).
             if r['id'] == 'MTNK':
                 # Exact-row reviewed secondary selection; raw corpus is unchanged.
-                self.assertEqual(r.get('w_damage'), raw.get('w2_damage'))
+                self.assertEqual(r.get('w_damage_per_shot'), raw.get('w2_damage'))
                 self.assertEqual(r.get('wdummy_damage'), raw.get('w_damage'))
             else:
-                self.assertEqual(r.get('w_damage'), raw.get('w_damage'), r['id'])
+                self.assertEqual(r.get('w_damage_per_shot'), raw.get('w_damage'), r['id'])
+            burst = float(r.get('w_burst') or 1)
+            if r.get('w_damage_per_shot') is not None:
+                self.assertAlmostEqual(r['w_damage'], r['w_damage_per_shot'] * burst, msg=r['id'])
 
     def test_reviewed_tesla_retains_original_exotic_verdict_without_armor_claim(self):
         row = next(r for r in self.rows if r['id'] == 'RATSLA')

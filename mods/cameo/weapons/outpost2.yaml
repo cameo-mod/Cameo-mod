@@ -122,19 +122,19 @@ edenMobileLaserTiger:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 edenMobileDefenceLaser:
-	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
+	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
 	Inherits: edenMobileLaserTiger
 	ReloadDelay: 10
 	Range: 6656
 	-Warhead@CannonHE_Medium:
 	-Warhead@Laser_Heavy:
-	Warhead@Laser_HeavyFlatCompatibility:
+	Warhead@Laser_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		PercentageScale: 1990
 
 edenRailgun:
-	Inherits@roleflat: ^Compatibility_Railgun_HeavyFlat
+	Inherits@roleflat: ^Warhead_Railgun_Heavy_Flat
 	Inherits: ^RailgunWeapon
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^LightChemicalWeapon
@@ -198,7 +198,7 @@ edenRailgun:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@TankDestroyerCannon:
-	Warhead@Railgun_HeavyFlatCompatibility:
+	Warhead@Railgun_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 25000
 		PercentageScale: 0

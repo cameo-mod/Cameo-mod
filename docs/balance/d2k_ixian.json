@@ -99,7 +99,7 @@
         "damage": "12000",
         "falloff": "100, 0",
         "spread": "85",
-        "tag": "MissileAP_HeavyFlatCompatibility",
+        "tag": "MissileAP_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -146,7 +146,7 @@
       "reloaddelay": "132",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_MissileAP_HeavyFlat",
+       "^Warhead_MissileAP_Heavy_Flat",
        "^TankDestroyerCannon",
        "^LightChemicalWeapon",
        "^FlakWeapon",
@@ -296,7 +296,7 @@
         "damage": "105000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
-        "tag": "Demolition_HeavyFlatCompatibility",
+        "tag": "Demolition_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -328,7 +328,7 @@
       "reloaddelay": "250",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Demolition_HeavyFlat",
+       "^Warhead_Demolition_Heavy_Flat",
        "^MediumFlameWeapon",
        "^HeavyBomb",
        "^TeslaChargedWeapon"
@@ -440,7 +440,7 @@
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "48",
-        "tag": "Laser_MediumFlatCompatibility",
+        "tag": "Laser_Medium",
         "type": "AreaDamage"
        },
        {
@@ -466,20 +466,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "50",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Laser_MediumFlat",
+       "^Warhead_Laser_Medium",
        "^TeslaWeapon",
        "^HeavyFlameWeapon",
        "^RailgunWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Medium"
+      ],
       "weapon": "ixian_farasha",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
@@ -490,7 +492,7 @@
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "48",
-        "tag": "Laser_MediumFlatCompatibility",
+        "tag": "Laser_Medium",
         "type": "AreaDamage"
        },
        {
@@ -516,7 +518,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "50",
@@ -524,9 +526,11 @@
       "versus_templates": [
        "ixian_farasha"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Medium"
+      ],
       "weapon": "d2k_farasha_aa",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -606,14 +610,14 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "96",
-        "tag": "Railgun_HeavyFlatCompatibility",
+        "tag": "Railgun_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
         "damage": "1000",
         "falloff": null,
         "spread": "500",
-        "tag": "RailgunExtraDamageCompatibility",
+        "tag": "RailgunExtraDamage_Auxiliary",
         "type": "SpreadDamage"
        },
        {
@@ -645,9 +649,9 @@
       "reloaddelay": "24",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Railgun_HeavyFlat",
+       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Railgun_Heavy",
-       "^Compatibility_Railgun_ExtraDamage",
+       "^Warhead_Railgun_ExtraDamage",
        "^FlakWeapon",
        "^TankDestroyerCannon",
        "^RailgunWeapon",
@@ -994,7 +998,7 @@
         "damage": "30000",
         "falloff": "100, 0",
         "spread": "80",
-        "tag": "CannonAP_LightFlatCompatibility",
+        "tag": "CannonAP_Light_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -1005,7 +1009,7 @@
       "reloaddelay": "50",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_CannonAP_LightFlat",
+       "^Warhead_CannonAP_Light_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -1249,7 +1253,7 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -1261,7 +1265,7 @@
       "requires": "!ixian_upgrade_tungstenneedleguns",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -1282,7 +1286,7 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -2036,7 +2040,7 @@
         "damage": "12000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -2113,7 +2117,7 @@
       "requires": "ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -2201,7 +2205,7 @@
         "damage": "12000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -2278,7 +2282,7 @@
       "requires": "ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -2361,7 +2365,7 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "67",
-        "tag": "Bullet_LightFlatCompatibility",
+        "tag": "Bullet_Light_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -2373,7 +2377,7 @@
       "requires": "!ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Bullet_LightFlat",
+       "^Warhead_Bullet_Light_Flat",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Light",
        "^Effect_Bullet_Light"
@@ -2390,7 +2394,7 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -2402,7 +2406,7 @@
       "requires": "ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Medium",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
@@ -2423,7 +2427,7 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "67",
-        "tag": "Bullet_LightFlatCompatibility",
+        "tag": "Bullet_Light_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -2435,7 +2439,7 @@
       "requires": "!ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Compatibility_Bullet_LightFlat",
+       "^Warhead_Bullet_Light_Flat",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Light",
        "^Effect_Bullet_Light"
@@ -2453,7 +2457,7 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -2465,7 +2469,7 @@
       "requires": "ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Medium",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
@@ -2561,7 +2565,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "85",
-        "tag": "MissileAP_HeavyFlatCompatibility",
+        "tag": "MissileAP_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -2596,7 +2600,7 @@
       "reloaddelay": "64",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_MissileAP_HeavyFlat",
+       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy",
@@ -2618,7 +2622,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "85",
-        "tag": "MissileAP_HeavyFlatCompatibility",
+        "tag": "MissileAP_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -2653,7 +2657,7 @@
       "reloaddelay": "64",
       "slot": "Armament@garrisoned",
       "versus_templates": [
-       "^Compatibility_MissileAP_HeavyFlat",
+       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy",
@@ -3983,7 +3987,7 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamageCompatibility",
+        "tag": "LaserExtraDamage_Auxiliary",
         "type": "SpreadDamage"
        },
        {
@@ -4059,8 +4063,8 @@
       "requires": "ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
-       "^Compatibility_Laser_ExtraDamage",
+       "^Warhead_Bullet_Medium_Flat",
+       "^Warhead_Laser_ExtraDamage",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -4190,7 +4194,7 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -4202,7 +4206,7 @@
       "requires": "!ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@Guns",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
@@ -4223,7 +4227,7 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -4348,7 +4352,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "40",
@@ -4357,18 +4361,16 @@
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
-       "^Warhead_CannonAP_Light",
        "^Projectile_Shell_Light",
        "^Effect_CannonAP_Light",
        "^D2K_Cannon"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_CannonAP_Light",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "HeavyIxianCombatTankCannon",
-      "weapon_class_source": "allowlist_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4443,7 +4445,7 @@
         "damage": "24000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_MediumFlatCompatibility",
+        "tag": "Concussion_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -4478,7 +4480,7 @@
       "reloaddelay": "80",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Concussion_MediumFlat",
+       "^Warhead_Concussion_Medium_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Concussion_Medium",
@@ -4931,7 +4933,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5555",
       "reloaddelay": "35",
@@ -4940,18 +4942,16 @@
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
-       "^Warhead_CannonAP_Light",
        "^Projectile_Shell_Light",
        "^Effect_CannonAP_Light",
        "^D2K_Cannon"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_CannonAP_Light",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "IxianCombatTankCannon",
-      "weapon_class_source": "allowlist_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

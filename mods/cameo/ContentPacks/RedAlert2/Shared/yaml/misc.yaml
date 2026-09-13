@@ -949,6 +949,9 @@ ra2asw:
 	Inherits@Template: ^BomberTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@upgrade: ^RA2AlliedAdvancedAeronautics
+	ReloadAmmoPool:
+		Delay: 20
+		Count: 1
 	Valued:
 		Cost: 340
 	Tooltip:
@@ -969,6 +972,7 @@ ra2asw:
 	ChangesHealth@SelfHealing:
 		Step: 20
 	Armament@PRIMARY:
+		AmmoUsage: 1
 		Weapon: RA2DepthCharge
 		LocalOffset: 427,-171,-213, 427,171,-213
 		PauseOnCondition: !ammo
@@ -985,7 +989,7 @@ ra2asw:
 	SpawnActorOnDeath:
 		Actor: ra2asw.Husk
 	AmmoPool:
-		Ammo: 12
+		Ammo: 5
 		AmmoCondition: ammo
 	Voiced:
 		VoiceSet: NighthawkVoice
@@ -1060,6 +1064,9 @@ ra2hornet:
 	Inherits@Template: ^BomberTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@upgrade: ^RA2AlliedAdvancedAeronautics
+	ReloadAmmoPool:
+		Delay: 100
+		Count: 1
 	Valued:
 		Cost: 170
 	Tooltip:
@@ -1080,13 +1087,14 @@ ra2hornet:
 	ChangesHealth@SelfHealing:
 		Step: 2
 	Armament@PRIMARY:
+		AmmoUsage: 1
 		Weapon: RA2HornetMissile
 		LocalOffset: 427,-171,-213, 427,171,-213
 		PauseOnCondition: !ammo
 	FirepowerMultiplier@ra2hornet:
 		Modifier: 50
 	AmmoPool:
-		Ammo: 12
+		Ammo: 1
 		AmmoCondition: ammo
 	SpawnActorOnDeath:
 		Actor: ra2hornet.Husk
