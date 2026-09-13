@@ -10,7 +10,16 @@ dated earlier, INCLUDING the "(evening)" section below, which this supersedes on
 | master | **`8f9bef3b0`** — PR #372 merged, then #346. **Boot-gated, ZERO blocking inherit nodes.** |
 | branches | 203 → **115**; 75 landed branches deleted, 39 `archive/20260913/*` tags pushed |
 | open PRs | 28 → **15** |
-| the live lane | **per-armament reference pairing** — the maintainer's cannon-vs-missile ruling |
+| the live lane | **per-armament reference pairing** — DONE and pushed |
+| the branch | `claude/armament_pairing` — `38a3d3664` + `a47a627de`, off `8f9bef3b0` |
+| the map | v25: 73 originals · 116 expanded · 305 references, now with per-armament references |
+
+⛔ **THE SUITE BASELINE, so nobody re-derives it.** Clean `origin/master` `8f9bef3b0` runs **2427
+tests with 22 errors + 139 failures across 113 distinct test names.** That is the floor; this
+branch adds 29 passing tests and no new failures. The failure mass is NOT the R12 consolidation
+lane — the largest clusters are weapon-name ownership tests (`test_soviet_owned_weapon_names` 16,
+`test_yak_weapon_ownership` 12, `test_additional_owned_names` 10) and `test_missile_role_policy`
+(8). Only ~50 of the 161 sit in consolidation/profile files.
 
 ⚠ The "(evening)" section below still says *master `b235c6980` DOES NOT BOOT* and *#372 is
 blocked*. Both were true when written and are now false. Its technical content — the R12 rename
@@ -40,9 +49,28 @@ contaminated by that fold. Shipped this turn, changing no balance number:
 * `tools/balance/build_armament_pairing_report.py` → `docs/balance/derived/armament_pairing.json`.
 * `tools/tests/test_armament_roles.py` — **29/29**.
 
-⛔ **NOT YET DONE, AND IT NEEDS THE MAINTAINER'S WORD:** retiring the fold in `armament_profile` in
-favour of per-role targets is a MODEL change, so it has not been made. The pairing is measured and
-reviewable first, which is the order the last three reversals here should have followed.
+⛔ **STILL NOT DONE, AND IT STILL NEEDS THE MAINTAINER'S WORD:** retiring the fold in
+`armament_profile` in favour of per-role targets is a MODEL change. The pairing is built, measured
+and rendered in the map; the ledger and `apply_balance` are untouched.
+
+⛔⛔ **A LIVE BALANCE FINDING THAT IS NOT MINE AND NOT FIXED.** `test_missile_role_policy` is red on
+master: 8 of the 77 pinned missile-role conversions no longer preserve `Damage`, which rule 5
+requires them to. Measured on `8f9bef3b0`:
+
+| weapon | pinned | now | |
+|---|--:|--:|--:|
+| `ra1_allies_sheridanassaulttank_missile` | 16,000 | **4,000** | **0.25x** |
+| `td_gdi_humveemkii_rocketshumvee2` (+3 siblings) | 16,000 / 32,000 | 8,000 / 16,000 | 0.50x |
+| `ra1_soviets_monstertank_missile` | 40,000 | 42,000 | 1.05x |
+| `ra1_soviets_samsite_missile_AA` | 16,000 | 17,600 | 1.10x |
+| `ra1_soviets_su57attackbomber_missile` | 40,000 | 46,000 | 1.15x |
+
+⚠ A red pin is not proof of a regression — a later, deliberate balance edit would look the same if
+the history was never re-pinned. But the Hum-vee's uniform 0.50x and the Sheridan's 0.25x are large
+and the guard that exists to catch exactly this is the one reporting it. **Never re-pin it to make
+the test green** — that is the ratchet mistake. Someone has to say which of the two numbers is
+intended. Both the Sheridan and the Hum-vee Mk II are multi-weapon units in the pairing lane, so
+their reference rows rest on these values.
 
 ### Where everything is
 
