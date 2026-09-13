@@ -1105,7 +1105,14 @@ REFERENCE_OVERRIDES = {
     ("td_gdi_archerartillery", "Combined Arms"): "THWK",      # Tomahawk Launcher
     ("td_gdi_exosuit", "Combined Arms"): "XO",                # X-O Powersuit
     ("td_gdi_predatortank", "Combined Arms"): "MTNK.Laser",   # the GDI Battle Tank replacement
-    ("td_gdi_firehawk", "Combined Arms"): "AURO",             # Aurora; A10 joins via FAMILY_EXTRA
+    # ⭐ THE A-10, NOT THE AURORA (maintainer, 2026-09-13): "CA has the A10 warthog right? Can
+    # you use it instead of the aurora for the fire hawk as reference." CA ships `A10` "Warthog"
+    # (plus `A10.GAU` and `A10.SW` variants) for arc/eagle/gdi/talon/zocom, and DTA's row for this
+    # actor is already its own `A10` — so the two references now describe the same aircraft.
+    # ⚠ The old comment here promised "A10 joins via FAMILY_EXTRA". There is no FAMILY_EXTRA in
+    # this file; the mechanism it named does not exist, so the A-10 never joined anything and the
+    # Aurora stood alone. A comment naming a mechanism is not the mechanism.
+    ("td_gdi_firehawk", "Combined Arms"): "A10",              # Warthog — the Aurora is a bomber, not this
     ("td_nod_venom", "Combined Arms"): "VENM",
     # Red Alert, Allies:
     ("ra1_allies_rapierjumpjet", "Combined Arms"): "BEAG",    # Black Eagle — NOT the Blackhawk
