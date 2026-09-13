@@ -184,6 +184,12 @@ def eligible(row, stat):
     """Does `row` belong in the population for `stat`? (see ELIGIBILITY)"""
     if row.get('reference_base_eligible') is False:
         return False
+    # Cameo's ledger can aggregate several baseline armaments into one cycle-damage/rate total
+    # while carrying Burst/Reload from only the selected primary. Those quantities do not form
+    # one cadence and abstain from the one-armament component model. Peer rows omit this flag
+    # because their extractor emits one selected weapon slot per row.
+    if stat in WEAPON_STATS and row.get('weapon_model_eligible') is False:
+        return False
     if stat == 'w_range' and 'w_range_usable' in row:
         # Independent, exact-row range proof never certifies damage or cadence.
         value = row.get(stat)
@@ -1061,7 +1067,8 @@ def armament_profile(arms, anum):
             "w_damage": dmg_total or None,
             "w_burst": anum(primary.get("burst")) or 1,
             "w_reload": anum(primary.get("reloaddelay")),
-            "w_dps": dps_total or None}, debt, primary
+            "w_dps": dps_total or None,
+            "weapon_model_eligible": len(live) == 1}, debt, primary
 
 
 def _armament_damage(arm):
@@ -1548,9 +1555,14 @@ def cameo_hero_rows():
                     if dps and wname:
                         for lad, frac in cameo_weapon_ladders(wname).items():
                             w[f"dps_vs_{lad}"] = dps * frac
+                cycle_damage = w.get("w_damage")
+                burst = float(w.get("w_burst") or 1)
+                per_shot = (float(cycle_damage) / burst
+                            if cycle_damage and burst > 1 else cycle_damage)
                 out.append({"source": "Cameo", "id": name, "name": name, "type": row_kind,
                             "hp": hp, "speed": spd, "turn_speed": turn, "cost": val("cost"),
                             "structure_debt": debt, "hero": True,
+                            "w_damage_per_shot": per_shot,
                             "turn_ratio": (spd / turn) if (spd and turn) else None, **w})
     return out
 

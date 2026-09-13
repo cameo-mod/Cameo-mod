@@ -315,7 +315,7 @@ def compose_dps(damage, reload_ticks, burst=1, burst_delay_per_shot=0.0):
     return damage_per_tick(damage, burst, reload_ticks, burst_delay_per_shot)
 
 
-def dps_guard(current, component_targets, dps_target):
+def dps_guard(current, component_targets, dps_target, burst_delay_target=None):
     """Check a set of component targets against the DPS verifier.
 
     `current` carries `w_damage` / `w_burst` / `w_reload` / `w_dps`; `component_targets` the
@@ -335,17 +335,22 @@ def dps_guard(current, component_targets, dps_target):
         return v if v not in (None, 0) else current.get(key)
 
     cur_dps = current.get("w_dps")
-    if cur_dps is None:
+    if cur_dps is None or current.get("weapon_model_eligible") is False:
         return None
-    # Everything below is per shot, on both sides, so the ONE formula applies literally.
-    per_shot = burst_delay_of(current)
-    if per_shot is None:
-        per_shot = 0.0
+    current_burst = float(current.get("w_burst") or 1)
+    current_delay = burst_delay_of(current)
+    if current_burst > 1 and current_delay is None:
+        return None
     # ⛔ `pick("w_damage")` IS PER CYCLE, and `damage_per_tick` multiplies by burst, so the cycle
     # total must be divided back down first or burst is counted twice — 969.86 instead of 485 on
     # the mammoth. Dividing by the TARGET burst is what makes the two spellings identical:
     # `(cycle/burst) * burst / ticks` is `cycle / ticks`.
     tgt_burst = float(pick("w_burst") or 1)
+    per_shot = (float(burst_delay_target) if burst_delay_target is not None
+                else current_delay)
+    if tgt_burst > 1 and per_shot is None:
+        return None
+    per_shot = per_shot or 0.0
     tgt_cycle_damage = pick("w_damage")
     new = damage_per_tick(
         (tgt_cycle_damage / tgt_burst) if (tgt_cycle_damage and tgt_burst) else None,
@@ -595,6 +600,11 @@ class FrozenCameoDistribution(dict):
         self.cameo_votes = {row['id']: row for row in rows}
 
 
+def _withhold_unproven_frozen_weapon_model(rows):
+    """Keep the frozen population fixed while withholding uncaptured armament structure."""
+    return [dict(row, weapon_model_eligible=False) for row in rows]
+
+
 def cameo_context():
     import hashlib
     path = ROOT / 'docs/reference/cameo_baselines/pre_reference_20260910.json'
@@ -610,7 +620,7 @@ def cameo_context():
     # different quantities. The bytes are untouched and still hash.
     # The snapshot already stores the burst TOTAL, which IS the referenced coordinate, so it is
     # normalised only to attach the derived per-shot figure. See `reference_distribution.to_per_cycle`.
-    rows = rd.to_per_cycle(document['rows'])
+    rows = _withhold_unproven_frozen_weapon_model(rd.to_per_cycle(document['rows']))
     distribution = rd.build_distributions(rows)
     add_cost_distribution(distribution, rows)
     return FrozenCameoDistribution(distribution['Cameo'], rows)
@@ -629,7 +639,7 @@ def hero_cameo_context():
     doc = json.loads(raw)
     if doc['parent_snapshot_sha256'] != FROZEN_CAMEO_SHA256:
         raise ValueError('hero reference does not share the frozen baseline')
-    rows = doc['rows']
+    rows = _withhold_unproven_frozen_weapon_model(rd.to_per_cycle(doc['rows']))
     dist = rd.build_distributions(rows)
     add_cost_distribution(dist, rows)
     return FrozenCameoDistribution(dist['Cameo'], rows)
@@ -681,6 +691,11 @@ def target_for(rows, cameo_row, stat, dist, cdist):
     vote_row = frozen.get(cameo_row.get('id')) if frozen is not None else cameo_row
     projection_row = vote_row if vote_row is not None else cameo_row
     if stat in LAW_GOVERNED_STATS:
+        return None, None, 0
+    if stat in rd.WEAPON_STATS and (
+            cameo_row.get("weapon_model_eligible") is False
+            or vote_row is None
+            or vote_row.get("weapon_model_eligible") is False):
         return None, None, 0
     if stat in DIRECT_STATS:
         return _direct_target(rows, vote_row, stat)
