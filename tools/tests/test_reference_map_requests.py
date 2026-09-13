@@ -10,6 +10,12 @@ import assign_references as ar
 import build_reference_report as report
 
 class Requests(unittest.TestCase):
+    def test_simultaneous_count_keeps_shared_conditions_and_refuses_expressions(self):
+        self.assertEqual(report.simultaneous_condition_bound(['upgrade', 'upgrade', '!upgrade']), 2)
+        self.assertEqual(report.simultaneous_condition_bound(['', 'mode', '!mode']), 2)
+        for condition in ('mode && !disabled', 'ammo<2', 'ammo>=2', '!!mode'):
+            self.assertIsNone(report.simultaneous_condition_bound([condition]))
+
     def test_original_mammoth_displaces_siege(self):
         source = 'DTA Enhanced'
         peer = {'id': '4TNK', 'name': 'Soviet Mammoth Tank', 'hp': 7600, 'cost': 1700}
@@ -33,13 +39,43 @@ class Requests(unittest.TestCase):
         self.assertIn('&lt;B&gt;', page)
         self.assertIn('model damage/tick eligible: no', page)
 
+    def test_unreviewed_reference_details_label_cycle_and_shot_separately(self):
+        row = {'source':'fixture','id':'burst','weapon':'Gun','w_damage':300,
+               'w_damage_per_shot':100,'w_burst':3,'w_reload':20}
+        page = report.weapon_calculation_details([row])
+        self.assertIn('damage per cycle (reference coordinate): 300', page)
+        self.assertIn('derived damage per shot: 100', page)
+
+    def test_verifier_withholds_unknown_cadence_and_uses_reference_delay(self):
+        unknown = {'w_damage':200,'w_damage_per_shot':100,
+                   'w_burst':2,'w_reload':400,'w_dps':.25,
+                   'weapon_model_eligible':True}
+        self.assertIn('WITHHELD', report.dps_verifier_cell(unknown, [unknown], {}))
+        current = {'w_damage':200,'w_damage_per_shot':100,
+                   'w_burst':2,'w_reload':90,'w_dps':2,
+                   'weapon_model_eligible':True}
+        reference = {'w_damage':200,'w_damage_per_shot':100,
+                     'w_burst':2,'w_reload':90,'w_dps':200/95}
+        self.assertIn('WITHHELD', report.dps_verifier_cell(current, [reference], {}))
+        cell = report.dps_verifier_cell(
+            current, [reference], {'w_damage':200,'w_burst':2,'w_reload':90})
+        self.assertIn('5t/shot', cell)
+
+    def test_multi_armament_component_display_is_withheld(self):
+        row = {'w_damage':100,'weapon_model_eligible':False}
+        self.assertIn('WITHHELD', report.component_num(row, 'w_damage'))
+        self.assertIn('WITHHELD', report.burst_delay_cell(row, []))
+        self.assertIn('WITHHELD', report.dps_verifier_cell(row, [], {}))
+
     def test_hero_projection_uses_separate_population(self):
         row={'id':'hero','type':'infantry','hero':True}
         counts=dict(actors=0,refs=0,none=0,thin=0)
         ordinary, frozen, hero_dist, hero_frozen=object(),object(),object(),object()
         with patch.object(report,'estimate_cell',return_value='estimate') as estimate:
             report.emit([],['hero'],{'hero':row},{},{},set(),ordinary,frozen,counts,{}, {},(hero_dist,hero_frozen))
-        self.assertEqual(estimate.call_count,5)
+        self.assertCountEqual(
+            [call.args[2] for call in estimate.call_args_list],
+            ['hp','speed','cost','w_range','w_dps','w_damage','w_reload','w_burst'])
         for call in estimate.call_args_list:
             self.assertIs(call.args[3],hero_dist)
             self.assertIs(call.args[4],hero_frozen)

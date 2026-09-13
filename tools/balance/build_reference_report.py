@@ -16,6 +16,7 @@ originals is a finite, decidable job.
 from __future__ import annotations
 
 import argparse
+import collections
 import html
 import json
 import re
@@ -95,13 +96,12 @@ def is_original(srcs):
                for s, d in (srcs or {}).items())
 
 
-def arm_note(actor, led_arms):
-    """`x3` beside a damage/tick value with more than one priced armament.
+def arm_note(actor, led_arms, model_eligible):
+    """Explain why a multi-armament row is withheld from the one-armament model.
 
-    The value shown is the HARDEST-HITTING armament, never the sum — 495 of 822 armed actors carry
-    several, and `ra2_allies_ifv` carries 39 mutually-exclusive ones. Without this marker the
-    reader cannot tell a single-gun tank from one whose other weapons are conditional, which is
-    exactly the question the maintainer asked about `td_nod_lighttankmkii`.
+    The ledger total and the primary cadence cannot be composed safely — 495 of 822 armed actors
+    carry several, and `ra2_allies_ifv` carries 39 mutually-exclusive ones. The marker keeps the
+    structural fact visible without presenting an aggregate as one weapon's per-shot damage.
     """
     n = led_arms.get(actor, 0)
     if n <= 1:
@@ -112,12 +112,20 @@ def arm_note(actor, led_arms):
     # tank has four guns" is the mistake the maintainer was worried about when they asked whether
     # a single collapsed damage number would be better.
     sim, total = simultaneous_armaments(actor)
+    if model_eligible is True:
+        return (f'<span class="muted" title="{total or n} priced armaments; exactly one is in '
+                'the baseline firing set, so the displayed components describe that armament.'
+                f'">1 of {total or n} guns</span>')
+    if sim is None:
+        return (f'<span class="muted" title="{total or n} priced armaments; the active '
+                'simultaneous set is not proven, so the one-armament component model is '
+                f'withheld.">&#215;{n}</span>')
     if sim and total and sim < total:
         return (f'<span class="muted" title="{total} priced armaments, but only {sim} can fire at '
                 f'once — the rest are mutually exclusive upgrade variants gated on a condition. '
-                f'The figure shown is ONE armament, never a sum.">{sim} of {total} guns</span>')
-    return (f'<span class="muted" title="{n} priced armaments, all able to fire; the figure shown '
-            f'is ONE armament, never a sum">&#215;{n}</span>')
+                f'The one-armament component model is withheld.">{sim} of {total} guns</span>')
+    return (f'<span class="muted" title="{n} priced armaments may fire together; the '
+            f'one-armament component model is withheld">&#215;{n}</span>')
 
 
 _SIM_CACHE = {}
@@ -131,6 +139,23 @@ def _ruleset():
         import miniyaml
         _RULESET.append(miniyaml.Ruleset(str(ROOT)))
     return _RULESET[0]
+
+
+def simultaneous_condition_bound(conditions):
+    """Maximum simultaneous arms for simple `C`/`!C` gates, or None if not provable."""
+    groups = collections.defaultdict(lambda: [0, 0])
+    loose = 0
+    for raw in conditions:
+        cond = (raw or "").strip()
+        if not cond:
+            loose += 1
+            continue
+        if re.fullmatch(r"!?[A-Za-z_][A-Za-z0-9_.-]*", cond) is None:
+            return None
+        negated = cond.startswith("!")
+        token = cond[1:] if negated else cond
+        groups[token][1 if negated else 0] += 1
+    return loose + sum(max(polarities) for polarities in groups.values())
 
 
 def simultaneous_armaments(actor):
@@ -150,9 +175,10 @@ def simultaneous_armaments(actor):
     held. Summing four would describe a tank that cannot exist, which is exactly why the damage
     column shows one armament rather than a total.
 
-    The rule is the condition's polarity: `C` and `!C` are the same slot in two states, so a
-    group keyed on the condition with any leading `!` stripped contributes ONE. Unconditioned
-    armaments each contribute one. ⚠ The LEDGER cannot answer this — its armament records carry
+    For a simple condition token, `C` and `!C` are opposite states; the larger side of that split
+    is the simultaneous bound. Repeated `C` arms each count because they can fire together. Any
+    compound expression is reported unknown instead of guessed. Unconditioned armaments each
+    contribute one. ⚠ The LEDGER cannot answer this — its armament records carry
     `requires_condition: None` for all four — so it is read from the resolved yaml, through
     `miniyaml` rather than by hand.
     """
@@ -164,7 +190,7 @@ def simultaneous_armaments(actor):
         node = None
     if node is None:
         return _SIM_CACHE.setdefault(actor, (None, None))
-    groups, loose = set(), 0
+    conditions = []
     total = 0
     for child in node.children:
         if not child.key.startswith("Armament"):
@@ -173,12 +199,8 @@ def simultaneous_armaments(actor):
         if not fields.get("Weapon"):
             continue
         total += 1
-        cond = (fields.get("RequiresCondition") or "").strip()
-        if cond:
-            groups.add(cond.lstrip("!").strip())
-        else:
-            loose += 1
-    return _SIM_CACHE.setdefault(actor, (len(groups) + loose, total))
+        conditions.append(fields.get("RequiresCondition") or "")
+    return _SIM_CACHE.setdefault(actor, (simultaneous_condition_bound(conditions), total))
 
 
 def burst_note(cameo_row):
@@ -194,6 +216,8 @@ def burst_note(cameo_row):
     Same information, stated the way round the value now demands: the cycle total leads, and the
     shot it is built from is shown underneath.
     """
+    if cameo_row.get("weapon_model_eligible") is False:
+        return ""
     burst = float(cameo_row.get("w_burst") or 1)
     cycle = cameo_row.get("w_damage")
     if burst <= 1 or not cycle:
@@ -202,16 +226,18 @@ def burst_note(cameo_row):
             f'shot it is built from">= {cycle / burst:,.0f} &#215; {burst:.0f}</small>')
 
 
+def component_num(cameo_row, stat):
+    if cameo_row.get("weapon_model_eligible") is False:
+        return '<span class="muted" title="multiple baseline armaments: withheld">WITHHELD</span>'
+    return num(cameo_row.get(stat))
+
+
 def recovered_burst_delay(row):
     """Ticks between shots INSIDE a burst, recovered from the row's own identity.
 
-    ⛔ IT IS RECOVERED, NOT READ, and that is the only safe way to get it. No source publishes a
-    usable per-shot delay on the unit row, and `w_damage` does not even mean the same thing on
-    both sides of the map — per SHOT in `extract_peer_units`, BURST-INCLUSIVE in the frozen Cameo
-    snapshot. `reference_targets.recover_burst_time` sidesteps that by never assuming either: the
-    cycle falls out of `damage / dps` whatever those two mean, and the burst time is whatever is
-    left after reload. Reading `w_damage` as damage-per-shot instead once gave the mammoth 800
-    DPS against a true 400.
+    It is recovered, not read: no source publishes a usable per-shot delay on the unit row.
+    `w_damage` is normalized to a full-cycle total and `reference_targets.damage_per_shot`
+    derives the formula input before the cycle identity is inverted.
 
     ⚠ A SINGLE-SHOT WEAPON HAS NO BURST DELAY, so this returns None rather than a number. With
     `Burst: 1` there is no gap to measure, and the leftover cycle time is charge-up or rounding
@@ -219,11 +245,8 @@ def recovered_burst_delay(row):
     exactly 0.00, so printing "0" would read as a real measurement of something that does not
     exist; 245 rows carry a genuine burst.
     """
-    # ⛔ ASK `reference_targets.burst_delay_of`, never `recover_burst_time` directly. The latter
-    # computes `damage / dps - reload`, which was the cycle only while Cameo's `w_damage` was a
-    # burst TOTAL. Now that every row is per shot the cycle is `damage * burst / dps`, and the old
-    # call quietly returned 0 for every burst weapon in the map — the mammoth's 8 and the MLRS's 5
-    # both went to nothing, which reads as "no burst delay" rather than as a broken calculation.
+    # Ask the one convention-aware helper; it also rejects the 334 rows whose recorded rate used
+    # the burst-1 identity despite declaring Burst > 1.
     return rt.burst_delay_of(row)
 
 
@@ -242,6 +265,9 @@ def burst_delay_cell(cameo_row, rows):
     up as a projected one. The reference figure is the plain MEDIAN of whatever the assigned
     reference rows recover, and the cell says exactly that in its tooltip.
     """
+    if cameo_row.get("weapon_model_eligible") is False:
+        return ('<span class="muted" title="multiple baseline armaments: cadence model '
+                'withheld">WITHHELD</span>')
     cur = recovered_burst_delay(cameo_row)
     vals = sorted(v for v in (recovered_burst_delay(r) for r in rows) if v is not None)
     if cur is None and not vals:
@@ -258,6 +284,15 @@ def burst_delay_cell(cameo_row, rows):
             f'<small class="evidence">{len(vals)} recovered</small></span>')
 
 
+def reference_burst_delay(rows):
+    """Median usable reference delay, or None when every assigned row abstains."""
+    vals = sorted(v for v in (recovered_burst_delay(row) for row in rows) if v is not None)
+    if not vals:
+        return None
+    mid = len(vals) // 2
+    return vals[mid] if len(vals) % 2 else (vals[mid - 1] + vals[mid]) / 2
+
+
 def dps_verifier_cell(cameo_row, rows, tgt):
     """Total DPS as R1's GUARD RAIL: never a target, only a verdict on the components.
 
@@ -271,7 +306,9 @@ def dps_verifier_cell(cameo_row, rows, tgt):
                            human picks.
       EXTREME              the composed move alone exceeds EXTREME_RATIO.
 
-    ⭐ THE CONVENTION IS KNOWN, SO THE VERIFIER IS NOT WITHHELD. A parallel fix (`41d0dad57`)
+    ⭐ THE CONVENTION IS KNOWN FOR ONE-ARMAMENT ROWS. Multi-armament Cameo rows aggregate damage
+    and rate but borrow burst/reload from one primary, so they are explicitly withheld. A parallel
+    fix (`41d0dad57`)
     made this cell fail closed on the premise that "the source corpus currently lacks that
     compatible evidence", which would print WITHHELD on every row. The premise is falsifiable and
     the AUTHORED YAML falsifies it: `td_gdi_mammothtank_120mmdualhv` declares `Damage: 16000`,
@@ -279,8 +316,8 @@ def dps_verifier_cell(cameo_row, rows, tgt):
     so Cameo stores the burst TOTAL, provably, and `td_gdi_mlrs_227mm` (8,000 x 6 = 48,000) says
     the same. The cure for an ambiguous unit is to resolve it, not to stop reporting.
 
-    So rows are normalised to per shot at construction (`reference_distribution.to_per_shot`) and
-    there is only ONE convention downstream. What IS kept from that fix is its genuinely better
+    Eligible peer and Cameo rows expose one per-cycle damage coordinate and a derived per-shot
+    formula input (`reference_distribution.to_per_cycle`). What IS kept from that fix is its better
     refusal: a recovered burst time below zero means the row's own DPS identity is shorter than
     its ReloadDelay, which is impossible, and clamping it to zero would certify a broken timing
     model. That still withholds.
@@ -290,11 +327,18 @@ def dps_verifier_cell(cameo_row, rows, tgt):
     instruction (maintainer, 2026-09-12: "with damage per shot, burst, burst delay, reload delay
     instead of just the DPS").
     """
+    if cameo_row.get("weapon_model_eligible") is False:
+        return ('<span class="muted" title="withheld: multiple baseline armaments do not form '
+                'one damage/burst/reload cadence">WITHHELD</span>')
     keys = ("w_damage", "w_burst", "w_reload")
     cur = {k: cameo_row.get(k) for k in keys}
     cur["w_dps"] = cameo_row.get("w_dps")
     comp = {k: _cell_value(tgt.get(k)) for k in keys}
-    g = rt.dps_guard(cur, comp, _cell_value(tgt.get("w_dps")))
+    if not any(value is not None for value in comp.values()):
+        return ('<span class="muted" title="withheld: no admitted component projection '
+                'to verify">WITHHELD</span>')
+    g = rt.dps_guard(cur, comp, _cell_value(tgt.get("w_dps")),
+                     reference_burst_delay(rows))
     if g is None:
         return ('<span class="muted" title="withheld: explicit damage convention and complete '
                 'burst-delay evidence required">WITHHELD</span>')
@@ -416,13 +460,8 @@ def weapon_calculation_details(rows, cameo_actor=None):
         proof = profile.get((row.get('source'), row.get('id')))
         cycle = row.get('w_cycle_evidence')
         fields = [('weapon', row.get('weapon')),
-            # ⚠ THESE ARE REFERENCE ROWS, AND THEY REALLY ARE PER SHOT. A parallel fix
-            # relabelled this "source damage coordinate ... not per-shot", which is true of the
-            # CAMEO snapshot and false of every peer: `extract_peer_units` sets
-            # `w_damage = audit["damage_pos"]` and rates it `damage_pos * burst / cycle`. OpenRA
-            # TD's `HTNK` proves it arithmetically — read as a burst total it gives a 24-tick
-            # cycle against a declared ReloadDelay of 40, which cannot happen.
-                  ('damage per shot (raw source units)', row.get('w_damage')),
+                  ('damage per cycle (reference coordinate)', row.get('w_damage')),
+                  ('derived damage per shot', rt.damage_per_shot(row)),
                   ('reload delay / ROF (source ticks)', row.get('w_reload')),
                   ('burst', row.get('w_burst'))]
         if proof:
@@ -605,10 +644,10 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
                 f'<tr><td><code>{html.escape(a)}</code>{note}{flag}</td>'
                 f'<td class="n">{num(c.get("hp"))} <span class="muted">→</span> {tgt["hp"]}</td>'
                 f'<td class="n">{num(c.get("speed"))} <span class="muted">→</span> {tgt["speed"]}</td>'
-                f'<td class="n">{num(c.get("w_range"))} <span class="muted">→</span> {tgt["w_range"]}</td>'
-                f'<td class="n">{num(c.get("w_damage"))} {burst_note(c)}{arm_note(a, led_arms)} <span class="muted">→</span> {tgt["w_damage"]}</td>'
-                f'<td class="n">{num(c.get("w_reload"))} <span class="muted">→</span> {tgt["w_reload"]}</td>'
-                f'<td class="n">{num(c.get("w_burst"))} <span class="muted">→</span> {tgt["w_burst"]}</td>'
+                f'<td class="n">{component_num(c, "w_range")} <span class="muted">→</span> {tgt["w_range"]}</td>'
+                f'<td class="n">{component_num(c, "w_damage")} {burst_note(c)}{arm_note(a, led_arms, c.get("weapon_model_eligible"))} <span class="muted">→</span> {tgt["w_damage"]}</td>'
+                f'<td class="n">{component_num(c, "w_reload")} <span class="muted">→</span> {tgt["w_reload"]}</td>'
+                f'<td class="n">{component_num(c, "w_burst")} <span class="muted">→</span> {tgt["w_burst"]}</td>'
                 f'<td class="n">{burst_delay_cell(c, rows)}</td>'
                 f'<td class="n">{dps_verifier_cell(c, rows, tgt)}</td>'
                 f'<td class="n">{num(c.get("cost"))} <span class="muted">→</span> {tgt["cost"]}</td></tr>')
