@@ -177,6 +177,18 @@ scrin_planetary_assault_carrier:
 	Inherits: ^ScrinAircraftVisual
 	Voiced:
 		VoiceSet: ScrinPACVoice
+	# CarrierMaster stacks one pac-loaded token per docked fighter. Keep the
+	# visual thresholds coarse because the approved source set has full, half,
+	# and empty dock states rather than eight separate hull renders.
+	WithFacingSpriteBody:
+		Sequence: idle-full
+		RequiresCondition: pac-loaded >= 5
+	WithFacingSpriteBody@HALF:
+		Sequence: idle-half
+		RequiresCondition: pac-loaded >= 1 && pac-loaded <= 4
+	WithFacingSpriteBody@EMPTY:
+		Sequence: idle-empty
+		RequiresCondition: pac-loaded == 0
 	WithIdleOverlay@shield1:
 		Image: hexshield_directional_oval
 		Sequence: aircraft-colossal
@@ -211,6 +223,7 @@ scrin_planetary_assault_carrier:
 		Voice: Attack
 	CarrierMaster:
 		Actors: scrin_invader_fighter, scrin_invader_fighter, scrin_invader_fighter, scrin_invader_fighter, scrin_invader_fighter, scrin_invader_fighter, scrin_invader_fighter, scrin_invader_fighter
+		LoadedCondition: pac-loaded
 		RearmTicks: 25
 		RespawnTicks: 50
 		InstaRepair: true

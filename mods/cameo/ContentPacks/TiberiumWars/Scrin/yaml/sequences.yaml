@@ -1328,7 +1328,31 @@ scrin_devastator_warship:
 
 scrin_planetary_assault_carrier:
 	idle:
-		Filename: scrin_sprites|scrin_planetary_assault_carrier.png
+		Filename: scrin_sprites|scrin_planetary_assault_carrier_full.png
+		Scale: 0.85
+		Length: 1
+		Facings: 32
+		ShadowStart: 32
+		ShadowZOffset: -5
+		Offset: 4.000,-12.000
+	idle-full:
+		Filename: scrin_sprites|scrin_planetary_assault_carrier_full.png
+		Scale: 0.85
+		Length: 1
+		Facings: 32
+		ShadowStart: 32
+		ShadowZOffset: -5
+		Offset: 4.000,-12.000
+	idle-half:
+		Filename: scrin_sprites|scrin_planetary_assault_carrier_half.png
+		Scale: 0.85
+		Length: 1
+		Facings: 32
+		ShadowStart: 32
+		ShadowZOffset: -5
+		Offset: 4.000,-12.000
+	idle-empty:
+		Filename: scrin_sprites|scrin_planetary_assault_carrier_empty.png
 		Scale: 0.85
 		Length: 1
 		Facings: 32

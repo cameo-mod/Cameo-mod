@@ -774,7 +774,7 @@ scrin_storm_column:
 scrin_rift_generator:
 	Inherits: ^ScrinBuilding
 	Health:
-		HP: 500000
+		HP: 1000000
 	Voiced:
 		VoiceSet: ScrinRiftGeneratorVoice
 	Inherits@buildup: ^ScrinAuthenticBuildup
@@ -791,9 +791,9 @@ scrin_rift_generator:
 		IconPaletteIsPlayerPalette: true
 		Description: Experimental rift-generation superweapon structure.
 	Valued:
-		Cost: 5000
+		Cost: 10000
 	Power:
-		Amount: -150
+		Amount: -200
 	Building:
 		Dimensions: 3,3
 		Footprint: xxx xxx xxx
