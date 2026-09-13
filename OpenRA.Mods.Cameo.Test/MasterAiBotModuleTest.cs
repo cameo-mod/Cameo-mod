@@ -8,6 +8,7 @@
  */
 #endregion
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -148,6 +149,15 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void DecisionCadenceStartsAtFirstRebuild()
+		{
+			var info = new MasterAiBotModuleInfo();
+			var initialTick = -Math.Max(1, info.DecisionInterval);
+			Assert.That(MasterAiBotModule.ShouldEvaluateDecision(initialTick, 0, info.DecisionInterval), Is.True);
+			Assert.That(MasterAiBotModule.ShouldEvaluateDecision(0, 1, info.DecisionInterval), Is.False);
+		}
+
+		[Test]
 		public void TargetScoreStaysBoundedForExtremeProfiles()
 		{
 			var info = new MasterAiBotModuleInfo();
@@ -159,6 +169,20 @@ namespace OpenRA.Mods.Cameo.Test
 				Assert.That(MasterAiBotModule.TargetScore(profile, int.MaxValue, info), Is.InRange(0, 1000));
 			Assert.That(MasterAiBotModule.Momentum(new EnemyProfile { Score = 1000 }, info.IncumbentMomentum),
 				Is.EqualTo(1000));
+		}
+
+		[Test]
+		public void TargetScoreDistinguishesCandidatesAndChoosesTheHigherScore()
+		{
+			var info = new MasterAiBotModuleInfo();
+			var reachableWeak = new EnemyProfile { Name = "reachable-weak", ArmyValue = 100, NearestCells = 5 };
+			var distantStrong = new EnemyProfile { Name = "distant-strong", ArmyValue = 10000, NearestCells = 50, BuildingCount = 8 };
+			reachableWeak.Score = MasterAiBotModule.TargetScore(reachableWeak, 1000, info);
+			distantStrong.Score = MasterAiBotModule.TargetScore(distantStrong, 1000, info);
+
+			Assert.That(reachableWeak.Score, Is.GreaterThan(distantStrong.Score));
+			Assert.That(MasterAiBotModule.ChooseTarget(new[] { distantStrong, reachableWeak }, null, 0, 0, info),
+				Is.SameAs(reachableWeak));
 		}
 
 		[Test]

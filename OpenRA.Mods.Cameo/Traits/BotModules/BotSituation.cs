@@ -107,7 +107,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly HashSet<uint> productionBuildings = [];
 		int nextSnapshotTick;
 		int nextEmergencyTick;
-		int lastDecisionTick = int.MinValue;
+		int lastDecisionTick;
 		OpenRA.Player incumbentTarget;
 		string incumbentPersonality = "";
 		int incumbentSince;
@@ -126,7 +126,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			: base(info)
 		{
 			player = self.Owner;
-			incumbentPersonality = CurrentPersonality();
+			lastDecisionTick = -Math.Max(1, info.DecisionInterval);
+			lastPersonalitySwitchTick = -Math.Max(1, info.PersonalityHoldTicks);
 			nextSnapshotTick = Math.Abs(player.ClientIndex * 37) % Math.Max(1, info.SnapshotInterval);
 			nextEmergencyTick = nextSnapshotTick;
 		}
@@ -180,7 +181,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			foreach (var profile in profiles.Values.Where(p => p.Alive))
 				profile.Score = TargetScore(profile, ownArmy, AlliedCommitments(profile.Player), econTotal, Info);
 
-			var decision = tick - lastDecisionTick >= Math.Max(1, Info.DecisionInterval);
+			var decision = ShouldEvaluateDecision(lastDecisionTick, tick, Info.DecisionInterval);
 			OpenRA.Player target = incumbentTarget;
 			if (decision)
 			{
@@ -440,7 +441,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var total = Math.Max(1, info.WeightReach + info.WeightWeak + info.WeightEcon + info.WeightKill + info.WeightDefence + info.WeightAlly);
 			var score = (long)info.WeightReach * reach + (long)info.WeightWeak * weak + (long)info.WeightEcon * econ +
 				(long)info.WeightKill * kill - (long)info.WeightDefence * fort - (long)info.WeightAlly * ally;
-			return ClampScore(score * 1000 / total);
+			return ClampScore(score * 10 / total);
+		}
+
+		internal static bool ShouldEvaluateDecision(int lastDecisionTick, int tick, int decisionInterval)
+		{
+			return tick - lastDecisionTick >= Math.Max(1, decisionInterval);
 		}
 
 		int AlliedCommitments(OpenRA.Player enemy)
