@@ -51,7 +51,7 @@ tkm_juggernaut:
 	Warhead@Bullet_Medium:
 		Damage: 4000
 tkmjuggap:
-	Inherits@finalmain: ^Compatibility_CannonAP_LightFlat
+	Inherits@finalmain: ^Warhead_CannonAP_Light_Flat
 	Inherits: ^Warhead_Bullet_Light
 	Inherits@2: ^RA2Grenade
 	ReloadDelay: 9
@@ -62,12 +62,12 @@ tkmjuggap:
 	ValidTargets: Ground, Water
 	-Warhead@Bullet_Light:
 	-Warhead@Demolition_Light:
-	Warhead@CannonAP_LightFlatCompatibility:
+	Warhead@CannonAP_Light_Flat:
 		ValidTargets: Ground, Water
 		Damage: 8000
 		PercentageScale: 9988
 tkmbunkmg:
-	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^Warhead_Bullet_Light
 	Inherits@2: ^RA2Chaingun
 	ReloadDelay: 41
@@ -81,7 +81,7 @@ tkmbunkmg:
 		Damage: 2000
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
@@ -346,7 +346,7 @@ tkmcryorockets:
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
 TKMQuadCannonAG:
-	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
+	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
@@ -372,19 +372,19 @@ TKMQuadCannonAG:
 		Damage: 2000
 	-Warhead@Bullet_Light:
 	-Warhead@Flak_Medium:
-	Warhead@Flak_MediumFlatCompatibility:
+	Warhead@Flak_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
 TKMQuadCannonAA:
 	Inherits: TKMQuadCannonAG
 	Range: 7880
-	Warhead@Flak_MediumFlatCompatibility:
+	Warhead@Flak_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
 tkmturretcannon:
-	Inherits@finalmain: ^Compatibility_CannonAP_LightFlat
+	Inherits@finalmain: ^Warhead_CannonAP_Light_Flat
 	Inherits@wh: ^Warhead_CannonAP_Light
 	Inherits@wh2: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
@@ -401,7 +401,7 @@ tkmturretcannon:
 		Damage: 8000
 	-Warhead@CannonAP_Light:
 	-Warhead@CannonHE_Medium:
-	Warhead@CannonAP_LightFlatCompatibility:
+	Warhead@CannonAP_Light_Flat:
 		ValidTargets: Ground, Water
 		Damage: 16000
 		PercentageScale: 9994
@@ -432,7 +432,7 @@ tkm2a46gun:
 	Warhead@CannonHE_Medium:
 		Damage: 10000
 TKMZazaCannonAG:
-	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
+	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
@@ -458,19 +458,19 @@ TKMZazaCannonAG:
 		Damage: 2000
 	-Warhead@Bullet_Light:
 	-Warhead@Flak_Medium:
-	Warhead@Flak_MediumFlatCompatibility:
+	Warhead@Flak_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
 TKMZazaCannonAA:
 	Inherits: TKMZazaCannonAG
 	Range: 7926
-	Warhead@Flak_MediumFlatCompatibility:
+	Warhead@Flak_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
 TKMAATurretCannon:
-	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
+	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
 	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
@@ -488,7 +488,7 @@ TKMAATurretCannon:
 		Damage: 2000
 	-Warhead@Flak_Medium:
 	-Warhead@MissileHE_Medium:
-	Warhead@Flak_MediumFlatCompatibility:
+	Warhead@Flak_Medium_Flat:
 		ValidTargets: Air
 		Damage: 4000
 		PercentageScale: 14975
@@ -552,7 +552,7 @@ tkmstrykermg:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 t30shell:
-	Inherits@finalmain: ^Compatibility_Railgun_HeavyFlat
+	Inherits@finalmain: ^Warhead_Railgun_Heavy_Flat
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@wh2: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
@@ -581,13 +581,13 @@ t30shell:
 	# 	AimTargetStances: Enemy, Neutral
 	-Warhead@Demolition_Heavy:
 	-Warhead@Railgun_Heavy:
-	Warhead@Railgun_HeavyFlatCompatibility:
+	Warhead@Railgun_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 80000
 		Spread: 512
 		PercentageScale: 3000
 HueyCryoMissiles:
-	Inherits@roleflat: ^Compatibility_Cryo_MediumFlat
+	Inherits@roleflat: ^Warhead_Cryo_Medium_Flat
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_MissileAP_Medium
 	Inherits@wh3: ^Warhead_Concussion_Medium
@@ -630,12 +630,12 @@ HueyCryoMissiles:
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
 	-Warhead@MissileAP_Medium:
-	Warhead@Cryo_MediumFlatCompatibility:
+	Warhead@Cryo_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
 HueyTwinMissiles:
-	Inherits@finalmain: ^Compatibility_MissileAP_MediumFlat
+	Inherits@finalmain: ^Warhead_MissileAP_Medium_Flat
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_MissileAP_Medium
 	Inherits@wh3: ^Warhead_Concussion_Medium
@@ -664,7 +664,7 @@ HueyTwinMissiles:
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
 	-Warhead@MissileAP_Medium:
-	Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@MissileAP_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
@@ -672,7 +672,7 @@ HueyTwinMissiles:
 		VerticalRateOfTurn: 16
 
 sandmarinemortar:
-	Inherits@finalmain: ^Compatibility_Demolition_HeavyFlat
+	Inherits@finalmain: ^Warhead_Demolition_Heavy_Flat
 	Inherits: ^Warhead_Demolition_Heavy
 	Inherits@2: ^Warhead_Flame_Medium
 	Inherits@3: ^Projectile_Flame_Medium
@@ -698,14 +698,14 @@ sandmarinemortar:
 		Damage: 120000
 	-Warhead@Demolition_Heavy:
 	-Warhead@Flame_Medium:
-	Warhead@Demolition_HeavyFlatCompatibility:
+	Warhead@Demolition_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 240000
 		PercentageScale: 10000
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 50
 bigshieemortar:
-	Inherits@finalmain: ^Compatibility_Demolition_HeavyFlat
+	Inherits@finalmain: ^Warhead_Demolition_Heavy_Flat
 	Inherits: ^Warhead_Demolition_Heavy
 	Inherits@2: ^Warhead_Flame_Medium
 	Inherits@3: ^Projectile_Flame_Medium
@@ -731,7 +731,7 @@ bigshieemortar:
 		Damage: 80000
 	-Warhead@Demolition_Heavy:
 	-Warhead@Flame_Medium:
-	Warhead@Demolition_HeavyFlatCompatibility:
+	Warhead@Demolition_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 160000
 		PercentageScale: 10000
@@ -848,16 +848,16 @@ tkmkatyushalalauncherrocketstwin:
 		ValidTargets: Ground, Water
 		Damage: 40000
 SandmarineTusk:
-	Inherits@finalmain: ^Compatibility_MissileHE_HeavyFlat
+	Inherits@finalmain: ^Warhead_MissileHE_Heavy_Flat
 	Inherits: ^SandmarineTuskLegacy
 	-Warhead@Concussion_Medium:
 	-Warhead@MissileHE_Heavy:
-	Warhead@MissileHE_HeavyFlatCompatibility:
+	Warhead@MissileHE_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 80000
 		PercentageScale: 9999
 BigShieeTusk:
-	Inherits@finalmain: ^Compatibility_MissileHE_HeavyFlat
+	Inherits@finalmain: ^Warhead_MissileHE_Heavy_Flat
 	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -876,7 +876,7 @@ BigShieeTusk:
 		Damage: 40000
 	-Warhead@Concussion_Medium:
 	-Warhead@MissileHE_Heavy:
-	Warhead@MissileHE_HeavyFlatCompatibility:
+	Warhead@MissileHE_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 80000
 		PercentageScale: 9999
@@ -923,14 +923,14 @@ SandmarineTuskCryo:
 	Inherits@finalmain: ^Warhead_MissileCryo_Heavy
 	Inherits: SandmarineTusk
 	Inherits@2: ^CryoMissileProjectile
-	-Warhead@MissileHE_HeavyFlatCompatibility:
+	-Warhead@MissileHE_Heavy_Flat:
 	Warhead@MissileCryo_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 80000
 		PercentageScale: 9999
 		-PhysicalStates:
 SandmarineTuskFire:
-	Inherits@roleflat: ^Compatibility_MissileHE_HeavyFlat
+	Inherits@roleflat: ^Warhead_MissileHE_Heavy_Flat
 	Inherits@missileap: ^Warhead_MissileAP_Light
 	Inherits@2: ^Warhead_Flame_Light
 	Inherits@3: ^Projectile_Missile_Light
@@ -948,7 +948,7 @@ SandmarineTuskFire:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	-Warhead@MissileHE_Heavy:
 	-Warhead@Concussion_Medium:
-	Warhead@MissileHE_HeavyFlatCompatibility:
+	Warhead@MissileHE_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 80000
@@ -988,25 +988,25 @@ SandmarineTuskFire:
 		Damage: 16000
 		ValidTargets: Ground, Water, Air
 ViperMissiles:
-	Inherits@finalmain: ^Compatibility_MissileAP_MediumFlat
+	Inherits@finalmain: ^Warhead_MissileAP_Medium_Flat
 	Inherits: ^ViperMissilesLegacy
 	-Warhead@Concussion_Medium:
 	-Warhead@MissileAP_Medium:
-	Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@MissileAP_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
 		PercentageScale: 9997
 ViperMissilesTwin:
 	Inherits: ViperMissiles
 	Burst: 8
-	Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@MissileAP_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
 		PercentageScale: 9997
 ViperMissilesCryo:
 	Inherits: ViperMissiles
 	Inherits@2: ^CryoMissileProjectile
-	Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@MissileAP_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
 		PercentageScale: 9997
@@ -1323,7 +1323,7 @@ tkmabramscannon:
 		PercentageScale: 5000
 		Damage: 20000
 tkmquadcannonmg:
-	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^Warhead_Bullet_Light
 	Inherits@2: ^RA2Chaingun
 	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
@@ -1344,7 +1344,7 @@ tkmquadcannonmg:
 		Damage: 2000
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
@@ -1439,7 +1439,7 @@ tkmrh120gun:
 	Warhead@CannonHE_Medium:
 		Damage: 12000
 tkmtrenchcannon:
-	Inherits@finalmain: ^Compatibility_CannonHE_HeavyFlat
+	Inherits@finalmain: ^Warhead_CannonHE_Heavy_Flat
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@wh2: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
@@ -1456,7 +1456,7 @@ tkmtrenchcannon:
 		Damage: 20000
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Concussion_Medium:
-	Warhead@CannonHE_HeavyFlatCompatibility:
+	Warhead@CannonHE_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 40000
 		PercentageScale: 9998
@@ -1464,7 +1464,7 @@ tkmtrenchdepcannon:
 	Inherits: tkmtrenchcannon
 	ReloadDelay: 36
 	Range: 11071
-	Warhead@CannonHE_HeavyFlatCompatibility:
+	Warhead@CannonHE_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 40000
 		PercentageScale: 9998

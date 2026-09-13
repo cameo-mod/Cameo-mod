@@ -1,5 +1,5 @@
 MarineMG:
-	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
+	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^Warhead_Bullet_Light
 	Inherits@2: ^Warhead_Bullet_Medium
 	Inherits@3: ^Warhead_CannonHE_Heavy
@@ -25,7 +25,7 @@ MarineMG:
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	-Warhead@CannonHE_Heavy:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 36000
 		PercentageScale: 1664
@@ -58,7 +58,7 @@ JimRaynorMachineGun:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 MadcapGun:
-	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
+	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^Warhead_Bullet_Light
 	Inherits@2: ^Warhead_Bullet_Medium
 	Inherits@3: ^Warhead_CannonHE_Heavy
@@ -83,7 +83,7 @@ MadcapGun:
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	-Warhead@CannonHE_Heavy:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 36000
 		PercentageScale: 1664
@@ -171,7 +171,7 @@ MatadorLaser:
 		Damage: 32000
 CycloneRockets:
 	Inherits@heldmissilerole: ^Warhead_MissileAP_Light
-	Inherits@roleflat: ^Compatibility_MissileHE_LightFlat
+	Inherits@roleflat: ^Warhead_MissileHE_Light_Flat
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
 	Report: cycloneshoot1.wav, cycloneshoot2.wav, cycloneshoot3.wav
@@ -207,11 +207,11 @@ CycloneRockets:
 		ValidTargets: lockable
 		ValidRelationships: Enemy
 	-Warhead@MissileHE_Medium:
-	Warhead@MissileHE_LightFlatCompatibility:
+	Warhead@MissileHE_Light_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
-	-Warhead@MissileHE_LightFlatCompatibility:
+	-Warhead@MissileHE_Light_Flat:
 	Warhead@MissileAP_Light: AreaDamage
 		Damage: 4000
 		PercentageScale: 9975
@@ -229,7 +229,7 @@ CycloneRocketsLockOn:
 
 MarauderMissiles:
 	Inherits@missilerole: ^Warhead_MissileHE_Medium
-	Inherits@collapseflat: ^Compatibility_MissileAP_MediumFlat
+	Inherits@collapseflat: ^Warhead_MissileAP_Medium_Flat
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@4: ^TankDestroyerCannon
@@ -266,7 +266,7 @@ MarauderMissiles:
 	-Warhead@TankDestroyerCannon:
 	-Warhead@MediumMissile:
 	-Warhead@CannonHE_Heavy:
-	-Warhead@MissileAP_MediumFlatCompatibility:
+	-Warhead@MissileAP_Medium_Flat:
 	Warhead@MissileHE_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -278,7 +278,7 @@ MarauderMissiles:
 		PercentageSpread: 50
 
 SCTyr:
-	Inherits@collapseflat: ^Compatibility_CannonHE_HeavyFlat
+	Inherits@collapseflat: ^Warhead_CannonHE_Heavy_Flat
 	Inherits: ^LightFlameWeapon
 	Inherits@2: ^Chaingun
 	Inherits@3: ^ShrapnelWeapon
@@ -339,7 +339,7 @@ SCTyr:
 	-Warhead@Chaingun:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@CannonHE_HeavyFlatCompatibility:
+	-Warhead@CannonHE_Heavy_Flat:
 SCTyrAA:
 	Inherits: ^Grenade
 	Inherits@2: ^FlakWeapon
@@ -404,7 +404,7 @@ ReaperPistols:
 		Damage: 2
 
 ReaperGrenade:
-	Inherits@finalmain: ^Compatibility_Demolition_LightFlat
+	Inherits@finalmain: ^Warhead_Demolition_Light_Flat
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Grenade_Light
@@ -448,7 +448,7 @@ ReaperGrenade:
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
-	Warhead@Demolition_LightFlatCompatibility:
+	Warhead@Demolition_Light_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		PercentageScale: 9992
@@ -726,7 +726,7 @@ SpecterSniperLockdown:
 	-Warhead@Bullet_Heavy:
 
 VultureGrenade:
-	Inherits@roleflat: ^Compatibility_Demolition_LightFlat
+	Inherits@roleflat: ^Warhead_Demolition_Light_Flat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
@@ -781,7 +781,7 @@ VultureGrenade:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@SmallArms:
 	-Warhead@TankDestroyerCannon:
-	Warhead@Demolition_LightFlatCompatibility:
+	Warhead@Demolition_Light_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 20000
@@ -791,7 +791,7 @@ VultureGrenade:
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 SiegeTankCannon:
-	Inherits@finalmain: ^Compatibility_CannonHE_HeavyFlat
+	Inherits@finalmain: ^Warhead_CannonHE_Heavy_Flat
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@wh2: ^Warhead_CannonAP_Light
 	Inherits@proj: ^Projectile_Shell_Heavy
@@ -803,12 +803,12 @@ SiegeTankCannon:
 		Speed: 611
 	-Warhead@CannonAP_Light:
 	-Warhead@CannonHE_Heavy:
-	Warhead@CannonHE_HeavyFlatCompatibility:
+	Warhead@CannonHE_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 30000
 		PercentageScale: 9997
 SiegeTankSiegeCannon:
-	Inherits@roleflat: ^Compatibility_CannonHE_HeavyFlat
+	Inherits@roleflat: ^Warhead_CannonHE_Heavy_Flat
 	Inherits: ^NuclearWarhead
 	Inherits@2: ^LightMissile
 	Inherits@3: ^LightChemicalWeapon
@@ -984,7 +984,7 @@ SiegeTankSiegeCannon:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@TankDestroyerCannon:
-	Warhead@CannonHE_HeavyFlatCompatibility:
+	Warhead@CannonHE_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 140000
@@ -1043,7 +1043,7 @@ GoliathRockets_AA:
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
 GoliathMk2MG:
-	Inherits@collapseflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@collapseflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1083,7 +1083,7 @@ GoliathMk2MG:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@TankDestroyerCannon:
-	-Warhead@Bullet_MediumFlatCompatibility:
+	-Warhead@Bullet_Medium_Flat:
 GoliathMk2Rockets:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy_D2K_Rocket
@@ -1352,7 +1352,7 @@ ValkyrieRockets:
 		PercentageDenominator: 10000
 
 WyvernRockets:
-	Inherits@collapseflat: ^Compatibility_MissileAP_HeavyFlat
+	Inherits@collapseflat: ^Warhead_MissileAP_Heavy_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1442,12 +1442,12 @@ WyvernRockets:
 	-Warhead@HeavyAAWeapon:
 	-Warhead@CannonHE_Heavy:
 	-Warhead@MissileAP_Heavy:
-	Warhead@MissileAP_HeavyFlatCompatibility:
+	Warhead@MissileAP_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 		PercentageScale: 2494
 BCLaser:
-	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
+	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1541,7 +1541,7 @@ BCLaser:
 	-Warhead@RailgunWeapon:
 
 BCYamatoCannon:
-	Inherits@roleflat: ^Compatibility_Plasma_HeavyFlat
+	Inherits@roleflat: ^Warhead_Plasma_Heavy_Flat
 	Inherits: BCLaser
 	Report: yamatoshoot.wav
 	SoundVolume: 5
@@ -1606,16 +1606,16 @@ BCYamatoCannon:
 	-Warhead@HeavyFlameWeapon:
 	-Warhead@HeavyMissile:
 	-Warhead@LaserWeapon:
-	-Warhead@Laser_HeavyFlatCompatibility:
+	-Warhead@Laser_Heavy_Flat:
 	-Warhead@NuclearWarhead:
 	-Warhead@RailgunWeapon:
-	-Warhead@Plasma_HeavyFlatCompatibility:
+	-Warhead@Plasma_Heavy_Flat:
 
 PhobosLaser:
-	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
+	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
 	Inherits@collapsewh: ^Warhead_Laser_Heavy
-	Inherits@collapseextra1: ^Compatibility_Laser_ExtraDamage
-	Inherits@collapseextra2: ^Compatibility_Railgun_ExtraDamage
+	Inherits@collapseextra1: ^Warhead_Laser_ExtraDamage
+	Inherits@collapseextra2: ^Warhead_Railgun_ExtraDamage
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1714,7 +1714,7 @@ PhobosLaser:
 		PercentageScale: 0
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Laser_Heavy:
-	Warhead@Laser_HeavyFlatCompatibility:
+	Warhead@Laser_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 48000
 		PercentageScale: 1248

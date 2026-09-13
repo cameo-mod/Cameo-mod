@@ -58,7 +58,7 @@ HeavyOrdosCombatTankRockets:
 		PercentageSpread: 50
 
 120mm_td:
-	Inherits@collapseflat: ^Compatibility_CannonHE_MediumFlat
+	Inherits@collapseflat: ^Warhead_CannonHE_Medium_Flat
 	Inherits: ^MediumChemicalWeapon
 	Inherits@2: ^LightChemicalWeapon
 	Inherits@3: ^D2K_Cannon
@@ -95,7 +95,7 @@ HeavyOrdosCombatTankRockets:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@LightChemicalWeapon:
 	-Warhead@TankDestroyerCannon:
-	-Warhead@CannonHE_MediumFlatCompatibility:
+	-Warhead@CannonHE_Medium_Flat:
 120mm_cobra:
 	Inherits@finalmain: ^Warhead_CannonAP
 	Inherits@proj: ^Projectile_Shell_Light
@@ -717,7 +717,7 @@ eye_bomberguy:
 		PercentageScale: 0
 
 D2K_155mm_turret:
-	Inherits@finalmain: ^Compatibility_CannonHE_MediumFlat
+	Inherits@finalmain: ^Warhead_CannonHE_Medium_Flat
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Demolition_Heavy
 	Inherits@wh3: ^Warhead_Concussion_Medium
@@ -856,13 +856,13 @@ D2K_155mm_turret:
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Heavy:
 	-Warhead@Demolition_Light:
-	Warhead@CannonHE_MediumFlatCompatibility:
+	Warhead@CannonHE_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 48000
 		PercentageScale: 0
 
 Dune_SiegeMortar:
-	Inherits@finalmain: ^Compatibility_Concussion_MediumFlat
+	Inherits@finalmain: ^Warhead_Concussion_Medium_Flat
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@wh3: ^Warhead_CannonAP_Light
@@ -1010,7 +1010,7 @@ Dune_SiegeMortar:
 	-Warhead@CannonHE_Medium:
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
-	Warhead@Concussion_MediumFlatCompatibility:
+	Warhead@Concussion_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 40000
 		PercentageScale: 0
@@ -1073,7 +1073,7 @@ D2K_Rocket_Trooper_AA:
 		ValidTargets: Air
 		Damage: 10000
 D2K_APC_Rocket:
-	Inherits@finalmain: ^Compatibility_MissileAP_MediumFlat
+	Inherits@finalmain: ^Warhead_MissileAP_Medium_Flat
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@wh2: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
@@ -1178,15 +1178,15 @@ D2K_APC_Rocket:
 	-Warhead@MissileAP_Heavy:
 	-Warhead@MissileAP_Light:
 	-Warhead@MissileAP_Medium:
-	Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@MissileAP_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
 		PercentageScale: 0
 D2K_APC_Rocket_AA:
-	Inherits@finalmain: ^Compatibility_MissileAA_MediumFlat
+	Inherits@finalmain: ^Warhead_MissileAA_Medium_Flat
 	Inherits: D2K_APC_Rocket
 	ValidTargets: Air
-	Warhead@MissileAA_MediumFlatCompatibility:
+	Warhead@MissileAA_Medium_Flat:
 		PhysicalStateName: Temperature
 		ValidTargets: Air
 		Damage: 24000
@@ -1275,13 +1275,13 @@ D2K_APC_Rocket_AA:
 			None: 5
 		Falloff: 100, 50
 		Range: 0, 32
-	-Warhead@MissileAP_MediumFlatCompatibility:
+	-Warhead@MissileAP_Medium_Flat:
 
 	Projectile: Missile
 		VerticalRateOfTurn: 12
 
 DeviatorMissile:
-	Inherits@collapseflat: ^Compatibility_MissileAP_HeavyFlat
+	Inherits@collapseflat: ^Warhead_MissileAP_Heavy_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1342,7 +1342,7 @@ DeviatorMissile:
 	MinRange: 1415
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@MediumMissile:
-	-Warhead@MissileAP_HeavyFlatCompatibility:
+	-Warhead@MissileAP_Heavy_Flat:
 	-Warhead@CannonHE_Heavy:
 DeviatorMissile_Artillery:
 	Inherits@missilerole: ^Warhead_MissileHE_Heavy
@@ -1814,7 +1814,7 @@ d2kChainGun:
 	Warhead@Bullet_Medium:
 		Damage: 4000
 d2kChainGun_upgrade:
-	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
+	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
@@ -1830,12 +1830,12 @@ d2kChainGun_upgrade:
 		Damage: 4000
 	-Warhead@Bullet_Medium:
 	-Warhead@Laser_Heavy:
-	Warhead@Laser_HeavyFlatCompatibility:
+	Warhead@Laser_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 9988
 HMGstealth:
-	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
+	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -1851,7 +1851,7 @@ HMGstealth:
 		Damage: 2000
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
@@ -1898,7 +1898,7 @@ ordos_autogunturret:
 		ValidTargets: Ground, Water, Air
 
 autogun_tank:
-	Inherits@collapseflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@collapseflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1953,7 +1953,7 @@ autogun_tank:
 	-Warhead@FlakWeapon:
 	-Warhead@MediumMissile:
 	-Warhead@Chaingun:
-	-Warhead@Bullet_MediumFlatCompatibility:
+	-Warhead@Bullet_Medium_Flat:
 
 autogun_tank_small:
 	Inherits: autogun_tank
@@ -1992,7 +1992,7 @@ d2kCarryallChainGun:
 	Warhead@Bullet_Medium:
 		Damage: 4000
 ordos_airmine:
-	Inherits@collapseflat: ^Compatibility_MissileAP_HeavyFlat
+	Inherits@collapseflat: ^Warhead_MissileAP_Heavy_Flat
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^LightChemicalWeapon
 	Inherits@3: ^FlakWeapon
@@ -2091,7 +2091,7 @@ ordos_airmine:
 	-Warhead@FlakWeapon:
 	-Warhead@MediumMissile:
 	-Warhead@HeavyBomb:
-	Warhead@MissileAP_HeavyFlatCompatibility:
+	Warhead@MissileAP_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		PercentageScale: 1659
@@ -2262,9 +2262,9 @@ HMGstealth_upgrade:
 		Color: 00ffbb
 	Warhead@Laser_Heavy:
 		Damage: 6000
-	-Warhead@Bullet_MediumFlatCompatibility:
+	-Warhead@Bullet_Medium_Flat:
 d2kCarryallChainGun_upgrade:
-	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
+	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
@@ -2279,12 +2279,12 @@ d2kCarryallChainGun_upgrade:
 		Damage: 2000
 	-Warhead@Bullet_Medium:
 	-Warhead@Laser_Heavy:
-	Warhead@Laser_HeavyFlatCompatibility:
+	Warhead@Laser_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
 LMG_ordos_upgrade:
-	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
+	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
@@ -2301,12 +2301,12 @@ LMG_ordos_upgrade:
 		Damage: 2000
 	-Warhead@Bullet_Medium:
 	-Warhead@Laser_Heavy:
-	Warhead@Laser_HeavyFlatCompatibility:
+	Warhead@Laser_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
 light_inf_lmg_ordos_upgrade:
-	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
+	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
@@ -2329,13 +2329,13 @@ light_inf_lmg_ordos_upgrade:
 		Damage: 2000
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_LightFlatCompatibility:
+	Warhead@Bullet_Light_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
-	-Warhead@Bullet_LightFlatCompatibility:
+	-Warhead@Bullet_Light_Flat:
 	-Warhead@Laser_Heavy:
-	Warhead@Laser_HeavyFlatCompatibility:
+	Warhead@Laser_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
@@ -2839,7 +2839,7 @@ d2k_airdefenseplatform:
 			Medium: 90
 			Heavy: 90
 			Concrete: 30
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975

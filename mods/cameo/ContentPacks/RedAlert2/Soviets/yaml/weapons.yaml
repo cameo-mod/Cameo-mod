@@ -167,7 +167,7 @@ RA2KirovBomb_nuclear_elite:
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 RA2120mm_rad:
-	Inherits@finalmain: ^Compatibility_Chemical_MediumFlat
+	Inherits@finalmain: ^Warhead_Chemical_Medium_Flat
 	Inherits@wh: ^Warhead_Chemical_Medium
 	Inherits@proj: ^Projectile_Chem_Medium
 	Inherits@fx: ^Effect_Chem_Medium
@@ -179,7 +179,7 @@ RA2120mm_rad:
 		Damage: 6000
 	-Warhead@CannonHE_Medium:
 	-Warhead@Chemical_Medium:
-	Warhead@Chemical_MediumFlatCompatibility:
+	Warhead@Chemical_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 12000
 		PercentageScale: 9992
@@ -205,7 +205,7 @@ RA2120mm_rad_elite:
 	Range: 6374
 	Burst: 2
 	BurstDelays: 3
-	Warhead@Chemical_MediumFlatCompatibility:
+	Warhead@Chemical_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 12000
 		PercentageScale: 9992
@@ -250,11 +250,11 @@ RA2120mm_tesla_elite:
 	Warhead@Demolition_Light:
 		Damage: 60000
 RA160mm:
-	Inherits@finalmain: ^Compatibility_Concussion_MediumFlat
+	Inherits@finalmain: ^Warhead_Concussion_Medium_Flat
 	Inherits: ^RA160mmLegacy
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
-	Warhead@Concussion_MediumFlatCompatibility:
+	Warhead@Concussion_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 120000
 		PercentageScale: 10000
@@ -275,7 +275,7 @@ RA160mm:
 	Warhead@Demolition_Light:
 		Damage: 36000
 RA160mm_rad:
-	Inherits@finalmain: ^Compatibility_Chemical_LightFlat
+	Inherits@finalmain: ^Warhead_Chemical_Light_Flat
 	Inherits: ^RA160mmRadLegacy
 	Warhead@CollapsedRA160mm_radChemical_LightPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -366,12 +366,12 @@ RA160mm_rad:
 	-Warhead@Chemical_Light:
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
-	Warhead@Chemical_LightFlatCompatibility:
+	Warhead@Chemical_Light_Flat:
 		ValidTargets: Ground, Water
 		Damage: 108000
 		PercentageScale: 0
 RA160mm_fire:
-	Inherits@finalmain: ^Compatibility_CannonFire_HeavyFlat
+	Inherits@finalmain: ^Warhead_CannonFire_Heavy_Flat
 	Inherits: RA160mm
 	Projectile: Bullet
 		ContrailStartColor: FFBB88
@@ -382,14 +382,14 @@ RA160mm_fire:
 		Amount: 1
 		AimChance: 0
 		AimTargetStances: Enemy, Neutral
-	-Warhead@Concussion_MediumFlatCompatibility:
-	Warhead@CannonFire_HeavyFlatCompatibility:
+	-Warhead@Concussion_Medium_Flat:
+	Warhead@CannonFire_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 120000
 		PercentageScale: 10000
 
 RA160mm_tesla:
-	Inherits@finalmain: ^Compatibility_Tesla_HeavyFlat
+	Inherits@finalmain: ^Warhead_Tesla_Heavy_Flat
 	Inherits: RA160mm
 	Projectile: Bullet
 		ContrailStartColor: 6688BB
@@ -400,8 +400,8 @@ RA160mm_tesla:
 		Amount: 1
 		AimChance: 100
 		AimTargetStances: Enemy, Neutral
-	-Warhead@Concussion_MediumFlatCompatibility:
-	Warhead@Tesla_HeavyFlatCompatibility:
+	-Warhead@Concussion_Medium_Flat:
+	Warhead@Tesla_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 120000
 		PercentageScale: 10000
@@ -412,13 +412,13 @@ RA160mmE_elite:
 	Range: 12345
 	Burst: 2
 	BurstDelays: 3
-	Warhead@Concussion_MediumFlatCompatibility:
+	Warhead@Concussion_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 120000
 		PercentageScale: 10000
 
 RA160mmE_rad_elite:
-	Inherits@finalmain: ^Compatibility_Chemical_LightFlat
+	Inherits@finalmain: ^Warhead_Chemical_Light_Flat
 	Inherits@wh: ^Warhead_Nuclear_Super
 	Inherits@fx: ^Effect_Nuclear_Super
 	Inherits: ^RA160mmRadLegacy
@@ -524,7 +524,7 @@ RA160mmE_rad_elite:
 	-Warhead@Chemical_Light:
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
-	Warhead@Chemical_LightFlatCompatibility:
+	Warhead@Chemical_Light_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 108000
@@ -540,7 +540,7 @@ RA160mmE_fire_elite:
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: AsianOilBombFragments
 		Amount: 2
-	Warhead@CannonFire_HeavyFlatCompatibility:
+	Warhead@CannonFire_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 120000
 		PercentageScale: 10000
@@ -553,7 +553,7 @@ RA160mmE_tesla_elite:
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: TeslaFragmentLarge
 		Amount: 2
-	Warhead@Tesla_HeavyFlatCompatibility:
+	Warhead@Tesla_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 120000
 		PercentageScale: 10000
@@ -1088,7 +1088,7 @@ V3Launch_elite:
 	Warhead@1Dam: TargetDamage
 
 RA2vulcan:
-	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water
@@ -1101,7 +1101,7 @@ RA2vulcan:
 		Damage: 2000
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -1142,12 +1142,12 @@ RA2FLAKAA_elite:
 
 RA2FlakTrackGun_elite:
 	Inherits: RA2FlakTrackGun
-	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
+	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
 	Range: 6528
 	Burst: 2
 	BurstDelays: 3
 	-Warhead@Flak_Medium:
-	Warhead@Flak_MediumFlatCompatibility:
+	Warhead@Flak_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 8000
 		PercentageScale: 2488
@@ -1213,7 +1213,7 @@ IvanBombAir:
 		ValidTargets: Aircraft
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Heavy:
-	Warhead@Demolition_HeavyFlatCompatibility:
+	Warhead@Demolition_Heavy_Flat:
 		ValidTargets: Aircraft
 		Damage: 90000
 		PercentageScale: 9999
@@ -1221,7 +1221,7 @@ BorisAKM_elite:
 	Inherits: BorisAKM
 	Range: 9167
 	Burst: 8
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 8000
 		PercentageScale: 9988
@@ -1231,7 +1231,7 @@ BorisAKM2:
 	ValidTargets: Structure, Bridge, wall
 	-InvalidTargets:
 	Range: 9167
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 8000
 		PercentageScale: 9988

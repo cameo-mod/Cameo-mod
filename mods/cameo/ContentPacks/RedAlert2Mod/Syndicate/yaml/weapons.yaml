@@ -14,7 +14,7 @@ latinsyndicate_latinmilitia_ak47_elite:
 	BurstDelays: 3
 
 latinsyndicate_latinmilitia_molotov:
-	Inherits@finalmain: ^Compatibility_Flame_LightFlat
+	Inherits@finalmain: ^Warhead_Flame_Light_Flat
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@wh2: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Flame_Light
@@ -37,7 +37,7 @@ latinsyndicate_latinmilitia_molotov:
 		AimTargetStances: Enemy, Neutral
 	-Warhead@Demolition_Light:
 	-Warhead@Flame_Light:
-	Warhead@Flame_LightFlatCompatibility:
+	Warhead@Flame_Light_Flat:
 		ValidTargets: Ground, Water
 		Damage: 8000
 		PercentageScale: 9988
@@ -48,7 +48,7 @@ latinsyndicate_latinmilitia_molotov_elite:
 	Range: 5500
 	Burst: 2
 	BurstDelays: 3
-	Warhead@Flame_LightFlatCompatibility:
+	Warhead@Flame_Light_Flat:
 		ValidTargets: Ground, Water
 		Damage: 8000
 		PercentageScale: 9988
@@ -137,7 +137,7 @@ NarcoGrenade_elite:
 		Weapon: AsianFlameFragment
 
 RA2NarcoAKM:
-	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	Report: iboratta.wav, iborattb.wav
@@ -152,7 +152,7 @@ RA2NarcoAKM:
 		Damage: 2000
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air, Garrisoned
 		Damage: 4000
 		PercentageScale: 9975
@@ -178,7 +178,7 @@ RA2Narco60mm_elite:
 	BurstDelays: 3
 
 RA2FreedomAK47:
-	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -217,7 +217,7 @@ RA2FreedomAK47:
 		Spread: 30
 	-Warhead@Chaingun:
 	-Warhead@SniperWeapon:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air, Garrisoned
 		Damage: 18000
 		PercentageScale: 3328
@@ -230,7 +230,7 @@ RA2FreedomAK47_elite:
 	BurstDelays: 1
 	Projectile: Bullet
 		Inaccuracy: 60
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air, Garrisoned
 		Damage: 18000
 		PercentageScale: 3328
@@ -555,7 +555,7 @@ SyndicateFireballLauncherExplode:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 LatinMonkeyGrenade1:
-	Inherits@finalmain: ^Compatibility_Demolition_LightFlat
+	Inherits@finalmain: ^Warhead_Demolition_Light_Flat
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Grenade_Light
@@ -610,7 +610,7 @@ LatinMonkeyGrenade1:
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
-	Warhead@Demolition_LightFlatCompatibility:
+	Warhead@Demolition_Light_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 30000
@@ -624,7 +624,7 @@ LatinMonkeyGrenade2:
 	BurstDelays: 3
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: AsianFlameFragment
-	Warhead@Demolition_LightFlatCompatibility:
+	Warhead@Demolition_Light_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 30000
@@ -638,7 +638,7 @@ LatinMonkeyGrenade3:
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: AsianFlameFragment
 		Amount: 4
-	Warhead@Demolition_LightFlatCompatibility:
+	Warhead@Demolition_Light_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 30000
@@ -657,13 +657,13 @@ LatinMonkeyGrenadeExplode:
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
-	Warhead@Demolition_LightFlatCompatibility:
+	Warhead@Demolition_Light_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		PercentageScale: 9992
 RA2RBurritoRocket:
-	Inherits@collapseflat: ^Compatibility_CannonHE_HeavyFlat
+	Inherits@collapseflat: ^Warhead_CannonHE_Heavy_Flat
 	Inherits: ^RA2Grenade
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^MediumFlameWeapon
@@ -734,7 +734,7 @@ RA2RBurritoRocket:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@HeavyBomb:
-	Warhead@CannonHE_HeavyFlatCompatibility:
+	Warhead@CannonHE_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
@@ -745,7 +745,7 @@ RA2RBurritoRocket:
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 RA2LarsRocket:
-	Inherits@collapseflat: ^Compatibility_MissileAP_HeavyFlat
+	Inherits@collapseflat: ^Warhead_MissileAP_Heavy_Flat
 	Inherits: ^D2KRocket
 	Inherits@2: ^HeavyAAWeapon
 	Inherits@3: ^LightMissile
@@ -803,12 +803,12 @@ RA2LarsRocket:
 	-Warhead@TankDestroyerCannon:
 	-Warhead@MissileAP_Heavy:
 	-Warhead@MissileAP_Medium:
-	Warhead@MissileAP_HeavyFlatCompatibility:
+	Warhead@MissileAP_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		PercentageScale: 3990
 RA2Gren60mm:
-	Inherits@finalmain: ^Compatibility_CannonAP_LightFlat
+	Inherits@finalmain: ^Warhead_CannonAP_Light_Flat
 	Inherits: ^RA2HeavyCannon
 	Inherits@2: ^RA2MediumCannon
 	Inherits@3: ^RA2TankDestroyerCannon
@@ -826,7 +826,7 @@ RA2Gren60mm:
 	-Warhead@CannonAP_Light:
 	-Warhead@CannonHE_Heavy:
 	-Warhead@CannonHE_Medium:
-	Warhead@CannonAP_LightFlatCompatibility:
+	Warhead@CannonAP_Light_Flat:
 		ValidTargets: Ground, Water
 		Damage: 6000
 		PercentageScale: 9984
@@ -835,7 +835,7 @@ RA2Gren60mm_elite:
 	Range: 6031
 	Burst: 2
 	BurstDelays: 3
-	Warhead@CannonAP_LightFlatCompatibility:
+	Warhead@CannonAP_Light_Flat:
 		ValidTargets: Ground, Water
 		Damage: 6000
 		PercentageScale: 9984
@@ -868,7 +868,7 @@ LatinRusherRocket_elite:
 	Warhead@MissileAP_Medium:
 		Damage: 32000
 LatinSmokerCannon:
-	Inherits@roleflat: ^Compatibility_CannonHE_MediumFlat
+	Inherits@roleflat: ^Warhead_CannonHE_Medium_Flat
 	Inherits: ^RailgunWeapon
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^HeavyBomb
@@ -917,7 +917,7 @@ LatinSmokerCannon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@CannonHE_Heavy:
 	-Warhead@CannonHE_Medium:
-	Warhead@CannonHE_MediumFlatCompatibility:
+	Warhead@CannonHE_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 13000
 		PercentageScale: 3070
@@ -996,7 +996,7 @@ LatinSmokerRocket_elite:
 	Warhead@MissileAP_Medium:
 		Damage: 48000
 DiabloCannon:
-	Inherits@collapseflat: ^Compatibility_Flak_MediumFlat
+	Inherits@collapseflat: ^Warhead_Flak_Medium_Flat
 	Inherits: ^LightMissile
 	Inherits@2: ^TankDestroyerCannon
 	Inherits@3: ^Chaingun
@@ -1039,7 +1039,7 @@ DiabloCannon:
 	-Warhead@LightMissile:
 	-Warhead@TankDestroyerCannon:
 	-Warhead@Chaingun:
-	-Warhead@Flak_MediumFlatCompatibility:
+	-Warhead@Flak_Medium_Flat:
 DiabloCannon_elite:
 	Inherits: DiabloCannon
 	Report: aacanon3.aud
@@ -1109,8 +1109,8 @@ DiabloCannonAAE_AA:
 	Warhead@Flak_Medium:
 		ValidTargets: Air
 RA2MortarBike:
-	Inherits@finalmain: ^Compatibility_Concussion_MediumFlat
-	Inherits@roleflat: ^Compatibility_CannonHE_MediumFlat
+	Inherits@finalmain: ^Warhead_Concussion_Medium_Flat
+	Inherits@roleflat: ^Warhead_CannonHE_Medium_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1193,13 +1193,13 @@ RA2MortarBike:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
-	Warhead@CannonHE_MediumFlatCompatibility:
+	Warhead@CannonHE_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 30000
 		PercentageScale: 0
 	-Warhead@CannonHE_Heavy:
-	-Warhead@CannonHE_MediumFlatCompatibility:
-	Warhead@Concussion_MediumFlatCompatibility:
+	-Warhead@CannonHE_Medium_Flat:
+	Warhead@Concussion_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 36000
 		PercentageScale: 1664
@@ -1209,13 +1209,13 @@ RA2MortarBike_elite:
 	Range: 8500
 	Burst: 2
 	BurstDelays: 3
-	Warhead@Concussion_MediumFlatCompatibility:
+	Warhead@Concussion_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 36000
 		PercentageScale: 1664
 
 LatinBuggyMG:
-	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water, Air
@@ -1238,7 +1238,7 @@ LatinBuggyMG:
 		Damage: 4000
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 9988
@@ -1250,7 +1250,7 @@ LatinBuggyMG_elite:
 	BurstDelays: 3
 
 LatinBuggyChaingun:
-	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
+	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Inherits@wh: ^Warhead_CannonAP_Light
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Shell_Light
@@ -1384,7 +1384,7 @@ LatinBuggyChaingun:
 	-Warhead@Bullet_Medium:
 	-Warhead@CannonAP_Light:
 	-Warhead@Flak_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 0
@@ -1394,7 +1394,7 @@ LatinBuggyChaingun_elite:
 	Range: 7000
 
 YakovlevCannon:
-	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
+	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1534,12 +1534,12 @@ YakovlevCannon:
 	-Warhead@CannonAP_Light:
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Flak_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 0
 YakovlevCannon_elite:
-	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
+	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1677,12 +1677,12 @@ YakovlevCannon_elite:
 	-Warhead@CannonAP_Light:
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Flak_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 0
 LatinSentryMG:
-	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
+	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1710,7 +1710,7 @@ LatinSentryMG:
 		Damage: 2000
 	-Warhead@Bullet_Medium:
 	-Warhead@CannonHE_Heavy:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
@@ -1718,13 +1718,13 @@ LatinSentryMG_elite:
 	Inherits: LatinSentryMG
 	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
 	Range: 7777
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
 
 LatinAADefenderCannon:
-	Inherits@roleflat: ^Compatibility_MissileAP_MediumFlat
+	Inherits@roleflat: ^Warhead_MissileAP_Medium_Flat
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
@@ -1752,7 +1752,7 @@ LatinAADefenderCannon:
 		ValidTargets: Air
 	-Warhead@Flak_Medium:
 	-Warhead@MissileAP_Medium:
-	Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@MissileAP_Medium_Flat:
 		ValidTargets: Air
 		Damage: 4000
 		PercentageScale: 9975
@@ -1898,7 +1898,7 @@ RA2TOPOLCuba:
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 RA2APCFlakCannon:
-	Inherits@collapseflat: ^Compatibility_Flak_MediumFlat
+	Inherits@collapseflat: ^Warhead_Flak_Medium_Flat
 	Inherits: ^LightMissile
 	Inherits@2: ^TankDestroyerCannon
 	Inherits@3: ^Chaingun
@@ -1941,7 +1941,7 @@ RA2APCFlakCannon:
 	-Warhead@LightMissile:
 	-Warhead@TankDestroyerCannon:
 	-Warhead@Chaingun:
-	-Warhead@Flak_MediumFlatCompatibility:
+	-Warhead@Flak_Medium_Flat:
 RA2APCFlakCannon_elite:
 	Inherits: RA2APCFlakCannon
 	Report: aacanon3.aud
@@ -2011,7 +2011,7 @@ RA2APCFlakCannonAA_elite:
 	Warhead@Flak_Medium:
 		ValidTargets: Air
 RA2APCMachineGun:
-	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water
@@ -2035,7 +2035,7 @@ RA2APCMachineGun:
 		Damage: 2000
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -2047,7 +2047,7 @@ RA2APCMachineGun_elite:
 	Burst: 8
 	BurstDelays: 2
 
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Air
 	Warhead@ShieldHit:
@@ -2057,7 +2057,7 @@ RA2APCMachineGun_AA:
 	ValidTargets: Air
 	Range: 8610
 
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		-InvalidTargets:
 		ValidTargets: Air
 RA2APCMachineGun_AA_elite:
@@ -2066,7 +2066,7 @@ RA2APCMachineGun_AA_elite:
 	Burst: 8
 	BurstDelays: 2
 
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Air
 RA2APCRocket:
 	Inherits@missilerole: ^Warhead_MissileHE_Medium
@@ -2253,7 +2253,7 @@ SMLLauncher:
 		Inaccuracy: 1000
 
 RA2AkulaRockets:
-	Inherits@finalmain: ^Compatibility_MissileAP_MediumFlat
+	Inherits@finalmain: ^Warhead_MissileAP_Medium_Flat
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@2: ^RA2Grenade
 	Inherits@3: ^RA2MediumMissile
@@ -2383,7 +2383,7 @@ RA2AkulaRockets:
 	-Warhead@Demolition_Heavy:
 	-Warhead@Demolition_Light:
 	-Warhead@MissileAP_Medium:
-	Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@MissileAP_Medium_Flat:
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 24000
 		PercentageScale: 0

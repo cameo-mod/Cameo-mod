@@ -46,7 +46,7 @@ TS70mmChem:
 		InvalidTargets: Water
 
 TS70mmTur:
-	Inherits@finalmain: ^Compatibility_CannonAP_LightFlat
+	Inherits@finalmain: ^Warhead_CannonAP_Light_Flat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
@@ -67,12 +67,12 @@ TS70mmTur:
 		Damage: 4000
 	-Warhead@CannonAP_Light:
 	-Warhead@CannonHE_Medium:
-	Warhead@CannonAP_LightFlatCompatibility:
+	Warhead@CannonAP_Light_Flat:
 		ValidTargets: Ground, Water
 		Damage: 8000
 		PercentageScale: 9988
 TS70mmTurChem:
-	Inherits@collapseflat: ^Compatibility_CannonHE_MediumFlat
+	Inherits@collapseflat: ^Warhead_CannonHE_Medium_Flat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
@@ -112,7 +112,7 @@ TS70mmTurChem:
 
 	-Warhead@LightChemicalWeapon:
 	-Warhead@TankDestroyerCannon:
-	-Warhead@CannonHE_MediumFlatCompatibility:
+	-Warhead@CannonHE_Medium_Flat:
 TS120mmx:
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
@@ -214,7 +214,7 @@ TSScoopDualChem:
 		InvalidTargets: Water
 
 TSScoopDualTur:
-	Inherits@finalmain: ^Compatibility_CannonHE_HeavyFlat
+	Inherits@finalmain: ^Warhead_CannonHE_Heavy_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -233,12 +233,12 @@ TSScoopDualTur:
 		Damage: 16000
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Concussion_Medium:
-	Warhead@CannonHE_HeavyFlatCompatibility:
+	Warhead@CannonHE_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 32000
 		PercentageScale: 9997
 TSScoopDualTurChem:
-	Inherits@collapseflat: ^Compatibility_CannonHE_HeavyFlat
+	Inherits@collapseflat: ^Warhead_CannonHE_Heavy_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -281,7 +281,7 @@ TSScoopDualTurChem:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@CannonHE_HeavyFlatCompatibility:
+	-Warhead@CannonHE_Heavy_Flat:
 TSHighVelocity:
 	Inherits: ^TSCannonEffect
 	Inherits@wh: ^Warhead_CannonAP
@@ -476,7 +476,7 @@ TSInfantryMortar:
 	-Warhead@Demolition_Heavy:
 
 TSInfantryMortarChem:
-	Inherits@finalmain: ^Compatibility_Chemical_MediumFlat
+	Inherits@finalmain: ^Warhead_Chemical_Medium_Flat
 	Inherits: ^TSInfantryMortarLegacy
 	Inherits@wh: ^Warhead_Chemical_Medium
 	Inherits@proj: ^Projectile_Chem_Medium
@@ -585,7 +585,7 @@ TSInfantryMortarChem:
 	-Warhead@Chemical_Medium:
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Heavy:
-	Warhead@Chemical_MediumFlatCompatibility:
+	Warhead@Chemical_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 48000
 		PercentageScale: 0
@@ -999,7 +999,7 @@ TSMammothTusk:
 
 TSRuinerMissile:
 	Inherits@missilerole: ^Warhead_MissileAP_Medium
-	Inherits@finalmain: ^Compatibility_MissileHE_MediumFlat
+	Inherits@finalmain: ^Warhead_MissileHE_Medium_Flat
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileHE_Medium
 	Range: 5919
@@ -1015,7 +1015,7 @@ TSRuinerMissile:
 	-Warhead@MissileHE_Medium:
 	Projectile: Missile
 		VerticalRateOfTurn: 16
-	-Warhead@MissileHE_MediumFlatCompatibility:
+	-Warhead@MissileHE_Medium_Flat:
 	Warhead@MissileAP_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1234,7 +1234,7 @@ TSChemCobraMissile:
 		InvalidTargets: Water
 
 TSAdatsMissile:
-	Inherits@finalmain: ^Compatibility_MissileHE_LightFlat
+	Inherits@finalmain: ^Warhead_MissileHE_Light_Flat
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
@@ -1253,17 +1253,17 @@ TSAdatsMissile:
 		ValidTargets: Ground, Water
 	-Warhead@Flak_Medium:
 	-Warhead@MissileHE_Light:
-	Warhead@MissileHE_LightFlatCompatibility:
+	Warhead@MissileHE_Light_Flat:
 		Damage: 8000
 		PercentageScale: 9988
 		ValidTargets: Ground, Water
 TSAdatsMissile_AA:
 	Inherits: TSAdatsMissile
-	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
+	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
 	Range: 8409
 	ValidTargets: Air
-	-Warhead@MissileHE_LightFlatCompatibility:
-	Warhead@Flak_MediumFlatCompatibility:
+	-Warhead@MissileHE_Light_Flat:
+	Warhead@Flak_Medium_Flat:
 		Damage: 8000
 		PercentageScale: 9988
 		ValidTargets: Air
@@ -1846,7 +1846,7 @@ TSMutShotgun:
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 TSMutVulcanTurret:
-	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -1859,7 +1859,7 @@ TSMutVulcanTurret:
 		Damage: 2000
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -1879,7 +1879,7 @@ TSRaiderCarCannon:
 	Warhead@Bullet_Light:
 		Damage: 4000
 TSBowlerCannon:
-	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
+	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -1892,7 +1892,7 @@ TSBowlerCannon:
 		Damage: 2000
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
@@ -1911,7 +1911,7 @@ TSWaspClaw:
 		Damage: 4000
 		ValidTargets: Ground, Air
 TSMutApcCannon:
-	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
+	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
@@ -1923,7 +1923,7 @@ TSMutApcCannon:
 		Damage: 2000
 	-Warhead@Bullet_Medium:
 	-Warhead@Flak_Medium:
-	Warhead@Flak_MediumFlatCompatibility:
+	Warhead@Flak_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
@@ -2022,7 +2022,7 @@ MutAPRifle:
 	Warhead@Bullet_Light:
 		Damage: 4000
 TSSergGun:
-	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
+	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -2041,7 +2041,7 @@ TSSergGun:
 # MutAPRifle stays for its other users.
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 2494

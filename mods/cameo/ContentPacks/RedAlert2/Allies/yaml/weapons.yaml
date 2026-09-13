@@ -145,7 +145,7 @@ HarrierMissiles_elite:
 		ContrailEndColor: FFFFFF
 
 BlackEagleMissiles:
-	Inherits@finalmain: ^Compatibility_MissileAP_MediumFlat
+	Inherits@finalmain: ^Warhead_MissileAP_Medium_Flat
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Demolition_Heavy
 	Inherits@proj: ^Projectile_Grenade_Light
@@ -264,7 +264,7 @@ BlackEagleMissiles:
 	-Warhead@Demolition_Heavy:
 	-Warhead@Demolition_Light:
 	-Warhead@MissileAP_Medium:
-	Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@MissileAP_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 48000
 		PercentageScale: 0
@@ -366,7 +366,7 @@ BlackEagleMissiles_elite:
 			None: 5
 		Falloff: 100, 50
 		Range: 0, 32
-	Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@MissileAP_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 48000
 		PercentageScale: 0
@@ -654,7 +654,7 @@ RA2Comet_elite:
 		AimTargetStances: Enemy, Neutral
 
 RA2GrandCannonWeapon:
-	Inherits@roleflat: ^Compatibility_CannonHE_HeavyFlat
+	Inherits@roleflat: ^Warhead_CannonHE_Heavy_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -726,7 +726,7 @@ RA2GrandCannonWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Demolition_Light:
-	Warhead@CannonHE_HeavyFlatCompatibility:
+	Warhead@CannonHE_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 300000
 		PercentageScale: 3333
@@ -738,7 +738,7 @@ RA2MirageGun_elite:
 	BurstDelays: 3
 
 RA2HeavyMirageGun:
-	Inherits@roleflat: ^Compatibility_CannonAP_LightFlat
+	Inherits@roleflat: ^Warhead_CannonAP_Light_Flat
 	Inherits: ^RailgunWeapon
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^MediumChemicalWeapon
@@ -781,7 +781,7 @@ RA2HeavyMirageGun:
 	-Warhead@RailgunWeapon:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
-	Warhead@CannonAP_LightFlatCompatibility:
+	Warhead@CannonAP_Light_Flat:
 		ValidTargets: Ground, Water
 		Damage: 33000
 		PercentageScale: 2422
@@ -891,10 +891,10 @@ RA2vulcan2:
 	Range: 5724
 	Report: bpilatta.wav, bpilattb.wav, bpilattc.wav, bpilattd.wav, bpilattc.wav
 
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		InvalidTargets: Air
 GuardianGIMG:
-	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water
@@ -907,7 +907,7 @@ GuardianGIMG:
 		Damage: 2000
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -932,7 +932,7 @@ GuardianGIMG_elite:
 	Range: 5762
 	Burst: 6
 
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		InvalidTargets: Air
 	Warhead@ShieldHit:
 		InvalidTargets: Air
@@ -993,7 +993,7 @@ RA2MP5_elite:
 	Burst: 8
 
 ra2roktgun:
-	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
+	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^LightMissile
 	Inherits@2: ^SmallArms
 	Inherits@3: ^FlakWeapon
@@ -1031,7 +1031,7 @@ ra2roktgun:
 	-Warhead@FlakWeapon:
 	-Warhead@LightMissile:
 	-Warhead@SmallArms:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Air, Water
 		Damage: 8000
 		PercentageScale: 2488

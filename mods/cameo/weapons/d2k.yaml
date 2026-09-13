@@ -57,11 +57,11 @@ Debris:
 		Damage: 2250
 
 Debris2:
-	Inherits@finalmain: ^Compatibility_Demolition_LightFlat
+	Inherits@finalmain: ^Warhead_Demolition_Light_Flat
 	Inherits: ^Debris2Legacy
 	-Warhead@Demolition_Light:
 	-Warhead@Flame_Light:
-	Warhead@Demolition_LightFlatCompatibility:
+	Warhead@Demolition_Light_Flat:
 		ValidTargets: Ground, Water
 		Damage: 32000
 		PercentageScale: 9997
@@ -80,7 +80,7 @@ Debris3:
 		Damage: 1350
 	-Warhead@Demolition_Light:
 	-Warhead@Flame_Light:
-	Warhead@Demolition_LightFlatCompatibility:
+	Warhead@Demolition_Light_Flat:
 		ValidTargets: Ground, Water
 		Damage: 16000
 		PercentageScale: 9994
@@ -97,7 +97,7 @@ Debris4:
 ################################
 #   CANNON
 ################################
-	Warhead@Demolition_LightFlatCompatibility:
+	Warhead@Demolition_Light_Flat:
 		ValidTargets: Ground, Water
 		Damage: 32000
 		PercentageScale: 9997
@@ -172,7 +172,7 @@ DevBullet:
 		Damage: 5625
 
 D2K_155mm:
-	Inherits@finalmain: ^Compatibility_CannonHE_MediumFlat
+	Inherits@finalmain: ^Warhead_CannonHE_Medium_Flat
 	Inherits: ^D2K155mmLegacy
 	Warhead@CollapsedD2K_155mmCannonHE_MediumPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -290,7 +290,7 @@ D2K_155mm:
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Heavy:
 	-Warhead@Demolition_Light:
-	Warhead@CannonHE_MediumFlatCompatibility:
+	Warhead@CannonHE_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 48000
 		PercentageScale: 0
@@ -335,7 +335,7 @@ D2K_Rocket_AA:
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Air
 D2K_Rocket_Trooper:
-	Inherits@finalmain: ^Compatibility_MissileAP_HeavyFlat
+	Inherits@finalmain: ^Warhead_MissileAP_Heavy_Flat
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@wh2: ^Warhead_MissileAP_Medium
 	Inherits@wh3: ^Warhead_MissileAP_Heavy
@@ -456,7 +456,7 @@ D2K_Rocket_Trooper:
 	-Warhead@MissileAP_Heavy:
 	-Warhead@MissileAP_Light:
 	-Warhead@MissileAP_Medium:
-	Warhead@MissileAP_HeavyFlatCompatibility:
+	Warhead@MissileAP_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
 		PercentageScale: 0
@@ -1137,7 +1137,7 @@ LMG:
 	Warhead@Bullet_Medium:
 		Damage: 4000
 light_inf_lmg:
-	Inherits@finalmain: ^Compatibility_Bullet_LightFlat
+	Inherits@finalmain: ^Warhead_Bullet_Light_Flat
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Light
 	Inherits@fx: ^Effect_Bullet_Light
@@ -1150,7 +1150,7 @@ light_inf_lmg:
 		Damage: 2000
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_LightFlatCompatibility:
+	Warhead@Bullet_Light_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
@@ -1167,7 +1167,7 @@ LMG_upgrade:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 light_inf_lmg_upgrade:
-	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
+	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^Warhead_Bullet_Medium
 	Inherits@3: ^Warhead_CannonHE_Heavy
 	Inherits@4: ^Projectile_Shell_Heavy
@@ -1189,7 +1189,7 @@ light_inf_lmg_upgrade:
 	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	-Warhead@CannonHE_Heavy:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
@@ -1292,7 +1292,7 @@ Fremen_RPG:
 
 	MinRange: 975
 HMG_fremen:
-	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
+	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Inherits: HMG
 	Report: FREMODD1.WAV
 	Warhead@CollapsedHMG_fremenBullet_LightPercentage: AreaDamagePercentage
@@ -1352,7 +1352,7 @@ HMG_fremen:
 		Falloff: 100, 50
 		Range: 0, 50
 	-Warhead@Bullet_Medium:
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 0
@@ -1529,7 +1529,7 @@ PhoenixRocketShrapnel:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 ixian_airdrone:
-	Inherits@collapseflat: ^Compatibility_MissileAP_HeavyFlat
+	Inherits@collapseflat: ^Warhead_MissileAP_Heavy_Flat
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^LightChemicalWeapon
 	Inherits@3: ^FlakWeapon
@@ -1617,7 +1617,7 @@ ixian_airdrone:
 	-Warhead@FlakWeapon:
 	-Warhead@MediumMissile:
 	-Warhead@HeavyBomb:
-	Warhead@MissileAP_HeavyFlatCompatibility:
+	Warhead@MissileAP_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		PercentageScale: 1659
@@ -1740,7 +1740,7 @@ d2k_airdefenseplatform:
 			Medium: 90
 			Heavy: 90
 			Concrete: 30
-	Warhead@Bullet_MediumFlatCompatibility:
+	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
