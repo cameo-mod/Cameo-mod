@@ -812,8 +812,12 @@ def emit_armament_pairing(body, members, attached, dist, cdist, crows):
     # four ground guns was blanked above and had no block down here either. Both conditions admit
     # a block now: a multi-role actor because its folded number mixes two kinds of gun, and any
     # withheld actor because this section is the only place its damage can be reported at all.
+    # ⚠ `cameo_votes` VIA getattr, the same way `reference_targets.target_for` reads it. The hero
+    # lane and the report's own tests pass a plain distribution with no frozen votes attached, and
+    # assuming the attribute turned `test_hero_projection_uses_separate_population` into an ERROR.
+    votes = getattr(cdist, "cameo_votes", None) or {}
     withheld = {a for a in members
-                if (cdist.cameo_votes.get(a) or {}).get("weapon_model_eligible") is False}
+                if (votes.get(a) or {}).get("weapon_model_eligible") is False}
     rows = [(a, actors[a]) for a in members
             if a in actors
             and (len(actors[a].get("roles", ())) > 1 or a in withheld)
