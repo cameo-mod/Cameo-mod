@@ -227,8 +227,11 @@ cabal_hunterdrone:
 	Inherits@exp: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	AttackAircraft:
+		RequiresCondition: ammo
 	AmmoPool:
 		Ammo: 1
+		AmmoCondition: ammo
 	ReloadAmmoPool:
 		Delay: 100
 		Count: 1
@@ -259,6 +262,7 @@ cabal_hunterdrone:
 		Step: 8
 	Armament@PRIMARY:
 		AmmoUsage: 1
+		PauseOnCondition: !ammo
 		Weapon: CabalOverkillDroneLaser
 		LocalOffset: 150,0,0
 	AttackAircraft:
@@ -321,13 +325,17 @@ cabal_orbdrone:
 
 cabal_orbdrone_slave:
 	Inherits: cabal_orbdrone
+	AttackAircraft:
+		RequiresCondition: ammo
 	AmmoPool:
 		Ammo: 1
+		AmmoCondition: ammo
 	ReloadAmmoPool:
 		Delay: 100
 		Count: 1
 	Armament@PRIMARY:
 		AmmoUsage: 1
+		PauseOnCondition: !ammo
 	Valued:
 		Cost: 270
 	Buildable:

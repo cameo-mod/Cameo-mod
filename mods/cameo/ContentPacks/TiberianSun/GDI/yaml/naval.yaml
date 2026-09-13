@@ -355,16 +355,19 @@ ts_gdi_strike_orca:
 	ChangesHealth@SelfHealing:
 		Step: 4
 	Armament@GUNS:
+		PauseOnCondition: ammo < 5
 		AmmoUsage: 5
 		Name: primary
 		Weapon: TSZoneHellfire
 		LocalOffset: 1024,0,-85
 	Armament@BOMBS:
+		PauseOnCondition: !ammo
 		AmmoUsage: 1
 		Name: secondary
 		Weapon: TSBomb
 		LocalOffset: 0,-256,-43, 0,256,-43
 	Armament@AA:
+		PauseOnCondition: ammo < 5
 		AmmoUsage: 5
 		Name: secondary
 		Weapon: TSZoneHellfire

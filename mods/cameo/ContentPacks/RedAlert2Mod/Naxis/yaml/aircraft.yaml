@@ -39,7 +39,7 @@ naxis_interceptor:
 		Weapon: NaxInterceptorRockets
 		LocalOffset: 425,-350,-225, 425,350,-225
 		LocalYaw: 50, -50, 25, -25
-		PauseOnCondition: !ammo
+		PauseOnCondition: ammo < 2
 	FirepowerMultiplier@MultiWeapon:
 		Modifier: 50
 	AmmoPool:

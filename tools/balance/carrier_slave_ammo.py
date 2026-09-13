@@ -14,7 +14,11 @@ MAINTAINER RULING R8, quoted because the arithmetic is theirs:
    ammo pool would need to be at 20 and the ammo reload would be 1 ammo per 5 ticks instead so
    at 100 ticks it's full again"
 
-THE LAW, and it reproduces both of those worked examples exactly (see `_self_test`):
+THE LAW, and it reproduces both of those worked examples exactly (see `_self_test`). The law
+sizes the pool and reload rate; it does not by itself stop an empty pool from firing. The
+generated actor contract also carries `AmmoCondition`, `AttackAircraft.RequiresCondition`, and
+per-armament minimum-ammo pause gates (`ammo < AmmoUsage`). The carrier engine refills the pool when the slave re-enters its carrier;
+`ReloadAmmoPool` is the explicit deployed/in-flight recovery policy.
 
     share    = lcm(Burst_i) over the SCORING armaments
     usage_i  = share / Burst_i          -- so every armament spends `share` per full burst
@@ -61,6 +65,82 @@ NAMED_SUICIDE = ("tkmsuicidedrone", "farasha_drone_ixian")
 SUICIDE_TRAITS = ("SpawnedExplodes", "Explodes")
 RELOAD_TICKS = 100          # empty -> full, always, per the ruling
 DEFAULT_POOL_ARMAMENTS = ("primary", "secondary")
+
+
+def minimum_ammo_pause(condition: str, usage: int) -> str:
+    """Pause an armament until its whole AmmoUsage can be paid."""
+    usage = max(int(usage or 1), 1)
+    return f"!{condition}" if usage == 1 else f"{condition} < {usage}"
+
+
+def pause_gate_sufficient(condition: str, usage: int, pause: str | None,
+                          requires: str | None, *, global_gate: bool = False) -> bool:
+    """Whether a resolved armament gate prevents undercharged shots."""
+    usage = max(int(usage or 1), 1)
+    if usage == 1 and global_gate:
+        return True
+    expected = minimum_ammo_pause(condition, usage)
+    if pause == expected or _generated_or_term(pause, expected):
+        return True
+    if usage == 1 and condition in {x.strip() for x in (requires or "").split(",")}:
+        return True
+    return False
+
+
+def _split_top_level_or(expression: str) -> list[str]:
+    parts, start, depth, i = [], 0, 0, 0
+    while i < len(expression):
+        char = expression[i]
+        if char == "(":
+            depth += 1
+        elif char == ")":
+            depth -= 1
+        elif char == "|" and i + 1 < len(expression) and expression[i + 1] == "|" and depth == 0:
+            parts.append(expression[start:i])
+            i += 1
+            start = i + 1
+        i += 1
+    parts.append(expression[start:])
+    return parts
+
+
+def _strip_balanced_outer_parentheses(expression: str) -> str:
+    expression = expression.strip()
+    while expression.startswith("(") and expression.endswith(")"):
+        depth = 0
+        closes_at = None
+        for i, char in enumerate(expression):
+            if char == "(":
+                depth += 1
+            elif char == ")":
+                depth -= 1
+                if depth == 0:
+                    closes_at = i
+                    break
+        if closes_at != len(expression) - 1:
+            break
+        expression = expression[1:-1].strip()
+    return expression
+
+
+def _generated_or_term(expression: str | None, expected: str) -> bool:
+    """Accept only an exact term or our top-level OR wrapper, never a substring."""
+    if not expression:
+        return False
+    for part in _split_top_level_or(expression):
+        if _strip_balanced_outer_parentheses(part) == expected:
+            return True
+    return False
+
+
+def preserved_pause(existing: str | None, condition: str, usage: int) -> str:
+    """Combine a required ammo threshold with an authored pause expression."""
+    expected = minimum_ammo_pause(condition, usage)
+    if not existing or existing == expected:
+        return expected
+    if _generated_or_term(existing, expected):
+        return existing
+    return f"({existing}) || ({expected})"
 
 
 def lcm_all(values) -> int:
@@ -231,6 +311,19 @@ def _self_test() -> int:
 
     assert pool_armaments([{"name": "primary"}, {"name": "secondary"}]) is None
     assert pool_armaments([{"name": "tertiary"}]) == ["tertiary"]
+
+    # Runtime-gate regressions: a global one-token gate is not enough for a ten-token shot,
+    # and an authored pause expression is preserved when the minimum-ammo threshold is added.
+    assert not pause_gate_sufficient("ammo", 10, None, None, global_gate=True)
+    assert pause_gate_sufficient("ammo", 10, "ammo < 10", None)
+    assert minimum_ammo_pause("ammo", 10) == "ammo < 10"
+    assert preserved_pause("reload_lock", "ammo", 10) == "(reload_lock) || (ammo < 10)"
+    assert pause_gate_sufficient("ammo", 10, "(reload_lock) || (ammo < 10)", None)
+    assert not pause_gate_sufficient("ammo", 10, "lock && (ammo < 10)", None)
+    assert not pause_gate_sufficient("ammo", 10, "!(ammo < 10)", None)
+    assert not pause_gate_sufficient("ammo", 10, "lock && (other || (ammo < 10) || third)", None)
+    assert not pause_gate_sufficient("ammo", 1, "!ammo_other", None)
+    assert preserved_pause("lock && (ammo < 10)", "ammo", 10) == "(lock && (ammo < 10)) || (ammo < 10)"
     print("carrier_slave_ammo self-test: PASS (both of the ruling's worked examples)")
     return 0
 

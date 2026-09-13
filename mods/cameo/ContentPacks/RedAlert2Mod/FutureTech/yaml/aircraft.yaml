@@ -350,6 +350,7 @@ landcarr_drone.futu:
 	Voiced:
 		VoiceSet: NighthawkVoice
 	AttackAircraft:
+		RequiresCondition: ammo
 		FacingTolerance: 40
 		PersistentTargeting: false
 	-AutoTarget:
