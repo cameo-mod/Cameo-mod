@@ -125,7 +125,11 @@ the fog sequencing.
   `BuildingFractions`).
 - [ ] **S** Personality-specific compositions via condition-gated
   `ProvidesPrerequisite` tokens plus group tokens for OR - zero C#.
-- [ ] **M** Guerrilla as the sixth personality (many small simultaneous raids).
+- [ ] **M** Add `personality-guerrilla` as a sixth personality for many small simultaneous
+  raids, gated on phase-3 log evidence that the computed rule fires often enough to justify it.
+  Tune a `SquadManagerBotModuleCA` instance using the existing `GuerrillaTypes`,
+  `MaxGuerrillaSize`, and `JoinGuerrilla` knobs, then add its notification block and audit
+  expected-set entries; no new C# is expected.
 - [x] **M** Phase 2 observe-only `MasterAiBotModule` and situation logging:
   [`BotSituation.cs`](../../OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs),
   [`AiSituationLogWriter.cs`](../../OpenRA.Mods.Cameo/Traits/AiSituationLogWriter.cs).

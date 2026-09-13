@@ -1038,6 +1038,9 @@ allow it.
    validated against replays cheaply without touching gameplay.
 3. **`BotPersonalityController` + dynamic switching (implemented).** The first behaviour change.
    Difficulty-gated so the lower tiers keep today's fixed personality.
+   The guerrilla rule is currently a computed-but-unavailable candidate: it remains in the
+   situation log's candidate field, while the active five-personality controller falls through
+   to the next grantable rule.
 4. **Main target selection**, consumed by the squad managers and support powers.
 5. **Counter demand and hints**, consumed by the unit builder, base builder and compositions
    (`ProvidesPrerequisite` tokens, zero C#).

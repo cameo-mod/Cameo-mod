@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
+using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Primitives;
 using OpenRA.Traits;
 
@@ -97,6 +98,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick
 	{
+		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller" };
 		readonly OpenRA.Player player;
 		readonly List<BotSituation> pendingSituations = [];
 		readonly Queue<(int Tick, int Delta)> lossSamples = new();
@@ -195,10 +197,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (target != null)
 				profiles.TryGetValue(target, out targetProfile);
 			var personalityDecision = ShouldEvaluatePersonality(decision, urgency, emergencyPersonalityHandled);
+			var personalityCandidate = incumbentPersonality ?? "";
 			if (personalityDecision)
 			{
 				var currentPersonality = CurrentPersonality();
+				var availablePersonalities = AvailablePersonalities();
 				var candidatePersonality = CandidatePersonality(urgency, targetProfile, ownArmy,
+					profiles.Values, currentPersonality, availablePersonalities, Info);
+				personalityCandidate = UnfilteredCandidatePersonality(urgency, targetProfile, ownArmy,
 					profiles.Values, currentPersonality, Info);
 				incumbentPersonality = candidatePersonality;
 
@@ -227,7 +233,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			{
 				Tick = tick,
 				MainTarget = target,
-				Personality = incumbentPersonality ?? "",
+				Personality = personalityCandidate,
 				Urgency = urgency,
 				Enemies = profiles,
 				Demand = demand,
@@ -252,6 +258,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return player.PlayerActor.TraitOrDefault<BotPersonalityController>()?.CurrentPersonality
 				?? player.PlayerActor.TraitOrDefault<AiMatchLogRecorder>()?.CurrentPersonality
 				?? "";
+		}
+
+		IEnumerable<string> AvailablePersonalities()
+		{
+			var controller = player.PlayerActor.TraitOrDefault<BotPersonalityController>();
+			return controller == null
+				? DefaultPersonalities
+				: controller.Info.Conditions.Select(c => BotPersonalityController.PersonalityName(c, controller.Info.PersonalityPrefix));
 		}
 
 		void CheckEmergency(int tick)
@@ -438,23 +452,40 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		internal static string CandidatePersonality(BotUrgency urgency, EnemyProfile target, int ownArmy,
+			IEnumerable<EnemyProfile> enemies, string incumbent, IEnumerable<string> availablePersonalities,
+			MasterAiBotModuleInfo info)
+		{
+			var available = availablePersonalities.ToHashSet(StringComparer.Ordinal);
+			foreach (var candidate in PersonalityCandidates(urgency, target, ownArmy, enemies, info))
+				if (available.Contains(candidate))
+					return candidate;
+
+			return incumbent != null && available.Contains(incumbent) ? incumbent : "";
+		}
+
+		internal static string UnfilteredCandidatePersonality(BotUrgency urgency, EnemyProfile target, int ownArmy,
 			IEnumerable<EnemyProfile> enemies, string incumbent, MasterAiBotModuleInfo info)
 		{
+			return PersonalityCandidates(urgency, target, ownArmy, enemies, info).FirstOrDefault() ?? incumbent ?? "";
+		}
+
+		static IEnumerable<string> PersonalityCandidates(BotUrgency urgency, EnemyProfile target, int ownArmy,
+			IEnumerable<EnemyProfile> enemies, MasterAiBotModuleInfo info)
+		{
 			if (urgency == BotUrgency.Emergency)
-				return "turtle";
+				yield return "turtle";
 			if (target != null && target.DefenceCount >= info.FortifiedDefenceCount && ownArmy >= info.SteamrollerMinArmyValue)
-				return "steamroller";
+				yield return "steamroller";
 			if (target != null && target.ExpansionClusters >= info.GuerrillaMinClusters)
-				return "guerrilla";
+				yield return "guerrilla";
 			if (target != null && target.TechBuildings >= info.TechEnemyTechBuildings &&
 				target.ArmyValue < info.RushMaxEnemyArmyValue * 2)
-				return "tech";
+				yield return "tech";
 			if (target != null && target.ArmyValue <= info.RushMaxEnemyArmyValue &&
 				target.DefenceCount <= info.RushMaxEnemyDefenceCount)
-				return "rush";
+				yield return "rush";
 			if (!enemies.Any(e => e.Alive && e.NearestCells >= 0))
-				return "expansion";
-			return incumbent ?? "";
+				yield return "expansion";
 		}
 
 		static CounterDemand BuildDemand(IEnumerable<EnemyProfile> enemies, EnemyProfile target, int totalArmy)

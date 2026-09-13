@@ -207,26 +207,39 @@ namespace OpenRA.Mods.Cameo.Test
 		public void CandidatePersonalityRulesAreOrdered()
 		{
 			var info = new MasterAiBotModuleInfo();
+			var available = new[] { "rush", "turtle", "tech", "expansion", "steamroller" };
+			var availableWithGuerrilla = available.Append("guerrilla");
 			var target = new EnemyProfile { Alive = true, NearestCells = 10, ArmyValue = 1000 };
-			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Emergency, target, 0, new[] { target }, "", info), Is.EqualTo("turtle"));
+			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Emergency, target, 0, new[] { target }, "",
+				available, info), Is.EqualTo("turtle"));
 			target.DefenceCount = 6;
-			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 3000, new[] { target }, "", info), Is.EqualTo("steamroller"));
+			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 3000, new[] { target }, "",
+				available, info), Is.EqualTo("steamroller"));
 			target.DefenceCount = 0;
 			target.ExpansionClusters = 3;
-			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "", info), Is.EqualTo("guerrilla"));
-			target.ExpansionClusters = 0;
 			target.TechBuildings = 4;
-			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "", info), Is.EqualTo("tech"));
+			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "",
+				available, info), Is.EqualTo("tech"));
+			Assert.That(MasterAiBotModule.UnfilteredCandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "", info),
+				Is.EqualTo("guerrilla"));
+			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "",
+				availableWithGuerrilla, info), Is.EqualTo("guerrilla"));
 			target.TechBuildings = 0;
+			target.ExpansionClusters = 0;
 			target.ArmyValue = 1500;
 			target.DefenceCount = 2;
-			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "", info), Is.EqualTo("rush"));
+			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "",
+				available, info), Is.EqualTo("rush"));
 			target.ArmyValue = 5000;
 			target.DefenceCount = 5;
 			target.NearestCells = -1;
-			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "", info), Is.EqualTo("expansion"));
+			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "",
+				available, info), Is.EqualTo("expansion"));
 			target.NearestCells = 10;
-			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "turtle", info), Is.EqualTo("turtle"));
+			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "turtle",
+				available, info), Is.EqualTo("turtle"));
+			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Normal, target, 0, new[] { target }, "guerrilla",
+				available, info), Is.EqualTo(""));
 		}
 
 		[Test]
