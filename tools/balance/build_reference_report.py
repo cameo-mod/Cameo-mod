@@ -27,6 +27,7 @@ HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import reference_distribution as rd          # noqa: E402
 import reference_targets as rt               # noqa: E402
+import build_armament_pairing_report as bap  # noqa: E402
 
 ROOT = rd.ROOT
 ASSIGN = ROOT / "docs/balance/derived/reference_assignment.json"
@@ -549,6 +550,11 @@ def weapon_calculation_details(rows, cameo_actor=None):
             'Unmodeled guided/custom projectiles remain unavailable, and conditional slots are not summed.</p>' + ''.join(parts) + '</details>')
 
 
+def _projection_context(actor, crows, dist, cdist, hero_context=None):
+    row = crows.get(actor) or {}
+    return hero_context if row.get("hero") and hero_context else (dist, cdist)
+
+
 def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, counts, klass, led_arms, hero_context=None):
     for kind, title in SECTIONS:
         group = [a for a in members if crows[a]["type"] == kind]
@@ -612,7 +618,8 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
                     if str(r.get("id")) not in {str((d or {}).get("id")) for d in chosen.values()}))
                 chips += (f'<span class="chip fam">+{extra} variant'
                           f'{"s" if extra != 1 else ""}: {html.escape(fam[:90])}</span>')
-            selected_dist, selected_cdist = (hero_context if c.get('hero') and hero_context else (dist, cdist))
+            selected_dist, selected_cdist = _projection_context(
+                a, crows, dist, cdist, hero_context)
             tgt = {stat: estimate_cell(rows, c, stat, selected_dist, selected_cdist, len(srcs))
                    for stat in ('hp', 'speed', 'cost', 'w_range', 'w_dps')}
             # ⭐ R1, 2026-09-12: the WEAPON COMPONENTS are the referenced inputs and total DPS
@@ -670,7 +677,7 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
         # the `for kind, title in SECTIONS` loop, so passing the band printed every actor's block
         # again under infantry, vehicles, aircraft and ships alike — 155 blocks for 35 actors.
         # `group` is this section's actors, which is what the heading above it claims.
-        emit_armament_pairing(body, group, attached, dist, cdist, crows)
+        emit_armament_pairing(body, group, attached, dist, cdist, crows, hero_context)
 
 
 # ── PER-ARMAMENT REFERENCES ──────────────────────────────────────────────────────────────────
@@ -684,41 +691,52 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
 _PAIRING = []
 
 
+def _validate_pairing_document(doc, expected_inputs):
+    if not isinstance(doc, dict) or doc.get("schema") != bap.PAIRING_SCHEMA:
+        raise ValueError("armament_pairing.json has an unsupported schema; rebuild it")
+    actors = doc.get("actors")
+    if not isinstance(actors, dict) or not actors:
+        raise ValueError("armament_pairing.json has no actor coverage; rebuild it")
+    stats = doc.get("stats")
+    if not isinstance(stats, dict) or stats.get("actors") != len(actors):
+        raise ValueError("armament_pairing.json actor coverage metadata is inconsistent")
+    recorded = doc.get("inputs")
+    if not isinstance(recorded, dict) or recorded != expected_inputs:
+        missing = sorted(set(expected_inputs) - set(recorded or {}))
+        extra = sorted(set(recorded or {}) - set(expected_inputs))
+        drift = sorted(key for key in set(expected_inputs) & set(recorded or {})
+                       if expected_inputs[key] != recorded[key])
+        detail = "; ".join(part for part in (
+            f"missing {missing}" if missing else "",
+            f"unexpected {extra}" if extra else "",
+            f"changed {drift}" if drift else "",
+        ) if part)
+        raise ValueError(f"armament_pairing.json input fingerprints are incomplete or stale: {detail}")
+    return doc
+
+
 def pairing_document():
     """The per-armament pairing artifact, REFUSED when its inputs have moved since it was built.
 
     ⛔ A RECORDED HASH THAT NOBODY RE-CHECKS IS A COMMENT (Astra, PR #375 blocker 4). The artifact
-    names the three files it was derived from and their sha256; if any of them differs now, the
-    pairing on disk describes a corpus that no longer exists and the map would render it as
-    current evidence. Stale evidence is worse than missing evidence, because it looks the same as
-    the real thing — so this raises rather than degrades.
+    names its complete reproducibility closure and each input's sha256; if the exact set or any
+    hash differs now, the pairing on disk describes a corpus that no longer exists and the map
+    would render it as current evidence. Stale evidence is worse than missing evidence, because it
+    looks the same as the real thing — so this raises rather than degrades.
 
     A document with no `inputs` block at all is a pre-fingerprint artifact and is refused for the
     same reason: it cannot prove it is fresh. Regenerate with
     `python tools/balance/build_armament_pairing_report.py --write`.
     """
     if not _PAIRING:
-        import hashlib
         path = ROOT / "docs/balance/derived/armament_pairing.json"
+        if not path.is_file():
+            raise ValueError("armament_pairing.json is missing; rebuild it with --write")
         try:
             doc = json.loads(path.read_text(encoding="utf-8"))
-        except Exception:
-            _PAIRING.append({"actors": {}})
-            return _PAIRING[0]
-        recorded = doc.get("inputs")
-        if not recorded:
-            raise ValueError(
-                "armament_pairing.json carries no input fingerprints; rebuild it with "
-                "tools/balance/build_armament_pairing_report.py --write")
-        for rel, want in sorted(recorded.items()):
-            src = ROOT / rel
-            got = (hashlib.sha256(src.read_bytes()).hexdigest() if src.exists() else None)
-            if got != want:
-                raise ValueError(
-                    f"armament_pairing.json is stale: {rel} has changed since it was built "
-                    f"(recorded {want}, found {got}). Rebuild it with "
-                    "tools/balance/build_armament_pairing_report.py --write")
-        _PAIRING.append(doc)
+        except (OSError, json.JSONDecodeError) as exc:
+            raise ValueError("armament_pairing.json is unreadable or malformed") from exc
+        _PAIRING.append(_validate_pairing_document(doc, bap.input_fingerprints(ROOT)))
     return _PAIRING[0]
 
 
@@ -798,7 +816,7 @@ def _armament_target_cell(main, cast, entry, attached_rows, dist, cdist, ctype, 
             f'{nsources} sources</small></span>{ratio}')
 
 
-def emit_armament_pairing(body, members, attached, dist, cdist, crows):
+def emit_armament_pairing(body, members, attached, dist, cdist, crows, hero_context=None):
     """One block per actor in this class that fires in more than one targeting role.
 
     ⭐ EACH ARMAMENT NOW CARRIES ITS OWN TARGET (maintainer, 2026-09-13: "td gdi battle tank and
@@ -830,8 +848,8 @@ def emit_armament_pairing(body, members, attached, dist, cdist, crows):
                 'weapon columns read WITHHELD for most of them. Here each armament finds its own '
                 'reference weapon and gets its own target, and a source that does not carry a '
                 'weapon in that role does not vote on it. '
-                '<b>=</b> exact role match &middot; <b>~</b> a dual-role weapon stood in &middot; '
-                '<b>?</b> the source could not state a role, so it votes on the main gun only. '
+                '<b>=</b> exact role match &middot; <b>~</b> a dual-role weapon stood in. '
+                'An unproven role abstains rather than voting. '
                 'Air is never paired with ground. A <code>c</code> on a range marks a value '
                 'converted from TS cells (1 cell = 1024 WDist). The reference column is projected '
                 'through the same coordinates and the same frozen ruler as every other target on '
@@ -845,6 +863,8 @@ def emit_armament_pairing(body, members, attached, dist, cdist, crows):
         body.append(f'<div><code>{html.escape(actor)}</code>')
         arows = attached.get(actor) or []
         ctype = (crows.get(actor) or {}).get("type")
+        selected_dist, selected_cdist = _projection_context(
+            actor, crows, dist, cdist, hero_context)
         body.append('<table><thead><tr><th>role</th><th>Cameo weapon</th><th class="n">range</th>'
                     '<th class="n">dmg/cycle now</th><th class="n">reference</th>'
                     '<th>voters</th></tr></thead><tbody>')
@@ -853,9 +873,11 @@ def emit_armament_pairing(body, members, attached, dist, cdist, crows):
         # armaments and would have reported one. An armament that drew no pair still gets its row
         # and says it abstains, because "no reference has this weapon" is a finding.
         for main in _armament_rows(entry):
-            role = main["role"]
-            cast = [(src, pair) for src, pair in votes.get(role, ())
-                    if pair["cameo"].get("weapon") == main["weapon"]]
+            role = main.get("role")
+            role_label = role or "unknown / unproven"
+            cast = ([] if role is None else
+                    [(src, pair) for src, pair in votes.get(role, ())
+                     if pair["cameo"].get("weapon") == main["weapon"]])
             if cast:
                 chips = " ".join(
                     '<span class="tag" title="{t}">{mark} {src} &middot; {w}</span>'.format(
@@ -867,14 +889,17 @@ def emit_armament_pairing(body, members, attached, dist, cdist, crows):
                         w=html.escape(str(pair["peer"]["weapon"])))
                     for source, pair in cast)
                 tally = f'<b>{len(cast)} of {n}</b> {chips}'
+            elif role is None:
+                tally = ('<span class="muted">unknown targeting role &mdash; this armament '
+                         'abstains and has no reference target</span>')
             else:
                 tally = ('<span class="muted">no source carries a weapon in this role &mdash; '
                          'this armament abstains and has no reference target</span>')
-            body.append(f'<tr><td class="cls">{html.escape(role)}</td>'
+            body.append(f'<tr><td class="cls">{html.escape(role_label)}</td>'
                         f'<td><code>{html.escape(str(main["weapon"]))}</code></td>'
                         f'<td class="n">{_range_cell(main)}</td>'
                         f'<td class="n">{num(main["damage_per_cycle"])}</td>'
-                        f'<td class="n">{_armament_target_cell(main, cast, entry, arows, dist, cdist, ctype, n)}</td>'
+                        f'<td class="n">{_armament_target_cell(main, cast, entry, arows, selected_dist, selected_cdist, ctype, n)}</td>'
                         f'<td>{tally}</td></tr>')
         body.append('</tbody></table></div>')
 

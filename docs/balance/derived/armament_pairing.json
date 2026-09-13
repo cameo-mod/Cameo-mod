@@ -32127,156 +32127,497 @@
   }
  },
  "inputs": {
-  "docs/balance/derived/reference_assignment.json": "59e3a872b2e95f74b00c308ea39d8a7af4b5cfd0d097affe1df601cd72c7ff10",
-  "docs/reference/ini_elite_weapon_evidence.json": "088c881ef149dc7835c9dd41ace411175a80c1337779d0d2901340e783919056",
-  "docs/reference/ini_projectile_role_evidence.json": "43c83da828800573d15e9ca0dcbd5b2a884befed53bfda3e5e8747f74fd77bd7"
+  "docs/balance/band-scope-20260911.json": "98fc9d1496dd2cdf528beb9eff3d57b72a4cfc00ecad8899eaec4b5b107d8aa0",
+  "docs/balance/building-shape-review-20260911.json": "04582b4244649588ecbab710567f1f5da302e6802557e0e4f2bef4252433256c",
+  "docs/balance/cargo-load-proposal-20260911.json": "c4b3b4179dc2e70c7e46d4528503de0857b07e8d9f1f59662605d1e9c5a1edad",
+  "docs/balance/d2k_atreides.json": "722831b5d33e1e0c0fc028b1468e7ecdf3a1142cb92de5bc3f88902c4569f36b",
+  "docs/balance/d2k_corrino.json": "61fa441428db126cba68eb16e9e5e3e169fbf8190cd49d193c2cd777269585f6",
+  "docs/balance/d2k_harkonnen.json": "f482f9c9aecfdd6a37d7022dbe26e9f4da0505c842e229041149759faee6b666",
+  "docs/balance/d2k_ixian.json": "7e5260778520abd962c0a760233807dc64493f2b7b31d8e3fc0eb2957a9d9b50",
+  "docs/balance/d2k_ordos.json": "f5ef7571fc5d83c84cf56fc25b8f390eeaad2715ea0dbac4ea0336aebca71f13",
+  "docs/balance/defense-armor-curves-20260911.json": "68ff597acab6dc80c6705c90c911c530c2589d27df85ab04906848d9cca82678",
+  "docs/balance/derived/reference_assignment.json": "550219c4a3e7c71d8ec36ccb09ddfba77dd4231189fe4353479e9a83b4fc74a7",
+  "docs/balance/four_voice_selection_pilot_20260911.json": "a8fec8992bb6320da544ccb329810ec8f2d48809be5468d4963493cef6e9e868",
+  "docs/balance/four_voice_selection_pilot_aircraft_20260911.json": "55245bbf2abefd1967403fed76382813b90238a6a9de34c2cae0dda7c6e0c019",
+  "docs/balance/four_voice_selection_pilot_infantry_20260911.json": "cea636ae66716e7a8fbf97ef0bf2e8a4bf76cf615968b8af096ca9fd7e87e417",
+  "docs/balance/infantry_artillery_pressure_manifest_20260911.json": "7efd84ae32b1b31bfe6cf4f552ca381b4d0118a5aab7ed4da5375d3162a80b22",
+  "docs/balance/redalert2_allies.json": "7657582dc34b88170cec030f62d0f11f38368996773f7a152a6edd50a44c2890",
+  "docs/balance/redalert2_soviets.json": "5c6dcb536fd8748fcae67029afe92f257c6ffa9bd0e36bb0073a5e32b9923f1d",
+  "docs/balance/redalert2_yuri.json": "16c68e36e484416e3d0b3e9f8cb19d7a2031a63458579c7d4c28182105d72d7a",
+  "docs/balance/redalert2mod_asianalliance.json": "35215f376d1dfee5845e81860eddda6f5635bfd5e5affb2cd7cc9d5faebab827",
+  "docs/balance/redalert2mod_consortium.json": "557d8dadae88fc68e1f4750f08093c397ccafd4a3f681d62b40da85b1772b8b0",
+  "docs/balance/redalert2mod_futuretech.json": "0af52616b921cd483fb2885240dd07ff8a2354f347d751132bbf601e9b20ed93",
+  "docs/balance/redalert2mod_naxis.json": "b0538a9c548848b17bb60586368e8cb09d089ca8d8d81b4d5bc7ef28e9ba3f39",
+  "docs/balance/redalert2mod_schwarzermond.json": "6b5a04d4ae3f279c99c36d54e72fca5f2f3182ef6feed702e35332b1bc9a9b26",
+  "docs/balance/redalert2mod_syndicate.json": "677d10fe188f532be90aff980ef9d9bbc37288ab9d28cf2eadaa0bedd41c25f0",
+  "docs/balance/redalert2mod_tkm.json": "c098e3736849d8d4b1a8bc1056eb318def5f247efc28cbcbd14a512bb6c5b1f8",
+  "docs/balance/redalert_allies.json": "fe9c084288a350319faf0ba9b60e4d6b193c71763351493565c28e6b2954241a",
+  "docs/balance/redalert_japan.json": "ae2abd36221c6bce5edb8bc4b9f828a58f4a46e3cb16920bc6882e5d325dd544",
+  "docs/balance/redalert_soviets.json": "bc8f22c39afa4249ee75ebf511b005f948e91e1f8d7f8e7f081513a0e3367298",
+  "docs/balance/shared_d2k.json": "cbf875ac3b78e5e11081646f2ab58c5eaee2b3da19e85c1002066c29fca68999",
+  "docs/balance/shared_redalert.json": "9d1a570b6e710b003b1ca0ef003d0539a8bad3e2ccd411adf683e3344febecc4",
+  "docs/balance/shared_redalert2.json": "94d1266358dfd36a97532537852119c0b514ee85ef6c7719ca84c81c5cfacb8e",
+  "docs/balance/shared_tiberiandawn.json": "92ec8da6ccdb2c68ca4a9a05ee2366648ba1583f144b64e6885e401cbf85731f",
+  "docs/balance/shared_tiberiansun.json": "1c8eea754cfd6b9986cdc65ca662df636595be23659807dec7ad1bdc82ec4fff",
+  "docs/balance/starcraft_protoss.json": "0690f40467d5dab55590ee49acf1281cd59232c18c97f4873a5e3592fc77e8a1",
+  "docs/balance/starcraft_terran.json": "9111cebe26fa90a04647ba41499164ed2bfd3a25374bb77e9cef01a335f868eb",
+  "docs/balance/starcraft_zerg.json": "08e679ff930613189b994f6d0963fcee409c3ed2321541428a54da33cf5eb8f5",
+  "docs/balance/tiberiandawn_gdi.json": "baaf3f58ae58490fad39b322641be90d20986e55b7956d14371011f135edfa0d",
+  "docs/balance/tiberiandawn_nod.json": "dbb09450b812cf27068907c95d2599c4d10affedb1428674dde89ed25da52e34",
+  "docs/balance/tiberiansun_cabal.json": "193ea68f5b88f9e56e6ba0877a858bbc0eeed81838d3282e1a4d7ae1e938c001",
+  "docs/balance/tiberiansun_forgotten.json": "61870a84b6b0ab4ad83ca8fd6d2d908b96dca516f6ad76b0fe6ab472f3683f48",
+  "docs/balance/tiberiansun_gdi.json": "8bc49f492538e3c8ba612823d71c0fdf21788667c5c7a44b50567b097ddd59ec",
+  "docs/balance/tiberiansun_nod.json": "c83cae224acafd315635609e1e4afd18f55efd36c37d01f28ad2c89f48a2b70d",
+  "docs/balance/warcraft2_humans.json": "8ce00951b7e7938ca0e7114554c3dd1f555af1e0ddebe00eade8c5d1ef8edbc5",
+  "docs/balance/warcraft2_orcs.json": "7bfc182d5f2c9729ee3d030c976c96ac66e0a183b91a8b09c9738acd1942a861",
+  "docs/reference/ini_corpus.json": "bfd96d5211044b3067f8444e2cde5d6adb70a7bcaff0c36040ad8a3ebaabb513",
+  "docs/reference/ini_elite_weapon_evidence.json": "831f10c450d47c0f32eb3a311b1a20da8a47e86b8a96529685c657a1b160354d",
+  "docs/reference/ini_projectile_role_evidence.json": "8055eb5c55b5ce07ac765f75f2b58e45c0fe3c482f5ffb35d2bf92f6c552848e",
+  "docs/reference/peer_corpus/ca_ab9e477c.jsonl": "e80f02b6ae603adfb5c3015045f94011a4af77ac4336f34bb35e153c30f1956f",
+  "docs/reference/peer_corpus/cnc_bbd36d9e.jsonl": "1dc3c1e1ccde2b16e550d044eea0874019cc517d6cbc3d8a89113646725d117e",
+  "docs/reference/peer_corpus/d2k_bbd36d9e.jsonl": "7a4c72f4d7f3aa9cd8f58ebed6149e8dff75eb9ed31bc1b8bb3157d6f4d1933b",
+  "docs/reference/peer_corpus/index.json": "a0c6ef6a74c75a61960f2b2f98ca646c45852bada1dd5edc70fa5d06e933efc2",
+  "docs/reference/peer_corpus/ra_bbd36d9e.jsonl": "d417f8af2ae7766901a9538aa5a9ebb3d3f33cd744c7cf25e3270d9d5367bf4e",
+  "docs/reference/peer_corpus/ts_bbd36d9e.jsonl": "f3a46a072568227b7c1cf2524a86d082dc94d5f72452d2eb064f6031575130b7",
+  "mods/cameo/ContentPacks/Core/content.yaml": "0fcb25dfae1b84219d0dce79cc2ab1fcd7d5620630804f7248761cdde7c997d1",
+  "mods/cameo/ContentPacks/Core/yaml/ai.yaml": "b3d895cc8fe0e8656faed7050441b0316e8f65998afe1120922a78a531ff842e",
+  "mods/cameo/ContentPacks/Core/yaml/faction.yaml": "37516c00bcc178328175517946cec2f0d7dd30073b2c9c4a048bff06339024fc",
+  "mods/cameo/ContentPacks/D2k/Atreides/content.yaml": "4670fae9fbd16afa59cef3ec74db38578993f00f3aaa2ed40fa093343af6a1e6",
+  "mods/cameo/ContentPacks/D2k/Atreides/yaml/ai.yaml": "3e5ae15cbfdf326a793d7cd761162e3d2dab467fd4e97f3661a5013d1ecec6b4",
+  "mods/cameo/ContentPacks/D2k/Atreides/yaml/aircraft.yaml": "cff0319bd8f44c717f7ad23a8372aed1d601a400a21df41355433aa0b5ed477e",
+  "mods/cameo/ContentPacks/D2k/Atreides/yaml/buildings.yaml": "8c97c5421d3cefbba8a14af0ea68830d14d25296180a24a0e7d9f37f0a46df44",
+  "mods/cameo/ContentPacks/D2k/Atreides/yaml/faction.yaml": "ee2babb21b6937683966bdf2c7a028b7bafd4f0aaa25086b0fcd29541f1bc537",
+  "mods/cameo/ContentPacks/D2k/Atreides/yaml/infantry.yaml": "73d224d45f9dc9139f1b00f793c23a46f98742480f47e157bb2d73f0daad71bc",
+  "mods/cameo/ContentPacks/D2k/Atreides/yaml/naval.yaml": "160bc0845a8909b0ecccbe378dedb0edb4257b75d292e6d60228ca19e2c8d170",
+  "mods/cameo/ContentPacks/D2k/Atreides/yaml/promotions.yaml": "9171e96753e13fc368b4549cac6bf3b6ce9fa5e267575f14ceae78655ba805ff",
+  "mods/cameo/ContentPacks/D2k/Atreides/yaml/upgrades.yaml": "c111b76a0e42ef12b6ef038fd3e0df58628f9a0f2efb2483e948622212647fd5",
+  "mods/cameo/ContentPacks/D2k/Atreides/yaml/vehicles.yaml": "85155c7efab4c0074b7ded3777a2f21610c8dd3ac63cba63db24d350cd0abd05",
+  "mods/cameo/ContentPacks/D2k/Atreides/yaml/weapons.yaml": "791f0a8d15ddd5c91d7916d938025af64234b243aca5e2414b3ce55ca9d11b6c",
+  "mods/cameo/ContentPacks/D2k/Corrino/content.yaml": "3f8a9a41e939314ce93013d98311c7f7bf317d6bcbf1387583a76ef13344d9fd",
+  "mods/cameo/ContentPacks/D2k/Corrino/yaml/ai.yaml": "387be8a4b4fccaf43da6016de7ada809309a9927b5a53b84ba88f12600dcf3a5",
+  "mods/cameo/ContentPacks/D2k/Corrino/yaml/aircraft.yaml": "ee2b584d475f1f39efd593db20923371a48fd4e2d5eb3e0aea21ad67ca366599",
+  "mods/cameo/ContentPacks/D2k/Corrino/yaml/buildings.yaml": "02de65477461f76419fe7fd052c7b954b98fadf25f78eb17334704676ddf6e65",
+  "mods/cameo/ContentPacks/D2k/Corrino/yaml/faction.yaml": "080be8a4ffca58acc5c7b75ca414f97b67fddc5a0a61c65a9265b3bc306ae28c",
+  "mods/cameo/ContentPacks/D2k/Corrino/yaml/infantry.yaml": "a2aefd203a55e4fc9302ab75f28b542c0200071f79e4a28dc993ff571d882e34",
+  "mods/cameo/ContentPacks/D2k/Corrino/yaml/naval.yaml": "160bc0845a8909b0ecccbe378dedb0edb4257b75d292e6d60228ca19e2c8d170",
+  "mods/cameo/ContentPacks/D2k/Corrino/yaml/promotions.yaml": "76f4763a744166757951f468c8e68f592b52ca248f88c485da077f875f87ceb6",
+  "mods/cameo/ContentPacks/D2k/Corrino/yaml/upgrades.yaml": "8face3ee865492b6b22c83567b5441cc78b35b60849f4741110521bfd1e28736",
+  "mods/cameo/ContentPacks/D2k/Corrino/yaml/vehicles.yaml": "03e82acd59c13a6135333586bc6846c5571497a5cfac6011666111c6cc9eb0ea",
+  "mods/cameo/ContentPacks/D2k/Corrino/yaml/weapons.yaml": "01371289e4fdbbd16fcb3809bca4392190f5f96907d21339101c238bd1f590b5",
+  "mods/cameo/ContentPacks/D2k/Harkonnen/content.yaml": "0b9b42da468cdd3198bcccd0ae8fcc225416c5fde8e97abcfaaf0bdf25169f7b",
+  "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/ai.yaml": "3c0cb67865a0ca62107b88d5366c728285b680dd56747275df79723fd597d44a",
+  "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/aircraft.yaml": "feeb4daff71f1919483a627e1b835375f9774382f3279f45badecba5c677e4df",
+  "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml": "4be656d600e963b7780fa98bdf6f0fb702305eba5e2c028bdf1a3333a8a9fa65",
+  "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/faction.yaml": "4b87f2353303a19c4c85c90f16640a0d078cfd385799675f292cc8f49b01a032",
+  "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/infantry.yaml": "dfeb8cd93b79ac5684ab9ebd5ca062b4fae058bea09b8b490b8e3f284570cd9b",
+  "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/naval.yaml": "160bc0845a8909b0ecccbe378dedb0edb4257b75d292e6d60228ca19e2c8d170",
+  "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/promotions.yaml": "f02858d4370b6ca2aa35dc85f6297142c9fe63892e212b6e59e95474d5c16b56",
+  "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/upgrades.yaml": "9b5adc08805a315663bfef3315c63ff399ab7a44333066fcd65a5ae32bf2eb62",
+  "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml": "fecff157d23c1befc3506c23602973b286acd5541c23f7a0318591ab074daea3",
+  "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml": "26d227db729f39df00c4255d69555b644ec7da7061875388550021943213fce1",
+  "mods/cameo/ContentPacks/D2k/Ixian/content.yaml": "fefcb99d16f12c5b3243ec55a4d350ebdfeae79270736600744ac7f7a77687f6",
+  "mods/cameo/ContentPacks/D2k/Ixian/yaml/ai.yaml": "78463f54a91add68168ccce90281f218f55fda5dbb21e7fecf742c746449223f",
+  "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml": "3f1f4f40142ee2f92a654a22858bb0ec4d3e1271a4102fdaf49ee9fc0df8b199",
+  "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml": "e34c683fba6ece6055f030671c629e03781191cf4a78b2ab8759e0652cdae317",
+  "mods/cameo/ContentPacks/D2k/Ixian/yaml/faction.yaml": "965b7c870347e951fd3b553fa016dabef69ca6cdf140290802469b40613fb140",
+  "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml": "0d6ab49062cc54cf9035ddc01e628ec2b14b5098f89c88e1a50afa2c3ef0d7a0",
+  "mods/cameo/ContentPacks/D2k/Ixian/yaml/naval.yaml": "160bc0845a8909b0ecccbe378dedb0edb4257b75d292e6d60228ca19e2c8d170",
+  "mods/cameo/ContentPacks/D2k/Ixian/yaml/promotions.yaml": "153eaa56b60ff0c68ed9c327fdfc0689b5b2c9c6bea00109d0fcc31cad716258",
+  "mods/cameo/ContentPacks/D2k/Ixian/yaml/upgrades.yaml": "a2a379b99e7e3a13f23eba75ee4ae4e4db3be00a48616352409bcae79c1fdf9e",
+  "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml": "e99e1a8d33bea7fe7a6d1a579cee024a37f2d23e9fa7279fb8119c6735d7b341",
+  "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml": "9f2e4ec727f09e7ff296d2242f07c653321d8b34331d5d91d9e904d0579c7efd",
+  "mods/cameo/ContentPacks/D2k/Ordos/content.yaml": "55c2142cd98b398763a5202b21155544b992e151c053cdb5269405cce8a982a7",
+  "mods/cameo/ContentPacks/D2k/Ordos/yaml/ai.yaml": "70372038f3757bff8c1bbdfc324516d6f9d89bc29cf1efc90915ba7c09c61f71",
+  "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml": "ba739dbaf3408eabd39b667b94d0868a7f86ac94ba3d23ef20a67aaf29a20e47",
+  "mods/cameo/ContentPacks/D2k/Ordos/yaml/buildings.yaml": "04c37f6e9d4ec937db1287b7f3bd246c8ddbd65de57aaea1eee649e6123c4622",
+  "mods/cameo/ContentPacks/D2k/Ordos/yaml/faction.yaml": "10f77fdfbeaeaecef1a3822a96457e405de11842d94d6b6326dc4d5f435b260b",
+  "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml": "37c74b35d763d53ee4aef2dbdd2014c621e35c316a877b42cbeee5cd456c7cd7",
+  "mods/cameo/ContentPacks/D2k/Ordos/yaml/naval.yaml": "160bc0845a8909b0ecccbe378dedb0edb4257b75d292e6d60228ca19e2c8d170",
+  "mods/cameo/ContentPacks/D2k/Ordos/yaml/promotions.yaml": "8c018af8c8403e61959cfc1f2304aa775466b28da8c5bb3b4938e03281929056",
+  "mods/cameo/ContentPacks/D2k/Ordos/yaml/templates.yaml": "3a587259e3c918cff5e637c008f0a19014189619c38183303d99f51cce5e4fd4",
+  "mods/cameo/ContentPacks/D2k/Ordos/yaml/upgrades.yaml": "9d088e41891c33beca838b150d31d6f6f839d05bdc404717135aa3db8b5e504d",
+  "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml": "ccf4d02048d09eefcf9e0a8414c9a44d5a82a46068f9c1462459753887b478fc",
+  "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml": "244161335ed2b531b2c211bfbea34afe608d4c9256b9217315f39ed1e8ad6a28",
+  "mods/cameo/ContentPacks/D2k/Shared/content.yaml": "83da5e7936d7aa8d96ca728dd4e77a1a59988c5cec2159e1b72a92bfee92ef4c",
+  "mods/cameo/ContentPacks/D2k/Shared/yaml/ai.yaml": "0b17cb70bebadc1d581e4ad9cd204a13db874bb36b9f60deb3f6d78c375dfa0b",
+  "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml": "215007bb1e3930f6a24901bf9d299112103fa1d9fa29bc7e3df37015356beb47",
+  "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml": "d92b9280a2f265b6ffc6212393520f5e748a283e2991c8151a50c563a5fb455b",
+  "mods/cameo/ContentPacks/D2k/Shared/yaml/faction.yaml": "bd1b783389246027d1464c23fdf5be02dd8cd4747049c23c3700ceafc0f312fe",
+  "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml": "99b6435efb98de2d8d93e97bbd68e7bb2c7d05c800ff8f7165ad875444073ebc",
+  "mods/cameo/ContentPacks/D2k/Shared/yaml/naval.yaml": "160bc0845a8909b0ecccbe378dedb0edb4257b75d292e6d60228ca19e2c8d170",
+  "mods/cameo/ContentPacks/D2k/Shared/yaml/promotions.yaml": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "mods/cameo/ContentPacks/D2k/Shared/yaml/templates.yaml": "1fb87ed9790de62600a51f305e4b97df2453a2fd8416c59fb36f136cf0b7736a",
+  "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml": "34c7a1c4dd02fe87c12320c5102aa878b51bfe2b160900441f9a7c4af6ea8fee",
+  "mods/cameo/ContentPacks/D2k/Shared/yaml/vehicles.yaml": "7c6bea35851aed606bbd5b49195f9f81ebd298691412db1801686b151550078b",
+  "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml": "a025269ac5835ab891dd7c043415f547137ee0ee0a50eccb4553f7f8d3734184",
+  "mods/cameo/ContentPacks/Outpost2/content.yaml": "89de4e94fa244d9ca1a82021c8e9afa70919c14d200fd768f6528699bc14a86c",
+  "mods/cameo/ContentPacks/Outpost2/yaml/ai.yaml": "ae9f3dbad139749b60b7603537e74ddf4e388b91de83062065219fd7e3ccd295",
+  "mods/cameo/ContentPacks/RedAlert/Allies/content.yaml": "e5ad5dbdf84825e66a173372338231f29ff51eba2e2c560338f0af54edd640ff",
+  "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml": "a206ef8acfadb0946586864bbcb0c7cbf4e7a22c60e7037dedecbc6616ff9f54",
+  "mods/cameo/ContentPacks/RedAlert/Allies/yaml/buildings.yaml": "ac9842e5a64891cf0b66510df6791239f53837d7a49189f5d6297899c3d69a5b",
+  "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml": "68625462311568ee5cc76343612cdbb1e14f2f7accb180f22d6fb8960737be1b",
+  "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml": "ba70f0c615bd4bba1469e04c6bf64b98f751b76e4429a939299af3c20addf5a8",
+  "mods/cameo/ContentPacks/RedAlert/Allies/yaml/promotions.yaml": "a6baaf47df3c5b7dbb9488e12d82a949b91baa39e31fdd13aa35622403e2ff0c",
+  "mods/cameo/ContentPacks/RedAlert/Allies/yaml/templates.yaml": "253a8cbae8dec1cc4d2485454680c576737112375a57036043b959ddd9d31ba8",
+  "mods/cameo/ContentPacks/RedAlert/Allies/yaml/upgrades.yaml": "217812e673411a6b9c8c800eb63bceb56dcf73f353010f186159f037e1784e45",
+  "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml": "5dcc32dd796728291808f09f558614588c0e7ba394ea69c6066336fe771866a5",
+  "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml": "80b8fc6f1a7213a4a586d8ec0dd8a7eafa3389dc80f08dbf29c727406c76a5c5",
+  "mods/cameo/ContentPacks/RedAlert/Japan/content.yaml": "18f56f94ea87f17c1706da0fe5d955472d7976d47eb5a84c764531f8a7c609a5",
+  "mods/cameo/ContentPacks/RedAlert/Japan/yaml/aircraft.yaml": "6987047700d5e6b69459924ffddbb56d29aa41502ae269d8cc980235d8bbb6de",
+  "mods/cameo/ContentPacks/RedAlert/Japan/yaml/buildings.yaml": "fc9527349c230446d5c510cf0644f1a9358aeada4830f34c6721594ed97b33d2",
+  "mods/cameo/ContentPacks/RedAlert/Japan/yaml/defenses.yaml": "30eb6ccaa05f789a1d59f67687ceb9d884ff71b32ef817e0c0f94e5730b352a0",
+  "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml": "080644dfdbff19475e1639773c89fc256b1524106a13717ffef34f6d14443a43",
+  "mods/cameo/ContentPacks/RedAlert/Japan/yaml/promotions.yaml": "03faeaf01029d2296943ff4a13179ae06b1c1caa77f7fc83ea7ae9fd7ab4a74e",
+  "mods/cameo/ContentPacks/RedAlert/Japan/yaml/templates.yaml": "cc567b4cf5c752c943f9d9dc95cdd36359c1ba73e481b83286c35dff39a2fd0e",
+  "mods/cameo/ContentPacks/RedAlert/Japan/yaml/upgrades.yaml": "0cc3ede8c7f195f355df46b75fd2e8d351c07aa1d6033b14e5e114c5a64c427c",
+  "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml": "bbd662d749a6df43c155eb7f529f430d48a494c1ad28af2e7ee5b7b440e90a6c",
+  "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml": "1ba6a8becc9bd834c8815c31390c09c98c1d304cf10c209c9b7736f8618e09d3",
+  "mods/cameo/ContentPacks/RedAlert/Shared/content.yaml": "187eea5352ddfc203894d8deedc4c1290eb9bd6209e4d37d6326b8427aa34b0d",
+  "mods/cameo/ContentPacks/RedAlert/Shared/yaml/ai.yaml": "df18bfaf3bf62ea185653fe40d37dc1525a2af71002e3993a2b6b29a17261f0a",
+  "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml": "bea139c82f59740a932d1b448d414a79a85d0253618b160aff2553b712e674c5",
+  "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml": "3fd0061c8176a37dd71fa4307010c36269771a7e75d8d0cd490b6110926f3986",
+  "mods/cameo/ContentPacks/RedAlert/Shared/yaml/faction.yaml": "c99b1ac7558ec558e511751ca0e1a8a2ff7807b9e7736cada66279b72278762d",
+  "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml": "57a91bdf54a98e420be8590a634a3c8102c35ce4e2161e051d0c6087ff76218e",
+  "mods/cameo/ContentPacks/RedAlert/Shared/yaml/misc.yaml": "ca3890269d8932933357065e84b01fd6a4e324aae854c2a9860087cbb1846d57",
+  "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml": "a43d6cae2ab00f3dc7992d706d9c2a785106f475e80a2a7b0edc88aa6c4895ef",
+  "mods/cameo/ContentPacks/RedAlert/Shared/yaml/templates.yaml": "dbcc8c5792e1f57f4bcbc17f3327b654e3febbdd8c48a2e4031a137b03e9185d",
+  "mods/cameo/ContentPacks/RedAlert/Shared/yaml/upgrades.yaml": "b699433cc3154f909e7b6a891033c2ade4f1b654cf3ca23816d2b835136da09c",
+  "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml": "a288757ba31705c1e452109467ce32f010b9b48c1d2920f1dbde10d68d1f9501",
+  "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml": "b74f315e2961f6ee43b2a3192bcdebad3ea1c8b4cd438c7458040f38fc1313f8",
+  "mods/cameo/ContentPacks/RedAlert/Soviets/content.yaml": "e18f505a0a9b07fc77dc5f621e100c1d8d809edfcbd4fe95c113d659d4bfeaf4",
+  "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml": "b1c532ab98016d0fe734624fbed9f40bbc2f8e7c872eb093073e8c546bbac998",
+  "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml": "0de27088ea50b083ebf1850b71ecc9d6406049214915751a66dcfbbe1a6e7f52",
+  "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml": "5fa22b70d16595f86b55634c763c6ab748677d546c4f673c4c870c330de48386",
+  "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml": "93e5934e63ae428baa847b625a8051e048c760e69d8786355beeccfa5fcbb153",
+  "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/promotions.yaml": "3ff2f33b47b4f98967b4e9967a728d1ed4c90ad7adcdd915124eded26801c403",
+  "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/templates.yaml": "9e744a2f3874a03bb3bee5123ee9c60910c4bcf1b3725bf2db1fc17f42517505",
+  "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml": "dacdbdf88d73ad883801d5cc8fcd481f5fe2e6a3c48b9eca5f26fc49a4a96a47",
+  "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml": "49c0197b6053549127d194fb3c2e937bc1930b2a36cf4dc9f66c47a7f09ce898",
+  "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml": "925e3bd37de4286cc886d711edd7861e7dcd35f98e6cf5ab341b24f6103777ba",
+  "mods/cameo/ContentPacks/RedAlert2/Allies/content.yaml": "f04533d68e95a5517291b8613c1cca50e1f9ccaa6b2a584484a11b7d934423bc",
+  "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/aircraft.yaml": "59ffb1967cae68298c0076d545839f140dd45852032b33afb9896eb2a9a8274e",
+  "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml": "c589c330a9b80d5cb1296e2937fcc3ce42c170ddb25f7643f141a6595902749e",
+  "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/defenses.yaml": "e2871f88f07b8a75eabcca9b7abe123b30872521d24d7d7c120033924308e2d0",
+  "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/infantry.yaml": "7923782968ebcecd1cfe1c007de2818622bd167c790fdaeb5cbb327aec255524",
+  "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/naval.yaml": "a97dcaad70ecf7fd249b8a2d06b4863aedc8681f0c1c45b61b67b3c6e8552761",
+  "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/templates.yaml": "390f980a0845dad992fef91402afd9f578030f399dce496e9dbd680afb8c46f1",
+  "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/upgrades.yaml": "bd63d3f22e6b3cddbba0249a9cf9d7d2d90885296c9af231942291206c691beb",
+  "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml": "254a1f741207e3708d5d6a12b11f8777745651fe4d85af13c7b75429cccf2ab0",
+  "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml": "a49815d1d51dcaf6bd2c6d251031f790998620f2a2e818b0c4f33aa910ca2519",
+  "mods/cameo/ContentPacks/RedAlert2/Shared/content.yaml": "cb2ff70f97d68349a713c5f4e920adf729d0c68a72565cfa1184b1eeada2fd72",
+  "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/ai.yaml": "13bad4fd701b126572ffa9e7b4078a9143dd662ce1681994c21239dca971ec76",
+  "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/faction.yaml": "feec4c0d772d8d898629d88edf3d0954988ea53f05bf2e67305690b6804a4174",
+  "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml": "705f5c78a86e284230bb8369253514a9bc0a28e1ed7190cbc6b0d883fadb3f57",
+  "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/templates.yaml": "04d0b006591812c413e136bc50788381dc0c1b17e900c0007551db94c0aca7f2",
+  "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/upgrades.yaml": "c4a0ac70ab300450a26ca18e6833c959b7043ea1d8d98ecea19585bc97c2e69b",
+  "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml": "635e0de9891a9948f23a07606bba650bc275ad4c9ad29007c6e51e520f69d297",
+  "mods/cameo/ContentPacks/RedAlert2/Soviets/content.yaml": "5e279af224f7aedbcb9a0ec0bbd36988ce41676a33d635ab1f2574228f8394d0",
+  "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml": "73bb6479bbecae540bcee92607751710c0d351fd2a4beab7f9fd82d4bd75ebce",
+  "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml": "cd3be2bfcb3c7ebf4025fee133e61e16ae413a17d1b6ce519c7d3fc93e352ebb",
+  "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml": "07dae4f5bd6d1b890879b0a0c31623c15b52d081e4435b48c20a36f191707e75",
+  "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml": "26c1c27b56594abba300820d131fbc6547c94ec6de2f76077218c3f29195edc3",
+  "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/naval.yaml": "48ec14b45c9b3933faa897f32fcd47ddd256d46076b5750367c027939c4e8d4a",
+  "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/templates.yaml": "7958594498c56c3069b2c4f4183ada1652bdcc54fa6a501784e7cdfa17a308d8",
+  "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/upgrades.yaml": "4523fc4d7ca50a7126a194c219a58041d13967898fd03bf5e51ddc2a6e4990f6",
+  "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml": "e3825558e9ca111e7d2d7341a40360ccf20472e9799bdadf20f21507e0917051",
+  "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml": "e4cc96fb7188d6cd23dae5b25855b848bd436d7d21b699f613d3317139ed49ed",
+  "mods/cameo/ContentPacks/RedAlert2/Yuri/content.yaml": "a81f2f1415fb75c1fd76c564a5dcb83be0c7295360d86493a527d0ea3e818df9",
+  "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml": "ef61da76e6bf30e73e7e3868775d9fd2c792772fc768fa08bc4a40f1d6b4deb2",
+  "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/buildings.yaml": "c220edc61f7e92f0e994229ebbb3a366feb08a344aa5bceae83e3e351f4c7e0b",
+  "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml": "e78fe182de9c8f7117bb34970c6fe88dc3d5b8dee6cf16a8300973b2619f23d6",
+  "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml": "d93ecc7cb7796d24f11a5759c6d4215989b6e0b6ff2906700ff4f4de9e1edce3",
+  "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/naval.yaml": "cf97f3122567389e2a6343e6786ecd792ec741bf686336b8b47c2ff3acc30bb5",
+  "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/templates.yaml": "74197e306d822c933b9489ad12b311d8719b4efc6c1b957f7fa494a713b78300",
+  "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/upgrades.yaml": "6e33bfe32426fd9581988f01909efe4c63bd6653d8499afaddcf4ba2a24c81e4",
+  "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml": "6e0fad20b4b36140a97c007d01192ea829ce8f0509a7e1c4f53da817c5c6333d",
+  "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml": "aafc71691ac9f4ae4b492f87de46757b02796efbf54e222e025ac7c4f2f88c65",
+  "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/content.yaml": "f6e865aec0cc5cb4a4b9a5f1e52eddf37a48586642ba89691ea30f1c3fe8567d",
+  "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/ai.yaml": "5393b3b31902c9bc9e04dfc0efe65393cf167df09287d7f8dc11e852bd49c70e",
+  "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml": "3ebcfd67672b5c341b398fad17d483f781cef6619b97591b0c4f53d8595a81f2",
+  "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml": "85ac0eb63694d932bca474522a491f2828c4735156725f713e7236f7dba1dd7b",
+  "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/faction.yaml": "c2dbd5bf0cb73563a049bed0534c31585da669759a8676f0b7010b09afe628d3",
+  "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml": "19e732a21ff289d76a75cdf5f6aa132c25d149c19c30f6df604e9198f0b0067c",
+  "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml": "c6fcee20bcc5b65cf2534c34489ca2db29d07f7380e99c0dc7aa5b018c0097be",
+  "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/promotions.yaml": "5e6bec337f9914e39a187e9abdf7fcf4a63ef39859e201c522cadf2c3eacbca0",
+  "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/upgrades.yaml": "888f1a3cbfa5f4216be827e01a5d6631bb371da91608f2f0990afd741a86709a",
+  "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml": "c04c693a900718d882e62d743db9ac6cb28bb038bec3e337a21f9602f396c5a5",
+  "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml": "ae6a112724e9513d97d384e71a71fbae5b7265cef8c5ec9eff8bebeada7aca45",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/content.yaml": "60e1e8b09a8d41db0cbda8e8c70d0c5a5011f2c855e5f079811a9c9e0fe7e7ec",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/ai.yaml": "c2ebda6657e1aa24b526f27c9913311d652845ed1ca8acfed4d5d734f3dc8e1f",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml": "b4d2a08413dff0c7c0e5662c0ac0a30bd3dc0e79ce7ec17708d9a6b56d926667",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml": "c7f3d5272eec2268a24b3300f4fee992d91852bcba0e0b5cfe1125966dee4091",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/faction.yaml": "3ec9ff8a5b185a79a7791e8e061aa80aba52e90384f61b83c0f42cad173cd815",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/infantry.yaml": "0d596ea7b4f59c01e25cf85b3de2eda71e35b285f82b10358794ab1a75c7794f",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/naval.yaml": "d18797719fbe0aecb4b56f1f237c43388119c714e5d384e9ecbf4c20b97e0cd1",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/promotions.yaml": "646e45961dbbb77d2e59c8c268f933a56a93b406836a05ea82620edae96165dc",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/upgrades.yaml": "31b24a1647b30248b5986d304bf3b7dd816cf4c68d7819a18be15b4676c3f1bd",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml": "a5edfad36f75ce066ff33890ec63d632e20d44e3c4935078feb39a4774916ab4",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml": "f2aea179261937fbe9a23542722950a172b0b90a4bdb6c41ede0c1e261411181",
+  "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/content.yaml": "1eb2c191926fedbfb3db7318f52b27d79a5b0c1a065deb08aacbb280064ad6b1",
+  "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/ai.yaml": "a41bec845b00101cc8209376fcc0800eb45cba88fc9afa3cb4f2fd8bf88a6a9a",
+  "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/aircraft.yaml": "9843d31c7ff7e6cb7c58b6f12b7ae3f3f9c4fe5bfc67b06b958939ea4751276e",
+  "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/buildings.yaml": "7ac743ca0883664a500ce11a9e3cd43df6c9e92794e764e8d85768d607f3cd87",
+  "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/faction.yaml": "ff6457b100268609c0d9d8f27edcc2355b58e43cb940798f54e71431fed298ab",
+  "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml": "1aaa4370760de248604ea06c6321201072e492a7d5a77268ce7492086f817fb5",
+  "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/naval.yaml": "16baf3a4c8c89af42e7b490b15344f46af738cad1705eb35c09ad9ccef32dd24",
+  "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/promotions.yaml": "9f1dbf4ab35fea4f2412e16ec2c4b6ea16f7340174626f51a6d1e85faf457e2d",
+  "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/upgrades.yaml": "d00ebbe939de80a85b8b3ec3e396131669fd05b6e95883d361e04b9a974aa01e",
+  "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml": "48fe0609ff15c3e3a88873c1def093ac64ed9a100560585b811df3b6aae1c7d1",
+  "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml": "0a21140382f727f3d310426839b14a55e30cd37b60c3966193a8186f81d7dc85",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/content.yaml": "ef03713990ea4a2cc4b3acfe080654200debcd6728b88bc7f22911a9baeaecfe",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/ai.yaml": "38a096307547a92100653654f132304ebe97ad24596d34ea61dc7f25d26ca237",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml": "14b0c083362748a75aef50b070c5500d45cff0644511e39351cf14e14ed43a60",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml": "506d2cc9d64bfa8b97ec8e83023e0ef7553e9305aeab7c1ea7b696b798f4554e",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/faction.yaml": "3635dab62e31bae49799cfe88362b2c0c7c04ff7eaf9a3d59fa344a1ea2db2b6",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml": "aabefd88465d08aa2368e6e03d1faf1c13d349464c246a42e79e25c555dda79d",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/naval.yaml": "0a47b3973c32855634103ddc2e498f7ba93f370a0639b3305bf881fc2f26cab8",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/promotions.yaml": "daa935d4e6a3b2f498cba1dd84442d8efb93587ffcdd2929aa2a761deabf10ea",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/upgrades.yaml": "ae16f0b3510ba5967051b663b0393c0821fa6494ac03ebfa2031d0590854caf8",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml": "a8c6cfbb11a9d22e1b300b0a14c98886b8e19c1c176d2d5ad80623b090fdadba",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml": "9700a7e91a1558cb3bd8b6acb50cdbf776aa37a031228ac5e0fadad81627e16b",
+  "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/content.yaml": "bceb534e1e2ea1c584a964463b1532cd10cbf9b6881128c4a6e5980c7351db47",
+  "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/ai.yaml": "a4f646b34f84e5af7e2b6b9c0b452a3f5e66746f1640a54dabe98bc28bbffd31",
+  "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml": "bae3a6f39d03963cf5d6d5d9f71622a50ddd9ff8930f5ecb82f8e922e166f269",
+  "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/buildings.yaml": "57c62a2f7653f3416873d1c2d24e7d88fbf90fc4a2438fe2f5dbdf09743a003b",
+  "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/faction.yaml": "c87e7f8c627f81306ec81b8d862b6bdde3f4b3c1fe634f314218895dec6011aa",
+  "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml": "bc35f7e69be82a64704410947109d860c7b098285dcae7c97de05d5cb77aa091",
+  "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/naval.yaml": "acf65ca5c6a665b4d4c7513b80a86c2b04d4c3c3b48fbdef66caed470d96420f",
+  "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/promotions.yaml": "1530db3a05d235a2551ac89e7e043ab5d85bc374941dc7dd263cb4306eb4c355",
+  "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/upgrades.yaml": "f9ac8fe0f2538667466c4a1231b621a09a9ac305445a8fccaf3fccbc11de55c4",
+  "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml": "5345ef86e7f172c9a707c9801e261f4c5089d123a05c9f189677be97d0881f59",
+  "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml": "d7faded3b6b7ee37d51c7f3d4ba691369fd84591fa7803f8840cd37c8c48f274",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Shared/content.yaml": "59866c25b7e4cbd44574f817c6d47d6f31085df96fa723ea1d7e925e7fcb8ee4",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Shared/yaml/ai.yaml": "8bb11ea523cb83862ce5d9e605c2241eba7a6a76bd3e542eb99fa0d88d89f5f2",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Shared/yaml/faction.yaml": "43c1bcdd1514551eda0f823a4745709bb29c4d02e60354f3aedd44f66430fadd",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Shared/yaml/templates.yaml": "c2213520800ea09efa6dfcaad1bb1125108c15884b494d7801ed78c0becc07c4",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/content.yaml": "36f6d28105cc31a8d3dd03762d1b3f2e898ef70f49d6f51f00c9931c0203112e",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/ai.yaml": "ea2d8b0ae4c6b0646e7e2d2fcc9332412a15a4bcc07670d40b4e08ea309c35ad",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/aircraft.yaml": "76f757e2465d9ed8a9e23ed70410e80df906d0ddbfe20ac0dcc8c587a46dbd2c",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml": "f2184d4bedae0c8fece321eb3b3ab5b9f56832be12d815f3215b20a0b04ff00d",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/faction.yaml": "c423cb5b4ff7683615556321ba60d3b184720d81f9486c6f7dd4cc349eed57c1",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml": "cfda0678588abba42e6d3d00c8d3955a4af673061ee0ea3266e8436894626c91",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/naval.yaml": "7252289da7b98cce05287808d6491228c9221456b357dc1dd8be9ecfd4f25673",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/promotions.yaml": "17964ada4fbbb356292e034327723c1c7b2c3c243be24da96dc8cf2ffa12183b",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/upgrades.yaml": "921c1619337f31d2008af896e0f5674211168f6024978db5391aea2cb90c3fde",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml": "77570fa55a40b42422c4146d87328964ab48aa5283d31d54044fb1ee1f467a63",
+  "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml": "94dddcd13e9f30b177f890ad7348213de88bdf194f35a93efaf21d6b7875ec9c",
+  "mods/cameo/ContentPacks/RedAlert2Mod/TKM/content.yaml": "c53de9320b7b1e4499106ebe70cea7536738cbd3510741a9a5e4c0b3efb36cc5",
+  "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/ai.yaml": "42453daa7e7759832c43c8ca0886564a1cf479b742dbdf897c30aa6baf724c1d",
+  "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml": "ff7b8625529a62ee6a16145a14aa3370fb5419e12758b1dcde7a23062be766fc",
+  "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml": "1e3824065d94be1c25a7e2861d84563ea99dded94d6185655f4d85820cb08cc8",
+  "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml": "0db5c92b97d8ebffed197e348c14ad1ab211659e2553f0756fd909940f85b4f0",
+  "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/faction.yaml": "a38f61be5a61bd41cdc822b58e8082b60db4389542c2e3ebf30fc383132e99cd",
+  "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/husks.yaml": "e0c7a40bd6764e1e56d736f230c67fc1d1a65ac7259493a252dfe210f628e629",
+  "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml": "21b2497bf125e4116c010a6f267c8d99cae09e566ce91e9603e433e28eca608c",
+  "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/promotions.yaml": "990674f205a00ff64077611ce19918f5da98a334837e57397056c70f962ded9b",
+  "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/templates.yaml": "27d2eff44a0b976b8166047fb8846fb9a502ff02fdb36ddee4dc3cdf41020d35",
+  "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/upgrades.yaml": "5da83d5b1779d53934fb584cf496113287b3a76d91c86e8b9307342f8115b6b5",
+  "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml": "bda2c8d55f87bd00f89430ffb02099e482047f8a8b6bde9ee83c5a16114c2abb",
+  "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml": "d73e8a5241d1054eecb9a2d05e18426fee20a334fbb30f92efc1761f76eaa8c4",
+  "mods/cameo/ContentPacks/StarCraft/Protoss/content.yaml": "f20b169280c66a9f941ff076a98260d309a18b49a135e4064e030c69e1656a7a",
+  "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml": "8184f3e12e4bcb4e58d89d77ec7d16affc7fca800a0950ec1d5caefe2fc429e3",
+  "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml": "f9ec295d45daf4c289e57a0fb22c19964252de6bd5bc3a63b9c6f6832a375064",
+  "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/defenses.yaml": "b48ad189bb0e2eaabb42c7c308b6f65dc75198659e807db671edaa153749f161",
+  "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml": "e16bb01f8af3433acafc29620d9d06891dc951db64e32eac148696ad2e7d6162",
+  "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/promotions.yaml": "f55571ee6e25e526a112705acc24e9f7a0bc32e87f119d9e0354da771be61fa4",
+  "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/templates.yaml": "8ec5c29833d4662dd100ca160332c4b15be132534a78f37bf233cee1c348986c",
+  "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/upgrades.yaml": "f091a421ba0b29bb1a84fcba33d0917ed531cad4d53a8f4954d351fba981f8e4",
+  "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml": "4fbef16d62cd577532deb215ad5dce26c4648a6a6a14a272d7525998f1f70b81",
+  "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml": "f1b4138798dffd55e0fb265cbcd18ba82814fd41e0f4808f5dc1376241451994",
+  "mods/cameo/ContentPacks/StarCraft/Terran/content.yaml": "711460786ecff567fd7e403059e74ce754a1404941ad3a6c72d76db52eb15efb",
+  "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml": "231a8997fe4005ddc31f92c35f06b0aeb7041d8fea53c4c3e03b15997d43b627",
+  "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml": "2b1df248288ce329477049aec1680e2cfb9db9b04bf5dadad0025266ab1c1395",
+  "mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml": "9dc592ac7a2235d1ec9f1e5eabd586f268a3f9aa04c719f99b3a22198d595326",
+  "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml": "4f20eddde6ff4899df791da45a9067dc4b9c4e19f1812dd5e2f9b7ed57986e31",
+  "mods/cameo/ContentPacks/StarCraft/Terran/yaml/promotions.yaml": "88d598fc92d1118ba0cb41919824e94425665fde80b52f85415e86d12f574283",
+  "mods/cameo/ContentPacks/StarCraft/Terran/yaml/templates.yaml": "177f991fe45f93570fec5b438bde3f354225d08298b2b8620429c5485b4edead",
+  "mods/cameo/ContentPacks/StarCraft/Terran/yaml/upgrades.yaml": "c05393f2ebe0273ac39813cd9447a10cf2c219300c8bcdafacdee1ac66207cec",
+  "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml": "953fc2332f8a325f902921d4d285323e8a1fbebdb8e177db771ec1d587111448",
+  "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml": "fabcbdb27fdea5c84cb2a945276d2380dbf5625d8f62b965cc5e0296a840840b",
+  "mods/cameo/ContentPacks/StarCraft/Zerg/content.yaml": "890eb2b48ae9c6e831ac264ac5d050b8c1f00f7ffcee2a0764f99e58bb03481c",
+  "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml": "c45ad7b93e993bcdbe1e6059ea0ce046c6d56b9afe9718506cbfeea2afc4da8d",
+  "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml": "570c73c0d0509bcb4894f72f884c559704ed42c403e3f9c924d518d6ffc711cf",
+  "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/defenses.yaml": "b762f24d6507fee37acfb8290fde3e980dd41b0d4780ba8b9d583c203b9d2f3e",
+  "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml": "dcbb6771326dca20466ff5b250b49c0b621f9b5086de6a924b2ddbe33aec045f",
+  "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/promotions.yaml": "6c9154267c25d4698de5de719820f3ad688a769f96f95e9391ee35941e95ac0d",
+  "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/templates.yaml": "2900fb7eb1c478e2f75b1e1937333cded2b231caad74e848daf129dd5ddba9d4",
+  "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/upgrades.yaml": "dc746995cba4d8eb7c9ee8f9640b4005db1c7bf11f369abfd91325203ed09a5b",
+  "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml": "60468e4765fbcb057344bd99ebb5c91ebfe4934d7ec53b7862d8dd6a8961a2b9",
+  "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml": "d52068afb7ed3463c5c204283ee938ba1b8298aad7287cc27433ce3ba596674a",
+  "mods/cameo/ContentPacks/StarCraft/content.yaml": "5a9f8abb90e807845b4a915785c11e9051fd55cec4888fca0511a124bf8b938d",
+  "mods/cameo/ContentPacks/StarCraft/yaml/ai.yaml": "ecd607e0f480784a690661b167a666cf51aeca7bf040bdc72065ad3f3ed91304",
+  "mods/cameo/ContentPacks/TiberianDawn/GDI/content.yaml": "8283b390ed02013f2329a4822772ac1b6fad227aaaec86dd797b60b8a1db127e",
+  "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/ai.yaml": "b6557d1b51b8981c9a4200263b0ff0e9446d3fe002fa0838e934c84a4e5b9589",
+  "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml": "7784a8178d8f322f6de373cf57f5593fdac7944c0292394e65e0f8e8287687bf",
+  "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/buildings.yaml": "a70bcb220df61e967ca62674732ee43fae1169dfaa350800d982c4f598b31c98",
+  "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/faction.yaml": "167e238d152b91be7881d3906f0b8551021adcbf0acd003eeab13749aab06163",
+  "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml": "13dd4c6e01dd20ac47c501032ffc0d5eed7220c0fe2a99e47866149d608fdce8",
+  "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml": "e33c50855bb2306e7f87f1186b82c8e11ba3db7e0af1f8df2552dab4276e558d",
+  "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/promotions.yaml": "5000c1f8429afa148f4d67444bf27c25f64a6d6a10590ac17cdab2947d693239",
+  "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/upgrades.yaml": "37fc0dee2234e11307d744494a9c520d7d04db4d72d50e5e2bdb11ec9b3cebf8",
+  "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml": "fd7e0d58679f7c623fd4d7f6dbf169e1bee173104cfe2dd31a00a567b725611c",
+  "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml": "8ed12f122a98734e4cd8f74addbf555bf5d563aaa310c2cefb703cbed1bd55da",
+  "mods/cameo/ContentPacks/TiberianDawn/Nod/content.yaml": "4d202d184059c43d923064125494b099bd8fbe1f3568d68768871db2e9f3287b",
+  "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/ai.yaml": "031573eae50d26659f8d975248ffd18e881a9c8a074085529a11467ba15d947f",
+  "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/aircraft.yaml": "a0586e246df96b3d4b6c070fa8cf2dabe157d4645097fbd9d23fa157f4cc4e0b",
+  "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml": "b17139b2bd80220ebb22889d6ddbdb496968dc14cd85025b20041c7e6cb4cb7d",
+  "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/faction.yaml": "4717a5faadfb014ad0b9687bd57d92f2f949b33b833794694eb298b70ef48c86",
+  "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml": "a63626ea567e9489254366e9242cd205ba63335f4af26599e0fe469926e428f4",
+  "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml": "014eb79b2a87ddc8f9c7a5cc91b2a2eb3a2df9cfc48fb8ccffa6d1ba53e34155",
+  "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/promotions.yaml": "d27b83a2f69b3e3ad74316a7df2aaa81e0280c601d0cfbe05fc90f5d54736efd",
+  "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/upgrades.yaml": "450897efcfbb6259dce20882a7d6c8a8bba42105df96e4a411eebffb36b02761",
+  "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml": "9d0b0d712244439068feb54c2e30e8b8d6b4bb4c954cd0840bad3686b9890459",
+  "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml": "118dad0e130781587260219b657bc3697e9fafb07f3d768fe39cfb766b0138c2",
+  "mods/cameo/ContentPacks/TiberianDawn/Shared/content.yaml": "a2d20b743e8795ae28ea400be84d8a0c8b033280058cd93402b6baa476b4928a",
+  "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/ai.yaml": "8bf9215e348337a5282fa2f4afe8b3abe0e2ca07489da5ecc3169956cfe7075e",
+  "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/aircraft.yaml": "e0f726b663596713fc83c5f2a2a5485d06dcdabd6a100df428dbf5843e37fba1",
+  "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml": "7e168713a6cb425d6d450decf80ab0c08e506e37bad441c686260d3eafe04ae6",
+  "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/faction.yaml": "454644a8dd7ae308e9cf485ecb708a0e75b7fb8a8e9269a71b69ceb00c6c78b4",
+  "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/infantry.yaml": "764940e5f603be34f095362ed606df928aa8ab8abd19a32b771011dcd02f507b",
+  "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/templates.yaml": "08aefeaab86d9f863eea059bc2832eac9a8e438f2346de6d48d65598c98161d4",
+  "mods/cameo/ContentPacks/TiberianSun/CABAL/content.yaml": "1e8f562c5f54507ab1a94f455a6749c611b14f5280a32601179cf02007aacb5e",
+  "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/ai.yaml": "f758c8c274c7dd17ee7b0cb01af4055dcdf95484e74f9e4bb3a2a6fa39f04402",
+  "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml": "4ebe1d1e0b94c50e439ab5096c89e9df159e09f1f25ead0304c8894f64358ad7",
+  "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/buildings.yaml": "4057eec5b6f4a7de2b1b75b391fb29c511c95520182bf2f655cc3efb863b9c0d",
+  "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml": "382fd2454e2e92a6871bd2f6cd80803d80623d72b62a85f56edb1f628418370e",
+  "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/husks.yaml": "c8e212ed2c28a5ec5287aabcf264f6bc389ebcf40b1dfc8352d6fcafbd484121",
+  "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml": "f5c7a64951af826454cc95abbf3b3f97c07d6b5394ce1d5ba2b228ba53b23ca5",
+  "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml": "bdf6ba4f5134656e7a6960d85941b536934c9fd1f2472c0006abf48b70c5fe59",
+  "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/promotions.yaml": "8d7bde1bb2f1cbfa8645c2aa9d01c3b3a643b7b8a9cc339f76980740d914f190",
+  "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/templates.yaml": "63bc88de69c521c5765214f37c341be100ab252713fc9a55d8bf92fe291b81b6",
+  "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/upgrades.yaml": "17fc5427d9276912b276bb62051785960dcc99a9635ed14d99c6e2947733f98a",
+  "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml": "39a2bb7fe988a25f2e704c9081feefb4800b3649a161aa1604fed56f9b916dc6",
+  "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml": "6c5d128a79a4a212b4c833e7f01fca4a7cb363a77e5edbbd3bbca5b3c9ed414d",
+  "mods/cameo/ContentPacks/TiberianSun/Forgotten/content.yaml": "d5122690e0a368163ec101c5ed7200e1fcbb311985fb67823dc492a3aa7963dc",
+  "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/ai.yaml": "ce49c7ef86bcc02c4adeed2071bc40c0819fd7e4235d428cf90223959c420454",
+  "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/aircraft.yaml": "5522138a4d5fba0aad16d511334b186eb21977829e095c1961a9735ca97f13b4",
+  "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/buildings.yaml": "3281f8a841b474c36c46af1d3b218a09c14ff5a6a16219864b060617fa7a07e0",
+  "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/defenses.yaml": "638223ba29bce80d53525ca53059e4a476516fc4081d796d29832693cfd22a9b",
+  "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/husks.yaml": "df0ef36429f85d31e4b5b8d63c5eb548ed4f58bd6cdef7092b05ac088e024682",
+  "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml": "5939c5c008a019698e33921f9ee19d4893e8a5109a3f624c7736935a6a1e4c44",
+  "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/misc.yaml": "25d5f87666a0db0da415e2e87cbd99f3a35b4ec13c01f231d835a87f3912902e",
+  "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/naval.yaml": "8b3818aaf87365b45546292b70ecebfaced187a586791fe1691270b39f1c1c53",
+  "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/promotions.yaml": "c6a9364a336f1b20fc48e9a306961d94323db16b3793c31fd22d5bfa3da1a14a",
+  "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/templates.yaml": "80e6169128ec924b31586605ec2c66c516fdf07ee1097345d5a8af769917d8cd",
+  "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/upgrades.yaml": "593fa523a05d6076d3626703d1719ccd4db2f4520123bfd805ddc31b160d280c",
+  "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml": "0f32eac02b9742ef0bc444044ce70c2164adbba18b0f8594fabd81169d83bf62",
+  "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml": "3bd26ac2b80b882ee8c004703c755d31a4631bfafde538ef0af27af92b39e0b9",
+  "mods/cameo/ContentPacks/TiberianSun/GDI/content.yaml": "fc71953555613b092a650a36d1548404aae9f06cbabf2a17172de206179dd5d0",
+  "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/ai.yaml": "0736b3acc16f4a027a4142c02cf0a1e1f304a95c59139061c3f9108abe02a0fa",
+  "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml": "89c144adad923a143ab633e88f946b030b8fb65e2dd23901dc1643cb792b8260",
+  "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml": "7152c6e9ca5cc70a0ccf4e7991601626169b176450e9563a3600a4f1d3983988",
+  "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/defenses.yaml": "25f1494f39157d6d2589cd069b9baeb1ff96651c7322f022a5851573c9a065e8",
+  "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/husks.yaml": "b676c1cd508b41bd204005f1d8e10917e72e6c0a47b2a013bcdcfb933207ffc1",
+  "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml": "58572725081411cc75994f16fa802e98d9695b02844f211a94f5e2b8ccc8e56b",
+  "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/naval.yaml": "fcf4cdf209d8c249034f1ac47e766e5fe6675cd58b228ab920a05e319b65cfc4",
+  "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/promotions.yaml": "8e50f40dc134098fda05a859e93113ce71710c05f92c9487b31770bd8adf9175",
+  "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/templates.yaml": "224e7811a572ee35004fd926bbc2908d28210445d43cb53dacb8103f1986fb2d",
+  "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/upgrades.yaml": "072a1d792ab31a49e80ad59cd88f2fa45f0cf0ab0448b0927b72b50955dfd356",
+  "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml": "90a9e8a9bf252bc3ac6c6e24efd12c70d4bed5480543131137b9cfc59671c0e8",
+  "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml": "956fe0bbbc120a617d00f95ca1e52ad5ef4bc3c8e125d9fd853e43ea78d9e2a1",
+  "mods/cameo/ContentPacks/TiberianSun/Nod/content.yaml": "e674237b8e90865c8180375a072f051a3d6690a665ada5cb36906482336b1fa0",
+  "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/ai.yaml": "2cdb792d2d69db1b0c20bbb9c90fa532fe7ed85b612ea4bfd14493f5fe8a2f7a",
+  "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/aircraft.yaml": "5c33557498f42cda7a2a96976683dafafdf92a861fecb88c4b3af199fb3ba17e",
+  "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml": "3cb0a3362866cedead09b545ae07874eb63d1b1687c59dd50328cd6e074c04a7",
+  "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml": "b6c102150e6cd0a5e55a59774a9d7f9b061443842ddeb56181f31cc783e8e581",
+  "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/husks.yaml": "5ca61f224f9d8750efed48adbab0794848e3644e4cc2fd623606f98835bc048c",
+  "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml": "9b0c150471f38fb9f49c3cd274fb6209be1e0dce0ed65e7becdb38e8c60b0a47",
+  "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml": "8077041264eee19b9c432103e69b91bb76067ef9259c3c47f21ef7e751326169",
+  "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/templates.yaml": "19b01833c8c4277d306f85279b0865592967678c53e9ff541316250d1447c364",
+  "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/upgrades.yaml": "97ee387a0f378dfdd35320fa7741c0325a23bfad3306c1f294640d010a8171bf",
+  "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml": "fc3dc3e7cfbc29ae931a4b000d0e11741540f19e6a264e32efd584ae1efa5fa1",
+  "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml": "22002eff9676eafe3eac25eabdd0aad69bf7acd6047c700a35733bb1ca09a91e",
+  "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml": "27f18a842d2f79ff4f63166fcd5adcbf93607441b6c625704869ad7302b4ef30",
+  "mods/cameo/ContentPacks/TiberianSun/content.yaml": "ebf15476e248fbb1df7d86f43bc69425df2218848ac3976c92bd6290dadd94ca",
+  "mods/cameo/ContentPacks/TiberianSun/yaml/ai.yaml": "38317fb6b809538cb68a35162592539b8ccf153a25c1c583bd5cdc8d623d279a",
+  "mods/cameo/ContentPacks/Warcraft2/Humans/content.yaml": "fb72709372e9770efbc496d26b0c4f607ec5be1d29b89c1784f1758d4cdcb169",
+  "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/aircraft.yaml": "8d88a84d148e2e102ae64e24fee2138a3bb9f6f4adb636d874d4fe3d5108c324",
+  "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/buildings.yaml": "19d320ceb928f35c072b50551dc441997f70c3b13a5eb6e1bdd2b2ec6e212b09",
+  "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/defenses.yaml": "56e9bb59c4da3be6bb441cc6833fb53bfce89582af67eb523ef7567b578cd408",
+  "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml": "252b419bc6e9d4d83455e7b00422ce1f946721bd52ada518e5d9c7f7c51c79c6",
+  "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/templates.yaml": "40647c9c07310cd992abce4ebf0b7c7f1cf7cbd651dd4f5a54a586cfdbbdb470",
+  "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/upgrades.yaml": "c9d8245697a64269dfe0f3404bb541e5add471a830093e1ff24ccd76ccb6a63c",
+  "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml": "c527fe8208ebc46dc3b247bf37cf209033a40fde72239afc4e3812537c4c711e",
+  "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml": "ee140547ff328d08844c343e2f02ec7ea4de69c365debb69361ca4aad972f769",
+  "mods/cameo/ContentPacks/Warcraft2/Orcs/content.yaml": "3c40e20c5008ce3d458166feb76d9570f642cce603b9e92bcde580f5753c0bd8",
+  "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/aircraft.yaml": "6cbf272a8f6221687eebf07ff02440abe8092d57e26addd8f769846afe50bcf0",
+  "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/buildings.yaml": "7ca765581cde822fbc8a4927a5281d75098ded9c16e88d0d2df40c806e3f2839",
+  "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/defenses.yaml": "80e2a3493dd0ba550302506bfcf9c9ccb2e34cf2dd3a6db07983e5ed151f4193",
+  "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml": "394479cfb303bcec7a01e80f4c3a1a9d974eebb5b83d58ac05d2928143373a47",
+  "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/templates.yaml": "f79c43466b364549c07902d00c58e0bce11f55955a41c5260b7c72ce2c593563",
+  "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/upgrades.yaml": "bd4c9ae9f4f81ff7b99f840928ec92ecb42bdbc3c45ec4d4f5c3e899b885a83d",
+  "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/vehicles.yaml": "2918579d1da0ff0e9cf2483bc8ceac663d5f96a80d3f5fc3d92689a11e7e57a4",
+  "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml": "2b938570f8dfeb38058e8da8a8efa89928159c6c13777e3dbc2bd0fecb0d0b13",
+  "mods/cameo/ContentPacks/Warcraft2/content.yaml": "777d21c6cbcc92ea641632a22002678d7de08d41c02b0646a0c925a6788932d5",
+  "mods/cameo/ContentPacks/Warcraft2/yaml/ai.yaml": "64edee42e0594e2fa665ce11368d5be09754664f553de82dc431f8ecceb41ad6",
+  "mods/cameo/ai/ai.yaml": "aaa674f88bc192d78641249f6c2366b226cb76d2dcf1439962668f6baf91cc4a",
+  "mods/cameo/mod.yaml": "530cc09d18b0fa100f4af14dcfa45686005e03ee25cd6968d6c713f83e2ecfc2",
+  "mods/cameo/rules/civilian.yaml": "7634efbde70ba2c4751be3a88f60583b55309735f1504c5842091b9144a703ab",
+  "mods/cameo/rules/civilian_desert.yaml": "6ce8546263af6afd79d0d70307865e20e0dfdbca1fd8354df8058792eaa794cd",
+  "mods/cameo/rules/defaults.yaml": "51bcfb57ccfa5e8ef74bc7367061b04de4901f64c073eb7b34480e09406c4f63",
+  "mods/cameo/rules/husks.yaml": "a67d414972fa75b06e1a5b623118e5b79766f8eae31123f2ac1af3d7a3e01dd2",
+  "mods/cameo/rules/map_generators.yaml": "285f258c3ff530c97407b13b0573fa62d70871caedf0e759a37c96d308a975e6",
+  "mods/cameo/rules/misc.yaml": "29f35dcb7fc17f868783822a485943cce25a5abb26a776bc6f9c70ee767a7587",
+  "mods/cameo/rules/music.yaml": "ef81bdb783454c420b9bb8c9f8f41bf16ddc26a56c561d270d9ecb0f9d9b81d3",
+  "mods/cameo/rules/outpost2.yaml": "b902c0183ca6d92b22b70db898aee8fb08a2a2dac9d56f78593128fec0418f0e",
+  "mods/cameo/rules/palettes.yaml": "c5d0113ba7bfe04f7e170704b9626c691338d7993383d5143cee95313fea428b",
+  "mods/cameo/rules/player.yaml": "70784562d6bef1285511427797db093130fd47b6d7f0c78262874c9b8f818918",
+  "mods/cameo/rules/promotions.yaml": "d341d30c1b0d09a714cb10ac99dca4df0514c45aeb13a81e2fd7d2783cbea229",
+  "mods/cameo/rules/shared.yaml": "ca02ef20b19e82ca8305e35069655bab860387341c461dbdcea78eec9d71baf9",
+  "mods/cameo/rules/starcraft.yaml": "18d359062886b4cf85014700cc035811ca67b58f5517347cfecf71e91df87a1d",
+  "mods/cameo/rules/tech.yaml": "1a16721db342abdef9b49166882a244b047e791dd2fb8b033dc2d4c8cae27878",
+  "mods/cameo/rules/tiberiansun.yaml": "029b57d655df5fd2753af5f9b6c09bfa2df8df72171d638f4cdcf8d08a88ff18",
+  "mods/cameo/rules/trees.yaml": "d71ad7f61529ca2e313a04ff57544f0f2e5cc308733e56a173a4402b312e0d36",
+  "mods/cameo/rules/warcraft2.yaml": "3fc30a3a329ac9ea9d11ab62be1c14fd368222333f9d97ccf71164fbc81145ec",
+  "mods/cameo/rules/world.yaml": "fc047272793b67013cc93788700f541d1d6a912fafdaf975126682cdd3b02140",
+  "mods/cameo/weapons/d2k.yaml": "f13a2d90bc7db2c0d3a70a6c2c36d464ce4517f244d8408cafa28d1df7b040fd",
+  "mods/cameo/weapons/outpost2.yaml": "21baa3b43114b750a704b7fd0653ecfde5c68b94a4a0d0df393cbf48c09f993c",
+  "mods/cameo/weapons/redalert2mod.yaml": "b33eca43e087a5887dde5c8ba087334581762f0c9731e5be4e84bdb9838df516",
+  "mods/cameo/weapons/starcraft.yaml": "82da51496714a5ad6db5dfabbff6f51a7452a759726ecf744f691715d3068631",
+  "mods/cameo/weapons/tiberiandawn.yaml": "a2dcce0d07d14e2468a3f35ef836027db519df216a426bcb27e66475be9a39c0",
+  "mods/cameo/weapons/tiberiansun.yaml": "34018c8d63dc09494b235a3066b51507971e06edcfdcffaea61dbb0b5b152139",
+  "mods/cameo/weapons/warcraft2.yaml": "dbf2df4bde65f982cfea5fbd3bb3c589037ac7d5a767d627b85a09cf9ae0145b",
+  "mods/cameo/weapons/weapons.yaml": "ba07d64556359fdbdf5b3a74db714c9077aebce6bde90cd1c26051441ea3fd67",
+  "tools/audit/miniyaml.py": "152ff27f9c64a81bc1d388ba9468368377fd3e6d0329c7ffcda0900773442130",
+  "tools/balance/armament_roles.py": "ad24f41c9d6c6efca2c56b81ed36d7ed7776d4a7bbcd129495be5400ae34eeae",
+  "tools/balance/assign_references.py": "fad1f2ddd9f86ab6fb38c19c62df7317cfc22faca442ae2dab6b0a3f58a9fe2c",
+  "tools/balance/build_armament_pairing_report.py": "04de520d217cb381ae8460daa04c33ab3cdd0566071fb7e7164aacecd30d7721",
+  "tools/balance/class_membership.py": "16d81a1afc26ff55d639acfbc447351d9910e6a240958732a6a15542625db28d",
+  "tools/balance/explain_unit.py": "394b74b8b9632b1532038465fcfbd5c282bc0900fb39ac4978fe5e13c9aa86ff",
+  "tools/balance/faction_routes.py": "a5625b777419e2daf0fe6868e10c199ea6083fb37ae8d04a18cd04f51022ef8c",
+  "tools/balance/formula.py": "2b3e352a5ae69ef3749bf0ebb2ab287e9e763011572291ac7e29752c8c48833e",
+  "tools/balance/ini_cycle_evidence.py": "4092f6c1799e6ded57cd7a959ef787ab9c74f4122823de6fcd6855cc00a41839",
+  "tools/balance/ini_range_evidence.py": "f67c4aeea6c5ba6a6e6f789f06c1ae1652ac0af0965b6b4d6922c5a540b9165a",
+  "tools/balance/ini_weapon_selection.py": "246ff38a2dab96b9280fc8d938931199c8bc0f4237b8f9455202a4c6b45bc613",
+  "tools/balance/peer_base_state.py": "1a7007163d56b7baafda97b7c117544ffb0a0c6254040aa94f452f008996c604",
+  "tools/balance/peer_corpus.py": "e9b5ea8c41c875eab784d60ebd6d988027249c8a58a9e07b2f8f3c3ebc1895f7",
+  "tools/balance/peer_nominal_evidence.py": "40ac4db4af15e6f1c269fc148bfa78b890149bc910f96b9f9ec9074204390862",
+  "tools/balance/peer_range_evidence.py": "a62198f172dd42a8feb8764515d13594f2cc432c8f4d0832170519c0921e0344",
+  "tools/balance/reference_distribution.py": "c6e73773155969de14df651a924bc270237a656c2d7c5d0b4a61e0eda6157d54",
+  "tools/balance/reference_lineages.py": "4550425cd2e374599479f48d314f5a5a53f807a69b2cc9b435dd3ea2852581a0",
+  "tools/balance/synthesize_reference.py": "10f8b951f12e5626102a9bde2c52338c4c5606a98ef607d6179e03076f062078",
+  "tools/reference/extract_ini_elite_weapons.py": "9dfb4c3071bbbf03923a8d30f9e7cdf68106767b6584a1cb0d4377c5d596c1a4",
+  "tools/reference/extract_ini_projectile_roles.py": "80aebe840d1f8d6b90f22e65742e36b91b3e7e8dbdb5f4fbb2b63689cd099770",
+  "tools/reference/extract_ini_units.py": "9dd66691360d29b5fc68a3bccb44639e3fbbad6f63b68507a6dba36fa0192e5e"
  },
  "no_structured_reference": [
-  "asianalliance_alligator",
-  "asianalliance_asiancommando",
-  "asianalliance_asianflametank",
-  "asianalliance_asianflametrooper",
-  "asianalliance_asiansentryflamer",
-  "asianalliance_asiantankkiller",
-  "asianalliance_harbinger",
-  "asianalliance_heavyrailguntank",
-  "asianalliance_howitzer",
-  "asianalliance_lynxtank",
   "asianalliance_phoenix",
-  "asianalliance_plasmatrooper",
-  "asianalliance_pulverizer",
-  "asianalliance_quasar",
-  "asianalliance_railguntank",
-  "asianalliance_railtower",
-  "asianalliance_viper",
-  "cabal_artilleryspider",
-  "cabal_ascended",
   "cabal_coredefender",
   "cabal_cyborgcommando",
-  "cabal_cyborginfantry",
-  "cabal_cyborgreaper",
-  "cabal_devout",
-  "cabal_hackercyborg",
-  "cabal_mantis",
   "cabal_plasmaturret",
-  "cabal_radar_cruiser",
-  "cabal_ravager",
-  "cabal_rocketcyborg",
   "cabal_spidercnc4",
-  "forgotten_flametank",
   "forgotten_ghoststalker",
   "forgotten_mlrs",
-  "forgotten_mutant",
   "forgotten_rattytank",
-  "forgotten_scoopertank",
   "forgotten_tiberianfiend",
-  "futuretech_enforcer",
-  "futuretech_guardiantank",
-  "futuretech_gunstrider",
-  "futuretech_oriontank",
-  "futuretech_robottank",
-  "japan_ballistatower",
-  "japan_exorcist",
-  "japan_grenadebuggy",
-  "japan_hovercraftflametank",
-  "japan_igomediumtank",
-  "japan_japanesebomber",
-  "japan_japaneseflamethrower",
-  "japan_oitank",
-  "japan_rocketangel",
-  "japan_shogunexecutioner",
-  "japan_shrineminitank",
-  "japan_yamatobattleship",
-  "japan_zerofighter",
-  "latinsyndicate_burrito",
-  "latinsyndicate_carteltruck",
-  "latinsyndicate_latinapc",
-  "latinsyndicate_latinflametrooper",
-  "latinsyndicate_mig21",
-  "latinsyndicate_narco",
-  "latinsyndicate_raiderbuggy",
-  "latinsyndicate_rushertank",
-  "latinsyndicate_smokertank",
-  "latinsyndicate_tortugatank",
-  "naxis_oldtank",
-  "naxis_sturmtiger",
   "naxis_tiger",
   "ordos_deviatortank",
-  "ra1_soviets_nuclearv2launcher",
-  "ra2_allies_aegiscruiser",
-  "ra2_allies_battlefortress",
-  "ra2_allies_battlefortress_chrono",
   "ra2_allies_battlefortress_empty",
-  "ra2_allies_blackeagle",
-  "ra2_allies_dog",
-  "ra2_allies_gi",
-  "ra2_allies_grandcannon",
-  "ra2_allies_grizzlytank",
-  "ra2_allies_guardiangi",
-  "ra2_allies_harrier",
-  "ra2_allies_heavymiragetank",
-  "ra2_allies_ifv",
-  "ra2_allies_ifv_chrono",
-  "ra2_allies_ifv_hmg",
-  "ra2_allies_ifv_mg",
-  "ra2_allies_ifv_repair",
-  "ra2_allies_miragetank",
-  "ra2_allies_nighthawk",
-  "ra2_allies_patriotmissilesystem",
-  "ra2_allies_prismtank",
-  "ra2_allies_prismtower",
-  "ra2_allies_rocketeer",
-  "ra2_allies_seal",
-  "ra2_allies_sniper",
-  "ra2_allies_tankdestroyer",
-  "ra2_allies_tanyaii",
-  "ra2_soviets_apocalypsetank",
-  "ra2_soviets_boris",
-  "ra2_soviets_conscript",
-  "ra2_soviets_desolator",
-  "ra2_soviets_dog",
-  "ra2_soviets_flakcannon",
-  "ra2_soviets_flaktrack",
-  "ra2_soviets_flaktrooper",
-  "ra2_soviets_kirovairship",
-  "ra2_soviets_migbomber",
-  "ra2_soviets_rhinoheavytank",
-  "ra2_soviets_seascorpion",
   "ra2_soviets_sentrygun",
-  "ra2_soviets_terrordrone",
-  "ra2_soviets_teslacoil",
-  "ra2_soviets_teslatank",
-  "ra2_soviets_teslatrooper",
-  "ra2_soviets_warminer",
   "steelconsortium_cargoship",
   "steelconsortium_katytank",
-  "steelconsortium_megalodon",
-  "tkm_abrams",
-  "tkm_dronepodtruck",
-  "tkm_quadtruck",
-  "tkm_spetsnaz",
-  "tkm_stryker",
-  "tkm_trenchtank",
-  "tkm_trooper",
-  "ts_gdi_amphibiousapc",
-  "ts_gdi_carrier",
-  "ts_gdi_cruiser",
-  "ts_gdi_destroyer",
   "ts_gdi_mobileemp",
-  "ts_gdi_pitbull",
-  "ts_gdi_rpgtower",
-  "ts_gdi_samtower",
-  "ts_gdi_titanmkii",
-  "ts_gdi_vulcantower",
-  "ts_gdi_zonetrooper",
-  "ts_nod_cruiser",
-  "ts_nod_elitecadre",
-  "ts_nod_shadowteam",
-  "ts_nod_submarine",
-  "yuri_cosmonaut",
-  "yuri_gatlingtank",
-  "yuri_magnetron",
-  "yuri_slaveminer"
+  "ts_nod_shadowteam"
  ],
  "role_vocabulary": [
   "ground",
@@ -32284,15 +32625,15 @@
   "both",
   "special"
  ],
- "schema": 1,
+ "schema": 2,
  "scope": "Per-armament reference pairing inside the existing actor assignment. No reference is re-scored and no balance number is written.",
  "stats": {
   "abstained_structureless": 157,
   "actors": 314,
   "actors_tier_expanded": 174,
   "actors_tier_original": 140,
-  "actors_with_an_uncovered_role": 7,
-  "actors_with_no_structured_reference_at_all": 145,
+  "actors_with_an_uncovered_armament": 142,
+  "actors_with_no_structured_reference_at_all": 17,
   "cameo_armaments_without_a_reference": 423,
   "contaminated_rows": 39,
   "exact_pairs": 215,
@@ -32303,34 +32644,1011 @@
   "pairs_role_both": 108,
   "pairs_role_ground": 181,
   "pairs_via_both_fallback": 93,
-  "uncovered_despite_a_structured_reference_air": 3,
-  "uncovered_despite_a_structured_reference_both": 4,
+  "uncovered_despite_a_structured_reference_air": 25,
+  "uncovered_despite_a_structured_reference_both": 47,
+  "uncovered_despite_a_structured_reference_ground": 104,
+  "uncovered_despite_a_structured_reference_special": 2,
   "unreferenced_role_air": 64,
   "unreferenced_role_both": 100,
   "unreferenced_role_ground": 255,
   "unreferenced_role_special": 4
  },
- "uncovered_roles": {
+ "uncovered_armaments": {
+  "asianalliance_alligator": [
+   {
+    "role": "ground",
+    "weapon": "AsianCrocBite"
+   }
+  ],
+  "asianalliance_asiancommando": [
+   {
+    "role": "both",
+    "weapon": "AsianSniper"
+   },
+   {
+    "role": "both",
+    "weapon": "AsianSniperLockdown"
+   }
+  ],
+  "asianalliance_asianflametank": [
+   {
+    "role": "ground",
+    "weapon": "AsianFlamerTank"
+   }
+  ],
+  "asianalliance_asianflametrooper": [
+   {
+    "role": "ground",
+    "weapon": "AsianFlamerTroop"
+   }
+  ],
+  "asianalliance_asiansentryflamer": [
+   {
+    "role": "ground",
+    "weapon": "AsianFlamerTurret"
+   }
+  ],
+  "asianalliance_asiantankkiller": [
+   {
+    "role": "both",
+    "weapon": "AsianTankKillerRocket"
+   }
+  ],
+  "asianalliance_harbinger": [
+   {
+    "role": "both",
+    "weapon": "AsianHarbingerPlasma"
+   }
+  ],
+  "asianalliance_heavyrailguntank": [
+   {
+    "role": "ground",
+    "weapon": "AsianRailTank2"
+   }
+  ],
+  "asianalliance_howitzer": [
+   {
+    "role": "ground",
+    "weapon": "AsianHowitzerCannon"
+   }
+  ],
+  "asianalliance_lynxtank": [
+   {
+    "role": "ground",
+    "weapon": "AsianLynxTankCannon"
+   }
+  ],
+  "asianalliance_plasmatrooper": [
+   {
+    "role": "ground",
+    "weapon": "AsianSinglePlasma"
+   }
+  ],
+  "asianalliance_pulverizer": [
+   {
+    "role": "both",
+    "weapon": "AsianPulverizerGatling"
+   }
+  ],
+  "asianalliance_quasar": [
+   {
+    "role": "ground",
+    "weapon": "AsianQuasarAG"
+   },
+   {
+    "role": "air",
+    "weapon": "AsianQuasar_AA"
+   }
+  ],
+  "asianalliance_railguntank": [
+   {
+    "role": "ground",
+    "weapon": "AsianRailTank"
+   }
+  ],
+  "asianalliance_railtower": [
+   {
+    "role": "ground",
+    "weapon": "AsianRailgun"
+   }
+  ],
+  "asianalliance_viper": [
+   {
+    "role": "ground",
+    "weapon": "AsianChemical"
+   }
+  ],
   "atreides_ornithopter": [
-   "both"
+   {
+    "role": "ground",
+    "weapon": "OrniGun"
+   },
+   {
+    "role": "both",
+    "weapon": "OrniMissile"
+   }
+  ],
+  "cabal_artilleryspider": [
+   {
+    "role": "ground",
+    "weapon": "CabalArtilleryWalkerShell"
+   }
+  ],
+  "cabal_ascended": [
+   {
+    "role": "both",
+    "weapon": "CabalAscendedRockets"
+   }
+  ],
+  "cabal_cyborginfantry": [
+   {
+    "role": "both",
+    "weapon": "CabalCyborgChaingun"
+   }
+  ],
+  "cabal_cyborgreaper": [
+   {
+    "role": "ground",
+    "weapon": "CabalReaperMissiles"
+   },
+   {
+    "role": "air",
+    "weapon": "CabalReaperMissiles_AA"
+   }
+  ],
+  "cabal_devout": [
+   {
+    "role": "both",
+    "weapon": "TSDevoutChainguns"
+   }
+  ],
+  "cabal_hackercyborg": [
+   {
+    "role": "ground",
+    "weapon": "TSCABALCharge_EMP"
+   }
+  ],
+  "cabal_mantis": [
+   {
+    "role": "both",
+    "weapon": "CabalMantisGun"
+   }
+  ],
+  "cabal_radar_cruiser": [
+   {
+    "role": "ground",
+    "weapon": "TSCABALCharge_EMP"
+   }
+  ],
+  "cabal_ravager": [
+   {
+    "role": "ground",
+    "weapon": "CabalRavagerPlasma"
+   }
+  ],
+  "cabal_rocketcyborg": [
+   {
+    "role": "both",
+    "weapon": "CabalRocketCyborgRockets"
+   }
+  ],
+  "forgotten_flametank": [
+   {
+    "role": "ground",
+    "weapon": "MutHFlamer"
+   }
+  ],
+  "forgotten_mutant": [
+   {
+    "role": "ground",
+    "weapon": "forgotten_mutant_dualwield"
+   }
+  ],
+  "forgotten_scoopertank": [
+   {
+    "role": "ground",
+    "weapon": "TSScoopDual"
+   }
+  ],
+  "futuretech_enforcer": [
+   {
+    "role": "ground",
+    "weapon": "FutureEnforcerShotgun"
+   }
+  ],
+  "futuretech_guardiantank": [
+   {
+    "role": "ground",
+    "weapon": "GuardianTankCannon"
+   }
+  ],
+  "futuretech_gunstrider": [
+   {
+    "role": "both",
+    "weapon": "FutureMechGatling"
+   }
+  ],
+  "futuretech_oriontank": [
+   {
+    "role": "ground",
+    "weapon": "OrionRailgun"
+   }
+  ],
+  "futuretech_robottank": [
+   {
+    "role": "ground",
+    "weapon": "RA2Robotmm"
+   }
+  ],
+  "japan_ballistatower": [
+   {
+    "role": "air",
+    "weapon": "BallistaSingleShotAir"
+   },
+   {
+    "role": "ground",
+    "weapon": "BallistaTowerMultiShot"
+   }
+  ],
+  "japan_exorcist": [
+   {
+    "role": "ground",
+    "weapon": "Hakureiring"
+   },
+   {
+    "role": "ground",
+    "weapon": "Hakureiring2"
+   }
+  ],
+  "japan_grenadebuggy": [
+   {
+    "role": "ground",
+    "weapon": "BuggyGrenade"
+   }
+  ],
+  "japan_hovercraftflametank": [
+   {
+    "role": "ground",
+    "weapon": "HeavyFlamer"
+   }
+  ],
+  "japan_igomediumtank": [
+   {
+    "role": "ground",
+    "weapon": "Type89Cannon"
+   }
+  ],
+  "japan_japanesebomber": [
+   {
+    "role": "ground",
+    "weapon": "JapaneseHeavyBomb"
+   },
+   {
+    "role": "both",
+    "weapon": "ZeroFighterChainGun"
+   }
+  ],
+  "japan_japaneseflamethrower": [
+   {
+    "role": "ground",
+    "weapon": "Flamer"
+   }
+  ],
+  "japan_oitank": [
+   {
+    "role": "ground",
+    "weapon": "OIBigCannon"
+   },
+   {
+    "role": "ground",
+    "weapon": "OIFlamer"
+   },
+   {
+    "role": "ground",
+    "weapon": "OISmallCannon"
+   }
+  ],
+  "japan_rocketangel": [
+   {
+    "role": "both",
+    "weapon": "RocketAngelRockets"
+   }
+  ],
+  "japan_shogunexecutioner": [
+   {
+    "role": "both",
+    "weapon": "ExecutionerSword"
+   }
+  ],
+  "japan_shrineminitank": [
+   {
+    "role": "ground",
+    "weapon": "ShrineTankCannon"
+   }
+  ],
+  "japan_yamatobattleship": [
+   {
+    "role": "ground",
+    "weapon": "YamatoCannon"
+   },
+   {
+    "role": "air",
+    "weapon": "YamatoFlak"
+   }
+  ],
+  "japan_zerofighter": [
+   {
+    "role": "both",
+    "weapon": "ZeroFighterArrows"
+   },
+   {
+    "role": "both",
+    "weapon": "ZeroFighterChainGun"
+   }
+  ],
+  "latinsyndicate_burrito": [
+   {
+    "role": "ground",
+    "weapon": "RA2RBurritoRocket"
+   }
+  ],
+  "latinsyndicate_carteltruck": [
+   {
+    "role": "ground",
+    "weapon": "RA2Narco60mm"
+   }
+  ],
+  "latinsyndicate_latinapc": [
+   {
+    "role": "ground",
+    "weapon": "RA2APCFlakCannon"
+   },
+   {
+    "role": "air",
+    "weapon": "RA2APCFlakCannonAA"
+   }
+  ],
+  "latinsyndicate_latinflametrooper": [
+   {
+    "role": "ground",
+    "weapon": "SyndicateFireballLauncher"
+   }
+  ],
+  "latinsyndicate_mig21": [
+   {
+    "role": "ground",
+    "weapon": "MigMissiles"
+   },
+   {
+    "role": "air",
+    "weapon": "MigMissiles_AA"
+   }
+  ],
+  "latinsyndicate_narco": [
+   {
+    "role": "ground",
+    "weapon": "NarcoGrenade"
+   },
+   {
+    "role": "both",
+    "weapon": "RA2NarcoPistol"
+   }
+  ],
+  "latinsyndicate_raiderbuggy": [
+   {
+    "role": "both",
+    "weapon": "LatinBuggyMG"
+   },
+   {
+    "role": "both",
+    "weapon": "LatinBuggyRocket"
+   }
+  ],
+  "latinsyndicate_rushertank": [
+   {
+    "role": "ground",
+    "weapon": "RA2Gren60mm"
+   }
+  ],
+  "latinsyndicate_smokertank": [
+   {
+    "role": "ground",
+    "weapon": "LatinSmokerCannon"
+   },
+   {
+    "role": "special",
+    "weapon": "RA2GrenadePack"
+   }
+  ],
+  "latinsyndicate_tortugatank": [
+   {
+    "role": "both",
+    "weapon": "LatinBuggyMG"
+   }
+  ],
+  "naxis_oldtank": [
+   {
+    "role": "ground",
+    "weapon": "NaxiAntiTankCannon"
+   }
+  ],
+  "naxis_sturmtiger": [
+   {
+    "role": "ground",
+    "weapon": "NaxSturmArty"
+   }
   ],
   "ra1_allies_alliedapc": [
-   "air"
+   {
+    "role": "air",
+    "weapon": "ra1_allies_alliedapc_gun_AA"
+   }
   ],
   "ra1_allies_sheridanassaulttank": [
-   "both"
+   {
+    "role": "both",
+    "weapon": "ra1_allies_sheridanassaulttank_chaingun"
+   },
+   {
+    "role": "both",
+    "weapon": "ra1_allies_sheridanassaulttank_missile"
+   }
+  ],
+  "ra1_soviets_heatraytank": [
+   {
+    "role": "ground",
+    "weapon": "ra1_soviets_heatraytank_heatray2"
+   },
+   {
+    "role": "ground",
+    "weapon": "ra1_soviets_heatraytank_heatray3"
+   },
+   {
+    "role": "ground",
+    "weapon": "ra1_soviets_heatraytank_heatray4"
+   }
+  ],
+  "ra1_soviets_kamovattackhelicopter": [
+   {
+    "role": "both",
+    "weapon": "ra1_soviets_kamovattackhelicopter_chaingun"
+   }
   ],
   "ra1_soviets_monstertank": [
-   "both"
+   {
+    "role": "both",
+    "weapon": "ra1_soviets_monstertank_missile"
+   }
+  ],
+  "ra1_soviets_nuclearv2launcher": [
+   {
+    "role": "ground",
+    "weapon": "ra1_soviets_nuclearv2launcher_scudnuke"
+   }
+  ],
+  "ra1_soviets_su57attackbomber": [
+   {
+    "role": "both",
+    "weapon": "ra1_soviets_su57attackbomber_chaingun"
+   }
+  ],
+  "ra2_allies_aegiscruiser": [
+   {
+    "role": "air",
+    "weapon": "RA2Medusa_AA"
+   }
+  ],
+  "ra2_allies_battlefortress": [
+   {
+    "role": "ground",
+    "weapon": "RA220mmrapid"
+   }
+  ],
+  "ra2_allies_battlefortress_chrono": [
+   {
+    "role": "ground",
+    "weapon": "RA220mmrapid"
+   }
+  ],
+  "ra2_allies_blackeagle": [
+   {
+    "role": "both",
+    "weapon": "BlackEagleMissiles"
+   }
+  ],
+  "ra2_allies_dog": [
+   {
+    "role": "ground",
+    "weapon": "ra2_allies_dog_bite"
+   }
+  ],
+  "ra2_allies_gi": [
+   {
+    "role": "both",
+    "weapon": "ra2_allies_gi_mg"
+   },
+   {
+    "role": "ground",
+    "weapon": "ra2_allies_gi_para"
+   }
+  ],
+  "ra2_allies_grandcannon": [
+   {
+    "role": "ground",
+    "weapon": "RA2GrandCannonWeapon"
+   }
+  ],
+  "ra2_allies_grizzlytank": [
+   {
+    "role": "ground",
+    "weapon": "RA2105mm"
+   }
+  ],
+  "ra2_allies_guardiangi": [
+   {
+    "role": "ground",
+    "weapon": "GuardianGIMG"
+   }
+  ],
+  "ra2_allies_harrier": [
+   {
+    "role": "both",
+    "weapon": "HarrierMissiles"
+   }
+  ],
+  "ra2_allies_heavymiragetank": [
+   {
+    "role": "ground",
+    "weapon": "RA2HeavyMirageGun"
+   }
+  ],
+  "ra2_allies_ifv": [
+   {
+    "role": "ground",
+    "weapon": "RA2HoverMissile"
+   },
+   {
+    "role": "air",
+    "weapon": "RA2HoverMissile_AA"
+   }
+  ],
+  "ra2_allies_ifv_chrono": [
+   {
+    "role": "ground",
+    "weapon": "RA2HoverMissile"
+   },
+   {
+    "role": "air",
+    "weapon": "RA2HoverMissile_AA"
+   }
+  ],
+  "ra2_allies_ifv_hmg": [
+   {
+    "role": "ground",
+    "weapon": "RA2HoverMissile"
+   },
+   {
+    "role": "air",
+    "weapon": "RA2HoverMissile_AA"
+   }
+  ],
+  "ra2_allies_ifv_mg": [
+   {
+    "role": "ground",
+    "weapon": "RA2HoverMissile"
+   },
+   {
+    "role": "air",
+    "weapon": "RA2HoverMissile_AA"
+   }
+  ],
+  "ra2_allies_ifv_repair": [
+   {
+    "role": "ground",
+    "weapon": "RA2HoverMissile"
+   },
+   {
+    "role": "air",
+    "weapon": "RA2HoverMissile_AA"
+   }
+  ],
+  "ra2_allies_miragetank": [
+   {
+    "role": "ground",
+    "weapon": "RA2MirageGun"
+   }
+  ],
+  "ra2_allies_nighthawk": [
+   {
+    "role": "both",
+    "weapon": "BlackHawkCannon"
+   }
+  ],
+  "ra2_allies_patriotmissilesystem": [
+   {
+    "role": "air",
+    "weapon": "RA2Patriot"
+   }
+  ],
+  "ra2_allies_prismtank": [
+   {
+    "role": "both",
+    "weapon": "RA2Comet"
+   }
+  ],
+  "ra2_allies_prismtower": [
+   {
+    "role": "both",
+    "weapon": "RA2Prism"
+   }
+  ],
+  "ra2_allies_rocketeer": [
+   {
+    "role": "both",
+    "weapon": "ra2roktgun"
+   }
+  ],
+  "ra2_allies_seal": [
+   {
+    "role": "ground",
+    "weapon": "RA2MP5"
+   }
+  ],
+  "ra2_allies_sniper": [
+   {
+    "role": "ground",
+    "weapon": "RA2AWP"
+   }
+  ],
+  "ra2_allies_tankdestroyer": [
+   {
+    "role": "ground",
+    "weapon": "RA2sabot"
+   }
+  ],
+  "ra2_allies_tanyaii": [
+   {
+    "role": "ground",
+    "weapon": "RA2DoublePistols"
+   }
+  ],
+  "ra2_soviets_apocalypsetank": [
+   {
+    "role": "ground",
+    "weapon": "RA2120xmm"
+   },
+   {
+    "role": "air",
+    "weapon": "RA2MammothTusk_AA"
+   }
+  ],
+  "ra2_soviets_boris": [
+   {
+    "role": "ground",
+    "weapon": "BorisAKM"
+   },
+   {
+    "role": "ground",
+    "weapon": "BorisAKM2"
+   }
+  ],
+  "ra2_soviets_conscript": [
+   {
+    "role": "both",
+    "weapon": "ra2_soviets_conscript_carbine"
+   }
+  ],
+  "ra2_soviets_desolator": [
+   {
+    "role": "ground",
+    "weapon": "RA2RadBeamWeapon"
+   }
+  ],
+  "ra2_soviets_dog": [
+   {
+    "role": "ground",
+    "weapon": "ra2_soviets_dog_bite"
+   }
+  ],
+  "ra2_soviets_flakcannon": [
+   {
+    "role": "air",
+    "weapon": "RA2TURRETFLAKAA"
+   }
+  ],
+  "ra2_soviets_flaktrack": [
+   {
+    "role": "air",
+    "weapon": "RA2FlakTrackAAGun"
+   },
+   {
+    "role": "ground",
+    "weapon": "RA2FlakTrackGun"
+   }
+  ],
+  "ra2_soviets_flaktrooper": [
+   {
+    "role": "ground",
+    "weapon": "RA2CRFlakGuyGun"
+   },
+   {
+    "role": "air",
+    "weapon": "RA2FLAKAA"
+   }
+  ],
+  "ra2_soviets_kirovairship": [
+   {
+    "role": "ground",
+    "weapon": "RA2KirovBomb"
+   }
+  ],
+  "ra2_soviets_migbomber": [
+   {
+    "role": "ground",
+    "weapon": "MigMissiles"
+   },
+   {
+    "role": "air",
+    "weapon": "MigMissiles_AA"
+   }
+  ],
+  "ra2_soviets_rhinoheavytank": [
+   {
+    "role": "ground",
+    "weapon": "RA2120mm"
+   }
+  ],
+  "ra2_soviets_seascorpion": [
+   {
+    "role": "ground",
+    "weapon": "RA2FlakTrackGun"
+   },
+   {
+    "role": "air",
+    "weapon": "SeaScorpion_AA"
+   }
+  ],
+  "ra2_soviets_terrordrone": [
+   {
+    "role": "special",
+    "weapon": "RA2DroneJump"
+   }
+  ],
+  "ra2_soviets_teslacoil": [
+   {
+    "role": "ground",
+    "weapon": "RA2CoilBolt"
+   }
+  ],
+  "ra2_soviets_teslatank": [
+   {
+    "role": "ground",
+    "weapon": "RA2TankBolt"
+   }
+  ],
+  "ra2_soviets_teslatrooper": [
+   {
+    "role": "ground",
+    "weapon": "RA2PortaTesla"
+   }
+  ],
+  "ra2_soviets_warminer": [
+   {
+    "role": "ground",
+    "weapon": "RA220mmrapid"
+   }
+  ],
+  "steelconsortium_megalodon": [
+   {
+    "role": "ground",
+    "weapon": "SteelMegaSword"
+   }
   ],
   "td_gdi_firehawk": [
-   "air"
+   {
+    "role": "air",
+    "weapon": "td_gdi_firehawk_firehawkmissiles_AA"
+   }
+  ],
+  "td_gdi_humveemkii": [
+   {
+    "role": "air",
+    "weapon": "td_gdi_humveemkii_machinegunhumvee2_AA"
+   }
+  ],
+  "td_gdi_missileboat": [
+   {
+    "role": "ground",
+    "weapon": "td_gdi_missileboat_gunboatmissile"
+   }
   ],
   "td_gdi_predatortank": [
-   "both"
+   {
+    "role": "both",
+    "weapon": "td_gdi_predatortank_gdipredatortankmissiles"
+   }
   ],
   "td_nod_buggymkii": [
-   "air"
+   {
+    "role": "air",
+    "weapon": "td_nod_buggymkii_machinegunbuggy2_AA"
+   }
+  ],
+  "td_nod_lasercorvette": [
+   {
+    "role": "both",
+    "weapon": "td_nod_lasercorvette_corvettedragon"
+   }
+  ],
+  "tkm_abrams": [
+   {
+    "role": "ground",
+    "weapon": "tkmrh120gun"
+   }
+  ],
+  "tkm_dronepodtruck": [
+   {
+    "role": "ground",
+    "weapon": "DronePodTruckLaser"
+   }
+  ],
+  "tkm_quadtruck": [
+   {
+    "role": "both",
+    "weapon": "TKMQuadCannonAA"
+   },
+   {
+    "role": "both",
+    "weapon": "TKMQuadCannonAG"
+   }
+  ],
+  "tkm_spetsnaz": [
+   {
+    "role": "ground",
+    "weapon": "tkmsmg"
+   }
+  ],
+  "tkm_stryker": [
+   {
+    "role": "both",
+    "weapon": "tkmstrykermg"
+   },
+   {
+    "role": "both",
+    "weapon": "tkmstrykerrockets"
+   }
+  ],
+  "tkm_trenchtank": [
+   {
+    "role": "ground",
+    "weapon": "tkmtrenchcannon"
+   }
+  ],
+  "tkm_trooper": [
+   {
+    "role": "both",
+    "weapon": "tkm_trooper_ak"
+   }
+  ],
+  "ts_gdi_amphibiousapc": [
+   {
+    "role": "both",
+    "weapon": "TSAAPCCannon"
+   }
+  ],
+  "ts_gdi_carrier": [
+   {
+    "role": "ground",
+    "weapon": "APCGun"
+   }
+  ],
+  "ts_gdi_cruiser": [
+   {
+    "role": "ground",
+    "weapon": "8Inch"
+   },
+   {
+    "role": "both",
+    "weapon": "TSHoverMissile"
+   }
+  ],
+  "ts_gdi_destroyer": [
+   {
+    "role": "ground",
+    "weapon": "DepthCharge"
+   },
+   {
+    "role": "both",
+    "weapon": "TSDestroyerMissiles"
+   }
+  ],
+  "ts_gdi_mammothmkii": [
+   {
+    "role": "ground",
+    "weapon": "TSMechMGII"
+   }
+  ],
+  "ts_gdi_pitbull": [
+   {
+    "role": "both",
+    "weapon": "PitbullRockets"
+   }
+  ],
+  "ts_gdi_rpgtower": [
+   {
+    "role": "ground",
+    "weapon": "TSRPGTower"
+   }
+  ],
+  "ts_gdi_samtower": [
+   {
+    "role": "air",
+    "weapon": "TSGDIRedEye"
+   }
+  ],
+  "ts_gdi_titanmkii": [
+   {
+    "role": "ground",
+    "weapon": "TS120mmTal"
+   }
+  ],
+  "ts_gdi_vulcantower": [
+   {
+    "role": "ground",
+    "weapon": "TSVulcanGun"
+   }
+  ],
+  "ts_gdi_zonetrooper": [
+   {
+    "role": "ground",
+    "weapon": "TSZoneRailgun"
+   }
+  ],
+  "ts_nod_cruiser": [
+   {
+    "role": "ground",
+    "weapon": "8Inch"
+   }
+  ],
+  "ts_nod_elitecadre": [
+   {
+    "role": "both",
+    "weapon": "elitecadregun"
+   }
+  ],
+  "ts_nod_submarine": [
+   {
+    "role": "ground",
+    "weapon": "RA2TorpTube"
+   }
+  ],
+  "yuri_cosmonaut": [
+   {
+    "role": "both",
+    "weapon": "RA2CosmonautLaser"
+   }
+  ],
+  "yuri_gatlingtank": [
+   {
+    "role": "ground",
+    "weapon": "RA2GattlingMG1"
+   },
+   {
+    "role": "air",
+    "weapon": "RA2GattlingMG1_AA"
+   }
+  ],
+  "yuri_magnetron": [
+   {
+    "role": "ground",
+    "weapon": "RA2Magnet"
+   }
+  ],
+  "yuri_slaveminer": [
+   {
+    "role": "ground",
+    "weapon": "RA220mmrapid"
+   }
   ]
  },
  "unknown_targets": {}

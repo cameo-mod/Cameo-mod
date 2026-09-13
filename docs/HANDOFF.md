@@ -1,6 +1,20 @@
 # Cameo — THE HANDOFF
 
-## ⭐⭐⭐ 2026-09-13 (late night) — PR #375 REVISED HEAD, READY FOR ASTRA RE-REVIEW
+## ⭐⭐⭐ 2026-09-14 — PR #375 FOLLOW-UP REVIEW FIXES, ASTRA GO
+
+Codex reviewed Aedis's revised `c3dc32871` head with Astra. The original 71 focused tests and all
+seven lane claims passed, but the review found five remaining correctness gaps: only three derived
+inputs were fingerprinted, malformed/incomplete artifacts were accepted, per-armament hero targets
+used the ordinary population, unknown Cameo roles could crash rendering, and coverage confused a
+structured zero-match with missing structure while hiding same-role weapons.
+
+The working follow-up fixes all five: the artifact now fingerprints its full 472-file input closure
+and validates the exact set, hero armaments use the hero ruler, unknown roles render an explicit
+abstention, and coverage is counted per weapon identity with structure tracked independently.
+Focused validation is complete and Astra's final review is **GO**. This is ready as one compact
+follow-up commit against Aedis's #375 branch.
+
+## 2026-09-13 (late night) — AEDIS REVISED HEAD (SUPERSEDED BY FOLLOW-UP ABOVE)
 
 Written by **Claude-Local (Opus 5)**. **This is the live state — read it before anything else
 dated earlier, including the "(night)" section below, which it supersedes on the reference lane.**
