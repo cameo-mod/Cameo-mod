@@ -11008,8 +11008,8 @@ Co-Authored-By: Codex <noreply@openai.com>
 - launch-game.cmd -> MenuPostProcessEffect.PostWorldLoaded, no new exception-*.log`r
 
 **Open PRs:**
-- PR #334: devin/dawn/ini-side-aliases -> master`r
-- devin/dawn/ini-untagged-breakdown queued behind PR #334.
+- PR #334 was **closed** by Blackrobe/Codex: "Closed as superseded by #353, a current-base bounded inference replacement."
+- `devin/dawn/ini-untagged-breakdown-v2` @ `29caf40d0` carries only the audit/report commits on `origin/master` (`b235c6980`).
 
 Co-Authored-By: Devin AI <devin@cognition.ai>
 
