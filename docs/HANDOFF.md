@@ -1,5 +1,118 @@
 # Cameo — THE HANDOFF
 
+## ⭐⭐⭐ 2026-09-13 (evening) — PR #372: ELEVEN PRs ON ONE BOOT-GATED TREE, AND THE RENAME REGRESSION
+
+Written by **Claude-Local (Opus 5)** on `claude/integration_v23`. **This is the live state — read it
+before anything else dated earlier.**
+
+### Where everything is
+
+| | |
+|---|---|
+| master | `b235c6980` — **DOES NOT BOOT** (verified directly, see below) |
+| the work | `claude/integration_v23`, **87 ahead**, clean, pushed, boot-gated |
+| the PR | **#372**, eleven PRs: #354 #355 #358 #361 #362 #363 #366 #369 #370 #373 #374 |
+| blocked on | **Blackrobe** — the Thermobaric `Versus` ruling. Nothing else. |
+
+⛔ **MASTER DOES NOT BOOT, AND IT IS EXACTLY ONE WEAPON.** Measured by running
+`audit_duplicate_inherits` against a clean `origin/master` worktree, not inferred from a PR title:
+
+    # BLOCKING - 1 node(s) the engine will REFUSE to resolve
+      Wraith_ToxinMissiles -> ^Warhead_MissileAP_Heavy
+        via Inherits:DeviatorMissile_Artillery -> DeviatorMissile -> ^D2KMissile -> ^Warhead_MissileAP_Heavy
+
+⚠ An earlier comment of mine said SIX. That was unmeasured and wrong; PR #361 said ONE and was
+right. **The engine throws on the FIRST blocking node, so a count above one cannot be observed in a
+single boot** — it could only be found by fixing them one at a time. "Six" reads as *master is
+deeply broken*; the truth is *master is one weapon away from booting*.
+
+### ⛔ THE REGRESSION ASTRA CAUGHT, AND THE LESSON IT CARRIES
+
+R12 (#366) renamed 34 structural migration helpers `^Compatibility_*` -> `^Warhead_*_Flat`. Two
+balance consumers identified those helpers **BY NAME PREFIX**, so the rename promoted them into the
+model:
+
+    target_model.pseudo_armor_mean   shield mean 180.28 -> 181.44   factor 0.5547 -> 0.5511
+    extract_stats.warheads           design_weapon_class moved on 33 weapons
+
+⛔⛔ **AND MY RE-EXTRACT MADE `audit_balance_drift` GREEN WHILE PRESERVING ALL OF IT.** That guard
+compares yaml against the ledger. Re-extracting wrote the new, wrong numbers into the ledger and the
+two agreed again. **A GREEN DRIFT RUN PROVES THE LEDGER MATCHES THE YAML, NEVER THAT THE MODEL IS
+RIGHT.** Nothing in the 227-test suite could see the difference.
+
+⚠ And `pseudo_armor_mean`'s OWN DOCSTRING already said why, three lines above the bug: *"Filtered on
+the warhead's TYPE, not on its key name ... The type is authoritative; the naming convention is
+not."* **A lesson written beside the code does not enforce itself — only a test does.**
+
+FIXED by semantics, one shared owner in `target_model.py`, used by both consumers:
+
+    is_damage_inert(node)           every damage warhead at `Damage: 0` -> 33 migration helpers
+    is_supplementary_template(node) ExtraDamage / FriendlyFire twins -> never a weapon's class
+    non_class_templates(rs)         the union; `extract_stats.warheads` refuses to emit them
+
+Shield mean restored to **180.2842 / 0.5547** exactly. Guarded by
+**`tools/tests/test_shield_class_invariance.py` (6/6)** — the load-bearing test RENAMES every helper
+and demands the mean is unchanged, which is precisely what a prefix filter cannot survive.
+
+⭐ **THE SECOND COHORT WAS FOUND ONLY BY CHECKING AGAINST THE PRE-RENAME LEDGER** instead of
+declaring the first fix done: 4 of 2,310 classes still disagreed, all newly collecting
+`^Warhead_Railgun_ExtraDamage`. ⭐ Excluding the twins ALSO fixed an opposite defect — counting them
+pushed weapons past the 2-warhead cap, so `MigMissiles_AA` and 6 siblings carried NO class at all.
+
+⚠ A name test is wrong in BOTH directions: `^Warhead_TankBusterBeam_Unscoped_Flat` ends in `_Flat`
+and is a REAL template (`Damage: 8000`).
+
+### #369 — reconciled, never taken as shipped
+
+Codex's `armament_profile` eligibility (`weapon_model_eligible = len(live) == 1`) is RIGHT and is
+kept: it is the maintainer's ruling that a cannon and a missile may not be averaged. But
+`_withhold_unproven_frozen_weapon_model` stamped EVERY frozen row ineligible. Measured on the
+rebuilt map:
+
+    live weapon targets 266 -> 0 · WITHHELD 38 -> 354 · EXTREME/DISAGREES 68/42 -> 0/0
+
+⚠ AND IT LOOKED GREEN — the report still built and the headline counts (73 originals · 116 expanded ·
+305 references) were IDENTICAL. **The guard rails reporting zero problems was the tell: they had
+nothing left to guard.** Removed; everything else in #369 kept, including two real hero-row bugs.
+
+### The 893 frozen rows — RECOVERED, not marked provisional
+
+The SHA256-pinned snapshot predates `weapon_model_eligible` and carried it on none of its 893 rows;
+every consumer tests `is False`, so absent read as eligible and all 893 were projected as
+single-weapon. **893 of 893 have a live ledger counterpart** (796 eligible, 97 multi-armament), so
+`_recover_weapon_model_eligibility` fetches the verdict by id — after the hash check, same rule
+`to_per_cycle` follows. Applied to BOTH frozen contexts.
+
+### The branch chaos, quantified
+
+**203 remote branches, 189 surveyed** — classified BY CONTENT (`git cherry`, patch-ids, so it sees
+through squashes), in **`docs/BRANCH_MANIFEST.md`**:
+
+    72 landed (delete AFTER #372 merges) · 30 devin abandoned · 2 devin superseded by #373/#374
+    9 open-PR branches (keep) · 75 legacy Apr-Jul · 1 integration branch
+
+⛔ **NOTHING MAY BE DELETED UNTIL #372 IS ON MASTER.** "Landed" means *landed in #372*, which is not
+merged. Deleting today destroys content that exists nowhere else. **39 `archive/20260913/*` tags are
+pushed**, so every abandoned `devin/*` branch is recoverable even past GitHub's grace period.
+
+⚠ **DEVIN IS RETIRED** (maintainer, 2026-09-13). Nothing behind `devin/*` has an owner. The main
+checkout still sits on `devin/aurora/naming-ra1_allies` with **364 uncommitted files** — stranded,
+NOT live WIP. Leave it alone; preserving it to a branch is Blackrobe's call.
+
+### Open, with owners
+
+* ⛔ **Thermobaric `COMPOSITE 92→93` / `Shield 179→180`** — from retiring the `^Warhead_*_Flat`
+  shims. Three `PRESERVED_HASHES` fixtures pin the old values and are **NOT regenerated**:
+  re-pinning a byte-stability guard is what it exists to prevent, and `Versus` needs permission.
+  **Blocked on Blackrobe.**
+* **Per-armament reference mapping** — the maintainer's cannon-vs-missile ruling. Data supports it
+  on BOTH sides already: the ledger carries every armament with its conditions, and the peer corpus
+  carries a full per-slot record (`weapon_evidence`: slot, range, reload, burst, burst delays,
+  warheads, valid targets). **Nothing needs re-extracting.** `weapon_model_eligible` is the hook.
+* ⛔ **The 694 unfolded rates stay BLOCKED.** Only 77 declare a burst delay, in Phobos/Ares notation
+  that is not OpenRA's (`[15, -1]` for Burst 6). Needs a YR/Ares cycle model nobody has written.
+
+
 ## ⛔⛔ 2026-09-13 (later) — THE "334 UNFOLDED RATES" ARE 694, AND THE BLOCKER IS NOT ARITHMETIC
 
 Written by **Claude-Local (Opus 5)**. ⚠ **Codex relayed at 13:34 that it has "picked up the 334-rate
