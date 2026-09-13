@@ -299,7 +299,7 @@ def dps_verifier_cell(cameo_row, rows, tgt):
         return ('<span class="muted" title="withheld: explicit damage convention and complete '
                 'burst-delay evidence required">WITHHELD</span>')
     pct = f'{g["composed_ratio"] * 100:.0f}%'
-    bd = f'burst delays {g["burst_delays"]!r} (evidence, not a column)'
+    bd = f'burst delay {g["burst_delay_per_shot"]:.0f}t/shot (recovered)'
     if g["verdict"] == "ok":
         tag = (f'<span class="tag" title="{bd}">no change</span>'
                if abs(g["composed_ratio"] - 1) < 0.02
@@ -652,7 +652,18 @@ def main() -> int:
     # variant lane made that visible: `td_gdi_humveemkii` holds DTA's `JEEPPTNK` and the page
     # showed the cell empty, which is the worst of both worlds — a mapping that exists in the
     # data and reads as missing work in the report.
-    index_rows = peers + rd.peer_variant_rows()
+    #
+    # ⛔ AND I MADE EXACTLY THAT MISTAKE AGAIN ONE LINE LATER, which is why this comment is now
+    # a list rather than a sentence. The first fix added the VARIANT lane and forgot the HERO
+    # lane, so `td_gdi_exosuit` reported "1 of 2 sources used" on HP, speed AND cost while DTA's
+    # `XO` — a perfectly good row with hp 7,000, speed 6, cost 2,000 — sat unrecoverable. The
+    # maintainer spotted it from the map. Every lane the ASSIGNMENT can write must be here:
+    #   peer_rows()          the ordinary corpus
+    #   peer_variant_rows()  chassis variants the population rule drops
+    #   peer_hero_rows()     heroes and build-limited units
+    # ⚠ This is the RECOVERY index and is independent of `--include-heroes`, which controls a
+    # separate hero comparison POPULATION. Recovering a row is not the same as pooling it.
+    index_rows = peers + rd.peer_variant_rows() + rd.peer_hero_rows()
     attached = rt.expand_families(rt.attach(assignment, rt.peer_index(index_rows)), peers)
     hero_context = None
     if args.include_heroes:
