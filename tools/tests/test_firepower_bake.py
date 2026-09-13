@@ -22,8 +22,9 @@ class FirepowerBakeTests(unittest.TestCase):
     def test_ignored_custom_damage_is_not_scaled(self):
         for kind in ['DamagesConcrete','AffectsIntegrity']:
             self.assertEqual(bake.plan_channel(wh(kind,1000),Fraction(1,4))['fields'],{})
-    def test_grid_exception_is_explicit(self):
-        with self.assertRaises(ValueError):bake.plan_channel(wh('AreaDamage',1020),Fraction(1,4))
+    def test_one_point_grid_accepts_integers_and_rejects_fractions(self):
+        self.assertEqual(bake.plan_channel(wh('AreaDamage',1020),Fraction(1,4))['fields']['Damage'],'255')
+        with self.assertRaises(ValueError):bake.plan_channel(wh('AreaDamage',1021),Fraction(1,4))
         self.assertEqual(bake.plan_channel(wh('AreaDamage',2000),Fraction(6,25),allow_off_grid=True)['fields']['Damage'],'480')
     def test_fractional_flat_requires_explicit_rounding(self):
         with self.assertRaises(ValueError):bake.plan_channel(wh('AreaDamage',120250),Fraction(21,20),allow_off_grid=True)
@@ -31,5 +32,5 @@ class FirepowerBakeTests(unittest.TestCase):
         self.assertEqual(p['fields']['Damage'],'126263')
         self.assertEqual(p['flat_rounding_error'],'1/2')
         rounded=bake.plan_channel(wh('AreaDamage',120250),Fraction(21,20),allow_rounding=True)
-        self.assertEqual(rounded['fields']['Damage'],'126260')
-        self.assertEqual(rounded['flat_rounding_error'],'-5/2')
+        self.assertEqual(rounded['fields']['Damage'],'126263')
+        self.assertEqual(rounded['flat_rounding_error'],'1/2')
