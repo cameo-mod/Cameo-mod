@@ -666,7 +666,11 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
             body.append('</tbody></table>')
             for actor, details in generic_details:
                 body.append(f'<div><code>{html.escape(actor)}</code>{details}</div>')
-        emit_armament_pairing(body, members)
+        # ⛔ `members` HERE WOULD RE-EMIT THE WHOLE BAND ONCE PER SECTION. This call sits inside
+        # the `for kind, title in SECTIONS` loop, so passing the band printed every actor's block
+        # again under infantry, vehicles, aircraft and ships alike — 155 blocks for 35 actors.
+        # `group` is this section's actors, which is what the heading above it claims.
+        emit_armament_pairing(body, group, attached, dist, cdist, crows)
 
 
 # ── PER-ARMAMENT REFERENCES ──────────────────────────────────────────────────────────────────
@@ -703,23 +707,104 @@ def _range_cell(view):
                      "c" if view.get("range_unit") == "cells" else "")
 
 
-def emit_armament_pairing(body, members):
-    """One block per actor in this class that fires in more than one targeting role."""
+def _armament_rows(entry):
+    """The armaments worth a row: the BASELINE firing set, strongest first within each role.
+
+    An upgrade-gated twin (`Armament@Upgrade`, `@AdvancedMissileTargeting`) is the same gun with a
+    different warhead and would triple the table without adding a reference; `baseline` is the flag
+    `armament_roles.view` already sets for exactly this. If an actor has no baseline armament at
+    all, everything it has is shown rather than nothing.
+    """
+    arms = [a for a in entry["armaments"] if a.get("baseline")] or list(entry["armaments"])
+    # ⚠ ONE ROW PER WEAPON, NOT PER SLOT. `Armament@PRIMARY` and `Armament@GARRISONED` are the
+    # same gun fired from two places, so keying on the slot printed `OIFlamer` and the Hind's
+    # chaingun twice. The weapon NAME is the identity the pairing votes on.
+    seen, uniq = set(), []
+    for a in arms:
+        key = (a.get("weapon"), a.get("role"))
+        if key in seen:
+            continue
+        seen.add(key)
+        uniq.append(a)
+    order = {role: i for i, role in enumerate(entry["roles"])}
+    return sorted(uniq, key=lambda a: (order.get(a["role"], 99), -(a["damage_per_cycle"] or 0)))
+
+
+def _peer_row_for(attached_rows, source, peer_id):
+    """The assigned peer ROW behind a pairing vote — needed for its source and TYPE.
+
+    `armament_pairing.json` records which peer WEAPON was paired, not the row it came from, and
+    the projection needs the row: the normalising population is picked by the peer's own type
+    ("overall" plus e.g. "vehicle"). Matched on source first and id second, because a source can
+    contribute a family of rows and any of them carries the same type.
+    """
+    same = [r for r in attached_rows if r.get("source") == source]
+    for r in same:
+        if (r.get("id") or "") == peer_id:
+            return r
+    return same[0] if same else None
+
+
+def _armament_target_cell(main, cast, entry, attached_rows, dist, cdist, ctype, nsources):
+    """`now -> reference` for ONE armament, or an explicit abstention.
+
+    ⛔ AN ABSTENTION IS RENDERED AS ONE. When no source carries a weapon in this role there is no
+    target, and the cell says so rather than showing a dash that could be read as zero — the
+    maintainer's own ruling for this case ("abstain and say so", 2026-09-13). The Firehawk's
+    Sidewinders land here correctly: no Warthog in any reference has an anti-air weapon.
+    """
+    if not cast:
+        return '<span class="muted" title="no source carries a weapon in this role">abstains</span>'
+    votes = [(_peer_row_for(attached_rows, source, entry["sources"][source].get("peer")),
+              pair["peer"].get("damage_per_cycle")) for source, pair in cast]
+    target, used = rt.armament_target(votes, dist, cdist, ctype)
+    if not target:
+        return ('<span class="muted" title="the paired weapons could not be normalised against '
+                'their own source population (a distribution needs three usable rows)">no usable '
+                'projection</span>')
+    now = main.get("damage_per_cycle")
+    ratio = (f' <b class="warn" title="needs explicit maintainer permission">{target / now:.2f}x</b>'
+             if now and abs(target / now - 1) > 0.005 else '')
+    return (f'<span data-v="{target}" title="projected from the {used} source(s) that carry a '
+            f'weapon in this role, through the same coordinates and the same frozen ruler as the '
+            f'actor-level targets">{target:,.0f}<small class="evidence">{used} of '
+            f'{nsources} sources</small></span>{ratio}')
+
+
+def emit_armament_pairing(body, members, attached, dist, cdist, crows):
+    """One block per actor in this class that fires in more than one targeting role.
+
+    ⭐ EACH ARMAMENT NOW CARRIES ITS OWN TARGET (maintainer, 2026-09-13: "td gdi battle tank and
+    mammoth tank are now withheld" -> wire the pairs in). The actor-level damage cell above stays
+    WITHHELD for these rows and that is correct — there is no single honest number for a unit that
+    fires a cannon and an anti-air missile. The number lives here instead, one per weapon, each
+    projected only from the sources that carry a weapon in that role."""
     actors = pairing_document().get("actors", {})
+    # ⛔ MULTI-ROLE WAS THE WRONG GATE AND HID 17 OF THE WITHHELD ACTORS. The actor-level cell is
+    # withheld for carrying more than one ARMAMENT, not more than one ROLE, so a destroyer with
+    # four ground guns was blanked above and had no block down here either. Both conditions admit
+    # a block now: a multi-role actor because its folded number mixes two kinds of gun, and any
+    # withheld actor because this section is the only place its damage can be reported at all.
+    withheld = {a for a in members
+                if (cdist.cameo_votes.get(a) or {}).get("weapon_model_eligible") is False}
     rows = [(a, actors[a]) for a in members
-            if a in actors and len(actors[a].get("roles", ())) > 1
+            if a in actors
+            and (len(actors[a].get("roles", ())) > 1 or a in withheld)
             and any("pairs" in s for s in actors[a]["sources"].values())]
     if not rows:
         return
     body.append('<h4>Per-armament references &mdash; one weapon, one vote</h4>')
-    body.append('<p class="lede">These actors fire in more than one targeting role, so the single '
-                'weapon column above describes two different guns at once. Here each armament '
-                'finds its own reference weapon, and a source that does not carry a weapon in '
-                'that role does not vote on it. '
+    body.append('<p class="lede">These actors carry more than one weapon, so a single folded '
+                'number above would describe two different guns at once &mdash; which is why the '
+                'weapon columns read WITHHELD for most of them. Here each armament finds its own '
+                'reference weapon and gets its own target, and a source that does not carry a '
+                'weapon in that role does not vote on it. '
                 '<b>=</b> exact role match &middot; <b>~</b> a dual-role weapon stood in &middot; '
                 '<b>?</b> the source could not state a role, so it votes on the main gun only. '
                 'Air is never paired with ground. A <code>c</code> on a range marks a value '
-                'converted from TS cells (1 cell = 1024 WDist).</p>')
+                'converted from TS cells (1 cell = 1024 WDist). The reference column is projected '
+                'through the same coordinates and the same frozen ruler as every other target on '
+                'this page.</p>')
     for actor, entry in rows:
         votes = collections.defaultdict(list)
         for source, info in entry["sources"].items():
@@ -727,16 +812,19 @@ def emit_armament_pairing(body, members):
                 votes[pair["role"]].append((source, pair))
         n = sum(1 for s in entry["sources"].values() if "pairs" in s)
         body.append(f'<div><code>{html.escape(actor)}</code>')
+        arows = attached.get(actor) or []
+        ctype = (crows.get(actor) or {}).get("type")
         body.append('<table><thead><tr><th>role</th><th>Cameo weapon</th><th class="n">range</th>'
-                    '<th class="n">dmg/cycle</th><th>voters</th></tr></thead><tbody>')
-        for role in entry["roles"]:
-            arms = [a for a in entry["armaments"] if a["role"] == role and a["baseline"]]
-            if not arms:
-                arms = [a for a in entry["armaments"] if a["role"] == role]
-            if not arms:
-                continue
-            main = max(arms, key=lambda a: a["damage_per_cycle"] or 0)
-            cast = votes.get(role, [])
+                    '<th class="n">dmg/cycle now</th><th class="n">reference</th>'
+                    '<th>voters</th></tr></thead><tbody>')
+        # ⭐ ONE ROW PER ARMAMENT, NOT PER ROLE. Taking the strongest weapon of each role was a
+        # second fold wearing the first one's clothes: `ra1_allies_destroyer` has four ground
+        # armaments and would have reported one. An armament that drew no pair still gets its row
+        # and says it abstains, because "no reference has this weapon" is a finding.
+        for main in _armament_rows(entry):
+            role = main["role"]
+            cast = [(src, pair) for src, pair in votes.get(role, ())
+                    if pair["cameo"].get("weapon") == main["weapon"]]
             if cast:
                 chips = " ".join(
                     '<span class="tag" title="{t}">{mark} {src} &middot; {w}</span>'.format(
@@ -755,6 +843,7 @@ def emit_armament_pairing(body, members):
                         f'<td><code>{html.escape(str(main["weapon"]))}</code></td>'
                         f'<td class="n">{_range_cell(main)}</td>'
                         f'<td class="n">{num(main["damage_per_cycle"])}</td>'
+                        f'<td class="n">{_armament_target_cell(main, cast, entry, arows, dist, cdist, ctype, n)}</td>'
                         f'<td>{tally}</td></tr>')
         body.append('</tbody></table></div>')
 
