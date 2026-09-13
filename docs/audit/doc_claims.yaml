@@ -535,3 +535,115 @@ claims:
           print(int(drift[0]))
       else:
           raise SystemExit(f'balance drift measurement unavailable: unexpected output/exit {result.returncode}')
+
+  - id: armament_multi_role_actors
+    value: 108
+    tolerance: 0
+    what: >
+      Priced actors whose UNCONDITIONAL armaments span more than one targeting role (ground / air /
+      both / special) - the full scope of the per-armament pairing ruling (maintainer 2026-09-13):
+      every unit whose one folded w_range/w_dps describes two different weapons.
+      NOT to be confused with the 47 that are STILL multi-role after
+      `reference_distribution.baseline_armaments` has run - that helper already drops 61 of them by
+      matching `@AA`/`_AA` in the slot or weapon NAME. 108 is the population, 47 is what survives
+      the existing name-based guard, and an earlier draft of ARMAMENT_PAIRING.md quoted 47 as the
+      scope, understating it by more than half.
+    docs: [docs/design/ARMAMENT_PAIRING.md]
+    measure: |
+      import json, pathlib, sys
+      root = pathlib.Path('.').resolve()
+      sys.path.insert(0, 'tools/audit'); sys.path.insert(0, 'tools/balance')
+      import miniyaml, armament_roles as ar, reference_distribution as rd
+      rules = miniyaml.Ruleset(root)
+      total = 0
+      for path in sorted((root / 'docs' / 'balance').glob('*.json')):
+          if path.name == 'class_anchors.json':
+              continue
+          try:
+              doc = json.loads(path.read_text(encoding='utf-8'))
+          except Exception:
+              continue
+          for section in (doc.get('sections') or {}).values():
+              if not isinstance(section, dict):
+                  continue
+              for record in section.values():
+                  if not isinstance(record, dict):
+                      continue
+                  views = ar.cameo_views(record, rules)
+                  if views and len(ar.strongest_by_role(views)) > 1:
+                      total += 1
+      print(total)
+
+  - id: armament_air_role_invisible_to_the_name_test
+    value: 50
+    tolerance: 0
+    what: >
+      Priced armaments whose weapon genuinely targets AIR ONLY but whose slot and weapon names do
+      not match `reference_distribution.AA_SLOT` (`@AA` / `_AA`). This is why the pairing key had
+      to become the targeting envelope rather than the spelling: a name blocklist cannot see
+      RA2Patriot, RA2TURRETFLAKAA, AsianPhotonCannon, PortableFlak or BallistaSingleShotAir.
+    docs: [docs/design/ARMAMENT_PAIRING.md]
+    measure: |
+      import json, pathlib, sys
+      root = pathlib.Path('.').resolve()
+      sys.path.insert(0, 'tools/audit'); sys.path.insert(0, 'tools/balance')
+      import miniyaml, armament_roles as ar, reference_distribution as rd
+      rules = miniyaml.Ruleset(root)
+      total = 0
+      for path in sorted((root / 'docs' / 'balance').glob('*.json')):
+          if path.name == 'class_anchors.json':
+              continue
+          try:
+              doc = json.loads(path.read_text(encoding='utf-8'))
+          except Exception:
+              continue
+          for section in (doc.get('sections') or {}).values():
+              if not isinstance(section, dict):
+                  continue
+              for record in section.values():
+                  if not isinstance(record, dict):
+                      continue
+                  for arm in (record.get('armaments') or []):
+                      if not arm.get('pricing'):
+                          continue
+                      role, _unknown = ar.cameo_weapon_role(rules, arm.get('weapon'))
+                      if role == ar.ROLE_AIR and not rd.is_anti_air_armament(arm):
+                          total += 1
+      print(total)
+
+  - id: dta_projectile_roles_resolved
+    value: 60
+    tolerance: 0
+    what: >
+      Projectiles cited by DTA Enhanced corpus rows whose AA/AG domain flags resolve out of the
+      byte-pinned Rules.ini + Enhance.ini. Every cited projectile must resolve: an unresolved one
+      would silently abstain from per-armament pairing and hand the map a folded number again.
+    docs: [docs/design/ARMAMENT_PAIRING.md]
+    measure: |
+      import json, pathlib
+      doc = json.loads((pathlib.Path('docs/reference/ini_projectile_role_evidence.json')
+                        ).read_text(encoding='utf-8'))
+      entry = {e['source']: e for e in doc['sources']}['DTA Enhanced']
+      if entry['undeclared']:
+          raise SystemExit('undeclared projectiles: %s' % entry['undeclared'])
+      print(entry['resolved'])
+
+  - id: dta_elite_weapons_reachable
+    value: 131
+    tolerance: 0
+    what: >
+      DTA Enhanced units in the corpus whose `Elite=` weapon is actually reachable (`Trainable=yes`
+      after the Enhance overlay). The TS engine gives a unit THREE weapon slots - Primary,
+      Secondary and Elite - and ini_corpus.json carries only the first two, so 171 DTA `Elite=`
+      declarations reached nothing until 2026-09-13. DTA Classic's count is 0 by contrast, because
+      the overlay is what sets Trainable=yes; a change in either direction means the Classic /
+      Enhanced distinction has been lost.
+    docs: [docs/design/ARMAMENT_PAIRING.md]
+    measure: |
+      import json, pathlib
+      doc = json.loads(pathlib.Path('docs/reference/ini_elite_weapon_evidence.json')
+                       .read_text(encoding='utf-8'))
+      entries = {e['source']: e for e in doc['sources']}
+      if entries['DTA Classic']['reachable'] != 0:
+          raise SystemExit('DTA Classic must have no reachable elite weapon')
+      print(entries['DTA Enhanced']['reachable'])

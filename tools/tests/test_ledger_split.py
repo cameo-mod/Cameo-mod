@@ -131,6 +131,22 @@ class CommittedLedgerTest(unittest.TestCase):
                 self.assertNotIn("ledger", reference)
                 self.assertNotIn("sections", reference)
                 continue
+            if path.name == "armament_pairing.json":
+                # Per-armament reference pairing (docs/design/ARMAMENT_PAIRING.md): which peer
+                # weapon each Cameo armament is matched against. Like the two sidecars above it is
+                # a cross-game reference artifact, not a faction's extracted ledger — and like
+                # them it must carry NO ledger payload, so a retune can never hide in here.
+                pairing = json.loads(path.read_text(encoding="utf-8"))
+                self.assertEqual(pairing["schema"], 1)
+                self.assertTrue(pairing["actors"])
+                self.assertIn("stats", pairing)
+                # The vocabulary is the maintainer's 2026-09-07 missile-role ruling; a silent
+                # change to it would repartition every pairing in this file.
+                self.assertEqual(["ground", "air", "both", "special"],
+                                 pairing["role_vocabulary"])
+                self.assertNotIn("ledger", pairing)
+                self.assertNotIn("sections", pairing)
+                continue
             if path.name == "reference_signatures.json":
                 signatures = json.loads(path.read_text(encoding="utf-8"))
                 self.assertTrue(signatures)

@@ -1,9 +1,48 @@
 # Cameo — THE HANDOFF
 
-## ⭐⭐⭐ 2026-09-13 (evening) — PR #372: ELEVEN PRs ON ONE BOOT-GATED TREE, AND THE RENAME REGRESSION
+## ⭐⭐⭐ 2026-09-13 (night) — MASTER BOOTS, AND EVERY UNIT'S WEAPONS ARE MAPPED SEPARATELY
 
-Written by **Claude-Local (Opus 5)** on `claude/integration_v23`. **This is the live state — read it
-before anything else dated earlier.**
+Written by **Claude-Local (Opus 5)**. **This is the live state — read it before anything else
+dated earlier, INCLUDING the "(evening)" section below, which this supersedes on every point.**
+
+| | |
+|---|---|
+| master | **`8f9bef3b0`** — PR #372 merged, then #346. **Boot-gated, ZERO blocking inherit nodes.** |
+| branches | 203 → **115**; 75 landed branches deleted, 39 `archive/20260913/*` tags pushed |
+| open PRs | 28 → **15** |
+| the live lane | **per-armament reference pairing** — the maintainer's cannon-vs-missile ruling |
+
+⚠ The "(evening)" section below still says *master `b235c6980` DOES NOT BOOT* and *#372 is
+blocked*. Both were true when written and are now false. Its technical content — the R12 rename
+regression, why a green `audit_balance_drift` proves nothing about the model — remains correct and
+is the reason the section is kept rather than deleted.
+
+### THE LIVE LANE: per-armament reference pairing
+
+Full document: **[`design/ARMAMENT_PAIRING.md`](design/ARMAMENT_PAIRING.md)**. In one paragraph:
+`armament_profile` folds an actor's armaments into one `w_range`/`w_dps` and takes `max(ranges)`,
+so `td_gdi_firehawk` reports its Sidewinders' **12,500** for a bomb that reaches **1,250**.
+**47 of 940** priced actors fire in more than one role and **40** assigned reference rows are
+contaminated by that fold. Shipped this turn, changing no balance number:
+
+* `tools/balance/armament_roles.py` — the role classifier (`ground`/`air`/`both`/`special`, the
+  maintainer's own 2026-09-07 missile vocabulary) plus one armament view for all three corpora.
+  **0 unknown target tokens** across both corpora.
+* `tools/reference/extract_ini_projectile_roles.py` → `docs/reference/ini_projectile_role_evidence.json`
+  — DTA's real `AA=`/`AG=` projectile flags, `$Inherits` flattened, both file hashes verified
+  against the corpus pin. **57/57 and 60/60** cited projectiles resolved.
+* `tools/reference/extract_ini_elite_weapons.py` → `docs/reference/ini_elite_weapon_evidence.json`
+  — ⛔ **the THIRD weapon slot.** A TS unit declares `Primary=`, `Secondary=` AND `Elite=`; the
+  corpus carried only the first two, so **171 DTA `Elite=` declarations never reached the map**.
+  The maintainer had to point this out twice. Gated on `Trainable=`, which the Enhance overlay
+  flips: DTA Classic 0 reachable, DTA Enhanced **131** (7 of them a genuinely additional armament,
+  where the primary is a zero-damage dummy).
+* `tools/balance/build_armament_pairing_report.py` → `docs/balance/derived/armament_pairing.json`.
+* `tools/tests/test_armament_roles.py` — **29/29**.
+
+⛔ **NOT YET DONE, AND IT NEEDS THE MAINTAINER'S WORD:** retiring the fold in `armament_profile` in
+favour of per-role targets is a MODEL change, so it has not been made. The pairing is measured and
+reviewable first, which is the order the last three reversals here should have followed.
 
 ### Where everything is
 
