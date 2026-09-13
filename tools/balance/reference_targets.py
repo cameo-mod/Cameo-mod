@@ -197,22 +197,31 @@ def burst_delay_of(row):
 
 
 def damage_per_shot(row):
-    """`w_damage` PER SHOT — which, by construction, is every row in the project.
+    """The row's damage PER SHOT — derived, because `w_damage` is now per CYCLE.
 
-    ⭐ THERE IS ONLY ONE CONVENTION NOW. `reference_distribution.cameo_rows` divides Cameo's
-    burst-total `w_damage` by its `Burst` when the row is built, and every other corpus already
-    stores damage per shot, so a universal formula has a universal input. This accessor stays as
-    the single named place that says so — and as the hook if a future corpus needs converting.
+    ⭐ THE REFERENCED COORDINATE IS PER CYCLE (maintainer, 2026-09-13) — burst is a delivery
+    choice and the whole-burst total is the comparable magnitude. `reference_distribution.
+    to_per_cycle` therefore puts every corpus in per-cycle units and carries the per-shot figure
+    alongside as `w_damage_per_shot`, so the formula can still be written the way it was ruled:
 
-    How the two conventions were established, against artifacts rather than docstrings:
-      Cameo   `td_gdi_mammothtank_120mmdualhv` declares Damage 16000 / Burst 2, and the
-              snapshot carried `w_damage` 32,000 — the burst total.
-      peers   `extract_peer_units` sets `w_damage = audit["damage_pos"]` and computes
-              `damage_pos * burst / cycle`, which is this formula verbatim.
-      legacy  decided by the impossible reading: Valiant Shades `4tnk` taken as a burst total
-              gives a cycle of 32.5 ticks against a DECLARED reload of 60; per shot it gives
-              65 = 60 + 5.
+        rate = damage_per_shot * burst / (reload + sum of the Burst - 1 delays)
+
+    Both spellings are the same number — `per_shot * burst` IS the cycle total — so nothing about
+    the anchors moves. What changes is which quantity gets PROJECTED, and that had to change:
+    Shattered Paradise ships the Mammoth Mk. II at Burst 4 where OpenRA TS ships it at Burst 2,
+    and per shot both read 4,000, so projecting per-shot called them identical while their real
+    output differs 16,000 to 8,000.
     """
+    d = row.get("w_damage_per_shot")
+    if d is not None:
+        return float(d)
+    # A row that never went through `to_per_cycle` still answers correctly.
+    raw, burst = row.get("w_damage"), float(row.get("w_burst") or 1)
+    return None if raw is None else float(raw) / burst if burst > 1 else float(raw)
+
+
+def damage_per_cycle(row):
+    """The row's damage for one FULL cycle — the quantity the reference map projects."""
     d = row.get("w_damage")
     return None if d is None else float(d)
 
@@ -332,7 +341,15 @@ def dps_guard(current, component_targets, dps_target):
     per_shot = burst_delay_of(current)
     if per_shot is None:
         per_shot = 0.0
-    new = damage_per_tick(pick("w_damage"), pick("w_burst"), pick("w_reload"), per_shot)
+    # ⛔ `pick("w_damage")` IS PER CYCLE, and `damage_per_tick` multiplies by burst, so the cycle
+    # total must be divided back down first or burst is counted twice — 969.86 instead of 485 on
+    # the mammoth. Dividing by the TARGET burst is what makes the two spellings identical:
+    # `(cycle/burst) * burst / ticks` is `cycle / ticks`.
+    tgt_burst = float(pick("w_burst") or 1)
+    tgt_cycle_damage = pick("w_damage")
+    new = damage_per_tick(
+        (tgt_cycle_damage / tgt_burst) if (tgt_cycle_damage and tgt_burst) else None,
+        tgt_burst, pick("w_reload"), per_shot)
     if not new or not cur_dps:
         return None
     out = dict(current_dps=float(cur_dps), composed_dps=new, composed_ratio=new / cur_dps,
@@ -379,18 +396,21 @@ def _guard_self_test():
     # a front-loaded burst lands the same damage in a shorter cycle, so the rate is higher
     assert damage_per_tick(1000, 4, 100, [1, 1, 1]) > damage_per_tick(1000, 4, 100, [9, 9, 9])
     assert damage_per_tick(1000, 4, 100, [2, 4, 6]) == 1000 * 4 / (100 + 12)
-    # Every row reaching this layer is ALREADY per shot — `cameo_rows` divides the snapshot's
-    # burst-total figure by `Burst` at construction, so one convention exists downstream.
-    assert damage_per_shot(dict(w_damage=16000, w_burst=2)) == 16000
-    assert damage_per_shot(dict(w_damage=4000, w_burst=2)) == 4000, "a peer row is already /shot"
+    # ⭐ `w_damage` IS PER CYCLE on every row — that is the referenced coordinate. Per shot is
+    # derived from it, and both spellings reach the same rate.
+    assert damage_per_cycle(dict(w_damage=32000, w_burst=2)) == 32000, "the mammoth's cycle"
+    assert damage_per_shot(dict(w_damage=32000, w_burst=2)) == 16000, "derived back to one shot"
+    assert damage_per_shot(dict(w_damage=32000, w_burst=2, w_damage_per_shot=16000)) == 16000
+    # a single-shot row is the same number either way
+    assert damage_per_cycle(dict(w_damage=4000, w_burst=1)) == 4000
     assert compose_dps(16000, 72, 2, 8) == 400, "the per-shot alias"
     # ⚠ feeding the BURST TOTAL in would double-count burst — the bug this convention prevents
     assert damage_per_tick(32000, 2, 72, 8) == 800, "burst counted twice, as expected"
 
     # PER SHOT, like every row in the project: authored Damage 16000 with Burst 2.
-    mam = dict(w_damage=16000, w_burst=2, w_reload=72, w_dps=400)
+    mam = dict(w_damage=32000, w_damage_per_shot=16000, w_burst=2, w_reload=72, w_dps=400)
     # components: damage +9.1%, reload -11.1%, burst unanimous at 2 (a DIRECT stat)
-    g = dps_guard(mam, dict(w_damage=17457.5, w_burst=2, w_reload=64), dps_target=695)
+    g = dps_guard(mam, dict(w_damage=34915, w_burst=2, w_reload=64), dps_target=695)
     assert abs(g["burst_delay_per_shot"] - 8) < 1e-9, g
     assert abs(g["composed_dps"] - 485) < 1, g["composed_dps"]
     assert abs(g["projected_ratio"] - 1.7375) < 0.01, g["projected_ratio"]
@@ -405,18 +425,19 @@ def _guard_self_test():
     # MLRS fires 6 rockets of 8,000 over 136 ticks (352.9/tick), and at Burst 2 it fires 2 of
     # them over 116 (137.9/tick). Firing a third as many rockets really is a 61% cut, and a guard
     # that called it "ok" was hiding the largest change in the row.
-    mlrs = dict(w_damage=8000, w_burst=6, w_reload=111, w_dps=352.94117647058823)
-    m = dps_guard(mlrs, dict(w_damage=8000, w_burst=2, w_reload=111), dps_target=None)
+    mlrs = dict(w_damage=48000, w_damage_per_shot=8000, w_burst=6, w_reload=111,
+                w_dps=352.94117647058823)
+    m = dps_guard(mlrs, dict(w_damage=16000, w_burst=2, w_reload=111), dps_target=None)
     assert abs(m["burst_delay_per_shot"] - 5) < 1e-6, m
     assert abs(m["composed_dps"] - 137.93) < 0.05, m["composed_dps"]
     assert m["verdict"] == "extreme", m          # 0.39x — correctly loud
 
     # a component set that agrees with the aggregate passes
-    ok = dps_guard(mam, dict(w_damage=16000 * 1.7, w_reload=72), 680)
+    ok = dps_guard(mam, dict(w_damage=32000 * 1.7, w_reload=72), 680)
     assert ok["verdict"] == "ok", ok
 
     # a genuine 2.5x move through the components alone is flagged
-    ex = dps_guard(mam, dict(w_damage=16000 * 2.5, w_reload=72), None)
+    ex = dps_guard(mam, dict(w_damage=32000 * 2.5, w_reload=72), None)
     assert ex["verdict"] == "extreme", ex
 
     # a missing component is the CURRENT value, never zero
@@ -587,7 +608,9 @@ def cameo_context():
     # is unchanged; the formula needs the ROWS in the one convention the whole project uses, or
     # every damage target comes back in burst-total units and the map draws an arrow between two
     # different quantities. The bytes are untouched and still hash.
-    rows = rd.to_per_shot(document['rows'])
+    # The snapshot already stores the burst TOTAL, which IS the referenced coordinate, so it is
+    # normalised only to attach the derived per-shot figure. See `reference_distribution.to_per_cycle`.
+    rows = rd.to_per_cycle(document['rows'])
     distribution = rd.build_distributions(rows)
     add_cost_distribution(distribution, rows)
     return FrozenCameoDistribution(distribution['Cameo'], rows)

@@ -914,10 +914,11 @@
       "reloaddelay": "125",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_MissileAP_Heavy",
+       "^Warhead_MissileAP_Heavy_WraithOrder",
        "DeviatorMissile_Artillery"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy_WraithOrder",
        "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileHE_Heavy",
        "^Warhead_CannonHE_Heavy"
@@ -2136,13 +2137,11 @@
       "slot": "Armament@SECONDARY",
       "versus_templates": [
        "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Light",
        "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "D2K_Rocket_Trooper_AGOnly",
       "weapon_class_source": "template"
@@ -2194,13 +2193,11 @@
       "slot": "Armament@SECONDARYgarrisoned",
       "versus_templates": [
        "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Light",
        "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "D2K_Rocket_Trooper_AGOnly",
       "weapon_class_source": "template"
@@ -4257,7 +4254,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7640",
       "reloaddelay": "80",
@@ -4265,22 +4262,16 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_CannonAP",
-       "^Warhead_Demolition_Light",
-       "^Warhead_Concussion_Medium",
-       "^Warhead_CannonAP_Light",
        "^Projectile_Shell_Light",
        "^Effect_CannonAP_Light",
        "^D2K_Cannon"
       ],
       "warheads": [
        "^Warhead_CannonAP",
-       "^Warhead_Demolition_Light",
-       "^Warhead_Concussion_Medium",
-       "^Warhead_CannonAP_Light",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "120mm_cobra",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "deployed",
@@ -4326,7 +4317,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7640",
       "reloaddelay": "80",
@@ -4337,13 +4328,10 @@
       ],
       "warheads": [
        "^Warhead_CannonAP",
-       "^Warhead_Demolition_Light",
-       "^Warhead_Concussion_Medium",
-       "^Warhead_CannonAP_Light",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "120mm_cobra_deploy",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5205,13 +5193,11 @@
       "slot": "Armament@Rockets",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
-       "^Warhead_MissileHE_Heavy",
        "^Projectile_Missile_Heavy_D2K",
        "^Effect_MissileHE_Heavy_D2K"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy",
-       "^Warhead_MissileHE_Heavy"
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "HeavyOrdosCombatTankRockets",
       "weapon_class_source": "template"
@@ -5759,7 +5745,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9380",
       "reloaddelay": "123",
@@ -5770,13 +5756,10 @@
       ],
       "warheads": [
        "^Warhead_CannonAP",
-       "^Warhead_Demolition_Light",
-       "^Warhead_Concussion_Medium",
-       "^Warhead_CannonAP_Light",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "120mm_python",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "deployed",
@@ -5824,7 +5807,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9380",
       "reloaddelay": "123",
@@ -5835,13 +5818,10 @@
       ],
       "warheads": [
        "^Warhead_CannonAP",
-       "^Warhead_Demolition_Light",
-       "^Warhead_Concussion_Medium",
-       "^Warhead_CannonAP_Light",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "120mm_python_deploy",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

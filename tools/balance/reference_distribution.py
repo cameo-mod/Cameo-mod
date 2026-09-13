@@ -872,7 +872,8 @@ def peer_rows():
         if rid:
             by_src[r["source"]].add(rid)
     peer_rows.ai_only = [r for r in rows if is_ai_only(r, by_src)]
-    return [r for r in rows if not is_ai_only(r, by_src)]
+    # Peers store damage PER SHOT; the referenced coordinate is per CYCLE (see `to_per_cycle`).
+    return to_per_cycle([r for r in rows if not is_ai_only(r, by_src)])
 
 
 # Cameo's own 16 armor rows, grouped by the ladder DESIGN.md puts them in.
@@ -1122,27 +1123,37 @@ def is_superweapon(rec):
     return False
 
 
-def to_per_shot(rows):
-    """Normalise Cameo rows' burst-total `w_damage` to PER SHOT, in memory.
+def to_per_cycle(rows):
+    """Express every row's `w_damage` as damage PER FULL CYCLE (the whole burst).
 
-    ⛔ THE FROZEN SNAPSHOT NEEDS THIS TOO, and missing that is what made the first attempt at the
-    universal formula inconsistent. `reference_targets.cameo_context()` loads a SHA256-pinned
-    baseline and builds the distribution every damage target is projected onto — so normalising
-    only `cameo_rows()` left the map showing a per-shot "now" against a burst-total "reference",
-    an arrow between two different units. The mammoth read `16,000 -> 34,915` when the target
-    meant 17,457.
+    ⛔ PER SHOT IS THE FORMULA'S INPUT AND THE WRONG THING TO COMPARE — maintainer, 2026-09-13:
+    *"if our mammoth tank is burst 2 and the reference is the ion mammoth or the railgun mammoth
+    with burst 1 it would give the wrong value ... it should reference the total damage including
+    all bursts right?"*. Correct, and the corpus shows it plainly: Shattered Paradise ships the
+    Mammoth Mk. II at Burst 4 and OpenRA TS ships it at Burst 2. Per shot BOTH read 4,000, so a
+    per-shot comparison calls them identical while their real output per cycle is 16,000 against
+    8,000 — a 2x difference the reference would have hidden.
 
-    The pin is not touched: the file is read byte-identically and still hashes, and the
-    conversion happens after load. `w_damage_cycle` keeps the authored per-cycle figure for
-    display.
+    Burst is a DELIVERY choice; damage per cycle is the magnitude. So the referenced coordinate is
+    per cycle, and per-shot is derived from it by dividing by whichever burst the unit ends up with.
+
+    ⚠ THIS IS THE OPPOSITE OF WHAT I SHIPPED THIS MORNING, and the reversal is the point. I had
+    normalised everything DOWN to per shot, which made the one formula apply literally but made
+    the projection compare the wrong quantity. The formula is unaffected either way:
+    `per_shot x burst / cycle` and `cycle_damage / cycle` are the same number.
+
+    Cameo's frozen snapshot already stores the burst TOTAL (verified against the authored yaml:
+    `td_gdi_mammothtank_120mmdualhv` declares `Damage: 16000` with `Burst: 2` and the snapshot
+    carries 32,000), so Cameo rows pass through untouched. Every peer corpus stores damage per
+    SHOT, so a peer row is multiplied by its own burst.
     """
     out = []
     for r in rows:
         d, burst = r.get("w_damage"), float(r.get("w_burst") or 1)
         if d and burst > 1:
-            r = dict(r, w_damage=float(d) / burst, w_damage_cycle=d)
+            r = dict(r, w_damage=float(d) * burst, w_damage_per_shot=d)
         else:
-            r = dict(r, w_damage_cycle=d)
+            r = dict(r, w_damage_per_shot=d)
         out.append(r)
     return out
 
@@ -1179,7 +1190,22 @@ def cameo_rows():
                     continue
                 if is_superweapon(rec):
                     continue
-                if rec.get("build_limit") is not None:      # check_band.py's epic/hero predicate
+                # ⛔ ZERO IS NOT A LIMIT, and this line said otherwise. `is_hero_limit` has
+                # documented the rule since 2026-09-08 — "PRESENT AND GREATER THAN ZERO ...
+                # `BuildLimit=0` means NO LIMIT in Westwood INI, not 'one only'" — but this drop
+                # tested PRESENCE, so an actor written `BuildLimit: 0` fell out of the ordinary
+                # population while `cameo_hero_rows` also refused it for not being a one-off. It
+                # landed in NEITHER pool and could match nothing at all.
+                #
+                # Found when the maintainer ruled the Chrono Tank back to an unlimited unit
+                # (2026-09-13). It inherits `^EpicVehicleTemplate`, so the limit cannot simply be
+                # deleted from the actor — `BuildLimit: 0` is the cancellation MiniYaml supports —
+                # and that spelling hit this bug. Measured blast radius: ONE actor in the whole
+                # ledger carries a zero limit, so this aligns the test with its own stated rule
+                # and changes nothing else.
+                if is_hero_limit((rec.get("build_limit") or {}).get("v")
+                                 if isinstance(rec.get("build_limit"), dict)
+                                 else rec.get("build_limit")):
                     continue
                 if ((rec.get("design") or {}).get("class_anchor")) in EXCLUDE_CLASSES:
                     continue
@@ -1249,13 +1275,14 @@ def cameo_rows():
                 #
                 # The authored per-cycle figure is kept beside it for display — it is what the
                 # ledger holds — but nothing computes from it.
+                # Cameo already stores the burst TOTAL, which IS the referenced coordinate
+                # (see `to_per_cycle`). Kept as authored; the per-shot figure is derived.
                 w_cycle = w.get("w_damage")
                 burst = float(w.get("w_burst") or 1)
-                if w_cycle and burst > 1:
-                    w = dict(w, w_damage=float(w_cycle) / burst)
+                per_shot = (float(w_cycle) / burst) if (w_cycle and burst > 1) else w_cycle
                 out.append({"source": "Cameo", "id": name, "name": name, "type": row_kind,
                             "hp": hp, "speed": spd, "turn_speed": turn, "cost": val("cost"),
-                            "structure_debt": debt, "w_damage_cycle": w_cycle,
+                            "structure_debt": debt, "w_damage_per_shot": per_shot,
                             "turn_ratio": (spd / turn) if (spd and turn) else None, **w})
     return out
 
@@ -1418,7 +1445,8 @@ def peer_hero_rows():
         if rid:
             by_src[r["source"]].add(rid)
     rows = [r for r in rows if not is_ai_only(r, by_src)]
-    return rows
+    # Peers store damage PER SHOT; the referenced coordinate is per CYCLE (see `to_per_cycle`).
+    return to_per_cycle(rows)
 
 
 def peer_variant_rows():
@@ -1448,7 +1476,7 @@ def peer_variant_rows():
         rid = (r.get("id") or "").strip().upper()
         if rid:
             by_src[r["source"]].add(rid)
-    return [r for r in rows if not is_ai_only(r, by_src)]
+    return to_per_cycle([r for r in rows if not is_ai_only(r, by_src)])
 
 
 def cameo_hero_rows():

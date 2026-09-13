@@ -166,36 +166,47 @@ def norm_words(text):
 ORIGINAL_SOURCES = ("OpenRA Red Alert", "OpenRA Tiberian Dawn",
                     "OpenRA Tiberian Sun", "Romanov's Vengeance")
 
+# ⛔ TWO TABLES, BECAUSE AN ALIAS IS EITHER A NAME OR AN ID AND MIXING THEM COSTS REAL MAPPINGS.
+# `name_score` is called TWICE per pair — once against the peer's display NAME and once against
+# its ID — and a single shared table applies to both, which is how one entry can be right in one
+# direction and wrong in the other.
+#
+# ⭐ THE SSM LAUNCHER IS THE CASE THAT PROVES IT (maintainer, 2026-09-13, twice). First:
+# "td_nod_ssmlauncher still uses the wrong references. It should use the SSM launcher and not the
+# combined arms MLRS". Then, after I removed the alias outright: "mobile sam was the correct
+# reference for the SSM Launcher so your first reference was correct but now that it's removed
+# it's wrong". Both are true, and the split is what satisfies both:
+#
+#   OpenRA TD  id MLRS   name "Mobile SAM"     <- CORRECT, and reachable only through the ID
+#   DTA        id MLRS   name "SSM Launcher"   <- correct by NAME anyway
+#   Combined   id MLRS   name "SSM Launcher"   <- correct by NAME anyway
+#   Combined   id MSAM   name "MLRS"           <- WRONG, and it was reachable only through NAME
+#   Romanov's  id mlrs   name "Rocket Launcher"<- WRONG by name
+#   Twisted    id MLRSW  name "Bullfrog"       <- WRONG by name
+#
+# As one table the alias scored ALL of them 1.00 and the tie-break picked by cost. Split, the id
+# alias reaches the two rows whose ID is `MLRS` and the name table never sees "MLRS" at all.
 NAME_ALIASES = {
     "battletank": ("mediumtank",),
     "mediumtank": ("battletank",),
-    # ONE-WAY ONLY. A Cameo `mlrs` may match Combined Arms' `MSAM` and DTA's "Rocket Launcher",
-    # because both of those ARE the MLRS under another name.
-    "mlrs": ("msam", "rocketlauncher"),
-    # 
-    # `"ssmlauncher": ("mlrs",)` WAS REMOVED 2026-09-13. The maintainer caught the symptom --
-    # "td_nod_ssmlauncher still uses the wrong references. It should use the SSM launcher and not
-    # the combined arms MLRS" -- and the alias was the cause. An SSM Launcher is not an MLRS; it
-    # is a surface-to-surface missile carrier, and the reverse alias above does not imply it.
-    #
-    # THE ALIAS EARNED NOTHING AND COST FOUR WRONG UNITS. Measured over every row an
-    # `ssmlauncher` can see, with the alias and without:
-    #     Combined Arms MLRS   "SSM Launcher"        1.00 -> 1.00   kept anyway
-    #     DTA Enhanced  MLRS   "SSM Launcher"        1.00 -> 1.00   kept anyway
-    #     Rise of East  AASAM  "Asian SSM Launcher"  0.85 -> 0.85   kept anyway
-    #     Combined Arms MSAM   "MLRS"                1.00 -> 0.40   ALIAS-ONLY, wrong unit
-    #     OpenRA TD     MLRS   "Mobile SAM"          1.00 -> 0.40   ALIAS-ONLY, an ANTI-AIR unit
-    #     Romanov's Ven mlrs   "Rocket Launcher"     1.00 -> 0.64   ALIAS-ONLY, wrong unit
-    #     Twisted Ins   MLRSW  "Bullfrog"            0.90 -> 0.38   ALIAS-ONLY, wrong unit
-    # Every genuine SSM Launcher already matches at 1.00 on its own NAME, so the alias only ever
-    # added false positives -- and it added them AT THE TOP SCORE, indistinguishable from the true
-    # match, which is what let `MSAM` "MLRS" and a Mobile SAM outrank the real row.
+    # DTA and OpenRA both NAME the MLRS "Rocket Launcher".
+    "mlrs": ("rocketlauncher",),
     # DTA writes it out in full where OpenRA and Combined Arms both abbreviate: `AGUN` "AA Gun"
     # and `CRAM` "AA Gun" against DTA's `RAAGUN` "Anti-aircraft Gun". Confirmed by the maintainer
     # as the same unit.
     "aagun": ("antiaircraftgun", "antiaircraft"),
     "alliedaagun": ("antiaircraftgun",),
 }
+
+# Applied to the peer's ID ONLY. A mod's id frequently preserves the unit's original identity
+# while its display name has been localised, expanded or renamed outright.
+ID_ALIASES = {
+    # Tiberian Dawn's SSM Launcher ships under the id `MLRS`, whatever the display says.
+    "ssmlauncher": ("mlrs",),
+    # Combined Arms and OpenRA both id the MLRS `MSAM`.
+    "mlrs": ("msam",),
+}
+
 
 
 def _substantial_containment(a, b):
@@ -218,14 +229,20 @@ def _substantial_containment(a, b):
     return lo >= 5 and lo / hi >= 0.4
 
 
-def name_score(cameo_id, peer_name):
-    """0..1. Exact and alias matches sit at the top; a shared distinctive word still counts."""
+def name_score(cameo_id, peer_name, aliases=None):
+    """0..1. Exact and alias matches sit at the top; a shared distinctive word still counts.
+
+    `aliases` selects WHICH table applies — `NAME_ALIASES` when comparing against the peer's
+    display name, `ID_ALIASES` when comparing against its id. Defaults to the name table so an
+    existing caller keeps its behaviour.
+    """
+    aliases = NAME_ALIASES if aliases is None else aliases
     tail = syn.norm(cameo_id.split("_")[-1])
     peer = syn.norm(peer_name)
     if not tail or not peer:
         return 0.0
     best = 0.0
-    for cand in (tail,) + NAME_ALIASES.get(tail, ()):
+    for cand in (tail,) + aliases.get(tail, ()):
         if cand == peer:
             return 1.0
         if cand.startswith(peer) or peer.startswith(cand):
@@ -411,8 +428,8 @@ def score(cam, rec, peer, cam_cost_pct, peer_cost_pct, home, cam_shape=None, pee
     # unused, and handed `td_gdi_mlrs` a Drone Launcher while DTA's real MLRS went unclaimed. Both
     # were then recorded as SHAPE matches — the scorer knew they were bad and the assignment kept
     # them anyway, which is the other half of this bug.
-    raw_name = max(name_score(cam["id"], peer.get("name", "")),
-                   name_score(cam["id"], peer.get("id", "")))
+    raw_name = max(name_score(cam["id"], peer.get("name", ""), NAME_ALIASES),
+                   name_score(cam["id"], peer.get("id", ""), ID_ALIASES))
     name = (4 if raw_name >= 1.0 else 3 if raw_name >= 0.9 else
             2 if raw_name >= 0.75 else 1 if raw_name >= 0.6 else 0)
     TIER_UNAVAILABLE = 0.0

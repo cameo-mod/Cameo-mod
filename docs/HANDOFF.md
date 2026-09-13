@@ -1,5 +1,210 @@
 # Cameo — THE HANDOFF
 
+## ⭐⭐ 2026-09-13 — FLEET SYNC, THE CODEX RECONCILIATION, AND THE REFERENCE MAP CLOSED OUT
+
+Written by **Claude-Local (Opus 5)** on `claude/weapon_inherit_audit_and_map`, 28 commits ahead of
+`master` and 0 behind. Read `docs/AGENT_WORKSPACE.md` → "Live agent roster" for who owns what.
+
+### Where master actually is, and why every branch looks wrong
+
+`master` is `b235c6980`, which took PR #345 as a **SQUASH**. That single fact explains most of the
+confusion on this tree right now, so it is the first thing to internalise:
+
+⛔ **AHEAD-COUNT IS NOT WORK-COUNT.** Every branch that fed #345 still reports its own commits as
+"ahead of master" because the hashes differ, even though the content landed. `git merge-base
+--is-ancestor` therefore answers the WRONG QUESTION. Verify by content:
+
+    git show origin/master:tools/balance/build_reference_report.py | grep -c "sources used"   # 1
+
+Measured 2026-09-13, four `claude/*` branches from 09-11 are in exactly that state and are
+**effectively landed — close them**: `refmap_damage_tick_fix`, `fix_peer_armament_selection`,
+`playtest_baseline`, `cl01_target_payload_review`. Their content is in master, and
+`is_upgrade_gated` is correctly ABSENT because its own author reverted it (`3a75e831f`).
+
+⚠ `codex/recovery-pr345-merge-20260912` reports **47 ahead / 828 files / 4.5M insertions** and
+that number is an illusion for the same reason — it carries #345's ORIGINAL merge commit. The
+genuinely new part is **118 tool files, ~22k lines**, and that part is real and is NOT on master.
+
+### What Codex (Blackrobe) has been doing — and what of it is duplicate
+
+**On MY branch, two commits, and one of them collided with me head-on:**
+
+* `41d0dad57` *"make R1 and R3 diagnostics fail closed"* — Codex solved the SAME damage-convention
+  problem I was solving, by a different design: keep both conventions alive, make the convention an
+  explicit parameter (`DAMAGE_PER_SHOT` / `DAMAGE_BURST_INCLUSIVE`), and withhold whenever it is
+  not stated. Its own comment states the premise: *"The source corpus currently lacks that
+  compatible evidence, so a missing guard is an honest hold."*
+  ⛔ **That premise is false and the AUTHORED YAML disproves it.**
+  `td_gdi_mammothtank_120mmdualhv` declares `Damage: 16000`, `Burst: 2`, `BurstDelays: 8`,
+  `ReloadDelay: 72`, and the snapshot carries `w_damage` 32,000 — so Cameo stores the burst TOTAL,
+  provably; `td_gdi_mlrs_227mm` (8,000 × 6 = 48,000) agrees. The convention is knowable, so the
+  cure is to RESOLVE it, not to stop reporting. Left as shipped it printed **WITHHELD on every
+  row** of the verifier column the maintainer had just asked to keep.
+  **Reconciled, not reverted:** I kept its genuinely better half — refusing a recovered burst time
+  below zero, because a cycle shorter than `ReloadDelay` is impossible and clamping it to 0 would
+  certify a broken timing model — and replaced the blanket hold with normalisation at row
+  construction. WITHHELD is now **36 targeted cells, not all of them**.
+* `8819225e7` *"measure deprecated-name lane"* — `tools/balance/audit_deprecated_name_lane.py` +
+  a 5,495-line report. **Complementary, not duplicate**: it measures the R10–R15 population that
+  `DESIGN.md` §11b.0 already rules. Keep.
+
+**On `codex/recovery-pr345-merge-20260912`, genuinely new and worth landing:** new audits
+(`audit_promotion_superiority`, `content_pack_dependencies`, `target_payload_routes`,
+`secondary_payload_routes`, `status_effect_inventory`, `ownership_lineage`), `armor_projection.py`,
+`assemble_four_voice_pilot.py`, an RA3 extractor (1,448 lines), and a large `tools/tests/` suite.
+
+⚠ **One duplication risk to check before landing it:** it adds `tools/tests/test_virtual_anchor.py`.
+`docs/TASK_INDEX.md` line 11 warns that a virtual-anchor mechanism was once re-designed when
+`fit_class.py --spec` already implemented it. Confirm the test targets the EXISTING mechanism.
+
+### The reference map is closed out for the five playtest factions
+
+Scope is `td_gdi · td_nod · ra1_allies · ra1_soviets · japan` — the four-faction project
+(`docs/balance/FOUR_FACTION_ROLE_PAYLOAD_DISPOSITION_20260911.md`) plus the Japan pilot. **845 of
+872 cells now use ALL their available sources; 27 use only some.**
+
+⛔ **"Every reference used" is NOT REACHABLE, and the arithmetic is the answer, not an excuse.**
+4,780 reference rows exist; clauses 2+3 permit at most **1,870** assignments; only **2,241** rows
+are ever visible to a same-type routed actor. So **2,539 rows can never be claimed by anybody** —
+Romanov's Vengeance alone contributes 614, because it ships a full RA2 navy and the factions routed
+to it field almost no ships. That is a CONTENT fact. `tools/balance/reference_coverage.py` reports
+every empty slot with its CAUSE, which is the actionable form: in scope, 157 TAKEN, 97 NOT
+NAME-BACKED, 8 NO CANDIDATE.
+
+**Defects found and fixed this session, each measured before and after:**
+
+1. **An original's worthless bid outranked an exact name match.** The greedy sorted with "is this
+   an original?" as the OUTERMOST key, above the name score. `ra2_allies_nighthawk` took two rows
+   named "Black Eagle" at name **0.154** while `ra2_allies_blackeagle` scored **1.0** and was
+   refused; the shape-only rows were then correctly binned and both Black Eagles ended the run held
+   by NOBODY. The preference now sits INSIDE the name bucket, so the `firerocketsoldier` 0.867 vs
+   `rocketsoldier` 0.850 case it was written for still resolves the same way. **+17 mappings.**
+2. **An SSM Launcher is not an MLRS.** `NAME_ALIASES["ssmlauncher"] = ("mlrs",)` scored a PERFECT
+   1.00 against anything merely NAMED "MLRS". Measured: every genuine SSM Launcher already matched
+   at 1.00 on its own name, and the alias ONLY ever added wrong units — CA's `MSAM` "MLRS", OpenRA
+   TD's `MLRS` **"Mobile SAM"** (an anti-air unit), RV's "Rocket Launcher", TI's "Bullfrog".
+   Removed. The reverse direction (`mlrs` → `msam`/`rocketlauncher`) is legitimate and stays.
+3. **The RA1 COUNTRIES are sides.** OpenRA RA tags country-specific units with their COUNTRY, never
+   their side, and the route tokens were only `("allies",)` / `("soviet",)` — so `TTNK` Tesla Tank
+   (russia), `DTRK` Demolition Truck (ukraine), `CTNK` Chrono Tank (germany), `STNK` Phase
+   Transport (france) and `MGG` Mobile Gap Generator (england) were invisible to every faction.
+   `ra1_soviets_teslatank` scores an EXACT 1.000 against "Tesla Tank" and was holding Combined
+   Arms' `TTRA` **"Tesla Track"** instead. **+3, nothing lost. O2 113 → 110, gating 11 → 8.**
+4. **The recovery index was missing the HERO lane.** `td_gdi_exosuit` read "1 of 2 sources" on HP,
+   SPEED and COST while DTA's `XO` sat there fully eligible. I had fixed exactly this for the
+   VARIANT lane one commit earlier and forgot heroes in the same line.
+5. **334 of 621 burst rows publish a rate that never folded burst in** — they satisfy
+   `rate == damage / reload` while declaring `Burst > 1`. Inverting one for a burst delay returns a
+   confident, meaningless number: DTA's `MLRS` (damage 100, burst 2, reload 400, rate 0.25) implies
+   an 800-tick cycle and a 400-tick "burst delay" equal to its own reload. `burst_delay_of` now
+   withholds on those (280 recover, 424 withheld).
+
+### THE ONE FORMULA (maintainer, 2026-09-12/13) — binding
+
+    rate = damage_per_shot × burst / (reload_delay + sum of the Burst − 1 delays)
+
+The unit is **damage per TICK**, not per second — every term in the divisor is authored in engine
+ticks. The stored field is still called `w_dps` across the ledgers; renaming it is its own
+migration, so the FUNCTION and every label say "per tick" to stop the misnomer spreading.
+
+⭐ **`formula.dps` has implemented this all along** and already owns `ENGINE_DEFAULT_BURST_DELAY`
+and the varying-delay sum, so `reference_targets.burst_time` DELEGATES to
+`formula.burst_delay_sum`. I briefly shipped a second copy including a duplicate constant — the
+`allows()` mistake this repo has already paid for twice. **Do not add a fourth implementation.**
+
+Engine semantics, checked against source rather than assumed — they are STRICTER than
+"repeat the last entry":
+
+    Armament.cs:146   Burst > 1 && BurstDelays.Length > 1 && Length != Burst-1 -> YamlException
+    Armament.cs:476   length 1 -> that value every gap; else walked in order
+    WeaponInfo.cs:129 BurstDelays = [5]
+
+Measured in the tree: 829 weapons single-entry, 36 declare none (they run on `[5]`), **0 vary, 0
+illegal**. Varying delays ARE live in the REFERENCE corpora, which is why the support was needed.
+
+### ⛔ TWO THINGS BLOCKED ON A MAINTAINER RULING — do not proceed past these
+
+1. **`audit_original_coverage` O1 is 13 against its ratchet of 12, so it EXITS 1.** I did not raise
+   the ratchet and did not revert a correct fix. The single new row is `ra1_allies_phasetransport`,
+   and it DISPROVES the premise O1 rests on — *"an original exists in OpenRA, so CA and DTA, being
+   supersets, must have it too"*. They ship the id and give it to the wrong side: CA's `STNK.Nod`
+   and DTA's `STNK` are both **Nod's Stealth Tank**, a different unit, so routing correctly refuses
+   them and the gap can never be closed by matching. That is the same shape as the existing
+   `O2_UNSETTLED` carve-out for Romanov's Vengeance — report it, do not gate on it. One line.
+2. **A DATA asymmetry, not a bug.** `ra1_allies_chronotank` and `ra1_allies_mobilegapgenerator`
+   both carry `BuildLimit: 1`, so by the ruled test (*"a hero is a limit of exactly one"*) they are
+   heroes on the Cameo side, while OpenRA's `CTNK` and `MGG` are ordinary buildable units.
+   Hero-to-hero-only then refuses a perfect 1.000 name match on both. Either Cameo's limits are
+   wrong or the rule needs a carve-out; both are gameplay calls.
+
+Also outstanding, not blocking: **OpenRA is not a complete authority on originals.**
+`td_nod_ssmlauncher` is matched "SSM Launcher" by BOTH supersets and by no OpenRA source, because
+OpenRA TD ships no SSM Launcher at all (verified across all 49 of its raw rows). The
+originals/expansions split rests on a premise with at least one counterexample.
+
+### What is still necessary before the balance pipeline can run
+
+⛔ **GREP `docs/TASK_INDEX.md` FIRST — the virtual-anchor MECHANISM ALREADY EXISTS.**
+`fit_class.py --spec hp,speed,range_wdist,damage,reload,cost0` **is** the virtual anchor, and
+`derive_virtual_anchor.py` already defaults to exactly the five playtest factions. HANDOFF has said
+it for days: *"What is missing is the INPUTS, not the mechanism."* Ran it 2026-09-13, 28 classes:
+
+| blocker | classes |
+|---|---|
+| no calibrated model damage/reload supplied | **26 of 28** |
+| THIN range / hp / speed / cost (too few sources to trust a median) | 12 / 10 / 10 / 10 |
+| **BIASED — the tool itself says "do not sign"** | 3 fields |
+| NO SOURCE at all | 1 |
+| UNAPPROVED (approval is the maintainer's act, by design) | 27 |
+
+So the order is: **model damage/reload inputs → per-class approval (holding the 3 BIASED back) →
+`apply_balance --confirm`.** Nothing writes yaml until then.
+
+### ⛔ ONE STEP LEFT ON THE CHRONO TANK — a design annotation, deliberately not changed
+
+Maintainer ruled 2026-09-13: *"make the CTNK a regular unit without build limit. Like a fire
+support so then it can match the reference."* Done and verified, in three parts — and it still
+does not match, for a fourth reason that is a DESIGN decision rather than a bug:
+
+1. `BuildLimit: 1` removed from `ra1_allies_chronotank`, `_mobilegapgenerator`, `_mobileradarjammer`.
+2. `Inherits@Template: ^EpicVehicleTemplate` → `^FireSupportTemplate`. The ledger now reads
+   `subtype: FireSupport` and `build_limit: None`, so both took effect.
+3. ⭐ A REAL BUG this uncovered, fixed: `cameo_rows()` dropped on `build_limit is not None`, while
+   the repo's own `is_hero_limit` has said since 2026-09-08 that a limit is "PRESENT AND GREATER
+   THAN ZERO — `BuildLimit=0` means NO LIMIT". An actor written `BuildLimit: 0` therefore fell out
+   of the ordinary population AND was refused by the hero lane for not being a one-off: it landed
+   in NEITHER pool and could match nothing. Measured blast radius before changing it: exactly ONE
+   actor in the whole ledger carries a zero limit.
+
+**What still blocks it:** the ledger carries `design.class_anchor: epic_vehicle`, and
+`EXCLUDE_CLASSES = {"epic_vehicle"}` removes the actor from `cameo_rows()` outright.
+`class_anchor` is a PRESERVED DESIGN ANNOTATION — `extract_stats` writes `None` and the value is
+carried forward from the design pass, so it does not follow the template. Changing it to
+`fire_support` reprices the unit into another class, which is a balance judgement and needs the
+maintainer's word, not a quiet edit. **Both gap generator and radar jammer DID land:** the gap
+generator now has three sources (CA `MGG`, DTA `MSA` "Mobile Sensor Array", OpenRA `MGG`) and the
+jammer has two, with DTA shipping no jammer at all — hence its `O1_UNSETTLED` entry.
+
+### ⭐ NEXT, AND ALREADY RULED — recompute the 334 rows that ignore burst
+
+Maintainer chose "recompute them to obey the formula" over withholding. 334 of 621 reference rows
+with `Burst > 1` publish `rate == damage / reload`, never folding burst in, so their rate
+understates the unit by roughly its burst. They currently withhold a burst-delay recovery but
+their `w_dps` is untouched. Recomputing moves every DPS-derived target that draws on them, so it
+wants its own before/after measurement — it is the first thing to pick up.
+
+### Instructions for the rest of the fleet
+
+* **Do not touch `tools/balance/{assign_references,reference_targets,reference_distribution,
+  reference_coverage,build_reference_report,faction_routes}.py` or `tools/reference/variant_pool.py`
+  without saying so on the roster first.** Codex and I collided on `reference_targets.py` today and
+  it cost a hand-merge; one owner per file-set (`BALANCE_PROGRAM_PLAN.md` §2) exists for this.
+* **Never read a background task's notification exit code** — read the `exit=` line in the output.
+* **Never raise a ratchet.** If a correct fix trips one, say so and ask, as done above.
+* **The reference map is one artifact, not many.** Update the existing page rather than publishing
+  a new one; find it with the Artifact `list` action instead of guessing.
+
+
 ## ⭐⭐ 2026-09-12 — ALL NINE DECISIONS ARE RULED. THE QUEUE IS UNBLOCKED.
 
 The rulings are binding and live in **`DESIGN.md` §11b.0 (R1–R9)** — read that, not this

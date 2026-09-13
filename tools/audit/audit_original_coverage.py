@@ -65,6 +65,27 @@ ORIGINAL_SOURCES = (
 # "Bazooka" and its AA gun "Anti-aircraft Gun". Each is fixed by ONE alias, and the list is
 # finite and checkable. It must fall, and it may never rise again.
 O1_BASELINE = 12
+# ⛔ O1_UNSETTLED — actors whose supersets ship the ID and give it to ANOTHER SIDE, so the gap can
+# never be closed by matching. Ruled 2026-09-13; the same shape as the O2 carve-out below, and
+# under the same obligation to be DELETED rather than grown.
+#
+# `ra1_allies_phasetransport` is the case. It holds OpenRA Red Alert's `STNK` "Phase Transport", a
+# genuine France-tagged RA1 original. Combined Arms and DTA both ship an `STNK` too — and both of
+# theirs is NOD'S STEALTH TANK, a different unit, which faction routing correctly refuses. So this
+# actor can never reach three sources, and counting it as a mapping defect asserts something the
+# data contradicts.
+#
+# ⚠ THIS DISPROVES THE PREMISE THE WHOLE O1 RULE RESTS ON — "an original exists in OpenRA, so CA
+# and DTA, being supersets, must have it too". They are supersets of the ROSTER, not of the
+# faction assignment, and a shared id is not a shared unit. `td_nod_ssmlauncher` is the mirror
+# image: matched "SSM Launcher" by BOTH supersets and shipped by no OpenRA source at all.
+O1_UNSETTLED = (
+    "ra1_allies_phasetransport",
+    # CA and OpenRA both ship `MRJ` "Mobile Radar Jammer" and DTA ships NO jammer of any kind —
+    # only Radar DOMES, which are buildings. Verified 2026-09-13 after the maintainer removed this
+    # actor's BuildLimit, which is what let it reach two sources in the first place.
+    "ra1_allies_mobileradarjammer",
+)
 # ⛔ O2 IS SPLIT, because it was measuring one settled question and one unsettled one and gating
 # on the sum. Tiberian Dawn, Red Alert and Tiberian Sun ship the original rosters and nothing
 # else, so an unclaimed row there is a real defect and ratchets normally — that number is now
@@ -131,7 +152,11 @@ def main() -> int:
     gating = [r for r in o2 if r[0] not in O2_UNSETTLED]
     print(f"\n   gating sources: {len(gating)} (ratchet {O2_BASELINE}) · "
           f"unsettled, reported only: {len(o2) - len(gating)}")
-    failed = len(o1) > O1_BASELINE or len(gating) > O2_BASELINE
+    o1_gating = [r for r in o1 if r[0] not in O1_UNSETTLED]
+    if len(o1_gating) != len(o1):
+        print(f"\n   O1 gating actors: {len(o1_gating)} (ratchet {O1_BASELINE}) · "
+              f"unsettled, reported only: {len(o1) - len(o1_gating)}")
+    failed = len(o1_gating) > O1_BASELINE or len(gating) > O2_BASELINE
     print(f"\nexit={1 if failed else 0}")
     return 1 if failed else 0
 

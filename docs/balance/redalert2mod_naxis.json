@@ -1623,7 +1623,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "2470",
       "pricing": true,
       "range": "12345",
@@ -1634,17 +1634,15 @@
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
-       "^Warhead_Concussion_Medium",
        "^Effect_Concussion_Medium",
        "^RA2Grenade"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "NaxGrilleArty",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "6",
@@ -4300,7 +4298,6 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "^Warhead_MissileHE_Medium",
        "NaxiShrekCons"
       ],
       "warheads": [
@@ -4436,7 +4433,6 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "^Warhead_MissileHE_Medium",
        "NaxiShrekCons"
       ],
       "warheads": [
@@ -4624,7 +4620,6 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "^Warhead_MissileHE_Medium",
        "NaxiShrek"
       ],
       "warheads": [
@@ -4760,7 +4755,6 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONED_E",
       "versus_templates": [
-       "^Warhead_MissileHE_Medium",
        "NaxiShrek"
       ],
       "warheads": [
@@ -7158,7 +7152,7 @@
         "damage": "6000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
-        "tag": "Flame_HeavyFlatCompatibility",
+        "tag": "Flame_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -7169,14 +7163,13 @@
       "reloaddelay": "44",
       "slot": "Armament@Flam",
       "versus_templates": [
-       "^Compatibility_Flame_HeavyFlat",
-       "^Warhead_Flame_Light",
        "^Warhead_Flame_Heavy",
+       "^Warhead_Flame_Light",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Flame_Light",
-       "^Warhead_Flame_Heavy"
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Flame_Light"
       ],
       "weapon": "SyndicateFireballLauncher",
       "weapon_class_source": "template"
@@ -7727,7 +7720,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "2470",
       "pricing": true,
       "range": "12345",
@@ -7738,17 +7731,15 @@
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
-       "^Warhead_Concussion_Medium",
        "^Effect_Concussion_Medium",
        "^RA2Grenade"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "NaxGrilleArty",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
@@ -7763,7 +7754,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "2470",
       "pricing": true,
       "range": "13333",
@@ -7776,11 +7767,10 @@
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "NaxGrilleArty_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -8997,7 +8987,7 @@
         "damage": "6000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
-        "tag": "Flame_HeavyFlatCompatibility",
+        "tag": "Flame_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -9008,14 +8998,13 @@
       "reloaddelay": "44",
       "slot": "Armament@Flam",
       "versus_templates": [
-       "^Compatibility_Flame_HeavyFlat",
-       "^Warhead_Flame_Light",
        "^Warhead_Flame_Heavy",
+       "^Warhead_Flame_Light",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Flame_Light",
-       "^Warhead_Flame_Heavy"
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Flame_Light"
       ],
       "weapon": "SyndicateFireballLauncher",
       "weapon_class_source": "template"
@@ -9748,7 +9737,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "2470",
       "pricing": true,
       "range": "12345",
@@ -9758,17 +9747,15 @@
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
-       "^Warhead_Concussion_Medium",
        "^Effect_Concussion_Medium",
        "^RA2Grenade"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_Concussion_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "NaxGrilleArty",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",

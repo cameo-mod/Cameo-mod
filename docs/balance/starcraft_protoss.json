@@ -1335,7 +1335,7 @@
         "damage": "13600",
         "falloff": "100, 40, 0",
         "spread": "100",
-        "tag": "Prism_HeavyFlatCompatibility",
+        "tag": "Prism_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -1382,13 +1382,13 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6474",
       "reloaddelay": "6",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Prism_HeavyFlat",
+       "^Warhead_Prism_Heavy",
        "^LightMissile",
        "^SmallArms",
        "^Chaingun",
@@ -1396,9 +1396,11 @@
        "^TeslaWeapon",
        "^LaserWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Prism_Heavy"
+      ],
       "weapon": "VoidRayBeam",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4997,7 +4999,7 @@
         "damage": "25000",
         "falloff": "100, 81, 61, 38, 0",
         "spread": "76",
-        "tag": "Waveforce_HeavyFlatCompatibility",
+        "tag": "Waveforce_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -5016,19 +5018,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9343",
       "reloaddelay": "120",
       "slot": "Armament@Upgrade2",
       "versus_templates": [
-       "^Compatibility_Waveforce_HeavyFlat",
+       "^Warhead_Waveforce_Heavy",
        "^TeslaWeapon",
        "^HeavyCannon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Waveforce_Heavy"
+      ],
       "weapon": "WaveforceCannonDistortedBeam1",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -5359,7 +5363,7 @@
         "damage": "40000",
         "falloff": "100, 52, 0",
         "spread": "39",
-        "tag": "Quantum_MediumFlatCompatibility",
+        "tag": "Quantum_Medium",
         "type": "AreaDamage"
        },
        {
@@ -5392,13 +5396,13 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5044",
       "reloaddelay": "30",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Quantum_MediumFlat",
+       "^Warhead_Quantum_Medium",
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",
        "^SmallArms",
@@ -5406,9 +5410,11 @@
        "^Grenade",
        "^TankDestroyerCannon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Quantum_Medium"
+      ],
       "weapon": "PositronGrenade",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
