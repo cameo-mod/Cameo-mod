@@ -11053,3 +11053,16 @@ found in reachable history. Requested Aedis's C32 reconciliation on PR 335;
 absence is not permission to release the ownership gate. PR remains draft.
 
 Co-Authored-By: Codex <noreply@openai.com>
+
+## 2026-09-13 — INI untagged-row audit corrected
+
+The new read-only audit now reports every unowned INI-corpus row under one
+field-based bucket. It finds 468 rows currently marked buildable without owners
+and 138 rows with a prerequisite but no owner; these are audit findings, not
+proof that extraction or buildability is fixed.
+
+The labels avoid inferred identities: zero cost remains zero_cost, and
+TechLevel 11 plus low cost remains tech11_low_cost. Per-source bucket totals
+are asserted against untagged totals, with focused fixtures over the committed
+corpus. No extractor, corpus row, reference eligibility, or gameplay data is
+changed by this audit.
