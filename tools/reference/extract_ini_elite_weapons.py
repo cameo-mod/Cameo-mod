@@ -58,7 +58,8 @@ from extract_ini_units import (read_ini, resolve_inherits, merge_overlay,  # noq
 # flying a projectile no baseline weapon uses would have no verdict and would silently abstain.
 # Importing the one `role_of` keeps a single vocabulary with no second copy and no load order
 # between the two extractors.
-from extract_ini_projectile_roles import (role_of, DEFAULT_AA, DEFAULT_AG,  # noqa: E402
+from extract_ini_projectile_roles import (_verified_sources,  # noqa: E402
+                                          role_of, DEFAULT_AA, DEFAULT_AG,
                                           DEFAULT_BASIS)
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -225,8 +226,12 @@ def load(root=ROOT):
     doc = json.loads(path.read_text(encoding="utf-8"))
     if doc.get("schema") != 1:
         raise ValueError("unsupported INI elite weapon evidence")
+    # ⛔ THE PIN IS RE-CHECKED HERE, NOT ONLY WHERE IT WAS WRITTEN — see `_verified_sources`.
+    # A source whose corpus pin has moved contributes no elite weapon at all, which is the same
+    # abstention every other unprovable thing in this lane produces.
+    verified, load.dropped = _verified_sources(doc, root)
     return {(entry["source"], unit): record
-            for entry in doc["sources"] for unit, record in entry["units"].items()}
+            for entry in verified for unit, record in entry["units"].items()}
 
 
 def main(argv=None) -> int:

@@ -184,6 +184,37 @@ def build(ini_dir: pathlib.Path) -> dict:
     }
 
 
+def _verified_sources(doc, root):
+    """The evidence sources whose byte pins STILL match the corpus — fail closed per source.
+
+    ⛔ A HASH RECORDED AT WRITE TIME PROVES NOTHING AT READ TIME (Astra, PR #375 blocker 4:
+    *"Evidence hashes are recorded but not enforced when consumed; stale projectile/elite evidence
+    and pairing artifacts can be accepted."*). Both extractors refuse to run unless the INI they
+    read hashes to the pin the corpus carries — and then wrote a JSON that any later process could
+    consume months after the corpus moved underneath it. Re-checking here closes that window with
+    the two files the repository actually holds, so it works on a machine without the 9.9 GB
+    reference folder.
+
+    Per SOURCE, not per document: a mismatch drops that source's evidence and leaves the rest
+    usable, which is the same shape as every other abstention in this lane. The dropped sources
+    are returned so a caller can report them rather than discover a silent gap.
+    """
+    pins = corpus_provenance()
+    kept, dropped = [], []
+    for entry in doc["sources"]:
+        source = entry.get("source")
+        want = pins.get(source)
+        got = (entry.get("rules_sha256"), entry.get("overlay_sha256"))
+        if want is None:
+            dropped.append((source, "the corpus pins no bytes for this source"))
+            continue
+        if tuple(want) != got:
+            dropped.append((source, "corpus pin moved since this evidence was written"))
+            continue
+        kept.append(entry)
+    return kept, dropped
+
+
 def load(root=ROOT):
     """{(source, projectile): verdict} for `armament_roles.ini_views`; {} when absent."""
     path = pathlib.Path(root) / "docs" / "reference" / "ini_projectile_role_evidence.json"
@@ -192,8 +223,9 @@ def load(root=ROOT):
     doc = json.loads(path.read_text(encoding="utf-8"))
     if doc.get("schema") != 1:
         raise ValueError("unsupported INI projectile role evidence")
+    verified, load.dropped = _verified_sources(doc, root)
     out = {}
-    for entry in doc["sources"]:
+    for entry in verified:
         for name, verdict in entry["projectiles"].items():
             out[(entry["source"], name)] = verdict
             out[(entry["source"], name.lower())] = verdict

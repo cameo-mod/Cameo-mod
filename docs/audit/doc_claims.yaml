@@ -537,7 +537,7 @@ claims:
           raise SystemExit(f'balance drift measurement unavailable: unexpected output/exit {result.returncode}')
 
   - id: armament_multi_role_actors
-    value: 108
+    value: 106
     tolerance: 0
     what: >
       Priced actors whose UNCONDITIONAL armaments span more than one targeting role (ground / air /
@@ -647,3 +647,57 @@ claims:
       if entries['DTA Classic']['reachable'] != 0:
           raise SystemExit('DTA Classic must have no reachable elite weapon')
       print(entries['DTA Enhanced']['reachable'])
+
+  - id: armament_unproven_peer_votes
+    value: 0
+    tolerance: 0
+    what: >
+      Pairs in armament_pairing.json whose PEER weapon could not state a targeting domain. The
+      maintainer ruled on 2026-09-13 that "ambiguous role or identity must abstain", after Astra
+      showed the old max-damage fallback promoting secondary AA guns (FlakTrackAAGun,
+      RA1RedEyeAA) to ground main-gun evidence. This must stay 0: any non-zero value means an
+      unproven weapon is voting again, which is the one pairing the ruling forbids.
+    docs: [docs/design/ARMAMENT_PAIRING.md]
+    measure: |
+      import json, pathlib
+      doc = json.loads(pathlib.Path('docs/balance/derived/armament_pairing.json')
+                       .read_text(encoding='utf-8'))
+      print(sum(1 for e in doc['actors'].values()
+                for s in e['sources'].values()
+                for p in s.get('pairs', ())
+                if p['peer'].get('role') is None))
+
+  - id: armament_reference_tier_original
+    value: 140
+    tolerance: 0
+    what: >
+      Actors that reference a peer's BASE weapon because an original-shipping mod matched them by
+      name; the remaining 174 of 314 are EXPANDED and reference the elite/upgraded replacement
+      instead (maintainer, 2026-09-13). The split is what keeps a replacement from voting beside
+      the weapon it replaces, so a move here means the original/expanded boundary shifted and every
+      DTA elite weapon changed hands.
+    docs: [docs/design/ARMAMENT_PAIRING.md]
+    measure: |
+      import json, pathlib
+      doc = json.loads(pathlib.Path('docs/balance/derived/armament_pairing.json')
+                       .read_text(encoding='utf-8'))
+      print(doc['stats']['actors_tier_original'])
+
+  - id: armament_pairing_input_fingerprints
+    value: 3
+    tolerance: 0
+    what: >
+      Input files whose sha256 armament_pairing.json records so a consumer can refuse a STALE
+      artifact - the two INI evidence documents and the reference assignment. Astra's PR #375
+      blocker 4: hashes were recorded at write time and never re-checked at read time, so evidence
+      months out of date could be rendered as current. build_reference_report.pairing_document()
+      re-hashes all three and raises. A drop here means the guard lost a file it was covering.
+    docs: [docs/design/ARMAMENT_PAIRING.md]
+    measure: |
+      import json, pathlib
+      doc = json.loads(pathlib.Path('docs/balance/derived/armament_pairing.json')
+                       .read_text(encoding='utf-8'))
+      inputs = doc.get('inputs') or {}
+      if not all(v and len(v) == 64 for v in inputs.values()):
+          raise SystemExit('an input fingerprint is missing or not a sha256')
+      print(len(inputs))

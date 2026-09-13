@@ -685,12 +685,39 @@ _PAIRING = []
 
 
 def pairing_document():
+    """The per-armament pairing artifact, REFUSED when its inputs have moved since it was built.
+
+    ⛔ A RECORDED HASH THAT NOBODY RE-CHECKS IS A COMMENT (Astra, PR #375 blocker 4). The artifact
+    names the three files it was derived from and their sha256; if any of them differs now, the
+    pairing on disk describes a corpus that no longer exists and the map would render it as
+    current evidence. Stale evidence is worse than missing evidence, because it looks the same as
+    the real thing — so this raises rather than degrades.
+
+    A document with no `inputs` block at all is a pre-fingerprint artifact and is refused for the
+    same reason: it cannot prove it is fresh. Regenerate with
+    `python tools/balance/build_armament_pairing_report.py --write`.
+    """
     if not _PAIRING:
+        import hashlib
         path = ROOT / "docs/balance/derived/armament_pairing.json"
         try:
             doc = json.loads(path.read_text(encoding="utf-8"))
         except Exception:
-            doc = {"actors": {}}
+            _PAIRING.append({"actors": {}})
+            return _PAIRING[0]
+        recorded = doc.get("inputs")
+        if not recorded:
+            raise ValueError(
+                "armament_pairing.json carries no input fingerprints; rebuild it with "
+                "tools/balance/build_armament_pairing_report.py --write")
+        for rel, want in sorted(recorded.items()):
+            src = ROOT / rel
+            got = (hashlib.sha256(src.read_bytes()).hexdigest() if src.exists() else None)
+            if got != want:
+                raise ValueError(
+                    f"armament_pairing.json is stale: {rel} has changed since it was built "
+                    f"(recorded {want}, found {got}). Rebuild it with "
+                    "tools/balance/build_armament_pairing_report.py --write")
         _PAIRING.append(doc)
     return _PAIRING[0]
 

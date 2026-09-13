@@ -34,17 +34,23 @@ A ten-fold range gap inside one row. Measured over the whole tree (2026-09-13):
 | | |
 |---|---|
 | priced actors | **940** |
-| **actors whose unconditional armaments span more than one role** | **108** |
+| **actors whose unconditional armaments span more than one role** | **106** |
 | …of those, still multi-role after `baseline_armaments` has run | 47 |
 | air-role armaments the existing `_AA` NAME test cannot see | **50** |
-| assigned actors whose reference row is contaminated by the fold | **40** |
+| assigned actors whose reference row is contaminated by the fold | **39** |
 
-⚠ **108 and 47 are different facts and an earlier draft of this document quoted the 47 as the
+⚠ **106 and 47 are different facts and an earlier draft of this document quoted the 47 as the
 scope, understating it by more than half.** `reference_distribution.baseline_armaments` already
-drops **61** of the 108 before anything downstream sees them — but it drops them by matching
+drops **59** of the 106 before anything downstream sees them — but it drops them by matching
 `@AA` / `_AA` in the slot or weapon NAME, which is the guard §3b shows cannot see 50 real air
-weapons. So 108 is the population the ruling covers, 47 is merely what survives a name test that
+weapons. So 106 is the population the ruling covers, 47 is merely what survives a name test that
 is itself unreliable. Registered as `armament_multi_role_actors` in `docs/audit/doc_claims.yaml`.
+
+⛔ **THIS FIGURE WAS FIRST PUBLISHED AS 108 AND THAT WAS WRONG.** `audit_doc_claims` measured 106
+against the same tree from the day the claim was registered; the 108 came from a hand count taken
+while the module was still being written, and it was never re-derived from the artifact. The two
+actors are not missing from anything — they were never in the population. Corrected 2026-09-13,
+value and prose together, which is the whole reason the registry requires a `measure:` block.
 
 ## 2. Why the references can already fix it
 
@@ -167,25 +173,112 @@ td_gdi_battletank
 handed `90mmDummy` — a real armament with a real range whose only job is to set the next slot's
 rate of fire — to the Battle Tank's missile.
 
-### 2d. A source that cannot state a role still votes on the main gun
+### 2d. ⛔ STRUCK — a source that cannot state a role now ABSTAINS
 
-⛔ **THIS WAS A REGRESSION IN THE FIRST DRAFT AND IT WAS CAUGHT BY READING THE OUTPUT.** Seven of
-the nine INI sources pin no `source_sha256`, so §4 refuses to state their projectiles' domains and
-every one of their armaments arrives with `role = None`. The first `pair_by_role` simply skipped
-those views — and `ra2_soviets_apocalypsetank` (5 sources), `ra2_allies_ifv` (5),
-`yuri_gatlingtank` (5) and `ra2_soviets_flaktrack` (4) came back with **zero votes on any weapon**.
-That is precisely the shape of PR #369: a guard that looks green by having nothing left to guard.
+**This section used to say the opposite, and the reversal is the ruling, not a bug fix.**
 
-The rule is satisfied either way. We cannot prove such a source has the anti-air weapon, so it does
-not vote on it; we can see it has a main gun, so it votes there and **nowhere else**. Recovered
-**317** votes, and the pair is flagged so a reader can always discount it.
+The original text: seven of the nine INI sources pin no `source_sha256`, so §4 refuses to state
+their projectiles' domains and every one of their armaments arrives with `role = None`. Dropping
+those views left `ra2_soviets_apocalypsetank` (5 sources), `ra2_allies_ifv` (5) and
+`yuri_gatlingtank` (5) with zero votes, so a fallback let such a source vote on the main gun only,
+ordered ground → both → air. That recovered 317 votes.
 
-⛔ **And it pairs against the GROUND weapon, not the strongest one** — a second defect in the same
-helper, found the same way. On the Apocalypse the AA missile out-damages the cannon (32,000 vs
-24,000), so taking the hardest hitter matched **five peer cannons against an anti-air missile** —
-the one pairing this ruling forbids. `UNPROVEN_PREFERENCE` orders ground → both → air → special,
-which is not a new rule either: DESIGN's `anti_air_vehicle` anchor already says to price on the
-ground weapon.
+**Astra falsified the premise (PR #375 review, blocker 3).** The fallback picked the hardest-hitting
+role-less weapon, and a *secondary* AA gun can out-damage its own chassis' main gun —
+`FlakTrackAAGun` and `RA1RedEyeAA` were both being reported as **ground main-gun evidence**. That is
+the one pairing this whole document exists to forbid, arrived at from the other direction: not by
+mixing a cannon with a missile on the Cameo side, but by taking an anti-air gun as the reference.
+
+Maintainer's ruling, 2026-09-13: *"ambiguous role or identity must abstain."*
+
+So `_unproven_pair` and `UNPROVEN_PREFERENCE` are **deleted**. An unproven peer weapon never votes.
+The cost is real, deliberate and counted rather than hidden:
+
+| | before | after |
+|---|--:|--:|
+| pairs | 607 | **308** |
+| exact pairs | 213 | **215** |
+| `both` stand-ins | 94 | 93 |
+| unproven pairs | 300 | **0** |
+
+`ra2_soviets_apocalypsetank` is back to zero votes and that is now the **correct** answer for it,
+not a regression: no source can prove which domain its weapons serve. The ordering rule the
+fallback encoded is not lost — it still lives where it came from, DESIGN's `anti_air_vehicle`
+anchor and `reference_distribution.baseline_armaments`.
+
+### 2e. WHICH weapon a reference offers depends on the Cameo actor's TIER
+
+Maintainer, 2026-09-13:
+
+> *"base version only for original units (with the exception for that dummy weapon of the MTNK)
+> and elite versions or upgraded weapons for promotion units to get some power creep for late game
+> or upgraded promotion units"*
+
+and, stated as a constraint: *"A replacement must not also count beside its base weapon."*
+
+| tier | who | which peer weapons are on the bench |
+|---|---|---|
+| `original` | an original-shipping mod matched it BY NAME | the **base** weapon only |
+| `expanded` | promotion units, Cameo additions, CA/DTA inventions | the **elite/upgraded replacement**, *in place of* the weapon it replaces |
+
+Measured: **140 original, 174 expanded** of the 314 priced actors with an assignment.
+
+⛔ **`Elite=` REPLACES the slot it is declared against, so benching it beside its base weapon lets
+one gun vote twice.** Astra found exactly that on FRIGATE, BEHEMOTH, YAK and HTNKARTY (blocker 1).
+130 of DTA Enhanced's 139 reachable elite weapons are the `E`-suffix upgrade of a gun the unit
+already fires — `MinigunE`, `120mmE`, `RaiderCannonE` — the same weapon, improved.
+
+⭐ **MTNK's dummy is the exception and it is not a special case in the code.** It falls out of
+`replaces_dummy_primary`: `[MTNK] Primary=90mmDummy` is a zero-damage rate-of-fire stub, so
+`Elite=70mmMsl1` fills a slot that was otherwise empty and IS a second weapon. **Nine** DTA units
+are in that state, and for them the elite weapon joins **both** tiers because it displaces nothing.
+That is why `td_gdi_battletank` — an original — still references DTA's elite missile.
+
+### 2f. Every Cameo armament pairs, not one per role
+
+⛔ **Reducing Cameo to the strongest weapon per role was a second fold wearing the first one's
+clothes** (Astra, blocker 2). `japan_oitank` carries OIFlamer, OIBigCannon and OISmallCannon — three
+GROUND weapons — and reporting only the flamer is the same defect this lane exists to remove, one
+level down. `ra1_allies_destroyer` has four. `cameo_armaments()` returns every referenceable
+armament, hardest-hitting first, deduplicated on **(weapon, role)** rather than on the slot, because
+`Armament@PRIMARY` and `Armament@GARRISONED` are one gun fired from two places.
+
+The same gate was wrong in the report: the actor-level cell is withheld for carrying more than one
+ARMAMENT, not more than one ROLE, so 17 withheld actors were blanked above and had no per-armament
+block below either.
+
+### 2g. Unknown target tokens FAIL CLOSED
+
+⛔ Astra, blocker 5: `Ground, UnknownFlyingTarget` came back a **proven exact ground** vote. The
+classifier used to return a confident role alongside the unrecognised tokens, treating them as
+neutral on the theory that a new marker must never silently flip a domain. That theory is a guess,
+and guessing from tokens is the exact failure this module was built to avoid — DTA's
+`AGHeatSeeker2` says "AG" in its name and declares `AA=yes`.
+
+`role_of_targets` now returns `None` whenever any token is unrecognised, and an unproven weapon
+does not vote (§2d). The tokens are still reported, because `--audit` proves the vocabulary covers
+the corpus: it is **0 today**, which is exactly when this guard is cheap to install.
+
+### 2h. Evidence fingerprints are enforced where the evidence is CONSUMED
+
+⛔ Astra, blocker 4: *"Evidence hashes are recorded but not enforced when consumed."* Both
+extractors refuse to run unless the INI they read hashes to the pin the corpus carries — and then
+wrote a JSON that any later process could consume months after the corpus moved underneath it.
+**A recorded hash that nobody re-checks is a comment.**
+
+Two layers now check, and both work without the 9.9 GB reference folder, using only files the
+repository holds:
+
+* `extract_ini_projectile_roles.load()` and `extract_ini_elite_weapons.load()` re-verify each
+  source's `rules_sha256`/`overlay_sha256` against `ini_corpus.json` and drop — **per source** — any
+  whose pin has moved. Dropped sources are returned on `load.dropped` so a caller can report the
+  gap instead of discovering it.
+* `armament_pairing.json` records an `inputs` block: the sha256 of the two evidence files and the
+  reference assignment it was built from. `build_reference_report.pairing_document()` re-hashes
+  them and **raises** rather than rendering stale evidence as current. A document with no `inputs`
+  block is refused for the same reason — it cannot prove it is fresh.
+
+Stale evidence is worse than missing evidence, because it looks exactly like the real thing.
 
 ## 3. The pairing key is the targeting envelope
 
@@ -262,17 +355,27 @@ two DTA hashes were verified against the reference install before anything was w
 | | |
 |---|---|
 | actors with a priced armament in the assignment | 314 |
+| …referencing a peer's BASE weapon (original) | 140 |
+| …referencing the elite/upgraded replacement (expanded) | 174 |
 | actors firing in more than one role | 46 |
-| **reference rows contaminated by the fold** | **93** |
-| armament pairs formed | **607** |
-| …proven exact role matches | 213 |
-| …a dual-role `both` weapon stood in | 94 |
-| …source could not state a role, votes on the main gun only | 300 |
-| …the reference carries that weapon only at ELITE rank | 5 |
-| pairs by role | ground 400 · both 177 · air 27 · special 3 |
-| actors with a weapon no structured source covers | **28** (air 20 · both 8) |
-| actors with no structured reference at all | 21 |
+| **reference rows contaminated by the fold** | **39** |
+| armament pairs formed | **308** |
+| …proven exact role matches | 215 |
+| …a dual-role `both` weapon stood in | 93 |
+| …source could not state a role | **0 — they abstain** (§2d) |
+| …the reference carries that weapon only at ELITE rank | 10 |
+| pairs by role | ground 181 · both 108 · air 19 |
+| Cameo armaments with no reference | 423 |
+| actors with a weapon no structured source covers | **7** (air 3 · both 4) |
+| actors with no structured reference at all | 145 |
 | unknown target tokens | **0** |
+
+⚠ **THE PAIR COUNT FELL FROM 607 AND THAT IS THE RULING LANDING, NOT A REGRESSION.** 300 of those
+pairs were the unproven fallback §2d strikes; the maintainer ruled such a source must abstain.
+Exact matches went UP (213 → 215) because §2e stopped a replacement voting beside its base weapon
+and §2f gave every same-role armament its own turn. `cameo_armaments_without_a_reference` is large
+(423) and newly honest for the same reason: it now counts every armament rather than one per role,
+so a four-gun destroyer reports four gaps where it used to report one.
 
 ⚠ **TWO REASONS A WEAPON ENDS UP UNREFERENCED, AND COUNTING THEM TOGETHER MAKES THE NUMBER LIE.**
 An early draft of this table reported "157 actors with an uncovered role, 105 of them ground",

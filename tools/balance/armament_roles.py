@@ -116,13 +116,27 @@ def role_of_targets(valid, invalid=None):
     """(role, unknown_tokens) from a weapon's targeting envelope.
 
     `valid` None/empty means the engine default, NOT "unknown" — see ENGINE_DEFAULT_TARGETS.
-    Unknown tokens are RETURNED rather than swallowed so `--audit` can prove the vocabulary still
-    covers the corpus; they are treated as neutral, so a new marker can never silently flip a
-    weapon's domain.
+
+    ⛔ AN UNKNOWN TOKEN MAKES THE VERDICT `None`, NOT A CONFIDENT ROLE (Astra, PR #375 blocker 5).
+    Unknown tokens used to be returned alongside a role and treated as NEUTRAL, so
+    `Ground, UnknownFlyingTarget` came back a proven exact `ground` — the one shape the maintainer
+    forbade, an air weapon standing in as ground evidence. Treating an unrecognised token as
+    neutral is a guess that a new marker cannot change a weapon's domain, and the whole reason
+    this classifier reads FLAGS instead of names is that such guesses are wrong: DTA's
+    `AGHeatSeeker2` says "AG" in its name and declares `AA=yes`.
+
+    So the vocabulary now fails CLOSED. A weapon carrying a token this module does not know
+    abstains, and `pair_by_role` gives it no vote at all. The tokens are still returned, because
+    `--audit` proves the vocabulary covers the corpus and the count must stay visible — it is 0
+    today, which is exactly when a guard is cheap to install.
+
+    Maintainer, 2026-09-13: *"ambiguous role or identity must abstain."*
     """
     targets = _tokens(valid) or _tokens(ENGINE_DEFAULT_TARGETS)
     targets -= _tokens(invalid)
     unknown = targets - AIR_TARGETS - GROUND_TARGETS - NEUTRAL_TARGETS
+    if unknown:
+        return None, unknown
     air = bool(targets & AIR_TARGETS)
     ground = bool(targets & GROUND_TARGETS)
     if air and ground:
@@ -183,7 +197,7 @@ RANGE_UNITS = {"wdist": 1.0, "cells": float(WDIST_PER_CELL)}
 
 def view(side, slot, weapon, role, unknown=(), damage_per_shot=None, burst=1,
          cycle=None, rng=None, requires=None, baseline=True, note=None, range_unit="wdist",
-         gate=None):
+         gate=None, replaces=None, additive=False):
     """One armament, on EITHER side of the map, in one shape.
 
     ⛔ `damage_per_cycle` AND `rate` ARE DERIVED HERE AND NOWHERE ELSE. The per-cycle coordinate is
@@ -205,6 +219,13 @@ def view(side, slot, weapon, role, unknown=(), damage_per_shot=None, burst=1,
         "damage_per_cycle": per_cycle, "cycle": cycle,
         "rate": (per_cycle / cycle) if (per_cycle and cycle) else None,
         "requires": requires, "baseline": baseline, "gate": gate, "note": note,
+        # ⛔ REPLACEMENT IDENTITY, carried rather than inferred (Astra, PR #375 blocker 1). An
+        # `Elite=` weapon REPLACES the slot it is declared against. `replaces` names that weapon
+        # and `additive` says whether the thing it replaced was a zero-damage dummy — the only
+        # case where the elite weapon occupies a slot that was otherwise empty and is therefore a
+        # genuinely EXTRA armament. Without these two fields a replacement could be benched
+        # alongside the weapon it replaces and the reference would vote twice with one gun.
+        "replaces": replaces, "additive": bool(additive),
     }
 
 
@@ -346,6 +367,8 @@ def ini_views(rec, projectile_roles=None, elite_weapons=None):
             # role a baseline weapon already fills. `pair_by_role` lets it cover a role that would
             # otherwise be EMPTY, which is the whole point: the reference does carry that weapon.
             baseline=False, range_unit="cells", gate="elite",
+            replaces=elite.get("replaces"),
+            additive=bool(elite.get("replaces_dummy_primary")),
             note=("elite, replaces %s%s" % (elite.get("replaces"),
                                             "" if elite.get("replaces_dummy_primary")
                                             else " (an upgrade of it, not an extra weapon)"))))
@@ -360,10 +383,12 @@ def ini_views(rec, projectile_roles=None, elite_weapons=None):
 # nearest legal partner, never pair `air` with `ground`. That single forbidden pair is the
 # maintainer's rule: "those two weapons are so different they should not be mixed."
 
-# Which Cameo weapon an UNPROVEN peer armament may stand against, in order. Ground first, because
-# DESIGN's `anti_air_vehicle` anchor prices on the ground weapon and a TS/RA2 `Primary=` is
-# overwhelmingly a main gun. `special` last: an interceptor is never a stand-in for a real gun.
-UNPROVEN_PREFERENCE = (ROLE_GROUND, ROLE_BOTH, ROLE_AIR, ROLE_SPECIAL)
+# ⛔ `UNPROVEN_PREFERENCE` WAS HERE AND IS DELETED WITH `_unproven_pair` (2026-09-13). It ordered
+# the roles a role-less peer weapon could stand against, so a source that could not state a domain
+# still voted on the main gun. The maintainer ruled the other way — *"ambiguous role or identity
+# must abstain"* — after Astra showed the fallback promoting secondary AA guns to ground evidence.
+# The ordering rule it encoded is NOT lost: it still lives where it came from, DESIGN's
+# `anti_air_vehicle` anchor and `reference_distribution.baseline_armaments`.
 
 COMPATIBLE = {
     ROLE_GROUND: (ROLE_GROUND, ROLE_BOTH),
@@ -437,31 +462,131 @@ def strongest_by_role(views, baseline_only=True):
     return best
 
 
-def pair_by_role(cameo_views_, peer_views_, baseline_only=True):
+# ── WHICH TIER AN ACTOR REFERENCES ───────────────────────────────────────────────────────────
+# ⛔ THE SAME RULE `build_reference_report.is_original` USES, AND A TEST PINS THEM TOGETHER.
+# It is duplicated rather than imported because that module pulls the whole report stack; the
+# duplication is safe only because `test_armament_roles` asserts the two agree on every actor in
+# the assignment, and that test is the reason this comment can be trusted.
+# COPIED VERBATIM, NOT RECONSTRUCTED. I wrote "OpenRA Dune 2000" here from memory and the
+# agreement test caught it on `atreides_combattank`: the fourth member is Romanov's Vengeance.
+# Do not "correct" this list -- it is the report's list, and the test is what keeps them equal.
+ORIGINAL_SOURCES = ("OpenRA Red Alert", "OpenRA Tiberian Dawn",
+                    "OpenRA Tiberian Sun", "Romanov's Vengeance")
+ORIGINAL_CONFIDENCE = ("STRONG", "FAIR")
+
+
+def reference_tier(sources):
+    """`original` when an original-shipping mod matched this actor BY NAME, else `expanded`.
+
+    OpenRA Red Alert / Tiberian Dawn / Tiberian Sun / Dune 2000 ship the original rosters and
+    nothing else, so a name-backed match against one of them proves the unit existed in the
+    original game. Everything else — promotion units, Cameo's own additions, CA and DTA
+    inventions — is EXPANDED and references the elite/upgraded weapon instead.
+    """
+    return (TIER_ORIGINAL
+            if any(d.get("confidence") in ORIGINAL_CONFIDENCE and s in ORIGINAL_SOURCES
+                   for s, d in (sources or {}).items())
+            else TIER_EXPANDED)
+
+
+TIER_ORIGINAL = "original"
+TIER_EXPANDED = "expanded"
+TIERS = (TIER_ORIGINAL, TIER_EXPANDED)
+
+
+def tier_bench(peer_views_, tier):
+    """The peer weapons a Cameo actor of this TIER may reference. The maintainer's rule, 2026-09-13:
+
+        "base version only for original units (with the exception for that dummy weapon of the
+         MTNK) and elite versions or upgraded weapons for promotion units to get some power creep
+         for late game"
+
+    and, restating it as a constraint: *"A replacement must not also count beside its base
+    weapon."* So:
+
+      ORIGINAL  the base weapon, and nothing rank-gated. A non-additive `Elite=` is the SAME gun
+                improved (`MinigunE`, `120mmE`, `RaiderCannonE` — 130 of DTA Enhanced's 139), so
+                benching it next to its base weapon lets one gun vote twice. Astra found exactly
+                that on FRIGATE, BEHEMOTH, YAK and HTNKARTY (PR #375 blocker 1).
+      EXPANDED  the elite/upgraded replacement STANDS IN PLACE OF the weapon it replaces, which
+                leaves the bench the same size. A promotion unit is a late-game design and gets a
+                late-game reference — power creep that is referenced rather than invented.
+
+    ⭐ MTNK'S DUMMY IS THE EXCEPTION AND IT IS NOT A SPECIAL CASE IN THE CODE — it falls out of
+    `additive`. `[MTNK] Primary=90mmDummy` is a zero-damage rate-of-fire stub, so `Elite=70mmMsl1`
+    fills a slot that was empty and IS a second weapon. Nine DTA units are in that state; for them
+    the elite weapon joins BOTH tiers because it displaces nothing.
+    """
+    if tier not in TIERS:
+        raise ValueError(f"unknown reference tier: {tier}")
+    superseded = set()
+    if tier == TIER_EXPANDED:
+        for v in peer_views_:
+            if v.get("gate") == "elite" and not v.get("additive") and v.get("replaces"):
+                superseded.add(str(v["replaces"]).strip().lower())
+    out = []
+    for v in peer_views_:
+        if v.get("gate") == "elite":
+            if v.get("additive") or tier == TIER_EXPANDED:
+                out.append(dict(v, baseline=True))
+            continue                       # original tier: a same-gun upgrade is not evidence
+        if str(v.get("weapon") or "").strip().lower() in superseded:
+            continue                       # its replacement is on the bench in its place
+        out.append(v)
+    return out
+
+
+def cameo_armaments(cameo_views_, baseline_only=True):
+    """EVERY Cameo armament that can be referenced, hardest-hitting first — not one per role.
+
+    ⛔ ONE PER ROLE WAS A SECOND FOLD (Astra, PR #375 blocker 2: *"Same-role weapons disappear
+    because Cameo is reduced to the strongest weapon per role"*). `japan_oitank` carries OIFlamer,
+    OIBigCannon and OISmallCannon — three GROUND weapons — and reporting only the flamer is the
+    same defect the whole lane exists to remove, one level down. `ra1_allies_destroyer` has four.
+
+    Deduplicated on (weapon, role) rather than on the slot, because `Armament@PRIMARY` and
+    `Armament@GARRISONED` are the same gun fired from two places and are not two armaments.
+    Clause 5 applies here too: a zero-damage row is never anybody's reference.
+    """
+    best = {}
+    for v in cameo_views_:
+        if baseline_only and not v["baseline"]:
+            continue
+        if v["role"] is None or not v["damage_per_cycle"]:
+            continue
+        key = (str(v.get("weapon") or "").strip().lower(), v["role"])
+        cur = best.get(key)
+        if cur is None or (v["damage_per_cycle"] or 0) > (cur["damage_per_cycle"] or 0):
+            best[key] = v
+    return sorted(best.values(),
+                  key=lambda v: (-(v["damage_per_cycle"] or 0), str(v.get("weapon") or "")))
+
+
+def pair_by_role(cameo_views_, peer_views_, baseline_only=True, tier=TIER_ORIGINAL):
     """([(role, cameo_view, peer_view, exact)], cameo_unmatched, peer_unmatched).
 
-    Exact role matches are claimed FIRST across every role, and only then is a `both` allowed to
-    stand in — otherwise a unit carrying a `both` missile and a `ground` cannon could see its
-    cannon claim the peer's `both` missile before the missile ever got a turn.
+    One chosen peer weapon per source contributes one candidate for ONE Cameo armament — the
+    maintainer's definition of a vote, 2026-09-13. Exact role matches are claimed FIRST across
+    every armament, and only then may a `both` stand in; otherwise a unit carrying a `both` missile
+    and a `ground` cannon could see its cannon claim the peer's `both` missile before the missile
+    ever got a turn. Armaments are served hardest-hitting first, so when a reference has fewer guns
+    than Cameo does, the main weapon is the one that gets the evidence.
 
-    ⛔ A SOURCE THAT CANNOT STATE A ROLE STILL VOTES ON THE MAIN WEAPON — see `_unproven_pair`.
-    Dropping it entirely is how the first draft of this function silently blanked every RA2 unit.
+    ⛔ AN UNPROVEN PEER WEAPON NO LONGER VOTES AT ALL, and `_unproven_pair` IS DELETED (Astra,
+    PR #375 blocker 3; maintainer: *"ambiguous role or identity must abstain"*). It used to fall
+    back to the peer's hardest-hitting role-less weapon so that the seven INI sources without a
+    byte-pinned corpus could still say something. That bought coverage with a guess, and the guess
+    was falsifiable: a secondary AA gun such as `FlakTrackAAGun` or `RA1RedEyeAA` outranks its
+    own chassis' main gun on damage and was then reported as GROUND main-gun evidence — the one
+    pairing the maintainer forbade. Abstaining costs votes and states the truth; the cost is
+    measured in the pairing report's own stats rather than hidden.
     """
-    cam = strongest_by_role(cameo_views_, baseline_only)
-    bench = candidates_by_role(peer_views_, baseline_only)
-    # ⭐ A RANK-GATED PEER WEAPON JOINS THE BENCH, at the BACK — it never displaces an ordinary one.
-    # DTA's GDI Medium Tank fires its missile only at elite rank, and the maintainer's rule is
-    # about POSSESSION, not availability: *"if the reference unit does not have the weapon it
-    # should not vote on it"* — it does have it. It is flagged (`gate`) so the map can show what
-    # kind of vote it is.
-    for role, gated in candidates_by_role(peer_views_, baseline_only=False).items():
-        for candidate in gated:
-            if candidate.get("gate") and candidate not in bench.get(role, ()):
-                bench.setdefault(role, []).append(candidate)
+    cam = cameo_armaments(cameo_views_, baseline_only)
+    bench = candidates_by_role(tier_bench(peer_views_, tier), baseline_only)
 
     taken, pairs = set(), []
 
-    def claim(role, want):
+    def claim(want):
         for candidate in bench.get(want, ()):
             key = (want, candidate["slot"], candidate["weapon"])
             if key not in taken:
@@ -469,63 +594,24 @@ def pair_by_role(cameo_views_, peer_views_, baseline_only=True):
                 return candidate
         return None
 
-    for role in ROLES:                       # exact matches first, across every role
-        if role not in cam:
-            continue
-        partner = claim(role, role)
+    unmatched = []
+    for armament in cam:                     # exact matches first, across every armament
+        partner = claim(armament["role"])
         if partner is not None:
-            pairs.append((role, cam[role], partner, True))
-    matched = {p[0] for p in pairs}
-    for role in ROLES:                       # then the nearest legal stand-in
-        if role in matched or role not in cam:
-            continue
-        for want in COMPATIBLE[role]:
-            partner = claim(role, want)
+            pairs.append((armament["role"], armament, partner, True))
+        else:
+            unmatched.append(armament)
+    still = []
+    for armament in unmatched:               # then the nearest legal stand-in
+        for want in COMPATIBLE[armament["role"]]:
+            partner = claim(want)
             if partner is not None:
-                pairs.append((role, cam[role], partner, False))
+                pairs.append((armament["role"], armament, partner, False))
                 break
-    if not pairs:
-        unproven = _unproven_pair(cameo_views_, peer_views_, baseline_only)
-        if unproven is not None:
-            pairs.append(unproven)
-    matched_cam = {p[0] for p in pairs}
+        else:
+            still.append(armament)
     matched_peer = {(p[2]["slot"], p[2]["weapon"]) for p in pairs}
-    peer_best = strongest_by_role(peer_views_, baseline_only)
-    return (pairs,
-            [v for r, v in sorted(cam.items()) if r not in matched_cam],
-            [v for _r, v in sorted(peer_best.items())
+    return (pairs, still,
+            [v for _r, v in sorted(strongest_by_role(
+                tier_bench(peer_views_, tier), baseline_only).items())
              if (v["slot"], v["weapon"]) not in matched_peer])
-
-
-def _unproven_pair(cameo_views_, peer_views_, baseline_only):
-    """The MAIN weapon against the MAIN weapon, when the peer's role cannot be established.
-
-    ⛔ THIS EXISTS BECAUSE ITS ABSENCE WAS A REGRESSION, CAUGHT BY LOOKING AT THE OUTPUT. Seven of
-    the nine INI sources pin no `source_sha256`, so `extract_ini_projectile_roles` refuses to state
-    their projectiles' domains and every one of their armaments arrives with `role = None`. The
-    first draft simply skipped those views — and `ra2_soviets_apocalypsetank` (5 sources),
-    `ra2_allies_ifv` (5), `yuri_gatlingtank` (5) and `ra2_soviets_flaktrack` (4) came back with
-    **zero** votes on any weapon. That is the exact shape of PR #369: a guard that looks green by
-    having nothing left to guard.
-
-    ⭐ THE MAINTAINER'S RULE IS SATISFIED EITHER WAY — *"if the reference unit does not have the
-    weapon it should not vote on it"*. We cannot prove such a source has the ANTI-AIR weapon, so it
-    does not vote on it. We can see it has a main gun, so it votes there and nowhere else. The pair
-    is flagged `exact=False` and the peer view keeps `role: None`, so a reader can always tell a
-    proven pairing from a carried-over one.
-
-    ⛔ AND IT PAIRS AGAINST THE GROUND WEAPON, NOT THE STRONGEST ONE. The first version took the
-    Cameo actor's hardest hitter and immediately produced the one thing the ruling forbids: on
-    `ra2_soviets_apocalypsetank` the AA missile out-damages the cannon (32,000 vs 24,000), so five
-    peer CANNONS were matched against an anti-air missile. `UNPROVEN_PREFERENCE` is the fix and it
-    is not a new rule either — DESIGN's `anti_air_vehicle` anchor already says to price on the
-    ground weapon, and `baseline_armaments` already implements that ordering.
-    """
-    peer = strongest_overall([v for v in peer_views_ if v["role"] is None], baseline_only)
-    if peer is None or not peer["damage_per_cycle"]:
-        return None
-    by_role = strongest_by_role(cameo_views_, baseline_only)
-    for role in UNPROVEN_PREFERENCE:
-        if role in by_role:
-            return (role, by_role[role], peer, False)
-    return None

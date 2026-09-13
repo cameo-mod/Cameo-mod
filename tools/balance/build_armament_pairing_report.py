@@ -81,6 +81,22 @@ def peer_index():
     return index
 
 
+INPUT_FILES = ("docs/reference/ini_projectile_role_evidence.json",
+               "docs/reference/ini_elite_weapon_evidence.json",
+               "docs/balance/derived/reference_assignment.json")
+
+
+def input_fingerprints(root=ROOT):
+    """{repo-relative path: sha256} for every file this document is derived from."""
+    import hashlib
+    out = {}
+    for rel in INPUT_FILES:
+        path = pathlib.Path(root) / rel
+        out[rel] = (hashlib.sha256(path.read_bytes()).hexdigest()
+                    if path.exists() else None)
+    return out
+
+
 def peer_views_for(kind, record, projectile_roles, elite_weapons):
     return (ar.peer_views(record) if kind == "openra"
             else ar.ini_views(record, projectile_roles, elite_weapons))
@@ -112,6 +128,12 @@ def build(only_actor=None):
         for v in cam:
             unknown_tokens.update(v["unknown_targets"])
         cam_roles = ar.strongest_by_role(cam)
+        # ⭐ THE TIER DECIDES WHICH PEER WEAPONS ARE ON THE BENCH (maintainer, 2026-09-13):
+        # originals reference the BASE weapon, promotion/expanded actors the elite or upgraded
+        # replacement. See `armament_roles.tier_bench` for the rule and for why MTNK's dummy is
+        # the one case where an elite weapon is genuinely additional.
+        tier = ar.reference_tier(assignment[actor])
+        stats[f"actors_tier_{tier}"] += 1
         stats["actors"] += 1
         wanted[actor] = set(cam_roles)
         if len(cam_roles) > 1:
@@ -141,7 +163,7 @@ def build(only_actor=None):
             peer = peer_views_for(kind, peer_record, projectile_roles, elite_weapons)
             for v in peer:
                 unknown_tokens.update(v["unknown_targets"])
-            pairs, cam_only, peer_only = ar.pair_by_role(cam, peer)
+            pairs, cam_only, peer_only = ar.pair_by_role(cam, peer, tier=tier)
             stats["pairs"] += len(pairs)
             stats["exact_pairs"] += sum(1 for p in pairs if p[3])
             stats["cameo_armaments_without_a_reference"] += len(cam_only)
@@ -204,6 +226,12 @@ def build(only_actor=None):
     stats["actors_with_no_structured_reference_at_all"] = len(no_structured)
     return {
         "schema": 1,
+        # ⛔ WHAT THIS DOCUMENT WAS BUILT FROM, so a consumer can refuse a STALE one (Astra,
+        # PR #375 blocker 4). `build_reference_report.pairing_document` re-hashes these three
+        # files and fails rather than render a pairing whose evidence has moved underneath it.
+        # The two extractors' own pins are re-checked separately, at load, per source — this
+        # guards the layer above them: the artifact itself.
+        "inputs": input_fingerprints(),
         "scope": ("Per-armament reference pairing inside the existing actor assignment. "
                   "No reference is re-scored and no balance number is written."),
         "role_vocabulary": list(ar.ROLES),
