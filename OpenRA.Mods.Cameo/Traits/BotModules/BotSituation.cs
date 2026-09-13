@@ -11,7 +11,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
+using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Primitives;
 using OpenRA.Traits;
 
@@ -89,12 +91,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public readonly int RushMaxEnemyArmyValue = 1500;
 		public readonly int RushMaxEnemyDefenceCount = 2;
 		public readonly int EliminationBuildingSaturation = 8;
+		public readonly int PersonalityHoldTicks = 3000;
 
 		public override object Create(ActorInitializer init) { return new MasterAiBotModule(init.Self, this); }
 	}
 
 	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick
 	{
+		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller" };
 		readonly OpenRA.Player player;
 		readonly List<BotSituation> pendingSituations = [];
 		readonly Queue<(int Tick, int Delta)> lossSamples = new();
@@ -110,6 +114,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int previousDeathsCost;
 		int previousKillsCost;
 		BotUrgency currentUrgency;
+		int lastPersonalitySwitchTick;
+		bool emergencyPersonalityHandled;
 
 		public BotSituation Situation { get; private set; }
 		internal int DeathsCostWindow { get; private set; }
@@ -121,6 +127,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			player = self.Owner;
 			lastDecisionTick = -Math.Max(1, info.DecisionInterval);
+			lastPersonalitySwitchTick = -Math.Max(1, info.PersonalityHoldTicks);
 			nextSnapshotTick = Math.Abs(player.ClientIndex * 37) % Math.Max(1, info.SnapshotInterval);
 			nextEmergencyTick = nextSnapshotTick;
 		}
@@ -140,10 +147,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 
 			nextSnapshotTick = tick + Math.Max(1, Info.SnapshotInterval);
-			Rebuild(tick);
+			Rebuild(tick, bot);
 		}
 
-		void Rebuild(int tick)
+		void Rebuild(int tick, IBot bot)
 		{
 			var actors = player.World.Actors.Where(a => a.IsInWorld && !a.IsDead).ToArray();
 			var actorsByOwner = actors.GroupBy(a => a.Owner).ToDictionary(g => g.Key, g => g.ToArray());
@@ -167,6 +174,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					(enemyArmy > 0 && (long)ownArmy * 100 < (long)enemyArmy * Info.PressuredArmyRatio)
 					? BotUrgency.Pressured : BotUrgency.Normal;
 			currentUrgency = urgency;
+			if (urgency != BotUrgency.Emergency)
+				emergencyPersonalityHandled = false;
 
 			var econTotal = profiles.Values.Where(p => p.Alive).Sum(EconProxy);
 			foreach (var profile in profiles.Values.Where(p => p.Alive))
@@ -183,17 +192,49 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (target != incumbentTarget)
 					incumbentSince = tick;
 				incumbentTarget = target;
-				incumbentPersonality = CandidatePersonality(urgency, target == null ? null : profiles[target], ownArmy,
-					profiles.Values, incumbentPersonality, Info);
-				lastDecisionTick = tick;
 			}
 
-			var demand = BuildDemand(profiles.Values, target == null ? null : profiles[target], enemyArmy);
+			EnemyProfile targetProfile = null;
+			if (target != null)
+				profiles.TryGetValue(target, out targetProfile);
+			var personalityDecision = ShouldEvaluatePersonality(decision, urgency, emergencyPersonalityHandled);
+			var personalityCandidate = incumbentPersonality ?? "";
+			if (personalityDecision)
+			{
+				var currentPersonality = CurrentPersonality();
+				var availablePersonalities = AvailablePersonalities();
+				var candidatePersonality = CandidatePersonality(urgency, targetProfile, ownArmy,
+					profiles.Values, currentPersonality, availablePersonalities, Info);
+				personalityCandidate = UnfilteredCandidatePersonality(urgency, targetProfile, ownArmy,
+					profiles.Values, currentPersonality, Info);
+				incumbentPersonality = candidatePersonality;
+
+				var botLimits = player.PlayerActor.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
+				if (ShouldSwitchPersonality(currentPersonality, candidatePersonality, lastPersonalitySwitchTick, tick,
+					urgency == BotUrgency.Emergency && !emergencyPersonalityHandled,
+					botLimits?.Info.AllowPersonalitySwitching ?? false, Info))
+				{
+					bot.QueueOrder(new Order("SetBotPersonality", player.PlayerActor, false)
+					{
+						TargetString = candidatePersonality,
+						SuppressVisualFeedback = true
+					});
+					lastPersonalitySwitchTick = tick;
+				}
+
+				if (urgency == BotUrgency.Emergency)
+					emergencyPersonalityHandled = true;
+			}
+
+			if (decision)
+				lastDecisionTick = tick;
+
+			var demand = BuildDemand(profiles.Values, targetProfile, enemyArmy);
 			var situation = new BotSituation
 			{
 				Tick = tick,
 				MainTarget = target,
-				Personality = incumbentPersonality ?? "",
+				Personality = personalityCandidate,
 				Urgency = urgency,
 				Enemies = profiles,
 				Demand = demand,
@@ -205,12 +246,27 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				OwnHarvesters = ownHarvesters,
 				OwnKillsCostWindow = KillsCostWindow,
 				OwnDeathsCostWindow = DeathsCostWindow,
-				OwnPersonality = player.PlayerActor.TraitOrDefault<AiMatchLogRecorder>()?.CurrentPersonality ?? ""
+				OwnPersonality = CurrentPersonality()
 			};
 			Situation = situation;
 			pendingSituations.Add(situation);
 			if (pendingSituations.Count > 2000)
 				pendingSituations.RemoveRange(1000, pendingSituations.Count - 2000);
+		}
+
+		string CurrentPersonality()
+		{
+			return player.PlayerActor.TraitOrDefault<BotPersonalityController>()?.CurrentPersonality
+				?? player.PlayerActor.TraitOrDefault<AiMatchLogRecorder>()?.CurrentPersonality
+				?? "";
+		}
+
+		IEnumerable<string> AvailablePersonalities()
+		{
+			var controller = player.PlayerActor.TraitOrDefault<BotPersonalityController>();
+			return controller == null
+				? DefaultPersonalities
+				: controller.Info.Conditions.Select(c => BotPersonalityController.PersonalityName(c, controller.Info.PersonalityPrefix));
 		}
 
 		void CheckEmergency(int tick)
@@ -347,6 +403,20 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return ClampScore(profile.Score + profile.Score * bonus / 1000);
 		}
 
+		internal static bool ShouldSwitchPersonality(string current, string candidate, int lastSwitchTick, int tick,
+			bool emergencyTransition, bool allowSwitching, MasterAiBotModuleInfo info)
+		{
+			if (!allowSwitching || string.IsNullOrEmpty(candidate) || candidate == current)
+				return false;
+
+			return emergencyTransition || tick - lastSwitchTick >= info.PersonalityHoldTicks;
+		}
+
+		internal static bool ShouldEvaluatePersonality(bool decision, BotUrgency urgency, bool handled)
+		{
+			return decision || urgency == BotUrgency.Emergency && !handled;
+		}
+
 		internal static int Saturate(int x, int k)
 		{
 			if (x <= 0)
@@ -388,23 +458,40 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		internal static string CandidatePersonality(BotUrgency urgency, EnemyProfile target, int ownArmy,
+			IEnumerable<EnemyProfile> enemies, string incumbent, IEnumerable<string> availablePersonalities,
+			MasterAiBotModuleInfo info)
+		{
+			var available = availablePersonalities.ToHashSet(StringComparer.Ordinal);
+			foreach (var candidate in PersonalityCandidates(urgency, target, ownArmy, enemies, info))
+				if (available.Contains(candidate))
+					return candidate;
+
+			return incumbent != null && available.Contains(incumbent) ? incumbent : "";
+		}
+
+		internal static string UnfilteredCandidatePersonality(BotUrgency urgency, EnemyProfile target, int ownArmy,
 			IEnumerable<EnemyProfile> enemies, string incumbent, MasterAiBotModuleInfo info)
 		{
+			return PersonalityCandidates(urgency, target, ownArmy, enemies, info).FirstOrDefault() ?? incumbent ?? "";
+		}
+
+		static IEnumerable<string> PersonalityCandidates(BotUrgency urgency, EnemyProfile target, int ownArmy,
+			IEnumerable<EnemyProfile> enemies, MasterAiBotModuleInfo info)
+		{
 			if (urgency == BotUrgency.Emergency)
-				return "turtle";
+				yield return "turtle";
 			if (target != null && target.DefenceCount >= info.FortifiedDefenceCount && ownArmy >= info.SteamrollerMinArmyValue)
-				return "steamroller";
+				yield return "steamroller";
 			if (target != null && target.ExpansionClusters >= info.GuerrillaMinClusters)
-				return "guerrilla";
+				yield return "guerrilla";
 			if (target != null && target.TechBuildings >= info.TechEnemyTechBuildings &&
 				target.ArmyValue < info.RushMaxEnemyArmyValue * 2)
-				return "tech";
+				yield return "tech";
 			if (target != null && target.ArmyValue <= info.RushMaxEnemyArmyValue &&
 				target.DefenceCount <= info.RushMaxEnemyDefenceCount)
-				return "rush";
+				yield return "rush";
 			if (!enemies.Any(e => e.Alive && e.NearestCells >= 0))
-				return "expansion";
-			return incumbent ?? "";
+				yield return "expansion";
 		}
 
 		static CounterDemand BuildDemand(IEnumerable<EnemyProfile> enemies, EnemyProfile target, int totalArmy)
