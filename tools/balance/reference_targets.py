@@ -169,7 +169,23 @@ def burst_delay_of(row):
     per_shot, rate = damage_per_shot(row), row.get("w_dps")
     if burst <= 1 or not per_shot or not rate:
         return None
-    remaining = per_shot * burst / float(rate) - float(row.get("w_reload") or 0)
+    reload_ticks = float(row.get("w_reload") or 0)
+    # ⛔ 334 OF 621 BURST ROWS PUBLISH A RATE THAT NEVER FOLDED BURST IN, and recovering a delay
+    # from one of those produces a confident, meaningless number. Measured 2026-09-13 across the
+    # peer corpus: those rows satisfy `rate == damage / reload` exactly — the burst-1 identity —
+    # while declaring `Burst > 1`, so the cadence they describe is one shot per cycle no matter
+    # what their own `w_burst` says. DTA's `MLRS` is the case the maintainer surfaced: damage 100,
+    # burst 2, reload 400, rate 0.25 = 100/400. Treating that rate as `damage * burst / cycle`
+    # implies a cycle of 800 ticks and hands back a 400-tick "burst delay" — exactly its reload,
+    # which is the signature of the arithmetic folding back on itself.
+    #
+    # This is NOT the same as the negative-remainder case below: there the numbers contradict each
+    # other, here they are self-consistent under a DIFFERENT formula. Both are withheld, and both
+    # for the same reason — a recovered value is only meaningful if the row's own rate was built
+    # the way this function inverts it.
+    if reload_ticks and abs(float(rate) - per_shot / reload_ticks) < 1e-9 * max(1.0, float(rate)):
+        return None
+    remaining = per_shot * burst / float(rate) - reload_ticks
     # ⭐ AN IMPOSSIBLE TIMING MODEL IS REFUSED, NOT CLAMPED (adopted from `41d0dad57`, and the
     # better half of that change). A cycle SHORTER than the row's own `ReloadDelay` cannot
     # happen — the reload is a floor — so a negative remainder means the row's damage, rate and

@@ -11634,26 +11634,6 @@
     ]
    }
   },
-  "td_nod_chemicalssmlauncher": {
-   "Combined Arms": {
-    "confidence": "STRONG",
-    "cost": 1350,
-    "home": true,
-    "hp": 15000,
-    "id": "MLRS",
-    "name": "SSM Launcher",
-    "raw_name": 0.85,
-    "score": [
-     2,
-     0,
-     1,
-     0.0,
-     0.887,
-     0.818,
-     0.85
-    ]
-   }
-  },
   "td_nod_chemicalstealthtank": {
    "Combined Arms": {
     "confidence": "STRONG",
@@ -12450,19 +12430,19 @@
   "td_nod_ssmlauncher": {
    "Combined Arms": {
     "confidence": "STRONG",
-    "cost": 1000,
+    "cost": 1350,
     "home": true,
-    "hp": 22000,
-    "id": "MSAM",
-    "name": "MLRS",
+    "hp": 15000,
+    "id": "MLRS",
+    "name": "SSM Launcher",
     "raw_name": 1.0,
     "score": [
      4,
      1,
      1,
      0.0,
-     0.808,
-     0.756,
+     0.798,
+     0.565,
      1.0
     ]
    },
@@ -12481,24 +12461,6 @@
      0.0,
      0.804,
      0.784,
-     1.0
-    ]
-   },
-   "OpenRA Tiberian Dawn": {
-    "confidence": "STRONG",
-    "cost": 600,
-    "home": true,
-    "hp": 18000,
-    "id": "MLRS",
-    "name": "Mobile SAM",
-    "raw_name": 1.0,
-    "score": [
-     4,
-     1,
-     1,
-     0.0,
-     0.674,
-     0.996,
      1.0
     ]
    }

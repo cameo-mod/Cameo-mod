@@ -169,8 +169,27 @@ ORIGINAL_SOURCES = ("OpenRA Red Alert", "OpenRA Tiberian Dawn",
 NAME_ALIASES = {
     "battletank": ("mediumtank",),
     "mediumtank": ("battletank",),
+    # ONE-WAY ONLY. A Cameo `mlrs` may match Combined Arms' `MSAM` and DTA's "Rocket Launcher",
+    # because both of those ARE the MLRS under another name.
     "mlrs": ("msam", "rocketlauncher"),
-    "ssmlauncher": ("mlrs",),
+    # 
+    # `"ssmlauncher": ("mlrs",)` WAS REMOVED 2026-09-13. The maintainer caught the symptom --
+    # "td_nod_ssmlauncher still uses the wrong references. It should use the SSM launcher and not
+    # the combined arms MLRS" -- and the alias was the cause. An SSM Launcher is not an MLRS; it
+    # is a surface-to-surface missile carrier, and the reverse alias above does not imply it.
+    #
+    # THE ALIAS EARNED NOTHING AND COST FOUR WRONG UNITS. Measured over every row an
+    # `ssmlauncher` can see, with the alias and without:
+    #     Combined Arms MLRS   "SSM Launcher"        1.00 -> 1.00   kept anyway
+    #     DTA Enhanced  MLRS   "SSM Launcher"        1.00 -> 1.00   kept anyway
+    #     Rise of East  AASAM  "Asian SSM Launcher"  0.85 -> 0.85   kept anyway
+    #     Combined Arms MSAM   "MLRS"                1.00 -> 0.40   ALIAS-ONLY, wrong unit
+    #     OpenRA TD     MLRS   "Mobile SAM"          1.00 -> 0.40   ALIAS-ONLY, an ANTI-AIR unit
+    #     Romanov's Ven mlrs   "Rocket Launcher"     1.00 -> 0.64   ALIAS-ONLY, wrong unit
+    #     Twisted Ins   MLRSW  "Bullfrog"            0.90 -> 0.38   ALIAS-ONLY, wrong unit
+    # Every genuine SSM Launcher already matches at 1.00 on its own NAME, so the alias only ever
+    # added false positives -- and it added them AT THE TOP SCORE, indistinguishable from the true
+    # match, which is what let `MSAM` "MLRS" and a Mobile SAM outrank the real row.
     # DTA writes it out in full where OpenRA and Combined Arms both abbreviate: `AGUN` "AA Gun"
     # and `CRAM` "AA Gun" against DTA's `RAAGUN` "Anti-aircraft Gun". Confirmed by the maintainer
     # as the same unit.
