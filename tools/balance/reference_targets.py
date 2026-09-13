@@ -670,10 +670,41 @@ def cameo_context():
     # different quantities. The bytes are untouched and still hash.
     # The snapshot already stores the burst TOTAL, which IS the referenced coordinate, so it is
     # normalised only to attach the derived per-shot figure. See `reference_distribution.to_per_cycle`.
-    rows = rd.to_per_cycle(document['rows'])
+    rows = _recover_weapon_model_eligibility(rd.to_per_cycle(document['rows']))
     distribution = rd.build_distributions(rows)
     add_cost_distribution(distribution, rows)
     return FrozenCameoDistribution(distribution['Cameo'], rows)
+
+
+def _recover_weapon_model_eligibility(rows):
+    """Carry each frozen row's MULTI-ARMAMENT verdict over from the live ledger, by id.
+
+    ⛔ WITHOUT THIS THE FROZEN POPULATION SILENTLY BYPASSES THE MULTI-ARMAMENT GUARD (Astra,
+    PR #372). `armament_profile` sets `weapon_model_eligible` from `len(live) == 1`, so an actor
+    whose cannon and missile would be averaged into one number abstains — but the pinned snapshot
+    predates the flag and carries it on **none** of its 893 rows. Every check reads
+    `... is False`, so "absent" meant "eligible", and all 893 were projected as if single-weapon.
+
+    ⭐ IT IS FULLY RECOVERABLE, which is why this is a recovery and not a disclaimer: measured
+    2026-09-13, **893 of 893** frozen ids have a live counterpart — 796 eligible, 97 genuinely
+    multi-armament. Nothing has to be marked provisional; the verdict simply has to be fetched.
+
+    ⚠ AFTER THE SHA256 CHECK, NEVER BEFORE — the same rule `to_per_cycle` follows. The pin
+    guarantees the FILE is unchanged; this attaches a derived judgement to the in-memory rows and
+    touches no bytes. A row with no live counterpart keeps no flag and stays eligible, which is the
+    pre-existing behaviour rather than a new silent withholding.
+    """
+    try:
+        live = {r["id"]: r for r in rd.cameo_rows()}
+    except Exception:                      # a broken ledger must not take the frozen pin with it
+        return rows
+    out = []
+    for row in rows:
+        counterpart = live.get(row.get("id"))
+        if counterpart is not None and "weapon_model_eligible" in counterpart:
+            row = dict(row, weapon_model_eligible=counterpart["weapon_model_eligible"])
+        out.append(row)
+    return out
 
 
 FROZEN_HERO_SHA256 = '101a934792713dd6ccf5fbeb99629db0379af7b1f9a51d52d02a010795e5365c'
@@ -689,7 +720,7 @@ def hero_cameo_context():
     doc = json.loads(raw)
     if doc['parent_snapshot_sha256'] != FROZEN_CAMEO_SHA256:
         raise ValueError('hero reference does not share the frozen baseline')
-    rows = rd.to_per_cycle(doc['rows'])
+    rows = _recover_weapon_model_eligibility(rd.to_per_cycle(doc['rows']))
     dist = rd.build_distributions(rows)
     add_cost_distribution(dist, rows)
     return FrozenCameoDistribution(dist['Cameo'], rows)
