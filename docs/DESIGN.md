@@ -2967,11 +2967,16 @@ AI match logging is record-only: it never changes gameplay and the game never
 reads the log back. The writer runs on the host only and emits schema version 1
 JSONL records.
 
+The phase-2 master publishes an observe-only per-enemy snapshot and computes
+candidate personality and target values for logging only. It queues no orders,
+grants no conditions, touches no synced state, and remains pre-fog by design.
+The situation records use schema version 1 in the same record-only boundary.
+
 The forward design for bot modules, per-ContentPack AI splitting, the dynamic
 personality manager, the master AI module, and match logging lives in
 [`design/AI_ARCHITECTURE.md`](design/AI_ARCHITECTURE.md). Sections 19 and 20
-above remain the binding rules for what ships today; nothing in the
-architecture document is implemented.
+above remain the binding rules for what ships today; record-only match logging
+and the observe-only phase-2 master snapshot are implemented as described.
 
 Two measured constraints from that document are binding on any AI yaml edit,
 because both fail in ways that reading the yaml will not reveal:
