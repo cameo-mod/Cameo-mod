@@ -1413,8 +1413,11 @@ DeviatorMissile_Artillery:
 		PercentageSpread: 50
 		InvalidTargets: Air
 
+^Warhead_MissileAP_Heavy_WraithOrder:
+	Inherits: ^Warhead_MissileAP_Heavy
+
 Wraith_ToxinMissiles:
-	Inherits@missilerole: ^Warhead_MissileAP_Heavy
+	Inherits@missilerole: ^Warhead_MissileAP_Heavy_WraithOrder
 	Inherits: DeviatorMissile_Artillery
 	Range: 8370
 	ReloadDelay: 125
