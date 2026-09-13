@@ -666,6 +666,97 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
             body.append('</tbody></table>')
             for actor, details in generic_details:
                 body.append(f'<div><code>{html.escape(actor)}</code>{details}</div>')
+        emit_armament_pairing(body, members)
+
+
+# ── PER-ARMAMENT REFERENCES ──────────────────────────────────────────────────────────────────
+# ⛔ THE MAINTAINER ASKED FOR EXACTLY THIS (2026-09-13): *"the reference map needs to show each
+# weapon per actor and try to find the weapon for each reference. If the reference unit does not
+# have the weapon it should not vote on it."* The table above shows ONE folded weapon per actor,
+# which on `td_gdi_firehawk` means the bomb is reported at the Sidewinders' range.
+#
+# It READS `armament_pairing.json` and computes nothing — the mechanism, its role vocabulary and
+# its measurements live in `armament_roles.py` and `docs/design/ARMAMENT_PAIRING.md`.
+_PAIRING = []
+
+
+def pairing_document():
+    if not _PAIRING:
+        path = ROOT / "docs/balance/derived/armament_pairing.json"
+        try:
+            doc = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            doc = {"actors": {}}
+        _PAIRING.append(doc)
+    return _PAIRING[0]
+
+
+def _short_source(name):
+    return name.replace("OpenRA ", "").replace("Twisted Insurrection", "Twisted Ins.")
+
+
+def _range_cell(view):
+    """Always the WDist figure; `c` marks a value converted from TS cells."""
+    if view.get("range_wdist") is None:
+        return "&#8212;"
+    return "%s%s" % (f'{round(view["range_wdist"]):,}',
+                     "c" if view.get("range_unit") == "cells" else "")
+
+
+def emit_armament_pairing(body, members):
+    """One block per actor in this class that fires in more than one targeting role."""
+    actors = pairing_document().get("actors", {})
+    rows = [(a, actors[a]) for a in members
+            if a in actors and len(actors[a].get("roles", ())) > 1
+            and any("pairs" in s for s in actors[a]["sources"].values())]
+    if not rows:
+        return
+    body.append('<h4>Per-armament references &mdash; one weapon, one vote</h4>')
+    body.append('<p class="lede">These actors fire in more than one targeting role, so the single '
+                'weapon column above describes two different guns at once. Here each armament '
+                'finds its own reference weapon, and a source that does not carry a weapon in '
+                'that role does not vote on it. '
+                '<b>=</b> exact role match &middot; <b>~</b> a dual-role weapon stood in &middot; '
+                '<b>?</b> the source could not state a role, so it votes on the main gun only. '
+                'Air is never paired with ground. A <code>c</code> on a range marks a value '
+                'converted from TS cells (1 cell = 1024 WDist).</p>')
+    for actor, entry in rows:
+        votes = collections.defaultdict(list)
+        for source, info in entry["sources"].items():
+            for pair in info.get("pairs", ()):
+                votes[pair["role"]].append((source, pair))
+        n = sum(1 for s in entry["sources"].values() if "pairs" in s)
+        body.append(f'<div><code>{html.escape(actor)}</code>')
+        body.append('<table><thead><tr><th>role</th><th>Cameo weapon</th><th class="n">range</th>'
+                    '<th class="n">dmg/cycle</th><th>voters</th></tr></thead><tbody>')
+        for role in entry["roles"]:
+            arms = [a for a in entry["armaments"] if a["role"] == role and a["baseline"]]
+            if not arms:
+                arms = [a for a in entry["armaments"] if a["role"] == role]
+            if not arms:
+                continue
+            main = max(arms, key=lambda a: a["damage_per_cycle"] or 0)
+            cast = votes.get(role, [])
+            if cast:
+                chips = " ".join(
+                    '<span class="tag" title="{t}">{mark} {src} &middot; {w}</span>'.format(
+                        t=html.escape("%s — %s" % (entry["sources"][source]["peer"],
+                                                   pair["peer"]["weapon"])),
+                        mark=("=" if pair["exact"]
+                              else "?" if pair["peer"]["role"] is None else "~"),
+                        src=html.escape(_short_source(source)),
+                        w=html.escape(str(pair["peer"]["weapon"])))
+                    for source, pair in cast)
+                tally = f'<b>{len(cast)} of {n}</b> {chips}'
+            else:
+                tally = ('<span class="muted">no source carries a weapon in this role &mdash; '
+                         'this armament abstains and has no reference target</span>')
+            body.append(f'<tr><td class="cls">{html.escape(role)}</td>'
+                        f'<td><code>{html.escape(str(main["weapon"]))}</code></td>'
+                        f'<td class="n">{_range_cell(main)}</td>'
+                        f'<td class="n">{num(main["damage_per_cycle"])}</td>'
+                        f'<td>{tally}</td></tr>')
+        body.append('</tbody></table></div>')
 
 
 def main() -> int:
