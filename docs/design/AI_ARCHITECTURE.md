@@ -911,15 +911,16 @@ Disabled/nonpositive budget returns no pause; otherwise existing clamps and excl
 Cached results may wait for the next configured recalculation; no other local module may
 interpret that cache as synchronized world state or bypass it through a new production path.
 
-**Proposed, not loaded:** `MasterAiBotModule` alone would publish the immutable local snapshot
-at the §10.5 proposed cadence (emergency ~25, rebuild ~150, decisions ~1500 ticks).
-Observe-only deployment has **no consumers and no behavior changes**. Later consumers pull hints,
-not orders; no snapshot means old policy. `ScoutBotModule` remains a later owner of explicitly
+**Loaded, observe-only:** `MasterAiBotModule` publishes the immutable local snapshot
+at the §10.5 cadence (emergency ~25, rebuild ~150, decisions ~1500 ticks).
+It has **no consumers and no hint reads**, queues no orders, makes no synced-state changes,
+and logs candidate personality and target values only. `ScoutBotModule` remains a later owner of explicitly
 allocated scouting tasks after contact memory and the visibility gate (§11.3), not a current
 capability. `BotPersonalityController` would be the synced `IResolveOrder` bridge: validate
 the token, ignore repeats, and manage its condition through replayed orders. It must solve
 initial-token ownership with `GrantRandomCondition` before switching ships; reading an unsynced
-personality field from simulation code is forbidden. No controller is implemented by this contract.
+personality field from simulation code is forbidden. The master module is loaded only for observation;
+no controller is implemented by this contract.
 
 ```text
 Current synced world / rule data
@@ -1031,9 +1032,10 @@ allow it.
 1. **Match logging, record-only.** No behaviour change. Writes the match record (§6.2) including
    the fixed personality and the outcome. Value: the learning loop has data before any decision
    code exists, and the log schema gets exercised while it is still cheap to change.
-2. **`MasterAiBotModule`, observe-only.** Builds and publishes the snapshot; decides nothing, and
-   no module reads it yet. Logged per rebuild. This is where the signal derivations get validated
-   against replays cheaply — a wrong detector is visible in the log without touching gameplay.
+2. **`MasterAiBotModule`, observe-only (implemented).** Builds and publishes the snapshot; decides
+   nothing, and no module reads it yet. Logged per rebuild. This is intentionally pre-fog, and the
+   score omits `w_hurt` until phase 4 adds pairwise attribution. The signal derivations can be
+   validated against replays cheaply without touching gameplay.
 3. **`BotPersonalityController` + dynamic switching.** The first behaviour change. Difficulty-gated
    so the lower tiers keep today's fixed personality.
 4. **Main target selection**, consumed by the squad managers and support powers.
