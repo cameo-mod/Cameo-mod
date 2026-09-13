@@ -169,6 +169,30 @@ def burst_delay_of(row):
     per_shot, rate = damage_per_shot(row), row.get("w_dps")
     if burst <= 1 or not per_shot or not rate:
         return None
+    # ⭐ A REVIEWED CYCLE PROOF IS READ, NEVER INVERTED. `ini_cycle_evidence` carries a
+    # hand-reviewed timing model for 444 DTA rows — `cycle = reload + sum(burst gaps) +
+    # post-burst jitter + charge`, with `dps = damage * shots / cycle_mean`. That IS the one
+    # formula, so those rows need no recovery at all: the gaps are stated outright.
+    #
+    # ⛔ AND INVERTING THEM WAS WRONG IN BOTH DIRECTIONS, measured 2026-09-13 over the 91 proven
+    # rows in the pools — 32 of them disagreed with their own proof:
+    #   * CONTAMINATION. The inversion cannot see `post_burst_jitter`, so it charges that time to
+    #     the burst gaps. Every mean-1-tick jitter row came back exactly one tick high — `HTNK`
+    #     6.0 against a proven 5.0, `3TNK` 2.0 against 1.0, `MSAM` 10.0 against 9.0.
+    #   * FALSE WITHHOLDING. `MLRS` "SSM Launcher" (damage 100, burst 2, reload 400, rate 0.25)
+    #     satisfies `rate == damage / reload` BY COINCIDENCE — its proof puts the single gap at
+    #     400 ticks (the attached-particle Rearm_Delay branch returns ROF after each emission),
+    #     so `100 x 2 / (400 + 400) = 0.25` as well. Both identities hold at once whenever the
+    #     gap happens to equal the reload, and the burst-1 test below then refused a delay that
+    #     was sitting there, proven, in the sidecar. Generals Alpha's Dragon Tank is the same
+    #     coincidence. That row is `td_nod_ssmlauncher`'s reference, so the withholding was
+    #     visible in the map.
+    proof = row.get("w_cycle_evidence")
+    if proof:
+        shots = proof.get("cycle_shots", proof["burst"])
+        if shots <= 1:
+            return None
+        return sum(d["mean"] for d in proof["burst_delays"]) / (shots - 1.0)
     reload_ticks = float(row.get("w_reload") or 0)
     # ⛔ 334 OF 621 BURST ROWS PUBLISH A RATE THAT NEVER FOLDED BURST IN, and recovering a delay
     # from one of those produces a confident, meaningless number. Measured 2026-09-13 across the

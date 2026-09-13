@@ -1,5 +1,159 @@
 # Cameo — THE HANDOFF
 
+## ⛔⛔ 2026-09-13 (later) — THE "334 UNFOLDED RATES" ARE 694, AND THE BLOCKER IS NOT ARITHMETIC
+
+Written by **Claude-Local (Opus 5)**. ⚠ **Codex relayed at 13:34 that it has "picked up the 334-rate
+recomputation".** This section is the measured diagnosis; read it before redoing the search, because
+the headline number, the population and the root cause were all different from what I reported on
+2026-09-12, and the ruled fix turns out to be blocked on an input nobody has.
+
+### The number
+
+| population | count |
+|---|---|
+| `ini_corpus.json` rows declaring `Burst > 1` with a rate of `damage / reload` | **694** |
+| of those, surviving the population rule + faction routing into a pool | **362** |
+| of those, actually ASSIGNED as some Cameo actor's reference | **77** (59 actors) |
+| of those, inside the playtest scope (td_gdi, td_nod, ra1_allies, ra1_soviets, japan) | **5 actors** |
+
+The "334" I published was one pool measured once. Deduped across `peer_rows` + `peer_hero_rows` +
+`peer_variant_rows` it is 362, and the corpus-level population is 694.
+
+### Root cause — it is a STALE CORPUS, not a formula bug
+
+Seven INI sources carry **no weapon-evidence stamp at all** (`w_evidence: null` on every row):
+CnC Reloaded, Mental Omega, RA2 0XX, RA2 Reborn, Red Resurrection, Rise of the East, Twisted
+Insurrection. `ini_corpus.json` predates the evidence policy for them, so their rows sail through
+`apply_weapon_evidence` untouched and publish `damage / reload` as a rate while declaring `Burst > 1`.
+
+DTA Classic and DTA Enhanced are the control: their rows DO carry stamps, so their burst rows are
+either withheld (`incomplete / burst_unfolded`) or carry a reviewed cycle proof. **The machinery
+already works; it was simply never run over the other seven.**
+
+⭐ **A fresh extraction fixes the stamps and LOSES NOTHING.** Measured 2026-09-13 by extracting all
+nine sources to a scratch file and diffing field-by-field against the committed corpus:
+
+    row keys identical (11,867)   ·   evidence LOST 0   ·   evidence CHANGED 0   ·   evidence GAINED 2,986
+
+### ⚠ But a regeneration costs 63 hand-baked weapon selections
+
+`ebf8f16ce` *"reference: read the Secondary weapon"* baked a dummy-primary correction directly into
+63 corpus rows — RoTE's `HTK` Halftrack declares `Primary=FlakTrackGun` (a 0-damage dummy) and the
+committed row silently carries the real `FlakTrackAAGun` instead. **All 63 are in those same seven
+sources; none are in DTA.** The sanctioned mechanism (`ini_weapon_selection.json`, fingerprinted and
+reviewed) covers only **2** rows, both DTA. A regen replaces those 63 with the raw shape, which the
+fresh extractor then stamps `direct_undeclared` — safe, but abstaining.
+
+⛔ **This, not "63 rows lose weapon evidence", is what the standing do-not-regenerate warning is
+actually protecting.** The warning's wording sent me looking for lost `w_evidence`, of which there
+is none.
+
+### ⛔ THE REAL BLOCKER: there is no YR/Ares cycle model, and the delays are mostly undeclared
+
+`rate = damage_per_shot x burst / (reload + sum of the Burst-1 delays)` needs the delays. After a
+fresh extraction **only 77 of the 694 rows declare any** (`BurstDelay0..N` for Ares, `Burst.Delays`
+for Phobos), and the notation is NOT OpenRA's:
+
+    Rise of the East  MLRS270   Burst 6   delays [15, -1]          a -1 SENTINEL, and only 2 entries
+    Rise of the East  RBUGGY    Burst 8   delays [15]              one entry for seven gaps
+    Rise of the East  PHZ89     Burst 6   delays [6,6,6,6,6,6]     SIX entries for FIVE gaps
+
+OpenRA's rule (`Armament.cs:146`) admits exactly length 1 or length `Burst - 1` and refuses to boot
+otherwise. Ares/Phobos plainly do neither. DTA reached a correct rate only through
+`ini_cycle_evidence.json` — **444 hand-reviewed timing proofs**, each carrying min/mean/max gaps,
+post-burst jitter and a charge term, each fingerprinted to its source row.
+
+So the maintainer's ruling ("recompute them to obey the formula") is right and cannot be executed for
+the ~617 rows that declare nothing, without first deciding what cycle to assume for an engine this
+repo has never modelled. **That is the open question. Do not guess it in code.**
+
+### ⭐ What WAS fixed here, and it was a real defect in my own guard
+
+`reference_targets.burst_delay_of` withheld on rows that **do** obey the formula, and contaminated the
+rest. Measured over the 91 rows carrying a reviewed cycle proof — **32 disagreed with their own proof**:
+
+* **False withholding.** DTA's `MLRS` "SSM Launcher" (damage 100, burst 2, reload 400, rate 0.25)
+  satisfies `rate == damage / reload` BY COINCIDENCE: its proof puts the single gap at 400 ticks, so
+  `100 x 2 / (400 + 400) = 0.25` as well. Both identities hold whenever the gap equals the reload, and
+  my burst-1 test then refused a delay that was sitting in the sidecar, proven. That row is
+  `td_nod_ssmlauncher`'s reference, so the withholding was visible in the map. Generals Alpha's
+  Dragon Tank is the same coincidence.
+* **Jitter contamination.** The inversion cannot see `post_burst_jitter`, so it charged that time to
+  the burst gaps: `HTNK` 6.0 against a proven 5.0, `3TNK` 2.0 against 1.0, `MSAM` 10.0 against 9.0.
+
+`burst_delay_of` now READS the proof instead of inverting the rate when one exists. 32 of 32 agree;
+`td_nod_ssmlauncher` went from 1 recovered delay to 2.
+
+⛔ **The lesson generalises: a row that satisfies the burst-1 identity is not necessarily unfolded.**
+Test the EVIDENCE, not the arithmetic coincidence.
+
+### ra1_allies_chronotank — closed, and the last gap is OUR rule, not missing data
+
+Maintainer ruled 2026-09-13: *"of course you also need to remove the epic vehicle template from the
+unit then after changing it"*. The yaml already carried `^FireSupportTemplate` with no epic template;
+what remained was the preserved `design.class_anchor: epic_vehicle` in `docs/balance/redalert_allies.json`,
+which `EXCLUDE_CLASSES` used to drop the actor entirely. Set to `fire_support` — the value
+`class_membership.subtype_to_anchor("FireSupport")` returns, and the one 30 of the other 32
+FireSupport units already carry. The actor now holds **Combined Arms `CTNK` + OpenRA Red Alert `CTNK`,
+both name-exact**; assignment 373 -> 374 actors, >=2 floor 226 -> 227.
+
+✅ **And the third source landed.** DTA Enhanced ships `CTNK` "Chrono Tank" (Allies, 1800cr) at
+`build_limit 2`, so `is_hero_limit` put it in the HERO pool while removing Cameo's own limit put the
+actor in the ORDINARY pool — name-exact, id-exact, and unreachable by every pass because the lanes
+are impermeable on purpose. The maintainer asked for it directly (*"Can you please also use it as
+reference or what?"*), and the CROSS-LANE PASS above is the answer: the actor now holds **all three**.
+O1 gating stays **12 of ratchet 12** and O2 gating fell **7 -> 6**. No ratchet was raised, and no
+exemption was added — the carve-out entry written for this actor earlier in the session was
+DELETED once the pass closed the gap for real.
+
+
+### ⭐ THE CROSS-LANE PASS — "Can you please also use it as reference?"
+
+Maintainer, 2026-09-13, on DTA Enhanced's `CTNK` "Chrono Tank" sitting unclaimed. `assign_references`
+gains a **fourth lane**, built to the variant pass's contract (strictly additive: it writes only into
+an empty `(actor, source)` slot and claims each peer row once, so **no existing mapping can change**).
+
+    the actor already holds an ORIGINAL-source row with raw_name EXACTLY 1.0
+    + a candidate in a routed, unfilled source matching that anchor on BOTH id and name
+    + that candidate unclaimed by any actor in any lane          =>   attach it, confidence FAIR
+
+⛔ **The `raw_name == 1.0` gate is what stops it corroborating a bad base.** Ungated it produced 34
+additions and one was `ra2_allies_grandcannon` -> Mental Omega `YAGGUN` "Gatling Cannon", extending a
+0.75 mispairing the greedy had already made. Gated: **26 candidates, every one unmistakable**
+(`DOG` "Attack Dog", `SONIC` "Disruptor", `TESLA` "Tesla Coil", `MMCH` "Titan").
+
+⭐ **24 of the 26 are in the ORDINARY lane**, not the hero lane — rows the greedy never reached
+because it takes one peer per actor per source. This is the documented failure mode again: *the
+matcher never chose badly, the right candidate was invisible.*
+
+**Landed: 3** — `ra1_allies_chronotank` (DTA `CTNK`), `ra2_allies_nighthawk` (Valiant Shades `shad`),
+`yuri_slaveminer` (Red Resurrection `SMIN`). References 302 -> 305; originals under three sources
+5 -> 4; `ra1_allies_chronotank` now holds **all three**.
+
+⚠ **The other 23 were refused by faction routing, and the refusals split two ways.** Neither is
+fixed here — both are outside the playtest scope (td_gdi, td_nod, ra1_allies, ra1_soviets, japan) —
+but both are real and both are the same class as `33f9b9675` ("the RA1 countries are sides"):
+
+* **CORRECT refusals.** `fr.allows` enforces the exclusivity rule: a row owned by several of a
+  source's routed Cameo factions describes the mod, not a faction, so it is admitted to none.
+  CnC Reloaded's `DOG` lists `AlliesCountry` **and** `SovietCountry`, so neither `ra2_allies_dog`
+  nor `ra2_soviets_dog` may have it. Working as designed.
+* ⛔ **A GENUINE MISSING-TOKEN GAP — TS sub-factions are not routed.** Crystallized Nexus tags its
+  GDI units `zocom` (ZOCOM) and `steel` (Steel Talons), and `ts_gdi`'s route for that source is
+  `('gdi',)`, so `SONIC` "Disruptor", `MMCH` "Titan", `JUGG` "Juggernaut", `HVR` "Hover MLRS",
+  `SMECH` "Wolverine", `HMEC` "Mammoth Mk. II", `JUMPJET` and `LPST` are invisible to their own
+  faction. Twisted Insurrection's `phoenix` IS routed, which is the precedent. ts_nod almost
+  certainly has the mirror gap (Black Hand / Marked of Kane). **8 exact-name originals in one
+  source — the largest single lever left in the map.**
+
+### ⛔ Do not "fix" the hero lane to close a gap like this
+
+Measured before the cross-lane pass was written, and recorded so nobody re-derives it: loosening
+`is_hero_limit` from `> 0` to `> 1` does release DTA's `CTNK`, and it also releases CnC Reloaded's
+`NODCOMMANDO` (Nod Commando, `build_limit 2`) into the ordinary vehicle population. **29 corpus rows
+move and they include commandos, Slave Miners and Grand Cannons.** The `> 0` test is correct; what
+was needed was a narrow derived exception, not a wider threshold.
+
 ## ⭐⭐ 2026-09-13 — FLEET SYNC, THE CODEX RECONCILIATION, AND THE REFERENCE MAP CLOSED OUT
 
 Written by **Claude-Local (Opus 5)** on `claude/weapon_inherit_audit_and_map`, 28 commits ahead of

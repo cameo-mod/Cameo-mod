@@ -85,6 +85,14 @@ O1_UNSETTLED = (
     # only Radar DOMES, which are buildings. Verified 2026-09-13 after the maintainer removed this
     # actor's BuildLimit, which is what let it reach two sources in the first place.
     "ra1_allies_mobileradarjammer",
+    # ⭐ ra1_allies_chronotank WAS HERE AND IS NOT ANY MORE, which is the outcome this list is
+    # supposed to have. It held two exact-name `CTNK` rows while DTA Enhanced's `CTNK` "Chrono
+    # Tank" sat unclaimed in the HERO pool (DTA caps it at `build_limit 2`; the maintainer had
+    # just removed Cameo's own limit, putting the two sides in impermeable lanes). The fix was a
+    # derived cross-lane pass in `assign_references`, NOT an exemption — see its comment for why
+    # loosening `is_hero_limit` to `> 1` was measured and rejected (it also frees CnC Reloaded's
+    # `NODCOMMANDO`). ⛔ Reach for that shape first: this list is for gaps the DATA closes off,
+    # never for gaps our own machinery creates.
 )
 # ⛔ O2 IS SPLIT, because it was measuring one settled question and one unsettled one and gating
 # on the sum. Tiberian Dawn, Red Alert and Tiberian Sun ship the original rosters and nothing

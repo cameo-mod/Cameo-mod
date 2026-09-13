@@ -939,6 +939,77 @@ def assign(only_class=None, routing=True):
     for src, rows_ in (list(by_source.items()) + list(hero_by_source.items())
                        + list(variant_by_source.items())):
         combined[src].extend(rows_)
+    # ── ORIGINALS CROSS-LANE PASS (maintainer, 2026-09-13) ───────────────────────────────────
+    #
+    #     "Can you please also use it as reference or what?"  — on DTA Enhanced's `CTNK`
+    #     "Chrono Tank", which was sitting unclaimed while `ra1_allies_chronotank` held only two.
+    #
+    # ⛔ THE PROBLEM IS NOT SCORING, IT IS VISIBILITY — the failure mode this repo keeps paying
+    # for. DTA caps its Chrono Tank at `build_limit 2`, so `is_hero_limit` puts it in the HERO
+    # pool; the maintainer removed Cameo's own limit so the actor could match, which put the Cameo
+    # side in the ORDINARY pool; and the two lanes are impermeable on purpose. A name-exact,
+    # id-exact original was therefore visible to a human and unreachable by every pass.
+    #
+    # ⚠ LOOSENING `is_hero_limit` IS THE WRONG FIX and was measured before this one was written:
+    # `> 0` -> `> 1` releases this row and ALSO releases CnC Reloaded's `NODCOMMANDO` (Nod
+    # Commando, limit 2) into the ordinary vehicle population — 29 corpus rows move, including
+    # commandos, Slave Miners and Grand Cannons. The lane rule is right; what it needed was a
+    # narrow, derived exception rather than a wider threshold.
+    #
+    # THE RULE, and every clause is load-bearing:
+    #   * the actor must already hold an ORIGINAL-source row whose `raw_name` is EXACTLY 1.0 —
+    #     an exact-name anchor, never a merely good one;
+    #   * the candidate must match that anchor on BOTH id and normalised name;
+    #   * the source must be routed for the actor's faction and not already filled;
+    #   * the candidate must be unclaimed by any actor, in any lane.
+    #
+    # ⛔ THE `raw_name == 1.0` GATE IS WHAT STOPS IT PROPAGATING A BAD BASE. Without it the pass
+    # extends whatever the greedy already got wrong: `ra2_allies_grandcannon` holds Romanov's
+    # Vengeance `yaggun` "Gatling Cannon" at raw_name 0.75, and the ungated rule dutifully handed
+    # it Mental Omega's `YAGGUN` as well — the same mistake, twice, now looking corroborated. With
+    # the gate the additions fall 34 -> 26 and every survivor is unmistakable: `DOG` "Attack Dog",
+    # `SONIC` "Disruptor", `TESLA` "Tesla Coil", `MMCH` "Titan".
+    #
+    # ⭐ AND IT TURNED OUT TO BE MORE THAN A HERO-LANE PATCH: 24 of the 26 recovered rows are in
+    # the ORDINARY lane — rows the greedy simply never reached, because it takes one peer per
+    # actor per source and these sat below the winner in their bucket.
+    #
+    # ⛔ STRICTLY ADDITIVE, exactly as the variant pass above: it writes ONLY into an empty
+    # (actor, source) slot and claims each peer row once, so no existing mapping can change. It
+    # runs BEFORE `apply_overrides`/`drop_unbacked_shape` so both still govern its output.
+    # Confidence is FAIR, never STRONG — the evidence is real but it bypassed the greedy, and a
+    # lane that promotes itself is how a map stops being checkable.
+    assign.crosslane = crosslane = []
+    claimed_rows = {(src, (m.get("id") or "").upper())
+                    for srcs in result.values() for src, m in srcs.items()}
+    for cid in sorted(result):
+        fac = fr.faction_of(cid)
+        if not fac:
+            continue
+        anchors = [m for src, m in result[cid].items()
+                   if src in ORIGINAL_SOURCES and m.get("raw_name") == 1.0]
+        if not anchors:
+            continue
+        for src in sorted({s for s, _ in (fr.ROUTES.get(fac) or ())} - set(result[cid])):
+            for pr in combined.get(src, ()):
+                pid = (pr.get("id") or "").upper()
+                if not pid or (src, pid) in claimed_rows:
+                    continue
+                if routing and not fr.allows(fac, pr):
+                    continue
+                if not any(pid == (m.get("id") or "").upper()
+                           and syn.norm(pr.get("name", "")) == syn.norm(m.get("name", ""))
+                           for m in anchors):
+                    continue
+                claimed_rows.add((src, pid))
+                result[cid][src] = {
+                    "name": pr.get("name"), "id": pr.get("id"),
+                    "score": (1, 0, 0, 0.0, 0.0, 0.0, 1.0),
+                    "hp": pr.get("hp"), "cost": pr.get("cost"), "home": False,
+                    "raw_name": 1.0, "confidence": "FAIR", "cross_lane": True}
+                crosslane.append((cid, src, pr.get("id"), pr.get("name")))
+                break
+
     result = apply_overrides(result, combined, routed_pool, routing)
     result, hero_dropped = drop_unbacked_shape(result)
     assign.shape_only = {**getattr(assign, "shape_only", {}), **hero_dropped}
