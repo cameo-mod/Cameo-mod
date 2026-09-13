@@ -144,6 +144,56 @@ class WithheldStatLeakTest(unittest.TestCase):
         self.assertGreaterEqual(w, min(p, CAM[0]["w_dps"]))
         self.assertLessEqual(w, max(p, CAM[0]["w_dps"]))
 
+    def test_multi_armament_cameo_row_withholds_weapon_model_only(self):
+        row = dict(CAM[0], weapon_model_eligible=False, w_damage=20, w_burst=2,
+                   w_reload=30)
+        self.assertFalse(rd.eligible(row, "w_damage"))
+        self.assertTrue(rd.eligible(row, "hp"))
+        self.assertEqual(self._t(VALID_PEERS, row, "w_damage"), (None, None, 0))
+
+    def test_unknown_burst_cadence_cannot_become_zero_delay(self):
+        current = dict(w_damage=200, w_damage_per_shot=100,
+                       w_burst=2, w_reload=400, w_dps=.25)
+        self.assertIsNone(rt.burst_delay_of(current))
+        self.assertIsNone(rt.dps_guard(current, {}, None))
+        self.assertIsNone(rt.dps_guard(current, {}, None, burst_delay_target=5))
+
+    def test_reference_burst_delay_is_used_when_available(self):
+        current = dict(w_damage=200, w_damage_per_shot=100,
+                       w_burst=2, w_reload=90, w_dps=2)
+        guarded = rt.dps_guard(current, {}, None, burst_delay_target=5)
+        self.assertAlmostEqual(guarded["composed_dps"], 200 / 95)
+        self.assertEqual(guarded["burst_delay_per_shot"], 5)
+
+    def test_target_burst_without_delay_stays_withheld(self):
+        current = dict(w_damage=100, w_damage_per_shot=100,
+                       w_burst=1, w_reload=100, w_dps=1)
+        self.assertIsNone(rt.dps_guard(
+            current, {"w_damage": 200, "w_burst": 2, "w_reload": 100}, None))
+
+    def test_frozen_weapon_population_is_fixed_and_fail_closed(self):
+        frozen = [dict(id="a", hp=10, w_damage=10, w_burst=2, w_reload=20, w_dps=.8)]
+        marked = rt._withhold_unproven_frozen_weapon_model(frozen)
+        self.assertFalse(marked[0]["weapon_model_eligible"])
+        self.assertEqual(marked[0]["hp"], 10)
+        # No mutable current row is consulted, so a live edit cannot change this population.
+        self.assertEqual(marked, rt._withhold_unproven_frozen_weapon_model(frozen))
+
+    def test_missing_frozen_actor_cannot_receive_weapon_target(self):
+        current = dict(CAM[0], id="new", weapon_model_eligible=True,
+                       w_damage=20, w_burst=2, w_reload=30)
+        frozen = rt.FrozenCameoDistribution(CDIST, [])
+        self.assertEqual(self._t(VALID_PEERS, current, "w_burst", cdist=frozen),
+                         (None, None, 0))
+
+    def test_live_hero_rows_carry_cycle_and_per_shot_damage(self):
+        rows = [row for row in rd.cameo_hero_rows()
+                if row.get("w_damage") and float(row.get("w_burst") or 1) > 1]
+        self.assertTrue(rows)
+        for row in rows:
+            self.assertAlmostEqual(
+                row["w_damage_per_shot"], row["w_damage"] / float(row["w_burst"]))
+
 
 if __name__ == "__main__":
     unittest.main()
