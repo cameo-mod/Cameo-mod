@@ -1,5 +1,106 @@
 # Cameo — THE HANDOFF
 
+## ⭐⭐⭐ 2026-09-13 (late night) — PR #375 REVISED HEAD, READY FOR ASTRA RE-REVIEW
+
+Written by **Claude-Local (Opus 5)**. **This is the live state — read it before anything else
+dated earlier, including the "(night)" section below, which it supersedes on the reference lane.**
+
+| | |
+|---|---|
+| the branch | `claude/armament_pairing` → **`96cefbe3b`**, off `8f9bef3b0`, pushed |
+| PR | **#375** — Astra NO-GO at `cfa8c9af9`; **all five blockers now addressed**, awaiting re-review |
+| the map | **v27** — 73 originals · 116 expanded · 305 references · 45 priced by formula |
+| suite | **161 fail/error, exactly master's baseline.** 2473 tests (master 2427) |
+| doc claims | this lane's **7 of 7 green**; 11 pre-existing mismatches elsewhere, untouched |
+
+### ⛔ THE DEFECT THAT INVALIDATED EVERY DAMAGE TARGET — `2e0df993d`
+
+`reference_distribution.to_per_cycle` multiplies any `Burst > 1` row by its burst, because peer
+corpora publish damage per SHOT. `reference_targets.cameo_context()` feeds it the **frozen Cameo
+snapshot, which already stores burst totals** — so Cameo's burst rows were multiplied twice. The
+mammoth 32,000 → 64,000; the MLRS 48,000 → **288,000**, 36× its per-shot damage. That snapshot is
+the PROJECTION RULER, so a quarter of it being inflated lifted every actor's target:
+
+    243 of 243 mapped actors inflated   median 2.01x   worst 8.31x
+    153 of 153 burst-1 actors moved     EXTREME 50->17   DISAGREES 31->10
+
+Found because the maintainer asked why the GDI grenadier's reference went 22k → 38k when all three
+of its references are Burst 1 and none of them had changed. **The guard is on `source == "Cameo"`,
+not a call-site flag.** If you consume `to_per_cycle` anywhere, re-check your numbers against this.
+
+### THE RULES THE MAINTAINER SET, 2026-09-13
+
+> *"one chosen peer weapon from each reference source contributes one candidate Range/DPS value for
+> one Cameo armament; it is reference evidence only, not a live balance change. Originals should
+> pair to the base weapon. Promotion/expanded actors should pair to the corresponding elite/upgraded
+> replacement. MTNK's dummy remains the additive exception. A replacement must not also count beside
+> its base weapon, and ambiguous role or identity must abstain."*
+
+| tier | who | bench |
+|---|---|---|
+| `original` (140) | an original-shipping mod matched it by name | the BASE weapon only |
+| `expanded` (174) | promotion units, Cameo/CA/DTA additions | the elite replacement, IN PLACE OF its base |
+
+MTNK's dummy is not special-cased — it falls out of `replaces_dummy_primary`. Nine DTA units have a
+zero-damage rate-of-fire stub as `Primary=`, so their `Elite=` weapon fills an empty slot and is a
+genuine second armament in **both** tiers. That is why `td_gdi_battletank`, an original, still
+references DTA's elite `70mmMsl1`.
+
+### ASTRA'S FIVE BLOCKERS — ALL ADDRESSED (`4ed37c121`, `febf778a3`, `96cefbe3b`)
+
+1. **elite replacements counted as extra weapons** → `armament_roles.tier_bench`, above.
+2. **same-role weapons vanish; single-role actors hidden** → `cameo_armaments()` replaces
+   `strongest_by_role` on the Cameo side; the report gates on WITHHELD, not on multi-ROLE.
+3. **unproven-role fallback picked max damage** → `_unproven_pair` and `UNPROVEN_PREFERENCE`
+   **deleted**. Pairs 607 → 308, unproven 300 → **0**, exact 213 → **215**.
+   `ra2_soviets_apocalypsetank` is back to zero votes and that is now the correct answer.
+4. **hashes recorded but not enforced** → two layers, both in-repo so they work without the 9.9 GB
+   reference folder: each extractor's `load()` re-verifies its source pins against `ini_corpus.json`
+   and drops per source (`load.dropped`); `armament_pairing.json` carries an `inputs` block and
+   `pairing_document()` **raises** on a stale one.
+5. **`Ground + UnknownFlyingTarget` became a proven ground vote** → `role_of_targets` fails closed.
+   0 unknown tokens tree-wide today, which is when the guard is cheap.
+
+### ⛔ LIVE YAML FINDINGS — NOT FIXED, AND DELIBERATELY SO
+
+**PR #345 (`b235c6980`, 2026-09-12) divided damage out of 43 weapons** while adding
+`PercentageDenominator`/`PercentageScale` to 213 warheads. Median divisor exactly **4.00×** (25
+weapons at 4.0, 14 at 2.0). `td_gdi_minigunner` 2000 → 480 per shot.
+
+⚠ **My first reading of this was wrong and Codex/Astra corrected it.** `pct_absolute == 0` means
+there is no standalone percentage FLOOR — **not** that folded `PercentageScale` damage is zero. The
+folded hit does execute, and the model carries it in `k_flat_context`. At reference HP 200,000 the
+folded damage is 480 (minigunner), 960 (its AP weapon), 3,720 (RA1 machinegunner), 1,000 (Hind).
+**Do not base a restore/finish decision on `pct_absolute`.** Maintainer's ruling: keep the current
+baked values, do not restore pre-#345 damage, do not run `apply_balance`. The zero percentage
+contribution is a separate runtime-audit item.
+
+**The remaining DPS gap is still real and still unexplained.** `td_gdi_minigunner` composes to 749%
+of its current rate, and **burst is not the lever**: at Burst 1 keeping `Damage: 480` the gap widens
+to 25.4×; keeping the cycle total it is still 6.35×. The driver is reload — every reference fires a
+full cycle in 20 ticks, Cameo takes 50 + 9.
+
+⚠ **The frozen snapshot predates #345.** Pinned 2026-09-10; #345 landed 09-12. **32 actors'
+`w_damage` differs between the pinned snapshot and live yaml** — 25 nerfed since, median exactly
+2.00×, with a cluster at exactly 4.00×. So for those rows the map's "now" column is live while the
+model's Cameo self-vote is the pre-quartering value. That is not a bug — the snapshot is SHA256
+pinned precisely so the map cannot feed on itself — but it must be known when reading them.
+`ra1_allies_sheridanassaulttank` is in this list at 4.00×: **the `test_missile_role_policy` 0.25×
+and the #345 quartering are the same event** (Codex: the documented local-firepower bake, PR #377).
+
+### WHAT IS STILL OPEN ON THIS LANE
+
+* **The ruler is still the ACTOR-LEVEL distribution.** `armament_target` projects one armament
+  against a population of whole actors' weapon damage. Right where one armament carries most of an
+  actor's output, generous to a small secondary. A per-ARMAMENT ruler needs the peer corpora
+  re-expressed per weapon first — not started, and it is a MODEL change needing the maintainer.
+* **694 unfolded rates stay blocked** — only 77 INI rows declare a burst delay, in Phobos/Ares
+  notation; `ini_views` leaves `cycle = None` for burst > 1 rather than inventing one.
+* **TS sub-faction routing gap** — Crystallized Nexus tags GDI units `zocom`/`steel`; `ts_gdi`
+  routes only `('gdi',)`.
+* **`shield_versus_mean`** documented 175.919 vs measured 180.284 (`DESIGN.md` §12.0c and
+  `design/ARMOR_LAYERS.md` both carry the stale number). Armor lane; Codex has logged it.
+
 ## ⭐⭐⭐ 2026-09-13 (night) — MASTER BOOTS, AND EVERY UNIT'S WEAPONS ARE MAPPED SEPARATELY
 
 Written by **Claude-Local (Opus 5)**. **This is the live state — read it before anything else
