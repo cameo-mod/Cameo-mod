@@ -16,7 +16,14 @@ import pathlib
 import sys
 from collections import defaultdict
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+
 CORPUS = pathlib.Path(__file__).parent.parent.parent / "docs" / "reference" / "ini_corpus.json"
+BUCKETS = (
+    "buildable_untagged", "zero_cost", "tech11_low_cost", "cost_tech11",
+    "cost_disabled", "cost_other", "prerequisite_no_owner", "no_production_claim",
+)
 
 
 def classify(row: dict) -> str:
@@ -26,9 +33,9 @@ def classify(row: dict) -> str:
         cost = row.get("cost")
         tech = row.get("tech_level")
         if cost == 0:
-            return "cost_0_civilian"
+            return "zero_cost"
         if tech == 11 and cost is not None and cost <= 100:
-            return "cost_low_hero"
+            return "tech11_low_cost"
         if tech == 11:
             return "cost_tech11"
         if tech is not None and tech < 0:
@@ -37,6 +44,24 @@ def classify(row: dict) -> str:
     if row.get("prerequisite"):
         return "prerequisite_no_owner"
     return "no_production_claim"
+
+
+def summarize_untagged(rows: list[dict]):
+    by_source = defaultdict(list)
+    for row in rows:
+        if not row.get("owners"):
+            by_source[row["source"]].append(row)
+    summary = {}
+    for source, source_rows in sorted(by_source.items()):
+        buckets = defaultdict(list)
+        for row in source_rows:
+            buckets[classify(row)].append(row)
+        counted = sum(len(buckets.get(bucket, ())) for bucket in BUCKETS)
+        if counted != len(source_rows):
+            raise AssertionError(
+                f"{source}: bucket total {counted} != untagged total {len(source_rows)}")
+        summary[source] = buckets
+    return by_source, summary
 
 
 def main() -> int:
@@ -52,22 +77,14 @@ def main() -> int:
                 continue
             rows.append(json.loads(line))
 
-    by_source = defaultdict(list)
-    for r in rows:
-        if not r.get("owners"):
-            by_source[r["source"]].append(r)
+    by_source, summary = summarize_untagged(rows)
 
     print("# INI corpus untagged breakdown\n")
-    headers = ["source", "total", "buildable", "cost_0_civilian", "cost_low_hero",
-               "cost_tech11", "cost_disabled", "cost_other", "prereq_no_owner", "no_production_claim"]
+    headers = ["source", "total", *BUCKETS]
     print("| " + " | ".join(headers) + " |")
     print("|" + "|".join(["---"] * len(headers)) + "|")
-    summary = {}
     for s, rs in sorted(by_source.items()):
-        buckets = defaultdict(list)
-        for r in rs:
-            buckets[classify(r)].append(r)
-        summary[s] = buckets
+        buckets = summary[s]
         cells = [s, str(len(rs))]
         for h in headers[2:]:
             cells.append(str(len(buckets.get(h, []))))
@@ -87,11 +104,13 @@ def main() -> int:
                       f"prereq={r.get('prerequisite')}")
             print()
     else:
-        print("None. All buildable rows now have resolved owners.\n")
+        print("No rows are currently marked buildable without owners.\n")
 
     print("\n## Costed but not buildable — data-driven subcategories\n")
+    print("Labels state observed fields only. Zero cost does not imply civilian identity, and "
+          "TechLevel 11 with low cost does not imply hero identity.\n")
     for s, buckets in sorted(summary.items()):
-        for cat in ["cost_0_civilian", "cost_low_hero", "cost_tech11", "cost_disabled", "cost_other"]:
+        for cat in ["zero_cost", "tech11_low_cost", "cost_tech11", "cost_disabled", "cost_other"]:
             rows = buckets.get(cat, [])
             if not rows:
                 continue

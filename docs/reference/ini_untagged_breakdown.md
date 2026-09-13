@@ -1,16 +1,16 @@
-﻿# INI corpus untagged breakdown
+# INI corpus untagged breakdown
 
-| source | total | buildable | cost_0_civilian | cost_low_hero | cost_tech11 | cost_disabled | cost_other | prereq_no_owner | no_production_claim |
+| source | total | buildable_untagged | zero_cost | tech11_low_cost | cost_tech11 | cost_disabled | cost_other | prerequisite_no_owner | no_production_claim |
 |---|---|---|---|---|---|---|---|---|---|
-| CnC Reloaded | 472 | 0 | 0 | 0 | 1 | 11 | 0 | 0 | 451 |
-| DTA Classic | 505 | 0 | 2 | 0 | 0 | 54 | 0 | 0 | 302 |
-| DTA Enhanced | 505 | 0 | 2 | 0 | 0 | 54 | 0 | 0 | 302 |
-| Mental Omega | 1132 | 0 | 121 | 8 | 14 | 40 | 4 | 0 | 838 |
-| RA2 0XX | 1598 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 1449 |
-| RA2 Reborn | 331 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 300 |
-| Red Resurrection | 570 | 0 | 1 | 0 | 0 | 2 | 0 | 0 | 555 |
-| Rise of the East | 687 | 0 | 2 | 0 | 0 | 29 | 0 | 0 | 649 |
-| Twisted Insurrection | 483 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 480 |
+| CnC Reloaded | 472 | 9 | 0 | 0 | 1 | 11 | 0 | 0 | 451 |
+| DTA Classic | 505 | 147 | 2 | 0 | 0 | 54 | 0 | 0 | 302 |
+| DTA Enhanced | 505 | 147 | 2 | 0 | 0 | 54 | 0 | 0 | 302 |
+| Mental Omega | 1132 | 107 | 121 | 8 | 14 | 40 | 4 | 0 | 838 |
+| RA2 0XX | 1598 | 6 | 0 | 0 | 0 | 5 | 0 | 138 | 1449 |
+| RA2 Reborn | 331 | 30 | 0 | 0 | 0 | 1 | 0 | 0 | 300 |
+| Red Resurrection | 570 | 12 | 1 | 0 | 0 | 2 | 0 | 0 | 555 |
+| Rise of the East | 687 | 7 | 2 | 0 | 0 | 29 | 0 | 0 | 649 |
+| Twisted Insurrection | 483 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 480 |
 
 ## Buildable but untagged (actionable)
 
@@ -510,13 +510,15 @@
 - `NEGLAMP` | Invisible Negative Light Post | type=building | cost=None | tech=11 | prereq=None
 
 
-## Costed but not buildable ù data-driven subcategories
+## Costed but not buildable — data-driven subcategories
 
-### CnC Reloaded ù cost_tech11 (1)
+Labels state observed fields only. Zero cost does not imply civilian identity, and TechLevel 11 with low cost does not imply hero identity.
+
+### CnC Reloaded — cost_tech11 (1)
 
 - `APCW` | Amphibious APC | type=vehicle | cost=800 | tech=11 | prereq=GDIWEAP,TSGAPILE
 
-### CnC Reloaded ù cost_disabled (11)
+### CnC Reloaded — cost_disabled (11)
 
 - `TBRUT` | Mutant Brute | type=infantry | cost=350 | tech=-1 | prereq=None
 - `SUBHARV` | Subterranean Harvester (only for AI!!!) | type=vehicle | cost=1400 | tech=-1 | prereq=ROBOTPILE
@@ -530,12 +532,12 @@
 - `GATICK` | Deployed Tick Tank | type=defense | cost=750 | tech=-1 | prereq=None
 - ... and 1 more
 
-### DTA Classic ù cost_0_civilian (2)
+### DTA Classic — zero_cost (2)
 
 - `TIBSPAWN` | Resource Spawner | type=vehicle | cost=0 | tech=-1 | prereq=None
 - `OILREFN` | Oil Refinery | type=defense | cost=0 | tech=-1 | prereq=None
 
-### DTA Classic ù cost_disabled (54)
+### DTA Classic — cost_disabled (54)
 
 - `COW` | Cow | type=infantry | cost=10 | tech=-1 | prereq=None
 - `RAPT` | Velociraptor | type=infantry | cost=600 | tech=-1 | prereq=None
@@ -549,12 +551,12 @@
 - `VISC_SML` | Baby Visceroid | type=vehicle | cost=150 | tech=-1 | prereq=None
 - ... and 44 more
 
-### DTA Enhanced ù cost_0_civilian (2)
+### DTA Enhanced — zero_cost (2)
 
 - `TIBSPAWN` | Resource Spawner | type=vehicle | cost=0 | tech=-1 | prereq=None
 - `OILREFN` | Oil Refinery | type=defense | cost=0 | tech=-1 | prereq=None
 
-### DTA Enhanced ù cost_disabled (54)
+### DTA Enhanced — cost_disabled (54)
 
 - `COW` | Cow | type=infantry | cost=10 | tech=-1 | prereq=None
 - `RAPT` | Velociraptor | type=infantry | cost=600 | tech=-1 | prereq=None
@@ -568,7 +570,7 @@
 - `VISC_SML` | Baby Visceroid | type=vehicle | cost=150 | tech=-1 | prereq=None
 - ... and 44 more
 
-### Mental Omega ù cost_0_civilian (121)
+### Mental Omega — zero_cost (121)
 
 - `SPGRE` | Automobile B | type=vehicle | cost=0 | tech=11 | prereq=None
 - `REDR12` | Automobile C | type=vehicle | cost=0 | tech=11 | prereq=None
@@ -582,7 +584,7 @@
 - `TRUCKA` | Truck (Empty) | type=vehicle | cost=0 | tech=11 | prereq=None
 - ... and 111 more
 
-### Mental Omega ù cost_low_hero (8)
+### Mental Omega — tech11_low_cost (8)
 
 - `MOTHRA` | Scout Raven | type=infantry | cost=1 | tech=11 | prereq=YABRCK,YAPSIS
 - `UTOPIA` | Utopia Transport Pod | type=vehicle | cost=100 | tech=11 | prereq=YURWEAP
@@ -593,7 +595,7 @@
 - `CASWLL` | Generic Stone Wall | type=building | cost=50 | tech=11 | prereq=BARRACKS
 - `CABRFC` | Generic Brick Fence | type=building | cost=50 | tech=11 | prereq=BARRACKS
 
-### Mental Omega ù cost_tech11 (14)
+### Mental Omega — cost_tech11 (14)
 
 - `ICBM` | Topol-M | type=vehicle | cost=2000 | tech=11 | prereq=SOVWEAP,SOVTECH
 - `AMWC` | Tech Truck A | type=vehicle | cost=200 | tech=11 | prereq=GAWEAP,GATECH
@@ -607,7 +609,7 @@
 - `SPYP` | Spy Plane | type=aircraft | cost=2000 | tech=11 | prereq=None
 - ... and 4 more
 
-### Mental Omega ù cost_disabled (40)
+### Mental Omega — cost_disabled (40)
 
 - `SLAV` | Slave Worker | type=infantry | cost=10 | tech=-1 | prereq=None
 - `GASAND` | Generic Sandbags | type=building | cost=25 | tech=-1 | prereq=BARRACKS
@@ -621,14 +623,14 @@
 - `NAAPP` | Old Soviet Advanced Power | type=building | cost=100 | tech=-1 | prereq=None
 - ... and 30 more
 
-### Mental Omega ù cost_other (4)
+### Mental Omega — cost_other (4)
 
 - `QUICK` | Quickshifter | type=vehicle | cost=2000 | tech=10 | prereq=None
 - `SEIZER` | Dybbuk-Seizer | type=aircraft | cost=2000 | tech=10 | prereq=None
 - `STARDUST` | The Paradox Engine (AI) | type=aircraft | cost=5000 | tech=12 | prereq=ALLWEAP,GATECH,AILOCK
 - `LIONH` | Lionheart Bomber | type=aircraft | cost=2000 | tech=10 | prereq=None
 
-### RA2 0XX ù cost_disabled (5)
+### RA2 0XX — cost_disabled (5)
 
 - `GASAND` | Sandbags | type=building | cost=25 | tech=-1 | prereq=BARRACKS
 - `CAMSC12A` | Bullseye 2 | type=defense | cost=600 | tech=-1 | prereq=None
@@ -636,25 +638,25 @@
 - `CAFWALL` | Civilian Reinforced Wall | type=building | cost=25 | tech=-1 | prereq=None
 - `CAMETALWALL` | Civilian Metal Wall | type=building | cost=25 | tech=-1 | prereq=BARRACKS
 
-### RA2 Reborn ù cost_disabled (1)
+### RA2 Reborn — cost_disabled (1)
 
 - `CAMSC12A` | Bullseye 2 | type=defense | cost=600 | tech=-1 | prereq=None
 
-### Red Resurrection ù cost_0_civilian (1)
+### Red Resurrection — zero_cost (1)
 
 - `BATARGET` | Shogun Beacon | type=building | cost=0 | tech=None | prereq=None
 
-### Red Resurrection ù cost_disabled (2)
+### Red Resurrection — cost_disabled (2)
 
 - `GALITE` | Light Post | type=building | cost=200 | tech=-1 | prereq=None
 - `CAMSC12A` | Bullseye w/Veterancy | type=building | cost=600 | tech=-1 | prereq=None
 
-### Rise of the East ù cost_0_civilian (2)
+### Rise of the East — zero_cost (2)
 
 - `BB_12HIT` | BB_12HIT | type=infantry | cost=0 | tech=-1 | prereq=CAWEAP
 - `SARCHER` | Allied Spectral Archer | type=infantry | cost=0 | tech=-1 | prereq=None
 
-### Rise of the East ù cost_disabled (29)
+### Rise of the East — cost_disabled (29)
 
 - `LSRDUDE` | AA Laser Dummy | type=infantry | cost=400 | tech=-1 | prereq=None
 - `LSRDUDE_E` | AA Laser Dummy | type=infantry | cost=400 | tech=-1 | prereq=CAWEAP
