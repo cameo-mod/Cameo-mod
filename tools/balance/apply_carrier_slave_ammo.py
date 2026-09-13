@@ -34,6 +34,7 @@ Usage:  python tools/balance/apply_carrier_slave_ammo.py [--apply]
 from __future__ import annotations
 
 import pathlib
+import subprocess
 import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "audit"))
@@ -48,6 +49,33 @@ import yaml_ops  # noqa: E402
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 POOL_STEMS = ("AmmoPool", "AmmoPoolCA")
 RELOAD_STEMS = ("ReloadAmmoPool", "ReloadAmmoPoolCA")
+
+
+def checked_plan_paths(root: pathlib.Path, manifest_paths, plan) -> list[str]:
+    """Return repo-relative plan paths after proving they are active rule files."""
+    resolved_root = root.resolve()
+    allowed = {pathlib.Path(path).resolve() for path in manifest_paths}
+    out = []
+    for raw in plan:
+        path = (root / raw).resolve()
+        try:
+            rel = path.relative_to(resolved_root)
+        except ValueError as exc:
+            raise ValueError(f"plan path escapes repository root: {raw}") from exc
+        if path not in allowed:
+            raise ValueError(f"plan path is not an active rules file: {rel.as_posix()}")
+        out.append(rel.as_posix())
+    return sorted(set(out))
+
+
+def dirty_plan_paths(root: pathlib.Path, paths: list[str]) -> list[str]:
+    """Porcelain records for affected files only; an unrelated dirty file is preserved."""
+    if not paths:
+        return []
+    result = subprocess.run(
+        ["git", "status", "--porcelain=v1", "--untracked-files=all", "--", *paths],
+        cwd=root, check=True, capture_output=True, text=True, encoding="utf-8")
+    return [line for line in result.stdout.splitlines() if line.strip()]
 
 
 def kv(node):
@@ -206,14 +234,7 @@ def build_plan(rs):
     return plan, rows, skipped, notes
 
 
-def main() -> int:
-    apply_it = "--apply" in sys.argv
-    rs = miniyaml.Ruleset(str(ROOT))
-    paths = sorted({str(p.relative_to(ROOT)).replace("\\", "/") for p in rs.manifest.rules})
-
-    plan, rows, skipped, notes = build_plan(rs)
-    n = yaml_ops.apply_plan(plan, ROOT)
-
+def report_result(n, rows, skipped, notes):
     print(f"SKIPPED {len(skipped)} suicide slaves (a reload is dead weight on a unit that "
           f"dies when it attacks):")
     for name, why in skipped:
@@ -244,9 +265,9 @@ def main() -> int:
         for a in arms:
             if p["roles"][a["key"]] != "score":
                 continue
-            for t in law.target_set(a.get("targets")):
-                groups.setdefault(t, 0)
-                groups[t] += a["burst"] * p["usage"][a["key"]]
+            for target in law.target_set(a.get("targets")):
+                groups.setdefault(target, 0)
+                groups[target] += a["burst"] * p["usage"][a["key"]]
         if groups and max(groups.values()) != p["ammo"]:
             bad.append((name, f"a full attack spends {max(groups.values())}, pool {p['ammo']}"))
     print("\nINVARIANTS (refill == 100 ticks; one full attack empties the pool exactly)")
@@ -257,9 +278,42 @@ def main() -> int:
         print("   all pass")
     for name, note in notes:
         print(f"   note {name:24s} {note}")
+    return bad
+
+
+def apply_with_cleanup(plan, root: pathlib.Path, paths: list[str], keep_on_success: bool,
+                       evaluator):
+    """Apply a clean plan and restore it on dry run, failed invariants, or any exception."""
+    try:
+        n = yaml_ops.apply_plan(plan, root)
+        result = evaluator(n)
+    except BaseException:
+        yaml_ops.git_restore(root, paths)
+        raise
+    if not keep_on_success or result:
+        yaml_ops.git_restore(root, paths)
+    return n, result
+
+
+def main() -> int:
+    apply_it = "--apply" in sys.argv
+    rs = miniyaml.Ruleset(str(ROOT))
+
+    plan, rows, skipped, notes = build_plan(rs)
+    paths = checked_plan_paths(ROOT, rs.manifest.rules, plan)
+    dirty = dirty_plan_paths(ROOT, paths)
+    if dirty:
+        print("REFUSED: affected rule files already have local changes:")
+        for line in dirty:
+            print(f"   {line}")
+        print("Commit, stash, or move those changes before running this writer.")
+        return 2
+
+    n, bad = apply_with_cleanup(
+        plan, ROOT, paths, apply_it,
+        lambda edits: report_result(edits, rows, skipped, notes))
 
     if not apply_it or bad:
-        yaml_ops.git_restore(ROOT, paths)
         print("\ntree restored." if bad else
               "\ndry run - tree restored. Re-run with --apply, then BOOT GATE.")
         return 1 if bad else 0
