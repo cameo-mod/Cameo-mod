@@ -256,7 +256,9 @@ Player:
 		Interval: 1
 		Amount: 1
 		ShowTicks: False
-		RequiresCondition: secondaryinsurance && nobase
+		# DynamicBotInsurance already follows supported bots after their last conyard is lost.
+		# Keep this legacy fallback only for humans and bot types outside its difficulty list.
+		RequiresCondition: secondaryinsurance && nobase && !genericbot
 	GrantConditionOnPlayerTotalCash:
 		Condition: nocomeback
 		Threshold: 999

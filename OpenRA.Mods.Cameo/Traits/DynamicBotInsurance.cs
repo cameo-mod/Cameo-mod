@@ -157,9 +157,10 @@ namespace OpenRA.Mods.Cameo.Traits
 			"liquid funds still gets SOME help: assets it cannot sell do not rebuild a base.")]
 		public readonly int MinWorthFactor = 250;
 
-		[Desc("Whether the par curve contributes at all. With it off, distress is measured purely",
-			"against the owner's own peak — which is fully fog-safe and needs no tuning.")]
-		public readonly bool UseParCurve = true;
+		[Desc("Whether the par curve contributes at all. Disabled by default until measured match data",
+			"can replace its provisional magnitudes. With it off, distress is measured purely against",
+			"the owner's own peak, which is fully fog-safe and needs no external calibration.")]
+		public readonly bool UseParCurve = false;
 
 		[Desc("The par curve's SHAPE: permille of the way from ParBaseWorth to the asymptote,",
 			"sampled every ParShapeStep permille of the midpoint, interpolated linearly between.",

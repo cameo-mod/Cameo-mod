@@ -42,6 +42,12 @@ def _csharp_defaults() -> dict[str, int]:
             re.findall(r"public readonly int (\w+) = (-?\d+);", src)}
 
 
+def _csharp_bool_defaults() -> dict[str, bool]:
+    src = csharp_source()
+    return {n: v == "true" for n, v in
+            re.findall(r"public readonly bool (\w+) = (true|false);", src)}
+
+
 def test_the_model_matches_the_csharp_defaults():
     """If this fails, the model and the trait have drifted and every test below is fiction."""
     cs = _csharp_defaults()
@@ -63,6 +69,11 @@ def test_the_model_matches_the_csharp_defaults():
     assert cs["ParAsymptotePerRank"] == m.PAR_ASYMPTOTE_PER_RANK
     assert (cs["ParMidpointEasiest"], cs["ParMidpointHardest"]) == (
         m.PAR_MIDPOINT_EASIEST, m.PAR_MIDPOINT_HARDEST)
+    assert _csharp_bool_defaults()["UseParCurve"] is m.USE_PAR_CURVE
+
+
+def test_the_unmeasured_par_curve_is_disabled_by_default():
+    assert m.Insurance("medium").use_par_curve is False
 
 
 def test_the_par_curve_table_matches_the_csharp_default():

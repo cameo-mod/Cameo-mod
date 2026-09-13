@@ -118,3 +118,15 @@ def test_the_dynamic_trait_replaces_the_legacy_ladder_and_covers_every_bot_type(
     difficulties = abi.dynamic_difficulties(rules)
     assert difficulties == abi.DIFFICULTIES
     assert abi.check_dynamic_trait(difficulties) == 0
+
+
+def test_supported_bots_do_not_stack_the_legacy_no_base_fallback():
+    """The player trait survives conyard loss, so its supported bots must not get both payouts."""
+    rules = abi.miniyaml.Ruleset(str(pathlib.Path(__file__).resolve().parents[2]))
+    player = rules.resolve("Player")
+    expr = player.child("CashTrickler@secondaryinsurance").get("RequiresCondition")
+    assert expr == "secondaryinsurance && nobase && !genericbot"
+
+    eligible = {"secondaryinsurance": True, "nobase": True}
+    assert abi.evaluate(expr, eligible) is True  # human or deliberately unsupported bot
+    assert abi.evaluate(expr, {**eligible, "genericbot": True}) is False

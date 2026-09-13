@@ -97,6 +97,7 @@ MIN_DIVISOR, MAX_DIVISOR = 10, 100
 MIN_DELAY, MAX_DELAY = 25, 1500
 MIN_CASH, MAX_CASH = 1, 10
 MIN_PURIFIER, MAX_PURIFIER = 5, 50
+USE_PAR_CURVE = False
 
 # --- net-worth layer (maintainer rulings, 2026-09-01) ---------------------------------------
 # ARMY_VALUE_WEIGHT is 0 because PlayerStatistics exposes BOTH ArmyValue and AssetsValue and it is
@@ -110,9 +111,8 @@ ARMY_VALUE_WEIGHT = 0            # percent of ArmyValue added on top of AssetsVa
 # another player's worth, which no player can see and which would rubber-band against the human.
 MIN_SELF_RATIO = 100             # permille floor, so a total collapse cannot divide by ~0
 
-# The par curve is CONSERVATIVE by ruling: its three magnitudes are invented, so its ratio is
-# CLAMPED before it can influence anything. Even a badly calibrated curve can then only move the
-# combined figure by sqrt(0.5) ~ 0.71x at worst, instead of dominating it.
+# The par curve is disabled by default because its three magnitudes are provisional. Its ratio
+# remains clamped so it can be enabled for measured tuning without dominating the self comparison.
 PAR_RATIO_MIN, PAR_RATIO_MAX = 500, 2000        # permille
 
 # Floor under the worth factor: a bot that is wealthy on paper but has no cash still gets SOME
@@ -177,7 +177,7 @@ class Insurance:
 
     def __init__(self, difficulty: str, difficulties: list[str] | None = None,
                  average_window: int = AVERAGE_WINDOW, max_threshold: int = MAX_THRESHOLD,
-                 min_threshold: int = MIN_THRESHOLD, use_par_curve: bool = True):
+                 min_threshold: int = MIN_THRESHOLD, use_par_curve: bool = USE_PAR_CURVE):
         self.difficulties = difficulties or DIFFICULTIES
         self.rank = self.difficulties.index(difficulty) if difficulty in self.difficulties else -1
         self.max_threshold = max_threshold
