@@ -1,14 +1,18 @@
 #region Copyright & License Information
 /*
- * Copyright (c) OpenRA Developers and Contributors
+ * Copyright (c) The OpenRA Developers and Contributors.
  * This file is part of OpenRA, which is free software. It is made
- * available under the terms of the GNU General Public License.
+ * available to you under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3 of
+ * the License, or (at your option) any later version.
  */
 #endregion
 
 using System;
 using System.Linq;
+using OpenRA.GameRules;
 using OpenRA.Mods.Common.Traits;
+using OpenRA.Primitives;
 using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Traits
@@ -26,6 +30,17 @@ namespace OpenRA.Mods.Cameo.Traits
 		};
 
 		public readonly string PersonalityPrefix = "personality-";
+
+		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
+		{
+			base.RulesetLoaded(rules, ai);
+
+			if (Conditions.Length == 0)
+				throw new YamlException("Conditions must contain at least one personality.");
+
+			if (Conditions.Any(c => !c.StartsWith(PersonalityPrefix, StringComparison.Ordinal)))
+				throw new YamlException($"Every personality condition must start with '{PersonalityPrefix}'.");
+		}
 
 		public override object Create(ActorInitializer init) { return new BotPersonalityController(init.Self, this); }
 	}
@@ -56,7 +71,7 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		void IResolveOrder.ResolveOrder(Actor self, Order order)
 		{
-			if (IsTraitDisabled || order.OrderString != "SetBotPersonality")
+			if (IsTraitDisabled || order.OrderString != "SetBotPersonality" || string.IsNullOrEmpty(order.TargetString))
 				return;
 
 			var condition = Info.Conditions.FirstOrDefault(c => PersonalityName(c, Info.PersonalityPrefix) == order.TargetString);

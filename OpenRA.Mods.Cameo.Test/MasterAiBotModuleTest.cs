@@ -250,6 +250,28 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void EmergencyPersonalitySwitchLatchesPerEpisode()
+		{
+			var handled = false;
+			var switches = 0;
+			foreach (var urgency in new[] { BotUrgency.Emergency, BotUrgency.Emergency, BotUrgency.Emergency })
+				if (MasterAiBotModule.ShouldEvaluatePersonality(false, urgency, handled))
+				{
+					switches++;
+					handled = true;
+				}
+
+			Assert.That(switches, Is.EqualTo(1));
+			handled = false;
+			if (MasterAiBotModule.ShouldEvaluatePersonality(false, BotUrgency.Emergency, handled))
+				switches++;
+
+			Assert.That(switches, Is.EqualTo(2));
+			Assert.That(MasterAiBotModule.ShouldEvaluatePersonality(false, BotUrgency.Normal, handled), Is.False);
+			Assert.That(MasterAiBotModule.ShouldEvaluatePersonality(true, BotUrgency.Normal, handled), Is.True);
+		}
+
+		[Test]
 		public void RelativeInitialAttackDelayPreservesStartAndRemovesElapsedDelay()
 		{
 			Assert.That(SquadManagerBotModuleCA.RemainingInitialAttackDelay(12000, 0), Is.EqualTo(12000));

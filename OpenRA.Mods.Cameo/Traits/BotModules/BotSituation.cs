@@ -112,8 +112,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int previousDeathsCost;
 		int previousKillsCost;
 		BotUrgency currentUrgency;
-		BotUrgency previousUrgency;
 		int lastPersonalitySwitchTick;
+		bool emergencyPersonalityHandled;
 
 		public BotSituation Situation { get; private set; }
 		internal int DeathsCostWindow { get; private set; }
@@ -171,6 +171,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					(enemyArmy > 0 && (long)ownArmy * 100 < (long)enemyArmy * Info.PressuredArmyRatio)
 					? BotUrgency.Pressured : BotUrgency.Normal;
 			currentUrgency = urgency;
+			if (urgency != BotUrgency.Emergency)
+				emergencyPersonalityHandled = false;
 
 			var econTotal = profiles.Values.Where(p => p.Alive).Sum(EconProxy);
 			foreach (var profile in profiles.Values.Where(p => p.Alive))
@@ -187,14 +189,22 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (target != incumbentTarget)
 					incumbentSince = tick;
 				incumbentTarget = target;
+			}
+
+			EnemyProfile targetProfile = null;
+			if (target != null)
+				profiles.TryGetValue(target, out targetProfile);
+			var personalityDecision = ShouldEvaluatePersonality(decision, urgency, emergencyPersonalityHandled);
+			if (personalityDecision)
+			{
 				var currentPersonality = CurrentPersonality();
-				var candidatePersonality = CandidatePersonality(urgency, target == null ? null : profiles[target], ownArmy,
+				var candidatePersonality = CandidatePersonality(urgency, targetProfile, ownArmy,
 					profiles.Values, currentPersonality, Info);
 				incumbentPersonality = candidatePersonality;
 
 				var botLimits = player.PlayerActor.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
 				if (ShouldSwitchPersonality(currentPersonality, candidatePersonality, lastPersonalitySwitchTick, tick,
-					urgency == BotUrgency.Emergency && previousUrgency != BotUrgency.Emergency,
+					urgency == BotUrgency.Emergency && !emergencyPersonalityHandled,
 					botLimits?.Info.AllowPersonalitySwitching ?? false, Info))
 				{
 					bot.QueueOrder(new Order("SetBotPersonality", player.PlayerActor, false)
@@ -205,10 +215,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					lastPersonalitySwitchTick = tick;
 				}
 
-				lastDecisionTick = tick;
+				if (urgency == BotUrgency.Emergency)
+					emergencyPersonalityHandled = true;
 			}
 
-			var demand = BuildDemand(profiles.Values, target == null ? null : profiles[target], enemyArmy);
+			if (decision)
+				lastDecisionTick = tick;
+
+			var demand = BuildDemand(profiles.Values, targetProfile, enemyArmy);
 			var situation = new BotSituation
 			{
 				Tick = tick,
@@ -228,7 +242,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				OwnPersonality = CurrentPersonality()
 			};
 			Situation = situation;
-			previousUrgency = urgency;
 			pendingSituations.Add(situation);
 			if (pendingSituations.Count > 2000)
 				pendingSituations.RemoveRange(1000, pendingSituations.Count - 2000);
@@ -382,6 +395,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return false;
 
 			return emergencyTransition || tick - lastSwitchTick >= info.PersonalityHoldTicks;
+		}
+
+		internal static bool ShouldEvaluatePersonality(bool decision, BotUrgency urgency, bool handled)
+		{
+			return decision || urgency == BotUrgency.Emergency && !handled;
 		}
 
 		internal static int Saturate(int x, int k)
