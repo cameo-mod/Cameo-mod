@@ -157,6 +157,82 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(MasterAiBotModule.ShouldEvaluateDecision(0, 1, info.DecisionInterval), Is.False);
 		}
 
+		[TestCase(true, false, true)]
+		[TestCase(true, true, false)]
+		[TestCase(false, false, false)]
+		public void MissingIncumbentBypassesTargetDecisionCadenceOnlyWhenOneWasSet(
+			bool hasIncumbent, bool incumbentAvailable, bool expected)
+		{
+			var info = new MasterAiBotModuleInfo();
+			Assert.That(MasterAiBotModule.ShouldEvaluateTargetDecision(
+				hasIncumbent, incumbentAvailable, 0, 1, info.DecisionInterval), Is.EqualTo(expected));
+		}
+
+		[Test]
+		public void CostCountersBaselineCumulativeStatsBeforeProducingDeltas()
+		{
+			var previousDeaths = 0;
+			var previousKills = 0;
+			var initialized = false;
+			Assert.That(MasterAiBotModule.CostDeltas(5000, 2000,
+				ref previousDeaths, ref previousKills, ref initialized), Is.EqualTo((0, 0)));
+			Assert.That((previousDeaths, previousKills, initialized), Is.EqualTo((5000, 2000, true)));
+			Assert.That(MasterAiBotModule.CostDeltas(5600, 2250,
+				ref previousDeaths, ref previousKills, ref initialized), Is.EqualTo((600, 250)));
+		}
+
+		[Test]
+		public void FreshGameCostCountersCountLossesBeforeTheFirstStaggeredCheck()
+		{
+			var previousDeaths = 0;
+			var previousKills = 0;
+			var initialized = true;
+			Assert.That(MasterAiBotModule.CostDeltas(700, 100,
+				ref previousDeaths, ref previousKills, ref initialized), Is.EqualTo((700, 100)));
+		}
+
+		[Test]
+		public void MasterAiSaveStateRoundTripsEmergencyWindowsAndPersonalityHold()
+		{
+			var original = new MasterAiBotSavedState
+			{
+				CostCountersInitialized = true,
+				PreviousDeathsCost = 5600,
+				PreviousKillsCost = 2250,
+				CurrentUrgency = BotUrgency.Emergency,
+				LastPersonalitySwitchTick = 4321,
+				EmergencyPersonalityHandled = true,
+				LossSamples = new[] { (4100, 250), (4250, 350) },
+				KillSamples = new[] { (4200, 125), (4300, 125) },
+				ProductionLossTicks = new[] { 4150, 4275 },
+				ProductionBuildings = new uint[] { 17, 29 }
+			};
+			var nodes = new List<MiniYamlNode>
+			{
+				new("State", "", MasterAiBotModule.SerializeState(original))
+			};
+			var serialized = nodes.WriteToString();
+			var restored = MasterAiBotModule.DeserializeState(
+				MiniYaml.FromString(serialized, "test").Single().Value);
+
+			Assert.That(restored.CostCountersInitialized, Is.True);
+			Assert.That(restored.PreviousDeathsCost, Is.EqualTo(5600));
+			Assert.That(restored.PreviousKillsCost, Is.EqualTo(2250));
+			Assert.That(restored.CurrentUrgency, Is.EqualTo(BotUrgency.Emergency));
+			Assert.That(restored.LastPersonalitySwitchTick, Is.EqualTo(4321));
+			Assert.That(restored.EmergencyPersonalityHandled, Is.True);
+			Assert.That(restored.LossSamples, Is.EqualTo(original.LossSamples));
+			Assert.That(restored.KillSamples, Is.EqualTo(original.KillSamples));
+			Assert.That(restored.ProductionLossTicks, Is.EqualTo(original.ProductionLossTicks));
+			Assert.That(restored.ProductionBuildings, Is.EqualTo(original.ProductionBuildings));
+
+			var previousDeaths = restored.PreviousDeathsCost;
+			var previousKills = restored.PreviousKillsCost;
+			var initialized = restored.CostCountersInitialized;
+			Assert.That(MasterAiBotModule.CostDeltas(5600, 2250,
+				ref previousDeaths, ref previousKills, ref initialized), Is.EqualTo((0, 0)));
+		}
+
 		[Test]
 		public void TargetScoreStaysBoundedForExtremeProfiles()
 		{

@@ -61,6 +61,20 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		internal string OwnPersonality = "";
 	}
 
+	internal sealed class MasterAiBotSavedState
+	{
+		public bool CostCountersInitialized;
+		public int PreviousDeathsCost;
+		public int PreviousKillsCost;
+		public BotUrgency CurrentUrgency;
+		public int LastPersonalitySwitchTick;
+		public bool EmergencyPersonalityHandled;
+		public (int Tick, int Delta)[] LossSamples = Array.Empty<(int, int)>();
+		public (int Tick, int Delta)[] KillSamples = Array.Empty<(int, int)>();
+		public int[] ProductionLossTicks = Array.Empty<int>();
+		public uint[] ProductionBuildings = Array.Empty<uint>();
+	}
+
 	public class MasterAiBotModuleInfo : ConditionalTraitInfo
 	{
 		public readonly BitSet<TargetableType> InfantryTargetTypes = new("Infantry");
@@ -96,7 +110,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public override object Create(ActorInitializer init) { return new MasterAiBotModule(init.Self, this); }
 	}
 
-	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick
+	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData
 	{
 		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller" };
 		readonly OpenRA.Player player;
@@ -113,6 +127,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int incumbentSince;
 		int previousDeathsCost;
 		int previousKillsCost;
+		bool costCountersInitialized;
 		BotUrgency currentUrgency;
 		int lastPersonalitySwitchTick;
 		bool emergencyPersonalityHandled;
@@ -126,6 +141,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			: base(info)
 		{
 			player = self.Owner;
+			costCountersInitialized = !player.World.IsLoadingGameSave;
 			lastDecisionTick = -Math.Max(1, info.DecisionInterval);
 			lastPersonalitySwitchTick = -Math.Max(1, info.PersonalityHoldTicks);
 			nextSnapshotTick = Math.Abs(player.ClientIndex * 37) % Math.Max(1, info.SnapshotInterval);
@@ -181,32 +197,31 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			foreach (var profile in profiles.Values.Where(p => p.Alive))
 				profile.Score = TargetScore(profile, ownArmy, AlliedCommitments(profile.Player), econTotal, Info);
 
-			var decision = ShouldEvaluateDecision(lastDecisionTick, tick, Info.DecisionInterval);
+			var targetProfile = profiles.Values.FirstOrDefault(p => p.Player == incumbentTarget);
+			var decision = ShouldEvaluateTargetDecision(
+				incumbentTarget != null, targetProfile != null,
+				lastDecisionTick, tick, Info.DecisionInterval);
 			OpenRA.Player target = incumbentTarget;
 			if (decision)
 			{
 				var candidates = profiles.Values.Where(p => p.Alive && p.NearestCells >= 0).ToArray();
-				var incumbent = candidates.FirstOrDefault(p => p.Player == incumbentTarget);
-				var chosen = ChooseTarget(candidates, incumbent, incumbentSince, tick, Info);
+				var chosen = ChooseTarget(candidates, targetProfile, incumbentSince, tick, Info);
 				target = chosen?.Player;
+				targetProfile = chosen;
 				if (target != incumbentTarget)
 					incumbentSince = tick;
 				incumbentTarget = target;
 			}
 
-			EnemyProfile targetProfile = null;
-			if (target != null)
-				profiles.TryGetValue(target, out targetProfile);
+			var currentPersonality = CurrentPersonality();
+			var personalityCandidate = UnfilteredCandidatePersonality(urgency, targetProfile, ownArmy,
+				profiles.Values, currentPersonality, Info);
 			var personalityDecision = ShouldEvaluatePersonality(decision, urgency, emergencyPersonalityHandled);
-			var personalityCandidate = incumbentPersonality ?? "";
 			if (personalityDecision)
 			{
-				var currentPersonality = CurrentPersonality();
 				var availablePersonalities = AvailablePersonalities();
 				var candidatePersonality = CandidatePersonality(urgency, targetProfile, ownArmy,
 					profiles.Values, currentPersonality, availablePersonalities, Info);
-				personalityCandidate = UnfilteredCandidatePersonality(urgency, targetProfile, ownArmy,
-					profiles.Values, currentPersonality, Info);
 				incumbentPersonality = candidatePersonality;
 
 				var botLimits = player.PlayerActor.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
@@ -274,10 +289,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var stats = player.PlayerActor.TraitOrDefault<PlayerStatistics>();
 			var deaths = stats?.DeathsCost ?? 0;
 			var kills = stats?.KillsCost ?? 0;
-			var delta = Math.Max(0, deaths - previousDeathsCost);
-			var killDelta = Math.Max(0, kills - previousKillsCost);
-			previousDeathsCost = deaths;
-			previousKillsCost = kills;
+			var (delta, killDelta) = CostDeltas(deaths, kills,
+				ref previousDeathsCost, ref previousKillsCost, ref costCountersInitialized);
 			if (delta > 0)
 				lossSamples.Enqueue((tick, delta));
 			if (killDelta > 0)
@@ -449,6 +462,30 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return tick - lastDecisionTick >= Math.Max(1, decisionInterval);
 		}
 
+		internal static bool ShouldEvaluateTargetDecision(bool hasIncumbent, bool incumbentAvailable,
+			int lastDecisionTick, int tick, int decisionInterval)
+		{
+			return hasIncumbent && !incumbentAvailable ||
+				ShouldEvaluateDecision(lastDecisionTick, tick, decisionInterval);
+		}
+
+		internal static (int Deaths, int Kills) CostDeltas(int deaths, int kills,
+			ref int previousDeaths, ref int previousKills, ref bool initialized)
+		{
+			if (!initialized)
+			{
+				previousDeaths = deaths;
+				previousKills = kills;
+				initialized = true;
+				return (0, 0);
+			}
+
+			var result = (Math.Max(0, deaths - previousDeaths), Math.Max(0, kills - previousKills));
+			previousDeaths = deaths;
+			previousKills = kills;
+			return result;
+		}
+
 		int AlliedCommitments(OpenRA.Player enemy)
 		{
 			return player.World.Players
@@ -509,6 +546,121 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				Detector = totalArmy == 0 ? 0 : ClampSignal(values.Sum(e => (long)e.ArmyValue * e.StealthShare / 100) * 100 / totalArmy),
 				Artillery = Saturate(target?.DefenceValue ?? values.Select(e => e.DefenceValue).DefaultIfEmpty().Max(), 1500)
 			};
+		}
+
+		List<MiniYamlNode> IGameSaveTraitData.IssueTraitData(Actor self)
+		{
+			if (IsTraitDisabled)
+				return null;
+
+			return SerializeState(new MasterAiBotSavedState
+			{
+				CostCountersInitialized = costCountersInitialized,
+				PreviousDeathsCost = previousDeathsCost,
+				PreviousKillsCost = previousKillsCost,
+				CurrentUrgency = currentUrgency,
+				LastPersonalitySwitchTick = lastPersonalitySwitchTick,
+				EmergencyPersonalityHandled = emergencyPersonalityHandled,
+				LossSamples = lossSamples.ToArray(),
+				KillSamples = killSamples.ToArray(),
+				ProductionLossTicks = productionLossTicks.ToArray(),
+				ProductionBuildings = productionBuildings.OrderBy(id => id).ToArray()
+			});
+		}
+
+		void IGameSaveTraitData.ResolveTraitData(Actor self, MiniYaml data)
+		{
+			if (self.World.IsReplay)
+				return;
+
+			var state = DeserializeState(data);
+			costCountersInitialized = state.CostCountersInitialized;
+			previousDeathsCost = state.PreviousDeathsCost;
+			previousKillsCost = state.PreviousKillsCost;
+			currentUrgency = state.CurrentUrgency;
+			lastPersonalitySwitchTick = state.LastPersonalitySwitchTick;
+			emergencyPersonalityHandled = state.EmergencyPersonalityHandled;
+
+			lossSamples.Clear();
+			foreach (var sample in state.LossSamples)
+				lossSamples.Enqueue(sample);
+			killSamples.Clear();
+			foreach (var sample in state.KillSamples)
+				killSamples.Enqueue(sample);
+			DeathsCostWindow = lossSamples.Sum(s => s.Delta);
+			KillsCostWindow = killSamples.Sum(s => s.Delta);
+
+			productionLossTicks.Clear();
+			foreach (var tick in state.ProductionLossTicks)
+				productionLossTicks.Enqueue(tick);
+
+			productionBuildings.Clear();
+			foreach (var id in state.ProductionBuildings)
+				productionBuildings.Add(id);
+		}
+
+		internal static List<MiniYamlNode> SerializeState(MasterAiBotSavedState state)
+		{
+			return new List<MiniYamlNode>
+			{
+				new("CostCountersInitialized", FieldSaver.FormatValue(state.CostCountersInitialized)),
+				new("PreviousDeathsCost", FieldSaver.FormatValue(state.PreviousDeathsCost)),
+				new("PreviousKillsCost", FieldSaver.FormatValue(state.PreviousKillsCost)),
+				new("CurrentUrgency", FieldSaver.FormatValue(state.CurrentUrgency)),
+				new("LastPersonalitySwitchTick", FieldSaver.FormatValue(state.LastPersonalitySwitchTick)),
+				new("EmergencyPersonalityHandled", FieldSaver.FormatValue(state.EmergencyPersonalityHandled)),
+				new("LossSamples", "", state.LossSamples.Select(SampleNode).ToList()),
+				new("KillSamples", "", state.KillSamples.Select(SampleNode).ToList()),
+				new("ProductionLossTicks", FieldSaver.FormatValue(state.ProductionLossTicks)),
+				new("ProductionBuildings", FieldSaver.FormatValue(state.ProductionBuildings))
+			};
+		}
+
+		internal static MasterAiBotSavedState DeserializeState(MiniYaml data)
+		{
+			var state = new MasterAiBotSavedState();
+			var nodes = data.ToDictionary();
+			if (nodes.TryGetValue("CostCountersInitialized", out var initializedNode))
+				state.CostCountersInitialized = FieldLoader.GetValue<bool>("CostCountersInitialized", initializedNode.Value);
+			if (nodes.TryGetValue("PreviousDeathsCost", out var deathsNode))
+				state.PreviousDeathsCost = FieldLoader.GetValue<int>("PreviousDeathsCost", deathsNode.Value);
+			if (nodes.TryGetValue("PreviousKillsCost", out var killsNode))
+				state.PreviousKillsCost = FieldLoader.GetValue<int>("PreviousKillsCost", killsNode.Value);
+			if (nodes.TryGetValue("CurrentUrgency", out var urgencyNode))
+				state.CurrentUrgency = FieldLoader.GetValue<BotUrgency>("CurrentUrgency", urgencyNode.Value);
+			if (nodes.TryGetValue("LastPersonalitySwitchTick", out var switchNode))
+				state.LastPersonalitySwitchTick = FieldLoader.GetValue<int>("LastPersonalitySwitchTick", switchNode.Value);
+			if (nodes.TryGetValue("EmergencyPersonalityHandled", out var handledNode))
+				state.EmergencyPersonalityHandled = FieldLoader.GetValue<bool>("EmergencyPersonalityHandled", handledNode.Value);
+
+			state.LossSamples = ReadSamples(nodes, "LossSamples");
+			state.KillSamples = ReadSamples(nodes, "KillSamples");
+			if (nodes.TryGetValue("ProductionLossTicks", out var productionLossNode))
+				state.ProductionLossTicks = FieldLoader.GetValue<int[]>("ProductionLossTicks", productionLossNode.Value);
+			if (nodes.TryGetValue("ProductionBuildings", out var productionBuildingsNode))
+				state.ProductionBuildings = FieldLoader.GetValue<uint[]>("ProductionBuildings", productionBuildingsNode.Value);
+			return state;
+		}
+
+		static MiniYamlNode SampleNode((int Tick, int Delta) sample)
+		{
+			return new MiniYamlNode("Sample", FieldSaver.FormatValue(new[] { sample.Tick, sample.Delta }));
+		}
+
+		static (int Tick, int Delta)[] ReadSamples(Dictionary<string, MiniYaml> nodes, string key)
+		{
+			if (!nodes.TryGetValue(key, out var node))
+				return Array.Empty<(int, int)>();
+
+			var samples = new List<(int Tick, int Delta)>();
+			foreach (var sampleNode in node.Nodes)
+			{
+				var values = FieldLoader.GetValue<int[]>("Sample", sampleNode.Value.Value);
+				if (values.Length == 2)
+					samples.Add((values[0], values[1]));
+			}
+
+			return samples.ToArray();
 		}
 
 		static bool IsEligible(OpenRA.Player p) => !p.NonCombatant && p.Playable;
