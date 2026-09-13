@@ -133,44 +133,55 @@ EXTREME_RATIO = 2.00
 DISAGREE_RATIO = 1.25
 
 
-def recover_burst_time(damage, dps, reload_ticks):
-    """The ticks spent INSIDE the burst, recovered from the row's own identity.
+# `w_damage` has two live meanings in the source corpus.  Keep the convention explicit at
+# the guard boundary instead of trying to infer it from damage / DPS: the same quotient is a
+# cycle for a burst-inclusive row and a per-shot cycle for a per-shot row.
+DAMAGE_PER_SHOT = "per_shot"
+DAMAGE_BURST_INCLUSIVE = "burst_inclusive"
 
-    ⛔ DO NOT TAKE `w_damage` AS DAMAGE PER SHOT. The convention differs by source and reading
-    it wrong double-counts burst:
-      * `extract_peer_units` sets `w_damage = audit["damage_pos"]`, damage per SHOT, and its
-        `w_dps = damage_pos * burst / cycle`.
-      * the frozen Cameo snapshot's `w_damage` is BURST-INCLUSIVE, and its identity is
-        `w_dps = w_damage / cycle` with no burst factor at all.
-    Proven on the shipped rows: mammoth `32000/400 = 80` ticks against `w_reload 72`, and
-    MLRS `48000/352.94 = 136` against `w_reload 111`. Multiplying by burst as well gives the
-    mammoth 800 dps against a true 400, and reported a bogus "EXTREME" verdict for the MLRS.
 
-    This is safe across both conventions because it never assumes one: the cycle comes out of
-    `damage / dps`, whatever those two mean, and the burst time is what is left after reload.
-    A target projected by `target_for` arrives in the SAME units as the Cameo row it is
-    projected onto, so composing in Cameo's convention is correct by construction.
+def recover_burst_time(damage, dps, reload_ticks, *, burst=1, damage_convention=None):
+    """Recover total burst-delay ticks only when the damage convention is explicit.
+
+    `extract_peer_units` stores per-shot damage while the frozen Cameo snapshot stores the
+    whole burst.  Without an explicit convention, `damage / dps` is ambiguous and this
+    function refuses to manufacture a delay.  The returned value is the sum of all delays in
+    the burst; individual delays must still be supplied separately when composing a target.
     """
-    if not damage or not dps:
+    if not damage or not dps or damage_convention not in {DAMAGE_PER_SHOT,
+                                                          DAMAGE_BURST_INCLUSIVE}:
         return None
-    return max(0.0, float(damage) / float(dps) - float(reload_ticks or 0))
+    shots = max(int(burst or 1), 1)
+    cycle_damage = float(damage) * (shots if damage_convention == DAMAGE_PER_SHOT else 1.0)
+    remaining = cycle_damage / float(dps) - float(reload_ticks or 0)
+    # A negative remainder means the row's own DPS identity is shorter than ReloadDelay;
+    # clamping that contradiction to zero would certify an impossible timing model.
+    if remaining < -1e-6:
+        return None
+    return max(0.0, remaining)
 
 
-def compose_dps(damage, reload_ticks, burst=1, burst_delay_per_shot=0.0):
-    """`damage / (reload + (burst - 1) * burst_delay)` — the engine's cycle.
+def compose_dps(damage, reload_ticks, burst=1, burst_delay_per_shot=0.0,
+                burst_delays=None, damage_convention=DAMAGE_BURST_INCLUSIVE):
+    """Compose a DPS value from an explicit damage convention and delay sequence.
 
-    `damage` is whatever `w_damage` means for the row it came from (see `recover_burst_time`);
-    burst is NOT a multiplier here. It reaches DPS only by lengthening the cycle, which is
-    also why a burst change alone barely moves DPS while it changes how the damage lands.
-
-    Recovered per-shot delays on the shipped rows: mammoth 8 ticks, MLRS 5 (the engine
-    default). Verified: mammoth `32000 / (72 + 1*8) = 400`.
+    A sequence is preferred because burst delays can vary.  The scalar argument remains a
+    convenience for a known constant-delay row.  Per-shot damage is multiplied by `burst`;
+    burst-inclusive damage is not.
     """
-    shots_gap = max(float(burst or 1) - 1.0, 0.0)
-    cycle = float(reload_ticks or 0) + shots_gap * float(burst_delay_per_shot or 0)
+    shots = max(int(burst or 1), 1)
+    if burst_delays is not None:
+        delays = [float(x) for x in burst_delays]
+        if len(delays) != max(shots - 1, 0):
+            return None
+        delay_total = sum(delays)
+    else:
+        delay_total = max(shots - 1, 0) * float(burst_delay_per_shot or 0)
+    cycle = float(reload_ticks or 0) + delay_total
     if cycle <= 0 or not damage:
         return None
-    return float(damage) / cycle
+    numerator = float(damage) * (shots if damage_convention == DAMAGE_PER_SHOT else 1.0)
+    return numerator / cycle
 
 
 def dps_guard(current, component_targets, dps_target):
@@ -193,16 +204,45 @@ def dps_guard(current, component_targets, dps_target):
         return v if v not in (None, 0) else current.get(key)
 
     cur_dps = current.get("w_dps")
-    bt = recover_burst_time(current.get("w_damage"), cur_dps, current.get("w_reload"))
+    convention = current.get("w_damage_convention")
+    target_damage = component_targets.get("w_damage")
+    target_convention = component_targets.get("w_damage_convention")
+    delays = current.get("w_burst_delays")
+    # A target without an explicit convention and delay sequence is not comparable.  Do not
+    # silently mix a peer per-shot target with Cameo's burst-inclusive coordinate.
+    if convention not in {DAMAGE_PER_SHOT, DAMAGE_BURST_INCLUSIVE}:
+        return None
+    if target_damage not in (None, 0) and target_convention != convention:
+        return None
+    if not isinstance(delays, (list, tuple)):
+        return None
+    burst = current.get("w_burst") or 1
+    bt = recover_burst_time(current.get("w_damage"), cur_dps, current.get("w_reload"),
+                            burst=burst, damage_convention=convention)
     if cur_dps is None or bt is None:
         return None
-    per_shot = bt / max(float(current.get("w_burst") or 1) - 1.0, 1.0)
+    if len(delays) != max(int(burst) - 1, 0) or abs(sum(float(x) for x in delays) - bt) > 1e-6:
+        return None
 
-    new = compose_dps(pick("w_damage"), pick("w_reload"), pick("w_burst"), per_shot)
+    target_burst = pick("w_burst")
+    # A changed burst needs its own delay evidence.  Reusing the current delay sequence would
+    # turn a real cadence change into a fabricated verifier result.
+    target_delays = component_targets.get("w_burst_delays")
+    if target_burst != burst and not isinstance(target_delays, (list, tuple)):
+        return None
+    if target_delays is None and target_burst == burst:
+        target_delays = delays
+    if not isinstance(target_delays, (list, tuple)):
+        return None
+    if len(target_delays) != max(int(target_burst or 1) - 1, 0):
+        return None
+
+    new = compose_dps(pick("w_damage"), pick("w_reload"), target_burst,
+                      burst_delays=target_delays, damage_convention=convention)
     if not new or not cur_dps:
         return None
     out = dict(current_dps=float(cur_dps), composed_dps=new, composed_ratio=new / cur_dps,
-               burst_delay_per_shot=per_shot, projected_dps=dps_target,
+               burst_delays=list(target_delays), projected_dps=dps_target,
                projected_ratio=None, disagreement=None, verdict="ok")
     if out["composed_ratio"] > EXTREME_RATIO or out["composed_ratio"] < 1 / EXTREME_RATIO:
         out["verdict"] = "extreme"
@@ -217,41 +257,62 @@ def dps_guard(current, component_targets, dps_target):
 
 def _guard_self_test():
     """The shipped mammoth and MLRS rows are the regression cases — both were got wrong once."""
-    # conventions recovered from the frozen snapshot, not assumed
-    assert recover_burst_time(32000, 400, 72) == 8.0, "mammoth burst time"
-    assert abs(recover_burst_time(48000, 352.94117647058823, 111) - 25.0) < 1e-6, "MLRS"
-    assert compose_dps(32000, 72, 2, 8) == 400, "the shipped mammoth identity"
-    assert abs(compose_dps(48000, 111, 6, 5) - 352.941) < 0.01, "the shipped MLRS identity"
+    assert recover_burst_time(32000, 400, 72, burst=2,
+                              damage_convention=DAMAGE_BURST_INCLUSIVE) == 8.0
+    assert recover_burst_time(16000, 400, 72, burst=2,
+                              damage_convention=DAMAGE_PER_SHOT) == 8.0
+    assert recover_burst_time(32000, 400, 72) is None, "unknown convention must withhold"
+    assert recover_burst_time(100, 20, 10, burst=1,
+                              damage_convention=DAMAGE_BURST_INCLUSIVE) is None
+    assert compose_dps(32000, 72, 2, burst_delays=[8]) == 400
+    assert abs(compose_dps(48000, 111, 6, burst_delay_per_shot=5) - 352.941) < 0.01
 
-    mam = dict(w_damage=32000, w_burst=2, w_reload=72, w_dps=400)
+    mam = dict(w_damage=32000, w_burst=2, w_reload=72, w_dps=400,
+               w_damage_convention=DAMAGE_BURST_INCLUSIVE, w_burst_delays=[8])
     # components: damage +9.1%, reload -11.1%, burst unanimous at 2 (a DIRECT stat)
-    g = dps_guard(mam, dict(w_damage=34915, w_burst=2, w_reload=64), dps_target=695)
-    assert abs(g["burst_delay_per_shot"] - 8) < 1e-9, g
+    g = dps_guard(mam, dict(w_damage=34915, w_burst=2, w_reload=64,
+                            w_damage_convention=DAMAGE_BURST_INCLUSIVE), dps_target=695)
+    assert g["burst_delays"] == [8], g
     assert abs(g["composed_dps"] - 485) < 1, g["composed_dps"]
     assert abs(g["projected_ratio"] - 1.7375) < 0.01, g["projected_ratio"]
     assert g["verdict"] == "disagrees", g          # ~1.43x apart, the documented gap
     assert abs(1 / g["disagreement"] - 1.43) < 0.02, g["disagreement"]
 
+    # Same burst count, different delay evidence must change the composed verifier.
+    delayed = dps_guard(mam, dict(w_damage=32000, w_burst=2, w_reload=72,
+                                  w_burst_delays=[12],
+                                  w_damage_convention=DAMAGE_BURST_INCLUSIVE), None)
+    assert delayed["burst_delays"] == [12], delayed
+    assert delayed["composed_ratio"] < 1.0, delayed
+
     # ⚠ A BURST CHANGE ALONE MUST NOT LOOK EXTREME. The MLRS target drops burst 6 -> 2, which
     # SHORTENS the cycle and nudges DPS up; the first version multiplied damage by burst and
     # called this "EXTREME 34%", a pure artifact of the wrong convention.
-    mlrs = dict(w_damage=48000, w_burst=6, w_reload=111, w_dps=352.94117647058823)
-    m = dps_guard(mlrs, dict(w_damage=46534, w_burst=2, w_reload=106), dps_target=None)
-    assert abs(m["burst_delay_per_shot"] - 5) < 1e-6, m
+    mlrs = dict(w_damage=48000, w_burst=6, w_reload=111,
+                w_dps=352.94117647058823,
+                w_damage_convention=DAMAGE_BURST_INCLUSIVE,
+                w_burst_delays=[5, 5, 5, 5, 5])
+    m = dps_guard(mlrs, dict(w_damage=46534, w_burst=6, w_reload=106,
+                             w_damage_convention=DAMAGE_BURST_INCLUSIVE), dps_target=None)
     assert 1.0 < m["composed_ratio"] < 1.3, m["composed_ratio"]
     assert m["verdict"] == "ok", m
 
     # a component set that agrees with the aggregate passes
-    ok = dps_guard(mam, dict(w_damage=32000 * 1.7, w_reload=72), 680)
+    ok = dps_guard(mam, dict(w_damage=32000 * 1.7, w_reload=72,
+                             w_damage_convention=DAMAGE_BURST_INCLUSIVE), 680)
     assert ok["verdict"] == "ok", ok
 
     # a genuine 2.5x move through the components alone is flagged
-    ex = dps_guard(mam, dict(w_damage=32000 * 2.5, w_reload=72), None)
+    ex = dps_guard(mam, dict(w_damage=32000 * 2.5, w_reload=72,
+                             w_damage_convention=DAMAGE_BURST_INCLUSIVE), None)
     assert ex["verdict"] == "extreme", ex
 
     # a missing component is the CURRENT value, never zero
-    same = dps_guard(mam, dict(w_damage=None, w_burst=None, w_reload=None), None)
+    same = dps_guard(mam, dict(w_damage=None, w_burst=None, w_reload=None,
+                               w_damage_convention=DAMAGE_BURST_INCLUSIVE), None)
     assert same["composed_ratio"] == 1.0, same
+    assert dps_guard(dict(w_damage=32000, w_burst=2, w_reload=72, w_dps=400),
+                     dict(w_damage=32000), None) is None
     return "reference_targets R1 guard self-test: PASS (mammoth 1.43x gap; MLRS burst not extreme)"
 
 

@@ -1025,13 +1025,14 @@ resolution is that four of them are inputs and the fifth is a check.
 
 `reference_targets.COMPONENT_STATS` / `VERIFIER_STATS`, `compose_dps`, `recover_burst_time`,
 `dps_guard` (+ `_guard_self_test`), and a **DPS verifier column** in the reference map, which
-now also carries **Damage/shot** and **Reload** as their own columns. Burst delay stays OUT of
-the map, as ruled, but IS in the arithmetic. Verdicts on TD GDI: 8 `DISAGREES`, 3 `EXTREME`,
-18 unchanged.
+now also carries the **source damage coordinate** and **Reload** as their own columns. Burst delay stays OUT of
+the map, as ruled. The verifier is diagnostic-only and is withheld unless the row carries an
+explicit damage convention plus a complete burst-delay sequence; the current peer corpus does
+not provide that compatible evidence.
 
-`EXTREME_RATIO` 2.00, `DISAGREE_RATIO` 1.25 — the latter deliberately BELOW the mammoth's own
-1.43x component-vs-aggregate gap, so the case that produced the ruling is flagged rather than
-waved through. The mammoth now reads **488, DISAGREES 122%** against the projection's 174%.
+`EXTREME_RATIO` 2.00, `DISAGREE_RATIO` 1.25 remain the proposed diagnostic thresholds; they are
+not currently producing verifier claims because the compatible convention and delay evidence is
+missing from the peer corpus.
 
 ⛔ **`w_damage` MEANS DIFFERENT THINGS IN DIFFERENT SOURCES, and reading it wrong
 double-counts burst.** `extract_peer_units` sets `w_damage = audit["damage_pos"]` — damage per
@@ -1040,12 +1041,11 @@ SHOT — with `w_dps = damage_pos x burst / cycle`. The frozen Cameo snapshot's 
 shipped rows: mammoth `32000/400 = 80` ticks against `w_reload 72`; MLRS
 `48000/352.94 = 136` against `w_reload 111`.
 
-So the cycle and the per-shot burst delay are **RECOVERED from each row's own identity**
-(`recover_burst_time`), never assumed — which makes the guard correct under either convention.
-The first implementation multiplied by burst regardless and gave the mammoth 800 DPS against a
-true 400, and reported the MLRS as `EXTREME 34%` when its real move is `+19%`. A projected
-target arrives in the SAME units as the Cameo row it was projected onto, so composing in
-Cameo's convention is correct by construction.
+The cycle is recoverable only after the row's damage convention is explicit: per-shot rows
+multiply by `Burst`, while burst-inclusive rows do not. A complete delay sequence is still
+required for composition because burst delays may vary. The first implementation inferred the
+convention from `damage / DPS` and could silently compare unlike rows; the corrected guard now
+withholds that case instead of manufacturing a verifier result.
 
 ⚠ **A burst change alone barely moves DPS, and must not read as extreme.** Burst reaches DPS
 only by lengthening the cycle through burst delays; under a burst-inclusive `w_damage` it is
@@ -1101,23 +1101,25 @@ Those are different questions; step 2 currently supplies the first to step 3.
 today; re-scaling every class baseline uniformly reaches only **271 (67%)**, short of the ≥80%
 target. **21 of 24 classes span more than the 2.5× envelope** — up to **33.7×** (`melee`).
 
-⭐ **But the spread is concentrated, and that is the finding.** Every class has a CORE — the
-largest subset able to share one baseline — and every core already fits: spans **1.4×–2.5×**,
-holding **290 of 404** members. The remaining **114** sit outside their own class core, and the
-extremes are plainly classification defects rather than pricing ones: `futuretech_blackwidow`
-is in **`melee`** with `Range: 9000`; `corrino_buggy` is in **`mbt`** (25k HP, 100 DPS, cost
-300); `cabal_enlighted` carries **11,184 DPS** in `heavy_infantry` against a flamer's 181.
-`steelconsortium_hoverboardgrenadier` prices at **3080%** of its class baseline.
+⭐ **But the spread is concentrated, and that is the finding.** Every class has a current-anchor
+ratio window — the largest observed subset inside the 2.5× envelope — and those windows span
+**1.4×–2.5×**, holding **290 of 404** members. The remaining **114** sit outside those
+current-anchor windows. The extremes are triage signals, not proofs of a role or pricing defect:
+`futuretech_blackwidow` is in **`melee`** with `Range: 9000`;
+`corrino_buggy` is in **`mbt`** (25k HP, 100 DPS, cost 300); `cabal_enlighted` carries
+**11,184 DPS** in `heavy_infantry` against a flamer's 181. `steelconsortium_hoverboardgrenadier`
+prices at **3080%** of its class baseline.
 
-**So the band is a MISCLASSIFICATION DETECTOR, and step 3 is blocked on membership triage, not
-on baseline arithmetic.** Each of the 114 is one of three things and only a maintainer can say
+**So the band is a CURRENT-ANCHOR TRIAGE SIGNAL, and step 3 is blocked on membership triage, not
+on arithmetic alone.** Each of the 114 is one of three things and only a maintainer can say
 which: misclassified, a legitimate higher tier needing a tech-tier gate, or genuinely
-mis-stated. Fitting a baseline before that triage fits it to a population that does not belong
-together. `anchor_readiness.py` says the same from the other end — its "statistically
+mis-stated. Uniform rescaling can change the nonlinear ratio spread, and an anisotropic baseline
+could change it further; both need their own evidence before the window is treated as a fit.
+`anchor_readiness.py` says the same from the other end — its "statistically
 indistinguishable" class pairs are *"separated by what they SHOOT AT, not by their stats"*.
 
-**The 114 triaged, 2026-09-12 (`fit_baseband.py --triage`).** ⛔ **A stat-based test cannot
-say where an outlier belongs, only that it does not belong here.** Measured: the median member
+**The 114 triaged, 2026-09-12 (`fit_baseband.py --triage`).** ⛔ **A stat-based test does not
+determine class membership or baseline feasibility.** Measured: the median member
 is accepted by **6 of the 27** class baselines (mean 5.6, max 9), so "another class would take
 it" is true of nearly everything and is worth nothing as evidence. The first version of the
 triage used the best-fitting class as its deciding signal and labelled **81 of 114

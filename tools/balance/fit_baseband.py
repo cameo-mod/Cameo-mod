@@ -36,11 +36,10 @@ no gentle shoulder.
 
 WHAT THIS TOOL COMPUTES, per class:
 
-  span      max_ratio / min_ratio at the CURRENT baseline. Near-invariant under a uniform
-            baseline rescale, so it decides FEASIBILITY before any fitting: a class whose
-            span exceeds 2.5 cannot fit 100%-250% under ANY baseline, and needs splitting or
-            a tech-tier gate on its outliers. Reporting that is the point — it is not a
-            failure of the fit.
+  span      max_ratio / min_ratio at the CURRENT anchor. The formula is nonlinear in the
+            baseline axes, so this span can change under a uniform rescale; it is a current-
+            anchor observation only. `best_k` reports the result of the bounded scalar scan,
+            while neither value proves that an anisotropic baseline or role split cannot fit.
   k*        the single scale applied to all four stat axes that maximises sweet-spot
             occupancy (ties broken toward the weakest member landing on 100%).
   fitted    occupancy at k*, and the members still outside.
@@ -92,17 +91,16 @@ def ratio_of(inp, spec, anchor_tier, k=1.0):
 
 
 def core_window(ratios, span_cap=SWEET_HI):
-    """(lo_index, hi_index) of the largest set of members that CAN share one baseline.
+    """(lo_index, hi_index) of the longest current-anchor ratio window.
 
-    The band ratio is one-dimensional, so sort and take the longest contiguous run whose
-    max/min fits the envelope; anything outside it cannot be priced from the same baseline as
-    the rest. Contiguity loses nothing here — a member between two in-window members is in
-    the window by construction.
+    The current-anchor ratios are one-dimensional, so sort and take the longest contiguous run
+    whose max/min fits the envelope. This is a descriptive window at the recorded anchor;
+    it is not a proof of the largest feasible subset after re-fitting the axes.
 
-    This is what makes the span number actionable. A class that "cannot fit" usually has a
-    tight core plus two or three members that do not belong in it at all: `futuretech_blackwidow`
-    is in `melee` with a range of 9000, and `corrino_buggy` is in `mbt`. The band is reading
-    out a CLASSIFICATION defect, not arguing with the band law.
+    This is what makes the span number actionable. A class with a wide current-anchor spread
+    usually has a tight observed window plus members that need a role or tier review;
+    `futuretech_blackwidow` is in `melee` with a range of 9000, and `corrino_buggy` is in `mbt`.
+    The band is reporting a triage signal, not proving a classification defect.
     """
     rs = sorted(ratios)
     best = (0, 0, 0)
@@ -197,14 +195,14 @@ def propose(band_ratio, axis, factor, cands, tier, core_tier):
 
     Deliberately NOT a recommendation of a target class. Class membership is a role judgement
     (what a unit shoots at) and no stat test can make it — see `candidate_classes`. What the
-    band can honestly contribute is: this member cannot share its class's baseline, here is
-    the axis responsible, and here is whether anything else would even accept it.
+    band can honestly contribute is: this member sits outside its current-anchor class window,
+    here is the axis responsible, and here is whether anything else would even accept it.
     """
     off = factor is not None and (factor > 2.0 or factor < 0.5)
     if not cands:
         return "NO CLASS ACCEPTS", (
-            f"outside every class baseline" +
-            (f"; {axis} {factor:.1f}x its own core" if off else ""))
+            f"outside every current-anchor class window" +
+            (f"; {axis} {factor:.1f}x its current-anchor window" if off else ""))
     if len(cands) == 1:
         return "ONE CLASS ACCEPTS", f"only `{cands[0][0]}` takes it at {cands[0][1] * 100:.0f}%"
     if off:
@@ -301,8 +299,8 @@ def main() -> int:
     print("| class | members | in band now | best single-k | k* | min% | max% | span | verdict |")
     print("|---|--:|--:|--:|--:|--:|--:|--:|---|")
     for cls, n, n0, nk, span, k, lo, hi, _spec in sorted(rows, key=lambda r: -r[4]):
-        verdict = ("CANNOT FIT — span > 2.5" if span > SWEET_HI
-                   else "fits fully" if nk == n else "partial")
+        verdict = ("fits fully" if nk == n
+                   else "CURRENT-ANCHOR SPAN > 2.5" if span > SWEET_HI else "partial")
         print(f"| `{cls}` | {n} | {n0} ({n0/n:.0%}) | {nk} ({nk/n:.0%}) | {k:.3f} | "
               f"{lo*100:.0f}% | {hi*100:.0f}% | {span:.1f}x | {verdict} |")
 
@@ -311,12 +309,13 @@ def main() -> int:
     fit = sum(r[3] for r in rows)
     print(f"\n**{now}/{tot} ({now/tot:.0%}) of priced members sit in the sweet spot today; "
           f"re-scaling each class baseline alone reaches {fit}/{tot} ({fit/tot:.0%}).**")
-    print(f"\n**{len(infeasible)} of {len(rows)} classes cannot fit the band as currently "
-          f"constituted** — their own spread exceeds the 2.5x baseline-to-verifier envelope.")
-    print("But the spread is concentrated, not general: below is each class's CORE (the "
-          "largest set that can share one baseline) and the members that cannot join it.\n")
+    print(f"\n**{len(infeasible)} of {len(rows)} classes exceed the 2.5x envelope at the "
+          "recorded current anchor** — this is a current-anchor observation, not a feasibility "
+          "proof.")
+    print("The spread is concentrated, not general: below is each class's current-anchor ratio "
+          "window and the members outside that window.\n")
 
-    print("| class | core | core span | members that cannot share the core baseline |")
+    print("| class | current-anchor window | window span | members outside the current-anchor ratio window |")
     print("|---|--:|--:|---|")
     triage_total = 0
     for cls, span, _n in sorted(infeasible, key=lambda r: -r[1]):
@@ -330,14 +329,14 @@ def main() -> int:
         cspan = core[-1][0] / core[0][0] if core else 0
         print(f"| `{cls}` | {len(core)}/{len(paired)} | {cspan:.1f}x | {shown}{more} |")
 
-    print(f"\n**{triage_total} members across those classes sit outside their own class core.**"
-          " Each is one of three things, and only a maintainer can say which:")
+    print(f"\n**{triage_total} members across those classes sit outside their current-anchor "
+          "ratio window.** Each is one of three things, and only a maintainer can say which:")
     print("  * misclassified — `futuretech_blackwidow` is in `melee` with a range of 9000, "
           "and `corrino_buggy` is in `mbt`;")
     print("  * a legitimate higher tier that needs a tech-tier gate rather than a wider band;")
     print("  * genuinely mis-stated, which is what the pipeline exists to fix.")
     print("\n⛔ Until that triage happens, no baseline for these classes can be signed: the "
-          "band would be fitted to a population that does not belong together.")
+          "current-anchor window does not determine class membership or baseline feasibility.")
 
     print("\n## The fitted baselines, on the grid\n")
     print("| class | hp0 | speed0 | range0_wdist | dps0 | (cost0 unchanged — it cannot move the band) |")
@@ -355,10 +354,10 @@ def main() -> int:
         print()
         print("## Per-outlier evidence — FOR A MAINTAINER DECISION, never applied")
         print()
-        print("A member is listed when it cannot share one baseline with its class core.")
+        print("A member is listed when it sits outside its current-anchor ratio window.")
         print()
-        print("⛔ **The band cannot say where a member belongs, only that it does not belong "
-              "here.** Measured: the median member is accepted by **6 of 27** class baselines "
+        print("⛔ **The band does not determine class membership or baseline feasibility.** "
+              "Measured: the median member is accepted by **6 of 27** class baselines "
               "(mean 5.6, max 9), so \"another class would take it\" is true of nearly "
               "everything and is not evidence. `anchor_readiness.py` says why — these classes "
               "are *\"separated by what they SHOOT AT, not by their stats. No stat-based check "
