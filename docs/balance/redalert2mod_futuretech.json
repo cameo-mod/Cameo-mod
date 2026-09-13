@@ -15,7 +15,7 @@
         "damage": "32000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "tag": "MissileAP_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -41,24 +41,25 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5200",
       "reloaddelay": "60",
       "slot": "Armament@Rocket",
       "versus_templates": [
-       "^Compatibility_MissileAP_MediumFlat",
+       "^Warhead_MissileAP_Medium_Flat",
        "^Grenade",
        "^D2KRocket",
        "^SteelMediumMissile",
        "^FutureCryocopterRocketMissileCompatibility"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "Future_Cryocopter_Rocket",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
@@ -66,7 +67,7 @@
         "damage": "12600",
         "falloff": "100, 45, 0",
         "spread": "42",
-        "tag": "Cryo_MediumFlatCompatibility",
+        "tag": "Cryo_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -113,13 +114,13 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5200",
       "reloaddelay": "8",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Cryo_MediumFlat",
+       "^Warhead_Cryo_Medium_Flat",
        "^LightMissile",
        "^SmallArms",
        "^Chaingun",
@@ -127,9 +128,11 @@
        "^TeslaWeapon",
        "^LaserWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Cryo_Medium_Flat"
+      ],
       "weapon": "Future_Cryocopter_Cryo",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -214,7 +217,7 @@
         "damage": "42488",
         "falloff": "100, 89, 75, 55, 0",
         "spread": "383",
-        "tag": "Plasma_HeavyFlatCompatibility",
+        "tag": "Plasma_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -296,7 +299,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Plasma_HeavyFlat",
+       "^Warhead_Plasma_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -311,6 +314,7 @@
        "^HeavyMissile"
       ],
       "warheads": [
+       "^Warhead_Plasma_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "FutureHarbingerCannon",
@@ -325,7 +329,7 @@
         "damage": "42488",
         "falloff": "100, 89, 75, 55, 0",
         "spread": "383",
-        "tag": "Plasma_HeavyFlatCompatibility",
+        "tag": "Plasma_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -410,6 +414,7 @@
        "FutureHarbingerCannon"
       ],
       "warheads": [
+       "^Warhead_Plasma_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "FutureHarbingerCannon_elite",
@@ -595,7 +600,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_MissileAP_MediumFlat",
+       "^Warhead_MissileAP_Medium_Flat",
        "^Grenade",
        "^MediumFlameWeapon",
        "^FlakWeapon",
@@ -603,6 +608,7 @@
        "^SteelMediumMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "SteelTwisterMissiles",
@@ -661,6 +667,7 @@
        "SteelTwisterMissiles"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "SteelTwisterMissiles_elite",
@@ -730,7 +737,7 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "tag": "MissileAP_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -742,7 +749,7 @@
       "reloaddelay": "3",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_MissileAP_MediumFlat",
+       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Demolition_Heavy",
        "^Projectile_Grenade_Light",
@@ -750,6 +757,7 @@
        "^RA2MediumMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Demolition_Heavy",
        "^Warhead_MissileAP_Medium"
@@ -933,7 +941,7 @@
         "damage": "12600",
         "falloff": "100, 45, 0",
         "spread": "42",
-        "tag": "Cryo_MediumFlatCompatibility",
+        "tag": "Cryo_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -980,7 +988,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7124",
       "reloaddelay": "8",
@@ -988,9 +996,11 @@
       "versus_templates": [
        "Future_Cryocopter_Cryo"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Cryo_Medium_Flat"
+      ],
       "weapon": "Future_Turret_Cryo",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1182,29 +1192,30 @@
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "43",
-        "tag": "MissileAP_LightFlatCompatibility",
+        "tag": "MissileAP_Light_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7410",
       "reloaddelay": "24",
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-healer && !ifv-chrono && !ifv-spy && !ifv-thief",
       "slot": "Armament@primary",
       "versus_templates": [
-       "^Compatibility_MissileAP_LightFlat",
+       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_Arrow_Light",
        "^RA2LightMissile",
        "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_Arrow_Light",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "Future_MultiMissile",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "primary",
@@ -1952,7 +1963,7 @@
         "damage": "8000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
-        "tag": "CannonHE_MediumFlatCompatibility",
+        "tag": "CannonHE_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -1978,25 +1989,26 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "25",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_CannonHE_MediumFlat",
+       "^Warhead_CannonHE_Medium_Flat",
        "^TankDestroyerCannon",
        "^MediumFlameWeapon",
        "^RA2RailgunWeapon",
        "^SteelMediumCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "CannonAttackRobotGun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "2",
@@ -2006,7 +2018,7 @@
         "damage": "8000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
-        "tag": "CannonHE_MediumFlatCompatibility",
+        "tag": "CannonHE_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -2032,7 +2044,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "25",
@@ -2042,11 +2054,12 @@
        "CannonAttackRobotGun"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "CannonAttackRobotGun_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -3392,7 +3405,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "tag": "MissileAP_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -3404,13 +3417,14 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_MissileAP_MediumFlat",
+       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_MissileAP_Medium",
        "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "MissileAttackRobotGun",
@@ -3424,7 +3438,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "tag": "MissileAP_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -3440,6 +3454,7 @@
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "MissileAttackRobotGun_elite",
@@ -3635,28 +3650,29 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5806",
       "reloaddelay": "40",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^RA2SmallArms",
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "Future_Wheel_MG",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "8",
@@ -3666,12 +3682,12 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6806",
       "reloaddelay": "25",
@@ -3682,11 +3698,12 @@
        "^SteelChaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "Future_Wheel_MG_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -3764,7 +3781,7 @@
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "67",
-        "tag": "Bullet_LightFlatCompatibility",
+        "tag": "Bullet_Light_Flat",
         "type": "AreaDamage"
        },
        {
@@ -3811,14 +3828,14 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4110",
       "reloaddelay": "55",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Bullet_LightFlat",
+       "^Warhead_Bullet_Light_Flat",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",
@@ -3829,11 +3846,12 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light_Flat",
        "^Warhead_CannonHE_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ShotgunAttackRobotGun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "2",
@@ -3843,7 +3861,7 @@
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "67",
-        "tag": "Bullet_LightFlatCompatibility",
+        "tag": "Bullet_Light_Flat",
         "type": "AreaDamage"
        },
        {
@@ -3890,7 +3908,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5110",
       "reloaddelay": "25",
@@ -3901,11 +3919,12 @@
        "^SteelChaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light_Flat",
        "^Warhead_CannonHE_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ShotgunAttackRobotGun_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -3914,7 +3933,7 @@
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "67",
-        "tag": "Bullet_LightFlatCompatibility",
+        "tag": "Bullet_Light_Flat",
         "type": "AreaDamage"
        },
        {
@@ -3961,14 +3980,14 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "4110",
       "reloaddelay": "55",
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Compatibility_Bullet_LightFlat",
+       "^Warhead_Bullet_Light_Flat",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",
@@ -3979,11 +3998,12 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light_Flat",
        "^Warhead_CannonHE_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ShotgunAttackRobotGun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -3994,7 +4014,7 @@
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "67",
-        "tag": "Bullet_LightFlatCompatibility",
+        "tag": "Bullet_Light_Flat",
         "type": "AreaDamage"
        },
        {
@@ -4041,7 +4061,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5110",
       "reloaddelay": "25",
@@ -4052,11 +4072,12 @@
        "^SteelChaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light_Flat",
        "^Warhead_CannonHE_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ShotgunAttackRobotGun_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -4581,7 +4602,7 @@
         "damage": "193600",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -4628,7 +4649,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "3200",
       "pricing": true,
       "range": "16000",
@@ -4636,7 +4657,7 @@
       "requires": "athena-charged == 1",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^Compatibility_Laser_HeavyFlat",
+       "^Warhead_Laser_Heavy_Flat",
        "^LightMissile",
        "^SmallArms",
        "^Chaingun",
@@ -4644,9 +4665,11 @@
        "^TeslaWeapon",
        "^LaserWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy_Flat"
+      ],
       "weapon": "AthenaLaser",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -4930,7 +4953,7 @@
         "damage": "550888",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
-        "tag": "CannonHE_HeavyFlatCompatibility",
+        "tag": "CannonHE_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -4985,7 +5008,7 @@
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_CannonHE_HeavyFlat",
+       "^Warhead_CannonHE_Heavy_Flat",
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
        "^ShrapnelWeapon",
@@ -4994,6 +5017,7 @@
        "^SteelHeavyCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "FutureTankCannons",
@@ -5008,7 +5032,7 @@
         "damage": "550888",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
-        "tag": "CannonHE_HeavyFlatCompatibility",
+        "tag": "CannonHE_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -5066,6 +5090,7 @@
        "FutureTankCannons"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "FutureTankCannons_elite",
@@ -5349,13 +5374,14 @@
       "reloaddelay": "12",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^TankDestroyerCannon",
        "^LightMissile",
        "^FlakWeapon",
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "FutureMechGatling",
@@ -5502,7 +5528,7 @@
         "damage": "60000",
         "falloff": "100, 0",
         "spread": "96",
-        "tag": "Railgun_HeavyFlatCompatibility",
+        "tag": "Railgun_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -5514,14 +5540,14 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7500",
       "reloaddelay": "60",
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Railgun_HeavyFlat",
+       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
        "^Effect_Railgun_Heavy",
@@ -5529,11 +5555,12 @@
        "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
+       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "OrionRailgun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "primary",
@@ -5542,7 +5569,7 @@
         "damage": "150000",
         "falloff": "100, 0",
         "spread": "96",
-        "tag": "Railgun_HeavyFlatCompatibility",
+        "tag": "Railgun_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -5561,7 +5588,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "60",
@@ -5572,11 +5599,12 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
+       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "OrionRailgun_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -5711,28 +5739,29 @@
         "damage": "12000",
         "falloff": "100, 0",
         "spread": "85",
-        "tag": "MissileAP_HeavyFlatCompatibility",
+        "tag": "MissileAP_Heavy_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "240",
       "slot": "Armament@WATER",
       "versus_templates": [
-       "^Compatibility_MissileAP_HeavyFlat",
+       "^Warhead_MissileAP_Heavy_Flat",
        "^RA2Grenade",
        "^RA2HeavyMissile",
        "^Effect_Watersplash_Large_RA2"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "FutureMicrotorpedos",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -5805,7 +5834,7 @@
         "damage": "30000",
         "falloff": "100, 89, 75, 55, 0",
         "spread": "383",
-        "tag": "Plasma_HeavyFlatCompatibility",
+        "tag": "Plasma_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -5824,7 +5853,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -5832,18 +5861,19 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Plasma_HeavyFlat",
+       "^Warhead_Plasma_Heavy_Flat",
        "^Warhead_Plasma_Heavy",
        "^Grenade",
        "^MediumChemicalWeapon",
        "^SteelHeavyCannon"
       ],
       "warheads": [
+       "^Warhead_Plasma_Heavy_Flat",
        "^Warhead_Plasma_Heavy",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "FutureMechPlasma",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "4",
@@ -5853,7 +5883,7 @@
         "damage": "30000",
         "falloff": "100, 89, 75, 55, 0",
         "spread": "383",
-        "tag": "Plasma_HeavyFlatCompatibility",
+        "tag": "Plasma_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -5872,7 +5902,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "1400",
       "pricing": true,
       "range": "8000",
@@ -5883,11 +5913,12 @@
        "FutureMechPlasma"
       ],
       "warheads": [
+       "^Warhead_Plasma_Heavy_Flat",
        "^Warhead_Plasma_Heavy",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "FutureMechPlasma_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -6103,27 +6134,28 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5555",
       "reloaddelay": "21",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^RA2SmallArms",
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ACV_Machinegun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "4",
@@ -6133,29 +6165,30 @@
         "damage": "12000",
         "falloff": "100, 0",
         "spread": "85",
-        "tag": "MissileAP_HeavyFlatCompatibility",
+        "tag": "MissileAP_Heavy_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "240",
       "requires": "inwater",
       "slot": "Armament@WATER",
       "versus_templates": [
-       "^Compatibility_MissileAP_HeavyFlat",
+       "^Warhead_MissileAP_Heavy_Flat",
        "^RA2Grenade",
        "^RA2HeavyMissile",
        "^Effect_Watersplash_Large_RA2"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "FutureMicrotorpedos",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -6439,28 +6472,29 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5660",
       "reloaddelay": "14",
       "requires": "ifv-mg",
       "slot": "Armament@mg",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^RA2SmallArms",
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2CRM60",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "6",
@@ -6470,7 +6504,7 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -6482,14 +6516,14 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4692",
       "reloaddelay": "10",
       "requires": "ifv-hmg",
       "slot": "Armament@hmg",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -6497,11 +6531,12 @@
        "^SniperWeapon"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2CRM60H",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
@@ -6758,7 +6793,7 @@
         "damage": "25000",
         "falloff": "100, 0",
         "spread": "80",
-        "tag": "CannonAP_LightFlatCompatibility",
+        "tag": "CannonAP_Light_Flat",
         "type": "AreaDamage"
        },
        {
@@ -6784,7 +6819,7 @@
       "requires": "ifv-cannon",
       "slot": "Armament@cannon",
       "versus_templates": [
-       "^Compatibility_CannonAP_LightFlat",
+       "^Warhead_CannonAP_Light_Flat",
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
        "^Warhead_CannonAP_Light",
@@ -6792,6 +6827,7 @@
        "^Effect_Iron_Fx_RA2"
       ],
       "warheads": [
+       "^Warhead_CannonAP_Light_Flat",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "RA2MirageGun",
@@ -7083,12 +7119,13 @@
       "slot": "Armament@missile",
       "versus_templates": [
        "^Warhead_MissileAP_Light",
-       "^Compatibility_MissileHE_LightFlat",
+       "^Warhead_MissileHE_Light_Flat",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light"
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileHE_Light_Flat"
       ],
       "weapon": "RA2MultiHoverMissile",
       "weapon_class_source": "template"
@@ -7246,7 +7283,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5760",
       "reloaddelay": "28",
@@ -7254,16 +7291,17 @@
       "slot": "Armament@primary",
       "versus_templates": [
        "^Warhead_MissileHE_Light",
-       "^Compatibility_MissileAP_LightFlat",
+       "^Warhead_MissileAP_Light_Flat",
        "^RA2LightMissile",
        "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileHE_Light",
+       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "primary",
@@ -7279,7 +7317,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6760",
       "reloaddelay": "28",
@@ -7291,10 +7329,11 @@
       ],
       "warheads": [
        "^Warhead_MissileHE_Light",
+       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "primary",
@@ -7318,12 +7357,14 @@
       "slot": "Armament@primaryAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
-       "^Compatibility_MissileAA_LightFlat",
+       "^Warhead_MissileAA_Light_Flat",
        "RA2HoverMissile"
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
+       "^Warhead_MissileAA_Light_Flat",
        "^Warhead_MissileHE_Light",
+       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA",
@@ -7351,12 +7392,14 @@
       "slot": "Armament@primaryeliteAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
-       "^Compatibility_MissileAA_LightFlat",
+       "^Warhead_MissileAA_Light_Flat",
        "RA2HoverMissile_elite"
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
+       "^Warhead_MissileAA_Light_Flat",
        "^Warhead_MissileHE_Light",
+       "^Warhead_MissileAP_Light_Flat",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA_elite",
@@ -7382,12 +7425,13 @@
       "slot": "Armament@primaryThunderbolt",
       "versus_templates": [
        "^Warhead_MissileAP_Light",
-       "^Compatibility_MissileHE_LightFlat",
+       "^Warhead_MissileHE_Light_Flat",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light"
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileHE_Light_Flat"
       ],
       "weapon": "RA2ThunderboltMissile",
       "weapon_class_source": "template"
@@ -7416,7 +7460,8 @@
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light"
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileHE_Light_Flat"
       ],
       "weapon": "RA2ThunderboltMissile_elite",
       "weapon_class_source": "template"
@@ -7433,7 +7478,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8640",
       "reloaddelay": "25",
@@ -7445,10 +7490,11 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light"
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileHE_Light_Flat"
       ],
       "weapon": "RA2ThunderboltMissile_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "primary",
@@ -7463,7 +7509,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9640",
       "reloaddelay": "25",
@@ -7475,10 +7521,11 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light"
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileHE_Light_Flat"
       ],
       "weapon": "RA2ThunderboltMissile_AA_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "4",
@@ -7503,7 +7550,8 @@
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light"
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileHE_Light_Flat"
       ],
       "weapon": "RA2MultiHoverMissile_elite",
       "weapon_class_source": "template"
@@ -7520,7 +7568,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "20",
@@ -7528,15 +7576,17 @@
       "slot": "Armament@missileAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
-       "^Compatibility_MissileAA_LightFlat",
+       "^Warhead_MissileAA_Light_Flat",
        "RA2MultiHoverMissile"
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light"
+       "^Warhead_MissileAA_Light_Flat",
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileHE_Light_Flat"
       ],
       "weapon": "RA2MultiHoverMissile_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "4",
@@ -7550,7 +7600,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "20",
@@ -7558,15 +7608,17 @@
       "slot": "Armament@missileeliteAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
-       "^Compatibility_MissileAA_LightFlat",
+       "^Warhead_MissileAA_Light_Flat",
        "RA2MultiHoverMissile_elite"
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light"
+       "^Warhead_MissileAA_Light_Flat",
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileHE_Light_Flat"
       ],
       "weapon": "RA2MultiHoverMissile_AA_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
@@ -7587,12 +7639,13 @@
       "slot": "Armament@missileThunderbolt",
       "versus_templates": [
        "^Warhead_MissileAP_Light",
-       "^Compatibility_MissileHE_LightFlat",
+       "^Warhead_MissileHE_Light_Flat",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light"
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileHE_Light_Flat"
       ],
       "weapon": "RA2MultiThunderboltMissile",
       "weapon_class_source": "template"
@@ -7620,7 +7673,8 @@
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light"
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileHE_Light_Flat"
       ],
       "weapon": "RA2MultiThunderboltMissile_elite",
       "weapon_class_source": "template"
@@ -7636,7 +7690,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "25",
@@ -7648,10 +7702,11 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light"
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileHE_Light_Flat"
       ],
       "weapon": "RA2MultiThunderboltMissile_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "4",
@@ -7665,7 +7720,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "25",
@@ -7677,10 +7732,11 @@
       ],
       "warheads": [
        "^Warhead_MissileAA_Light",
-       "^Warhead_MissileAP_Light"
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileHE_Light_Flat"
       ],
       "weapon": "RA2MultiThunderboltMissile_AA_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [

@@ -44,7 +44,7 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -56,25 +56,26 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4000",
       "reloaddelay": "20",
       "requires": "ordos_upgrade_lasercartridges",
       "slot": "Armament@PRIMARYLaser",
       "versus_templates": [
-       "^Compatibility_Laser_HeavyFlat",
+       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
        "^Effect_Laser_Heavy",
        "d2kCarryallChainGun"
       ],
       "warheads": [
+       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Laser_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "d2kCarryallChainGun_upgrade",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -169,7 +170,7 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -181,25 +182,26 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4000",
       "reloaddelay": "20",
       "requires": "ordos_upgrade_lasercartridges",
       "slot": "Armament@PRIMARYLaser",
       "versus_templates": [
-       "^Compatibility_Laser_HeavyFlat",
+       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
        "^Effect_Laser_Heavy",
        "d2kCarryallChainGun"
       ],
       "warheads": [
+       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Laser_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "d2kCarryallChainGun_upgrade",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -267,7 +269,7 @@
         "damage": "12000",
         "falloff": "100, 0",
         "spread": "85",
-        "tag": "MissileAP_HeavyFlatCompatibility",
+        "tag": "MissileAP_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -321,7 +323,7 @@
       "reloaddelay": "132",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_MissileAP_HeavyFlat",
+       "^Warhead_MissileAP_Heavy_Flat",
        "^TankDestroyerCannon",
        "^LightChemicalWeapon",
        "^FlakWeapon",
@@ -330,6 +332,7 @@
        "^D2KMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "ordos_airmine",
@@ -443,7 +446,7 @@
         "damage": "24000",
         "falloff": "100, 70, 30, 0",
         "spread": "300",
-        "tag": "MissileAA_MediumFlatCompatibility",
+        "tag": "MissileAA_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -478,10 +481,12 @@
       "reloaddelay": "42",
       "slot": "Armament@aa1",
       "versus_templates": [
-       "^Compatibility_MissileAA_MediumFlat",
+       "^Warhead_MissileAA_Medium_Flat",
        "D2K_APC_Rocket"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Medium_Flat",
+       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
@@ -495,7 +500,7 @@
         "damage": "24000",
         "falloff": "100, 70, 30, 0",
         "spread": "300",
-        "tag": "MissileAA_MediumFlatCompatibility",
+        "tag": "MissileAA_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -530,10 +535,12 @@
       "reloaddelay": "42",
       "slot": "Armament@aa2",
       "versus_templates": [
-       "^Compatibility_MissileAA_MediumFlat",
+       "^Warhead_MissileAA_Medium_Flat",
        "D2K_APC_Rocket"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Medium_Flat",
+       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
@@ -771,7 +778,7 @@
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -783,25 +790,26 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6184",
       "reloaddelay": "60",
       "requires": "ordos_upgrade_lasercartridges",
       "slot": "Armament@PRIMARYLaser",
       "versus_templates": [
-       "^Compatibility_Laser_HeavyFlat",
+       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
        "^Effect_Laser_Heavy",
        "d2kChainGun"
       ],
       "warheads": [
+       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Laser_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "d2kChainGun_upgrade",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -921,6 +929,7 @@
        "^Warhead_MissileAP_Heavy_WraithOrder",
        "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileHE_Heavy",
+       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "Wraith_ToxinMissiles",
@@ -1002,7 +1011,7 @@
         "damage": "48000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
-        "tag": "CannonHE_MediumFlatCompatibility",
+        "tag": "CannonHE_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -1045,7 +1054,7 @@
       "reloaddelay": "74",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_CannonHE_MediumFlat",
+       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Concussion_Medium",
@@ -1054,6 +1063,7 @@
        "^D2K_Cannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Concussion_Medium",
@@ -2811,24 +2821,25 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "67",
-        "tag": "Bullet_LightFlatCompatibility",
+        "tag": "Bullet_Light_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5475",
       "reloaddelay": "20",
       "requires": "!ordos_upgrade_lasercartridges",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Bullet_LightFlat",
+       "^Warhead_Bullet_Light_Flat",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Light",
        "^Effect_Bullet_Light"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light_Flat",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "light_inf_lmg",
@@ -2840,7 +2851,7 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -2852,25 +2863,27 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5475",
       "reloaddelay": "20",
       "requires": "ordos_upgrade_lasercartridges",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Compatibility_Laser_HeavyFlat",
+       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
        "^Effect_Laser_Heavy",
        "light_inf_lmg"
       ],
       "warheads": [
+       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Laser_Heavy",
+       "^Warhead_Bullet_Light_Flat",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "light_inf_lmg_ordos_upgrade",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -2879,24 +2892,25 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "67",
-        "tag": "Bullet_LightFlatCompatibility",
+        "tag": "Bullet_Light_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "5475",
       "reloaddelay": "20",
       "requires": "!ordos_upgrade_lasercartridges",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Compatibility_Bullet_LightFlat",
+       "^Warhead_Bullet_Light_Flat",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Light",
        "^Effect_Bullet_Light"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light_Flat",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "light_inf_lmg",
@@ -2909,7 +2923,7 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -2921,25 +2935,27 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5475",
       "reloaddelay": "20",
       "requires": "ordos_upgrade_lasercartridges",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
-       "^Compatibility_Laser_HeavyFlat",
+       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
        "^Effect_Laser_Heavy",
        "light_inf_lmg"
       ],
       "warheads": [
+       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Laser_Heavy",
+       "^Warhead_Bullet_Light_Flat",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "light_inf_lmg_ordos_upgrade",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -3023,7 +3039,7 @@
         "damage": "40000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_MediumFlatCompatibility",
+        "tag": "Concussion_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -3067,7 +3083,7 @@
       "reloaddelay": "80",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Concussion_MediumFlat",
+       "^Warhead_Concussion_Medium_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonAP_Light",
@@ -3076,6 +3092,7 @@
        "^D2K_Cannon"
       ],
       "warheads": [
+       "^Warhead_Concussion_Medium_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonAP_Light",
@@ -3091,7 +3108,7 @@
         "damage": "40000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_MediumFlatCompatibility",
+        "tag": "Concussion_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -3135,7 +3152,7 @@
       "reloaddelay": "80",
       "slot": "Armament@garrisoned",
       "versus_templates": [
-       "^Compatibility_Concussion_MediumFlat",
+       "^Warhead_Concussion_Medium_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonAP_Light",
@@ -3144,6 +3161,7 @@
        "^D2K_Cannon"
       ],
       "warheads": [
+       "^Warhead_Concussion_Medium_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonAP_Light",
@@ -3213,7 +3231,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "85",
-        "tag": "MissileAP_HeavyFlatCompatibility",
+        "tag": "MissileAP_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -3248,7 +3266,7 @@
       "reloaddelay": "64",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_MissileAP_HeavyFlat",
+       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy",
@@ -3256,6 +3274,7 @@
        "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
@@ -3270,7 +3289,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "85",
-        "tag": "MissileAP_HeavyFlatCompatibility",
+        "tag": "MissileAP_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -3305,7 +3324,7 @@
       "reloaddelay": "64",
       "slot": "Armament@garrisoned",
       "versus_templates": [
-       "^Compatibility_MissileAP_HeavyFlat",
+       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy",
@@ -3313,6 +3332,7 @@
        "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
@@ -4084,7 +4104,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "tag": "MissileAP_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -4119,7 +4139,7 @@
       "reloaddelay": "42",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_MissileAP_MediumFlat",
+       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
@@ -4127,6 +4147,7 @@
        "^D2KRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
@@ -4443,7 +4464,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "1245",
       "pricing": true,
       "range": "6220",
@@ -4453,11 +4474,12 @@
        "autogun_tank"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "autogun_tank_small",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -4688,6 +4710,7 @@
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
+       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_MissileAP_Heavy"
       ],
@@ -4787,14 +4810,14 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "1415",
       "pricing": true,
       "range": "7070",
       "reloaddelay": "98",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_MissileAP_HeavyFlat",
+       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -4803,11 +4826,12 @@
        "^D2KMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "DeviatorMissile",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -4884,7 +4908,7 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "tag": "MissileAP_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -4919,7 +4943,7 @@
       "reloaddelay": "42",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_MissileAP_MediumFlat",
+       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
@@ -4927,6 +4951,7 @@
        "^D2KRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
@@ -5043,14 +5068,14 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "1495",
       "pricing": true,
       "range": "7480",
       "reloaddelay": "24",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -5061,11 +5086,12 @@
        "^Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "autogun_tank",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -5320,7 +5346,7 @@
         "damage": "24000",
         "falloff": "100, 70, 30, 0",
         "spread": "300",
-        "tag": "MissileAA_MediumFlatCompatibility",
+        "tag": "MissileAA_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -5355,10 +5381,12 @@
       "reloaddelay": "42",
       "slot": "Armament@aa1",
       "versus_templates": [
-       "^Compatibility_MissileAA_MediumFlat",
+       "^Warhead_MissileAA_Medium_Flat",
        "D2K_APC_Rocket"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Medium_Flat",
+       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
@@ -5372,7 +5400,7 @@
         "damage": "24000",
         "falloff": "100, 70, 30, 0",
         "spread": "300",
-        "tag": "MissileAA_MediumFlatCompatibility",
+        "tag": "MissileAA_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -5407,10 +5435,12 @@
       "reloaddelay": "42",
       "slot": "Armament@aa2",
       "versus_templates": [
-       "^Compatibility_MissileAA_MediumFlat",
+       "^Warhead_MissileAA_Medium_Flat",
        "D2K_APC_Rocket"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Medium_Flat",
+       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
@@ -6106,30 +6136,31 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4857",
       "reloaddelay": "33",
       "requires": "!ordos_upgrade_lasercartridges",
       "slot": "Armament@damage",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "HMGstealth",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "4",
@@ -6165,6 +6196,7 @@
       ],
       "warheads": [
        "^Warhead_Laser_Heavy",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
@@ -6285,13 +6317,14 @@
       "reloaddelay": "72",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_CannonHE_MediumFlat",
+       "^Warhead_CannonHE_Medium_Flat",
        "^MediumChemicalWeapon",
        "^LightChemicalWeapon",
        "^D2K_Cannon",
        "^TankDestroyerCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "120mm_td",

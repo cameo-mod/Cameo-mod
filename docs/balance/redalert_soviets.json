@@ -77,12 +77,12 @@
         "damage": "8000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
-        "tag": "Flame_LightFlatCompatibility",
+        "tag": "Flame_Light_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "minrange": "1290",
       "pricing": true,
       "range": "6460",
@@ -96,11 +96,12 @@
       ],
       "warheads": [
        "^Warhead_IncendiaryYakComposition",
+       "^Warhead_Flame_Light_Flat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ra1_soviets_armoredyak_chaingun_incendiary",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "secondary",
@@ -111,12 +112,12 @@
         "damage": "8000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
-        "tag": "Flame_LightFlatCompatibility",
+        "tag": "Flame_Light_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "minrange": "1290",
       "pricing": true,
       "range": "6460",
@@ -130,11 +131,12 @@
       ],
       "warheads": [
        "^Warhead_IncendiaryYakComposition",
+       "^Warhead_Flame_Light_Flat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ra1_soviets_armoredyak_chaingun_incendiary",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -202,7 +204,7 @@
         "falloff": "100, 0",
         "percentage_denominator": "10000",
         "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "tag": "MissileAP_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -217,6 +219,7 @@
        "HindMissiles"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_Concussion_Medium"
@@ -231,7 +234,7 @@
         "falloff": "100, 0",
         "percentage_denominator": "10000",
         "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "tag": "MissileAP_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -246,6 +249,7 @@
        "HindMissiles"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_Concussion_Medium"
@@ -260,7 +264,7 @@
         "falloff": "100, 0",
         "percentage_denominator": "10000",
         "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "tag": "MissileAP_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -275,6 +279,7 @@
        "HindMissiles"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_Concussion_Medium"
@@ -731,12 +736,12 @@
         "falloff": "100, 90, 78, 60, 0",
         "percentage_denominator": "10000",
         "spread": "200",
-        "tag": "Flame_LightFlatCompatibility",
+        "tag": "Flame_Light_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "8",
@@ -746,11 +751,12 @@
        "IncendiaryChainGun"
       ],
       "warheads": [
+       "^Warhead_Flame_Light_Flat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ra1_soviets_hindattackhelicopter_incendiarychaingun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "secondary",
@@ -760,12 +766,12 @@
         "falloff": "100, 90, 78, 60, 0",
         "percentage_denominator": "10000",
         "spread": "200",
-        "tag": "Flame_LightFlatCompatibility",
+        "tag": "Flame_Light_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "8",
@@ -775,11 +781,12 @@
        "IncendiaryChainGun"
       ],
       "warheads": [
+       "^Warhead_Flame_Light_Flat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ra1_soviets_hindattackhelicopter_incendiarychaingun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -910,7 +917,7 @@
         "falloff": "100, 55, 0",
         "percentage_denominator": "10000",
         "spread": "93",
-        "tag": "Tesla_HeavyFlatCompatibility",
+        "tag": "Tesla_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -922,25 +929,26 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "32",
       "requires": "!ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@Tesla",
       "versus_templates": [
-       "^Compatibility_Tesla_HeavyFlat",
+       "^Warhead_Tesla_Heavy_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
        "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_Tesla_Heavy"
       ],
       "weapon": "ra1_soviets_kamovattackhelicopter_kamovtesla",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
@@ -949,7 +957,7 @@
         "falloff": "100, 55, 0",
         "percentage_denominator": "10000",
         "spread": "93",
-        "tag": "Tesla_HeavyFlatCompatibility",
+        "tag": "Tesla_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -961,7 +969,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "32",
@@ -971,11 +979,12 @@
        "ra1_soviets_kamovattackhelicopter_kamovtesla"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_Tesla_Heavy"
       ],
       "weapon": "ra1_soviets_kamovattackhelicopter_kamovteslaarc",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
@@ -984,7 +993,7 @@
         "falloff": "100, 0",
         "percentage_denominator": "10000",
         "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "tag": "MissileAP_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -999,6 +1008,7 @@
        "HindMissiles"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_Concussion_Medium"
@@ -1013,7 +1023,7 @@
         "falloff": "100, 0",
         "percentage_denominator": "10000",
         "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "tag": "MissileAP_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -1028,6 +1038,7 @@
        "HindMissiles"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_Concussion_Medium"
@@ -1042,7 +1053,7 @@
         "falloff": "100, 0",
         "percentage_denominator": "10000",
         "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "tag": "MissileAP_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -1057,6 +1068,7 @@
        "HindMissiles"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_Concussion_Medium"
@@ -1342,12 +1354,12 @@
         "falloff": "100, 90, 78, 60, 0",
         "percentage_denominator": "10000",
         "spread": "200",
-        "tag": "Flame_LightFlatCompatibility",
+        "tag": "Flame_Light_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "8",
@@ -1357,11 +1369,12 @@
        "IncendiaryChainGun"
       ],
       "warheads": [
+       "^Warhead_Flame_Light_Flat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ra1_soviets_kamovattackhelicopter_incendiarychaingun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "secondary",
@@ -1371,12 +1384,12 @@
         "falloff": "100, 90, 78, 60, 0",
         "percentage_denominator": "10000",
         "spread": "200",
-        "tag": "Flame_LightFlatCompatibility",
+        "tag": "Flame_Light_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "8",
@@ -1386,11 +1399,12 @@
        "IncendiaryChainGun"
       ],
       "warheads": [
+       "^Warhead_Flame_Light_Flat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ra1_soviets_kamovattackhelicopter_incendiarychaingun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -1521,7 +1535,7 @@
         "damage": "32000",
         "falloff": "100, 55, 0",
         "spread": "93",
-        "tag": "Tesla_HeavyFlatCompatibility",
+        "tag": "Tesla_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -1533,7 +1547,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "minrange": "1180",
       "pricing": true,
       "range": "5900",
@@ -1541,18 +1555,19 @@
       "requires": "ra1_soviets_upgrade_teslarockets",
       "slot": "Armament@TeslaUpgrade1",
       "versus_templates": [
-       "^Compatibility_Tesla_HeavyFlat",
+       "^Warhead_Tesla_Heavy_Flat",
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
        "ra1_soviets_migattackbomber_maverick",
        "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy_Flat",
        "^Warhead_Tesla_Heavy",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "ra1_soviets_migattackbomber_teslamaverick",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "2",
@@ -1562,7 +1577,7 @@
         "damage": "32000",
         "falloff": "100, 55, 0",
         "spread": "93",
-        "tag": "Tesla_HeavyFlatCompatibility",
+        "tag": "Tesla_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -1574,7 +1589,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "minrange": "1180",
       "pricing": true,
       "range": "5900",
@@ -1582,18 +1597,19 @@
       "requires": "ra1_soviets_upgrade_teslarockets",
       "slot": "Armament@TeslaUpgrade2",
       "versus_templates": [
-       "^Compatibility_Tesla_HeavyFlat",
+       "^Warhead_Tesla_Heavy_Flat",
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
        "ra1_soviets_migattackbomber_maverick",
        "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy_Flat",
        "^Warhead_Tesla_Heavy",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "ra1_soviets_migattackbomber_teslamaverick",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "2",
@@ -1603,7 +1619,7 @@
         "damage": "48000",
         "falloff": "100, 76, 57, 43, 31, 17, 0",
         "spread": "338",
-        "tag": "Thermobaric_HeavyFlatCompatibility",
+        "tag": "Thermobaric_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -1629,7 +1645,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "minrange": "1180",
       "pricing": true,
       "range": "5900",
@@ -1637,7 +1653,7 @@
       "requires": "ra1_soviets_upgrade_thermonuclearrockets",
       "slot": "Armament@NuclearUpgrade1",
       "versus_templates": [
-       "^Compatibility_Thermobaric_HeavyFlat",
+       "^Warhead_Thermobaric_Heavy_Flat",
        "^Warhead_Thermobaric_Heavy",
        "^NuclearWarhead",
        "^HeavyMissile",
@@ -1645,11 +1661,12 @@
        "ra1_soviets_migattackbomber_maverick"
       ],
       "warheads": [
+       "^Warhead_Thermobaric_Heavy_Flat",
        "^Warhead_Thermobaric_Heavy",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "ra1_soviets_migattackbomber_thermobaricmaverick",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "2",
@@ -1659,7 +1676,7 @@
         "damage": "48000",
         "falloff": "100, 76, 57, 43, 31, 17, 0",
         "spread": "338",
-        "tag": "Thermobaric_HeavyFlatCompatibility",
+        "tag": "Thermobaric_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -1685,7 +1702,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "minrange": "1180",
       "pricing": true,
       "range": "5900",
@@ -1693,7 +1710,7 @@
       "requires": "ra1_soviets_upgrade_thermonuclearrockets",
       "slot": "Armament@NuclearUpgrade2",
       "versus_templates": [
-       "^Compatibility_Thermobaric_HeavyFlat",
+       "^Warhead_Thermobaric_Heavy_Flat",
        "^Warhead_Thermobaric_Heavy",
        "^NuclearWarhead",
        "^HeavyMissile",
@@ -1701,11 +1718,12 @@
        "ra1_soviets_migattackbomber_maverick"
       ],
       "warheads": [
+       "^Warhead_Thermobaric_Heavy_Flat",
        "^Warhead_Thermobaric_Heavy",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "ra1_soviets_migattackbomber_thermobaricmaverick",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -1902,12 +1920,12 @@
         "falloff": "100, 90, 78, 60, 0",
         "percentage_denominator": "10000",
         "spread": "200",
-        "tag": "Flame_LightFlatCompatibility",
+        "tag": "Flame_Light_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -1921,11 +1939,12 @@
       ],
       "warheads": [
        "^Warhead_IncendiaryYakComposition",
+       "^Warhead_Flame_Light_Flat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ra1_soviets_nuclearyak_chaingun_incendiary",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "secondary",
@@ -1937,12 +1956,12 @@
         "falloff": "100, 90, 78, 60, 0",
         "percentage_denominator": "10000",
         "spread": "200",
-        "tag": "Flame_LightFlatCompatibility",
+        "tag": "Flame_Light_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -1956,11 +1975,12 @@
       ],
       "warheads": [
        "^Warhead_IncendiaryYakComposition",
+       "^Warhead_Flame_Light_Flat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ra1_soviets_nuclearyak_chaingun_incendiary",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -2158,12 +2178,12 @@
         "falloff": "100, 90, 78, 60, 0",
         "percentage_denominator": "500",
         "spread": "200",
-        "tag": "Flame_LightFlatCompatibility",
+        "tag": "Flame_Light_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -2177,11 +2197,12 @@
       ],
       "warheads": [
        "^Warhead_IncendiaryYakComposition",
+       "^Warhead_Flame_Light_Flat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ra1_soviets_su57attackbomber_chaingun_incendiary",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "8",
@@ -2192,12 +2213,12 @@
         "falloff": "100, 90, 78, 60, 0",
         "percentage_denominator": "500",
         "spread": "200",
-        "tag": "Flame_LightFlatCompatibility",
+        "tag": "Flame_Light_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -2211,11 +2232,12 @@
       ],
       "warheads": [
        "^Warhead_IncendiaryYakComposition",
+       "^Warhead_Flame_Light_Flat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ra1_soviets_su57attackbomber_chaingun_incendiary",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -2490,7 +2512,7 @@
         "falloff": "100, 55, 0",
         "percentage_denominator": "10000",
         "spread": "93",
-        "tag": "Tesla_HeavyFlatCompatibility",
+        "tag": "Tesla_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -2502,7 +2524,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -2510,18 +2532,19 @@
       "requires": "!ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@Tesla",
       "versus_templates": [
-       "^Compatibility_Tesla_HeavyFlat",
+       "^Warhead_Tesla_Heavy_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
        "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_Tesla_Heavy"
       ],
       "weapon": "ra1_soviets_teslayak_yakteslagun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "8",
@@ -2532,7 +2555,7 @@
         "falloff": "100, 55, 0",
         "percentage_denominator": "10000",
         "spread": "93",
-        "tag": "Tesla_HeavyFlatCompatibility",
+        "tag": "Tesla_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -2544,7 +2567,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -2555,11 +2578,12 @@
        "ra1_soviets_teslayak_yakteslagun"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_Tesla_Heavy"
       ],
       "weapon": "ra1_soviets_teslayak_yakteslagunarc",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "8",
@@ -2635,12 +2659,12 @@
         "falloff": "100, 90, 78, 60, 0",
         "percentage_denominator": "10000",
         "spread": "200",
-        "tag": "Flame_LightFlatCompatibility",
+        "tag": "Flame_Light_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -2654,11 +2678,12 @@
       ],
       "warheads": [
        "^Warhead_IncendiaryYakComposition",
+       "^Warhead_Flame_Light_Flat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ra1_soviets_teslayak_chaingun_incendiary",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "secondary",
@@ -2670,12 +2695,12 @@
         "falloff": "100, 90, 78, 60, 0",
         "percentage_denominator": "10000",
         "spread": "200",
-        "tag": "Flame_LightFlatCompatibility",
+        "tag": "Flame_Light_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -2689,11 +2714,12 @@
       ],
       "warheads": [
        "^Warhead_IncendiaryYakComposition",
+       "^Warhead_Flame_Light_Flat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ra1_soviets_teslayak_chaingun_incendiary",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -2891,12 +2917,12 @@
         "falloff": "100, 90, 78, 60, 0",
         "percentage_denominator": "10000",
         "spread": "200",
-        "tag": "Flame_LightFlatCompatibility",
+        "tag": "Flame_Light_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -2910,11 +2936,12 @@
       ],
       "warheads": [
        "^Warhead_IncendiaryYakComposition",
+       "^Warhead_Flame_Light_Flat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ra1_soviets_yakscoutplane_chaingun_incendiary",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "secondary",
@@ -2926,12 +2953,12 @@
         "falloff": "100, 90, 78, 60, 0",
         "percentage_denominator": "10000",
         "spread": "200",
-        "tag": "Flame_LightFlatCompatibility",
+        "tag": "Flame_Light_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -2945,11 +2972,12 @@
       ],
       "warheads": [
        "^Warhead_IncendiaryYakComposition",
+       "^Warhead_Flame_Light_Flat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ra1_soviets_yakscoutplane_chaingun_incendiary",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -4076,29 +4104,30 @@
         "falloff": "100, 0",
         "percentage_denominator": "10000",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4822",
       "reloaddelay": "11",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ra1_soviets_ak47conscript_rifle",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -4110,29 +4139,30 @@
         "falloff": "100, 0",
         "percentage_denominator": "10000",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "4822",
       "reloaddelay": "11",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ra1_soviets_ak47conscript_rifle",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -5458,19 +5488,19 @@
         "falloff": "100, 90, 78, 60, 0",
         "percentage_denominator": "10000",
         "spread": "200",
-        "tag": "Flame_LightFlatCompatibility",
+        "tag": "Flame_Light_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4668",
       "reloaddelay": "50",
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Compatibility_Flame_LightFlat",
+       "^Warhead_Flame_Light_Flat",
        "^Warhead_Flame_Light",
        "^Projectile_Flame_Light",
        "^Effect_Flame_Light",
@@ -5478,11 +5508,12 @@
        "^IncendiaryBulletProjectile"
       ],
       "warheads": [
+       "^Warhead_Flame_Light_Flat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Light"
       ],
       "weapon": "ra1_soviets_rifleinfantry_carbine_incendiary",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -5494,19 +5525,19 @@
         "falloff": "100, 90, 78, 60, 0",
         "percentage_denominator": "10000",
         "spread": "200",
-        "tag": "Flame_LightFlatCompatibility",
+        "tag": "Flame_Light_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "4668",
       "reloaddelay": "50",
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
-       "^Compatibility_Flame_LightFlat",
+       "^Warhead_Flame_Light_Flat",
        "^Warhead_Flame_Light",
        "^Projectile_Flame_Light",
        "^Effect_Flame_Light",
@@ -5514,11 +5545,12 @@
        "^IncendiaryBulletProjectile"
       ],
       "warheads": [
+       "^Warhead_Flame_Light_Flat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Light"
       ],
       "weapon": "ra1_soviets_rifleinfantry_carbine_incendiary",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -5585,7 +5617,7 @@
         "damage": "20000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "tag": "MissileAP_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -5599,6 +5631,7 @@
        "RocketsRA"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "ra1_soviets_rocketsoldier_rocketsra",
@@ -5611,7 +5644,7 @@
         "damage": "20000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "tag": "MissileAP_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -5625,6 +5658,7 @@
        "RocketsRA"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "ra1_soviets_rocketsoldier_rocketsra",
@@ -5954,7 +5988,7 @@
         "damage": "20000",
         "falloff": "100, 0",
         "spread": "96",
-        "tag": "Railgun_HeavyFlatCompatibility",
+        "tag": "Railgun_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -5987,7 +6021,7 @@
       "requires": "!ra1_soviets_upgrade_incendiarybullets && !ra1_soviets_upgrade_teslaarcing && !ra1_soviets_upgrade_nucleartankshells",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Railgun_HeavyFlat",
+       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -5995,6 +6029,7 @@
        "^Grenade"
       ],
       "warheads": [
+       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "ra1_soviets_volkov_volkovmagneticweapon",
@@ -6008,7 +6043,7 @@
         "damage": "16000",
         "falloff": "100, 0",
         "spread": "96",
-        "tag": "Railgun_HeavyFlatCompatibility",
+        "tag": "Railgun_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -6048,7 +6083,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5660",
       "reloaddelay": "30",
@@ -6061,11 +6096,12 @@
        "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [
+       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Tesla_Heavy"
       ],
       "weapon": "ra1_soviets_volkov_volkovmagneticweapontesla",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "1",
@@ -6089,7 +6125,7 @@
         "damage": "80000",
         "falloff": "100, 0",
         "spread": "96",
-        "tag": "Railgun_HeavyFlatCompatibility",
+        "tag": "Railgun_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -6115,7 +6151,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.375,
+      "design_weapon_class": null,
       "minrange": "1080",
       "pricing": true,
       "range": "5400",
@@ -6129,10 +6165,11 @@
       ],
       "warheads": [
        "^Warhead_Nuclear_Super",
+       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "ra1_soviets_volkov_volkovmagneticweaponnuclearshells",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "2",
@@ -6149,7 +6186,7 @@
         "damage": "20000",
         "falloff": "100, 0",
         "spread": "96",
-        "tag": "Railgun_HeavyFlatCompatibility",
+        "tag": "Railgun_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -6175,7 +6212,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5400",
       "reloaddelay": "15",
@@ -6190,10 +6227,11 @@
       ],
       "warheads": [
        "^Warhead_Flame_Medium",
+       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "ra1_soviets_volkov_volkovmagneticweaponincendiary",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "2",
@@ -6203,7 +6241,7 @@
         "damage": "16000",
         "falloff": "100, 52, 0",
         "spread": "52",
-        "tag": "Quantum_HeavyFlatCompatibility",
+        "tag": "Quantum_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -6264,24 +6302,26 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5660",
       "reloaddelay": "30",
       "requires": "ra1_soviets_upgrade_incendiarybullets && ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@IncendiaryTesla",
       "versus_templates": [
-       "^Compatibility_Quantum_HeavyFlat",
+       "^Warhead_Quantum_Heavy_Flat",
        "ra1_soviets_volkov_volkovmagneticweapon",
        "^MediumFlameWeapon",
        "^TeslaWeapon",
        "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [
+       "^Warhead_Quantum_Heavy_Flat",
+       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "ra1_soviets_volkov_volkovmagneticweaponincendiarytesla",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "1",
@@ -6352,7 +6392,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "1080",
       "pricing": true,
       "range": "5400",
@@ -6367,10 +6407,11 @@
       ],
       "warheads": [
        "^Warhead_CannonNuke_Heavy",
+       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "ra1_soviets_volkov_volkovmagneticweaponincendiarynuclearshells",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -6381,7 +6422,7 @@
         "damage": "20000",
         "falloff": "100, 0",
         "spread": "96",
-        "tag": "Railgun_HeavyFlatCompatibility",
+        "tag": "Railgun_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -6414,7 +6455,7 @@
       "requires": "!ra1_soviets_upgrade_incendiarybullets && !ra1_soviets_upgrade_teslaarcing && !ra1_soviets_upgrade_nucleartankshells",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Compatibility_Railgun_HeavyFlat",
+       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -6422,6 +6463,7 @@
        "^Grenade"
       ],
       "warheads": [
+       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "ra1_soviets_volkov_volkovmagneticweapon",
@@ -6436,7 +6478,7 @@
         "damage": "16000",
         "falloff": "100, 0",
         "spread": "96",
-        "tag": "Railgun_HeavyFlatCompatibility",
+        "tag": "Railgun_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -6476,7 +6518,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5660",
       "reloaddelay": "30",
@@ -6489,11 +6531,12 @@
        "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [
+       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Tesla_Heavy"
       ],
       "weapon": "ra1_soviets_volkov_volkovmagneticweapontesla",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -6518,7 +6561,7 @@
         "damage": "80000",
         "falloff": "100, 0",
         "spread": "96",
-        "tag": "Railgun_HeavyFlatCompatibility",
+        "tag": "Railgun_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -6544,7 +6587,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.375,
+      "design_weapon_class": null,
       "minrange": "1080",
       "pricing": false,
       "range": "5400",
@@ -6558,10 +6601,11 @@
       ],
       "warheads": [
        "^Warhead_Nuclear_Super",
+       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "ra1_soviets_volkov_volkovmagneticweaponnuclearshells",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -6579,7 +6623,7 @@
         "damage": "20000",
         "falloff": "100, 0",
         "spread": "96",
-        "tag": "Railgun_HeavyFlatCompatibility",
+        "tag": "Railgun_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -6605,7 +6649,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5400",
       "reloaddelay": "15",
@@ -6620,10 +6664,11 @@
       ],
       "warheads": [
        "^Warhead_Flame_Medium",
+       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "ra1_soviets_volkov_volkovmagneticweaponincendiary",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -6634,7 +6679,7 @@
         "damage": "16000",
         "falloff": "100, 52, 0",
         "spread": "52",
-        "tag": "Quantum_HeavyFlatCompatibility",
+        "tag": "Quantum_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -6695,24 +6740,26 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5660",
       "reloaddelay": "30",
       "requires": "ra1_soviets_upgrade_incendiarybullets && ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@GARRISONEDIncendiaryTesla",
       "versus_templates": [
-       "^Compatibility_Quantum_HeavyFlat",
+       "^Warhead_Quantum_Heavy_Flat",
        "ra1_soviets_volkov_volkovmagneticweapon",
        "^MediumFlameWeapon",
        "^TeslaWeapon",
        "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [
+       "^Warhead_Quantum_Heavy_Flat",
+       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "ra1_soviets_volkov_volkovmagneticweaponincendiarytesla",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -6784,7 +6831,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "1080",
       "pricing": false,
       "range": "5400",
@@ -6799,10 +6846,11 @@
       ],
       "warheads": [
        "^Warhead_CannonNuke_Heavy",
+       "^Warhead_Railgun_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "ra1_soviets_volkov_volkovmagneticweaponincendiarynuclearshells",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -8223,29 +8271,30 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5454",
       "reloaddelay": "20",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ra1_soviets_btr80_machinegun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "4",
@@ -8255,12 +8304,12 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8181",
       "reloaddelay": "20",
@@ -8269,11 +8318,12 @@
        "ra1_soviets_btr80_machinegun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ra1_soviets_btr80_machinegun_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "4",
@@ -8283,7 +8333,7 @@
         "damage": "4000",
         "falloff": "100, 55, 0",
         "spread": "93",
-        "tag": "Tesla_HeavyFlatCompatibility",
+        "tag": "Tesla_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -8295,25 +8345,26 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5454",
       "reloaddelay": "20",
       "requires": "ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@TeslaUpgrade1",
       "versus_templates": [
-       "^Compatibility_Tesla_HeavyFlat",
+       "^Warhead_Tesla_Heavy_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
        "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_Tesla_Heavy"
       ],
       "weapon": "ra1_soviets_btr80_machinegun_tesla",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "4",
@@ -8323,7 +8374,7 @@
         "damage": "4000",
         "falloff": "100, 55, 0",
         "spread": "93",
-        "tag": "Tesla_HeavyFlatCompatibility",
+        "tag": "Tesla_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -8335,7 +8386,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5454",
       "reloaddelay": "20",
@@ -8345,11 +8396,12 @@
        "ra1_soviets_btr80_machinegun_tesla"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_Tesla_Heavy"
       ],
       "weapon": "ra1_soviets_btr80_machinegun_tesla_arc",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "4",
@@ -8359,7 +8411,7 @@
         "damage": "4000",
         "falloff": "100, 55, 0",
         "spread": "93",
-        "tag": "Tesla_HeavyFlatCompatibility",
+        "tag": "Tesla_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -8371,7 +8423,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8181",
       "reloaddelay": "20",
@@ -8381,11 +8433,12 @@
        "ra1_soviets_btr80_machinegun_tesla"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_Tesla_Heavy"
       ],
       "weapon": "ra1_soviets_btr80_machinegun_tesla_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "4",
@@ -8395,7 +8448,7 @@
         "damage": "4000",
         "falloff": "100, 55, 0",
         "spread": "93",
-        "tag": "Tesla_HeavyFlatCompatibility",
+        "tag": "Tesla_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -8407,7 +8460,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8181",
       "reloaddelay": "20",
@@ -8417,11 +8470,12 @@
        "ra1_soviets_btr80_machinegun_tesla_AA"
       ],
       "warheads": [
+       "^Warhead_Tesla_Heavy_Flat",
        "^Warhead_MissileAP_Light",
        "^Warhead_Tesla_Heavy"
       ],
       "weapon": "ra1_soviets_btr80_machinegun_tesla_arc_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -8501,12 +8555,12 @@
         "damage": "4000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_MediumFlatCompatibility",
+        "tag": "Flak_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8118",
       "reloaddelay": "5",
@@ -8515,11 +8569,12 @@
        "ra1_soviets_flaktruck_flak_cannon"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Bullet_Medium",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "ra1_soviets_flaktruck_flak_cannon_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "2",
@@ -8528,29 +8583,30 @@
         "damage": "4000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_MediumFlatCompatibility",
+        "tag": "Flak_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5412",
       "reloaddelay": "5",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^Compatibility_Flak_MediumFlat",
+       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Bullet_Medium",
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
        "^Effect_Flak_Medium"
       ],
       "warheads": [
+       "^Warhead_Flak_Medium_Flat",
        "^Warhead_Bullet_Medium",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "ra1_soviets_flaktruck_flak_cannon",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -8683,19 +8739,19 @@
         "damage": "4000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
-        "tag": "Flame_LightFlatCompatibility",
+        "tag": "Flame_Light_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "10",
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@UpgradeAG",
       "versus_templates": [
-       "^Compatibility_Flame_LightFlat",
+       "^Warhead_Flame_Light_Flat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Flame_Light",
@@ -8703,11 +8759,12 @@
        "^IncendiaryBulletProjectile"
       ],
       "warheads": [
+       "^Warhead_Flame_Light_Flat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ra1_soviets_gatlingtank_incendiaryragatlingtankcannon",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
@@ -8715,12 +8772,12 @@
         "damage": "4000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
-        "tag": "Flame_LightFlatCompatibility",
+        "tag": "Flame_Light_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7500",
       "reloaddelay": "10",
@@ -8730,11 +8787,12 @@
        "ra1_soviets_gatlingtank_incendiaryragatlingtankcannon"
       ],
       "warheads": [
+       "^Warhead_Flame_Light_Flat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ra1_soviets_gatlingtank_incendiaryragatlingtankcannon_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
@@ -9031,12 +9089,12 @@
         "damage": "16000",
         "falloff": "100, 45, 15, 0",
         "spread": "200",
-        "tag": "MissileHE_HeavyFlatCompatibility",
+        "tag": "MissileHE_Heavy_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "minrange": "2765",
       "pricing": true,
       "range": "13820",
@@ -9044,18 +9102,19 @@
       "requires": "!(ra1_soviets_upgrade_thermobaricrockets || ra1_soviets_upgrade_scorchedearth)",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_MissileHE_HeavyFlat",
+       "^Warhead_MissileHE_Heavy_Flat",
        "^Warhead_MissileHE_Heavy",
        "^Warhead_Concussion_Medium",
        "^Projectile_Missile_Heavy",
        "^Effect_Concussion_Medium"
       ],
       "warheads": [
+       "^Warhead_MissileHE_Heavy_Flat",
        "^Warhead_MissileHE_Heavy",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "ra1_soviets_grad_rocket",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "8",
@@ -9079,12 +9138,12 @@
         "damage": "16000",
         "falloff": "100, 45, 15, 0",
         "spread": "200",
-        "tag": "MissileHE_HeavyFlatCompatibility",
+        "tag": "MissileHE_Heavy_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "minrange": "2765",
       "pricing": true,
       "range": "13820",
@@ -9097,11 +9156,12 @@
        "ra1_soviets_grad_rocket"
       ],
       "warheads": [
+       "^Warhead_MissileHE_Heavy_Flat",
        "^Warhead_MissileHE_Heavy",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "ra1_soviets_grad_rocket_heavy",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -9249,7 +9309,7 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamageCompatibility",
+        "tag": "LaserExtraDamage_Auxiliary",
         "type": "SpreadDamage"
        },
        {
@@ -9290,13 +9350,14 @@
       "slot": "Armament@shtora",
       "versus_templates": [
        "^Warhead_Laser_Light",
-       "^Compatibility_Laser_ExtraDamage",
+       "^Warhead_Laser_ExtraDamage",
        "^LightFlameWeapon",
        "^FlakWeapon",
        "^LaserWeapon"
       ],
       "warheads": [
-       "^Warhead_Laser_Light"
+       "^Warhead_Laser_Light",
+       "^Warhead_Laser_ExtraDamage"
       ],
       "weapon": "ShtoraLaser",
       "weapon_class_source": "template"
@@ -9639,30 +9700,31 @@
         "damage": "12000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "300",
-        "tag": "Flame_MediumFlatCompatibility",
+        "tag": "Flame_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5469",
       "reloaddelay": "76",
       "requires": "ra1_soviets_upgrade_nucleartankshells",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Compatibility_Flame_MediumFlat",
+       "^Warhead_Flame_Medium_Flat",
        "^Warhead_Flame_Medium",
        "^Projectile_Flame_Medium",
        "^Effect_Flame_Medium",
        "105mm"
       ],
       "warheads": [
+       "^Warhead_Flame_Medium_Flat",
        "^Warhead_Flame_Medium",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "ra1_soviets_heavytank_105mmthermobaric",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -10218,7 +10280,7 @@
         "damage": "24000",
         "falloff": "100, 76, 57, 43, 31, 17, 0",
         "spread": "338",
-        "tag": "Thermobaric_HeavyFlatCompatibility",
+        "tag": "Thermobaric_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -10257,6 +10319,7 @@
        "ra120mmThermobaric"
       ],
       "warheads": [
+       "^Warhead_Thermobaric_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Flame_Heavy",
        "^Warhead_Demolition_Heavy"
@@ -10272,7 +10335,7 @@
         "damage": "24000",
         "falloff": "100, 76, 57, 43, 31, 17, 0",
         "spread": "338",
-        "tag": "Thermobaric_HeavyFlatCompatibility",
+        "tag": "Thermobaric_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -10311,6 +10374,7 @@
        "ra120mmThermobaric"
       ],
       "warheads": [
+       "^Warhead_Thermobaric_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Flame_Heavy",
        "^Warhead_Demolition_Heavy"
@@ -10872,12 +10936,13 @@
       "slot": "Armament@SECONDARY",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
-       "^Compatibility_MissileHE_HeavyFlat",
+       "^Warhead_MissileHE_Heavy_Flat",
        "^Projectile_Missile_Heavy",
        "^Effect_MissileHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAP_Heavy",
+       "^Warhead_MissileHE_Heavy_Flat"
       ],
       "weapon": "ra1_soviets_monstertank_missile",
       "weapon_class_source": "template"
@@ -11429,7 +11494,7 @@
       "requires": "!ra1_soviets_upgrade_nucleartankshells && !ra1_soviets_promotion_mammothtanktargetingcomputer",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_CannonHE_HeavyFlat",
+       "^Warhead_CannonHE_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -11437,6 +11502,7 @@
        "^MediumFlameWeapon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "ra1_soviets_siegemammothtank_ra120mm2",
@@ -11479,6 +11545,7 @@
        "ra1_soviets_siegemammothtank_ra120mm2"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "ra1_soviets_siegemammothtank_ra120mm2targetingcomputer",
@@ -11492,7 +11559,7 @@
         "damage": "48000",
         "falloff": "100, 76, 57, 43, 31, 17, 0",
         "spread": "338",
-        "tag": "Thermobaric_HeavyFlatCompatibility",
+        "tag": "Thermobaric_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -11528,7 +11595,7 @@
       "requires": "ra1_soviets_upgrade_nucleartankshells && !ra1_soviets_promotion_mammothtanktargetingcomputer",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Compatibility_Thermobaric_HeavyFlat",
+       "^Warhead_Thermobaric_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -11538,6 +11605,7 @@
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
+       "^Warhead_Thermobaric_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Flame_Heavy",
        "^Warhead_Demolition_Heavy"
@@ -11553,7 +11621,7 @@
         "damage": "48000",
         "falloff": "100, 76, 57, 43, 31, 17, 0",
         "spread": "338",
-        "tag": "Thermobaric_HeavyFlatCompatibility",
+        "tag": "Thermobaric_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -11592,6 +11660,7 @@
        "ra1_soviets_siegemammothtank_ra120mm2thermobaric"
       ],
       "warheads": [
+       "^Warhead_Thermobaric_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Flame_Heavy",
        "^Warhead_Demolition_Heavy"
@@ -12109,12 +12178,12 @@
         "damage": "24000",
         "falloff": "100, 45, 15, 0",
         "spread": "150",
-        "tag": "MissileHE_MediumFlatCompatibility",
+        "tag": "MissileHE_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "minrange": "1920",
       "pricing": true,
       "range": "9595",
@@ -12122,18 +12191,19 @@
       "requires": "!ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_MissileHE_MediumFlat",
+       "^Warhead_MissileHE_Medium_Flat",
        "^Warhead_MissileHE_Medium",
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
       ],
       "warheads": [
+       "^Warhead_MissileHE_Medium_Flat",
        "^Warhead_MissileHE_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "ra1_soviets_v1rockettruck_v1rockets",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "4",

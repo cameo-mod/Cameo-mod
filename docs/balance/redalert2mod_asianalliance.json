@@ -15,7 +15,7 @@
         "damage": "16000",
         "falloff": "100, 89, 75, 55, 0",
         "spread": "287",
-        "tag": "Plasma_MediumFlatCompatibility",
+        "tag": "Plasma_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -68,7 +68,7 @@
       "reloaddelay": "60",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Plasma_MediumFlat",
+       "^Warhead_Plasma_Medium_Flat",
        "^Warhead_Plasma_Medium",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
@@ -83,6 +83,7 @@
        "^Effect_Apoc_Explosion_RA2"
       ],
       "warheads": [
+       "^Warhead_Plasma_Medium_Flat",
        "^Warhead_Plasma_Medium",
        "^Warhead_CannonHE_Medium",
        "^Warhead_MissileAP_Medium"
@@ -156,7 +157,7 @@
         "damage": "12000",
         "falloff": "100, 0",
         "spread": "85",
-        "tag": "MissileAP_HeavyFlatCompatibility",
+        "tag": "MissileAP_Heavy_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -168,7 +169,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_MissileAP_HeavyFlat",
+       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_Concussion_Light",
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Heavy",
@@ -177,6 +178,7 @@
        "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_Concussion_Light",
        "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileAP_Medium"
@@ -192,7 +194,7 @@
         "damage": "12000",
         "falloff": "100, 0",
         "spread": "85",
-        "tag": "MissileAP_HeavyFlatCompatibility",
+        "tag": "MissileAP_Heavy_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -207,6 +209,7 @@
        "AsianPelicanMissile"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_Concussion_Light",
        "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileAP_Medium"
@@ -222,28 +225,29 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6100",
       "reloaddelay": "18",
       "requires": "asianalliance_doctrine_asianphalanx && !rank-elite",
       "slot": "Armament@MG",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^RA2HeavyCannon",
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "AsianPelicanMG",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "8",
@@ -253,12 +257,12 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7100",
       "reloaddelay": "18",
@@ -268,11 +272,12 @@
        "AsianPelicanMG"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "AsianPelicanMG_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -748,28 +753,29 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
       "reloaddelay": "12",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^RA2SmallArms",
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "AsianKamikazeChaingun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
@@ -1792,7 +1798,7 @@
         "damage": "16000",
         "falloff": "100, 89, 75, 55, 0",
         "spread": "383",
-        "tag": "Plasma_HeavyFlatCompatibility",
+        "tag": "Plasma_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -1846,7 +1852,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "minrange": "2800",
       "pricing": true,
       "range": "14000",
@@ -1857,11 +1863,12 @@
        "^Effect_Twlt_Large_RA2"
       ],
       "warheads": [
+       "^Warhead_Plasma_Heavy_Flat",
        "^Warhead_CannonHE_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "AsianTurretPlasma",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -1923,7 +1930,7 @@
         "damage": "8000",
         "falloff": "100, 89, 75, 55, 0",
         "spread": "383",
-        "tag": "Plasma_HeavyFlatCompatibility",
+        "tag": "Plasma_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -1970,22 +1977,24 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "14000",
       "reloaddelay": "13",
       "requires": "!asianalliance_upgrade_celestialpower",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Plasma_HeavyFlat",
+       "^Warhead_Plasma_Heavy_Flat",
        "^MediumMissile",
        "^FlakWeapon",
        "^TeslaWeapon",
        "^MagicWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Plasma_Heavy_Flat"
+      ],
       "weapon": "AsianPhotonCannon",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -1993,7 +2002,7 @@
         "damage": "8000",
         "falloff": "100, 52, 0",
         "spread": "52",
-        "tag": "Quantum_HeavyFlatCompatibility",
+        "tag": "Quantum_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -2040,19 +2049,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "14000",
       "reloaddelay": "13",
       "requires": "asianalliance_upgrade_celestialpower",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Compatibility_Quantum_HeavyFlat",
+       "^Warhead_Quantum_Heavy_Flat",
        "AsianPhotonCannon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Quantum_Heavy_Flat",
+       "^Warhead_Plasma_Heavy_Flat"
+      ],
       "weapon": "AsianPhotonCannon_EMP",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2231,7 +2243,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "minrange": "2400",
       "pricing": true,
       "range": "12000",
@@ -2243,10 +2255,11 @@
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium",
+       "^Warhead_MissileAA_Medium_Flat",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "AsianSpitfireRockets",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -2414,7 +2427,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "12",
@@ -2422,14 +2435,16 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_MissileHE_Medium",
-       "^Compatibility_MissileAP_MediumFlat",
+       "^Warhead_MissileAP_Medium_Flat",
        "AsianPhotonCannon"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium"
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_MissileAP_Medium_Flat",
+       "^Warhead_Plasma_Heavy_Flat"
       ],
       "weapon": "AsianPunisherAG",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
@@ -2484,7 +2499,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "12",
@@ -2496,10 +2511,12 @@
       ],
       "warheads": [
        "^Warhead_MissileQuantum_Medium",
-       "^Warhead_MissileHE_Medium"
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_MissileAP_Medium_Flat",
+       "^Warhead_Plasma_Heavy_Flat"
       ],
       "weapon": "AsianPunisherAG_EMP",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -2730,28 +2747,29 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5935",
       "reloaddelay": "16",
       "requires": "!asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^RA2SmallArms",
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ASDFGun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "3",
@@ -2768,7 +2786,7 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -2787,6 +2805,7 @@
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
@@ -2818,28 +2837,29 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5935",
       "reloaddelay": "16",
       "requires": "!asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^RA2SmallArms",
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ASDFGun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -2857,7 +2877,7 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -2876,6 +2896,7 @@
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
@@ -3758,29 +3779,30 @@
         "damage": "8000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_MediumFlatCompatibility",
+        "tag": "Concussion_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "92",
       "requires": "asianalliance_doctrine_modernizedinfantryequipment && !rank-elite",
       "slot": "Armament@GRENADE",
       "versus_templates": [
-       "^Compatibility_Concussion_MediumFlat",
+       "^Warhead_Concussion_Medium_Flat",
        "^Warhead_Concussion_Medium",
        "^Effect_Concussion_Medium",
        "^RA2MediumCannon"
       ],
       "warheads": [
+       "^Warhead_Concussion_Medium_Flat",
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "asianalliance_asianmilitia_grenade",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "2",
@@ -3790,12 +3812,12 @@
         "damage": "8000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_MediumFlatCompatibility",
+        "tag": "Concussion_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5500",
       "reloaddelay": "92",
@@ -3805,11 +3827,12 @@
        "asianalliance_asianmilitia_grenade"
       ],
       "warheads": [
+       "^Warhead_Concussion_Medium_Flat",
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "asianalliance_asianmilitia_grenade_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -3875,29 +3898,30 @@
         "damage": "8000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_MediumFlatCompatibility",
+        "tag": "Concussion_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "4500",
       "reloaddelay": "92",
       "requires": "asianalliance_doctrine_modernizedinfantryequipment && !rank-elite",
       "slot": "Armament@GRENADEG",
       "versus_templates": [
-       "^Compatibility_Concussion_MediumFlat",
+       "^Warhead_Concussion_Medium_Flat",
        "^Warhead_Concussion_Medium",
        "^Effect_Concussion_Medium",
        "^RA2MediumCannon"
       ],
       "warheads": [
+       "^Warhead_Concussion_Medium_Flat",
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "asianalliance_asianmilitia_grenade",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -3908,12 +3932,12 @@
         "damage": "8000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_MediumFlatCompatibility",
+        "tag": "Concussion_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5500",
       "reloaddelay": "92",
@@ -3923,11 +3947,12 @@
        "asianalliance_asianmilitia_grenade"
       ],
       "warheads": [
+       "^Warhead_Concussion_Medium_Flat",
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "asianalliance_asianmilitia_grenade_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -4380,30 +4405,31 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "3500",
       "reloaddelay": "70",
       "requires": "!rank-elite && !asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "asianalliance_fanatic_shotgun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "13",
@@ -4413,12 +4439,12 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "3500",
       "reloaddelay": "70",
@@ -4428,11 +4454,12 @@
        "asianalliance_fanatic_shotgun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "asianalliance_fanatic_shotgun_upgrade",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "20",
@@ -4442,12 +4469,12 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "3500",
       "reloaddelay": "70",
@@ -4457,11 +4484,12 @@
        "asianalliance_fanatic_shotgun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "asianalliance_fanatic_shotgun_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -4472,30 +4500,31 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "3500",
       "reloaddelay": "70",
       "requires": "!rank-elite && !asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "asianalliance_fanatic_shotgun",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -4506,12 +4535,12 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "3500",
       "reloaddelay": "70",
@@ -4521,11 +4550,12 @@
        "asianalliance_fanatic_shotgun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "asianalliance_fanatic_shotgun_upgrade",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -4536,12 +4566,12 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "3500",
       "reloaddelay": "70",
@@ -4551,11 +4581,12 @@
        "asianalliance_fanatic_shotgun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "asianalliance_fanatic_shotgun_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -4771,7 +4802,7 @@
         "damage": "16000",
         "falloff": "100, 89, 75, 55, 0",
         "spread": "383",
-        "tag": "Plasma_HeavyFlatCompatibility",
+        "tag": "Plasma_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -4825,14 +4856,14 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5190",
       "reloaddelay": "34",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Plasma_HeavyFlat",
+       "^Warhead_Plasma_Heavy_Flat",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",
@@ -4846,11 +4877,12 @@
        "^Effect_Apoc_Explosion_RA2"
       ],
       "warheads": [
+       "^Warhead_Plasma_Heavy_Flat",
        "^Warhead_CannonHE_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "AsianSinglePlasma",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "primary",
@@ -4861,7 +4893,7 @@
         "damage": "16000",
         "falloff": "100, 89, 75, 55, 0",
         "spread": "383",
-        "tag": "Plasma_HeavyFlatCompatibility",
+        "tag": "Plasma_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -4915,7 +4947,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5836",
       "reloaddelay": "34",
@@ -4925,11 +4957,12 @@
        "AsianSinglePlasma"
       ],
       "warheads": [
+       "^Warhead_Plasma_Heavy_Flat",
        "^Warhead_CannonHE_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "AsianSinglePlasma_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -4938,7 +4971,7 @@
         "damage": "16000",
         "falloff": "100, 89, 75, 55, 0",
         "spread": "383",
-        "tag": "Plasma_HeavyFlatCompatibility",
+        "tag": "Plasma_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -4992,14 +5025,14 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5190",
       "reloaddelay": "34",
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Compatibility_Plasma_HeavyFlat",
+       "^Warhead_Plasma_Heavy_Flat",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",
@@ -5013,11 +5046,12 @@
        "^Effect_Apoc_Explosion_RA2"
       ],
       "warheads": [
+       "^Warhead_Plasma_Heavy_Flat",
        "^Warhead_CannonHE_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "AsianSinglePlasma",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -5028,7 +5062,7 @@
         "damage": "16000",
         "falloff": "100, 89, 75, 55, 0",
         "spread": "383",
-        "tag": "Plasma_HeavyFlatCompatibility",
+        "tag": "Plasma_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -5082,7 +5116,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "5836",
       "reloaddelay": "34",
@@ -5092,11 +5126,12 @@
        "AsianSinglePlasma"
       ],
       "warheads": [
+       "^Warhead_Plasma_Heavy_Flat",
        "^Warhead_CannonHE_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "AsianSinglePlasma_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -5333,7 +5368,7 @@
         "damage": "12000",
         "falloff": "100, 0",
         "spread": "59",
-        "tag": "Arrow_LightFlatCompatibility",
+        "tag": "Arrow_Light_Flat",
         "type": "AreaDamage"
        },
        {
@@ -5394,7 +5429,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1350",
       "pricing": true,
       "range": "6740",
@@ -5402,14 +5437,17 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Arrow_LightFlat",
+       "^Warhead_Arrow_Light_Flat",
        "AsianPhotonCannon",
        "^Grenade",
        "^ArrowWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Arrow_Light_Flat",
+       "^Warhead_Plasma_Heavy_Flat"
+      ],
       "weapon": "AsianMaidenBow",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "6",
@@ -5419,7 +5457,7 @@
         "damage": "12000",
         "falloff": "100, 0",
         "spread": "59",
-        "tag": "Arrow_LightFlatCompatibility",
+        "tag": "Arrow_Light_Flat",
         "type": "AreaDamage"
        },
        {
@@ -5480,7 +5518,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1550",
       "pricing": true,
       "range": "7740",
@@ -5490,9 +5528,12 @@
       "versus_templates": [
        "AsianMaidenBow"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Arrow_Light_Flat",
+       "^Warhead_Plasma_Heavy_Flat"
+      ],
       "weapon": "AsianMaidenBow_elite",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -5503,7 +5544,7 @@
         "damage": "12000",
         "falloff": "100, 0",
         "spread": "59",
-        "tag": "Arrow_LightFlatCompatibility",
+        "tag": "Arrow_Light_Flat",
         "type": "AreaDamage"
        },
        {
@@ -5564,7 +5605,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1350",
       "pricing": false,
       "range": "6740",
@@ -5572,14 +5613,17 @@
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Compatibility_Arrow_LightFlat",
+       "^Warhead_Arrow_Light_Flat",
        "AsianPhotonCannon",
        "^Grenade",
        "^ArrowWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Arrow_Light_Flat",
+       "^Warhead_Plasma_Heavy_Flat"
+      ],
       "weapon": "AsianMaidenBow",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -5590,7 +5634,7 @@
         "damage": "12000",
         "falloff": "100, 0",
         "spread": "59",
-        "tag": "Arrow_LightFlatCompatibility",
+        "tag": "Arrow_Light_Flat",
         "type": "AreaDamage"
        },
        {
@@ -5651,7 +5695,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1550",
       "pricing": false,
       "range": "7740",
@@ -5661,9 +5705,12 @@
       "versus_templates": [
        "AsianMaidenBow"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Arrow_Light_Flat",
+       "^Warhead_Plasma_Heavy_Flat"
+      ],
       "weapon": "AsianMaidenBow_elite",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5820,7 +5867,7 @@
         "damage": "6000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_MediumFlatCompatibility",
+        "tag": "Flak_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -5833,10 +5880,11 @@
       "slot": "Armament@AA",
       "versus_templates": [
        "RA2FlakTrackGun",
-       "^Compatibility_Flak_MediumFlat"
+       "^Warhead_Flak_Medium_Flat"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium"
+       "^Warhead_Flak_Medium",
+       "^Warhead_Flak_Medium_Flat"
       ],
       "weapon": "AAGunBoatFlak",
       "weapon_class_source": "template"
@@ -5877,7 +5925,7 @@
         "damage": "6000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_MediumFlatCompatibility",
+        "tag": "Flak_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -5892,7 +5940,8 @@
        "AAGunBoatFlak"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium"
+       "^Warhead_Flak_Medium",
+       "^Warhead_Flak_Medium_Flat"
       ],
       "weapon": "AAGunBoatFlak_elite",
       "weapon_class_source": "template"
@@ -6175,28 +6224,29 @@
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "85",
-        "tag": "MissileAP_HeavyFlatCompatibility",
+        "tag": "MissileAP_Heavy_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "120",
       "slot": "Armament@Torp",
       "versus_templates": [
-       "^Compatibility_MissileAP_HeavyFlat",
+       "^Warhead_MissileAP_Heavy_Flat",
        "^RA2Grenade",
        "^RA2HeavyMissile",
        "^Effect_Watersplash_Large_RA2"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "AsianSmallTorpedo",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -6396,7 +6446,7 @@
         "damage": "8000",
         "falloff": "100, 89, 75, 55, 0",
         "spread": "383",
-        "tag": "Plasma_HeavyFlatCompatibility",
+        "tag": "Plasma_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -6443,7 +6493,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7168",
       "reloaddelay": "22",
@@ -6452,9 +6502,11 @@
       "versus_templates": [
        "AsianPhotonCannon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Plasma_Heavy_Flat"
+      ],
       "weapon": "AsianQuasarBoatAG",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "3",
@@ -6464,7 +6516,7 @@
         "damage": "8000",
         "falloff": "100, 52, 0",
         "spread": "52",
-        "tag": "Quantum_HeavyFlatCompatibility",
+        "tag": "Quantum_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -6511,19 +6563,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7168",
       "reloaddelay": "22",
       "requires": "asianalliance_upgrade_celestialpower",
       "slot": "Armament@UpgradeAG",
       "versus_templates": [
-       "^Compatibility_Quantum_HeavyFlat",
+       "^Warhead_Quantum_Heavy_Flat",
        "AsianQuasarBoatAG"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Quantum_Heavy_Flat",
+       "^Warhead_Plasma_Heavy_Flat"
+      ],
       "weapon": "AsianQuasarBoatAG_EMP",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "3",
@@ -6533,7 +6588,7 @@
         "damage": "8000",
         "falloff": "100, 70, 30, 0",
         "spread": "300",
-        "tag": "MissileAA_MediumFlatCompatibility",
+        "tag": "MissileAA_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -6580,19 +6635,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7168",
       "reloaddelay": "22",
       "requires": "!asianalliance_upgrade_celestialpower",
       "slot": "Armament@AA",
       "versus_templates": [
-       "^Compatibility_MissileAA_MediumFlat",
+       "^Warhead_MissileAA_Medium_Flat",
        "AsianPhotonCannon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Medium_Flat",
+       "^Warhead_Plasma_Heavy_Flat"
+      ],
       "weapon": "AsianQuasarBoat_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "3",
@@ -6649,7 +6707,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7168",
       "reloaddelay": "22",
@@ -6660,10 +6718,12 @@
        "AsianQuasarBoat_AA"
       ],
       "warheads": [
-       "^Warhead_MissileQuantum_Medium"
+       "^Warhead_MissileQuantum_Medium",
+       "^Warhead_MissileAA_Medium_Flat",
+       "^Warhead_Plasma_Heavy_Flat"
       ],
       "weapon": "AsianQuasarBoat_EMP_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -8095,7 +8155,7 @@
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_CannonHE_MediumFlat",
+       "^Warhead_CannonHE_Medium_Flat",
        "^Grenade",
        "^ShrapnelWeapon",
        "^LightFlameWeapon",
@@ -8104,6 +8164,7 @@
        "^RA2MediumCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "AsianLynxTankCannon",
@@ -8169,6 +8230,7 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "AsianLynxTankCannon_elite",
@@ -8182,28 +8244,29 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5357",
       "reloaddelay": "51",
       "requires": "asianalliance_doctrine_asianphalanx && !rank-elite",
       "slot": "Armament@MG",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^RA2SmallArms",
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "AsianLynxMG",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "6",
@@ -8213,12 +8276,12 @@
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6357",
       "reloaddelay": "51",
@@ -8229,11 +8292,12 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "AsianLynxMG_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -8380,7 +8444,7 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -8391,7 +8455,7 @@
       "reloaddelay": "12",
       "slot": "Armament@1",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
@@ -8399,6 +8463,7 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
@@ -8412,7 +8477,7 @@
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -8424,7 +8489,7 @@
       "requires": "asianalliance_doctrine_heavypulverizerweapons",
       "slot": "Armament@2",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
@@ -8432,6 +8497,7 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
@@ -8523,7 +8589,7 @@
         "damage": "10000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -8539,6 +8605,7 @@
        "AsianPulverizerGatling"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
@@ -8566,7 +8633,7 @@
         "damage": "10000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -8583,6 +8650,7 @@
        "AsianPulverizerGatling"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
@@ -8660,7 +8728,7 @@
         "damage": "8000",
         "falloff": "100, 89, 75, 55, 0",
         "spread": "383",
-        "tag": "Plasma_HeavyFlatCompatibility",
+        "tag": "Plasma_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -8707,7 +8775,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "33",
@@ -8716,9 +8784,11 @@
       "versus_templates": [
        "AsianPhotonCannon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Plasma_Heavy_Flat"
+      ],
       "weapon": "AsianQuasarAG",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -8726,7 +8796,7 @@
         "damage": "8000",
         "falloff": "100, 52, 0",
         "spread": "52",
-        "tag": "Quantum_HeavyFlatCompatibility",
+        "tag": "Quantum_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -8773,19 +8843,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "33",
       "requires": "asianalliance_upgrade_celestialpower",
       "slot": "Armament@UpgradeAG",
       "versus_templates": [
-       "^Compatibility_Quantum_HeavyFlat",
+       "^Warhead_Quantum_Heavy_Flat",
        "AsianQuasarAG"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Quantum_Heavy_Flat",
+       "^Warhead_Plasma_Heavy_Flat"
+      ],
       "weapon": "AsianQuasarAG_EMP",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -8793,7 +8866,7 @@
         "damage": "8000",
         "falloff": "100, 70, 30, 0",
         "spread": "300",
-        "tag": "MissileAA_MediumFlatCompatibility",
+        "tag": "MissileAA_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -8840,19 +8913,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "33",
       "requires": "!asianalliance_upgrade_celestialpower",
       "slot": "Armament@AA",
       "versus_templates": [
-       "^Compatibility_MissileAA_MediumFlat",
+       "^Warhead_MissileAA_Medium_Flat",
        "AsianPhotonCannon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Medium_Flat",
+       "^Warhead_Plasma_Heavy_Flat"
+      ],
       "weapon": "AsianQuasar_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -8907,7 +8983,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "33",
@@ -8918,10 +8994,12 @@
        "AsianQuasar_AA"
       ],
       "warheads": [
-       "^Warhead_MissileQuantum_Medium"
+       "^Warhead_MissileQuantum_Medium",
+       "^Warhead_MissileAA_Medium_Flat",
+       "^Warhead_Plasma_Heavy_Flat"
       ],
       "weapon": "AsianQuasar_EMP_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -9145,7 +9223,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "minrange": "1700",
       "pricing": true,
       "range": "8500",
@@ -9153,7 +9231,7 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
-       "^Compatibility_MissileAA_MediumFlat",
+       "^Warhead_MissileAA_Medium_Flat",
        "^HeavyMissile",
        "^FlakWeapon",
        "^RA2Grenade",
@@ -9161,10 +9239,11 @@
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium",
+       "^Warhead_MissileAA_Medium_Flat",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "AsianMLRS",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -9236,7 +9315,7 @@
         "damage": "24000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "275",
-        "tag": "Chemical_MediumFlatCompatibility",
+        "tag": "Chemical_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -9276,14 +9355,14 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "60",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Chemical_MediumFlat",
+       "^Warhead_Chemical_Medium_Flat",
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
        "^HeavyChemicalWeapon",
@@ -9292,6 +9371,7 @@
        "^RA2Grenade"
       ],
       "warheads": [
+       "^Warhead_Chemical_Medium_Flat",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "AsianChemical",
@@ -9305,7 +9385,7 @@
         "damage": "24000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "275",
-        "tag": "Chemical_MediumFlatCompatibility",
+        "tag": "Chemical_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -9345,7 +9425,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "60",
@@ -9355,6 +9435,7 @@
        "AsianChemical"
       ],
       "warheads": [
+       "^Warhead_Chemical_Medium_Flat",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "AsianChemical_elite",
@@ -9429,28 +9510,29 @@
         "damage": "8000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_MediumFlatCompatibility",
+        "tag": "Concussion_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4567",
       "reloaddelay": "92",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Concussion_MediumFlat",
+       "^Warhead_Concussion_Medium_Flat",
        "^Warhead_Concussion_Medium",
        "^Effect_Concussion_Medium",
        "^RA2MediumCannon"
       ],
       "warheads": [
+       "^Warhead_Concussion_Medium_Flat",
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "AsianGrenade",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -9532,7 +9614,7 @@
         "damage": "16000",
         "falloff": "100, 89, 75, 55, 0",
         "spread": "383",
-        "tag": "Plasma_HeavyFlatCompatibility",
+        "tag": "Plasma_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -9586,7 +9668,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7777",
       "reloaddelay": "25",
@@ -9596,11 +9678,12 @@
        "AsianSinglePlasma"
       ],
       "warheads": [
+       "^Warhead_Plasma_Heavy_Flat",
        "^Warhead_CannonHE_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "AsianTwinPlasma",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "4",
@@ -9610,7 +9693,7 @@
         "damage": "16000",
         "falloff": "100, 89, 75, 55, 0",
         "spread": "383",
-        "tag": "Plasma_HeavyFlatCompatibility",
+        "tag": "Plasma_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -9664,7 +9747,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8888",
       "reloaddelay": "25",
@@ -9674,11 +9757,12 @@
        "AsianTwinPlasma"
       ],
       "warheads": [
+       "^Warhead_Plasma_Heavy_Flat",
        "^Warhead_CannonHE_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "AsianTwinPlasma_elite",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {

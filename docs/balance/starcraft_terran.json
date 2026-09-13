@@ -13,7 +13,7 @@
         "damage": "0",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -87,7 +87,7 @@
       "reloaddelay": "38",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Laser_HeavyFlat",
+       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -101,6 +101,7 @@
        "^LaserWeapon"
       ],
       "warheads": [
+       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "BCLaser",
@@ -174,21 +175,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6800",
       "reloaddelay": "38",
       "requires": "terran_upgrade_yamatocannonandtacticaljumpupgrade",
       "slot": "Armament@Yamato",
       "versus_templates": [
-       "^Compatibility_Plasma_HeavyFlat",
+       "^Warhead_Plasma_Heavy_Flat",
        "BCLaser"
       ],
       "warheads": [
+       "^Warhead_Plasma_Heavy_Flat",
+       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "BCYamatoCannon",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -426,21 +429,21 @@
         "damage": "48000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_HeavyFlatCompatibility",
+        "tag": "Laser_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamageCompatibility",
+        "tag": "LaserExtraDamage_Auxiliary",
         "type": "SpreadDamage"
        },
        {
         "damage": "1000",
         "falloff": null,
         "spread": "500",
-        "tag": "RailgunExtraDamageCompatibility",
+        "tag": "RailgunExtraDamage_Auxiliary",
         "type": "SpreadDamage"
        },
        {
@@ -494,16 +497,16 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "80",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Laser_HeavyFlat",
+       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Laser_Heavy",
-       "^Compatibility_Laser_ExtraDamage",
-       "^Compatibility_Railgun_ExtraDamage",
+       "^Warhead_Laser_ExtraDamage",
+       "^Warhead_Railgun_ExtraDamage",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -516,11 +519,14 @@
        "^LaserWeapon"
       ],
       "warheads": [
+       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_Laser_Heavy",
+       "^Warhead_Laser_ExtraDamage",
+       "^Warhead_Railgun_ExtraDamage",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "PhobosLaser",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "secondary",
@@ -590,21 +596,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6800",
       "reloaddelay": "38",
       "requires": "terran_upgrade_yamatocannonandtacticaljumpupgrade",
       "slot": "Armament@Yamato",
       "versus_templates": [
-       "^Compatibility_Plasma_HeavyFlat",
+       "^Warhead_Plasma_Heavy_Flat",
        "BCLaser"
       ],
       "warheads": [
+       "^Warhead_Plasma_Heavy_Flat",
+       "^Warhead_Laser_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "BCYamatoCannon",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -1491,7 +1499,7 @@
         "damage": "16000",
         "falloff": "100, 0",
         "spread": "85",
-        "tag": "MissileAP_HeavyFlatCompatibility",
+        "tag": "MissileAP_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -1538,13 +1546,13 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "90",
       "slot": "Armament@SECONDARY1",
       "versus_templates": [
-       "^Compatibility_MissileAP_HeavyFlat",
+       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -1557,11 +1565,12 @@
        "^D2KRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "WyvernRockets",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "4",
@@ -1571,7 +1580,7 @@
         "damage": "16000",
         "falloff": "100, 0",
         "spread": "85",
-        "tag": "MissileAP_HeavyFlatCompatibility",
+        "tag": "MissileAP_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -1618,13 +1627,13 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "90",
       "slot": "Armament@SECONDARY2",
       "versus_templates": [
-       "^Compatibility_MissileAP_HeavyFlat",
+       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -1637,11 +1646,12 @@
        "^D2KRocket"
       ],
       "warheads": [
+       "^Warhead_MissileAP_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "WyvernRockets",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -3473,7 +3483,7 @@
         "damage": "36000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -3484,7 +3494,7 @@
       "reloaddelay": "25",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Warhead_CannonHE_Heavy",
@@ -3492,6 +3502,7 @@
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Warhead_CannonHE_Heavy"
@@ -3506,7 +3517,7 @@
         "damage": "36000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -3517,7 +3528,7 @@
       "reloaddelay": "25",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Warhead_CannonHE_Heavy",
@@ -3525,6 +3536,7 @@
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Warhead_CannonHE_Heavy"
@@ -3635,14 +3647,15 @@
       "slot": "Armament@1",
       "versus_templates": [
        "^Warhead_MissileHE_Medium",
-       "^Compatibility_MissileAP_MediumFlat",
+       "^Warhead_MissileAP_Medium_Flat",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^TankDestroyerCannon",
        "^MediumMissile"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium"
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_MissileAP_Medium_Flat"
       ],
       "weapon": "MarauderMissiles",
       "weapon_class_source": "template"
@@ -3680,14 +3693,15 @@
       "slot": "Armament@GARRISONED1",
       "versus_templates": [
        "^Warhead_MissileHE_Medium",
-       "^Compatibility_MissileAP_MediumFlat",
+       "^Warhead_MissileAP_Medium_Flat",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^TankDestroyerCannon",
        "^MediumMissile"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium"
+       "^Warhead_MissileHE_Medium",
+       "^Warhead_MissileAP_Medium_Flat"
       ],
       "weapon": "MarauderMissiles",
       "weapon_class_source": "template"
@@ -3754,7 +3768,7 @@
         "damage": "36000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -3765,7 +3779,7 @@
       "reloaddelay": "26",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Warhead_CannonHE_Heavy",
@@ -3773,6 +3787,7 @@
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Warhead_CannonHE_Heavy"
@@ -3789,7 +3804,7 @@
         "damage": "36000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
+        "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -3800,7 +3815,7 @@
       "reloaddelay": "26",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Warhead_CannonHE_Heavy",
@@ -3808,6 +3823,7 @@
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Warhead_CannonHE_Heavy"
@@ -4214,7 +4230,7 @@
         "damage": "12000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "233",
-        "tag": "Demolition_LightFlatCompatibility",
+        "tag": "Demolition_Light_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -4226,7 +4242,7 @@
       "reloaddelay": "45",
       "slot": "Armament@Grenade",
       "versus_templates": [
-       "^Compatibility_Demolition_LightFlat",
+       "^Warhead_Demolition_Light_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Projectile_Grenade_Light",
@@ -4236,6 +4252,7 @@
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Heavy"
@@ -4320,7 +4337,7 @@
         "damage": "12000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "233",
-        "tag": "Demolition_LightFlatCompatibility",
+        "tag": "Demolition_Light_Flat",
         "type": "AreaDamage"
        }
       ],
@@ -4332,7 +4349,7 @@
       "reloaddelay": "45",
       "slot": "Armament@GARRISONEDGrenade",
       "versus_templates": [
-       "^Compatibility_Demolition_LightFlat",
+       "^Warhead_Demolition_Light_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Projectile_Grenade_Light",
@@ -4342,6 +4359,7 @@
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light_Flat",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Heavy"
@@ -5482,12 +5500,13 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_MissileAP_Light",
-       "^Compatibility_MissileHE_LightFlat",
+       "^Warhead_MissileHE_Light_Flat",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light"
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileHE_Light_Flat"
       ],
       "weapon": "CycloneRockets",
       "weapon_class_source": "template"
@@ -5515,7 +5534,8 @@
        "CycloneRockets"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light"
+       "^Warhead_MissileAP_Light",
+       "^Warhead_MissileHE_Light_Flat"
       ],
       "weapon": "CycloneRocketsLockOn",
       "weapon_class_source": "template"
@@ -5805,13 +5825,13 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6479",
       "reloaddelay": "34",
       "slot": "Armament@G1",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -5820,11 +5840,12 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "GoliathMk2MG",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "4",
@@ -5853,13 +5874,13 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6479",
       "reloaddelay": "34",
       "slot": "Armament@G2",
       "versus_templates": [
-       "^Compatibility_Bullet_MediumFlat",
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -5868,11 +5889,12 @@
        "^RA2Chaingun"
       ],
       "warheads": [
+       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "GoliathMk2MG",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
@@ -6390,30 +6412,31 @@
         "damage": "30000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
-        "tag": "CannonHE_HeavyFlatCompatibility",
+        "tag": "CannonHE_Heavy_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6114",
       "reloaddelay": "37",
       "requires": "undeployed",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_CannonHE_HeavyFlat",
+       "^Warhead_CannonHE_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_CannonAP_Light",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "SiegeTankCannon",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "deployed",
@@ -6422,7 +6445,7 @@
         "damage": "140000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
-        "tag": "CannonHE_HeavyFlatCompatibility",
+        "tag": "CannonHE_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -6525,7 +6548,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "2355",
       "pricing": true,
       "range": "11775",
@@ -6533,7 +6556,7 @@
       "requires": "deployed",
       "slot": "Armament@DEPLOYED",
       "versus_templates": [
-       "^Compatibility_CannonHE_HeavyFlat",
+       "^Warhead_CannonHE_Heavy_Flat",
        "^NuclearWarhead",
        "^LightMissile",
        "^LightChemicalWeapon",
@@ -6549,9 +6572,11 @@
        "^MediumCannon",
        "^TankDestroyerCannon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy_Flat"
+      ],
       "weapon": "SiegeTankSiegeCannon",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6626,7 +6651,7 @@
         "damage": "20000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "233",
-        "tag": "Demolition_LightFlatCompatibility",
+        "tag": "Demolition_Light_Flat",
         "type": "AreaDamage"
        },
        {
@@ -6659,13 +6684,13 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4800",
       "reloaddelay": "25",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Demolition_LightFlat",
+       "^Warhead_Demolition_Light_Flat",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",
@@ -6675,6 +6700,7 @@
        "^TankDestroyerCannon"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "VultureGrenade",
@@ -6783,13 +6809,14 @@
       "reloaddelay": "44",
       "slot": "Armament@Cannon",
       "versus_templates": [
-       "^Compatibility_CannonHE_HeavyFlat",
+       "^Warhead_CannonHE_Heavy_Flat",
        "^LightFlameWeapon",
        "^Chaingun",
        "^ShrapnelWeapon",
        "^RA2HeavyCannon"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "SCTyr",

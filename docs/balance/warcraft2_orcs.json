@@ -2000,6 +2000,7 @@
        "wc2arrowFire"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "wc2axeFire",
@@ -2061,6 +2062,7 @@
        "wc2arrowFire"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "wc2axeFire",
@@ -2343,6 +2345,7 @@
        "wc2arrowFire"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "wc2axeFire",
@@ -2404,6 +2407,7 @@
        "wc2arrowFire"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "wc2axeFire",
@@ -2523,6 +2527,7 @@
        "wc2arrowFire"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "wc2axeFire",
@@ -2584,6 +2589,7 @@
        "wc2arrowFire"
       ],
       "warheads": [
+       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "wc2axeFire",
@@ -2655,7 +2661,7 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamageCompatibility",
+        "tag": "LaserExtraDamage_Auxiliary",
         "type": "SpreadDamage"
        },
        {
@@ -2732,6 +2738,8 @@
        "wc2highArrowFire"
       ],
       "warheads": [
+       "^Warhead_Laser_ExtraDamage",
+       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "wc2axeFirespear",
@@ -2744,7 +2752,7 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamageCompatibility",
+        "tag": "LaserExtraDamage_Auxiliary",
         "type": "SpreadDamage"
        },
        {
@@ -2821,6 +2829,8 @@
        "wc2highArrowFire"
       ],
       "warheads": [
+       "^Warhead_Laser_ExtraDamage",
+       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "wc2axeFirespear",
@@ -4379,7 +4389,7 @@
         "damage": "140000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
-        "tag": "CannonHE_HeavyFlatCompatibility",
+        "tag": "CannonHE_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -4482,14 +4492,14 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "2240",
       "pricing": true,
       "range": "11200",
       "reloaddelay": "100",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_CannonHE_HeavyFlat",
+       "^Warhead_CannonHE_Heavy_Flat",
        "^NuclearWarhead",
        "^LightMissile",
        "^LightChemicalWeapon",
@@ -4505,9 +4515,11 @@
        "^MediumCannon",
        "^TankDestroyerCannon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy_Flat"
+      ],
       "weapon": "SiegeEngineCannon",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

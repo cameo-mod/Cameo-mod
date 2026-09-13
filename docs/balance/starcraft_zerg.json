@@ -333,7 +333,7 @@
         "damage": "44000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "275",
-        "tag": "Chemical_MediumFlatCompatibility",
+        "tag": "Chemical_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -376,6 +376,7 @@
        "MutaliskSpore"
       ],
       "warheads": [
+       "^Warhead_Chemical_Medium_Flat",
        "^Warhead_Chemical_Medium"
       ],
       "weapon": "SCDevourerAA",
@@ -447,7 +448,7 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamageCompatibility",
+        "tag": "LaserExtraDamage_Auxiliary",
         "type": "SpreadDamage"
        },
        {
@@ -501,7 +502,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Chemical_Medium",
-       "^Compatibility_Laser_ExtraDamage",
+       "^Warhead_Laser_ExtraDamage",
        "^LightFlameWeapon",
        "^MediumMissile",
        "^ShrapnelWeapon",
@@ -510,7 +511,8 @@
        "^LaserWeapon"
       ],
       "warheads": [
-       "^Warhead_Chemical_Medium"
+       "^Warhead_Chemical_Medium",
+       "^Warhead_Laser_ExtraDamage"
       ],
       "weapon": "DreadshroudSpore",
       "weapon_class_source": "template"
@@ -656,7 +658,7 @@
         "damage": "24000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_MediumFlatCompatibility",
+        "tag": "Concussion_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -682,13 +684,13 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "60",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Concussion_MediumFlat",
+       "^Warhead_Concussion_Medium_Flat",
        "^Warhead_Concussion_Medium",
        "^Warhead_Concussion_Light",
        "^Grenade",
@@ -696,11 +698,12 @@
        "^HeavyBomb"
       ],
       "warheads": [
+       "^Warhead_Concussion_Medium_Flat",
        "^Warhead_Concussion_Medium",
        "^Warhead_Concussion_Light"
       ],
       "weapon": "GuardianShoot",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -761,7 +764,7 @@
         "damage": "32000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "275",
-        "tag": "Chemical_MediumFlatCompatibility",
+        "tag": "Chemical_Medium_Flat",
         "type": "AreaDamage"
        },
        {
@@ -800,7 +803,7 @@
       "reloaddelay": "20",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_Chemical_MediumFlat",
+       "^Warhead_Chemical_Medium_Flat",
        "^Warhead_Chemical_Medium",
        "^SwordWeapon",
        "^MediumChemicalWeapon",
@@ -808,6 +811,7 @@
        "^ArrowWeapon"
       ],
       "warheads": [
+       "^Warhead_Chemical_Medium_Flat",
        "^Warhead_Chemical_Medium"
       ],
       "weapon": "MutaliskSpore",
@@ -1036,12 +1040,12 @@
         "damage": "100000",
         "falloff": "100, 70, 30, 0",
         "spread": "400",
-        "tag": "MissileAA_HeavyFlatCompatibility",
+        "tag": "MissileAA_Heavy_Flat",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "2000",
       "reloaddelay": "25",
@@ -1050,11 +1054,12 @@
        "SCScourgeExplosion"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Heavy_Flat",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "ScourgeExplosion",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -1915,7 +1920,7 @@
         "damage": "25000",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "Melee_HeavyFlatCompatibility",
+        "tag": "Melee_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -1948,7 +1953,7 @@
       "requires": "sunken",
       "slot": "Armament@sunken",
       "versus_templates": [
-       "^Compatibility_Melee_HeavyFlat",
+       "^Warhead_Melee_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -1957,6 +1962,7 @@
        "^SwordWeapon"
       ],
       "warheads": [
+       "^Warhead_Melee_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "Tentacle",
@@ -2073,7 +2079,7 @@
         "damage": "25000",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "Melee_HeavyFlatCompatibility",
+        "tag": "Melee_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -2106,7 +2112,7 @@
       "requires": "sunken",
       "slot": "Armament@sunken",
       "versus_templates": [
-       "^Compatibility_Melee_HeavyFlat",
+       "^Warhead_Melee_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -2115,6 +2121,7 @@
        "^SwordWeapon"
       ],
       "warheads": [
+       "^Warhead_Melee_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "Tentacle",
@@ -2230,7 +2237,7 @@
         "damage": "25000",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "Melee_HeavyFlatCompatibility",
+        "tag": "Melee_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -2263,7 +2270,7 @@
       "requires": "sunken",
       "slot": "Armament@sunken",
       "versus_templates": [
-       "^Compatibility_Melee_HeavyFlat",
+       "^Warhead_Melee_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -2272,6 +2279,7 @@
        "^SwordWeapon"
       ],
       "warheads": [
+       "^Warhead_Melee_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "Tentacle",
@@ -2388,7 +2396,7 @@
         "damage": "25000",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "Melee_HeavyFlatCompatibility",
+        "tag": "Melee_Heavy_Flat",
         "type": "AreaDamage"
        },
        {
@@ -2421,7 +2429,7 @@
       "requires": "sunken",
       "slot": "Armament@sunken",
       "versus_templates": [
-       "^Compatibility_Melee_HeavyFlat",
+       "^Warhead_Melee_Heavy_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -2430,6 +2438,7 @@
        "^SwordWeapon"
       ],
       "warheads": [
+       "^Warhead_Melee_Heavy_Flat",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "Tentacle",
