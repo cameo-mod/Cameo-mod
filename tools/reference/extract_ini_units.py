@@ -140,6 +140,15 @@ SECTION = re.compile(r"^\s*\[([^\]]+)\]")
 KV = re.compile(r"^\s*([$A-Za-z0-9_.]+)\s*=\s*([^;]*)")
 
 
+# ⛔ THE MINIMUM INTER-SHOT DELAY, and the whole of the cycle model for a burst (maintainer,
+# 2026-09-14): *"if there is no burst delay you can use the minimal allowed value of 1 tick
+# between the bursts"*. TS/RA2 rules cannot declare one, so there is no value to read and no
+# reason to prefer any number above the engine floor. OpenRA's own `WeaponInfo.BurstDelays`
+# defaults to 5, but that is a different engine's default for a field these sources do not
+# have - borrowing it would invent evidence rather than bound it.
+BURST_DELAY_TICKS = 1
+
+
 def read_ini(path: pathlib.Path) -> dict[str, dict[str, str]]:
     """{section: {key: value}}. latin-1 so every byte round-trips — these are not UTF-8."""
     out: dict[str, dict[str, str]] = {}
@@ -582,8 +591,13 @@ def weapon_of(ini: dict, wname: str, engine: str) -> dict:
     #   * declared markers (railgun identity — even beside a positive `Damage` literal — a
     #     non-zero `AmbientDamage`, fire/spark particles) → incomplete, `exotic_channels`;
     #   * dangling/absent warhead → incomplete, `missing_dependency`;
-    #   * `Burst` > 1 → incomplete, `burst_unfolded` — damage/ROF is one shot per cycle and
-    #     cannot describe the declared multi-shot cadence until a cycle model exists;
+    #   * `Burst` > 1 → ⭐ FOLDED, not refused (maintainer ruling 2026-09-14). This used to be
+    #     `incomplete, burst_unfolded` because "damage/ROF is one shot per cycle and cannot
+    #     describe the declared multi-shot cadence UNTIL A CYCLE MODEL EXISTS". The ruling
+    #     supplies that model: *"if there is no burst delay you can use the minimal allowed
+    #     value of 1 tick between the bursts"*. These INI engines do not let a rules file
+    #     declare an inter-shot delay at all, so there is nothing to read and the minimum is
+    #     the only principled floor. See BURST_DELAY_TICKS;
     #   * an effect-system reference (AttachedParticleSystem / warhead `Particle`) →
     #     incomplete, `effect_reference` — an effect the fold cannot model;
     #   * missing/zero `Damage` → incomplete, `direct_undeclared` — the absence of known
@@ -602,15 +616,20 @@ def weapon_of(ini: dict, wname: str, engine: str) -> dict:
         evidence, reason = "incomplete", "exotic_channels"
     elif not wh_resolved:
         evidence, reason = "incomplete", "missing_dependency"
-    elif burst is not None and burst > 1:
-        evidence, reason = "incomplete", "burst_unfolded"
     elif channels.get("w_particle_system") or channels.get("w_attached_particle_system"):
         evidence, reason = "incomplete", "effect_reference"
     elif not dmg:
         evidence, reason = "incomplete", "direct_undeclared"
     else:
         evidence, reason = "nominal_direct", None
-    dps = (dmg / rof) if (dmg and rof) else None
+    # ⭐ THE BURST FOLD (maintainer, 2026-09-14). `Burst` shots leave the barrel inside one
+    # cycle, so the cadence is damage x burst over the reload PLUS the gaps between those
+    # shots. The INI engines expose no inter-shot delay, so the ruling takes the minimum the
+    # engine allows - 1 tick - which is the shortest cycle and therefore the HIGHEST rate the
+    # declaration can support. That makes every folded figure an UPPER bound on the peer's
+    # cadence, which is the honest direction for a floor assumption to err in.
+    dps = (dmg * (burst or 1) / (rof + ((burst or 1) - 1) * BURST_DELAY_TICKS)
+           if (dmg and rof) else None)
     return {
         "weapon": wname or None,
         "w_damage": dmg,

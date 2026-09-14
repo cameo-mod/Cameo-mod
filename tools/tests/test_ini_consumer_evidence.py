@@ -473,12 +473,13 @@ class BoundaryTest(unittest.TestCase):
         out = {r["id"]: r for r in rd.ini_rows()}
         rail = out["RAILHERO"] if "RAILHERO" in out else None
         # the rail hero is build-limit 1: it withholds in the HERO loader, the ordinary lane
+        # ⭐ THE LATER FOLD ARRIVED (maintainer, 2026-09-14): a burst is now folded at the
+        # engine-minimum 1 tick between shots rather than withheld, so this row VOTES.
         burst = out["BURST2N"]
-        self.assertIsNone(burst["w_dps"])
-        self.assertEqual(burst["w_dps_raw"], 2.0)       # the direct-channel diagnostic
-        self.assertEqual(burst["w_evidence"], "incomplete")
-        self.assertEqual(burst["w_evidence_reason"], "burst_unfolded")
-        self.assertEqual(burst["w_burst"], 2)           # raw cadence survives for the later fold
+        self.assertIsNotNone(burst["w_dps"])
+        self.assertEqual(burst["w_evidence"], "nominal_direct")
+        self.assertIsNone(burst.get("w_evidence_reason"))
+        self.assertEqual(burst["w_burst"], 2)
         for lad in rd.LADDERS:
             self.assertIsNone(burst[f"dps_vs_{lad}"])
         self.assertEqual(burst["hp"], 480)              # chassis intact
@@ -487,7 +488,10 @@ class BoundaryTest(unittest.TestCase):
         self.assertTrue(hero["hero"])
         self.assertEqual(hero["w_evidence_reason"], "exotic_channels")
         self.assertIsNone(hero["w_dps"])
-        self.assertEqual(hero["w_dps_raw"], 2.0)
+        # ⭐ The raw diagnostic now carries the FOLDED cadence: RailGun is Damage 10,
+        # ROF 5, Burst 2, so 10 x 2 / (5 + 1) = 3.33. The railgun row itself is still
+        # WITHHELD as exotic_channels - the fold changes the number, not the verdict.
+        self.assertAlmostEqual(hero["w_dps_raw"], 10 * 2 / (5 + 1))
         for lad in rd.LADDERS:
             self.assertIsNone(hero[f"dps_vs_{lad}"])
         # and a conventional HERO keeps its numeric behaviour on the same boundary

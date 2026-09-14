@@ -443,16 +443,32 @@ class EvidenceVerdictTests(unittest.TestCase):
         self.assertIsNone(rec["w_evidence_reason"])
         self.assertIs(rec["w_dps_usable"], True)
 
-    def test_burst_2_is_withheld_from_the_usable_gate(self):
+    def test_burst_2_folds_at_one_tick_instead_of_being_withheld(self):
+        """⭐ THE BURST FOLD (maintainer, 2026-09-14).
+
+        This test used to assert the opposite - that `Burst: 2` was withheld as
+        `incomplete / burst_unfolded`, with `w_dps` reading 100/50 = 2.0 as though one shot
+        left the barrel per cycle. The refusal's own comment said it stood "until a cycle
+        model exists"; the ruling supplies one: *"if there is no burst delay you can use the
+        minimal allowed value of 1 tick between the bursts"*.
+
+        So two shots inside one cycle: 100 x 2 / (50 + 1) = 3.92. ⚠ One tick is the MINIMUM,
+        so this is the SHORTEST cycle and the HIGHEST rate the declaration can support - an
+        upper bound on the peer's cadence, which is the honest direction to err in.
+        """
         rec = ex.weapon_of(
             {"RW": {"Damage": "100", "ROF": "50", "Burst": "2", "Warhead": "RWH"},
              "RWH": {}},
             "RW", "ts")
         self.assertEqual(rec["w_burst"], 2)
-        self.assertEqual(rec["w_dps"], 2.0)
-        self.assertEqual(rec["w_evidence"], "incomplete")
-        self.assertEqual(rec["w_evidence_reason"], "burst_unfolded")
-        self.assertIsNone(rec.get("w_dps_usable"))
+        self.assertAlmostEqual(rec["w_dps"], 100 * 2 / (50 + 1))
+        self.assertEqual(rec["w_evidence"], "nominal_direct")
+        self.assertIsNone(rec["w_evidence_reason"])
+        self.assertIs(rec["w_dps_usable"], True)
+        # Burst 1 is unaffected: no gap to add, so the fold is the identity.
+        plain = ex.weapon_of(
+            {"RW": {"Damage": "100", "ROF": "50", "Warhead": "RWH"}, "RWH": {}}, "RW", "ts")
+        self.assertEqual(plain["w_dps"], 2.0)
 
     def test_dangling_warhead_is_a_missing_dependency(self):
         rec = ex.weapon_of(
