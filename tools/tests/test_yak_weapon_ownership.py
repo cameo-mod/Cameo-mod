@@ -14,6 +14,7 @@ from dump_resolved import node_to_obj
 import consolidate_named_family_profiles as cohort
 import extract_stats
 from owned_weapon_history import restore_chained_identity_fields
+from reviewed_weapon_history import OwnedCheckpointView, restore_owned_checkpoint_actor
 
 FIXTURE = ROOT / 'tools/tests/fixtures/yak_owned_weapon_baseline_20260910.json'
 
@@ -44,11 +45,12 @@ class YakOwnershipTests(unittest.TestCase):
                                 self.rules.inherits_of(self.rules.weapon(new))))
 
     def test_incendiary_converter_guards_cover_each_new_root(self):
+        history = OwnedCheckpointView(self, self.rules, 'yak')
         self.assertEqual(len(cohort.YAK_OWNED_SOURCES), 5)
         for new in cohort.YAK_OWNED_SOURCES:
             self.assertEqual(cohort.ROOTS[new], ('Flame_Light', set(), 8000, 9988))
             self.assertEqual(cohort.descendants(self.rules, new), set())
-            self.assertEqual(cohort.resolved_hash(self.rules, new, 'Flame_Light'),
+            self.assertEqual(cohort.resolved_hash(history, new, 'Flame_Light'),
                              cohort.PRESERVED_HASHES[new])
 
     def test_incendiary_diagnostic_class_is_preserved(self):
@@ -56,24 +58,24 @@ class YakOwnershipTests(unittest.TestCase):
             entry = extract_stats.weapon_entry(self.rules, new)
             self.assertEqual(entry['design_weapon_class'], .875)
             self.assertEqual(entry['weapon_class_source'], 'template')
-            self.assertEqual(entry['warheads'], ['^Warhead_Flame_Light', '^Warhead_Bullet_Medium'])
-            self.assertIn('^Compatibility_IncendiaryYakComposition', entry['versus_templates'])
+            self.assertEqual(entry['warheads'], ['^Warhead_IncendiaryYakComposition',
+                '^Warhead_Flame_Light', '^Warhead_Bullet_Medium'])
+            self.assertIn('^Warhead_IncendiaryYakComposition', entry['versus_templates'])
 
     def test_each_owned_payload_matches_its_original(self):
+        history = OwnedCheckpointView(self, self.rules, 'yak')
         for actor, route in self.before['routes'].items():
             for old, new in route.items():
                 with self.subTest(weapon=new):
                     self.assertTrue(new.startswith(actor+'_'))
-                    actual = node_to_obj(self.rules.resolve_weapon(new))
+                    actual = node_to_obj(history.resolve_weapon(new))
                     self.assertEqual(digest(actual), self.before['weapon_hashes'][old])
 
     def test_all_five_actor_payloads_only_change_weapon_identity(self):
         count = 0
         for actor, route in self.before['routes'].items():
             reverse = {new: old for old, new in route.items()}
-            actual = node_to_obj(self.rules.resolve(actor))
-            self._reverse_later_su57_missile_names(actor, actual)
-            self._reverse_later_bomb_names(actor, actual)
+            actual = restore_owned_checkpoint_actor(self, self.rules, 'yak', actor)
             for key, trait in actual.items():
                 if key.split('@')[0] == 'Armament' and isinstance(trait, dict):
                     if trait.get('Weapon') in reverse:

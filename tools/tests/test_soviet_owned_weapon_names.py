@@ -12,6 +12,7 @@ import miniyaml
 from dump_resolved import node_to_obj
 from safe_rename import load_map
 from owned_weapon_history import restore_chained_identity_fields
+from reviewed_weapon_history import OwnedCheckpointView, restore_owned_checkpoint_actor
 
 MAP = ROOT / 'tools/rename/rename_map_ra1_soviets_owned_weapons_20260910.yaml'
 FIXTURE = ROOT / 'tools/tests/fixtures/soviet_owned_weapons_baseline_20260910.json'
@@ -40,9 +41,10 @@ class OwnedWeaponNames(unittest.TestCase):
             self.assertIn(new, self.rules.weapons)
 
     def test_all_resolved_weapon_payloads_are_identical(self):
+        history = OwnedCheckpointView(self, self.rules, 'soviet')
         for old, new in self.names.items():
             with self.subTest(weapon=new):
-                self.assertEqual(restore_chained_identity_fields(node_to_obj(self.rules.resolve_weapon(new))),
+                self.assertEqual(restore_chained_identity_fields(node_to_obj(history.resolve_weapon(new))),
                                  self.before['weapons'][old])
 
     def test_all_owner_traits_change_only_exact_armament_references(self):
@@ -56,7 +58,8 @@ class OwnedWeaponNames(unittest.TestCase):
                         self.assertTrue(replacement.startswith(actor + '_'))
                         trait['Weapon'] = replacement
             with self.subTest(actor=actor):
-                self.assertEqual(node_to_obj(self.rules.resolve(actor)), expected)
+                self.assertEqual(restore_owned_checkpoint_actor(self, self.rules, 'soviet', actor),
+                                 expected)
 
     def test_aa_sibling_suffix_is_retained(self):
         for old in ('BTRMachineGun_AA', 'BTRTeslaMachineGun_AA',

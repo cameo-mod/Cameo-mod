@@ -5,10 +5,42 @@ import unittest
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2] / "tools/audit"))
 from miniyaml import Node
-from reviewed_weapon_history import historical_copy, restore_target_policy_fields
+from reviewed_weapon_history import (historical_copy, restore_target_policy_fields,
+    OwnedCheckpointView, restore_owned_checkpoint_actor, restore_owned_checkpoint_node)
 
 
 class ReviewedHistoryTests(unittest.TestCase):
+    def test_owned_checkpoint_rejects_unreviewed_payload_change(self):
+        from miniyaml import Ruleset
+        root = pathlib.Path(__file__).resolve().parents[2]
+        rules = Ruleset(root)
+        live = rules.resolve_weapon('ra1_allies_sheridanassaulttank_cannon')
+        restored = OwnedCheckpointView(self, rules, 'additional').resolve_weapon(live.key)
+        self.assertEqual(live.key, restored.key)
+        self.assertEqual('2000', live.get('Warhead@CannonAP_Light', 'Damage'))
+        self.assertEqual('8000', restored.get('Warhead@CannonAP_Light', 'Damage'))
+        mutated = live.deep_copy()
+        damage = next(child.child('Damage') for child in mutated.children
+                      if child.key.startswith('Warhead@') and child.child('Damage'))
+        damage.value = str(int(damage.value) + 1)
+        with self.assertRaises(AssertionError):
+            restore_owned_checkpoint_node(self, 'additional', 'resolved_weapons', mutated)
+
+    def test_owned_actor_checkpoint_rejects_unreviewed_change(self):
+        from miniyaml import Ruleset
+        root = pathlib.Path(__file__).resolve().parents[2]
+        rules = Ruleset(root)
+
+        class MutatedRules:
+            def resolve(_, actor):
+                node = rules.resolve(actor).deep_copy()
+                node.child('Valued').child('Cost').value = '1'
+                return node
+
+        with self.assertRaises(AssertionError):
+            restore_owned_checkpoint_actor(
+                self, MutatedRules(), 'soviet', 'ra1_soviets_btr80')
+
     def test_sonic_history_rejects_unrecorded_damage_change(self):
         from miniyaml import Ruleset
         from reviewed_weapon_history import restore_sonic_family
