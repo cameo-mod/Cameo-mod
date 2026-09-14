@@ -30,6 +30,8 @@ RUNTIME_SOURCE_SUFFIXES = {
     ".config", ".cs", ".ftl", ".json", ".lua", ".toml", ".xml", ".yaml", ".yml",
 }
 RUNTIME_SOURCE_PREFIXES = ("engine/", "mods/", "OpenRA.Mods.")
+PYTHON_REFERENCE_ALLOWLIST = ROOT / "tools" / "balance" / "r12_python_legacy_references.json"
+GENERATED_PYTHON_LEGACY_FRAGMENTS = ("^Compatibility_", "FlatCompatibility")
 
 
 def norm(path: pathlib.Path) -> str:
@@ -93,6 +95,74 @@ def tracked_runtime_sources() -> list[pathlib.Path]:
         if raw == "mod.config" or raw.startswith(RUNTIME_SOURCE_PREFIXES):
             paths.append(path)
     return sorted(paths)
+
+
+def tracked_python_sources() -> list[pathlib.Path]:
+    """Tracked Python tooling that may retain historical or generated cohort identifiers."""
+    proc = subprocess.run(
+        ["git", "ls-files", "-z"], cwd=ROOT, check=True, capture_output=True)
+    return sorted(
+        ROOT / raw for raw in proc.stdout.decode("utf-8").split("\0")
+        if raw.startswith("tools/") and raw.endswith(".py"))
+
+
+def python_reference_records(paths: list[pathlib.Path], template_map: dict[str, str],
+                             inner_map: dict[str, str]) -> dict[str, list[str]]:
+    """Exact source lines that retain literal or generated legacy R12 identifiers."""
+    tokens = tuple(template_map) + tuple(inner_map)
+    records: dict[str, list[str]] = {}
+    for path in paths:
+        found = []
+        for line in path.read_text(encoding="utf-8-sig").splitlines():
+            if any(token in line for token in tokens) or any(
+                    fragment in line for fragment in GENERATED_PYTHON_LEGACY_FRAGMENTS):
+                found.append(line.strip())
+        if found:
+            records[norm(path)] = sorted(found)
+    return records
+
+
+def python_reference_digest(lines: list[str]) -> str:
+    payload = json.dumps(lines, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+    return hashlib.sha256(payload).hexdigest()
+
+
+def python_reference_issues(paths: list[pathlib.Path], template_map: dict[str, str],
+                            inner_map: dict[str, str],
+                            allowlist_path: pathlib.Path = PYTHON_REFERENCE_ALLOWLIST) -> list[dict]:
+    """Reject new, removed, or changed legacy references outside the reviewed inventory."""
+    records = python_reference_records(paths, template_map, inner_map)
+    try:
+        allowlist = json.loads(allowlist_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise RuntimeError(f"could not load Python legacy-reference allowlist: {allowlist_path}") from exc
+    if allowlist.get("schema") != 1 or not isinstance(allowlist.get("files"), dict):
+        raise RuntimeError("invalid Python legacy-reference allowlist schema")
+
+    expected = allowlist["files"]
+    issues = []
+    for path in sorted(set(records) | set(expected)):
+        actual_lines = records.get(path)
+        pinned = expected.get(path)
+        if actual_lines is None:
+            issues.append({"file": path, "issue": "stale allowlist entry"})
+            continue
+        if pinned is None:
+            issues.append({"file": path, "issue": "unreviewed legacy reference"})
+            continue
+        actual_digest = python_reference_digest(actual_lines)
+        if (pinned.get("count") != len(actual_lines)
+                or pinned.get("sha256") != actual_digest
+                or not str(pinned.get("reason") or "").strip()):
+            issues.append({
+                "file": path,
+                "issue": "reviewed legacy references changed",
+                "expected_count": pinned.get("count"),
+                "actual_count": len(actual_lines),
+                "expected_sha256": pinned.get("sha256"),
+                "actual_sha256": actual_digest,
+            })
+    return issues
 
 
 def tracked_oramap_archives() -> list[pathlib.Path]:
@@ -248,6 +318,14 @@ def run(*, apply: bool, proof_path: pathlib.Path | None = None) -> dict:
         raise RuntimeError(
             "old cohort names exist outside active rule/weapon sources; review these runtime "
             f"consumers before renaming:\n{names}")
+    python_issues = python_reference_issues(
+        tracked_python_sources(), template_map, inner_map)
+    if python_issues:
+        names = "\n".join(
+            f"{row['file']}: {row['issue']}" for row in python_issues)
+        raise RuntimeError(
+            "old cohort identifiers in Python tooling differ from the reviewed historical "
+            f"inventory; classify them before renaming:\n{names}")
     archive_consumers = stale_oramap_references(
         tracked_oramap_archives(), template_map, inner_map)
     if archive_consumers:

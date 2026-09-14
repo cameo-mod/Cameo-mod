@@ -68,10 +68,10 @@ claims:
       print(sum(included(n.key) for n in rs.resolve('world').children))
 
   - id: shield_versus_mean
-    value: 175.919
+    value: 180.284210526316
     tolerance: 0.01
     what: Mean Versus-vs-Shield across all main flat warheads. Drives shield_hp_factor.
-    docs: [docs/DESIGN.md, docs/design/ARMOR_LAYERS.md, docs/design/ARMOR_LAYERS.md]
+    docs: [docs/DESIGN.md, docs/design/ARMOR_LAYERS.md]
     measure: |
       import sys, pathlib
       sys.path[:0] = ['tools/audit', 'tools/balance']
@@ -79,7 +79,7 @@ claims:
       print(tm.pseudo_armor_mean('Shield'))
 
   - id: shield_hp_factor
-    value: 0.568442
+    value: 0.554679745431
     tolerance: 0.01
     what: What one shield point is worth as HP (100 / mean Versus vs Shield).
     docs: [docs/DESIGN.md, docs/design/ARMOR_LAYERS.md]

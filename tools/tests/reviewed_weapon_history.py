@@ -33,6 +33,38 @@ LATER_OWNED_NAMES = {
 LATER_HISTORICAL_NAMES = {new: old for old, new in LATER_OWNED_NAMES.items()}
 
 
+@lru_cache(maxsize=1)
+def r12_inverse_name_map():
+    """Exact landed R12 name map, inverted for historical test fixtures only."""
+    proof = json.loads((pathlib.Path(__file__).parents[2] / 'docs' / 'audit' / 'latest' /
+                        'r12_pure_rename_proof_20260913.json').read_text(encoding='utf-8'))
+    inverse = {new: old for old, new in proof['template_renames'].items()}
+    for old, new in proof['payload_renames'].items():
+        inverse['Warhead@' + new] = 'Warhead@' + old
+        inverse['-Warhead@' + new] = '-Warhead@' + old
+    return inverse
+
+
+def restore_r12_names(node):
+    """Return a copy with only the approved R12 template/payload rename reversed."""
+    inverse = r12_inverse_name_map()
+    copy = node.deep_copy()
+
+    def restore(current):
+        current.key = inverse.get(str(current.key), current.key)
+        current.value = inverse.get(str(current.value or '').strip(), current.value)
+        for child in current.children:
+            restore(child)
+
+    restore(copy)
+    return copy
+
+
+@lru_cache(maxsize=1)
+def r12_forward_name_map():
+    return {old: new for new, old in r12_inverse_name_map().items()}
+
+
 def current_profile_name(rules, name):
     return name if name in rules.weapons else LATER_OWNED_NAMES.get(name, name)
 
@@ -328,6 +360,8 @@ def restore_target_policy_fields(test, node):
                 child.key = child.key.replace('Warhead@BlastCryo_', 'Warhead@CryoBlast_', 1)
     for tag, key, before, after in target_policy_field_changes().get(node.key, ()):
         warhead = copy.child(tag)
+        if warhead is None:
+            warhead = copy.child(r12_forward_name_map().get(tag, tag))
         test.assertIsNotNone(warhead, (node.key, tag))
         field = warhead.child(key)
         test.assertEqual(after, field.value if field else None, (node.key, tag, key))
@@ -434,7 +468,7 @@ class HistoricalView:
         return restore_missile_role(self.test, self.rules.weapon(name), source=True)
 
     def resolve_weapon(self, name):
-        return historical_copy(self.test, self.rules.resolve_weapon(name))
+        return restore_r12_names(historical_copy(self.test, self.rules.resolve_weapon(name)))
 
 
 class SonicFamilyView(HistoricalView):
@@ -468,7 +502,7 @@ def restore_later_profile(test, node):
     historical_name = LATER_HISTORICAL_NAMES.get(node.key, node.key)
     if historical_name not in fixture:
         return node
-    node = restore_target_policy_fields(test, node)
+    node = restore_r12_names(restore_target_policy_fields(test, node))
     record = fixture[historical_name]
     def ordered(n):
         return [n.key, n.value, [ordered(c) for c in n.children]]
