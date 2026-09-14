@@ -208,6 +208,61 @@ def simultaneous_armaments(actor):
     return _SIM_CACHE.setdefault(actor, (simultaneous_condition_bound(conditions), total))
 
 
+_BASELINE_SIM_CACHE = {}
+
+
+def as_built_weapons(actor):
+    """The set of weapon NAMES that fire on the unit AS BUILT - nothing bought, nothing earned.
+
+    ⛔ THIS IS NOT `simultaneous_armaments`, AND THE DIFFERENCE IS THE WHOLE POINT.
+    That one returns the MAXIMUM the actor can ever have firing at once; this one returns what
+    fires the moment it rolls off the production line. `td_gdi_battletank` separates them:
+
+        Armament              !td_gdi_upgrade_highvelocitycannons      <- as built
+        Armament@HV            td_gdi_upgrade_highvelocitycannons
+        Armament@Missile      !td_gdi_upgrade_advancedmissiletargeting <- as built
+        Armament@Advanced...   td_gdi_upgrade_advancedmissiletargeting
+        Armament@MachineGun    td_gdi_upgrade_armorpiercingbullets     <- ADDITIVE upgrade
+
+    The machine gun has no `!` twin, so it is an EXTRA gun bought later rather than a swap. The
+    maximum is 3 and the as-built loadout is 2, and both numbers are true. Summing the maximum
+    would price every Battle Tank as though it had already paid for an upgrade it may never buy,
+    so the combined figure describes the as-built unit - the same state every other column on
+    this row is measured in.
+
+    A negated gate (`!upgrade`) is ACTIVE as built and belongs here; a plain gate (`upgrade`) is
+    not and does not. Anything this cannot read - a compound expression - returns None, and the
+    caller withholds rather than guesses.
+
+    ⚠ WEAPONS, NOT SLOTS. `Armament@PRIMARY` and `Armament@GARRISONED` are the same gun fired
+    from two places, and counting slots made a rifleman look like a two-gun unit.
+    """
+    if actor in _BASELINE_SIM_CACHE:
+        return _BASELINE_SIM_CACHE[actor]
+    try:
+        node = _ruleset().resolve(actor)
+    except Exception:                                   # a missing actor is not a report failure
+        node = None
+    if node is None:
+        return _BASELINE_SIM_CACHE.setdefault(actor, None)
+    built = set()
+    for child in node.children:
+        if not child.key.startswith("Armament"):
+            continue
+        fields = {g.key: g.value for g in child.children}
+        weapon = fields.get("Weapon")
+        if not weapon:
+            continue
+        cond = (fields.get("RequiresCondition") or "").strip()
+        if not cond:
+            built.add(weapon)
+        elif re.fullmatch(r"!?[A-Za-z_][A-Za-z0-9_.-]*", cond) is None:
+            return _BASELINE_SIM_CACHE.setdefault(actor, None)
+        elif cond.startswith("!"):
+            built.add(weapon)
+    return _BASELINE_SIM_CACHE.setdefault(actor, frozenset(built))
+
+
 def burst_note(cameo_row):
     """`= 16,000 x 2` beneath a per-CYCLE damage figure — the breakdown, not a multiplier.
 
@@ -233,7 +288,10 @@ def burst_note(cameo_row):
 
 def component_num(cameo_row, stat):
     if cameo_row.get("weapon_model_eligible") is False:
-        return '<span class="muted" title="multiple baseline armaments: withheld">WITHHELD</span>'
+        return ('<span class="muted" title="multiple baseline armaments, and a cadence does not '
+                'sum: two guns firing together have two reload delays and two bursts. The '
+                'combined DAMAGE is in the damage column; the per-weapon cadence is in the '
+                'per-armament block below.">WITHHELD</span>')
     return num(cameo_row.get(stat))
 
 
@@ -643,6 +701,21 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
             # MOVES it, not the number — and the raw target rounds, which hid that distinction.
             tgt['w_burst'] = estimate_cell(rows, c, 'w_burst', selected_dist, selected_cdist,
                                            len(srcs), flag_change=c.get('w_burst'))
+            # ⭐ LAW 3a.3 FIRST, #397's ROUTING SECOND. Master routes every weapon cell of a
+            # multi-armament actor to "see per-armament components", which is a better answer than
+            # WITHHELD but still not the one the maintainer asked for: *"the combined DPS is what
+            # counts and it is what should be DISPLAYED in the reference data"*. So where the sum
+            # is provably honest it is shown here, and the routing text remains the fallback for
+            # every cell that genuinely has no single value - reload, burst, burst delay, the DPS
+            # verifier, and any actor whose guns cannot be summed.
+            #
+            # ⚠ ORDER MATTERS: `combined_range_cell` reads `tgt["w_range"]`, and the routing
+            # branch below OVERWRITES `tgt` with link text. Compute both cells first.
+            ctype_a = c.get("type")
+            withheld_actor = c.get("weapon_model_eligible") is False
+            combined = (combined_damage_cell(a, c, rows, selected_dist, selected_cdist, ctype_a)
+                        if withheld_actor else None)
+            shared_range = (combined_range_cell(a, tgt["w_range"]) if withheld_actor else None)
             per_armament = has_structured_armament_components(a)
             if per_armament:
                 route = ('<span class="muted" title="actor-level weapon folding can select a '
@@ -654,6 +727,12 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
             else:
                 burst_delay = burst_delay_cell(c, rows)
                 dps_verifier = dps_verifier_cell(c, rows, tgt)
+            damage_cell = combined or (
+                f'{component_num(c, "w_damage")} {burst_note(c)}'
+                f'{arm_note(a, led_arms, c.get("weapon_model_eligible"))} '
+                f'<span class="muted">\u2192</span> {tgt["w_damage"]}')
+            range_cell = shared_range or (
+                f'{component_num(c, "w_range")} <span class="muted">\u2192</span> {tgt["w_range"]}')
             note = ' <span class="tag">chassis-only</span>' if a in chassis_only else ""
             if c.get('hero'):
                 note += ' <span class="tag">hero-only model</span>'
@@ -666,8 +745,8 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
                 f'<tr><td><code>{html.escape(a)}</code>{note}{flag}</td>'
                 f'<td class="n">{num(c.get("hp"))} <span class="muted">→</span> {tgt["hp"]}</td>'
                 f'<td class="n">{num(c.get("speed"))} <span class="muted">→</span> {tgt["speed"]}</td>'
-                f'<td class="n">{component_num(c, "w_range")} <span class="muted">→</span> {tgt["w_range"]}</td>'
-                f'<td class="n">{component_num(c, "w_damage")} {burst_note(c)}{arm_note(a, led_arms, c.get("weapon_model_eligible"))} <span class="muted">→</span> {tgt["w_damage"]}</td>'
+                f'<td class="n">{range_cell}</td>'
+                f'<td class="n">{damage_cell}</td>'
                 f'<td class="n">{component_num(c, "w_reload")} <span class="muted">→</span> {tgt["w_reload"]}</td>'
                 f'<td class="n">{component_num(c, "w_burst")} <span class="muted">→</span> {tgt["w_burst"]}</td>'
                 f'<td class="n">{burst_delay}</td>'
@@ -879,6 +958,153 @@ ARMAMENT_COMPONENTS = {
     "w_burst": "weapon_burst",
     "w_dps": "rate",
 }
+
+
+# ⛔ WHICH DOMAIN EACH ROLE CAN REACH. `both` is not a third domain - it is a weapon that
+# reaches BOTH, which is why a plain set intersection is the right test and a role-equality test
+# is not.
+_ROLE_DOMAINS = {"ground": frozenset("G"), "air": frozenset("A"), "both": frozenset("GA")}
+
+
+def firing_together(actor, entry):
+    """The armaments whose damage may honestly be ADDED, or None.
+
+    Three filters, and each one exists because skipping it produces a number that is wrong in a
+    specific, checkable way:
+
+    1. AS BUILT. Upgrade-gated guns are excluded (`as_built_weapons`), so no unit is priced with
+       hardware it has not bought.
+
+    2. ⛔ AN AA SPLIT IS ONE WEAPON (DESIGN §3a.1). `td_gdi_apc_apcgun` and
+       `td_gdi_apc_apcgun_AA` are a single gun that OpenRA forced into two armaments because one
+       armament cannot have 1.5x reach against air. ADDING them would double the APC firepower
+       outright. Five actors in the classic four alone carry such a twin - the two APCs, the
+       Allied heavy AA tank, the flak truck, and the Humvee Mk II with TWO of them - so this is
+       the difference between a combined figure and a fabricated one. The twin test is the same
+       one `doc_claims.aa_split_pairs_compliant` uses: an `_AA` name whose base weapon exists.
+
+    3. ⛔ THEY MUST BE ABLE TO HIT THE SAME TARGET. A bomb that only strikes the ground and a
+       missile that only reaches air are never in the air at the same target, so summing them
+       describes a volley nothing ever receives (`ra1_allies_rapierjumpjet`, `td_gdi_firehawk`).
+       The test is that the INTERSECTION of every armament domain is non-empty: `ground` + `both`
+       share the ground and sum; `ground` + `air` share nothing and withhold. Connectivity would
+       be the wrong test - ground/air/both is a connected chain with no common target.
+    """
+    built = as_built_weapons(actor)
+    if built is None:
+        return None
+    arms = [a for a in _armament_rows(entry) if a.get("weapon") in built]
+    if len(arms) != len(built):                 # a priced armament the pairing never saw
+        return None
+    twins = {w for w in built if str(w).endswith("_AA") and str(w)[:-3] in built}
+    arms = [a for a in arms if a.get("weapon") not in twins]
+    if len(arms) < 2:
+        return None
+    domains = [_ROLE_DOMAINS.get(a.get("role")) for a in arms]
+    if any(d is None for d in domains):
+        return None
+    common = frozenset("GA")
+    for d in domains:
+        common &= d
+    return arms if common else None
+
+
+def combined_armament_totals(actor, attached_rows, dist, cdist, ctype):
+    """⭐ LAW 3: ARMAMENTS THAT FIRE TOGETHER SUM, and the map must show the total.
+
+    Maintainer, 2026-09-14: *"for the balance formula you need to count both weapons if they are
+    truly activated at the same time ... the combined DPS is what counts and it is what should be
+    displayed in the reference data instead of the WITHHELD status!"*
+
+    Returns `(now, reference, guns, sources_used)` or None. None means the sum would be a lie,
+    and there are three separate ways for that to be true - each one a refusal, not a gap:
+
+      * the simultaneous set is not PROVEN. `simultaneous_armaments` reads the resolved yaml and
+        reports a bound only for simple `C` / `!C` conditions; a compound expression comes back
+        unknown. Summing a set nobody proved is how `x4` got onto the mammoth in the first place.
+      * the baseline armaments and that bound DISAGREE in size. The baseline set is the one that
+        fires with no upgrades held, so when its size equals the bound the two descriptions agree
+        and the set is known. When they do not, something is gated in a way this cannot read.
+      * any one armament has no target. A PARTIAL sum is the worst of the three outcomes: it
+        looks like a complete answer and reads low, so a unit would be priced as though one of
+        its guns were free. Better to withhold the row than to under-report it.
+
+    ⚠ DAMAGE PER CYCLE SUMS; CADENCE DOES NOT. Reload, burst and burst delay stay withheld
+    above, because two guns firing together have two cadences and no single one describes them.
+    """
+    entry = pairing_document().get("actors", {}).get(actor)
+    if entry is None:
+        return None
+    arms = firing_together(actor, entry)
+    if arms is None:
+        return None
+    votes_by_role = collections.defaultdict(list)
+    for source, info in entry["sources"].items():
+        for pair in info.get("pairs", ()):
+            votes_by_role[pair["role"]].append((source, pair))
+    now_total = ref_total = 0.0
+    sources_used = set()
+    for main in arms:
+        now = main.get("damage_per_cycle")
+        role = main.get("role")
+        if not now or role is None:
+            return None
+        cast = [(src, pair) for src, pair in votes_by_role.get(role, ())
+                if pair["cameo"].get("weapon") == main["weapon"]]
+        if not cast:
+            return None
+        peer_votes = [(_peer_row_for(attached_rows, source, entry["sources"][source].get("peer")),
+                       pair["peer"].get("damage_per_cycle")) for source, pair in cast]
+        target, _used = rt.armament_target(peer_votes, dist, cdist, ctype)
+        if not target:
+            return None
+        now_total += now
+        ref_total += target
+        sources_used.update(source for source, _pair in cast)
+    return now_total, ref_total, len(arms), len(sources_used)
+
+
+def combined_damage_cell(actor, cameo_row, attached_rows, dist, cdist, ctype):
+    """The Damage/cycle cell for a multi-gun actor: the SUM, where the sum is honest.
+
+    Falls back to the old WITHHELD marker by returning None, so the caller keeps one code path.
+    """
+    totals = combined_armament_totals(actor, attached_rows, dist, cdist, ctype)
+    if totals is None:
+        return None
+    now, ref, guns, used = totals
+    ratio = (f' <b class="warn" title="needs explicit maintainer permission">{ref / now:.2f}x</b>'
+             if now and abs(ref / now - 1) > 0.005 else '')
+    return (f'<span data-v="{now}" title="the {guns} armaments this actor fires at the same time '
+            f'AS BUILT, summed - combined damage per cycle is what the unit actually delivers. '
+            f'Upgrade-gated guns are excluded: they are not part of the unit being priced.'
+            f'">{now:,.0f}'
+            f'<small class="evidence">combined, {guns} guns</small></span> '
+            f'<span class="muted">→</span> '
+            f'<span data-v="{ref}" title="each armament projected separately from the sources '
+            f'that carry a weapon in its role, then summed - same coordinates and the same frozen '
+            f'ruler as every other target here">{ref:,.0f}'
+            f'<small class="evidence">{used} source(s)</small></span>{ratio}')
+
+
+def combined_range_cell(actor, tgt_range):
+    """⭐ LAW 2 MAKES THIS CELL WELL-DEFINED. Every weapon that can hit the same target shares
+    one range, so a multi-gun actor normally has ONE reach and withholding it said nothing true.
+    Reported only when the simultaneous armaments actually agree; a disagreement is a law
+    violation and keeps the WITHHELD marker rather than being averaged away.
+    """
+    entry = pairing_document().get("actors", {}).get(actor)
+    if entry is None:
+        return None
+    arms = firing_together(actor, entry)
+    if arms is None:
+        return None
+    reaches = {a.get("range_wdist") for a in arms}
+    if len(reaches) != 1 or None in reaches:
+        return None
+    reach = reaches.pop()
+    return (f'<span data-v="{reach}" title="every armament that fires together shares this reach '
+            f'(DESIGN §3a.2)">{reach:,.0f}</span> <span class="muted">→</span> {tgt_range}')
 
 
 def _armament_component_target(entry, cast, attached_rows, dist, cdist, ctype, stat,

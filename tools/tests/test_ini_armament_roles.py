@@ -117,10 +117,31 @@ class ConsumerGateTests(unittest.TestCase):
         view = armament.ini_views(self.row(), exact)[0]
         self.assertFalse(view["eligible"])
 
+    def test_a_readable_burst_folds_at_one_tick_instead_of_being_benched(self):
+        """⭐ THE BURST FOLD (maintainer, 2026-09-14).
+
+        `{"burst": 2}` used to sit in the `bad` tuple below, refused as `burst_unfolded`. The
+        refusal existed because nothing could say how long a multi-shot cycle takes; the ruling
+        says it takes the engine minimum between shots: *"if there is no burst delay you can use
+        the minimal allowed value of 1 ticks between the bursts"*. So two shots of 30 over a
+        10-tick reload plus one 1-tick gap: cycle 11, 60 damage in it.
+
+        ⚠ The INVALID numbers around it are untouched and still bench - a burst of 0 or 1.5 is
+        not a cadence this can fold, it is a declaration nobody can read.
+        """
+        exact = {("S", "Gun", "P"): {
+            "status": "resolved", "role": "ground",
+            "weapon_evidence": "nominal_direct", "w_dps_usable": True,
+            "damage": 30, "reload": 10, "range": 9, "burst": 2,
+        }}
+        view = armament.ini_views(self.row(), exact)[0]
+        self.assertTrue(view["eligible"])
+        self.assertEqual(11, view["cycle"])
+        self.assertEqual(60, view["damage_per_cycle"])
+
     def test_burst_and_invalid_numbers_never_enter_the_bench(self):
         bad = (
             {"damage": 30, "reload": 10, "range": 9, "burst": 0},
-            {"damage": 30, "reload": 10, "range": 9, "burst": 2},
             {"damage": float("nan"), "reload": 10, "range": 9, "burst": 1},
             {"damage": -3, "reload": 10, "range": 9, "burst": 1},
             {"damage": 30, "reload": 0, "range": 9, "burst": 1},

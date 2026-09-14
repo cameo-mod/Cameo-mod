@@ -64,7 +64,12 @@ class ChargeAwareArmamentProfileTests(unittest.TestCase):
         self.assertEqual(3, row["w_burst"])
         self.assertEqual(100.0, row["w_reload"])
         self.assertEqual(300.0, row["w_damage"])
-        self.assertAlmostEqual(300 / 106, row["w_dps"])
+        # ⭐ 131, NOT 106 - THE CHARGE IS IN THE CYCLE NOW (#392, maintainer 2026-09-14:
+        # "take into account the ammo reload delay to calculate how long a full cycle takes").
+        # 100 reload + 2 x 3 burst delay = 106 was the cadence BEFORE the wind-up was counted;
+        # the charge costs 25 more ticks every cycle, so the honest period is 131 and the rate
+        # drops accordingly. This assertion was left pinned to the old law when the law shipped.
+        self.assertAlmostEqual(300 / 131, row["w_dps"])
 
     def test_charge_level_traits_do_not_invent_a_sustained_cycle(self):
         charge = {"v": "AttackCharges", "ticks": 25.0}
@@ -113,10 +118,15 @@ class LiveLedgerChargeTests(unittest.TestCase):
         cls.rows = {row["id"]: row for row in rd.cameo_rows()}
 
     def test_all_attack_tesla_rows_use_the_same_actor_cycle_in_both_consumers(self):
+        # ⭐ THE CYCLES CARRY THE CHARGE (#392). Was 106 / 75 / 160, which is what these three
+        # cost with the wind-up ignored; the applied law adds it, so they are 131 / 95 / 210 and
+        # all three defences were being read as firing faster than they do. The Rail Tower is
+        # the charge-PER-SHOT case (weapon reload 40 > ChargeDelay 3, so every one of its five
+        # shots pays the wind-up); the coils charge once per volley.
         expected = {
-            "ra1_soviets_teslacoil": (3, 100.0, 106.0, 144000.0),
-            "ra2_soviets_teslacoil": (1, 75.0, 75.0, 96000.0),
-            "asianalliance_railtower": (5, 120.0, 160.0, 155000.0),
+            "ra1_soviets_teslacoil": (3, 100.0, 131.0, 144000.0),
+            "ra2_soviets_teslacoil": (1, 75.0, 95.0, 96000.0),
+            "asianalliance_railtower": (5, 120.0, 210.0, 155000.0),
         }
         self.assertEqual(set(expected), attack_tesla_actors())
         for actor, (burst, reload_delay, cycle, damage) in expected.items():

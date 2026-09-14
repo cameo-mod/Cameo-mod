@@ -709,6 +709,67 @@ claims:
           raise SystemExit('an input fingerprint is missing or not a sha256')
       print(len(inputs))
 
+  - id: mammoth_armament_voters
+    value: 3
+    tolerance: 0
+    what: >
+      Sources voting on EACH of `td_gdi_mammothtank`'s two as-built armaments, in
+      `armament_pairing.json`. ⛔ THIS CLAIM EXISTS BECAUSE THE NUMBER WAS 2 AND THE MAINTAINER
+      CAUGHT IT: *"somehow removes the DTA from voting on the weapon? This is unacceptable!
+      Before all 3 weapons were voting from the reference but it lost the DTA one so this is a
+      true regression!"* DTA Enhanced declares `Burst: 2` on both `120mm` and `MammothTusk`, and
+      the consumer gate in `armament_roles.ini_views` refused any armament whose burst was not 1,
+      so the only source that makes the CANNON the stronger gun fell silent and the cannon-missile
+      spread lost its dissenting voter. The burst fold (DESIGN 3a, maintainer ruling "if there is
+      no burst delay you can use the minimal allowed value of 1 ticks between the bursts")
+      restores it. A drop back to 2 means a gate has closed on a readable declaration again.
+    docs: [docs/DESIGN.md]
+    measure: |
+      import json, pathlib, collections
+      doc = json.loads(pathlib.Path('docs/balance/derived/armament_pairing.json')
+                       .read_text(encoding='utf-8'))
+      entry = doc['actors']['td_gdi_mammothtank']
+      per = collections.Counter()
+      for info in entry['sources'].values():
+          for pair in info.get('pairs', ()):
+              per[pair['cameo']['weapon']] += 1
+      if len(per) != 2:
+          raise SystemExit('expected exactly two paired armaments, got %r' % dict(per))
+      print(min(per.values()))
+
+  - id: ini_armament_views_eligible
+    value: 1388
+    tolerance: 0
+    what: >
+      INI armament views that pass `armament_roles.ini_views`' eligibility gate over the frozen
+      `ini_corpus.json`. It was **1144** before the burst fold; the 244 admitted are every one of
+      them DTA, the only source whose corpus rows carry an evidence verdict of their own, and they
+      had been refused as `burst_unfolded`. ⚠ ONE TICK IS THE MINIMUM the engine allows, so a
+      folded cycle is the SHORTEST the declaration supports and its rate is an UPPER bound - the
+      honest direction for a floor assumption. ⛔ The fold is applied where the declaration is
+      READ, not in the corpus: regenerating `ini_corpus.json` today drops the dummy-primary
+      promotion on 63 rows (see `extract_ini_units.EXPLICIT_DUMMY_WEAPONS`), so the corpus stays
+      frozen until that is ruled on separately.
+    docs: [docs/DESIGN.md]
+    measure: |
+      import json, pathlib, sys, collections
+      sys.path.insert(0, 'tools/balance'); sys.path.insert(0, 'tools/reference')
+      sys.path.insert(0, 'tools/audit')
+      import armament_roles as ar
+      import extract_ini_projectile_roles as ipr
+      import extract_ini_armament_roles as iar
+      import extract_ini_elite_weapons as ielite
+      root = pathlib.Path('.').resolve()
+      roles = ipr.load(root); roles.update(iar.load(root)); elite = ielite.load(root)
+      n = 0
+      for line in (root / 'docs/reference/ini_corpus.json').read_text(
+              encoding='utf-8').splitlines():
+          if not line.strip():
+              continue
+          for view in ar.ini_views(json.loads(line), roles, elite):
+              n += view['eligible']
+      print(n)
+
   - id: aa_split_pairs_compliant
     value: 36
     tolerance: 0
