@@ -579,36 +579,75 @@ Where two armaments genuinely fire together at one target, the priced quantity i
 the reference map must show it rather than abstain. Abstention is for armaments that cannot be
 compared, not for ones that add.
 
-### 3a.4 Differentiate the guns - the sources do, and by a lot
+### 3a.4 Why a cannon and a missile land on almost the same target
 
-> *"it would actually be nice if cannons and missiles or anything else does not deal the exact
-> same damage ... If Cannon is like 1.5x more powerful than the missile then it would make sense
-> to have both with different values but not at like a 1.05x difference"*
+> *"compare 41,528 for the missiles with 40,997 with the cannons! ... Both weapons even when they
+> use different references have almost the same damage ... So what exactly is going on here?"*
 
-⭐ **MEASURED, AND THE SOURCE MATERIAL BACKS THE INSTINCT.** Across every reference Mammoth Tank
-carrying both a cannon and missiles, the cannon-vs-missile **DPS** ratio is:
+⛔ **FIRST, A CORRECTION I OWE THIS SECTION.** An earlier draft answered this with "the sources
+say 1.71x" - a median cannon-vs-missile DPS ratio measured across every reference Mammoth Tank in
+the **INI corpus** (CnC Reloaded, Twisted Insurrection, Mental Omega, RA2, DTA Classic, Rise of the
+East). That number is real, and it is **the wrong population**: none of those sources votes on
+`td_gdi_mammothtank`. Its voters are OpenRA peers. Quoting a corpus-wide statistic to explain a
+specific actor's pairing is the same class of error as reasoning from a trait's name instead of its
+source - see `mammoth_cannon_missile_source_ratio`, which now says so on its face.
 
-| statistic | ratio |
-|---|--:|
-| median | **1.71x** |
-| mean | 1.80x |
-| range | 1.11x - 2.93x |
+**THE ACTUAL VOTERS, read out of `armament_pairing.json`:**
 
-CnC Reloaded runs 1.71x-2.73x, Twisted Insurrection 1.67x-2.00x, RA2's Apocalypse 1.67x, Red
-Resurrection 1.25x; DTA Classic and Rise of the East **invert** it and make the missile stronger.
-Across all 930 dual-weapon reference actors only **29.2%** sit inside 1.05x, while **45.4%** are
-more than 3x apart.
+| source | cannon | missile | missile:cannon |
+|---|---|---|--:|
+| Combined Arms | `130mmTD` 12,000 / 85t | `MammothTusk` 14,000 / 75t | 1.17x |
+| OpenRA Tiberian Dawn | `120mmDual` 8,000 / 48t | `MammothMissiles` 10,000 / 60t | 1.25x |
+| **geometric mean** | **9,798** | **11,832** | **1.21x** |
 
-⛔ **Our map projects the Mammoth's two weapons 1.013x apart, where the sources are 1.71x apart.**
-That is not a data problem, it is the FOLD: each armament is projected through the same
-actor-level ruler, so both land in the same place and the distinction the sources carry is
-flattened out. Retiring that fold for a per-armament ruler is the open MODEL change; until then a
-near-1.0x spread between a cannon and a missile is an ARTEFACT of the projection and must not be
-read as evidence that the two should be equal. Pinned by `mammoth_cannon_missile_source_ratio`.
+By RATE rather than per cycle it is smaller still - CA 141.2 vs 186.7 (1.32x), Tiberian Dawn
+**166.7 vs 166.7 (exactly 1.00x)**, geometric mean **1.15x**.
 
-⚠ The corollary the maintainer drew: where the projected difference really is only a few percent,
-averaging the two and applying one value costs nothing - *"so it doesn't matter if it's exactly
-the same or not"*. The prize is the cases where the sources say 1.5x-2x and we currently say 1.0x.
+⭐ **So the honest answer is in two parts, and the first part is the bigger one.**
+
+1. **The voters barely differentiate these weapons to begin with.** 1.15x-1.21x, not 1.7x. Tiberian
+   Dawn gives the Mammoth's cannon and missiles the *same rate*. There is far less signal here than
+   the wider corpus would suggest.
+2. **The projection then compresses what little is left.** A 1.21x spread in the peers becomes a
+   1.013x spread in the targets. Each vote is normalised against its own source's distribution
+   (`coordinates` -> `project`) and the candidates are blended by geometric mean, so two weapons
+   sitting at similar RANKS within the same source resolve to the same Cameo magnitude even when
+   their raw numbers differ.
+
+⭐⭐ **AND THE BATTLE TANK PROVES POINT 1 OUTRIGHT.** Its missile has exactly one voter:
+
+| source | cannon | missile |
+|---|---|---|
+| Combined Arms | `120mm` 4,600 | *(unpaired)* |
+| DTA Enhanced | `90mm` **30** | `70mmMsl1` **30** |
+| OpenRA Tiberian Dawn | `120mm` 4,000 | *(unpaired)* |
+
+**In DTA Enhanced - the missile's ONLY voter - the cannon and the missile carry the identical
+number, 30.** The missile's reference IS the cannon's reference. The 5.8% that survives comes
+entirely from the cannon additionally blending Combined Arms and Tiberian Dawn, which pull it a
+little differently. That also explains the maintainer's own observation that the Battle Tank
+spreads more than the Mammoth: **asymmetric voter counts (1 vs 3) move the two targets apart; equal
+counts (2 vs 2) hold them together.**
+
+⚠ **THE MAP THAT PROMPTED THIS IS STALE.** It reports "3 of 3 sources" for both Mammoth weapons
+including `DTA Enhanced · MammothTusk`. On master, **DTA Enhanced pairs 0 of the Mammoth's 2
+armaments** - both sit in `cameo_unpaired` - so it is 2 of 3, and the 41,528 / 40,997 figures
+predate the current gating. Re-render before reasoning from those numbers again.
+
+⭐ **WHAT THIS DOES AND DOES NOT JUSTIFY.** It does NOT justify forcing a cannon and a missile
+apart: for these two actors the evidence genuinely says they are close. It DOES justify the
+maintainer's corollary - *"so it doesn't matter if it's exactly the same or not"* - that where the
+projected difference is a few percent, averaging the two and applying one value costs nothing. And
+it identifies the one thing worth fixing: **the compression is real** (1.21x in, 1.013x out), so
+where a peer difference IS large the map will still understate it. That is an argument for a
+per-armament ruler, and it is a MODEL change that needs the maintainer.
+
+⚠ For the record, the wider-corpus number stands as a fact about that corpus: across all 930
+dual-weapon reference actors only **29.2%** sit inside 1.05x and **45.4%** exceed 3x, and among its
+Mammoth Tanks the median cannon:missile DPS ratio is **1.71x** (1.11x-2.93x), with DTA Classic and
+Rise of the East inverting it. It is evidence that differentiated guns are normal in the genre -
+not evidence about what `td_gdi_mammothtank` should be.
+
 
 ## 4. Tech tier rules (F12/F13)
 
