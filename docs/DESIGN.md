@@ -878,6 +878,75 @@ want to become `D2K_Rocket_Trooper_AG`, because the AA twin `D2K_Rocket_Trooper_
 ground-side candidates. Which one is the real half is a question about that unit, not a naming
 question, so the generator refuses rather than picking.
 
+
+### 3a.9 THE FIREPOWER SHARE - how a multi-weapon unit was always balanced
+
+> *"you need to count them as individual units in the balance formula, one with one weapon and
+> the other with the other weapon. But here it's important that they are indeed not counted as
+> separate units cost wise because chaingun and bomb can target the same target right? so in this
+> case what you need to do is create those two units separately first as virtual units, then give
+> each only 1/n firepower and then combine them. For the Yak what was used was actually 50% Bombs
+> and 50% dual chainguns which means 25% single chaingun (since these are two weapons right?) ...
+> a lot of units have this logic like also the hind and the sky hawk"* (maintainer, 2026-09-14)
+
+**THE LAW.** A multi-weapon actor is priced by splitting it into **virtual single-weapon units**,
+pricing each with the balance formula, and merging them back. What changes between the two cases
+is the SHARE each virtual unit carries:
+
+| the weapons can... | each virtual unit gets | the actor's DPS is | why |
+|---|---|---|---|
+| **hit the same target** (3a.6) | **1/n of the firepower budget** | the **SUM** of the shares | both barrels land on the victim, so together they must equal one unit's worth of firepower |
+| **never hit the same target** (3a.7) | the **FULL** firepower budget | **NOT summed** - each stands alone | only ever one of them is engaging, so each must be a complete unit on its own |
+
+⭐ **THE TREE ALREADY OBEYS THIS, AND IT IS VISIBLE AS A FINGERPRINT.** If every weapon carries
+`1/n`, then with one shared cycle (3a.6) **every weapon on the actor shows the SAME DPS**. That is
+exactly what the classic four show, and it is not a coincidence - it is the rule leaving a mark:
+
+| actor | weapons | DPS each | total | share |
+|---|--:|--:|--:|--:|
+| `td_gdi_mammothtank` | 2 | 200.00 | 400.00 | 1/2 |
+| `td_gdi_mammothtankmkiii` | 2 | 218.18 | 436.36 | 1/2 |
+| `td_gdi_battletank` | 2 | 111.11 | 222.22 | 1/2 |
+| `td_gdi_humveemkii` | 2 | 95.24 | 190.48 | 1/2 |
+| `ra1_allies_sheridanassaulttank` | 3 | 62.50 | 187.50 | 1/3 |
+| `ra1_soviets_heatraytank` | 4 | 187.50 | 750.00 | 1/4 |
+
+**n COUNTS GUNS, NOT ARMAMENT ENTRIES**, and the tree writes that two different ways - this is
+the subtlety the Yak exists to teach:
+
+* `td_gdi_mammothtank` declares ONE armament per weapon whose `LocalOffset` lists TWO barrels
+  (`900,180,340, 900,-180,340`). Two barrels, one armament, one share.
+* `ra1_soviets_yakscoutplane` declares TWO armaments of the same weapon at the two wing offsets
+  (`256,-213,0` and `256,213,0`). Two guns, two armaments - and **the pair shares 50%, so each
+  single chaingun is 25%**, which is precisely the maintainer's arithmetic.
+
+⛔ **SO A DUPLICATE ARMAMENT IS NOT ALWAYS A DUPLICATE.** `Armament@PRIMARY` and
+`Armament@GARRISONED` are the same gun fired from two places and must be counted ONCE; the Yak's
+two wing mounts are two guns and must be counted TWICE. The evidence that separates them is the
+`LocalOffset`: same weapon, DIFFERENT offset, same condition = a real second mount. ⚠ The
+reference map currently de-duplicates on `(weapon, role)` alone and therefore UNDER-counts a dual
+mount. Two actors are affected, `ra1_soviets_yakscoutplane` and `ra1_soviets_su57attackbomber`,
+and **neither publishes a wrong number today** only because both are withheld for a different
+reason (their cycles differ). It becomes a live error the moment those cycles are fixed.
+
+**THE YAK IS OFF ITS OWN DESIGN TODAY.** Intended 50% bomb / 50% chainguns; measured:
+
+    napalm bomb   40,080 per cycle / 119 = 336.81   72%
+    chaingun x2    8,000 per cycle / 121 =  66.12   14% each, 28% together
+
+⚠ Fixing that is a firepower re-split, not a cadence tweak, and it needs the pipeline and an
+explicit order. What IS ruled is the cadence: the two cycles are averaged to **120** (3a.6).
+
+⚠ **STILL TO CONFIRM** - recorded here so the next reader does not assume the answer:
+1. Is the share always **equal** (1/n), or may a deliberate design weight one weapon higher, with
+   1/n only the default? Every measured actor is exactly equal, which suggests equal is the law.
+2. Does `n` count **barrels** (the Yak's 25% per chaingun) or **weapon systems** (50% for the
+   chaingun pair)? The Yak answer implies barrels for the share and systems for the split.
+3. For the 3a.7 disjoint case, the requirement is that both virtual units resolve to the **same
+   HP, speed and cost**. Is the DPS of each expected to match a single-weapon unit of that class
+   outright, or to be reduced for the flexibility of carrying both?
+
+
 ## 4. Tech tier rules (F12/F13)
 
 Building tiers are data-driven from prerequisite chains (conyard 0,
