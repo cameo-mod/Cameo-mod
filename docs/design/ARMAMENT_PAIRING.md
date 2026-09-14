@@ -311,18 +311,36 @@ it and Astra's engine trace held it (PR #386), correctly. Three shapes break a n
   Tower *"needs to charge for every shot unlike the tesla coil ... at 5 shots the initial charge
   delay is used 5 times"*. So its cycle is `160 + 5 x 12 = **220**` — #385's 160 never paid the
   charge and my 172 paid it once; both were wrong. A charged weapon is one of two machines,
-  **charge-once** or **charge-per-shot**, differing by a factor of `MaxCharges`. Astra's trace
-  gives the mechanism (the Rail Tower's post-shot `ChargeFire` wait of 3 expires inside a 10-tick
-  weapon reload, so the trait exits and reacquires). What is still missing is the DETECTION:
-  `ChargeDelay` against the weapon reload, a field `extract_stats` does not record.
-* **random `ChargeLevel`** — `steelconsortium_dagger` declares `ChargeLevel: 25, 50` and
-  `extract_stats` keeps only the lower bound. ⭐ **Maintainer ruled 2026-09-14: use the MEAN of
-  min and max**, added to the reload — so the Dagger contributes 37.5 — and `wc2_humans_dwarvenrifleman`'s `0, 4` becomes **2**, not the
-  zero the ledger currently records. Four actors carry a ranged charge; the extractor change to
-  average them is pending and is one of the three unblocks.
+  **charge-once** or **charge-per-shot**, differing by a factor of `MaxCharges`.
+  ⭐ **RESOLVED 2026-09-14, in the maintainer's favour.** `ChargeFire` does not spin while the
+  weapon reloads — it EXITS, because `AttackBase.CanAttack` calls
+  `HasAnyValidWeapons(reloadingIsInvalid: true)` and a reloading armament makes it false.
+  `ChargeAttack` has the same guard, so the activity ends and the actor re-enters through
+  `ChargeAttack`, paying `InitialChargeDelay` again. The detection is therefore exactly the
+  comparison Astra named: **`ChargeDelay` against the weapon's reload** — `reload <= ChargeDelay`
+  is charge-once with `gap = ChargeDelay`, `reload > ChargeDelay` is charge-per-shot with
+  `gap = reload + InitialChargeDelay`. `tools/balance/sim_attack_tesla.py` reproduces all three
+  ruled figures exactly: 131, 95 and the Rail Tower's **220**.
+  ⛔ **My 172 and 180 are both WITHDRAWN** — they shared the false premise that `ChargeFire`
+  keeps ticking through the reload, and Codex and Astra caught it. #385's 160 never paid the
+  charge. Applying any of this still needs `ChargeDelay` and the weapon reload in the extractor.
+* **random `ChargeLevel`** — ⭐ **CLOSED, and it shipped.** `steelconsortium_dagger` declares
+  `ChargeLevel: 25, 50`; `extract_stats` kept only the lower bound. Maintainer ruled 2026-09-14 to
+  **use the MEAN of min and max**, added to the reload, so the Dagger contributes **37.5** and
+  `wc2_humans_dwarvenrifleman`'s `0, 4` becomes **2**, not zero. `extract_stats.charge_scalar`
+  implements it and all four ranged actors were re-extracted.
+  ⛔ **The dwarf is the case that mattered, and it made the unit DEARER.**
+  `charge_price_multiplier` treats `share <= 0` as *charges, but we cannot see by how much* and
+  returns the FLAT 0.75 floor — so the misparsed zero was collecting the deepest discount in the
+  table. Its real 2 ticks against a 60-tick reload move it to **0.976**. The Dagger's own figure
+  does not move (0.750, already clamped at the floor) and the two siege engines go 0.875 → 0.827.
+  ⚠ The reference path is untouched: `charge_attack_cycle` returns `None` for the whole
+  `ChargeLevel` family, so the regenerated `armament_pairing.json` changed only its three input
+  fingerprints.
 
-The unblock is three extractor fields — `ChargeDelay`, `ShotsPerCharge`, and whether a value was a
-RANGE — plus a formula that models recharge overlap. Withholding is the same answer this lane gives
+⭐ Range-ness is now resolved at extraction, so **two extractor fields remain** — `ChargeDelay`
+and `ShotsPerCharge` — plus a formula that models recharge overlap.
+Withholding is the same answer this lane gives
 everywhere else: an unprovable quantity abstains.
 
 ⛔ **THE POPULATION IS SMALLER THAN IT LOOKS, AND I OVERSTATED IT.** 14 actors carry a `charge_up`
@@ -330,8 +348,9 @@ record, but that is not 14 actors whose reported cadence would move. **Three are
 other eleven are `ChargeLevel`-family records** — a different trait with a different schedule, not
 units inheriting an engine default, which is how I first explained it and was wrong.
 `ra1_allies_mobileradarjammer` has **no priced armament view at all**,
-`wc2_humans_dwarvenrifleman` records **zero** ticks today (it declares `0, 4`, so under the
-averaging ruling it becomes 2), and `terran_siegetank` keeps 37 under the ownership guard. I published a table claiming the siege
+`wc2_humans_dwarvenrifleman` winds up for **2** ticks against a 60-tick reload (it declares
+`0, 4`; the averaging ruling has landed, so this is no longer the zero it used to read), and
+`terran_siegetank` keeps 37 under the ownership guard. I published a table claiming the siege
 tank at 62 and the burning Obelisk at 155; **both were wrong** — measured before I adopted #385's
 guard, and never re-measured after. Counting records is not counting effects.
 

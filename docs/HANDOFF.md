@@ -7,7 +7,7 @@ Written by **Claude-Local (Opus 5)**. Live state; read before anything dated ear
 | | |
 |---|---|
 | master | **`b7b8a91ff`** — #375 landed as `e1eef5e59`, then #385 |
-| my open PR | **#386** at **`762cc5233`** — docs + tests ONLY, production code identical to master |
+| my open PRs | **#386** — docs + tests ONLY, production code identical to master; then `claude/charge_range_mean` **stacked on it**, carrying the extractor change + re-extract |
 | Codex's lane | seven-source pinning (verified), reference-map review, missing references, 28-faction regen |
 | map | v29 classic C&C: 161 originals · 255 expanded · 815 references |
 | suite | branch matches master's baseline; 0 new failures |
@@ -23,15 +23,55 @@ reload delay plus charge delay"* — **both**, never either. And the rate identi
 
 ⛔ **Applying it is BLOCKED on evidence the extractor does not record.** Astra's engine trace:
 multi-shot `ChargeLevel` recharges per projectile (burning Obelisk, Burst 10); the Rail Tower's
-INITIAL charge is 12 and the 3 is its post-shot `ChargeFire` wait, resuming inside its own 10-tick
-reload and then reacquiring — an unresolved RESTART schedule, so 160 and 172 are both provisional;
-`ChargeLevel: 25, 50` keeps only its lower bound. Unblock = `ChargeDelay`, `ShotsPerCharge`,
-range-ness + recharge-overlap modelling.
+INITIAL charge is 12 and the 3 is its post-shot `ChargeFire` wait.
+Unblock = `ChargeDelay` + `ShotsPerCharge` + recharge-overlap modelling. **Range-ness is no longer
+on that list** — see below.
 
-⭐ **RANDOM RANGES TAKE THE MEAN** (maintainer, 2026-09-14). `25, 50` → 37.5; the dwarven
-rifleman's `0, 4` → **2**, not zero. FOUR actors carry a ranged charge. **Recorded, not
-implemented** — it changes `charge_up.ticks` in the RAW ledgers, so it needs an `extract_stats`
-change plus a full re-extract, on its own branch. **This is the next task in my lane.**
+⭐⭐ **THE RAIL TOWER IS RESOLVED — THE RULING WAS RIGHT, AND BOTH MY NUMBERS ARE WITHDRAWN.**
+`ChargeFire` does not spin while the weapon reloads: `AttackBase.CanAttack` calls
+`HasAnyValidWeapons(reloadingIsInvalid: true)`, a reloading armament makes it false, and
+`ChargeFire` returns true. `ChargeAttack` carries the same guard, so the activity ENDS and the
+actor re-enters through it — paying `InitialChargeDelay` again, exactly as ruled. Codex and Astra
+caught this; my 172 (spin) and 180 (quantised spin) shared the same false premise.
+
+`tools/balance/sim_attack_tesla.py` runs the state machine tick by tick and reproduces **all
+three** ruled figures: 131, 95 and **220**.
+
+| number | source | what it got wrong |
+|--:|---|---|
+| 160 | #385 | never pays the wind-up |
+| 172 | mine — **withdrawn** | `ChargeFire` exits, it does not spin |
+| 180 | mine — **withdrawn** | same false premise, quantised |
+| **220** | the 2026-09-14 ruling | — reproduced exactly |
+
+⭐ **And it gives the automatic detection**: `reload <= ChargeDelay` is charge-once
+(`gap = ChargeDelay`); `reload > ChargeDelay` is charge-per-shot
+(`gap = reload + InitialChargeDelay`). ⛔ Confirmed is not applied — the charge term is still
+withheld, and applying it needs `ChargeDelay` and the weapon reload in the extractor.
+
+⭐⭐ **RANDOM RANGES TAKE THE MEAN — RULED, IMPLEMENTED, RE-EXTRACTED** (maintainer, 2026-09-14).
+`ChargeLevel: 25, 50` is ONE uniform roll, not two settings, so it costs **37.5**;
+`extract_stats.charge_scalar` averages min and max where it used to keep `split(",")[0]` — i.e. it
+priced every charged shot as if it always rolled the luckiest value. **Exactly four actors declare
+a range and all four moved**; nothing else in 34 ledgers did.
+
+| actor | declared | ticks | price multiplier |
+|---|---|--:|---|
+| `steelconsortium_dagger` | `25, 50` | 25 → **37.5** | 0.750 → 0.750 (already at the floor) |
+| `wc2_humans_dwarvenrifleman` | `0, 4` | 0 → **2.0** | 0.750 → **0.976** |
+| `wc2_humans_siegeengine` | `20, 40` | 20 → **30.0** | 0.875 → 0.827 |
+| `wc2_orcs_siegeengine` | `20, 40` | 20 → **30.0** | 0.875 → 0.827 |
+
+⛔ **THE DWARF IS THE FINDING, AND IT GOES THE WRONG WAY ON PURPOSE.**
+`charge_price_multiplier` reads `share <= 0` as *charges, but we cannot see by how much* and hands
+back the FLAT 0.75 floor — so the misparsed zero was quietly collecting the DEEPEST discount in the
+table. Measuring its real 2 ticks makes the unit **dearer**, not cheaper. A measured near-zero and
+an unmeasured zero are different facts and only one may claim the floor.
+
+⚠ **The reference path did not move**: `charge_attack_cycle` returns `None` for the whole
+`ChargeLevel` family, so the regenerated `armament_pairing.json` changed only its three input
+fingerprints — which is also how the fingerprint guard caught the stale artifact in the first
+place. Pinned by the new `ranged_charge_actors` claim.
 
 `tesla_coil_attack_period` pins the IMPLEMENTED **106** with the ruled **131** beside it, and a
 test asserts the gap is exactly the 25-tick wind-up, so neither applying it early nor landing the
@@ -62,7 +102,12 @@ values stand — untouched, no `apply_balance`. Evidence only.
 
 ### WHAT IS STILL OPEN IN MY LANE
 
-* **Averaging ruling** — `extract_stats` + full re-extract (above). Next.
+* ~~Averaging ruling — `extract_stats` + full re-extract~~ ⭐ **DONE** (above), on
+  `claude/charge_range_mean`, stacked on #386 because it needs that branch's charge tests.
+* **Next: the two remaining extractor fields**, `ChargeDelay` and `ShotsPerCharge`. They are what
+  stand between the ruled charge law and applying it — and they are useless until the
+  **172-vs-220 disagreement** below is reconciled, because they are exactly the evidence that
+  argument turns on.
 * The actor-level ruler is still a distribution of whole actors; a per-armament ruler needs the
   peer corpora re-expressed per weapon. MODEL change, needs the maintainer.
 * **694 unfolded rates stay blocked.**
