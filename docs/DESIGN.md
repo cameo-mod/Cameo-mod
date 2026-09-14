@@ -553,13 +553,18 @@ a flat 1.5x - **MG1 1.350x, MG2 1.429x, MG3 1.500x** - and that ramp is delibera
 weapons are exempt from 3a.1's flat ratio. Their doubled AA damage is correct: both actors are
 the dedicated-AA role.
 
-⛔ **BUT THE TANK'S WEAPONS ARE SHARED AND THE CANNON'S ARE NOT.** `YuriGatlingCannonMG1/2/3`
-belong to `yuri_gatlingcannon` alone, so that exemption is clean. `RA2GattlingMG1/2/3` are used by
-`yuri_gatlingtank` **and by `ra2_c_abram`, `ra2_c_hum`, `ra2_c_hum2`, `ra2_c_ifv` and
-`ra2leopard`** - so exempting the WEAPON also exempts five actors that were not named. Either the
-exemption is written against those weapons and covers all six actors, or the non-gatling users
-need weapons of their own. **Unresolved; do not apply the exemption to the shared weapons until
-it is.**
+⛔ **THE EXEMPTION IS PER ACTOR, NOT PER WEAPON - RULED 2026-09-14.** *"Only the Yuri gatling
+tank and the Yuri gatling cannon! Anything else is not approved and requires their own weapon."*
+
+`YuriGatlingCannonMG1/2/3` belong to `yuri_gatlingcannon` alone, so that half needs nothing.
+`RA2GattlingMG1/2/3` are shared with **five actors that are NOT exempt** - `ra2_c_abram`,
+`ra2_c_hum`, `ra2_c_hum2`, `ra2_c_ifv` and `ra2leopard` - so those five must be given **their own
+copies at a flat 1.5x AA reach** rather than inheriting the ramp. Until that split exists the
+shared weapons cannot be marked exempt, because doing so would hand the exemption to five units
+that were explicitly not approved for it.
+
+⚠ The split is new yaml (three weapons, plus the armament rewiring on five actors) and therefore
+needs the pipeline and a boot gate. It is a task, not a decision.
 
 **⭐⭐ THE AA BONUS IS SCOPED BY CLASS** (maintainer, 2026-09-14). The question was whether the
 AA half carries +100% damage; the answer depends on whose job anti-air is:
