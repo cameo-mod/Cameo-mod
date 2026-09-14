@@ -12,7 +12,7 @@ be inferred (DESIGN 3a.8, 3a.10):
 | `X_AGOnly` + `X_AAOnly` | TWO independent weapons | prices **both**, never summed |
 | no suffix | hits everything, or is the only weapon | priced normally |
 
-**93 renames** - 74 twin, 16 disjoint, 3 dropped.
+**94 renames** - 74 twin, 16 disjoint, 4 dropped.
 
 ## Twin splits - the ground half gains `_AG`
 
@@ -118,6 +118,7 @@ be inferred (DESIGN 3a.8, 3a.10):
 
 | old | new | why |
 |---|---|---|
+| `D2K_Rocket_AA` | `D2K_ADP_Rocket` | maintainer-named; the plain de-suffixed name is taken by another weapon |
 | `ra1_allies_rapierjumpjet_missile_AA` | `ra1_allies_rapierjumpjet_missile` | it attacks air AND ground |
 | `ra1_allies_rapierjumpjet_missile_cryo_AA` | `ra1_allies_rapierjumpjet_missile_cryo` | it attacks air AND ground |
 | `ra1_soviets_samsite_missile_AA` | `ra1_soviets_samsite_missile` | it is the actor's only weapon |
@@ -127,5 +128,4 @@ be inferred (DESIGN 3a.8, 3a.10):
 | old | wanted | why |
 |---|---|---|
 | `AsianQuasarAG` | `AsianQuasar_EMP_AG` | already scheduled as AsianQuasar_AG - one weapon cannot take two names: ground half of the twin AsianQuasar_EMP_AA (matched on cadence + 1.5x reach, not on name) |
-| `D2K_Rocket_AA` | `D2K_Rocket` | target name already taken: it is the actor's only weapon |
 | `SteelMantaAG` | `SteelMantaAAResonance_AG` | already scheduled as SteelManta_AG - one weapon cannot take two names: ground half of the twin SteelMantaAAResonance_AA (matched on cadence + 1.5x reach, not on name) |

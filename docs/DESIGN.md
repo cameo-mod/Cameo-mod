@@ -574,6 +574,20 @@ that were explicitly not approved for it.
 ⚠ The split is new yaml (three weapons, plus the armament rewiring on five actors) and therefore
 needs the pipeline and a boot gate. It is a task, not a decision.
 
+⛔ **AND THE MECHANISM THAT USED TO SEPARATE THEM IS GONE - MEASURED 2026-09-14.** The maintainer
+suspected it: *"the weapons are fixed and shared between the two. The range for both is
+individually set on the unit with a range multiplier. This might not work or maybe the multipliers
+have been removed in a previous commit when I asked to remove any unconditional multipliers so
+yeah, now it might be broken."* Confirmed. Every `RangeMultiplier` left on `yuri_gatlingtank`,
+`yuri_gatlingcannon`, `ra2_c_ifv` and `ra2leopard` is CONDITIONAL - `@shrouded`, `@blinded`,
+`@RANK-*`, `@GravityGenerator*`, `@tankbunker`, `@GatlingBuff` - and **not one is unconditional**.
+So a unit can no longer set its own reach: the shared weapon's `Range` is the only source, and all
+six actors are locked to the same numbers. Splitting the weapons per unit is therefore not merely
+tidier, it is the ONLY way to give them different reaches again.
+
+⚠ They do not even use the same stages: `ra2_c_ifv` carries MG1 and MG2 only, `ra2leopard` carries
+MG1 alone beside its `RA2120mm` cannon, and only `yuri_gatlingtank` uses all three.
+
 **⭐⭐ THE AA BONUS IS SCOPED BY CLASS** (maintainer, 2026-09-14). The question was whether the
 AA half carries +100% damage; the answer depends on whose job anti-air is:
 
@@ -629,7 +643,46 @@ equally authoritative.
 
 ⛔ **AN OPEN QUESTION SITS ON TOP OF THIS ONE - see the box at the end of 3a.1.**
 
+### 3a.1b ⭐ THE APPROVED AA FIXES (maintainer, 2026-09-14)
+
+Every one of these was put to the maintainer with its numbers and approved:
+
+| finding | count | ruling |
+|---|--:|---|
+| AA half at **0.5x** damage - the Lunar/Naxi laser family | 5 | *"maybe it was accidentally reversed? but yeah this is not intended"* → **fix** |
+| identical damage but the reach ratio is not 1.5x | 6 | *"yes always"* → **fix to exactly 1.5x** |
+| `apparition.ixian` at **2.0x** reach, `ixian_farasha` at **1.0x** | 2 | *"yes"* → **same treatment** |
+| gatling spin-up ramp (1.350x / 1.429x / 1.500x) | 6 weapons | **exempt**, but only on `yuri_gatlingtank` and `yuri_gatlingcannon` |
+
+⚠ All are yaml balance numbers: pipeline and boot gate, never a hand edit.
+
+**⭐ IS THE BONUS AA REACH MANDATORY?** *"it should be mandatory where possible but it might be
+that the units from scout or transport classes have a weapon that cannot attack air at all, or get
+an additional weapon that can't attack air like the nod buggy that gets a flamethrower as an extra
+weapon which can never hit air. Or a tank cannon like for the japanese hovercraft APC which only
+has one weapon that can attack air while it has another that is only anti ground."* So: mandatory
+for a weapon that CAN engage air, and simply inapplicable to one that cannot. A unit in those
+three classes may carry extra ground-only weapons without breaking the rule.
+
 ### 3a.2 Weapons that can hit the same target MUST share one range
+
+**⭐ THE EXEMPTION IS RULED: FIXED-WING AIRCRAFT ONLY** (maintainer, 2026-09-14): *"only for
+fixed wing aircraft because they will always fly in range since they can't stop mid air unlike
+helicopters so they will always use the long range and the short range weapon together by flying
+over the target. So for fighters and bombers that rule doesn't exist but anything else that stops
+to attack it must be the same range."*
+
+The mechanism is the reason: a unit that STOPS to attack fires from the range of its longest gun,
+so a shorter gun on it is dead yaml. A fighter or bomber cannot stop - it flies over the target -
+so it necessarily closes to the short weapon's range and both weapons land. Unequal ranges are
+therefore meaningful on a fixed-wing aircraft and meaningless on everything else, **helicopters
+included** (a Hind can hover, so it obeys the rule).
+
+⚠ This is what makes `ra1_soviets_yakscoutplane` (1,840 bomb / 7,000 chaingun) and
+`ra1_soviets_su57attackbomber` legal, and it hands them to 3a.9's DISJOINTED-same-target case:
+separate ranges, both hitting the victim, so each is solved on its own and then takes 1/n.
+
+
 
 > *"the unit will always try to fire at maximum range so if they are different it will mostly use
 > one but not both weapons so to maximize effectiveness it is imperative that ALL WEAPONS THAT
@@ -794,7 +847,14 @@ measurement. It shows that differentiated slots are common in that population; i
 which slot should be stronger or what `td_gdi_mammothtank` should be.
 
 
-### 3a.5 ⛔ NEVER reference across factions
+### 3a.5 ⛔ NEVER reference across factions AUTOMATICALLY
+
+**Refined 2026-09-14:** *"unless approved by the maintainer and manually set, never match it
+automatically"*. A cross-faction pairing is legal only as an explicit entry in
+`assign_references.REFERENCE_OVERRIDES`, where the ruling is visible and attributable. The MATCHER
+may never produce one on its own.
+
+
 
 > *"the GDI emp grenadier was mapped to the CA marauder which is a scrin unit so that is wrong!
 > Never ever reference from other factions without my instructions! What we need is the CA zone
@@ -866,13 +926,18 @@ rule the exemption first, then fix what remains.
 fix any of these very close drifts but the larger ones are likely on design. Only the smaller
 drifts like these should be corrected."* A spread of a couple of percent is somebody's arithmetic
 slipping and is repaired by averaging; a spread of 100% is a design decision and must be left to
-a design ruling. Measured across the classic four at a **5%** threshold, the whole corrective
-list is TWO rows:
+a design ruling. ⚠ **THE THRESHOLD IS 10%, not 5%** (maintainer, 2026-09-14: *"I would say even 10% instead
+of 5%"*). Measured across the classic four, the whole corrective list is ONE row:
 
 | actor | quantity | values | spread | action |
 |---|---|--:|--:|---|
-| `ra1_soviets_yakscoutplane` | cycle | 119 / 121 | **1.7%** | average to **120** (bomb reload 110 -> 111, chaingun 100 -> 99) |
 | `td_gdi_battletank` | range | 5,400 / 5,438 | **0.7%** | average to **5,419** |
+
+⛔ **THE YAK IS NO LONGER ON THIS LIST.** Its 119/121 cycle looked like the clearest drift in the
+tree, and it was not drift at all: its two weapons have SEPARATE RANGES, which makes them
+disjointed (3a.9), and a disjointed pair has no reason to share a cycle. The averaging order was
+withdrawn by the maintainer once that was seen. ⚠ A near-miss is only drift when the two weapons
+were supposed to match in the first place - check 3a.9's 2x2 BEFORE averaging anything.
 
 Everything else measures 12.7% or wider - the Yak's bomb against its chaingun at 280%, the Humvee
 Mk II's two cycles at exactly 100%, the Laser Corvette's charged laser at 114% - and those are
@@ -1051,7 +1116,47 @@ half - the Sea Scorpion's ground weapon is `RA2FlakTrackGun`, shared with the fl
 `Only` convention cannot always be applied to BOTH halves. Where the ground weapon is shared with
 another unit it must not be renamed; only the air half takes `_AAOnly`.
 
-### 3a.9 THE FIREPOWER SHARE - how a multi-weapon unit was always balanced
+### 3a.9 THE FIREPOWER SHARE - the 2x2 that decides how a multi-weapon unit is priced
+
+⛔⛔ **CORRECTED BY THE MAINTAINER, 2026-09-14, AND THIS SUPERSEDES THE EARLIER READING.** The
+first version of this section keyed everything on whether two weapons can hit the same TARGET.
+That is only half of it. The other half - the half that explains the cases that would not fit -
+is whether they share a RANGE:
+
+> *"disjointed means separate ranges! Write that down because that is important! And remember
+> disjointed against the same target still counts both! which means you need to adjust the final
+> DPS of each weapon by 1/n. While disjointed against different targets like the AA Trooper
+> having one AG and one AA disjointed weapon means both keep their full DPS!"*
+
+|  | **same range** | **different ranges (DISJOINTED)** |
+|---|---|---|
+| **same target** | one cycle, **DPS sums**, each weapon is **1/n** of the budget | each solved on its own (longer reach buys less DPS), then each scaled by **1/n** - they still both hit the victim |
+| **different targets** | - | each keeps its **FULL** DPS and they are **never summed** - only one is ever engaging |
+
+**READ IT AS TWO INDEPENDENT QUESTIONS.** *Do they both reach the victim?* decides whether the
+budget is SHARED (1/n) or not. *Do they have the same range?* decides whether their DPS can be
+ADDED or must be solved separately. The first question is about paying; the second is about
+arithmetic.
+
+⭐ **THE CASE THAT FORCED THE CORRECTION.** `ra1_soviets_yakscoutplane` carries a napalm bomb at
+1,840 range and a chaingun at 7,000, and its cycles differ (119 against 121). Under the old
+reading that was a 3a.6 violation to be averaged away. It is not: the two weapons have separate
+RANGES, so they are disjointed, and a disjointed pair has no reason to share a cycle. *"So yes
+this was wrong on my part ... that's why the short range weapon has the high damage and the long
+range weapon has the low damage, it all makes sense now!"* ⚠ **The ruling to average the Yak's
+cycle to 120 is therefore WITHDRAWN** - there was never a drift to fix.
+
+⭐ **AND IT EXPLAINS THE YAK'S 72/28.** Measured: bomb 336.81 DPS at 1,840 reach, chaingun 66.12
+at 7,000. That is not a broken 50/50 split - it is the range/DPS trade-off doing exactly what it
+should, with each weapon then taking half the budget. The "50% bombs, 50% dual chainguns" the
+maintainer described is the BUDGET share, never a claim that the two would show equal DPS.
+
+**WHERE 1/n WITH A PLAIN SUM APPLIES:** *"only counts for same range weapons like for helicopters
+like the hind, kamov, sky hawk etc with multi weapons and all weapons with identical range where
+you can simply sum up DPS with no problem!"* - helicopters and ground units, which stop to
+attack and therefore obey 3a.2's equal-range law.
+
+
 
 > *"you need to count them as individual units in the balance formula, one with one weapon and
 > the other with the other weapon. But here it's important that they are indeed not counted as
@@ -1061,14 +1166,9 @@ another unit it must not be renamed; only the air half takes `_AAOnly`.
 > and 50% dual chainguns which means 25% single chaingun (since these are two weapons right?) ...
 > a lot of units have this logic like also the hind and the sky hawk"* (maintainer, 2026-09-14)
 
-**THE LAW.** A multi-weapon actor is priced by splitting it into **virtual single-weapon units**,
-pricing each with the balance formula, and merging them back. What changes between the two cases
-is the SHARE each virtual unit carries:
-
-| the weapons can... | each virtual unit gets | the actor's DPS is | why |
-|---|---|---|---|
-| **hit the same target** (3a.6) | **1/n of the firepower budget** | the **SUM** of the shares | both barrels land on the victim, so together they must equal one unit's worth of firepower |
-| **never hit the same target** (3a.7) | the **FULL** firepower budget | **NOT summed** - each stands alone | only ever one of them is engaging, so each must be a complete unit on its own |
+**THE MECHANISM.** A multi-weapon actor is priced by splitting it into **virtual single-weapon
+units**, pricing each with the balance formula, and merging them back. The 2x2 above decides
+what share each virtual unit carries and whether the results may be added.
 
 ⭐ **THE TREE ALREADY OBEYS THIS, AND IT IS VISIBLE AS A FINGERPRINT.** If every weapon carries
 `1/n`, then with one shared cycle (3a.6) **every weapon on the actor shows the SAME DPS**. That is

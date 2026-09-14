@@ -1,5 +1,23 @@
 {
  "_doc": "Formula v2 class anchors (BALANCE_PIPELINE.md \u00a75, DESIGN \u00a712 second iteration). Each class prices by normalized deviation from its anchor: Cost = cost0 * (O/O0 + P/P0 + Q/Q0) / 3 \u2014 exact at the anchor. Anchors are MAINTAINER picks, validated by tools/balance/fit_class.py before sign-off. reveals_shroud (maintainer 2026-07-22) = baseline range floored to 5000 for scout/closecombat/melee. Infantry anchors locked 2026-07-22 (DPS/cost provisional, tested in-game later). Classes without an entry keep the global Tiger formula.",
+"anti_air_ship": {
+  "anchor_actor": "ra2_allies_aegiscruiser",
+  "armor": "Medium",
+  "comment": "Dedicated anti-air SHIP - the naval form of anti_air_vehicle, created 2026-09-14 on the maintainer's order (\"we also have the anti air ship template like for the sea scorpion, aegis cruiser etc, they should get the same bonus as the anti air vehicle class\"). Keeps a SEPARATE FREE air weapon (+50% range/+100% dmg) priced only on the ground weapon, exactly as anti_air_vehicle does. See DESIGN 3a.1.",
+  "provisional": "SPEC IS THE ANCHOR'S CURRENT LIVE STATS, NOT A MAINTAINER PICK - recorded so the class exists and can be fitted, NOT signed off. ra2_allies_aegiscruiser measures hp 90000, speed 90, cost 1500, ground weapon RA2MedusaAG range 9000 and 30000 x3 over a 126t cycle = 714.29 dps. Verifier ra2_soviets_seascorpion measures hp 25000, speed 120, cost 600 - a 3.6x hp spread against the anchor, so the pair needs fit_class.py and a maintainer decision before sign-off. Its AA/AG pair is also NOT clean: SeaScorpion_AA 13500 against RA2FlakTrackGun 5528 is 2.44x, and that ground weapon is SHARED with the flak track.",
+  "reveals_shroud": 7000,
+  "signed_off": false,
+  "spec": {
+   "cost0": 1500,
+   "dps0": 714,
+   "hp0": 90000,
+   "range0_wdist": 9000,
+   "speed0": 90
+  },
+  "tech_tier": 1.0,
+  "tech_tier_flag": "DEFAULT 1.0 - inherited from anti_air_vehicle and unconfirmed for the naval form; baseline+verifier must SHARE tier+K",
+  "verifier_actor": "ra2_soviets_seascorpion"
+ },
  "anti_air_vehicle": {
   "anchor_actor": "latinsyndicate_diablo",
   "armor": "Medium",
