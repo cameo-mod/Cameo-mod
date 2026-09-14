@@ -1153,12 +1153,40 @@ def to_per_cycle(rows):
     `td_gdi_mammothtank_120mmdualhv` declares `Damage: 16000` with `Burst: 2` and the snapshot
     carries 32,000), so Cameo rows pass through untouched. Every peer corpus stores damage per
     SHOT, so a peer row is multiplied by its own burst.
+
+    ⛔⛔ THE SENTENCE ABOVE WAS THE DOCSTRING AND NOT THE CODE, AND THAT COST A FACTOR OF 2.4.
+    Maintainer, 2026-09-13: *"the GDI grenadier reference damage per shot went up from 22k to 38k
+    per cycle but why? ... the grenadier only shoots a single grenade so the numbers should not
+    change right?"* Right, and the grenadier's own numbers did NOT change — all three of its
+    references are Burst 1. What changed was the RULER it is measured against.
+
+    The loop below multiplied EVERY row with `Burst > 1`, and `reference_targets.cameo_context()`
+    feeds it the frozen Cameo snapshot, which is exactly the corpus the docstring says is already
+    per cycle. So Cameo's burst rows were multiplied A SECOND TIME:
+
+        td_gdi_mammothtank  yaml 16,000 x Burst 2  snapshot 32,000  ->  64,000
+        td_gdi_mlrs         yaml  8,000 x Burst 6  snapshot 48,000  -> 288,000   (36x the shot)
+
+    245 of the 893 frozen rows, and 24 of the 83 hero rows. That snapshot is the PROJECTION
+    RULER — the distribution every damage target is projected onto — so inflating a quarter of it
+    lifted the damage target of every Cameo actor, including the single-shot ones that have no
+    burst anywhere near them. Cameo's infantry ruler read median 25,200 / mean 60,189 / gm 26,071
+    where the truth is 20,010 / 28,049 / 18,539, and td_gdi_grenadier projected 38,451 instead of
+    21,631.
+
+    ⚠ THE GUARD IS THE SOURCE, NOT A FLAG AT THE CALL SITE. Both frozen snapshots are 100% rows
+    of `source == "Cameo"` (893 and 83, measured), Cameo is the one corpus that stores the burst
+    total, and a parameter would have to be passed correctly at every future call site to work.
+    This way a Cameo row is safe wherever it is handed in, including mixed with peers.
     """
     out = []
     for r in rows:
         d, burst = r.get("w_damage"), float(r.get("w_burst") or 1)
-        if d and burst > 1:
+        if d and burst > 1 and r.get("source") != "Cameo":
             r = dict(r, w_damage=float(d) * burst, w_damage_per_shot=d)
+        elif d and burst > 1:
+            # Already a cycle total. Only the derived per-SHOT figure is attached.
+            r = dict(r, w_damage_per_shot=float(d) / burst)
         else:
             r = dict(r, w_damage_per_shot=d)
         out.append(r)
