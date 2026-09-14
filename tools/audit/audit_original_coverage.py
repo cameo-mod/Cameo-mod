@@ -7,10 +7,10 @@
      it doesn't exist in OpenRA or OpenTD then it is an extra unit and those can't always have
      3 references. But those that exist in OpenRA and OpenTD MUST ALWAYS HAVE 3 REFERENCES."
 
-That makes the acceptance test mechanical, which is the point: OpenRA Red Alert and OpenRA
-Tiberian Dawn ship the ORIGINAL rosters and nothing else, so an actor paired to one of their
-rows is by definition an original — and Combined Arms and DTA, which are supersets, must both
-have it too. Two rows short of three is a mapping defect, never missing data.
+That makes the acceptance test mechanical, which is the point: an actor paired to one of the
+declared original authorities is original, and must carry three name-backed references from the
+sources routed for its own faction. The candidate sources differ by universe; reporting Combined
+Arms and DTA as "missing" for RA2 or Tiberian Sun was itself a stale audit defect.
 
 The reverse direction is checked as well, because it catches the failure the first cannot see:
 an original whose OpenRA counterpart was never claimed by anybody. `ra1_allies_rifleinfantry`
@@ -60,10 +60,10 @@ ORIGINAL_SOURCES = (
 # Pill Box, `pillbox` a Silo. O1 counted those slots as FULL. It now counts them as EMPTY, which
 # is what they always were.
 #
-# ⛔ SO THIS NUMBER IS A WORK QUEUE, NOT A DEBT TO TOLERATE. Every one of the 12 is an original
-# whose counterpart exists in a source we could not name-match — DTA calls its rocket soldier
-# "Bazooka" and its AA gun "Anti-aircraft Gun". Each is fixed by ONE alias, and the list is
-# finite and checkable. It must fall, and it may never rise again.
+# ⛔ SO THIS NUMBER IS A WORK QUEUE, NOT A DEBT TO TOLERATE. Some rows are one safe alias away;
+# others expose a real source absence, a bot/variant identity, or an unsettled authority. The
+# audit names every routed candidate source so those cases are not confused with missing CA/DTA
+# data from another universe. It must fall, and it may never rise again.
 O1_BASELINE = 12
 # ⛔ O1_UNSETTLED — actors whose supersets ship the ID and give it to ANOTHER SIDE, so the gap can
 # never be closed by matching. Ruled 2026-09-13; the same shape as the O2 carve-out below, and
@@ -123,7 +123,9 @@ def main() -> int:
         for s in originals:
             claimed[(s, (srcs[s].get("id") or "").upper())].append(actor)
         if originals and len(srcs) < 3:
-            missing = [s for s in ("Combined Arms", "DTA Enhanced") if s not in srcs]
+            faction = fr.faction_of(actor)
+            routed = [source for source, _tokens in fr.routes_for(faction)]
+            missing = [source for source in routed if source not in srcs]
             o1.append((actor, sorted(srcs), missing))
 
     o2 = []
@@ -142,7 +144,8 @@ def main() -> int:
     print(f"## O1 — holds an OpenRA original but fewer than three sources: "
           f"**{len(o1)}** (ratchet {O1_BASELINE})\n")
     for actor, have, missing in o1[:40]:
-        print(f"   {actor:40} has {', '.join(s[:12] for s in have):26} MISSING {', '.join(missing)}")
+        print(f"   {actor:40} has {', '.join(s[:12] for s in have):26} "
+              f"ROUTED CANDIDATES {', '.join(missing)}")
     if len(o1) > 40:
         print(f"   … and {len(o1) - 40} more")
 

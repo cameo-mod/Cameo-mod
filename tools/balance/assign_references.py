@@ -1068,6 +1068,19 @@ REFERENCE_OVERRIDES = {
     # Original-unit gaps: renamed Scout Tank and RA-prefixed camouflaged pillbox.
     ('ra1_allies_alliedlighttank', 'Combined Arms'): '1TNK',
     ('ra1_allies_camopillbox', 'DTA Enhanced'): 'RAHBOX',
+    # 2026-09-14 original-coverage review. These are exact identity rows that the automatic
+    # matcher cannot use because their source ownership is untagged/shared, or because a display
+    # name adds a faction prefix. Every row was verified unclaimed before admission.
+    ('ra2_allies_engineer', 'Valiant Shades'): 'AENGINEER',
+    ('ra2_soviets_engineer', 'Valiant Shades'): 'SENGINEER',
+    ('ra2_soviets_sentrygun', 'Mental Omega'): 'NALASR',
+    ('ra2_soviets_sentrygun', 'CnC Reloaded'): 'NALASR',
+    ('ra2_soviets_sentrygun', 'RA2 Reborn'): 'NALASR',
+    ('ra2_soviets_sentrygun', 'Red Resurrection'): 'NALASR',
+    ('ts_gdi_mobileconstructionvehicle', 'Shattered Paradise'): 'MCV',
+    ('ts_gdi_mobilesensorarray', 'Crystallized Nexus'): 'LPST',
+    ('ts_nod_lightinfantry', 'Shattered Paradise'): 'ALTNODE1',
+    ('ts_nod_lightinfantry', 'Twisted Insurrection'): 'E1NOD',
     # Aedis 2026-09-10: original Soviet Mammoth, not the Siege expansion.
     ("ra1_soviets_mammothtank", "DTA Enhanced"): "4TNK",
     ("ra1_allies_gunboat", "DTA Enhanced"): "DESTROYER",   # DTA "Corvette"

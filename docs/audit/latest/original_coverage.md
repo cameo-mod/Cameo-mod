@@ -1,21 +1,17 @@
 # Original-unit reference coverage
 
-## O1 — holds an OpenRA original but fewer than three sources: **14** (ratchet 12)
+## O1 — holds an OpenRA original but fewer than three sources: **10** (ratchet 12)
 
-   ra1_allies_blackhawk                     has OpenRA Red A               MISSING Combined Arms, DTA Enhanced
-   ra1_allies_mobileradarjammer             has Combined Arm, OpenRA Red A MISSING DTA Enhanced
-   ra1_allies_phasetransport                has OpenRA Red A               MISSING Combined Arms, DTA Enhanced
-   ra1_soviets_flaktruck                    has OpenRA Red A               MISSING Combined Arms, DTA Enhanced
-   ra2_allies_battlefortress_empty          has Romanov's Ve               MISSING Combined Arms, DTA Enhanced
-   ra2_allies_engineer                      has Romanov's Ve               MISSING Combined Arms, DTA Enhanced
-   ra2_soviets_engineer                     has Romanov's Ve               MISSING Combined Arms, DTA Enhanced
-   ra2_soviets_sentrygun                    has Romanov's Ve, Valiant Shad MISSING Combined Arms, DTA Enhanced
-   ts_gdi_lightinfantry                     has OpenRA Tiber, Twisted Insu MISSING Combined Arms, DTA Enhanced
-   ts_gdi_mobileconstructionvehicle         has Crystallized, OpenRA Tiber MISSING Combined Arms, DTA Enhanced
-   ts_gdi_mobilesensorarray                 has OpenRA Tiber, Shattered Pa MISSING Combined Arms, DTA Enhanced
-   ts_gdi_railguncommando                   has OpenRA Tiber, Shattered Pa MISSING Combined Arms, DTA Enhanced
-   ts_nod_lightinfantry                     has OpenRA Tiber               MISSING Combined Arms, DTA Enhanced
-   ts_nod_shotguncommando                   has OpenRA Tiber, Shattered Pa MISSING Combined Arms, DTA Enhanced
+   ra1_allies_blackhawk                     has OpenRA Red A               ROUTED CANDIDATES Combined Arms, DTA Enhanced
+   ra1_allies_mobileradarjammer             has Combined Arm, OpenRA Red A ROUTED CANDIDATES DTA Enhanced
+   ra1_allies_phasetransport                has OpenRA Red A               ROUTED CANDIDATES Combined Arms, DTA Enhanced
+   ra1_soviets_flaktruck                    has OpenRA Red A               ROUTED CANDIDATES Combined Arms, DTA Enhanced
+   ra2_allies_battlefortress_empty          has Romanov's Ve               ROUTED CANDIDATES Valiant Shades, Mental Omega, CnC Reloaded, RA2 Reborn, Red Resurrection, RA2 0XX
+   ra2_allies_engineer                      has Romanov's Ve, Valiant Shad ROUTED CANDIDATES Mental Omega, CnC Reloaded, RA2 Reborn, Red Resurrection, RA2 0XX
+   ra2_soviets_engineer                     has Romanov's Ve, Valiant Shad ROUTED CANDIDATES Mental Omega, CnC Reloaded, RA2 Reborn, Red Resurrection, RA2 0XX
+   ts_gdi_lightinfantry                     has OpenRA Tiber, Twisted Insu ROUTED CANDIDATES Shattered Paradise, Crystallized Nexus, CnC Reloaded
+   ts_gdi_railguncommando                   has OpenRA Tiber, Shattered Pa ROUTED CANDIDATES Crystallized Nexus, CnC Reloaded, Twisted Insurrection
+   ts_nod_shotguncommando                   has OpenRA Tiber, Shattered Pa ROUTED CANDIDATES Crystallized Nexus, CnC Reloaded, Twisted Insurrection
 
 ## O2 — OpenRA/OpenTD original claimed by nobody: **108** (ratchet 15)
 
@@ -67,6 +63,6 @@
 
    gating sources: 6 (ratchet 15) · unsettled, reported only: 102
 
-   O1 gating actors: 12 (ratchet 12) · unsettled, reported only: 2
+   O1 gating actors: 8 (ratchet 12) · unsettled, reported only: 2
 
 exit=0
