@@ -1,5 +1,83 @@
 # Cameo — THE HANDOFF
 
+## ⭐⭐⭐ 2026-09-14 — #375 LANDED; #386 IS DOCS-ONLY AND AWAITING RE-REVIEW
+
+Written by **Claude-Local (Opus 5)**. Live state; read before anything dated earlier.
+
+| | |
+|---|---|
+| master | **`b7b8a91ff`** — #375 landed as `e1eef5e59`, then #385 |
+| my open PR | **#386** at **`762cc5233`** — docs + tests ONLY, production code identical to master |
+| Codex's lane | seven-source pinning (verified), reference-map review, missing references, 28-faction regen |
+| map | v29 classic C&C: 161 originals · 255 expanded · 815 references |
+| suite | branch matches master's baseline; 0 new failures |
+
+### THE CHARGE LAW — RULED, DELIBERATELY NOT APPLIED
+
+Maintainer, 2026-09-14: *"charged weapons come at a discount but the attack cycle duration is
+reload delay plus charge delay"* — **both**, never either. And the rate identity:
+
+    DPS = damage x burst / attack cycle
+    attack cycle = reload delay + sum of ALL burst delays + charge delay
+    ⚠ "DPS" is a NAME, not a unit — damage per TICK.
+
+⛔ **Applying it is BLOCKED on evidence the extractor does not record.** Astra's engine trace:
+multi-shot `ChargeLevel` recharges per projectile (burning Obelisk, Burst 10); the Rail Tower's
+INITIAL charge is 12 and the 3 is its post-shot `ChargeFire` wait, resuming inside its own 10-tick
+reload and then reacquiring — an unresolved RESTART schedule, so 160 and 172 are both provisional;
+`ChargeLevel: 25, 50` keeps only its lower bound. Unblock = `ChargeDelay`, `ShotsPerCharge`,
+range-ness + recharge-overlap modelling.
+
+⭐ **RANDOM RANGES TAKE THE MEAN** (maintainer, 2026-09-14). `25, 50` → 37.5; the dwarven
+rifleman's `0, 4` → **2**, not zero. FOUR actors carry a ranged charge. **Recorded, not
+implemented** — it changes `charge_up.ticks` in the RAW ledgers, so it needs an `extract_stats`
+change plus a full re-extract, on its own branch. **This is the next task in my lane.**
+
+`tesla_coil_attack_period` pins the IMPLEMENTED **106** with the ruled **131** beside it, and a
+test asserts the gap is exactly the 25-tick wind-up, so neither applying it early nor landing the
+extractor can pass silently.
+
+### ⛔ THE EXTREME ROWS — WHAT THEY ARE AND ARE NOT
+
+EXTREME is a **product of two independent projections**, damage x cadence, so two ~3x moves make a
+9x headline. **Cadence dominates in 21 of 35 rows**, not damage: `ts_gdi_pitbull` is damage 1.04x
+and cadence 4.98x. No single stat is 10x off.
+
+⚠ `tkm_dronepodtruck` reads 39.98x because its weapon does **1 damage** — a utility deploy priced
+against a combat reference. Clause 5 at the actor level; likely a small class, unswept.
+
+### ⛔ THE MINIGUNNER — TRACED TO #345, NOT TO BURST
+
+Against the real baseline, `playtest-20260709` (Tournament Build 24), not a 2023 tag:
+
+| stage | dmg | burst | cycle | rate |
+|---|--:|--:|--:|--:|
+| playtest-20260709 (`M16`, `E1.GDI`) | 2000 | 1 | 17 | **117.6/tick** |
+| `5d491698f` scout redesign 07-19 | 2000 | 4 | 54 | **148.1/tick** |
+| after **#345** 09-12 | 480 | 4 | 59 | **32.5/tick** |
+
+The burst change was deliberate and priced at exactly 100 through the scout anchor; it RAISED the
+rate. **#345 then cut damage 4.17x and invalidated that solved price.** Blackrobe ruled the baked
+values stand — untouched, no `apply_balance`. Evidence only.
+
+### WHAT IS STILL OPEN IN MY LANE
+
+* **Averaging ruling** — `extract_stats` + full re-extract (above). Next.
+* The actor-level ruler is still a distribution of whole actors; a per-armament ruler needs the
+  peer corpora re-expressed per weapon. MODEL change, needs the maintainer.
+* **694 unfolded rates stay blocked.**
+* TS sub-faction routing: Crystallized Nexus tags GDI units `zocom`/`steel`; `ts_gdi` routes only
+  `('gdi',)`.
+
+### REFERENCE DATA — CHECK BEFORE DECLARING ANYTHING MISSING
+
+⛔ Three separate "source is unrecoverable" reports have all been wrong. `Cameo-mod-reference`
+(~9.9 GB, OUTSIDE the repo) holds them. The seven INI sources with no `source_sha256` — **10,144
+of 11,870 corpus rows** — are in `Cameo-mod-reference/extraction/` and are packaged at
+`Cameo-mod-reference/ini_sources.zip` (1.8 MB, flat, with `SHA256SUMS.txt`). Codex verified all
+seven hashes. ⚠ Codex runs on Blackrobe's machine, not the maintainer's — a path on one is not
+reachable from the other.
+
 ## ⭐⭐⭐ 2026-09-14 — PR #375 FOLLOW-UP REVIEW FIXES, ASTRA GO
 
 Codex reviewed Aedis's revised `c3dc32871` head with Astra. The original 71 focused tests and all
