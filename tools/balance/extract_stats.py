@@ -99,6 +99,42 @@ def stat(resolved, local, trait: str, field: str):
     return {"v": v, "src": src}
 
 
+def charge_scalar(raw, default=None):
+    """One number out of a charge field that may be a RANDOM RANGE.
+
+    ⛔ **Maintainer ruling, 2026-09-14** — *"regarding the charge with random
+    charge level make it so it counts the average between max and min delay ...
+    for the consortium dagger, the charge range from 25 to 50 so you add 37.5 to
+    the reload delay as attack cycle"*.
+
+    `ChargeLevel: 25, 50` is not two settings, it is ONE uniform roll the engine
+    makes every time the actor winds up. The cost of a cycle is therefore the
+    MEAN of the bounds, and this used to keep `split(",")[0]` — the lower bound,
+    i.e. it priced every charged shot as if it always rolled the luckiest value.
+
+    ⚠ A range whose floor is 0 is still a RANGE, not an absent value:
+    `wc2_humans_dwarvenrifleman` declares `0, 4` and costs **2**, not zero. That
+    zero is the one this function most needed to stop reporting, because a zero
+    read as "no charge" silently exempts the actor from the whole charge law.
+
+    Mean of MIN and MAX rather than of every element, exactly as ruled — they
+    coincide for the two-element ranges the tree actually has, and the ruling is
+    what a third value would have to be measured against.
+    """
+    parts = []
+    for piece in str(raw).split(","):
+        piece = piece.strip()
+        if not piece:
+            continue
+        try:
+            parts.append(float(piece))
+        except (TypeError, ValueError):
+            return default
+    if not parts:
+        return default
+    return (min(parts) + max(parts)) / 2.0
+
+
 def charge_up(resolved, local):
     """The actor's charge-up attack trait + provenance, or None.
 
@@ -113,6 +149,9 @@ def charge_up(resolved, local):
     W16 also records the MEASURED wind-up so the discount can scale with it:
       ticks — how long the actor spends charging
       cycle — the reload the trait itself governs, when it has one
+
+    `ticks` may come from a RANDOM RANGE, in which case it is the mean of the
+    bounds — see `charge_scalar` for the ruling and for why a zero floor matters.
 
     ⚠ Both read the ENGINE DEFAULT when the key is absent from the yaml. An absent
     key means default, never zero: the RA2 Tesla Coil writes no
@@ -137,10 +176,7 @@ def charge_up(resolved, local):
                 n = child(c, key)
                 if n is None or n.value in (None, ""):
                     return default
-                try:                       # ChargeLevel may be a LIST (CA's frontal
-                    return float(str(n.value).split(",")[0].strip())   # variant)
-                except (TypeError, ValueError):
-                    return default
+                return charge_scalar(n.value, default)
 
             ticks = num(spec.get("charge"))
             rate = num(spec.get("rate"), 1) or 1

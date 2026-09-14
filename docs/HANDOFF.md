@@ -1,5 +1,127 @@
 # Cameo — THE HANDOFF
 
+## ⭐⭐⭐ 2026-09-14 — CHARGE-RANGE AVERAGING INTEGRATED; CADENCE STILL WITHHELD
+
+Integrated from Aedis's #386/#389 work after Codex and Astra review. Live state; read before
+anything dated earlier.
+
+| | |
+|---|---|
+| base master | **`f585afd4f`** — verified INI votes plus exact original-reference repairs |
+| integrated change | random charge ranges average min/max; four records re-extracted |
+| cadence | charge-per-shot source behavior established; 220 is the immediate-reacquisition model, not runtime proof; still unapplied |
+| map | all 29 non-WIP factions: 161 originals · 709 expanded · 925 references |
+| validation | focused charge/reference tests and 34-ledger drift check green; broad baseline failures remain separately disclosed |
+
+### THE CHARGE LAW — RULED, DELIBERATELY NOT APPLIED
+
+Maintainer, 2026-09-14: *"charged weapons come at a discount but the attack cycle duration is
+reload delay plus charge delay"* — **both**, never either. And the rate identity:
+
+    DPS = damage x burst / attack cycle
+    attack cycle = reload delay + sum of ALL burst delays + charge delay
+    ⚠ "DPS" is a NAME, not a unit — damage per TICK.
+
+⛔ **Applying it is BLOCKED on evidence the extractor does not record.** Astra's engine trace:
+multi-shot `ChargeLevel` recharges per projectile (burning Obelisk, Burst 10); the Rail Tower's
+INITIAL charge is 12 and the 3 is its post-shot `ChargeFire` wait.
+Unblock = `ChargeDelay` + `ShotsPerCharge` + recharge-overlap modelling. **Range-ness is no longer
+on that list** — see below.
+
+⭐⭐ **THE RAIL TOWER RECHARGES PER SHOT; ITS FIXED RUNTIME PERIOD IS STILL UNMEASURED.**
+`ChargeFire` does not spin while the weapon reloads: `AttackBase.CanAttack` calls
+`HasAnyValidWeapons(reloadingIsInvalid: true)`, a reloading armament makes it false, and
+`ChargeFire` returns true. `ChargeAttack` carries the same guard, so the activity ENDS and the
+actor re-enters through it — paying `InitialChargeDelay` again, as ruled. Codex and Astra
+caught this; my 172 (spin) and 180 (quantised spin) shared the same false premise.
+
+`tools/balance/sim_attack_tesla.py` reproduces 131, 95 and **220** under an explicit immediate-
+reacquisition assumption. The real Rail Tower inherits randomized 3–7 tick AutoTarget scans,
+which the simulator does not model, so 220 is the ruled/model floor rather than runtime proof.
+
+| number | source | what it got wrong |
+|--:|---|---|
+| 160 | #385 | never pays the wind-up |
+| 172 | mine — **withdrawn** | `ChargeFire` exits, it does not spin |
+| 180 | mine — **withdrawn** | same false premise, quantised |
+| **220** | the 2026-09-14 ruling | reproduced with immediate reacquisition; runtime unmeasured |
+
+⭐ **And it gives the automatic detection**: `reload <= ChargeDelay` is charge-once
+(`gap = ChargeDelay`); `reload > ChargeDelay` is charge-per-shot
+(`gap = reload + reacquisition + InitialChargeDelay`). ⛔ The ruled model is not applied — the charge term is still
+withheld, and applying it needs `ChargeDelay` and the weapon reload in the extractor.
+
+⭐⭐ **RANDOM RANGES TAKE THE MEAN — RULED, IMPLEMENTED, RE-EXTRACTED** (maintainer, 2026-09-14).
+`ChargeLevel: 25, 50` is ONE uniform roll, not two settings, so it costs **37.5**;
+`extract_stats.charge_scalar` averages min and max where it used to keep `split(",")[0]` — i.e. it
+priced every charged shot as if it always rolled the luckiest value. **Exactly four actors declare
+a range and all four moved**; nothing else in 34 ledgers did.
+
+| actor | declared | ticks | price multiplier |
+|---|---|--:|---|
+| `steelconsortium_dagger` | `25, 50` | 25 → **37.5** | 0.750 → 0.750 (already at the floor) |
+| `wc2_humans_dwarvenrifleman` | `0, 4` | 0 → **2.0** | 0.750 → **0.976** |
+| `wc2_humans_siegeengine` | `20, 40` | 20 → **30.0** | 0.875 → 0.827 |
+| `wc2_orcs_siegeengine` | `20, 40` | 20 → **30.0** | 0.875 → 0.827 |
+
+⛔ **THE DWARF IS THE FINDING, AND IT GOES THE WRONG WAY ON PURPOSE.**
+`charge_price_multiplier` reads `share <= 0` as *charges, but we cannot see by how much* and hands
+back the FLAT 0.75 floor — so the misparsed zero was quietly collecting the DEEPEST discount in the
+table. Measuring its real 2 ticks makes the unit **dearer**, not cheaper. A measured near-zero and
+an unmeasured zero are different facts and only one may claim the floor.
+
+⚠ **The reference path did not move**: `charge_attack_cycle` returns `None` for the whole
+`ChargeLevel` family, so the regenerated `armament_pairing.json` changed only its three input
+fingerprints — which is also how the fingerprint guard caught the stale artifact in the first
+place. Pinned by the new `ranged_charge_actors` claim.
+
+`tesla_coil_attack_period` pins the IMPLEMENTED **106** with the ruled **131** beside it, and a
+test asserts the gap is exactly the 25-tick wind-up, so neither applying it early nor landing the
+extractor can pass silently.
+
+### ⛔ THE EXTREME ROWS — WHAT THEY ARE AND ARE NOT
+
+EXTREME is a **product of two independent projections**, damage x cadence, so two ~3x moves make a
+9x headline. **Cadence dominates in 21 of 35 rows**, not damage: `ts_gdi_pitbull` is damage 1.04x
+and cadence 4.98x. No single stat is 10x off.
+
+⚠ `tkm_dronepodtruck` reads 39.98x because its weapon does **1 damage** — a utility deploy priced
+against a combat reference. Clause 5 at the actor level; likely a small class, unswept.
+
+### ⛔ THE MINIGUNNER — TRACED TO #345, NOT TO BURST
+
+Against the real baseline, `playtest-20260709` (Tournament Build 24), not a 2023 tag:
+
+| stage | dmg | burst | cycle | rate |
+|---|--:|--:|--:|--:|
+| playtest-20260709 (`M16`, `E1.GDI`) | 2000 | 1 | 17 | **117.6/tick** |
+| `5d491698f` scout redesign 07-19 | 2000 | 4 | 54 | **148.1/tick** |
+| after **#345** 09-12 | 480 | 4 | 59 | **32.5/tick** |
+
+The burst change was deliberate and priced at exactly 100 through the scout anchor; it RAISED the
+rate. **#345 then cut damage 4.17x and invalidated that solved price.** Blackrobe ruled the baked
+values stand — untouched, no `apply_balance`. Evidence only.
+
+### WHAT IS STILL OPEN IN MY LANE
+
+* ~~Averaging ruling — `extract_stats` + full re-extract~~ ⭐ **DONE** in this integration.
+* **Next: the remaining cadence evidence**, `ChargeDelay`, `ShotsPerCharge` and reacquisition
+  timing. They stand between the ruled charge law and applying it.
+* The actor-level ruler is still a distribution of whole actors; a per-armament ruler needs the
+  peer corpora re-expressed per weapon. MODEL change, needs the maintainer.
+* **694 unfolded rates stay blocked.**
+* TS sub-faction routing: Crystallized Nexus tags GDI units `zocom`/`steel`; `ts_gdi` routes only
+  `('gdi',)`.
+
+### REFERENCE DATA — CHECK BEFORE DECLARING ANYTHING MISSING
+
+⛔ Three separate "source is unrecoverable" reports have all been wrong. `Cameo-mod-reference`
+(~9.9 GB, OUTSIDE the repo) holds them. The seven INI sources with no `source_sha256` — **10,144
+of 11,870 corpus rows** — are in `Cameo-mod-reference/extraction/` and are packaged at
+`Cameo-mod-reference/ini_sources.zip` (1.8 MB, flat, with `SHA256SUMS.txt`). Codex verified all
+seven hashes. ⚠ Codex runs on Blackrobe's machine, not the maintainer's — a path on one is not
+reachable from the other.
+
 ## ⭐⭐⭐ 2026-09-14 — PR #375 FOLLOW-UP REVIEW FIXES, ASTRA GO
 
 Codex reviewed Aedis's revised `c3dc32871` head with Astra. The original 71 focused tests and all
