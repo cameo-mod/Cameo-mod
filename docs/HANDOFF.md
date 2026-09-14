@@ -102,6 +102,55 @@ pinned precisely so the map cannot feed on itself — but it must be known when 
 `ra1_allies_sheridanassaulttank` is in this list at 4.00×: **the `test_missile_role_policy` 0.25×
 and the #345 quartering are the same event** (Codex: the documented local-firepower bake, PR #377).
 
+### THE 16 EXTREME ROWS — TWO MEASURED CAUSES, ONE STILL OPEN
+
+Maintainer asked for the root cause of "all the very extreme cases". Measured against the v27 map;
+`EXTREME` fires in BOTH directions, and the direction is the clue.
+
+**CAUSE 1 — #345's damage bake (7 of 16, all of them ABOVE 100%).** These actors' `w_damage`
+differs between the frozen snapshot (pinned 2026-09-10) and live yaml, because #345 landed 09-12:
+
+    td_gdi_minigunner            749%   frozen  8,000 -> live  1,920   4.17x
+    td_nod_minigunner            588%   frozen  8,000 -> live  2,320   3.45x
+    ra1_soviets_rifleinfantry    462%   frozen  6,000 -> live  2,520   2.38x
+    ra1_allies_rifleinfantry     399%   frozen  6,000 -> live  2,820   2.13x
+    td_nod_buggymkii             361%   frozen 18,009 -> live  9,009   2.00x
+    ra1_allies_alliedlighttank   256%   frozen 12,005 -> live  6,005   2.00x
+    ra1_allies_alliedheavyaatank 230%   frozen  8,004 -> live  2,004   3.99x
+
+⛔ RULED: the baked values STAND. No restore, no `apply_balance`. These rows will keep reading
+EXTREME until the snapshot is re-pinned, which is a separate decision with its own hazards - the
+pin is what stops the map feeding on its own output.
+
+**CAUSE 2 — a charge-up weapon's `ReloadDelay` excludes the charge (proven on 1, the only one that
+can be proven from the tree).** `ra1_soviets_teslacoil` is the clearest row on the whole map:
+
+    ledger reloaddelay            3 ticks
+    actor InitialChargeDelay     25 ticks   (defenses.yaml:229)
+    model cycle                   3         real cycle ~28  ->  rate ~9.3x too fast
+
+so the reference correctly says it should be at **29%** of the rate the model computes. This is the
+rule `docs/DESIGN.md` already carries - *effective reload = written + charge* - simply not applied
+by `extract_stats`, which copies `ReloadDelay` and never looks for `AttackCharges`. Only THREE
+actors tree-wide declare `InitialChargeDelay` (`ra1_soviets_teslacoil` 25, `ra2_soviets_teslacoil`
+20, `asianalliance` building 12), so the blast radius is small - but the tesla coil is a signature
+unit and its number is wrong by an order of magnitude.
+
+⚠ The other three sub-100% rows - `ra1_soviets_shocktrooper` 47%, `ra1_soviets_zapper` 41%,
+`ra1_soviets_commissar` 30% - are the same tesla/electric family but declare NO charge delay, so
+cause 2 is NOT established for them. Do not assume it.
+
+**STILL UNEXPLAINED (5).** `japan_shrineminitank` 336%, `japan_igomediumtank` 238%,
+`td_nod_lighttank` 210%, `ra1_soviets_flametower` 209%, `ra1_soviets_submarine` 206%. No frozen/live
+drift, no charge delay, burst 1 throughout. These look like plain divergence from their references
+rather than a measurement defect, but that is an impression, not a measurement.
+
+⛔ **BURST IS NOT THE LEVER ON ANY OF THEM, and it was the first hypothesis.** The damage column is
+already per CYCLE. On `td_gdi_minigunner`, going Burst 4 -> 1 and keeping `Damage: 480` WIDENS the
+gap to 25.4x; keeping the cycle total leaves 6.35x. The driver is reload - every reference fires a
+full cycle in 20 ticks where Cameo takes 50 + 9.
+
+
 ### WHAT IS STILL OPEN ON THIS LANE
 
 * **The ruler is still the ACTOR-LEVEL distribution.** `armament_target` projects one armament
