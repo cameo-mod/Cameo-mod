@@ -250,19 +250,29 @@ def cameo_views(rec, rs):
     passenger mode are all recognised as alternatives rather than parallel weapons — the same rule
     `baseline_armaments` applies, not a second opinion about it.
     """
+    import formula
     import reference_distribution as rd
     out = []
-    for arm in (rec.get("armaments") or []):
-        if not arm.get("pricing"):
-            continue
+    priced = [arm for arm in (rec.get("armaments") or []) if arm.get("pricing")]
+    active = rd.default_active_armaments(priced)
+    baseline = rd.baseline_armaments(priced) if priced else []
+    charge_owner_is_unambiguous = (len(active) == 1 and len(baseline) == 1
+                                   and active[0] is baseline[0])
+    for arm in priced:
         role, unknown = cameo_weapon_role(rs, arm.get("weapon"))
         mains = [w for w in (arm.get("damage_warheads") or []) if (_num(w.get("damage")) or 0) > 0]
         dmg = sum(_num(w.get("damage")) or 0 for w in mains) or None
         raw = str(arm.get("burstdelays") or "").replace(",", " ").split()
+        burst = int(_num(arm.get("burst")) or 1)
+        weapon_reload = _num(arm.get("reloaddelay"))
+        cycle = cycle_ticks(weapon_reload, burst, raw)
+        charged_cycle = (formula.charge_attack_cycle(rec.get("charge_up"), weapon_reload)
+                         if charge_owner_is_unambiguous else None)
+        if charged_cycle is not None:
+            cycle, burst = charged_cycle
         out.append(view(
             "cameo", arm.get("slot"), arm.get("weapon"), role, unknown,
-            damage_per_shot=dmg, burst=int(_num(arm.get("burst")) or 1),
-            cycle=cycle_ticks(_num(arm.get("reloaddelay")), _num(arm.get("burst")) or 1, raw),
+            damage_per_shot=dmg, burst=burst, cycle=cycle,
             rng=_num(arm.get("range")), requires=arm.get("requires"),
             baseline=not rd.is_upgrade_gated(arm),
             note=",".join(sorted({w.get("tag") for w in mains if w.get("tag")})) or None))
