@@ -1206,6 +1206,16 @@ ra1_soviets_btr80:
 	Inherits@AutoloadersUpgradeRA1: ^AutoloadersUpgradeRA1
 	Inherits@UnstableIsotopesUpgradeRA1: ^UnstableIsotopesUpgradeRA1
 	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
+	Inherits@gat: ^GatlingSpinUpUnitBehavior
+	ModifiesCombatProportionalToPhysicalState@SpinUp:
+		RequiresCondition: ra1_soviets_promotion_gatlingtank
+	SelectedPhysicalStateBar@SpinUp:
+		RequiresCondition: ra1_soviets_promotion_gatlingtank
+	GrantConditionOnAttack@gatling:
+		RevokeDelay: 37
+		RequiresCondition: !rank-elite && ra1_soviets_promotion_gatlingtank
+	GrantConditionOnAttack@elitegatling:
+		RequiresCondition: rank-elite && ra1_soviets_promotion_gatlingtank
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 120
@@ -1287,31 +1297,6 @@ ra1_soviets_btr80:
 		DecorationBounds: 1280, 1280
 	-DamagedByTintedCells@rad:
 	-DamagedByTintedCells@genrad:
-	AmmoPool:
-		Ammo: 16
-		AmmoCondition: ammo
-	ReloadAmmoPool:
-		Delay: 16
-		Count: 1
-		ResetOnFire: True
-	ReloadDelayMultiplier@GattlingSpeed1:
-		RequiresCondition: ammo < 10 && ra1_soviets_promotion_gatlingtank
-		Modifier: 80
-	ReloadDelayMultiplier@GattlingSpeed2:
-		RequiresCondition: ammo < 6 && ra1_soviets_promotion_gatlingtank
-		Modifier: 80
-	ReloadDelayMultiplier@GattlingSpeed3:
-		RequiresCondition: ammo <= 1 && ra1_soviets_promotion_gatlingtank
-		Modifier: 80
-	RangeMultiplier@GattlingSpeed1:
-		RequiresCondition: ammo < 10 && ra1_soviets_promotion_gatlingtank
-		Modifier: 105
-	RangeMultiplier@GattlingSpeed2:
-		RequiresCondition: ammo < 6 && ra1_soviets_promotion_gatlingtank
-		Modifier: 105
-	RangeMultiplier@GattlingSpeed3:
-		RequiresCondition: ammo <= 1 && ra1_soviets_promotion_gatlingtank
-		Modifier: 105
 	GrantConditionOnPrerequisite@ra1_soviets_promotion_gatlingtank:
 		Condition: ra1_soviets_promotion_gatlingtank
 		Prerequisites: ra1_soviets_promotion_gatlingtank
@@ -1509,6 +1494,7 @@ ra1_soviets_gatlingtank:
 	Inherits@AutoloadersUpgradeRA1: ^AutoloadersUpgradeRA1
 	Inherits@UnstableIsotopesUpgradeRA1: ^UnstableIsotopesUpgradeRA1
 	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
+	Inherits@gat: ^GatlingSpinUpUnitBehavior
 	Tooltip:
 		Name: Gatling Tank
 	Valued:
@@ -1602,40 +1588,6 @@ ra1_soviets_gatlingtank:
 		Image: ra1_soviets_gatlingtank
 	FireWarheadsOnDeath:
 		Weapon: UnitExplode
-	AmmoPool:
-		Ammo: 4
-		AmmoCondition: ammo
-	ReloadAmmoPool:
-		Delay: 25
-		Count: 1
-		ResetOnFire: True
-	FirepowerMultiplier@GattlingSpeed1:
-		RequiresCondition: ammo == 3
-		Modifier: 125
-	FirepowerMultiplier@GattlingSpeed2:
-		RequiresCondition: ammo == 2
-		Modifier: 133
-	FirepowerMultiplier@GattlingSpeed3:
-		RequiresCondition: ammo <= 1
-		Modifier: 150
-	ReloadDelayMultiplier@GattlingSpeed1:
-		RequiresCondition: ammo == 3
-		Modifier: 85
-	ReloadDelayMultiplier@GattlingSpeed2:
-		RequiresCondition: ammo == 2
-		Modifier: 65
-	ReloadDelayMultiplier@GattlingSpeed3:
-		RequiresCondition: ammo <= 1
-		Modifier: 50
-	RangeMultiplier@GattlingSpeed1:
-		RequiresCondition: ammo == 3
-		Modifier: 105
-	RangeMultiplier@GattlingSpeed2:
-		RequiresCondition: ammo == 2
-		Modifier: 110
-	RangeMultiplier@GattlingSpeed3:
-		RequiresCondition: ammo <= 1
-		Modifier: 115
 	ReloadDelayMultiplier@ra1_soviets_upgrade_autoloaders:
 		Modifier: 80
 	ActorStatValues:
