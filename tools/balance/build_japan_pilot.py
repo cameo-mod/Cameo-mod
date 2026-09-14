@@ -137,6 +137,13 @@ PROVENANCE_CODE = (
     "tools/balance/explain_unit.py",
     "tools/balance/reference_lineages.py",
     "tools/balance/diagnostic_output.py",
+    # ⭐ THE PER-ARMAMENT PAIRING LANE ENTERED THIS CLOSURE, and the guard caught it rather than a
+    # human noticing. `build_reference_report` imports `build_armament_pairing_report`, which
+    # imports `armament_roles`, so both can change what the pilot reports and both must be
+    # fingerprinted. Registering them is the fix; trimming the closure test would have been the
+    # bug. (test_japan_pilot.InputFingerprintTests.test_import_closure_is_fully_fingerprinted)
+    "tools/balance/build_armament_pairing_report.py",
+    "tools/balance/armament_roles.py",
     "tools/audit/miniyaml.py",
 )
 

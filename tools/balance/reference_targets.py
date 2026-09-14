@@ -816,6 +816,68 @@ def target_for(rows, cameo_row, stat, dist, cdist):
     return peers_only, with_cameo, len(used)
 
 
+def armament_target(votes, dist, cdist, cameo_type, stat="w_damage"):
+    """One damage target for ONE armament, projected from the peer WEAPONS paired to it.
+
+    ⭐ THIS IS `target_for` WITH THE FOLD TAKEN OUT, and deliberately not a second model. Same
+    coordinates, same per-source pooling, same projection onto the same frozen ruler — the only
+    difference is WHAT gets projected: the damage of the peer weapon that was paired to this
+    armament, instead of the actor's single folded `w_damage`.
+
+    ⛔ IT EXISTS BECAUSE THE FOLD HAD NO HONEST ANSWER FOR A TWO-WEAPON UNIT. PR #372 stamped
+    `weapon_model_eligible: False` on every multi-armament actor and `target_for` then refused the
+    projection, which was the right refusal — averaging a 120mm cannon with an anti-air missile
+    produces a number describing neither gun. But it left 38 actors in the map with a blank damage
+    cell, including the two the maintainer went looking for:
+
+        "td gdi battle tank and mammoth tank are now withheld"  (maintainer, 2026-09-13)
+
+    37 of those 38 already had the evidence to answer properly — 83 armament-to-weapon pairs in
+    `armament_pairing.json`, built from the maintainer's own ruling that a reference which does not
+    carry a weapon in that role does not vote on it. The Mammoth has six exact pairs across three
+    sources, cannon to cannon and missile to missile. Nothing consumed them until now.
+
+    `votes` is [(peer_row, damage_per_cycle)], at most one entry per source, already restricted to
+    the weapons paired to this one armament. Both sides are per CYCLE, which is the same coordinate
+    the distributions are built in — see `reference_distribution.to_per_cycle`, and the ruler
+    double-count it used to hide.
+
+    ⚠ THE RULER STAYS THE ACTOR-LEVEL ONE. `cdist` is a distribution of whole actors' weapon
+    damage, and an armament is projected against it as if it were a unit's gun. That is the
+    approximation this function makes and it is worth stating plainly: it is right for the common
+    case where one armament carries most of an actor's output, and it is generous to a small
+    secondary weapon. It is still strictly better than the fold, which compared a cannon against a
+    missile's reference. A per-ARMAMENT ruler is the honest end state and needs the peer corpora
+    re-expressed per weapon first; that is not this change.
+
+    Returns (target, sources_used) — (None, 0) when no paired weapon can be normalised, which is
+    an abstention and must be rendered as one, never as a zero.
+    """
+    per_source = collections.defaultdict(lambda: collections.defaultdict(list))
+    for row, x in votes:
+        if not x or x <= 0 or not row:
+            continue
+        for pop in ("overall", row.get("type")):
+            agg = dist.get(row.get("source"), {}).get(pop, {}).get(stat)
+            for k, v in rd.coordinates(float(x), agg).items():
+                per_source[row["source"]][(pop, k)].append(v)
+    if not per_source:
+        return None, 0
+    pooled, used = collections.defaultdict(list), set()
+    for source, coords in per_source.items():
+        used.add(source)
+        for key, vals in coords.items():
+            pooled[key].append(statistics.fmean(vals) if key[1] == "p_rng" else rd.gm(vals))
+    synth = {pk: (statistics.fmean(v) if pk[1] == "p_rng" else rd.gm(v))
+             for pk, v in pooled.items()}
+    cands = []
+    for pop in ("overall", cameo_type):
+        coord = {k: v for (p_, k), v in synth.items() if p_ == pop}
+        cands += list(rd.project(coord, cdist.get(pop, {}).get(stat)).values())
+    cands = [c for c in cands if c and c > 0]
+    return (rd.gm(cands), len(used)) if cands else (None, 0)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--faction", nargs="+", required=True)
