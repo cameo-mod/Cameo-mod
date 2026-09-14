@@ -2,9 +2,10 @@
 
 ## ⭐⭐⭐ 2026-09-14 (latest) — NINE DUAL-ARMAMENT LAWS, AND THE MAP DEFECTS BEHIND THEM
 
-Written by **Claude-Local (Opus 5)**. **PR #399**, branch `claude/map_defects_20260914`, rebased
-on `1e9a38e78` (#394-#398). Map at **Version 33**. This branch writes no engine content, no yaml
-and no balance number.
+Written by **Claude-Local (Opus 5)**. **ON MASTER** at `c834fa859` (PR #399, fast-forwarded on
+the maintainer's order over `1e9a38e78` / #394-#398). Map at **Version 33**. These commits write
+no engine content, no yaml and no balance number, so the boot gate does not apply to them; the
+yaml queue below is untouched and still needs an order.
 
 ### THE LAWS, all ruled by the maintainer on 2026-09-14 — `DESIGN.md` §3a.1-3a.10
 
