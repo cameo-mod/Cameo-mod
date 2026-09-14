@@ -1,9 +1,191 @@
 # Cameo — THE HANDOFF
 
-## ⭐⭐⭐ 2026-09-13 (evening) — PR #372: ELEVEN PRs ON ONE BOOT-GATED TREE, AND THE RENAME REGRESSION
+## ⭐⭐⭐ 2026-09-14 — PR #375 FOLLOW-UP REVIEW FIXES, ASTRA GO
 
-Written by **Claude-Local (Opus 5)** on `claude/integration_v23`. **This is the live state — read it
-before anything else dated earlier.**
+Codex reviewed Aedis's revised `c3dc32871` head with Astra. The original 71 focused tests and all
+seven lane claims passed, but the review found five remaining correctness gaps: only three derived
+inputs were fingerprinted, malformed/incomplete artifacts were accepted, per-armament hero targets
+used the ordinary population, unknown Cameo roles could crash rendering, and coverage confused a
+structured zero-match with missing structure while hiding same-role weapons.
+
+The working follow-up fixes all five: the artifact now fingerprints its full 472-file input closure
+and validates the exact set, hero armaments use the hero ruler, unknown roles render an explicit
+abstention, and coverage is counted per weapon identity with structure tracked independently.
+Focused validation is complete and Astra's final review is **GO**. This is ready as one compact
+follow-up commit against Aedis's #375 branch.
+
+## 2026-09-13 (late night) — AEDIS REVISED HEAD (SUPERSEDED BY FOLLOW-UP ABOVE)
+
+Written by **Claude-Local (Opus 5)**. **This is the live state — read it before anything else
+dated earlier, including the "(night)" section below, which it supersedes on the reference lane.**
+
+| | |
+|---|---|
+| the branch | `claude/armament_pairing` → **`96cefbe3b`**, off `8f9bef3b0`, pushed |
+| PR | **#375** — Astra NO-GO at `cfa8c9af9`; **all five blockers now addressed**, awaiting re-review |
+| the map | **v27** — 73 originals · 116 expanded · 305 references · 45 priced by formula |
+| suite | **161 fail/error, exactly master's baseline.** 2473 tests (master 2427) |
+| doc claims | this lane's **7 of 7 green**; 11 pre-existing mismatches elsewhere, untouched |
+
+### ⛔ THE DEFECT THAT INVALIDATED EVERY DAMAGE TARGET — `2e0df993d`
+
+`reference_distribution.to_per_cycle` multiplies any `Burst > 1` row by its burst, because peer
+corpora publish damage per SHOT. `reference_targets.cameo_context()` feeds it the **frozen Cameo
+snapshot, which already stores burst totals** — so Cameo's burst rows were multiplied twice. The
+mammoth 32,000 → 64,000; the MLRS 48,000 → **288,000**, 36× its per-shot damage. That snapshot is
+the PROJECTION RULER, so a quarter of it being inflated lifted every actor's target:
+
+    243 of 243 mapped actors inflated   median 2.01x   worst 8.31x
+    153 of 153 burst-1 actors moved     EXTREME 50->17   DISAGREES 31->10
+
+Found because the maintainer asked why the GDI grenadier's reference went 22k → 38k when all three
+of its references are Burst 1 and none of them had changed. **The guard is on `source == "Cameo"`,
+not a call-site flag.** If you consume `to_per_cycle` anywhere, re-check your numbers against this.
+
+### THE RULES THE MAINTAINER SET, 2026-09-13
+
+> *"one chosen peer weapon from each reference source contributes one candidate Range/DPS value for
+> one Cameo armament; it is reference evidence only, not a live balance change. Originals should
+> pair to the base weapon. Promotion/expanded actors should pair to the corresponding elite/upgraded
+> replacement. MTNK's dummy remains the additive exception. A replacement must not also count beside
+> its base weapon, and ambiguous role or identity must abstain."*
+
+| tier | who | bench |
+|---|---|---|
+| `original` (140) | an original-shipping mod matched it by name | the BASE weapon only |
+| `expanded` (174) | promotion units, Cameo/CA/DTA additions | the elite replacement, IN PLACE OF its base |
+
+MTNK's dummy is not special-cased — it falls out of `replaces_dummy_primary`. Nine DTA units have a
+zero-damage rate-of-fire stub as `Primary=`, so their `Elite=` weapon fills an empty slot and is a
+genuine second armament in **both** tiers. That is why `td_gdi_battletank`, an original, still
+references DTA's elite `70mmMsl1`.
+
+### ASTRA'S FIVE BLOCKERS — ALL ADDRESSED (`4ed37c121`, `febf778a3`, `96cefbe3b`)
+
+1. **elite replacements counted as extra weapons** → `armament_roles.tier_bench`, above.
+2. **same-role weapons vanish; single-role actors hidden** → `cameo_armaments()` replaces
+   `strongest_by_role` on the Cameo side; the report gates on WITHHELD, not on multi-ROLE.
+3. **unproven-role fallback picked max damage** → `_unproven_pair` and `UNPROVEN_PREFERENCE`
+   **deleted**. Pairs 607 → 308, unproven 300 → **0**, exact 213 → **215**.
+   `ra2_soviets_apocalypsetank` is back to zero votes and that is now the correct answer.
+4. **hashes recorded but not enforced** → two layers, both in-repo so they work without the 9.9 GB
+   reference folder: each extractor's `load()` re-verifies its source pins against `ini_corpus.json`
+   and drops per source (`load.dropped`); `armament_pairing.json` carries an `inputs` block and
+   `pairing_document()` **raises** on a stale one.
+5. **`Ground + UnknownFlyingTarget` became a proven ground vote** → `role_of_targets` fails closed.
+   0 unknown tokens tree-wide today, which is when the guard is cheap.
+
+### ⛔ LIVE YAML FINDINGS — NOT FIXED, AND DELIBERATELY SO
+
+**PR #345 (`b235c6980`, 2026-09-12) divided damage out of 43 weapons** while adding
+`PercentageDenominator`/`PercentageScale` to 213 warheads. Median divisor exactly **4.00×** (25
+weapons at 4.0, 14 at 2.0). `td_gdi_minigunner` 2000 → 480 per shot.
+
+⚠ **My first reading of this was wrong and Codex/Astra corrected it.** `pct_absolute == 0` means
+there is no standalone percentage FLOOR — **not** that folded `PercentageScale` damage is zero. The
+folded hit does execute, and the model carries it in `k_flat_context`. At reference HP 200,000 the
+folded damage is 480 (minigunner), 960 (its AP weapon), 3,720 (RA1 machinegunner), 1,000 (Hind).
+**Do not base a restore/finish decision on `pct_absolute`.** Maintainer's ruling: keep the current
+baked values, do not restore pre-#345 damage, do not run `apply_balance`. The zero percentage
+contribution is a separate runtime-audit item.
+
+**The remaining DPS gap is still real and still unexplained.** `td_gdi_minigunner` composes to 749%
+of its current rate, and **burst is not the lever**: at Burst 1 keeping `Damage: 480` the gap widens
+to 25.4×; keeping the cycle total it is still 6.35×. The driver is reload — every reference fires a
+full cycle in 20 ticks, Cameo takes 50 + 9.
+
+⚠ **The frozen snapshot predates #345.** Pinned 2026-09-10; #345 landed 09-12. **32 actors'
+`w_damage` differs between the pinned snapshot and live yaml** — 25 nerfed since, median exactly
+2.00×, with a cluster at exactly 4.00×. So for those rows the map's "now" column is live while the
+model's Cameo self-vote is the pre-quartering value. That is not a bug — the snapshot is SHA256
+pinned precisely so the map cannot feed on itself — but it must be known when reading them.
+`ra1_allies_sheridanassaulttank` is in this list at 4.00×: **the `test_missile_role_policy` 0.25×
+and the #345 quartering are the same event** (Codex: the documented local-firepower bake, PR #377).
+
+### WHAT IS STILL OPEN ON THIS LANE
+
+* **The ruler is still the ACTOR-LEVEL distribution.** `armament_target` projects one armament
+  against a population of whole actors' weapon damage. Right where one armament carries most of an
+  actor's output, generous to a small secondary. A per-ARMAMENT ruler needs the peer corpora
+  re-expressed per weapon first — not started, and it is a MODEL change needing the maintainer.
+* **694 unfolded rates stay blocked** — only 77 INI rows declare a burst delay, in Phobos/Ares
+  notation; `ini_views` leaves `cycle = None` for burst > 1 rather than inventing one.
+* **TS sub-faction routing gap** — Crystallized Nexus tags GDI units `zocom`/`steel`; `ts_gdi`
+  routes only `('gdi',)`.
+* **`shield_versus_mean`** documented 175.919 vs measured 180.284 (`DESIGN.md` §12.0c and
+  `design/ARMOR_LAYERS.md` both carry the stale number). Armor lane; Codex has logged it.
+
+## ⭐⭐⭐ 2026-09-13 (night) — MASTER BOOTS, AND EVERY UNIT'S WEAPONS ARE MAPPED SEPARATELY
+
+Written by **Claude-Local (Opus 5)**. **This is the live state — read it before anything else
+dated earlier, INCLUDING the "(evening)" section below, which this supersedes on every point.**
+
+| | |
+|---|---|
+| master | **`8f9bef3b0`** — PR #372 merged, then #346. **Boot-gated, ZERO blocking inherit nodes.** |
+| branches | 203 → **115**; 75 landed branches deleted, 39 `archive/20260913/*` tags pushed |
+| open PRs | 28 → **15** |
+| the live lane | **per-armament reference pairing** — DONE and pushed |
+| the branch | `claude/armament_pairing` — `38a3d3664` + `a47a627de`, off `8f9bef3b0` |
+| the map | v25: 73 originals · 116 expanded · 305 references, now with per-armament references |
+
+⛔ **THE SUITE BASELINE, so nobody re-derives it.** Clean `origin/master` `8f9bef3b0` runs **2427
+tests with 22 errors + 139 failures across 113 distinct test names.** That is the floor; this
+branch adds 29 passing tests and no new failures. The failure mass is NOT the R12 consolidation
+lane — the largest clusters are weapon-name ownership tests (`test_soviet_owned_weapon_names` 16,
+`test_yak_weapon_ownership` 12, `test_additional_owned_names` 10) and `test_missile_role_policy`
+(8). Only ~50 of the 161 sit in consolidation/profile files.
+
+⚠ The "(evening)" section below still says *master `b235c6980` DOES NOT BOOT* and *#372 is
+blocked*. Both were true when written and are now false. Its technical content — the R12 rename
+regression, why a green `audit_balance_drift` proves nothing about the model — remains correct and
+is the reason the section is kept rather than deleted.
+
+### THE LIVE LANE: per-armament reference pairing
+
+Full document: **[`design/ARMAMENT_PAIRING.md`](design/ARMAMENT_PAIRING.md)**. In one paragraph:
+`armament_profile` folds an actor's armaments into one `w_range`/`w_dps` and takes `max(ranges)`,
+so `td_gdi_firehawk` reports its Sidewinders' **12,500** for a bomb that reaches **1,250**.
+**47 of 940** priced actors fire in more than one role and **40** assigned reference rows are
+contaminated by that fold. Shipped this turn, changing no balance number:
+
+* `tools/balance/armament_roles.py` — the role classifier (`ground`/`air`/`both`/`special`, the
+  maintainer's own 2026-09-07 missile vocabulary) plus one armament view for all three corpora.
+  **0 unknown target tokens** across both corpora.
+* `tools/reference/extract_ini_projectile_roles.py` → `docs/reference/ini_projectile_role_evidence.json`
+  — DTA's real `AA=`/`AG=` projectile flags, `$Inherits` flattened, both file hashes verified
+  against the corpus pin. **57/57 and 60/60** cited projectiles resolved.
+* `tools/reference/extract_ini_elite_weapons.py` → `docs/reference/ini_elite_weapon_evidence.json`
+  — ⛔ **the THIRD weapon slot.** A TS unit declares `Primary=`, `Secondary=` AND `Elite=`; the
+  corpus carried only the first two, so **171 DTA `Elite=` declarations never reached the map**.
+  The maintainer had to point this out twice. Gated on `Trainable=`, which the Enhance overlay
+  flips: DTA Classic 0 reachable, DTA Enhanced **131** (7 of them a genuinely additional armament,
+  where the primary is a zero-damage dummy).
+* `tools/balance/build_armament_pairing_report.py` → `docs/balance/derived/armament_pairing.json`.
+* `tools/tests/test_armament_roles.py` — **29/29**.
+
+⛔ **STILL NOT DONE, AND IT STILL NEEDS THE MAINTAINER'S WORD:** retiring the fold in
+`armament_profile` in favour of per-role targets is a MODEL change. The pairing is built, measured
+and rendered in the map; the ledger and `apply_balance` are untouched.
+
+⛔⛔ **A LIVE BALANCE FINDING THAT IS NOT MINE AND NOT FIXED.** `test_missile_role_policy` is red on
+master: 8 of the 77 pinned missile-role conversions no longer preserve `Damage`, which rule 5
+requires them to. Measured on `8f9bef3b0`:
+
+| weapon | pinned | now | |
+|---|--:|--:|--:|
+| `ra1_allies_sheridanassaulttank_missile` | 16,000 | **4,000** | **0.25x** |
+| `td_gdi_humveemkii_rocketshumvee2` (+3 siblings) | 16,000 / 32,000 | 8,000 / 16,000 | 0.50x |
+| `ra1_soviets_monstertank_missile` | 40,000 | 42,000 | 1.05x |
+| `ra1_soviets_samsite_missile_AA` | 16,000 | 17,600 | 1.10x |
+| `ra1_soviets_su57attackbomber_missile` | 40,000 | 46,000 | 1.15x |
+
+⚠ A red pin is not proof of a regression — a later, deliberate balance edit would look the same if
+the history was never re-pinned. But the Hum-vee's uniform 0.50x and the Sheridan's 0.25x are large
+and the guard that exists to catch exactly this is the one reporting it. **Never re-pin it to make
+the test green** — that is the ratchet mistake. Someone has to say which of the two numbers is
+intended. Both the Sheridan and the Hum-vee Mk II are multi-weapon units in the pairing lane, so
+their reference rows rest on these values.
 
 ### Where everything is
 
