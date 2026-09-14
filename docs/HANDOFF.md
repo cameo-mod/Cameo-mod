@@ -1,5 +1,107 @@
 # Cameo — THE HANDOFF
 
+## ⭐⭐⭐ 2026-09-14 (latest) — THREE MAP DEFECTS THE MAINTAINER FOUND, ALL FIXED
+
+Written by **Claude-Local (Opus 5)**. Live state; read before anything dated earlier.
+Head `0e9ac6b85` on `claude/dual_armament_law` (**PR #393**), pushed. Map at **Version 31**.
+
+### 1. ⛔ DTA HAD BEEN SILENTLY REMOVED FROM THE VOTE — fixed
+
+> *"somehow removes the DTA from voting on the weapon? This is unacceptable! Before all 3 weapons
+> were voting from the reference but it lost the DTA one so this is a true regression!"*
+
+Correct. DTA Enhanced declares `Burst: 2` on both the mammoth's `120mm` and its `MammothTusk`, and
+`armament_roles.ini_views` refused any armament whose burst was not exactly 1. **All 250
+`burst_unfolded` rows in the corpus are DTA and nobody else**, so the gate silenced precisely the
+one source that makes the CANNON the stronger gun — which is why the cannon/missile spread had
+lost its dissenting voter. The maintainer's own earlier ruling supplies the missing cycle model
+(*"if there is no burst delay you can use the minimal allowed value of 1 ticks"*), so it is
+applied: **1144 → 1388 eligible views**, the mammoth's two armaments back to **3 voters each**,
+guarded by the new claim `mammoth_armament_voters`.
+
+⛔ **THE FOLD IS APPLIED WHERE THE DECLARATION IS READ, NOT IN THE CORPUS — AND THE NOTE BELOW
+DATED EARLIER TODAY HAD THE DRIFT BACKWARDS.** It recorded the 63-row difference as "the committed
+corpus is stale against its own extractor". The direction is the opposite: a re-extract **LOSES**
+the dummy-primary promotion on those rows, so `weapon` becomes `200mmD` / `SonicZapC` /
+`GrindDummy` — zero-damage targeting slots. `extract_ini_units.EXPLICIT_DUMMY_WEAPONS` documents
+this at length and rules it: *"a regeneration today is a REGRESSION, not a refresh ... do NOT
+regenerate the INI corpus until these 63 are ruled on"*. Re-extracting would have traded one
+regression for a larger one. When that reviewed regeneration eventually happens the extractor
+emits the same folded rate and this consumer path stops firing — the two orders agree.
+
+⚠ The **7 byte-pinned sources cannot fold**: their sidecar publishes `burst` only on `resolved`
+rows, so a `burst_unfolded` sidecar row has no shot count to fold with. My first cut let the fold
+bypass the sidecar's `status` gate and put **six named unsafe elite weapons** back into the
+pairing; `test_known_unsafe_elite_weapons_are_withheld_from_every_pair` caught it. The fold now
+excuses one REASON and never a verdict.
+
+### 2. ⛔ "ALL WITHHELD!" — law 3a.3 is now actually implemented
+
+Armaments that fire together SUM and the total is displayed. Mammoth **32,000 combined → 82,526**,
+battle tank **16,000 → 36,705**; **13 actors** in the classic four qualify.
+
+Four guards decide whether a sum is honest, each blocking a specific wrong number: **as built**
+(the battle tank's third gun is an upgrade with no `!` twin — maximum 3, as-built 2), **an AA twin
+is not a second gun** (adding `td_gdi_apc_apcgun` to its own `_AA` half would double the APC; five
+classic-four actors carry such a twin), **a common target domain** (INTERSECTION, not connectivity
+— ground/air/both is a connected chain with no shared target), and **every armament must have a
+reference** (a partial sum reads low and looks complete, which is worse than withholding).
+⚠ Cadence still withholds, correctly: two guns have two reload delays.
+
+⭐ **The range cell became a live §3a.2 compliance check** — it shows the shared reach only when
+the guns agree. **6 of the 13 disagree**, `td_gdi_battletank` by 38 WDist (5,438 vs 5,400), too
+small to be deliberate. Reported, not touched: range is a balance number.
+
+### 3. ⛔ A CROSS-FACTION REFERENCE — fixed, and the gate behind it is INERT
+
+> *"the GDI emp grenadier was mapped to the CA marauder which is a scrin unit so that is wrong!
+> Never ever reference from other factions without my instructions!"*
+
+`td_gdi_empgrenadier` → CA `ZRAI` **Zone Raider** (sonic grenades, GDI/ZOCOM), via
+`REFERENCE_OVERRIDES`; verified unclaimed first. Law written down as **DESIGN §3a.5**.
+
+⚠ **The finding underneath matters more than the fix.** CA tags `MRDR` (Scrin) and `ZRAI` (GDI)
+with the SAME 25-faction string, so the map recorded `home: true` for a Scrin unit **truthfully**.
+**156 of CA's 377 units carry ten or more faction tags** (median 5) against a median of **1** in
+OpenRA Tiberian Dawn. For CA the routing gate is not weak, it is **INERT** — a cross-faction pick
+cannot be detected from the corpus at all, and the maintainer's eye is the only gate until CA
+lineage comes from something other than `Buildable.Factions`. ⚠ `yuri_gatlingtrooper` → `ZTRP`
+(Zone Trooper, GDI/ZOCOM) is the same defect, outside the classic four, **reported not changed**.
+
+### Also fixed on the way
+
+Two assertions in `test_charge_aware_reference.py` still pinned the **pre-charge** tesla cycles
+(106 / 75 / 160) while #392 shipped **131 / 95 / 210**. A gap in my own earlier work, now closed.
+
+### State
+
+| branch | head | PR | state |
+|---|---|---|---|
+| `claude/charge_reacquisition` | `92b86437f` | **#392** → master | charge wind-up applied, boot-gated green |
+| `claude/dual_armament_law` | `0e9ac6b85` | **#393** → #392 | the five laws + the three fixes above |
+| `claude/burst_fold` | `1eb7a38c3` | none | the EXTRACTOR-side fold; still parked, see below |
+
+⚠ `claude/burst_fold` is **not** what shipped here. It folds inside `extract_ini_units.py`, which
+only takes effect on a corpus regeneration — and the regeneration is exactly what must not happen
+yet. It stays parked until the 63 dummy-primary rows are ruled on.
+
+⛔ **THE REVIEW MAP IS THE CLASSIC FOUR ONLY** (`td_gdi td_nod ra1_allies ra1_soviets`) and lives
+at ONE artifact, `claude.ai/code/artifact/0efff6f0-89af-4ea2-b8a9-2027142a631b` (**v31**).
+**Update that URL; never publish a new link.**
+
+### Open
+
+* `td_nod_lasercorvette`'s obelisk laser never fires — `AttackTurretedCharged.Attacking` does not
+  filter by armament, so each secondary missile resets `ChargeLevel`; the primary needs 50
+  uninterrupted ticks and the longest gap is 35. **0 shots in 3000 simulated ticks.** Options:
+  `ChargeRate: 2`, `ChargeLevel: 40`, or a NEW Cameo trait (a same-name shadow loses to CA in
+  assembly order). A balance value either way — awaiting a ruling.
+* The §3a.2 **exemption list** (bombs, `elite` replacements) — deliberately not invented.
+* 21 AA value violations + 6 wrong ratios (§3a.1) — need the pipeline and a maintainer order.
+* 9 `doc_claims` mismatches in the warhead/AI lanes, **pre-existing** — this work changed no yaml.
+* A fresh worktree at master crashes on `Cannot locate type: DynamicBotInsuranceInfo` until
+  `dotnet build -c Release -p:TargetPlatform=win-x64` is re-run.
+
 ## ⭐⭐⭐ 2026-09-14 (late) — THREE BRANCHES, TWO PRs, AND ONE DEFECT THAT IS NOT OURS
 
 Written by **Claude-Local (Opus 5)**. Live state; read before anything dated earlier.
