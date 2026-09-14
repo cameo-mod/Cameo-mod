@@ -1,36 +1,33 @@
 # Original-unit reference coverage
 
-## O1 — holds an OpenRA original but fewer than three sources: **10** (ratchet 12)
+## O1 — holds an OpenRA original but fewer than three sources: **14** (ratchet 12)
 
-   ra1_allies_alliedlighttank               has DTA Enhanced, OpenRA Red A MISSING Combined Arms
    ra1_allies_blackhawk                     has OpenRA Red A               MISSING Combined Arms, DTA Enhanced
-   ra1_allies_camopillbox                   has Combined Arm, OpenRA Red A MISSING DTA Enhanced
-   ra1_soviets_mammothtank                  has Combined Arm, OpenRA Red A MISSING DTA Enhanced
+   ra1_allies_mobileradarjammer             has Combined Arm, OpenRA Red A MISSING DTA Enhanced
+   ra1_allies_phasetransport                has OpenRA Red A               MISSING Combined Arms, DTA Enhanced
+   ra1_soviets_flaktruck                    has OpenRA Red A               MISSING Combined Arms, DTA Enhanced
+   ra2_allies_battlefortress_empty          has Romanov's Ve               MISSING Combined Arms, DTA Enhanced
    ra2_allies_engineer                      has Romanov's Ve               MISSING Combined Arms, DTA Enhanced
-   ra2_allies_grizzlytank                   has RA2 Reborn, Romanov's Ve   MISSING Combined Arms, DTA Enhanced
    ra2_soviets_engineer                     has Romanov's Ve               MISSING Combined Arms, DTA Enhanced
    ra2_soviets_sentrygun                    has Romanov's Ve, Valiant Shad MISSING Combined Arms, DTA Enhanced
+   ts_gdi_lightinfantry                     has OpenRA Tiber, Twisted Insu MISSING Combined Arms, DTA Enhanced
+   ts_gdi_mobileconstructionvehicle         has Crystallized, OpenRA Tiber MISSING Combined Arms, DTA Enhanced
+   ts_gdi_mobilesensorarray                 has OpenRA Tiber, Shattered Pa MISSING Combined Arms, DTA Enhanced
+   ts_gdi_railguncommando                   has OpenRA Tiber, Shattered Pa MISSING Combined Arms, DTA Enhanced
    ts_nod_lightinfantry                     has OpenRA Tiber               MISSING Combined Arms, DTA Enhanced
    ts_nod_shotguncommando                   has OpenRA Tiber, Shattered Pa MISSING Combined Arms, DTA Enhanced
 
-## O2 — OpenRA/OpenTD original claimed by nobody: **116** (ratchet 15)
+## O2 — OpenRA/OpenTD original claimed by nobody: **108** (ratchet 15)
 
-   Romanov's Vengeance: 104
-   OpenRA Red Alert: 9
+   Romanov's Vengeance: 102
+   OpenRA Red Alert: 4
    OpenRA Tiberian Sun: 2
-   OpenRA Tiberian Dawn: 1
 
-   OpenRA Tiber  RMBO          Commando                        infantry
    OpenRA Red A  Ant           Giant Ant                       infantry
-   OpenRA Red A  CTNK          Chrono Tank                     vehicle
-   OpenRA Red A  DTRK          Demolition Truck                vehicle
    OpenRA Red A  E4            Flame Infantry                  infantry
-   OpenRA Red A  FTRK          Mobile Flak                     vehicle
    OpenRA Red A  SPY.England   SPY.England                     infantry
-   OpenRA Red A  STNK          Phase Transport                 vehicle
-   OpenRA Red A  TTNK          Tesla Tank                      vehicle
    OpenRA Red A  Zombie        Zombie                          infantry
-   OpenRA Tiber  E1            Light Infantry                  infantry
+   OpenRA Tiber  CYBORG        Cyborg Infantry                 infantry
    OpenRA Tiber  GACTWR        Component Tower                 defense
    Romanov's Ve  caeast02      Yuri Statue                     defense
    Romanov's Ve  vlad          Vladamir's Dreadnought          ship
@@ -47,7 +44,6 @@
    Romanov's Ve  dred          Dreadnought                     ship
    Romanov's Ve  expn          Mobile Expansion Vehicle        vehicle
    Romanov's Ve  exps          Mobile Expansion Vehicle        vehicle
-   Romanov's Ve  expy          Mobile Expansion Vehicle        vehicle
    Romanov's Ve  grtk          Grinder Tank                    vehicle
    Romanov's Ve  sub           Typhoon Attack Submarine        ship
    Romanov's Ve  4tnk          Mammoth Tank                    vehicle
@@ -60,8 +56,17 @@
    Romanov's Ve  naflak-tr     Flak Cannon                     defense
    Romanov's Ve  nasam-tr      Patriot Missile System          defense
    Romanov's Ve  tesla-tr      Tesla Coil                      defense
-   … and 76 more
+   Romanov's Ve  yaggun-tr     Gatling Cannon                  defense
+   Romanov's Ve  floater       Mutant Crab                     ship
+   Romanov's Ve  gagun         Gun Turret                      defense
+   Romanov's Ve  gagun-tr      Gun Turret                      defense
+   Romanov's Ve  gamgun        Mirage Turret                   defense
+   Romanov's Ve  gamgun-tr     Mirage Turret                   defense
+   Romanov's Ve  hytk          Hydra Heavy Tank                vehicle
+   … and 68 more
 
-   gating sources: 12 (ratchet 15) · unsettled, reported only: 104
+   gating sources: 6 (ratchet 15) · unsettled, reported only: 102
+
+   O1 gating actors: 12 (ratchet 12) · unsettled, reported only: 2
 
 exit=0

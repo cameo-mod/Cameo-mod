@@ -2760,7 +2760,8 @@ kept for provenance and for the technique notes inside them.
 **The rule that keeps this file from becoming one of them:** a handoff records STATE, and state
 rots. When you finish a session, update **this** file — do not write a new dated one. If a
 statement here disagrees with the tree, the tree is right; fix the sentence.
-## 2026-09-14 — SEVEN INI SOURCES BYTE-PINNED; ROLE VOTES STILL FAIL CLOSED
+
+## 2026-09-14 — SEVEN INI SOURCES BYTE-PINNED; ROLE VOTES FAIL CLOSED PER ARMAMENT
 
 The exact external INIs for CnC Reloaded, Mental Omega, RA2 0XX, RA2 Reborn, Red Resurrection,
 Rise of the East and Twisted Insurrection were received and verified against their supplied
@@ -2774,7 +2775,24 @@ slots and every cited weapon-to-projectile link. The 64 historical promoted-seco
 not re-approved by this operation. `docs/reference/ini_corpus.json` gains only `source_sha256` on
 those rows; no value, order, duplicate, selection, damage, range or cadence field changes.
 
-⛔ This does **not** restore their votes yet. RA2/Ares default targeting semantics and the
-per-slot weapon-evidence eligibility gate remain separate review work. `extract_ini_projectile_roles`
-continues to publish DTA only, so role-less sources still abstain. The 694 unfolded-cycle hold and
-the no-regeneration warning below both remain intact.
+`extract_ini_armament_roles.py` now admits only the safe subset. It re-verifies all seven files and
+the corpus weapon-link fingerprints, then reads each cited weapon directly from those exact bytes.
+RA2/YR needs explicit valid `AA` **and** `AG`; Twisted Insurrection may use the documented TS
+defaults. Each slot must independently be `nominal_direct`, carry usable positive finite values,
+and have `Burst = 1`. Missing defaults, invalid booleans, incomplete/effect weapons and multi-shot
+weapons abstain. The sidecar resolves **496 of 2,461** cited armaments; 1,965 remain explicitly
+withheld.
+
+The regenerated per-armament map forms **332** pairs (226 exact, 106 via a proven `both` stand-in),
+up from 308. This is 59 proof-backed additions and 35 DTA withdrawals caused by applying the same
+slot-evidence gate to primary, secondary and elite weapons there, net +24. The Apocalypse tank now
+has one explicit Mental Omega AA-missile
+vote; its cannon still abstains. No corpus regeneration, assignment change, historical selection
+approval, gameplay value, `apply_balance`, protected classifier or 694-cycle inference is included.
+
+The canonical full reference page `docs/audit/latest/reference_map_clean_20260911.html` is
+regenerated from the current tree. The current tree has **29** non-WIP
+faction ledger prefixes rather than the requested historical count of 28, so all 29 are included;
+only `plymouth` and `eden`, both explicitly labelled WIP, are excluded. The page reports 161
+original and 709 expanded actors, 915 attached references, 514 formula-priced actors and 12
+originals below three sources.

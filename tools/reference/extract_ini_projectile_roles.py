@@ -15,12 +15,11 @@ missile, so the DTA mammoth's secondary is `both`, which is what makes it the co
 Cameo's `MissileAP_Heavy` and for CA's `MammothTusk` (Air, AirSmall, Infantry). A name classifier
 calls it anti-ground and pairs an air missile against a cannon. Measured 2026-09-13.
 
-⛔ DTA ONLY FOR NOW. The other seven source files are byte-pinned as of 2026-09-14, but that
-milestone deliberately certifies only their actor weapon-slot and weapon-projectile links. It
-does not establish RA2/Ares defaults or make an incomplete weapon eligible to vote. Until those
-two gates are implemented and reviewed, this extractor continues to publish DTA roles only and
-the seven sources continue to abstain. A source hash is necessary provenance, not sufficient
-combat evidence.
+This extractor remains DTA-specific because its existing elite evidence shares the same two
+source files. The other seven pinned sources use `extract_ini_armament_roles.py`, which binds
+each exact weapon/projectile link to explicit targeting and per-slot weapon evidence. RA2 missing
+defaults and incomplete weapons still abstain there. A source hash is necessary provenance, not
+sufficient combat evidence.
 
     python tools/reference/extract_ini_projectile_roles.py \
         --ini-dir "<reference>/DTA Developer Edition/INI" --write
@@ -122,6 +121,16 @@ def role_of(aa: bool, ag: bool) -> str:
     return "special"
 
 
+def target_bool(raw):
+    """(value, state) for one projectile Boolean; invalid text is never false."""
+    if raw is None:
+        return None, "absent"
+    value = bool_value(raw)
+    if value is None:
+        return None, "invalid"
+    return value, "declared"
+
+
 def projectile_roles(ini: dict, wanted: set) -> tuple[dict, list]:
     """{projectile: verdict} over the FLATTENED ini, plus the names the file does not declare."""
     roles, missing = {}, []
@@ -132,8 +141,12 @@ def projectile_roles(ini: dict, wanted: set) -> tuple[dict, list]:
             continue
         declared_aa = section.get("AA")
         declared_ag = section.get("AG")
-        aa = DEFAULT_AA if declared_aa is None else bool(bool_value(declared_aa))
-        ag = DEFAULT_AG if declared_ag is None else bool(bool_value(declared_ag))
+        aa, aa_state = target_bool(declared_aa)
+        ag, ag_state = target_bool(declared_ag)
+        if "invalid" in (aa_state, ag_state):
+            raise ValueError(f"{name}: invalid AA/AG boolean")
+        aa = DEFAULT_AA if aa_state == "absent" else aa
+        ag = DEFAULT_AG if ag_state == "absent" else ag
         roles[name] = {
             "role": role_of(aa, ag),
             "aa": aa,

@@ -41,6 +41,7 @@ import miniyaml                       # noqa: E402
 import peer_corpus                    # noqa: E402
 import reference_distribution as rd   # noqa: E402
 import extract_ini_projectile_roles as ipr  # noqa: E402
+import extract_ini_armament_roles as iar     # noqa: E402
 import extract_ini_elite_weapons as ielite     # noqa: E402
 
 ROOT = rd.ROOT
@@ -85,6 +86,8 @@ def peer_index():
 
 DATA_INPUT_FILES = (
     "docs/reference/ini_corpus.json",
+    "docs/reference/ini_armament_role_evidence.json",
+    "docs/reference/ini_source_pins.json",
     "docs/reference/ini_projectile_role_evidence.json",
     "docs/reference/ini_elite_weapon_evidence.json",
     "docs/balance/derived/reference_assignment.json",
@@ -111,8 +114,10 @@ TOOL_INPUT_FILES = (
     "tools/balance/reference_lineages.py",
     "tools/balance/synthesize_reference.py",
     "tools/reference/extract_ini_elite_weapons.py",
+    "tools/reference/extract_ini_armament_roles.py",
     "tools/reference/extract_ini_projectile_roles.py",
     "tools/reference/extract_ini_units.py",
+    "tools/reference/ini_source_pins.py",
 )
 
 
@@ -171,6 +176,7 @@ def build(only_actor=None):
     ledger = asg.ledger()
     rules = miniyaml.Ruleset(ROOT)
     projectile_roles = ipr.load(ROOT)
+    projectile_roles.update(iar.load(ROOT))
     elite_weapons = ielite.load(ROOT)
     peers = peer_index()
 

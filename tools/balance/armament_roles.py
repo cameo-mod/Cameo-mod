@@ -52,6 +52,7 @@ The targeting envelope is the SOURCE; the slot spelling is a convention.
 """
 from __future__ import annotations
 
+import math
 import pathlib
 import sys
 
@@ -197,7 +198,7 @@ RANGE_UNITS = {"wdist": 1.0, "cells": float(WDIST_PER_CELL)}
 
 def view(side, slot, weapon, role, unknown=(), damage_per_shot=None, burst=1,
          cycle=None, rng=None, requires=None, baseline=True, note=None, range_unit="wdist",
-         gate=None, replaces=None, additive=False):
+         gate=None, replaces=None, additive=False, eligible=True, refusal=None):
     """One armament, on EITHER side of the map, in one shape.
 
     ⛔ `damage_per_cycle` AND `rate` ARE DERIVED HERE AND NOWHERE ELSE. The per-cycle coordinate is
@@ -219,6 +220,7 @@ def view(side, slot, weapon, role, unknown=(), damage_per_shot=None, burst=1,
         "damage_per_cycle": per_cycle, "cycle": cycle,
         "rate": (per_cycle / cycle) if (per_cycle and cycle) else None,
         "requires": requires, "baseline": baseline, "gate": gate, "note": note,
+        "eligible": bool(eligible), "refusal": refusal,
         # ⛔ REPLACEMENT IDENTITY, carried rather than inferred (Astra, PR #375 blocker 1). An
         # `Elite=` weapon REPLACES the slot it is declared against. `replaces` names that weapon
         # and `additive` says whether the thing it replaced was a zero-damage dummy — the only
@@ -351,27 +353,89 @@ def ini_views(rec, projectile_roles=None, elite_weapons=None):
         if not weapon and dmg is None:
             continue
         proj = rec.get(prefix + "projectile")
-        verdict = roles.get((source, proj)) or roles.get((source, str(proj).lower()))
+        exact = roles.get((source, weapon, str(proj or "")))
+        verdict = exact or roles.get((source, proj)) or roles.get((source, str(proj).lower()))
+
+        # The seven newly pinned sources use exact sidecar values.  DTA's older projectile-only
+        # evidence remains usable only when this exact corpus slot carries the extractor's final
+        # nominal-direct verdict.  One slot never authorises its sibling.
+        if exact:
+            dmg = _num(exact.get("damage"))
+            reload = _num(exact.get("reload"))
+            rng = _num(exact.get("range"))
+            burst_was_bool = isinstance(exact.get("burst"), bool)
+            raw_burst = _num(exact.get("burst"))
+            evidence_ok = (exact.get("status") == "resolved"
+                           and exact.get("weapon_evidence") == "nominal_direct"
+                           and exact.get("w_dps_usable") is True)
+            refusal = exact.get("reason")
+        else:
+            reload = _num(rec.get(prefix + "reload"))
+            rng = _num(rec.get(prefix + "range"))
+            burst_was_bool = isinstance(rec.get(prefix + "burst"), bool)
+            raw_burst = _num(rec.get(prefix + "burst"))
+            evidence_ok = (rec.get(prefix + "evidence") == "nominal_direct"
+                           and rec.get(prefix + "dps_usable") is True)
+            refusal = rec.get(prefix + "evidence_reason") or (
+                None if evidence_ok else "weapon_evidence_absent_or_incomplete")
+
         role = verdict.get("role") if verdict else None
-        burst = int(_num(rec.get(prefix + "burst")) or 1)
+        burst_ok = (not burst_was_bool and (raw_burst is None or
+                    (math.isfinite(raw_burst) and raw_burst >= 1 and raw_burst.is_integer()))
+                    )
+        burst = int(1 if raw_burst is None else raw_burst) if burst_ok else 1
+        numbers_ok = all(value is not None and math.isfinite(value) and value > 0
+                         for value in (dmg, reload, rng))
+        eligible = evidence_ok and verdict is not None and burst_ok and burst == 1 and numbers_ok
+        if not eligible and refusal is None:
+            if verdict is None:
+                refusal = "projectile_role_unresolved"
+            elif not burst_ok:
+                refusal = "invalid_burst"
+            elif burst > 1:
+                refusal = "burst_unfolded"
+            elif not numbers_ok:
+                refusal = "invalid_direct_weapon_numbers"
         out.append(view(
             "ini", slot, weapon, role, (),
             damage_per_shot=dmg, burst=burst,
             # ⛔ THE 694 UNFOLDED RATES STAY BLOCKED. Only 77 INI rows declare a burst delay, in
             # Phobos/Ares notation that is not OpenRA's, so the cycle is left None rather than
             # invented — the view still carries range, damage and burst, which is what pairs.
-            cycle=cycle_ticks(rec.get(prefix + "reload"), 1, ()) if burst <= 1 else None,
-            rng=_num(rec.get(prefix + "range")), requires=None, baseline=True,
+            cycle=cycle_ticks(reload, 1, ()) if eligible else None,
+            rng=rng, requires=None, baseline=True,
             range_unit="cells",
-            note=("projectile=%s" % proj) if proj else None))
+            note=("projectile=%s" % proj) if proj else None,
+            eligible=eligible, refusal=refusal))
     elite = (elite_weapons or {}).get((source, str(rec.get("id") or "")))
     if elite:
-        burst = int(_num(elite.get("burst")) or 1)
+        burst_was_bool = isinstance(elite.get("burst"), bool)
+        raw_burst = _num(elite.get("burst"))
+        burst_ok = (not burst_was_bool and (raw_burst is None or
+                    (math.isfinite(raw_burst) and raw_burst >= 1 and raw_burst.is_integer()))
+                    )
+        burst = int(1 if raw_burst is None else raw_burst) if burst_ok else 1
+        damage = _num(elite.get("damage"))
+        reload = _num(elite.get("reload"))
+        rng = _num(elite.get("range"))
+        numbers_ok = all(value is not None and math.isfinite(value) and value > 0
+                         for value in (damage, reload, rng))
+        evidence_ok = (elite.get("status") == "resolved"
+                       and elite.get("weapon_evidence") == "nominal_direct"
+                       and elite.get("w_dps_usable") is True)
+        eligible = (evidence_ok and elite.get("role") is not None and burst_ok
+                    and burst == 1 and numbers_ok)
+        refusal = elite.get("weapon_evidence_reason") or elite.get("reason")
+        if not eligible and refusal is None:
+            refusal = ("projectile_role_unresolved" if elite.get("role") is None
+                       else "invalid_or_unfolded_burst" if not burst_ok or burst > 1
+                       else "invalid_direct_weapon_numbers" if not numbers_ok
+                       else "weapon_evidence_absent_or_incomplete")
         out.append(view(
             "ini", "elite", elite.get("weapon"), elite.get("role"), (),
-            damage_per_shot=_num(elite.get("damage")), burst=burst,
-            cycle=cycle_ticks(elite.get("reload"), 1, ()) if burst <= 1 else None,
-            rng=_num(elite.get("range")), requires="rank-elite",
+            damage_per_shot=damage, burst=burst,
+            cycle=cycle_ticks(reload, 1, ()) if eligible else None,
+            rng=rng, requires="rank-elite",
             # ⚠ NOT BASELINE — it is rank-gated, exactly like Cameo's own `_elite` armaments and
             # the peer mods' upgrade barrels, and `strongest_by_role` therefore skips it for any
             # role a baseline weapon already fills. `pair_by_role` lets it cover a role that would
@@ -381,7 +445,8 @@ def ini_views(rec, projectile_roles=None, elite_weapons=None):
             additive=bool(elite.get("replaces_dummy_primary")),
             note=("elite, replaces %s%s" % (elite.get("replaces"),
                                             "" if elite.get("replaces_dummy_primary")
-                                            else " (an upgrade of it, not an extra weapon)"))))
+                                            else " (an upgrade of it, not an extra weapon)")),
+            eligible=eligible, refusal=refusal))
     return out
 
 
@@ -410,7 +475,8 @@ COMPATIBLE = {
 
 def strongest_overall(views, baseline_only=True):
     """The single hardest-hitting baseline armament, role or no role."""
-    pool = [v for v in views if not baseline_only or v["baseline"]]
+    pool = [v for v in views if v.get("eligible", True)
+            and (not baseline_only or v["baseline"])]
     if not pool:
         return None
     return max(pool, key=lambda v: v["damage_per_cycle"] or 0)
@@ -438,6 +504,8 @@ def candidates_by_role(views, baseline_only=True):
     for v in views:
         if baseline_only and not v["baseline"]:
             continue
+        if not v.get("eligible", True):
+            continue
         if v["role"] is None:
             continue
         # ⛔ CLAUSE 5 OF THE MATCHING LAW — "a zero-damage row never matches a combat unit." The
@@ -463,6 +531,8 @@ def strongest_by_role(views, baseline_only=True):
     best = {}
     for v in views:
         if baseline_only and not v["baseline"]:
+            continue
+        if not v.get("eligible", True):
             continue
         if v["role"] is None or not v["damage_per_cycle"]:
             continue                       # clause 5 — see `candidates_by_role`
@@ -561,6 +631,8 @@ def cameo_armaments(cameo_views_, baseline_only=True):
     best = {}
     for v in cameo_views_:
         if baseline_only and not v["baseline"]:
+            continue
+        if not v.get("eligible", True):
             continue
         if v["role"] is None or not v["damage_per_cycle"]:
             continue

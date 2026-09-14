@@ -11,8 +11,9 @@ _Maintainer order, 2026-09-13:_
 This document is the ruling, the mechanism and the measurements. The code is
 [`tools/balance/armament_roles.py`](../../tools/balance/armament_roles.py),
 [`tools/balance/build_armament_pairing_report.py`](../../tools/balance/build_armament_pairing_report.py)
-and [`tools/reference/extract_ini_projectile_roles.py`](../../tools/reference/extract_ini_projectile_roles.py);
-the contract is [`tools/tests/test_armament_roles.py`](../../tools/tests/test_armament_roles.py).
+and the INI evidence extractors under [`tools/reference/`](../../tools/reference/). The contracts
+are [`test_armament_roles.py`](../../tools/tests/test_armament_roles.py) and
+[`test_ini_armament_roles.py`](../../tools/tests/test_ini_armament_roles.py).
 
 ---
 
@@ -136,14 +137,17 @@ reference anywhere.
 
 `[MTNK]` is `Trainable=no` in `Rules.ini` and `Trainable=yes` in `Enhance.ini`. The elite missile
 exists in both rulesets and can only ever be FIRED in Enhanced. An extractor ignoring `Trainable`
-would hand DTA Classic 139 weapons no unit in that ruleset can reach.
+would hand DTA Classic 159 corpus-referenced weapons no unit in that ruleset can reach.
 
 ⚠ **And most elite weapons are not a second weapon at all.** `Elite=` REPLACES the primary, so the
 124 `E`-suffix entries (`RaiderCannonE`, `MinigunE`, `HellfireE`, `120mmE`) are the same gun
 improved. Only where the primary is a zero-damage dummy does the elite weapon occupy a slot that
 was otherwise empty — **7 units** — and only those are genuinely additional. Recorded per row as
 `replaces_dummy_primary`. Elite weapons enter the bench as **rank-gated**: they never displace an
-ordinary armament, they only fill a place nothing else can.
+ordinary armament, they only fill a place nothing else can. The same weapon-evidence gate now
+admits only **39 of 131** reachable elite records. A withheld replacement still suppresses its
+base weapon for an expanded Cameo actor, so rejecting the elite cannot silently restore the
+superseded lower-tier gun.
 
 ### 2c. The bench — a reference's SECOND weapon in a compatible role
 
@@ -194,17 +198,18 @@ Maintainer's ruling, 2026-09-13: *"ambiguous role or identity must abstain."*
 So `_unproven_pair` and `UNPROVEN_PREFERENCE` are **deleted**. An unproven peer weapon never votes.
 The cost is real, deliberate and counted rather than hidden:
 
-| | before | after |
-|---|--:|--:|
-| pairs | 607 | **308** |
-| exact pairs | 213 | **215** |
-| `both` stand-ins | 94 | 93 |
-| unproven pairs | 300 | **0** |
+| | before ruling | after ruling | current pinned evidence |
+|---|--:|--:|--:|
+| pairs | 607 | **308** | **332** |
+| exact pairs | 213 | **215** | **226** |
+| `both` stand-ins | 94 | 93 | 106 |
+| unproven pairs | 300 | **0** | **0** |
 
-`ra2_soviets_apocalypsetank` is back to zero votes and that is now the **correct** answer for it,
-not a regression: no source can prove which domain its weapons serve. The ordering rule the
-fallback encoded is not lost — it still lives where it came from, DESIGN's `anti_air_vehicle`
-anchor and `reference_distribution.baseline_armaments`.
+The current increase is evidence, not a fallback returning: 59 exact-source pairs were admitted
+and 35 old DTA pairs were withdrawn by the per-slot weapon gate, for a net +24. The Apocalypse
+tank now gets one explicit Mental Omega vote for its AA missile; its ground cannon still abstains.
+The ordering rule the deleted fallback encoded still lives where it came from, DESIGN's
+`anti_air_vehicle` anchor and `reference_distribution.baseline_armaments`.
 
 ### 2e. WHICH weapon a reference offers depends on the Cameo actor's TIER
 
@@ -225,7 +230,7 @@ Measured: **140 original, 174 expanded** of the 314 priced actors with an assign
 
 ⛔ **`Elite=` REPLACES the slot it is declared against, so benching it beside its base weapon lets
 one gun vote twice.** Astra found exactly that on FRIGATE, BEHEMOTH, YAK and HTNKARTY (blocker 1).
-130 of DTA Enhanced's 139 reachable elite weapons are the `E`-suffix upgrade of a gun the unit
+124 of DTA Enhanced's 131 reachable elite weapons are the `E`-suffix upgrade of a gun the unit
 already fires — `MinigunE`, `120mmE`, `RaiderCannonE` — the same weapon, improved.
 
 ⭐ **MTNK's dummy is the exception and it is not a special case in the code.** It falls out of
@@ -269,10 +274,10 @@ wrote a JSON that any later process could consume months after the corpus moved 
 Two layers now check, and both work without the 9.9 GB reference folder, using only files the
 repository holds:
 
-* `extract_ini_projectile_roles.load()` and `extract_ini_elite_weapons.load()` re-verify each
-  source's `rules_sha256`/`overlay_sha256` against `ini_corpus.json` and drop — **per source** — any
-  whose pin has moved. Dropped sources are returned on `load.dropped` so a caller can report the
-  gap instead of discovering it.
+* `extract_ini_projectile_roles.load()`, `extract_ini_armament_roles.load()` and
+  `extract_ini_elite_weapons.load()` re-verify each source's byte pin against `ini_corpus.json`.
+  The seven-source armament loader also rechecks the corpus weapon-link fingerprint. A moved pin
+  or binding drops that source, per source, and is exposed on `load.dropped`.
 * `armament_pairing.json` records an `inputs` block for the complete reproducibility closure: the
   INI corpus and extracted evidence, selected OpenRA peer corpora, Cameo balance ledgers, active
   manifest/rules/weapons, and direct tool dependencies. `build_reference_report.pairing_document()`
@@ -345,16 +350,27 @@ undeclared. A projectile declaring neither flag takes the engine default (`AA=no
 is recorded in the file as an explicit assumption with its basis — and each verdict says which half
 was declared and which was defaulted.
 
-⛔ **DTA only for role evidence, even after the seven-source pin milestone.** The other seven exact
-INI files are now SHA-256 pinned, and `ini_source_pins.py` verifies all **10,144** existing corpus
-rows against their actor Primary/Secondary slots and weapon-to-projectile links. It preserves the
-historical 64 promoted-secondary occurrences (63 identities) without approving those selections.
-The third-party text remains outside git.
+The other seven exact INIs are SHA-256 pinned, and `ini_source_pins.py` verifies all **10,144**
+existing corpus rows against their actor Primary/Secondary slots and weapon-to-projectile links.
+It preserves the historical 64 promoted-secondary occurrences (63 identities) without approving
+those selections. The third-party text remains outside git.
 
-That provenance does not establish RA2/Ares defaults or make an incomplete weapon eligible to
-vote. `extract_ini_projectile_roles.py` therefore still publishes only DTA roles until those two
-gates are reviewed; the seven sources continue to abstain. The DTA hashes remain independently
-verified: `786f0ae5…` for `Rules.ini`, `d836d5a9…` for `Enhance.ini`.
+`extract_ini_armament_roles.py` adds the missing evidence gate without regenerating the corpus.
+For each cited weapon it binds the exact weapon/projectile link to freshly read range, damage,
+reload, burst and targeting flags. RA2/YR contributes only when **both** resolved `AA` and `AG`
+values are explicit and valid; missing defaults abstain because no authoritative RA2 default is
+pinned. Twisted Insurrection uses the documented TS defaults. Invalid booleans never coerce to
+false. A weapon must also be `nominal_direct`, carry usable positive finite numbers, and have
+`Burst = 1`; incomplete/effect/multi-shot records abstain as a whole, so the 694-cycle hold stays
+closed.
+
+Result: **496 of 2,461** cited armaments resolve. The other 1,965 are named in the evidence sidecar:
+1,404 need RA2 defaults, 363 are multi-shot, 82 use effect references, 38 use exotic channels,
+33 have no direct damage, 15 have other incomplete weapon evidence, 12 lack a projectile section,
+17 carry invalid/non-positive direct numbers, and one lacks a warhead dependency. DTA keeps its
+independently pinned projectile evidence, but its primary, secondary and elite slots now pass the
+same `nominal_direct`/usable/single-shot/numeric gate. The DTA hashes remain
+`786f0ae5…` for `Rules.ini` and `d836d5a9…` for `Enhance.ini`.
 
 ## 5. What the pairing currently reports
 
@@ -366,25 +382,32 @@ verified: `786f0ae5…` for `Rules.ini`, `d836d5a9…` for `Enhance.ini`.
 | …referencing a peer's BASE weapon (original) | 140 |
 | …referencing the elite/upgraded replacement (expanded) | 174 |
 | actors firing in more than one role | 46 |
-| **reference rows contaminated by the fold** | **39** |
-| armament pairs formed | **308** |
-| …proven exact role matches | 215 |
-| …a dual-role `both` weapon stood in | 93 |
+| **reference rows contaminated by the fold** | **38** |
+| armament pairs formed | **332** |
+| …proven exact role matches | 226 |
+| …a dual-role `both` weapon stood in | 106 |
 | …source could not state a role | **0 — they abstain** (§2d) |
-| …the reference carries that weapon only at ELITE rank | 10 |
-| pairs by role | ground 181 · both 108 · air 19 |
-| Cameo armaments with no reference | 423 |
-| actors with at least one uncovered armament | **142** |
-| uncovered armaments despite structured references | ground 104 · both 47 · air 25 · special 2 |
+| …the reference carries that weapon only at ELITE rank | 4 |
+| pairs by role | ground 187 · both 120 · air 25 |
+| Cameo armaments with no reference | 399 |
+| actors with at least one uncovered armament | **119** |
+| uncovered armaments despite structured references | ground 93 · both 36 · air 21 · special 2 |
 | actors with no structured reference at all | 17 |
 | unknown target tokens | **0** |
 
-⚠ **THE PAIR COUNT FELL FROM 607 AND THAT IS THE RULING LANDING, NOT A REGRESSION.** 300 of those
-pairs were the unproven fallback §2d strikes; the maintainer ruled such a source must abstain.
-Exact matches went UP (213 → 215) because §2e stopped a replacement voting beside its base weapon
-and §2f gave every same-role armament its own turn. `cameo_armaments_without_a_reference` is large
-(423) and newly honest for the same reason: it now counts every armament rather than one per role,
-so a four-gun destroyer reports four gaps where it used to report one.
+The canonical review page `docs/audit/latest/reference_map_clean_20260911.html` is regenerated
+from the current tree. The request called this the
+"all-28-faction" map, but the current tree has **29** non-WIP faction prefixes with balance
+ledgers; the report includes all 29 and excludes only the two explicitly WIP Dark Reign factions
+(`plymouth`, `eden`). It contains 161 original and 709 expanded actors, 915 attached references,
+514 formula-priced actors and 12 originals with fewer than three sources.
+
+⚠ **THE PAIR COUNT REMAINS FAR BELOW 607 BECAUSE THE UNPROVEN FALLBACK STAYS DELETED.** The seven
+verified sources restore 59 proof-backed pairs, while the new slot gate withdraws 35 DTA pair
+instances that rested on incomplete weapons, including six unsafe elite weapons. The net
+308 → 332 is therefore narrower and stronger.
+`cameo_armaments_without_a_reference` remains large (399) because every armament is counted rather
+than one per role, so a four-gun destroyer reports four gaps where it used to report one.
 
 ⚠ **TWO REASONS A WEAPON ENDS UP UNREFERENCED, AND COUNTING THEM TOGETHER MAKES THE NUMBER LIE.**
 The report separates actors whose assigned peers expose no structured armament rows at all from
@@ -394,7 +417,7 @@ gap, not missing structure.
 
 Coverage is also tracked by **weapon identity**, not merely by role. The earlier role-level count
 said only seven actors were uncovered because one successful ground match could hide another ground
-weapon on the same actor. The corrected report exposes 178 uncovered armaments on 142 actors. That
+weapon on the same actor. The current report exposes 152 uncovered armaments on 119 actors. That
 is an honest inventory for later reference work, not a licence to invent votes. For example,
 `td_gdi_firehawk` remains correctly uncovered for its Sidewinders when its A-10 references carry no
 anti-air weapon; the source abstains instead of averaging those missiles with a napalm bomb.
