@@ -613,6 +613,127 @@ it does not, which turns that column into a live compliance check: **six of the 
 actors disagree on range**, `td_gdi_battletank` by 38 WDist (5,438 vs 5,400) - too small to be
 deliberate, which is exactly the kind of drift 3a.2 exists to catch.
 
+### 3a.4 Why a cannon and a missile land on almost the same target
+
+> *"compare 41,528 for the missiles with 40,997 with the cannons! ... Both weapons even when they
+> use different references have almost the same damage ... So what exactly is going on here?"*
+
+⛔ **FIRST, A CORRECTION I OWE THIS SECTION.** An earlier draft answered this with "the sources
+say 1.71x" - a median cannon-vs-missile DPS ratio measured across every reference Mammoth Tank in
+the **INI corpus** (CnC Reloaded, Twisted Insurrection, Mental Omega, RA2, DTA Classic, Rise of the
+East). That number is real, and it is **the wrong population**: none of those sources votes on
+`td_gdi_mammothtank`. Its voters are OpenRA peers. Quoting a corpus-wide statistic to explain a
+specific actor's pairing is the same class of error as reasoning from a trait's name instead of its
+source - see `mammoth_named_dual_slot_separation_ratio`, which now says so on its face.
+
+**THE ACTUAL VOTERS, read out of `armament_pairing.json`:**
+
+| source | cannon | missile | missile:cannon |
+|---|---|---|--:|
+| Combined Arms | `130mmTD` 12,000 / 85t | `MammothTusk` 14,000 / 75t | 1.17x |
+| OpenRA Tiberian Dawn | `120mmDual` 8,000 / 48t | `MammothMissiles` 10,000 / 60t | 1.25x |
+| **geometric mean** | **9,798** | **11,832** | **1.21x** |
+
+By RATE rather than per cycle it is smaller still - CA 141.2 vs 186.7 (1.32x), Tiberian Dawn
+**166.7 vs 166.7 (exactly 1.00x)**, geometric mean **1.15x**.
+
+⭐ **THE ANSWER, AFTER REGENERATING THE MAP: THE SOURCES WERE CANCELLING EACH OTHER OUT.**
+
+An earlier draft of this section said the projection COMPRESSES the difference. That was also
+wrong, and the regeneration disproves it. With DTA Enhanced's unusable rows correctly gated out,
+the Mammoth's two targets move to:
+
+| | old map (stale) | regenerated | peers |
+|---|--:|--:|--:|
+| `mammothmissiles` | 41,528 (3 of 3) | **51,580** (2 of 3) | 11,832 |
+| `120mmdual` | 40,997 (3 of 3) | **42,275** (2 of 3) | 9,798 |
+| **ratio** | **1.013x** | **1.220x** | **1.208x** |
+
+**1.208x in the peers becomes 1.220x in the targets.** The projection carries the difference
+through almost exactly; it does not compress it. What produced the old 1.013x was a
+**CANCELLATION BETWEEN SOURCES POINTING IN OPPOSITE DIRECTIONS**:
+
+* Combined Arms and Tiberian Dawn both make the **missile** stronger (1.17x, 1.25x);
+* DTA Enhanced makes the **cannon** stronger - `HTNK` carries cannon 30 against missile 20, a
+  1.5x inversion.
+
+Blending three sources, two saying "missile" and one saying "cannon" nearly as loudly, lands on
+"about equal". The near-equality was never evidence that the two weapons are alike; it was two
+opposite claims averaging to nothing.
+
+⛔ **AND DTA SHOULD NEVER HAVE BEEN IN THAT AVERAGE.** Its `HTNK` declares `Burst: 2` on BOTH
+armaments with no burst delays, so neither cycle can be folded: both rows are
+`incomplete / burst_unfolded` and carry no `dps_usable`. They are part of the blocked
+unfolded-rate population (170 rows tree-wide, 84 of them DTA Enhanced). The current gate excludes
+them correctly - and the moment it did, the real 1.22x separation appeared.
+
+⭐⭐ **THE BATTLE TANK IS A DIFFERENT STORY, AND IT DID NOT MOVE.** 18,870 vs 17,835 before and
+after. Its missile has exactly one voter:
+
+| source | cannon | missile |
+|---|---|---|
+| Combined Arms | `120mm` 4,600 | *(unpaired)* |
+| DTA Enhanced | `90mm` **30** | `70mmMsl1` **30** |
+| OpenRA Tiberian Dawn | `120mm` 4,000 | *(unpaired)* |
+
+**In DTA Enhanced - the missile's ONLY voter - the cannon and the missile carry the identical
+number, 30.** The missile's reference IS the cannon's reference, so the two targets cannot
+separate on evidence; the 5.8% that survives is entirely the cannon's extra Combined Arms and
+Tiberian Dawn blend. Asymmetric voter counts (1 vs 3) are what move these two apart at all.
+
+⚠ **THREE DIFFERENT CAUSES, AND THEY LOOK IDENTICAL ON THE PAGE.** A near-1.0x spread between two
+armaments can mean *the sources agree they are alike*, *the sources disagree and cancelled*, or
+*one armament's only voter is the other armament's weapon*. Only the Mammoth's was the second and
+only the Battle Tank's is the third. **Read the voters, never the spread.**
+
+
+⚠ **THE MAP THAT PROMPTED THIS WAS STALE, AND HAS BEEN REGENERATED.** It reported "3 of 3
+sources" for both Mammoth weapons including `DTA Enhanced · MammothTusk`; DTA Enhanced now pairs
+0 of the Mammoth's 2 armaments. Regenerated 2026-09-14 across all 31 faction tokens:
+**161 originals · 709 expanded · 925 references · 514 priced by formula · 8 originals under three
+sources.**
+
+⭐ **WHAT THIS DOES AND DOES NOT JUSTIFY.** The Mammoth's guns are NOT alike after all - the
+evidence separates them by 1.22x once the unusable votes are gone, so the maintainer's instinct
+that a cannon and a missile should differ noticeably is supported here by our own map, not only by
+the wider corpus. The Battle Tank is the opposite case: its missile has no independent evidence at
+all, so applying one averaged value to both costs nothing and is exactly the maintainer's own
+corollary. ⚠ The `td_gdi_apc` pair (6,239 vs 6,138, a 1.6% spread) is a THIRD case and is settled
+by 3a.1 rather than by evidence: it is one weapon split for reach, so the two must be made
+identical regardless of what their separate votes say.
+
+⚠ For the record, the wider-corpus number stands as a non-directional separation statistic.
+Across all 930 dual-weapon reference actors only **29.2%** sit inside 1.05x and **45.4%** exceed
+3x. Among the 15 INI rows whose actor name contains `mammoth` and whose two slots both have DPS,
+the median stronger:weaker ratio is **1.71x** (1.11x-2.93x). The selection includes Mammoth-named
+walkers and no RA2 Apocalypse row, so it must not be described as a directional cannon:missile
+measurement. It shows that differentiated slots are common in that population; it does not say
+which slot should be stronger or what `td_gdi_mammothtank` should be.
+
+
+### 3a.5 ⛔ NEVER reference across factions
+
+> *"the GDI emp grenadier was mapped to the CA marauder which is a scrin unit so that is wrong!
+> Never ever reference from other factions without my instructions! What we need is the CA zone
+> raider with the sonic grenades which is much closer to the EMP grenadier and also from a gdi
+> sub faction called ZOCOM"* (maintainer, 2026-09-14)
+
+A Cameo actor takes its reference from its OWN faction's lineage in the source mod. A
+cross-faction pairing needs an explicit maintainer instruction, and is recorded in
+`assign_references.REFERENCE_OVERRIDES` where the next reader can see who ruled it.
+
+⚠ **THE FACTION GATE CANNOT CATCH THIS, AND THAT IS THE FINDING.** Combined Arms tags `MRDR`
+(Scrin) and `ZRAI` (GDI/ZOCOM) with the SAME 25-faction string - `allies/arc/.../gdi/.../scrin/
+.../zocom`, every faction in the mod - so the map recorded `home: true` for a Scrin unit and was
+telling the truth as far as the data goes. **156 of CA's 377 units carry ten or more faction
+tags** (median 5), against a median of **1** in OpenRA Tiberian Dawn. For CA the routing gate is
+therefore not merely weak, it is INERT: a cross-faction pick cannot be detected from the corpus at
+all. Until CA lineage comes from something other than `Buildable.Factions`, every CA pairing is a
+name-and-stats match with no faction check behind it, and the maintainer's eye is the only gate.
+⚠ One more sits in the tree unruled: `yuri_gatlingtrooper` references CA's `ZTRP` Zone Trooper,
+GDI/ZOCOM again. It is outside the classic four, so it is reported rather than changed - inventing
+a cross-faction correction is the same mistake in the other direction.
+
 ### 3a.6 ONE CYCLE PER ACTOR - and then the total DPS is just a sum
 
 > *"Take a look at how our current mammoth tank works with dual weapons and different reload
@@ -727,145 +848,35 @@ three different things in this tree, and only the first may be ignored:
 So the rule is conditional: **ignore `X_AA` when `X` exists as another armament on the same
 actor.** Anything else is priced normally.
 
-**THE RENAME THAT MAKES THE CONVENTION MACHINE-READABLE.** Eight true splits hide from the audit
-today because their GROUND half carries an `AG` suffix, so `X` never matches `X_AA`:
+**THE NAMING CONVENTION - BOTH HALVES CARRY A SUFFIX.** Maintainer, 2026-09-14: *"The pair
+should have the _AA and the _AG pair where the AA variant is the one with 1.5x range and anti
+air right?"* So a split is **`X_AG` + `X_AA`**, never a bare `X` against an `X_AA`. With both
+halves marked, the formula drops the `_AA` half by NAME and the audit checks the pair by name,
+and neither has to infer anything.
 
-| ground half (rename to) | AA twin | range | ratio |
-|---|---|--:|--:|
-| `AsianQuasarAG` -> `AsianQuasar` | `AsianQuasar_AA` | 6000 -> 9000 | **1.50x** |
-| `RA2MedusaAG` -> `RA2Medusa` | `RA2Medusa_AA` | 9000 -> 13500 | **1.50x** |
-| `SteelMantaAG` -> `SteelManta` | `SteelManta_AA` | 6666 -> 9999 | **1.50x** |
-| `td_gdi_boxer_boxercannonag` -> `..._boxercannon` | `..._boxercannon_AA` | 4860 -> 7290 | **1.50x** |
-| `D2K_Rocket_Trooper_AGOnly` -> `D2K_Rocket_Trooper` | `D2K_Rocket_Trooper_AA` | 6252 -> 9716 | 1.55x |
-| `d2k_APC_AG` -> `d2k_APC` | `d2k_APC_AA` | 9216 -> 11000 | 1.19x |
-| `d2k_APCo_AG` -> `d2k_APCo` | `d2k_APCo_AA` | 9216 -> 11000 | 1.19x |
-| `AsianQuasarBoatAG` -> `AsianQuasarBoat` | `AsianQuasarBoat_AA` | 7168 -> 7168 | 1.00x |
+⚠ **THE SLOT ORDER IS READ FROM THE TREE, NOT CHOSEN**: `MigMissiles_AA_elite` and ten more
+like it already exist, so the AA/AG marker sits directly after the base and any state modifier
+follows it - `MigMissiles_AG_elite`, not `MigMissiles_elite_AG`.
 
-⭐ Four are **already at exactly 1.50x** and are invisible to the audit for no reason but the
-name; the other four are real 3a.1 violations the rename would expose. ⚠ The rename is a weapon
-migration (`tools/rename/safe_rename.py`) and needs a boot gate, so it is listed here and awaits
-the order rather than being done in passing.
+The full proposal is generated into **`docs/design/AA_SPLIT_RENAME_MAP.md`**: **84 weapons**
+across **63 split pairs**, with one collision flagged for a human. ⚠ It is NOT applied - executing
+it is a `safe_rename.py` migration needing a boot gate and a quiet tree, and master is currently
+staged for a controlled playtest.
 
-### 3a.5 ⛔ NEVER reference across factions
+⛔ **TWO TRAPS THE GENERATOR HAD TO BE TAUGHT**, both caught by reading its output:
 
-> *"the GDI emp grenadier was mapped to the CA marauder which is a scrin unit so that is wrong!
-> Never ever reference from other factions without my instructions! What we need is the CA zone
-> raider with the sonic grenades which is much closer to the EMP grenadier and also from a gdi
-> sub faction called ZOCOM"* (maintainer, 2026-09-14)
+* **A shared prefix is not a family.** The first cut proposed `D2K_Rocket_Buggy ->
+  D2K_Rocket_AG_Buggy`. `D2K_Rocket_Buggy`, `D2K_Rocket_Trooper` and `D2K_Rocket_Fremen` are
+  DIFFERENT units' weapons that merely start with the same words. Only a known state modifier
+  (`elite`, `cryo`, `rad`, `fire`, `tesla`) travels with the base.
+* **"Frag" is not an "AG" suffix.** A regex for a ground half ending in `AG` also matches
+  `Future_MultiMissile_Frag` and `TS155mmFrag`. The cure is to require the `_AA` partner to
+  EXIST before believing any name is half of a split.
 
-A Cameo actor takes its reference from its OWN faction's lineage in the source mod. A
-cross-faction pairing needs an explicit maintainer instruction, and is recorded in
-`assign_references.REFERENCE_OVERRIDES` where the next reader can see who ruled it.
-
-⚠ **THE FACTION GATE CANNOT CATCH THIS, AND THAT IS THE FINDING.** Combined Arms tags `MRDR`
-(Scrin) and `ZRAI` (GDI/ZOCOM) with the SAME 25-faction string - `allies/arc/.../gdi/.../scrin/
-.../zocom`, every faction in the mod - so the map recorded `home: true` for a Scrin unit and was
-telling the truth as far as the data goes. **156 of CA's 377 units carry ten or more faction
-tags** (median 5), against a median of **1** in OpenRA Tiberian Dawn. For CA the routing gate is
-therefore not merely weak, it is INERT: a cross-faction pick cannot be detected from the corpus at
-all. Until CA lineage comes from something other than `Buildable.Factions`, every CA pairing is a
-name-and-stats match with no faction check behind it, and the maintainer's eye is the only gate.
-⚠ One more sits in the tree unruled: `yuri_gatlingtrooper` references CA's `ZTRP` Zone Trooper,
-GDI/ZOCOM again. It is outside the classic four, so it is reported rather than changed - inventing
-a cross-faction correction is the same mistake in the other direction.
-
-### 3a.4 Why a cannon and a missile land on almost the same target
-
-> *"compare 41,528 for the missiles with 40,997 with the cannons! ... Both weapons even when they
-> use different references have almost the same damage ... So what exactly is going on here?"*
-
-⛔ **FIRST, A CORRECTION I OWE THIS SECTION.** An earlier draft answered this with "the sources
-say 1.71x" - a median cannon-vs-missile DPS ratio measured across every reference Mammoth Tank in
-the **INI corpus** (CnC Reloaded, Twisted Insurrection, Mental Omega, RA2, DTA Classic, Rise of the
-East). That number is real, and it is **the wrong population**: none of those sources votes on
-`td_gdi_mammothtank`. Its voters are OpenRA peers. Quoting a corpus-wide statistic to explain a
-specific actor's pairing is the same class of error as reasoning from a trait's name instead of its
-source - see `mammoth_named_dual_slot_separation_ratio`, which now says so on its face.
-
-**THE ACTUAL VOTERS, read out of `armament_pairing.json`:**
-
-| source | cannon | missile | missile:cannon |
-|---|---|---|--:|
-| Combined Arms | `130mmTD` 12,000 / 85t | `MammothTusk` 14,000 / 75t | 1.17x |
-| OpenRA Tiberian Dawn | `120mmDual` 8,000 / 48t | `MammothMissiles` 10,000 / 60t | 1.25x |
-| **geometric mean** | **9,798** | **11,832** | **1.21x** |
-
-By RATE rather than per cycle it is smaller still - CA 141.2 vs 186.7 (1.32x), Tiberian Dawn
-**166.7 vs 166.7 (exactly 1.00x)**, geometric mean **1.15x**.
-
-⭐ **THE ANSWER, AFTER REGENERATING THE MAP: THE SOURCES WERE CANCELLING EACH OTHER OUT.**
-
-An earlier draft of this section said the projection COMPRESSES the difference. That was also
-wrong, and the regeneration disproves it. With DTA Enhanced's unusable rows correctly gated out,
-the Mammoth's two targets move to:
-
-| | old map (stale) | regenerated | peers |
-|---|--:|--:|--:|
-| `mammothmissiles` | 41,528 (3 of 3) | **51,580** (2 of 3) | 11,832 |
-| `120mmdual` | 40,997 (3 of 3) | **42,275** (2 of 3) | 9,798 |
-| **ratio** | **1.013x** | **1.220x** | **1.208x** |
-
-**1.208x in the peers becomes 1.220x in the targets.** The projection carries the difference
-through almost exactly; it does not compress it. What produced the old 1.013x was a
-**CANCELLATION BETWEEN SOURCES POINTING IN OPPOSITE DIRECTIONS**:
-
-* Combined Arms and Tiberian Dawn both make the **missile** stronger (1.17x, 1.25x);
-* DTA Enhanced makes the **cannon** stronger - `HTNK` carries cannon 30 against missile 20, a
-  1.5x inversion.
-
-Blending three sources, two saying "missile" and one saying "cannon" nearly as loudly, lands on
-"about equal". The near-equality was never evidence that the two weapons are alike; it was two
-opposite claims averaging to nothing.
-
-⛔ **AND DTA SHOULD NEVER HAVE BEEN IN THAT AVERAGE.** Its `HTNK` declares `Burst: 2` on BOTH
-armaments with no burst delays, so neither cycle can be folded: both rows are
-`incomplete / burst_unfolded` and carry no `dps_usable`. They are part of the blocked
-unfolded-rate population (170 rows tree-wide, 84 of them DTA Enhanced). The current gate excludes
-them correctly - and the moment it did, the real 1.22x separation appeared.
-
-⭐⭐ **THE BATTLE TANK IS A DIFFERENT STORY, AND IT DID NOT MOVE.** 18,870 vs 17,835 before and
-after. Its missile has exactly one voter:
-
-| source | cannon | missile |
-|---|---|---|
-| Combined Arms | `120mm` 4,600 | *(unpaired)* |
-| DTA Enhanced | `90mm` **30** | `70mmMsl1` **30** |
-| OpenRA Tiberian Dawn | `120mm` 4,000 | *(unpaired)* |
-
-**In DTA Enhanced - the missile's ONLY voter - the cannon and the missile carry the identical
-number, 30.** The missile's reference IS the cannon's reference, so the two targets cannot
-separate on evidence; the 5.8% that survives is entirely the cannon's extra Combined Arms and
-Tiberian Dawn blend. Asymmetric voter counts (1 vs 3) are what move these two apart at all.
-
-⚠ **THREE DIFFERENT CAUSES, AND THEY LOOK IDENTICAL ON THE PAGE.** A near-1.0x spread between two
-armaments can mean *the sources agree they are alike*, *the sources disagree and cancelled*, or
-*one armament's only voter is the other armament's weapon*. Only the Mammoth's was the second and
-only the Battle Tank's is the third. **Read the voters, never the spread.**
-
-
-⚠ **THE MAP THAT PROMPTED THIS WAS STALE, AND HAS BEEN REGENERATED.** It reported "3 of 3
-sources" for both Mammoth weapons including `DTA Enhanced · MammothTusk`; DTA Enhanced now pairs
-0 of the Mammoth's 2 armaments. Regenerated 2026-09-14 across all 31 faction tokens:
-**161 originals · 709 expanded · 925 references · 514 priced by formula · 8 originals under three
-sources.**
-
-⭐ **WHAT THIS DOES AND DOES NOT JUSTIFY.** The Mammoth's guns are NOT alike after all - the
-evidence separates them by 1.22x once the unusable votes are gone, so the maintainer's instinct
-that a cannon and a missile should differ noticeably is supported here by our own map, not only by
-the wider corpus. The Battle Tank is the opposite case: its missile has no independent evidence at
-all, so applying one averaged value to both costs nothing and is exactly the maintainer's own
-corollary. ⚠ The `td_gdi_apc` pair (6,239 vs 6,138, a 1.6% spread) is a THIRD case and is settled
-by 3a.1 rather than by evidence: it is one weapon split for reach, so the two must be made
-identical regardless of what their separate votes say.
-
-⚠ For the record, the wider-corpus number stands as a non-directional separation statistic.
-Across all 930 dual-weapon reference actors only **29.2%** sit inside 1.05x and **45.4%** exceed
-3x. Among the 15 INI rows whose actor name contains `mammoth` and whose two slots both have DPS,
-the median stronger:weaker ratio is **1.71x** (1.11x-2.93x). The selection includes Mammoth-named
-walkers and no RA2 Apocalypse row, so it must not be described as a directional cannon:missile
-measurement. It shows that differentiated slots are common in that population; it does not say
-which slot should be stronger or what `td_gdi_mammothtank` should be.
-
+⚠ **ONE COLLISION NEEDS A RULING**: `D2K_Rocket_Trooper` and `D2K_Rocket_Trooper_AGOnly` both
+want to become `D2K_Rocket_Trooper_AG`, because the AA twin `D2K_Rocket_Trooper_AA` has TWO
+ground-side candidates. Which one is the real half is a question about that unit, not a naming
+question, so the generator refuses rather than picking.
 
 ## 4. Tech tier rules (F12/F13)
 
