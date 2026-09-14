@@ -2215,9 +2215,17 @@ td_gdi_grenadier_grenade:
 
 td_gdi_rocketsoldier_rockets:
 	Inherits: Rockets
+	ReloadDelay: 56
+	Range: 6264
+	Warhead@MissileAP_Light:
+		Damage: 16341
 
 td_gdi_rocketsoldier_rocketsamt:
 	Inherits: RocketsAMT
+	ReloadDelay: 56
+	Range: 6264
+	Warhead@MissileAP_Light:
+		Damage: 16341
 
 td_gdi_apc_apcgun:
 	Inherits: APCGun

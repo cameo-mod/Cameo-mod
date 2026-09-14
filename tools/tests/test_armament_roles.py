@@ -660,7 +660,7 @@ class PerArmamentComponentTargetTests(unittest.TestCase):
     def test_pairing_schema_retains_authored_components(self):
         self.assertEqual(self.bap.PAIRING_SCHEMA, self.doc["schema"])
         main = self.doc["actors"]["td_gdi_rocketsoldier"]["armaments"][0]
-        self.assertEqual(63.0, main["weapon_reload"])
+        self.assertEqual(56.0, main["weapon_reload"])
         self.assertEqual(1, main["weapon_burst"])
         self.assertEqual([], main["weapon_burst_delays"])
 

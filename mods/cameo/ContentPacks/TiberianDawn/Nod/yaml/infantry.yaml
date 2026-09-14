@@ -55,6 +55,14 @@ td_nod_rocketsoldier:
 	Inherits: ^E3
 	Tooltip:
 		Name: Nod Rocket Soldier
+	Valued:
+		Cost: 420
+	Health:
+		HP: 15000
+	ChangesHealth@SelfHealing:
+		Step: 15
+	Mobile:
+		Speed: 45
 	Inherits@GuerillaTactics: ^GuerillaTactics
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
 	Inherits@TiberiumInfusion: ^TiberiumInfusion
