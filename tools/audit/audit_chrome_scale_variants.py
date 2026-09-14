@@ -43,7 +43,7 @@ bucket their resolution and UI scale land in — that is the whole "1440p is fin
 WHAT IT CHECKS, for every collection in chrome.yaml that declares Regions:
   1. the ARTWORK bounding box of each declared variant equals the 1x region extent x its density
      (canvas size is ignored — padding to a power of two is the upstream convention);
-  2. the canvas is at least big enough to hold that artwork;
+  2. every runtime texture canvas is power-of-two and at least big enough to hold that artwork;
   3. every region fits inside the 1x extent, since that is the coordinate space they are in.
 
 ⚠ Absence is fine and is the normal case — 71 collections here declare only `Image`. A missing
@@ -199,7 +199,7 @@ def main() -> int:
           "extent. Upstream pads 3x art into a power-of-two canvas, so a 1024px file holding 768px\n"
           "of art is correct; and a base sheet may carry art outside any declared region.\n")
 
-    bad, unread, checked = [], [], 0
+    bad, non_power_of_two, unread, checked = [], [], [], 0
     for name, imgs in sorted(imgs_of.items()):
         if "Image" not in imgs:
             continue
@@ -210,6 +210,8 @@ def main() -> int:
         bx, by = base[2], base[3]
         if not bx or not by:
             continue
+        if base[0] & (base[0] - 1) or base[1] & (base[1] - 1):
+            non_power_of_two.append((name, "Image", imgs["Image"], base[:2]))
 
         for field, density in (("Image2x", 2), ("Image3x", 3), ("Image4x", 4)):
             fn = imgs.get(field)
@@ -221,6 +223,8 @@ def main() -> int:
                 continue
             checked += 1
             cw, chh, ax, ay = got
+            if cw & (cw - 1) or chh & (chh - 1):
+                non_power_of_two.append((name, field, fn, (cw, chh)))
             rx, ry = ax / bx, ay / by
             if abs(rx - density) > TOLERANCE or abs(ry - density) > TOLERANCE:
                 bad.append((name, field, fn, density, (bx, by), (ax, ay), (rx, ry), (cw, chh)))
@@ -236,13 +240,21 @@ def main() -> int:
                   f"| **{got[0]}x{got[1]}** | **{r[0]:.2f}x / {r[1]:.2f}x** (declared {d}x) |")
         print()
 
+    if non_power_of_two:
+        print("## ⛔ Runtime texture canvas is not power-of-two\n")
+        print("| collection | field | file | canvas |")
+        print("|---|---|---|--:|")
+        for name, field, fn, canvas in non_power_of_two:
+            print(f"| {name} | `{field}` | `{fn}` | **{canvas[0]}x{canvas[1]}** |")
+        print()
+
     if unread:
         print("## ⚠ Declared files that could not be read (advisory)\n")
         for name, fn in sorted(set(unread))[:20]:
             print(f"- `{name}` -> `{fn}`")
         print()
 
-    if bad:
+    if bad or non_power_of_two:
         print("**FAIL** — see `docs/audit/CHROME_SCALE_BUG.md`.")
         return 1
     print("**PASS** — every variant's artwork matches its declared density.")

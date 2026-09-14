@@ -127,15 +127,30 @@ def _box_resize(w, h, rows, nw, nh):
     return out
 
 
+def power_of_two_canvas(width: int, height: int) -> tuple[int, int]:
+    """The engine uploads sheets as textures and rejects non-power-of-two canvases."""
+    def ceil_power_of_two(value: int) -> int:
+        return 1 << (value - 1).bit_length()
+
+    return ceil_power_of_two(width), ceil_power_of_two(height)
+
+
 def resize(src: pathlib.Path, dst: pathlib.Path, nw: int, nh: int) -> str:
+    cw, ch = power_of_two_canvas(nw, nh)
     try:
         from PIL import Image
     except ImportError:
         w, h, rows = _read_png(src)
-        _write_png(dst, nw, nh, _box_resize(w, h, rows, nw, nh))
+        scaled = _box_resize(w, h, rows, nw, nh)
+        padded = [row + bytearray((cw - nw) * 4) for row in scaled]
+        padded.extend(bytearray(cw * 4) for _ in range(ch - nh))
+        _write_png(dst, cw, ch, padded)
         return "pure-python box filter"
     with Image.open(src) as im:
-        im.convert("RGBA").resize((nw, nh), Image.LANCZOS).save(dst, "PNG", optimize=True)
+        scaled = im.convert("RGBA").resize((nw, nh), Image.LANCZOS)
+        canvas = Image.new("RGBA", (cw, ch), (0, 0, 0, 0))
+        canvas.paste(scaled, (0, 0))
+        canvas.save(dst, "PNG", optimize=True)
     return "Pillow LANCZOS"
 
 
@@ -346,7 +361,8 @@ def main() -> int:
     # is one, so failing a plain --check on it would report a healthy collection as broken — the
     # same false positive that my first diagnosis of this bug made by reading canvases.
     if ms != (bw * master_density, bh * master_density):
-        verb = "**Refusing.**" if args.emit else "**Not a generation source.**"
+        generating = bool(args.emit or args.write)
+        verb = "**Refusing.**" if generating else "**Not a generation source.**"
         print(f"⛔ {verb} The master's canvas is {ms[0]}x{ms[1]}, but {master_density}x of "
               f"the base canvas ({bw}x{bh}) is {bw*master_density}x{bh*master_density}. That means "
               f"the master is PADDED — the upstream convention — and a uniform resize would produce "
@@ -354,7 +370,7 @@ def main() -> int:
               f"Nothing is wrong with a padded sheet; it just cannot be used as a generation "
               f"source. Export the derived sheets from the art source instead, or supply an "
               f"unpadded master.\n")
-        if args.emit:
+        if generating:
             return 1
 
     if args.emit:
@@ -396,7 +412,10 @@ def main() -> int:
             return 0
         for dst, (nw, nh) in emit:
             how = resize(master, dst, nw, nh)
-            print(f"\n  wrote {dst}  {nw}x{nh}  ({how})")
+            cw, ch = png_size(dst)
+            layout = (f"{nw}x{nh}" if (cw, ch) == (nw, nh)
+                      else f"{nw}x{nh} artwork on {cw}x{ch} canvas")
+            print(f"\n  wrote {dst}  {layout}  ({how})")
         write_stamp(args.collection, master, [d for d, _ in emit])
         print("\n⚠ Generated files are engine content: run "
               "`python tools/audit/audit_chrome_scale_variants.py`, then BOOT GATE before "
@@ -438,7 +457,10 @@ def main() -> int:
 
     for field, dst, (nw, nh) in jobs:
         how = resize(master, dst, nw, nh)
-        print(f"\n  wrote {dst}  {nw}x{nh}  ({how})")
+        cw, ch = png_size(dst)
+        layout = (f"{nw}x{nh}" if (cw, ch) == (nw, nh)
+                  else f"{nw}x{nh} artwork on {cw}x{ch} canvas")
+        print(f"\n  wrote {dst}  {layout}  ({how})")
     print("\n⚠ Now run `python tools/audit/audit_chrome_scale_variants.py`, then BOOT GATE before "
           "committing — these are engine content.")
     return 0

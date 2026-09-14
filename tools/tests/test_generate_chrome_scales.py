@@ -67,7 +67,7 @@ def test_artwork_finds_the_real_extent_of_the_generated_flag_sheets():
     cases = {
         "flags.png": (512, 512, 387, 512),
         "flags_2x.png": (1024, 1024, 771, 1024),
-        "flags_3x.png": (1536, 1536, 1153, 1536),
+        "flags_3x.png": (2048, 2048, 1153, 1536),
         "flags_4x.png": (2048, 2048, 1536, 2048),
         "glyphs_3x.png": (1024, 1024, 768, 768),   # 3x artwork in a padded canvas -- correct
     }
@@ -76,6 +76,15 @@ def test_artwork_finds_the_real_extent_of_the_generated_flag_sheets():
         if not p.exists():
             continue
         assert g.artwork(p) == want, name
+
+
+def test_declared_flag_variant_canvases_are_power_of_two():
+    """The renderer rejects a 1536x1536 sheet before any flag can be judged visually."""
+    uibits = ROOT / "mods" / "cameo" / "uibits"
+    for name in ("flags.png", "flags_2x.png", "flags_3x.png"):
+        width, height = g.png_size(uibits / name)
+        assert width & (width - 1) == 0, (name, width)
+        assert height & (height - 1) == 0, (name, height)
 
 
 def test_the_collection_names_are_matched_case_insensitively():
@@ -120,8 +129,76 @@ def test_a_padded_master_is_only_fatal_when_generating():
     """
     src = TOOL.read_text(encoding="utf-8")
     assert "Not a generation source" in src
-    assert re.search(r"if args\.emit:\s*\n\s*return 1", src), \
-        "the padded-master refusal must exit non-zero only on --emit"
+    assert re.search(r"if generating:\s*\n\s*return 1", src), \
+        "the padded-master refusal must exit non-zero whenever generation is requested"
+
+
+def test_write_refuses_an_auto_selected_padded_master(monkeypatch):
+    """A repair run must not resize the padded 3x runtime sheet as though it were a master."""
+    calls = []
+    monkeypatch.setattr(g, "resize", lambda *args: calls.append(args))
+    monkeypatch.setattr(sys, "argv", [str(TOOL), "flags", "--write"])
+    assert g.main() == 1
+    assert calls == []
+
+
+def test_pillow_resize_pads_without_moving_the_artwork(tmp_path):
+    from PIL import Image
+
+    src, dst = tmp_path / "source.png", tmp_path / "derived.png"
+    image = Image.new("RGBA", (3, 2))
+    image.putdata([
+        (255, 0, 0, 255), (0, 255, 0, 255), (0, 0, 255, 255),
+        (1, 2, 3, 255), (4, 5, 6, 255), (7, 8, 9, 255),
+    ])
+    image.save(src)
+    original = image.tobytes()
+
+    assert g.resize(src, dst, 3, 2) == "Pillow LANCZOS"
+    with Image.open(dst) as got:
+        assert got.size == (4, 2)
+        assert got.crop((0, 0, 3, 2)).tobytes() == original
+        assert got.crop((3, 0, 4, 2)).tobytes() == bytes(8)
+
+
+def test_pure_python_resize_pads_without_moving_the_artwork(tmp_path, monkeypatch):
+    import builtins
+
+    src, dst = tmp_path / "source.png", tmp_path / "derived.png"
+    source_rows = [bytearray(range(12)), bytearray(range(12, 24))]
+    g._write_png(src, 3, 2, source_rows)
+    real_import = builtins.__import__
+
+    def no_pillow(name, *args, **kwargs):
+        if name == "PIL":
+            raise ImportError("forced fallback")
+        return real_import(name, *args, **kwargs)
+
+    monkeypatch.setattr(builtins, "__import__", no_pillow)
+    assert g.resize(src, dst, 3, 2) == "pure-python box filter"
+    width, height, rows = g._read_png(dst)
+    assert (width, height) == (4, 2)
+    assert [row[:12] for row in rows] == source_rows
+    assert all(row[12:] == bytes(4) for row in rows)
+
+
+def test_scale_audit_rejects_a_non_power_of_two_runtime_sheet(tmp_path, monkeypatch):
+    audit_dir = ROOT / "tools" / "audit"
+    sys.path.insert(0, str(audit_dir))
+    import audit_chrome_scale_variants as audit
+
+    uibits = tmp_path / "uibits"
+    uibits.mkdir()
+    g._write_png(uibits / "base.png", 2, 2, [bytearray([255] * 8) for _ in range(2)])
+    g._write_png(uibits / "three.png", 6, 6, [bytearray([255] * 24) for _ in range(6)])
+    chrome = tmp_path / "chrome.yaml"
+    chrome.write_text(
+        "^Flags:\n\tImage: base.png\n\tImage3x: three.png\n\n"
+        "flags:\n\tInherits: ^Flags\n\tRegions:\n\t\tgdi: 0, 0, 2, 2\n",
+        encoding="utf-8")
+    monkeypatch.setattr(audit, "CHROME", chrome)
+    monkeypatch.setattr(audit, "UIBITS", uibits)
+    assert audit.main() == 1
 
 
 def test_the_broken_collection_check_does_not_fire_for_a_supplied_master():
