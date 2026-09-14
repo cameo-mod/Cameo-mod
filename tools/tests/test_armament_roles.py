@@ -13,6 +13,7 @@ from __future__ import annotations
 import json
 import pathlib
 import sys
+import tempfile
 import unittest
 import unittest.mock
 
@@ -464,6 +465,24 @@ class EvidenceFingerprintTests(unittest.TestCase):
         self.assertEqual([], kept)
         self.assertEqual(1, len(dropped))
 
+    def test_source_verification_reads_the_requested_root(self):
+        import extract_ini_projectile_roles as ipr
+        with tempfile.TemporaryDirectory() as temp:
+            root = pathlib.Path(temp)
+            corpus = root / "docs" / "reference" / "ini_corpus.json"
+            corpus.parent.mkdir(parents=True)
+            corpus.write_text(json.dumps({
+                "source": "DTA Enhanced",
+                "source_sha256": "a" * 64,
+                "overlay_sha256": "b" * 64,
+            }) + "\n", encoding="utf-8")
+            doc = {"sources": [{"source": "DTA Enhanced",
+                                "rules_sha256": "a" * 64,
+                                "overlay_sha256": "b" * 64}]}
+            kept, dropped = ipr._verified_sources(doc, root)
+            self.assertEqual(doc["sources"], kept)
+            self.assertEqual([], dropped)
+
     def test_the_real_evidence_still_verifies(self):
         import extract_ini_projectile_roles as ipr
         import extract_ini_elite_weapons as ielite
@@ -473,11 +492,21 @@ class EvidenceFingerprintTests(unittest.TestCase):
         self.assertEqual([], ielite.load.dropped)
 
     def test_the_pairing_artifact_records_what_it_was_built_from(self):
+        import build_armament_pairing_report as bap
         doc = json.loads((ROOT / "docs/balance/derived/armament_pairing.json")
                          .read_text(encoding="utf-8"))
-        self.assertIn("inputs", doc)
-        self.assertTrue(doc["inputs"])
-        self.assertTrue(all(v and len(v) == 64 for v in doc["inputs"].values()))
+        self.assertEqual(bap.input_fingerprints(ROOT), doc["inputs"])
+
+    def test_pairing_fingerprints_are_stable_across_lf_and_crlf_checkouts(self):
+        import build_armament_pairing_report as bap
+        with tempfile.TemporaryDirectory() as temp:
+            path = pathlib.Path(temp) / "input.txt"
+            path.write_bytes(b"alpha\nbeta\n")
+            lf = bap.canonical_text_sha256(path)
+            path.write_bytes(b"alpha\r\nbeta\r\n")
+            self.assertEqual(lf, bap.canonical_text_sha256(path))
+            path.write_bytes(b"alpha\r\nchanged\r\n")
+            self.assertNotEqual(lf, bap.canonical_text_sha256(path))
 
     def test_a_stale_pairing_artifact_is_refused_not_rendered(self):
         import build_reference_report as brr
@@ -492,6 +521,73 @@ class EvidenceFingerprintTests(unittest.TestCase):
                     brr.pairing_document()
         finally:
             brr._PAIRING.clear()
+
+    def test_malformed_missing_empty_and_incomplete_artifacts_are_refused(self):
+        import build_armament_pairing_report as bap
+        import build_reference_report as brr
+        path = ROOT / "docs/balance/derived/armament_pairing.json"
+        doc = json.loads(path.read_text(encoding="utf-8"))
+        expected = bap.input_fingerprints(ROOT)
+
+        for change in (
+                lambda bad: bad.update(schema=999),
+                lambda bad: bad.update(actors={}),
+                lambda bad: bad.update(inputs=dict(list(expected.items())[:1])),
+                lambda bad: bad.update(stats={"actors": len(bad["actors"]) + 1})):
+            bad = json.loads(json.dumps(doc))
+            change(bad)
+            with self.assertRaises(ValueError):
+                brr._validate_pairing_document(bad, expected)
+
+        brr._PAIRING.clear()
+        try:
+            with unittest.mock.patch.object(pathlib.Path, "read_text", return_value="{"):
+                with self.assertRaisesRegex(ValueError, "malformed"):
+                    brr.pairing_document()
+        finally:
+            brr._PAIRING.clear()
+
+    def test_structured_zero_match_rows_are_not_called_structureless(self):
+        doc = json.loads((ROOT / "docs/balance/derived/armament_pairing.json")
+                         .read_text(encoding="utf-8"))
+        for actor in ("asianalliance_asiancommando", "asianalliance_asiantankkiller"):
+            self.assertNotIn(actor, doc["no_structured_reference"])
+            self.assertIn(actor, doc["uncovered_armaments"])
+
+
+class ArmamentRenderingTests(unittest.TestCase):
+    def test_hero_armaments_select_the_hero_population(self):
+        import build_reference_report as brr
+        ordinary = (object(), object())
+        hero = (object(), object())
+        crows = {"hero": {"hero": True}, "ordinary": {"hero": False}}
+        self.assertEqual(hero, brr._projection_context("hero", crows, *ordinary, hero))
+        self.assertEqual(ordinary, brr._projection_context("ordinary", crows, *ordinary, hero))
+
+    def test_unknown_cameo_role_renders_an_explicit_abstention(self):
+        import build_reference_report as brr
+
+        class Distribution:
+            cameo_votes = {"mystery": {"weapon_model_eligible": False}}
+
+        doc = {"actors": {"mystery": {
+            "roles": [None],
+            "armaments": [{"weapon": "MysteryGun", "role": None, "baseline": True,
+                            "range_wdist": 1024, "range_unit": "wdist",
+                            "damage_per_cycle": 100}],
+            "sources": {"Peer": {"peer": "X", "pairs": []}},
+        }}}
+        body = []
+        brr._PAIRING[:] = [doc]
+        try:
+            brr.emit_armament_pairing(body, ["mystery"], {"mystery": []},
+                                       object(), Distribution(),
+                                       {"mystery": {"type": "vehicle"}})
+        finally:
+            brr._PAIRING.clear()
+        rendered = "".join(body)
+        self.assertIn("unknown / unproven", rendered)
+        self.assertIn("abstains", rendered)
 
 
 def _ledger_row(actor):

@@ -684,14 +684,18 @@ claims:
       print(doc['stats']['actors_tier_original'])
 
   - id: armament_pairing_input_fingerprints
-    value: 3
+    value: 472
     tolerance: 0
     what: >
-      Input files whose sha256 armament_pairing.json records so a consumer can refuse a STALE
-      artifact - the two INI evidence documents and the reference assignment. Astra's PR #375
-      blocker 4: hashes were recorded at write time and never re-checked at read time, so evidence
-      months out of date could be rendered as current. build_reference_report.pairing_document()
-      re-hashes all three and raises. A drop here means the guard lost a file it was covering.
+      Complete input closure whose sha256 armament_pairing.json records so a consumer can refuse a
+      STALE artifact: the INI corpus and extracted evidence, selected OpenRA peer corpora, Cameo
+      balance ledgers, active manifest/rules/weapons, and every executed local tool dependency.
+      Repository text hashes canonicalise LF/CRLF while raw evidence pins remain separately
+      enforced. Astra's
+      PR #375 follow-up found that hashing only three derived files left their upstream inputs
+      unguarded. build_reference_report.pairing_document() recomputes the exact full set and raises
+      on a missing, extra, changed, malformed, empty, or unsupported artifact. A drop here means the
+      input closure changed and this claim must be re-measured.
     docs: [docs/design/ARMAMENT_PAIRING.md]
     measure: |
       import json, pathlib

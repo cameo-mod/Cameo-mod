@@ -26,6 +26,7 @@ from __future__ import annotations
 
 import argparse
 import collections
+import hashlib
 import json
 import pathlib
 import sys
@@ -45,6 +46,7 @@ import extract_ini_elite_weapons as ielite     # noqa: E402
 ROOT = rd.ROOT
 ASSIGNMENT = ROOT / "docs" / "balance" / "derived" / "reference_assignment.json"
 OUT = ROOT / "docs" / "balance" / "derived" / "armament_pairing.json"
+PAIRING_SCHEMA = 2
 
 PAIR_FIELDS = ("slot", "weapon", "role", "range", "range_unit", "range_wdist",
                "damage_per_cycle", "cycle", "rate", "gate")
@@ -81,20 +83,82 @@ def peer_index():
     return index
 
 
-INPUT_FILES = ("docs/reference/ini_projectile_role_evidence.json",
-               "docs/reference/ini_elite_weapon_evidence.json",
-               "docs/balance/derived/reference_assignment.json")
+DATA_INPUT_FILES = (
+    "docs/reference/ini_corpus.json",
+    "docs/reference/ini_projectile_role_evidence.json",
+    "docs/reference/ini_elite_weapon_evidence.json",
+    "docs/balance/derived/reference_assignment.json",
+    "docs/reference/peer_corpus/index.json",
+)
+
+TOOL_INPUT_FILES = (
+    "tools/audit/miniyaml.py",
+    "tools/balance/armament_roles.py",
+    "tools/balance/assign_references.py",
+    "tools/balance/build_armament_pairing_report.py",
+    "tools/balance/class_membership.py",
+    "tools/balance/explain_unit.py",
+    "tools/balance/faction_routes.py",
+    "tools/balance/formula.py",
+    "tools/balance/ini_cycle_evidence.py",
+    "tools/balance/ini_range_evidence.py",
+    "tools/balance/ini_weapon_selection.py",
+    "tools/balance/peer_base_state.py",
+    "tools/balance/peer_corpus.py",
+    "tools/balance/peer_nominal_evidence.py",
+    "tools/balance/peer_range_evidence.py",
+    "tools/balance/reference_distribution.py",
+    "tools/balance/reference_lineages.py",
+    "tools/balance/synthesize_reference.py",
+    "tools/reference/extract_ini_elite_weapons.py",
+    "tools/reference/extract_ini_projectile_roles.py",
+    "tools/reference/extract_ini_units.py",
+)
+
+
+def input_paths(root=ROOT):
+    """Every repository file whose contents can change the pairing artifact."""
+    root = pathlib.Path(root).resolve()
+    paths = {root / rel for rel in DATA_INPUT_FILES + TOOL_INPUT_FILES}
+    paths.update(peer_corpus.input_paths(root))
+    paths.update(path for path in (root / "docs" / "balance").glob("*.json")
+                 if path.name != "class_anchors.json")
+
+    rules = miniyaml.Ruleset(root)
+    for path in rules.manifest.sources + rules.manifest.rules + rules.manifest.weapons:
+        resolved = path.resolve()
+        try:
+            rel = resolved.relative_to(root)
+        except ValueError:
+            continue
+        # engine/ is an ignored local runtime whose presence differs by checkout. The portable
+        # artifact is derived from the repository-owned Cameo sources and must verify identically
+        # in a clean worktree without an engine junction.
+        if rel.parts and rel.parts[0] != "engine":
+            paths.add(resolved)
+
+    missing = [path for path in paths if not path.is_file()]
+    if missing:
+        names = ", ".join(sorted(path.relative_to(root).as_posix() for path in missing))
+        raise ValueError(f"armament pairing input missing: {names}")
+    return tuple(sorted(paths, key=lambda path: path.relative_to(root).as_posix()))
 
 
 def input_fingerprints(root=ROOT):
-    """{repo-relative path: sha256} for every file this document is derived from."""
-    import hashlib
-    out = {}
-    for rel in INPUT_FILES:
-        path = pathlib.Path(root) / rel
-        out[rel] = (hashlib.sha256(path.read_bytes()).hexdigest()
-                    if path.exists() else None)
-    return out
+    """Portable {repo-relative path: sha256} for every text input to this artifact.
+
+    Git may materialise the same text as LF or CRLF in different worktrees. Canonicalise line
+    endings so that checkout policy cannot make an unchanged artifact look stale. Raw byte pins
+    for external evidence remain enforced separately by peer_corpus and the INI extractors.
+    """
+    root = pathlib.Path(root).resolve()
+    return {path.relative_to(root).as_posix(): canonical_text_sha256(path)
+            for path in input_paths(root)}
+
+
+def canonical_text_sha256(path):
+    data = pathlib.Path(path).read_bytes().replace(b"\r\n", b"\n")
+    return hashlib.sha256(data).hexdigest()
 
 
 def peer_views_for(kind, record, projectile_roles, elite_weapons):
@@ -112,10 +176,9 @@ def build(only_actor=None):
 
     actors, unknown_tokens = {}, collections.Counter()
     stats = collections.Counter()
-    # {actor: roles that at least ONE source could pair}. A role no source covers is a weapon the
-    # map prices with no reference at all — the honest version of the blanket withholding #369
-    # reached for, scoped to the armaments that actually lack evidence.
-    covered, wanted = {}, {}
+    # Coverage is keyed by weapon identity. A successful match for one cannon must not hide a
+    # second cannon merely because both share the same role.
+    covered, wanted, structured = {}, {}, set()
     for actor in sorted(assignment):
         if only_actor and actor != only_actor:
             continue
@@ -127,7 +190,8 @@ def build(only_actor=None):
             continue
         for v in cam:
             unknown_tokens.update(v["unknown_targets"])
-        cam_roles = ar.strongest_by_role(cam)
+        cam_armaments = ar.cameo_armaments(cam)
+        cam_roles = {view["role"] for view in cam_armaments}
         # ⭐ THE TIER DECIDES WHICH PEER WEAPONS ARE ON THE BENCH (maintainer, 2026-09-13):
         # originals reference the BASE weapon, promotion/expanded actors the elite or upgraded
         # replacement. See `armament_roles.tier_bench` for the rule and for why MTNK's dummy is
@@ -135,7 +199,7 @@ def build(only_actor=None):
         tier = ar.reference_tier(assignment[actor])
         stats[f"actors_tier_{tier}"] += 1
         stats["actors"] += 1
-        wanted[actor] = set(cam_roles)
+        wanted[actor] = {(view["weapon"], view["role"]) for view in cam_armaments}
         if len(cam_roles) > 1:
             stats["multi_role_actors"] += 1
 
@@ -160,6 +224,7 @@ def build(only_actor=None):
                       else "peer_row_missing_UNEXPECTED"] += 1
                 continue
             kind, peer_record = found
+            structured.add(actor)
             peer = peer_views_for(kind, peer_record, projectile_roles, elite_weapons)
             for v in peer:
                 unknown_tokens.update(v["unknown_targets"])
@@ -167,14 +232,11 @@ def build(only_actor=None):
             stats["pairs"] += len(pairs)
             stats["exact_pairs"] += sum(1 for p in pairs if p[3])
             stats["cameo_armaments_without_a_reference"] += len(cam_only)
-            for role, _c, peer_view, exact in pairs:
+            for role, cameo_view, peer_view, exact in pairs:
                 stats[f"pairs_role_{role}"] += 1
-                covered.setdefault(actor, set()).add(role)
-                # ⚠ THREE KINDS OF PAIR, AND CONFLATING THEM HIDES THE ONE THAT MATTERS. An exact
-                # role match is proven on both sides; a `both` stand-in is proven on both sides and
-                # legal; an UNPROVEN pair is a source that could not state a role at all and is
-                # voting on the main weapon only. The third is the one a reader must be able to
-                # discount, so it gets its own counter rather than swelling the fallback number.
+                covered.setdefault(actor, set()).add(cameo_view["weapon"])
+                # Two admitted kinds of pair remain: an exact role match, and a proven `both`
+                # stand-in. An unproven role has already abstained in pair_by_role.
                 if peer_view.get("gate"):
                     stats["pairs_from_a_rank_gated_weapon"] += 1
                 if exact:
@@ -200,35 +262,34 @@ def build(only_actor=None):
                 "peer_unpaired": [v["weapon"] for v in peer_only],
             }
         actors[actor] = {
-            "roles": sorted(cam_roles),
+            "roles": sorted(cam_roles, key=lambda role: (role is None, str(role))),
             "armaments": [{k: v[k] for k in PAIR_FIELDS + ("baseline", "note")} for v in cam],
             "sources": sources,
         }
-    # ⛔ TWO REASONS A ROLE ENDS UP UNCOVERED, AND COUNTING THEM TOGETHER MAKES THE NUMBER LIE.
-    # The first draft reported 157 actors with an uncovered role and 105 of them "ground" — which
-    # reads as a broken matcher. Measured: 148 of the 157 paired NOTHING, because every source
-    # assigned to them is markdown-only and has no armaments to pair. Those actors are not a
-    # finding about roles at all; they are the Doc 5 coverage gap, already known and counted above.
-    # Only the remaining 9 are the real finding: a structured reference exists and still has no
-    # armament in that role. This is the `0%-row-is-a-bug-in-the-check` class, caught by looking.
+    # ⛔ TWO REASONS A WEAPON ENDS UP UNCOVERED, AND COUNTING THEM TOGETHER MAKES THE NUMBER LIE.
+    # Track whether any assigned source supplied a structured row independently from whether a
+    # compatible weapon pair was found. Then report every missing weapon identity, so one matched
+    # cannon cannot hide a second cannon with the same role.
     uncovered, no_structured = {}, []
-    for actor, roles in wanted.items():
-        missing = sorted(roles - covered.get(actor, set()))
+    for actor, armaments in wanted.items():
+        missing = sorted((weapon, role) for weapon, role in armaments
+                         if weapon not in covered.get(actor, set()))
         if not missing:
             continue
-        if actor in covered:
-            uncovered[actor] = missing
-            for role in missing:
-                stats[f"uncovered_despite_a_structured_reference_{role}"] += 1
+        if actor in structured:
+            uncovered[actor] = [{"weapon": weapon, "role": role}
+                                for weapon, role in missing]
+            for _weapon, role in missing:
+                stats[f"uncovered_despite_a_structured_reference_{role or 'unproven'}"] += 1
         else:
             no_structured.append(actor)
-    stats["actors_with_an_uncovered_role"] = len(uncovered)
+    stats["actors_with_an_uncovered_armament"] = len(uncovered)
     stats["actors_with_no_structured_reference_at_all"] = len(no_structured)
     return {
-        "schema": 1,
+        "schema": PAIRING_SCHEMA,
         # ⛔ WHAT THIS DOCUMENT WAS BUILT FROM, so a consumer can refuse a STALE one (Astra,
-        # PR #375 blocker 4). `build_reference_report.pairing_document` re-hashes these three
-        # files and fails rather than render a pairing whose evidence has moved underneath it.
+        # PR #375 blocker 4 and follow-up). `build_reference_report.pairing_document` rebuilds
+        # this complete input set and fails rather than render a pairing whose evidence moved.
         # The two extractors' own pins are re-checked separately, at load, per source — this
         # guards the layer above them: the artifact itself.
         "inputs": input_fingerprints(),
@@ -237,10 +298,10 @@ def build(only_actor=None):
         "role_vocabulary": list(ar.ROLES),
         "stats": dict(sorted(stats.items())),
         # ⚠ A TOKEN NOBODY CLASSIFIED IS A GAP IN THE VOCABULARY, NOT A NEUTRAL FACT. It is
-        # treated as neutral so it can never flip a domain silently, and reported here so the
-        # next reader can see that it happened and add it deliberately.
+        # failed closed so the weapon abstains, and reported here so the next reader can see that
+        # it happened and add the token deliberately.
         "unknown_targets": dict(sorted(unknown_tokens.items())),
-        "uncovered_roles": dict(sorted(uncovered.items())),
+        "uncovered_armaments": dict(sorted(uncovered.items())),
         "no_structured_reference": sorted(no_structured),
         "actors": actors,
     }
@@ -262,7 +323,7 @@ def print_actor(doc, actor):
     if entry is None:
         print(f"{actor}: not in the assignment, or it carries no priced armament")
         return
-    print(f"== {actor}   roles: {', '.join(entry['roles'])}")
+    print(f"== {actor}   roles: {', '.join(role or 'unknown / unproven' for role in entry['roles'])}")
     for arm in entry["armaments"]:
         flag = "" if arm["baseline"] else "  (upgrade/alternative)"
         print("   %-8s %-44s range %-7s dmg/cycle %-9s rate %s%s"

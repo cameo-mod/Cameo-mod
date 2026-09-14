@@ -62,10 +62,11 @@ def sha256(path: pathlib.Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def corpus_provenance():
+def corpus_provenance(root=ROOT):
     """{source: (rules_sha256, overlay_sha256)} for every source that pins its bytes."""
     out = {}
-    for line in CORPUS.read_text(encoding="utf-8").splitlines():
+    corpus = pathlib.Path(root) / "docs" / "reference" / "ini_corpus.json"
+    for line in corpus.read_text(encoding="utf-8").splitlines():
         if not line.strip():
             continue
         row = json.loads(line)
@@ -199,7 +200,7 @@ def _verified_sources(doc, root):
     usable, which is the same shape as every other abstention in this lane. The dropped sources
     are returned so a caller can report them rather than discover a silent gap.
     """
-    pins = corpus_provenance()
+    pins = corpus_provenance(root)
     kept, dropped = [], []
     for entry in doc["sources"]:
         source = entry.get("source")

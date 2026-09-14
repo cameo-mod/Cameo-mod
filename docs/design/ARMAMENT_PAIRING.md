@@ -273,10 +273,14 @@ repository holds:
   source's `rules_sha256`/`overlay_sha256` against `ini_corpus.json` and drop — **per source** — any
   whose pin has moved. Dropped sources are returned on `load.dropped` so a caller can report the
   gap instead of discovering it.
-* `armament_pairing.json` records an `inputs` block: the sha256 of the two evidence files and the
-  reference assignment it was built from. `build_reference_report.pairing_document()` re-hashes
-  them and **raises** rather than rendering stale evidence as current. A document with no `inputs`
-  block is refused for the same reason — it cannot prove it is fresh.
+* `armament_pairing.json` records an `inputs` block for the complete reproducibility closure: the
+  INI corpus and extracted evidence, selected OpenRA peer corpora, Cameo balance ledgers, active
+  manifest/rules/weapons, and direct tool dependencies. `build_reference_report.pairing_document()`
+  rebuilds that exact set and **raises** on a missing, extra, or changed input rather than rendering
+  stale evidence as current. Missing, malformed, empty, or unsupported artifacts are refused for
+  the same reason — they cannot prove they are fresh. Repository text is hashed after canonicalising
+  LF/CRLF so the same commit verifies across checkout policies; the peer-corpus and INI extractors
+  still enforce their separate raw-byte source pins.
 
 Stale evidence is worse than missing evidence, because it looks exactly like the real thing.
 
@@ -298,9 +302,9 @@ Three rules make it safe:
   the ~900 peer armaments leave it unwritten, so reading absence as "unknown" would abstain on half
   the corpus.
 * **`InvalidTargets` subtracts** before the domains are read.
-* **An unclassified token is neutral AND reported.** It can never flip a domain silently, and
-  `armament_pairing.json` lists any it sees. Today that list is **empty**: the three measured token
-  sets cover both corpora completely.
+* **An unclassified token fails closed AND is reported.** The weapon abstains rather than deriving
+  a role from the recognised subset, and `armament_pairing.json` lists every unknown token. Today
+  that list is **empty**: the three measured token sets cover both corpora completely.
 
 `air` and `ground` are the one forbidden pair. `both` is adjacent to everything, so an exact role
 claims its partner first and only then may a `both` stand in — otherwise a cannon claims the peer's
@@ -366,8 +370,9 @@ two DTA hashes were verified against the reference install before anything was w
 | …the reference carries that weapon only at ELITE rank | 10 |
 | pairs by role | ground 181 · both 108 · air 19 |
 | Cameo armaments with no reference | 423 |
-| actors with a weapon no structured source covers | **7** (air 3 · both 4) |
-| actors with no structured reference at all | 145 |
+| actors with at least one uncovered armament | **142** |
+| uncovered armaments despite structured references | ground 104 · both 47 · air 25 · special 2 |
+| actors with no structured reference at all | 17 |
 | unknown target tokens | **0** |
 
 ⚠ **THE PAIR COUNT FELL FROM 607 AND THAT IS THE RULING LANDING, NOT A REGRESSION.** 300 of those
@@ -378,20 +383,17 @@ and §2f gave every same-role armament its own turn. `cameo_armaments_without_a_
 so a four-gun destroyer reports four gaps where it used to report one.
 
 ⚠ **TWO REASONS A WEAPON ENDS UP UNREFERENCED, AND COUNTING THEM TOGETHER MAKES THE NUMBER LIE.**
-An early draft of this table reported "157 actors with an uncovered role, 105 of them ground",
-which reads as a broken matcher. It was not: the great majority paired nothing at all because every
-source assigned to them reaches the map as a Doc 5 markdown TABLE with one folded weapon column and
-no armaments to pair — the known Doc 5 coverage gap, not a role finding. The report now separates
-them (`actors_with_no_structured_reference_at_all` vs `uncovered_despite_a_structured_reference_*`)
-and only the second is a finding about roles.
+The report separates actors whose assigned peers expose no structured armament rows at all from
+weapons left uncovered despite at least one structured peer row. Structure exists independently of
+whether a particular weapon found a compatible match: a structured zero-match row is evidence of a
+gap, not missing structure.
 
-⭐ **Every remaining uncovered weapon is an air or dual-role one — `..._ground` is now zero.** That
-is the expected shape: peer mods give a unit one main gun and, much more rarely, a second anti-air
-mount, so a Cameo unit's cannon almost always finds a counterpart and its AA missile often does
-not. `td_gdi_firehawk` is the maintainer's own example and its answer is correct — the A-10 Warthog
-has no anti-air weapon in Combined Arms or in DTA, so the Sidewinders genuinely have no reference
-in either assigned source. **Reporting that is the point.** The previous behaviour gave them one
-anyway, by averaging them with a napalm bomb.
+Coverage is also tracked by **weapon identity**, not merely by role. The earlier role-level count
+said only seven actors were uncovered because one successful ground match could hide another ground
+weapon on the same actor. The corrected report exposes 178 uncovered armaments on 142 actors. That
+is an honest inventory for later reference work, not a licence to invent votes. For example,
+`td_gdi_firehawk` remains correctly uncovered for its Sidewinders when its A-10 references carry no
+anti-air weapon; the source abstains instead of averaging those missiles with a napalm bomb.
 
 ## 6. What this deliberately does NOT do
 
