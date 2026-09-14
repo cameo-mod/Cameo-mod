@@ -342,6 +342,7 @@ tkm_zaza:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@gat: ^GatlingSpinUpUnitBehavior
 	Valued:
 		Cost: 1600
 	Tooltip:
@@ -375,33 +376,6 @@ tkm_zaza:
 		Recoil: 43
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
-	FirepowerMultiplier@GattlingSpeed1:
-		RequiresCondition: ammo == 3
-		Modifier: 125
-	FirepowerMultiplier@GattlingSpeed2:
-		RequiresCondition: ammo == 2
-		Modifier: 133
-	FirepowerMultiplier@GattlingSpeed3:
-		RequiresCondition: ammo <= 1
-		Modifier: 150
-	ReloadDelayMultiplier@GattlingSpeed1:
-		RequiresCondition: ammo == 3
-		Modifier: 90
-	ReloadDelayMultiplier@GattlingSpeed2:
-		RequiresCondition: ammo == 2
-		Modifier: 70
-	ReloadDelayMultiplier@GattlingSpeed3:
-		RequiresCondition: ammo <= 1
-		Modifier: 50
-	RangeMultiplier@GattlingSpeed1:
-		RequiresCondition: ammo == 3
-		Modifier: 105
-	RangeMultiplier@GattlingSpeed2:
-		RequiresCondition: ammo == 2
-		Modifier: 110
-	RangeMultiplier@GattlingSpeed3:
-		RequiresCondition: ammo <= 1
-		Modifier: 115
 	WithMuzzleOverlay:
 	AttackTurreted:
 	ActorStatValues:

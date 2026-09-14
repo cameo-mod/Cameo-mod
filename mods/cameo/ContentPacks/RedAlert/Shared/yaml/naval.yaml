@@ -252,6 +252,7 @@ japan_japanesespeedboat:
 	Inherits@WaveforceBullets: ^WaveforceBullets
 	Inherits@SuperiorWarEngines: ^SuperiorWarEngines
 	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Inherits@gat: ^GatlingSpinUpUnitBehavior
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~japan_japanesenavalyard
@@ -309,21 +310,6 @@ japan_japanesespeedboat:
 	RenderSprites:
 		Image: japan_japanesespeedboat
 		PlayerPalette: player_rgba
-	GrantConditionOnAttack@gatling:
-		Condition: gatling
-		ArmamentNames: primary
-		RequiredShotsPerInstance: 5, 10
-		MaximumInstances: 2
-		RevokeDelay: 25
-		RevokeAll: true
-		IsCyclic: false
-		RevokeOnNewTarget: false
-	ReloadDelayMultiplier@GattlingSpeed:
-		RequiresCondition: gatling >= 2
-		Modifier: 50
-	RangeMultiplier@GattlingSpeed:
-		RequiresCondition: gatling
-		Modifier: 125
 	ActorStatValues:
 		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_superiorwarengines, japan_upgrade_nanotechrepairs
 
