@@ -34,6 +34,78 @@ LATER_HISTORICAL_NAMES = {new: old for old, new in LATER_OWNED_NAMES.items()}
 
 
 @lru_cache(maxsize=1)
+def owned_checkpoint_history():
+    """Pinned, test-only bridges from owner-renaming checkpoints to current rules."""
+    path = pathlib.Path(__file__).parent / 'fixtures' / 'owned_checkpoint_history_20260914.json'
+    data = json.loads(path.read_text(encoding='utf-8'))
+    if data.get('schema') != 1:
+        raise AssertionError('unsupported owned-checkpoint history schema')
+    return data['cohorts']
+
+
+def _ordered_node(node):
+    return [node.key, node.value, [_ordered_node(child) for child in node.children]]
+
+
+def _rebuild_node(row, file=''):
+    return Node(row[0], row[1], [_rebuild_node(child, file) for child in row[2]], file)
+
+
+def restore_owned_checkpoint_node(test, cohort, kind, node):
+    """Assert an exact modern node, then expose its reviewed post-owner checkpoint."""
+    record = owned_checkpoint_history()[cohort][kind].get(node.key)
+    if record is None:
+        return node
+    digest = hashlib.sha256(json.dumps(_ordered_node(node),
+                            separators=(',', ':')).encode()).hexdigest()
+    test.assertEqual(record['current_hash'], digest, (cohort, kind, node.key))
+    return _rebuild_node(record['checkpoint'], node.file)
+
+
+def restore_owned_checkpoint_actor(test, rules, cohort, actor):
+    """Reverse only the recorded post-owner actor changes in a validated copy."""
+    from dump_resolved import node_to_obj
+    obj = node_to_obj(rules.resolve(actor))
+    record = owned_checkpoint_history()[cohort]['resolved_actors'][actor]
+    digest = hashlib.sha256(json.dumps(obj, sort_keys=True,
+                            separators=(',', ':')).encode()).hexdigest()
+    test.assertEqual(record['current_hash'], digest, (cohort, actor))
+    restored = json.loads(json.dumps(obj))
+    missing = {'__owned_history_missing__': True}
+    for change in record['changes']:
+        parent = restored
+        for key in change['path'][:-1]:
+            parent = parent[key]
+        key = change['path'][-1]
+        current = parent.get(key, missing)
+        test.assertEqual(change['current'], current, (cohort, actor, change['path']))
+        if change['checkpoint'] == missing:
+            parent.pop(key)
+        else:
+            parent[key] = change['checkpoint']
+    return restored
+
+
+class OwnedCheckpointView:
+    """Ruleset facade for tests frozen at one reviewed owner-renaming checkpoint."""
+    def __init__(self, test, rules, cohort):
+        self.test, self.rules, self.cohort = test, rules, cohort
+
+    def __getattr__(self, key):
+        return getattr(self.rules, key)
+
+    def weapon(self, name):
+        node = self.rules.weapon(name)
+        return (None if node is None else
+                restore_owned_checkpoint_node(self.test, self.cohort, 'source_weapons', node))
+
+    def resolve_weapon(self, name):
+        node = self.rules.resolve_weapon(name)
+        return (None if node is None else
+                restore_owned_checkpoint_node(self.test, self.cohort, 'resolved_weapons', node))
+
+
+@lru_cache(maxsize=1)
 def r12_inverse_name_map():
     """Exact landed R12 name map, inverted for historical test fixtures only."""
     proof = json.loads((pathlib.Path(__file__).parents[2] / 'docs' / 'audit' / 'latest' /
