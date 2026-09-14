@@ -553,6 +553,14 @@ a flat 1.5x - **MG1 1.350x, MG2 1.429x, MG3 1.500x** - and that ramp is delibera
 weapons are exempt from 3a.1's flat ratio. Their doubled AA damage is correct: both actors are
 the dedicated-AA role.
 
+**⭐ WHY THE THREE STAGES EXIST AT ALL** (maintainer): *"It's because the Yuri gatling switches
+weapons that can play a different sound effect between the 3 states so it's only for the two
+things."* The stages are a SOUND mechanism - three weapons so the spin-up can be heard - not a
+balance device. ⚠ Which is worth keeping in mind when the ramping reach is eventually reviewed:
+the ramp is a side effect of a presentation feature, so it was probably never chosen as a
+balance value. It stands as an approved exception either way, but that is the reason it should
+not be copied onto anything else.
+
 ⛔ **THE EXEMPTION IS PER ACTOR, NOT PER WEAPON - RULED 2026-09-14.** *"Only the Yuri gatling
 tank and the Yuri gatling cannon! Anything else is not approved and requires their own weapon."*
 
