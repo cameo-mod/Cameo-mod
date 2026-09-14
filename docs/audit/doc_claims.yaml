@@ -713,9 +713,11 @@ claims:
       Priced actors carrying a resolved `charge_up` record, whose per-armament attack cycle is
       therefore reload PLUS charge delay (DESIGN.md, maintainer law 2026-09-14: "charged weapons
       come at a discount but the attack cycle duration is reload delay plus charge delay"). An
-      explicit InitialChargeDelay count does NOT bound this population - only three actors write
-      the field and the rest take the engine default - which is why the claim measures resolved
-      records instead. It counts RECORDS, not effects: of the 14, ra1_allies_mobileradarjammer has no priced
+      explicit InitialChargeDelay count does NOT bound this population, which is why the claim
+      measures resolved records instead. ⛔ The reason is NOT that the rest inherit an engine
+      default: only THREE of the 14 are AttackTesla records at all, and the other ELEVEN are
+      ChargeLevel-family records (AttackCharges, AttackFrontalCharged, AttackTurretedCharged) -
+      a different trait with a different schedule. It counts RECORDS, not effects: of the 14, ra1_allies_mobileradarjammer has no priced
       armament view, wc2_humans_dwarvenrifleman records zero charge ticks, and multi-armament
       actors abstain under the ownership guard. Counting records as effects is the error that
       put two wrong figures into DESIGN.md on 2026-09-14.
@@ -745,8 +747,10 @@ claims:
       maintainer 2026-09-14, adds the 25-tick InitialChargeDelay - and the 25-tick difference is
       deliberately NOT applied yet. Astra's engine trace showed a naive "cycle + ticks" is wrong
       for multi-shot ChargeLevel (the burning Obelisk recharges per projectile), for interleaved
-      AttackTesla (the Rail Tower charges inside its own reload) and for random ranges
-      (ChargeLevel 25, 50 keeps only its lower bound). The unblock is three extractor fields -
+      AttackTesla (the Rail Tower's initial charge is 12 and the 3 is its post-shot ChargeFire
+      wait, which resumes inside the weapon's own 10-tick reload and is then reacquired - an
+      unresolved restart schedule) and for random ranges (ChargeLevel 25, 50 keeps only its lower
+      bound; ruled 2026-09-14 to become the MEAN of min and max, extractor change pending). The unblock is three extractor fields -
       ChargeDelay, ShotsPerCharge and range-ness - plus recharge-overlap modelling. This claim
       pins the implemented number ON PURPOSE so the 106-vs-131 gap stays auditable instead of
       invisible; when the extractor lands it becomes 131 and DESIGN's note is struck.

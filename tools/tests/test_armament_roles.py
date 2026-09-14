@@ -608,10 +608,13 @@ class ChargeAttackCycleTests(unittest.TestCase):
 
       * multi-shot ChargeLevel - the burning Obelisk is Burst 10 / BurstDelays 1 and its
         AttackCharges notifier resets ChargeLevel on every projectile, so later shots recharge;
-      * interleaved AttackTesla - the Rail Tower charges in 3 ticks inside a 10-tick weapon
-        reload, so charge and reload OVERLAP (both 160 and 172 are provisional);
+      * interleaved AttackTesla - the Rail Tower's INITIAL charge is 12; the 3 is its post-shot
+        ChargeFire wait, which resumes while the armament is still inside its 10-tick reload,
+        exits, and is reacquired through the initial charge again. That restart/reacquisition
+        schedule is unresolved, so both 160 and 172 are provisional;
       * random ChargeLevel - `ChargeLevel: 25, 50` is a RANGE and extract_stats keeps the lower
-        bound only.
+        bound only. Ruled 2026-09-14: take the MEAN of min and max (37.5 here; the dwarf's
+        `0, 4` becomes 2, not zero). Four actors carry one; the extractor change is pending.
 
     The unblock is three extractor fields - ChargeDelay, ShotsPerCharge, range-ness - plus
     recharge-overlap modelling. When that lands, these expectations move to the ruled values in
@@ -687,6 +690,9 @@ class ChargeAttackCycleTests(unittest.TestCase):
         """
         self.assertEqual([], ar.cameo_views(_ledger_row("ra1_allies_mobileradarjammer"),
                                             self.rules))
+        # ⚠ ZERO ONLY BECAUSE THE EXTRACTOR KEEPS THE LOWER BOUND. The dwarf declares
+        # `ChargeLevel: 0, 4`; under the maintainer's 2026-09-14 averaging ruling this becomes 2.
+        # When the extractor change lands, this expectation moves with it.
         self.assertEqual(0.0, _ledger_row("wc2_humans_dwarvenrifleman")["charge_up"]["ticks"])
 
     def test_an_ordinary_unit_is_untouched(self):

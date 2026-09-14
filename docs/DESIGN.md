@@ -604,8 +604,8 @@ YAML remains an explicit design decision.
     | case | why a naive `+ charge` is wrong |
     |---|---|
     | multi-shot `ChargeLevel` | the burning Obelisk is Burst 10 / BurstDelays 1 and its `AttackCharges` notifier resets `ChargeLevel` on **every projectile** — later shots must recharge, so the period is not `105 + 50` |
-    | interleaved `AttackTesla` | the Rail Tower charges in 3 ticks while its weapon is still in a 10-tick reload, so charge and reload OVERLAP; both 160 and 172 are provisional |
-    | random `ChargeLevel` | `ChargeLevel: 25, 50` is a RANGE, and `extract_stats` keeps only its lower bound |
+    | interleaved `AttackTesla` | the Rail Tower's initial charge is **12**; the **3** is the post-shot `ChargeFire` wait, which resumes while the armament is still inside its 10-tick reload, exits, and is reacquired through the initial charge again. That RESTART/REACQUISITION schedule is unresolved, so both 160 and 172 are provisional |
+    | random `ChargeLevel` | `ChargeLevel: 25, 50` is a RANGE, and `extract_stats` keeps only its lower bound. ⭐ **RULED 2026-09-14: take the MEAN of min and max** — so 37.5 here, and `0, 4` is 2 rather than zero. Four actors carry a ranged charge; the extractor change is pending |
 
     The unblock is three extractor fields — `ChargeDelay`, `ShotsPerCharge`, and
     whether a charge value was a RANGE — plus a formula that models recharge overlap.

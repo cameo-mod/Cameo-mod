@@ -307,19 +307,27 @@ it and Astra's engine trace held it (PR #386), correctly. Three shapes break a n
 * **multi-shot `ChargeLevel`** — the burning Obelisk is Burst 10 / BurstDelays 1, and its
   `AttackCharges` notifier resets `ChargeLevel` on every projectile, so later shots must recharge.
   Its period is not `105 + 50`.
-* **interleaved `AttackTesla`** — the Rail Tower charges in 3 ticks while its weapon is still in a
-  10-tick reload, so the two OVERLAP. Both #385's 160 and my 172 are provisional.
+* **interleaved `AttackTesla`** — the Rail Tower's initial charge is **12**; the **3** is the
+  post-shot `ChargeFire` wait. It resumes while the armament is still inside its 10-tick reload,
+  exits, and is then reacquired through the initial charge again. That restart/reacquisition
+  schedule is unresolved, so both #385's 160 and my 172 are provisional.
 * **random `ChargeLevel`** — `steelconsortium_dagger` declares `ChargeLevel: 25, 50` and
-  `extract_stats` keeps only the lower bound.
+  `extract_stats` keeps only the lower bound. ⭐ **Maintainer ruled 2026-09-14: use the MEAN of
+  min and max**, so 37.5 here — and `wc2_humans_dwarvenrifleman`'s `0, 4` becomes **2**, not the
+  zero the ledger currently records. Four actors carry a ranged charge; the extractor change to
+  average them is pending and is one of the three unblocks.
 
 The unblock is three extractor fields — `ChargeDelay`, `ShotsPerCharge`, and whether a value was a
 RANGE — plus a formula that models recharge overlap. Withholding is the same answer this lane gives
 everywhere else: an unprovable quantity abstains.
 
 ⛔ **THE POPULATION IS SMALLER THAN IT LOOKS, AND I OVERSTATED IT.** 14 actors carry a `charge_up`
-record, but that is not 14 actors whose reported cadence would move: `ra1_allies_mobileradarjammer`
-has **no priced armament view at all**, `wc2_humans_dwarvenrifleman` records **zero** charge ticks,
-and `terran_siegetank` keeps 37 under the ownership guard. I published a table claiming the siege
+record, but that is not 14 actors whose reported cadence would move. **Three are `AttackTesla`; the
+other eleven are `ChargeLevel`-family records** — a different trait with a different schedule, not
+units inheriting an engine default, which is how I first explained it and was wrong.
+`ra1_allies_mobileradarjammer` has **no priced armament view at all**,
+`wc2_humans_dwarvenrifleman` records **zero** ticks today (it declares `0, 4`, so under the
+averaging ruling it becomes 2), and `terran_siegetank` keeps 37 under the ownership guard. I published a table claiming the siege
 tank at 62 and the burning Obelisk at 155; **both were wrong** — measured before I adopted #385's
 guard, and never re-measured after. Counting records is not counting effects.
 
