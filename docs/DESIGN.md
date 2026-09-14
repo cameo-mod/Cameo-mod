@@ -546,6 +546,21 @@ by 1.5x; `Rocket_stealth` makes AA weaker (14500 vs 12000) on a 1.19x range. Rea
 mistake ruled against above. There is no convention here to preserve; pinned by
 `aa_split_pairs_compliant`.
 
+**⚠ THE GATLING EXCEPTION** (maintainer, 2026-09-14): *"This is only for the gatling tank and
+the gatling cannon right? Those have their own unique gatling behavior and are an exception.
+Anything else follows the rule."* Their AA reach RAMPS with the spin-up stage instead of holding
+a flat 1.5x - **MG1 1.350x, MG2 1.429x, MG3 1.500x** - and that ramp is deliberate, so those
+weapons are exempt from 3a.1's flat ratio. Their doubled AA damage is correct: both actors are
+the dedicated-AA role.
+
+⛔ **BUT THE TANK'S WEAPONS ARE SHARED AND THE CANNON'S ARE NOT.** `YuriGatlingCannonMG1/2/3`
+belong to `yuri_gatlingcannon` alone, so that exemption is clean. `RA2GattlingMG1/2/3` are used by
+`yuri_gatlingtank` **and by `ra2_c_abram`, `ra2_c_hum`, `ra2_c_hum2`, `ra2_c_ifv` and
+`ra2leopard`** - so exempting the WEAPON also exempts five actors that were not named. Either the
+exemption is written against those weapons and covers all six actors, or the non-gatling users
+need weapons of their own. **Unresolved; do not apply the exemption to the shared weapons until
+it is.**
+
 **⭐⭐ THE AA BONUS IS SCOPED BY CLASS** (maintainer, 2026-09-14). The question was whether the
 AA half carries +100% damage; the answer depends on whose job anti-air is:
 
