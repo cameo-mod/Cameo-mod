@@ -590,6 +590,104 @@ class ArmamentRenderingTests(unittest.TestCase):
         self.assertIn("abstains", rendered)
 
 
+
+class ChargeAttackCycleTests(unittest.TestCase):
+    """An actor-level attack trait can OVERRIDE the weapon's cycle, and the per-armament view has
+    to honour it. DESIGN.md rules the arithmetic: "the trait's ReloadDelay is the cycle,
+    MaxCharges is the burst, and the WEAPON's reload is the burst delay - NOT ChargeDelay",
+    with an 11.8x DPS overstatement named as the cost of ignoring it.
+
+    History worth keeping: my first diagnosis was wrong in both directions (Codex, PR #383). I
+    claimed `extract_stats` never captured the trait - it records `charge_up` - and that the fix
+    was reload + wind-up, which it is not: the wind-up is a PRICE input (the K discount), not
+    cycle time. The defect was only ever in this consumer.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.rules = miniyaml.Ruleset(ROOT)
+
+    def test_the_tesla_coil_fires_three_zaps_per_actor_cycle(self):
+        views = ar.cameo_views(_ledger_row("ra1_soviets_teslacoil"), self.rules)
+        self.assertTrue(views)
+        for v in views:
+            self.assertEqual(3, v["burst"], v["weapon"])       # AttackTesla MaxCharges
+            # 100 trait reload + 3 x (3 - 1) burst gaps = 106, PLUS the 25-tick wind-up.
+            self.assertEqual(131.0, v["cycle"], v["weapon"])
+
+    def test_ignoring_the_actor_cycle_overstates_the_rate(self):
+        """DESIGN names 11.8x for the trait override alone; the wind-up takes it further.
+
+        Both halves are asserted separately so a change to either is legible: 106 ticks is the
+        ruled trait cycle, and 131 is the period the maintainer ruled on 2026-09-14.
+        """
+        view = ar.cameo_views(_ledger_row("ra1_soviets_teslacoil"), self.rules)[0]
+        naive = view["damage_per_shot"] / 3.0        # the weapon's own 3-tick reload, burst 1
+        trait_only = view["damage_per_cycle"] / 106.0
+        self.assertAlmostEqual(11.8, naive / trait_only, places=1)
+        self.assertAlmostEqual(14.6, naive / view["rate"], places=1)
+
+    def test_every_armament_of_the_actor_takes_the_cycle_not_a_share_of_it(self):
+        """⚠ NOT DIVIDED AMONG THEM. The coil's three armaments are mutually exclusive upgrade
+        states, so whichever is active fires on the full actor cycle; and where two armaments ARE
+        simultaneous (terran_siegetank, td_nod_lasercorvette) both still fire once per cycle. The
+        share question belongs to actor-level aggregation, not to the per-armament view."""
+        cycles = {v["cycle"] for v in ar.cameo_views(_ledger_row("ra1_soviets_teslacoil"),
+                                                     self.rules)}
+        self.assertEqual({131.0}, cycles)
+
+    def test_the_chargelevel_family_keeps_its_reload_but_gains_the_wind_up(self):
+        """SUPERSEDES `..._keeps_its_own_weapon_cycle`, on the maintainer's ruling 2026-09-14:
+        *"charged weapons come at a discount but the attack cycle duration is reload delay plus
+        charge delay"* - BOTH, not either.
+
+        `formula.charge_attack_cycle` returning None for this family means the trait does not
+        override the weapon's RELOAD. It says nothing about the wind-up, and I briefly read it as
+        saying the charge costs no cycle time at all. The Obelisk keeps its own 96-tick weapon
+        cycle and adds its 50-tick charge.
+        """
+        views = ar.cameo_views(_ledger_row("td_nod_obeliskoflight"), self.rules)
+        self.assertTrue(views)
+        main = [v for v in views if v["weapon"] == "td_nod_obeliskoflight_laserobelisk"]
+        self.assertTrue(main)
+        for v in main:
+            self.assertEqual(1, v["burst"], v["weapon"])        # no trait burst: not overridden
+            self.assertEqual(146.0, v["cycle"], v["weapon"])    # 96 weapon + 50 charge
+        # ⚠ EVERY armament gains the wind-up, but each keeps its OWN weapon cycle underneath it:
+        # the burning variant declares Burst 10 in the WEAPON, which the trait does not touch,
+        # so it lands at 155 rather than 146. Asserting one number for all of them was my error.
+        burning = [v for v in views
+                   if v["weapon"] == "td_nod_obeliskoflight_laserobeliskburning"][0]
+        self.assertEqual(10, burning["burst"])
+        self.assertEqual(155.0, burning["cycle"])
+        # The wind-up is asserted as a DIFFERENCE against the bare weapon cycle rather than by a
+        # label, so the test survives any change to how the note is worded: 96 + 50 and 105 + 50.
+        charge = _ledger_row("td_nod_obeliskoflight")["charge_up"]["ticks"]
+        self.assertEqual(50.0, charge)
+        self.assertEqual({146.0 - charge, 155.0 - charge},
+                         {v["cycle"] - charge for v in views})
+
+    def test_the_rate_identity_holds_with_all_three_cycle_terms(self):
+        """The maintainer's formula, 2026-09-14, asserted as an identity rather than described:
+
+            DPS = damage x burst / attack cycle
+            attack cycle = reload delay + sum of all burst delays + charge delay
+
+        and DPS is damage per TICK, not per second. The Tesla Coil exercises every term at once:
+        reload 100, two burst gaps of 3, charge 25.
+        """
+        v = ar.cameo_views(_ledger_row("ra1_soviets_teslacoil"), self.rules)[0]
+        reload_delay, burst_delays, charge = 100.0, 3.0 * (3 - 1), 25.0
+        self.assertEqual(reload_delay + burst_delays + charge, v["cycle"])
+        self.assertEqual(v["damage_per_shot"] * v["burst"], v["damage_per_cycle"])
+        self.assertAlmostEqual(v["damage_per_shot"] * v["burst"] / v["cycle"], v["rate"])
+
+    def test_an_ordinary_unit_is_untouched(self):
+        view = ar.cameo_views(_ledger_row("td_gdi_grenadier"), self.rules)[0]
+        self.assertEqual(1, view["burst"])
+        self.assertEqual(42.0, view["cycle"])
+
+
 def _ledger_row(actor):
     import assign_references as asg
     row = asg.ledger().get(actor)

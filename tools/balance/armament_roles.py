@@ -270,6 +270,24 @@ def cameo_views(rec, rs):
                          if charge_owner_is_unambiguous else None)
         if charged_cycle is not None:
             cycle, burst = charged_cycle
+        # ⭐ AND THE WIND-UP IS PART OF THE PERIOD (maintainer law, 2026-09-14): *"charged weapons
+        # come at a discount but the attack cycle duration is reload delay plus charge delay"* —
+        # BOTH, never either. The K discount prices the DRAWBACK of standing helpless; the longer
+        # cycle measures the OUTPUT that costs. DESIGN's own discount formula already agreed:
+        # `charge_share = charge / (charge + cycle)` puts the charge inside the denominator, so
+        # the period was always the sum.
+        #
+        # ⛔ THIS IS THE HALF `charge_attack_cycle` DOES NOT COVER, and reading its `None` as "no
+        # charge time" is the trap. `None` says only that the trait does not override the weapon's
+        # RELOAD — so the ChargeLevel family (AttackCharges, AttackFrontalCharged,
+        # AttackTurretedCharged) keeps its own weapon cycle AND still waits out its wind-up.
+        # Without this, the Obelisk of Light reported a 96-tick period for a 146-tick attack.
+        #
+        # Gated on the SAME `charge_owner_is_unambiguous` guard as the cycle override, so a hidden
+        # AA arm or an inactive fallback cannot pick up an actor cadence that is not theirs.
+        charge_ticks = _num((rec.get("charge_up") or {}).get("ticks"))
+        if charge_owner_is_unambiguous and cycle and charge_ticks:
+            cycle += charge_ticks
         out.append(view(
             "cameo", arm.get("slot"), arm.get("weapon"), role, unknown,
             damage_per_shot=dmg, burst=burst, cycle=cycle,

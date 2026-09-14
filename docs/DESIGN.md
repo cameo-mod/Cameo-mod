@@ -579,6 +579,39 @@ YAML remains an explicit design decision.
     cycle, `MaxCharges` is the burst, and the WEAPON's reload is the burst delay —
     NOT `ChargeDelay`. Reading the weapon's reload as the cycle overstated Tesla DPS
     by **11.8×**. See `BALANCE_PROGRAM_PLAN.md` W16.
+  - ⭐⭐ **THE CYCLE IS RELOAD PLUS CHARGE, AND THE DISCOUNT STILL APPLIES** (maintainer
+    law, 2026-09-14): *"charged weapons come at a discount but the attack cycle
+    duration is reload delay plus charge delay"*. **BOTH, never either** — the K
+    discount prices the DRAWBACK of being helpless while winding up; the longer cycle
+    measures the OUTPUT that the wind-up costs. Pricing one and not the other is the
+    mistake, in both directions:
+    - taking only the discount reports a charged weapon firing as fast as an
+      instant one, which is what the per-armament reference consumer did until
+      2026-09-14 (`armament_roles.cameo_views`);
+    - taking only the cycle double-charges the drawback the discount already covers.
+
+    This is not new arithmetic — the discount's own denominator already said so.
+    `charge_share = charge / (charge + cycle)` treats `charge + cycle` as the whole
+    period, so the period was always the sum. Applies to **both** trait families:
+    on top of the trait cycle for `AttackTesla`, and on top of the weapon's own cycle
+    for the `ChargeLevel` family (`AttackCharges`, `AttackFrontalCharged`,
+    `AttackTurretedCharged`), whose gun keeps its reload.
+
+    ⛔ **`formula.charge_attack_cycle` returning `None` does NOT mean "no charge time".**
+    It means only that the trait does not override the weapon's RELOAD. Reading it as
+    "the charge costs no cycle time" is the error this clause exists to prevent.
+
+    | actor | trait | base cycle | wind-up | period |
+    |---|---|--:|--:|--:|
+    | `ra1_soviets_teslacoil` | `AttackTesla` | 106 | 25 | **131** |
+    | `ra2_soviets_teslacoil` | `AttackTesla` | 75 | 20 | **95** |
+    | `asianalliance_railtower` | `AttackTesla` | 160 | 12 | **172** |
+    | `td_nod_obeliskoflight` | `AttackCharges` | 96 | 50 | **146** |
+    | `terran_siegetank` | `AttackTurretedCharged` | 37 | 25 | **62** |
+
+    14 actors carry a resolved `charge_up` record; an explicit `InitialChargeDelay`
+    count does NOT bound them, because the trait can take the engine default.
+    Pinned as `charged_actor_cycle_actors` in `docs/audit/doc_claims.yaml`.
   - Charge values are DECISIONS: write `InitialChargeDelay` out rather than inheriting
     the engine's default of 22. An absent key means DEFAULT, never zero.
 - ⭐ **TEAM UPGRADES ARE ALWAYS WEAKER THAN FACTION UPGRADES** (maintainer law,
