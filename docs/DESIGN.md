@@ -956,14 +956,31 @@ reason (their cycles differ). It becomes a live error the moment those cycles ar
 ⚠ Fixing that is a firepower re-split, not a cadence tweak, and it needs the pipeline and an
 explicit order. What IS ruled is the cadence: the two cycles are averaged to **120** (3a.6).
 
-⚠ **STILL TO CONFIRM** - recorded here so the next reader does not assume the answer:
-1. Is the share always **equal** (1/n), or may a deliberate design weight one weapon higher, with
-   1/n only the default? Every measured actor is exactly equal, which suggests equal is the law.
-2. Does `n` count **barrels** (the Yak's 25% per chaingun) or **weapon systems** (50% for the
-   chaingun pair)? The Yak answer implies barrels for the share and systems for the split.
-3. For the 3a.7 disjoint case, the requirement is that both virtual units resolve to the **same
-   HP, speed and cost**. Is the DPS of each expected to match a single-weapon unit of that class
-   outright, or to be reduced for the flexibility of carrying both?
+⭐ **ANSWERED BY THE MAINTAINER, 2026-09-14:**
+
+1. **THE SHARE IS NOT FORCED EQUAL.** *"Yes exactly design can weight a type more!"* So `1/n` is
+   the DEFAULT and a deliberate design may give one system a larger slice. Equal is what every
+   measured classic-four actor happens to be, which makes an UNequal split a design statement
+   worth being able to point at - not automatically a defect. ⚠ It also means an unequal split
+   can never be auto-corrected; it can only be flagged for a human.
+2. **`n` COUNTS WEAPON SYSTEMS - all weapons of the same type count as ONE.** *"Weapon systems
+   (all weapons of the same type count as one)."* The Yak therefore has **n = 2**: one bomb
+   system and one chaingun system, 50% each, and the chaingun system's 50% is then divided
+   between its two barrels at 25% apiece.
+
+   ⛔ **THE TWO STATEMENTS LIVE AT DIFFERENT LEVELS AND BOTH MATTER.** The SHARE is counted per
+   system (n = 2 for the Yak), but the DELIVERED DPS is the sum over every BARREL, because both
+   wing guns really do fire. So a tool must group by system to compute the share and sum all
+   armaments to compute the total. Collapsing the Yak's two chainguns into one gives the right
+   `n` and the WRONG total - which is exactly the bug recorded above.
+⚠ **STILL OPEN** - for the 3a.7 disjoint case, both virtual units must resolve to the same HP,
+speed and cost, but at what DPS LEVEL? Take `ra1_allies_destroyer`: virtual unit A is the hull
+with only the anti-ship missile, virtual unit B the hull with only the depth charge. Should A's
+DPS equal that of a dedicated single-weapon anti-ship destroyer at that cost (and B's that of a
+dedicated sub-hunter) - so the real ship is BOTH specialists in one hull for one price - or
+should each be reduced, so that carrying both is paid for in firepower and building a specialist
+still makes sense? ⚠ Unlike the same-target case, `1/n` does NOT answer this: the two weapons
+never add up against anything, so nothing forces them to share a budget.
 
 
 ## 4. Tech tier rules (F12/F13)
