@@ -47,10 +47,11 @@ import extract_ini_elite_weapons as ielite     # noqa: E402
 ROOT = rd.ROOT
 ASSIGNMENT = ROOT / "docs" / "balance" / "derived" / "reference_assignment.json"
 OUT = ROOT / "docs" / "balance" / "derived" / "armament_pairing.json"
-PAIRING_SCHEMA = 2
+PAIRING_SCHEMA = 3
 
 PAIR_FIELDS = ("slot", "weapon", "role", "range", "range_unit", "range_wdist",
-               "damage_per_cycle", "cycle", "rate", "gate")
+               "damage_per_shot", "damage_per_cycle", "cycle", "rate", "gate",
+               "weapon_reload", "weapon_burst", "weapon_burst_delays")
 
 # Sources that reach the reference map as hand-maintained Doc 5 markdown tables rather than as an
 # extracted corpus. They carry ONE folded weapon column by construction, so there is no second

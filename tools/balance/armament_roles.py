@@ -198,7 +198,8 @@ RANGE_UNITS = {"wdist": 1.0, "cells": float(WDIST_PER_CELL)}
 
 def view(side, slot, weapon, role, unknown=(), damage_per_shot=None, burst=1,
          cycle=None, rng=None, requires=None, baseline=True, note=None, range_unit="wdist",
-         gate=None, replaces=None, additive=False, eligible=True, refusal=None):
+         gate=None, replaces=None, additive=False, eligible=True, refusal=None,
+         weapon_reload=None, weapon_burst=None, weapon_burst_delays=()):
     """One armament, on EITHER side of the map, in one shape.
 
     ⛔ `damage_per_cycle` AND `rate` ARE DERIVED HERE AND NOWHERE ELSE. The per-cycle coordinate is
@@ -207,6 +208,9 @@ def view(side, slot, weapon, role, unknown=(), damage_per_shot=None, burst=1,
     per-shot / per-burst convention split in the first place.
     """
     burst = int(burst or 1)
+    authored_burst = int(weapon_burst or burst)
+    authored_delays = [value for value in (_num(v) for v in weapon_burst_delays)
+                       if value is not None]
     per_cycle = (damage_per_shot * burst) if damage_per_shot else None
     scale = RANGE_UNITS.get(range_unit)
     if scale is None:
@@ -219,6 +223,13 @@ def view(side, slot, weapon, role, unknown=(), damage_per_shot=None, burst=1,
         "damage_per_shot": damage_per_shot, "burst": burst,
         "damage_per_cycle": per_cycle, "cycle": cycle,
         "rate": (per_cycle / cycle) if (per_cycle and cycle) else None,
+        # Keep authored weapon components separate from the modeled actor cycle. AttackTesla
+        # replaces `burst` above with logical charges, and reviewed INI cycles can include
+        # jitter/charge beyond reload plus burst gaps. Application code must never reverse the
+        # modeled cycle and silently overwrite those authored fields.
+        "weapon_reload": _num(weapon_reload),
+        "weapon_burst": authored_burst,
+        "weapon_burst_delays": authored_delays,
         "requires": requires, "baseline": baseline, "gate": gate, "note": note,
         "eligible": bool(eligible), "refusal": refusal,
         # ⛔ REPLACEMENT IDENTITY, carried rather than inferred (Astra, PR #375 blocker 1). An
@@ -265,7 +276,8 @@ def cameo_views(rec, rs):
         mains = [w for w in (arm.get("damage_warheads") or []) if (_num(w.get("damage")) or 0) > 0]
         dmg = sum(_num(w.get("damage")) or 0 for w in mains) or None
         raw = str(arm.get("burstdelays") or "").replace(",", " ").split()
-        burst = int(_num(arm.get("burst")) or 1)
+        authored_burst = int(_num(arm.get("burst")) or 1)
+        burst = authored_burst
         weapon_reload = _num(arm.get("reloaddelay"))
         cycle = cycle_ticks(weapon_reload, burst, raw)
         charged_cycle = (formula.charge_attack_cycle(rec.get("charge_up"), weapon_reload)
@@ -277,7 +289,9 @@ def cameo_views(rec, rs):
             damage_per_shot=dmg, burst=burst, cycle=cycle,
             rng=_num(arm.get("range")), requires=arm.get("requires"),
             baseline=not rd.is_upgrade_gated(arm),
-            note=",".join(sorted({w.get("tag") for w in mains if w.get("tag")})) or None))
+            note=",".join(sorted({w.get("tag") for w in mains if w.get("tag")})) or None,
+            weapon_reload=weapon_reload, weapon_burst=authored_burst,
+            weapon_burst_delays=raw))
     return out
 
 
@@ -296,13 +310,17 @@ def peer_views(row):
         dmg = sum(_num(w.get("damage_num")) or 0
                   for w in (arm.get("warheads") or [])
                   if (_num(w.get("damage_num")) or 0) > 0) or None
+        authored_burst = int(_num(arm.get("burst")) or 1)
+        authored_delays = arm.get("burst_delays") or ()
+        authored_reload = _num(arm.get("reload_delay"))
         out.append(view(
             "peer", arm.get("slot"), arm.get("weapon"), role, unknown,
-            damage_per_shot=dmg, burst=int(_num(arm.get("burst")) or 1),
-            cycle=cycle_ticks(arm.get("reload_delay"), arm.get("burst") or 1,
-                              arm.get("burst_delays") or ()),
+            damage_per_shot=dmg, burst=authored_burst,
+            cycle=cycle_ticks(authored_reload, authored_burst, authored_delays),
             rng=_num(arm.get("range")), requires=arm.get("requires_condition"),
-            baseline=_peer_baseline(arm), note=arm.get("cadence_reason")))
+            baseline=_peer_baseline(arm), note=arm.get("cadence_reason"),
+            weapon_reload=authored_reload, weapon_burst=authored_burst,
+            weapon_burst_delays=authored_delays))
     return out
 
 
@@ -406,7 +424,8 @@ def ini_views(rec, projectile_roles=None, elite_weapons=None):
             rng=rng, requires=None, baseline=True,
             range_unit="cells",
             note=("projectile=%s" % proj) if proj else None,
-            eligible=eligible, refusal=refusal))
+            eligible=eligible, refusal=refusal,
+            weapon_reload=reload, weapon_burst=burst, weapon_burst_delays=()))
     elite = (elite_weapons or {}).get((source, str(rec.get("id") or "")))
     if elite:
         burst_was_bool = isinstance(elite.get("burst"), bool)
@@ -446,7 +465,8 @@ def ini_views(rec, projectile_roles=None, elite_weapons=None):
             note=("elite, replaces %s%s" % (elite.get("replaces"),
                                             "" if elite.get("replaces_dummy_primary")
                                             else " (an upgrade of it, not an extra weapon)")),
-            eligible=eligible, refusal=refusal))
+            eligible=eligible, refusal=refusal,
+            weapon_reload=reload, weapon_burst=burst, weapon_burst_delays=()))
     return out
 
 
