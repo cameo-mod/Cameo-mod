@@ -424,7 +424,7 @@
  "scout_vehicle": {
   "anchor_actor": "td_nod_buggy",
   "armor": "Scout",
-  "comment": "Fast recon. MG/autocannon. Never the AA (that's anti_air_vehicle).",
+  "comment": "Fast recon. MG/autocannon. MAY carry the bonus anti-air reach (maintainer 2026-09-14: anti_air_vehicle, scout_vehicle and armed_troop_transport get it - e.g. Nod buggy, Japanese armored car). SUPERSEDES the earlier note that a scout vehicle is 'never the AA'; being the DEDICATED AA unit is still anti_air_vehicle's job, but carrying an AA split is not exclusive to it. See DESIGN 3a.1.",
   "provisional": "2026-08-01 LOCKED table (epic-top, <=2.0x A+B spread, HP in 10k steps, sane DPS/Cost 0.5-1.5 + epic 2.0); signed_off pending fit_class per class. DPS restat DEFERRED to the cannon/weapon rebuild.",
   "reveals_shroud": 8000,
   "signed_off": false,

@@ -546,6 +546,24 @@ by 1.5x; `Rocket_stealth` makes AA weaker (14500 vs 12000) on a 1.19x range. Rea
 mistake ruled against above. There is no convention here to preserve; pinned by
 `aa_split_pairs_compliant`.
 
+**⭐ WHICH CLASSES MAY CARRY AN AA SPLIT AT ALL** (maintainer, 2026-09-14: *"anti air vehicle,
+scout vehicle and armed troop transports get this bonus anti air range ... It should have been
+written down into the documentation"*). Exactly **three**:
+
+| class | examples named by the maintainer |
+|---|---|
+| `anti_air_vehicle` | Allied heavy anti-air tank, Soviet gatling tank, flak truck |
+| `scout_vehicle` | Nod buggy, Japanese armored car |
+| `armed_troop_transport` | GDI APC, BTR-80 |
+
+⚠ **`scout_vehicle`'s class anchor currently says the opposite** - *"Fast recon. MG/autocannon.
+Never the AA (that's anti_air_vehicle)"* - which is now superseded: a scout vehicle may carry the
+bonus AA reach. The comment is corrected in `class_anchors.json` in the same commit as this line,
+because a stale statement left standing somewhere else is exactly how two documents come to look
+equally authoritative.
+
+⛔ **AN OPEN QUESTION SITS ON TOP OF THIS ONE - see the box at the end of 3a.1.**
+
 ### 3a.2 Weapons that can hit the same target MUST share one range
 
 > *"the unit will always try to fire at maximum range so if they are different it will mostly use
@@ -840,6 +858,38 @@ target **both fire** and they must share a cycle. They miss by **2 ticks** - bom
 `ReloadDelay 110 + 3 x Burst-4 delays = 119`, chaingun `100 + 7 x 3 = 121` - which is drift, not
 design, exactly like `td_gdi_battletank`'s 38-WDist range gap. ⚠ Its 1,840 vs 7,000 range gap is
 the unruled BOMB exemption to 3a.2 and must be ruled before it is "fixed".
+
+**⭐ THE DISJOINT PAIR DOES NOT SHARE A DPS EITHER** (maintainer, 2026-09-14): *"Each is a full
+unit but keep in mind that the range for both will vary and resolving the balance formula means
+the DPS of the higher range one will be lower than the shorter range one. That's just how the
+balance formula works. So they will not have the same DPS if they have two separate ranges and
+that's the important part here!"*
+
+So the two cases have OPPOSITE fingerprints, and that is how to tell them apart on sight:
+
+| case | cycle | range | per-weapon DPS |
+|---|---|---|---|
+| same target (3a.6, 3a.9) | **shared** | **shared** | **equal** - each is 1/n of one budget |
+| disjoint (3a.7) | independent | **independent** | **deliberately unequal** - longer reach buys less DPS |
+
+⛔ So an unequal DPS on a disjoint pair is not drift and must never be "corrected" toward
+equality: `ra1_allies_destroyer`'s 8,000-range missile SHOULD out-range and under-damage its
+6,000-range depth charge. Each is a FULL unit at the same HP, speed and cost - the hull is both
+specialists in one, and that is the intended deal.
+
+⚠ **THE ORDOS AA TROOPER IS THIS CASE, NOT AN AA SPLIT** (maintainer, on being shown the
+numbers): *"it's not actually the 1.5x rule, this one uses two independent weapons like we said
+earlier for the ships so yes range and DPS just solve independently for this unit."* Its
+`D2K_Rocket_Trooper_AA` (Air, 9,716, 10,000 dmg) and `D2K_Rocket_Trooper_AGOnly` (Ground/Water,
+6,252, 30,000 dmg) are two real weapons - longer reach, lower damage, exactly as the rule
+predicts - and 3a.1's ratio law does not apply to them.
+
+⛔ **WHICH CREATES A NAMING CONFLICT THAT MUST BE RESOLVED BEFORE THE RENAME RUNS.** 3a.8 has
+the balance formula DROP every `_AA` weapon by name. That is safe only while `_AA` means "the
+free, unpriced air half of a split". The Ordos trooper's air missile is NOT that - it is a full
+virtual unit that must be PRICED - so leaving it called `_AA` would delete a real weapon from the
+formula. Either it stops being called `_AA`, or 3a.8's rule gains the exception it was written to
+avoid. **The rename map must not be executed until this is settled.**
 
 ### 3a.8 ⛔ The balance formula IGNORES the `_AA` half - but only when it HAS an AG twin
 
