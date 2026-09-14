@@ -684,11 +684,14 @@ claims:
       print(doc['stats']['actors_tier_original'])
 
   - id: armament_pairing_input_fingerprints
-    value: 472
+    value: 476
     tolerance: 0
     what: >
       Complete input closure whose sha256 armament_pairing.json records so a consumer can refuse a
-      STALE artifact: the INI corpus and extracted evidence, selected OpenRA peer corpora, Cameo
+      STALE artifact: (⚠ 472 -> 476 on 2026-09-14. The four new inputs arrived with #388/#390's
+      restored INI armament votes, which peer_corpus.input_paths now pins; the claim was simply
+      not bumped with them. Verified NOT to come from the charge or dual-armament work by
+      measuring input_fingerprints with those changes stashed - it already read 476.) the INI corpus and extracted evidence, selected OpenRA peer corpora, Cameo
       balance ledgers, active manifest/rules/weapons, and every executed local tool dependency.
       Repository text hashes canonicalise LF/CRLF while raw evidence pins remain separately
       enforced. Astra's
@@ -705,6 +708,143 @@ claims:
       if not all(v and len(v) == 64 for v in inputs.values()):
           raise SystemExit('an input fingerprint is missing or not a sha256')
       print(len(inputs))
+
+  - id: aa_split_pairs_compliant
+    value: 36
+    tolerance: 0
+    what: >
+      `_AA`/ground weapon pairs that obey the AA-split law (DESIGN 3a.1, maintainer 2026-09-14):
+      a weapon split into ground and _AA halves only because OpenRA cannot give one armament 1.5x
+      reach against air is ONE weapon, so Damage, ReloadDelay, Burst, BurstDelays AND MinRange
+      must be identical and ONLY the maximum Range differs, by exactly 1.5x. ⛔ MinRange NEVER
+      scales - "no range multiplier changes min range" - and scaling it by 1.5x alongside Range
+      silently widens the dead zone the unit cannot shoot into; four pairs (Naxis_Komet, eden_EMP,
+      edenTiger_EMP, plymouth_EMP) make exactly that mistake. Of 63 pairs in the tree, 36 comply,
+      21 are VALUE violations and 6 have a reach ratio other than 1.5x. The violations share no
+      direction: RA2GattlingMG1/2/3 and YuriGatlingCannonMG1/2/3 give the AA half double damage,
+      the Lunar/Naxi laser family gives it half, SteelMantaHunterCannons scales damage and reload
+      together, and Rocket_stealth makes AA weaker on a 1.19x range. This claim is a RATCHET in
+      the rising direction: it may go UP as pairs are fixed, never down.
+    docs: [docs/DESIGN.md]
+    measure: |
+      import pathlib, sys
+      root = pathlib.Path('.').resolve()
+      sys.path.insert(0, 'tools/audit'); sys.path.insert(0, 'tools/balance')
+      import miniyaml
+      rules = miniyaml.Ruleset(root)
+      IDENTICAL = ('Damage', 'ReloadDelay', 'Burst', 'BurstDelays', 'MinRange')
+      def wf(name):
+          w = rules.resolve_weapon(name)
+          if w is None:
+              return None
+          out = {}
+          for k in ('ReloadDelay', 'Burst', 'BurstDelays', 'Range', 'MinRange'):
+              n = next((c for c in w.children if c.key == k), None)
+              if n is not None:
+                  out[k] = str(n.value)
+          dmg = [int(k.value) for c in w.children
+                 if c.key.split('@', 1)[0].startswith('Warhead')
+                 for k in c.children if k.key == 'Damage']
+          if dmg:
+              out['Damage'] = max(dmg)
+          return out
+      def num(v):
+          try:
+              return float(str(v).rstrip('c'))
+          except (TypeError, ValueError):
+              return None
+      clean = 0
+      for name in sorted(rules.weapons):
+          if not name.endswith('_AA'):
+              continue
+          base = name[:-3]
+          if base not in rules.weapons:
+              continue
+          a, g = wf(name), wf(base)
+          if a is None or g is None:
+              continue
+          if any(g.get(k) != a.get(k) for k in IDENTICAL):
+              continue
+          gv, av = num(g.get('Range')), num(a.get('Range'))
+          if gv and av and abs(av / gv - 1.5) <= 0.001:
+              clean += 1
+      print(clean)
+
+  - id: same_target_range_groups
+    value: 387
+    tolerance: 0
+    what: >
+      Same-target armament groups that already share ONE range (DESIGN 3a.2, maintainer
+      2026-09-14): "ALL WEAPONS THAT CAN HIT THE SAME TARGET MUST ALWAYS HAVE THE EXACT SAME RANGE
+      AND THE ONLY EXCEPTIONS ARE THOSE ANTI GROUND ANTI AIR COMBOS WITH THE 1.5X RANGE". The
+      reason is mechanical: an actor engages at its longest usable reach, so a shorter second
+      weapon never fires. Measured through armament_roles.cameo_views - the same views the
+      reference map uses - over actors with 2+ priced armaments, grouping by whether a role can
+      engage ground (ground/both) or air (air/both). 522 actors qualify; 387 groups share one
+      range and 330 carry a spread, worst 409x. ⛔ The 330 is an UPPER bound, not a defect count:
+      it still includes aircraft bombs (TSBomb, OrniBomb, NaxiCowDrop) and condition-gated elite
+      replacements, none of which competes for a target at maximum range, and the exemption list
+      is an open design question. ⚠ This law DEPARTS from the sources on purpose - only 31.9% of
+      the 935 dual-weapon reference actors give both weapons equal range. RATCHET upward.
+    docs: [docs/DESIGN.md]
+    measure: |
+      import collections, pathlib, sys
+      root = pathlib.Path('.').resolve()
+      for d in ('tools/audit', 'tools/balance', 'tools/reference'):
+          sys.path.insert(0, d)
+      import armament_roles as ar, assign_references as asg, miniyaml
+      rules = miniyaml.Ruleset(root)
+      led = asg.ledger()
+      OVERLAP = {'ground': {'ground', 'both'}, 'air': {'air', 'both'}}
+      ok = 0
+      for actor, row in sorted(led.items()):
+          views = [v for v in ar.cameo_views(row, rules)
+                   if v.get('range') and (v.get('damage_per_cycle') or 0) > 1]
+          if len(views) < 2:
+              continue
+          for roles in OVERLAP.values():
+              grp = [v for v in views if v.get('role') in roles]
+              if len(grp) < 2:
+                  continue
+              if len({round(float(v['range'])) for v in grp}) == 1:
+                  ok += 1
+      print(ok)
+
+  - id: mammoth_cannon_missile_source_ratio
+    value: 1.71
+    tolerance: 0.01
+    what: >
+      Median cannon-vs-missile DPS ratio across every reference Mammoth Tank that carries both
+      (DESIGN 3a.4). The maintainer asked whether the base games really give a dual-weapon unit
+      the same damage - "If Cannon is like 1.5x more powerful than the missile then it would make
+      sense to have both with different values but not at like a 1.05x difference". They do not:
+      median 1.71x, mean 1.80x, spread 1.11x-2.93x over 15 source rows. CnC Reloaded runs
+      1.71x-2.73x, Twisted Insurrection 1.67x-2.00x, RA2's Apocalypse 1.67x; DTA Classic and Rise
+      of the East INVERT it and make the missile stronger. Across all 930 dual-weapon reference
+      actors only 29.2% sit inside 1.05x while 45.4% are more than 3x apart. ⛔ Our own map
+      projects the Mammoth's two weapons 1.013x apart - an ARTEFACT of the fold, which projects
+      every armament through one actor-level ruler, NOT evidence that the two should be equal.
+      This claim exists so that artefact cannot be mistaken for a finding again.
+    docs: [docs/DESIGN.md]
+    measure: |
+      import json, pathlib, statistics
+      rows = [json.loads(l) for l in
+              pathlib.Path('docs/reference/ini_corpus.json')
+              .read_text(encoding='utf-8').splitlines() if l.strip()]
+      seen, ratios = set(), []
+      for r in sorted(rows, key=lambda r: (r.get('source') or '', r.get('id') or '')):
+          if 'mammoth' not in (r.get('name') or '').lower():
+              continue
+          if not (r.get('w_dps') and r.get('w2_dps')):
+              continue
+          key = (r.get('source'), r.get('name'), r.get('w_dps'), r.get('w2_dps'))
+          if key in seen:
+              continue
+          seen.add(key)
+          a, b = float(r['w_dps']), float(r['w2_dps'])
+          if min(a, b) > 0:
+              ratios.append(max(a, b) / min(a, b))
+      print(round(statistics.median(ratios), 2))
 
   - id: charged_actor_cycle_actors
     value: 14

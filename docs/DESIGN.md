@@ -506,6 +506,110 @@ defaults.yaml** (`^HighTechTankTemplate` ⇒ vehicle, whatever the render
 traits say). Power plant vision currently: 4c0 small / 5c0 advanced —
 a project-wide size/cost scaling rule is TODO.
 
+## 3a. The dual-armament laws (maintainer, 2026-09-14)
+
+Four rulings about actors that carry more than one weapon. They were prompted by the
+per-armament reference map, which showed the GDI APC, Battle Tank and Mammoth Tank carrying two
+weapons whose targets came out within a few percent of each other.
+
+### 3a.1 An AA split is ONE weapon, and only its RANGE differs
+
+> *"the APC anti ground and anti air flak should not have any different damage since it's the
+> same weapon (the only reason why we had to split it was a necessity because we can't otherwise
+> have 1.5x range against air) so yes for those dual weapons that are only anti ground and anti
+> air versions they must be identical except for the 1.5x range"*
+
+A `_AA` weapon that exists only because OpenRA cannot give one armament a longer reach against
+air is **not a second weapon**. `Damage`, `ReloadDelay`, `Burst` and `BurstDelays` must be
+IDENTICAL to its ground twin. **Only `Range` differs, by exactly 1.5x.**
+
+⛔ **`MinRange` NEVER SCALES** (maintainer, same ruling): *"Min Range never scales! That one is
+always constant - because no range multiplier changes min range."* A range multiplier moves the
+maximum reach and nothing else, so the AA half must carry the SAME `MinRange` as its ground twin.
+Scaling it by 1.5x alongside `Range` looks tidy and is wrong; it silently widens the dead zone
+the unit cannot shoot into.
+
+⚠ **MEASURED 2026-09-14: the tree does not obey this.** 63 `_AA`/ground pairs exist:
+
+| | pairs | |
+|---|--:|---|
+| compliant | **36** | identical apart from a 1.5x maximum range |
+| **value violations** | **21** | the halves are not the same weapon at all |
+| range-ratio violations | 6 | same weapon, reach is not 1.5x |
+
+⛔ And the violations do not even share a direction. `RA2GattlingMG1/2/3` and
+`YuriGatlingCannonMG1/2/3` give the AA half **double** damage (4000 vs 8000); the Lunar and Naxi
+laser family gives it **half** (8000 vs 4000); `SteelMantaHunterCannons` scales damage AND reload
+by 1.5x; `Rocket_stealth` makes AA weaker (14500 vs 12000) on a 1.19x range. Reach ratios of
+1.0x, 1.35x, 1.429x, 1.688x, 1.808x and 2.0x all appear. Four pairs - `Naxis_Komet`, `eden_EMP`,
+`edenTiger_EMP` and `plymouth_EMP` - scale `MinRange` by 1.5x as well, which is the specific
+mistake ruled against above. There is no convention here to preserve; pinned by
+`aa_split_pairs_compliant`.
+
+### 3a.2 Weapons that can hit the same target MUST share one range
+
+> *"the unit will always try to fire at maximum range so if they are different it will mostly use
+> one but not both weapons so to maximize effectiveness it is imperative that ALL WEAPONS THAT
+> CAN HIT THE SAME TARGET MUST ALWAYS HAVE THE EXACT SAME RANGE AND THE ONLY EXCEPTIONS ARE THOSE
+> ANTI GROUND ANTI AIR COMBOS WITH THE 1.5X RANGE"*
+
+The reason is mechanical, not aesthetic: an actor engages at its longest usable reach, so a
+shorter second weapon simply never fires. Two weapons at different ranges are one weapon plus
+dead yaml.
+
+⚠ **This law deliberately DEPARTS from the source material.** Measured across the 935 reference
+actors that carry two weapons, only **31.9%** give them equal range - the originals routinely
+split reach. Cameo does not, because OpenRA's targeting makes the shorter gun inert. Fidelity
+loses to function here, and that is a decision, not an oversight.
+
+⚠ **MEASURED on the tree**: of 522 actors with 2+ priced armaments, **387 same-target groups
+share one range (54.0%) and 330 carry a spread**, the worst 409x. ⛔ The 330 is an UPPER bound,
+not a defect count: it still includes aircraft bombs (`TSBomb`, `OrniBomb`, `NaxiCowDrop`) and
+condition-gated `elite` replacements, neither of which competes for a target at maximum range.
+**The exemption list is an open design question** - see `same_target_range_groups`.
+
+### 3a.3 Simultaneous armaments SUM - the actor-level cell must not be WITHHELD
+
+> *"for the balance formula you need to count both weapons if they are truly activated at the
+> same time at the same ground target like the mammoth tank cannons and missiles so the combined
+> DPS is what counts and it is what should be displayed in the reference data instead of the
+> WITHHELD status"*
+
+Where two armaments genuinely fire together at one target, the priced quantity is their SUM, and
+the reference map must show it rather than abstain. Abstention is for armaments that cannot be
+compared, not for ones that add.
+
+### 3a.4 Differentiate the guns - the sources do, and by a lot
+
+> *"it would actually be nice if cannons and missiles or anything else does not deal the exact
+> same damage ... If Cannon is like 1.5x more powerful than the missile then it would make sense
+> to have both with different values but not at like a 1.05x difference"*
+
+⭐ **MEASURED, AND THE SOURCE MATERIAL BACKS THE INSTINCT.** Across every reference Mammoth Tank
+carrying both a cannon and missiles, the cannon-vs-missile **DPS** ratio is:
+
+| statistic | ratio |
+|---|--:|
+| median | **1.71x** |
+| mean | 1.80x |
+| range | 1.11x - 2.93x |
+
+CnC Reloaded runs 1.71x-2.73x, Twisted Insurrection 1.67x-2.00x, RA2's Apocalypse 1.67x, Red
+Resurrection 1.25x; DTA Classic and Rise of the East **invert** it and make the missile stronger.
+Across all 930 dual-weapon reference actors only **29.2%** sit inside 1.05x, while **45.4%** are
+more than 3x apart.
+
+⛔ **Our map projects the Mammoth's two weapons 1.013x apart, where the sources are 1.71x apart.**
+That is not a data problem, it is the FOLD: each armament is projected through the same
+actor-level ruler, so both land in the same place and the distinction the sources carry is
+flattened out. Retiring that fold for a per-armament ruler is the open MODEL change; until then a
+near-1.0x spread between a cannon and a missile is an ARTEFACT of the projection and must not be
+read as evidence that the two should be equal. Pinned by `mammoth_cannon_missile_source_ratio`.
+
+⚠ The corollary the maintainer drew: where the projected difference really is only a few percent,
+averaging the two and applying one value costs nothing - *"so it doesn't matter if it's exactly
+the same or not"*. The prize is the cases where the sources say 1.5x-2x and we currently say 1.0x.
+
 ## 4. Tech tier rules (F12/F13)
 
 Building tiers are data-driven from prerequisite chains (conyard 0,
