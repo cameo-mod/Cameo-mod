@@ -123,8 +123,8 @@ confirmed input discontinuity in these seven rows, but no re-pin counterfactual 
 that removing it would clear every `EXTREME` flag. Re-pinning is a separate decision with its own
 hazards - the pin is what stops the map feeding on its own output.
 
-**CONSUMER GAP — the per-armament reference path ignores an actor-level attack cycle (proven on
-1).** `ra1_soviets_teslacoil` exposes the mismatch clearly:
+**CONSUMER GAP — resolved: the reference path ignored an actor-level attack cycle (proven on
+3 `AttackTesla` actors).** `ra1_soviets_teslacoil` exposed the mismatch clearly:
 
     weapon ReloadDelay             3 ticks   (the gap between zaps)
     actor AttackTesla ReloadDelay 100 ticks
@@ -135,15 +135,23 @@ hazards - the pin is what stops the map feeding on its own output.
 `extract_stats` already records this `AttackTesla` data. `formula.charge_attack_cycle` models the
 sustained attack as 3 zaps over 106 ticks (`100 + 3 * (3 - 1)`), or about 35.3 ticks per zap; the
 25-tick initial wind-up is a separate price input, not something that can be added to each 3-tick
-weapon reload. The remaining defect is downstream: the per-armament reference consumer still uses
-the weapon's 3-tick reload without applying the recorded actor cycle. That overstates the reported
-rate, but this evidence does **not** derive the map's 29% comparison or an exact correction for it.
+weapon reload. `reference_distribution.armament_profile` and `armament_roles.cameo_views` now apply
+that shared actor-cycle formula when exactly one baseline armament makes ownership unambiguous.
+The same correction covers RA2's Tesla Coil (75 ticks, one zap) and the Asian Alliance Railtower
+(160 ticks, five shots). Charge-level traits keep their weapon cadence, and multi-armament actors
+remain withheld rather than inheriting one actor cycle by guess.
+
+The corrected four-faction report reads the RA1 coil as 144,000 damage per actor cycle and
+1,358.49 damage/tick. Its independently composed reference target is 4,591 damage/tick
+(`EXTREME 338%`), so the earlier `29%` explanation was backwards: it came from treating the
+3-tick between-zap gap as the entire current cycle. This remains a diagnostic target, not a live
+balance change.
 
 Only three actors explicitly override `InitialChargeDelay` (`ra1_soviets_teslacoil` 25,
 `ra2_soviets_teslacoil` 20, one Asian Alliance building 12). Other charge traits can use engine
 defaults, so an explicit-field count does not bound the downstream fix. Measure from resolved
-`charge_up` records and decide how one actor cycle applies to its armaments before changing the
-reference consumer.
+`charge_up` records. The current adapter therefore consumes only the three `AttackTesla` records
+whose actor cycle is already explicit in the ledger.
 
 ⚠ The other three sub-100% rows - `ra1_soviets_shocktrooper` 47%, `ra1_soviets_zapper` 41%,
 `ra1_soviets_commissar` 30% - are the same tesla/electric family, but shared damage type does not

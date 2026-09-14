@@ -1002,6 +1002,11 @@ def is_upgrade_gated(arm):
     return not formula.condition_holds_by_default(arm.get("requires"))
 
 
+def default_active_armaments(arms):
+    """Every priced armament active in the shared canonical built state, before role filtering."""
+    return [a for a in arms if formula.condition_holds_by_default(a.get("requires"))]
+
+
 def baseline_armaments(arms):
     """The armaments a unit fires AT ONCE with no upgrades and no rank.
 
@@ -1022,7 +1027,7 @@ def baseline_armaments(arms):
     # ground and AA domains.  A satisfiability test per arm would admit mutually exclusive modes
     # (Tesla charged/un-charged variants or every IFV passenger) and sum them as if they fired
     # together.  The formula evaluator is also the one used by fit_class.pricing_armaments.
-    live = [a for a in arms if formula.condition_holds_by_default(a.get("requires"))]
+    live = default_active_armaments(arms)
     ground = [a for a in live if not is_anti_air_armament(a)]
     if ground:
         return ground            # price on the ground weapon (DESIGN, anti_air_vehicle anchor)
@@ -1038,9 +1043,21 @@ def baseline_armaments(arms):
     return [max(arms, key=_armament_damage)]
 
 
-def armament_profile(arms, anum):
-    """(w_range, w_damage, w_burst, w_reload, w_dps, debt, primary) over the BASELINE set."""
+def armament_profile(arms, anum, charge_up=None):
+    """(w_range, w_damage, w_burst, w_reload, w_dps, debt, primary) over the BASELINE set.
+
+    `AttackTesla` replaces a weapon's cadence with one actor-level cycle. The ledger already
+    records that cycle in `charge_up`; using the weapon's reload by itself treats the gap between
+    zaps as the full reload. Apply the shared formula only when one baseline armament makes the
+    ownership unambiguous. Other charge traits return no cadence override, and multi-armament
+    actors keep the existing fail-closed component verdict.
+    """
+    active = default_active_armaments(arms)
     live = baseline_armaments(arms)
+    charged_cycle = None
+    if len(active) == 1 and len(live) == 1 and active[0] is live[0]:
+        weapon_reload = anum(live[0].get("reloaddelay"))
+        charged_cycle = formula.charge_attack_cycle(charge_up, weapon_reload)
     dps_total, dmg_total, debt = 0.0, 0.0, False
     for a in live:
         mains = [wh for wh in (a.get("damage_warheads") or [])
@@ -1055,6 +1072,8 @@ def armament_profile(arms, anum):
         dmg = sum(anum(wh.get("damage")) or 0 for wh in mains)
         burst = anum(a.get("burst")) or 1
         cycle = burst_cycle(a, anum)
+        if charged_cycle is not None:
+            cycle, burst = charged_cycle
         per_cycle = dmg * burst
         if per_cycle and cycle:
             dps_total += per_cycle / cycle
@@ -1065,8 +1084,10 @@ def armament_profile(arms, anum):
     ranges = [anum(a.get("range")) for a in live if anum(a.get("range"))]
     return {"w_range": max(ranges) if ranges else None,
             "w_damage": dmg_total or None,
-            "w_burst": anum(primary.get("burst")) or 1,
-            "w_reload": anum(primary.get("reloaddelay")),
+            "w_burst": charged_cycle[1] if charged_cycle is not None
+                       else anum(primary.get("burst")) or 1,
+            "w_reload": (anum(charge_up.get("cycle_reload")) if charged_cycle is not None
+                         else anum(primary.get("reloaddelay"))),
             "w_dps": dps_total or None,
             "weapon_model_eligible": len(live) == 1}, debt, primary
 
@@ -1278,7 +1299,7 @@ def cameo_rows():
 
                 w, debt = {}, False
                 if arms:
-                    w, debt, a = armament_profile(arms, anum)
+                    w, debt, a = armament_profile(arms, anum, rec.get("charge_up"))
                     dps = w["w_dps"]
                     tpl = a.get("versus_templates") or []
                     wname = a.get("weapon") or (tpl[-1] if tpl else None)
@@ -1576,7 +1597,7 @@ def cameo_hero_rows():
                         return None
                 w, debt = {}, False
                 if arms:
-                    w, debt, a = armament_profile(arms, anum)
+                    w, debt, a = armament_profile(arms, anum, rec.get("charge_up"))
                     dps = w["w_dps"]
                     tpl = a.get("versus_templates") or []
                     wname = a.get("weapon") or (tpl[-1] if tpl else None)
