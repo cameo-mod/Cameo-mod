@@ -1,5 +1,63 @@
 # Cameo — THE HANDOFF
 
+## ⭐⭐⭐ 2026-09-14 (latest) — NINE DUAL-ARMAMENT LAWS, AND THE MAP DEFECTS BEHIND THEM
+
+Written by **Claude-Local (Opus 5)**. **PR #399**, branch `claude/map_defects_20260914`, rebased
+on `1e9a38e78` (#394-#398). Map at **Version 33**. This branch writes no engine content, no yaml
+and no balance number.
+
+### THE LAWS, all ruled by the maintainer on 2026-09-14 — `DESIGN.md` §3a.1-3a.10
+
+| § | law |
+|---|---|
+| 3a.1 | An AA split is ONE weapon; **`MinRange` never scales**. The AA bonus is **scoped by class**: `anti_air_vehicle` and the **anti-air SHIP** template get +50% range **and +100% damage** (priced at zero); `scout_vehicle` and `armed_troop_transport` get +50% range at the **same** damage; no other class may carry a split. |
+| 3a.2 | Weapons that can hit the same target share ONE range. Bomb/`elite` exemption still **unruled**. |
+| 3a.3 | Simultaneous armaments SUM and must be DISPLAYED. |
+| 3a.4 | The cannon/missile near-tie is **source cancellation** — read the voters, never the spread. |
+| 3a.5 | ⛔ **NEVER reference across factions.** CA's routing gate is INERT (156 of 377 units carry >=10 faction tags). |
+| 3a.6 | **ONE CYCLE PER ACTOR**, so total DPS is a plain sum. Plus the **drift rule**: average spreads under 5%, leave wider ones to design. |
+| 3a.7 | **Mutually exclusive weapons are virtual twin units** — resolved independently, **never summed**, sharing neither range nor DPS. Longer reach buys less DPS. |
+| 3a.8 | The formula **drops the `_AA` half by name**; the 1.5x check is an AUDIT matter only. |
+| 3a.9 | **THE FIREPOWER SHARE.** Same-target weapons split one budget (1/n by default, **weighting allowed by design**); `n` counts **weapon SYSTEMS**, while delivered DPS sums over every **barrel**. |
+| 3a.10 | **`Only` marks a disjoint pair.** `X_AG`+`X_AA` is one weapon split for reach; `X_AGOnly`+`X_AAOnly` is two independent weapons, both priced. |
+
+⭐ **THE FINGERPRINT THAT SEPARATES THE TWO CASES:** same-target weapons share cycle, range AND
+DPS; disjoint weapons share none of the three. Equal per-weapon DPS is 3a.9 leaving a mark, not a
+coincidence — mammoth 200x2, Sheridan 62.5x3, heatray tank 187.5x4.
+
+### THE THREE MAP DEFECTS — all were live on master, #394 did not carry them
+
+1. **DTA silenced.** `ini_views` gated on `burst == 1`, and **all 250 `burst_unfolded` corpus rows
+   are DTA and nobody else** — so the only source making the mammoth CANNON stronger fell silent.
+   Folded at the ruled 1 tick: **1144 -> 1388** eligible views, 3 voters per armament.
+   ⛔ Applied where the declaration is READ. **Never regenerate `ini_corpus.json`**: a re-extract
+   LOSES the dummy-primary promotion on 63 rows, which the extractor's own comments already ruled
+   is "a REGRESSION, not a refresh".
+2. **"All withheld!"** — combined damage is displayed now (mammoth 32,000 -> 82,526). Four guards:
+   as built, an AA twin is not a second gun, a common target domain, and every armament needs a
+   reference. Cadence never sums.
+3. **Cross-faction reference** — the EMP grenadier pointed at CA's Scrin Marauder; now `ZRAI`,
+   the GDI/ZOCOM Zone Raider.
+
+### ⛔ BLOCKED / OPEN
+
+* **The AA rename map** (`docs/design/AA_SPLIT_RENAME_MAP.md` — 93 renames: 74 twin, 16 disjoint,
+  3 dropped, 3 needing a human) is **NOT APPLIED**. It needs `safe_rename.py`, a boot gate and a
+  quiet tree, and master is staged for a playtest.
+* **There is NO naval class in `class_anchors.json`** — the anti-air SHIP ruling has nothing to
+  attach to until that class exists.
+* **Aegis Cruiser**, ordered: drop the `upra2aegismissiles` condition from its AG armament and
+  double the AA half to 60,000. Its range is already exactly 1.5x. Both yaml.
+* **Sea Scorpion is not a clean pair** — 2.44x reach, and its ground weapon is SHARED with the
+  flak track, so it cannot be rescaled alone.
+* **Yaml drift queue**: Yak cycle -> **120** (reloads 111/99), battle tank range -> **5,419**. The
+  Yak is also off its own firepower design (72/28 against an intended 50/50).
+* **A latent bug**: the map de-duplicates armaments on `(weapon, role)`, which UNDER-counts a real
+  dual mount — the Yak's two wing chainguns at `LocalOffset` 256,±213. Nothing publishes a wrong
+  number today only because both affected actors are withheld for another reason. The
+  discriminator is `LocalOffset`, which `armament_pairing.json` does not carry.
+* `td_nod_lasercorvette`'s obelisk laser — **fixed by Codex in #395**.
+
 ## 2026-09-14 (late) — CHARGE AND DUAL-ARMAMENT INTEGRATION
 
 This section describes the corrected integration of Aedis's PRs **#392** and **#393** on the
