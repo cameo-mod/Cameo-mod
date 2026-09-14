@@ -1,6 +1,6 @@
 # Cameo — THE HANDOFF
 
-## ⭐⭐⭐ 2026-09-14 — CHARGE-RANGE AVERAGING INTEGRATED; CADENCE STILL WITHHELD
+## ⭐⭐⭐ 2026-09-14 — THE CHARGE TERM IS APPLIED; THE AUTOTARGET SPREAD IS NOT
 
 Integrated from Aedis's #386/#389 work after Codex and Astra review. Live state; read before
 anything dated earlier.
@@ -49,7 +49,29 @@ which the simulator does not model, so 220 is the ruled/model floor rather than 
 ⭐ **And it gives the automatic detection**: `reload <= ChargeDelay` is charge-once
 (`gap = ChargeDelay`); `reload > ChargeDelay` is charge-per-shot
 (`gap = reload + reacquisition + InitialChargeDelay`). ⛔ The ruled model is not applied — the charge term is still
-withheld, and applying it needs `ChargeDelay` and the weapon reload in the extractor.
+APPLIED, on the maintainer's instruction *"make sure the charge between every shot is counted
+correctly for the burst cycle"*.
+
+⭐⭐ **WHAT LANDED.** `extract_stats` records `ChargeDelay` (engine default 3, written by no
+actor - which is why the mode was undecidable), and `formula.charge_attack_cycle` counts the
+wind-up once or per shot from `ChargeDelay` vs the WEAPON's reload. Priced cycles are now
+**131 / 95 / 210** - every maintainer ruling. `tesla_coil_attack_period` moved 106 -> 131.
+
+| actor | cycle | rate | |
+|---|---|---|--:|
+| `asianalliance_railtower` | 160 -> **210** | 968.75 -> **738.10** | **-24%** |
+| `ra1_soviets_teslacoil` | 106 -> **131** | 1358.49 -> **1099.24** | **-19%** |
+
+⚠ **ONE YAML CHANGE**: `asianalliance_railtower` `InitialChargeDelay` 12 -> **10**. The
+maintainer first proposed `ChargeDelay: 10` for consistency and then rejected it themselves - it
+would have flipped the tower to charge-ONCE (cycle 170) and removed the per-shot charging that is
+the building's identity. A comment at the trait now says exactly that. Boot-gated green.
+
+⛔ **THE AUTOTARGET SPREAD IS MEASURED BUT NOT PRICED.** `AutoTarget.ScanForTarget` re-arms with
+`SharedRandom.Next(3, 8)` = **U{3..7}, mean 5**, no Cameo override. A charge-per-shot actor goes
+idle between shots and pays it; the Rail Tower measures **210 floor / 218 mean / 232 ceiling**
+over 300 seeds, while both coils are INVARIANT because charge-once never goes idle. The floor is
+what the pipeline prices.
 
 ⭐⭐ **RANDOM RANGES TAKE THE MEAN — RULED, IMPLEMENTED, RE-EXTRACTED** (maintainer, 2026-09-14).
 `ChargeLevel: 25, 50` is ONE uniform roll, not two settings, so it costs **37.5**;

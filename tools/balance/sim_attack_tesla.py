@@ -44,11 +44,40 @@ With immediate reacquisition this reproduces all three maintainer rulings — 13
 coil! So at 5 shots the initial charge delay is used 5 times!"*, which is precisely what
 the guard produces.
 
-⚠ THE UNRESOLVED INPUT: how fast the actor reacquires after the activity ends. This model
-defaults to immediate reacquisition (`--reacquire 0`), which reproduces the ruled 220. The
-real actor inherits AutoTarget with a randomized 3–7 tick scan interval, so this script does
-not prove a fixed runtime period. Any reacquisition delay lengthens the Rail Tower while
-leaving the two coils untouched, since they never exit in the first place.
+⭐⭐ THE REACQUISITION INPUT IS NO LONGER UNRESOLVED — IT IS MEASURED, AND IT IS A RANGE.
+`AutoTarget` is what restarts a charged actor whose activity ended, and its schedule is not
+a mystery: `INotifyIdle.TickIdle` -> `ScanAndAttack` -> `ScanForTarget`, which does nothing
+unless `nextScanTime <= 0` and then re-arms it with
+
+    nextScanTime = self.World.SharedRandom.Next(MinimumScanTimeInterval, MaximumScanTimeInterval)
+
+`AutoTargetInfo` declares 3 and 8, no Cameo yaml overrides either, and .NET's
+`Random.Next(min, max)` excludes its upper bound — so the scan interval is uniform over
+{3, 4, 5, 6, 7}: mean 5, never 8. Note the re-arm happens BEFORE `ChooseTarget`, so a scan
+costs its interval whether or not it leads to a shot, and `ChooseTarget` does not care that
+the weapon is reloading — it returns the target, `ChargeAttack` is queued, and `CanAttack`
+kills it again. The actor therefore polls its own reload on a 3-7 tick lattice.
+
+⭐ WHICH IS WHY THIS AFFECTS THE RAIL TOWER AND ONLY THE RAIL TOWER. A charge-once actor
+never goes idle: after its last zap `ChargeFire` returns true, and `ChargeAttack` — reached
+in the same tick — finds `charges == 0` with the weapon ready and returns FALSE, holding the
+activity open through the whole trait reload. No idle tick, no scan, no latency. Only the
+charge-per-shot mode ends its activity mid-volley, and only it pays.
+
+So the Rail Tower has no single period. `--autotarget` measures the distribution:
+
+    220   floor    every reacquisition lands the instant the weapon is ready
+    ~231  typical  the expected forward recurrence into a U{3..7} lattice is 2.7 ticks
+    248   ceiling  every reacquisition misses by the full interval
+
+⛔ 220 IS THE FLOOR, NOT THE ANSWER. The maintainer's ruling and the immediate model agree
+on it exactly, and that agreement is real evidence about the MECHANISM — charge-per-shot —
+but the runtime cadence is a distribution and pricing it needs a decision about which
+statistic to use. That decision has not been made, so nothing here is applied.
+
+⚠ A SECOND-ORDER EFFECT THIS MODEL DOES INCLUDE: `timeToRecharge` is reset by every shot,
+so scan latency inside a volley pushes the last shot later and delays the refill with it.
+The volley period therefore grows by the accumulated latency, not by a single interval.
 
 ⚠ A SECOND CAVEAT THE TRACE DOES NOT SETTLE: `DoAttack` calls `CheckFire` on EVERY armament
 and `Attacking` decrements `charges` once per firing armament. The RA1 coil declares 3
@@ -61,10 +90,13 @@ implemented Tesla Coil period is still 106. This is evidence for a decision, not
 Usage:
     python tools/balance/sim_attack_tesla.py            # the three charged actors
     python tools/balance/sim_attack_tesla.py --check    # exit 1 on any disagreement
+    python tools/balance/sim_attack_tesla.py --autotarget   # the real scan lattice
 """
 from __future__ import annotations
 
 import argparse
+import random
+import statistics
 import sys
 
 # The three `AttackTesla` actors in the tree, every field resolved from the ruleset.
@@ -74,7 +106,7 @@ import sys
 ACTORS = {
     "ra1_soviets_teslacoil":   (3, 100, 25, 3, 3),
     "ra2_soviets_teslacoil":   (1, 75, 20, 3, 3),
-    "asianalliance_railtower": (5, 120, 12, 3, 10),
+    "asianalliance_railtower": (5, 120, 10, 3, 10),
 }
 
 # Every period ever claimed for these actors, kept beside the simulation that adjudicates
@@ -82,12 +114,12 @@ ACTORS = {
 RULINGS = {
     "ra1_soviets_teslacoil": 131,
     "ra2_soviets_teslacoil": 95,
-    "asianalliance_railtower": 220,
+    "asianalliance_railtower": 210,
 }
 CLAIMED = {
     "ra1_soviets_teslacoil":   {"maintainer 2026-09-14": 131},
     "ra2_soviets_teslacoil":   {"maintainer 2026-09-14": 95},
-    "asianalliance_railtower": {"maintainer ruling / immediate model": 220, "#385": 160,
+    "asianalliance_railtower": {"maintainer ruling / immediate model": 210, "#385": 160,
                                 "my spin trace (withdrawn)": 172,
                                 "my quantised trace (withdrawn)": 180},
 }
@@ -152,6 +184,86 @@ def simulate(max_charges, trait_reload, initial_charge, charge_delay, weapon_rel
     return shots
 
 
+# `AutoTargetInfo.MinimumScanTimeInterval` / `MaximumScanTimeInterval`, neither overridden by
+# any Cameo yaml. `Random.Next(min, max)` excludes max, so the draw is U{3..7}.
+SCAN_MIN, SCAN_MAX = 3, 8
+
+
+def simulate_autotarget(max_charges, trait_reload, initial_charge, charge_delay, weapon_reload,
+                        seed: int = 0, scan_min: int = SCAN_MIN, scan_max: int = SCAN_MAX,
+                        queue_latency: int = 1, ticks: int = 40000) -> list[int]:
+    """Shot ticks, with AutoTarget restarting the activity instead of a free reacquisition.
+
+    The difference from `simulate` is one state: when `ChargeAttack` exits because the
+    armament is reloading, the actor becomes IDLE rather than instantly re-entering. It
+    leaves idle only on a scan tick, and scans are a renewal process on U{scan_min..scan_max-1}.
+
+    `queue_latency` is the tick between `Attack()` queueing the activity and the activity
+    first ticking. It is 1 here; it moves every charge-per-shot gap by exactly that amount
+    and is reported rather than hidden, because nothing in the source pins it harder.
+    """
+    rng = random.Random(seed)
+    charges, time_to_recharge, fire_delay = max_charges, 0, 0
+    state, wait, next_scan, shots = "ChargeAttack", 0, 0, []
+
+    for t in range(ticks):
+        can_attack = fire_delay == 0          # HasAnyValidWeapons(reloadingIsInvalid: true)
+
+        while wait == 0:
+            if state == "idle":
+                # AutoTarget.INotifyIdle.TickIdle -> ScanAndAttack -> ScanForTarget.
+                if next_scan > 0:
+                    break
+                # Re-armed BEFORE ChooseTarget, so a fruitless scan still costs its interval.
+                next_scan = rng.randrange(scan_min, scan_max)
+                state, wait = "ChargeAttack", queue_latency
+                break
+            if state == "ChargeFire":
+                if not can_attack or charges == 0:
+                    state = "ChargeAttack"                 # returns true, unwinds same tick
+                    continue
+                fire_delay = weapon_reload
+                charges -= 1
+                time_to_recharge = trait_reload
+                shots.append(t)
+                wait = charge_delay
+                break
+            # ChargeAttack
+            if not can_attack:
+                state = "idle"                             # the whole activity ENDS
+                break
+            if charges == 0:
+                break                                      # returns false: holds, no idle
+            wait, state = initial_charge, "ChargeFire"
+            break
+
+        if wait > 0:
+            wait -= 1
+        if fire_delay > 0:
+            fire_delay -= 1
+        if next_scan > 0:
+            next_scan -= 1                                 # AutoTarget.ITick.Tick
+        time_to_recharge -= 1
+        if time_to_recharge <= 0:
+            charges = max_charges
+
+    return shots
+
+
+def periods_autotarget(spec, seeds: int = 200, **kw) -> list[int]:
+    """Volley periods across many RNG seeds - the Rail Tower has a distribution, not a value."""
+    out = []
+    for seed in range(seeds):
+        shots = simulate_autotarget(*spec, seed=seed, **kw)
+        if len(shots) < 2 * spec[0]:
+            continue
+        gaps = [b - a for a, b in zip(shots, shots[1:])]
+        cut = max(gaps)
+        firsts = [shots[0]] + [b for a, b in zip(shots, shots[1:]) if b - a == cut]
+        out.extend(b - a for a, b in zip(firsts, firsts[1:]))
+    return out
+
+
 def analyse(name, spec, reacquire: int = 0):
     """(period, closed form, inter-shot gaps, shots per volley) for one actor."""
     shots = simulate(*spec, reacquire=reacquire)
@@ -173,7 +285,30 @@ def main() -> int:
                     help="exit 1 if simulation, closed form and ruling disagree")
     ap.add_argument("--reacquire", type=int, default=0,
                     help="ticks to reacquire after the attack activity ends (default 0)")
+    ap.add_argument("--autotarget", action="store_true",
+                    help="model AutoTarget's U{3..7} scan lattice instead of free reacquisition")
+    ap.add_argument("--seeds", type=int, default=200,
+                    help="RNG seeds for --autotarget (default 200)")
     args = ap.parse_args()
+
+    if args.autotarget:
+        print(f"AutoTarget scan interval: Random.Next({SCAN_MIN}, {SCAN_MAX}) -> "
+              f"U{{{SCAN_MIN}..{SCAN_MAX - 1}}}, mean "
+              f"{statistics.mean(range(SCAN_MIN, SCAN_MAX)):.1f} ticks")
+        print(f"{'actor':<26} {'mode':<9} {'immediate':>9} {'min':>5} {'mean':>7} "
+              f"{'max':>5}   ruling")
+        print("-" * 92)
+        for name, spec in ACTORS.items():
+            ps = periods_autotarget(spec, seeds=args.seeds)
+            mode = charge_mode(spec[3], spec[4])
+            ruled = RULINGS[name]
+            note = "unchanged - never goes idle" if mode == "once" else "a DISTRIBUTION"
+            print(f"{name:<26} {mode:<9} {formula(*spec):>9} {min(ps):>5} "
+                  f"{statistics.mean(ps):>7.1f} {max(ps):>5}   {ruled}  {note}")
+        print("-" * 92)
+        print("The priced 210 is the FLOOR of the Rail Tower's range, not its runtime cadence.")
+        print("The floor is what is priced; the AutoTarget spread above it is not. See DESIGN.md.")
+        return 0
 
     bad = 0
     print(f"{'actor':<26} {'mode':<9} {'gap':>5} {'SIMULATED':>10} {'formula':>8}   claims")
@@ -189,7 +324,7 @@ def main() -> int:
         print(f"{name:<26} {mode:<9} {str(gap):>5} {str(period):>10} {str(closed or '-'):>8}"
               f"{'' if agree else '  DISAGREE'}   {claims}")
     print("-" * 104)
-    print("WITHHELD: the charge term is NOT applied to any price or reference. Evidence only.")
+    print("APPLIED: formula.charge_attack_cycle now counts the wind-up. These are its inputs.")
 
     if args.check:
         for name, spec in ACTORS.items():

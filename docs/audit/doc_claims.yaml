@@ -781,27 +781,29 @@ claims:
       print(seen)
 
   - id: railtower_immediate_reacquisition_period
-    value: 220
+    value: 210
     tolerance: 0
     what: >
-      The asianalliance_railtower's ruled attack-period model in ticks when reacquisition is
-      assumed immediate. Maintainer ruling 2026-09-14: "for the asian alliance railgun tower it needs
-      to charge for every shot unlike the tesla coil! So at 5 shots the initial charge delay is
-      used 5 times!" ChargeFire.Tick returns true when AttackBase.CanAttack is
-      false, and CanAttack calls HasAnyValidWeapons(reloadingIsInvalid: true), so a reloading
-      armament ends the activity rather than stalling it; the actor re-enters through
-      ChargeAttack and pays InitialChargeDelay again. Hence the mode test, which needs no trait
-      name: weapon reload <= ChargeDelay is charge-once (gap = ChargeDelay), weapon reload >
-      ChargeDelay is charge-per-shot (gap = weapon reload + InitialChargeDelay), and
-      cycle = (MaxCharges-1) x gap + trait ReloadDelay + InitialChargeDelay. The same model
-      reproduces the two Tesla Coils' ruled 131 and 95 exactly. Two earlier figures of mine,
-      172 (ChargeFire spins) and 180 (spins on a quantised schedule), are WITHDRAWN, and #385's
-      160 never paid the wind-up at all. ⚠ One free assumption remains - reacquisition after the
-      activity ends is modelled as immediate, which is what reproduces 220. The real actor's
-      randomized 3-7 tick AutoTarget scan is outside this simulator, so this is not a verified
-      fixed runtime period. The ruled model is NOT applied: the charge term is still withheld
-      and tesla_coil_attack_period still pins 106.
-    docs: [docs/DESIGN.md, docs/design/ARMAMENT_PAIRING.md]
+      The asianalliance_railtower's attack period in ticks with reacquisition treated as
+      immediate - the FLOOR of its range, and the value the pipeline prices. Maintainer ruling
+      2026-09-14: "for the asian alliance railgun tower it needs to charge for every shot
+      unlike the tesla coil! So at 5 shots the initial charge delay is used 5 times!" -
+      CONFIRMED by the engine. ChargeFire.Tick returns true when AttackBase.CanAttack is false,
+      and CanAttack calls HasAnyValidWeapons(reloadingIsInvalid: true), so a reloading armament
+      ENDS the activity rather than stalling it; the actor re-enters through ChargeAttack and
+      pays InitialChargeDelay again. Weapon reload 10 > ChargeDelay 3, so the tower is
+      charge-per-shot: 4 x (10 + 10) + 120 + 10 = 210. ⚠ It was 220 while the wind-up was 12;
+      the maintainer set InitialChargeDelay to 10 on 2026-09-14 for consistency, having first
+      considered ChargeDelay 10 and then rejected it because that would have silently converted
+      the tower to charge-ONCE (cycle 170) and removed the per-shot charging that is the
+      building's identity. ⛔ This is a FLOOR, not the runtime cadence: a charge-per-shot actor
+      goes idle between shots and re-enters on AutoTarget's scan, which is
+      Random.Next(MinimumScanTimeInterval 3, MaximumScanTimeInterval 8) = U{3..7}, neither
+      overridden by any Cameo yaml. Measured over 300 seeds the tower runs 210 floor / 218 mean
+      / 232 ceiling, while both Tesla Coils are invariant because a charge-once actor never goes
+      idle. The floor is priced deliberately; the spread above it is recorded, not applied.
+      Two withdrawn figures of mine, 172 and 180, assumed ChargeFire spins rather than exits.
+      ⚠ Counting the charge cut this tower's measured rate from 968.75 to 738.1, -24%.
     measure: |
       import sys
       sys.path.insert(0, 'tools/balance')
@@ -812,29 +814,23 @@ claims:
       print(period)
 
   - id: tesla_coil_attack_period
-    value: 106
+    value: 131
     tolerance: 0
     what: >
-      The RA1 Tesla Coil's IMPLEMENTED attack period in ticks: 100 (AttackTesla ReloadDelay) plus
-      3 x (3-1) weapon-reload burst gaps. The RULED period is 131 - DESIGN.md's charge law,
-      maintainer 2026-09-14, adds the 25-tick InitialChargeDelay - and the 25-tick difference is
-      deliberately NOT applied yet. Astra's engine trace showed a naive "cycle + ticks" is wrong
-      for multi-shot ChargeLevel (the burning Obelisk recharges per projectile), for interleaved
-      AttackTesla. That case is source-supported as charge-per-shot, but the fixed runtime period
-      is not resolved:
-      ChargeFire exits rather than spins when the armament is reloading (AttackBase.CanAttack
-      calls HasAnyValidWeapons with reloadingIsInvalid: true), so the Rail Tower re-enters
-      through ChargeAttack and pays InitialChargeDelay on every shot. Immediate reacquisition
-      yields the ruled 220; randomized AutoTarget timing may lengthen it. Two traces
-      published earlier, 172 and 180, are WITHDRAWN; they shared the false premise that
-      ChargeFire keeps ticking through the reload. See railtower_immediate_reacquisition_period. None of it is
-      implemented: this claim still pins 106. ⭐ The third blocker, random ranges, is CLOSED: ChargeLevel
-      25, 50 used to keep only its lower bound and now contributes the ruled MEAN of min and max
-      (see ranged_charge_actors). Two extractor fields remain - ChargeDelay and ShotsPerCharge -
-      plus recharge-overlap modelling. This claim
-      pins the implemented number ON PURPOSE so the 106-vs-131 gap stays auditable instead of
-      invisible; when the extractor lands it becomes 131 and DESIGN's note is struck.
-    docs: [docs/DESIGN.md, docs/design/ARMAMENT_PAIRING.md]
+      The RA1 Tesla Coil's attack period in ticks, as priced: 100 (AttackTesla ReloadDelay)
+      plus 3 x (3-1) inter-zap gaps plus the 25-tick InitialChargeDelay. ⭐ This claim pinned
+      the IMPLEMENTED 106 for as long as the charge term was withheld, and it moved to the
+      ruled 131 when formula.charge_attack_cycle began counting the wind-up (maintainer,
+      2026-09-14: "charged weapons come at a discount but the attack cycle duration is reload
+      delay plus charge delay"). The mode is decided by ChargeDelay against the WEAPON's
+      reload, now recorded by extract_stats: reload <= ChargeDelay is charge-once
+      (gap = ChargeDelay), reload > ChargeDelay is charge-per-shot
+      (gap = reload + wind-up), because ChargeFire.Tick returns true when AttackBase.CanAttack
+      is false and CanAttack calls HasAnyValidWeapons(reloadingIsInvalid: true). Two traces of
+      mine, 172 and 180, were WITHDRAWN for assuming ChargeFire spins instead of exiting;
+      Codex and Astra caught it. ⚠ Counting the charge cut this coil's measured rate from
+      1358.5 to 1099.2 per tick, -19%: it had been read as firing a fifth faster than it does.
+      See railtower_immediate_reacquisition_period for the charge-per-shot half.
     measure: |
       import pathlib, sys
       root = pathlib.Path('.').resolve()
