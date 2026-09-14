@@ -12,6 +12,7 @@ sys.path[:0]=[str(ROOT/'tools/audit'),str(ROOT/'tools/balance')]
 from miniyaml import Ruleset
 from dump_resolved import node_to_obj
 import extract_stats
+from reviewed_weapon_history import OwnedCheckpointView, restore_owned_checkpoint_actor
 
 
 def digest(obj):return hashlib.sha256(json.dumps(obj,sort_keys=True,separators=(',',':')).encode()).hexdigest()
@@ -26,12 +27,13 @@ class AdditionalOwnedNameTests(unittest.TestCase):
         cls.mapping={o:n for r in cls.before['routes'].values() for o,n in r.items()}
 
     def test_eleven_full_ordered_payloads_and_aa_suffixes_preserved(self):
+        history = OwnedCheckpointView(self, self.rules, 'additional')
         self.assertEqual(len(self.mapping),11)
         self.assertEqual(len(set(self.mapping.values())),11)
         for old,new in self.mapping.items():
             with self.subTest(weapon=new):
                 self.assertNotIn(old,self.rules.weapons)
-                node=self.rules.resolve_weapon(new)
+                node=history.resolve_weapon(new)
                 self.assertEqual(digest(node_to_obj(node)),self.before['weapon_hashes'][old])
                 self.assertEqual(digest([ordered(c) for c in node.children]),self.before['ordered_hashes'][old])
                 if old.endswith('_AA') or old=='Nike':self.assertTrue(new.endswith('_AA'))
@@ -46,8 +48,7 @@ class AdditionalOwnedNameTests(unittest.TestCase):
         count=0
         for actor,route in self.before['routes'].items():
             reverse={n:o for o,n in route.items()}
-            obj=node_to_obj(self.rules.resolve(actor))
-            self._reverse_later_sheridan_names(actor, obj)
+            obj=restore_owned_checkpoint_actor(self,self.rules,'additional',actor)
             for key,trait in obj.items():
                 if key.split('@')[0]=='Armament' and trait.get('Weapon') in reverse:
                     trait['Weapon']=reverse[trait['Weapon']]
