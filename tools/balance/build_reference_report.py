@@ -1026,10 +1026,11 @@ def main() -> int:
     summary = (f'{counts["orig"]} originals · {counts["exp"]} expanded · '
                f'{counts["refs"]} references · {counts["none"]} priced by formula · '
                f'{counts["thin"]} originals under three sources')
+    title = "Cameo Reference Map"
     page = (
-        "<title>TD &amp; RA1 Reference Map</title>\n"
+        f"<title>{title}</title>\n"
         f"<style>{STYLE}</style>\n"
-        "<h1>TD &amp; RA1 Reference Map</h1>\n"
+        f"<h1>{title}</h1>\n"
         '<p class="lede">Every Cameo actor with the reference unit chosen from each source, by '
         'full id and name, split into units that exist in the original games and units that do '
         'not. The bar on each chip is match confidence. <b>HP →</b>, <b>speed →</b> and '

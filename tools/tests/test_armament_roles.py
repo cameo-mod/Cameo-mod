@@ -420,11 +420,18 @@ class UnprovenRoleTests(unittest.TestCase):
         pairs, _cam_only, _ = ar.pair_by_role(cam, peer)
         self.assertEqual([], pairs)
 
-    def test_the_apocalypse_now_abstains_rather_than_guessing(self):
+    def test_the_apocalypse_only_uses_the_explicitly_proven_missile(self):
         doc = json.loads((ROOT / "docs/balance/derived/armament_pairing.json")
                          .read_text(encoding="utf-8"))
         entry = doc["actors"]["ra2_soviets_apocalypsetank"]
-        self.assertEqual(0, sum(len(s.get("pairs", ())) for s in entry["sources"].values()))
+        pairs = [(source, pair) for source, data in entry["sources"].items()
+                 for pair in data.get("pairs", ())]
+        self.assertEqual(1, len(pairs))
+        self.assertEqual("Mental Omega", pairs[0][0])
+        self.assertEqual("RA2MammothTusk_AA", pairs[0][1]["cameo"]["weapon"])
+        self.assertEqual("air", pairs[0][1]["role"])
+        self.assertIn({"weapon": "RA2120xmm", "role": "ground"},
+                      doc["uncovered_armaments"]["ra2_soviets_apocalypsetank"])
 
 
 class EveryArmamentPairsTests(unittest.TestCase):
@@ -550,7 +557,7 @@ class EvidenceFingerprintTests(unittest.TestCase):
     def test_structured_zero_match_rows_are_not_called_structureless(self):
         doc = json.loads((ROOT / "docs/balance/derived/armament_pairing.json")
                          .read_text(encoding="utf-8"))
-        for actor in ("asianalliance_asiancommando", "asianalliance_asiantankkiller"):
+        for actor in ("asianalliance_asiancommando", "asianalliance_quasar"):
             self.assertNotIn(actor, doc["no_structured_reference"])
             self.assertIn(actor, doc["uncovered_armaments"])
 

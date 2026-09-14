@@ -23,17 +23,17 @@ missile, exactly as described, and the reason DTA can vote on a Cameo unit's mis
 
 ⭐ `Trainable=` IS THE GATE, AND THE ENHANCE OVERLAY FLIPS IT. Measured 2026-09-13:
 
-    DTA Classic    171 sections with Elite=,   0 trainable  -> NO elite weapon is reachable
-    DTA Enhanced   171 sections with Elite=, 139 trainable
+    DTA Classic    159 corpus-referenced Elite= sections,   0 reachable
+    DTA Enhanced   159 corpus-referenced Elite= sections, 131 reachable
 
 `[MTNK]` is `Trainable=no` in `Rules.ini` and `Trainable=yes` in `Enhance.ini`. So the elite
 missile exists in both rulesets and can only ever be FIRED in Enhanced. An extractor that ignored
-`Trainable` would hand DTA Classic 139 weapons no unit in that ruleset can reach.
+`Trainable` would hand DTA Classic 159 weapons no unit in that ruleset can reach.
 
-⚠ AND MOST ELITE WEAPONS ARE NOT A SECOND WEAPON AT ALL. 130 of the 139 are the `E`-suffix upgrade
+⚠ AND MOST ELITE WEAPONS ARE NOT A SECOND WEAPON AT ALL. 124 of the 131 reachable records are the `E`-suffix upgrade
 of a weapon the unit already fires (`RaiderCannonE`, `MinigunE`, `HellfireE`, `120mmE`); `Elite=`
 REPLACES the primary, so for those it is the same gun, improved. Only where the primary is a
-zero-damage dummy does the elite weapon occupy a slot that was otherwise empty — **9 units** —
+zero-damage dummy does the elite weapon occupy a slot that was otherwise empty — **7 units** —
 and only those are a genuinely additional armament. Both facts are recorded per row
 (`replaces_dummy_primary`), because the consumer must be able to tell them apart and this file is
 the only place the distinction is visible.
@@ -46,13 +46,14 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import pathlib
 import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 from extract_ini_units import (read_ini, resolve_inherits, merge_overlay,  # noqa: E402
-                               bool_value, num)
+                               bool_value, num, weapon_of)
 # ⛔ THE ROLE IS STAMPED HERE, not looked up later. `extract_ini_projectile_roles` only resolves
 # the projectiles the corpus CITES, and it cites `Primary=`/`Secondary=` only — an elite weapon
 # flying a projectile no baseline weapon uses would have no verdict and would silently abstain.
@@ -60,7 +61,7 @@ from extract_ini_units import (read_ini, resolve_inherits, merge_overlay,  # noq
 # between the two extractors.
 from extract_ini_projectile_roles import (_verified_sources,  # noqa: E402
                                           role_of, DEFAULT_AA, DEFAULT_AG,
-                                          DEFAULT_BASIS)
+                                          DEFAULT_BASIS, target_bool)
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 OUT = ROOT / "docs" / "reference" / "ini_elite_weapon_evidence.json"
@@ -72,11 +73,6 @@ PINNED = {
     "DTA Classic": {"rules": "Rules.ini", "overlay": None, "engine": "ts"},
     "DTA Enhanced": {"rules": "Rules.ini", "overlay": "Enhance.ini", "engine": "ts"},
 }
-
-# The weapon fields the consumer needs, in the corpus's own spelling.
-WEAPON_FIELDS = (("damage", "Damage"), ("range", "Range"), ("reload", "ROF"),
-                 ("burst", "Burst"), ("projectile", "Projectile"), ("warhead", "Warhead"))
-
 
 def sha256(path: pathlib.Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -111,29 +107,62 @@ def projectile_role(ini, projectile):
     if section is None:
         return None, []
     declared_aa, declared_ag = section.get("AA"), section.get("AG")
-    aa = DEFAULT_AA if declared_aa is None else bool(bool_value(declared_aa))
-    ag = DEFAULT_AG if declared_ag is None else bool(bool_value(declared_ag))
+    aa, aa_state = target_bool(declared_aa)
+    ag, ag_state = target_bool(declared_ag)
+    if "invalid" in (aa_state, ag_state):
+        return None, []
+    aa = DEFAULT_AA if aa_state == "absent" else aa
+    ag = DEFAULT_AG if ag_state == "absent" else ag
     return role_of(aa, ag), sorted(k for k, v in (("AA", declared_aa), ("AG", declared_ag))
                                    if v is not None)
 
 
-def weapon_record(ini, name):
+def weapon_record(ini, name, engine="ts"):
     section = ini.get(name or "")
     if section is None:
         return None
-    rec = {"weapon": name}
-    for key, field in WEAPON_FIELDS:
-        value = section.get(field)
-        if value is None:
-            continue
-        rec[key] = value if key in ("projectile", "warhead") else num(value)
+    extracted = weapon_of(ini, name, engine)
+    rec = {
+        "weapon": name,
+        "damage": extracted.get("w_damage"),
+        "range": extracted.get("w_range"),
+        "reload": extracted.get("w_reload"),
+        "burst": extracted.get("w_burst"),
+        "projectile": extracted.get("w_projectile"),
+        "warhead": extracted.get("w_warhead"),
+        "weapon_evidence": extracted.get("w_evidence"),
+        "weapon_evidence_reason": extracted.get("w_evidence_reason"),
+        "w_dps_usable": extracted.get("w_dps_usable"),
+    }
     role, declared = projectile_role(ini, rec.get("projectile"))
     rec["role"] = role
     rec["role_declared"] = declared
+    raw_burst = rec.get("burst")
+    burst = 1 if raw_burst is None else raw_burst
+    numeric = (rec.get("damage"), rec.get("reload"), rec.get("range"))
+    numbers_ok = all(isinstance(value, (int, float)) and not isinstance(value, bool)
+                     and math.isfinite(value) and value > 0 for value in numeric)
+    burst_ok = (isinstance(burst, (int, float)) and not isinstance(burst, bool)
+                and math.isfinite(burst) and float(burst).is_integer() and int(burst) == 1)
+    eligible = (rec.get("weapon_evidence") == "nominal_direct"
+                and rec.get("w_dps_usable") is True and role is not None
+                and numbers_ok and burst_ok)
+    rec["status"] = "resolved" if eligible else "abstained"
+    if not eligible:
+        if rec.get("weapon_evidence_reason"):
+            rec["reason"] = rec["weapon_evidence_reason"]
+        elif role is None:
+            rec["reason"] = "projectile_role_unresolved"
+        elif not burst_ok:
+            rec["reason"] = "invalid_or_unfolded_burst"
+        elif not numbers_ok:
+            rec["reason"] = "invalid_direct_weapon_numbers"
+        else:
+            rec["reason"] = "weapon_evidence_incomplete"
     return rec
 
 
-def elite_rows(ini, wanted):
+def elite_rows(ini, wanted, engine="ts"):
     rows, unreachable, missing = {}, [], []
     for unit in sorted(wanted):
         section = ini.get(unit)
@@ -147,7 +176,7 @@ def elite_rows(ini, wanted):
         # fact about the ruleset and hiding it would make the Classic/Enhanced difference
         # invisible — which is the difference that decides whether DTA votes at all.
         trainable = bool_value(section.get("Trainable"))
-        record = weapon_record(ini, elite)
+        record = weapon_record(ini, elite, engine)
         if record is None:
             missing.append(f"{unit}:{elite}")
             continue
@@ -194,7 +223,7 @@ def build(ini_dir: pathlib.Path) -> dict:
             ini = merge_overlay(ini, resolve_inherits(read_ini(overlay_path)))
         elif want_overlay:
             raise SystemExit(f"{label}: corpus pins an overlay this spec does not apply")
-        rows, unreachable, missing = elite_rows(ini, corpus_ids(label))
+        rows, unreachable, missing = elite_rows(ini, corpus_ids(label), spec["engine"])
         sources.append({
             "source": label,
             "engine": spec["engine"],
@@ -202,6 +231,8 @@ def build(ini_dir: pathlib.Path) -> dict:
             "overlay_sha256": overlay_digest,
             "overlay_precedence": "overlay_over_rules" if overlay_digest else "none",
             "reachable": len(rows),
+            "resolved_for_pairing": sum(record.get("status") == "resolved"
+                                        for record in rows.values()),
             "declared_but_untrainable": len(unreachable),
             "undeclared_weapon": missing,
             "additional_armament": sum(1 for r in rows.values()
