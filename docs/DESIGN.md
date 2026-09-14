@@ -603,18 +603,38 @@ source - see `mammoth_cannon_missile_source_ratio`, which now says so on its fac
 By RATE rather than per cycle it is smaller still - CA 141.2 vs 186.7 (1.32x), Tiberian Dawn
 **166.7 vs 166.7 (exactly 1.00x)**, geometric mean **1.15x**.
 
-⭐ **So the honest answer is in two parts, and the first part is the bigger one.**
+⭐ **THE ANSWER, AFTER REGENERATING THE MAP: THE SOURCES WERE CANCELLING EACH OTHER OUT.**
 
-1. **The voters barely differentiate these weapons to begin with.** 1.15x-1.21x, not 1.7x. Tiberian
-   Dawn gives the Mammoth's cannon and missiles the *same rate*. There is far less signal here than
-   the wider corpus would suggest.
-2. **The projection then compresses what little is left.** A 1.21x spread in the peers becomes a
-   1.013x spread in the targets. Each vote is normalised against its own source's distribution
-   (`coordinates` -> `project`) and the candidates are blended by geometric mean, so two weapons
-   sitting at similar RANKS within the same source resolve to the same Cameo magnitude even when
-   their raw numbers differ.
+An earlier draft of this section said the projection COMPRESSES the difference. That was also
+wrong, and the regeneration disproves it. With DTA Enhanced's unusable rows correctly gated out,
+the Mammoth's two targets move to:
 
-⭐⭐ **AND THE BATTLE TANK PROVES POINT 1 OUTRIGHT.** Its missile has exactly one voter:
+| | old map (stale) | regenerated | peers |
+|---|--:|--:|--:|
+| `mammothmissiles` | 41,528 (3 of 3) | **51,580** (2 of 3) | 11,832 |
+| `120mmdual` | 40,997 (3 of 3) | **42,275** (2 of 3) | 9,798 |
+| **ratio** | **1.013x** | **1.220x** | **1.208x** |
+
+**1.208x in the peers becomes 1.220x in the targets.** The projection carries the difference
+through almost exactly; it does not compress it. What produced the old 1.013x was a
+**CANCELLATION BETWEEN SOURCES POINTING IN OPPOSITE DIRECTIONS**:
+
+* Combined Arms and Tiberian Dawn both make the **missile** stronger (1.17x, 1.25x);
+* DTA Enhanced makes the **cannon** stronger - `HTNK` carries cannon 30 against missile 20, a
+  1.5x inversion.
+
+Blending three sources, two saying "missile" and one saying "cannon" nearly as loudly, lands on
+"about equal". The near-equality was never evidence that the two weapons are alike; it was two
+opposite claims averaging to nothing.
+
+⛔ **AND DTA SHOULD NEVER HAVE BEEN IN THAT AVERAGE.** Its `HTNK` declares `Burst: 2` on BOTH
+armaments with no burst delays, so neither cycle can be folded: both rows are
+`incomplete / burst_unfolded` and carry no `dps_usable`. They are part of the blocked
+unfolded-rate population (170 rows tree-wide, 84 of them DTA Enhanced). The current gate excludes
+them correctly - and the moment it did, the real 1.22x separation appeared.
+
+⭐⭐ **THE BATTLE TANK IS A DIFFERENT STORY, AND IT DID NOT MOVE.** 18,870 vs 17,835 before and
+after. Its missile has exactly one voter:
 
 | source | cannon | missile |
 |---|---|---|
@@ -623,24 +643,30 @@ By RATE rather than per cycle it is smaller still - CA 141.2 vs 186.7 (1.32x), T
 | OpenRA Tiberian Dawn | `120mm` 4,000 | *(unpaired)* |
 
 **In DTA Enhanced - the missile's ONLY voter - the cannon and the missile carry the identical
-number, 30.** The missile's reference IS the cannon's reference. The 5.8% that survives comes
-entirely from the cannon additionally blending Combined Arms and Tiberian Dawn, which pull it a
-little differently. That also explains the maintainer's own observation that the Battle Tank
-spreads more than the Mammoth: **asymmetric voter counts (1 vs 3) move the two targets apart; equal
-counts (2 vs 2) hold them together.**
+number, 30.** The missile's reference IS the cannon's reference, so the two targets cannot
+separate on evidence; the 5.8% that survives is entirely the cannon's extra Combined Arms and
+Tiberian Dawn blend. Asymmetric voter counts (1 vs 3) are what move these two apart at all.
 
-⚠ **THE MAP THAT PROMPTED THIS IS STALE.** It reports "3 of 3 sources" for both Mammoth weapons
-including `DTA Enhanced · MammothTusk`. On master, **DTA Enhanced pairs 0 of the Mammoth's 2
-armaments** - both sit in `cameo_unpaired` - so it is 2 of 3, and the 41,528 / 40,997 figures
-predate the current gating. Re-render before reasoning from those numbers again.
+⚠ **TWO DIFFERENT CAUSES, AND THEY LOOK IDENTICAL ON THE PAGE.** A near-1.0x spread between two
+armaments can mean *the sources agree they are alike*, *the sources disagree and cancelled*, or
+*one armament's only voter is the other armament's weapon*. Only the Mammoth's was the second and
+only the Battle Tank's is the third. **Read the voters, never the spread.**
 
-⭐ **WHAT THIS DOES AND DOES NOT JUSTIFY.** It does NOT justify forcing a cannon and a missile
-apart: for these two actors the evidence genuinely says they are close. It DOES justify the
-maintainer's corollary - *"so it doesn't matter if it's exactly the same or not"* - that where the
-projected difference is a few percent, averaging the two and applying one value costs nothing. And
-it identifies the one thing worth fixing: **the compression is real** (1.21x in, 1.013x out), so
-where a peer difference IS large the map will still understate it. That is an argument for a
-per-armament ruler, and it is a MODEL change that needs the maintainer.
+
+⚠ **THE MAP THAT PROMPTED THIS WAS STALE, AND HAS BEEN REGENERATED.** It reported "3 of 3
+sources" for both Mammoth weapons including `DTA Enhanced · MammothTusk`; DTA Enhanced now pairs
+0 of the Mammoth's 2 armaments. Regenerated 2026-09-14 across all 31 faction tokens:
+**161 originals · 709 expanded · 925 references · 514 priced by formula · 8 originals under three
+sources.**
+
+⭐ **WHAT THIS DOES AND DOES NOT JUSTIFY.** The Mammoth's guns are NOT alike after all - the
+evidence separates them by 1.22x once the unusable votes are gone, so the maintainer's instinct
+that a cannon and a missile should differ noticeably is supported here by our own map, not only by
+the wider corpus. The Battle Tank is the opposite case: its missile has no independent evidence at
+all, so applying one averaged value to both costs nothing and is exactly the maintainer's own
+corollary. ⚠ The `td_gdi_apc` pair (6,239 vs 6,138, a 1.6% spread) is a THIRD case and is settled
+by 3a.1 rather than by evidence: it is one weapon split for reach, so the two must be made
+identical regardless of what their separate votes say.
 
 ⚠ For the record, the wider-corpus number stands as a fact about that corpus: across all 930
 dual-weapon reference actors only **29.2%** sit inside 1.05x and **45.4%** exceed 3x, and among its
