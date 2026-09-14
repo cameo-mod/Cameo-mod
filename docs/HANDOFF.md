@@ -102,7 +102,7 @@ pinned precisely so the map cannot feed on itself — but it must be known when 
 `ra1_allies_sheridanassaulttank` is in this list at 4.00×: **the `test_missile_role_policy` 0.25×
 and the #345 quartering are the same event** (Codex: the documented local-firepower bake, PR #377).
 
-### THE 16 EXTREME ROWS — TWO MEASURED CAUSES, ONE STILL OPEN
+### THE 16 EXTREME ROWS — ONE MEASURED CAUSE, ONE CONSUMER GAP, FIVE STILL OPEN
 
 Maintainer asked for the root cause of "all the very extreme cases". Measured against the v27 map;
 `EXTREME` fires in BOTH directions, and the direction is the clue.
@@ -118,27 +118,36 @@ differs between the frozen snapshot (pinned 2026-09-10) and live yaml, because #
     ra1_allies_alliedlighttank   256%   frozen 12,005 -> live  6,005   2.00x
     ra1_allies_alliedheavyaatank 230%   frozen  8,004 -> live  2,004   3.99x
 
-⛔ RULED: the baked values STAND. No restore, no `apply_balance`. These rows will keep reading
-EXTREME until the snapshot is re-pinned, which is a separate decision with its own hazards - the
-pin is what stops the map feeding on its own output.
+⛔ RULED: the baked values STAND. No restore, no `apply_balance`. The frozen/live split is a
+confirmed input discontinuity in these seven rows, but no re-pin counterfactual has established
+that removing it would clear every `EXTREME` flag. Re-pinning is a separate decision with its own
+hazards - the pin is what stops the map feeding on its own output.
 
-**CAUSE 2 — a charge-up weapon's `ReloadDelay` excludes the charge (proven on 1, the only one that
-can be proven from the tree).** `ra1_soviets_teslacoil` is the clearest row on the whole map:
+**CONSUMER GAP — the per-armament reference path ignores an actor-level attack cycle (proven on
+1).** `ra1_soviets_teslacoil` exposes the mismatch clearly:
 
-    ledger reloaddelay            3 ticks
-    actor InitialChargeDelay     25 ticks   (defenses.yaml:229)
-    model cycle                   3         real cycle ~28  ->  rate ~9.3x too fast
+    weapon ReloadDelay             3 ticks   (the gap between zaps)
+    actor AttackTesla ReloadDelay 100 ticks
+    actor AttackTesla MaxCharges    3
+    actor InitialChargeDelay       25 ticks   (defenses.yaml:229)
+    extracted charge_up             ticks=25, cycle_reload=100, burst=3
 
-so the reference correctly says it should be at **29%** of the rate the model computes. This is the
-rule `docs/DESIGN.md` already carries - *effective reload = written + charge* - simply not applied
-by `extract_stats`, which copies `ReloadDelay` and never looks for `AttackCharges`. Only THREE
-actors tree-wide declare `InitialChargeDelay` (`ra1_soviets_teslacoil` 25, `ra2_soviets_teslacoil`
-20, `asianalliance` building 12), so the blast radius is small - but the tesla coil is a signature
-unit and its number is wrong by an order of magnitude.
+`extract_stats` already records this `AttackTesla` data. `formula.charge_attack_cycle` models the
+sustained attack as 3 zaps over 106 ticks (`100 + 3 * (3 - 1)`), or about 35.3 ticks per zap; the
+25-tick initial wind-up is a separate price input, not something that can be added to each 3-tick
+weapon reload. The remaining defect is downstream: the per-armament reference consumer still uses
+the weapon's 3-tick reload without applying the recorded actor cycle. That overstates the reported
+rate, but this evidence does **not** derive the map's 29% comparison or an exact correction for it.
+
+Only three actors explicitly override `InitialChargeDelay` (`ra1_soviets_teslacoil` 25,
+`ra2_soviets_teslacoil` 20, one Asian Alliance building 12). Other charge traits can use engine
+defaults, so an explicit-field count does not bound the downstream fix. Measure from resolved
+`charge_up` records and decide how one actor cycle applies to its armaments before changing the
+reference consumer.
 
 ⚠ The other three sub-100% rows - `ra1_soviets_shocktrooper` 47%, `ra1_soviets_zapper` 41%,
-`ra1_soviets_commissar` 30% - are the same tesla/electric family but declare NO charge delay, so
-cause 2 is NOT established for them. Do not assume it.
+`ra1_soviets_commissar` 30% - are the same tesla/electric family, but shared damage type does not
+prove shared attack cadence. Inspect their resolved attack traits and defaults independently.
 
 **STILL UNEXPLAINED (5).** `japan_shrineminitank` 336%, `japan_igomediumtank` 238%,
 `td_nod_lighttank` 210%, `ra1_soviets_flametower` 209%, `ra1_soviets_submarine` 206%. No frozen/live
