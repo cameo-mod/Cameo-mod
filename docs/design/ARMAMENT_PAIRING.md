@@ -307,13 +307,17 @@ it and Astra's engine trace held it (PR #386), correctly. Three shapes break a n
 * **multi-shot `ChargeLevel`** — the burning Obelisk is Burst 10 / BurstDelays 1, and its
   `AttackCharges` notifier resets `ChargeLevel` on every projectile, so later shots must recharge.
   Its period is not `105 + 50`.
-* **interleaved `AttackTesla`** — the Rail Tower's initial charge is **12**; the **3** is the
-  post-shot `ChargeFire` wait. It resumes while the armament is still inside its 10-tick reload,
-  exits, and is then reacquired through the initial charge again. That restart/reacquisition
-  schedule is unresolved, so both #385's 160 and my 172 are provisional.
+* **interleaved `AttackTesla`** — ⭐ **resolved by a maintainer ruling, 2026-09-14**: the Rail
+  Tower *"needs to charge for every shot unlike the tesla coil ... at 5 shots the initial charge
+  delay is used 5 times"*. So its cycle is `160 + 5 x 12 = **220**` — #385's 160 never paid the
+  charge and my 172 paid it once; both were wrong. A charged weapon is one of two machines,
+  **charge-once** or **charge-per-shot**, differing by a factor of `MaxCharges`. Astra's trace
+  gives the mechanism (the Rail Tower's post-shot `ChargeFire` wait of 3 expires inside a 10-tick
+  weapon reload, so the trait exits and reacquires). What is still missing is the DETECTION:
+  `ChargeDelay` against the weapon reload, a field `extract_stats` does not record.
 * **random `ChargeLevel`** — `steelconsortium_dagger` declares `ChargeLevel: 25, 50` and
   `extract_stats` keeps only the lower bound. ⭐ **Maintainer ruled 2026-09-14: use the MEAN of
-  min and max**, so 37.5 here — and `wc2_humans_dwarvenrifleman`'s `0, 4` becomes **2**, not the
+  min and max**, added to the reload — so the Dagger contributes 37.5 — and `wc2_humans_dwarvenrifleman`'s `0, 4` becomes **2**, not the
   zero the ledger currently records. Four actors carry a ranged charge; the extractor change to
   average them is pending and is one of the three unblocks.
 

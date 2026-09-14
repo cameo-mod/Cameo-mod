@@ -595,6 +595,86 @@ YAML remains an explicit design decision.
     ⚠ **"DPS" is a NAME, not a unit — it is damage per TICK**, everywhere in this
     repository. Nothing here is per second.
 
+    ⭐⭐ **HOW MANY TIMES THE CHARGE IS PAID** (maintainer, 2026-09-14). This is the
+    fact that decides the whole arithmetic, and it is NOT derivable from the trait name:
+
+    > *"for the tesla coil the attack cycle is initial charge delay + reload delay but for
+    > the asian alliance railgun tower it needs to charge for every shot unlike the tesla
+    > coil! So at 5 shots the initial charge delay is used 5 times! For the tesla coil it
+    > is only used once!"*
+
+    | actor | base cycle | charge | paid | attack cycle |
+    |---|--:|--:|:--:|--:|
+    | `ra1_soviets_teslacoil` | 106 | 25 | **x1** | **131** |
+    | `ra2_soviets_teslacoil` | 75 | 20 | x1 | **95** |
+    | `asianalliance_railtower` | 160 | 12 | **x5** (`MaxCharges`) | **220** |
+
+    So a charged weapon is one of two machines, and they differ by a factor of `MaxCharges`:
+    **charge-once** (one wind-up, then the whole burst) or **charge-per-shot** (every shot
+    pays). Astra's engine trace found the mechanism that separates them — the Rail Tower's
+    post-shot `ChargeFire` wait (3) expires while its weapon is still in a 10-tick reload,
+    so the trait exits and must reacquire through `InitialChargeDelay` for the next shot.
+    The Tesla Coil's zaps are uninterrupted. The detectable condition is therefore
+    **`ChargeDelay` against the WEAPON's reload**, which is exactly the field
+    `extract_stats` does not yet record.
+
+    ⚠ The same question is open for multi-shot `ChargeLevel` — the burning Obelisk is
+    Burst 10 and its notifier resets on every projectile, which reads as charge-per-shot and
+    would make its period very large. **Do not assume it**; it needs the same evidence and a
+    ruling of its own.
+
+    ⭐ **RANDOM RANGES TAKE THE MEAN** (same ruling): `ChargeLevel: 25, 50` contributes
+    **37.5**, not the lower bound `extract_stats` keeps today. `0, 4` is **2**, not zero.
+    Four actors carry a ranged charge.
+
+    ⭐⭐⭐ **THE ENGINE TRACE, AND THE ONE FORMULA IT YIELDS** (`AttackTesla.cs`, read
+    2026-09-14 at the maintainer's request to *"verify why that is in game and then adjust
+    our formula so it will detect that behavior automatically"*).
+
+    What the code actually does:
+
+    * `ChargeAttack.Tick` queues `Wait(InitialChargeDelay)` then `ChargeFire` — **once per
+      volley**, not per shot.
+    * `ChargeFire.Tick` calls `DoAttack`, queues `Wait(ChargeDelay)` and loops. It returns
+      (ends) **only when `charges == 0`**.
+    * `charges` decrements in `INotifyAttack.Attacking` — i.e. only when a shot REALLY
+      fires. `DoAttack` → `Armament.CheckFire` → `CanFire`, which returns false while
+      `IsReloading`.
+    * So if `ChargeDelay` is shorter than the WEAPON's reload, `ChargeFire` simply spins:
+      it fires nothing, spends no charge, waits `ChargeDelay` and tries again. **It does
+      not exit and the initial charge is not re-paid.** The effective spacing between
+      shots is therefore `max(ChargeDelay, weapon reload)`.
+    * `timeToRecharge` is reset to the trait's `ReloadDelay` on **every** shot, and `ITick`
+      refills `charges` when it expires — so the trait reload runs from the LAST shot.
+
+    Which gives one expression, with no mode flag and nothing to detect by name:
+
+        attack cycle = (MaxCharges - 1) x max(ChargeDelay, weapon ReloadDelay)
+                     + trait ReloadDelay
+                     + InitialChargeDelay
+
+    | actor | spacing | (n-1) x spacing | trait reload | initial charge | cycle |
+    |---|--:|--:|--:|--:|--:|
+    | `ra1_soviets_teslacoil` | max(3,3)=3 | 6 | 100 | 25 | **131** |
+    | `ra2_soviets_teslacoil` | — (1 charge) | 0 | 75 | 20 | **95** |
+    | `asianalliance_railtower` | max(3,10)=**10** | 40 | 120 | 12 | **172** |
+
+    ⭐ **This reproduces the maintainer's Tesla Coil ruling exactly (131)** and needs no
+    per-actor knowledge: the `max()` term IS the automatic detection.
+
+    ⛔ **BUT IT DOES NOT REPRODUCE "CHARGE FIVE TIMES" FOR THE RAIL TOWER.** The ruling of
+    2026-09-14 read its behaviour as paying `InitialChargeDelay` once per shot, giving
+    `160 + 5 x 12 = 220`. The source pays it once per volley, giving **172**. The OBSERVATION
+    behind the ruling is real and this explains it: with `ChargeDelay` 3 against a weapon
+    reload of 10, the tower visibly stalls between shots, which looks exactly like
+    re-charging — but the stall is the WEAPON reloading, not the trait winding up again, and
+    the two differ by `5 x 12 - 4 x (10 - 3) = 32` ticks.
+
+    ⚠ **172 is what the engine says; 220 is what the maintainer ruled. The difference is
+    unresolved and the number stays WITHHELD until they reconcile.** Do not implement either
+    silently. If the engine trace is accepted, the formula above supersedes both #385's 160
+    (which never pays the charge) and the per-shot reading.
+
     ⛔ **THE LAW IS RULED; APPLYING IT IS BLOCKED ON EVIDENCE THE EXTRACTOR DOES NOT
     RECORD.** `reference_distribution`/`armament_roles` still report the cycle WITHOUT
     the charge term (Tesla Coil 106, Obelisk 96), and that gap is deliberate rather
@@ -604,7 +684,7 @@ YAML remains an explicit design decision.
     | case | why a naive `+ charge` is wrong |
     |---|---|
     | multi-shot `ChargeLevel` | the burning Obelisk is Burst 10 / BurstDelays 1 and its `AttackCharges` notifier resets `ChargeLevel` on **every projectile** — later shots must recharge, so the period is not `105 + 50` |
-    | interleaved `AttackTesla` | the Rail Tower's initial charge is **12**; the **3** is the post-shot `ChargeFire` wait, which resumes while the armament is still inside its 10-tick reload, exits, and is reacquired through the initial charge again. That RESTART/REACQUISITION schedule is unresolved, so both 160 and 172 are provisional |
+    | interleaved `AttackTesla` | ⭐ **RESOLVED by the ruling above**: the Rail Tower charges PER SHOT, so its cycle is `160 + 5 x 12 = 220`. 172 (charge paid once) was wrong and so was #385's 160 (charge never paid). What remains is DETECTING the mode: `ChargeDelay` vs the weapon reload, which the extractor does not record |
     | random `ChargeLevel` | `ChargeLevel: 25, 50` is a RANGE, and `extract_stats` keeps only its lower bound. ⭐ **RULED 2026-09-14: take the MEAN of min and max** — so 37.5 here, and `0, 4` is 2 rather than zero. Four actors carry a ranged charge; the extractor change is pending |
 
     The unblock is three extractor fields — `ChargeDelay`, `ShotsPerCharge`, and
