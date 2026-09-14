@@ -20177,6 +20177,46 @@
     "ground"
    ],
    "sources": {
+    "CnC Reloaded": {
+     "cameo_unpaired": [
+      "RA2vulcan"
+     ],
+     "kind": "ini",
+     "pairs": [],
+     "peer": "NALASR",
+     "peer_name": "Soviet Sentry Gun",
+     "peer_unpaired": []
+    },
+    "Mental Omega": {
+     "cameo_unpaired": [
+      "RA2vulcan"
+     ],
+     "kind": "ini",
+     "pairs": [],
+     "peer": "NALASR",
+     "peer_name": "Sentry Gun",
+     "peer_unpaired": []
+    },
+    "RA2 Reborn": {
+     "cameo_unpaired": [
+      "RA2vulcan"
+     ],
+     "kind": "ini",
+     "pairs": [],
+     "peer": "NALASR",
+     "peer_name": "Soviet Sentry Gun",
+     "peer_unpaired": []
+    },
+    "Red Resurrection": {
+     "cameo_unpaired": [
+      "RA2vulcan"
+     ],
+     "kind": "ini",
+     "pairs": [],
+     "peer": "NALASR",
+     "peer_name": "Soviet Sentry Gun",
+     "peer_unpaired": []
+    },
     "Romanov's Vengeance": {
      "peer": "nalasr",
      "status": "no structured corpus for this source \u2014 Doc 5 markdown only"
@@ -30303,6 +30343,47 @@
      "peer": "E1",
      "peer_name": "Light Infantry",
      "peer_unpaired": []
+    },
+    "Shattered Paradise": {
+     "peer": "ALTNODE1",
+     "status": "no structured corpus for this source \u2014 Doc 5 markdown only"
+    },
+    "Twisted Insurrection": {
+     "cameo_unpaired": [],
+     "kind": "ini",
+     "pairs": [
+      {
+       "cameo": {
+        "cycle": 12.0,
+        "damage_per_cycle": 2000.0,
+        "gate": null,
+        "range": 4062.0,
+        "range_unit": "wdist",
+        "range_wdist": 4062.0,
+        "rate": 166.66666666666666,
+        "role": "both",
+        "slot": "Armament@PRIMARY",
+        "weapon": "TSMinigun"
+       },
+       "exact": false,
+       "peer": {
+        "cycle": 6.0,
+        "damage_per_cycle": 6.0,
+        "gate": null,
+        "range": 5.0,
+        "range_unit": "cells",
+        "range_wdist": 5120.0,
+        "rate": 1.0,
+        "role": "ground",
+        "slot": "primary",
+        "weapon": "MinigunNod"
+       },
+       "role": "both"
+      }
+     ],
+     "peer": "E1NOD",
+     "peer_name": "Militant",
+     "peer_unpaired": []
     }
    }
   },
@@ -32787,7 +32868,7 @@
   "docs/balance/d2k_ixian.json": "7e5260778520abd962c0a760233807dc64493f2b7b31d8e3fc0eb2957a9d9b50",
   "docs/balance/d2k_ordos.json": "f5ef7571fc5d83c84cf56fc25b8f390eeaad2715ea0dbac4ea0336aebca71f13",
   "docs/balance/defense-armor-curves-20260911.json": "68ff597acab6dc80c6705c90c911c530c2589d27df85ab04906848d9cca82678",
-  "docs/balance/derived/reference_assignment.json": "550219c4a3e7c71d8ec36ccb09ddfba77dd4231189fe4353479e9a83b4fc74a7",
+  "docs/balance/derived/reference_assignment.json": "dc5910f1be4fd8c61c2b0fdd77610d598b36990ee25b95801c65a82c1589c2b3",
   "docs/balance/four_voice_selection_pilot_20260911.json": "a8fec8992bb6320da544ccb329810ec8f2d48809be5468d4963493cef6e9e868",
   "docs/balance/four_voice_selection_pilot_aircraft_20260911.json": "55245bbf2abefd1967403fed76382813b90238a6a9de34c2cae0dda7c6e0c019",
   "docs/balance/four_voice_selection_pilot_infantry_20260911.json": "cea636ae66716e7a8fbf97ef0bf2e8a4bf76cf615968b8af096ca9fd7e87e417",
@@ -33233,7 +33314,7 @@
   "mods/cameo/weapons/weapons.yaml": "ba07d64556359fdbdf5b3a74db714c9077aebce6bde90cd1c26051441ea3fd67",
   "tools/audit/miniyaml.py": "152ff27f9c64a81bc1d388ba9468368377fd3e6d0329c7ffcda0900773442130",
   "tools/balance/armament_roles.py": "7aba44d46be11c2fffbc936a78330a637bb90d5311451586ea8f3b2d8fa724c6",
-  "tools/balance/assign_references.py": "fad1f2ddd9f86ab6fb38c19c62df7317cfc22faca442ae2dab6b0a3f58a9fe2c",
+  "tools/balance/assign_references.py": "298c0a5d55f2e95307dca15cc13df5785e1cbe0d2b4c4551623124f60734ed5f",
   "tools/balance/build_armament_pairing_report.py": "59e4b1670b3ef6847dd258a2b5a7ac2d77ba37f60e9ea7d3f56cb54a4a0c89ab",
   "tools/balance/class_membership.py": "16d81a1afc26ff55d639acfbc447351d9910e6a240958732a6a15542625db28d",
   "tools/balance/explain_unit.py": "394b74b8b9632b1532038465fcfbd5c282bc0900fb39ac4978fe5e13c9aa86ff",
@@ -33268,7 +33349,6 @@
   "naxis_tiger",
   "ordos_deviatortank",
   "ra2_allies_battlefortress_empty",
-  "ra2_soviets_sentrygun",
   "steelconsortium_cargoship",
   "steelconsortium_katytank",
   "ts_gdi_mobileemp",
@@ -33283,29 +33363,29 @@
  "schema": 2,
  "scope": "Per-armament reference pairing inside the existing actor assignment. No reference is re-scored and no balance number is written.",
  "stats": {
-  "abstained_structureless": 157,
+  "abstained_structureless": 158,
   "actors": 314,
   "actors_tier_expanded": 174,
   "actors_tier_original": 140,
-  "actors_with_an_uncovered_armament": 119,
-  "actors_with_no_structured_reference_at_all": 17,
-  "cameo_armaments_without_a_reference": 399,
+  "actors_with_an_uncovered_armament": 120,
+  "actors_with_no_structured_reference_at_all": 16,
+  "cameo_armaments_without_a_reference": 403,
   "contaminated_rows": 38,
   "exact_pairs": 226,
   "multi_role_actors": 46,
-  "pairs": 332,
+  "pairs": 333,
   "pairs_from_a_rank_gated_weapon": 4,
   "pairs_role_air": 25,
-  "pairs_role_both": 120,
+  "pairs_role_both": 121,
   "pairs_role_ground": 187,
-  "pairs_via_both_fallback": 106,
+  "pairs_via_both_fallback": 107,
   "uncovered_despite_a_structured_reference_air": 21,
   "uncovered_despite_a_structured_reference_both": 36,
-  "uncovered_despite_a_structured_reference_ground": 93,
+  "uncovered_despite_a_structured_reference_ground": 94,
   "uncovered_despite_a_structured_reference_special": 2,
   "unreferenced_role_air": 58,
   "unreferenced_role_both": 88,
-  "unreferenced_role_ground": 249,
+  "unreferenced_role_ground": 253,
   "unreferenced_role_special": 4
  },
  "uncovered_armaments": {
@@ -33921,6 +34001,12 @@
    {
     "role": "ground",
     "weapon": "RA2120mm"
+   }
+  ],
+  "ra2_soviets_sentrygun": [
+   {
+    "role": "ground",
+    "weapon": "RA2vulcan"
    }
   ],
   "ra2_soviets_terrordrone": [

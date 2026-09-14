@@ -383,30 +383,40 @@ same `nominal_direct`/usable/single-shot/numeric gate. The DTA hashes remain
 | …referencing the elite/upgraded replacement (expanded) | 174 |
 | actors firing in more than one role | 46 |
 | **reference rows contaminated by the fold** | **38** |
-| armament pairs formed | **332** |
+| armament pairs formed | **333** |
 | …proven exact role matches | 226 |
-| …a dual-role `both` weapon stood in | 106 |
+| …a dual-role `both` weapon stood in | 107 |
 | …source could not state a role | **0 — they abstain** (§2d) |
 | …the reference carries that weapon only at ELITE rank | 4 |
-| pairs by role | ground 187 · both 120 · air 25 |
-| Cameo armaments with no reference | 399 |
-| actors with at least one uncovered armament | **119** |
-| uncovered armaments despite structured references | ground 93 · both 36 · air 21 · special 2 |
-| actors with no structured reference at all | 17 |
+| pairs by role | ground 187 · both 121 · air 25 |
+| Cameo armaments with no reference | 403 |
+| actors with at least one uncovered armament | **120** |
+| uncovered armaments despite structured references | ground 94 · both 36 · air 21 · special 2 |
+| actors with no structured reference at all | 16 |
 | unknown target tokens | **0** |
 
 The canonical review page `docs/audit/latest/reference_map_clean_20260911.html` is regenerated
 from the current tree. The request called this the
 "all-28-faction" map, but the current tree has **29** non-WIP faction prefixes with balance
 ledgers; the report includes all 29 and excludes only the two explicitly WIP Dark Reign factions
-(`plymouth`, `eden`). It contains 161 original and 709 expanded actors, 915 attached references,
-514 formula-priced actors and 12 originals with fewer than three sources.
+(`plymouth`, `eden`). It contains 161 original and 709 expanded actors, 925 attached references,
+514 formula-priced actors and 8 rendered originals with fewer than three sources.
+
+The 2026-09-14 missing-reference review added ten exact, previously unclaimed mappings: the
+Valiant Shades Allied/Soviet Engineers, four source-specific Soviet Sentry Guns, Shattered
+Paradise's GDI MCV, Crystallized Nexus's Mobile Sensor Array, and the Shattered Paradise/Twisted
+Insurrection Nod Militants for TS Nod Light Infantry. Four original actors reached the
+three-source floor; the engineers improved from one to two references. The bot-only empty
+Battle Fortress variant did not take the `BFRT` rows already owned by the real Battle Fortress.
+The O1 audit now lists each faction's actual routed candidates rather than incorrectly reporting
+Combined Arms and DTA as missing sources for every RA2 and Tiberian Sun actor.
 
 ⚠ **THE PAIR COUNT REMAINS FAR BELOW 607 BECAUSE THE UNPROVEN FALLBACK STAYS DELETED.** The seven
 verified sources restore 59 proof-backed pairs, while the new slot gate withdraws 35 DTA pair
 instances that rested on incomplete weapons, including six unsafe elite weapons. The net
-308 → 332 is therefore narrower and stronger.
-`cameo_armaments_without_a_reference` remains large (399) because every armament is counted rather
+308 → 332 is therefore narrower and stronger. The exact missing-reference follow-up adds one
+further proven pair, bringing the current artifact to 333.
+`cameo_armaments_without_a_reference` remains large (403) because every armament is counted rather
 than one per role, so a four-gun destroyer reports four gaps where it used to report one.
 
 ⚠ **TWO REASONS A WEAPON ENDS UP UNREFERENCED, AND COUNTING THEM TOGETHER MAKES THE NUMBER LIE.**
@@ -417,7 +427,7 @@ gap, not missing structure.
 
 Coverage is also tracked by **weapon identity**, not merely by role. The earlier role-level count
 said only seven actors were uncovered because one successful ground match could hide another ground
-weapon on the same actor. The current report exposes 152 uncovered armaments on 119 actors. That
+weapon on the same actor. The current report exposes 153 uncovered armaments on 120 actors. That
 is an honest inventory for later reference work, not a licence to invent votes. For example,
 `td_gdi_firehawk` remains correctly uncovered for its Sidewinders when its A-10 references carry no
 anti-air weapon; the source abstains instead of averaging those missiles with a napalm bomb.

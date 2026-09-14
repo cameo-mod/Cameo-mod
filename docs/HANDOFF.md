@@ -2783,9 +2783,9 @@ and have `Burst = 1`. Missing defaults, invalid booleans, incomplete/effect weap
 weapons abstain. The sidecar resolves **496 of 2,461** cited armaments; 1,965 remain explicitly
 withheld.
 
-The regenerated per-armament map forms **332** pairs (226 exact, 106 via a proven `both` stand-in),
-up from 308. This is 59 proof-backed additions and 35 DTA withdrawals caused by applying the same
-slot-evidence gate to primary, secondary and elite weapons there, net +24. The Apocalypse tank now
+The regenerated per-armament map forms **333** pairs (226 exact, 107 via a proven `both` stand-in).
+The source-role gate moved 308 to 332 through 59 proof-backed additions and 35 DTA withdrawals;
+the exact missing-reference follow-up added one more pair. The Apocalypse tank now
 has one explicit Mental Omega AA-missile
 vote; its cannon still abstains. No corpus regeneration, assignment change, historical selection
 approval, gameplay value, `apply_balance`, protected classifier or 694-cycle inference is included.
@@ -2794,5 +2794,15 @@ The canonical full reference page `docs/audit/latest/reference_map_clean_2026091
 regenerated from the current tree. The current tree has **29** non-WIP
 faction ledger prefixes rather than the requested historical count of 28, so all 29 are included;
 only `plymouth` and `eden`, both explicitly labelled WIP, are excluded. The page reports 161
-original and 709 expanded actors, 915 attached references, 514 formula-priced actors and 12
-originals below three sources.
+original and 709 expanded actors, 925 attached references, 514 formula-priced actors and 8
+rendered originals below three sources.
+
+The follow-up original-reference review added ten exact, unclaimed mappings: Valiant Shades'
+side-specific Allied/Soviet Engineers, four source-specific Soviet Sentry Guns, Shattered
+Paradise's GDI MCV, Crystallized Nexus's Mobile Sensor Array and two source-specific Nod Militants.
+The Sentry Gun, GDI MCV, Mobile Sensor Array and TS Nod Light Infantry now meet the three-source
+floor; both RA2 engineers improve from one to two. O1 has 10 total rows, with 8 gating and two
+documented source-impossible RA1 exceptions. Its
+missing-source column now uses each faction's actual routes instead of claiming CA/DTA are
+required for RA2 and TS. The bot-only empty Battle Fortress variant remains separate and did not
+steal `BFRT` rows from the real Battle Fortress.
