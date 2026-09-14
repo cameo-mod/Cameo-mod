@@ -547,7 +547,7 @@ def pseudo_armor_mean(row: str = "Shield") -> float:
 
 
 def shield_hp_factor() -> float:
-    """What ONE point of shield strength is worth as HP (see above). ~0.476 today."""
+    """What ONE point of shield strength is worth as HP (see above). ~0.555 today."""
     mean = pseudo_armor_mean("Shield")
     return 100.0 / mean if mean > 0 else 1.0
 
