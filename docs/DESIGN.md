@@ -579,6 +579,60 @@ Where two armaments genuinely fire together at one target, the priced quantity i
 the reference map must show it rather than abstain. Abstention is for armaments that cannot be
 compared, not for ones that add.
 
+**APPLIED 2026-09-14** (`build_reference_report.firing_together`). The maintainer read the map
+again and the verdict was blunt - *"all withheld!"* - so the combined figure is now computed and
+displayed. `td_gdi_mammothtank` reads **32,000 combined, 2 guns -> 82,526**; `td_gdi_battletank`
+**16,000 -> 36,705**. Thirteen actors in the classic four qualify.
+
+⛔ **FOUR THINGS MUST BE TRUE BEFORE A SUM IS PRINTED**, and each one exists because skipping it
+produces a number that is wrong in a specific, checkable way:
+
+1. **AS BUILT.** Upgrade-gated armaments are excluded. `td_gdi_battletank` carries five armaments
+   and its machine gun is gated on `td_gdi_upgrade_armorpiercingbullets` with no `!` twin, so it
+   is an EXTRA gun bought later rather than a swap: the maximum is three and the as-built loadout
+   is two. Both numbers are true and only one of them describes the unit being priced.
+2. ⛔ **AN AA SPLIT IS ONE WEAPON** (3a.1). `td_gdi_apc_apcgun` and `td_gdi_apc_apcgun_AA` are a
+   single gun that OpenRA forced into two armaments, and adding them would double the APC's
+   firepower outright. Five actors in the classic four carry such a twin - both APCs, the Allied
+   heavy AA tank, the flak truck, and the Humvee Mk II with two of them.
+3. ⛔ **THEY MUST REACH A COMMON TARGET.** The test is that the INTERSECTION of every armament's
+   domain is non-empty: `ground` + `both` share the ground and sum; `ground` + `air` share nothing
+   and abstain, because a bomb and an anti-air missile are never over the same target
+   (`ra1_allies_rapierjumpjet`, `td_gdi_firehawk`). ⚠ Connectivity is the WRONG test - ground,
+   air and both form a connected chain with no target all three can hit.
+4. **EVERY ARMAMENT MUST HAVE A REFERENCE.** A PARTIAL sum is the worst outcome available: it
+   looks complete and reads low, so the unit would be priced as though one of its guns were free.
+
+⚠ **CADENCE DOES NOT SUM.** Reload, burst and burst delay stay WITHHELD on a multi-gun row and
+that is correct - two guns firing together have two reload delays and no single one describes
+them. Only DAMAGE adds. The range cell shows the shared reach when 3a.2 holds and withholds when
+it does not, which turns that column into a live compliance check: **six of the thirteen combined
+actors disagree on range**, `td_gdi_battletank` by 38 WDist (5,438 vs 5,400) - too small to be
+deliberate, which is exactly the kind of drift 3a.2 exists to catch.
+
+### 3a.5 ⛔ NEVER reference across factions
+
+> *"the GDI emp grenadier was mapped to the CA marauder which is a scrin unit so that is wrong!
+> Never ever reference from other factions without my instructions! What we need is the CA zone
+> raider with the sonic grenades which is much closer to the EMP grenadier and also from a gdi
+> sub faction called ZOCOM"* (maintainer, 2026-09-14)
+
+A Cameo actor takes its reference from its OWN faction's lineage in the source mod. A
+cross-faction pairing needs an explicit maintainer instruction, and is recorded in
+`assign_references.REFERENCE_OVERRIDES` where the next reader can see who ruled it.
+
+⚠ **THE FACTION GATE CANNOT CATCH THIS, AND THAT IS THE FINDING.** Combined Arms tags `MRDR`
+(Scrin) and `ZRAI` (GDI/ZOCOM) with the SAME 25-faction string - `allies/arc/.../gdi/.../scrin/
+.../zocom`, every faction in the mod - so the map recorded `home: true` for a Scrin unit and was
+telling the truth as far as the data goes. **156 of CA's 377 units carry ten or more faction
+tags** (median 5), against a median of **1** in OpenRA Tiberian Dawn. For CA the routing gate is
+therefore not merely weak, it is INERT: a cross-faction pick cannot be detected from the corpus at
+all. Until CA lineage comes from something other than `Buildable.Factions`, every CA pairing is a
+name-and-stats match with no faction check behind it, and the maintainer's eye is the only gate.
+⚠ One more sits in the tree unruled: `yuri_gatlingtrooper` references CA's `ZTRP` Zone Trooper,
+GDI/ZOCOM again. It is outside the classic four, so it is reported rather than changed - inventing
+a cross-faction correction is the same mistake in the other direction.
+
 ### 3a.4 Why a cannon and a missile land on almost the same target
 
 > *"compare 41,528 for the missiles with 40,997 with the cannons! ... Both weapons even when they

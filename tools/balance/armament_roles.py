@@ -150,6 +150,45 @@ def role_of_targets(valid, invalid=None):
 
 
 # ── THE ONE RATE FORMULA, ONE IMPLEMENTATION ─────────────────────────────────────────────────
+# ⭐ THE BURST FOLD AT THE CONSUMPTION POINT (maintainer ruling, 2026-09-14: *"if there is no
+# burst delay you can use the minimal allowed value of 1 ticks between the bursts"*).
+#
+# ⛔ WHY THE RULING IS APPLIED HERE AND NOT IN THE CORPUS. `burst_unfolded` was never a claim
+# that the declaration was unreadable - damage, reload, range and burst are all present and
+# certified. It was a refusal to INVENT a cycle for shots the INI engines cannot time, and its
+# own comment said it stood "until a cycle model exists". The ruling supplies that model. The
+# corpus itself stays frozen: regenerating `ini_corpus.json` today DROPS the dummy-primary
+# promotion on 63 rows (see `extract_ini_units.EXPLICIT_DUMMY_WEAPONS`), so the fold is applied
+# where the declaration is READ instead of where it is stored. When that reviewed regeneration
+# finally lands, the extractor emits `nominal_direct` with the same folded rate and this path
+# simply stops firing - the two orders agree by construction.
+#
+# ⚠ ONE TICK IS THE MINIMUM, so the folded cycle is the SHORTEST the declaration can support
+# and the rate is therefore an UPPER bound on the peer cadence. For the population this actually
+# unblocks - 321 views, every one of them DTA, a TS-engine source whose rules cannot declare an
+# inter-shot delay at all - there is no value being overridden: there is no field.
+INI_BURST_DELAY_TICKS = 1
+
+
+def ini_burst_delays(burst):
+    """The (burst - 1) inter-shot gaps an INI declaration implies, at the engine minimum.
+
+    Passing these explicitly matters: `cycle_ticks` falls back to OpenRA own `BurstDelays`
+    default of 5 when it is handed nothing, which is the right ruler for an OpenRA peer and the
+    wrong one for a source whose engine has no such field.
+    """
+    try:
+        n = int(burst or 1)
+    except (TypeError, ValueError):
+        n = 1
+    return (INI_BURST_DELAY_TICKS,) * max(0, n - 1)
+
+
+def folded_burst(evidence, reason):
+    """True when the ONLY thing wrong with a row is that its burst was never folded."""
+    return evidence == "incomplete" and reason == "burst_unfolded"
+
+
 def cycle_ticks(reload_delay, burst=1, burst_delays=()):
     """Ticks from the START of one burst to the next: ReloadDelay + (Burst-1) x mean(BurstDelays).
 
@@ -365,19 +404,30 @@ def ini_views(rec, projectile_roles=None, elite_weapons=None):
             rng = _num(exact.get("range"))
             burst_was_bool = isinstance(exact.get("burst"), bool)
             raw_burst = _num(exact.get("burst"))
+            folded = folded_burst(exact.get("weapon_evidence"),
+                                  exact.get("weapon_evidence_reason"))
+            # ⛔ STATUS STILL GATES. The fold excuses one REASON (`burst_unfolded`), never the
+            # sidecar own verdict: an `abstained` record was judged unusable for reasons this
+            # fold knows nothing about, and six named elite weapons rely on exactly that
+            # (`test_known_unsafe_elite_weapons_are_withheld_from_every_pair`). In practice the
+            # seven pinned sources publish `burst` only on RESOLVED rows, so an abstained
+            # `burst_unfolded` row has no burst to fold with anyway - folding it would be
+            # inventing the shot count, not bounding the gap between shots.
             evidence_ok = (exact.get("status") == "resolved"
-                           and exact.get("weapon_evidence") == "nominal_direct"
-                           and exact.get("w_dps_usable") is True)
-            refusal = exact.get("reason")
+                           and (folded or (exact.get("weapon_evidence") == "nominal_direct"
+                                           and exact.get("w_dps_usable") is True)))
+            refusal = None if folded else exact.get("reason")
         else:
             reload = _num(rec.get(prefix + "reload"))
             rng = _num(rec.get(prefix + "range"))
             burst_was_bool = isinstance(rec.get(prefix + "burst"), bool)
             raw_burst = _num(rec.get(prefix + "burst"))
-            evidence_ok = (rec.get(prefix + "evidence") == "nominal_direct"
-                           and rec.get(prefix + "dps_usable") is True)
-            refusal = rec.get(prefix + "evidence_reason") or (
-                None if evidence_ok else "weapon_evidence_absent_or_incomplete")
+            folded = folded_burst(rec.get(prefix + "evidence"),
+                                  rec.get(prefix + "evidence_reason"))
+            evidence_ok = folded or (rec.get(prefix + "evidence") == "nominal_direct"
+                                     and rec.get(prefix + "dps_usable") is True)
+            refusal = None if folded else (rec.get(prefix + "evidence_reason") or (
+                None if evidence_ok else "weapon_evidence_absent_or_incomplete"))
 
         role = verdict.get("role") if verdict else None
         burst_ok = (not burst_was_bool and (raw_burst is None or
@@ -386,23 +436,23 @@ def ini_views(rec, projectile_roles=None, elite_weapons=None):
         burst = int(1 if raw_burst is None else raw_burst) if burst_ok else 1
         numbers_ok = all(value is not None and math.isfinite(value) and value > 0
                          for value in (dmg, reload, rng))
-        eligible = evidence_ok and verdict is not None and burst_ok and burst == 1 and numbers_ok
+        # ⭐ `burst == 1` WAS A CONDITION HERE AND IS GONE: a burst is folded now, not refused.
+        eligible = evidence_ok and verdict is not None and burst_ok and numbers_ok
         if not eligible and refusal is None:
             if verdict is None:
                 refusal = "projectile_role_unresolved"
             elif not burst_ok:
                 refusal = "invalid_burst"
-            elif burst > 1:
-                refusal = "burst_unfolded"
             elif not numbers_ok:
                 refusal = "invalid_direct_weapon_numbers"
         out.append(view(
             "ini", slot, weapon, role, (),
             damage_per_shot=dmg, burst=burst,
-            # ⛔ THE 694 UNFOLDED RATES STAY BLOCKED. Only 77 INI rows declare a burst delay, in
-            # Phobos/Ares notation that is not OpenRA's, so the cycle is left None rather than
-            # invented — the view still carries range, damage and burst, which is what pairs.
-            cycle=cycle_ticks(reload, 1, ()) if eligible else None,
+            # ⭐ THE CYCLE IS FOLDED NOW (see INI_BURST_DELAY_TICKS). This read `cycle_ticks(
+            # reload, 1, ())` under the note "THE 694 UNFOLDED RATES STAY BLOCKED ... the cycle is
+            # left None rather than invented". The ruling replaces "invented" with "bounded": the
+            # gap is the engine minimum, so the cycle is the shortest the declaration supports.
+            cycle=cycle_ticks(reload, burst, ini_burst_delays(burst)) if eligible else None,
             rng=rng, requires=None, baseline=True,
             range_unit="cells",
             note=("projectile=%s" % proj) if proj else None,
@@ -420,21 +470,26 @@ def ini_views(rec, projectile_roles=None, elite_weapons=None):
         rng = _num(elite.get("range"))
         numbers_ok = all(value is not None and math.isfinite(value) and value > 0
                          for value in (damage, reload, rng))
+        folded = folded_burst(elite.get("weapon_evidence"), elite.get("weapon_evidence_reason"))
+        # ⛔ STATUS STILL GATES here too - see the note in the slot branch above.
         evidence_ok = (elite.get("status") == "resolved"
-                       and elite.get("weapon_evidence") == "nominal_direct"
-                       and elite.get("w_dps_usable") is True)
-        eligible = (evidence_ok and elite.get("role") is not None and burst_ok
-                    and burst == 1 and numbers_ok)
-        refusal = elite.get("weapon_evidence_reason") or elite.get("reason")
+                       and (folded or (elite.get("weapon_evidence") == "nominal_direct"
+                                       and elite.get("w_dps_usable") is True)))
+        # ⭐ The elite slot folds on the same ruling as the other two - an `Elite=` weapon is a
+        # weapon, and letting it abstain while its own primary votes would price one DTA tank
+        # against another with a different rule.
+        eligible = (evidence_ok and elite.get("role") is not None and burst_ok and numbers_ok)
+        refusal = None if folded else (elite.get("weapon_evidence_reason")
+                                       or elite.get("reason"))
         if not eligible and refusal is None:
             refusal = ("projectile_role_unresolved" if elite.get("role") is None
-                       else "invalid_or_unfolded_burst" if not burst_ok or burst > 1
+                       else "invalid_burst" if not burst_ok
                        else "invalid_direct_weapon_numbers" if not numbers_ok
                        else "weapon_evidence_absent_or_incomplete")
         out.append(view(
             "ini", "elite", elite.get("weapon"), elite.get("role"), (),
             damage_per_shot=damage, burst=burst,
-            cycle=cycle_ticks(reload, 1, ()) if eligible else None,
+            cycle=cycle_ticks(reload, burst, ini_burst_delays(burst)) if eligible else None,
             rng=rng, requires="rank-elite",
             # ⚠ NOT BASELINE — it is rank-gated, exactly like Cameo's own `_elite` armaments and
             # the peer mods' upgrade barrels, and `strongest_by_role` therefore skips it for any

@@ -1097,6 +1097,22 @@ REFERENCE_OVERRIDES = {
     # psionic support unit, and averaging its damage into a LASER trooper would import a number
     # that describes nothing about the unit. Range and role match too (7168 vs our 5524).
     ("td_nod_lasertrooper", "Combined Arms"): "RMBC",
+    # ⛔ NEVER REFERENCE ACROSS FACTIONS (maintainer, 2026-09-14): *"the GDI emp grenadier was
+    # mapped to the CA marauder which is a scrin unit so that is wrong! Never ever reference from
+    # other factions without my instructions! What we need is the CA zone raider with the sonic
+    # grenades which is much closer to the EMP grenadier and also from a gdi sub faction called
+    # ZOCOM."* The Zone Raider throws sonic grenades from ZOCOM, a GDI sub-faction; the Marauder
+    # is Scrin infantry that happens to sit at a similar cost and HP.
+    #
+    # ⚠ THE FACTION GATE CANNOT CATCH THIS ONE, and that is the finding worth keeping. CA tags
+    # `MRDR` and `ZRAI` with the SAME 25-faction string - "allies/arc/.../gdi/.../scrin/.../zocom",
+    # every faction in the mod - so `home: true` was recorded for a Scrin unit truthfully as far
+    # as the data goes. 156 of CA's 377 units carry ten or more faction tags (median 5), against a
+    # median of 1 in OpenRA Tiberian Dawn. So for CA the routing gate is not merely weak, it is
+    # INERT, and a cross-faction pick cannot be detected from the corpus at all. Until CA lineage
+    # is derived from something other than `Buildable.Factions`, every CA pairing is a name-and-
+    # stats match with no faction check behind it, and the maintainer eye is the only gate.
+    ("td_gdi_empgrenadier", "Combined Arms"): "ZRAI",      # Zone Raider (ZOCOM), sonic grenades
     # CA ships TWO rows named "AA Gun" with identical stats. `AGUN` is the id OpenRA Red Alert
     # uses, so id agreement gives it to the Allied gun and frees `CRAM` for GDI's Skyshield.
     ("td_gdi_skyshield", "Combined Arms"): "CRAM",

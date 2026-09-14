@@ -5674,12 +5674,66 @@
    ],
    "sources": {
     "DTA Enhanced": {
-     "cameo_unpaired": [
-      "ra1_allies_alliedheavyaatank_cannon",
-      "ra1_allies_alliedheavyaatank_cannon_AA"
-     ],
+     "cameo_unpaired": [],
      "kind": "ini",
-     "pairs": [],
+     "pairs": [
+      {
+       "cameo": {
+        "cycle": 10.0,
+        "damage_per_cycle": 2004.0,
+        "gate": null,
+        "range": 4746.0,
+        "range_unit": "wdist",
+        "range_wdist": 4746.0,
+        "rate": 200.4,
+        "role": "ground",
+        "slot": "Armament@AG",
+        "weapon": "ra1_allies_alliedheavyaatank_cannon"
+       },
+       "exact": true,
+       "peer": {
+        "cycle": 58.0,
+        "damage_per_cycle": 26.0,
+        "gate": null,
+        "range": 5.7,
+        "range_unit": "cells",
+        "range_wdist": 5836.8,
+        "rate": 0.4482758620689655,
+        "role": "ground",
+        "slot": "primary",
+        "weapon": "AGFlak"
+       },
+       "role": "ground"
+      },
+      {
+       "cameo": {
+        "cycle": 10.0,
+        "damage_per_cycle": 2004.0,
+        "gate": null,
+        "range": 7119.0,
+        "range_unit": "wdist",
+        "range_wdist": 7119.0,
+        "rate": 200.4,
+        "role": "air",
+        "slot": "Armament@AA",
+        "weapon": "ra1_allies_alliedheavyaatank_cannon_AA"
+       },
+       "exact": true,
+       "peer": {
+        "cycle": 21.0,
+        "damage_per_cycle": 28.0,
+        "gate": null,
+        "range": 8.5,
+        "range_unit": "cells",
+        "range_wdist": 8704.0,
+        "rate": 1.3333333333333333,
+        "role": "air",
+        "slot": "secondary",
+        "weapon": "Flak"
+       },
+       "role": "air"
+      }
+     ],
      "peer": "MFLAK",
      "peer_name": "Anti-Aircraft Truck",
      "peer_unpaired": []
@@ -6631,14 +6685,43 @@
      "peer_unpaired": []
     },
     "DTA Enhanced": {
-     "cameo_unpaired": [
-      "ra1_allies_chronotank_missile"
-     ],
+     "cameo_unpaired": [],
      "kind": "ini",
-     "pairs": [],
+     "pairs": [
+      {
+       "cameo": {
+        "cycle": 63.0,
+        "damage_per_cycle": 80040.0,
+        "gate": null,
+        "range": 6102.0,
+        "range_unit": "wdist",
+        "range_wdist": 6102.0,
+        "rate": 1270.4761904761904,
+        "role": "both",
+        "slot": "Armament@PRIMARY",
+        "weapon": "ra1_allies_chronotank_missile"
+       },
+       "exact": false,
+       "peer": {
+        "cycle": 91.0,
+        "damage_per_cycle": 140.0,
+        "gate": null,
+        "range": 6.0,
+        "range_unit": "cells",
+        "range_wdist": 6144.0,
+        "rate": 1.5384615384615385,
+        "role": "ground",
+        "slot": "primary",
+        "weapon": "ChronoTusk"
+       },
+       "role": "both"
+      }
+     ],
      "peer": "CTNK",
      "peer_name": "Chrono Tank",
-     "peer_unpaired": []
+     "peer_unpaired": [
+      "ChronoTuskAA"
+     ]
     },
     "OpenRA Red Alert": {
      "cameo_unpaired": [],
@@ -6780,11 +6863,38 @@
      "peer_unpaired": []
     },
     "DTA Enhanced": {
-     "cameo_unpaired": [
-      "ra1_allies_cruiser_8inch"
-     ],
+     "cameo_unpaired": [],
      "kind": "ini",
-     "pairs": [],
+     "pairs": [
+      {
+       "cameo": {
+        "cycle": 255.0,
+        "damage_per_cycle": 160000.0,
+        "gate": null,
+        "range": 15000.0,
+        "range_unit": "wdist",
+        "range_wdist": 15000.0,
+        "rate": 627.4509803921569,
+        "role": "ground",
+        "slot": "Armament@PRIMARY",
+        "weapon": "ra1_allies_cruiser_8inch"
+       },
+       "exact": true,
+       "peer": {
+        "cycle": 151.0,
+        "damage_per_cycle": 96.0,
+        "gate": null,
+        "range": 17.5,
+        "range_unit": "cells",
+        "range_wdist": 17920.0,
+        "rate": 0.6357615894039735,
+        "role": "ground",
+        "slot": "primary",
+        "weapon": "16Inch"
+       },
+       "role": "ground"
+      }
+     ],
      "peer": "CRUISER",
      "peer_name": "Cruiser",
      "peer_unpaired": []
@@ -6988,12 +7098,66 @@
      ]
     },
     "DTA Enhanced": {
-     "cameo_unpaired": [
-      "ra1_allies_destroyer_depthcharge",
-      "ra1_allies_destroyer_missile"
-     ],
+     "cameo_unpaired": [],
      "kind": "ini",
-     "pairs": [],
+     "pairs": [
+      {
+       "cameo": {
+        "cycle": 60.0,
+        "damage_per_cycle": 60000.0,
+        "gate": null,
+        "range": 6000.0,
+        "range_unit": "wdist",
+        "range_wdist": 6000.0,
+        "rate": 1000.0,
+        "role": "ground",
+        "slot": "Armament@DC1",
+        "weapon": "ra1_allies_destroyer_depthcharge"
+       },
+       "exact": true,
+       "peer": {
+        "cycle": 73.0,
+        "damage_per_cycle": 88.0,
+        "gate": null,
+        "range": 8.0,
+        "range_unit": "cells",
+        "range_wdist": 8192.0,
+        "rate": 1.2054794520547945,
+        "role": "ground",
+        "slot": "primary",
+        "weapon": "FrigateMissile"
+       },
+       "role": "ground"
+      },
+      {
+       "cameo": {
+        "cycle": 34.0,
+        "damage_per_cycle": 20000.0,
+        "gate": null,
+        "range": 8000.0,
+        "range_unit": "wdist",
+        "range_wdist": 8000.0,
+        "rate": 588.2352941176471,
+        "role": "both",
+        "slot": "Armament",
+        "weapon": "ra1_allies_destroyer_missile"
+       },
+       "exact": false,
+       "peer": {
+        "cycle": 38.0,
+        "damage_per_cycle": 48.0,
+        "gate": null,
+        "range": 11.5,
+        "range_unit": "cells",
+        "range_wdist": 11776.0,
+        "rate": 1.263157894736842,
+        "role": "air",
+        "slot": "secondary",
+        "weapon": "FrigateMissileAA"
+       },
+       "role": "both"
+      }
+     ],
      "peer": "FRIGATE",
      "peer_name": "Frigate",
      "peer_unpaired": []
@@ -10009,11 +10173,38 @@
      "peer_unpaired": []
     },
     "DTA Enhanced": {
-     "cameo_unpaired": [
-      "ra1_soviets_heavytank_105mm"
-     ],
+     "cameo_unpaired": [],
      "kind": "ini",
-     "pairs": [],
+     "pairs": [
+      {
+       "cameo": {
+        "cycle": 81.0,
+        "damage_per_cycle": 20000.0,
+        "gate": null,
+        "range": 5469.0,
+        "range_unit": "wdist",
+        "range_wdist": 5469.0,
+        "rate": 246.91358024691357,
+        "role": "ground",
+        "slot": "Armament",
+        "weapon": "ra1_soviets_heavytank_105mm"
+       },
+       "exact": true,
+       "peer": {
+        "cycle": 71.0,
+        "damage_per_cycle": 68.0,
+        "gate": null,
+        "range": 5.7,
+        "range_unit": "cells",
+        "range_wdist": 5836.8,
+        "rate": 0.9577464788732394,
+        "role": "ground",
+        "slot": "primary",
+        "weapon": "105mm"
+       },
+       "role": "ground"
+      }
+     ],
      "peer": "3TNK",
      "peer_name": "Heavy Tank",
      "peer_unpaired": []
@@ -10919,12 +11110,66 @@
      "peer_unpaired": []
     },
     "DTA Enhanced": {
-     "cameo_unpaired": [
-      "ra1_soviets_mammothtank_ra120mm",
-      "ra1_soviets_mammothtank_mammothtusk"
-     ],
+     "cameo_unpaired": [],
      "kind": "ini",
-     "pairs": [],
+     "pairs": [
+      {
+       "cameo": {
+        "cycle": 103.0,
+        "damage_per_cycle": 48024.0,
+        "gate": null,
+        "range": 6412.0,
+        "range_unit": "wdist",
+        "range_wdist": 6412.0,
+        "rate": 466.252427184466,
+        "role": "ground",
+        "slot": "Armament@PRIMARY",
+        "weapon": "ra1_soviets_mammothtank_ra120mm"
+       },
+       "exact": true,
+       "peer": {
+        "cycle": 81.0,
+        "damage_per_cycle": 88.0,
+        "gate": null,
+        "range": 6.25,
+        "range_unit": "cells",
+        "range_wdist": 6400.0,
+        "rate": 1.0864197530864197,
+        "role": "ground",
+        "slot": "primary",
+        "weapon": "120mmRA"
+       },
+       "role": "ground"
+      },
+      {
+       "cameo": {
+        "cycle": 103.0,
+        "damage_per_cycle": 48000.0,
+        "gate": null,
+        "range": 6412.0,
+        "range_unit": "wdist",
+        "range_wdist": 6412.0,
+        "rate": 466.0194174757282,
+        "role": "both",
+        "slot": "Armament@SECONDARY",
+        "weapon": "ra1_soviets_mammothtank_mammothtusk"
+       },
+       "exact": true,
+       "peer": {
+        "cycle": 81.0,
+        "damage_per_cycle": 30.0,
+        "gate": null,
+        "range": 6.25,
+        "range_unit": "cells",
+        "range_wdist": 6400.0,
+        "rate": 0.37037037037037035,
+        "role": "both",
+        "slot": "secondary",
+        "weapon": "MammothTuskRA"
+       },
+       "role": "both"
+      }
+     ],
      "peer": "4TNK",
      "peer_name": "Soviet Mammoth Tank",
      "peer_unpaired": []
@@ -11127,11 +11372,38 @@
      ]
     },
     "DTA Enhanced": {
-     "cameo_unpaired": [
-      "ra1_soviets_migattackbomber_maverick"
-     ],
+     "cameo_unpaired": [],
      "kind": "ini",
-     "pairs": [],
+     "pairs": [
+      {
+       "cameo": {
+        "cycle": 54.0,
+        "damage_per_cycle": 80000.0,
+        "gate": null,
+        "range": 5900.0,
+        "range_unit": "wdist",
+        "range_wdist": 5900.0,
+        "rate": 1481.4814814814815,
+        "role": "both",
+        "slot": "Armament@Rockets1",
+        "weapon": "ra1_soviets_migattackbomber_maverick"
+       },
+       "exact": false,
+       "peer": {
+        "cycle": 8.0,
+        "damage_per_cycle": 72.0,
+        "gate": null,
+        "range": 5.2,
+        "range_unit": "cells",
+        "range_wdist": 5324.8,
+        "rate": 9.0,
+        "role": "ground",
+        "slot": "primary",
+        "weapon": "Maverick"
+       },
+       "role": "both"
+      }
+     ],
      "peer": "MIG",
      "peer_name": "MIG",
      "peer_unpaired": []
@@ -11234,14 +11506,43 @@
      "peer_unpaired": []
     },
     "DTA Enhanced": {
-     "cameo_unpaired": [
-      "ra1_soviets_missilesubmarine_227mm"
-     ],
+     "cameo_unpaired": [],
      "kind": "ini",
-     "pairs": [],
+     "pairs": [
+      {
+       "cameo": {
+        "cycle": 136.0,
+        "damage_per_cycle": 105600.0,
+        "gate": null,
+        "range": 9920.0,
+        "range_unit": "wdist",
+        "range_wdist": 9920.0,
+        "rate": 776.4705882352941,
+        "role": "both",
+        "slot": "Armament@PRIMARY",
+        "weapon": "ra1_soviets_missilesubmarine_227mm"
+       },
+       "exact": false,
+       "peer": {
+        "cycle": 71.0,
+        "damage_per_cycle": 68.0,
+        "gate": null,
+        "range": 10.0,
+        "range_unit": "cells",
+        "range_wdist": 10240.0,
+        "rate": 0.9577464788732394,
+        "role": "ground",
+        "slot": "primary",
+        "weapon": "SubSCUD"
+       },
+       "role": "both"
+      }
+     ],
      "peer": "MSUB",
      "peer_name": "Missile Submarine",
-     "peer_unpaired": []
+     "peer_unpaired": [
+      "SubMissileAA"
+     ]
     },
     "OpenRA Red Alert": {
      "cameo_unpaired": [],
@@ -13276,11 +13577,39 @@
     },
     "DTA Enhanced": {
      "cameo_unpaired": [
-      "ra1_soviets_yakscoutplane_napalm_bomb",
       "ra1_soviets_yakscoutplane_chaingun"
      ],
      "kind": "ini",
-     "pairs": [],
+     "pairs": [
+      {
+       "cameo": {
+        "cycle": 119.0,
+        "damage_per_cycle": 40080.0,
+        "gate": null,
+        "range": 1840.0,
+        "range_unit": "wdist",
+        "range_wdist": 1840.0,
+        "rate": 336.8067226890756,
+        "role": "ground",
+        "slot": "Armament@BOMBS",
+        "weapon": "ra1_soviets_yakscoutplane_napalm_bomb"
+       },
+       "exact": true,
+       "peer": {
+        "cycle": 4.0,
+        "damage_per_cycle": 60.0,
+        "gate": null,
+        "range": 8.0,
+        "range_unit": "cells",
+        "range_wdist": 8192.0,
+        "rate": 15.0,
+        "role": "ground",
+        "slot": "primary",
+        "weapon": "ChainGun"
+       },
+       "role": "ground"
+      }
+     ],
      "peer": "YAK",
      "peer_name": "Yak",
      "peer_unpaired": []
@@ -21137,14 +21466,43 @@
      "peer_unpaired": []
     },
     "DTA Enhanced": {
-     "cameo_unpaired": [
-      "td_gdi_advancedguardtower_towermissile"
-     ],
+     "cameo_unpaired": [],
      "kind": "ini",
-     "pairs": [],
+     "pairs": [
+      {
+       "cameo": {
+        "cycle": 30.0,
+        "damage_per_cycle": 32014.0,
+        "gate": null,
+        "range": 8772.0,
+        "range_unit": "wdist",
+        "range_wdist": 8772.0,
+        "rate": 1067.1333333333334,
+        "role": "both",
+        "slot": "Armament@PRIMARY",
+        "weapon": "td_gdi_advancedguardtower_towermissile"
+       },
+       "exact": false,
+       "peer": {
+        "cycle": 41.0,
+        "damage_per_cycle": 60.0,
+        "gate": null,
+        "range": 8.5,
+        "range_unit": "cells",
+        "range_wdist": 8704.0,
+        "rate": 1.4634146341463414,
+        "role": "ground",
+        "slot": "primary",
+        "weapon": "TowerMissile"
+       },
+       "role": "both"
+      }
+     ],
      "peer": "ATWR",
      "peer_name": "Advanced Guard Tower",
-     "peer_unpaired": []
+     "peer_unpaired": [
+      "TowerMissileAA"
+     ]
     },
     "OpenRA Tiberian Dawn": {
      "cameo_unpaired": [],
@@ -21979,22 +22337,22 @@
        },
        "exact": false,
        "peer": {
-        "cycle": 75.0,
-        "damage_per_cycle": 8400.0,
+        "cycle": 60.0,
+        "damage_per_cycle": 8500.0,
         "gate": null,
         "range": 6144.0,
         "range_unit": "wdist",
         "range_wdist": 6144.0,
-        "rate": 112.0,
+        "rate": 141.66666666666666,
         "role": "ground",
         "slot": "Armament@PRIMARY",
-        "weapon": "MarauderDiscs"
+        "weapon": "ZoneRaiderGrenade"
        },
        "role": "both"
       }
      ],
-     "peer": "MRDR",
-     "peer_name": "Marauder",
+     "peer": "ZRAI",
+     "peer_name": "Zone Raider",
      "peer_unpaired": []
     },
     "DTA Enhanced": {
@@ -22916,12 +23274,40 @@
     "DTA Enhanced": {
      "cameo_unpaired": [
       "td_gdi_humveemkii_rocketshumvee2",
-      "td_gdi_humveemkii_rocketshumvee2_AA",
       "td_gdi_humveemkii_machinegunhumvee2",
       "td_gdi_humveemkii_machinegunhumvee2_AA"
      ],
      "kind": "ini",
-     "pairs": [],
+     "pairs": [
+      {
+       "cameo": {
+        "cycle": 84.0,
+        "damage_per_cycle": 8000.0,
+        "gate": null,
+        "range": 8397.0,
+        "range_unit": "wdist",
+        "range_wdist": 8397.0,
+        "rate": 95.23809523809524,
+        "role": "air",
+        "slot": "Armament@RocketsAA",
+        "weapon": "td_gdi_humveemkii_rocketshumvee2_AA"
+       },
+       "exact": true,
+       "peer": {
+        "cycle": 61.0,
+        "damage_per_cycle": 60.0,
+        "gate": null,
+        "range": 6.0,
+        "range_unit": "cells",
+        "range_wdist": 6144.0,
+        "rate": 0.9836065573770492,
+        "role": "air",
+        "slot": "secondary",
+        "weapon": "AA70mmMslx"
+       },
+       "role": "air"
+      }
+     ],
      "peer": "JEEPPTNK",
      "peer_name": "Rocket Hum-vee",
      "peer_unpaired": []
@@ -23058,12 +23444,66 @@
      "peer_unpaired": []
     },
     "DTA Enhanced": {
-     "cameo_unpaired": [
-      "td_gdi_mammothtank_120mmdual",
-      "td_gdi_mammothtank_mammothmissiles"
-     ],
+     "cameo_unpaired": [],
      "kind": "ini",
-     "pairs": [],
+     "pairs": [
+      {
+       "cameo": {
+        "cycle": 80.0,
+        "damage_per_cycle": 16000.0,
+        "gate": null,
+        "range": 6141.0,
+        "range_unit": "wdist",
+        "range_wdist": 6141.0,
+        "rate": 200.0,
+        "role": "ground",
+        "slot": "Armament@PRIMARY",
+        "weapon": "td_gdi_mammothtank_120mmdual"
+       },
+       "exact": true,
+       "peer": {
+        "cycle": 81.0,
+        "damage_per_cycle": 60.0,
+        "gate": null,
+        "range": 5.7,
+        "range_unit": "cells",
+        "range_wdist": 5836.8,
+        "rate": 0.7407407407407407,
+        "role": "ground",
+        "slot": "primary",
+        "weapon": "120mm"
+       },
+       "role": "ground"
+      },
+      {
+       "cameo": {
+        "cycle": 80.0,
+        "damage_per_cycle": 16000.0,
+        "gate": null,
+        "range": 6141.0,
+        "range_unit": "wdist",
+        "range_wdist": 6141.0,
+        "rate": 200.0,
+        "role": "both",
+        "slot": "Armament@SECONDARY",
+        "weapon": "td_gdi_mammothtank_mammothmissiles"
+       },
+       "exact": true,
+       "peer": {
+        "cycle": 81.0,
+        "damage_per_cycle": 40.0,
+        "gate": null,
+        "range": 5.7,
+        "range_unit": "cells",
+        "range_wdist": 5836.8,
+        "rate": 0.49382716049382713,
+        "role": "both",
+        "slot": "secondary",
+        "weapon": "MammothTusk"
+       },
+       "role": "both"
+      }
+     ],
      "peer": "HTNK",
      "peer_name": "GDI Mammoth Tank",
      "peer_unpaired": []
@@ -23604,14 +24044,43 @@
      ]
     },
     "DTA Enhanced": {
-     "cameo_unpaired": [
-      "td_gdi_mlrs_227mm"
-     ],
+     "cameo_unpaired": [],
      "kind": "ini",
-     "pairs": [],
+     "pairs": [
+      {
+       "cameo": {
+        "cycle": 136.0,
+        "damage_per_cycle": 48000.0,
+        "gate": null,
+        "range": 9920.0,
+        "range_unit": "wdist",
+        "range_wdist": 9920.0,
+        "rate": 352.94117647058823,
+        "role": "both",
+        "slot": "Armament@PRIMARY",
+        "weapon": "td_gdi_mlrs_227mm"
+       },
+       "exact": false,
+       "peer": {
+        "cycle": 81.0,
+        "damage_per_cycle": 150.0,
+        "gate": null,
+        "range": 8.5,
+        "range_unit": "cells",
+        "range_wdist": 8704.0,
+        "rate": 1.8518518518518519,
+        "role": "ground",
+        "slot": "primary",
+        "weapon": "227mmMsl"
+       },
+       "role": "both"
+      }
+     ],
      "peer": "MSAM",
      "peer_name": "Rocket Launcher",
-     "peer_unpaired": []
+     "peer_unpaired": [
+      "AA227mmMsl"
+     ]
     },
     "OpenRA Tiberian Dawn": {
      "cameo_unpaired": [],
@@ -24210,11 +24679,38 @@
      ]
     },
     "DTA Enhanced": {
-     "cameo_unpaired": [
-      "td_nod_apacheattackhelicopter_gun"
-     ],
+     "cameo_unpaired": [],
      "kind": "ini",
-     "pairs": [],
+     "pairs": [
+      {
+       "cameo": {
+        "cycle": 22.0,
+        "damage_per_cycle": 16000.0,
+        "gate": null,
+        "range": 4501.0,
+        "range_unit": "wdist",
+        "range_wdist": 4501.0,
+        "rate": 727.2727272727273,
+        "role": "both",
+        "slot": "Armament@PRIMARY",
+        "weapon": "td_nod_apacheattackhelicopter_gun"
+       },
+       "exact": false,
+       "peer": {
+        "cycle": 11.0,
+        "damage_per_cycle": 50.0,
+        "gate": null,
+        "range": 4.8,
+        "range_unit": "cells",
+        "range_wdist": 4915.2,
+        "rate": 4.545454545454546,
+        "role": "ground",
+        "slot": "primary",
+        "weapon": "HeliHVMG"
+       },
+       "role": "both"
+      }
+     ],
      "peer": "APACHE",
      "peer_name": "Apache",
      "peer_unpaired": []
@@ -26523,23 +27019,25 @@
        },
        "exact": false,
        "peer": {
-        "cycle": 60.0,
-        "damage_per_cycle": 30.0,
+        "cycle": 61.0,
+        "damage_per_cycle": 60.0,
         "gate": null,
-        "range": 7.0,
+        "range": 4.4,
         "range_unit": "cells",
-        "range_wdist": 7168.0,
-        "rate": 0.5,
-        "role": "air",
-        "slot": "secondary",
-        "weapon": "AA70mmMsl"
+        "range_wdist": 4505.6,
+        "rate": 0.9836065573770492,
+        "role": "ground",
+        "slot": "primary",
+        "weapon": "BikeMissile"
        },
        "role": "both"
       }
      ],
      "peer": "BIKE",
      "peer_name": "Recon Bike",
-     "peer_unpaired": []
+     "peer_unpaired": [
+      "AA70mmMsl"
+     ]
     },
     "OpenRA Tiberian Dawn": {
      "cameo_unpaired": [],
@@ -26777,11 +27275,38 @@
      "peer_unpaired": []
     },
     "DTA Enhanced": {
-     "cameo_unpaired": [
-      "td_nod_samsite_dragon"
-     ],
+     "cameo_unpaired": [],
      "kind": "ini",
-     "pairs": [],
+     "pairs": [
+      {
+       "cameo": {
+        "cycle": 50.0,
+        "damage_per_cycle": 24000.0,
+        "gate": null,
+        "range": 12193.0,
+        "range_unit": "wdist",
+        "range_wdist": 12193.0,
+        "rate": 480.0,
+        "role": "air",
+        "slot": "Armament",
+        "weapon": "td_nod_samsite_dragon"
+       },
+       "exact": true,
+       "peer": {
+        "cycle": 91.0,
+        "damage_per_cycle": 80.0,
+        "gate": null,
+        "range": 16.0,
+        "range_unit": "cells",
+        "range_wdist": 16384.0,
+        "rate": 0.8791208791208791,
+        "role": "air",
+        "slot": "primary",
+        "weapon": "RedEYE2"
+       },
+       "role": "air"
+      }
+     ],
      "peer": "SAM",
      "peer_name": "SAM Site",
      "peer_unpaired": []
@@ -26982,14 +27507,43 @@
      ]
     },
     "DTA Enhanced": {
-     "cameo_unpaired": [
-      "td_nod_stealthtank_stealthtankmissiles"
-     ],
+     "cameo_unpaired": [],
      "kind": "ini",
-     "pairs": [],
+     "pairs": [
+      {
+       "cameo": {
+        "cycle": 66.0,
+        "damage_per_cycle": 24000.0,
+        "gate": null,
+        "range": 7432.0,
+        "range_unit": "wdist",
+        "range_wdist": 7432.0,
+        "rate": 363.6363636363636,
+        "role": "both",
+        "slot": "Armament",
+        "weapon": "td_nod_stealthtank_stealthtankmissiles"
+       },
+       "exact": false,
+       "peer": {
+        "cycle": 61.0,
+        "damage_per_cycle": 60.0,
+        "gate": null,
+        "range": 4.8,
+        "range_unit": "cells",
+        "range_wdist": 4915.2,
+        "rate": 0.9836065573770492,
+        "role": "ground",
+        "slot": "primary",
+        "weapon": "70mmMslx"
+       },
+       "role": "both"
+      }
+     ],
      "peer": "STNK",
      "peer_name": "Stealth Tank",
-     "peer_unpaired": []
+     "peer_unpaired": [
+      "AA70mmMslx"
+     ]
     },
     "OpenRA Tiberian Dawn": {
      "cameo_unpaired": [],
@@ -32868,7 +33422,7 @@
   "docs/balance/d2k_ixian.json": "7e5260778520abd962c0a760233807dc64493f2b7b31d8e3fc0eb2957a9d9b50",
   "docs/balance/d2k_ordos.json": "f5ef7571fc5d83c84cf56fc25b8f390eeaad2715ea0dbac4ea0336aebca71f13",
   "docs/balance/defense-armor-curves-20260911.json": "68ff597acab6dc80c6705c90c911c530c2589d27df85ab04906848d9cca82678",
-  "docs/balance/derived/reference_assignment.json": "dc5910f1be4fd8c61c2b0fdd77610d598b36990ee25b95801c65a82c1589c2b3",
+  "docs/balance/derived/reference_assignment.json": "c7d7351a33b5fcde70f4ea8a9655a418226d2b43923cd1434f3a6807939a8126",
   "docs/balance/four_voice_selection_pilot_20260911.json": "a8fec8992bb6320da544ccb329810ec8f2d48809be5468d4963493cef6e9e868",
   "docs/balance/four_voice_selection_pilot_aircraft_20260911.json": "55245bbf2abefd1967403fed76382813b90238a6a9de34c2cae0dda7c6e0c019",
   "docs/balance/four_voice_selection_pilot_infantry_20260911.json": "cea636ae66716e7a8fbf97ef0bf2e8a4bf76cf615968b8af096ca9fd7e87e417",
@@ -33313,8 +33867,8 @@
   "mods/cameo/weapons/warcraft2.yaml": "dbf2df4bde65f982cfea5fbd3bb3c589037ac7d5a767d627b85a09cf9ae0145b",
   "mods/cameo/weapons/weapons.yaml": "ba07d64556359fdbdf5b3a74db714c9077aebce6bde90cd1c26051441ea3fd67",
   "tools/audit/miniyaml.py": "152ff27f9c64a81bc1d388ba9468368377fd3e6d0329c7ffcda0900773442130",
-  "tools/balance/armament_roles.py": "7aba44d46be11c2fffbc936a78330a637bb90d5311451586ea8f3b2d8fa724c6",
-  "tools/balance/assign_references.py": "298c0a5d55f2e95307dca15cc13df5785e1cbe0d2b4c4551623124f60734ed5f",
+  "tools/balance/armament_roles.py": "5b00f54be9eaf65405693163b04411ebf5b8556d7a8a719773b669228423a3e4",
+  "tools/balance/assign_references.py": "e5df34a42d27a60b3c876ab43f7d683f1706234eb55584164cb885c2b4e26913",
   "tools/balance/build_armament_pairing_report.py": "59e4b1670b3ef6847dd258a2b5a7ac2d77ba37f60e9ea7d3f56cb54a4a0c89ab",
   "tools/balance/class_membership.py": "16d81a1afc26ff55d639acfbc447351d9910e6a240958732a6a15542625db28d",
   "tools/balance/explain_unit.py": "394b74b8b9632b1532038465fcfbd5c282bc0900fb39ac4978fe5e13c9aa86ff",
@@ -33367,25 +33921,25 @@
   "actors": 314,
   "actors_tier_expanded": 174,
   "actors_tier_original": 140,
-  "actors_with_an_uncovered_armament": 120,
+  "actors_with_an_uncovered_armament": 119,
   "actors_with_no_structured_reference_at_all": 16,
-  "cameo_armaments_without_a_reference": 403,
-  "contaminated_rows": 38,
-  "exact_pairs": 226,
+  "cameo_armaments_without_a_reference": 383,
+  "contaminated_rows": 44,
+  "exact_pairs": 238,
   "multi_role_actors": 46,
-  "pairs": 333,
+  "pairs": 353,
   "pairs_from_a_rank_gated_weapon": 4,
-  "pairs_role_air": 25,
-  "pairs_role_both": 121,
-  "pairs_role_ground": 187,
-  "pairs_via_both_fallback": 107,
-  "uncovered_despite_a_structured_reference_air": 21,
+  "pairs_role_air": 28,
+  "pairs_role_both": 131,
+  "pairs_role_ground": 194,
+  "pairs_via_both_fallback": 115,
+  "uncovered_despite_a_structured_reference_air": 19,
   "uncovered_despite_a_structured_reference_both": 36,
-  "uncovered_despite_a_structured_reference_ground": 94,
+  "uncovered_despite_a_structured_reference_ground": 93,
   "uncovered_despite_a_structured_reference_special": 2,
-  "unreferenced_role_air": 58,
-  "unreferenced_role_both": 88,
-  "unreferenced_role_ground": 253,
+  "unreferenced_role_air": 55,
+  "unreferenced_role_both": 78,
+  "unreferenced_role_ground": 246,
   "unreferenced_role_special": 4
  },
  "uncovered_armaments": {
@@ -33769,16 +34323,6 @@
     "weapon": "ra1_allies_alliedapc_gun_AA"
    }
   ],
-  "ra1_allies_alliedheavyaatank": [
-   {
-    "role": "ground",
-    "weapon": "ra1_allies_alliedheavyaatank_cannon"
-   },
-   {
-    "role": "air",
-    "weapon": "ra1_allies_alliedheavyaatank_cannon_AA"
-   }
-  ],
   "ra1_allies_sheridanassaulttank": [
    {
     "role": "both",
@@ -34055,10 +34599,6 @@
    {
     "role": "air",
     "weapon": "td_gdi_humveemkii_machinegunhumvee2_AA"
-   },
-   {
-    "role": "air",
-    "weapon": "td_gdi_humveemkii_rocketshumvee2_AA"
    }
   ],
   "td_gdi_missileboat": [
