@@ -778,6 +778,25 @@ damage column a live compliance check exactly as the range column is for 3a.2. �
 depth-charge rows and the two bombers are the same population as 3a.2's open bomb exemption -
 rule the exemption first, then fix what remains.
 
+**⭐ THE DRIFT RULE - average the near-misses, leave the wide gaps alone** (maintainer,
+2026-09-14): *"please use the same value for both: average of 119 and 121 = 120. That's how you
+fix any of these very close drifts but the larger ones are likely on design. Only the smaller
+drifts like these should be corrected."* A spread of a couple of percent is somebody's arithmetic
+slipping and is repaired by averaging; a spread of 100% is a design decision and must be left to
+a design ruling. Measured across the classic four at a **5%** threshold, the whole corrective
+list is TWO rows:
+
+| actor | quantity | values | spread | action |
+|---|---|--:|--:|---|
+| `ra1_soviets_yakscoutplane` | cycle | 119 / 121 | **1.7%** | average to **120** (bomb reload 110 -> 111, chaingun 100 -> 99) |
+| `td_gdi_battletank` | range | 5,400 / 5,438 | **0.7%** | average to **5,419** |
+
+Everything else measures 12.7% or wider - the Yak's bomb against its chaingun at 280%, the Humvee
+Mk II's two cycles at exactly 100%, the Laser Corvette's charged laser at 114% - and those are
+design questions, not drift. ⚠ Both corrections are yaml balance numbers and therefore belong to
+the pipeline (`extract_stats` -> ledger -> `apply_balance --confirm`) with a boot gate, never to a
+hand edit.
+
 ### 3a.7 Mutually exclusive weapons resolve INDEPENDENTLY - and their DPS is never summed
 
 > *"Those should be regarded like the anti air weapons since they are mutually exclusive with
