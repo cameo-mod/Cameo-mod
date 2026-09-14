@@ -948,6 +948,34 @@ ground-side candidates. Which one is the real half is a question about that unit
 question, so the generator refuses rather than picking.
 
 
+### 3a.10 ⭐ `Only` MARKS A DISJOINT PAIR - the suffix that overrides the twin rule
+
+> *"The two weapons should be renamed and I think the key to this is simply the Only at the end
+> which should override the AG / AA same weapon twin rule! So if you name it _AGOnly and _AAOnly
+> that will tell our formula that those are indeed disjointed weapons and not a twin!"*
+> (maintainer, 2026-09-14)
+
+**THE LAW.** The suffix says which of the two mechanisms a weapon belongs to, so no tool has to
+infer it:
+
+| naming | meaning | the formula |
+|---|---|---|
+| `X_AG` + `X_AA` | **one weapon** split for reach (3a.1) | prices `X_AG`, **drops `X_AA`** |
+| `X_AGOnly` + `X_AAOnly` | **two independent weapons** (3a.7) | prices **BOTH**, as virtual units, never summed |
+| no suffix | hits everything, or is the actor's only weapon | priced normally |
+
+⛔ **THIS IS WHAT UNBLOCKS THE RENAME.** 3a.8 has the formula drop every `_AA` by name, which
+would have deleted the Ordos AA trooper's air missile - a full weapon that must be priced. With
+`Only` the two cases are distinguishable at a glance and the drop rule stays unconditional. The
+Ordos trooper therefore becomes `D2K_Rocket_Trooper_AGOnly` (already correct) and
+`D2K_Rocket_Trooper_AAOnly`, and its 1.554x reach with 3x damage difference is not a violation of
+anything - it is 3a.7 working as designed: longer reach, lower DPS.
+
+⚠ A disjoint pair's ground half may carry a name of its own that has nothing to do with the air
+half - the Sea Scorpion's ground weapon is `RA2FlakTrackGun`, shared with the flak track - so the
+`Only` convention cannot always be applied to BOTH halves. Where the ground weapon is shared with
+another unit it must not be renamed; only the air half takes `_AAOnly`.
+
 ### 3a.9 THE FIREPOWER SHARE - how a multi-weapon unit was always balanced
 
 > *"you need to count them as individual units in the balance formula, one with one weapon and
