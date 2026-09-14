@@ -2838,3 +2838,21 @@ kept for provenance and for the technique notes inside them.
 **The rule that keeps this file from becoming one of them:** a handoff records STATE, and state
 rots. When you finish a session, update **this** file — do not write a new dated one. If a
 statement here disagrees with the tree, the tree is right; fix the sentence.
+## 2026-09-14 — SEVEN INI SOURCES BYTE-PINNED; ROLE VOTES STILL FAIL CLOSED
+
+The exact external INIs for CnC Reloaded, Mental Omega, RA2 0XX, RA2 Reborn, Red Resurrection,
+Rise of the East and Twisted Insurrection were received and verified against their supplied
+SHA-256 manifest. `docs/reference/ini_source_pins.json` records hashes only; the third-party rules
+text remains outside git.
+
+`tools/reference/ini_source_pins.py` proves the current corpus points back to those bytes at the
+scope needed for later role extraction: all **10,144** rows match their actor Primary/Secondary
+slots and every cited weapon-to-projectile link. The 64 historical promoted-secondary occurrences
+(63 identities; duplicated Red Resurrection `NAFLAKAI1`) are preserved exactly and are explicitly
+not re-approved by this operation. `docs/reference/ini_corpus.json` gains only `source_sha256` on
+those rows; no value, order, duplicate, selection, damage, range or cadence field changes.
+
+⛔ This does **not** restore their votes yet. RA2/Ares default targeting semantics and the
+per-slot weapon-evidence eligibility gate remain separate review work. `extract_ini_projectile_roles`
+continues to publish DTA only, so role-less sources still abstain. The 694 unfolded-cycle hold and
+the no-regeneration warning below both remain intact.

@@ -399,12 +399,16 @@ undeclared. A projectile declaring neither flag takes the engine default (`AA=no
 is recorded in the file as an explicit assumption with its basis — and each verdict says which half
 was declared and which was defaulted.
 
-⛔ **DTA only, and that is a provenance ruling.** Of the nine INI sources, DTA Classic and DTA
-Enhanced are the only two whose corpus rows carry a `source_sha256`; the other seven pin nothing. A
-projectile role is a claim about the same bytes the damage numbers came from, and for seven sources
-that claim cannot be made. They abstain. Re-pin them and the tool covers them with no change. (The
-two DTA hashes were verified against the reference install before anything was written:
-`786f0ae5…` for `Rules.ini`, `d836d5a9…` for `Enhance.ini`, both exact.)
+⛔ **DTA only for role evidence, even after the seven-source pin milestone.** The other seven exact
+INI files are now SHA-256 pinned, and `ini_source_pins.py` verifies all **10,144** existing corpus
+rows against their actor Primary/Secondary slots and weapon-to-projectile links. It preserves the
+historical 64 promoted-secondary occurrences (63 identities) without approving those selections.
+The third-party text remains outside git.
+
+That provenance does not establish RA2/Ares defaults or make an incomplete weapon eligible to
+vote. `extract_ini_projectile_roles.py` therefore still publishes only DTA roles until those two
+gates are reviewed; the seven sources continue to abstain. The DTA hashes remain independently
+verified: `786f0ae5…` for `Rules.ini`, `d836d5a9…` for `Enhance.ini`.
 
 ## 5. What the pairing currently reports
 

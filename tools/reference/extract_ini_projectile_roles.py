@@ -15,12 +15,12 @@ missile, so the DTA mammoth's secondary is `both`, which is what makes it the co
 Cameo's `MissileAP_Heavy` and for CA's `MammothTusk` (Air, AirSmall, Infantry). A name classifier
 calls it anti-ground and pairs an air missile against a cannon. Measured 2026-09-13.
 
-⛔ DTA ONLY, AND THAT IS A PROVENANCE RULING, NOT AN OVERSIGHT. Of the nine INI sources in
-`ini_corpus.json`, DTA Classic and DTA Enhanced are the ONLY two whose rows carry a
-`source_sha256`; the other seven were extracted in the named-source mode and pin nothing. A
-projectile role is a claim about the same bytes the damage numbers came from, and for seven
-sources that claim cannot be made. They keep `role: None` and abstain — an abstention is a
-correct answer, a guess is not. Re-pin those sources and this tool covers them with no change.
+⛔ DTA ONLY FOR NOW. The other seven source files are byte-pinned as of 2026-09-14, but that
+milestone deliberately certifies only their actor weapon-slot and weapon-projectile links. It
+does not establish RA2/Ares defaults or make an incomplete weapon eligible to vote. Until those
+two gates are implemented and reviewed, this extractor continues to publish DTA roles only and
+the seven sources continue to abstain. A source hash is necessary provenance, not sufficient
+combat evidence.
 
     python tools/reference/extract_ini_projectile_roles.py \
         --ini-dir "<reference>/DTA Developer Edition/INI" --write
@@ -64,15 +64,30 @@ def sha256(path: pathlib.Path) -> str:
 
 def corpus_provenance(root=ROOT):
     """{source: (rules_sha256, overlay_sha256)} for every source that pins its bytes."""
-    out = {}
+    seen = {}
     corpus = pathlib.Path(root) / "docs" / "reference" / "ini_corpus.json"
     for line in corpus.read_text(encoding="utf-8").splitlines():
         if not line.strip():
             continue
         row = json.loads(line)
-        digest = row.get("source_sha256")
-        if digest:
-            out.setdefault(row["source"], (digest, row.get("overlay_sha256")))
+        seen.setdefault(row["source"], []).append(
+            (row.get("source_sha256"), row.get("overlay_sha256")))
+    out, dropped = {}, []
+    for source, values in seen.items():
+        # A source is byte-pinned only when EVERY row carries one identical pin. Accepting the
+        # first stamped row would let a partial or conflicting corpus masquerade as verified.
+        if any(not isinstance(digest, str) or len(digest) != 64
+               or any(ch not in "0123456789abcdef" for ch in digest.lower())
+               for digest, _overlay in values):
+            if any(digest for digest, _overlay in values):
+                dropped.append((source, "source pin is partial"))
+            continue
+        unique = set(values)
+        if len(unique) != 1:
+            dropped.append((source, "source pins conflict"))
+            continue
+        out[source] = unique.pop()
+    corpus_provenance.dropped = dropped
     return out
 
 
