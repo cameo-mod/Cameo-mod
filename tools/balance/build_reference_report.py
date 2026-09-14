@@ -965,6 +965,28 @@ ARMAMENT_COMPONENTS = {
 # is not.
 _ROLE_DOMAINS = {"ground": frozenset("G"), "air": frozenset("A"), "both": frozenset("GA")}
 
+_VALID_TARGETS = {}
+
+
+def _valid_targets(weapon):
+    """The weapon own `ValidTargets` tokens, or None when it declares none.
+
+    ⚠ An ABSENT `ValidTargets` is not an empty one - the engine defaults it - so this returns
+    None and the caller falls back to the coarse role rather than concluding "hits nothing".
+    """
+    if weapon in _VALID_TARGETS:
+        return _VALID_TARGETS[weapon]
+    try:
+        node = _ruleset().resolve_weapon(weapon)
+    except Exception:
+        node = None
+    tokens = None
+    if node is not None:
+        child = next((c for c in node.children if c.key == "ValidTargets"), None)
+        if child is not None and child.value:
+            tokens = frozenset(t.strip().lower() for t in str(child.value).split(",") if t.strip())
+    return _VALID_TARGETS.setdefault(weapon, tokens)
+
 
 def firing_together(actor, entry):
     """The armaments whose damage may honestly be ADDED, or None.
@@ -983,12 +1005,20 @@ def firing_together(actor, entry):
        the difference between a combined figure and a fabricated one. The twin test is the same
        one `doc_claims.aa_split_pairs_compliant` uses: an `_AA` name whose base weapon exists.
 
-    3. ⛔ THEY MUST BE ABLE TO HIT THE SAME TARGET. A bomb that only strikes the ground and a
-       missile that only reaches air are never in the air at the same target, so summing them
-       describes a volley nothing ever receives (`ra1_allies_rapierjumpjet`, `td_gdi_firehawk`).
-       The test is that the INTERSECTION of every armament domain is non-empty: `ground` + `both`
-       share the ground and sum; `ground` + `air` share nothing and withhold. Connectivity would
-       be the wrong test - ground/air/both is a connected chain with no common target.
+    3. ⛔ THEY MUST BE ABLE TO HIT THE SAME TARGET. The test is that the INTERSECTION of every
+       armament domain is non-empty: `ground` + `both` share the ground and sum; `ground` + `air`
+       share nothing. Connectivity would be the WRONG test - ground/air/both is a connected chain
+       with no common target.
+
+       ⭐ A DISJOINT SET IS NOT A DEFECT, IT IS A DIFFERENT KIND OF UNIT, so it returns the
+       sentinel "exclusive" rather than None and the caller says which (maintainer, 2026-09-14,
+       on the depth-charge boats): *"Those should be regarded like the anti air weapons since
+       they are mutually exclusive with their other weapon ... it must resolve to the same cost
+       for both weapons for the same actor individually as if they were twin units (imagine one
+       ship with only rockets and the same ship with only depth charges) ... but the DPS is never
+       summed up for those!"* `ra1_allies_destroyer` carries a missile for `Ground, Water, Air`
+       and a depth charge for `Underwater, Submarine`: two weapons that can never engage one
+       target, so each is resolved alone and the actor pays once.
     """
     built = as_built_weapons(actor)
     if built is None:
@@ -1000,13 +1030,26 @@ def firing_together(actor, entry):
     arms = [a for a in arms if a.get("weapon") not in twins]
     if len(arms) < 2:
         return None
+    # ⛔ `ValidTargets` FIRST, THE ROLE ONLY AS A FALLBACK. The pairing role vocabulary is
+    # ground/air/both and has NO underwater domain, so a depth charge declaring
+    # `Underwater, Submarine` is filed as "ground" and looks like it shares a target with the
+    # ship cannon beside it. It cannot: the two never engage the same thing. Reading the weapon
+    # declaration directly is what separates `ra1_allies_destroyer` (missile Ground/Water/Air vs
+    # depth charge Underwater/Submarine - exclusive) from `td_gdi_humveemkii` (both Ground/Water,
+    # genuinely simultaneous). The role stays as the fallback for a weapon that declares nothing.
+    targets = [_valid_targets(a.get("weapon")) for a in arms]
+    if all(t for t in targets):
+        common = set(targets[0])
+        for t in targets[1:]:
+            common &= t
+        return arms if common else "exclusive"
     domains = [_ROLE_DOMAINS.get(a.get("role")) for a in arms]
     if any(d is None for d in domains):
         return None
     common = frozenset("GA")
     for d in domains:
         common &= d
-    return arms if common else None
+    return arms if common else "exclusive"
 
 
 def combined_armament_totals(actor, attached_rows, dist, cdist, ctype):
@@ -1036,8 +1079,8 @@ def combined_armament_totals(actor, attached_rows, dist, cdist, ctype):
     if entry is None:
         return None
     arms = firing_together(actor, entry)
-    if arms is None:
-        return None
+    if arms is None or arms == "exclusive":
+        return arms
     # ⭐ ONE CYCLE PER ACTOR IS THE CONVENTION (maintainer, 2026-09-14): *"the cycle time is the
     # same for both! Reload delay + sum of burst delays must be identical between weapons."*
     # Verified in the tree: the Mammoth runs 80/80, the Sheridan 64/64/64 with a Burst-4 chaingun
@@ -1091,6 +1134,12 @@ def combined_damage_cell(actor, cameo_row, attached_rows, dist, cdist, ctype):
     totals = combined_armament_totals(actor, attached_rows, dist, cdist, ctype)
     if totals is None:
         return None
+    if totals == "exclusive":
+        return ('<span class="muted" title="these weapons can never engage the same target - a '
+                'depth charge reaches Underwater/Submarine and the ship gun does not - so their '
+                'damage is NOT summed. Each is resolved on its own, as though the actor were two '
+                'twin units sharing one HP, speed and cost; see the per-armament block below.'
+                '">resolved per weapon <b class="warn">not summed</b></span>')
     if totals == "cycles_differ":
         return ('<span class="muted" title="these armaments fire together but do NOT share one '
                 'attack cycle, so there is no interval their damage can be added over. One cycle '
@@ -1130,7 +1179,9 @@ def combined_range_cell(actor, tgt_range):
     if entry is None:
         return None
     arms = firing_together(actor, entry)
-    if arms is None:
+    if arms is None or arms == "exclusive":
+        # Mutually exclusive weapons legitimately carry DIFFERENT reaches - a depth charge is
+        # short and its ship's missile is long - so there is no single actor range to show.
         return None
     reaches = {a.get("range_wdist") for a in arms}
     if len(reaches) != 1 or None in reaches:

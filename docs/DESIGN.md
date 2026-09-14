@@ -657,6 +657,95 @@ damage column a live compliance check exactly as the range column is for 3a.2. �
 depth-charge rows and the two bombers are the same population as 3a.2's open bomb exemption -
 rule the exemption first, then fix what remains.
 
+### 3a.7 Mutually exclusive weapons resolve INDEPENDENTLY - and their DPS is never summed
+
+> *"Those should be regarded like the anti air weapons since they are mutually exclusive with
+> their other weapon ... It's not the same weapon that's firing but a different weapon with
+> different range, damage and attack cycle but overall it must resolve to the same cost for both
+> weapons for the same actor individually as if they were twin units (imagine one ship with only
+> rockets and the same ship with only depth charges) then you have to use the balance formula to
+> individually resolve DPS and range for both weapons so that the HP, speed and cost can be the
+> same for both variants and then merge it back together to a single unit right? ... the DPS is
+> never summed up for those!"* (maintainer, 2026-09-14)
+
+**THE LAW.** When two armaments on one actor can never engage the same target, they are not a
+combined weapon system - they are **two virtual twin units sharing one chassis**. Price each one
+on its own through the balance formula, require both to resolve to the SAME HP, speed and cost,
+then merge back to one actor. **Never sum their DPS, and never expect them to share a range** -
+a depth charge is deliberately short-ranged and the missile beside it is not, so 3a.2 does not
+apply between them and neither does 3a.6.
+
+⛔ **THE TEST IS `ValidTargets`, NOT THE PAIRING ROLE.** The role vocabulary is ground / air /
+both and has **no underwater domain**, so a depth charge declaring `Underwater, Submarine` is
+filed as "ground" and looks like it shares a target with the ship's cannon. It cannot. Read the
+weapon's own declaration and intersect:
+
+| actor | weapon A | weapon B | verdict |
+|---|---|---|---|
+| `ra1_allies_destroyer` | missile `Ground, Water, Air` | depth charge `Underwater, Submarine` | **exclusive** |
+| `ra1_allies_gunboat` | cannon `Ground, Water` | depth charge `Underwater, Submarine` | **exclusive** |
+| `td_gdi_missileboat` | missile `Ground, Water` | depth charge `Underwater, Submarine` | **exclusive** |
+| `td_gdi_firehawk` | missiles `Air` | bomb `Ground, Water` | **exclusive** |
+| `td_gdi_boxer` | cannon_AA `Air` | cannon `Ground, Water` | **exclusive** (an AA split) |
+| `td_gdi_humveemkii` | MG `Ground, Water` | rockets `Ground, Water` | **simultaneous** |
+
+**MEASURED, classic four:** of the multi-weapon actors, **6 sum**, **5 are exclusive**, and **4
+genuinely break 3a.6** - `ra1_soviets_su57attackbomber` 54/121, `ra1_soviets_yakscoutplane`
+119/121, `td_gdi_humveemkii` 42/84, `td_nod_lasercorvette` 42/90. That last list is the fix
+queue; the exclusive five are correct as they stand.
+
+⚠ `ra1_soviets_yakscoutplane` is worth its own line because it looks like the boats and is not:
+its napalm bomb is `Ground, Water` and its chaingun `Ground, Water, Air`, so against any ground
+target **both fire** and they must share a cycle. They miss by **2 ticks** - bomb
+`ReloadDelay 110 + 3 x Burst-4 delays = 119`, chaingun `100 + 7 x 3 = 121` - which is drift, not
+design, exactly like `td_gdi_battletank`'s 38-WDist range gap. ⚠ Its 1,840 vs 7,000 range gap is
+the unruled BOMB exemption to 3a.2 and must be ruled before it is "fixed".
+
+### 3a.8 ⛔ The balance formula IGNORES the `_AA` half - but only when it HAS an AG twin
+
+> *"the easiest way is to rename all those AA twin weapons with the _AA Suffix and then ignoring
+> it for the balance formula! The only thing that matters here is that the AA weapons have 1.5x
+> range from their AG version and that should only be part of the audit but never by the balance
+> formula"* (maintainer, 2026-09-14)
+
+**THE LAW.** An `_AA` half that exists only to give one gun 1.5x reach against air is **not a
+second weapon**: the formula prices the ground half and ignores the `_AA` half entirely. The
+1.5x relationship and the identical Damage/Reload/Burst/BurstDelays/MinRange are an **AUDIT**
+matter (`aa_split_pairs_compliant`), never a pricing input.
+
+⛔ **"IGNORE EVERY `_AA` WEAPON" WOULD PRICE REAL UNITS AT ZERO.** The suffix currently means
+three different things in this tree, and only the first may be ignored:
+
+1. **The AA half of a split** - 63 weapons whose exact base twin `X` also exists. Ignore these.
+2. **A standalone AA weapon** - `ra1_soviets_samsite` carries exactly ONE armament,
+   `ra1_soviets_samsite_missile_AA`, and `harkonnen_adp` carries `D2K_Rocket_AA`. That weapon IS
+   the unit. Ignoring it prices a SAM site at **zero DPS**.
+3. **A general weapon that merely also hits air** - `ra1_allies_rapierjumpjet_missile_AA`
+   declares `Ground, Water, Air` and has no AG twin at all. It is the Rapier's main gun wearing
+   the wrong name.
+
+So the rule is conditional: **ignore `X_AA` when `X` exists as another armament on the same
+actor.** Anything else is priced normally.
+
+**THE RENAME THAT MAKES THE CONVENTION MACHINE-READABLE.** Eight true splits hide from the audit
+today because their GROUND half carries an `AG` suffix, so `X` never matches `X_AA`:
+
+| ground half (rename to) | AA twin | range | ratio |
+|---|---|--:|--:|
+| `AsianQuasarAG` -> `AsianQuasar` | `AsianQuasar_AA` | 6000 -> 9000 | **1.50x** |
+| `RA2MedusaAG` -> `RA2Medusa` | `RA2Medusa_AA` | 9000 -> 13500 | **1.50x** |
+| `SteelMantaAG` -> `SteelManta` | `SteelManta_AA` | 6666 -> 9999 | **1.50x** |
+| `td_gdi_boxer_boxercannonag` -> `..._boxercannon` | `..._boxercannon_AA` | 4860 -> 7290 | **1.50x** |
+| `D2K_Rocket_Trooper_AGOnly` -> `D2K_Rocket_Trooper` | `D2K_Rocket_Trooper_AA` | 6252 -> 9716 | 1.55x |
+| `d2k_APC_AG` -> `d2k_APC` | `d2k_APC_AA` | 9216 -> 11000 | 1.19x |
+| `d2k_APCo_AG` -> `d2k_APCo` | `d2k_APCo_AA` | 9216 -> 11000 | 1.19x |
+| `AsianQuasarBoatAG` -> `AsianQuasarBoat` | `AsianQuasarBoat_AA` | 7168 -> 7168 | 1.00x |
+
+⭐ Four are **already at exactly 1.50x** and are invisible to the audit for no reason but the
+name; the other four are real 3a.1 violations the rename would expose. ⚠ The rename is a weapon
+migration (`tools/rename/safe_rename.py`) and needs a boot gate, so it is listed here and awaits
+the order rather than being done in passing.
+
 ### 3a.5 ⛔ NEVER reference across factions
 
 > *"the GDI emp grenadier was mapped to the CA marauder which is a scrin unit so that is wrong!
