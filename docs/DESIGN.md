@@ -546,6 +546,43 @@ by 1.5x; `Rocket_stealth` makes AA weaker (14500 vs 12000) on a 1.19x range. Rea
 mistake ruled against above. There is no convention here to preserve; pinned by
 `aa_split_pairs_compliant`.
 
+**⭐⭐ THE AA BONUS IS SCOPED BY CLASS** (maintainer, 2026-09-14). The question was whether the
+AA half carries +100% damage; the answer depends on whose job anti-air is:
+
+| class | the AA half gets | why |
+|---|---|---|
+| `anti_air_vehicle` | **+50% range AND +100% damage**, priced at zero | anti-air IS the role |
+| the **anti-air SHIP** template (Sea Scorpion, Aegis Cruiser) | **the same as anti_air_vehicle** | the naval form of that role |
+| `scout_vehicle` | **+50% range, SAME damage** | it carries AA; it is not the AA |
+| `armed_troop_transport` | **+50% range, SAME damage** | likewise |
+| any other class | may not carry an AA split at all | |
+
+> *"Dedicated anti air vehicle will get the +100% damage against air because that's their role,
+> scout vehicle and armed troop transport should only have the +50% range but the same damage ...
+> don't forget we also have the anti air ship template like for the sea scorpion, aegis cruiser
+> etc, they should get the same bonus as the anti air vehicle class."*
+
+⚠ **THE MEASUREMENT THAT SHAPED THIS.** Of 63 pairs, **36** comply with identical damage and
+only **2** with double; 46 carry identical damage today. A blanket +100% would have made 36
+correct pairs wrong, required editing 61 of 63, and INVERTED the rise-only
+`aa_split_pairs_compliant` ratchet. Scoping it by class keeps the common case intact and gives
+the dedicated AA classes something the others do not have - which is the point, because a free
+double-damage air weapon on every APC would leave `anti_air_vehicle` with no identity.
+
+⛔ **BLOCKER: THERE IS NO NAVAL CLASS IN `class_anchors.json` AT ALL.** Not an anti-air ship
+class, not any other. The naval half of this ruling has nothing to attach to yet, and creating
+that class is a prerequisite for applying it.
+
+⚠ **THE AEGIS CRUISER, ordered the same day**: *"remove the upgrade that unlocks the anti ground
+weapon and just make it the default AG / AA pair with the +50% range and +100% damage"*. Measured:
+`RA2Medusa_AA` 13,500 (Air) against `RA2MedusaAG` 9,000 (Ground/Water) is **already exactly 1.5x**,
+the damage is **identical at 30,000**, and the AG armament is gated behind `upra2aegismissiles`.
+So the change is precisely two things - drop that condition, and double the AA half's damage to
+60,000 - both yaml, both needing the pipeline and a boot gate. ⚠ The **Sea Scorpion is not a
+clean pair**: `SeaScorpion_AA` 13,500 against `RA2FlakTrackGun` 5,528 is **2.44x**, and its ground
+weapon is SHARED with the flak track, so it cannot be renamed or rescaled without touching another
+unit. It needs its own decision.
+
 **⭐ WHICH CLASSES MAY CARRY AN AA SPLIT AT ALL** (maintainer, 2026-09-14: *"anti air vehicle,
 scout vehicle and armed troop transports get this bonus anti air range ... It should have been
 written down into the documentation"*). Exactly **three**:
