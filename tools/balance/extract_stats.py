@@ -190,6 +190,16 @@ def charge_up(resolved, local):
             if cycle_reload:
                 rec["cycle_reload"] = round(cycle_reload, 2)
                 rec["burst"] = int(num(spec.get("burst"), 1) or 1)
+                # ⭐ THE FIELD THAT DECIDES WHETHER THE WIND-UP IS PAID ONCE OR PER SHOT.
+                # `ChargeDelay` is the wait `ChargeFire` inserts between shots; when it is
+                # SHORTER than the weapon's reload, `ChargeFire` meets a reloading armament,
+                # `CanAttack` is false, and the activity exits - so the actor winds up again
+                # for every shot. No actor in the tree writes it, which is exactly why the
+                # mode was invisible for so long: the engine default 3 has to be recorded
+                # explicitly or `charge_attack_cycle` cannot tell the two machines apart.
+                charge_delay = num(spec.get("charge_delay"))
+                if charge_delay is not None:
+                    rec["charge_delay"] = round(charge_delay, 2)
         return rec
     return None
 

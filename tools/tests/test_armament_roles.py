@@ -25,6 +25,7 @@ sys.path.insert(0, str(ROOT / "tools" / "reference"))
 
 import armament_roles as ar                      # noqa: E402
 import miniyaml                                  # noqa: E402
+import nominal_condition_context as ncc          # noqa: E402
 import reference_distribution as rd              # noqa: E402
 from audit_missile_role_family import weapon_role  # noqa: E402
 
@@ -642,43 +643,72 @@ class ChargeAttackCycleTests(unittest.TestCase):
         self.assertTrue(views)
         for v in views:
             self.assertEqual(3, v["burst"], v["weapon"])       # AttackTesla MaxCharges
-            # IMPLEMENTED: 100 trait reload + 3 x (3 - 1) burst gaps.
-            # RULED: 131, i.e. + the 25-tick InitialChargeDelay. Withheld - see the class docstring.
-            self.assertEqual(106.0, v["cycle"], v["weapon"])
+            # ⭐ 100 trait reload + 3 x (3 - 1) inter-zap gaps + the 25-tick wind-up.
+            # This was 106 while the charge term was withheld; the ruled 131 is now what
+            # `charge_attack_cycle` returns, so the gap this class used to assert is closed.
+            self.assertEqual(131.0, v["cycle"], v["weapon"])
 
-    def test_ignoring_the_trait_cycle_overstates_the_rate_11_8x(self):
-        """The number DESIGN names, recomputed from the tree rather than quoted."""
+    def test_ignoring_the_trait_cycle_overstates_the_rate_14_6x(self):
+        """The number DESIGN names, recomputed from the tree rather than quoted.
+
+        ⚠ It MOVED from 11.8x to 14.6x when the wind-up entered the cycle, and that is the
+        right direction: a longer true cycle makes reading the weapon alone a bigger lie.
+        """
         view = ar.cameo_views(_ledger_row("ra1_soviets_teslacoil"), self.rules)[0]
         naive = view["damage_per_shot"] / 3.0        # the weapon's own 3-tick reload, burst 1
-        self.assertAlmostEqual(11.8, naive / view["rate"], places=1)
+        self.assertAlmostEqual(14.6, naive / view["rate"], places=1)
 
     def test_the_rate_identity_holds_for_every_implemented_term(self):
         """`DPS = damage x burst / cycle` is asserted as an identity, not described."""
         v = ar.cameo_views(_ledger_row("ra1_soviets_teslacoil"), self.rules)[0]
-        self.assertEqual(100.0 + 3.0 * (3 - 1), v["cycle"])   # reload + burst delays
+        # reload + inter-zap gaps + charge - the maintainer's cycle, in full.
+        self.assertEqual(100.0 + 3.0 * (3 - 1) + 25.0, v["cycle"])
         self.assertEqual(v["damage_per_shot"] * v["burst"], v["damage_per_cycle"])
         self.assertAlmostEqual(v["damage_per_shot"] * v["burst"] / v["cycle"], v["rate"])
 
-    def test_the_charge_term_is_withheld_and_the_gap_is_exactly_the_wind_up(self):
-        """⛔ THE GAP IS ASSERTED, so it cannot be forgotten or silently closed.
+    def test_the_charge_term_is_applied_and_the_cycle_carries_the_whole_wind_up(self):
+        """⭐ THE GAP THIS USED TO ASSERT IS CLOSED. It said: "if someone lands the extractor
+        work, this fails too - and that is the signal to move every expectation here to the ruled
+        values at once." The extractor work landed, so it did, and this is the moved form.
 
-        If someone applies the charge term without the extractor work, this fails and points at
-        the class docstring. If someone lands the extractor work, this fails too - and that is the
-        signal to move every expectation here to the ruled values at once.
+        The wind-up is now counted ONCE for a charge-once actor and once PER SHOT for a
+        charge-per-shot one, and the test asserts the decomposition rather than the total, so a
+        future change cannot reach the right number by the wrong route.
         """
         row = _ledger_row("ra1_soviets_teslacoil")
         wind_up = row["charge_up"]["ticks"]
         self.assertEqual(25.0, wind_up)
+        # ChargeDelay is now recorded - without it the two machines are indistinguishable.
+        self.assertEqual(3.0, row["charge_up"]["charge_delay"])
         view = ar.cameo_views(row, self.rules)[0]
-        self.assertEqual(131.0, view["cycle"] + wind_up, "the RULED period is 106 + 25")
-        self.assertEqual(106.0, view["cycle"], "the IMPLEMENTED period withholds the charge")
+        self.assertEqual(131.0, view["cycle"], "the RULED period, now implemented")
+        self.assertEqual(106.0, view["cycle"] - wind_up, "and it is 106 plus the wind-up")
+
+    def test_the_rail_tower_pays_its_wind_up_once_per_shot(self):
+        """⛔ THE MODE TEST, end to end: charge-per-shot is worth a factor of MaxCharges.
+
+        Weapon reload 10 > ChargeDelay 3, so `ChargeFire` meets a reloading armament, exits, and
+        the tower re-enters through `ChargeAttack` - paying `InitialChargeDelay` every shot, as
+        the maintainer ruled. 4 x (10 + 10) + 120 + 10 = 210.
+        """
+        row = _ledger_row("asianalliance_railtower")
+        charge = row["charge_up"]
+        self.assertEqual(10.0, charge["ticks"])
+        self.assertEqual(3.0, charge["charge_delay"])
+        self.assertEqual(5, charge["burst"])
+        view = ar.cameo_views(row, self.rules)[0]
+        self.assertEqual(210.0, view["cycle"])
+        # Charge-once would have been 4 x 3 + 120 + 10 = 142. The modes are not close.
+        self.assertNotEqual(142.0, view["cycle"])
 
     def test_the_chargelevel_family_gets_no_cycle_change_at_all(self):
         """`formula.charge_attack_cycle` returns None here - the trait does not own the RELOAD.
 
         ⛔ That is NOT the same as "the charge costs no time", and reading it that way is what
-        produced my withdrawn 146/155 figures. The ruled period for the base Obelisk is 96 + 50;
-        the implemented one is 96, and the difference is withheld with the rest.
+        produced my withdrawn 146/155 figures. ⚠ The `AttackTesla` charge term is now APPLIED,
+        and this family deliberately did NOT move with it: `AttackTesla` owns its actor's reload
+        and can therefore say what a cycle is, while a `ChargeLevel` trait only delays a gun that
+        keeps its own. The base Obelisk stays 96 and the burning one 105.
         """
         views = ar.cameo_views(_ledger_row("td_nod_obeliskoflight"), self.rules)
         main = [v for v in views if v["weapon"] == "td_nod_obeliskoflight_laserobelisk"]
@@ -818,11 +848,11 @@ class ChargedActorPeriodTests(unittest.TestCase):
     FIELDS = {
         "ra1_soviets_teslacoil": (3, 100, 25, 3, 3),
         "ra2_soviets_teslacoil": (1, 75, 20, 3, 3),
-        "asianalliance_railtower": (5, 120, 12, 3, 10),
+        "asianalliance_railtower": (5, 120, 10, 3, 10),
     }
     RULED = {"ra1_soviets_teslacoil": 131,
              "ra2_soviets_teslacoil": 95,
-             "asianalliance_railtower": 220}
+             "asianalliance_railtower": 210}
 
     @classmethod
     def setUpClass(cls):
@@ -896,6 +926,29 @@ class ChargedActorPeriodTests(unittest.TestCase):
             expected = "per-shot" if actor == "asianalliance_railtower" else "once"
             self.assertEqual(expected, sim.charge_mode(cd, wr), actor)
 
+    def test_ra2_coil_has_one_enabled_armament_in_every_powered_mode(self):
+        """The baseline model assumes one firing armament, so the yaml must enforce it.
+
+        The old elite/no-overload expressions left their final ``or`` outside the
+        charge-state gate. That enabled both ``Armament@2`` and ``Armament@Charged2``
+        together and made ``AttackTesla`` decrement its single charge twice.
+        """
+        node = self.rules.resolve("ra2_soviets_teslacoil")
+        arms = [c for c in node.children if c.key.split("@", 1)[0] == "Armament"]
+        self.assertEqual(6, len(arms))
+        for charge in range(4):
+            for upgrade in (0, 1):
+                for elite in (0, 1):
+                    context = {
+                        "TeslaCoilCharge": charge,
+                        "unpowered": 0,
+                        "ra2_soviets_upgrade_teslaoverload": upgrade,
+                        "rank-elite": elite,
+                    }
+                    active = [a.key for a in arms
+                              if ncc.evaluate_context(a.get("RequiresCondition"), context)]
+                    self.assertEqual(1, len(active), (context, active))
+
     def test_both_wrong_traces_agreed_with_the_coils_which_is_why_they_survived(self):
         """⚠ Why two reviews passed a wrong formula: the coils cannot tell the models apart."""
         for coil in ("ra1_soviets_teslacoil", "ra2_soviets_teslacoil"):
@@ -904,17 +957,43 @@ class ChargedActorPeriodTests(unittest.TestCase):
             quantised = (mc - 1) * (cd * -(-wr // cd)) + tr + ic   # the 180 model
             self.assertEqual(self.RULED[coil], spin, coil)
             self.assertEqual(self.RULED[coil], quantised, coil)
-        # ...and why the Rail Tower is the only actor that discriminates.
+        # ...and why the Rail Tower is the only actor that discriminates. The three models are
+        # computed from the CURRENT fields rather than quoting 172/180/220, which were measured
+        # when its wind-up was 12; the point being asserted is that they DIVERGE here and agree
+        # on the coils, not the historical constants themselves.
         mc, tr, ic, cd, wr = self.FIELDS["asianalliance_railtower"]
-        self.assertEqual(172, (mc - 1) * max(cd, wr) + tr + ic)
-        self.assertEqual(180, (mc - 1) * (cd * -(-wr // cd)) + tr + ic)
-        self.assertEqual(220, (mc - 1) * (wr + ic) + tr + ic)
+        spin = (mc - 1) * max(cd, wr) + tr + ic
+        quantised = (mc - 1) * (cd * -(-wr // cd)) + tr + ic
+        per_shot = (mc - 1) * (wr + ic) + tr + ic
+        self.assertEqual(3, len({spin, quantised, per_shot}), "the tower separates all three")
+        self.assertEqual(self.RULED["asianalliance_railtower"], per_shot)
+        # The engine does charge-per-shot here, so the other two are the withdrawn ones.
+        self.assertLess(spin, per_shot)
+        self.assertLess(quantised, per_shot)
 
-    def test_the_ruled_period_is_still_not_applied(self):
-        """⛔ The ruled model is not implemented. The charge term stays withheld until the extractor
-        records `ChargeDelay` and the weapon reload beside the charge."""
-        view = ar.cameo_views(_ledger_row("ra1_soviets_teslacoil"), self.rules)[0]
-        self.assertEqual(106.0, view["cycle"], "the implemented period still excludes the charge")
+    def test_the_ruled_period_is_now_what_the_pipeline_prices(self):
+        """⭐ The extractor records `ChargeDelay`, so the mode is decidable and the term is
+        APPLIED. Every ruled figure is now the priced figure - asserted through the pricing path,
+        not just the simulator, so the two cannot drift apart."""
+        for actor, ruled in self.RULED.items():
+            view = ar.cameo_views(_ledger_row(actor), self.rules)[0]
+            self.assertEqual(float(ruled), view["cycle"], actor)
+
+    def test_the_autotarget_spread_sits_above_the_priced_floor(self):
+        """⚠ What is priced is the FLOOR, and only the floor. A charge-per-shot actor goes idle
+        between shots and re-enters on AutoTarget's U{3..7} scan, so its runtime cadence is a
+        distribution - measured here so nobody mistakes the priced number for the whole truth."""
+        import statistics
+        import sim_attack_tesla as sim
+        spec = self.FIELDS["asianalliance_railtower"]
+        ps = sim.periods_autotarget(spec, seeds=120)
+        self.assertEqual(210, min(ps), "the floor is what the pipeline prices")
+        self.assertGreater(statistics.mean(ps), 210)
+        self.assertLessEqual(max(ps), 210 + 4 * (sim.SCAN_MAX - 1))
+        # A charge-once actor never goes idle, so its cadence carries no spread at all.
+        for coil in ("ra1_soviets_teslacoil", "ra2_soviets_teslacoil"):
+            cps = sim.periods_autotarget(self.FIELDS[coil], seeds=40)
+            self.assertEqual({self.RULED[coil]}, set(cps), coil)
 
 
 def _ledger_row(actor):

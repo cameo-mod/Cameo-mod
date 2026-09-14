@@ -345,8 +345,19 @@ it and Astra's engine trace held it (PR #386), correctly. Three shapes break a n
   `ChargeLevel` family, so the regenerated `armament_pairing.json` changed only its three input
   fingerprints.
 
-⭐ Range-ness is now resolved at extraction, so **two extractor fields remain** — `ChargeDelay`
-and `ShotsPerCharge` — plus a formula that models recharge overlap.
+⭐⭐ **CLOSED, AND THE CHARGE TERM IS APPLIED (2026-09-14).** Range-ness resolves at
+extraction, and `ChargeDelay` is now recorded too — the engine default 3, written by no actor,
+which is precisely why the mode was undecidable. `charge_attack_cycle` therefore tells
+charge-once from charge-per-shot by comparing it against the WEAPON's reload, and prices
+**131 / 95 / 210**. Counting the wind-up cut the Tesla Coil's rate 19% and the Rail Tower's
+24%: both had been read as firing faster than they do.
+
+⚠ `ShotsPerCharge` stays unrecorded and matters only to the `ChargeLevel` family, which
+deliberately did NOT move — it delays a gun that keeps its own reload, so it cannot say what a
+cycle is. ⛔ And what is priced is the FLOOR: a charge-per-shot actor goes idle between shots
+and re-enters on `AutoTarget`'s `Next(3, 8)` = U{3..7} scan. A 300-seed sample reports
+210 minimum / 218 mean / 232 maximum, but a legal scan path reaches 234, so the sample maximum
+is not a ceiling. Baseline coil states are invariant when exactly one armament is enabled.
 Withholding is the same answer this lane gives
 everywhere else: an unprovable quantity abstains.
 
