@@ -2813,7 +2813,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "18000",
+        "damage": "16341",
         "falloff": "100, 0",
         "spread": "43",
         "tag": "MissileAP_Light",
@@ -2823,8 +2823,8 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
-      "range": "6368",
-      "reloaddelay": "63",
+      "range": "6264",
+      "reloaddelay": "56",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "Rockets"
@@ -2839,7 +2839,7 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "18000",
+        "damage": "16341",
         "falloff": "100, 0",
         "spread": "43",
         "tag": "MissileAP_Light",
@@ -2849,8 +2849,8 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
-      "range": "6368",
-      "reloaddelay": "63",
+      "range": "6264",
+      "reloaddelay": "56",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "Rockets"
@@ -2868,8 +2868,8 @@
     },
     "buildable": true,
     "cost": {
-     "src": "inherited",
-     "v": "300"
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Valued.Cost",
+     "v": "420"
     },
     "design": {
      "category": "Infantry",
@@ -2880,8 +2880,8 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
-     "v": "9000"
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Health.HP",
+     "v": "15000"
     },
     "name": "Nod Rocket Soldier",
     "prerequisites": [
@@ -2918,8 +2918,8 @@
      "v": "6500"
     },
     "speed": {
-     "src": "inherited",
-     "v": "50"
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Mobile.Speed",
+     "v": "45"
     }
    },
    "td_nod_stealthsoldier": {
@@ -4742,7 +4742,7 @@
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Valued.Cost",
-     "v": "600"
+     "v": "720"
     },
     "design": {
      "category": "Vehicles",

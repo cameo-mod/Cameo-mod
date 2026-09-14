@@ -113,6 +113,14 @@ td_gdi_rocketsoldier:
 	Inherits: ^E3
 	Tooltip:
 		Name: GDI Rocket Soldier
+	Valued:
+		Cost: 420
+	Health:
+		HP: 15000
+	ChangesHealth@SelfHealing:
+		Step: 15
+	Mobile:
+		Speed: 45
 	Inherits@LongRangeSensors: ^LongRangeSensors
 	Inherits@MissileTargeting: ^AdvancedMissileTargeting
 	Inherits@CuttingEdge: ^CuttingEdgeEquipment
@@ -143,6 +151,14 @@ td_gdi_rocketsoldier:
 
 E3: #map import compatibility
 	Inherits: td_gdi_rocketsoldier
+	Valued:
+		Cost: 300
+	Health:
+		HP: 9000
+	ChangesHealth@SelfHealing:
+		Step: 9
+	Mobile:
+		Speed: 50
 	# Keep the map-import alias on the original shared weapons.
 	Armament@PRIMARY:
 		Weapon: Rockets

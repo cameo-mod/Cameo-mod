@@ -33,6 +33,10 @@ td_nod_samsite_dragon:
 		ValidTargets: Air
 td_nod_rocketsoldier_rockets:
 	Inherits: Rockets
+	ReloadDelay: 56
+	Range: 6264
+	Warhead@MissileAP_Light:
+		Damage: 16341
 
 td_nod_flamethrower_flamethrower:
 	Inherits: Flamethrower
