@@ -985,6 +985,16 @@ ground-side candidates. Which one is the real half is a question about that unit
 question, so the generator refuses rather than picking.
 
 
+**⚠ THE IXIAN TWIN BAZOOKA IS A THIRD SHAPE, and it is unique** (maintainer, 2026-09-14):
+*"It's on the twin bazooka, the upgrade to the rocket trooper for the Ixians! And yes this unit
+shoots one straight rocket that is like a Bullet and one targeted Missile ... But it's unique to
+that unit with that logic."* `ixian_twinrockettrooper` fires `D2K_Rocket_Trooper1` (a **Missile**
+projectile) and `D2K_Rocket_Trooper2` (a **Bullet** projectile) from two armaments, both at range
+6,502 and both `Ground, Water, Air`. So it is neither a twin split nor a disjoint pair: it is TWO
+SYSTEMS THAT SHARE EVERY TARGET, differing only in how the projectile flies - which makes it a
+3a.6/3a.9 unit (one cycle, one range, the firepower split between the two systems). It takes no
+AA/AG suffix. ⚠ Do not generalise it: the maintainer marked it as unique to that unit.
+
 ### 3a.10 ⭐ `Only` MARKS A DISJOINT PAIR - the suffix that overrides the twin rule
 
 > *"The two weapons should be renamed and I think the key to this is simply the Only at the end
