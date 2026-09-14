@@ -579,6 +579,167 @@ YAML remains an explicit design decision.
     cycle, `MaxCharges` is the burst, and the WEAPON's reload is the burst delay —
     NOT `ChargeDelay`. Reading the weapon's reload as the cycle overstated Tesla DPS
     by **11.8×**. See `BALANCE_PROGRAM_PLAN.md` W16.
+  - ⭐⭐ **THE CYCLE IS RELOAD PLUS CHARGE, AND THE DISCOUNT STILL APPLIES** (maintainer
+    law, 2026-09-14): *"charged weapons come at a discount but the attack cycle
+    duration is reload delay plus charge delay"*. **BOTH, never either** — the K
+    discount prices the DRAWBACK of being helpless while winding up; the longer cycle
+    measures the OUTPUT that the wind-up costs.
+
+    This is not new arithmetic. The discount's own denominator already said so:
+    `charge_share = charge / (charge + cycle)` treats `charge + cycle` as the whole
+    period. And the full rate law is:
+
+        DPS = damage x burst / attack cycle
+        attack cycle = reload delay + sum of ALL burst delays + charge delay
+
+    ⚠ **"DPS" is a NAME, not a unit — it is damage per TICK**, everywhere in this
+    repository. Nothing here is per second.
+
+    ⭐⭐ **HOW MANY TIMES THE CHARGE IS PAID** (maintainer, 2026-09-14). This is the
+    fact that decides the whole arithmetic, and it is NOT derivable from the trait name:
+
+    > *"for the tesla coil the attack cycle is initial charge delay + reload delay but for
+    > the asian alliance railgun tower it needs to charge for every shot unlike the tesla
+    > coil! So at 5 shots the initial charge delay is used 5 times! For the tesla coil it
+    > is only used once!"*
+
+    | actor | base cycle | charge | paid | attack cycle |
+    |---|--:|--:|:--:|--:|
+    | `ra1_soviets_teslacoil` | 106 | 25 | **x1** | **131** |
+    | `ra2_soviets_teslacoil` | 75 | 20 | x1 | **95** |
+    | `asianalliance_railtower` | 160 | 12 | **x5** (`MaxCharges`) | **220 ruled immediate-reacquisition model** |
+
+    So a charged weapon is one of two machines, and they differ by a factor of `MaxCharges`:
+    **charge-once** (one wind-up, then the whole burst) or **charge-per-shot** (every shot
+    pays). Astra's engine trace found the mechanism that separates them — the Rail Tower's
+    post-shot `ChargeFire` wait (3) expires while its weapon is still in a 10-tick reload,
+    so the trait exits and must reacquire through `InitialChargeDelay` for the next shot.
+    The Tesla Coil's zaps are uninterrupted. The detectable condition is therefore
+    **`ChargeDelay` against the WEAPON's reload**, which is exactly the field
+    `extract_stats` does not yet record.
+
+    ⚠ The same question is open for multi-shot `ChargeLevel` — the burning Obelisk is
+    Burst 10 and its notifier resets on every projectile, which reads as charge-per-shot and
+    would make its period very large. **Do not assume it**; it needs the same evidence and a
+    ruling of its own.
+
+    ⭐ **RANDOM RANGES TAKE THE MEAN** (same ruling) — **IMPLEMENTED**: `ChargeLevel: 25, 50`
+    is not two settings but ONE uniform roll the engine makes on every wind-up, so it contributes
+    **37.5**. `extract_stats.charge_scalar` now averages min and max; it used to keep
+    `split(",")[0]`, which priced every charged shot as if it always rolled the luckiest value.
+    **Exactly four actors declare a range**, and all four moved:
+
+    | actor | declared | ticks | price multiplier |
+    |---|---|--:|---|
+    | `steelconsortium_dagger` | `25, 50` | 25 → **37.5** | 0.750 → 0.750 (already at the floor) |
+    | `wc2_humans_dwarvenrifleman` | `0, 4` | 0 → **2.0** | 0.750 → **0.976** |
+    | `wc2_humans_siegeengine` | `20, 40` | 20 → **30.0** | 0.875 → 0.827 |
+    | `wc2_orcs_siegeengine` | `20, 40` | 20 → **30.0** | 0.875 → 0.827 |
+
+    ⛔ **THE DWARF MOVES THE PRICE THE OPPOSITE WAY FROM INTUITION, AND THAT IS THE POINT.**
+    `charge_price_multiplier` reads `share <= 0` as *charges, but we cannot see by how much* and
+    hands out the FLAT 0.75 floor. So the misparsed zero was quietly collecting the deepest
+    discount in the table; measuring its real 2 ticks against a 60-tick reload makes it **dearer**,
+    not cheaper. A MEASURED near-zero and an UNMEASURED zero are different facts, and only one of
+    them may claim the floor.
+
+    ⚠ Nothing in the REFERENCE path moved: `formula.charge_attack_cycle` returns `None` for the
+    whole `ChargeLevel` family, so the regenerated `armament_pairing.json` changed only its three
+    input fingerprints. The ruling is MIN and MAX, not the mean of every element — they coincide
+    for the two-element ranges the tree has, and a third value would need its own measurement.
+    Pinned by `ranged_charge_actors`.
+
+    ⭐⭐⭐ **THE ENGINE TRACE, AND THE RULED IMMEDIATE-REACQUISITION MODEL** (`AttackTesla.cs`, read
+    2026-09-14 at the maintainer's request to *"verify why that is in game and then adjust
+    our formula so it will detect that behavior automatically"*).
+
+    ⛔ **I PUBLISHED TWO TRACES HERE AND BOTH WERE WRONG.** The first used
+    `max(ChargeDelay, weapon ReloadDelay)` and gave 172; the second quantised that to
+    `ChargeDelay x ceil(reload / ChargeDelay)` and gave 180. They share one false premise —
+    that `ChargeFire` keeps ticking while the weapon reloads. **Codex and Astra caught it.**
+    It does not tick; it EXITS:
+
+        ChargeFire.Tick:  if (IsCanceling || !attack.CanAttack(self, target)) return true;
+
+    and `AttackBase.CanAttack` calls `HasAnyValidWeapons(target, reloadingIsInvalid: true)`,
+    whose loop sets `reloadingStateIsValid = !reloadingIsInvalid || !armament.IsReloading`.
+    **A reloading armament makes `CanAttack` false**, so `ChargeFire` returns true and unwinds.
+    `ChargeAttack` carries the identical guard, so it ends too — the whole attack activity
+    finishes, the actor reacquires, and it comes back in through `ChargeAttack`, **which pays
+    `InitialChargeDelay` all over again.**
+
+    ⭐⭐ **THAT CONFIRMS THE CHARGE-PER-SHOT MODE, BUT NOT A FIXED RUNTIME PERIOD.** No
+    trait-name special case is needed: `ChargeDelay` against the weapon reload establishes
+    whether the activity is interrupted. The time before the parent schedules a replacement
+    attack activity is a separate input:
+
+        weapon reload <= ChargeDelay   CHARGE-ONCE      gap = ChargeDelay
+        weapon reload >  ChargeDelay   CHARGE-PER-SHOT  gap = weapon reload + reacquisition + InitialChargeDelay
+
+        attack cycle = (MaxCharges - 1) x gap + trait ReloadDelay + InitialChargeDelay
+
+    | actor | ChargeDelay | weapon reload | mode | gap | (n-1) x gap | trait reload | charge | cycle |
+    |---|--:|--:|---|--:|--:|--:|--:|--:|
+    | `ra1_soviets_teslacoil` | 3 | 3 | once | 3 | 6 | 100 | 25 | **131** |
+    | `ra2_soviets_teslacoil` | 3 | 3 | once | — | 0 | 75 | 20 | **95** |
+    | `asianalliance_railtower` | 3 | 10 | **per-shot** | 10+0+12=**22** | 88 | 120 | 12 | **220 modeled** |
+
+    ⭐ **`tools/balance/sim_attack_tesla.py` reproduces all three ruled figures under explicit
+    immediate reacquisition** — including the
+    maintainer's *"for the asian alliance railgun tower it needs to charge for every shot
+    unlike the tesla coil! So at 5 shots the initial charge delay is used 5 times!"*, which is
+    charge-per-shot behavior the reloading guard produces. It exposes `--reacquire` because the
+    surrounding `AutoTarget` activity, with randomized 3–7 tick scan intervals, is not simulated.
+
+    ⚠ `ChargeDelay` is the ENGINE DEFAULT 3 on all three actors — no yaml writes it — so the
+    comparison that decides the mode is invisible in the rules. This is why the mode cannot be
+    read off the yaml today: the extractor records neither `ChargeDelay` nor the weapon reload
+    beside the charge record.
+
+    | number | where it came from | what it got wrong |
+    |--:|---|---|
+    | 160 | #385 | never pays the wind-up at all |
+    | 172 | my spin trace — **withdrawn** | `ChargeFire` exits, it does not spin |
+    | 180 | my quantised trace — **withdrawn** | same false premise, quantised |
+    | **220** | the 2026-09-14 ruling | reproduced by the immediate-reacquisition model; runtime timing remains unmeasured |
+
+    ⚠ **TWO ASSUMPTIONS THE MODEL STILL CARRIES.** (1) Reacquisition after the activity ends
+    is modelled as immediate; that is what produces 220. The real actor's randomized AutoTarget
+    scan can lengthen the period, while leaving both coils untouched because they never exit.
+    (2) `DoAttack` calls `CheckFire` on EVERY armament and `Attacking` decrements
+    `charges` once per firing armament; the RA1 coil declares 3 armaments and the RA2 coil 6,
+    all condition-gated, and the model assumes exactly one is enabled — which is what
+    reproduces 131 and 95.
+
+    ⛔ **STILL NOT APPLIED.** The charge-per-shot ruling is source-supported, while 220 remains
+    the immediate-reacquisition model rather than measured runtime timing. `armament_roles`
+    withholds the charge term and `tesla_coil_attack_period` still pins the implemented 106.
+    Applying it needs `ChargeDelay` and the weapon reload in the extractor, which is the
+    remaining unblock.
+
+    ⛔ **THE LAW IS RULED; APPLYING IT IS BLOCKED ON EVIDENCE THE EXTRACTOR DOES NOT
+    RECORD.** `reference_distribution`/`armament_roles` still report the cycle WITHOUT
+    the charge term (Tesla Coil 106, Obelisk 96), and that gap is deliberate rather
+    than forgotten. Astra's engine trace, 2026-09-14, found three cases where naively
+    adding the wind-up produces a number the engine does not run:
+
+    | case | why a naive `+ charge` is wrong |
+    |---|---|
+    | multi-shot `ChargeLevel` | the burning Obelisk is Burst 10 / BurstDelays 1 and its `AttackCharges` notifier resets `ChargeLevel` on **every projectile** — later shots must recharge, so the period is not `105 + 50` |
+    | interleaved `AttackTesla` | `ChargeFire` exits when the armament is reloading, so the Rail Tower must re-enter through `ChargeAttack` and pay the wind-up again. The maintainer's **220** is reproduced only with immediate reacquisition; real AutoTarget timing is still unmeasured. My 172 and 180 are withdrawn and #385's 160 never paid the charge. Detection needs `ChargeDelay`, weapon reload and reacquisition timing |
+    | random `ChargeLevel` | ⭐ **CLOSED.** `ChargeLevel: 25, 50` is a RANGE and `extract_stats` kept only its lower bound; ruled 2026-09-14 to take the MEAN of min and max, and `charge_scalar` now does — 37.5 here, and `0, 4` is 2 rather than zero. All four ranged actors re-extracted |
+
+    ⭐ One of the three unblocks is now closed: **range-ness is recorded**, because the mean is
+    resolved at extraction and the ledger stores the number the cycle actually costs. **Two
+    extractor fields remain** — `ChargeDelay` and `ShotsPerCharge` — plus a formula that models
+    recharge overlap.
+    Until then the charge term is withheld rather than guessed, and
+    `tesla_coil_attack_period` pins the **implemented** 106 with the ruled 131 recorded
+    beside it, so the gap is auditable instead of invisible.
+
+    ⛔ **`formula.charge_attack_cycle` returning `None` does NOT mean "no charge time".**
+    It means only that the trait does not override the weapon's RELOAD. That misreading
+    is what produced the withdrawn Obelisk figure.
   - Charge values are DECISIONS: write `InitialChargeDelay` out rather than inheriting
     the engine's default of 22. An absent key means DEFAULT, never zero.
 - ⭐ **TEAM UPGRADES ARE ALWAYS WEAKER THAN FACTION UPGRADES** (maintainer law,

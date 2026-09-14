@@ -705,3 +705,144 @@ claims:
       if not all(v and len(v) == 64 for v in inputs.values()):
           raise SystemExit('an input fingerprint is missing or not a sha256')
       print(len(inputs))
+
+  - id: charged_actor_cycle_actors
+    value: 14
+    tolerance: 0
+    what: >
+      Priced actors carrying a resolved `charge_up` record, whose per-armament attack cycle is
+      therefore reload PLUS charge delay (DESIGN.md, maintainer law 2026-09-14: "charged weapons
+      come at a discount but the attack cycle duration is reload delay plus charge delay"). An
+      explicit InitialChargeDelay count does NOT bound this population, which is why the claim
+      measures resolved records instead. ⛔ The reason is NOT that the rest inherit an engine
+      default: only THREE of the 14 are AttackTesla records at all, and the other ELEVEN are
+      ChargeLevel-family records (AttackCharges, AttackFrontalCharged, AttackTurretedCharged) -
+      a different trait with a different schedule. It counts RECORDS, not effects: of the 14,
+      ra1_allies_mobileradarjammer has no priced armament view, wc2_humans_dwarvenrifleman winds
+      up for only 2 ticks against a 60-tick reload, and multi-armament actors abstain under the
+      ownership guard. Counting records as effects is the error that put two wrong figures into
+      DESIGN.md on 2026-09-14. ⭐ The dwarf's figure was ZERO until the averaging ruling landed;
+      see ranged_charge_actors for why that zero was the most expensive one in the table.
+    docs: [docs/DESIGN.md, docs/design/ARMAMENT_PAIRING.md]
+    measure: |
+      import json, glob
+      total = 0
+      for path in sorted(glob.glob('docs/balance/*.json')):
+          try:
+              doc = json.loads(open(path, encoding='utf-8').read())
+          except ValueError:
+              continue
+          for section in (doc.get('sections') or {}).values():
+              if not isinstance(section, dict):
+                  continue
+              for record in section.values():
+                  if isinstance(record, dict) and record.get('charge_up'):
+                      total += 1
+      print(total)
+
+  - id: ranged_charge_actors
+    value: 4
+    tolerance: 0
+    what: >
+      Actors whose charge field is a RANDOM RANGE rather than a scalar, and which therefore cost
+      the MEAN of its bounds. Maintainer ruling 2026-09-14: "regarding the charge with random
+      charge level make it so it counts the average between max and min delay ... for the
+      consortium dagger, the charge range from 25 to 50 so you add 37.5 to the reload delay as
+      attack cycle". `extract_stats.charge_scalar` implements it; before that it kept
+      split(',')[0], i.e. it priced every charged shot as if it always rolled the luckiest value.
+      The four are steelconsortium_dagger (25, 50 -> 37.5), wc2_humans_dwarvenrifleman
+      (0, 4 -> 2.0) and the two wc2 siege engines (20, 40 -> 30.0). ⛔ The dwarf is the case that
+      matters and it moves the price the OPPOSITE way from intuition: charge_price_multiplier
+      reads share <= 0 as "charges, but we cannot see by how much" and hands out the FLAT 0.75
+      floor, so the misparsed zero was collecting the deepest discount in the table; the measured
+      2 ticks move it to 0.9758. The other three move 0.75 -> 0.75 (already clamped at the floor)
+      and 0.875 -> 0.8269 twice. ⚠ Nothing in the reference path moved, because
+      formula.charge_attack_cycle returns None for the whole ChargeLevel family - the regenerated
+      armament_pairing.json changed only its three input fingerprints.
+    docs: [docs/DESIGN.md, docs/design/ARMAMENT_PAIRING.md]
+    measure: |
+      import json, glob
+      want = {'steelconsortium_dagger': 37.5, 'wc2_humans_dwarvenrifleman': 2.0,
+              'wc2_humans_siegeengine': 30.0, 'wc2_orcs_siegeengine': 30.0}
+      seen = 0
+      for path in sorted(glob.glob('docs/balance/*.json')):
+          try:
+              doc = json.loads(open(path, encoding='utf-8').read())
+          except ValueError:
+              continue
+          for section in (doc.get('sections') or {}).values():
+              if not isinstance(section, dict):
+                  continue
+              for actor, record in section.items():
+                  if actor in want and isinstance(record, dict):
+                      charge = record.get('charge_up') or {}
+                      if charge.get('ticks') == want[actor]:
+                          seen += 1
+      print(seen)
+
+  - id: railtower_immediate_reacquisition_period
+    value: 220
+    tolerance: 0
+    what: >
+      The asianalliance_railtower's ruled attack-period model in ticks when reacquisition is
+      assumed immediate. Maintainer ruling 2026-09-14: "for the asian alliance railgun tower it needs
+      to charge for every shot unlike the tesla coil! So at 5 shots the initial charge delay is
+      used 5 times!" ChargeFire.Tick returns true when AttackBase.CanAttack is
+      false, and CanAttack calls HasAnyValidWeapons(reloadingIsInvalid: true), so a reloading
+      armament ends the activity rather than stalling it; the actor re-enters through
+      ChargeAttack and pays InitialChargeDelay again. Hence the mode test, which needs no trait
+      name: weapon reload <= ChargeDelay is charge-once (gap = ChargeDelay), weapon reload >
+      ChargeDelay is charge-per-shot (gap = weapon reload + InitialChargeDelay), and
+      cycle = (MaxCharges-1) x gap + trait ReloadDelay + InitialChargeDelay. The same model
+      reproduces the two Tesla Coils' ruled 131 and 95 exactly. Two earlier figures of mine,
+      172 (ChargeFire spins) and 180 (spins on a quantised schedule), are WITHDRAWN, and #385's
+      160 never paid the wind-up at all. ⚠ One free assumption remains - reacquisition after the
+      activity ends is modelled as immediate, which is what reproduces 220. The real actor's
+      randomized 3-7 tick AutoTarget scan is outside this simulator, so this is not a verified
+      fixed runtime period. The ruled model is NOT applied: the charge term is still withheld
+      and tesla_coil_attack_period still pins 106.
+    docs: [docs/DESIGN.md, docs/design/ARMAMENT_PAIRING.md]
+    measure: |
+      import sys
+      sys.path.insert(0, 'tools/balance')
+      import sim_attack_tesla as sim
+      spec = sim.ACTORS['asianalliance_railtower']
+      period, closed, _, _ = sim.analyse('asianalliance_railtower', spec)
+      assert period == closed, (period, closed)
+      print(period)
+
+  - id: tesla_coil_attack_period
+    value: 106
+    tolerance: 0
+    what: >
+      The RA1 Tesla Coil's IMPLEMENTED attack period in ticks: 100 (AttackTesla ReloadDelay) plus
+      3 x (3-1) weapon-reload burst gaps. The RULED period is 131 - DESIGN.md's charge law,
+      maintainer 2026-09-14, adds the 25-tick InitialChargeDelay - and the 25-tick difference is
+      deliberately NOT applied yet. Astra's engine trace showed a naive "cycle + ticks" is wrong
+      for multi-shot ChargeLevel (the burning Obelisk recharges per projectile), for interleaved
+      AttackTesla. That case is source-supported as charge-per-shot, but the fixed runtime period
+      is not resolved:
+      ChargeFire exits rather than spins when the armament is reloading (AttackBase.CanAttack
+      calls HasAnyValidWeapons with reloadingIsInvalid: true), so the Rail Tower re-enters
+      through ChargeAttack and pays InitialChargeDelay on every shot. Immediate reacquisition
+      yields the ruled 220; randomized AutoTarget timing may lengthen it. Two traces
+      published earlier, 172 and 180, are WITHDRAWN; they shared the false premise that
+      ChargeFire keeps ticking through the reload. See railtower_immediate_reacquisition_period. None of it is
+      implemented: this claim still pins 106. ⭐ The third blocker, random ranges, is CLOSED: ChargeLevel
+      25, 50 used to keep only its lower bound and now contributes the ruled MEAN of min and max
+      (see ranged_charge_actors). Two extractor fields remain - ChargeDelay and ShotsPerCharge -
+      plus recharge-overlap modelling. This claim
+      pins the implemented number ON PURPOSE so the 106-vs-131 gap stays auditable instead of
+      invisible; when the extractor lands it becomes 131 and DESIGN's note is struck.
+    docs: [docs/DESIGN.md, docs/design/ARMAMENT_PAIRING.md]
+    measure: |
+      import pathlib, sys
+      root = pathlib.Path('.').resolve()
+      sys.path.insert(0, 'tools/audit'); sys.path.insert(0, 'tools/balance')
+      import armament_roles as ar, assign_references as asg, miniyaml
+      rules = miniyaml.Ruleset(root)
+      views = ar.cameo_views(asg.ledger()['ra1_soviets_teslacoil'], rules)
+      cycles = {v['cycle'] for v in views}
+      if len(cycles) != 1:
+          raise SystemExit(f'the coil should have one cycle, got {sorted(cycles)}')
+      print(int(cycles.pop()))

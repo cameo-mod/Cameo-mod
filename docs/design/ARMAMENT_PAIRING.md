@@ -289,6 +289,81 @@ repository holds:
 
 Stale evidence is worse than missing evidence, because it looks exactly like the real thing.
 
+### 2i. The attack cycle includes the CHARGE — ruled, and NOT yet applied
+
+The law, as the maintainer states it (2026-09-14):
+
+```
+DPS = damage x burst / attack cycle
+attack cycle = reload delay + sum of ALL burst delays + charge delay
+```
+
+⚠ **"DPS" is a name, not a unit — it is damage per TICK.** Every rate in this lane, in the ledger
+and on the map is per tick.
+
+One thing DOES reach the cycle from outside the weapon today: **the trait can override the reload.**
+`AttackTesla`'s own `ReloadDelay` is the cycle, `MaxCharges` is the burst, and the WEAPON's reload
+is the gap between zaps (`formula.charge_attack_cycle`, shipped in #385). Reading the weapon alone
+reported a Tesla Coil, whose weapon reloads every 3 ticks, as firing twenty times a second.
+
+⛔ **THE CHARGE TERM ITSELF IS WITHHELD, AND THAT IS A DECISION, NOT AN OVERSIGHT.** I implemented
+it and Astra's engine trace held it (PR #386), correctly. Three shapes break a naive `cycle + ticks`:
+
+* **multi-shot `ChargeLevel`** — the burning Obelisk is Burst 10 / BurstDelays 1, and its
+  `AttackCharges` notifier resets `ChargeLevel` on every projectile, so later shots must recharge.
+  Its period is not `105 + 50`.
+* **interleaved `AttackTesla`** — the maintainer ruled that the Rail
+  Tower *"needs to charge for every shot unlike the tesla coil ... at 5 shots the initial charge
+  delay is used 5 times"*. The immediate-reacquisition model gives `160 + 5 x 12 = **220**` — #385's 160 never paid the
+  charge and my 172 paid it once; both were wrong. A charged weapon is one of two machines,
+  **charge-once** or **charge-per-shot**, differing by a factor of `MaxCharges`.
+  `ChargeFire` does not spin while the
+  weapon reloads — it EXITS, because `AttackBase.CanAttack` calls
+  `HasAnyValidWeapons(reloadingIsInvalid: true)` and a reloading armament makes it false.
+  `ChargeAttack` has the same guard, so the activity ends and the actor re-enters through
+  `ChargeAttack`, paying `InitialChargeDelay` again. The detection is therefore exactly the
+  comparison Astra named: **`ChargeDelay` against the weapon's reload** — `reload <= ChargeDelay`
+  is charge-once with `gap = ChargeDelay`; `reload > ChargeDelay` is charge-per-shot. The latter
+  gap is `reload + reacquisition + InitialChargeDelay`. `tools/balance/sim_attack_tesla.py`
+  reproduces 131, 95 and **220** only with explicit zero-tick reacquisition. The real Rail Tower
+  inherits randomized 3–7 tick AutoTarget scans, which the simulator does not model, so its fixed
+  runtime period remains unmeasured.
+  ⛔ **My 172 and 180 are both WITHDRAWN** — they shared the false premise that `ChargeFire`
+  keeps ticking through the reload, and Codex and Astra caught it. #385's 160 never paid the
+  charge. Applying any of this still needs `ChargeDelay` and the weapon reload in the extractor.
+* **random `ChargeLevel`** — ⭐ **CLOSED, and it shipped.** `steelconsortium_dagger` declares
+  `ChargeLevel: 25, 50`; `extract_stats` kept only the lower bound. Maintainer ruled 2026-09-14 to
+  **use the MEAN of min and max**, added to the reload, so the Dagger contributes **37.5** and
+  `wc2_humans_dwarvenrifleman`'s `0, 4` becomes **2**, not zero. `extract_stats.charge_scalar`
+  implements it and all four ranged actors were re-extracted.
+  ⛔ **The dwarf is the case that mattered, and it made the unit DEARER.**
+  `charge_price_multiplier` treats `share <= 0` as *charges, but we cannot see by how much* and
+  returns the FLAT 0.75 floor — so the misparsed zero was collecting the deepest discount in the
+  table. Its real 2 ticks against a 60-tick reload move it to **0.976**. The Dagger's own figure
+  does not move (0.750, already clamped at the floor) and the two siege engines go 0.875 → 0.827.
+  ⚠ The reference path is untouched: `charge_attack_cycle` returns `None` for the whole
+  `ChargeLevel` family, so the regenerated `armament_pairing.json` changed only its three input
+  fingerprints.
+
+⭐ Range-ness is now resolved at extraction, so **two extractor fields remain** — `ChargeDelay`
+and `ShotsPerCharge` — plus a formula that models recharge overlap.
+Withholding is the same answer this lane gives
+everywhere else: an unprovable quantity abstains.
+
+⛔ **THE POPULATION IS SMALLER THAN IT LOOKS, AND I OVERSTATED IT.** 14 actors carry a `charge_up`
+record, but that is not 14 actors whose reported cadence would move. **Three are `AttackTesla`; the
+other eleven are `ChargeLevel`-family records** — a different trait with a different schedule, not
+units inheriting an engine default, which is how I first explained it and was wrong.
+`ra1_allies_mobileradarjammer` has **no priced armament view at all**,
+`wc2_humans_dwarvenrifleman` winds up for **2** ticks against a 60-tick reload (it declares
+`0, 4`; the averaging ruling has landed, so this is no longer the zero it used to read), and
+`terran_siegetank` keeps 37 under the ownership guard. I published a table claiming the siege
+tank at 62 and the burning Obelisk at 155; **both were wrong** — measured before I adopted #385's
+guard, and never re-measured after. Counting records is not counting effects.
+
+⛔ **AND `charge_attack_cycle` RETURNING `None` DOES NOT MEAN "NO CHARGE TIME".** It says only that
+the trait does not override the weapon's RELOAD. Both #385 and I read it the other way first.
+
 ## 3. The pairing key is the targeting envelope
 
 Not the weapon's name. The vocabulary is **the maintainer's own missile ruling of 2026-09-07**,
