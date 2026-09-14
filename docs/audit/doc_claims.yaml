@@ -709,6 +709,42 @@ claims:
           raise SystemExit('an input fingerprint is missing or not a sha256')
       print(len(inputs))
 
+  - id: shared_attack_cycle_actors
+    value: 15
+    tolerance: 0
+    what: >
+      As-built multi-weapon actors in the classic four whose armaments all share ONE attack cycle
+      (`ReloadDelay + sum(BurstDelays)` identical between weapons) - DESIGN 3a.6, maintainer
+      2026-09-14: *"The cycle time is the same for both! ... then to calculate the total damage you
+      just need add the individual DPS from each weapon"*. 15 of 23 comply; the Mammoth runs 80/80,
+      the Sheridan 64/64/64 with a Burst-4 chaingun on the same cycle as its cannon, the Battle
+      Tank 72/72. The 8 that do not are naval depth-charge carriers, the two bombers, the Humvee
+      Mk II and the Laser Corvette. ⛔ This is a RATCHET in the RISING direction: it may go UP as
+      actors are brought onto one cycle, never down - a drop means a weapon's cadence was changed
+      without its siblings and the actor's damage can no longer be summed.
+    docs: [docs/DESIGN.md]
+    measure: |
+      import json, pathlib, sys
+      sys.path.insert(0, 'tools/balance'); sys.path.insert(0, 'tools/audit')
+      import build_reference_report as br
+      doc = json.loads(pathlib.Path('docs/balance/derived/armament_pairing.json')
+                       .read_text(encoding='utf-8'))
+      classic = ('td_gdi_', 'td_nod_', 'ra1_allies_', 'ra1_soviets_')
+      same = 0
+      for actor, entry in doc['actors'].items():
+          if not actor.startswith(classic):
+              continue
+          built = br.as_built_weapons(actor)
+          if not built:
+              continue
+          arms = [a for a in entry['armaments'] if a.get('weapon') in built]
+          if len(arms) < 2:
+              continue
+          cycles = {a.get('cycle') for a in arms}
+          if len(cycles) == 1 and None not in cycles:
+              same += 1
+      print(same)
+
   - id: mammoth_armament_voters
     value: 3
     tolerance: 0

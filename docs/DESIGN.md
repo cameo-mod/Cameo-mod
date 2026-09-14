@@ -613,6 +613,50 @@ it does not, which turns that column into a live compliance check: **six of the 
 actors disagree on range**, `td_gdi_battletank` by 38 WDist (5,438 vs 5,400) - too small to be
 deliberate, which is exactly the kind of drift 3a.2 exists to catch.
 
+### 3a.6 ONE CYCLE PER ACTOR - and then the total DPS is just a sum
+
+> *"Take a look at how our current mammoth tank works with dual weapons and different reload
+> delays and different burst delays! The cycle time is the same for both! Reload delay + sum of
+> burst delays must be identical between weapons ... So the secret is to give each weapon the same
+> cycle, then DPS = damage per shot * burst / cycle time should also be identical ... which means
+> to calculate the total damage you just need add the individual DPS from each weapon"*
+> (maintainer, 2026-09-14)
+
+**THE LAW.** Every armament on one actor shares ONE attack cycle: `ReloadDelay + sum(BurstDelays)`
+is identical across the actor's weapons, whatever each weapon's burst and per-shot damage. A
+weapon that fires four shots simply spaces them inside the same interval.
+
+**VERIFIED IN THE TREE**, on the three actors the maintainer named:
+
+| actor | weapons | cycle | dmg/cycle each | rate each | **total DPS** |
+|---|---|--:|--:|--:|--:|
+| `td_gdi_mammothtank` | cannon, missiles | **80 / 80** | 16,000 | 200.00 | **400.00** |
+| `ra1_allies_sheridanassaulttank` | cannon, missile, Burst-4 chaingun | **64 / 64 / 64** | 4,000 | 62.50 | **187.50** |
+| `td_gdi_battletank` | cannon, missiles | **72 / 72** | 8,000 | 111.11 | **222.22** |
+
+**WHAT FOLLOWS, and it is the whole point:** with one cycle and one range (3a.2), the balance
+formula needs nothing special for a multi-weapon actor. **Total DPS = the sum of the per-weapon
+DPS**, range is the shared range, HP and speed come from the chassis. There is no blocker and no
+composition problem - the per-cycle damages add directly, because they are damages over the SAME
+interval.
+
+⛔ **TWO THINGS THE SUM MUST STILL RESPECT**, neither of them a blocker:
+
+1. **An AA split is not a second gun** (3a.1). `td_gdi_humveemkii` declares
+   `machinegunhumvee2` + `machinegunhumvee2_AA` + `rocketshumvee2` + `rocketshumvee2_AA`: that is
+   TWO weapons, not four, and adding all four doubles the unit.
+2. **A cycle that is not shared has nothing to add over.** Damage per cycle is only additive when
+   the cycles are equal; otherwise the two figures describe different intervals.
+
+**MEASURED COMPLIANCE, classic four:** of 23 as-built multi-weapon actors, **15 share one cycle**
+and 8 do not (`ra1_allies_destroyer` 34/60, `ra1_allies_gunboat` 30/60, `td_gdi_missileboat`
+44/60, `ra1_soviets_su57attackbomber` 54/121, `ra1_soviets_yakscoutplane` 119/121,
+`td_gdi_firehawk` 55/52, `td_gdi_humveemkii` 42/84, `td_nod_lasercorvette` 90/42). The reference
+map prints **WITHHELD - cycles differ** for those rather than a meaningless sum, which makes the
+damage column a live compliance check exactly as the range column is for 3a.2. ⚠ The naval
+depth-charge rows and the two bombers are the same population as 3a.2's open bomb exemption -
+rule the exemption first, then fix what remains.
+
 ### 3a.5 ⛔ NEVER reference across factions
 
 > *"the GDI emp grenadier was mapped to the CA marauder which is a scrin unit so that is wrong!

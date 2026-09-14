@@ -1038,27 +1038,46 @@ def combined_armament_totals(actor, attached_rows, dist, cdist, ctype):
     arms = firing_together(actor, entry)
     if arms is None:
         return None
+    # ⭐ ONE CYCLE PER ACTOR IS THE CONVENTION (maintainer, 2026-09-14): *"the cycle time is the
+    # same for both! Reload delay + sum of burst delays must be identical between weapons."*
+    # Verified in the tree: the Mammoth runs 80/80, the Sheridan 64/64/64 with a Burst-4 chaingun
+    # landing on the same cycle as its cannon, the Battle Tank 72/72. When it holds, per-cycle
+    # damage adds directly and the sum is proportional to the summed DPS.
+    #
+    # ⛔ WHEN IT DOES NOT HOLD, DAMAGE PER CYCLE HAS NO SINGLE MEANING and adding two different
+    # cycles' worth of damage would produce a figure describing no interval at all. 8 of the 23
+    # multi-weapon actors in the classic four are in that state, so the cell reports the breach
+    # instead of a number - the same way the range cell reports a 3a.2 breach.
+    cycles = {a.get("cycle") for a in arms}
+    if len(cycles) != 1 or None in cycles:
+        return "cycles_differ"
     votes_by_role = collections.defaultdict(list)
     for source, info in entry["sources"].items():
         for pair in info.get("pairs", ()):
             votes_by_role[pair["role"]].append((source, pair))
-    now_total = ref_total = 0.0
+    now_total, ref_total = 0.0, 0.0
     sources_used = set()
     for main in arms:
         now = main.get("damage_per_cycle")
         role = main.get("role")
         if not now or role is None:
             return None
+        # ⭐ THE NOW TOTAL NEVER DEPENDS ON THE REFERENCE. It is arithmetic over our OWN yaml,
+        # so a gun no source happens to carry cannot make the unit's current firepower unknowable.
+        # Only the REFERENCE half abstains, and it abstains WHOLE: a partial projection reads low
+        # while looking complete, which is the one failure mode worth refusing outright.
+        now_total += now
         cast = [(src, pair) for src, pair in votes_by_role.get(role, ())
                 if pair["cameo"].get("weapon") == main["weapon"]]
-        if not cast:
-            return None
+        if not cast or ref_total is None:
+            ref_total = None
+            continue
         peer_votes = [(_peer_row_for(attached_rows, source, entry["sources"][source].get("peer")),
                        pair["peer"].get("damage_per_cycle")) for source, pair in cast]
         target, _used = rt.armament_target(peer_votes, dist, cdist, ctype)
         if not target:
-            return None
-        now_total += now
+            ref_total = None
+            continue
         ref_total += target
         sources_used.update(source for source, _pair in cast)
     return now_total, ref_total, len(arms), len(sources_used)
@@ -1072,7 +1091,21 @@ def combined_damage_cell(actor, cameo_row, attached_rows, dist, cdist, ctype):
     totals = combined_armament_totals(actor, attached_rows, dist, cdist, ctype)
     if totals is None:
         return None
+    if totals == "cycles_differ":
+        return ('<span class="muted" title="these armaments fire together but do NOT share one '
+                'attack cycle, so there is no interval their damage can be added over. One cycle '
+                'per actor is the convention (reload + burst delays identical between weapons); '
+                'this actor breaks it, and that is the thing to fix.">WITHHELD '
+                '<b class="warn">cycles differ</b></span>')
     now, ref, guns, used = totals
+    if ref is None:
+        return (f'<span data-v="{now}" title="the {guns} armaments this actor fires at the same '
+                f'time AS BUILT, summed over their one shared cycle">{now:,.0f}'
+                f'<small class="evidence">combined, {guns} guns</small></span> '
+                f'<span class="muted">\u2192</span> '
+                f'<span class="muted" title="at least one of these armaments has no reference '
+                f'weapon in any source, and a PARTIAL sum would read low while looking '
+                f'complete">no complete reference</span>')
     ratio = (f' <b class="warn" title="needs explicit maintainer permission">{ref / now:.2f}x</b>'
              if now and abs(ref / now - 1) > 0.005 else '')
     return (f'<span data-v="{now}" title="the {guns} armaments this actor fires at the same time '
