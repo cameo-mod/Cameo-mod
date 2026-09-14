@@ -1054,18 +1054,10 @@ def armament_profile(arms, anum, charge_up=None):
     """
     active = default_active_armaments(arms)
     live = baseline_armaments(arms)
-    charged_cycle, charge_ticks = None, None
+    charged_cycle = None
     if len(active) == 1 and len(live) == 1 and active[0] is live[0]:
         weapon_reload = anum(live[0].get("reloaddelay"))
         charged_cycle = formula.charge_attack_cycle(charge_up, weapon_reload)
-        # ⭐ THE WIND-UP IS PART OF THE PERIOD TOO (maintainer law, 2026-09-14): *"charged weapons
-        # come at a discount but the attack cycle duration is reload delay plus charge delay"*.
-        # `charge_attack_cycle` covers only the trait's REPLACEMENT of the weapon reload, so the
-        # ChargeLevel family — which it answers None for — still has to wait out its charge.
-        # Applied under the SAME unambiguous-ownership guard, and identically in
-        # `armament_roles.cameo_views`, because the two consumers are pinned equal by
-        # test_charge_aware_reference.
-        charge_ticks = anum((charge_up or {}).get("ticks"))
     dps_total, dmg_total, debt = 0.0, 0.0, False
     for a in live:
         mains = [wh for wh in (a.get("damage_warheads") or [])
@@ -1082,8 +1074,6 @@ def armament_profile(arms, anum, charge_up=None):
         cycle = burst_cycle(a, anum)
         if charged_cycle is not None:
             cycle, burst = charged_cycle
-        if cycle and charge_ticks:
-            cycle += charge_ticks
         per_cycle = dmg * burst
         if per_cycle and cycle:
             dps_total += per_cycle / cycle

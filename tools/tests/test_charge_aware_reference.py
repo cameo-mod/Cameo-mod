@@ -64,25 +64,15 @@ class ChargeAwareArmamentProfileTests(unittest.TestCase):
         self.assertEqual(3, row["w_burst"])
         self.assertEqual(100.0, row["w_reload"])
         self.assertEqual(300.0, row["w_damage"])
-        # 100 trait reload + 3 x (3 - 1) burst gaps + the 25-tick wind-up (maintainer law,
-        # 2026-09-14: the attack cycle is reload delay + burst delays + CHARGE delay).
-        self.assertAlmostEqual(300 / 131, row["w_dps"])
+        self.assertAlmostEqual(300 / 106, row["w_dps"])
 
-    def test_charge_level_traits_keep_their_reload_and_still_wait_out_the_charge(self):
-        """SUPERSEDES `..._do_not_invent_a_sustained_cycle` (maintainer law, 2026-09-14).
-
-        The old name was right about one thing and wrong about the other: a ChargeLevel trait does
-        NOT replace the weapon's reload — `charge_attack_cycle` returns None and `w_reload` stays
-        3 — but the unit still stands there winding up, and *"the attack cycle duration is reload
-        delay plus charge delay"*. So the cadence is 3 + 25, not 3. Reading `None` as "no charge
-        time at all" is the trap this test now guards.
-        """
+    def test_charge_level_traits_do_not_invent_a_sustained_cycle(self):
         charge = {"v": "AttackCharges", "ticks": 25.0}
         row, _debt, _ = rd.armament_profile([armament()], float, charge)
         self.assertEqual(1, row["w_burst"])
-        self.assertEqual(3.0, row["w_reload"])      # the trait does NOT own the reload
+        self.assertEqual(3.0, row["w_reload"])
         self.assertEqual(100.0, row["w_damage"])
-        self.assertAlmostEqual(100 / 28, row["w_dps"])
+        self.assertAlmostEqual(100 / 3, row["w_dps"])
 
     def test_multi_armament_actor_keeps_the_existing_fail_closed_model(self):
         charge = {"v": "AttackTesla", "ticks": 25.0,
@@ -124,9 +114,9 @@ class LiveLedgerChargeTests(unittest.TestCase):
 
     def test_all_attack_tesla_rows_use_the_same_actor_cycle_in_both_consumers(self):
         expected = {
-            "ra1_soviets_teslacoil": (3, 100.0, 131.0, 144000.0),
-            "ra2_soviets_teslacoil": (1, 75.0, 95.0, 96000.0),
-            "asianalliance_railtower": (5, 120.0, 172.0, 155000.0),
+            "ra1_soviets_teslacoil": (3, 100.0, 106.0, 144000.0),
+            "ra2_soviets_teslacoil": (1, 75.0, 75.0, 96000.0),
+            "asianalliance_railtower": (5, 120.0, 160.0, 155000.0),
         }
         self.assertEqual(set(expected), attack_tesla_actors())
         for actor, (burst, reload_delay, cycle, damage) in expected.items():

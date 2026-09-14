@@ -715,7 +715,10 @@ claims:
       come at a discount but the attack cycle duration is reload delay plus charge delay"). An
       explicit InitialChargeDelay count does NOT bound this population - only three actors write
       the field and the rest take the engine default - which is why the claim measures resolved
-      records instead. A drop means charged actors are being priced as if they fired instantly.
+      records instead. It counts RECORDS, not effects: of the 14, ra1_allies_mobileradarjammer has no priced
+      armament view, wc2_humans_dwarvenrifleman records zero charge ticks, and multi-armament
+      actors abstain under the ownership guard. Counting records as effects is the error that
+      put two wrong figures into DESIGN.md on 2026-09-14.
     docs: [docs/DESIGN.md, docs/design/ARMAMENT_PAIRING.md]
     measure: |
       import json, glob
@@ -734,13 +737,19 @@ claims:
       print(total)
 
   - id: tesla_coil_attack_period
-    value: 131
+    value: 106
     tolerance: 0
     what: >
-      The RA1 Tesla Coil's full attack period in ticks: 100 (AttackTesla ReloadDelay) + 3 x (3-1)
-      weapon-reload burst gaps + 25 (InitialChargeDelay) = 131. It is the worked example behind
-      both halves of the charge law, and the row that exposed the consumer defect - reading the
-      weapon's own 3-tick reload reported this unit firing twenty times a second.
+      The RA1 Tesla Coil's IMPLEMENTED attack period in ticks: 100 (AttackTesla ReloadDelay) plus
+      3 x (3-1) weapon-reload burst gaps. The RULED period is 131 - DESIGN.md's charge law,
+      maintainer 2026-09-14, adds the 25-tick InitialChargeDelay - and the 25-tick difference is
+      deliberately NOT applied yet. Astra's engine trace showed a naive "cycle + ticks" is wrong
+      for multi-shot ChargeLevel (the burning Obelisk recharges per projectile), for interleaved
+      AttackTesla (the Rail Tower charges inside its own reload) and for random ranges
+      (ChargeLevel 25, 50 keeps only its lower bound). The unblock is three extractor fields -
+      ChargeDelay, ShotsPerCharge and range-ness - plus recharge-overlap modelling. This claim
+      pins the implemented number ON PURPOSE so the 106-vs-131 gap stays auditable instead of
+      invisible; when the extractor lands it becomes 131 and DESIGN's note is struck.
     docs: [docs/DESIGN.md, docs/design/ARMAMENT_PAIRING.md]
     measure: |
       import pathlib, sys

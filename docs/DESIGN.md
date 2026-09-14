@@ -583,35 +583,39 @@ YAML remains an explicit design decision.
     law, 2026-09-14): *"charged weapons come at a discount but the attack cycle
     duration is reload delay plus charge delay"*. **BOTH, never either** — the K
     discount prices the DRAWBACK of being helpless while winding up; the longer cycle
-    measures the OUTPUT that the wind-up costs. Pricing one and not the other is the
-    mistake, in both directions:
-    - taking only the discount reports a charged weapon firing as fast as an
-      instant one, which is what the per-armament reference consumer did until
-      2026-09-14 (`armament_roles.cameo_views`);
-    - taking only the cycle double-charges the drawback the discount already covers.
+    measures the OUTPUT that the wind-up costs.
 
-    This is not new arithmetic — the discount's own denominator already said so.
+    This is not new arithmetic. The discount's own denominator already said so:
     `charge_share = charge / (charge + cycle)` treats `charge + cycle` as the whole
-    period, so the period was always the sum. Applies to **both** trait families:
-    on top of the trait cycle for `AttackTesla`, and on top of the weapon's own cycle
-    for the `ChargeLevel` family (`AttackCharges`, `AttackFrontalCharged`,
-    `AttackTurretedCharged`), whose gun keeps its reload.
+    period. And the full rate law is:
+
+        DPS = damage x burst / attack cycle
+        attack cycle = reload delay + sum of ALL burst delays + charge delay
+
+    ⚠ **"DPS" is a NAME, not a unit — it is damage per TICK**, everywhere in this
+    repository. Nothing here is per second.
+
+    ⛔ **THE LAW IS RULED; APPLYING IT IS BLOCKED ON EVIDENCE THE EXTRACTOR DOES NOT
+    RECORD.** `reference_distribution`/`armament_roles` still report the cycle WITHOUT
+    the charge term (Tesla Coil 106, Obelisk 96), and that gap is deliberate rather
+    than forgotten. Astra's engine trace, 2026-09-14, found three cases where naively
+    adding the wind-up produces a number the engine does not run:
+
+    | case | why a naive `+ charge` is wrong |
+    |---|---|
+    | multi-shot `ChargeLevel` | the burning Obelisk is Burst 10 / BurstDelays 1 and its `AttackCharges` notifier resets `ChargeLevel` on **every projectile** — later shots must recharge, so the period is not `105 + 50` |
+    | interleaved `AttackTesla` | the Rail Tower charges in 3 ticks while its weapon is still in a 10-tick reload, so charge and reload OVERLAP; both 160 and 172 are provisional |
+    | random `ChargeLevel` | `ChargeLevel: 25, 50` is a RANGE, and `extract_stats` keeps only its lower bound |
+
+    The unblock is three extractor fields — `ChargeDelay`, `ShotsPerCharge`, and
+    whether a charge value was a RANGE — plus a formula that models recharge overlap.
+    Until then the charge term is withheld rather than guessed, and
+    `tesla_coil_attack_period` pins the **implemented** 106 with the ruled 131 recorded
+    beside it, so the gap is auditable instead of invisible.
 
     ⛔ **`formula.charge_attack_cycle` returning `None` does NOT mean "no charge time".**
-    It means only that the trait does not override the weapon's RELOAD. Reading it as
-    "the charge costs no cycle time" is the error this clause exists to prevent.
-
-    | actor | trait | base cycle | wind-up | period |
-    |---|---|--:|--:|--:|
-    | `ra1_soviets_teslacoil` | `AttackTesla` | 106 | 25 | **131** |
-    | `ra2_soviets_teslacoil` | `AttackTesla` | 75 | 20 | **95** |
-    | `asianalliance_railtower` | `AttackTesla` | 160 | 12 | **172** |
-    | `td_nod_obeliskoflight` | `AttackCharges` | 96 | 50 | **146** |
-    | `terran_siegetank` | `AttackTurretedCharged` | 37 | 25 | **62** |
-
-    14 actors carry a resolved `charge_up` record; an explicit `InitialChargeDelay`
-    count does NOT bound them, because the trait can take the engine default.
-    Pinned as `charged_actor_cycle_actors` in `docs/audit/doc_claims.yaml`.
+    It means only that the trait does not override the weapon's RELOAD. That misreading
+    is what produced the withdrawn Obelisk figure.
   - Charge values are DECISIONS: write `InitialChargeDelay` out rather than inheriting
     the engine's default of 22. An absent key means DEFAULT, never zero.
 - ⭐ **TEAM UPGRADES ARE ALWAYS WEAKER THAN FACTION UPGRADES** (maintainer law,

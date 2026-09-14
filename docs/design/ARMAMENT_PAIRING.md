@@ -284,7 +284,7 @@ repository holds:
 
 Stale evidence is worse than missing evidence, because it looks exactly like the real thing.
 
-### 2i. The attack cycle includes the CHARGE, and an actor trait can own the cycle
+### 2i. The attack cycle includes the CHARGE — ruled, and NOT yet applied
 
 The law, as the maintainer states it (2026-09-14):
 
@@ -294,50 +294,37 @@ attack cycle = reload delay + sum of ALL burst delays + charge delay
 ```
 
 ⚠ **"DPS" is a name, not a unit — it is damage per TICK.** Every rate in this lane, in the ledger
-and on the map is per tick. Reading one as per-second rescales every comparison by the tick rate.
+and on the map is per tick.
 
-Two things reach the cycle from OUTSIDE the weapon, and the per-armament consumer honoured neither
-until 2026-09-14:
+One thing DOES reach the cycle from outside the weapon today: **the trait can override the reload.**
+`AttackTesla`'s own `ReloadDelay` is the cycle, `MaxCharges` is the burst, and the WEAPON's reload
+is the gap between zaps (`formula.charge_attack_cycle`, shipped in #385). Reading the weapon alone
+reported a Tesla Coil, whose weapon reloads every 3 ticks, as firing twenty times a second.
 
-**The trait can override the reload.** `AttackTesla`'s own `ReloadDelay` is the cycle, `MaxCharges`
-is the burst, and the WEAPON's reload is the gap between zaps. DESIGN.md has ruled this since
-2026-08-15 and `formula.charge_attack_cycle` is its one implementation — reused here, never
-re-derived. Reading the weapon alone reports a Tesla Coil, whose weapon reloads every 3 ticks, as
-firing twenty times a second: an **11.8x** overstatement DESIGN names explicitly.
+⛔ **THE CHARGE TERM ITSELF IS WITHHELD, AND THAT IS A DECISION, NOT AN OVERSIGHT.** I implemented
+it and Astra's engine trace held it (PR #386), correctly. Three shapes break a naive `cycle + ticks`:
 
-**The wind-up is part of the period.** Maintainer, 2026-09-14: *"charged weapons come at a discount
-but the attack cycle duration is reload delay plus charge delay"* — **both**, never either. The K
-discount prices the DRAWBACK of being helpless while charging; the longer cycle measures the OUTPUT
-the wind-up costs. And this is not new arithmetic: the discount's own denominator,
-`charge_share = charge / (charge + cycle)`, already treated `charge + cycle` as the whole period.
+* **multi-shot `ChargeLevel`** — the burning Obelisk is Burst 10 / BurstDelays 1, and its
+  `AttackCharges` notifier resets `ChargeLevel` on every projectile, so later shots must recharge.
+  Its period is not `105 + 50`.
+* **interleaved `AttackTesla`** — the Rail Tower charges in 3 ticks while its weapon is still in a
+  10-tick reload, so the two OVERLAP. Both #385's 160 and my 172 are provisional.
+* **random `ChargeLevel`** — `steelconsortium_dagger` declares `ChargeLevel: 25, 50` and
+  `extract_stats` keeps only the lower bound.
 
-| actor | trait | base cycle | wind-up | period |
-|---|---|--:|--:|--:|
-| `ra1_soviets_teslacoil` | `AttackTesla` | 106 | 25 | **131** |
-| `ra2_soviets_teslacoil` | `AttackTesla` | 75 | 20 | **95** |
-| `asianalliance_railtower` | `AttackTesla` | 160 | 12 | **172** |
-| `td_nod_obeliskoflight` | `AttackCharges` | 96 | 50 | **146** |
-| `terran_siegetank` | `AttackTurretedCharged` | 37 | 25 | **62** |
+The unblock is three extractor fields — `ChargeDelay`, `ShotsPerCharge`, and whether a value was a
+RANGE — plus a formula that models recharge overlap. Withholding is the same answer this lane gives
+everywhere else: an unprovable quantity abstains.
 
-**14 actors** carry a resolved `charge_up` record. ⛔ An explicit `InitialChargeDelay` count does
-NOT bound that population — only three actors write the field and the rest take the engine default,
-so measure from resolved records. Pinned as `charged_actor_cycle_actors` and
-`tesla_coil_attack_period`.
+⛔ **THE POPULATION IS SMALLER THAN IT LOOKS, AND I OVERSTATED IT.** 14 actors carry a `charge_up`
+record, but that is not 14 actors whose reported cadence would move: `ra1_allies_mobileradarjammer`
+has **no priced armament view at all**, `wc2_humans_dwarvenrifleman` records **zero** charge ticks,
+and `terran_siegetank` keeps 37 under the ownership guard. I published a table claiming the siege
+tank at 62 and the burning Obelisk at 155; **both were wrong** — measured before I adopted #385's
+guard, and never re-measured after. Counting records is not counting effects.
 
-⛔ **THREE MISTAKES ARE RECORDED HERE BECAUSE ALL THREE WERE MADE, IN ORDER.**
-
-1. *"`extract_stats` never looks for `AttackCharges`."* False — it has always recorded `charge_up`
-   (`ticks`, `cycle_reload`, `burst`). The defect was only ever in this consumer. (Codex, PR #383.)
-2. *"Effective reload = written + charge, so the coil's cycle is 3 + 25 = 28 and its rate is 9.3x
-   too fast."* Wrong model and an underived number: the trait's 100-tick reload IS the cycle, and
-   the true correction is 11.8x before the wind-up.
-3. *"`charge_attack_cycle` returns `None` for the ChargeLevel family, so the charge costs no cycle
-   time there."* Also wrong, in the other direction. `None` says only that the trait does not
-   override the weapon's RELOAD. The Obelisk keeps its 96-tick weapon cycle **and** adds its
-   50-tick charge.
-
-The shape common to all three: reasoning about what a helper or a field *ought* to mean instead of
-measuring what it holds.
+⛔ **AND `charge_attack_cycle` RETURNING `None` DOES NOT MEAN "NO CHARGE TIME".** It says only that
+the trait does not override the weapon's RELOAD. Both #385 and I read it the other way first.
 
 ## 3. The pairing key is the targeting envelope
 
