@@ -302,6 +302,10 @@ CHARGE_FIELDS = {
         # a 160-tick cycle, not 132).
         "cycle_reload": ("ReloadDelay", 120),
         "burst": ("MaxCharges", 1),
+        # Engine default 3 (AttackTeslaInfo). Recorded because the comparison
+        # `ChargeDelay` vs the WEAPON's reload is what separates charge-once from
+        # charge-per-shot, and no actor in the tree writes the field.
+        "charge_delay": ("ChargeDelay", 3),
     },
     # The ChargeLevel family governs no reload of its own — the charge gates the
     # actor's own gun, so the share is measured against the weapon it delays.
@@ -380,17 +384,47 @@ def charge_share(ticks: float | None, cycle: float | None) -> float:
 def charge_attack_cycle(charge, weapon_reload: float | None):
     """(cycle_ticks, shots_per_cycle) for a trait that OVERRIDES the weapon's reload.
 
-    `AttackTesla` is the case: the trait's own `ReloadDelay` is the cycle, it fires
-    `MaxCharges` zaps within it, and the WEAPON's reload is the gap between those
-    zaps — i.e. exactly a burst, so `eff_reload` applies unchanged.
+    `AttackTesla` is the case: the trait's own `ReloadDelay` is the cycle and it fires
+    `MaxCharges` zaps within it.
 
     Returns None for traits that do NOT override the weapon (the `ChargeLevel`
     family), whose gun keeps its own reload and whose charge merely delays it.
 
-    ⚠ This is a PRICING correction, not a detail. A Tesla Coil's weapon reloads
-    every 3 ticks, so reading the weapon alone prices it as firing 20 times a
-    second when it really fires 3 zaps per 106 ticks — an 11.8x overstatement of
-    its DPS, and DPS drives the price.
+    ⭐ THE WIND-UP IS PART OF THE CYCLE, AND IT IS PAID ONCE OR PER SHOT (maintainer,
+    2026-09-14: *"charged weapons come at a discount but the attack cycle duration is
+    reload delay plus charge delay"*, and for the Rail Tower *"it needs to charge for
+    every shot unlike the tesla coil ... at 5 shots the initial charge delay is used 5
+    times"*). Which machine an actor is comes straight out of the engine, with no
+    trait-name special case:
+
+        ChargeFire.Tick:  if (IsCanceling || !attack.CanAttack(self, target)) return true;
+
+    and `AttackBase.CanAttack` calls `HasAnyValidWeapons(reloadingIsInvalid: true)`. So
+    when the WEAPON's reload outlasts `ChargeDelay`, `ChargeFire` meets a reloading
+    armament and EXITS; `ChargeAttack` carries the same guard and ends too, and the actor
+    re-enters through it — paying `InitialChargeDelay` again:
+
+        weapon reload <= ChargeDelay   charge-once      gap = ChargeDelay
+        weapon reload >  ChargeDelay   charge-per-shot  gap = weapon reload + wind-up
+
+        cycle = (shots - 1) x gap + trait ReloadDelay + wind-up
+
+    Reproduces every ruled figure: the RA1 coil 131, the RA2 coil 95, the Rail Tower 210.
+    `tools/balance/sim_attack_tesla.py` derives the same numbers by running the trait's
+    state machine tick by tick.
+
+    ⚠ A charge-per-shot actor's REAL cadence is a distribution, not this number: it goes
+    idle between shots and re-enters on `AutoTarget`'s random 3-7 tick scan. A 300-seed
+    sample reports 210 minimum / 218 mean / 232 maximum, while another legal scan path
+    produces 234, so those sampled extrema are not fixed bounds. This returns the FLOOR
+    deliberately — it is the value the maintainer ruled, it is the
+    one that follows from the fields alone, and it errs toward pricing the actor as
+    slightly stronger than it is rather than weaker.
+
+    ⚠ This is a PRICING correction, not a detail. A Tesla Coil's weapon reloads every 3
+    ticks, so reading the weapon alone prices it as firing 20 times a second when it
+    really fires 3 zaps per 131 ticks — a 14.6x overstatement of its DPS, and DPS drives
+    the price.
     """
     if not isinstance(charge, dict):
         return None
@@ -398,7 +432,19 @@ def charge_attack_cycle(charge, weapon_reload: float | None):
     if not reload_:
         return None
     burst = int(charge.get("burst") or 1)
-    return eff_reload(reload_, burst, weapon_reload), burst
+    wind_up = float(charge.get("ticks") or 0.0)
+    charge_delay = charge.get("charge_delay")
+
+    if charge_delay is None or not weapon_reload:
+        # Pre-`charge_delay` ledgers cannot tell the modes apart. Fall back to the old
+        # behaviour rather than guess a mode - a wrong mode is a factor of MaxCharges.
+        return eff_reload(reload_, burst, weapon_reload) + wind_up, burst
+
+    if float(weapon_reload) > float(charge_delay):
+        gap = float(weapon_reload) + wind_up          # charge-per-shot
+    else:
+        gap = float(charge_delay)                     # charge-once
+    return (burst - 1) * gap + float(reload_) + wind_up, burst
 
 
 def charge_price_multiplier(charge, reload_fallback: float | None = None) -> float:

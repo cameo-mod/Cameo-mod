@@ -506,6 +506,180 @@ defaults.yaml** (`^HighTechTankTemplate` ⇒ vehicle, whatever the render
 traits say). Power plant vision currently: 4c0 small / 5c0 advanced —
 a project-wide size/cost scaling rule is TODO.
 
+## 3a. The dual-armament laws (maintainer, 2026-09-14)
+
+Four rulings about actors that carry more than one weapon. They were prompted by the
+per-armament reference map, which showed the GDI APC, Battle Tank and Mammoth Tank carrying two
+weapons whose targets came out within a few percent of each other.
+
+### 3a.1 An AA split is ONE weapon, and only its RANGE differs
+
+> *"the APC anti ground and anti air flak should not have any different damage since it's the
+> same weapon (the only reason why we had to split it was a necessity because we can't otherwise
+> have 1.5x range against air) so yes for those dual weapons that are only anti ground and anti
+> air versions they must be identical except for the 1.5x range"*
+
+A `_AA` weapon that exists only because OpenRA cannot give one armament a longer reach against
+air is **not a second weapon**. `Damage`, `ReloadDelay`, `Burst` and `BurstDelays` must be
+IDENTICAL to its ground twin. **Only `Range` differs, by exactly 1.5x.**
+
+⛔ **`MinRange` NEVER SCALES** (maintainer, same ruling): *"Min Range never scales! That one is
+always constant - because no range multiplier changes min range."* A range multiplier moves the
+maximum reach and nothing else, so the AA half must carry the SAME `MinRange` as its ground twin.
+Scaling it by 1.5x alongside `Range` looks tidy and is wrong; it silently widens the dead zone
+the unit cannot shoot into.
+
+⚠ **MEASURED 2026-09-14: the tree does not obey this.** 63 `_AA`/ground pairs exist:
+
+| | pairs | |
+|---|--:|---|
+| compliant | **36** | identical apart from a 1.5x maximum range |
+| **value violations** | **21** | the halves are not the same weapon at all |
+| range-ratio violations | 6 | same weapon, reach is not 1.5x |
+
+⛔ And the violations do not even share a direction. `RA2GattlingMG1/2/3` and
+`YuriGatlingCannonMG1/2/3` give the AA half **double** damage (4000 vs 8000); the Lunar and Naxi
+laser family gives it **half** (8000 vs 4000); `SteelMantaHunterCannons` scales damage AND reload
+by 1.5x; `Rocket_stealth` makes AA weaker (14500 vs 12000) on a 1.19x range. Reach ratios of
+1.0x, 1.35x, 1.429x, 1.688x, 1.808x and 2.0x all appear. Four pairs - `Naxis_Komet`, `eden_EMP`,
+`edenTiger_EMP` and `plymouth_EMP` - scale `MinRange` by 1.5x as well, which is the specific
+mistake ruled against above. There is no convention here to preserve; pinned by
+`aa_split_pairs_compliant`.
+
+### 3a.2 Weapons that can hit the same target MUST share one range
+
+> *"the unit will always try to fire at maximum range so if they are different it will mostly use
+> one but not both weapons so to maximize effectiveness it is imperative that ALL WEAPONS THAT
+> CAN HIT THE SAME TARGET MUST ALWAYS HAVE THE EXACT SAME RANGE AND THE ONLY EXCEPTIONS ARE THOSE
+> ANTI GROUND ANTI AIR COMBOS WITH THE 1.5X RANGE"*
+
+This is a project consistency rule with a mechanical purpose: same-target armaments should
+participate together predictably instead of depending on the attack trait and order path.
+`AttackFrontal` deliberately approaches the shortest active maximum range, so a shorter weapon
+is not universally inert; other attack paths can open fire at the longer range and delay the
+shorter armament. Equal range removes that mode-dependent split and makes the combined value
+model match the intended simultaneous use.
+
+⚠ **This law deliberately DEPARTS from the source material.** Measured across the 935 reference
+actors that carry two weapons, only **31.9%** give them equal range - the originals routinely
+split reach. Cameo chooses predictable simultaneous use across its attack traits instead.
+Fidelity loses to function here, and that is a decision, not an oversight.
+
+⚠ **MEASURED on the tree**: of 522 actors with 2+ priced armaments, **387 same-target groups
+share one range (54.0%) and 330 carry a spread**, the worst 409x. ⛔ The 330 is an UPPER bound,
+not a defect count: it still includes aircraft bombs (`TSBomb`, `OrniBomb`, `NaxiCowDrop`) and
+condition-gated `elite` replacements, neither of which competes for a target at maximum range.
+**The exemption list is an open design question** - see `same_target_range_groups`.
+
+### 3a.3 Simultaneous armaments SUM - the actor-level cell must not be WITHHELD
+
+> *"for the balance formula you need to count both weapons if they are truly activated at the
+> same time at the same ground target like the mammoth tank cannons and missiles so the combined
+> DPS is what counts and it is what should be displayed in the reference data instead of the
+> WITHHELD status"*
+
+Where two armaments genuinely fire together at one target, the priced quantity is their SUM, and
+the reference map must show it rather than abstain. Abstention is for armaments that cannot be
+compared, not for ones that add.
+
+### 3a.4 Why a cannon and a missile land on almost the same target
+
+> *"compare 41,528 for the missiles with 40,997 with the cannons! ... Both weapons even when they
+> use different references have almost the same damage ... So what exactly is going on here?"*
+
+⛔ **FIRST, A CORRECTION I OWE THIS SECTION.** An earlier draft answered this with "the sources
+say 1.71x" - a median cannon-vs-missile DPS ratio measured across every reference Mammoth Tank in
+the **INI corpus** (CnC Reloaded, Twisted Insurrection, Mental Omega, RA2, DTA Classic, Rise of the
+East). That number is real, and it is **the wrong population**: none of those sources votes on
+`td_gdi_mammothtank`. Its voters are OpenRA peers. Quoting a corpus-wide statistic to explain a
+specific actor's pairing is the same class of error as reasoning from a trait's name instead of its
+source - see `mammoth_named_dual_slot_separation_ratio`, which now says so on its face.
+
+**THE ACTUAL VOTERS, read out of `armament_pairing.json`:**
+
+| source | cannon | missile | missile:cannon |
+|---|---|---|--:|
+| Combined Arms | `130mmTD` 12,000 / 85t | `MammothTusk` 14,000 / 75t | 1.17x |
+| OpenRA Tiberian Dawn | `120mmDual` 8,000 / 48t | `MammothMissiles` 10,000 / 60t | 1.25x |
+| **geometric mean** | **9,798** | **11,832** | **1.21x** |
+
+By RATE rather than per cycle it is smaller still - CA 141.2 vs 186.7 (1.32x), Tiberian Dawn
+**166.7 vs 166.7 (exactly 1.00x)**, geometric mean **1.15x**.
+
+⭐ **THE ANSWER, AFTER REGENERATING THE MAP: THE SOURCES WERE CANCELLING EACH OTHER OUT.**
+
+An earlier draft of this section said the projection COMPRESSES the difference. That was also
+wrong, and the regeneration disproves it. With DTA Enhanced's unusable rows correctly gated out,
+the Mammoth's two targets move to:
+
+| | old map (stale) | regenerated | peers |
+|---|--:|--:|--:|
+| `mammothmissiles` | 41,528 (3 of 3) | **51,580** (2 of 3) | 11,832 |
+| `120mmdual` | 40,997 (3 of 3) | **42,275** (2 of 3) | 9,798 |
+| **ratio** | **1.013x** | **1.220x** | **1.208x** |
+
+**1.208x in the peers becomes 1.220x in the targets.** The projection carries the difference
+through almost exactly; it does not compress it. What produced the old 1.013x was a
+**CANCELLATION BETWEEN SOURCES POINTING IN OPPOSITE DIRECTIONS**:
+
+* Combined Arms and Tiberian Dawn both make the **missile** stronger (1.17x, 1.25x);
+* DTA Enhanced makes the **cannon** stronger - `HTNK` carries cannon 30 against missile 20, a
+  1.5x inversion.
+
+Blending three sources, two saying "missile" and one saying "cannon" nearly as loudly, lands on
+"about equal". The near-equality was never evidence that the two weapons are alike; it was two
+opposite claims averaging to nothing.
+
+⛔ **AND DTA SHOULD NEVER HAVE BEEN IN THAT AVERAGE.** Its `HTNK` declares `Burst: 2` on BOTH
+armaments with no burst delays, so neither cycle can be folded: both rows are
+`incomplete / burst_unfolded` and carry no `dps_usable`. They are part of the blocked
+unfolded-rate population (170 rows tree-wide, 84 of them DTA Enhanced). The current gate excludes
+them correctly - and the moment it did, the real 1.22x separation appeared.
+
+⭐⭐ **THE BATTLE TANK IS A DIFFERENT STORY, AND IT DID NOT MOVE.** 18,870 vs 17,835 before and
+after. Its missile has exactly one voter:
+
+| source | cannon | missile |
+|---|---|---|
+| Combined Arms | `120mm` 4,600 | *(unpaired)* |
+| DTA Enhanced | `90mm` **30** | `70mmMsl1` **30** |
+| OpenRA Tiberian Dawn | `120mm` 4,000 | *(unpaired)* |
+
+**In DTA Enhanced - the missile's ONLY voter - the cannon and the missile carry the identical
+number, 30.** The missile's reference IS the cannon's reference, so the two targets cannot
+separate on evidence; the 5.8% that survives is entirely the cannon's extra Combined Arms and
+Tiberian Dawn blend. Asymmetric voter counts (1 vs 3) are what move these two apart at all.
+
+⚠ **THREE DIFFERENT CAUSES, AND THEY LOOK IDENTICAL ON THE PAGE.** A near-1.0x spread between two
+armaments can mean *the sources agree they are alike*, *the sources disagree and cancelled*, or
+*one armament's only voter is the other armament's weapon*. Only the Mammoth's was the second and
+only the Battle Tank's is the third. **Read the voters, never the spread.**
+
+
+⚠ **THE MAP THAT PROMPTED THIS WAS STALE, AND HAS BEEN REGENERATED.** It reported "3 of 3
+sources" for both Mammoth weapons including `DTA Enhanced · MammothTusk`; DTA Enhanced now pairs
+0 of the Mammoth's 2 armaments. Regenerated 2026-09-14 across all 31 faction tokens:
+**161 originals · 709 expanded · 925 references · 514 priced by formula · 8 originals under three
+sources.**
+
+⭐ **WHAT THIS DOES AND DOES NOT JUSTIFY.** The Mammoth's guns are NOT alike after all - the
+evidence separates them by 1.22x once the unusable votes are gone, so the maintainer's instinct
+that a cannon and a missile should differ noticeably is supported here by our own map, not only by
+the wider corpus. The Battle Tank is the opposite case: its missile has no independent evidence at
+all, so applying one averaged value to both costs nothing and is exactly the maintainer's own
+corollary. ⚠ The `td_gdi_apc` pair (6,239 vs 6,138, a 1.6% spread) is a THIRD case and is settled
+by 3a.1 rather than by evidence: it is one weapon split for reach, so the two must be made
+identical regardless of what their separate votes say.
+
+⚠ For the record, the wider-corpus number stands as a non-directional separation statistic.
+Across all 930 dual-weapon reference actors only **29.2%** sit inside 1.05x and **45.4%** exceed
+3x. Among the 15 INI rows whose actor name contains `mammoth` and whose two slots both have DPS,
+the median stronger:weaker ratio is **1.71x** (1.11x-2.93x). The selection includes Mammoth-named
+walkers and no RA2 Apocalypse row, so it must not be described as a directional cannon:missile
+measurement. It shows that differentiated slots are common in that population; it does not say
+which slot should be stronger or what `td_gdi_mammothtank` should be.
+
+
 ## 4. Tech tier rules (F12/F13)
 
 Building tiers are data-driven from prerequisite chains (conyard 0,
@@ -711,31 +885,51 @@ YAML remains an explicit design decision.
     all condition-gated, and the model assumes exactly one is enabled — which is what
     reproduces 131 and 95.
 
-    ⛔ **STILL NOT APPLIED.** The charge-per-shot ruling is source-supported, while 220 remains
-    the immediate-reacquisition model rather than measured runtime timing. `armament_roles`
-    withholds the charge term and `tesla_coil_attack_period` still pins the implemented 106.
-    Applying it needs `ChargeDelay` and the weapon reload in the extractor, which is the
-    remaining unblock.
+    ⭐⭐ **APPLIED 2026-09-14**, on the maintainer's instruction *"make sure the charge
+    between every shot is counted correctly for the burst cycle"*. The last unblock is
+    closed: `extract_stats` records `ChargeDelay` — the engine default 3, written by no actor
+    in the tree, which is exactly why the mode was undecidable — and
+    `formula.charge_attack_cycle` counts the wind-up once or per shot accordingly.
+    `tesla_coil_attack_period` moved from the implemented 106 to the ruled **131**.
 
-    ⛔ **THE LAW IS RULED; APPLYING IT IS BLOCKED ON EVIDENCE THE EXTRACTOR DOES NOT
-    RECORD.** `reference_distribution`/`armament_roles` still report the cycle WITHOUT
-    the charge term (Tesla Coil 106, Obelisk 96), and that gap is deliberate rather
-    than forgotten. Astra's engine trace, 2026-09-14, found three cases where naively
+    ⚠ **THE CORRECTION IS NOT SMALL.** These defences were priced on a cycle that omitted the
+    wind-up entirely, so their rates fell when it was added:
+
+    | actor | cycle | rate | |
+    |---|---|---|--:|
+    | `asianalliance_railtower` | 160 → **210** | 968.75 → **738.10** | **-24%** |
+    | `ra1_soviets_teslacoil` | 106 → **131** | 1358.49 → **1099.24** | **-19%** |
+
+    ⛔ **WHAT IS PRICED IS THE FLOOR, AND ONLY THE FLOOR.** A charge-per-shot actor goes idle
+    between shots, so it re-enters through `AutoTarget`, whose scan re-arms with
+    `SharedRandom.Next(MinimumScanTimeInterval 3, MaximumScanTimeInterval 8)` — and `Next`
+    EXCLUDES its upper bound, so the interval is **U{3..7}, mean 5**, with no Cameo yaml
+    overriding either field. A 300-seed sample reports **210 minimum / 218 mean / 232 maximum**;
+    a valid repeating scan path produces 234, so 232 is not a ceiling. The baseline Tesla Coil
+    cases are invariant when exactly one condition-gated armament is enabled. The floor is priced
+    deliberately: it follows from the fields
+    alone, it is what the maintainer ruled, and it errs toward pricing the actor slightly
+    strong rather than weak. The spread above it is recorded, not applied.
+
+    ⭐ **THE LAW IS RULED AND, SINCE 2026-09-14, APPLIED.** The evidence the extractor did
+    not record — `ChargeDelay` — is now recorded, so `reference_distribution`/`armament_roles`
+    report the cycle WITH the charge term (Tesla Coil **131**, Rail Tower **210**). The
+    `ChargeLevel` family is deliberately unchanged (Obelisk still 96): it only delays a gun
+    that keeps its own reload, so it cannot say what a cycle is. Astra's engine trace, 2026-09-14, found three cases where naively
     adding the wind-up produces a number the engine does not run:
 
     | case | why a naive `+ charge` is wrong |
     |---|---|
     | multi-shot `ChargeLevel` | the burning Obelisk is Burst 10 / BurstDelays 1 and its `AttackCharges` notifier resets `ChargeLevel` on **every projectile** — later shots must recharge, so the period is not `105 + 50` |
-    | interleaved `AttackTesla` | `ChargeFire` exits when the armament is reloading, so the Rail Tower must re-enter through `ChargeAttack` and pay the wind-up again. The maintainer's **220** is reproduced only with immediate reacquisition; real AutoTarget timing is still unmeasured. My 172 and 180 are withdrawn and #385's 160 never paid the charge. Detection needs `ChargeDelay`, weapon reload and reacquisition timing |
+    | interleaved `AttackTesla` | ⭐ **CLOSED.** `ChargeFire` exits when the armament is reloading, so the Rail Tower re-enters through `ChargeAttack` and pays the wind-up again — charge-per-shot, exactly as ruled. Detection is `ChargeDelay` vs the weapon reload, both now available, and AutoTarget's `Next(3, 8)` scan is sampled by the simulator. The tower prices at its ideal floor **210** (its wind-up is 10 since 2026-09-14); 300 seeds average 218 and a legal path reaches 234. My 172 and 180 are withdrawn; #385's 160 never paid the charge |
     | random `ChargeLevel` | ⭐ **CLOSED.** `ChargeLevel: 25, 50` is a RANGE and `extract_stats` kept only its lower bound; ruled 2026-09-14 to take the MEAN of min and max, and `charge_scalar` now does — 37.5 here, and `0, 4` is 2 rather than zero. All four ranged actors re-extracted |
 
-    ⭐ One of the three unblocks is now closed: **range-ness is recorded**, because the mean is
-    resolved at extraction and the ledger stores the number the cycle actually costs. **Two
-    extractor fields remain** — `ChargeDelay` and `ShotsPerCharge` — plus a formula that models
-    recharge overlap.
-    Until then the charge term is withheld rather than guessed, and
-    `tesla_coil_attack_period` pins the **implemented** 106 with the ruled 131 recorded
-    beside it, so the gap is auditable instead of invisible.
+    ⭐ **All three unblocks are closed.** Range-ness resolves at extraction; `ChargeDelay` is
+    recorded, which is what makes the mode decidable; and the reacquisition variability is
+    explicitly modelled and sampled. `ShotsPerCharge` remains unrecorded and matters only to the
+    `ChargeLevel` family, which does not own a cycle. `tesla_coil_attack_period` has moved
+    from the implemented 106 to the ruled **131** — the gap it existed to keep auditable is
+    shut.
 
     ⛔ **`formula.charge_attack_cycle` returning `None` does NOT mean "no charge time".**
     It means only that the trait does not override the weapon's RELOAD. That misreading

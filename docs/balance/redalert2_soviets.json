@@ -2507,7 +2507,7 @@
       "pricing": true,
       "range": "8842",
       "reloaddelay": "3",
-      "requires": "((!TeslaCoilCharge && !unpowered) || (TeslaCoilCharge == 1 && unpowered)) && (ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite)",
+      "requires": "((!TeslaCoilCharge && !unpowered) || (TeslaCoilCharge == 1 && unpowered)) && ((ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite))",
       "slot": "Armament@2",
       "versus_templates": [
        "RA2CoilBolt"
@@ -2608,7 +2608,7 @@
       "pricing": true,
       "range": "8842",
       "reloaddelay": "3",
-      "requires": "((TeslaCoilCharge && !unpowered) || (TeslaCoilCharge > 1 && unpowered)) && (ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite)",
+      "requires": "((TeslaCoilCharge && !unpowered) || (TeslaCoilCharge > 1 && unpowered)) && ((ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite))",
       "slot": "Armament@Charged2",
       "versus_templates": [
        "RA2OPCoilBolt1"
@@ -2660,6 +2660,7 @@
     "buildable": true,
     "charge_up": {
      "burst": 1,
+     "charge_delay": 3,
      "cycle_reload": 75.0,
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#AttackTesla",
      "ticks": 20.0,

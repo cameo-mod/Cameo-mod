@@ -1,6 +1,102 @@
 # Cameo — THE HANDOFF
 
-## ⭐⭐⭐ 2026-09-14 — CHARGE-RANGE AVERAGING INTEGRATED; CADENCE STILL WITHHELD
+## 2026-09-14 (late) — CHARGE AND DUAL-ARMAMENT INTEGRATION
+
+This section describes the corrected integration of Aedis's PRs **#392** and **#393** on the
+current master line. Exact commit identities belong in Git/PR history rather than this live
+handoff. The separate one-tick INI burst fold remains outside this integration because it needs
+a reviewed corpus re-extract and source-pin regeneration.
+
+### ⛔ THE REVIEW MAP IS THE CLASSIC FOUR ONLY
+
+Maintainer, 2026-09-14: *"I want the original 4 factions to be mapped and rebalanced first before
+we even start doing the rest."* — `td_gdi td_nod ra1_allies ra1_soviets`, nothing else.
+**73 originals · 78 expanded · 285 references · 21 formula-priced · 4 originals under three sources.**
+
+⚠ It lives at ONE artifact, `claude.ai/code/artifact/0efff6f0-89af-4ea2-b8a9-2027142a631b` (v30).
+**Update that URL; never publish a new link** — a fresh publish strands the maintainer's bookmark.
+The *"regenerate for all factions every time"* rule governs **Codex's canonical coverage report**
+(29 non-WIP ledgers), which is a DIFFERENT artifact with a different job. I conflated the two and
+built a 31-faction map nobody asked for.
+
+### ⭐ THE CHARGE TERM IS APPLIED (#392)
+
+`extract_stats` records `ChargeDelay` (engine default 3, written by no actor — which is why the
+mode was undecidable). `charge_attack_cycle` counts the wind-up once or per shot, chosen by
+`ChargeDelay` against the WEAPON's reload. Priced cycles **131 / 95 / 210**, every ruling.
+Rates fell **-19%** (Tesla Coil) and **-24%** (Rail Tower): they had been read as firing faster
+than they do. Two live YAML corrections accompany the model: `asianalliance_railtower`
+`InitialChargeDelay` 12 → 10, and the RA2 Soviet Tesla Coil's elite/no-overload normal and
+charged armament conditions are parenthesized so exactly one can fire.
+`AutoTarget` reacquisition uses `Next(3, 8)` = U{3..7}. A 300-seed sample gives the tower
+210 minimum / 218 mean / 232 maximum, while a valid repeating path reaches 234; sampled maxima
+are not ceilings. **The 210 ideal floor is priced; the spread is not.** Baseline coil states are
+invariant only when exactly one condition-gated armament is enabled.
+
+### ⭐ THE FOUR DUAL-ARMAMENT LAWS (#393, DESIGN §3a)
+
+1. **An AA split is ONE weapon** — identical Damage/Reload/Burst/BurstDelays **and MinRange**;
+   only max Range differs, exactly 1.5x. ⛔ **`MinRange` never scales.** 63 pairs → **36 compliant,
+   21 value violations, 6 wrong ratio**, with no consistent direction.
+2. **Same-target weapons share one range** (sole exception the AA combo). 387 groups comply,
+   330 spread — ⚠ an UPPER bound; bombs and `elite` replacements are still in it and **the
+   exemption list is an open question, not invented here.**
+3. **Simultaneous armaments SUM** and must be displayed, not WITHHELD.
+4. **Why two guns land on one target**, below.
+
+### ⛔ THE MAMMOTH — I WAS WRONG TWICE, AND THE ANSWER IS SOURCE CANCELLATION
+
+Not the INI corpus (wrong population: those sources do not vote on this actor) and **not
+projection compression** — the projection carries 1.208x in the peers to 1.220x in the targets.
+The old 1.013x was **two sources cancelling a third**: Combined Arms and Tiberian Dawn both make
+the missile stronger (1.17x, 1.25x), DTA Enhanced makes the cannon stronger (30 vs 20). Once
+DTA's unusable rows were gated out the real **1.22x** appeared.
+
+The Battle Tank is a different case and did not move: its missile's ONLY voter is DTA Enhanced,
+where `90mm` and `70mmMsl1` both carry **30** — the missile's reference IS the cannon's.
+
+⚠ **Three causes produce a near-1.0x spread and look identical on the page**: the sources agree,
+the sources cancelled, or one armament's only voter is the other's weapon. **Read the voters,
+never the spread.**
+
+### ⛔ THE BURST FOLD IS RULED AND IMPLEMENTED, BUT MUST NOT LAND ALONE
+
+Maintainer: *"if there is no burst delay you can use the minimal allowed value of 1 tick."*
+`dps = damage x burst / (reload + (burst-1) x 1)`; **170 armaments stop abstaining**; 110 INI
+tests pass. It will bring DTA back into the mammoth vote and shrink the 1.22x again — expected,
+and honest.
+
+⛔ **IT CANNOT LAND WITHOUT THE RE-EXTRACT**, and the re-extract surfaces a defect that is **not
+ours**: HEAD's own extractor on HEAD's own pinned sources already produces **63 actors whose
+`LINK_FIELDS` differ from the committed `ini_corpus.json`** — weapon SELECTION, not cadence
+(Red Resurrection 20 · Rise of the East 19 · Mental Omega 14 · CnC Reloaded 4 · Twisted
+Insurrection 3 · RA2 0XX 2 · RA2 Reborn 1; **none DTA**). Proven by reverting the extractor and
+re-extracting: the same 63 appear. The committed corpus is stale against its own extractor.
+**Fold + re-extract + `ini_source_pins.json` regeneration + the 63-row drift are ONE reviewed
+pass, and it is Codex's to sequence.**
+
+Building the map with the fold present correctly refused: *"armament_pairing.json input
+fingerprints are incomplete or stale: changed ['tools/reference/extract_ini_units.py']"*. That is
+why the fold was reverted off #393 onto its own branch.
+
+### ⛔ OPEN — `td_nod_lasercorvette`'s obelisk laser never fires
+
+`AttackTurretedCharged.Attacking` does not filter by armament, and OpenRA notifies EVERY
+`INotifyAttack` trait when ANY armament fires; with `ShotsPerCharge` defaulting to 1, each
+**secondary** missile executes `ChargeLevel = 0`. Primary needs 50 uninterrupted ticks
+(`ChargeLevel 50` @ `ChargeRate 1`); the secondary's longest gap is 35 (`ReloadDelay 35`,
+`Burst 2`, `BurstDelays 7`). **35 < 50 ⇒ 0 shots in 3000 simulated ticks.** CA's own trait warns
+it suits single-weapon units only. Options, none applied: `ChargeRate: 2`, `ChargeLevel: 40`, or
+a NEW Cameo trait filtering the notifier — a same-name shadow loses, since CA precedes Cameo in
+the assembly order. **Awaiting Codex's review; it is a balance value either way.**
+
+### ⚠ ENVIRONMENT
+
+A fresh worktree at current master crashes on `Cannot locate type: DynamicBotInsuranceInfo` until
+`dotnet build -c Release -p:TargetPlatform=win-x64` is re-run — the tracked DLL does not
+auto-update. Same root cause as the suite's `test_audit_bot_insurance` import errors.
+
+## ⭐⭐⭐ 2026-09-14 — THE CHARGE TERM IS APPLIED; THE AUTOTARGET SPREAD IS NOT
 
 Integrated from Aedis's #386/#389 work after Codex and Astra review. Live state; read before
 anything dated earlier.
@@ -48,8 +144,31 @@ which the simulator does not model, so 220 is the ruled/model floor rather than 
 
 ⭐ **And it gives the automatic detection**: `reload <= ChargeDelay` is charge-once
 (`gap = ChargeDelay`); `reload > ChargeDelay` is charge-per-shot
-(`gap = reload + reacquisition + InitialChargeDelay`). ⛔ The ruled model is not applied — the charge term is still
-withheld, and applying it needs `ChargeDelay` and the weapon reload in the extractor.
+(`gap = reload + reacquisition + InitialChargeDelay`). This was the final withheld state before
+#392; the applied state follows below.
+
+⭐⭐ **WHAT LANDED.** `extract_stats` records `ChargeDelay` (engine default 3, written by no
+actor - which is why the mode was undecidable), and `formula.charge_attack_cycle` counts the
+wind-up once or per shot from `ChargeDelay` vs the WEAPON's reload. Priced cycles are now
+**131 / 95 / 210** - every maintainer ruling. `tesla_coil_attack_period` moved 106 -> 131.
+
+| actor | cycle | rate | |
+|---|---|---|--:|
+| `asianalliance_railtower` | 160 -> **210** | 968.75 -> **738.10** | **-24%** |
+| `ra1_soviets_teslacoil` | 106 -> **131** | 1358.49 -> **1099.24** | **-19%** |
+
+⚠ **LIVE YAML CHANGES**: `asianalliance_railtower` `InitialChargeDelay` 12 -> **10**. The
+maintainer first proposed `ChargeDelay: 10` for consistency and then rejected it themselves - it
+would have flipped the tower to charge-ONCE (cycle 170) and removed the per-shot charging that is
+the building's identity. The RA2 Soviet Tesla Coil's elite/no-overload conditions also gain
+parentheses around their upgrade/rank alternatives; this removes an overlap that enabled the
+normal and charged armaments together. The integration boot gate is green.
+
+⛔ **THE AUTOTARGET SPREAD IS MEASURED BUT NOT PRICED.** `AutoTarget.ScanForTarget` re-arms with
+`SharedRandom.Next(3, 8)` = **U{3..7}, mean 5**, no Cameo override. A charge-per-shot actor goes
+idle between shots and pays it. Over 300 seeds the Rail Tower sample is **210 minimum / 218 mean /
+232 maximum**; a valid path reaches 234, so no fixed ceiling is claimed. The baseline coil states
+are invariant with one enabled armament. The 210 ideal floor is what the pipeline prices.
 
 ⭐⭐ **RANDOM RANGES TAKE THE MEAN — RULED, IMPLEMENTED, RE-EXTRACTED** (maintainer, 2026-09-14).
 `ChargeLevel: 25, 50` is ONE uniform roll, not two settings, so it costs **37.5**;
