@@ -17,8 +17,10 @@ from __future__ import annotations
 
 import argparse
 import collections
+import hashlib
 import html
 import json
+import math
 import re
 import pathlib
 import sys
@@ -28,9 +30,11 @@ sys.path.insert(0, str(HERE))
 import reference_distribution as rd          # noqa: E402
 import reference_targets as rt               # noqa: E402
 import build_armament_pairing_report as bap  # noqa: E402
+import armament_roles as ar                   # noqa: E402
 
 ROOT = rd.ROOT
 ASSIGN = ROOT / "docs/balance/derived/reference_assignment.json"
+SINGLETON_SELF_VOTES = ROOT / "docs/reference/cameo_singleton_armament_self_votes_20260914.json"
 ORIGINAL_SOURCES = ("OpenRA Red Alert", "OpenRA Tiberian Dawn",
                     "OpenRA Tiberian Sun", "Romanov's Vengeance")
 SECTIONS = (("infantry", "Infantry"), ("vehicle", "Vehicles"), ("aircraft", "Aircraft"),
@@ -639,6 +643,17 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
             # MOVES it, not the number — and the raw target rounds, which hid that distinction.
             tgt['w_burst'] = estimate_cell(rows, c, 'w_burst', selected_dist, selected_cdist,
                                            len(srcs), flag_change=c.get('w_burst'))
+            per_armament = has_structured_armament_components(a)
+            if per_armament:
+                route = ('<span class="muted" title="actor-level weapon folding can select a '
+                         'different peer armament">see per-armament components</span>')
+                for stat in ("w_range", "w_damage", "w_reload", "w_burst", "w_dps"):
+                    tgt[stat] = route
+                burst_delay = route
+                dps_verifier = route
+            else:
+                burst_delay = burst_delay_cell(c, rows)
+                dps_verifier = dps_verifier_cell(c, rows, tgt)
             note = ' <span class="tag">chassis-only</span>' if a in chassis_only else ""
             if c.get('hero'):
                 note += ' <span class="tag">hero-only model</span>'
@@ -655,8 +670,8 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
                 f'<td class="n">{component_num(c, "w_damage")} {burst_note(c)}{arm_note(a, led_arms, c.get("weapon_model_eligible"))} <span class="muted">→</span> {tgt["w_damage"]}</td>'
                 f'<td class="n">{component_num(c, "w_reload")} <span class="muted">→</span> {tgt["w_reload"]}</td>'
                 f'<td class="n">{component_num(c, "w_burst")} <span class="muted">→</span> {tgt["w_burst"]}</td>'
-                f'<td class="n">{burst_delay_cell(c, rows)}</td>'
-                f'<td class="n">{dps_verifier_cell(c, rows, tgt)}</td>'
+                f'<td class="n">{burst_delay}</td>'
+                f'<td class="n">{dps_verifier}</td>'
                 f'<td class="n">{num(c.get("cost"))} <span class="muted">→</span> {tgt["cost"]}</td></tr>')
         body.append("</tbody></table>")
         if reference_details:
@@ -689,6 +704,68 @@ def emit(body, members, crows, assignment, attached, chassis_only, dist, cdist, 
 # It READS `armament_pairing.json` and computes nothing — the mechanism, its role vocabulary and
 # its measurements live in `armament_roles.py` and `docs/design/ARMAMENT_PAIRING.md`.
 _PAIRING = []
+_SINGLETON_BINDINGS = []
+SINGLETON_SELF_VOTE_STATS = (
+    "hp", "speed", "cost", "w_range", "w_damage", "w_reload", "w_burst", "w_dps",
+)
+
+
+def singleton_self_vote_bindings():
+    """Hash-pinned frozen rows whose one priced armament is independently identified."""
+    if _SINGLETON_BINDINGS:
+        return _SINGLETON_BINDINGS[0]
+    doc = json.loads(SINGLETON_SELF_VOTES.read_text(encoding="utf-8"))
+    if doc.get("schema") != 1:
+        raise ValueError("singleton self-vote receipt has an unsupported schema")
+    snapshot = doc.get("immutable_snapshot") or {}
+    snapshot_path = ROOT / str(snapshot.get("path") or "")
+    if not snapshot_path.is_file():
+        raise ValueError("singleton self-vote receipt does not match the immutable snapshot")
+    snapshot_raw = snapshot_path.read_bytes()
+    if hashlib.sha256(snapshot_raw).hexdigest() != snapshot.get("sha256"):
+        raise ValueError("singleton self-vote receipt does not match the immutable snapshot")
+    snapshot_doc = json.loads(snapshot_raw)
+    frozen_rows = {row.get("id"): row for row in snapshot_doc.get("rows", ())}
+    bindings = doc.get("bindings")
+    if not isinstance(bindings, dict) or not bindings:
+        raise ValueError("singleton self-vote receipt has no bindings")
+    source_ledgers = doc.get("source_ledgers") or {}
+    for actor, binding in bindings.items():
+        source = source_ledgers.get(binding.get("source_ledger")) or {}
+        source_hash = str(source.get("sha256") or "")
+        source_key = f'docs/balance/{binding.get("source_ledger")}'
+        if (not re.fullmatch(r"[0-9a-f]{64}", source_hash)
+                or snapshot_doc.get("inputs", {}).get(source_key) != source_hash):
+            raise ValueError(f"singleton self-vote source hash does not match for {actor}")
+        values = binding.get("snapshot_values")
+        if not isinstance(values, dict) or set(values) != set(SINGLETON_SELF_VOTE_STATS):
+            raise ValueError(f"singleton self-vote values are incomplete for {actor}")
+        frozen = frozen_rows.get(actor)
+        if frozen is None or any(frozen.get(stat) != values[stat]
+                                 for stat in SINGLETON_SELF_VOTE_STATS):
+            raise ValueError(f"singleton self-vote values do not match for {actor}")
+    _SINGLETON_BINDINGS.append(bindings)
+    return bindings
+
+
+def singleton_self_vote_row(actor, main_rows, cdist):
+    """Return one admitted frozen row, or fail if its bound armament shape moved."""
+    binding = singleton_self_vote_bindings().get(actor)
+    if binding is None:
+        return None
+    if len(main_rows) != 1:
+        raise ValueError(f"singleton self-vote armament count moved for {actor}")
+    main = main_rows[0]
+    if binding.get("weapon") != main.get("weapon") or binding.get("slot") != main.get("slot"):
+        raise ValueError(f"singleton self-vote armament binding moved for {actor}")
+    frozen = getattr(cdist, "cameo_votes", None) or {}
+    row = frozen.get(actor)
+    if row is None:
+        raise ValueError(f"singleton self-vote row is absent for {actor}")
+    for stat, expected in binding["snapshot_values"].items():
+        if row.get(stat) != expected:
+            raise ValueError(f"singleton self-vote {stat} moved for {actor}")
+    return row
 
 
 def _validate_pairing_document(doc, expected_inputs):
@@ -738,6 +815,11 @@ def pairing_document():
             raise ValueError("armament_pairing.json is unreadable or malformed") from exc
         _PAIRING.append(_validate_pairing_document(doc, bap.input_fingerprints(ROOT)))
     return _PAIRING[0]
+
+
+def has_structured_armament_components(actor):
+    entry = pairing_document().get("actors", {}).get(actor)
+    return bool(entry and any("pairs" in source for source in entry["sources"].values()))
 
 
 def _short_source(name):
@@ -790,30 +872,115 @@ def _peer_row_for(attached_rows, source, peer_id):
     return same[0] if same else None
 
 
-def _armament_target_cell(main, cast, entry, attached_rows, dist, cdist, ctype, nsources):
-    """`now -> reference` for ONE armament, or an explicit abstention.
+ARMAMENT_COMPONENTS = {
+    "w_range": "range",
+    "w_damage": "damage_per_cycle",
+    "w_reload": "weapon_reload",
+    "w_burst": "weapon_burst",
+    "w_dps": "rate",
+}
 
-    ⛔ AN ABSTENTION IS RENDERED AS ONE. When no source carries a weapon in this role there is no
-    target, and the cell says so rather than showing a dash that could be read as zero — the
-    maintainer's own ruling for this case ("abstain and say so", 2026-09-13). The Firehawk's
-    Sidewinders land here correctly: no Warthog in any reference has an anti-air weapon.
-    """
-    if not cast:
-        return '<span class="muted" title="no source carries a weapon in this role">abstains</span>'
+
+def _armament_component_target(entry, cast, attached_rows, dist, cdist, ctype, stat,
+                               cameo_vote=None):
+    """One role-paired component target, without reusing the actor-level selected weapon."""
+    field = ARMAMENT_COMPONENTS[stat]
     votes = [(_peer_row_for(attached_rows, source, entry["sources"][source].get("peer")),
-              pair["peer"].get("damage_per_cycle")) for source, pair in cast]
-    target, used = rt.armament_target(votes, dist, cdist, ctype)
-    if not target:
-        return ('<span class="muted" title="the paired weapons could not be normalised against '
-                'their own source population (a distribution needs three usable rows)">no usable '
-                'projection</span>')
-    now = main.get("damage_per_cycle")
-    ratio = (f' <b class="warn" title="needs explicit maintainer permission">{target / now:.2f}x</b>'
-             if now and abs(target / now - 1) > 0.005 else '')
-    return (f'<span data-v="{target}" title="projected from the {used} source(s) that carry a '
-            f'weapon in this role, through the same coordinates and the same frozen ruler as the '
-            f'actor-level targets">{target:,.0f}<small class="evidence">{used} of '
-            f'{nsources} sources</small></span>{ratio}')
+              pair["peer"].get(field)) for source, pair in cast]
+    return rt.armament_target(votes, dist, cdist, ctype, stat, cameo_vote)
+
+
+def _snap_armament_component(stat, target):
+    """Snap writeable fields to their one-unit grids; refuse fractional discrete counts."""
+    if target is None:
+        return None
+    snapped = round(target)
+    if stat in ("w_burst", "w_burst_delay") and not math.isclose(
+            float(target), snapped, rel_tol=0, abs_tol=1e-9):
+        return None
+    return snapped
+
+
+def _armament_component_cell(now, raw_target, target, used, nsources, stat,
+                             has_cameo_vote):
+    """Render one per-armament component, with integer writeback visibility."""
+    if raw_target is None:
+        return '<span class="muted" title="paired weapons could not produce this component">abstains</span>'
+    if target is None:
+        return (f'<span class="warn" title="discrete component target {raw_target:g} is not an '
+                f'integer and cannot be written">HOLD {raw_target:g}</span>')
+    rendered = f'{target:,.0f}'
+    evidence = f'{used} of {nsources} peer sources' + (' + Cameo self' if has_cameo_vote else '')
+    ratio = ""
+    if now and abs(float(target) / float(now) - 1) > 0.005:
+        ratio = (f' <b class="warn" title="needs explicit maintainer permission">'
+                 f'{float(target) / float(now):.2f}x</b>')
+    return (f'<span data-v="{target}" title="role-paired component projection; unrounded '
+            f'{raw_target:g}; {evidence}">'
+            f'{rendered}<small class="evidence">{evidence}</small></span>{ratio}')
+
+
+def _mean_weapon_burst_delay(view):
+    burst = int(view.get("weapon_burst") or 1)
+    delays = list(view.get("weapon_burst_delays") or ())
+    if burst <= 1:
+        return None
+    if not delays:
+        return 5.0
+    if len(delays) == 1:
+        return float(delays[0])
+    if len(delays) == burst - 1:
+        return sum(float(value) for value in delays) / (burst - 1)
+    return None
+
+
+def _armament_burst_delay_target(cast):
+    values = [_mean_weapon_burst_delay(pair["peer"]) for _source, pair in cast]
+    values = sorted(value for value in values if value is not None)
+    if not values:
+        return None, 0
+    mid = len(values) // 2
+    target = values[mid] if len(values) % 2 else (values[mid - 1] + values[mid]) / 2
+    return target, len(values)
+
+
+def _armament_burst_delay_cell(main, raw_target, target, used):
+    current = _mean_weapon_burst_delay(main)
+    left = f'{current:.0f}' if current is not None else '<span class="muted">—</span>'
+    if raw_target is None:
+        return left + ' <span class="muted">→ —</span>'
+    if target is None:
+        return left + f' <span class="muted">→</span> <span class="warn">HOLD {raw_target:g}</span>'
+    return (f'{left} <span class="muted">→</span> {target:.0f}'
+            f'<small class="evidence">{used} authored</small>')
+
+
+def _armament_dps_guard_cell(main, targets, dps_target, burst_delay_target,
+                             rejected_component=False):
+    """Verify composed authored components only when they reproduce the modeled Cameo cycle."""
+    if rejected_component:
+        return ('<span class="muted" title="a fractional burst or burst-delay proposal is on '
+                'HOLD; the verifier cannot substitute the current value">WITHHELD</span>')
+    authored_cycle = ar.cycle_ticks(
+        main.get("weapon_reload"), main.get("weapon_burst"),
+        main.get("weapon_burst_delays") or ())
+    if (authored_cycle is None or main.get("cycle") is None
+            or abs(float(authored_cycle) - float(main["cycle"])) > 1e-9):
+        return ('<span class="muted" title="modeled actor cycle contains charge, jitter or other '
+                'timing beyond the authored weapon components">WITHHELD</span>')
+    current = {
+        "w_damage": main.get("damage_per_cycle"),
+        "w_burst": main.get("weapon_burst"),
+        "w_reload": main.get("weapon_reload"),
+        "w_dps": main.get("rate"),
+    }
+    guard = rt.dps_guard(current, targets, dps_target, burst_delay_target)
+    if guard is None:
+        return '<span class="muted">WITHHELD</span>'
+    ratio = f'{guard["composed_ratio"] * 100:.0f}%'
+    if guard["verdict"] == "ok":
+        return f'{guard["composed_dps"]:.0f} <span class="tag">{ratio} of now</span>'
+    return f'{guard["composed_dps"]:.0f} <b class="warn">{guard["verdict"].upper()} {ratio}</b>'
 
 
 def emit_armament_pairing(body, members, attached, dist, cdist, crows, hero_context=None):
@@ -830,24 +997,17 @@ def emit_armament_pairing(body, members, attached, dist, cdist, crows, hero_cont
     # four ground guns was blanked above and had no block down here either. Both conditions admit
     # a block now: a multi-role actor because its folded number mixes two kinds of gun, and any
     # withheld actor because this section is the only place its damage can be reported at all.
-    # ⚠ `cameo_votes` VIA getattr, the same way `reference_targets.target_for` reads it. The hero
-    # lane and the report's own tests pass a plain distribution with no frozen votes attached, and
-    # assuming the attribute turned `test_hero_projection_uses_separate_population` into an ERROR.
-    votes = getattr(cdist, "cameo_votes", None) or {}
-    withheld = {a for a in members
-                if (votes.get(a) or {}).get("weapon_model_eligible") is False}
     rows = [(a, actors[a]) for a in members
             if a in actors
-            and (len(actors[a].get("roles", ())) > 1 or a in withheld)
             and any("pairs" in s for s in actors[a]["sources"].values())]
     if not rows:
         return
     body.append('<h4>Per-armament references &mdash; one weapon, one vote</h4>')
-    body.append('<p class="lede">These actors carry more than one weapon, so a single folded '
-                'number above would describe two different guns at once &mdash; which is why the '
-                'weapon columns read WITHHELD for most of them. Here each armament finds its own '
+    body.append('<p class="lede">Here each armament finds its own '
                 'reference weapon and gets its own target, and a source that does not carry a '
                 'weapon in that role does not vote on it. '
+                'This also covers a one-gun Cameo actor whose reference actor has several guns; '
+                'the actor-level fold may otherwise select the wrong peer weapon. '
                 '<b>=</b> exact role match &middot; <b>~</b> a dual-role weapon stood in. '
                 'An unproven role abstains rather than voting. '
                 'Air is never paired with ground. A <code>c</code> on a range marks a value '
@@ -865,14 +1025,17 @@ def emit_armament_pairing(body, members, attached, dist, cdist, crows, hero_cont
         ctype = (crows.get(actor) or {}).get("type")
         selected_dist, selected_cdist = _projection_context(
             actor, crows, dist, cdist, hero_context)
-        body.append('<table><thead><tr><th>role</th><th>Cameo weapon</th><th class="n">range</th>'
-                    '<th class="n">dmg/cycle now</th><th class="n">reference</th>'
+        body.append('<table><thead><tr><th>role</th><th>Cameo weapon</th>'
+                    '<th class="n">range now → ref</th><th class="n">damage/cycle now → ref</th>'
+                    '<th class="n">reload now → ref</th><th class="n">burst now → ref</th>'
+                    '<th class="n">burst delay now → ref</th><th class="n">DPS verifier</th>'
                     '<th>voters</th></tr></thead><tbody>')
         # ⭐ ONE ROW PER ARMAMENT, NOT PER ROLE. Taking the strongest weapon of each role was a
         # second fold wearing the first one's clothes: `ra1_allies_destroyer` has four ground
         # armaments and would have reported one. An armament that drew no pair still gets its row
         # and says it abstains, because "no reference has this weapon" is a finding.
-        for main in _armament_rows(entry):
+        main_rows = _armament_rows(entry)
+        for main in main_rows:
             role = main.get("role")
             role_label = role or "unknown / unproven"
             cast = ([] if role is None else
@@ -895,11 +1058,44 @@ def emit_armament_pairing(body, members, attached, dist, cdist, crows, hero_cont
             else:
                 tally = ('<span class="muted">no source carries a weapon in this role &mdash; '
                          'this armament abstains and has no reference target</span>')
+            self_row = singleton_self_vote_row(actor, main_rows, selected_cdist)
+            has_self = bool(self_row and self_row.get("weapon_model_eligible") is not False)
+            targets = {}
+            cells = {}
+            rejected_component = False
+            current = {
+                "w_range": main.get("range_wdist"),
+                "w_damage": main.get("damage_per_cycle"),
+                "w_reload": main.get("weapon_reload"),
+                "w_burst": main.get("weapon_burst"),
+            }
+            for stat in ("w_range", "w_damage", "w_reload", "w_burst"):
+                cameo_vote = self_row.get(stat) if has_self else None
+                raw_target, used = _armament_component_target(
+                    entry, cast, arows, selected_dist, selected_cdist, ctype, stat,
+                    cameo_vote)
+                target = _snap_armament_component(stat, raw_target)
+                rejected_component |= raw_target is not None and target is None
+                targets[stat] = target
+                cells[stat] = _armament_component_cell(
+                    current[stat], raw_target, target, used, n, stat,
+                    has_self and stat != "w_burst")
+            dps_vote = self_row.get("w_dps") if has_self else None
+            dps_target, _dps_used = _armament_component_target(
+                entry, cast, arows, selected_dist, selected_cdist, ctype, "w_dps",
+                dps_vote)
+            raw_burst_delay, delay_used = _armament_burst_delay_target(cast)
+            burst_delay_target = _snap_armament_component(
+                "w_burst_delay", raw_burst_delay)
+            rejected_component |= raw_burst_delay is not None and burst_delay_target is None
             body.append(f'<tr><td class="cls">{html.escape(role_label)}</td>'
                         f'<td><code>{html.escape(str(main["weapon"]))}</code></td>'
-                        f'<td class="n">{_range_cell(main)}</td>'
-                        f'<td class="n">{num(main["damage_per_cycle"])}</td>'
-                        f'<td class="n">{_armament_target_cell(main, cast, entry, arows, selected_dist, selected_cdist, ctype, n)}</td>'
+                        f'<td class="n">{_range_cell(main)} <span class="muted">→</span> {cells["w_range"]}</td>'
+                        f'<td class="n">{num(main["damage_per_cycle"])} <span class="muted">→</span> {cells["w_damage"]}</td>'
+                        f'<td class="n">{num(main.get("weapon_reload"))} <span class="muted">→</span> {cells["w_reload"]}</td>'
+                        f'<td class="n">{num(main.get("weapon_burst"))} <span class="muted">→</span> {cells["w_burst"]}</td>'
+                        f'<td class="n">{_armament_burst_delay_cell(main, raw_burst_delay, burst_delay_target, delay_used)}</td>'
+                        f'<td class="n">{_armament_dps_guard_cell(main, targets, dps_target, burst_delay_target, rejected_component)}</td>'
                         f'<td>{tally}</td></tr>')
         body.append('</tbody></table></div>')
 

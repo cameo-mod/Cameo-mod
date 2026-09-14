@@ -137,7 +137,7 @@ class CommittedLedgerTest(unittest.TestCase):
                 # a cross-game reference artifact, not a faction's extracted ledger — and like
                 # them it must carry NO ledger payload, so a retune can never hide in here.
                 pairing = json.loads(path.read_text(encoding="utf-8"))
-                self.assertEqual(pairing["schema"], 2)
+                self.assertEqual(pairing["schema"], 3)
                 self.assertTrue(pairing["actors"])
                 self.assertIn("stats", pairing)
                 # The vocabulary is the maintainer's 2026-09-07 missile-role ruling; a silent

@@ -458,6 +458,28 @@ independently pinned projectile evidence, but its primary, secondary and elite s
 same `nominal_direct`/usable/single-shot/numeric gate. The DTA hashes remain
 `786f0ae5…` for `Rules.ini` and `d836d5a9…` for `Enhance.ini`.
 
+### 2j. Application components stay per armament, and frozen self-votes are explicit
+
+`armament_pairing.json` schema 3 retains each matched weapon's authored reload, burst and burst
+delays beside its modeled cycle. These are different facts: `AttackTesla` can model three logical
+zaps while the weapon itself remains Burst 1, and reviewed INI cycles can include charge or jitter
+that must not be reverse-engineered into authored YAML fields.
+
+The reference map now projects range, damage per cycle and reload from the same role-paired weapon.
+Burst keeps the existing discrete law: median within each external source, then median across
+sources, without a Cameo self-vote. Continuous component targets add the immutable Cameo value as
+one equal vote only when a hash-pinned singleton receipt identifies the historical priced slot and
+weapon. The first such receipt is
+`docs/reference/cameo_singleton_armament_self_votes_20260914.json`, limited to the TD GDI and Nod
+Rocket Soldiers. A current one-armament count is not historical proof and cannot create a new
+self-vote by itself.
+
+The component DPS verifier is withheld when the modeled actor cycle differs from the authored
+weapon reload plus burst gaps. This prevents charge, reacquisition or reviewed source jitter from
+being flattened back into weapon fields during application. A fractional burst or burst-delay
+target is also held and withholds the verifier; it never falls back to the current integer while
+the same row displays a rejected proposal.
+
 ## 5. What the pairing currently reports
 
 `python tools/balance/build_armament_pairing_report.py --write`

@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import json
 import pathlib
+import re
 import sys
 import tempfile
 import unittest
@@ -101,9 +102,13 @@ class CycleTests(unittest.TestCase):
 
     def test_the_rate_is_per_cycle_damage_over_the_cycle(self):
         v = ar.view("cameo", "Armament", "w", ar.ROLE_GROUND,
-                    damage_per_shot=8000, burst=2, cycle=80.0)
+                    damage_per_shot=8000, burst=2, cycle=80.0,
+                    weapon_reload=72, weapon_burst=2, weapon_burst_delays=[8])
         self.assertEqual(16000, v["damage_per_cycle"])
         self.assertAlmostEqual(200.0, v["rate"])
+        self.assertEqual(72, v["weapon_reload"])
+        self.assertEqual(2, v["weapon_burst"])
+        self.assertEqual([8], v["weapon_burst_delays"])
 
 
 class RangeUnitTests(unittest.TestCase):
@@ -596,6 +601,194 @@ class ArmamentRenderingTests(unittest.TestCase):
         rendered = "".join(body)
         self.assertIn("unknown / unproven", rendered)
         self.assertIn("abstains", rendered)
+
+
+class PerArmamentComponentTargetTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        import build_armament_pairing_report as bap
+        import build_reference_report as brr
+        import reference_targets as rt
+
+        cls.bap = bap
+        cls.brr = brr
+        cls.rt = rt
+        cls.peers = rd.peer_rows()
+        cls.dist = rd.build_distributions(cls.peers)
+        rt.add_cost_distribution(cls.dist, cls.peers)
+        cls.cdist = rt.cameo_context()
+        assignment = json.loads(
+            (ROOT / "docs/balance/derived/reference_assignment.json").read_text(
+                encoding="utf-8"
+            )
+        )["assignment"]
+        index_rows = cls.peers + rd.peer_variant_rows() + rd.peer_hero_rows()
+        cls.attached = rt.expand_families(
+            rt.attach(assignment, rt.peer_index(index_rows)), cls.peers
+        )
+        cls.doc = json.loads(
+            (ROOT / "docs/balance/derived/armament_pairing.json").read_text(
+                encoding="utf-8"
+            )
+        )
+
+    def rocket_targets(self, actor):
+        entry = self.doc["actors"][actor]
+        main = self.brr._armament_rows(entry)[0]
+        cast = [
+            (source, pair)
+            for source, source_data in entry["sources"].items()
+            for pair in source_data.get("pairs", ())
+            if pair["cameo"].get("weapon") == main["weapon"]
+        ]
+        self_vote = self.cdist.cameo_votes[actor]
+        targets = {}
+        for stat in ("w_range", "w_damage", "w_reload", "w_burst", "w_dps"):
+            targets[stat], used = self.brr._armament_component_target(
+                entry,
+                cast,
+                self.attached[actor],
+                self.dist,
+                self.cdist,
+                "infantry",
+                stat,
+                self_vote.get(stat),
+            )
+            self.assertEqual(3, used, stat)
+        return main, targets
+
+    def test_pairing_schema_retains_authored_components(self):
+        self.assertEqual(self.bap.PAIRING_SCHEMA, self.doc["schema"])
+        main = self.doc["actors"]["td_gdi_rocketsoldier"]["armaments"][0]
+        self.assertEqual(63.0, main["weapon_reload"])
+        self.assertEqual(1, main["weapon_burst"])
+        self.assertEqual([], main["weapon_burst_delays"])
+
+    def test_frozen_self_vote_receipt_binds_only_the_td_pair(self):
+        bindings = self.brr.singleton_self_vote_bindings()
+        self.assertEqual(
+            {"td_gdi_rocketsoldier", "td_nod_rocketsoldier"},
+            set(bindings),
+        )
+        for actor, binding in bindings.items():
+            self.assertEqual(
+                self.doc["actors"][actor]["armaments"][0]["weapon"],
+                binding["weapon"],
+            )
+            self.assertEqual(
+                self.cdist.cameo_votes[actor]["w_damage"],
+                binding["snapshot_values"]["w_damage"],
+            )
+
+    def test_frozen_self_vote_receipt_rejects_incomplete_or_unbound_evidence(self):
+        receipt_path = ROOT / "docs/reference/cameo_singleton_armament_self_votes_20260914.json"
+        original = json.loads(receipt_path.read_text(encoding="utf-8"))
+        bad_docs = []
+        bad_hash = json.loads(json.dumps(original))
+        bad_hash["source_ledgers"]["tiberiandawn_gdi.json"]["sha256"] = "0" * 64
+        bad_docs.append(bad_hash)
+        missing_value = json.loads(json.dumps(original))
+        del missing_value["bindings"]["td_gdi_rocketsoldier"]["snapshot_values"]["w_reload"]
+        bad_docs.append(missing_value)
+
+        for bad in bad_docs:
+            with self.subTest(kind=len(json.dumps(bad))):
+                with tempfile.TemporaryDirectory() as temp:
+                    path = pathlib.Path(temp) / "receipt.json"
+                    path.write_text(json.dumps(bad), encoding="utf-8")
+                    self.brr._SINGLETON_BINDINGS.clear()
+                    with unittest.mock.patch.object(self.brr, "SINGLETON_SELF_VOTES", path):
+                        with self.assertRaises(ValueError):
+                            self.brr.singleton_self_vote_bindings()
+        self.brr._SINGLETON_BINDINGS.clear()
+        self.brr.singleton_self_vote_bindings()
+
+    def test_bound_actor_refuses_a_second_baseline_armament(self):
+        entry = self.doc["actors"]["td_gdi_rocketsoldier"]
+        main = self.brr._armament_rows(entry)[0]
+        with self.assertRaisesRegex(ValueError, "armament count moved"):
+            self.brr.singleton_self_vote_row(
+                "td_gdi_rocketsoldier", [main, dict(main)], self.cdist
+            )
+
+    def test_burst_is_directly_pooled_and_ignores_the_self_vote(self):
+        target, used = self.rt.armament_target(
+            [({"source": "A"}, 1), ({"source": "A"}, 3), ({"source": "B"}, 4)],
+            None,
+            None,
+            "infantry",
+            "w_burst",
+            cameo_vote=99,
+        )
+        self.assertEqual(3, target)  # median(A=2, B=4)
+        self.assertEqual(2, used)
+
+    def test_td_rocket_pair_uses_role_paired_four_voice_components(self):
+        expected = {
+            "w_range": 6264.360092626203,
+            "w_damage": 16341.2549997169,
+            "w_reload": 55.650643641621535,
+            "w_burst": 1.0,
+            "w_dps": 294.23802589174227,
+        }
+        for actor in ("td_gdi_rocketsoldier", "td_nod_rocketsoldier"):
+            with self.subTest(actor=actor):
+                main, targets = self.rocket_targets(actor)
+                for stat, value in expected.items():
+                    self.assertAlmostEqual(value, targets[stat], places=8, msg=stat)
+
+                proposal = {
+                    stat: self.brr._snap_armament_component(stat, targets[stat])
+                    for stat in ("w_range", "w_damage", "w_reload", "w_burst")
+                }
+                guard = self.rt.dps_guard(
+                    {
+                        "w_damage": main["damage_per_cycle"],
+                        "w_burst": main["weapon_burst"],
+                        "w_reload": main["weapon_reload"],
+                        "w_dps": main["rate"],
+                    },
+                    proposal,
+                    targets["w_dps"],
+                )
+                self.assertEqual("ok", guard["verdict"])
+                self.assertAlmostEqual(16341 / 56, guard["composed_dps"])
+                self.assertLess(abs(guard["disagreement"] - 1), 0.01)
+
+    def test_fractional_burst_is_withheld_instead_of_rounded_into_the_guard(self):
+        self.assertIsNone(self.brr._snap_armament_component("w_burst", 1.5))
+        self.assertIn("HOLD 1.5", self.brr._armament_component_cell(
+            1, 1.5, None, 3, 3, "w_burst", False
+        ))
+        main = self.doc["actors"]["td_gdi_rocketsoldier"]["armaments"][0]
+        self.assertIn("WITHHELD", self.brr._armament_dps_guard_cell(
+            main, {}, None, None, rejected_component=True
+        ))
+
+    def test_modeled_charge_cycle_is_not_reconstructed_from_weapon_fields(self):
+        main = self.doc["actors"]["ra1_soviets_teslacoil"]["armaments"][0]
+        self.assertEqual(131.0, main["cycle"])
+        self.assertEqual(3.0, main["weapon_reload"])
+        self.assertEqual(1, main["weapon_burst"])
+        self.assertEqual(3.0, ar.cycle_ticks(
+            main["weapon_reload"], main["weapon_burst"], main["weapon_burst_delays"]
+        ))
+        self.assertIn("WITHHELD", self.brr._armament_dps_guard_cell(
+            main, {}, None, None
+        ))
+
+    def test_main_actor_row_routes_weapon_values_to_the_component_table(self):
+        page = (ROOT / "docs/audit/latest/reference_map_playtest_20260914.html").read_text(
+            encoding="utf-8"
+        )
+        rows = [
+            row
+            for row in re.findall(r"<tr>.*?</tr>", page, re.DOTALL)
+            if "<code>td_gdi_rocketsoldier</code>" in row
+        ]
+        self.assertTrue(rows)
+        self.assertIn("see per-armament components", rows[0])
+        self.assertNotIn('data-v="15461.', rows[0])
 
 
 

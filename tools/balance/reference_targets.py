@@ -816,8 +816,8 @@ def target_for(rows, cameo_row, stat, dist, cdist):
     return peers_only, with_cameo, len(used)
 
 
-def armament_target(votes, dist, cdist, cameo_type, stat="w_damage"):
-    """One damage target for ONE armament, projected from the peer WEAPONS paired to it.
+def armament_target(votes, dist, cdist, cameo_type, stat="w_damage", cameo_vote=None):
+    """One component target for ONE armament, from only the peer WEAPONS paired to it.
 
     ⭐ THIS IS `target_for` WITH THE FOLD TAKEN OUT, and deliberately not a second model. Same
     coordinates, same per-source pooling, same projection onto the same frozen ruler — the only
@@ -837,10 +837,15 @@ def armament_target(votes, dist, cdist, cameo_type, stat="w_damage"):
     carry a weapon in that role does not vote on it. The Mammoth has six exact pairs across three
     sources, cannon to cannon and missile to missile. Nothing consumed them until now.
 
-    `votes` is [(peer_row, damage_per_cycle)], at most one entry per source, already restricted to
-    the weapons paired to this one armament. Both sides are per CYCLE, which is the same coordinate
-    the distributions are built in — see `reference_distribution.to_per_cycle`, and the ruler
-    double-count it used to hide.
+    `votes` is [(peer_row, component_value)], at most one entry per source, already restricted to
+    the weapons paired to this one armament. Continuous components use the same within-source
+    coordinate projection as `target_for`. Burst is a count and keeps `_direct_target`'s law:
+    median within each source, then median across source votes, with no coordinate projection.
+
+    `cameo_vote` is the immutable Cameo self-vote for an unambiguous one-armament baseline. It is
+    folded in once after the peer sources, matching R4's equal source weights. Multi-armament
+    callers must omit it: their frozen actor-level weapon row is exactly the fold this function
+    exists to avoid.
 
     ⚠ THE RULER STAYS THE ACTOR-LEVEL ONE. `cdist` is a distribution of whole actors' weapon
     damage, and an armament is projected against it as if it were a unit's gun. That is the
@@ -853,6 +858,16 @@ def armament_target(votes, dist, cdist, cameo_type, stat="w_damage"):
     Returns (target, sources_used) — (None, 0) when no paired weapon can be normalised, which is
     an abstention and must be rendered as one, never as a zero.
     """
+    if stat in DIRECT_STATS:
+        per_source = collections.defaultdict(list)
+        for row, x in votes:
+            if row and x and x > 0:
+                per_source[row["source"]].append(float(x))
+        if not per_source:
+            return None, 0
+        source_votes = [statistics.median(values) for values in per_source.values()]
+        return statistics.median(source_votes), len(per_source)
+
     per_source = collections.defaultdict(lambda: collections.defaultdict(list))
     for row, x in votes:
         if not x or x <= 0 or not row:
@@ -875,7 +890,12 @@ def armament_target(votes, dist, cdist, cameo_type, stat="w_damage"):
         coord = {k: v for (p_, k), v in synth.items() if p_ == pop}
         cands += list(rd.project(coord, cdist.get(pop, {}).get(stat)).values())
     cands = [c for c in cands if c and c > 0]
-    return (rd.gm(cands), len(used)) if cands else (None, 0)
+    if not cands:
+        return None, 0
+    peers_only = rd.gm(cands)
+    with_cameo = (rd.gm([peers_only] * len(used) + [float(cameo_vote)])
+                   if cameo_vote is not None and cameo_vote > 0 else peers_only)
+    return with_cameo, len(used)
 
 
 def main() -> int:
