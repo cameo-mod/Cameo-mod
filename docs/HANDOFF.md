@@ -1,5 +1,102 @@
 # Cameo — THE HANDOFF
 
+## ⭐⭐⭐ 2026-09-14 (late) — THREE BRANCHES, TWO PRs, AND ONE DEFECT THAT IS NOT OURS
+
+Written by **Claude-Local (Opus 5)**. Live state; read before anything dated earlier.
+
+| branch | head | PR | state |
+|---|---|---|---|
+| `claude/charge_reacquisition` | `92b86437f` | **#392** → master | charge wind-up APPLIED, boot-gated green |
+| `claude/dual_armament_law` | `f0ed45897` | **#393** → #392 | the four dual-armament laws + the regenerated map |
+| `claude/burst_fold` | `1eb7a38c3` | none, deliberately | the 1-tick ruling, **blocked on a re-extract** |
+
+Tree clean, all three pushed, master `b0d56462b`.
+
+### ⛔ THE REVIEW MAP IS THE CLASSIC FOUR ONLY
+
+Maintainer, 2026-09-14: *"I want the original 4 factions to be mapped and rebalanced first before
+we even start doing the rest."* — `td_gdi td_nod ra1_allies ra1_soviets`, nothing else.
+**73 originals · 78 expanded · 285 references · 21 formula-priced · 4 originals under three sources.**
+
+⚠ It lives at ONE artifact, `claude.ai/code/artifact/0efff6f0-89af-4ea2-b8a9-2027142a631b` (v30).
+**Update that URL; never publish a new link** — a fresh publish strands the maintainer's bookmark.
+The *"regenerate for all factions every time"* rule governs **Codex's canonical coverage report**
+(29 non-WIP ledgers), which is a DIFFERENT artifact with a different job. I conflated the two and
+built a 31-faction map nobody asked for.
+
+### ⭐ THE CHARGE TERM IS APPLIED (#392)
+
+`extract_stats` records `ChargeDelay` (engine default 3, written by no actor — which is why the
+mode was undecidable). `charge_attack_cycle` counts the wind-up once or per shot, chosen by
+`ChargeDelay` against the WEAPON's reload. Priced cycles **131 / 95 / 210**, every ruling.
+Rates fell **-19%** (Tesla Coil) and **-24%** (Rail Tower): they had been read as firing faster
+than they do. One yaml change, `asianalliance_railtower` `InitialChargeDelay` 12 → 10.
+`AutoTarget` reacquisition is MEASURED — `Next(3, 8)` = U{3..7} — giving the tower 210 floor /
+218 mean / 232 ceiling; **the floor is priced, the spread is not.** Both coils are invariant.
+
+### ⭐ THE FOUR DUAL-ARMAMENT LAWS (#393, DESIGN §3a)
+
+1. **An AA split is ONE weapon** — identical Damage/Reload/Burst/BurstDelays **and MinRange**;
+   only max Range differs, exactly 1.5x. ⛔ **`MinRange` never scales.** 63 pairs → **36 compliant,
+   21 value violations, 6 wrong ratio**, with no consistent direction.
+2. **Same-target weapons share one range** (sole exception the AA combo). 387 groups comply,
+   330 spread — ⚠ an UPPER bound; bombs and `elite` replacements are still in it and **the
+   exemption list is an open question, not invented here.**
+3. **Simultaneous armaments SUM** and must be displayed, not WITHHELD.
+4. **Why two guns land on one target**, below.
+
+### ⛔ THE MAMMOTH — I WAS WRONG TWICE, AND THE ANSWER IS SOURCE CANCELLATION
+
+Not the INI corpus (wrong population: those sources do not vote on this actor) and **not
+projection compression** — the projection carries 1.208x in the peers to 1.220x in the targets.
+The old 1.013x was **two sources cancelling a third**: Combined Arms and Tiberian Dawn both make
+the missile stronger (1.17x, 1.25x), DTA Enhanced makes the cannon stronger (30 vs 20). Once
+DTA's unusable rows were gated out the real **1.22x** appeared.
+
+The Battle Tank is a different case and did not move: its missile's ONLY voter is DTA Enhanced,
+where `90mm` and `70mmMsl1` both carry **30** — the missile's reference IS the cannon's.
+
+⚠ **Three causes produce a near-1.0x spread and look identical on the page**: the sources agree,
+the sources cancelled, or one armament's only voter is the other's weapon. **Read the voters,
+never the spread.**
+
+### ⛔ THE BURST FOLD IS RULED AND IMPLEMENTED, BUT MUST NOT LAND ALONE
+
+Maintainer: *"if there is no burst delay you can use the minimal allowed value of 1 tick."*
+`dps = damage x burst / (reload + (burst-1) x 1)`; **170 armaments stop abstaining**; 110 INI
+tests pass. It will bring DTA back into the mammoth vote and shrink the 1.22x again — expected,
+and honest.
+
+⛔ **IT CANNOT LAND WITHOUT THE RE-EXTRACT**, and the re-extract surfaces a defect that is **not
+ours**: HEAD's own extractor on HEAD's own pinned sources already produces **63 actors whose
+`LINK_FIELDS` differ from the committed `ini_corpus.json`** — weapon SELECTION, not cadence
+(Red Resurrection 20 · Rise of the East 19 · Mental Omega 14 · CnC Reloaded 4 · Twisted
+Insurrection 3 · RA2 0XX 2 · RA2 Reborn 1; **none DTA**). Proven by reverting the extractor and
+re-extracting: the same 63 appear. The committed corpus is stale against its own extractor.
+**Fold + re-extract + `ini_source_pins.json` regeneration + the 63-row drift are ONE reviewed
+pass, and it is Codex's to sequence.**
+
+Building the map with the fold present correctly refused: *"armament_pairing.json input
+fingerprints are incomplete or stale: changed ['tools/reference/extract_ini_units.py']"*. That is
+why the fold was reverted off #393 onto its own branch.
+
+### ⛔ OPEN — `td_nod_lasercorvette`'s obelisk laser never fires
+
+`AttackTurretedCharged.Attacking` does not filter by armament, and OpenRA notifies EVERY
+`INotifyAttack` trait when ANY armament fires; with `ShotsPerCharge` defaulting to 1, each
+**secondary** missile executes `ChargeLevel = 0`. Primary needs 50 uninterrupted ticks
+(`ChargeLevel 50` @ `ChargeRate 1`); the secondary's longest gap is 35 (`ReloadDelay 35`,
+`Burst 2`, `BurstDelays 7`). **35 < 50 ⇒ 0 shots in 3000 simulated ticks.** CA's own trait warns
+it suits single-weapon units only. Options, none applied: `ChargeRate: 2`, `ChargeLevel: 40`, or
+a NEW Cameo trait filtering the notifier — a same-name shadow loses, since CA precedes Cameo in
+the assembly order. **Awaiting Codex's review; it is a balance value either way.**
+
+### ⚠ ENVIRONMENT
+
+A fresh worktree at current master crashes on `Cannot locate type: DynamicBotInsuranceInfo` until
+`dotnet build -c Release -p:TargetPlatform=win-x64` is re-run — the tracked DLL does not
+auto-update. Same root cause as the suite's `test_audit_bot_insurance` import errors.
+
 ## ⭐⭐⭐ 2026-09-14 — THE CHARGE TERM IS APPLIED; THE AUTOTARGET SPREAD IS NOT
 
 Integrated from Aedis's #386/#389 work after Codex and Astra review. Live state; read before
