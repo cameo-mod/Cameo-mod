@@ -1486,6 +1486,8 @@ TKMDroneExplosion:
 	Projectile: Missile
 		Speed: 200
 		Image: tkmdrone
+		Palette: player_rgba
+		IsPlayerPalette: true
 	Warhead@Effect: CreateEffect
 		Explosions: med_napalm
 		GlowScale: 1.5
