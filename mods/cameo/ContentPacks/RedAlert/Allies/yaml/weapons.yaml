@@ -27,10 +27,10 @@ ra1_allies_ranger_machinegun:
 	ReloadDelay: 10
 	Burst: 4
 	BurstDelays: 5
-	Range: 4359
+	Range: 4252
 	Report: pillbox1.aud
 	Warhead@Bullet_Light:
-		Damage: 4000
+		Damage: 3137
 ra1_allies_ranger_machinegun_cryo:
 	Inherits@wh: ^Warhead_BulletCryo_Light
 	Inherits@proj: ^Projectile_Bullet_Light
@@ -39,10 +39,10 @@ ra1_allies_ranger_machinegun_cryo:
 	ReloadDelay: 10
 	Burst: 4
 	BurstDelays: 5
-	Range: 4359
+	Range: 4252
 	Report: pillbox1.aud
 	Warhead@BulletCryo_Light:
-		Damage: 4000
+		Damage: 3137
 
 ra1_allies_alliedgunturret_cannon:
 	Inherits@finalmain: ^Warhead_CannonHE_Heavy_Flat
@@ -738,12 +738,12 @@ ra1_allies_alliedmediumtank_cannon:
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonHE_Medium
 	ReloadDelay: 47
-	Range: 5159
+	Range: 5117
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 515
 	Warhead@CannonHE_Medium:
-		Damage: 8000
+		Damage: 14554
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 
@@ -752,12 +752,12 @@ ra1_allies_alliedmediumtank_cannon_cryo:
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_Cryo
 	ReloadDelay: 47
-	Range: 5159
+	Range: 5117
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 515
 	Warhead@CannonCryo_Medium:
-		Damage: 8000
+		Damage: 14554
 
 Repair:
 	Inherits: ^RepairWeapon
@@ -939,6 +939,24 @@ RadarJammer:
 
 ra1_allies_alliedrocketsoldier_rocketsra:
 	Inherits: RocketsRA
+	Range: 7205
+	Warhead@MissileAP_Medium_Flat:
+		Damage: 12358
+
+ra1_allies_alliedrocketsoldier_rocketsracryo:
+	Range: 7205
+	Warhead@MissileCryo_Medium:
+		Damage: 12358
+
+ra1_allies_rifleinfantry_carbine:
+	Range: 4778
+	Warhead@Bullet_Light:
+		Damage: 3513
+
+ra1_allies_rifleinfantry_carbine_cryo:
+	Range: 4778
+	Warhead@BulletCryo_Light:
+		Damage: 3513
 
 ra1_allies_cargoplanebomber_parabomb:
 	Inherits: ParaBomb
@@ -963,10 +981,11 @@ ra1_allies_alliedsniper_lightsniper:
 
 ra1_allies_alliedlighttank_25mm:
 	Inherits: 25mm
+	Range: 4897
 	Warhead@CannonHE_Medium:
 		PercentageDenominator: 10000
 		PercentageScale: 1659
-		Damage: 6000
+		Damage: 16591
 	Warhead@GrenadePercentage:
 		PercentageDenominator: 200
 		Damage: 1
@@ -984,6 +1003,12 @@ ra1_allies_alliedlighttank_25mm:
 		Damage: 1
 ra1_allies_alliedartillery_155mm:
 	Inherits: 155mm
+	Range: 11813
+	Warhead@Concussion_Heavy:
+		Damage: 58173
 
 ra1_allies_alliedartillery_155mmcryo:
 	Inherits: 155mmCryo
+	Range: 11813
+	Warhead@Concussion_Heavy:
+		Damage: 58173

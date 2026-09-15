@@ -12,11 +12,11 @@ td_nod_minigunner:
 	# anchor; class knobs neutralized (2x-health bake); burst flavor
 	# trimmed to formula DPS by the unit-named multiplier.
 	Mobile:
-		Speed: 66
+		Speed: 59
 	Health:
-		HP: 30000
+		HP: 22000
 	ChangesHealth@SelfHealing:
-		Step: 30
+		Step: 22
 	# DamageMultiplier@ScoutInfantryBuff:
 		# Modifier: 100
 	# FirepowerMultiplier@ScoutInfantryBuff:
@@ -25,6 +25,8 @@ td_nod_minigunner:
 		# Modifier: 29
 	Tooltip:
 		Name: Nod Minigunner
+	Valued:
+		Cost: 130
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: ~td_nod_handofnod
@@ -96,18 +98,18 @@ td_nod_flamethrower:
 	Tooltip:
 		Name: Nod Flamethrower
 	Valued:
-		Cost: 200
+		Cost: 330
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~td_nod_handofnod, td_nod_communicationscenter, ~!td_nod_promotion_blackhandflamer
 		Queue: Infantry, RAInfantry
 		Description: actor_e4.description
 	Mobile:
-		Speed: 60
+		Speed: 65
 	Health:
-		HP: 20000
+		HP: 29000
 	ChangesHealth@SelfHealing:
-		Step: 20
+		Step: 29
 	Armament:
 		Weapon: td_nod_flamethrower_flamethrower
 		LocalOffset: 341,0,256
@@ -158,13 +160,13 @@ td_nod_chemicalwarrior:
 		Queue: Infantry, RAInfantry
 		Description: actor_e5.description
 	Mobile:
-		Speed: 48
+		Speed: 58
 		Locomotor: chem
 	-DamagedByTerrain:
 	Health:
-		HP: 48000
+		HP: 56000
 	ChangesHealth@SelfHealing:
-		Step: 48
+		Step: 56
 	Armament:
 		Weapon: td_nod_chemicalwarrior_chemspray
 		LocalOffset: 341,0,256

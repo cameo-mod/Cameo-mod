@@ -1795,7 +1795,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "48000",
+        "damage": "42792",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "183",
         "tag": "Chemical_Light",
@@ -1805,7 +1805,7 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
-      "range": "3414",
+      "range": "2822",
       "reloaddelay": "48",
       "slot": "Armament",
       "versus_templates": [
@@ -1821,7 +1821,7 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "48000",
+        "damage": "42792",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "183",
         "tag": "Chemical_Light",
@@ -1831,7 +1831,7 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
-      "range": "3414",
+      "range": "2822",
       "reloaddelay": "48",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
@@ -1863,7 +1863,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Health.HP",
-     "v": "48000"
+     "v": "56000"
     },
     "name": "Chemical Warrior",
     "prerequisites": [
@@ -1901,7 +1901,7 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Mobile.Speed",
-     "v": "48"
+     "v": "58"
     }
    },
    "td_nod_commando": {
@@ -2074,7 +2074,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "20000",
+        "damage": "27494",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
         "tag": "Flame_Light",
@@ -2084,7 +2084,7 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
-      "range": "2085",
+      "range": "2495",
       "reloaddelay": "60",
       "slot": "Armament",
       "versus_templates": [
@@ -2100,7 +2100,7 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "20000",
+        "damage": "27494",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
         "tag": "Flame_Light",
@@ -2110,7 +2110,7 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
-      "range": "2085",
+      "range": "2495",
       "reloaddelay": "60",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
@@ -2130,7 +2130,7 @@
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Valued.Cost",
-     "v": "200"
+     "v": "330"
     },
     "design": {
      "category": "Infantry",
@@ -2142,7 +2142,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Health.HP",
-     "v": "20000"
+     "v": "29000"
     },
     "name": "Nod Flamethrower",
     "prerequisites": [
@@ -2181,7 +2181,7 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Mobile.Speed",
-     "v": "60"
+     "v": "65"
     }
    },
    "td_nod_lasercommando": {
@@ -2563,7 +2563,7 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "580",
+        "damage": "3403",
         "falloff": "100, 0",
         "percentage_denominator": "10000",
         "spread": "67",
@@ -2574,7 +2574,7 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
-      "range": "4609",
+      "range": "4203",
       "reloaddelay": "50",
       "requires": "!td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@PRIMARY",
@@ -2595,7 +2595,7 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "580",
+        "damage": "3403",
         "falloff": "100, 0",
         "percentage_denominator": "10000",
         "spread": "67",
@@ -2606,7 +2606,7 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
-      "range": "4609",
+      "range": "4203",
       "reloaddelay": "50",
       "requires": "!td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@GARRISONED",
@@ -2626,7 +2626,7 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "1740",
+        "damage": "10209",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
@@ -2657,7 +2657,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "174",
+        "damage": "1021",
         "falloff": null,
         "spread": "300",
         "tag": "LegacyLaserExtraDamage",
@@ -2667,7 +2667,7 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
-      "range": "4500",
+      "range": "4104",
       "reloaddelay": "40",
       "requires": "td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@Upgrade",
@@ -2690,7 +2690,7 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "1740",
+        "damage": "10209",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
@@ -2721,7 +2721,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "174",
+        "damage": "1021",
         "falloff": null,
         "spread": "300",
         "tag": "LegacyLaserExtraDamage",
@@ -2731,7 +2731,7 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": false,
-      "range": "4500",
+      "range": "4104",
       "reloaddelay": "40",
       "requires": "td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@UpgradeGARRISONED",
@@ -2755,8 +2755,8 @@
     },
     "buildable": true,
     "cost": {
-     "src": "inherited",
-     "v": "100"
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Valued.Cost",
+     "v": "130"
     },
     "design": {
      "category": "Infantry",
@@ -2768,7 +2768,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Health.HP",
-     "v": "30000"
+     "v": "22000"
     },
     "name": "Nod Minigunner",
     "prerequisites": [
@@ -2805,7 +2805,7 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Mobile.Speed",
-     "v": "66"
+     "v": "59"
     }
    },
    "td_nod_rocketsoldier": {
@@ -4112,7 +4112,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "32000",
+        "damage": "72263",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
         "tag": "Concussion_Medium_Flat",
@@ -4121,9 +4121,9 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
-      "minrange": "2470",
+      "minrange": "2258",
       "pricing": true,
-      "range": "12345",
+      "range": "11291",
       "reloaddelay": "112",
       "requires": "!td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament",
@@ -4140,7 +4140,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "36000",
+        "damage": "81296",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "466",
         "tag": "Concussion_Heavy",
@@ -4191,9 +4191,9 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
-      "minrange": "2470",
+      "minrange": "2258",
       "pricing": true,
-      "range": "12345",
+      "range": "11291",
       "reloaddelay": "96",
       "requires": "td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@Upgrade",
@@ -4220,7 +4220,7 @@
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Valued.Cost",
-     "v": "400"
+     "v": "850"
     },
     "design": {
      "category": "Vehicles",
@@ -4232,7 +4232,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Health.HP",
-     "v": "17500"
+     "v": "29000"
     },
     "integrity_pct": {
      "src": "inherited",
@@ -4267,7 +4267,7 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.Speed",
-     "v": "55"
+     "v": "54"
     },
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
@@ -4281,7 +4281,7 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "3896",
         "falloff": "100, 0",
         "spread": "67",
         "tag": "Bullet_Light",
@@ -4291,7 +4291,7 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
-      "range": "4540",
+      "range": "4263",
       "reloaddelay": "10",
       "slot": "Armament",
       "versus_templates": [
@@ -4308,7 +4308,7 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "1948",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
         "tag": "Flame_Light",
@@ -4318,7 +4318,7 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
-      "range": "4540",
+      "range": "4263",
       "reloaddelay": "10",
       "requires": "td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@Upgrade",
@@ -4341,7 +4341,7 @@
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Valued.Cost",
-     "v": "300"
+     "v": "590"
     },
     "design": {
      "category": "Vehicles",
@@ -4353,7 +4353,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Health.HP",
-     "v": "20000"
+     "v": "36000"
     },
     "integrity_pct": {
      "src": "inherited",
@@ -4387,7 +4387,7 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.Speed",
-     "v": "200"
+     "v": "161"
     },
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
@@ -4742,7 +4742,7 @@
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Valued.Cost",
-     "v": "720"
+     "v": "880"
     },
     "design": {
      "category": "Vehicles",
@@ -5186,7 +5186,7 @@
       "burstdelays": "10",
       "damage_warheads": [
        {
-        "damage": "14000",
+        "damage": "33642",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "300",
         "tag": "Flame_Medium",
@@ -5196,7 +5196,7 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
-      "range": "2390",
+      "range": "2532",
       "reloaddelay": "50",
       "slot": "Armament",
       "versus_templates": [
@@ -5216,7 +5216,7 @@
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Valued.Cost",
-     "v": "800"
+     "v": "1130"
     },
     "design": {
      "category": "Tanks",
@@ -5228,7 +5228,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Health.HP",
-     "v": "100000"
+     "v": "119000"
     },
     "integrity_pct": {
      "src": "inherited",
@@ -5263,7 +5263,7 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.Speed",
-     "v": "80"
+     "v": "83"
     },
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
@@ -5368,7 +5368,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "14679",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
@@ -5378,7 +5378,7 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
-      "range": "4993",
+      "range": "4694",
       "reloaddelay": "45",
       "slot": "Armament",
       "versus_templates": [
@@ -5395,7 +5395,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "14679",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium",
@@ -5405,7 +5405,7 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
-      "range": "4993",
+      "range": "4694",
       "reloaddelay": "45",
       "requires": "td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@Missile",
@@ -5428,7 +5428,7 @@
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Valued.Cost",
-     "v": "600"
+     "v": "930"
     },
     "design": {
      "category": "Tanks",
@@ -5440,7 +5440,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Health.HP",
-     "v": "80000"
+     "v": "110000"
     },
     "integrity_pct": {
      "src": "inherited",
@@ -5474,7 +5474,7 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.Speed",
-     "v": "110"
+     "v": "89"
     },
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
@@ -5737,7 +5737,7 @@
       "burstdelays": "10",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "7985",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium",
@@ -5772,7 +5772,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
+        "damage": "7985",
         "falloff": null,
         "spread": null,
         "tag": "CollapseTargetCompatibility1",
@@ -5782,7 +5782,7 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
-      "range": "6000",
+      "range": "5376",
       "reloaddelay": "55",
       "slot": "Armament",
       "versus_templates": [
@@ -5806,7 +5806,7 @@
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Valued.Cost",
-     "v": "500"
+     "v": "1140"
     },
     "design": {
      "category": "Vehicles",
@@ -5818,7 +5818,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Health.HP",
-     "v": "17500"
+     "v": "35000"
     },
     "integrity_pct": {
      "src": "inherited",
@@ -5852,7 +5852,7 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.Speed",
-     "v": "200"
+     "v": "184"
     },
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
@@ -6036,7 +6036,7 @@
       "burstdelays": "25",
       "damage_warheads": [
        {
-        "damage": "50000",
+        "damage": "69017",
         "falloff": "100, 74, 54, 36, 0",
         "spread": "245",
         "tag": "MissileFire_Heavy",
@@ -6045,9 +6045,9 @@
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
-      "minrange": "1790",
+      "minrange": "2090",
       "pricing": true,
-      "range": "8940",
+      "range": "10449",
       "reloaddelay": "225",
       "slot": "Armament",
       "versus_templates": [
@@ -6067,7 +6067,7 @@
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Valued.Cost",
-     "v": "800"
+     "v": "1710"
     },
     "design": {
      "category": "Vehicles",
@@ -6079,7 +6079,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Health.HP",
-     "v": "20000"
+     "v": "41000"
     },
     "integrity_pct": {
      "src": "inherited",
@@ -6114,7 +6114,7 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.Speed",
-     "v": "100"
+     "v": "83"
     },
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
@@ -6196,7 +6196,7 @@
       "burstdelays": "8",
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "22230",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium",
@@ -6206,7 +6206,7 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
-      "range": "7432",
+      "range": "6081",
       "reloaddelay": "58",
       "requires": "!td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament",
@@ -6226,7 +6226,7 @@
       "burstdelays": "8",
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "22230",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium",
@@ -6236,7 +6236,7 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
-      "range": "7432",
+      "range": "6081",
       "reloaddelay": "58",
       "requires": "td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@Upgrade",
@@ -6257,7 +6257,7 @@
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Valued.Cost",
-     "v": "900"
+     "v": "520"
     },
     "design": {
      "category": "Vehicles",
@@ -6274,7 +6274,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Health.HP",
-     "v": "25000"
+     "v": "43000"
     },
     "integrity_pct": {
      "src": "inherited",
@@ -6309,7 +6309,7 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.Speed",
-     "v": "150"
+     "v": "131"
     },
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",

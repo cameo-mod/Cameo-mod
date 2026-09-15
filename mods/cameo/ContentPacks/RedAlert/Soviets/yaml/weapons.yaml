@@ -85,7 +85,7 @@ ra1_soviets_grenadier_grenade:
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Demolition_Light
 	ReloadDelay: 40
-	Range: 5791
+	Range: 4973
 	Report: toss1.aud
 	Projectile: Bullet
 		Speed: 150
@@ -96,7 +96,7 @@ ra1_soviets_grenadier_grenade:
 		ContrailStartColor: FF8888FF
 		ContrailEndColor: FFFFFF22
 	Warhead@Demolition_Light: AreaDamage
-		Damage: 16000
+		Damage: 13577
 
 ra1_soviets_grenadier_grenaderaexplode:
 	Inherits@roleflat: ^Warhead_Flame_Light_Flat
@@ -118,6 +118,7 @@ ra1_soviets_grenadier_grenadethermobaric:
 	Inherits@3: ^GrenadeRALegacy
 	Projectile: Bullet
 		ContrailStartColor: FF8844FF
+	Range: 4973
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 4000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
@@ -141,7 +142,7 @@ ra1_soviets_grenadier_grenadethermobaric:
 		Damage: 4000
 	Warhead@Thermobaric_Light:
 		ValidTargets: Ground, Water
-		Damage: 16000
+		Damage: 13577
 		PercentageScale: 4994
 	-Warhead@MediumFlameWeapon:
 	-Warhead@ShrapnelWeapon:
@@ -390,8 +391,12 @@ ra1_soviets_mortarsoldier_siegemortarthermobaricexplode:
 		Damage: 12000
 ra1_soviets_shocktrooper_portatesla_emp:
 	Inherits: PortaTesla
+	Range: 5932
 	Warhead@Tesla_Heavy:
 		IntegrityScale: 150
+		Damage: 9102
+	Warhead@Tesla_Heavy_ExtraDamage:
+		Damage: 4551
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 10000
 
@@ -408,10 +413,10 @@ ra1_soviets_shocktrooper_portateslafragment:
 	Inherits: ra1_soviets_shocktrooper_portateslaarc_emp
 	Range: 2326
 	Warhead@Tesla_Heavy:
-		Damage: 10000
+		Damage: 4551
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
-		Damage: 5000
+		Damage: 2275
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 5000
 	-Warhead@TeslaArc:
@@ -469,8 +474,12 @@ PointDefenseTesla:
 		Damage: 5000
 ra1_soviets_teslatank_ttankzap_emp:
 	Inherits: TTankZap
+	Range: 7898
 	Warhead@Tesla_Heavy:
 		IntegrityScale: 150
+		Damage: 32798
+	Warhead@Tesla_Heavy_ExtraDamage:
+		Damage: 16399
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
 
@@ -487,10 +496,10 @@ ra1_soviets_teslatank_ttankzaparcteslafragment1_emp:
 	Inherits: ra1_soviets_teslatank_ttankzaparc_emp
 	Range: 3650
 	Warhead@Tesla_Heavy:
-		Damage: 20000
+		Damage: 16399
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
-		Damage: 10000
+		Damage: 8200
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 10000
 	Warhead@TeslaArc: FireShrapnel
@@ -504,10 +513,10 @@ ra1_soviets_teslatank_ttankzaparcteslafragment2_emp:
 	Inherits: ra1_soviets_teslatank_ttankzaparcteslafragment1_emp
 	Range: 1825
 	Warhead@Tesla_Heavy:
-		Damage: 10000
+		Damage: 8200
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
-		Damage: 5000
+		Damage: 4100
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 5000
 	-Warhead@TeslaArc:
@@ -877,6 +886,8 @@ ra1_soviets_v2rocketlauncher_scudthermobaric:
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@fx: ^Effect_Demolition_Heavy
 	Inherits: SCUD
+	Range: 12596
+	MinRange: 2519
 	Warhead@Effect:
 		ValidTargets: Ground, Water
 	Warhead@EffectAir: CreateEffect
@@ -893,7 +904,7 @@ ra1_soviets_v2rocketlauncher_scudthermobaric:
 		ContrailEndColor: 33221100
 	Warhead@HeavyMissile: SpreadDamage
 		InvalidTargets: Air
-		Damage: 40000
+		Damage: 32665
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		Damage: 20
@@ -902,7 +913,7 @@ ra1_soviets_v2rocketlauncher_scudthermobaric:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
-		Damage: 40000
+		Damage: 32665
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
@@ -912,19 +923,23 @@ ra1_soviets_v2rocketlauncher_scudthermobaric:
 		PhysicalStateScale: 100
 	Warhead@Demolition_Heavy:
 		InvalidTargets: Air
-		Damage: 40000
+		Damage: 32665
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 	Warhead@MissileHE_Heavy:
 		InvalidTargets: Air
+		Damage: 48998
 	Warhead@Flame_Heavy:
 		InvalidTargets: Air
+		Damage: 48998
 ra1_soviets_v2rocketlauncher_scudtesla:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^Effect_Tesla_Heavy
 	Inherits@2: SCUD
 	Inherits@3: ^Effect_Kirov_Tesla_RA2
+	Range: 12596
+	MinRange: 2519
 	Projectile: Bullet
 		TrailImage: litning
 		ContrailStartWidth: 100
@@ -935,7 +950,7 @@ ra1_soviets_v2rocketlauncher_scudtesla:
 		ContrailEndColor: 11223300
 	Warhead@HeavyMissile: SpreadDamage
 		InvalidTargets: Air
-		Damage: 30000
+		Damage: 24499
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		Damage: 15
@@ -944,7 +959,7 @@ ra1_soviets_v2rocketlauncher_scudtesla:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
-		Damage: 30000
+		Damage: 24499
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
@@ -954,11 +969,11 @@ ra1_soviets_v2rocketlauncher_scudtesla:
 		PhysicalStateScale: 100
 	Warhead@Tesla_Heavy:
 		InvalidTargets: Air
-		Damage: 30000
+		Damage: 24499
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		InvalidTargets: Air
 		DamageTypes: Tesla
-		Damage: 15000
+		Damage: 12250
 	Warhead@EMPUnit: AffectsIntegrity
 		InvalidTargets: Air
 		Damage: 45000
@@ -973,8 +988,10 @@ ra1_soviets_v2rocketlauncher_scudtesla:
 		InvalidTargets: Air
 	Warhead@MissileHE_Heavy:
 		InvalidTargets: Air
+		Damage: 48998
 	Warhead@Flame_Heavy:
 		InvalidTargets: Air
+		Damage: 48998
 ra1_soviets_nuclearv2launcher_scudnuke:
 	Inherits@wh: ^Warhead_Nuclear_Super
 	Inherits@fx: ^Effect_Nuclear_Super
@@ -2654,6 +2671,7 @@ ra1_soviets_heavytank_105mmthermobaric:
 	Inherits@proj: ^Projectile_Flame_Medium
 	Inherits@fx: ^Effect_Flame_Medium
 	Inherits: 105mm
+	Range: 5193
 	Warhead@Flame_Medium: AreaDamage
 		Damage: 6000
 	Warhead@CannonHE_Medium: AreaDamage
@@ -2666,7 +2684,7 @@ ra1_soviets_heavytank_105mmthermobaric:
 		ImpactSounds: firebl3.aud
 	Warhead@Flame_Medium_Flat:
 		ValidTargets: Ground, Water
-		Damage: 12000
+		Damage: 22690
 		PercentageScale: 9992
 
 		PhysicalStateName: Temperature
@@ -5044,7 +5062,7 @@ ra1_soviets_rifleinfantry_carbine:
 	Inherits@proj: ^Projectile_Bullet_Light
 	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 50
-	Range: 4668
+	Range: 4586
 	ValidTargets: Ground, Water
 	Burst: 3
 	BurstDelays: 5
@@ -5053,7 +5071,7 @@ ra1_soviets_rifleinfantry_carbine:
 		PercentageDenominator: 10000
 		PercentageScale: 10000
 		InvalidTargets: Air
-		Damage: 840
+		Damage: 3604
 ra1_soviets_rifleinfantry_carbine_incendiary:
 	Inherits@roleflat: ^Warhead_Flame_Light_Flat
 	Inherits@wh: ^Warhead_Flame_Light
@@ -5072,7 +5090,7 @@ ra1_soviets_rifleinfantry_carbine_incendiary:
 		PercentageDenominator: 10000
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
-		Damage: 1680
+		Damage: 7208
 		PercentageScale: 9975
 	-Warhead@Bullet_Light:
 	-Warhead@Flame_Light:
@@ -5169,6 +5187,9 @@ ra1_soviets_teslacoil_teslazap:
 
 ra1_soviets_rocketsoldier_rocketsra:
 	Inherits: RocketsRA
+	Range: 7205
+	Warhead@MissileAP_Medium_Flat:
+		Damage: 12358
 
 ra1_soviets_dragunovantimaterialsniper_dragunovsniper:
 	Inherits: DragunovSniper
@@ -5193,18 +5214,29 @@ ra1_soviets_dragunovantimaterialsniper_dragunovsniper:
 		Damage: 1030
 ra1_soviets_shocktrooper_portatesla:
 	Inherits: PortaTesla
+	Range: 5932
+	Warhead@Tesla_Heavy:
+		Damage: 9102
+	Warhead@Tesla_Heavy_ExtraDamage:
+		Damage: 4551
 
 ra1_soviets_v2rocketlauncher_scud:
 	Inherits: SCUD
-
+	Range: 12596
+	MinRange: 2519
 	Warhead@MissileHE_Heavy:
 		InvalidTargets: Air
+		Damage: 48998
 	Warhead@Flame_Heavy:
 		InvalidTargets: Air
+		Damage: 48998
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 ra1_soviets_heavytank_105mm:
 	Inherits: 105mm
+	Range: 5193
+	Warhead@CannonHE_Medium:
+		Damage: 18909
 
 ra1_soviets_gorynychtank_bigflamer:
 	Inherits: BigFlamer
@@ -5230,6 +5262,11 @@ ra1_soviets_mammothtank_mammothtuskthermobaric:
 
 ra1_soviets_teslatank_ttankzap:
 	Inherits: TTankZap
+	Range: 7898
+	Warhead@Tesla_Heavy:
+		Damage: 32798
+	Warhead@Tesla_Heavy_ExtraDamage:
+		Damage: 16399
 
 # Context-specific shrapnel selectors preserve each firing parent target mask.
 ra1_soviets_kamovattackhelicopter_kamovmissileteslaarcfragment1:
@@ -5303,11 +5340,15 @@ ra1_soviets_v2rocketlauncher_scudteslafragment1:
 		Weapon: ra1_soviets_v2rocketlauncher_scudteslafragment2
 		ValidTargets: Ground, Water
 		-InvalidTargets:
+	Warhead@MissileTesla_Heavy:
+		Damage: 14699
 
 ra1_soviets_v2rocketlauncher_scudteslafragment2:
 	Inherits: MammothTuskTeslaFragment2Ground
 	ValidTargets: Ground, Water
 	-InvalidTargets:
+	Warhead@MissileTesla_Heavy:
+		Damage: 7350
 
 MammothTuskTeslaInfantryFragment1_ExplicitDamage21of20:
 	Inherits: MammothTuskTeslaInfantryFragment1

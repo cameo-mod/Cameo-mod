@@ -24,11 +24,11 @@ WEAPONS = (
     "td_nod_rocketsoldier_rockets",
 )
 CARGO_COSTS = {
-    "td_gdi_apc": 1640,
-    "td_gdi_assaultapc": 4050,
-    "td_gdi_chinooktransport": 4050,
-    "td_gdi_humveemkii": 820,
-    "td_nod_buggymkii": 720,
+    "td_gdi_apc": 1740,
+    "td_gdi_assaultapc": 4090,
+    "td_gdi_chinooktransport": 4090,
+    "td_gdi_humveemkii": 870,
+    "td_nod_buggymkii": 880,
 }
 
 

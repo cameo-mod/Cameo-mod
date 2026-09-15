@@ -45,7 +45,7 @@ td_gdi_apc:
 	Tooltip:
 		Name: GDI APC
 	Valued:
-		Cost: 1640
+		Cost: 1740
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_barracks, ~!td_gdi_promotion_assaultapc
@@ -112,21 +112,21 @@ td_gdi_humvee:
 	Tooltip:
 		Name: GDI Humvee
 	Valued:
-		Cost: 400
+		Cost: 560
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~td_gdi_weaponsfactory, ~!td_gdi_promotion_humveemkii
 		Queue: Vehicle, RAVehicle
 		Description: actor_jeep.description
 	Mobile:
-		Speed: 150
+		Speed: 144
 		TurnSpeed: 30
 	Health:
-		HP: 27500
+		HP: 45000
 	Repairable:
-		HpPerStep: 1375
+		HpPerStep: 2250
 	ChangesHealth@SelfHealing:
-		Step: 11
+		Step: 18
 	Turreted:
 		TurnSpeed: 30
 		Offset: -85,0,192
@@ -165,21 +165,21 @@ td_gdi_battletank:
 	Tooltip:
 		Name: GDI Battle Tank
 	Valued:
-		Cost: 900
+		Cost: 1300
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~td_gdi_weaponsfactory, ~!td_gdi_promotion_predatortank
 		Queue: Vehicle, RAVehicle
 		Description: actor_mtnk.description
 	Mobile:
-		Speed: 80
+		Speed: 74
 		TurnSpeed: 16
 	Health:
-		HP: 125000
+		HP: 151000
 	Repairable:
-		HpPerStep: 6250
+		HpPerStep: 7550
 	ChangesHealth@SelfHealing:
-		Step: 50
+		Step: 60
 	Turreted:
 		TurnSpeed: 16
 	Armament:
@@ -256,7 +256,7 @@ td_gdi_mammothtank:
 	Tooltip:
 		Name: GDI Mammoth Tank
 	Valued:
-		Cost: 1600
+		Cost: 2740
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_advancedcommunicationscenter, ~!td_gdi_promotion_mammothtankmk3
@@ -264,15 +264,15 @@ td_gdi_mammothtank:
 		Description: actor_htnk.description
 	Mobile:
 		Locomotor: heavytracked
-		Speed: 60
+		Speed: 49
 		TurnSpeed: 12
 	Passenger:
 	Health:
-		HP: 225000
+		HP: 280000
 	Repairable:
-		HpPerStep: 11250
+		HpPerStep: 14000
 	ChangesHealth@SelfHealing:
-		Step: 90
+		Step: 112
 	WithSpriteTurret:
 	Turreted:
 		TurnSpeed: 12
@@ -411,21 +411,21 @@ td_gdi_mlrs:
 	Tooltip:
 		Name: GDI MLRS
 	Valued:
-		Cost: 1000
+		Cost: 1350
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_communicationscenter
 		Queue: Vehicle, RAVehicle
 		Description: actor_mlrs.description
 	Mobile:
-		Speed: 80
+		Speed: 74
 		TurnSpeed: 16
 	Health:
-		HP: 25000
+		HP: 44000
 	Repairable:
-		HpPerStep: 1250
+		HpPerStep: 2200
 	ChangesHealth@SelfHealing:
-		Step: 10
+		Step: 18
 	Turreted:
 		TurnSpeed: 16
 		Offset: -256,0,128
@@ -537,7 +537,7 @@ td_gdi_assaultapc:
 	Inherits@LightWeightArmorPlating: ^LightWeightArmorPlating
 	Inherits@decoration: ^GDIRankDecoration
 	Valued:
-		Cost: 4050
+		Cost: 4090
 	Tooltip:
 		Name: Assault APC
 	Buildable:
@@ -628,7 +628,7 @@ td_gdi_humveemkii:
 		Queue: Vehicle, RAVehicle
 		Description: actor_jeep.description
 	Valued:
-		Cost: 820
+		Cost: 870
 	Mobile:
 		Speed: 115
 		TurnSpeed: 23

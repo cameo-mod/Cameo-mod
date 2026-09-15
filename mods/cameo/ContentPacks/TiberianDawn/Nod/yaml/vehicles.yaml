@@ -117,22 +117,22 @@ td_nod_artillery:
 	Tooltip:
 		Name: Nod Artillery
 	Valued:
-		Cost: 400
+		Cost: 850
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~td_nod_airstrip, td_nod_communicationscenter, ~!td_nod_promotion_specter
 		Queue: Vehicle, RAVehicle
 		Description: actor_arty.description
 	Mobile:
-		Speed: 55
+		Speed: 54
 		TurnSpeed: 22
 		Locomotor: lighttracked
 	Health:
-		HP: 17500
+		HP: 29000
 	Repairable:
-		HpPerStep: 875
+		HpPerStep: 1450
 	ChangesHealth@SelfHealing:
-		Step: 7
+		Step: 12
 	Armament:
 		Weapon: td_nod_artillery_artilleryshell
 		LocalOffset: 624,0,208
@@ -175,22 +175,22 @@ td_nod_flametank:
 	Tooltip:
 		Name: Nod Flame Tank
 	Valued:
-		Cost: 800
+		Cost: 1130
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~td_nod_airstrip, td_nod_communicationscenter, ~!td_nod_promotion_flametankmkii
 		Queue: Vehicle, RAVehicle
 		Description: actor_ftnk.description
 	Mobile:
-		Speed: 80
+		Speed: 83
 		TurnSpeed: 32
 		Locomotor: tracked
 	Health:
-		HP: 100000
+		HP: 119000
 	Repairable:
-		HpPerStep: 5000
+		HpPerStep: 5950
 	ChangesHealth@SelfHealing:
-		Step: 40
+		Step: 48
 	Armament:
 		Weapon: td_nod_flametank_bigflamer
 		LocalOffset: 512,128,42, 512,-128,42
@@ -217,21 +217,21 @@ td_nod_buggy:
 	Tooltip:
 		Name: Nod Buggy
 	Valued:
-		Cost: 300
+		Cost: 590
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~td_nod_airstrip, ~!td_nod_promotion_buggymkii
 		Queue: Vehicle, RAVehicle
 		Description: actor_bggy.description
 	Mobile:
-		Speed: 200
+		Speed: 161
 		TurnSpeed: 40
 	Health:
-		HP: 20000
+		HP: 36000
 	Repairable:
-		HpPerStep: 1000
+		HpPerStep: 1800
 	ChangesHealth@SelfHealing:
-		Step: 8
+		Step: 14
 	Turreted:
 		TurnSpeed: 40
 		Offset: -43,0,128
@@ -267,21 +267,21 @@ td_nod_reconbike:
 	Tooltip:
 		Name: Recon Bike
 	Valued:
-		Cost: 500
+		Cost: 1140
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~td_nod_airstrip, ~!td_nod_promotion_chemicalattackbike
 		Queue: Vehicle, RAVehicle
 		Description: actor_bike.description
 	Mobile:
-		Speed: 200
+		Speed: 184
 		TurnSpeed: 40
 	Health:
-		HP: 17500
+		HP: 35000
 	Repairable:
-		HpPerStep: 875
+		HpPerStep: 1750
 	ChangesHealth@SelfHealing:
-		Step: 7
+		Step: 14
 	Armament:
 		Weapon: td_nod_reconbike_rocket
 		LocalOffset: -125, -175, 175, -125, 175, 175
@@ -323,21 +323,21 @@ td_nod_lighttank:
 	Tooltip:
 		Name: Nod Light Tank
 	Valued:
-		Cost: 600
+		Cost: 930
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~td_nod_airstrip, ~!td_nod_promotion_lighttankmkii
 		Queue: Vehicle, RAVehicle
 		Description: actor_ltnk.description
 	Mobile:
-		Speed: 110
+		Speed: 89
 		TurnSpeed: 22
 	Health:
-		HP: 80000
+		HP: 110000
 	Repairable:
-		HpPerStep: 4000
+		HpPerStep: 5500
 	ChangesHealth@SelfHealing:
-		Step: 32
+		Step: 44
 	Turreted:
 		TurnSpeed: 22
 	Armament:
@@ -380,7 +380,7 @@ td_nod_ssmlauncher:
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
 	Inherits@decoration: ^NodRankDecoration
 	Valued:
-		Cost: 800
+		Cost: 1710
 	Tooltip:
 		Name: SSM Launcher
 	Buildable:
@@ -390,14 +390,14 @@ td_nod_ssmlauncher:
 		Description: actor_mssm.description
 		Icon: icon
 	Mobile:
-		Speed: 100
+		Speed: 83
 		TurnSpeed: 20
 	Health:
-		HP: 20000
+		HP: 41000
 	Repairable:
-		HpPerStep: 1000
+		HpPerStep: 2050
 	ChangesHealth@SelfHealing:
-		Step: 8
+		Step: 16
 	Turreted:
 		TurnSpeed: 20
 		Offset: -128,0,128
@@ -453,7 +453,7 @@ td_nod_stealthtank:
 	Inherits@BlackMarketUpgrades: ^BlackMarketUpgrades
 	Inherits@decoration: ^NodRankDecoration
 	Valued:
-		Cost: 900
+		Cost: 520
 	Tooltip:
 		Name: Stealth Tank
 	Buildable:
@@ -463,14 +463,14 @@ td_nod_stealthtank:
 		Description: actor_stnk.description
 	Mobile:
 		Locomotor: heavywheeled
-		Speed: 150
+		Speed: 131
 		TurnSpeed: 60
 	Health:
-		HP: 25000
+		HP: 43000
 	Repairable:
-		HpPerStep: 1250
+		HpPerStep: 2150
 	ChangesHealth@SelfHealing:
-		Step: 10
+		Step: 17
 	Cloak:
 		InitialDelay: 100
 		CloakDelay: 50
@@ -721,7 +721,7 @@ td_nod_buggymkii:
 		Prerequisites: ~td_nod_airstrip, ~td_nod_promotion_buggymkii
 		Description: Fast raider vehicle.\n  Strong vs Infantry\n  Weak vs Tanks
 	Valued:
-		Cost: 720
+		Cost: 880
 	Mobile:
 		Speed: 120
 		TurnSpeed: 24

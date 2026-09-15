@@ -20,7 +20,7 @@
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#Valued.Cost",
-     "v": "3920"
+     "v": "4360"
     },
     "design": {
      "category": "Aircraft",
@@ -1676,6 +1676,173 @@
    }
   },
   "infantry": {
+   "ra1_allies_alliedrocketsoldier": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "12358",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_Medium_Flat",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "7205",
+      "reloaddelay": "50",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "RocketsRA"
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "ra1_allies_alliedrocketsoldier_rocketsra",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "12358",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_Medium_Flat",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": false,
+      "range": "7205",
+      "reloaddelay": "50",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "RocketsRA"
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Medium"
+      ],
+      "weapon": "ra1_allies_alliedrocketsoldier_rocketsra",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "12358",
+        "falloff": "100, 60, 27, 0",
+        "spread": "40",
+        "tag": "MissileCryo_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "7205",
+      "reloaddelay": "50",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^Warhead_MissileCryo_Medium",
+       "^Projectile_Missile_Light",
+       "^Effect_Cryo"
+      ],
+      "warheads": [
+       "^Warhead_MissileCryo_Medium"
+      ],
+      "weapon": "ra1_allies_alliedrocketsoldier_rocketsracryo",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "12358",
+        "falloff": "100, 60, 27, 0",
+        "spread": "40",
+        "tag": "MissileCryo_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": false,
+      "range": "7205",
+      "reloaddelay": "50",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@UpgradeGARRISONED",
+      "versus_templates": [
+       "^Warhead_MissileCryo_Medium",
+       "^Projectile_Missile_Light",
+       "^Effect_Cryo"
+      ],
+      "warheads": [
+       "^Warhead_MissileCryo_Medium"
+      ],
+      "weapon": "ra1_allies_alliedrocketsoldier_rocketsracryo",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Valued.Cost",
+     "v": "510"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "AntiTankAntiAirInfantry",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Health.HP",
+     "v": "14000"
+    },
+    "name": "Allied Rocket Soldier",
+    "prerequisites": [
+     "~ra1_allies_alliedbarracks"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "resolved_firepower_modifiers": [],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Mobile.Speed",
+     "v": "50"
+    }
+   },
    "ra1_allies_alliedsniper": {
     "armaments": [
      {
@@ -2415,6 +2582,189 @@
      "v": "60"
     }
    },
+   "ra1_allies_rifleinfantry": {
+    "armaments": [
+     {
+      "burst": "3",
+      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "3513",
+        "falloff": "100, 0",
+        "percentage_denominator": "10000",
+        "spread": "67",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "4778",
+      "reloaddelay": "50",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "ra1_allies_rifleinfantry_carbine",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "3",
+      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "3513",
+        "falloff": "100, 0",
+        "percentage_denominator": "10000",
+        "spread": "67",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": false,
+      "range": "4778",
+      "reloaddelay": "50",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "ra1_allies_rifleinfantry_carbine",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "3513",
+        "falloff": "100, 48, 0",
+        "percentage_denominator": "10000",
+        "spread": "30",
+        "tag": "BulletCryo_Light",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "4778",
+      "reloaddelay": "50",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^Warhead_BulletCryo_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Cryo"
+      ],
+      "warheads": [
+       "^Warhead_BulletCryo_Light"
+      ],
+      "weapon": "ra1_allies_rifleinfantry_carbine_cryo",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "3",
+      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "3513",
+        "falloff": "100, 48, 0",
+        "percentage_denominator": "10000",
+        "spread": "30",
+        "tag": "BulletCryo_Light",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": false,
+      "range": "4778",
+      "reloaddelay": "50",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@UpgradeGARRISONED",
+      "versus_templates": [
+       "^Warhead_BulletCryo_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Cryo"
+      ],
+      "warheads": [
+       "^Warhead_BulletCryo_Light"
+      ],
+      "weapon": "ra1_allies_rifleinfantry_carbine_cryo",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Valued.Cost",
+     "v": "110"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ScoutInfantry",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Health.HP",
+     "v": "20000"
+    },
+    "name": "Rifle Infantry",
+    "prerequisites": [
+     "~ra1_allies_alliedbarracks"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "resolved_firepower_modifiers": [],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Mobile.Speed",
+     "v": "56"
+    }
+   },
    "ra1_allies_tanya": {
     "armaments": [
      {
@@ -3147,7 +3497,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "30000",
+        "damage": "58173",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "466",
         "tag": "Concussion_Heavy",
@@ -3179,7 +3529,7 @@
       "design_weapon_class": 1.25,
       "minrange": "2670",
       "pricing": true,
-      "range": "13350",
+      "range": "11813",
       "reloaddelay": "80",
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament",
@@ -3195,7 +3545,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "30000",
+        "damage": "58173",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "466",
         "tag": "Concussion_Heavy",
@@ -3227,7 +3577,7 @@
       "design_weapon_class": 1.25,
       "minrange": "2670",
       "pricing": true,
-      "range": "13350",
+      "range": "11813",
       "reloaddelay": "80",
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@Upgrade",
@@ -3248,7 +3598,7 @@
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Valued.Cost",
-     "v": "600"
+     "v": "1240"
     },
     "design": {
      "category": "Vehicles",
@@ -3260,7 +3610,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
-     "v": "20000"
+     "v": "30000"
     },
     "integrity_pct": {
      "src": "inherited",
@@ -3294,7 +3644,7 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Mobile.Speed",
-     "v": "60"
+     "v": "58"
     },
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Mobile.TurnSpeed",
@@ -3484,7 +3834,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "16591",
         "falloff": "100, 50, 20, 0",
         "percentage_denominator": "10000",
         "spread": "300",
@@ -3535,7 +3885,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
-      "range": "4720",
+      "range": "4897",
       "reloaddelay": "37",
       "slot": "Armament",
       "versus_templates": [
@@ -3555,7 +3905,7 @@
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Valued.Cost",
-     "v": "500"
+     "v": "1040"
     },
     "design": {
      "category": "Tanks",
@@ -3567,7 +3917,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
-     "v": "50000"
+     "v": "75000"
     },
     "integrity_pct": {
      "src": "inherited",
@@ -3601,7 +3951,7 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Mobile.Speed",
-     "v": "120"
+     "v": "111"
     },
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Mobile.TurnSpeed",
@@ -3613,7 +3963,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "14554",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
@@ -3623,7 +3973,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
-      "range": "5159",
+      "range": "5117",
       "reloaddelay": "47",
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament",
@@ -3641,7 +3991,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "14554",
         "falloff": "100, 61, 28, 0",
         "spread": "55",
         "tag": "CannonCryo_Medium",
@@ -3651,7 +4001,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
-      "range": "5159",
+      "range": "5117",
       "reloaddelay": "47",
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@Cryo",
@@ -3674,7 +4024,7 @@
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Valued.Cost",
-     "v": "700"
+     "v": "1280"
     },
     "design": {
      "category": "Tanks",
@@ -3686,7 +4036,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
-     "v": "90000"
+     "v": "127000"
     },
     "integrity_pct": {
      "src": "inherited",
@@ -3720,7 +4070,7 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Mobile.Speed",
-     "v": "100"
+     "v": "81"
     },
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Mobile.TurnSpeed",
@@ -4788,7 +5138,7 @@
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Valued.Cost",
-     "v": "1960"
+     "v": "2180"
     },
     "design": {
      "category": "Vehicles",
@@ -4849,7 +5199,7 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "3137",
         "falloff": "100, 0",
         "spread": "67",
         "tag": "Bullet_Light",
@@ -4859,7 +5209,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
-      "range": "4359",
+      "range": "4252",
       "reloaddelay": "10",
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament",
@@ -4879,7 +5229,7 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "3137",
         "falloff": "100, 48, 0",
         "spread": "30",
         "tag": "BulletCryo_Light",
@@ -4889,7 +5239,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
-      "range": "4359",
+      "range": "4252",
       "reloaddelay": "10",
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@Cryo",
@@ -4912,7 +5262,7 @@
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Valued.Cost",
-     "v": "300"
+     "v": "510"
     },
     "design": {
      "category": "Vehicles",
@@ -4924,7 +5274,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
-     "v": "22500"
+     "v": "40000"
     },
     "integrity_pct": {
      "src": "inherited",
@@ -4957,7 +5307,7 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Mobile.Speed",
-     "v": "175"
+     "v": "157"
     },
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Mobile.TurnSpeed",
