@@ -1505,8 +1505,6 @@ T08DES:
 		Dimensions: 2,1
 	MapEditorData:
 		RequireTilesets: CAMEO
-	RenderSprites:
-		Palette: cameo-desert
 
 T08DES.Husk:
 	Inherits: ^TreeHusk
@@ -1515,8 +1513,6 @@ T08DES.Husk:
 	Building:
 		Footprint: x_
 		Dimensions: 2,1
-	RenderSprites:
-		Palette: cameo-desert
 
 T09DES:
 	Inherits: ^Tree
