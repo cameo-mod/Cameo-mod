@@ -841,6 +841,12 @@ tkm_spetsnaz:
 	RenderSprites:
 		Image: tkm_spetsnaz
 		PlayerPalette: player_rgba
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+		DeathPaletteIsPlayerPalette: true
+	WithDeathAnimation@effect:
+		DeathSequencePalette: player_rgba
+		DeathPaletteIsPlayerPalette: true
 
 #######################################
 # TKM Vehicles
