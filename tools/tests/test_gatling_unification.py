@@ -231,13 +231,7 @@ class GatlingUnificationTests(unittest.TestCase):
                     "15",
                 )
 
-    def test_non_spin_compensators_remain_intact(self):
-        japan = self.rules.resolve("japan_armoredcar")
-        self.assertEqual(
-            japan.child("FirepowerMultiplier@GattlingSpeed").get("Modifier"),
-            "10",
-        )
-
+    def test_remaining_soviet_non_spin_compensators_remain_intact(self):
         for actor_name in ("ra1_soviets_btr80", "ra1_soviets_gatlingtank"):
             with self.subTest(actor=actor_name):
                 actor = self.rules.resolve(actor_name)

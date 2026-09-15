@@ -87,10 +87,10 @@ class AcceptedTdNodBalanceBatchTests(unittest.TestCase):
     def test_newer_td_rocket_pair_is_not_reverted(self):
         actor = self.rules.resolve("td_nod_rocketsoldier")
         weapon = self.rules.resolve_weapon("td_nod_rocketsoldier_rockets")
-        self.assertEqual("420", actor.child("Valued").get("Cost"))
-        self.assertEqual("15000", actor.child("Health").get("HP"))
-        self.assertEqual("6264", weapon.get("Range"))
-        self.assertEqual("16341", weapon.child("Warhead@MissileAP_Light").get("Damage"))
+        self.assertEqual("390", actor.child("Valued").get("Cost"))
+        self.assertEqual("14000", actor.child("Health").get("HP"))
+        self.assertEqual("6028", weapon.get("Range"))
+        self.assertEqual("16882", weapon.child("Warhead@MissileAP_Light").get("Damage"))
 
 
 if __name__ == "__main__":

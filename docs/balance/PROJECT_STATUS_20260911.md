@@ -1,15 +1,12 @@
-# Four-faction balance project — current status, 11 September 2026
+# Four-faction balance project — historical status, 11 September 2026
 
-**Current control state: implementation is continuing on GPT-5.6 Luna Max after
-the Astra review.** The continuation review corrected Sol's Havoc regression and
-several report/helper errors. Scheduled Discord monitoring is **ACTIVE** with a
-15-minute cadence and a saved expiration of 14 September 2026 at 00:16:58 WIB.
-
-The reviewed execution plan is [GRAND_PLAN_20260911.md](GRAND_PLAN_20260911.md).
-The active model is **GPT-5.6 Luna Max**. Astra High provides occasional
-read-only milestone review; DeepSeek remains excluded. The scoped continuation
-and milestone-only native Discord replies have already been published. Merge,
-game launch, engine build and external coordination setup remain unauthorized.
+> **Historical checkpoint.** The September 11-14 model, ownership, monitoring and
+> publication controls below expired and do not establish current authority.
+> Continue from the current branch and Blackrobe's latest explicit instructions;
+> inspect actual automation state before describing monitoring as active. Current
+> master includes PR #401's 29-actor/11-carrier gameplay application and PR #402's
+> Yuri private gatling families. Do not reopen old checkpoint PRs as the default
+> continuation route.
 
 ## Planning review — current conclusions
 
@@ -77,11 +74,11 @@ an empty owner does not authorize automatic claims on overlapping files.
 | GP-02 source and channel evidence | Codex / GPT-5.6 Luna Max | **PARTIAL** — roster reconciled; 71/71 frozen ledger inputs recovered; reconstruction admission contract hardened | Supply independently reviewed reconstruction evidence before admitting channel votes; original scalar baseline remains intact |
 | GP-03 role and payload closure | Codex implementation; Claude CL-01 analysis | **PARTIAL** — Rapier reviewed; Havoc regression reversed; CL-01 report complete | Review PR #346's findings; the shared PDLaser payload-mask correction is now applied; keep V2's existing surface role pending a design call |
 | CL-01 target/payload review | Aedis's Claude | **COMPLETE in open PR #346** — 19 rows dispositioned | Codex reviews `db102bb16`; no duplicate edits to the report |
-| GP-04 per-unit proposals | Codex / GPT-5.6 Luna Max | **Full 163-actor table; numerical pricing still partial** | Use `astra_review_20260911/candidate_proposals.md`: 13 reviewable and 18 held numerical proposals, with explicit routes for the other 132 actors |
-| GP-05 promotion and cargo batch | Codex / GPT-5.6 Luna Max | **Non-live helper corrected; content pending final prices** | Preserve atomic promotion removal/price compensation; do not treat the helper as applied gameplay |
-| GP-06 application and GP-07 playtest | Codex; maintainer playtest | Later milestones | Follow specific content and runtime authorization |
-| GP-08 portable handoff and checkpoint | Codex / GPT-6 Astra | Authorized publication batch | Publish to Blackrobe's fork and link a draft continuation to #342; retain merge hold |
-| Aedis DM heartbeat | Codex heartbeat | **ACTIVE**; 15-minute cadence; saved expiration 2026-09-14 00:16:58 WIB | Use a new temporary external-browser tab for every check; preserve native Reply, `[Codex]` and milestone-only communication |
+| GP-04 per-unit proposals | Historical proposal evidence | **29 additional actors applied in PR #401; 122 rows retained current values because no complete target existed** | Do not replay the older proposal table or overwrite the newer Rocket Soldier result; require a concrete new proposal for further changes |
+| GP-05 promotion and cargo batch | Current gameplay | **Eleven valid authored-load carriers repriced in PR #401** | Recalculate passenger-sum dependents whenever accepted infantry prices change |
+| GP-06 application and GP-07 playtest | Codex; maintainer playtest | **Application milestone delivered in PR #401; gameplay playtest remains separate** | Use current master and record scenario evidence for any new candidate |
+| GP-08 portable handoff and checkpoint | Git history | **Superseded by merged PRs #401 and #402** | Use current master, not draft #342/#345, as the continuation base |
+| Aedis DM heartbeat | None | **STOPPED; the recorded September 14 schedule expired** | Use a new temporary external-browser tab for explicitly requested checks; preserve native Reply, `[Codex]` and milestone-only communication |
 
 ## Intended milestone
 

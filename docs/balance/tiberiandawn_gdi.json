@@ -394,7 +394,7 @@
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Valued.Cost",
-     "v": "4090"
+     "v": "4120"
     },
     "design": {
      "category": "Aircraft",
@@ -3691,7 +3691,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "16341",
+        "damage": "15800",
         "falloff": "100, 0",
         "spread": "43",
         "tag": "MissileAP_Light",
@@ -3701,7 +3701,7 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
-      "range": "6264",
+      "range": "6500",
       "reloaddelay": "56",
       "requires": "!td_gdi_upgrade_advancedmissiletargeting",
       "slot": "Armament@PRIMARY",
@@ -3718,7 +3718,7 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "16341",
+        "damage": "15800",
         "falloff": "100, 0",
         "spread": "43",
         "tag": "MissileAP_Light",
@@ -3728,7 +3728,7 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
-      "range": "6264",
+      "range": "6500",
       "reloaddelay": "56",
       "requires": "!td_gdi_upgrade_advancedmissiletargeting",
       "slot": "Armament@GARRISONED",
@@ -3744,7 +3744,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "16341",
+        "damage": "15800",
         "falloff": "100, 0",
         "spread": "43",
         "tag": "MissileAP_Light",
@@ -3754,7 +3754,7 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
-      "range": "6264",
+      "range": "6500",
       "reloaddelay": "56",
       "requires": "td_gdi_upgrade_advancedmissiletargeting",
       "slot": "Armament@AdvancedMissileTargeting",
@@ -3771,7 +3771,7 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "16341",
+        "damage": "15800",
         "falloff": "100, 0",
         "spread": "43",
         "tag": "MissileAP_Light",
@@ -3781,7 +3781,7 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
-      "range": "6264",
+      "range": "6500",
       "reloaddelay": "56",
       "requires": "td_gdi_upgrade_advancedmissiletargeting",
       "slot": "Armament@AdvancedMissileTargetingGARRISONED",
@@ -3802,7 +3802,7 @@
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Valued.Cost",
-     "v": "420"
+     "v": "450"
     },
     "design": {
      "category": "Infantry",
@@ -3814,7 +3814,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Health.HP",
-     "v": "15000"
+     "v": "16000"
     },
     "name": "GDI Rocket Soldier",
     "prerequisites": [
@@ -3848,7 +3848,7 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Mobile.Speed",
-     "v": "45"
+     "v": "42"
     }
    },
    "td_gdi_shotgunner": {
@@ -5194,7 +5194,7 @@
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Valued.Cost",
-     "v": "1740"
+     "v": "1800"
     },
     "design": {
      "category": "Vehicles",
@@ -5507,7 +5507,7 @@
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Valued.Cost",
-     "v": "4090"
+     "v": "4120"
     },
     "design": {
      "category": "Vehicles",
@@ -6926,7 +6926,7 @@
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml#Valued.Cost",
-     "v": "870"
+     "v": "900"
     },
     "design": {
      "category": "Vehicles",

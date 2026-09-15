@@ -20,7 +20,7 @@ ACTORS = {
     "ra1_soviets_shocktrooper": (680, 31000, 48, None, 31, "Plate"),
     "ra1_soviets_heavytank": (1450, 172000, 66, 8600, 69, "Heavy"),
     "ra1_soviets_rifleinfantry": (110, 21000, 55, None, 21, "None"),
-    "ra1_soviets_rocketsoldier": (410, 14000, 50, None, 14, "Flak"),
+    "ra1_soviets_rocketsoldier": (440, 15000, 46, None, 15, "Flak"),
 }
 
 BASE_WEAPONS = {
@@ -49,8 +49,8 @@ BASE_WEAPONS = {
         4586, None, 50, 3, 5, {"Warhead@Bullet_Light": 3604},
         Fraction(3 * 3604, 60)),
     "ra1_soviets_rocketsoldier_rocketsra": (
-        7205, None, 50, 1, 0, {"Warhead@MissileAP_Medium_Flat": 12358},
-        Fraction(12358, 50)),
+        6910, None, 50, 1, 0, {"Warhead@MissileAP_Medium_Flat": 13216},
+        Fraction(13216, 50)),
 }
 
 UPGRADE_DIRECT_DAMAGE = {

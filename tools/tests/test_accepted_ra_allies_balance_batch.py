@@ -16,7 +16,7 @@ ACTORS = {
     "ra1_allies_alliedartillery": (1240, 30000, 58, 1500, 12),
     "ra1_allies_alliedlighttank": (1040, 75000, 111, 3750, 30),
     "ra1_allies_alliedmediumtank": (1280, 127000, 81, 6350, 51),
-    "ra1_allies_alliedrocketsoldier": (510, 14000, 50, None, 14),
+    "ra1_allies_alliedrocketsoldier": (480, 13000, 54, None, 13),
     "ra1_allies_rifleinfantry": (110, 20000, 56, None, 21),
     "ra1_allies_ranger": (510, 40000, 157, 2000, 16),
 }
@@ -40,11 +40,11 @@ WEAPONS = {
         (5117, 47, 1, 0, "Warhead@CannonCryo_Medium", 14554, 0,
          Fraction(14554, 47)),
     "ra1_allies_alliedrocketsoldier_rocketsra":
-        (7205, 50, 1, 0, "Warhead@MissileAP_Medium_Flat", 12358, 0,
-         Fraction(12358, 50)),
+        (7500, 50, 1, 0, "Warhead@MissileAP_Medium_Flat", 11500, 0,
+         Fraction(11500, 50)),
     "ra1_allies_alliedrocketsoldier_rocketsracryo":
-        (7205, 50, 1, 0, "Warhead@MissileCryo_Medium", 12358, 0,
-         Fraction(12358, 50)),
+        (7500, 50, 1, 0, "Warhead@MissileCryo_Medium", 11500, 0,
+         Fraction(11500, 50)),
     "ra1_allies_rifleinfantry_carbine":
         (4778, 50, 3, 4, "Warhead@Bullet_Light", 3513, 0,
          Fraction(3 * 3513, 58)),

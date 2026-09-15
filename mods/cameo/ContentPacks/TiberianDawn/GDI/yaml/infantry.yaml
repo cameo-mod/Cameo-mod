@@ -116,13 +116,13 @@ td_gdi_rocketsoldier:
 	Tooltip:
 		Name: GDI Rocket Soldier
 	Valued:
-		Cost: 420
+		Cost: 450
 	Health:
-		HP: 15000
+		HP: 16000
 	ChangesHealth@SelfHealing:
-		Step: 15
+		Step: 16
 	Mobile:
-		Speed: 45
+		Speed: 42
 	Inherits@LongRangeSensors: ^LongRangeSensors
 	Inherits@MissileTargeting: ^AdvancedMissileTargeting
 	Inherits@CuttingEdge: ^CuttingEdgeEquipment

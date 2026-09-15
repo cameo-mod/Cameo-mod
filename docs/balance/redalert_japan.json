@@ -4049,7 +4049,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "1600",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -4058,6 +4058,7 @@
        {
         "damage": "1",
         "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "percentage_denominator": "1000",
         "spread": "35",
         "tag": "ArrowWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -4065,6 +4066,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
@@ -4072,6 +4074,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
@@ -4079,6 +4082,7 @@
        {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
+        "percentage_denominator": "1000",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
@@ -4086,6 +4090,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "150",
         "tag": "MediumCannonPercentage",
         "type": "AreaDamagePercentage"
@@ -4093,6 +4098,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
@@ -4100,6 +4106,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -4107,6 +4114,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
@@ -4139,7 +4147,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "1600",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -4148,6 +4156,7 @@
        {
         "damage": "1",
         "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "percentage_denominator": "1000",
         "spread": "35",
         "tag": "ArrowWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -4155,6 +4164,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
@@ -4162,6 +4172,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
@@ -4169,6 +4180,7 @@
        {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
+        "percentage_denominator": "1000",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
@@ -4176,6 +4188,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "150",
         "tag": "MediumCannonPercentage",
         "type": "AreaDamagePercentage"
@@ -4183,6 +4196,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
@@ -4190,6 +4204,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -4197,6 +4212,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
@@ -4221,21 +4237,21 @@
      {
       "damage_warheads": [
        {
-        "damage": "3000",
+        "damage": "300",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "1000",
+        "damage": "100",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
        },
        {
-        "damage": "16000",
+        "damage": "1600",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -4244,6 +4260,7 @@
        {
         "damage": "1",
         "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "percentage_denominator": "1000",
         "spread": "35",
         "tag": "ArrowWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -4251,6 +4268,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
@@ -4258,6 +4276,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
@@ -4265,6 +4284,7 @@
        {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
+        "percentage_denominator": "1000",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
@@ -4272,6 +4292,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "150",
         "tag": "MediumCannonPercentage",
         "type": "AreaDamagePercentage"
@@ -4279,6 +4300,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
@@ -4286,6 +4308,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -4293,6 +4316,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
@@ -4300,6 +4324,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -4327,21 +4352,21 @@
      {
       "damage_warheads": [
        {
-        "damage": "3000",
+        "damage": "300",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "1000",
+        "damage": "100",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
        },
        {
-        "damage": "16000",
+        "damage": "1600",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -4350,6 +4375,7 @@
        {
         "damage": "1",
         "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "percentage_denominator": "1000",
         "spread": "35",
         "tag": "ArrowWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -4357,6 +4383,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
@@ -4364,6 +4391,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
@@ -4371,6 +4399,7 @@
        {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
+        "percentage_denominator": "1000",
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
@@ -4378,6 +4407,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "150",
         "tag": "MediumCannonPercentage",
         "type": "AreaDamagePercentage"
@@ -4385,6 +4415,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
@@ -4392,6 +4423,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -4399,6 +4431,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
@@ -4406,6 +4439,7 @@
        {
         "damage": "1",
         "falloff": null,
+        "percentage_denominator": "1000",
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -4478,14 +4512,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 10,
-      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#FirepowerMultiplier@GattlingSpeed.Modifier",
-      "trait": "FirepowerMultiplier@GattlingSpeed",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_flat": {
      "src": "inherited",
      "v": "0"

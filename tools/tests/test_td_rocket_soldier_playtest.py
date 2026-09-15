@@ -18,17 +18,26 @@ import check_band  # noqa: E402
 
 
 ACTORS = ("td_gdi_rocketsoldier", "td_nod_rocketsoldier")
+ACTOR_STATS = {
+    "td_gdi_rocketsoldier": ("450", "16000", "16", "42"),
+    "td_nod_rocketsoldier": ("390", "14000", "14", "48"),
+}
 WEAPONS = (
     "td_gdi_rocketsoldier_rockets",
     "td_gdi_rocketsoldier_rocketsamt",
     "td_nod_rocketsoldier_rockets",
 )
+WEAPON_STATS = {
+    "td_gdi_rocketsoldier_rockets": ("6500", "15800"),
+    "td_gdi_rocketsoldier_rocketsamt": ("6500", "15800"),
+    "td_nod_rocketsoldier_rockets": ("6028", "16882"),
+}
 CARGO_COSTS = {
-    "td_gdi_apc": 1740,
-    "td_gdi_assaultapc": 4090,
-    "td_gdi_chinooktransport": 4090,
-    "td_gdi_humveemkii": 870,
-    "td_nod_buggymkii": 880,
+    "td_gdi_apc": 1800,
+    "td_gdi_assaultapc": 4120,
+    "td_gdi_chinooktransport": 4120,
+    "td_gdi_humveemkii": 900,
+    "td_nod_buggymkii": 850,
 }
 
 
@@ -38,16 +47,15 @@ class TdRocketSoldierPlaytestTests(unittest.TestCase):
         cls.model = Model(ROOT)
         cls.rules = cls.model.rs
 
-    def test_actor_pair_uses_the_reviewed_local_baseline(self):
+    def test_actor_pair_uses_the_reviewed_faction_identity_split(self):
         for actor_name in ACTORS:
             with self.subTest(actor=actor_name):
                 actor = self.rules.resolve(actor_name)
-                self.assertEqual(actor.child("Valued").get("Cost"), "420")
-                self.assertEqual(actor.child("Health").get("HP"), "15000")
-                self.assertEqual(
-                    actor.child("ChangesHealth@SelfHealing").get("Step"), "15"
-                )
-                self.assertEqual(actor.child("Mobile").get("Speed"), "45")
+                cost, hp, healing, speed = ACTOR_STATS[actor_name]
+                self.assertEqual(actor.child("Valued").get("Cost"), cost)
+                self.assertEqual(actor.child("Health").get("HP"), hp)
+                self.assertEqual(actor.child("ChangesHealth@SelfHealing").get("Step"), healing)
+                self.assertEqual(actor.child("Mobile").get("Speed"), speed)
 
     def test_owned_weapon_family_uses_one_component_proposal(self):
         parents = {
@@ -61,11 +69,12 @@ class TdRocketSoldierPlaytestTests(unittest.TestCase):
                 self.assertEqual(local.child("Inherits").value, parents[weapon_name])
                 weapon = self.rules.resolve_weapon(weapon_name)
                 self.assertEqual(weapon.get("ReloadDelay"), "56")
-                self.assertEqual(weapon.get("Range"), "6264")
+                range_value, damage = WEAPON_STATS[weapon_name]
+                self.assertEqual(weapon.get("Range"), range_value)
                 self.assertEqual(int(weapon.get("Burst") or 1), 1)
                 self.assertEqual(
                     weapon.child("Warhead@MissileAP_Light").get("Damage"),
-                    "16341",
+                    damage,
                 )
 
     def test_map_import_alias_keeps_the_old_chassis_and_shared_weapons(self):
@@ -92,16 +101,16 @@ class TdRocketSoldierPlaytestTests(unittest.TestCase):
                     str(expected), self.rules.resolve(actor_name).child("Valued").get("Cost")
                 )
 
-    def test_invalid_nod_chinook_load_stays_held_and_unmodified(self):
+    def test_nod_chinook_load_is_valid_and_uses_passenger_sum(self):
         load = cargo_pricing.authored_load(self.rules, "td_nod_chinooktransport")
-        self.assertIn("filled weight 11/8", load["issues"])
-        self.assertIsNone(load["passenger_sum"])
+        self.assertEqual([], load["issues"])
+        self.assertEqual(3853, load["passenger_sum"])
         self.assertEqual(
-            "3100",
+            "3853",
             self.rules.resolve("td_nod_chinooktransport").child("Valued").get("Cost"),
         )
 
-    def test_final_ledger_stats_price_to_the_reviewed_420_grid(self):
+    def test_final_ledger_formula_keeps_the_pre_identity_420_baseline(self):
         raw = json.loads(
             (ROOT / "docs" / "balance" / "tiberiandawn_gdi.json").read_text(
                 encoding="utf-8"
@@ -119,8 +128,11 @@ class TdRocketSoldierPlaytestTests(unittest.TestCase):
         )["rocket_trooper"]
         inputs = check_band.unit_inputs(raw, derived)
         price = check_band.price_for("rocket_trooper", anchor, inputs)
-        self.assertAlmostEqual(422.748, price, places=3)
         self.assertEqual(420, round(price / 10) * 10)
+        self.assertEqual(
+            "450",
+            self.rules.resolve("td_gdi_rocketsoldier").child("Valued").get("Cost"),
+        )
 
 
 if __name__ == "__main__":

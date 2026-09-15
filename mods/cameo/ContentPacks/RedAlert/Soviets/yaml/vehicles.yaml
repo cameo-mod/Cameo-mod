@@ -1139,7 +1139,7 @@ ra1_soviets_flaktruck:
 		Prerequisites: ~ra1_soviets_warfactory, ~!ra1_soviets_doctrine_conscription
 		Description: actor_ftrk.description
 	Valued:
-		Cost: 950
+		Cost: 980
 	Tooltip:
 		Name: Flak Truck
 	UpdatesPlayerStatistics:
@@ -1222,7 +1222,7 @@ ra1_soviets_btr80:
 		Prerequisites: ~ra1_soviets_warfactory, ~ra1_soviets_doctrine_conscription
 		Description: actor_btr.description
 	Valued:
-		Cost: 1770
+		Cost: 1800
 	Tooltip:
 		Name: BTR-80
 		RequiresCondition: !ra1_soviets_promotion_gatlingtank

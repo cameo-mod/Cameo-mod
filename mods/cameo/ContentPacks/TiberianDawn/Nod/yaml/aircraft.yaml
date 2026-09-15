@@ -7,7 +7,7 @@ td_nod_chinooktransport:
 	Inherits@GuerillaTactics: ^GuerillaTactics
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
 	Valued:
-		Cost: 3100
+		Cost: 3853
 	Tooltip:
 		Name: Nod Chinook Transport
 	Buildable:
@@ -49,7 +49,7 @@ td_nod_chinooktransport:
 	Cargo:
 		UnloadVoice: Move
 		Types: Infantry, Hacker, Fremen
-		MaxWeight: 8
+		MaxWeight: 11
 		InitialUnits: td_nod_minigunner, td_nod_rocketsoldier, td_nod_flamethrower, td_nod_chemicalwarrior, td_nod_chemicalrocketsoldier, td_nod_lasertrooper, td_nod_stealthsoldier, td_nod_blackhandflamer
 	SpawnActorOnDeath:
 		Actor: TRAN.Husk

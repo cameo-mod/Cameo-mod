@@ -1,7 +1,8 @@
 # Four-faction balance delivery plan
 
-**Planning revision: 11 September 2026. Continued on GPT-5.6 Luna Max, with
-occasional GPT-6 Astra High read-only review.**
+**Historical planning revision: 11 September 2026.** The model, monitoring,
+ownership and publication controls recorded here expired with that session.
+Use current master and Blackrobe's latest explicit instructions for execution.
 
 Deliver the intended result accurately as fast as possible. The main deliverable
 is a reviewed RA1 Allies/Soviets and TD GDI/Nod balance candidate for playtesting,
@@ -29,21 +30,17 @@ implementation facts; Blackrobe's latest instructions determine authorization.
 Historical document instructions to auto-merge, build, launch, or lint do not
 override the current explicit boundaries.
 
-### Current authorization
+### Historical authorization record
 
-- Blackrobe resumed implementation on Luna Max after pausing the Sol run.
-  Continue the existing GP-01 through GP-08 scope without stopping for routine fixes.
-- Discord monitoring is active on its saved 15-minute schedule through 00:16:58
-  WIB on 14 September 2026. Every check uses a new temporary external-browser
-  tab; preserve native Reply and the `[Codex]` prefix.
-- Blackrobe subsequently authorized publishing the scoped continuation and one
-  native Discord handoff reply. Publish only to Blackrobe's fork; #342's upstream
-  head cannot be updated through that route, so link a draft continuation.
-  Merge, build and game launch remain unauthorized. Preserve dirty work,
-  immutable baselines, engine pins, and ownership boundaries.
-- Work directly in Luna Max; use Astra High only for occasional bounded review.
-  DeepSeek remains excluded. No services, cross-PC connections,
-  cloud resources, account changes, or agent-control framework are to be set up.
+- The September 11-14 instructions below are provenance, not live authorization.
+  They do not select the current model, resume monitoring, impose an old merge
+  hold, or direct work into draft #342/#345.
+- Current implementation starts from current master. Blackrobe's latest explicit
+  instructions determine scope, publication and review. Inspect actual automation
+  state before describing monitoring as active.
+- The private temporary-tab, native Reply, `[Codex]` attribution and milestone-only
+  communication rules remain applicable when Blackrobe explicitly requests an
+  Aedis DM action.
 
 ## 2. Define the deliverable and measure the right progress
 
@@ -231,17 +228,10 @@ documentation suggesting it. Menu launch proves startup only; target selection,
 promotion replacement, cargo, and damage/state behavior need actual scenarios.
 Never edit `mod.config` or `engine/VERSION` to make an audit pass.
 
-The preserved branch checkpoint is `33a2fb2e83645f18910b8155de599e5544c08ee9` on
-`codex/overnight-integration-20260910`. [PR #342](https://github.com/cameo-mod/Cameo-mod/pull/342)
-is the recorded aggregate preservation PR. The reviewed continuation and GP-02
-contract-hardening, support-pricing, PDLaser payload, reference-map tooling,
-built-state condition-selector, promotion-readiness, Sunday startup-handoff and
-peer-extractor batches are now published through `5221a76e5` in
-[draft PR #345](https://github.com/cameo-mod/Cameo-mod/pull/345).
-Future reviewed changes may continue on that draft PR; publication does not
-authorize merging. Inspect
-overlapping PRs #339–342 and do not merge them indiscriminately. Do not stage,
-reset, clean or replay old batches broadly.
+The old `codex/overnight-integration-20260910` checkpoint and PRs #342/#345 are
+historical preservation references. Current master includes PR #401's accepted
+classic-four application and PR #402's Yuri gatling split. Future work starts
+from current master; do not replay or continue the old aggregate drafts.
 
 ## 8. Aedis/Claude continuation without duplicate work
 
