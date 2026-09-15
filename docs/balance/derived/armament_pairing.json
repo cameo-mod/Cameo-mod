@@ -40106,17 +40106,17 @@
     {
      "baseline": true,
      "cycle": 6.0,
-     "damage_per_cycle": 4000.0,
-     "damage_per_shot": 4000.0,
+     "damage_per_cycle": 3000.0,
+     "damage_per_shot": 3000.0,
      "gate": null,
      "note": "Bullet_Medium_Flat",
-     "range": 5000.0,
+     "range": 5400.0,
      "range_unit": "wdist",
-     "range_wdist": 5000.0,
-     "rate": 666.6666666666666,
+     "range_wdist": 5400.0,
+     "rate": 500.0,
      "role": "ground",
      "slot": "Armament@1",
-     "weapon": "RA2GattlingMG1",
+     "weapon": "YuriGatlingTankMG1",
      "weapon_burst": 1,
      "weapon_burst_delays": [],
      "weapon_reload": 6.0
@@ -40124,17 +40124,17 @@
     {
      "baseline": false,
      "cycle": 4.0,
-     "damage_per_cycle": 4000.0,
-     "damage_per_shot": 4000.0,
+     "damage_per_cycle": 3000.0,
+     "damage_per_shot": 3000.0,
      "gate": null,
      "note": "Bullet_Medium_Flat",
-     "range": 5250.0,
+     "range": 5670.0,
      "range_unit": "wdist",
-     "range_wdist": 5250.0,
-     "rate": 1000.0,
+     "range_wdist": 5670.0,
+     "rate": 750.0,
      "role": "ground",
      "slot": "Armament@2",
-     "weapon": "RA2GattlingMG2",
+     "weapon": "YuriGatlingTankMG2",
      "weapon_burst": 1,
      "weapon_burst_delays": [],
      "weapon_reload": 4.0
@@ -40142,17 +40142,17 @@
     {
      "baseline": false,
      "cycle": 2.0,
-     "damage_per_cycle": 4000.0,
-     "damage_per_shot": 4000.0,
+     "damage_per_cycle": 3000.0,
+     "damage_per_shot": 3000.0,
      "gate": null,
      "note": "Bullet_Medium_Flat",
-     "range": 5500.0,
+     "range": 5940.0,
      "range_unit": "wdist",
-     "range_wdist": 5500.0,
-     "rate": 2000.0,
+     "range_wdist": 5940.0,
+     "rate": 1500.0,
      "role": "ground",
      "slot": "Armament@3",
-     "weapon": "RA2GattlingMG3",
+     "weapon": "YuriGatlingTankMG3",
      "weapon_burst": 1,
      "weapon_burst_delays": [],
      "weapon_reload": 2.0
@@ -40160,17 +40160,17 @@
     {
      "baseline": true,
      "cycle": 6.0,
-     "damage_per_cycle": 8000.0,
-     "damage_per_shot": 8000.0,
+     "damage_per_cycle": 6000.0,
+     "damage_per_shot": 6000.0,
      "gate": null,
      "note": "Bullet_Medium_Flat",
-     "range": 6750.0,
+     "range": 7290.0,
      "range_unit": "wdist",
-     "range_wdist": 6750.0,
-     "rate": 1333.3333333333333,
+     "range_wdist": 7290.0,
+     "rate": 1000.0,
      "role": "air",
      "slot": "Armament@1AA",
-     "weapon": "RA2GattlingMG1_AA",
+     "weapon": "YuriGatlingTankMG1_AA",
      "weapon_burst": 1,
      "weapon_burst_delays": [],
      "weapon_reload": 6.0
@@ -40178,17 +40178,17 @@
     {
      "baseline": false,
      "cycle": 4.0,
-     "damage_per_cycle": 8000.0,
-     "damage_per_shot": 8000.0,
+     "damage_per_cycle": 6000.0,
+     "damage_per_shot": 6000.0,
      "gate": null,
      "note": "Bullet_Medium_Flat",
-     "range": 7500.0,
+     "range": 8100.0,
      "range_unit": "wdist",
-     "range_wdist": 7500.0,
-     "rate": 2000.0,
+     "range_wdist": 8100.0,
+     "rate": 1500.0,
      "role": "air",
      "slot": "Armament@2AA",
-     "weapon": "RA2GattlingMG2_AA",
+     "weapon": "YuriGatlingTankMG2_AA",
      "weapon_burst": 1,
      "weapon_burst_delays": [],
      "weapon_reload": 4.0
@@ -40196,17 +40196,17 @@
     {
      "baseline": false,
      "cycle": 2.0,
-     "damage_per_cycle": 8000.0,
-     "damage_per_shot": 8000.0,
+     "damage_per_cycle": 6000.0,
+     "damage_per_shot": 6000.0,
      "gate": null,
      "note": "Bullet_Medium_Flat",
-     "range": 8250.0,
+     "range": 8910.0,
      "range_unit": "wdist",
-     "range_wdist": 8250.0,
-     "rate": 4000.0,
+     "range_wdist": 8910.0,
+     "rate": 3000.0,
      "role": "air",
      "slot": "Armament@3AA",
-     "weapon": "RA2GattlingMG3_AA",
+     "weapon": "YuriGatlingTankMG3_AA",
      "weapon_burst": 1,
      "weapon_burst_delays": [],
      "weapon_reload": 2.0
@@ -40219,8 +40219,8 @@
    "sources": {
     "CnC Reloaded": {
      "cameo_unpaired": [
-      "RA2GattlingMG1_AA",
-      "RA2GattlingMG1"
+      "YuriGatlingTankMG1_AA",
+      "YuriGatlingTankMG1"
      ],
      "kind": "ini",
      "pairs": [],
@@ -40230,8 +40230,8 @@
     },
     "Mental Omega": {
      "cameo_unpaired": [
-      "RA2GattlingMG1_AA",
-      "RA2GattlingMG1"
+      "YuriGatlingTankMG1_AA",
+      "YuriGatlingTankMG1"
      ],
      "kind": "ini",
      "pairs": [],
@@ -40241,8 +40241,8 @@
     },
     "RA2 0XX": {
      "cameo_unpaired": [
-      "RA2GattlingMG1_AA",
-      "RA2GattlingMG1"
+      "YuriGatlingTankMG1_AA",
+      "YuriGatlingTankMG1"
      ],
      "kind": "ini",
      "pairs": [],
@@ -40252,8 +40252,8 @@
     },
     "RA2 Reborn": {
      "cameo_unpaired": [
-      "RA2GattlingMG1_AA",
-      "RA2GattlingMG1"
+      "YuriGatlingTankMG1_AA",
+      "YuriGatlingTankMG1"
      ],
      "kind": "ini",
      "pairs": [],
@@ -40263,8 +40263,8 @@
     },
     "Red Resurrection": {
      "cameo_unpaired": [
-      "RA2GattlingMG1_AA",
-      "RA2GattlingMG1"
+      "YuriGatlingTankMG1_AA",
+      "YuriGatlingTankMG1"
      ],
      "kind": "ini",
      "pairs": [],
@@ -41449,7 +41449,7 @@
   "docs/balance/infantry_artillery_pressure_manifest_20260911.json": "7efd84ae32b1b31bfe6cf4f552ca381b4d0118a5aab7ed4da5375d3162a80b22",
   "docs/balance/redalert2_allies.json": "7657582dc34b88170cec030f62d0f11f38368996773f7a152a6edd50a44c2890",
   "docs/balance/redalert2_soviets.json": "ee4256683593cfb4351b90ba61204e6382fa483527e5580488e672cd5ed8678b",
-  "docs/balance/redalert2_yuri.json": "16c68e36e484416e3d0b3e9f8cb19d7a2031a63458579c7d4c28182105d72d7a",
+  "docs/balance/redalert2_yuri.json": "56d3ce10214255c7fcad4314140e229412087fb312e83824acc819cdc4a6c713",
   "docs/balance/redalert2mod_asianalliance.json": "89dab9f13ea91a056daed1b85e62fb98acd0b4d9b0a06713af2bcc1b4c9718c8",
   "docs/balance/redalert2mod_consortium.json": "26bb2a2f58a89d518d9f5ac19469b7a27e0c2e38915d6a9dd825cb6a72278e6a",
   "docs/balance/redalert2mod_futuretech.json": "0af52616b921cd483fb2885240dd07ff8a2354f347d751132bbf601e9b20ed93",
@@ -41632,13 +41632,13 @@
   "mods/cameo/ContentPacks/RedAlert2/Yuri/content.yaml": "a81f2f1415fb75c1fd76c564a5dcb83be0c7295360d86493a527d0ea3e818df9",
   "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml": "ef61da76e6bf30e73e7e3868775d9fd2c792772fc768fa08bc4a40f1d6b4deb2",
   "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/buildings.yaml": "c220edc61f7e92f0e994229ebbb3a366feb08a344aa5bceae83e3e351f4c7e0b",
-  "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml": "e78fe182de9c8f7117bb34970c6fe88dc3d5b8dee6cf16a8300973b2619f23d6",
+  "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml": "aa9116c04c515ddf396ea399b43dc38ab7467e61fd04c01881194ef4ab39a036",
   "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml": "d93ecc7cb7796d24f11a5759c6d4215989b6e0b6ff2906700ff4f4de9e1edce3",
   "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/naval.yaml": "cf97f3122567389e2a6343e6786ecd792ec741bf686336b8b47c2ff3acc30bb5",
   "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/templates.yaml": "74197e306d822c933b9489ad12b311d8719b4efc6c1b957f7fa494a713b78300",
   "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/upgrades.yaml": "6e33bfe32426fd9581988f01909efe4c63bd6653d8499afaddcf4ba2a24c81e4",
-  "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml": "6e0fad20b4b36140a97c007d01192ea829ce8f0509a7e1c4f53da817c5c6333d",
-  "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml": "aafc71691ac9f4ae4b492f87de46757b02796efbf54e222e025ac7c4f2f88c65",
+  "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml": "ce52c2f1b7cbc4c03c2dab4daa768c7b600e667066d07908dff8597d81770de5",
+  "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml": "d841a7f10a5de463d3dcead93cbc211af53adc75b0249998c96c772d78807885",
   "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/content.yaml": "f6e865aec0cc5cb4a4b9a5f1e52eddf37a48586642ba89691ea30f1c3fe8567d",
   "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/ai.yaml": "5393b3b31902c9bc9e04dfc0efe65393cf167df09287d7f8dc11e852bd49c70e",
   "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml": "3ebcfd67672b5c341b398fad17d483f781cef6619b97591b0c4f53d8595a81f2",
@@ -42782,11 +42782,11 @@
   "yuri_gatlingtank": [
    {
     "role": "ground",
-    "weapon": "RA2GattlingMG1"
+    "weapon": "YuriGatlingTankMG1"
    },
    {
     "role": "air",
-    "weapon": "RA2GattlingMG1_AA"
+    "weapon": "YuriGatlingTankMG1_AA"
    }
   ],
   "yuri_magnetron": [
