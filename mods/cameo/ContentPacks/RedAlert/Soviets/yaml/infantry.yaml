@@ -102,16 +102,18 @@ ra1_soviets_rifleinfantry:
 	Inherits@IncendiaryBulletsUpgradeRA1: ^IncendiaryBulletsUpgradeRA1
 	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Valued:
+		Cost: 110
 	# Formula v2 scout conversion (2026-07-19): unique classic-rifle
 	# character at the original cost 100; O/P/Q priced via the scout
 	# anchor; class knobs neutralized (2x-health bake); burst flavor
 	# trimmed to formula DPS by the unit-named multiplier.
 	Mobile:
-		Speed: 54
+		Speed: 55
 	Health:
-		HP: 34000
+		HP: 21000
 	ChangesHealth@SelfHealing:
-		Step: 34
+		Step: 21
 	# DamageMultiplier@ScoutInfantryBuff:
 		# Modifier: 100
 	# FirepowerMultiplier@ScoutInfantryBuff:
@@ -223,7 +225,7 @@ ra1_soviets_grenadier:
 	Inherits@InfernoDoctrineRA1: ^InfernoDoctrineRA1
 	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
 	Valued:
-		Cost: 200
+		Cost: 230
 	Tooltip:
 		Name: Soviet Grenadier
 	UpdatesPlayerStatistics:
@@ -234,11 +236,11 @@ ra1_soviets_grenadier:
 		Queue: Infantry, RAInfantry
 		Description: actor_e2.description
 	Mobile:
-		Speed: 75
+		Speed: 72
 	Health:
-		HP: 8000
+		HP: 14000
 	ChangesHealth@SelfHealing:
-		Step: 8
+		Step: 14
 	Armament:
 		Weapon: ra1_soviets_grenadier_grenade
 		LocalOffset: 0,0,427
@@ -355,6 +357,8 @@ ra1_soviets_rocketsoldier:
 	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
 	Tooltip:
 		Name: Soviet Rocket Soldier
+	Valued:
+		Cost: 410
 	Buildable:
 		Prerequisites: ~ra1_soviets_barracks, ~!ra1_soviets_doctrine_inferno, ~!ra1_soviets_doctrine_conscription
 		Description: Anti-tank infantry.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
@@ -362,6 +366,12 @@ ra1_soviets_rocketsoldier:
 		VoiceSet: RussianVoice
 	ActorStatValues:
 		Upgrades: ra1_soviets_promotion_infantrysuperoptics, ra1_soviets_doctrine_conscription, ra1_soviets_upgrade_menofsteel
+	Health:
+		HP: 14000
+	ChangesHealth@SelfHealing:
+		Step: 14
+	Mobile:
+		Speed: 50
 
 	Armament@PRIMARY:
 		Weapon: ra1_soviets_rocketsoldier_rocketsra
@@ -562,17 +572,17 @@ ra1_soviets_shocktrooper:
 		Prerequisites: ~ra1_soviets_barracks, ra1_soviets_techcenter, ~!ra1_soviets_doctrine_teslaandexperimentaltech
 		Description: actor_shok.description
 	Valued:
-		Cost: 600
+		Cost: 680
 	Tooltip:
 		Name: Shock Trooper
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
-		HP: 40000
+		HP: 31000
 	ChangesHealth@SelfHealing:
-		Step: 40
+		Step: 31
 	Mobile:
-		Speed: 40
+		Speed: 48
 	Armament@PRIMARY:
 		Weapon: ra1_soviets_shocktrooper_portatesla
 		LocalOffset: 427,0,341

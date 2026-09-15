@@ -163,19 +163,19 @@ ra1_soviets_v2rocketlauncher:
 		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_techcenter, ~!ra1_soviets_doctrine_nuclearwar
 		Description: actor_v2rl.description
 	Valued:
-		Cost: 1600
+		Cost: 1410
 	Tooltip:
 		Name: V2 Rocket Launcher
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
-		HP: 30000
+		HP: 45000
 	Repairable:
-		HpPerStep: 1500
+		HpPerStep: 2250
 	ChangesHealth@SelfHealing:
-		Step: 12
+		Step: 18
 	Mobile:
-		Speed: 85
+		Speed: 67
 		TurnSpeed: 34
 	Armament@PRIMARY:
 		Weapon: ra1_soviets_v2rocketlauncher_scud
@@ -307,19 +307,19 @@ ra1_soviets_heavytank:
 		BuildPaletteOrder: 120
 		Description: actor_3tnk.description
 	Valued:
-		Cost: 1000
+		Cost: 1450
 	Tooltip:
 		Name: Soviet Heavy Tank
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
-		HP: 150000
+		HP: 172000
 	Repairable:
-		HpPerStep: 7500
+		HpPerStep: 8600
 	ChangesHealth@SelfHealing:
-		Step: 60
+		Step: 69
 	Mobile:
-		Speed: 70
+		Speed: 66
 		TurnSpeed: 14
 	Turreted:
 		TurnSpeed: 14
@@ -1009,7 +1009,7 @@ ra1_soviets_teslatank:
 	Tooltip:
 		Name: Tesla Tank
 	Valued:
-		Cost: 1700
+		Cost: 1440
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 170
@@ -1018,13 +1018,13 @@ ra1_soviets_teslatank:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
-		HP: 40000
+		HP: 58000
 	Repairable:
-		HpPerStep: 2000
+		HpPerStep: 2900
 	ChangesHealth@SelfHealing:
-		Step: 16
+		Step: 23
 	Mobile:
-		Speed: 80
+		Speed: 78
 		TurnSpeed: 16
 	Armament:
 		Weapon: ra1_soviets_teslatank_ttankzap
@@ -1139,7 +1139,7 @@ ra1_soviets_flaktruck:
 		Prerequisites: ~ra1_soviets_warfactory, ~!ra1_soviets_doctrine_conscription
 		Description: actor_ftrk.description
 	Valued:
-		Cost: 800
+		Cost: 950
 	Tooltip:
 		Name: Flak Truck
 	UpdatesPlayerStatistics:
@@ -1222,7 +1222,7 @@ ra1_soviets_btr80:
 		Prerequisites: ~ra1_soviets_warfactory, ~ra1_soviets_doctrine_conscription
 		Description: actor_btr.description
 	Valued:
-		Cost: 1620
+		Cost: 1770
 	Tooltip:
 		Name: BTR-80
 		RequiresCondition: !ra1_soviets_promotion_gatlingtank

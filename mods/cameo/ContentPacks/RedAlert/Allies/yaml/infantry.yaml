@@ -382,3 +382,23 @@ ra1_allies_machinegunner:
 		MuzzleSequence: garrison-muzzle
 		Weapon: ra1_allies_machinegunner_machinegun_cryo
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
+
+ra1_allies_rifleinfantry:
+	Valued:
+		Cost: 110
+	Health:
+		HP: 20000
+	ChangesHealth@SelfHealing:
+		Step: 21
+	Mobile:
+		Speed: 56
+
+ra1_allies_alliedrocketsoldier:
+	Valued:
+		Cost: 510
+	Health:
+		HP: 14000
+	ChangesHealth@SelfHealing:
+		Step: 14
+	Mobile:
+		Speed: 50

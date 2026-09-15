@@ -10,11 +10,11 @@ td_gdi_minigunner:
 	# anchor; class knobs neutralized (2x-health bake); burst flavor
 	# trimmed to formula DPS by the unit-named multiplier.
 	Mobile:
-		Speed: 63
+		Speed: 58
 	Health:
-		HP: 31000
+		HP: 22000
 	ChangesHealth@SelfHealing:
-		Step: 32
+		Step: 22
 	# DamageMultiplier@ScoutInfantryBuff:
 		# Modifier: 100
 	# FirepowerMultiplier@ScoutInfantryBuff:
@@ -23,6 +23,8 @@ td_gdi_minigunner:
 		# Modifier: 24
 	Tooltip:
 		Name: GDI Minigunner
+	Valued:
+		Cost: 110
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: ~td_gdi_barracks
@@ -71,18 +73,18 @@ td_gdi_grenadier:
 	Tooltip:
 		Name: GDI Grenadier
 	Valued:
-		Cost: 200
+		Cost: 230
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~td_gdi_barracks, ~!td_gdi_promotion_empgrenadier
 		Queue: Infantry, RAInfantry
 		Description: actor_e2.description
 	Mobile:
-		Speed: 75
+		Speed: 73
 	Health:
-		HP: 8000
+		HP: 15000
 	ChangesHealth@SelfHealing:
-		Step: 8
+		Step: 15
 	Armament:
 		Weapon: td_gdi_grenadier_grenade
 		LocalOffset: 0,0,427

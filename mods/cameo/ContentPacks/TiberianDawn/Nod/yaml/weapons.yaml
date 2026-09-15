@@ -40,24 +40,44 @@ td_nod_rocketsoldier_rockets:
 
 td_nod_flamethrower_flamethrower:
 	Inherits: Flamethrower
+	Range: 2495
+	Warhead@Flame_Light:
+		Damage: 27494
 
 td_nod_chemicalwarrior_chemspray:
 	Inherits: Chemspray
+	Range: 2822
+	Warhead@Chemical_Light:
+		Damage: 42792
 
 td_nod_commando_td_gdi_commando_sniper:
 	Inherits: td_gdi_commando_sniper
 
 td_nod_artillery_artilleryshell:
 	Inherits: ArtilleryShell
+	Range: 11291
+	MinRange: 2258
+	Warhead@Concussion_Medium_Flat:
+		Damage: 72263
 
 td_nod_flametank_bigflamer:
 	Inherits: BigFlamer
+	Range: 2532
+	Warhead@Flame_Medium:
+		Damage: 33642
 
 td_nod_buggy_machinegun:
 	Inherits: MachineGun
+	Range: 4263
+	Warhead@Bullet_Light:
+		Damage: 3896
 
 td_nod_ssmlauncher_honestjohn:
 	Inherits: HonestJohn
+	Range: 10449
+	MinRange: 2090
+	Warhead@MissileFire_Heavy:
+		Damage: 69017
 
 td_nod_ballisticmissilesubmarine_honestjohn:
 	Inherits: HonestJohn
@@ -182,8 +202,8 @@ td_nod_artillery_artilleryshellupgrade:
 	Inherits@5: ^MediumCannon
 	Inherits@6: ^HeavyBomb
 	ReloadDelay: 96
-	Range: 12345
-	MinRange: 2470
+	Range: 11291
+	MinRange: 2258
 	Report: tnkfire2.aud
 	TargetActorCenter: true
 	Projectile: Bullet
@@ -247,7 +267,7 @@ td_nod_artillery_artilleryshellupgrade:
 	-Warhead@HeavyBomb:
 	Warhead@Concussion_Heavy:
 		ValidTargets: Ground, Water
-		Damage: 36000
+		Damage: 81296
 		PercentageScale: 0
 
 MachineGun:
@@ -269,7 +289,7 @@ td_nod_buggy_fireballlauncherbuggy:
 	ReloadDelay: 10
 	Burst: 3
 	BurstDelays: 5
-	Range: 4540
+	Range: 4263
 	StartBurstReport: flamtnk1.aud
 	Projectile: Bullet
 		Speed: 111
@@ -277,7 +297,7 @@ td_nod_buggy_fireballlauncherbuggy:
 		Inaccuracy: 555
 		Palette: tseffect
 	Warhead@Flame_Light:
-		Damage: 2000
+		Damage: 1948
 td_nod_reconbike_rocket:
 	Inherits@collapsewh: ^Warhead_MissileAP_Medium
 	-TargetActorCenter:
@@ -288,7 +308,7 @@ td_nod_reconbike_rocket:
 	Burst: 2
 	BurstDelays: 10
 	ReloadDelay: 55
-	Range: 6000
+	Range: 5376
 	Report: bazook1.aud
 	Projectile: Missile
 		VerticalRateOfTurn: 20
@@ -322,14 +342,14 @@ td_nod_reconbike_rocket:
 	-Warhead@LightMissile:
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 7985
 		PercentageScale: 0
 	Warhead@CollapseTargetCompatibility1: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 7985
 		PercentageScale: 0
 
 PDLaserBike:
@@ -341,12 +361,12 @@ td_nod_lighttank_70mm:
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonHE_Medium
 	ReloadDelay: 45
-	Range: 4993
+	Range: 4694
 	Report: tnkfire3.aud
 	Projectile: Bullet
 		Speed: 499
 	Warhead@CannonHE_Medium:
-		Damage: 6000
+		Damage: 14679
 	Warhead@Effect: CreateEffect
 		ImpactSounds: xplos.aud
 
@@ -355,10 +375,10 @@ td_nod_lighttank_ltnkmissiles:
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
 	ReloadDelay: 45
-	Range: 4993
+	Range: 4694
 	Report: bazook1.aud
 	Warhead@MissileAP_Medium:
-		Damage: 6000
+		Damage: 14679
 	Warhead@Effect: CreateEffect
 		Explosions: small_frag
 
@@ -406,10 +426,10 @@ td_nod_stealthtank_stealthtankmissiles:
 	ReloadDelay: 58
 	Burst: 2
 	BurstDelays: 8
-	Range: 7432
+	Range: 6081
 	Report: rocket1.aud
 	Warhead@MissileAP_Medium:
-		Damage: 12000
+		Damage: 22230
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplobig4.aud
@@ -1705,7 +1725,7 @@ td_nod_minigunner_minigun:
 	Inherits@proj: ^Projectile_Bullet_Light
 	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 50
-	Range: 4609
+	Range: 4203
 	ValidTargets: Ground, Water
 	Burst: 4
 	BurstDelays: 2
@@ -1714,7 +1734,7 @@ td_nod_minigunner_minigun:
 		PercentageDenominator: 10000
 		PercentageScale: 10000
 		InvalidTargets: Air
-		Damage: 580
+		Damage: 3403
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 td_nod_minigunner_minigun_laser:
@@ -1725,7 +1745,7 @@ td_nod_minigunner_minigun_laser:
 	Inherits@legacychip: ^LegacyLaserChipCompatibility
 	ValidTargets: Ground, Water
 	ReloadDelay: 40
-	Range: 4500
+	Range: 4104
 	Burst: 4
 	BurstDelays: 2
 	Report: vpalwe2d.aud
@@ -1750,11 +1770,11 @@ td_nod_minigunner_minigun_laser:
 		Damage: 29
 	Warhead@Laser_Heavy:
 		InvalidTargets: Air
-		Damage: 1740
+		Damage: 10209
 		PercentageScale: 0
 	-Warhead@Laser_Heavy_ExtraDamage:
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 	Warhead@LegacyLaserExtraDamage:
-		Damage: 174
+		Damage: 1021
 		InvalidTargets: Air

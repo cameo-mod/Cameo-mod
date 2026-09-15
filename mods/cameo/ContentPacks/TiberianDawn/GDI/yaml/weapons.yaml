@@ -390,10 +390,10 @@ td_gdi_humvee_machinegun:
 	ReloadDelay: 9
 	Burst: 3
 	BurstDelays: 6
-	Range: 4792
+	Range: 4321
 	Report: mgun11.aud
 	Warhead@Bullet_Light:
-		Damage: 6000
+		Damage: 4698
 td_gdi_humvee_machinegun_ap:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -401,10 +401,10 @@ td_gdi_humvee_machinegun_ap:
 	ReloadDelay: 9
 	Burst: 3
 	BurstDelays: 6
-	Range: 4792
+	Range: 4321
 	Report: mgun11.aud
 	Warhead@Bullet_Medium:
-		Damage: 6000
+		Damage: 4698
 120mm:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
@@ -425,12 +425,12 @@ td_gdi_battletank_120mmhv:
 	Inherits@fx: ^Effect_CannonHE_Medium
 	Inherits: ^HVProjectile
 	ReloadDelay: 72
-	Range: 5438
+	Range: 5181
 	Report: tnkfire4.aud
 	Projectile: Bullet
 		Speed: 1086
 	Warhead@CannonHE_Medium:
-		Damage: 16000
+		Damage: 29696
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 
@@ -439,10 +439,10 @@ td_gdi_battletank_m1a1missiles:
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
 	ReloadDelay: 72
-	Range: 5400
+	Range: 5145
 	Report: rocket1.aud
 	Warhead@MissileAP_Medium:
-		Damage: 8000
+		Damage: 14848
 	Warhead@Effect: CreateEffect
 		Explosions: small_frag
 
@@ -459,10 +459,10 @@ td_gdi_battletank_m1a1machinegun:
 	Inherits@fx: ^Effect_Bullet_Medium
 	Burst: 4
 	ReloadDelay: 68
-	Range: 5400
+	Range: 5145
 	Report: mgun11.aud
 	Warhead@Bullet_Medium:
-		Damage: 2000
+		Damage: 3712
 td_gdi_mammothtank_120mmdual:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
@@ -470,12 +470,12 @@ td_gdi_mammothtank_120mmdual:
 	ReloadDelay: 72
 	Burst: 2
 	BurstDelays: 8
-	Range: 6141
+	Range: 5341
 	Report: tnkfire6.aud
 	Projectile: Bullet
 		Speed: 614
 	Warhead@CannonHE_Heavy:
-		Damage: 8000
+		Damage: 13892
 td_gdi_mammothtank_120mmdualhv:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
@@ -484,12 +484,12 @@ td_gdi_mammothtank_120mmdualhv:
 	ReloadDelay: 72
 	Burst: 2
 	BurstDelays: 8
-	Range: 6141
+	Range: 5341
 	Report: tnkfire6.aud
 	Projectile: Bullet
 		Speed: 1228
 	Warhead@CannonHE_Heavy:
-		Damage: 16000
+		Damage: 27784
 td_gdi_mammothtank_mammothmissiles:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -497,13 +497,13 @@ td_gdi_mammothtank_mammothmissiles:
 	ReloadDelay: 68
 	Burst: 2
 	BurstDelays: 12
-	Range: 6141
+	Range: 5341
 	Report: rocket1.aud
 	Projectile: Missile
 		VerticalRateOfTurn: 12
 		Image: DRAGON
 	Warhead@MissileAP_Heavy:
-		Damage: 8000
+		Damage: 13892
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
 		ImpactSounds: xplobig4.aud
@@ -514,6 +514,10 @@ td_gdi_mammothtank_mammothmissilesamt:
 
 td_gdi_mlrs_227mmamt:
 	Inherits: 227mm
+	Range: 9993
+	MinRange: 1999
+	Warhead@MissileAP_Medium:
+		Damage: 14736
 	Inherits@2: ^AMTProjectile
 
 	Projectile: Missile
@@ -2148,7 +2152,7 @@ td_gdi_minigunner_minigun:
 	Inherits@proj: ^Projectile_Bullet_Light
 	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 50
-	Range: 5499
+	Range: 4393
 	ValidTargets: Ground, Water
 	Burst: 4
 	BurstDelays: 3
@@ -2157,7 +2161,7 @@ td_gdi_minigunner_minigun:
 		PercentageDenominator: 10000
 		PercentageScale: 10000
 		InvalidTargets: Air
-		Damage: 480
+		Damage: 3539
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 td_gdi_minigunner_minigun_ap:
@@ -2166,7 +2170,7 @@ td_gdi_minigunner_minigun_ap:
 	Inherits@fx: ^Effect_Bullet_Medium
 	ValidTargets: Ground, Water
 	ReloadDelay: 45
-	Range: 4600
+	Range: 3676
 	Burst: 4
 	BurstDelays: 3
 	Report: mgun2.aud
@@ -2174,7 +2178,7 @@ td_gdi_minigunner_minigun_ap:
 		PercentageDenominator: 10000
 		PercentageScale: 10000
 		InvalidTargets: Air
-		Damage: 960
+		Damage: 7078
 # CLOSE-COMBAT BASELINE WEAPON (Formula v2, 2026-07-19): defines the
 # closecombat anchor with td_gdi_shotgunner. SmallArms+Chaingun (WC .875),
 # burst 5 pellets fire together (BurstDelays 0) = one shotgun blast;
@@ -2212,6 +2216,9 @@ td_gdi_shotgunner_shotgun:
 		InvalidTargets: Air
 td_gdi_grenadier_grenade:
 	Inherits: Grenade
+	Range: 4945
+	Warhead@Demolition_Light:
+		Damage: 19346
 
 td_gdi_rocketsoldier_rockets:
 	Inherits: Rockets
@@ -2232,9 +2239,16 @@ td_gdi_apc_apcgun:
 
 td_gdi_battletank_120mm:
 	Inherits: 120mm
+	Range: 5181
+	Warhead@CannonHE_Medium:
+		Damage: 14848
 
 td_gdi_mlrs_227mm:
 	Inherits: 227mm
+	Range: 9993
+	MinRange: 1999
+	Warhead@MissileAP_Medium:
+		Damage: 14736
 
 td_gdi_assaultapc_machinegunhumvee2:
 	Inherits: MachineGunHumvee2
