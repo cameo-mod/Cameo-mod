@@ -813,7 +813,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
-      "range": "5000",
+      "range": "7500",
       "reloaddelay": "6",
       "slot": "Armament@1",
       "versus_templates": [
@@ -841,7 +841,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
-      "range": "5250",
+      "range": "7875",
       "reloaddelay": "4",
       "slot": "Armament@2",
       "versus_templates": [
@@ -869,7 +869,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
-      "range": "5500",
+      "range": "8250",
       "reloaddelay": "2",
       "slot": "Armament@3",
       "versus_templates": [
@@ -897,7 +897,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
-      "range": "6750",
+      "range": "10125",
       "reloaddelay": "6",
       "slot": "Armament@1AA",
       "versus_templates": [
@@ -925,7 +925,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
-      "range": "7500",
+      "range": "11250",
       "reloaddelay": "4",
       "slot": "Armament@2AA",
       "versus_templates": [
@@ -953,7 +953,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
-      "range": "8250",
+      "range": "12375",
       "reloaddelay": "2",
       "slot": "Armament@3AA",
       "versus_templates": [
@@ -4072,63 +4072,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium_Flat",
-        "type": "AreaDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "5000",
-      "reloaddelay": "6",
-      "requires": "!gatling",
-      "slot": "Armament@1",
-      "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
-       "^RA2Chaingun"
-      ],
-      "warheads": [
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium"
-      ],
-      "weapon": "RA2GattlingMG1",
-      "weapon_class_source": "template"
-     },
-     {
-      "damage_warheads": [
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium_Flat",
-        "type": "AreaDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "5250",
-      "reloaddelay": "4",
-      "requires": "gatling == 1",
-      "slot": "Armament@2",
-      "versus_templates": [
-       "RA2GattlingMG1"
-      ],
-      "warheads": [
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium"
-      ],
-      "weapon": "RA2GattlingMG2",
-      "weapon_class_source": "template"
-     },
-     {
-      "damage_warheads": [
-       {
-        "damage": "4000",
+        "damage": "3000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium_Flat",
@@ -4138,37 +4082,10 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
-      "range": "5500",
-      "reloaddelay": "2",
-      "requires": "gatling > 1",
-      "slot": "Armament@3",
-      "versus_templates": [
-       "RA2GattlingMG1"
-      ],
-      "warheads": [
-       "^Warhead_Bullet_Light",
-       "^Warhead_Bullet_Medium"
-      ],
-      "weapon": "RA2GattlingMG3",
-      "weapon_class_source": "template"
-     },
-     {
-      "damage_warheads": [
-       {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium_Flat",
-        "type": "AreaDamage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
-      "pricing": true,
-      "range": "6750",
+      "range": "5400",
       "reloaddelay": "6",
       "requires": "!gatling",
-      "slot": "Armament@1AA",
+      "slot": "Armament@1",
       "versus_templates": [
        "RA2GattlingMG1"
       ],
@@ -4176,26 +4093,26 @@
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "RA2GattlingMG1_AA",
+      "weapon": "YuriGatlingTankMG1",
       "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "3000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium_Flat",
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
-      "range": "7500",
+      "range": "5670",
       "reloaddelay": "4",
       "requires": "gatling == 1",
-      "slot": "Armament@2AA",
+      "slot": "Armament@2",
       "versus_templates": [
        "RA2GattlingMG2"
       ],
@@ -4203,13 +4120,13 @@
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "RA2GattlingMG2_AA",
+      "weapon": "YuriGatlingTankMG2",
       "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "3000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium_Flat",
@@ -4219,10 +4136,10 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
-      "range": "8250",
+      "range": "5940",
       "reloaddelay": "2",
       "requires": "gatling > 1",
-      "slot": "Armament@3AA",
+      "slot": "Armament@3",
       "versus_templates": [
        "RA2GattlingMG3"
       ],
@@ -4230,7 +4147,88 @@
        "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
-      "weapon": "RA2GattlingMG3_AA",
+      "weapon": "YuriGatlingTankMG3",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_Medium_Flat",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
+      "pricing": true,
+      "range": "7290",
+      "reloaddelay": "6",
+      "requires": "!gatling",
+      "slot": "Armament@1AA",
+      "versus_templates": [
+       "RA2GattlingMG1_AA"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "YuriGatlingTankMG1_AA",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_Medium_Flat",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
+      "pricing": true,
+      "range": "8100",
+      "reloaddelay": "4",
+      "requires": "gatling == 1",
+      "slot": "Armament@2AA",
+      "versus_templates": [
+       "RA2GattlingMG2_AA"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "YuriGatlingTankMG2_AA",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_Medium_Flat",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
+      "pricing": true,
+      "range": "8910",
+      "reloaddelay": "2",
+      "requires": "gatling > 1",
+      "slot": "Armament@3AA",
+      "versus_templates": [
+       "RA2GattlingMG3_AA"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "YuriGatlingTankMG3_AA",
       "weapon_class_source": "template"
      }
     ],
@@ -4251,11 +4249,6 @@
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
-    "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#FirepowerMultiplier@SpeedupCompensation.Modifier",
-     "trait": "FirepowerMultiplier@SpeedupCompensation",
-     "v": 0.75
-    },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Health.HP",
      "v": "45000"
@@ -4272,14 +4265,7 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [
-     {
-      "modifier": 75,
-      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#FirepowerMultiplier@SpeedupCompensation.Modifier",
-      "trait": "FirepowerMultiplier@SpeedupCompensation",
-      "types": []
-     }
-    ],
+    "resolved_firepower_modifiers": [],
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && ((yuri_doctrine_psionicvehicleshields && EnemyInProximity) || shieldgen || shielded)"

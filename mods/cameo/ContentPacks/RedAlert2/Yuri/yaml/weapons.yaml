@@ -664,19 +664,31 @@ YRBoomerTorpedo:
 
 YuriGatlingCannonMG1:
 	Inherits: RA2GattlingMG1
+	Range: 7500
 	Inherits@ProjectileStreak: ^YuriGatlingCannonProjectileStreak
+	Warhead@Bullet_Medium_Flat:
+		Damage: 4000
 
 YuriGatlingCannonMG1_AA:
 	Inherits: RA2GattlingMG1_AA
+	Range: 10125
 	Inherits@ProjectileStreak: ^YuriGatlingCannonProjectileStreak
+	Warhead@Bullet_Medium_Flat:
+		Damage: 8000
 
 YuriGatlingCannonMG2:
 	Inherits: RA2GattlingMG2
+	Range: 7875
 	Inherits@ProjectileStreak: ^YuriGatlingCannonProjectileStreak
+	Warhead@Bullet_Medium_Flat:
+		Damage: 4000
 
 YuriGatlingCannonMG2_AA:
 	Inherits: RA2GattlingMG2_AA
+	Range: 11250
 	Inherits@ProjectileStreak: ^YuriGatlingCannonProjectileStreak
+	Warhead@Bullet_Medium_Flat:
+		Damage: 8000
 
 RA2GattlingMG3:
 	Inherits: RA2GattlingMG1
@@ -698,11 +710,53 @@ RA2GattlingMG3_AA:
 		PercentageScale: 9988
 YuriGatlingCannonMG3:
 	Inherits: RA2GattlingMG3
+	Range: 8250
 	Inherits@ProjectileStreak: ^YuriGatlingCannonProjectileStreak
+	Warhead@Bullet_Medium_Flat:
+		Damage: 4000
 
 YuriGatlingCannonMG3_AA:
 	Inherits: RA2GattlingMG3_AA
+	Range: 12375
 	Inherits@ProjectileStreak: ^YuriGatlingCannonProjectileStreak
+	Warhead@Bullet_Medium_Flat:
+		Damage: 8000
+
+YuriGatlingTankMG1:
+	Inherits: RA2GattlingMG1
+	Range: 5400
+	Warhead@Bullet_Medium_Flat:
+		Damage: 3000
+
+YuriGatlingTankMG1_AA:
+	Inherits: RA2GattlingMG1_AA
+	Range: 7290
+	Warhead@Bullet_Medium_Flat:
+		Damage: 6000
+
+YuriGatlingTankMG2:
+	Inherits: RA2GattlingMG2
+	Range: 5670
+	Warhead@Bullet_Medium_Flat:
+		Damage: 3000
+
+YuriGatlingTankMG2_AA:
+	Inherits: RA2GattlingMG2_AA
+	Range: 8100
+	Warhead@Bullet_Medium_Flat:
+		Damage: 6000
+
+YuriGatlingTankMG3:
+	Inherits: RA2GattlingMG3
+	Range: 5940
+	Warhead@Bullet_Medium_Flat:
+		Damage: 3000
+
+YuriGatlingTankMG3_AA:
+	Inherits: RA2GattlingMG3_AA
+	Range: 8910
+	Warhead@Bullet_Medium_Flat:
+		Damage: 6000
 
 RA2GattlingInf:
 	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat

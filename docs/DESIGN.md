@@ -564,26 +564,23 @@ not be copied onto anything else.
 ⛔ **THE EXEMPTION IS PER ACTOR, NOT PER WEAPON - RULED 2026-09-14.** *"Only the Yuri gatling
 tank and the Yuri gatling cannon! Anything else is not approved and requires their own weapon."*
 
-`YuriGatlingCannonMG1/2/3` belong to `yuri_gatlingcannon` alone, so that half needs nothing.
-`RA2GattlingMG1/2/3` are shared with **five actors that are NOT exempt** - `ra2_c_abram`,
-`ra2_c_hum`, `ra2_c_hum2`, `ra2_c_ifv` and `ra2leopard` - so those five must be given **their own
-copies at a flat 1.5x AA reach** rather than inheriting the ramp. Until that split exists the
-shared weapons cannot be marked exempt, because doing so would hand the exemption to five units
-that were explicitly not approved for it.
+`YuriGatlingCannonMG1/2/3` belong to `yuri_gatlingcannon` alone. `RA2GattlingMG1/2/3` are shared
+with **five actors that are NOT exempt** - `ra2_c_abram`, `ra2_c_hum`, `ra2_c_hum2`, `ra2_c_ifv`
+and `ra2leopard`. The Yuri Gatling Tank and Cannon therefore need private weapon wrappers so their
+stage-specific reaches can be represented without changing those other consumers.
 
-⚠ The split is new yaml (three weapons, plus the armament rewiring on five actors) and therefore
-needs the pipeline and a boot gate. It is a task, not a decision.
+⚠ The split adds six private Tank wrappers, pins the six existing Cannon wrappers to their
+effective range and damage, and rewires the Tank's six armaments. It therefore needs the pipeline
+and a boot gate. It is a task, not a decision.
 
-⛔ **AND THE MECHANISM THAT USED TO SEPARATE THEM IS GONE - MEASURED 2026-09-14.** The maintainer
-suspected it: *"the weapons are fixed and shared between the two. The range for both is
-individually set on the unit with a range multiplier. This might not work or maybe the multipliers
-have been removed in a previous commit when I asked to remove any unconditional multipliers so
-yeah, now it might be broken."* Confirmed. Every `RangeMultiplier` left on `yuri_gatlingtank`,
-`yuri_gatlingcannon`, `ra2_c_ifv` and `ra2leopard` is CONDITIONAL - `@shrouded`, `@blinded`,
-`@RANK-*`, `@GravityGenerator*`, `@tankbunker`, `@GatlingBuff` - and **not one is unconditional**.
-So a unit can no longer set its own reach: the shared weapon's `Range` is the only source, and all
-six actors are locked to the same numbers. Splitting the weapons per unit is therefore not merely
-tidier, it is the ONLY way to give them different reaches again.
+⛔ **THE RUNTIME RANGE AND FIREPOWER DIFFERENTIATION WAS PRESENT BUT INVISIBLE TO THE LEDGERS -
+CORRECTED 2026-09-15.** `yuri_gatlingcannon` carried an unconditional 150% `RangeMultiplier`,
+while `yuri_gatlingtank` carried 108% range and 75% firepower. The Cannon had no equivalent
+unconditional firepower modifier. Runtime therefore already produced different effective reach
+and Tank damage. The balance ledgers read weapon-local `Range` and `Damage` and ignored these
+actor multipliers, so they reported the shared base values for both actors. Private wrappers
+preserve the existing effective values directly on each weapon and make the distinction visible
+to the pipeline; the actor multipliers can then be removed without changing runtime behavior.
 
 ⚠ They do not even use the same stages: `ra2_c_ifv` carries MG1 and MG2 only, `ra2leopard` carries
 MG1 alone beside its `RA2120mm` cannon, and only `yuri_gatlingtank` uses all three.
