@@ -58,13 +58,13 @@ td_nod_rocketsoldier:
 	Tooltip:
 		Name: Nod Rocket Soldier
 	Valued:
-		Cost: 420
+		Cost: 390
 	Health:
-		HP: 15000
+		HP: 14000
 	ChangesHealth@SelfHealing:
-		Step: 15
+		Step: 14
 	Mobile:
-		Speed: 45
+		Speed: 48
 	Inherits@GuerillaTactics: ^GuerillaTactics
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
 	Inherits@TiberiumInfusion: ^TiberiumInfusion

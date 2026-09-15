@@ -16,17 +16,18 @@ import cargo_pricing  # noqa: E402
 
 
 VALID_CARRIERS = {
-    "ra1_allies_alliedapc": 1740,
-    "ra1_allies_alliedchinooktransport": 4360,
-    "ra1_allies_phasetransport": 2180,
-    "ra1_soviets_btr80": 1770,
-    "ra1_soviets_flaktruck": 950,
-    "ra1_soviets_hiptransport": 2730,
-    "td_gdi_apc": 1740,
-    "td_gdi_assaultapc": 4090,
-    "td_gdi_chinooktransport": 4090,
-    "td_gdi_humveemkii": 870,
-    "td_nod_buggymkii": 880,
+    "ra1_allies_alliedapc": 1680,
+    "ra1_allies_alliedchinooktransport": 4300,
+    "ra1_allies_phasetransport": 2150,
+    "ra1_soviets_btr80": 1800,
+    "ra1_soviets_flaktruck": 980,
+    "ra1_soviets_hiptransport": 2760,
+    "td_gdi_apc": 1800,
+    "td_gdi_assaultapc": 4120,
+    "td_gdi_chinooktransport": 4120,
+    "td_gdi_humveemkii": 900,
+    "td_nod_buggymkii": 850,
+    "td_nod_chinooktransport": 3853,
 }
 
 
@@ -44,16 +45,6 @@ class AcceptedClassicFourCargoPriceTests(unittest.TestCase):
                 self.assertEqual(
                     str(expected), self.rules.resolve(actor_name).child("Valued").get("Cost")
                 )
-
-    def test_invalid_nod_chinook_remains_held(self):
-        load = cargo_pricing.authored_load(self.rules, "td_nod_chinooktransport")
-        self.assertIn("filled weight 11/8", load["issues"])
-        self.assertIsNone(load["passenger_sum"])
-        self.assertEqual(
-            "3100",
-            self.rules.resolve("td_nod_chinooktransport").child("Valued").get("Cost"),
-        )
-
 
 if __name__ == "__main__":
     unittest.main()

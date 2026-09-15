@@ -20,7 +20,7 @@
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#Valued.Cost",
-     "v": "4360"
+     "v": "4300"
     },
     "design": {
      "category": "Aircraft",
@@ -1681,7 +1681,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "12358",
+        "damage": "11500",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium_Flat",
@@ -1691,7 +1691,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
-      "range": "7205",
+      "range": "7500",
       "reloaddelay": "50",
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@PRIMARY",
@@ -1708,7 +1708,7 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "12358",
+        "damage": "11500",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium_Flat",
@@ -1718,7 +1718,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
-      "range": "7205",
+      "range": "7500",
       "reloaddelay": "50",
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@GARRISONED",
@@ -1734,7 +1734,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "12358",
+        "damage": "11500",
         "falloff": "100, 60, 27, 0",
         "spread": "40",
         "tag": "MissileCryo_Medium",
@@ -1744,7 +1744,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
-      "range": "7205",
+      "range": "7500",
       "reloaddelay": "50",
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@Upgrade",
@@ -1763,7 +1763,7 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "12358",
+        "damage": "11500",
         "falloff": "100, 60, 27, 0",
         "spread": "40",
         "tag": "MissileCryo_Medium",
@@ -1773,7 +1773,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
-      "range": "7205",
+      "range": "7500",
       "reloaddelay": "50",
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@UpgradeGARRISONED",
@@ -1796,7 +1796,7 @@
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Valued.Cost",
-     "v": "510"
+     "v": "480"
     },
     "design": {
      "class_anchor": null,
@@ -1807,7 +1807,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Health.HP",
-     "v": "14000"
+     "v": "13000"
     },
     "name": "Allied Rocket Soldier",
     "prerequisites": [
@@ -1840,7 +1840,7 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Mobile.Speed",
-     "v": "50"
+     "v": "54"
     }
    },
    "ra1_allies_alliedsniper": {
@@ -5138,7 +5138,7 @@
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Valued.Cost",
-     "v": "2180"
+     "v": "2150"
     },
     "design": {
      "category": "Vehicles",

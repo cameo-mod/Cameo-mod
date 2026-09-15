@@ -446,16 +446,14 @@ For each cited weapon it binds the exact weapon/projectile link to freshly read 
 reload, burst and targeting flags. RA2/YR contributes only when **both** resolved `AA` and `AG`
 values are explicit and valid; missing defaults abstain because no authoritative RA2 default is
 pinned. Twisted Insurrection uses the documented TS defaults. Invalid booleans never coerce to
-false. A weapon must also be `nominal_direct`, carry usable positive finite numbers, and have
-`Burst = 1`; incomplete/effect/multi-shot records abstain as a whole, so the 694-cycle hold stays
-closed.
+false. A weapon must also be `nominal_direct` and carry usable positive finite numbers. The
+consumption path admits otherwise-proven `burst_unfolded` records with one tick per inter-shot gap;
+resolved sidecar status, targeting and integral positive burst remain required. Other incomplete
+or effect records abstain. Preserve the frozen corpus and its promoted-secondary selections.
 
-Result: **496 of 2,461** cited armaments resolve. The other 1,965 are named in the evidence sidecar:
-1,404 need RA2 defaults, 363 are multi-shot, 82 use effect references, 38 use exotic channels,
-33 have no direct damage, 15 have other incomplete weapon evidence, 12 lack a projectile section,
-17 carry invalid/non-positive direct numbers, and one lacks a warhead dependency. DTA keeps its
-independently pinned projectile evidence, but its primary, secondary and elite slots now pass the
-same `nominal_direct`/usable/single-shot/numeric gate. The DTA hashes remain
+The exact extractor disposition remains in the evidence sidecar. DTA keeps its independently
+pinned projectile evidence, while its primary, secondary and elite slots pass the same
+`nominal_direct`/usable/numeric gate and the reviewed `burst_unfolded` consumption rule. The DTA hashes remain
 `786f0ae5…` for `Rules.ini` and `d836d5a9…` for `Enhance.ini`.
 
 ### 2j. Application components stay per armament, and frozen self-votes are explicit
@@ -489,26 +487,29 @@ the same row displays a rejected proposal.
 | actors with a priced armament in the assignment | 314 |
 | …referencing a peer's BASE weapon (original) | 140 |
 | …referencing the elite/upgraded replacement (expanded) | 174 |
-| actors firing in more than one role | 46 |
-| **reference rows contaminated by the fold** | **38** |
-| armament pairs formed | **333** |
-| …proven exact role matches | 226 |
-| …a dual-role `both` weapon stood in | 107 |
+| actors firing in more than one role | 45 |
+| **reference rows contaminated by the fold** | **44** |
+| armament pairs formed | **353** |
+| …proven exact role matches | 238 |
+| …a dual-role `both` weapon stood in | 115 |
 | …source could not state a role | **0 — they abstain** (§2d) |
 | …the reference carries that weapon only at ELITE rank | 4 |
-| pairs by role | ground 187 · both 121 · air 25 |
-| Cameo armaments with no reference | 403 |
-| actors with at least one uncovered armament | **120** |
-| uncovered armaments despite structured references | ground 94 · both 36 · air 21 · special 2 |
+| pairs by role | ground 194 · both 131 · air 28 |
+| Cameo armaments with no reference | 378 |
+| actors with at least one uncovered armament | **119** |
+| uncovered armaments despite structured references | ground 93 · both 36 · air 18 · special 2 |
 | actors with no structured reference at all | 16 |
 | unknown target tokens | **0** |
 
-The canonical review page `docs/audit/latest/reference_map_clean_20260911.html` is regenerated
-from the current tree. The request called this the
-"all-28-faction" map, but the current tree has **29** non-WIP faction prefixes with balance
-ledgers; the report includes all 29 and excludes only the two explicitly WIP Dark Reign factions
-(`plymouth`, `eden`). It contains 161 original and 709 expanded actors, 925 attached references,
-514 formula-priced actors and 8 rendered originals with fewer than three sources.
+The historical 2026-09-14 all-faction review page is
+`docs/audit/latest/reference_map_clean_20260911.html`. That snapshot covers **29** non-WIP
+faction prefixes and excludes the two explicitly WIP Dark Reign factions (`plymouth`, `eden`);
+it contains 161 original and 709 expanded actors, 925 attached references, 514 formula-priced
+actors and 8 rendered originals with fewer than three sources. It was not regenerated in this
+batch. The current classic-four review is
+`docs/audit/latest/Cameo-reference-map-original-four-20260916.html`: 76 original and 87 expanded
+actors, 297 attached references, 27 formula-priced actors and 4 originals with fewer than three
+sources, generated from the current branch.
 
 The 2026-09-14 missing-reference review added ten exact, previously unclaimed mappings: the
 Valiant Shades Allied/Soviet Engineers, four source-specific Soviet Sentry Guns, Shattered
@@ -519,12 +520,9 @@ Battle Fortress variant did not take the `BFRT` rows already owned by the real B
 The O1 audit now lists each faction's actual routed candidates rather than incorrectly reporting
 Combined Arms and DTA as missing sources for every RA2 and Tiberian Sun actor.
 
-⚠ **THE PAIR COUNT REMAINS FAR BELOW 607 BECAUSE THE UNPROVEN FALLBACK STAYS DELETED.** The seven
-verified sources restore 59 proof-backed pairs, while the new slot gate withdraws 35 DTA pair
-instances that rested on incomplete weapons, including six unsafe elite weapons. The net
-308 → 332 is therefore narrower and stronger. The exact missing-reference follow-up adds one
-further proven pair, bringing the current artifact to 333.
-`cameo_armaments_without_a_reference` remains large (403) because every armament is counted rather
+⚠ **THE PAIR COUNT REMAINS FAR BELOW 607 BECAUSE THE UNPROVEN FALLBACK STAYS DELETED.** The current
+artifact on this branch, based on master `102645047`, has 353 pairs: 238 exact and 115 via the legal `both` fallback.
+`cameo_armaments_without_a_reference` remains large (378) because every armament is counted rather
 than one per role, so a four-gun destroyer reports four gaps where it used to report one.
 
 ⚠ **TWO REASONS A WEAPON ENDS UP UNREFERENCED, AND COUNTING THEM TOGETHER MAKES THE NUMBER LIE.**
@@ -535,7 +533,8 @@ gap, not missing structure.
 
 Coverage is also tracked by **weapon identity**, not merely by role. The earlier role-level count
 said only seven actors were uncovered because one successful ground match could hide another ground
-weapon on the same actor. The current report exposes 153 uncovered armaments on 120 actors. That
+weapon on the same actor. The current report exposes 149 structured-reference gaps on 119 actors
+(ground 93, both 36, air 18, special 2). That
 is an honest inventory for later reference work, not a licence to invent votes. For example,
 `td_gdi_firehawk` remains correctly uncovered for its Sidewinders when its A-10 references carry no
 anti-air weapon; the source abstains instead of averaging those missiles with a napalm bomb.

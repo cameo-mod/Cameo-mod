@@ -2608,27 +2608,35 @@ ArmoredCarMG:
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
+		PercentageDenominator: 1000
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
+		PercentageDenominator: 1000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
+		PercentageDenominator: 1000
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
+		PercentageDenominator: 1000
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
+		PercentageDenominator: 1000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
+		PercentageDenominator: 1000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
+		PercentageDenominator: 1000
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
+		PercentageDenominator: 1000
 	Warhead@Effect: CreateEffect
 		Explosions: piffs
 	-Warhead@ArrowWeapon:
@@ -2642,7 +2650,7 @@ ArmoredCarMG:
 	-Warhead@Chaingun:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
-		Damage: 16000
+		Damage: 1600
 		PercentageScale: 0
 
 ArmoredCarMG_AA:
@@ -2671,7 +2679,7 @@ ArmoredCarMG_AA:
 		ValidTargets: Air
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
-		Damage: 16000
+		Damage: 1600
 		FriendlyFireDamage: 75
 		FriendlyFireSpread: 75
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
@@ -2690,13 +2698,16 @@ ArmoredCarMGWaveforce:
 	Inherits@4: ^WaveforceBulletProjectile
 	Warhead@Railgun_Heavy:
 		InvalidTargets: Air
-		Damage: 3000
+		Damage: 300
 		PercentageScale: 6667
+	Warhead@Railgun_Heavy_ExtraDamage:
+		Damage: 100
 	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Spread: 250
 		Damage: 1
+		PercentageDenominator: 1000
 		Versus:
 			Shield: 35
 			Spaceship: 25
@@ -2746,12 +2757,15 @@ ArmoredCarMGAAWaveforce:
 	Inherits@4: ^WaveforceBulletProjectile
 	Warhead@Railgun_Heavy:
 		ValidTargets: Air
-		Damage: 3000
+		Damage: 300
 		PercentageScale: 6667
+	Warhead@Railgun_Heavy_ExtraDamage:
+		Damage: 100
 	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air
 		Spread: 250
 		Damage: 1
+		PercentageDenominator: 1000
 		Versus:
 			Shield: 35
 			Spaceship: 25

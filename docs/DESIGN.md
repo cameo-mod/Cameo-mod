@@ -512,7 +512,7 @@ Four rulings about actors that carry more than one weapon. They were prompted by
 per-armament reference map, which showed the GDI APC, Battle Tank and Mammoth Tank carrying two
 weapons whose targets came out within a few percent of each other.
 
-### 3a.1 An AA split is ONE weapon, and only its RANGE differs
+### 3a.1 An AA split is ONE weapon; its free bonus is scoped by class
 
 > *"the APC anti ground and anti air flak should not have any different damage since it's the
 > same weapon (the only reason why we had to split it was a necessity because we can't otherwise
@@ -520,8 +520,11 @@ weapons whose targets came out within a few percent of each other.
 > air versions they must be identical except for the 1.5x range"*
 
 A `_AA` weapon that exists only because OpenRA cannot give one armament a longer reach against
-air is **not a second weapon**. `Damage`, `ReloadDelay`, `Burst` and `BurstDelays` must be
-IDENTICAL to its ground twin. **Only `Range` differs, by exactly 1.5x.**
+air is **not a second weapon**. `ReloadDelay`, `Burst`, `BurstDelays` and `MinRange` match its
+ground twin. Maximum AA range is normally 1.5x ground range. AA damage is equal for
+`scout_vehicle` and `armed_troop_transport`, and doubled for `anti_air_vehicle` and
+`anti_air_ship`. The Yuri staged-range exception below remains explicitly scoped to its two
+actors.
 
 ⛔ **`MinRange` NEVER SCALES** (maintainer, same ruling): *"Min Range never scales! That one is
 always constant - because no range multiplier changes min range."* A range multiplier moves the
@@ -564,14 +567,11 @@ not be copied onto anything else.
 ⛔ **THE EXEMPTION IS PER ACTOR, NOT PER WEAPON - RULED 2026-09-14.** *"Only the Yuri gatling
 tank and the Yuri gatling cannon! Anything else is not approved and requires their own weapon."*
 
-`YuriGatlingCannonMG1/2/3` belong to `yuri_gatlingcannon` alone. `RA2GattlingMG1/2/3` are shared
-with **five actors that are NOT exempt** - `ra2_c_abram`, `ra2_c_hum`, `ra2_c_hum2`, `ra2_c_ifv`
-and `ra2leopard`. The Yuri Gatling Tank and Cannon therefore need private weapon wrappers so their
-stage-specific reaches can be represented without changing those other consumers.
-
-⚠ The split adds six private Tank wrappers, pins the six existing Cannon wrappers to their
-effective range and damage, and rewires the Tank's six armaments. It therefore needs the pipeline
-and a boot gate. It is a task, not a decision.
+`YuriGatlingCannonMG1/2/3` and the six `YuriGatlingTankMG*` wrappers are private to their actors.
+PR #402 (`102645047`) completed the split: it pinned effective range and damage on both private
+families, rewired the Tank's six armaments, and removed the historical unconditional actor
+multipliers. `RA2GattlingMG1/2/3` remain shared by `ra2_c_abram`, `ra2_c_hum`, `ra2_c_hum2`,
+`ra2_c_ifv` and `ra2leopard`; those consumers remain outside the Yuri exception.
 
 ⛔ **THE RUNTIME RANGE AND FIREPOWER DIFFERENTIATION WAS PRESENT BUT INVISIBLE TO THE LEDGERS -
 CORRECTED 2026-09-15.** `yuri_gatlingcannon` carried an unconditional 150% `RangeMultiplier`,
@@ -608,9 +608,9 @@ correct pairs wrong, required editing 61 of 63, and INVERTED the rise-only
 the dedicated AA classes something the others do not have - which is the point, because a free
 double-damage air weapon on every APC would leave `anti_air_vehicle` with no identity.
 
-⛔ **BLOCKER: THERE IS NO NAVAL CLASS IN `class_anchors.json` AT ALL.** Not an anti-air ship
-class, not any other. The naval half of this ruling has nothing to attach to yet, and creating
-that class is a prerequisite for applying it.
+⚠ `class_anchors.json` now contains a provisional `anti_air_ship` anchor. Remaining work is
+fitting and maintainer sign-off, plus separately reviewed Aegis/Sea Scorpion weapon corrections.
+Do not recreate the class or treat its provisional specification as approved.
 
 ⚠ **THE AEGIS CRUISER, ordered the same day**: *"remove the upgrade that unlocks the anti ground
 weapon and just make it the default AG / AA pair with the +50% range and +100% damage"*. Measured:

@@ -1541,7 +1541,7 @@ def main() -> int:
         'full id and name, split into units that exist in the original games and units that do '
         'not. The bar on each chip is match confidence. <b>HP →</b>, <b>speed →</b> and '
         '<b>cost →</b> are the R4 synthesis targets — references plus Cameo, one vote each. '
-        'Nothing here has been written to yaml.</p>\n'
+        'This report is read-only: current values come from live YAML, while the arrows are diagnostic synthesis targets.</p>\n'
         f'<p class="lede">{summary}</p>\n'
         '<div class="wrap">\n' + "\n".join(body) + "\n</div>\n")
     pathlib.Path(args.out).write_text(page, encoding="utf-8")

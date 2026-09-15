@@ -854,7 +854,7 @@
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#Valued.Cost",
-     "v": "2730"
+     "v": "2760"
     },
     "design": {
      "category": "Aircraft",
@@ -5583,7 +5583,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "12358",
+        "damage": "13216",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium_Flat",
@@ -5593,7 +5593,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
-      "range": "7205",
+      "range": "6910",
       "reloaddelay": "50",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
@@ -5609,7 +5609,7 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "12358",
+        "damage": "13216",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium_Flat",
@@ -5619,7 +5619,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
-      "range": "7205",
+      "range": "6910",
       "reloaddelay": "50",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
@@ -5639,7 +5639,7 @@
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Valued.Cost",
-     "v": "410"
+     "v": "440"
     },
     "design": {
      "class_anchor": null,
@@ -5650,7 +5650,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Health.HP",
-     "v": "14000"
+     "v": "15000"
     },
     "name": "Soviet Rocket Soldier",
     "prerequisites": [
@@ -5685,7 +5685,7 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Mobile.Speed",
-     "v": "50"
+     "v": "46"
     }
    },
    "ra1_soviets_shocktrooper": {
@@ -8440,7 +8440,7 @@
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Valued.Cost",
-     "v": "1770"
+     "v": "1800"
     },
     "design": {
      "category": "Vehicles",
@@ -8569,7 +8569,7 @@
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Valued.Cost",
-     "v": "950"
+     "v": "980"
     },
     "design": {
      "category": "Vehicles",

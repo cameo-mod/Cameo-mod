@@ -16,7 +16,7 @@ yaml queue below is untouched and still needs an order.
 | 3a.3 | Simultaneous armaments SUM and must be DISPLAYED. |
 | 3a.4 | The cannon/missile near-tie is **source cancellation** — read the voters, never the spread. |
 | 3a.5 | ⛔ **NEVER reference across factions.** CA's routing gate is INERT (156 of 377 units carry >=10 faction tags). |
-| 3a.6 | **ONE CYCLE PER ACTOR**, so total DPS is a plain sum. Plus the **drift rule**: average spreads under 5%, leave wider ones to design. |
+| 3a.6 | **ONE CYCLE PER ACTOR**, so total DPS is a plain sum. Average eligible same-system drifts under 10%; disjoint weapons do not share a cycle. |
 | 3a.7 | **Mutually exclusive weapons are virtual twin units** — resolved independently, **never summed**, sharing neither range nor DPS. Longer reach buys less DPS. |
 | 3a.8 | The formula **drops the `_AA` half by name**; the 1.5x check is an AUDIT matter only. |
 | 3a.9 | **THE FIREPOWER SHARE.** Same-target weapons split one budget (1/n by default, **weighting allowed by design**); `n` counts **weapon SYSTEMS**, while delivered DPS sums over every **barrel**. |
@@ -45,14 +45,15 @@ coincidence — mammoth 200x2, Sheridan 62.5x3, heatray tank 187.5x4.
 * **The AA rename map** (`docs/design/AA_SPLIT_RENAME_MAP.md` — 93 renames: 74 twin, 16 disjoint,
   3 dropped, 3 needing a human) is **NOT APPLIED**. It needs `safe_rename.py`, a boot gate and a
   quiet tree, and master is staged for a playtest.
-* **There is NO naval class in `class_anchors.json`** — the anti-air SHIP ruling has nothing to
-  attach to until that class exists.
+* The `anti_air_ship` anchor now exists provisionally in `class_anchors.json`. Remaining work is
+  fitting and maintainer sign-off; do not recreate it or treat the provisional spec as approved.
 * **Aegis Cruiser**, ordered: drop the `upra2aegismissiles` condition from its AG armament and
   double the AA half to 60,000. Its range is already exactly 1.5x. Both yaml.
 * **Sea Scorpion is not a clean pair** — 2.44x reach, and its ground weapon is SHARED with the
   flak track, so it cannot be rescaled alone.
-* **Yaml drift queue**: Yak cycle -> **120** (reloads 111/99), battle tank range -> **5,419**. The
-  Yak is also off its own firepower design (72/28 against an intended 50/50).
+* **Historical yaml drift queue:** the Yak averaging order was withdrawn after its weapons were
+  confirmed disjoint. The Battle Tank was subsequently rebalanced in PR #401. Do not replay the
+  old 120/5,419 values.
 * **A latent bug**: the map de-duplicates armaments on `(weapon, role)`, which UNDER-counts a real
   dual mount — the Yak's two wing chainguns at `LocalOffset` 256,±213. Nothing publishes a wrong
   number today only because both affected actors are withheld for another reason. The

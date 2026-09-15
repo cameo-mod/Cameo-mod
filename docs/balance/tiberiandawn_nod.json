@@ -129,7 +129,7 @@
     "buildable": true,
     "cargo_capacity": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/aircraft.yaml#Cargo.MaxWeight",
-     "v": "8"
+     "v": "11"
     },
     "cargo_types": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/aircraft.yaml#Cargo.Types",
@@ -137,7 +137,7 @@
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/aircraft.yaml#Valued.Cost",
-     "v": "3100"
+     "v": "3853"
     },
     "design": {
      "category": "Aircraft",
@@ -2813,7 +2813,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "16341",
+        "damage": "16882",
         "falloff": "100, 0",
         "spread": "43",
         "tag": "MissileAP_Light",
@@ -2823,7 +2823,7 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
-      "range": "6264",
+      "range": "6028",
       "reloaddelay": "56",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
@@ -2839,7 +2839,7 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "16341",
+        "damage": "16882",
         "falloff": "100, 0",
         "spread": "43",
         "tag": "MissileAP_Light",
@@ -2849,7 +2849,7 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
-      "range": "6264",
+      "range": "6028",
       "reloaddelay": "56",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
@@ -2869,7 +2869,7 @@
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Valued.Cost",
-     "v": "420"
+     "v": "390"
     },
     "design": {
      "category": "Infantry",
@@ -2881,7 +2881,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Health.HP",
-     "v": "15000"
+     "v": "14000"
     },
     "name": "Nod Rocket Soldier",
     "prerequisites": [
@@ -2919,7 +2919,7 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Mobile.Speed",
-     "v": "45"
+     "v": "48"
     }
    },
    "td_nod_stealthsoldier": {
@@ -4742,7 +4742,7 @@
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Valued.Cost",
-     "v": "880"
+     "v": "850"
     },
     "design": {
      "category": "Vehicles",

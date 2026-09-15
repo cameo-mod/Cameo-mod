@@ -358,7 +358,7 @@ ra1_soviets_rocketsoldier:
 	Tooltip:
 		Name: Soviet Rocket Soldier
 	Valued:
-		Cost: 410
+		Cost: 440
 	Buildable:
 		Prerequisites: ~ra1_soviets_barracks, ~!ra1_soviets_doctrine_inferno, ~!ra1_soviets_doctrine_conscription
 		Description: Anti-tank infantry.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
@@ -367,11 +367,11 @@ ra1_soviets_rocketsoldier:
 	ActorStatValues:
 		Upgrades: ra1_soviets_promotion_infantrysuperoptics, ra1_soviets_doctrine_conscription, ra1_soviets_upgrade_menofsteel
 	Health:
-		HP: 14000
+		HP: 15000
 	ChangesHealth@SelfHealing:
-		Step: 14
+		Step: 15
 	Mobile:
-		Speed: 50
+		Speed: 46
 
 	Armament@PRIMARY:
 		Weapon: ra1_soviets_rocketsoldier_rocketsra

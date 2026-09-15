@@ -45,7 +45,7 @@ td_gdi_apc:
 	Tooltip:
 		Name: GDI APC
 	Valued:
-		Cost: 1740
+		Cost: 1800
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_barracks, ~!td_gdi_promotion_assaultapc
@@ -537,7 +537,7 @@ td_gdi_assaultapc:
 	Inherits@LightWeightArmorPlating: ^LightWeightArmorPlating
 	Inherits@decoration: ^GDIRankDecoration
 	Valued:
-		Cost: 4090
+		Cost: 4120
 	Tooltip:
 		Name: Assault APC
 	Buildable:
@@ -628,7 +628,7 @@ td_gdi_humveemkii:
 		Queue: Vehicle, RAVehicle
 		Description: actor_jeep.description
 	Valued:
-		Cost: 870
+		Cost: 900
 	Mobile:
 		Speed: 115
 		TurnSpeed: 23

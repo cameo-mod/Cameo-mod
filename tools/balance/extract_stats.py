@@ -51,6 +51,17 @@ SECTION_FILES = ("faction", "buildings", "defenses", "infantry", "vehicles",
                  "aircraft", "naval", "upgrades", "promotions", "misc")
 SHARED_LEAVES = {"Shared", "Core"}
 
+# These Yuri weapons are three mutually exclusive gatling stages plus parallel
+# AG/AA domains.  Their live conditions use two different trait fields
+# (RequiresCondition on the Tank, PauseOnCondition on the Cannon), so the raw
+# condition-only selector cannot express one shared pricing baseline.  Keep the
+# maintainer-approved model input explicit and fail closed if a wrapper is
+# renamed: Level-1 AG is the only armament priced for either actor.
+PRICING_ARMAMENT_OVERRIDES = {
+    "yuri_gatlingcannon": {"Armament@1": "YuriGatlingCannonMG1"},
+    "yuri_gatlingtank": {"Armament@1": "YuriGatlingTankMG1"},
+}
+
 SECTION_DEFAULT_SUBTYPE = {
     "infantry": "Infantry",
     "vehicles": "Vehicle",
@@ -1064,6 +1075,7 @@ def extract_actor(rs, key: str, section: str,
     # audits. Its cost is only an XP-on-kill value; its stats don't matter.
     u["buildable"] = _is_balance_buildable(buildable, key)
     arms = []
+    pricing_override = PRICING_ARMAMENT_OVERRIDES.get(key)
     for c in resolved.children:
         if c.key == "Armament" or c.key.startswith("Armament@"):
             wname = c.get("Weapon")
@@ -1086,6 +1098,10 @@ def extract_actor(rs, key: str, section: str,
                 entry["support_armament"] = True
                 entry["pricing"] = False
                 entry["pricing_reason"] = "support_armament"
+            elif pricing_override is not None:
+                entry["pricing"] = pricing_override.get(c.key) == wname
+                if not entry["pricing"]:
+                    entry["pricing_reason"] = "staged_gatling_nonbaseline"
             else:
                 entry["pricing"] = not ("garrison" in arm_name.lower()) and not (
                     entry.get("extraction_note") == "no_damage_warheads")
