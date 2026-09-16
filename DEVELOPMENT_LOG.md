@@ -1,4 +1,4 @@
-﻿## OpenCode GLM 5.3 Flash - Astra pipeline batch: A3/C1 dossiers, extrapolation join, speed law, report refresh (2026-09-09)
+## OpenCode GLM 5.3 Flash - Astra pipeline batch: A3/C1 dossiers, extrapolation join, speed law, report refresh (2026-09-09)
 
 ### Japan pilot follow-up — Astra, 2026-09-09 (in progress)
 
@@ -11066,3 +11066,36 @@ TechLevel 11 plus low cost remains tech11_low_cost. Per-source bucket totals
 are asserted against untagged totals, with focused fixtures over the committed
 corpus. No extractor, corpus row, reference eligibility, or gameplay data is
 changed by this audit.
+
+## 2026-09-16 — Volcanic shellmap camera reverted to 6 cells
+
+**What and why:** `CameraRadius` in `shellmap_v3.oramap`'s `attack.lua` was
+reverted from `46080` (45 cells) to `6144` (6 cells), undoing the 2026-08-25
+widening recorded above. At 45 cells the camera centre travelled up to 45 cells
+from `camerapoint` (63,79), while the three scripted battle waypoints
+(`attack_harkonnen` 49,82; `attack_harkonnen2` 49,65; `attack_soviet` 81,76) sit
+only 14–20 cells from it; with a viewport half-window of roughly 15–27 cells
+(48 px cells, `DefaultScale: 0.5`) the fight left the frame for much of the
+144 s revolution, and the north/south passes framed empty terrain. At 6 cells
+the fight stays framed throughout.
+
+The widening's stated motive — bringing the x=128 carryall/frigate spawn
+corridor into frame — is deliberately given up; that corridor is not where the
+fighting happens. Precedent: `shellmap_v2` still uses 6144, and
+`tools/archive/shellmap-2ffa/build-guide.md:231` says to keep the radius small
+so the map edge is not swung into frame.
+
+**Verification:** the archive was repacked preserving entry names, order,
+timestamps and compression — `map.bin`, `map.png`, `map.yaml`, `rules.yaml` and
+`weapons.yaml` are byte-identical, and only `attack.lua` differs, by the single
+`CameraRadius` line. `python tools/tests/test_shellmap_actor_references.py`
+passes (2 tests). Boot-gated by the maintainer's in-game run: menu reached, no
+new `exception-*.log`. Landed as `03049aada` and pushed to
+`cameo-mod/Cameo-mod` master.
+
+The radius is not registered in `docs/audit/doc_claims.yaml`, so no audit
+tracks it and no gate would have caught the stale "45 cells" claims this entry
+corrects.
+
+Co-Authored-By: DeepSeek Flash <noreply@deepseek.com>
+

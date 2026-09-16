@@ -1668,7 +1668,7 @@ Maintainer rulings, 2026-09-08:
 ---
 
 
-**2026-08-25 update (Devin AI):** The volcanic shellmap (`shellmap_v3.oramap`) camera was too tight (6-cell radius), hiding the scripted attack waves. The `attack.lua` camera radius has been widened to 45 cells. The boot-blocking stale removal `-Warhead@CannonHE_MediumPercentage` in `weapons/outpost2.yaml` is resolved in `a92ae850`, and boot-gate passes with no new exceptions. See `DEVELOPMENT_LOG.md` § "Volcanic shellmap camera radius fix" for evidence and verification.
+**2026-08-25 update (Devin AI):** The volcanic shellmap (`shellmap_v3.oramap`) camera was too tight (6-cell radius), hiding the scripted attack waves. The `attack.lua` camera radius was widened to 45 cells. **Superseded 2026-09-16:** reverted to 6 cells (`03049aada`) — at 45 cells the camera centre travelled up to 45 cells from `camerapoint` while the three scripted battle waypoints sit only 14–20 cells away, so the fight left the frame for much of the 144 s revolution. See the 2026-09-16 entry in `DEVELOPMENT_LOG.md`. The boot-blocking stale removal `-Warhead@CannonHE_MediumPercentage` in `weapons/outpost2.yaml` is resolved in `a92ae850`, and boot-gate passes with no new exceptions. See `DEVELOPMENT_LOG.md` § "Volcanic shellmap camera radius fix" for evidence and verification.
 
 **This is the single entry point for anyone picking up work on Cameo — human or agent.**
 Written 2026-08-23, re-verified against master at `e60aab63`. It supersedes every previous handoff document;
