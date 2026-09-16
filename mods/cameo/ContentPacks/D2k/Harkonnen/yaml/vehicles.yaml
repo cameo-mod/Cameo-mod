@@ -34,6 +34,7 @@ combat_tank.harkonnen:
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@EMP: ^TurretEMP
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Buildable:
 		Queue: Vehicle, RAVehicle, Starport
@@ -44,7 +45,7 @@ combat_tank.harkonnen:
 	Valued:
 		Cost: 600
 	Tooltip:
-		Name: Harkonnen Assault Tank
+		Name: Harkonnen Combat Tank
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -54,20 +55,24 @@ combat_tank.harkonnen:
 	Mobile:
 		Speed: 65
 		TurnSpeed: 13
+	Turreted:
+		TurnSpeed: 13
 	Armament:
 		Weapon: 80mm_H
 		Recoil: 64
 		RecoilRecovery: 32
 		LocalOffset: 256,0,0
-	AttackFrontal:
-		FacingTolerance: 0
+		MuzzleSequence: muzzle
+		MuzzlePalette: d2keffect
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed
 		EmptyWeapon: D2KUnitExplodeMed
 	Cloak@TDcloak:
 		CloakStyle: Palette
 		CloakedPalette: d2kcloak
-	-WithDeathAnimation:
 	RenderSprites:
 		Image: combat_tank.harkonnen
 		PlayerPalette: player_rgba

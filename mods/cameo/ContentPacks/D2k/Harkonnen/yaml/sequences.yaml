@@ -47,23 +47,49 @@ harkonnen_flameturret:
 
 combat_tank.harkonnen:
 	Defaults:
-		Filename: harkonnen_assaulttank.png
 	idle:
-		Start: 0
-		Facings: 32
-	move:
-		Start: 0
-		Facings: 32
-		Tick: 80
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2051
+		Facings: -32
+	turret:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2115
+		Facings: -32
+	muzzle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4028
+		Tick: 60
+		Facings: -32
+		BlendMode: Additive
 	icon:
-		Filename: harkonnen_assaulttank_icon.png
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4282
+		Offset: -30,-24
+
 
 combat_tank_husk.harkonnen:
 	Defaults:
-		Filename: harkonnen_assaulttank.png
 	idle:
-		Start: 0
-		Facings: 32
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2051
+		Facings: -32
+		ZOffset: -512
+	turret:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2115
+		Facings: -32
 		ZOffset: -512
 
 devastator_husk.harkonnen:
