@@ -688,7 +688,7 @@ ra1_allies_machinegunner_machinegun:
 		PercentageDenominator: 10000
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
-		Damage: 14880
+		Damage: 10320
 		PercentageScale: 2494
 	Warhead@ShieldHit:
 		InvalidTargets: Air
@@ -706,7 +706,7 @@ ra1_allies_machinegunner_machinegun_cryo:
 		PercentageDenominator: 10000
 		PercentageScale: 10000
 		InvalidTargets: Air
-		Damage: 14880
+		Damage: 10320
 		ValidTargets: Ground, Water, Air
 ZeroFighterChainGun:
 	Inherits@wh: ^Warhead_Bullet_Medium
