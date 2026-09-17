@@ -946,6 +946,17 @@ ra1_soviets_oretruck:
 	ActorStatValues:
 		Upgrades: ra1_soviets_doctrine_industrialefficiency, ra1_soviets_doctrine_heavyarmor, ra1_soviets_upgrade_wareconomy, ra1_soviets_upgrade_stalinium
 
+	ChangesHealth@SelfHealing:
+		Step: 84
+	Repairable:
+		HpPerStep: 10500
+	Health:
+		HP: 210000
+	Mobile:
+		Speed: 81
+		TurnSpeed: 16
+	Valued:
+		Cost: 1560
 ra1_soviets_heavyindustrialminer:
 	Inherits: ra1_soviets_oretruck
 	Tooltip:

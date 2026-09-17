@@ -105,6 +105,17 @@ td_nod_tiberiumharvester:
 	ActorStatValues:
 		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics
 
+	ChangesHealth@SelfHealing:
+		Step: 96
+	Repairable:
+		HpPerStep: 12000
+	Health:
+		HP: 240000
+	Mobile:
+		Speed: 69
+		TurnSpeed: 14
+	Valued:
+		Cost: 1670
 td_nod_artillery:
 	Inherits: ^Tank
 	Inherits@Template: ^ArtilleryTemplate
@@ -940,14 +951,14 @@ td_nod_stealthharvester:
 	Tooltip:
 		Name: Stealth Harvester
 	Mobile:
-		Speed: 75
+		Speed: 77
 		TurnSpeed: 15
 	Health:
-		HP: 125000
+		HP: 175000
 	Repairable:
-		HpPerStep: 6250
+		HpPerStep: 8750
 	ChangesHealth@SelfHealing:
-		Step: 50
+		Step: 70
 	Harvester:
 		BaleLoadDelay: 2
 		BaleUnloadDelay: 1
@@ -965,3 +976,6 @@ td_nod_stealthharvester:
 		Image: td_nod_stealthharvester
 	ActorStatValues:
 		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics
+
+	Valued:
+		Cost: 1520

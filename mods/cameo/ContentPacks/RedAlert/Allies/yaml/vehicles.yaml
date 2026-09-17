@@ -253,6 +253,17 @@ ra1_allies_alliedoretruck:
 	ActorStatValues:
 		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
 
+	ChangesHealth@SelfHealing:
+		Step: 84
+	Repairable:
+		HpPerStep: 10500
+	Health:
+		HP: 210000
+	Mobile:
+		Speed: 81
+		TurnSpeed: 16
+	Valued:
+		Cost: 1560
 ra1_allies_alliedmobileconstructionvehicle:
 	Inherits: ^RAMCV
 	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
