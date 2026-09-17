@@ -79,10 +79,10 @@ actor_2tnk =
    .name = Allied Medium Tank
 
 actor_heavyaatank =
-   .description = Allied heavy anti air tank.
+   .description = Mobile twin-cannon anti-aircraft vehicle.
       Strong vs Aircraft
       Weak vs Tanks
-   .name = Allied Heavy AA Tank
+   .name = Flakpanzer Gepard
 
 actor_3tnk =
    .description = Soviet main battle tank armed with dual cannons.
