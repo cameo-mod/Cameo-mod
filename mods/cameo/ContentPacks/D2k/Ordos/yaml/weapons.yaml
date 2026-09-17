@@ -1893,9 +1893,6 @@ ordos_autogunturret:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Effect2: CreateEffect
-		ImpactSounds: 2100richet1.wav, 2100richet2.wav
-		ValidTargets: Ground, Water, Air
 
 autogun_tank:
 	Inherits@collapseflat: ^Warhead_Bullet_Medium_Flat
