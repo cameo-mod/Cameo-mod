@@ -32,8 +32,17 @@ Heal/repair scaling keeps time-to-full and repair time-to-full constant:
 TurnSpeed follows the F8 law: 60->69 => 12->14, 75->77 => 15, 90->81
 => 18->16.
 
-Idempotent, refuses unexpected current values, exits nonzero on any
-mismatch. Dry/confirm distinction is not needed: this script only
+Idempotent: every patched field must land on its listed pre-edit value
+(EXPECTED_OLD) or the script exits nonzero WITHOUT writing that file, so
+an unexpected yaml state is refused loudly instead of silently clobbered.
+This is NOT an apply_balance pass on purpose: the pipeline refuses
+inherited-src edits and carries no heal/repair fields at all
+(extract_stats cannot even read `ChangesHealth@SelfHealing` today), so
+this standalone, inspectable writer materializes the batch per actor
+instead. It does not use the apply_transaction rollback layer because
+it only ever writes whole known files whose diff is fully printed; the
+acceptance test resolves every resulting value and is the gate.
+ Dry/confirm distinction is not needed: this script only
 materializes the batch the reference map already computed; the commit
 carries the playtest report and Aedis's review is the gate.
 """
@@ -99,6 +108,19 @@ SPECS = {
 }
 
 
+# Pre-edit yaml values that each PATCHED field must carry. A patch target
+# that is not on one of these values refuses the run loudly (review the
+# playtest doc before force-extending this table).
+EXPECTED_OLD = {
+    "td_nod_stealthharvester": {
+        "Mobile.Speed": "75",
+        "Health.HP": "125000",
+        "Repairable.HpPerStep": "6250",
+        "ChangesHealth@SelfHealing.Step": "50",
+    },
+}
+
+
 class ActorEditor:
     def __init__(self, path: pathlib.Path):
         raw = path.read_bytes()
@@ -158,7 +180,7 @@ class ActorEditor:
             i += 1
         return None
 
-    def patch_child(self, block, end, indent, name, fields, report):
+    def patch_child(self, block, end, indent, name, fields, report, allowed_old):
         span = self.child_span(block, end, name, indent)
         if span is None:
             return False
@@ -177,11 +199,16 @@ class ActorEditor:
                 continue
             k, m = hit
             old = m.group(2)
-            if old != str(want):
-                self.lines[k] = f"{m.group(1)} {want}"
-                report.append(f"{name}.{key}: {old} -> {want}")
-            else:
+            if old == str(want):
                 report.append(f"{name}.{key}: already {want}")
+                continue
+            if old not in allowed_old.get(f"{name}.{key}", ()):
+                self.problems.append(
+                    f"{name}.{key}: refusing to overwrite unexpected value {old!r}"
+                )
+                continue
+            self.lines[k] = f"{m.group(1)} {want}"
+            report.append(f"{name}.{key}: {old} -> {want}")
         return True
 
     def insert_child(self, actor, block, end, indent, name, fields, report):
@@ -191,20 +218,38 @@ class ActorEditor:
         # Insert at the END of the actor block: siblings later in the block
         # win same-key merges, and templates merge in at the `Inherits:`
         # position, so a child placed before `Inherits:` would be silently
-        # overridden by the template (seen on this batch: before-Insert
-        # placement failed to resolve).
-        self.lines[end:end] = lines
+        # overridden by the template (seen on this batch: before-Inherits
+        # placement failed to resolve). Keep the phantom trailing newline
+        # element ("" after split) last, so the file keeps its final
+        # newline when the actor is the last one in the file.
+        at = min(end, len(self.lines))
+        if at == len(self.lines):
+            if self.lines and self.lines[-1] == "":
+                at -= 1
+            else:
+                self.lines.append("")
+        self.lines[at:at] = lines
         for key, want in fields.items():
             report.append(f"{name}.{key}: added {want}")
 
     def apply(self, actor: str, fields: dict[str, dict[str, int]]):
+        allowed = EXPECTED_OLD.get(actor, {})
+        patched = {
+            name.replace(".", "."): values
+            for name, values in allowed.items()
+        }
         report: list[str] = []
         block, end, indent = self.span(actor)
         # Patch existing children first (order-independent).
         remaining = dict(fields)
         for name in list(remaining):
+            allow: dict[str, tuple] = {}
+            for key in remaining[name]:
+                pre = allowed.get(f"{name}.{key}")
+                if pre is not None:
+                    allow[key] = (pre,)
             if self.child_span(block, end, name, indent) is not None:
-                self.patch_child(block, end, indent, name, remaining.pop(name), report)
+                self.patch_child(block, end, indent, name, remaining.pop(name), report, allow)
         # Insert the children the actor does not own yet.
         for name, vals in remaining.items():
             self.insert_child(actor, block, end, indent, name, vals, report)
@@ -227,6 +272,8 @@ def main() -> int:
             rc = 1
             for p in ed.problems:
                 print(f"   PROBLEM {p}")
+            print(f"   REFUSED WRITING {path}")
+            continue
         path.write_bytes(ed.content())
     return rc
 
