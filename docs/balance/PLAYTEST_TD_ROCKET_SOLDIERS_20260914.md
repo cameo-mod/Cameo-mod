@@ -44,8 +44,10 @@ Raising each soldier from 300 to 420 changes every valid authored full load that
 | GDI Humvee Mk. II | 820 |
 | Nod Buggy Mk. II | 720 |
 
-The Nod Chinook remains unchanged at 3,100 because its authored load is already invalid at weight
-11/8. It has no passenger-sum target until that separate cargo design issue is resolved.
+The Nod Chinook remains outside this Rocket Soldier batch, but its current
+authored load is now valid at 3,853: the eight listed passengers resolve to a
+full 11/11 weight load and the cost equals their passenger sum. No cargo field
+is changed here.
 
 The full derived-sidecar refresh is retained. Raising the two actors' HP shifts the shared
 `shield_damage_share` context slightly, so untouched derived values can move by 0.01; the
