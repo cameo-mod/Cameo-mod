@@ -1036,14 +1036,16 @@ def extract_actor(rs, key: str, section: str,
             ("cargo_types", "Cargo", "Types"),
             ("cargo_requires", "Cargo", "RequiresCondition"),
             ("cargo_pause", "Cargo", "PauseOnCondition"),
-            ("self_heal_step", "ChangesHealth", "Step"),
-            # The named instance most actors actually use (828 blocks at the
-            # time of writing vs 88 bare `ChangesHealth` blocks). Listed LAST so
-            # an actor carrying both keeps the instance's value, which is the
-            # meaningful self-heal. Batches before 2026-09-18 (PR #404) could
-            # not ride the ledger for this field at all: the harvester batch
-            # had to ship per-actor overrides annotated by hand.
+            # The named instance most actors actually use. Listed FIRST here,
+            # not last: the bare `ChangesHealth` trait is a SEPARATE trait
+            # instance in the engine and both tick independently, so an actor
+            # carrying both (~3 do: a StarCraft Protoss craft and two
+            # Tiberian Sun CABAL vehicles) heals by the SUM, and collapsing
+            # them into one key would silently drop a real heal layer.
+            # `self_heal_step` is the canonical named instance;
+            # `self_heal_step_other` keeps the bare one when present.
             ("self_heal_step", "ChangesHealth@SelfHealing", "Step"),
+            ("self_heal_step_other", "ChangesHealth", "Step"),
             ("repairable_hp_per_step", "Repairable", "HpPerStep"),
             # --- THE SURVIVABILITY LAYERS (E1, 2026-08-16) ---------------------------- #
             # Maintainer: *"shielded units and armored units need to have a price! it is
