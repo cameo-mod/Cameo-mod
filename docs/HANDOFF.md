@@ -1,5 +1,25 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-18 — MCV/SUPPORT AND TRANSPORT CHASSIS SLICES (IN REVIEW)
+
+The playable-balance queue now has two stacked follow-ups to #404/#405:
+
+* **PR #406**, branch `claude/support-durability-classic-four-20260918`, applies the
+  20260916 chassis-only targets to four classic-four MCVs, the RA1 mobile gap generator,
+  and the RA1 mobile radar jammer. `^MCV` stays untouched; the MCVs use actor-local
+  materialized blocks. HP is on the binding 1,000 grid, F1/F2 values are derived, and
+  support F10 TurnSpeed is preserved. Costs are reference-backed for non-cargo actors.
+* **PR #407**, branch `claude/transport-chassis-classic-four-20260918`, applies only
+  HP/Speed/Aircraft TurnSpeed/heal/repair to the four classic-four helicopter transports.
+  Costs remain their authored passenger sums: 4,120 / 3,853 / 4,300 / 2,760. Direct
+  `cargo_pricing.authored_load` verifies full valid loads 8/8, 11/11, 10/10 and 8/8.
+  `Aircraft.TurnSpeed` is now a raw ledger field (`turn_speed_air`), so drift covers it.
+* Both slices have bounded contracts, clean drift, `find_empty_warhead = 0`, deterministic
+  69-artifact refreshes and boot-gated menu proofs with zero new exceptions. Full test
+  discovery is intentionally not run on this machine because it approaches OOM.
+* Merge order: **#404 -> #405 -> #406 -> #407**, then re-extract once on the integrated
+  tree. The transport cost question remains a separate cargo-law decision.
+
 ## 2026-09-18 — CLASSIC-FOUR HARVESTER DURABILITY BATCH (IN REVIEW)
 
 Owner: **opencode (GLM)**, by maintainer order ("I want the game playable... work on
