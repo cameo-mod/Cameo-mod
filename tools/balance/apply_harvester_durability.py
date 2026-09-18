@@ -35,13 +35,11 @@ TurnSpeed follows the F8 law: 60->69 => 12->14, 75->77 => 15, 90->81
 Idempotent: every patched field must land on its listed pre-edit value
 (EXPECTED_OLD) or the script exits nonzero WITHOUT writing that file, so
 an unexpected yaml state is refused loudly instead of silently clobbered.
-This is NOT an apply_balance pass on purpose: the pipeline refuses
-inherited-src edits and carries no heal/repair fields at all
-(extract_stats cannot even read `ChangesHealth@SelfHealing` today), so
-this standalone, inspectable writer materializes the batch per actor
-instead. It does not use the apply_transaction rollback layer because
-it only ever writes whole known files whose diff is fully printed; the
-acceptance test resolves every resulting value and is the gate.
+This is NOT an apply_balance pass on purpose: inherited-src edits need
+per-actor materialization. This standalone writer validates every file
+before any replacement and uses the same transaction rollback layer as
+apply_balance; the acceptance test resolves every resulting value and is
+the gate.
  Dry/confirm distinction is not needed: this script only
 materializes the batch the reference map already computed; the commit
 carries the playtest report and Aedis's review is the gate.
