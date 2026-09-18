@@ -52,6 +52,8 @@ import pathlib
 import re
 import sys
 
+from apply_transaction import Transaction
+
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 
 GDI_VEH = ROOT / "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml"
@@ -124,6 +126,7 @@ EXPECTED_OLD = {
 class ActorEditor:
     def __init__(self, path: pathlib.Path):
         raw = path.read_bytes()
+        self.original = raw
         self.bom = raw.startswith(b"\xef\xbb\xbf")
         text = raw.decode("utf-8-sig")
         self.crlf = "\r\n" in text
@@ -262,7 +265,7 @@ def main() -> int:
     for actor, (path, _, fields) in SPECS.items():
         by_file.setdefault(path, []).append((actor, fields))
     rc = 0
-    pending: list[tuple[pathlib.Path, bytes]] = []
+    pending: list[tuple[pathlib.Path, bytes, bytes]] = []
     for path, actors in by_file.items():
         ed = ActorEditor(path)
         for actor, fields in by_file[path]:
@@ -276,12 +279,20 @@ def main() -> int:
                 print(f"   PROBLEM {p}")
             print(f"   REFUSED WRITING {path}")
             continue
-        pending.append((path, ed.content()))
+        pending.append((path, ed.original, ed.content()))
     if rc:
         print("REFUSED WRITING: at least one file failed validation; no batch files were written")
         return rc
-    for path, content in pending:
-        path.write_bytes(content)
+    transaction = Transaction({path: original for path, original, _ in pending})
+    try:
+        for path, _, content in pending:
+            transaction.write(path, content)
+    except BaseException as error:
+        conflicts = transaction.rollback()
+        print(f"REFUSED WRITING: transaction failed: {error}")
+        if conflicts:
+            print("ROLLBACK CONFLICTS:", ", ".join(conflicts))
+        return 1
     return rc
 
 
