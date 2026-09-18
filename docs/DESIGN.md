@@ -315,7 +315,7 @@ Reference-clean units: **TD GDI Archer** (`gdiarcher`), **Ordos Raider**
 | Defense vision | `RevealsShroud.Range = weapon range` |
 | AA / advanced defense detection | `DetectCloaked.Range = weapon range / 2` |
 | Defense power | `Power.Amount = -(Cost / 20)` |
-| Vehicle turning | `TurnSpeed = Speed / 5`, `Turreted.TurnSpeed` equals it — but **DERIVED IN C#, not written in yaml** (maintainer 2026-09-07). Speed is now on a step of 1, so `Speed / 5` is no longer an integer; the yaml carries a MULTIPLIER and the trait computes the angle in fixed point, so the ratio stays exact instead of rounding to ~3%. |
+| Vehicle turning | `TurnSpeed = Speed / 5`, `Turreted.TurnSpeed` equals it. The value is generated into YAML by the balance tooling and consumed as an authored integer `WAngle`; it is not derived at runtime. Speed is now on a step of 1, so the generator rounds the derived target and the audit records the permitted tolerance. |
 | Turretless (AttackFrontal) vehicles | `TurnSpeed = 2 × Speed / 5` — the former artillery exception was dropped 2026-07-10 (data check: turretless artillery split 24 at 2×, 18 at 1× — no real pattern) |
 | Stationary defenses | **`Turreted.TurnSpeed = 2 × Speed / 5` applied to the TURRET, not a chassis** (maintainer 2026-09-07). A defense has no hull to turn, so the turretless doubling lands on the turret instead — a defense therefore tracks as fast as a frontal-weapon tank, and markedly faster than a tank TURRET. `Speed` here is the speed the emplacement would have as a mobile unit of its class. |
 | Units that DEPLOY into an immobile form | **rotation DOUBLES while deployed** (maintainer 2026-09-07) — the deployed state is a stationary defense and takes the defense rule. Applies to `td_gdi_defenserig`, the Terran siege tank, the Matador and every other deploy-to-immobile unit. |
@@ -2896,9 +2896,9 @@ finer than the percentage grid can follow; that is a known consequence, not a bu
   be consistent. Guarded by `audit_turn_speed.py` T3.
 - **Turn rate is GENERATED into yaml, never derived at runtime** — `audit_turn_speed.py` guards
   it. Turn speed is an integer `WAngle` at every layer and both runtime hooks
-  (`ITurnSpeedModifier`, `ITurretTurnSpeedModifier`) take an integer PERCENTAGE, so code and a
-  generator produce byte-identical values; `Aircraft` exposes no hook at all and would need the
-  whole trait shadowed for no change in the numbers.
+  (`ITurnSpeedModifier`, `ITurretTurnSpeedModifier`) take an integer PERCENTAGE, so the
+  generator produces the authored values consumed by the engine. `Aircraft` exposes no hook
+  at all, so its `Aircraft.TurnSpeed` must likewise be authored and ledger-covered.
 ### Regeneration — one global rule, no per-actor numbers
 
 **Maintainer ruling 2026-09-07.** Regeneration is stated as **TICKS TO FULL**, never as a

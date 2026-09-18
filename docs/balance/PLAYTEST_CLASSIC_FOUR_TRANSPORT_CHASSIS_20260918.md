@@ -4,7 +4,9 @@ This batch applies the chassis-only HP and Speed projections from the
 20260916 reference map to the four classic-four air transports. Carrier Cost
 is deliberately unchanged: all four authored `Cargo.InitialUnits` loads
 resolve to a passenger sum equal to the current carrier cost, and the cargo
-pricing law owns that field.
+pricing law owns that field. This is the explicit cargo-law exemption from
+the ordinary 10-credit candidate grid: a carrier cost is the integer sum of
+its passenger costs, even when that sum is not itself a multiple of ten.
 
 | Actor | HP | Speed | Aircraft TurnSpeed | Self-heal Step | HpPerStep | Cost |
 |---|---:|---:|---:|---:|---:|---:|
@@ -24,6 +26,12 @@ Cargo was inspected directly through `cargo_pricing.authored_load`: all four
 loads are valid and filled to capacity, including the Nod Chinook's eight
 authored passengers whose heavier passenger weights total 11. No Cargo,
 InitialUnits, MaxWeight or passenger price changes are included.
+
+The dated `band-scope-20260911.json` and checkpoint cargo reports are historical
+diagnostics from before the accepted passenger-price batch; their old unresolved
+rows are not current evidence. The current cargo state is the direct
+`cargo_pricing.authored_load` result recorded above and is covered by the focused
+contract in this batch.
 
 ## Playtest focus
 

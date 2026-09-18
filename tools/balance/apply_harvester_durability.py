@@ -124,6 +124,7 @@ EXPECTED_OLD = {
 class ActorEditor:
     def __init__(self, path: pathlib.Path):
         raw = path.read_bytes()
+        self.original = raw
         self.bom = raw.startswith(b"\xef\xbb\xbf")
         text = raw.decode("utf-8-sig")
         self.crlf = "\r\n" in text
@@ -262,7 +263,7 @@ def main() -> int:
     for actor, (path, _, fields) in SPECS.items():
         by_file.setdefault(path, []).append((actor, fields))
     rc = 0
-    pending: list[tuple[pathlib.Path, bytes]] = []
+    pending: list[tuple[pathlib.Path, bytes, bytes]] = []
     for path, actors in by_file.items():
         ed = ActorEditor(path)
         for actor, fields in by_file[path]:
@@ -276,13 +277,13 @@ def main() -> int:
                 print(f"   PROBLEM {p}")
             print(f"   REFUSED WRITING {path}")
             continue
-        pending.append((path, ed.content()))
+        pending.append((path, ed.original, ed.content()))
     if rc:
         print("REFUSED WRITING: at least one file failed validation; no batch files were written")
         return rc
-    transaction = Transaction({path: path.read_bytes() for path, _ in pending})
+    transaction = Transaction({path: original for path, original, _ in pending})
     try:
-        for path, content in pending:
+        for path, _, content in pending:
             transaction.write(path, content)
     except BaseException as error:
         conflicts = transaction.rollback()
