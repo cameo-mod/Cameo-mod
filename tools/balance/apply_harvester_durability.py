@@ -35,13 +35,11 @@ TurnSpeed follows the F8 law: 60->69 => 12->14, 75->77 => 15, 90->81
 Idempotent: every patched field must land on its listed pre-edit value
 (EXPECTED_OLD) or the script exits nonzero WITHOUT writing that file, so
 an unexpected yaml state is refused loudly instead of silently clobbered.
-This is NOT an apply_balance pass on purpose: the pipeline refuses
-inherited-src edits and carries no heal/repair fields at all
-(extract_stats cannot even read `ChangesHealth@SelfHealing` today), so
-this standalone, inspectable writer materializes the batch per actor
-instead. It does not use the apply_transaction rollback layer because
-it only ever writes whole known files whose diff is fully printed; the
-acceptance test resolves every resulting value and is the gate.
+This is NOT an apply_balance pass on purpose: inherited-src edits need
+per-actor materialization. This standalone writer validates every file
+before any replacement and uses the same transaction rollback layer as
+apply_balance; the acceptance test resolves every resulting value and is
+the gate.
  Dry/confirm distinction is not needed: this script only
 materializes the batch the reference map already computed; the commit
 carries the playtest report and Aedis's review is the gate.
@@ -51,6 +49,8 @@ from __future__ import annotations
 import pathlib
 import re
 import sys
+
+from apply_transaction import Transaction
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 
@@ -124,6 +124,7 @@ EXPECTED_OLD = {
 class ActorEditor:
     def __init__(self, path: pathlib.Path):
         raw = path.read_bytes()
+        self.original = raw
         self.bom = raw.startswith(b"\xef\xbb\xbf")
         text = raw.decode("utf-8-sig")
         self.crlf = "\r\n" in text
@@ -235,13 +236,10 @@ class ActorEditor:
         self.lines[at:at] = lines
         for key, want in fields.items():
             report.append(f"{name}.{key}: added {want}")
+        return len(lines)
 
     def apply(self, actor: str, fields: dict[str, dict[str, int]]):
         allowed = EXPECTED_OLD.get(actor, {})
-        patched = {
-            name.replace(".", "."): values
-            for name, values in allowed.items()
-        }
         report: list[str] = []
         block, end, indent = self.span(actor)
         # Patch existing children first (order-independent).
@@ -256,7 +254,7 @@ class ActorEditor:
                 self.patch_child(block, end, indent, name, remaining.pop(name), report, allow)
         # Insert the children the actor does not own yet.
         for name, vals in remaining.items():
-            self.insert_child(actor, block, end, indent, name, vals, report)
+            end += self.insert_child(actor, block, end, indent, name, vals, report)
         return report
 
 
@@ -265,6 +263,7 @@ def main() -> int:
     for actor, (path, _, fields) in SPECS.items():
         by_file.setdefault(path, []).append((actor, fields))
     rc = 0
+    pending: list[tuple[pathlib.Path, bytes, bytes]] = []
     for path, actors in by_file.items():
         ed = ActorEditor(path)
         for actor, fields in by_file[path]:
@@ -278,7 +277,20 @@ def main() -> int:
                 print(f"   PROBLEM {p}")
             print(f"   REFUSED WRITING {path}")
             continue
-        path.write_bytes(ed.content())
+        pending.append((path, ed.original, ed.content()))
+    if rc:
+        print("REFUSED WRITING: at least one file failed validation; no batch files were written")
+        return rc
+    transaction = Transaction({path: original for path, original, _ in pending})
+    try:
+        for path, _, content in pending:
+            transaction.write(path, content)
+    except BaseException as error:
+        conflicts = transaction.rollback()
+        print(f"REFUSED WRITING: transaction failed: {error}")
+        if conflicts:
+            print("ROLLBACK CONFLICTS:", ", ".join(conflicts))
+        return 1
     return rc
 
 
