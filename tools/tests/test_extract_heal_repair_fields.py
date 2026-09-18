@@ -67,9 +67,14 @@ class ExtractHealRepairFieldsTests(unittest.TestCase):
                 self.assertIn("#ChangesHealth.Step", row["self_heal_step_other"]["src"])
 
     def test_bare_only_actor_keeps_the_applyable_canonical_key(self):
-        row = self.row("devastator")
-        self.assertEqual("60", row["self_heal_step"]["v"])
-        self.assertIn("#ChangesHealth.Step", row["self_heal_step"]["src"])
+        actor = "devastator"
+        row = self.row(actor)
+        slot = row["self_heal_step"]
+        self.assertIn("#ChangesHealth.Step", slot["src"])
+        self.assertEqual(
+            str(self.rules.resolve(actor).child("ChangesHealth").get("Step")),
+            slot["v"],
+        )
         self.assertNotIn("self_heal_step_other", row)
 
 
