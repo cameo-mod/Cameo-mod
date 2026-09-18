@@ -121,7 +121,15 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "30000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "240"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -223,6 +231,10 @@
      "SCZergInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "20"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -304,6 +316,10 @@
      "SCZergInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "40"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -411,6 +427,10 @@
      "SCZergInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "100"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -546,6 +566,10 @@
      "SCZergInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "24"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -627,6 +651,10 @@
      "SCZergInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "150"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -732,6 +760,10 @@
      "SCZergInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "60"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -855,6 +887,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "16"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -913,6 +949,10 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1007,6 +1047,10 @@
      "SCZergInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1086,6 +1130,10 @@
      "SCZergInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2048,6 +2096,10 @@
      "RABuilding"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2205,6 +2257,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2363,6 +2419,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2520,6 +2580,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2598,6 +2662,10 @@
      "SCZergInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "80"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -2722,6 +2790,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "80"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -2797,6 +2869,10 @@
      "RAVehicle"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "60"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2881,6 +2957,10 @@
      "SCZergInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "300"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2969,6 +3049,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "14"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3122,6 +3206,10 @@
      "SCZergInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "40"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -3277,6 +3365,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "40"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3358,6 +3450,10 @@
      "SCZergInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "32"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3438,6 +3534,10 @@
      "SCZergInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "160"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3535,6 +3635,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "11"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4286,6 +4390,10 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "2250"
+    },
     "resolved_firepower_modifiers": [
      {
       "modifier": 25,
@@ -4294,6 +4402,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "18"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -4384,6 +4496,10 @@
      "SCZergInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "60"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4446,6 +4562,14 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "15000"
+    },
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "120"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4595,6 +4719,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "150"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4686,6 +4814,10 @@
      "SCZergInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4799,6 +4931,10 @@
      "SCZergInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"

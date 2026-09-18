@@ -91,7 +91,17 @@ td_nod_mobileconstructionvehicle:
 		Image: mcv
 	ActorStatValues:
 		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics
-
+	ChangesHealth@SelfHealing:
+		Step: 118
+	Repairable:
+		HpPerStep: 14750
+	Health:
+		HP: 295000
+	Mobile:
+		Speed: 65
+		TurnSpeed: 13
+	Valued:
+		Cost: 4920
 td_nod_tiberiumharvester:
 	Inherits: ^TDHARV
 	Inherits@GuerillaTactics: ^GuerillaTactics

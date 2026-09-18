@@ -279,7 +279,17 @@ ra1_allies_alliedmobileconstructionvehicle:
 		VoiceSet: RAVehicleVoice
 	ActorStatValues:
 		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
-
+	ChangesHealth@SelfHealing:
+		Step: 102
+	Repairable:
+		HpPerStep: 12750
+	Health:
+		HP: 255000
+	Mobile:
+		Speed: 70
+		TurnSpeed: 14
+	Valued:
+		Cost: 4650
 ra1_allies_ranger:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
@@ -891,22 +901,22 @@ ra1_allies_mobilegapgenerator:
 	Tooltip:
 		Name: Mobile Gap Generator
 	Valued:
-		Cost: 5000
+		Cost: 1640
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
-		HP: 25000
+		HP: 95000
 	Repairable:
-		HpPerStep: 1250
+		HpPerStep: 4750
 	ChangesHealth@SelfHealing:
-		Step: 10
+		Step: 38
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 1
 	Armor:
 		Type: Light
 	Mobile:
-		Speed: 75
+		Speed: 76
 		TurnSpeed: 30
 	Targetable@Epic:
 		TargetTypes: Epic
@@ -967,7 +977,7 @@ ra1_allies_mobileradarjammer:
 	Inherits@ChronoArmor: ^ChronoArmor
 	-ExternalCondition@lockon:
 	Valued:
-		Cost: 5000
+		Cost: 1710
 	Tooltip:
 		Name: Mobile Radar Jammer
 	UpdatesPlayerStatistics:
@@ -980,19 +990,19 @@ ra1_allies_mobileradarjammer:
 		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ~ra1_allies_promotion_gapgeneratorandradarjammer
 		Description: actor_mrj.description
 	Health:
-		HP: 25000
+		HP: 70000
 	Repairable:
-		HpPerStep: 1250
+		HpPerStep: 3500
 	ChangesHealth@SelfHealing:
-		Step: 10
+		Step: 28
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 1
 	Armor:
 		Type: Light
 	Mobile:
-		Speed: 100
-		TurnSpeed: 40
+		Speed: 74
+		TurnSpeed: 30
 	Targetable@Epic:
 		TargetTypes: Epic
 	TooltipExtras@Epic:

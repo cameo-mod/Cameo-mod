@@ -1036,7 +1036,12 @@ def extract_actor(rs, key: str, section: str,
             ("cargo_types", "Cargo", "Types"),
             ("cargo_requires", "Cargo", "RequiresCondition"),
             ("cargo_pause", "Cargo", "PauseOnCondition"),
-            ("self_heal_step", "ChangesHealth", "Step"),
+            # The named instance is the canonical self-heal layer. A bare
+            # ChangesHealth node is a separate engine instance and is kept
+            # separately when an actor carries both.
+            ("self_heal_step", "ChangesHealth@SelfHealing", "Step"),
+            ("self_heal_step_other", "ChangesHealth", "Step"),
+            ("repairable_hp_per_step", "Repairable", "HpPerStep"),
             # --- THE SURVIVABILITY LAYERS (E1, 2026-08-16) ---------------------------- #
             # Maintainer: *"shielded units and armored units need to have a price! it is
             # like extra survivability ... Extra shields and extra armor platings just make

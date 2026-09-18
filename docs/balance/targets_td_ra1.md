@@ -1,5 +1,11 @@
 # Reference targets — R4 synthesis (references + Cameo, one vote each)
 
+> ⚠ **SUPERSEDED as a value source (2026-09-18).** This document's `x -> y`
+> numbers are the older R4 synthesis generation. The authoritative target set
+> is now `docs/audit/latest/Cameo-reference-map-original-four-20260916.html`.
+> Keep these tables for method and provenance only; queue new applications from
+> the 20260916 map, not from these older numeric projections.
+
 ## td_gdi — 28 actors
 
 | actor | src | hp now | hp -> | speed now | speed -> | range now | range -> | dps now | dps -> | cost now | cost -> |

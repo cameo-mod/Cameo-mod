@@ -1004,7 +1004,17 @@ ra1_soviets_mobileconstructionvehicle:
 		VoiceSet: RussianVehicleVoice
 	ActorStatValues:
 		Upgrades: ra1_soviets_doctrine_heavyarmor, ra1_soviets_upgrade_stalinium
-
+	ChangesHealth@SelfHealing:
+		Step: 102
+	Repairable:
+		HpPerStep: 12750
+	Health:
+		HP: 255000
+	Mobile:
+		Speed: 70
+		TurnSpeed: 14
+	Valued:
+		Cost: 4650
 ra1_soviets_teslatank:
 	Inherits: ^Tank
 	Inherits@Template: ^FireSupportTemplate
