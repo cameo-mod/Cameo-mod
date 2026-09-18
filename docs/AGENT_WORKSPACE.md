@@ -35,6 +35,7 @@ and every other agent can see the same picture without asking. If your row is st
 |---|---|---|---|---|
 | **Claude-Local** | Opus 5, local CLI | `claude/weapon_inherit_audit_and_map` | the REFERENCE pipeline: `tools/balance/{assign_references,reference_targets,reference_distribution,reference_coverage,build_reference_report,faction_routes}.py`, `tools/reference/variant_pool.py` | ACTIVE 2026-09-13 |
 | **Codex (Astra)** | GPT-6, Blackrobe's host | `codex/recovery-pr345-merge-20260912`, `codex/overnight-integration-20260910` | INI/DTA extraction, evidence gates, the four-faction review pipeline, `tools/tests/` | ACTIVE 2026-09-13 |
+| **OpenCode** | GPT-5.6 Luna, local API | `claude/harvester-durability-classic-four-20260918`, `claude/extract-heal-repair-fields-20260918`, `claude/support-durability-classic-four-20260918`, `claude/transport-chassis-classic-four-20260918` | classic-four balance applications, ledger survivability/air-turn fields, and reviewable materializer scripts | ACTIVE 2026-09-18 |
 | Devin — Aurora | Devin AI | `devin/aurora/lane*` | AA range/audit lanes, extractor cargo | idle since 2026-09-08 |
 | Devin — Ember | Devin AI | `devin/ember/consortium-*` | Steel Consortium W24 stacks, class templates | idle since 2026-09-08 |
 | Devin — Nova | Devin AI | `devin/nova/*` | naming sweeps, AreaDamage class-2d, dead-field scales | idle since 2026-09-06 |
