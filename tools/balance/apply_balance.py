@@ -46,7 +46,8 @@ from miniyaml import load, load_manifest, Ruleset  # noqa: E402
 LEDGER = ROOT / "docs/balance"
 
 UNIT_FIELDS = ("cost", "hp", "speed", "speed_air", "turn_speed", "sight",
-               "build_limit", "build_duration", "self_heal_step")
+               "build_limit", "build_duration", "self_heal_step",
+               "repairable_hp_per_step")
 
 # W17 — `FirepowerMultiplier` is RETIRED as a fine-tuning knob, so the pipeline no
 # longer WRITES it. `extract_stats` still reads it (167 actors still carry one and
