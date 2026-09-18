@@ -1037,11 +1037,6 @@ def extract_actor(rs, key: str, section: str,
             ("cargo_types", "Cargo", "Types"),
             ("cargo_requires", "Cargo", "RequiresCondition"),
             ("cargo_pause", "Cargo", "PauseOnCondition"),
-            # The named instance is the canonical self-heal layer. A bare
-            # ChangesHealth node is a separate engine instance and is kept
-            # separately when an actor carries both.
-            ("self_heal_step", "ChangesHealth@SelfHealing", "Step"),
-            ("self_heal_step_other", "ChangesHealth", "Step"),
             ("repairable_hp_per_step", "Repairable", "HpPerStep"),
             # --- THE SURVIVABILITY LAYERS (E1, 2026-08-16) ---------------------------- #
             # Maintainer: *"shielded units and armored units need to have a price! it is
@@ -1068,6 +1063,18 @@ def extract_actor(rs, key: str, section: str,
         s = stat(resolved, local, trait, field)
         if s is not None:
             u[out_key] = s
+    # These are separate engine instances. Keep a named SelfHealing value as
+    # the canonical base-heal field; retain bare-only actors under that same
+    # applyable key, and preserve a simultaneous bare layer separately. Other
+    # named instances are ability/condition effects and remain excluded.
+    named_heal = stat(resolved, local, "ChangesHealth@SelfHealing", "Step")
+    bare_heal = stat(resolved, local, "ChangesHealth", "Step")
+    if named_heal is not None:
+        u["self_heal_step"] = named_heal
+        if bare_heal is not None:
+            u["self_heal_step_other"] = bare_heal
+    elif bare_heal is not None:
+        u["self_heal_step"] = bare_heal
     if buildable is not None:
         prereq = buildable.get("Prerequisites")
         if prereq:
