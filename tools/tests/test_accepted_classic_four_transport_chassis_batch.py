@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import pathlib
+import json
 import sys
 import unittest
 
@@ -40,6 +41,20 @@ class AcceptedClassicFourTransportChassisTests(unittest.TestCase):
                     str(step), actor.child("ChangesHealth@SelfHealing").get("Step")
                 )
                 self.assertEqual(str(repair), actor.child("Repairable").get("HpPerStep"))
+
+    def test_aircraft_turn_speed_is_in_the_raw_ledger(self):
+        for name, (_, _, _, turn, _, _) in TARGETS.items():
+            with self.subTest(actor=name):
+                hits = []
+                for path in (ROOT / "docs" / "balance").glob("*.json"):
+                    doc = json.loads(path.read_text(encoding="utf-8-sig"))
+                    for section in (doc.get("sections") or {}).values():
+                        if name in section:
+                            hits.append(section[name])
+                self.assertEqual(1, len(hits))
+                slot = hits[0].get("turn_speed_air")
+                self.assertEqual(str(turn), slot["v"])
+                self.assertTrue(slot["src"].endswith("#Aircraft.TurnSpeed"))
 
 
 if __name__ == "__main__":

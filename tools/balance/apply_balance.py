@@ -45,7 +45,7 @@ from miniyaml import load, load_manifest, Ruleset  # noqa: E402
 
 LEDGER = ROOT / "docs/balance"
 
-UNIT_FIELDS = ("cost", "hp", "speed", "speed_air", "turn_speed", "sight",
+UNIT_FIELDS = ("cost", "hp", "speed", "speed_air", "turn_speed", "turn_speed_air", "sight",
                "build_limit", "build_duration", "self_heal_step",
                "repairable_hp_per_step")
 

@@ -17,6 +17,8 @@ HP uses the 1,000 grid. Speed and aircraft TurnSpeed follow the helicopter
 F19 law (`round(Speed / 5)`); self-heal uses the nearest integer to HP/2500,
 and repair uses HP/20. Every actor already owns its Aircraft, Health,
 Repairable and SelfHealing blocks, so no shared transport template is edited.
+`Aircraft.TurnSpeed` is also emitted as `turn_speed_air` in the raw ledger, so
+drift checks cover the field instead of relying only on the resolved contract.
 
 Cargo was inspected directly through `cargo_pricing.authored_load`: all four
 loads are valid and filled to capacity, including the Nod Chinook's eight
@@ -30,3 +32,13 @@ InitialUnits, MaxWeight or passenger price changes are included.
 - Check the faster/slower reach changes at factory state and during unload.
 - Treat any future transport cost change as a separate cargo-law decision with
   cross-carrier passenger-price impact.
+
+## Verification
+
+- Resolved transport contract: 1 test plus raw-ledger aircraft-turn coverage
+- Cargo pricing: 8/8, 11/11, 10/10 and 8/8 full authored loads; costs equal
+  passenger sums
+- `audit_balance_drift`: clean, 34 ledgers
+- `find_empty_warhead.py`: 0; `audit_stat_formulas.py`: no transport findings
+- `check_determinism.py`: 69/69 byte-identical
+- Boot gate: `MenuPostProcessEffect.PostWorldLoaded`, zero new exceptions

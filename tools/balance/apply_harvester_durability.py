@@ -35,13 +35,11 @@ TurnSpeed follows the F8 law: 60->69 => 12->14, 75->77 => 15, 90->81
 Idempotent: every patched field must land on its listed pre-edit value
 (EXPECTED_OLD) or the script exits nonzero WITHOUT writing that file, so
 an unexpected yaml state is refused loudly instead of silently clobbered.
-This is NOT an apply_balance pass on purpose: the pipeline refuses
-inherited-src edits and carries no heal/repair fields at all
-(extract_stats cannot even read `ChangesHealth@SelfHealing` today), so
-this standalone, inspectable writer materializes the batch per actor
-instead. It does not use the apply_transaction rollback layer because
-it only ever writes whole known files whose diff is fully printed; the
-acceptance test resolves every resulting value and is the gate.
+This is NOT an apply_balance pass on purpose: inherited-src edits still
+need per-actor materialization. The extract/apply pipeline now carries
+the named self-heal and repair fields, but it cannot materialize an
+inherited field. This standalone writer uses the same transaction layer
+as apply_balance and validates every file before any replacement.
  Dry/confirm distinction is not needed: this script only
 materializes the batch the reference map already computed; the commit
 carries the playtest report and Aedis's review is the gate.
@@ -51,6 +49,8 @@ from __future__ import annotations
 import pathlib
 import re
 import sys
+
+from apply_transaction import ApplyError, Transaction
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 
@@ -280,8 +280,16 @@ def main() -> int:
     if rc:
         print("REFUSED WRITING: at least one file failed validation; no batch files were written")
         return rc
-    for path, content in pending:
-        path.write_bytes(content)
+    transaction = Transaction({path: path.read_bytes() for path, _ in pending})
+    try:
+        for path, content in pending:
+            transaction.write(path, content)
+    except BaseException as error:
+        conflicts = transaction.rollback()
+        print(f"REFUSED WRITING: transaction failed: {error}")
+        if conflicts:
+            print("ROLLBACK CONFLICTS:", ", ".join(conflicts))
+        return 1
     return rc
 
 

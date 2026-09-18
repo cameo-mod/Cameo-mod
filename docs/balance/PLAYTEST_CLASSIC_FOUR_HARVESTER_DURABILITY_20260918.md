@@ -46,10 +46,9 @@ inherits from.
   five classic-four actors, the same override shape
   `td_nod_stealthharvester` and `ra1_soviets_heavyindustrialminer` already use.
 * `tools/balance/apply_harvester_durability.py` performs the edit (idempotent,
-  refuses nothing silently — it is a dry, inspectable script rather than an
-  `apply_balance` pass because the pipeline refuses inherited-src edits and does
-  not carry heal/repair fields at all; extract_stats cannot even read
-  `ChangesHealth@SelfHealing` today).
+  transaction-backed, and refuses unexpected pre-edit values). It remains a
+  separate materializer because `apply_balance` refuses inherited-src edits;
+  #405 now carries named self-heal and repair fields through the ledger.
 * Ordering-sensitive: inserted children land at the END of each actor block. A
   block's own children placed BEFORE `Inherits:` lose same-key merges to the
   template (observed on this batch during the first run; resolved values and
