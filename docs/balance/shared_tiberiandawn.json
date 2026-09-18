@@ -39,6 +39,14 @@
      "v": "100"
     },
     "name": "Chinook Transport",
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "5000"
+    },
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "40"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"

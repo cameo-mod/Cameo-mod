@@ -205,7 +205,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "6125"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "49"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -505,7 +513,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "3750"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "30"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -743,6 +759,10 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "1500"
+    },
     "resolved_firepower_modifiers": [
      {
       "modifier": 50,
@@ -751,6 +771,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "30"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1544,6 +1568,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1675,6 +1703,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1816,6 +1848,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2108,6 +2144,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "20"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (japan_upgrade_stealthsuitintegration || shieldgen || shielded)"
@@ -2285,6 +2325,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "75"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (japan_upgrade_stealthsuitintegration || shieldgen || shielded)"
@@ -2641,6 +2685,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "15"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (japan_upgrade_stealthsuitintegration || shieldgen || shielded)"
@@ -2849,6 +2897,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "15"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (japan_upgrade_stealthsuitintegration || shieldgen || shielded)"
@@ -3006,6 +3058,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "24"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (japan_upgrade_stealthsuitintegration || shieldgen || shielded)"
@@ -3243,6 +3299,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "35"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (japan_upgrade_stealthsuitintegration || shieldgen || shielded)"
@@ -3520,6 +3580,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "48"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (japan_upgrade_stealthsuitintegration || shieldgen || shielded)"
@@ -4512,7 +4576,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "2125"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "17"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4708,7 +4780,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "3250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "26"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4859,7 +4939,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "6500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "104"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4925,6 +5013,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "15000"
+    },
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "120"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4990,6 +5086,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "15000"
+    },
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "120"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5055,6 +5159,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "15000"
+    },
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "120"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5120,6 +5232,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "15000"
+    },
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "120"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5185,6 +5305,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "15000"
+    },
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "120"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5250,6 +5378,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "15000"
+    },
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "120"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5315,6 +5451,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "15000"
+    },
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "120"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5380,6 +5524,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "15000"
+    },
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "120"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5880,7 +6032,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "37500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "300"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6015,7 +6175,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "3000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "24"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6141,7 +6309,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "6000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "96"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6555,6 +6731,10 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "3250"
+    },
     "resolved_firepower_modifiers": [
      {
       "modifier": 50,
@@ -6563,6 +6743,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "26"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6708,7 +6892,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "5500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "44"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6773,6 +6965,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "15000"
+    },
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "120"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6836,6 +7036,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "3750"
+    },
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "30"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -6957,6 +7165,10 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "1875"
+    },
     "resolved_firepower_modifiers": [
      {
       "modifier": 33,
@@ -6965,6 +7177,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "15"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7493,7 +7709,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "32500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "260"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7626,7 +7850,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "1250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7721,7 +7953,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "150000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "1200"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7809,7 +8049,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "3000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "24"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7892,6 +8140,10 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "2500"
+    },
     "resolved_firepower_modifiers": [
      {
       "modifier": 50,
@@ -7900,6 +8152,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "20"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -8130,7 +8386,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "3000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "24"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"

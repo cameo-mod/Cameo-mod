@@ -1,6 +1,37 @@
 # Cameo — THE HANDOFF
 
-## ⭐⭐⭐ 2026-09-14 (latest) — NINE DUAL-ARMAMENT LAWS, AND THE MAP DEFECTS BEHIND THEM
+## 2026-09-18 — CLASSIC-FOUR HARVESTER DURABILITY BATCH (IN REVIEW)
+
+Owner: **opencode (GLM)**, by maintainer order ("I want the game playable... work on
+everything you can regarding this new balance project"). Upstream PR:
+**cameo-mod/Cameo-mod#404** (branch `claude/harvester-durability-classic-four-20260918`,
+commits `2ef633490` + `395911844`). The economy-unit slice the 2026-09-15 accepted batch
+explicitly held back, and the harvester-HP step AedisToru asked for in Discord the same
+day (04:58-05:02).
+
+* **Five actors** (reference-map targets, `Cameo-reference-map-original-four-20260916.html`,
+  chassis-only rows, weapons withheld by all sources — no warhead/Burst/BurstDelays touched):
+  td_gdi/td_nod tiberiumharvester HP 150k→240k Speed 60→69 Cost 1000→1670;
+  td_nod_stealthharvester 125k→175k / 75→77 / cost 1520;
+  ra1_allies/ra1_soviets oretruck 100k→210k / 90→81 / cost 1560.
+  Heal/repair steps scaled by the same HP ratio (F1/F2 exact); TurnSpeed follows F8:
+  TD pair 12→14, RA1 pair 18→16, stealth stays 15.
+* **Materialized per-actor overrides, NOT a template edit** — `^TDHARV` also feeds four
+  Tiberian Sun harvesters, `^RAHARV` also feeds japan's ore truck; both unmoved (pinned
+  by test).
+* **New trap, encoded**: a block's own children placed BEFORE `Inherits:` lose same-key
+  merges to the template (first pass was invisible to the resolver). Inserted children
+  belong at block END; the acceptance test resolves every value to prove it.
+* **Gates**: 24→4-class tests OK · `check_determinism` 69/69 byte-identical · no new
+  `audit_stat_formulas` findings · boot gate passed (0 new exception logs) · ledger
+  committed with yaml, drift clean · DeepSeek independent pre-review ACCEPT, findings
+  closed same branch (its comment is on the PR).
+* **Pipeline gap fixed in the stacked #405 line**: `extract_stats` now records the named
+  `ChangesHealth@SelfHealing` instance, keeps a separate bare-instance layer when an actor
+  carries both, and records `Repairable.HpPerStep`; `apply_balance.UNIT_FIELDS` carries the
+  repair field. Re-extract and drift both pass on the current stacked batch branch.
+
+## ⭐⭐⭐ 2026-09-14 (latest on master) — NINE DUAL-ARMAMENT LAWS, AND THE MAP DEFECTS BEHIND THEM
 
 Written by **Claude-Local (Opus 5)**. **ON MASTER** at `c834fa859` (PR #399, fast-forwarded on
 the maintainer's order over `1e9a38e78` / #394-#398). Map at **Version 33**. These commits write

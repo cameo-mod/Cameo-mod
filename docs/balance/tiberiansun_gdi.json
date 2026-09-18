@@ -158,7 +158,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "4000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "32"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -353,7 +361,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "45000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "360"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -481,6 +497,10 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "7625"
+    },
     "resolved_firepower_modifiers": [
      {
       "modifier": 25,
@@ -489,6 +509,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "61"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -605,7 +629,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "3125"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "25"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -720,7 +752,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "3500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "28"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1620,6 +1660,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1757,6 +1801,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1841,6 +1889,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1959,6 +2011,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2142,6 +2198,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "12"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2296,6 +2356,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "(td_nod_upgrade_cyberneticmodifications || shieldgen)"
@@ -2558,6 +2622,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "45"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -2652,6 +2720,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "34"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2761,6 +2833,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "16"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -2908,6 +2984,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3141,6 +3221,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "100"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3417,6 +3501,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "54"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3639,6 +3727,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3834,6 +3926,10 @@
      "RANaval"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "90"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4119,6 +4215,10 @@
      "RANaval"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "90"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4285,6 +4385,10 @@
      "RANaval"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4351,6 +4455,10 @@
      "Naval",
      "RANaval"
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "40"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4489,6 +4597,10 @@
     },
     "name": "Strike Orca",
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "4"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5003,7 +5115,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "4000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "32"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5127,7 +5247,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "12500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "100"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5241,7 +5369,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "1500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "12"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5352,7 +5488,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "1750"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "14"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5446,7 +5590,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "2500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "20"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5661,7 +5813,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "60000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "480"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5848,7 +6008,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "40000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "320"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5913,6 +6081,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "15000"
+    },
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "120"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6009,7 +6185,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "7500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "60"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6070,6 +6254,10 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "2637"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6160,7 +6348,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "1375"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "11"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6225,6 +6421,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "7500"
+    },
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "60"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -6358,7 +6562,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "5000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "40"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6488,7 +6700,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "6000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "48"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6616,7 +6836,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "1500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "12"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6743,7 +6971,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "2500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "20"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
