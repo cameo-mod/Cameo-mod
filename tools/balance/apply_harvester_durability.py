@@ -262,6 +262,7 @@ def main() -> int:
     for actor, (path, _, fields) in SPECS.items():
         by_file.setdefault(path, []).append((actor, fields))
     rc = 0
+    pending: list[tuple[pathlib.Path, bytes]] = []
     for path, actors in by_file.items():
         ed = ActorEditor(path)
         for actor, fields in by_file[path]:
@@ -275,7 +276,12 @@ def main() -> int:
                 print(f"   PROBLEM {p}")
             print(f"   REFUSED WRITING {path}")
             continue
-        path.write_bytes(ed.content())
+        pending.append((path, ed.content()))
+    if rc:
+        print("REFUSED WRITING: at least one file failed validation; no batch files were written")
+        return rc
+    for path, content in pending:
+        path.write_bytes(content)
     return rc
 
 

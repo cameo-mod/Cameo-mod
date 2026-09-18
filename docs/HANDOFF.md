@@ -26,10 +26,10 @@ day (04:58-05:02).
   `audit_stat_formulas` findings · boot gate passed (0 new exception logs) · ledger
   committed with yaml, drift clean · DeepSeek independent pre-review ACCEPT, findings
   closed same branch (its comment is on the PR).
-* **Pipeline gap left open on purpose** (for Aedis): `extract_stats.stat()` looks up the
-  literal key `ChangesHealth`, so `self_heal_step` is never emitted and
-  `Repairable.HpPerStep` is not in the schema at all — batches of this shape cannot ride
-  the ledger until that is fixed.
+* **Pipeline gap fixed in the stacked #405 line**: `extract_stats` now records the named
+  `ChangesHealth@SelfHealing` instance, keeps a separate bare-instance layer when an actor
+  carries both, and records `Repairable.HpPerStep`; `apply_balance.UNIT_FIELDS` carries the
+  repair field. Re-extract and drift both pass on the current stacked batch branch.
 
 ## ⭐⭐⭐ 2026-09-14 (latest on master) — NINE DUAL-ARMAMENT LAWS, AND THE MAP DEFECTS BEHIND THEM
 
