@@ -202,7 +202,11 @@ class ActorEditor:
             if old == str(want):
                 report.append(f"{name}.{key}: already {want}")
                 continue
-            if old not in allowed_old.get(f"{name}.{key}", ()):
+            # allowed_old is keyed by the SHORT field name (the caller builds
+            # it per (actor, child) from the actor-level EXPECTED_OLD rows);
+            # deriving the key back to `Actor.Field` here again would look up
+            # a key the caller never stored and refuse every pre-vector.
+            if old not in allowed_old.get(key, ()):
                 self.problems.append(
                     f"{name}.{key}: refusing to overwrite unexpected value {old!r}"
                 )
