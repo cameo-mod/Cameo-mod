@@ -121,6 +121,15 @@ number appears exactly as the yaml states it, with provenance:
 > the finding `DRIFT (raw)` or `DRIFT (model)`. The derived rows repeat only `slot` and
 > `weapon` as join keys — never a raw stat, so there is still exactly one copy of every
 > number. Spec: [`EFFECTIVE_DAMAGE.md`](EFFECTIVE_DAMAGE.md).
+
+> The raw unit fields also carry the survivability and aircraft-turn inputs that
+> must be auditable when a batch changes them: `self_heal_step` is the named
+> `ChangesHealth@SelfHealing.Step` value, falling back to a bare
+> `ChangesHealth.Step` for a bare-only actor; `self_heal_step_other` preserves a
+> simultaneous bare instance, `repairable_hp_per_step` is
+> `Repairable.HpPerStep`, and `turn_speed_air` is `Aircraft.TurnSpeed`.
+> Conditional or ability-specific `ChangesHealth@...` instances are deliberately
+> not folded into base self-heal.
 >
 > ⚠ Nothing consumes the derived tree yet — it is a read-only sidecar. `build_workbook.py`
 > never read the old in-ledger fields either. Wiring K into pricing is **W11**, behind a

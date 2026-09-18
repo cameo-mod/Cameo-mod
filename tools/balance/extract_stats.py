@@ -1036,11 +1036,6 @@ def extract_actor(rs, key: str, section: str,
             ("cargo_types", "Cargo", "Types"),
             ("cargo_requires", "Cargo", "RequiresCondition"),
             ("cargo_pause", "Cargo", "PauseOnCondition"),
-            # The named instance is the canonical self-heal layer. A bare
-            # ChangesHealth node is a separate engine instance and is kept
-            # separately when an actor carries both.
-            ("self_heal_step", "ChangesHealth@SelfHealing", "Step"),
-            ("self_heal_step_other", "ChangesHealth", "Step"),
             ("repairable_hp_per_step", "Repairable", "HpPerStep"),
             # --- THE SURVIVABILITY LAYERS (E1, 2026-08-16) ---------------------------- #
             # Maintainer: *"shielded units and armored units need to have a price! it is
@@ -1067,6 +1062,20 @@ def extract_actor(rs, key: str, section: str,
         s = stat(resolved, local, trait, field)
         if s is not None:
             u[out_key] = s
+    # `ChangesHealth@SelfHealing` and a bare `ChangesHealth` are separate
+    # engine instances. Keep the named instance as the canonical base
+    # self-heal. A bare-only actor still needs the canonical key so the balance
+    # writer can consume it; when both exist, preserve the bare layer under a
+    # separate key because both instances tick and their rates sum. Other
+    # named instances are ability/condition effects, not base self-heal.
+    named_heal = stat(resolved, local, "ChangesHealth@SelfHealing", "Step")
+    bare_heal = stat(resolved, local, "ChangesHealth", "Step")
+    if named_heal is not None:
+        u["self_heal_step"] = named_heal
+        if bare_heal is not None:
+            u["self_heal_step_other"] = bare_heal
+    elif bare_heal is not None:
+        u["self_heal_step"] = bare_heal
     if buildable is not None:
         prereq = buildable.get("Prerequisites")
         if prereq:
