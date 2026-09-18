@@ -1037,6 +1037,14 @@ def extract_actor(rs, key: str, section: str,
             ("cargo_requires", "Cargo", "RequiresCondition"),
             ("cargo_pause", "Cargo", "PauseOnCondition"),
             ("self_heal_step", "ChangesHealth", "Step"),
+            # The named instance most actors actually use (828 blocks at the
+            # time of writing vs 88 bare `ChangesHealth` blocks). Listed LAST so
+            # an actor carrying both keeps the instance's value, which is the
+            # meaningful self-heal. Batches before 2026-09-18 (PR #404) could
+            # not ride the ledger for this field at all: the harvester batch
+            # had to ship per-actor overrides annotated by hand.
+            ("self_heal_step", "ChangesHealth@SelfHealing", "Step"),
+            ("repairable_hp_per_step", "Repairable", "HpPerStep"),
             # --- THE SURVIVABILITY LAYERS (E1, 2026-08-16) ---------------------------- #
             # Maintainer: *"shielded units and armored units need to have a price! it is
             # like extra survivability ... Extra shields and extra armor platings just make
