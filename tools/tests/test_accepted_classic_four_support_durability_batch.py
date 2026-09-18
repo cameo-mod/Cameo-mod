@@ -15,12 +15,12 @@ from cameo_model import Model  # noqa: E402
 
 
 TARGETS = {
-    "td_gdi_mobileconstructionvehicle": (4920, 295000, 65, 13, 118, 14750, "Medium"),
-    "td_nod_mobileconstructionvehicle": (4920, 295000, 65, 13, 118, 14750, "Medium"),
-    "ra1_allies_alliedmobileconstructionvehicle": (4650, 255000, 70, 14, 102, 12750, "Medium"),
-    "ra1_soviets_mobileconstructionvehicle": (4650, 255000, 70, 14, 102, 12750, "Medium"),
-    "ra1_allies_mobilegapgenerator": (1640, 95000, 76, 30, 38, 4750, "Light"),
-    "ra1_allies_mobileradarjammer": (1710, 70000, 74, 30, 28, 3500, "Light"),
+    "td_gdi_mobileconstructionvehicle": (4920, 294000, 65, 13, 118, 14700, "Medium"),
+    "td_nod_mobileconstructionvehicle": (4920, 294000, 65, 13, 118, 14700, "Medium"),
+    "ra1_allies_alliedmobileconstructionvehicle": (4650, 253000, 70, 14, 101, 12650, "Medium"),
+    "ra1_soviets_mobileconstructionvehicle": (4650, 253000, 70, 14, 101, 12650, "Medium"),
+    "ra1_allies_mobilegapgenerator": (1640, 96000, 76, 30, 38, 4800, "Light"),
+    "ra1_allies_mobileradarjammer": (1710, 72000, 74, 30, 29, 3600, "Light"),
 }
 
 

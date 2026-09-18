@@ -23,20 +23,26 @@ are patched in place.
 
 | Actor | HP | Speed | TurnSpeed | Self-heal Step | HpPerStep | Cost |
 |---|---:|---:|---:|---:|---:|---:|
-| `td_gdi_mobileconstructionvehicle` | 300,000 -> **295,000** | 75 -> **65** | 15 -> **13** | 120 -> **118** | 15,000 -> **14,750** | 5,000 -> **4,920** |
-| `td_nod_mobileconstructionvehicle` | 300,000 -> **295,000** | 75 -> **65** | 15 -> **13** | 120 -> **118** | 15,000 -> **14,750** | 5,000 -> **4,920** |
-| `ra1_allies_alliedmobileconstructionvehicle` | 300,000 -> **255,000** | 75 -> **70** | 15 -> **14** | 120 -> **102** | 15,000 -> **12,750** | 5,000 -> **4,650** |
-| `ra1_soviets_mobileconstructionvehicle` | 300,000 -> **255,000** | 75 -> **70** | 15 -> **14** | 120 -> **102** | 15,000 -> **12,750** | 5,000 -> **4,650** |
-| `ra1_allies_mobilegapgenerator` | 25,000 -> **95,000** | 75 -> **76** | 30 -> **30** | 10 -> **38** | 1,250 -> **4,750** | 5,000 -> **1,640** |
-| `ra1_allies_mobileradarjammer` | 25,000 -> **70,000** | 100 -> **74** | 40 -> **30** | 10 -> **28** | 1,250 -> **3,500** | 5,000 -> **1,710** |
+| `td_gdi_mobileconstructionvehicle` | 300,000 -> **294,000** | 75 -> **65** | 15 -> **13** | 120 -> **118** | 15,000 -> **14,700** | 5,000 -> **4,920** |
+| `td_nod_mobileconstructionvehicle` | 300,000 -> **294,000** | 75 -> **65** | 15 -> **13** | 120 -> **118** | 15,000 -> **14,700** | 5,000 -> **4,920** |
+| `ra1_allies_alliedmobileconstructionvehicle` | 300,000 -> **253,000** | 75 -> **70** | 15 -> **14** | 120 -> **101** | 15,000 -> **12,650** | 5,000 -> **4,650** |
+| `ra1_soviets_mobileconstructionvehicle` | 300,000 -> **253,000** | 75 -> **70** | 15 -> **14** | 120 -> **101** | 15,000 -> **12,650** | 5,000 -> **4,650** |
+| `ra1_allies_mobilegapgenerator` | 25,000 -> **96,000** | 75 -> **76** | 30 -> **30** | 10 -> **38** | 1,250 -> **4,800** | 5,000 -> **1,640** |
+| `ra1_allies_mobileradarjammer` | 25,000 -> **72,000** | 100 -> **74** | 40 -> **30** | 10 -> **29** | 1,250 -> **3,600** | 5,000 -> **1,710** |
 
-HP uses the nearest 5,000 grid rather than the ordinary 1,000 grid so the
-vehicle formulas remain exact: `Repairable.HpPerStep = HP / 20` and
-`ChangesHealth@SelfHealing.Step = HP / 2500`. Speed is the nearest integer.
-Costs use the 10-credit grid with half-up handling at an exact 5-credit tie.
+HP uses the accepted 1,000 grid. `Repairable.HpPerStep` follows `HP / 20`
+exactly; `ChangesHealth@SelfHealing.Step` is the nearest integer to
+`HP / 2500`, matching the existing audit tolerance. Speed is the nearest
+integer. Costs use the 10-credit grid with half-up handling at an exact
+5-credit tie.
 TurnSpeed follows the resolved actor's existing formula: the MCVs follow
 `round(Speed / 5)`; the two support actors' existing doubled turn lane follows
 `2 * round(Speed / 5)`.
+
+The doubled support lane is not inferred from the actor name: both actors
+currently carry `AttackFrontal` support/dummy traits and no turret, which is
+why the audit selects F10 rather than F8. Removing those traits later would be
+a separate design change and would require revisiting their TurnSpeed values.
 
 ## Deliberately held rows
 
@@ -55,3 +61,8 @@ contracts before application.
   mobile stealth support the cheapest default opening.
 - Confirm the radar jammer's speed reduction is still usable while its larger
   health pool survives the approach to a frontline.
+
+`mods/cameo/rules/camea.yaml` contains a commented-out MCV that inherits the TD
+GDI MCV directly. It is inert in the current `mod.yaml` graph, but must be
+reviewed before Camea is re-enabled because it would intentionally inherit the
+TD-specific override.

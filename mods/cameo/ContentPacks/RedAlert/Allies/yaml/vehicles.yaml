@@ -280,11 +280,11 @@ ra1_allies_alliedmobileconstructionvehicle:
 	ActorStatValues:
 		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
 	ChangesHealth@SelfHealing:
-		Step: 102
+		Step: 101
 	Repairable:
-		HpPerStep: 12750
+		HpPerStep: 12650
 	Health:
-		HP: 255000
+		HP: 253000
 	Mobile:
 		Speed: 70
 		TurnSpeed: 14
@@ -905,9 +905,9 @@ ra1_allies_mobilegapgenerator:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
-		HP: 95000
+		HP: 96000
 	Repairable:
-		HpPerStep: 4750
+		HpPerStep: 4800
 	ChangesHealth@SelfHealing:
 		Step: 38
 		Delay: 1
@@ -990,11 +990,11 @@ ra1_allies_mobileradarjammer:
 		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ~ra1_allies_promotion_gapgeneratorandradarjammer
 		Description: actor_mrj.description
 	Health:
-		HP: 70000
+		HP: 72000
 	Repairable:
-		HpPerStep: 3500
+		HpPerStep: 3600
 	ChangesHealth@SelfHealing:
-		Step: 28
+		Step: 29
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 1

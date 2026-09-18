@@ -7,14 +7,10 @@ RA1's two unarmed support vehicles). Reuses the harvester batch's
 ActorEditor verbatim; the module-level EXPECTED_OLD is swapped for this
 batch's table before use.
 
-Grids (accepted-batch conventions with one documented deviation):
-    HP  -> 5,000 grid DEViation note: the accepted-batch rule is the
-           1,000 grid, but the F2 identity (ChangesHealth@SelfHealing
-           .Step == HP/2500) is exact only on multiples of 2,500, and the
-           F1 identity (Repairable.HpPerStep == HP/20) on multiples of
-           20. 5,000 is the nearest common grid satisfying both; the
-           harvester batch could use the 1,000 grid because its targets
-           happened to divide exactly.
+Grids follow the accepted-batch conventions: HP -> 1,000 grid, Speed ->
+integer, and Cost -> 10 grid. Heal/repair values use the nearest integer
+to the existing F1/F2 formulas; the audit's established tolerance covers
+the fractional HP/2500 result on a 1,000-grid HP value.
     Speed -> integer (unsnapped rounded half-up)
     Cost -> 10 grid, half-up on exact 5s (1,705 -> 1,710)
     TurnSpeed follows the audit formula the actor currently obeys:
@@ -25,17 +21,17 @@ Grids (accepted-batch conventions with one documented deviation):
 
 Batch table (unsnapped map target -> applied):
     td_gdi/nod_mobileconstructionvehicle
-        HP 293,935 -> 295,000  speed 64.72 -> 65  turn 15 -> 13
-        step 120 -> 118  hpp 15,000 -> 14,750  cost 5,000 -> 4,920
+        HP 293,935 -> 294,000  speed 64.72 -> 65  turn 15 -> 13
+        step 120 -> 118  hpp 15,000 -> 14,700  cost 5,000 -> 4,920
     ra1_allies/soviets mobileconstructionvehicle
-        HP 252,864 -> 255,000  speed 69.53 -> 70  turn 15 -> 14
-        step 120 -> 102  hpp 15,000 -> 12,750  cost 5,000 -> 4,650
+        HP 252,864 -> 253,000  speed 69.53 -> 70  turn 15 -> 14
+        step 120 -> 101  hpp 15,000 -> 12,650  cost 5,000 -> 4,650
     ra1_allies_mobilegapgenerator
-        HP 96,282 -> 95,000  speed 75.63 -> 76  turn 30 -> 30
-        step 10 -> 38  hpp 1,250 -> 4,750  cost 5,000 -> 1,640
+        HP 96,282 -> 96,000  speed 75.63 -> 76  turn 30 -> 30
+        step 10 -> 38  hpp 1,250 -> 4,800  cost 5,000 -> 1,640
     ra1_allies_mobileradarjammer
-        HP 71,989 -> 70,000  speed 73.62 -> 74  turn 40 -> 30
-        step 10 -> 28  hpp 1,250 -> 3,500  cost 5,000 -> 1,710
+        HP 71,989 -> 72,000  speed 73.62 -> 74  turn 40 -> 30
+        step 10 -> 29  hpp 1,250 -> 3,600  cost 5,000 -> 1,710
 
 The four chinook/HIP transports and any passenger-carried actor are
 EXCLUDED on purpose: dropping their cost touches the passenger-sum
@@ -65,21 +61,21 @@ def _mcv(hp: int, speed: int, turn: int, cost: int) -> dict[str, dict[str, int]]
         "Mobile": {"Speed": speed, "TurnSpeed": turn},
         "Health": {"HP": hp},
         "Repairable": {"HpPerStep": hp // 20},
-        "ChangesHealth@SelfHealing": {"Step": hp // 2500},
+        "ChangesHealth@SelfHealing": {"Step": round(hp / 2500)},
     }
 
 
 SPECS = {
-    "td_gdi_mobileconstructionvehicle": (TD_VEH, None, _mcv(295000, 65, 13, 4920)),
-    "td_nod_mobileconstructionvehicle": (TD_NOD_VEH, None, _mcv(295000, 65, 13, 4920)),
-    "ra1_allies_alliedmobileconstructionvehicle": (RA_AIR_VEH, None, _mcv(255000, 70, 14, 4650)),
-    "ra1_soviets_mobileconstructionvehicle": (RA_SOV_VEH, None, _mcv(255000, 70, 14, 4650)),
+    "td_gdi_mobileconstructionvehicle": (TD_VEH, None, _mcv(294000, 65, 13, 4920)),
+    "td_nod_mobileconstructionvehicle": (TD_NOD_VEH, None, _mcv(294000, 65, 13, 4920)),
+    "ra1_allies_alliedmobileconstructionvehicle": (RA_AIR_VEH, None, _mcv(253000, 70, 14, 4650)),
+    "ra1_soviets_mobileconstructionvehicle": (RA_SOV_VEH, None, _mcv(253000, 70, 14, 4650)),
     "ra1_allies_mobilegapgenerator": (
         RA_AIR_VEH,
         None,
         {"Mobile": {"Speed": 76, "TurnSpeed": 30},
-         "Health": {"HP": 95000},
-         "Repairable": {"HpPerStep": 4750},
+         "Health": {"HP": 96000},
+         "Repairable": {"HpPerStep": 4800},
          "ChangesHealth@SelfHealing": {"Step": 38},
          "Valued": {"Cost": 1640}},
     ),
@@ -87,9 +83,9 @@ SPECS = {
         RA_AIR_VEH,
         None,
         {"Mobile": {"Speed": 74, "TurnSpeed": 30},
-         "Health": {"HP": 70000},
-         "Repairable": {"HpPerStep": 3500},
-         "ChangesHealth@SelfHealing": {"Step": 28},
+         "Health": {"HP": 72000},
+         "Repairable": {"HpPerStep": 3600},
+         "ChangesHealth@SelfHealing": {"Step": 29},
          "Valued": {"Cost": 1710}},
     ),
 }
@@ -115,10 +111,15 @@ EXPECTED_OLD = {
 
 
 def main() -> int:
-    Editor.EXPECTED_OLD = EXPECTED_OLD
-    Editor.SPECS = SPECS
-    rc = Editor.main()
-    return rc
+    old_expected = Editor.EXPECTED_OLD
+    old_specs = Editor.SPECS
+    try:
+        Editor.EXPECTED_OLD = EXPECTED_OLD
+        Editor.SPECS = SPECS
+        return Editor.main()
+    finally:
+        Editor.EXPECTED_OLD = old_expected
+        Editor.SPECS = old_specs
 
 
 if __name__ == "__main__":

@@ -235,13 +235,10 @@ class ActorEditor:
         self.lines[at:at] = lines
         for key, want in fields.items():
             report.append(f"{name}.{key}: added {want}")
+        return len(lines)
 
     def apply(self, actor: str, fields: dict[str, dict[str, int]]):
         allowed = EXPECTED_OLD.get(actor, {})
-        patched = {
-            name.replace(".", "."): values
-            for name, values in allowed.items()
-        }
         report: list[str] = []
         block, end, indent = self.span(actor)
         # Patch existing children first (order-independent).
@@ -256,7 +253,7 @@ class ActorEditor:
                 self.patch_child(block, end, indent, name, remaining.pop(name), report, allow)
         # Insert the children the actor does not own yet.
         for name, vals in remaining.items():
-            self.insert_child(actor, block, end, indent, name, vals, report)
+            end += self.insert_child(actor, block, end, indent, name, vals, report)
         return report
 
 
