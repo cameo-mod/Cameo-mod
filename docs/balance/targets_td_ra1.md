@@ -1,5 +1,11 @@
 # Reference targets — R4 synthesis (references + Cameo, one vote each)
 
+> **SUPERSEDED as a value source (2026-09-18).** These `x -> y` numbers are
+> the older R4 synthesis generation. Use the newest published reference map,
+> `docs/audit/latest/Cameo-reference-map-original-four-20260916.html`, for
+> numeric applications. Keep this document for method and provenance only;
+> do not queue a new batch from its stale projections.
+
 > ⚠ **SUPERSEDED as a value source (2026-09-18).** This document's `x -> y`
 > numbers are the older R4 synthesis generation. The authoritative target set
 > is now `docs/audit/latest/Cameo-reference-map-original-four-20260916.html`.
