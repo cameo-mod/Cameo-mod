@@ -255,14 +255,14 @@ ra1_allies_alliedchinooktransport:
 		AddToArmyValue: true
 		OverrideActor: ra1_allies_alliedchinooktransport
 	Aircraft:
-		TurnSpeed: 25
-		Speed: 125
+		TurnSpeed: 24
+		Speed: 120
 	Health:
-		HP: 125000
+		HP: 88000
 	Repairable:
-		HpPerStep: 6250
+		HpPerStep: 4400
 	ChangesHealth@SelfHealing:
-		Step: 50
+		Step: 35
 	WithIdleOverlay@ROTOR1AIR:
 		Offset: 597,0,213
 		Sequence: rotor
