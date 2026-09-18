@@ -43,7 +43,8 @@ all 24 baseline failure/error signatures; the later OpenRA repair needs its own 
 - [x] `ScaledSelfHeal` trait — ticks-to-full, applied per tick with a carried fraction,
   linear ramp over 125 ticks replacing `DamageCooldown`. Built, boot-gated, shipped
   **INERT** (`4afa00095`).
-- [ ] **Convert the 892 `ChangesHealth@SelfHealing` nodes.** DELEGATED and split four ways —
+- [ ] **Convert the remaining 836 authored `ChangesHealth@SelfHealing` nodes (measured
+  2026-09-18; the former 892 count is stale).** DELEGATED and split four ways —
   `Cameo-mod-fleet/TASK_2026-09-07_regen_conversion.md`. Everything lands on
   `devin/regen/conversion`; Claude-Local flips `defaults.yaml` LAST and merges whole,
   because deleting overrides first leaves a flat `Step: 10` and flipping first

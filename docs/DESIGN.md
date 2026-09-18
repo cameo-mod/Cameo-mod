@@ -2920,10 +2920,13 @@ per-step amount, and it is applied **every tick**:
   since the last damage: 0 at the moment of the hit, full at 5 s, linear between. Shields use
   250. The old `DamageCooldown` (10 vehicles / 20 infantry) is retired.
 * **Always on while damaged** — `StartIfBelow: 100`, as `defaults.yaml` already sets.
-* **ONE global inherit.** The rate belongs to `^InfantryBuffs` / `^VehicleBuffs` /
-  `^AircraftBuffs` / `^ShipBuffs` in `defaults.yaml`. **The 883 per-actor
-  `ChangesHealth@SelfHealing` overrides are deleted** — they existed only to write `HP/2500`
-  per actor, which the trait now derives.
+* **ONE global inherit is the target state, not the current migration state.** The rate
+  belongs to `^InfantryBuffs` / `^VehicleBuffs` / `^AircraftBuffs` / `^ShipBuffs` in
+  `defaults.yaml`. The current tree still carries **836 authored
+  `ChangesHealth@SelfHealing` nodes** (measured 2026-09-18); their conversion remains
+  open in the roadmap. Do not delete those overrides until the conversion batch has
+  landed and its playtest proves the global trait is active. The raw ledger now records
+  the named Step and `Repairable.HpPerStep` so interim batches cannot lose them.
 
 ⚠ **What was already correct, and was nearly "fixed" by mistake.** `defaults.yaml` sets
 `Delay: 1` for vehicles/aircraft/ships and `Delay: 2` for infantry. Reading only the ContentPack
