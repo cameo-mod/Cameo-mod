@@ -84,9 +84,14 @@ class ExtractHealRepairFieldsTests(unittest.TestCase):
                     actor, "repairable_hp_per_step", "Repairable", "HpPerStep")
 
     def test_bare_only_heal_keeps_the_canonical_key(self):
-        row = self.ledger_row("devastator")[1]
-        self.assertEqual("60", row["self_heal_step"]["v"])
-        self.assertIn("#ChangesHealth.Step", row["self_heal_step"]["src"])
+        actor = "devastator"
+        row = self.ledger_row(actor)[1]
+        slot = row["self_heal_step"]
+        self.assertIn("#ChangesHealth.Step", slot["src"])
+        self.assertEqual(
+            str(self.rules.resolve(actor).child("ChangesHealth").get("Step")),
+            slot["v"],
+        )
         self.assertNotIn("self_heal_step_other", row)
 
     def test_conditional_named_heal_is_not_misclassified_as_base_heal(self):
