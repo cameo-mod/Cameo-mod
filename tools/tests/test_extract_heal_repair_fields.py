@@ -83,6 +83,18 @@ class ExtractHealRepairFieldsTests(unittest.TestCase):
                 self.assert_slot_tracks_yaml(
                     actor, "repairable_hp_per_step", "Repairable", "HpPerStep")
 
+    def test_bare_only_heal_keeps_the_canonical_key(self):
+        row = self.ledger_row("devastator")[1]
+        self.assertEqual("60", row["self_heal_step"]["v"])
+        self.assertIn("#ChangesHealth.Step", row["self_heal_step"]["src"])
+        self.assertNotIn("self_heal_step_other", row)
+
+    def test_conditional_named_heal_is_not_misclassified_as_base_heal(self):
+        row = self.ledger_row("cabal_coredefender")[1]
+        self.assertIn("self_heal_step", row)
+        self.assertIn("#ChangesHealth@SelfHealing.Step", row["self_heal_step"]["src"])
+        self.assertNotIn("self_heal_step_other", row)
+
     def test_actors_carrying_both_instances_keep_both_layers(self):
         """The bare `ChangesHealth` trait is a separate engine instance and
         both tick independently, so the raw ledger must keep the second

@@ -1036,16 +1036,6 @@ def extract_actor(rs, key: str, section: str,
             ("cargo_types", "Cargo", "Types"),
             ("cargo_requires", "Cargo", "RequiresCondition"),
             ("cargo_pause", "Cargo", "PauseOnCondition"),
-            # The named instance most actors actually use. Listed FIRST here,
-            # not last: the bare `ChangesHealth` trait is a SEPARATE trait
-            # instance in the engine and both tick independently, so an actor
-            # carrying both (~3 do: a StarCraft Protoss craft and two
-            # Tiberian Sun CABAL vehicles) heals by the SUM, and collapsing
-            # them into one key would silently drop a real heal layer.
-            # `self_heal_step` is the canonical named instance;
-            # `self_heal_step_other` keeps the bare one when present.
-            ("self_heal_step", "ChangesHealth@SelfHealing", "Step"),
-            ("self_heal_step_other", "ChangesHealth", "Step"),
             ("repairable_hp_per_step", "Repairable", "HpPerStep"),
             # --- THE SURVIVABILITY LAYERS (E1, 2026-08-16) ---------------------------- #
             # Maintainer: *"shielded units and armored units need to have a price! it is
@@ -1072,6 +1062,22 @@ def extract_actor(rs, key: str, section: str,
         s = stat(resolved, local, trait, field)
         if s is not None:
             u[out_key] = s
+    # `ChangesHealth@SelfHealing` and a bare `ChangesHealth` are separate
+    # engine instances. The named instance is the canonical base self-heal;
+    # when it is absent, preserve a bare-only actor under the canonical key so
+    # apply_balance consumers do not lose those actors. If both exist, retain
+    # the bare layer separately because both tick and their rates sum. Other
+    # named instances (@1, @TIBREPAIR, @AttackHeal, ...) are conditional or
+    # ability-specific effects, not the base self-heal, and stay out of this
+    # pair deliberately.
+    named_heal = stat(resolved, local, "ChangesHealth@SelfHealing", "Step")
+    bare_heal = stat(resolved, local, "ChangesHealth", "Step")
+    if named_heal is not None:
+        u["self_heal_step"] = named_heal
+        if bare_heal is not None:
+            u["self_heal_step_other"] = bare_heal
+    elif bare_heal is not None:
+        u["self_heal_step"] = bare_heal
     if buildable is not None:
         prereq = buildable.get("Prerequisites")
         if prereq:
