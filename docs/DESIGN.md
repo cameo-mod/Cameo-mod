@@ -1262,7 +1262,11 @@ cheapest provider wins).
 
 ### Transport cargo pricing (proposal policy, 2026-09-11)
 
-All unit and passenger prices use the **10-credit grid for now**. Naval
+Ordinary unit and passenger prices use the **10-credit grid for now**. A
+loaded carrier is an explicit exception: its `Valued.Cost` is the exact
+integer sum of its authored passenger prices after capacity validation, so a
+carrier total may be off the 10-credit grid (for example, the current Nod
+Chinook is 3,853). Naval
 transports have no `InitialUnits` payload and are excluded from the loaded-price
 rule; an empty starting naval payload does **not** authorize changing an
 existing `MaxWeight` value. Air transports such as Chinooks use one of each
