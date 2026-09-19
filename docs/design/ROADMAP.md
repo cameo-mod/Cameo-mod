@@ -43,7 +43,8 @@ all 24 baseline failure/error signatures; the later OpenRA repair needs its own 
 - [x] `ScaledSelfHeal` trait — ticks-to-full, applied per tick with a carried fraction,
   linear ramp over 125 ticks replacing `DamageCooldown`. Built, boot-gated, shipped
   **INERT** (`4afa00095`).
-- [ ] **Convert the 892 `ChangesHealth@SelfHealing` nodes.** DELEGATED and split four ways —
+- [ ] **Convert the remaining 836 authored `ChangesHealth@SelfHealing` nodes (measured
+  2026-09-18; the former 892 count is stale).** DELEGATED and split four ways —
   `Cameo-mod-fleet/TASK_2026-09-07_regen_conversion.md`. Everything lands on
   `devin/regen/conversion`; Claude-Local flips `defaults.yaml` LAST and merges whole,
   because deleting overrides first leaves a flat `Step: 10` and flipping first
@@ -575,8 +576,11 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
   contradicting `BALANCE_PIPELINE.md` §2; recommendation is to split them into
   `docs/balance/derived/`. Full spec + improvement roadmap:
   [`EFFECTIVE_DAMAGE.md`](EFFECTIVE_DAMAGE.md).
-- **[NEXT — needs a maintainer warhead order] Adopt the Sonic family.** `^Warhead_Sonic_*` now bakes
-  the `SonicDebuff` mark (`5a14355e6`), but **nothing inherits it**, so it is inert. Candidates:
+- **[IN FLIGHT — needs a maintainer warhead order for the remaining candidates] Adopt the Sonic
+  family.** `^Warhead_Sonic_*` now bakes the `SonicDebuff` mark (`5a14355e6`), and the live
+  Disruptor upgrade `TSSonicZapWeaponSonic` already inherits `^Warhead_Sonic_Heavy` and ships
+  the debuff. Remaining candidates still sit on legacy families and require per-weapon review;
+  do not bulk-reparent them. Candidates:
   TS GDI `TSSonicZapWeapon` / `TSSonicZapWeaponSonic` (the Disruptor — currently Tesla + Magic),
   the sonic UPGRADE variants `TSVulcanGunSonic` / `TSAssaultCannonSonic` / `TSAssaultCannonTalSonic` /
   `TSHellfireSonic` / `TSZoneHellfireSonic` / `TSBombSonic` / `TSGrenadeSonic` / `KodiakCannonSonic`
