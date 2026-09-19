@@ -576,8 +576,11 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
   contradicting `BALANCE_PIPELINE.md` §2; recommendation is to split them into
   `docs/balance/derived/`. Full spec + improvement roadmap:
   [`EFFECTIVE_DAMAGE.md`](EFFECTIVE_DAMAGE.md).
-- **[NEXT — needs a maintainer warhead order] Adopt the Sonic family.** `^Warhead_Sonic_*` now bakes
-  the `SonicDebuff` mark (`5a14355e6`), but **nothing inherits it**, so it is inert. Candidates:
+- **[IN FLIGHT — needs a maintainer warhead order for the remaining candidates] Adopt the Sonic
+  family.** `^Warhead_Sonic_*` now bakes the `SonicDebuff` mark (`5a14355e6`), and the live
+  Disruptor upgrade `TSSonicZapWeaponSonic` already inherits `^Warhead_Sonic_Heavy` and ships
+  the debuff. Remaining candidates still sit on legacy families and require per-weapon review;
+  do not bulk-reparent them. Candidates:
   TS GDI `TSSonicZapWeapon` / `TSSonicZapWeaponSonic` (the Disruptor — currently Tesla + Magic),
   the sonic UPGRADE variants `TSVulcanGunSonic` / `TSAssaultCannonSonic` / `TSAssaultCannonTalSonic` /
   `TSHellfireSonic` / `TSZoneHellfireSonic` / `TSBombSonic` / `TSGrenadeSonic` / `KodiakCannonSonic`
