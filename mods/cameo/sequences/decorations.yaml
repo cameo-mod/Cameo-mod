@@ -3302,7 +3302,7 @@ t01win.husk:
 		Tick: 80
 
 ####################################################################################################
-#	TD Civilian for CAMEO
+#	Temperat Civilians
 ####################################################################################################
 temv01:
 	Defaults:
@@ -3531,5 +3531,697 @@ temv18.husk:
 		Start: 1
 		ZOffset: -512
 ####################################################################################################
-#	TD Desert Civilian for CAMEO
+#	Snow Civilians
 ####################################################################################################
+snov01:
+	Defaults:
+		Filename: v01.sno
+	idle:
+	damaged-idle:
+		Start: 1
+
+snov01.husk:
+	Defaults:
+		Filename: v01.sno
+	idle:
+		Start: 1
+
+snov02:
+	Defaults:
+		Filename: v02.sno
+	idle:
+	damaged-idle:
+		Start: 1
+
+snov02.husk:
+	idle:
+		Filename: v02.sno
+		Start: 1
+
+snov03:
+	Defaults:
+		Filename: v03.sno
+	idle:
+	damaged-idle:
+		Start: 1
+
+
+snov03.husk:
+	idle:
+		Filename: v03.sno
+		Start: 1
+
+snov04:
+	Defaults:
+		Filename: v04.sno
+	idle:
+	damaged-idle:
+		Start: 1
+
+snov04.husk:
+	idle:
+		Filename: v04.sno
+		Start: 1
+
+snov05:
+	Defaults:
+		Filename: v05.sno
+	idle:
+	damaged-idle:
+		Start: 1
+
+snov05.husk:
+	idle:
+		Filename: v05.sno
+		Start: 1
+
+snov06:
+	Defaults:
+		Filename: v06.sno
+	idle:
+	damaged-idle:
+		Start: 1
+
+snov06.husk:
+	idle:
+		Filename: v06.sno
+		Start: 1
+
+snov07:
+	Defaults:
+		Filename: v07.sno
+	idle:
+	damaged-idle:
+		Start: 1
+
+snov07.husk:
+	idle:
+		Filename: v07.sno
+		Start: 1
+
+snov08:
+	Defaults:
+		Filename: v08.sno
+	idle:
+	damaged-idle:
+		Start: 1
+
+snov08.husk:
+	idle:
+		Filename: v08.sno
+		Start: 1
+
+snov09:
+	Defaults:
+		Filename: v09.sno
+	idle:
+	damaged-idle:
+		Start: 1
+
+snov09.husk:
+	idle:
+		Filename: v09.sno
+		Start: 1
+
+snov10:
+	Defaults:
+		Filename: v10.sno
+	idle:
+	damaged-idle:
+		Start: 1
+
+snov10.husk:
+	idle:
+		Filename: v10.sno
+		Start: 1
+
+snov11:
+	Defaults:
+		Filename: v11.sno
+	idle:
+	damaged-idle:
+		Start: 1
+
+snov11.husk:
+	idle:
+		Filename: v11.sno
+		Start: 1
+
+snov12:
+	Defaults:
+		Filename: v12.sno
+		ZOffset: -512
+	idle:
+	damaged-idle:
+		Start: 1
+
+
+snov12.husk:
+	idle:
+		Filename: v12.sno
+		Start: 1
+		ZOffset: -512
+snov13:
+	Defaults:
+		Filename: v13.sno
+		ZOffset: -512
+	idle:
+	damaged-idle:
+		Start: 1
+
+snov13.husk:
+	idle:
+		Filename: v13.sno
+		Start: 1
+		ZOffset: -512
+snov14:
+	Defaults:
+		Filename: v14.sno
+		ZOffset: -512
+	idle:
+	damaged-idle:
+		Start: 1
+
+snov14.husk:
+	idle:
+		Filename: v14.sno
+		Start: 1
+		ZOffset: -512
+snov15:
+	Defaults:
+		Filename: v15.sno
+		ZOffset: -512
+	idle:
+	damaged-idle:
+		Start: 1
+
+snov15.husk:
+	idle:
+		Filename: v15.sno
+		Start: 1
+		ZOffset: -512
+snov16:
+	Defaults:
+		Filename: v16.sno
+		ZOffset: -512
+	idle:
+	damaged-idle:
+		Start: 1
+
+snov16.husk:
+	idle:
+		Filename: v16.sno
+		Start: 1
+		ZOffset: -512
+snov17:
+	Defaults:
+		Filename: v17.sno
+		ZOffset: -512
+	idle:
+	damaged-idle:
+		Start: 1
+
+snov17.husk:
+	idle:
+		Filename: v17.sno
+		Start: 1
+		ZOffset: -512
+snov18:
+	Defaults:
+		Filename: v18.sno
+		ZOffset: -512
+	idle:
+	damaged-idle:
+		Start: 1
+
+snov18.husk:
+	idle:
+		Filename: v18.sno
+		Start: 1
+		ZOffset: -512
+####################################################################################################
+#	Winter Civilian
+####################################################################################################
+winv01:
+	Defaults:
+		Filename: v01.win
+	idle:
+	damaged-idle:
+		Start: 1
+
+winv01.husk:
+	Defaults:
+		Filename: v01.win
+	idle:
+		Start: 1
+
+winv02:
+	Defaults:
+		Filename: v02.win
+	idle:
+	damaged-idle:
+		Start: 1
+
+winv02.husk:
+	idle:
+		Filename: v02.win
+		Start: 1
+
+winv03:
+	Defaults:
+		Filename: v03.win
+	idle:
+	damaged-idle:
+		Start: 1
+
+winv03.husk:
+	idle:
+		Filename: v03.win
+		Start: 1
+
+winv04:
+	Defaults:
+		Filename: v04.win
+	idle:
+	damaged-idle:
+		Start: 1
+
+winv04.husk:
+	idle:
+		Filename: v04.win
+		Start: 1
+
+winv05:
+	Defaults:
+		Filename: v05.win
+	idle:
+	damaged-idle:
+		Start: 1
+
+winv05.husk:
+	idle:
+		Filename: v05.win
+		Start: 1
+
+winv06:
+	Defaults:
+		Filename: v06.win
+	idle:
+	damaged-idle:
+		Start: 1
+
+winv06.husk:
+	idle:
+		Filename: v06.win
+		Start: 1
+
+winv07:
+	Defaults:
+		Filename: v07.win
+	idle:
+	damaged-idle:
+		Start: 1
+
+winv07.husk:
+	idle:
+		Filename: v07.win
+		Start: 1
+
+winv08:
+	Defaults:
+		Filename: v08.win
+	idle:
+	damaged-idle:
+		Start: 1
+
+winv08.husk:
+	idle:
+		Filename: v08.win
+		Start: 1
+
+winv09:
+	Defaults:
+		Filename: v09.win
+	idle:
+	damaged-idle:
+		Start: 1
+
+winv09.husk:
+	idle:
+		Filename: v09.win
+		Start: 1
+
+winv10:
+	Defaults:
+		Filename: v10.win
+	idle:
+	damaged-idle:
+		Start: 1
+
+winv10.husk:
+	idle:
+		Filename: v10.win
+		Start: 1
+
+winv11:
+	Defaults:
+		Filename: v11.win
+	idle:
+	damaged-idle:
+		Start: 1
+
+winv11.husk:
+	idle:
+		Filename: v11.win
+		Start: 1
+
+winv12:
+	Defaults:
+		Filename: v12.win
+		ZOffset: -512
+	idle:
+	damaged-idle:
+		Start: 1
+
+winv12.husk:
+	idle:
+		Filename: v12.win
+		Start: 1
+		ZOffset: -512
+
+winv13:
+	Defaults:
+		Filename: v13.win
+		ZOffset: -512
+	idle:
+	damaged-idle:
+		Start: 1
+
+winv13.husk:
+	idle:
+		Filename: v13.win
+		Start: 1
+		ZOffset: -512
+
+winv14:
+	Defaults:
+		Filename: v14.win
+		ZOffset: -512
+	idle:
+	damaged-idle:
+		Start: 1
+
+winv14.husk:
+	idle:
+		Filename: v14.win
+		Start: 1
+		ZOffset: -512
+
+winv15:
+	Defaults:
+		Filename: v15.win
+		ZOffset: -512
+	idle:
+	damaged-idle:
+		Start: 1
+
+winv15.husk:
+	idle:
+		Filename: v15.win
+		Start: 1
+		ZOffset: -512
+
+winv16:
+	Defaults:
+		Filename: v16.win
+		ZOffset: -512
+	idle:
+	damaged-idle:
+		Start: 1
+
+winv16.husk:
+	idle:
+		Filename: v16.win
+		Start: 1
+		ZOffset: -512
+
+winv17:
+	Defaults:
+		Filename: v17.win
+		ZOffset: -512
+	idle:
+	damaged-idle:
+		Start: 1
+
+winv17.husk:
+	idle:
+		Filename: v17.win
+		Start: 1
+		ZOffset: -512
+
+winv18:
+	Defaults:
+		Filename: v18.win
+		ZOffset: -512
+	idle:
+	damaged-idle:
+		Start: 1
+
+winv18.husk:
+	idle:
+		Filename: v18.win
+		Start: 1
+		ZOffset: -512
+####################################################################################################
+#	Jungle Civilian
+####################################################################################################
+junv01:
+	Defaults:
+		Filename: v01.jun
+	idle:
+	damaged-idle:
+		Start: 1
+
+junv01.husk:
+	Defaults:
+		Filename: v01.jun
+	idle:
+		Start: 1
+
+junv02:
+	Defaults:
+		Filename: v02.jun
+	idle:
+	damaged-idle:
+		Start: 1
+
+junv02.husk:
+	idle:
+		Filename: v02.jun
+		Start: 1
+
+junv03:
+	Defaults:
+		Filename: v03.jun
+	idle:
+	damaged-idle:
+		Start: 1
+
+junv03.husk:
+	idle:
+		Filename: v03.jun
+		Start: 1
+
+junv04:
+	Defaults:
+		Filename: v04.jun
+	idle:
+	damaged-idle:
+		Start: 1
+
+junv04.husk:
+	idle:
+		Filename: v04.jun
+		Start: 1
+
+junv05:
+	Defaults:
+		Filename: v05.jun
+	idle:
+	damaged-idle:
+		Start: 1
+
+junv05.husk:
+	idle:
+		Filename: v05.jun
+		Start: 1
+
+junv06:
+	Defaults:
+		Filename: v06.jun
+	idle:
+	damaged-idle:
+		Start: 1
+
+junv06.husk:
+	idle:
+		Filename: v06.jun
+		Start: 1
+
+junv07:
+	Defaults:
+		Filename: v07.jun
+	idle:
+	damaged-idle:
+		Start: 1
+
+junv07.husk:
+	idle:
+		Filename: v07.jun
+		Start: 1
+
+junv08:
+	Defaults:
+		Filename: v08.jun
+	idle:
+	damaged-idle:
+		Start: 1
+
+junv08.husk:
+	idle:
+		Filename: v08.jun
+		Start: 1
+
+junv09:
+	Defaults:
+		Filename: v09.jun
+	idle:
+	damaged-idle:
+		Start: 1
+
+junv09.husk:
+	idle:
+		Filename: v09.jun
+		Start: 1
+
+junv10:
+	Defaults:
+		Filename: v10.jun
+	idle:
+	damaged-idle:
+		Start: 1
+
+junv10.husk:
+	idle:
+		Filename: v10.jun
+		Start: 1
+
+junv11:
+	Defaults:
+		Filename: v11.jun
+	idle:
+	damaged-idle:
+		Start: 1
+
+junv11.husk:
+	idle:
+		Filename: v11.jun
+		Start: 1
+
+junv12:
+	Defaults:
+		Filename: v12.jun
+		ZOffset: -512
+	idle:
+	damaged-idle:
+		Start: 1
+
+junv12.husk:
+	idle:
+		Filename: v12.jun
+		Start: 1
+		ZOffset: -512
+
+junv13:
+	Defaults:
+		Filename: v13.jun
+		ZOffset: -512
+	idle:
+	damaged-idle:
+		Start: 1
+
+junv13.husk:
+	idle:
+		Filename: v13.jun
+		Start: 1
+		ZOffset: -512
+
+junv14:
+	Defaults:
+		Filename: v14.jun
+		ZOffset: -512
+	idle:
+	damaged-idle:
+		Start: 1
+
+junv14.husk:
+	idle:
+		Filename: v14.jun
+		Start: 1
+		ZOffset: -512
+
+junv15:
+	Defaults:
+		Filename: v15.jun
+		ZOffset: -512
+	idle:
+	damaged-idle:
+		Start: 1
+
+junv15.husk:
+	idle:
+		Filename: v15.jun
+		Start: 1
+		ZOffset: -512
+
+junv16:
+	Defaults:
+		Filename: v16.jun
+		ZOffset: -512
+	idle:
+	damaged-idle:
+		Start: 1
+
+junv16.husk:
+	idle:
+		Filename: v16.jun
+		Start: 1
+		ZOffset: -512
+
+junv17:
+	Defaults:
+		Filename: v17.jun
+		ZOffset: -512
+	idle:
+	damaged-idle:
+		Start: 1
+
+junv17.husk:
+	idle:
+		Filename: v17.jun
+		Start: 1
+		ZOffset: -512
+
+junv18:
+	Defaults:
+		Filename: v18.jun
+		ZOffset: -512
+	idle:
+	damaged-idle:
+		Start: 1
+
+junv18.husk:
+	idle:
+		Filename: v18.jun
+		Start: 1
+		ZOffset: -512
