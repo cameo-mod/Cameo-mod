@@ -225,7 +225,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "25000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "200"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -245,6 +253,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "30"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "6"
     }
    },
    "terran_dropship": {
@@ -290,6 +302,14 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "6250"
+    },
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -309,6 +329,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "125"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "25"
     }
    },
    "terran_medivac": {
@@ -393,7 +417,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "6250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -413,6 +445,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "125"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "25"
     }
    },
    "terran_phobos": {
@@ -646,7 +682,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "50000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "400"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -666,6 +710,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "25"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "5"
     }
    },
    "terran_pythean": {
@@ -755,7 +803,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "20000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "160"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -775,6 +831,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "40"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "8"
     }
    },
    "terran_raven": {
@@ -853,7 +913,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "5000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "40"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -873,6 +941,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "100"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "20"
     }
    },
    "terran_sciencevessel": {
@@ -973,7 +1045,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "10000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "80"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -993,6 +1073,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "66"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "13"
     }
    },
    "terran_sundog": {
@@ -1125,6 +1209,10 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "8000"
+    },
     "resolved_firepower_modifiers": [
      {
       "modifier": 50,
@@ -1133,6 +1221,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "64"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1152,6 +1244,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "120"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "24"
     }
    },
    "terran_valkyrie": {
@@ -1305,6 +1401,10 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "6000"
+    },
     "resolved_firepower_modifiers": [
      {
       "modifier": 50,
@@ -1313,6 +1413,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "48"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1332,6 +1436,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "140"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "28"
     }
    },
    "terran_wraith": {
@@ -1459,7 +1567,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "2500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "20"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1479,6 +1595,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "120"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "24"
     }
    },
    "terran_wyvern": {
@@ -1679,7 +1799,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "9000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "72"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1699,6 +1827,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "70"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "14"
     }
    }
   },
@@ -2331,6 +2463,10 @@
      "Defence",
      "RADefence"
     ],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2498,6 +2634,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2619,6 +2759,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2802,6 +2946,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "52"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3068,6 +3216,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "45"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3309,6 +3461,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "78"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3444,6 +3600,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "200"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3576,6 +3736,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "60"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -3723,6 +3887,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "90"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3859,6 +4027,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "40"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -4117,6 +4289,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "60"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4380,6 +4556,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "60"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4646,6 +4826,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5555,7 +5739,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "4500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "36"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5743,6 +5935,10 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "6250"
+    },
     "resolved_firepower_modifiers": [
      {
       "modifier": 33,
@@ -5751,6 +5947,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6012,6 +6212,10 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "8750"
+    },
     "resolved_firepower_modifiers": [
      {
       "modifier": 33,
@@ -6020,6 +6224,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "70"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6151,7 +6359,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "5000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "40"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6215,6 +6431,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "15000"
+    },
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "120"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6345,6 +6569,10 @@
      "Infantry",
      "RAInfantry"
     ],
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "2250"
+    },
     "resolved_firepower_modifiers": [
      {
       "modifier": 25,
@@ -6353,6 +6581,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "18"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -6592,7 +6824,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "7500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "60"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6714,7 +6954,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "3750"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "30"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6884,7 +7132,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "15000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "120"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"

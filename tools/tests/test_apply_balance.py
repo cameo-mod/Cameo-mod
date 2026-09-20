@@ -205,6 +205,51 @@ class ApplyTests(unittest.TestCase):
         self.assertEqual(child.call_count, 2)
         self.assertEqual(json.loads(self.sidecar.read_text(encoding="utf-8")), {"new": True})
 
+    def _add_heal_repair_fields(self):
+        self.yaml.write_bytes(
+            self.original
+            + b"\tChangesHealth@SelfHealing:\r\n"
+            + b"\t\tStep: 10\r\n"
+            + b"\tRepairable:\r\n"
+            + b"\t\tHpPerStep: 100\r\n"
+        )
+        unit = self.fresh["test"]["sections"]["infantry"]["unit"]
+        unit["self_heal_step"] = {
+            "v": "10",
+            "src": "mods/cameo/rules/test.yaml#ChangesHealth@SelfHealing.Step",
+        }
+        unit["repairable_hp_per_step"] = {
+            "v": "100",
+            "src": "mods/cameo/rules/test.yaml#Repairable.HpPerStep",
+        }
+        self.desired = copy.deepcopy(self.fresh)
+        target = self.desired["test"]["sections"]["infantry"]["unit"]
+        target["self_heal_step"]["v"] = "20"
+        target["repairable_hp_per_step"]["v"] = "200"
+        self.write_ledgers()
+
+    def test_heal_and_repair_write_through_exact_file_provenance(self):
+        self._add_heal_repair_fields()
+        code, text, child = self.run_apply("--confirm", runner=self.successful_child)
+        self.assertEqual(0, code, text)
+        self.assertIn("APPLIED AND VERIFIED", text)
+        content = self.yaml.read_bytes()
+        self.assertIn(b"Step: 20", content)
+        self.assertIn(b"HpPerStep: 200", content)
+        child.assert_called()
+
+    def test_inherited_heal_source_refuses_without_writing_any_file(self):
+        self._add_heal_repair_fields()
+        target = self.desired["test"]["sections"]["infantry"]["unit"]
+        target["self_heal_step"]["src"] = "inherited"
+        self.write_ledgers()
+        before = {path: path.read_bytes() for path in self.root.rglob("*") if path.is_file()}
+        code, text, child = self.run_apply("--confirm")
+        self.assertEqual(1, code, text)
+        self.assertIn("inherited edit is unsupported", text)
+        child.assert_not_called()
+        self.assertEqual(before, {path: path.read_bytes() for path in self.root.rglob("*") if path.is_file()})
+
     def test_extractor_failure_rolls_back_yaml_and_keeps_proposal(self):
         self.change_cost()
         proposal = (self.ledger / "test.json").read_bytes()

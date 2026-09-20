@@ -56,6 +56,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "180"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "20"
     }
    },
    "harkonnen_carryall": {
@@ -110,6 +114,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "180"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "20"
     }
    },
    "harkonnen_gunship": {
@@ -190,6 +198,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "192"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "20"
     }
    }
   },
@@ -257,6 +269,10 @@
      "harkonnen_barracks"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -451,6 +467,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -534,6 +554,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1056,6 +1080,10 @@
      "harkonnen_outpost"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1379,6 +1407,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "32"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -1556,6 +1588,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
@@ -1760,6 +1796,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "50"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -1979,6 +2019,10 @@
      "Starport"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2182,6 +2226,10 @@
      "Starport"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2273,6 +2321,10 @@
      "Starport"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2375,7 +2427,15 @@
      "RAVehicle",
      "Starport"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "31250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "250"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2468,6 +2528,10 @@
      "Starport"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2559,6 +2623,10 @@
      "Starport"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2623,6 +2691,14 @@
      "RAVehicle",
      "Starport"
     ],
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "15000"
+    },
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "120"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2687,6 +2763,14 @@
      "RAVehicle",
      "Starport"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "10000"
+    },
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "80"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -2791,6 +2875,10 @@
      "Starport"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
