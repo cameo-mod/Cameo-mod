@@ -2,14 +2,14 @@ corrino_carryall:
 	Inherits: ^RANeutralPlane
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Tooltip:
-		Name: Corrino Carryall
+		Name: actor_corrino_carryall.name
 	Valued:
 		Cost: 600
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 10
 		Prerequisites: ~hightech.corrino
-		Description: Lifts and transports vehicles across the battlefield.\n  Unarmed
+		Description: actor_corrino_carryall.description
 		IconPalette: d2kunit
 	Health:
 		HP: 50000
@@ -75,12 +75,12 @@ corrino_gunship:
 	Valued:
 		Cost: 1200
 	Tooltip:
-		Name: Corrino Gunship
+		Name: actor_corrino_gunship.name
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 20
 		Prerequisites: ~hightech.corrino
-		Description: Heavily armed gunship.\n  Strong vs Vehicles, Infantry\n  Weak vs Anti-Air
+		Description: actor_corrino_gunship.description
 		IconPalette: d2kunit
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -122,14 +122,14 @@ corrino_advancedcarryall:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	-SpawnActorOnDeath:
 	Tooltip:
-		Name: Corrino Advanced Carryall
+		Name: actor_corrino_advancedcarryall.name
 	Valued:
 		Cost: 800
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
 		Prerequisites: ~hightech.corrino
-		Description: Advanced transport aircraft.\n  Unarmed
+		Description: actor_corrino_advancedcarryall.description
 		IconPalette: d2kunit
 	Health:
 		HP: 50000

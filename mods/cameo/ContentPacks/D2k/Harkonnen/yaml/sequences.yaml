@@ -74,6 +74,19 @@ combat_tank.harkonnen:
 		Start: 4282
 		Offset: -30,-24
 
+harkonnen_assaulttank:
+	Defaults:
+		Filename: harkonnen_assaulttank.png
+	idle:
+		Start: 0
+		Facings: 32
+	move:
+		Start: 0
+		Facings: 32
+		Tick: 80
+	icon:
+		Filename: harkonnen_assaulttank_icon.png
+
 
 combat_tank_husk.harkonnen:
 	Defaults:
@@ -90,16 +103,6 @@ combat_tank_husk.harkonnen:
 		Remap: 54F94B
 		Start: 2115
 		Facings: -32
-		ZOffset: -512
-
-devastator_husk.harkonnen:
-	Defaults:
-		Filename: harkonnen_devestator.png
-	idle:
-		Start: 0
-		Length: 1
-		Facings: 32
-		Transpose: true
 		ZOffset: -512
 
 harkonnen_spiceharvester:
@@ -170,10 +173,10 @@ harkonnen_devastatorturret:
 		Tick: 200
 		ZOffset: 1024
 	icon:
-		Filename: harkonnen_devastatorturret_icon.png
+		Filename: harkonnen_devastatorturret_build_icon.png
 		Offset: 0,0
 
-missile_tank:
+harkonnen_rockettank:
 	Defaults:
 		Filename: harkonnen_rockettank.png
 	idle:
@@ -373,4 +376,3 @@ harkonnen_sardaukar_baron_elite:
 	icon:
 		Filename: d2k_sardaukar_elite_icon.shp
 		Scale: 1
-

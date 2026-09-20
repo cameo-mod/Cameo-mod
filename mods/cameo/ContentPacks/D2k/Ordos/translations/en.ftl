@@ -24,3 +24,15 @@ upgrade_ordos_rapidfirearmorpiercingbelts =
 template_harvester =
    .description = Collects spice for credits.
       Unarmed
+
+actor_ordos_laserturret =
+   .name = Ordos Laser Turret
+   .description = Burst-fire laser defense.
+      Strong vs Vehicles, Aircraft
+      Weak vs Infantry
+
+actor_ordos_chemturret =
+   .name = Gas Turret
+   .description = Ballistic toxic-gas defense.
+      Strong vs Infantry
+      Weak vs Vehicles

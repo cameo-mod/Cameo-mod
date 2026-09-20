@@ -160,7 +160,7 @@ atreides_spiceharvester:
 		Facings: 8
 		Tick: 80
 	icon:
-		Filename: atreides_harvester.png
+		Filename: atreides_harvester_build_icon.png
 		Start: 0
 		Length: 1
 		Facings: 1
@@ -196,9 +196,9 @@ ornithopter:
 		Transpose: true
 		Tick: 120
 	icon:
-		Filename: atreides_ornithopter_icon.png
+		Filename: atreides_ornithopter_build_icon.png
 
-sonic_tank:
+atreides_sonictank:
 	Defaults:
 		Filename: atreides_sonictank.png
 	idle:
@@ -214,7 +214,7 @@ sonic_tank:
 		Transpose: true
 		Tick: 100
 	icon:
-		Filename: atreides_sonictank_icon.png
+		Filename: atreides_sonictank_build_icon.png
 
 atreides_sandbike:
 	Defaults:
@@ -227,7 +227,7 @@ atreides_sandbike:
 		Facings: 32
 		Tick: 80
 	icon:
-		Filename: atreides_sandbike_icon.png
+		Filename: atreides_sandbike_build_icon.png
 
 atreides_apc:
 	Defaults:
@@ -252,7 +252,7 @@ atreides_apc:
 		Tick: 60
 		BlendMode: Additive
 	icon:
-		Filename: atreides_apc_icon.png
+		Filename: atreides_apc_build_icon.png
 
 atreides_minotaurus:
 	Defaults:
@@ -270,7 +270,7 @@ atreides_minotaurus:
 		Transpose: true
 		Tick: 100
 	icon:
-		Filename: atreides_minotaurus_icon.png
+		Filename: atreides_minotaurus_build_icon.png
 
 atreides_mongoose:
 	Defaults:
@@ -300,7 +300,7 @@ atreides_mongoose:
 		Tick: 60
 		BlendMode: Additive
 	icon:
-		Filename: atreides_mongoose_icon.png
+		Filename: atreides_mongoose_build_icon.png
 
 atreides_repairtank:
 	Defaults:
@@ -318,7 +318,7 @@ atreides_repairtank:
 		Transpose: true
 		Tick: 100
 	icon:
-		Filename: atreides_repairtank_icon.png
+		Filename: atreides_repairtank_build_icon.png
 
 atreides_advancedcarryall:
 	Defaults:
@@ -336,7 +336,7 @@ atreides_advancedcarryall:
 		Facings: 32
 		Tick: 120
 	icon:
-		Filename: atreides_advancedcarryall_icon.png
+		Filename: atreides_advancedcarryall_build_icon.png
 
 atreides_airdrone:
 	Defaults:
@@ -349,7 +349,7 @@ atreides_airdrone:
 		Facings: 32
 		Tick: 80
 	icon:
-		Filename: atreides_airdrone_icon.png
+		Filename: atreides_airdrone_build_icon.png
 
 gun_turret.atreides:
 	Inherits: flame_turret
@@ -1008,23 +1008,3 @@ faction.atreides:
 		Filename: atreidesicon.shp
 	icon:
 		Filename: atreidesicon.shp
-
-d2k_atreides_apc:
-	idle:
-		Filename: d2k_atreides_apc.shp
-		Facings: -32
-	turret:
-		Filename: d2k_atreides_apc_turret.shp
-		Start: 0
-		Facings: -32
-	icon:
-		Filename: d2k_atreides_apc_icon.shp
-		Offset: 0,-2
-	muzzle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4028
-		Tick: 60
-		Facings: -32
-		BlendMode: Additive

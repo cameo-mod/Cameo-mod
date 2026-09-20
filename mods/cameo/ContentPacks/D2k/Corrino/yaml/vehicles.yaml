@@ -7,10 +7,10 @@ corrino_mobileconstructionvehicle:
 	Buildable:
 		Queue: Vehicle, RAVehicle, Starport
 		Prerequisites: ~corrino_vehicle_production, corrino_mcv_production
-		Description: Deploys into a Construction Yard.\n  Unarmed
+		Description: actor_corrino_mobileconstructionvehicle.description
 		IconPalette: d2kunit
 	Tooltip:
-		Name: Corrino Mobile Construction Vehicle
+		Name: actor_corrino_mobileconstructionvehicle.name
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeLarge
 		EmptyWeapon: D2KUnitExplodeLarge
@@ -36,14 +36,14 @@ corrino_spiceharvester:
 		Queue: Vehicle, RAVehicle, Starport
 		Prerequisites: ~spice_refinery, ~corrino_vehicle_production
 		BuildPaletteOrder: 10
-		Description: Collects spice for credits.\n  Unarmed
+		Description: actor_corrino_spiceharvester.description
 		IconPalette: d2kunit
 		BuildDuration: 250
 		BuildDurationModifier: 100
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: Corrino Spice Harvester
+		Name: actor_corrino_spiceharvester.name
 	Selectable:
 		DecorationBounds: 1536, 1536
 	Harvester:
@@ -80,9 +80,11 @@ corrino_spiceharvester:
 
 corrino_combattank:
 	Inherits: ^CombatTank
+	Tooltip:
+		Name: actor_corrino_combattank.name
 	Buildable:
 		Prerequisites: ~heavy.corrino_combat
-		Description: Imperial Sardaukar battle tank.\n  Strong vs Tanks\n  Weak vs Infantry
+		Description: actor_corrino_combattank.description
 	Armament:
 		Weapon: corrino_cannon
 	RenderSprites:
@@ -102,12 +104,12 @@ corrino_buggy:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~corrino_light_vehicle_production
 		BuildPaletteOrder: 20
-		Description: Fast scout buggy with a mounted turret.\n  Strong vs Vehicles\n  Weak vs Infantry
+		Description: actor_corrino_buggy.description
 		IconPalette: d2kunit
 	Valued:
 		Cost: 300
 	Tooltip:
-		Name: Corrino Buggy
+		Name: actor_corrino_buggy.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -159,12 +161,12 @@ corrino_bmp:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~corrino_light_vehicle_production, upgrade_light.corrino
 		BuildPaletteOrder: 30
-		Description: Infantry fighting vehicle with a turret cannon.\n  Strong vs Vehicles, Infantry\n  Weak vs Aircraft
+		Description: actor_corrino_bmp.description
 		IconPalette: d2kunit
 	Valued:
 		Cost: 400
 	Tooltip:
-		Name: Corrino BMP
+		Name: actor_corrino_bmp.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -210,14 +212,14 @@ corrino_apc:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Tooltip:
-		Name: Corrino APC
+		Name: actor_corrino_apc.name
 	Valued:
 		Cost: 600
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~corrino_light_vehicle_production
 		BuildPaletteOrder: 50
-		Description: Armored transport.\n  Can carry infantry
+		Description: actor_corrino_apc.description
 		IconPalette: d2kunit
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -251,14 +253,14 @@ corrino_missiletank:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Tooltip:
-		Name: Corrino Missile Tank
+		Name: actor_corrino_missiletank.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~heavy.missile_tank, ~research_centre
 		BuildPaletteOrder: 60
-		Description: Rocket Artillery.\n  Strong vs Vehicles, Buildings, Aircraft\n  Weak vs Infantry\nDetector
+		Description: actor_corrino_missiletank.description
 		IconPalette: d2kunit
 	Valued:
 		Cost: 750
@@ -302,12 +304,12 @@ corrino_siegetank:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~corrino_vehicle_production, upgrade_heavy.corrino
 		BuildPaletteOrder: 50
-		Description: Siege Artillery.\n  Strong vs Infantry, Buildings\n  Weak vs Tanks
+		Description: actor_corrino_siegetank.description
 		IconPalette: d2kunit
 	Valued:
 		Cost: 600
 	Tooltip:
-		Name: Siege Tank
+		Name: actor_corrino_siegetank.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:

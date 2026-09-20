@@ -8,14 +8,14 @@ atreides_lightinfantry:
 	Inherits@anim: ^D2KPaletteRenderInfantry
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Tooltip:
-		Name: Atreides Light Infantry
+		Name: actor_atreides_lightinfantry.name
 	Valued:
 		Cost: 150
 	Buildable:
 		Factions: atreides
 		BuildPaletteOrder: 10
 		Queue: Infantry, RAInfantry
-		Description: Basic infantry armed with a light machine gun.\n  Strong vs Infantry\n  Weak vs Vehicles, Aircraft
+		Description: actor_atreides_lightinfantry.description
 		IconPalette: d2kunit
 		Prerequisites: ~atreides_barracks
 	Health:
@@ -49,14 +49,14 @@ atreides_rockettrooper:
 	Inherits@anim: ^D2KPaletteRenderInfantry
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Tooltip:
-		Name: Atreides Rocket Trooper
+		Name: actor_atreides_rockettrooper.name
 	Valued:
 		Cost: 200
 	Buildable:
 		Factions: atreides
 		BuildPaletteOrder: 20
 		Queue: Infantry, RAInfantry
-		Description: Anti-tank infantry armed with rockets.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+		Description: actor_atreides_rockettrooper.description
 		IconPalette: d2kunit
 		Prerequisites: ~atreides_barracks
 	Health:
@@ -88,7 +88,7 @@ atreides_fremen:
 	Inherits@AntiBuil: ^PrioritizeBuilding
 	Inherits@decoration: ^DuneRankDecoration
 	Tooltip:
-		Name: Desert Phantom
+		Name: actor_atreides_fremen.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -98,7 +98,7 @@ atreides_fremen:
 		Prerequisites: ~atreides_barracks, ~hightech.atreides, upgrade_barracks, ~atreides_promotion_fremen
 		Icon: phantomicon
 		IconPalette: windows256
-		Description: Fast Elite infantry units armed with assault rifles and machine guns. When grouped, they can take down buildings extremely quickly.\nDetector\n  Strong vs Buildings\n  Weak vs Infantry, Vehicles\n  Special Ability: Invisibility
+		Description: actor_atreides_fremen.description
 		BuildDuration: 300
 		BuildDurationModifier: 100
 	Mobile:
@@ -143,14 +143,14 @@ atreides_engineer:
 	Inherits@anim: ^D2KPaletteRenderInfantry
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Tooltip:
-		Name: Atreides Engineer
+		Name: actor_atreides_engineer.name
 	Valued:
 		Cost: 250
 	Buildable:
 		Factions: atreides
 		BuildPaletteOrder: 30
 		Queue: Infantry, RAInfantry
-		Description: Infiltrates and captures enemy buildings.\n  Strong vs Buildings\n  Weak vs Everything
+		Description: actor_atreides_engineer.description
 		IconPalette: d2kunit
 		Prerequisites: ~atreides_barracks
 	Health:
