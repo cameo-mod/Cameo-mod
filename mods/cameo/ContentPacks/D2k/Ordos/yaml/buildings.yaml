@@ -662,7 +662,7 @@ ordos_laserturret:
 	Armor:
 		Type: Concrete
 	Tooltip:
-		Name: Ordos Laser Turret
+		Name: actor_ordos_laserturret.name
 	Valued:
 		Cost: 1100
 	Buildable:
@@ -670,13 +670,13 @@ ordos_laserturret:
 		Queue: Defence, RADefence
 		Prerequisites: ~ordos_constructionyard, ordos_ixresearchcenter
 		BuildPaletteOrder: 520
-		Description: Advanced defensive turret.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+		Description: actor_ordos_laserturret.description
 		IconPalette: cameo
 	Health:
 		HP: 75000
 	Armament:
 		Weapon: ordos_laserturret
-		LocalOffset: 600,0,500
+		LocalOffset: 540,0,194
 	WithSpriteTurret:
 		Palette: player
 		IsPlayerPalette: True
@@ -728,7 +728,7 @@ ordos_chemturret:
 	Armor:
 		Type: Concrete
 	Tooltip:
-		Name: Ordos Chemical Mortar Turret
+		Name: actor_ordos_chemturret.name
 	Valued:
 		Cost: 1200
 	Buildable:
@@ -736,13 +736,13 @@ ordos_chemturret:
 		Queue: Defence, RADefence
 		Prerequisites: ~ordos_constructionyard, ordos_barracks
 		BuildPaletteOrder: 530
-		Description: Long-range chemical mortar.\n  Strong vs Infantry, Buildings\n  Weak vs Tanks
+		Description: actor_ordos_chemturret.description
 		IconPalette: cameo
 	Health:
 		HP: 75000
 	Armament:
 		Weapon: ordos_chemturret
-		LocalOffset: 600,0,500
+		LocalOffset: 540,0,450
 	WithSpriteTurret:
 		Palette: player
 		IsPlayerPalette: True
@@ -769,11 +769,11 @@ ordos_chemturret:
 	SpawnActorOnDeath@death1:
 		Actor: light_inf
 	Power:
-		Amount: -55
+		Amount: -60
 	RevealsShroud:
-		Range: 7710
+		Range: 14000
 	DetectCloaked:
-		Range: 3855
+		Range: 7000
 	-WithDeathAnimation:
 	ActorStatValues:
 		Upgrades: ordos_upgrade_contraband

@@ -11,6 +11,8 @@ upgrade_conyard.atreides:
 		IconPalette: d2kunit
 	Valued:
 		Cost: 200
+	RenderSprites:
+		Image: conyard.atreides
 
 upgrade_barracks.atreides:
 	Inherits: ^UpgradeTemplate
@@ -25,6 +27,8 @@ upgrade_barracks.atreides:
 		IconPalette: d2kunit
 	Valued:
 		Cost: 200
+	RenderSprites:
+		Image: barracks.atreides
 
 upgrade_light.atreides:
 	Inherits: ^UpgradeTemplate
@@ -39,6 +43,8 @@ upgrade_light.atreides:
 		IconPalette: d2kunit
 	Valued:
 		Cost: 200
+	RenderSprites:
+		Image: light.atreides
 
 upgrade_heavy.atreides:
 	Inherits: ^UpgradeTemplate
@@ -53,6 +59,8 @@ upgrade_heavy.atreides:
 		IconPalette: d2kunit
 	Valued:
 		Cost: 400
+	RenderSprites:
+		Image: heavy.atreides
 
 upgrade_radar.atreides:
 	Inherits: ^UpgradeTemplate
@@ -67,3 +75,5 @@ upgrade_radar.atreides:
 		IconPalette: d2kunit
 	Valued:
 		Cost: 300
+	RenderSprites:
+		Image: outpost.atreides

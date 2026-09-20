@@ -2347,8 +2347,10 @@ ordos_laserturret:
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
 	ReloadDelay: 55
+	Burst: 3
+	BurstDelays: 5
 	Range: 7275
-	Report: LaserTankAttack.wav
+	Report: PopupTurretAttack.wav
 	Projectile: LaserZap
 		Width: 55
 		ZOffset: 2047
@@ -2357,21 +2359,51 @@ ordos_laserturret:
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 
+^Warhead_Toxic_AntiInfantryDefense:
+	Inherits: ^Warhead_Toxic_Light
+	Warhead@Toxic_Light:
+		Versus:
+			Scout: 100
+			Light: 40
+			Medium: 20
+			Heavy: 20
+			Superheavy: 20
+
 ordos_chemturret:
+	Inherits@wh: ^Warhead_Toxic_AntiInfantryDefense
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_Chem_Light
 	ReloadDelay: 90
 	Range: 14000
-	Report: MORTAR1.WAV
+	MinRange: 1985
+	Report: ChemTurretAttack.wav
+	ValidTargets: Ground
+	TargetActorCenter: true
 	Projectile: Bullet
-		Speed: 350
-	Warhead@Chem_Medium: AreaDamage
-		Spread: 500
-		Damage: 40000
-		Versus:
-			Scout: 90
-			Light: 80
-			Medium: 70
-			Heavy: 60
-		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		Speed: 175
+		Inaccuracy: 75
+		LaunchAngle: 125
+		ContrailLength: 30
+		ContrailStartWidth: 60
+		ContrailEndWidth: 15
+		ContrailStartColor: FEDCBA98
+		ContrailEndColor: 87654321
+		InaccuracyType: PerCellIncrement
+		Image: d2k_155mm
+		Palette: effect
+	Warhead@Toxic_Light: AreaDamage
+		ValidTargets: Ground, Water
+		InvalidTargets: wall, Mine, ToxinImmune
+		Spread: 1536
+		Damage: 20000
+		PercentageScale: 0
+		DamageTypes: Prone75Percent, TriggerProne, ToxicDeath
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_toxic_large_explosion
+		ImpactSounds: EXPLMD2.WAV
+		ExplosionPalette: d2k_toxic_explosion
+		ValidTargets: Ground, Ship
+		ImpactActors: false
 
 # Migrated from legacy mods/cameo/weapons/d2k.yaml (Ruling 9)
 # These weapons are only used by Ordos actors.

@@ -9,13 +9,13 @@ corrino_sardaukar_bazooka:
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiAir: ^PrioritizeAir
 	Tooltip:
-		Name: Sardaukar Bazooka
+		Name: actor_corrino_sardaukar_bazooka.name
 	Valued:
 		Cost: 600
 	Buildable:
 		BuildPaletteOrder: 40
 		Queue: Infantry, RAInfantry
-		Description: Elite Sardaukar anti-tank trooper with a heavy bazooka.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+		Description: actor_corrino_sardaukar_bazooka.description
 		IconPalette: d2kunit
 		Prerequisites: ~corrino_barracks
 	UpdatesPlayerStatistics:
@@ -66,13 +66,13 @@ corrino_lightinfantry:
 	Inherits@anim: ^D2KPaletteRenderInfantry
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Tooltip:
-		Name: Corrino Light Infantry
+		Name: actor_corrino_lightinfantry.name
 	Valued:
 		Cost: 150
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Infantry, RAInfantry
-		Description: Imperial conscript infantry.\n  Strong vs Infantry\n  Weak vs Vehicles, Aircraft
+		Description: actor_corrino_lightinfantry.description
 		IconPalette: d2kunit
 		Prerequisites: ~corrino_barracks
 	Health:
@@ -102,13 +102,13 @@ corrino_engineer:
 	Inherits@anim: ^D2KPaletteRenderInfantry
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Tooltip:
-		Name: Corrino Engineer
+		Name: actor_corrino_engineer.name
 	Valued:
 		Cost: 250
 	Buildable:
 		BuildPaletteOrder: 30
 		Queue: Infantry, RAInfantry
-		Description: Infiltrates and captures enemy buildings.\n  Strong vs Buildings\n  Weak vs Everything
+		Description: actor_corrino_engineer.description
 		IconPalette: d2kunit
 		Prerequisites: ~corrino_barracks
 	Health:
@@ -133,13 +133,13 @@ corrino_trooper:
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiAir: ^PrioritizeAir
 	Tooltip:
-		Name: Corrino Trooper
+		Name: actor_corrino_trooper.name
 	Valued:
 		Cost: 200
 	Buildable:
 		BuildPaletteOrder: 20
 		Queue: Infantry, RAInfantry
-		Description: Imperial anti-tank trooper armed with rockets.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+		Description: actor_corrino_trooper.description
 		IconPalette: d2kunit
 		Prerequisites: ~corrino_barracks
 	Health:
@@ -171,7 +171,7 @@ corrino_sardaukar_berserker:
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Tooltip:
-		Name: Sardaukar Berserker
+		Name: actor_corrino_sardaukar_berserker.name
 	WithInfantryBody:
 		DefaultAttackSequence: shoot
 		StandSequences: stand
@@ -180,7 +180,7 @@ corrino_sardaukar_berserker:
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Infantry, RAInfantry
-		Description: Elite Sardaukar melee warrior armed with a heavy axe.\n  Strong vs Infantry\n  Weak vs Vehicles
+		Description: actor_corrino_sardaukar_berserker.description
 		IconPalette: d2kunit
 		Prerequisites: ~corrino_barracks
 	UpdatesPlayerStatistics:
@@ -216,13 +216,13 @@ corrino_sardaukar_sword:
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Tooltip:
-		Name: Sardaukar Swordmaster
+		Name: actor_corrino_sardaukar_sword.name
 	Valued:
 		Cost: 600
 	Buildable:
 		BuildPaletteOrder: 60
 		Queue: Infantry, RAInfantry
-		Description: Elite Sardaukar duelist armed with a powered blade.\n  Strong vs Infantry\n  Weak vs Vehicles
+		Description: actor_corrino_sardaukar_sword.description
 		IconPalette: d2kunit
 		Prerequisites: ~corrino_barracks
 	UpdatesPlayerStatistics:
@@ -262,13 +262,13 @@ corrino_sardaukar_javelin:
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiAir: ^PrioritizeAir
 	Tooltip:
-		Name: Sardaukar Javelin
+		Name: actor_corrino_sardaukar_javelin.name
 	Valued:
 		Cost: 600
 	Buildable:
 		BuildPaletteOrder: 70
 		Queue: Infantry, RAInfantry
-		Description: Elite Sardaukar skirmisher armed with throwing spears.\n  Strong vs Vehicles\n  Weak vs Infantry
+		Description: actor_corrino_sardaukar_javelin.description
 		IconPalette: d2kunit
 		Prerequisites: ~corrino_barracks
 	UpdatesPlayerStatistics:
@@ -308,13 +308,13 @@ corrino_sardaukar_laser:
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiAir: ^PrioritizeAir
 	Tooltip:
-		Name: Sardaukar Laser
+		Name: actor_corrino_sardaukar_laser.name
 	Valued:
 		Cost: 600
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Infantry, RAInfantry
-		Description: Elite Sardaukar equipped with a laser rifle.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+		Description: actor_corrino_sardaukar_laser.description
 		IconPalette: d2kunit
 		Prerequisites: ~corrino_barracks
 	UpdatesPlayerStatistics:

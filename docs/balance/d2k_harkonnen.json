@@ -31,7 +31,8 @@
     },
     "name": "Harkonnen Advanced Carryall",
     "prerequisites": [
-     "~hightech.harkonnen"
+     "~hightech.harkonnen",
+     "~harkonnen_promotion_advancedcarryall"
     ],
     "queue": [
      "Aircraft",
@@ -172,7 +173,8 @@
     },
     "name": "Harkonnen Gunship",
     "prerequisites": [
-     "~hightech.harkonnen"
+     "~hightech.harkonnen",
+     "~harkonnen_promotion_gunship"
     ],
     "queue": [
      "Aircraft",
@@ -1826,6 +1828,221 @@
     }
    }
   },
+  "promotions": {
+   "harkonnen_promotion_adp": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "PromotionUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Harkonnen Air Defense Platform",
+    "prerequisites": [
+     "~harkonnen_constructionyard",
+     "!harkonnen_promotion_adp",
+     "harkonnen_promotion_gunship",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "harkonnen_promotion_advancedcarryall": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "PromotionUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Harkonnen Advanced Carryall",
+    "prerequisites": [
+     "~harkonnen_constructionyard",
+     "!harkonnen_promotion_advancedcarryall",
+     "harkonnen_promotion_adp",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "harkonnen_promotion_assaulttank": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "PromotionUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Harkonnen Assault Tank",
+    "prerequisites": [
+     "~harkonnen_constructionyard",
+     "!harkonnen_promotion_assaulttank",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "harkonnen_promotion_buzzsaw": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "PromotionUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Harkonnen Buzzsaw",
+    "prerequisites": [
+     "~harkonnen_constructionyard",
+     "!harkonnen_promotion_buzzsaw",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "harkonnen_promotion_devastatormech": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "PromotionUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Harkonnen Devastator Mech",
+    "prerequisites": [
+     "~harkonnen_constructionyard",
+     "!harkonnen_promotion_devastatormech",
+     "harkonnen_promotion_flametank",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "harkonnen_promotion_flametank": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "PromotionUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Harkonnen Flame Tank",
+    "prerequisites": [
+     "~harkonnen_constructionyard",
+     "!harkonnen_promotion_flametank",
+     "harkonnen_promotion_assaulttank",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "harkonnen_promotion_gunship": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "PromotionUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Harkonnen Gunship",
+    "prerequisites": [
+     "~harkonnen_constructionyard",
+     "!harkonnen_promotion_gunship",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "harkonnen_promotion_inkvine": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "PromotionUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Harkonnen Inkvine Catapult",
+    "prerequisites": [
+     "~harkonnen_constructionyard",
+     "!harkonnen_promotion_inkvine",
+     "harkonnen_promotion_rockettank",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "harkonnen_promotion_rockettank": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "PromotionUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Harkonnen Rocket Tank",
+    "prerequisites": [
+     "~harkonnen_constructionyard",
+     "!harkonnen_promotion_rockettank",
+     "harkonnen_promotion_buzzsaw",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   }
+  },
   "upgrades": {
    "upgrade_barracks.harkonnen": {
     "build_limit": {
@@ -2218,7 +2435,8 @@
     "prerequisites": [
      "~harkonnen_vehicle_production",
      "~heavy.harkonnen_combat",
-     "research_centre"
+     "research_centre",
+     "~harkonnen_promotion_adp"
     ],
     "queue": [
      "Vehicle",
@@ -2253,6 +2471,100 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "20"
+    }
+   },
+   "harkonnen_assaulttank": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "5120",
+      "reloaddelay": "55",
+      "slot": "Armament",
+      "versus_templates": [
+       "^D2K_Cannon"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "80mm_H",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "MainBattleTank",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Health.HP",
+     "v": "70000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Harkonnen Assault Tank",
+    "prerequisites": [
+     "~harkonnen_vehicle_production",
+     "~heavy.harkonnen_combat",
+     "research_centre",
+     "~harkonnen_promotion_assaulttank"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle",
+     "Starport"
+    ],
+    "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "65"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "13"
     }
    },
    "harkonnen_buzzsaw": {
@@ -2313,7 +2625,8 @@
     "prerequisites": [
      "~harkonnen_vehicle_production",
      "~heavy.harkonnen_combat",
-     "research_centre"
+     "research_centre",
+     "~harkonnen_promotion_buzzsaw"
     ],
     "queue": [
      "Vehicle",
@@ -2420,7 +2733,8 @@
     "prerequisites": [
      "~harkonnen_vehicle_production",
      "~heavy.harkonnen",
-     "research_centre"
+     "research_centre",
+     "~harkonnen_promotion_devastatormech"
     ],
     "queue": [
      "Vehicle",
@@ -2520,7 +2834,8 @@
     "name": "Harkonnen Flame Tank",
     "prerequisites": [
      "~harkonnen_vehicle_production",
-     "~heavy.harkonnen_combat"
+     "~heavy.harkonnen_combat",
+     "~harkonnen_promotion_flametank"
     ],
     "queue": [
      "Vehicle",
@@ -2611,11 +2926,12 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Harkonnen Inkvine",
+    "name": "Harkonnen Inkvine Catapult",
     "prerequisites": [
      "~harkonnen_vehicle_production",
      "~heavy.harkonnen_combat",
-     "research_centre"
+     "research_centre",
+     "~harkonnen_promotion_inkvine"
     ],
     "queue": [
      "Vehicle",
@@ -2722,6 +3038,111 @@
     "turn_speed": {
      "src": "inherited",
      "v": "15"
+    }
+   },
+   "harkonnen_rockettank": {
+    "armaments": [
+     {
+      "burst": "4",
+      "burstdelays": "25",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "15000",
+        "falloff": null,
+        "spread": null,
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "2050",
+      "pricing": true,
+      "range": "10240",
+      "reloaddelay": "150",
+      "slot": "Armament",
+      "versus_templates": [
+       "^D2KMissile"
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "mtank_pri",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Valued.Cost",
+     "v": "750"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "MissileVehicle",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Health.HP",
+     "v": "50000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Harkonnen Rocket Tank",
+    "prerequisites": [
+     "~harkonnen_vehicle_production",
+     "~heavy.missile_tank",
+     "research_centre",
+     "upgrade_heavy",
+     "~harkonnen_promotion_rockettank"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle",
+     "Starport"
+    ],
+    "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#RevealsShroud.Range",
+     "v": "6c256"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "64"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "26"
     }
    },
    "harkonnen_spiceharvester": {

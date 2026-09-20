@@ -1349,23 +1349,31 @@
      {
       "damage_warheads": [
        {
-        "damage": "40000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "Chem_Medium",
+        "damage": "20000",
+        "falloff": "100, 90, 75, 55, 30, 0",
+        "spread": "1536",
+        "tag": "Toxic_Light",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
+      "minrange": "1985",
       "pricing": true,
       "range": "14000",
       "reloaddelay": "90",
       "slot": "Armament",
-      "versus_templates": [],
-      "warheads": [],
+      "versus_templates": [
+       "^Warhead_Toxic_AntiInfantryDefense",
+       "^Projectile_Shell_Light",
+       "^Effect_Chem_Light"
+      ],
+      "warheads": [
+       "^Warhead_Toxic_AntiInfantryDefense",
+       "^Warhead_Toxic_Light"
+      ],
       "weapon": "ordos_chemturret",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1392,7 +1400,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ordos Chemical Mortar Turret",
+    "name": "Gas Turret",
     "prerequisites": [
      "~ordos_constructionyard",
      "ordos_barracks"
@@ -1420,7 +1428,7 @@
     },
     "sight": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/buildings.yaml#RevealsShroud.Range",
-     "v": "7710"
+     "v": "14000"
     }
    },
    "ordos_constructionyard": {
@@ -1641,6 +1649,8 @@
    "ordos_laserturret": {
     "armaments": [
      {
+      "burst": "3",
+      "burstdelays": "5",
       "damage_warheads": [
        {
         "damage": "10000",
