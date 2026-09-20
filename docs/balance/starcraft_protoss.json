@@ -112,7 +112,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "11250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "90"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled"
@@ -140,6 +148,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "75"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "15"
     }
    },
    "protoss_carrier": {
@@ -194,7 +206,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "15000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "120"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled"
@@ -222,6 +242,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "45"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "9"
     }
    },
    "protoss_corsair": {
@@ -358,7 +382,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "6250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "50"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled"
@@ -386,6 +418,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "125"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "25"
     }
    },
    "protoss_epigraph": {
@@ -630,6 +666,10 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "10000"
+    },
     "resolved_firepower_modifiers": [
      {
       "modifier": 50,
@@ -638,6 +678,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "80"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled"
@@ -665,6 +709,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "100"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "20"
     }
    },
    "protoss_gladius": {
@@ -813,6 +861,10 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "5000"
+    },
     "resolved_firepower_modifiers": [
      {
       "modifier": 50,
@@ -821,6 +873,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "40"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled"
@@ -848,6 +904,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "50"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "10"
     }
    },
    "protoss_observer": {
@@ -884,6 +944,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "625"
+    },
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "5"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled"
@@ -911,6 +979,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "60"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "12"
     }
    },
    "protoss_scout": {
@@ -1068,7 +1140,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "3750"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "30"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled"
@@ -1096,6 +1176,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "150"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "30"
     }
    },
    "protoss_shuttle": {
@@ -1140,6 +1224,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "5000"
+    },
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "40"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled"
@@ -1167,6 +1259,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "150"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "30"
     }
    },
    "protoss_starshipsovereign": {
@@ -1286,6 +1382,10 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "37500"
+    },
     "resolved_firepower_modifiers": [
      {
       "modifier": 75,
@@ -1295,6 +1395,10 @@
      }
     ],
     "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "300"
+    },
+    "self_heal_step_other": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#ChangesHealth.Step",
      "v": "32"
     },
@@ -1325,6 +1429,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "40"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "8"
     }
    },
    "protoss_voidray": {
@@ -1442,6 +1550,10 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "3500"
+    },
     "resolved_firepower_modifiers": [
      {
       "modifier": 9,
@@ -1450,6 +1562,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "28"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled"
@@ -1477,6 +1593,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "140"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "28"
     }
    }
   },
@@ -2570,6 +2690,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled"
@@ -2705,6 +2829,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "30"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled"
@@ -2795,6 +2923,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "70"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled"
@@ -2885,6 +3017,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "50"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled"
@@ -3241,6 +3377,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "35"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -3331,6 +3471,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "60"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled"
@@ -3549,6 +3693,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "75"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled"
@@ -3641,6 +3789,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "40"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled"
@@ -3734,6 +3886,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "250"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled"
@@ -4550,7 +4706,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "3000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "24"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled"
@@ -4654,7 +4818,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "17500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "140"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled"
@@ -4782,6 +4954,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "100"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled"
@@ -4907,6 +5083,10 @@
      "Infantry",
      "RAInfantry"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "3750"
+    },
     "resolved_firepower_modifiers": [
      {
       "modifier": 50,
@@ -4915,6 +5095,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "30"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled"
@@ -5114,6 +5298,10 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "17500"
+    },
     "resolved_firepower_modifiers": [
      {
       "modifier": 223,
@@ -5122,6 +5310,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "140"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled"
@@ -5250,7 +5442,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "1250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "10"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled"
@@ -5322,6 +5522,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "15000"
+    },
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "120"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled"
@@ -5456,6 +5664,10 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "3000"
+    },
     "resolved_firepower_modifiers": [
      {
       "modifier": 50,
@@ -5464,6 +5676,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "24"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled"
@@ -5562,6 +5778,10 @@
      "Infantry",
      "RAInfantry"
     ],
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "2250"
+    },
     "resolved_firepower_modifiers": [
      {
       "modifier": 25,
@@ -5570,6 +5790,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "18"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled"
@@ -5715,7 +5939,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "13750"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "110"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled"

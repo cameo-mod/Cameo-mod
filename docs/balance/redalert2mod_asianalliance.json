@@ -124,7 +124,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "4500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "36"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -144,6 +152,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "210"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "14"
     }
    },
    "asianalliance_pelican": {
@@ -308,7 +320,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "2000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "16"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -328,6 +348,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "125"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "25"
     }
    },
    "asianalliance_phoenix": {
@@ -464,7 +488,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "4500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "36"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -484,6 +516,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "180"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "12"
     }
    },
    "bomber_minebomb.asian": {
@@ -545,6 +581,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "250"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "25"
     }
    },
    "bomber_minebomb2.asian": {
@@ -606,6 +646,10 @@
     "speed_air": {
      "src": "inherited",
      "v": "250"
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "25"
     }
    },
    "kami.asian": {
@@ -652,6 +696,10 @@
     },
     "name": "Kamikaze",
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "3"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -671,6 +719,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "160"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "16"
     }
    },
    "kami_asdf.asian": {
@@ -717,6 +769,10 @@
     },
     "name": "Airstrike Kamikaze",
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "3"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -736,6 +792,10 @@
     "speed_air": {
      "src": "inherited",
      "v": "160"
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "16"
     }
    },
    "kami_chemical.asian": {
@@ -826,6 +886,10 @@
     },
     "name": "Chemical Attack Plane",
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "6"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -845,6 +909,10 @@
     "speed_air": {
      "src": "inherited",
      "v": "160"
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "16"
     }
    }
   },
@@ -1347,6 +1415,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1586,6 +1658,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1705,6 +1781,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1898,6 +1978,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2089,6 +2173,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2186,6 +2274,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2284,6 +2376,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2536,6 +2632,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2700,6 +2800,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "27"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2928,6 +3032,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "40"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3430,6 +3538,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3675,6 +3787,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "26"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3979,6 +4095,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "24"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -4253,6 +4373,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "17"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -4602,6 +4726,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "100"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4742,6 +4870,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "40"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5132,6 +5264,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "64"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5303,6 +5439,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "20"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5699,6 +5839,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "14"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -5988,6 +6132,10 @@
      "RANaval"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "36"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6066,6 +6214,10 @@
      "RANaval"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "70"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6141,6 +6293,10 @@
      "RANaval"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6235,6 +6391,10 @@
      "RANaval"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "96"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6362,6 +6522,10 @@
      "RANaval"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "40"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6702,6 +6866,10 @@
      "RANaval"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "55"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6780,6 +6948,10 @@
      "RANaval"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "110"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7557,6 +7729,10 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "4250"
+    },
     "resolved_firepower_modifiers": [
      {
       "modifier": 75,
@@ -7565,6 +7741,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "34"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7629,6 +7809,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "15000"
+    },
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "120"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7696,6 +7884,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "1625"
+    },
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "13"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7759,6 +7955,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "1250"
+    },
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "10"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -7894,7 +8098,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "12500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "100"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -8014,7 +8226,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "2000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "16"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -8270,7 +8490,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "6000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "48"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -8476,7 +8704,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "4250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "34"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -8627,7 +8863,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "14250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "114"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -8958,7 +9202,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "2750"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "22"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -9093,7 +9345,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "8000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "64"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -9203,7 +9463,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "2000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "16"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -9396,7 +9664,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "1250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -9497,7 +9773,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "12500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "100"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -9717,7 +10001,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "6500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "52"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"

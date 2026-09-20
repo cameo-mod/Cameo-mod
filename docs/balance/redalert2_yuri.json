@@ -171,7 +171,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "6250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -191,6 +199,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "80"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "16"
     }
    },
    "yuriinvisibleplane": {
@@ -256,6 +268,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "300"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "20"
     }
    }
   },
@@ -1008,6 +1024,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1202,6 +1222,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1288,6 +1312,10 @@
      "RABuilding"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "80"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && ((yuri_doctrine_psionicvehicleshields && EnemyInProximity) || shieldgen || shielded)"
@@ -1352,6 +1380,10 @@
      "Defence",
      "RADefence"
     ],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1590,6 +1622,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "96"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1700,6 +1736,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "45"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1776,6 +1816,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "5"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -1916,6 +1960,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "28"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1935,6 +1983,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Aircraft.Speed",
      "v": "165"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Aircraft.TurnSpeed",
+     "v": "33"
     }
    },
    "yuri_engineer": {
@@ -2133,6 +2185,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "36"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -2411,6 +2467,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "24"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -2889,6 +2949,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "12"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3021,6 +3085,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "20"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3138,6 +3206,10 @@
      "RANaval"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "40"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4042,7 +4114,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "625"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "5"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && ((yuri_doctrine_psionicvehicleshields && EnemyInProximity) || shieldgen || shielded)"
@@ -4275,7 +4355,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "2250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "18"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && ((yuri_doctrine_psionicvehicleshields && EnemyInProximity) || shieldgen || shielded)"
@@ -4772,7 +4860,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "3500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "28"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && ((yuri_doctrine_psionicvehicleshields && EnemyInProximity) || shieldgen || shielded)"
@@ -4982,7 +5078,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "3250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "26"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && ((yuri_doctrine_psionicvehicleshields && EnemyInProximity) || shieldgen || shielded)"
@@ -5072,7 +5176,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "5000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "40"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && ((yuri_doctrine_psionicvehicleshields && EnemyInProximity) || shieldgen || shielded)"
@@ -5141,6 +5253,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "15000"
+    },
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "120"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && ((yuri_doctrine_psionicvehicleshields && EnemyInProximity) || shieldgen || shielded)"
@@ -5239,6 +5359,10 @@
      "RAVehicle"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "80"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && ((yuri_doctrine_psionicvehicleshields && EnemyInProximity) || shieldgen || shielded)"

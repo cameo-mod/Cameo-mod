@@ -61,6 +61,10 @@
     "speed_air": {
      "src": "inherited",
      "v": "156"
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "24"
     }
    },
    "carryall.paradrop": {
@@ -121,6 +125,10 @@
     "speed_air": {
      "src": "inherited",
      "v": "156"
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "24"
     }
    },
    "carryall.reinforce": {
@@ -173,6 +181,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "156"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "24"
     }
    },
    "frigate": {
@@ -220,6 +232,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "189"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "4"
     }
    },
    "frigate.paradrop": {
@@ -271,6 +287,10 @@
     "speed_air": {
      "src": "inherited",
      "v": "189"
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "4"
     }
    }
   },
@@ -867,6 +887,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "40"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
@@ -1042,6 +1066,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "12"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
@@ -1347,6 +1375,10 @@
      "Starport"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"

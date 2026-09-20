@@ -121,6 +121,15 @@ number appears exactly as the yaml states it, with provenance:
 > the finding `DRIFT (raw)` or `DRIFT (model)`. The derived rows repeat only `slot` and
 > `weapon` as join keys — never a raw stat, so there is still exactly one copy of every
 > number. Spec: [`EFFECTIVE_DAMAGE.md`](EFFECTIVE_DAMAGE.md).
+
+> The raw unit fields also carry the survivability and aircraft-turn inputs that
+> must be auditable when a batch changes them: `self_heal_step` is the named
+> `ChangesHealth@SelfHealing.Step` value, falling back to a bare
+> `ChangesHealth.Step` for a bare-only actor; `self_heal_step_other` preserves a
+> simultaneous bare instance, `repairable_hp_per_step` is
+> `Repairable.HpPerStep`, and `turn_speed_air` is `Aircraft.TurnSpeed`.
+> Conditional or ability-specific `ChangesHealth@...` instances are deliberately
+> not folded into base self-heal.
 >
 > ⚠ Nothing consumes the derived tree yet — it is a read-only sidecar. `build_workbook.py`
 > never read the old in-ledger fields either. Wiring K into pricing is **W11**, behind a
@@ -264,9 +273,12 @@ returns nonzero and restores transaction-owned bytes, including BOM/newlines.
 Concurrent edits are not overwritten; conflicts retain recovery originals and
 print their location. No-op confirmation writes nothing and launches no children.
 
-This is exception-safe, not a filesystem-wide atomic transaction: run with the
-game closed and no other writer. A hard process kill can leave intermediate YAML;
-recovery originals are created before the first write and their location is printed.
+Each replacement is atomic at the individual file boundary. The multi-file
+operation combines those per-file replacements with rollback and optimistic
+byte guards; it is not a filesystem-wide atomic transaction or compare-and-swap.
+Run with the game closed and exclusive writer ownership of the affected files.
+A hard process kill can leave intermediate YAML; recovery originals are created
+before the first write and their location is printed.
 Map/script-generated references remain manual review limits. A successful apply
 does not approve its balance targets or replace the full audits and boot gate.
 Each generated workbook also carries a SHA-256 fingerprint of the builder,

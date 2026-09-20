@@ -16,14 +16,14 @@ td_nod_chinooktransport:
 		Queue: Aircraft, RAAircraft
 		Description: actor_tran.description
 	Aircraft:
-		TurnSpeed: 30
-		Speed: 150
+		TurnSpeed: 25
+		Speed: 124
 	Health:
-		HP: 100000
+		HP: 82000
 	Repairable:
-		HpPerStep: 5000
+		HpPerStep: 4100
 	ChangesHealth@SelfHealing:
-		Step: 40
+		Step: 33
 	EjectOnDeath:
 		PilotActor: td_nod_minigunner
 	WithIdleOverlay@ROTOR1AIR:

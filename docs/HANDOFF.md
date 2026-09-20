@@ -1,6 +1,76 @@
 # Cameo — THE HANDOFF
 
-## ⭐⭐⭐ 2026-09-14 (latest) — NINE DUAL-ARMAMENT LAWS, AND THE MAP DEFECTS BEHIND THEM
+## 2026-09-20 — PR #407 AGGREGATE CLASSIC-FOUR MILESTONE (IN REVIEW)
+
+PR #407 on `claude/transport-chassis-classic-four-20260918` is the single
+aggregate review head for the classic-four harvester, pipeline, support, and
+transport work. It is rebased on current `upstream/master` (`5fd2ea5e2`) and
+supersedes PRs #404–#406; those heads are historical inputs, not a merge stack.
+
+The exact runtime scope is chassis-only:
+
+* Five harvesters receive the following chassis values (old -> new): TD GDI and
+  Nod `HP 150,000 -> 240,000`, `Speed 60 -> 69`, `Cost 1,000 -> 1,670`,
+  `SelfHealing.Step 60 -> 96`, and `HpPerStep 7,500 -> 12,000`; Nod stealth
+  `HP 125,000 -> 175,000`, `Speed 75 -> 77`, `Cost 1,000 -> 1,520`,
+  `SelfHealing.Step 50 -> 70`, and `HpPerStep 6,250 -> 8,750`; Allied and
+  Soviet ore trucks `HP 100,000 -> 210,000`, `Speed 90 -> 81`,
+  `TurnSpeed 18 -> 16`, `Cost 1,000 -> 1,560`, `SelfHealing.Step 40 -> 84`,
+  and `HpPerStep 5,000 -> 10,500`. Shared `^TDHARV` and `^RAHARV` templates
+  stay intact; target actors receive materialized local children.
+* Four classic MCVs receive materialized chassis values: TD GDI/Nod
+  `HP 300,000 -> 294,000`, `Speed 75 -> 65`, `TurnSpeed 15 -> 13`,
+  `Cost 5,000 -> 4,920`, `SelfHealing.Step 120 -> 118`, and
+  `HpPerStep 15,000 -> 14,700`; RA1 Allied/Soviet `HP 300,000 -> 253,000`,
+  `Speed 75 -> 70`, `TurnSpeed 15 -> 14`, `Cost 5,000 -> 4,650`,
+  `SelfHealing.Step 120 -> 101`, and `HpPerStep 15,000 -> 12,650`.
+  The shared `^MCV` baseline remains unchanged.
+* The RA1 mobile gap generator changes `HP 25,000 -> 96,000`,
+  `Speed 75 -> 76`, `TurnSpeed 30 -> 30`, `SelfHealing.Step 10 -> 38`,
+  and `HpPerStep 1,250 -> 4,800`; the mobile radar jammer changes
+  `HP 25,000 -> 72,000`, `Speed 100 -> 74`, `TurnSpeed 40 -> 30`,
+  `SelfHealing.Step 10 -> 29`, and `HpPerStep 1,250 -> 3,600`. Both authored
+  costs remain 5,000 because their reference rows contain no class or special
+  ability input that justifies a projected price.
+* Four helicopter transports receive: TD GDI/Nod `HP 100,000 -> 82,000`,
+  `Aircraft.Speed 150 -> 124`, `Aircraft.TurnSpeed 30 -> 25`,
+  `SelfHealing.Step 40 -> 33`, and `HpPerStep 5,000 -> 4,100`; RA1 Allied
+  `HP 125,000 -> 88,000`, `Aircraft.Speed 125 -> 120`,
+  `Aircraft.TurnSpeed 25 -> 24`, `SelfHealing.Step 50 -> 35`, and
+  `HpPerStep 6,250 -> 4,400`; RA1 Soviet `HP 150,000 -> 104,000`,
+  `Aircraft.Speed 100 -> 118`, `Aircraft.TurnSpeed 20 -> 24`,
+  `SelfHealing.Step 60 -> 42`, and `HpPerStep 7,500 -> 5,200`.
+  Cargo, InitialUnits, and MaxWeight remain unchanged; authored costs remain
+  the exact passenger sums 4,120 / 3,853 / 4,300 / 2,760.
+
+The extraction contract now carries named `ChangesHealth@SelfHealing.Step`,
+bare-only canonical heal, simultaneous named+bare layers,
+`Repairable.HpPerStep`, and `Aircraft.TurnSpeed` provenance. `apply_balance`
+has focused end-to-end coverage for exact heal/repair file anchors and refuses
+inherited writes. The reusable materializer resolves every target actor before
+editing and requires each resolved field to match its complete old or target
+tuple; unexpected inherited baselines refuse the entire batch. Writes remain
+per-file atomic replacements with rollback and optimistic byte guards, and the
+operator must own the affected files exclusively.
+
+Excluded from this milestone are all weapon/warhead/Burst/BurstDelays changes,
+shared-template edits, inactive Tomorrow gameplay edits, transport cargo
+composition changes, and unsupported support price projections. The main risks
+are the gameplay impact of the larger harvester/support durability pools, the
+MCV cost reductions, and the transport survivability/mobility shifts. The
+inactive `mods/cameo/rules/tomorrow.yaml` `mcv.answer` and `mrj.answer`
+inheritance (including the `mrj.answer` support chassis path) is recorded as a
+re-enable warning; those actors were not changed because the file is excluded
+from the active manifest.
+
+Validation is kept focused because monolithic discovery is OOM-prone. The
+required evidence is the targeted gameplay/tooling contracts, extraction and
+ledger drift, `apply_balance` and materializer refusal/idempotence, cargo
+pricing, determinism, formula/empty-warhead audits, diff hygiene, and a fresh
+menu boot with no new exception logs after the YAML edits. Full-suite green is
+not claimed unless it is actually run.
+
+## ⭐⭐⭐ 2026-09-14 (latest on master) — NINE DUAL-ARMAMENT LAWS, AND THE MAP DEFECTS BEHIND THEM
 
 Written by **Claude-Local (Opus 5)**. **ON MASTER** at `c834fa859` (PR #399, fast-forwarded on
 the maintainer's order over `1e9a38e78` / #394-#398). Map at **Version 33**. These commits write

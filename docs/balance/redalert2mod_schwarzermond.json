@@ -55,6 +55,10 @@
      "RAAircraft"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "7"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -74,6 +78,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "75"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "5"
     }
    },
    "schwarzermond_corruptorpiercer": {
@@ -150,6 +158,10 @@
      "RAAircraft"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "7"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -169,6 +181,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "150"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "10"
     }
    },
    "schwarzermond_dieglocke": {
@@ -242,6 +258,10 @@
      "RAAircraft"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -261,6 +281,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "40"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "8"
     }
    },
    "schwarzermond_drone": {
@@ -438,6 +462,10 @@
     },
     "name": "Drone",
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "3"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -457,6 +485,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "150"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "15"
     }
    },
    "schwarzermond_haunebuii": {
@@ -563,6 +595,10 @@
      "RAAircraft"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "100"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -582,6 +618,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "66"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "13"
     }
    },
    "schwarzermond_haunebuiii": {
@@ -717,6 +757,10 @@
      "RAAircraft"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "150"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -736,6 +780,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "55"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "11"
     }
    },
    "schwarzermond_spacezeppelin": {
@@ -1568,6 +1616,10 @@
      "RAAircraft",
      "Vehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "2625"
+    },
     "resolved_firepower_modifiers": [
      {
       "modifier": 50,
@@ -1576,6 +1628,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "21"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1595,6 +1651,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "35"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "7"
     }
    }
   },
@@ -1654,6 +1714,10 @@
      "RABuilding"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2108,6 +2172,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2465,6 +2533,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2670,7 +2742,15 @@
      "Infantry",
      "RAInfantry"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml#Repairable.HpPerStep",
+     "v": "2500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "20"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (schwarzermond_upgrade_vrilinfusion || shieldgen || shielded)"
@@ -3201,6 +3281,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "18"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (schwarzermond_upgrade_vrilinfusion || shieldgen || shielded)"
@@ -3729,6 +3813,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "30"
+    },
     "shield_condition": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml#Shielded.RequiresCondition",
      "v": "!disabled && (schwarzermond_upgrade_vrilinfusion || yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -3983,7 +4071,15 @@
      "Infantry",
      "RAInfantry"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml#Repairable.HpPerStep",
+     "v": "3750"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "30"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -4612,7 +4708,15 @@
      "Infantry",
      "RAInfantry"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml#Repairable.HpPerStep",
+     "v": "2500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "50"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (schwarzermond_upgrade_vrilinfusion || shieldgen || shielded)"
@@ -4823,6 +4927,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "120"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (schwarzermond_upgrade_vrilinfusion || shieldgen || shielded)"
@@ -5405,6 +5513,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "64"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (schwarzermond_upgrade_vrilinfusion || shieldgen || shielded)"
@@ -6072,7 +6184,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "20000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "160"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6249,6 +6369,10 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "16250"
+    },
     "resolved_firepower_modifiers": [
      {
       "modifier": 50,
@@ -6257,6 +6381,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "130"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6334,7 +6462,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "3125"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6518,7 +6654,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "3500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "28"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6645,7 +6789,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "12000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "96"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7097,7 +7249,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "4375"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "35"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7549,7 +7709,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "5000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "40"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7771,7 +7939,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "3125"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "25"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7968,7 +8144,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "4500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "36"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -8270,7 +8454,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "8000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "64"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -8356,7 +8548,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "1750"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "14"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -8422,6 +8622,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "15000"
+    },
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "120"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -8697,7 +8905,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "22500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "180"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"

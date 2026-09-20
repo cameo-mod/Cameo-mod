@@ -143,6 +143,10 @@
      "~yuri_barracks"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "10"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -350,7 +354,15 @@
      "v": "100"
     },
     "name": "Drive By Car",
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "1250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -588,7 +600,15 @@
      "v": "100"
     },
     "name": "Drive By Car",
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "1250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -796,7 +816,15 @@
      "v": "100"
     },
     "name": "Drive By Car",
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "1250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -943,7 +971,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Repairable.HpPerStep",
+     "v": "6500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "52"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1062,7 +1098,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Repairable.HpPerStep",
+     "v": "5000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "40"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1181,7 +1225,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "5000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "40"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1356,7 +1408,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Repairable.HpPerStep",
+     "v": "5000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "40"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1564,7 +1624,15 @@
      "v": "100"
     },
     "name": "Drive By Car",
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "1250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2565,7 +2633,15 @@
      "v": "100"
     },
     "name": "Drive By Car",
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "1250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2773,7 +2849,15 @@
      "v": "100"
     },
     "name": "Drive By Car",
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "1250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2981,7 +3065,15 @@
      "v": "100"
     },
     "name": "Drive By Car",
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "1250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3189,7 +3281,15 @@
      "v": "100"
     },
     "name": "Drive By Car",
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "1250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3397,7 +3497,15 @@
      "v": "100"
     },
     "name": "Drive By Car",
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "1250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3605,7 +3713,15 @@
      "v": "100"
     },
     "name": "Drive By Car",
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "1250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3813,7 +3929,15 @@
      "v": "100"
     },
     "name": "Drive By Car",
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "1250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4021,7 +4145,15 @@
      "v": "100"
     },
     "name": "Drive By Car",
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "1250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4229,7 +4361,15 @@
      "v": "100"
     },
     "name": "Drive By Car",
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "1250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4437,7 +4577,15 @@
      "v": "100"
     },
     "name": "Drive By Car",
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "1250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4675,7 +4823,15 @@
      "v": "100"
     },
     "name": "Drive By Car",
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "1250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4883,7 +5039,15 @@
      "v": "100"
     },
     "name": "Drive By Car",
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "1250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5091,7 +5255,15 @@
      "v": "100"
     },
     "name": "Drive By Car",
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "1250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5299,7 +5471,15 @@
      "v": "100"
     },
     "name": "Drive By Car",
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "1250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5507,7 +5687,15 @@
      "v": "100"
     },
     "name": "Drive By Car",
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "1250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5632,6 +5820,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "20"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5651,6 +5843,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Aircraft.Speed",
      "v": "210"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Aircraft.TurnSpeed",
+     "v": "21"
     }
    },
    "ra2carrier": {
@@ -5704,6 +5900,10 @@
      "RANaval"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "100"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5774,6 +5974,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Aircraft.Speed",
      "v": "150"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Aircraft.TurnSpeed",
+     "v": "25"
     }
    },
    "ra2cplanesov": {
@@ -5821,6 +6025,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Aircraft.Speed",
      "v": "150"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Aircraft.TurnSpeed",
+     "v": "25"
     }
    },
    "ra2dest": {
@@ -5931,6 +6139,10 @@
      "RANaval"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "64"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6037,6 +6249,10 @@
      "RANaval"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "8"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6123,6 +6339,10 @@
      "RANaval"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "100"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6263,6 +6483,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -6433,6 +6657,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "2"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6452,6 +6680,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Aircraft.Speed",
      "v": "225"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Aircraft.TurnSpeed",
+     "v": "25"
     }
    },
    "ra2lcrf": {
@@ -6641,7 +6873,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Repairable.HpPerStep",
+     "v": "6500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "52"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6843,6 +7083,10 @@
     },
     "name": "Tesla Coil Charger",
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "48"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7129,6 +7373,10 @@
     },
     "name": "Tesla Commando",
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "48"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7290,6 +7538,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -7383,6 +7635,10 @@
      "RANaval"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "12"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7503,6 +7759,10 @@
      "RANaval"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "48"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7836,6 +8096,10 @@
     },
     "name": "MiG Bomber",
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "40"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7855,6 +8119,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Aircraft.Speed",
      "v": "250"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Aircraft.TurnSpeed",
+     "v": "17"
     }
    },
    "yrhovr": {
@@ -8099,6 +8367,10 @@
      "v": "100"
     },
     "name": "Robot Tank",
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Repairable.HpPerStep",
+     "v": "2500"
+    },
     "resolved_firepower_modifiers": [
      {
       "modifier": 110,
@@ -8107,6 +8379,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "20"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -8190,6 +8466,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Aircraft.Speed",
      "v": "250"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Aircraft.TurnSpeed",
+     "v": "28"
     }
    },
    "yrygyard": {
