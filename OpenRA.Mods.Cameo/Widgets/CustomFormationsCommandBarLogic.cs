@@ -39,6 +39,7 @@ namespace OpenRA.Mods.Cameo.Widgets
 		readonly World world;
 
 		int selectionHash;
+		bool attackMoveIsDefault;
 		Actor[] selectedActors = Array.Empty<Actor>();
 		bool attackMoveDisabled = true;
 		bool forceMoveDisabled = true;
@@ -317,14 +318,23 @@ namespace OpenRA.Mods.Cameo.Widgets
 
 		void UpdateStateIfNecessary()
 		{
-			if (selectionHash == world.Selection.Hash)
+			// attackMoveDisabled's eligibility test depends on the setting (see below), not just
+			// on the selection, so a setting change must invalidate the cache here too - otherwise
+			// toggling it with an unchanged selection leaves the tooltip and the disabled state
+			// disagreeing until the player reselects something.
+			var attackMoveIsDefaultNow = Game.Settings.Game.AttackMoveIsDefault;
+			if (selectionHash == world.Selection.Hash && attackMoveIsDefault == attackMoveIsDefaultNow)
 				return;
+
+			attackMoveIsDefault = attackMoveIsDefaultNow;
 
 			selectedActors = world.Selection.Actors
 				.Where(a => a.Owner == world.LocalPlayer && a.IsInWorld && !a.IsDead)
 				.ToArray();
 
-			attackMoveDisabled = !selectedActors.Any(a => a.Info.HasTraitInfo<AttackMoveInfo>() && a.Info.HasTraitInfo<AutoTargetInfo>());
+			attackMoveDisabled = attackMoveIsDefault
+				? !selectedActors.Any(a => a.Info.HasTraitInfo<IMoveInfo>())
+				: !selectedActors.Any(a => a.Info.HasTraitInfo<AttackMoveInfo>() && a.Info.HasTraitInfo<AutoTargetInfo>());
 			guardDisabled = !selectedActors.Any(a => a.Info.HasTraitInfo<GuardInfo>() && a.Info.HasTraitInfo<AutoTargetInfo>());
 			forceMoveDisabled = !selectedActors.Any(a => a.Info.HasTraitInfo<MobileInfo>() || a.Info.HasTraitInfo<AircraftInfo>());
 			forceAttackDisabled = !selectedActors.Any(a => a.Info.HasTraitInfo<AttackBaseInfo>());
