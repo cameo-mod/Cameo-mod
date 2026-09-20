@@ -28,6 +28,8 @@ UNIT_OWNER_COUNTS = {
     "d2k/atreides": 18,
     "d2k/harkonnen": 19,
     "d2k/corrino": 19,
+    "d2k/ordos": 32,
+    "d2k/ixian": 26,
 }
 
 ORDOS_TURRETS = {"ordos_laserturret", "ordos_chemturret"}
@@ -48,7 +50,7 @@ class D2KFactionFluentTests(unittest.TestCase):
             (ROOT / f"mods/cameo/ContentPacks/D2k/{pack}/translations/en.ftl")
             .read_text(encoding="utf-8")
             .rstrip()
-            for pack in ("Atreides", "Harkonnen", "Corrino", "Ordos")
+            for pack in ("Atreides", "Harkonnen", "Corrino", "Ordos", "Ixian")
         )
 
     def test_active_factions_use_fluent_name_and_description(self):
@@ -108,6 +110,9 @@ class D2KFactionFluentTests(unittest.TestCase):
             "Transports ",
             "Unarmed",
             "Cloaked ",
+            "Can ",
+            "Detonates ",
+            "Abilities: ",
         )
 
         for actor in sorted(targets):
@@ -125,6 +130,19 @@ class D2KFactionFluentTests(unittest.TestCase):
                 self.assertTrue(description[0].endswith("."), (actor, description[0]))
                 for detail in (line.strip() for line in description[1:] if line.strip()):
                     self.assertTrue(detail.startswith(allowed_detail_lines), (actor, detail))
+
+                copy = "\n".join(description)
+                if "Detects cloaked units" in copy:
+                    self.assertIsNotNone(resolved.child("DetectCloaked"), actor)
+                if "Transports " in copy:
+                    self.assertTrue(
+                        resolved.child("Cargo") is not None
+                        or resolved.child("Carryall") is not None
+                        or resolved.child("AutoCarryall") is not None,
+                        actor,
+                    )
+                if any(term in copy for term in ("Cloaked ", "Stealth bomber", "Can gain stealth")):
+                    self.assertIsNotNone(resolved.child("Cloak"), actor)
 
 
 if __name__ == "__main__":
