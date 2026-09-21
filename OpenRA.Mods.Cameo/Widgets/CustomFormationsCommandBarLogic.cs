@@ -90,8 +90,14 @@ namespace OpenRA.Mods.Cameo.Widgets
 					: attackMoveTooltipDesc;
 
 				attackMoveButton.IsDisabled = () => { UpdateStateIfNecessary(); return attackMoveDisabled; };
+
+				// CustomFormationsAttackMoveOrderGenerator itself stays completely untouched and is
+				// used exactly as before when the setting is off. CustomFormationsMoveOrderGenerator
+				// is a new sibling class (not a subclass), only ever instantiated when the setting
+				// is on, so the off state never runs any of the new class's code at all - mirrors
+				// the engine's own AttackMoveOrderGenerator/MoveOrderGenerator split.
 				attackMoveButton.IsHighlighted = () => Game.Settings.Game.AttackMoveIsDefault
-					? world.OrderGenerator is MoveOrderGenerator
+					? world.OrderGenerator is CustomFormationsMoveOrderGenerator
 					: world.OrderGenerator is CustomFormationsAttackMoveOrderGenerator;
 
 				void Toggle(bool allowCancel)
@@ -102,7 +108,7 @@ namespace OpenRA.Mods.Cameo.Widgets
 							world.CancelInputMode();
 					}
 					else if (Game.Settings.Game.AttackMoveIsDefault)
-						world.OrderGenerator = new MoveOrderGenerator(world);
+						world.OrderGenerator = new CustomFormationsMoveOrderGenerator(selectedActors, Game.Settings.Game.ResolveActionButton(MouseActionType.ConfirmOrder));
 					else
 						world.OrderGenerator = new CustomFormationsAttackMoveOrderGenerator(selectedActors, Game.Settings.Game.ResolveActionButton(MouseActionType.ConfirmOrder));
 				}
