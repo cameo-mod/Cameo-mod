@@ -15,12 +15,12 @@
 		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 130
 		Prerequisites: ~ordos_heavy_vehicle_production, ordos_outpost, ~!ordos_promotion_laboratorycrawler
-		Description: Ordos Universal Battle Tank\nHighly Mobile Hover unit\nFires laser beams\nWeak durability\n  Strong vs Everything
+		Description: actor_ordos_apc.description
 		IconPalette: windows256
 	Valued:
 		Cost: 2100
 	Tooltip:
-		Name: Ordos APC
+		Name: actor_ordos_apc.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -78,12 +78,12 @@ ordos_laboratorycrawler:
 		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 170
 		Prerequisites: ~ordos_heavy_vehicle_production, ordos_ixresearchcenter, ~ordos_promotion_laboratorycrawler
-		Description: Tleilaxu Mobile Laboratory. Can contaminate enemy infantry and heal friendlies. Equipped with AA Rockets.
+		Description: actor_ordos_laboratorycrawler.description
 		IconPalette: windows256
 	Valued:
 		Cost: 4500
 	Tooltip:
-		Name: Laboratory Crawler
+		Name: actor_ordos_laboratorycrawler.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -137,10 +137,10 @@ ordos_mobileconstructionvehicle:
 		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 40
 		Prerequisites: ~ordos_heavy_vehicle_production, ordos_mcv_production
-		Description: Deploys into a Construction Yard.\n  Unarmed
+		Description: actor_ordos_mobileconstructionvehicle.description
 		IconPalette: d2kunit
 	Tooltip:
-		Name: Ordos Mobile Construction Vehicle
+		Name: actor_ordos_mobileconstructionvehicle.name
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeLarge
 		EmptyWeapon: D2KUnitExplodeLarge
@@ -192,12 +192,12 @@ ordos_spiceharvester:
 		Queue: Vehicle, RAVehicle, Starport
 		Prerequisites: ~spice_refinery, ~ordos_heavy_vehicle_production
 		BuildPaletteOrder: 10
-		Description: template_harvester.description
+		Description: actor_ordos_spiceharvester.description
 		IconPalette: d2kunit
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: Ordos Spice Harvester
+		Name: actor_ordos_spiceharvester.name
 	Selectable:
 		DecorationBounds: 1536, 1536
 	Harvester:
@@ -790,7 +790,7 @@ ordos_cobratank:
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
 	Tooltip:
-		Name: Cobra Tank
+		Name: actor_ordos_cobratank.name
 	Valued:
 		Cost: 1500
 	Buildable:
@@ -798,7 +798,7 @@ ordos_cobratank:
 		Queue: Vehicle, RAVehicle, Starport
 		Prerequisites: ~ordos_heavy_vehicle_production, ordos_outpost, ~!ordos_promotion_python
 		BuildPaletteOrder: 100
-		Description: Siege Artillery\n  Strong vs Infantry, Buildings\n  Weak vs Tanks
+		Description: actor_ordos_cobratank.description
 		IconPalette: d2kunit
 	Health:
 		HP: 45000
@@ -905,7 +905,7 @@ ordos_pythontank:
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
 	Inherits@bot: ^SiegeModeVehicle
 	Tooltip:
-		Name: Python Tank
+		Name: actor_ordos_pythontank.name
 	Valued:
 		Cost: 2500
 	Buildable:
@@ -913,7 +913,7 @@ ordos_pythontank:
 		Queue: Vehicle, RAVehicle, Starport
 		Prerequisites: ~ordos_heavy_vehicle_production, ordos_outpost, ~ordos_promotion_python
 		BuildPaletteOrder: 150
-		Description: Siege Artillery\n  Strong vs Infantry, Buildings\n  Weak vs Tanks
+		Description: actor_ordos_pythontank.description
 		IconPalette: d2kunit
 	Health:
 		HP: 70000
@@ -1016,12 +1016,12 @@ ordos_lasertank:
 		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 140
 		Prerequisites: ~ordos_heavy_vehicle_production, ordos_ixresearchcenter, ~ordos_promotion_lasertank
-		Description: Ordos Universal Battle Tank\nHighly Mobile Hover unit\nFires laser beams\nWeak durability\n  Strong vs Everything
+		Description: actor_ordos_lasertank.description
 		IconPalette: windows256
 	Valued:
 		Cost: 2400
 	Tooltip:
-		Name: Laser Tank
+		Name: actor_ordos_lasertank.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -1072,7 +1072,7 @@ ordos_deviatortank:
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Inherits@BiologicalWarfareUpgradeOrdos: ^BiologicalWarfareUpgradeOrdos
 	Tooltip:
-		Name: Deviator Tank
+		Name: actor_ordos_deviatortank.name
 	Valued:
 		Cost: 1600
 	Buildable:
@@ -1080,7 +1080,7 @@ ordos_deviatortank:
 		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 120
 		Prerequisites: ~ordos_heavy_vehicle_production, ordos_palace, ~ordos_promotion_deviatortank
-		Description: Ordos Universal Battle Tank\nHighly Mobile Hover unit\nFires laser beams\nWeak durability\n  Strong vs Everything
+		Description: actor_ordos_deviatortank.description
 		IconPalette: windows256
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -1403,7 +1403,7 @@ ordos_raider:
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
 	Tooltip:
-		Name: Ordos Raider
+		Name: actor_ordos_raider.name
 	Valued:
 		Cost: 1200
 	Buildable:
@@ -1411,7 +1411,7 @@ ordos_raider:
 		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 70
 		Prerequisites: ~ordos_light_vehicle_production, ~!ordos_promotion_stealthraider
-		Description: Improved Scout\nCan carry a passenger\n  Strong vs Infantry, Light Vehicles\n  Weak vs Tanks
+		Description: actor_ordos_raider.description
 		IconPalette: d2kunit
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -1458,14 +1458,14 @@ ordos_stealthraider:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Tooltip:
-		Name: Stealth Raider
+		Name: actor_ordos_stealthraider.name
 	Valued:
 		Cost: 1300
 	Buildable:
 		Factions: ordos
 		Prerequisites: ~ordos_light_vehicle_production, ~ordos_promotion_stealthraider
 		BuildPaletteOrder: 80
-		Description: Invisible Raider Trike\n  Strong vs Infantry, Light Vehicles\n  Weak vs Tanks
+		Description: actor_ordos_stealthraider.description
 		IconPalette: d2kunit
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -1505,7 +1505,7 @@ ordos_dustdrone:
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
 	Tooltip:
-		Name: Dust Drone
+		Name: actor_ordos_dustdrone.name
 	Valued:
 		Cost: 1400
 	Buildable:
@@ -1513,7 +1513,7 @@ ordos_dustdrone:
 		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 90
 		Prerequisites: ~ordos_light_vehicle_production, ~ordos_promotion_dustdrone
-		Description: Improved Scout\n  Strong vs Vehicles\n  Weak vs Infantry
+		Description: actor_ordos_dustdrone.description
 		IconPalette: d2kunit
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -1570,7 +1570,7 @@ ordos_deviatorartillery:
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Inherits@BiologicalWarfareUpgradeOrdos: ^BiologicalWarfareUpgradeOrdos
 	Tooltip:
-		Name: Deviator Artillery
+		Name: actor_ordos_deviatorartillery.name
 	Valued:
 		Cost: 1250
 	UpdatesPlayerStatistics:
@@ -1580,7 +1580,7 @@ ordos_deviatorartillery:
 		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 20
 		Prerequisites: ~ordos_heavy_vehicle_production, ordos_palace
-		Description: Fires a warhead which changes\nthe allegiance of enemy vehicles
+		Description: actor_ordos_deviatorartillery.description
 		IconPalette: d2kunit
 	Health:
 		HP: 55000
@@ -1628,14 +1628,14 @@ ordos_combattank:
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
 	Tooltip:
-		Name: Ordos Combat Tank
+		Name: actor_ordos_combattank.name
 	Valued:
 		Cost: 650
 	Buildable:
 		Factions: ordos
 		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 50
-		Description: template_mbt.description
+		Description: actor_ordos_combattank.description
 		IconPalette: d2kunit
 		Prerequisites: ~ordos_heavy_vehicle_production, ~!ordos_upgrade_heavycombattank
 	UpdatesPlayerStatistics:
@@ -1684,14 +1684,14 @@ ordos_heavycombattank:
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
 	Tooltip:
-		Name: Ordos Heavy Combat Tank
+		Name: actor_ordos_heavycombattank.name
 	Valued:
 		Cost: 950
 	Buildable:
 		Factions: ordos
 		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 60
-		Description: template_mbt.description
+		Description: actor_ordos_heavycombattank.description
 		IconPalette: d2kunit
 		Prerequisites: ~ordos_heavy_vehicle_production, ~ordos_upgrade_heavycombattank
 	UpdatesPlayerStatistics:
@@ -1750,7 +1750,7 @@ ordos_combatautoguntank:
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
 	Inherits@RapidFireArmorPiercingBelts: ^Ordos_RapidFireArmorPiercingBelts
 	Tooltip:
-		Name: Combat Autogun Tank
+		Name: actor_ordos_combatautoguntank.name
 	Valued:
 		Cost: 1500
 	Buildable:
@@ -1758,7 +1758,7 @@ ordos_combatautoguntank:
 		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 110
 		Prerequisites: ~ordos_heavy_vehicle_production, ordos_outpost, ~!ordos_upgrade_heavyautoguntank
-		Description: Combat Anti-Infantry and Anti-Air Vehicle
+		Description: actor_ordos_combatautoguntank.description
 		IconPalette: ra2
 	Armament:
 		Weapon: autogun_tank_small
@@ -1806,7 +1806,7 @@ ordos_heavyautoguntank:
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
 	Inherits@RapidFireArmorPiercingBelts: ^Ordos_RapidFireArmorPiercingBelts
 	Tooltip:
-		Name: Heavy Autogun Tank
+		Name: actor_ordos_heavyautoguntank.name
 	Valued:
 		Cost: 2800
 	Buildable:
@@ -1814,7 +1814,7 @@ ordos_heavyautoguntank:
 		Queue: Vehicle, RAVehicle, Starport
 		Prerequisites: ~ordos_heavy_vehicle_production, ~ordos_upgrade_heavyautoguntank
 		BuildPaletteOrder: 160
-		Description: Heavy Anti-Infantry Tank\n  Strong vs Infantry, Vehicles\n  Weak vs Tanks
+		Description: actor_ordos_heavyautoguntank.description
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -1865,7 +1865,7 @@ ordos_tankdestroyer:
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
 	Tooltip:
-		Name: Tank Destroyer
+		Name: actor_ordos_tankdestroyer.name
 	Valued:
 		Cost: 2200
 	Buildable:
@@ -1873,7 +1873,7 @@ ordos_tankdestroyer:
 		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 30
 		Prerequisites: ~ordos_heavy_vehicle_production, ordos_ixresearchcenter
-		Description: Fast stealth tank with powerful long range cannon\n  Strong vs Tanks\n  Weak vs Infantry
+		Description: actor_ordos_tankdestroyer.description
 		IconPalette: windows256
 	Armament:
 		Weapon: 120mm_td

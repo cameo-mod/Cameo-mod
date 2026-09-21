@@ -13,13 +13,13 @@ ordos_antiairtrooper:
 	Valued:
 		Cost: 450
 	Tooltip:
-		Name: Anti Air Trooper
+		Name: actor_ordos_antiairtrooper.name
 	Buildable:
 		Factions: ordos
 		BuildPaletteOrder: 95
 		Prerequisites: ~ordos_barracks, ~ordos_upgrade_antiairtrooper
 		Queue: Infantry, RAInfantry
-		Description: template_antitank_antiair_infantry.description
+		Description: actor_ordos_antiairtrooper.description
 	Health:
 		HP: 15000
 	ChangesHealth@SelfHealing:
@@ -62,7 +62,7 @@ ordos_lightinfantry:
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
 	Inherits@LaserGuns: ^Ordos_LaserGuns
 	Tooltip:
-		Name: Ordos Light Infantry
+		Name: actor_ordos_lightinfantry.name
 	Valued:
 		Cost: 120
 	Buildable:
@@ -133,7 +133,7 @@ ordos_rockettrooper:
 	Valued:
 		Cost: 300
 	Tooltip:
-		Name: Ordos Rocket Trooper
+		Name: actor_ordos_rockettrooper.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -171,14 +171,14 @@ ordos_chemicaltrooper:
 	Inherits@AntiTank: ^PrioritizeTank
 	Inherits@BiologicalWarfareUpgradeOrdos: ^BiologicalWarfareUpgradeOrdos
 	Tooltip:
-		Name: Ordos Chemical Trooper
+		Name: actor_ordos_chemicaltrooper.name
 	Valued:
 		Cost: 400
 	Buildable:
 		Factions: ordos
 		BuildPaletteOrder: 85
 		Queue: Infantry, RAInfantry
-		Description: General-purpose infantry equipped with chemical weapon.\nCannot attack buildings\n  Strong vs Infantry\n  Weak vs Vehicles
+		Description: actor_ordos_chemicaltrooper.description
 		Prerequisites: ~ordos_barracks, ~ordos_promotion_chemicaltrooper
 		IconPalette: player
 	Health:
@@ -225,7 +225,7 @@ ordos_mortartrooper:
 	Inherits@BiologicalWarfareUpgradeOrdos: ^BiologicalWarfareUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
 	Tooltip:
-		Name: Ordos Mortar Trooper
+		Name: actor_ordos_mortartrooper.name
 	Valued:
 		Cost: 600
 	Buildable:
@@ -233,7 +233,7 @@ ordos_mortartrooper:
 		BuildPaletteOrder: 115
 		Prerequisites: ~ordos_barracks, ~ordos_promotion_mortartroopers
 		Queue: Infantry, RAInfantry
-		Description: template_antitank_antiair_infantry.description
+		Description: actor_ordos_mortartrooper.description
 	Health:
 		HP: 20000
 	ChangesHealth@SelfHealing:
@@ -390,7 +390,7 @@ ordos_facedancer:
 	Inherits@BiologicalWarfareUpgradeOrdos: ^BiologicalWarfareUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
 	Tooltip:
-		Name: Face Dancer
+		Name: actor_ordos_facedancer.name
 	Valued:
 		Cost: 5000
 	Buildable:
@@ -399,7 +399,7 @@ ordos_facedancer:
 		BuildPaletteOrder: 35
 		BuildLimit: 1
 		Prerequisites: ~ordos_barracks, ordos_palace
-		Description: Genetically modified humanoid armed with a powerful rocket launcher. Can cloak. Does not lie down when attacked. Immune to Tiberium
+		Description: actor_ordos_facedancer.description
 	Health:
 		HP: 90000
 	ChangesHealth@SelfHealing:
@@ -455,13 +455,13 @@ ordos_contaminator:
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: Contaminator
+		Name: actor_ordos_contaminator.name
 	Buildable:
 		Factions: ordos
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 105
 		Prerequisites: ~ordos_barracks, ~ordos_promotion_contaminator
-		Description: The Contaminator is a genetically engineered organism\nthat infects a target organic unit to create another Contaminator\nwhen the target dies. They are quite\nresilient to gunfire.\n  Strong vs Buildings, Infantry, Air, Vehicles\n  Weak vs Siege
+		Description: actor_ordos_contaminator.description
 	Health:
 		HP: 75000
 	ChangesHealth@SelfHealing:
@@ -792,14 +792,14 @@ ordos_leech:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 130
 		Prerequisites: ~ordos_barracks, ~ordos_promotion_leecher
-		Description: Stealth creature that can attack infantry and infect vehicles.
+		Description: actor_ordos_leech.description
 		IconPalette: player
 	Selectable:
 		Bounds: 1024, 1024
 	Valued:
 		Cost: 1100
 	Tooltip:
-		Name: Leech
+		Name: actor_ordos_leech.name
 	Mobile:
 		Speed: 150
 		TurnSpeed: 60
@@ -2016,12 +2016,12 @@ ordos_saboteur:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 15
 		Prerequisites: ~disabled
-		Description: Sneaky stealth infantry that can infiltrate safely, armed with explosives that can be attached to buildings\nExplodes upon death\nDetector\n  Strong vs Buildings\n  Weak vs Everything\n  Special Abilities: Destroy Buildings, Invisibility
+		Description: actor_ordos_saboteur.description
 		IconPalette: d2kunit
 	Valued:
 		Cost: 300 ## actually 0, but spawns from support power at Palace
 	Tooltip:
-		Name: Saboteur
+		Name: actor_ordos_saboteur.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
