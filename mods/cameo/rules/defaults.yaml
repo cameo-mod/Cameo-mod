@@ -1178,7 +1178,7 @@
 	Inherits@InfantryBuffs: ^InfantryBuffs
 	Inherits@RA2YuriStealthSuits: ^RA2YuriStealthSuits
 	Armor:
-		Type: None
+		Type: Flak
 	DamageMultiplier@ScoutInfantryBuff:
 		Modifier: 50
 	FirepowerMultiplier@ScoutInfantryBuff:
@@ -1277,7 +1277,7 @@
 	FirepowerMultiplier@AntiTankAntiAirInfantryBuff:
 		Modifier: 110
 	Armor:
-		Type: Flak
+		Type: None
 	RevealsShroud:
 		Range: 6500
 	Buildable:
@@ -1404,7 +1404,7 @@
 	RenderRangeCircle:
 		RangeCircleType: infantry
 	Armor:
-		Type: Flak
+		Type: None
 	RevealsShroud:
 		Range: 7500
 	DetectCloaked:
@@ -1431,7 +1431,7 @@
 	Inherits@detect: ^GenericGroundDetector
 	Inherits@InfantryBuffs: ^InfantryBuffs
 	Armor:
-		Type: Flak
+		Type: None
 	FirepowerMultiplier@HeavySniperInfantryBuff:
 		Modifier: 100
 	RevealsShroud:
@@ -1461,7 +1461,7 @@
 	Inherits@EXT: ^ExternalConditions
 	Inherits@InfantryBuffs: ^InfantryBuffs
 	Armor:
-		Type: Flak
+		Type: None
 	FirepowerMultiplier@RocketTrooperInfantryBuff:
 		Modifier: 100
 	RevealsShroud:
