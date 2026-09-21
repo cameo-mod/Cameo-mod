@@ -108,6 +108,12 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [Two ways a gate passes its own verification and is still broken (2026-08-23)](#two-ways-a-gate-passes-its-own-verification-and-is-still-broken-2026-08-23)
 - ["Regenerable" is a claim about a tool, and it needs running (2026-08-28)](#regenerable-is-a-claim-about-a-tool-and-it-needs-running-2026-08-28)
 - ["Not found" is not "not there" — three ways a grep lies (2026-08-28)](#not-found-is-not-not-there--three-ways-a-grep-lies-2026-08-28)
+- [A default you never see is still a decision — the Aircraft-148 defect](#a-default-you-never-see-is-still-a-decision--the-aircraft-148-defect)
+- [An invariant that holds BY CONSTRUCTION cannot fail, so it is not a check](#an-invariant-that-holds-by-construction-cannot-fail-so-it-is-not-a-check)
+- [`*Death` tokens are DEATH ANIMATIONS, not damage elements](#death-tokens-are-death-animations-not-damage-elements)
+- [One weapon, one warhead — on the REFERENCE side too](#one-weapon-one-warhead--on-the-reference-side-too)
+- [A weapon's profile is the SUM of its warheads, not its biggest one](#a-weapons-profile-is-the-sum-of-its-warheads-not-its-biggest-one)
+- [Matching a warhead by its NAME fails, three different ways](#matching-a-warhead-by-its-name-fails-three-different-ways)
 
 ---
 
@@ -1940,3 +1946,132 @@ Two launch traps surfaced the same day, both producing false confidence:
    Gate correctly: confirm the PID you launched is alive through the load AND
    the marker appears — or timestamp-check that the marker was written during
    your process's lifetime, not just "exists."
+
+---
+
+## A default you never see is still a decision — the Aircraft-148 defect
+
+`WeaponInfo.ValidTargets` and `Warhead.ValidTargets` **both default to `new("Ground", "Water")`**
+(`WeaponInfo.cs:116`, `Warhead.cs:30`). A weapon that never mentions targeting therefore **cannot
+hit air at all** — that is 366 of Combined Arms' 695 weapons.
+
+The reference matrix filled every unstated armour row with the engine's neutral 100, including the
+aircraft rows of weapons that can never fire at aircraft. Every tank cannon in the corpus was
+entered as a competent anti-air weapon. **74% of Combined Arms' air cells were wrong, and 48% of
+Cameo's own.** The maintainer spotted it from the output: *"Aircraft148 is there always even if the
+unit cannot even hit air which is annoying and completely misrepresenting everything."*
+
+⭐ **A cell an attack cannot reach is `n/a`, and `n/a` is not `0`.** Both are excluded from every
+mean, but "immune to this armour" and "cannot target this armour" are different statements and a
+reader must be able to tell them apart. Guarded by `warhead_matrix.targetable_macros`.
+
+## An invariant that holds BY CONSTRUCTION cannot fail, so it is not a check
+
+The reference matrices are normalised so each one's geometric mean is 100 and every value lies in
+`[10, 200]`. That was verified after every change and reported as proof — *"all seven verified at
+exactly 100.00000000"*.
+
+It proved nothing. The matrix is divided **by the very centre being tested**, so the invariant is
+true whatever that centre is. It passed on six matrices whose centre had collapsed to a twentieth
+of the mod's typical value, where a real 60 and a real 100 both clamped to the ceiling and the
+whole matrix had flattened.
+
+⭐ **Check against a quantity the transform cannot move.** Here that is the source's own POSITIVE
+MEDIAN: a matrix has collapsed when its typical working value no longer fits inside its own window.
+`warhead_matrix.py --check`. The same trap is waiting wherever a value is normalised by a statistic
+derived from itself.
+
+⚠ The related numerical lesson: the window is a FIXPOINT (clamping moves the mean, which moves the
+window), and it **diverges** when the floored cells are numerous enough. Above ~13% zeros Mental
+Omega's centre marched 32.3 → 13.5 → 4.1 → 0.2 and never settled. Below ~8% it converged fine,
+which is exactly why the flaw stayed invisible until six YR mods were added at once.
+
+## `*Death` tokens are DEATH ANIMATIONS, not damage elements
+
+`DamageTypes` looks like an element tag and mostly is not. `FireDeath` means "the victim plays the
+burning death sequence" — Combined Arms' `HonestJohn` rocket artillery and `155mmSpec` both carry
+it, and neither is a fire weapon. Reading it as an element produced a warhead group named
+`LaserFire_Veh` containing `PointLaser` and `AvatarLaser`.
+
+⭐ **Split the strong signals from the animations.** `FrozenDeath`, `RadiationDeath`, `ToxinDeath`,
+`ElectricityDeath` and `AtomizedDeath` are specific enough that no ordinary weapon claims them, and
+`TankBuster` and `Incendiary` are real damage tags the engine acts on. `FireDeath`,
+`ExplosionDeath`, `BulletDeath` and `DefaultDeath` are presentation.
+
+## One weapon, one warhead — on the REFERENCE side too
+
+**116 of Combined Arms' 466 armed weapons carry more than one damage warhead.** Treating each node
+as its own weapon put one weapon into three groups at once and filled the generalist buckets with
+fragments — which is what the maintainer was seeing when they wrote *"these are many different
+things that have nothing to do with each other."* One row per weapon is right, and it is
+DESIGN.md §11b applied to the corpus instead of to our own tree.
+
+⛔ **The half of this entry that said HOW to pick that row was wrong and has been struck.** It
+read: *"`Warhead@1Dam` is the main in 550 of 577 weapons, so the convention decides it."* The
+count came from a scan that treated every warhead node as a weapon, and the conclusion does not
+survive contact with the corpus — see
+[A weapon's profile is the SUM of its warheads](#a-weapons-profile-is-the-sum-of-its-warheads-not-its-biggest-one).
+⭐ **Fold, do not pick.**
+
+## A weapon's profile is the SUM of its warheads, not its biggest one
+
+The maintainer reviewed 132 measured warhead groups and queried four of them in almost the same
+words — *"why is light immune? this doesn't make any sense and is a bug"*, *"how is the damage so
+low against None?"*, *"none immune is a bug, this can't be right?"*, *"are you sure that anti light
+is only at 18 while the rest is all at 176?"*. All four were one defect, in the measurement.
+
+The compressor reduced each weapon to one warhead — correctly — but picked it **by name**,
+`Warhead@1Dam` first. In Combined Arms that convention does not mean "the main one", and the extra
+warheads are routinely **complementary rather than twins**, because OpenRA fires every warhead on
+every hit:
+
+| weapon | `@1Dam` | the warhead that was discarded |
+|---|---|---|
+| `FireballLauncher` | `Light: 0` | `@2Dam` — `Light: 50`, everything else 0 |
+| `JDAM` | `None: 0` | `@2Dam` — `None: 100`, everything else 0 |
+| `MaverickSU` | `None: 0` | `@2Dam` — `None: 100`, everything else 0 |
+| `ApocRadBeamWeapon` | an infantry-only `HealthPercentageDamage` rider stating one row | `@2Dam` — the weapon's whole table |
+
+Picking one reported a **false zero**, the worst error available here: the pipeline exists to keep
+time-to-kill intact across the compression, and a zero says "this matchup never ends".
+
+⭐ The fix is arithmetic, not heuristic. Effective damage against armour `A` is what the engine
+inflicts, `sum over warheads w that reach A of damage_w x versus_w(A) / 100`, so the folded row is
+that against the weapon's own total damage `D`:
+
+```
+versus(A) = 100 x SUM( damage_w x versus_w(A) ) / D,    D = SUM( damage_w )
+```
+
+A warhead that cannot reach `A` contributes 0 to the numerator and still counts in `D`. That keeps
+the **ratios** between armour rows equal to the ratios of real effective damage. ⚠ Dividing by a
+per-armour denominator instead — a plain weighted average — silently flattens exactly the weapons
+that split their target sets: it reports `ApocRadBeamWeapon` at 2.14x infantry-vs-light where the
+truth is 2.64x. Two currencies are never summed: `HealthPercentageDamage` resolves as
+`HP x Damage/100 x Versus/100`, so `Damage: 300` is a 3x-overkill one-shot and not a 300 HP chip,
+and it folds only with its own kind.
+
+⚠ **A folded row has no node of its own, and `DamageTypes` is keyed by (weapon, node).** The first
+version of this fold dropped that key, every folded weapon came back element `Plain`, and the
+flamethrowers landed in the plain-`Bullet` group. Carry the original node list and resolve the
+element over all of them.
+
+⭐ **The maintainer's review was recorded per WEAPON, not per group, and that is why it survived.**
+Group names carry a `_2`/`_3` suffix assigned by clustering order, so fixing this defect moved 5
+group boundaries and would have invalidated a name-keyed review. `docs/reference/warhead_family_assignment.yaml`
+keeps every individually-named verdict in an `overrides:` block for exactly this reason.
+
+## Matching a warhead by its NAME fails, three different ways
+
+Three separate name-based classifications broke in one session:
+
+* `BazAP` was classified **Tesla** — `Ba`**`zAP`** contains "zap" as a substring.
+* `ChronoBeam` and `LocomotorBeam` matched **Laser** on "beam"; both are mind-control and
+  movement effects with no damage profile at all.
+* `InterloperLaser` landed in a group named `Cannon_LightVeh`, and `135mm` in one named
+  `Laser_HeavyVeh`, because the group's name was voted by whichever member matched first.
+
+Word boundaries fix only the first. ⭐ **Every signal has a measured source: delivery from the
+weapon's `Projectile:`, element from `DamageTypes:`, platform from the actors that actually fire
+it.** Where no measurement exists, the assignment is a maintainer decision made from the compressed
+groups — never a regex over identifiers (`REFERENCE_EXTRACTION_PLAN.md` R21).
