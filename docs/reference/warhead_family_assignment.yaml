@@ -1,0 +1,1468 @@
+# Reference warhead group -> Cameo warhead family.
+#
+# HAND-AUTHORED, like `peer_armor_map.yaml` and for the same reason: it is a series of JUDGEMENTS
+# and every one has to be inspectable and arguable. There is deliberately NO generator for this
+# file -- edit it directly. It must never be rebuilt from a name-matching pass:
+# REFERENCE_EXTRACTION_PLAN.md R21 records the three separate ways that failed (`BazAP` read as
+# Tesla because it contains "zAP"; `ChronoBeam` and `LocomotorBeam` read as Laser, and both are
+# mind-control effects with no damage profile at all).
+#
+# The GROUPS come from `tools/reference/compress_warheads.py`, which keys on measured signals
+# only: delivery from the weapon's `Projectile:`, element from its warhead's `DamageTypes:`,
+# platform from the actors that actually fire it, and shape from the normalised Versus row.
+# The FAMILY on each row is a decision, not a measurement.
+#
+# status:
+#   proposed    Claude's reading, awaiting maintainer review
+#   confirmed   the maintainer has reviewed this row
+#
+# Review page (pre-filled, markable): https://claude.ai/artifact/2b4mMZydFnKiox9XKGB8s3
+#
+# `profile` is the group's normalised Versus row in `armors` order. `n/a` means the warhead
+# CANNOT TARGET that armour's macro class at all (R16) -- neither a zero nor a 100, and excluded
+# from every mean.
+#
+# WARNING: group NAMES are stable only for a given compression run. If `compress_warheads.py`
+# changes its key or threshold the names shift, and this file must be RE-REVIEWED rather than
+# blindly re-applied. Current run: tau 0.50, four platform bands, one main warhead per weapon,
+# zeros treated as absences.
+
+source: combined_arms
+tau: 0.5
+armors: [Heavy, Wood, None, Light, Aircraft, Concrete]
+totals:
+  warheads: 751
+  compressible: 394
+  skipped: 357
+  groups: 132
+
+groups:
+  BulletHE_Veh:
+    family: "CannonAP"
+    status: confirmed
+    review_note: "per-weapon overrides also split off: (park: naval), BlastSonic, CannonNuke"
+    band: "vehicle"
+    delivery: "Bullet"
+    element: "HE"
+    uses: 48
+    members: 24
+    factor: 1.375
+    profile: [191.2, 159.9, 76.8, 187.4, 94.9, 114.5]
+    weapons: ["105mm", "120mm", "120mm.Drone", "125mm", "125mmAtomic", "125mmLasher", "125mmLasherAtomic", "125mmRhino", "125mmRhinoAtomic", "130mm", "130mmAtomic", "130mmTD", "130mmTD.Drone", "135mm", "135mmAtomic", "152mm", "152mmAtomic", "30mm", "90mm", "DepthCharge", "DoubleDepthCharge", "GuardianDroneGun", "TitanGun", "ZoneRaiderGrenade"]
+  Bullet_Veh:
+    family: "Bullet"
+    status: confirmed
+    review_note: "per-weapon overrides also split off: Bullet"
+    band: "vehicle"
+    delivery: "Bullet"
+    element: "Plain"
+    uses: 36
+    members: 7
+    factor: 0.515
+    profile: [21.4, 21.4, 200.0, 139.4, 165.3, 21.4]
+    weapons: ["FLAK-23-AG", "M60mg", "M60mgJJ", "M60mgMD", "M60mgTD", "Pistol", "PistolTD"]
+  MissileHE_Veh:
+    family: "MissileHE"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Missile"
+    element: "HE"
+    uses: 22
+    members: 13
+    factor: 1.18
+    profile: [59.8, 137.2, 173.4, 145.2, 81.2, 128.6]
+    weapons: ["227mm", "227mm.Hailstorm", "227mm.Hammerhead", "227mmH", "227mmH.Hailstorm", "227mmH.Hammerhead", "ApocalypseTusk", "CyborgReaperMissiles", "MammothTusk", "MammothTusk.Drone", "RocketShells", "TitanTusk", "TitanTusk.Gyro"]
+  BulletHE_Veh_2:
+    family: "CannonHE"
+    status: confirmed
+    review_note: "per-weapon overrides also split off: CannonNuke, MissileHE"
+    band: "vehicle"
+    delivery: "Bullet"
+    element: "HE"
+    uses: 21
+    members: 18
+    factor: 1.366
+    profile: [80.5, 175.3, 183.3, 151.2, n/a, 121.7]
+    weapons: ["155mm", "155mmTD", "155mmTDM", "227mm.Hypersonic", "227mmH.Hypersonic", "25mmFRAG", "280mmAtomic", "8Inch", "8Inch.NoReport", "GradRockets", "GradRockets.UPG", "GradRocketsWide", "GradRocketsWide.UPG", "JuggernautGun", "KatyushaRockets", "KatyushaRocketsWide", "SCUD", "SonicMortar"]
+  MissileHE_Veh_2:
+    family: "MissileAA"
+    status: confirmed
+    review_note: "per-weapon overrides also split off: MissileAP"
+    band: "vehicle"
+    delivery: "Missile"
+    element: "HE"
+    uses: 20
+    members: 10
+    factor: 1.045
+    profile: [119.0, 95.2, 23.8, 200.0, 107.8, 71.4]
+    weapons: ["227mmAA.Hailstorm", "227mmAA.Hammerhead", "227mmAA.Hypersonic", "BikeRocketsAA.TibCore", "IFVRocketsAA", "IFVRocketsAAE", "IFVRocketsAAE.CRYO", "IFVRocketsAAE.TibCore", "PitbullRockets", "StingerAA"]
+  Hitscan_Veh:
+    family: "(drop: not a damage warhead)"
+    status: confirmed
+    review_note: "every member carries a per-weapon override; the group family decides nothing"
+    band: "vehicle"
+    delivery: "Hitscan"
+    element: "Plain"
+    uses: 18
+    members: 6
+    factor: 2.0
+    profile: [200.0, 200.0, 200.0, 200.0, n/a, 200.0]
+    weapons: ["DemoTruckTargeting", "EnslaveInfantry", "EnslaveVehicle", "Heal", "IvanIFVTargeting", "RepairIFV"]
+  MissileHE_Inf:
+    family: "MissileAP"
+    status: confirmed
+    band: "infantry"
+    delivery: "Missile"
+    element: "HE"
+    uses: 17
+    members: 13
+    factor: 0.846
+    profile: [171.1, 138.6, 20.5, 65.2, 80.4, 140.2]
+    weapons: ["Dragon", "Dragon.CYB", "Dragon.CYB.TibCore", "Dragon.TD", "Dragon.TibCore", "DragonBATF", "DragonBATF.CYB", "DragonBATF.CYB.TibCore", "DragonBATF.TD", "DragonBATF.TibCore", "DragonGI", "IntruderDiscsBATF", "MarauderDiscs"]
+  MissileHE_Veh_3:
+    family: "MissileAP"
+    status: confirmed
+    review_note: "per-weapon overrides also split off: MissileAP"
+    band: "vehicle"
+    delivery: "Missile"
+    element: "HE"
+    uses: 17
+    members: 8
+    factor: 0.872
+    profile: [183.9, 109.0, 21.9, 124.4, 82.4, 97.8]
+    weapons: ["APTusk", "BikeRockets", "BikeRockets.TibCore", "IFVRockets", "IFVRocketsE", "IntruderDiscs", "SBRockets", "TigerGuardMissile"]
+  Laser_Veh:
+    family: "Laser"
+    status: confirmed
+    review_note: "per-weapon overrides also split off: (drop: support weapon), Quantum"
+    band: "vehicle"
+    delivery: "Laser"
+    element: "Plain"
+    uses: 15
+    members: 11
+    factor: 1.625
+    profile: [185.1, 138.0, 189.5, 170.5, n/a, 137.1]
+    weapons: ["AvatarLaser", "AvatarLaser.Adv", "CustodianHeal", "IFVLaser", "PointLaser", "ReaperLaser", "ReaperLaserCharged", "ReaperLaserChargedReversed", "ReaperLaserReversed", "TripodLaser", "TripodLaserReversed"]
+  Hitscan_Inf:
+    family: "Melee"
+    status: confirmed
+    review_note: "per-weapon overrides also split off: (drop: support weapon), (drop: targeting relay)"
+    band: "infantry"
+    delivery: "Hitscan"
+    element: "Plain"
+    uses: 12
+    members: 9
+    factor: 1.774
+    profile: [200.0, 160.6, 165.5, 190.3, n/a, 173.9]
+    weapons: ["BruteAttack", "BruteBuildingAttack", "BursterTargeting", "CyberdogJaw", "CyborgRepair", "DogJaw", "MineDefuser", "Repair", "TerrorDogJaw"]
+  Bullet_Inf:
+    family: "Bullet"
+    status: confirmed
+    band: "infantry"
+    delivery: "Bullet"
+    element: "Plain"
+    uses: 11
+    members: 10
+    factor: 0.628
+    profile: [27.0, 57.3, 200.0, 87.2, n/a, 36.2]
+    weapons: ["CommissarPistol", "ConfessorGun", "M14", "M16Carbine", "M16CarbineBATF", "M1Carbine", "M1CarbineBATF", "Vulcan3", "WarriorGun", "WarriorGunBATF"]
+  MissileAP_Veh:
+    family: "MissileAP"
+    status: confirmed
+    review_note: "per-weapon overrides also split off: MissileAP, Quantum"
+    band: "vehicle"
+    delivery: "Missile"
+    element: "AP"
+    uses: 10
+    members: 8
+    factor: 0.796
+    profile: [139.6, 87.9, 26.7, 113.3, 122.0, 79.0]
+    weapons: ["HstkMissile", "HstkMissile.TibCore", "IFVRocketsE.TibCore", "LaceratorShards.Hypercharged", "PlasmaDiscs.Hypercharged", "StnkMissile", "StnkMissile.TibCore", "TOW"]
+  Laser_Veh_2:
+    family: "LaserPulse"
+    status: confirmed
+    review_note: "per-weapon overrides also split off: LaserPulse"
+    band: "vehicle"
+    delivery: "Laser"
+    element: "Plain"
+    uses: 9
+    members: 4
+    factor: 0.612
+    profile: [32.0, 40.4, 160.2, 129.7, n/a, 32.0]
+    weapons: ["BattleTankLaser", "LightTankLaser", "RaiderBuggyLaser", "StealthAPCLaser"]
+  MissileKinetic_Veh:
+    family: "Arrow"
+    status: confirmed
+    review_note: "per-weapon overrides also split off: Arrow"
+    band: "vehicle"
+    delivery: "Missile"
+    element: "Kinetic"
+    uses: 9
+    members: 3
+    factor: 0.58
+    profile: [23.2, 36.1, 200.0, 102.2, 114.7, 29.6]
+    weapons: ["ImpalerSpikePassenger", "ShardWalkerShards", "StalkerShards"]
+  MissileAP_Air:
+    family: "MissileAP"
+    status: confirmed
+    review_note: "per-weapon overrides also split off: MissileAP"
+    band: "aircraft"
+    delivery: "Missile"
+    element: "AP"
+    uses: 8
+    members: 8
+    factor: 1.098
+    profile: [200.0, 65.6, 43.5, 141.6, 115.5, 191.8]
+    weapons: ["BlackEagleMissiles", "EnervatorBolts", "HellfireAG", "HellfireAG.Cryo", "HellfireAG.Orca", "Maverick", "PhantomMissiles", "ScrinTorp.UPG"]
+  BulletKinetic_Veh:
+    family: "Bullet"
+    status: confirmed
+    review_note: "per-weapon overrides also split off: Bullet"
+    band: "vehicle"
+    delivery: "Bullet"
+    element: "Kinetic"
+    uses: 7
+    members: 2
+    factor: 0.588
+    profile: [23.0, 39.8, 200.0, 132.5, 125.1, 23.0]
+    weapons: ["M60mgIFV", "MGattG"]
+  BulletRadiation_Veh:
+    family: "Chemical"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Bullet"
+    element: "Radiation"
+    uses: 7
+    members: 5
+    factor: 0.747
+    profile: [51.7, 87.7, 111.0, 72.8, n/a, 63.7]
+    weapons: ["ChemicalMortar", "CorrupterSpewCharged", "RuinerCannon", "RuinerCannonCharged", "SCUD.Iraq"]
+  MissileHE_Inf_2:
+    family: "MissileAA"
+    status: confirmed
+    band: "infantry"
+    delivery: "Missile"
+    element: "HE"
+    uses: 7
+    members: 4
+    factor: 0.875
+    profile: [n/a, n/a, n/a, n/a, 87.5, n/a]
+    weapons: ["CyborgReaperMissilesAA", "RedEye", "RedEyeGI", "RedEyeGI.CRYO"]
+  Radiation_Veh:
+    family: "Radiation"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Radiation"
+    element: "Radiation"
+    uses: 7
+    members: 3
+    factor: 0.551
+    profile: [38.4, 36.3, 147.3, 64.9, n/a, 38.2]
+    weapons: ["DesolatorBeam", "OverlordRadBeamWeapon", "RadBeamWeaponHeavy"]
+  Tesla_Veh:
+    family: "Tesla"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Tesla"
+    element: "Tesla"
+    uses: 7
+    members: 5
+    factor: 1.483
+    profile: [167.2, 110.7, 200.0, 174.8, n/a, 110.7]
+    weapons: ["CyclopsZap", "TTankZap", "TTankZap.UPG", "TTrackZap", "TTrackZap.UPG"]
+  BulletAP_Air:
+    family: "MissileAP"
+    status: confirmed
+    band: "aircraft"
+    delivery: "Bullet"
+    element: "AP"
+    uses: 6
+    members: 5
+    factor: 0.831
+    profile: [192.4, 57.1, 22.7, 128.1, 107.3, 123.1]
+    weapons: ["KamovRockets", "KamovRocketsWide", "MaverickSU", "ScrinTorp", "SeismicMissile"]
+  Laser_Veh_3:
+    family: "Quantum"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Laser"
+    element: "Plain"
+    uses: 6
+    members: 4
+    factor: 0.974
+    profile: [165.4, 86.7, 38.6, 136.4, n/a, 115.8]
+    weapons: ["DevourerLaser", "DevourerLaserCharged", "InterloperLaser", "ViperLaser"]
+  MissileCryo_Inf:
+    family: "MissileCryo"
+    status: confirmed
+    band: "infantry"
+    delivery: "Missile"
+    element: "Cryo"
+    uses: 6
+    members: 3
+    factor: 0.951
+    profile: [200.0, 157.7, 21.3, 72.5, n/a, 159.9]
+    weapons: ["Dragon.CRYO", "DragonBATF.CRYO", "DragonGI.CRYO"]
+  SprayHE_Veh:
+    family: "Sonic"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Spray"
+    element: "HE"
+    uses: 6
+    members: 5
+    factor: 1.022
+    profile: [37.9, 200.0, 157.7, 75.8, n/a, 123.0]
+    weapons: ["DisruptorPulse", "DisruptorPulse.Amp", "DisruptorPulse.Amp.Seek3", "DisruptorPulse.Seek3", "SonicPulseDelphis"]
+  Bullet_Veh_2:
+    family: "CannonHE"
+    status: confirmed
+    review_note: "per-weapon overrides also split off: MissileHE"
+    band: "vehicle"
+    delivery: "Bullet"
+    element: "Plain"
+    uses: 5
+    members: 5
+    factor: 1.604
+    profile: [98.4, 200.0, 200.0, 162.7, n/a, 166.0]
+    weapons: ["155mmSpec", "HonestJohn", "HonestJohn.UPG", "HonestJohnBH", "HonestJohnBH.UPG"]
+  Laser_Inf:
+    family: "LaserPulse"
+    status: confirmed
+    band: "infantry"
+    delivery: "Laser"
+    element: "Plain"
+    uses: 5
+    members: 3
+    factor: 0.763
+    profile: [41.6, 63.4, 169.5, 114.6, n/a, 50.5]
+    weapons: ["CyberscrinLaser", "PortaLaser", "PsychicBeamBATF"]
+  MissileHE_Veh_4:
+    family: "MissileAP"
+    status: confirmed
+    review_note: "per-weapon overrides also split off: (park: naval), MissileAP"
+    band: "vehicle"
+    delivery: "Missile"
+    element: "HE"
+    uses: 5
+    members: 4
+    factor: 1.339
+    profile: [182.5, 152.8, 105.8, 122.1, n/a, 119.4]
+    weapons: ["PlasmaDiscs", "Stinger", "SubMissile", "TorpTube"]
+  RailgunHE_Veh:
+    family: "Railgun"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Railgun"
+    element: "HE"
+    uses: 5
+    members: 3
+    factor: 1.319
+    profile: [200.0, 136.5, 63.9, 166.1, n/a, 137.8]
+    weapons: ["IonZap", "TitanRailgun", "ZoneTrooperRailgun"]
+  Spray_Veh:
+    family: "Flame"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Spray"
+    element: "Plain"
+    uses: 5
+    members: 5
+    factor: 1.491
+    profile: [80.4, 200.0, 200.0, 181.2, n/a, 126.6]
+    weapons: ["AvatarFlamer", "AvatarFlamer.UPG", "BigFlamerTD", "HeavyFlameTankFlamer", "HeavyFlameTankFlamer.UPG"]
+  Tesla_Def:
+    family: "Tesla"
+    status: confirmed
+    band: "defense"
+    delivery: "Tesla"
+    element: "Tesla"
+    uses: 5
+    members: 5
+    factor: 1.713
+    profile: [200.0, 127.9, 179.7, 193.7, n/a, 165.8]
+    weapons: ["StormColumnZap", "TeslaZap", "TeslaZapBoost1", "TeslaZapBoost2", "TeslaZapBoost3"]
+  BulletCryo_Veh:
+    family: "Cryo"
+    status: confirmed
+    review_note: "per-weapon overrides also split off: MissileCryo"
+    band: "vehicle"
+    delivery: "Bullet"
+    element: "Cryo"
+    uses: 4
+    members: 2
+    factor: 1.38
+    profile: [119.6, 180.9, 143.0, 138.5, n/a, 116.7]
+    weapons: ["CryoMissile", "CryoMortar"]
+  BulletHE_Def:
+    family: "CannonAP"
+    status: confirmed
+    band: "defense"
+    delivery: "Bullet"
+    element: "HE"
+    uses: 4
+    members: 4
+    factor: 0.816
+    profile: [122.1, 88.9, 39.9, 101.1, n/a, 82.6]
+    weapons: ["203mm", "203mm.Inacc", "TurretGun", "TurretGunTD"]
+  Bullet_Veh_3:
+    family: "CannonAP"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Bullet"
+    element: "Plain"
+    uses: 4
+    members: 2
+    factor: 1.2
+    profile: [178.8, 147.7, 63.9, 200.0, n/a, 73.8]
+    weapons: ["120mmHEAT", "InterloperWave"]
+  Bullet_Veh_4:
+    family: "Bullet"
+    status: confirmed
+    review_note: "per-weapon overrides also split off: Bullet"
+    band: "vehicle"
+    delivery: "Bullet"
+    element: "Plain"
+    uses: 4
+    members: 3
+    factor: 0.918
+    profile: [48.8, 118.8, 200.0, 112.6, 109.2, 47.5]
+    weapons: ["BATFGun", "CorrupterSpew", "FLAK-SEAS-AG"]
+  HitscanHE_Veh:
+    family: "Sniper"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Hitscan"
+    element: "HE"
+    uses: 4
+    members: 2
+    factor: 0.297
+    profile: [59.4, 10.0, 90.3, 43.4, n/a, 10.0]
+    weapons: ["SniperIFVGun", "SniperIFVGun.UPG"]
+  Hitscan_Inf_2:
+    family: "Sniper"
+    status: confirmed
+    band: "infantry"
+    delivery: "Hitscan"
+    element: "Plain"
+    uses: 4
+    members: 4
+    factor: 1.459
+    profile: [200.0, 200.0, 200.0, 41.3, n/a, 200.0]
+    weapons: ["Colt45", "Colt45BATF", "SilencedPPK", "SilencedPPKBATF"]
+  LaserHE_Veh:
+    family: "Prism"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Laser"
+    element: "HE"
+    uses: 4
+    members: 3
+    factor: 1.474
+    profile: [73.2, 189.6, 172.3, 193.5, n/a, 150.5]
+    weapons: ["HopliteIFVGun", "PrisCLaser", "PrisTLaser"]
+  Laser_Air:
+    family: "Quantum"
+    status: confirmed
+    band: "aircraft"
+    delivery: "Laser"
+    element: "Plain"
+    uses: 4
+    members: 4
+    factor: 1.532
+    profile: [148.0, 146.0, 200.0, 189.1, 74.6, 123.5]
+    weapons: ["FloatingDiscLaser", "MothershipBeam", "VenomLaser", "VenomLaser.UPG"]
+  Laser_Inf_2:
+    family: "LaserPulse"
+    status: confirmed
+    review_note: "per-weapon overrides also split off: (drop: not a damage warhead)"
+    band: "infantry"
+    delivery: "Laser"
+    element: "Plain"
+    uses: 4
+    members: 4
+    factor: 1.618
+    profile: [138.5, 153.1, 200.0, 200.0, n/a, 130.6]
+    weapons: ["Flare", "PortaLaser.Templar", "PortaLaser.Templar.UPG", "ScrinRepair"]
+  MissileAP_Air_2:
+    family: "MissileHE"
+    status: confirmed
+    band: "aircraft"
+    delivery: "Missile"
+    element: "AP"
+    uses: 4
+    members: 4
+    factor: 0.874
+    profile: [102.3, 55.4, 200.0, 81.0, n/a, 55.4]
+    weapons: ["HindRockets", "HindRockets.UPG", "HindRockets.Ukraine", "HindRockets.Ukraine.UPG"]
+  Spray_Veh_2:
+    family: "(resolved per weapon)"
+    status: confirmed
+    review_note: "every member carries a per-weapon override; the group family decides nothing"
+    band: "vehicle"
+    delivery: "Spray"
+    element: "Plain"
+    uses: 4
+    members: 2
+    factor: 1.379
+    profile: [195.9, 113.1, 110.8, 166.5, n/a, 122.1]
+    weapons: ["BlackHandFlamer", "ObliteratorBolt"]
+  BombHE_Air:
+    family: "Demolition"
+    status: confirmed
+    band: "aircraft"
+    delivery: "Bomb"
+    element: "HE"
+    uses: 3
+    members: 3
+    factor: 1.453
+    profile: [159.9, 200.0, 85.3, 181.2, n/a, 131.3]
+    weapons: ["KirovBomb", "KirovChaosBomb", "KirovClusterBomb"]
+  BulletFire_Veh:
+    family: "Flame"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Bullet"
+    element: "Fire"
+    uses: 3
+    members: 1
+    factor: 0.291
+    profile: [10.0, 25.6, 95.9, 53.3, n/a, 16.0]
+    weapons: ["FireballLauncher"]
+  BulletHE_Air:
+    family: "Demolition"
+    status: confirmed
+    band: "aircraft"
+    delivery: "Bullet"
+    element: "HE"
+    uses: 3
+    members: 3
+    factor: 1.32
+    profile: [38.7, 180.5, 200.0, 154.4, n/a, 185.6]
+    weapons: ["DevastatorDiscs", "DevastatorTorpedo", "GrenadeJJ"]
+  BulletHE_Inf:
+    family: "Demolition"
+    status: confirmed
+    band: "infantry"
+    delivery: "Bullet"
+    element: "HE"
+    uses: 3
+    members: 2
+    factor: 1.526
+    profile: [92.3, 200.0, 127.9, 195.9, n/a, 178.8]
+    weapons: ["Grenade", "ShadowOperativeGrenade"]
+  BulletHE_Veh_3:
+    family: "(resolved per weapon)"
+    status: confirmed
+    review_note: "every member carries a per-weapon override; the group family decides nothing"
+    band: "vehicle"
+    delivery: "Bullet"
+    element: "HE"
+    uses: 3
+    members: 2
+    factor: 0.917
+    profile: [60.7, 110.8, 185.2, 70.5, n/a, 73.8]
+    weapons: ["280mmNeutron", "HallucinationGrenade"]
+  BulletKinetic_Air:
+    family: "Bullet"
+    status: confirmed
+    review_note: "per-weapon overrides also split off: Bullet"
+    band: "aircraft"
+    delivery: "Bullet"
+    element: "Kinetic"
+    uses: 3
+    members: 3
+    factor: 1.064
+    profile: [100.7, 65.4, 200.0, 124.4, 110.1, 60.2]
+    weapons: ["ChainGun", "GAU8", "HeliGunAG"]
+  BulletRadiation_Veh_2:
+    family: "Chemical"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Bullet"
+    element: "Radiation"
+    uses: 3
+    members: 1
+    factor: 0.327
+    profile: [12.8, 25.6, 95.9, 74.6, n/a, 16.0]
+    weapons: ["ChemballLauncher"]
+  HitscanKinetic_Air:
+    family: "Bullet"
+    status: confirmed
+    review_note: "per-weapon overrides also split off: BulletHE"
+    band: "aircraft"
+    delivery: "Hitscan"
+    element: "Kinetic"
+    uses: 3
+    members: 3
+    factor: 1.088
+    profile: [81.8, 105.9, 200.0, 143.1, 113.6, 57.8]
+    weapons: ["ChainGun.Yak.L", "ChainGun.Yak.R", "GAU8.Building"]
+  LaserHE_Inf:
+    family: "LaserPulse"
+    status: confirmed
+    band: "infantry"
+    delivery: "Laser"
+    element: "HE"
+    uses: 3
+    members: 3
+    factor: 1.487
+    profile: [85.3, 200.0, 200.0, 200.0, n/a, 106.6]
+    weapons: ["HopliteGun", "HopliteGunBATF", "HopliteGunCharged"]
+  LaserHE_Veh_2:
+    family: "(drop: not a damage warhead)"
+    status: confirmed
+    review_note: "every member carries a per-weapon override; the group family decides nothing"
+    band: "vehicle"
+    delivery: "Laser"
+    element: "HE"
+    uses: 3
+    members: 1
+    factor: 0.229
+    profile: [36.2, 10.7, 21.3, 36.2, n/a, 21.3]
+    weapons: ["EnlightenedBeam"]
+  LaserHE_Veh_3:
+    family: "Railgun"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Laser"
+    element: "HE"
+    uses: 3
+    members: 1
+    factor: 1.188
+    profile: [200.0, 106.6, 38.4, 181.2, n/a, 159.9]
+    weapons: ["ZoneDefenderGun"]
+  Laser_Veh_4:
+    family: "Laser"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Laser"
+    element: "Plain"
+    uses: 3
+    members: 2
+    factor: 1.328
+    profile: [n/a, n/a, n/a, n/a, 132.8, n/a]
+    weapons: ["DisintegratorIFVBeamAA", "MantisLaser"]
+  MissileCryo_Veh:
+    family: "MissileCryo"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Missile"
+    element: "Cryo"
+    uses: 3
+    members: 1
+    factor: 0.92
+    profile: [200.0, 85.3, 21.3, 170.5, n/a, 106.6]
+    weapons: ["IFVRocketsE.CRYO"]
+  MissileHE_Air:
+    family: "MissileAA"
+    status: confirmed
+    review_note: "per-weapon overrides also split off: MissileHE"
+    band: "aircraft"
+    delivery: "Missile"
+    element: "HE"
+    uses: 3
+    members: 3
+    factor: 1.043
+    profile: [61.6, 110.1, 200.0, 121.1, 107.7, 55.0]
+    weapons: ["HellfireAG.Harrier", "ManticoreBolts", "Sidewinder"]
+  MissileHE_Veh_5:
+    family: "MissileHE"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Missile"
+    element: "HE"
+    uses: 3
+    members: 1
+    factor: 1.167
+    profile: [170.5, 74.6, 159.9, 200.0, n/a, 53.3]
+    weapons: ["CyCannon"]
+  MissileKinetic_Inf:
+    family: "Arrow"
+    status: confirmed
+    band: "infantry"
+    delivery: "Missile"
+    element: "Kinetic"
+    uses: 3
+    members: 3
+    factor: 0.57
+    profile: [21.3, 32.0, 200.0, 138.5, n/a, 32.0]
+    weapons: ["EvisceratorShards", "EvisceratorShardsCharged", "RavagerShards"]
+  SprayCryo_Veh:
+    family: "Cryo"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Spray"
+    element: "Cryo"
+    uses: 3
+    members: 1
+    factor: 0.835
+    profile: [21.3, 200.0, 200.0, 32.0, n/a, 149.2]
+    weapons: ["CryoSprayer"]
+  BombAP_Air:
+    family: "Demolition"
+    status: confirmed
+    band: "aircraft"
+    delivery: "Bomb"
+    element: "AP"
+    uses: 2
+    members: 2
+    factor: 0.743
+    profile: [72.9, 58.3, 140.2, 58.3, n/a, 65.2]
+    weapons: ["JDAM", "VertigoBomb"]
+  BombTesla_Air:
+    family: "Demolition"
+    status: confirmed
+    band: "aircraft"
+    delivery: "Bomb"
+    element: "Tesla"
+    uses: 2
+    members: 2
+    factor: 1.239
+    profile: [178.8, 200.0, 67.4, 170.2, n/a, 97.7]
+    weapons: ["KirovTeslaBomb", "OrcaBomb"]
+  BulletHE_Air_2:
+    family: "BulletHE"
+    status: confirmed
+    band: "aircraft"
+    delivery: "Bullet"
+    element: "HE"
+    uses: 2
+    members: 2
+    factor: 1.118
+    profile: [200.0, 17.1, 200.0, 200.0, n/a, 127.9]
+    weapons: ["Hydra.L", "Hydra.R"]
+  BulletHE_Air_3:
+    family: "BulletHE"
+    status: confirmed
+    band: "aircraft"
+    delivery: "Bullet"
+    element: "HE"
+    uses: 2
+    members: 2
+    factor: 1.204
+    profile: [113.1, 106.0, 190.4, 141.4, n/a, 78.3]
+    weapons: ["MothershipDiscs", "Rah66AG"]
+  BulletHE_Veh_4:
+    family: "CannonAP"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Bullet"
+    element: "HE"
+    uses: 2
+    members: 2
+    factor: 0.906
+    profile: [175.1, 90.4, 41.3, 178.8, n/a, 52.2]
+    weapons: ["25mm", "2Inch"]
+  BulletHE_Veh_5:
+    family: "(resolved per weapon)"
+    status: confirmed
+    review_note: "every member carries a per-weapon override; the group family decides nothing"
+    band: "vehicle"
+    delivery: "Bullet"
+    element: "HE"
+    uses: 2
+    members: 2
+    factor: 0.579
+    profile: [16.6, 63.9, 184.4, 51.9, n/a, 63.9]
+    weapons: ["380mm", "380mmAtomic"]
+  Bullet_Air:
+    family: "Bullet"
+    status: confirmed
+    band: "aircraft"
+    delivery: "Bullet"
+    element: "Plain"
+    uses: 2
+    members: 2
+    factor: 1.033
+    profile: [73.8, 111.8, 190.4, 117.2, n/a, 63.9]
+    weapons: ["Rah66AG.BlackHand", "StormriderZap"]
+  Bullet_Def:
+    family: "(resolved per weapon)"
+    status: confirmed
+    review_note: "every member carries a per-weapon override; the group family decides nothing"
+    band: "defense"
+    delivery: "Bullet"
+    element: "Plain"
+    uses: 2
+    members: 2
+    factor: 1.066
+    profile: [n/a, n/a, n/a, n/a, 106.6, n/a]
+    weapons: ["Gatt", "ZSU-23"]
+  Bullet_Inf_2:
+    family: "(drop: not a damage warhead)"
+    status: confirmed
+    review_note: "every member carries a per-weapon override; the group family decides nothing"
+    band: "infantry"
+    delivery: "Bullet"
+    element: "Plain"
+    uses: 2
+    members: 2
+    factor: 2.0
+    profile: [200.0, 200.0, 200.0, 200.0, n/a, 200.0]
+    weapons: ["CyborgReaperSnare", "Ivanbomb"]
+  HitscanKinetic_Inf:
+    family: "(resolved per weapon)"
+    status: confirmed
+    review_note: "every member carries a per-weapon override; the group family decides nothing"
+    band: "infantry"
+    delivery: "Hitscan"
+    element: "Kinetic"
+    uses: 2
+    members: 2
+    factor: 0.826
+    profile: [36.9, 73.8, 200.0, 147.7, n/a, 47.7]
+    weapons: ["ImpalerSpike", "ShadowOperativeGun"]
+  HitscanKinetic_Veh:
+    family: "Sniper"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Hitscan"
+    element: "Kinetic"
+    uses: 2
+    members: 1
+    factor: 1.386
+    profile: [200.0, 200.0, 200.0, 32.0, n/a, 200.0]
+    weapons: ["CommandoIFVGun"]
+  HitscanKinetic_Veh_2:
+    family: "Sniper"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Hitscan"
+    element: "Kinetic"
+    uses: 2
+    members: 1
+    factor: 0.504
+    profile: [32.0, 32.0, 200.0, 74.6, n/a, 21.3]
+    weapons: ["SealIFVGun"]
+  Laser_Air_2:
+    family: "Laser"
+    status: confirmed
+    band: "aircraft"
+    delivery: "Laser"
+    element: "Plain"
+    uses: 2
+    members: 2
+    factor: 2.0
+    profile: [n/a, n/a, n/a, n/a, 200.0, n/a]
+    weapons: ["VenomLaserAA", "VenomLaserAA.UPG"]
+  Laser_Def:
+    family: "Laser"
+    status: confirmed
+    band: "defense"
+    delivery: "Laser"
+    element: "Plain"
+    uses: 2
+    members: 2
+    factor: 1.814
+    profile: [200.0, 127.9, 200.0, 200.0, n/a, 191.8]
+    weapons: ["Laser", "Laser.Adv"]
+  Laser_Def_2:
+    family: "LaserPulse"
+    status: confirmed
+    band: "defense"
+    delivery: "Laser"
+    element: "Plain"
+    uses: 2
+    members: 2
+    factor: 1.22
+    profile: [53.3, 149.2, 200.0, 181.2, n/a, 93.8]
+    weapons: ["LaserTur", "LaserTur.Adv"]
+  Laser_Inf_3:
+    family: "Quantum"
+    status: confirmed
+    band: "infantry"
+    delivery: "Laser"
+    element: "Plain"
+    uses: 2
+    members: 2
+    factor: 0.919
+    profile: [200.0, 153.5, 20.7, 70.5, 77.7, 155.6]
+    weapons: ["DisintegratorBeam", "DisintegratorBeamBATF"]
+  Laser_Veh_5:
+    family: "Quantum"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Laser"
+    element: "Plain"
+    uses: 2
+    members: 1
+    factor: 0.951
+    profile: [200.0, 157.7, 21.3, 72.5, n/a, 159.9]
+    weapons: ["DisintegratorIFVBeam"]
+  MissileHE_Def:
+    family: "MissileAA"
+    status: confirmed
+    band: "defense"
+    delivery: "Missile"
+    element: "HE"
+    uses: 2
+    members: 1
+    factor: 1.066
+    profile: [n/a, n/a, n/a, n/a, 106.6, n/a]
+    weapons: ["Nike"]
+  Radiation_Veh_2:
+    family: "Radiation"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Radiation"
+    element: "Radiation"
+    uses: 2
+    members: 1
+    factor: 0.638
+    profile: [61.5, 46.1, 106.8, 75.8, n/a, 46.1]
+    weapons: ["ApocRadBeamWeapon"]
+  Railgun_Veh:
+    family: "Railgun"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Railgun"
+    element: "Plain"
+    uses: 2
+    members: 2
+    factor: 0.535
+    profile: [90.6, 10.0, 106.6, 106.6, n/a, 42.6]
+    weapons: ["MicrowaveZap", "MicrowaveZap.UPG"]
+  SprayKinetic_Veh:
+    family: "BulletHE"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Spray"
+    element: "Kinetic"
+    uses: 2
+    members: 1
+    factor: 0.785
+    profile: [32.0, 85.3, 200.0, 170.5, n/a, 32.0]
+    weapons: ["EnforcerIFVShotgun"]
+  SprayRadiation_Inf:
+    family: "Chemical"
+    status: confirmed
+    band: "infantry"
+    delivery: "Spray"
+    element: "Radiation"
+    uses: 2
+    members: 2
+    factor: 1.253
+    profile: [63.0, 190.4, 200.0, 152.2, n/a, 84.6]
+    weapons: ["ChemsprayTD", "ChemsprayTDBATF"]
+  Spray_Def:
+    family: "Sonic"
+    status: confirmed
+    band: "defense"
+    delivery: "Spray"
+    element: "Plain"
+    uses: 2
+    members: 2
+    factor: 1.558
+    profile: [200.0, 196.1, 59.7, 196.1, n/a, 200.0]
+    weapons: ["SonicPulse", "SonicPulse.UPG"]
+  Spray_Inf:
+    family: "Flame"
+    status: confirmed
+    band: "infantry"
+    delivery: "Spray"
+    element: "Plain"
+    uses: 2
+    members: 2
+    factor: 1.172
+    profile: [53.3, 190.4, 200.0, 152.2, n/a, 71.5]
+    weapons: ["FlamerTD", "FlamerTDBATF"]
+  Tesla_Inf:
+    family: "Tesla"
+    status: confirmed
+    band: "infantry"
+    delivery: "Tesla"
+    element: "Tesla"
+    uses: 2
+    members: 2
+    factor: 1.649
+    profile: [159.9, 127.9, 200.0, 200.0, n/a, 149.2]
+    weapons: ["PortaTesla", "PortaTesla.UPG"]
+  BombAP_Air_2:
+    family: "Demolition"
+    status: confirmed
+    band: "aircraft"
+    delivery: "Bomb"
+    element: "AP"
+    uses: 1
+    members: 1
+    factor: 0.721
+    profile: [106.6, n/a, 53.3, 74.6, n/a, 63.9]
+    weapons: ["PeacemakerBombs"]
+  BombRadiation_Air:
+    family: "Nuclear"
+    status: confirmed
+    band: "aircraft"
+    delivery: "Bomb"
+    element: "Radiation"
+    uses: 1
+    members: 1
+    factor: 1.529
+    profile: [191.8, 200.0, 85.3, 200.0, n/a, 127.9]
+    weapons: ["KirovNukeBomb"]
+  BulletAP_Veh:
+    family: "CannonAP"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Bullet"
+    element: "AP"
+    uses: 1
+    members: 1
+    factor: 0.708
+    profile: [200.0, 32.0, 21.3, 127.9, n/a, 102.3]
+    weapons: ["183mm"]
+  BulletFire_Def:
+    family: "(drop: support power)"
+    status: confirmed
+    review_note: "every member carries a per-weapon override; the group family decides nothing"
+    band: "defense"
+    delivery: "Bullet"
+    element: "Fire"
+    uses: 1
+    members: 1
+    factor: 1.324
+    profile: [159.9, 71.0, 142.1, 177.6, n/a, 142.1]
+    weapons: ["FirestormBarrage"]
+  BulletFire_Inf:
+    family: "Flame"
+    status: confirmed
+    band: "infantry"
+    delivery: "Bullet"
+    element: "Fire"
+    uses: 1
+    members: 1
+    factor: 0.553
+    profile: [21.3, 106.6, 200.0, 53.3, n/a, 21.3]
+    weapons: ["FireballGun"]
+  BulletTesla_Air:
+    family: "BulletTesla"
+    status: confirmed
+    band: "aircraft"
+    delivery: "Bullet"
+    element: "Tesla"
+    uses: 1
+    members: 1
+    factor: 1.562
+    profile: [200.0, 106.6, 159.9, 170.5, n/a, 159.9]
+    weapons: ["ShadeEmp"]
+  BulletTesla_Def:
+    family: "(drop: support power)"
+    status: confirmed
+    review_note: "every member carries a per-weapon override; the group family decides nothing"
+    band: "defense"
+    delivery: "Bullet"
+    element: "Tesla"
+    uses: 1
+    members: 1
+    factor: 0.842
+    profile: [63.9, 85.3, 106.6, 85.3, n/a, 85.3]
+    weapons: ["EMPMissileLauncher"]
+  BulletTesla_Inf:
+    family: "Concussion"
+    status: confirmed
+    band: "infantry"
+    delivery: "Bullet"
+    element: "Tesla"
+    uses: 1
+    members: 1
+    factor: 1.365
+    profile: [53.3, 200.0, 127.9, 191.8, n/a, 181.2]
+    weapons: ["EMPGrenade"]
+  Bullet_Air_2:
+    family: "Bullet"
+    status: confirmed
+    band: "aircraft"
+    delivery: "Bullet"
+    element: "Plain"
+    uses: 1
+    members: 1
+    factor: 0.46
+    profile: [21.3, 21.3, 200.0, 106.6, n/a, 21.3]
+    weapons: ["M60mgNHAW"]
+  Bullet_Veh_5:
+    family: "BulletHE"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Bullet"
+    element: "Plain"
+    uses: 1
+    members: 1
+    factor: 0.704
+    profile: [25.6, 106.6, 200.0, 149.2, n/a, 21.3]
+    weapons: ["WolverineGun"]
+  HitscanAP_Air:
+    family: "(drop: not a damage warhead)"
+    status: confirmed
+    review_note: "every member carries a per-weapon override; the group family decides nothing"
+    band: "aircraft"
+    delivery: "Hitscan"
+    element: "AP"
+    uses: 1
+    members: 1
+    factor: 0.959
+    profile: [n/a, 95.9, n/a, n/a, n/a, n/a]
+    weapons: ["PeacemakerBombsBuilding"]
+  HitscanHE_Veh_2:
+    family: "Railgun"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Hitscan"
+    element: "HE"
+    uses: 1
+    members: 1
+    factor: 1.295
+    profile: [200.0, 149.2, 63.9, 149.2, n/a, 127.9]
+    weapons: ["TitanRailgunImpact"]
+  HitscanTesla_Air:
+    family: "(drop: not a damage warhead)"
+    status: confirmed
+    review_note: "every member carries a per-weapon override; the group family decides nothing"
+    band: "aircraft"
+    delivery: "Hitscan"
+    element: "Tesla"
+    uses: 1
+    members: 1
+    factor: 0.853
+    profile: [n/a, 85.3, n/a, n/a, n/a, n/a]
+    weapons: ["OrcaBombBuilding"]
+  Hitscan_Air:
+    family: "MissileAA"
+    status: confirmed
+    band: "aircraft"
+    delivery: "Hitscan"
+    element: "Plain"
+    uses: 1
+    members: 1
+    factor: 2.0
+    profile: [n/a, n/a, n/a, n/a, 200.0, n/a]
+    weapons: ["InvaderLauncher"]
+  Hitscan_Def:
+    family: "Plasma"
+    status: confirmed
+    band: "defense"
+    delivery: "Hitscan"
+    element: "Plain"
+    uses: 1
+    members: 1
+    factor: 0.949
+    profile: [53.3, 106.6, 181.2, 117.2, n/a, 63.9]
+    weapons: ["PlasmaTurretGun"]
+  Hitscan_Veh_2:
+    family: "Bullet"
+    status: confirmed
+    review_note: "every member carries a per-weapon override; the group family decides nothing"
+    band: "vehicle"
+    delivery: "Hitscan"
+    element: "Plain"
+    uses: 1
+    members: 1
+    factor: 0.64
+    profile: [28.8, 28.8, 200.0, 100.6, 143.8, 28.8]
+    weapons: ["GunWalkerZap"]
+  Hitscan_Veh_3:
+    family: "Quantum"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Hitscan"
+    element: "Plain"
+    uses: 1
+    members: 1
+    factor: 1.159
+    profile: [191.8, 32.0, 200.0, 159.9, n/a, 106.6]
+    weapons: ["NeutronCannon"]
+  LaserAP_Air:
+    family: "Railgun"
+    status: confirmed
+    review_note: "every member carries a per-weapon override; the group family decides nothing"
+    band: "aircraft"
+    delivery: "Laser"
+    element: "AP"
+    uses: 1
+    members: 1
+    factor: 1.337
+    profile: [200.0, 79.1, 52.8, 171.4, 200.0, 200.0]
+    weapons: ["TormentorZap"]
+  LaserAtomized_Veh:
+    family: "LaserPulse"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Laser"
+    element: "Atomized"
+    uses: 1
+    members: 1
+    factor: 0.774
+    profile: [32.0, 127.9, 200.0, 106.6, n/a, 32.0]
+    weapons: ["LeecherBeam"]
+  LaserHE_Def:
+    family: "Prism"
+    status: confirmed
+    band: "defense"
+    delivery: "Laser"
+    element: "HE"
+    uses: 1
+    members: 1
+    factor: 1.334
+    profile: [170.5, 85.3, 85.3, 170.5, n/a, 200.0]
+    weapons: ["PrisLaser"]
+  LaserKinetic_Veh:
+    family: "Quantum"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Laser"
+    element: "Kinetic"
+    uses: 1
+    members: 1
+    factor: 0.282
+    profile: [57.5, 29.8, 10.0, 33.3, n/a, 30.9]
+    weapons: ["RiftCannon"]
+  Laser_Veh_6:
+    family: "Railgun"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Laser"
+    element: "Plain"
+    uses: 1
+    members: 1
+    factor: 1.451
+    profile: [200.0, 85.3, 138.5, 170.5, n/a, 159.9]
+    weapons: ["XOLaser"]
+  MissileAtomized_Veh:
+    family: "Quantum"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Missile"
+    element: "Atomized"
+    uses: 1
+    members: 1
+    factor: 1.017
+    profile: [200.0, 63.9, 32.0, 138.5, n/a, 191.8]
+    weapons: ["AtomizerBolts"]
+  MissileHE_Def_2:
+    family: "MissileAP"
+    status: confirmed
+    band: "defense"
+    delivery: "Missile"
+    element: "HE"
+    uses: 1
+    members: 1
+    factor: 1.228
+    profile: [159.9, 117.2, 85.3, 149.2, n/a, 117.2]
+    weapons: ["StingerGTWR"]
+  MissileHE_Inf_3:
+    family: "MissileAP"
+    status: confirmed
+    band: "infantry"
+    delivery: "Missile"
+    element: "HE"
+    uses: 1
+    members: 1
+    factor: 0.909
+    profile: [200.0, 85.3, 21.3, 159.9, n/a, 106.6]
+    weapons: ["TigerGuardMissileBATF"]
+  MissileKinetic_Def:
+    family: "MissileAA"
+    status: confirmed
+    band: "defense"
+    delivery: "Missile"
+    element: "Kinetic"
+    uses: 1
+    members: 1
+    factor: 1.066
+    profile: [n/a, n/a, n/a, n/a, 106.6, n/a]
+    weapons: ["ShardLauncher"]
+  MissileKinetic_Veh_2:
+    family: "MissileAP"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Missile"
+    element: "Kinetic"
+    uses: 1
+    members: 1
+    factor: 0.935
+    profile: [200.0, 117.2, 32.0, 127.9, n/a, 74.6]
+    weapons: ["LaceratorShards"]
+  MissileKinetic_Veh_3:
+    family: "BulletTesla"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Missile"
+    element: "Kinetic"
+    uses: 1
+    members: 1
+    factor: 0.632
+    profile: [74.6, 21.3, 200.0, 149.2, n/a, 21.3]
+    weapons: ["XOCoilGun"]
+  MissileTesla_Veh:
+    family: "MissileTesla"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Missile"
+    element: "Tesla"
+    uses: 1
+    members: 1
+    factor: 0.664
+    profile: [21.3, 53.3, 200.0, 106.6, n/a, 53.3]
+    weapons: ["NullifierBolt"]
+  Radiation_Inf:
+    family: "Radiation"
+    status: confirmed
+    band: "infantry"
+    delivery: "Radiation"
+    element: "Radiation"
+    uses: 1
+    members: 1
+    factor: 1.311
+    profile: [85.3, 106.6, 200.0, 200.0, n/a, 106.6]
+    weapons: ["RadTrooperBeam"]
+  RailgunHE_Veh_2:
+    family: "Railgun"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Railgun"
+    element: "HE"
+    uses: 1
+    members: 1
+    factor: 1.263
+    profile: [181.2, 138.5, 200.0, 200.0, n/a, 32.0]
+    weapons: ["Railgun"]
+  Railgun_Veh_2:
+    family: "BulletHE"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Railgun"
+    element: "Plain"
+    uses: 1
+    members: 1
+    factor: 0.704
+    profile: [25.6, 106.6, 200.0, 149.2, n/a, 21.3]
+    weapons: ["WolverineGunLine"]
+  SprayHE_Veh_2:
+    family: "Sonic"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Spray"
+    element: "HE"
+    uses: 1
+    members: 1
+    factor: 1.078
+    profile: [200.0, 42.6, 42.6, 200.0, n/a, 200.0]
+    weapons: ["BasiliskPulse"]
+  SprayKinetic_Inf:
+    family: "BulletHE"
+    status: confirmed
+    band: "infantry"
+    delivery: "Spray"
+    element: "Kinetic"
+    uses: 1
+    members: 1
+    factor: 0.785
+    profile: [32.0, 85.3, 200.0, 170.5, n/a, 32.0]
+    weapons: ["EnforcerShotgun"]
+  Tesla_Veh_2:
+    family: "Storm"
+    status: confirmed
+    band: "vehicle"
+    delivery: "Tesla"
+    element: "Tesla"
+    uses: 1
+    members: 1
+    factor: 0.828
+    profile: [59.7, 149.2, 32.0, 68.2, n/a, 200.0]
+    weapons: ["StormcrawlerZap"]
+
+# ── PER-WEAPON OVERRIDES ────────────────────────────────────────────────────────────────────
+#
+# Dictated by the maintainer in the 2026-09-21 review. An override BEATS its group family.
+#
+# These are the durable half of the review. Group names carry a `_2`/`_3` suffix assigned
+# by clustering order, so they SHIFT whenever `compress_warheads.py` is re-run -- and it was
+# re-run the same day, when folding the warheads of a weapon together merged 7 groups. A
+# weapon name does not shift. Anything the maintainer said about a specific weapon lives
+# here rather than in a group row, so a re-compression cannot silently lose it.
+#
+# `(drop: ...)`  never becomes a warhead -- support, targeting or a support power.
+# `(park: ...)`  a real weapon held back until its ladder exists (naval).
+
+overrides:
+  "125mmAtomic": {family: "CannonNuke", why: "atomic variant: same Versus as 125mm, 2.7x Spread, plus a CreateTintedCells radiation field"}
+  "125mmLasherAtomic": {family: "CannonNuke", why: "atomic variant of 125mmLasher"}
+  "125mmRhinoAtomic": {family: "CannonNuke", why: "atomic variant of 125mmRhino"}
+  "130mmAtomic": {family: "CannonNuke", why: "atomic variant of 130mm"}
+  "135mmAtomic": {family: "CannonNuke", why: "atomic variant of 135mm"}
+  "152mmAtomic": {family: "CannonNuke", why: "atomic variant of 152mm"}
+  "280mmAtomic": {family: "CannonNuke", why: "nuke cannon (NUKC)"}
+  "280mmNeutron": {family: "CannonNuke", why: "neutron shell of the same nuke cannon"}
+  "380mm": {family: "CannonHE", why: "ISU assault gun: Heavy=26 and a 70000 infantry-only twin -- anti-infantry/anti-structure, not an anti-tank cannon"}
+  "380mmAtomic": {family: "CannonNuke", why: "atomic variant of 380mm"}
+  "BattleTankLaser": {family: "LaserPulse", why: "Nod laser Medium Tank; Prism is reserved for PrisCLaser/PrisTLaser"}
+  "BlackEagleMissiles": {family: "MissileAP", why: "ground half of BlackEagleMissiles+BlackEagleMissilesAA; a folded dual-purpose weapon takes its GROUND family -- the air side is a range/firepower modifier, not a second warhead"}
+  "BlackHandFlamer": {family: "Flame", why: "Black Hand flamethrower; its only fire signal is FireDeath, which is a death animation, so the element reads Plain and it has to be named here"}
+  "BursterTargeting": {family: "(drop: targeting relay)", why: "TargetDamage warhead with no Damage field at all"}
+  "ChainGun.Yak.L": {family: "BulletHE", why: "maintainer: the Yak chaingun is a bullet weapon; now folded with ChainGun.Yak.AA"}
+  "ChainGun.Yak.R": {family: "BulletHE", why: "the other wing mount of the same gun"}
+  "CryoMissile": {family: "MissileCryo", why: "maintainer: Bullet projectile but a missile by name, art and role -- Fix it!"}
+  "CustodianHeal": {family: "(drop: support weapon)", why: "a heal, not a weapon"}
+  "CyborgReaperSnare": {family: "(drop: not a damage warhead)", why: "whole group Bullet_Inf_2 was dropped in review"}
+  "DemoTruckTargeting": {family: "(drop: not a damage warhead)", why: "whole group Hitscan_Veh was dropped in review"}
+  "DepthCharge": {family: "(park: naval)", why: "ValidTargets Submarine only -- anti-submarine, and its flat 100 row is an artifact of nothing else being targetable"}
+  "DoubleDepthCharge": {family: "(park: naval)", why: "as DepthCharge"}
+  "EMPMissileLauncher": {family: "(drop: support power)", why: "PATR, Range 300c0 -- map-wide support power"}
+  "EnervatorBolts": {family: "MissileAP", why: "ground half of EnervatorBolts+EnervatorBoltsAA; a folded dual-purpose weapon takes its GROUND family -- the air side is a range/firepower modifier, not a second warhead"}
+  "EnlightenedBeam": {family: "(drop: not a damage warhead)", why: "whole group LaserHE_Veh_2 was dropped in review"}
+  "EnslaveInfantry": {family: "(drop: not a damage warhead)", why: "whole group Hitscan_Veh was dropped in review"}
+  "EnslaveVehicle": {family: "(drop: not a damage warhead)", why: "whole group Hitscan_Veh was dropped in review"}
+  "FLAK-23-AG": {family: "Bullet", why: "ground half of FLAK-23-AG+FLAK-23-AA; a folded dual-purpose weapon takes its GROUND family -- the air side is a range/firepower modifier, not a second warhead"}
+  "FLAK-SEAS-AG": {family: "Bullet", why: "ground half of FLAK-SEAS-AG+FLAK-SEAS-AA; a folded dual-purpose weapon takes its GROUND family -- the air side is a range/firepower modifier, not a second warhead"}
+  "FirestormBarrage": {family: "(drop: support power)", why: "UPGC, Range 300c0 -- map-wide support power"}
+  "Flare": {family: "(drop: not a damage warhead)", why: "whole group Laser_Inf_3 was dropped in review"}
+  "Gatt": {family: "BulletHE", why: "maintainer: a bullet weapon by behaviour, not flak -- 1300 damage gatling on the C-RAM"}
+  "GradRockets": {family: "MissileHE", why: "rocket artillery, not a cannon"}
+  "GradRockets.UPG": {family: "MissileHE", why: "rocket artillery, not a cannon"}
+  "GradRocketsWide": {family: "MissileHE", why: "rocket artillery, not a cannon"}
+  "GradRocketsWide.UPG": {family: "MissileHE", why: "rocket artillery, not a cannon"}
+  "GunWalkerZap": {family: "Bullet", why: "ground half of GunWalkerZap+GunWalkerZapAA; a folded dual-purpose weapon takes its GROUND family -- the air side is a range/firepower modifier, not a second warhead"}
+  "HallucinationGrenade": {family: "Concussion", why: "a grenade is concussive"}
+  "Heal": {family: "(drop: not a damage warhead)", why: "whole group Hitscan_Veh was dropped in review"}
+  "HeliGunAG": {family: "Bullet", why: "ground half of HeliGunAG+HeliGunAA; a folded dual-purpose weapon takes its GROUND family -- the air side is a range/firepower modifier, not a second warhead"}
+  "HellfireAG.Harrier": {family: "MissileHE", why: "ground half of HellfireAG.Harrier+HellfireAA.Harrier; a folded dual-purpose weapon takes its GROUND family -- the air side is a range/firepower modifier, not a second warhead"}
+  "HellfireAG.Orca": {family: "MissileAP", why: "ground half of HellfireAG.Orca+HellfireAA.Orca; a folded dual-purpose weapon takes its GROUND family -- the air side is a range/firepower modifier, not a second warhead"}
+  "HonestJohn": {family: "MissileHE", why: "ballistic missile, not a cannon"}
+  "HonestJohn.UPG": {family: "MissileHE", why: "ballistic missile, not a cannon"}
+  "HonestJohnBH": {family: "MissileHE", why: "ballistic missile, not a cannon"}
+  "HonestJohnBH.UPG": {family: "MissileHE", why: "ballistic missile, not a cannon"}
+  "ImpalerSpike": {family: "Arrow", why: "confirmed Arrow"}
+  "IvanIFVTargeting": {family: "(drop: not a damage warhead)", why: "whole group Hitscan_Veh was dropped in review"}
+  "Ivanbomb": {family: "(drop: not a damage warhead)", why: "whole group Bullet_Inf_2 was dropped in review"}
+  "KatyushaRockets": {family: "MissileHE", why: "rocket artillery, not a cannon"}
+  "KatyushaRocketsWide": {family: "MissileHE", why: "rocket artillery, not a cannon"}
+  "LaceratorShards.Hypercharged": {family: "Quantum", why: "Scrin shard weapon -- maintainer ruled the shard/disc weapons Quantum"}
+  "LightTankLaser": {family: "LaserPulse", why: "Nod laser Light Tank; Prism is reserved for PrisCLaser/PrisTLaser"}
+  "M60mgJJ": {family: "Bullet", why: "ground half of M60mgJJ+M60mgJJAA; a folded dual-purpose weapon takes its GROUND family -- the air side is a range/firepower modifier, not a second warhead"}
+  "MGattG": {family: "Bullet", why: "a machine gun"}
+  "Maverick": {family: "MissileAP", why: "ground half of Maverick+MaverickAA; a folded dual-purpose weapon takes its GROUND family -- the air side is a range/firepower modifier, not a second warhead"}
+  "MineDefuser": {family: "(drop: support weapon)", why: "ValidTargets Mine; damages mines to defuse them"}
+  "ObliteratorBolt": {family: "Sonic", why: "Obliterator (OBLT); same FireDeath-only signal gap as BlackHandFlamer"}
+  "OrcaBombBuilding": {family: "(drop: not a damage warhead)", why: "whole group HitscanTesla_Air was dropped in review"}
+  "PeacemakerBombsBuilding": {family: "(drop: not a damage warhead)", why: "whole group HitscanAP_Air was dropped in review"}
+  "PhantomMissiles": {family: "MissileAP", why: "ground half of PhantomMissiles+PhantomMissilesAA; a folded dual-purpose weapon takes its GROUND family -- the air side is a range/firepower modifier, not a second warhead"}
+  "PitbullRockets": {family: "MissileAP", why: "ground half of PitbullRockets+PitbullRocketsAA; a folded dual-purpose weapon takes its GROUND family -- the air side is a range/firepower modifier, not a second warhead"}
+  "PlasmaDiscs.Hypercharged": {family: "Quantum", why: "Scrin disc weapon -- maintainer ruled the shard/disc weapons Quantum"}
+  "ReaperLaser": {family: "Quantum", why: "Reaper Tripod -- a Scrin alien laser"}
+  "ReaperLaserCharged": {family: "Quantum", why: "Reaper Tripod -- a Scrin alien laser"}
+  "ReaperLaserChargedReversed": {family: "Quantum", why: "Reaper Tripod -- a Scrin alien laser"}
+  "ReaperLaserReversed": {family: "Quantum", why: "Reaper Tripod -- a Scrin alien laser"}
+  "Repair": {family: "(drop: support weapon)", why: "Damage -3000, DamageTypes DirectRepair -- it heals"}
+  "RepairIFV": {family: "(drop: not a damage warhead)", why: "whole group Hitscan_Veh was dropped in review"}
+  "SBRockets": {family: "MissileAP", why: "ground half of SBRockets+BikeRocketsAA; a folded dual-purpose weapon takes its GROUND family -- the air side is a range/firepower modifier, not a second warhead"}
+  "ScrinRepair": {family: "(drop: not a damage warhead)", why: "whole group Laser_Inf_3 was dropped in review"}
+  "ShadowOperativeGun": {family: "Sniper", why: "a sniper, not an Arrow"}
+  "ShardWalkerShards": {family: "Arrow", why: "ground half of ShardWalkerShards+ShardWalkerShardsAA; a folded dual-purpose weapon takes its GROUND family -- the air side is a range/firepower modifier, not a second warhead"}
+  "Stinger": {family: "MissileAP", why: "anti-tank missile"}
+  "SubMissile": {family: "(park: naval)", why: "naval, awaits the naval ladder"}
+  "TOW": {family: "MissileAP", why: "a real anti-tank missile, not a Scrin weapon"}
+  "TormentorZap": {family: "Railgun", why: "ground half of TormentorZap+TormentorZapAA; a folded dual-purpose weapon takes its GROUND family -- the air side is a range/firepower modifier, not a second warhead"}
+  "TorpTube": {family: "(park: naval)", why: "naval, awaits the naval ladder"}
+  "TripodLaser": {family: "Quantum", why: "Annihilator Tripod -- a Scrin alien laser"}
+  "TripodLaserReversed": {family: "Quantum", why: "Annihilator Tripod -- a Scrin alien laser"}
+  "ZSU-23": {family: "Flak", why: "maintainer: ZSU is flak"}
+  "ZoneRaiderGrenade": {family: "BlastSonic", why: "Zone Raider sonic grenade; carries a Warhead@Concussion condition -- Blast x Element = Concussion x Demolition x Element"}
