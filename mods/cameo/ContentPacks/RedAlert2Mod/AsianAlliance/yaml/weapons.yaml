@@ -2910,7 +2910,7 @@ ASDFKamikazeExplosion:
 	Inherits@3: ^Projectile_Grenade_Light
 	Report: M203.aud
 	Warhead@Demolition_Heavy:
-		Damage: 30000
+		Damage: 20000
 	Warhead@Effect: CreateEffect
 		Explosions: ivan_explosion
 		ExplosionPalette: ra2effect
@@ -2994,7 +2994,7 @@ AsianSniperAP:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 8
 	Warhead@Bullet_Heavy: AreaDamage
-		Damage: 80000
+		Damage: 92000
 	Warhead@Bullet_Light: AreaDamage
 		Spread: 1
 		Falloff: 100, 0
@@ -3043,7 +3043,7 @@ AsianSniperLockdown:
 		Spread: 1
 		Falloff: 100, 0
 		ValidTargets: Ground, Water, Air
-		Damage: 192000
+		Damage: 204000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		Spread: 1

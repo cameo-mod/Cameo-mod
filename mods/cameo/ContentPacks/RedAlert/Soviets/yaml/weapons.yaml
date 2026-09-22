@@ -187,7 +187,7 @@ ra1_soviets_grenadier_grenadethermobaricexplode:
 		PhysicalStateScale: 100
 	Warhead@Thermobaric_Light:
 		ValidTargets: Ground, Water
-		Damage: 8000
+		Damage: 16000
 		PercentageScale: 4994
 	-Warhead@MediumFlameWeapon:
 	-Warhead@ShrapnelWeapon:
@@ -903,7 +903,7 @@ ra1_soviets_v2rocketlauncher_scudthermobaric:
 		PhysicalStateScale: 100
 	Warhead@Demolition_Heavy:
 		InvalidTargets: Air
-		Damage: 97995
+		Damage: 195991
 	-Warhead@MissileHE_Heavy:
 	Warhead@ShieldHit:
 		InvalidTargets: Air
@@ -933,7 +933,7 @@ ra1_soviets_v2rocketlauncher_scudtesla:
 		PhysicalStateScale: 100
 	Warhead@Tesla_Heavy:
 		InvalidTargets: Air
-		Damage: 73497
+		Damage: 171493
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		InvalidTargets: Air
 		DamageTypes: Tesla
@@ -1276,7 +1276,7 @@ HindMissiles:
 		ImpactActors: false
 	Warhead@MissileAP_Medium_Flat:
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 6000
 		PercentageScale: 9984
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
@@ -1957,7 +1957,7 @@ ra1_soviets_teslayak_yakteslaarcfragment1:
 	Warhead@Tesla_Heavy_Flat:
 		PercentageDenominator: 10000
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 6000
 		PercentageScale: 6663
 	-Warhead@LightMissile:
 	-Warhead@TeslaWeapon:
@@ -1987,7 +1987,7 @@ ra1_soviets_teslayak_yakteslaarcfragment2:
 	Warhead@Tesla_Heavy_Flat:
 		PercentageDenominator: 10000
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 5000
 		PercentageScale: 7995
 	-Warhead@TeslaArc:
 	-Warhead@LightMissile:
@@ -2113,6 +2113,93 @@ ra1_soviets_teslayak_tesla_bomb:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	Warhead@PreservedFlat_HeavyBomb: SpreadDamage
+		InvalidTargets: Air
+		ValidTargets: Ground, Ship
+		Spread: 800
+		Damage: 10000
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			HAZMAT: 50
+			Shield: 140
+			Wood: 100
+			Concrete: 96
+			Steel: 92
+			None: 88
+			Flak: 84
+			Plate: 80
+			Heroic: 76
+			Scout: 72
+			Light: 68
+			Medium: 64
+			Heavy: 60
+			Superheavy: 56
+			Fighter: 52
+			Bomber: 48
+			Helicopter: 44
+			Spaceship: 40
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@PreservedFlat_HeavyChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		InvalidTargets: wall, Air
+		Spread: 1050
+		Damage: 10000
+		Falloff: 99, 66, 33
+		Versus:
+			HAZMAT: 50
+			Shield: 140
+			Superheavy: 100
+			Plate: 96
+			Heavy: 92
+			Flak: 88
+			Medium: 84
+			None: 80
+			Light: 76
+			Heroic: 72
+			Scout: 68
+			Steel: 64
+			Concrete: 60
+			Wood: 56
+			Spaceship: 52
+			Helicopter: 48
+			Bomber: 44
+			Fighter: 40
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		PhysicalStates:
+			Corrosion: 100
+	Warhead@PreservedFlat_HeavyFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		InvalidTargets: wall, Air
+		Spread: 1000
+		Damage: 10000
+		Falloff: 111, 33, 11, 3
+		Versus:
+			Shield: 140
+			None: 100
+			Flak: 96
+			Plate: 92
+			Heroic: 88
+			Wood: 84
+			Concrete: 80
+			Steel: 76
+			Scout: 72
+			Light: 68
+			Medium: 64
+			Heavy: 60
+			Superheavy: 56
+			Fighter: 52
+			Bomber: 48
+			Helicopter: 44
+			Spaceship: 40
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 	Warhead@PreservedFlat_TeslaExtraDamage: SpreadDamage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
@@ -2143,7 +2230,7 @@ ra1_soviets_teslayak_tesla_bomb:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Spread: 100
-		Damage: 160000
+		Damage: 10000
 		Versus:
 			REFLECTOR: 50
 			Shield: 150
@@ -2659,7 +2746,7 @@ ShtoraLaser:
 
 	Warhead@Laser_Light:
 		ValidTargets: Ground, Water, Air
-		Damage: 7000
+		Damage: 6000
 		PercentageScale: 0
 	-Warhead@LightFlameWeapon:
 	-Warhead@FlakWeapon:
@@ -3137,7 +3224,7 @@ MammothTuskTesla:
 		AimTargetStances: Enemy, Neutral
 	Warhead@MissileTesla_Heavy:
 		ValidTargets: Ground, Water, Infantry, Monster, Air
-		Damage: 32000
+		Damage: 36000
 		PercentageScale: 0
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
@@ -3232,7 +3319,7 @@ MammothTuskTeslaFragment1:
 		AimTargetStances: Enemy, Neutral
 	Warhead@MissileTesla_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 16000
+		Damage: 18000
 		PercentageScale: 0
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
@@ -3276,7 +3363,7 @@ MammothTuskTeslaFragment2:
 		Damage: 4000
 	Warhead@MissileTesla_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 9000
 		PercentageScale: 0
 	-Warhead@TeslaArc:
 	-Warhead@Grenade:
@@ -4113,7 +4200,7 @@ ra1_soviets_volkov_volkovmagneticweapontesla:
 	Warhead@Tesla_Heavy:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
-		Damage: 24000
+		Damage: 32000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		InvalidTargets: Air
@@ -4161,7 +4248,7 @@ ra1_soviets_volkov_volkovmagneticweaponteslafragment1:
 	Warhead@Tesla_Heavy:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
-		Damage: 12000
+		Damage: 16000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
@@ -4206,7 +4293,7 @@ ra1_soviets_volkov_volkovmagneticweaponteslafragment2:
 	Warhead@Tesla_Heavy:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
-		Damage: 6000
+		Damage: 8000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
@@ -4381,7 +4468,7 @@ ra1_soviets_volkov_volkovmagneticweaponincendiaryteslafragment1:
 	Warhead@Tesla_Heavy:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
-		Damage: 12000
+		Damage: 20000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
@@ -4430,7 +4517,7 @@ ra1_soviets_volkov_volkovmagneticweaponincendiaryteslafragment2:
 	Warhead@Tesla_Heavy:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
-		Damage: 6000
+		Damage: 10000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
@@ -4501,7 +4588,7 @@ ra1_soviets_volkov_volkovmagneticweaponincendiarynuclearshells:
 	Warhead@CannonNuke_Heavy:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
-		Damage: 200000
+		Damage: 180000
 		PercentageScale: 0
 	-Warhead@MediumFlameWeapon:
 	-Warhead@NuclearWarhead:
@@ -4985,7 +5072,7 @@ ra1_soviets_v2rocketlauncher_scud:
 	MinRange: 2519
 	Warhead@MissileHE_Heavy:
 		InvalidTargets: Air
-		Damage: 48998
+		Damage: 97996
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 ra1_soviets_heavytank_105mm:

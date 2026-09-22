@@ -149,7 +149,7 @@ tkmfirerockets:
 		Damage: 18000
 	Warhead@Flame_Light:
 		InvalidTargets: Air
-		Damage: 24000
+		Damage: 22000
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, ixian_concretewall
@@ -635,7 +635,7 @@ HueyCryoMissiles:
 	-Warhead@MissileAP_Medium:
 	Warhead@Cryo_Medium_Flat:
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 6000
 		PercentageScale: 9984
 HueyTwinMissiles:
 	Inherits@finalmain: ^Warhead_MissileAP_Medium_Flat
@@ -669,7 +669,7 @@ HueyTwinMissiles:
 	-Warhead@MissileAP_Medium:
 	Warhead@MissileAP_Medium_Flat:
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 6000
 		PercentageScale: 9984
 	Projectile: Missile
 		VerticalRateOfTurn: 16
@@ -822,7 +822,7 @@ tkmkatyushalalauncherrocketsfire:
 		InvalidTargets: Air
 		PercentageScale: 6667
 		ValidTargets: Ground, Water, Air
-		Damage: 27000
+		Damage: 28000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@ShieldHit:
 		InvalidTargets: Air
@@ -949,7 +949,7 @@ SandmarineTuskFire:
 		InvalidTargets: Air
 		PercentageScale: 6667
 		ValidTargets: Ground, Water, Air
-		Damage: 87000
+		Damage: 88000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	-Warhead@MissileHE_Heavy:
 	-Warhead@Concussion_Medium:
@@ -1023,7 +1023,7 @@ ViperMissilesFire:
 	Warhead@Flame_Light:
 		PercentageScale: 6667
 		ValidTargets: Ground, Water, Air
-		Damage: 39000
+		Damage: 40000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	-Warhead@MissileAP_Light:
 	-Warhead@Concussion_Medium:
@@ -1122,7 +1122,7 @@ VonSniperAP:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 8
 	Warhead@Bullet_Heavy: AreaDamage
-		Damage: 80000
+		Damage: 92000
 	Warhead@Bullet_Light: AreaDamage
 		Spread: 1
 		Falloff: 100, 0
@@ -1170,7 +1170,7 @@ VonSniperLockdown:
 		Spread: 1
 		Falloff: 100, 0
 		ValidTargets: Ground, Water, Air
-		Damage: 192000
+		Damage: 204000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		Spread: 1

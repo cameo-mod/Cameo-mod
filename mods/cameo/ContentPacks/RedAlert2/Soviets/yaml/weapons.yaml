@@ -359,7 +359,7 @@ RA160mm_rad:
 	-Warhead@Demolition_Light:
 	Warhead@Chemical_Light_Flat:
 		ValidTargets: Ground, Water
-		Damage: 144000
+		Damage: 108000
 		PercentageScale: 0
 RA160mm_fire:
 	Inherits@finalmain: ^Warhead_CannonFire_Heavy_Flat
@@ -1166,7 +1166,7 @@ RA2FlakTrackAAGun:
 		ValidTargets: Air
 	Warhead@Flak_Medium:
 		PercentageScale: 2488
-		Damage: 7000
+		Damage: 8000
 		ValidTargets: Air
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:

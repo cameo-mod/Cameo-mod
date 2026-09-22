@@ -268,7 +268,7 @@ DragunovSniper:
 		Spread: 1
 		Falloff: 100, 0
 		# Still heavily damages tanks, but cannot one-shot a Mammoth or win the return-fire duel.
-		Damage: 40000
+		Damage: 200000
 		PercentageScale: 0
 	Warhead@LegacyRailgunExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -797,7 +797,7 @@ ZeroFighterChainGunWaveforce:
 	Inherits@compat: ^ZeroFighterWaveforceBulletCompatibility
 	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 9000
+		Damage: 11000
 		PercentageScale: 4444
 	-Warhead@Bullet_Medium:
 	-Warhead@ZeroFighterBullet_Medium:
@@ -972,7 +972,7 @@ WaveforceCannonDistortedBeam1:
 	-Warhead@TeslaWeapon:
 	Warhead@Waveforce_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 20000
+		Damage: 25000
 		PercentageScale: 0
 
 WaveforceCannonDistortedBeam2:

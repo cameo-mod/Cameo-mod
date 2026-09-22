@@ -107,7 +107,7 @@ TankBusterBeamCannon:
 	Warhead@Railgun_Heavy:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
-		Damage: 24000
+		Damage: 23000
 		PercentageScale: 0
 	-Warhead@TankBusterBeamUnscoped:
 
@@ -519,7 +519,7 @@ BallistaSingleShotAirEnergized:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
-		Damage: 160000
+		Damage: 170000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@CannonHE_Medium: AreaDamage
 		ValidTargets: Air
@@ -772,7 +772,7 @@ BallistaMultiShotEnergized:
 	Warhead@Arrow_Medium:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
-		Damage: 40000
+		Damage: 45000
 		PercentageScale: 0
 
 	Warhead@EMPUnit:
@@ -1190,7 +1190,7 @@ ZeroFighterArrowsEnergized:
 	-Warhead@TeslaWeapon:
 	Warhead@Arrow_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 32000
+		Damage: 36000
 		PercentageScale: 4442
 	-Warhead@Arrow_Light:
 	-Warhead@MissileHE_Medium:
@@ -1593,7 +1593,7 @@ HovercraftPlasmaCannon:
 	-Warhead@TeslaWeapon:
 	Warhead@Plasma_Medium_Flat:
 		ValidTargets: Ground, Water, Air
-		Damage: 18000
+		Damage: 27000
 		PercentageScale: 0
 	-Warhead@Bullet_Medium_Flat:
 	-Warhead@Grenade:
@@ -1731,7 +1731,7 @@ Type89PlasmaCannon:
 	Warhead@Plasma_Medium_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
-		Damage: 13000
+		Damage: 15000
 		PercentageScale: 0
 	-Warhead@CannonHE_Medium:
 
@@ -1947,7 +1947,7 @@ OISmallPlasmaCannon:
 	Warhead@Plasma_Medium_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
-		Damage: 8000
+		Damage: 10000
 		PercentageScale: 0
 
 	Warhead@ShieldHit:
@@ -2394,7 +2394,7 @@ NanoSmokeAG:
 	Warhead@Chemical_Medium_Flat:
 		InvalidTargets: Air
 		ValidTargets: Infantry, Vehicle, Building
-		Damage: 9999
+		Damage: 10887
 		PercentageScale: 0
 	InvalidTargets: wall, Air
 
@@ -2430,7 +2430,7 @@ WaveArtilleryImpact:
 	Projectile: InstantHit
 	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water
-		Damage: 20000
+		Damage: 21000
 		Spread: 333
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
@@ -2485,6 +2485,18 @@ WaveTurretImpact:
 		ValidRelationships: Enemy, Neutral
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Damage: 5
+		Spread: 500
+		ValidRelationships: Enemy, Neutral
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@RailgunWeapon: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 20000
+		Spread: 500
+		ValidRelationships: Enemy, Neutral
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 5
 		Spread: 500

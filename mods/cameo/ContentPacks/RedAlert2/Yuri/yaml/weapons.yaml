@@ -225,7 +225,7 @@ RA2LasherToxicMortar_elite:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@CannonChem_Medium:
 		ValidTargets: Ground, Water
-		Damage: 36000
+		Damage: 42000
 		PercentageScale: 0
 	-Warhead@CannonAP_Light:
 	-Warhead@CannonHE_Heavy:
@@ -280,7 +280,7 @@ RA2LasherLaser_elite:
 	-Warhead@LaserWeapon:
 	Warhead@Laser_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
-		Damage: 32000
+		Damage: 40000
 		PercentageScale: 5998
 		PhysicalStateScale: 15
 
@@ -781,7 +781,7 @@ RA2GattlingInf:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Air, Water
-		Damage: 4000
+		Damage: 16000
 		PercentageScale: 2494
 RA2Virusgun:
 	Inherits@roleflat: ^Warhead_Sniper_Light
@@ -1032,7 +1032,7 @@ RA2CosmonautLaser:
 	-Warhead@RailgunWeapon:
 	Warhead@Laser_Light:
 		ValidTargets: Ground, Water, Air
-		Damage: 12000
+		Damage: 13600
 		PercentageScale: 1464
 	-Warhead@Bullet_Medium_Flat:
 	-Warhead@FlakWeapon:

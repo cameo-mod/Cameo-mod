@@ -348,7 +348,7 @@ SteelQuantumCannon_elite:
 	Warhead@Quantum_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
-		Damage: 36000
+		Damage: 60000
 		PercentageScale: 5999
 
 	Warhead@Laser_Heavy_ExtraDamage:
@@ -496,7 +496,7 @@ bfg10kCannon:
 	-Warhead@TeslaChargedWeapon:
 	Warhead@Plasma_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
-		Damage: 1000000
+		Damage: 1127488
 		PercentageScale: 0
 
 superbfg10kCannon:
@@ -2364,7 +2364,7 @@ SteelQuantumTurretRail:
 	Warhead@Quantum_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
-		Damage: 12000
+		Damage: 14600
 		PercentageScale: 1364
 	-Warhead@CannonHE_Heavy:
 
