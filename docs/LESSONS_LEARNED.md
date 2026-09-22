@@ -1773,6 +1773,11 @@ had shown cameo-mod's PRs moments earlier.
 report a PR or branch as missing on a bare `gh` result — check `gh repo view --json
 nameWithOwner` first, or compare with `gh api repos/cameo-mod/Cameo-mod/compare/master...<branch>`.
 
+Worse variant (hit 2026-09-22): the redirect can also **succeed silently on the wrong repo** —
+`gh pr view/comment 146` resolved to an unrelated PR on `Zeruel87/Cameo-mod` and posted a review
+there, while the real target was #431 on `cameo-mod/Cameo-mod`. Same PR number, different repo —
+no error at all. Any `gh` result without `--repo` is untrusted, including "success".
+
 ## A spread-band ratio that folds in `Shield` invents violations that do not exist
 
 `Shield` is not a normal armor. §12.0c gives it its own compressed `[100,400]` ladder, so its
