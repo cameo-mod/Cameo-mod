@@ -866,6 +866,23 @@ Then read `C:	mp\gate_<name>\Logs\perf.log` for
 `(Get-Process OpenRA).Path` against your own worktree, because another agent's gate may be
 mid-run and a live instance locks the next build.
 
+#### `launch-game.cmd` needs Windows `find.exe` — Git Bash shadows it
+
+**2026-09-22.** The script's engine check is `find %ENGINE_VERSION% %ENGINE_DIRECTORY%\VERSION`;
+under Git Bash, GNU `find` shadows Windows `find.exe`, the check dies with "Required engine
+files not found", and a stale `perf.log` can still read as a pass. Either run the script from
+`cmd.exe`/PowerShell, or invoke the binary directly with the same arguments the script uses:
+
+```
+cd engine && ./bin/OpenRA.exe Game.Mod=cameo Engine.EngineDir=".." \
+  Engine.LaunchPath="<abs path to launch-game.cmd>" \
+  Engine.ModSearchPaths="<worktree>\\mods,./mods"
+```
+
+`Engine.LaunchPath` must point at the launcher script (the mod worktree), NOT `engine/bin` —
+the wrong path aborts with `Unknown or invalid mod 'cameo'` and a zero-byte perf.log.
+Always confirm `perf.log` has a FRESH timestamp before trusting the menu line.
+
 ## The canonical engine update pipeline (binding, uniform process)
 
 The engine lives in TWO places that must stay in sync. Follow these steps IN ORDER for every engine change:
