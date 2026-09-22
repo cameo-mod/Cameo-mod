@@ -80,7 +80,7 @@
       "armament_name": "secondary",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 55, 0",
         "spread": "93",
         "tag": "Tesla_Heavy",
@@ -92,13 +92,6 @@
         "spread": "200",
         "tag": "Tesla_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "128",
-        "tag": "Magic_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
@@ -2543,17 +2536,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "36000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
@@ -2594,24 +2580,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "48000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
@@ -2653,24 +2625,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "48000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
@@ -2753,17 +2711,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "36000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
@@ -2805,24 +2756,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "48000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
@@ -2865,24 +2802,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "48000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Sniper_Light",
         "type": "AreaDamage"
        },
        {
@@ -4631,7 +4554,7 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "30000",
+        "damage": "42000",
         "falloff": "100, 82, 61, 38, 0",
         "spread": "90",
         "tag": "CannonChem_Medium",
@@ -4706,13 +4629,6 @@
         "spread": null,
         "tag": "CannonAP_Light_Percentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "12000",
-        "falloff": null,
-        "spread": null,
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
        },
        {
         "damage": "2",

@@ -36,17 +36,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "48000",
+        "damage": "96000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "366",
         "tag": "Chemical_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "48000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "800",
-        "tag": "Demolition_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -100,7 +93,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "80000",
+        "damage": "160000",
         "falloff": "100, 55, 0",
         "spread": "116",
         "tag": "Tesla_Super",
@@ -112,13 +105,6 @@
         "spread": "400",
         "tag": "Tesla_Super_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "80000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "800",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -144,7 +130,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "80000",
+        "damage": "160000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
         "spread": "800",
         "tag": "Nuclear_Super",
@@ -156,13 +142,6 @@
         "spread": "4000",
         "tag": "Nuclear_Super_Percentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "80000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "800",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -187,7 +166,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "100000",
+        "damage": "200000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
         "spread": "1000",
         "tag": "Nuclear_Super",
@@ -199,13 +178,6 @@
         "spread": "5000",
         "tag": "Nuclear_Super_Percentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "100000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "1000",
-        "tag": "Demolition_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -362,7 +334,7 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "28000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "275",
         "tag": "Chemical_Medium",
@@ -394,14 +366,6 @@
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium_GroundShipExtraDamage",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "24000",
-        "falloff": "100, 45, 15, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "MissileHE_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -608,7 +572,7 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "28000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "275",
         "tag": "Chemical_Medium",
@@ -640,14 +604,6 @@
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium_GroundShipExtraDamage",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "24000",
-        "falloff": "100, 45, 15, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "MissileHE_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -1202,14 +1158,7 @@
       "armament_name": "deployed",
       "damage_warheads": [
        {
-        "damage": "108000",
-        "falloff": "100, 88, 72, 50, 0",
-        "spread": "183",
-        "tag": "Chemical_Light_Flat",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "36000",
+        "damage": "144000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
         "spread": "1000",
         "tag": "Nuclear_Super",

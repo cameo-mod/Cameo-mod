@@ -227,7 +227,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Health.HP",
      "v": "200000"
     },
-    "name": "Advanced Carryall",
+    "name": "actor_ordos_advancedcarryall.name",
     "prerequisites": [
      "~ordos_hightechfactory"
     ],
@@ -369,7 +369,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Air Mine",
+    "name": "actor_ordos_airmine.name",
     "prerequisites": [
      "~ordos_hightechfactory"
     ],
@@ -583,7 +583,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Banshee",
+    "name": "actor_ordos_banshee.name",
     "prerequisites": [
      "~ordos_hightechfactory",
      "ordos_ixresearchcenter",
@@ -724,7 +724,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Eye In The Sky",
+    "name": "actor_ordos_eyeinthesky.name",
     "prerequisites": [
      "~ordos_hightechfactory",
      "ordos_ixresearchcenter"
@@ -869,7 +869,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Swarmer Drone",
+    "name": "actor_ordos_swarmerdrone.name",
     "prerequisites": [
      "~ordos_hightechfactory"
     ],
@@ -1008,7 +1008,7 @@
      "src": "inherited",
      "v": "200"
     },
-    "name": "Wraith",
+    "name": "actor_ordos_wraith.name",
     "prerequisites": [
      "~ordos_hightechfactory",
      "ordos_palace",
@@ -1400,7 +1400,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Gas Turret",
+    "name": "actor_ordos_chemturret.name",
     "prerequisites": [
      "~ordos_constructionyard",
      "ordos_barracks"
@@ -1709,7 +1709,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ordos Laser Turret",
+    "name": "actor_ordos_laserturret.name",
     "prerequisites": [
      "~ordos_constructionyard",
      "ordos_ixresearchcenter"
@@ -2314,7 +2314,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Health.HP",
      "v": "15000"
     },
-    "name": "Anti Air Trooper",
+    "name": "actor_ordos_antiairtrooper.name",
     "prerequisites": [
      "~ordos_barracks",
      "~ordos_upgrade_antiairtrooper"
@@ -2432,7 +2432,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Health.HP",
      "v": "30000"
     },
-    "name": "Ordos Chemical Trooper",
+    "name": "actor_ordos_chemicaltrooper.name",
     "prerequisites": [
      "~ordos_barracks",
      "~ordos_promotion_chemicaltrooper"
@@ -2550,7 +2550,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Health.HP",
      "v": "75000"
     },
-    "name": "Contaminator",
+    "name": "actor_ordos_contaminator.name",
     "prerequisites": [
      "~ordos_barracks",
      "~ordos_promotion_contaminator"
@@ -2786,7 +2786,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Health.HP",
      "v": "90000"
     },
-    "name": "Face Dancer",
+    "name": "actor_ordos_facedancer.name",
     "prerequisites": [
      "~ordos_barracks",
      "ordos_palace"
@@ -2870,7 +2870,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Health.HP",
      "v": "50000"
     },
-    "name": "Leech",
+    "name": "actor_ordos_leech.name",
     "prerequisites": [
      "~ordos_barracks",
      "~ordos_promotion_leecher"
@@ -3078,7 +3078,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Health.HP",
      "v": "28000"
     },
-    "name": "Ordos Light Infantry",
+    "name": "actor_ordos_lightinfantry.name",
     "prerequisites": [
      "~ordos_barracks"
     ],
@@ -3288,7 +3288,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Health.HP",
      "v": "20000"
     },
-    "name": "Ordos Mortar Trooper",
+    "name": "actor_ordos_mortartrooper.name",
     "prerequisites": [
      "~ordos_barracks",
      "~ordos_promotion_mortartroopers"
@@ -3460,7 +3460,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Health.HP",
      "v": "12000"
     },
-    "name": "Ordos Rocket Trooper",
+    "name": "actor_ordos_rockettrooper.name",
     "prerequisites": [
      "~ordos_barracks",
      "~!ordos_upgrade_antiairtrooper"
@@ -3537,7 +3537,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Health.HP",
      "v": "12000"
     },
-    "name": "Saboteur",
+    "name": "actor_ordos_saboteur.name",
     "prerequisites": [
      "~disabled"
     ],
@@ -4290,7 +4290,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ordos APC",
+    "name": "actor_ordos_apc.name",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "ordos_outpost",
@@ -4489,7 +4489,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Cobra Tank",
+    "name": "actor_ordos_cobratank.name",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "ordos_outpost",
@@ -4628,7 +4628,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Combat Autogun Tank",
+    "name": "actor_ordos_combatautoguntank.name",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "ordos_outpost",
@@ -4737,7 +4737,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ordos Combat Tank",
+    "name": "actor_ordos_combattank.name",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "~!ordos_upgrade_heavycombattank"
@@ -4874,7 +4874,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Deviator Artillery",
+    "name": "actor_ordos_deviatorartillery.name",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "ordos_palace"
@@ -4997,7 +4997,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Deviator Tank",
+    "name": "actor_ordos_deviatortank.name",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "ordos_palace",
@@ -5130,7 +5130,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Dust Drone",
+    "name": "actor_ordos_dustdrone.name",
     "prerequisites": [
      "~ordos_light_vehicle_production",
      "~ordos_promotion_dustdrone"
@@ -5276,7 +5276,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Heavy Autogun Tank",
+    "name": "actor_ordos_heavyautoguntank.name",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "~ordos_upgrade_heavyautoguntank"
@@ -5414,7 +5414,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ordos Heavy Combat Tank",
+    "name": "actor_ordos_heavycombattank.name",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "~ordos_upgrade_heavycombattank"
@@ -5646,7 +5646,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Laboratory Crawler",
+    "name": "actor_ordos_laboratorycrawler.name",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "ordos_ixresearchcenter",
@@ -5794,7 +5794,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Laser Tank",
+    "name": "actor_ordos_lasertank.name",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "ordos_ixresearchcenter",
@@ -5873,7 +5873,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ordos Mobile Construction Vehicle",
+    "name": "actor_ordos_mobileconstructionvehicle.name",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "ordos_mcv_production"
@@ -6067,7 +6067,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Python Tank",
+    "name": "actor_ordos_pythontank.name",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "ordos_outpost",
@@ -6213,7 +6213,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ordos Raider",
+    "name": "actor_ordos_raider.name",
     "prerequisites": [
      "~ordos_light_vehicle_production",
      "~!ordos_promotion_stealthraider"
@@ -6291,7 +6291,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ordos Spice Harvester",
+    "name": "actor_ordos_spiceharvester.name",
     "prerequisites": [
      "~spice_refinery",
      "~ordos_heavy_vehicle_production"
@@ -6447,7 +6447,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Stealth Raider",
+    "name": "actor_ordos_stealthraider.name",
     "prerequisites": [
      "~ordos_light_vehicle_production",
      "~ordos_promotion_stealthraider"
@@ -6573,7 +6573,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Tank Destroyer",
+    "name": "actor_ordos_tankdestroyer.name",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "ordos_ixresearchcenter"

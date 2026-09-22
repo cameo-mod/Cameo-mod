@@ -6173,18 +6173,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "3000",
         "falloff": "100, 50",
         "spread": "128",
         "tag": "Magic_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50",
-        "spread": null,
-        "tag": "ExtraSquidDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
@@ -7886,7 +7879,7 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "28000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "275",
         "tag": "Chemical_Medium",
@@ -7918,14 +7911,6 @@
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium_GroundShipExtraDamage",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "24000",
-        "falloff": "100, 45, 15, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "MissileHE_Medium",
         "type": "AreaDamage"
        }
       ],

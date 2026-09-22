@@ -48,57 +48,8 @@ japan_imperialscoutsman_rifle:
 	-Warhead@RailgunExtraDamage:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 13000
 		PercentageScale: 0
-	Warhead@RailgunCompatibility: SpreadDamage
-		AffectsParent: false
-		Spread: 250
-		Damage: 4000
-		Versus:
-			REFLECTOR: 50
-			Shield: 140
-			Superheavy: 100
-			Heavy: 96
-			Medium: 92
-			Light: 88
-			Scout: 84
-			Heroic: 80
-			Plate: 76
-			Flak: 72
-			None: 68
-			Steel: 64
-			Concrete: 60
-			Wood: 56
-			Spaceship: 52
-			Helicopter: 48
-			Bomber: 44
-			Fighter: 40
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Incendiary
-	Warhead@RailgunShieldCompatibility: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Spread: 500
-		Damage: 1000
-		Versus:
-			REFLECTOR: 50
-			Shield: 100
-			None: 1
-			Flak: 1
-			Plate: 1
-			Heroic: 1
-			Superheavy: 1
-			Heavy: 1
-			Medium: 1
-			Light: 1
-			Scout: 1
-			Steel: 1
-			Concrete: 1
-			Wood: 1
-			Fighter: 1
-			Bomber: 1
-			Helicopter: 1
-			Spaceship: 1
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		UpdatesUnitStatistics: false
 
 # paired upgrade variant (LAW: renaming a base weapon ALWAYS renames its
 # upgraded variant with it). Waveforce flavor rides the baseline stats.
@@ -106,6 +57,9 @@ japan_imperialscoutsman_rifle_waveforce:
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: japan_imperialscoutsman_rifle
 	Inherits@3: ^WaveforceBulletProjectile
+	-Warhead@Bullet_Medium:
+	Warhead@Railgun_Heavy:
+		Damage: 15000
 
 TankBusterBeamCannon:
 	Inherits@collapsewh: ^Warhead_Railgun_Heavy
@@ -153,14 +107,13 @@ TankBusterBeamCannon:
 	Warhead@Railgun_Heavy:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
-		Damage: 15000
+		Damage: 23000
 		PercentageScale: 0
+	-Warhead@TankBusterBeamUnscoped:
 
 	Warhead@Railgun_Heavy_ExtraDamage:
 		InvalidTargets: Air
 	Warhead@RailgunExtraDamage_Auxiliary:
-		InvalidTargets: Air
-	Warhead@TankBusterBeamUnscoped:
 		InvalidTargets: Air
 	Warhead@ShieldHit:
 		InvalidTargets: Air
@@ -319,32 +272,6 @@ SamuraiBladeCharged:
 	-Warhead@SwordWeaponFriendlyFire:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@PreservedFlat_SwordWeapon: SpreadDamage
-		InvalidTargets: Air
-		ValidRelationships: Neutral, Enemy
-		ValidTargets: Ground, Water
-		Falloff: 100, 50
-		Spread: 320
-		Damage: 10000
-		Versus:
-			Shield: 125
-			None: 100
-			Flak: 95
-			Plate: 90
-			Heroic: 85
-			Scout: 80
-			Light: 75
-			Medium: 70
-			Heavy: 65
-			Superheavy: 60
-			Steel: 55
-			Concrete: 50
-			Wood: 45
-			Fighter: 40
-			Bomber: 35
-			Helicopter: 30
-			Spaceship: 25
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@PreservedFlat_SwordWeaponFriendlyFire: SpreadDamage
 		InvalidTargets: Air
 		ValidRelationships: Ally
@@ -402,7 +329,7 @@ SamuraiBladeCharged:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Spread: 100
-		Damage: 10000
+		Damage: 20000
 		Versus:
 			REFLECTOR: 50
 			Shield: 150
@@ -591,8 +518,8 @@ BallistaSingleShotAirEnergized:
 		Damage: 10
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MissileAP_Light:
-		ValidTargets: Air
-		Damage: 20000
+		ValidTargets: Ground, Water, Air
+		Damage: 170000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@CannonHE_Medium: AreaDamage
 		ValidTargets: Air
@@ -673,6 +600,9 @@ BallistaSingleShotAirEnergized:
 		ValidTargets: Air
 		Damage: 110000
 		PercentageScale: 0
+	-Warhead@Arrow_Light_Flat:
+	-Warhead@Arrow_Light:
+	-Warhead@CannonHE_Medium:
 BallistaMultiShot:
 	Inherits@collapsewh: ^Warhead_Arrow_Medium
 	-TargetActorCenter:
@@ -757,15 +687,7 @@ BallistaMultiShot:
 	Warhead@Arrow_Medium:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
-		Damage: 30000
-		PercentageScale: 0
-	Warhead@CollapseTargetCompatibility1: AreaDamage
-		InvalidTargets: Air
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
+		Damage: 40000
 		PercentageScale: 0
 
 BallistaMultiShotEnergized:
@@ -872,8 +794,6 @@ BallistaTowerMultiShot:
 		InvalidTargets: Air
 	Warhead@ArrowWeaponPercentage:
 		InvalidTargets: wall, Air
-	Warhead@CollapseTargetCompatibility1:
-		InvalidTargets: Air
 BallistaTowerMultiShotEnergized:
 	Inherits: BallistaMultiShotEnergized
 	Range: 9214
@@ -1288,13 +1208,17 @@ SkyHawkChainGun:
 		Speed: 4000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 4000
+	-Warhead@Demolition_Light:
 SkyHawkChainGunWaveforce:
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: SkyHawkChainGun
 	Inherits@3: ^WaveforceBulletProjectile
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 500
+	-Warhead@Bullet_Medium:
+	Warhead@Railgun_Heavy:
+		Damage: 6000
 
 ^SkyHawkCannonLegacy:
 	Inherits@wh2: ^Warhead_CannonAP_Light
@@ -1335,15 +1259,11 @@ SkyHawkPlasmaCannon:
 		Width: 40
 	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 16000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonAP_Light: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 12000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		ImpactSounds: psahit00.aud
@@ -1351,6 +1271,7 @@ SkyHawkPlasmaCannon:
 	Warhead@EffectAir: CreateEffect
 		ImpactSounds: psahit00.aud
 		Explosions: purple_plasma
+	-Warhead@CannonAP_Light:
 
 SkyHawkArrows:
 	Inherits@finalmain: ^Warhead_Arrow_Light_Flat
@@ -1723,14 +1644,13 @@ JapaneseHovercraftFlakWaveforce:
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: JapaneseHovercraftFlak
 	Inherits@3: ^WaveforceBulletProjectile
-	Warhead@Flak_Medium_Flat:
-		InvalidTargets: Air
-		ValidTargets: Ground, Water
-		Damage: 4000
-		PercentageScale: 9975
-
 	Warhead@Railgun_Heavy:
 		InvalidTargets: Air
+		ValidTargets: Ground, Water
+		Damage: 6000
+		PercentageScale: 6650
+	-Warhead@Flak_Medium_Flat:
+
 	Warhead@Railgun_Heavy_ExtraDamage:
 		InvalidTargets: Air
 	Warhead@ShieldHit:
@@ -1739,10 +1659,11 @@ JapaneseHovercraftFlakAAkWaveforce:
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: JapaneseHovercraftFlakAA
 	Inherits@3: ^WaveforceBulletProjectile
-	Warhead@Flak_Medium_Flat:
+	Warhead@Railgun_Heavy:
 		ValidTargets: Air
-		Damage: 4000
-		PercentageScale: 9975
+		Damage: 6000
+		PercentageScale: 6650
+	-Warhead@Flak_Medium_Flat:
 
 	Warhead@Railgun_Heavy:
 		ValidTargets: Air
@@ -1852,7 +1773,7 @@ Type97PlasmaCannon:
 		ContrailLength: 15
 		Width: 50
 	Warhead@Tesla_Heavy:
-		Damage: 4000
+		Damage: 12000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		Damage: 2000
@@ -1866,6 +1787,8 @@ Type97PlasmaCannon:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: psahit00.aud
 		Explosions: purple_plasma
+	-Warhead@Railgun_Heavy:
+	-Warhead@CannonHE_Heavy:
 
 ShrineTankCannon:
 	# Shrine Minitank weapon — weaker version of Exorcist. Pure Magic (2026-08-10).
@@ -1931,7 +1854,7 @@ WaveforceCannon:
 		Damage: 10000
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 10000
+		Damage: 20000
 	Warhead@Effect: CreateEffect
 		ImpactSounds: psahit00.aud
 		Explosions: blueartexp
@@ -1947,6 +1870,7 @@ WaveforceCannon:
 		ValidTargets: Air
 	Warhead@Railgun_Heavy_ExtraDamage:
 		ValidTargets: Ground, Water, Air
+	-Warhead@Railgun_Heavy:
 
 OISmallCannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium
@@ -2062,7 +1986,7 @@ OIBigPlasmaCannon:
 		ContrailLength: 15
 		Width: 60
 	Warhead@Tesla_Heavy:
-		Damage: 8000
+		Damage: 24000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		Damage: 4000
@@ -2076,6 +2000,8 @@ OIBigPlasmaCannon:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: psahit00.aud
 		Explosions: purple_plasma
+	-Warhead@Railgun_Heavy:
+	-Warhead@CannonHE_Heavy:
 
 OIFlamer:
 	Inherits@wh: ^Warhead_Flame_Medium
@@ -2500,12 +2426,11 @@ WaveArtilleryShell:
 
 WaveArtilleryImpact:
 	Inherits: ^Warhead_Tesla_Heavy
-	Inherits@2: ^Warhead_Railgun_Heavy
 	Inherits@3: ^Effect_Railgun_Heavy
 	Projectile: InstantHit
 	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water
-		Damage: 10000
+		Damage: 21000
 		Spread: 333
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
@@ -2513,11 +2438,6 @@ WaveArtilleryImpact:
 		Damage: 5000
 		Spread: 666
 		ValidRelationships: Enemy, Neutral
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Railgun_Heavy:
-		ValidTargets: Ground, Water
-		Damage: 10000
-		Spread: 333
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@SonicDebuff: GrantExternalCondition
 		Condition: SonicDebuff
@@ -2659,17 +2579,11 @@ ArmoredCarMG_AA:
 	ValidTargets: Air
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air
-	Warhead@CannonAP_Light: AreaDamage
-		ValidTargets: Air
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Air
-	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Air
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@GrenadePercentage: AreaDamagePercentage
-		ValidTargets: Air
-	Warhead@CannonHE_Medium: AreaDamage
 		ValidTargets: Air
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
@@ -2698,10 +2612,11 @@ ArmoredCarMGWaveforce:
 	Inherits@4: ^WaveforceBulletProjectile
 	Warhead@Railgun_Heavy:
 		InvalidTargets: Air
-		Damage: 300
+		Damage: 1900
 		PercentageScale: 6667
 	Warhead@Railgun_Heavy_ExtraDamage:
 		Damage: 100
+	-Warhead@Bullet_Medium:
 	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
@@ -2733,8 +2648,6 @@ ArmoredCarMGWaveforce:
 		InvalidTargets: Air
 	Warhead@ShieldHit:
 		InvalidTargets: Air
-	Warhead@Bullet_Medium:
-		InvalidTargets: Air
 	Warhead@ArrowWeaponPercentage:
 		InvalidTargets: wall, Air
 	Warhead@TankDestroyerCannonPercentage:
@@ -2757,10 +2670,11 @@ ArmoredCarMGAAWaveforce:
 	Inherits@4: ^WaveforceBulletProjectile
 	Warhead@Railgun_Heavy:
 		ValidTargets: Air
-		Damage: 300
+		Damage: 1900
 		PercentageScale: 6667
 	Warhead@Railgun_Heavy_ExtraDamage:
 		Damage: 100
+	-Warhead@Bullet_Medium:
 	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air
 		Spread: 250

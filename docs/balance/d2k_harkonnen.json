@@ -29,7 +29,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Harkonnen Advanced Carryall",
+    "name": "actor_harkonnen_advancedcarryall.name",
     "prerequisites": [
      "~hightech.harkonnen",
      "~harkonnen_promotion_advancedcarryall"
@@ -88,7 +88,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Harkonnen Carryall",
+    "name": "actor_harkonnen_carryall.name",
     "prerequisites": [
      "~harkonnen_hightechfactory"
     ],
@@ -171,7 +171,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Harkonnen Gunship",
+    "name": "actor_harkonnen_gunship.name",
     "prerequisites": [
      "~hightech.harkonnen",
      "~harkonnen_promotion_gunship"
@@ -1287,7 +1287,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/infantry.yaml#Health.HP",
      "v": "20000"
     },
-    "name": "Harkonnen Engineer",
+    "name": "actor_harkonnen_engineer.name",
     "prerequisites": [
      "~harkonnen_barracks"
     ],
@@ -1400,7 +1400,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/infantry.yaml#Health.HP",
      "v": "32000"
     },
-    "name": "Harkonnen Light Infantry",
+    "name": "actor_harkonnen_lightinfantry.name",
     "prerequisites": [
      "~harkonnen_barracks"
     ],
@@ -1574,7 +1574,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/infantry.yaml#Health.HP",
      "v": "40000"
     },
-    "name": "Harkonnen Rocket Trooper",
+    "name": "actor_harkonnen_rockettrooper.name",
     "prerequisites": [
      "~harkonnen_barracks"
     ],
@@ -2225,7 +2225,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Harkonnen Combat Tank",
+    "name": "actor_combat_tank_harkonnen.name",
     "prerequisites": [
      "~harkonnen_vehicle_production",
      "~heavy.harkonnen_combat"
@@ -2431,7 +2431,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Harkonnen ADP",
+    "name": "actor_harkonnen_adp.name",
     "prerequisites": [
      "~harkonnen_vehicle_production",
      "~heavy.harkonnen_combat",
@@ -2525,7 +2525,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Harkonnen Assault Tank",
+    "name": "actor_harkonnen_assaulttank.name",
     "prerequisites": [
      "~harkonnen_vehicle_production",
      "~heavy.harkonnen_combat",
@@ -2621,7 +2621,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Harkonnen Buzzsaw",
+    "name": "actor_harkonnen_buzzsaw.name",
     "prerequisites": [
      "~harkonnen_vehicle_production",
      "~heavy.harkonnen_combat",
@@ -2831,7 +2831,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Harkonnen Flame Tank",
+    "name": "actor_harkonnen_flametank.name",
     "prerequisites": [
      "~harkonnen_vehicle_production",
      "~heavy.harkonnen_combat",
@@ -2926,7 +2926,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Harkonnen Inkvine Catapult",
+    "name": "actor_harkonnen_inkvine.name",
     "prerequisites": [
      "~harkonnen_vehicle_production",
      "~heavy.harkonnen_combat",
@@ -2997,7 +2997,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Harkonnen Mobile Construction Vehicle",
+    "name": "actor_harkonnen_mobileconstructionvehicle.name",
     "prerequisites": [
      "~harkonnen_vehicle_production",
      "harkonnen_mcv_production"
@@ -3102,7 +3102,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Harkonnen Rocket Tank",
+    "name": "actor_harkonnen_rockettank.name",
     "prerequisites": [
      "~harkonnen_vehicle_production",
      "~heavy.missile_tank",
@@ -3174,7 +3174,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Harkonnen Spice Harvester",
+    "name": "actor_harkonnen_spiceharvester.name",
     "prerequisites": [
      "~spice_refinery",
      "~harkonnen_vehicle_production"
@@ -3283,7 +3283,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Missile Tank",
+    "name": "actor_missile_tank.name",
     "prerequisites": [
      "~harkonnen_vehicle_production",
      "~heavy.missile_tank",
