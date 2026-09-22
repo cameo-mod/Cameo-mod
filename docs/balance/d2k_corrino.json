@@ -29,7 +29,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Corrino Advanced Carryall",
+    "name": "actor_corrino_advancedcarryall.name",
     "prerequisites": [
      "~hightech.corrino"
     ],
@@ -87,7 +87,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Corrino Carryall",
+    "name": "actor_corrino_carryall.name",
     "prerequisites": [
      "~hightech.corrino"
     ],
@@ -170,7 +170,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Corrino Gunship",
+    "name": "actor_corrino_gunship.name",
     "prerequisites": [
      "~hightech.corrino"
     ],
@@ -1012,7 +1012,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Corrino/yaml/infantry.yaml#Health.HP",
      "v": "20000"
     },
-    "name": "Corrino Engineer",
+    "name": "actor_corrino_engineer.name",
     "prerequisites": [
      "~corrino_barracks"
     ],
@@ -1125,7 +1125,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Corrino/yaml/infantry.yaml#Health.HP",
      "v": "32000"
     },
-    "name": "Corrino Light Infantry",
+    "name": "actor_corrino_lightinfantry.name",
     "prerequisites": [
      "~corrino_barracks"
     ],
@@ -1364,7 +1364,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Corrino/yaml/infantry.yaml#Health.HP",
      "v": "120000"
     },
-    "name": "Sardaukar Bazooka",
+    "name": "actor_corrino_sardaukar_bazooka.name",
     "prerequisites": [
      "~corrino_barracks"
     ],
@@ -1476,7 +1476,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Corrino/yaml/infantry.yaml#Health.HP",
      "v": "120000"
     },
-    "name": "Sardaukar Berserker",
+    "name": "actor_corrino_sardaukar_berserker.name",
     "prerequisites": [
      "~corrino_barracks"
     ],
@@ -1588,7 +1588,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Corrino/yaml/infantry.yaml#Health.HP",
      "v": "120000"
     },
-    "name": "Sardaukar Javelin",
+    "name": "actor_corrino_sardaukar_javelin.name",
     "prerequisites": [
      "~corrino_barracks"
     ],
@@ -1718,7 +1718,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Corrino/yaml/infantry.yaml#Health.HP",
      "v": "120000"
     },
-    "name": "Sardaukar Laser",
+    "name": "actor_corrino_sardaukar_laser.name",
     "prerequisites": [
      "~corrino_barracks"
     ],
@@ -1830,7 +1830,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Corrino/yaml/infantry.yaml#Health.HP",
      "v": "120000"
     },
-    "name": "Sardaukar Swordmaster",
+    "name": "actor_corrino_sardaukar_sword.name",
     "prerequisites": [
      "~corrino_barracks"
     ],
@@ -2000,7 +2000,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Corrino/yaml/infantry.yaml#Health.HP",
      "v": "40000"
     },
-    "name": "Corrino Trooper",
+    "name": "actor_corrino_trooper.name",
     "prerequisites": [
      "~corrino_barracks"
     ],
@@ -2208,7 +2208,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Corrino APC",
+    "name": "actor_corrino_apc.name",
     "prerequisites": [
      "~corrino_light_vehicle_production"
     ],
@@ -2293,7 +2293,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Corrino BMP",
+    "name": "actor_corrino_bmp.name",
     "prerequisites": [
      "~corrino_light_vehicle_production",
      "upgrade_light.corrino"
@@ -2386,7 +2386,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Corrino Buggy",
+    "name": "actor_corrino_buggy.name",
     "prerequisites": [
      "~corrino_light_vehicle_production"
     ],
@@ -2478,7 +2478,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Combat Tank",
+    "name": "actor_corrino_combattank.name",
     "prerequisites": [
      "~heavy.corrino_combat"
     ],
@@ -2579,7 +2579,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Corrino Missile Tank",
+    "name": "actor_corrino_missiletank.name",
     "prerequisites": [
      "~heavy.missile_tank",
      "~research_centre"
@@ -2647,7 +2647,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Corrino Mobile Construction Vehicle",
+    "name": "actor_corrino_mobileconstructionvehicle.name",
     "prerequisites": [
      "~corrino_vehicle_production",
      "corrino_mcv_production"
@@ -2778,7 +2778,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Siege Tank",
+    "name": "actor_corrino_siegetank.name",
     "prerequisites": [
      "~corrino_vehicle_production",
      "upgrade_heavy.corrino"
@@ -2846,7 +2846,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Corrino Spice Harvester",
+    "name": "actor_corrino_spiceharvester.name",
     "prerequisites": [
      "~spice_refinery",
      "~corrino_vehicle_production"

@@ -141,10 +141,11 @@ ra1_allies_longbow_missile_cryo:
 	Report: missile6.aud
 	Warhead@BlastCryo_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 16000
 	Warhead@MissileCryo_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
+	-Warhead@MissileCryo_Heavy:
 
 	Projectile: Missile
 		VerticalRateOfTurn: 12
@@ -224,11 +225,8 @@ ra1_allies_sheridanassaulttank_cannon:
 	Warhead@CannonAP_Light:
 		PercentageDenominator: 10000
 		PercentageScale: 10000
-		Damage: 2000
-	Warhead@CannonHE_Medium:
-		PercentageDenominator: 10000
-		PercentageScale: 10000
-		Damage: 2000
+		Damage: 4000
+	-Warhead@CannonHE_Medium:
 ra1_allies_sheridanassaulttank_cannon_cryo:
 	Inherits@wh: ^Warhead_CannonCryo_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
@@ -379,15 +377,11 @@ ra1_allies_rapierjumpjet_missile_AA:
 		PercentageDenominator: 10000
 		PercentageScale: 10000
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@MissileAP_Heavy:
-		PercentageDenominator: 10000
-		PercentageScale: 10000
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 8000
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
 		ImpactSounds: xplobig4.aud
+	-Warhead@MissileAP_Heavy:
 
 ra1_allies_rapierjumpjet_missile_cryo_AA:
 	Inherits@wh: ^Warhead_BlastCryo_Medium
@@ -415,12 +409,8 @@ ra1_allies_rapierjumpjet_missile_cryo_AA:
 		PercentageDenominator: 10000
 		PercentageScale: 10000
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@MissileCryo_Heavy:
-		PercentageDenominator: 10000
-		PercentageScale: 10000
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 8000
+	-Warhead@MissileCryo_Heavy:
 
 ra1_allies_reconranger_recoillessgun:
 	Inherits@collapseflat: ^Warhead_MissileAP_Heavy_Flat
@@ -512,7 +502,7 @@ ra1_allies_reconranger_recoillessgun:
 	Warhead@MissileAP_Heavy:
 		PercentageScale: 1210
 		ValidTargets: Ground, Water, Air
-		Damage: 33000
+		Damage: 32000
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud

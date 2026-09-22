@@ -262,7 +262,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ixian Air Drone",
+    "name": "actor_ixian_airdrone.name",
     "prerequisites": [
      "~ixian_launchpad"
     ],
@@ -383,7 +383,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ixian EMP Bomber",
+    "name": "actor_ixian_empbomber.name",
     "prerequisites": [
      "~ixian_launchpad",
      "ixian_ixresearchcenter",
@@ -594,7 +594,7 @@
      "src": "inherited",
      "v": "200"
     },
-    "name": "Farasha",
+    "name": "actor_ixian_farasha.name",
     "prerequisites": [
      "~ixian_hightechfactory",
      "ixian_ixresearchcenter",
@@ -734,7 +734,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ixian Railgun Drone",
+    "name": "actor_ixian_railgundrone.name",
     "prerequisites": [
      "~ixian_hightechfactory",
      "~ixian_promotion_ixrailgundrone"
@@ -848,7 +848,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ixian Resonance Drone",
+    "name": "actor_ixian_resonancedrone.name",
     "prerequisites": [
      "~ixian_hightechfactory",
      "ixian_ixresearchcenter",
@@ -2406,7 +2406,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Health.HP",
      "v": "32000"
     },
-    "name": "Rashidan",
+    "name": "actor_heavy_inf_ixian.name",
     "prerequisites": [
      "~ixian_barracks",
      "~ixian_promotion_rashidan"
@@ -2598,7 +2598,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Health.HP",
      "v": "32000"
     },
-    "name": "Ixian Light Infantry",
+    "name": "actor_ixian_lightinfantry.name",
     "prerequisites": [
      "~ixian_barracks"
     ],
@@ -2786,7 +2786,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Health.HP",
      "v": "12000"
     },
-    "name": "Ixian Rocket Trooper",
+    "name": "actor_ixian_rockettrooper.name",
     "prerequisites": [
      "~ixian_barracks",
      "~!ixian_upgrade_twinbazooka"
@@ -2904,7 +2904,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Health.HP",
      "v": "36000"
     },
-    "name": "Shock Infantry",
+    "name": "actor_ixian_shockinfantry.name",
     "prerequisites": [
      "~ixian_barracks",
      "ixian_ixresearchcenter",
@@ -3023,7 +3023,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Health.HP",
      "v": "44000"
     },
-    "name": "Storm Infantry",
+    "name": "actor_ixian_storminfantry.name",
     "prerequisites": [
      "~ixian_barracks",
      "ixian_ixresearchcenter",
@@ -3283,7 +3283,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Health.HP",
      "v": "24000"
     },
-    "name": "Twin Rocket Trooper",
+    "name": "actor_ixian_twinrockettrooper.name",
     "prerequisites": [
      "~ixian_barracks",
      "~ixian_upgrade_twinbazooka"
@@ -4223,7 +4223,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ix Duelist Tank",
+    "name": "actor_duelist_tank_ixian.name",
     "prerequisites": [
      "~ixian_vehicle_production",
      "ixian_ixresearchcenter"
@@ -4412,7 +4412,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Heavy Ix Raider",
+    "name": "actor_heavy_rocket_raider_ixian.name",
     "prerequisites": [
      "~ixian_vehicle_production",
      "~ixian_promotion_heavyixraider"
@@ -4525,7 +4525,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Heavy Koda Tank",
+    "name": "actor_ixian_heavykodatank.name",
     "prerequisites": [
      "~ixian_vehicle_production",
      "~ixian_upgrade_heavykodatank"
@@ -4657,7 +4657,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ix Combat Siege",
+    "name": "actor_ixian_ixcombatsiege.name",
     "prerequisites": [
      "~ixian_vehicle_production",
      "ixian_outpost"
@@ -4761,7 +4761,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ix Missile Tank",
+    "name": "actor_ixian_ixmissiletank.name",
     "prerequisites": [
      "~ixian_vehicle_production",
      "ixian_ixresearchcenter"
@@ -4898,7 +4898,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ix Projector",
+    "name": "actor_ixian_ixprojector.name",
     "prerequisites": [
      "~ixian_vehicle_production",
      "ixian_ixresearchcenter",
@@ -5039,7 +5039,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ix Siege Tank",
+    "name": "actor_ixian_ixsiegetank.name",
     "prerequisites": [
      "~ixian_vehicle_production",
      "ixian_outpost",
@@ -5146,7 +5146,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Koda Tank",
+    "name": "actor_ixian_kodatank.name",
     "prerequisites": [
      "~ixian_vehicle_production",
      "~!ixian_upgrade_heavykodatank"
@@ -5224,7 +5224,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ixian Mobile Construction Vehicle",
+    "name": "actor_ixian_mobileconstructionvehicle.name",
     "prerequisites": [
      "~ixian_vehicle_production",
      "ixian_mcv_production"
@@ -5370,7 +5370,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Mongoose",
+    "name": "actor_ixian_mongoose.name",
     "prerequisites": [
      "~ixian_vehicle_production"
     ],
@@ -5530,7 +5530,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Neo Cymek",
+    "name": "actor_ixian_neocymek.name",
     "prerequisites": [
      "~ixian_vehicle_production",
      "ixian_ixresearchcenter",
@@ -5641,7 +5641,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Shock Raider",
+    "name": "actor_ixian_shockraider.name",
     "prerequisites": [
      "~ixian_vehicle_production",
      "ixian_ixresearchcenter",
@@ -5720,7 +5720,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ixian Spice Harvester",
+    "name": "actor_ixian_spiceharvester.name",
     "prerequisites": [
      "~spice_refinery",
      "~ixian_vehicle_production"
@@ -5851,7 +5851,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Storm Raider",
+    "name": "actor_ixian_stormraider.name",
     "prerequisites": [
      "~ixian_vehicle_production",
      "ixian_ixresearchcenter",
@@ -5969,7 +5969,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ix Raider",
+    "name": "actor_rocket_raider_ixian.name",
     "prerequisites": [
      "~ixian_vehicle_production",
      "~!ixian_promotion_heavyixraider"

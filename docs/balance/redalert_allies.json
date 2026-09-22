@@ -302,17 +302,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": "100, 72, 50, 32, 19, 9, 0",
         "spread": "105",
         "tag": "BlastCryo_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 60, 27, 0",
-        "spread": "53",
-        "tag": "MissileCryo_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -474,19 +467,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "percentage_denominator": "10000",
         "spread": "350",
         "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -516,19 +501,11 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 72, 50, 32, 19, 9, 0",
         "percentage_denominator": "10000",
         "spread": "105",
         "tag": "BlastCryo_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 60, 27, 0",
-        "percentage_denominator": "10000",
-        "spread": "53",
-        "tag": "MissileCryo_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -5580,7 +5557,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "33000",
+        "damage": "32000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy",
@@ -5663,7 +5640,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "33000",
+        "damage": "32000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy",
@@ -5761,19 +5738,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "percentage_denominator": "10000",
         "spread": "80",
         "tag": "CannonAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
         "type": "AreaDamage"
        }
       ],

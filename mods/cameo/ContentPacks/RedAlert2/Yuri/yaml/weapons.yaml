@@ -205,9 +205,6 @@ RA2LasherToxicMortar_elite:
 		Damage: 4000
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@CannonHE_Medium: AreaDamage
-		Damage: 12000
-		PercentageScale: 0
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@CannonHE_Heavy: AreaDamage
@@ -228,7 +225,7 @@ RA2LasherToxicMortar_elite:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@CannonChem_Medium:
 		ValidTargets: Ground, Water
-		Damage: 30000
+		Damage: 36000
 		PercentageScale: 0
 	-Warhead@CannonAP_Light:
 	-Warhead@CannonHE_Heavy:
@@ -283,7 +280,7 @@ RA2LasherLaser_elite:
 	-Warhead@LaserWeapon:
 	Warhead@Laser_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
-		Damage: 40000
+		Damage: 32000
 		PercentageScale: 5998
 		PhysicalStateScale: 15
 
@@ -340,12 +337,13 @@ RA2DiskDrain:
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water
-		Damage: 2000
+		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 1000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
+	-Warhead@Magic_Heavy:
 RA2DiskSteal:
 	ReloadDelay: 5
 	Range: 125
@@ -783,7 +781,7 @@ RA2GattlingInf:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Air, Water
-		Damage: 16000
+		Damage: 4000
 		PercentageScale: 2494
 RA2Virusgun:
 	Inherits@roleflat: ^Warhead_Sniper_Light
@@ -864,7 +862,7 @@ RA2Virusgun2:
 	-InvalidTargets:
 	Warhead@Flak_Medium:
 		ValidTargets: Infantry, Monster, Garrisoned
-		Damage: 12000
+		Damage: 36000
 		Spread: 1
 		Falloff: 100, 0
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
@@ -886,10 +884,7 @@ RA2Virusgun2:
 		Duration: 150
 	-Warhead@HeavyChemicalWeapon:
 	-Warhead@SniperWeapon:
-	Warhead@Sniper_Light:
-		ValidTargets: Ground, Ship, Garrisoned
-		Damage: 24000
-		PercentageScale: 0
+	-Warhead@Sniper_Light:
 
 RA2Virusgun3:
 	Inherits@wh: ^Warhead_MissileAP_Medium
@@ -904,10 +899,11 @@ RA2Virusgun3:
 		TrailDelay: 1
 	Warhead@MissileAP_Medium:
 		ValidTargets: Infantry, Monster, Garrisoned
-		Damage: 12000
+		Damage: 48000
 		Spread: 1
 		Falloff: 100, 0
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	-Warhead@Flak_Medium:
 	Warhead@Condition: GrantExternalCondition
 		Range: 2000
 		Condition: corroded
@@ -1036,7 +1032,7 @@ RA2CosmonautLaser:
 	-Warhead@RailgunWeapon:
 	Warhead@Laser_Light:
 		ValidTargets: Ground, Water, Air
-		Damage: 13600
+		Damage: 12000
 		PercentageScale: 1464
 	-Warhead@Bullet_Medium_Flat:
 	-Warhead@FlakWeapon:

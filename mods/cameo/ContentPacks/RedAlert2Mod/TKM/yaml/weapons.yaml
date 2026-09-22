@@ -149,7 +149,7 @@ tkmfirerockets:
 		Damage: 18000
 	Warhead@Flame_Light:
 		InvalidTargets: Air
-		Damage: 4000
+		Damage: 24000
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, ixian_concretewall
@@ -161,6 +161,7 @@ tkmfirerockets:
 		ImpactSounds: firebl3.aud
 	Warhead@ShieldHit:
 		InvalidTargets: Air
+	-Warhead@MissileAP_Light:
 tkmdronesummon:
 	Projectile: InstantExplode
 	Warhead@2: SpawnActor
@@ -199,10 +200,11 @@ tkmakap:
 	Warhead@Bullet_Light:
 		PercentageScale: 3333
 		Burst: 3
-		Damage: 6000
+		Damage: 8000
 	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water
 		Damage: 2000
+	-Warhead@Demolition_Light:
 tkmkord:
 	Inherits: ^RA2Chaingun
 	ReloadDelay: 10
@@ -292,9 +294,10 @@ tkmm203:
 		ContrailStartColor: FF8888FF
 		ContrailEndColor: FFFFFF22
 	Warhead@Demolition_Light:
-		Damage: 4000
+		Damage: 8000
 	Warhead@Flame_Light:
 		Damage: 4000
+	-Warhead@Flame_Light:
 tkmrockets:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
@@ -632,7 +635,7 @@ HueyCryoMissiles:
 	-Warhead@MissileAP_Medium:
 	Warhead@Cryo_Medium_Flat:
 		ValidTargets: Ground, Water, Air
-		Damage: 6000
+		Damage: 8000
 		PercentageScale: 9984
 HueyTwinMissiles:
 	Inherits@finalmain: ^Warhead_MissileAP_Medium_Flat
@@ -666,7 +669,7 @@ HueyTwinMissiles:
 	-Warhead@MissileAP_Medium:
 	Warhead@MissileAP_Medium_Flat:
 		ValidTargets: Ground, Water, Air
-		Damage: 6000
+		Damage: 8000
 		PercentageScale: 9984
 	Projectile: Missile
 		VerticalRateOfTurn: 16
@@ -819,14 +822,12 @@ tkmkatyushalalauncherrocketsfire:
 		InvalidTargets: Air
 		PercentageScale: 6667
 		ValidTargets: Ground, Water, Air
-		Damage: 6000
+		Damage: 27000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MissileAP_Light:
-		InvalidTargets: Air
 	Warhead@ShieldHit:
 		InvalidTargets: Air
-	Warhead@Concussion_Medium:
-		InvalidTargets: Air
+	-Warhead@MissileAP_Light:
+	-Warhead@Concussion_Medium:
 tkmkatyushalalauncherrocketstwin:
 	Inherits: tkmkatyushalalauncherrockets
 	Burst: 16
@@ -917,8 +918,12 @@ SandmarineTuskTwin:
 		Damage: 4000
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water
-		Damage: 4000
+		Damage: 60000
 	-Warhead@FlakWeapon:
+	-Warhead@MissileHE_Heavy:
+	-Warhead@Concussion_Medium:
+	-Warhead@Grenade:
+	-Warhead@Bullet_Medium:
 SandmarineTuskCryo:
 	Inherits@finalmain: ^Warhead_MissileCryo_Heavy
 	Inherits: SandmarineTusk
@@ -944,19 +949,14 @@ SandmarineTuskFire:
 		InvalidTargets: Air
 		PercentageScale: 6667
 		ValidTargets: Ground, Water, Air
-		Damage: 6000
+		Damage: 87000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	-Warhead@MissileHE_Heavy:
 	-Warhead@Concussion_Medium:
-	Warhead@MissileHE_Heavy_Flat:
-		InvalidTargets: Air
-		ValidTargets: Ground, Water
-		Damage: 80000
-		PercentageScale: 9999
-	Warhead@MissileAP_Light:
-		InvalidTargets: Air
 	Warhead@ShieldHit:
 		InvalidTargets: Air
+	-Warhead@MissileHE_Heavy_Flat:
+	-Warhead@MissileAP_Light:
 ^ViperMissilesLegacy:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Concussion_Medium
@@ -1023,8 +1023,11 @@ ViperMissilesFire:
 	Warhead@Flame_Light:
 		PercentageScale: 6667
 		ValidTargets: Ground, Water, Air
-		Damage: 6000
+		Damage: 39000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	-Warhead@MissileAP_Light:
+	-Warhead@Concussion_Medium:
+	-Warhead@MissileAP_Medium:
 DronePodTruckLaser:
 	ReloadDelay: 5
 	ValidTargets: Ground, Water
@@ -1075,7 +1078,7 @@ VonSniper:
 		Spread: 1
 		Falloff: 100, 0
 		ValidTargets: Ground, Water, Air
-		Damage: 6000
+		Damage: 30000
 	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -1102,6 +1105,8 @@ VonSniper:
 		PercentageScale: 0
 	-Warhead@SniperFlak:
 	-Warhead@SniperMediumMissile:
+	-Warhead@SniperSmallArms:
+	-Warhead@SniperChaingun:
 VonSniperAP:
 	Inherits: VonSniper
 	ReloadDelay: 50
@@ -1117,7 +1122,7 @@ VonSniperAP:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 8
 	Warhead@Bullet_Heavy: AreaDamage
-		Damage: 16000
+		Damage: 80000
 	Warhead@Bullet_Light: AreaDamage
 		Spread: 1
 		Falloff: 100, 0
@@ -1146,6 +1151,8 @@ VonSniperAP:
 	-Warhead@SniperFlak:
 	-Warhead@SniperMediumMissile:
 	-Warhead@Bullet_Light:
+	-Warhead@SniperChaingun:
+	-Warhead@Bullet_Medium:
 VonSniperLockdown:
 	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
@@ -1163,7 +1170,7 @@ VonSniperLockdown:
 		Spread: 1
 		Falloff: 100, 0
 		ValidTargets: Ground, Water, Air
-		Damage: 32000
+		Damage: 192000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		Spread: 1
@@ -1224,6 +1231,10 @@ VonSniperLockdown:
 		Damage: 64000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	-Warhead@SniperMediumMissile:
+	-Warhead@SniperFlak:
+	-Warhead@SniperChaingun:
+	-Warhead@Bullet_Heavy:
+	-Warhead@Bullet_Medium:
 
 tkmm16ap:
 	Inherits: ^RA2Chaingun
@@ -1270,8 +1281,9 @@ tkmstrykerfirerockets:
 		Damage: 24000
 		ValidTargets: Ground, Water, Trees, Air
 	Warhead@Flame_Medium:
-		Damage: 6000
+		Damage: 30000
 		ValidTargets: Ground, Water, Air
+	-Warhead@MissileAP_Medium:
 VanSniper:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light

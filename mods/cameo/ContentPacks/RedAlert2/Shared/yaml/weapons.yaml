@@ -980,7 +980,7 @@ RA2MirageGun:
 	-Warhead@RailgunWeapon:
 	Warhead@CannonAP_Light_Flat:
 		ValidTargets: Ground, Water
-		Damage: 25000
+		Damage: 24000
 		PercentageScale: 3196
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 	-Warhead@CannonAP_Light:
@@ -1116,7 +1116,7 @@ RA2ThunderboltMissile:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 12000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 9975
 		PercentageSpread: 50
@@ -1208,7 +1208,7 @@ RA2MultiHoverMissile:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 9975
 		PercentageSpread: 50
@@ -1229,7 +1229,7 @@ RA2MultiHoverMissile_elite:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 9975
 		PercentageSpread: 50
@@ -1316,7 +1316,7 @@ RA2MultiThunderboltMissile:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 16000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 9975
 		PercentageSpread: 50
@@ -1763,18 +1763,10 @@ SonicZap:
 	Warhead@Magic_Heavy:
 		Range: 0, 32
 		Falloff: 100, 50
-		Damage: 2000
+		Damage: 3000
 		AffectsParent: false
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		ValidTargets: Water, Underwater
-	Warhead@ExtraSquidDamage: SpreadDamage
-		Range: 0, 32
-		Falloff: 100, 50
-		Damage: 1000
-		AffectsParent: false
-		ValidRelationships: Neutral, Enemy
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		ValidTargets: Squid
 
 SonicZapFriendly:
 	ReloadDelay: 60
@@ -2299,7 +2291,7 @@ MigMissiles:
 	Warhead@MissileAP_Medium:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
-		Damage: 24000
+		Damage: 32000
 		PercentageScale: 3333
 		PercentageDenominator: 10000
 	Warhead@MissileAP_Medium_GroundShipExtraDamage:
@@ -2314,7 +2306,7 @@ MigMissiles:
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Spread: 150
-		Damage: 24000
+		Damage: 32000
 		Falloff: 100, 45, 15, 0
 		Versus:
 			HAZMAT: 76
@@ -2380,7 +2372,7 @@ MigMissiles_rad:
 	Warhead@Chemical_Medium:
 		ValidTargets: Ground, Water
 		InvalidTargets: Air
-		Damage: 4000
+		Damage: 40000
 	Warhead@Radiation: CreateTintedCells
 		Falloff: 100, 75, 66, 50, 33, 25, 20, 10
 		Spread: 200
@@ -2411,6 +2403,7 @@ MigMissiles_rad:
 		PercentageScale: 3333
 		InvalidTargets: Air
 		PercentageDenominator: 10000
+	-Warhead@MissileHE_Medium:
 
 MigMissiles_fire:
 	Inherits: MigMissiles
@@ -2446,7 +2439,7 @@ MigMissiles_fire:
 		InvalidTargets: Air
 	-Warhead@MissileAP_Medium:
 	Warhead@MissileHE_Medium: AreaDamage
-		Damage: 24000
+		Damage: 32000
 		PercentageScale: 3333
 		InvalidTargets: Air
 		PercentageDenominator: 10000
@@ -2485,7 +2478,7 @@ MigMissiles_tesla:
 		InvalidTargets: Air
 	-Warhead@MissileAP_Medium:
 	Warhead@MissileHE_Medium: AreaDamage
-		Damage: 24000
+		Damage: 32000
 		PercentageScale: 3333
 		InvalidTargets: Air
 		PercentageDenominator: 10000
@@ -2521,7 +2514,7 @@ MigMissiles_elite:
 		ValidTargets: Ground, Ship
 	-Warhead@MissileAP_Medium:
 	Warhead@MissileHE_Medium: AreaDamage
-		Damage: 24000
+		Damage: 32000
 		PercentageScale: 3333
 		InvalidTargets: Air
 		PercentageDenominator: 10000
@@ -2530,6 +2523,8 @@ MigMissiles_rad_elite:
 	Inherits: MigMissiles_rad
 	Range: 8600
 	Burst: 8
+	Warhead@Chemical_Medium:
+		Damage: 36000
 
 	Projectile: Missile
 		VerticalRateOfTurn: 16
@@ -2561,6 +2556,7 @@ MigMissiles_rad_elite:
 		PercentageScale: 3333
 		InvalidTargets: Air
 		PercentageDenominator: 10000
+	-Warhead@MissileHE_Medium:
 
 MigMissiles_fire_elite:
 	Inherits: MigMissiles_fire
@@ -2590,7 +2586,7 @@ MigMissiles_fire_elite:
 		InvalidTargets: Air
 	-Warhead@MissileAP_Medium:
 	Warhead@MissileHE_Medium: AreaDamage
-		Damage: 24000
+		Damage: 32000
 		PercentageScale: 3333
 		InvalidTargets: Air
 		PercentageDenominator: 10000
@@ -2621,7 +2617,7 @@ MigMissiles_AA:
 	-Warhead@MissileAP_Medium:
 	Warhead@MissileAA_Medium: AreaDamage
 		ValidTargets: Air
-		Damage: 24000
+		Damage: 32000
 		PercentageScale: 3333
 		PercentageDenominator: 10000
 	-Warhead@MissileHE_Medium:
@@ -2652,7 +2648,7 @@ MigMissiles_AA_elite:
 	-Warhead@MissileAP_Medium:
 	Warhead@MissileAA_Medium: AreaDamage
 		ValidTargets: Air
-		Damage: 24000
+		Damage: 32000
 		PercentageScale: 3333
 		PercentageDenominator: 10000
 	-Warhead@MissileHE_Medium:
@@ -2821,7 +2817,7 @@ RA2SCUDELITE:
 	Range: 24000
 	Warhead@Nuclear_Super:
 		ValidTargets: Ground, Water, Air
-		Damage: 30000
+		Damage: 120000
 	Warhead@Nuclear_Super_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 15
@@ -2830,6 +2826,9 @@ RA2SCUDELITE:
 		Spread: 600
 		Level: 600
 		LayerName: ra2radiation
+	-Warhead@Demolition_Light:
+	-Warhead@RA2SCUDMissileAP_Heavy_NoWall:
+	-Warhead@MissileAP_Heavy:
 
 V3Explode:
 	Inherits: RA2SCUD
@@ -3398,7 +3397,7 @@ RA2Terrorist:
 	-Warhead@Concussion_Medium:
 	Warhead@Demolition_Heavy_Flat:
 		ValidTargets: Ground, Water
-		Damage: 100000
+		Damage: 150000
 		PercentageScale: 9999
 2100Tanktrap:
 	Warhead@1Dam: SpreadDamage

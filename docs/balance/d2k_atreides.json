@@ -29,7 +29,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Atreides Advanced Carryall",
+    "name": "actor_atreides_advancedcarryall.name",
     "prerequisites": [
      "~hightech.atreides"
     ],
@@ -124,7 +124,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Atreides Air Drone",
+    "name": "actor_atreides_airdrone.name",
     "prerequisites": [
      "~hightech.atreides",
      "research_centre",
@@ -275,7 +275,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ornithopter",
+    "name": "actor_atreides_ornithopter.name",
     "prerequisites": [
      "~hightech.atreides"
     ],
@@ -1123,7 +1123,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Atreides/yaml/infantry.yaml#Health.HP",
      "v": "20000"
     },
-    "name": "Atreides Engineer",
+    "name": "actor_atreides_engineer.name",
     "prerequisites": [
      "~atreides_barracks"
     ],
@@ -1229,7 +1229,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Atreides/yaml/infantry.yaml#Health.HP",
      "v": "15000"
     },
-    "name": "Desert Phantom",
+    "name": "actor_atreides_fremen.name",
     "prerequisites": [
      "~atreides_barracks",
      "~hightech.atreides",
@@ -1346,7 +1346,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Atreides/yaml/infantry.yaml#Health.HP",
      "v": "32000"
     },
-    "name": "Atreides Light Infantry",
+    "name": "actor_atreides_lightinfantry.name",
     "prerequisites": [
      "~atreides_barracks"
     ],
@@ -1520,7 +1520,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Atreides/yaml/infantry.yaml#Health.HP",
      "v": "40000"
     },
-    "name": "Atreides Rocket Trooper",
+    "name": "actor_atreides_rockettrooper.name",
     "prerequisites": [
      "~atreides_barracks"
     ],
@@ -1878,7 +1878,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Atreides APC",
+    "name": "actor_atreides_apc.name",
     "prerequisites": [
      "~atreides_vehicle_production",
      "~heavy.atreides_combat"
@@ -1966,7 +1966,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Combat Tank",
+    "name": "actor_atreides_combattank.name",
     "prerequisites": [
      "~heavy.atreides_combat"
     ],
@@ -2093,7 +2093,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Atreides Minotaurus",
+    "name": "actor_atreides_minotaurus.name",
     "prerequisites": [
      "~atreides_vehicle_production",
      "~heavy.missile_tank",
@@ -2197,7 +2197,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Missile Tank",
+    "name": "actor_atreides_missiletank.name",
     "prerequisites": [
      "~heavy.missile_tank",
      "research_centre"
@@ -2265,7 +2265,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Atreides Mobile Construction Vehicle",
+    "name": "actor_atreides_mobileconstructionvehicle.name",
     "prerequisites": [
      "~atreides_vehicle_production",
      "atreides_mcv_production"
@@ -2370,7 +2370,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Atreides Mongoose",
+    "name": "actor_atreides_mongoose.name",
     "prerequisites": [
      "~atreides_vehicle_production",
      "~heavy.missile_tank",
@@ -2483,7 +2483,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Atreides Repair Tank",
+    "name": "actor_atreides_repairtank.name",
     "prerequisites": [
      "~atreides_vehicle_production",
      "~heavy.atreides_combat"
@@ -2577,7 +2577,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Atreides Sand Bike",
+    "name": "actor_atreides_sandbike.name",
     "prerequisites": [
      "~atreides_vehicle_production",
      "~light.atreides"
@@ -2705,7 +2705,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Siege Tank",
+    "name": "actor_atreides_siegetank.name",
     "prerequisites": [
      "~atreides_vehicle_production",
      "upgrade_heavy.atreides"
@@ -2799,7 +2799,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Sonic Tank",
+    "name": "actor_atreides_sonictank.name",
     "prerequisites": [
      "~heavy.atreides_combat",
      "research_centre",
@@ -2869,7 +2869,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Atreides Spice Harvester",
+    "name": "actor_atreides_spiceharvester.name",
     "prerequisites": [
      "~spice_refinery",
      "~atreides_vehicle_production"
