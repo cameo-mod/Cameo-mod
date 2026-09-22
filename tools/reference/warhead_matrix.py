@@ -134,6 +134,23 @@ EXCLUDED_ARMORS: dict[str, set[str]] = {
     "ra20xx":           set(_YR_EXCLUDED),
     "ra2_reborn":       set(_YR_EXCLUDED),
     "red_resurrection": set(_YR_EXCLUDED),
+    # ⛔ R58 — SHATTERED PARADISE SHIPS FIVE DEAD ARMOUR TAGS, the same defect OpenRA's Dune 2000
+    # has below and found the same way: count who WEARS each tag against who NAMES it.
+    #
+    #     InfantryArmor / BuildingArmor / VehicleArmor / DefenseArmor / ConcreteArmor
+    #     named by 3 warheads each, worn by ZERO actors.
+    #
+    # They are a renamed vocabulary's leftovers, and the giveaway is that the same three warheads
+    # carry BOTH sets with DIFFERENT numbers — `BlackholeblastFinal` states `Building: 20` and
+    # `BuildingArmor: 80`, `Heavy: 10` and `VehicleArmor: 50`. The engine evaluates the live row
+    # and ignores the other; this matrix was reading both, so three warheads got five extra
+    # columns of an older draft averaged into their profile, and every other SP warhead got five
+    # unstated-100 cells that drag the window centre.
+    # ⚠ `Bike` and `None` are KEPT although no warhead names them: one actor wears each, so the
+    # game really does evaluate them. The rule is "drop what the engine never looks at", not
+    # "drop what is thin".
+    "shattered_paradise": {"InfantryArmor", "BuildingArmor", "VehicleArmor",
+                           "DefenseArmor", "ConcreteArmor"},
     "combined_arms": {"Brick", "Tree"},       # Brick = BRIK/CHAIN/FENC/SBAG/SWAL, walls only
     "openra_ra":     {"Tree", "truk"},
     "openra_td":     set(),
