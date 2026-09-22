@@ -109,7 +109,7 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		static bool AllBotsResolved(World world)
 		{
-			return world.Players.Where(p => p.IsBot && !p.NonCombatant && p.Playable)
+			return world.Players.Where(AiMatchLogWriter.IsLoggableBot)
 				.All(p => p.WinState != WinState.Undefined);
 		}
 
@@ -119,7 +119,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (string.IsNullOrEmpty(gameUid))
 				gameUid = fallbackGameUid;
 			var lines = new StringBuilder();
-			foreach (var player in world.Players.Where(p => p.IsBot && !p.NonCombatant && p.Playable)
+			foreach (var player in world.Players.Where(AiMatchLogWriter.IsLoggableBot)
 				.OrderBy(p => p.InternalName, StringComparer.Ordinal))
 			{
 				var module = player.PlayerActor.TraitsImplementing<MasterAiBotModule>().FirstOrDefault();

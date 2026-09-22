@@ -1379,6 +1379,11 @@ conditions, no synced state, and no module reads the snapshot yet. It is deliber
 its target score deliberately omits the pairwise `w_hurt` term, because no verified per-enemy
 damage attribution hook exists before phase 4. Numbers in the log are integers only.
 
+The bot-player gate is `python tools\tests\ai_bot_player_gate.py`; `boot-test.cmd` only proves
+plain OpenRA launch and is not a bot-construction check. Match and situation logs now include
+campaign and other map-declared bots; use their `map_uid` and `bot_type` fields when filtering
+offline.
+
 ⚠ **Do not quote phase 2 as evidence that the bots are smarter.** It observes. The first phase
 that a player could feel is phase 3.
 
