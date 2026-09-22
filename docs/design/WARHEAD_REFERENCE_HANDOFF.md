@@ -101,7 +101,7 @@ after two averaging defects were fixed (R34, R35). `Heroic` stays derived per §
 
 ### Stage 3 — compression
 
-**1,721 groups across 20 sources, at `tau = 0.20` (R41), with the element vocabulary corrected (R45).** The threshold was 0.50 until
+**1,710 groups across 20 sources, at `tau = 0.20` (R41), with the element vocabulary corrected (R45).** The threshold was 0.50 until
 2026-09-22, chosen as "well below the 25th percentile" of the pairwise distances — a heuristic
 with nothing scoring it. `validate_families.py` scores a grouping against Cameo's own 904
 labelled weapons, and at 0.50 a group held a MEDIAN OF 3 distinct Cameo families: 61% purity,
@@ -128,7 +128,7 @@ That worked only because the review is recorded per WEAPON, not per group — gr
 `_2`/`_3` suffix assigned by clustering order and shift whenever the compressor is re-run. Use
 `retau_assignment.py` for any future threshold change; never re-apply this file by group name.
 
-The other sources carry 1,509 groups. `propagate_families.py` inherits a family wherever the
+The other sources carry 1,498 groups. `propagate_families.py` inherits a family wherever the
 Combined Arms review fixed one for the same delivery x element x band triple:
 
 | | groups |
@@ -189,7 +189,7 @@ And they are stale in a specific, checkable way. `docs/reference/family_profiles
 generated on **2026-08-15** by `propose_family_profiles.py` over `survey_platforms.py` — the
 OLD single-machine extractor that traces INI files out of `~/Downloads`, which nobody else has.
 Its 31 entries carry **1 to 9 mods each**, gated at `min_rows: 8, min_mods: 3`. The pipeline in
-this document carries **20 sources and 1,721 groups** and is hermetic. The numbers that ship were
+this document carries **20 sources and 1,710 groups** and is hermetic. The numbers that ship were
 never exposed to most of the corpus.
 
 So: point the profile proposal at `warhead_groups.json` + `warhead_family_assignment.yaml`
@@ -223,7 +223,7 @@ construction — Cameo's vocabulary IS delivery x element, so `(Missile, Fire)` 
 `Demolition`, `Concussion`, `Flak` and `Arrow` all measure as roughly `(Bullet, HE)`, and the
 thing that separates them is the profile shape, which is the 3–11% method.
 
-**So the 1,509 unassigned groups are a judgement task.** The maintainer authorised it being done
+**So the 1,498 unassigned groups are a judgement task.** The maintainer authorised it being done
 here for later review — *"fit everything from all mods into that reference table yourself and I
 should try to review everything"* — but it cannot be automated and declared finished.
 
@@ -249,8 +249,8 @@ in one place, which is the rule every consumer previously reimplemented.
 stage was OpenRA-only (and the three largest unreviewed sources are INI), `--write` overwrote rather
 than merged, and `family_matrix` was NONDETERMINISTIC. All three are fixed — see R47.
 
-Usage order by group count: `mental_omega` 169, `red_resurrection` 147, `rise_of_the_east` 140,
-`romanovs_vengeance` 100, `shattered_paradise` 90, `ra20xx` 86, `ra2_reborn` 82,
+Usage order by group count: `mental_omega` 165, `red_resurrection` 147, `rise_of_the_east` 136,
+`romanovs_vengeance` 100, `cnc_reloaded` 96, `shattered_paradise` 90, `ra20xx` 83, `ra2_reborn` 82,
 `twisted_insurrection` 75, `cnc_reloaded` 96, `dta_enhanced` 57, `dta_classic` 42,
 `openra_ra` 33, `crystallized_nexus` 28, `openra_ts` 22, `openra_td` 20, `openra_d2k` 15.
 
