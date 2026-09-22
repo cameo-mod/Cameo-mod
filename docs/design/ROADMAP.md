@@ -2376,6 +2376,10 @@ types, creating a unified wall+turret defense system across the mod.
 - [x] Replace shared art references with unique `harkonnen_*` assets/actors where art exists; remaining placeholders flagged for art pass.
 - [x] Enable `FactionCA@Harkonnen` and add `StartingUnits` (MCV/Light/Heavy) in `afdaae46c`.
 - [x] Boot-gate + menu reached with zero new exceptions.
+- [x] **Build options follow-up (2026-09-21):** restored the missing `Queue`, palette order,
+  descriptions, and icon palettes for `harkonnen_autogunturret` and
+  `harkonnen_rocketturret`; both now appear in the Harkonnen Defence queue with their existing
+  construction-yard/barracks or outpost prerequisites.
 
 ### Phase 2 — Atreides (Devin-Aurora) — COMPLETE in `f07d8d35e`
 - [x] Complete Atreides tech tree: 15 buildings, 4 infantry, 5 vehicles, 1 aircraft, 5 upgrades, sequences.

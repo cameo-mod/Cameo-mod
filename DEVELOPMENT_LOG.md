@@ -11452,3 +11452,26 @@ Open items are coordinator scope: ExtraDamage-twin 50%-of-main ruling,
 #431-vs-#424 land order (measured: hunks 34 lines apart, auto-merges).
 
 Co-Authored-By: Devin <158243242+devin-ai-integration[bot]@users.noreply.github.com>
+
+## 2026-09-21 — Codex (GPT-5.6 Luna): Harkonnen defense build options
+
+**Finding:** the resolved Harkonnen faction closure contained every Harkonnen unit and building,
+but `harkonnen_autogunturret` and `harkonnen_rocketturret` had `Buildable.Prerequisites` with no
+`Queue`. They could not enter any production palette. Ixian/Ordos peer definitions supplied the
+missing Defence queue, palette ordering, description, and icon fields.
+
+**Change:** updated the two build options in `ContentPacks/D2k/Harkonnen/yaml/buildings.yaml`
+and added a Harkonnen-specific Rocket Turret description in the pack's Fluent file. Existing
+prerequisites and weapon/actor behavior are unchanged.
+
+**Verification:**
+- Resolver check: 42 Harkonnen-prefixed `Buildable` actors, 0 missing `Queue`; both repaired
+  turrets resolve to `Defence, RADefence`.
+- `utility.cmd cameo --faction-report harkonnen`: both turrets report as Harkonnen buildings,
+  alongside the complete Harkonnen closure.
+- Prefix-filtered engine reports also classify `combat_tank.harkonnen`, `missile_tank`, and
+  `devastator` as Harkonnen vehicles; all generic Harkonnen combat units remain buildable.
+- Isolated boot gate via a per-run `Engine.SupportDir`: `perf.log` contains
+  `MenuPostProcessEffect.PostWorldLoaded` and the isolated log directory contains no
+  `exception-*.log`. An initial attempt failed before engine initialization because the support
+  directory had not been pre-created; the corrected run passed.

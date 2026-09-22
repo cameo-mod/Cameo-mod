@@ -1,5 +1,8 @@
 # d2k Harkonnen pack strings (faction descriptions live in mods/cameo/fluent/rules/en.ftl).
 
+actor_harkonnen_rocketturret =
+   .description = Powered rocket turret that attacks ground, water, and air targets.
+
 actor_combat_tank_harkonnen =
    .name = Harkonnen Combat Tank
    .description = Main battle tank.

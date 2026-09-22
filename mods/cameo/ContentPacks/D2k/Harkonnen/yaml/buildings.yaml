@@ -299,7 +299,11 @@ harkonnen_autogunturret:
 	Valued:
 		Cost: 1100
 	Buildable:
+		Queue: Defence, RADefence
 		Prerequisites: ~harkonnen_constructionyard, harkonnen_barracks
+		BuildPaletteOrder: 510
+		Description: Defensive structure.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Tanks
+		IconPalette: cameo
 	Health:
 		HP: 75000
 	Armament:
@@ -435,7 +439,11 @@ harkonnen_rocketturret:
 	Armor:
 		Type: Concrete
 	Buildable:
+		Queue: Defence, RADefence
 		Prerequisites: ~harkonnen_constructionyard, harkonnen_outpost
+		BuildPaletteOrder: 610
+		Description: actor_harkonnen_rocketturret.description
+		IconPalette: d2kunit
 	Valued:
 		Cost: 1500
 	Tooltip:
