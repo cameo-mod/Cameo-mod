@@ -7,7 +7,7 @@
 # HOW THIS PASS WAS MADE, so it can be audited rather than trusted:
 #   * Group rows carry a decision per measured (delivery, element) SIGNATURE, with the reasoning
 #     in `why`. A signature is what the measurement actually distinguishes.
-#   * `overrides:` holds the 91 weapons looked at individually. An override BEATS its
+#   * `overrides:` holds the 89 weapons looked at individually. An override BEATS its
 #     group, and it is keyed by WEAPON so it survives re-clustering — which matters: the first
 #     pass keyed these by GROUP and lost one within a single regrouping (R50).
 #   * Everything is `status: proposed`. NOTHING here has been reviewed by the maintainer.
@@ -30,7 +30,7 @@ armors:
 - steel
 - concrete
 totals:
-  groups: 92
+  groups: 94
   weapons: 136
 groups:
   LaserTesla_Veh:
@@ -96,22 +96,21 @@ groups:
     band: infantry
     delivery: Hitscan
     element: Kinetic
-    uses: 22
-    members: 3
-    factor: 0.6558169051370851
+    uses: 21
+    members: 2
+    factor: 0.6741667378705196
     profile:
     - 195.1
-    - 168.1
-    - 168.1
-    - 51.8
-    - 29.3
-    - 29.3
+    - 174.5
+    - 174.5
+    - 53.4
+    - 31.5
+    - 31.5
     - 74.1
     - 48.8
     - 25.4
     weapons:
     - SA
-    - SAFlame
     - SSA
   BulletHE_Veh:
     family: BulletHE
@@ -688,30 +687,6 @@ groups:
     - null
     weapons:
     - FlakWH
-  HitscanKinetic_Inf_4:
-    family: Bullet
-    status: proposed
-    why: 'instant-hit kinetic small arms: INF ~170 against VEH ~35'
-    band: infantry
-    delivery: Hitscan
-    element: Kinetic
-    uses: 3
-    members: 3
-    factor: 0.26968973879096225
-    profile:
-    - 198.3
-    - 195.1
-    - 195.1
-    - 10.0
-    - 10.0
-    - 10.0
-    - 10.0
-    - 10.0
-    - 10.0
-    weapons:
-    - HollowPoint
-    - PenetrationHollowPoint
-    - Virus
   MissileHE_Def:
     family: MissileHE
     status: proposed
@@ -957,7 +932,7 @@ groups:
     weapons:
     - DeathWH
     - TSSonicWarhead
-  HitscanKinetic_Inf_5:
+  HitscanKinetic_Inf_4:
     family: Bullet
     status: proposed
     why: 'instant-hit kinetic small arms: INF ~170 against VEH ~35'
@@ -979,6 +954,29 @@ groups:
     - 10.0
     weapons:
     - Gatt2WH
+  HitscanKinetic_Inf_5:
+    family: Bullet
+    status: proposed
+    why: 'instant-hit kinetic small arms: INF ~170 against VEH ~35'
+    band: infantry
+    delivery: Hitscan
+    element: Kinetic
+    uses: 2
+    members: 2
+    factor: 0.26993933371012047
+    profile:
+    - 200.0
+    - 195.1
+    - 195.1
+    - 10.0
+    - 10.0
+    - 10.0
+    - 10.0
+    - 10.0
+    - 10.0
+    weapons:
+    - HollowPoint
+    - PenetrationHollowPoint
   HitscanKinetic_Inf_6:
     family: Bullet
     status: proposed
@@ -1531,6 +1529,28 @@ groups:
     - 97.5
     weapons:
     - AmigoFireWH
+  HitscanFire_Inf_2:
+    family: Flame
+    status: proposed
+    why: instant-hit incendiary
+    band: infantry
+    delivery: Hitscan
+    element: Fire
+    uses: 1
+    members: 1
+    factor: 0.62060201205789
+    profile:
+    - 195.1
+    - 156.1
+    - 156.1
+    - 48.8
+    - 25.4
+    - 25.4
+    - 74.1
+    - 48.8
+    - 25.4
+    weapons:
+    - SAFlame
   HitscanFire_Veh:
     family: Flame
     status: proposed
@@ -1729,6 +1749,28 @@ groups:
     - 10.0
     weapons:
     - ElectricShockEWH
+  HitscanToxin_Inf:
+    family: BulletChem
+    status: proposed
+    why: instant-hit chemical - the virus rifle
+    band: infantry
+    delivery: Hitscan
+    element: Toxin
+    uses: 1
+    members: 1
+    factor: 0.2691912410906386
+    profile:
+    - 195.1
+    - 195.1
+    - 195.1
+    - 10.0
+    - 10.0
+    - 10.0
+    - 10.0
+    - 10.0
+    - 10.0
+    weapons:
+    - Virus
   Hitscan_Inf_5:
     family: Bullet
     status: proposed
@@ -2205,7 +2247,7 @@ overrides:
   GUARDWH:
     family: MissileAP
     why: '`GUARDWH`, INF 39 / VEH 163 [read as the group `MissileHE_Inf_3`]'
-  HollowPoint:
+  Gatt2WH:
     family: Sniper
     why: '`HollowPoint`, `PenetrationHollowPoint`, `Virus` — INF 196 against a flat 10 on every vehicle
       and building rung [read as the group `HitscanKinetic_Inf_4`]'
@@ -2280,10 +2322,6 @@ overrides:
   ParasiteUltraDog:
     family: '(drop: not a damage warhead)'
     why: the parasite dogs — an infection mechanic [read as the group `Missile_Inf`]
-  PenetrationHollowPoint:
-    family: Sniper
-    why: '`HollowPoint`, `PenetrationHollowPoint`, `Virus` — INF 196 against a flat 10 on every vehicle
-      and building rung [read as the group `HitscanKinetic_Inf_4`]'
   PenetrationHollowPoint2:
     family: Sniper
     why: '`HollowPoint2` and its penetrating twin [read as the group `HitscanKinetic_Inf_6`]'
@@ -2411,10 +2449,6 @@ overrides:
   UltraAP:
     family: CannonAP
     why: '`UltraAP` [read as the group `Bullet_Veh`]'
-  Virus:
-    family: Sniper
-    why: '`HollowPoint`, `PenetrationHollowPoint`, `Virus` — INF 196 against a flat 10 on every vehicle
-      and building rung [read as the group `HitscanKinetic_Inf_4`]'
   WeakPlasmoidWH:
     family: Plasma
     why: the weak plasmoid

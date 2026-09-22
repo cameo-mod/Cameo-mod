@@ -30,7 +30,7 @@ armors:
 - steel
 - concrete
 totals:
-  groups: 155
+  groups: 156
   weapons: 260
 groups:
   HitscanKinetic_Inf:
@@ -676,6 +676,28 @@ groups:
     weapons:
     - CraneWeaponWH
     - IronGuardWH
+  BulletFire_Inf:
+    family: BulletFire
+    status: proposed
+    why: incendiary ammunition
+    band: infantry
+    delivery: Bullet
+    element: Fire
+    uses: 3
+    members: 1
+    factor: 1.9989542935629752
+    profile:
+    - null
+    - null
+    - null
+    - 200.0
+    - 200.0
+    - 199.4
+    - 200.0
+    - 200.0
+    - 200.0
+    weapons:
+    - CyborgGrenadeWH
   BulletHE_Inf:
     family: BulletHE
     status: proposed
@@ -699,28 +721,6 @@ groups:
     weapons:
     - SeitaadEMPWH
     - UraniumWH2
-  BulletKinetic_Inf:
-    family: Bullet
-    status: proposed
-    why: solid slug
-    band: infantry
-    delivery: Bullet
-    element: Kinetic
-    uses: 3
-    members: 1
-    factor: 1.9989542935629752
-    profile:
-    - null
-    - null
-    - null
-    - 200.0
-    - 200.0
-    - 199.4
-    - 200.0
-    - 200.0
-    - 200.0
-    weapons:
-    - CyborgGrenadeWH
   Bullet_Inf:
     family: Bullet
     status: proposed
@@ -1136,7 +1136,7 @@ groups:
     weapons:
     - ShockCyborg
     - ShockTrooper
-  BulletFire_Inf:
+  BulletFire_Inf_2:
     family: BulletFire
     status: proposed
     why: incendiary ammunition
@@ -1514,28 +1514,6 @@ groups:
     - 59.8
     weapons:
     - HummSA
-  HitscanKinetic_Veh_5:
-    family: Bullet
-    status: proposed
-    why: 'instant-hit kinetic, anti-infantry throughout: small arms'
-    band: vehicle
-    delivery: Hitscan
-    element: Kinetic
-    uses: 2
-    members: 1
-    factor: 0.7469178820682956
-    profile:
-    - 200.0
-    - 200.0
-    - 200.0
-    - 119.6
-    - 79.7
-    - 59.8
-    - 19.9
-    - 39.9
-    - 19.9
-    weapons:
-    - ThorSSA
   HitscanRadiation_Inf:
     family: Nuclear
     status: proposed
@@ -1559,6 +1537,28 @@ groups:
     weapons:
     - RadEradicationWH
     - RadEruptionWarhead
+  HitscanTesla_Veh:
+    family: BulletTesla
+    status: proposed
+    why: instant-hit electrified rounds
+    band: vehicle
+    delivery: Hitscan
+    element: Tesla
+    uses: 2
+    members: 1
+    factor: 0.7469178820682956
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 119.6
+    - 79.7
+    - 59.8
+    - 19.9
+    - 39.9
+    - 19.9
+    weapons:
+    - ThorSSA
   Hitscan_Veh_2:
     family: Bullet
     status: proposed
@@ -1830,36 +1830,13 @@ groups:
     weapons:
     - CenturionMissilesWH
     - MirageWH
-  MissileKinetic_Inf:
-    family: MissileAP
-    status: proposed
-    why: steered solid penetrator
-    band: infantry
-    delivery: Missile
-    element: Kinetic
-    uses: 2
-    members: 2
-    factor: 0.48912991610708123
-    profile:
-    - 48.9
-    - 48.9
-    - 48.9
-    - 12.0
-    - 12.0
-    - 12.0
-    - null
-    - null
-    - null
-    weapons:
-    - HuntressWH
-    - KrukovSwordWH
-  RailgunKinetic_Inf:
+  RailgunFire_Inf:
     family: Railgun
     status: proposed
-    why: genuine IsRailgun weapons (R48)
+    why: genuine IsRailgun weapon; the Fire element is its death animation
     band: infantry
     delivery: Railgun
-    element: Kinetic
+    element: Fire
     uses: 2
     members: 2
     factor: 1.5467646066254566
@@ -2030,7 +2007,7 @@ groups:
     - 59.8
     weapons:
     - TurretFireWH
-  BulletFire_Inf_2:
+  BulletFire_Inf_3:
     family: BulletFire
     status: proposed
     why: incendiary ammunition
@@ -2734,7 +2711,7 @@ groups:
     - 39.9
     weapons:
     - SAFlame
-  HitscanKinetic_Veh_6:
+  HitscanKinetic_Veh_5:
     family: Bullet
     status: proposed
     why: 'instant-hit kinetic, anti-infantry throughout: small arms'
@@ -2756,7 +2733,7 @@ groups:
     - 19.9
     weapons:
     - GattAAWH
-  HitscanKinetic_Veh_7:
+  HitscanKinetic_Veh_6:
     family: Bullet
     status: proposed
     why: 'instant-hit kinetic, anti-infantry throughout: small arms'
@@ -2778,7 +2755,7 @@ groups:
     - 19.9
     weapons:
     - HARVWH
-  HitscanKinetic_Veh_8:
+  HitscanKinetic_Veh_7:
     family: Bullet
     status: proposed
     why: 'instant-hit kinetic, anti-infantry throughout: small arms'
@@ -3196,6 +3173,28 @@ groups:
     - 79.7
     weapons:
     - FuryWH
+  MissileFire_Inf:
+    family: MissileFire
+    status: proposed
+    why: steered incendiary
+    band: infantry
+    delivery: Missile
+    element: Fire
+    uses: 1
+    members: 1
+    factor: 0.11962403741541532
+    profile:
+    - 12.0
+    - 12.0
+    - 12.0
+    - 12.0
+    - 12.0
+    - 12.0
+    - null
+    - null
+    - null
+    weapons:
+    - KrukovSwordWH
   MissileHE_Def_3:
     family: MissileHE
     status: proposed
@@ -3372,6 +3371,28 @@ groups:
     - 12.0
     weapons:
     - RamHackArenaWH
+  MissileKinetic_Inf:
+    family: MissileAP
+    status: proposed
+    why: steered solid penetrator
+    band: infantry
+    delivery: Missile
+    element: Kinetic
+    uses: 1
+    members: 1
+    factor: 2.0000000000007496
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    weapons:
+    - HuntressWH
   MissileTesla_Inf:
     family: MissileTesla
     status: proposed
@@ -3460,7 +3481,7 @@ groups:
     - 99.7
     weapons:
     - WOLFWH
-  RailgunFire_Inf:
+  RailgunFire_Inf_2:
     family: Railgun
     status: proposed
     why: genuine IsRailgun weapon; the Fire element is its death animation

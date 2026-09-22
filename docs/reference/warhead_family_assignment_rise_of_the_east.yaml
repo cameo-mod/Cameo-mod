@@ -7,7 +7,7 @@
 # HOW THIS PASS WAS MADE, so it can be audited rather than trusted:
 #   * Group rows carry a decision per measured (delivery, element) SIGNATURE, with the reasoning
 #     in `why`. A signature is what the measurement actually distinguishes.
-#   * `overrides:` holds the 13 weapons looked at individually. An override BEATS its
+#   * `overrides:` holds the 14 weapons looked at individually. An override BEATS its
 #     group, and it is keyed by WEAPON so it survives re-clustering — which matters: the first
 #     pass keyed these by GROUP and lost one within a single regrouping (R50).
 #   * Everything is `status: proposed`. NOTHING here has been reviewed by the maintainer.
@@ -30,7 +30,7 @@ armors:
 - steel
 - concrete
 totals:
-  groups: 131
+  groups: 133
   weapons: 225
 groups:
   BulletHE_Veh:
@@ -514,30 +514,6 @@ groups:
     - BleederWH
     - BoobyTrapWH
     - PsiPulse
-  HitscanKinetic_Inf_2:
-    family: Bullet
-    status: proposed
-    why: 'instant-hit kinetic, anti-infantry in 8 of 10 measurable: small arms'
-    band: infantry
-    delivery: Hitscan
-    element: Kinetic
-    uses: 4
-    members: 3
-    factor: 1.5914899893589627
-    profile:
-    - 200.0
-    - 200.0
-    - 200.0
-    - 200.0
-    - 200.0
-    - 184.9
-    - 110.7
-    - 158.1
-    - 63.2
-    weapons:
-    - BORISWH
-    - RashidWH
-    - VLADWH
   MissileHE_Veh_2:
     family: MissileHE
     status: proposed
@@ -1223,7 +1199,7 @@ groups:
     weapons:
     - FlakGuyWH
     - FlakGuyWHAA
-  HitscanKinetic_Inf_3:
+  HitscanKinetic_Inf_2:
     family: Bullet
     status: proposed
     why: 'instant-hit kinetic, anti-infantry in 8 of 10 measurable: small arms'
@@ -1245,7 +1221,7 @@ groups:
     - 28.5
     weapons:
     - SA1S
-  HitscanKinetic_Inf_4:
+  HitscanKinetic_Inf_3:
     family: Bullet
     status: proposed
     why: 'instant-hit kinetic, anti-infantry in 8 of 10 measurable: small arms'
@@ -1268,7 +1244,7 @@ groups:
     weapons:
     - HollowPoint
     - HollowPoint3
-  HitscanKinetic_Inf_5:
+  HitscanKinetic_Inf_4:
     family: Bullet
     status: proposed
     why: 'instant-hit kinetic, anti-infantry in 8 of 10 measurable: small arms'
@@ -1358,6 +1334,28 @@ groups:
     weapons:
     - SonicWH
   HitscanTesla_Inf:
+    family: BulletTesla
+    status: proposed
+    why: instant-hit electrified
+    band: infantry
+    delivery: Hitscan
+    element: Tesla
+    uses: 2
+    members: 1
+    factor: 1.6054021161824181
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 110.7
+    - 158.1
+    - 63.2
+    weapons:
+    - BORISWH
+  HitscanTesla_Inf_2:
     family: BulletTesla
     status: proposed
     why: instant-hit electrified
@@ -2107,6 +2105,28 @@ groups:
     - 200.0
     weapons:
     - TerrorBombWHK
+  HitscanFire_Inf_2:
+    family: BulletFire
+    status: proposed
+    why: instant-hit incendiary
+    band: infantry
+    delivery: Hitscan
+    element: Fire
+    uses: 1
+    members: 1
+    factor: 1.6054021161824181
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 110.7
+    - 158.1
+    - 63.2
+    weapons:
+    - VLADWH
   HitscanFire_Veh_2:
     family: BulletFire
     status: proposed
@@ -2239,7 +2259,7 @@ groups:
     - 47.4
     weapons:
     - LocustWH1
-  HitscanKinetic_Inf_6:
+  HitscanKinetic_Inf_5:
     family: Bullet
     status: proposed
     why: 'instant-hit kinetic, anti-infantry in 8 of 10 measurable: small arms'
@@ -2261,6 +2281,28 @@ groups:
     - null
     weapons:
     - HollowPointJK
+  HitscanKinetic_Inf_6:
+    family: Bullet
+    status: proposed
+    why: 'instant-hit kinetic, anti-infantry in 8 of 10 measurable: small arms'
+    band: infantry
+    delivery: Hitscan
+    element: Kinetic
+    uses: 1
+    members: 1
+    factor: 1.564026370948835
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 158.1
+    - 110.7
+    - 158.1
+    - 63.2
+    weapons:
+    - RashidWH
   HitscanKinetic_Inf_7:
     family: Bullet
     status: proposed
@@ -2723,6 +2765,28 @@ groups:
     - null
     weapons:
     - Mechanical
+  MissileFire_Inf:
+    family: MissileFire
+    status: proposed
+    why: steered incendiary
+    band: infantry
+    delivery: Missile
+    element: Fire
+    uses: 1
+    members: 1
+    factor: 1.50487089434192
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 189.7
+    - 98.0
+    - 110.7
+    - 60.1
+    weapons:
+    - AngelWH
   MissileFire_Veh_2:
     family: MissileFire
     status: proposed
@@ -2833,28 +2897,6 @@ groups:
     - 200.0
     weapons:
     - TomahawkWH
-  MissileKinetic_Inf:
-    family: MissileAP
-    status: proposed
-    why: steered solid penetrator
-    band: infantry
-    delivery: Missile
-    element: Kinetic
-    uses: 1
-    members: 1
-    factor: 1.50487089434192
-    profile:
-    - 200.0
-    - 200.0
-    - 200.0
-    - 200.0
-    - 200.0
-    - 189.7
-    - 98.0
-    - 110.7
-    - 60.1
-    weapons:
-    - AngelWH
   Missile_Veh_2:
     family: MissileHE
     status: proposed
@@ -3058,3 +3100,6 @@ overrides:
     family: Demolition
     why: a suicide bomb. ⚠ flat 200 on all nine armours, so it carries no shape — the family is a judgement,
       the profile should not set it
+  VLADWH:
+    family: Bullet
+    why: an AKM whose critical hit throws chaos gas; the rifle is the weapon

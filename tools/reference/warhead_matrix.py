@@ -757,11 +757,26 @@ def ini_element(warhead: dict[str, str]) -> str:
     # `Tiberium=no`, so they read `Plain` — and they DID BEFORE THIS CHANGE TOO. TI has no
     # machine-readable element signal for them at all; they will need per-weapon overrides when
     # TI is assigned, the same way Romanov's Vengeance's flamethrowers did (R55).
-    if _ini_yes(warhead, "Bullets"):
-        return "Kinetic"
+    # ⛔ R59 — `Bullets=yes` USED TO SIT ABOVE THE DEATH-CODE FALLBACK AND STEAL FROM IT. It is
+    # the small-arms flag, the INI dialect's spelling of exactly the signal the OpenRA dialect
+    # ranks DEAD LAST: `ELEMENT_ORDER` ends with `("Kinetic", "BulletDeath")` under the comment
+    # *"weak: explosive payload vs solid slug, used only when no strong signal is present"*. The
+    # two dialects were ranking one concept at opposite ends of the table.
+    #
+    # 28 warheads across five sources carry BOTH, and the specific signal is right nearly every
+    # time: `SAFlame`, `SSABFlame`, `FLAMEWH2` and `InfernoWH` are flamethrowers reading KINETIC,
+    # and `Virus` — the virus sniper's warhead, in THREE sources — read Kinetic too.
+    #
+    # ⚠ I nearly rejected this fix on two false losses, and the lesson is the older one: READ THE
+    # WEAPON, DO NOT GUESS FROM THE NAME. `BORISWH` and `ThorSSA` looked like a commando's rifle
+    # and a heavy gun being wrongly electrified. They are not. BORISWH is fired by `EMPAKM_N`
+    # with `Report=BorisTeslaAttack`; ThorSSA carries `EMEffect=yes` with `AnimList=TCCLOUD1B`,
+    # thunderclouds. Both really are electric, and the demotion CORRECTS them.
     fallback = INI_INFDEATH_ELEMENT.get(str(warhead.get("InfDeath", "")).strip())
     if fallback:
         return fallback
+    if _ini_yes(warhead, "Bullets"):
+        return "Kinetic"
     try:
         spread = float(warhead.get("CellSpread", 0) or 0)
     except ValueError:
