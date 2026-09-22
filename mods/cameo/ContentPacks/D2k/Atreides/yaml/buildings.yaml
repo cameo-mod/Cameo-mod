@@ -199,6 +199,7 @@ atreides_outpost:
 
 atreides_hightechfactory:
 	Inherits: ^D2KBuilding
+	Inherits@hpad: ^IsAircraftFactory
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@shape: ^3x2Shape
 	Buildable:
@@ -212,6 +213,19 @@ atreides_hightechfactory:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
+	Armor:
+		Type: Concrete
+	Exit:
+		SpawnOffset: 0,0,728
+		ExitCell: 0,0
+	WithProductionOverlay@WELDING:
+		RequiresCondition: !build-incomplete
+		Queues: Aircraft
+		Sequence: production-welding
+	ProductionCostMultiplier@dune:
+		Multiplier: 150
+	ProductionTimeMultiplier@dune:
+		Multiplier: 150
 	RenderSprites:
 		Image: hightech.atreides
 	ProvidesPrerequisite@hightech:
