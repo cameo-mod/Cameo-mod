@@ -33,6 +33,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools" / "audit"))
 sys.path.insert(0, str(ROOT / "tools" / "reference"))
 
+import assignment_store as store  # noqa: E402
 import warhead_matrix as wm  # noqa: E402
 
 DOC = ROOT / "docs" / "reference" / "warhead_family_assignment.yaml"
@@ -40,9 +41,19 @@ GROUPS = ROOT / "docs" / "reference" / "warhead_groups.json"
 OUT = ROOT / "docs" / "reference" / "warhead_families.json"
 
 
-def load_assignment() -> dict:
-    import yaml
-    return yaml.safe_load(DOC.read_text(encoding="utf-8"))
+def load_assignment(source: str) -> dict:
+    """One source's review, through the keyed store — NOT by path.
+
+    This used to read a single hardcoded file and reject anything whose `source:` did not match,
+    which made the tool structurally single-source: the assignment for a SECOND mod could not be
+    reached at all, however correct the file was.
+    """
+    doc = store.load_source(source)
+    if doc is None:
+        have = ", ".join(sorted(store.load())) or "none"
+        raise SystemExit(f"no assignment file for {source!r} "
+                         f"(reviewed so far: {have})")
+    return doc
 
 
 def family_of(weapon: str, group: dict, overrides: dict) -> str:
@@ -78,10 +89,8 @@ def source_rows(source: str) -> dict[str, dict]:
 
 
 def collapse(source: str) -> dict:
-    assignment = load_assignment()
-    if assignment["source"] != source:
-        raise SystemExit(f"{DOC.name} holds {assignment['source']}, not {source}")
-    overrides = assignment["overrides"]
+    assignment = load_assignment(source)
+    overrides = assignment.get("overrides") or {}
     groups = {g["name"]: g for g in json.load(GROUPS.open(encoding="utf-8"))[source]["groups"]}
     armors = next(iter(groups.values()))["armors"]
     measured = source_rows(source)

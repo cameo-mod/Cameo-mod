@@ -1,0 +1,3772 @@
+# Reference warhead group -> Cameo warhead family — MENTAL OMEGA.
+#
+# HAND-AUTHORED, like the Combined Arms file beside it, and for the same reason: every row is a
+# JUDGEMENT and every one has to be arguable. R21 forbids rebuilding this from a name-matching
+# pass, and R46 measured why — four automatic matchers score ~20% against a 75% ceiling, and name
+# evidence alone is right 40% of the time on the 42% of weapons it can even guess at.
+#
+# HOW THIS PASS WAS MADE, so it can be audited rather than trusted:
+#   * Each row's `why` states the reasoning. Decisions were taken once per measured
+#     (delivery, element) SIGNATURE — 37 of them across these 165 groups — rather than
+#     once per group, because a signature is the thing the measurement actually distinguishes.
+#   * 7 groups were opened and read individually and BEAT their signature;
+#     those rows say so. They are the support weapons, the repair beams and the chrono effects.
+#   * Everything is `status: proposed`. NOTHING here has been reviewed by the maintainer.
+#
+# ⚠ THE LEVEL IS NOT DECIDED HERE. `band` records which platform fires the weapon; the family is
+# the only decision this file makes.
+#
+# ⚠ Group NAMES are an artefact of one compression run. Record any correction per WEAPON in an
+# `overrides:` block, never against a group name — that is what let the Combined Arms review
+# survive three regroupings untouched (R41, R45, R48).
+#
+# Current run: tau 0.20, four platform bands, one main warhead per weapon, zeros as absences,
+# element vocabulary per R45, delivery per R48.
+source: mental_omega
+tau: 0.2
+armors:
+- none
+- flak
+- plate
+- light
+- medium
+- heavy
+- wood
+- steel
+- concrete
+totals:
+  groups: 165
+  weapons: 260
+groups:
+  HitscanKinetic_Inf:
+    family: Bullet
+    status: proposed
+    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    band: infantry
+    delivery: Hitscan
+    element: Kinetic
+    uses: 18
+    members: 2
+    factor: 1.0625024440244257
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 178.3
+    - 97.7
+    - 79.7
+    - 79.7
+    - 48.8
+    - 39.9
+    weapons:
+    - JumpjetSSA
+    - SA
+  MissileFire_Veh:
+    family: MissileFire
+    status: proposed
+    why: steered incendiary, anti-armour in 7 of 11 measurable
+    band: vehicle
+    delivery: Missile
+    element: Fire
+    uses: 18
+    members: 3
+    factor: 1.5177405140559332
+    profile:
+    - 92.5
+    - 92.5
+    - 92.5
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 168.5
+    - 200.0
+    weapons:
+    - AP
+    - APSplash
+    - APSplashNaut
+  Hitscan_Veh:
+    family: Bullet
+    status: proposed
+    why: 'instant-hit, no element stated: plain small arms'
+    band: vehicle
+    delivery: Hitscan
+    element: Plain
+    uses: 14
+    members: 4
+    factor: 0.4889380962051444
+    profile:
+    - 12.0
+    - 12.0
+    - 12.0
+    - 30.6
+    - 30.6
+    - 30.6
+    - 48.9
+    - 48.9
+    - 48.9
+    weapons:
+    - GrinderWH
+    - MagneShakeWH
+    - Special2
+    - Special3
+  HitscanKinetic_Inf_2:
+    family: Bullet
+    status: proposed
+    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    band: infantry
+    delivery: Hitscan
+    element: Kinetic
+    uses: 12
+    members: 4
+    factor: 0.989070185686804
+    profile:
+    - 98.9
+    - 98.9
+    - 78.2
+    - 12.0
+    - 12.0
+    - 12.0
+    - 12.0
+    - 12.0
+    - 12.0
+    weapons:
+    - DKnightSAWH
+    - HollowPoint
+    - HollowPoint4
+    - HollowPointAnimal
+  Hitscan_Inf:
+    family: Bullet
+    status: proposed
+    why: 'instant-hit, no element stated: plain small arms'
+    band: infantry
+    delivery: Hitscan
+    element: Plain
+    uses: 12
+    members: 4
+    factor: 0.989070185686804
+    profile:
+    - 98.9
+    - 98.9
+    - 98.9
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    weapons:
+    - Controller
+    - ControllerBuilding
+    - IvanBomb
+    - Snapshot
+  Laser_Veh:
+    family: Laser
+    status: proposed
+    why: coherent light, no payload
+    band: vehicle
+    delivery: Laser
+    element: Plain
+    uses: 10
+    members: 8
+    factor: 0.9889408756976648
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 98.9
+    - 98.9
+    - 98.9
+    - 199.7
+    - 199.7
+    - 199.7
+    weapons:
+    - AbramsLaserWH
+    - AeroblazeSniperWH
+    - AeroblazeWH
+    - MantaConfuseRifleWH
+    - OxidizerTargetWH
+    - RaccoonTankWH
+    - RuptureWH
+    - TeralaserWH
+  MissileHE_Def:
+    family: MissileHE
+    status: proposed
+    why: steered explosive
+    band: defense
+    delivery: Missile
+    element: HE
+    uses: 9
+    members: 2
+    factor: 0.48912991610708123
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 48.9
+    - 48.9
+    - 48.9
+    weapons:
+    - BlackoutMissileWH
+    - TargetAllCaster
+  MissileHE_Veh:
+    family: MissileHE
+    status: proposed
+    why: steered explosive
+    band: vehicle
+    delivery: Missile
+    element: HE
+    uses: 9
+    members: 7
+    factor: 1.3266075044194734
+    profile:
+    - 133.7
+    - 133.7
+    - 133.7
+    - 125.1
+    - 125.1
+    - 125.1
+    - 98.9
+    - 87.0
+    - 98.9
+    weapons:
+    - ApocalypseWH
+    - ArchelonWH
+    - SeitaadMissileWH
+    - SharkSplash
+    - SharkSplashWave
+    - SuperSubAP
+    - TeslaAP
+  Hitscan_Inf_2:
+    family: Bullet
+    status: proposed
+    why: 'instant-hit, no element stated: plain small arms'
+    band: infantry
+    delivery: Hitscan
+    element: Plain
+    uses: 7
+    members: 5
+    factor: 0.3374378877626033
+    profile:
+    - null
+    - null
+    - null
+    - 33.1
+    - 33.1
+    - 33.1
+    - 28.8
+    - 28.8
+    - 28.8
+    weapons:
+    - AirstrikeFlare
+    - AirstrikeFlareAI
+    - RepulsorPlaceWH
+    - SealC4WH
+    - Smashing
+  HitscanHE_Veh:
+    family: BulletHE
+    status: proposed
+    why: instant-hit with an explosive payload
+    band: vehicle
+    delivery: Hitscan
+    element: HE
+    uses: 6
+    members: 4
+    factor: 0.989070185686804
+    profile:
+    - 98.9
+    - 98.9
+    - 98.9
+    - 78.2
+    - 78.2
+    - 78.2
+    - 48.9
+    - 48.9
+    - 48.9
+    weapons:
+    - AthenaStrikeWH
+    - Cuttering
+    - GeneticGasWH
+    - RoadrunnerChokeWH
+  HitscanKinetic_Veh:
+    family: Bullet
+    status: proposed
+    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    band: vehicle
+    delivery: Hitscan
+    element: Kinetic
+    uses: 6
+    members: 4
+    factor: 0.9457416090035302
+    profile:
+    - 94.6
+    - 94.6
+    - 94.6
+    - 44.7
+    - 44.7
+    - 44.7
+    - null
+    - null
+    - null
+    weapons:
+    - FortressSSA
+    - HollowPointDrone
+    - TankScannerWH
+    - WolfhoundSA
+  MissileFire_Veh_2:
+    family: MissileFire
+    status: proposed
+    why: steered incendiary, anti-armour in 7 of 11 measurable
+    band: vehicle
+    delivery: Missile
+    element: Fire
+    uses: 6
+    members: 6
+    factor: 1.9192915119213476
+    profile:
+    - 182.7
+    - 182.7
+    - 182.7
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 149.5
+    - 200.0
+    weapons:
+    - AbramsCannonWH
+    - FortressAP
+    - MantaWH
+    - PiranhaWH
+    - RoboSplash
+    - TeratornWH
+  BulletTesla_Veh:
+    family: BulletTesla
+    status: proposed
+    why: electrified ammunition
+    band: vehicle
+    delivery: Bullet
+    element: Tesla
+    uses: 5
+    members: 2
+    factor: 0.9534541262173849
+    profile:
+    - 59.8
+    - 59.8
+    - 59.8
+    - 200.0
+    - 200.0
+    - 200.0
+    - 79.7
+    - 59.8
+    - 79.7
+    weapons:
+    - HowitzerBeaconWH
+    - HowitzerWH
+  HitscanFire_Veh:
+    family: BulletFire
+    status: proposed
+    why: instant-hit incendiary rounds
+    band: vehicle
+    delivery: Hitscan
+    element: Fire
+    uses: 5
+    members: 3
+    factor: 1.6521756337119733
+    profile:
+    - 186.0
+    - 186.0
+    - 172.0
+    - 200.0
+    - 199.6
+    - 172.0
+    - 199.4
+    - 99.7
+    - 59.8
+    weapons:
+    - FlakSeawolfWH
+    - FlakTrackWH
+    - SentinelWH
+  HitscanKinetic_Veh_2:
+    family: Bullet
+    status: proposed
+    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    band: vehicle
+    delivery: Hitscan
+    element: Kinetic
+    uses: 5
+    members: 2
+    factor: 0.8488450347443955
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 89.2
+    - 48.8
+    - 39.9
+    - 69.1
+    - 59.8
+    - 39.9
+    weapons:
+    - GattWH
+    - SSA
+  Laser_Inf:
+    family: Laser
+    status: proposed
+    why: coherent light, no payload
+    band: infantry
+    delivery: Laser
+    element: Plain
+    uses: 5
+    members: 4
+    factor: 1.3280578615468983
+    profile:
+    - 133.6
+    - 133.6
+    - 133.6
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 159.5
+    weapons:
+    - ConfuseRifleWH
+    - DSpiderWebWH
+    - FinAutoSniperGunWH
+    - LUNARWH
+  BulletTesla_Veh_2:
+    family: BulletTesla
+    status: proposed
+    why: electrified ammunition
+    band: vehicle
+    delivery: Bullet
+    element: Tesla
+    uses: 4
+    members: 1
+    factor: 1.4705330833476034
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 79.7
+    - 79.7
+    - 79.7
+    - 199.4
+    - 199.4
+    - 199.4
+    weapons:
+    - BorilloWH
+  HitscanHE_Veh_2:
+    family: BulletHE
+    status: proposed
+    why: instant-hit with an explosive payload
+    band: vehicle
+    delivery: Hitscan
+    element: HE
+    uses: 4
+    members: 2
+    factor: 1.3043945666304044
+    profile:
+    - 79.7
+    - 79.7
+    - 48.8
+    - 200.0
+    - 200.0
+    - 199.7
+    - 178.6
+    - 178.6
+    - 138.1
+    weapons:
+    - DemobombWH
+    - MadbombWH
+  Hitscan_Inf_3:
+    family: Bullet
+    status: proposed
+    why: 'instant-hit, no element stated: plain small arms'
+    band: infantry
+    delivery: Hitscan
+    element: Plain
+    uses: 4
+    members: 3
+    factor: 0.2881483589846163
+    profile:
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - 28.8
+    - 28.8
+    - 28.8
+    weapons:
+    - ArsonistPlaceWH
+    - BondBreakerWH
+    - TanyaC4WH
+  MissileToxin_Inf:
+    family: MissileChem
+    status: proposed
+    why: steered chemical
+    band: infantry
+    delivery: Missile
+    element: Toxin
+    uses: 4
+    members: 4
+    factor: 0.48456012631427847
+    profile:
+    - 48.9
+    - 48.9
+    - 48.9
+    - 48.9
+    - 47.6
+    - 46.2
+    - 48.9
+    - 48.9
+    - 48.9
+    weapons:
+    - CyComWH
+    - DLancerOTWH
+    - DLancerWH
+    - VolkovBombWH
+  MissileToxin_Veh:
+    family: MissileChem
+    status: proposed
+    why: steered chemical
+    band: vehicle
+    delivery: Missile
+    element: Toxin
+    uses: 4
+    members: 2
+    factor: 1.2145753362036293
+    profile:
+    - 199.4
+    - 179.4
+    - 99.7
+    - 200.0
+    - 159.5
+    - 99.7
+    - 159.5
+    - 79.7
+    - 39.9
+    weapons:
+    - IFVWH
+    - VoyagerWH
+  Missile_Veh:
+    family: MissileHE
+    status: proposed
+    why: 'steered, no element: the default missile'
+    band: vehicle
+    delivery: Missile
+    element: Plain
+    uses: 4
+    members: 2
+    factor: 0.48912991610708123
+    profile:
+    - 48.9
+    - 48.9
+    - 48.9
+    - 48.9
+    - 48.9
+    - 48.9
+    - null
+    - null
+    - null
+    weapons:
+    - ConfuseFlareWH
+    - Parasite
+  TeslaHE_Def:
+    family: Tesla
+    status: proposed
+    why: electric bolt
+    band: defense
+    delivery: Tesla
+    element: HE
+    uses: 4
+    members: 2
+    factor: 1.585741530425959
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 99.7
+    - 99.7
+    - 99.7
+    weapons:
+    - ElectricCoil
+    - ElectricSuper
+  BombHE_Def:
+    family: '(drop: support weapon)'
+    status: proposed
+    why: CraneWeaponWH + IronGuardWH — IronGuard is a protective ability; the flat 10.9 on vehicles only
+      is a marker, not a damage ladder
+    band: defense
+    delivery: Bomb
+    element: HE
+    uses: 3
+    members: 2
+    factor: 0.10937277422442028
+    profile:
+    - null
+    - null
+    - null
+    - 10.9
+    - 10.9
+    - 10.9
+    - null
+    - null
+    - null
+    weapons:
+    - CraneWeaponWH
+    - IronGuardWH
+  BulletHE_Veh:
+    family: BulletHE
+    status: proposed
+    why: explosive ball ammunition
+    band: vehicle
+    delivery: Bullet
+    element: HE
+    uses: 3
+    members: 2
+    factor: 1.8835878079279536
+    profile:
+    - 167.1
+    - 167.1
+    - 167.1
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    weapons:
+    - CenturionCannonWH
+    - ConfuseWH
+  BulletKinetic_Inf:
+    family: Bullet
+    status: proposed
+    why: solid slug
+    band: infantry
+    delivery: Bullet
+    element: Kinetic
+    uses: 3
+    members: 1
+    factor: 1.9989542935629752
+    profile:
+    - null
+    - null
+    - null
+    - 200.0
+    - 200.0
+    - 199.4
+    - 200.0
+    - 200.0
+    - 200.0
+    weapons:
+    - CyborgGrenadeWH
+  Bullet_Inf:
+    family: Bullet
+    status: proposed
+    why: ballistic, no element
+    band: infantry
+    delivery: Bullet
+    element: Plain
+    uses: 3
+    members: 1
+    factor: 0.11962403741541532
+    profile:
+    - 12.0
+    - 12.0
+    - 12.0
+    - 12.0
+    - 12.0
+    - 12.0
+    - null
+    - null
+    - null
+    weapons:
+    - SuppressorWH
+  HitscanAtomized_Veh:
+    family: Quantum
+    status: proposed
+    why: 'ChronoBlasterWH + ChronoWarpWH — these DO damage, unlike ChronoBeam above, but the flat 200
+      means the profile carries no shape. Review: the family is a judgement, the profile should not be
+      pooled'
+    band: vehicle
+    delivery: Hitscan
+    element: Atomized
+    uses: 3
+    members: 2
+    factor: 2.0000000000007496
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - null
+    - null
+    - null
+    weapons:
+    - ChronoBlasterWH
+    - ChronoWarpWH
+  HitscanHE_Inf:
+    family: BulletHE
+    status: proposed
+    why: instant-hit with an explosive payload
+    band: infantry
+    delivery: Hitscan
+    element: HE
+    uses: 3
+    members: 2
+    factor: 1.3097402587471414
+    profile:
+    - 141.2
+    - 141.2
+    - 141.2
+    - 200.0
+    - 200.0
+    - 200.0
+    - 39.9
+    - 39.9
+    - 19.9
+    weapons:
+    - DuplicantWH
+    - ScourgeWH
+  HitscanKinetic_Inf_3:
+    family: Bullet
+    status: proposed
+    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    band: infantry
+    delivery: Hitscan
+    element: Kinetic
+    uses: 3
+    members: 1
+    factor: 1.584912420362453
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 199.4
+    - 99.7
+    - 99.7
+    - null
+    - null
+    - null
+    weapons:
+    - CivilianSA
+  HitscanToxin_Inf:
+    family: BulletChem
+    status: proposed
+    why: instant-hit chemical rounds
+    band: infantry
+    delivery: Hitscan
+    element: Toxin
+    uses: 3
+    members: 2
+    factor: 2.0000000000007496
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    weapons:
+    - PsiPulse
+    - SuperPsiPulse
+  Hitscan_Inf_4:
+    family: Bullet
+    status: proposed
+    why: 'instant-hit, no element stated: plain small arms'
+    band: infantry
+    delivery: Hitscan
+    element: Plain
+    uses: 3
+    members: 1
+    factor: 1.445691683582846
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - null
+    - null
+    - null
+    - 119.6
+    - 119.6
+    - 79.7
+    weapons:
+    - Battering
+  LaserHE_Def:
+    family: Laser
+    status: proposed
+    why: 'a laser whose victims explode: the death animation is not the element'
+    band: defense
+    delivery: Laser
+    element: HE
+    uses: 3
+    members: 3
+    factor: 1.27077785313933
+    profile:
+    - 157.3
+    - 157.3
+    - 142.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 70.9
+    - 65.8
+    - 65.8
+    weapons:
+    - AntaresWH
+    - AntaresWHBlue
+    - RailgunTowerWH
+  LaserHE_Def_2:
+    family: Laser
+    status: proposed
+    why: 'a laser whose victims explode: the death animation is not the element'
+    band: defense
+    delivery: Laser
+    element: HE
+    uses: 3
+    members: 3
+    factor: 1.9986058462647214
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 199.4
+    - 199.4
+    - 199.4
+    weapons:
+    - HyperionWH
+    - InfernoRailgunWH
+    - InfernoRailgunWHBlue
+  LaserHE_Veh:
+    family: Laser
+    status: proposed
+    why: 'a laser whose victims explode: the death animation is not the element'
+    band: vehicle
+    delivery: Laser
+    element: HE
+    uses: 3
+    members: 2
+    factor: 0.11962403741541532
+    profile:
+    - 12.0
+    - 12.0
+    - 12.0
+    - 12.0
+    - 12.0
+    - 12.0
+    - 12.0
+    - 12.0
+    - 12.0
+    weapons:
+    - BulldogPainterWH
+    - RaccoonWH
+  Laser_Inf_2:
+    family: Laser
+    status: proposed
+    why: coherent light, no payload
+    band: infantry
+    delivery: Laser
+    element: Plain
+    uses: 3
+    members: 2
+    factor: 1.7053784172829975
+    profile:
+    - 200.0
+    - 200.0
+    - 189.4
+    - 189.1
+    - 138.1
+    - 99.7
+    - 200.0
+    - 200.0
+    - 200.0
+    weapons:
+    - EnforcerWH
+    - TanyaLaserWH
+  Laser_Veh_2:
+    family: Laser
+    status: proposed
+    why: coherent light, no payload
+    band: vehicle
+    delivery: Laser
+    element: Plain
+    uses: 3
+    members: 2
+    factor: 0.44999452947521096
+    profile:
+    - 48.9
+    - 48.9
+    - 48.9
+    - 179.4
+    - 99.7
+    - 99.7
+    - 200.0
+    - 200.0
+    - 200.0
+    weapons:
+    - DolphinWH
+    - RuinerRayWH
+  Laser_Veh_3:
+    family: Laser
+    status: proposed
+    why: coherent light, no payload
+    band: vehicle
+    delivery: Laser
+    element: Plain
+    uses: 3
+    members: 2
+    factor: 1.5785652475098528
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 97.7
+    - 109.2
+    - 89.2
+    weapons:
+    - ComancheWH
+    - ShadowPulse
+  MissileFire_Air:
+    family: MissileFire
+    status: proposed
+    why: steered incendiary, anti-armour in 7 of 11 measurable
+    band: aircraft
+    delivery: Missile
+    element: Fire
+    uses: 3
+    members: 2
+    factor: 1.4963493581160514
+    profile:
+    - 99.7
+    - 99.7
+    - 99.7
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    weapons:
+    - ASWSplash
+    - GehennaWH
+  MissileFire_Def:
+    family: MissileFire
+    status: proposed
+    why: steered incendiary, anti-armour in 7 of 11 measurable
+    band: defense
+    delivery: Missile
+    element: Fire
+    uses: 3
+    members: 2
+    factor: 2.0000000000007496
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - null
+    - null
+    - null
+    weapons:
+    - PatriotWH
+    - SAMBunkerWH
+  MissileFire_Inf:
+    family: MissileFire
+    status: proposed
+    why: steered incendiary, anti-armour in 7 of 11 measurable
+    band: infantry
+    delivery: Missile
+    element: Fire
+    uses: 3
+    members: 1
+    factor: 1.2297348069960656
+    profile:
+    - 79.7
+    - 79.7
+    - 99.7
+    - 200.0
+    - 200.0
+    - 200.0
+    - 159.5
+    - 99.7
+    - 79.7
+    weapons:
+    - GUARDWH
+  MissileHE_Inf:
+    family: MissileHE
+    status: proposed
+    why: steered explosive
+    band: infantry
+    delivery: Missile
+    element: HE
+    uses: 3
+    members: 2
+    factor: 1.9876343417787068
+    profile:
+    - 200.0
+    - 200.0
+    - 199.7
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 179.4
+    weapons:
+    - Uragan1WH
+    - ZorbWH
+  MissileToxin_Inf_2:
+    family: MissileChem
+    status: proposed
+    why: steered chemical
+    band: infantry
+    delivery: Missile
+    element: Toxin
+    uses: 3
+    members: 2
+    factor: 1.7615384233304123
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 154.4
+    - 138.1
+    - 119.6
+    weapons:
+    - PsychicDartsWH
+    - RhadHE
+  MissileToxin_Veh_2:
+    family: MissileChem
+    status: proposed
+    why: steered chemical
+    band: vehicle
+    delivery: Missile
+    element: Toxin
+    uses: 3
+    members: 2
+    factor: 1.9015856196323209
+    profile:
+    - 159.5
+    - 159.5
+    - 200.0
+    - 200.0
+    - 200.0
+    - 199.7
+    - 200.0
+    - 200.0
+    - 200.0
+    weapons:
+    - ApocMissileWH
+    - MTWH
+  Missile_Inf:
+    family: MissileHE
+    status: proposed
+    why: 'steered, no element: the default missile'
+    band: infantry
+    delivery: Missile
+    element: Plain
+    uses: 3
+    members: 3
+    factor: 0.7821549818207558
+    profile:
+    - 48.9
+    - 48.9
+    - 48.9
+    - 78.2
+    - 78.2
+    - 78.2
+    - 12.0
+    - 12.0
+    - 12.0
+    weapons:
+    - GodsbaneMissileWH
+    - LocomotorBeam
+    - ParasitePro
+  Radiation_Inf:
+    family: Nuclear
+    status: proposed
+    why: rad beam
+    band: infantry
+    delivery: Radiation
+    element: Radiation
+    uses: 3
+    members: 1
+    factor: 1.7140570232309298
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 199.4
+    - 159.5
+    - 99.7
+    - null
+    - null
+    - null
+    weapons:
+    - RadBeamWarhead
+  Radiation_Veh:
+    family: '(drop: not a damage warhead)'
+    status: proposed
+    why: EMPBeamWH + RepairMechanical + RepairMechanicalReju — two of the three are REPAIR weapons; nothing
+      here damages anything
+    band: vehicle
+    delivery: Radiation
+    element: Plain
+    uses: 3
+    members: 3
+    factor: 0.7821549818207558
+    profile:
+    - null
+    - null
+    - null
+    - 78.2
+    - 78.2
+    - 78.2
+    - null
+    - null
+    - null
+    weapons:
+    - EMPBeamWH
+    - RepairMechanical
+    - RepairMechanicalReju
+  TeslaHE_Inf:
+    family: Tesla
+    status: proposed
+    why: electric bolt
+    band: infantry
+    delivery: Tesla
+    element: HE
+    uses: 3
+    members: 2
+    factor: 1.9597343257001112
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 199.4
+    - 139.6
+    - 199.4
+    weapons:
+    - ShockCyborg
+    - ShockTrooper
+  BulletFire_Def:
+    family: BulletFire
+    status: proposed
+    why: incendiary ammunition, anti-armour in 5 of 6
+    band: defense
+    delivery: Bullet
+    element: Fire
+    uses: 2
+    members: 1
+    factor: 1.1661543459536008
+    profile:
+    - 139.6
+    - 139.6
+    - 119.6
+    - 200.0
+    - 200.0
+    - 200.0
+    - 59.8
+    - 59.8
+    - 59.8
+    weapons:
+    - GrandCannonWH
+  BulletFire_Inf:
+    family: BulletFire
+    status: proposed
+    why: incendiary ammunition, anti-armour in 5 of 6
+    band: infantry
+    delivery: Bullet
+    element: Fire
+    uses: 2
+    members: 1
+    factor: 1.2297348069960656
+    profile:
+    - 79.7
+    - 79.7
+    - 99.7
+    - 200.0
+    - 200.0
+    - 200.0
+    - 159.5
+    - 99.7
+    - 79.7
+    weapons:
+    - ARROWWH
+  BulletFire_Inf_2:
+    family: BulletFire
+    status: proposed
+    why: incendiary ammunition, anti-armour in 5 of 6
+    band: infantry
+    delivery: Bullet
+    element: Fire
+    uses: 2
+    members: 1
+    factor: 1.1304448658936792
+    profile:
+    - 99.7
+    - 99.7
+    - 79.7
+    - 200.0
+    - 200.0
+    - 200.0
+    - 99.7
+    - 79.7
+    - 59.8
+    weapons:
+    - QuadMortarWH
+  BulletFire_Veh:
+    family: BulletFire
+    status: proposed
+    why: incendiary ammunition, anti-armour in 5 of 6
+    band: vehicle
+    delivery: Bullet
+    element: Fire
+    uses: 2
+    members: 1
+    factor: 1.4257618208314753
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 79.7
+    - 79.7
+    - 59.8
+    weapons:
+    - CruiserWH
+  BulletHE_Inf:
+    family: BulletHE
+    status: proposed
+    why: explosive ball ammunition
+    band: infantry
+    delivery: Bullet
+    element: HE
+    uses: 2
+    members: 1
+    factor: 0.11962403741541532
+    profile:
+    - null
+    - null
+    - null
+    - 12.0
+    - 12.0
+    - 12.0
+    - null
+    - null
+    - null
+    weapons:
+    - SeitaadEMPWH
+  BulletHE_Veh_2:
+    family: BulletHE
+    status: proposed
+    why: explosive ball ammunition
+    band: vehicle
+    delivery: Bullet
+    element: HE
+    uses: 2
+    members: 2
+    factor: 1.869798794792621
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 138.1
+    - 199.7
+    - 158.2
+    weapons:
+    - FTankCannonWH
+    - TyrantWH
+  BulletRadiation_Veh:
+    family: CannonNuke
+    status: proposed
+    why: a ballistic radiological shell
+    band: vehicle
+    delivery: Bullet
+    element: Radiation
+    uses: 2
+    members: 1
+    factor: 1.5090264150223314
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 99.7
+    - 79.7
+    - 79.7
+    weapons:
+    - ReaperWH
+  BulletTesla_Inf:
+    family: BulletTesla
+    status: proposed
+    why: electrified ammunition
+    band: infantry
+    delivery: Bullet
+    element: Tesla
+    uses: 2
+    members: 1
+    factor: 1.4720720361242339
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 79.7
+    - 79.7
+    - 79.7
+    - 200.0
+    - 200.0
+    - 200.0
+    weapons:
+    - PyroWH
+  BulletTesla_Veh_3:
+    family: BulletTesla
+    status: proposed
+    why: electrified ammunition
+    band: vehicle
+    delivery: Bullet
+    element: Tesla
+    uses: 2
+    members: 1
+    factor: 1.4320134077096893
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 159.5
+    - 99.7
+    - 59.8
+    - 199.4
+    - 139.6
+    - 119.6
+    weapons:
+    - BuratinoWH
+  BulletTesla_Veh_4:
+    family: BulletTesla
+    status: proposed
+    why: electrified ammunition
+    band: vehicle
+    delivery: Bullet
+    element: Tesla
+    uses: 2
+    members: 1
+    factor: 1.0814004165296043
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 39.9
+    - 39.9
+    - 19.9
+    - 200.0
+    - 200.0
+    - 199.4
+    weapons:
+    - GharialWH
+  BulletToxin_Veh:
+    family: BulletChem
+    status: proposed
+    why: chemical ammunition
+    band: vehicle
+    delivery: Bullet
+    element: Toxin
+    uses: 2
+    members: 1
+    factor: 1.0419136926158987
+    profile:
+    - 79.7
+    - 79.7
+    - 79.7
+    - 200.0
+    - 200.0
+    - 200.0
+    - 99.7
+    - 59.8
+    - 59.8
+    weapons:
+    - SpeederHE
+  BulletToxin_Veh_2:
+    family: BulletChem
+    status: proposed
+    why: chemical ammunition
+    band: vehicle
+    delivery: Bullet
+    element: Toxin
+    uses: 2
+    members: 2
+    factor: 1.8842372657196678
+    profile:
+    - 199.7
+    - 199.7
+    - 199.7
+    - 199.7
+    - 199.7
+    - 199.7
+    - 167.1
+    - 189.4
+    - 149.2
+    weapons:
+    - HydraMissileWH
+    - UraniumWH
+  HitscanAtomized_Inf:
+    family: '(drop: not a damage warhead)'
+    status: proposed
+    why: 'ChronoBeam — R21 names it: a mind-control effect with no damage profile. Its flat 200 across
+      all nine armours is the signature of absent Verses data, not of a generalist warhead'
+    band: infantry
+    delivery: Hitscan
+    element: Atomized
+    uses: 2
+    members: 1
+    factor: 2.0000000000007496
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    weapons:
+    - ChronoBeam
+  HitscanHE_Inf_2:
+    family: BulletHE
+    status: proposed
+    why: instant-hit with an explosive payload
+    band: infantry
+    delivery: Hitscan
+    element: HE
+    uses: 2
+    members: 2
+    factor: 0.44271459654714
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 179.4
+    - 159.5
+    - 119.6
+    - 40.9
+    - 43.7
+    - 40.9
+    weapons:
+    - BondEruptionWH
+    - SpiderBombWH
+  HitscanKinetic_Inf_4:
+    family: Bullet
+    status: proposed
+    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    band: infantry
+    delivery: Hitscan
+    element: Kinetic
+    uses: 2
+    members: 1
+    factor: 0.9844233001788151
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 79.7
+    - 79.7
+    - 59.8
+    - 79.7
+    - 59.8
+    - 59.8
+    weapons:
+    - KnightSA
+  HitscanKinetic_Veh_3:
+    family: Bullet
+    status: proposed
+    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    band: vehicle
+    delivery: Hitscan
+    element: Kinetic
+    uses: 2
+    members: 1
+    factor: 0.9888985666414685
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 119.6
+    - 99.7
+    - 99.7
+    - 59.8
+    - 39.9
+    - 39.9
+    weapons:
+    - BuzzardWH
+  HitscanKinetic_Veh_4:
+    family: Bullet
+    status: proposed
+    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    band: vehicle
+    delivery: Hitscan
+    element: Kinetic
+    uses: 2
+    members: 1
+    factor: 1.3634099848185162
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 179.4
+    - 99.7
+    - 99.7
+    - 159.5
+    - 119.6
+    - 59.8
+    weapons:
+    - HummSA
+  HitscanRadiation_Inf:
+    family: Nuclear
+    status: proposed
+    why: rad beams and eruptions
+    band: infantry
+    delivery: Hitscan
+    element: Radiation
+    uses: 2
+    members: 2
+    factor: 0.8930249620081928
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 79.7
+    - 39.9
+    - 19.9
+    - null
+    - null
+    - null
+    weapons:
+    - RadEradicationWH
+    - RadEruptionWarhead
+  HitscanTesla_Inf:
+    family: BulletTesla
+    status: proposed
+    why: instant-hit electrified rounds
+    band: infantry
+    delivery: Hitscan
+    element: Tesla
+    uses: 2
+    members: 1
+    factor: 1.9986058462647205
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 199.4
+    - 200.0
+    - 199.4
+    weapons:
+    - TerrorBombWH
+  HitscanTesla_Inf_2:
+    family: BulletTesla
+    status: proposed
+    why: instant-hit electrified rounds
+    band: infantry
+    delivery: Hitscan
+    element: Tesla
+    uses: 2
+    members: 2
+    factor: 1.0525208398327734
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 159.5
+    - 109.2
+    - 79.7
+    - 59.8
+    - 59.8
+    - 39.9
+    weapons:
+    - GyroAAWH
+    - GyroWH
+  HitscanTesla_Veh:
+    family: BulletTesla
+    status: proposed
+    why: instant-hit electrified rounds
+    band: vehicle
+    delivery: Hitscan
+    element: Tesla
+    uses: 2
+    members: 1
+    factor: 0.7469178820682956
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 119.6
+    - 79.7
+    - 59.8
+    - 19.9
+    - 39.9
+    - 19.9
+    weapons:
+    - ThorSSA
+  HitscanToxin_Veh:
+    family: BulletChem
+    status: proposed
+    why: instant-hit chemical rounds
+    band: vehicle
+    delivery: Hitscan
+    element: Toxin
+    uses: 2
+    members: 2
+    factor: 0.4630721962686287
+    profile:
+    - 48.9
+    - 48.9
+    - 48.9
+    - 48.9
+    - 46.3
+    - 37.8
+    - 48.9
+    - 48.8
+    - 40.9
+    weapons:
+    - DSonicRayWH
+    - SquidHE
+  Hitscan_Def:
+    family: Bullet
+    status: proposed
+    why: 'instant-hit, no element stated: plain small arms'
+    band: defense
+    delivery: Hitscan
+    element: Plain
+    uses: 2
+    members: 2
+    factor: 0.11962403741541532
+    profile:
+    - 12.0
+    - 12.0
+    - 12.0
+    - 12.0
+    - 12.0
+    - 12.0
+    - 12.0
+    - 12.0
+    - 12.0
+    weapons:
+    - AvalonChargeWH
+    - SpotLightWH
+  Hitscan_Veh_2:
+    family: Bullet
+    status: proposed
+    why: 'instant-hit, no element stated: plain small arms'
+    band: vehicle
+    delivery: Hitscan
+    element: Plain
+    uses: 2
+    members: 2
+    factor: 2.0000000000007496
+    profile:
+    - null
+    - null
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - null
+    - null
+    - null
+    weapons:
+    - MagneticStop
+    - RepairMechanicalNMIN
+  LaserHE_Inf:
+    family: Laser
+    status: proposed
+    why: 'a laser whose victims explode: the death animation is not the element'
+    band: infantry
+    delivery: Laser
+    element: HE
+    uses: 2
+    members: 2
+    factor: 1.0632359725506335
+    profile:
+    - 119.6
+    - 119.6
+    - 159.5
+    - 200.0
+    - 200.0
+    - 200.0
+    - 59.8
+    - 39.9
+    - 39.9
+    weapons:
+    - RailguneerOTWH
+    - RailguneerWH
+  LaserTesla_Inf:
+    family: Quantum
+    status: proposed
+    why: laser x tesla is the Quantum blend by the delivery grid
+    band: infantry
+    delivery: Laser
+    element: Tesla
+    uses: 2
+    members: 1
+    factor: 2.0000000000007496
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    weapons:
+    - SpiderWebWH
+  Laser_Def:
+    family: Laser
+    status: proposed
+    why: coherent light, no payload
+    band: defense
+    delivery: Laser
+    element: Plain
+    uses: 2
+    members: 1
+    factor: 1.9979091338761783
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 199.4
+    - 199.4
+    - 199.4
+    weapons:
+    - PrismWarhead
+  Laser_Veh_4:
+    family: Laser
+    status: proposed
+    why: coherent light, no payload
+    band: vehicle
+    delivery: Laser
+    element: Plain
+    uses: 2
+    members: 1
+    factor: 0.5417490198845342
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 39.9
+    - 39.9
+    - 39.9
+    - 19.9
+    - 19.9
+    - 19.9
+    weapons:
+    - RoboLaserWH
+  MissileFire_Air_2:
+    family: MissileFire
+    status: proposed
+    why: steered incendiary, anti-armour in 7 of 11 measurable
+    band: aircraft
+    delivery: Missile
+    element: Fire
+    uses: 2
+    members: 2
+    factor: 2.0000000000007496
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    weapons:
+    - HornetAP
+    - ShrikeWH
+  MissileFire_Def_2:
+    family: MissileFire
+    status: proposed
+    why: steered incendiary, anti-armour in 7 of 11 measurable
+    band: defense
+    delivery: Missile
+    element: Fire
+    uses: 2
+    members: 1
+    factor: 1.3903616512870245
+    profile:
+    - 79.7
+    - 79.7
+    - 79.7
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 119.6
+    - 200.0
+    weapons:
+    - TurretAP
+  MissileFire_Veh_3:
+    family: MissileFire
+    status: proposed
+    why: steered incendiary, anti-armour in 7 of 11 measurable
+    band: vehicle
+    delivery: Missile
+    element: Fire
+    uses: 2
+    members: 1
+    factor: 0.8944079254093501
+    profile:
+    - 59.8
+    - 59.8
+    - 59.8
+    - 200.0
+    - 200.0
+    - 200.0
+    - 59.8
+    - 59.8
+    - 59.8
+    weapons:
+    - JAGDWH
+  MissileHE_Def_2:
+    family: MissileHE
+    status: proposed
+    why: steered explosive
+    band: defense
+    delivery: Missile
+    element: HE
+    uses: 2
+    members: 2
+    factor: 2.0000000000007496
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - null
+    - null
+    - null
+    weapons:
+    - DevourerWH
+    - GrumbleWH
+  MissileKinetic_Inf:
+    family: MissileAP
+    status: proposed
+    why: steered solid penetrator
+    band: infantry
+    delivery: Missile
+    element: Kinetic
+    uses: 2
+    members: 2
+    factor: 0.48912991610708123
+    profile:
+    - 48.9
+    - 48.9
+    - 48.9
+    - 12.0
+    - 12.0
+    - 12.0
+    - null
+    - null
+    - null
+    weapons:
+    - HuntressWH
+    - KrukovSwordWH
+  MissileTesla_Air:
+    family: MissileTesla
+    status: proposed
+    why: steered electric
+    band: aircraft
+    delivery: Missile
+    element: Tesla
+    uses: 2
+    members: 2
+    factor: 0.48912991610708123
+    profile:
+    - 48.9
+    - 48.9
+    - 48.9
+    - 48.9
+    - 48.9
+    - 48.9
+    - 48.9
+    - 48.9
+    - 48.9
+    weapons:
+    - DSeekerBombWH
+    - SeekerBombWH
+  MissileTesla_Veh:
+    family: MissileTesla
+    status: proposed
+    why: steered electric
+    band: vehicle
+    delivery: Missile
+    element: Tesla
+    uses: 2
+    members: 1
+    factor: 1.1233616322263615
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 59.8
+    - 59.8
+    - 59.8
+    - 139.6
+    - 119.6
+    - 99.7
+    weapons:
+    - VultureBombsWH
+  MissileToxin_Inf_3:
+    family: MissileChem
+    status: proposed
+    why: steered chemical
+    band: infantry
+    delivery: Missile
+    element: Toxin
+    uses: 2
+    members: 2
+    factor: 1.3898769723350348
+    profile:
+    - 79.7
+    - 79.7
+    - 79.7
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 199.4
+    - 119.6
+    weapons:
+    - LancerOTWH
+    - LancerWH
+  RailgunKinetic_Inf:
+    family: '(drop: not a damage warhead)'
+    status: proposed
+    why: KillDriverWH + KillDriverAIWH — crew removal, it takes the vehicle rather than damaging it
+    band: infantry
+    delivery: Railgun
+    element: Kinetic
+    uses: 2
+    members: 2
+    factor: 1.5467646066254566
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 119.6
+    - 119.6
+    - 119.6
+    - null
+    - null
+    - null
+    weapons:
+    - KillDriverAIWH
+    - KillDriverWH
+  TeslaHE_Veh:
+    family: Tesla
+    status: proposed
+    why: electric bolt
+    band: vehicle
+    delivery: Tesla
+    element: HE
+    uses: 2
+    members: 1
+    factor: 1.6181929945496214
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 99.7
+    - 119.6
+    - 99.7
+    weapons:
+    - ElectricTank
+  BombHE_Veh:
+    family: '(drop: support weapon)'
+    status: proposed
+    why: 'ThorHTLWH — flat 10 on every reachable armour, the floor of the window: a marker warhead'
+    band: vehicle
+    delivery: Bomb
+    element: HE
+    uses: 1
+    members: 1
+    factor: 0.10000000000003746
+    profile:
+    - 10.0
+    - 10.0
+    - 10.0
+    - 10.0
+    - 10.0
+    - 10.0
+    - null
+    - null
+    - null
+    weapons:
+    - ThorHTLWH
+  BombKinetic_Veh:
+    family: Demolition
+    status: proposed
+    why: vertical delivery, solid
+    band: vehicle
+    delivery: Bomb
+    element: Kinetic
+    uses: 1
+    members: 1
+    factor: 2.0000000000007496
+    profile:
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - 200.0
+    - 200.0
+    - 200.0
+    weapons:
+    - DiskDrainWH
+  BombTesla_Inf:
+    family: Demolition
+    status: proposed
+    why: vertical delivery, electric payload
+    band: infantry
+    delivery: Bomb
+    element: Tesla
+    uses: 1
+    members: 1
+    factor: 0.10000000000003746
+    profile:
+    - 10.0
+    - 10.0
+    - 10.0
+    - 10.0
+    - 10.0
+    - 10.0
+    - null
+    - null
+    - null
+    weapons:
+    - ChronoFreezeWH
+  BombToxin_Veh:
+    family: Chemical
+    status: proposed
+    why: a chemical bomb is the Chemical family, not a delivery blend
+    band: vehicle
+    delivery: Bomb
+    element: Toxin
+    uses: 1
+    members: 1
+    factor: 1.8463094633247215
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 139.6
+    - 139.6
+    - 200.0
+    - 200.0
+    - 200.0
+    weapons:
+    - BlimpHE
+  BulletFire_Inf_3:
+    family: BulletFire
+    status: proposed
+    why: incendiary ammunition, anti-armour in 5 of 6
+    band: infantry
+    delivery: Bullet
+    element: Fire
+    uses: 1
+    members: 1
+    factor: 0.6915523791622157
+    profile:
+    - 39.9
+    - 39.9
+    - 19.9
+    - 200.0
+    - 200.0
+    - 200.0
+    - 59.8
+    - 59.8
+    - 39.9
+    weapons:
+    - FlakGuyATWH
+  BulletFire_Veh_2:
+    family: BulletFire
+    status: proposed
+    why: incendiary ammunition, anti-armour in 5 of 6
+    band: vehicle
+    delivery: Bullet
+    element: Fire
+    uses: 1
+    members: 1
+    factor: 1.3374662054868418
+    profile:
+    - 59.8
+    - 59.8
+    - 59.8
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    weapons:
+    - CataAP
+  BulletHE_Inf_2:
+    family: BulletHE
+    status: proposed
+    why: explosive ball ammunition
+    band: infantry
+    delivery: Bullet
+    element: HE
+    uses: 1
+    members: 1
+    factor: 1.4605348291280513
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 99.7
+    - 79.7
+    - 59.8
+    - 199.4
+    - 200.0
+    - 199.4
+    weapons:
+    - RazgarWH
+  BulletHE_Inf_3:
+    family: BulletHE
+    status: proposed
+    why: explosive ball ammunition
+    band: infantry
+    delivery: Bullet
+    element: HE
+    uses: 1
+    members: 1
+    factor: 0.19979091338761773
+    profile:
+    - 79.7
+    - 79.7
+    - 79.7
+    - 10.0
+    - 10.0
+    - 10.0
+    - 10.0
+    - 10.0
+    - 10.0
+    weapons:
+    - RiotGrenadeWH
+  BulletHE_Inf_4:
+    family: BulletHE
+    status: proposed
+    why: explosive ball ammunition
+    band: infantry
+    delivery: Bullet
+    element: HE
+    uses: 1
+    members: 1
+    factor: 1.379945888710359
+    profile:
+    - 99.7
+    - 99.7
+    - 79.7
+    - 200.0
+    - 200.0
+    - 200.0
+    - 119.6
+    - 200.0
+    - 119.6
+    weapons:
+    - SiegfriedWH
+  BulletHE_Inf_5:
+    family: BulletHE
+    status: proposed
+    why: explosive ball ammunition
+    band: infantry
+    delivery: Bullet
+    element: HE
+    uses: 1
+    members: 1
+    factor: 2.0000000000007496
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    weapons:
+    - StalkerDrainWH
+  BulletHE_Veh_3:
+    family: BulletHE
+    status: proposed
+    why: explosive ball ammunition
+    band: vehicle
+    delivery: Bullet
+    element: HE
+    uses: 1
+    members: 1
+    factor: 1.047745662922841
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 59.8
+    - 19.9
+    - 19.9
+    weapons:
+    - IronDragonWarhead
+  BulletHE_Veh_4:
+    family: BulletHE
+    status: proposed
+    why: explosive ball ammunition
+    band: vehicle
+    delivery: Bullet
+    element: HE
+    uses: 1
+    members: 1
+    factor: 0.5015917179175144
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 39.9
+    - 39.9
+    - 19.9
+    - 19.9
+    - 19.9
+    - 19.9
+    weapons:
+    - StingerSprayWH
+  BulletTesla_Def:
+    family: BulletTesla
+    status: proposed
+    why: electrified ammunition
+    band: defense
+    delivery: Bullet
+    element: Tesla
+    uses: 1
+    members: 1
+    factor: 0.11962403741541532
+    profile:
+    - 12.0
+    - 12.0
+    - 12.0
+    - 12.0
+    - 12.0
+    - 12.0
+    - null
+    - null
+    - null
+    weapons:
+    - SmokebombsSingleWH
+  BulletTesla_Def_2:
+    family: BulletTesla
+    status: proposed
+    why: electrified ammunition
+    band: defense
+    delivery: Bullet
+    element: Tesla
+    uses: 1
+    members: 1
+    factor: 0.8944079254093501
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 59.8
+    - 59.8
+    - 59.8
+    - 59.8
+    - 59.8
+    - 59.8
+    weapons:
+    - TurretFireWH
+  BulletTesla_Inf_2:
+    family: BulletTesla
+    status: proposed
+    why: electrified ammunition
+    band: infantry
+    delivery: Bullet
+    element: Tesla
+    uses: 1
+    members: 1
+    factor: 1.0814004165296043
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 39.9
+    - 39.9
+    - 19.9
+    - 200.0
+    - 200.0
+    - 199.4
+    weapons:
+    - KingsGunWH
+  BulletTesla_Inf_3:
+    family: BulletTesla
+    status: proposed
+    why: electrified ammunition
+    band: infantry
+    delivery: Bullet
+    element: Tesla
+    uses: 1
+    members: 1
+    factor: 1.585359505368136
+    profile:
+    - null
+    - null
+    - null
+    - 179.4
+    - 139.6
+    - 99.7
+    - 200.0
+    - 199.4
+    - 159.5
+    weapons:
+    - StalkerWH
+  BulletToxin_Inf:
+    family: BulletChem
+    status: proposed
+    why: chemical ammunition
+    band: infantry
+    delivery: Bullet
+    element: Toxin
+    uses: 1
+    members: 1
+    factor: 1.9503420991827574
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 159.5
+    weapons:
+    - UraniumWH2
+  BulletToxin_Veh_3:
+    family: BulletChem
+    status: proposed
+    why: chemical ammunition
+    band: vehicle
+    delivery: Bullet
+    element: Toxin
+    uses: 1
+    members: 1
+    factor: 1.6664262455820351
+    profile:
+    - 139.6
+    - 139.6
+    - 99.7
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 159.5
+    weapons:
+    - ARTYHE
+  BulletToxin_Veh_4:
+    family: BulletChem
+    status: proposed
+    why: chemical ammunition
+    band: vehicle
+    delivery: Bullet
+    element: Toxin
+    uses: 1
+    members: 1
+    factor: 1.150591073636529
+    profile:
+    - 200.0
+    - 200.0
+    - 199.4
+    - 79.7
+    - 59.8
+    - 39.9
+    - 139.6
+    - 139.6
+    - 119.6
+    weapons:
+    - BasiliskWH
+  BulletToxin_Veh_5:
+    family: BulletChem
+    status: proposed
+    why: chemical ammunition
+    band: vehicle
+    delivery: Bullet
+    element: Toxin
+    uses: 1
+    members: 1
+    factor: 1.288180169109827
+    profile:
+    - 79.7
+    - 59.8
+    - 59.8
+    - 200.0
+    - 200.0
+    - 200.0
+    - 199.4
+    - 179.4
+    - 119.6
+    weapons:
+    - ColossusWH
+  BulletToxin_Veh_6:
+    family: BulletChem
+    status: proposed
+    why: chemical ammunition
+    band: vehicle
+    delivery: Bullet
+    element: Toxin
+    uses: 1
+    members: 1
+    factor: 1.4307461325879185
+    profile:
+    - 199.4
+    - 199.4
+    - 99.7
+    - 200.0
+    - 200.0
+    - 200.0
+    - 99.7
+    - 99.7
+    - 79.7
+    weapons:
+    - Comanche2WH
+  Bullet_Def:
+    family: Bullet
+    status: proposed
+    why: ballistic, no element
+    band: defense
+    delivery: Bullet
+    element: Plain
+    uses: 1
+    members: 1
+    factor: 0.11962403741541532
+    profile:
+    - 12.0
+    - 12.0
+    - 12.0
+    - 12.0
+    - 12.0
+    - 12.0
+    - null
+    - null
+    - null
+    weapons:
+    - WarpnodeWH
+  Bullet_Inf_2:
+    family: Bullet
+    status: proposed
+    why: ballistic, no element
+    band: infantry
+    delivery: Bullet
+    element: Plain
+    uses: 1
+    members: 1
+    factor: 1.528649305340324
+    profile:
+    - null
+    - null
+    - null
+    - 39.9
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    weapons:
+    - FlintBomb
+  Bullet_Veh:
+    family: Bullet
+    status: proposed
+    why: ballistic, no element
+    band: vehicle
+    delivery: Bullet
+    element: Plain
+    uses: 1
+    members: 1
+    factor: 0.11962403741541532
+    profile:
+    - null
+    - null
+    - null
+    - 12.0
+    - 12.0
+    - 12.0
+    - null
+    - null
+    - null
+    weapons:
+    - ASWLaunchWH
+  HitscanFire_Def:
+    family: BulletFire
+    status: proposed
+    why: instant-hit incendiary rounds
+    band: defense
+    delivery: Hitscan
+    element: Fire
+    uses: 1
+    members: 1
+    factor: 1.5016520783590481
+    profile:
+    - 179.4
+    - 179.4
+    - 159.5
+    - 200.0
+    - 199.4
+    - 159.5
+    - 199.4
+    - 99.7
+    - 59.8
+    weapons:
+    - FlakCannonWH
+  HitscanFire_Def_2:
+    family: BulletFire
+    status: proposed
+    why: instant-hit incendiary rounds
+    band: defense
+    delivery: Hitscan
+    element: Fire
+    uses: 1
+    members: 1
+    factor: 1.1661543459536008
+    profile:
+    - 139.6
+    - 139.6
+    - 119.6
+    - 200.0
+    - 200.0
+    - 200.0
+    - 59.8
+    - 59.8
+    - 59.8
+    weapons:
+    - HammerWH
+  HitscanFire_Inf:
+    family: BulletFire
+    status: proposed
+    why: instant-hit incendiary rounds
+    band: infantry
+    delivery: Hitscan
+    element: Fire
+    uses: 1
+    members: 1
+    factor: 1.8338922243094304
+    profile:
+    - 200.0
+    - 200.0
+    - 199.4
+    - 200.0
+    - 199.4
+    - 119.6
+    - null
+    - null
+    - null
+    weapons:
+    - FlakGuyAAWH
+  HitscanFire_Inf_2:
+    family: BulletFire
+    status: proposed
+    why: instant-hit incendiary rounds
+    band: infantry
+    delivery: Hitscan
+    element: Fire
+    uses: 1
+    members: 1
+    factor: 1.353470032051124
+    profile:
+    - 79.7
+    - 79.7
+    - 59.8
+    - 200.0
+    - 200.0
+    - 200.0
+    - 179.4
+    - 200.0
+    - 139.6
+    weapons:
+    - QuakeWeaponWH
+  HitscanHE_Def:
+    family: BulletHE
+    status: proposed
+    why: instant-hit with an explosive payload
+    band: defense
+    delivery: Hitscan
+    element: HE
+    uses: 1
+    members: 1
+    factor: 2.0000000000007496
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    weapons:
+    - GeneburstWH
+  HitscanHE_Def_2:
+    family: BulletHE
+    status: proposed
+    why: instant-hit with an explosive payload
+    band: defense
+    delivery: Hitscan
+    element: HE
+    uses: 1
+    members: 1
+    factor: 1.585741530425959
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 99.7
+    - 99.7
+    - 99.7
+    weapons:
+    - MercuryStrikeWH
+  HitscanHE_Def_3:
+    family: BulletHE
+    status: proposed
+    why: instant-hit with an explosive payload
+    band: defense
+    delivery: Hitscan
+    element: HE
+    uses: 1
+    members: 1
+    factor: 2.0000000000007496
+    profile:
+    - null
+    - null
+    - null
+    - 200.0
+    - 200.0
+    - 200.0
+    - null
+    - null
+    - null
+    weapons:
+    - NuclearPathWH
+  HitscanHE_Veh_3:
+    family: BulletHE
+    status: proposed
+    why: instant-hit with an explosive payload
+    band: vehicle
+    delivery: Hitscan
+    element: HE
+    uses: 1
+    members: 1
+    factor: 0.19958204536121804
+    profile:
+    - 19.9
+    - 19.9
+    - 19.9
+    - 39.9
+    - 39.9
+    - 39.9
+    - 10.0
+    - 10.0
+    - 10.0
+    weapons:
+    - GravitronFieldWH
+  HitscanHE_Veh_4:
+    family: BulletHE
+    status: proposed
+    why: instant-hit with an explosive payload
+    band: vehicle
+    delivery: Hitscan
+    element: HE
+    uses: 1
+    members: 1
+    factor: 0.8269674458592746
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 99.7
+    - 59.8
+    - 59.8
+    - 39.9
+    - 39.9
+    - 39.9
+    weapons:
+    - HydraSSA
+  HitscanHE_Veh_5:
+    family: BulletHE
+    status: proposed
+    why: instant-hit with an explosive payload
+    band: vehicle
+    delivery: Hitscan
+    element: HE
+    uses: 1
+    members: 1
+    factor: 1.3033491550899585
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 99.7
+    - 99.7
+    - 79.7
+    - 119.6
+    - 119.6
+    - 119.6
+    weapons:
+    - ShadrayWaveWH
+  HitscanKinetic_Def:
+    family: Bullet
+    status: proposed
+    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    band: defense
+    delivery: Hitscan
+    element: Kinetic
+    uses: 1
+    members: 1
+    factor: 0.6319659638572084
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 79.7
+    - 39.9
+    - 39.9
+    - 39.9
+    - 19.9
+    - 19.9
+    weapons:
+    - CamoSA
+  HitscanKinetic_Inf_5:
+    family: Bullet
+    status: proposed
+    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    band: infantry
+    delivery: Hitscan
+    element: Kinetic
+    uses: 1
+    members: 1
+    factor: 1.0023866280471165
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 79.7
+    - 39.9
+    - 39.9
+    - null
+    - null
+    - null
+    weapons:
+    - HollowPointSEAL
+  HitscanKinetic_Inf_6:
+    family: Bullet
+    status: proposed
+    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    band: infantry
+    delivery: Hitscan
+    element: Kinetic
+    uses: 1
+    members: 1
+    factor: 0.4299864820337252
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 19.9
+    - 19.9
+    - 19.9
+    - 19.9
+    - 19.9
+    - 19.9
+    weapons:
+    - RiotGunWH
+  HitscanKinetic_Inf_7:
+    family: Bullet
+    status: proposed
+    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    band: infantry
+    delivery: Hitscan
+    element: Kinetic
+    uses: 1
+    members: 1
+    factor: 1.1671628817300133
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 199.4
+    - 99.7
+    - 79.7
+    - 99.7
+    - 79.7
+    - 39.9
+    weapons:
+    - SAFlame
+  HitscanKinetic_Veh_5:
+    family: Bullet
+    status: proposed
+    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    band: vehicle
+    delivery: Hitscan
+    element: Kinetic
+    uses: 1
+    members: 1
+    factor: 0.8650756924199485
+    profile:
+    - 200.0
+    - 200.0
+    - 199.4
+    - 200.0
+    - 119.6
+    - 59.8
+    - 59.8
+    - 19.9
+    - 19.9
+    weapons:
+    - GattAAWH
+  HitscanKinetic_Veh_6:
+    family: Bullet
+    status: proposed
+    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    band: vehicle
+    delivery: Hitscan
+    element: Kinetic
+    uses: 1
+    members: 1
+    factor: 0.7140147141029456
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 159.5
+    - 79.7
+    - 59.8
+    - 19.9
+    - 19.9
+    - 19.9
+    weapons:
+    - HARVWH
+  HitscanKinetic_Veh_7:
+    family: Bullet
+    status: proposed
+    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    band: vehicle
+    delivery: Hitscan
+    element: Kinetic
+    uses: 1
+    members: 1
+    factor: 1.1401530054125173
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 179.4
+    - 99.7
+    - 79.7
+    - 79.7
+    - 59.8
+    - 59.8
+    weapons:
+    - VultureSA
+  HitscanRadiation_Inf_2:
+    family: Nuclear
+    status: proposed
+    why: rad beams and eruptions
+    band: infantry
+    delivery: Hitscan
+    element: Radiation
+    uses: 1
+    members: 1
+    factor: 1.7140570232309298
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 199.4
+    - 159.5
+    - 99.7
+    - null
+    - null
+    - null
+    weapons:
+    - KrukovRadBeamWH
+  HitscanTesla_Def:
+    family: BulletTesla
+    status: proposed
+    why: instant-hit electrified rounds
+    band: defense
+    delivery: Hitscan
+    element: Tesla
+    uses: 1
+    members: 1
+    factor: 1.2879648677301059
+    profile:
+    - null
+    - null
+    - null
+    - 200.0
+    - 200.0
+    - 200.0
+    - 119.6
+    - 79.7
+    - 59.8
+    weapons:
+    - WarRigDrillsWH
+  HitscanTesla_Veh_2:
+    family: BulletTesla
+    status: proposed
+    why: instant-hit electrified rounds
+    band: vehicle
+    delivery: Hitscan
+    element: Tesla
+    uses: 1
+    members: 1
+    factor: 1.373222064179545
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 199.4
+    - 179.4
+    - 159.5
+    - 79.7
+    - 79.7
+    - 59.8
+    weapons:
+    - SeawolfHE
+  HitscanToxin_Veh_2:
+    family: BulletChem
+    status: proposed
+    why: instant-hit chemical rounds
+    band: vehicle
+    delivery: Hitscan
+    element: Toxin
+    uses: 1
+    members: 1
+    factor: 0.7140147141029456
+    profile:
+    - 79.7
+    - 79.7
+    - 59.8
+    - 200.0
+    - 200.0
+    - 200.0
+    - 19.9
+    - 39.9
+    - 19.9
+    weapons:
+    - SonicRayWH
+  Hitscan_Inf_5:
+    family: Bullet
+    status: proposed
+    why: 'instant-hit, no element stated: plain small arms'
+    band: infantry
+    delivery: Hitscan
+    element: Plain
+    uses: 1
+    members: 1
+    factor: 0.44721359550012574
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 10.0
+    - 10.0
+    - 10.0
+    - null
+    - null
+    - null
+    weapons:
+    - VirusAttach
+  LaserHE_Def_3:
+    family: Laser
+    status: proposed
+    why: 'a laser whose victims explode: the death animation is not the element'
+    band: defense
+    delivery: Laser
+    element: HE
+    uses: 1
+    members: 1
+    factor: 1.5596492860700744
+    profile:
+    - 119.6
+    - 119.6
+    - 99.7
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 119.6
+    - 200.0
+    weapons:
+    - NeutralizerWeldWH
+  LaserHE_Inf_2:
+    family: Laser
+    status: proposed
+    why: 'a laser whose victims explode: the death animation is not the element'
+    band: infantry
+    delivery: Laser
+    element: HE
+    uses: 1
+    members: 1
+    factor: 0.11962403741541532
+    profile:
+    - null
+    - null
+    - null
+    - 12.0
+    - 12.0
+    - 12.0
+    - null
+    - null
+    - null
+    weapons:
+    - EMPYunru
+  LaserHE_Inf_3:
+    family: Laser
+    status: proposed
+    why: 'a laser whose victims explode: the death animation is not the element'
+    band: infantry
+    delivery: Laser
+    element: HE
+    uses: 1
+    members: 1
+    factor: 1.2549007588268983
+    profile:
+    - 99.7
+    - 79.7
+    - 79.7
+    - 200.0
+    - 200.0
+    - 200.0
+    - 159.5
+    - 79.7
+    - 119.6
+    weapons:
+    - NeonWeldWH
+  LaserHE_Veh_2:
+    family: Laser
+    status: proposed
+    why: 'a laser whose victims explode: the death animation is not the element'
+    band: vehicle
+    delivery: Laser
+    element: HE
+    uses: 1
+    members: 1
+    factor: 2.0000000000007496
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - null
+    - null
+    - null
+    weapons:
+    - BlizzardAAWH
+  LaserHE_Veh_3:
+    family: Laser
+    status: proposed
+    why: 'a laser whose victims explode: the death animation is not the element'
+    band: vehicle
+    delivery: Laser
+    element: HE
+    uses: 1
+    members: 1
+    factor: 1.1825379342344315
+    profile:
+    - 199.4
+    - 199.4
+    - 99.7
+    - 200.0
+    - 200.0
+    - 200.0
+    - 59.8
+    - 59.8
+    - 39.9
+    weapons:
+    - FutureAP
+  LaserHE_Veh_4:
+    family: Laser
+    status: proposed
+    why: 'a laser whose victims explode: the death animation is not the element'
+    band: vehicle
+    delivery: Laser
+    element: HE
+    uses: 1
+    members: 1
+    factor: 1.3374662054868418
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 59.8
+    - 59.8
+    - 59.8
+    weapons:
+    - MarauderRailgunWH
+  LaserHE_Veh_5:
+    family: Laser
+    status: proposed
+    why: 'a laser whose victims explode: the death animation is not the element'
+    band: vehicle
+    delivery: Laser
+    element: HE
+    uses: 1
+    members: 1
+    factor: 1.5596492860700744
+    profile:
+    - 119.6
+    - 119.6
+    - 99.7
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 119.6
+    - 200.0
+    weapons:
+    - RamWeldWH
+  LaserKinetic_Veh:
+    family: Laser
+    status: proposed
+    why: laser, kinetic death animation
+    band: vehicle
+    delivery: Laser
+    element: Kinetic
+    uses: 1
+    members: 1
+    factor: 2.0000000000007496
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    weapons:
+    - StunGunWH
+  LaserTesla_Def:
+    family: Quantum
+    status: proposed
+    why: laser x tesla is the Quantum blend by the delivery grid
+    band: defense
+    delivery: Laser
+    element: Tesla
+    uses: 1
+    members: 1
+    factor: 1.3033491550899585
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 179.4
+    - 119.6
+    - 79.7
+    - 99.7
+    - 99.7
+    - 79.7
+    weapons:
+    - EmitterWarhead
+  LaserTesla_Veh:
+    family: Quantum
+    status: proposed
+    why: laser x tesla is the Quantum blend by the delivery grid
+    band: vehicle
+    delivery: Laser
+    element: Tesla
+    uses: 1
+    members: 1
+    factor: 1.3033491550899585
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 179.4
+    - 119.6
+    - 79.7
+    - 99.7
+    - 99.7
+    - 79.7
+    weapons:
+    - JackalWarhead
+  LaserToxin_Inf:
+    family: Laser
+    status: proposed
+    why: laser, toxin death animation
+    band: infantry
+    delivery: Laser
+    element: Toxin
+    uses: 1
+    members: 1
+    factor: 2.0000000000007496
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    weapons:
+    - IceBeamWH
+  LaserToxin_Veh:
+    family: Laser
+    status: proposed
+    why: laser, toxin death animation
+    band: vehicle
+    delivery: Laser
+    element: Toxin
+    uses: 1
+    members: 1
+    factor: 1.1087559747020541
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 199.4
+    - 179.4
+    - 139.6
+    - 39.9
+    - 39.9
+    - 39.9
+    weapons:
+    - BlizzardBeamWH
+  Laser_Def_2:
+    family: Laser
+    status: proposed
+    why: coherent light, no payload
+    band: defense
+    delivery: Laser
+    element: Plain
+    uses: 1
+    members: 1
+    factor: 1.5547750642055824
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 199.4
+    - 139.6
+    - 99.7
+    - 59.8
+    weapons:
+    - MonolithLaserWH
+  Laser_Veh_5:
+    family: Laser
+    status: proposed
+    why: coherent light, no payload
+    band: vehicle
+    delivery: Laser
+    element: Plain
+    uses: 1
+    members: 1
+    factor: 1.2459341203224543
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 119.6
+    - 119.6
+    - 99.7
+    - 99.7
+    - 79.7
+    - 79.7
+    weapons:
+    - DiskLaserWH
+  MissileFire_Def_3:
+    family: MissileFire
+    status: proposed
+    why: steered incendiary, anti-armour in 7 of 11 measurable
+    band: defense
+    delivery: Missile
+    element: Fire
+    uses: 1
+    members: 1
+    factor: 0.4304364745554393
+    profile:
+    - 39.9
+    - 39.9
+    - 39.9
+    - 200.0
+    - 200.0
+    - 200.0
+    - 10.0
+    - 10.0
+    - 10.0
+    weapons:
+    - CannonBunkerWH
+  MissileFire_Def_4:
+    family: MissileFire
+    status: proposed
+    why: steered incendiary, anti-armour in 7 of 11 measurable
+    band: defense
+    delivery: Missile
+    element: Fire
+    uses: 1
+    members: 1
+    factor: 0.40399948828715976
+    profile:
+    - 39.9
+    - 39.9
+    - 39.9
+    - 59.8
+    - 59.8
+    - 39.9
+    - 39.9
+    - 39.9
+    - 19.9
+    weapons:
+    - WallbusterWH
+  MissileFire_Inf_2:
+    family: MissileFire
+    status: proposed
+    why: steered incendiary, anti-armour in 7 of 11 measurable
+    band: infantry
+    delivery: Missile
+    element: Fire
+    uses: 1
+    members: 1
+    factor: 2.0000000000007496
+    profile:
+    - null
+    - null
+    - null
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    weapons:
+    - ARMORAP
+  MissileFire_Inf_3:
+    family: MissileFire
+    status: proposed
+    why: steered incendiary, anti-armour in 7 of 11 measurable
+    band: infantry
+    delivery: Missile
+    element: Fire
+    uses: 1
+    members: 1
+    factor: 0.7955947939204246
+    profile:
+    - null
+    - null
+    - null
+    - 200.0
+    - 200.0
+    - 200.0
+    - 39.9
+    - 39.9
+    - 19.9
+    weapons:
+    - GiantsbaneWH
+  MissileFire_Veh_4:
+    family: MissileFire
+    status: proposed
+    why: steered incendiary, anti-armour in 7 of 11 measurable
+    band: vehicle
+    delivery: Missile
+    element: Fire
+    uses: 1
+    members: 1
+    factor: 1.081777523303079
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 39.9
+    - 39.9
+    - 19.9
+    weapons:
+    - PhantasmWH
+  MissileFire_Veh_5:
+    family: MissileFire
+    status: proposed
+    why: steered incendiary, anti-armour in 7 of 11 measurable
+    band: vehicle
+    delivery: Missile
+    element: Fire
+    uses: 1
+    members: 1
+    factor: 1.428729346955581
+    profile:
+    - null
+    - null
+    - null
+    - 200.0
+    - 199.4
+    - 179.4
+    - 119.6
+    - 99.7
+    - 99.7
+    weapons:
+    - WOLFWH
+  MissileHE_Air:
+    family: MissileHE
+    status: proposed
+    why: steered explosive
+    band: aircraft
+    delivery: Missile
+    element: HE
+    uses: 1
+    members: 1
+    factor: 1.9496622114975808
+    profile:
+    - 200.0
+    - 200.0
+    - 199.4
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 159.5
+    weapons:
+    - LeviWH
+  MissileHE_Inf_2:
+    family: MissileHE
+    status: proposed
+    why: steered explosive
+    band: infantry
+    delivery: Missile
+    element: HE
+    uses: 1
+    members: 1
+    factor: 1.1222033474229016
+    profile:
+    - 39.9
+    - 39.9
+    - 39.9
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 139.6
+    - 199.4
+    weapons:
+    - Eureka1WH
+  MissileHE_Veh_2:
+    family: MissileHE
+    status: proposed
+    why: steered explosive
+    band: vehicle
+    delivery: Missile
+    element: HE
+    uses: 1
+    members: 1
+    factor: 0.6915523791622157
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 59.8
+    - 39.9
+    - 19.9
+    - 59.8
+    - 39.9
+    - 39.9
+    weapons:
+    - CondorWH
+  MissileHE_Veh_3:
+    family: MissileHE
+    status: proposed
+    why: steered explosive
+    band: vehicle
+    delivery: Missile
+    element: HE
+    uses: 1
+    members: 1
+    factor: 1.1483583668939448
+    profile:
+    - 159.5
+    - 119.6
+    - 119.6
+    - 200.0
+    - 200.0
+    - 200.0
+    - 79.7
+    - 59.8
+    - 39.9
+    weapons:
+    - MirageWH
+  MissileHE_Veh_4:
+    family: MissileHE
+    status: proposed
+    why: steered explosive
+    band: vehicle
+    delivery: Missile
+    element: HE
+    uses: 1
+    members: 1
+    factor: 0.11962403741541532
+    profile:
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - 12.0
+    - 12.0
+    - 12.0
+    weapons:
+    - RamHackArenaWH
+  MissileTesla_Def:
+    family: MissileTesla
+    status: proposed
+    why: steered electric
+    band: defense
+    delivery: Missile
+    element: Tesla
+    uses: 1
+    members: 1
+    factor: 1.7049447690499606
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 119.6
+    - 199.4
+    - 79.7
+    weapons:
+    - FuryWH
+  MissileToxin_Veh_3:
+    family: MissileChem
+    status: proposed
+    why: steered chemical
+    band: vehicle
+    delivery: Missile
+    element: Toxin
+    uses: 1
+    members: 1
+    factor: 1.4615536443649
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 99.7
+    - 79.7
+    - 59.8
+    weapons:
+    - CenturionMissilesWH
+  MissileToxin_Veh_4:
+    family: MissileChem
+    status: proposed
+    why: steered chemical
+    band: vehicle
+    delivery: Missile
+    element: Toxin
+    uses: 1
+    members: 1
+    factor: 1.3086264478708696
+    profile:
+    - 79.7
+    - 79.7
+    - 79.7
+    - 200.0
+    - 200.0
+    - 199.4
+    - 200.0
+    - 139.6
+    - 99.7
+    weapons:
+    - SwordfishWH
+  Missile_Air:
+    family: MissileHE
+    status: proposed
+    why: 'steered, no element: the default missile'
+    band: aircraft
+    delivery: Missile
+    element: Plain
+    uses: 1
+    members: 1
+    factor: 1.6381269859003453
+    profile:
+    - 200.0
+    - 200.0
+    - 159.5
+    - 139.6
+    - 119.6
+    - 99.7
+    - 200.0
+    - 200.0
+    - 200.0
+    weapons:
+    - VentrexWH
+  RailgunHE_Inf:
+    family: Railgun
+    status: proposed
+    why: genuine IsRailgun weapon
+    band: infantry
+    delivery: Railgun
+    element: HE
+    uses: 1
+    members: 1
+    factor: 2.0000000000007496
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    weapons:
+    - AssasinWH
+  RailgunTesla_Inf:
+    family: Quantum
+    status: proposed
+    why: railgun x tesla is the Quantum blend
+    band: infantry
+    delivery: Railgun
+    element: Tesla
+    uses: 1
+    members: 1
+    factor: 2.0000000000007496
+    profile:
+    - null
+    - null
+    - null
+    - 200.0
+    - 200.0
+    - 200.0
+    - null
+    - null
+    - null
+    weapons:
+    - AlizeGunWH
+  Railgun_Veh:
+    family: '(drop: not a damage warhead)'
+    status: proposed
+    why: ChronoImprisonWH — an imprison effect. It carries IsRailgun for the beam visual, which is the
+      R48 flag doing its real job
+    band: vehicle
+    delivery: Railgun
+    element: Plain
+    uses: 1
+    members: 1
+    factor: 0.11962403741541532
+    profile:
+    - null
+    - null
+    - null
+    - 12.0
+    - 12.0
+    - 12.0
+    - null
+    - null
+    - null
+    weapons:
+    - ChronoImprisonWH
+  TeslaHE_Veh_2:
+    family: Tesla
+    status: proposed
+    why: electric bolt
+    band: vehicle
+    delivery: Tesla
+    element: HE
+    uses: 1
+    members: 1
+    factor: 1.0757561245821137
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 199.4
+    - 159.5
+    - 119.6
+    - 39.9
+    - 39.9
+    - 39.9
+    weapons:
+    - WormqueenBoltWH
+overrides: {}
