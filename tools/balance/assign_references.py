@@ -196,6 +196,11 @@ NAME_ALIASES = {
     # as the same unit.
     "aagun": ("antiaircraftgun", "antiaircraft"),
     "alliedaagun": ("antiaircraftgun",),
+    # OpenRA Red Alert names the Soviet flame infantry `E4` "Flame Infantry" — the same unit
+    # every other source calls a Flamethrower. Verified 2026-09-22: E4 is soviet-tagged,
+    # admissible to `ra1_soviets`, and was claimed by nobody; no other admissible row carries
+    # the name, and no other Cameo actor tail ends in `flamethrower` within E4's routes.
+    "flamethrower": ("flameinfantry",),
 }
 
 # Applied to the peer's ID ONLY. A mod's id frequently preserves the unit's original identity
@@ -205,6 +210,13 @@ ID_ALIASES = {
     "ssmlauncher": ("mlrs",),
     # Combined Arms and OpenRA both id the MLRS `MSAM`.
     "mlrs": ("msam",),
+    # Two Tiberian-Sun-descendant mods independently rename GDI's Light Infantry "Marine" —
+    # Shattered Paradise `GDIE1` and Crystallized Nexus `GASOL`, both gdi-tagged and admissible
+    # to `ts_gdi` only (verified 2026-09-22: these are the only exact "Marine" rows in the
+    # corpus, and both were unclaimed). Scoped to ids so the generic word can never fire on a
+    # different unit; the `ts_nod` light infantry reaches SP/TI through REFERENCE_OVERRIDES
+    # below instead, because those sources give the Nod side to other ids entirely.
+    "lightinfantry": ("gdie1", "gasol"),
 }
 
 
@@ -1158,7 +1170,6 @@ REFERENCE_OVERRIDES = {
     # The Tiger is a Cameo expansion with no CA counterpart, so it gets none: an empty slot is a
     # question, a stolen row is a wrong answer that also breaks two correct mappings.
     ("ra1_allies_bastionartillerybunker", "Combined Arms"): "HTUR",  # Grand Cannon
-    ("ra1_allies_alliedheavyaatank", "DTA Enhanced"): "SHILKA",      # Quad Tank
     # Red Alert, Soviets:
     # ⚠ CA ships TWO rows named "SAM Site" with identical faction lists — `NSAM` (Nod's) and `SAM`
     # (the Soviet one). The NAME cannot separate them and the id can, exactly like the AA Gun pair.
@@ -1183,6 +1194,11 @@ REFERENCE_OVERRIDES = {
     # MFLAK frees SHILKA for the Soviet gatling tank, so both get a real row and the
     # one-row-one-actor rule holds. The maintainer named this one; it is not a workaround.
     ("ra1_allies_alliedheavyaatank", "DTA Enhanced"): "MFLAK",   # "Anti-Aircraft Truck", Allies
+    # …and the freed row lands on the unit it was freed for. `SHILKA` "Quad Tank" is the same
+    # quad-AA chassis as the Gattling Tank; Soviet-tagged, admissible, and verified unclaimed
+    # 2026-09-22 (the earlier `alliedheavyaatank -> SHILKA` line above this block was dead —
+    # the dict kept only the maintainer's MFLAK ruling; the stale key has been removed).
+    ("ra1_soviets_gatlingtank", "DTA Enhanced"): "SHILKA",
 
     # ── Round six, 2026-09-09. Aedis's DM 22:33 under Blackrobe's overnight authority: the
     # V1 Rocket Truck maps to Combined Arms' KATY and is renamed Katyusha for players. The

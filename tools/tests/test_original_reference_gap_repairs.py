@@ -24,6 +24,15 @@ EXPECTED = {
     ("ts_gdi_mobilesensorarray", "Crystallized Nexus"): "LPST",
     ("ts_nod_lightinfantry", "Shattered Paradise"): "ALTNODE1",
     ("ts_nod_lightinfantry", "Twisted Insurrection"): "E1NOD",
+    ("ra1_soviets_gatlingtank", "DTA Enhanced"): "SHILKA",
+}
+
+# Rows the ALIAS tables must fill — not REFERENCE_OVERRIDES pins, so the override-map
+# assertion does not apply; they land through `name_score` alone.
+EXPECTED_ALIAS_FILLED = {
+    ("ra1_soviets_flamethrower", "OpenRA Red Alert"): "E4",
+    ("ts_gdi_lightinfantry", "Shattered Paradise"): "GDIE1",
+    ("ts_gdi_lightinfantry", "Crystallized Nexus"): "GASOL",
 }
 
 EXPECTED_NAMES = {
@@ -37,6 +46,10 @@ EXPECTED_NAMES = {
     ("Crystallized Nexus", "LPST"): "Mobile Sensor Array",
     ("Shattered Paradise", "ALTNODE1"): "Militant",
     ("Twisted Insurrection", "E1NOD"): "Militant",
+    ("DTA Enhanced", "SHILKA"): "Quad Tank",
+    ("Shattered Paradise", "GDIE1"): "Marine",
+    ("Crystallized Nexus", "GASOL"): "Marine",
+    ("OpenRA Red Alert", "E4"): "Flame Infantry",
 }
 
 
@@ -56,8 +69,14 @@ class OriginalReferenceGapRepairs(unittest.TestCase):
 
     def test_completed_gaps_have_three_or_more_sources(self):
         for actor in ("ra2_soviets_sentrygun", "ts_gdi_mobileconstructionvehicle",
-                      "ts_gdi_mobilesensorarray", "ts_nod_lightinfantry"):
+                      "ts_gdi_mobilesensorarray", "ts_nod_lightinfantry",
+                      "ts_gdi_lightinfantry", "ra1_soviets_flamethrower"):
             self.assertGreaterEqual(len(self.saved[actor]), 3, actor)
+
+    def test_alias_rows_land_in_the_generated_assignment(self):
+        for (actor, source), peer_id in EXPECTED_ALIAS_FILLED.items():
+            self.assertEqual(peer_id, self.saved[actor][source]["id"].upper(), (actor, source))
+            self.assertEqual("STRONG", self.saved[actor][source]["confidence"], (actor, source))
 
     def test_peer_rows_have_the_exact_reviewed_id_and_name(self):
         rows = (distribution.peer_rows() + distribution.peer_variant_rows()
@@ -68,7 +87,7 @@ class OriginalReferenceGapRepairs(unittest.TestCase):
             self.assertEqual(name, index[key]["name"], key)
 
     def test_new_rows_remain_unique_in_the_assignment(self):
-        for (actor, source), peer_id in EXPECTED.items():
+        for (actor, source), peer_id in {**EXPECTED, **EXPECTED_ALIAS_FILLED}.items():
             claims = [other for other, refs in self.saved.items()
                       if str(refs.get(source, {}).get("id") or "").upper() == peer_id]
             self.assertEqual([actor], claims, (source, peer_id))
