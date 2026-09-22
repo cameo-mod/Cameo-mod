@@ -3175,6 +3175,12 @@ the moment §12.0h renormalised everything.
 
 ### 12.0d THE CLASS TILT (maintainer 2026-08-16) — binding
 
+> ⚠ **The thing this tilts on is being retired.** §12.0d keys the tilt on the warhead's LEVEL;
+> §12.0j (2026-09-21) retires `_Light` / `_Medium` / `_Heavy` and re-keys the tilt onto the FIRING
+> UNIT's tier, computed from its prerequisite chain cost. The tilt itself survives — its input
+> changes from a hand-assigned label to a measured number. Binding as written until the §12.0j
+> regeneration runs; do not build anything new on the level.
+
 Within a family, each LEVEL tilts toward one end of every armor ladder:
 
 | level | tilts toward | |
@@ -3338,6 +3344,12 @@ until item A5 retires them onto `^Warhead_*` templates. This is a reason to fini
 reason to avoid the rule.
 
 ### 12.0h THE MEAN-100 LAW (maintainer, 2026-08-16) — binding, supersedes median-100
+
+> ⚠ **The ARITHMETIC mean below is the law for the templates as they ship TODAY.** §12.0j rules
+> that the ONE regeneration following the reference mapping normalises to the **GEOMETRIC** mean
+> instead, because that is the condition under which two matrices compose without moving total
+> magnitude. Measured: Cameo's template matrix currently sits at a geometric mean of **79.8**, so
+> the two are not the same number. Until that regeneration runs, everything below binds unchanged.
 
 > *"all warheads average all versus values at 100 to make them comparable"*
 
@@ -3608,6 +3620,12 @@ needs three things for backup systems:
 
 ### 12.0i CONTINUOUS HEAVINESS — the global armor axis and the bell (maintainer 2026-08-23/24) — binding
 
+> ⚠ **The axis below is unchanged; where `h` COMES FROM changes.** This section reads `h` off the
+> warhead's LEVEL as 0 / 1 / 2. §12.0j (2026-09-21) retires the level and derives `h` from the
+> FIRING UNIT's prerequisite chain cost instead, `h = 2 × (1 − f(C))`, which is continuous rather
+> than three buckets. The bell, `mu = (h + COM) / 2`, `LO`, `sigma` and the rank restore are all
+> untouched — they simply receive a measured input instead of a hand-assigned one.
+
 Replaces the discrete `Light/Medium/Heavy/Super` LEVEL with a continuous heaviness `h`. Full
 derivation and the measurements behind every constant: `docs/design/WEAPON_HEAVINESS.md` §9.
 
@@ -3764,6 +3782,55 @@ Heaviness 0..2000. Omitted mode keeps legacy behavior, including existing healin
 and standalone percentage warheads. This is an intentional gameplay change,
 not an equivalence-preserving refactor. Initial activation is limited to five
 CannonAP pilot definitions; it does not authorize automatic whole-roster fitting.
+
+### 12.0j THE LEVEL RETIRES; `h` COMES FROM THE UNIT (maintainer 2026-09-21) — binding, PLANNED
+
+> *"the tilt is only from the unit class itself with the heaviness bell curve applying from the
+> unit tier by credits required for all prerequisites including the promotions … the higher the
+> cost … the more the heaviness bell curve is pushed towards the heavy side."*
+
+⛔ **NOT YET IMPLEMENTED, AND DELIBERATELY SO.** This is the shape of ONE regeneration that happens
+**after** the reference mapping completes, never before and never piecemeal:
+*"hold off the weapon warhead changes until we have successfully mapped it from our reference
+data … so this should be a big all in one change."*
+
+**What changes.** `^Warhead_<Family>_<Level>` becomes `^Warhead_<Family>`. The `_Light` / `_Medium`
+/ `_Heavy` suffix is retired: **147 templates across 50 families become 50**, and the 1,147 concrete
+weapons that inherit a level are re-pointed. Families already carry the delivery × element grammar
+(`BulletChem`, `CannonCryo`, `MissileTesla`), so 50 is a real vocabulary, not a collapse.
+
+**Where the tilt goes.** §12.0d keyed the tilt on the LEVEL, and there is no level any more. It is
+re-keyed onto the **firing unit**:
+
+```
+C = Σ(prerequisite building costs)  +  1500 × promotion tiers      ← tools/balance/tier_chain.py
+f(C) = 1 / (1 + (C − B) / S)                B = 9500, S = 8250     ← already shipped, already
+h = 2 × (1 − f(C))                                                   used by the pricing formula
+```
+
+Barracks-only lands at `h = 0`; a Tier-4 chain approaches `h = 2`. ⭐ **The measurement layer
+already exists** — `tier_chain.py` resolves prerequisite chains to a cumulative cost and scopes
+providers to the actor's own ContentPack, so a Nod unit is never priced off a GDI ConYard. The only
+new term is the 1500-credit promotion tier. This replaces a hand-assigned label with a number the
+tech tree maintains itself, which is what the 2026-08-11 standing order asks for.
+
+**How it is applied.** A new warhead class in `OpenRA.Mods.Cameo` reads the source actor's tier
+from `WarheadArgs` and tilts the profile at impact, so the family keeps ONE shape and the tilt is
+CONTINUOUS rather than three buckets. ⚠ Two dependencies: **3,067 weapons still use the engine's
+`SpreadDamage`** against 3,991 on Cameo's `AreaDamage` (the "universal conversion COMPLETE" note is
+stale), so either that conversion finishes or `SpreadDamage` is shadowed; and the family keeps
+supplying the tilt's DIRECTION while `h` supplies only its MAGNITUDE, or a Tier-4 AA gun tilts
+heavy-ward and stops being anti-light.
+
+**The normalisation moves too.** §12.0h normalises each row to ARITHMETIC mean 100. The regenerated
+templates are normalised to **GEOMETRIC** mean 100, because that is the condition under which two
+matrices compose without moving total magnitude — `prod(cell / 100) == 1`. Measured: Cameo's
+template matrix sits at a geometric mean of **79.8**, so this is a real move, not a rename.
+
+**Uniqueness survives the averaging.** The reference merge sets each family's position; where two
+families then land on top of each other they are separated along the axis on which the sources
+disagreed MOST, because that is where the field is least certain and we have the most licence to
+choose. Authenticity decides everything it can; uniqueness decides only the collisions.
 
 ## 16. Rank decorations, experience systems & elite weapons
 
