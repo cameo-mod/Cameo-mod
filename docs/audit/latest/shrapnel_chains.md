@@ -8,7 +8,7 @@
 | S3 | DEEP (> 6 bounces, review only) | 0 | - |  |
 
 
-194 weapon(s) fire shrapnel; 194 chain(s) walked.
+199 weapon(s) fire shrapnel; 199 chain(s) walked.
 
 
 **PASS** - 0 multi-node cycle(s), 0 self-cycle(s), 0 dangling.

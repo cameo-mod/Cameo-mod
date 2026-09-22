@@ -8,6 +8,6 @@
 
 ## PASS
 - Shared non-tuning fields are byte-identical across all five instances.
-- GrantRandomCondition and squad-manager condition sets match exactly.
+- BotPersonalityController and squad-manager condition sets match exactly.
 - Personality conditions have exactly one matching notification block each.
 - No dead RushInterval/RushAttackScanRadius keys remain.

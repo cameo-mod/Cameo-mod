@@ -1,6 +1,6 @@
 # audit_fluent — localization drift (B12)
 
-Fluent messages loaded: **5254** — unresolved fluent refs in rules: **0**, orphaned actor-* messages: **529**
+Fluent messages loaded: **5588** — unresolved fluent refs in rules: **0**, orphaned actor-* messages: **534**
 
 
 ## F1 — rules reference fluent keys that don't exist (shows raw key in-game)
@@ -64,6 +64,7 @@ _none found_
 | actor_cheme3 |
 | actor_cleg |
 | actor_cmin |
+| actor_combat_tank_harkonnen |
 | actor_ctnk |
 | actor_d2k_munitions |
 | actor_deso |
@@ -76,6 +77,7 @@ _none found_
 | actor_dron |
 | actor_dtrk |
 | actor_duelist_tank |
+| actor_duelist_tank_ixian |
 | actor_e2 |
 | actor_e4 |
 | actor_e5 |
@@ -141,6 +143,8 @@ _none found_
 | actor_hakurei |
 | actor_havoc |
 | actor_hbox |
+| actor_heavy_inf_ixian |
+| actor_heavy_rocket_raider_ixian |
 | actor_heavyaatank |
 | actor_heli |
 | actor_high_tech_factory |
@@ -260,6 +264,7 @@ _none found_
 | actor_rasniper |
 | actor_robo |
 | actor_rocket_raider |
+| actor_rocket_raider_ixian |
 | actor_rocketangel |
 | actor_sam |
 | actor_sapc |
@@ -548,18 +553,18 @@ _none found_
 | faction | fluent/total tooltips | coverage |
 |---|---|---|
 | asianalliance | 0/78 | 0% |
-| atreides | 0/32 | 0% |
+| atreides | 11/32 | 34% |
 | cabal | 0/84 | 0% |
-| corrino | 0/33 | 0% |
+| corrino | 15/33 | 45% |
 | eden | 0/45 | 0% |
 | forgotten | 78/81 | 96% |
 | futuretech | 0/59 | 0% |
-| harkonnen | 3/61 | 4% |
-| ixian | 0/90 | 0% |
+| harkonnen | 24/72 | 33% |
+| ixian | 31/88 | 35% |
 | japan | 1/76 | 1% |
 | latinsyndicate | 0/71 | 0% |
 | naxis | 0/78 | 0% |
-| ordos | 0/96 | 0% |
+| ordos | 37/94 | 39% |
 | plymouth | 0/46 | 0% |
 | protoss | 0/74 | 0% |
 | ra1_allies | 1/74 | 1% |

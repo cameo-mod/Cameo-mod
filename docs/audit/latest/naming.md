@@ -6,13 +6,13 @@
 | faction | compliant | % | proposal collisions | asset files to rename | unrepairable stems |
 |---|---|---|---|---|---|
 | asianalliance | 73/73 | 100% | 0 | 1 | 6 |
-| atreides | 21/23 | 91% | 0 | 4 | 10 |
+| atreides | 21/23 | 91% | 0 | 8 | 10 |
 | cabal | 80/80 | 100% | 0 | 0 | 0 |
-| corrino | 22/25 | 88% | 0 | 5 | 1 |
+| corrino | 22/25 | 88% | 0 | 6 | 1 |
 | eden | 43/43 | 100% | 0 | 0 | 0 |
 | forgotten | 78/78 | 100% | 0 | 1 | 0 |
 | futuretech | 56/56 | 100% | 0 | 1 | 0 |
-| harkonnen | 27/35 | 77% | 0 | 1 | 1 |
+| harkonnen | 40/48 | 83% | 0 | 2 | 2 |
 | ixian | 60/65 | 92% | 0 | 2 | 0 |
 | japan | 68/68 | 100% | 0 | 1 | 0 |
 | latinsyndicate | 65/65 | 100% | 0 | 0 | 0 |
@@ -43,13 +43,13 @@
 | faction | icons compliant | % |
 |---|---|---|
 | asianalliance | 56/57 | 98% |
-| atreides | 6/7 | 85% |
+| atreides | 8/8 | 100% |
 | cabal | 2/2 | 100% |
 | corrino | 1/1 | 100% |
 | eden | 41/41 | 100% |
 | forgotten | 58/58 | 100% |
 | futuretech | 43/43 | 100% |
-| harkonnen | 8/8 | 100% |
+| harkonnen | 12/12 | 100% |
 | ixian | 32/32 | 100% |
 | japan | 43/44 | 97% |
 | latinsyndicate | 45/45 | 100% |

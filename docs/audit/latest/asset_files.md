@@ -49,10 +49,10 @@ _none found_
 | mods/cameo/sequences/iok.yaml:262 | ra2_soviets_barracks_bib3.tem |
 | mods/cameo/sequences/iok.yaml:297 | ra2_soviets_barracks_bib3.tem |
 | mods/cameo/sequences/iok.yaml:521 | iokscud.shp |
-| mods/cameo/sequences/redalert2.yaml:3834 | cra2cmin.shp |
-| mods/cameo/sequences/redalert2.yaml:3854 | ra2ltnk.shp |
-| mods/cameo/sequences/redalert2.yaml:3864 | ra2howi.shp |
-| mods/cameo/sequences/redalert2.yaml:3877 | ra2arty.shp |
+| mods/cameo/sequences/redalert2.yaml:3889 | cra2cmin.shp |
+| mods/cameo/sequences/redalert2.yaml:3909 | ra2ltnk.shp |
+| mods/cameo/sequences/redalert2.yaml:3919 | ra2howi.shp |
+| mods/cameo/sequences/redalert2.yaml:3932 | ra2arty.shp |
 | mods/cameo/sequences/starcraft.yaml:34 | zergsoilmaker.shp |
 | mods/cameo/sequences/starcraft.yaml:60 | zergsoilmaker2.shp |
 | mods/cameo/sequences/starcraft.yaml:285 | scztruck.shp |

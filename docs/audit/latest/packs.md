@@ -4,7 +4,7 @@
 
 | prefix | in packs | outside packs | sample outside file |
 |---|---|---|---|
-| ra2 | 166 | 164 | mods\cameo\rules\misc.yaml |
+| ra2 | 179 | 164 | mods\cameo\rules\misc.yaml |
 | wc | 0 | 79 | mods\cameo\rules\warcraft1.yaml |
 | halloween | 0 | 39 | mods\cameo\rules\halloween.yaml |
 | sow | 0 | 38 | mods\cameo\rules\sow.yaml |
@@ -94,7 +94,7 @@
 | swlaat | 0 | 1 | mods\cameo\rules\starwars.yaml |
 | swxwing | 0 | 1 | mods\cameo\rules\starwars.yaml |
 | td_nod | 69 | 1 | mods\cameo\rules\tiberiaalliances.yaml |
-| ts | 0 | 1 | mods\cameo\rules\misc.yaml |
+| ts | 39 | 1 | mods\cameo\rules\misc.yaml |
 | upsusagunship3 | 0 | 1 | mods\cameo\rules\shockwave.yaml |
 | upusaleaflet | 0 | 1 | mods\cameo\rules\generals.yaml |
 | wc2 | 0 | 1 | mods\cameo\rules\warcraft2.yaml |
@@ -116,7 +116,7 @@
 | worms | 0 | 1 | mods\cameo\rules\worms.yaml |
 | zmcv | 0 | 1 | mods\cameo\rules\z.yaml |
 
-Fully converted prefixes (76): air, asianalliance, atreides, banshee, bomber, cabal, cargoship, carryall, cgcnst, combat, corrino, cruiser, cryo, d2k, deathcash, drone, duelist, egcnst, eye, farasha, forgotten, fremen, futuretech, grun, harbinger, harkonnen, heavy, heavydrone, inspect, ixian, japan, kami, landcarr, latinsyndicate, light, mig, missile, nax, naxis, ordos, ornithopter, pelican, phoenix, protoss, qacst, ra1_allies, ra1_badger, ra2_allies, ra2_soviets, ra2_yuri, ra2hind, resonance, rocket, schwarzermond, scrapcar, scrapcar2, siege, sietch, sonic, steelconsortium, swarmer, td_gdi, team, terran, tkm, ts_gdi, ts_nod, twister, up, upgrade, wc2_humans, wc2_orcs, wraith, yakolev, yuri, zerg
+Fully converted prefixes (83): air, asianalliance, atreides, banshee, bomber, cabal, cargoship, carryall, cgcnst, combat, corrino, cruiser, cryo, d2k, deathcash, drone, duelist, egcnst, eye, farasha, forgotten, fremen, futuretech, grun, harbinger, harkonnen, heavy, heavydrone, inspect, ixian, japan, kami, landcarr, latinsyndicate, light, mig, missile, nax, naxis, ordos, ornithopter, pelican, phoenix, protoss, qacst, ra1_allies, ra1_badger, ra2_allies, ra2_soviets, ra2_yuri, ra2hind, resonance, rocket, schwarzermond, scrapcar, scrapcar2, siege, sietch, sonic, steelconsortium, swarmer, td_gdi, team, terran, tkm, ts_bus, ts_gdi, ts_nod, ts_pickup, ts_pickupb, ts_sedan, ts_trucka, ts_truckb, ts_wini, twister, up, upgrade, wc2_humans, wc2_orcs, wraith, yakolev, yuri, zerg
 
 ## P2 — actors whose id does not match the pack's dominant prefix
 
@@ -210,10 +210,14 @@ Fully converted prefixes (76): air, asianalliance, atreides, banshee, bomber, ca
 
 ## P3 — content.yaml manifest vs disk / nonstandard filenames
 
-- `TiberianSun\GDI`: `misc.yaml` in content.yaml but MISSING on disk (crash risk)
+- `D2k\Atreides`: nonstandard filename `voices.yaml` (closed set, DESIGN §2)
+- `D2k\Harkonnen`: nonstandard filename `voices.yaml` (closed set, DESIGN §2)
+- `D2k\Ixian`: nonstandard filename `voices.yaml` (closed set, DESIGN §2)
+- `D2k\Ordos`: nonstandard filename `voices.yaml` (closed set, DESIGN §2)
+- `D2k\Shared`: nonstandard filename `voices.yaml` (closed set, DESIGN §2)
 
 ## P4 — naming summary (counts; details via gen_rename_maps)
 
-- actor ids violating the lowercase grammar: **1505** (e.g. 1TNK.camea, 2100A2MAT, 2100A2PT, 2100A2TIT, 2100A2VET, 2100AA, 2100AACH, 2100AAMAT)
+- actor ids violating the lowercase grammar: **1537** (e.g. 1TNK.camea, 2100A2MAT, 2100A2PT, 2100A2TIT, 2100A2VET, 2100AA, 2100AACH, 2100AAMAT)
 
-Total findings: 690
+Total findings: 694

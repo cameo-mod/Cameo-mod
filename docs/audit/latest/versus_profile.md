@@ -1,11 +1,11 @@
-# audit_versus_profile — 147 MAIN profiles across 50 families (146 legacy level + 1 level-less base)
+# audit_versus_profile — 159 MAIN profiles across 54 families (158 legacy level + 1 level-less base)
 
-## §12.0h MEAN-100 — 145 of 147 conform
+## §12.0h MEAN-100 — 157 of 159 conform
 
   Nuclear_Super  mean 77.5 _(HAND_TUNED — generator skips it, expected)_
   Sniper_Light  mean 55.0 _(HAND_TUNED — generator skips it, expected)_
 
-## spread band 2x-8x (target 4x) — 48 in band
+## spread band 2x-8x (target 4x) — 52 in band
 
   _(flat by design, excluded: Magic, Sonic)_
 

@@ -1,22 +1,22 @@
-# audit_three_way_split — 230 weapons with MORE THAN ONE main warhead
+# audit_three_way_split — 142 weapons with MORE THAN ONE main warhead
 
 _The `intentional_composites` exemption was DELETED 2026-09-06 (DESIGN §11b.1). Nothing is subtracted — every stack is debt._
 
-   1887  correct — exactly one main warhead
-    317  none — utility / effect-only weapons
-    230  RAW STACKS — structural inventory
-    230  STACKS — all debt under §11b.1
+   1992  correct — exactly one main warhead
+    320  none — utility / effect-only weapons
+    142  RAW STACKS — structural inventory
+    142  STACKS — all debt under §11b.1
 
   mains  weapons
-      2    122
-      3     65
-      4     21
-      5     10
-      6      3
-      7      8
+      2     78
+      3     37
+      4     11
+      5      7
+      6      1
+      7      7
       8      1
 
-131 distinct stacked combinations; the 20 most common:
+71 distinct stacked combinations; the 20 most common:
 
 | count | combination |
 |---|---|
@@ -27,19 +27,19 @@ _The `intentional_composites` exemption was DELETED 2026-09-06 (DESIGN §11b.1).
 | 6 | Nuclear_Super + Tesla_Super |
 | 5 | Demolition_Light + MissileAP_Heavy + RA2SCUDMissileAP_Heavy_NoWall |
 | 5 | 1Dam + Concussion_Medium + Demolition_Heavy |
-| 4 | 1Dam + Flame_Heavy + MissileHE_Heavy |
+| 4 | 1Dam + MissileHE_Heavy |
 | 4 | 1Dam + Bullet_Light |
-| 4 | Flame_Heavy + MissileHE_Heavy |
 | 3 | 1Dam + Flame_Medium |
 | 3 | 1Dam + Demolition_Heavy + Flame_Heavy |
 | 3 | IonCannon + Tesla_Super |
-| 3 | Magic_Heavy + Tesla_Heavy |
-| 3 | Bullet_Medium + Concussion_Medium + Demolition_Light |
 | 3 | Laser_Heavy + Railgun_Heavy + Tesla_Heavy |
-| 3 | Quantum_HeavyFlatCompatibility + Tesla_Heavy |
-| 3 | CannonHE_Heavy + Railgun_HeavyFlatCompatibility + Tesla_Heavy |
-| 2 | Flak_Medium + Flak_MediumFlatCompatibility |
-| 2 | Bullet_Medium + Railgun_Heavy |
+| 3 | Quantum_Heavy_Flat + Tesla_Heavy |
+| 2 | IonCannon + TeslaChargedWeapon + TeslaWeapon + Tesla_Super |
+| 2 | 1Dam + Demolition_Light + Flame_Light |
+| 2 | CannonHE_Heavy + Plasma_Heavy_Flat |
+| 2 | CannonHE_Heavy + CannonHE_Heavy_Flat |
+| 2 | 1Dam + Clear |
+| 2 | 1Dam + Demolition_Light |
 
-WARN raw 230/322; (cross-check audit_weapon_shape W5)
+WARN raw 142/322; (cross-check audit_weapon_shape W5)
 Lower `RAW_SPLIT_BASELINE` as weapons are collapsed; never raise it. W5 also resolves inheritance, but includes zero/healing/ally-only flat nodes and has narrower type/name rules. Use audit_weapon_shape.py --compare-split for the exact set difference; neither count is subtracted or reclassified.

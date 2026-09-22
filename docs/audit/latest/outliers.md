@@ -1,6 +1,6 @@
 # audit_outliers — systemic numeric drift (B9)
 
-(trait,field) distributions sampled: **18** — robust outliers (top 25 per field): **165**, selection bounds > 5120: **0**
+(trait,field) distributions sampled: **18** — robust outliers (top 25 per field): **163**, selection bounds > 5120: **0**
 
 
 ## Hard screen — Selectable bounds above the 5x5-cell maximum
@@ -65,31 +65,31 @@ _none found_
 | ChangesHealth.Step | latinsyndicate_tortugatank | 350 | 20 | 11.1 |
 | ChangesHealth.Step | ts_gdi_mammothprototype | 320 | 20 | 10.1 |
 | ChangesHealth.Step | ra2_soviets_kirovairship | 320 | 20 | 10.1 |
-| Health.HP | schwarzermond_dieglocke | 3750000 | 60000 | 62.2 |
-| Health.HP | japan_shogunexecutioner | 3000000 | 60000 | 49.6 |
-| Health.HP | cabal_avatar_backup | 2500000 | 60000 | 41.1 |
-| Health.HP | cabal_coredefender | 2000000 | 60000 | 32.7 |
-| Health.HP | naxis_ratte | 2000000 | 60000 | 32.7 |
-| Health.HP | steelconsortium_empressstation | 1500000 | 60000 | 24.3 |
-| Health.HP | schwarzermond_spacezeppelin | 1350000 | 60000 | 21.8 |
-| Health.HP | naxis_transportzeppelin | 1250000 | 60000 | 20.1 |
-| Health.HP | ts_gdi_mammothmkii | 1200000 | 60000 | 19.2 |
-| Health.HP | td_gdi_constructionyard | 1000000 | 60000 | 15.9 |
-| Health.HP | td_gdi_advancedcommunicationscenter | 1000000 | 60000 | 15.9 |
-| Health.HP | td_nod_constructionyard | 1000000 | 60000 | 15.9 |
-| Health.HP | td_nod_templeofnod | 1000000 | 60000 | 15.9 |
-| Health.HP | japan_japaneseconstructionyard | 1000000 | 60000 | 15.9 |
-| Health.HP | japan_japaneseshrine | 1000000 | 60000 | 15.9 |
-| Health.HP | ra1_soviets_constructionyard | 1000000 | 60000 | 15.9 |
-| Health.HP | ra1_soviets_missilesilo | 1000000 | 60000 | 15.9 |
-| Health.HP | ra1_soviets_ironcurtain | 1000000 | 60000 | 15.9 |
-| Health.HP | ra1_soviets_monstertank | 1000000 | 60000 | 15.9 |
-| Health.HP | ra1_allies_alliedconstructionyard | 1000000 | 60000 | 15.9 |
-| Health.HP | ra1_allies_chronosphere | 1000000 | 60000 | 15.9 |
-| Health.HP | TSGTCNST | 1000000 | 60000 | 15.9 |
-| Health.HP | cabal_core | 1000000 | 60000 | 15.9 |
-| Health.HP | cabal_constructionyard | 1000000 | 60000 | 15.9 |
-| Health.HP | cabal_avatar | 1000000 | 60000 | 15.9 |
+| Health.HP | schwarzermond_dieglocke | 3750000 | 55000 | 71.2 |
+| Health.HP | japan_shogunexecutioner | 3000000 | 55000 | 56.8 |
+| Health.HP | cabal_avatar_backup | 2500000 | 55000 | 47.1 |
+| Health.HP | cabal_coredefender | 2000000 | 55000 | 37.5 |
+| Health.HP | naxis_ratte | 2000000 | 55000 | 37.5 |
+| Health.HP | steelconsortium_empressstation | 1500000 | 55000 | 27.8 |
+| Health.HP | schwarzermond_spacezeppelin | 1350000 | 55000 | 25.0 |
+| Health.HP | naxis_transportzeppelin | 1250000 | 55000 | 23.0 |
+| Health.HP | ts_gdi_mammothmkii | 1200000 | 55000 | 22.1 |
+| Health.HP | td_gdi_constructionyard | 1000000 | 55000 | 18.2 |
+| Health.HP | td_gdi_advancedcommunicationscenter | 1000000 | 55000 | 18.2 |
+| Health.HP | td_nod_constructionyard | 1000000 | 55000 | 18.2 |
+| Health.HP | td_nod_templeofnod | 1000000 | 55000 | 18.2 |
+| Health.HP | japan_japaneseconstructionyard | 1000000 | 55000 | 18.2 |
+| Health.HP | japan_japaneseshrine | 1000000 | 55000 | 18.2 |
+| Health.HP | ra1_soviets_constructionyard | 1000000 | 55000 | 18.2 |
+| Health.HP | ra1_soviets_missilesilo | 1000000 | 55000 | 18.2 |
+| Health.HP | ra1_soviets_ironcurtain | 1000000 | 55000 | 18.2 |
+| Health.HP | ra1_soviets_monstertank | 1000000 | 55000 | 18.2 |
+| Health.HP | ra1_allies_alliedconstructionyard | 1000000 | 55000 | 18.2 |
+| Health.HP | ra1_allies_chronosphere | 1000000 | 55000 | 18.2 |
+| Health.HP | TSGTCNST | 1000000 | 55000 | 18.2 |
+| Health.HP | cabal_core | 1000000 | 55000 | 18.2 |
+| Health.HP | cabal_constructionyard | 1000000 | 55000 | 18.2 |
+| Health.HP | cabal_avatar | 1000000 | 55000 | 18.2 |
 | Mobile.TurnSpeed | schwarzermond_hole_small | 255 | 20 | 22.6 |
 | Mobile.TurnSpeed | schwarzermond_hole | 255 | 20 | 22.6 |
 | Mobile.TurnSpeed | SCSPIDERMINE | 200 | 20 | 17.3 |
@@ -107,22 +107,20 @@ _none found_
 | Power.Amount | terran_phobos | -500 | -40 | 10.3 |
 | Power.Amount | yuri_bioreactor | 400 | -40 | 9.9 |
 | Power.Amount | ts_nod_advancedpowerplant | 360 | -40 | 9.0 |
-| Repairable.HpPerStep | japan_shogunexecutioner | 150000 | 4250 | 43.7 |
-| Repairable.HpPerStep | naxis_ratte | 100000 | 4250 | 28.7 |
-| Repairable.HpPerStep | ts_gdi_mammothmkii | 60000 | 4250 | 16.7 |
-| Repairable.HpPerStep | ra1_soviets_monstertank | 50000 | 4250 | 13.7 |
-| Repairable.HpPerStep | forgotten_experimentalmammothtank | 50000 | 4250 | 13.7 |
-| Repairable.HpPerStep | terran_phobos | 50000 | 4250 | 13.7 |
-| Repairable.HpPerStep | ts_gdi_kodiakcommandship | 45000 | 4250 | 12.2 |
-| Repairable.HpPerStep | latinsyndicate_tortugatank | 43750 | 4250 | 11.8 |
-| Repairable.HpPerStep | ts_gdi_mammothprototype | 40000 | 4250 | 10.7 |
-| Repairable.HpPerStep | japan_exorcistoitank | 37500 | 4250 | 10.0 |
-| Repairable.HpPerStep | protoss_starshipsovereign | 37500 | 4250 | 10.0 |
-| Repairable.HpPerStep | japan_oitank | 32500 | 4250 | 8.5 |
-| Repairable.HpPerStep | forgotten_nomadbarracks | 32500 | 4250 | 8.5 |
-| Repairable.HpPerStep | futuretech_futuretank | 32500 | 4250 | 8.5 |
-| Repairable.HpPerStep | ra1_soviets_siegemammothtank | 31250 | 4250 | 8.1 |
-| Repairable.HpPerStep | harkonnen_devastatormech | 31250 | 4250 | 8.1 |
+| Repairable.HpPerStep | japan_shogunexecutioner | 150000 | 4187.5 | 42.5 |
+| Repairable.HpPerStep | naxis_ratte | 100000 | 4187.5 | 27.9 |
+| Repairable.HpPerStep | ts_gdi_mammothmkii | 60000 | 4187.5 | 16.3 |
+| Repairable.HpPerStep | ra1_soviets_monstertank | 50000 | 4187.5 | 13.4 |
+| Repairable.HpPerStep | forgotten_experimentalmammothtank | 50000 | 4187.5 | 13.4 |
+| Repairable.HpPerStep | terran_phobos | 50000 | 4187.5 | 13.4 |
+| Repairable.HpPerStep | ts_gdi_kodiakcommandship | 45000 | 4187.5 | 11.9 |
+| Repairable.HpPerStep | latinsyndicate_tortugatank | 43750 | 4187.5 | 11.5 |
+| Repairable.HpPerStep | ts_gdi_mammothprototype | 40000 | 4187.5 | 10.4 |
+| Repairable.HpPerStep | japan_exorcistoitank | 37500 | 4187.5 | 9.7 |
+| Repairable.HpPerStep | protoss_starshipsovereign | 37500 | 4187.5 | 9.7 |
+| Repairable.HpPerStep | japan_oitank | 32500 | 4187.5 | 8.3 |
+| Repairable.HpPerStep | forgotten_nomadbarracks | 32500 | 4187.5 | 8.3 |
+| Repairable.HpPerStep | futuretech_futuretank | 32500 | 4187.5 | 8.3 |
 | RevealsShroud.Range | steelconsortium_bfg10000 | 25000 | 2048 | 20.2 |
 | RevealsShroud.Range | tkm_radartruck | 21500 | 2048 | 17.1 |
 | RevealsShroud.Range | ixian_ixprojector | 20000 | 2048 | 15.8 |
@@ -135,6 +133,7 @@ _none found_
 | RevealsShroud.Range | asianalliance_pulsar | 14000 | 2048 | 10.5 |
 | RevealsShroud.Range | asianalliance_plasmacannon | 14000 | 2048 | 10.5 |
 | RevealsShroud.Range | asianalliance_spitfire | 14000 | 2048 | 10.5 |
+| RevealsShroud.Range | ordos_chemturret | 14000 | 2048 | 10.5 |
 | RevealsShroud.Range | td_gdi_skyshield | 13800 | 2048 | 10.3 |
 | RevealsShroud.Range | ts_nod_samsite | 13176 | 2048 | 9.8 |
 | RevealsShroud.Range | ra2_soviets_flakcannon | 12936 | 2048 | 9.6 |
@@ -147,7 +146,6 @@ _none found_
 | RevealsShroud.Range | ra2_soviets_kirovairship | 12345 | 2048 | 9.0 |
 | RevealsShroud.Range | yuri_floatingdisk | 12345 | 2048 | 9.0 |
 | RevealsShroud.Range | steelconsortium_empressstation | 12345 | 2048 | 9.0 |
-| RevealsShroud.Range | steelconsortium_cloudbreaker | 12345 | 2048 | 9.0 |
 | Selectable.Bounds | ra1_allies_reinforcementpad | 5120 | 1024 | 10.8 |
 | Selectable.Bounds | ra2ctind01 | 5120 | 1024 | 10.8 |
 | Selectable.Bounds | ra2ctmiam06 | 5120 | 1024 | 10.8 |

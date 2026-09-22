@@ -1,6 +1,6 @@
 # audit_orphans — dead content (B10)
 
-Live weapons: **2969** — orphans: **390**, dangling weapon refs (BLOCKING): **0**, conditions granted-never-consumed: **16**
+Live weapons: **2977** — orphans: **395**, dangling weapon refs (BLOCKING): **0**, conditions granted-never-consumed: **16**
 
 
 ## O2 — dangling weapon references (crash-on-use class)
@@ -78,10 +78,10 @@ _none found_
 | DTAtomic | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
 | DTMutate | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
 | DeathHand | mods/cameo/weapons/d2k.yaml |
-| Debris | mods/cameo/weapons/d2k.yaml |
-| Debris2 | mods/cameo/weapons/d2k.yaml |
-| Debris3 | mods/cameo/weapons/d2k.yaml |
-| Debris4 | mods/cameo/weapons/d2k.yaml |
+| Debris | mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml |
+| Debris2 | mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml |
+| Debris3 | mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml |
+| Debris4 | mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml |
 | DebrisMissile | mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml |
 | Demolish | mods/cameo/weapons/weapons.yaml |
 | DepthChargeCryo | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
@@ -143,7 +143,7 @@ _none found_
 | IonPulseDischarge | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml |
 | JetExplosion | mods/cameo/weapons/weapons.yaml |
 | KirovExplode | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml |
-| LMG | mods/cameo/weapons/d2k.yaml |
+| LMG | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml |
 | LMG_burst | mods/cameo/weapons/d2k.yaml |
 | LMG_ordos_upgrade | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml |
 | LMG_upgrade | mods/cameo/weapons/d2k.yaml |
@@ -168,6 +168,7 @@ _none found_
 | MammothTankCannon | mods/cameo/weapons/tiberiansun.yaml |
 | MammothTuskGal | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
 | MammothTuskTesla | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |
+| MammothTuskTeslaFragment1Ground | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |
 | MammothTuskThermobaric | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |
 | MutAPRifle | mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml |
 | MutAPRifle_elite | mods/cameo/weapons/tiberiansun.yaml |
@@ -194,13 +195,13 @@ _none found_
 | OrniGunC | mods/cameo/ContentPacks/D2k/Atreides/yaml/weapons.yaml |
 | PDLaser | mods/cameo/weapons/weapons.yaml |
 | Patriot | mods/cameo/weapons/weapons.yaml |
-| PhoenixRocket | mods/cameo/weapons/d2k.yaml |
+| PhoenixRocket | mods/cameo/ContentPacks/D2k/Atreides/yaml/weapons.yaml |
 | PlasBullet | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml |
 | PlasmaPuff | mods/cameo/weapons/weapons.yaml |
 | PortableChronoImpact | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml |
 | PortableChronoTeleport | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml |
 | PsionicShells | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
-| PulseMissile | mods/cameo/weapons/d2k.yaml |
+| PulseMissile | mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml |
 | RA28Inch | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml |
 | RA2AsianShotgun | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml |
 | RA2AsianShotgunFanatic1 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml |
@@ -214,6 +215,8 @@ _none found_
 | RA2FLAKAG | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml |
 | RA2FLOATER | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml |
 | RA2GIRockets | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml |
+| RA2GattlingMG3 | mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml |
+| RA2GattlingMG3_AA | mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml |
 | RA2IMP | mods/cameo/weapons/weapons.yaml |
 | RA2IMPAA | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml |
 | RA2KirovHowitzerSplash | mods/cameo/weapons/redalert2mod.yaml |
@@ -314,7 +317,7 @@ _none found_
 | bowFire_AA | mods/cameo/weapons/weapons.yaml |
 | d2k25mm | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml |
 | d2kFlameTurret | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml |
-| d2kFlamegun | mods/cameo/weapons/d2k.yaml |
+| d2kFlamegun | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml |
 | d2k_APC_AA | mods/cameo/weapons/d2k.yaml |
 | d2k_APC_AG | mods/cameo/weapons/d2k.yaml |
 | d2k_APCo_AA | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml |
@@ -325,7 +328,7 @@ _none found_
 | d2k_flame_tank | mods/cameo/weapons/d2k.yaml |
 | d2k_grenade | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml |
 | d2k_kwny_fighter | mods/cameo/weapons/d2k.yaml |
-| d2k_laser | mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml |
+| d2k_laser | mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml |
 | d2k_laser_aa | mods/cameo/weapons/d2k.yaml |
 | d2k_laser_qafza | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml |
 | d2k_laser_qafza_aa | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml |
@@ -390,6 +393,8 @@ _none found_
 | ra120mmirak | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
 | ra1_allies_alliedsniper | mods/cameo/weapons/tiberiandawn.yaml |
 | ra1_soviets_heavyteslatank_ttankzap2 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |
+| ra1_soviets_mortarsoldier_siegemortar | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |
+| ra1_soviets_mortarsoldier_siegemortarthermobaric | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |
 | ragal120mm | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
 | supernova_missile_super | mods/cameo/weapons/outpost2.yaml |
 | td_gdi_guardtower_highv_base | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml |

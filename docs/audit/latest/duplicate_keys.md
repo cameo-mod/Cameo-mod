@@ -1,6 +1,6 @@
 # audit_duplicate_keys — duplicate keys in one node (ambiguous merges)
 
-Files scanned: **652** — D1 ambiguous inheritance labels: **0**, D2 merged duplicates: **258**
+Files scanned: **657** — D1 ambiguous inheritance labels: **0**, D2 merged duplicates: **267**
 
 
 ## D1 — duplicate inheritance labels with different parent values
@@ -12,7 +12,7 @@ _none found_
 
 | key | occurrences |
 |---|---|
-| RenderSprites | 31 |
+| RenderSprites | 32 |
 | Voiced | 15 |
 | RevealsShroud | 14 |
 | Prerequisites | 11 |
@@ -20,19 +20,20 @@ _none found_
 | HitShape | 8 |
 | Selectable | 7 |
 | muzzle | 6 |
+| AttackAircraft | 6 |
 | Warhead@1Dam | 6 |
 | AutoTarget | 5 |
 | ProvidesPrerequisite@buildingname | 5 |
 | cheer | 4 |
 | SpawnActorOnDeath | 4 |
 | WithAmmoPipsDecoration | 4 |
-| AttackAircraft | 3 |
 | GrantConditionOnPrerequisite@2 | 3 |
 | ProvidesPrerequisite | 3 |
 | stand | 3 |
 | gtwrmake | 3 |
 | Report | 3 |
 | Burst | 3 |
+| Warhead@Railgun_Heavy_ExtraDamage | 2 |
 | dead | 2 |
 | idle | 2 |
 | Building | 2 |
@@ -51,7 +52,6 @@ _none found_
 | AttackTurreted | 2 |
 | Scale | 2 |
 | die5 | 2 |
-| Warhead@2Eff | 2 |
 
 
 ## D2 — full list
@@ -61,10 +61,14 @@ _none found_
 | mods/cameo/chrome/ingame_observer.yaml | 316, 320 | Container@OBSERVER_WIDGETS > Children > Image@REPLAY_PLAYER | Visible |
 | mods/cameo/chrome/settings_display.yaml | 26, 80, 110, 141, 165, 191, 206, 228, 283, 344, 386, 399, 431, 444, 457, 470, 483, 496, 509 | Container@DISPLAY_PANEL > Children > ScrollPanel@SETTINGS_SCROLLPANEL > Children | Container@ROW |
 | mods/cameo/chrome/settings_display.yaml | 66, 269 | Container@DISPLAY_PANEL > Children > ScrollPanel@SETTINGS_SCROLLPANEL > Children | Container@SPACER |
+| mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 1662, 1668 | JapaneseHovercraftFlakAAkWaveforce | Warhead@Railgun_Heavy |
+| mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 2617, 2647 | ArmoredCarMGWaveforce | Warhead@Railgun_Heavy_ExtraDamage |
+| mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 2675, 2703 | ArmoredCarMGAAWaveforce | Warhead@Railgun_Heavy_ExtraDamage |
 | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/sequences.yaml | 11, 37 | ra2_allies_alliedconstructionyard | dead |
-| mods/cameo/ContentPacks/RedAlert2/Shared/yaml/sequences.yaml | 3731, 3737 | yrslav | cheer |
-| mods/cameo/ContentPacks/RedAlert2/Shared/yaml/sequences.yaml | 3870, 3874 | ra2howi | muzzle |
-| mods/cameo/ContentPacks/RedAlert2/Shared/yaml/sequences.yaml | 3883, 3887 | ra2arty | muzzle |
+| mods/cameo/ContentPacks/RedAlert2/Shared/yaml/sequences.yaml | 3775, 3781 | yrslav | cheer |
+| mods/cameo/ContentPacks/RedAlert2/Shared/yaml/sequences.yaml | 3914, 3918 | ra2howi | muzzle |
+| mods/cameo/ContentPacks/RedAlert2/Shared/yaml/sequences.yaml | 3927, 3931 | ra2arty | muzzle |
+| mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml | 2526, 2533 | MigMissiles_rad_elite | Warhead@Chemical_Medium |
 | mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/sequences.yaml | 4, 45 | yuri_constructionyard | build |
 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/sequences.yaml | 11, 31 | asianalliance_asianconstructionyard | dead |
 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/sequences.yaml | 1275, 1304 | asianalliance_asianflametrooper | shoot |
@@ -73,9 +77,11 @@ _none found_
 | mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/sequences.yaml | 525, 583 | latinsyndicate_topolsilo | critical-idle |
 | mods/cameo/ContentPacks/StarCraft/Protoss/yaml/sequences.yaml | 503, 505 | protoss_arbiter | idle |
 | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/sequences.yaml | 388, 394 | td_gdi_advancedguardtower | muzzle |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml | 230, 268 | cabal_hunterdrone | AttackAircraft |
 | mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/sequences.yaml | 62, 66 | forgotten_chemsprayinfantry | prone-shoot |
 | mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/sequences.yaml | 334, 375 | forgotten_zombiemutant | standup |
 | mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/sequences.yaml | 369, 384 | forgotten_zombiemutant | die-crushed |
+| mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml | 990, 992 | ts_tree24.Husk | RenderSprites |
 | mods/cameo/ContentPacks/Warcraft2/Humans/yaml/sequences.yaml | 150, 153 | wc2_humans_guardtower | Defaults |
 | mods/cameo/ContentPacks/Warcraft2/Humans/yaml/sequences.yaml | 158, 161 | wc2_humans_cannontower | Defaults |
 | mods/cameo/ContentPacks/Warcraft2/Humans/yaml/sequences.yaml | 166, 168 | wc2_humans_wall | Defaults |
@@ -203,6 +209,8 @@ _none found_
 | mods/cameo/rules/sow.yaml | 3422, 3434 | sow_mech_jaguar | Voiced |
 | mods/cameo/rules/sow.yaml | 3547, 3559 | sow_mech_achilles | Voiced |
 | mods/cameo/rules/sow.yaml | 4034, 4092 | sowfighter | RenderSprites |
+| mods/cameo/rules/starcraft.yaml | 520, 562 | SCWRAITHDRONE | AttackAircraft |
+| mods/cameo/rules/starcraft.yaml | 852, 901 | SCINTERCEPTOR | AttackAircraft |
 | mods/cameo/rules/starwars.yaml | 207, 226 | ^SWFortressBuilding | Selectable |
 | mods/cameo/rules/starwars.yaml | 3706, 3767 | swpalace | DetectCloaked |
 | mods/cameo/rules/starwars.yaml | 3746, 3751 | swpalace | ProvidesPrerequisite@buildingname |
@@ -277,11 +285,11 @@ _none found_
 | mods/cameo/sequences/iok.yaml | 329, 331 | iokpalace | Defaults |
 | mods/cameo/sequences/lostunits.yaml | 28, 31 | rathf | die5 |
 | mods/cameo/sequences/misc.yaml | 1493, 1497 | resources | ra2gold18 |
-| mods/cameo/sequences/misc.yaml | 3572, 3581 | overlay | target-select |
+| mods/cameo/sequences/misc.yaml | 3579, 3588 | overlay | target-select |
 | mods/cameo/sequences/n64.yaml | 631, 633 | n64gtwr > make > Combine | gtwrmake |
-| mods/cameo/sequences/redalert2.yaml | 3735, 3741 | yrslav | cheer |
-| mods/cameo/sequences/redalert2.yaml | 3867, 3871 | ra2howi | muzzle |
-| mods/cameo/sequences/redalert2.yaml | 3880, 3884 | ra2arty | muzzle |
+| mods/cameo/sequences/redalert2.yaml | 3790, 3796 | yrslav | cheer |
+| mods/cameo/sequences/redalert2.yaml | 3922, 3926 | ra2howi | muzzle |
+| mods/cameo/sequences/redalert2.yaml | 3935, 3939 | ra2arty | muzzle |
 | mods/cameo/sequences/shared_effects.yaml | 232, 237 | tscloud1 | Filename |
 | mods/cameo/sequences/starwars.yaml | 1016, 1018 | swgtwr > make > Combine | gtwrmake |
 | mods/cameo/sequences/starwars.yaml | 1143, 1145 | swtmpl | Defaults |
@@ -290,6 +298,7 @@ _none found_
 | mods/cameo/sequences/tiberiandawn.yaml | 1485, 1488 | gdirigtower | muzzle |
 | mods/cameo/sequences/warcraft1.yaml | 1368, 1374, 1383 | wc_n_portal | Scale |
 | mods/cameo/tilesets/arrakis.yaml | 8238, 8244 | MultiBrushCollections > Segmented | MultiBrush@161 |
+| mods/cameo/tilesets/cameo.yaml | 13131, 13132 | Templates > Template@56086 > Tiles | 1 |
 | mods/cameo/tilesets/snow.yaml | 2518, 2519 | Templates > Template@2086 > Tiles | 1 |
 | mods/cameo/weapons/advacewars.yaml | 265, 267 | AWGarrisonMG | Warhead@2Eff |
 | mods/cameo/weapons/advacewars.yaml | 1083, 1085 | AWTeslaCrystal | Range |
@@ -318,5 +327,5 @@ _none found_
 | mods/cameo/weapons/wh40k.yaml | 354, 357 | WH40KShootaBoyzGun | Warhead@1Dam |
 
 
-D2 count 258 is below the baseline 260 — lower D2_BASELINE in this script to lock the fix in.
+**FAIL** — D2 count 267 exceeds the baseline 260: a new duplicate key was introduced.
 
