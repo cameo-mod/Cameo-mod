@@ -1,3 +1,52 @@
+## Devin-DAWN (A4) — D2k weapon closure: legacy `weapons/d2k.yaml` drained of live weapons (2026-09-22)
+
+**Branch:** `devin/dawn/d2k-weapon-closure`. **Context:** the fleet lanes changed hands
+while I was on the INI lane — the standing-orders ownership table (HANDOFF §ownership)
+gives Atreides/Ordos/Shared-weapons to Aurora, Harkonnen+legacy d2k.yaml to Blaze,
+Ixian to Echo. This commit touches all of them, so it is posted for their review as a
+PR rather than merged silently. The maintainer's #1 stated priority is that Atreides,
+Harkonnen and Corrino actually live in their ContentPacks — this is that work.
+
+**What I measured first** (never trust the status board — it claimed "D2k four …
+DONE incl. weapons+sequences" while `mods/cameo/weapons/d2k.yaml` still carried 106
+weapons, 3,026 lines, loaded globally at `mod.yaml` Weapons: index 35):
+
+- Resolved every actor in the merged ruleset (`miniyaml.Ruleset`, no hand-parsing)
+  and walked every field value for weapon-name references; resolved every weapon's
+  `Inherits` chain for weapon→weapon references.
+- Result for the legacy file: **23 live-referenced** weapons, **5 cross-theme**
+  (consumed by `Core/yaml` Player powers or `StarCraft/Zerg`), **~78 unreferenced**
+  (o* OpenRA-era duplicates + `d2k_*` specials; all 363 `.oramap` archives scanned
+  clean; the dormant commented-out `rules/dune2.yaml`/`weapons/dune2.yaml` still name
+  `oDeviatorMissile`/`oSound`).
+- Found **21 stale duplicate definitions** in `d2k.yaml` byte-identical to pack
+  copies (they merged to nothing), plus ONE real override: `mtank_pri`'s
+  `Projectile.VerticalRateOfTurn: 12` — folded into the Shared def before deleting
+  the legacy copy.
+
+**Moves:** Shared ← `D2K_Rocket_Trooper`, `D2kBuildingExplode`, `Debris`/`2`/`3`/`4`,
+`^D2K_Cannon`, `light_inf_lmg(+_upgrade)`, `^Debris2Legacy`,
+`^HeavyMachineGunProjectile`, `Fremen_RPG`, `HMG_fremen`, `WallExplode`, `WormJaw`;
+Harkonnen ← `D2K70mmH`, `D2K_Rocket_AA`, `DevBullet`, `PlasmaExplosion`;
+Ordos ← `LMG`, `PhoenixRocketShrapnel`, `d2kFlamegun`; Atreides ← `PhoenixRocket`.
+Re-homed existing cross-pack weapons into Shared: `OrniGun`, `Sound`, `HMG`
+(Atreides), `ordos_autogunturret` (Ordos), `HMG_turret`, `d2k_laser` (Ixian).
+
+**Verification (outputs, not claims):**
+- `dump_resolved.py --all` + a full resolved-weapon dump, before vs after: **0 diff
+  lines** for both (112 MB actor dump, 10.8 MB weapon dump).
+- `find_empty_warhead.py`: `EMPTY-TYPE warheads … : 0`.
+- Boot-gate: `perf.log` ends `MenuPostProcessEffect.PostWorldLoaded`; zero new
+  `exception-*.log`.
+
+**Still needs a ruling / belongs to later phases:** the 5 cross-theme weapons
+(`D2K_155mm` is used by StarCraft `BehemothShoot`/`GuardianShoot`; `DeathHand`,
+`oDeathHand`, `PulseMissile`, `ixian_airdrone` are Core `Player` power weapons) and
+the ~76-weapon unreferenced inventory in `d2k.yaml` (unused-file audit phase per
+docs/MIGRATION.md). `sequences/d2k.yaml` is a separate migration not started here.
+`Sound2` exists as two byte-identical copies in the Atreides and Ordos packs
+(unreferenced; flagged for dedup review).
+
 ## OpenCode GLM 5.3 Flash - Astra pipeline batch: A3/C1 dossiers, extrapolation join, speed law, report refresh (2026-09-09)
 
 ### Japan pilot follow-up — Astra, 2026-09-09 (in progress)
