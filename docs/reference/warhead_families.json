@@ -1536,7 +1536,7 @@
   "families": [
    {
     "family": "Bullet",
-    "uses": 111.0,
+    "uses": 110.0,
     "weapons": [
      "ASWLaunchWH",
      "AirstrikeFlare",
@@ -1552,7 +1552,6 @@
      "ControllerBuilding",
      "CyborgGrenadeWH",
      "DKnightSAWH",
-     "FlintBomb",
      "FortressSSA",
      "GattAAWH",
      "GattWH",
@@ -1593,7 +1592,6 @@
      "BulletKinetic_Inf",
      "Bullet_Def",
      "Bullet_Inf",
-     "Bullet_Inf_2",
      "Bullet_Veh",
      "HitscanKinetic_Def",
      "HitscanKinetic_Inf",
@@ -1634,18 +1632,18 @@
      83.7,
      83.7,
      82.1,
-     65.8,
-     51.1,
-     49.4,
-     52.8,
-     40.8,
-     37.5
+     66.2,
+     50.3,
+     48.6,
+     51.7,
+     39.8,
+     36.6
     ],
-    "factor": 0.638
+    "factor": 0.633
    },
    {
     "family": "Laser",
-    "uses": 51.0,
+    "uses": 50.0,
     "weapons": [
      "AbramsLaserWH",
      "AeroblazeSniperWH",
@@ -1686,7 +1684,6 @@
      "RuinerRayWH",
      "RuptureWH",
      "ShadowPulse",
-     "StunGunWH",
      "TanyaLaserWH",
      "TeralaserWH"
     ],
@@ -1702,7 +1699,6 @@
      "LaserHE_Veh_3",
      "LaserHE_Veh_4",
      "LaserHE_Veh_5",
-     "LaserKinetic_Veh",
      "LaserToxin_Inf",
      "LaserToxin_Veh",
      "Laser_Def",
@@ -1727,9 +1723,9 @@
      "concrete"
     ],
     "profile": [
-     146.0,
-     145.2,
-     141.9,
+     144.9,
+     144.1,
+     140.7,
      123.1,
      118.0,
      114.5,
@@ -1737,7 +1733,7 @@
      78.6,
      77.3
     ],
-    "factor": 0.92
+    "factor": 0.906
    },
    {
     "family": "MissileFire",
@@ -2370,12 +2366,12 @@
     "family": "Demolition",
     "uses": 2.0,
     "weapons": [
-     "ChronoFreezeWH",
-     "DiskDrainWH"
+     "BlimpHE",
+     "FlintBomb"
     ],
     "groups": [
-     "BombKinetic_Veh",
-     "BombTesla_Inf"
+     "BombToxin_Veh",
+     "Bullet_Inf_2"
     ],
     "armors": [
      "none",
@@ -2389,20 +2385,20 @@
      "concrete"
     ],
     "profile": [
-     10.0,
-     10.0,
-     10.0,
-     10.0,
-     10.0,
-     10.0,
+     200.0,
+     200.0,
+     200.0,
+     89.3,
+     167.1,
+     167.1,
      200.0,
      200.0,
      200.0
     ],
-    "factor": 0.447
+    "factor": 1.68
    },
    {
-    "family": "MissileAP",
+    "family": "Melee",
     "uses": 2.0,
     "weapons": [
      "HuntressWH",
@@ -2436,86 +2432,26 @@
     "factor": 0.489
    },
    {
-    "family": "Chemical",
-    "uses": 1.0,
-    "weapons": [
-     "BlimpHE"
-    ],
-    "groups": [
-     "BombToxin_Veh"
-    ],
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     200.0,
-     139.6,
-     139.6,
-     200.0,
-     200.0,
-     200.0
-    ],
-    "factor": 1.846
-   },
-   {
-    "family": "Railgun",
-    "uses": 1.0,
-    "weapons": [
-     "AssasinWH"
-    ],
-    "groups": [
-     "RailgunHE_Inf"
-    ],
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     200.0,
-     200.0,
-     200.0,
-     200.0,
-     200.0,
-     200.0
-    ],
-    "factor": 2.0
-   },
-   {
     "family": "(drop: not a damage warhead)",
-    "uses": 8.0,
+    "uses": 11.0,
     "weapons": [
+     "AssasinWH",
      "ChronoBeam",
+     "ChronoFreezeWH",
      "ChronoImprisonWH",
      "EMPBeamWH",
      "KillDriverAIWH",
      "KillDriverWH",
      "RepairMechanical",
-     "RepairMechanicalReju"
+     "RepairMechanicalReju",
+     "StunGunWH"
     ],
     "groups": [
+     "BombTesla_Inf",
      "HitscanAtomized_Inf",
+     "LaserKinetic_Veh",
      "Radiation_Veh",
+     "RailgunHE_Inf",
      "RailgunKinetic_Inf",
      "Railgun_Veh"
     ],
@@ -2531,29 +2467,31 @@
      "concrete"
     ],
     "profile": [
-     200.0,
-     200.0,
-     200.0,
-     87.0,
-     87.0,
-     87.0,
+     130.4,
+     130.4,
+     130.4,
+     76.1,
+     76.1,
+     76.1,
      200.0,
      200.0,
      200.0
     ],
-    "factor": 0.928
+    "factor": 0.871
    },
    {
     "family": "(drop: support weapon)",
-    "uses": 4.0,
+    "uses": 5.0,
     "weapons": [
      "CraneWeaponWH",
+     "DiskDrainWH",
      "IronGuardWH",
      "ThorHTLWH"
     ],
     "groups": [
      "BombHE_Def",
-     "BombHE_Veh"
+     "BombHE_Veh",
+     "BombKinetic_Veh"
     ],
     "armors": [
      "none",
@@ -2573,13 +2511,13 @@
      10.5,
      10.5,
      10.5,
-     null,
-     null,
-     null
+     200.0,
+     200.0,
+     200.0
     ],
-    "factor": 0.105
+    "factor": 0.189
    }
   ],
-  "live": 18
+  "live": 16
  }
 }

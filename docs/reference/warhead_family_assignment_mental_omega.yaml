@@ -9,7 +9,7 @@
 #   * Each row's `why` states the reasoning. Decisions were taken once per measured
 #     (delivery, element) SIGNATURE — 37 of them across these 165 groups — rather than
 #     once per group, because a signature is the thing the measurement actually distinguishes.
-#   * 7 groups were opened and read individually and BEAT their signature;
+#   * 14 groups were opened and read individually and BEAT their signature;
 #     those rows say so. They are the support weapons, the repair beams and the chrono effects.
 #   * Everything is `status: proposed`. NOTHING here has been reviewed by the maintainer.
 #
@@ -1895,9 +1895,11 @@ groups:
     - DevourerWH
     - GrumbleWH
   MissileKinetic_Inf:
-    family: MissileAP
+    family: Melee
     status: proposed
-    why: steered solid penetrator
+    why: 'HuntressWH + KrukovSwordWH are BLADES, not armour-piercing missiles. The profile agrees: 48.9
+      against infantry, 12 against vehicles, nothing against buildings. Delivery read Missile because
+      the projectile steers (ROT > 0), which a thrown blade does'
     band: infantry
     delivery: Missile
     element: Kinetic
@@ -2053,9 +2055,9 @@ groups:
     weapons:
     - ThorHTLWH
   BombKinetic_Veh:
-    family: Demolition
+    family: '(drop: support weapon)'
     status: proposed
-    why: vertical delivery, solid
+    why: DiskDrainWH — a drain effect, reaching buildings only
     band: vehicle
     delivery: Bomb
     element: Kinetic
@@ -2075,9 +2077,9 @@ groups:
     weapons:
     - DiskDrainWH
   BombTesla_Inf:
-    family: Demolition
+    family: '(drop: not a damage warhead)'
     status: proposed
-    why: vertical delivery, electric payload
+    why: 'ChronoFreezeWH — flat 10, the floor of the window, on every reachable armour: a marker'
     band: infantry
     delivery: Bomb
     element: Tesla
@@ -2097,9 +2099,10 @@ groups:
     weapons:
     - ChronoFreezeWH
   BombToxin_Veh:
-    family: Chemical
+    family: Demolition
     status: proposed
-    why: a chemical bomb is the Chemical family, not a delivery blend
+    why: BlimpHE — a blimp detonating. The name says HE and the broad blast profile agrees; the Toxin
+      element is a death-animation artefact
     band: vehicle
     delivery: Bomb
     element: Toxin
@@ -2515,9 +2518,9 @@ groups:
     weapons:
     - WarpnodeWH
   Bullet_Inf_2:
-    family: Bullet
+    family: Demolition
     status: proposed
-    why: ballistic, no element
+    why: 'FlintBomb — a bomb, not ball ammunition: nothing against infantry, 200 against structures'
     band: infantry
     delivery: Bullet
     element: Plain
@@ -3197,9 +3200,9 @@ groups:
     weapons:
     - RamWeldWH
   LaserKinetic_Veh:
-    family: Laser
+    family: '(drop: not a damage warhead)'
     status: proposed
-    why: laser, kinetic death animation
+    why: StunGunWH — a stun is a status effect; its 200 reaches infantry only
     band: vehicle
     delivery: Laser
     element: Kinetic
@@ -3681,9 +3684,10 @@ groups:
     weapons:
     - VentrexWH
   RailgunHE_Inf:
-    family: Railgun
+    family: '(drop: not a damage warhead)'
     status: proposed
-    why: genuine IsRailgun weapon
+    why: AssasinWH — flat 200 across all NINE armours including buildings, the same absent-Verses signature
+      as ChronoBeam. An assassination is an instant kill, not a damage ladder
     band: infantry
     delivery: Railgun
     element: HE
