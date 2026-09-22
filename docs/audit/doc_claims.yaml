@@ -1179,3 +1179,38 @@ claims:
                   seen[fam].add(kind(vals))
               break
       print(sum(1 for f, ks in seen.items() if ks == {'shaped'}))
+
+  - id: cameo_element_bearing_families
+    value: 15
+    tolerance: 2
+    what: >
+      Live warhead families whose template declares a `DamageTypes` token the engine can actually
+      filter on (an element such as `Incendiary` or `Tesla`), as opposed to the generic
+      `Prone75Percent, TriggerProne, ExplosionDeath` that 31 of the 50 carry. R43: `Flame`, `Cryo`,
+      `Toxic`, `Chemical`, `Laser`, `Nuclear` and nine others declare no element, while their own
+      blend children (`BulletFire`, `CannonFire`, `Inferno`) declare `FireDeath, Incendiary`. The
+      mod's rules consume these tokens (`Incendiary` x3, `RadiationDeath` x6,
+      `AffectedByDamageTypes: Tesla` x2), so an undeclared element is a gate that never fires.
+      This number should go UP as families are tagged; it is the counter for that work.
+    docs: [docs/design/REFERENCE_EXTRACTION_PLAN.md]
+    measure: |
+      import pathlib, sys
+      sys.path[:0] = ['tools/audit', 'tools/reference']
+      from miniyaml import Ruleset
+      import cameo_families as cf, compress_warheads as cw
+      rs = Ruleset(pathlib.Path('.').resolve(), 'cameo')
+      fams = {}
+      for name in rs.weapons:
+          if not name.startswith('^Warhead_'):
+              continue
+          fam, level, var = cf.split_template(name)
+          if var or not level:
+              continue
+          for c in rs.resolve_weapon(name).children:
+              k = c.key
+              if not k.startswith('Warhead') or 'ercentage' in k or 'riendly' in k:
+                  continue
+              dt = c.child('DamageTypes')
+              fams.setdefault(fam, set()).add(cw.element_of(dt.value if dt else ''))
+              break
+      print(sum(1 for f, es in fams.items() if es - {'HE', 'Plain'}))
