@@ -31984,6 +31984,38 @@
      "Aircraft",
      "Concrete"
     ],
+    "band": "vehicle",
+    "delivery": "Bullet",
+    "element": "Toxin",
+    "examples": [
+     "CorrupterSpew:Warhead@1Dam"
+    ],
+    "factor": 1.2569481996323284,
+    "flat": false,
+    "members": 1,
+    "name": "BulletToxin_Veh",
+    "profile": [
+     63.9,
+     200.0,
+     200.0,
+     191.8,
+     null,
+     63.9
+    ],
+    "uses": 1,
+    "weapons": [
+     "CorrupterSpew"
+    ]
+   },
+   {
+    "armors": [
+     "Heavy",
+     "Wood",
+     "None",
+     "Light",
+     "Aircraft",
+     "Concrete"
+    ],
     "band": "aircraft",
     "delivery": "Bullet",
     "element": "Plain",
@@ -32052,76 +32084,12 @@
     "delivery": "Bullet",
     "element": "Plain",
     "examples": [
-     "WolverineGun:Warhead@1Dam"
-    ],
-    "factor": 0.7043692068185919,
-    "flat": false,
-    "members": 1,
-    "name": "Bullet_Veh_10",
-    "profile": [
-     25.6,
-     106.6,
-     200.0,
-     149.2,
-     null,
-     21.3
-    ],
-    "uses": 1,
-    "weapons": [
-     "WolverineGun"
-    ]
-   },
-   {
-    "armors": [
-     "Heavy",
-     "Wood",
-     "None",
-     "Light",
-     "Aircraft",
-     "Concrete"
-    ],
-    "band": "vehicle",
-    "delivery": "Bullet",
-    "element": "Plain",
-    "examples": [
-     "CorrupterSpew:Warhead@1Dam"
-    ],
-    "factor": 1.2569481996323284,
-    "flat": false,
-    "members": 1,
-    "name": "Bullet_Veh_7",
-    "profile": [
-     63.9,
-     200.0,
-     200.0,
-     191.8,
-     null,
-     63.9
-    ],
-    "uses": 1,
-    "weapons": [
-     "CorrupterSpew"
-    ]
-   },
-   {
-    "armors": [
-     "Heavy",
-     "Wood",
-     "None",
-     "Light",
-     "Aircraft",
-     "Concrete"
-    ],
-    "band": "vehicle",
-    "delivery": "Bullet",
-    "element": "Plain",
-    "examples": [
      "FLAK-SEAS-AG:Warhead@1Dam"
     ],
     "factor": 0.9459579785589767,
     "flat": false,
     "members": 1,
-    "name": "Bullet_Veh_8",
+    "name": "Bullet_Veh_7",
     "profile": [
      65.5,
      131.1,
@@ -32153,7 +32121,7 @@
     "factor": 0.5731240547939165,
     "flat": false,
     "members": 1,
-    "name": "Bullet_Veh_9",
+    "name": "Bullet_Veh_8",
     "profile": [
      17.3,
      17.3,
@@ -32165,6 +32133,38 @@
     "uses": 1,
     "weapons": [
      "M60mgJJ"
+    ]
+   },
+   {
+    "armors": [
+     "Heavy",
+     "Wood",
+     "None",
+     "Light",
+     "Aircraft",
+     "Concrete"
+    ],
+    "band": "vehicle",
+    "delivery": "Bullet",
+    "element": "Plain",
+    "examples": [
+     "WolverineGun:Warhead@1Dam"
+    ],
+    "factor": 0.7043692068185919,
+    "flat": false,
+    "members": 1,
+    "name": "Bullet_Veh_9",
+    "profile": [
+     25.6,
+     106.6,
+     200.0,
+     149.2,
+     null,
+     21.3
+    ],
+    "uses": 1,
+    "weapons": [
+     "WolverineGun"
     ]
    },
    {
@@ -65052,7 +65052,7 @@
  },
  "romanovs_vengeance": {
   "compressed": 500,
-  "group_count": 100,
+  "group_count": 99,
   "groups": [
    {
     "armors": [
@@ -66682,6 +66682,66 @@
      "Drone"
     ],
     "band": "infantry",
+    "delivery": "Radiation",
+    "element": "Radiation",
+    "examples": [
+     "RadBeamWeapon:Warhead@1Dam",
+     "RadBeamWeaponE:Warhead@1Dam",
+     "RadBeamWeaponOrange:Warhead@1Dam",
+     "RadBeamWeaponOrangeE:Warhead@1Dam",
+     "UCRadBeamWeapon:Warhead@1Dam",
+     "UCRadBeamWeaponE:Warhead@1Dam",
+     "UCRadBeamWeaponOrange:Warhead@1Dam",
+     "UCRadBeamWeaponOrangeE:Warhead@1Dam"
+    ],
+    "factor": 0.8962861725654471,
+    "flat": false,
+    "members": 8,
+    "name": "Radiation_Inf",
+    "profile": [
+     null,
+     null,
+     null,
+     104.1,
+     148.8,
+     22.3,
+     148.8,
+     148.8,
+     148.8,
+     148.8,
+     22.3,
+     148.8,
+     59.5
+    ],
+    "uses": 8,
+    "weapons": [
+     "RadBeamWeapon",
+     "RadBeamWeaponE",
+     "RadBeamWeaponOrange",
+     "RadBeamWeaponOrangeE",
+     "UCRadBeamWeapon",
+     "UCRadBeamWeaponE",
+     "UCRadBeamWeaponOrange",
+     "UCRadBeamWeaponOrangeE"
+    ]
+   },
+   {
+    "armors": [
+     "Wood",
+     "Steel",
+     "Concrete",
+     "Light",
+     "None",
+     "Heavy",
+     "Flak",
+     "Plate",
+     "steel",
+     "concrete",
+     "Medium",
+     "Rocket",
+     "Drone"
+    ],
+    "band": "infantry",
     "delivery": "Hitscan",
     "element": "Kinetic",
     "examples": [
@@ -67681,7 +67741,7 @@
     ],
     "band": "infantry",
     "delivery": "Bullet",
-    "element": "Plain",
+    "element": "Toxin",
     "examples": [
      "ToxinSprayer:folded",
      "ToxinSprayerE:folded",
@@ -67691,7 +67751,7 @@
     "factor": 0.7355017668278897,
     "flat": false,
     "members": 4,
-    "name": "Bullet_Inf_3",
+    "name": "BulletToxin_Inf",
     "profile": [
      null,
      null,
@@ -67733,7 +67793,7 @@
     ],
     "band": "vehicle",
     "delivery": "Bullet",
-    "element": "Plain",
+    "element": "Toxin",
     "examples": [
      "CRToxinSprayer:folded",
      "CRToxinSprayerE:folded",
@@ -67743,7 +67803,7 @@
     "factor": 0.6975335244070665,
     "flat": false,
     "members": 4,
-    "name": "Bullet_Veh_3",
+    "name": "BulletToxin_Veh",
     "profile": [
      null,
      null,
@@ -68045,6 +68105,58 @@
     ],
     "band": "infantry",
     "delivery": "Hitscan",
+    "element": "Toxin",
+    "examples": [
+     "UCVirusgun:Warhead@1Dam",
+     "UCVirusgunE:Warhead@1Dam",
+     "Virusgun:Warhead@1Dam",
+     "VirusgunE:Warhead@1Dam"
+    ],
+    "factor": 0.5699234699086753,
+    "flat": false,
+    "members": 4,
+    "name": "HitscanToxin_Inf",
+    "profile": [
+     10.0,
+     10.0,
+     10.0,
+     148.8,
+     148.8,
+     111.6,
+     148.8,
+     148.8,
+     148.8,
+     148.8,
+     10.0,
+     148.8,
+     37.2
+    ],
+    "uses": 4,
+    "weapons": [
+     "UCVirusgun",
+     "UCVirusgunE",
+     "Virusgun",
+     "VirusgunE"
+    ]
+   },
+   {
+    "armors": [
+     "Wood",
+     "Steel",
+     "Concrete",
+     "Light",
+     "None",
+     "Heavy",
+     "Flak",
+     "Plate",
+     "steel",
+     "concrete",
+     "Medium",
+     "Rocket",
+     "Drone"
+    ],
+    "band": "infantry",
+    "delivery": "Hitscan",
     "element": "Plain",
     "examples": [
      "PsychicJab:Warhead@1Dam",
@@ -68077,58 +68189,6 @@
      "PsychicJabE",
      "UCPsychicJab",
      "UCPsychicJabE"
-    ]
-   },
-   {
-    "armors": [
-     "Wood",
-     "Steel",
-     "Concrete",
-     "Light",
-     "None",
-     "Heavy",
-     "Flak",
-     "Plate",
-     "steel",
-     "concrete",
-     "Medium",
-     "Rocket",
-     "Drone"
-    ],
-    "band": "infantry",
-    "delivery": "Hitscan",
-    "element": "Plain",
-    "examples": [
-     "UCVirusgun:Warhead@1Dam",
-     "UCVirusgunE:Warhead@1Dam",
-     "Virusgun:Warhead@1Dam",
-     "VirusgunE:Warhead@1Dam"
-    ],
-    "factor": 0.5699234699086753,
-    "flat": false,
-    "members": 4,
-    "name": "Hitscan_Inf_3",
-    "profile": [
-     10.0,
-     10.0,
-     10.0,
-     148.8,
-     148.8,
-     111.6,
-     148.8,
-     148.8,
-     148.8,
-     148.8,
-     10.0,
-     148.8,
-     37.2
-    ],
-    "uses": 4,
-    "weapons": [
-     "UCVirusgun",
-     "UCVirusgunE",
-     "Virusgun",
-     "VirusgunE"
     ]
    },
    {
@@ -68457,7 +68517,7 @@
     ],
     "band": "aircraft",
     "delivery": "Missile",
-    "element": "Plain",
+    "element": "Toxin",
     "examples": [
      "MosquitoBarrage:folded",
      "MosquitoBarrageE:folded",
@@ -68467,7 +68527,7 @@
     "factor": 0.3595043004584325,
     "flat": false,
     "members": 4,
-    "name": "Missile_Air",
+    "name": "MissileToxin_Air",
     "profile": [
      40.9,
      48.0,
@@ -68489,110 +68549,6 @@
      "MosquitoBarrageE",
      "MosquitoMissile",
      "MosquitoMissileE"
-    ]
-   },
-   {
-    "armors": [
-     "Wood",
-     "Steel",
-     "Concrete",
-     "Light",
-     "None",
-     "Heavy",
-     "Flak",
-     "Plate",
-     "steel",
-     "concrete",
-     "Medium",
-     "Rocket",
-     "Drone"
-    ],
-    "band": "infantry",
-    "delivery": "Radiation",
-    "element": "Plain",
-    "examples": [
-     "RadBeamWeaponOrange:Warhead@1Dam",
-     "RadBeamWeaponOrangeE:Warhead@1Dam",
-     "UCRadBeamWeaponOrange:Warhead@1Dam",
-     "UCRadBeamWeaponOrangeE:Warhead@1Dam"
-    ],
-    "factor": 0.8962861725654471,
-    "flat": false,
-    "members": 4,
-    "name": "Radiation_Inf",
-    "profile": [
-     null,
-     null,
-     null,
-     104.1,
-     148.8,
-     22.3,
-     148.8,
-     148.8,
-     148.8,
-     148.8,
-     22.3,
-     148.8,
-     59.5
-    ],
-    "uses": 4,
-    "weapons": [
-     "RadBeamWeaponOrange",
-     "RadBeamWeaponOrangeE",
-     "UCRadBeamWeaponOrange",
-     "UCRadBeamWeaponOrangeE"
-    ]
-   },
-   {
-    "armors": [
-     "Wood",
-     "Steel",
-     "Concrete",
-     "Light",
-     "None",
-     "Heavy",
-     "Flak",
-     "Plate",
-     "steel",
-     "concrete",
-     "Medium",
-     "Rocket",
-     "Drone"
-    ],
-    "band": "infantry",
-    "delivery": "Radiation",
-    "element": "Radiation",
-    "examples": [
-     "RadBeamWeapon:Warhead@1Dam",
-     "RadBeamWeaponE:Warhead@1Dam",
-     "UCRadBeamWeapon:Warhead@1Dam",
-     "UCRadBeamWeaponE:Warhead@1Dam"
-    ],
-    "factor": 0.8962861725654471,
-    "flat": false,
-    "members": 4,
-    "name": "Radiation_Inf_2",
-    "profile": [
-     null,
-     null,
-     null,
-     104.1,
-     148.8,
-     22.3,
-     148.8,
-     148.8,
-     148.8,
-     148.8,
-     22.3,
-     148.8,
-     59.5
-    ],
-    "uses": 4,
-    "weapons": [
-     "RadBeamWeapon",
-     "RadBeamWeaponE",
-     "UCRadBeamWeapon",
-     "UCRadBeamWeaponE"
     ]
    },
    {
@@ -68826,7 +68782,7 @@
     "factor": 0.9567283159767211,
     "flat": false,
     "members": 3,
-    "name": "Hitscan_Inf_4",
+    "name": "Hitscan_Inf_3",
     "profile": [
      37.2,
      44.6,
@@ -69055,6 +69011,54 @@
      "Rocket",
      "Drone"
     ],
+    "band": "vehicle",
+    "delivery": "Bullet",
+    "element": "Toxin",
+    "examples": [
+     "PoisonSting:Warhead@1Dam",
+     "PoisonStingE:Warhead@1Dam"
+    ],
+    "factor": 0.8465874374048312,
+    "flat": false,
+    "members": 2,
+    "name": "BulletToxin_Veh_2",
+    "profile": [
+     52.1,
+     37.2,
+     37.2,
+     119.0,
+     148.8,
+     37.2,
+     148.8,
+     148.8,
+     148.8,
+     148.8,
+     37.2,
+     148.8,
+     89.3
+    ],
+    "uses": 2,
+    "weapons": [
+     "PoisonSting",
+     "PoisonStingE"
+    ]
+   },
+   {
+    "armors": [
+     "Wood",
+     "Steel",
+     "Concrete",
+     "Light",
+     "None",
+     "Heavy",
+     "Flak",
+     "Plate",
+     "steel",
+     "concrete",
+     "Medium",
+     "Rocket",
+     "Drone"
+    ],
     "band": "aircraft",
     "delivery": "Bullet",
     "element": "Plain",
@@ -69159,7 +69163,7 @@
     "factor": 0.9901884023673088,
     "flat": false,
     "members": 2,
-    "name": "Bullet_Veh_4",
+    "name": "Bullet_Veh_3",
     "profile": [
      29.8,
      37.2,
@@ -69179,54 +69183,6 @@
     "weapons": [
      "MirageGun",
      "MirageGunE"
-    ]
-   },
-   {
-    "armors": [
-     "Wood",
-     "Steel",
-     "Concrete",
-     "Light",
-     "None",
-     "Heavy",
-     "Flak",
-     "Plate",
-     "steel",
-     "concrete",
-     "Medium",
-     "Rocket",
-     "Drone"
-    ],
-    "band": "vehicle",
-    "delivery": "Bullet",
-    "element": "Plain",
-    "examples": [
-     "PoisonSting:Warhead@1Dam",
-     "PoisonStingE:Warhead@1Dam"
-    ],
-    "factor": 0.8465874374048312,
-    "flat": false,
-    "members": 2,
-    "name": "Bullet_Veh_5",
-    "profile": [
-     52.1,
-     37.2,
-     37.2,
-     119.0,
-     148.8,
-     37.2,
-     148.8,
-     148.8,
-     148.8,
-     148.8,
-     37.2,
-     148.8,
-     89.3
-    ],
-    "uses": 2,
-    "weapons": [
-     "PoisonSting",
-     "PoisonStingE"
     ]
    },
    {
@@ -69629,6 +69585,54 @@
      "Rocket",
      "Drone"
     ],
+    "band": "vehicle",
+    "delivery": "Hitscan",
+    "element": "Toxin",
+    "examples": [
+     "CRVirusgun:Warhead@1Dam",
+     "CRVirusgunE:Warhead@1Dam"
+    ],
+    "factor": 0.5699234699086753,
+    "flat": false,
+    "members": 2,
+    "name": "HitscanToxin_Veh",
+    "profile": [
+     10.0,
+     10.0,
+     10.0,
+     148.8,
+     148.8,
+     111.6,
+     148.8,
+     148.8,
+     148.8,
+     148.8,
+     10.0,
+     148.8,
+     37.2
+    ],
+    "uses": 2,
+    "weapons": [
+     "CRVirusgun",
+     "CRVirusgunE"
+    ]
+   },
+   {
+    "armors": [
+     "Wood",
+     "Steel",
+     "Concrete",
+     "Light",
+     "None",
+     "Heavy",
+     "Flak",
+     "Plate",
+     "steel",
+     "concrete",
+     "Medium",
+     "Rocket",
+     "Drone"
+    ],
     "band": "defense",
     "delivery": "Hitscan",
     "element": "Plain",
@@ -69705,54 +69709,6 @@
     "weapons": [
      "CRPsychicJab",
      "CRPsychicJabE"
-    ]
-   },
-   {
-    "armors": [
-     "Wood",
-     "Steel",
-     "Concrete",
-     "Light",
-     "None",
-     "Heavy",
-     "Flak",
-     "Plate",
-     "steel",
-     "concrete",
-     "Medium",
-     "Rocket",
-     "Drone"
-    ],
-    "band": "vehicle",
-    "delivery": "Hitscan",
-    "element": "Plain",
-    "examples": [
-     "CRVirusgun:Warhead@1Dam",
-     "CRVirusgunE:Warhead@1Dam"
-    ],
-    "factor": 0.5699234699086753,
-    "flat": false,
-    "members": 2,
-    "name": "Hitscan_Veh_3",
-    "profile": [
-     10.0,
-     10.0,
-     10.0,
-     148.8,
-     148.8,
-     111.6,
-     148.8,
-     148.8,
-     148.8,
-     148.8,
-     10.0,
-     148.8,
-     37.2
-    ],
-    "uses": 2,
-    "weapons": [
-     "CRVirusgun",
-     "CRVirusgunE"
     ]
    },
    {
