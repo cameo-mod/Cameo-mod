@@ -362,6 +362,8 @@ namespace OpenRA.Mods.Cameo.Test
 		[TestCase("rush", "turtle", 1000, 1000 + 3000, false, -1, 1000, false)]
 		[TestCase("rush", "", 1000, 1000 + 3000, false, 3000, 1000, false)]
 		[TestCase("rush", "rush", 1000, 1000 + 3000, false, 3000, 1000, false)]
+		[TestCase("rush", "turtle", 1000, 1750, false, 750, 1000, true)]
+		[TestCase("rush", "turtle", 1001, 1750, false, 750, 1000, false)]
 		public void PersonalitySwitchPolicyRespectsReactionDelayAndHold(string current, string candidate, int lastSwitchTick,
 			int tick, bool emergencyTransition, int reactionDelay, int candidateSince, bool expected)
 		{
@@ -412,8 +414,14 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void PersonalityReactionDelayUsesThirtySecondTierSteps()
 		{
-			var delays = Enumerable.Range(0, 10).Select(i => 7500 - i * 750).ToArray();
-			Assert.That(delays, Is.EqualTo(new[] { 7500, 6750, 6000, 5250, 4500, 3750, 3000, 2250, 1500, 750 }));
+			var info = new MasterAiBotModuleInfo();
+			foreach (var delay in Enumerable.Range(0, 10).Select(i => 7500 - i * 750))
+			{
+				Assert.That(MasterAiBotModule.ShouldSwitchPersonality("rush", "turtle", 0, delay - 1,
+					false, delay, 0, info), Is.False);
+				Assert.That(MasterAiBotModule.ShouldSwitchPersonality("rush", "turtle", 0, delay,
+					false, delay, 0, info), Is.True);
+			}
 		}
 
 		[Test]

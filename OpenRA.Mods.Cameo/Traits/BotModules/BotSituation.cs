@@ -437,8 +437,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return true;
 			if (reactionDelayTicks < 0)
 				return false;
+			var hold = Math.Min(info.PersonalityHoldTicks, reactionDelayTicks);
 			return tick - candidateSince >= reactionDelayTicks &&
-				tick - lastSwitchTick >= info.PersonalityHoldTicks;
+				tick - lastSwitchTick >= hold;
 		}
 
 		internal static int Saturate(int x, int k)

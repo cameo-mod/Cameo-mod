@@ -914,14 +914,15 @@ interpret that cache as synchronized world state or bypass it through a new prod
 **Loaded, observe-only:** `MasterAiBotModule` publishes the immutable local snapshot
 at the §10.5 cadence (emergency ~25, rebuild ~150, decisions ~1500 ticks).
 It has **no consumers and no hint reads**, and logs candidate personality and target values only.
-On hard and above it issues `SetBotPersonality` at the decision cadence; the synced
+Every difficulty issues `SetBotPersonality` after its sustained reaction delay; the synced
 `BotPersonalityController` validates the order, ignores repeats, and owns the sole condition token.
 `ScoutBotModule` remains a later owner of explicitly allocated scouting tasks after contact memory
 and the visibility gate (§11.3), not a current capability. Reading an unsynced personality field
 from simulation code is forbidden. `PersonalityReactionDelay` controls how long
 a candidate must persist before switching; the ten difficulty tiers range from
-7500 ticks on easiest to 750 on cameogod in 750-tick steps, while a negative
-value preserves the fixed random personality fallback.
+7500 ticks on easiest to 750 on cameogod in 750-tick steps. The personality
+hold is clamped to that reaction delay, so no tier reacts slower than its own
+delay; a negative value preserves the fixed random personality fallback.
 
 ```text
 Current synced world / rule data
@@ -1062,7 +1063,7 @@ the one that needs a tuning pass on everything before it.
 |---|---|
 | Duplicate authority (two writers of production or squads) | 10.1; enforced by the master owning no queues and no squads |
 | Second instance of a `TraitOrDefault` consumer | §1.3; the master and the compositions module are singletons by declaration |
-| Personality thrash | §4.5 hold time + momentum + slow cadence; and every switch costs an order (10.4) |
+| Personality thrash | §4.5 sustained reaction delay + clamped hold + momentum; and every switch costs an order (10.4) |
 | Desync from learning | §6.1 tiers; learned data is read at load or never touches synced state |
 | Learned weights overfitted to bot-vs-bot play | §8.4 distribution shift; priors stay small and are reviewed as balance data |
 | Losing today's behaviour on a bad phase | degradation rule in 10.1; set `PersonalityReactionDelay` negative to disable switching |

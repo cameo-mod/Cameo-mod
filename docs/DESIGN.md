@@ -4266,8 +4266,9 @@ dynamically through a `SetBotPersonality` order; the synced controller keeps
 exactly one personality condition active at a time. Switching requires the
 candidate to persist for the per-tier `PersonalityReactionDelay` (7500 ticks
 on easiest down to 750 on cameogod in 750-tick steps), then observes a
-`PersonalityHoldTicks` minimum hold. Emergency bypasses both the reaction
-delay and the hold.
+`PersonalityHoldTicks` hold clamped to that reaction delay, so no tier reacts
+slower than its own delay. Emergency bypasses both the reaction delay and the
+hold.
 
 The personality effect is currently confined to the squad manager. Each
 personality has its own `SquadManagerBotModuleCA` instance gated by
