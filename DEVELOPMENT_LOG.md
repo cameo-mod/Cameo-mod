@@ -56,6 +56,34 @@ was needed. Resolved dump re-verified identical; boot-gate re-run PASS.
 `Sound2` exists as two byte-identical copies in the Atreides and Ordos packs
 (unreferenced; flagged for dedup review).
 
+### Follow-up (same day, `devin/dawn/d2k-sequence-closure`, PR #412): sequences
+
+Second pass on `mods/cameo/sequences/d2k.yaml` (182 top-level images, 5,752
+lines, the last globally-loaded D2k content file). The naive value-match map
+misfired twice before the executed classification — first by attributing
+inherited fields to the wrong file (regex bug), then by counting AI
+unit-name lists and dead-weapon projectile fields as references. The shipped
+pass is field-scoped (`RenderSprites.Image` + trait `Image`/`Icon` overrides
++ `Projectile.Image/TrailImage/HitAnim` — the same field set
+`audit_sequences.py` audits).
+
+- 38 blocks → NEW `ContentPacks/D2k/Shared/yaml/sequences.yaml` +
+  `Sequences:` include in Shared/content.yaml (every multi-pack image).
+- `d2k_missile`, `oneblastbullet`, `deviator_trail` → Ordos;
+  `d2k_ixdroneprojectile`, `vordel_effect_2` → Ixian; `devastator` →
+  Harkonnen.
+- 13 byte-identical dupes deleted (Atreides/Ordos pack copies pre-existed).
+- Stay global pending the shared-asset ruling: `small_trail`/`small_trail2`/
+  `shrapnel2-4` (core RockDebris map props ROCK1-7/TANKTRAP), `d2k_rpg`
+  (live RedAlert weapons), `spicebloom` (core actor). ~110 unreferenced
+  images stay for the unused-file audit.
+- `audit_sequences.py`: S1=0 before AND after; the lone S2 finding
+  (ra1_soviets flag overlay) is pre-existing on master. Boot-gate PASS.
+
+**Reusable lesson:** classify pack-membership on field-scoped *resolved*
+references only. Raw value matches over-report via AI lists (`ai/ai.yaml`),
+commented-out files, substring names, and dead weapon/projectile nodes.
+
 ## OpenCode GLM 5.3 Flash - Astra pipeline batch: A3/C1 dossiers, extrapolation join, speed law, report refresh (2026-09-09)
 
 ### Japan pilot follow-up — Astra, 2026-09-09 (in progress)
