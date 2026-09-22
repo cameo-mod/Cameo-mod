@@ -686,13 +686,12 @@
     "delivery": "Bullet",
     "element": "HE",
     "band": "vehicle",
-    "uses": 36,
+    "uses": 34,
     "weapons": [
      "8Inch",
      "BuggyGrenade",
      "DepthCharge",
      "Grenade",
-     "HammerTankCannonThermobaric",
      "NaxSturmArty",
      "SCUDThermobaric",
      "TSRaiderGrenade",
@@ -703,7 +702,6 @@
      "ra120mmThermobaric",
      "ra120mmThermobaricTargetingComputer",
      "sandmarinemortar",
-     "v1rocketsThermobaric",
      "wc2ballistaFire"
     ]
    },
@@ -876,79 +874,6 @@
     ]
    },
    {
-    "group": "BulletHE_Veh_5",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "CannonAP": 17,
-     "CannonHE": 12,
-     "CannonNuke": 9,
-     "MissileHE": 6
-    },
-    "delivery": "Bullet",
-    "element": "HE",
-    "band": "vehicle",
-    "uses": 27,
-    "weapons": [
-     "105mmThermobaric",
-     "AsianFlamerTank",
-     "AsianFlamerTank_elite",
-     "BigFlamer",
-     "BigFlamer2",
-     "FireballLauncherBuggy",
-     "FireballLauncherBuggy2",
-     "HeavyFlamer",
-     "HeavyPlasmaFlamer",
-     "IncendiaryRAGatlingTankCannon",
-     "MatadorFlamer",
-     "MutFlamer",
-     "MutHFlamer",
-     "OIFlamer",
-     "OIPlasmaFlamer",
-     "TSFireballLauncher",
-     "wc2dragonFireExplosion"
-    ]
-   },
-   {
-    "group": "BulletHE_Inf_2",
-    "family": "Demolition",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Demolition": 2
-    },
-    "delivery": "Bullet",
-    "element": "HE",
-    "band": "infantry",
-    "uses": 25,
-    "weapons": [
-     "AsianFlamerTroop",
-     "AsianFlamerTroop2",
-     "AsianFlamerTurret",
-     "BlackHandFlamer",
-     "FireballGun",
-     "FireballGunThermobaric",
-     "FirebatF",
-     "Flamer",
-     "Flamethrower",
-     "HarakanF",
-     "NaxiFlamerTroop",
-     "NaxiFlamerTroop_elite",
-     "SyndicateFireballLauncher",
-     "SyndicateFireballLauncher_elite",
-     "ThermoF",
-     "VolkovMagneticWeaponIncendiary",
-     "latinsyndicate_latinmilitia_molotov",
-     "latinsyndicate_latinmilitia_molotov_elite",
-     "ra1_soviets_rifleinfantry_carbine_incendiary",
-     "wc2mageFireballExplosion",
-     "wc2mageFireballVisible"
-    ]
-   },
-   {
     "group": "HitscanHE_Air",
     "family": "Sniper",
     "status": "proposed",
@@ -1049,6 +974,66 @@
      "schwarzermond_lunarsoldier_rifle_yellow",
      "schwarzermond_lunarsoldier_rifle_yellow_elite",
      "td_nod_minigunner_minigun_laser"
+    ]
+   },
+   {
+    "group": "BulletFire_Inf",
+    "family": "Flame",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Flame": 1
+    },
+    "delivery": "Bullet",
+    "element": "Fire",
+    "band": "infantry",
+    "uses": 20,
+    "weapons": [
+     "AsianFlamerTroop",
+     "AsianFlamerTroop2",
+     "AsianFlamerTurret",
+     "BlackHandFlamer",
+     "FireballGun",
+     "FireballGunThermobaric",
+     "FirebatF",
+     "Flamer",
+     "Flamethrower",
+     "HarakanF",
+     "NaxiFlamerTroop",
+     "NaxiFlamerTroop_elite",
+     "SiegeMortar",
+     "ThermoF",
+     "VolkovMagneticWeaponIncendiary",
+     "wc2mageFireballExplosion",
+     "wc2mageFireballVisible"
+    ]
+   },
+   {
+    "group": "BulletFire_Veh",
+    "family": "Flame",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Flame": 1
+    },
+    "delivery": "Bullet",
+    "element": "Fire",
+    "band": "vehicle",
+    "uses": 20,
+    "weapons": [
+     "AsianFlamerTank",
+     "AsianFlamerTank_elite",
+     "BigFlamer",
+     "BigFlamer2",
+     "FireballLauncherBuggy",
+     "HeavyFlamer",
+     "MutFlamer",
+     "MutHFlamer",
+     "OIFlamer",
+     "TSFireballLauncher",
+     "wc2dragonFireExplosion"
     ]
    },
    {
@@ -1249,7 +1234,7 @@
     ]
    },
    {
-    "group": "BulletHE_Veh_6",
+    "group": "BulletHE_Veh_5",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -1409,40 +1394,6 @@
     ]
    },
    {
-    "group": "BulletHE_Veh_7",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "CannonAP": 17,
-     "CannonHE": 12,
-     "CannonNuke": 9,
-     "MissileHE": 6
-    },
-    "delivery": "Bullet",
-    "element": "HE",
-    "band": "vehicle",
-    "uses": 15,
-    "weapons": [
-     "AsianChemical",
-     "AsianChemical_elite",
-     "CabalRavagerPlasma",
-     "CabalRavagerPlasmaNeutron",
-     "JapanSpeedBoatGunWaveforce",
-     "MutFlamerChem",
-     "MutHFlamerChem",
-     "NambuMGWaveforce",
-     "RA2120mm_rad",
-     "RA2120mm_rad_elite",
-     "TS120mmxChem",
-     "TSBusMortarChem",
-     "TSChemBoatcannon",
-     "TSScoopDualChem",
-     "harkonnen_inkvine_weapon"
-    ]
-   },
-   {
     "group": "LaserHE_Air",
     "family": "?",
     "status": "proposed",
@@ -1474,7 +1425,7 @@
     ]
    },
    {
-    "group": "BulletHE_Inf_3",
+    "group": "BulletHE_Inf_2",
     "family": "Demolition",
     "status": "proposed",
     "confidence": "single",
@@ -1496,35 +1447,6 @@
      "TSCommandoShotgun",
      "TSMutShotgun",
      "TSShotgun"
-    ]
-   },
-   {
-    "group": "BulletHE_Inf_4",
-    "family": "Demolition",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Demolition": 2
-    },
-    "delivery": "Bullet",
-    "element": "HE",
-    "band": "infantry",
-    "uses": 13,
-    "weapons": [
-     "D2K_Rocket_Trooper2",
-     "GrenadeRA",
-     "GrenadeThermobaric",
-     "LatinMonkeyGrenade1",
-     "LatinMonkeyGrenade2",
-     "LatinMonkeyGrenade3",
-     "NarcoGrenade",
-     "NarcoGrenade_elite",
-     "ReaperGrenade",
-     "SiegeMortar",
-     "TSCadreGrenade",
-     "TSInfantryMortar",
-     "tkm_trooper_gp25"
     ]
    },
    {
@@ -1637,7 +1559,7 @@
     ]
    },
    {
-    "group": "BulletHE_Inf_5",
+    "group": "BulletHE_Inf_3",
     "family": "Demolition",
     "status": "proposed",
     "confidence": "single",
@@ -1650,22 +1572,22 @@
     "band": "infantry",
     "uses": 12,
     "weapons": [
-     "Chemspray",
-     "DefilerPlague",
-     "RA2Chemspray2",
-     "RA2Chemspray_elite",
-     "TSChemGhostGun",
-     "TSChemspray",
-     "TSChemsprayUP",
-     "TSGhostGun",
-     "TSInfantryMortarChem",
-     "TSToxinRifle",
-     "TSVisceroidSpray",
-     "TSVisceroidSprayUP"
+     "D2K_Rocket_Trooper2",
+     "GrenadeRA",
+     "GrenadeThermobaric",
+     "LatinMonkeyGrenade1",
+     "LatinMonkeyGrenade2",
+     "LatinMonkeyGrenade3",
+     "NarcoGrenade",
+     "NarcoGrenade_elite",
+     "ReaperGrenade",
+     "TSCadreGrenade",
+     "TSInfantryMortar",
+     "tkm_trooper_gp25"
     ]
    },
    {
-    "group": "BulletHE_Veh_8",
+    "group": "BulletHE_Veh_6",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -1771,7 +1693,7 @@
     ]
    },
    {
-    "group": "BulletHE_Inf_6",
+    "group": "BulletHE_Inf_4",
     "family": "Demolition",
     "status": "proposed",
     "confidence": "single",
@@ -1795,6 +1717,66 @@
      "ra1_allies_rifleinfantry_carbine_cryo",
      "tkm_rifleman_rifle",
      "tkm_rifleman_semiautorifle"
+    ]
+   },
+   {
+    "group": "BulletToxin_Inf",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "Bullet": 28,
+     "CannonAP": 24,
+     "CannonHE": 13,
+     "MissileHE": 10
+    },
+    "delivery": "Bullet",
+    "element": "Toxin",
+    "band": "infantry",
+    "uses": 11,
+    "weapons": [
+     "CabalDissolverSpray",
+     "Chemspray",
+     "DefilerPlague",
+     "RA2Chemspray",
+     "TSChemGhostGun",
+     "TSChemspray",
+     "TSChemsprayUP",
+     "TSGhostGun",
+     "TSToxinRifle",
+     "TSVisceroidSpray",
+     "TSVisceroidSprayUP"
+    ]
+   },
+   {
+    "group": "BulletToxin_Veh",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "Bullet": 28,
+     "CannonAP": 24,
+     "CannonHE": 13,
+     "MissileHE": 10
+    },
+    "delivery": "Bullet",
+    "element": "Toxin",
+    "band": "vehicle",
+    "uses": 11,
+    "weapons": [
+     "CabalRavagerPlasma",
+     "CabalRavagerPlasmaNeutron",
+     "MutFlamerChem",
+     "MutHFlamerChem",
+     "TS70mmChem",
+     "TSBusMortarChem",
+     "TSChemBoatcannon",
+     "TSHighVelocity2Chem",
+     "TSHighVelocityChem",
+     "harkonnen_inkvine_weapon",
+     "plymouthSticky"
     ]
    },
    {
@@ -1964,19 +1946,19 @@
     ]
    },
    {
-    "group": "Bullet_Veh",
+    "group": "BulletToxin_Veh_2",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
-    "why": "exact delivery/element/band match",
+    "why": "no CA group with this band; matched on 1",
     "candidates": {
-     "Bullet": 10,
-     "MissileHE": 4,
-     "CannonAP": 2,
-     "CannonHE": 1
+     "Bullet": 28,
+     "CannonAP": 24,
+     "CannonHE": 13,
+     "MissileHE": 10
     },
     "delivery": "Bullet",
-    "element": "Plain",
+    "element": "Toxin",
     "band": "vehicle",
     "uses": 10,
     "weapons": [
@@ -2011,7 +1993,7 @@
     ]
    },
    {
-    "group": "BulletHE_Inf_7",
+    "group": "BulletHE_Inf_5",
     "family": "Demolition",
     "status": "proposed",
     "confidence": "single",
@@ -2036,7 +2018,28 @@
     ]
    },
    {
-    "group": "BulletHE_Veh_10",
+    "group": "BulletHE_Veh_7",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "CannonAP": 17,
+     "CannonHE": 12,
+     "CannonNuke": 9,
+     "MissileHE": 6
+    },
+    "delivery": "Bullet",
+    "element": "HE",
+    "band": "vehicle",
+    "uses": 9,
+    "weapons": [
+     "DRPlasmaTankWeapon",
+     "DevBullet"
+    ]
+   },
+   {
+    "group": "BulletHE_Veh_8",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -2061,27 +2064,6 @@
      "RA2GattlingMG3",
      "TSMechMGII",
      "TSNomadGun"
-    ]
-   },
-   {
-    "group": "BulletHE_Veh_9",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "CannonAP": 17,
-     "CannonHE": 12,
-     "CannonNuke": 9,
-     "MissileHE": 6
-    },
-    "delivery": "Bullet",
-    "element": "HE",
-    "band": "vehicle",
-    "uses": 9,
-    "weapons": [
-     "DRPlasmaTankWeapon",
-     "DevBullet"
     ]
    },
    {
@@ -2206,7 +2188,7 @@
     ]
    },
    {
-    "group": "BulletHE_Inf_8",
+    "group": "BulletHE_Inf_6",
     "family": "Demolition",
     "status": "proposed",
     "confidence": "single",
@@ -2228,7 +2210,7 @@
     ]
    },
    {
-    "group": "BulletHE_Inf_9",
+    "group": "BulletHE_Inf_7",
     "family": "Demolition",
     "status": "proposed",
     "confidence": "single",
@@ -2252,7 +2234,34 @@
     ]
    },
    {
-    "group": "BulletHE_Veh_11",
+    "group": "BulletHE_Veh_10",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "CannonAP": 17,
+     "CannonHE": 12,
+     "CannonNuke": 9,
+     "MissileHE": 6
+    },
+    "delivery": "Bullet",
+    "element": "HE",
+    "band": "vehicle",
+    "uses": 8,
+    "weapons": [
+     "AsianChemical",
+     "AsianChemical_elite",
+     "JapanSpeedBoatGunWaveforce",
+     "NambuMGWaveforce",
+     "RA2120mm_rad",
+     "RA2120mm_rad_elite",
+     "TS120mmxChem",
+     "TSScoopDualChem"
+    ]
+   },
+   {
+    "group": "BulletHE_Veh_9",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -2357,6 +2366,28 @@
     ]
    },
    {
+    "group": "BulletFire_Veh_2",
+    "family": "Flame",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Flame": 1
+    },
+    "delivery": "Bullet",
+    "element": "Fire",
+    "band": "vehicle",
+    "uses": 7,
+    "weapons": [
+     "HammerTankCannonThermobaric",
+     "HonestJohn",
+     "MonsterTank120mmInferno",
+     "SteelKatyCannons",
+     "SteelKatyCannons_elite",
+     "v1rocketsThermobaric"
+    ]
+   },
+   {
     "group": "BulletHE_Air_3",
     "family": "?",
     "status": "proposed",
@@ -2377,7 +2408,7 @@
     ]
    },
    {
-    "group": "BulletHE_Inf_10",
+    "group": "BulletHE_Inf_8",
     "family": "Demolition",
     "status": "proposed",
     "confidence": "single",
@@ -2397,6 +2428,31 @@
      "CabalCommandoPlasmaMk2Neutron",
      "CabalCommandoPlasmaNeutron",
      "PlasmaFlamer"
+    ]
+   },
+   {
+    "group": "BulletHE_Veh_11",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "CannonAP": 17,
+     "CannonHE": 12,
+     "CannonNuke": 9,
+     "MissileHE": 6
+    },
+    "delivery": "Bullet",
+    "element": "HE",
+    "band": "vehicle",
+    "uses": 7,
+    "weapons": [
+     "105mmThermobaric",
+     "FireballLauncherBuggy2",
+     "HeavyPlasmaFlamer",
+     "IncendiaryRAGatlingTankCannon",
+     "MatadorFlamer",
+     "OIPlasmaFlamer"
     ]
    },
    {
@@ -2439,7 +2495,7 @@
     ]
    },
    {
-    "group": "Bullet_Veh_2",
+    "group": "Bullet_Veh",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -2505,28 +2561,6 @@
     ]
    },
    {
-    "group": "MissileHE_Inf_4",
-    "family": "MissileAP",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "MissileAP": 14,
-     "MissileAA": 4
-    },
-    "delivery": "Missile",
-    "element": "HE",
-    "band": "infantry",
-    "uses": 7,
-    "weapons": [
-     "SwarmlingShoot",
-     "TSFiendShard",
-     "TSFiendShardBlue",
-     "TSFiendShardBlueUP",
-     "TSFiendShardUP"
-    ]
-   },
-   {
     "group": "MissileTesla_Veh_2",
     "family": "MissileTesla",
     "status": "proposed",
@@ -2547,6 +2581,30 @@
      "eden_EMP_AA",
      "plymouth_EMP",
      "plymouth_Tiger_EMP"
+    ]
+   },
+   {
+    "group": "MissileToxin_Inf",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
+    },
+    "delivery": "Missile",
+    "element": "Toxin",
+    "band": "infantry",
+    "uses": 7,
+    "weapons": [
+     "ChemRockets",
+     "TSFiendShard",
+     "TSFiendShardBlue",
+     "TSFiendShardBlueUP",
+     "TSFiendShardUP"
     ]
    },
    {
@@ -2644,28 +2702,6 @@
     "band": "aircraft",
     "uses": 6,
     "weapons": [
-     "AsianChemicalBombs",
-     "CorruptorSpore",
-     "Laboratory_Bioball",
-     "MutaliskSpore",
-     "QueenSpine"
-    ]
-   },
-   {
-    "group": "BulletHE_Air_6",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "BulletHE": 4,
-     "Demolition": 3
-    },
-    "delivery": "Bullet",
-    "element": "HE",
-    "band": "aircraft",
-    "uses": 6,
-    "weapons": [
      "BCLaser",
      "InterceptorCannon",
      "PhobosLaser",
@@ -2692,6 +2728,27 @@
      "TS70mmTur",
      "TSHighVelocityTur",
      "tkmturretcannon"
+    ]
+   },
+   {
+    "group": "BulletHE_Inf_9",
+    "family": "Demolition",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Demolition": 2
+    },
+    "delivery": "Bullet",
+    "element": "HE",
+    "band": "infantry",
+    "uses": 6,
+    "weapons": [
+     "SyndicateFireballLauncher",
+     "SyndicateFireballLauncher_elite",
+     "latinsyndicate_latinmilitia_molotov",
+     "latinsyndicate_latinmilitia_molotov_elite",
+     "ra1_soviets_rifleinfantry_carbine_incendiary"
     ]
    },
    {
@@ -2776,7 +2833,32 @@
     ]
    },
    {
-    "group": "MissileHE_Inf_5",
+    "group": "MissileFire_Veh",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
+    },
+    "delivery": "Missile",
+    "element": "Fire",
+    "band": "vehicle",
+    "uses": 6,
+    "weapons": [
+     "MammothTusk2Thermobaric",
+     "MammothTusk2ThermobaricTargetingComputer",
+     "MammothTuskThermobaric",
+     "MammothTuskThermobaricTargetingComputer",
+     "MonsterTankTuskThermobaric",
+     "wc2dragonFireVisible"
+    ]
+   },
+   {
+    "group": "MissileHE_Inf_4",
     "family": "MissileAP",
     "status": "proposed",
     "confidence": "majority",
@@ -2796,7 +2878,7 @@
     ]
    },
    {
-    "group": "MissileHE_Inf_6",
+    "group": "MissileHE_Inf_5",
     "family": "MissileAP",
     "status": "proposed",
     "confidence": "majority",
@@ -2819,32 +2901,7 @@
     ]
    },
    {
-    "group": "MissileHE_Veh_7",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "MissileHE": 14,
-     "MissileAP": 11,
-     "MissileAA": 9,
-     "(park: naval)": 2
-    },
-    "delivery": "Missile",
-    "element": "HE",
-    "band": "vehicle",
-    "uses": 6,
-    "weapons": [
-     "MammothTusk2Thermobaric",
-     "MammothTusk2ThermobaricTargetingComputer",
-     "MammothTuskThermobaric",
-     "MammothTuskThermobaricTargetingComputer",
-     "MonsterTankTuskThermobaric",
-     "NodTorpTubeBlackMarket"
-    ]
-   },
-   {
-    "group": "Missile_Veh_2",
+    "group": "MissileToxin_Veh",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -2856,7 +2913,7 @@
      "Arrow": 6
     },
     "delivery": "Missile",
-    "element": "Plain",
+    "element": "Toxin",
     "band": "vehicle",
     "uses": 6,
     "weapons": [
@@ -2866,26 +2923,6 @@
      "TSChemAdatsMissile",
      "TSChemRuinerMissile",
      "TSMammothTuskChem"
-    ]
-   },
-   {
-    "group": "BulletFire_Veh",
-    "family": "Flame",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Flame": 1
-    },
-    "delivery": "Bullet",
-    "element": "Fire",
-    "band": "vehicle",
-    "uses": 5,
-    "weapons": [
-     "HonestJohn",
-     "MonsterTank120mmInferno",
-     "SteelKatyCannons",
-     "SteelKatyCannons_elite"
     ]
    },
    {
@@ -2958,28 +2995,7 @@
     ]
    },
    {
-    "group": "BulletHE_Air_10",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "BulletHE": 4,
-     "Demolition": 3
-    },
-    "delivery": "Bullet",
-    "element": "HE",
-    "band": "aircraft",
-    "uses": 4,
-    "weapons": [
-     "JapaneseHeavyBomb",
-     "SkyHawkChainGun",
-     "TSBombSonic",
-     "eye_bomberguy"
-    ]
-   },
-   {
-    "group": "BulletHE_Air_7",
+    "group": "BulletHE_Air_6",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -2999,7 +3015,7 @@
     ]
    },
    {
-    "group": "BulletHE_Air_8",
+    "group": "BulletHE_Air_7",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -3018,7 +3034,7 @@
     ]
    },
    {
-    "group": "BulletHE_Air_9",
+    "group": "BulletHE_Air_8",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -3034,6 +3050,27 @@
     "weapons": [
      "NaxQuadCannon",
      "NaxQuadCannon_elite"
+    ]
+   },
+   {
+    "group": "BulletHE_Air_9",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "BulletHE": 4,
+     "Demolition": 3
+    },
+    "delivery": "Bullet",
+    "element": "HE",
+    "band": "aircraft",
+    "uses": 4,
+    "weapons": [
+     "JapaneseHeavyBomb",
+     "SkyHawkChainGun",
+     "TSBombSonic",
+     "eye_bomberguy"
     ]
    },
    {
@@ -3058,7 +3095,7 @@
     ]
    },
    {
-    "group": "Bullet_Veh_3",
+    "group": "Bullet_Veh_2",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -3079,30 +3116,7 @@
     ]
    },
    {
-    "group": "Bullet_Veh_4",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Bullet": 10,
-     "MissileHE": 4,
-     "CannonAP": 2,
-     "CannonHE": 1
-    },
-    "delivery": "Bullet",
-    "element": "Plain",
-    "band": "vehicle",
-    "uses": 4,
-    "weapons": [
-     "TS70mmChem",
-     "TSHighVelocity2Chem",
-     "TSHighVelocityChem",
-     "plymouthSticky"
-    ]
-   },
-   {
-    "group": "MissileFire_Veh",
+    "group": "MissileFire_Veh_2",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -3139,53 +3153,12 @@
     "band": "aircraft",
     "uses": 4,
     "weapons": [
-     "DreadshroudSpore",
-     "MigMissiles_rad",
-     "MigMissiles_rad_elite"
-    ]
-   },
-   {
-    "group": "MissileHE_Air_5",
-    "family": "MissileAA",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "MissileAA": 2,
-     "MissileHE": 1
-    },
-    "delivery": "Missile",
-    "element": "HE",
-    "band": "aircraft",
-    "uses": 4,
-    "weapons": [
      "SteelTwisterMissiles",
      "SteelTwisterMissiles_elite"
     ]
    },
    {
-    "group": "MissileHE_Air_6",
-    "family": "MissileAA",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "MissileAA": 2,
-     "MissileHE": 1
-    },
-    "delivery": "Missile",
-    "element": "HE",
-    "band": "aircraft",
-    "uses": 4,
-    "weapons": [
-     "AsianPhoenixRocket",
-     "AsianPhoenixRocket_elite",
-     "HindMissilesThermobaric",
-     "ThermobaricMaverick"
-    ]
-   },
-   {
-    "group": "MissileHE_Air_7",
+    "group": "MissileHE_Air_5",
     "family": "MissileAA",
     "status": "proposed",
     "confidence": "majority",
@@ -3206,25 +3179,7 @@
     ]
    },
    {
-    "group": "MissileHE_Def_3",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "MissileAA": 1,
-     "MissileAP": 1
-    },
-    "delivery": "Missile",
-    "element": "HE",
-    "band": "defense",
-    "uses": 4,
-    "weapons": [
-     "Spore_AA"
-    ]
-   },
-   {
-    "group": "MissileHE_Veh_8",
+    "group": "MissileHE_Veh_7",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -3244,6 +3199,48 @@
      "AsianQuasarBoatAG",
      "DragoonCannon",
      "HovercraftPlasmaCannon"
+    ]
+   },
+   {
+    "group": "MissileToxin_Air",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
+    },
+    "delivery": "Missile",
+    "element": "Toxin",
+    "band": "aircraft",
+    "uses": 4,
+    "weapons": [
+     "DreadshroudSpore",
+     "MigMissiles_rad",
+     "MigMissiles_rad_elite"
+    ]
+   },
+   {
+    "group": "MissileToxin_Def",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
+    },
+    "delivery": "Missile",
+    "element": "Toxin",
+    "band": "defense",
+    "uses": 4,
+    "weapons": [
+     "Spore_AA"
     ]
    },
    {
@@ -3309,45 +3306,26 @@
     ]
    },
    {
-    "group": "BombHE_Air_2",
-    "family": "Demolition",
+    "group": "BombRadiation_Air",
+    "family": "Nuclear",
     "status": "proposed",
     "confidence": "single",
     "why": "exact delivery/element/band match",
     "candidates": {
-     "Demolition": 3
+     "Nuclear": 1
     },
     "delivery": "Bomb",
-    "element": "HE",
+    "element": "Radiation",
     "band": "aircraft",
     "uses": 3,
     "weapons": [
      "FirehawkBomb",
-     "ParaBombNuke",
-     "YakNuclearBomb"
+     "RA2KirovBomb_nuclear",
+     "RA2KirovBomb_nuclear_elite"
     ]
    },
    {
-    "group": "BombHE_Air_3",
-    "family": "Demolition",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Demolition": 3
-    },
-    "delivery": "Bomb",
-    "element": "HE",
-    "band": "aircraft",
-    "uses": 3,
-    "weapons": [
-     "Napalm",
-     "NapalmA10Carrier",
-     "YakNapalm"
-    ]
-   },
-   {
-    "group": "BulletFire_Inf",
+    "group": "BulletFire_Inf_2",
     "family": "Flame",
     "status": "proposed",
     "confidence": "single",
@@ -3363,6 +3341,45 @@
      "RA2PsychicJab",
      "RA2PsychicJab_elite",
      "VolkovMagneticWeaponIncendiaryNuclearShells"
+    ]
+   },
+   {
+    "group": "BulletHE_Air_10",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "BulletHE": 4,
+     "Demolition": 3
+    },
+    "delivery": "Bullet",
+    "element": "HE",
+    "band": "aircraft",
+    "uses": 3,
+    "weapons": [
+     "AsianChemicalBombs",
+     "MutaliskSpore",
+     "QueenSpine"
+    ]
+   },
+   {
+    "group": "BulletHE_Inf_10",
+    "family": "Demolition",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Demolition": 2
+    },
+    "delivery": "Bullet",
+    "element": "HE",
+    "band": "infantry",
+    "uses": 3,
+    "weapons": [
+     "RA2Chemspray2",
+     "RA2Chemspray_elite",
+     "TSInfantryMortarChem"
     ]
    },
    {
@@ -3385,6 +3402,27 @@
      "ShotgunAttackRobotGun",
      "ShotgunAttackRobotGun_elite",
      "ordos_raider_hmg"
+    ]
+   },
+   {
+    "group": "BulletToxin_Air",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "Bullet": 28,
+     "CannonAP": 24,
+     "CannonHE": 13,
+     "MissileHE": 10
+    },
+    "delivery": "Bullet",
+    "element": "Toxin",
+    "band": "aircraft",
+    "uses": 3,
+    "weapons": [
+     "CorruptorSpore",
+     "Laboratory_Bioball"
     ]
    },
    {
@@ -3489,7 +3527,7 @@
     ]
    },
    {
-    "group": "MissileHE_Air_8",
+    "group": "MissileHE_Air_6",
     "family": "MissileAA",
     "status": "proposed",
     "confidence": "majority",
@@ -3509,7 +3547,27 @@
     ]
    },
    {
-    "group": "MissileHE_Def_4",
+    "group": "MissileHE_Air_7",
+    "family": "MissileAA",
+    "status": "proposed",
+    "confidence": "majority",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "MissileAA": 2,
+     "MissileHE": 1
+    },
+    "delivery": "Missile",
+    "element": "HE",
+    "band": "aircraft",
+    "uses": 3,
+    "weapons": [
+     "HindMissilesThermobaric",
+     "RA2DepthCharge",
+     "ScourgeDroneExplosion"
+    ]
+   },
+   {
+    "group": "MissileHE_Def_3",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -3529,7 +3587,7 @@
     ]
    },
    {
-    "group": "MissileHE_Def_5",
+    "group": "MissileHE_Def_4",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -3565,35 +3623,13 @@
     "band": "vehicle",
     "uses": 3,
     "weapons": [
-     "HermitShoot",
-     "NodTorpTube",
-     "TorpTube"
-    ]
-   },
-   {
-    "group": "MissileHE_Veh_11",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "MissileHE": 14,
-     "MissileAP": 11,
-     "MissileAA": 9,
-     "(park: naval)": 2
-    },
-    "delivery": "Missile",
-    "element": "HE",
-    "band": "vehicle",
-    "uses": 3,
-    "weapons": [
      "HovercraftCannon",
      "JapanMaidenBow",
      "JapanMaidenBowEnergized"
     ]
    },
    {
-    "group": "MissileHE_Veh_12",
+    "group": "MissileHE_Veh_11",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -3615,7 +3651,7 @@
     ]
    },
    {
-    "group": "MissileHE_Veh_9",
+    "group": "MissileHE_Veh_8",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -3634,6 +3670,28 @@
      "AsianMLRS",
      "AsianQuasarBoat_AA",
      "AsianQuasar_AA"
+    ]
+   },
+   {
+    "group": "MissileHE_Veh_9",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "MissileHE": 14,
+     "MissileAP": 11,
+     "MissileAA": 9,
+     "(park: naval)": 2
+    },
+    "delivery": "Missile",
+    "element": "HE",
+    "band": "vehicle",
+    "uses": 3,
+    "weapons": [
+     "HermitShoot",
+     "NodTorpTube",
+     "TorpTube"
     ]
    },
    {
@@ -3656,6 +3714,42 @@
     ]
    },
    {
+    "group": "BombHE_Air_2",
+    "family": "Demolition",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Demolition": 3
+    },
+    "delivery": "Bomb",
+    "element": "HE",
+    "band": "aircraft",
+    "uses": 2,
+    "weapons": [
+     "Napalm",
+     "NapalmA10Carrier"
+    ]
+   },
+   {
+    "group": "BombHE_Air_3",
+    "family": "Demolition",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Demolition": 3
+    },
+    "delivery": "Bomb",
+    "element": "HE",
+    "band": "aircraft",
+    "uses": 2,
+    "weapons": [
+     "ParaBombNuke",
+     "YakNuclearBomb"
+    ]
+   },
+   {
     "group": "BombHE_Veh",
     "family": "Demolition",
     "status": "proposed",
@@ -3671,24 +3765,6 @@
     "weapons": [
      "NaxShoeRocket",
      "RA2AkulaRockets"
-    ]
-   },
-   {
-    "group": "BombRadiation_Air",
-    "family": "Nuclear",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Nuclear": 1
-    },
-    "delivery": "Bomb",
-    "element": "Radiation",
-    "band": "aircraft",
-    "uses": 2,
-    "weapons": [
-     "RA2KirovBomb_nuclear",
-     "RA2KirovBomb_nuclear_elite"
     ]
    },
    {
@@ -3711,7 +3787,25 @@
     ]
    },
    {
-    "group": "BulletFire_Veh_2",
+    "group": "BulletFire_Def",
+    "family": "(drop: support power)",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "(drop: support power)": 1
+    },
+    "delivery": "Bullet",
+    "element": "Fire",
+    "band": "defense",
+    "uses": 2,
+    "weapons": [
+     "FireballLauncher",
+     "FireballLauncherThermobaric"
+    ]
+   },
+   {
+    "group": "BulletFire_Veh_3",
     "family": "Flame",
     "status": "proposed",
     "confidence": "single",
@@ -3729,7 +3823,7 @@
     ]
    },
    {
-    "group": "BulletFire_Veh_3",
+    "group": "BulletFire_Veh_4",
     "family": "Flame",
     "status": "proposed",
     "confidence": "single",
@@ -3747,7 +3841,7 @@
     ]
    },
    {
-    "group": "BulletFire_Veh_4",
+    "group": "BulletFire_Veh_5",
     "family": "Flame",
     "status": "proposed",
     "confidence": "single",
@@ -3785,24 +3879,6 @@
    },
    {
     "group": "BulletHE_Def_4",
-    "family": "CannonAP",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "CannonAP": 4
-    },
-    "delivery": "Bullet",
-    "element": "HE",
-    "band": "defense",
-    "uses": 2,
-    "weapons": [
-     "FireballLauncher",
-     "FireballLauncherThermobaric"
-    ]
-   },
-   {
-    "group": "BulletHE_Def_5",
     "family": "CannonAP",
     "status": "proposed",
     "confidence": "single",
@@ -3912,6 +3988,48 @@
     ]
    },
    {
+    "group": "BulletToxin_Inf_2",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "Bullet": 28,
+     "CannonAP": 24,
+     "CannonHE": 13,
+     "MissileHE": 10
+    },
+    "delivery": "Bullet",
+    "element": "Toxin",
+    "band": "infantry",
+    "uses": 2,
+    "weapons": [
+     "RA2Virusgun3",
+     "RA2Virusgun_elite"
+    ]
+   },
+   {
+    "group": "BulletToxin_Veh_3",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "Bullet": 28,
+     "CannonAP": 24,
+     "CannonHE": 13,
+     "MissileHE": 10
+    },
+    "delivery": "Bullet",
+    "element": "Toxin",
+    "band": "vehicle",
+    "uses": 2,
+    "weapons": [
+     "AsianPulverizerMechaGatling",
+     "GradHeavyRockets"
+    ]
+   },
+   {
     "group": "Bullet_Def",
     "family": "?",
     "status": "proposed",
@@ -3931,45 +4049,7 @@
     ]
    },
    {
-    "group": "Bullet_Inf_2",
-    "family": "Bullet",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Bullet": 10,
-     "(drop: not a damage warhead)": 2
-    },
-    "delivery": "Bullet",
-    "element": "Plain",
-    "band": "infantry",
-    "uses": 2,
-    "weapons": [
-     "CabalDissolverSpray",
-     "RA2Chemspray"
-    ]
-   },
-   {
-    "group": "Bullet_Inf_3",
-    "family": "Bullet",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Bullet": 10,
-     "(drop: not a damage warhead)": 2
-    },
-    "delivery": "Bullet",
-    "element": "Plain",
-    "band": "infantry",
-    "uses": 2,
-    "weapons": [
-     "RA2Virusgun3",
-     "RA2Virusgun_elite"
-    ]
-   },
-   {
-    "group": "Bullet_Veh_5",
+    "group": "Bullet_Veh_3",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -3989,7 +4069,7 @@
     ]
    },
    {
-    "group": "Bullet_Veh_6",
+    "group": "Bullet_Veh_4",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -4006,27 +4086,6 @@
     "uses": 2,
     "weapons": [
      "wc2submarineFire"
-    ]
-   },
-   {
-    "group": "Bullet_Veh_7",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Bullet": 10,
-     "MissileHE": 4,
-     "CannonAP": 2,
-     "CannonHE": 1
-    },
-    "delivery": "Bullet",
-    "element": "Plain",
-    "band": "vehicle",
-    "uses": 2,
-    "weapons": [
-     "AsianPulverizerMechaGatling",
-     "GradHeavyRockets"
     ]
    },
    {
@@ -4483,6 +4542,27 @@
     "band": "aircraft",
     "uses": 2,
     "weapons": [
+     "AsianPhoenixRocket",
+     "AsianPhoenixRocket_elite"
+    ]
+   },
+   {
+    "group": "MissileFire_Air_3",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
+    },
+    "delivery": "Missile",
+    "element": "Fire",
+    "band": "aircraft",
+    "uses": 2,
+    "weapons": [
      "ixian_airdrone",
      "ordos_airmine"
     ]
@@ -4544,50 +4624,12 @@
     "band": "aircraft",
     "uses": 2,
     "weapons": [
-     "ArbiterCannon",
-     "AsianHarbingerPlasma"
-    ]
-   },
-   {
-    "group": "MissileHE_Air_11",
-    "family": "MissileAA",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "MissileAA": 2,
-     "MissileHE": 1
-    },
-    "delivery": "Missile",
-    "element": "HE",
-    "band": "aircraft",
-    "uses": 2,
-    "weapons": [
      "BlackEagleThunderboltMissiles",
      "BlackEagleThunderboltMissiles_elite"
     ]
    },
    {
-    "group": "MissileHE_Air_12",
-    "family": "MissileAA",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "MissileAA": 2,
-     "MissileHE": 1
-    },
-    "delivery": "Missile",
-    "element": "HE",
-    "band": "aircraft",
-    "uses": 2,
-    "weapons": [
-     "RA2DepthCharge",
-     "ScourgeDroneExplosion"
-    ]
-   },
-   {
-    "group": "MissileHE_Air_13",
+    "group": "MissileHE_Air_11",
     "family": "MissileAA",
     "status": "proposed",
     "confidence": "majority",
@@ -4606,7 +4648,7 @@
     ]
    },
    {
-    "group": "MissileHE_Air_14",
+    "group": "MissileHE_Air_12",
     "family": "MissileAA",
     "status": "proposed",
     "confidence": "majority",
@@ -4625,7 +4667,7 @@
     ]
    },
    {
-    "group": "MissileHE_Air_15",
+    "group": "MissileHE_Air_13",
     "family": "MissileAA",
     "status": "proposed",
     "confidence": "majority",
@@ -4644,7 +4686,7 @@
     ]
    },
    {
-    "group": "MissileHE_Air_9",
+    "group": "MissileHE_Air_8",
     "family": "MissileAA",
     "status": "proposed",
     "confidence": "majority",
@@ -4662,7 +4704,26 @@
     ]
    },
    {
-    "group": "MissileHE_Def_6",
+    "group": "MissileHE_Air_9",
+    "family": "MissileAA",
+    "status": "proposed",
+    "confidence": "majority",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "MissileAA": 2,
+     "MissileHE": 1
+    },
+    "delivery": "Missile",
+    "element": "HE",
+    "band": "aircraft",
+    "uses": 2,
+    "weapons": [
+     "ArbiterCannon",
+     "AsianHarbingerPlasma"
+    ]
+   },
+   {
+    "group": "MissileHE_Def_5",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -4681,7 +4742,7 @@
     ]
    },
    {
-    "group": "MissileHE_Def_7",
+    "group": "MissileHE_Def_6",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -4700,7 +4761,7 @@
     ]
    },
    {
-    "group": "MissileHE_Def_8",
+    "group": "MissileHE_Def_7",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -4719,7 +4780,7 @@
     ]
    },
    {
-    "group": "MissileHE_Veh_13",
+    "group": "MissileHE_Veh_12",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -4740,7 +4801,7 @@
     ]
    },
    {
-    "group": "MissileHE_Veh_14",
+    "group": "MissileHE_Veh_13",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -4761,7 +4822,7 @@
     ]
    },
    {
-    "group": "MissileHE_Veh_15",
+    "group": "MissileHE_Veh_14",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -4854,7 +4915,7 @@
     ]
    },
    {
-    "group": "Missile_Air",
+    "group": "MissileToxin_Air_2",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -4866,7 +4927,7 @@
      "Arrow": 6
     },
     "delivery": "Missile",
-    "element": "Plain",
+    "element": "Toxin",
     "band": "aircraft",
     "uses": 2,
     "weapons": [
@@ -4875,7 +4936,7 @@
     ]
    },
    {
-    "group": "Missile_Inf",
+    "group": "MissileToxin_Inf_2",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -4887,7 +4948,7 @@
      "Arrow": 6
     },
     "delivery": "Missile",
-    "element": "Plain",
+    "element": "Toxin",
     "band": "infantry",
     "uses": 2,
     "weapons": [
@@ -4896,7 +4957,7 @@
     ]
    },
    {
-    "group": "Missile_Veh_3",
+    "group": "Missile_Veh_2",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -5019,6 +5080,24 @@
     ]
    },
    {
+    "group": "BombFire_Air",
+    "family": "Demolition",
+    "status": "proposed",
+    "confidence": "majority",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "Demolition": 8,
+     "Nuclear": 1
+    },
+    "delivery": "Bomb",
+    "element": "Fire",
+    "band": "aircraft",
+    "uses": 1,
+    "weapons": [
+     "YakNapalm"
+    ]
+   },
+   {
     "group": "BombHE_Air_4",
     "family": "Demolition",
     "status": "proposed",
@@ -5053,23 +5132,6 @@
     ]
    },
    {
-    "group": "BombHE_Veh_2",
-    "family": "Demolition",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "Demolition": 3
-    },
-    "delivery": "Bomb",
-    "element": "HE",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "RA2TOPOLCuba"
-    ]
-   },
-   {
     "group": "BombRadiation_Air_2",
     "family": "Nuclear",
     "status": "proposed",
@@ -5084,6 +5146,23 @@
     "uses": 1,
     "weapons": [
      "RA2KirovBomb_rad"
+    ]
+   },
+   {
+    "group": "BombRadiation_Veh",
+    "family": "Nuclear",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "no CA group with this band; matched on 2",
+    "candidates": {
+     "Nuclear": 1
+    },
+    "delivery": "Bomb",
+    "element": "Radiation",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
+     "RA2TOPOLCuba"
     ]
    },
    {
@@ -5121,7 +5200,7 @@
     ]
    },
    {
-    "group": "BulletFire_Inf_2",
+    "group": "BulletFire_Inf_3",
     "family": "Flame",
     "status": "proposed",
     "confidence": "single",
@@ -5138,7 +5217,7 @@
     ]
    },
    {
-    "group": "BulletFire_Inf_3",
+    "group": "BulletFire_Inf_4",
     "family": "Flame",
     "status": "proposed",
     "confidence": "single",
@@ -5155,7 +5234,7 @@
     ]
    },
    {
-    "group": "BulletFire_Inf_4",
+    "group": "BulletFire_Inf_5",
     "family": "Flame",
     "status": "proposed",
     "confidence": "single",
@@ -5172,7 +5251,7 @@
     ]
    },
    {
-    "group": "BulletFire_Inf_5",
+    "group": "BulletFire_Inf_6",
     "family": "Flame",
     "status": "proposed",
     "confidence": "single",
@@ -5238,7 +5317,7 @@
     "band": "defense",
     "uses": 1,
     "weapons": [
-     "LatinAADefenderCannon"
+     "NaxFlakAG"
     ]
    },
    {
@@ -5255,7 +5334,7 @@
     "band": "defense",
     "uses": 1,
     "weapons": [
-     "NaxFlakAG"
+     "SkyshieldCannon"
     ]
    },
    {
@@ -5272,28 +5351,11 @@
     "band": "defense",
     "uses": 1,
     "weapons": [
-     "SkyshieldCannon"
-    ]
-   },
-   {
-    "group": "BulletHE_Def_13",
-    "family": "CannonAP",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "CannonAP": 4
-    },
-    "delivery": "Bullet",
-    "element": "HE",
-    "band": "defense",
-    "uses": 1,
-    "weapons": [
      "TSVulcanGunSonic"
     ]
    },
    {
-    "group": "BulletHE_Def_6",
+    "group": "BulletHE_Def_5",
     "family": "CannonAP",
     "status": "proposed",
     "confidence": "single",
@@ -5310,7 +5372,7 @@
     ]
    },
    {
-    "group": "BulletHE_Def_7",
+    "group": "BulletHE_Def_6",
     "family": "CannonAP",
     "status": "proposed",
     "confidence": "single",
@@ -5327,7 +5389,7 @@
     ]
    },
    {
-    "group": "BulletHE_Def_8",
+    "group": "BulletHE_Def_7",
     "family": "CannonAP",
     "status": "proposed",
     "confidence": "single",
@@ -5344,7 +5406,7 @@
     ]
    },
    {
-    "group": "BulletHE_Def_9",
+    "group": "BulletHE_Def_8",
     "family": "CannonAP",
     "status": "proposed",
     "confidence": "single",
@@ -5358,6 +5420,23 @@
     "uses": 1,
     "weapons": [
      "JHighVWaveforce"
+    ]
+   },
+   {
+    "group": "BulletHE_Def_9",
+    "family": "CannonAP",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "CannonAP": 4
+    },
+    "delivery": "Bullet",
+    "element": "HE",
+    "band": "defense",
+    "uses": 1,
+    "weapons": [
+     "LatinAADefenderCannon"
     ]
    },
    {
@@ -5523,17 +5602,19 @@
     ]
    },
    {
-    "group": "Bullet_Def_2",
+    "group": "BulletToxin_Def",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
-    "why": "exact delivery/element/band match",
+    "why": "no CA group with this band; matched on 1",
     "candidates": {
-     "BulletHE": 1,
-     "Flak": 1
+     "Bullet": 28,
+     "CannonAP": 24,
+     "CannonHE": 13,
+     "MissileHE": 10
     },
     "delivery": "Bullet",
-    "element": "Plain",
+    "element": "Toxin",
     "band": "defense",
     "uses": 1,
     "weapons": [
@@ -5541,17 +5622,19 @@
     ]
    },
    {
-    "group": "Bullet_Inf_4",
-    "family": "Bullet",
+    "group": "BulletToxin_Inf_3",
+    "family": "?",
     "status": "proposed",
-    "confidence": "majority",
-    "why": "exact delivery/element/band match",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
     "candidates": {
-     "Bullet": 10,
-     "(drop: not a damage warhead)": 2
+     "Bullet": 28,
+     "CannonAP": 24,
+     "CannonHE": 13,
+     "MissileHE": 10
     },
     "delivery": "Bullet",
-    "element": "Plain",
+    "element": "Toxin",
     "band": "infantry",
     "uses": 1,
     "weapons": [
@@ -5559,17 +5642,19 @@
     ]
    },
    {
-    "group": "Bullet_Inf_5",
-    "family": "Bullet",
+    "group": "BulletToxin_Inf_4",
+    "family": "?",
     "status": "proposed",
-    "confidence": "majority",
-    "why": "exact delivery/element/band match",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
     "candidates": {
-     "Bullet": 10,
-     "(drop: not a damage warhead)": 2
+     "Bullet": 28,
+     "CannonAP": 24,
+     "CannonHE": 13,
+     "MissileHE": 10
     },
     "delivery": "Bullet",
-    "element": "Plain",
+    "element": "Toxin",
     "band": "infantry",
     "uses": 1,
     "weapons": [
@@ -5577,19 +5662,19 @@
     ]
    },
    {
-    "group": "Bullet_Veh_8",
+    "group": "BulletToxin_Veh_4",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
-    "why": "exact delivery/element/band match",
+    "why": "no CA group with this band; matched on 1",
     "candidates": {
-     "Bullet": 10,
-     "MissileHE": 4,
-     "CannonAP": 2,
-     "CannonHE": 1
+     "Bullet": 28,
+     "CannonAP": 24,
+     "CannonHE": 13,
+     "MissileHE": 10
     },
     "delivery": "Bullet",
-    "element": "Plain",
+    "element": "Toxin",
     "band": "vehicle",
     "uses": 1,
     "weapons": [
@@ -5720,16 +5805,19 @@
     ]
    },
    {
-    "group": "Hitscan_Air_2",
-    "family": "MissileAA",
+    "group": "HitscanToxin_Air",
+    "family": "?",
     "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
     "candidates": {
-     "MissileAA": 1
+     "Sniper": 9,
+     "(drop: not a damage warhead)": 8,
+     "Melee": 6,
+     "Bullet": 2
     },
     "delivery": "Hitscan",
-    "element": "Plain",
+    "element": "Toxin",
     "band": "aircraft",
     "uses": 1,
     "weapons": [
@@ -6003,7 +6091,7 @@
     ]
    },
    {
-    "group": "MissileFire_Air_3",
+    "group": "MissileFire_Air_4",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -6023,7 +6111,7 @@
     ]
    },
    {
-    "group": "MissileFire_Air_4",
+    "group": "MissileFire_Air_5",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -6043,7 +6131,7 @@
     ]
    },
    {
-    "group": "MissileFire_Veh_2",
+    "group": "MissileFire_Veh_3",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -6063,25 +6151,7 @@
     ]
    },
    {
-    "group": "MissileHE_Air_16",
-    "family": "MissileAA",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "MissileAA": 2,
-     "MissileHE": 1
-    },
-    "delivery": "Missile",
-    "element": "HE",
-    "band": "aircraft",
-    "uses": 1,
-    "weapons": [
-     "HindMissilesNuclear"
-    ]
-   },
-   {
-    "group": "MissileHE_Air_17",
+    "group": "MissileHE_Air_14",
     "family": "MissileAA",
     "status": "proposed",
     "confidence": "majority",
@@ -6099,7 +6169,7 @@
     ]
    },
    {
-    "group": "MissileHE_Air_18",
+    "group": "MissileHE_Air_15",
     "family": "MissileAA",
     "status": "proposed",
     "confidence": "majority",
@@ -6117,7 +6187,25 @@
     ]
    },
    {
-    "group": "MissileHE_Air_19",
+    "group": "MissileHE_Air_16",
+    "family": "MissileAA",
+    "status": "proposed",
+    "confidence": "majority",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "MissileAA": 2,
+     "MissileHE": 1
+    },
+    "delivery": "Missile",
+    "element": "HE",
+    "band": "aircraft",
+    "uses": 1,
+    "weapons": [
+     "ThermobaricMaverick"
+    ]
+   },
+   {
+    "group": "MissileHE_Air_17",
     "family": "MissileAA",
     "status": "proposed",
     "confidence": "majority",
@@ -6135,7 +6223,7 @@
     ]
    },
    {
-    "group": "MissileHE_Air_20",
+    "group": "MissileHE_Air_18",
     "family": "MissileAA",
     "status": "proposed",
     "confidence": "majority",
@@ -6153,25 +6241,7 @@
     ]
    },
    {
-    "group": "MissileHE_Def_10",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "MissileAA": 1,
-     "MissileAP": 1
-    },
-    "delivery": "Missile",
-    "element": "HE",
-    "band": "defense",
-    "uses": 1,
-    "weapons": [
-     "edenDefenceRailgun"
-    ]
-   },
-   {
-    "group": "MissileHE_Def_9",
+    "group": "MissileHE_Def_8",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -6189,7 +6259,25 @@
     ]
    },
    {
-    "group": "MissileHE_Inf_7",
+    "group": "MissileHE_Def_9",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "MissileAA": 1,
+     "MissileAP": 1
+    },
+    "delivery": "Missile",
+    "element": "HE",
+    "band": "defense",
+    "uses": 1,
+    "weapons": [
+     "edenDefenceRailgun"
+    ]
+   },
+   {
+    "group": "MissileHE_Inf_6",
     "family": "MissileAP",
     "status": "proposed",
     "confidence": "majority",
@@ -6207,7 +6295,7 @@
     ]
    },
    {
-    "group": "MissileHE_Inf_8",
+    "group": "MissileHE_Inf_7",
     "family": "MissileAP",
     "status": "proposed",
     "confidence": "majority",
@@ -6225,7 +6313,7 @@
     ]
    },
    {
-    "group": "MissileHE_Inf_9",
+    "group": "MissileHE_Inf_8",
     "family": "MissileAP",
     "status": "proposed",
     "confidence": "majority",
@@ -6243,7 +6331,25 @@
     ]
    },
    {
-    "group": "MissileHE_Veh_16",
+    "group": "MissileHE_Inf_9",
+    "family": "MissileAP",
+    "status": "proposed",
+    "confidence": "majority",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "MissileAP": 14,
+     "MissileAA": 4
+    },
+    "delivery": "Missile",
+    "element": "HE",
+    "band": "infantry",
+    "uses": 1,
+    "weapons": [
+     "SwarmlingShoot"
+    ]
+   },
+   {
+    "group": "MissileHE_Veh_15",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -6263,7 +6369,7 @@
     ]
    },
    {
-    "group": "MissileHE_Veh_17",
+    "group": "MissileHE_Veh_16",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -6283,7 +6389,7 @@
     ]
    },
    {
-    "group": "MissileHE_Veh_18",
+    "group": "MissileHE_Veh_17",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -6300,6 +6406,26 @@
     "uses": 1,
     "weapons": [
      "GoliathRockets_AA"
+    ]
+   },
+   {
+    "group": "MissileHE_Veh_18",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "MissileHE": 14,
+     "MissileAP": 11,
+     "MissileAA": 9,
+     "(park: naval)": 2
+    },
+    "delivery": "Missile",
+    "element": "HE",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
+     "NodTorpTubeBlackMarket"
     ]
    },
    {
@@ -6323,23 +6449,23 @@
     ]
    },
    {
-    "group": "MissileHE_Veh_20",
+    "group": "MissileRadiation_Air",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
-    "why": "exact delivery/element/band match",
+    "why": "no CA group with this band; matched on 1",
     "candidates": {
-     "MissileHE": 14,
-     "MissileAP": 11,
-     "MissileAA": 9,
-     "(park: naval)": 2
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
     },
     "delivery": "Missile",
-    "element": "HE",
-    "band": "vehicle",
+    "element": "Radiation",
+    "band": "aircraft",
     "uses": 1,
     "weapons": [
-     "wc2dragonFireVisible"
+     "HindMissilesNuclear"
     ]
    },
    {
@@ -6411,7 +6537,7 @@
     ]
    },
    {
-    "group": "Missile_Air_2",
+    "group": "Missile_Air",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -6431,7 +6557,7 @@
     ]
    },
    {
-    "group": "Missile_Air_3",
+    "group": "Missile_Air_2",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -6451,27 +6577,7 @@
     ]
    },
    {
-    "group": "Missile_Inf_2",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "MissileAP": 41,
-     "MissileHE": 19,
-     "MissileAA": 17,
-     "Arrow": 6
-    },
-    "delivery": "Missile",
-    "element": "Plain",
-    "band": "infantry",
-    "uses": 1,
-    "weapons": [
-     "ChemRockets"
-    ]
-   },
-   {
-    "group": "Missile_Inf_3",
+    "group": "Missile_Inf",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -6491,7 +6597,7 @@
     ]
    },
    {
-    "group": "Missile_Inf_4",
+    "group": "Missile_Inf_2",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -6528,7 +6634,7 @@
     ]
    },
    {
-    "group": "RadiationHE_Inf",
+    "group": "RadiationToxin_Inf",
     "family": "Radiation",
     "status": "proposed",
     "confidence": "single",
@@ -6537,7 +6643,7 @@
      "Radiation": 5
     },
     "delivery": "Radiation",
-    "element": "HE",
+    "element": "Toxin",
     "band": "infantry",
     "uses": 1,
     "weapons": [
@@ -6768,9 +6874,9 @@
    }
   ],
   "stats": {
-   "needs a human": 133,
-   "inherited, CA split this triple": 71,
-   "inherited cleanly": 98
+   "needs a human": 142,
+   "inherited, CA split this triple": 66,
+   "inherited cleanly": 99
   }
  },
  "cnc_reloaded": {
@@ -15527,6 +15633,26 @@
     ]
    },
    {
+    "group": "BulletToxin_Inf",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "Bullet": 28,
+     "CannonAP": 24,
+     "CannonHE": 13,
+     "MissileHE": 10
+    },
+    "delivery": "Bullet",
+    "element": "Toxin",
+    "band": "infantry",
+    "uses": 1,
+    "weapons": [
+     "Chemspray"
+    ]
+   },
+   {
     "group": "Bullet_Air",
     "family": "Bullet",
     "status": "proposed",
@@ -15559,24 +15685,6 @@
     "uses": 1,
     "weapons": [
      "HighV"
-    ]
-   },
-   {
-    "group": "Bullet_Inf",
-    "family": "Bullet",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Bullet": 10,
-     "(drop: not a damage warhead)": 2
-    },
-    "delivery": "Bullet",
-    "element": "Plain",
-    "band": "infantry",
-    "uses": 1,
-    "weapons": [
-     "Chemspray"
     ]
    },
    {
@@ -15693,9 +15801,9 @@
    }
   ],
   "stats": {
-   "needs a human": 9,
+   "needs a human": 10,
    "inherited cleanly": 8,
-   "inherited, CA split this triple": 3
+   "inherited, CA split this triple": 2
   }
  },
  "openra_ts": {
@@ -27295,27 +27403,6 @@
     ]
    },
    {
-    "group": "Bullet_Inf",
-    "family": "Bullet",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Bullet": 10,
-     "(drop: not a damage warhead)": 2
-    },
-    "delivery": "Bullet",
-    "element": "Plain",
-    "band": "infantry",
-    "uses": 4,
-    "weapons": [
-     "GSkirmisherMortar",
-     "GSkirmisherMortarGas",
-     "SkirmisherMortar",
-     "SkirmisherMortarGas"
-    ]
-   },
-   {
     "group": "Laser_Inf",
     "family": "?",
     "status": "proposed",
@@ -27461,27 +27548,51 @@
     ]
    },
    {
-    "group": "Bullet_Def",
+    "group": "BulletToxin_Def",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
-    "why": "exact delivery/element/band match",
+    "why": "no CA group with this band; matched on 1",
     "candidates": {
-     "BulletHE": 1,
-     "Flak": 1
+     "Bullet": 28,
+     "CannonAP": 24,
+     "CannonHE": 13,
+     "MissileHE": 10
     },
     "delivery": "Bullet",
-    "element": "Plain",
+    "element": "Toxin",
     "band": "defense",
     "uses": 3,
     "weapons": [
-     "BlackCDefArtillery",
-     "BlasterProton",
+     "WasteTurretWeapon",
+     "WasteTurretWeaponBlue",
      "WeasaurusSpitGreen"
     ]
    },
    {
-    "group": "Bullet_Inf_2",
+    "group": "BulletToxin_Veh",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "Bullet": 28,
+     "CannonAP": 24,
+     "CannonHE": 13,
+     "MissileHE": 10
+    },
+    "delivery": "Bullet",
+    "element": "Toxin",
+    "band": "vehicle",
+    "uses": 3,
+    "weapons": [
+     "CorruptorAcid",
+     "CorruptorAcidBlue",
+     "WolfAcid"
+    ]
+   },
+   {
+    "group": "Bullet_Inf",
     "family": "Bullet",
     "status": "proposed",
     "confidence": "majority",
@@ -27498,50 +27609,6 @@
      "GTemplarFlame",
      "GTemplarFlameE",
      "TemplarFlameE"
-    ]
-   },
-   {
-    "group": "Bullet_Veh_2",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Bullet": 10,
-     "MissileHE": 4,
-     "CannonAP": 2,
-     "CannonHE": 1
-    },
-    "delivery": "Bullet",
-    "element": "Plain",
-    "band": "vehicle",
-    "uses": 3,
-    "weapons": [
-     "BuggyMortar",
-     "BuggyMortarE",
-     "MUTMRLSRocketGas"
-    ]
-   },
-   {
-    "group": "Bullet_Veh_3",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Bullet": 10,
-     "MissileHE": 4,
-     "CannonAP": 2,
-     "CannonHE": 1
-    },
-    "delivery": "Bullet",
-    "element": "Plain",
-    "band": "vehicle",
-    "uses": 3,
-    "weapons": [
-     "CorruptorAcid",
-     "CorruptorAcidBlue",
-     "WolfAcid"
     ]
    },
    {
@@ -27686,7 +27753,28 @@
     ]
    },
    {
-    "group": "Bullet_Def_2",
+    "group": "BulletToxin_Inf",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "Bullet": 28,
+     "CannonAP": 24,
+     "CannonHE": 13,
+     "MissileHE": 10
+    },
+    "delivery": "Bullet",
+    "element": "Toxin",
+    "band": "infantry",
+    "uses": 2,
+    "weapons": [
+     "GSkirmisherMortarGas",
+     "SkirmisherMortarGas"
+    ]
+   },
+   {
+    "group": "Bullet_Def",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -27700,12 +27788,12 @@
     "band": "defense",
     "uses": 2,
     "weapons": [
-     "WasteTurretWeapon",
-     "WasteTurretWeaponBlue"
+     "BlackCDefArtillery",
+     "BlasterProton"
     ]
    },
    {
-    "group": "Bullet_Inf_3",
+    "group": "Bullet_Inf_2",
     "family": "Bullet",
     "status": "proposed",
     "confidence": "majority",
@@ -27724,7 +27812,7 @@
     ]
    },
    {
-    "group": "Bullet_Inf_4",
+    "group": "Bullet_Inf_3",
     "family": "Bullet",
     "status": "proposed",
     "confidence": "majority",
@@ -27740,6 +27828,46 @@
     "weapons": [
      "GJJGrenade",
      "JJGroundGrenade"
+    ]
+   },
+   {
+    "group": "Bullet_Inf_4",
+    "family": "Bullet",
+    "status": "proposed",
+    "confidence": "majority",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Bullet": 10,
+     "(drop: not a damage warhead)": 2
+    },
+    "delivery": "Bullet",
+    "element": "Plain",
+    "band": "infantry",
+    "uses": 2,
+    "weapons": [
+     "GSkirmisherMortar",
+     "SkirmisherMortar"
+    ]
+   },
+   {
+    "group": "Bullet_Veh_2",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Bullet": 10,
+     "MissileHE": 4,
+     "CannonAP": 2,
+     "CannonHE": 1
+    },
+    "delivery": "Bullet",
+    "element": "Plain",
+    "band": "vehicle",
+    "uses": 2,
+    "weapons": [
+     "BuggyMortar",
+     "BuggyMortarE"
     ]
    },
    {
@@ -27862,6 +27990,26 @@
     ]
    },
    {
+    "group": "LaserToxin_Veh",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "Quantum": 18,
+     "LaserPulse": 15,
+     "Laser": 10,
+     "Prism": 4
+    },
+    "delivery": "Laser",
+    "element": "Toxin",
+    "band": "vehicle",
+    "uses": 2,
+    "weapons": [
+     "ToxinCommandoRifle"
+    ]
+   },
+   {
     "group": "Laser_Air",
     "family": "Quantum",
     "status": "proposed",
@@ -27882,26 +28030,6 @@
    },
    {
     "group": "Laser_Veh_2",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Quantum": 11,
-     "Laser": 6,
-     "LaserPulse": 4,
-     "Railgun": 1
-    },
-    "delivery": "Laser",
-    "element": "Plain",
-    "band": "vehicle",
-    "uses": 2,
-    "weapons": [
-     "ToxinCommandoRifle"
-    ]
-   },
-   {
-    "group": "Laser_Veh_3",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -27998,48 +28126,6 @@
     ]
    },
    {
-    "group": "Missile_Air",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "MissileAP": 41,
-     "MissileHE": 19,
-     "MissileAA": 17,
-     "Arrow": 6
-    },
-    "delivery": "Missile",
-    "element": "Plain",
-    "band": "aircraft",
-    "uses": 2,
-    "weapons": [
-     "BattleshipPlasma",
-     "FalconPunchGas"
-    ]
-   },
-   {
-    "group": "Missile_Veh",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "MissileAP": 41,
-     "MissileHE": 19,
-     "MissileAA": 17,
-     "Arrow": 6
-    },
-    "delivery": "Missile",
-    "element": "Plain",
-    "band": "vehicle",
-    "uses": 2,
-    "weapons": [
-     "LynxRocket",
-     "LynxRocketGas"
-    ]
-   },
-   {
     "group": "Railgun_Def",
     "family": "Railgun",
     "status": "proposed",
@@ -28110,6 +28196,66 @@
     ]
    },
    {
+    "group": "BulletToxin_Air",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "Bullet": 28,
+     "CannonAP": 24,
+     "CannonHE": 13,
+     "MissileHE": 10
+    },
+    "delivery": "Bullet",
+    "element": "Toxin",
+    "band": "aircraft",
+    "uses": 1,
+    "weapons": [
+     "QueenTooth"
+    ]
+   },
+   {
+    "group": "BulletToxin_Veh_2",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "Bullet": 28,
+     "CannonAP": 24,
+     "CannonHE": 13,
+     "MissileHE": 10
+    },
+    "delivery": "Bullet",
+    "element": "Toxin",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
+     "MUTMRLSRocketGas"
+    ]
+   },
+   {
+    "group": "BulletToxin_Veh_3",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "Bullet": 28,
+     "CannonAP": 24,
+     "CannonHE": 13,
+     "MissileHE": 10
+    },
+    "delivery": "Bullet",
+    "element": "Toxin",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
+     "RegensisCannon"
+    ]
+   },
+   {
     "group": "Bullet_Air",
     "family": "Bullet",
     "status": "proposed",
@@ -28140,28 +28286,11 @@
     "band": "aircraft",
     "uses": 1,
     "weapons": [
-     "QueenTooth"
-    ]
-   },
-   {
-    "group": "Bullet_Air_3",
-    "family": "Bullet",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Bullet": 3
-    },
-    "delivery": "Bullet",
-    "element": "Plain",
-    "band": "aircraft",
-    "uses": 1,
-    "weapons": [
      "RayriderMolotov"
     ]
    },
    {
-    "group": "Bullet_Def_3",
+    "group": "Bullet_Def_2",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -28179,7 +28308,7 @@
     ]
    },
    {
-    "group": "Bullet_Def_4",
+    "group": "Bullet_Def_3",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -28197,27 +28326,7 @@
     ]
    },
    {
-    "group": "Bullet_Veh_4",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Bullet": 10,
-     "MissileHE": 4,
-     "CannonAP": 2,
-     "CannonHE": 1
-    },
-    "delivery": "Bullet",
-    "element": "Plain",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "RegensisCannon"
-    ]
-   },
-   {
-    "group": "Bullet_Veh_5",
+    "group": "Bullet_Veh_3",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -28415,6 +28524,26 @@
     ]
    },
    {
+    "group": "LaserToxin_Inf",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "Quantum": 18,
+     "LaserPulse": 15,
+     "Laser": 10,
+     "Prism": 4
+    },
+    "delivery": "Laser",
+    "element": "Toxin",
+    "band": "infantry",
+    "uses": 1,
+    "weapons": [
+     "GToxinCommandoRifle"
+    ]
+   },
+   {
     "group": "Laser_Def_2",
     "family": "?",
     "status": "proposed",
@@ -28434,25 +28563,6 @@
    },
    {
     "group": "Laser_Inf_2",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "LaserPulse": 5,
-     "Quantum": 2,
-     "(drop: not a damage warhead)": 2
-    },
-    "delivery": "Laser",
-    "element": "Plain",
-    "band": "infantry",
-    "uses": 1,
-    "weapons": [
-     "GToxinCommandoRifle"
-    ]
-   },
-   {
-    "group": "Laser_Inf_3",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -28547,6 +28657,66 @@
     ]
    },
    {
+    "group": "MissileToxin_Air",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
+    },
+    "delivery": "Missile",
+    "element": "Toxin",
+    "band": "aircraft",
+    "uses": 1,
+    "weapons": [
+     "FalconPunchGas"
+    ]
+   },
+   {
+    "group": "MissileToxin_Veh",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
+    },
+    "delivery": "Missile",
+    "element": "Toxin",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
+     "LynxRocketGas"
+    ]
+   },
+   {
+    "group": "Missile_Air",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
+    },
+    "delivery": "Missile",
+    "element": "Plain",
+    "band": "aircraft",
+    "uses": 1,
+    "weapons": [
+     "BattleshipPlasma"
+    ]
+   },
+   {
     "group": "Missile_Air_2",
     "family": "?",
     "status": "proposed",
@@ -28587,7 +28757,7 @@
     ]
    },
    {
-    "group": "Missile_Veh_2",
+    "group": "Missile_Veh",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -28604,6 +28774,26 @@
     "uses": 1,
     "weapons": [
      "Glyder2Cannon"
+    ]
+   },
+   {
+    "group": "Missile_Veh_2",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
+    },
+    "delivery": "Missile",
+    "element": "Plain",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
+     "LynxRocket"
     ]
    },
    {
@@ -28718,8 +28908,8 @@
    }
   ],
   "stats": {
-   "needs a human": 42,
-   "inherited cleanly": 21,
+   "needs a human": 47,
+   "inherited cleanly": 20,
    "inherited, CA split this triple": 23
   }
  },

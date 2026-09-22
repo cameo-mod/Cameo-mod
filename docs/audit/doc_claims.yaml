@@ -1117,7 +1117,7 @@ claims:
       print(n)
 
   - id: warhead_reference_groups
-    value: 1712
+    value: 1721
     tolerance: 0
     what: >
       Compression groups across all 20 reference sources at `compress_warheads.DEFAULT_TAU`,
@@ -1181,7 +1181,7 @@ claims:
       print(sum(1 for f, ks in seen.items() if ks == {'shaped'}))
 
   - id: cameo_element_bearing_families
-    value: 18
+    value: 23
     tolerance: 0
     what: >
       Live warhead families whose template declares a `DamageTypes` token the engine can actually
@@ -1191,6 +1191,13 @@ claims:
       blend children (`BulletFire`, `CannonFire`, `Inferno`) declare `FireDeath, Incendiary`. The
       mod's rules consume these tokens (`Incendiary` x3, `RadiationDeath` x6,
       `AffectedByDamageTypes: Tesla` x2), so an undeclared element is a gate that never fires.
+      RECONCILED, because this number moved twice in one session and each step is
+      accounted for: 15 at R43 -> 18 when R44 derived the token from the family
+      (`Flame`, `Thermobaric` gained Fire, `Nuclear` gained Radiation) -> 23 when R45
+      taught the extractor Cameo's `TiberiumDeath` spelling, which surfaced the five
+      Toxin families (`Chemical`, `Toxic`, `BulletChem`, `CannonChem`, `MissileChem`)
+      that had been reading as `Plain` all along. A jump here with no ruling behind it
+      means `ELEMENT_ORDER` changed, not that warheads were tagged.
       This number should go UP as families are tagged; it is the counter for that work.
     docs: [docs/design/REFERENCE_EXTRACTION_PLAN.md]
     measure: |

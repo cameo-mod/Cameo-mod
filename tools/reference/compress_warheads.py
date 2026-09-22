@@ -274,6 +274,14 @@ ELEMENT_ORDER = [
     ("Cryo", "FrozenDeath"),
     ("Radiation", "RadiationDeath"),
     ("Toxin", "ToxinDeath"),
+    # R45 - THE SAME ELEMENT IS SPELLED DIFFERENTLY IN DIFFERENT MODS. Combined Arms writes
+    # `ToxinDeath` (20 uses, `TiberiumDeath` 0); Cameo writes `TiberiumDeath` (381 uses across
+    # resolved warheads, `ToxinDeath` 0). Mapping only one spelling meant NEITHER labelled source
+    # ever produced a single group classified Toxin -- including the `*Chem` families whose whole
+    # identity is that element. `RA2VirusDeath` joins them because defaults.yaml groups all three
+    # under one death voice (`DeathSounds@POISONED`), which is the mod stating they are one thing.
+    ("Toxin", "TiberiumDeath"),
+    ("Toxin", "RA2VirusDeath"),
     ("Tesla", "ElectricityDeath"),
     ("Atomized", "AtomizedDeath"),
     ("Fire", "Incendiary"),
@@ -285,8 +293,20 @@ ELEMENT_ORDER = [
 ]
 # Carried by most warheads and saying nothing about the element: prone modifiers, the generic and
 # the burning death animations, the flak-vest interaction, and the air-to-ground marker.
-ELEMENT_NOISE = {"Prone50Percent", "TriggerProne", "DefaultDeath", "FireDeath",
-                 "FlakVestMitigated", "FlakVestMitigatedMinor", "AirToGround", "Repairable"}
+# R45 - CENSUSED, not guessed. Every token in the corpus was counted against this table; the
+# ones below say nothing about the element. An UNMAPPED token is not harmless: `element_of`
+# subtracts the noise and then takes the first ELEMENT_ORDER hit, so a warhead carrying an
+# unmapped element token ALONGSIDE a mapped one is actively MISLABELLED as the mapped one
+# (a chem shell with `TiberiumDeath, ExplosionDeath` read as HE), not merely missed.
+# The prone variants were the biggest omission: `Prone75Percent` alone occurs 8,055 times and
+# only `Prone50Percent` was listed. `RippedApartDeath` is `Sniper`'s death ANIMATION, and the
+# spawn/infection/mutate tokens are gameplay mechanics.
+ELEMENT_NOISE = {"Prone50Percent", "Prone60Percent", "Prone75Percent", "Prone100Percent",
+                 "TriggerProne", "DefaultDeath", "DefaultDeathwc2", "FireDeath",
+                 "FlakVestMitigated", "FlakVestMitigatedMinor", "AirToGround", "Repairable",
+                 "RippedApartDeath", "SoundDeath",
+                 "KillsDrone", "DroneInfection", "SuppressDrone", "RemovesSquid",
+                 "SwarmlingSpawn", "QueenBroodlingSpawn", "ContaminatorMutate", "QuestionMutate"}
 
 
 def element_of(damage_types: str) -> str:
