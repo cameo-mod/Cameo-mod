@@ -43,10 +43,8 @@ groups:
   BulletHE_Veh:
     family: CannonAP
     status: proposed
-    carry: split
+    carry: carried
     carried_from: BulletHE_Veh
-    review_note: carried from `BulletHE_Veh`, which this threshold splits into 3 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
     band: vehicle
     delivery: Bullet
     element: HE
@@ -91,10 +89,8 @@ groups:
   Bullet_Veh:
     family: Bullet
     status: proposed
-    carry: split
+    carry: carried
     carried_from: Bullet_Veh
-    review_note: carried from `Bullet_Veh`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
     band: vehicle
     delivery: Bullet
     element: Plain
@@ -119,7 +115,7 @@ groups:
     family: MissileAA
     status: confirmed
     carry: carried
-    carried_from: MissileHE_Veh_2
+    carried_from: MissileHE_Veh
     band: vehicle
     delivery: Missile
     element: HE
@@ -189,10 +185,8 @@ groups:
   MissileHE_Inf:
     family: MissileAP
     status: proposed
-    carry: split
+    carry: carried
     carried_from: MissileHE_Inf
-    review_note: carried from `MissileHE_Inf`, which this threshold splits into 3 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
     band: infantry
     delivery: Missile
     element: HE
@@ -231,10 +225,8 @@ groups:
   Bullet_Veh_2:
     family: Bullet
     status: proposed
-    carry: split
-    carried_from: Bullet_Veh
-    review_note: carried from `Bullet_Veh`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: Bullet_Veh_2
     band: vehicle
     delivery: Bullet
     element: Plain
@@ -263,10 +255,8 @@ groups:
   Laser_Veh:
     family: Laser
     status: proposed
-    carry: split
+    carry: carried
     carried_from: Laser_Veh
-    review_note: carried from `Laser_Veh`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
     band: vehicle
     delivery: Laser
     element: Plain
@@ -304,10 +294,8 @@ groups:
   MissileHE_Veh_2:
     family: MissileHE
     status: proposed
-    carry: split
-    carried_from: MissileHE_Veh
-    review_note: carried from `MissileHE_Veh`, which this threshold splits into 3 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: MissileHE_Veh_2
     band: vehicle
     delivery: Missile
     element: HE
@@ -337,10 +325,8 @@ groups:
   Bullet_Inf:
     family: Bullet
     status: proposed
-    carry: split
+    carry: carried
     carried_from: Bullet_Inf
-    review_note: carried from `Bullet_Inf`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
     band: infantry
     delivery: Bullet
     element: Plain
@@ -377,10 +363,8 @@ groups:
   Hitscan_Inf:
     family: Melee
     status: proposed
-    carry: split
+    carry: carried
     carried_from: Hitscan_Inf
-    review_note: carried from `Hitscan_Inf`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
     band: infantry
     delivery: Hitscan
     element: Plain
@@ -415,10 +399,8 @@ groups:
   MissileHE_Veh_3:
     family: MissileHE
     status: proposed
-    carry: split
-    carried_from: MissileHE_Veh
-    review_note: carried from `MissileHE_Veh`, which this threshold splits into 3 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: MissileHE_Veh_3
     band: vehicle
     delivery: Missile
     element: HE
@@ -452,10 +434,8 @@ groups:
   MissileHE_Veh_4:
     family: MissileAP
     status: proposed
-    carry: split
-    carried_from: MissileHE_Veh_3
-    review_note: carried from `MissileHE_Veh_3`, which this threshold splits into 4 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: MissileHE_Veh_4
     band: vehicle
     delivery: Missile
     element: HE
@@ -481,10 +461,8 @@ groups:
   BulletHE_Veh_2:
     family: CannonAP
     status: proposed
-    carry: split
-    carried_from: BulletHE_Veh
-    review_note: carried from `BulletHE_Veh`, which this threshold splits into 3 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: BulletHE_Veh_2
     band: vehicle
     delivery: Bullet
     element: HE
@@ -513,10 +491,8 @@ groups:
   BulletHE_Veh_3:
     family: CannonHE
     status: proposed
-    carry: split
-    carried_from: BulletHE_Veh_2
-    review_note: carried from `BulletHE_Veh_2`, which this threshold splits into 5 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: BulletHE_Veh_3
     band: vehicle
     delivery: Bullet
     element: HE
@@ -544,10 +520,8 @@ groups:
   BulletHE_Veh_4:
     family: CannonHE
     status: proposed
-    carry: split
-    carried_from: BulletHE_Veh_2
-    review_note: carried from `BulletHE_Veh_2`, which this threshold splits into 5 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: BulletHE_Veh_4
     band: vehicle
     delivery: Bullet
     element: HE
@@ -732,10 +706,8 @@ groups:
   BulletHE_Veh_5:
     family: CannonHE
     status: proposed
-    carry: split
-    carried_from: BulletHE_Veh_2
-    review_note: carried from `BulletHE_Veh_2`, which this threshold splits into 5 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: BulletHE_Veh_5
     band: vehicle
     delivery: Bullet
     element: HE
@@ -765,7 +737,7 @@ groups:
     family: LaserPulse
     status: confirmed
     carry: carried
-    carried_from: Laser_Inf_2
+    carried_from: Laser_Inf
     band: infantry
     delivery: Laser
     element: Plain
@@ -947,10 +919,8 @@ groups:
   MissileHE_Veh_5:
     family: MissileAP
     status: proposed
-    carry: split
-    carried_from: MissileHE_Veh_3
-    review_note: carried from `MissileHE_Veh_3`, which this threshold splits into 4 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: MissileHE_Veh_5
     band: vehicle
     delivery: Missile
     element: HE
@@ -977,10 +947,8 @@ groups:
   SprayHE_Veh:
     family: Sonic
     status: proposed
-    carry: split
+    carry: carried
     carried_from: SprayHE_Veh
-    review_note: carried from `SprayHE_Veh`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
     band: vehicle
     delivery: Spray
     element: HE
@@ -1008,10 +976,8 @@ groups:
   Tesla_Def:
     family: Tesla
     status: proposed
-    carry: split
+    carry: carried
     carried_from: Tesla_Def
-    review_note: carried from `Tesla_Def`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
     band: defense
     delivery: Tesla
     element: Tesla
@@ -1039,10 +1005,8 @@ groups:
   Tesla_Veh:
     family: Tesla
     status: proposed
-    carry: split
+    carry: carried
     carried_from: Tesla_Veh
-    review_note: carried from `Tesla_Veh`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
     band: vehicle
     delivery: Tesla
     element: Tesla
@@ -1163,7 +1127,7 @@ groups:
     family: CannonAP
     status: confirmed
     carry: carried
-    carried_from: BulletHE_Veh_4
+    carried_from: BulletHE_Veh_7
     band: vehicle
     delivery: Bullet
     element: HE
@@ -1188,7 +1152,7 @@ groups:
     family: Bullet
     status: confirmed
     carry: carried
-    carried_from: BulletKinetic_Veh
+    carried_from: BulletKinetic_Veh_2
     band: vehicle
     delivery: Bullet
     element: Kinetic
@@ -1211,7 +1175,7 @@ groups:
     family: Chemical
     status: confirmed
     carry: carried
-    carried_from: BulletRadiation_Veh_2
+    carried_from: BulletRadiation_Veh
     band: vehicle
     delivery: Bullet
     element: Radiation
@@ -1233,10 +1197,8 @@ groups:
   BulletRadiation_Veh_2:
     family: Chemical
     status: proposed
-    carry: split
-    carried_from: BulletRadiation_Veh
-    review_note: carried from `BulletRadiation_Veh`, which this threshold splits into 3 groups — the old
-      review saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: BulletRadiation_Veh_2
     band: vehicle
     delivery: Bullet
     element: Radiation
@@ -1258,10 +1220,8 @@ groups:
   BulletRadiation_Veh_3:
     family: Chemical
     status: proposed
-    carry: split
-    carried_from: BulletRadiation_Veh
-    review_note: carried from `BulletRadiation_Veh`, which this threshold splits into 3 groups — the old
-      review saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: BulletRadiation_Veh_3
     band: vehicle
     delivery: Bullet
     element: Radiation
@@ -1288,7 +1248,7 @@ groups:
     family: CannonHE
     status: confirmed
     carry: carried
-    carried_from: Bullet_Veh_2
+    carried_from: Bullet_Veh_4
     band: vehicle
     delivery: Bullet
     element: Plain
@@ -1366,7 +1326,7 @@ groups:
     family: Railgun
     status: confirmed
     carry: carried
-    carried_from: LaserHE_Veh_3
+    carried_from: LaserHE_Veh_2
     band: vehicle
     delivery: Laser
     element: HE
@@ -1388,10 +1348,8 @@ groups:
   Laser_Veh_3:
     family: Quantum
     status: proposed
-    carry: split
+    carry: carried
     carried_from: Laser_Veh_3
-    review_note: carried from `Laser_Veh_3`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
     band: vehicle
     delivery: Laser
     element: Plain
@@ -1413,10 +1371,8 @@ groups:
   Laser_Veh_4:
     family: LaserPulse
     status: proposed
-    carry: split
-    carried_from: Laser_Veh_2
-    review_note: carried from `Laser_Veh_2`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: Laser_Veh_4
     band: vehicle
     delivery: Laser
     element: Plain
@@ -1439,7 +1395,7 @@ groups:
     family: Laser
     status: confirmed
     carry: carried
-    carried_from: Laser_Veh_4
+    carried_from: Laser_Veh_5
     band: vehicle
     delivery: Laser
     element: Plain
@@ -1463,10 +1419,8 @@ groups:
   Laser_Veh_6:
     family: Quantum
     status: proposed
-    carry: split
-    carried_from: Laser_Veh_3
-    review_note: carried from `Laser_Veh_3`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: Laser_Veh_6
     band: vehicle
     delivery: Laser
     element: Plain
@@ -1544,7 +1498,7 @@ groups:
     family: MissileHE
     status: confirmed
     carry: carried
-    carried_from: MissileHE_Veh_5
+    carried_from: MissileHE_Veh_6
     band: vehicle
     delivery: Missile
     element: HE
@@ -1566,10 +1520,8 @@ groups:
   MissileHE_Veh_7:
     family: MissileAP
     status: proposed
-    carry: split
-    carried_from: MissileHE_Veh_3
-    review_note: carried from `MissileHE_Veh_3`, which this threshold splits into 4 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: MissileHE_Veh_7
     band: vehicle
     delivery: Missile
     element: HE
@@ -1618,10 +1570,8 @@ groups:
   MissileKinetic_Veh:
     family: Arrow
     status: proposed
-    carry: split
+    carry: carried
     carried_from: MissileKinetic_Veh
-    review_note: carried from `MissileKinetic_Veh`, which this threshold splits into 2 groups — the old
-      review saw these weapons mixed in with the others, so the label is inherited, not confirmed
     band: vehicle
     delivery: Missile
     element: Kinetic
@@ -1666,10 +1616,8 @@ groups:
   MissileKinetic_Veh_3:
     family: Arrow
     status: proposed
-    carry: split
-    carried_from: MissileKinetic_Veh
-    review_note: carried from `MissileKinetic_Veh`, which this threshold splits into 2 groups — the old
-      review saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: MissileKinetic_Veh_3
     band: vehicle
     delivery: Missile
     element: Kinetic
@@ -1692,7 +1640,7 @@ groups:
     family: Radiation
     status: confirmed
     carry: carried
-    carried_from: Radiation_Veh
+    carried_from: Radiation_Veh_2
     band: vehicle
     delivery: Radiation
     element: Radiation
@@ -1714,10 +1662,8 @@ groups:
   RailgunHE_Veh:
     family: Railgun
     status: proposed
-    carry: split
+    carry: carried
     carried_from: RailgunHE_Veh
-    review_note: carried from `RailgunHE_Veh`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
     band: vehicle
     delivery: Railgun
     element: HE
@@ -1785,10 +1731,8 @@ groups:
   Spray_Veh_2:
     family: Flame
     status: proposed
-    carry: split
-    carried_from: Spray_Veh
-    review_note: carried from `Spray_Veh`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: Spray_Veh_2
     band: vehicle
     delivery: Spray
     element: Plain
@@ -1814,10 +1758,8 @@ groups:
   Tesla_Veh_2:
     family: Tesla
     status: proposed
-    carry: split
-    carried_from: Tesla_Veh
-    review_note: carried from `Tesla_Veh`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: Tesla_Veh_2
     band: vehicle
     delivery: Tesla
     element: Tesla
@@ -1868,10 +1810,8 @@ groups:
   BulletAP_Air:
     family: MissileAP
     status: proposed
-    carry: split
+    carry: carried
     carried_from: BulletAP_Air
-    review_note: carried from `BulletAP_Air`, which this threshold splits into 3 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
     band: aircraft
     delivery: Bullet
     element: AP
@@ -1893,10 +1833,8 @@ groups:
   BulletAP_Air_2:
     family: MissileAP
     status: proposed
-    carry: split
-    carried_from: BulletAP_Air
-    review_note: carried from `BulletAP_Air`, which this threshold splits into 3 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: BulletAP_Air_2
     band: aircraft
     delivery: Bullet
     element: AP
@@ -1920,10 +1858,8 @@ groups:
   BulletAP_Air_3:
     family: MissileAP
     status: proposed
-    carry: split
-    carried_from: BulletAP_Air
-    review_note: carried from `BulletAP_Air`, which this threshold splits into 3 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: BulletAP_Air_3
     band: aircraft
     delivery: Bullet
     element: AP
@@ -1947,10 +1883,8 @@ groups:
   BulletHE_Air:
     family: Demolition
     status: proposed
-    carry: split
+    carry: carried
     carried_from: BulletHE_Air
-    review_note: carried from `BulletHE_Air`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
     band: aircraft
     delivery: Bullet
     element: HE
@@ -1999,10 +1933,8 @@ groups:
   BulletHE_Def:
     family: CannonAP
     status: proposed
-    carry: split
+    carry: carried
     carried_from: BulletHE_Def
-    review_note: carried from `BulletHE_Def`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
     band: defense
     delivery: Bullet
     element: HE
@@ -2026,10 +1958,8 @@ groups:
   BulletHE_Def_2:
     family: CannonAP
     status: proposed
-    carry: split
-    carried_from: BulletHE_Def
-    review_note: carried from `BulletHE_Def`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: BulletHE_Def_2
     band: defense
     delivery: Bullet
     element: HE
@@ -2053,10 +1983,8 @@ groups:
   BulletHE_Inf:
     family: Demolition
     status: proposed
-    carry: split
+    carry: carried
     carried_from: BulletHE_Inf
-    review_note: carried from `BulletHE_Inf`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
     band: infantry
     delivery: Bullet
     element: HE
@@ -2126,10 +2054,8 @@ groups:
   BulletHE_Veh_9:
     family: CannonHE
     status: proposed
-    carry: split
-    carried_from: BulletHE_Veh_2
-    review_note: carried from `BulletHE_Veh_2`, which this threshold splits into 5 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: BulletHE_Veh_9
     band: vehicle
     delivery: Bullet
     element: HE
@@ -2228,10 +2154,8 @@ groups:
   Bullet_Veh_5:
     family: Bullet
     status: proposed
-    carry: split
-    carried_from: Bullet_Veh_4
-    review_note: carried from `Bullet_Veh_4`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: Bullet_Veh_5
     band: vehicle
     delivery: Bullet
     element: Plain
@@ -2349,10 +2273,8 @@ groups:
   Hitscan_Inf_2:
     family: Melee
     status: proposed
-    carry: split
-    carried_from: Hitscan_Inf
-    review_note: carried from `Hitscan_Inf`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: Hitscan_Inf_2
     band: infantry
     delivery: Hitscan
     element: Plain
@@ -2376,10 +2298,8 @@ groups:
   Hitscan_Inf_3:
     family: Sniper
     status: proposed
-    carry: split
-    carried_from: Hitscan_Inf_2
-    review_note: carried from `Hitscan_Inf_2`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: Hitscan_Inf_3
     band: infantry
     delivery: Hitscan
     element: Plain
@@ -2403,10 +2323,8 @@ groups:
   Hitscan_Inf_4:
     family: Sniper
     status: proposed
-    carry: split
-    carried_from: Hitscan_Inf_2
-    review_note: carried from `Hitscan_Inf_2`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: Hitscan_Inf_4
     band: infantry
     delivery: Hitscan
     element: Plain
@@ -2430,10 +2348,8 @@ groups:
   LaserHE_Veh_3:
     family: Prism
     status: proposed
-    carry: split
-    carried_from: LaserHE_Veh
-    review_note: carried from `LaserHE_Veh`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: LaserHE_Veh_3
     band: vehicle
     delivery: Laser
     element: HE
@@ -2455,10 +2371,8 @@ groups:
   LaserHE_Veh_4:
     family: Prism
     status: proposed
-    carry: split
-    carried_from: LaserHE_Veh
-    review_note: carried from `LaserHE_Veh`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: LaserHE_Veh_4
     band: vehicle
     delivery: Laser
     element: HE
@@ -2482,10 +2396,8 @@ groups:
   Laser_Air:
     family: Quantum
     status: proposed
-    carry: split
+    carry: carried
     carried_from: Laser_Air
-    review_note: carried from `Laser_Air`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
     band: aircraft
     delivery: Laser
     element: Plain
@@ -2509,10 +2421,8 @@ groups:
   Laser_Air_2:
     family: Quantum
     status: proposed
-    carry: split
-    carried_from: Laser_Air
-    review_note: carried from `Laser_Air`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: Laser_Air_2
     band: aircraft
     delivery: Laser
     element: Plain
@@ -2537,7 +2447,7 @@ groups:
     family: Laser
     status: confirmed
     carry: carried
-    carried_from: Laser_Air_2
+    carried_from: Laser_Air_3
     band: aircraft
     delivery: Laser
     element: Plain
@@ -2612,7 +2522,7 @@ groups:
     family: LaserPulse
     status: confirmed
     carry: carried
-    carried_from: Laser_Inf
+    carried_from: Laser_Inf_2
     band: infantry
     delivery: Laser
     element: Plain
@@ -2685,7 +2595,7 @@ groups:
     family: Quantum
     status: confirmed
     carry: carried
-    carried_from: Laser_Veh_5
+    carried_from: Laser_Veh_7
     band: vehicle
     delivery: Laser
     element: Plain
@@ -2707,10 +2617,8 @@ groups:
   Laser_Veh_8:
     family: Laser
     status: proposed
-    carry: split
-    carried_from: Laser_Veh
-    review_note: carried from `Laser_Veh`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: Laser_Veh_8
     band: vehicle
     delivery: Laser
     element: Plain
@@ -2755,10 +2663,8 @@ groups:
   MissileHE_Inf_3:
     family: MissileAP
     status: proposed
-    carry: split
-    carried_from: MissileHE_Inf
-    review_note: carried from `MissileHE_Inf`, which this threshold splits into 3 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: MissileHE_Inf_3
     band: infantry
     delivery: Missile
     element: HE
@@ -2803,10 +2709,8 @@ groups:
   RailgunHE_Veh_2:
     family: Railgun
     status: proposed
-    carry: split
-    carried_from: RailgunHE_Veh
-    review_note: carried from `RailgunHE_Veh`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: RailgunHE_Veh_2
     band: vehicle
     delivery: Railgun
     element: HE
@@ -2855,10 +2759,8 @@ groups:
   SprayHE_Veh_2:
     family: Sonic
     status: proposed
-    carry: split
-    carried_from: SprayHE_Veh
-    review_note: carried from `SprayHE_Veh`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: SprayHE_Veh_2
     band: vehicle
     delivery: Spray
     element: HE
@@ -2928,10 +2830,8 @@ groups:
   Spray_Veh_3:
     family: Flame
     status: proposed
-    carry: split
-    carried_from: Spray_Veh
-    review_note: carried from `Spray_Veh`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: Spray_Veh_3
     band: vehicle
     delivery: Spray
     element: Plain
@@ -3026,10 +2926,8 @@ groups:
   BombTesla_Air:
     family: Demolition
     status: proposed
-    carry: split
+    carry: carried
     carried_from: BombTesla_Air
-    review_note: carried from `BombTesla_Air`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
     band: aircraft
     delivery: Bomb
     element: Tesla
@@ -3051,10 +2949,8 @@ groups:
   BombTesla_Air_2:
     family: Demolition
     status: proposed
-    carry: split
-    carried_from: BombTesla_Air
-    review_note: carried from `BombTesla_Air`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: BombTesla_Air_2
     band: aircraft
     delivery: Bomb
     element: Tesla
@@ -3168,10 +3064,8 @@ groups:
   BulletHE_Air_3:
     family: Demolition
     status: proposed
-    carry: split
-    carried_from: BulletHE_Air
-    review_note: carried from `BulletHE_Air`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: BulletHE_Air_3
     band: aircraft
     delivery: Bullet
     element: HE
@@ -3193,10 +3087,8 @@ groups:
   BulletHE_Air_4:
     family: BulletHE
     status: proposed
-    carry: split
-    carried_from: BulletHE_Air_3
-    review_note: carried from `BulletHE_Air_3`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: BulletHE_Air_4
     band: aircraft
     delivery: Bullet
     element: HE
@@ -3218,10 +3110,8 @@ groups:
   BulletHE_Air_5:
     family: BulletHE
     status: proposed
-    carry: split
-    carried_from: BulletHE_Air_3
-    review_note: carried from `BulletHE_Air_3`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: BulletHE_Air_5
     band: aircraft
     delivery: Bullet
     element: HE
@@ -3243,10 +3133,8 @@ groups:
   BulletHE_Inf_2:
     family: Demolition
     status: proposed
-    carry: split
-    carried_from: BulletHE_Inf
-    review_note: carried from `BulletHE_Inf`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: BulletHE_Inf_2
     band: infantry
     delivery: Bullet
     element: HE
@@ -3268,10 +3156,8 @@ groups:
   BulletHE_Veh_11:
     family: CannonHE
     status: proposed
-    carry: split
-    carried_from: BulletHE_Veh_2
-    review_note: carried from `BulletHE_Veh_2`, which this threshold splits into 5 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: BulletHE_Veh_11
     band: vehicle
     delivery: Bullet
     element: HE
@@ -3340,7 +3226,7 @@ groups:
     family: CannonAP
     status: confirmed
     carry: carried
-    carried_from: BulletHE_Veh_4
+    carried_from: BulletHE_Veh_14
     band: vehicle
     delivery: Bullet
     element: HE
@@ -3362,10 +3248,8 @@ groups:
   BulletHE_Veh_15:
     family: CannonAP
     status: proposed
-    carry: split
-    carried_from: BulletHE_Veh
-    review_note: carried from `BulletHE_Veh`, which this threshold splits into 3 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: BulletHE_Veh_15
     band: vehicle
     delivery: Bullet
     element: HE
@@ -3387,10 +3271,8 @@ groups:
   BulletKinetic_Air:
     family: Bullet
     status: proposed
-    carry: split
+    carry: carried
     carried_from: BulletKinetic_Air
-    review_note: carried from `BulletKinetic_Air`, which this threshold splits into 2 groups — the old
-      review saw these weapons mixed in with the others, so the label is inherited, not confirmed
     band: aircraft
     delivery: Bullet
     element: Kinetic
@@ -3412,10 +3294,8 @@ groups:
   BulletKinetic_Air_2:
     family: Bullet
     status: proposed
-    carry: split
-    carried_from: BulletKinetic_Air
-    review_note: carried from `BulletKinetic_Air`, which this threshold splits into 2 groups — the old
-      review saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: BulletKinetic_Air_2
     band: aircraft
     delivery: Bullet
     element: Kinetic
@@ -3460,10 +3340,8 @@ groups:
   BulletRadiation_Veh_4:
     family: Chemical
     status: proposed
-    carry: split
-    carried_from: BulletRadiation_Veh
-    review_note: carried from `BulletRadiation_Veh`, which this threshold splits into 3 groups — the old
-      review saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: BulletRadiation_Veh_4
     band: vehicle
     delivery: Bullet
     element: Radiation
@@ -3551,6 +3429,29 @@ groups:
     - 181.2
     weapons:
     - EMPGrenade
+  BulletToxin_Veh:
+    family: Bullet
+    status: proposed
+    carry: carried
+    carried_from: Bullet_Veh_7
+    band: vehicle
+    delivery: Bullet
+    element: Toxin
+    uses: 1
+    members: 1
+    factor: 1.2569481996323284
+    flat: false
+    examples:
+    - CorrupterSpew:Warhead@1Dam
+    profile:
+    - 63.9
+    - 200.0
+    - 200.0
+    - 191.8
+    - null
+    - 63.9
+    weapons:
+    - CorrupterSpew
   Bullet_Air_2:
     family: Bullet
     status: confirmed
@@ -3577,10 +3478,8 @@ groups:
   Bullet_Inf_3:
     family: Bullet
     status: proposed
-    carry: split
-    carried_from: Bullet_Inf
-    review_note: carried from `Bullet_Inf`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: Bullet_Inf_3
     band: infantry
     delivery: Bullet
     element: Plain
@@ -3599,55 +3498,7 @@ groups:
     - 21.3
     weapons:
     - CommissarPistol
-  Bullet_Veh_10:
-    family: BulletHE
-    status: confirmed
-    carry: carried
-    carried_from: Bullet_Veh_5
-    band: vehicle
-    delivery: Bullet
-    element: Plain
-    uses: 1
-    members: 1
-    factor: 0.7043692068185919
-    flat: false
-    examples:
-    - WolverineGun:Warhead@1Dam
-    profile:
-    - 25.6
-    - 106.6
-    - 200.0
-    - 149.2
-    - null
-    - 21.3
-    weapons:
-    - WolverineGun
   Bullet_Veh_7:
-    family: Bullet
-    status: proposed
-    carry: split
-    carried_from: Bullet_Veh_4
-    review_note: carried from `Bullet_Veh_4`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
-    band: vehicle
-    delivery: Bullet
-    element: Plain
-    uses: 1
-    members: 1
-    factor: 1.2569481996323284
-    flat: false
-    examples:
-    - CorrupterSpew:Warhead@1Dam
-    profile:
-    - 63.9
-    - 200.0
-    - 200.0
-    - 191.8
-    - null
-    - 63.9
-    weapons:
-    - CorrupterSpew
-  Bullet_Veh_8:
     family: (resolved per weapon)
     status: confirmed
     carry: all_overridden
@@ -3670,7 +3521,7 @@ groups:
     weapons:
     - FLAK-SEAS-AG
     overridden_members: 1
-  Bullet_Veh_9:
+  Bullet_Veh_8:
     family: (resolved per weapon)
     status: confirmed
     carry: all_overridden
@@ -3693,6 +3544,29 @@ groups:
     weapons:
     - M60mgJJ
     overridden_members: 1
+  Bullet_Veh_9:
+    family: BulletHE
+    status: confirmed
+    carry: carried
+    carried_from: Bullet_Veh_10
+    band: vehicle
+    delivery: Bullet
+    element: Plain
+    uses: 1
+    members: 1
+    factor: 0.7043692068185919
+    flat: false
+    examples:
+    - WolverineGun:Warhead@1Dam
+    profile:
+    - 25.6
+    - 106.6
+    - 200.0
+    - 149.2
+    - null
+    - 21.3
+    weapons:
+    - WolverineGun
   HitscanAP_Air:
     family: (resolved per weapon)
     status: confirmed
@@ -3743,7 +3617,7 @@ groups:
     family: Bullet
     status: confirmed
     carry: carried
-    carried_from: HitscanKinetic_Air
+    carried_from: HitscanKinetic_Air_2
     band: aircraft
     delivery: Hitscan
     element: Kinetic
@@ -4018,10 +3892,8 @@ groups:
   Laser_Veh_10:
     family: LaserPulse
     status: proposed
-    carry: split
-    carried_from: Laser_Veh_2
-    review_note: carried from `Laser_Veh_2`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: Laser_Veh_10
     band: vehicle
     delivery: Laser
     element: Plain
@@ -4044,7 +3916,7 @@ groups:
     family: Railgun
     status: confirmed
     carry: carried
-    carried_from: Laser_Veh_6
+    carried_from: Laser_Veh_11
     band: vehicle
     delivery: Laser
     element: Plain
@@ -4158,10 +4030,8 @@ groups:
   MissileHE_Inf_4:
     family: MissileAP
     status: proposed
-    carry: split
-    carried_from: MissileHE_Inf
-    review_note: carried from `MissileHE_Inf`, which this threshold splits into 3 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: MissileHE_Inf_4
     band: infantry
     delivery: Missile
     element: HE
@@ -4184,7 +4054,7 @@ groups:
     family: MissileAP
     status: confirmed
     carry: carried
-    carried_from: MissileHE_Inf_3
+    carried_from: MissileHE_Inf_5
     band: infantry
     delivery: Missile
     element: HE
@@ -4230,7 +4100,7 @@ groups:
     family: MissileAP
     status: confirmed
     carry: carried
-    carried_from: MissileHE_Veh_4
+    carried_from: MissileHE_Veh_11
     band: vehicle
     delivery: Missile
     element: HE
@@ -4252,10 +4122,8 @@ groups:
   MissileHE_Veh_12:
     family: MissileHE
     status: proposed
-    carry: split
-    carried_from: MissileHE_Veh
-    review_note: carried from `MissileHE_Veh`, which this threshold splits into 3 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: MissileHE_Veh_12
     band: vehicle
     delivery: Missile
     element: HE
@@ -4323,10 +4191,8 @@ groups:
   MissileHE_Veh_9:
     family: MissileAP
     status: proposed
-    carry: split
-    carried_from: MissileHE_Veh_3
-    review_note: carried from `MissileHE_Veh_3`, which this threshold splits into 4 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: MissileHE_Veh_9
     band: vehicle
     delivery: Missile
     element: HE
@@ -4372,7 +4238,7 @@ groups:
     family: MissileAP
     status: confirmed
     carry: carried
-    carried_from: MissileKinetic_Veh_2
+    carried_from: MissileKinetic_Veh_4
     band: vehicle
     delivery: Missile
     element: Kinetic
@@ -4395,7 +4261,7 @@ groups:
     family: BulletTesla
     status: confirmed
     carry: carried
-    carried_from: MissileKinetic_Veh_3
+    carried_from: MissileKinetic_Veh_5
     band: vehicle
     delivery: Missile
     element: Kinetic
@@ -4464,7 +4330,7 @@ groups:
     family: Railgun
     status: confirmed
     carry: carried
-    carried_from: RailgunHE_Veh_2
+    carried_from: RailgunHE_Veh_3
     band: vehicle
     delivery: Railgun
     element: HE
@@ -4510,7 +4376,7 @@ groups:
     family: Sonic
     status: confirmed
     carry: carried
-    carried_from: SprayHE_Veh_2
+    carried_from: SprayHE_Veh_3
     band: vehicle
     delivery: Spray
     element: HE
@@ -4555,10 +4421,8 @@ groups:
   SprayRadiation_Inf:
     family: Chemical
     status: proposed
-    carry: split
+    carry: carried
     carried_from: SprayRadiation_Inf
-    review_note: carried from `SprayRadiation_Inf`, which this threshold splits into 2 groups — the old
-      review saw these weapons mixed in with the others, so the label is inherited, not confirmed
     band: infantry
     delivery: Spray
     element: Radiation
@@ -4580,10 +4444,8 @@ groups:
   SprayRadiation_Inf_2:
     family: Chemical
     status: proposed
-    carry: split
-    carried_from: SprayRadiation_Inf
-    review_note: carried from `SprayRadiation_Inf`, which this threshold splits into 2 groups — the old
-      review saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: SprayRadiation_Inf_2
     band: infantry
     delivery: Spray
     element: Radiation
@@ -4605,10 +4467,8 @@ groups:
   Spray_Inf:
     family: Flame
     status: proposed
-    carry: split
+    carry: carried
     carried_from: Spray_Inf
-    review_note: carried from `Spray_Inf`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
     band: infantry
     delivery: Spray
     element: Plain
@@ -4630,10 +4490,8 @@ groups:
   Spray_Inf_2:
     family: Flame
     status: proposed
-    carry: split
-    carried_from: Spray_Inf
-    review_note: carried from `Spray_Inf`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: Spray_Inf_2
     band: infantry
     delivery: Spray
     element: Plain
@@ -4678,10 +4536,8 @@ groups:
   Tesla_Def_2:
     family: Tesla
     status: proposed
-    carry: split
-    carried_from: Tesla_Def
-    review_note: carried from `Tesla_Def`, which this threshold splits into 2 groups — the old review
-      saw these weapons mixed in with the others, so the label is inherited, not confirmed
+    carry: carried
+    carried_from: Tesla_Def_2
     band: defense
     delivery: Tesla
     element: Tesla
@@ -4704,7 +4560,7 @@ groups:
     family: Storm
     status: confirmed
     carry: carried
-    carried_from: Tesla_Veh_2
+    carried_from: Tesla_Veh_3
     band: vehicle
     delivery: Tesla
     element: Tesla

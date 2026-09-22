@@ -45,6 +45,8 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [⛔ A ZERO-BYTE audit report is a clean green board (2026-09-06)](#-a-zero-byte-audit-report-is-a-clean-green-board-2026-09-06)
 - [⛔ A 0% compliance row is a bug report about the CHECKER (2026-09-06)](#-a-0-compliance-row-is-a-bug-report-about-the-checker-2026-09-06)
 - [A writer that "preserves line endings" but reads in text mode preserves nothing (2026-09-22)](#a-writer-that-preserves-line-endings-but-reads-in-text-mode-preserves-nothing-2026-09-22)
+- [⛔ A surviving name is not a surviving decision (2026-09-22)](#a-surviving-name-is-not-a-surviving-decision-2026-09-22)
+- [A writer that replaces when you expect it to merge, and exits 0 (2026-09-22)](#a-writer-that-replaces-when-you-expect-it-to-merge-and-exits-0-2026-09-22)
 - [A hand-edit to generated output has a countdown on it (2026-09-05)](#a-hand-edit-to-generated-output-has-a-countdown-on-it-2026-09-05)
 - [Hand-built JSON emitters need native parse tests (2026-09-07)](#hand-built-json-emitters-need-native-parse-tests-2026-09-07)
 - [Condition-gated bot delays must be relative to WorldTick (2026-09-13)](#condition-gated-bot-delays-must-be-relative-to-worldtick-2026-09-13)
@@ -2041,6 +2043,72 @@ it, and neither is a fire weapon. Reading it as an element produced a warhead gr
 `ElectricityDeath` and `AtomizedDeath` are specific enough that no ordinary weapon claims them, and
 `TankBuster` and `Incendiary` are real damage tags the engine acts on. `FireDeath`,
 `ExplosionDeath`, `BulletDeath` and `DefaultDeath` are presentation.
+
+⭐ **HOW TO TELL WHICH IS WHICH, since the name never says (R54).** List the token's CARRIERS and
+read them. A token whose carriers are all one kind of weapon is an element; a token spread across
+several kinds is an animation, no matter how elemental it sounds. Worked on all eight OpenRA
+rulesets at once, that test admitted three new spellings and rejected seven tempting ones:
+
+| token | carriers | verdict |
+|---|---|---|
+| `VirusDeath` (RV, 24 weapons) | ToxinSprayer, Virusgun, PoisonSting, ToxinBomb, CloudDamage — **all toxin** | **Toxin** |
+| `PoisonDeath` (CA, 8) | ChemDebris, CorrupterSpew, VirusCloud, and a sniper that **spawns a `viruscloud` actor** | **Toxin** |
+| `OrangeRadiationDeath` (8) | every one the Orange twin of a `RadiationDeath` weapon | **Radiation** |
+| `FlameDeath` (RV, 61) | flamethrowers — **but also** CurtainRifle, PsychicJab, MirageGun, IonCannon, every barrel explosion | animation |
+| `ElectroDeath` (RV, 73) | ElectricBolt, CoilBolt — **but also** PrismShot, Comet, DiskLaser | animation |
+| `EnergyDeath` (SP/CN/TS, 84) | lasers, plasma, ion, railgun, tesla **and artillery** | animation |
+
+⛔ **The same element is spelled differently in every mod, so the vocabulary is never finished.**
+Toxin alone has FIVE spellings across the corpus — `ToxinDeath` (CA), `TiberiumDeath` (TD/Cameo),
+`RA2VirusDeath` (Cameo), `VirusDeath` (RV), `PoisonDeath` (CA). A mod that shows **zero groups of
+an element it obviously has** is the symptom; Romanov's Vengeance had no chemical weapons on
+record while shipping a full Yuri toxin arsenal. Census the tokens before assigning the source.
+
+⚠ **Listing a token as NOISE changes no classification** — `element_of` subtracts the noise set and
+then takes the first `ELEMENT_ORDER` hit, so a token in neither list already loses every time. The
+noise set exists to record that a token was **censused and judged**, which is the only thing that
+stops the next census redoing the work. Do not mistake adding one for a fix.
+
+## A surviving name is not a surviving decision (2026-09-22)
+
+Reviewed data keyed by a GENERATED name silently rots when the generator renumbers, and the
+loader will not notice, because the name still exists.
+
+Pulling one weapon out of Combined Arms' `Bullet_Veh_7` cascaded the numbered suffixes: `_7`, `_8`
+and `_9` each inherited the next group's weapon, and three **maintainer-reviewed** decisions
+attached to weapons nobody had looked at. The coverage report said **one** row was open — the only
+one whose name had disappeared — so three wrong rows read as green.
+
+⭐ **The fix is to record the MEMBERS a decision was written about, and check them.** Every
+assignment row had always carried its weapon list, precisely so it could be audited later, and
+nothing audited it until `assignment_store.stale_rows()` did. Generalise: whenever a hand-made
+judgement is keyed by anything a tool generates, store the judgement's SUBJECT alongside the key
+and assert the two still agree.
+
+⛔ **And prove the guard on the broken state before trusting it.** `stale_rows()` was run against
+the pre-migration file first and fired on 4 rows, then against the fixed one and fired on 0. A
+guard only ever observed passing is indistinguishable from a guard that cannot fail — the same
+defect as `tolerance` set so wide no claim could miss, and as a line-ending check that could never
+trigger.
+
+## A writer that replaces when you expect it to merge, and exits 0 (2026-09-22)
+
+Three writers in one lane failed the same way: they did something destructive, reported success,
+and left no signal.
+
+* `compress_warheads.py --write` **replaces** the groups file rather than merging, while
+  `--source` **defaults to one mod**. A bare `--write` wrote 182 groups over all twenty sources,
+  destroying **1,499**, and printed `wrote docs/reference/warhead_groups.json` with exit 0.
+* `retau_assignment.py` held a **hardcoded document path** from when there was one reviewed
+  source. `--source X` switched the data but not the document, so it compared X's groups against
+  a different mod's review and reported a confident 100% migration.
+* Its own warning said *"both groupings are at tau X — nothing to migrate"*, which is false: a
+  vocabulary change regroups without touching tau.
+
+⭐ **A destructive default needs an explicit opt-in, and a report needs a number.** `--write` now
+requires `--all` and prints the group and source counts it wrote, so a wrong run is visible in its
+own output rather than in a diff nobody takes. ⭐ **Snapshot before any regrouping** — the 1,499
+lost groups were recovered from a copy taken two commands earlier, purely out of habit.
 
 ## One weapon, one warhead — on the REFERENCE side too
 

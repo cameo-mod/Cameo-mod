@@ -103,6 +103,31 @@ def resolve(sid: str, groups: list | None = None) -> dict:
     return out
 
 
+def stale_rows() -> dict:
+    """{source: [group names whose reviewed row no longer holds the weapons it was written for]}.
+
+    ⛔ R54 - THE ONE CHECK THAT MATTERS, AND IT WAS MISSING. Every assignment row records the
+    WEAPONS it was written about, precisely so it can be audited later — and nothing audited it.
+    Dropping `CorrupterSpew` out of Combined Arms' `Bullet_Veh_7` into its own Toxin group
+    CASCADED the numbered suffixes, so `Bullet_Veh_7`, `_8` and `_9` each silently inherited the
+    next group's weapon. Three maintainer-reviewed decisions were then attached to weapons nobody
+    had looked at, and `coverage()` reported **one** open row, because a row is only "open" when
+    its NAME disappears. A name surviving proves nothing; the weapon list is the identity.
+
+    A non-empty result means the grouping moved under a review and
+    `retau_assignment.py --source <sid> --write` must be run before anything trusts `resolve()`.
+    """
+    data = json.load(GROUPS.open(encoding="utf-8"))
+    out: dict = {}
+    for sid, doc in load().items():
+        have = {g["name"]: set(g["weapons"]) for g in data.get(sid, {}).get("groups", [])}
+        bad = [name for name, row in (doc.get("groups") or {}).items()
+               if name not in have or set(row.get("weapons") or []) != have[name]]
+        if bad:
+            out[sid] = sorted(bad)
+    return out
+
+
 def coverage() -> list:
     """[(source, groups, decided, open)] over every source in the groups file."""
     data = json.load(GROUPS.open(encoding="utf-8"))
@@ -157,6 +182,18 @@ def main() -> int:
           "`(drop: ...)` / `(park: ...)` calls; `open` is everything still unreviewed.")
     for sid, why in sorted(NEEDS_NO_REVIEW.items()):
         print(f"  `{sid}` needs no review — {why}")
+
+    stale = stale_rows()
+    if stale:
+        print("\n⛔ STALE REVIEWS — the grouping moved under these rows and `resolve()` is "
+              "returning decisions for weapons they were not written about:")
+        for sid, names in sorted(stale.items()):
+            print(f"  {sid}: {len(names)} row(s) — {', '.join(names[:6])}"
+                  f"{' …' if len(names) > 6 else ''}")
+            print(f"     fix: python tools/reference/retau_assignment.py --old <snapshot.json> "
+                  f"--source {sid} --write")
+        return 1
+    print("\n✓ every reviewed row still holds exactly the weapons it was written about.")
     return 0
 
 

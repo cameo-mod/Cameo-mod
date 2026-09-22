@@ -273,6 +273,11 @@ ELEMENT_ORDER = [
     # strong: a real damage tag, or a death type unique to that element
     ("Cryo", "FrozenDeath"),
     ("Radiation", "RadiationDeath"),
+    # R54 - the same animation in a different palette. RV pairs them explicitly, warhead by
+    # warhead: NukePayload/NukePayloadOrange, atomic/atomicOrange, FalloutBomb/FalloutBombOrange,
+    # RadBeamWeapon/RadBeamWeaponOrange. All 8 carriers are the Orange twin of a RadiationDeath
+    # weapon, so the pair read as two different elements until now.
+    ("Radiation", "OrangeRadiationDeath"),
     ("Toxin", "ToxinDeath"),
     # R45 - THE SAME ELEMENT IS SPELLED DIFFERENTLY IN DIFFERENT MODS. Combined Arms writes
     # `ToxinDeath` (20 uses, `TiberiumDeath` 0); Cameo writes `TiberiumDeath` (381 uses across
@@ -282,6 +287,20 @@ ELEMENT_ORDER = [
     # under one death voice (`DeathSounds@POISONED`), which is the mod stating they are one thing.
     ("Toxin", "TiberiumDeath"),
     ("Toxin", "RA2VirusDeath"),
+    # R54 - a FOURTH and FIFTH spelling of the same element, found the same way R45 found the
+    # third: by censusing every `*Death` token in every source against the two lists below.
+    # Romanov's Vengeance writes `VirusDeath` (36 nodes / 24 weapons) and Combined Arms writes
+    # `PoisonDeath` (10 / 8). Every RV carrier is a toxin weapon without exception -- ToxinSprayer,
+    # Virusgun, PoisonSting, ToxinBomb, ToxinSplash, CloudDamage, GasCrateExplode, MosquitoMissile
+    # -- and RV had ZERO Toxin groups before this, which is the giveaway: a mod with a whole Yuri
+    # chemical arsenal cannot have no chemical weapons. CA's carriers are ChemDebris, CorrupterSpew,
+    # VirusCloud, UnitExplodeChemSmall and `SNIPER.ASSA`, the Assassin, whose own warhead spawns a
+    # `viruscloud` actor -- read, not assumed. ⚠ ONE doubtful row: CA's `FireDebris`, a napalm
+    # debris shard sitting directly beside `ChemDebris` in the same file, carries `PoisonDeath`
+    # too and now reads Toxin. It looks like an authoring slip in CA rather than a design
+    # statement, and it is left alone here because CA's review is the MAINTAINER's.
+    ("Toxin", "VirusDeath"),
+    ("Toxin", "PoisonDeath"),
     ("Tesla", "ElectricityDeath"),
     ("Atomized", "AtomizedDeath"),
     ("Fire", "Incendiary"),
@@ -301,12 +320,38 @@ ELEMENT_ORDER = [
 # The prone variants were the biggest omission: `Prone75Percent` alone occurs 8,055 times and
 # only `Prone50Percent` was listed. `RippedApartDeath` is `Sniper`'s death ANIMATION, and the
 # spawn/infection/mutate tokens are gameplay mechanics.
+#
+# R54 - ⚠ ADDING A TOKEN HERE CHANGES NO CLASSIFICATION. `element_of` subtracts this set and then
+# looks for an ELEMENT_ORDER hit, so a token that is in NEITHER list already loses every time;
+# NOISE and UNMAPPED are behaviourally identical. What this set records is that a token was
+# CENSUSED AND JUDGED, which is the only thing that stops the next census redoing the work. The
+# second block below is that census, taken across all eight OpenRA rulesets:
+#   `FlameDeath` (RV, 61 weapons) is the single most tempting miss in the corpus and it is NOT an
+#   element. It is on the flamethrowers, yes — but also on CurtainRifle, PsychicJab, MirageGun,
+#   IonCannon, DerrickExplode and every barrel explosion: 17 of 61 carriers do not burn anything.
+#   It is the burned-corpse animation, exactly like `FireDeath` one line above, and RV's fire
+#   weapons are identified by profile and name instead (R55).
+#   `ElectroDeath` (RV, 73) is the same trap wearing the opposite element: ElectricBolt, CoilBolt,
+#   TeslaFence — and PrismShot, PrismSupport, Comet, DiskLaser. Mapping it to Tesla would have
+#   bought nothing (every real tesla weapon already reads Tesla from its DELIVERY) and cost the
+#   Prism tower, which is not an electric weapon by any reading.
+#   `EnergyDeath` (SP 70, CN 10, TS 4) spans lasers, plasma, ion, railgun, tesla AND artillery —
+#   one animation over four elements, so it names none of them.
+#   `PsychicDeath` (RV 24, Cameo 17) is carried by PsiWave and PsychicDomination but also by
+#   CRNuke, IvanBomber, SealC4 and TanyaC4: the no-corpse animation, not mind control.
+#   `BruteDeath` (12) is melee — Punch, Smash, SlimeAttack — the `RippedApartDeath` of this mod.
+#   `MutationDeath`/`MutatedDeath`/`CabalDeath*`/`ChronoDeath` are mechanics or one-weapon
+#   animations, each under 6 carriers; `AtomizedDeath` already carries the signal ChronoDeath
+#   might be mistaken for.
 ELEMENT_NOISE = {"Prone50Percent", "Prone60Percent", "Prone75Percent", "Prone100Percent",
                  "TriggerProne", "DefaultDeath", "DefaultDeathwc2", "FireDeath",
                  "FlakVestMitigated", "FlakVestMitigatedMinor", "AirToGround", "Repairable",
                  "RippedApartDeath", "SoundDeath",
                  "KillsDrone", "DroneInfection", "SuppressDrone", "RemovesSquid",
-                 "SwarmlingSpawn", "QueenBroodlingSpawn", "ContaminatorMutate", "QuestionMutate"}
+                 "SwarmlingSpawn", "QueenBroodlingSpawn", "ContaminatorMutate", "QuestionMutate",
+                 # R54 census - death ANIMATIONS and mechanics, verified against their carriers
+                 "FlameDeath", "ElectroDeath", "EnergyDeath", "PsychicDeath", "BruteDeath",
+                 "MutationDeath", "MutatedDeath", "ChronoDeath", "CabalDeath", "CabalDeathUpg"}
 
 
 def element_of(damage_types: str) -> str:
@@ -578,9 +623,20 @@ def main() -> int:
         print()
 
     if args.write:
+        # ⚠ R54 - `--write` REPLACES the file, it does not merge, and `--source` DEFAULTS to
+        # combined_arms. So a bare `--write` wrote one source's 182 groups over all twenty and
+        # said only "wrote docs/reference/warhead_groups.json" — 1,499 groups and every other
+        # source's measured payload gone, with a zero exit code. The same defect class as the
+        # splice writer and the `tolerance`-as-a-fraction claims: a destructive default that
+        # cannot report that it did something unintended. `--write` now requires `--all`.
+        if not args.all:
+            raise SystemExit(
+                f"refusing to write: --write replaces every source in {OUT.name}, and this run "
+                f"measured only {args.source!r}. Re-run with --all --write, or drop --write.")
         OUT.write_text(json.dumps(out, indent=1, sort_keys=True, default=float) + "\n",
                        encoding="utf-8")
-        print(f"wrote {OUT.relative_to(ROOT)}")
+        print(f"wrote {OUT.relative_to(ROOT)}  ({sum(len(v['groups']) for v in out.values())} "
+              f"groups across {len(out)} sources)")
     return 0
 
 

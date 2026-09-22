@@ -59,12 +59,30 @@ import pathlib
 import shutil
 import sys
 
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+
 import yaml
+
+import assignment_store as store
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 
 GROUPS = ROOT / "docs" / "reference" / "warhead_groups.json"
-DOC = ROOT / "docs" / "reference" / "warhead_family_assignment.yaml"
+# ⚠ R54 - THERE IS NO SINGLE ASSIGNMENT DOCUMENT ANY MORE. This was a hardcoded path to Combined
+# Arms' file from when CA was the only reviewed source, and `--source` switched only the GROUPS
+# lookup. So `--source mental_omega` compared MO's new groups against CA's REVIEW and reported a
+# confident migration of the wrong document — it did not fail, which is what made it dangerous.
+# The document now comes from `assignment_store`, keyed by the same `source:` field everything
+# else keys on. Same defect class as `family_matrix.load_assignment`, fixed the same way.
+
+
+def doc_for(source: str) -> pathlib.Path:
+    """The assignment file that CLAIMS `source`, not a filename guessed from it."""
+    doc = store.load_source(source)
+    if doc is None:
+        raise SystemExit(f"no assignment file declares source {source!r} — "
+                         f"reviewed sources are {', '.join(sorted(store.load()))}")
+    return doc["_path"]
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -167,10 +185,10 @@ def migrate(old_entry: dict, new_entry: dict, doc: dict) -> dict:
     return {"rows": rows, "stats": stats, "produced": produced}
 
 
-def write_doc(new_entry: dict, result: dict, doc: dict) -> str:
+def write_doc(new_entry: dict, result: dict, doc: dict, doc_path: pathlib.Path) -> str:
     """Rebuild the yaml, preserving the header comments and the per-weapon overrides."""
     header = []
-    for line in DOC.read_text(encoding="utf-8").splitlines():
+    for line in doc_path.read_text(encoding="utf-8").splitlines():
         if line.startswith("source:"):
             break
         header.append(line)
@@ -197,19 +215,28 @@ def main() -> int:
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--old", required=True, type=pathlib.Path,
                     help="a warhead_groups.json snapshot taken BEFORE the tau change")
-    ap.add_argument("--source", default=None,
-                    help="default: the `source:` named in the assignment file")
+    ap.add_argument("--source", required=True,
+                    help="which source to migrate; its assignment file is found by that key")
     ap.add_argument("--write", action="store_true")
     ap.add_argument("--verify", action="store_true", help="print every straddle in full")
     args = ap.parse_args()
 
-    doc = yaml.safe_load(DOC.read_text(encoding="utf-8"))
-    source = args.source or doc["source"]
+    source = args.source
+    doc_path = doc_for(source)
+    doc = yaml.safe_load(doc_path.read_text(encoding="utf-8"))
 
     old_entry = load_groups(args.old, source)
     new_entry = load_groups(GROUPS, source)
+    # ⚠ R54 - THIS USED TO SAY "nothing to migrate" AND IT WAS WRONG. tau is not the only thing
+    # that regroups: an ELEMENT VOCABULARY change does it too, and it is worse, because pulling
+    # one weapon out of `Bullet_Veh_7` CASCADES the numbered suffixes — `Bullet_Veh_7/8/9` each
+    # inherited the next group's weapons and three reviewed Combined Arms decisions silently
+    # attached to weapons nobody had reviewed. The loader saw only ONE open row out of four wrong
+    # ones, because the NAMES all still existed. Same tau is not the same grouping.
     if old_entry["tau"] == new_entry["tau"]:
-        print(f"⚠ both groupings are at tau {old_entry['tau']} — nothing to migrate")
+        print(f"note: both groupings are at tau {old_entry['tau']}, so this is a re-key after a "
+              f"vocabulary or corpus change rather than a tau move — still required, because "
+              f"group names renumber.")
     result = migrate(old_entry, new_entry, doc)
     stats = result["stats"]
 
@@ -235,10 +262,10 @@ def main() -> int:
             print(f"      {row['review_note']}")
 
     if args.write:
-        backup = DOC.with_suffix(".yaml.bak")
-        shutil.copy2(DOC, backup)
-        DOC.write_text(write_doc(new_entry, result, doc), encoding="utf-8")
-        print(f"\nwrote {DOC.relative_to(ROOT)}  (previous version kept at {backup.name})")
+        backup = doc_path.with_suffix(".yaml.bak")
+        shutil.copy2(doc_path, backup)
+        doc_path.write_text(write_doc(new_entry, result, doc, doc_path), encoding="utf-8")
+        print(f"\nwrote {doc_path.relative_to(ROOT)}  (previous version kept at {backup.name})")
     else:
         print("\n(dry run — pass --write to rewrite the assignment file)")
     return 0
