@@ -399,10 +399,6 @@ JapanMaidenBowEnergized:
 	Inherits@6: JapanMaidenBow
 	Projectile: Missile
 		ContrailStartColor: FFCC77
-	Warhead@Arrow_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 6000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
@@ -410,10 +406,6 @@ JapanMaidenBowEnergized:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonHE_Medium: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 6000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -480,6 +472,7 @@ JapanMaidenBowEnergized:
 		Explosions: drneutronexp
 		ImpactSounds: kaboom12.aud
 		ValidTargets: Air
+	-Warhead@Arrow_Light:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@MediumMissile:
@@ -489,7 +482,7 @@ JapanMaidenBowEnergized:
 	-Warhead@TeslaWeapon:
 	Warhead@Arrow_Light_Flat:
 		ValidTargets: Ground, Water, Air
-		Damage: 33000
+		Damage: 42000
 		PercentageScale: 0
 
 BallistaSingleShotAir_AA:
