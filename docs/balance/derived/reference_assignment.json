@@ -4227,6 +4227,24 @@
      0.554,
      0.85
     ]
+   },
+   "OpenRA Red Alert": {
+    "confidence": "STRONG",
+    "cost": 300,
+    "home": true,
+    "hp": 4000,
+    "id": "E4",
+    "name": "Flame Infantry",
+    "raw_name": 1.0,
+    "score": [
+     4,
+     1,
+     1,
+     0.0,
+     0.758,
+     0.671,
+     1.0
+    ]
    }
   },
   "ra1_soviets_flametower": {
@@ -4293,6 +4311,16 @@
     "hp": 25000,
     "id": "BTR.YURI",
     "name": "Armored Personnel Carrier (Gattling BTR)",
+    "raw_name": null,
+    "score": null
+   },
+   "DTA Enhanced": {
+    "confidence": "STRONG",
+    "cost": 550,
+    "home": false,
+    "hp": 2500,
+    "id": "SHILKA",
+    "name": "Quad Tank",
     "raw_name": null,
     "score": null
    }
@@ -13640,6 +13668,24 @@
    }
   },
   "ts_gdi_lightinfantry": {
+   "Crystallized Nexus": {
+    "confidence": "STRONG",
+    "cost": 120.0,
+    "home": true,
+    "hp": 125.0,
+    "id": "GASOL",
+    "name": "Marine",
+    "raw_name": 1.0,
+    "score": [
+     4,
+     1,
+     1,
+     0.0,
+     0.727,
+     0.956,
+     1.0
+    ]
+   },
    "OpenRA Tiberian Sun": {
     "confidence": "STRONG",
     "cost": 120,
@@ -13655,6 +13701,24 @@
      0.0,
      0.89,
      0.956,
+     1.0
+    ]
+   },
+   "Shattered Paradise": {
+    "confidence": "STRONG",
+    "cost": 150.0,
+    "home": true,
+    "hp": 15000.0,
+    "id": "GDIE1",
+    "name": "Marine",
+    "raw_name": 1.0,
+    "score": [
+     4,
+     1,
+     1,
+     0.0,
+     0.743,
+     0.919,
      1.0
     ]
    }
