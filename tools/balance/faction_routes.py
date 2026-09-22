@@ -373,6 +373,19 @@ EXCLUSIVE_ONLY = {
     "RA2 0XX": "side-based; `Germans` differs from `Americans` by ONE unit and `Alliance` by zero",
     "Twisted Insurrection": "per-house, but GDI+Phoenix and Nod+Sons are splinter pairs that "
                             "share a roster and must not read as two factions",
+    # HANDOFF priority-queue 1, assigned EMBER. CA is a five-side mashup shipped under ~24 house
+    # tokens; only 5 are routed and the corpus tags every row with its full owner list, so the
+    # all-houses pool (ACOL, AGUN, AMCV, ... — owned by all ~25 houses) was admissible to ALL
+    # FIVE routed Cameo factions at once and a soviet+yuri unit like `3TNK` fed ra1_soviets AND
+    # yuri. That is how Nod's SAM became `ra1_soviets_sovietsamsite`'s reference. Measured on
+    # the committed corpus: 186 of 341 CA rows admit to 2+ factions. Real per-side rows exist
+    # (nod 26, gdi 21, allies 17 single-owner), and the universal-mobile carve-out keeps the
+    # shared combat pool — post-cut rosters are ~76-107 rows a faction. Sub-faction houses
+    # (`talon`, `zocom`, `marked`, `legion`, ...) are leaves until the `peer_faction_sides.json`
+    # expansion lands (devin/ember/vfi-signature-fix); exclusive-only works correctly either
+    # way — a leaf-only row simply stays untagged as today.
+    "Combined Arms": "five-side mashup tagging rows with every owner house — the all-houses "
+                     "pool fed all five routed factions at once (186 of 341 rows multi-admit)",
 }
 
 # {source: every faction token that source routes to ANY Cameo faction} — the rivals an
