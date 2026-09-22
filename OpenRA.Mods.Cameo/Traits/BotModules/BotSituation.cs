@@ -465,7 +465,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		internal static bool ShouldEvaluateTargetDecision(bool hasIncumbent, bool incumbentAvailable,
 			int lastDecisionTick, int tick, int decisionInterval)
 		{
-			return hasIncumbent && !incumbentAvailable ||
+			return !hasIncumbent || !incumbentAvailable ||
 				ShouldEvaluateDecision(lastDecisionTick, tick, decisionInterval);
 		}
 

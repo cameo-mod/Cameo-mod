@@ -159,8 +159,8 @@ namespace OpenRA.Mods.Cameo.Test
 
 		[TestCase(true, false, true)]
 		[TestCase(true, true, false)]
-		[TestCase(false, false, false)]
-		public void MissingIncumbentBypassesTargetDecisionCadenceOnlyWhenOneWasSet(
+		[TestCase(false, false, true)]
+		public void TargetDecisionBypassesCadenceWhenNoTargetIsHeld(
 			bool hasIncumbent, bool incumbentAvailable, bool expected)
 		{
 			var info = new MasterAiBotModuleInfo();
