@@ -1,64 +1,16 @@
 # Atreides faction-specific weapons.
 # Ported from legacy mods/cameo/weapons/d2k.yaml to make the Atreides ContentPack
-# self-contained. These override the legacy definitions (ContentPacks load after
-# the global weapons file). Shared D2k weapons (light_inf_lmg, D2K_Rocket_Trooper,
-# 80mm_A, mtank_pri, D2K_155mm, D2KUnitExplode*) remain in the global file until
-# Devin-Blaze moves them to ContentPacks/D2k/Shared/yaml/weapons.yaml.
+# self-contained. Weapons shared with other D2k factions live in
+# ContentPacks/D2k/Shared/yaml/weapons.yaml (light_inf_lmg, D2K_Rocket_Trooper,
+# 80mm_A, mtank_pri, D2KUnitExplode*, Sound, OrniGun, HMG).
 #
 # Atreides-unique weapons:
-# - Sound/Sound2: sonic tank weapon (AreaBeam, Atreides only)
+# - Sound2: sonic tank variant (inherits Shared Sound)
 # - OrniBomb/OrniBombC: ornithopter bomb
-# - OrniMissile: ornithopter missile
-# - OrniGun/OrniGunC: ornithopter gun
+# - OrniMissile: ornithopter missile (inherits PhoenixRocket, moved here from legacy)
+# - OrniGunC: ornithopter gun variant (inherits Shared OrniGun)
+# - PhoenixRocket: missile base inherited by OrniMissile (Atreides-only consumer)
 # - Fremen_S: Fremen stealth weapon
-
-Sound:
-	ReloadDelay: 77
-	Range: 7777
-	Report: SONIC1.WAV
-	Projectile: AreaBeam
-		Speed: 333
-		Inaccuracy: 333
-		InaccuracyType: PerCellIncrement
-		Duration: 4 # Has a length of 0c512
-		DamageInterval: 2 # Travels 0c384 between impacts, will hit a target roughly three times
-		Width: 0c512
-		Shape: Flat
-		Falloff: 100, 75, 50
-		Range: 0, 7500, 15000
-		BeyondTargetRange: 1c0
-		Color: C4C9C2
-	Warhead@1Dam: SpreadDamage
-		Range: 0, 32
-		Falloff: 100, 100
-		Damage: 3333
-		AffectsParent: false
-		ValidRelationships: Neutral, Enemy
-		Versus:
-			None: 333
-			Wood: 88
-			Light: 123
-			Medium: 111
-			Heavy: 99
-			Concrete: 77
-		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
-	Warhead@2Dam: SpreadDamage
-		Range: 0, 32
-		Falloff: 100, 100
-		Damage: 333 # Only does 10% damage to friendly units
-		AffectsParent: false
-		ValidRelationships: Ally
-		Versus:
-			None: 333
-			Wood: 88
-			Light: 123
-			Medium: 111
-			Heavy: 99
-			Concrete: 77
-		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
-	Warhead@Concrete: DamagesConcrete
-		Damage: 1500
-
 
 Sound2:
 	Inherits: Sound
@@ -115,39 +67,7 @@ OrniMissile:
 			Medium: 75
 			Heavy: 50
 			Concrete: 125
-
 	MinRange: 1335
-
-OrniGun:
-	StartBurstReport: FREMODD1.WAV
-	Burst: 5
-	BurstDelays: 2
-	ReloadDelay: 25
-	Range: 6666
-	ValidTargets: Ground
-	Projectile: InstantHit
-		Inaccuracy: 1c256
-		InaccuracyType: PerCellIncrement
-	Warhead@1Dam: SpreadDamage
-		ValidTargets: Ground
-		Damage: 3333
-		Spread: 333
-		Falloff: 100, 33
-		Versus:
-			None: 333
-			Wood: 66
-			Light: 123
-			Medium: 111
-			Heavy: 99
-			Concrete: 33
-		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@2Eff: CreateEffect
-		Explosions: d2k_piffs
-		ImpactActors: false
-		ExplosionPalette: effect75alpha
-	Warhead@Concrete: DamagesConcrete
-		Damage: 1250
 
 
 OrniGunC:
@@ -157,8 +77,8 @@ OrniGunC:
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Ground, Air
 		Damage: 800
-
 	MinRange: 1200
+
 
 Fremen_S:
 	Inherits: ^MG
@@ -201,12 +121,38 @@ D2KRepair:
 		ValidTargets: lockdowned
 		ValidRelationships: Ally
 
-HMG:
-	Inherits@wh: ^Warhead_Bullet_Medium
-	Inherits@proj: ^Projectile_Bullet_Light
-	Inherits@fx: ^Effect_Bullet_Light
-	ReloadDelay: 20
-	Range: 3072
-	Report: 20MMGUN1.WAV
+PhoenixRocket:
+	Inherits: ^D2KMissile
+	ReloadDelay: 100
+	Burst: 8
+	Range: 4608
+	BurstDelays: 10
+	Projectile: Missile
+		Inaccuracy: 96
+		Speed: 256
+		RangeLimit: 4c512
+	Warhead@1Dam: SpreadDamage
+		Spread: 1c0
+		Damage: 7500
+		Versus:
+			None: 150
+			Wood: 100
+			Light: 125
+			Medium: 125
+			Heavy: 100
+			Concrete: 40
+	Warhead@3Eff: CreateEffect
+		Explosions: napalm
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+		ImpactSounds: firebl3.aud
+		ExplosionPalette: effect
 	Warhead@Concrete: DamagesConcrete
-		Damage: 1800
+		Damage: 1250
+	Warhead@Shrapnel: FireShrapnel
+		Weapon: PhoenixRocketShrapnel
+		Amount: 3
+		ValidTargets: Ground, Water, Air
+	MinRange: 920
+

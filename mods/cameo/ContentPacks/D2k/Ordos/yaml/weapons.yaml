@@ -91,11 +91,11 @@ HeavyOrdosCombatTankRockets:
 		Damage: 14000
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 7
-
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@LightChemicalWeapon:
 	-Warhead@TankDestroyerCannon:
 	-Warhead@CannonHE_Medium_Flat:
+
 120mm_cobra:
 	Inherits@finalmain: ^Warhead_CannonAP
 	Inherits@proj: ^Projectile_Shell_Light
@@ -703,7 +703,6 @@ eye_bomberguy:
 		ImpactActors: false
 	Warhead@Concrete: DamagesConcrete
 		Damage: 1875
-
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@MediumChemicalWeapon:
@@ -715,6 +714,7 @@ eye_bomberguy:
 		ValidTargets: Ground, Water
 		Damage: 100000
 		PercentageScale: 0
+
 
 D2K_155mm_turret:
 	Inherits@finalmain: ^Warhead_CannonHE_Medium_Flat
@@ -891,9 +891,6 @@ Dune_SiegeMortar:
 		Damage: 10000
 	Warhead@CannonAP_Light:
 		Damage: 10000
-#############################
-#       MISSILES
-#############################
 	Warhead@CollapsedDune_SiegeMortarCannonAP_LightPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1014,6 +1011,9 @@ Dune_SiegeMortar:
 		ValidTargets: Ground, Water
 		Damage: 40000
 		PercentageScale: 0
+#############################
+#       MISSILES
+#############################
 
 D2K_Rocket_Trooper_AGOnly:
 	Inherits@missilerole: ^Warhead_MissileHE_Heavy
@@ -1276,9 +1276,9 @@ D2K_APC_Rocket_AA:
 		Falloff: 100, 50
 		Range: 0, 32
 	-Warhead@MissileAP_Medium_Flat:
-
 	Projectile: Missile
 		VerticalRateOfTurn: 12
+
 
 DeviatorMissile:
 	Inherits@collapseflat: ^Warhead_MissileAP_Heavy_Flat
@@ -1292,7 +1292,6 @@ DeviatorMissile:
 	Range: 7070
 	Report: MISSLE1.WAV
 	ValidTargets: Ground, Water, Air
-	# InvalidTargets: Structure, MCImmune
 	Projectile: Missile
 		VerticalRateOfTurn: 12
 		Inaccuracy: 16
@@ -1338,12 +1337,13 @@ DeviatorMissile:
 		ValidRelationships: Neutral, Enemy
 	Warhead@Concrete: DamagesConcrete
 		Damage: 1000
-
 	MinRange: 1415
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@MediumMissile:
 	-Warhead@MissileAP_Heavy_Flat:
 	-Warhead@CannonHE_Heavy:
+	# InvalidTargets: Structure, MCImmune
+
 DeviatorMissile_Artillery:
 	Inherits@missilerole: ^Warhead_MissileHE_Heavy
 	Inherits: ^ShrapnelWeapon
@@ -1596,7 +1596,6 @@ Laboratory_Bioball:
 		Palette: alpha25
 		Weapon: AnthraxCloud
 		InvalidTargets: Water, Structure
-
 	-Warhead@MediumFlameWeapon:
 	-Warhead@MediumChemicalWeapon:
 	Warhead@Chemical_Medium:
@@ -1604,9 +1603,10 @@ Laboratory_Bioball:
 		ValidTargets: Ground, Water, Air
 		Damage: 50000
 		PercentageScale: 0
-
 	Warhead@ShieldHit:
 		InvalidTargets: Air
+
+
 facedancer_grenade:
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1691,7 +1691,6 @@ facedancer_grenade:
 		InvalidTargets: Ship, Structure, Bridge
 	Warhead@Concrete:
 		Damage: 750
-
 	-Warhead@LightFlameWeapon:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@HeavyBomb:
@@ -1701,6 +1700,7 @@ facedancer_grenade:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@LightMissile:
 	-Warhead@MediumMissile:
+
 
 GrenDeath:
 	Warhead@EnemyDam: SpreadDamage
@@ -1855,45 +1855,6 @@ HMGstealth:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
-ordos_autogunturret:
-	Inherits: ^Warhead_Bullet_Light
-	Inherits@2: ^Warhead_Bullet_Medium
-	Inherits@3: ^Warhead_CannonHE_Heavy
-	Inherits@4: ^Projectile_Bullet_Medium
-	Inherits@5: ^Effect_CannonHE_Heavy
-	ReloadDelay: 22
-	Burst: 4
-	BurstDelays: 2
-	Range: 7700
-	StartBurstReport: autoguntrt.wav
-	ValidTargets: Ground, Water, Air
-	Projectile: Bullet
-		-Image:
-		ProjectileStreakLength: 960
-		ProjectileStreakLengthVariation: 96
-		ProjectileStreakWidth: 45
-		ProjectileStreakColor: FFF4C2
-		ProjectileStreakTailWidth: 6
-		ProjectileStreakHeadWidth: 24
-		ProjectileStreakHeadTaperLength: 192
-		ProjectileStreakTailColor: FFB060
-		ProjectileStreakTailColorAlpha: 176
-		ContrailLength: 0
-		Speed: 4000
-	Warhead@Effect:
-		Explosions: piffs
-	Warhead@EffectWater:
-		Explosions: water_piffs
-	Warhead@CannonHE_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@Bullet_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-
 autogun_tank:
 	Inherits@collapseflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
@@ -1944,7 +1905,6 @@ autogun_tank:
 		Explosions: poof
 		ImpactSounds: xplos.aud
 		ValidTargets: Ground, Water
-
 	MinRange: 1495
 	-Warhead@HeavyAAWeapon:
 	-Warhead@FlakWeapon:
@@ -1952,11 +1912,12 @@ autogun_tank:
 	-Warhead@Chaingun:
 	-Warhead@Bullet_Medium_Flat:
 
+
 autogun_tank_small:
 	Inherits: autogun_tank
 	Range: 6220
-
 	MinRange: 1245
+
 D2KAAMineExplosion:
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
@@ -2337,11 +2298,11 @@ light_inf_lmg_ordos_upgrade:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
-
 	Warhead@Laser_Heavy_ExtraDamage:
 		InvalidTargets: Air
 	Warhead@ShieldHit:
 		InvalidTargets: Air
+
 ordos_laserturret:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -2501,8 +2462,8 @@ d2k_tyrant:
 			Medium: 115
 			Heavy: 100
 			Concrete: 30
-
 	MinRange: 1230
+
 
 Rocket_stealth:
 	Inherits: ^D2KMissile
@@ -2515,8 +2476,8 @@ Rocket_stealth:
 		Inaccuracy: 64
 	Warhead@MissileAP_Heavy:
 		Damage: 14500
-
 	MinRange: 1845
+
 
 Rocket_stealth_AA:
 	Inherits: Rocket_stealth
@@ -2547,8 +2508,8 @@ d2k_APCo_AG:
 	ReloadDelay: 175
 	Warhead@1Dam: SpreadDamage
 		Damage: 6000
-
 	MinRange: 1845
+
 
 d2k_APCo_AA:
 	Inherits: Rocket_stealth_AA
@@ -2994,3 +2955,51 @@ d2k_sard_crossbow:
 		ImpactActors: false
 	Warhead@Concrete: DamagesConcrete
 		Damage: 540
+
+LMG:
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
+	ReloadDelay: 20
+	Range: 4448
+	Report: gun11.aud
+	Warhead@Bullet_Medium:
+		Damage: 4000
+
+d2kFlamegun:
+	Inherits: Flamer
+	ReloadDelay: 6
+	Range: 2048
+	Report: FLAMER1.WAV
+	Projectile: Bullet
+		Speed: 1c256
+	Warhead@Flame_Light:
+		Damage: 3200
+	Warhead@2Eff: CreateEffect
+		Explosions: flame
+		ExplosionPalette: effect75alpha
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+
+
+PhoenixRocketShrapnel:
+	Inherits: Flamer
+	Inherits@Rad: CHFlameRadiation
+	Burst: 3
+	Range: 3333
+	ValidTargets: Ground, Water, Air
+	Projectile: Missile
+		Shadow: true
+		HorizontalRateOfTurn: 33
+		CruiseAltitude: 3333
+		MinimumLaunchAngle: 33
+		Image: d2k_missile2
+		Palette: d2keffect
+		TrailImage: large_trail
+		Speed: 333
+		Acceleration: 3
+		RangeLimit: 33333
+		Inaccuracy: 333
+	Warhead@Flame_Light:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000

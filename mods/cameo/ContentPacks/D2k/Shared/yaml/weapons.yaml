@@ -553,6 +553,7 @@ mtank_pri:
 	Range: 10240
 	ValidTargets: Ground, Air
 	Projectile: Missile
+		VerticalRateOfTurn: 12
 		RangeLimit: 30c0
 		HorizontalRateOfTurn: 100
 	Warhead@1Dam: SpreadDamage
@@ -595,3 +596,596 @@ D2KUnitExplodeMed:
 		ImpactSounds: EXPLSML2.WAV
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
+
+^HeavyMachineGunProjectile:
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: 88FF4488
+		ContrailEndColor: FFFFFF44
+		ContrailWidth: 75
+		ContrailLength: 15
+		Speed: 4000
+		Width: 20
+	Warhead@Effect: CreateEffect
+		Explosions: green_small_fire
+		ImpactSounds: kaboom12.aud
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: green_small_fire
+		ImpactSounds: kaboom12.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		Explosions: green_small_fire
+		ImpactSounds: kaboom12.aud
+		ValidTargets: Air
+
+#######################################
+#       DEBRIS
+#######################################
+
+
+Debris:
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@proj: ^Projectile_Grenade_Light_D2K_Debris
+	Inherits@fx: ^Effect_Demolition_Light_D2K
+	ReloadDelay: 60
+	Range: 2816
+	Report: d2khc.wav
+	Warhead@Demolition_Light:
+		Damage: 16000
+		DamageCalculationType: ClosestTargetablePosition
+
+^Debris2Legacy:
+	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@proj: ^Projectile_Flame_Light
+	Inherits@fx: ^Effect_Flame_Light
+	Inherits: Debris
+	Projectile: Bullet
+		Image: shrapnel2
+		Palette: d2keffect
+		TrailImage: small_trail
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+	Warhead@Demolition_Light:
+		Damage: 16000
+	Warhead@Flame_Light:
+		Damage: 16000
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_small_napalm
+		ExplosionPalette: effect75alpha
+	Warhead@Concrete: DamagesConcrete
+		Damage: 2250
+
+
+Debris2:
+	Inherits@finalmain: ^Warhead_Demolition_Light_Flat
+	Inherits: ^Debris2Legacy
+	-Warhead@Demolition_Light:
+	-Warhead@Flame_Light:
+	Warhead@Demolition_Light_Flat:
+		ValidTargets: Ground, Water
+		Damage: 32000
+		PercentageScale: 9997
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 50
+
+Debris3:
+	Inherits: Debris2
+	Projectile: Bullet
+		Image: shrapnel3
+		TrailImage: small_trail2
+	Warhead@Demolition_Light:
+		Damage: 8000
+	Warhead@Flame_Light:
+		Damage: 8000
+	Warhead@Concrete: DamagesConcrete
+		Damage: 1350
+	-Warhead@Demolition_Light:
+	-Warhead@Flame_Light:
+	Warhead@Demolition_Light_Flat:
+		ValidTargets: Ground, Water
+		Damage: 16000
+		PercentageScale: 9994
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 50
+
+
+Debris4:
+	Inherits: Debris2
+	Projectile: Bullet
+		Image: shrapnel4
+		TrailImage: large_trail
+	Warhead@Demolition_Light_Flat:
+		ValidTargets: Ground, Water
+		Damage: 32000
+		PercentageScale: 9997
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 50
+
+
+################################
+#   CANNON
+################################
+
+
+^D2K_Cannon:
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium_D2K
+	Inherits@fx: ^Effect_CannonHE_Medium_D2K
+	Report: MEDTANK1.WAV
+	Warhead@CannonHE_Medium:
+		PercentageScale: 2500
+		Damage: 8000
+
+
+D2K_Rocket_Trooper:
+	Inherits@finalmain: ^Warhead_MissileAP_Heavy_Flat
+	Inherits@wh: ^Warhead_MissileAP_Light
+	Inherits@wh2: ^Warhead_MissileAP_Medium
+	Inherits@wh3: ^Warhead_MissileAP_Heavy
+	Inherits@proj: ^Projectile_Missile_Medium
+	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Rocket_Trooper
+	ReloadDelay: 64
+	Range: 6185
+	Report: ROCKET1.WAV
+	ValidTargets: Ground, Water, Air
+	Projectile: Missile
+		Image: d2k_RPG
+		Palette: d2keffect
+		TrailImage: bazooka_trail2
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+		Speed: 666
+		Inaccuracy: 25
+		InaccuracyType: PerCellIncrement
+		LaunchAngle: 125
+		MaximumLaunchSpeed: 222
+		MinimumLaunchSpeed: 222
+		HorizontalRateOfTurn: 22
+		VerticalRateOfTurn: 12
+		Acceleration: 6
+	Warhead@MissileAP_Light:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+	Warhead@MissileAP_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+	Warhead@MissileAP_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+	Warhead@CollapsedMissileAP_HeavyPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 400
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Heavy: 24
+			Medium: 23
+			Light: 22
+			Scout: 21
+			Spaceship: 20
+			Helicopter: 19
+			Bomber: 18
+			Fighter: 17
+			Concrete: 16
+			Steel: 15
+			Wood: 14
+			Heroic: 13
+			Plate: 12
+			Flak: 11
+			None: 10
+		Falloff: 100, 51
+		Range: 0, 42
+	Warhead@CollapsedMissileAP_LightPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 400
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 17
+			Superheavy: 16
+			Heavy: 15
+			Medium: 14
+			Light: 13
+			Scout: 12
+			Spaceship: 11
+			Helicopter: 10
+			Bomber: 9
+			Fighter: 8
+			Concrete: 7
+			Steel: 6
+			Wood: 5
+			Heroic: 4
+			Plate: 3
+			Flak: 2
+			None: 1
+		Falloff: 100, 51
+		Range: 0, 21
+	Warhead@CollapsedMissileAP_MediumPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 400
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Heavy: 19
+			Medium: 18
+			Light: 17
+			Scout: 16
+			Spaceship: 15
+			Helicopter: 14
+			Bomber: 13
+			Fighter: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
+		Falloff: 100, 50
+		Range: 0, 32
+	-Warhead@MissileAP_Heavy:
+	-Warhead@MissileAP_Light:
+	-Warhead@MissileAP_Medium:
+	Warhead@MissileAP_Heavy_Flat:
+		ValidTargets: Ground, Water, Air
+		Damage: 24000
+		PercentageScale: 0
+
+WormJaw:
+	ReloadDelay: 10
+	InvalidTargets: Structure
+	Range: 1536
+	Warhead@NeededForTargeting: TargetDamage
+		InvalidTargets: Structure
+
+
+D2kBuildingExplode:
+	Inherits: ^DamagingExplosionHE
+	Warhead@Effect2: CreateEffect
+		Explosions: d2k_building, d2k_self_destruct, d2k_large_explosion
+		ImpactActors: false
+		ExplosionPalette: effect75alpha
+	Warhead@Effect: CreateEffect
+		ImpactSounds: EXPLHG1.WAV
+
+
+WallExplode:
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_wall_explosion
+		ImpactSounds: EXPLHG1.WAV, fey_explhg2.wav
+		ImpactActors: false
+		ExplosionPalette: effect75alpha
+
+
+light_inf_lmg:
+	Inherits@finalmain: ^Warhead_Bullet_Light_Flat
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
+	ReloadDelay: 20
+	Range: 5475
+	Report: gun11.aud
+	Warhead@Bullet_Medium:
+		Damage: 2000
+	Warhead@Bullet_Light:
+		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_Light_Flat:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
+
+light_inf_lmg_upgrade:
+	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
+	Inherits: ^Warhead_Bullet_Medium
+	Inherits@3: ^Warhead_CannonHE_Heavy
+	Inherits@4: ^Projectile_Shell_Heavy
+	Inherits@5: ^Effect_CannonHE_Heavy
+	Inherits@6: ^HeavyMachineGunProjectile
+	ReloadDelay: 20
+	Range: 4500
+	Report: gun11.aud
+	ValidTargets: Ground, Water, Air
+	Warhead@CannonHE_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@Bullet_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@Bullet_Light:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	-Warhead@CannonHE_Heavy:
+	Warhead@Bullet_Medium_Flat:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
+
+Fremen_RPG:
+	Inherits: ^D2KMissile
+	Inherits@fx: ^Effect_MissileAP_Heavy
+	ReloadDelay: 45
+	Range: 4864
+	ValidTargets: Air, Vehicle, Structure
+	InvalidTargets: Infantry
+	Projectile: Missile
+		Image: d2k_RPG
+		TrailImage: bazooka_trail2
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@RA2Crater:
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: SandCrater, RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_rocket_explosion
+		ExplosionPalette: effect75alpha
+		ImpactActors: false
+		ValidTargets: Ground, Air
+	Warhead@MissileAP_Heavy:
+		Damage: 4200
+	Warhead@Concrete: DamagesConcrete
+		Damage: 625
+	MinRange: 975
+
+
+HMG_fremen:
+	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
+	Inherits: HMG
+	Report: FREMODD1.WAV
+	Warhead@CollapsedHMG_fremenBullet_LightPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 100
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Fighter: 11
+			Wood: 10
+			Light: 9
+			Bomber: 8
+			Steel: 7
+			Medium: 6
+			Helicopter: 5
+			Concrete: 4
+			Heavy: 3
+			Spaceship: 2
+			Superheavy: 1
+		Falloff: 100, 51
+		Range: 0, 33
+	Warhead@CollapsedHMG_fremenBullet_MediumPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 100
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Steel: 11
+			Medium: 10
+			Helicopter: 9
+			Concrete: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+		Falloff: 100, 50
+		Range: 0, 50
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_Medium_Flat:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 0
+		FriendlyFireDamage: 67
+		FriendlyFireSpread: 67
+
+
+Sound:
+	ReloadDelay: 77
+	Range: 7777
+	Report: SONIC1.WAV
+	Projectile: AreaBeam
+		Speed: 333
+		Inaccuracy: 333
+		InaccuracyType: PerCellIncrement
+		Duration: 4 # Has a length of 0c512
+		DamageInterval: 2 # Travels 0c384 between impacts, will hit a target roughly three times
+		Width: 0c512
+		Shape: Flat
+		Falloff: 100, 75, 50
+		Range: 0, 7500, 15000
+		BeyondTargetRange: 1c0
+		Color: C4C9C2
+	Warhead@1Dam: SpreadDamage
+		Range: 0, 32
+		Falloff: 100, 100
+		Damage: 3333
+		AffectsParent: false
+		ValidRelationships: Neutral, Enemy
+		Versus:
+			None: 333
+			Wood: 88
+			Light: 123
+			Medium: 111
+			Heavy: 99
+			Concrete: 77
+		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
+	Warhead@2Dam: SpreadDamage
+		Range: 0, 32
+		Falloff: 100, 100
+		Damage: 333 # Only does 10% damage to friendly units
+		AffectsParent: false
+		ValidRelationships: Ally
+		Versus:
+			None: 333
+			Wood: 88
+			Light: 123
+			Medium: 111
+			Heavy: 99
+			Concrete: 77
+		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
+	Warhead@Concrete: DamagesConcrete
+		Damage: 1500
+
+
+
+OrniGun:
+	StartBurstReport: FREMODD1.WAV
+	Burst: 5
+	BurstDelays: 2
+	ReloadDelay: 25
+	Range: 6666
+	ValidTargets: Ground
+	Projectile: InstantHit
+		Inaccuracy: 1c256
+		InaccuracyType: PerCellIncrement
+	Warhead@1Dam: SpreadDamage
+		ValidTargets: Ground
+		Damage: 3333
+		Spread: 333
+		Falloff: 100, 33
+		Versus:
+			None: 333
+			Wood: 66
+			Light: 123
+			Medium: 111
+			Heavy: 99
+			Concrete: 33
+		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
+		DamageCalculationType: ClosestTargetablePosition
+	Warhead@2Eff: CreateEffect
+		Explosions: d2k_piffs
+		ImpactActors: false
+		ExplosionPalette: effect75alpha
+	Warhead@Concrete: DamagesConcrete
+		Damage: 1250
+
+
+
+HMG:
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light
+	ReloadDelay: 20
+	Range: 3072
+	Report: 20MMGUN1.WAV
+	Warhead@Concrete: DamagesConcrete
+		Damage: 1800
+
+
+ordos_autogunturret:
+	Inherits: ^Warhead_Bullet_Light
+	Inherits@2: ^Warhead_Bullet_Medium
+	Inherits@3: ^Warhead_CannonHE_Heavy
+	Inherits@4: ^Projectile_Bullet_Medium
+	Inherits@5: ^Effect_CannonHE_Heavy
+	ReloadDelay: 22
+	Burst: 4
+	BurstDelays: 2
+	Range: 7700
+	StartBurstReport: autoguntrt.wav
+	ValidTargets: Ground, Water, Air
+	Projectile: Bullet
+		-Image:
+		ProjectileStreakLength: 960
+		ProjectileStreakLengthVariation: 96
+		ProjectileStreakWidth: 45
+		ProjectileStreakColor: FFF4C2
+		ProjectileStreakTailWidth: 6
+		ProjectileStreakHeadWidth: 24
+		ProjectileStreakHeadTaperLength: 192
+		ProjectileStreakTailColor: FFB060
+		ProjectileStreakTailColorAlpha: 176
+		ContrailLength: 0
+		Speed: 4000
+	Warhead@Effect:
+		Explosions: piffs
+	Warhead@EffectWater:
+		Explosions: water_piffs
+	Warhead@CannonHE_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@Bullet_Light:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@Bullet_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+
+
+HMG_turret:
+	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
+	ReloadDelay: 22
+	Burst: 4
+	BurstDelays: 2
+	Range: 7394
+	StartBurstReport: 20MMGUN1.WAV
+	ValidTargets: Ground, Water
+	Warhead@Bullet_Medium:
+		ValidTargets: Ground, Water
+		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_Medium_Flat:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 9975
+
+d2k_laser:
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
+	Report: obelray1.aud
+	ReloadDelay: 25
+	Range: 7500
+	Burst: 5
+	BurstDelays: 0
+	StartBurstReport: d2k_laser_tank_att.wav
+	ValidTargets: Ground
+	Projectile: LaserZap
+		Width: 50
+		ZOffset: 2047
+		Color: FF0000
+	Warhead@Laser_Heavy:
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
