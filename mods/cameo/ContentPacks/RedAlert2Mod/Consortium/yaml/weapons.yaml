@@ -283,7 +283,6 @@ SteelQuantumCannon_EMP:
 		ValidTargets: Ground, Water
 		Damage: 16000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PercentageScale: 0
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
@@ -326,7 +325,6 @@ SteelQuantumCannon_elite:
 		Damage: 6
 	Warhead@RailgunWeapon: SpreadDamage
 		Damage: 24000
-		PercentageScale: 0
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		Damage: 6
@@ -376,7 +374,6 @@ SteelQuantumCannonScatter_elite:
 		Damage: 1
 	Warhead@RailgunWeapon: SpreadDamage
 		Damage: 4000
-		PercentageScale: 0
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		Damage: 1
