@@ -263,8 +263,7 @@ atreides_palace:
 	Inherits@SW: ^PrimarySuperweapon
 	Inherits@shape: ^2x2Shape
 	Buildable:
-		Factions: atreides
-		Prerequisites: ~hightech.atreides, ~research_centre, !apalace, ~techlevel.superweapons
+		Prerequisites: ~hightech.atreides, ~heavy.atreides_combat, ~research_centre, !apalace, ~techlevel.superweapons
 		Description: Unlocks superweapons and elite units.
 		IconPalette: d2kunit
 	Tooltip:

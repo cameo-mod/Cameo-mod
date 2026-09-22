@@ -12,10 +12,9 @@ atreides_ornithopter:
 	Tooltip:
 		Name: actor_atreides_ornithopter.name
 	Buildable:
-		Factions: atreides
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 60
-		Prerequisites: ~hightech.atreides
+		Prerequisites: ~hightech.atreides, ~heavy.atreides_combat
 		Description: actor_atreides_ornithopter.description
 		IconPalette: d2kunit
 	UpdatesPlayerStatistics:
@@ -145,10 +144,9 @@ atreides_advancedcarryall:
 	Valued:
 		Cost: 800
 	Buildable:
-		Factions: atreides
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 40
-		Prerequisites: ~hightech.atreides
+		Prerequisites: ~hightech.atreides, ~heavy.atreides_combat
 		Description: actor_atreides_advancedcarryall.description
 		IconPalette: d2kunit
 	Health:

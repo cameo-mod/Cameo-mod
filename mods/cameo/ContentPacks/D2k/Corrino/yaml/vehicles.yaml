@@ -258,7 +258,7 @@ corrino_missiletank:
 		AddToArmyValue: true
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~heavy.missile_tank, ~research_centre
+		Prerequisites: ~heavy.missile_tank, ~heavy.corrino_combat, ~research_centre
 		BuildPaletteOrder: 60
 		Description: actor_corrino_missiletank.description
 		IconPalette: d2kunit
