@@ -7,7 +7,7 @@ Real factions: **31** — covered by crate: **30** — missing: **1**
 
 | faction | crate suffix | granted unit | NoBaseSelectionShares |
 |---|---|---|---|
-| asianalliance | asianalliance | asianalliance_asianmobileconstructionvehicle | 10000 |
+| asianalliance | asianalliance | asianalliance_mobileconstructionvehicle | 10000 |
 | atreides | atreides | atreides_mobileconstructionvehicle | 10000 |
 | cabal | cabal | cabal_mobileconstructionvehicle | 10000 |
 | eden | eden | EDEN_CONVEC_STRUCTURE_FACTORY | 10000 |
