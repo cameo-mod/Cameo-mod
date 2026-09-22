@@ -54,7 +54,7 @@ consolidation target, and the maintainer ruled it waits until every source has v
 | 1 | Read 20 sources into one normalised matrix | `warhead_matrix.py` | **done**, 0 degenerate |
 | 2 | Map each source's armours onto our 16 rows, and average | `armor_interpolate.py` | **done**, all 20 mapped |
 | 3 | Compress each source's weapons into review groups | `compress_warheads.py` | **done**, 17 of 20 |
-| 4 | Assign each group to a Cameo warhead family | `warhead_family_assignment*.yaml` | **7 of 17 sources, 1,886 of 2,554 weapons (74%)** (CA reviewed; Mental Omega, Red Resurrection, Rise of the East, Romanov's Vengeance, CnC Reloaded and Shattered Paradise proposed) |
+| 4 | Assign each group to a Cameo warhead family | `warhead_family_assignment*.yaml` | **8 of 17 sources, 1,999 of 2,554 weapons (78%)** (CA reviewed; Mental Omega, Red Resurrection, Rise of the East, Romanov's Vengeance, CnC Reloaded, Shattered Paradise and RA2 Reborn proposed) |
 | 5 | Collapse to one row per Cameo warhead | `family_matrix.py` | done for both; every dialect since R47 |
 
 Stage 4 is the bottleneck and it is the only stage that needs human judgement.
@@ -101,7 +101,7 @@ after two averaging defects were fixed (R34, R35). `Heroic` stays derived per §
 
 ### Stage 3 — compression
 
-**1,662 groups across 20 sources, at `tau = 0.20` (R41), with the element vocabulary censused corpus-wide (R45, R54).** The threshold was 0.50 until
+**1,670 groups across 20 sources, at `tau = 0.20` (R41), with the element vocabulary censused corpus-wide (R45, R54).** The threshold was 0.50 until
 2026-09-22, chosen as "well below the 25th percentile" of the pairwise distances — a heuristic
 with nothing scoring it. `validate_families.py` scores a grouping against Cameo's own 904
 labelled weapons, and at 0.50 a group held a MEDIAN OF 3 distinct Cameo families: 61% purity,
@@ -189,7 +189,7 @@ And they are stale in a specific, checkable way. `docs/reference/family_profiles
 generated on **2026-08-15** by `propose_family_profiles.py` over `survey_platforms.py` — the
 OLD single-machine extractor that traces INI files out of `~/Downloads`, which nobody else has.
 Its 31 entries carry **1 to 9 mods each**, gated at `min_rows: 8, min_mods: 3`. The pipeline in
-this document carries **20 sources and 1,662 groups** and is hermetic. The numbers that ship were
+this document carries **20 sources and 1,670 groups** and is hermetic. The numbers that ship were
 never exposed to most of the corpus.
 
 So: point the profile proposal at `warhead_groups.json` + `warhead_family_assignment.yaml`
@@ -249,14 +249,14 @@ in one place, which is the rule every consumer previously reimplemented.
 stage was OpenRA-only (and the three largest unreviewed sources are INI), `--write` overwrote rather
 than merged, and `family_matrix` was NONDETERMINISTIC. All three are fixed — see R47.
 
-⭐ **DONE (7):** `combined_arms` 182 (REVIEWED), `mental_omega` 155, `red_resurrection` 138,
-`rise_of_the_east` 131, `romanovs_vengeance` 99, `cnc_reloaded` 92,
-`shattered_paradise` 92 — 889 groups, 1,886 weapons.
+⭐ **DONE (8):** `combined_arms` 182 (REVIEWED), `mental_omega` 156, `red_resurrection` 138,
+`rise_of_the_east` 133, `romanovs_vengeance` 99, `cnc_reloaded` 94,
+`shattered_paradise` 92, `ra2_reborn` 80 — 974 groups, 1,999 weapons.
 
-**REMAINING (10), in usage order — 436 groups, half of what is already done:**
-`ra2_reborn` 78, `ra20xx` 76, `twisted_insurrection` 70, `dta_enhanced` 53,
-`dta_classic` 41, `openra_ra` 33, `crystallized_nexus` 28, `openra_ts` 22,
-`openra_td` 20, `openra_d2k` 15.
+**REMAINING (9), in usage order — 359 groups, a third of what is already done:**
+`ra20xx` 77, `twisted_insurrection` 70, `dta_enhanced` 53, `dta_classic` 41,
+`openra_ra` 33, `crystallized_nexus` 28, `openra_ts` 22, `openra_td` 20,
+`openra_d2k` 15.
 
 ⭐ **EXPECT NO FIRE ELEMENT.** Three of the seven sources done so far (Romanov's Vengeance,
 Shattered Paradise, and Twisted Insurrection when it comes) have NO machine-readable fire
