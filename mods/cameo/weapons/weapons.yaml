@@ -5851,7 +5851,7 @@ DefuseKit:
 			Superheavy: 55
 			Helicopter: 52
 			Spaceship: 46
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 		PercentageScale: 10000
@@ -5911,7 +5911,7 @@ DefuseKit:
 			Helicopter: 56
 			Heroic: 53
 			Spaceship: 51
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 		PercentageScale: 10000
@@ -5971,7 +5971,7 @@ DefuseKit:
 			Bomber: 53
 			Helicopter: 49
 			Spaceship: 44
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 		PercentageScale: 10000
@@ -6032,7 +6032,7 @@ DefuseKit:
 			Helicopter: 54
 			Bomber: 50
 			Fighter: 48
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStates:
 			Corrosion: 100
 		PercentageScale: 10000
@@ -6092,7 +6092,7 @@ DefuseKit:
 			Helicopter: 54
 			Bomber: 48
 			Fighter: 40
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStates:
 			Corrosion: 100
 		PercentageScale: 10000
@@ -6152,7 +6152,7 @@ DefuseKit:
 			Wood: 60
 			Bomber: 58
 			Fighter: 49
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStates:
 			Corrosion: 100
 		PercentageScale: 10000
@@ -6216,7 +6216,7 @@ DefuseKit:
 			Bomber: 60
 			Helicopter: 51
 			Spaceship: 44
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
 		PercentageVersus:
@@ -6276,7 +6276,7 @@ DefuseKit:
 			Bomber: 60
 			Helicopter: 51
 			Spaceship: 44
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
 		PercentageVersus:
@@ -6336,7 +6336,7 @@ DefuseKit:
 			Bomber: 64
 			Helicopter: 58
 			Spaceship: 48
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
 		PercentageVersus:
@@ -6579,7 +6579,7 @@ DefuseKit:
 			Superheavy: 55
 			Helicopter: 48
 			Spaceship: 40
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStates:
 			Temperature: 33
 		PercentageScale: 10000
@@ -6639,7 +6639,7 @@ DefuseKit:
 			Heroic: 55
 			Helicopter: 54
 			Spaceship: 46
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStates:
 			Temperature: 33
 		PercentageScale: 10000
@@ -6699,7 +6699,7 @@ DefuseKit:
 			Bomber: 63
 			Helicopter: 58
 			Spaceship: 54
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStates:
 			Temperature: 33
 		PercentageScale: 10000
@@ -9837,7 +9837,7 @@ DefuseKit:
 			Plate: 61
 			Flak: 58
 			None: 55
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Nuclear_Super_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 1000

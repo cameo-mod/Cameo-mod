@@ -44,6 +44,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [⛔ `Node.child()` is an EXACT match — 97% of the mod's producers were invisible (2026-09-06)](#-nodechild-is-an-exact-match--97-of-the-mods-producers-were-invisible-2026-09-06)
 - [⛔ A ZERO-BYTE audit report is a clean green board (2026-09-06)](#-a-zero-byte-audit-report-is-a-clean-green-board-2026-09-06)
 - [⛔ A 0% compliance row is a bug report about the CHECKER (2026-09-06)](#-a-0-compliance-row-is-a-bug-report-about-the-checker-2026-09-06)
+- [A writer that "preserves line endings" but reads in text mode preserves nothing (2026-09-22)](#a-writer-that-preserves-line-endings-but-reads-in-text-mode-preserves-nothing-2026-09-22)
 - [A hand-edit to generated output has a countdown on it (2026-09-05)](#a-hand-edit-to-generated-output-has-a-countdown-on-it-2026-09-05)
 - [Five bug classes from the W25 armor/Versus rebuild (2026-08-16/17)](#five-bug-classes-from-the-w25-armorversus-rebuild-2026-08-1617)
 - [3-way split retrofits: two recurring child-weapon bugs (2026-08-08)](#3-way-split-retrofits-two-recurring-child-weapon-bugs-2026-08-08)
@@ -172,6 +173,49 @@ the threshold behavior.
 - Weapon children that need a different concrete value should override with a
   single `Warhead@Concrete:` key; matching keys merge, so only the last value
   survives.
+
+## A writer that "preserves line endings" but reads in text mode preserves nothing (2026-09-22)
+
+`splice_templates.py` contained exactly the right line:
+
+```python
+newline = "\r\n" if "\r\n" in text else "\n"
+```
+
+and it could never once have been true. The text had come from `Path.read_text()`, which
+applies universal-newline translation, so CRLF arrives already normalised and the test
+always takes the `else`. `write_text()` then translates back to `os.linesep` on the way
+out. On Windows that turns every splice into a full-file rewrite of `weapons.yaml` --
+19,882 lines touched to change 12.
+
+**The detection code looked correct in review and was inert.** Reading it teaches nothing;
+only the bytes on disk do. Both ends need `newline=""`:
+
+```python
+with F.open(encoding="utf-8", newline="") as fh:   # no translation on the way IN
+    text = fh.read()
+...
+with F.open("w", encoding="utf-8", newline="") as fh:   # nor on the way OUT
+    fh.write(newline.join(result))
+```
+
+**And then measure the consequence before writing it up.** The first version of this
+entry said the bug produced a 19,882-line COMMIT diff. It does not: `.gitattributes`
+carries `*.yaml eol=lf` and `* text=lf`, so git normalises on add and reports the same 12
+changed lines whichever ending sits on disk -- confirmed by writing CRLF deliberately and
+re-running `git diff`. The real cost is to the WORKING TREE: a plain non-git `diff`
+reports the whole file, byte-comparing tools see everything changed, and git warns on
+every touch. That is a detour, not a corruption.
+
+Two habits come out of it, and they generalise past this one tool:
+
+* **A guard that cannot fail is not a guard.** Before trusting a conditional that protects
+  something, make it fire once on purpose. This one had never fired.
+* **Diff the artifact, not the intent.** `git diff --stat` after the splice said 12 lines;
+  a raw `diff` against a pre-change copy said 19,882. Both were true and they answer
+  different questions. Knowing which one the situation needs is the skill -- and when a
+  diff is implausibly large for the edit you made, suspect encoding before suspecting the
+  edit.
 
 ## ⛔ A 0% compliance row is a bug report about the CHECKER (2026-09-06)
 

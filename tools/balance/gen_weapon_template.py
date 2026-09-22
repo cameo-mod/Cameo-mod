@@ -1895,8 +1895,97 @@ FAMILY_DAMAGE_TYPES = {
     "CannonChem": "Prone75Percent, TriggerProne, TiberiumDeath",
     "MissileChem":"Prone75Percent, TriggerProne, TiberiumDeath",
     "BulletChem": "Prone75Percent, TriggerProne, TiberiumDeath",
-    # Storm is handled at its own call site (Prone100Percent + Tesla).
+    # ⛔ THE TWO BELOW ARE NOT ELEMENTS — they are deliberate choices the derivation below would
+    # otherwise flatten, and both were caught by diffing generated output against what ships.
+    # `Sniper` uses a death ANIMATION as its signature (the target is ripped apart, not blown up);
+    # deriving it from its element would have replaced that with a generic explosion. `Storm`
+    # knocks EVERY infantry target prone, not 75% of them — it lived at a second call site, which
+    # is how it came to be the one IntegrityScale family whose `Tesla` token was hand-added.
+    "Sniper":     "Prone75Percent, TriggerProne, RippedApartDeath",
+    "Storm":      "Prone100Percent, TriggerProne, ElectricityDeath, Tesla",
 }
+
+
+# ── ELEMENT -> DamageTypes, DERIVED FROM THE FAMILY (R43) ─────────────────────────────────────
+# The table above was hand-maintained and listed 17 families, all of them BLENDS. Every base
+# family was missing, so 31 of 50 shipped the generic `ExplosionDeath` line — including `Flame`,
+# whose own children `BulletFire`/`CannonFire`/`Inferno` were correctly tagged `Incendiary`. A
+# family and the blends made FROM it disagreed about what element it is.
+#
+# ⚠ A NAME IS NOT A MEASUREMENT (R21) — except here, and only here. R21 forbids inferring a
+# REFERENCE mod's weapon nature from its name (`BazAP` read as Tesla because it contains "zAP").
+# These are OUR family names, and DESIGN.md §12 declares them as a delivery x element grid: a
+# `MissileCryo` is delivery Missile, element Cryo BY CONSTRUCTION, because that is what naming it
+# so was FOR. The name is a spec on this side of the line and evidence on the other.
+#
+# ⛔ ONLY TOKENS THAT ALREADY EXIST IN THE TREE. Introducing a new one is a design decision, not a
+# generator change, and an unconsumed token is dead weight the engine will happily carry forever
+# (FieldLoader keeps unknown STRINGS; it is unknown FIELDS it drops). Live counts at R43:
+# `FireDeath` 230 / `Incendiary` 204 / `Tesla` 142 / `ElectricityDeath` 140 / `TiberiumDeath` 56 /
+# `RadiationDeath` 20. There is NO `FrozenDeath` anywhere, so Cryo has no token and is reported by
+# `undeclared_elements()` rather than invented.
+ELEMENT_DAMAGE_TYPES = {
+    "Fire":      "FireDeath, Incendiary",
+    "Tesla":     "ElectricityDeath, Tesla",
+    "Toxin":     "TiberiumDeath",
+    "Radiation":  "RadiationDeath",
+}
+
+# The element half of each family name. Longest match wins, so `FlakCryo` reads Cryo and `Flak`
+# reads nothing. A family absent from this map has no element and keeps the plain blast line.
+ELEMENT_BY_NAME = {
+    "Flame": "Fire", "Fire": "Fire", "Inferno": "Fire", "Thermobaric": "Fire",
+    "Tesla": "Tesla", "Quantum": "Tesla", "Storm": "Tesla",
+    "Chemical": "Toxin", "Chem": "Toxin", "Toxic": "Toxin",
+    "Nuclear": "Radiation",
+    # ⚠ `Nuke` is deliberately FIRE, not Radiation, because that is what `CannonNuke` and
+    # `MissileNuke` already ship and changing it would move live gating under the guise of a
+    # refactor. Whether a tactical nuke should read Radiation is a DESIGN question, open.
+    "Nuke": "Fire",
+    # No engine token exists for these yet; `undeclared_elements()` lists them.
+    "Cryo": "Cryo",
+}
+
+PRONE_DEFAULT = "Prone75Percent, TriggerProne"
+BLAST_DEFAULT = "ExplosionDeath"
+
+
+def family_element(name):
+    """The element a family name declares, or None. Longest token match wins."""
+    hit = None
+    for token, element in ELEMENT_BY_NAME.items():
+        if token in name and (hit is None or len(token) > len(hit[0])):
+            hit = (token, element)
+    return hit[1] if hit else None
+
+
+def damage_types_for(name, prone=PRONE_DEFAULT):
+    """The `DamageTypes` line for a family — explicit override, else derived from its element.
+
+    ⭐ The `Tesla` token is appended STRUCTURALLY for every family carrying `IntegrityScale`,
+    because that is what makes the Integrity trait's passive drain fire. It used to be a comment
+    asking the reader to remember, and `Storm` was already relying on a second call site to add
+    it by hand. A rule the generator enforces cannot be forgotten by the next family.
+    """
+    override = FAMILY_DAMAGE_TYPES.get(name)
+    if override:
+        return override
+    element = family_element(name)
+    tail = ELEMENT_DAMAGE_TYPES.get(element) if element else None
+    line = f"{prone}, {tail or BLAST_DEFAULT}"
+    if name in FAMILY_INTEGRITY_SCALE and "Tesla" not in line:
+        line += ", Tesla"
+    return line
+
+
+def undeclared_elements():
+    """[(family, element)] whose element is real but has no token in the tree — a DESIGN gap."""
+    out = []
+    for name in sorted(set(WEAPONS) | set(BLEND_FAMILIES)):
+        element = family_element(name)
+        if element and element not in ELEMENT_DAMAGE_TYPES:
+            out.append((name, element))
+    return out
 
 # Per-family STATUS CONDITION (PHYSICAL_STATE_SYSTEM.md §6 decision 4). Some families mark the target
 # with a short external condition on every hit instead of (or as well as) filling a PhysicalState meter.
@@ -1944,7 +2033,7 @@ def emit_inherit_family(name, parent, psn, pss, levels):
     parent_cfg = WEAPONS[parent]
     order16 = build_order(parent_cfg[0], parent_cfg[1])
     vt = valid_targets(parent_cfg[2])
-    dt = FAMILY_DAMAGE_TYPES.get(name)
+    dt = damage_types_for(name)
     return family(name, order16, vt, levels, profile_family=parent,
                   **({"damage_types": dt} if dt else {}))
 
@@ -2238,7 +2327,7 @@ def _generate():
             print()
             continue
         order = build_order(bl, d)
-        dt = FAMILY_DAMAGE_TYPES.get(nm)
+        dt = damage_types_for(nm)
         print(f"###### {nm}: {macro_summary(bl)} ({d}, air={air}) ######")
         print(family(nm, order, vt, lv, spreads=spreads, falloffs=falloffs, **({"damage_types": dt} if dt else {})))
         print()
@@ -2264,7 +2353,7 @@ def _generate():
         air_share = (sum(1 for p in parents if p in WEAPONS and WEAPONS[p][2]) / len(parents)
                      if parents else 0)
         vt = valid_targets(air_share >= 1 / 3)
-        dt = FAMILY_DAMAGE_TYPES.get(nm)
+        dt = damage_types_for(nm)
         states_note = f"+ PhysicalStates {states}" if states else "no PhysicalStates"
         # The blend's SHAPE crosses its parents' shapes exactly as its Versus crosses their
         # profiles — see blend_shape(). Without this the 17 blend families kept the old
