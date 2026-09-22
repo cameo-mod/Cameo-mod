@@ -94,7 +94,7 @@ done
 # ⚠ Each script still exits 1 on its own findings, so CI may gate on one deliberately.
 # ⚠ tools/audit/run_all.py parses BOTH loops out of this file — keep the `for a in ...; do`
 #   shape so the two runners cannot drift apart.
-for a in code_duplication test_coverage recent_changes error_handling security; do
+for a in code_duplication test_coverage recent_changes error_handling security drain_status; do
   echo "== audit_$a (advisory)"
   "$PYTHON" "tools/audit/audit_$a.py" "$@" > "$OUT/$a.md" 2> "$OUT/$a.err" || true
   [ -s "$OUT/$a.err" ] || rm -f "$OUT/$a.err"
