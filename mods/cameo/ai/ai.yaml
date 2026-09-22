@@ -42,6 +42,7 @@
 		UnitDelayModifier: 300
 		UnitIntervalModifier: 300
 		InitialAttackDelay: 12000
+		PersonalityReactionDelay: 7500
 		RequiresCondition: easiestbot
 	BotLimits@veryeasy:
 		ProductionTypeLimit: 2
@@ -53,6 +54,7 @@
 		UnitDelayModifier: 250
 		UnitIntervalModifier: 250
 		InitialAttackDelay: 6000
+		PersonalityReactionDelay: 6750
 		RequiresCondition: veryeasybot
 	BotLimits@easy:
 		ProductionTypeLimit: 2
@@ -64,6 +66,7 @@
 		UnitDelayModifier: 200
 		UnitIntervalModifier: 200
 		InitialAttackDelay: 3000
+		PersonalityReactionDelay: 6000
 		RequiresCondition: easybot
 	BotLimits@medium:
 		ProductionTypeLimit: 3
@@ -75,6 +78,7 @@
 		UnitDelayModifier: 175
 		UnitIntervalModifier: 175
 		InitialAttackDelay: 1500
+		PersonalityReactionDelay: 5250
 		RequiresCondition: mediumbot
 	BotLimits@hard:
 		ProductionTypeLimit: 3
@@ -86,7 +90,7 @@
 		UnitDelayModifier: 150
 		UnitIntervalModifier: 150
 		PrioritizeBarracksBeforeRefinery: true
-		AllowPersonalitySwitching: true
+		PersonalityReactionDelay: 4500
 		RequiresCondition: hardbot
 	BotLimits@veryhard:
 		ProductionTypeLimit: 4
@@ -98,7 +102,7 @@
 		UnitDelayModifier: 125
 		UnitIntervalModifier: 125
 		PrioritizeBarracksBeforeRefinery: true
-		AllowPersonalitySwitching: true
+		PersonalityReactionDelay: 3750
 		RequiresCondition: veryhardbot
 	BotLimits@brutal:
 		ProductionTypeLimit: 4
@@ -106,7 +110,7 @@
 		RefineryLimit: 7
 		HarvesterLimit: 21
 		PrioritizeBarracksBeforeRefinery: true
-		AllowPersonalitySwitching: true
+		PersonalityReactionDelay: 3000
 		RequiresCondition: brutalbot
 	BotLimits@challenger:
 		ProductionTypeLimit: 5
@@ -118,7 +122,7 @@
 		UnitDelayModifier: 75
 		UnitIntervalModifier: 75
 		PrioritizeBarracksBeforeRefinery: true
-		AllowPersonalitySwitching: true
+		PersonalityReactionDelay: 2250
 		RequiresCondition: challengerbot
 	BotLimits@unbeatable:
 		ProductionTypeLimit: 6
@@ -130,7 +134,7 @@
 		UnitDelayModifier: 50
 		UnitIntervalModifier: 50
 		PrioritizeBarracksBeforeRefinery: true
-		AllowPersonalitySwitching: true
+		PersonalityReactionDelay: 1500
 		RequiresCondition: unbeatablebot
 	BotLimits@god:
 		ProductionTypeLimit: 7
@@ -142,7 +146,7 @@
 		UnitDelayModifier: 25
 		UnitIntervalModifier: 25
 		PrioritizeBarracksBeforeRefinery: true
-		AllowPersonalitySwitching: true
+		PersonalityReactionDelay: 750
 		RequiresCondition: cameogodbot
 
 Player:
