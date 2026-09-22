@@ -101,7 +101,7 @@ after two averaging defects were fixed (R34, R35). `Heroic` stays derived per §
 
 ### Stage 3 — compression
 
-**1,712 groups across 20 sources, at `tau = 0.20` (R41).** The threshold was 0.50 until
+**1,721 groups across 20 sources, at `tau = 0.20` (R41), with the element vocabulary corrected (R45).** The threshold was 0.50 until
 2026-09-22, chosen as "well below the 25th percentile" of the pairwise distances — a heuristic
 with nothing scoring it. `validate_families.py` scores a grouping against Cameo's own 904
 labelled weapons, and at 0.50 a group held a MEDIAN OF 3 distinct Cameo families: 61% purity,
@@ -128,7 +128,7 @@ That worked only because the review is recorded per WEAPON, not per group — gr
 `_2`/`_3` suffix assigned by clustering order and shift whenever the compressor is re-run. Use
 `retau_assignment.py` for any future threshold change; never re-apply this file by group name.
 
-The other sources carry 1,500 groups. `propagate_families.py` inherits a family wherever the
+The other sources carry 1,509 groups. `propagate_families.py` inherits a family wherever the
 Combined Arms review fixed one for the same delivery x element x band triple:
 
 | | groups |
@@ -188,7 +188,7 @@ And they are stale in a specific, checkable way. `docs/reference/family_profiles
 generated on **2026-08-15** by `propose_family_profiles.py` over `survey_platforms.py` — the
 OLD single-machine extractor that traces INI files out of `~/Downloads`, which nobody else has.
 Its 31 entries carry **1 to 9 mods each**, gated at `min_rows: 8, min_mods: 3`. The pipeline in
-this document carries **20 sources and 1,712 groups** and is hermetic. The numbers that ship were
+this document carries **20 sources and 1,721 groups** and is hermetic. The numbers that ship were
 never exposed to most of the corpus.
 
 So: point the profile proposal at `warhead_groups.json` + `warhead_family_assignment.yaml`
@@ -205,11 +205,11 @@ family's provenance from which JSON it appears in. Measure the template that shi
 
 ### The other half — assignment for the remaining sources
 
-`propagate_families.py` still proposes a family for the 1,500 non-CA groups by matching the
+`propagate_families.py` still proposes a family for the 1,509 non-CA groups by matching the
 delivery x element x band triple, and **R39 measured that at 19% top-1**. Treat its output as a
 shortlist, never as an answer, and read `--purity` alongside any score. Usage order by group
 count: `mental_omega` 169, `red_resurrection` 147, `rise_of_the_east` 140, `romanovs_vengeance`
-100, `ra20xx` 86, `shattered_paradise` 86, `ra2_reborn` 82, `twisted_insurrection` 75.
+100, `shattered_paradise` 90, `ra20xx` 86, `ra2_reborn` 82, `twisted_insurrection` 75.
 
 ⚠ `warhead_family_assignment.yaml` holds Combined Arms only. A second source needs either a
 second file or a `source:` key per block — the `source:` field already exists, so the decided
