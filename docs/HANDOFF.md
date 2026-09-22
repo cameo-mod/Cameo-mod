@@ -1531,9 +1531,11 @@ Landed today, both boot-gated:
 across 10 of them. Fixed by `extract_stats.py`, never by hand. **Yaml and ledger in the SAME
 commit** is now a standing fleet rule.
 
-Next in the W24 queue: `devin/nova/w24-lane2` (57 commits, conflicts in
-`RedAlert2/Soviets/weapons.yaml` — a real per-weapon decision, not a merge tool), then
-`devin/nova/w24-naxi-pilot`, which must follow it.
+W24 queue update (2026-09-22): `devin/nova/w24-lane2` landed as squash-merge
+`devin/nova/w24-lane2-v2` `9303d9689` (PR #431 — review-closed by EMBER, verified by DAWN,
+resolved-diff clean vs master). `devin/nova/w24-naxi-pilot` is **superseded**: master renamed
+the NaxiWW2Machinegun family to the pct-model with two live channels; the collapse would have
+halved its damage.
 
 ### ✅ CLOSED — THE ANTI-AIR CONVENTION. Ruled by the maintainer 2026-09-08.
 
@@ -1665,8 +1667,8 @@ when every one had applied. **Check the mtime; check which pool.**
   of 12**, stranding `minelayer`, `phasetransport`, `nukedemotruck`, `sovietoretruck` and two more.
   Back to EMBER with the list. **Never raise a ratchet to land a branch.**
 * `devin/aurora/ini-pool-hygiene` — the `BuildLimit=0` change above. Rejected with evidence.
-* `devin/nova/w24-lane2` — 57 commits, rotted from 5 conflicts to **36** while NOVA stayed silent.
-  It is the only agent that has not pushed since 2026-09-07.
+* `devin/nova/w24-lane2` — resolved 2026-09-22: rebased and landed as `w24-lane2-v2`
+  (`9303d9689`, PR #431). The old branch tips are preserved under `archive/20260913/*` tags.
 
 ### ⭐⭐ 2026-09-08 — THE EXTRAPOLATION PROGRAM IS THE PLAN NOW
 
