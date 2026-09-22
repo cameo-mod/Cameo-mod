@@ -1711,7 +1711,14 @@ Maintainer rulings, 2026-09-08:
 
 ### Priority queue
 
-1. **CA over-tagging** (EMBER) — unblocks ~8 known-wrong mappings at once.
+1. **CA over-tagging** (EMBER) — ✅ **IMPLEMENTED 2026-09-22, PR #434**
+   (`devin/ember/ca-exclusive-routing`, pending merge): `"Combined Arms"` added to
+   `EXCLUSIVE_ONLY`. The all-houses pool had been admissible to all five routed
+   factions at once (186 of 341 rows multi-admit); post-cut rosters are
+   90/104/95/75/78, multi-admit drops to 73 (all survivors are the sanctioned
+   universal-mobile carve-out), 33 shared-pool CA refs drop, 8 actors go
+   formula-only, STRONG share unchanged at 84%. Deny-side complement is #422's
+   `peer_faction_sides.json` leaf→side expansion (`talon`→`gdi` restores TITN).
 2. **Heroes are invisible on BOTH sides — that, not a missing filter, is why `RMBO` is
    unclaimed.** ⚠ This CORRECTS what this file said earlier on 2026-09-07, and the correction
    matters more than the item. Aurora's `filter_candidate_eligibility.py`
@@ -1733,6 +1740,12 @@ Maintainer rulings, 2026-09-08:
    ordinary formula.** Implementation is the fleet's: a hero flag carried on the row rather than a
    drop, `peer_rows()` keeping its exclusion for distributions, and `assign_references` matching
    hero-to-hero only. 83 Cameo actors and 295 peer heroes are in scope.
+   ✅ **LANDED** — the lane exists on master: `peer_hero_rows()` /
+   `cameo_hero_rows()` (`reference_distribution.py`), hero-to-hero-only gate +
+   two-pass design in `assign_references` (hero lane runs after the non-hero
+   pass so no ordinary mapping shifts). Verified live: `td_gdi_commando` and
+   `ra1_allies_chronotank` each claim their Commando/Chrono Tank peers across
+   3 sources at STRONG.
 3. **Aliases for the 9 short originals** (ECHO) — each is one synonym; DTA calls its rocket
    soldier "Bazooka" and its AA gun "Anti-aircraft Gun". Finite and checkable.
 4. **Sign the 27 class anchors** (CODEX) — 0 of 27 signed, and `apply_balance` therefore refuses
