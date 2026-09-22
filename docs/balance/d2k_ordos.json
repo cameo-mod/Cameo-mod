@@ -127,6 +127,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "156"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "24"
     }
    },
    "ordos_advancedcarryall": {
@@ -255,6 +259,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "156"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "24"
     }
    },
    "ordos_airmine": {
@@ -370,6 +378,10 @@
      "RAAircraft"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -389,6 +401,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "35"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "2"
     }
    },
    "ordos_banshee": {
@@ -577,7 +593,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "1875"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "15"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ordos_upgrade_shields || shieldgen || shielded)"
@@ -601,6 +625,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "165"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "33"
     }
    },
    "ordos_eyeinthesky": {
@@ -705,7 +733,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "7500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "60"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ordos_upgrade_shields || shieldgen || shielded)"
@@ -729,6 +765,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "180"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "12"
     }
    },
    "ordos_swarmerdrone": {
@@ -837,7 +877,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "1000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "20"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ordos_upgrade_shields || shieldgen || shielded)"
@@ -861,6 +909,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "260"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "17"
     }
    },
    "ordos_wraith": {
@@ -966,7 +1018,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "18750"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "150"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ordos_upgrade_shields || shieldgen || shielded)"
@@ -990,6 +1050,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "45"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "9"
     }
    }
   },
@@ -1098,6 +1162,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1200,6 +1268,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1277,23 +1349,31 @@
      {
       "damage_warheads": [
        {
-        "damage": "40000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "Chem_Medium",
+        "damage": "20000",
+        "falloff": "100, 90, 75, 55, 30, 0",
+        "spread": "1536",
+        "tag": "Toxic_Light",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
+      "minrange": "1985",
       "pricing": true,
       "range": "14000",
       "reloaddelay": "90",
       "slot": "Armament",
-      "versus_templates": [],
-      "warheads": [],
+      "versus_templates": [
+       "^Warhead_Toxic_AntiInfantryDefense",
+       "^Projectile_Shell_Light",
+       "^Effect_Chem_Light"
+      ],
+      "warheads": [
+       "^Warhead_Toxic_AntiInfantryDefense",
+       "^Warhead_Toxic_Light"
+      ],
       "weapon": "ordos_chemturret",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1320,7 +1400,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Ordos Chemical Mortar Turret",
+    "name": "Gas Turret",
     "prerequisites": [
      "~ordos_constructionyard",
      "ordos_barracks"
@@ -1330,6 +1410,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1344,7 +1428,7 @@
     },
     "sight": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/buildings.yaml#RevealsShroud.Range",
-     "v": "7710"
+     "v": "14000"
     }
    },
    "ordos_constructionyard": {
@@ -1565,6 +1649,8 @@
    "ordos_laserturret": {
     "armaments": [
      {
+      "burst": "3",
+      "burstdelays": "5",
       "damage_warheads": [
        {
         "damage": "10000",
@@ -1633,6 +1719,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2234,6 +2324,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "15"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -2348,6 +2442,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "30"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
@@ -2462,6 +2560,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "75"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
@@ -2694,6 +2796,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "90"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
@@ -2774,6 +2880,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "20"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_personalshield || shieldgen || shielded)"
@@ -2990,6 +3100,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "28"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -3184,6 +3298,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "20"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3352,6 +3470,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "12"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -4179,7 +4301,15 @@
      "RAVehicle",
      "Starport"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "3375"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "27"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ordos_upgrade_shields || shieldgen || shielded)"
@@ -4370,7 +4500,15 @@
      "RAVehicle",
      "Starport"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "2250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "18"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ordos_upgrade_shields || shieldgen || shielded)"
@@ -4501,6 +4639,10 @@
      "RAVehicle",
      "Starport"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "4750"
+    },
     "resolved_firepower_modifiers": [
      {
       "modifier": 25,
@@ -4509,6 +4651,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "38"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ordos_upgrade_shields || shieldgen || shielded)"
@@ -4601,7 +4747,15 @@
      "RAVehicle",
      "Starport"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "4250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "34"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ordos_upgrade_shields || shieldgen || shielded)"
@@ -4730,7 +4884,15 @@
      "RAVehicle",
      "Starport"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "2750"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "22"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ordos_upgrade_shields || shieldgen || shielded)"
@@ -4846,7 +5008,15 @@
      "RAVehicle",
      "Starport"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "4250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "34"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ordos_upgrade_shields || shieldgen || shielded)"
@@ -4970,7 +5140,15 @@
      "RAVehicle",
      "Starport"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "1625"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "13"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ordos_upgrade_shields || shieldgen || shielded)"
@@ -5108,6 +5286,10 @@
      "RAVehicle",
      "Starport"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "8000"
+    },
     "resolved_firepower_modifiers": [
      {
       "modifier": 40,
@@ -5116,6 +5298,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "64"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ordos_upgrade_shields || shieldgen || shielded)"
@@ -5238,7 +5424,15 @@
      "RAVehicle",
      "Starport"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "5750"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "46"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ordos_upgrade_shields || shieldgen || shielded)"
@@ -5463,7 +5657,15 @@
      "RAVehicle",
      "Starport"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "6875"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "55"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ordos_upgrade_shields || shieldgen || shielded)"
@@ -5603,7 +5805,15 @@
      "RAVehicle",
      "Starport"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "5250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "42"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ordos_upgrade_shields || shieldgen || shielded)"
@@ -5673,6 +5883,14 @@
      "RAVehicle",
      "Starport"
     ],
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "15000"
+    },
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "120"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5860,7 +6078,15 @@
      "RAVehicle",
      "Starport"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "3500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "28"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ordos_upgrade_shields || shieldgen || shielded)"
@@ -5997,7 +6223,15 @@
      "RAVehicle",
      "Starport"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "3000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "24"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ordos_upgrade_shields || shieldgen || shielded)"
@@ -6067,6 +6301,14 @@
      "RAVehicle",
      "Starport"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "10000"
+    },
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "80"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ordos_upgrade_shields || shieldgen || shielded)"
@@ -6215,7 +6457,15 @@
      "RAVehicle",
      "Starport"
     ],
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "3000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "24"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ordos_upgrade_shields || shieldgen || shielded)"
@@ -6333,7 +6583,15 @@
      "RAVehicle",
      "Starport"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "4000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "32"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ordos_upgrade_shields || shieldgen || shielded)"

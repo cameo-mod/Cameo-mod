@@ -50,6 +50,10 @@
     "speed_air": {
      "src": "inherited",
      "v": "175"
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "20"
     }
    },
    "japan_japanesesuperbomber": {
@@ -166,6 +170,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "200"
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "20"
     }
    },
    "ra1_allies_badger": {
@@ -214,6 +222,10 @@
     "speed_air": {
      "src": "inherited",
      "v": "175"
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "20"
     }
    },
    "ra1_allies_cargoplanebomber": {
@@ -319,6 +331,10 @@
     "speed_air": {
      "src": "inherited",
      "v": "175"
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "20"
     }
    },
    "ra1_allies_cargoplaneparadrop": {
@@ -366,6 +382,10 @@
     "speed_air": {
      "src": "inherited",
      "v": "175"
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "20"
     }
    },
    "ra1_badger": {
@@ -414,6 +434,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "175"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "20"
     }
    },
    "ra1_badger_bomber": {
@@ -492,6 +516,10 @@
     "speed_air": {
      "src": "inherited",
      "v": "175"
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "20"
     }
    },
    "ra1_soviets_badger": {
@@ -540,6 +568,10 @@
     "speed_air": {
      "src": "inherited",
      "v": "175"
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "20"
     }
    },
    "ra1_soviets_spyplane": {
@@ -605,6 +637,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "300"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "20"
     }
    },
    "ra1_soviets_superspyplane": {
@@ -672,6 +708,10 @@
     "speed_air": {
      "src": "inherited",
      "v": "300"
+    },
+    "turn_speed_air": {
+     "src": "inherited",
+     "v": "20"
     }
    }
   },
@@ -1267,6 +1307,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "13"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -1451,6 +1495,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "21"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -1816,6 +1864,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "11"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1961,6 +2013,10 @@
      "RANaval"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "90"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2147,6 +2203,10 @@
      "RANaval"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "16"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2302,6 +2362,10 @@
      "RANaval"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "100"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2595,6 +2659,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2614,6 +2682,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Aircraft.Speed",
      "v": "175"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Aircraft.TurnSpeed",
+     "v": "25"
     }
    },
    "ra1_allies_cruiser": {
@@ -2772,6 +2844,10 @@
      "RANaval"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "90"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2999,6 +3075,10 @@
      "RANaval"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3171,6 +3251,10 @@
      "RANaval"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "24"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3330,6 +3414,10 @@
      "RANaval"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "28"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3458,6 +3546,10 @@
      "RANaval"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "40"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3709,7 +3801,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "2500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "20"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3827,7 +3927,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "8000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "64"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"

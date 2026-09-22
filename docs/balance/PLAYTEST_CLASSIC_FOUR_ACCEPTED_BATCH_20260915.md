@@ -37,7 +37,8 @@ limited units, support actors, cargo chassis, or incomplete reference rows.
 - The existing TD Rocket Soldier pair remains at the newer per-armament result
   from PR #398 instead of being replaced by the older actor-fold projection.
 - Eleven valid authored-load carriers are repriced to the sum of their accepted
-  passenger prices. The overfilled TD Nod Chinook remains held at 3,100.
+  passenger prices. The TD Nod Chinook is now also valid at 3,853: its eight
+  authored passengers resolve to a full 11/11 weight load.
 
 ## Evidence
 

@@ -10,6 +10,8 @@ upgrade_conyard.corrino:
 		IconPalette: d2kunit
 	Valued:
 		Cost: 200
+	RenderSprites:
+		Image: conyard.harkonnen
 
 upgrade_barracks.corrino:
 	Inherits: ^UpgradeTemplate
@@ -23,6 +25,8 @@ upgrade_barracks.corrino:
 		IconPalette: d2kunit
 	Valued:
 		Cost: 200
+	RenderSprites:
+		Image: barracks.harkonnen
 
 upgrade_light.corrino:
 	Inherits: ^UpgradeTemplate
@@ -36,6 +40,8 @@ upgrade_light.corrino:
 		IconPalette: d2kunit
 	Valued:
 		Cost: 200
+	RenderSprites:
+		Image: light.harkonnen
 
 upgrade_heavy.corrino:
 	Inherits: ^UpgradeTemplate
@@ -49,6 +55,8 @@ upgrade_heavy.corrino:
 		IconPalette: d2kunit
 	Valued:
 		Cost: 400
+	RenderSprites:
+		Image: heavy.harkonnen
 
 upgrade_radar.corrino:
 	Inherits: ^UpgradeTemplate
@@ -62,3 +70,5 @@ upgrade_radar.corrino:
 		IconPalette: d2kunit
 	Valued:
 		Cost: 300
+	RenderSprites:
+		Image: outpost.harkonnen

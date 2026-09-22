@@ -2,14 +2,14 @@ harkonnen_carryall:
 	Inherits: ^RANeutralPlane
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Tooltip:
-		Name: Harkonnen Carryall
+		Name: actor_harkonnen_carryall.name
 	Valued:
 		Cost: 600
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 10
 		Prerequisites: ~harkonnen_hightechfactory
-		Description: Lifts and transports vehicles across the battlefield.\n  Unarmed
+		Description: actor_harkonnen_carryall.description
 		IconPalette: d2kunit
 	Health:
 		HP: 50000
@@ -74,12 +74,12 @@ harkonnen_gunship:
 	Valued:
 		Cost: 1200
 	Tooltip:
-		Name: Harkonnen Gunship
+		Name: actor_harkonnen_gunship.name
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 20
-		Prerequisites: ~hightech.harkonnen
-		Description: Heavily armed gunship.\n  Strong vs Vehicles, Infantry\n  Weak vs Anti-Air
+		Prerequisites: ~hightech.harkonnen, ~harkonnen_promotion_gunship
+		Description: actor_harkonnen_gunship.description
 		IconPalette: d2kunit
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -122,14 +122,14 @@ harkonnen_advancedcarryall:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	-SpawnActorOnDeath:
 	Tooltip:
-		Name: Harkonnen Advanced Carryall
+		Name: actor_harkonnen_advancedcarryall.name
 	Valued:
 		Cost: 800
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~hightech.harkonnen
-		Description: Advanced transport aircraft.\n  Unarmed
+		Prerequisites: ~hightech.harkonnen, ~harkonnen_promotion_advancedcarryall
+		Description: actor_harkonnen_advancedcarryall.description
 		IconPalette: d2kunit
 	Health:
 		HP: 50000

@@ -8,13 +8,13 @@ harkonnen_lightinfantry:
 	Inherits@anim: ^D2KPaletteRenderInfantry
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Tooltip:
-		Name: Harkonnen Light Infantry
+		Name: actor_harkonnen_lightinfantry.name
 	Valued:
 		Cost: 150
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Infantry, RAInfantry
-		Description: Brutal infantry armed with a heavy machine gun.\n  Strong vs Infantry\n  Weak vs Vehicles, Aircraft
+		Description: actor_harkonnen_lightinfantry.description
 		IconPalette: d2kunit
 		Prerequisites: ~harkonnen_barracks
 	Health:
@@ -48,13 +48,13 @@ harkonnen_rockettrooper:
 	Inherits@anim: ^D2KPaletteRenderInfantry
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Tooltip:
-		Name: Harkonnen Rocket Trooper
+		Name: actor_harkonnen_rockettrooper.name
 	Valued:
 		Cost: 200
 	Buildable:
 		BuildPaletteOrder: 20
 		Queue: Infantry, RAInfantry
-		Description: Anti-tank infantry armed with rockets.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+		Description: actor_harkonnen_rockettrooper.description
 		IconPalette: d2kunit
 		Prerequisites: ~harkonnen_barracks
 	Health:
@@ -82,13 +82,13 @@ harkonnen_engineer:
 	Inherits@anim: ^D2KPaletteRenderInfantry
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Tooltip:
-		Name: Harkonnen Engineer
+		Name: actor_harkonnen_engineer.name
 	Valued:
 		Cost: 250
 	Buildable:
 		BuildPaletteOrder: 30
 		Queue: Infantry, RAInfantry
-		Description: Infiltrates and captures enemy buildings.\n  Strong vs Buildings\n  Weak vs Everything
+		Description: actor_harkonnen_engineer.description
 		IconPalette: d2kunit
 		Prerequisites: ~harkonnen_barracks
 	Health:

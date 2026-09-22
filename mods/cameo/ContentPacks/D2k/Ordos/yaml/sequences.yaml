@@ -1677,7 +1677,7 @@ ordos_upgrade_heavycombattankrockets:
 
 ordos_laserturret:
 	Defaults:
-		Scale: 1
+		Scale: 0.9
 		Offset: -2,0
 	invisible:
 		Filename: ordos_lasertur.png
@@ -1709,12 +1709,13 @@ ordos_laserturret:
 		Tick: 200
 		ZOffset: 1024
 	icon:
+		Scale: 1
 		Offset: 0,0
-		Filename: ordos_lasertur_icon.png
+		Filename: ordos_lasertur_build_icon.png
 
 ordos_chemturret:
 	Defaults:
-		Scale: 1
+		Scale: 0.9
 		Offset: -2,0
 	invisible:
 		Filename: ordos_chemtur.png
@@ -1746,8 +1747,9 @@ ordos_chemturret:
 		Tick: 200
 		ZOffset: 1024
 	icon:
+		Scale: 1
 		Offset: 0,0
-		Filename: ordos_chemtur_icon.png
+		Filename: ordos_chemtur_build_icon.png
 
 # --- Migrated from legacy sequences/d2k.yaml (Ruling 3, 2026-09-06) ---
 barracks.ordos:

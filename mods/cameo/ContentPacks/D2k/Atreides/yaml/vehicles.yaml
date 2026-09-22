@@ -8,10 +8,10 @@ atreides_mobileconstructionvehicle:
 		Factions: atreides
 		Queue: Vehicle, RAVehicle, Starport
 		Prerequisites: ~atreides_vehicle_production, atreides_mcv_production
-		Description: Deploys into a Construction Yard.\n  Unarmed
+		Description: actor_atreides_mobileconstructionvehicle.description
 		IconPalette: d2kunit
 	Tooltip:
-		Name: Atreides Mobile Construction Vehicle
+		Name: actor_atreides_mobileconstructionvehicle.name
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeLarge
 		EmptyWeapon: D2KUnitExplodeLarge
@@ -29,10 +29,12 @@ atreides_mobileconstructionvehicle:
 
 atreides_combattank:
 	Inherits: ^CombatTank
+	Tooltip:
+		Name: actor_atreides_combattank.name
 	Buildable:
 		Factions: atreides
 		Prerequisites: ~heavy.atreides_combat
-		Description: Main battle tank.\n  Strong vs Vehicles\n  Weak vs Infantry
+		Description: actor_atreides_combattank.description
 	Armament:
 		Weapon: 80mm_A
 	RenderSprites:
@@ -61,14 +63,14 @@ atreides_spiceharvester:
 		Queue: Vehicle, RAVehicle, Starport
 		Prerequisites: ~spice_refinery, ~atreides_vehicle_production
 		BuildPaletteOrder: 20
-		Description: Collects spice for credits.\n  Unarmed
+		Description: actor_atreides_spiceharvester.description
 		IconPalette: d2kunit
 		BuildDuration: 250
 		BuildDurationModifier: 100
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: Atreides Spice Harvester
+		Name: actor_atreides_spiceharvester.name
 	Selectable:
 		DecorationBounds: 1536, 1536
 	Harvester:
@@ -117,12 +119,12 @@ atreides_sonictank:
 		Queue: Vehicle, RAVehicle, Starport
 		Prerequisites: ~heavy.atreides_combat, research_centre, ~atreides_promotion_sonictank
 		BuildPaletteOrder: 80
-		Description: Fires devastating sonic waves.\n  Strong vs Infantry, Vehicles\n  Weak vs Tanks, Artillery
+		Description: actor_atreides_sonictank.description
 		IconPalette: d2kunit
 	Valued:
 		Cost: 1000
 	Tooltip:
-		Name: Sonic Tank
+		Name: actor_atreides_sonictank.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -132,6 +134,8 @@ atreides_sonictank:
 	Mobile:
 		Speed: 31
 		TurnSpeed: 48
+	WithMoveAnimation:
+		MoveSequence: move
 	RevealsShroud:
 		Range: 5c768
 	Armament:
@@ -151,7 +155,8 @@ atreides_sonictank:
 		VoiceSet: D2KSonicTank
 	-WithDeathAnimation:
 	RenderSprites:
-		Image: sonic_tank
+		Image: atreides_sonictank
+		PlayerPalette: player_rgba
 
 sonic_tank_husk.atreides:
 	Inherits@husk: ^D2KVehicleHusk
@@ -162,7 +167,8 @@ sonic_tank_husk.atreides:
 		IntoActor: atreides_sonictank
 	-WithDeathAnimation:
 	RenderSprites:
-		Image: sonic_tank
+		Image: atreides_sonictank
+		PlayerPalette: player_rgba
 
 atreides_missiletank:
 	Inherits@D2KT: ^D2KTank
@@ -173,7 +179,7 @@ atreides_missiletank:
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@decoration: ^DuneRankDecoration
 	Tooltip:
-		Name: Missile Tank
+		Name: actor_atreides_missiletank.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -181,7 +187,7 @@ atreides_missiletank:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~heavy.missile_tank, research_centre
 		BuildPaletteOrder: 60
-		Description: Rocket Artillery.\n  Strong vs Vehicles, Buildings, Aircraft\n  Weak vs Infantry\nDetector
+		Description: actor_atreides_missiletank.description
 		IconPalette: d2kunit
 	Valued:
 		Cost: 750
@@ -228,12 +234,12 @@ atreides_siegetank:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~atreides_vehicle_production, upgrade_heavy.atreides
 		BuildPaletteOrder: 110
-		Description: Siege Artillery.\n  Strong vs Infantry, Buildings\n  Weak vs Tanks
+		Description: actor_atreides_siegetank.description
 		IconPalette: d2kunit
 	Valued:
 		Cost: 600
 	Tooltip:
-		Name: Siege Tank
+		Name: actor_atreides_siegetank.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -294,12 +300,12 @@ atreides_sandbike:
 		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 10
 		Prerequisites: ~atreides_vehicle_production, ~light.atreides
-		Description: Fast scout bike.\n  Strong vs Infantry\n  Weak vs Tanks
+		Description: actor_atreides_sandbike.description
 		IconPalette: d2kunit
 	Valued:
 		Cost: 300
 	Tooltip:
-		Name: Atreides Sand Bike
+		Name: actor_atreides_sandbike.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -337,12 +343,12 @@ atreides_apc:
 		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 45
 		Prerequisites: ~atreides_vehicle_production, ~heavy.atreides_combat
-		Description: Armored personnel carrier.\n  Strong vs Infantry\n  Can transport infantry
+		Description: actor_atreides_apc.description
 		IconPalette: d2kunit
 	Valued:
 		Cost: 800
 	Tooltip:
-		Name: Atreides APC
+		Name: actor_atreides_apc.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -389,12 +395,12 @@ atreides_repairtank:
 		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 55
 		Prerequisites: ~atreides_vehicle_production, ~heavy.atreides_combat
-		Description: Repairs friendly vehicles.\n  Support
+		Description: actor_atreides_repairtank.description
 		IconPalette: d2kunit
 	Valued:
 		Cost: 800
 	Tooltip:
-		Name: Atreides Repair Tank
+		Name: actor_atreides_repairtank.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -435,12 +441,12 @@ atreides_minotaurus:
 		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 65
 		Prerequisites: ~atreides_vehicle_production, ~heavy.missile_tank, research_centre, ~atreides_promotion_minotaurus
-		Description: Heavy artillery.\n  Strong vs Buildings, Vehicles\n  Weak vs Infantry
+		Description: actor_atreides_minotaurus.description
 		IconPalette: d2kunit
 	Valued:
 		Cost: 900
 	Tooltip:
-		Name: Atreides Minotaurus
+		Name: actor_atreides_minotaurus.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -480,12 +486,12 @@ atreides_mongoose:
 		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 57
 		Prerequisites: ~atreides_vehicle_production, ~heavy.missile_tank, research_centre, ~atreides_promotion_mongoose
-		Description: Turreted missile vehicle.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+		Description: actor_atreides_mongoose.description
 		IconPalette: d2kunit
 	Valued:
 		Cost: 750
 	Tooltip:
-		Name: Atreides Mongoose
+		Name: actor_atreides_mongoose.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -498,7 +504,10 @@ atreides_mongoose:
 	Armament:
 		Weapon: mtank_pri
 		LocalOffset: -128,128,171, -128,-128,171
+		MuzzleSequence: muzzle
+		MuzzlePalette: d2keffect
 	AttackTurreted:
+	WithMuzzleOverlay:
 	WithSpriteTurret:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed

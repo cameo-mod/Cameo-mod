@@ -10,13 +10,13 @@ atreides_ornithopter:
 	Valued:
 		Cost: 1500
 	Tooltip:
-		Name: Ornithopter
+		Name: actor_atreides_ornithopter.name
 	Buildable:
 		Factions: atreides
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 60
 		Prerequisites: ~hightech.atreides
-		Description: Fast strike aircraft armed with bombs and missiles.\n  Strong vs Buildings, Vehicles\n  Weak vs Anti-Air
+		Description: actor_atreides_ornithopter.description
 		IconPalette: d2kunit
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -92,13 +92,13 @@ atreides_airdrone:
 	Valued:
 		Cost: 1000
 	Tooltip:
-		Name: Atreides Air Drone
+		Name: actor_atreides_airdrone.name
 	Buildable:
 		Factions: atreides
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
 		Prerequisites: ~hightech.atreides, research_centre, ~atreides_promotion_airdrone
-		Description: Fast strike drone armed with missiles.\n  Strong vs Vehicles, Aircraft\n  Weak vs Anti-Air
+		Description: actor_atreides_airdrone.description
 		IconPalette: d2kunit
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -141,7 +141,7 @@ atreides_advancedcarryall:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	-SpawnActorOnDeath:
 	Tooltip:
-		Name: Atreides Advanced Carryall
+		Name: actor_atreides_advancedcarryall.name
 	Valued:
 		Cost: 800
 	Buildable:
@@ -149,7 +149,7 @@ atreides_advancedcarryall:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 40
 		Prerequisites: ~hightech.atreides
-		Description: Advanced transport aircraft.\n  Unarmed
+		Description: actor_atreides_advancedcarryall.description
 		IconPalette: d2kunit
 	Health:
 		HP: 50000

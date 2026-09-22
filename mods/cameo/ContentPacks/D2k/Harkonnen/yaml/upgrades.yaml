@@ -10,6 +10,8 @@ upgrade_conyard.harkonnen:
 		IconPalette: d2kunit
 	Valued:
 		Cost: 200
+	RenderSprites:
+		Image: conyard.harkonnen
 
 upgrade_barracks.harkonnen:
 	Inherits: ^UpgradeTemplate
@@ -23,6 +25,8 @@ upgrade_barracks.harkonnen:
 		IconPalette: d2kunit
 	Valued:
 		Cost: 200
+	RenderSprites:
+		Image: barracks.harkonnen
 
 upgrade_light.harkonnen:
 	Inherits: ^UpgradeTemplate
@@ -36,6 +40,8 @@ upgrade_light.harkonnen:
 		IconPalette: d2kunit
 	Valued:
 		Cost: 200
+	RenderSprites:
+		Image: light.harkonnen
 
 upgrade_heavy.harkonnen:
 	Inherits: ^UpgradeTemplate
@@ -49,6 +55,8 @@ upgrade_heavy.harkonnen:
 		IconPalette: d2kunit
 	Valued:
 		Cost: 400
+	RenderSprites:
+		Image: heavy.harkonnen
 
 upgrade_radar.harkonnen:
 	Inherits: ^UpgradeTemplate
@@ -62,3 +70,5 @@ upgrade_radar.harkonnen:
 		IconPalette: d2kunit
 	Valued:
 		Cost: 300
+	RenderSprites:
+		Image: outpost.harkonnen

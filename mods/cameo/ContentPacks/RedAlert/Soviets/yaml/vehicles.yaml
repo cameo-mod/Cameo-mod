@@ -946,6 +946,17 @@ ra1_soviets_oretruck:
 	ActorStatValues:
 		Upgrades: ra1_soviets_doctrine_industrialefficiency, ra1_soviets_doctrine_heavyarmor, ra1_soviets_upgrade_wareconomy, ra1_soviets_upgrade_stalinium
 
+	ChangesHealth@SelfHealing:
+		Step: 84
+	Repairable:
+		HpPerStep: 10500
+	Health:
+		HP: 210000
+	Mobile:
+		Speed: 81
+		TurnSpeed: 16
+	Valued:
+		Cost: 1560
 ra1_soviets_heavyindustrialminer:
 	Inherits: ra1_soviets_oretruck
 	Tooltip:
@@ -993,7 +1004,17 @@ ra1_soviets_mobileconstructionvehicle:
 		VoiceSet: RussianVehicleVoice
 	ActorStatValues:
 		Upgrades: ra1_soviets_doctrine_heavyarmor, ra1_soviets_upgrade_stalinium
-
+	ChangesHealth@SelfHealing:
+		Step: 101
+	Repairable:
+		HpPerStep: 12650
+	Health:
+		HP: 253000
+	Mobile:
+		Speed: 70
+		TurnSpeed: 14
+	Valued:
+		Cost: 4650
 ra1_soviets_teslatank:
 	Inherits: ^Tank
 	Inherits@Template: ^FireSupportTemplate

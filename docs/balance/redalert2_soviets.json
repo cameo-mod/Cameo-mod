@@ -262,6 +262,10 @@
      "RAAircraft"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "320"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -281,6 +285,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "30"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "6"
     }
    },
    "ra2_soviets_migbomber": {
@@ -931,7 +939,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "2875"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "23"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -951,6 +967,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "215"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "14"
     }
    },
    "ra2_soviets_siegechopper": {
@@ -1361,6 +1381,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "22"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1380,6 +1404,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "150"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "30"
     }
    },
    "ra2_soviets_transportkirov": {
@@ -1455,7 +1483,15 @@
      "RAAircraft",
      "Vehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "13250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "106"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1475,6 +1511,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "35"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "7"
     }
    }
   },
@@ -2119,6 +2159,10 @@
      "Defence",
      "RADefence"
     ],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2230,6 +2274,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2431,6 +2479,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2696,6 +2748,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2922,6 +2978,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "90"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3077,6 +3137,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "26"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -3165,6 +3229,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3304,6 +3372,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "30"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3380,6 +3452,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "2"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3763,6 +3839,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "10"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -4047,6 +4127,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "48"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4181,6 +4265,10 @@
      "RANaval"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5012,7 +5100,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "17500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "140"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5283,6 +5379,10 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "2250"
+    },
     "resolved_firepower_modifiers": [
      {
       "modifier": 75,
@@ -5291,6 +5391,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "18"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5355,6 +5459,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "15000"
+    },
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "120"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5651,7 +5763,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "6500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "52"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5760,6 +5880,10 @@
      "RAVehicle"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "4"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5928,7 +6052,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "3750"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "30"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6027,7 +6159,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "1875"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "15"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6121,7 +6261,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "6250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "50"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"

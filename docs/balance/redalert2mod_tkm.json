@@ -204,6 +204,10 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "5000"
+    },
     "resolved_firepower_modifiers": [
      {
       "modifier": 50,
@@ -212,6 +216,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "40"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -231,6 +239,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "120"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "24"
     }
    },
    "tkm_viper": {
@@ -416,7 +428,15 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Repairable.HpPerStep",
+     "v": "5000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "40"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -436,6 +456,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "150"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "10"
     }
    },
    "tkmdrone": {
@@ -472,6 +496,10 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -491,6 +519,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "150"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "80"
     }
    },
    "tkmsuicidedrone": {
@@ -548,6 +580,10 @@
     },
     "name": "Wraith Drone",
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -567,6 +603,10 @@
     "speed_air": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "200"
+    },
+    "turn_speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Aircraft.TurnSpeed",
+     "v": "12"
     }
    }
   },
@@ -1182,6 +1222,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1267,6 +1311,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1353,6 +1401,10 @@
      "RADefence"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1427,6 +1479,10 @@
     },
     "name": "Flak Bus (Deployed)",
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1500,6 +1556,10 @@
     },
     "name": "TKM Trench Tank (Deployed)",
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -1921,6 +1981,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "16"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2094,6 +2158,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "20"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -2256,6 +2324,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "32"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -2562,6 +2634,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "9"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -2691,6 +2767,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "20"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2837,6 +2917,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -2952,6 +3036,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "60"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3135,6 +3223,10 @@
       "types": []
      }
     ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "32"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
@@ -3641,6 +3733,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "50"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3771,6 +3867,10 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "40"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -3876,6 +3976,10 @@
      "~yuri_barracks"
     ],
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "10"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -4614,7 +4718,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "4800"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "48"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4798,7 +4910,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "1375"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "11"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -4907,7 +5027,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "2500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "20"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5390,7 +5518,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "6000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "48"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5475,7 +5611,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "1375"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "11"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5537,6 +5681,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "1375"
+    },
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5636,7 +5788,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "1375"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "11"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5700,6 +5860,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "15000"
+    },
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "120"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5819,7 +5987,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "1375"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "11"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5896,7 +6072,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "1375"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "11"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -5999,7 +6183,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "1375"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "11"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6479,7 +6671,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "6000"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "48"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6633,7 +6833,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "1375"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "80"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6740,7 +6948,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "2637"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -6884,7 +7100,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "2637"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7001,7 +7225,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "1375"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "11"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7118,7 +7350,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "3500"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "35"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7183,6 +7423,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "5000"
+    },
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "40"
+    },
     "shield_condition": {
      "src": "inherited",
      "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
@@ -7383,7 +7631,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "1750"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "14"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7482,7 +7738,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "2637"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7549,6 +7813,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "2637"
+    },
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -7668,7 +7940,15 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "6250"
+    },
     "resolved_firepower_modifiers": [],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "11"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"

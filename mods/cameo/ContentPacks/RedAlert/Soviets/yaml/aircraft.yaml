@@ -1059,14 +1059,14 @@ ra1_soviets_hiptransport:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
-		HP: 150000
+		HP: 104000
 	Repairable:
-		HpPerStep: 7500
+		HpPerStep: 5200
 	ChangesHealth@SelfHealing:
-		Step: 60
+		Step: 42
 	Aircraft:
-		TurnSpeed: 20
-		Speed: 100
+		TurnSpeed: 24
+		Speed: 118
 	WithIdleOverlay@ROTORAIR:
 		Sequence: rotor
 		RequiresCondition: airborne
