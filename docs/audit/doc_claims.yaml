@@ -1092,7 +1092,7 @@ claims:
 
   - id: cameo_family_labelled_weapons
     value: 904
-    tolerance: 20
+    tolerance: 0
     what: >
       Concrete Cameo weapons whose inherit chain names a `^Warhead_<Family>_<Level>` template,
       and therefore STATE their warhead family in the yaml rather than needing one assigned.
@@ -1118,7 +1118,7 @@ claims:
 
   - id: warhead_reference_groups
     value: 1712
-    tolerance: 60
+    tolerance: 0
     what: >
       Compression groups across all 20 reference sources at `compress_warheads.DEFAULT_TAU`,
       which R41 set to 0.20. This is the size of the review surface: at the old tau 0.50 it was
@@ -1134,7 +1134,7 @@ claims:
 
   - id: cameo_shaped_families
     value: 47
-    tolerance: 2
+    tolerance: 0
     what: >
       Live warhead families whose shipped 16-rung Versus profile is SHAPED — neither a constant
       nor an even ramp. R42's census: 47 shaped, 2 flat by design (`Magic`, `Sonic`, which ignore
@@ -1181,8 +1181,8 @@ claims:
       print(sum(1 for f, ks in seen.items() if ks == {'shaped'}))
 
   - id: cameo_element_bearing_families
-    value: 15
-    tolerance: 2
+    value: 18
+    tolerance: 0
     what: >
       Live warhead families whose template declares a `DamageTypes` token the engine can actually
       filter on (an element such as `Incendiary` or `Tesla`), as opposed to the generic
