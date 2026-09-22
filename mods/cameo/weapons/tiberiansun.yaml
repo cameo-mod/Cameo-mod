@@ -1003,7 +1003,7 @@ TSAegisMissile:
 		FriendlyFireSpread: 100
 
 TSMammothTusk_elite:
-	Inherits: TSMammothTusk2
+	Inherits: TSMammothTusk2_AA
 	Burst: 8
 	Range: 9216
 	Projectile: Missile
@@ -1252,7 +1252,7 @@ TSChemAdatsMissile:
 		Damage: 12000
 		PercentageScale: 0
 		ValidTargets: Ground, Water
-TSChemAdatsMissileAA:
+TSChemAdatsMissile_AA:
 	Inherits: TSAdatsMissile_AA
 	Projectile: Missile
 		VerticalRateOfTurn: 20

@@ -492,7 +492,7 @@ JapanMaidenBowEnergized:
 		Damage: 33000
 		PercentageScale: 0
 
-BallistaSingleShotAir:
+BallistaSingleShotAir_AA:
 	Inherits: JapanMaidenBow
 	Range: 9214
 	ReloadDelay: 200
@@ -501,7 +501,7 @@ BallistaSingleShotAir:
 		ValidTargets: Air
 		Damage: 160000
 	MinRange: 1845
-BallistaSingleShotAirEnergized:
+BallistaSingleShotAirEnergized_AA:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileAP_Light

@@ -73,7 +73,7 @@ GROUPS = {
     },
     "MissileHE_Medium": {
         "TSRuinerMissile", "TSSBoatTusk", "TSStankTusk",
-        "CabalManticoreMissilesAA", "CabalReaperMissiles_AA",
+        "CabalManticoreMissiles_AA", "CabalReaperMissiles_AA",
     },
     "Chemical_Light": {"RA160mm_rad"},
     "Chemical_Medium": {
@@ -98,7 +98,7 @@ GROUPS = {
 
 DESTINATION_OVERRIDES = {
     "CabalHeavyReaperMissiles_AA": "MissileAA_Heavy",
-    "CabalManticoreMissilesAA": "MissileAA_Medium",
+    "CabalManticoreMissiles_AA": "MissileAA_Medium",
     "CabalReaperMissiles_AA": "MissileAA_Medium",
     "RA160mmE_fire_elite": "CannonFire_Heavy",
     "RA160mm_fire": "CannonFire_Heavy",
@@ -110,7 +110,7 @@ DESTINATION_OVERRIDES = {
 }
 SOURCE_OVERRIDES = {
     "CabalHeavyReaperMissiles_AA": "MissileHE_Heavy",
-    "CabalManticoreMissilesAA": "MissileHE_Medium",
+    "CabalManticoreMissiles_AA": "MissileHE_Medium",
     "CabalReaperMissiles_AA": "MissileHE_Medium",
     "RA160mmE_fire_elite": "Concussion_Medium",
     "RA160mm_fire": "Concussion_Medium",
