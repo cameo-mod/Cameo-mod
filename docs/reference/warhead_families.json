@@ -1542,7 +1542,6 @@
      "AirstrikeFlare",
      "AirstrikeFlareAI",
      "ArsonistPlaceWH",
-     "AvalonChargeWH",
      "Battering",
      "BondBreakerWH",
      "BuzzardWH",
@@ -1552,6 +1551,7 @@
      "ControllerBuilding",
      "CyborgGrenadeWH",
      "DKnightSAWH",
+     "FlakGuyATWH",
      "FortressSSA",
      "GattAAWH",
      "GattWH",
@@ -1593,6 +1593,7 @@
      "BulletKinetic_Inf",
      "Bullet_Def",
      "Bullet_Inf",
+     "Bullet_Inf_2",
      "Bullet_Veh",
      "HitscanKinetic_Def",
      "HitscanKinetic_Inf",
@@ -1631,17 +1632,231 @@
      "concrete"
     ],
     "profile": [
-     85.3,
-     85.3,
-     83.7,
-     67.1,
-     50.8,
-     48.8,
-     50.3,
-     39.8,
-     35.9
+     86.4,
+     86.4,
+     84.2,
+     69.3,
+     52.5,
+     50.5,
+     51.5,
+     40.8,
+     36.6
     ],
-    "factor": 0.635
+    "factor": 0.645
+   },
+   {
+    "family": "MissileHE",
+    "uses": 81.0,
+    "weapons": [
+     "AP",
+     "APSplash",
+     "APSplashNaut",
+     "ARMORAP",
+     "ASWSplash",
+     "AbramsCannonWH",
+     "ArchelonWH",
+     "BlackoutMissileWH",
+     "CannonBunkerWH",
+     "CondorWH",
+     "ConfuseFlareWH",
+     "CyComWH",
+     "DevourerWH",
+     "Eureka1WH",
+     "FortressAP",
+     "GUARDWH",
+     "GehennaWH",
+     "GiantsbaneWH",
+     "GodsbaneMissileWH",
+     "GrumbleWH",
+     "HornetAP",
+     "JAGDWH",
+     "LeviWH",
+     "LocomotorBeam",
+     "MantaWH",
+     "MirageWH",
+     "Parasite",
+     "ParasitePro",
+     "PatriotWH",
+     "PhantasmWH",
+     "PiranhaWH",
+     "PsychicDartsWH",
+     "RamHackArenaWH",
+     "RoboSplash",
+     "SAMBunkerWH",
+     "SeitaadMissileWH",
+     "SharkSplash",
+     "SharkSplashWave",
+     "ShrikeWH",
+     "TargetAllCaster",
+     "TeratornWH",
+     "TurretAP",
+     "Uragan1WH",
+     "VentrexWH",
+     "WOLFWH",
+     "WallbusterWH",
+     "ZorbWH"
+    ],
+    "groups": [
+     "MissileHE_Air",
+     "MissileHE_Air_2",
+     "MissileHE_Def",
+     "MissileHE_Def_2",
+     "MissileHE_Def_3",
+     "MissileHE_Def_4",
+     "MissileHE_Inf",
+     "MissileHE_Inf_2",
+     "MissileHE_Inf_3",
+     "MissileHE_Inf_4",
+     "MissileHE_Inf_5",
+     "MissileHE_Veh",
+     "MissileHE_Veh_2",
+     "MissileHE_Veh_3",
+     "MissileHE_Veh_4",
+     "MissileHE_Veh_5",
+     "MissileHE_Veh_6",
+     "MissileHE_Veh_7",
+     "MissileHE_Veh_8",
+     "Missile_Air",
+     "Missile_Def",
+     "Missile_Inf",
+     "Missile_Veh",
+     "Missile_Veh_2"
+    ],
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "profile": [
+     112.7,
+     112.2,
+     112.9,
+     165.0,
+     163.7,
+     160.7,
+     127.1,
+     101.6,
+     114.8
+    ],
+    "factor": 1.283
+   },
+   {
+    "family": "BulletHE",
+    "uses": 67.0,
+    "weapons": [
+     "ARROWWH",
+     "AthenaStrikeWH",
+     "BasiliskWH",
+     "BondEruptionWH",
+     "CataAP",
+     "CenturionCannonWH",
+     "ColossusWH",
+     "ConfuseWH",
+     "CruiserWH",
+     "Cuttering",
+     "DemobombWH",
+     "DuplicantWH",
+     "FTankCannonWH",
+     "FlakCannonWH",
+     "FlakGuyAAWH",
+     "FlakSeawolfWH",
+     "FlakTrackWH",
+     "GeneburstWH",
+     "GeneticGasWH",
+     "GharialWH",
+     "GrandCannonWH",
+     "GravitronFieldWH",
+     "HammerWH",
+     "HowitzerBeaconWH",
+     "HowitzerWH",
+     "HydraSSA",
+     "IronDragonWarhead",
+     "KingsGunWH",
+     "MadbombWH",
+     "MercuryStrikeWH",
+     "NuclearPathWH",
+     "PsiPulse",
+     "QuadMortarWH",
+     "QuakeWeaponWH",
+     "RazgarWH",
+     "RiotGrenadeWH",
+     "RoadrunnerChokeWH",
+     "ScourgeWH",
+     "SeitaadEMPWH",
+     "SentinelWH",
+     "ShadrayWaveWH",
+     "SiegfriedWH",
+     "SpiderBombWH",
+     "StalkerDrainWH",
+     "StingerSprayWH",
+     "SuperPsiPulse",
+     "TyrantWH",
+     "UraniumWH",
+     "UraniumWH2"
+    ],
+    "groups": [
+     "BulletHE_Def",
+     "BulletHE_Inf",
+     "BulletHE_Inf_2",
+     "BulletHE_Inf_3",
+     "BulletHE_Inf_4",
+     "BulletHE_Inf_5",
+     "BulletHE_Inf_6",
+     "BulletHE_Inf_7",
+     "BulletHE_Inf_8",
+     "BulletHE_Veh",
+     "BulletHE_Veh_2",
+     "BulletHE_Veh_3",
+     "BulletHE_Veh_4",
+     "BulletHE_Veh_5",
+     "BulletHE_Veh_6",
+     "BulletHE_Veh_7",
+     "BulletHE_Veh_8",
+     "BulletHE_Veh_9",
+     "HitscanHE_Def",
+     "HitscanHE_Def_2",
+     "HitscanHE_Def_3",
+     "HitscanHE_Def_4",
+     "HitscanHE_Inf",
+     "HitscanHE_Inf_2",
+     "HitscanHE_Inf_3",
+     "HitscanHE_Inf_4",
+     "HitscanHE_Veh",
+     "HitscanHE_Veh_2",
+     "HitscanHE_Veh_3",
+     "HitscanHE_Veh_4",
+     "HitscanHE_Veh_5",
+     "HitscanHE_Veh_6"
+    ],
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "profile": [
+     132.2,
+     131.6,
+     125.2,
+     136.3,
+     133.6,
+     121.5,
+     99.9,
+     88.8,
+     76.5
+    ],
+    "factor": 1.148
    },
    {
     "family": "Laser",
@@ -1743,390 +1958,7 @@
     "factor": 0.945
    },
    {
-    "family": "MissileFire",
-    "uses": 45.0,
-    "weapons": [
-     "AP",
-     "APSplash",
-     "APSplashNaut",
-     "ARMORAP",
-     "ASWSplash",
-     "AbramsCannonWH",
-     "CannonBunkerWH",
-     "FortressAP",
-     "GUARDWH",
-     "GehennaWH",
-     "GiantsbaneWH",
-     "HornetAP",
-     "JAGDWH",
-     "MantaWH",
-     "PatriotWH",
-     "PhantasmWH",
-     "PiranhaWH",
-     "RoboSplash",
-     "SAMBunkerWH",
-     "ShrikeWH",
-     "TeratornWH",
-     "TurretAP",
-     "WOLFWH",
-     "WallbusterWH"
-    ],
-    "groups": [
-     "MissileFire_Air",
-     "MissileFire_Air_2",
-     "MissileFire_Def",
-     "MissileFire_Def_2",
-     "MissileFire_Def_3",
-     "MissileFire_Def_4",
-     "MissileFire_Inf",
-     "MissileFire_Inf_2",
-     "MissileFire_Inf_3",
-     "MissileFire_Veh",
-     "MissileFire_Veh_2",
-     "MissileFire_Veh_3",
-     "MissileFire_Veh_4",
-     "MissileFire_Veh_5"
-    ],
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "profile": [
-     97.4,
-     97.4,
-     99.0,
-     194.7,
-     194.7,
-     192.5,
-     145.6,
-     105.1,
-     129.0
-    ],
-    "factor": 1.393
-   },
-   {
-    "family": "BulletHE",
-    "uses": 37.0,
-    "weapons": [
-     "AthenaStrikeWH",
-     "BondEruptionWH",
-     "CenturionCannonWH",
-     "ConfuseWH",
-     "Cuttering",
-     "DemobombWH",
-     "DuplicantWH",
-     "FTankCannonWH",
-     "GeneburstWH",
-     "GeneticGasWH",
-     "GharialWH",
-     "GravitronFieldWH",
-     "HydraSSA",
-     "IronDragonWarhead",
-     "KingsGunWH",
-     "MadbombWH",
-     "MercuryStrikeWH",
-     "NuclearPathWH",
-     "RazgarWH",
-     "RiotGrenadeWH",
-     "RoadrunnerChokeWH",
-     "ScourgeWH",
-     "SeitaadEMPWH",
-     "ShadrayWaveWH",
-     "SiegfriedWH",
-     "SpiderBombWH",
-     "StalkerDrainWH",
-     "StingerSprayWH",
-     "TyrantWH"
-    ],
-    "groups": [
-     "BulletHE_Inf",
-     "BulletHE_Inf_2",
-     "BulletHE_Inf_3",
-     "BulletHE_Inf_4",
-     "BulletHE_Inf_5",
-     "BulletHE_Inf_6",
-     "BulletHE_Veh",
-     "BulletHE_Veh_2",
-     "BulletHE_Veh_3",
-     "BulletHE_Veh_4",
-     "BulletHE_Veh_5",
-     "HitscanHE_Def",
-     "HitscanHE_Def_2",
-     "HitscanHE_Def_3",
-     "HitscanHE_Inf",
-     "HitscanHE_Inf_2",
-     "HitscanHE_Veh",
-     "HitscanHE_Veh_2",
-     "HitscanHE_Veh_3",
-     "HitscanHE_Veh_4",
-     "HitscanHE_Veh_5"
-    ],
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "profile": [
-     138.3,
-     138.3,
-     131.1,
-     101.5,
-     98.8,
-     88.4,
-     82.5,
-     83.4,
-     73.0
-    ],
-    "factor": 0.998
-   },
-   {
-    "family": "MissileHE",
-    "uses": 36.0,
-    "weapons": [
-     "ApocalypseWH",
-     "ArchelonWH",
-     "BlackoutMissileWH",
-     "CondorWH",
-     "ConfuseFlareWH",
-     "DevourerWH",
-     "Eureka1WH",
-     "GodsbaneMissileWH",
-     "GrumbleWH",
-     "LeviWH",
-     "LocomotorBeam",
-     "MirageWH",
-     "Parasite",
-     "ParasitePro",
-     "RamHackArenaWH",
-     "SeitaadMissileWH",
-     "SharkSplash",
-     "SharkSplashWave",
-     "SuperSubAP",
-     "TargetAllCaster",
-     "TeslaAP",
-     "Uragan1WH",
-     "VentrexWH",
-     "ZorbWH"
-    ],
-    "groups": [
-     "MissileHE_Air",
-     "MissileHE_Def",
-     "MissileHE_Def_2",
-     "MissileHE_Inf",
-     "MissileHE_Inf_2",
-     "MissileHE_Veh",
-     "MissileHE_Veh_2",
-     "MissileHE_Veh_3",
-     "MissileHE_Veh_4",
-     "Missile_Air",
-     "Missile_Inf",
-     "Missile_Veh"
-    ],
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "profile": [
-     134.5,
-     133.3,
-     132.3,
-     126.5,
-     124.0,
-     120.1,
-     105.7,
-     98.1,
-     98.7
-    ],
-    "factor": 1.167
-   },
-   {
     "family": "BulletFire",
-    "uses": 24.0,
-    "weapons": [
-     "ARROWWH",
-     "CataAP",
-     "CruiserWH",
-     "FlakCannonWH",
-     "FlakGuyAAWH",
-     "FlakGuyATWH",
-     "FlakSeawolfWH",
-     "FlakTrackWH",
-     "GrandCannonWH",
-     "HammerWH",
-     "HowitzerBeaconWH",
-     "HowitzerWH",
-     "QuadMortarWH",
-     "QuakeWeaponWH",
-     "SentinelWH"
-    ],
-    "groups": [
-     "BulletFire_Def",
-     "BulletFire_Inf",
-     "BulletFire_Inf_2",
-     "BulletFire_Inf_3",
-     "BulletFire_Veh",
-     "BulletFire_Veh_2",
-     "BulletFire_Veh_3",
-     "HitscanFire_Def",
-     "HitscanFire_Def_2",
-     "HitscanFire_Inf",
-     "HitscanFire_Inf_2",
-     "HitscanFire_Veh"
-    ],
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "profile": [
-     108.7,
-     108.7,
-     99.9,
-     200.0,
-     199.8,
-     186.7,
-     109.6,
-     82.7,
-     70.6
-    ],
-    "factor": 1.239
-   },
-   {
-    "family": "MissileChem",
-    "uses": 18.0,
-    "weapons": [
-     "ApocMissileWH",
-     "CenturionMissilesWH",
-     "CyComWH",
-     "DLancerOTWH",
-     "DLancerWH",
-     "IFVWH",
-     "LancerOTWH",
-     "LancerWH",
-     "MTWH",
-     "PsychicDartsWH",
-     "RhadHE",
-     "SwordfishWH",
-     "VolkovBombWH",
-     "VoyagerWH"
-    ],
-    "groups": [
-     "MissileToxin_Inf",
-     "MissileToxin_Inf_2",
-     "MissileToxin_Inf_3",
-     "MissileToxin_Veh",
-     "MissileToxin_Veh_2",
-     "MissileToxin_Veh_3",
-     "MissileToxin_Veh_4"
-    ],
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "profile": [
-     120.7,
-     118.0,
-     107.5,
-     146.2,
-     138.2,
-     123.7,
-     126.4,
-     103.5,
-     79.7
-    ],
-    "factor": 1.166
-   },
-   {
-    "family": "BulletChem",
-    "uses": 16.0,
-    "weapons": [
-     "ARTYHE",
-     "BasiliskWH",
-     "ColossusWH",
-     "Comanche2WH",
-     "DSonicRayWH",
-     "HydraMissileWH",
-     "PsiPulse",
-     "SonicRayWH",
-     "SpeederHE",
-     "SquidHE",
-     "SuperPsiPulse",
-     "UraniumWH",
-     "UraniumWH2",
-     "WarRigDrillsWH"
-    ],
-    "groups": [
-     "BulletToxin_Inf",
-     "BulletToxin_Veh",
-     "BulletToxin_Veh_2",
-     "BulletToxin_Veh_3",
-     "BulletToxin_Veh_4",
-     "BulletToxin_Veh_5",
-     "BulletToxin_Veh_6",
-     "HitscanToxin_Def",
-     "HitscanToxin_Inf",
-     "HitscanToxin_Veh",
-     "HitscanToxin_Veh_2"
-    ],
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "profile": [
-     126.6,
-     124.2,
-     113.7,
-     150.0,
-     145.5,
-     136.7,
-     104.4,
-     99.8,
-     78.9
-    ],
-    "factor": 1.263
-   },
-   {
-    "family": "BulletTesla",
     "uses": 16.0,
     "weapons": [
      "BorilloWH",
@@ -2141,15 +1973,15 @@
      "TurretFireWH"
     ],
     "groups": [
-     "BulletTesla_Def",
-     "BulletTesla_Def_2",
-     "BulletTesla_Inf",
-     "BulletTesla_Inf_2",
-     "BulletTesla_Veh",
-     "BulletTesla_Veh_2",
-     "HitscanTesla_Inf",
-     "HitscanTesla_Inf_2",
-     "HitscanTesla_Veh"
+     "BulletFire_Def",
+     "BulletFire_Def_2",
+     "BulletFire_Inf",
+     "BulletFire_Inf_2",
+     "BulletFire_Veh",
+     "BulletFire_Veh_2",
+     "HitscanFire_Inf",
+     "HitscanFire_Inf_2",
+     "HitscanFire_Veh"
     ],
     "armors": [
      "none",
@@ -2176,6 +2008,56 @@
     "factor": 1.211
    },
    {
+    "family": "MissileChem",
+    "uses": 15.0,
+    "weapons": [
+     "ApocMissileWH",
+     "CenturionMissilesWH",
+     "DLancerOTWH",
+     "DLancerWH",
+     "IFVWH",
+     "LancerOTWH",
+     "LancerWH",
+     "MTWH",
+     "RhadHE",
+     "SwordfishWH",
+     "VolkovBombWH",
+     "VoyagerWH"
+    ],
+    "groups": [
+     "MissileToxin_Inf",
+     "MissileToxin_Inf_2",
+     "MissileToxin_Inf_3",
+     "MissileToxin_Veh",
+     "MissileToxin_Veh_2",
+     "MissileToxin_Veh_3",
+     "MissileToxin_Veh_4"
+    ],
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "profile": [
+     109.2,
+     106.1,
+     94.9,
+     137.4,
+     128.4,
+     112.3,
+     123.4,
+     97.2,
+     71.0
+    ],
+    "factor": 1.071
+   },
+   {
     "family": "Tesla",
     "uses": 10.0,
     "weapons": [
@@ -2187,10 +2069,10 @@
      "WormqueenBoltWH"
     ],
     "groups": [
-     "TeslaHE_Def",
-     "TeslaHE_Inf",
      "TeslaHE_Veh",
-     "TeslaHE_Veh_2"
+     "Tesla_Def",
+     "Tesla_Inf",
+     "Tesla_Veh"
     ],
     "armors": [
      "none",
@@ -2215,6 +2097,52 @@
      105.0
     ],
     "factor": 1.629
+   },
+   {
+    "family": "BulletChem",
+    "uses": 9.0,
+    "weapons": [
+     "ARTYHE",
+     "Comanche2WH",
+     "DSonicRayWH",
+     "HydraMissileWH",
+     "SonicRayWH",
+     "SpeederHE",
+     "SquidHE",
+     "WarRigDrillsWH"
+    ],
+    "groups": [
+     "BulletToxin_Veh",
+     "BulletToxin_Veh_2",
+     "BulletToxin_Veh_3",
+     "BulletToxin_Veh_4",
+     "HitscanToxin_Def",
+     "HitscanToxin_Veh",
+     "HitscanToxin_Veh_2"
+    ],
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "profile": [
+     95.2,
+     95.2,
+     80.7,
+     146.2,
+     144.5,
+     138.1,
+     81.5,
+     77.2,
+     61.5
+    ],
+    "factor": 0.992
    },
    {
     "family": "Nuclear",
@@ -2255,7 +2183,7 @@
     "factor": 1.379
    },
    {
-    "family": "MissileTesla",
+    "family": "MissileFire",
     "uses": 5.0,
     "weapons": [
      "DSeekerBombWH",
@@ -2264,9 +2192,9 @@
      "VultureBombsWH"
     ],
     "groups": [
-     "MissileTesla_Air",
-     "MissileTesla_Def",
-     "MissileTesla_Veh"
+     "MissileFire_Air",
+     "MissileFire_Def",
+     "MissileFire_Veh"
     ],
     "armors": [
      "none",
@@ -2293,16 +2221,49 @@
     "factor": 0.876
    },
    {
-    "family": "Quantum",
-    "uses": 4.0,
+    "family": "MissileTesla",
+    "uses": 3.0,
     "weapons": [
-     "AlizeGunWH",
+     "ApocalypseWH",
+     "SuperSubAP",
+     "TeslaAP"
+    ],
+    "groups": [
+     "MissileTesla_Veh"
+    ],
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "profile": [
+     200.0,
+     200.0,
+     200.0,
+     200.0,
+     200.0,
+     200.0,
+     200.0,
+     168.5,
+     200.0
+    ],
+    "factor": 1.962
+   },
+   {
+    "family": "Quantum",
+    "uses": 3.0,
+    "weapons": [
      "ChronoBlasterWH",
      "ChronoWarpWH"
     ],
     "groups": [
-     "HitscanAtomized_Veh",
-     "RailgunTesla_Inf"
+     "HitscanAtomized_Veh"
     ],
     "armors": [
      "none",
@@ -2370,7 +2331,7 @@
     ],
     "groups": [
      "BombToxin_Veh",
-     "Bullet_Inf_2"
+     "Bullet_Inf_3"
     ],
     "armors": [
      "none",
@@ -2429,6 +2390,72 @@
      null
     ],
     "factor": 0.489
+   },
+   {
+    "family": "BulletTesla",
+    "uses": 1.0,
+    "weapons": [
+     "AvalonChargeWH"
+    ],
+    "groups": [
+     "HitscanTesla_Def"
+    ],
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "profile": [
+     12.0,
+     12.0,
+     12.0,
+     12.0,
+     12.0,
+     12.0,
+     12.0,
+     12.0,
+     12.0
+    ],
+    "factor": 0.12
+   },
+   {
+    "family": "Railgun",
+    "uses": 1.0,
+    "weapons": [
+     "AlizeGunWH"
+    ],
+    "groups": [
+     "RailgunFire_Inf"
+    ],
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "profile": [
+     null,
+     null,
+     null,
+     200.0,
+     200.0,
+     200.0,
+     null,
+     null,
+     null
+    ],
+    "factor": 2.0
    },
    {
     "family": "(drop: not a damage warhead)",
@@ -2517,6 +2544,6 @@
     "factor": 0.189
    }
   ],
-  "live": 16
+  "live": 17
  }
 }
