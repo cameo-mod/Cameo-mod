@@ -11396,3 +11396,42 @@ corrects.
 
 Co-Authored-By: DeepSeek Flash <noreply@deepseek.com>
 
+
+## 2026-09-22 — NOVA: W24 lane-2 landed + semantic-merge repair (PR #431)
+
+**What and why:** the lane-2 squash (`w24-lane2-v2`) was rebased onto master
+`1378e2bce` and pushed as `1c947128f` — conflict-clean, all audits green,
+boot-gate passed. A post-push `review_resolve_diff` sweep over every touched
+weapon **plus every `Inherits:` referrer** then exposed what syntactic gates
+could not: 78 weapons whose resolved damage sum drifted from master — 52
+stale-value overwrites, 25 folds computed on pre-rebase values, and one fold
+(`ra1_soviets_teslayak_tesla_bomb`) that collapsed four deliberate
+`PreservedFlat_*` channels into a single inflated node.
+
+`9303d9689` repaired all of them (survivors carry
+`master[survivor] + sum(dropped channels)`; stale channels restored to
+master's values; `tesla_bomb` and `WaveTurretImpact` blocks restored
+verbatim; ledgers re-extracted in the same commit). Post-fix: **zero
+resolved-damage sum mismatches across 149 weapons**; remaining flags are
+intended W24 arity collapses.
+
+**Verification:** `find_empty_warhead` 0 · `audit_balance_drift` clean 34/34 ·
+`audit_duplicate_inherits` 1956 = master baseline · `audit_three_way_split`
+143 vs master 230 · `audit_warhead_split` fingerprint 23 vs master 55 ·
+boot-gate menu + ~3 min dwell, zero new exceptions. Independently verified
+by DAWN (`VERIFY_2026-09-22_dawn_on_nova_431_head.md`: "Ember's findings do
+not reproduce on `9303d9689`") and review-closed by EMBER
+(`REVIEW_CLOSE_2026-09-22_ember_nova431.md`: "no mechanical defects").
+
+**Also landed this session:** six small PRs (#414–#419), the merge doctrine
+in `docs/LESSONS_LEARNED.md` (PR #433), and the `w24-naxi-pilot` branch
+marked superseded — master had already renamed that family to the pct-model
+with two live channels, so the planned collapse would have halved its
+damage. ⚠ Tooling note: `gh` resolves this repo through a stale
+`Zeruel87/Cameo-mod` redirect — always pass `-R cameo-mod/Cameo-mod`; an
+earlier "PR #146" citation pointed at an unrelated June PR because of it.
+
+Open items are coordinator scope: ExtraDamage-twin 50%-of-main ruling,
+#431-vs-#424 land order (measured: hunks 34 lines apart, auto-merges).
+
+Co-Authored-By: Devin <158243242+devin-ai-integration[bot]@users.noreply.github.com>
