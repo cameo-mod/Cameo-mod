@@ -2,26 +2,21 @@
 #
 # HAND-AUTHORED, like the Combined Arms file beside it, and for the same reason: every row is a
 # JUDGEMENT and every one has to be arguable. R21 forbids rebuilding this from a name-matching
-# pass, and R46 measured why — four automatic matchers score ~20% against a 75% ceiling, and name
-# evidence alone is right 40% of the time on the 42% of weapons it can even guess at.
+# pass, and R46 measured why — four automatic matchers score ~20% against a 75% ceiling.
 #
 # HOW THIS PASS WAS MADE, so it can be audited rather than trusted:
-#   * Each row's `why` states the reasoning. Decisions were taken once per measured
-#     (delivery, element) SIGNATURE — 37 of them across these 165 groups — rather than
-#     once per group, because a signature is the thing the measurement actually distinguishes.
-#   * 14 groups were opened and read individually and BEAT their signature;
-#     those rows say so. They are the support weapons, the repair beams and the chrono effects.
+#   * Group rows carry a decision per measured (delivery, element) SIGNATURE, with the reasoning
+#     in `why`. A signature is what the measurement actually distinguishes.
+#   * `overrides:` holds the 20 weapons looked at individually. An override BEATS its
+#     group, and it is keyed by WEAPON so it survives re-clustering — which matters: the first
+#     pass keyed these by GROUP and lost one within a single regrouping (R50).
 #   * Everything is `status: proposed`. NOTHING here has been reviewed by the maintainer.
 #
 # ⚠ THE LEVEL IS NOT DECIDED HERE. `band` records which platform fires the weapon; the family is
 # the only decision this file makes.
 #
-# ⚠ Group NAMES are an artefact of one compression run. Record any correction per WEAPON in an
-# `overrides:` block, never against a group name — that is what let the Combined Arms review
-# survive three regroupings untouched (R41, R45, R48).
-#
 # Current run: tau 0.20, four platform bands, one main warhead per weapon, zeros as absences,
-# element vocabulary per R45, delivery per R48.
+# element vocabulary per R45/R50, delivery per R48.
 source: mental_omega
 tau: 0.2
 armors:
@@ -35,13 +30,13 @@ armors:
 - steel
 - concrete
 totals:
-  groups: 165
+  groups: 164
   weapons: 260
 groups:
   HitscanKinetic_Inf:
     family: Bullet
     status: proposed
-    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    why: 'instant-hit kinetic, anti-infantry throughout: small arms'
     band: infantry
     delivery: Hitscan
     element: Kinetic
@@ -64,7 +59,7 @@ groups:
   MissileFire_Veh:
     family: MissileFire
     status: proposed
-    why: steered incendiary, anti-armour in 7 of 11 measurable
+    why: steered incendiary
     band: vehicle
     delivery: Missile
     element: Fire
@@ -113,7 +108,7 @@ groups:
   HitscanKinetic_Inf_2:
     family: Bullet
     status: proposed
-    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    why: 'instant-hit kinetic, anti-infantry throughout: small arms'
     band: infantry
     delivery: Hitscan
     element: Kinetic
@@ -266,6 +261,32 @@ groups:
     - RepulsorPlaceWH
     - SealC4WH
     - Smashing
+  Laser_Inf:
+    family: Laser
+    status: proposed
+    why: coherent light, no payload
+    band: infantry
+    delivery: Laser
+    element: Plain
+    uses: 7
+    members: 5
+    factor: 1.4413836676489145
+    profile:
+    - 144.9
+    - 144.9
+    - 144.9
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 200.0
+    - 159.5
+    weapons:
+    - ConfuseRifleWH
+    - DSpiderWebWH
+    - FinAutoSniperGunWH
+    - LUNARWH
+    - SpiderWebWH
   HitscanHE_Veh:
     family: BulletHE
     status: proposed
@@ -294,7 +315,7 @@ groups:
   HitscanKinetic_Veh:
     family: Bullet
     status: proposed
-    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    why: 'instant-hit kinetic, anti-infantry throughout: small arms'
     band: vehicle
     delivery: Hitscan
     element: Kinetic
@@ -319,7 +340,7 @@ groups:
   MissileFire_Veh_2:
     family: MissileFire
     status: proposed
-    why: steered incendiary, anti-armour in 7 of 11 measurable
+    why: steered incendiary
     band: vehicle
     delivery: Missile
     element: Fire
@@ -343,13 +364,13 @@ groups:
     - PiranhaWH
     - RoboSplash
     - TeratornWH
-  BulletTesla_Veh:
-    family: BulletTesla
+  BulletFire_Veh:
+    family: BulletFire
     status: proposed
-    why: electrified ammunition
+    why: incendiary ammunition
     band: vehicle
     delivery: Bullet
-    element: Tesla
+    element: Fire
     uses: 5
     members: 2
     factor: 0.9534541262173849
@@ -393,7 +414,7 @@ groups:
   HitscanKinetic_Veh_2:
     family: Bullet
     status: proposed
-    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    why: 'instant-hit kinetic, anti-infantry throughout: small arms'
     band: vehicle
     delivery: Hitscan
     element: Kinetic
@@ -413,32 +434,7 @@ groups:
     weapons:
     - GattWH
     - SSA
-  Laser_Inf:
-    family: Laser
-    status: proposed
-    why: coherent light, no payload
-    band: infantry
-    delivery: Laser
-    element: Plain
-    uses: 5
-    members: 4
-    factor: 1.3280578615468983
-    profile:
-    - 133.6
-    - 133.6
-    - 133.6
-    - 200.0
-    - 200.0
-    - 200.0
-    - 200.0
-    - 200.0
-    - 159.5
-    weapons:
-    - ConfuseRifleWH
-    - DSpiderWebWH
-    - FinAutoSniperGunWH
-    - LUNARWH
-  BulletTesla_Veh_2:
+  BulletTesla_Veh:
     family: BulletTesla
     status: proposed
     why: electrified ammunition
@@ -602,10 +598,9 @@ groups:
     - ElectricCoil
     - ElectricSuper
   BombHE_Def:
-    family: '(drop: support weapon)'
+    family: Demolition
     status: proposed
-    why: CraneWeaponWH + IronGuardWH — IronGuard is a protective ability; the flat 10.9 on vehicles only
-      is a marker, not a damage ladder
+    why: vertical delivery, explosive
     band: defense
     delivery: Bomb
     element: HE
@@ -695,9 +690,7 @@ groups:
   HitscanAtomized_Veh:
     family: Quantum
     status: proposed
-    why: 'ChronoBlasterWH + ChronoWarpWH — these DO damage, unlike ChronoBeam above, but the flat 200
-      means the profile carries no shape. Review: the family is a judgement, the profile should not be
-      pooled'
+    why: 'MO chrono weapons: high-tech energy, the Quantum blend'
     band: vehicle
     delivery: Hitscan
     element: Atomized
@@ -743,7 +736,7 @@ groups:
   HitscanKinetic_Inf_3:
     family: Bullet
     status: proposed
-    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    why: 'instant-hit kinetic, anti-infantry throughout: small arms'
     band: infantry
     delivery: Hitscan
     element: Kinetic
@@ -950,7 +943,7 @@ groups:
   MissileFire_Air:
     family: MissileFire
     status: proposed
-    why: steered incendiary, anti-armour in 7 of 11 measurable
+    why: steered incendiary
     band: aircraft
     delivery: Missile
     element: Fire
@@ -973,7 +966,7 @@ groups:
   MissileFire_Def:
     family: MissileFire
     status: proposed
-    why: steered incendiary, anti-armour in 7 of 11 measurable
+    why: steered incendiary
     band: defense
     delivery: Missile
     element: Fire
@@ -996,7 +989,7 @@ groups:
   MissileFire_Inf:
     family: MissileFire
     status: proposed
-    why: steered incendiary, anti-armour in 7 of 11 measurable
+    why: steered incendiary
     band: infantry
     delivery: Missile
     element: Fire
@@ -1131,10 +1124,9 @@ groups:
     weapons:
     - RadBeamWarhead
   Radiation_Veh:
-    family: '(drop: not a damage warhead)'
+    family: Nuclear
     status: proposed
-    why: EMPBeamWH + RepairMechanical + RepairMechanicalReju — two of the three are REPAIR weapons; nothing
-      here damages anything
+    why: rad delivery
     band: vehicle
     delivery: Radiation
     element: Plain
@@ -1181,7 +1173,7 @@ groups:
   BulletFire_Def:
     family: BulletFire
     status: proposed
-    why: incendiary ammunition, anti-armour in 5 of 6
+    why: incendiary ammunition
     band: defense
     delivery: Bullet
     element: Fire
@@ -1203,7 +1195,7 @@ groups:
   BulletFire_Inf:
     family: BulletFire
     status: proposed
-    why: incendiary ammunition, anti-armour in 5 of 6
+    why: incendiary ammunition
     band: infantry
     delivery: Bullet
     element: Fire
@@ -1225,7 +1217,7 @@ groups:
   BulletFire_Inf_2:
     family: BulletFire
     status: proposed
-    why: incendiary ammunition, anti-armour in 5 of 6
+    why: incendiary ammunition
     band: infantry
     delivery: Bullet
     element: Fire
@@ -1244,10 +1236,10 @@ groups:
     - 59.8
     weapons:
     - QuadMortarWH
-  BulletFire_Veh:
+  BulletFire_Veh_2:
     family: BulletFire
     status: proposed
-    why: incendiary ammunition, anti-armour in 5 of 6
+    why: incendiary ammunition
     band: vehicle
     delivery: Bullet
     element: Fire
@@ -1289,6 +1281,28 @@ groups:
     weapons:
     - SeitaadEMPWH
   BulletHE_Veh_2:
+    family: BulletHE
+    status: proposed
+    why: explosive ball ammunition
+    band: vehicle
+    delivery: Bullet
+    element: HE
+    uses: 2
+    members: 1
+    factor: 1.0814004165296043
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 39.9
+    - 39.9
+    - 19.9
+    - 200.0
+    - 200.0
+    - 199.4
+    weapons:
+    - GharialWH
+  BulletHE_Veh_3:
     family: BulletHE
     status: proposed
     why: explosive ball ammunition
@@ -1355,7 +1369,7 @@ groups:
     - 200.0
     weapons:
     - PyroWH
-  BulletTesla_Veh_3:
+  BulletTesla_Veh_2:
     family: BulletTesla
     status: proposed
     why: electrified ammunition
@@ -1377,28 +1391,6 @@ groups:
     - 119.6
     weapons:
     - BuratinoWH
-  BulletTesla_Veh_4:
-    family: BulletTesla
-    status: proposed
-    why: electrified ammunition
-    band: vehicle
-    delivery: Bullet
-    element: Tesla
-    uses: 2
-    members: 1
-    factor: 1.0814004165296043
-    profile:
-    - 200.0
-    - 200.0
-    - 200.0
-    - 39.9
-    - 39.9
-    - 19.9
-    - 200.0
-    - 200.0
-    - 199.4
-    weapons:
-    - GharialWH
   BulletToxin_Veh:
     family: BulletChem
     status: proposed
@@ -1445,10 +1437,9 @@ groups:
     - HydraMissileWH
     - UraniumWH
   HitscanAtomized_Inf:
-    family: '(drop: not a damage warhead)'
+    family: Quantum
     status: proposed
-    why: 'ChronoBeam — R21 names it: a mind-control effect with no damage profile. Its flat 200 across
-      all nine armours is the signature of absent Verses data, not of a generalist warhead'
+    why: 'MO chrono weapons: high-tech energy, the Quantum blend'
     band: infantry
     delivery: Hitscan
     element: Atomized
@@ -1493,7 +1484,7 @@ groups:
   HitscanKinetic_Inf_4:
     family: Bullet
     status: proposed
-    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    why: 'instant-hit kinetic, anti-infantry throughout: small arms'
     band: infantry
     delivery: Hitscan
     element: Kinetic
@@ -1515,7 +1506,7 @@ groups:
   HitscanKinetic_Veh_3:
     family: Bullet
     status: proposed
-    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    why: 'instant-hit kinetic, anti-infantry throughout: small arms'
     band: vehicle
     delivery: Hitscan
     element: Kinetic
@@ -1537,7 +1528,7 @@ groups:
   HitscanKinetic_Veh_4:
     family: Bullet
     status: proposed
-    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    why: 'instant-hit kinetic, anti-infantry throughout: small arms'
     band: vehicle
     delivery: Hitscan
     element: Kinetic
@@ -1556,6 +1547,28 @@ groups:
     - 59.8
     weapons:
     - HummSA
+  HitscanKinetic_Veh_5:
+    family: Bullet
+    status: proposed
+    why: 'instant-hit kinetic, anti-infantry throughout: small arms'
+    band: vehicle
+    delivery: Hitscan
+    element: Kinetic
+    uses: 2
+    members: 1
+    factor: 0.7469178820682956
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 119.6
+    - 79.7
+    - 59.8
+    - 19.9
+    - 39.9
+    - 19.9
+    weapons:
+    - ThorSSA
   HitscanRadiation_Inf:
     family: Nuclear
     status: proposed
@@ -1624,28 +1637,6 @@ groups:
     weapons:
     - GyroAAWH
     - GyroWH
-  HitscanTesla_Veh:
-    family: BulletTesla
-    status: proposed
-    why: instant-hit electrified rounds
-    band: vehicle
-    delivery: Hitscan
-    element: Tesla
-    uses: 2
-    members: 1
-    factor: 0.7469178820682956
-    profile:
-    - 200.0
-    - 200.0
-    - 200.0
-    - 119.6
-    - 79.7
-    - 59.8
-    - 19.9
-    - 39.9
-    - 19.9
-    weapons:
-    - ThorSSA
   HitscanToxin_Veh:
     family: BulletChem
     status: proposed
@@ -1738,28 +1729,6 @@ groups:
     weapons:
     - RailguneerOTWH
     - RailguneerWH
-  LaserTesla_Inf:
-    family: Quantum
-    status: proposed
-    why: laser x tesla is the Quantum blend by the delivery grid
-    band: infantry
-    delivery: Laser
-    element: Tesla
-    uses: 2
-    members: 1
-    factor: 2.0000000000007496
-    profile:
-    - 200.0
-    - 200.0
-    - 200.0
-    - null
-    - null
-    - null
-    - null
-    - null
-    - null
-    weapons:
-    - SpiderWebWH
   Laser_Def:
     family: Laser
     status: proposed
@@ -1807,7 +1776,7 @@ groups:
   MissileFire_Air_2:
     family: MissileFire
     status: proposed
-    why: steered incendiary, anti-armour in 7 of 11 measurable
+    why: steered incendiary
     band: aircraft
     delivery: Missile
     element: Fire
@@ -1830,7 +1799,7 @@ groups:
   MissileFire_Def_2:
     family: MissileFire
     status: proposed
-    why: steered incendiary, anti-armour in 7 of 11 measurable
+    why: steered incendiary
     band: defense
     delivery: Missile
     element: Fire
@@ -1852,7 +1821,7 @@ groups:
   MissileFire_Veh_3:
     family: MissileFire
     status: proposed
-    why: steered incendiary, anti-armour in 7 of 11 measurable
+    why: steered incendiary
     band: vehicle
     delivery: Missile
     element: Fire
@@ -1895,11 +1864,9 @@ groups:
     - DevourerWH
     - GrumbleWH
   MissileKinetic_Inf:
-    family: Melee
+    family: MissileAP
     status: proposed
-    why: 'HuntressWH + KrukovSwordWH are BLADES, not armour-piercing missiles. The profile agrees: 48.9
-      against infantry, 12 against vehicles, nothing against buildings. Delivery read Missile because
-      the projectile steers (ROT > 0), which a thrown blade does'
+    why: steered solid penetrator
     band: infantry
     delivery: Missile
     element: Kinetic
@@ -1988,9 +1955,9 @@ groups:
     - LancerOTWH
     - LancerWH
   RailgunKinetic_Inf:
-    family: '(drop: not a damage warhead)'
+    family: Railgun
     status: proposed
-    why: KillDriverWH + KillDriverAIWH — crew removal, it takes the vehicle rather than damaging it
+    why: genuine IsRailgun weapons (R48)
     band: infantry
     delivery: Railgun
     element: Kinetic
@@ -2032,10 +1999,32 @@ groups:
     - 99.7
     weapons:
     - ElectricTank
-  BombHE_Veh:
-    family: '(drop: support weapon)'
+  BombHE_Inf:
+    family: Demolition
     status: proposed
-    why: 'ThorHTLWH — flat 10 on every reachable armour, the floor of the window: a marker warhead'
+    why: vertical delivery, explosive
+    band: infantry
+    delivery: Bomb
+    element: HE
+    uses: 1
+    members: 1
+    factor: 0.10000000000003746
+    profile:
+    - 10.0
+    - 10.0
+    - 10.0
+    - 10.0
+    - 10.0
+    - 10.0
+    - null
+    - null
+    - null
+    weapons:
+    - ChronoFreezeWH
+  BombHE_Veh:
+    family: Demolition
+    status: proposed
+    why: vertical delivery, explosive
     band: vehicle
     delivery: Bomb
     element: HE
@@ -2055,9 +2044,9 @@ groups:
     weapons:
     - ThorHTLWH
   BombKinetic_Veh:
-    family: '(drop: support weapon)'
+    family: Demolition
     status: proposed
-    why: DiskDrainWH — a drain effect, reaching buildings only
+    why: vertical delivery, solid
     band: vehicle
     delivery: Bomb
     element: Kinetic
@@ -2076,33 +2065,10 @@ groups:
     - 200.0
     weapons:
     - DiskDrainWH
-  BombTesla_Inf:
-    family: '(drop: not a damage warhead)'
-    status: proposed
-    why: 'ChronoFreezeWH — flat 10, the floor of the window, on every reachable armour: a marker'
-    band: infantry
-    delivery: Bomb
-    element: Tesla
-    uses: 1
-    members: 1
-    factor: 0.10000000000003746
-    profile:
-    - 10.0
-    - 10.0
-    - 10.0
-    - 10.0
-    - 10.0
-    - 10.0
-    - null
-    - null
-    - null
-    weapons:
-    - ChronoFreezeWH
   BombToxin_Veh:
-    family: Demolition
+    family: Chemical
     status: proposed
-    why: BlimpHE — a blimp detonating. The name says HE and the broad blast profile agrees; the Toxin
-      element is a death-animation artefact
+    why: a chemical bomb is the Chemical family
     band: vehicle
     delivery: Bomb
     element: Toxin
@@ -2124,7 +2090,7 @@ groups:
   BulletFire_Inf_3:
     family: BulletFire
     status: proposed
-    why: incendiary ammunition, anti-armour in 5 of 6
+    why: incendiary ammunition
     band: infantry
     delivery: Bullet
     element: Fire
@@ -2143,10 +2109,10 @@ groups:
     - 39.9
     weapons:
     - FlakGuyATWH
-  BulletFire_Veh_2:
+  BulletFire_Veh_3:
     family: BulletFire
     status: proposed
-    why: incendiary ammunition, anti-armour in 5 of 6
+    why: incendiary ammunition
     band: vehicle
     delivery: Bullet
     element: Fire
@@ -2174,6 +2140,28 @@ groups:
     element: HE
     uses: 1
     members: 1
+    factor: 1.0814004165296043
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 39.9
+    - 39.9
+    - 19.9
+    - 200.0
+    - 200.0
+    - 199.4
+    weapons:
+    - KingsGunWH
+  BulletHE_Inf_3:
+    family: BulletHE
+    status: proposed
+    why: explosive ball ammunition
+    band: infantry
+    delivery: Bullet
+    element: HE
+    uses: 1
+    members: 1
     factor: 1.4605348291280513
     profile:
     - 200.0
@@ -2187,7 +2175,7 @@ groups:
     - 199.4
     weapons:
     - RazgarWH
-  BulletHE_Inf_3:
+  BulletHE_Inf_4:
     family: BulletHE
     status: proposed
     why: explosive ball ammunition
@@ -2209,7 +2197,7 @@ groups:
     - 10.0
     weapons:
     - RiotGrenadeWH
-  BulletHE_Inf_4:
+  BulletHE_Inf_5:
     family: BulletHE
     status: proposed
     why: explosive ball ammunition
@@ -2231,7 +2219,7 @@ groups:
     - 119.6
     weapons:
     - SiegfriedWH
-  BulletHE_Inf_5:
+  BulletHE_Inf_6:
     family: BulletHE
     status: proposed
     why: explosive ball ammunition
@@ -2253,7 +2241,7 @@ groups:
     - null
     weapons:
     - StalkerDrainWH
-  BulletHE_Veh_3:
+  BulletHE_Veh_4:
     family: BulletHE
     status: proposed
     why: explosive ball ammunition
@@ -2275,7 +2263,7 @@ groups:
     - 19.9
     weapons:
     - IronDragonWarhead
-  BulletHE_Veh_4:
+  BulletHE_Veh_5:
     family: BulletHE
     status: proposed
     why: explosive ball ammunition
@@ -2342,28 +2330,6 @@ groups:
     weapons:
     - TurretFireWH
   BulletTesla_Inf_2:
-    family: BulletTesla
-    status: proposed
-    why: electrified ammunition
-    band: infantry
-    delivery: Bullet
-    element: Tesla
-    uses: 1
-    members: 1
-    factor: 1.0814004165296043
-    profile:
-    - 200.0
-    - 200.0
-    - 200.0
-    - 39.9
-    - 39.9
-    - 19.9
-    - 200.0
-    - 200.0
-    - 199.4
-    weapons:
-    - KingsGunWH
-  BulletTesla_Inf_3:
     family: BulletTesla
     status: proposed
     why: electrified ammunition
@@ -2518,9 +2484,9 @@ groups:
     weapons:
     - WarpnodeWH
   Bullet_Inf_2:
-    family: Demolition
+    family: Bullet
     status: proposed
-    why: 'FlintBomb — a bomb, not ball ammunition: nothing against infantry, 200 against structures'
+    why: ballistic, no element
     band: infantry
     delivery: Bullet
     element: Plain
@@ -2784,7 +2750,7 @@ groups:
   HitscanKinetic_Def:
     family: Bullet
     status: proposed
-    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    why: 'instant-hit kinetic, anti-infantry throughout: small arms'
     band: defense
     delivery: Hitscan
     element: Kinetic
@@ -2806,7 +2772,7 @@ groups:
   HitscanKinetic_Inf_5:
     family: Bullet
     status: proposed
-    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    why: 'instant-hit kinetic, anti-infantry throughout: small arms'
     band: infantry
     delivery: Hitscan
     element: Kinetic
@@ -2828,7 +2794,7 @@ groups:
   HitscanKinetic_Inf_6:
     family: Bullet
     status: proposed
-    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    why: 'instant-hit kinetic, anti-infantry throughout: small arms'
     band: infantry
     delivery: Hitscan
     element: Kinetic
@@ -2850,7 +2816,7 @@ groups:
   HitscanKinetic_Inf_7:
     family: Bullet
     status: proposed
-    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    why: 'instant-hit kinetic, anti-infantry throughout: small arms'
     band: infantry
     delivery: Hitscan
     element: Kinetic
@@ -2869,10 +2835,10 @@ groups:
     - 39.9
     weapons:
     - SAFlame
-  HitscanKinetic_Veh_5:
+  HitscanKinetic_Veh_6:
     family: Bullet
     status: proposed
-    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    why: 'instant-hit kinetic, anti-infantry throughout: small arms'
     band: vehicle
     delivery: Hitscan
     element: Kinetic
@@ -2891,10 +2857,10 @@ groups:
     - 19.9
     weapons:
     - GattAAWH
-  HitscanKinetic_Veh_6:
+  HitscanKinetic_Veh_7:
     family: Bullet
     status: proposed
-    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    why: 'instant-hit kinetic, anti-infantry throughout: small arms'
     band: vehicle
     delivery: Hitscan
     element: Kinetic
@@ -2913,10 +2879,10 @@ groups:
     - 19.9
     weapons:
     - HARVWH
-  HitscanKinetic_Veh_7:
+  HitscanKinetic_Veh_8:
     family: Bullet
     status: proposed
-    why: 'instant-hit kinetic, anti-infantry in all 15 groups: small arms'
+    why: 'instant-hit kinetic, anti-infantry throughout: small arms'
     band: vehicle
     delivery: Hitscan
     element: Kinetic
@@ -2957,29 +2923,7 @@ groups:
     - null
     weapons:
     - KrukovRadBeamWH
-  HitscanTesla_Def:
-    family: BulletTesla
-    status: proposed
-    why: instant-hit electrified rounds
-    band: defense
-    delivery: Hitscan
-    element: Tesla
-    uses: 1
-    members: 1
-    factor: 1.2879648677301059
-    profile:
-    - null
-    - null
-    - null
-    - 200.0
-    - 200.0
-    - 200.0
-    - 119.6
-    - 79.7
-    - 59.8
-    weapons:
-    - WarRigDrillsWH
-  HitscanTesla_Veh_2:
+  HitscanTesla_Veh:
     family: BulletTesla
     status: proposed
     why: instant-hit electrified rounds
@@ -3001,6 +2945,28 @@ groups:
     - 59.8
     weapons:
     - SeawolfHE
+  HitscanToxin_Def:
+    family: BulletChem
+    status: proposed
+    why: instant-hit chemical rounds
+    band: defense
+    delivery: Hitscan
+    element: Toxin
+    uses: 1
+    members: 1
+    factor: 1.2879648677301059
+    profile:
+    - null
+    - null
+    - null
+    - 200.0
+    - 200.0
+    - 200.0
+    - 119.6
+    - 79.7
+    - 59.8
+    weapons:
+    - WarRigDrillsWH
   HitscanToxin_Veh_2:
     family: BulletChem
     status: proposed
@@ -3046,6 +3012,28 @@ groups:
     weapons:
     - VirusAttach
   LaserHE_Def_3:
+    family: Laser
+    status: proposed
+    why: 'a laser whose victims explode: the death animation is not the element'
+    band: defense
+    delivery: Laser
+    element: HE
+    uses: 1
+    members: 1
+    factor: 1.3033491550899585
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 179.4
+    - 119.6
+    - 79.7
+    - 99.7
+    - 99.7
+    - 79.7
+    weapons:
+    - EmitterWarhead
+  LaserHE_Def_4:
     family: Laser
     status: proposed
     why: 'a laser whose victims explode: the death animation is not the element'
@@ -3164,6 +3152,28 @@ groups:
     element: HE
     uses: 1
     members: 1
+    factor: 1.3033491550899585
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 179.4
+    - 119.6
+    - 79.7
+    - 99.7
+    - 99.7
+    - 79.7
+    weapons:
+    - JackalWarhead
+  LaserHE_Veh_5:
+    family: Laser
+    status: proposed
+    why: 'a laser whose victims explode: the death animation is not the element'
+    band: vehicle
+    delivery: Laser
+    element: HE
+    uses: 1
+    members: 1
     factor: 1.3374662054868418
     profile:
     - 200.0
@@ -3177,7 +3187,7 @@ groups:
     - 59.8
     weapons:
     - MarauderRailgunWH
-  LaserHE_Veh_5:
+  LaserHE_Veh_6:
     family: Laser
     status: proposed
     why: 'a laser whose victims explode: the death animation is not the element'
@@ -3200,9 +3210,9 @@ groups:
     weapons:
     - RamWeldWH
   LaserKinetic_Veh:
-    family: '(drop: not a damage warhead)'
+    family: Laser
     status: proposed
-    why: StunGunWH — a stun is a status effect; its 200 reaches infantry only
+    why: laser, kinetic death animation
     band: vehicle
     delivery: Laser
     element: Kinetic
@@ -3221,50 +3231,6 @@ groups:
     - null
     weapons:
     - StunGunWH
-  LaserTesla_Def:
-    family: Quantum
-    status: proposed
-    why: laser x tesla is the Quantum blend by the delivery grid
-    band: defense
-    delivery: Laser
-    element: Tesla
-    uses: 1
-    members: 1
-    factor: 1.3033491550899585
-    profile:
-    - 200.0
-    - 200.0
-    - 200.0
-    - 179.4
-    - 119.6
-    - 79.7
-    - 99.7
-    - 99.7
-    - 79.7
-    weapons:
-    - EmitterWarhead
-  LaserTesla_Veh:
-    family: Quantum
-    status: proposed
-    why: laser x tesla is the Quantum blend by the delivery grid
-    band: vehicle
-    delivery: Laser
-    element: Tesla
-    uses: 1
-    members: 1
-    factor: 1.3033491550899585
-    profile:
-    - 200.0
-    - 200.0
-    - 200.0
-    - 179.4
-    - 119.6
-    - 79.7
-    - 99.7
-    - 99.7
-    - 79.7
-    weapons:
-    - JackalWarhead
   LaserToxin_Inf:
     family: Laser
     status: proposed
@@ -3356,7 +3322,7 @@ groups:
   MissileFire_Def_3:
     family: MissileFire
     status: proposed
-    why: steered incendiary, anti-armour in 7 of 11 measurable
+    why: steered incendiary
     band: defense
     delivery: Missile
     element: Fire
@@ -3378,7 +3344,7 @@ groups:
   MissileFire_Def_4:
     family: MissileFire
     status: proposed
-    why: steered incendiary, anti-armour in 7 of 11 measurable
+    why: steered incendiary
     band: defense
     delivery: Missile
     element: Fire
@@ -3400,7 +3366,7 @@ groups:
   MissileFire_Inf_2:
     family: MissileFire
     status: proposed
-    why: steered incendiary, anti-armour in 7 of 11 measurable
+    why: steered incendiary
     band: infantry
     delivery: Missile
     element: Fire
@@ -3422,7 +3388,7 @@ groups:
   MissileFire_Inf_3:
     family: MissileFire
     status: proposed
-    why: steered incendiary, anti-armour in 7 of 11 measurable
+    why: steered incendiary
     band: infantry
     delivery: Missile
     element: Fire
@@ -3444,7 +3410,7 @@ groups:
   MissileFire_Veh_4:
     family: MissileFire
     status: proposed
-    why: steered incendiary, anti-armour in 7 of 11 measurable
+    why: steered incendiary
     band: vehicle
     delivery: Missile
     element: Fire
@@ -3466,7 +3432,7 @@ groups:
   MissileFire_Veh_5:
     family: MissileFire
     status: proposed
-    why: steered incendiary, anti-armour in 7 of 11 measurable
+    why: steered incendiary
     band: vehicle
     delivery: Missile
     element: Fire
@@ -3684,10 +3650,9 @@ groups:
     weapons:
     - VentrexWH
   RailgunHE_Inf:
-    family: '(drop: not a damage warhead)'
+    family: Railgun
     status: proposed
-    why: AssasinWH — flat 200 across all NINE armours including buildings, the same absent-Verses signature
-      as ChronoBeam. An assassination is an instant kill, not a damage ladder
+    why: genuine IsRailgun weapon
     band: infantry
     delivery: Railgun
     element: HE
@@ -3729,10 +3694,9 @@ groups:
     weapons:
     - AlizeGunWH
   Railgun_Veh:
-    family: '(drop: not a damage warhead)'
+    family: Railgun
     status: proposed
-    why: ChronoImprisonWH — an imprison effect. It carries IsRailgun for the beam visual, which is the
-      R48 flag doing its real job
+    why: genuine IsRailgun weapon
     band: vehicle
     delivery: Railgun
     element: Plain
@@ -3773,4 +3737,69 @@ groups:
     - 39.9
     weapons:
     - WormqueenBoltWH
-overrides: {}
+overrides:
+  AssasinWH:
+    family: '(drop: not a damage warhead)'
+    why: flat 200 across all NINE armours including buildings, the same absent-Verses signature as ChronoBeam.
+      An assassination is an instant kill
+  BlimpHE:
+    family: Demolition
+    why: a blimp detonating. The name says HE and the broad blast profile agrees; the Toxin element is
+      a death-animation artefact
+  ChronoBeam:
+    family: '(drop: not a damage warhead)'
+    why: 'R21 names it: a mind-control effect. Flat 200 across all nine armours is the signature of ABSENT
+      Verses data, not of a generalist warhead'
+  ChronoBlasterWH:
+    family: Quantum
+    why: these DO damage, unlike ChronoBeam, but the flat 200 carries no shape
+  ChronoFreezeWH:
+    family: '(drop: not a damage warhead)'
+    why: 'flat 10, the floor of the window, on every reachable armour: a marker'
+  ChronoImprisonWH:
+    family: '(drop: not a damage warhead)'
+    why: an imprison effect. It carries IsRailgun for the beam visual, which is the R48 flag doing its
+      real job
+  ChronoWarpWH:
+    family: Quantum
+    why: see ChronoBlasterWH
+  CraneWeaponWH:
+    family: '(drop: support weapon)'
+    why: a construction crane
+  DiskDrainWH:
+    family: '(drop: support weapon)'
+    why: a drain effect, reaching buildings only
+  EMPBeamWH:
+    family: '(drop: not a damage warhead)'
+    why: an EMP beam — a disable effect; Cameo models that as Integrity, not Versus
+  FlintBomb:
+    family: Demolition
+    why: 'a bomb, not ball ammunition: nothing against infantry, 200 against structures'
+  HuntressWH:
+    family: Melee
+    why: a BLADE, not an armour-piercing missile. 48.9 against infantry, 12 against vehicles, nothing
+      against buildings. Delivery read Missile because a thrown blade's projectile steers (ROT > 0)
+  IronGuardWH:
+    family: '(drop: support weapon)'
+    why: a protective ability, not damage
+  KillDriverAIWH:
+    family: '(drop: not a damage warhead)'
+    why: crew removal — it takes the vehicle
+  KillDriverWH:
+    family: '(drop: not a damage warhead)'
+    why: crew removal — it takes the vehicle
+  KrukovSwordWH:
+    family: Melee
+    why: a sword — see HuntressWH
+  RepairMechanical:
+    family: '(drop: not a damage warhead)'
+    why: a repair weapon
+  RepairMechanicalReju:
+    family: '(drop: not a damage warhead)'
+    why: a repair weapon
+  StunGunWH:
+    family: '(drop: not a damage warhead)'
+    why: a stun is a status effect
+  ThorHTLWH:
+    family: '(drop: support weapon)'
+    why: 'flat 10 on every reachable armour — the floor of the window: a marker'

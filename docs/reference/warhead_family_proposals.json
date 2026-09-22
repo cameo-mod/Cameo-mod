@@ -11469,6 +11469,29 @@
     ]
    },
    {
+    "group": "Laser_Inf",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "LaserPulse": 5,
+     "Quantum": 2,
+     "(drop: not a damage warhead)": 2
+    },
+    "delivery": "Laser",
+    "element": "Plain",
+    "band": "infantry",
+    "uses": 7,
+    "weapons": [
+     "ConfuseRifleWH",
+     "DSpiderWebWH",
+     "FinAutoSniperGunWH",
+     "LUNARWH",
+     "SpiderWebWH"
+    ]
+   },
+   {
     "group": "HitscanHE_Veh",
     "family": "Sniper",
     "status": "proposed",
@@ -11535,18 +11558,16 @@
     ]
    },
    {
-    "group": "BulletTesla_Veh",
-    "family": "?",
+    "group": "BulletFire_Veh",
+    "family": "Flame",
     "status": "proposed",
-    "confidence": "split",
-    "why": "no CA group with this band; matched on 2",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
     "candidates": {
-     "BulletTesla": 1,
-     "(drop: support power)": 1,
-     "Concussion": 1
+     "Flame": 1
     },
     "delivery": "Bullet",
-    "element": "Tesla",
+    "element": "Fire",
     "band": "vehicle",
     "uses": 5,
     "weapons": [
@@ -11595,29 +11616,7 @@
     ]
    },
    {
-    "group": "Laser_Inf",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "LaserPulse": 5,
-     "Quantum": 2,
-     "(drop: not a damage warhead)": 2
-    },
-    "delivery": "Laser",
-    "element": "Plain",
-    "band": "infantry",
-    "uses": 5,
-    "weapons": [
-     "ConfuseRifleWH",
-     "DSpiderWebWH",
-     "FinAutoSniperGunWH",
-     "LUNARWH"
-    ]
-   },
-   {
-    "group": "BulletTesla_Veh_2",
+    "group": "BulletTesla_Veh",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -12305,7 +12304,7 @@
     ]
    },
    {
-    "group": "BulletFire_Veh",
+    "group": "BulletFire_Veh_2",
     "family": "Flame",
     "status": "proposed",
     "confidence": "single",
@@ -12340,6 +12339,26 @@
    },
    {
     "group": "BulletHE_Veh_2",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "CannonAP": 17,
+     "CannonHE": 12,
+     "CannonNuke": 9,
+     "MissileHE": 6
+    },
+    "delivery": "Bullet",
+    "element": "HE",
+    "band": "vehicle",
+    "uses": 2,
+    "weapons": [
+     "GharialWH"
+    ]
+   },
+   {
+    "group": "BulletHE_Veh_3",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -12394,7 +12413,7 @@
     ]
    },
    {
-    "group": "BulletTesla_Veh_3",
+    "group": "BulletTesla_Veh_2",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -12410,25 +12429,6 @@
     "uses": 2,
     "weapons": [
      "BuratinoWH"
-    ]
-   },
-   {
-    "group": "BulletTesla_Veh_4",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "BulletTesla": 1,
-     "(drop: support power)": 1,
-     "Concussion": 1
-    },
-    "delivery": "Bullet",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 2,
-    "weapons": [
-     "GharialWH"
     ]
    },
    {
@@ -12564,6 +12564,23 @@
     ]
    },
    {
+    "group": "HitscanKinetic_Veh_5",
+    "family": "Sniper",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Sniper": 2
+    },
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "band": "vehicle",
+    "uses": 2,
+    "weapons": [
+     "ThorSSA"
+    ]
+   },
+   {
     "group": "HitscanRadiation_Inf",
     "family": "?",
     "status": "proposed",
@@ -12617,23 +12634,6 @@
     "weapons": [
      "GyroAAWH",
      "GyroWH"
-    ]
-   },
-   {
-    "group": "HitscanTesla_Veh",
-    "family": "(drop: not a damage warhead)",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "(drop: not a damage warhead)": 1
-    },
-    "delivery": "Hitscan",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 2,
-    "weapons": [
-     "ThorSSA"
     ]
    },
    {
@@ -12711,26 +12711,6 @@
     "weapons": [
      "RailguneerOTWH",
      "RailguneerWH"
-    ]
-   },
-   {
-    "group": "LaserTesla_Inf",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Quantum": 18,
-     "LaserPulse": 15,
-     "Laser": 10,
-     "Prism": 4
-    },
-    "delivery": "Laser",
-    "element": "Tesla",
-    "band": "infantry",
-    "uses": 2,
-    "weapons": [
-     "SpiderWebWH"
     ]
    },
    {
@@ -12963,6 +12943,23 @@
     ]
    },
    {
+    "group": "BombHE_Inf",
+    "family": "Demolition",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "no CA group with this band; matched on 2",
+    "candidates": {
+     "Demolition": 3
+    },
+    "delivery": "Bomb",
+    "element": "HE",
+    "band": "infantry",
+    "uses": 1,
+    "weapons": [
+     "ChronoFreezeWH"
+    ]
+   },
+   {
     "group": "BombHE_Veh",
     "family": "Demolition",
     "status": "proposed",
@@ -12995,23 +12992,6 @@
     "uses": 1,
     "weapons": [
      "DiskDrainWH"
-    ]
-   },
-   {
-    "group": "BombTesla_Inf",
-    "family": "Demolition",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "Demolition": 2
-    },
-    "delivery": "Bomb",
-    "element": "Tesla",
-    "band": "infantry",
-    "uses": 1,
-    "weapons": [
-     "ChronoFreezeWH"
     ]
    },
    {
@@ -13050,7 +13030,7 @@
     ]
    },
    {
-    "group": "BulletFire_Veh_2",
+    "group": "BulletFire_Veh_3",
     "family": "Flame",
     "status": "proposed",
     "confidence": "single",
@@ -13080,7 +13060,7 @@
     "band": "infantry",
     "uses": 1,
     "weapons": [
-     "RazgarWH"
+     "KingsGunWH"
     ]
    },
    {
@@ -13097,7 +13077,7 @@
     "band": "infantry",
     "uses": 1,
     "weapons": [
-     "RiotGrenadeWH"
+     "RazgarWH"
     ]
    },
    {
@@ -13114,7 +13094,7 @@
     "band": "infantry",
     "uses": 1,
     "weapons": [
-     "SiegfriedWH"
+     "RiotGrenadeWH"
     ]
    },
    {
@@ -13131,11 +13111,28 @@
     "band": "infantry",
     "uses": 1,
     "weapons": [
+     "SiegfriedWH"
+    ]
+   },
+   {
+    "group": "BulletHE_Inf_6",
+    "family": "Demolition",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Demolition": 2
+    },
+    "delivery": "Bullet",
+    "element": "HE",
+    "band": "infantry",
+    "uses": 1,
+    "weapons": [
      "StalkerDrainWH"
     ]
    },
    {
-    "group": "BulletHE_Veh_3",
+    "group": "BulletHE_Veh_4",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -13155,7 +13152,7 @@
     ]
    },
    {
-    "group": "BulletHE_Veh_4",
+    "group": "BulletHE_Veh_5",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -13210,23 +13207,6 @@
    },
    {
     "group": "BulletTesla_Inf_2",
-    "family": "Concussion",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Concussion": 1
-    },
-    "delivery": "Bullet",
-    "element": "Tesla",
-    "band": "infantry",
-    "uses": 1,
-    "weapons": [
-     "KingsGunWH"
-    ]
-   },
-   {
-    "group": "BulletTesla_Inf_3",
     "family": "Concussion",
     "status": "proposed",
     "confidence": "single",
@@ -13661,7 +13641,7 @@
     ]
    },
    {
-    "group": "HitscanKinetic_Veh_5",
+    "group": "HitscanKinetic_Veh_6",
     "family": "Sniper",
     "status": "proposed",
     "confidence": "single",
@@ -13678,7 +13658,7 @@
     ]
    },
    {
-    "group": "HitscanKinetic_Veh_6",
+    "group": "HitscanKinetic_Veh_7",
     "family": "Sniper",
     "status": "proposed",
     "confidence": "single",
@@ -13695,7 +13675,7 @@
     ]
    },
    {
-    "group": "HitscanKinetic_Veh_7",
+    "group": "HitscanKinetic_Veh_8",
     "family": "Sniper",
     "status": "proposed",
     "confidence": "single",
@@ -13732,24 +13712,7 @@
     ]
    },
    {
-    "group": "HitscanTesla_Def",
-    "family": "(drop: not a damage warhead)",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "(drop: not a damage warhead)": 1
-    },
-    "delivery": "Hitscan",
-    "element": "Tesla",
-    "band": "defense",
-    "uses": 1,
-    "weapons": [
-     "WarRigDrillsWH"
-    ]
-   },
-   {
-    "group": "HitscanTesla_Veh_2",
+    "group": "HitscanTesla_Veh",
     "family": "(drop: not a damage warhead)",
     "status": "proposed",
     "confidence": "single",
@@ -13763,6 +13726,26 @@
     "uses": 1,
     "weapons": [
      "SeawolfHE"
+    ]
+   },
+   {
+    "group": "HitscanToxin_Def",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "Sniper": 9,
+     "(drop: not a damage warhead)": 8,
+     "Melee": 6,
+     "Bullet": 2
+    },
+    "delivery": "Hitscan",
+    "element": "Toxin",
+    "band": "defense",
+    "uses": 1,
+    "weapons": [
+     "WarRigDrillsWH"
     ]
    },
    {
@@ -13807,6 +13790,23 @@
    },
    {
     "group": "LaserHE_Def_3",
+    "family": "Prism",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Prism": 1
+    },
+    "delivery": "Laser",
+    "element": "HE",
+    "band": "defense",
+    "uses": 1,
+    "weapons": [
+     "EmitterWarhead"
+    ]
+   },
+   {
+    "group": "LaserHE_Def_4",
     "family": "Prism",
     "status": "proposed",
     "confidence": "single",
@@ -13910,11 +13910,30 @@
     "band": "vehicle",
     "uses": 1,
     "weapons": [
-     "MarauderRailgunWH"
+     "JackalWarhead"
     ]
    },
    {
     "group": "LaserHE_Veh_5",
+    "family": "Prism",
+    "status": "proposed",
+    "confidence": "majority",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Prism": 3,
+     "(drop: not a damage warhead)": 1,
+     "Railgun": 1
+    },
+    "delivery": "Laser",
+    "element": "HE",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
+     "MarauderRailgunWH"
+    ]
+   },
+   {
+    "group": "LaserHE_Veh_6",
     "family": "Prism",
     "status": "proposed",
     "confidence": "majority",
@@ -13947,46 +13966,6 @@
     "uses": 1,
     "weapons": [
      "StunGunWH"
-    ]
-   },
-   {
-    "group": "LaserTesla_Def",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Quantum": 18,
-     "LaserPulse": 15,
-     "Laser": 10,
-     "Prism": 4
-    },
-    "delivery": "Laser",
-    "element": "Tesla",
-    "band": "defense",
-    "uses": 1,
-    "weapons": [
-     "EmitterWarhead"
-    ]
-   },
-   {
-    "group": "LaserTesla_Veh",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Quantum": 18,
-     "LaserPulse": 15,
-     "Laser": 10,
-     "Prism": 4
-    },
-    "delivery": "Laser",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "JackalWarhead"
     ]
    },
    {
@@ -14433,9 +14412,9 @@
    }
   ],
   "stats": {
-   "needs a human": 86,
-   "inherited, CA split this triple": 31,
-   "inherited cleanly": 48
+   "needs a human": 83,
+   "inherited, CA split this triple": 32,
+   "inherited cleanly": 49
   }
  },
  "openra_d2k": {
@@ -16191,18 +16170,19 @@
     ]
    },
    {
-    "group": "BulletTesla_Veh",
+    "group": "BulletHE_Veh",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
-    "why": "no CA group with this band; matched on 2",
+    "why": "exact delivery/element/band match",
     "candidates": {
-     "BulletTesla": 1,
-     "(drop: support power)": 1,
-     "Concussion": 1
+     "CannonAP": 17,
+     "CannonHE": 12,
+     "CannonNuke": 9,
+     "MissileHE": 6
     },
     "delivery": "Bullet",
-    "element": "Tesla",
+    "element": "HE",
     "band": "vehicle",
     "uses": 11,
     "weapons": [
@@ -16214,16 +16194,17 @@
     ]
    },
    {
-    "group": "HitscanTesla_Inf",
-    "family": "(drop: not a damage warhead)",
+    "group": "HitscanKinetic_Inf",
+    "family": "?",
     "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
     "candidates": {
-     "(drop: not a damage warhead)": 1
+     "Arrow": 1,
+     "Sniper": 1
     },
     "delivery": "Hitscan",
-    "element": "Tesla",
+    "element": "Kinetic",
     "band": "infantry",
     "uses": 9,
     "weapons": [
@@ -16231,28 +16212,25 @@
     ]
    },
    {
-    "group": "BulletTesla_Veh_2",
+    "group": "HitscanFire_Veh",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
-    "why": "no CA group with this band; matched on 2",
+    "why": "no CA group with this band; matched on 1",
     "candidates": {
-     "BulletTesla": 1,
-     "(drop: support power)": 1,
-     "Concussion": 1
+     "Sniper": 9,
+     "(drop: not a damage warhead)": 8,
+     "Melee": 6,
+     "Bullet": 2
     },
-    "delivery": "Bullet",
-    "element": "Tesla",
+    "delivery": "Hitscan",
+    "element": "Fire",
     "band": "vehicle",
-    "uses": 7,
+    "uses": 6,
     "weapons": [
-     "AARaijinWH",
-     "Ace155mmWH",
-     "DZapWH",
-     "RaijinWH",
-     "SuperApocMissWH",
-     "TomaWH",
-     "TsunamiWH"
+     "AeroWH",
+     "DeathWH",
+     "FlakWH"
     ]
    },
    {
@@ -16278,27 +16256,6 @@
     ]
    },
    {
-    "group": "HitscanFire_Veh",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Sniper": 9,
-     "(drop: not a damage warhead)": 8,
-     "Melee": 6,
-     "Bullet": 2
-    },
-    "delivery": "Hitscan",
-    "element": "Fire",
-    "band": "vehicle",
-    "uses": 5,
-    "weapons": [
-     "DeathWH",
-     "FlakWH"
-    ]
-   },
-   {
     "group": "Hitscan_Inf",
     "family": "?",
     "status": "proposed",
@@ -16320,18 +16277,19 @@
     ]
    },
    {
-    "group": "BulletTesla_Veh_3",
+    "group": "BulletHE_Veh_2",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
-    "why": "no CA group with this band; matched on 2",
+    "why": "exact delivery/element/band match",
     "candidates": {
-     "BulletTesla": 1,
-     "(drop: support power)": 1,
-     "Concussion": 1
+     "CannonAP": 17,
+     "CannonHE": 12,
+     "CannonNuke": 9,
+     "MissileHE": 6
     },
     "delivery": "Bullet",
-    "element": "Tesla",
+    "element": "HE",
     "band": "vehicle",
     "uses": 4,
     "weapons": [
@@ -16341,16 +16299,16 @@
     ]
    },
    {
-    "group": "HitscanTesla_Veh",
-    "family": "(drop: not a damage warhead)",
+    "group": "HitscanKinetic_Veh",
+    "family": "Sniper",
     "status": "proposed",
     "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
+    "why": "exact delivery/element/band match",
     "candidates": {
-     "(drop: not a damage warhead)": 1
+     "Sniper": 2
     },
     "delivery": "Hitscan",
-    "element": "Tesla",
+    "element": "Kinetic",
     "band": "vehicle",
     "uses": 4,
     "weapons": [
@@ -16359,7 +16317,74 @@
     ]
    },
    {
-    "group": "BulletHE_Veh",
+    "group": "MissileFire_Veh",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
+    },
+    "delivery": "Missile",
+    "element": "Fire",
+    "band": "vehicle",
+    "uses": 4,
+    "weapons": [
+     "APSplash",
+     "APSplash2",
+     "APSplashPlus"
+    ]
+   },
+   {
+    "group": "MissileToxin_Inf",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
+    },
+    "delivery": "Missile",
+    "element": "Toxin",
+    "band": "infantry",
+    "uses": 4,
+    "weapons": [
+     "SoldierHE",
+     "SoldierHEAA",
+     "TankHunterWH"
+    ]
+   },
+   {
+    "group": "MissileToxin_Veh",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
+    },
+    "delivery": "Missile",
+    "element": "Toxin",
+    "band": "vehicle",
+    "uses": 4,
+    "weapons": [
+     "AnvilWH",
+     "AnvilWHE",
+     "ChronoMislWH",
+     "FenrirWH"
+    ]
+   },
+   {
+    "group": "BulletHE_Veh_3",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -16376,6 +16401,71 @@
     "uses": 3,
     "weapons": [
      "FlakTWH"
+    ]
+   },
+   {
+    "group": "BulletHE_Veh_4",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "CannonAP": 17,
+     "CannonHE": 12,
+     "CannonNuke": 9,
+     "MissileHE": 6
+    },
+    "delivery": "Bullet",
+    "element": "HE",
+    "band": "vehicle",
+    "uses": 3,
+    "weapons": [
+     "Ace155mmWH",
+     "DamoclesMainWH",
+     "SuperApocMissWH"
+    ]
+   },
+   {
+    "group": "BulletTesla_Veh",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 2",
+    "candidates": {
+     "BulletTesla": 1,
+     "(drop: support power)": 1,
+     "Concussion": 1
+    },
+    "delivery": "Bullet",
+    "element": "Tesla",
+    "band": "vehicle",
+    "uses": 3,
+    "weapons": [
+     "AARaijinWH",
+     "DZapWH",
+     "RaijinWH"
+    ]
+   },
+   {
+    "group": "BulletToxin_Veh",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "Bullet": 28,
+     "CannonAP": 24,
+     "CannonHE": 13,
+     "MissileHE": 10
+    },
+    "delivery": "Bullet",
+    "element": "Toxin",
+    "band": "vehicle",
+    "uses": 3,
+    "weapons": [
+     "SickleMotarWH",
+     "TomaWH",
+     "TsunamiWH"
     ]
    },
    {
@@ -16400,16 +16490,17 @@
     ]
    },
    {
-    "group": "HitscanTesla_Inf_2",
-    "family": "(drop: not a damage warhead)",
+    "group": "HitscanKinetic_Inf_2",
+    "family": "?",
     "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
     "candidates": {
-     "(drop: not a damage warhead)": 1
+     "Arrow": 1,
+     "Sniper": 1
     },
     "delivery": "Hitscan",
-    "element": "Tesla",
+    "element": "Kinetic",
     "band": "infantry",
     "uses": 3,
     "weapons": [
@@ -16418,16 +16509,16 @@
     ]
    },
    {
-    "group": "HitscanTesla_Veh_2",
-    "family": "(drop: not a damage warhead)",
+    "group": "HitscanKinetic_Veh_2",
+    "family": "Sniper",
     "status": "proposed",
     "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
+    "why": "exact delivery/element/band match",
     "candidates": {
-     "(drop: not a damage warhead)": 1
+     "Sniper": 2
     },
     "delivery": "Hitscan",
-    "element": "Tesla",
+    "element": "Kinetic",
     "band": "vehicle",
     "uses": 3,
     "weapons": [
@@ -16436,34 +16527,19 @@
     ]
    },
    {
-    "group": "MissileTesla_Inf",
-    "family": "MissileTesla",
+    "group": "MissileToxin_Inf_2",
+    "family": "?",
     "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
     "candidates": {
-     "MissileTesla": 1
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
     },
     "delivery": "Missile",
-    "element": "Tesla",
-    "band": "infantry",
-    "uses": 3,
-    "weapons": [
-     "SoldierHE",
-     "TankHunterWH"
-    ]
-   },
-   {
-    "group": "MissileTesla_Inf_2",
-    "family": "MissileTesla",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "MissileTesla": 1
-    },
-    "delivery": "Missile",
-    "element": "Tesla",
+    "element": "Toxin",
     "band": "infantry",
     "uses": 3,
     "weapons": [
@@ -16473,25 +16549,7 @@
     ]
    },
    {
-    "group": "MissileTesla_Veh",
-    "family": "MissileTesla",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "MissileTesla": 1
-    },
-    "delivery": "Missile",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 3,
-    "weapons": [
-     "APSplash",
-     "APSplashPlus"
-    ]
-   },
-   {
-    "group": "MissileToxin_Veh",
+    "group": "MissileToxin_Veh_2",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -16507,9 +16565,9 @@
     "band": "vehicle",
     "uses": 3,
     "weapons": [
-     "AnvilWH",
-     "AnvilWHE",
-     "FenrirWH"
+     "HE",
+     "TuskWH",
+     "UlysseWH"
     ]
    },
    {
@@ -16548,6 +16606,27 @@
     ]
    },
    {
+    "group": "BulletHE_Veh_5",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "CannonAP": 17,
+     "CannonHE": 12,
+     "CannonNuke": 9,
+     "MissileHE": 6
+    },
+    "delivery": "Bullet",
+    "element": "HE",
+    "band": "vehicle",
+    "uses": 2,
+    "weapons": [
+     "KatWH",
+     "RadCannonWH"
+    ]
+   },
+   {
     "group": "BulletTesla_Inf",
     "family": "Concussion",
     "status": "proposed",
@@ -16562,26 +16641,6 @@
     "uses": 2,
     "weapons": [
      "FlamethrwWH"
-    ]
-   },
-   {
-    "group": "BulletTesla_Veh_4",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "BulletTesla": 1,
-     "(drop: support power)": 1,
-     "Concussion": 1
-    },
-    "delivery": "Bullet",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 2,
-    "weapons": [
-     "KatWH",
-     "RadCannonWH"
     ]
    },
    {
@@ -16622,7 +16681,44 @@
     ]
    },
    {
-    "group": "HitscanKinetic_Veh",
+    "group": "HitscanKinetic_Inf_3",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Arrow": 1,
+     "Sniper": 1
+    },
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "band": "infantry",
+    "uses": 2,
+    "weapons": [
+     "HollowPointNoBld"
+    ]
+   },
+   {
+    "group": "HitscanKinetic_Inf_4",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Arrow": 1,
+     "Sniper": 1
+    },
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "band": "infantry",
+    "uses": 2,
+    "weapons": [
+     "JapSSA",
+     "OfficerPointWH"
+    ]
+   },
+   {
+    "group": "HitscanKinetic_Veh_3",
     "family": "Sniper",
     "status": "proposed",
     "confidence": "single",
@@ -16639,51 +16735,16 @@
     ]
    },
    {
-    "group": "HitscanTesla_Inf_3",
-    "family": "(drop: not a damage warhead)",
+    "group": "HitscanKinetic_Veh_4",
+    "family": "Sniper",
     "status": "proposed",
     "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
+    "why": "exact delivery/element/band match",
     "candidates": {
-     "(drop: not a damage warhead)": 1
+     "Sniper": 2
     },
     "delivery": "Hitscan",
-    "element": "Tesla",
-    "band": "infantry",
-    "uses": 2,
-    "weapons": [
-     "HollowPointNoBld"
-    ]
-   },
-   {
-    "group": "HitscanTesla_Inf_4",
-    "family": "(drop: not a damage warhead)",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "(drop: not a damage warhead)": 1
-    },
-    "delivery": "Hitscan",
-    "element": "Tesla",
-    "band": "infantry",
-    "uses": 2,
-    "weapons": [
-     "JapSSA",
-     "OfficerPointWH"
-    ]
-   },
-   {
-    "group": "HitscanTesla_Veh_3",
-    "family": "(drop: not a damage warhead)",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "(drop: not a damage warhead)": 1
-    },
-    "delivery": "Hitscan",
-    "element": "Tesla",
+    "element": "Kinetic",
     "band": "vehicle",
     "uses": 2,
     "weapons": [
@@ -16711,6 +16772,26 @@
     ]
    },
    {
+    "group": "MissileFire_Def",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
+    },
+    "delivery": "Missile",
+    "element": "Fire",
+    "band": "defense",
+    "uses": 2,
+    "weapons": [
+     "SAMWH"
+    ]
+   },
+   {
     "group": "MissileHE_Def",
     "family": "?",
     "status": "proposed",
@@ -16730,60 +16811,7 @@
     ]
    },
    {
-    "group": "MissileTesla_Air",
-    "family": "MissileTesla",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "MissileTesla": 1
-    },
-    "delivery": "Missile",
-    "element": "Tesla",
-    "band": "aircraft",
-    "uses": 2,
-    "weapons": [
-     "OrcaHWH",
-     "TestSpectreWH"
-    ]
-   },
-   {
-    "group": "MissileTesla_Def",
-    "family": "MissileTesla",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "MissileTesla": 1
-    },
-    "delivery": "Missile",
-    "element": "Tesla",
-    "band": "defense",
-    "uses": 2,
-    "weapons": [
-     "SAMWH"
-    ]
-   },
-   {
-    "group": "MissileTesla_Veh_2",
-    "family": "MissileTesla",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "MissileTesla": 1
-    },
-    "delivery": "Missile",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 2,
-    "weapons": [
-     "CastelloWH",
-     "ChronoMislWH"
-    ]
-   },
-   {
-    "group": "MissileToxin_Veh_2",
+    "group": "MissileToxin_Air",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -16796,11 +16824,11 @@
     },
     "delivery": "Missile",
     "element": "Toxin",
-    "band": "vehicle",
+    "band": "aircraft",
     "uses": 2,
     "weapons": [
-     "HE",
-     "TuskWH"
+     "OrcaHWH",
+     "TestSpectreWH"
     ]
    },
    {
@@ -16870,24 +16898,25 @@
     "band": "vehicle",
     "uses": 1,
     "weapons": [
-     "BlimpHE"
+     "ShenlongWH1"
     ]
    },
    {
-    "group": "BombTesla_Veh_2",
+    "group": "BombToxin_Veh",
     "family": "Demolition",
     "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
+    "confidence": "majority",
+    "why": "no CA group with this band; matched on 1",
     "candidates": {
-     "Demolition": 2
+     "Demolition": 8,
+     "Nuclear": 1
     },
     "delivery": "Bomb",
-    "element": "Tesla",
+    "element": "Toxin",
     "band": "vehicle",
     "uses": 1,
     "weapons": [
-     "ShenlongWH1"
+     "BlimpHE"
     ]
    },
    {
@@ -16944,7 +16973,24 @@
     ]
    },
    {
-    "group": "BulletHE_Veh_2",
+    "group": "BulletHE_Inf",
+    "family": "Demolition",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Demolition": 2
+    },
+    "delivery": "Bullet",
+    "element": "HE",
+    "band": "infantry",
+    "uses": 1,
+    "weapons": [
+     "NukeGuyWH"
+    ]
+   },
+   {
+    "group": "BulletHE_Veh_10",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -16960,7 +17006,104 @@
     "band": "vehicle",
     "uses": 1,
     "weapons": [
-     "DamoclesMainWH"
+     "UltraAP"
+    ]
+   },
+   {
+    "group": "BulletHE_Veh_6",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "CannonAP": 17,
+     "CannonHE": 12,
+     "CannonNuke": 9,
+     "MissileHE": 6
+    },
+    "delivery": "Bullet",
+    "element": "HE",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
+     "DESTWH"
+    ]
+   },
+   {
+    "group": "BulletHE_Veh_7",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "CannonAP": 17,
+     "CannonHE": 12,
+     "CannonNuke": 9,
+     "MissileHE": 6
+    },
+    "delivery": "Bullet",
+    "element": "HE",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
+     "HoubeiWH"
+    ]
+   },
+   {
+    "group": "BulletHE_Veh_8",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "CannonAP": 17,
+     "CannonHE": 12,
+     "CannonNuke": 9,
+     "MissileHE": 6
+    },
+    "delivery": "Bullet",
+    "element": "HE",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
+     "InfernoWH"
+    ]
+   },
+   {
+    "group": "BulletHE_Veh_9",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "CannonAP": 17,
+     "CannonHE": 12,
+     "CannonNuke": 9,
+     "MissileHE": 6
+    },
+    "delivery": "Bullet",
+    "element": "HE",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
+     "ReaperGrenadeWH"
+    ]
+   },
+   {
+    "group": "BulletKinetic_Veh",
+    "family": "Bullet",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Bullet": 2
+    },
+    "delivery": "Bullet",
+    "element": "Kinetic",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
+     "GattWH"
     ]
    },
    {
@@ -16998,157 +17141,7 @@
     ]
    },
    {
-    "group": "BulletTesla_Inf_2",
-    "family": "Concussion",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Concussion": 1
-    },
-    "delivery": "Bullet",
-    "element": "Tesla",
-    "band": "infantry",
-    "uses": 1,
-    "weapons": [
-     "NukeGuyWH"
-    ]
-   },
-   {
-    "group": "BulletTesla_Veh_10",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "BulletTesla": 1,
-     "(drop: support power)": 1,
-     "Concussion": 1
-    },
-    "delivery": "Bullet",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "TwinMWH"
-    ]
-   },
-   {
-    "group": "BulletTesla_Veh_11",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "BulletTesla": 1,
-     "(drop: support power)": 1,
-     "Concussion": 1
-    },
-    "delivery": "Bullet",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "UltraAP"
-    ]
-   },
-   {
-    "group": "BulletTesla_Veh_5",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "BulletTesla": 1,
-     "(drop: support power)": 1,
-     "Concussion": 1
-    },
-    "delivery": "Bullet",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "DESTWH"
-    ]
-   },
-   {
-    "group": "BulletTesla_Veh_6",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "BulletTesla": 1,
-     "(drop: support power)": 1,
-     "Concussion": 1
-    },
-    "delivery": "Bullet",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "GattWH"
-    ]
-   },
-   {
-    "group": "BulletTesla_Veh_7",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "BulletTesla": 1,
-     "(drop: support power)": 1,
-     "Concussion": 1
-    },
-    "delivery": "Bullet",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "HoubeiWH"
-    ]
-   },
-   {
-    "group": "BulletTesla_Veh_8",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "BulletTesla": 1,
-     "(drop: support power)": 1,
-     "Concussion": 1
-    },
-    "delivery": "Bullet",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "InfernoWH"
-    ]
-   },
-   {
-    "group": "BulletTesla_Veh_9",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "BulletTesla": 1,
-     "(drop: support power)": 1,
-     "Concussion": 1
-    },
-    "delivery": "Bullet",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "ReaperGrenadeWH"
-    ]
-   },
-   {
-    "group": "BulletToxin_Veh",
+    "group": "BulletToxin_Veh_2",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -17164,7 +17157,7 @@
     "band": "vehicle",
     "uses": 1,
     "weapons": [
-     "SickleMotarWH"
+     "TwinMWH"
     ]
    },
    {
@@ -17262,7 +17255,67 @@
     ]
    },
    {
-    "group": "HitscanKinetic_Inf",
+    "group": "HitscanKinetic_Def",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 2",
+    "candidates": {
+     "Sniper": 3,
+     "BulletHE": 2,
+     "Bullet": 1,
+     "Arrow": 1
+    },
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "band": "defense",
+    "uses": 1,
+    "weapons": [
+     "CerberMGWH"
+    ]
+   },
+   {
+    "group": "HitscanKinetic_Def_2",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 2",
+    "candidates": {
+     "Sniper": 3,
+     "BulletHE": 2,
+     "Bullet": 1,
+     "Arrow": 1
+    },
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "band": "defense",
+    "uses": 1,
+    "weapons": [
+     "GladiatorWH"
+    ]
+   },
+   {
+    "group": "HitscanKinetic_Def_3",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 2",
+    "candidates": {
+     "Sniper": 3,
+     "BulletHE": 2,
+     "Bullet": 1,
+     "Arrow": 1
+    },
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "band": "defense",
+    "uses": 1,
+    "weapons": [
+     "PillBoxWH"
+    ]
+   },
+   {
+    "group": "HitscanKinetic_Inf_5",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -17280,7 +17333,61 @@
     ]
    },
    {
-    "group": "HitscanKinetic_Veh_2",
+    "group": "HitscanKinetic_Inf_6",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Arrow": 1,
+     "Sniper": 1
+    },
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "band": "infantry",
+    "uses": 1,
+    "weapons": [
+     "SuperHollowPoint"
+    ]
+   },
+   {
+    "group": "HitscanKinetic_Inf_7",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Arrow": 1,
+     "Sniper": 1
+    },
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "band": "infantry",
+    "uses": 1,
+    "weapons": [
+     "TaHollowPoint"
+    ]
+   },
+   {
+    "group": "HitscanKinetic_Inf_8",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Arrow": 1,
+     "Sniper": 1
+    },
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "band": "infantry",
+    "uses": 1,
+    "weapons": [
+     "WolveWH"
+    ]
+   },
+   {
+    "group": "HitscanKinetic_Veh_5",
     "family": "Sniper",
     "status": "proposed",
     "confidence": "single",
@@ -17294,6 +17401,23 @@
     "uses": 1,
     "weapons": [
      "MagneShakeWH"
+    ]
+   },
+   {
+    "group": "HitscanKinetic_Veh_6",
+    "family": "Sniper",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Sniper": 2
+    },
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
+     "TenguMGWH"
     ]
    },
    {
@@ -17314,142 +17438,6 @@
     "uses": 1,
     "weapons": [
      "RadEruptionWarhead"
-    ]
-   },
-   {
-    "group": "HitscanTesla_Def",
-    "family": "(drop: not a damage warhead)",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "(drop: not a damage warhead)": 1
-    },
-    "delivery": "Hitscan",
-    "element": "Tesla",
-    "band": "defense",
-    "uses": 1,
-    "weapons": [
-     "CerberMGWH"
-    ]
-   },
-   {
-    "group": "HitscanTesla_Def_2",
-    "family": "(drop: not a damage warhead)",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "(drop: not a damage warhead)": 1
-    },
-    "delivery": "Hitscan",
-    "element": "Tesla",
-    "band": "defense",
-    "uses": 1,
-    "weapons": [
-     "GladiatorWH"
-    ]
-   },
-   {
-    "group": "HitscanTesla_Def_3",
-    "family": "(drop: not a damage warhead)",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "(drop: not a damage warhead)": 1
-    },
-    "delivery": "Hitscan",
-    "element": "Tesla",
-    "band": "defense",
-    "uses": 1,
-    "weapons": [
-     "PillBoxWH"
-    ]
-   },
-   {
-    "group": "HitscanTesla_Inf_5",
-    "family": "(drop: not a damage warhead)",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "(drop: not a damage warhead)": 1
-    },
-    "delivery": "Hitscan",
-    "element": "Tesla",
-    "band": "infantry",
-    "uses": 1,
-    "weapons": [
-     "SuperHollowPoint"
-    ]
-   },
-   {
-    "group": "HitscanTesla_Inf_6",
-    "family": "(drop: not a damage warhead)",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "(drop: not a damage warhead)": 1
-    },
-    "delivery": "Hitscan",
-    "element": "Tesla",
-    "band": "infantry",
-    "uses": 1,
-    "weapons": [
-     "TaHollowPoint"
-    ]
-   },
-   {
-    "group": "HitscanTesla_Inf_7",
-    "family": "(drop: not a damage warhead)",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "(drop: not a damage warhead)": 1
-    },
-    "delivery": "Hitscan",
-    "element": "Tesla",
-    "band": "infantry",
-    "uses": 1,
-    "weapons": [
-     "WolveWH"
-    ]
-   },
-   {
-    "group": "HitscanTesla_Veh_4",
-    "family": "(drop: not a damage warhead)",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "(drop: not a damage warhead)": 1
-    },
-    "delivery": "Hitscan",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "AeroWH"
-    ]
-   },
-   {
-    "group": "HitscanTesla_Veh_5",
-    "family": "(drop: not a damage warhead)",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "(drop: not a damage warhead)": 1
-    },
-    "delivery": "Hitscan",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "TenguMGWH"
     ]
    },
    {
@@ -17550,7 +17538,7 @@
     ]
    },
    {
-    "group": "MissileFire_Veh",
+    "group": "MissileFire_Veh_2",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -17566,37 +17554,23 @@
     "band": "vehicle",
     "uses": 1,
     "weapons": [
-     "APSplash2"
+     "CastelloWH"
     ]
    },
    {
-    "group": "MissileTesla_Inf_3",
-    "family": "MissileTesla",
+    "group": "MissileFire_Veh_3",
+    "family": "?",
     "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
     "candidates": {
-     "MissileTesla": 1
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
     },
     "delivery": "Missile",
-    "element": "Tesla",
-    "band": "infantry",
-    "uses": 1,
-    "weapons": [
-     "RedGuardHE"
-    ]
-   },
-   {
-    "group": "MissileTesla_Veh_3",
-    "family": "MissileTesla",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "MissileTesla": 1
-    },
-    "delivery": "Missile",
-    "element": "Tesla",
+    "element": "Fire",
     "band": "vehicle",
     "uses": 1,
     "weapons": [
@@ -17604,24 +17578,7 @@
     ]
    },
    {
-    "group": "MissileTesla_Veh_4",
-    "family": "MissileTesla",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "MissileTesla": 1
-    },
-    "delivery": "Missile",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "UlysseWH"
-    ]
-   },
-   {
-    "group": "MissileToxin_Inf",
+    "group": "MissileToxin_Inf_3",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -17637,7 +17594,7 @@
     "band": "infantry",
     "uses": 1,
     "weapons": [
-     "SoldierHEAA"
+     "RedGuardHE"
     ]
    },
    {
@@ -17715,9 +17672,9 @@
    }
   ],
   "stats": {
-   "inherited, CA split this triple": 13,
-   "needs a human": 33,
-   "inherited cleanly": 37
+   "inherited, CA split this triple": 14,
+   "needs a human": 48,
+   "inherited cleanly": 17
   }
  },
  "ra2_reborn": {
@@ -17747,6 +17704,27 @@
     ]
    },
    {
+    "group": "Hitscan_Veh",
+    "family": "(drop: not a damage warhead)",
+    "status": "proposed",
+    "confidence": "majority",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "(drop: not a damage warhead)": 6,
+     "Bullet": 1,
+     "Quantum": 1
+    },
+    "delivery": "Hitscan",
+    "element": "Plain",
+    "band": "vehicle",
+    "uses": 14,
+    "weapons": [
+     "EMPuls",
+     "LocomotorBeam",
+     "Special"
+    ]
+   },
+   {
     "group": "HitscanKinetic_Veh",
     "family": "Sniper",
     "status": "proposed",
@@ -17761,26 +17739,6 @@
     "uses": 12,
     "weapons": [
      "SA"
-    ]
-   },
-   {
-    "group": "Hitscan_Veh",
-    "family": "(drop: not a damage warhead)",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "(drop: not a damage warhead)": 6,
-     "Bullet": 1,
-     "Quantum": 1
-    },
-    "delivery": "Hitscan",
-    "element": "Plain",
-    "band": "vehicle",
-    "uses": 12,
-    "weapons": [
-     "LocomotorBeam",
-     "Special"
     ]
    },
    {
@@ -18197,24 +18155,6 @@
     ]
    },
    {
-    "group": "HitscanTesla_Veh_2",
-    "family": "(drop: not a damage warhead)",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "(drop: not a damage warhead)": 1
-    },
-    "delivery": "Hitscan",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 3,
-    "weapons": [
-     "EMPuls",
-     "EMWaveWH"
-    ]
-   },
-   {
     "group": "Hitscan_Inf_2",
     "family": "?",
     "status": "proposed",
@@ -18345,6 +18285,25 @@
     "uses": 2,
     "weapons": [
      "PsychGasCreate"
+    ]
+   },
+   {
+    "group": "HitscanHE_Veh_2",
+    "family": "Sniper",
+    "status": "proposed",
+    "confidence": "majority",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Sniper": 2,
+     "Railgun": 1
+    },
+    "delivery": "Hitscan",
+    "element": "HE",
+    "band": "vehicle",
+    "uses": 2,
+    "weapons": [
+     "ChaosWH",
+     "EMWaveWH"
     ]
    },
    {
@@ -18830,24 +18789,6 @@
     ]
    },
    {
-    "group": "HitscanHE_Veh_2",
-    "family": "Sniper",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Sniper": 2,
-     "Railgun": 1
-    },
-    "delivery": "Hitscan",
-    "element": "HE",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "ChaosWH"
-    ]
-   },
-   {
     "group": "HitscanKinetic_Inf_4",
     "family": "?",
     "status": "proposed",
@@ -19285,8 +19226,8 @@
   ],
   "stats": {
    "needs a human": 45,
-   "inherited cleanly": 19,
-   "inherited, CA split this triple": 18
+   "inherited, CA split this triple": 18,
+   "inherited cleanly": 18
   }
  },
  "red_resurrection": {
@@ -19317,16 +19258,19 @@
     ]
    },
    {
-    "group": "MissileTesla_Veh",
-    "family": "MissileTesla",
+    "group": "MissileFire_Veh",
+    "family": "?",
     "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
     "candidates": {
-     "MissileTesla": 1
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
     },
     "delivery": "Missile",
-    "element": "Tesla",
+    "element": "Fire",
     "band": "vehicle",
     "uses": 11,
     "weapons": [
@@ -19335,26 +19279,25 @@
     ]
    },
    {
-    "group": "BulletTesla_Veh",
-    "family": "?",
+    "group": "BulletFire_Veh",
+    "family": "Flame",
     "status": "proposed",
-    "confidence": "split",
-    "why": "no CA group with this band; matched on 2",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
     "candidates": {
-     "BulletTesla": 1,
-     "(drop: support power)": 1,
-     "Concussion": 1
+     "Flame": 1
     },
     "delivery": "Bullet",
-    "element": "Tesla",
+    "element": "Fire",
     "band": "vehicle",
-    "uses": 8,
+    "uses": 10,
     "weapons": [
      "105mmWH",
      "120mmWH",
-     "155mmWH",
      "ATGUNWH",
+     "ApocAP",
      "VandalMM2WH",
+     "VandalMM3WH",
      "VandalMMWH"
     ]
    },
@@ -19423,6 +19366,25 @@
     ]
    },
    {
+    "group": "BulletFire_Veh_2",
+    "family": "Flame",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Flame": 1
+    },
+    "delivery": "Bullet",
+    "element": "Fire",
+    "band": "vehicle",
+    "uses": 5,
+    "weapons": [
+     "CTankAGWH",
+     "DefenderMMWH",
+     "ShogunCannonWH"
+    ]
+   },
+   {
     "group": "Hitscan_Veh_2",
     "family": "(drop: not a damage warhead)",
     "status": "proposed",
@@ -19442,22 +19404,22 @@
     ]
    },
    {
-    "group": "MissileTesla_Veh_2",
-    "family": "MissileTesla",
+    "group": "BombHE_Veh",
+    "family": "Demolition",
     "status": "proposed",
     "confidence": "single",
-    "why": "exact delivery/element/band match",
+    "why": "no CA group with this band; matched on 2",
     "candidates": {
-     "MissileTesla": 1
+     "Demolition": 3
     },
-    "delivery": "Missile",
-    "element": "Tesla",
+    "delivery": "Bomb",
+    "element": "HE",
     "band": "vehicle",
-    "uses": 5,
+    "uses": 4,
     "weapons": [
-     "GooCannonWH",
-     "MammothTuskEWH",
-     "MammothTuskWH"
+     "BlimpBombWH",
+     "CopterScrambleWH",
+     "PerunLightningWH"
     ]
    },
    {
@@ -19481,27 +19443,6 @@
      "BattleBufferWH",
      "NukeCannonWH",
      "WildcatRocketWH"
-    ]
-   },
-   {
-    "group": "BulletTesla_Veh_2",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "BulletTesla": 1,
-     "(drop: support power)": 1,
-     "Concussion": 1
-    },
-    "delivery": "Bullet",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 4,
-    "weapons": [
-     "CTankAGWH",
-     "ScorpMortarWH",
-     "ShogunCannonWH"
     ]
    },
    {
@@ -19560,22 +19501,46 @@
     ]
    },
    {
-    "group": "HitscanTesla_Inf",
-    "family": "(drop: not a damage warhead)",
+    "group": "Hitscan_Inf_4",
+    "family": "?",
     "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
     "candidates": {
-     "(drop: not a damage warhead)": 1
+     "Melee": 6,
+     "Sniper": 4,
+     "(drop: support weapon)": 2,
+     "(drop: targeting relay)": 1
     },
     "delivery": "Hitscan",
-    "element": "Tesla",
+    "element": "Plain",
     "band": "infantry",
     "uses": 4,
     "weapons": [
      "DoublePistolsWH",
      "GhurkaRifleWH",
-     "LegionGunsWH"
+     "VirusWH"
+    ]
+   },
+   {
+    "group": "MissileFire_Veh_2",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
+    },
+    "delivery": "Missile",
+    "element": "Fire",
+    "band": "vehicle",
+    "uses": 4,
+    "weapons": [
+     "MammothTuskEWH",
+     "MammothTuskWH"
     ]
    },
    {
@@ -19601,25 +19566,7 @@
     ]
    },
    {
-    "group": "BombTesla_Veh",
-    "family": "Demolition",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "Demolition": 2
-    },
-    "delivery": "Bomb",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 3,
-    "weapons": [
-     "BlimpBombWH",
-     "PerunLightningWH"
-    ]
-   },
-   {
-    "group": "BulletFire_Veh",
+    "group": "BulletFire_Veh_3",
     "family": "Flame",
     "status": "proposed",
     "confidence": "single",
@@ -19632,30 +19579,12 @@
     "band": "vehicle",
     "uses": 3,
     "weapons": [
-     "ApocAP",
-     "VandalMM3WH"
+     "DecimatorGunsWH",
+     "ScorpMortarWH"
     ]
    },
    {
-    "group": "BulletFire_Veh_2",
-    "family": "Flame",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Flame": 1
-    },
-    "delivery": "Bullet",
-    "element": "Fire",
-    "band": "vehicle",
-    "uses": 3,
-    "weapons": [
-     "ArmaduraCannonWH",
-     "DefenderMMWH"
-    ]
-   },
-   {
-    "group": "BulletTesla_Veh_3",
+    "group": "BulletTesla_Veh",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -19675,16 +19604,19 @@
     ]
    },
    {
-    "group": "HitscanTesla_Inf_2",
-    "family": "(drop: not a damage warhead)",
+    "group": "Hitscan_Inf_5",
+    "family": "?",
     "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
     "candidates": {
-     "(drop: not a damage warhead)": 1
+     "Melee": 6,
+     "Sniper": 4,
+     "(drop: support weapon)": 2,
+     "(drop: targeting relay)": 1
     },
     "delivery": "Hitscan",
-    "element": "Tesla",
+    "element": "Plain",
     "band": "infantry",
     "uses": 3,
     "weapons": [
@@ -19755,34 +19687,19 @@
     ]
    },
    {
-    "group": "MissileTesla_Air",
-    "family": "MissileTesla",
+    "group": "MissileFire_Inf",
+    "family": "?",
     "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
     "candidates": {
-     "MissileTesla": 1
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
     },
     "delivery": "Missile",
-    "element": "Tesla",
-    "band": "aircraft",
-    "uses": 3,
-    "weapons": [
-     "BeagleWH",
-     "MaverickWH"
-    ]
-   },
-   {
-    "group": "MissileTesla_Inf",
-    "family": "MissileTesla",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "MissileTesla": 1
-    },
-    "delivery": "Missile",
-    "element": "Tesla",
+    "element": "Fire",
     "band": "infantry",
     "uses": 3,
     "weapons": [
@@ -19790,16 +19707,19 @@
     ]
    },
    {
-    "group": "MissileTesla_Veh_3",
-    "family": "MissileTesla",
+    "group": "MissileFire_Veh_3",
+    "family": "?",
     "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
     "candidates": {
-     "MissileTesla": 1
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
     },
     "delivery": "Missile",
-    "element": "Tesla",
+    "element": "Fire",
     "band": "vehicle",
     "uses": 3,
     "weapons": [
@@ -19866,6 +19786,23 @@
     ]
    },
    {
+    "group": "BulletFire_Def",
+    "family": "(drop: support power)",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "(drop: support power)": 1
+    },
+    "delivery": "Bullet",
+    "element": "Fire",
+    "band": "defense",
+    "uses": 2,
+    "weapons": [
+     "DepthChargeArtilleryWH"
+    ]
+   },
+   {
     "group": "BulletFire_Inf",
     "family": "Flame",
     "status": "proposed",
@@ -19884,7 +19821,7 @@
     ]
    },
    {
-    "group": "BulletFire_Veh_3",
+    "group": "BulletFire_Veh_4",
     "family": "Flame",
     "status": "proposed",
     "confidence": "single",
@@ -19897,7 +19834,26 @@
     "band": "vehicle",
     "uses": 2,
     "weapons": [
-     "DecimatorGunsWH"
+     "GunboatgunWH"
+    ]
+   },
+   {
+    "group": "BulletHE_Air",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "BulletHE": 4,
+     "Demolition": 3
+    },
+    "delivery": "Bullet",
+    "element": "HE",
+    "band": "aircraft",
+    "uses": 2,
+    "weapons": [
+     "FirebombsWH",
+     "YakBombWH"
     ]
    },
    {
@@ -19936,75 +19892,23 @@
     ]
    },
    {
-    "group": "BulletTesla_Def",
-    "family": "(drop: support power)",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "(drop: support power)": 1
-    },
-    "delivery": "Bullet",
-    "element": "Tesla",
-    "band": "defense",
-    "uses": 2,
-    "weapons": [
-     "DepthChargeArtilleryWH"
-    ]
-   },
-   {
-    "group": "BulletTesla_Inf",
-    "family": "Concussion",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Concussion": 1
-    },
-    "delivery": "Bullet",
-    "element": "Tesla",
-    "band": "infantry",
-    "uses": 2,
-    "weapons": [
-     "BazookaWH",
-     "FlakGuyWH"
-    ]
-   },
-   {
-    "group": "BulletTesla_Inf_2",
-    "family": "Concussion",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Concussion": 1
-    },
-    "delivery": "Bullet",
-    "element": "Tesla",
-    "band": "infantry",
-    "uses": 2,
-    "weapons": [
-     "FlashbangWH",
-     "RikishiGrenadeWH"
-    ]
-   },
-   {
-    "group": "BulletTesla_Veh_4",
+    "group": "HitscanFire_Inf",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
-    "why": "no CA group with this band; matched on 2",
+    "why": "no CA group with this band; matched on 1",
     "candidates": {
-     "BulletTesla": 1,
-     "(drop: support power)": 1,
-     "Concussion": 1
+     "Sniper": 9,
+     "(drop: not a damage warhead)": 8,
+     "Melee": 6,
+     "Bullet": 2
     },
-    "delivery": "Bullet",
-    "element": "Tesla",
-    "band": "vehicle",
+    "delivery": "Hitscan",
+    "element": "Fire",
+    "band": "infantry",
     "uses": 2,
     "weapons": [
-     "GunboatgunWH"
+     "LegionGunsWH"
     ]
    },
    {
@@ -20028,24 +19932,7 @@
     ]
    },
    {
-    "group": "HitscanTesla_Inf_3",
-    "family": "(drop: not a damage warhead)",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "(drop: not a damage warhead)": 1
-    },
-    "delivery": "Hitscan",
-    "element": "Tesla",
-    "band": "infantry",
-    "uses": 2,
-    "weapons": [
-     "AWPWH"
-    ]
-   },
-   {
-    "group": "Hitscan_Inf_4",
+    "group": "Hitscan_Inf_6",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -20065,7 +19952,7 @@
     ]
    },
    {
-    "group": "Hitscan_Inf_5",
+    "group": "Hitscan_Inf_7",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -20081,11 +19968,11 @@
     "band": "infantry",
     "uses": 2,
     "weapons": [
-     "VirusWH"
+     "AWPWH"
     ]
    },
    {
-    "group": "Hitscan_Inf_6",
+    "group": "Hitscan_Inf_8",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -20106,6 +19993,47 @@
     ]
    },
    {
+    "group": "MissileFire_Air",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
+    },
+    "delivery": "Missile",
+    "element": "Fire",
+    "band": "aircraft",
+    "uses": 2,
+    "weapons": [
+     "SwallowBombsWH",
+     "VultureMissileWH"
+    ]
+   },
+   {
+    "group": "MissileFire_Veh_4",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
+    },
+    "delivery": "Missile",
+    "element": "Fire",
+    "band": "vehicle",
+    "uses": 2,
+    "weapons": [
+     "SubTorpedoWH"
+    ]
+   },
+   {
     "group": "MissileHE_Air",
     "family": "MissileAA",
     "status": "proposed",
@@ -20120,7 +20048,7 @@
     "band": "aircraft",
     "uses": 2,
     "weapons": [
-     "ScourgeAntiAirWH"
+     "BeagleWH"
     ]
    },
    {
@@ -20138,25 +20066,26 @@
     "band": "aircraft",
     "uses": 2,
     "weapons": [
-     "J20BombWH",
-     "ValkyrieBombsWH"
+     "ScourgeAntiAirWH"
     ]
    },
    {
-    "group": "MissileTesla_Veh_4",
-    "family": "MissileTesla",
+    "group": "MissileHE_Air_3",
+    "family": "MissileAA",
     "status": "proposed",
-    "confidence": "single",
+    "confidence": "majority",
     "why": "exact delivery/element/band match",
     "candidates": {
-     "MissileTesla": 1
+     "MissileAA": 2,
+     "MissileHE": 1
     },
     "delivery": "Missile",
-    "element": "Tesla",
-    "band": "vehicle",
+    "element": "HE",
+    "band": "aircraft",
     "uses": 2,
     "weapons": [
-     "SubTorpedoWH"
+     "J20BombWH",
+     "ValkyrieBombsWH"
     ]
    },
    {
@@ -20269,23 +20198,6 @@
     ]
    },
    {
-    "group": "BombHE_Veh",
-    "family": "Demolition",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "Demolition": 3
-    },
-    "delivery": "Bomb",
-    "element": "HE",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "CopterScrambleWH"
-    ]
-   },
-   {
     "group": "Bomb_Veh_2",
     "family": "Demolition",
     "status": "proposed",
@@ -20304,7 +20216,92 @@
     ]
    },
    {
-    "group": "BulletFire_Veh_4",
+    "group": "BulletFire_Def_2",
+    "family": "(drop: support power)",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "(drop: support power)": 1
+    },
+    "delivery": "Bullet",
+    "element": "Fire",
+    "band": "defense",
+    "uses": 1,
+    "weapons": [
+     "Pillbox60MMWH"
+    ]
+   },
+   {
+    "group": "BulletFire_Inf_2",
+    "family": "Flame",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Flame": 1
+    },
+    "delivery": "Bullet",
+    "element": "Fire",
+    "band": "infantry",
+    "uses": 1,
+    "weapons": [
+     "FlakGuyWH"
+    ]
+   },
+   {
+    "group": "BulletFire_Inf_3",
+    "family": "Flame",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Flame": 1
+    },
+    "delivery": "Bullet",
+    "element": "Fire",
+    "band": "infantry",
+    "uses": 1,
+    "weapons": [
+     "FlashbangWH"
+    ]
+   },
+   {
+    "group": "BulletFire_Veh_5",
+    "family": "Flame",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Flame": 1
+    },
+    "delivery": "Bullet",
+    "element": "Fire",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
+     "ArmaduraCannonWH"
+    ]
+   },
+   {
+    "group": "BulletFire_Veh_6",
+    "family": "Flame",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Flame": 1
+    },
+    "delivery": "Bullet",
+    "element": "Fire",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
+     "BlitzerGun_S1WH"
+    ]
+   },
+   {
+    "group": "BulletFire_Veh_7",
     "family": "Flame",
     "status": "proposed",
     "confidence": "single",
@@ -20321,7 +20318,24 @@
     ]
    },
    {
-    "group": "BulletHE_Air",
+    "group": "BulletFire_Veh_8",
+    "family": "Flame",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Flame": 1
+    },
+    "delivery": "Bullet",
+    "element": "Fire",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
+     "TrikeMortarWH"
+    ]
+   },
+   {
+    "group": "BulletHE_Air_2",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -20335,7 +20349,7 @@
     "band": "aircraft",
     "uses": 1,
     "weapons": [
-     "YakBombWH"
+     "YakMGWH"
     ]
    },
    {
@@ -20356,7 +20370,58 @@
     ]
    },
    {
+    "group": "BulletHE_Def_3",
+    "family": "CannonAP",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "CannonAP": 4
+    },
+    "delivery": "Bullet",
+    "element": "HE",
+    "band": "defense",
+    "uses": 1,
+    "weapons": [
+     "ConfedBatteryWH"
+    ]
+   },
+   {
     "group": "BulletHE_Inf_2",
+    "family": "Demolition",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Demolition": 2
+    },
+    "delivery": "Bullet",
+    "element": "HE",
+    "band": "infantry",
+    "uses": 1,
+    "weapons": [
+     "BazookaWH"
+    ]
+   },
+   {
+    "group": "BulletHE_Inf_3",
+    "family": "Demolition",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Demolition": 2
+    },
+    "delivery": "Bullet",
+    "element": "HE",
+    "band": "infantry",
+    "uses": 1,
+    "weapons": [
+     "RikishiGrenadeWH"
+    ]
+   },
+   {
+    "group": "BulletHE_Inf_4",
     "family": "Demolition",
     "status": "proposed",
     "confidence": "single",
@@ -20389,7 +20454,7 @@
     "band": "vehicle",
     "uses": 1,
     "weapons": [
-     "CataclysmArtyWH"
+     "155mmWH"
     ]
    },
    {
@@ -20409,7 +20474,7 @@
     "band": "vehicle",
     "uses": 1,
     "weapons": [
-     "PenguinArtilleryWH"
+     "160mmWH"
     ]
    },
    {
@@ -20429,79 +20494,51 @@
     "band": "vehicle",
     "uses": 1,
     "weapons": [
+     "CataclysmArtyWH"
+    ]
+   },
+   {
+    "group": "BulletHE_Veh_5",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "CannonAP": 17,
+     "CannonHE": 12,
+     "CannonNuke": 9,
+     "MissileHE": 6
+    },
+    "delivery": "Bullet",
+    "element": "HE",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
+     "PenguinArtilleryWH"
+    ]
+   },
+   {
+    "group": "BulletHE_Veh_6",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "CannonAP": 17,
+     "CannonHE": 12,
+     "CannonNuke": 9,
+     "MissileHE": 6
+    },
+    "delivery": "Bullet",
+    "element": "HE",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
      "TitoShockShellWH"
     ]
    },
    {
-    "group": "BulletTesla_Air",
-    "family": "BulletTesla",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "BulletTesla": 1
-    },
-    "delivery": "Bullet",
-    "element": "Tesla",
-    "band": "aircraft",
-    "uses": 1,
-    "weapons": [
-     "FirebombsWH"
-    ]
-   },
-   {
-    "group": "BulletTesla_Air_2",
-    "family": "BulletTesla",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "BulletTesla": 1
-    },
-    "delivery": "Bullet",
-    "element": "Tesla",
-    "band": "aircraft",
-    "uses": 1,
-    "weapons": [
-     "YakMGWH"
-    ]
-   },
-   {
-    "group": "BulletTesla_Def_2",
-    "family": "(drop: support power)",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "(drop: support power)": 1
-    },
-    "delivery": "Bullet",
-    "element": "Tesla",
-    "band": "defense",
-    "uses": 1,
-    "weapons": [
-     "ConfedBatteryWH"
-    ]
-   },
-   {
-    "group": "BulletTesla_Def_3",
-    "family": "(drop: support power)",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "(drop: support power)": 1
-    },
-    "delivery": "Bullet",
-    "element": "Tesla",
-    "band": "defense",
-    "uses": 1,
-    "weapons": [
-     "Pillbox60MMWH"
-    ]
-   },
-   {
-    "group": "BulletTesla_Inf_3",
+    "group": "BulletTesla_Inf",
     "family": "Concussion",
     "status": "proposed",
     "confidence": "single",
@@ -20518,26 +20555,7 @@
     ]
    },
    {
-    "group": "BulletTesla_Veh_5",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "BulletTesla": 1,
-     "(drop: support power)": 1,
-     "Concussion": 1
-    },
-    "delivery": "Bullet",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "160mmWH"
-    ]
-   },
-   {
-    "group": "BulletTesla_Veh_6",
+    "group": "BulletTesla_Veh_2",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -20556,26 +20574,7 @@
     ]
    },
    {
-    "group": "BulletTesla_Veh_7",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "BulletTesla": 1,
-     "(drop: support power)": 1,
-     "Concussion": 1
-    },
-    "delivery": "Bullet",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "BlitzerGun_S1WH"
-    ]
-   },
-   {
-    "group": "BulletTesla_Veh_8",
+    "group": "BulletTesla_Veh_3",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -20591,25 +20590,6 @@
     "uses": 1,
     "weapons": [
      "DragonMissileWH"
-    ]
-   },
-   {
-    "group": "BulletTesla_Veh_9",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "BulletTesla": 1,
-     "(drop: support power)": 1,
-     "Concussion": 1
-    },
-    "delivery": "Bullet",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "TrikeMortarWH"
     ]
    },
    {
@@ -20727,7 +20707,7 @@
     ]
    },
    {
-    "group": "HitscanFire_Inf",
+    "group": "HitscanFire_Inf_2",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -20763,7 +20743,7 @@
     "band": "vehicle",
     "uses": 1,
     "weapons": [
-     "DeathWH"
+     "AbramsMMWH"
     ]
    },
    {
@@ -20783,11 +20763,71 @@
     "band": "vehicle",
     "uses": 1,
     "weapons": [
-     "ScorpionWH"
+     "CorkscrewGunWH"
     ]
    },
    {
     "group": "HitscanFire_Veh_4",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "Sniper": 9,
+     "(drop: not a damage warhead)": 8,
+     "Melee": 6,
+     "Bullet": 2
+    },
+    "delivery": "Hitscan",
+    "element": "Fire",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
+     "DeathWH"
+    ]
+   },
+   {
+    "group": "HitscanFire_Veh_5",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "Sniper": 9,
+     "(drop: not a damage warhead)": 8,
+     "Melee": 6,
+     "Bullet": 2
+    },
+    "delivery": "Hitscan",
+    "element": "Fire",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
+     "ScorpionWH"
+    ]
+   },
+   {
+    "group": "HitscanFire_Veh_6",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "Sniper": 9,
+     "(drop: not a damage warhead)": 8,
+     "Melee": 6,
+     "Bullet": 2
+    },
+    "delivery": "Hitscan",
+    "element": "Fire",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
+     "ShogunArtyWH"
+    ]
+   },
+   {
+    "group": "HitscanFire_Veh_7",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -20880,6 +20920,24 @@
    },
    {
     "group": "HitscanHE_Inf_4",
+    "family": "Sniper",
+    "status": "proposed",
+    "confidence": "majority",
+    "why": "no CA group with this band; matched on 2",
+    "candidates": {
+     "Sniper": 2,
+     "Railgun": 1
+    },
+    "delivery": "Hitscan",
+    "element": "HE",
+    "band": "infantry",
+    "uses": 1,
+    "weapons": [
+     "WarcopGunWH"
+    ]
+   },
+   {
+    "group": "HitscanHE_Inf_5",
     "family": "Sniper",
     "status": "proposed",
     "confidence": "majority",
@@ -21005,7 +21063,7 @@
     ]
    },
    {
-    "group": "HitscanTesla_Inf_4",
+    "group": "HitscanTesla_Inf",
     "family": "(drop: not a damage warhead)",
     "status": "proposed",
     "confidence": "single",
@@ -21022,7 +21080,7 @@
     ]
    },
    {
-    "group": "HitscanTesla_Inf_5",
+    "group": "HitscanTesla_Inf_2",
     "family": "(drop: not a damage warhead)",
     "status": "proposed",
     "confidence": "single",
@@ -21039,92 +21097,7 @@
     ]
    },
    {
-    "group": "HitscanTesla_Inf_6",
-    "family": "(drop: not a damage warhead)",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "(drop: not a damage warhead)": 1
-    },
-    "delivery": "Hitscan",
-    "element": "Tesla",
-    "band": "infantry",
-    "uses": 1,
-    "weapons": [
-     "WarcopGunWH"
-    ]
-   },
-   {
     "group": "HitscanTesla_Veh",
-    "family": "(drop: not a damage warhead)",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "(drop: not a damage warhead)": 1
-    },
-    "delivery": "Hitscan",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "AbramsMMWH"
-    ]
-   },
-   {
-    "group": "HitscanTesla_Veh_2",
-    "family": "(drop: not a damage warhead)",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "(drop: not a damage warhead)": 1
-    },
-    "delivery": "Hitscan",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "CorkscrewGunWH"
-    ]
-   },
-   {
-    "group": "HitscanTesla_Veh_3",
-    "family": "(drop: not a damage warhead)",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "(drop: not a damage warhead)": 1
-    },
-    "delivery": "Hitscan",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "DiskWH"
-    ]
-   },
-   {
-    "group": "HitscanTesla_Veh_4",
-    "family": "(drop: not a damage warhead)",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "(drop: not a damage warhead)": 1
-    },
-    "delivery": "Hitscan",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "ShogunArtyWH"
-    ]
-   },
-   {
-    "group": "HitscanTesla_Veh_5",
     "family": "(drop: not a damage warhead)",
     "status": "proposed",
     "confidence": "single",
@@ -21257,6 +21230,26 @@
     "band": "vehicle",
     "uses": 1,
     "weapons": [
+     "DiskWH"
+    ]
+   },
+   {
+    "group": "HitscanToxin_Veh_3",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "Sniper": 9,
+     "(drop: not a damage warhead)": 8,
+     "Melee": 6,
+     "Bullet": 2
+    },
+    "delivery": "Hitscan",
+    "element": "Toxin",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
      "MagneShakeWH"
     ]
    },
@@ -21294,47 +21287,47 @@
     "band": "infantry",
     "uses": 1,
     "weapons": [
-     "TermiGunWH"
-    ]
-   },
-   {
-    "group": "Hitscan_Inf_7",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Melee": 6,
-     "Sniper": 4,
-     "(drop: support weapon)": 2,
-     "(drop: targeting relay)": 1
-    },
-    "delivery": "Hitscan",
-    "element": "Plain",
-    "band": "infantry",
-    "uses": 1,
-    "weapons": [
-     "Battering"
-    ]
-   },
-   {
-    "group": "Hitscan_Inf_8",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Melee": 6,
-     "Sniper": 4,
-     "(drop: support weapon)": 2,
-     "(drop: targeting relay)": 1
-    },
-    "delivery": "Hitscan",
-    "element": "Plain",
-    "band": "infantry",
-    "uses": 1,
-    "weapons": [
      "BorisWH"
+    ]
+   },
+   {
+    "group": "Hitscan_Inf_11",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Melee": 6,
+     "Sniper": 4,
+     "(drop: support weapon)": 2,
+     "(drop: targeting relay)": 1
+    },
+    "delivery": "Hitscan",
+    "element": "Plain",
+    "band": "infantry",
+    "uses": 1,
+    "weapons": [
+     "StallionGunWH"
+    ]
+   },
+   {
+    "group": "Hitscan_Inf_12",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Melee": 6,
+     "Sniper": 4,
+     "(drop: support weapon)": 2,
+     "(drop: targeting relay)": 1
+    },
+    "delivery": "Hitscan",
+    "element": "Plain",
+    "band": "infantry",
+    "uses": 1,
+    "weapons": [
+     "TermiGunWH"
     ]
    },
    {
@@ -21354,7 +21347,7 @@
     "band": "infantry",
     "uses": 1,
     "weapons": [
-     "StallionGunWH"
+     "Battering"
     ]
    },
    {
@@ -21394,26 +21387,6 @@
     "uses": 1,
     "weapons": [
      "SonicZapWH"
-    ]
-   },
-   {
-    "group": "LaserTesla_Def",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Quantum": 18,
-     "LaserPulse": 15,
-     "Laser": 10,
-     "Prism": 4
-    },
-    "delivery": "Laser",
-    "element": "Tesla",
-    "band": "defense",
-    "uses": 1,
-    "weapons": [
-     "PrismWarhead"
     ]
    },
    {
@@ -21477,6 +21450,26 @@
     ]
    },
    {
+    "group": "LaserToxin_Def",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "Quantum": 18,
+     "LaserPulse": 15,
+     "Laser": 10,
+     "Prism": 4
+    },
+    "delivery": "Laser",
+    "element": "Toxin",
+    "band": "defense",
+    "uses": 1,
+    "weapons": [
+     "PrismWarhead"
+    ]
+   },
+   {
     "group": "LaserToxin_Inf",
     "family": "?",
     "status": "proposed",
@@ -21535,7 +21528,7 @@
     ]
    },
    {
-    "group": "MissileFire_Air",
+    "group": "MissileFire_Air_2",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -21551,11 +21544,171 @@
     "band": "aircraft",
     "uses": 1,
     "weapons": [
-     "VultureMissileWH"
+     "MaverickWH"
     ]
    },
    {
-    "group": "MissileFire_Veh",
+    "group": "MissileFire_Air_3",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
+    },
+    "delivery": "Missile",
+    "element": "Fire",
+    "band": "aircraft",
+    "uses": 1,
+    "weapons": [
+     "ValkyrieDamageWH"
+    ]
+   },
+   {
+    "group": "MissileFire_Air_4",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
+    },
+    "delivery": "Missile",
+    "element": "Fire",
+    "band": "aircraft",
+    "uses": 1,
+    "weapons": [
+     "VTOLMissileWH"
+    ]
+   },
+   {
+    "group": "MissileFire_Def",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
+    },
+    "delivery": "Missile",
+    "element": "Fire",
+    "band": "defense",
+    "uses": 1,
+    "weapons": [
+     "SAMWH"
+    ]
+   },
+   {
+    "group": "MissileFire_Def_2",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
+    },
+    "delivery": "Missile",
+    "element": "Fire",
+    "band": "defense",
+    "uses": 1,
+    "weapons": [
+     "TorpedoTubesWeaponWH"
+    ]
+   },
+   {
+    "group": "MissileFire_Inf_2",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
+    },
+    "delivery": "Missile",
+    "element": "Fire",
+    "band": "infantry",
+    "uses": 1,
+    "weapons": [
+     "BazookaAAWH"
+    ]
+   },
+   {
+    "group": "MissileFire_Inf_3",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
+    },
+    "delivery": "Missile",
+    "element": "Fire",
+    "band": "infantry",
+    "uses": 1,
+    "weapons": [
+     "BrutMissilesWH"
+    ]
+   },
+   {
+    "group": "MissileFire_Inf_4",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
+    },
+    "delivery": "Missile",
+    "element": "Fire",
+    "band": "infantry",
+    "uses": 1,
+    "weapons": [
+     "GhurkaRocketWH"
+    ]
+   },
+   {
+    "group": "MissileFire_Inf_5",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
+    },
+    "delivery": "Missile",
+    "element": "Fire",
+    "band": "infantry",
+    "uses": 1,
+    "weapons": [
+     "RangleRocketsWH"
+    ]
+   },
+   {
+    "group": "MissileFire_Veh_5",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -21649,113 +21802,51 @@
     "band": "vehicle",
     "uses": 1,
     "weapons": [
+     "GooCannonWH"
+    ]
+   },
+   {
+    "group": "MissileHE_Veh_4",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "MissileHE": 14,
+     "MissileAP": 11,
+     "MissileAA": 9,
+     "(park: naval)": 2
+    },
+    "delivery": "Missile",
+    "element": "HE",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
      "OverseerMagnetWH"
     ]
    },
    {
-    "group": "MissileTesla_Air_2",
-    "family": "MissileTesla",
+    "group": "MissileHE_Veh_5",
+    "family": "?",
     "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
     "candidates": {
-     "MissileTesla": 1
+     "MissileHE": 14,
+     "MissileAP": 11,
+     "MissileAA": 9,
+     "(park: naval)": 2
     },
     "delivery": "Missile",
-    "element": "Tesla",
-    "band": "aircraft",
+    "element": "HE",
+    "band": "vehicle",
     "uses": 1,
     "weapons": [
-     "SwallowBombsWH"
+     "SquidSplashWH"
     ]
    },
    {
-    "group": "MissileTesla_Air_3",
-    "family": "MissileTesla",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "MissileTesla": 1
-    },
-    "delivery": "Missile",
-    "element": "Tesla",
-    "band": "aircraft",
-    "uses": 1,
-    "weapons": [
-     "ValkyrieDamageWH"
-    ]
-   },
-   {
-    "group": "MissileTesla_Air_4",
-    "family": "MissileTesla",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "MissileTesla": 1
-    },
-    "delivery": "Missile",
-    "element": "Tesla",
-    "band": "aircraft",
-    "uses": 1,
-    "weapons": [
-     "VTOLMissileWH"
-    ]
-   },
-   {
-    "group": "MissileTesla_Def",
-    "family": "MissileTesla",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "MissileTesla": 1
-    },
-    "delivery": "Missile",
-    "element": "Tesla",
-    "band": "defense",
-    "uses": 1,
-    "weapons": [
-     "SAMWH"
-    ]
-   },
-   {
-    "group": "MissileTesla_Def_2",
-    "family": "MissileTesla",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "MissileTesla": 1
-    },
-    "delivery": "Missile",
-    "element": "Tesla",
-    "band": "defense",
-    "uses": 1,
-    "weapons": [
-     "TorpedoTubesWeaponWH"
-    ]
-   },
-   {
-    "group": "MissileTesla_Inf_2",
-    "family": "MissileTesla",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "MissileTesla": 1
-    },
-    "delivery": "Missile",
-    "element": "Tesla",
-    "band": "infantry",
-    "uses": 1,
-    "weapons": [
-     "BazookaAAWH"
-    ]
-   },
-   {
-    "group": "MissileTesla_Inf_3",
+    "group": "MissileTesla_Inf",
     "family": "MissileTesla",
     "status": "proposed",
     "confidence": "single",
@@ -21769,74 +21860,6 @@
     "uses": 1,
     "weapons": [
      "BombDroneWH"
-    ]
-   },
-   {
-    "group": "MissileTesla_Inf_4",
-    "family": "MissileTesla",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "MissileTesla": 1
-    },
-    "delivery": "Missile",
-    "element": "Tesla",
-    "band": "infantry",
-    "uses": 1,
-    "weapons": [
-     "BrutMissilesWH"
-    ]
-   },
-   {
-    "group": "MissileTesla_Inf_5",
-    "family": "MissileTesla",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "MissileTesla": 1
-    },
-    "delivery": "Missile",
-    "element": "Tesla",
-    "band": "infantry",
-    "uses": 1,
-    "weapons": [
-     "GhurkaRocketWH"
-    ]
-   },
-   {
-    "group": "MissileTesla_Inf_6",
-    "family": "MissileTesla",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "MissileTesla": 1
-    },
-    "delivery": "Missile",
-    "element": "Tesla",
-    "band": "infantry",
-    "uses": 1,
-    "weapons": [
-     "RangleRocketsWH"
-    ]
-   },
-   {
-    "group": "MissileTesla_Veh_5",
-    "family": "MissileTesla",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "MissileTesla": 1
-    },
-    "delivery": "Missile",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "SquidSplashWH"
     ]
    },
    {
@@ -21949,42 +21972,6 @@
     ]
    },
    {
-    "group": "RailgunTesla_Inf_2",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Tesla",
-    "band": "infantry",
-    "uses": 1,
-    "weapons": [
-     "InfCannonWH"
-    ]
-   },
-   {
-    "group": "RailgunTesla_Veh",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "CazadorAutocannonWH"
-    ]
-   },
-   {
     "group": "Railgun_Inf",
     "family": "Railgun",
     "status": "proposed",
@@ -22000,6 +21987,42 @@
     "uses": 1,
     "weapons": [
      "HeadhunterGunWH"
+    ]
+   },
+   {
+    "group": "Railgun_Inf_2",
+    "family": "Railgun",
+    "status": "proposed",
+    "confidence": "majority",
+    "why": "no CA group with this band; matched on 2",
+    "candidates": {
+     "Railgun": 2,
+     "BulletHE": 1
+    },
+    "delivery": "Railgun",
+    "element": "Plain",
+    "band": "infantry",
+    "uses": 1,
+    "weapons": [
+     "InfCannonWH"
+    ]
+   },
+   {
+    "group": "Railgun_Veh",
+    "family": "Railgun",
+    "status": "proposed",
+    "confidence": "majority",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Railgun": 2,
+     "BulletHE": 1
+    },
+    "delivery": "Railgun",
+    "element": "Plain",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
+     "CazadorAutocannonWH"
     ]
    },
    {
@@ -22040,9 +22063,9 @@
    }
   ],
   "stats": {
-   "inherited, CA split this triple": 33,
-   "inherited cleanly": 55,
-   "needs a human": 59
+   "inherited, CA split this triple": 35,
+   "needs a human": 79,
+   "inherited cleanly": 34
   }
  },
  "rise_of_the_east": {
@@ -29107,6 +29130,25 @@
     ]
    },
    {
+    "group": "Bullet_Def",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "BulletHE": 1,
+     "Flak": 1
+    },
+    "delivery": "Bullet",
+    "element": "Plain",
+    "band": "defense",
+    "uses": 3,
+    "weapons": [
+     "EMPuls",
+     "FragWHDummy"
+    ]
+   },
+   {
     "group": "HitscanFire_Veh",
     "family": "?",
     "status": "proposed",
@@ -29354,23 +29396,6 @@
     ]
    },
    {
-    "group": "BulletTesla_Def",
-    "family": "(drop: support power)",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "(drop: support power)": 1
-    },
-    "delivery": "Bullet",
-    "element": "Tesla",
-    "band": "defense",
-    "uses": 2,
-    "weapons": [
-     "EMPuls"
-    ]
-   },
-   {
     "group": "BulletToxin_Def_2",
     "family": "?",
     "status": "proposed",
@@ -29591,24 +29616,6 @@
     ]
    },
    {
-    "group": "MissileTesla_Air",
-    "family": "MissileTesla",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "MissileTesla": 1
-    },
-    "delivery": "Missile",
-    "element": "Tesla",
-    "band": "aircraft",
-    "uses": 2,
-    "weapons": [
-     "EMPulsSml",
-     "ProtonEMPWH"
-    ]
-   },
-   {
     "group": "MissileTesla_Veh_2",
     "family": "MissileTesla",
     "status": "proposed",
@@ -29726,6 +29733,27 @@
     ]
    },
    {
+    "group": "Missile_Air",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "MissileAP": 41,
+     "MissileHE": 19,
+     "MissileAA": 17,
+     "Arrow": 6
+    },
+    "delivery": "Missile",
+    "element": "Plain",
+    "band": "aircraft",
+    "uses": 2,
+    "weapons": [
+     "EMPulsSml",
+     "ProtonEMPWH"
+    ]
+   },
+   {
     "group": "Railgun_Inf",
     "family": "Railgun",
     "status": "proposed",
@@ -29780,23 +29808,6 @@
     ]
    },
    {
-    "group": "BulletTesla_Air",
-    "family": "BulletTesla",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "BulletTesla": 1
-    },
-    "delivery": "Bullet",
-    "element": "Tesla",
-    "band": "aircraft",
-    "uses": 1,
-    "weapons": [
-     "ParalyzeBombWH"
-    ]
-   },
-   {
     "group": "BulletTesla_Inf",
     "family": "Concussion",
     "status": "proposed",
@@ -29811,25 +29822,6 @@
     "uses": 1,
     "weapons": [
      "WebMass"
-    ]
-   },
-   {
-    "group": "BulletTesla_Veh",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "BulletTesla": 1,
-     "(drop: support power)": 1,
-     "Concussion": 1
-    },
-    "delivery": "Bullet",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "MobileEMPulse"
     ]
    },
    {
@@ -29873,21 +29865,20 @@
     ]
    },
    {
-    "group": "Bullet_Def",
-    "family": "?",
+    "group": "Bullet_Air",
+    "family": "Bullet",
     "status": "proposed",
-    "confidence": "split",
+    "confidence": "single",
     "why": "exact delivery/element/band match",
     "candidates": {
-     "BulletHE": 1,
-     "Flak": 1
+     "Bullet": 3
     },
     "delivery": "Bullet",
     "element": "Plain",
-    "band": "defense",
+    "band": "aircraft",
     "uses": 1,
     "weapons": [
-     "FragWHDummy"
+     "ParalyzeBombWH"
     ]
    },
    {
@@ -29928,6 +29919,26 @@
    },
    {
     "group": "Bullet_Veh_2",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Bullet": 10,
+     "MissileHE": 4,
+     "CannonAP": 2,
+     "CannonHE": 1
+    },
+    "delivery": "Bullet",
+    "element": "Plain",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
+     "MobileEMPulse"
+    ]
+   },
+   {
+    "group": "Bullet_Veh_3",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -30023,19 +30034,18 @@
     ]
    },
    {
-    "group": "LaserTesla_Inf",
+    "group": "Laser_Inf",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
-    "why": "no CA group with this band; matched on 1",
+    "why": "exact delivery/element/band match",
     "candidates": {
-     "Quantum": 18,
-     "LaserPulse": 15,
-     "Laser": 10,
-     "Prism": 4
+     "LaserPulse": 5,
+     "Quantum": 2,
+     "(drop: not a damage warhead)": 2
     },
     "delivery": "Laser",
-    "element": "Tesla",
+    "element": "Plain",
     "band": "infantry",
     "uses": 1,
     "weapons": [
@@ -30063,7 +30073,7 @@
     ]
    },
    {
-    "group": "Missile_Air",
+    "group": "Missile_Air_2",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -30204,9 +30214,9 @@
    }
   ],
   "stats": {
-   "needs a human": 51,
+   "needs a human": 52,
    "inherited, CA split this triple": 14,
-   "inherited cleanly": 10
+   "inherited cleanly": 8
   }
  }
 }
