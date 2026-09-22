@@ -148,6 +148,7 @@ python tools/reference/compress_warheads.py --all --write # 1,059 groups
 python tools/reference/propagate_families.py --write      # family proposals for 16 sources
 python tools/reference/family_matrix.py --write           # one row per Cameo warhead
 python tools/reference/build_family_page.py               # the reviewable page
+python tools/reference/assignment_store.py                # who is reviewed, and how far
 ```
 
 The full chain takes a few minutes; `--all` compression is the slow part.
@@ -160,7 +161,7 @@ then `build_family_page`.
 
 | path | what | hand-edited? |
 |---|---|---|
-| `docs/reference/warhead_family_assignment.yaml` | the Combined Arms review — groups + per-weapon overrides | **yes, no generator** |
+| `docs/reference/warhead_family_assignment*.yaml` | the reviews — ONE FILE PER SOURCE, keyed by the `source:` field inside it, not by filename. Groups + per-weapon overrides. Load through `assignment_store.py`, never by path | **yes, no generator** |
 | `docs/reference/warhead_groups.json` | compression output, all sources | generated |
 | `docs/reference/warhead_families.json` | one row per Cameo warhead | generated |
 | `docs/reference/warhead_family_proposals.json` | propagated proposals for the other 16 | generated |
@@ -239,9 +240,14 @@ How to actually work a source:
 ⚠ A per-weapon override BEATS its group, and an overridden weapon does not vote for its group in
 any later migration (R41). That is what makes per-weapon records safe across re-clustering.
 
-⚠ `warhead_family_assignment.yaml` holds Combined Arms only. A second source needs either a second
-file or a `source:` key per block — the `source:` field already exists, so the decided layout is a
-glob over `warhead_family_assignment*.yaml` keyed by it.
+⭐ **THE LAYOUT IS DECIDED AND BUILT** (R47): one file per source, globbed as `warhead_family_assignment*.yaml`
+and keyed by the `source:` field inside it rather than by filename — a file can be renamed, a review
+cannot. `assignment_store.py` is the only loader; it also implements override-beats-group precedence
+in one place, which is the rule every consumer previously reimplemented.
+
+⚠ Answering that question surfaced three blockers that would each have wasted a review: the collapse
+stage was OpenRA-only (and the three largest unreviewed sources are INI), `--write` overwrote rather
+than merged, and `family_matrix` was NONDETERMINISTIC. All three are fixed — see R47.
 
 Usage order by group count: `mental_omega` 169, `red_resurrection` 147, `rise_of_the_east` 140,
 `romanovs_vengeance` 100, `shattered_paradise` 90, `ra20xx` 86, `ra2_reborn` 82,

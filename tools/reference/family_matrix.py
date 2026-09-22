@@ -50,12 +50,30 @@ def family_of(weapon: str, group: dict, overrides: dict) -> str:
     return entry["family"] if entry else group["family"]
 
 
+_COLLECTED: dict | None = None
+
+
 def source_rows(source: str) -> dict[str, dict]:
-    """Each weapon's OWN measured row, keyed by weapon name."""
-    spec = next((s for s in wm.OPENRA_SOURCES if s[0] == source), None)
-    if spec is None:
-        raise SystemExit(f"{source} is not an OpenRA source; the INI dialects need their reader")
-    entry = wm.build_matrix(wm.read_openra(spec[2], spec[3]), source)
+    """Each weapon's OWN measured row, keyed by weapon name — for ANY dialect.
+
+    ⚠ THIS USED TO BE OPENRA-ONLY, and that made the collapse stage silently unreachable for
+    most of the corpus: it rebuilt the matrix with `read_openra` and raised *"the INI dialects
+    need their reader"* for everything else. Only 8 of the 17 assignable sources are OpenRA — the
+    other 9 include `mental_omega`, `red_resurrection` and `rise_of_the_east`, the three LARGEST
+    unreviewed sources. A review of any of them would have been real work that nothing could
+    consume, and the wall was one stage downstream of where anyone would have been looking.
+
+    `warhead_matrix.collect()` already builds every dialect uniformly and every entry carries
+    `rows`, so reading from it costs one collect and works everywhere. Cached, because
+    `collapse()` is called per source and the collect reads all twenty.
+    """
+    global _COLLECTED
+    if _COLLECTED is None:
+        _COLLECTED = wm.collect()
+    entry = _COLLECTED.get(source)
+    if entry is None:
+        raise SystemExit(f"{source} is not in the corpus "
+                         f"(have: {', '.join(sorted(_COLLECTED))})")
     return {r["weapon"]: r for r in entry["rows"] if r.get("weapon")}
 
 
@@ -157,9 +175,25 @@ def fill_air_only(families: list[dict], armors: list[str], groups: dict, pooled:
     ground_i = [i for i in range(len(armors)) if i != air_i]
 
     def delivery_of(family: str) -> str:
-        names = {g for _, _, _, _, g in pooled.get(family, [])}
+        """The delivery most of a family's groups use — with a TOTAL ORDER on ties.
+
+        ⛔ THIS FUNCTION USED TO MAKE THE WHOLE TOOL NONDETERMINISTIC. `names` was a set, and
+        `Counter.most_common(1)` breaks a tie by INSERTION order, so a family whose groups split
+        evenly between two deliveries picked its winner from set iteration order — which varies
+        with `PYTHONHASHSEED` from one process to the next. That choice selects the donor POOL a
+        family derives its ground rows from, so two runs over identical inputs produced different
+        committed numbers: profile cells moved ~1% and `derived_ground.donors` gained and lost
+        members (`Cryo`, `BulletTesla`) run to run. Verified by running twice under one seed
+        (identical) and once under another (different).
+
+        Sorting the names fixes the Counter's insertion order, and ranking by (-count, name)
+        gives a total order so a genuine tie resolves alphabetically instead of by luck.
+        """
+        names = sorted({g for _, _, _, _, g in pooled.get(family, [])})
         tally = collections.Counter(groups[n]["delivery"] for n in names if n in groups)
-        return tally.most_common(1)[0][0] if tally else ""
+        if not tally:
+            return ""
+        return min(tally.items(), key=lambda kv: (-kv[1], kv[0]))[0]
 
     donors: dict[str, list] = collections.defaultdict(list)
     for f in families:
@@ -211,8 +245,17 @@ def main() -> int:
     result = collapse(args.source)
     print(report(result))
     if args.write:
-        OUT.write_text(json.dumps({args.source: result}, indent=1), encoding="utf-8")
-        print(f"\nwrote {OUT.relative_to(ROOT)}")
+        # ⚠ MERGE, NEVER OVERWRITE. This used to write `{source: result}` wholesale, which was
+        # correct while exactly one source was reviewed and silently destructive the moment a
+        # second one existed: collapsing `mental_omega` would have deleted the Combined Arms
+        # rows that the weapon generator reads. Keep every source already on disk.
+        existing = {}
+        if OUT.exists():
+            existing = json.loads(OUT.read_text(encoding="utf-8"))
+        existing[args.source] = result
+        OUT.write_text(json.dumps(existing, indent=1), encoding="utf-8")
+        print(f"\nwrote {OUT.relative_to(ROOT)}  "
+              f"({len(existing)} source(s): {', '.join(sorted(existing))})")
     return 0
 
 
