@@ -36,6 +36,13 @@ ts_civ3:
 	Inherits: ^TSCivInfantry
 	Inherits@armed: ^ArmedCivilian
 
+^TSAngryCivilianSpawner:
+	SpawnActorOnDeath@angrycivilian_1:
+		Actor: ts_civ1
+	SpawnActorOnDeath@angrycivilian_2:
+		Actor: ts_civ2
+	SpawnActorOnDeath@angrycivilian_3:
+		Actor: ts_civ3
 ##############################################
 #   Tiberian Sun Civilian Cars
 ##############################################
@@ -260,6 +267,7 @@ ts_bus_driveby:
 tscity01:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA23x3Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: City Block
 	RenderSprites:
@@ -268,6 +276,7 @@ tscity01:
 tscity02:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA23x3Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: City Block
 	RenderSprites:
@@ -276,6 +285,7 @@ tscity02:
 tscity03:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA23x3Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: City Block
 	RenderSprites:
@@ -284,6 +294,7 @@ tscity03:
 tscity04:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA23x3Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: City Block
 	RenderSprites:
@@ -292,6 +303,7 @@ tscity04:
 tscity05:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA23x3Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: City Block
 	RenderSprites:
@@ -300,6 +312,7 @@ tscity05:
 tscity06:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA23x3Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: City Block
 	RenderSprites:
@@ -308,6 +321,7 @@ tscity06:
 tscity07:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA23x3Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: City Block
 	RenderSprites:
@@ -316,6 +330,7 @@ tscity07:
 tscity08:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA22x2Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: Small Building
 	RenderSprites:
@@ -324,6 +339,7 @@ tscity08:
 tscity09:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA22x2Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: Small City Block
 	RenderSprites:
@@ -332,6 +348,7 @@ tscity09:
 tscity10:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA22x2Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: Small City Block
 	RenderSprites:
@@ -340,6 +357,7 @@ tscity10:
 tscity11:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA23x3Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: City Block
 	RenderSprites:
@@ -348,6 +366,7 @@ tscity11:
 tscity12:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA22x2Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: City Block
 	RenderSprites:
@@ -356,6 +375,7 @@ tscity12:
 tscity13:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA22x2Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: City Block
 	RenderSprites:
@@ -364,6 +384,7 @@ tscity13:
 tscity14:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA22x2Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: City Block
 	RenderSprites:
@@ -372,6 +393,7 @@ tscity14:
 tscity15:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA23x3Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: Warehouse
 	RenderSprites:
@@ -380,6 +402,7 @@ tscity15:
 tscity16:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA23x3Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: City Block
 	RenderSprites:
@@ -388,6 +411,7 @@ tscity16:
 tscity17:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA24x3Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: Large City Block
 	RenderSprites:
@@ -396,6 +420,7 @@ tscity17:
 tscity18:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA24x3Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: Large City Block
 	RenderSprites:
@@ -404,6 +429,7 @@ tscity18:
 tscity19:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA22x2Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: Gas Station
 	RenderSprites:
@@ -412,6 +438,7 @@ tscity19:
 tscity22:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA22x2Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: Church
 	RenderSprites:
@@ -420,6 +447,7 @@ tscity22:
 tsct0001:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA23x3Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: Rural Storage
 	RenderSprites:
@@ -428,6 +456,7 @@ tsct0001:
 tsct0002:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA22x2Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: Rural Storage
 	RenderSprites:
@@ -436,6 +465,7 @@ tsct0002:
 tsct0003:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA22x2Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: Rural Storage
 	RenderSprites:
@@ -444,6 +474,7 @@ tsct0003:
 tsct0004:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA22x2Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: Rural Storage
 	RenderSprites:
@@ -452,6 +483,7 @@ tsct0004:
 tsct0005:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA22x2Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: Rural Storage
 	RenderSprites:
@@ -460,6 +492,7 @@ tsct0005:
 tsct0006:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA22x2Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: Rural Storage
 	RenderSprites:
@@ -468,6 +501,7 @@ tsct0006:
 tsct0007:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA22x2Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: Rural Storage
 	RenderSprites:
@@ -476,6 +510,7 @@ tsct0007:
 tsct0008:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA22x2Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: Rural Shelter
 	RenderSprites:
@@ -484,6 +519,7 @@ tsct0008:
 tsct0009:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA22x2Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: Rural Shelter
 	RenderSprites:
@@ -492,6 +528,7 @@ tsct0009:
 tsct0010:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA23x3Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: Rural Shelter
 	RenderSprites:
@@ -500,6 +537,7 @@ tsct0010:
 tsct0012:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA23x3Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: Rural Cabin
 	RenderSprites:
@@ -508,6 +546,7 @@ tsct0012:
 tsct0014:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA21x1Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: Rural Bunker
 	RenderSprites:
@@ -516,6 +555,7 @@ tsct0014:
 tsct0015:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA21x1Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: Rural Structure
 	RenderSprites:
@@ -524,6 +564,7 @@ tsct0015:
 tsct0016:
 	Inherits: ^RA2CivBuilding
 	Inherits@2x2: ^RA21x1Garrison
+	Inherits@Angry: ^TSAngryCivilianSpawner
 	Tooltip:
 		Name: Rural Structure
 	RenderSprites:

@@ -4078,7 +4078,7 @@
 		RequiresBaseProvider: true
 		BuildSounds: constru2.aud, hvydoor1.aud, placbldg.aud, build5.aud
 		UndeploySounds: cashturn.aud
-		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune
+		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,ClearInterior,Road,Concrete,ClearDune
 	RequiresBuildableArea:
 		AreaTypes: building
 		Adjacent: 3
@@ -4240,6 +4240,27 @@
 	Targetable@destroyed:
 		TargetTypes: TechHusk
 		RequiresCondition: damaged
+	SpawnActorOnDeath@angrycivilian_1:
+		Probability: 25
+		Actor: c1
+		OwnerType: InternalName
+		InternalOwner: Creeps
+		RequiresCondition: !loaded
+		RequiresLobbyCreeps: true
+	SpawnActorOnDeath@angrycivilian_2:
+		Probability: 25
+		Actor: c2
+		OwnerType: InternalName
+		InternalOwner: Creeps
+		RequiresCondition: !loaded
+		RequiresLobbyCreeps: true
+	SpawnActorOnDeath@angrycivilian_3:
+		Probability: 25
+		Actor: c3
+		OwnerType: InternalName
+		InternalOwner: Creeps
+		RequiresCondition: !loaded
+		RequiresLobbyCreeps: true
 
 ^CivBuildingHusk:
 	Inherits@1: ^SpriteActor
@@ -4702,7 +4723,7 @@
 	HiddenUnderShroud:
 	ScriptTriggers:
 	MapEditorData:
-		RequireTilesets: DESERT
+		RequireTilesets: DESERT, CAMEO
 		Categories: Decoration
 	RequiresSpecificOwners:
 		ValidOwnerNames: Neutral
