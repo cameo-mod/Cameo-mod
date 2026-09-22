@@ -14,8 +14,8 @@ weapons, 3,026 lines, loaded globally at `mod.yaml` Weapons: index 35):
 - Resolved every actor in the merged ruleset (`miniyaml.Ruleset`, no hand-parsing)
   and walked every field value for weapon-name references; resolved every weapon's
   `Inherits` chain for weapon→weapon references.
-- Result for the legacy file: **23 live-referenced** weapons, **5 cross-theme**
-  (consumed by `Core/yaml` Player powers or `StarCraft/Zerg`), **~78 unreferenced**
+- Result for the legacy file: **23 live-referenced** weapons, **5 classified
+  "cross-theme" — WRONG, see correction below** — **~78 unreferenced**
   (o* OpenRA-era duplicates + `d2k_*` specials; all 363 `.oramap` archives scanned
   clean; the dormant commented-out `rules/dune2.yaml`/`weapons/dune2.yaml` still name
   `oDeviatorMissile`/`oSound`).
@@ -39,11 +39,20 @@ Re-homed existing cross-pack weapons into Shared: `OrniGun`, `Sound`, `HMG`
 - Boot-gate: `perf.log` ends `MenuPostProcessEffect.PostWorldLoaded`; zero new
   `exception-*.log`.
 
-**Still needs a ruling / belongs to later phases:** the 5 cross-theme weapons
-(`D2K_155mm` is used by StarCraft `BehemothShoot`/`GuardianShoot`; `DeathHand`,
-`oDeathHand`, `PulseMissile`, `ixian_airdrone` are Core `Player` power weapons) and
-the ~76-weapon unreferenced inventory in `d2k.yaml` (unused-file audit phase per
-docs/MIGRATION.md). `sequences/d2k.yaml` is a separate migration not started here.
+**Correction (same branch, commit fdaa2e2fc):** the "5 cross-theme" call was a
+substring-grep false positive. Re-verified on the resolved ruleset:
+`D2K_155mm` is D2k-only (atreides_minotaurus/siegetank, corrino_siegetank,
+siege_tank) → Shared; `PulseMissile` (ixian_supercomputer support power) and
+`ixian_airdrone` (ixian actors) → Ixian — the `Player` hits were AI
+bot-module name lists in `ai/ai.yaml`, not weapon fields; `DeathHand` and
+`oDeathHand` have zero live referencers (deathhand power commented out
+everywhere). **After fdaa2e2fc `d2k.yaml` contains ONLY ~78 unreferenced
+weapons** — every live D2k weapon lives in its owning pack; no design ruling
+was needed. Resolved dump re-verified identical; boot-gate re-run PASS.
+
+**Still belongs to later phases:** the ~78-weapon unreferenced inventory in
+`d2k.yaml` (unused-file audit phase per docs/MIGRATION.md).
+`sequences/d2k.yaml` is a separate migration not started here.
 `Sound2` exists as two byte-identical copies in the Atreides and Ordos packs
 (unreferenced; flagged for dedup review).
 
