@@ -2214,6 +2214,30 @@ not repeatedly.
 
 Crashes and player-visible regressions jump everything below.
 
+### ⭐ LIVE LANE — warhead/armour reference averaging (Claude Opus 5, 2026-09-22)
+
+**On branch `claude/warhead_reference_R39_R53`, NOT on master.** 24 commits, every one boot-gated.
+It is pushed and safe; it is NOT merged, and the reason is recorded under "the merge block" below.
+
+Read [`design/REFERENCE_EXTRACTION_PLAN.md`](design/REFERENCE_EXTRACTION_PLAN.md) **R39-R53** (the
+binding rulings) then [`design/WARHEAD_REFERENCE_HANDOFF.md`](design/WARHEAD_REFERENCE_HANDOFF.md)
+(lane state and the per-source procedure). Coverage prints from
+`python tools/reference/assignment_store.py`.
+
+State: **4 of 17 sources assigned, 995 weapons of 2,194.** Combined Arms is maintainer-REVIEWED;
+Mental Omega, Red Resurrection and Rise of the East are `proposed` first passes awaiting review.
+
+⛔ **THE MERGE BLOCK IS NOT TECHNICAL.** This branch is 305 behind `master` and its own remote has
+moved 307 commits ahead. A pull cannot be done from this working tree, because the tree holds
+SIX uncommitted files belonging to another contributor (`.claude/settings.json`,
+`tools/hooks/bash_guard.py`, four `tools/rename/rename_map_*.yaml`) and the incoming commits touch
+all of them. Merging would either refuse or destroy that work, which rule 6 forbids. **Whoever
+owns those files must commit or stash them first**; then this branch rebases onto master normally.
+
+⚠ Two extractor fixes in here (R48, R50, R51) changed the measured corpus, so anything downstream
+of `warhead_groups.json` computed before 2026-09-22 is stale.
+
+
 ### 3.A — MULTI-AGENT COORDINATION (read this FIRST if you are an AI agent)
 
 **As of 2026-08-25, there are 5 Devin AI agents running locally.** Each agent MUST:
