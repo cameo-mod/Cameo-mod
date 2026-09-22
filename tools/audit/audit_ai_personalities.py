@@ -19,6 +19,8 @@ AI_PATH = ROOT / "mods" / "cameo" / "ai" / "ai.yaml"
 CONTROLLER_PATH = ROOT / "OpenRA.Mods.Cameo" / "Traits" / "BotPersonalityController.cs"
 PERSONALITIES = ("rush", "turtle", "tech", "expansion", "steamroller")
 CONDITIONS = {f"personality-{name}" for name in PERSONALITIES}
+DIFFICULTIES = ("easiest", "veryeasy", "easy", "medium", "hard", "veryhard", "brutal", "challenger", "unbeatable", "god")
+REACTION_DELAYS = (7500, 6750, 6000, 5250, 4500, 3750, 3000, 2250, 1500, 750)
 TUNING_FIELDS = {
     "MinimumAttackForceDelay",
     "SquadSize",
@@ -138,6 +140,20 @@ def main() -> int:
     if not source_conditions or len(source_conditions) != len(set(source_conditions)) or set(source_conditions) != CONDITIONS:
         failures.append(f"controller conditions {sorted(set(source_conditions))} != {sorted(CONDITIONS)}")
 
+    bot_limits = [
+        match.group(1)
+        for line in lines
+        if (match := re.match(r"^\tBotLimits@([^:]+):$", line))
+    ]
+    if bot_limits != list(DIFFICULTIES):
+        failures.append(f"BotLimits difficulty order {bot_limits} != {list(DIFFICULTIES)}")
+    for name, expected_delay in zip(bot_limits, REACTION_DELAYS):
+        block = lines_for_block(lines, f"BotLimits@{name}")
+        fields = field_blocks(block)
+        expected = f"PersonalityReactionDelay: {expected_delay}"
+        if fields.get("PersonalityReactionDelay", "").strip() != expected:
+            failures.append(f"{name} has incorrect PersonalityReactionDelay")
+
     blocks = {
         name: lines_for_block(lines, f"SquadManagerBotModuleCA@{name}")
         for name in PERSONALITIES
@@ -210,6 +226,7 @@ def main() -> int:
     print(f"- Consumed conditions: `{', '.join(sorted(consumed))}`")
     print(f"- Personality blocks: {len([block for block in blocks.values() if block])}/5")
     print(f"- Personality notifications: {len(notification_names)}/5")
+    print(f"- BotLimits reaction delays: `{', '.join(str(delay) for delay in REACTION_DELAYS)}`")
     print(f"- Explicit tuning allow-list: `{', '.join(sorted(TUNING_FIELDS))}`")
     print()
     if failures:

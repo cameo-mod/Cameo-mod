@@ -918,8 +918,10 @@ On hard and above it issues `SetBotPersonality` at the decision cadence; the syn
 `BotPersonalityController` validates the order, ignores repeats, and owns the sole condition token.
 `ScoutBotModule` remains a later owner of explicitly allocated scouting tasks after contact memory
 and the visibility gate (§11.3), not a current capability. Reading an unsynced personality field
-from simulation code is forbidden. Lower tiers keep switching disabled through
-`AllowPersonalitySwitching: false`, preserving the fixed random personality fallback.
+from simulation code is forbidden. `PersonalityReactionDelay` controls how long
+a candidate must persist before switching; the ten difficulty tiers range from
+7500 ticks on easiest to 750 on cameogod in 750-tick steps, while a negative
+value preserves the fixed random personality fallback.
 
 ```text
 Current synced world / rule data
@@ -1063,7 +1065,7 @@ the one that needs a tuning pass on everything before it.
 | Personality thrash | §4.5 hold time + momentum + slow cadence; and every switch costs an order (10.4) |
 | Desync from learning | §6.1 tiers; learned data is read at load or never touches synced state |
 | Learned weights overfitted to bot-vs-bot play | §8.4 distribution shift; priors stay small and are reviewed as balance data |
-| Losing today's behaviour on a bad phase | degradation rule in 10.1; `AllowPersonalitySwitching: false` remains the fallback |
+| Losing today's behaviour on a bad phase | degradation rule in 10.1; set `PersonalityReactionDelay` negative to disable switching |
 | Tuning invalidated by the fog switch | fog is phase 6, and phases 1-5 are labelled pre-fog rather than pretending otherwise |
 | Stale reference to a personality-gated module after a switch | §1.6; CN shipped this bug and documented it — every such reference is re-resolved whenever the cached instance is not enabled |
 | A borrowed detection threshold that never fires | §11.4; detection thresholds are fitted from phase-2 logs, only the hysteresis constants are imported |

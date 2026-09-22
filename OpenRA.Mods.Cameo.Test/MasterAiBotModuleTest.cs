@@ -201,6 +201,8 @@ namespace OpenRA.Mods.Cameo.Test
 				PreviousKillsCost = 2250,
 				CurrentUrgency = BotUrgency.Emergency,
 				LastPersonalitySwitchTick = 4321,
+				PersonalityCandidateSince = 4100,
+				PersonalityCandidate = "turtle",
 				EmergencyPersonalityHandled = true,
 				LossSamples = new[] { (4100, 250), (4250, 350) },
 				KillSamples = new[] { (4200, 125), (4300, 125) },
@@ -220,6 +222,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(restored.PreviousKillsCost, Is.EqualTo(2250));
 			Assert.That(restored.CurrentUrgency, Is.EqualTo(BotUrgency.Emergency));
 			Assert.That(restored.LastPersonalitySwitchTick, Is.EqualTo(4321));
+			Assert.That(restored.PersonalityCandidateSince, Is.EqualTo(4100));
+			Assert.That(restored.PersonalityCandidate, Is.EqualTo("turtle"));
 			Assert.That(restored.EmergencyPersonalityHandled, Is.True);
 			Assert.That(restored.LossSamples, Is.EqualTo(original.LossSamples));
 			Assert.That(restored.KillSamples, Is.EqualTo(original.KillSamples));
@@ -351,37 +355,65 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(info.Conditions.Any(c => BotPersonalityController.PersonalityName(c, info.PersonalityPrefix) == "guerrilla"), Is.False);
 		}
 
-		[TestCase("rush", "turtle", 1000, 1000 + 2999, false, true, false)]
-		[TestCase("rush", "turtle", 1000, 1000 + 3000, false, true, true)]
-		[TestCase("rush", "turtle", 1000, 1000 + 1, true, true, true)]
-		[TestCase("rush", "turtle", 1000, 1000 + 3000, false, false, false)]
-		public void PersonalitySwitchPolicyRespectsHoldAndDifficulty(string current, string candidate, int lastSwitchTick,
-			int tick, bool emergencyTransition, bool allowSwitching, bool expected)
+		[TestCase("rush", "turtle", 1000, 1000 + 2999, false, 3000, 1000, false)]
+		[TestCase("rush", "turtle", 1001, 1000 + 3000, false, 3000, 1000, false)]
+		[TestCase("rush", "turtle", 1000, 1000 + 3000, false, 3000, 1000, true)]
+		[TestCase("rush", "turtle", 1000, 1000 + 1, true, 7500, 1000, true)]
+		[TestCase("rush", "turtle", 1000, 1000 + 3000, false, -1, 1000, false)]
+		[TestCase("rush", "", 1000, 1000 + 3000, false, 3000, 1000, false)]
+		[TestCase("rush", "rush", 1000, 1000 + 3000, false, 3000, 1000, false)]
+		public void PersonalitySwitchPolicyRespectsReactionDelayAndHold(string current, string candidate, int lastSwitchTick,
+			int tick, bool emergencyTransition, int reactionDelay, int candidateSince, bool expected)
 		{
 			Assert.That(MasterAiBotModule.ShouldSwitchPersonality(current, candidate, lastSwitchTick, tick,
-				emergencyTransition, allowSwitching, new MasterAiBotModuleInfo()), Is.EqualTo(expected));
+				emergencyTransition, reactionDelay, candidateSince, new MasterAiBotModuleInfo()), Is.EqualTo(expected));
+		}
+
+		[Test]
+		public void SustainedCandidateSinceTracksCandidateEpisodes()
+		{
+			Assert.That(MasterAiBotModule.SustainedCandidateSince("rush", "rush", 1000, 1500), Is.EqualTo(1000));
+			Assert.That(MasterAiBotModule.SustainedCandidateSince("turtle", "rush", 1000, 1500), Is.EqualTo(1500));
+			Assert.That(MasterAiBotModule.SustainedCandidateSince("", "rush", 1000, 1500), Is.EqualTo(1500));
 		}
 
 		[Test]
 		public void EmergencyPersonalitySwitchLatchesPerEpisode()
 		{
+			var info = new MasterAiBotModuleInfo();
 			var handled = false;
 			var switches = 0;
-			foreach (var urgency in new[] { BotUrgency.Emergency, BotUrgency.Emergency, BotUrgency.Emergency })
-				if (MasterAiBotModule.ShouldEvaluatePersonality(false, urgency, handled))
+			var lastSwitchTick = 1000;
+			for (var i = 0; i < 3; i++)
+			{
+				var urgency = BotUrgency.Emergency;
+				var tick = 1000 + i * 150;
+				var emergencyTransition = urgency == BotUrgency.Emergency && !handled;
+				if (MasterAiBotModule.ShouldSwitchPersonality("rush", "turtle", lastSwitchTick, tick,
+					emergencyTransition, 7500, 1000, info))
 				{
 					switches++;
+					lastSwitchTick = tick;
 					handled = true;
 				}
+			}
 
 			Assert.That(switches, Is.EqualTo(1));
 			handled = false;
-			if (MasterAiBotModule.ShouldEvaluatePersonality(false, BotUrgency.Emergency, handled))
+			var recoveryUrgency = BotUrgency.Emergency;
+			var recoveryEmergencyTransition = recoveryUrgency == BotUrgency.Emergency && !handled;
+			if (MasterAiBotModule.ShouldSwitchPersonality("rush", "turtle", lastSwitchTick, 1450,
+				recoveryEmergencyTransition, 7500, 1000, info))
 				switches++;
 
 			Assert.That(switches, Is.EqualTo(2));
-			Assert.That(MasterAiBotModule.ShouldEvaluatePersonality(false, BotUrgency.Normal, handled), Is.False);
-			Assert.That(MasterAiBotModule.ShouldEvaluatePersonality(true, BotUrgency.Normal, handled), Is.True);
+		}
+
+		[Test]
+		public void PersonalityReactionDelayUsesThirtySecondTierSteps()
+		{
+			var delays = Enumerable.Range(0, 10).Select(i => 7500 - i * 750).ToArray();
+			Assert.That(delays, Is.EqualTo(new[] { 7500, 6750, 6000, 5250, 4500, 3750, 3000, 2250, 1500, 750 }));
 		}
 
 		[Test]

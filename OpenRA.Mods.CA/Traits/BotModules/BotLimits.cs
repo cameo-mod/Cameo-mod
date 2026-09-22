@@ -32,7 +32,8 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Prioritize the first barracks before the first refinery for configured factions.")]
 		public readonly bool PrioritizeBarracksBeforeRefinery = false;
 
-		public readonly bool AllowPersonalitySwitching = false;
+		[Desc("Ticks the same personality candidate must persist before this difficulty switches to it. Negative disables switching.")]
+		public readonly int PersonalityReactionDelay = 7500;
 
 		public override object Create(ActorInitializer init) { return new BotLimits(init.Self, this); }
 	}

@@ -68,6 +68,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public int PreviousKillsCost;
 		public BotUrgency CurrentUrgency;
 		public int LastPersonalitySwitchTick;
+		public int PersonalityCandidateSince;
+		public string PersonalityCandidate = "";
 		public bool EmergencyPersonalityHandled;
 		public (int Tick, int Delta)[] LossSamples = Array.Empty<(int, int)>();
 		public (int Tick, int Delta)[] KillSamples = Array.Empty<(int, int)>();
@@ -106,6 +108,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public readonly int RushMaxEnemyDefenceCount = 2;
 		public readonly int EliminationBuildingSaturation = 8;
 		public readonly int PersonalityHoldTicks = 3000;
+		[Desc("Fallback reaction delay in ticks when the bot player has no enabled BotLimits. Negative disables switching.")]
+		public readonly int DefaultPersonalityReactionDelay = 7500;
 
 		public override object Create(ActorInitializer init) { return new MasterAiBotModule(init.Self, this); }
 	}
@@ -130,6 +134,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		bool costCountersInitialized;
 		BotUrgency currentUrgency;
 		int lastPersonalitySwitchTick;
+		int personalityCandidateSince;
+		string sustainedCandidate = "";
 		bool emergencyPersonalityHandled;
 
 		public BotSituation Situation { get; private set; }
@@ -216,30 +222,30 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var currentPersonality = CurrentPersonality();
 			var personalityCandidate = UnfilteredCandidatePersonality(urgency, targetProfile, ownArmy,
 				profiles.Values, currentPersonality, Info);
-			var personalityDecision = ShouldEvaluatePersonality(decision, urgency, emergencyPersonalityHandled);
-			if (personalityDecision)
+			var availablePersonalities = AvailablePersonalities();
+			var candidatePersonality = CandidatePersonality(urgency, targetProfile, ownArmy,
+				profiles.Values, currentPersonality, availablePersonalities, Info);
+			incumbentPersonality = candidatePersonality;
+			personalityCandidateSince = SustainedCandidateSince(candidatePersonality, sustainedCandidate,
+				personalityCandidateSince, tick);
+			sustainedCandidate = candidatePersonality;
+
+			var emergencyTransition = urgency == BotUrgency.Emergency && !emergencyPersonalityHandled;
+			var botLimits = player.PlayerActor.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
+			var reactionDelay = botLimits?.Info.PersonalityReactionDelay ?? Info.DefaultPersonalityReactionDelay;
+			if (ShouldSwitchPersonality(currentPersonality, candidatePersonality, lastPersonalitySwitchTick, tick,
+				emergencyTransition, reactionDelay, personalityCandidateSince, Info))
 			{
-				var availablePersonalities = AvailablePersonalities();
-				var candidatePersonality = CandidatePersonality(urgency, targetProfile, ownArmy,
-					profiles.Values, currentPersonality, availablePersonalities, Info);
-				incumbentPersonality = candidatePersonality;
-
-				var botLimits = player.PlayerActor.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
-				if (ShouldSwitchPersonality(currentPersonality, candidatePersonality, lastPersonalitySwitchTick, tick,
-					urgency == BotUrgency.Emergency && !emergencyPersonalityHandled,
-					botLimits?.Info.AllowPersonalitySwitching ?? false, Info))
+				bot.QueueOrder(new Order("SetBotPersonality", player.PlayerActor, false)
 				{
-					bot.QueueOrder(new Order("SetBotPersonality", player.PlayerActor, false)
-					{
-						TargetString = candidatePersonality,
-						SuppressVisualFeedback = true
-					});
-					lastPersonalitySwitchTick = tick;
-				}
-
-				if (urgency == BotUrgency.Emergency)
-					emergencyPersonalityHandled = true;
+					TargetString = candidatePersonality,
+					SuppressVisualFeedback = true
+				});
+				lastPersonalitySwitchTick = tick;
 			}
+
+			if (emergencyTransition)
+				emergencyPersonalityHandled = true;
 
 			if (decision)
 				lastDecisionTick = tick;
@@ -416,18 +422,23 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return ClampScore(profile.Score + profile.Score * bonus / 1000);
 		}
 
-		internal static bool ShouldSwitchPersonality(string current, string candidate, int lastSwitchTick, int tick,
-			bool emergencyTransition, bool allowSwitching, MasterAiBotModuleInfo info)
+		internal static int SustainedCandidateSince(string candidate, string previousCandidate,
+			int previousSince, int tick)
 		{
-			if (!allowSwitching || string.IsNullOrEmpty(candidate) || candidate == current)
-				return false;
-
-			return emergencyTransition || tick - lastSwitchTick >= info.PersonalityHoldTicks;
+			return string.IsNullOrEmpty(candidate) || candidate != previousCandidate ? tick : previousSince;
 		}
 
-		internal static bool ShouldEvaluatePersonality(bool decision, BotUrgency urgency, bool handled)
+		internal static bool ShouldSwitchPersonality(string current, string candidate, int lastSwitchTick, int tick,
+			bool emergencyTransition, int reactionDelayTicks, int candidateSince, MasterAiBotModuleInfo info)
 		{
-			return decision || urgency == BotUrgency.Emergency && !handled;
+			if (string.IsNullOrEmpty(candidate) || candidate == current)
+				return false;
+			if (emergencyTransition)
+				return true;
+			if (reactionDelayTicks < 0)
+				return false;
+			return tick - candidateSince >= reactionDelayTicks &&
+				tick - lastSwitchTick >= info.PersonalityHoldTicks;
 		}
 
 		internal static int Saturate(int x, int k)
@@ -560,6 +571,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				PreviousKillsCost = previousKillsCost,
 				CurrentUrgency = currentUrgency,
 				LastPersonalitySwitchTick = lastPersonalitySwitchTick,
+				PersonalityCandidateSince = personalityCandidateSince,
+				PersonalityCandidate = sustainedCandidate,
 				EmergencyPersonalityHandled = emergencyPersonalityHandled,
 				LossSamples = lossSamples.ToArray(),
 				KillSamples = killSamples.ToArray(),
@@ -579,6 +592,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			previousKillsCost = state.PreviousKillsCost;
 			currentUrgency = state.CurrentUrgency;
 			lastPersonalitySwitchTick = state.LastPersonalitySwitchTick;
+			personalityCandidateSince = state.PersonalityCandidateSince;
+			sustainedCandidate = state.PersonalityCandidate;
 			emergencyPersonalityHandled = state.EmergencyPersonalityHandled;
 
 			lossSamples.Clear();
@@ -608,6 +623,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				new("PreviousKillsCost", FieldSaver.FormatValue(state.PreviousKillsCost)),
 				new("CurrentUrgency", FieldSaver.FormatValue(state.CurrentUrgency)),
 				new("LastPersonalitySwitchTick", FieldSaver.FormatValue(state.LastPersonalitySwitchTick)),
+				new("PersonalityCandidateSince", FieldSaver.FormatValue(state.PersonalityCandidateSince)),
+				new("PersonalityCandidate", FieldSaver.FormatValue(state.PersonalityCandidate)),
 				new("EmergencyPersonalityHandled", FieldSaver.FormatValue(state.EmergencyPersonalityHandled)),
 				new("LossSamples", "", state.LossSamples.Select(SampleNode).ToList()),
 				new("KillSamples", "", state.KillSamples.Select(SampleNode).ToList()),
@@ -630,6 +647,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				state.CurrentUrgency = FieldLoader.GetValue<BotUrgency>("CurrentUrgency", urgencyNode.Value);
 			if (nodes.TryGetValue("LastPersonalitySwitchTick", out var switchNode))
 				state.LastPersonalitySwitchTick = FieldLoader.GetValue<int>("LastPersonalitySwitchTick", switchNode.Value);
+			if (nodes.TryGetValue("PersonalityCandidateSince", out var candidateSinceNode))
+				state.PersonalityCandidateSince = FieldLoader.GetValue<int>("PersonalityCandidateSince", candidateSinceNode.Value);
+			if (nodes.TryGetValue("PersonalityCandidate", out var candidateNode))
+				state.PersonalityCandidate = FieldLoader.GetValue<string>("PersonalityCandidate", candidateNode.Value);
 			if (nodes.TryGetValue("EmergencyPersonalityHandled", out var handledNode))
 				state.EmergencyPersonalityHandled = FieldLoader.GetValue<bool>("EmergencyPersonalityHandled", handledNode.Value);
 
