@@ -1,6 +1,6 @@
 # audit_faction_leaks — cross-faction leaks (B1)
 
-Factions checked: **31** — L1 leaks: **453**, L3 concrete-inherit leaks: **20**, shared/unattributed buildables: **91**
+Factions checked: **31** — L1 leaks: **449**, L3 concrete-inherit leaks: **20**, shared/unattributed buildables: **91**
 
 
 ## L1 — buildable in faction X but owned by faction Y
@@ -306,16 +306,12 @@ Factions checked: **31** — L1 leaks: **453**, L3 concrete-inherit leaks: **20*
 | ordos | atreides_fremen | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/infantry.yaml |
 | ordos | atreides_ornithopter | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/aircraft.yaml |
 | ordos | atreides_palace | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/buildings.yaml |
-| ordos | harkonnen_advancedcarryall | d2k/harkonnen | mods/cameo/ContentPacks/D2k/Harkonnen/yaml/aircraft.yaml |
-| ordos | harkonnen_gunship | d2k/harkonnen | mods/cameo/ContentPacks/D2k/Harkonnen/yaml/aircraft.yaml |
 | ixian | atreides_advancedcarryall | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/aircraft.yaml |
 | ixian | atreides_fremen | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/infantry.yaml |
 | ixian | atreides_missiletank | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/vehicles.yaml |
 | ixian | atreides_ornithopter | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/aircraft.yaml |
 | ixian | atreides_palace | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/buildings.yaml |
 | ixian | corrino_missiletank | d2k/corrino | mods/cameo/ContentPacks/D2k/Corrino/yaml/vehicles.yaml |
-| ixian | harkonnen_advancedcarryall | d2k/harkonnen | mods/cameo/ContentPacks/D2k/Harkonnen/yaml/aircraft.yaml |
-| ixian | harkonnen_gunship | d2k/harkonnen | mods/cameo/ContentPacks/D2k/Harkonnen/yaml/aircraft.yaml |
 | harkonnen | atreides_advancedcarryall | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/aircraft.yaml |
 | harkonnen | atreides_fremen | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/infantry.yaml |
 | harkonnen | atreides_missiletank | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/vehicles.yaml |

@@ -16,14 +16,14 @@ A repair is ONLY a legacy Int32 wrap independent of SharedVersus. The `runtime u
 
 | weapon | warhead | legacy Int32 units | wide legacy units | runtime units |
 |---|---|---:|---:|---:|
-| `DalekCannon` | `Railgun_HeavyFlatCompatibility` | -6474 | 15000 | 15000 |
-| `DalekCannon_elite` | `Railgun_HeavyFlatCompatibility` | 8525 | 30000 | 30000 |
+| `DalekCannon` | `Railgun_Heavy_Flat` | -6474 | 15000 | 15000 |
+| `DalekCannon_elite` | `Railgun_Heavy_Flat` | 8525 | 30000 | 30000 |
 | `ExecutionerSword` | `Melee_Medium` | 8525 | 30000 | 30000 |
 | `Hakureiring2` | `Magic_Heavy` | -9474 | 12000 | 12000 |
 | `OIHakureiring2` | `Magic_Heavy` | -9474 | 12000 | 12000 |
 | `TSLocustBombChem` | `Chemical_Heavy` | -7974 | 13500 | 13500 |
 | `d2kStormLasher` | `Storm_Heavy` | -6474 | 15000 | 15000 |
-| `sandmarinemortar` | `Demolition_HeavyFlatCompatibility` | -9474 | 12000 | 12000 |
+| `sandmarinemortar` | `Demolition_Heavy_Flat` | -9474 | 12000 | 12000 |
 
 ## Shared-mode inventory
 

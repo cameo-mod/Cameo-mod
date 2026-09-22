@@ -1,6 +1,6 @@
 # audit_orphans — dead content (B10)
 
-Live weapons: **2969** — orphans: **390**, dangling weapon refs (BLOCKING): **0**, conditions granted-never-consumed: **16**
+Live weapons: **2977** — orphans: **395**, dangling weapon refs (BLOCKING): **0**, conditions granted-never-consumed: **16**
 
 
 ## O2 — dangling weapon references (crash-on-use class)
@@ -168,6 +168,7 @@ _none found_
 | MammothTankCannon | mods/cameo/weapons/tiberiansun.yaml |
 | MammothTuskGal | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
 | MammothTuskTesla | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |
+| MammothTuskTeslaFragment1Ground | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |
 | MammothTuskThermobaric | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |
 | MutAPRifle | mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml |
 | MutAPRifle_elite | mods/cameo/weapons/tiberiansun.yaml |
@@ -214,6 +215,8 @@ _none found_
 | RA2FLAKAG | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml |
 | RA2FLOATER | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml |
 | RA2GIRockets | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml |
+| RA2GattlingMG3 | mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml |
+| RA2GattlingMG3_AA | mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml |
 | RA2IMP | mods/cameo/weapons/weapons.yaml |
 | RA2IMPAA | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml |
 | RA2KirovHowitzerSplash | mods/cameo/weapons/redalert2mod.yaml |
@@ -390,6 +393,8 @@ _none found_
 | ra120mmirak | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
 | ra1_allies_alliedsniper | mods/cameo/weapons/tiberiandawn.yaml |
 | ra1_soviets_heavyteslatank_ttankzap2 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |
+| ra1_soviets_mortarsoldier_siegemortar | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |
+| ra1_soviets_mortarsoldier_siegemortarthermobaric | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |
 | ragal120mm | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
 | supernova_missile_super | mods/cameo/weapons/outpost2.yaml |
 | td_gdi_guardtower_highv_base | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml |

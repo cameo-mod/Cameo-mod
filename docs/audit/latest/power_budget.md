@@ -1,6 +1,6 @@
 # audit_power_budget — worst-case stacked multipliers (R2)
 
-Units above the 2.0× effective-power budget: **823**
+Units above the 2.0× effective-power budget: **825**
 
 
 ## Breaches (damage× × surv× = power×), largest first
@@ -801,10 +801,12 @@ Units above the 2.0× effective-power budget: **823**
 | harkonnen | combat_tank.harkonnen | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | harkonnen | corrino_missiletank | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | harkonnen | harkonnen_adp | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| harkonnen | harkonnen_assaulttank | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | harkonnen | harkonnen_buzzsaw | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | harkonnen | harkonnen_flametank | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | harkonnen | harkonnen_inkvine | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | harkonnen | harkonnen_lightinfantry | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| harkonnen | harkonnen_rockettank | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | harkonnen | harkonnen_rockettrooper | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | harkonnen | harkonnen_sardaukar | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | harkonnen | light_inf | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |

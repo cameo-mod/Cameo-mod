@@ -1,4 +1,5 @@
-# audit_duplicate_inherits — 1876 actor(s)/template(s) reach a parent through more than one path
+_clean_ — no node reaches the same parent twice on one chain (actors and weapons).
+# audit_duplicate_inherits — 1956 actor(s)/template(s) reach a parent through more than one path
 
 A10Carrier:
   parent ^^ ^externalconditions  (2 paths)
@@ -12087,6 +12088,11 @@ harkonnen_adp:
     -> harkonnen_adp -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> harkonnen_adp -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
+harkonnen_assaulttank:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> harkonnen_assaulttank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> harkonnen_assaulttank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
 harkonnen_autogunturret:
   parent ^^ ^basebuilding  (2 paths)
     -> harkonnen_autogunturret -> ^d2kdefense -> ^defense -> Inherits:^BaseBuilding
@@ -12561,6 +12567,11 @@ harkonnen_repairpad:
   parent ^^ ^disabledoverlay  (2 paths)
     -> harkonnen_repairpad -> ^d2kbuilding -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
     -> harkonnen_repairpad -> ^repairfacility -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+
+harkonnen_rockettank:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> harkonnen_rockettank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> harkonnen_rockettank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 harkonnen_rocketturret:
   parent ^^ ^basebuilding  (2 paths)
@@ -15064,6 +15075,136 @@ japan_zerofighter_slave:
   parent ^^ ^wc2humansinvisibilitystatus  (2 paths)
     -> japan_zerofighter_slave -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
     -> japan_zerofighter_slave -> ^bombertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+
+junv01:
+  parent ^^ ^shroudable  (2 paths)
+    -> junv01 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> junv01 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> junv01 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> junv01 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> junv01 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> junv01 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+junv02:
+  parent ^^ ^shroudable  (2 paths)
+    -> junv02 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> junv02 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> junv02 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> junv02 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> junv02 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> junv02 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+junv03:
+  parent ^^ ^shroudable  (2 paths)
+    -> junv03 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> junv03 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> junv03 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> junv03 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> junv03 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> junv03 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+junv04:
+  parent ^^ ^shroudable  (2 paths)
+    -> junv04 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> junv04 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> junv04 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> junv04 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> junv04 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> junv04 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+junv05:
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> junv05 -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> junv05 -> ^2x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^shroudable  (2 paths)
+    -> junv05 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> junv05 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> junv05 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> junv05 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> junv05 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> junv05 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+junv06:
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> junv06 -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> junv06 -> ^2x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^shroudable  (2 paths)
+    -> junv06 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> junv06 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> junv06 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> junv06 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> junv06 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> junv06 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+junv07:
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> junv07 -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> junv07 -> ^2x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^shroudable  (2 paths)
+    -> junv07 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> junv07 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> junv07 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> junv07 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> junv07 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> junv07 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+junv08:
+  parent ^^ ^shroudable  (2 paths)
+    -> junv08 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> junv08 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> junv08 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> junv08 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> junv08 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> junv08 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+junv09:
+  parent ^^ ^shroudable  (2 paths)
+    -> junv09 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> junv09 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> junv09 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> junv09 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> junv09 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> junv09 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+junv10:
+  parent ^^ ^shroudable  (2 paths)
+    -> junv10 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> junv10 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> junv10 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> junv10 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> junv10 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> junv10 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+junv11:
+  parent ^^ ^shroudable  (2 paths)
+    -> junv11 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> junv11 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> junv11 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> junv11 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> junv11 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> junv11 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 kami.asian:
   parent ^^ ^externalconditions  (2 paths)
@@ -21061,6 +21202,33 @@ ra1_allies_chronotank:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_allies_chronotank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_allies_chronotank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^vehiclebuffs  (2 paths)
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^tankbuffs -> Inherits@VehicleBuffs:^VehicleBuffs
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> Inherits@VehicleBuffs:^VehicleBuffs
+  parent ^^ ^globalbuffs  (2 paths)
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^tankbuffs -> ^vehiclebuffs -> Inherits@GlobalBuffs:^GlobalBuffs
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^vehiclebuffs -> Inherits@GlobalBuffs:^GlobalBuffs
+  parent ^^ ^gpssatellitesupport  (2 paths)
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^tankbuffs -> ^vehiclebuffs -> ^globalbuffs -> Inherits:^GPSSatelliteSupport
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^vehiclebuffs -> ^globalbuffs -> Inherits:^GPSSatelliteSupport
+  parent ^^ ^wayofthedragon  (2 paths)
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^tankbuffs -> ^vehiclebuffs -> ^globalbuffs -> Inherits@2:^WayOfTheDragon
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^vehiclebuffs -> ^globalbuffs -> Inherits@2:^WayOfTheDragon
+  parent ^^ ^helium3teamupgrademobile  (2 paths)
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^tankbuffs -> ^vehiclebuffs -> Inherits@Helium3TeamUpgradeMobile:^Helium3TeamUpgradeMobile
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^vehiclebuffs -> Inherits@Helium3TeamUpgradeMobile:^Helium3TeamUpgradeMobile
+  parent ^^ ^nanotechrepairs  (2 paths)
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^tankbuffs -> ^vehiclebuffs -> Inherits:^NanoTechRepairs
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^vehiclebuffs -> Inherits:^NanoTechRepairs
+  parent ^^ ^modernfirecontrolsystems  (2 paths)
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^tankbuffs -> ^vehiclebuffs -> Inherits@ModernFireControlSystems:^ModernFireControlSystems
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^vehiclebuffs -> Inherits@ModernFireControlSystems:^ModernFireControlSystems
+  parent ^^ ^blitzkrieg  (2 paths)
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^tankbuffs -> ^vehiclebuffs -> Inherits@Blitzkrieg:^Blitzkrieg
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^vehiclebuffs -> Inherits@Blitzkrieg:^Blitzkrieg
+  parent ^^ ^tiberiumadaptability  (2 paths)
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^tankbuffs -> ^vehiclebuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
+    -> ra1_allies_chronotank -> ^firesupporttemplate -> ^vehiclebuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
 
 ra1_allies_cruiser:
   parent ^^ ^acceptscloakcrate  (2 paths)
@@ -31353,6 +31521,158 @@ sietch_creep_disabled:
     -> sietch_creep_disabled -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
     -> sietch_creep_disabled -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
 
+snov01:
+  parent ^^ ^shroudable  (2 paths)
+    -> snov01 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> snov01 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> snov01 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> snov01 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> snov01 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> snov01 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+snov02:
+  parent ^^ ^shroudable  (2 paths)
+    -> snov02 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> snov02 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> snov02 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> snov02 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> snov02 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> snov02 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+snov03:
+  parent ^^ ^shroudable  (2 paths)
+    -> snov03 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> snov03 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> snov03 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> snov03 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> snov03 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> snov03 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+snov04:
+  parent ^^ ^shroudable  (2 paths)
+    -> snov04 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> snov04 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> snov04 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> snov04 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> snov04 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> snov04 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+snov05:
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> snov05 -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> snov05 -> ^2x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^shroudable  (2 paths)
+    -> snov05 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> snov05 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> snov05 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> snov05 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> snov05 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> snov05 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+snov06:
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> snov06 -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> snov06 -> ^2x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^shroudable  (2 paths)
+    -> snov06 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> snov06 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> snov06 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> snov06 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> snov06 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> snov06 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+snov07:
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> snov07 -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> snov07 -> ^2x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^shroudable  (2 paths)
+    -> snov07 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> snov07 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> snov07 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> snov07 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> snov07 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> snov07 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+snov08:
+  parent ^^ ^shroudable  (2 paths)
+    -> snov08 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> snov08 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> snov08 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> snov08 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> snov08 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> snov08 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+snov09:
+  parent ^^ ^shroudable  (2 paths)
+    -> snov09 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> snov09 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> snov09 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> snov09 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> snov09 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> snov09 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+snov10:
+  parent ^^ ^shroudable  (2 paths)
+    -> snov10 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> snov10 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> snov10 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> snov10 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> snov10 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> snov10 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+snov11:
+  parent ^^ ^shroudable  (2 paths)
+    -> snov11 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> snov11 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> snov11 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> snov11 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> snov11 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> snov11 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+snov12:
+  parent ^^ ^shroudable  (2 paths)
+    -> snov12 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> snov12 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> snov12 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> snov12 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> snov12 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> snov12 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+snov13:
+  parent ^^ ^shroudable  (2 paths)
+    -> snov13 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> snov13 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> snov13 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> snov13 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> snov13 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> snov13 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
 steelconsortium_antiairquantummissileturret:
   parent ^^ ^globalbounty  (2 paths)
     -> steelconsortium_antiairquantummissileturret -> ^ra2defense -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
@@ -32457,7 +32777,7 @@ td_gdi_apc:
     -> td_gdi_apc -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> td_gdi_apc -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
   parent ^^ ^lightweightarmorplating  (2 paths)
-    -> td_gdi_apc -> ^supportvehicletemplate -> Inherits@upgrade:^LightWeightArmorPlating
+    -> td_gdi_apc -> ^armedtrooptransporttemplate -> ^supportvehicletemplate -> Inherits@upgrade:^LightWeightArmorPlating
     -> td_gdi_apc -> Inherits@LightWeightArmorPlating:^LightWeightArmorPlating
 
 td_gdi_archerartillery:
@@ -38979,6 +39299,47 @@ trooper:
     -> trooper -> ^d2kinfantry -> ^d2kpersonalshield -> Inherits@IxianTechnology:^D2K_AdvancedIxianTechnology
     -> trooper -> ^d2kpersonalshield -> Inherits@IxianTechnology:^D2K_AdvancedIxianTechnology
 
+ts_bus:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_bus -> ^civilianvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_bus -> ^civilianvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+ts_bus_demo:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_bus_demo -> ^civiliansuicidevehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_bus_demo -> ^civiliansuicidevehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> ts_bus_demo -> ^civiliansuicidevehicle -> Inherits@EMP:^FrontalEMP
+    -> ts_bus_demo -> Inherits@EMP:^FrontalEMP
+
+ts_bus_driveby:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_bus_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_bus_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> ts_bus_driveby -> ^civiliandrivebyvehicle -> Inherits@EMP:^FrontalEMP
+    -> ts_bus_driveby -> Inherits@EMP:^FrontalEMP
+
+ts_ctpyr01:
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ts_ctpyr01 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ts_ctpyr01 -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+ts_ctpyr02:
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ts_ctpyr02 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ts_ctpyr02 -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+ts_ctpyr03:
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ts_ctpyr03 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ts_ctpyr03 -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+ts_ctvega:
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> ts_ctvega -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ts_ctvega -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
 ts_gdi_amphibiousapc:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ts_gdi_amphibiousapc -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
@@ -41957,10 +42318,264 @@ ts_nod_warfactory:
     -> ts_nod_warfactory -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
     -> ts_nod_warfactory -> ^isweaponfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
+ts_pickup:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_pickup -> ^civilianvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_pickup -> ^civilianvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+ts_pickup_demo:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_pickup_demo -> ^civiliansuicidevehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_pickup_demo -> ^civiliansuicidevehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> ts_pickup_demo -> ^civiliansuicidevehicle -> Inherits@EMP:^FrontalEMP
+    -> ts_pickup_demo -> Inherits@EMP:^FrontalEMP
+
+ts_pickup_driveby:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_pickup_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_pickup_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> ts_pickup_driveby -> ^civiliandrivebyvehicle -> Inherits@EMP:^FrontalEMP
+    -> ts_pickup_driveby -> Inherits@EMP:^FrontalEMP
+
+ts_pickupb:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_pickupb -> ^civilianvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_pickupb -> ^civilianvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+ts_pickupb_demo:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_pickupb_demo -> ^civiliansuicidevehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_pickupb_demo -> ^civiliansuicidevehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> ts_pickupb_demo -> ^civiliansuicidevehicle -> Inherits@EMP:^FrontalEMP
+    -> ts_pickupb_demo -> Inherits@EMP:^FrontalEMP
+
+ts_pickupb_driveby:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_pickupb_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_pickupb_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> ts_pickupb_driveby -> ^civiliandrivebyvehicle -> Inherits@EMP:^FrontalEMP
+    -> ts_pickupb_driveby -> Inherits@EMP:^FrontalEMP
+
+ts_sedan:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_sedan -> ^civilianvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_sedan -> ^civilianvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+ts_sedan_demo:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_sedan_demo -> ^civiliansuicidevehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_sedan_demo -> ^civiliansuicidevehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> ts_sedan_demo -> ^civiliansuicidevehicle -> Inherits@EMP:^FrontalEMP
+    -> ts_sedan_demo -> Inherits@EMP:^FrontalEMP
+
+ts_sedan_driveby:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_sedan_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_sedan_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> ts_sedan_driveby -> ^civiliandrivebyvehicle -> Inherits@EMP:^FrontalEMP
+    -> ts_sedan_driveby -> Inherits@EMP:^FrontalEMP
+
+ts_trucka:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_trucka -> ^civilianvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_trucka -> ^civilianvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+ts_trucka_demo:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_trucka_demo -> ^civiliansuicidevehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_trucka_demo -> ^civiliansuicidevehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> ts_trucka_demo -> ^civiliansuicidevehicle -> Inherits@EMP:^FrontalEMP
+    -> ts_trucka_demo -> Inherits@EMP:^FrontalEMP
+
+ts_trucka_driveby:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_trucka_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_trucka_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> ts_trucka_driveby -> ^civiliandrivebyvehicle -> Inherits@EMP:^FrontalEMP
+    -> ts_trucka_driveby -> Inherits@EMP:^FrontalEMP
+
+ts_truckb:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_truckb -> ^civilianvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_truckb -> ^civilianvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+ts_truckb_demo:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_truckb_demo -> ^civiliansuicidevehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_truckb_demo -> ^civiliansuicidevehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> ts_truckb_demo -> ^civiliansuicidevehicle -> Inherits@EMP:^FrontalEMP
+    -> ts_truckb_demo -> Inherits@EMP:^FrontalEMP
+
+ts_truckb_driveby:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_truckb_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_truckb_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> ts_truckb_driveby -> ^civiliandrivebyvehicle -> Inherits@EMP:^FrontalEMP
+    -> ts_truckb_driveby -> Inherits@EMP:^FrontalEMP
+
+ts_wini:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_wini -> ^civilianvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_wini -> ^civilianvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+ts_wini_demo:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_wini_demo -> ^civiliansuicidevehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_wini_demo -> ^civiliansuicidevehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> ts_wini_demo -> ^civiliansuicidevehicle -> Inherits@EMP:^FrontalEMP
+    -> ts_wini_demo -> Inherits@EMP:^FrontalEMP
+
+ts_wini_driveby:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> ts_wini_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ts_wini_driveby -> ^civiliandrivebyvehicle -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^frontalemp  (2 paths)
+    -> ts_wini_driveby -> ^civiliandrivebyvehicle -> Inherits@EMP:^FrontalEMP
+    -> ts_wini_driveby -> Inherits@EMP:^FrontalEMP
+
 tsaegis:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> tsaegis -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> tsaegis -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+tsbboard01:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard01 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard01 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard01 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard01 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard02:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard02 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard02 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard02 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard02 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard03:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard03 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard03 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard03 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard03 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard04:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard04 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard04 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard04 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard04 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard05:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard05 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard05 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard05 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard05 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard06:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard06 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard06 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard06 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard06 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard07:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard07 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard07 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard07 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard07 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard08:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard08 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard08 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard08 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard08 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard09:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard09 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard09 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard09 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard09 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard10:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard10 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard10 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard10 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard10 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard11:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard11 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard11 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard11 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard11 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard12:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard12 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard12 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard12 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard12 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard13:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard13 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard13 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard13 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard13 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard14:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard14 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard14 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard14 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard14 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard15:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard15 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard15 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard15 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard15 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+tsbboard16:
+  parent ^^ ^1x1shape  (2 paths)
+    -> tsbboard16 -> ^ra2civprop -> ^building -> Inherits@shape:^1x1Shape
+    -> tsbboard16 -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> tsbboard16 -> ^ra2civprop -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> tsbboard16 -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
 tscity01:
   parent ^^ ^shielddomeshapevisual  (2 paths)
@@ -49478,6 +50093,158 @@ wc2_orcs_zuljin_elite:
     -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
     -> wc2_orcs_zuljin_elite -> ^wc2infantry -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
     -> wc2_orcs_zuljin_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+
+winv01:
+  parent ^^ ^shroudable  (2 paths)
+    -> winv01 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> winv01 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> winv01 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> winv01 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> winv01 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> winv01 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+winv02:
+  parent ^^ ^shroudable  (2 paths)
+    -> winv02 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> winv02 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> winv02 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> winv02 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> winv02 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> winv02 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+winv03:
+  parent ^^ ^shroudable  (2 paths)
+    -> winv03 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> winv03 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> winv03 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> winv03 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> winv03 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> winv03 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+winv04:
+  parent ^^ ^shroudable  (2 paths)
+    -> winv04 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> winv04 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> winv04 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> winv04 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> winv04 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> winv04 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+winv05:
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> winv05 -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> winv05 -> ^2x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^shroudable  (2 paths)
+    -> winv05 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> winv05 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> winv05 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> winv05 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> winv05 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> winv05 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+winv06:
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> winv06 -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> winv06 -> ^2x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^shroudable  (2 paths)
+    -> winv06 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> winv06 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> winv06 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> winv06 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> winv06 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> winv06 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+winv07:
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> winv07 -> ^civbuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> winv07 -> ^2x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^shroudable  (2 paths)
+    -> winv07 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> winv07 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> winv07 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> winv07 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> winv07 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> winv07 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+winv08:
+  parent ^^ ^shroudable  (2 paths)
+    -> winv08 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> winv08 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> winv08 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> winv08 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> winv08 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> winv08 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+winv09:
+  parent ^^ ^shroudable  (2 paths)
+    -> winv09 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> winv09 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> winv09 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> winv09 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> winv09 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> winv09 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+winv10:
+  parent ^^ ^shroudable  (2 paths)
+    -> winv10 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> winv10 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> winv10 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> winv10 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> winv10 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> winv10 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+winv11:
+  parent ^^ ^shroudable  (2 paths)
+    -> winv11 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> winv11 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> winv11 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> winv11 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> winv11 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> winv11 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+winv12:
+  parent ^^ ^shroudable  (2 paths)
+    -> winv12 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> winv12 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> winv12 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> winv12 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> winv12 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> winv12 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
+
+winv13:
+  parent ^^ ^shroudable  (2 paths)
+    -> winv13 -> ^civbuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> winv13 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> winv13 -> ^civbuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> winv13 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> winv13 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> winv13 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
 yrbpln:
   parent ^^ ^enemyinproximity  (2 paths)

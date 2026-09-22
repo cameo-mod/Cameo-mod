@@ -1,6 +1,6 @@
 # audit_assets — asset format norms (B11, RAMpage)
 
-PNGs scanned: **2078** (over budget: **169**), WAVs scanned: **8812** (non-conforming: **3666**)
+PNGs scanned: **2095** (over budget: **169**), WAVs scanned: **8816** (non-conforming: **3666**)
 
 
 ## P1 — PNGs over budget (> 8 MiB or > 8192px)
@@ -88,10 +88,10 @@ PNGs scanned: **2078** (over budget: **169**), WAVs scanned: **8812** (non-confo
 | mods/cameo/bits/terran/terran_promotion_warhound_tyrwalk.png | 808 KiB | 12992x128 |
 | mods/cameo/bits/terran/terran_reaper.png | 174 KiB | 9024x64 |
 | mods/cameo/bits/tkm/tkmflakbusdeploy.png | 3454 KiB | 45582x482 |
-| mods/cameo/bits/tkm/tkmflakbusdeployed.png | 319 KiB | 9216x97 |
-| mods/cameo/bits/tkm/tkm_promotion_thebigshiee_tkmbigshiee.png | 1151 KiB | 10784x193 |
-| mods/cameo/bits/tkm/tkm_promotion_thesandmarine_tkmsandmarine.png | 815 KiB | 10272x187 |
-| mods/cameo/bits/tkm/tkm_supportlabor_supplycenter.png | 698 KiB | 23130x131 |
+| mods/cameo/bits/tkm/tkmflakbusdeployed.png | 310 KiB | 9216x97 |
+| mods/cameo/bits/tkm/tkm_promotion_thebigshiee_tkmbigshiee.png | 1122 KiB | 10784x193 |
+| mods/cameo/bits/tkm/tkm_promotion_thesandmarine_tkmsandmarine.png | 763 KiB | 10272x187 |
+| mods/cameo/bits/tkm/tkm_supportlabor_supplycenter.png | 694 KiB | 23130x131 |
 | mods/cameo/bits/ts/cabal_artilleryspider.png | 776 KiB | 18048x150 |
 | mods/cameo/bits/ts/cabal_arty_spider.png | 776 KiB | 18048x150 |
 | mods/cameo/bits/ts/cabal_hk1_gunship.png | 325 KiB | 9088x141 |
