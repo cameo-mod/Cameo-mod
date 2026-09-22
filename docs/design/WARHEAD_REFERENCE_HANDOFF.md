@@ -1,6 +1,6 @@
 # Reference warhead pipeline — handoff
 
-**Status: the measurement is finished and verified; the family assignment is 2 sources of 17 done** (Combined Arms reviewed, Mental Omega a proposed first pass).
+**Status: the measurement is finished and verified; the family assignment is 3 sources of 17 done** (Combined Arms reviewed; Mental Omega and Red Resurrection proposed first passes).
 
 This is a LANE handoff, not a dated one. It describes the live state of the WARHEAD and ARMOUR
 side of the reference programme and is meant to be edited in place as the lane moves.
@@ -54,7 +54,7 @@ consolidation target, and the maintainer ruled it waits until every source has v
 | 1 | Read 20 sources into one normalised matrix | `warhead_matrix.py` | **done**, 0 degenerate |
 | 2 | Map each source's armours onto our 16 rows, and average | `armor_interpolate.py` | **done**, all 20 mapped |
 | 3 | Compress each source's weapons into review groups | `compress_warheads.py` | **done**, 17 of 20 |
-| 4 | Assign each group to a Cameo warhead family | `warhead_family_assignment*.yaml` | **2 of 17 sources** (CA reviewed, Mental Omega proposed) |
+| 4 | Assign each group to a Cameo warhead family | `warhead_family_assignment*.yaml` | **3 of 17 sources** (CA reviewed; Mental Omega and Red Resurrection proposed) |
 | 5 | Collapse to one row per Cameo warhead | `family_matrix.py` | done for both; every dialect since R47 |
 
 Stage 4 is the bottleneck and it is the only stage that needs human judgement.
@@ -101,7 +101,7 @@ after two averaging defects were fixed (R34, R35). `Heroic` stays derived per §
 
 ### Stage 3 — compression
 
-**1,710 groups across 20 sources, at `tau = 0.20` (R41), with the element vocabulary corrected (R45).** The threshold was 0.50 until
+**1,681 groups across 20 sources, at `tau = 0.20` (R41), with the element vocabulary corrected (R45).** The threshold was 0.50 until
 2026-09-22, chosen as "well below the 25th percentile" of the pairwise distances — a heuristic
 with nothing scoring it. `validate_families.py` scores a grouping against Cameo's own 904
 labelled weapons, and at 0.50 a group held a MEDIAN OF 3 distinct Cameo families: 61% purity,
@@ -189,7 +189,7 @@ And they are stale in a specific, checkable way. `docs/reference/family_profiles
 generated on **2026-08-15** by `propose_family_profiles.py` over `survey_platforms.py` — the
 OLD single-machine extractor that traces INI files out of `~/Downloads`, which nobody else has.
 Its 31 entries carry **1 to 9 mods each**, gated at `min_rows: 8, min_mods: 3`. The pipeline in
-this document carries **20 sources and 1,710 groups** and is hermetic. The numbers that ship were
+this document carries **20 sources and 1,681 groups** and is hermetic. The numbers that ship were
 never exposed to most of the corpus.
 
 So: point the profile proposal at `warhead_groups.json` + `warhead_family_assignment.yaml`
