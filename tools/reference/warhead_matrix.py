@@ -620,7 +620,15 @@ INI_LIST_BAND = {"InfantryTypes": "infantry", "VehicleTypes": "vehicle",
 #
 # Codes 6 and 7 are dropped: they showed NO toxin correlation in any source. Toxin has a real
 # signal already, `Tiberium=yes`, carried by 7-132 warheads per source.
-INI_INFDEATH_ELEMENT = {"4": "Fire", "5": "Tesla"}
+# R51 calibrated 4=Fire and 5=Tesla by correlating each code against warhead NAMES in aggregate
+# across all seven INI sources. R56 adds 8 the same way: its 51 carriers are `PlagueWH`,
+# `VirusGas`, `AnthraxWH1/2`, `ChemWH`, `DrThraxWH`, `ToxicMolesWH`, `Gas`, `ToxinWH`, `Virus`,
+# `GooCannonWH`, `EradicatorWH` — code 8 is the die-of-gas animation, and it is the INI dialect's
+# ONLY broad toxin signal now that `Tiberium=yes` has been retired (see `ini_element`).
+# ⚠ It is a FALLBACK and sits below the explicit flags on purpose: Red Resurrection's
+# `FusionRadWH` and `RadBeamWarhead` carry code 8 and nothing else, because radiation and poison
+# kill the same slow way in RA2. They will read Toxin and need a per-weapon override (R52).
+INI_INFDEATH_ELEMENT = {"4": "Fire", "5": "Tesla", "8": "Toxin"}
 
 
 def _ini_yes(block: dict[str, str], key: str) -> bool:
@@ -678,6 +686,11 @@ def ini_element(warhead: dict[str, str]) -> str:
         return "Sonic"
     if _ini_yes(warhead, "Temporal"):
         return "Atomized"
+    # R56 — the INI dialect's only EXPLICIT toxin flag. Tiny and perfect: 9 carriers across the
+    # seven sources, 8 of them toxin-named (`VirusGas` in five mods, `PurpleGasWH`, `ToxinWH2`).
+    # It sits above `Fire` because a poison weapon that also burns is a poison weapon.
+    if _ini_yes(warhead, "Poison"):
+        return "Toxin"
     if _ini_yes(warhead, "Fire"):
         return "Fire"
     # ⛔ `EMEffect` IS A MECHANIC, NOT AN ELEMENT — the same class of mistake as R48's
@@ -698,14 +711,35 @@ def ini_element(warhead: dict[str, str]) -> str:
     # (23-298 weapons per source) — which is the right place for it, because being an electric
     # bolt is how the thing is delivered.
     #
-    # ⚠ OPEN, NOT FIXED: the `InfDeath` fallback below assumes 3=burn / 4=electrocute, and that
-    # table is NOT stable across mods. Measured on Red Resurrection by correlating each code
-    # against warhead NAMES, in aggregate: InfDeath=4 is 16 fire-named against 1 tesla-named, and
-    # InfDeath=5 is 6 tesla-named against 0 fire-named — i.e. RR uses 4=fire, 5=electro. That
-    # mislabels 16 RR flame warheads as Tesla. A per-source code table would fix it and is a
-    # design decision, not a bug fix, so it is recorded in R50 rather than guessed at here.
-    if _ini_yes(warhead, "Tiberium"):
-        return "Toxin"
+    # ⛔ CLOSED BY R51, and the note that used to sit here said the opposite. It read *"OPEN, NOT
+    # FIXED: the `InfDeath` fallback assumes 3=burn / 4=electrocute, and that table is NOT stable
+    # across mods… a design decision, not a bug fix"* — written after measuring ONE source.
+    # Measuring all seven showed the pattern identical everywhere: it is 4=Fire, 5=Tesla, 8=Toxin,
+    # an ordinary wrong constant with a corpus-wide fix. The stale note survived R51 by three
+    # rulings because nothing greps code comments for superseded claims.
+    #
+    # ⛔ `Tiberium=yes` IS NOT AN ELEMENT EITHER — R56, and the fifth instance of this exact class
+    # after `IsDetachedRailgun`, `EMEffect`, the `InfDeath` offset and `FlameDeath`. In TS/RA2 it
+    # means the warhead interacts with Tiberium — detonates a field, hurts tiberium-armoured
+    # things — so the mods set it on anything with a real explosion. Censused over the seven INI
+    # sources on REAL warheads (sections a weapon actually points at, not the `TIB01`–`TIB20`
+    # field overlays that inflate a naive count to 198 in CnC Reloaded alone):
+    #
+    #     378 carriers, of which 15 are toxin-NAMED — 4%.
+    #     rise_of_the_east 111, ra20xx 102, twisted_insurrection 50, mental_omega 48,
+    #     cnc_reloaded 47, ra2_reborn 16, red_resurrection 4
+    #     and they are ARTYHE, BlimpHE, NukeWH, 40MMHE, APOCHE, CRNUKEWH — artillery,
+    #     bombs, nukes and autocannon.
+    #
+    # It made CnC Reloaded's artillery, mortars, a railgun prototype and a sonic warhead — all
+    # named `*HE` — read as chemical weapons. Retiring it moves 333 warheads off a wrong Toxin
+    # label; `Poison` and `InfDeath=8` above add 43 correct ones.
+    #
+    # ⚠ REMAINING GAP, recorded rather than papered over: Twisted Insurrection's real chem
+    # weapons (`ChemBurst`, `ChemSpray`, `Gas`, `ToxinBomb`, `BlueTibWH`) carry `InfDeath=1` and
+    # `Tiberium=no`, so they read `Plain` — and they DID BEFORE THIS CHANGE TOO. TI has no
+    # machine-readable element signal for them at all; they will need per-weapon overrides when
+    # TI is assigned, the same way Romanov's Vengeance's flamethrowers did (R55).
     if _ini_yes(warhead, "Bullets"):
         return "Kinetic"
     fallback = INI_INFDEATH_ELEMENT.get(str(warhead.get("InfDeath", "")).strip())

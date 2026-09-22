@@ -7,7 +7,7 @@
 # HOW THIS PASS WAS MADE, so it can be audited rather than trusted:
 #   * Group rows carry a decision per measured (delivery, element) SIGNATURE, with the reasoning
 #     in `why`. A signature is what the measurement actually distinguishes.
-#   * `overrides:` holds the 17 weapons looked at individually. An override BEATS its
+#   * `overrides:` holds the 18 weapons looked at individually. An override BEATS its
 #     group, and it is keyed by WEAPON so it survives re-clustering — which matters: the first
 #     pass keyed these by GROUP and lost one within a single regrouping (R50).
 #   * Everything is `status: proposed`. NOTHING here has been reviewed by the maintainer.
@@ -30,7 +30,7 @@ armors:
 - steel
 - concrete
 totals:
-  groups: 137
+  groups: 138
   weapons: 195
 groups:
   Hitscan_Veh:
@@ -254,30 +254,6 @@ groups:
     - 44.1
     weapons:
     - NighthawkMGWH
-  MissileHE_Veh_2:
-    family: MissileHE
-    status: proposed
-    why: steered explosive
-    band: vehicle
-    delivery: Missile
-    element: HE
-    uses: 5
-    members: 3
-    factor: 0.998963455100706
-    profile:
-    - 188.1
-    - 158.7
-    - 147.1
-    - 110.5
-    - 92.5
-    - 79.3
-    - 76.4
-    - 73.1
-    - 49.8
-    weapons:
-    - GooCannonWH
-    - MammothTuskEWH
-    - MammothTuskWH
   BulletHE_Veh_3:
     family: BulletHE
     status: proposed
@@ -373,6 +349,29 @@ groups:
     - DoublePistolsWH
     - GhurkaRifleWH
     - VirusWH
+  MissileHE_Veh_2:
+    family: MissileHE
+    status: proposed
+    why: steered explosive
+    band: vehicle
+    delivery: Missile
+    element: HE
+    uses: 4
+    members: 2
+    factor: 1.1024547854429394
+    profile:
+    - 194.2
+    - 194.2
+    - 150.1
+    - 123.6
+    - 105.9
+    - 97.1
+    - 79.4
+    - 79.4
+    - 53.0
+    weapons:
+    - MammothTuskEWH
+    - MammothTuskWH
   Missile_Air:
     family: MissileHE
     status: proposed
@@ -2467,6 +2466,29 @@ groups:
     - 44.1
     weapons:
     - SonicZapWH
+  LaserToxin_Inf:
+    family: Nuclear
+    status: proposed
+    why: ⚠ OVERRIDDEN PER WEAPON BELOW — its only member is `RadBeamWarhead`, which is radiological, not
+      chemical
+    band: infantry
+    delivery: Laser
+    element: Toxin
+    uses: 1
+    members: 1
+    factor: 0.9119219074880276
+    profile:
+    - 200.0
+    - 200.0
+    - 200.0
+    - 176.6
+    - 141.2
+    - 105.9
+    - 44.1
+    - 26.5
+    - 17.7
+    weapons:
+    - RadBeamWarhead
   Laser_Def:
     family: Laser
     status: proposed
@@ -2511,28 +2533,6 @@ groups:
     - 44.1
     weapons:
     - LunarWH
-  Laser_Inf_2:
-    family: Laser
-    status: proposed
-    why: coherent light
-    band: infantry
-    delivery: Laser
-    element: Plain
-    uses: 1
-    members: 1
-    factor: 0.9119219074880276
-    profile:
-    - 200.0
-    - 200.0
-    - 200.0
-    - 176.6
-    - 141.2
-    - 105.9
-    - 44.1
-    - 26.5
-    - 17.7
-    weapons:
-    - RadBeamWarhead
   MissileFire_Inf:
     family: MissileFire
     status: proposed
@@ -2885,6 +2885,29 @@ groups:
     - null
     weapons:
     - J20BombWH
+  MissileToxin_Veh:
+    family: MissileChem
+    status: proposed
+    why: '`GooCannonWH` — `AnimList=GASEXP1,GASEXP2,GASEXP3` and an anti-infantry profile (INF 177/106/141
+      against VEH 88/71/53). A gas weapon by every reading'
+    band: vehicle
+    delivery: Missile
+    element: Toxin
+    uses: 1
+    members: 1
+    factor: 0.820214095627358
+    profile:
+    - 176.6
+    - 105.9
+    - 141.2
+    - 88.3
+    - 70.6
+    - 53.0
+    - 70.6
+    - 61.8
+    - 44.1
+    weapons:
+    - GooCannonWH
   Missile_Veh_2:
     family: MissileHE
     status: proposed
@@ -3152,6 +3175,12 @@ overrides:
     family: Tesla
     why: Perun is the thunder god — a lightning strike. Delivered vertically, which is why its signature
       says Bomb, but the payload is electric
+  RadBeamWarhead:
+    family: Nuclear
+    why: 'the Desolator beam. R56 predicted this one in the extractor comment before it appeared: RR writes
+      NOTHING on it but `InfDeath=8`, because radiation and poison kill the same slow way in RA2, so the
+      new toxin fallback claims it. The profile settles it — INF 200 falling to VEH 106 and BLD 18-44
+      is radiation, not gas'
   SlaveMinerWH:
     family: Bullet
     why: INF 200 / VEH 94 / BLD 26 — an autocannon, not a railgun
