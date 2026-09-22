@@ -1,3 +1,25 @@
+## Devin-DAWN (A4) — D2k audio closure: legacy `audio/d2k.yaml` drained of live voice sets (2026-09-22, PR #420)
+
+**Branch:** `devin/dawn/d2k-audio-closure`, stacked on `d2k-sequence-closure` (#412).
+Last globally-loaded D2k definition file of the `Voices:` manifest kind.
+
+- Resolver walked every resolved actor's `Voiced.VoiceSet`; live definitions moved:
+  12 -> `D2k/Shared/yaml/voices.yaml` (both `^D2K*` templates + 10 multi-pack sets),
+  17 -> Ordos (all `EBFD*`), 3 -> Ixian, 1 -> Harkonnen, 1 -> Atreides.
+- `Voices:` section added to all five pack `content.yaml`s (packs are inline
+  `Include:`s of mod.yaml — any manifest key is legal there).
+- `audio/d2k.yaml` 646 -> 291 lines; remainder = 23 unreferenced sets held for
+  the unused-file audit phase (header documents this).
+- Verified: all 821 manifest voice defs resolve; only unresolved name is the
+  PRE-EXISTING `D2kVehicleVoice` (lowercase k) typo — referenced by
+  ordos_tankdestroyer, ixian_mongoose, ixian_ixprojector, apparition.ixian,
+  defined in no file on master. Flagged, not fixed (behaviour change, separate PR).
+- Boot-gate PASS after rebuilding OpenRA.Mods.Cameo (stale DLL -> the known
+  `Cannot locate type: AiSituationLogWriterInfo` crash, same as fleet hit before).
+  `launch-game.cmd` also still broken by unix-`find` shadowing cmd-`find` on
+  PATH when run from Git Bash — launched `engine/bin/OpenRA.exe` directly with
+  the same args instead; identical gate.
+
 ## Devin-DAWN (A4) — D2k weapon closure: legacy `weapons/d2k.yaml` drained of live weapons (2026-09-22)
 
 **Branch:** `devin/dawn/d2k-weapon-closure`. **Context:** the fleet lanes changed hands
