@@ -1,6 +1,6 @@
 # Reference warhead pipeline — handoff
 
-**Status: the measurement is finished and verified; the family assignment is 3 sources of 17 done** (Combined Arms reviewed; Mental Omega and Red Resurrection proposed first passes).
+**Status: the measurement is finished and verified; the family assignment is 4 sources of 17 done** (Combined Arms reviewed; Mental Omega, Red Resurrection and Rise of the East proposed first passes).
 
 This is a LANE handoff, not a dated one. It describes the live state of the WARHEAD and ARMOUR
 side of the reference programme and is meant to be edited in place as the lane moves.
@@ -54,7 +54,7 @@ consolidation target, and the maintainer ruled it waits until every source has v
 | 1 | Read 20 sources into one normalised matrix | `warhead_matrix.py` | **done**, 0 degenerate |
 | 2 | Map each source's armours onto our 16 rows, and average | `armor_interpolate.py` | **done**, all 20 mapped |
 | 3 | Compress each source's weapons into review groups | `compress_warheads.py` | **done**, 17 of 20 |
-| 4 | Assign each group to a Cameo warhead family | `warhead_family_assignment*.yaml` | **3 of 17 sources** (CA reviewed; Mental Omega and Red Resurrection proposed) |
+| 4 | Assign each group to a Cameo warhead family | `warhead_family_assignment*.yaml` | **4 of 17 sources** (CA reviewed; Mental Omega, Red Resurrection and Rise of the East proposed) |
 | 5 | Collapse to one row per Cameo warhead | `family_matrix.py` | done for both; every dialect since R47 |
 
 Stage 4 is the bottleneck and it is the only stage that needs human judgement.
