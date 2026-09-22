@@ -610,7 +610,25 @@ def ini_delivery(weapon: dict[str, str], projectile: dict[str, str]) -> str:
     """One weapon's delivery, from its own flags and its projectile's behaviour."""
     if _ini_yes(weapon, "IsLaser") or _ini_yes(weapon, "IsBigLaser"):
         return "Laser"
-    if _ini_yes(weapon, "IsRailgun") or _ini_yes(weapon, "IsDetachedRailgun"):
+    # ⛔ `IsDetachedRailgun` IS NOT A RAILGUN SIGNAL. In Ares it only MODIFIES `IsRailgun` —
+    # it moves where the beam is drawn from — so on its own it does nothing, and the mods set it
+    # on weapons that are not railguns at all. Measured across the corpus, the overlap with
+    # `IsRailgun` is EXACTLY ZERO in all three sources that use it:
+    #
+    #     mental_omega       93 set, 93 without `IsRailgun`   (20mm, AGGattling, AKM, Vulcan2)
+    #     rise_of_the_east  323 set, 323 without
+    #     ra20xx             52 set,  52 without
+    #
+    # 468 weapons were therefore delivered as "Railgun" while being machine guns and assault
+    # rifles, which is why Mental Omega's `RailgunKinetic_*` groups read ANTI-INFANTRY in 9 of 11
+    # cases — the PROFILES were right all along, small arms really are anti-infantry, and it was
+    # the label on top of them that was wrong. MO's genuine railguns (`MutationRailgun`,
+    # `ScavengerRailgun`, `RuinerRay`, `AlizeGun`) all carry `IsRailgun` and are unaffected.
+    #
+    # ⚠ `IsBigLaser` is the same SHAPE of flag and is deliberately NOT changed here: it is used
+    # mostly alongside `IsLaser` (cnc_reloaded 40 set, only 14 orphaned) so the evidence is mixed,
+    # and `IsRadEruption` is genuinely standalone in Ares. One flag, one measurement, one fix.
+    if _ini_yes(weapon, "IsRailgun"):
         return "Railgun"
     if _ini_yes(weapon, "IsElectricBolt"):
         return "Tesla"

@@ -7681,6 +7681,24 @@
     "band": "infantry",
     "uses": 2,
     "weapons": [
+     "RealRailShot"
+    ]
+   },
+   {
+    "group": "Bullet_Inf_3",
+    "family": "Bullet",
+    "status": "proposed",
+    "confidence": "majority",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Bullet": 10,
+     "(drop: not a damage warhead)": 2
+    },
+    "delivery": "Bullet",
+    "element": "Plain",
+    "band": "infantry",
+    "uses": 2,
+    "weapons": [
      "SuperPsyDamageWH"
     ]
    },
@@ -8007,24 +8025,6 @@
     "uses": 2,
     "weapons": [
      "ChronoBeam"
-    ]
-   },
-   {
-    "group": "Railgun_Inf",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "Railgun": 2,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Plain",
-    "band": "infantry",
-    "uses": 2,
-    "weapons": [
-     "RealRailShot"
     ]
    },
    {
@@ -8674,7 +8674,7 @@
     ]
    },
    {
-    "group": "Railgun_Inf_2",
+    "group": "Railgun_Inf",
     "family": "Railgun",
     "status": "proposed",
     "confidence": "majority",
@@ -11266,6 +11266,25 @@
  "mental_omega": {
   "groups": [
    {
+    "group": "HitscanKinetic_Inf",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Arrow": 1,
+     "Sniper": 1
+    },
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "band": "infantry",
+    "uses": 18,
+    "weapons": [
+     "JumpjetSSA",
+     "SA"
+    ]
+   },
+   {
     "group": "MissileFire_Veh",
     "family": "?",
     "status": "proposed",
@@ -11288,24 +11307,6 @@
     ]
    },
    {
-    "group": "HitscanKinetic_Inf",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Arrow": 1,
-     "Sniper": 1
-    },
-    "delivery": "Hitscan",
-    "element": "Kinetic",
-    "band": "infantry",
-    "uses": 17,
-    "weapons": [
-     "SA"
-    ]
-   },
-   {
     "group": "Hitscan_Veh",
     "family": "(drop: not a damage warhead)",
     "status": "proposed",
@@ -11325,6 +11326,27 @@
      "MagneShakeWH",
      "Special2",
      "Special3"
+    ]
+   },
+   {
+    "group": "HitscanKinetic_Inf_2",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Arrow": 1,
+     "Sniper": 1
+    },
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "band": "infantry",
+    "uses": 12,
+    "weapons": [
+     "DKnightSAWH",
+     "HollowPoint",
+     "HollowPoint4",
+     "HollowPointAnimal"
     ]
    },
    {
@@ -11423,25 +11445,6 @@
     ]
    },
    {
-    "group": "HitscanKinetic_Inf_2",
-    "family": "?",
-    "status": "proposed",
-    "confidence": "split",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Arrow": 1,
-     "Sniper": 1
-    },
-    "delivery": "Hitscan",
-    "element": "Kinetic",
-    "band": "infantry",
-    "uses": 7,
-    "weapons": [
-     "HollowPoint",
-     "HollowPointAnimal"
-    ]
-   },
-   {
     "group": "Hitscan_Inf_2",
     "family": "?",
     "status": "proposed",
@@ -11484,6 +11487,26 @@
      "Cuttering",
      "GeneticGasWH",
      "RoadrunnerChokeWH"
+    ]
+   },
+   {
+    "group": "HitscanKinetic_Veh",
+    "family": "Sniper",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Sniper": 2
+    },
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "band": "vehicle",
+    "uses": 6,
+    "weapons": [
+     "FortressSSA",
+     "HollowPointDrone",
+     "TankScannerWH",
+     "WolfhoundSA"
     ]
    },
    {
@@ -11554,6 +11577,24 @@
     ]
    },
    {
+    "group": "HitscanKinetic_Veh_2",
+    "family": "Sniper",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Sniper": 2
+    },
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "band": "vehicle",
+    "uses": 5,
+    "weapons": [
+     "GattWH",
+     "SSA"
+    ]
+   },
+   {
     "group": "Laser_Inf",
     "family": "?",
     "status": "proposed",
@@ -11573,44 +11614,6 @@
      "DSpiderWebWH",
      "FinAutoSniperGunWH",
      "LUNARWH"
-    ]
-   },
-   {
-    "group": "RailgunKinetic_Inf",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "band": "infantry",
-    "uses": 5,
-    "weapons": [
-     "DKnightSAWH",
-     "HollowPoint4"
-    ]
-   },
-   {
-    "group": "RailgunKinetic_Veh",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "band": "vehicle",
-    "uses": 5,
-    "weapons": [
-     "GattWH",
-     "SSA"
     ]
    },
    {
@@ -11649,24 +11652,6 @@
     "weapons": [
      "DemobombWH",
      "MadbombWH"
-    ]
-   },
-   {
-    "group": "HitscanKinetic_Veh",
-    "family": "Sniper",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Sniper": 2
-    },
-    "delivery": "Hitscan",
-    "element": "Kinetic",
-    "band": "vehicle",
-    "uses": 4,
-    "weapons": [
-     "HollowPointDrone",
-     "TankScannerWH"
     ]
    },
    {
@@ -11847,6 +11832,27 @@
     "uses": 3,
     "weapons": [
      "SuppressorWH"
+    ]
+   },
+   {
+    "group": "HitscanAtomized_Veh",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "Sniper": 9,
+     "(drop: not a damage warhead)": 8,
+     "Melee": 6,
+     "Bullet": 2
+    },
+    "delivery": "Hitscan",
+    "element": "Atomized",
+    "band": "vehicle",
+    "uses": 3,
+    "weapons": [
+     "ChronoBlasterWH",
+     "ChronoWarpWH"
     ]
    },
    {
@@ -12229,25 +12235,6 @@
     ]
    },
    {
-    "group": "RailgunAtomized_Veh",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Atomized",
-    "band": "vehicle",
-    "uses": 3,
-    "weapons": [
-     "ChronoBlasterWH",
-     "ChronoWarpWH"
-    ]
-   },
-   {
     "group": "TeslaHE_Inf",
     "family": "Tesla",
     "status": "proposed",
@@ -12486,6 +12473,26 @@
     ]
    },
    {
+    "group": "HitscanAtomized_Inf",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "Sniper": 9,
+     "(drop: not a damage warhead)": 8,
+     "Melee": 6,
+     "Bullet": 2
+    },
+    "delivery": "Hitscan",
+    "element": "Atomized",
+    "band": "infantry",
+    "uses": 2,
+    "weapons": [
+     "ChronoBeam"
+    ]
+   },
+   {
     "group": "HitscanHE_Inf_2",
     "family": "Sniper",
     "status": "proposed",
@@ -12502,6 +12509,58 @@
     "weapons": [
      "BondEruptionWH",
      "SpiderBombWH"
+    ]
+   },
+   {
+    "group": "HitscanKinetic_Inf_4",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Arrow": 1,
+     "Sniper": 1
+    },
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "band": "infantry",
+    "uses": 2,
+    "weapons": [
+     "KnightSA"
+    ]
+   },
+   {
+    "group": "HitscanKinetic_Veh_3",
+    "family": "Sniper",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Sniper": 2
+    },
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "band": "vehicle",
+    "uses": 2,
+    "weapons": [
+     "BuzzardWH"
+    ]
+   },
+   {
+    "group": "HitscanKinetic_Veh_4",
+    "family": "Sniper",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Sniper": 2
+    },
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "band": "vehicle",
+    "uses": 2,
+    "weapons": [
+     "HummSA"
     ]
    },
    {
@@ -12540,6 +12599,24 @@
     "uses": 2,
     "weapons": [
      "TerrorBombWH"
+    ]
+   },
+   {
+    "group": "HitscanTesla_Inf_2",
+    "family": "(drop: not a damage warhead)",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "no CA group with this band; matched on 2",
+    "candidates": {
+     "(drop: not a damage warhead)": 1
+    },
+    "delivery": "Hitscan",
+    "element": "Tesla",
+    "band": "infantry",
+    "uses": 2,
+    "weapons": [
+     "GyroAAWH",
+     "GyroWH"
     ]
    },
    {
@@ -12849,43 +12926,7 @@
     ]
    },
    {
-    "group": "RailgunAtomized_Inf",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Atomized",
-    "band": "infantry",
-    "uses": 2,
-    "weapons": [
-     "ChronoBeam"
-    ]
-   },
-   {
-    "group": "RailgunKinetic_Inf_2",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "band": "infantry",
-    "uses": 2,
-    "weapons": [
-     "KnightSA"
-    ]
-   },
-   {
-    "group": "RailgunKinetic_Inf_3",
+    "group": "RailgunKinetic_Inf",
     "family": "Railgun",
     "status": "proposed",
     "confidence": "majority",
@@ -12901,61 +12942,6 @@
     "weapons": [
      "KillDriverAIWH",
      "KillDriverWH"
-    ]
-   },
-   {
-    "group": "RailgunKinetic_Veh_2",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "band": "vehicle",
-    "uses": 2,
-    "weapons": [
-     "BuzzardWH"
-    ]
-   },
-   {
-    "group": "RailgunKinetic_Veh_3",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "band": "vehicle",
-    "uses": 2,
-    "weapons": [
-     "HummSA"
-    ]
-   },
-   {
-    "group": "RailgunKinetic_Veh_4",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "band": "vehicle",
-    "uses": 2,
-    "weapons": [
-     "FortressSSA",
-     "WolfhoundSA"
     ]
    },
    {
@@ -13579,6 +13565,24 @@
     "band": "vehicle",
     "uses": 1,
     "weapons": [
+     "HydraSSA"
+    ]
+   },
+   {
+    "group": "HitscanHE_Veh_5",
+    "family": "Sniper",
+    "status": "proposed",
+    "confidence": "majority",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Sniper": 2,
+     "Railgun": 1
+    },
+    "delivery": "Hitscan",
+    "element": "HE",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
      "ShadrayWaveWH"
     ]
    },
@@ -13603,7 +13607,25 @@
     ]
    },
    {
-    "group": "HitscanKinetic_Inf_4",
+    "group": "HitscanKinetic_Inf_5",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Arrow": 1,
+     "Sniper": 1
+    },
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "band": "infantry",
+    "uses": 1,
+    "weapons": [
+     "HollowPointSEAL"
+    ]
+   },
+   {
+    "group": "HitscanKinetic_Inf_6",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -13621,7 +13643,7 @@
     ]
    },
    {
-    "group": "HitscanKinetic_Inf_5",
+    "group": "HitscanKinetic_Inf_7",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -13639,7 +13661,7 @@
     ]
    },
    {
-    "group": "HitscanKinetic_Veh_2",
+    "group": "HitscanKinetic_Veh_5",
     "family": "Sniper",
     "status": "proposed",
     "confidence": "single",
@@ -13653,6 +13675,60 @@
     "uses": 1,
     "weapons": [
      "GattAAWH"
+    ]
+   },
+   {
+    "group": "HitscanKinetic_Veh_6",
+    "family": "Sniper",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Sniper": 2
+    },
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
+     "HARVWH"
+    ]
+   },
+   {
+    "group": "HitscanKinetic_Veh_7",
+    "family": "Sniper",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Sniper": 2
+    },
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
+     "VultureSA"
+    ]
+   },
+   {
+    "group": "HitscanRadiation_Inf_2",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "Sniper": 9,
+     "(drop: not a damage warhead)": 8,
+     "Melee": 6,
+     "Bullet": 2
+    },
+    "delivery": "Hitscan",
+    "element": "Radiation",
+    "band": "infantry",
+    "uses": 1,
+    "weapons": [
+     "KrukovRadBeamWH"
     ]
    },
    {
@@ -13673,7 +13749,7 @@
     ]
    },
    {
-    "group": "HitscanTesla_Inf_2",
+    "group": "HitscanTesla_Veh_2",
     "family": "(drop: not a damage warhead)",
     "status": "proposed",
     "confidence": "single",
@@ -13683,10 +13759,10 @@
     },
     "delivery": "Hitscan",
     "element": "Tesla",
-    "band": "infantry",
+    "band": "vehicle",
     "uses": 1,
     "weapons": [
-     "GyroAAWH"
+     "SeawolfHE"
     ]
    },
    {
@@ -14302,113 +14378,6 @@
     ]
    },
    {
-    "group": "RailgunHE_Veh",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Railgun": 4
-    },
-    "delivery": "Railgun",
-    "element": "HE",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "HydraSSA"
-    ]
-   },
-   {
-    "group": "RailgunKinetic_Inf_4",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "band": "infantry",
-    "uses": 1,
-    "weapons": [
-     "HollowPointSEAL"
-    ]
-   },
-   {
-    "group": "RailgunKinetic_Inf_5",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "band": "infantry",
-    "uses": 1,
-    "weapons": [
-     "JumpjetSSA"
-    ]
-   },
-   {
-    "group": "RailgunKinetic_Veh_5",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "HARVWH"
-    ]
-   },
-   {
-    "group": "RailgunKinetic_Veh_6",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "VultureSA"
-    ]
-   },
-   {
-    "group": "RailgunRadiation_Inf",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Radiation",
-    "band": "infantry",
-    "uses": 1,
-    "weapons": [
-     "KrukovRadBeamWH"
-    ]
-   },
-   {
     "group": "RailgunTesla_Inf",
     "family": "Railgun",
     "status": "proposed",
@@ -14424,42 +14393,6 @@
     "uses": 1,
     "weapons": [
      "AlizeGunWH"
-    ]
-   },
-   {
-    "group": "RailgunTesla_Inf_2",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Tesla",
-    "band": "infantry",
-    "uses": 1,
-    "weapons": [
-     "GyroWH"
-    ]
-   },
-   {
-    "group": "RailgunTesla_Veh",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "SeawolfHE"
     ]
    },
    {
@@ -14500,9 +14433,9 @@
    }
   ],
   "stats": {
-   "needs a human": 81,
-   "inherited, CA split this triple": 45,
-   "inherited cleanly": 43
+   "needs a human": 86,
+   "inherited, CA split this triple": 31,
+   "inherited cleanly": 48
   }
  },
  "openra_d2k": {
@@ -16311,9 +16244,10 @@
     "delivery": "Bullet",
     "element": "Tesla",
     "band": "vehicle",
-    "uses": 6,
+    "uses": 7,
     "weapons": [
      "AARaijinWH",
+     "Ace155mmWH",
      "DZapWH",
      "RaijinWH",
      "SuperApocMissWH",
@@ -16383,6 +16317,27 @@
     "weapons": [
      "Controller",
      "Snapshot"
+    ]
+   },
+   {
+    "group": "BulletTesla_Veh_3",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 2",
+    "candidates": {
+     "BulletTesla": 1,
+     "(drop: support power)": 1,
+     "Concussion": 1
+    },
+    "delivery": "Bullet",
+    "element": "Tesla",
+    "band": "vehicle",
+    "uses": 4,
+    "weapons": [
+     "CyclopRailgunWH",
+     "HopliteWH",
+     "HowitzerWH"
     ]
    },
    {
@@ -16463,6 +16418,24 @@
     ]
    },
    {
+    "group": "HitscanTesla_Veh_2",
+    "family": "(drop: not a damage warhead)",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "no CA group with this band; matched on 2",
+    "candidates": {
+     "(drop: not a damage warhead)": 1
+    },
+    "delivery": "Hitscan",
+    "element": "Tesla",
+    "band": "vehicle",
+    "uses": 3,
+    "weapons": [
+     "SSA",
+     "TwinSAWH"
+    ]
+   },
+   {
     "group": "MissileTesla_Inf",
     "family": "MissileTesla",
     "status": "proposed",
@@ -16540,25 +16513,6 @@
     ]
    },
    {
-    "group": "RailgunTesla_Veh",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 3,
-    "weapons": [
-     "CyclopRailgunWH",
-     "HopliteWH"
-    ]
-   },
-   {
     "group": "Tesla_Inf",
     "family": "Tesla",
     "status": "proposed",
@@ -16611,7 +16565,7 @@
     ]
    },
    {
-    "group": "BulletTesla_Veh_3",
+    "group": "BulletTesla_Veh_4",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -16668,6 +16622,23 @@
     ]
    },
    {
+    "group": "HitscanKinetic_Veh",
+    "family": "Sniper",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Sniper": 2
+    },
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "band": "vehicle",
+    "uses": 2,
+    "weapons": [
+     "GattlingAAWH"
+    ]
+   },
+   {
     "group": "HitscanTesla_Inf_3",
     "family": "(drop: not a damage warhead)",
     "status": "proposed",
@@ -16703,23 +16674,6 @@
     ]
    },
    {
-    "group": "HitscanTesla_Veh_2",
-    "family": "(drop: not a damage warhead)",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "(drop: not a damage warhead)": 1
-    },
-    "delivery": "Hitscan",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 2,
-    "weapons": [
-     "HARVWH"
-    ]
-   },
-   {
     "group": "HitscanTesla_Veh_3",
     "family": "(drop: not a damage warhead)",
     "status": "proposed",
@@ -16733,7 +16687,7 @@
     "band": "vehicle",
     "uses": 2,
     "weapons": [
-     "SSA"
+     "HARVWH"
     ]
    },
    {
@@ -16847,24 +16801,6 @@
     "weapons": [
      "HE",
      "TuskWH"
-    ]
-   },
-   {
-    "group": "RailgunKinetic_Veh",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "band": "vehicle",
-    "uses": 2,
-    "weapons": [
-     "GattlingAAWH"
     ]
    },
    {
@@ -17094,11 +17030,11 @@
     "band": "vehicle",
     "uses": 1,
     "weapons": [
-     "UltraAP"
+     "TwinMWH"
     ]
    },
    {
-    "group": "BulletTesla_Veh_4",
+    "group": "BulletTesla_Veh_11",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -17113,7 +17049,7 @@
     "band": "vehicle",
     "uses": 1,
     "weapons": [
-     "DESTWH"
+     "UltraAP"
     ]
    },
    {
@@ -17132,7 +17068,7 @@
     "band": "vehicle",
     "uses": 1,
     "weapons": [
-     "HoubeiWH"
+     "DESTWH"
     ]
    },
    {
@@ -17151,7 +17087,7 @@
     "band": "vehicle",
     "uses": 1,
     "weapons": [
-     "HowitzerWH"
+     "GattWH"
     ]
    },
    {
@@ -17170,7 +17106,7 @@
     "band": "vehicle",
     "uses": 1,
     "weapons": [
-     "InfernoWH"
+     "HoubeiWH"
     ]
    },
    {
@@ -17189,7 +17125,7 @@
     "band": "vehicle",
     "uses": 1,
     "weapons": [
-     "ReaperGrenadeWH"
+     "InfernoWH"
     ]
    },
    {
@@ -17208,7 +17144,7 @@
     "band": "vehicle",
     "uses": 1,
     "weapons": [
-     "TwinMWH"
+     "ReaperGrenadeWH"
     ]
    },
    {
@@ -17344,7 +17280,7 @@
     ]
    },
    {
-    "group": "HitscanKinetic_Veh",
+    "group": "HitscanKinetic_Veh_2",
     "family": "Sniper",
     "status": "proposed",
     "confidence": "single",
@@ -17725,75 +17661,20 @@
     ]
    },
    {
-    "group": "RailgunRadiation_Inf",
-    "family": "Railgun",
+    "group": "Radiation_Inf",
+    "family": "Radiation",
     "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
     "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
+     "Radiation": 1
     },
-    "delivery": "Railgun",
+    "delivery": "Radiation",
     "element": "Radiation",
     "band": "infantry",
     "uses": 1,
     "weapons": [
      "RadBeamWarhead"
-    ]
-   },
-   {
-    "group": "RailgunTesla_Veh_2",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "Ace155mmWH"
-    ]
-   },
-   {
-    "group": "RailgunTesla_Veh_3",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "GattWH"
-    ]
-   },
-   {
-    "group": "RailgunTesla_Veh_4",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Tesla",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "TwinSAWH"
     ]
    },
    {
@@ -17834,9 +17715,9 @@
    }
   ],
   "stats": {
-   "inherited, CA split this triple": 19,
-   "needs a human": 32,
-   "inherited cleanly": 35
+   "inherited, CA split this triple": 13,
+   "needs a human": 33,
+   "inherited cleanly": 37
   }
  },
  "ra2_reborn": {
@@ -22196,45 +22077,46 @@
     ]
    },
    {
-    "group": "MissileKinetic_Inf",
-    "family": "Arrow",
+    "group": "HitscanKinetic_Inf",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Arrow": 1,
+     "Sniper": 1
+    },
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "band": "infantry",
+    "uses": 40,
+    "weapons": [
+     "SA",
+     "SA3",
+     "SA5",
+     "SAFlame"
+    ]
+   },
+   {
+    "group": "HitscanKinetic_Veh",
+    "family": "Sniper",
     "status": "proposed",
     "confidence": "single",
     "why": "exact delivery/element/band match",
     "candidates": {
-     "Arrow": 3
+     "Sniper": 2
     },
-    "delivery": "Missile",
-    "element": "Kinetic",
-    "band": "infantry",
-    "uses": 31,
-    "weapons": [
-     "SA"
-    ]
-   },
-   {
-    "group": "RailgunKinetic_Veh",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
+    "delivery": "Hitscan",
     "element": "Kinetic",
     "band": "vehicle",
-    "uses": 26,
+    "uses": 31,
     "weapons": [
      "BulletWH",
      "PulvWH",
+     "SA2",
      "SAT",
-     "SA_C2",
      "SA_Q2",
-     "SA_T",
-     "SA_T3",
-     "TenguWH"
+     "SA_T"
     ]
    },
    {
@@ -22303,24 +22185,6 @@
     ]
    },
    {
-    "group": "HitscanKinetic_Veh",
-    "family": "Sniper",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Sniper": 2
-    },
-    "delivery": "Hitscan",
-    "element": "Kinetic",
-    "band": "vehicle",
-    "uses": 13,
-    "weapons": [
-     "SA2",
-     "SSA_T2"
-    ]
-   },
-   {
     "group": "Hitscan_Veh",
     "family": "(drop: not a damage warhead)",
     "status": "proposed",
@@ -22334,11 +22198,12 @@
     "delivery": "Hitscan",
     "element": "Plain",
     "band": "vehicle",
-    "uses": 12,
+    "uses": 13,
     "weapons": [
      "LocomotorBeam",
      "RadarRevealWH",
-     "Special"
+     "Special",
+     "StormWH"
     ]
    },
    {
@@ -22383,16 +22248,38 @@
     ]
    },
    {
-    "group": "RailgunKinetic_Def",
-    "family": "Railgun",
+    "group": "HitscanKinetic_Veh_2",
+    "family": "Sniper",
     "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
     "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
+     "Sniper": 2
     },
-    "delivery": "Railgun",
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "band": "vehicle",
+    "uses": 9,
+    "weapons": [
+     "SA_C2",
+     "SA_T2",
+     "SA_T3",
+     "TenguWH"
+    ]
+   },
+   {
+    "group": "HitscanKinetic_Def",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "no CA group with this band; matched on 2",
+    "candidates": {
+     "Sniper": 3,
+     "BulletHE": 2,
+     "Bullet": 1,
+     "Arrow": 1
+    },
+    "delivery": "Hitscan",
     "element": "Kinetic",
     "band": "defense",
     "uses": 7,
@@ -22438,24 +22325,6 @@
     "uses": 6,
     "weapons": [
      "UpgradeWH"
-    ]
-   },
-   {
-    "group": "RailgunKinetic_Inf",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "band": "infantry",
-    "uses": 6,
-    "weapons": [
-     "SA3"
     ]
    },
    {
@@ -22584,6 +22453,26 @@
     ]
    },
    {
+    "group": "HitscanKinetic_Inf_2",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Arrow": 1,
+     "Sniper": 1
+    },
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "band": "infantry",
+    "uses": 4,
+    "weapons": [
+     "BORISWH",
+     "RashidWH",
+     "VLADWH"
+    ]
+   },
+   {
     "group": "Hitscan_Inf_2",
     "family": "?",
     "status": "proposed",
@@ -22666,26 +22555,6 @@
      "Controller2",
      "DrifterWH",
      "Parasite"
-    ]
-   },
-   {
-    "group": "RailgunKinetic_Inf_2",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "band": "infantry",
-    "uses": 4,
-    "weapons": [
-     "BORISWH",
-     "RashidWH",
-     "VLADWH"
     ]
    },
    {
@@ -22863,26 +22732,25 @@
     "band": "vehicle",
     "uses": 3,
     "weapons": [
-     "FlakTWH"
+     "BulletWHAA"
     ]
    },
    {
-    "group": "HitscanKinetic_Inf",
-    "family": "?",
+    "group": "HitscanHE_Veh_2",
+    "family": "Sniper",
     "status": "proposed",
-    "confidence": "split",
+    "confidence": "majority",
     "why": "exact delivery/element/band match",
     "candidates": {
-     "Arrow": 1,
-     "Sniper": 1
+     "Sniper": 2,
+     "Railgun": 1
     },
     "delivery": "Hitscan",
-    "element": "Kinetic",
-    "band": "infantry",
+    "element": "HE",
+    "band": "vehicle",
     "uses": 3,
     "weapons": [
-     "SA5",
-     "SAFlame"
+     "FlakTWH"
     ]
    },
    {
@@ -23002,23 +22870,6 @@
     "uses": 3,
     "weapons": [
      "GUARDWH"
-    ]
-   },
-   {
-    "group": "RailgunHE_Veh",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Railgun": 4
-    },
-    "delivery": "Railgun",
-    "element": "HE",
-    "band": "vehicle",
-    "uses": 3,
-    "weapons": [
-     "BulletWHAA"
     ]
    },
    {
@@ -23271,7 +23122,26 @@
     ]
    },
    {
-    "group": "HitscanKinetic_Inf_2",
+    "group": "HitscanHE_Inf",
+    "family": "Sniper",
+    "status": "proposed",
+    "confidence": "majority",
+    "why": "no CA group with this band; matched on 2",
+    "candidates": {
+     "Sniper": 2,
+     "Railgun": 1
+    },
+    "delivery": "Hitscan",
+    "element": "HE",
+    "band": "infantry",
+    "uses": 2,
+    "weapons": [
+     "BleederWH",
+     "IronGuardWH3"
+    ]
+   },
+   {
+    "group": "HitscanKinetic_Inf_3",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -23289,7 +23159,26 @@
     ]
    },
    {
-    "group": "HitscanKinetic_Inf_3",
+    "group": "HitscanKinetic_Inf_4",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Arrow": 1,
+     "Sniper": 1
+    },
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "band": "infantry",
+    "uses": 2,
+    "weapons": [
+     "HollowPoint",
+     "HollowPoint3"
+    ]
+   },
+   {
+    "group": "HitscanKinetic_Inf_5",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -23308,23 +23197,6 @@
     ]
    },
    {
-    "group": "HitscanKinetic_Veh_2",
-    "family": "Sniper",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Sniper": 2
-    },
-    "delivery": "Hitscan",
-    "element": "Kinetic",
-    "band": "vehicle",
-    "uses": 2,
-    "weapons": [
-     "MagneShakeWH"
-    ]
-   },
-   {
     "group": "HitscanKinetic_Veh_3",
     "family": "Sniper",
     "status": "proposed",
@@ -23338,7 +23210,7 @@
     "band": "vehicle",
     "uses": 2,
     "weapons": [
-     "SA_T2"
+     "MagneShakeWH"
     ]
    },
    {
@@ -23399,6 +23271,46 @@
     "uses": 2,
     "weapons": [
      "BruteWH"
+    ]
+   },
+   {
+    "group": "Hitscan_Inf_5",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Melee": 6,
+     "Sniper": 4,
+     "(drop: support weapon)": 2,
+     "(drop: targeting relay)": 1
+    },
+    "delivery": "Hitscan",
+    "element": "Plain",
+    "band": "infantry",
+    "uses": 2,
+    "weapons": [
+     "LUNARWH"
+    ]
+   },
+   {
+    "group": "Hitscan_Inf_6",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Melee": 6,
+     "Sniper": 4,
+     "(drop: support weapon)": 2,
+     "(drop: targeting relay)": 1
+    },
+    "delivery": "Hitscan",
+    "element": "Plain",
+    "band": "infantry",
+    "uses": 2,
+    "weapons": [
+     "MaidenWH2"
     ]
    },
    {
@@ -23594,61 +23506,6 @@
     "uses": 2,
     "weapons": [
      "RadBeamWarhead"
-    ]
-   },
-   {
-    "group": "RailgunKinetic_Inf_3",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "band": "infantry",
-    "uses": 2,
-    "weapons": [
-     "HollowPoint",
-     "HollowPoint3"
-    ]
-   },
-   {
-    "group": "Railgun_Inf",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "Railgun": 2,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Plain",
-    "band": "infantry",
-    "uses": 2,
-    "weapons": [
-     "LUNARWH"
-    ]
-   },
-   {
-    "group": "Railgun_Inf_2",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "Railgun": 2,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Plain",
-    "band": "infantry",
-    "uses": 2,
-    "weapons": [
-     "MaidenWH2"
     ]
    },
    {
@@ -24066,25 +23923,25 @@
     ]
    },
    {
-    "group": "HitscanHE_Inf",
+    "group": "HitscanHE_Veh_3",
     "family": "Sniper",
     "status": "proposed",
     "confidence": "majority",
-    "why": "no CA group with this band; matched on 2",
+    "why": "exact delivery/element/band match",
     "candidates": {
      "Sniper": 2,
      "Railgun": 1
     },
     "delivery": "Hitscan",
     "element": "HE",
-    "band": "infantry",
+    "band": "vehicle",
     "uses": 1,
     "weapons": [
-     "IronGuardWH3"
+     "LocustWH1"
     ]
    },
    {
-    "group": "HitscanHE_Veh_2",
+    "group": "HitscanHE_Veh_4",
     "family": "Sniper",
     "status": "proposed",
     "confidence": "majority",
@@ -24102,7 +23959,25 @@
     ]
    },
    {
-    "group": "HitscanKinetic_Inf_4",
+    "group": "HitscanKinetic_Inf_6",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Arrow": 1,
+     "Sniper": 1
+    },
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "band": "infantry",
+    "uses": 1,
+    "weapons": [
+     "HollowPointJK"
+    ]
+   },
+   {
+    "group": "HitscanKinetic_Inf_7",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -24117,6 +23992,58 @@
     "uses": 1,
     "weapons": [
      "SAMOB"
+    ]
+   },
+   {
+    "group": "HitscanKinetic_Inf_8",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Arrow": 1,
+     "Sniper": 1
+    },
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "band": "infantry",
+    "uses": 1,
+    "weapons": [
+     "TanyaCryoWH"
+    ]
+   },
+   {
+    "group": "HitscanKinetic_Veh_4",
+    "family": "Sniper",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Sniper": 2
+    },
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
+     "NomadWH"
+    ]
+   },
+   {
+    "group": "HitscanKinetic_Veh_5",
+    "family": "Sniper",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Sniper": 2
+    },
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "band": "vehicle",
+    "uses": 1,
+    "weapons": [
+     "SSA_T2"
     ]
    },
    {
@@ -24174,7 +24101,7 @@
     ]
    },
    {
-    "group": "Hitscan_Inf_5",
+    "group": "Hitscan_Inf_7",
     "family": "?",
     "status": "proposed",
     "confidence": "split",
@@ -24191,6 +24118,26 @@
     "uses": 1,
     "weapons": [
      "AirstrikeFlare"
+    ]
+   },
+   {
+    "group": "Hitscan_Inf_8",
+    "family": "?",
+    "status": "proposed",
+    "confidence": "split",
+    "why": "exact delivery/element/band match",
+    "candidates": {
+     "Melee": 6,
+     "Sniper": 4,
+     "(drop: support weapon)": 2,
+     "(drop: targeting relay)": 1
+    },
+    "delivery": "Hitscan",
+    "element": "Plain",
+    "band": "infantry",
+    "uses": 1,
+    "weapons": [
+     "RockyWH"
     ]
    },
    {
@@ -24537,7 +24484,7 @@
     ]
    },
    {
-    "group": "MissileKinetic_Inf_2",
+    "group": "MissileKinetic_Inf",
     "family": "Arrow",
     "status": "proposed",
     "confidence": "single",
@@ -24631,6 +24578,23 @@
     ]
    },
    {
+    "group": "RadiationAtomized_Inf",
+    "family": "Radiation",
+    "status": "proposed",
+    "confidence": "single",
+    "why": "no CA group with this band; matched on 1",
+    "candidates": {
+     "Radiation": 5
+    },
+    "delivery": "Radiation",
+    "element": "Atomized",
+    "band": "infantry",
+    "uses": 1,
+    "weapons": [
+     "ChronoBeam2"
+    ]
+   },
+   {
     "group": "RadiationFire_Inf",
     "family": "Radiation",
     "status": "proposed",
@@ -24662,148 +24626,6 @@
     "uses": 1,
     "weapons": [
      "SpotterWH"
-    ]
-   },
-   {
-    "group": "RailgunAtomized_Inf",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Atomized",
-    "band": "infantry",
-    "uses": 1,
-    "weapons": [
-     "ChronoBeam2"
-    ]
-   },
-   {
-    "group": "RailgunHE_Inf",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "Railgun": 4
-    },
-    "delivery": "Railgun",
-    "element": "HE",
-    "band": "infantry",
-    "uses": 1,
-    "weapons": [
-     "BleederWH"
-    ]
-   },
-   {
-    "group": "RailgunHE_Veh_2",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "single",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Railgun": 4
-    },
-    "delivery": "Railgun",
-    "element": "HE",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "LocustWH1"
-    ]
-   },
-   {
-    "group": "RailgunKinetic_Inf_4",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "band": "infantry",
-    "uses": 1,
-    "weapons": [
-     "HollowPointJK"
-    ]
-   },
-   {
-    "group": "RailgunKinetic_Inf_5",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "band": "infantry",
-    "uses": 1,
-    "weapons": [
-     "TanyaCryoWH"
-    ]
-   },
-   {
-    "group": "RailgunKinetic_Veh_2",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 1",
-    "candidates": {
-     "Railgun": 6,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "NomadWH"
-    ]
-   },
-   {
-    "group": "Railgun_Inf_3",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "no CA group with this band; matched on 2",
-    "candidates": {
-     "Railgun": 2,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Plain",
-    "band": "infantry",
-    "uses": 1,
-    "weapons": [
-     "RockyWH"
-    ]
-   },
-   {
-    "group": "Railgun_Veh",
-    "family": "Railgun",
-    "status": "proposed",
-    "confidence": "majority",
-    "why": "exact delivery/element/band match",
-    "candidates": {
-     "Railgun": 2,
-     "BulletHE": 1
-    },
-    "delivery": "Railgun",
-    "element": "Plain",
-    "band": "vehicle",
-    "uses": 1,
-    "weapons": [
-     "StormWH"
     ]
    },
    {
@@ -24862,9 +24684,9 @@
    }
   ],
   "stats": {
-   "inherited cleanly": 35,
-   "inherited, CA split this triple": 36,
-   "needs a human": 69
+   "inherited cleanly": 34,
+   "needs a human": 77,
+   "inherited, CA split this triple": 25
   }
  },
  "romanovs_vengeance": {

@@ -25241,12 +25241,50 @@
     "delivery": "Bullet",
     "element": "Plain",
     "examples": [
+     "RealRailShot:RealRailShot"
+    ],
+    "factor": 1.3791800514588322,
+    "flat": false,
+    "members": 1,
+    "name": "Bullet_Inf_2",
+    "profile": [
+     200.0,
+     195.1,
+     136.5,
+     200.0,
+     117.0,
+     195.1,
+     156.1,
+     97.5,
+     48.8
+    ],
+    "uses": 2,
+    "weapons": [
+     "RealRailShot"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "infantry",
+    "delivery": "Bullet",
+    "element": "Plain",
+    "examples": [
      "SuperPsyDamageWH:SuperPsyDamageWH"
     ],
     "factor": 0.8769349096301384,
     "flat": false,
     "members": 1,
-    "name": "Bullet_Inf_2",
+    "name": "Bullet_Inf_3",
     "profile": [
      195.1,
      195.1,
@@ -25915,44 +25953,6 @@
     "uses": 2,
     "weapons": [
      "ChronoBeam"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "infantry",
-    "delivery": "Railgun",
-    "element": "Plain",
-    "examples": [
-     "RealRailShot:RealRailShot"
-    ],
-    "factor": 1.3791800514588322,
-    "flat": false,
-    "members": 1,
-    "name": "Railgun_Inf",
-    "profile": [
-     200.0,
-     195.1,
-     136.5,
-     200.0,
-     117.0,
-     195.1,
-     156.1,
-     97.5,
-     48.8
-    ],
-    "uses": 2,
-    "weapons": [
-     "RealRailShot"
     ]
    },
    {
@@ -27268,7 +27268,7 @@
     "factor": 1.9779213047105655,
     "flat": false,
     "members": 1,
-    "name": "Railgun_Inf_2",
+    "name": "Railgun_Inf",
     "profile": [
      200.0,
      200.0,
@@ -38873,8 +38873,48 @@
  },
  "mental_omega": {
   "compressed": 260,
-  "group_count": 169,
+  "group_count": 165,
   "groups": [
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "infantry",
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "examples": [
+     "SA:SA",
+     "JumpjetSSA:JumpjetSSA"
+    ],
+    "factor": 1.0625024440244257,
+    "flat": false,
+    "members": 2,
+    "name": "HitscanKinetic_Inf",
+    "profile": [
+     200.0,
+     200.0,
+     200.0,
+     178.3,
+     97.7,
+     79.7,
+     79.7,
+     48.8,
+     39.9
+    ],
+    "uses": 18,
+    "weapons": [
+     "JumpjetSSA",
+     "SA"
+    ]
+   },
    {
     "armors": [
      "none",
@@ -38929,44 +38969,6 @@
      "steel",
      "concrete"
     ],
-    "band": "infantry",
-    "delivery": "Hitscan",
-    "element": "Kinetic",
-    "examples": [
-     "SA:SA"
-    ],
-    "factor": 1.0031834358350291,
-    "flat": false,
-    "members": 1,
-    "name": "HitscanKinetic_Inf",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     159.5,
-     79.7,
-     79.7,
-     79.7,
-     39.9,
-     39.9
-    ],
-    "uses": 17,
-    "weapons": [
-     "SA"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
     "band": "vehicle",
     "delivery": "Hitscan",
     "element": "Plain",
@@ -38997,6 +38999,50 @@
      "MagneShakeWH",
      "Special2",
      "Special3"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "infantry",
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "examples": [
+     "HollowPoint:HollowPoint",
+     "HollowPoint4:HollowPoint4",
+     "HollowPointAnimal:HollowPointAnimal",
+     "DKnightSAWH:DKnightSAWH"
+    ],
+    "factor": 0.989070185686804,
+    "flat": false,
+    "members": 4,
+    "name": "HitscanKinetic_Inf_2",
+    "profile": [
+     98.9,
+     98.9,
+     78.2,
+     12.0,
+     12.0,
+     12.0,
+     12.0,
+     12.0,
+     12.0
+    ],
+    "uses": 12,
+    "weapons": [
+     "DKnightSAWH",
+     "HollowPoint",
+     "HollowPoint4",
+     "HollowPointAnimal"
     ]
    },
    {
@@ -39199,46 +39245,6 @@
     ],
     "band": "infantry",
     "delivery": "Hitscan",
-    "element": "Kinetic",
-    "examples": [
-     "HollowPoint:HollowPoint",
-     "HollowPointAnimal:HollowPointAnimal"
-    ],
-    "factor": 2.0000000000007496,
-    "flat": false,
-    "members": 2,
-    "name": "HitscanKinetic_Inf_2",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ],
-    "uses": 7,
-    "weapons": [
-     "HollowPoint",
-     "HollowPointAnimal"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "infantry",
-    "delivery": "Hitscan",
     "element": "Plain",
     "examples": [
      "Smashing:Smashing",
@@ -39313,6 +39319,50 @@
      "Cuttering",
      "GeneticGasWH",
      "RoadrunnerChokeWH"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "vehicle",
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "examples": [
+     "HollowPointDrone:HollowPointDrone",
+     "TankScannerWH:TankScannerWH",
+     "FortressSSA:FortressSSA",
+     "WolfhoundSA:WolfhoundSA"
+    ],
+    "factor": 0.9457416090035302,
+    "flat": false,
+    "members": 4,
+    "name": "HitscanKinetic_Veh",
+    "profile": [
+     94.6,
+     94.6,
+     94.6,
+     44.7,
+     44.7,
+     44.7,
+     null,
+     null,
+     null
+    ],
+    "uses": 6,
+    "weapons": [
+     "FortressSSA",
+     "HollowPointDrone",
+     "TankScannerWH",
+     "WolfhoundSA"
     ]
    },
    {
@@ -39457,6 +39507,46 @@
      "steel",
      "concrete"
     ],
+    "band": "vehicle",
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "examples": [
+     "SSA:SSA",
+     "GattWH:GattWH"
+    ],
+    "factor": 0.8488450347443955,
+    "flat": false,
+    "members": 2,
+    "name": "HitscanKinetic_Veh_2",
+    "profile": [
+     200.0,
+     200.0,
+     200.0,
+     89.2,
+     48.8,
+     39.9,
+     69.1,
+     59.8,
+     39.9
+    ],
+    "uses": 5,
+    "weapons": [
+     "GattWH",
+     "SSA"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
     "band": "infantry",
     "delivery": "Laser",
     "element": "Plain",
@@ -39487,86 +39577,6 @@
      "DSpiderWebWH",
      "FinAutoSniperGunWH",
      "LUNARWH"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "infantry",
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "examples": [
-     "HollowPoint4:HollowPoint4",
-     "DKnightSAWH:DKnightSAWH"
-    ],
-    "factor": 0.48912991610708123,
-    "flat": false,
-    "members": 2,
-    "name": "RailgunKinetic_Inf",
-    "profile": [
-     48.9,
-     48.9,
-     48.9,
-     12.0,
-     12.0,
-     12.0,
-     12.0,
-     12.0,
-     12.0
-    ],
-    "uses": 5,
-    "weapons": [
-     "DKnightSAWH",
-     "HollowPoint4"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "vehicle",
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "examples": [
-     "SSA:SSA",
-     "GattWH:GattWH"
-    ],
-    "factor": 0.8488450347443955,
-    "flat": false,
-    "members": 2,
-    "name": "RailgunKinetic_Veh",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     89.2,
-     48.8,
-     39.9,
-     69.1,
-     59.8,
-     39.9
-    ],
-    "uses": 5,
-    "weapons": [
-     "GattWH",
-     "SSA"
     ]
    },
    {
@@ -39645,46 +39655,6 @@
     "weapons": [
      "DemobombWH",
      "MadbombWH"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "vehicle",
-    "delivery": "Hitscan",
-    "element": "Kinetic",
-    "examples": [
-     "HollowPointDrone:HollowPointDrone",
-     "TankScannerWH:TankScannerWH"
-    ],
-    "factor": 0.4472135955001255,
-    "flat": false,
-    "members": 2,
-    "name": "HitscanKinetic_Veh",
-    "profile": [
-     44.7,
-     44.7,
-     44.7,
-     44.7,
-     44.7,
-     44.7,
-     null,
-     null,
-     null
-    ],
-    "uses": 4,
-    "weapons": [
-     "HollowPointDrone",
-     "TankScannerWH"
     ]
    },
    {
@@ -40047,6 +40017,46 @@
     "uses": 3,
     "weapons": [
      "SuppressorWH"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "vehicle",
+    "delivery": "Hitscan",
+    "element": "Atomized",
+    "examples": [
+     "ChronoWarpWH:ChronoWarpWH",
+     "ChronoBlasterWH:ChronoBlasterWH"
+    ],
+    "factor": 2.0000000000007496,
+    "flat": false,
+    "members": 2,
+    "name": "HitscanAtomized_Veh",
+    "profile": [
+     200.0,
+     200.0,
+     200.0,
+     200.0,
+     200.0,
+     200.0,
+     null,
+     null,
+     null
+    ],
+    "uses": 3,
+    "weapons": [
+     "ChronoBlasterWH",
+     "ChronoWarpWH"
     ]
    },
    {
@@ -40821,46 +40831,6 @@
      "steel",
      "concrete"
     ],
-    "band": "vehicle",
-    "delivery": "Railgun",
-    "element": "Atomized",
-    "examples": [
-     "ChronoWarpWH:ChronoWarpWH",
-     "ChronoBlasterWH:ChronoBlasterWH"
-    ],
-    "factor": 2.0000000000007496,
-    "flat": false,
-    "members": 2,
-    "name": "RailgunAtomized_Veh",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     200.0,
-     200.0,
-     200.0,
-     null,
-     null,
-     null
-    ],
-    "uses": 3,
-    "weapons": [
-     "ChronoBlasterWH",
-     "ChronoWarpWH"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
     "band": "infantry",
     "delivery": "Tesla",
     "element": "HE",
@@ -41363,6 +41333,44 @@
     ],
     "band": "infantry",
     "delivery": "Hitscan",
+    "element": "Atomized",
+    "examples": [
+     "ChronoBeam:ChronoBeam"
+    ],
+    "factor": 2.0000000000007496,
+    "flat": false,
+    "members": 1,
+    "name": "HitscanAtomized_Inf",
+    "profile": [
+     200.0,
+     200.0,
+     200.0,
+     200.0,
+     200.0,
+     200.0,
+     200.0,
+     200.0,
+     200.0
+    ],
+    "uses": 2,
+    "weapons": [
+     "ChronoBeam"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "infantry",
+    "delivery": "Hitscan",
     "element": "HE",
     "examples": [
      "BondEruptionWH:BondEruptionWH",
@@ -41387,6 +41395,120 @@
     "weapons": [
      "BondEruptionWH",
      "SpiderBombWH"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "infantry",
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "examples": [
+     "KnightSA:KnightSA"
+    ],
+    "factor": 0.9844233001788151,
+    "flat": false,
+    "members": 1,
+    "name": "HitscanKinetic_Inf_4",
+    "profile": [
+     200.0,
+     200.0,
+     200.0,
+     79.7,
+     79.7,
+     59.8,
+     79.7,
+     59.8,
+     59.8
+    ],
+    "uses": 2,
+    "weapons": [
+     "KnightSA"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "vehicle",
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "examples": [
+     "BuzzardWH:BuzzardWH"
+    ],
+    "factor": 0.9888985666414685,
+    "flat": false,
+    "members": 1,
+    "name": "HitscanKinetic_Veh_3",
+    "profile": [
+     200.0,
+     200.0,
+     200.0,
+     119.6,
+     99.7,
+     99.7,
+     59.8,
+     39.9,
+     39.9
+    ],
+    "uses": 2,
+    "weapons": [
+     "BuzzardWH"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "vehicle",
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "examples": [
+     "HummSA:HummSA"
+    ],
+    "factor": 1.3634099848185162,
+    "flat": false,
+    "members": 1,
+    "name": "HitscanKinetic_Veh_4",
+    "profile": [
+     200.0,
+     200.0,
+     200.0,
+     179.4,
+     99.7,
+     99.7,
+     159.5,
+     119.6,
+     59.8
+    ],
+    "uses": 2,
+    "weapons": [
+     "HummSA"
     ]
    },
    {
@@ -41465,6 +41587,46 @@
     "uses": 2,
     "weapons": [
      "TerrorBombWH"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "infantry",
+    "delivery": "Hitscan",
+    "element": "Tesla",
+    "examples": [
+     "GyroAAWH:GyroAAWH",
+     "GyroWH:GyroWH"
+    ],
+    "factor": 1.0525208398327734,
+    "flat": false,
+    "members": 2,
+    "name": "HitscanTesla_Inf_2",
+    "profile": [
+     200.0,
+     200.0,
+     200.0,
+     159.5,
+     109.2,
+     79.7,
+     59.8,
+     59.8,
+     39.9
+    ],
+    "uses": 2,
+    "weapons": [
+     "GyroAAWH",
+     "GyroWH"
     ]
    },
    {
@@ -42107,82 +42269,6 @@
     ],
     "band": "infantry",
     "delivery": "Railgun",
-    "element": "Atomized",
-    "examples": [
-     "ChronoBeam:ChronoBeam"
-    ],
-    "factor": 2.0000000000007496,
-    "flat": false,
-    "members": 1,
-    "name": "RailgunAtomized_Inf",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     200.0,
-     200.0,
-     200.0,
-     200.0,
-     200.0,
-     200.0
-    ],
-    "uses": 2,
-    "weapons": [
-     "ChronoBeam"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "infantry",
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "examples": [
-     "KnightSA:KnightSA"
-    ],
-    "factor": 0.9844233001788151,
-    "flat": false,
-    "members": 1,
-    "name": "RailgunKinetic_Inf_2",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     79.7,
-     79.7,
-     59.8,
-     79.7,
-     59.8,
-     59.8
-    ],
-    "uses": 2,
-    "weapons": [
-     "KnightSA"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "infantry",
-    "delivery": "Railgun",
     "element": "Kinetic",
     "examples": [
      "KillDriverAIWH:KillDriverAIWH",
@@ -42191,7 +42277,7 @@
     "factor": 1.5467646066254566,
     "flat": false,
     "members": 2,
-    "name": "RailgunKinetic_Inf_3",
+    "name": "RailgunKinetic_Inf",
     "profile": [
      200.0,
      200.0,
@@ -42207,122 +42293,6 @@
     "weapons": [
      "KillDriverAIWH",
      "KillDriverWH"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "vehicle",
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "examples": [
-     "BuzzardWH:BuzzardWH"
-    ],
-    "factor": 0.9888985666414685,
-    "flat": false,
-    "members": 1,
-    "name": "RailgunKinetic_Veh_2",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     119.6,
-     99.7,
-     99.7,
-     59.8,
-     39.9,
-     39.9
-    ],
-    "uses": 2,
-    "weapons": [
-     "BuzzardWH"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "vehicle",
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "examples": [
-     "HummSA:HummSA"
-    ],
-    "factor": 1.3634099848185162,
-    "flat": false,
-    "members": 1,
-    "name": "RailgunKinetic_Veh_3",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     179.4,
-     99.7,
-     99.7,
-     159.5,
-     119.6,
-     59.8
-    ],
-    "uses": 2,
-    "weapons": [
-     "HummSA"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "vehicle",
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "examples": [
-     "FortressSSA:FortressSSA",
-     "WolfhoundSA:WolfhoundSA"
-    ],
-    "factor": 2.0000000000007496,
-    "flat": false,
-    "members": 2,
-    "name": "RailgunKinetic_Veh_4",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ],
-    "uses": 2,
-    "weapons": [
-     "FortressSSA",
-     "WolfhoundSA"
     ]
    },
    {
@@ -43595,12 +43565,50 @@
     "delivery": "Hitscan",
     "element": "HE",
     "examples": [
+     "HydraSSA:HydraSSA"
+    ],
+    "factor": 0.8269674458592746,
+    "flat": false,
+    "members": 1,
+    "name": "HitscanHE_Veh_4",
+    "profile": [
+     200.0,
+     200.0,
+     200.0,
+     99.7,
+     59.8,
+     59.8,
+     39.9,
+     39.9,
+     39.9
+    ],
+    "uses": 1,
+    "weapons": [
+     "HydraSSA"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "vehicle",
+    "delivery": "Hitscan",
+    "element": "HE",
+    "examples": [
      "ShadrayWaveWH:ShadrayWaveWH"
     ],
     "factor": 1.3033491550899585,
     "flat": false,
     "members": 1,
-    "name": "HitscanHE_Veh_4",
+    "name": "HitscanHE_Veh_5",
     "profile": [
      200.0,
      200.0,
@@ -43671,12 +43679,50 @@
     "delivery": "Hitscan",
     "element": "Kinetic",
     "examples": [
+     "HollowPointSEAL:HollowPointSEAL"
+    ],
+    "factor": 1.0023866280471165,
+    "flat": false,
+    "members": 1,
+    "name": "HitscanKinetic_Inf_5",
+    "profile": [
+     200.0,
+     200.0,
+     200.0,
+     79.7,
+     39.9,
+     39.9,
+     null,
+     null,
+     null
+    ],
+    "uses": 1,
+    "weapons": [
+     "HollowPointSEAL"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "infantry",
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "examples": [
      "RiotGunWH:RiotGunWH"
     ],
     "factor": 0.4299864820337252,
     "flat": false,
     "members": 1,
-    "name": "HitscanKinetic_Inf_4",
+    "name": "HitscanKinetic_Inf_6",
     "profile": [
      200.0,
      200.0,
@@ -43714,7 +43760,7 @@
     "factor": 1.1671628817300133,
     "flat": false,
     "members": 1,
-    "name": "HitscanKinetic_Inf_5",
+    "name": "HitscanKinetic_Inf_7",
     "profile": [
      200.0,
      200.0,
@@ -43752,7 +43798,7 @@
     "factor": 0.8650756924199485,
     "flat": false,
     "members": 1,
-    "name": "HitscanKinetic_Veh_2",
+    "name": "HitscanKinetic_Veh_5",
     "profile": [
      200.0,
      200.0,
@@ -43767,6 +43813,120 @@
     "uses": 1,
     "weapons": [
      "GattAAWH"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "vehicle",
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "examples": [
+     "HARVWH:HARVWH"
+    ],
+    "factor": 0.7140147141029456,
+    "flat": false,
+    "members": 1,
+    "name": "HitscanKinetic_Veh_6",
+    "profile": [
+     200.0,
+     200.0,
+     200.0,
+     159.5,
+     79.7,
+     59.8,
+     19.9,
+     19.9,
+     19.9
+    ],
+    "uses": 1,
+    "weapons": [
+     "HARVWH"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "vehicle",
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "examples": [
+     "VultureSA:VultureSA"
+    ],
+    "factor": 1.1401530054125173,
+    "flat": false,
+    "members": 1,
+    "name": "HitscanKinetic_Veh_7",
+    "profile": [
+     200.0,
+     200.0,
+     200.0,
+     179.4,
+     99.7,
+     79.7,
+     79.7,
+     59.8,
+     59.8
+    ],
+    "uses": 1,
+    "weapons": [
+     "VultureSA"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "infantry",
+    "delivery": "Hitscan",
+    "element": "Radiation",
+    "examples": [
+     "KrukovRadBeamWH:KrukovRadBeamWH"
+    ],
+    "factor": 1.7140570232309298,
+    "flat": false,
+    "members": 1,
+    "name": "HitscanRadiation_Inf_2",
+    "profile": [
+     200.0,
+     200.0,
+     200.0,
+     199.4,
+     159.5,
+     99.7,
+     null,
+     null,
+     null
+    ],
+    "uses": 1,
+    "weapons": [
+     "KrukovRadBeamWH"
     ]
    },
    {
@@ -43819,30 +43979,30 @@
      "steel",
      "concrete"
     ],
-    "band": "infantry",
+    "band": "vehicle",
     "delivery": "Hitscan",
     "element": "Tesla",
     "examples": [
-     "GyroAAWH:GyroAAWH"
+     "SeawolfHE:SeawolfHE"
     ],
-    "factor": 1.0419136926158987,
+    "factor": 1.373222064179545,
     "flat": false,
     "members": 1,
-    "name": "HitscanTesla_Inf_2",
+    "name": "HitscanTesla_Veh_2",
     "profile": [
      200.0,
      200.0,
      200.0,
+     199.4,
+     179.4,
      159.5,
-     99.7,
      79.7,
-     59.8,
-     59.8,
-     39.9
+     79.7,
+     59.8
     ],
     "uses": 1,
     "weapons": [
-     "GyroAAWH"
+     "SeawolfHE"
     ]
    },
    {
@@ -45073,234 +45233,6 @@
      "steel",
      "concrete"
     ],
-    "band": "vehicle",
-    "delivery": "Railgun",
-    "element": "HE",
-    "examples": [
-     "HydraSSA:HydraSSA"
-    ],
-    "factor": 0.8269674458592746,
-    "flat": false,
-    "members": 1,
-    "name": "RailgunHE_Veh",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     99.7,
-     59.8,
-     59.8,
-     39.9,
-     39.9,
-     39.9
-    ],
-    "uses": 1,
-    "weapons": [
-     "HydraSSA"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "infantry",
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "examples": [
-     "HollowPointSEAL:HollowPointSEAL"
-    ],
-    "factor": 1.0023866280471165,
-    "flat": false,
-    "members": 1,
-    "name": "RailgunKinetic_Inf_4",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     79.7,
-     39.9,
-     39.9,
-     null,
-     null,
-     null
-    ],
-    "uses": 1,
-    "weapons": [
-     "HollowPointSEAL"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "infantry",
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "examples": [
-     "JumpjetSSA:JumpjetSSA"
-    ],
-    "factor": 1.1253290307950463,
-    "flat": false,
-    "members": 1,
-    "name": "RailgunKinetic_Inf_5",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     199.4,
-     119.6,
-     79.7,
-     79.7,
-     59.8,
-     39.9
-    ],
-    "uses": 1,
-    "weapons": [
-     "JumpjetSSA"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "vehicle",
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "examples": [
-     "HARVWH:HARVWH"
-    ],
-    "factor": 0.7140147141029456,
-    "flat": false,
-    "members": 1,
-    "name": "RailgunKinetic_Veh_5",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     159.5,
-     79.7,
-     59.8,
-     19.9,
-     19.9,
-     19.9
-    ],
-    "uses": 1,
-    "weapons": [
-     "HARVWH"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "vehicle",
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "examples": [
-     "VultureSA:VultureSA"
-    ],
-    "factor": 1.1401530054125173,
-    "flat": false,
-    "members": 1,
-    "name": "RailgunKinetic_Veh_6",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     179.4,
-     99.7,
-     79.7,
-     79.7,
-     59.8,
-     59.8
-    ],
-    "uses": 1,
-    "weapons": [
-     "VultureSA"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "infantry",
-    "delivery": "Railgun",
-    "element": "Radiation",
-    "examples": [
-     "KrukovRadBeamWH:KrukovRadBeamWH"
-    ],
-    "factor": 1.7140570232309298,
-    "flat": false,
-    "members": 1,
-    "name": "RailgunRadiation_Inf",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     199.4,
-     159.5,
-     99.7,
-     null,
-     null,
-     null
-    ],
-    "uses": 1,
-    "weapons": [
-     "KrukovRadBeamWH"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
     "band": "infantry",
     "delivery": "Railgun",
     "element": "Tesla",
@@ -45325,82 +45257,6 @@
     "uses": 1,
     "weapons": [
      "AlizeGunWH"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "infantry",
-    "delivery": "Railgun",
-    "element": "Tesla",
-    "examples": [
-     "GyroWH:GyroWH"
-    ],
-    "factor": 1.0632359725506335,
-    "flat": false,
-    "members": 1,
-    "name": "RailgunTesla_Inf_2",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     159.5,
-     119.6,
-     79.7,
-     59.8,
-     59.8,
-     39.9
-    ],
-    "uses": 1,
-    "weapons": [
-     "GyroWH"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "vehicle",
-    "delivery": "Railgun",
-    "element": "Tesla",
-    "examples": [
-     "SeawolfHE:SeawolfHE"
-    ],
-    "factor": 1.373222064179545,
-    "flat": false,
-    "members": 1,
-    "name": "RailgunTesla_Veh",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     199.4,
-     179.4,
-     159.5,
-     79.7,
-     79.7,
-     59.8
-    ],
-    "uses": 1,
-    "weapons": [
-     "SeawolfHE"
     ]
    },
    {
@@ -48611,7 +48467,7 @@
  },
  "ra20xx": {
   "compressed": 125,
-  "group_count": 86,
+  "group_count": 83,
   "groups": [
    {
     "armors": [
@@ -48768,30 +48624,32 @@
     "element": "Tesla",
     "examples": [
      "AARaijinWH:AARaijinWH",
+     "Ace155mmWH:Ace155mmWH",
      "DZapWH:DZapWH",
      "RaijinWH:RaijinWH",
      "SuperApocMissWH:SuperApocMissWH",
      "TomaWH:TomaWH",
      "TsunamiWH:TsunamiWH"
     ],
-    "factor": 1.8794200812951312,
+    "factor": 1.8942738307258349,
     "flat": false,
-    "members": 6,
+    "members": 7,
     "name": "BulletTesla_Veh_2",
     "profile": [
-     186.6,
-     186.6,
-     184.6,
-     195.8,
-     193.7,
-     191.6,
-     193.5,
-     191.5,
-     168.9
+     188.5,
+     188.5,
+     186.8,
+     196.4,
+     194.6,
+     192.8,
+     194.4,
+     192.7,
+     171.5
     ],
-    "uses": 6,
+    "uses": 7,
     "weapons": [
      "AARaijinWH",
+     "Ace155mmWH",
      "DZapWH",
      "RaijinWH",
      "SuperApocMissWH",
@@ -48919,6 +48777,48 @@
     "weapons": [
      "Controller",
      "Snapshot"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "vehicle",
+    "delivery": "Bullet",
+    "element": "Tesla",
+    "examples": [
+     "CyclopRailgunWH:CyclopRailgunWH",
+     "HopliteWH:HopliteWH",
+     "HowitzerWH:HowitzerWH"
+    ],
+    "factor": 1.5665521870225603,
+    "flat": false,
+    "members": 3,
+    "name": "BulletTesla_Veh_3",
+    "profile": [
+     107.4,
+     101.1,
+     97.6,
+     199.8,
+     191.6,
+     182.7,
+     200.0,
+     200.0,
+     191.7
+    ],
+    "uses": 4,
+    "weapons": [
+     "CyclopRailgunWH",
+     "HopliteWH",
+     "HowitzerWH"
     ]
    },
    {
@@ -49077,6 +48977,46 @@
     "weapons": [
      "CommandoHollowPoint",
      "Virus"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "vehicle",
+    "delivery": "Hitscan",
+    "element": "Tesla",
+    "examples": [
+     "SSA:SSA",
+     "TwinSAWH:TwinSAWH"
+    ],
+    "factor": 1.145568044730161,
+    "flat": false,
+    "members": 2,
+    "name": "HitscanTesla_Veh_2",
+    "profile": [
+     200.0,
+     193.7,
+     193.7,
+     128.5,
+     74.2,
+     74.2,
+     143.6,
+     98.1,
+     45.4
+    ],
+    "uses": 3,
+    "weapons": [
+     "SSA",
+     "TwinSAWH"
     ]
    },
    {
@@ -49255,46 +49195,6 @@
      "steel",
      "concrete"
     ],
-    "band": "vehicle",
-    "delivery": "Railgun",
-    "element": "Tesla",
-    "examples": [
-     "CyclopRailgunWH:CyclopRailgunWH",
-     "HopliteWH:HopliteWH"
-    ],
-    "factor": 1.5430899360744574,
-    "flat": false,
-    "members": 2,
-    "name": "RailgunTesla_Veh",
-    "profile": [
-     93.8,
-     93.8,
-     93.8,
-     200.0,
-     200.0,
-     200.0,
-     200.0,
-     200.0,
-     187.7
-    ],
-    "uses": 3,
-    "weapons": [
-     "CyclopRailgunWH",
-     "HopliteWH"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
     "band": "infantry",
     "delivery": "Tesla",
     "element": "Plain",
@@ -49419,7 +49319,7 @@
     "factor": 1.4314408949311077,
     "flat": false,
     "members": 2,
-    "name": "BulletTesla_Veh_3",
+    "name": "BulletTesla_Veh_4",
     "profile": [
      93.1,
      82.1,
@@ -49527,6 +49427,44 @@
      "steel",
      "concrete"
     ],
+    "band": "vehicle",
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "examples": [
+     "GattlingAAWH:GattlingAAWH"
+    ],
+    "factor": 0.6161239840457057,
+    "flat": false,
+    "members": 1,
+    "name": "HitscanKinetic_Veh",
+    "profile": [
+     200.0,
+     200.0,
+     187.7,
+     140.7,
+     93.8,
+     46.9,
+     23.5,
+     11.7,
+     10.0
+    ],
+    "uses": 2,
+    "weapons": [
+     "GattlingAAWH"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
     "band": "infantry",
     "delivery": "Hitscan",
     "element": "Tesla",
@@ -49614,7 +49552,7 @@
     "factor": 0.7336821716768587,
     "flat": false,
     "members": 1,
-    "name": "HitscanTesla_Veh_2",
+    "name": "HitscanTesla_Veh_3",
     "profile": [
      200.0,
      187.7,
@@ -49629,44 +49567,6 @@
     "uses": 2,
     "weapons": [
      "HARVWH"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "vehicle",
-    "delivery": "Hitscan",
-    "element": "Tesla",
-    "examples": [
-     "SSA:SSA"
-    ],
-    "factor": 1.3179142254508645,
-    "flat": false,
-    "members": 1,
-    "name": "HitscanTesla_Veh_3",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     140.7,
-     93.8,
-     93.8,
-     175.9,
-     117.3,
-     58.6
-    ],
-    "uses": 2,
-    "weapons": [
-     "SSA"
     ]
    },
    {
@@ -49903,44 +49803,6 @@
     "weapons": [
      "HE",
      "TuskWH"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "vehicle",
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "examples": [
-     "GattlingAAWH:GattlingAAWH"
-    ],
-    "factor": 0.6161239840457057,
-    "flat": false,
-    "members": 1,
-    "name": "RailgunKinetic_Veh",
-    "profile": [
-     200.0,
-     200.0,
-     187.7,
-     140.7,
-     93.8,
-     46.9,
-     23.5,
-     11.7,
-     10.0
-    ],
-    "uses": 2,
-    "weapons": [
-     "GattlingAAWH"
     ]
    },
    {
@@ -50415,12 +50277,50 @@
     "delivery": "Bullet",
     "element": "Tesla",
     "examples": [
+     "TwinMWH:TwinMWH"
+    ],
+    "factor": 1.6557707501908343,
+    "flat": false,
+    "members": 1,
+    "name": "BulletTesla_Veh_10",
+    "profile": [
+     200.0,
+     200.0,
+     200.0,
+     164.2,
+     164.2,
+     82.1,
+     200.0,
+     187.7,
+     140.7
+    ],
+    "uses": 1,
+    "weapons": [
+     "TwinMWH"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "vehicle",
+    "delivery": "Bullet",
+    "element": "Tesla",
+    "examples": [
      "UltraAP:UltraAP"
     ],
     "factor": 0.3587592879125654,
     "flat": false,
     "members": 1,
-    "name": "BulletTesla_Veh_10",
+    "name": "BulletTesla_Veh_11",
     "profile": [
      14.1,
      14.1,
@@ -50458,7 +50358,7 @@
     "factor": 1.0966431820540126,
     "flat": false,
     "members": 1,
-    "name": "BulletTesla_Veh_4",
+    "name": "BulletTesla_Veh_5",
     "profile": [
      105.6,
      93.8,
@@ -50491,12 +50391,50 @@
     "delivery": "Bullet",
     "element": "Tesla",
     "examples": [
+     "GattWH:GattWH"
+    ],
+    "factor": 0.5296914145409962,
+    "flat": false,
+    "members": 1,
+    "name": "BulletTesla_Veh_6",
+    "profile": [
+     200.0,
+     187.7,
+     164.2,
+     117.3,
+     70.4,
+     23.5,
+     23.5,
+     11.7,
+     10.0
+    ],
+    "uses": 1,
+    "weapons": [
+     "GattWH"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "vehicle",
+    "delivery": "Bullet",
+    "element": "Tesla",
+    "examples": [
      "HoubeiWH:HoubeiWH"
     ],
     "factor": 1.4037050972038758,
     "flat": false,
     "members": 1,
-    "name": "BulletTesla_Veh_5",
+    "name": "BulletTesla_Veh_7",
     "profile": [
      105.6,
      105.6,
@@ -50529,50 +50467,12 @@
     "delivery": "Bullet",
     "element": "Tesla",
     "examples": [
-     "HowitzerWH:HowitzerWH"
-    ],
-    "factor": 1.6145523238976698,
-    "flat": false,
-    "members": 1,
-    "name": "BulletTesla_Veh_6",
-    "profile": [
-     140.7,
-     117.3,
-     105.6,
-     199.4,
-     175.9,
-     152.5,
-     200.0,
-     200.0,
-     200.0
-    ],
-    "uses": 1,
-    "weapons": [
-     "HowitzerWH"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "vehicle",
-    "delivery": "Bullet",
-    "element": "Tesla",
-    "examples": [
      "InfernoWH:InfernoWH"
     ],
     "factor": 1.0347714526213878,
     "flat": false,
     "members": 1,
-    "name": "BulletTesla_Veh_7",
+    "name": "BulletTesla_Veh_8",
     "profile": [
      46.9,
      35.2,
@@ -50610,7 +50510,7 @@
     "factor": 1.3687954048479156,
     "flat": false,
     "members": 1,
-    "name": "BulletTesla_Veh_8",
+    "name": "BulletTesla_Veh_9",
     "profile": [
      175.9,
      175.9,
@@ -50625,44 +50525,6 @@
     "uses": 1,
     "weapons": [
      "ReaperGrenadeWH"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "vehicle",
-    "delivery": "Bullet",
-    "element": "Tesla",
-    "examples": [
-     "TwinMWH:TwinMWH"
-    ],
-    "factor": 1.6557707501908343,
-    "flat": false,
-    "members": 1,
-    "name": "BulletTesla_Veh_9",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     164.2,
-     164.2,
-     82.1,
-     200.0,
-     187.7,
-     140.7
-    ],
-    "uses": 1,
-    "weapons": [
-     "TwinMWH"
     ]
    },
    {
@@ -50952,7 +50814,7 @@
     "factor": 1.99999999999963,
     "flat": false,
     "members": 1,
-    "name": "HitscanKinetic_Veh",
+    "name": "HitscanKinetic_Veh_2",
     "profile": [
      null,
      null,
@@ -51742,7 +51604,7 @@
      "concrete"
     ],
     "band": "infantry",
-    "delivery": "Railgun",
+    "delivery": "Radiation",
     "element": "Radiation",
     "examples": [
      "RadBeamWarhead:RadBeamWarhead"
@@ -51750,7 +51612,7 @@
     "factor": 1.4786571820038268,
     "flat": false,
     "members": 1,
-    "name": "RailgunRadiation_Inf",
+    "name": "Radiation_Inf",
     "profile": [
      152.5,
      129.0,
@@ -51765,120 +51627,6 @@
     "uses": 1,
     "weapons": [
      "RadBeamWarhead"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "vehicle",
-    "delivery": "Railgun",
-    "element": "Tesla",
-    "examples": [
-     "Ace155mmWH:Ace155mmWH"
-    ],
-    "factor": 1.9858943463988106,
-    "flat": false,
-    "members": 1,
-    "name": "RailgunTesla_Veh_2",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     200.0,
-     200.0,
-     200.0,
-     200.0,
-     200.0,
-     187.7
-    ],
-    "uses": 1,
-    "weapons": [
-     "Ace155mmWH"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "vehicle",
-    "delivery": "Railgun",
-    "element": "Tesla",
-    "examples": [
-     "GattWH:GattWH"
-    ],
-    "factor": 0.5296914145409962,
-    "flat": false,
-    "members": 1,
-    "name": "RailgunTesla_Veh_3",
-    "profile": [
-     200.0,
-     187.7,
-     164.2,
-     117.3,
-     70.4,
-     23.5,
-     23.5,
-     11.7,
-     10.0
-    ],
-    "uses": 1,
-    "weapons": [
-     "GattWH"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "vehicle",
-    "delivery": "Railgun",
-    "element": "Tesla",
-    "examples": [
-     "TwinSAWH:TwinSAWH"
-    ],
-    "factor": 0.9957599058906367,
-    "flat": false,
-    "members": 1,
-    "name": "RailgunTesla_Veh_4",
-    "profile": [
-     200.0,
-     187.7,
-     187.7,
-     117.3,
-     58.6,
-     58.6,
-     117.3,
-     82.1,
-     35.2
-    ],
-    "uses": 1,
-    "weapons": [
-     "TwinSAWH"
     ]
    },
    {
@@ -60851,7 +60599,7 @@
  },
  "rise_of_the_east": {
   "compressed": 225,
-  "group_count": 140,
+  "group_count": 136,
   "groups": [
    {
     "armors": [
@@ -60923,29 +60671,35 @@
      "concrete"
     ],
     "band": "infantry",
-    "delivery": "Missile",
+    "delivery": "Hitscan",
     "element": "Kinetic",
     "examples": [
-     "SA:SA"
+     "SA:SA",
+     "SA3:SA3",
+     "SA5:SA5",
+     "SAFlame:SAFlame"
     ],
-    "factor": 0.9209592010664324,
+    "factor": 1.0176717780538456,
     "flat": false,
-    "members": 1,
-    "name": "MissileKinetic_Inf",
+    "members": 4,
+    "name": "HitscanKinetic_Inf",
     "profile": [
      200.0,
      200.0,
      200.0,
-     75.9,
-     56.9,
-     37.9,
-     82.2,
-     82.2,
-     53.8
+     84.3,
+     63.1,
+     45.6,
+     94.3,
+     103.7,
+     61.7
     ],
-    "uses": 31,
+    "uses": 40,
     "weapons": [
-     "SA"
+     "SA",
+     "SA3",
+     "SA5",
+     "SAFlame"
     ]
    },
    {
@@ -60961,43 +60715,39 @@
      "concrete"
     ],
     "band": "vehicle",
-    "delivery": "Railgun",
+    "delivery": "Hitscan",
     "element": "Kinetic",
     "examples": [
+     "SA2:SA2",
      "SA_T:SA_T",
      "SA_Q2:SA_Q2",
-     "SA_T3:SA_T3",
      "BulletWH:BulletWH",
      "PulvWH:PulvWH",
-     "SA_C2:SA_C2",
-     "SAT:SAT",
-     "TenguWH:TenguWH"
+     "SAT:SAT"
     ],
-    "factor": 1.038873797669073,
+    "factor": 1.005225538921442,
     "flat": false,
-    "members": 8,
-    "name": "RailgunKinetic_Veh",
+    "members": 6,
+    "name": "HitscanKinetic_Veh",
     "profile": [
      200.0,
      200.0,
      200.0,
-     121.8,
-     75.8,
-     40.3,
-     85.4,
-     94.2,
-     58.9
+     102.9,
+     69.2,
+     39.7,
+     86.5,
+     91.6,
+     58.5
     ],
-    "uses": 26,
+    "uses": 31,
     "weapons": [
      "BulletWH",
      "PulvWH",
+     "SA2",
      "SAT",
-     "SA_C2",
      "SA_Q2",
-     "SA_T",
-     "SA_T3",
-     "TenguWH"
+     "SA_T"
     ]
    },
    {
@@ -61150,72 +60900,34 @@
     ],
     "band": "vehicle",
     "delivery": "Hitscan",
-    "element": "Kinetic",
-    "examples": [
-     "SA2:SA2",
-     "SSA_T2:SSA_T2"
-    ],
-    "factor": 1.0962200519379501,
-    "flat": false,
-    "members": 2,
-    "name": "HitscanKinetic_Veh",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     89.8,
-     72.1,
-     52.9,
-     104.2,
-     116.2,
-     68.9
-    ],
-    "uses": 13,
-    "weapons": [
-     "SA2",
-     "SSA_T2"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "vehicle",
-    "delivery": "Hitscan",
     "element": "Plain",
     "examples": [
      "Special:Special",
      "LocomotorBeam:LocomotorBeam",
-     "RadarRevealWH:RadarRevealWH"
+     "RadarRevealWH:RadarRevealWH",
+     "StormWH:StormWH"
     ],
-    "factor": 0.8583756379750084,
+    "factor": 0.5014851040299986,
     "flat": false,
-    "members": 3,
+    "members": 4,
     "name": "Hitscan_Veh",
     "profile": [
-     56.2,
-     56.2,
-     56.2,
-     85.8,
-     85.8,
-     85.8,
-     200.0,
-     200.0,
-     200.0
+     31.6,
+     31.6,
+     31.6,
+     50.1,
+     50.1,
+     50.1,
+     44.7,
+     44.7,
+     44.7
     ],
-    "uses": 12,
+    "uses": 13,
     "weapons": [
      "LocomotorBeam",
      "RadarRevealWH",
-     "Special"
+     "Special",
+     "StormWH"
     ]
    },
    {
@@ -61314,8 +61026,52 @@
      "steel",
      "concrete"
     ],
+    "band": "vehicle",
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "examples": [
+     "SA_T3:SA_T3",
+     "SA_T2:SA_T2",
+     "SA_C2:SA_C2",
+     "TenguWH:TenguWH"
+    ],
+    "factor": 1.0786694282539058,
+    "flat": false,
+    "members": 4,
+    "name": "HitscanKinetic_Veh_2",
+    "profile": [
+     200.0,
+     200.0,
+     200.0,
+     146.8,
+     81.2,
+     40.7,
+     85.9,
+     98.6,
+     60.1
+    ],
+    "uses": 9,
+    "weapons": [
+     "SA_C2",
+     "SA_T2",
+     "SA_T3",
+     "TenguWH"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
     "band": "defense",
-    "delivery": "Railgun",
+    "delivery": "Hitscan",
     "element": "Kinetic",
     "examples": [
      "SA_T1D:SA_T1D"
@@ -61323,7 +61079,7 @@
     "factor": 1.1191623182897439,
     "flat": false,
     "members": 1,
-    "name": "RailgunKinetic_Def",
+    "name": "HitscanKinetic_Def",
     "profile": [
      200.0,
      200.0,
@@ -61414,44 +61170,6 @@
     "uses": 6,
     "weapons": [
      "UpgradeWH"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "infantry",
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "examples": [
-     "SA3:SA3"
-    ],
-    "factor": 1.0375390746955715,
-    "flat": false,
-    "members": 1,
-    "name": "RailgunKinetic_Inf",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     88.5,
-     69.6,
-     50.6,
-     98.0,
-     94.9,
-     60.1
-    ],
-    "uses": 6,
-    "weapons": [
-     "SA3"
     ]
    },
    {
@@ -61722,6 +61440,48 @@
     ],
     "band": "infantry",
     "delivery": "Hitscan",
+    "element": "Kinetic",
+    "examples": [
+     "BORISWH:BORISWH",
+     "RashidWH:RashidWH",
+     "VLADWH:VLADWH"
+    ],
+    "factor": 1.5914899893589627,
+    "flat": false,
+    "members": 3,
+    "name": "HitscanKinetic_Inf_2",
+    "profile": [
+     200.0,
+     200.0,
+     200.0,
+     200.0,
+     200.0,
+     184.9,
+     110.7,
+     158.1,
+     63.2
+    ],
+    "uses": 4,
+    "weapons": [
+     "BORISWH",
+     "RashidWH",
+     "VLADWH"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "infantry",
+    "delivery": "Hitscan",
     "element": "Plain",
     "examples": [
      "SmallComet2WHE:SmallComet2WHE",
@@ -61870,48 +61630,6 @@
      "Controller2",
      "DrifterWH",
      "Parasite"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "infantry",
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "examples": [
-     "BORISWH:BORISWH",
-     "RashidWH:RashidWH",
-     "VLADWH:VLADWH"
-    ],
-    "factor": 1.5914899893589627,
-    "flat": false,
-    "members": 3,
-    "name": "RailgunKinetic_Inf_2",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     200.0,
-     200.0,
-     184.9,
-     110.7,
-     158.1,
-     63.2
-    ],
-    "uses": 4,
-    "weapons": [
-     "BORISWH",
-     "RashidWH",
-     "VLADWH"
     ]
    },
    {
@@ -62254,9 +61972,9 @@
     "delivery": "Hitscan",
     "element": "HE",
     "examples": [
-     "FlakTWH:FlakTWH"
+     "BulletWHAA:BulletWHAA"
     ],
-    "factor": 1.3946327180441591,
+    "factor": 0.6782099988639547,
     "flat": false,
     "members": 1,
     "name": "HitscanHE_Veh",
@@ -62264,16 +61982,16 @@
      200.0,
      200.0,
      200.0,
-     173.9,
+     189.7,
+     158.1,
      126.5,
-     79.1,
-     113.8,
-     132.8,
-     94.9
+     10.0,
+     10.0,
+     10.0
     ],
     "uses": 3,
     "weapons": [
-     "FlakTWH"
+     "BulletWHAA"
     ]
    },
    {
@@ -62288,32 +62006,30 @@
      "steel",
      "concrete"
     ],
-    "band": "infantry",
+    "band": "vehicle",
     "delivery": "Hitscan",
-    "element": "Kinetic",
+    "element": "HE",
     "examples": [
-     "SA5:SA5",
-     "SAFlame:SAFlame"
+     "FlakTWH:FlakTWH"
     ],
-    "factor": 1.0594806647802584,
+    "factor": 1.3946327180441591,
     "flat": false,
-    "members": 2,
-    "name": "HitscanKinetic_Inf",
+    "members": 1,
+    "name": "HitscanHE_Veh_2",
     "profile": [
      200.0,
      200.0,
      200.0,
-     86.6,
-     63.2,
-     47.4,
-     99.0,
-     121.9,
-     67.1
+     173.9,
+     126.5,
+     79.1,
+     113.8,
+     132.8,
+     94.9
     ],
     "uses": 3,
     "weapons": [
-     "SA5",
-     "SAFlame"
+     "FlakTWH"
     ]
    },
    {
@@ -62550,44 +62266,6 @@
     "uses": 3,
     "weapons": [
      "GUARDWH"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "vehicle",
-    "delivery": "Railgun",
-    "element": "HE",
-    "examples": [
-     "BulletWHAA:BulletWHAA"
-    ],
-    "factor": 0.6782099988639547,
-    "flat": false,
-    "members": 1,
-    "name": "RailgunHE_Veh",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     189.7,
-     158.1,
-     126.5,
-     10.0,
-     10.0,
-     10.0
-    ],
-    "uses": 3,
-    "weapons": [
-     "BulletWHAA"
     ]
    },
    {
@@ -63112,6 +62790,46 @@
     ],
     "band": "infantry",
     "delivery": "Hitscan",
+    "element": "HE",
+    "examples": [
+     "BleederWH:BleederWH",
+     "IronGuardWH3:IronGuardWH3"
+    ],
+    "factor": 0.11246854393268771,
+    "flat": false,
+    "members": 2,
+    "name": "HitscanHE_Inf",
+    "profile": [
+     12.6,
+     12.6,
+     12.6,
+     11.2,
+     11.2,
+     11.2,
+     11.2,
+     11.2,
+     11.2
+    ],
+    "uses": 2,
+    "weapons": [
+     "BleederWH",
+     "IronGuardWH3"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "infantry",
+    "delivery": "Hitscan",
     "element": "Kinetic",
     "examples": [
      "SA1S:SA1S"
@@ -63119,7 +62837,7 @@
     "factor": 0.827208515005479,
     "flat": false,
     "members": 1,
-    "name": "HitscanKinetic_Inf_2",
+    "name": "HitscanKinetic_Inf_3",
     "profile": [
      200.0,
      200.0,
@@ -63152,13 +62870,53 @@
     "delivery": "Hitscan",
     "element": "Kinetic",
     "examples": [
+     "HollowPoint:HollowPoint",
+     "HollowPoint3:HollowPoint3"
+    ],
+    "factor": 2.0000000000005356,
+    "flat": false,
+    "members": 2,
+    "name": "HitscanKinetic_Inf_4",
+    "profile": [
+     200.0,
+     200.0,
+     200.0,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ],
+    "uses": 2,
+    "weapons": [
+     "HollowPoint",
+     "HollowPoint3"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "infantry",
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "examples": [
      "ImplodeWH:ImplodeWH",
      "Virus:Virus"
     ],
     "factor": 0.27144176165956335,
     "flat": false,
     "members": 2,
-    "name": "HitscanKinetic_Inf_3",
+    "name": "HitscanKinetic_Inf_5",
     "profile": [
      200.0,
      200.0,
@@ -63197,7 +62955,7 @@
     "factor": 0.7952727008498063,
     "flat": false,
     "members": 1,
-    "name": "HitscanKinetic_Veh_2",
+    "name": "HitscanKinetic_Veh_3",
     "profile": [
      null,
      null,
@@ -63212,44 +62970,6 @@
     "uses": 2,
     "weapons": [
      "MagneShakeWH"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "vehicle",
-    "delivery": "Hitscan",
-    "element": "Kinetic",
-    "examples": [
-     "SA_T2:SA_T2"
-    ],
-    "factor": 1.026234410778113,
-    "flat": false,
-    "members": 1,
-    "name": "HitscanKinetic_Veh_3",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     139.1,
-     69.6,
-     34.8,
-     82.2,
-     94.9,
-     60.1
-    ],
-    "uses": 2,
-    "weapons": [
-     "SA_T2"
     ]
    },
    {
@@ -63364,6 +63084,82 @@
     "uses": 2,
     "weapons": [
      "BruteWH"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "infantry",
+    "delivery": "Hitscan",
+    "element": "Plain",
+    "examples": [
+     "LUNARWH:LUNARWH"
+    ],
+    "factor": 1.7273524406457825,
+    "flat": false,
+    "members": 1,
+    "name": "Hitscan_Inf_5",
+    "profile": [
+     200.0,
+     200.0,
+     189.7,
+     200.0,
+     158.1,
+     110.7,
+     null,
+     null,
+     null
+    ],
+    "uses": 2,
+    "weapons": [
+     "LUNARWH"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "infantry",
+    "delivery": "Hitscan",
+    "element": "Plain",
+    "examples": [
+     "MaidenWH2:MaidenWH2"
+    ],
+    "factor": 1.1509405431715742,
+    "flat": false,
+    "members": 1,
+    "name": "Hitscan_Inf_6",
+    "profile": [
+     200.0,
+     200.0,
+     200.0,
+     94.9,
+     79.1,
+     47.4,
+     110.7,
+     142.3,
+     79.1
+    ],
+    "uses": 2,
+    "weapons": [
+     "MaidenWH2"
     ]
    },
    {
@@ -63748,122 +63544,6 @@
     "uses": 2,
     "weapons": [
      "RadBeamWarhead"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "infantry",
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "examples": [
-     "HollowPoint:HollowPoint",
-     "HollowPoint3:HollowPoint3"
-    ],
-    "factor": 2.0000000000005356,
-    "flat": false,
-    "members": 2,
-    "name": "RailgunKinetic_Inf_3",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ],
-    "uses": 2,
-    "weapons": [
-     "HollowPoint",
-     "HollowPoint3"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "infantry",
-    "delivery": "Railgun",
-    "element": "Plain",
-    "examples": [
-     "LUNARWH:LUNARWH"
-    ],
-    "factor": 1.7273524406457825,
-    "flat": false,
-    "members": 1,
-    "name": "Railgun_Inf",
-    "profile": [
-     200.0,
-     200.0,
-     189.7,
-     200.0,
-     158.1,
-     110.7,
-     null,
-     null,
-     null
-    ],
-    "uses": 2,
-    "weapons": [
-     "LUNARWH"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "infantry",
-    "delivery": "Railgun",
-    "element": "Plain",
-    "examples": [
-     "MaidenWH2:MaidenWH2"
-    ],
-    "factor": 1.1509405431715742,
-    "flat": false,
-    "members": 1,
-    "name": "Railgun_Inf_2",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     94.9,
-     79.1,
-     47.4,
-     110.7,
-     142.3,
-     79.1
-    ],
-    "uses": 2,
-    "weapons": [
-     "MaidenWH2"
     ]
    },
    {
@@ -64716,30 +64396,30 @@
      "steel",
      "concrete"
     ],
-    "band": "infantry",
+    "band": "vehicle",
     "delivery": "Hitscan",
     "element": "HE",
     "examples": [
-     "IronGuardWH3:IronGuardWH3"
+     "LocustWH1:LocustWH1"
     ],
-    "factor": 0.10000000000002676,
+    "factor": 1.1247216257411847,
     "flat": false,
     "members": 1,
-    "name": "HitscanHE_Inf",
+    "name": "HitscanHE_Veh_3",
     "profile": [
-     null,
-     null,
-     null,
-     10.0,
-     10.0,
-     10.0,
-     10.0,
-     10.0,
-     10.0
+     126.5,
+     94.9,
+     63.2,
+     200.0,
+     200.0,
+     200.0,
+     79.1,
+     126.5,
+     47.4
     ],
     "uses": 1,
     "weapons": [
-     "IronGuardWH3"
+     "LocustWH1"
     ]
    },
    {
@@ -64763,7 +64443,7 @@
     "factor": 2.0000000000005356,
     "flat": false,
     "members": 1,
-    "name": "HitscanHE_Veh_2",
+    "name": "HitscanHE_Veh_4",
     "profile": [
      200.0,
      200.0,
@@ -64796,12 +64476,50 @@
     "delivery": "Hitscan",
     "element": "Kinetic",
     "examples": [
+     "HollowPointJK:HollowPointJK"
+    ],
+    "factor": 0.10000000000002676,
+    "flat": false,
+    "members": 1,
+    "name": "HitscanKinetic_Inf_6",
+    "profile": [
+     null,
+     null,
+     null,
+     10.0,
+     10.0,
+     10.0,
+     null,
+     null,
+     null
+    ],
+    "uses": 1,
+    "weapons": [
+     "HollowPointJK"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "infantry",
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "examples": [
      "SAMOB:SAMOB"
     ],
     "factor": 0.9097616999653172,
     "flat": false,
     "members": 1,
-    "name": "HitscanKinetic_Inf_4",
+    "name": "HitscanKinetic_Inf_7",
     "profile": [
      94.9,
      63.2,
@@ -64816,6 +64534,120 @@
     "uses": 1,
     "weapons": [
      "SAMOB"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "infantry",
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "examples": [
+     "TanyaCryoWH:TanyaCryoWH"
+    ],
+    "factor": 1.0413513116364133,
+    "flat": false,
+    "members": 1,
+    "name": "HitscanKinetic_Inf_8",
+    "profile": [
+     200.0,
+     200.0,
+     200.0,
+     158.1,
+     126.5,
+     94.9,
+     47.4,
+     63.2,
+     31.6
+    ],
+    "uses": 1,
+    "weapons": [
+     "TanyaCryoWH"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "vehicle",
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "examples": [
+     "NomadWH:NomadWH"
+    ],
+    "factor": 2.0000000000005356,
+    "flat": false,
+    "members": 1,
+    "name": "HitscanKinetic_Veh_4",
+    "profile": [
+     200.0,
+     200.0,
+     200.0,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ],
+    "uses": 1,
+    "weapons": [
+     "NomadWH"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "vehicle",
+    "delivery": "Hitscan",
+    "element": "Kinetic",
+    "examples": [
+     "SSA_T2:SSA_T2"
+    ],
+    "factor": 1.1978704042817292,
+    "flat": false,
+    "members": 1,
+    "name": "HitscanKinetic_Veh_5",
+    "profile": [
+     200.0,
+     200.0,
+     200.0,
+     98.0,
+     82.2,
+     63.2,
+     110.7,
+     142.3,
+     79.1
+    ],
+    "uses": 1,
+    "weapons": [
+     "SSA_T2"
     ]
    },
    {
@@ -64953,7 +64785,7 @@
     "factor": 0.15811466717919395,
     "flat": false,
     "members": 1,
-    "name": "Hitscan_Inf_5",
+    "name": "Hitscan_Inf_7",
     "profile": [
      null,
      null,
@@ -64968,6 +64800,44 @@
     "uses": 1,
     "weapons": [
      "AirstrikeFlare"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "infantry",
+    "delivery": "Hitscan",
+    "element": "Plain",
+    "examples": [
+     "RockyWH:RockyWH"
+    ],
+    "factor": 1.1192476835424108,
+    "flat": false,
+    "members": 1,
+    "name": "Hitscan_Inf_8",
+    "profile": [
+     110.7,
+     79.1,
+     47.4,
+     200.0,
+     158.1,
+     110.7,
+     126.5,
+     189.7,
+     79.1
+    ],
+    "uses": 1,
+    "weapons": [
+     "RockyWH"
     ]
    },
    {
@@ -65675,7 +65545,7 @@
     "factor": 1.50487089434192,
     "flat": false,
     "members": 1,
-    "name": "MissileKinetic_Inf_2",
+    "name": "MissileKinetic_Inf",
     "profile": [
      200.0,
      200.0,
@@ -65858,6 +65728,44 @@
     ],
     "band": "infantry",
     "delivery": "Radiation",
+    "element": "Atomized",
+    "examples": [
+     "ChronoBeam2:ChronoBeam2"
+    ],
+    "factor": 1.849314251531608,
+    "flat": false,
+    "members": 1,
+    "name": "RadiationAtomized_Inf",
+    "profile": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     200.0,
+     200.0,
+     158.1
+    ],
+    "uses": 1,
+    "weapons": [
+     "ChronoBeam2"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "infantry",
+    "delivery": "Radiation",
     "element": "Fire",
     "examples": [
      "HollowPointV:HollowPointV"
@@ -65918,310 +65826,6 @@
     "uses": 1,
     "weapons": [
      "SpotterWH"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "infantry",
-    "delivery": "Railgun",
-    "element": "Atomized",
-    "examples": [
-     "ChronoBeam2:ChronoBeam2"
-    ],
-    "factor": 1.849314251531608,
-    "flat": false,
-    "members": 1,
-    "name": "RailgunAtomized_Inf",
-    "profile": [
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     200.0,
-     200.0,
-     158.1
-    ],
-    "uses": 1,
-    "weapons": [
-     "ChronoBeam2"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "infantry",
-    "delivery": "Railgun",
-    "element": "HE",
-    "examples": [
-     "BleederWH:BleederWH"
-    ],
-    "factor": 0.12649173374335515,
-    "flat": false,
-    "members": 1,
-    "name": "RailgunHE_Inf",
-    "profile": [
-     12.6,
-     12.6,
-     12.6,
-     12.6,
-     12.6,
-     12.6,
-     12.6,
-     12.6,
-     12.6
-    ],
-    "uses": 1,
-    "weapons": [
-     "BleederWH"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "vehicle",
-    "delivery": "Railgun",
-    "element": "HE",
-    "examples": [
-     "LocustWH1:LocustWH1"
-    ],
-    "factor": 1.1247216257411847,
-    "flat": false,
-    "members": 1,
-    "name": "RailgunHE_Veh_2",
-    "profile": [
-     126.5,
-     94.9,
-     63.2,
-     200.0,
-     200.0,
-     200.0,
-     79.1,
-     126.5,
-     47.4
-    ],
-    "uses": 1,
-    "weapons": [
-     "LocustWH1"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "infantry",
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "examples": [
-     "HollowPointJK:HollowPointJK"
-    ],
-    "factor": 0.10000000000002676,
-    "flat": false,
-    "members": 1,
-    "name": "RailgunKinetic_Inf_4",
-    "profile": [
-     null,
-     null,
-     null,
-     10.0,
-     10.0,
-     10.0,
-     null,
-     null,
-     null
-    ],
-    "uses": 1,
-    "weapons": [
-     "HollowPointJK"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "infantry",
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "examples": [
-     "TanyaCryoWH:TanyaCryoWH"
-    ],
-    "factor": 1.0413513116364133,
-    "flat": false,
-    "members": 1,
-    "name": "RailgunKinetic_Inf_5",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     158.1,
-     126.5,
-     94.9,
-     47.4,
-     63.2,
-     31.6
-    ],
-    "uses": 1,
-    "weapons": [
-     "TanyaCryoWH"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "vehicle",
-    "delivery": "Railgun",
-    "element": "Kinetic",
-    "examples": [
-     "NomadWH:NomadWH"
-    ],
-    "factor": 2.0000000000005356,
-    "flat": false,
-    "members": 1,
-    "name": "RailgunKinetic_Veh_2",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ],
-    "uses": 1,
-    "weapons": [
-     "NomadWH"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "infantry",
-    "delivery": "Railgun",
-    "element": "Plain",
-    "examples": [
-     "RockyWH:RockyWH"
-    ],
-    "factor": 1.1192476835424108,
-    "flat": false,
-    "members": 1,
-    "name": "Railgun_Inf_3",
-    "profile": [
-     110.7,
-     79.1,
-     47.4,
-     200.0,
-     158.1,
-     110.7,
-     126.5,
-     189.7,
-     79.1
-    ],
-    "uses": 1,
-    "weapons": [
-     "RockyWH"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "vehicle",
-    "delivery": "Railgun",
-    "element": "Plain",
-    "examples": [
-     "StormWH:StormWH"
-    ],
-    "factor": 0.10000000000002676,
-    "flat": false,
-    "members": 1,
-    "name": "Railgun_Veh",
-    "profile": [
-     10.0,
-     10.0,
-     10.0,
-     10.0,
-     10.0,
-     10.0,
-     10.0,
-     10.0,
-     10.0
-    ],
-    "uses": 1,
-    "weapons": [
-     "StormWH"
     ]
    },
    {
