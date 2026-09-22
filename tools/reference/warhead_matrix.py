@@ -659,8 +659,30 @@ def ini_element(warhead: dict[str, str]) -> str:
         return "Atomized"
     if _ini_yes(warhead, "Fire"):
         return "Fire"
-    if _ini_yes(warhead, "EMEffect"):
-        return "Tesla"
+    # ⛔ `EMEffect` IS A MECHANIC, NOT AN ELEMENT — the same class of mistake as R48's
+    # `IsDetachedRailgun`. In RA2 it makes a warhead disable vehicles; Cameo models that as
+    # Integrity/PhysicalState, never as a Versus row. Censused over the seven INI sources, it
+    # marks ordinary ordnance and almost never a tesla weapon:
+    #
+    #     ra20xx            248 of 684 warheads (36%)   2 tesla-NAMED
+    #     red_resurrection  110 of 480 (23%)            5 tesla-named  (105mmWH, 120mmWH,
+    #                                                                   155mmWH, ATGUNWH — tank
+    #                                                                   cannons and artillery)
+    #     mental_omega       36 of 731 (5%)             0 tesla-named
+    #     the other four     ~0
+    #
+    # Reading it as Tesla made Red Resurrection look like a mod built almost entirely out of
+    # electricity: Missile/Tesla 17 groups, Bullet/Tesla 17, Hitscan/Tesla 11. Genuine tesla
+    # weapons are still caught, and caught better, at the DELIVERY level by `IsElectricBolt`
+    # (23-298 weapons per source) — which is the right place for it, because being an electric
+    # bolt is how the thing is delivered.
+    #
+    # ⚠ OPEN, NOT FIXED: the `InfDeath` fallback below assumes 3=burn / 4=electrocute, and that
+    # table is NOT stable across mods. Measured on Red Resurrection by correlating each code
+    # against warhead NAMES, in aggregate: InfDeath=4 is 16 fire-named against 1 tesla-named, and
+    # InfDeath=5 is 6 tesla-named against 0 fire-named — i.e. RR uses 4=fire, 5=electro. That
+    # mislabels 16 RR flame warheads as Tesla. A per-source code table would fix it and is a
+    # design decision, not a bug fix, so it is recorded in R50 rather than guessed at here.
     if _ini_yes(warhead, "Tiberium"):
         return "Toxin"
     if _ini_yes(warhead, "Bullets"):
