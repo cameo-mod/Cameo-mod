@@ -9,7 +9,7 @@
 | weapons/advancewars.yaml | 109 | 0 | 109 |  |
 | weapons/ballistics.yaml | 18 | 4 | 14 | GLOBAL:tech, RedAlert/Japan, RedAlert2/Allies, RedAlert2Mod/FutureTech, RedAlert2Mod/Naxis, TiberianDawn/GDI… |
 | weapons/classicdoom.yaml | 25 | 0 | 25 |  |
-| weapons/d2k.yaml | 127 | 23 | 104 | D2k/Atreides, D2k/Corrino, D2k/Harkonnen, D2k/Ixian, D2k/Ordos, D2k/Shared… |
+| weapons/d2k.yaml | 80 | 1 | 79 | GLOBAL:d2k |
 | weapons/darkreign.yaml | 94 | 0 | 94 |  |
 | weapons/dune2.yaml | 16 | 0 | 16 |  |
 | weapons/elementals.yaml | 4 | 0 | 4 |  |

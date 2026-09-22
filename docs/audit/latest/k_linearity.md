@@ -1,10 +1,10 @@
 # audit_k_linearity — the flat K must not move when Damage moves
 
-Analysed **2148** concrete weapons.
+Analysed **2145** concrete weapons.
 
 ## L0 — every positive offensive runtime percentage application is modeled
 
-_clean_ — modeled 1701 folded and 2523 standalone applications.
+_clean_ — modeled 1609 folded and 2504 standalone applications.
 
 ## L1 — `k_flat` is invariant under a change of flat Damage
 
@@ -18,7 +18,7 @@ _clean_ — the identity holds for every analysed weapon; 11 percentage-only wea
 
 ## L3 — weapons with a standalone percentage DPS floor
 
-703 weapon(s) carry a standalone percentage hit; **190** have a floor at or above 25% of output.
+700 weapon(s) carry a standalone percentage hit; **186** have a floor at or above 25% of output.
 
 A price target below the floor is UNREACHABLE by lowering flat Damage — `required_damage()` returns None rather than a wrong positive number. To price these lower, the standalone percentage hit has to shrink.
 
@@ -45,6 +45,7 @@ A price target below the floor is UNREACHABLE by lowering flat Damage — `requi
 | `RocketAngelRockets` | 88.7% |
 | `PhobosLaser` | 87.1% |
 | `TSHSeekerBomb` | 85.7% |
+| `BallistaSingleShotAirEnergized` | 85.4% |
 | `LunarNaxiDroneMissile` | 85.3% |
 | `120mm_python_deploy` | 84.5% |
 | `SCTyrAA` | 84.2% |
@@ -53,13 +54,12 @@ A price target below the floor is UNREACHABLE by lowering flat Damage — `requi
 | `120mm_cobra_deploy` | 83.6% |
 | `BallistaMultiShotEnergized` | 83.1% |
 | `BallistaTowerMultiShotEnergized` | 82.5% |
-| `SteelTwisterMissiles_elite` | 81.4% |
 
-_... and 160 more._
+_... and 156 more._
 
 ## L4 — folded runtime quantisation residual
 
-630 weapon(s) have a non-zero current folded runtime residual.
+627 weapon(s) have a non-zero current folded runtime residual.
 This residual is included in measured output but excluded from `k_flat` and `dps_floor`; recompute it after snapping a proposed Damage value.
 
 | weapon | context-adjusted residual per shot |

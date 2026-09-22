@@ -1,14 +1,14 @@
 # audit_release_drift - measured against the build players played
 
 
-baseline: **playtest-20260709** (`8c238ffc3`), 1912 weapons · 1350 shared with the tree · **1187 unchanged**
+baseline: **playtest-20260709** (`8c238ffc3`), 1912 weapons · 1348 shared with the tree · **1184 unchanged**
 
 | code | check | count | ratchet |  |
 |---|---|---|---|---|
-| D1 | INFLATED - deals more than it shipped | 107 | 133 | PASS |
+| D1 | INFLATED - deals more than it shipped | 108 | 133 | PASS |
 | D2 | WEAKENED - deals less than it shipped | 56 | 62 | PASS |
 | D3 | EXTREME - 3x or worse, either way | 17 | 27 | PASS |
-| D4 | UNMATCHED - in the release, gone under that name | 562 | 335 | FAIL |
+| D4 | UNMATCHED - in the release, gone under that name | 564 | 335 | FAIL |
 | D5 | ACCEPTED value edit (informational) | 33 | 43 | PASS |
 
 
@@ -31,8 +31,8 @@ baseline: **playtest-20260709** (`8c238ffc3`), 1912 weapons · 1350 shared with 
 | RA2MultiThunderboltMissile | 16000 | 4000 | 0.25 | 8 -> 1 |
 | RA2MultiThunderboltMissile_elite | 16000 | 4000 | 0.25 | 8 -> 1 |
 | ArmoredCarMG | 16000 | 1600 | 0.10 | 8 -> 1 |
-| ArmoredCarMGAAWaveforce | 19000 | 1900 | 0.10 | 10 -> 2 |
-| ArmoredCarMGWaveforce | 19000 | 1900 | 0.10 | 10 -> 2 |
+| ArmoredCarMGAAWaveforce | 19000 | 1900 | 0.10 | 10 -> 1 |
+| ArmoredCarMGWaveforce | 19000 | 1900 | 0.10 | 10 -> 1 |
 
 
 
@@ -42,9 +42,9 @@ Only the 194 pinned ownership renames are followed. Wrapper branches, unreviewed
 
 | measure | lineage view |
 |---|---|
-| matched | 1506 |
-| unmatched | 406 |
-| inflated | 132 |
+| matched | 1504 |
+| unmatched | 408 |
+| inflated | 133 |
 | weakened | 81 |
 | extreme | 22 |
 | accepted | 34 |
@@ -94,15 +94,15 @@ Recovered **156** release identities hidden by name-only matching. Raw D4 and al
 | RocketsHumvee2 | td_gdi_humveemkii_rocketshumvee2 | 16000 | 8000 | 0.50 | 1 -> 1 | weakened |
 | RocketsHumvee2AMT | td_gdi_humveemkii_rocketshumvee2amt | 32000 | 16000 | 0.50 | 2 -> 1 | weakened |
 | RocketsRACryo | ra1_allies_alliedrocketsoldier_rocketsracryo | 20000 | 11500 | 0.57 | 2 -> 1 | weakened |
-| SCUDTesla | ra1_soviets_v2rocketlauncher_scudtesla | 90000 | 171493 | 1.91 | 3 -> 5 | inflated |
-| SCUDThermobaric | ra1_soviets_v2rocketlauncher_scudthermobaric | 120000 | 195991 | 1.63 | 3 -> 5 | inflated |
+| SCUDTesla | ra1_soviets_v2rocketlauncher_scudtesla | 90000 | 171493 | 1.91 | 3 -> 1 | inflated |
+| SCUDThermobaric | ra1_soviets_v2rocketlauncher_scudthermobaric | 120000 | 195991 | 1.63 | 3 -> 1 | inflated |
 | StealthTankMissiles | td_nod_stealthtank_stealthtankmissiles | 12000 | 22230 | 1.85 | 1 -> 1 | inflated |
 | StealthTankMissilesBlackMarket | td_nod_stealthtank_stealthtankmissilesblackmarket | 12000 | 22230 | 1.85 | 1 -> 1 | inflated |
 | TowerMissile | td_gdi_advancedguardtower_towermissile | 14000 | 16000 | 1.14 | 7 -> 1 | inflated |
 | TowerMissileAMT | td_gdi_advancedguardtower_towermissileamt | 14000 | 16000 | 1.14 | 7 -> 1 | inflated |
 | TurretGun | td_nod_gunturret_turretgun | 24000 | 19000 | 0.79 | 4 -> 1 | weakened |
 | TurretGunBlackMarket | td_nod_gunturret_turretgunblackmarket | 36000 | 31000 | 0.86 | 6 -> 1 | weakened |
-| VolkovMagneticWeaponIncendiaryNuclearShells | ra1_soviets_volkov_volkovmagneticweaponincendiarynuclearshells | 200000 | 180000 | 0.90 | 5 -> 4 | weakened |
+| VolkovMagneticWeaponIncendiaryNuclearShells | ra1_soviets_volkov_volkovmagneticweaponincendiarynuclearshells | 200000 | 180000 | 0.90 | 5 -> 1 | weakened |
 | YakNuclearBomb | ra1_soviets_nuclearyak_yaknuclearbomb | 200000 | 100000 | 0.50 | 4 -> 1 | weakened |
 | YakTeslaArcFragment1 | ra1_soviets_teslayak_yakteslaarcfragment1 | 8000 | 6000 | 0.75 | 2 -> 1 | weakened |
 | YakTeslaArcFragment2 | ra1_soviets_teslayak_yakteslaarcfragment2 | 4000 | 5000 | 1.25 | 2 -> 1 | inflated |

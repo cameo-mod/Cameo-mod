@@ -210,10 +210,14 @@ Fully converted prefixes (83): air, asianalliance, atreides, banshee, bomber, ca
 
 ## P3 — content.yaml manifest vs disk / nonstandard filenames
 
-- `TiberianSun\GDI`: `misc.yaml` in content.yaml but MISSING on disk (crash risk)
+- `D2k\Atreides`: nonstandard filename `voices.yaml` (closed set, DESIGN §2)
+- `D2k\Harkonnen`: nonstandard filename `voices.yaml` (closed set, DESIGN §2)
+- `D2k\Ixian`: nonstandard filename `voices.yaml` (closed set, DESIGN §2)
+- `D2k\Ordos`: nonstandard filename `voices.yaml` (closed set, DESIGN §2)
+- `D2k\Shared`: nonstandard filename `voices.yaml` (closed set, DESIGN §2)
 
 ## P4 — naming summary (counts; details via gen_rename_maps)
 
-- actor ids violating the lowercase grammar: **1505** (e.g. 1TNK.camea, 2100A2MAT, 2100A2PT, 2100A2TIT, 2100A2VET, 2100AA, 2100AACH, 2100AAMAT)
+- actor ids violating the lowercase grammar: **1537** (e.g. 1TNK.camea, 2100A2MAT, 2100A2PT, 2100A2TIT, 2100A2VET, 2100AA, 2100AACH, 2100AAMAT)
 
-Total findings: 690
+Total findings: 694

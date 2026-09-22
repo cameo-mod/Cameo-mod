@@ -4,25 +4,25 @@
 
 Γ¢ö This **repeals the exemption** in `tools/audit/intentional_composites.py`. Its 224 entries are no longer 'reviewed, keep' ΓÇö they are the worklist. The registry data stays useful: it says which mains someone chose on purpose.
 
-concrete weapons with inherits: **2152**
+concrete weapons with inherits: **2149**
 
 W5 counts structural flat-damage nodes, including zero/healing/ally-only nodes; the split audit counts positive non-companion damage. Both resolve the full concrete weapon corpus. Use `--compare-split` for exact differences.
 
 | check | what | count | ratchet |
 |---|---|--:|--:|
-| W1 | more than 3 inherits | **561** (26.07% of 2152) | 26.16% |
-| W2 | two or more `^Warhead_*` inherits | **283** Γ¢ö | 177 |
+| W1 | more than 3 inherits | **559** (26.02% of 2149) | 26.16% |
+| W2 | two or more `^Warhead_*` inherits | **281** Γ¢ö | 177 |
 | W3 | two or more `^Projectile_*` inherits | **12** | 12 |
 | W4 | two or more `^Effect_*` inherits | **51** | 51 |
-| W5 | more than one resolved MAIN warhead | **305** | 389 |
-| W6 | effect warheads declared LOCALLY | **693** | 694 |
+| W5 | more than one resolved MAIN warhead | **216** | 389 |
+| W6 | effect warheads declared LOCALLY | **692** | 694 |
 | W7 | inherits from ANOTHER WEAPON, not a template | **963** Γ¢ö | 957 |
-| W8 | inherits a `^Template` that is not one of the three kinds | **722** | 858 |
+| W8 | inherits a `^Template` that is not one of the three kinds | **720** | 858 |
 
 | I7 informational ΓÇö missing template | weapons |
 |---|--:|
-| no `^Effect_*` inherit | 1323 |
-| no `^Projectile_*` inherit | 1441 |
+| no `^Effect_*` inherit | 1321 |
+| no `^Projectile_*` inherit | 1439 |
 | no `^Warhead_*` inherit | 1036 |
 
 _I7 is a REVIEW QUEUE, not a defect count ΓÇö an instant or utility weapon may legitimately have no projectile. Do not ratchet it without a per-weapon pass._
@@ -77,7 +77,7 @@ _I7 is a REVIEW QUEUE, not a defect count ΓÇö an instant or utility weapon ma
 _... and 923 more._
 
 
-## W8 ΓÇö inherits a `^Template` that is not one of the three kinds (722 vs ratchet 858)
+## W8 ΓÇö inherits a `^Template` that is not one of the three kinds (720 vs ratchet 858)
 
 | weapon | legacy templates | first four |
 |---|---|---|
@@ -89,7 +89,7 @@ _... and 923 more._
 | `155mmCryo` | 1 | `^CryoMissileProjectile` |
 | `25mm` | 5 | `^Grenade` · `^ShrapnelWeapon` · `^LightFlameWeapon` · `^MediumChemicalWeapon` |
 | `25mmWaveforce` | 2 | `^WaveforceBulletWarhead` · `^WaveforceBulletProjectile` |
-| `80mm_A` | 2 | `^D2K_Cannon` · `^D2K_Cannon` |
+| `80mm_A` | 1 | `^D2K_Cannon` |
 | `80mm_H` | 1 | `^D2K_Cannon` |
 | `AAGunBoatCannon` | 1 | `^RA2HeavyCannon` |
 | `AAGunBoatCannon_elite` | 1 | `^RA2EliteEffects` |
@@ -123,10 +123,10 @@ _... and 923 more._
 | `AsianPhotonCannon` | 4 | `^MediumMissile` · `^FlakWeapon` · `^TeslaWeapon` · `^MagicWeapon` |
 
 
-_... and 682 more._
+_... and 680 more._
 
 
-## W1 ΓÇö more than 3 inherits (561 vs ratchet 576)
+## W1 ΓÇö more than 3 inherits (559 vs ratchet 576)
 
 | weapon | inherits | first four |
 |---|---|---|
@@ -172,10 +172,10 @@ _... and 682 more._
 | `BlackEagleThunderboltMissiles` | 10 | `^Grenade` ┬╖ `^ShrapnelWeapon` ┬╖ `^HeavyBomb` ┬╖ `^HeavyMissile` |
 
 
-_... and 521 more._
+_... and 519 more._
 
 
-## W2 ΓÇö two or more `^Warhead_*` inherits (283 vs ratchet 177)
+## W2 ΓÇö two or more `^Warhead_*` inherits (281 vs ratchet 177)
 
 | weapon | warhead templates |
 |---|---|
@@ -221,7 +221,7 @@ _... and 521 more._
 | `DalekCannon` | `^Warhead_Railgun_Heavy_Flat` ┬╖ `^Warhead_Tesla_Heavy` ┬╖ `^Warhead_Laser_Heavy` |
 
 
-_... and 243 more._
+_... and 241 more._
 
 
 ## W3 ΓÇö two or more `^Projectile_*` inherits (12 vs ratchet 12)
@@ -291,31 +291,14 @@ _... and 243 more._
 _... and 11 more._
 
 
-## W5 ΓÇö more than one resolved MAIN warhead (305 vs ratchet 389)
+## W5 ΓÇö more than one resolved MAIN warhead (216 vs ratchet 389)
 
 | weapon | mains | which |
 |---|---|---|
 | `12MissilesSpawnerScud` | 4 | `Demolition_Heavy` ┬╖ `Demolition_Light` ┬╖ `Flame_Medium` ┬╖ `MissileAP_Heavy` |
-| `25mmWaveforce` | 2 | `CannonHE_Medium` ┬╖ `Railgun_Heavy` |
-| `AAGunBoatFlak` | 3 | `Bullet_Light` ┬╖ `Flak_Medium` ┬╖ `Flak_Medium_Flat` |
-| `AAGunBoatFlak_elite` | 3 | `Bullet_Light` ┬╖ `Flak_Medium` ┬╖ `Flak_Medium_Flat` |
-| `ATMine` | 2 | `ATMineDemolition_Light` ┬╖ `Demolition_Light` |
-| `ArmoredCarMGAAWaveforce` | 5 | `Bullet_Light` ┬╖ `Bullet_Medium` ┬╖ `CannonAP_Light` ┬╖ `CannonHE_Medium` |
-| `ArmoredCarMGWaveforce` | 2 | `Bullet_Medium` ┬╖ `Railgun_Heavy` |
-| `ArmoredCarMG_AA` | 4 | `Bullet_Light` ┬╖ `Bullet_Medium` ┬╖ `CannonAP_Light` ┬╖ `CannonHE_Medium` |
-| `AsianChaosMine` | 2 | `CannonAP_Light` ┬╖ `Chemical_Heavy` |
-| `AsianPhoenixRocket` | 3 | `Demolition_Light` ┬╖ `Flame_Medium` ┬╖ `MissileAP_Heavy` |
-| `AsianPhoenixRocket_elite` | 3 | `Demolition_Light` ┬╖ `Flame_Medium` ┬╖ `MissileAP_Heavy` |
-| `AsianSniper` | 3 | `Bullet_Heavy` ┬╖ `SniperChaingun` ┬╖ `SniperSmallArms` |
-| `AsianSniperAP` | 4 | `Bullet_Heavy` ┬╖ `Bullet_Medium` ┬╖ `SniperChaingun` ┬╖ `SniperSmallArms` |
-| `AsianSniperLockdown` | 6 | `Bullet_Heavy` ┬╖ `Bullet_Medium` ┬╖ `SniperChaingun` ┬╖ `SniperFlak` |
 | `AsianTSIonCannon` | 4 | `IonCannon` ┬╖ `TeslaChargedWeapon` ┬╖ `TeslaWeapon` ┬╖ `Tesla_Super` |
 | `Atomic` | 2 | `Nuclear_Super` ┬╖ `Tesla_Super` |
 | `BCLaser` | 2 | `CannonHE_Heavy` ┬╖ `Laser_Heavy_Flat` |
-| `BallistaMultiShot` | 2 | `Arrow_Medium` ┬╖ `CollapseTargetCompatibility1` |
-| `BallistaSingleShotAirEnergized` | 4 | `Arrow_Light` ┬╖ `Arrow_Light_Flat` ┬╖ `CannonHE_Medium` ┬╖ `MissileAP_Light` |
-| `BallistaTowerMultiShot` | 2 | `Arrow_Medium` ┬╖ `CollapseTargetCompatibility1` |
-| `BarrelExplode` | 2 | `1Dam` ┬╖ `Demolition_Light` |
 | `BroodweaverLeech` | 2 | `ExtraHealing` ┬╖ `HealingWeapon` |
 | `CHFlameBlue` | 2 | `1Dam` ┬╖ `Flame_Medium` |
 | `CabalAscendedRockets` | 2 | `MissileHE_Heavy` ┬╖ `MissileHE_HeavyGroundBonus` |
@@ -335,12 +318,29 @@ _... and 11 more._
 | `DTAtomic` | 2 | `Nuclear_Super` ┬╖ `Tesla_Super` |
 | `DeathHandCluster` | 3 | `1Dam` ┬╖ `Demolition_Light` ┬╖ `Flame_Light` |
 | `DreadshroudSpore` | 2 | `Chemical_Medium` ┬╖ `LaserExtraDamage_Auxiliary` |
+| `DredMissile` | 3 | `Demolition_Light` ┬╖ `MissileAP_Heavy` ┬╖ `RA2SCUDMissileAP_Heavy_NoWall` |
+| `ExecutionerDeath` | 7 | `10Dam_areanuke3` ┬╖ `11Dam_areanuke3` ┬╖ `1Dam_impact` ┬╖ `4Dam_areanuke1` |
+| `ExplosiveDebris` | 2 | `Demolition_Light` ┬╖ `Flame_Light` |
+| `FutureEnforcerShotgun` | 7 | `CannonHE_Medium` ┬╖ `ShotgunChaingun` ┬╖ `ShotgunGrenadeAlly` ┬╖ `ShotgunShrapnelAlly` |
+| `FutureEnforcerShotgunDeployed` | 7 | `CannonHE_Medium` ┬╖ `ShotgunChaingun` ┬╖ `ShotgunGrenadeAlly` ┬╖ `ShotgunShrapnelAlly` |
+| `FutureEnforcerShotgunDeployed_elite` | 7 | `CannonHE_Medium` ┬╖ `ShotgunChaingun` ┬╖ `ShotgunGrenadeAlly` ┬╖ `ShotgunShrapnelAlly` |
+| `FutureEnforcerShotgun_elite` | 7 | `CannonHE_Medium` ┬╖ `ShotgunChaingun` ┬╖ `ShotgunGrenadeAlly` ┬╖ `ShotgunShrapnelAlly` |
+| `FutureHarbingerCannon` | 2 | `CannonHE_Heavy` ┬╖ `Plasma_Heavy_Flat` |
+| `FutureHarbingerCannon_elite` | 2 | `CannonHE_Heavy` ┬╖ `Plasma_Heavy_Flat` |
+| `FutureTankCannons` | 2 | `CannonHE_Heavy` ┬╖ `CannonHE_Heavy_Flat` |
+| `FutureTankCannons_elite` | 2 | `CannonHE_Heavy` ┬╖ `CannonHE_Heavy_Flat` |
+| `Future_Cryocopter_Rocket` | 3 | `FutureCryocopterMissileAP_Medium` ┬╖ `FutureCryocopterMissileAP_MediumFriendly` ┬╖ `MissileAP_Medium_Flat` |
+| `GDIRigDroneRepair` | 2 | `ExtraRepair` ┬╖ `RepairWeapon` |
+| `GDIRigDroneTargeting` | 2 | `ExtraRepair` ┬╖ `RepairWeapon` |
+| `GDIRigDroneTargetingTower` | 2 | `ExtraRepair` ┬╖ `RepairWeapon` |
+| `GLASCUD` | 2 | `1Dam` ┬╖ `MissileHE_Heavy` |
+| `GLASCUDPOWER` | 2 | `1Dam` ┬╖ `MissileHE_Heavy` |
 
 
-_... and 265 more._
+_... and 176 more._
 
 
-## W6 ΓÇö effect warheads declared LOCALLY (693 vs ratchet 694)
+## W6 ΓÇö effect warheads declared LOCALLY (692 vs ratchet 694)
 
 | weapon | nodes | first three |
 |---|---|---|
@@ -386,7 +386,7 @@ _... and 265 more._
 | `BigChemSpray` | 1 | `Warhead@3Eff: CreateEffect` |
 
 
-_... and 653 more._
+_... and 652 more._
 
 
 **FAIL ΓÇö W2, W7 rose above baseline.** A weapon was given a second warhead, projectile or effect. The law allows exactly three inherits and one main.

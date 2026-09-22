@@ -2,13 +2,13 @@
 
 | code | check | count | ratchet |  |
 |---|---|---|---|---|
-| R1 | ground-only weapon not flying MissileHE | 15 | 51 | PASS |
+| R1 | ground-only weapon not flying MissileHE | 11 | 51 | PASS |
 | R2 | air-only weapon not flying MissileAA | 8 | 33 | PASS |
 | R3 | dual-role weapon not flying MissileAP | 4 | 47 | PASS |
 | R4 | MissileHE reachable against Air (hard rule) | 4 | 50 | PASS |
 
 
-378 concrete weapon(s) fly a Missile* main; 280 already match their role.
+361 concrete weapon(s) fly a Missile* main; 268 already match their role.
 
 
 ## custom selectors - domain verdict withheld
@@ -38,7 +38,6 @@
 | ra1_soviets_mammothtank_mammothtusktesla | Ground, Water, Infantry, Monster, Air | wall |
 | ra1_soviets_monstertank_missile_tesla | Ground, Water, Infantry, Monster, Air | wall |
 | ra1_soviets_siegemammothtank_mammothtusk2 | Ground, Water, Infantry, Monster, Air | wall |
-| ra1_soviets_submarine_torpedo | Water, Underwater, Bridge |  |
 | ra1_soviets_submarine_torpedo_thermobaric | Water, Underwater, Bridge |  |
 | td_nod_attacksubmarine_nodtorptube | Water, Underwater, Bridge |  |
 | td_nod_attacksubmarine_nodtorptubeblackmarket | Water, Underwater, Bridge |  |
@@ -51,7 +50,7 @@ These selectors need recipient-type evidence; they are not certified conforming.
 | family | weapons |
 |---|---|
 | MissileChem | 16 |
-| MissileCryo | 6 |
+| MissileCryo | 4 |
 | MissileFire | 7 |
 | MissileQuantum | 4 |
 | MissileSonic | 2 |
@@ -69,7 +68,7 @@ Groups only enumerated one-parent wrappers whose current ordered payload equals 
 
 | code | raw findings | exact-equivalence groups |
 |---|---|---|
-| R1 | 15 | 15 |
+| R1 | 11 | 11 |
 | R2 | 8 | 8 |
 | R3 | 4 | 4 |
 | R4 | 4 | 4 |

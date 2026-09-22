@@ -1,6 +1,6 @@
 # audit_duplicate_keys — duplicate keys in one node (ambiguous merges)
 
-Files scanned: **652** — D1 ambiguous inheritance labels: **0**, D2 merged duplicates: **265**
+Files scanned: **657** — D1 ambiguous inheritance labels: **0**, D2 merged duplicates: **267**
 
 
 ## D1 — duplicate inheritance labels with different parent values
@@ -61,12 +61,14 @@ _none found_
 | mods/cameo/chrome/ingame_observer.yaml | 316, 320 | Container@OBSERVER_WIDGETS > Children > Image@REPLAY_PLAYER | Visible |
 | mods/cameo/chrome/settings_display.yaml | 26, 80, 110, 141, 165, 191, 206, 228, 283, 344, 386, 399, 431, 444, 457, 470, 483, 496, 509 | Container@DISPLAY_PANEL > Children > ScrollPanel@SETTINGS_SCROLLPANEL > Children | Container@ROW |
 | mods/cameo/chrome/settings_display.yaml | 66, 269 | Container@DISPLAY_PANEL > Children > ScrollPanel@SETTINGS_SCROLLPANEL > Children | Container@SPACER |
-| mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 2703, 2732 | ArmoredCarMGWaveforce | Warhead@Railgun_Heavy_ExtraDamage |
-| mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 2762, 2789 | ArmoredCarMGAAWaveforce | Warhead@Railgun_Heavy_ExtraDamage |
+| mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 1662, 1668 | JapaneseHovercraftFlakAAkWaveforce | Warhead@Railgun_Heavy |
+| mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 2617, 2647 | ArmoredCarMGWaveforce | Warhead@Railgun_Heavy_ExtraDamage |
+| mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 2675, 2703 | ArmoredCarMGAAWaveforce | Warhead@Railgun_Heavy_ExtraDamage |
 | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/sequences.yaml | 11, 37 | ra2_allies_alliedconstructionyard | dead |
 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/sequences.yaml | 3775, 3781 | yrslav | cheer |
 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/sequences.yaml | 3914, 3918 | ra2howi | muzzle |
 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/sequences.yaml | 3927, 3931 | ra2arty | muzzle |
+| mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml | 2526, 2533 | MigMissiles_rad_elite | Warhead@Chemical_Medium |
 | mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/sequences.yaml | 4, 45 | yuri_constructionyard | build |
 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/sequences.yaml | 11, 31 | asianalliance_asianconstructionyard | dead |
 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/sequences.yaml | 1275, 1304 | asianalliance_asianflametrooper | shoot |
@@ -325,5 +327,5 @@ _none found_
 | mods/cameo/weapons/wh40k.yaml | 354, 357 | WH40KShootaBoyzGun | Warhead@1Dam |
 
 
-**FAIL** — D2 count 265 exceeds the baseline 260: a new duplicate key was introduced.
+**FAIL** — D2 count 267 exceeds the baseline 260: a new duplicate key was introduced.
 

@@ -1,6 +1,6 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **142**, files touched: **1268**
+Commits reviewed: **156**, files touched: **1817**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
@@ -26,8 +26,8 @@ Commits reviewed: **142**, files touched: **1268**
 | tools/audit/audit_bot_insurance.py | not invoked by run_all.sh |
 | tools/audit/audit_chrome_master_freshness.py | not invoked by run_all.sh |
 | tools/audit/audit_chrome_scale_variants.py | not invoked by run_all.sh |
-| tools/audit/audit_drain_status.py | not invoked by run_all.sh |
 | tools/audit/audit_inline_effects.py | not invoked by run_all.sh |
+| tools/audit/audit_orphan_removals.py | not invoked by run_all.sh |
 | tools/audit/audit_promotion_superiority.py | not invoked by run_all.sh |
 | tools/audit/audit_scaled_bullet_overrides.py | not invoked by run_all.sh |
 | tools/audit/audit_upgrade_regression.py | not invoked by run_all.sh |
@@ -63,20 +63,20 @@ _none found_
 | file | commits touching it |
 |---|---|
 | docs/DESIGN.md | 33 |
-| docs/HANDOFF.md | 30 |
+| docs/HANDOFF.md | 32 |
 | docs/balance/derived/armament_pairing.json | 15 |
 | tools/balance/build_reference_report.py | 15 |
 | tools/balance/reference_targets.py | 14 |
-| docs/balance/derived/redalert_allies.json | 10 |
-| docs/balance/derived/redalert_japan.json | 10 |
-| docs/balance/derived/redalert_soviets.json | 10 |
-| docs/balance/derived/shared_redalert.json | 10 |
-| docs/balance/derived/tiberiandawn_gdi.json | 10 |
-| docs/balance/derived/tiberiandawn_nod.json | 10 |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 10 |
-| docs/balance/derived/d2k_atreides.json | 9 |
-| docs/balance/derived/d2k_corrino.json | 9 |
-| docs/balance/derived/d2k_harkonnen.json | 9 |
+| DEVELOPMENT_LOG.md | 12 |
+| docs/balance/derived/redalert_allies.json | 11 |
+| docs/balance/derived/redalert_japan.json | 11 |
+| docs/balance/derived/redalert_soviets.json | 11 |
+| docs/balance/derived/shared_redalert.json | 11 |
+| docs/balance/derived/tiberiandawn_gdi.json | 11 |
+| docs/balance/derived/tiberiandawn_nod.json | 11 |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 11 |
+| docs/balance/derived/d2k_atreides.json | 10 |
+| docs/balance/derived/d2k_corrino.json | 10 |
 
 
 ## Reviewer checklist (not machine-checkable)

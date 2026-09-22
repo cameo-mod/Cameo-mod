@@ -1,13 +1,13 @@
 === 52 VIOLATIONS + 0 REDUNDANT (Image: explosion) ===
 
-[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:1103  Hakureiring2  Image: hakurei_giphy
-[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:1167  ReimuYinYangDrone  Image: hakurei_giphy
-[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:1185  THMiss  Image: hakurei_dream
-[VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:4042  RA2CorpseSpawner  Image: ra2corpse
-[VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:4078  RA2FlyingBody  Image: ra2corpse
-[VIOLATION] mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml:2423  AsianTSIonCannon  Image: tsioncannon
-[VIOLATION] mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:2072  TDIonCannon  Image: tsioncannon
-[VIOLATION] mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:2084  TDIonCannon  Image: ionsfx
+[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:1023  Hakureiring2  Image: hakurei_giphy
+[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:1087  ReimuYinYangDrone  Image: hakurei_giphy
+[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:1105  THMiss  Image: hakurei_dream
+[VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:4040  RA2CorpseSpawner  Image: ra2corpse
+[VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:4076  RA2FlyingBody  Image: ra2corpse
+[VIOLATION] mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml:2425  AsianTSIonCannon  Image: tsioncannon
+[VIOLATION] mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:2071  TDIonCannon  Image: tsioncannon
+[VIOLATION] mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:2083  TDIonCannon  Image: ionsfx
 [VIOLATION] mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1207  TSIonCannon  Image: tsioncannon
 [VIOLATION] mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1381  E1Droppod  Image: tsdroppod
 [VIOLATION] mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1389  E1Droppod  Image: tsdroppod

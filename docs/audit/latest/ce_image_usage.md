@@ -4,13 +4,13 @@ tsdig: ALSO-USED (3)
   mods\cameo\sequences\tiberiansun.yaml:1246: 		Filename: tsdig.shp
 tsioncannon: ALSO-USED (11)
   mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\buildings.yaml:1050: 		Effect: tsioncannon
-  mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml:2512: 		RingImage: tsioncannon
+  mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml:2514: 		RingImage: tsioncannon
   mods\cameo\ContentPacks\RedAlert2Mod\Consortium\yaml\buildings.yaml:384: 		Effect: tsioncannon
   mods\cameo\ContentPacks\StarCraft\Protoss\yaml\buildings.yaml:600: 		Effect: tsioncannon
   mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\buildings.yaml:254: 		Effect: tsioncannon
 ionsfx: ALSO-USED (3)
-  mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:2112: 		Image: ionsfx
-  mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:2116: 		TrailImage: ionsfx
+  mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:2111: 		Image: ionsfx
+  mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:2115: 		TrailImage: ionsfx
   mods\cameo\sequences\misc.yaml:3472: 		Filename: ionsfx.shp
 tspodring: ALSO-USED (3)
   mods\cameo\sequences\misc.yaml:2636: 	tspodring:
@@ -22,10 +22,10 @@ tsdroppod: ALSO-USED (2)
   mods\cameo\ContentPacks\TiberianSun\GDI\yaml\aircraft.yaml:499: 		Image: tsdroppod
   mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1375: 		Image: tsdroppod
 hakurei_giphy: ALSO-USED (2)
-  mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:1149: 		Image: hakurei_giphy
+  mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:1069: 		Image: hakurei_giphy
   mods\cameo\sequences\misc.yaml:4541: 		Filename: hakurei_giphy.shp
 hakurei_dream: ALSO-USED (2)
-  mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:1138: 		Image: hakurei_dream
+  mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:1058: 		Image: hakurei_dream
   mods\cameo\sequences\misc.yaml:4533: 		Filename: hakurei_dream.shp
 ra2corpse: CE-ONLY
 wc2_effect_sparkle: ALSO-USED (5)

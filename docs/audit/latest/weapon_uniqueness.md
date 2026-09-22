@@ -1,6 +1,6 @@
 # Weapon uniqueness (DESIGN.md §10 — faction identity)
 
-damaging armament weapons checked: 1483; W1 same-faction 37, W2 cross-faction 33, W3 carrier-only 89
+damaging armament weapons checked: 1481; W1 same-faction 37, W2 cross-faction 32, W3 carrier-only 89
 
 
 ## W1 — same faction, distinct actors, identical weapon (37)
@@ -46,7 +46,7 @@ damaging armament weapons checked: 1483; W1 same-faction 37, W2 cross-faction 33
 | wc2paladinexorcism | wc2_humans | wc2_humans_highelfpriest, wc2_humans_highelfsorceress |
 
 
-## W2 — identical weapon across factions (33)
+## W2 — identical weapon across factions (32)
 
 | weapon | families | factions | actors |
 |---|---|---|---|
@@ -63,7 +63,6 @@ damaging armament weapons checked: 1483; W1 same-faction 37, W2 cross-faction 33
 | sealattach | 3 | futuretech, ra2_allies, tkm | futuretech_blackwidow, ra2_allies_seal, tkm_spetsnaz |
 | tsengineerpistol | 3 | forgotten, ts_gdi, ts_nod | forgotten_engineer, ts_gdi_engineer, ts_nod_engineer |
 | 80mm_a | 2 | atreides, corrino | atreides_combattank, corrino_bmp |
-| d2k_155mm | 2 | atreides, corrino | atreides_siegetank, corrino_siegetank |
 | light_inf_lmg_upgrade | 2 | atreides, corrino, harkonnen, ixian, ordos | ixian_lightinfantry, light_inf |
 | naxlasert | 2 | schwarzermond, terran | schwarzermond_lasertower, terran_sentinel |
 | naxsturmarty | 2 | naxis, schwarzermond | naxis_sturmtiger, schwarzermond_sturmcannon |

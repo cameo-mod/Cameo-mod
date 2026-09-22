@@ -15,12 +15,12 @@ X5 suffix ordering violations: **0**
 ## X3 — AA-only weapons not following _AA convention
 | File | Line | Weapon | ValidTargets |
 |---|---|---|---|
-| ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 568 | BallistaSingleShotAir | Air |
-| ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 577 | BallistaSingleShotAirEnergized | Air |
+| ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 495 | BallistaSingleShotAir | Air |
+| ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 504 | BallistaSingleShotAirEnergized | Air |
 | ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml | 141 | ConsortiumMissileSystem | Air |
 | ContentPacks/StarCraft/Terran/yaml/weapons.yaml | 1087 | GoliathMk2Rockets | Air |
-| ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1102 | td_nod_buggymkii_laserbuggy2_AAinferno | Air |
-| ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1111 | td_nod_buggymkii_laserbuggy2_AAburning | Air |
+| ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1101 | td_nod_buggymkii_laserbuggy2_AAinferno | Air |
+| ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1110 | td_nod_buggymkii_laserbuggy2_AAburning | Air |
 | ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1569 | CabalLaserBoatLaserAA | Air |
 | ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1917 | CabalManticoreMissilesAA | Air |
 | ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 663 | TSMammothTusk2 | Air |

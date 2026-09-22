@@ -4,7 +4,7 @@
 |---|---|---|---|
 | T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (13 file(s)) | 209 | >= 24 |
 | T2 | `def test_*` in tools/tests (268 file(s)) | 2782 | >= 177 |
-| T3 | modules with no test mentioning them | 278 | <= 224 |
+| T3 | modules with no test mentioning them | 279 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (278)
+## T3 — untested modules (279)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -200,6 +200,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_naming_damage.py | audit_naming_damage |
 | python | tools/audit/audit_nuclear_flash_bindings.py | audit_nuclear_flash_bindings |
 | python | tools/audit/audit_original_coverage.py | audit_original_coverage |
+| python | tools/audit/audit_orphan_removals.py | audit_orphan_removals |
 | python | tools/audit/audit_orphans.py | audit_orphans |
 | python | tools/audit/audit_outliers.py | audit_outliers |
 | python | tools/audit/audit_packs.py | audit_packs |
@@ -301,5 +302,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 278 untested > baseline 224
+- T3: 279 untested > baseline 224
 
