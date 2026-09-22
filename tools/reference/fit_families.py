@@ -61,6 +61,7 @@ sys.path.insert(0, str(ROOT / "tools" / "audit"))
 sys.path.insert(0, str(ROOT / "tools" / "reference"))
 
 import armor_interpolate as ai  # noqa: E402
+import cameo_families as cf  # noqa: E402
 import warhead_matrix as wm  # noqa: E402
 
 GROUPS = ROOT / "docs" / "reference" / "warhead_groups.json"
@@ -84,20 +85,15 @@ SKIP = {
 }
 
 
-# Cameo's four weapon levels. The template name is `^Warhead_<Family>_<Level>[_<Variant>]`, so the
-# family must be found by LOCATING the level token, never by splitting on the last underscore:
-# `^Warhead_CannonHE_Heavy_D2K_DevBullet` rpartitions to the family "CannonHE_Heavy_D2K" and the
-# level "DevBullet", inventing three families that do not exist.
-LEVELS = ("Light", "Medium", "Heavy", "Super")
+# The template name is `^Warhead_<Family>_<Level>[_<Variant>]` and the parser lives in
+# `cameo_families`; see its docstring for why splitting on the last underscore is wrong.
+LEVELS = cf.LEVELS
 
 
 def split_template(name: str) -> tuple:
     """`^Warhead_CannonHE_Heavy_D2K_DevBullet` -> ("CannonHE", "Heavy")."""
-    parts = name[len("^Warhead_"):].split("_")
-    for i, part in enumerate(parts):
-        if part in LEVELS:
-            return "_".join(parts[:i]), part
-    return "_".join(parts), ""
+    family, level, _variant = cf.split_template(name)
+    return family, level
 
 
 def normalise(profile: dict) -> dict:

@@ -59,7 +59,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools" / "audit"))
 sys.path.insert(0, str(ROOT / "tools" / "reference"))
 
-from miniyaml import Ruleset  # noqa: E402
+import cameo_families as cf  # noqa: E402
 
 GROUPS = ROOT / "docs" / "reference" / "warhead_groups.json"
 DOC = ROOT / "docs" / "reference" / "warhead_family_assignment.yaml"
@@ -73,23 +73,12 @@ MIN_VOTERS = 3
 def ground_truth() -> dict:
     """{weapon: {family: weight}} from the `^Warhead_<Family>_<Level>` templates it inherits.
 
-    A weapon inheriting two templates of the SAME family (`Bullet_Light` + `Bullet_Medium` -- the
-    legal between-tier mix) votes once for `Bullet`. One inheriting two DIFFERENT families splits
-    its vote, because which of them is "the" family is exactly the judgement under test.
+    Delegates to `cameo_families.labelled_weapons` so the LEVEL-token parser lives in one place.
+    This function once split on the last underscore and invented a family per template variant
+    (`CannonHE_Heavy_D2K` alongside `CannonHE`), which inflated the family count 51 -> 53 and
+    silently scattered the ground truth it was meant to define.
     """
-    rs = Ruleset(ROOT, "cameo")
-    out: dict = {}
-    for name, raw in rs.weapons.items():
-        if name.startswith("^") or name.startswith("-"):
-            continue
-        families = set()
-        for _, parent in rs.inherits_of(raw):
-            if parent.startswith("^Warhead_"):
-                rest = parent[len("^Warhead_"):]
-                families.add(rest.rsplit("_", 1)[0] if "_" in rest else rest)
-        if families:
-            out[name] = {f: 1.0 / len(families) for f in families}
-    return out
+    return cf.labelled_weapons()
 
 
 def tally_of(group: dict, truth: dict) -> collections.Counter:

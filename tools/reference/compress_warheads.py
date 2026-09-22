@@ -27,15 +27,41 @@ THE THREE THINGS THAT DECIDE A MERGE
    sequence of small differences into one enormous group — the classic way an automatic
    clustering quietly swallows the distinctions it was asked to preserve.
 
-THE THRESHOLD IS DELIBERATELY TIGHT
------------------------------------
-Measured on Combined Arms, pairwise shape distances run p25 0.351, median 0.542, max 1.820 (log
-units; 0.10 ~ a 10% difference per armour). `DEFAULT_TAU = 0.50` therefore sits well below the
-25th percentile: it merges only what is genuinely alike and leaves everything else alone. That is
-the "conservative first" the order asks for. Raise it later, with the counts in front of you.
+THE THRESHOLD IS SET BY MEASURED PURITY, NOT BY A PERCENTILE
+------------------------------------------------------------
+The first threshold, `0.50`, was chosen as "well below the 25th percentile" of Combined Arms'
+pairwise shape distances (p25 0.351, median 0.542, max 1.820; log units, 0.10 ~ a 10% difference
+per armour). That is a reasonable-sounding heuristic and it was too loose, which only became
+visible once there was something to score against.
+
+`validate_families.py` scores a grouping against the ONE labelled set in this lane: Cameo's own
+904 weapons, each of which states its family by inheriting `^Warhead_<Family>_<Level>` (R37). The
+question it asks of a threshold is *purity* — what share of a group belongs to its most common
+family. Purity is the CEILING on any single-family label, so a loose threshold caps the review
+before a human ever looks at it:
+
+    tau    groups   median purity   >=80% pure   usage-weighted
+    0.50      162         61%          11/53           53%
+    0.30      241         67%          18/61           67%
+    0.20      302         75%          29/71           77%
+    0.10      413         89%          47/71           84%
+
+At 0.50 a single group held a MEDIAN OF 3 distinct Cameo families (worst: 15) — no one label can
+be right about a group like that. Usage weighting made it WORSE (53%), because the big groups are
+the mixed ones, so reviewing "just the important ones" reviewed precisely the groups a single
+label fits worst.
+
+`DEFAULT_TAU = 0.20` (R41) buys 75% purity for 1,712 groups across all sources. 0.10 is purer
+still and costs another 279 groups for +14 points; 0.20 is the knee, and it is where the maintainer
+ruled.
+
+⚠ MOVING THIS NUMBER INVALIDATES GROUP NAMES, NOT DECISIONS. Agglomerative clustering NESTS: a
+tighter tau SUBDIVIDES the looser tau's groups rather than reshuffling them, so every reviewed
+decision survives as long as it is carried by WEAPON MEMBERSHIP. `retau_assignment.py` does
+exactly that — never re-apply an assignment file by group name after changing this.
 
     python tools/reference/compress_warheads.py --source combined_arms
-    python tools/reference/compress_warheads.py --source combined_arms --tau 0.30
+    python tools/reference/compress_warheads.py --source combined_arms --tau 0.50
     python tools/reference/compress_warheads.py --all --write
 """
 from __future__ import annotations
@@ -59,9 +85,9 @@ if hasattr(sys.stdout, "reconfigure"):
 
 OUT = ROOT / "docs" / "reference" / "warhead_groups.json"
 
-# Shape distance below which two warheads may merge, in log units. See the module docstring for
-# why this number and not a rounder one.
-DEFAULT_TAU = 0.50
+# Shape distance below which two warheads may merge, in log units. See the module docstring:
+# this number is set by MEASURED PURITY against Cameo's own labelled weapons, not by taste.
+DEFAULT_TAU = 0.20
 
 # ── Platform bands ────────────────────────────────────────────────────────────────────────────
 # A weapon's band is the band of the actors that FIRE it. This is what keeps the Obelisk apart

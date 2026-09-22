@@ -509,3 +509,67 @@ claims:
           if any(p.startswith('^Warhead_') for _, p in rs.inherits_of(raw)):
               n += 1
       print(n)
+
+  - id: warhead_reference_groups
+    value: 1712
+    tolerance: 60
+    what: >
+      Compression groups across all 20 reference sources at `compress_warheads.DEFAULT_TAU`,
+      which R41 set to 0.20. This is the size of the review surface: at the old tau 0.50 it was
+      1,184 groups whose median purity against Cameo's own labelled weapons was 61%, and R39
+      measured that no single-family label can beat a group's purity. If this number moves,
+      `DEFAULT_TAU` moved with it, and `warhead_family_assignment.yaml` must be carried forward
+      by `retau_assignment.py` (weapon membership) rather than re-applied by group NAME.
+    docs: [docs/design/REFERENCE_EXTRACTION_PLAN.md, docs/design/WARHEAD_REFERENCE_HANDOFF.md]
+    measure: |
+      import json
+      d = json.load(open('docs/reference/warhead_groups.json', encoding='utf-8'))
+      print(sum(len(v['groups']) for v in d.values()))
+
+  - id: cameo_shaped_families
+    value: 47
+    tolerance: 2
+    what: >
+      Live warhead families whose shipped 16-rung Versus profile is SHAPED — neither a constant
+      nor an even ramp. R42's census: 47 shaped, 2 flat by design (`Magic`, `Sonic`, which ignore
+      armour and are special-cased in both `class_tilt` and the heaviness bell), 2 hand-tuned
+      (`Nuclear_Super`, `Sniper_Light`). It pins the claim that there is NO unmeasured-family gap,
+      which three earlier estimates got wrong by inferring provenance from which JSON a family
+      appears in rather than measuring the template that ships.
+    docs: [docs/design/REFERENCE_EXTRACTION_PLAN.md]
+    measure: |
+      import collections, pathlib, sys
+      sys.path[:0] = ['tools/audit', 'tools/balance', 'tools/reference']
+      from miniyaml import Ruleset
+      import weapon_efficiency as we, cameo_families as cf, gen_weapon_template as gwt
+      rungs = [a for m in ('INF', 'VEH', 'BLD', 'AIR') for a in gwt.LADDERS[m]]
+      rs = Ruleset(pathlib.Path('.').resolve(), 'cameo')
+      def kind(vals):
+          s = sorted(vals)
+          if len(set(s)) == 1:
+              return 'flat'
+          steps = {round(b - a, 4) for a, b in zip(s, s[1:])}
+          if len(steps) == 1:
+              return 'ramp'
+          base = min(steps)
+          if base > 0 and all(abs(x / base - round(x / base)) < 1e-6 and round(x / base) <= 2
+                              for x in steps):
+              return 'ramp'
+          return 'shaped'
+      seen = collections.defaultdict(set)
+      for name in rs.weapons:
+          if not name.startswith('^Warhead_'):
+              continue
+          fam, level, var = cf.split_template(name)
+          if var:
+              continue
+          for c in rs.resolve_weapon(name).children:
+              k = c.key
+              if not k.startswith('Warhead') or 'ercentage' in k or 'riendly' in k:
+                  continue
+              v = we.versus_of(c)
+              vals = [v[a] for a in rungs if a in v]
+              if len(vals) == 16:
+                  seen[fam].add(kind(vals))
+              break
+      print(sum(1 for f, ks in seen.items() if ks == {'shaped'}))
