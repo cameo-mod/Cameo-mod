@@ -599,7 +599,28 @@ INI_LIST_BAND = {"InfantryTypes": "infantry", "VehicleTypes": "vehicle",
 # ⚠ `InfDeath` IS A DEATH ANIMATION, exactly like OpenRA's `*Death` tokens, and the same caution
 # applies: only the codes whose meaning is unambiguous across TS and RA2 are used — 3 burn, 4
 # electrocute, 6 and 7 the chemical/mutation pair. The rest say nothing about the element.
-INI_INFDEATH_ELEMENT = {"3": "Fire", "4": "Tesla", "6": "Toxin", "7": "Toxin"}
+# ⛔ MEASURED, NOT ASSUMED (R51). This table used to read {3: Fire, 4: Tesla, 6: Toxin, 7: Toxin}
+# on the stated grounds that those codes are "unambiguous across TS and RA2". They are not, and
+# the table was off by one on both elements it claimed to know.
+#
+# Calibrated by correlating each code against warhead NAMES in AGGREGATE across all seven INI
+# sources — which is sound because it identifies a CODE TABLE from hundreds of warheads, not an
+# individual weapon from its name (the thing R21 forbids). The pattern is identical in every
+# source, `ts` dialect included:
+#
+#     code   fire-named (7 sources)        tesla-named (7 sources)
+#       3    0  0  0  1  0  0  0            1  1  2  3  2  1  3
+#       4   18 13 26 18 10 16  9            0  0  3  4  0  1  0
+#       5    0  0  0  0  0  0  1            5 11 26  3  2  5  1
+#
+# So 4 is FIRE and 5 is ELECTRO, corpus-wide. The old table put Fire on 3 — which has NO fire
+# correlation anywhere and ~450 warheads behind it — and Tesla on 4, which is where the fire
+# weapons actually live. In Red Resurrection alone that mislabelled 82 warheads as Fire and 16
+# genuine flamethrowers (`FlamethrowerWH`, `DevilFlamerWH`, `FirestormWH`) as Tesla.
+#
+# Codes 6 and 7 are dropped: they showed NO toxin correlation in any source. Toxin has a real
+# signal already, `Tiberium=yes`, carried by 7-132 warheads per source.
+INI_INFDEATH_ELEMENT = {"4": "Fire", "5": "Tesla"}
 
 
 def _ini_yes(block: dict[str, str], key: str) -> bool:
