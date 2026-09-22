@@ -376,3 +376,42 @@ harkonnen_sardaukar_baron_elite:
 	icon:
 		Filename: d2k_sardaukar_elite_icon.shp
 		Scale: 1
+
+devastator:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2083
+		Facings: -32
+	muzzle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4060
+		Tick: 80
+		Facings: -32
+		BlendMode: Additive
+	active:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3839
+		Length: 14
+		Tick: 130
+		BlendMode: Additive
+	active-2:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4152
+		Length: 12
+		Tick: 100
+		BlendMode: Additive
+	icon:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4289
+		Offset: -30,-24

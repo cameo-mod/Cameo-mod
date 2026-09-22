@@ -1983,3 +1983,29 @@ ordos_eye_bombs:
 		Facings: -8
 		Transpose: true
 		ZOffset: 1023
+
+deviator_trail:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Start: 3788
+		Length: 5
+		Tick: 80
+		ZOffset: 1023
+
+d2k_missile:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3336
+		Facings: -32
+		ZOffset: 1023
+
+oneblastbullet:
+	idle:
+		Filename: oneblastbullet.shp
+		BlendMode: Additive
+		ZOffset: 1023
