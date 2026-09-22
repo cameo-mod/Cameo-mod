@@ -483,3 +483,29 @@ claims:
                            capture_output=True, text=True).stdout
       m = re.search(r'\*\*(\d+) ledger\(s\) drifted\*\*', out)
       print(m.group(1) if m else 0)
+
+  - id: cameo_family_labelled_weapons
+    value: 904
+    tolerance: 20
+    what: >
+      Concrete Cameo weapons whose inherit chain names a `^Warhead_<Family>_<Level>` template,
+      and therefore STATE their warhead family in the yaml rather than needing one assigned.
+      This is the labelled test set R39 rests on: it is the only source where a family
+      assignment can be SCORED instead of reviewed, and `tools/reference/validate_families.py`
+      uses it to measure every propagation method. If this collapses, R39's 19%/11% scores and
+      the tau-purity sweep are no longer measured against anything and must be re-run.
+      Related but NOT the same number as `warhead_family_reach`, which counts FIRED weapons
+      reaching a family over the whole actor set; this counts weapon definitions.
+    docs: [docs/design/REFERENCE_EXTRACTION_PLAN.md]
+    measure: |
+      import pathlib, sys
+      sys.path[:0] = ['tools/audit']
+      from miniyaml import Ruleset
+      rs = Ruleset(pathlib.Path('.').resolve(), 'cameo')
+      n = 0
+      for name, raw in rs.weapons.items():
+          if name.startswith('^') or name.startswith('-'):
+              continue
+          if any(p.startswith('^Warhead_') for _, p in rs.inherits_of(raw)):
+              n += 1
+      print(n)
