@@ -61,6 +61,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [`Inherits` POSITION is semantic, not cosmetic (2026-08-16)](#inherits-position-is-semantic-not-cosmetic-2026-08-16)
 - [Upgrade regressions feel like downgrades (2026-08-19)](#upgrade-regressions-feel-like-downgrades-2026-08-19)
 - [`git grep` and `miniyaml.load` BOTH silently under-read non-UTF-8 weapons yaml (2026-09-05)](#git-grep-and-miniyamlload-both-silently-under-read-non-utf-8-weapons-yaml-2026-09-05)
+- [⛔ Conflict-clean is not resolved-clean — a merge can pass every gate while damage drifts (2026-09-22)](#-conflict-clean-is-not-resolved-clean--a-merge-can-pass-every-gate-while-damage-drifts-2026-09-22)
 
 **Weapon templates, the 3-way split and the effect layer**
 
@@ -97,6 +98,36 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [Two ways a gate passes its own verification and is still broken (2026-08-23)](#two-ways-a-gate-passes-its-own-verification-and-is-still-broken-2026-08-23)
 - ["Regenerable" is a claim about a tool, and it needs running (2026-08-28)](#regenerable-is-a-claim-about-a-tool-and-it-needs-running-2026-08-28)
 - ["Not found" is not "not there" — three ways a grep lies (2026-08-28)](#not-found-is-not-not-there--three-ways-a-grep-lies-2026-08-28)
+
+---
+
+## ⛔ Conflict-clean is not resolved-clean — a merge can pass every gate while damage drifts (2026-09-22)
+
+The W24 lane-2 squash-merge onto master passed yaml parse,
+`find_empty_warhead` = 0, `audit_balance_drift` clean, and the boot-gate —
+and still shipped **78 weapons whose resolved damage sum differed from
+master**. `git rebase` resolves TEXT, not semantics: 52 stale-value
+overwrites (old branch values beating master's newer rebalances), 25 fold
+survivors computed on pre-rebase values, and one fold that collapsed four
+deliberate `PreservedFlat_*` channels into a single inflated node.
+
+**Rule:** after ANY merge or rebase that touches `weapons.yaml`, run
+`tools/audit/review_resolve_diff.py <master-tree> <branch-tree>` over
+**every weapon id your diff touches AND every `Inherits:` referrer of
+those weapons** — children outside the diff inherit the edited parents and
+drift invisibly (`WaveTurretImpact`, `GLASCUD`). Compare damage **sums**,
+not the OK/FLAGS verdict: a multiset arity difference is the point of a
+W24 fold, but `sum(branch) == sum(master)` per weapon is the invariant.
+
+Corollaries proven on that repair: a surviving channel master rebalanced
+gets master's value, never the branch's stale one; a fold survivor carries
+`master[survivor] + sum(master's folded-away channels)`; `PreservedFlat_*`
+/ `*_Flat` companion channels are deliberate structure — restore master's
+block, don't fold them; and damage-number repairs must re-run
+`extract_stats.py` so yaml and ledgers land in the same commit.
+Independent verification of the fix is cheap and worth asking for — DAWN's
+re-run caught the difference between "reviewed pre-repair" and "verified
+post-repair".
 
 ---
 
