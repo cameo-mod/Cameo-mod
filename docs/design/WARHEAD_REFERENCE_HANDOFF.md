@@ -101,7 +101,11 @@ after two averaging defects were fixed (R34, R35). `Heroic` stays derived per §
 
 ### Stage 3 — compression
 
-1,059 groups across 17 sources. The Westwood INI dialects needed their own signal extraction
+**1,712 groups across 20 sources, at `tau = 0.20` (R41).** The threshold was 0.50 until
+2026-09-22, chosen as "well below the 25th percentile" of the pairwise distances — a heuristic
+with nothing scoring it. `validate_families.py` scores a grouping against Cameo's own 904
+labelled weapons, and at 0.50 a group held a MEDIAN OF 3 distinct Cameo families: 61% purity,
+which is the CEILING on any single-family label. 0.20 buys 75%. See R39/R41. The Westwood INI dialects needed their own signal extraction
 (R38): they have no `Projectile:` or `DamageTypes:`, and their projectile NAMES are useless
 (`InvisibleWork`, `CannonInviso` are rendering variants). Delivery comes from weapon flags plus
 the `[Projectile]` section's behaviour; element from warhead flags with `InfDeath` only as a
@@ -113,12 +117,18 @@ Three sources do not compress, all by construction: `cameo` needs no compression
 
 ### Stage 4 — family assignment
 
-**Combined Arms is complete and maintainer-reviewed**: 118 groups, all `confirmed`, plus 82
-per-weapon overrides. The review is recorded per WEAPON, not per group, because group names carry
-a `_2`/`_3` suffix assigned by clustering order and shift whenever the compressor is re-run — which
-happened four times during the review and cost nothing because of this.
+**Combined Arms is complete and maintainer-reviewed**, and it SURVIVED the tau change intact:
+118 groups became **182** at tau 0.20 and all 182 inherited a reviewed decision — 74 carried, 72
+split, 36 all-overridden, **0 straddle, 0 unreviewed**. The acceptance test is not the counts but
+that **all 360 CA weapons resolve to the same family before and after (0 changed)**. The 72
+`split` rows are re-opened as `proposed`: the old review saw those weapons mixed in with others,
+so their label is inherited rather than re-confirmed.
 
-The other 16 sources carry 1,059 groups. `propagate_families.py` inherits a family wherever the
+That worked only because the review is recorded per WEAPON, not per group — group names carry a
+`_2`/`_3` suffix assigned by clustering order and shift whenever the compressor is re-run. Use
+`retau_assignment.py` for any future threshold change; never re-apply this file by group name.
+
+The other sources carry 1,500 groups. `propagate_families.py` inherits a family wherever the
 Combined Arms review fixed one for the same delivery x element x band triple:
 
 | | groups |
@@ -166,21 +176,44 @@ that URL, never publish a new one.
 
 ## The next task, concretely
 
-Work through the 512 groups that have no Combined Arms precedent, **one source at a time in usage
-order**, the way Combined Arms was done. For each source:
+⭐ **REFRESH THE 10 BASE PROFILES FROM THE 20-SOURCE CORPUS.** This is the family-outward half of
+the maintainer's 2026-09-22 ruling, and R42 measured why it is the whole job:
 
-1. `python tools/reference/propagate_families.py` and read that source's rows.
-2. Fill the `?` families, correct the `split` ones, leave the clean inherits alone.
-3. Record per-WEAPON decisions in an `overrides:` block, never per group name.
-4. Re-run `compress_warheads --all --write` and confirm nothing was lost.
+Every shaped family in the mod rests on ten measured ones — `Bullet`, `CannonAP`, `CannonHE`,
+`Flame`, `Laser`, `MissileAA`, `MissileAP`, `MissileHE`, `Prism`, `Tesla` — because the other 27
+live families are `BLEND_FAMILIES` and average their PARENTS' real profiles. Refreshing the ten
+therefore propagates to all 47 at once.
 
-Usage order by group count: `mental_omega` 130, `rise_of_the_east` 105, `red_resurrection` 104,
-`cnc_reloaded` 71, `romanovs_vengeance` 71, `ra20xx` 68, `shattered_paradise` 63, `ra2_reborn` 62,
-`twisted_insurrection` 61, `dta_enhanced` 35, `dta_classic` 30, `crystallized_nexus` 26,
-`openra_ra` 25, `openra_ts` 22, `openra_td` 19, `openra_d2k` 11.
+And they are stale in a specific, checkable way. `docs/reference/family_profiles.json` was
+generated on **2026-08-15** by `propose_family_profiles.py` over `survey_platforms.py` — the
+OLD single-machine extractor that traces INI files out of `~/Downloads`, which nobody else has.
+Its 31 entries carry **1 to 9 mods each**, gated at `min_rows: 8, min_mods: 3`. The pipeline in
+this document carries **20 sources and 1,712 groups** and is hermetic. The numbers that ship were
+never exposed to most of the corpus.
 
-⚠ `warhead_family_assignment.yaml` currently holds Combined Arms only. A second source needs
-either a second file or a `source:` key per block — decide that before starting, not halfway.
+So: point the profile proposal at `warhead_groups.json` + `warhead_family_assignment.yaml`
+instead of `survey_platforms`, re-derive the ten, and diff against what ships before writing
+anything. ⚠ `gen_weapon_template` consumes `family_profiles.json` directly, so a re-derivation
+moves live Versus tables — it is a `Versus` change and needs explicit permission (rule 4) and a
+boot gate.
+
+⚠ **THERE IS NO RAMP GAP TO FILL — do not go looking for one.** R42 measured the shipped
+templates: 47 shaped, 2 flat BY DESIGN (`Magic`, `Sonic`, which ignore armour and are
+special-cased in `class_tilt` AND the heaviness bell), 2 hand-tuned (`Nuclear_Super`,
+`Sniper_Light`). Three separate estimates of a "33 ramp" gap were wrong because they inferred a
+family's provenance from which JSON it appears in. Measure the template that ships.
+
+### The other half — assignment for the remaining sources
+
+`propagate_families.py` still proposes a family for the 1,500 non-CA groups by matching the
+delivery x element x band triple, and **R39 measured that at 19% top-1**. Treat its output as a
+shortlist, never as an answer, and read `--purity` alongside any score. Usage order by group
+count: `mental_omega` 169, `red_resurrection` 147, `rise_of_the_east` 140, `romanovs_vengeance`
+100, `ra20xx` 86, `shattered_paradise` 86, `ra2_reborn` 82, `twisted_insurrection` 75.
+
+⚠ `warhead_family_assignment.yaml` holds Combined Arms only. A second source needs either a
+second file or a `source:` key per block — the `source:` field already exists, so the decided
+layout is a glob over `warhead_family_assignment*.yaml` keyed by it.
 
 ## Open questions the maintainer has not ruled on
 
