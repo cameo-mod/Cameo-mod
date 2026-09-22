@@ -314,9 +314,9 @@ td_nod_upgrade_advancedguerillatactics:
 		Image: advancedguerillatacticsicon
 	#ProvidesPrerequisite:
 	ProvidesTeamProxyActor:
-		Actor: team_upgrade.up_advancedguerillatactics
+		Actor: td_nod_upgrade_advancedguerillatactics_proxy_actor
 
-team_upgrade.up_advancedguerillatactics:
+td_nod_upgrade_advancedguerillatactics_proxy_actor:
 	Inherits: ^ResearchedUpgradeTemplate
 	ProvidesPrerequisite:
 		Prerequisite: td_nod_upgrade_advancedguerillatactics
