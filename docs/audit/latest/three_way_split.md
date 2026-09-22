@@ -2,7 +2,7 @@
 
 _The `intentional_composites` exemption was DELETED 2026-09-06 (DESIGN §11b.1). Nothing is subtracted — every stack is debt._
 
-   1887  correct — exactly one main warhead
+   1907  correct — exactly one main warhead
     317  none — utility / effect-only weapons
     230  RAW STACKS — structural inventory
     230  STACKS — all debt under §11b.1
@@ -36,9 +36,9 @@ _The `intentional_composites` exemption was DELETED 2026-09-06 (DESIGN §11b.1).
 | 3 | Magic_Heavy + Tesla_Heavy |
 | 3 | Bullet_Medium + Concussion_Medium + Demolition_Light |
 | 3 | Laser_Heavy + Railgun_Heavy + Tesla_Heavy |
-| 3 | Quantum_HeavyFlatCompatibility + Tesla_Heavy |
-| 3 | CannonHE_Heavy + Railgun_HeavyFlatCompatibility + Tesla_Heavy |
-| 2 | Flak_Medium + Flak_MediumFlatCompatibility |
+| 3 | Quantum_Heavy_Flat + Tesla_Heavy |
+| 3 | CannonHE_Heavy + Railgun_Heavy_Flat + Tesla_Heavy |
+| 2 | Flak_Medium + Flak_Medium_Flat |
 | 2 | Bullet_Medium + Railgun_Heavy |
 
 WARN raw 230/322; (cross-check audit_weapon_shape W5)

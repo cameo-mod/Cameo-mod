@@ -2,9 +2,9 @@
 
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
-| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (11 file(s)) | 173 | >= 24 |
-| T2 | `def test_*` in tools/tests (165 file(s)) | 2036 | >= 177 |
-| T3 | modules with no test mentioning them | 261 | <= 224 |
+| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (13 file(s)) | 209 | >= 24 |
+| T2 | `def test_*` in tools/tests (268 file(s)) | 2782 | >= 177 |
+| T3 | modules with no test mentioning them | 278 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (261)
+## T3 — untested modules (278)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -39,6 +39,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Traits/AdaptiveGameSpeed.cs | AdaptiveGameSpeed |
 | C# | OpenRA.Mods.Cameo/Traits/AdaptiveGameSpeedHost.cs | AdaptiveGameSpeedHost |
 | C# | OpenRA.Mods.Cameo/Traits/AdaptiveSpeedController.cs | AdaptiveSpeedController |
+| C# | OpenRA.Mods.Cameo/Traits/AiLogFileAppender.cs | AiLogFileAppender |
 | C# | OpenRA.Mods.Cameo/Traits/AiMatchLogRecorder.cs | AiMatchLogRecorder |
 | C# | OpenRA.Mods.Cameo/Traits/AnnounceOnDamageState.cs | AnnounceOnDamageState |
 | C# | OpenRA.Mods.Cameo/Traits/ArmorPlating.cs | ArmorPlating, ArmorPlatingInit |
@@ -164,6 +165,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Widgets/ScaledImageWidget.cs | ScaledImageWidget |
 | python | tools/audit/audit_ai.py | audit_ai |
 | python | tools/audit/audit_ai_personalities.py | audit_ai_personalities |
+| python | tools/audit/audit_ammo_cadence.py | audit_ammo_cadence |
 | python | tools/audit/audit_armament_naming.py | audit_armament_naming |
 | python | tools/audit/audit_armor_upgrade_harm.py | audit_armor_upgrade_harm |
 | python | tools/audit/audit_asset_files.py | audit_asset_files |
@@ -173,12 +175,13 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_buildable_order.py | audit_buildable_order |
 | python | tools/audit/audit_burst_delays.py | audit_burst_delays |
 | python | tools/audit/audit_ca_drift.py | audit_ca_drift |
+| python | tools/audit/audit_chrome_master_freshness.py | audit_chrome_master_freshness |
 | python | tools/audit/audit_code_duplication.py | audit_code_duplication |
 | python | tools/audit/audit_consistency_report.py | audit_consistency_report |
 | python | tools/audit/audit_damage_grid.py | audit_damage_grid |
 | python | tools/audit/audit_display_text.py | audit_display_text |
+| python | tools/audit/audit_drain_status.py | audit_drain_status |
 | python | tools/audit/audit_dune_rank_decoration.py | audit_dune_rank_decoration |
-| python | tools/audit/audit_duplicate_inherits.py | audit_duplicate_inherits |
 | python | tools/audit/audit_effect_warhead_names.py | audit_effect_warhead_names |
 | python | tools/audit/audit_elite_gating.py | audit_elite_gating |
 | python | tools/audit/audit_empty_warheads.py | audit_empty_warheads |
@@ -192,7 +195,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_metadata.py | audit_metadata |
 | python | tools/audit/audit_meter_dilution.py | audit_meter_dilution |
 | python | tools/audit/audit_min_range.py | audit_min_range |
-| python | tools/audit/audit_missile_role_family.py | audit_missile_role_family |
 | python | tools/audit/audit_missing_elite.py | audit_missing_elite |
 | python | tools/audit/audit_multiplier_modifiers.py | audit_multiplier_modifiers |
 | python | tools/audit/audit_naming_damage.py | audit_naming_damage |
@@ -205,7 +207,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_power_budget.py | audit_power_budget |
 | python | tools/audit/audit_promotion_gating.py | audit_promotion_gating |
 | python | tools/audit/audit_rank_decoration.py | audit_rank_decoration |
-| python | tools/audit/audit_release_drift.py | audit_release_drift |
 | python | tools/audit/audit_rename_safety.py | audit_rename_safety |
 | python | tools/audit/audit_sequences.py | audit_sequences |
 | python | tools/audit/audit_shrapnel_chains.py | audit_shrapnel_chains |
@@ -213,7 +214,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_survivability_pricing.py | audit_survivability_pricing |
 | python | tools/audit/audit_task_index.py | audit_task_index |
 | python | tools/audit/audit_template_conformance.py | audit_template_conformance |
-| python | tools/audit/audit_test_coverage.py | audit_test_coverage |
 | python | tools/audit/audit_ts_death_palette.py | audit_ts_death_palette |
 | python | tools/audit/audit_turn_speed.py | audit_turn_speed |
 | python | tools/audit/audit_unconverted_templates.py | audit_unconverted_templates |
@@ -222,7 +222,11 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_weapon_identity.py | audit_weapon_identity |
 | python | tools/audit/audit_weapon_suffixes.py | audit_weapon_suffixes |
 | python | tools/audit/audit_weapon_uniqueness.py | audit_weapon_uniqueness |
+| python | tools/audit/building_shape_damage.py | building_shape_damage |
 | python | tools/audit/check_effect_audio.py | check_effect_audio |
+| python | tools/audit/collapse_dead_warhead_inherits.py | collapse_dead_warhead_inherits |
+| python | tools/audit/content_pack_dependencies.py | content_pack_dependencies |
+| python | tools/audit/delivery_element_inventory.py | delivery_element_inventory |
 | python | tools/audit/effect_audit.py | effect_audit |
 | python | tools/audit/extract_reference_effects.py | extract_reference_effects |
 | python | tools/audit/find_empty_warhead.py | find_empty_warhead |
@@ -235,15 +239,21 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/gen_rename_maps.py | gen_rename_maps |
 | python | tools/audit/phase_b_survey.py | phase_b_survey |
 | python | tools/audit/propose_sonic_mapping.py | propose_sonic_mapping |
-| python | tools/audit/review_resolve_diff.py | review_resolve_diff |
+| python | tools/audit/status_effect_inventory.py | status_effect_inventory |
 | python | tools/audit/summarize_role_comparison.py | summarize_role_comparison |
 | python | tools/balance/_fix_min_range.py | _fix_min_range |
 | python | tools/balance/_requantize_ledgers.py | _requantize_ledgers |
 | python | tools/balance/_show_audit_summaries.py | _show_audit_summaries |
 | python | tools/balance/_write_weapon_class.py | _write_weapon_class |
+| python | tools/balance/ammo_cadence.py | ammo_cadence |
+| python | tools/balance/analyse_flat_main_fold.py | analyse_flat_main_fold |
+| python | tools/balance/apply_support_durability.py | apply_support_durability |
+| python | tools/balance/apply_transport_chassis.py | apply_transport_chassis |
 | python | tools/balance/armor_exposure.py | armor_exposure |
 | python | tools/balance/audit_below_divider.py | audit_below_divider |
+| python | tools/balance/carrier_slave_ammo.py | carrier_slave_ammo |
 | python | tools/balance/collapse_target.py | collapse_target |
+| python | tools/balance/compare_defense_armor_curves.py | compare_defense_armor_curves |
 | python | tools/balance/compensate_retrofit.py | compensate_retrofit |
 | python | tools/balance/consolidate_compatibility_profiles.py | consolidate_compatibility_profiles |
 | python | tools/balance/convert_apply_to_scaled_v2.py | convert_apply_to_scaled_v2 |
@@ -257,16 +267,22 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/gen_effects.py | gen_effects |
 | python | tools/balance/gen_projectiles.py | gen_projectiles |
 | python | tools/balance/harvester_table.py | harvester_table |
+| python | tools/balance/ini_range_evidence.py | ini_range_evidence |
 | python | tools/balance/measure_retrofit_gap.py | measure_retrofit_gap |
 | python | tools/balance/pending_classes.py | pending_classes |
 | python | tools/balance/plan_firepower_retirement.py | plan_firepower_retirement |
 | python | tools/balance/plan_warhead_collapse.py | plan_warhead_collapse |
 | python | tools/balance/preview_bell.py | preview_bell |
+| python | tools/balance/projectile_travel_evidence.py | projectile_travel_evidence |
 | python | tools/balance/proposal_contract.py | proposal_contract |
+| python | tools/balance/reference_coverage.py | reference_coverage |
 | python | tools/balance/remove_dead_weapons.py | remove_dead_weapons |
 | python | tools/balance/rename_3way_underscore.py | rename_3way_underscore |
+| python | tools/balance/render_defense_armor_curves.py | render_defense_armor_curves |
 | python | tools/balance/report_versus_change.py | report_versus_change |
+| python | tools/balance/resolved_gate.py | resolved_gate |
 | python | tools/balance/retained_firepower_survey.py | retained_firepower_survey |
+| python | tools/balance/retire_flat_shims.py | retire_flat_shims |
 | python | tools/balance/retrofit_legacy_template.py | retrofit_legacy_template |
 | python | tools/balance/retrofit_weapon_family.py | retrofit_weapon_family |
 | python | tools/balance/run_with_guard.py | run_with_guard |
@@ -275,6 +291,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/strip_weapon_versus.py | strip_weapon_versus |
 | python | tools/balance/sweep_areadamage.py | sweep_areadamage |
 | python | tools/balance/verify_retrofit.py | verify_retrofit |
+| python | tools/balance/yaml_ops.py | yaml_ops |
 | python | tools/packs/extract_shared.py | extract_shared |
 | python | tools/packs/split_faction.py | split_faction |
 | python | tools/rename/apply_ra1_legacy.py | apply_ra1_legacy |
@@ -284,5 +301,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 261 untested > baseline 224
+- T3: 278 untested > baseline 224
 

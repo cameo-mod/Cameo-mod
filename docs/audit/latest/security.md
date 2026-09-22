@@ -1,11 +1,11 @@
 # audit_security — credentials, code execution, supply chain
 
-Files scanned: **1714**
+Files scanned: **1942**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
 | S1 | committed credential shapes | 0 | 0 |
-| S2 | code execution from data | 3 | 0 |
+| S2 | code execution from data | 4 | 0 |
 | S3 | plaintext http:// download | 0 | 0 |
 | S4 | unpinned third-party GitHub Action | 0 | 0 |
 | S5 | unpinned/floating NuGet package | 0 | 0 |
@@ -17,10 +17,11 @@ Files scanned: **1714**
 _none found_
 
 
-## S2 — 3 finding(s)
+## S2 — 4 finding(s)
 
 | file | line | detail |
 |---|---|---|
+| tools/audit/audit_bot_insurance.py | 88 | `eval()` |
 | tools/balance/firepower_consumer_report.py | 34 | `exec()` |
 | tools/balance/formula.py | 59 | `eval()` |
 | tools/tests/test_audit_run_all_parser.py | 34 | `exec()` |
@@ -56,5 +57,5 @@ _none found_
 
 ## FAIL
 
-- S2: 3 > baseline 0
+- S2: 4 > baseline 0
 
