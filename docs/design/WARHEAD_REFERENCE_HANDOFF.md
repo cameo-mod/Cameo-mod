@@ -205,15 +205,48 @@ family's provenance from which JSON it appears in. Measure the template that shi
 
 ### The other half — assignment for the remaining sources
 
-`propagate_families.py` still proposes a family for the 1,509 non-CA groups by matching the
-delivery x element x band triple, and **R39 measured that at 19% top-1**. Treat its output as a
-shortlist, never as an answer, and read `--purity` alongside any score. Usage order by group
-count: `mental_omega` 169, `red_resurrection` 147, `rise_of_the_east` 140, `romanovs_vengeance`
-100, `shattered_paradise` 90, `ra20xx` 86, `ra2_reborn` 82, `twisted_insurrection` 75.
+⛔ **DO NOT GO LOOKING FOR A MATCHER. FOUR HAVE BEEN MEASURED AND THEY ALL SCORE ~20%.** R46 has
+the numbers, scored against Cameo's 904 self-labelled weapons and the 337 maintainer-reviewed
+Combined Arms ones:
 
-⚠ `warhead_family_assignment.yaml` holds Combined Arms only. A second source needs either a
-second file or a `source:` key per block — the `source:` field already exists, so the decided
-layout is a glob over `warhead_family_assignment*.yaml` keyed by it.
+| method | top-1 | shortlist |
+|---|--:|--:|
+| propagation by delivery x element x band | 17% | 34% |
+| direct categorical construction | 20% | 38% |
+| name evidence | 17% | — (40% precision on 42% coverage) |
+| nearest Versus shape | 3–11% | 19% |
+
+against a **75% median-purity ceiling**. The one that *should* have worked is the direct
+construction — Cameo's vocabulary IS delivery x element, so `(Missile, Fire)` ought to be
+`MissileFire`. It fails because the map is not injective: `Bullet`, `CannonHE`, `CannonAP`,
+`Demolition`, `Concussion`, `Flak` and `Arrow` all measure as roughly `(Bullet, HE)`, and the
+thing that separates them is the profile shape, which is the 3–11% method.
+
+**So the 1,509 unassigned groups are a judgement task.** The maintainer authorised it being done
+here for later review — *"fit everything from all mods into that reference table yourself and I
+should try to review everything"* — but it cannot be automated and declared finished.
+
+How to actually work a source:
+
+1. `python tools/reference/propagate_families.py` and read that source's rows. Treat every
+   proposal as a SHORTLIST entry (34–38% containment), never as an answer.
+2. For each group, weigh the measured signals together — delivery, element, band, profile shape,
+   `uses`, and the example weapon names. No single one decides it; that is what R46 measured.
+3. Record the decision per WEAPON in `overrides:`, never per group name. Group names are an
+   artefact of one compression run.
+4. Re-run `compress_warheads --all --write` and confirm nothing was lost.
+
+⚠ A per-weapon override BEATS its group, and an overridden weapon does not vote for its group in
+any later migration (R41). That is what makes per-weapon records safe across re-clustering.
+
+⚠ `warhead_family_assignment.yaml` holds Combined Arms only. A second source needs either a second
+file or a `source:` key per block — the `source:` field already exists, so the decided layout is a
+glob over `warhead_family_assignment*.yaml` keyed by it.
+
+Usage order by group count: `mental_omega` 169, `red_resurrection` 147, `rise_of_the_east` 140,
+`romanovs_vengeance` 100, `shattered_paradise` 90, `ra20xx` 86, `ra2_reborn` 82,
+`twisted_insurrection` 75, `cnc_reloaded` 96, `dta_enhanced` 57, `dta_classic` 42,
+`openra_ra` 33, `crystallized_nexus` 28, `openra_ts` 22, `openra_td` 20, `openra_d2k` 15.
 
 ## Open questions the maintainer has not ruled on
 
