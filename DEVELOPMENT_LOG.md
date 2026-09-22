@@ -1,3 +1,20 @@
+## Devin-DAWN (A4) — D2k files closure: 522 attributed assets out of bits/d2k (2026-09-22, PR #427)
+
+**Branch:** `devin/dawn/d2k-files-closure`, stacked on `d2k-audio-closure` (#420).
+
+- Attribution via resolver + yaml scanning: sequence Filename/Files/Images,
+  voice-set keys with faction prefixes (keys like `_ESEL1` concat as
+  `A`+`_ESEL1`), tileset Images:, resolved Icon/Report/*Sound* fields.
+- Moved 522/950: Ordos 224, Ixian 90, Harkonnen 31, Atreides 30, Corrino 10,
+  Shared 137 -> files/{icons,sprites,sounds}; 17 named mounts in mod.yaml.
+- bits/d2k keeps its mount; remaining 428 = dead inventory + ~47 cross-theme
+  assets (DATA.R16: 14 referrers; d2kconcrete*.png feed 13 tilesets).
+- audit_asset_files.py A4 now reads manifest Voices: lists (mod.yaml + pack
+  content.yaml) — was blind to pack voices.yaml, reported false CRASH hits.
+- Boot-gate PASS. Note: engine/VERSION was UTF-16 again and unix-find shadows
+  cmd-find in launch-game.cmd under Git Bash — launched engine/bin/OpenRA.exe
+  directly with identical args (documented workaround).
+
 ## Devin-DAWN (A4) — D2k audio closure: legacy `audio/d2k.yaml` drained of live voice sets (2026-09-22, PR #420)
 
 **Branch:** `devin/dawn/d2k-audio-closure`, stacked on `d2k-sequence-closure` (#412).
