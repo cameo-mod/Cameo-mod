@@ -578,7 +578,13 @@ SECTION_RE = re.compile(r"^\s*\[([^\]]+)\]")
 # an INDEXED list — `0=medium`, `1=naval_light` — so a key pattern anchored on a letter silently
 # reads those sections as EMPTY. That is not a parse error anywhere: DTA simply came back with
 # the five built-in armors instead of eleven, and zero units, and the matrix still built.
-KEY_RE = re.compile(r"^\s*([A-Za-z0-9_][A-Za-z0-9_.]*)\s*=\s*(.*?)\s*(?:;.*)?$")
+# ⛔ `$` IS A LEGAL FIRST CHARACTER. DTA (Vinifera) inherits sections with `$Inherits=Parent`, and a
+# pattern that starts at a letter dropped every one of those lines in silence: 790 DTA sections -
+# 56 warheads, 132 weapons, 315 units - were read without their parent, so an inheriting warhead
+# such as `E3APRA` (`$Inherits=E3AP`) measured FLAT 100% everywhere. `extract_ini_units.py` had
+# already fixed the same regex in its own reader; this one never got the fix. `read_dta` resolves
+# the directive (R63).
+KEY_RE = re.compile(r"^\s*(\$?[A-Za-z0-9_][A-Za-z0-9_.]*)\s*=\s*(.*?)\s*(?:;.*)?$")
 
 # The five armor types the Tiberian Sun engine ships built in. DTA comments them out of its
 # `[ArmorTypes]` list (`;=none`) precisely because they are implicit, then appends its own.
@@ -928,12 +934,24 @@ def _dta_excluded(actor: str) -> bool:
     return actor.upper() in DTA_EXCLUDED_ACTORS
 
 
+def load_dta_ini(rules: pathlib.Path, overlay: pathlib.Path | None) -> dict[str, dict[str, str]]:
+    """DTA's INI as the game reads it: each file's `$Inherits=` flattened, then the overlay on top.
+
+    The SAME order `extract_ini_units.py` uses (flatten per file, then `merge_overlay`), so the
+    warhead matrix and the unit corpus cannot read one DTA section two different ways (R63).
+    """
+    from extract_ini_units import resolve_inherits  # the one flattener; do not grow a second
+
+    ini = resolve_inherits(parse_ini(rules))
+    if overlay is not None and overlay.exists():
+        for section, keys in resolve_inherits(parse_ini(overlay)).items():
+            ini.setdefault(section, {}).update(keys)
+    return ini
+
+
 def read_dta(rules: pathlib.Path, overlay: pathlib.Path | None) -> dict:
     """DTA Classic (`Rules.ini`) or Enhanced (`Rules.ini` + `Enhance.ini` on top)."""
-    ini = parse_ini(rules)
-    if overlay is not None and overlay.exists():
-        for section, keys in parse_ini(overlay).items():
-            ini.setdefault(section, {}).update(keys)
+    ini = load_dta_ini(rules, overlay)
 
     armors, spec = dta_armor_system(ini)
 
