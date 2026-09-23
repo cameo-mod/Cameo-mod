@@ -488,7 +488,7 @@ D2K_TowerMissile:
 	Warhead@DuneSand: LeaveSmudge
 		SmudgeType: SandCrater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		GlowScale: 1.5
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12
@@ -554,7 +554,7 @@ mtank_pri:
 D2KUnitExplodeSmall:
 	Inherits: ^Explosion
 	Inherits@fx: ^d2k_self_destruct
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ValidTargets: Ground, Air, Ship
 
 D2KUnitExplodeLarge:
