@@ -223,6 +223,20 @@
        },
        {
         "damage": "4",
+        "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
@@ -231,22 +245,8 @@
        {
         "damage": "4",
         "falloff": null,
-        "spread": "125",
-        "tag": "RailgunWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4",
-        "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "400",
-        "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -263,9 +263,7 @@
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
-       "^HeavyChemicalWeapon",
        "^RailgunWeapon",
-       "^HeavyMissile",
        "^HeavyBomb"
       ],
       "warheads": [
@@ -1600,6 +1598,7 @@
    "ts_gdi_empulsecannon": {
     "armaments": [
      {
+      "armament_name": "superweapon",
       "damage_warheads": [
        {
         "damage": "5000",
@@ -1752,13 +1751,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "8",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "125",
@@ -1770,6 +1762,13 @@
         "falloff": null,
         "spread": null,
         "tag": "HRailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -1784,7 +1783,6 @@
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
-       "^ShrapnelWeapon",
        "^RailgunWeapon"
       ],
       "warheads": [
@@ -2507,6 +2505,13 @@
        {
         "damage": "1",
         "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
@@ -2516,13 +2521,6 @@
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "125",
-        "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2536,9 +2534,8 @@
       "versus_templates": [
        "^Warhead_Flak_Medium",
        "^Warhead_Railgun_ExtraDamage",
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^RailgunWeapon"
+       "^RailgunWeapon",
+       "^Effect_Clsn_Small_RA2"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -2568,6 +2565,13 @@
        {
         "damage": "1",
         "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
@@ -2577,13 +2581,6 @@
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "125",
-        "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2597,9 +2594,8 @@
       "versus_templates": [
        "^Warhead_Flak_Medium",
        "^Warhead_Railgun_ExtraDamage",
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^RailgunWeapon"
+       "^RailgunWeapon",
+       "^Effect_Clsn_Small_RA2"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -3290,6 +3286,20 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunGrenadeAlly",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunShrapnelAlly",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -3323,20 +3333,6 @@
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunGrenadeAlly",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunShrapnelAlly",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
@@ -3348,13 +3344,7 @@
       "versus_templates": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^TankDestroyerCannon",
-       "^SmallArms",
-       "^Chaingun",
-       "^ShotgunCannonHEMediumCompatibility"
+       "^Effect_CannonHE_Medium"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -3373,6 +3363,20 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunGrenadeAlly",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "ShotgunShrapnelAlly",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -3406,20 +3410,6 @@
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunGrenadeAlly",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunShrapnelAlly",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
@@ -3431,13 +3421,7 @@
       "versus_templates": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^TankDestroyerCannon",
-       "^SmallArms",
-       "^Chaingun",
-       "^ShotgunCannonHEMediumCompatibility"
+       "^Effect_CannonHE_Medium"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -4095,9 +4079,7 @@
       "slot": "Armament@QUINTA",
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^ShrapnelWeapon"
+       "^Effect_CannonAP_Medium"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -4146,9 +4128,7 @@
       "slot": "Armament@SEXTA",
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^ShrapnelWeapon"
+       "^Effect_CannonAP_Medium"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -4263,9 +4243,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^ShrapnelWeapon"
+       "^Effect_CannonAP_Medium"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -5304,9 +5282,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^ShrapnelWeapon"
+       "^Effect_CannonAP_Medium"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"

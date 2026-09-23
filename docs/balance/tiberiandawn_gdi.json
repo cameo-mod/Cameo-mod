@@ -737,12 +737,7 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
-       "^HeavyCannon",
-       "^TankDestroyerCannon",
-       "^ShrapnelWeapon",
-       "^Grenade",
-       "^HeavyMissile",
-       "^MediumMissile"
+       "^Effect_CannonAP_Medium"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -1072,13 +1067,7 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
-       "^TankDestroyerCannon",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^FlakWeapon",
-       "^HeavyAAWeapon",
-       "^HeavyMissile",
-       "^MediumMissile"
+       "^Effect_Watersplash_Huge_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -1681,10 +1670,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Flak_Heavy",
-       "^SmallArms",
-       "^LightMissile",
-       "^Chaingun",
-       "^FlakWeapon"
+       "^Effect_Clsn_Small_RA2"
       ],
       "warheads": [
        "^Warhead_Flak_Heavy"
@@ -2506,6 +2492,20 @@
        },
        {
         "damage": "4",
+        "falloff": null,
+        "spread": "150",
+        "tag": "MediumCannonPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4",
+        "falloff": null,
+        "spread": "300",
+        "tag": "HeavyMissilePercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
@@ -2521,22 +2521,8 @@
        {
         "damage": "4",
         "falloff": null,
-        "spread": "150",
-        "tag": "MediumCannonPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4",
-        "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4",
-        "falloff": null,
-        "spread": "300",
-        "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2551,10 +2537,7 @@
        "^TeslaChargedWeapon",
        "^TeslaWeapon",
        "^MediumFlameWeapon",
-       "^ShrapnelWeapon",
-       "^HeavyCannon",
        "^MediumCannon",
-       "^MediumMissile",
        "^HeavyMissile"
       ],
       "warheads": [
@@ -2596,6 +2579,20 @@
        },
        {
         "damage": "4",
+        "falloff": null,
+        "spread": "150",
+        "tag": "MediumCannonPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4",
+        "falloff": null,
+        "spread": "300",
+        "tag": "HeavyMissilePercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
@@ -2611,22 +2608,8 @@
        {
         "damage": "4",
         "falloff": null,
-        "spread": "150",
-        "tag": "MediumCannonPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4",
-        "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4",
-        "falloff": null,
-        "spread": "300",
-        "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2641,10 +2624,7 @@
        "^TeslaChargedWeapon",
        "^TeslaWeapon",
        "^MediumFlameWeapon",
-       "^ShrapnelWeapon",
-       "^HeavyCannon",
        "^MediumCannon",
-       "^MediumMissile",
        "^HeavyMissile"
       ],
       "warheads": [
@@ -2859,9 +2839,7 @@
       "slot": "Armament@ra1_allies_alliedsniper",
       "versus_templates": [
        "^Warhead_Bullet_Heavy",
-       "^SniperWeapon",
-       "^Chaingun",
-       "^SniperBulletHeavyCompatibility"
+       "^SniperWeapon"
       ],
       "warheads": [
        "^Warhead_Bullet_Heavy"
@@ -2929,9 +2907,8 @@
       "slot": "Armament@Grenade",
       "versus_templates": [
        "^Warhead_Concussion_Medium",
-       "^ShrapnelWeapon",
-       "^Grenade",
-       "^EMPDamage"
+       "^EMPDamage",
+       "^Effect_Concussion_Light"
       ],
       "warheads": [
        "^Warhead_Concussion_Medium"
@@ -2973,8 +2950,7 @@
       "slot": "Armament@M16",
       "versus_templates": [
        "^Warhead_Bullet_Medium",
-       "^SniperWeapon",
-       "^Chaingun"
+       "^SniperWeapon"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -3015,9 +2991,7 @@
       "slot": "Armament@SniperGARRISONED",
       "versus_templates": [
        "^Warhead_Bullet_Heavy",
-       "^SniperWeapon",
-       "^Chaingun",
-       "^SniperBulletHeavyCompatibility"
+       "^SniperWeapon"
       ],
       "warheads": [
        "^Warhead_Bullet_Heavy"
@@ -3087,9 +3061,8 @@
       "slot": "Armament@GrenadeGARRISONED",
       "versus_templates": [
        "^Warhead_Concussion_Medium",
-       "^ShrapnelWeapon",
-       "^Grenade",
-       "^EMPDamage"
+       "^EMPDamage",
+       "^Effect_Concussion_Light"
       ],
       "warheads": [
        "^Warhead_Concussion_Medium"
@@ -3132,8 +3105,7 @@
       "slot": "Armament@M16GARRISONED",
       "versus_templates": [
        "^Warhead_Bullet_Medium",
-       "^SniperWeapon",
-       "^Chaingun"
+       "^SniperWeapon"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -3278,11 +3250,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Bullet_Heavy",
-       "^SmallArms",
-       "^Grenade",
-       "^FlakWeapon",
-       "^Chaingun",
-       "^SniperBulletHeavyCompatibility"
+       "^Effect_CannonHE_Heavy_D2K_DevBullet"
       ],
       "warheads": [
        "^Warhead_Bullet_Heavy"
@@ -3344,11 +3312,7 @@
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_Bullet_Heavy",
-       "^SmallArms",
-       "^Grenade",
-       "^FlakWeapon",
-       "^Chaingun",
-       "^SniperBulletHeavyCompatibility"
+       "^Effect_CannonHE_Heavy_D2K_DevBullet"
       ],
       "warheads": [
        "^Warhead_Bullet_Heavy"
@@ -4106,6 +4070,13 @@
        {
         "damage": "5",
         "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "5",
+        "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
@@ -4127,13 +4098,6 @@
        {
         "damage": "5",
         "falloff": null,
-        "spread": "125",
-        "tag": "RailgunWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "5",
-        "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
@@ -4148,11 +4112,8 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
-       "^TankDestroyerCannon",
-       "^LightChemicalWeapon",
-       "^ShrapnelWeapon",
        "^RailgunWeapon",
-       "^HeavyMissile"
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -4173,6 +4134,13 @@
        {
         "damage": "5",
         "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "5",
+        "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
@@ -4194,13 +4162,6 @@
        {
         "damage": "5",
         "falloff": null,
-        "spread": "125",
-        "tag": "RailgunWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "5",
-        "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
@@ -4215,11 +4176,8 @@
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
-       "^TankDestroyerCannon",
-       "^LightChemicalWeapon",
-       "^ShrapnelWeapon",
        "^RailgunWeapon",
-       "^HeavyMissile"
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -5408,13 +5366,6 @@
        },
        {
         "damage": "7",
-        "falloff": null,
-        "spread": "225",
-        "tag": "HeavyCannonPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "7",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
@@ -5433,6 +5384,13 @@
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "7",
+        "falloff": null,
+        "spread": "225",
+        "tag": "HeavyCannonPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -5445,7 +5403,6 @@
       "versus_templates": [
        "^Warhead_Concussion_Heavy",
        "^MediumCannon",
-       "^HeavyCannon",
        "^MediumFlameWeapon",
        "^ShrapnelWeapon",
        "^HeavyBomb"
@@ -6000,12 +5957,7 @@
       "slot": "Armament@AG",
       "versus_templates": [
        "^Warhead_Bullet_Medium_Flat",
-       "^SmallArms",
-       "^LightMissile",
-       "^Grenade",
-       "^MediumCannon",
-       "^Chaingun",
-       "^FlakWeapon"
+       "^Effect_CannonHE_Heavy_D2K_DevBullet"
       ],
       "warheads": [],
       "weapon": "td_gdi_boxer_boxercannonag",
@@ -6370,12 +6322,7 @@
       "slot": "Armament@mobile",
       "versus_templates": [
        "^Warhead_Bullet_Medium",
-       "^TankDestroyerCannon",
-       "^SmallArms",
-       "^Grenade",
-       "^MediumCannon",
-       "^FlakWeapon",
-       "^Chaingun"
+       "^Effect_CannonHE_Heavy_D2K_DevBullet"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"

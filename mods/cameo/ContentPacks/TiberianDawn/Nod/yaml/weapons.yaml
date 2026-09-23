@@ -1,9 +1,7 @@
 M16Laser:
 	Inherits@wh: ^Warhead_Laser_Heavy
-	Inherits: ^SmallArms
-	Inherits@2: ^Chaingun
 	Inherits@3: ^LaserWeapon
-	Inherits@legacychip: ^LegacyLaserChipCompatibility
+	Inherits: ^Effect_Sniper_Light
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 4983
@@ -11,10 +9,8 @@ M16Laser:
 	Projectile: LaserZap
 		Width: 25
 	TargetActorCenter: false
-	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 1
-	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 1
 	-Warhead@LaserWeapon:
@@ -26,6 +22,93 @@ M16Laser:
 		PercentageScale: 0
 	-Warhead@Laser_Heavy_ExtraDamage:
 
+	Projectile:
+		ContrailEndColor: 88664422
+		ContrailEndWidth: 80
+		ContrailLength: 8
+		ContrailStartColor: EECCAA88
+		ContrailStartWidth: 40
+		ContrailZOffset: 4000
+		Image: 50CAL
+		Inaccuracy: 200
+		Speed: 4000
+	Warhead@ChaingunPercentage:
+		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
+		Spread: 100
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water, Air
+		Versus:
+			Bomber: 12
+			Concrete: 11
+			Fighter: 15
+			Flak: 19
+			Heavy: 7
+			Helicopter: 9
+			Heroic: 17
+			Light: 13
+			Medium: 10
+			None: 20
+			Plate: 18
+			Scout: 16
+			Shield: 25
+			Spaceship: 6
+			Steel: 8
+			Superheavy: 5
+			Wood: 14
+	Warhead@Effect:
+		Explosions: small_napalm
+	Warhead@LegacyLaserExtraDamage: SpreadDamage
+		Damage: 600
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		Spread: 300
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water, Air
+		Versus:
+			Bomber: 1
+			Concrete: 1
+			Fighter: 1
+			Flak: 1
+			Heavy: 1
+			Helicopter: 1
+			Heroic: 1
+			Light: 1
+			Medium: 1
+			None: 1
+			Plate: 1
+			REFLECTOR: 50
+			Scout: 1
+			Shield: 100
+			Spaceship: 1
+			Steel: 1
+			Superheavy: 1
+			Wood: 1
+	Warhead@ShieldHit:
+		Duration: 10
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+	Warhead@SmallArmsPercentage:
+		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
+		Spread: 50
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water, Air
+		Versus:
+			Bomber: 8
+			Concrete: 4
+			Fighter: 11
+			Flak: 15
+			Heavy: 3
+			Helicopter: 5
+			Heroic: 13
+			Light: 9
+			Medium: 6
+			None: 16
+			Plate: 14
+			Scout: 12
+			Shield: 17
+			Spaceship: 2
+			Steel: 7
+			Superheavy: 1
+			Wood: 10
 td_nod_samsite_dragon:
 	Inherits: Dragon
 
@@ -195,9 +278,6 @@ td_nod_chemicalssmlauncher_bigtiberiumexplosion:
 
 td_nod_artillery_artilleryshellupgrade:
 	Inherits@collapsewh: ^Warhead_Concussion_Heavy
-	Inherits: ^Grenade
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^MediumChemicalWeapon
 	Inherits@4: ^MediumFlameWeapon
 	Inherits@5: ^MediumCannon
 	Inherits@6: ^HeavyBomb
@@ -270,6 +350,82 @@ td_nod_artillery_artilleryshellupgrade:
 		Damage: 81296
 		PercentageScale: 0
 
+	Projectile:
+		Blockable: false
+	Warhead@GrenadePercentage:
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Falloff: 100, 50, 33, 25, 20
+		Spread: 200
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		Versus:
+			Bomber: 3
+			Concrete: 13
+			Fighter: 4
+			Flak: 7
+			Heavy: 10
+			Helicopter: 2
+			Heroic: 5
+			Light: 14
+			Medium: 12
+			None: 9
+			Plate: 6
+			Scout: 16
+			Shield: 17
+			Spaceship: 1
+			Steel: 11
+			Superheavy: 8
+			Wood: 15
+	Warhead@MediumChemicalWeaponPercentage:
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		Falloff: 99, 66, 33
+		Spread: 350
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		PhysicalStates:
+			Corrosion: 100
+		Versus:
+			Bomber: 6
+			Concrete: 10
+			Fighter: 5
+			Flak: 17
+			Heavy: 18
+			Helicopter: 7
+			Heroic: 13
+			Light: 14
+			Medium: 16
+			None: 15
+			Plate: 19
+			Scout: 12
+			Shield: 25
+			Spaceship: 8
+			Steel: 11
+			Superheavy: 20
+			Wood: 9
+	Warhead@ShrapnelWeaponPercentage:
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Falloff: 100, 75, 50, 25
+		Spread: 300
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		Versus:
+			Bomber: 7
+			Concrete: 15
+			Fighter: 8
+			Flak: 16
+			Heavy: 11
+			Helicopter: 6
+			Heroic: 10
+			Light: 17
+			Medium: 14
+			None: 19
+			Plate: 13
+			Scout: 20
+			Shield: 25
+			Spaceship: 5
+			Steel: 12
+			Superheavy: 9
+			Wood: 18
 MachineGun:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
@@ -300,11 +456,8 @@ td_nod_buggy_fireballlauncherbuggy:
 		Damage: 1948
 td_nod_reconbike_rocket:
 	Inherits@collapsewh: ^Warhead_MissileAP_Medium
+	Inherits: ^Effect_CannonAP_Light
 	-TargetActorCenter:
-	Inherits: ^TankDestroyerCannon
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^FlakWeapon
-	Inherits@4: ^LightMissile
 	Burst: 2
 	BurstDelays: 10
 	ReloadDelay: 55
@@ -345,6 +498,135 @@ td_nod_reconbike_rocket:
 		Damage: 15970
 		PercentageScale: 0
 
+	Projectile:
+		Acceleration: 4
+		AllowSnapping: true
+		Arm: 0
+		Blockable: false
+		CloseEnough: 600
+		ContrailEndColor: 000000FF
+		ContrailEndWidth: 100
+		ContrailLength: 0
+		ContrailStartColor: FF884400
+		ContrailStartWidth: 50
+		ContrailZOffset: 4000
+		HomingActivationDelay: 1
+		HorizontalRateOfTurn: 40
+		Image: DRAGON
+		Inaccuracy: 50
+		MaximumLaunchSpeed: 300
+		MinimumLaunchSpeed: 300
+		PointDefenseTypes: Missile
+		RangeLimit: 20000
+		Shadow: true
+		Speed: 600
+		TrailImage: smokey
+		TrailInterval: 1
+	TargetActorCenter: true
+	Warhead@Effect:
+		Explosions: small_poof
+		ImpactActors: false
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Water
+	Warhead@EffectAir:
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+	Warhead@FlakWeaponPercentage:
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		Spread: 125
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water, Air
+		Versus:
+			Bomber: 19
+			Concrete: 6
+			Fighter: 20
+			Flak: 15
+			Heavy: 9
+			Helicopter: 18
+			Heroic: 13
+			Light: 11
+			Medium: 10
+			None: 16
+			Plate: 14
+			Scout: 12
+			Shield: 25
+			Spaceship: 17
+			Steel: 5
+			Superheavy: 8
+			Wood: 7
+	Warhead@Glow:
+		FadeFrames: 15
+		Scale: 0.8
+	Warhead@LightMissilePercentage:
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
+		Spread: 100
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water, Air
+		Versus:
+			Bomber: 10
+			Concrete: 9
+			Fighter: 7
+			Flak: 3
+			Heavy: 14
+			Helicopter: 13
+			Heroic: 1
+			Light: 8
+			Medium: 11
+			None: 2
+			Plate: 4
+			Scout: 5
+			Shield: 17
+			Spaceship: 15
+			Steel: 12
+			Superheavy: 16
+			Wood: 6
+	Warhead@ShieldHit:
+		Duration: 6
+	Warhead@ShrapnelWeaponPercentage:
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Falloff: 100, 75, 50, 25
+		Spread: 300
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 7
+			Concrete: 15
+			Fighter: 8
+			Flak: 16
+			Heavy: 11
+			Helicopter: 6
+			Heroic: 10
+			Light: 17
+			Medium: 14
+			None: 19
+			Plate: 13
+			Scout: 20
+			Shield: 25
+			Spaceship: 5
+			Steel: 12
+			Superheavy: 9
+			Wood: 18
+	Warhead@TankDestroyerCannonPercentage:
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Spread: 75
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 2
+			Concrete: 10
+			Fighter: 1
+			Flak: 7
+			Heavy: 15
+			Helicopter: 3
+			Heroic: 5
+			Light: 13
+			Medium: 14
+			None: 6
+			Plate: 8
+			Scout: 12
+			Shield: 17
+			Spaceship: 4
+			Steel: 11
+			Superheavy: 16
+			Wood: 9
 PDLaserBike:
 	Inherits: PDLaser
 	Range: 6000
@@ -508,16 +790,12 @@ td_nod_apacheattackhelicopter_missile:
 
 td_nod_gunturret_turretgun:
 	Inherits@collapsewh: ^Warhead_Concussion_Medium
-	Inherits: ^ShrapnelWeapon
-	Inherits@2: ^Grenade
-	Inherits@3: ^MediumCannon
-	Inherits@4: ^TankDestroyerCannon
+	Inherits: ^Effect_AlliedTigerCannon
 	ReloadDelay: 61
 	Range: 7711
 	Report: tnkfire6.aud
 	Projectile: Bullet
 		Speed: 771
-		-LaunchAngle:
 		Damage: 6000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 3
@@ -527,21 +805,120 @@ td_nod_gunturret_turretgun:
 		Damage: 3
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 3
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@MediumCannon:
-	-Warhead@TankDestroyerCannon:
 	Warhead@Concussion_Medium:
 		Damage: 19000
 		PercentageScale: 0
 
+	Projectile:
+		Blockable: false
+		Image: 120MM
+		Inaccuracy: 150
+		Shadow: true
+	Warhead@Concrete:
+		Damage: 100
+	Warhead@Effect:
+		ImpactActors: false
+	Warhead@EffectWater:
+		Explosions: med_splash
+	Warhead@GrenadePercentage:
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Falloff: 100, 50, 33, 25, 20
+		Spread: 200
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		Versus:
+			Bomber: 3
+			Concrete: 13
+			Fighter: 4
+			Flak: 7
+			Heavy: 10
+			Helicopter: 2
+			Heroic: 5
+			Light: 14
+			Medium: 12
+			None: 9
+			Plate: 6
+			Scout: 16
+			Shield: 17
+			Spaceship: 1
+			Steel: 11
+			Superheavy: 8
+			Wood: 15
+	Warhead@MediumCannonPercentage:
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
+		Spread: 150
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		Versus:
+			Bomber: 7
+			Concrete: 17
+			Fighter: 8
+			Flak: 11
+			Heavy: 14
+			Helicopter: 6
+			Heroic: 9
+			Light: 18
+			Medium: 16
+			None: 13
+			Plate: 10
+			Scout: 20
+			Shield: 25
+			Spaceship: 5
+			Steel: 15
+			Superheavy: 12
+			Wood: 19
+	Warhead@ShrapnelWeaponPercentage:
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Falloff: 100, 75, 50, 25
+		Spread: 300
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		Versus:
+			Bomber: 7
+			Concrete: 15
+			Fighter: 8
+			Flak: 16
+			Heavy: 11
+			Helicopter: 6
+			Heroic: 10
+			Light: 17
+			Medium: 14
+			None: 19
+			Plate: 13
+			Scout: 20
+			Shield: 25
+			Spaceship: 5
+			Steel: 12
+			Superheavy: 9
+			Wood: 18
+	Warhead@TankDestroyerCannonPercentage:
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Spread: 75
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		Versus:
+			Bomber: 2
+			Concrete: 10
+			Fighter: 1
+			Flak: 7
+			Heavy: 15
+			Helicopter: 3
+			Heroic: 5
+			Light: 13
+			Medium: 14
+			None: 6
+			Plate: 8
+			Scout: 12
+			Shield: 17
+			Spaceship: 4
+			Steel: 11
+			Superheavy: 16
+			Wood: 9
 td_nod_gunturret_turretgunblackmarket:
 	Inherits@roleflat: ^Warhead_Concussion_Medium_Flat
-	Inherits: ^HeavyBomb
-	Inherits@2: ^HeavyCannon
 	Inherits@3: td_nod_gunturret_turretgun
+	Inherits: ^Effect_Apoc_AP_RA2
+	-Warhead@Effect:
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 6000
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
@@ -550,13 +927,167 @@ td_nod_gunturret_turretgunblackmarket:
 		Damage: 6000
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		Damage: 3
-	-Warhead@Effect:
 	-Warhead@HeavyBomb:
 	-Warhead@HeavyCannon:
 	Warhead@Concussion_Medium:
 		Damage: 31000
 		PercentageScale: 0
 	-Warhead@Concussion_Medium_Flat:
+	Projectile:
+		Blockable: false
+		Image: 120MM
+		Inaccuracy: 150
+		Shadow: true
+	Warhead@Concrete:
+		Damage: 100
+	Warhead@Effect1:
+		Explosions: poof
+	Warhead@EffectWater:
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		-ExplosionPalette:
+	Warhead@GrenadePercentage:
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Falloff: 100, 50, 33, 25, 20
+		Spread: 200
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		Versus:
+			Bomber: 3
+			Concrete: 13
+			Fighter: 4
+			Flak: 7
+			Heavy: 10
+			Helicopter: 2
+			Heroic: 5
+			Light: 14
+			Medium: 12
+			None: 9
+			Plate: 6
+			Scout: 16
+			Shield: 17
+			Spaceship: 1
+			Steel: 11
+			Superheavy: 8
+			Wood: 15
+	Warhead@HeavyBombPercentage:
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		Falloff: 100, 50, 25, 10, 5
+		Spread: 400
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Ship
+		Versus:
+			Bomber: 12
+			Concrete: 24
+			Fighter: 13
+			Flak: 21
+			Heavy: 15
+			Helicopter: 11
+			Heroic: 19
+			Light: 17
+			Medium: 16
+			None: 22
+			Plate: 20
+			Scout: 18
+			Shield: 35
+			Spaceship: 10
+			Steel: 23
+			Superheavy: 14
+			Wood: 25
+	Warhead@HeavyCannonPercentage:
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Spread: 225
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		Versus:
+			Bomber: 12
+			Concrete: 22
+			Fighter: 13
+			Flak: 16
+			Heavy: 19
+			Helicopter: 11
+			Heroic: 14
+			Light: 23
+			Medium: 21
+			None: 18
+			Plate: 15
+			Scout: 25
+			Spaceship: 10
+			Steel: 20
+			Superheavy: 17
+			Wood: 24
+	Warhead@MediumCannonPercentage:
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
+		Spread: 150
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		Versus:
+			Bomber: 7
+			Concrete: 17
+			Fighter: 8
+			Flak: 11
+			Heavy: 14
+			Helicopter: 6
+			Heroic: 9
+			Light: 18
+			Medium: 16
+			None: 13
+			Plate: 10
+			Scout: 20
+			Shield: 25
+			Spaceship: 5
+			Steel: 15
+			Superheavy: 12
+			Wood: 19
+	Warhead@ShieldHit:
+		Duration: 12
+	Warhead@ShrapnelWeaponPercentage:
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Falloff: 100, 75, 50, 25
+		Spread: 300
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		Versus:
+			Bomber: 7
+			Concrete: 15
+			Fighter: 8
+			Flak: 16
+			Heavy: 11
+			Helicopter: 6
+			Heroic: 10
+			Light: 17
+			Medium: 14
+			None: 19
+			Plate: 13
+			Scout: 20
+			Shield: 25
+			Spaceship: 5
+			Steel: 12
+			Superheavy: 9
+			Wood: 18
+	Warhead@TankDestroyerCannonPercentage:
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Spread: 75
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		Versus:
+			Bomber: 2
+			Concrete: 10
+			Fighter: 1
+			Flak: 7
+			Heavy: 15
+			Helicopter: 3
+			Heroic: 5
+			Light: 13
+			Medium: 14
+			None: 6
+			Plate: 8
+			Scout: 12
+			Shield: 17
+			Spaceship: 4
+			Steel: 11
+			Superheavy: 16
+			Wood: 9
 Dragon:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -687,9 +1218,8 @@ td_nod_obeliskoflight_laserobeliskburning:
 		InvalidTargets: Air
 td_nod_chemicalrocketsoldier_chemrockets:
 	Inherits@collapsewh: ^Warhead_Chemical_Light
-	Inherits: ^Grenade
-	Inherits@2: ^LightChemicalWeapon
-	Inherits@3: ^LightMissile
+	Inherits: ^Effect_CannonAP_Light
+	-Warhead@Glow:
 	ReloadDelay: 54
 	Range: 6006
 	Report: bazook1.aud
@@ -714,16 +1244,107 @@ td_nod_chemicalrocketsoldier_chemrockets:
 	Warhead@EffectAir: CreateEffect
 		Explosions: chemball
 		ImpactSounds: xplos.aud
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@LightChemicalWeapon:
-	-Warhead@LightMissile:
 	Warhead@Chemical_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 36000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PercentageScale: 0
 
+	InvalidTargets: wall
+	Projectile:
+		Acceleration: 4
+		AllowSnapping: true
+		Arm: 0
+		Blockable: false
+		CloseEnough: 600
+		ContrailLength: 0
+		HomingActivationDelay: 1
+		HorizontalRateOfTurn: 40
+		Image: DRAGON
+		Inaccuracy: 50
+		LaunchAngle: 66
+		MaximumLaunchSpeed: 300
+		MinimumLaunchSpeed: 300
+		PointDefenseTypes: Missile
+		RangeLimit: 20000
+		Shadow: true
+		Speed: 600
+		TrailInterval: 1
+	ValidTargets: Ground, Water, Air
+	Warhead@Effect:
+		ImpactActors: false
+		ValidTargets: Ground, Water
+	Warhead@EffectWater:
+		Explosions: med_splash
+	Warhead@GrenadePercentage:
+		Falloff: 100, 50, 33, 25, 20
+		Spread: 200
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 3
+			Concrete: 13
+			Fighter: 4
+			Flak: 7
+			Heavy: 10
+			Helicopter: 2
+			Heroic: 5
+			Light: 14
+			Medium: 12
+			None: 9
+			Plate: 6
+			Scout: 16
+			Shield: 17
+			Spaceship: 1
+			Steel: 11
+			Superheavy: 8
+			Wood: 15
+	Warhead@LightChemicalWeaponPercentage:
+		Falloff: 99, 66, 33
+		Spread: 175
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+		Versus:
+			Bomber: 2
+			Concrete: 6
+			Fighter: 1
+			Flak: 13
+			Heavy: 14
+			Helicopter: 3
+			Heroic: 9
+			Light: 10
+			Medium: 12
+			None: 11
+			Plate: 15
+			Scout: 8
+			Shield: 17
+			Spaceship: 4
+			Steel: 7
+			Superheavy: 16
+			Wood: 5
+	Warhead@LightMissilePercentage:
+		Spread: 100
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 10
+			Concrete: 9
+			Fighter: 7
+			Flak: 3
+			Heavy: 14
+			Helicopter: 13
+			Heroic: 1
+			Light: 8
+			Medium: 11
+			None: 2
+			Plate: 4
+			Scout: 5
+			Shield: 17
+			Spaceship: 15
+			Steel: 12
+			Superheavy: 16
+			Wood: 6
+	Warhead@ShieldHit:
+		Duration: 6
 td_nod_chemicalrocketsoldier_chemrocketsexplosion:
 	Inherits: td_nod_chemicalrocketsoldier_chemrockets
 	Warhead@GrenadePercentage: AreaDamagePercentage
@@ -744,10 +1365,7 @@ td_nod_chemicalrocketsoldier_chemrocketsexplosion:
 
 td_nod_chemicalattackbike_chemicalbikerockets:
 	Inherits@collapsewh: ^Warhead_MissileChem_Medium
-	Inherits: ^TankDestroyerCannon
-	Inherits@2: ^LightChemicalWeapon
-	Inherits@3: ^FlakWeapon
-	Inherits@4: ^MediumMissile
+	Inherits: ^Effect_Watersplash_Huge_RA2
 	ValidTargets: Ground, Water, Air
 	Burst: 2
 	BurstDelays: 10
@@ -785,13 +1403,130 @@ td_nod_chemicalattackbike_chemicalbikerockets:
 		ValidTargets: Air
 
 	TargetActorCenter: false
-	-Warhead@TankDestroyerCannon:
-	-Warhead@LightChemicalWeapon:
-	-Warhead@FlakWeapon:
-	-Warhead@MediumMissile:
 	Warhead@MissileChem_Medium:
 		Damage: 32000
 		PercentageScale: 0
+	InvalidTargets: wall
+	Projectile:
+		Acceleration: 3
+		AllowSnapping: true
+		Arm: 0
+		Blockable: false
+		CloseEnough: 500
+		ContrailEndColor: 000000FF
+		ContrailEndWidth: 100
+		ContrailLength: 0
+		ContrailStartColor: FF884400
+		ContrailStartWidth: 50
+		ContrailZOffset: 4000
+		HomingActivationDelay: 2
+		HorizontalRateOfTurn: 30
+		Image: DRAGON
+		Inaccuracy: 100
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		PointDefenseTypes: Missile
+		RangeLimit: 25000
+		Shadow: true
+		Speed: 500
+		TrailInterval: 1
+	Warhead@Concrete:
+		Damage: 150
+	Warhead@Effect:
+		ValidTargets: Ground, Water
+	Warhead@EffectWater:
+		Explosions: small_splash
+		ImpactSounds: splash9.aud
+		-ExplosionPalette:
+	Warhead@FlakWeaponPercentage:
+		Spread: 125
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 19
+			Concrete: 6
+			Fighter: 20
+			Flak: 15
+			Heavy: 9
+			Helicopter: 18
+			Heroic: 13
+			Light: 11
+			Medium: 10
+			None: 16
+			Plate: 14
+			Scout: 12
+			Shield: 25
+			Spaceship: 17
+			Steel: 5
+			Superheavy: 8
+			Wood: 7
+	Warhead@LightChemicalWeaponPercentage:
+		Falloff: 99, 66, 33
+		Spread: 175
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+		Versus:
+			Bomber: 2
+			Concrete: 6
+			Fighter: 1
+			Flak: 13
+			Heavy: 14
+			Helicopter: 3
+			Heroic: 9
+			Light: 10
+			Medium: 12
+			None: 11
+			Plate: 15
+			Scout: 8
+			Shield: 17
+			Spaceship: 4
+			Steel: 7
+			Superheavy: 16
+			Wood: 5
+	Warhead@MediumMissilePercentage:
+		Spread: 200
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 14
+			Concrete: 13
+			Fighter: 11
+			Flak: 7
+			Heavy: 18
+			Helicopter: 17
+			Heroic: 5
+			Light: 12
+			Medium: 15
+			None: 6
+			Plate: 8
+			Scout: 9
+			Shield: 25
+			Spaceship: 19
+			Steel: 16
+			Superheavy: 20
+			Wood: 10
+	Warhead@ShieldHit:
+		Duration: 8
+	Warhead@TankDestroyerCannonPercentage:
+		Spread: 75
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 2
+			Concrete: 10
+			Fighter: 1
+			Flak: 7
+			Heavy: 15
+			Helicopter: 3
+			Heroic: 5
+			Light: 13
+			Medium: 14
+			None: 6
+			Plate: 8
+			Scout: 12
+			Shield: 17
+			Spaceship: 4
+			Steel: 11
+			Superheavy: 16
+			Wood: 9
 td_nod_chemicalattackbike_chemicalbikerocketsexplosion:
 	Inherits: td_nod_chemicalattackbike_chemicalbikerockets
 	Warhead@Resource: CreateResource
@@ -803,9 +1538,8 @@ td_nod_chemicalattackbike_chemicalbikerocketsexplosion:
 
 td_nod_chemicalstealthtank_chemicalstealthtankmissiles:
 	Inherits@collapsewh: ^Warhead_MissileChem_Medium
-	Inherits: ^ShrapnelWeapon
-	Inherits@2: ^MediumChemicalWeapon
-	Inherits@3: ^MediumMissile
+	Inherits: ^Effect_CannonAP_Medium
+	-Warhead@Glow:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 60
 	Range: 6962
@@ -839,13 +1573,99 @@ td_nod_chemicalstealthtank_chemicalstealthtankmissiles:
 		ValidTargets: Air
 
 	TargetActorCenter: false
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@MediumMissile:
 	Warhead@MissileChem_Medium:
 		Damage: 30000
 		PercentageScale: 0
+	InvalidTargets: wall
+	Projectile:
+		Acceleration: 3
+		AllowSnapping: true
+		Arm: 0
+		Blockable: false
+		CloseEnough: 500
+		ContrailLength: 0
+		HomingActivationDelay: 2
+		HorizontalRateOfTurn: 30
+		Inaccuracy: 100
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		PointDefenseTypes: Missile
+		RangeLimit: 25000
+		Shadow: true
+		Speed: 500
+		TrailInterval: 1
+	Warhead@Effect:
+		ImpactActors: false
+		ValidTargets: Ground, Water
+	Warhead@MediumChemicalWeaponPercentage:
+		Falloff: 99, 66, 33
+		Spread: 350
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+		Versus:
+			Bomber: 6
+			Concrete: 10
+			Fighter: 5
+			Flak: 17
+			Heavy: 18
+			Helicopter: 7
+			Heroic: 13
+			Light: 14
+			Medium: 16
+			None: 15
+			Plate: 19
+			Scout: 12
+			Shield: 25
+			Spaceship: 8
+			Steel: 11
+			Superheavy: 20
+			Wood: 9
+	Warhead@MediumMissilePercentage:
+		Spread: 200
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 14
+			Concrete: 13
+			Fighter: 11
+			Flak: 7
+			Heavy: 18
+			Helicopter: 17
+			Heroic: 5
+			Light: 12
+			Medium: 15
+			None: 6
+			Plate: 8
+			Scout: 9
+			Shield: 25
+			Spaceship: 19
+			Steel: 16
+			Superheavy: 20
+			Wood: 10
+	Warhead@ShieldHit:
+		Duration: 8
+	Warhead@ShrapnelWeaponPercentage:
+		Falloff: 100, 75, 50, 25
+		Spread: 300
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 7
+			Concrete: 15
+			Fighter: 8
+			Flak: 16
+			Heavy: 11
+			Helicopter: 6
+			Heroic: 10
+			Light: 17
+			Medium: 14
+			None: 19
+			Plate: 13
+			Scout: 20
+			Shield: 25
+			Spaceship: 5
+			Steel: 12
+			Superheavy: 9
+			Wood: 18
 td_nod_chemicalstealthtank_chemicalstealthtankexplosion:
 	Inherits: td_nod_chemicalstealthtank_chemicalstealthtankmissiles
 	Warhead@Resource: CreateResource
@@ -928,9 +1748,7 @@ td_nod_chemicalssmlauncher_chemicalhonestjohn:
 
 td_nod_buggymkii_machinegunbuggy2:
 	Inherits@collapsewh: ^Warhead_Bullet_Medium
-	Inherits: ^HeavyCannon
-	Inherits@2: ^SmallArms
-	Inherits@3: ^Chaingun
+	Inherits: ^Effect_CannonHE_Heavy_D2K_DevBullet
 	ReloadDelay: 60
 	Burst: 3
 	BurstDelays: 4
@@ -950,9 +1768,6 @@ td_nod_buggymkii_machinegunbuggy2:
 		ValidTargets: Ground, Water
 		Damage: 1
 	-TargetActorCenter:
-	-Warhead@HeavyCannon:
-	-Warhead@SmallArms:
-	-Warhead@Chaingun:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 3000
@@ -960,6 +1775,105 @@ td_nod_buggymkii_machinegunbuggy2:
 		FriendlyFireSpread: 100
 		PercentageScale: 0
 
+	Projectile: Bullet
+		ContrailEndColor: 88664422
+		ContrailEndWidth: 80
+		ContrailLength: 8
+		ContrailStartColor: EECCAA88
+		ContrailStartWidth: 40
+		ContrailZOffset: 4000
+		Image: 50CAL
+		Inaccuracy: 200
+		Shadow: true
+		Speed: 4000
+	Warhead@ChaingunPercentage:
+		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
+		Spread: 100
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 12
+			Concrete: 11
+			Fighter: 15
+			Flak: 19
+			Heavy: 7
+			Helicopter: 9
+			Heroic: 17
+			Light: 13
+			Medium: 10
+			None: 20
+			Plate: 18
+			Scout: 16
+			Shield: 25
+			Spaceship: 6
+			Steel: 8
+			Superheavy: 5
+			Wood: 14
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@Effect:
+		Explosions: piffs
+		ImpactSounds: kaboom15.aud
+		ValidTargets: Ground, Ship, Air
+		-ExplosionPalette:
+		-ImpactActors:
+	Warhead@EffectAir:
+		Explosions: big_explosion_air
+	Warhead@EffectWater:
+		Explosions: water_piffs
+	Warhead@Glow:
+		Color: FFB84D
+		FadeFrames: 15
+		Scale: 0.8
+	Warhead@HeavyCannonPercentage:
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Spread: 225
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 12
+			Concrete: 22
+			Fighter: 13
+			Flak: 16
+			Heavy: 19
+			Helicopter: 11
+			Heroic: 14
+			Light: 23
+			Medium: 21
+			None: 18
+			Plate: 15
+			Scout: 25
+			Spaceship: 10
+			Steel: 20
+			Superheavy: 17
+			Wood: 24
+	Warhead@ShieldHit:
+		Duration: 4
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+	Warhead@SmallArmsPercentage:
+		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
+		Spread: 50
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 8
+			Concrete: 4
+			Fighter: 11
+			Flak: 15
+			Heavy: 3
+			Helicopter: 5
+			Heroic: 13
+			Light: 9
+			Medium: 6
+			None: 16
+			Plate: 14
+			Scout: 12
+			Shield: 17
+			Spaceship: 2
+			Steel: 7
+			Superheavy: 1
+			Wood: 10
+	Warhead@Smudge:
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		SmudgeType: Crater
 td_nod_buggymkii_machinegunbuggy2_AA:
 	Inherits: td_nod_buggymkii_machinegunbuggy2
 	Range: 7911
@@ -1138,8 +2052,7 @@ td_nod_buggymkii_fireballlauncherbuggy2:
 		PercentageScale: 9984
 td_nod_lighttankmkii_lighttank2cannon:
 	Inherits@collapsewh: ^Warhead_CannonHE_Medium
-	Inherits: ^LightChemicalWeapon
-	Inherits@2: ^MediumCannon
+	Inherits: ^Effect_CannonHE_Heavy
 	ReloadDelay: 35
 	Range: 4903
 	Report: tnkfire3.aud
@@ -1165,6 +2078,66 @@ td_nod_lighttankmkii_lighttank2cannon:
 	Warhead@CannonHE_Medium:
 		Damage: 8000
 		PercentageScale: 0
+	InvalidTargets: wall
+	Projectile:
+		Image: 120MM
+		Inaccuracy: 300
+		Shadow: true
+	Warhead@Concrete:
+		Damage: 150
+	Warhead@EffectWater:
+		Explosions: small_splash
+	Warhead@LightChemicalWeaponPercentage:
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		Falloff: 99, 66, 33
+		Spread: 175
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		PhysicalStates:
+			Corrosion: 100
+		Versus:
+			Bomber: 2
+			Concrete: 6
+			Fighter: 1
+			Flak: 13
+			Heavy: 14
+			Helicopter: 3
+			Heroic: 9
+			Light: 10
+			Medium: 12
+			None: 11
+			Plate: 15
+			Scout: 8
+			Shield: 17
+			Spaceship: 4
+			Steel: 7
+			Superheavy: 16
+			Wood: 5
+	Warhead@MediumCannonPercentage:
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
+		Spread: 150
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		Versus:
+			Bomber: 7
+			Concrete: 17
+			Fighter: 8
+			Flak: 11
+			Heavy: 14
+			Helicopter: 6
+			Heroic: 9
+			Light: 18
+			Medium: 16
+			None: 13
+			Plate: 10
+			Scout: 20
+			Shield: 25
+			Spaceship: 5
+			Steel: 15
+			Superheavy: 12
+			Wood: 19
+	Warhead@ShieldHit:
+		Duration: 8
 td_nod_lighttankmkii_lighttank2missiles:
 	Inherits@2: ^Warhead_MissileAP_Medium
 	Inherits@3: ^Projectile_Missile_Medium
@@ -1224,9 +2197,8 @@ td_nod_lasertrooper_blackhandlaser:
 	# beam. ExtraDamage warheads inherit untouched (shield-only chip; ignored
 	# for pricing). (^TankDestroyerCannon = interim Light CannonAP.)
 	Inherits@wh: ^Warhead_Laser_Heavy
-	Inherits@light: ^TankDestroyerCannon
-	Inherits@medium: ^FlakWeapon
 	Inherits@heavy: ^LaserWeapon
+	Inherits: ^Effect_Watersplash_Huge_RA2
 	ReloadDelay: 50
 	Range: 5524
 	Report: vfloatta.wav
@@ -1241,12 +2213,10 @@ td_nod_lasertrooper_blackhandlaser:
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFF
 	TargetActorCenter: false
-	-Warhead@TankDestroyerCannon:
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		PercentageDenominator: 2500
 		ValidTargets: Ground, Water, Air
 		Damage: 108
-	-Warhead@FlakWeapon:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		PercentageDenominator: 2500
 		Damage: 108
@@ -1286,6 +2256,75 @@ td_nod_lasertrooper_blackhandlaser:
 		PercentageScale: 0
 	-Warhead@Laser_Heavy_ExtraDamage:
 
+	Projectile:
+		ContrailEndColor: 000000FF
+		ContrailEndWidth: 100
+		ContrailLength: 10
+		ContrailStartColor: FF884400
+		ContrailStartWidth: 50
+		ContrailZOffset: 4000
+		Image: 50CAL
+		Inaccuracy: 250
+		Shadow: true
+		Speed: 10000
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@Effect:
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater:
+		Explosions: small_splash
+		ImpactSounds: splash9.aud
+		-ExplosionPalette:
+	Warhead@FlakWeaponPercentage:
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		Spread: 125
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water, Air
+		Versus:
+			Bomber: 19
+			Concrete: 6
+			Fighter: 20
+			Flak: 15
+			Heavy: 9
+			Helicopter: 18
+			Heroic: 13
+			Light: 11
+			Medium: 10
+			None: 16
+			Plate: 14
+			Scout: 12
+			Shield: 25
+			Spaceship: 17
+			Steel: 5
+			Superheavy: 8
+			Wood: 7
+	Warhead@ShieldHit:
+		Duration: 10
+	Warhead@Smudge:
+		SmudgeType: Scorch
+	Warhead@TankDestroyerCannonPercentage:
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Spread: 75
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 2
+			Concrete: 10
+			Fighter: 1
+			Flak: 7
+			Heavy: 15
+			Helicopter: 3
+			Heroic: 5
+			Light: 13
+			Medium: 14
+			None: 6
+			Plate: 8
+			Scout: 12
+			Shield: 17
+			Spaceship: 4
+			Steel: 11
+			Superheavy: 16
+			Wood: 9
 td_nod_blackhandflamer_blackhandflamer:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
@@ -1311,10 +2350,7 @@ td_nod_blackhandflamer_blackhandflamerexplode:
 td_nod_stealthsoldier_bhreddarts:
 	Inherits@collapsewh: ^Warhead_Tesla_Super
 	Inherits: ^TeslaChargedWeapon
-	Inherits@2: ^TankDestroyerCannon
-	Inherits@3: ^Chaingun
-	Inherits@4: ^ShrapnelWeapon
-	Inherits@5: ^MediumMissile
+	Inherits: ^Effect_CannonAP_Medium
 	ReloadDelay: 90
 	Burst: 4
 	BurstDelays: 5
@@ -1362,11 +2398,6 @@ td_nod_stealthsoldier_bhreddarts:
 		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
 	-Warhead@TeslaChargedWeapon:
 	-Warhead@TeslaChargedExtraDamage:
-	-Warhead@TankDestroyerCannon:
-	-Warhead@Chaingun:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@MediumMissile:
 	-Warhead@Tesla_Super_ExtraDamage:
 	-Warhead@EMPUnit:
 	Warhead@Tesla_Super:
@@ -1384,6 +2415,118 @@ td_nod_stealthsoldier_bhreddarts:
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
 
+	Projectile:
+		Acceleration: 3
+		AllowSnapping: true
+		Arm: 0
+		Blockable: false
+		CloseEnough: 500
+		ContrailEndWidth: 80
+		ContrailStartWidth: 40
+		ContrailZOffset: 4000
+		HomingActivationDelay: 2
+		HorizontalRateOfTurn: 30
+		Inaccuracy: 100
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		PointDefenseTypes: Missile
+		RangeLimit: 25000
+		Shadow: true
+		Speed: 500
+		TrailInterval: 1
+	Warhead@ChaingunPercentage:
+		Spread: 100
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 12
+			Concrete: 11
+			Fighter: 15
+			Flak: 19
+			Heavy: 7
+			Helicopter: 9
+			Heroic: 17
+			Light: 13
+			Medium: 10
+			None: 20
+			Plate: 18
+			Scout: 16
+			Shield: 25
+			Spaceship: 6
+			Steel: 8
+			Superheavy: 5
+			Wood: 14
+	Warhead@Effect:
+		ImpactActors: false
+		ValidTargets: Ground, Water
+	Warhead@Glow:
+		FadeFrames: 15
+		Scale: 0.8
+	Warhead@MediumMissilePercentage:
+		Spread: 200
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 14
+			Concrete: 13
+			Fighter: 11
+			Flak: 7
+			Heavy: 18
+			Helicopter: 17
+			Heroic: 5
+			Light: 12
+			Medium: 15
+			None: 6
+			Plate: 8
+			Scout: 9
+			Shield: 25
+			Spaceship: 19
+			Steel: 16
+			Superheavy: 20
+			Wood: 10
+	Warhead@ShieldHit:
+		Duration: 8
+	Warhead@ShrapnelWeaponPercentage:
+		Falloff: 100, 75, 50, 25
+		Spread: 300
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 7
+			Concrete: 15
+			Fighter: 8
+			Flak: 16
+			Heavy: 11
+			Helicopter: 6
+			Heroic: 10
+			Light: 17
+			Medium: 14
+			None: 19
+			Plate: 13
+			Scout: 20
+			Shield: 25
+			Spaceship: 5
+			Steel: 12
+			Superheavy: 9
+			Wood: 18
+	Warhead@TankDestroyerCannonPercentage:
+		Spread: 75
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 2
+			Concrete: 10
+			Fighter: 1
+			Flak: 7
+			Heavy: 15
+			Helicopter: 3
+			Heroic: 5
+			Light: 13
+			Medium: 14
+			None: 6
+			Plate: 8
+			Scout: 12
+			Shield: 17
+			Spaceship: 4
+			Steel: 11
+			Superheavy: 16
+			Wood: 9
 ^SpecterArtilleryShellLegacy:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Concussion_Medium
@@ -1425,12 +2568,9 @@ td_nod_specterartillery_specterartilleryshell:
 		PercentageScale: 9997
 td_nod_specterartillery_specterartilleryshellupgrade:
 	Inherits@roleflat: ^Warhead_CannonHE_Heavy_Flat
-	Inherits: ^MediumChemicalWeapon
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^HeavyBomb
 	Inherits@4: ^TankDestroyerCannon
-	Inherits@5: ^MediumCannon
-	Inherits@6: ^HeavyCannon
 	Inherits@7: ^SpecterArtilleryShellLegacy
 	Projectile: Bullet
 		ContrailStartWidth: 111
@@ -1490,6 +2630,77 @@ td_nod_specterartillery_specterartilleryshellupgrade:
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
 
+	Warhead@HeavyCannonPercentage:
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Spread: 225
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		Versus:
+			Bomber: 12
+			Concrete: 22
+			Fighter: 13
+			Flak: 16
+			Heavy: 19
+			Helicopter: 11
+			Heroic: 14
+			Light: 23
+			Medium: 21
+			None: 18
+			Plate: 15
+			Scout: 25
+			Spaceship: 10
+			Steel: 20
+			Superheavy: 17
+			Wood: 24
+	Warhead@MediumCannonPercentage:
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
+		Spread: 150
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		Versus:
+			Bomber: 7
+			Concrete: 17
+			Fighter: 8
+			Flak: 11
+			Heavy: 14
+			Helicopter: 6
+			Heroic: 9
+			Light: 18
+			Medium: 16
+			None: 13
+			Plate: 10
+			Scout: 20
+			Shield: 25
+			Spaceship: 5
+			Steel: 15
+			Superheavy: 12
+			Wood: 19
+	Warhead@MediumChemicalWeaponPercentage:
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		Falloff: 99, 66, 33
+		Spread: 350
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		PhysicalStates:
+			Corrosion: 100
+		Versus:
+			Bomber: 6
+			Concrete: 10
+			Fighter: 5
+			Flak: 17
+			Heavy: 18
+			Helicopter: 7
+			Heroic: 13
+			Light: 14
+			Medium: 16
+			None: 15
+			Plate: 19
+			Scout: 12
+			Shield: 25
+			Spaceship: 8
+			Steel: 11
+			Superheavy: 20
+			Wood: 9
 td_nod_venom_laser:
 	Inherits@wh: ^Warhead_Laser_Medium
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -1729,10 +2940,8 @@ td_nod_minigunner_minigun:
 		InvalidTargets: Air
 td_nod_minigunner_minigun_laser:
 	Inherits@wh: ^Warhead_Laser_Heavy
-	Inherits: ^SmallArms
-	Inherits@2: ^Chaingun
 	Inherits@3: ^LaserWeapon
-	Inherits@legacychip: ^LegacyLaserChipCompatibility
+	Inherits: ^Effect_Sniper_Light
 	ValidTargets: Ground, Water
 	ReloadDelay: 40
 	Range: 4104
@@ -1742,12 +2951,10 @@ td_nod_minigunner_minigun_laser:
 	Projectile: LaserZap
 		Width: 25
 	TargetActorCenter: false
-	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		PercentageDenominator: 10000
 		InvalidTargets: Air
 		Damage: 29
-	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		PercentageDenominator: 10000
 		InvalidTargets: Air
@@ -1768,3 +2975,89 @@ td_nod_minigunner_minigun_laser:
 	Warhead@LegacyLaserExtraDamage:
 		Damage: 1021
 		InvalidTargets: Air
+	Projectile:
+		ContrailEndColor: 88664422
+		ContrailEndWidth: 80
+		ContrailLength: 8
+		ContrailStartColor: EECCAA88
+		ContrailStartWidth: 40
+		ContrailZOffset: 4000
+		Image: 50CAL
+		Inaccuracy: 200
+		Speed: 4000
+	Warhead@ChaingunPercentage:
+		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
+		Spread: 100
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water, Air
+		Versus:
+			Bomber: 12
+			Concrete: 11
+			Fighter: 15
+			Flak: 19
+			Heavy: 7
+			Helicopter: 9
+			Heroic: 17
+			Light: 13
+			Medium: 10
+			None: 20
+			Plate: 18
+			Scout: 16
+			Shield: 25
+			Spaceship: 6
+			Steel: 8
+			Superheavy: 5
+			Wood: 14
+	Warhead@Effect:
+		Explosions: small_napalm
+	Warhead@LegacyLaserExtraDamage: SpreadDamage
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		Spread: 300
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water, Air
+		Versus:
+			Bomber: 1
+			Concrete: 1
+			Fighter: 1
+			Flak: 1
+			Heavy: 1
+			Helicopter: 1
+			Heroic: 1
+			Light: 1
+			Medium: 1
+			None: 1
+			Plate: 1
+			REFLECTOR: 50
+			Scout: 1
+			Shield: 100
+			Spaceship: 1
+			Steel: 1
+			Superheavy: 1
+			Wood: 1
+	Warhead@ShieldHit:
+		Duration: 10
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+	Warhead@SmallArmsPercentage:
+		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
+		Spread: 50
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water, Air
+		Versus:
+			Bomber: 8
+			Concrete: 4
+			Fighter: 11
+			Flak: 15
+			Heavy: 3
+			Helicopter: 5
+			Heroic: 13
+			Light: 9
+			Medium: 6
+			None: 16
+			Plate: 14
+			Scout: 12
+			Shield: 17
+			Spaceship: 2
+			Steel: 7
+			Superheavy: 1
+			Wood: 10

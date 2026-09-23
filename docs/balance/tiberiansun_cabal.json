@@ -412,7 +412,7 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^LaserWeapon",
-       "^MediumMissile"
+       "^Effect_Watersplash_Huge_RA2"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -482,12 +482,7 @@
       "slot": "Armament@ROCKETS",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
-       "^HeavyCannon",
-       "^TankDestroyerCannon",
-       "^ShrapnelWeapon",
-       "^Grenade",
-       "^HeavyMissile",
-       "^MediumMissile"
+       "^Effect_CannonAP_Medium"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -585,13 +580,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "5",
-        "falloff": null,
-        "spread": "300",
-        "tag": "HeavyMissilePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "600",
         "falloff": null,
         "spread": "300",
@@ -604,6 +592,13 @@
         "spread": "500",
         "tag": "LegacyRailgunExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": null,
+        "spread": "300",
+        "tag": "HeavyMissilePercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -616,7 +611,7 @@
        "^Warhead_Laser_Heavy",
        "^LaserWeapon",
        "^RailgunWeapon",
-       "^HeavyMissile"
+       "^Effect_Watersplash_Huge_RA2"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -686,12 +681,7 @@
       "slot": "Armament@ROCKETS",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
-       "^HeavyCannon",
-       "^TankDestroyerCannon",
-       "^ShrapnelWeapon",
-       "^Grenade",
-       "^HeavyMissile",
-       "^MediumMissile"
+       "^Effect_CannonAP_Medium"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -834,16 +824,16 @@
        },
        {
         "damage": "5",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "5",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -866,9 +856,7 @@
        "^TeslaWeapon",
        "^HeavyMissile",
        "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^Grenade",
-       "^ArrowWeapon"
+       "^Grenade"
       ],
       "warheads": [
        "^Warhead_MissileTesla_Heavy"
@@ -2006,14 +1994,14 @@
         "damage": "35",
         "falloff": null,
         "spread": "75",
-        "tag": "TankDestroyerCannonPercentage",
+        "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "35",
         "falloff": null,
         "spread": "75",
-        "tag": "LaserWeaponPercentage",
+        "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -2040,11 +2028,9 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Warhead_Laser_ExtraDamage",
-       "^TankDestroyerCannon",
        "^LaserWeapon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^TSLaserEffect"
+       "^TSLaserEffect",
+       "^Effect_Watersplash_Huge_RA2"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -2571,14 +2557,9 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_MissileHE_Heavy",
-       "^LightMissile",
-       "^MediumMissile",
-       "^HeavyMissile",
-       "^TankDestroyerCannon",
-       "^FlakWeapon",
-       "^HeavyAAWeapon",
        "^CabalMissileMedium",
-       "^CabalMissileEffect"
+       "^CabalMissileEffect",
+       "^Effect_MissileHE_Heavy"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy"
@@ -2649,14 +2630,9 @@
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_MissileHE_Heavy",
-       "^LightMissile",
-       "^MediumMissile",
-       "^HeavyMissile",
-       "^TankDestroyerCannon",
-       "^FlakWeapon",
-       "^HeavyAAWeapon",
        "^CabalMissileMedium",
-       "^CabalMissileEffect"
+       "^CabalMissileEffect",
+       "^Effect_MissileHE_Heavy"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy"
@@ -2814,13 +2790,6 @@
        },
        {
         "damage": "25",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "25",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
@@ -2839,6 +2808,13 @@
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "25",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -2852,7 +2828,6 @@
        "^Warhead_Plasma_Heavy_Flat",
        "^HeavyCannon",
        "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
        "^TeslaWeapon",
        "^MagicWeapon",
        "^RailgunWeapon"
@@ -2938,13 +2913,6 @@
        },
        {
         "damage": "25",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "25",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
@@ -2963,6 +2931,13 @@
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "25",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -2976,7 +2951,6 @@
        "^Warhead_Plasma_Heavy_Flat",
        "^HeavyCannon",
        "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
        "^TeslaWeapon",
        "^MagicWeapon",
        "^RailgunWeapon"
@@ -3140,13 +3114,6 @@
        },
        {
         "damage": "25",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "25",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
@@ -3165,6 +3132,13 @@
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "25",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -3178,7 +3152,6 @@
        "^Warhead_Plasma_Heavy_Flat",
        "^HeavyCannon",
        "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
        "^TeslaWeapon",
        "^MagicWeapon",
        "^RailgunWeapon"
@@ -3264,13 +3237,6 @@
        },
        {
         "damage": "25",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "25",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
@@ -3289,6 +3255,13 @@
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "25",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -3302,7 +3275,6 @@
        "^Warhead_Plasma_Heavy_Flat",
        "^HeavyCannon",
        "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
        "^TeslaWeapon",
        "^MagicWeapon",
        "^RailgunWeapon"
@@ -3699,8 +3671,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_CannonChem_Light",
-       "^LightChemicalWeapon",
-       "^TankDestroyerCannon"
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_CannonChem_Light"
@@ -4079,14 +4050,14 @@
         "damage": "35",
         "falloff": null,
         "spread": "75",
-        "tag": "TankDestroyerCannonPercentage",
+        "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "35",
         "falloff": null,
         "spread": "75",
-        "tag": "LaserWeaponPercentage",
+        "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -4113,11 +4084,9 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Warhead_Laser_ExtraDamage",
-       "^TankDestroyerCannon",
        "^LaserWeapon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^TSLaserEffect"
+       "^TSLaserEffect",
+       "^Effect_Watersplash_Huge_RA2"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -4168,14 +4137,14 @@
         "damage": "35",
         "falloff": null,
         "spread": "75",
-        "tag": "TankDestroyerCannonPercentage",
+        "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "35",
         "falloff": null,
         "spread": "75",
-        "tag": "LaserWeaponPercentage",
+        "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -4202,11 +4171,9 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Warhead_Laser_ExtraDamage",
-       "^TankDestroyerCannon",
        "^LaserWeapon",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^TSLaserEffect"
+       "^TSLaserEffect",
+       "^Effect_Watersplash_Huge_RA2"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -5822,10 +5789,7 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_CannonHE_Heavy",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^MediumCannon",
-       "^HeavyCannon"
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -5841,6 +5805,20 @@
         "spread": "400",
         "tag": "CannonHE_Heavy_Flat",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "21",
+        "falloff": null,
+        "spread": "100",
+        "tag": "TeslaChargedWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "21",
+        "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "21",
@@ -5879,23 +5857,9 @@
        },
        {
         "damage": "21",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaChargedWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "21",
         "falloff": "111, 88, 44, 22, 11",
         "spread": "111",
         "tag": "MagicWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "21",
-        "falloff": null,
-        "spread": "125",
-        "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -5909,14 +5873,9 @@
       "slot": "Armament@Upgraded",
       "versus_templates": [
        "^Warhead_CannonHE_Heavy_Flat",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^MediumCannon",
-       "^HeavyCannon",
-       "^MediumChemicalWeapon",
        "^TeslaChargedWeapon",
-       "^MagicWeapon",
-       "^RailgunWeapon"
+       "^RailgunWeapon",
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [],
       "weapon": "CabalArtilleryWalkerShellUpgraded",
@@ -6143,13 +6102,6 @@
        {
         "damage": "5",
         "falloff": null,
-        "spread": "225",
-        "tag": "HeavyCannonPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "5",
-        "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -6167,6 +6119,13 @@
         "spread": "75",
         "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "5",
+        "falloff": null,
+        "spread": "225",
+        "tag": "HeavyCannonPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -6177,10 +6136,10 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Laser_Heavy_Flat",
-       "^HeavyCannon",
        "^TeslaWeapon",
        "^RailgunWeapon",
-       "^LaserWeapon"
+       "^LaserWeapon",
+       "^Effect_Watersplash_Huge_RA2"
       ],
       "warheads": [],
       "weapon": "CabalBeholderLaser",
