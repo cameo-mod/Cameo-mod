@@ -1,5 +1,7 @@
 RA2TURRETFLAKAA:
-	Inherits: ^RA2FlakWeapon
+	Inherits@xRA2TURRETFLAKAA0: ^Warhead_Flak_Medium
+	Inherits@xRA2TURRETFLAKAA1: ^Projectile_Flak_Medium
+	Inherits@xRA2TURRETFLAKAA2: ^Effect_Flak_Puff_RA2
 	Report: aacanon3.aud
 	Range: 12936
 	ReloadDelay: 15
@@ -8,7 +10,9 @@ RA2TURRETFLAKAA:
 		ValidTargets: Air
 		Damage: 10000
 SeaScorpion_AA:
-	Inherits: ^RA2FlakWeapon
+	Inherits@xSeaScorpion_AA0: ^Warhead_Flak_Medium
+	Inherits@xSeaScorpion_AA1: ^Projectile_Flak_Medium
+	Inherits@xSeaScorpion_AA2: ^Effect_Flak_Puff_RA2
 	Report: aacanon3.aud
 	Range: 13500
 	ReloadDelay: 17
@@ -39,7 +43,6 @@ RA2KirovBomb_rad:
 	Inherits@proj: ^Projectile_Chem_Heavy
 	Inherits@fx: ^Effect_Chem_Heavy
 	Inherits: RA2KirovBomb
-	Inherits@rad: ^RA2RadShell
 	Warhead@Chemical_Heavy:
 		Damage: 96000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
@@ -48,6 +51,12 @@ RA2KirovBomb_rad:
 		Falloff: 100, 75, 66, 50, 33, 25, 20, 10
 		Spread: 480
 		Level: 480
+	Warhead@Effect:
+		Explosions: demotruck_explosion
+	Warhead@Radiation:
+		InvalidTargets: RadiationImmmune
+		MaxLevel: 1000
+		LayerName: ra2radiation
 
 RA2KirovBomb_fire:
 	Inherits: RA2KirovBomb
@@ -163,7 +172,6 @@ RA2120mm_rad:
 	Inherits@proj: ^Projectile_Chem_Medium
 	Inherits@fx: ^Effect_Chem_Medium
 	Inherits: RA2120mm
-	Inherits@rad: ^RA2RadShell
 	Warhead@Chemical_Medium:
 		Damage: 6000
 	Warhead@CannonHE_Medium:
@@ -174,6 +182,16 @@ RA2120mm_rad:
 		ValidTargets: Ground, Water
 		Damage: 12000
 		PercentageScale: 9992
+	Warhead@Radiation: CreateTintedCells
+	Warhead@Effect:
+		Explosions: demotruck_explosion
+	Warhead@Radiation:
+		InvalidTargets: RadiationImmmune
+		Falloff: 100, 85, 70, 55, 40, 25, 10
+		Spread: 500
+		Level: 25
+		MaxLevel: 1000
+		LayerName: ra2radiation
 RA2120mm_fire:
 	Inherits: RA2120mm
 	Warhead@FireShrapnel: FireShrapnel
@@ -192,7 +210,6 @@ RA2120mm_tesla:
 
 RA2120mm_rad_elite:
 	Inherits: RA2120mm_rad
-	Inherits@Elite: ^RA2EliteEffects
 	Range: 6374
 	Burst: 2
 	BurstDelays: 3
@@ -200,20 +217,71 @@ RA2120mm_rad_elite:
 		ValidTargets: Ground, Water
 		Damage: 12000
 		PercentageScale: 9992
+	Warhead@Radiation: CreateTintedCells
+	Warhead@Concrete:
+		Damage: 200
+	Warhead@Effect:
+		Explosions: ra2_elite_explosion
+		ImpactSounds: gexpapoa.wav
+	Warhead@EffectAir:
+		Explosions: big_explosion_air
+	Warhead@EffectWater:
+		Explosions: ra2_large_watersplash
+		ImpactSounds: gexpwala.wav
+	Warhead@Glow:
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@Radiation:
+		InvalidTargets: RadiationImmmune
+		Falloff: 100, 85, 70, 55, 40, 25, 10
+		Spread: 500
+		Level: 25
+		MaxLevel: 1000
+		LayerName: ra2radiation
+	Warhead@ShieldHit:
+		Duration: 12
 
 RA2120mm_fire_elite:
 	Inherits: RA2120mm_fire
-	Inherits@Elite: ^RA2EliteEffects
 	Range: 6374
 	Burst: 2
 	BurstDelays: 3
+	Warhead@Concrete:
+		Damage: 200
+	Warhead@Effect:
+		Explosions: ra2_elite_explosion
+		ImpactSounds: gexpapoa.wav
+	Warhead@EffectAir:
+		Explosions: big_explosion_air
+	Warhead@EffectWater:
+		Explosions: ra2_large_watersplash
+		ImpactSounds: gexpwala.wav
+	Warhead@Glow:
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@ShieldHit:
+		Duration: 12
 
 RA2120mm_tesla_elite:
 	Inherits: RA2120mm_tesla
-	Inherits@Elite: ^RA2EliteEffects
 	Range: 6374
 	Burst: 2
 	BurstDelays: 3
+	Warhead@Concrete:
+		Damage: 200
+	Warhead@Effect:
+		Explosions: ra2_elite_explosion
+		ImpactSounds: gexpapoa.wav
+	Warhead@EffectAir:
+		Explosions: big_explosion_air
+	Warhead@EffectWater:
+		Explosions: ra2_large_watersplash
+		ImpactSounds: gexpwala.wav
+	Warhead@Glow:
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@ShieldHit:
+		Duration: 12
 
 ^RA160mmLegacy:
 	Inherits@wh: ^Warhead_Concussion_Medium
@@ -242,18 +310,43 @@ RA2120mm_tesla_elite:
 		Damage: 60000
 RA160mm:
 	Inherits@finalmain: ^Warhead_Concussion_Medium_Flat
-	Inherits: ^RA160mmLegacy
+	Inherits@xRA160mm0: ^Warhead_Concussion_Medium
+	Inherits@xRA160mm1: ^Effect_Concussion_Medium
+	Inherits@xRA160mm2: ^Warhead_Demolition_Light
+	Inherits@xRA160mm3: ^Projectile_Grenade_Light
+	Inherits@xRA160mm4: ^Effect_Bang_Large_RA2
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
 	Warhead@Concussion_Medium_Flat:
 		ValidTargets: Ground, Water
 		Damage: 120000
 		PercentageScale: 10000
+	ReloadDelay: 88
+	Range: 11111
+	MinRange: 2222
+	Report: vdesatta.wav, vdesattb.wav
+	Projectile:
+		Speed: 333
+		LaunchAngle: 111
+		Inaccuracy: 1111
+		Image: bhreddragon
+		ContrailLength: 25
+		ContrailStartColor: BB8866
+		ContrailStartWidth: 55
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		TrailImage: black_smokey
+		TrailPalette: effect75alpha
+		TrailInterval: 1
 ^RA160mmRadLegacy:
 	Inherits@wh: ^Warhead_Chemical_Light
 	Inherits@proj: ^Projectile_Chem_Light
 	Inherits@fx: ^Effect_Chem_Light
-	Inherits@3: ^RA160mmLegacy
+	Inherits@x^RA160mmRadLegacy0: ^Warhead_Concussion_Medium
+	Inherits@x^RA160mmRadLegacy1: ^Effect_Concussion_Medium
+	Inherits@x^RA160mmRadLegacy2: ^Warhead_Demolition_Light
+	Inherits@x^RA160mmRadLegacy3: ^Projectile_Grenade_Light
+	Inherits@x^RA160mmRadLegacy4: ^Effect_Bang_Large_RA2
 	Inherits@rad: ^RA2RadShell
 	Projectile: Bullet
 		ContrailStartColor: 88BB66
@@ -267,7 +360,14 @@ RA160mm:
 		Damage: 36000
 RA160mm_rad:
 	Inherits@finalmain: ^Warhead_Chemical_Light_Flat
-	Inherits: ^RA160mmRadLegacy
+	Inherits@xRA160mm_rad0: ^Warhead_Chemical_Light
+	Inherits@xRA160mm_rad1: ^Projectile_Chem_Light
+	Inherits@xRA160mm_rad2: ^Effect_Chem_Light
+	Inherits@xRA160mm_rad3: ^Warhead_Concussion_Medium
+	Inherits@xRA160mm_rad4: ^Effect_Concussion_Medium
+	Inherits@xRA160mm_rad5: ^Warhead_Demolition_Light
+	Inherits@xRA160mm_rad6: ^Projectile_Grenade_Light
+	Inherits@xRA160mm_rad7: ^Effect_Bang_Large_RA2
 	Warhead@CollapsedRA160mm_radChemical_LightPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -361,6 +461,33 @@ RA160mm_rad:
 		ValidTargets: Ground, Water
 		Damage: 108000
 		PercentageScale: 0
+	ReloadDelay: 88
+	Range: 11111
+	MinRange: 2222
+	Report: vdesatta.wav, vdesattb.wav
+	Warhead@Radiation: CreateTintedCells
+	Projectile:
+		Speed: 333
+		LaunchAngle: 111
+		Inaccuracy: 1111
+		Image: bhreddragon
+		ContrailLength: 25
+		ContrailStartColor: 88BB66
+		ContrailStartWidth: 55
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		TrailImage: green_smokey
+		TrailPalette: effect
+		TrailInterval: 1
+	Warhead@Effect:
+		Explosions: demotruck_explosion
+	Warhead@Radiation:
+		InvalidTargets: RadiationImmmune
+		Falloff: 100, 85, 70, 55, 40, 25, 10
+		Spread: 500
+		Level: 25
+		MaxLevel: 1000
+		LayerName: ra2radiation
 RA160mm_fire:
 	Inherits@finalmain: ^Warhead_CannonFire_Heavy_Flat
 	Inherits: RA160mm
@@ -399,7 +526,6 @@ RA160mm_tesla:
 
 RA160mmE_elite:
 	Inherits: RA160mm
-	Inherits@Elite: ^RA2EliteEffects
 	Range: 12345
 	Burst: 2
 	BurstDelays: 3
@@ -407,13 +533,58 @@ RA160mmE_elite:
 		ValidTargets: Ground, Water
 		Damage: 120000
 		PercentageScale: 10000
+	ReloadDelay: 88
+	MinRange: 2222
+	Report: vdesatta.wav, vdesattb.wav
+	Warhead@RA2Crater: LeaveSmudge
+	Warhead@EffectAir: CreateEffect
+	Projectile:
+		Speed: 333
+		LaunchAngle: 111
+		Inaccuracy: 1111
+		Image: bhreddragon
+		ContrailLength: 25
+		ContrailStartColor: BB8866
+		ContrailStartWidth: 55
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		TrailImage: black_smokey
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+	Warhead@Concrete:
+		Damage: 200
+	Warhead@Effect:
+		Explosions: ra2_elite_explosion
+		ImpactSounds: gexpapoa.wav
+	Warhead@EffectAir:
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@EffectWater:
+		Explosions: ra2_large_watersplash
+		ImpactSounds: gexpwala.wav
+	Warhead@Glow:
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHit:
+		Duration: 12
 
 RA160mmE_rad_elite:
 	Inherits@finalmain: ^Warhead_Chemical_Light_Flat
 	Inherits@wh: ^Warhead_Nuclear_Super
 	Inherits@fx: ^Effect_Nuclear_Super
-	Inherits: ^RA160mmRadLegacy
-	Inherits@Elite: ^RA2EliteEffects
+	Inherits@xRA160mmE_rad_elite0: ^Warhead_Chemical_Light
+	Inherits@xRA160mmE_rad_elite1: ^Projectile_Chem_Light
+	Inherits@xRA160mmE_rad_elite2: ^Effect_Chem_Light
+	Inherits@xRA160mmE_rad_elite3: ^Warhead_Concussion_Medium
+	Inherits@xRA160mmE_rad_elite4: ^Effect_Concussion_Medium
+	Inherits@xRA160mmE_rad_elite5: ^Warhead_Demolition_Light
+	Inherits@xRA160mmE_rad_elite6: ^Projectile_Grenade_Light
+	Inherits@xRA160mmE_rad_elite7: ^Effect_Bang_Large_RA2
 	Range: 12345
 	-Warhead@Chemical_Light_Flat:
 	Warhead@Nuclear_Super:
@@ -519,9 +690,54 @@ RA160mmE_rad_elite:
 
 	Warhead@ShieldHit:
 		InvalidTargets: Air
+	ReloadDelay: 88
+	MinRange: 2222
+	Report: vdesatta.wav, vdesattb.wav
+	Warhead@Radiation: CreateTintedCells
+	Warhead@RA2Crater: LeaveSmudge
+	Warhead@EffectAir: CreateEffect
+	Projectile:
+		Speed: 333
+		LaunchAngle: 111
+		Inaccuracy: 1111
+		Image: bhreddragon
+		ContrailLength: 25
+		ContrailStartColor: 88BB66
+		ContrailStartWidth: 55
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		TrailImage: green_smokey
+		TrailPalette: effect
+		TrailInterval: 1
+	Warhead@Concrete:
+		Damage: 200
+	Warhead@Effect:
+		ImpactSounds: gexpapoa.wav
+	Warhead@EffectAir:
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@EffectWater:
+		Explosions: ra2_large_watersplash
+		ImpactSounds: gexpwala.wav
+	Warhead@Glow:
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Radiation:
+		InvalidTargets: RadiationImmmune
+		Falloff: 100, 85, 70, 55, 40, 25, 10
+		Spread: 500
+		Level: 25
+		MaxLevel: 1000
+		LayerName: ra2radiation
+	Warhead@ShieldHit:
+		Duration: 12
 RA160mmE_fire_elite:
 	Inherits: RA160mm_fire
-	Inherits@Elite: ^RA2EliteEffects
 	Inherits@fx: ^Effect_Explosion_Large_RA2
 	Range: 12345
 	Warhead@FireShrapnel: FireShrapnel
@@ -531,10 +747,22 @@ RA160mmE_fire_elite:
 		ValidTargets: Ground, Water
 		Damage: 120000
 		PercentageScale: 10000
+	ReloadDelay: 88
+	MinRange: 2222
+	Report: vdesatta.wav, vdesattb.wav
+	Projectile:
+		Speed: 333
+		LaunchAngle: 111
+		Inaccuracy: 1111
+		Image: bhreddragon
+		ContrailLength: 25
+		ContrailStartWidth: 55
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		TrailInterval: 1
 
 RA160mmE_tesla_elite:
 	Inherits: RA160mm_tesla
-	Inherits@Elite: ^RA2EliteEffects
 	Inherits@fx: ^Effect_Kirov_Tesla_RA2
 	Range: 12345
 	Warhead@FireShrapnel: FireShrapnel
@@ -549,6 +777,25 @@ RA160mmE_tesla_elite:
 # without repeating effect overrides on each concrete weapon/rank route.
 # Materialized in resolved order from the authored generic + Apocalypse effects:
 # one heavy glow path, with exact fields/order protected by the premerge fixture.
+	ReloadDelay: 88
+	MinRange: 2222
+	Report: vdesatta.wav, vdesattb.wav
+	Warhead@EffectAir: CreateEffect
+	Projectile:
+		Speed: 333
+		LaunchAngle: 111
+		Inaccuracy: 1111
+		Image: bhreddragon
+		ContrailLength: 25
+		ContrailStartWidth: 55
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		TrailInterval: 1
+	Warhead@EffectAir:
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
 ^Effect_Apoc_AP_RA2:
 	Inherits@glow: ^ImpactGlow
 	Warhead@Smudge: LeaveSmudge
@@ -707,7 +954,6 @@ RA2120xmm_rad:
 	Inherits@wh: ^Warhead_CannonChem_Light
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_Apoc_Chem_RA2
-	Inherits@rad: ^RA2RadShell
 	Range: 6992
 	ReloadDelay: 63
 	Burst: 2
@@ -721,6 +967,16 @@ RA2120xmm_rad:
 		Damage: 16000
 		PhysicalStates:
 			Corrosion: 100
+	Warhead@Radiation: CreateTintedCells
+	Warhead@Effect:
+		Explosions: demotruck_explosion
+	Warhead@Radiation:
+		InvalidTargets: RadiationImmmune
+		Falloff: 100, 85, 70, 55, 40, 25, 10
+		Spread: 500
+		Level: 25
+		MaxLevel: 1000
+		LayerName: ra2radiation
 RA2120xmm_fire:
 	Inherits@wh: ^Warhead_CannonFire_Light
 	Inherits@proj: ^Projectile_Shell_Light
@@ -763,31 +1019,128 @@ RA2120xmm_tesla:
 
 RA2120xmm_elite:
 	Inherits: RA2120xmm
-	Inherits@Elite: ^RA2EliteEffects
 	Range: 7992
 	Burst: 4
 	BurstDelays: 3
+	Warhead@Concrete:
+		Damage: 200
+	Warhead@Effect:
+		Explosions: ra2_elite_explosion
+	Warhead@EffectWater:
+		ImpactSounds: gexpwala.wav
+	Warhead@ShieldHit:
+		Duration: 12
 
 RA2120xmm_rad_elite:
 	Inherits: RA2120xmm_rad
-	Inherits@Elite: ^RA2EliteEffects
 	Range: 7992
 	Burst: 4
 	BurstDelays: 3
+	Warhead@Radiation: CreateTintedCells
+	Warhead@Concrete:
+		Damage: 200
+	Warhead@Effect:
+		Explosions: ra2_elite_explosion
+	Warhead@EffectWater:
+		ImpactSounds: gexpwala.wav
+	Warhead@Radiation:
+		InvalidTargets: RadiationImmmune
+		Falloff: 100, 85, 70, 55, 40, 25, 10
+		Spread: 500
+		Level: 25
+		MaxLevel: 1000
+		LayerName: ra2radiation
+	Warhead@ShieldHit:
+		Duration: 12
 
 RA2120xmm_fire_elite:
 	Inherits: RA2120xmm_fire
-	Inherits@Elite: ^RA2EliteEffects
 	Range: 7992
 	Burst: 4
 	BurstDelays: 3
+	Warhead@DuneRock: LeaveSmudge
+	Warhead@DuneSand: LeaveSmudge
+	Warhead@RA2Crater: LeaveSmudge
+	Warhead@EffectAir: CreateEffect
+	Warhead@Concrete: DamagesConcrete
+	Warhead@EffectWater: CreateEffect
+	Warhead@Concrete:
+		Damage: 200
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+		Explosions: ra2_elite_explosion
+		ImpactSounds: gexpapoa.wav
+		ValidTargets: Ground, Ship
+		ExplosionPalette: ra2effect
+	Warhead@EffectAir:
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@EffectWater:
+		Explosions: ra2_large_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwala.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@Glow:
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHit:
+		Duration: 12
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+	Warhead@Smudge:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 RA2120xmm_tesla_elite:
 	Inherits: RA2120xmm_tesla
-	Inherits@Elite: ^RA2EliteEffects
 	Range: 7992
 	Burst: 4
 	BurstDelays: 3
+	Warhead@Smudge: LeaveSmudge
+	Warhead@DuneRock: LeaveSmudge
+	Warhead@DuneSand: LeaveSmudge
+	Warhead@RA2Crater: LeaveSmudge
+	Warhead@Concrete: DamagesConcrete
+	Warhead@Concrete:
+		Damage: 200
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+		Explosions: ra2_elite_explosion
+		ImpactSounds: gexpapoa.wav
+	Warhead@EffectAir:
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+	Warhead@EffectWater:
+		Explosions: ra2_large_watersplash
+		ImpactSounds: gexpwala.wav
+	Warhead@Glow:
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHit:
+		Duration: 12
+	Warhead@Smudge:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 RA2CoilBolt:
 	Inherits@wh: ^Warhead_Tesla_Heavy
@@ -1031,13 +1384,16 @@ MigMissiles_tesla_elite:
 
 RA2MammothTusk_AA:
 	Inherits@missilerole: ^Warhead_MissileAA_Medium
-	Inherits: ^RA2MediumMissile
+	Inherits@xRA2MammothTusk_AA0: ^Warhead_MissileAP_Medium
+	Inherits@xRA2MammothTusk_AA1: ^Projectile_Missile_Medium
+	Inherits@xRA2MammothTusk_AA2: ^Effect_Clsn_Medium_RA2
 	ValidTargets: Air
 	Range: 6100
 	ReloadDelay: 68
 	Report: vapoat2a.wav, vapoat2b.wav, vapoat2c.wav
 	Burst: 2
 	Projectile: Missile
+		-TrailImage:
 		VerticalRateOfTurn: 16
 	-Warhead@MissileAP_Medium:
 	Warhead@MissileAA_Medium: AreaDamage
@@ -1049,6 +1405,11 @@ RA2MammothTusk_AA:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
+	Projectile:
+		Image: patriot
+		ContrailLength: 33
+		ContrailStartWidth: 33
+		ContrailEndWidth: 1
 
 RA2MammothTusk_AA_elite:
 	Inherits: RA2MammothTusk_AA
@@ -1076,8 +1437,12 @@ V3Launch_elite:
 
 RA2vulcan:
 	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
-	Inherits: ^RA2SmallArms
-	Inherits@2: ^RA2Chaingun
+	Inherits@xRA2vulcan0: ^Warhead_Bullet_Light
+	Inherits@xRA2vulcan1: ^Projectile_Bullet_Light
+	Inherits@xRA2vulcan2: ^Effect_Bullet_Light_RA2
+	Inherits@xRA2vulcan0: ^Warhead_Bullet_Medium
+	Inherits@xRA2vulcan1: ^Projectile_Bullet_Medium
+	Inherits@xRA2vulcan2: ^Effect_Bullet_Medium_RA2
 	ValidTargets: Ground, Water
 	ReloadDelay: 18
 	Range: 6577
@@ -1112,7 +1477,9 @@ RA2CRFlakGuyGun_elite:
 	BurstDelays: 3
 
 RA2FLAKAA:
-	Inherits: ^RA2FlakWeapon
+	Inherits@xRA2FLAKAA0: ^Warhead_Flak_Medium
+	Inherits@xRA2FLAKAA1: ^Projectile_Flak_Medium
+	Inherits@xRA2FLAKAA2: ^Effect_Flak_Puff_RA2
 	Report: aacanon3.aud
 	ReloadDelay: 26
 	Range: 7834
