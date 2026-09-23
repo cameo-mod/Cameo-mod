@@ -2420,30 +2420,6 @@ Rammax_Sabot:
 	-Warhead@LaserWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@PreservedFlat_Chaingun: SpreadDamage
-		InvalidTargets: Air
-		ValidTargets: Ground, Water, Air
-		Spread: 200
-		Damage: 2000
-		Versus:
-			Shield: 125
-			None: 100
-			Flak: 95
-			Plate: 90
-			Heroic: 85
-			Scout: 80
-			Fighter: 75
-			Wood: 70
-			Light: 65
-			Bomber: 60
-			Concrete: 55
-			Medium: 50
-			Helicopter: 45
-			Steel: 40
-			Heavy: 35
-			Spaceship: 30
-			Superheavy: 25
-		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 	Warhead@PreservedFlat_LaserExtraDamage: SpreadDamage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
@@ -2474,7 +2450,7 @@ Rammax_Sabot:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Spread: 150
-		Damage: 10000
+		Damage: 14000
 		Versus:
 			REFLECTOR: 50
 			Shield: 140
@@ -2520,31 +2496,6 @@ Rammax_Sabot:
 			Helicopter: 10
 			Bomber: 10
 			Fighter: 10
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@PreservedFlat_TeslaWeapon: SpreadDamage
-		InvalidTargets: Air
-		ValidTargets: Ground, Water, Air
-		Spread: 100
-		Damage: 2000
-		Versus:
-			REFLECTOR: 50
-			Shield: 150
-			Heroic: 100
-			Plate: 96
-			Flak: 92
-			None: 88
-			Superheavy: 84
-			Heavy: 80
-			Medium: 76
-			Light: 72
-			Scout: 68
-			Steel: 64
-			Concrete: 60
-			Wood: 56
-			Spaceship: 52
-			Helicopter: 48
-			Bomber: 44
-			Fighter: 40
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 
 	Warhead@ShieldHit:

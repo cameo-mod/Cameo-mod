@@ -102,7 +102,7 @@ Future_Cryocopter_Rocket:
 	-Warhead@MissileAP_Medium:
 	Warhead@MissileAP_Medium_Flat:
 		ValidTargets: Ground, Water, Air
-		Damage: 32000
+		Damage: 48000
 		PercentageScale: 9997
 	Warhead@PhysicalStateCryo1: ApplyPhysicalState
 		PhysicalStateName: Temperature
@@ -137,6 +137,7 @@ Future_Cryocopter_Rocket:
 
 	Projectile: Missile
 		VerticalRateOfTurn: 16
+	-Warhead@FutureCryocopterMissileAP_Medium:
 
 Future_Cryocopter_Cryo:
 	Inherits@roleflat: ^Warhead_Cryo_Medium_Flat
@@ -935,7 +936,7 @@ FutureEnforcerShotgun:
 		Damage: 1
 	Warhead@CannonHE_Medium:
 		InvalidTargets: Air
-		Damage: 2000
+		Damage: 12000
 	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		InvalidTargets: Air
@@ -944,31 +945,21 @@ FutureEnforcerShotgun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		Damage: 1
-	Warhead@ShotgunShrapnelEnemy:
-		InvalidTargets: Air
-		Damage: 4000
-		PercentageScale: 0
+	-Warhead@ShotgunShrapnelEnemy:
 	-Warhead@ShotgunGrenadeEnemy:
 
 	Warhead@ShotgunGrenadeAlly:
 		InvalidTargets: Air
 	Warhead@ShotgunShrapnelAlly:
 		InvalidTargets: Air
-	Warhead@ShotgunTankDestroyer:
-		InvalidTargets: Air
-	Warhead@ShotgunSmallArms:
-		InvalidTargets: BulletImmune, Air
-	Warhead@ShotgunChaingun:
-		InvalidTargets: Air
+	-Warhead@ShotgunTankDestroyer:
+	-Warhead@ShotgunSmallArms:
+	-Warhead@ShotgunChaingun:
 FutureEnforcerShotgun_elite:
 	Inherits: FutureEnforcerShotgun
 	Range: 4000
 	Burst: 2
 	BurstDelays: 3
-	Warhead@ShotgunShrapnelEnemy:
-		InvalidTargets: Air
-		Damage: 4000
-		PercentageScale: 0
 
 	Warhead@CannonHE_Medium:
 		InvalidTargets: Air
@@ -988,20 +979,10 @@ FutureEnforcerShotgun_elite:
 		InvalidTargets: Air
 	Warhead@ShotgunShrapnelAlly:
 		InvalidTargets: Air
-	Warhead@ShotgunTankDestroyer:
-		InvalidTargets: Air
-	Warhead@ShotgunSmallArms:
-		InvalidTargets: BulletImmune, Air
-	Warhead@ShotgunChaingun:
-		InvalidTargets: Air
 FutureEnforcerShotgunDeployed:
 	Inherits: FutureEnforcerShotgun
 	ReloadDelay: 65
 	Range: 6150
-	Warhead@ShotgunShrapnelEnemy:
-		InvalidTargets: Air
-		Damage: 4000
-		PercentageScale: 0
 
 	Warhead@CannonHE_Medium:
 		InvalidTargets: Air
@@ -1018,22 +999,12 @@ FutureEnforcerShotgunDeployed:
 	Warhead@ShotgunGrenadeAlly:
 		InvalidTargets: Air
 	Warhead@ShotgunShrapnelAlly:
-		InvalidTargets: Air
-	Warhead@ShotgunTankDestroyer:
-		InvalidTargets: Air
-	Warhead@ShotgunSmallArms:
-		InvalidTargets: BulletImmune, Air
-	Warhead@ShotgunChaingun:
 		InvalidTargets: Air
 FutureEnforcerShotgunDeployed_elite:
 	Inherits: FutureEnforcerShotgunDeployed
 	Range: 7150
 	Burst: 2
 	BurstDelays: 3
-	Warhead@ShotgunShrapnelEnemy:
-		InvalidTargets: Air
-		Damage: 4000
-		PercentageScale: 0
 
 	Warhead@CannonHE_Medium:
 		InvalidTargets: Air
@@ -1052,12 +1023,6 @@ FutureEnforcerShotgunDeployed_elite:
 	Warhead@ShotgunGrenadeAlly:
 		InvalidTargets: Air
 	Warhead@ShotgunShrapnelAlly:
-		InvalidTargets: Air
-	Warhead@ShotgunTankDestroyer:
-		InvalidTargets: Air
-	Warhead@ShotgunSmallArms:
-		InvalidTargets: BulletImmune, Air
-	Warhead@ShotgunChaingun:
 		InvalidTargets: Air
 FutureJavelinRockets:
 	Inherits@wh: ^Warhead_MissileAP_Medium
@@ -1215,20 +1180,14 @@ ShotgunAttackRobotGun:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@CannonHE_Medium:
-		InvalidTargets: Air
-		ValidTargets: Ground, Water
-		Damage: 2000
+	-Warhead@CannonHE_Medium:
 	Warhead@SmallArms: SpreadDamage
 		Damage: 2000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Bullet_Medium:
-		InvalidTargets: Air
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
+	-Warhead@Bullet_Medium:
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
 	# guidance fields. Keeps today's resolved type verbatim.
@@ -1242,7 +1201,7 @@ ShotgunAttackRobotGun:
 	Warhead@Bullet_Light_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
-		Damage: 8000
+		Damage: 12000
 		PercentageScale: 0
 
 ShotgunAttackRobotGun_elite:
@@ -1254,9 +1213,6 @@ ShotgunAttackRobotGun_elite:
 	BurstDelays: 3
 
 	Warhead@Bullet_Light_Flat:
-		-InvalidTargets:
-		ValidTargets: Ground, Water
-	Warhead@CannonHE_Medium:
 		-InvalidTargets:
 		ValidTargets: Ground, Water
 	Warhead@GrenadePercentage:
@@ -1271,9 +1227,7 @@ ShotgunAttackRobotGun_elite:
 	Warhead@SmallArmsPercentage:
 		-InvalidTargets:
 		ValidTargets: Ground, Water, Air
-	Warhead@Bullet_Medium:
-		-InvalidTargets:
-		ValidTargets: Ground, Water, Air
+	-Warhead@Bullet_Medium:
 CannonAttackRobotGun:
 	Inherits@collapseflat: ^Warhead_CannonHE_Medium_Flat
 	Inherits: ^TankDestroyerCannon
@@ -1597,10 +1551,7 @@ FutureTankCannons:
 		ValidTargets: Ground, Water
 		Damage: 50
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonHE_Heavy:
-		ValidTargets: Ground, Water
-		Damage: 100000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	-Warhead@CannonHE_Heavy:
 	Warhead@EMPUnit: AffectsIntegrity
 		InvalidTargets: Shielded, Air
 		Damage: 100000
@@ -1619,7 +1570,7 @@ FutureTankCannons:
 	-Warhead@TeslaWeapon:
 	Warhead@CannonHE_Heavy_Flat:
 		ValidTargets: Ground, Water
-		Damage: 550888
+		Damage: 600000
 		PercentageScale: 0
 
 	Warhead@ShieldHit:
@@ -1630,6 +1581,8 @@ FutureTankCannons_elite:
 	Range: 8500
 	Burst: 4
 	BurstDelays: 5
+	Warhead@CannonHE_Heavy_Flat:
+		Damage: 650888
 
 FutureHarbingerCannon:
 	Inherits@roleflat: ^Warhead_Plasma_Heavy_Flat
@@ -1720,7 +1673,7 @@ FutureHarbingerCannon:
 		Damage: 2
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 40000
 	Warhead@Effect1:
 		Explosions: blue_big_frag
 	Warhead@Effect2:
@@ -1742,16 +1695,14 @@ FutureHarbingerCannon:
 	-Warhead@TeslaChargedWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	Warhead@Plasma_Heavy_Flat:
-		ValidTargets: Ground, Water, Air
-		Damage: 42488
-		PercentageScale: 0
+	-Warhead@Plasma_Heavy_Flat:
 
 FutureHarbingerCannon_elite:
 	Inherits: FutureHarbingerCannon
 	Range: 7030
 	Burst: 4
 	Warhead@CannonHE_Heavy:
+		Damage: 46488
 		ValidTargets: Ground, Water, Air
 	Warhead@HeavyChemicalWeaponPercentage:
 		ValidTargets: Ground, Water, Air
