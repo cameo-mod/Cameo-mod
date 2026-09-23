@@ -28,7 +28,7 @@ anchor: `SPEC(240000,95,5500,600,1,800)` (cost0 800, O0 1490.00, P0 2232.00, Q0 
 | `ordos_combatautoguntank` | 1500 | 282 | -81% ❗ |
 | `ordos_heavycombattank` | 950 | 314 | -67% ❗ |
 | `protoss_dragoon` | 1200 | 453 | -62% ❗ |
-| `ptnk.asian` | 2400 | 564 | -77% ❗ |
+| `asianalliance_ptnk` | 2400 | 564 | -77% ❗ |
 | `ra1_allies_alliedcybertank` | 1300 | 467 | -64% ❗ |
 | `ra1_allies_alliedmediumtank` | 700 | 310 | -56% ❗ |
 | `ra1_allies_alliedtigerheavytank` | 1300 | 467 | -64% ❗ |

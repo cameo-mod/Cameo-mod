@@ -13,7 +13,7 @@
 | G.I. | ra2_allies_gi | HP 25000 vs game 50000; Damage 6000 vs game 12075 |
 | Conscript | ra2_soviets_conscript | HP 13000 vs game 26000 |
 | Yuri Initiate | yuri_initiate | Damage 4000 vs game 8028 |
-| Asian Militia | asianalliance_asianmilitia | HP 12000 vs game 24000; Reload 52 vs game 50 |
+| Asian Militia | asianalliance_militia | HP 12000 vs game 24000; Reload 52 vs game 50 |
 | GDI Grenadier | td_gdi_grenadier | HP 8000 vs game 15000; Speed 75 vs game 73; Damage 16000 vs game 19446 |
 | EMP Grenadier | td_gdi_empgrenadier | Damage 64000 vs game 104232 |
 | Soviet Grenadier | ra1_soviets_grenadier | HP 8000 vs game 14000; Speed 75 vs game 72; Damage 16000 vs game 13677 |
@@ -29,7 +29,7 @@
 | Hydralisk | zerg_hydralisk | Damage 8000 vs game 18000 |
 | High Templar | protoss_hightemplar | Damage 8000 vs game 104000; Reload 8 vs game 64 |
 | Elven Archer | wc2_humans_elvenarcher | Damage 18000 vs game 24110 |
-| Asian Tank Killer | asianalliance_asiantankkiller | Damage 34000 vs game 68200 |
+| Asian Tank Killer | asianalliance_tankkiller | Damage 34000 vs game 68200 |
 | Veteran Archer | asianalliance_veteranarcher | Damage 36000 vs game 71982 |
 | Laser Trooper | td_nod_lasertrooper | HP 60000 vs game 59000; Speed 60 vs game 51; Damage 30000 vs game 33397; Reload 60 vs game 50 |
 | Stealth Soldier | td_nod_stealthsoldier | Damage 32000 vs game 93500 |
