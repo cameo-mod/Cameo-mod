@@ -54,7 +54,7 @@ consolidation target, and the maintainer ruled it waits until every source has v
 | 1 | Read 20 sources into one normalised matrix | `warhead_matrix.py` | **done**, 0 degenerate |
 | 2 | Map each source's armours onto our 16 rows, and average | `armor_interpolate.py` | **done**, all 20 mapped |
 | 3 | Compress each source's weapons into review groups | `compress_warheads.py` | **done**, 17 of 20 |
-| 4 | Assign each group to a Cameo warhead family | `warhead_family_assignment*.yaml` | **9 of 17 sources, 2,124 of 2,554 weapons (83%)** (CA reviewed; Mental Omega, Red Resurrection, Rise of the East, Romanov's Vengeance, CnC Reloaded, Shattered Paradise, RA2 Reborn and RA 20XX proposed) |
+| 4 | Assign each group to a Cameo warhead family | `warhead_family_assignment*.yaml` | **10 of 17 sources, 2,220 of 2,554 weapons (87%)** (CA reviewed; Mental Omega, Red Resurrection, Rise of the East, Romanov's Vengeance, CnC Reloaded, Shattered Paradise, RA2 Reborn, RA 20XX and Twisted Insurrection proposed) |
 | 5 | Collapse to one row per Cameo warhead | `family_matrix.py` | done for both; every dialect since R47 |
 
 Stage 4 is the bottleneck and it is the only stage that needs human judgement.
@@ -249,13 +249,14 @@ in one place, which is the rule every consumer previously reimplemented.
 stage was OpenRA-only (and the three largest unreviewed sources are INI), `--write` overwrote rather
 than merged, and `family_matrix` was NONDETERMINISTIC. All three are fixed — see R47.
 
-⭐ **DONE (9):** `combined_arms` 182 (REVIEWED), `mental_omega` 156, `red_resurrection` 138,
+⭐ **DONE (10):** `combined_arms` 182 (REVIEWED), `mental_omega` 156, `red_resurrection` 138,
 `rise_of_the_east` 133, `romanovs_vengeance` 99, `cnc_reloaded` 94,
-`shattered_paradise` 92, `ra2_reborn` 80, `ra20xx` 77 — 1,051 groups, 2,124 weapons.
+`shattered_paradise` 92, `ra2_reborn` 80, `ra20xx` 77, `twisted_insurrection` 70 — 1,121 groups,
+2,220 weapons.
 
-**REMAINING (8), in usage order — 282 groups, about a quarter of what is done:**
-`twisted_insurrection` 70, `dta_enhanced` 53, `dta_classic` 41, `openra_ra` 33,
-`crystallized_nexus` 28, `openra_ts` 22, `openra_td` 20, `openra_d2k` 15.
+**REMAINING (7), in usage order — 212 groups, about a fifth of what is done:**
+`dta_enhanced` 53, `dta_classic` 41, `openra_ra` 33, `crystallized_nexus` 28,
+`openra_ts` 22, `openra_td` 20, `openra_d2k` 15.
 
 ⛔ **GROUP-LEVEL READS IN THE AUTHORING AID ARE NOW MEMBERSHIP-CHECKED (R60).** `by_group()`
 refuses a group whose current weapons differ from the ones the committed file recorded. If
@@ -267,9 +268,10 @@ signal — `FireDeath`/`FlameDeath` are animations (R54) and only `Incendiary` a
 are real. Their flamethrowers are read from profile and name, and the collapsed `Flame` row
 has verified the call every time. Budget for it rather than being surprised by it.
 
-⚠ **`twisted_insurrection` WILL NEED PER-WEAPON WORK ON ITS CHEM WEAPONS.** R56 measured that
-`ChemBurst`, `ChemSpray`, `Gas`, `ToxinBomb` and `BlueTibWH` carry `InfDeath=1` and
-`Tiberium=no`, so the extractor has nothing to read. Budget for it.
+✅ **`twisted_insurrection` was read ENTIRELY per weapon (R62)** — its element axis carries almost
+nothing. Expect the same of the two DTA sources and `crystallized_nexus`, which are TS/RA-engine
+INI mods too: read each weapon's projectile, report and firer (`tools/reference/ini_lookup.py`), and
+remember TS tank guns fire `Projectile=InvisibleMissile`, so they measure as MISSILES.
 
 ⛔ **AFTER ANY REGROUPING, RE-KEY THE REVIEWS (R54).** Snapshot `warhead_groups.json` FIRST,
 then `retau_assignment.py --old <snapshot> --source <sid> --write` for every reviewed source,
