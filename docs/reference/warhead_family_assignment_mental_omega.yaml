@@ -3588,8 +3588,10 @@ overrides:
     why: 'R21 names it: a mind-control effect. Flat 200 across all nine armours is the signature of ABSENT
       Verses data, not of a generalist warhead'
   ChronoBlasterWH:
-    family: Quantum
-    why: these DO damage, unlike ChronoBeam, but the flat 200 carries no shape
+    family: Temporal
+    why: the Siren Frigate's `NeutronBlaster` (Chrono Legionnaire attack sound) - the maintainer-adopted
+      `Temporal` family (DESIGN §12.0k item 10) - chrono erase/warp, flat, ignores armour; was `Quantum`
+      (R72)
   ChronoFreezeWH:
     family: '(drop: not a damage warhead)'
     why: 'flat 10, the floor of the window, on every reachable armour: a marker'
@@ -3598,8 +3600,9 @@ overrides:
     why: an imprison effect. It carries IsRailgun for the beam visual, which is the R48 flag doing its
       real job
   ChronoWarpWH:
-    family: Quantum
-    why: see ChronoBlasterWH
+    family: Temporal
+    why: the Charon Tank's `NeutronCannon` (1000 dmg, chrono warp) - the maintainer-adopted `Temporal`
+      family (DESIGN §12.0k item 10) - chrono erase/warp, flat, ignores armour; was `Quantum` (R72)
   CraneWeaponWH:
     family: '(drop: support weapon)'
     why: a construction crane
