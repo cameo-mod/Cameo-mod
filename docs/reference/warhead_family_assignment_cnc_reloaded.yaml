@@ -7,7 +7,7 @@
 # HOW THIS PASS WAS MADE, so it can be audited rather than trusted:
 #   * Group rows carry a decision per measured (delivery, element) SIGNATURE, with the reasoning
 #     in `why`. A signature is what the measurement actually distinguishes.
-#   * `overrides:` holds the 89 weapons looked at individually. An override BEATS its
+#   * `overrides:` holds the 88 weapons looked at individually. An override BEATS its
 #     group, and it is keyed by WEAPON so it survives re-clustering — which matters: the first
 #     pass keyed these by GROUP and lost one within a single regrouping (R50).
 #   * Everything is `status: proposed`. NOTHING here has been reviewed by the maintainer.
@@ -1406,28 +1406,6 @@ groups:
     element: Sonic
     uses: 1
     members: 1
-    factor: 1.6570953312125414
-    profile:
-    - 195.1
-    - 195.1
-    - 195.1
-    - 195.1
-    - 156.1
-    - 156.1
-    - 195.1
-    - 117.0
-    - 117.0
-    weapons:
-    - SonicWarhead
-  BulletSonic_Veh_2:
-    family: Sonic
-    status: proposed
-    why: a resonance weapon
-    band: vehicle
-    delivery: Bullet
-    element: Sonic
-    uses: 1
-    members: 1
     factor: 1.4066731466560531
     profile:
     - null
@@ -2126,6 +2104,28 @@ groups:
     - 195.1
     weapons:
     - RailShot
+  Sonic_Veh:
+    family: Sonic
+    status: proposed
+    why: a sonic wave weapon - `IsSonic=yes` (R60)
+    band: vehicle
+    delivery: Sonic
+    element: Sonic
+    uses: 1
+    members: 1
+    factor: 1.6570953312125414
+    profile:
+    - 195.1
+    - 195.1
+    - 195.1
+    - 195.1
+    - 156.1
+    - 156.1
+    - 195.1
+    - 117.0
+    - 117.0
+    weapons:
+    - SonicWarhead
   Tesla_Veh:
     family: Tesla
     status: proposed
@@ -2388,10 +2388,10 @@ overrides:
       [read as the group `Hitscan_Veh`]'
   ShortRange2EMPuls:
     family: '(drop: not a damage warhead)'
-    why: the short-range EM pulses [read as the group `BulletSonic_Def`]
+    why: a short-range EM pulse (R50)
   ShortRangeEMPuls:
     family: '(drop: not a damage warhead)'
-    why: the short-range EM pulses [read as the group `BulletSonic_Def`]
+    why: a short-range EM pulse (R50)
   SlowdownWeaponWH:
     family: '(drop: support weapon)'
     why: '`ClawsGrabWH`, `LocomotorBeam`, `NeverUseDummyWH` (named for it), `ReckonerTargeterWH`, `ScrambleWeaponsWH`,
@@ -2404,9 +2404,6 @@ overrides:
     family: Sniper
     why: '`Snapshot`, `CyborgSnapshot`, `Organic` — INF 195 and NO reach against anything else at all
       [read as the group `Hitscan_Inf_2`]'
-  SonicWarhead:
-    family: Sonic
-    why: '`SonicWarhead` — named for what it is [read as the group `BulletSonic_Veh`]'
   Special:
     family: '(drop: support weapon)'
     why: '`ClawsGrabWH`, `LocomotorBeam`, `NeverUseDummyWH` (named for it), `ReckonerTargeterWH`, `ScrambleWeaponsWH`,
@@ -2414,7 +2411,7 @@ overrides:
       [read as the group `Hitscan_Veh`]'
   SubmergedEMPuls:
     family: '(drop: not a damage warhead)'
-    why: '`SubmergedEMPuls` [read as the group `BulletSonic_Veh_2`]'
+    why: an EM pulse disables, it does not kill (R50)
   Super:
     family: '(drop: support weapon)'
     why: '`ClawsGrabWH`, `LocomotorBeam`, `NeverUseDummyWH` (named for it), `ReckonerTargeterWH`, `ScrambleWeaponsWH`,

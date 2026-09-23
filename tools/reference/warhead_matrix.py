@@ -680,6 +680,20 @@ def ini_delivery(weapon: dict[str, str], projectile: dict[str, str]) -> str:
         return "Tesla"
     if _ini_yes(weapon, "IsRadBeam") or _ini_yes(weapon, "IsRadEruption"):
         return "Radiation"
+    # R60 — the YR wave flags, censused over the seven INI sources before deciding:
+    #
+    #   `IsSonic`    19 weapons — SonicZap, SonicBreak, OldSonicZap, TumbGun, GeneticBeam. Every
+    #                one a sonic weapon. It is the same KIND of engine flag as `IsLaser` and
+    #                `IsRailgun` above, and its absence here was an oversight: Twisted
+    #                Insurrection's three SonicZaps read `Hitscan/Plain` for want of it.
+    #   `IsMagBeam`  48 weapons — NOT mapped. It is the magnetic-wave VISUAL, and its carriers are
+    #                the Magnetron, tractor/scramble/slowdown waves and disk drains (mechanics)
+    #                alongside real damage weapons (TSSonicZap, RaijinZapX, ShadrayWave). One
+    #                visual over many roles names none of them — the `EnergyDeath` lesson (R54)
+    #                wearing a weapon flag instead of a death animation.
+    #   `AmbientDamage` alone — 221 weapons, railguns and vulcans included. Not a signal.
+    if _ini_yes(weapon, "IsSonic"):
+        return "Sonic"
     if _ini_yes(projectile, "Vertical"):
         return "Bomb"
     try:

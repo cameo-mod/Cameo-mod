@@ -26012,50 +26012,12 @@
     "delivery": "Bullet",
     "element": "Sonic",
     "examples": [
-     "SonicWarhead:SonicWarhead"
-    ],
-    "factor": 1.6570953312125414,
-    "flat": false,
-    "members": 1,
-    "name": "BulletSonic_Veh",
-    "profile": [
-     195.1,
-     195.1,
-     195.1,
-     195.1,
-     156.1,
-     156.1,
-     195.1,
-     117.0,
-     117.0
-    ],
-    "uses": 1,
-    "weapons": [
-     "SonicWarhead"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "vehicle",
-    "delivery": "Bullet",
-    "element": "Sonic",
-    "examples": [
      "SubmergedEMPuls:SubmergedEMPuls"
     ],
     "factor": 1.4066731466560531,
     "flat": false,
     "members": 1,
-    "name": "BulletSonic_Veh_2",
+    "name": "BulletSonic_Veh",
     "profile": [
      null,
      null,
@@ -27248,6 +27210,44 @@
     "uses": 1,
     "weapons": [
      "RailShot"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "vehicle",
+    "delivery": "Sonic",
+    "element": "Sonic",
+    "examples": [
+     "SonicWarhead:SonicWarhead"
+    ],
+    "factor": 1.6570953312125414,
+    "flat": false,
+    "members": 1,
+    "name": "Sonic_Veh",
+    "profile": [
+     195.1,
+     195.1,
+     195.1,
+     195.1,
+     156.1,
+     156.1,
+     195.1,
+     117.0,
+     117.0
+    ],
+    "uses": 1,
+    "weapons": [
+     "SonicWarhead"
     ]
    },
    {
@@ -52086,44 +52086,6 @@
      "concrete"
     ],
     "band": "infantry",
-    "delivery": "Bullet",
-    "element": "Sonic",
-    "examples": [
-     "TumblerWH:TumblerWH"
-    ],
-    "factor": 1.3692551541671827,
-    "flat": false,
-    "members": 1,
-    "name": "BulletSonic_Inf",
-    "profile": [
-     200.0,
-     174.9,
-     145.8,
-     145.8,
-     131.2,
-     116.6,
-     145.8,
-     116.6,
-     87.5
-    ],
-    "uses": 2,
-    "weapons": [
-     "TumblerWH"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "infantry",
     "delivery": "Hitscan",
     "element": "Fire",
     "examples": [
@@ -52710,6 +52672,44 @@
      "concrete"
     ],
     "band": "infantry",
+    "delivery": "Sonic",
+    "element": "Sonic",
+    "examples": [
+     "TumblerWH:TumblerWH"
+    ],
+    "factor": 1.3692551541671827,
+    "flat": false,
+    "members": 1,
+    "name": "Sonic_Inf",
+    "profile": [
+     200.0,
+     174.9,
+     145.8,
+     145.8,
+     131.2,
+     116.6,
+     145.8,
+     116.6,
+     87.5
+    ],
+    "uses": 2,
+    "weapons": [
+     "TumblerWH"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "infantry",
     "delivery": "Tesla",
     "element": "Tesla",
     "examples": [
@@ -52961,44 +52961,6 @@
     "uses": 1,
     "weapons": [
      "BiosWH"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "flak",
-     "plate",
-     "light",
-     "medium",
-     "heavy",
-     "wood",
-     "steel",
-     "concrete"
-    ],
-    "band": "vehicle",
-    "delivery": "Bullet",
-    "element": "Sonic",
-    "examples": [
-     "SonicWarhead:SonicWarhead"
-    ],
-    "factor": 1.2384016726074862,
-    "flat": false,
-    "members": 1,
-    "name": "BulletSonic_Veh",
-    "profile": [
-     145.8,
-     145.8,
-     145.8,
-     145.8,
-     116.6,
-     116.6,
-     145.8,
-     87.5,
-     87.5
-    ],
-    "uses": 1,
-    "weapons": [
-     "SonicWarhead"
     ]
    },
    {
@@ -53949,6 +53911,44 @@
     "uses": 1,
     "weapons": [
      "APSplash"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "flak",
+     "plate",
+     "light",
+     "medium",
+     "heavy",
+     "wood",
+     "steel",
+     "concrete"
+    ],
+    "band": "vehicle",
+    "delivery": "Sonic",
+    "element": "Sonic",
+    "examples": [
+     "SonicWarhead:SonicWarhead"
+    ],
+    "factor": 1.2384016726074862,
+    "flat": false,
+    "members": 1,
+    "name": "Sonic_Veh",
+    "profile": [
+     145.8,
+     145.8,
+     145.8,
+     145.8,
+     116.6,
+     116.6,
+     145.8,
+     87.5,
+     87.5
+    ],
+    "uses": 1,
+    "weapons": [
+     "SonicWarhead"
     ]
    },
    {
@@ -74751,42 +74751,12 @@
     "delivery": "Hitscan",
     "element": "Plain",
     "examples": [
-     "SonicWarhead:SonicWarhead"
-    ],
-    "factor": 1.534675359920735,
-    "flat": false,
-    "members": 1,
-    "name": "Hitscan_Veh_2",
-    "profile": [
-     200.0,
-     200.0,
-     200.0,
-     126.3,
-     84.2
-    ],
-    "uses": 3,
-    "weapons": [
-     "SonicWarhead"
-    ]
-   },
-   {
-    "armors": [
-     "none",
-     "wood",
-     "light",
-     "heavy",
-     "concrete"
-    ],
-    "band": "vehicle",
-    "delivery": "Hitscan",
-    "element": "Plain",
-    "examples": [
      "TankRailShotI:TankRailShotI"
     ],
     "factor": 1.3820162954002435,
     "flat": false,
     "members": 1,
-    "name": "Hitscan_Veh_3",
+    "name": "Hitscan_Veh_2",
     "profile": [
      63.2,
      189.5,
@@ -74947,6 +74917,36 @@
     "uses": 3,
     "weapons": [
      "PlasmaWH"
+    ]
+   },
+   {
+    "armors": [
+     "none",
+     "wood",
+     "light",
+     "heavy",
+     "concrete"
+    ],
+    "band": "vehicle",
+    "delivery": "Sonic",
+    "element": "Plain",
+    "examples": [
+     "SonicWarhead:SonicWarhead"
+    ],
+    "factor": 1.534675359920735,
+    "flat": false,
+    "members": 1,
+    "name": "Sonic_Veh",
+    "profile": [
+     200.0,
+     200.0,
+     200.0,
+     126.3,
+     84.2
+    ],
+    "uses": 3,
+    "weapons": [
+     "SonicWarhead"
     ]
    },
    {
@@ -75210,7 +75210,7 @@
     "factor": 0.28460361426543146,
     "flat": false,
     "members": 1,
-    "name": "Hitscan_Veh_4",
+    "name": "Hitscan_Veh_3",
     "profile": [
      200.0,
      21.1,
@@ -75240,7 +75240,7 @@
     "factor": 0.42435776868609826,
     "flat": false,
     "members": 1,
-    "name": "Hitscan_Veh_5",
+    "name": "Hitscan_Veh_4",
     "profile": [
      200.0,
      42.1,
@@ -75934,7 +75934,7 @@
     "factor": 0.774910313430762,
     "flat": false,
     "members": 1,
-    "name": "Hitscan_Veh_6",
+    "name": "Hitscan_Veh_5",
     "profile": [
      157.9,
      105.3,
