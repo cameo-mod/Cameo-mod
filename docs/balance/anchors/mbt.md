@@ -96,7 +96,7 @@ Every classified member with its LIVE resolved-YAML stats as it ships today, sor
 | ra1_soviets_kotinnucleartank | redalert_soviets | REF | 240000 | 65 | 6427 | 1800 | live resolved YAML |
 | naxis_kingtigerheavytank | redalert2mod_naxis | FORMULA | 200000 | 100 | 5000 | 2000 | live resolved YAML |
 | oldqtnk.steel | redalert2mod_consortium | FORMULA | 112500 | 80 | 7000 | 2400 | excluded from fit (buildable=False and no explicit balance_include) |
-| ptnk.asian | redalert2mod_asianalliance | FORMULA | 130000 | 50 | 7777 | 2400 | live resolved YAML |
+| asianalliance_ptnk | redalert2mod_asianalliance | FORMULA | 130000 | 50 | 7777 | 2400 | live resolved YAML |
 | tkm_trenchtank | redalert2mod_tkm | REF | 200000 | 65 | 9237 | 2500 | live resolved YAML |
 | cabal_widow | tiberiansun_cabal | FORMULA | 120000 | 60 | 6813 | 3500 | live resolved YAML |
 

@@ -370,7 +370,7 @@ _267 further infantry inherit Repairable from the infantry base template (^Defau
 | actor | actual | expected |
 |---|---|---|
 | asianalliance_advancedcommunicationcenter | Power -200 | expected -500 (-Cost/20) |
-| asianalliance_asiansentryflamer | Power -25 | expected -40 (-Cost/20) |
+| asianalliance_sentryflamer | Power -25 | expected -40 (-Cost/20) |
 | asianalliance_chaosstorminductor | Power -200 | expected -250 (-Cost/20) |
 | asianalliance_concretebarrier | Power missing | expected -10 |
 | atreides_palace | Power -200 | expected -500 (-Cost/20) |
@@ -706,14 +706,14 @@ _none found_
 | yuri: heavyyuri | all units are Tier 1 | heavy support should mix all tiers |
 | asianalliance: heavyasianalliance | total cost 7680 | target ~10000 (±15%) |
 | asianalliance: heavyasianalliance | 5 infantry : 6 vehicles | want ~5 infantry per vehicle |
-| asianalliance: heavyasianalliance | asianalliance_lynxtank (cost 850) x3 vs asianalliance_asiantankkiller (cost 300) x2 | pricier units must not outnumber cheaper ones |
+| asianalliance: heavyasianalliance | asianalliance_lynxtank (cost 850) x3 vs asianalliance_tankkiller (cost 300) x2 | pricier units must not outnumber cheaper ones |
 | steelconsortium: heavyconsortium | 5 infantry : 6 vehicles | want ~5 infantry per vehicle |
 | steelconsortium: heavyconsortium | steelconsortium_quantumtank (cost 1600) x4 vs steelconsortium_clonetrooper (cost 143) x3 | pricier units must not outnumber cheaper ones |
 | steelconsortium: heavyconsortium | steelconsortium_quantumtank (cost 1600) x4 vs steelconsortium_quantummissiletrooper (cost 1150) x2 | pricier units must not outnumber cheaper ones |
 | steelconsortium: heavyconsortium | steelconsortium_quantumtank (cost 1600) x4 vs steelconsortium_manta (cost 850) x2 | pricier units must not outnumber cheaper ones |
 | latinsyndicate: heavysyndicate | total cost 14790 | target ~10000 (±15%) |
 | latinsyndicate: heavysyndicate | 5 infantry : 6 vehicles | want ~5 infantry per vehicle |
-| latinsyndicate: heavysyndicate | latinsyndicate_freedomfighter (cost 3000) x2 vs ptnk.asian (cost 2400) x1 | pricier units must not outnumber cheaper ones |
+| latinsyndicate: heavysyndicate | latinsyndicate_freedomfighter (cost 3000) x2 vs asianalliance_ptnk (cost 2400) x1 | pricier units must not outnumber cheaper ones |
 | naxis: heavynaxis | 5 infantry : 6 vehicles | want ~5 infantry per vehicle |
 | naxis: heavynaxis | naxis_wirbelwind (cost 1800) x3 vs naxis_sssoldier (cost 240) x2 | pricier units must not outnumber cheaper ones |
 | naxis: heavynaxis | naxis_tiger (cost 800) x3 vs naxis_sssoldier (cost 240) x2 | pricier units must not outnumber cheaper ones |

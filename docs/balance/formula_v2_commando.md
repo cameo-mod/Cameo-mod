@@ -4,7 +4,7 @@ anchor: `SPEC(80000,65,8000,1200,1,3000)` (cost0 3000, O0 1810.00, P0 4048.00, Q
 
 | unit | cost (actual) | class-formula price | delta |
 |---|---|---|---|
-| `asianalliance_asiancommando` | 3000 | 2948 | -2% |
+| `asianalliance_commando` | 3000 | 2948 | -2% |
 | `cabal_berserker` | 10000 | 8294 | -17% ⚠ |
 | `forgotten_ghoststalker` | 4000 | 2570 | -36% ❗ |
 | `forgotten_ghoststalker_r4` | 4000 | 3069 | -23% ⚠ |

@@ -1863,7 +1863,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "33000",
+        "damage": "42000",
         "falloff": "100, 0",
         "spread": "59",
         "tag": "Arrow_Light_Flat",
@@ -1903,20 +1903,6 @@
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": null,
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
        },
        {
         "damage": "3",
@@ -1953,7 +1939,7 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "33000",
+        "damage": "42000",
         "falloff": "100, 0",
         "spread": "59",
         "tag": "Arrow_Light_Flat",
@@ -1995,20 +1981,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "59",
-        "tag": "Arrow_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": null,
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "3",
         "falloff": null,
         "spread": null,
@@ -2042,7 +2014,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "Flak"
+     "v": "None"
     },
     "buildable": true,
     "cost": {

@@ -63,7 +63,7 @@ class SharedOwnerWrapperTests(unittest.TestCase):
         weapons = {c.get('Weapon') for c in self.rules.resolve('E3').children_named('Armament')}
         self.assertEqual(weapons, {'Rockets', 'RocketsAMT'})
 
-    def test_only_canonical_owner_and_its_colorpicker_use_wrapper(self):
+    def test_only_canonical_owner_uses_wrapper(self):
         owners = {new: actor for actor, route in self.before['routes'].items() for new in route.values()}
         seen = set()
         for actor in self.rules.actors:
@@ -72,11 +72,9 @@ class SharedOwnerWrapperTests(unittest.TestCase):
             for trait in self.rules.resolve(actor).children:
                 weapon = trait.get('Weapon')
                 if weapon in owners:
-                    self.assertIn(actor, {owners[weapon], owners[weapon] + '.colorpicker'}, weapon)
+                    self.assertIn(actor, {owners[weapon]}, weapon)
                     seen.add(weapon)
         self.assertEqual(seen, set(owners))
-        colorpicker = restore(node_to_obj(self.rules.resolve('ra1_soviets_mammothtank.colorpicker')), self.reverse)
-        self.assertEqual(digest(colorpicker), self.before['colorpicker_before_hash'])
 
 
 if __name__ == '__main__':
