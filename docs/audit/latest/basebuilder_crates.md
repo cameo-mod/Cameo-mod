@@ -23,7 +23,7 @@ Real factions: **31** — covered by crate: **30** — missing: **1**
 | protoss | protoss | protoss_mobilenexus | 10000 |
 | ra1_allies | ra1_allies | ra1_allies_alliedmobileconstructionvehicle | 10000 |
 | ra1_soviets | ra1_soviets | ra1_soviets_mobileconstructionvehicle | 10000 |
-| ra2_allies | ra2_allies | ra2_allies_alliedmobileconstructionvehicle | 10000 |
+| ra2_allies | ra2_allies | ra2_allies_mobileconstructionvehicle | 10000 |
 | ra2_soviets | ra2_soviets | ra2_soviets_mobileconstructionvehicle | 10000 |
 | schwarzermond | schwarzermond | schwarzermond_naxismobileconstructionvehicle | 10000 |
 | steelconsortium | steelconsortium | steelconsortium_consortiummobileconstructionvehicle | 10000 |

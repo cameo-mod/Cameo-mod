@@ -151,7 +151,7 @@ class WeaponCorrectnessFollowupTests(unittest.TestCase):
             "ordos_repairpad",
             "protoss_assimilator",
             "ra1_soviets_barracks",
-            "ra2_allies_alliedservicedepot",
+            "ra2_allies_servicedepot",
             "ra2_soviets_servicedepot",
             "td_gdi_advancedcommunicationscenter",
             "td_gdi_advancedguardtower",
