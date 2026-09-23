@@ -4,7 +4,6 @@ IncendiaryM1Carbine:
 	Inherits@proj: ^Projectile_Flame_Light
 	Inherits@fx: ^Effect_Flame_Light
 	Inherits: M1Carbine
-	Inherits@2: ^IncendiaryBulletProjectile
 	ValidTargets: Ground, Water, Air
 	Warhead@Flame_Light:
 		ValidTargets: Ground, Water, Air
@@ -18,6 +17,14 @@ IncendiaryM1Carbine:
 		PercentageScale: 9975
 	-Warhead@Bullet_Light:
 	-Warhead@Flame_Light:
+	Projectile: Bullet
+	Projectile:
+		Speed: 4000
+		ContrailStartColor: FF884488
+		ContrailEndColor: FFFFFF44
+		ContrailLength: 15
+		ContrailWidth: 150
+		Width: 40
 ra1_soviets_ak47conscript_rifle:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Inherits@wh: ^Warhead_Bullet_Light
@@ -100,7 +107,10 @@ ra1_soviets_grenadier_grenade:
 
 ra1_soviets_grenadier_grenaderaexplode:
 	Inherits@roleflat: ^Warhead_Flame_Light_Flat
-	Inherits: ^GrenadeRALegacy
+	Inherits@xra1_soviets_grenadier_grenaderaexplode0: ^Warhead_Demolition_Light
+	Inherits@xra1_soviets_grenadier_grenaderaexplode1: ^Warhead_Flame_Light
+	Inherits@xra1_soviets_grenadier_grenaderaexplode2: ^Projectile_Grenade_Light
+	Inherits@xra1_soviets_grenadier_grenaderaexplode3: ^Effect_Flame_Light
 	Warhead@Demolition_Light: AreaDamage
 		Damage: 4000
 	Warhead@Flame_Light:
@@ -111,44 +121,118 @@ ra1_soviets_grenadier_grenaderaexplode:
 		PercentageScale: 9988
 	-Warhead@Demolition_Light:
 	-Warhead@Flame_Light:
+	ReloadDelay: 40
+	Range: 5791
+	Report: toss1.aud
+	Projectile:
+		ContrailLength: 11
+		ContrailStartWidth: 66
+		ContrailEndWidth: 22
+		ContrailStartColor: FF8888FF
+		ContrailEndColor: FFFFFF22
 ra1_soviets_grenadier_grenadethermobaric:
 	Inherits@roleflat: ^Warhead_Thermobaric_Light
-	Inherits: ^ShrapnelWeapon
-	Inherits@2: ^MediumFlameWeapon
-	Inherits@3: ^GrenadeRALegacy
+	Inherits@xra1_soviets_grenadier_grenadethermobaric0: ^Warhead_Demolition_Light
+	Inherits@xra1_soviets_grenadier_grenadethermobaric1: ^Warhead_Flame_Light
+	Inherits@xra1_soviets_grenadier_grenadethermobaric2: ^Projectile_Grenade_Light
+	Inherits@xra1_soviets_grenadier_grenadethermobaric3: ^Effect_Flame_Light
 	Projectile: Bullet
 		ContrailStartColor: FF8844FF
 	Range: 4973
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		Damage: 2
 	Warhead@Demolition_Light: AreaDamage
 		Damage: 4000
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 4000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		Damage: 2
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@Flame_Light:
 		Damage: 4000
 	Warhead@Thermobaric_Light:
 		ValidTargets: Ground, Water
 		Damage: 13577
 		PercentageScale: 4994
-	-Warhead@MediumFlameWeapon:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@Demolition_Light:
 	-Warhead@Flame_Light:
+	ReloadDelay: 40
+	Report: toss1.aud
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+	Warhead@DuneRock: LeaveSmudge
+	Warhead@DuneSand: LeaveSmudge
+	Warhead@EffectWater: CreateEffect
+	Warhead@Concrete: DamagesConcrete
+	InvalidTargets: wall
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+	Projectile:
+		ContrailLength: 11
+		ContrailStartWidth: 66
+		ContrailEndWidth: 22
+		ContrailEndColor: FFFFFF22
+	Warhead@Concrete:
+		Damage: 175
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+		ValidTargets: Ground, Ship
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@EffectWater:
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@MediumFlameWeaponPercentage:
+		ValidTargets: Ground, Water
+		Spread: 375
+		Damage: 2
+		Falloff: 111, 33, 11, 3
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Wood: 16
+			Concrete: 15
+			Steel: 14
+			Scout: 13
+			Light: 12
+			Medium: 11
+			Heavy: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@ShrapnelWeaponPercentage:
+		ValidTargets: Ground, Water
+		Spread: 300
+		Damage: 2
+		Falloff: 100, 75, 50, 25
+		Versus:
+			Shield: 25
+			Scout: 20
+			None: 19
+			Wood: 18
+			Light: 17
+			Flak: 16
+			Concrete: 15
+			Medium: 14
+			Plate: 13
+			Steel: 12
+			Heavy: 11
+			Heroic: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
 ra1_soviets_grenadier_grenadethermobaricexplode:
 	Inherits: ra1_soviets_grenadier_grenadethermobaric
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -736,9 +820,6 @@ ra1_soviets_v1rockettruck_v1rockets:
 ra1_soviets_v1rockettruck_v1rocketsthermobaric:
 	Inherits@collapsewh: ^Warhead_Thermobaric_Heavy
 	-TargetActorCenter:
-	Inherits: ^MediumMissile
-	Inherits@2: ^Grenade
-	Inherits@3: ^HeavyFlameWeapon
 	ReloadDelay: 115
 	Burst: 4
 	BurstDelays: 5
@@ -758,43 +839,173 @@ ra1_soviets_v1rockettruck_v1rocketsthermobaric:
 		ContrailLength: 10
 		ContrailStartColor: FFBB8844
 		ContrailEndColor: 33221100
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 8000
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		InvalidTargets: Air
-		Damage: 4
-	Warhead@Grenade: SpreadDamage
-		Damage: 8000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 4000
-	Warhead@GrenadePercentage: AreaDamagePercentage
-		InvalidTargets: Air
-		Damage: 4
-	Warhead@HeavyFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 8000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
-		InvalidTargets: Air
-		Damage: 4
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 
 	Warhead@Thermobaric_Heavy:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 24000
 		PercentageScale: 0
-	-Warhead@MediumMissile:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@HeavyFlameWeapon:
 
 	Warhead@ShieldHit:
 		InvalidTargets: Air
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
+	Warhead@Smudge: LeaveSmudge
+	Warhead@DuneRock: LeaveSmudge
+	Warhead@DuneSand: LeaveSmudge
+	Warhead@RA2Crater: LeaveSmudge
+	Warhead@Effect: CreateEffect
+	Warhead@EffectAir: CreateEffect
+	Warhead@ShieldHit: GrantExternalCondition
+	Warhead@Concrete: DamagesConcrete
+	Warhead@ShieldHitEffect: CreateEffect
+	TargetActorCenter: true
+	Warhead@GrenadePercentage: AreaDamagePercentage
+	Warhead@EffectWater: CreateEffect
+	InvalidTargets: wall
+	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
+	Warhead@RA2Scorch: LeaveSmudge
+	Warhead@GroundFire: SpawnActor
+	Projectile:
+		Arm: 0
+		AllowSnapping: true
+		HorizontalRateOfTurn: 30
+		VerticalRateOfTurn: 30
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		CloseEnough: 500
+		Acceleration: 3
+		HomingActivationDelay: 2
+		RangeLimit: 25000
+		PointDefenseTypes: Missile
+	Warhead@Concrete:
+		Damage: 100
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+		Explosions: big_napalm
+		ImpactSounds: firebl3.aud
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+		GlowScale: 2.0
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
+	Warhead@EffectAir:
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@EffectWater:
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@GrenadePercentage:
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 4
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+		InvalidTargets: Air
+	Warhead@GroundFire:
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@HeavyFlameWeaponPercentage:
+		ValidTargets: Ground, Water
+		Spread: 500
+		Damage: 4
+		Falloff: 111, 33, 11, 3
+		Versus:
+			HAZMAT: 25
+			Shield: 35
+			None: 25
+			Flak: 24
+			Plate: 23
+			Heroic: 22
+			Wood: 21
+			Concrete: 20
+			Steel: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		InvalidTargets: Air
+	Warhead@MediumMissilePercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 200
+		Damage: 4
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Spaceship: 19
+			Heavy: 18
+			Helicopter: 17
+			Steel: 16
+			Medium: 15
+			Bomber: 14
+			Concrete: 13
+			Light: 12
+			Fighter: 11
+			Wood: 10
+			Scout: 9
+			Plate: 8
+			Flak: 7
+			None: 6
+			Heroic: 5
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
+		UpdatesUnitStatistics: false
+		InvalidTargets: Air
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHit:
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Smudge:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
 ra1_soviets_grad_rocket:
 	Inherits@roleflat: ^Warhead_MissileHE_Heavy_Flat
 	Inherits@wh: ^Warhead_MissileHE_Heavy
@@ -824,8 +1035,6 @@ ra1_soviets_grad_rocket:
 	-Warhead@MissileHE_Heavy:
 	-Warhead@Concussion_Medium:
 ra1_soviets_grad_rocket_heavy:
-	Inherits: ^MediumChemicalWeapon
-	Inherits@2: ^HeavyBomb
 	Inherits@3: ra1_soviets_grad_rocket
 	Projectile: Bullet
 		TrailImage: black_smokey
@@ -835,23 +1044,104 @@ ra1_soviets_grad_rocket_heavy:
 		ContrailLength: 20
 		ContrailStartColor: FFBB8844
 		ContrailEndColor: 33221100
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 4000
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 2
-	Warhead@HeavyBomb: SpreadDamage
-		Damage: 4000
-	Warhead@HeavyBombPercentage: AreaDamagePercentage
-		Damage: 2
 	Warhead@MissileHE_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 16000
 		PercentageScale: 4994
-	-Warhead@HeavyBomb:
-	-Warhead@MediumChemicalWeapon:
+	InvalidTargets: wall
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
+	Warhead@Smudge1: LeaveSmudge
+	Warhead@RA2Crater: LeaveSmudge
+	Warhead@Smudge2: LeaveSmudge
+	Warhead@Smudge2RA2: LeaveSmudge
+	Warhead@Effect1: CreateEffect
+	Warhead@Effect2: CreateEffect
+	Warhead@Effect:
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@Effect1:
+		Explosions: poof
+		ImpactSounds: siege_impact.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+	Warhead@Effect2:
+		Delay: 6
+		Explosions: napalm
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@HeavyBombPercentage:
+		ValidTargets: Ground, Ship
+		Spread: 400
+		Damage: 2
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			Shield: 35
+			Wood: 25
+			Concrete: 24
+			Steel: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+	Warhead@MediumChemicalWeaponPercentage:
+		ValidTargets: Ground, Water
+		Spread: 350
+		Damage: 2
+		Falloff: 99, 66, 33
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Plate: 19
+			Heavy: 18
+			Flak: 17
+			Medium: 16
+			None: 15
+			Light: 14
+			Heroic: 13
+			Scout: 12
+			Steel: 11
+			Concrete: 10
+			Wood: 9
+			Spaceship: 8
+			Helicopter: 7
+			Bomber: 6
+			Fighter: 5
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge1:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
 SCUD:
 	Inherits: ^Warhead_MissileHE_Heavy
 	Inherits@2: ^Warhead_Flame_Heavy
@@ -1233,7 +1523,6 @@ IncendiaryChainGun:
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Flame_Light
 	Inherits@fx: ^Effect_Flame_Light
-	Inherits@3: ^IncendiaryBulletProjectile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 8
 	Range: 5528
@@ -1249,6 +1538,14 @@ IncendiaryChainGun:
 		PercentageScale: 9975
 	-Warhead@Bullet_Medium:
 	-Warhead@Flame_Light:
+	Projectile:
+		Speed: 4000
+		Image: 50CAL
+		ContrailStartColor: FF884488
+		ContrailEndColor: FFFFFF44
+		ContrailWidth: 150
+		ContrailLength: 15
+		Width: 40
 HindMissiles:
 	Inherits@finalmain: ^Warhead_MissileAP_Medium_Flat
 	Inherits@wh: ^Warhead_Demolition_Light
@@ -1290,10 +1587,6 @@ ra1_soviets_hindattackhelicopter_hindmissilesthermobaric:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^Grenade
-	Inherits@5: ^ShrapnelWeapon
-	Inherits@6: ^MediumFlameWeapon
-	Inherits@7: ^MediumMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 16
 	Range: 5528
@@ -1313,50 +1606,9 @@ ra1_soviets_hindattackhelicopter_hindmissilesthermobaric:
 		ContrailLength: 10
 		ContrailStartColor: FFBB8844
 		ContrailEndColor: 33221100
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-	Warhead@GrenadePercentage: AreaDamagePercentage
-		PercentageDenominator: 200
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		PercentageDenominator: 200
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		PercentageDenominator: 200
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		PercentageDenominator: 200
-		ValidTargets: Ground, Water, Air
-		Damage: 1
 	Warhead@Effect: CreateEffect
 		Explosions: med_napalm
 		GlowScale: 1.5
@@ -1370,20 +1622,154 @@ ra1_soviets_hindattackhelicopter_hindmissilesthermobaric:
 		ValidTargets: Ground, Water, Air
 		Damage: 5000
 		PercentageScale: 1990
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@MediumFlameWeapon:
-	-Warhead@MediumMissile:
 	-Warhead@CannonHE_Heavy:
+	Warhead@GrenadePercentage: AreaDamagePercentage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+	InvalidTargets: wall
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+	Warhead@RA2Scorch: LeaveSmudge
+	Warhead@GroundFire: SpawnActor
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
+	Projectile:
+		LaunchAngle: 66
+		Arm: 0
+		AllowSnapping: true
+		HorizontalRateOfTurn: 30
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		CloseEnough: 500
+		Acceleration: 3
+		HomingActivationDelay: 2
+		RangeLimit: 25000
+		PointDefenseTypes: Missile
+	Warhead@Concrete:
+		Damage: 150
+	Warhead@Effect:
+		ValidTargets: Ground, Water
+	Warhead@EffectAir:
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+	Warhead@EffectWater:
+		Explosions: med_splash
+	Warhead@GrenadePercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 200
+		Damage: 1
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+		PercentageDenominator: 200
+	Warhead@GroundFire:
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@MediumFlameWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 375
+		Damage: 1
+		Falloff: 111, 33, 11, 3
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Wood: 16
+			Concrete: 15
+			Steel: 14
+			Scout: 13
+			Light: 12
+			Medium: 11
+			Heavy: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		PercentageDenominator: 200
+	Warhead@MediumMissilePercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 200
+		Damage: 1
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Spaceship: 19
+			Heavy: 18
+			Helicopter: 17
+			Steel: 16
+			Medium: 15
+			Bomber: 14
+			Concrete: 13
+			Light: 12
+			Fighter: 11
+			Wood: 10
+			Scout: 9
+			Plate: 8
+			Flak: 7
+			None: 6
+			Heroic: 5
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
+		UpdatesUnitStatistics: false
+		PercentageDenominator: 200
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHit:
+		Duration: 8
+	Warhead@ShrapnelWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 300
+		Damage: 1
+		Falloff: 100, 75, 50, 25
+		Versus:
+			Shield: 25
+			Scout: 20
+			None: 19
+			Wood: 18
+			Light: 17
+			Flak: 16
+			Concrete: 15
+			Medium: 14
+			Plate: 13
+			Steel: 12
+			Heavy: 11
+			Heroic: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+		PercentageDenominator: 200
 
 ra1_soviets_hindattackhelicopter_hindmissilesnuclear:
 	Inherits@collapsewh: ^Warhead_Nuclear_Super
-	Inherits: ^TankDestroyerCannon
-	Inherits@2: ^MediumFlameWeapon
-	Inherits@3: ^NuclearWarhead
-	Inherits@4: ^MediumMissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 16
 	Range: 5528
@@ -1403,41 +1789,6 @@ ra1_soviets_hindattackhelicopter_hindmissilesnuclear:
 		ContrailLength: 10
 		ContrailStartColor: FFBB8844
 		ContrailEndColor: 33221100
-	Warhead@TankDestroyerCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-		PercentageDenominator: 200
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		PercentageDenominator: 200
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@NuclearWarhead: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@NuclearWarheadPercentage: AreaDamagePercentage
-		PercentageDenominator: 200
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		PercentageDenominator: 200
-		ValidTargets: Ground, Water, Air
-		Damage: 1
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ground, Water, Air
 		Explosions: nuke_small
@@ -1447,19 +1798,215 @@ ra1_soviets_hindattackhelicopter_hindmissilesnuclear:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 0
-	-Warhead@MediumFlameWeapon:
-	-Warhead@MediumMissile:
-	-Warhead@NuclearWarhead:
-	-Warhead@TankDestroyerCannon:
 	-Warhead@Nuclear_Super_Percentage:
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+	Warhead@Smudge: LeaveSmudge
+	Warhead@DuneRock: LeaveSmudge
+	Warhead@DuneSand: LeaveSmudge
+	Warhead@RA2Crater: LeaveSmudge
+	Warhead@EffectWater: CreateEffect
+	Warhead@EffectAir: CreateEffect
+	Warhead@Glow: GlowImpact
+	Warhead@ShieldHit: GrantExternalCondition
+	Warhead@Concrete: DamagesConcrete
+	Warhead@ShieldHitEffect: CreateEffect
+	InvalidTargets: wall
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+	Warhead@RA2Scorch: LeaveSmudge
+	Warhead@GroundFire: SpawnActor
+	Warhead@NuclearWarheadPercentage: AreaDamagePercentage
+	Warhead@Smudge1: LeaveSmudge
+	Warhead@Smudge2: LeaveSmudge
+	Warhead@Smudge3: LeaveSmudge
+	Warhead@ShieldHitEffectNuclear: CreateEffect
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
+	Projectile:
+		Arm: 0
+		AllowSnapping: true
+		HorizontalRateOfTurn: 30
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		CloseEnough: 500
+		Acceleration: 3
+		HomingActivationDelay: 2
+		RangeLimit: 25000
+		PointDefenseTypes: Missile
+	Warhead@Concrete:
+		Damage: 150
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@EffectAir:
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@EffectWater:
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@Glow:
+		Color: FFB84D
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@GroundFire:
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@MediumFlameWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 375
+		Damage: 1
+		Falloff: 111, 33, 11, 3
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Wood: 16
+			Concrete: 15
+			Steel: 14
+			Scout: 13
+			Light: 12
+			Medium: 11
+			Heavy: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		PercentageDenominator: 200
+	Warhead@MediumMissilePercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 200
+		Damage: 1
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Spaceship: 19
+			Heavy: 18
+			Helicopter: 17
+			Steel: 16
+			Medium: 15
+			Bomber: 14
+			Concrete: 13
+			Light: 12
+			Fighter: 11
+			Wood: 10
+			Scout: 9
+			Plate: 8
+			Flak: 7
+			None: 6
+			Heroic: 5
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
+		UpdatesUnitStatistics: false
+		PercentageDenominator: 200
+	Warhead@NuclearWarheadPercentage:
+		ValidTargets: Ground, Water, Air
+		AffectsParent: True
+		Spread: 500
+		Damage: 1
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Plate: 24
+			Heavy: 23
+			Flak: 22
+			Medium: 21
+			None: 20
+			Light: 19
+			Heroic: 18
+			Scout: 17
+			Steel: 16
+			Concrete: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PercentageDenominator: 200
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHit:
+		Condition: shieldhit
+		Duration: 8
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffectNuclear:
+		ImpactSounds: shielded_nuclear_hit.wav
+		ValidTargets: Shielded
+	Warhead@Smudge:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge1:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 1
+		Delay: 3
+	Warhead@Smudge2:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge3:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 3
+		Delay: 9
+	Warhead@TankDestroyerCannonPercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 75
+		Damage: 1
+		Versus:
+			Shield: 17
+			Superheavy: 16
+			Heavy: 15
+			Medium: 14
+			Light: 13
+			Scout: 12
+			Steel: 11
+			Concrete: 10
+			Wood: 9
+			Plate: 8
+			Flak: 7
+			None: 6
+			Heroic: 5
+			Spaceship: 4
+			Helicopter: 3
+			Bomber: 2
+			Fighter: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+		PercentageDenominator: 200
 
 ra1_soviets_kamovattackhelicopter_kamovmissilestesla:
 	Inherits@roleflat: ^Warhead_MissileTesla_Medium
-	Inherits: ^Grenade
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^MediumFlameWeapon
 	Inherits@4: ^TeslaWeapon
-	Inherits@5: ^MediumMissile
 	Inherits@fx: ^Effect_Tesla_Impact_RA2
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 16
@@ -1480,48 +2027,6 @@ ra1_soviets_kamovattackhelicopter_kamovmissilestesla:
 		ContrailLength: 10
 		ContrailStartColor: 88BBFF44
 		ContrailEndColor: 11223300
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@GrenadePercentage: AreaDamagePercentage
-		PercentageDenominator: 400
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		PercentageDenominator: 400
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		PercentageDenominator: 400
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -1531,15 +2036,6 @@ ra1_soviets_kamovattackhelicopter_kamovmissilestesla:
 		Damage: 1000
 		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
-		PercentageDenominator: 400
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		PercentageDenominator: 400
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -1558,14 +2054,169 @@ ra1_soviets_kamovattackhelicopter_kamovmissilestesla:
 		ValidTargets: Ground, Water, Air
 		Damage: 2750
 		PercentageScale: 0
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@MediumFlameWeapon:
-	-Warhead@MediumMissile:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
+	Warhead@GrenadePercentage: AreaDamagePercentage
+	Warhead@Smudge: LeaveSmudge
+	Warhead@DuneRock: LeaveSmudge
+	Warhead@DuneSand: LeaveSmudge
+	Warhead@Concrete: DamagesConcrete
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+	InvalidTargets: wall
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+	Warhead@RA2Scorch: LeaveSmudge
+	Warhead@GroundFire: SpawnActor
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
+	Warhead@RA2Crater: LeaveSmudge
+	Projectile:
+		LaunchAngle: 66
+		Arm: 0
+		AllowSnapping: true
+		HorizontalRateOfTurn: 30
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		CloseEnough: 500
+		Acceleration: 3
+		HomingActivationDelay: 2
+		RangeLimit: 25000
+		PointDefenseTypes: Missile
+	Warhead@Concrete:
+		Damage: 150
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@EffectAir:
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+	Warhead@GrenadePercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 200
+		Damage: 1
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+		PercentageDenominator: 400
+	Warhead@GroundFire:
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@MediumFlameWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 375
+		Damage: 1
+		Falloff: 111, 33, 11, 3
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Wood: 16
+			Concrete: 15
+			Steel: 14
+			Scout: 13
+			Light: 12
+			Medium: 11
+			Heavy: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		PercentageDenominator: 400
+	Warhead@MediumMissilePercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 200
+		Damage: 1
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Spaceship: 19
+			Heavy: 18
+			Helicopter: 17
+			Steel: 16
+			Medium: 15
+			Bomber: 14
+			Concrete: 13
+			Light: 12
+			Fighter: 11
+			Wood: 10
+			Scout: 9
+			Plate: 8
+			Flak: 7
+			None: 6
+			Heroic: 5
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+		PercentageDenominator: 400
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShrapnelWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 300
+		Damage: 1
+		Falloff: 100, 75, 50, 25
+		Versus:
+			Shield: 25
+			Scout: 20
+			None: 19
+			Wood: 18
+			Light: 17
+			Flak: 16
+			Concrete: 15
+			Medium: 14
+			Plate: 13
+			Steel: 12
+			Heavy: 11
+			Heroic: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+		PercentageDenominator: 400
+	Warhead@Smudge:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 ra1_soviets_kamovattackhelicopter_kamovtesla:
 	Inherits@finalmain: ^Warhead_Tesla_Heavy_Flat
@@ -1991,10 +2642,6 @@ ra1_soviets_teslayak_yakteslaarcfragment2:
 
 ra1_soviets_yakscoutplane_napalm_bomb:
 	Inherits@collapsewh: ^Warhead_Flame_Heavy
-	Inherits: ^ShrapnelWeapon
-	Inherits@2: ^HeavyBomb
-	Inherits@3: ^MediumFlameWeapon
-	Inherits@4: ^HeavyFlameWeapon
 	ReloadDelay: 110
 	Range: 1840
 	Burst: 4
@@ -2006,22 +2653,6 @@ ra1_soviets_yakscoutplane_napalm_bomb:
 		Acceleration: 0, 0, -10
 		Image: BOMBLET
 		Shadow: true
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		PercentageDenominator: 400
-		Damage: 5
-	Warhead@HeavyBombPercentage: AreaDamagePercentage
-		PercentageDenominator: 400
-		Damage: 5
-	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		PercentageDenominator: 400
-		Damage: 5
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
-		PercentageDenominator: 400
-		Damage: 5
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@Effect: CreateEffect
 		Explosions: med_napalm
 		GlowScale: 1.5
@@ -2030,18 +2661,200 @@ ra1_soviets_yakscoutplane_napalm_bomb:
 	Warhead@Flame_Heavy:
 		Damage: 10000
 		PercentageScale: 0
-	-Warhead@Effect1:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@HeavyBomb:
-	-Warhead@MediumFlameWeapon:
-	-Warhead@HeavyFlameWeapon:
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+	Warhead@Smudge: LeaveSmudge
+	Warhead@DuneRock: LeaveSmudge
+	Warhead@DuneSand: LeaveSmudge
+	Warhead@EffectWater: CreateEffect
+	Warhead@ShieldHit: GrantExternalCondition
+	Warhead@Concrete: DamagesConcrete
+	Warhead@ShieldHitEffect: CreateEffect
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
+	Warhead@Smudge1: LeaveSmudge
+	Warhead@RA2Crater: LeaveSmudge
+	Warhead@Smudge2: LeaveSmudge
+	Warhead@Smudge2RA2: LeaveSmudge
+	Warhead@Effect2: CreateEffect
+	InvalidTargets: wall
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+	Warhead@RA2Scorch: LeaveSmudge
+	Warhead@GroundFire: SpawnActor
+	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
+	Projectile:
+		Speed: 3000
+	Warhead@Concrete:
+		Damage: 250
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+		ImpactSounds: firebl3.aud
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+	Warhead@Effect2:
+		Delay: 6
+		Explosions: napalm
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@EffectWater:
+		Explosions: large_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@GroundFire:
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@HeavyBombPercentage:
+		ValidTargets: Ground, Ship
+		Spread: 400
+		Damage: 5
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			Shield: 35
+			Wood: 25
+			Concrete: 24
+			Steel: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PercentageDenominator: 400
+	Warhead@HeavyFlameWeaponPercentage:
+		ValidTargets: Ground, Water
+		Spread: 500
+		Damage: 5
+		Falloff: 111, 33, 11, 3
+		Versus:
+			HAZMAT: 25
+			Shield: 35
+			None: 25
+			Flak: 24
+			Plate: 23
+			Heroic: 22
+			Wood: 21
+			Concrete: 20
+			Steel: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		PercentageDenominator: 400
+	Warhead@MediumFlameWeaponPercentage:
+		ValidTargets: Ground, Water
+		Spread: 375
+		Damage: 5
+		Falloff: 111, 33, 11, 3
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Wood: 16
+			Concrete: 15
+			Steel: 14
+			Scout: 13
+			Light: 12
+			Medium: 11
+			Heavy: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		PercentageDenominator: 400
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHit:
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@ShrapnelWeaponPercentage:
+		ValidTargets: Ground, Water
+		Spread: 300
+		Damage: 5
+		Falloff: 100, 75, 50, 25
+		Versus:
+			Shield: 25
+			Scout: 20
+			None: 19
+			Wood: 18
+			Light: 17
+			Flak: 16
+			Concrete: 15
+			Medium: 14
+			Plate: 13
+			Steel: 12
+			Heavy: 11
+			Heroic: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+		PercentageDenominator: 400
+	Warhead@Smudge:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+	Warhead@Smudge1:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
 
 ra1_soviets_teslayak_tesla_bomb:
 	Inherits: ^TeslaWeapon
-	Inherits@2: ^HeavyBomb
-	Inherits@3: ^HeavyChemicalWeapon
-	Inherits@4: ^HeavyFlameWeapon
 	Inherits@fx: ^Effect_Kirov_Tesla_RA2
 	ReloadDelay: 125
 	Range: 1250
@@ -2064,40 +2877,6 @@ ra1_soviets_teslayak_tesla_bomb:
 		InvalidTargets: Air
 		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyBomb: SpreadDamage
-		Damage: 40000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyBombPercentage: AreaDamagePercentage
-		PercentageDenominator: 100
-		InvalidTargets: Air
-		Damage: 5
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 40000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
-		PercentageDenominator: 100
-		InvalidTargets: Air
-		Damage: 5
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 40000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
-		PercentageDenominator: 100
-		InvalidTargets: Air
-		Damage: 5
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@EMPUnit: AffectsIntegrity
 		InvalidTargets: Shielded, Air
 		Damage: 40000
@@ -2161,20 +2940,125 @@ ra1_soviets_teslayak_tesla_bomb:
 			Fighter: 40
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	-Warhead@Effect1:
-	-Warhead@HeavyBomb:
-	-Warhead@HeavyChemicalWeapon:
-	-Warhead@HeavyFlameWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
 
 	Warhead@ShieldHit:
 		InvalidTargets: Air
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
+	InvalidTargets: wall
+	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
+	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
+	Warhead@Smudge: LeaveSmudge
+	Warhead@RA2Scorch: LeaveSmudge
+	Warhead@GroundFire: SpawnActor
+	Projectile:
+		Speed: 3000
+	Warhead@Effect:
+		GlowScale: 2.0
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
+		ImpactActors: false
+	Warhead@GroundFire:
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@HeavyBombPercentage:
+		ValidTargets: Ground, Ship
+		Spread: 400
+		Damage: 5
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			Shield: 35
+			Wood: 25
+			Concrete: 24
+			Steel: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+		PercentageDenominator: 100
+		InvalidTargets: Air
+	Warhead@HeavyChemicalWeaponPercentage:
+		ValidTargets: Ground, Water
+		Spread: 525
+		Damage: 5
+		Falloff: 99, 66, 33
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Plate: 24
+			Heavy: 23
+			Flak: 22
+			Medium: 21
+			None: 20
+			Light: 19
+			Heroic: 18
+			Scout: 17
+			Steel: 16
+			Concrete: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+		PercentageDenominator: 100
+		InvalidTargets: Air
+	Warhead@HeavyFlameWeaponPercentage:
+		ValidTargets: Ground, Water
+		Spread: 500
+		Damage: 5
+		Falloff: 111, 33, 11, 3
+		Versus:
+			HAZMAT: 25
+			Shield: 35
+			None: 25
+			Flak: 24
+			Plate: 23
+			Heroic: 22
+			Wood: 21
+			Concrete: 20
+			Steel: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		PercentageDenominator: 100
+		InvalidTargets: Air
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
 ra1_soviets_nuclearyak_yaknuclearbomb:
 	Inherits@roleflat: ^Warhead_Nuclear_Super
-	Inherits: ^HeavyBomb
-	Inherits@2: ^HeavyChemicalWeapon
-	Inherits@3: ^HeavyFlameWeapon
-	Inherits@4: ^NuclearWarhead
 	-Warhead@Nuclear_Super_Percentage:
 	ReloadDelay: 125
 	Range: 1250
@@ -2186,46 +3070,6 @@ ra1_soviets_nuclearyak_yaknuclearbomb:
 		Acceleration: 0, 0, -10
 		Image: MISSILE
 		Shadow: True
-	Warhead@HeavyBomb: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 50000
-	Warhead@HeavyBombPercentage: AreaDamagePercentage
-		PercentageDenominator: 200
-		ValidTargets: Ground, Water
-		Damage: 25
-	Warhead@HeavyChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water
-		Damage: 50000
-	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
-		PercentageDenominator: 200
-		ValidTargets: Ground, Water
-		Damage: 25
-	Warhead@HeavyFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water
-		Damage: 50000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
-		PercentageDenominator: 200
-		ValidTargets: Ground, Water
-		Damage: 25
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@NuclearWarhead: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 50000
-		AffectsParent: false
-	Warhead@NuclearWarheadPercentage: AreaDamagePercentage
-		PercentageDenominator: 200
-		ValidTargets: Ground, Water
-		Damage: 25
-		AffectsParent: false
 	Warhead@Effect: CreateEffect
 		Explosions: nuke_small
 		ImpactSounds: kaboom22.aud
@@ -2234,10 +3078,207 @@ ra1_soviets_nuclearyak_yaknuclearbomb:
 		ValidTargets: Ground, Water
 		Damage: 100000
 		PercentageScale: 0
-	-Warhead@HeavyBomb:
-	-Warhead@HeavyChemicalWeapon:
-	-Warhead@HeavyFlameWeapon:
-	-Warhead@NuclearWarhead:
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
+	Warhead@Smudge1: LeaveSmudge
+	Warhead@RA2Crater: LeaveSmudge
+	Warhead@Smudge2: LeaveSmudge
+	Warhead@Smudge2RA2: LeaveSmudge
+	Warhead@Effect1: CreateEffect
+	Warhead@Effect2: CreateEffect
+	Warhead@EffectWater: CreateEffect
+	Warhead@ShieldHit: GrantExternalCondition
+	Warhead@ShieldHitEffect: CreateEffect
+	Warhead@Concrete: DamagesConcrete
+	InvalidTargets: wall
+	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
+	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
+	Warhead@Smudge: LeaveSmudge
+	Warhead@RA2Scorch: LeaveSmudge
+	Warhead@GroundFire: SpawnActor
+	Warhead@NuclearWarheadPercentage: AreaDamagePercentage
+	Warhead@Smudge3: LeaveSmudge
+	Warhead@ShieldHitEffectNuclear: CreateEffect
+	Projectile:
+		Speed: 3000
+	Warhead@Concrete:
+		Damage: 1000
+	Warhead@Effect:
+		GlowScale: 2.0
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
+	Warhead@Effect1:
+		Explosions: poof
+		ImpactSounds: siege_impact.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+	Warhead@Effect2:
+		Delay: 6
+		Explosions: napalm
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@EffectWater:
+		Explosions: large_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+	Warhead@GroundFire:
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@HeavyBombPercentage:
+		ValidTargets: Ground, Water
+		Spread: 400
+		Damage: 25
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			Shield: 35
+			Wood: 25
+			Concrete: 24
+			Steel: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PercentageDenominator: 200
+	Warhead@HeavyChemicalWeaponPercentage:
+		ValidTargets: Ground, Water
+		Spread: 525
+		Damage: 25
+		Falloff: 99, 66, 33
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Plate: 24
+			Heavy: 23
+			Flak: 22
+			Medium: 21
+			None: 20
+			Light: 19
+			Heroic: 18
+			Scout: 17
+			Steel: 16
+			Concrete: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+		PercentageDenominator: 200
+	Warhead@HeavyFlameWeaponPercentage:
+		ValidTargets: Ground, Water
+		Spread: 500
+		Damage: 25
+		Falloff: 111, 33, 11, 3
+		Versus:
+			HAZMAT: 25
+			Shield: 35
+			None: 25
+			Flak: 24
+			Plate: 23
+			Heroic: 22
+			Wood: 21
+			Concrete: 20
+			Steel: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		PercentageDenominator: 200
+	Warhead@NuclearWarheadPercentage:
+		ValidTargets: Ground, Water
+		AffectsParent: false
+		Spread: 500
+		Damage: 25
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Plate: 24
+			Heavy: 23
+			Flak: 22
+			Medium: 21
+			None: 20
+			Light: 19
+			Heroic: 18
+			Scout: 17
+			Steel: 16
+			Concrete: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PercentageDenominator: 200
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHit:
+		Condition: shieldhit
+		Duration: 25
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffectNuclear:
+		ImpactSounds: shielded_nuclear_hit.wav
+		ValidTargets: Shielded
+	Warhead@Smudge:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+	Warhead@Smudge1:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 1
+		Delay: 3
+	Warhead@Smudge2:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge3:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 3
+		Delay: 9
 
 ra1_soviets_migattackbomber_maverick:
 	Inherits@wh: ^Warhead_MissileAP_Medium
@@ -2372,9 +3413,6 @@ ra1_soviets_migattackbomber_teslamaverickfragment2:
 ra1_soviets_migattackbomber_thermobaricmaverick:
 	Inherits@roleflat: ^Warhead_Thermobaric_Heavy_Flat
 	Inherits@collapsewh: ^Warhead_Thermobaric_Heavy
-	Inherits: ^NuclearWarhead
-	Inherits@2: ^HeavyMissile
-	Inherits@3: ^MediumFlameWeapon
 	Inherits@4: ra1_soviets_migattackbomber_maverick
 	Projectile: Missile
 		VerticalRateOfTurn: 16
@@ -2389,33 +3427,6 @@ ra1_soviets_migattackbomber_thermobaricmaverick:
 		ContrailEndColor: 33221100
 		TrailInterval: 1
 		TrailDelay: 1
-	Warhead@NuclearWarhead: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 12000
-		AffectsParent: false
-	Warhead@NuclearWarheadPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 6
-		AffectsParent: false
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 12000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 6
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 12000
-	Warhead@HeavyMissilePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 6
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
@@ -2433,11 +3444,126 @@ ra1_soviets_migattackbomber_thermobaricmaverick:
 		ValidTargets: Ground, Water, Air
 		Damage: 48000
 		PercentageScale: 2498
-	-Warhead@NuclearWarhead:
-	-Warhead@HeavyMissile:
-	-Warhead@MediumFlameWeapon:
 	-Warhead@MissileAP_Medium:
 	-Warhead@Thermobaric_Heavy:
+	Warhead@NuclearWarheadPercentage: AreaDamagePercentage
+	Warhead@Smudge1: LeaveSmudge
+	Warhead@Smudge2: LeaveSmudge
+	Warhead@Smudge3: LeaveSmudge
+	Warhead@ShieldHitEffectNuclear: CreateEffect
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+	InvalidTargets: wall
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+	Warhead@RA2Scorch: LeaveSmudge
+	Warhead@GroundFire: SpawnActor
+	Warhead@Effect:
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@GroundFire:
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@HeavyMissilePercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 300
+		Damage: 6
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Spaceship: 24
+			Heavy: 23
+			Helicopter: 22
+			Steel: 21
+			Medium: 20
+			Bomber: 19
+			Concrete: 18
+			Light: 17
+			Fighter: 16
+			Wood: 15
+			Scout: 14
+			Plate: 13
+			Flak: 12
+			None: 11
+			Heroic: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@MediumFlameWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 375
+		Damage: 6
+		Falloff: 111, 33, 11, 3
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Wood: 16
+			Concrete: 15
+			Steel: 14
+			Scout: 13
+			Light: 12
+			Medium: 11
+			Heavy: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@NuclearWarheadPercentage:
+		ValidTargets: Ground, Water, Air
+		AffectsParent: false
+		Spread: 500
+		Damage: 6
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Plate: 24
+			Heavy: 23
+			Flak: 22
+			Medium: 21
+			None: 20
+			Light: 19
+			Heroic: 18
+			Scout: 17
+			Steel: 16
+			Concrete: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHitEffectNuclear:
+		ImpactSounds: shielded_nuclear_hit.wav
+		ValidTargets: Shielded
+	Warhead@Smudge1:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 1
+		Delay: 3
+	Warhead@Smudge2:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge3:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 3
+		Delay: 9
 ra1_soviets_su57attackbomber_missile:
 	Inherits@missilerole: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -2602,8 +3728,6 @@ ShtoraLaser:
 	Inherits@collapsewh: ^Warhead_Laser_Light
 	Inherits@collapseextra: ^Warhead_Laser_ExtraDamage
 	-TargetActorCenter:
-	Inherits: ^LightFlameWeapon
-	Inherits@2: ^FlakWeapon
 	Inherits@3: ^LaserWeapon
 	ReloadDelay: 100
 	Range: 6825
@@ -2618,19 +3742,6 @@ ShtoraLaser:
 		SecondaryBeamWidth: 64
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFFFF
-	Warhead@LightFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2657,11 +3768,93 @@ ShtoraLaser:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 0
-	-Warhead@LightFlameWeapon:
-	-Warhead@FlakWeapon:
 	-Warhead@LaserWeapon:
 	-Warhead@LaserExtraDamage:
 	-Warhead@MediumChemicalWeapon:
+	InvalidTargets: wall
+	TargetActorCenter: true
+	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
+	Warhead@GroundFire: SpawnActor
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+	Warhead@EffectWater: CreateEffect
+	Projectile:
+		Speed: 10000
+		Image: 50CAL
+		ContrailZOffset: 4000
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+		ContrailStartWidth: 50
+		ContrailEndWidth: 100
+		ContrailLength: 10
+		Inaccuracy: 250
+	Warhead@Effect:
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater:
+		Explosions: small_splash
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@FlakWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 125
+		Damage: 1
+		Versus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Concrete: 6
+			Steel: 5
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
+	Warhead@GroundFire:
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@LightFlameWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 250
+		Damage: 1
+		Falloff: 111, 33, 11, 3
+		Versus:
+			Shield: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Wood: 12
+			Concrete: 11
+			Steel: 10
+			Scout: 9
+			Light: 8
+			Medium: 7
+			Heavy: 6
+			Superheavy: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@RA2Scorch:
+		Chance: 15
+	Warhead@Smudge:
+		Chance: 15
 
 ra1_soviets_kotinnucleartank_kotincannon:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
@@ -2915,14 +4108,6 @@ MammothTuskTargetingComputer:
 
 MammothTuskThermobaric:
 	Inherits@collapsewh: ^Warhead_Thermobaric_Heavy
-	Inherits: ^LightFlameWeapon
-	Inherits@2: ^MediumFlameWeapon
-	Inherits@3: ^HeavyFlameWeapon
-	Inherits@4: ^Grenade
-	Inherits@5: ^FlakWeapon
-	Inherits@6: ^ShrapnelWeapon
-	Inherits@7: ^MediumMissile
-	Inherits@8: ^HeavyMissile
 	ValidTargets: Ground, Water, Infantry, Monster, Air
 	ReloadDelay: 91
 	Burst: 2
@@ -2941,81 +4126,6 @@ MammothTuskThermobaric:
 		ContrailLength: 10
 		ContrailStartColor: FFBB8844
 		ContrailEndColor: 33221100
-	Warhead@LightFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@GrenadePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@FlakWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@HeavyMissilePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
 	Warhead@Effect: CreateEffect
 		Explosions: big_napalm
 		GlowScale: 2.0
@@ -3033,16 +4143,291 @@ MammothTuskThermobaric:
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
 		PercentageScale: 0
-	-Warhead@LightFlameWeapon:
-	-Warhead@MediumFlameWeapon:
-	-Warhead@HeavyFlameWeapon:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@FlakWeapon:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@MediumMissile:
-	-Warhead@HeavyMissile:
+	InvalidTargets: wall
+	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
+	Warhead@Smudge: LeaveSmudge
+	Warhead@RA2Scorch: LeaveSmudge
+	Warhead@ShieldHit: GrantExternalCondition
+	Warhead@ShieldHitEffect: CreateEffect
+	Warhead@GroundFire: SpawnActor
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
+	Warhead@GrenadePercentage: AreaDamagePercentage
+	Warhead@DuneRock: LeaveSmudge
+	Warhead@DuneSand: LeaveSmudge
+	Warhead@EffectWater: CreateEffect
+	Warhead@Concrete: DamagesConcrete
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
+	Warhead@RA2Crater: LeaveSmudge
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+	Projectile:
+		Blockable: false
+		LaunchAngle: 66
+		Inaccuracy: 150
+		ContrailZOffset: 4000
+		ContrailStartWidth: 50
+		ContrailEndWidth: 100
+		Arm: 0
+		AllowSnapping: true
+		Shadow: true
+		HorizontalRateOfTurn: 20
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		CloseEnough: 400
+		Acceleration: 2
+		HomingActivationDelay: 3
+		RangeLimit: 30000
+		PointDefenseTypes: Missile
+	Warhead@Concrete:
+		Damage: 200
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+		ImpactActors: false
+		ValidTargets: Ground, Water
+	Warhead@EffectAir:
+		ValidTargets: Air
+		ImpactActors: false
+	Warhead@EffectWater:
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@FlakWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 125
+		Damage: 2
+		Versus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Concrete: 6
+			Steel: 5
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
+	Warhead@GrenadePercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 200
+		Damage: 2
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@GroundFire:
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@HeavyFlameWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 500
+		Damage: 2
+		Falloff: 111, 33, 11, 3
+		Versus:
+			HAZMAT: 25
+			Shield: 35
+			None: 25
+			Flak: 24
+			Plate: 23
+			Heroic: 22
+			Wood: 21
+			Concrete: 20
+			Steel: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@HeavyMissilePercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 300
+		Damage: 2
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Spaceship: 24
+			Heavy: 23
+			Helicopter: 22
+			Steel: 21
+			Medium: 20
+			Bomber: 19
+			Concrete: 18
+			Light: 17
+			Fighter: 16
+			Wood: 15
+			Scout: 14
+			Plate: 13
+			Flak: 12
+			None: 11
+			Heroic: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@LightFlameWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 250
+		Damage: 2
+		Falloff: 111, 33, 11, 3
+		Versus:
+			Shield: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Wood: 12
+			Concrete: 11
+			Steel: 10
+			Scout: 9
+			Light: 8
+			Medium: 7
+			Heavy: 6
+			Superheavy: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 375
+		Damage: 2
+		Falloff: 111, 33, 11, 3
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Wood: 16
+			Concrete: 15
+			Steel: 14
+			Scout: 13
+			Light: 12
+			Medium: 11
+			Heavy: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumMissilePercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 200
+		Damage: 2
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Spaceship: 19
+			Heavy: 18
+			Helicopter: 17
+			Steel: 16
+			Medium: 15
+			Bomber: 14
+			Concrete: 13
+			Light: 12
+			Fighter: 11
+			Wood: 10
+			Scout: 9
+			Plate: 8
+			Flak: 7
+			None: 6
+			Heroic: 5
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		Chance: 15
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHit:
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@ShrapnelWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 300
+		Damage: 2
+		Falloff: 100, 75, 50, 25
+		Versus:
+			Shield: 25
+			Scout: 20
+			None: 19
+			Wood: 18
+			Light: 17
+			Flak: 16
+			Concrete: 15
+			Medium: 14
+			Plate: 13
+			Steel: 12
+			Heavy: 11
+			Heroic: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@Smudge:
+		SmudgeType: Crater
+		Chance: 15
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 MammothTuskThermobaricTargetingComputer:
 	Inherits: MammothTuskThermobaric
@@ -3053,10 +4438,7 @@ MammothTuskThermobaricTargetingComputer:
 
 MammothTuskTesla:
 	Inherits@roleflat: ^Warhead_MissileTesla_Heavy
-	Inherits: ^Grenade
-	Inherits@2: ^LightFlameWeapon
 	Inherits@3: ^TeslaWeapon
-	Inherits@4: ^HeavyMissile
 	Inherits@fx: ^Effect_Tesla_Impact_RA2
 	ValidTargets: Ground, Water, Infantry, Monster, Air
 	ReloadDelay: 91
@@ -3076,33 +4458,6 @@ MammothTuskTesla:
 		ContrailLength: 10
 		ContrailStartColor: 88BBFF44
 		ContrailEndColor: 11223300
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@GrenadePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 4
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@LightFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 4
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -3112,14 +4467,6 @@ MammothTuskTesla:
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 4
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -3135,14 +4482,143 @@ MammothTuskTesla:
 		ValidTargets: Ground, Water, Infantry, Monster, Air
 		Damage: 36000
 		PercentageScale: 0
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@HeavyMissile:
-	-Warhead@LightFlameWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
 
 # Surface-only arcs for Tesla Yak's bomb and V2's Tesla missile.
+	Warhead@GrenadePercentage: AreaDamagePercentage
+	Warhead@Smudge: LeaveSmudge
+	Warhead@DuneRock: LeaveSmudge
+	Warhead@DuneSand: LeaveSmudge
+	Warhead@Concrete: DamagesConcrete
+	InvalidTargets: wall
+	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
+	Warhead@RA2Scorch: LeaveSmudge
+	Warhead@GroundFire: SpawnActor
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+	Warhead@RA2Crater: LeaveSmudge
+	Projectile:
+		Blockable: false
+		LaunchAngle: 66
+		Inaccuracy: 150
+		Arm: 0
+		AllowSnapping: true
+		Shadow: true
+		HorizontalRateOfTurn: 20
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		CloseEnough: 400
+		Acceleration: 2
+		HomingActivationDelay: 3
+		RangeLimit: 30000
+		PointDefenseTypes: Missile
+	Warhead@Concrete:
+		Damage: 200
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+		ImpactSounds: xplobig4.aud
+		ImpactActors: false
+	Warhead@EffectAir:
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+	Warhead@GrenadePercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 200
+		Damage: 4
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+	Warhead@GroundFire:
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@HeavyMissilePercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 300
+		Damage: 4
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Spaceship: 24
+			Heavy: 23
+			Helicopter: 22
+			Steel: 21
+			Medium: 20
+			Bomber: 19
+			Concrete: 18
+			Light: 17
+			Fighter: 16
+			Wood: 15
+			Scout: 14
+			Plate: 13
+			Flak: 12
+			None: 11
+			Heroic: 10
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+	Warhead@LightFlameWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 250
+		Damage: 4
+		Falloff: 111, 33, 11, 3
+		Versus:
+			Shield: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Wood: 12
+			Concrete: 11
+			Steel: 10
+			Scout: 9
+			Light: 8
+			Medium: 7
+			Heavy: 6
+			Superheavy: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		Chance: 15
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		Chance: 15
 MammothTuskTeslaFragment1Ground:
 	Inherits: MammothTuskTeslaFragment1
 	ValidTargets: Ground, Water
@@ -3300,8 +4776,6 @@ ra1_soviets_siegemammothtank_ra120mm2:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^LightChemicalWeapon
-	Inherits@5: ^MediumFlameWeapon
 	ValidTargets: Ground, Water, Vehicle, Structure
 	ReloadDelay: 125
 	Burst: 2
@@ -3310,24 +4784,6 @@ ra1_soviets_siegemammothtank_ra120mm2:
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 666
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 16000
-	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 8
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 16000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		Damage: 8
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@CannonHE_Heavy:
 		PercentageScale: 3332
 		Damage: 48000
@@ -3335,9 +4791,89 @@ ra1_soviets_siegemammothtank_ra120mm2:
 		Explosions: small_building
 		ImpactSounds: kaboom15.aud
 		ValidTargets: Ground
-	-Warhead@LightChemicalWeapon:
-	-Warhead@MediumFlameWeapon:
 	-Warhead@CannonHE_Heavy_Flat:
+	InvalidTargets: wall
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+	Warhead@RA2Scorch: LeaveSmudge
+	Warhead@GroundFire: SpawnActor
+	Warhead@Concrete:
+		Damage: 100
+	Warhead@Effect:
+		ImpactActors: false
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@GroundFire:
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@LightChemicalWeaponPercentage:
+		ValidTargets: Ground, Water
+		Spread: 175
+		Damage: 8
+		Falloff: 99, 66, 33
+		Versus:
+			Shield: 17
+			Superheavy: 16
+			Plate: 15
+			Heavy: 14
+			Flak: 13
+			Medium: 12
+			None: 11
+			Light: 10
+			Heroic: 9
+			Scout: 8
+			Steel: 7
+			Concrete: 6
+			Wood: 5
+			Spaceship: 4
+			Helicopter: 3
+			Bomber: 2
+			Fighter: 1
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+	Warhead@MediumFlameWeaponPercentage:
+		ValidTargets: Ground, Water
+		Spread: 375
+		Damage: 8
+		Falloff: 111, 33, 11, 3
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Wood: 16
+			Concrete: 15
+			Steel: 14
+			Scout: 13
+			Light: 12
+			Medium: 11
+			Heavy: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHit:
+		Duration: 8
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+	Warhead@Smudge:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
 
 ra1_soviets_siegemammothtank_ra120mm2targetingcomputer:
 	Inherits: ra1_soviets_siegemammothtank_ra120mm2
@@ -3560,10 +5096,6 @@ ra1_soviets_siegemammothtank_ra120mm2thermobarictargetingcomputer:
 	-Warhead@Collapsedra120mm2ThermobaricFlame_HeavyPercentage:
 ra1_soviets_siegemammothtank_mammothtusk2:
 	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
-	Inherits: ^LightFlameWeapon
-	Inherits@2: ^MediumChemicalWeapon
-	Inherits@3: ^HeavyMissile
-	Inherits@glow: ^ImpactGlow
 	ValidTargets: Ground, Water, Infantry, Monster, Air
 	ReloadDelay: 125
 	Burst: 2
@@ -3573,34 +5105,6 @@ ra1_soviets_siegemammothtank_mammothtusk2:
 	Projectile: Missile
 		VerticalRateOfTurn: 12
 		Speed: 666
-	Warhead@LightFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 16000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 8
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 16000
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 8
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 16000
-	Warhead@HeavyMissilePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 8
 	Warhead@Effect: CreateEffect
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom12.aud
@@ -3609,9 +5113,164 @@ ra1_soviets_siegemammothtank_mammothtusk2:
 		ValidTargets: Ground, Water, Air
 		Damage: 48000
 		PercentageScale: 0
-	-Warhead@LightFlameWeapon:
-	-Warhead@MediumChemicalWeapon:
-	-Warhead@HeavyMissile:
+	InvalidTargets: wall
+	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
+	Warhead@Smudge: LeaveSmudge
+	Warhead@RA2Scorch: LeaveSmudge
+	Warhead@ShieldHit: GrantExternalCondition
+	Warhead@ShieldHitEffect: CreateEffect
+	Warhead@GroundFire: SpawnActor
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+	Warhead@Concrete: DamagesConcrete
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+	Warhead@DuneRock: LeaveSmudge
+	Warhead@DuneSand: LeaveSmudge
+	Warhead@RA2Crater: LeaveSmudge
+	Warhead@EffectAir: CreateEffect
+	Warhead@Glow: GlowImpact
+	Projectile:
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		Inaccuracy: 150
+		Image: MISSILE
+		Shadow: true
+		HorizontalRateOfTurn: 20
+		TrailImage: smokey
+		TrailInterval: 1
+		ContrailLength: 0
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		CloseEnough: 400
+		Acceleration: 2
+		HomingActivationDelay: 3
+		RangeLimit: 30000
+		PointDefenseTypes: Missile
+	Warhead@Concrete:
+		Damage: 200
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+		ImpactActors: false
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@EffectAir:
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@Glow:
+		Color: FFB84D
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@GroundFire:
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@HeavyMissilePercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 300
+		Damage: 8
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Spaceship: 24
+			Heavy: 23
+			Helicopter: 22
+			Steel: 21
+			Medium: 20
+			Bomber: 19
+			Concrete: 18
+			Light: 17
+			Fighter: 16
+			Wood: 15
+			Scout: 14
+			Plate: 13
+			Flak: 12
+			None: 11
+			Heroic: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@LightFlameWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 250
+		Damage: 8
+		Falloff: 111, 33, 11, 3
+		Versus:
+			Shield: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Wood: 12
+			Concrete: 11
+			Steel: 10
+			Scout: 9
+			Light: 8
+			Medium: 7
+			Heavy: 6
+			Superheavy: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 350
+		Damage: 8
+		Falloff: 99, 66, 33
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Plate: 19
+			Heavy: 18
+			Flak: 17
+			Medium: 16
+			None: 15
+			Light: 14
+			Heroic: 13
+			Scout: 12
+			Steel: 11
+			Concrete: 10
+			Wood: 9
+			Spaceship: 8
+			Helicopter: 7
+			Bomber: 6
+			Fighter: 5
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		Chance: 15
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHit:
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Smudge:
+		SmudgeType: Crater
+		Chance: 15
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 ra1_soviets_siegemammothtank_mammothtusk2targetingcomputer:
 	Inherits@missilerole: ^Warhead_MissileAP_Heavy
@@ -3633,9 +5292,6 @@ ra1_soviets_siegemammothtank_mammothtusk2targetingcomputer:
 
 ra1_soviets_siegemammothtank_mammothtusk2thermobaric:
 	Inherits@collapsewh: ^Warhead_Thermobaric_Heavy
-	Inherits: ^HeavyFlameWeapon
-	Inherits@2: ^HeavyBomb
-	Inherits@3: ^HeavyMissile
 	ValidTargets: Ground, Water, Infantry, Monster, Air
 	ReloadDelay: 125
 	Burst: 2
@@ -3654,31 +5310,6 @@ ra1_soviets_siegemammothtank_mammothtusk2thermobaric:
 		ContrailLength: 10
 		ContrailStartColor: FFBB8844
 		ContrailEndColor: 33221100
-	Warhead@HeavyFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 16000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 8
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyBomb: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 16000
-	Warhead@HeavyBombPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 8
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 16000
-	Warhead@HeavyMissilePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 8
 	Warhead@Effect: CreateEffect
 		Explosions: big_napalm
 		GlowScale: 2.0
@@ -3696,9 +5327,183 @@ ra1_soviets_siegemammothtank_mammothtusk2thermobaric:
 		ValidTargets: Ground, Water, Air
 		Damage: 48000
 		PercentageScale: 0
-	-Warhead@HeavyFlameWeapon:
-	-Warhead@HeavyBomb:
-	-Warhead@HeavyMissile:
+	InvalidTargets: wall
+	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
+	Warhead@Smudge: LeaveSmudge
+	Warhead@RA2Scorch: LeaveSmudge
+	Warhead@ShieldHit: GrantExternalCondition
+	Warhead@ShieldHitEffect: CreateEffect
+	Warhead@GroundFire: SpawnActor
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
+	Warhead@Smudge1: LeaveSmudge
+	Warhead@RA2Crater: LeaveSmudge
+	Warhead@Smudge2: LeaveSmudge
+	Warhead@Smudge2RA2: LeaveSmudge
+	Warhead@Effect1: CreateEffect
+	Warhead@Effect2: CreateEffect
+	Warhead@EffectWater: CreateEffect
+	Warhead@Concrete: DamagesConcrete
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+	Warhead@DuneRock: LeaveSmudge
+	Warhead@DuneSand: LeaveSmudge
+	Projectile:
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		Inaccuracy: 150
+		Shadow: true
+		HorizontalRateOfTurn: 20
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		CloseEnough: 400
+		Acceleration: 2
+		HomingActivationDelay: 3
+		RangeLimit: 30000
+		PointDefenseTypes: Missile
+	Warhead@Concrete:
+		Damage: 200
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+		ImpactActors: false
+		ValidTargets: Ground, Water
+	Warhead@Effect1:
+		Explosions: poof
+		ImpactSounds: siege_impact.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+	Warhead@Effect2:
+		Delay: 6
+		Explosions: napalm
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@EffectAir:
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@EffectWater:
+		Explosions: large_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+	Warhead@GroundFire:
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@HeavyBombPercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 400
+		Damage: 8
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			Shield: 35
+			Wood: 25
+			Concrete: 24
+			Steel: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+	Warhead@HeavyFlameWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 500
+		Damage: 8
+		Falloff: 111, 33, 11, 3
+		Versus:
+			HAZMAT: 25
+			Shield: 35
+			None: 25
+			Flak: 24
+			Plate: 23
+			Heroic: 22
+			Wood: 21
+			Concrete: 20
+			Steel: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@HeavyMissilePercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 300
+		Damage: 8
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Spaceship: 24
+			Heavy: 23
+			Helicopter: 22
+			Steel: 21
+			Medium: 20
+			Bomber: 19
+			Concrete: 18
+			Light: 17
+			Fighter: 16
+			Wood: 15
+			Scout: 14
+			Plate: 13
+			Flak: 12
+			None: 11
+			Heroic: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHit:
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Smudge:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge1:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
 
 ra1_soviets_siegemammothtank_mammothtusk2thermobarictargetingcomputer:
 	Inherits: ra1_soviets_siegemammothtank_mammothtusk2thermobaric
@@ -3789,10 +5594,7 @@ ra1_soviets_monstertank_missile:
 
 ra1_soviets_monstertank_missile_tesla:
 	Inherits@roleflat: ^Warhead_MissileTesla_Heavy
-	Inherits: ^Grenade
-	Inherits@2: ^LightFlameWeapon
 	Inherits@3: ^TeslaWeapon
-	Inherits@4: ^HeavyMissile
 	Inherits@fx: ^Effect_Tesla_Impact_RA2
 	ValidTargets: Ground, Water, Infantry, Monster, Air
 	ReloadDelay: 125
@@ -3812,35 +5614,6 @@ ra1_soviets_monstertank_missile_tesla:
 		ContrailLength: 10
 		ContrailStartColor: 88BBFF44
 		ContrailEndColor: 11223300
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 26750
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 13250
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@GrenadePercentage: AreaDamagePercentage
-		PercentageDenominator: 2000
-		ValidTargets: Ground, Water, Air
-		Damage: 273
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@LightFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 26750
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
-		PercentageDenominator: 2000
-		ValidTargets: Ground, Water, Air
-		Damage: 273
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 26750
@@ -3850,15 +5623,6 @@ ra1_soviets_monstertank_missile_tesla:
 		Damage: 13250
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
-		PercentageDenominator: 2000
-		ValidTargets: Ground, Water, Air
-		Damage: 273
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 26750
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		PercentageDenominator: 2000
 		ValidTargets: Ground, Water, Air
 		Damage: 273
@@ -3877,23 +5641,147 @@ ra1_soviets_monstertank_missile_tesla:
 		ValidTargets: Ground, Water, Infantry, Monster, Air
 		Damage: 126260
 		PercentageScale: 0
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@HeavyMissile:
-	-Warhead@LightFlameWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
+	Warhead@GrenadePercentage: AreaDamagePercentage
+	Warhead@Smudge: LeaveSmudge
+	Warhead@DuneRock: LeaveSmudge
+	Warhead@DuneSand: LeaveSmudge
+	Warhead@Concrete: DamagesConcrete
+	InvalidTargets: wall
+	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
+	Warhead@RA2Scorch: LeaveSmudge
+	Warhead@GroundFire: SpawnActor
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+	Warhead@RA2Crater: LeaveSmudge
+	Projectile:
+		Blockable: false
+		LaunchAngle: 66
+		Inaccuracy: 150
+		Arm: 0
+		AllowSnapping: true
+		Shadow: true
+		HorizontalRateOfTurn: 20
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		CloseEnough: 400
+		Acceleration: 2
+		HomingActivationDelay: 3
+		RangeLimit: 30000
+		PointDefenseTypes: Missile
+	Warhead@Concrete:
+		Damage: 200
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+		ImpactSounds: xplobig4.aud
+		ImpactActors: false
+	Warhead@EffectAir:
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+	Warhead@GrenadePercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 200
+		Damage: 273
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+		PercentageDenominator: 2000
+	Warhead@GroundFire:
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@HeavyMissilePercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 300
+		Damage: 273
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Spaceship: 24
+			Heavy: 23
+			Helicopter: 22
+			Steel: 21
+			Medium: 20
+			Bomber: 19
+			Concrete: 18
+			Light: 17
+			Fighter: 16
+			Wood: 15
+			Scout: 14
+			Plate: 13
+			Flak: 12
+			None: 11
+			Heroic: 10
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+		PercentageDenominator: 2000
+	Warhead@LightFlameWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 250
+		Damage: 273
+		Falloff: 111, 33, 11, 3
+		Versus:
+			Shield: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Wood: 12
+			Concrete: 11
+			Steel: 10
+			Scout: 9
+			Light: 8
+			Medium: 7
+			Heavy: 6
+			Superheavy: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		PercentageDenominator: 2000
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		Chance: 15
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		Chance: 15
 
 ra1_soviets_monstertank_missile_thermobaric:
 	Inherits@collapsewh: ^Warhead_Thermobaric_Heavy
-	Inherits: ^LightFlameWeapon
-	Inherits@2: ^MediumFlameWeapon
-	Inherits@3: ^HeavyFlameWeapon
-	Inherits@4: ^Grenade
-	Inherits@5: ^FlakWeapon
-	Inherits@6: ^ShrapnelWeapon
-	Inherits@7: ^MediumMissile
-	Inherits@8: ^HeavyMissile
 	ValidTargets: Ground, Water, Infantry, Monster, Air
 	ReloadDelay: 125
 	Burst: 4
@@ -3912,89 +5800,6 @@ ra1_soviets_monstertank_missile_thermobaric:
 		ContrailLength: 10
 		ContrailStartColor: FFBB8844
 		ContrailEndColor: 33221100
-	Warhead@LightFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 13250
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
-		PercentageDenominator: 2000
-		ValidTargets: Ground, Water, Air
-		Damage: 147
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 13250
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		PercentageDenominator: 2000
-		ValidTargets: Ground, Water, Air
-		Damage: 147
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 13250
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
-		PercentageDenominator: 2000
-		ValidTargets: Ground, Water, Air
-		Damage: 147
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 13250
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 6750
-	Warhead@GrenadePercentage: AreaDamagePercentage
-		PercentageDenominator: 2000
-		ValidTargets: Ground, Water, Air
-		Damage: 147
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 13250
-	Warhead@FlakWeaponPercentage: AreaDamagePercentage
-		PercentageDenominator: 2000
-		ValidTargets: Ground, Water, Air
-		Damage: 147
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 13250
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 6750
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		PercentageDenominator: 2000
-		ValidTargets: Ground, Water, Air
-		Damage: 147
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 13250
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		PercentageDenominator: 2000
-		ValidTargets: Ground, Water, Air
-		Damage: 147
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 13250
-	Warhead@HeavyMissilePercentage: AreaDamagePercentage
-		PercentageDenominator: 2000
-		ValidTargets: Ground, Water, Air
-		Damage: 147
 	Warhead@Effect: CreateEffect
 		Explosions: big_napalm
 		GlowScale: 2.0
@@ -4012,24 +5817,305 @@ ra1_soviets_monstertank_missile_thermobaric:
 		ValidTargets: Ground, Water, Air
 		Damage: 111300
 		PercentageScale: 0
-	-Warhead@LightFlameWeapon:
-	-Warhead@MediumFlameWeapon:
-	-Warhead@HeavyFlameWeapon:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@FlakWeapon:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	-Warhead@MediumMissile:
-	-Warhead@HeavyMissile:
+	InvalidTargets: wall
+	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
+	Warhead@Smudge: LeaveSmudge
+	Warhead@RA2Scorch: LeaveSmudge
+	Warhead@ShieldHit: GrantExternalCondition
+	Warhead@ShieldHitEffect: CreateEffect
+	Warhead@GroundFire: SpawnActor
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
+	Warhead@GrenadePercentage: AreaDamagePercentage
+	Warhead@DuneRock: LeaveSmudge
+	Warhead@DuneSand: LeaveSmudge
+	Warhead@EffectWater: CreateEffect
+	Warhead@Concrete: DamagesConcrete
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
+	Warhead@RA2Crater: LeaveSmudge
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+	Projectile:
+		Blockable: false
+		LaunchAngle: 66
+		Inaccuracy: 150
+		ContrailZOffset: 4000
+		ContrailStartWidth: 50
+		ContrailEndWidth: 100
+		Arm: 0
+		AllowSnapping: true
+		Shadow: true
+		HorizontalRateOfTurn: 20
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		CloseEnough: 400
+		Acceleration: 2
+		HomingActivationDelay: 3
+		RangeLimit: 30000
+		PointDefenseTypes: Missile
+	Warhead@Concrete:
+		Damage: 200
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+		ImpactActors: false
+		ValidTargets: Ground, Water
+	Warhead@EffectAir:
+		ValidTargets: Air
+		ImpactActors: false
+	Warhead@EffectWater:
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@FlakWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 125
+		Damage: 147
+		Versus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Concrete: 6
+			Steel: 5
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
+		PercentageDenominator: 2000
+	Warhead@GrenadePercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 200
+		Damage: 147
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+		PercentageDenominator: 2000
+	Warhead@GroundFire:
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@HeavyFlameWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 500
+		Damage: 147
+		Falloff: 111, 33, 11, 3
+		Versus:
+			HAZMAT: 25
+			Shield: 35
+			None: 25
+			Flak: 24
+			Plate: 23
+			Heroic: 22
+			Wood: 21
+			Concrete: 20
+			Steel: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		PercentageDenominator: 2000
+	Warhead@HeavyMissilePercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 300
+		Damage: 147
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Spaceship: 24
+			Heavy: 23
+			Helicopter: 22
+			Steel: 21
+			Medium: 20
+			Bomber: 19
+			Concrete: 18
+			Light: 17
+			Fighter: 16
+			Wood: 15
+			Scout: 14
+			Plate: 13
+			Flak: 12
+			None: 11
+			Heroic: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+		PercentageDenominator: 2000
+	Warhead@LightFlameWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 250
+		Damage: 147
+		Falloff: 111, 33, 11, 3
+		Versus:
+			Shield: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Wood: 12
+			Concrete: 11
+			Steel: 10
+			Scout: 9
+			Light: 8
+			Medium: 7
+			Heavy: 6
+			Superheavy: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		PercentageDenominator: 2000
+	Warhead@MediumFlameWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 375
+		Damage: 147
+		Falloff: 111, 33, 11, 3
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Wood: 16
+			Concrete: 15
+			Steel: 14
+			Scout: 13
+			Light: 12
+			Medium: 11
+			Heavy: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		PercentageDenominator: 2000
+	Warhead@MediumMissilePercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 200
+		Damage: 147
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Spaceship: 19
+			Heavy: 18
+			Helicopter: 17
+			Steel: 16
+			Medium: 15
+			Bomber: 14
+			Concrete: 13
+			Light: 12
+			Fighter: 11
+			Wood: 10
+			Scout: 9
+			Plate: 8
+			Flak: 7
+			None: 6
+			Heroic: 5
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
+		UpdatesUnitStatistics: false
+		PercentageDenominator: 2000
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		Chance: 15
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHit:
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@ShrapnelWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 300
+		Damage: 147
+		Falloff: 100, 75, 50, 25
+		Versus:
+			Shield: 25
+			Scout: 20
+			None: 19
+			Wood: 18
+			Light: 17
+			Flak: 16
+			Concrete: 15
+			Medium: 14
+			Plate: 13
+			Steel: 12
+			Heavy: 11
+			Heroic: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+		PercentageDenominator: 2000
+	Warhead@Smudge:
+		SmudgeType: Crater
+		Chance: 15
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 ra1_soviets_volkov_volkovmagneticweapon:
 	Inherits@roleflat: ^Warhead_Railgun_Heavy_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^MediumChemicalWeapon
-	Inherits@5: ^Grenade
 	-Warhead@Railgun_Heavy_Flat:
 	ValidTargets: Ground, Water
 	ReloadDelay: 15
@@ -4044,30 +6130,78 @@ ra1_soviets_volkov_volkovmagneticweapon:
 	Warhead@CannonHE_Heavy:
 		Damage: 30000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 10000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 5
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Grenade: SpreadDamage
-		Damage: 10000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 5000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@GrenadePercentage: AreaDamagePercentage
-		Damage: 5
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@Effect: CreateEffect
 		Explosions: poof
 		ImpactSounds: kaboom25.aud
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@MediumChemicalWeapon:
+	InvalidTargets: wall
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+	Warhead@GrenadePercentage: AreaDamagePercentage
+	Projectile:
+		Blockable: false
+		LaunchAngle: 66
+	Warhead@Concrete:
+		Damage: 100
+	Warhead@Effect:
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+		ImpactActors: false
+	Warhead@EffectWater:
+		Explosions: med_splash
+	Warhead@GrenadePercentage:
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 5
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+	Warhead@MediumChemicalWeaponPercentage:
+		ValidTargets: Ground, Water
+		Spread: 350
+		Damage: 5
+		Falloff: 99, 66, 33
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Plate: 19
+			Heavy: 18
+			Flak: 17
+			Medium: 16
+			None: 15
+			Light: 14
+			Heroic: 13
+			Scout: 12
+			Steel: 11
+			Concrete: 10
+			Wood: 9
+			Spaceship: 8
+			Helicopter: 7
+			Bomber: 6
+			Fighter: 5
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+	Warhead@ShieldHit:
+		Duration: 10
 
 ra1_soviets_volkov_volkovmagneticweapontesla:
 	Inherits: ra1_soviets_volkov_volkovmagneticweapon
@@ -4265,14 +6399,82 @@ ra1_soviets_volkov_volkovmagneticweaponincendiary:
 	Inherits@proj: ^Projectile_Flame_Medium
 	Inherits@fx: ^Effect_Flame_Medium
 	Inherits: ra1_soviets_volkov_volkovmagneticweapon
-	Inherits@2: ^IncendiaryBulletProjectile
 	Warhead@Flame_Medium: AreaDamage
 		Damage: 40000
 	-Warhead@CannonHE_Heavy:
+	InvalidTargets: wall
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+	Warhead@GrenadePercentage: AreaDamagePercentage
+	Projectile:
+		Speed: 4000
+		Blockable: false
+		LaunchAngle: 66
+		ContrailStartColor: FF884488
+		ContrailEndColor: FFFFFF44
+		ContrailWidth: 150
+		ContrailLength: 15
+		Width: 40
+	Warhead@Concrete:
+		Damage: 100
+	Warhead@EffectWater:
+		Explosions: med_splash
+	Warhead@GrenadePercentage:
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 5
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+	Warhead@MediumChemicalWeaponPercentage:
+		ValidTargets: Ground, Water
+		Spread: 350
+		Damage: 5
+		Falloff: 99, 66, 33
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Plate: 19
+			Heavy: 18
+			Flak: 17
+			Medium: 16
+			None: 15
+			Light: 14
+			Heroic: 13
+			Scout: 12
+			Steel: 11
+			Concrete: 10
+			Wood: 9
+			Spaceship: 8
+			Helicopter: 7
+			Bomber: 6
+			Fighter: 5
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+	Warhead@ShieldHit:
+		Duration: 10
 ra1_soviets_volkov_volkovmagneticweaponincendiarytesla:
 	Inherits@roleflat: ^Warhead_Quantum_Heavy_Flat
 	Inherits: ra1_soviets_volkov_volkovmagneticweapon
-	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^TeslaWeapon
 	Inherits@fx: ^Effect_Tesla_Impact_RA2
 	ReloadDelay: 30
@@ -4296,22 +6498,6 @@ ra1_soviets_volkov_volkovmagneticweaponincendiarytesla:
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		InvalidTargets: Air
-		ValidTargets: Ground, Water, Air
-		Damage: 4
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -4341,13 +6527,114 @@ ra1_soviets_volkov_volkovmagneticweaponincendiarytesla:
 		ValidTargets: Ground, Water
 		Damage: 40000
 		PercentageScale: 0
-	-Warhead@MediumFlameWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
 	-Warhead@CannonHE_Heavy:
 
 	Warhead@ShieldHit:
 		InvalidTargets: Air
+	InvalidTargets: wall
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+	Warhead@RA2Scorch: LeaveSmudge
+	Warhead@GroundFire: SpawnActor
+	Projectile:
+		Speed: 3000
+		Blockable: false
+		LaunchAngle: 66
+	Warhead@Concrete:
+		Damage: 100
+	Warhead@Effect:
+		ImpactSounds: firebl3.aud
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+		ImpactActors: false
+	Warhead@GrenadePercentage:
+		Spread: 200
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		UpdatesUnitStatistics: false
+	Warhead@GroundFire:
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@MediumChemicalWeaponPercentage:
+		Spread: 350
+		Falloff: 99, 66, 33
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Plate: 19
+			Heavy: 18
+			Flak: 17
+			Medium: 16
+			None: 15
+			Light: 14
+			Heroic: 13
+			Scout: 12
+			Steel: 11
+			Concrete: 10
+			Wood: 9
+			Spaceship: 8
+			Helicopter: 7
+			Bomber: 6
+			Fighter: 5
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+	Warhead@MediumFlameWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 375
+		Damage: 4
+		Falloff: 111, 33, 11, 3
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Wood: 16
+			Concrete: 15
+			Steel: 14
+			Scout: 13
+			Light: 12
+			Medium: 11
+			Heavy: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		InvalidTargets: Air
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
 ra1_soviets_volkov_volkovmagneticweaponincendiaryteslafragment1:
 	Inherits: ra1_soviets_volkov_volkovmagneticweapontesla
 	ValidTargets: Ground, Water
@@ -4441,8 +6728,6 @@ ra1_soviets_volkov_volkovmagneticweaponincendiaryteslafragment2:
 
 ra1_soviets_volkov_volkovmagneticweaponincendiarynuclearshells:
 	Inherits@roleflat: ^Warhead_CannonNuke_Heavy
-	Inherits: ^MediumFlameWeapon
-	Inherits@2: ^NuclearWarhead
 	Inherits@3: ra1_soviets_volkov_volkovmagneticweapon
 	ReloadDelay: 40
 	Burst: 1
@@ -4457,20 +6742,6 @@ ra1_soviets_volkov_volkovmagneticweaponincendiarynuclearshells:
 		LaunchAngle: 66
 		Inaccuracy: 333
 		Image: BOMB
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 40000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		InvalidTargets: Air
-		Damage: 20
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		Damage: 20
@@ -4483,13 +6754,6 @@ ra1_soviets_volkov_volkovmagneticweaponincendiarynuclearshells:
 		InvalidTargets: Air
 		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@NuclearWarhead: SpreadDamage
-		Damage: 40000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@NuclearWarheadPercentage: AreaDamagePercentage
-		InvalidTargets: Air
-		Damage: 20
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@Effect: CreateEffect
 		Explosions: nuke_small
 		ImpactSounds: kaboom22.aud
@@ -4499,18 +6763,163 @@ ra1_soviets_volkov_volkovmagneticweaponincendiarynuclearshells:
 		ValidTargets: Ground, Water
 		Damage: 180000
 		PercentageScale: 0
-	-Warhead@MediumFlameWeapon:
-	-Warhead@NuclearWarhead:
 	-Warhead@CannonHE_Heavy:
 
 	Warhead@ShieldHit:
 		InvalidTargets: Air
+	InvalidTargets: wall
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+	Warhead@RA2Scorch: LeaveSmudge
+	Warhead@GroundFire: SpawnActor
+	Warhead@NuclearWarheadPercentage: AreaDamagePercentage
+	Warhead@Smudge1: LeaveSmudge
+	Warhead@Smudge2: LeaveSmudge
+	Warhead@Smudge3: LeaveSmudge
+	Warhead@ShieldHitEffectNuclear: CreateEffect
+	Projectile:
+		Blockable: false
+	Warhead@Concrete:
+		Damage: 100
+	Warhead@Effect:
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@EffectWater:
+		Explosions: med_splash
+	Warhead@GrenadePercentage:
+		ValidTargets: Ground, Water
+		Spread: 200
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		UpdatesUnitStatistics: false
+	Warhead@GroundFire:
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@MediumChemicalWeaponPercentage:
+		ValidTargets: Ground, Water
+		Spread: 350
+		Falloff: 99, 66, 33
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Plate: 19
+			Heavy: 18
+			Flak: 17
+			Medium: 16
+			None: 15
+			Light: 14
+			Heroic: 13
+			Scout: 12
+			Steel: 11
+			Concrete: 10
+			Wood: 9
+			Spaceship: 8
+			Helicopter: 7
+			Bomber: 6
+			Fighter: 5
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+	Warhead@MediumFlameWeaponPercentage:
+		ValidTargets: Ground, Water
+		Spread: 375
+		Damage: 20
+		Falloff: 111, 33, 11, 3
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Wood: 16
+			Concrete: 15
+			Steel: 14
+			Scout: 13
+			Light: 12
+			Medium: 11
+			Heavy: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		InvalidTargets: Air
+	Warhead@NuclearWarheadPercentage:
+		ValidTargets: Ground, Air, Water
+		AffectsParent: True
+		Spread: 500
+		Damage: 20
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Plate: 24
+			Heavy: 23
+			Flak: 22
+			Medium: 21
+			None: 20
+			Light: 19
+			Heroic: 18
+			Scout: 17
+			Steel: 16
+			Concrete: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		InvalidTargets: Air
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHit:
+		Duration: 10
+	Warhead@ShieldHitEffectNuclear:
+		ImpactSounds: shielded_nuclear_hit.wav
+		ValidTargets: Shielded
+	Warhead@Smudge1:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 1
+		Delay: 3
+	Warhead@Smudge2:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge3:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 3
+		Delay: 9
 ParaBombNuke:
 	Inherits@roleflat: ^Warhead_Nuclear_Super
-	Inherits: ^HeavyBomb
-	Inherits@2: ^HeavyChemicalWeapon
-	Inherits@3: ^HeavyFlameWeapon
-	Inherits@4: ^NuclearWarhead
 	-Warhead@Nuclear_Super_Percentage:
 	ReloadDelay: 50
 	Range: 750
@@ -4522,44 +6931,212 @@ ParaBombNuke:
 		Velocity: 25, 0, -75
 		Acceleration: 0, 0, 0
 		Shadow: False
-	Warhead@HeavyBomb: SpreadDamage
-		Damage: 100000
-	Warhead@HeavyBombPercentage: AreaDamagePercentage
-		Damage: 50
-	Warhead@HeavyChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 100000
-	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 50
-	Warhead@HeavyFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 100000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
-		Damage: 50
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@NuclearWarhead: SpreadDamage
-		Damage: 100000
-		AffectsParent: false
-	Warhead@NuclearWarheadPercentage: AreaDamagePercentage
-		Damage: 50
-		AffectsParent: false
 	Warhead@Effect: CreateEffect
 		ImpactSounds: kaboom22.aud
 	Warhead@Nuclear_Super:
 		ValidTargets: Ground, Water
 		Damage: 400000
 		PercentageScale: 0
-	-Warhead@HeavyBomb:
-	-Warhead@HeavyChemicalWeapon:
-	-Warhead@HeavyFlameWeapon:
-	-Warhead@NuclearWarhead:
+	ValidTargets: Ground, Water
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
+	Warhead@Smudge1: LeaveSmudge
+	Warhead@RA2Crater: LeaveSmudge
+	Warhead@Smudge2: LeaveSmudge
+	Warhead@Smudge2RA2: LeaveSmudge
+	Warhead@Effect1: CreateEffect
+	Warhead@Effect2: CreateEffect
+	Warhead@EffectWater: CreateEffect
+	Warhead@ShieldHit: GrantExternalCondition
+	Warhead@ShieldHitEffect: CreateEffect
+	Warhead@Concrete: DamagesConcrete
+	InvalidTargets: wall
+	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
+	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
+	Warhead@Smudge: LeaveSmudge
+	Warhead@RA2Scorch: LeaveSmudge
+	Warhead@GroundFire: SpawnActor
+	Warhead@NuclearWarheadPercentage: AreaDamagePercentage
+	Warhead@Smudge3: LeaveSmudge
+	Warhead@ShieldHitEffectNuclear: CreateEffect
+	Projectile:
+		Speed: 3000
+	Warhead@Concrete:
+		Damage: 1000
+	Warhead@Effect:
+		Explosions: nuke_explosion
+		GlowScale: 2.0
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
+		ImpactActors: false
+	Warhead@Effect1:
+		Explosions: poof
+		ImpactSounds: siege_impact.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+	Warhead@Effect2:
+		Delay: 6
+		Explosions: napalm
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@EffectWater:
+		Explosions: large_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+	Warhead@GroundFire:
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@HeavyBombPercentage:
+		ValidTargets: Ground, Ship
+		Spread: 400
+		Damage: 50
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			Shield: 35
+			Wood: 25
+			Concrete: 24
+			Steel: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+	Warhead@HeavyChemicalWeaponPercentage:
+		ValidTargets: Ground, Water
+		Spread: 525
+		Damage: 50
+		Falloff: 99, 66, 33
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Plate: 24
+			Heavy: 23
+			Flak: 22
+			Medium: 21
+			None: 20
+			Light: 19
+			Heroic: 18
+			Scout: 17
+			Steel: 16
+			Concrete: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+	Warhead@HeavyFlameWeaponPercentage:
+		ValidTargets: Ground, Water
+		Spread: 500
+		Damage: 50
+		Falloff: 111, 33, 11, 3
+		Versus:
+			HAZMAT: 25
+			Shield: 35
+			None: 25
+			Flak: 24
+			Plate: 23
+			Heroic: 22
+			Wood: 21
+			Concrete: 20
+			Steel: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@NuclearWarheadPercentage:
+		ValidTargets: Ground, Air, Water
+		AffectsParent: false
+		Spread: 500
+		Damage: 50
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Plate: 24
+			Heavy: 23
+			Flak: 22
+			Medium: 21
+			None: 20
+			Light: 19
+			Heroic: 18
+			Scout: 17
+			Steel: 16
+			Concrete: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHit:
+		Condition: shieldhit
+		Duration: 25
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffectNuclear:
+		ImpactSounds: shielded_nuclear_hit.wav
+		ValidTargets: Shielded
+	Warhead@Smudge:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+	Warhead@Smudge1:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 1
+		Delay: 3
+	Warhead@Smudge2:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge3:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 3
+		Delay: 9
 
 ra1_soviets_cyberdog_bite:
 	ValidTargets: Infantry, Vehicle
@@ -4575,10 +7152,6 @@ ra1_soviets_cyberdog_bite:
 
 ra1_soviets_samsite_missile_AA:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
-	Inherits: ^FlakWeapon
-	Inherits@2: ^HeavyMissile
-	Inherits@3: ^MediumMissile
-	Inherits@4: ^LightMissile
 	ReloadDelay: 27
 	Range: 12790
 	Report: missile1.aud
@@ -4589,31 +7162,11 @@ ra1_soviets_samsite_missile_AA:
 		AllowSnapping: true
 		CloseEnough: 600
 	ValidTargets: Air
-	Warhead@FlakWeaponPercentage: AreaDamagePercentage
-		PercentageDenominator: 1000
-		ValidTargets: Air
-		Damage: 22
-	Warhead@HeavyMissilePercentage: AreaDamagePercentage
-		PercentageDenominator: 1000
-		ValidTargets: Air
-		Damage: 22
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		PercentageDenominator: 1000
-		ValidTargets: Air
-		Damage: 22
-	Warhead@LightMissilePercentage: AreaDamagePercentage
-		PercentageDenominator: 1000
-		ValidTargets: Air
-		Damage: 22
 	Warhead@EffectAir: CreateEffect
 		Explosions: med_explosion_air
 		ImpactSounds: kaboom25.aud
 		ValidTargets: Air
 	-TargetActorCenter:
-	-Warhead@FlakWeapon:
-	-Warhead@HeavyMissile:
-	-Warhead@MediumMissile:
-	-Warhead@LightMissile:
 	Warhead@MissileAA_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -4623,6 +7176,171 @@ ra1_soviets_samsite_missile_AA:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 0
 		PercentageSpread: 50
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+	Warhead@Effect: CreateEffect
+	Warhead@EffectWater: CreateEffect
+	Warhead@ShieldHit: GrantExternalCondition
+	Warhead@Concrete: DamagesConcrete
+	Warhead@ShieldHitEffect: CreateEffect
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+	Warhead@Smudge: LeaveSmudge
+	Warhead@DuneRock: LeaveSmudge
+	Warhead@DuneSand: LeaveSmudge
+	Warhead@RA2Crater: LeaveSmudge
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
+	Warhead@LightMissilePercentage: AreaDamagePercentage
+	Projectile:
+		ContrailZOffset: 4000
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+		ContrailStartWidth: 50
+		ContrailEndWidth: 100
+		ContrailLength: 0
+		Speed: 600
+		Inaccuracy: 50
+		Arm: 0
+		Blockable: false
+		Shadow: true
+		HorizontalRateOfTurn: 40
+		TrailImage: smokey
+		TrailInterval: 1
+		MaximumLaunchSpeed: 300
+		MinimumLaunchSpeed: 300
+		HomingActivationDelay: 1
+		RangeLimit: 20000
+		PointDefenseTypes: Missile
+	Warhead@Concrete:
+		Damage: 100
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+		Explosions: small_poof
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Water
+	Warhead@EffectAir:
+		ImpactActors: false
+	Warhead@EffectWater:
+		Explosions: small_splash
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@FlakWeaponPercentage:
+		ValidTargets: Air
+		Spread: 125
+		Damage: 22
+		Versus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Concrete: 6
+			Steel: 5
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
+		PercentageDenominator: 1000
+	Warhead@HeavyMissilePercentage:
+		ValidTargets: Air
+		Spread: 300
+		Damage: 22
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Spaceship: 24
+			Heavy: 23
+			Helicopter: 22
+			Steel: 21
+			Medium: 20
+			Bomber: 19
+			Concrete: 18
+			Light: 17
+			Fighter: 16
+			Wood: 15
+			Scout: 14
+			Plate: 13
+			Flak: 12
+			None: 11
+			Heroic: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+		PercentageDenominator: 1000
+	Warhead@LightMissilePercentage:
+		ValidTargets: Air
+		Spread: 100
+		Damage: 22
+		Versus:
+			Shield: 17
+			Superheavy: 16
+			Spaceship: 15
+			Heavy: 14
+			Helicopter: 13
+			Steel: 12
+			Medium: 11
+			Bomber: 10
+			Concrete: 9
+			Light: 8
+			Fighter: 7
+			Wood: 6
+			Scout: 5
+			Plate: 4
+			Flak: 3
+			None: 2
+			Heroic: 1
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
+		UpdatesUnitStatistics: false
+		PercentageDenominator: 1000
+	Warhead@MediumMissilePercentage:
+		ValidTargets: Air
+		Spread: 200
+		Damage: 22
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Spaceship: 19
+			Heavy: 18
+			Helicopter: 17
+			Steel: 16
+			Medium: 15
+			Bomber: 14
+			Concrete: 13
+			Light: 12
+			Fighter: 11
+			Wood: 10
+			Scout: 9
+			Plate: 8
+			Flak: 7
+			None: 6
+			Heroic: 5
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
+		UpdatesUnitStatistics: false
+		PercentageDenominator: 1000
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHit:
+		Condition: shieldhit
+		Duration: 6
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Smudge:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 ra1_soviets_gatlingtank_ragatlingtankcannon:
 	Inherits@wh: ^Warhead_Bullet_Medium
@@ -4647,7 +7365,6 @@ ra1_soviets_gatlingtank_incendiaryragatlingtankcannon:
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Flame_Light
 	Inherits@fx: ^Effect_Flame_Light
-	Inherits@3: ^IncendiaryBulletProjectile
 	ValidTargets: Ground, Water
 	ReloadDelay: 10
 	Range: 5000
@@ -4663,6 +7380,14 @@ ra1_soviets_gatlingtank_incendiaryragatlingtankcannon:
 		PercentageScale: 9975
 	-Warhead@Bullet_Medium:
 	-Warhead@Flame_Light:
+	Projectile:
+		Speed: 4000
+		Image: 50CAL
+		ContrailStartColor: FF884488
+		ContrailEndColor: FFFFFF44
+		ContrailWidth: 150
+		ContrailLength: 15
+		Width: 40
 ra1_soviets_gatlingtank_incendiaryragatlingtankcannon_AA:
 	Inherits: ra1_soviets_gatlingtank_incendiaryragatlingtankcannon
 	Range: 7500
@@ -4833,7 +7558,6 @@ ra1_soviets_rifleinfantry_carbine_incendiary:
 	Inherits@proj: ^Projectile_Flame_Light
 	Inherits@fx: ^Effect_Flame_Light
 	Inherits: ra1_soviets_rifleinfantry_carbine
-	Inherits@2: ^IncendiaryBulletProjectile
 	ValidTargets: Ground, Water
 	Warhead@Flame_Light:
 		ValidTargets: Ground, Water
@@ -4849,6 +7573,14 @@ ra1_soviets_rifleinfantry_carbine_incendiary:
 		PercentageScale: 9975
 	-Warhead@Bullet_Light:
 	-Warhead@Flame_Light:
+	Projectile: Bullet
+	Projectile:
+		Speed: 4000
+		ContrailStartColor: FF884488
+		ContrailEndColor: FFFFFF44
+		ContrailLength: 15
+		ContrailWidth: 150
+		Width: 40
 
 ra1_soviets_kotinnucleartank_kotincannonnuclearshell:
 	Inherits@wh: ^Warhead_CannonNuke_Heavy
