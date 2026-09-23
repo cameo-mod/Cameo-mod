@@ -54,7 +54,7 @@ consolidation target, and the maintainer ruled it waits until every source has v
 | 1 | Read 20 sources into one normalised matrix | `warhead_matrix.py` | **done**, 0 degenerate |
 | 2 | Map each source's armours onto our 16 rows, and average | `armor_interpolate.py` | **done**, all 20 mapped |
 | 3 | Compress each source's weapons into review groups | `compress_warheads.py` | **done**, 17 of 20 |
-| 4 | Assign each group to a Cameo warhead family | `warhead_family_assignment*.yaml` | **14 of 17 sources, 2,464 of 2,542 weapons (97%)** (CA reviewed; Mental Omega, Red Resurrection, Rise of the East, Romanov's Vengeance, CnC Reloaded, Shattered Paradise, RA2 Reborn, RA 20XX, Twisted Insurrection, DTA Enhanced, DTA Classic, OpenRA RA and Crystallized Nexus proposed) |
+| 4 | Assign each group to a Cameo warhead family | `warhead_family_assignment*.yaml` | **17 of 17 sources, 2,542 of 2,542 weapons (100%) — assignment COMPLETE; next = averaging** (CA reviewed; Mental Omega, Red Resurrection, Rise of the East, Romanov's Vengeance, CnC Reloaded, Shattered Paradise, RA2 Reborn, RA 20XX, Twisted Insurrection, DTA Enhanced, DTA Classic, OpenRA RA, Crystallized Nexus, OpenRA TS/TD/D2k proposed) |
 | 5 | Collapse to one row per Cameo warhead | `family_matrix.py` | done for both; every dialect since R47 |
 
 Stage 4 is the bottleneck and it is the only stage that needs human judgement.
@@ -249,13 +249,16 @@ in one place, which is the rule every consumer previously reimplemented.
 stage was OpenRA-only (and the three largest unreviewed sources are INI), `--write` overwrote rather
 than merged, and `family_matrix` was NONDETERMINISTIC. All three are fixed — see R47.
 
-⭐ **DONE (14):** `combined_arms` 182 (REVIEWED), `mental_omega` 156, `red_resurrection` 138,
+⭐ **DONE (17 — all):** `combined_arms` 182 (REVIEWED), `mental_omega` 156, `red_resurrection` 138,
 `rise_of_the_east` 133, `romanovs_vengeance` 99, `cnc_reloaded` 94,
 `shattered_paradise` 92, `ra2_reborn` 80, `ra20xx` 77, `twisted_insurrection` 70, `dta_enhanced` 50,
-`dta_classic` 38, `openra_ra` 33, `crystallized_nexus` 28 — 1,270 groups, 2,464 weapons.
+`dta_classic` 38, `openra_ra` 33, `crystallized_nexus` 28, `openra_ts` 22, `openra_td` 20, `openra_d2k` 15 — 1,327 groups,
+2,542 weapons.
 
-**REMAINING (3), in usage order — 57 groups:**
-`openra_ts` 22, `openra_td` 20, `openra_d2k` 15.
+**REMAINING: none.** The next stage is the AVERAGING: one profile per Cameo family from every
+source's decided weapons. ⚠ Read R68 first — OpenRA TS carries five lowercase armour columns that
+are neutral for every family and must not be averaged as signal. Sixteen of the seventeen
+sources are still `status: proposed`; only Combined Arms is maintainer-reviewed.
 
 ⛔ **GROUP-LEVEL READS IN THE AUTHORING AID ARE NOW MEMBERSHIP-CHECKED (R60).** `by_group()`
 refuses a group whose current weapons differ from the ones the committed file recorded. If
