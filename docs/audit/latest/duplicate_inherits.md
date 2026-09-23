@@ -24356,82 +24356,82 @@ ra2_allies_airforcecommandhq:
     -> ra2_allies_airforcecommandhq -> ^radarbuilding -> ^disableonlowpowerorpowerdown -> Inherits@2:^DisableOnPowerDown
     -> ra2_allies_airforcecommandhq -> ^isaircraftfactory -> Inherits@DisabledOverlay:^DisableOnPowerDown
 
-ra2_allies_alliedbarracks:
+ra2_allies_barracks:
   parent ^^ ^globalbounty  (2 paths)
-    -> ra2_allies_alliedbarracks -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra2_allies_alliedbarracks -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_barracks -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_barracks -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra2_allies_alliedbarracks -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra2_allies_alliedbarracks -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_barracks -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_barracks -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^disabledoverlay  (2 paths)
-    -> ra2_allies_alliedbarracks -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra2_allies_alliedbarracks -> ^isbarrack -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+    -> ra2_allies_barracks -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra2_allies_barracks -> ^isbarrack -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
-ra2_allies_alliedbattlelab:
+ra2_allies_battlelab:
   parent ^^ ^globalbounty  (2 paths)
-    -> ra2_allies_alliedbattlelab -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra2_allies_alliedbattlelab -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_battlelab -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_battlelab -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra2_allies_alliedbattlelab -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra2_allies_alliedbattlelab -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_battlelab -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_battlelab -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^disabledoverlay  (2 paths)
-    -> ra2_allies_alliedbattlelab -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra2_allies_alliedbattlelab -> ^istechnobuilding -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+    -> ra2_allies_battlelab -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra2_allies_battlelab -> ^istechnobuilding -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
-ra2_allies_alliedconstructionyard:
+ra2_allies_constructionyard:
   parent ^^ ^globalbounty  (2 paths)
-    -> ra2_allies_alliedconstructionyard -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra2_allies_alliedconstructionyard -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_constructionyard -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_constructionyard -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra2_allies_alliedconstructionyard -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra2_allies_alliedconstructionyard -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_constructionyard -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_constructionyard -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
-ra2_allies_alliedmobileconstructionvehicle:
+ra2_allies_mobileconstructionvehicle:
   parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ra2_allies_alliedmobileconstructionvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ra2_allies_alliedmobileconstructionvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+    -> ra2_allies_mobileconstructionvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ra2_allies_mobileconstructionvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
   parent ^^ ^enemyinproximity  (3 paths)
-    -> ra2_allies_alliedmobileconstructionvehicle -> ^vehicle -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-    -> ra2_allies_alliedmobileconstructionvehicle -> ^ra2alliedchromiumionpulseplatings -> Inherits@EnemyInProximity:^EnemyInProximity
-    -> ra2_allies_alliedmobileconstructionvehicle -> ^ra2alliedprismaticbarrier -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> ra2_allies_mobileconstructionvehicle -> ^vehicle -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> ra2_allies_mobileconstructionvehicle -> ^ra2alliedchromiumionpulseplatings -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> ra2_allies_mobileconstructionvehicle -> ^ra2alliedprismaticbarrier -> Inherits@EnemyInProximity:^EnemyInProximity
 
-ra2_allies_alliedorerefinery:
+ra2_allies_orerefinery:
   parent ^^ ^globalbounty  (2 paths)
-    -> ra2_allies_alliedorerefinery -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra2_allies_alliedorerefinery -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_orerefinery -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_orerefinery -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra2_allies_alliedorerefinery -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra2_allies_alliedorerefinery -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_orerefinery -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_orerefinery -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
-ra2_allies_alliedpowerplant:
+ra2_allies_powerplant:
   parent ^^ ^globalbounty  (2 paths)
-    -> ra2_allies_alliedpowerplant -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra2_allies_alliedpowerplant -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_powerplant -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_powerplant -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra2_allies_alliedpowerplant -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra2_allies_alliedpowerplant -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_powerplant -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_powerplant -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
-ra2_allies_alliedservicedepot:
+ra2_allies_servicedepot:
   parent ^^ ^globalbounty  (2 paths)
-    -> ra2_allies_alliedservicedepot -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra2_allies_alliedservicedepot -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_servicedepot -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_servicedepot -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra2_allies_alliedservicedepot -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra2_allies_alliedservicedepot -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_servicedepot -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_servicedepot -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^disabledoverlay  (2 paths)
-    -> ra2_allies_alliedservicedepot -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra2_allies_alliedservicedepot -> ^repairfacility -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+    -> ra2_allies_servicedepot -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra2_allies_servicedepot -> ^repairfacility -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
-ra2_allies_alliedwarfactory:
+ra2_allies_warfactory:
   parent ^^ ^globalbounty  (2 paths)
-    -> ra2_allies_alliedwarfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra2_allies_alliedwarfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_warfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_warfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra2_allies_alliedwarfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra2_allies_alliedwarfactory -> ^ra2defaultweap -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_warfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_warfactory -> ^ra2defaultweap -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^disabledoverlay  (2 paths)
-    -> ra2_allies_alliedwarfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra2_allies_alliedwarfactory -> ^ra2defaultweap -> ^isweaponfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+    -> ra2_allies_warfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra2_allies_warfactory -> ^ra2defaultweap -> ^isweaponfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
 ra2_allies_battlefortress:
   parent ^^ ^acceptscloakcrate  (2 paths)

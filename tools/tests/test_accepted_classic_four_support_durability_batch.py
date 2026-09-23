@@ -54,7 +54,7 @@ class AcceptedClassicFourSupportDurabilityBatchTests(unittest.TestCase):
             "ts_gdi_mobileconstructionvehicle",
             "ts_nod_mobileconstructionvehicle",
             "japan_japanesemobileconstructionvehicle",
-            "ra2_allies_alliedmobileconstructionvehicle",
+            "ra2_allies_mobileconstructionvehicle",
             "atreides_mobileconstructionvehicle",
         ):
             with self.subTest(actor=name):

@@ -1888,7 +1888,7 @@ shipped that many, so RV expands the roster like CA and DTA do. `OpenRA RA2 offi
 | agent | lane |
 |---|---|
 | **Blackrobe GPT-6 Astra** | ⭐ **FINISH THE BALANCE PIPELINE** (Tasks A–G) **and inherit the AI bot modules** (Task H — Devin Cloud ran out of quota mid-merge). Full brief: [`BLACKROBE_ASTRA_BRIEF.md`](BLACKROBE_ASTRA_BRIEF.md). Branch `astra/balance-pipeline`, never master. Has **full authority including `apply_balance --confirm`**, conditional on one commit per decision and a review dossier at `audit/ASTRA_REVIEW.md`. |
-| **Aurora** | `ra1_allies` + `ra2_allies` + `ts_gdi` — **128 items**, incl. the 16 Allies sprites wearing Soviet names → `../Cameo-mod-fleet/TASK_2026-09-06_aurora.md` |
+| **Aurora** (lane retired; Ember regenerated) | `ra2_allies` + `ts_gdi` — **DONE 2026-09-23** on `devin/ember/rename-ra2ts` (8 actors + 57 assets, regenerated not cherry-picked). `ra1_allies` — held for NOVA's `RELEASE_redalert.md`; the 16 Allies sprites wearing Soviet names ride with it → `../Cameo-mod-fleet/TASK_2026-09-06_aurora.md` |
 | **Ember** | `asianalliance` — **DONE 2026-09-22**: `naming-asianalliance` `0ce8783b9` rebased + pushed (43 actors, 57 assets, ledgers re-extracted, docs propagated; boot-gated). Awaiting review/landing → `TASK_2026-09-06_ember.md` |
 | **Nova** | `ra1_soviets` — **94 items**, incl. the fluent-key leak and the 19 doubled filenames → `TASK_2026-09-06_nova.md` |
 | **Dawn** | `latinsyndicate` + `steelconsortium` + `wc2_*` + `zerg` — **79 items** → `TASK_2026-09-06_dawn.md` |

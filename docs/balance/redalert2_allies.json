@@ -345,7 +345,7 @@
     "name": "Black Eagle",
     "prerequisites": [
      "~ra2_allies_airforcecommandhq",
-     "ra2_allies_alliedbattlelab"
+     "ra2_allies_battlelab"
     ],
     "queue": [
      "Aircraft",
@@ -766,8 +766,8 @@
     },
     "name": "Airforce Command HQ",
     "prerequisites": [
-     "~ra2_allies_alliedconstructionyard",
-     "ra2_allies_alliedorerefinery"
+     "~ra2_allies_constructionyard",
+     "ra2_allies_orerefinery"
     ],
     "queue": [
      "Building",
@@ -790,7 +790,7 @@
      "v": "6000"
     }
    },
-   "ra2_allies_alliedbarracks": {
+   "ra2_allies_barracks": {
     "armor": {
      "src": "inherited",
      "v": "Wood"
@@ -821,8 +821,8 @@
     },
     "name": "Allied Barracks",
     "prerequisites": [
-     "~ra2_allies_alliedconstructionyard",
-     "ra2_allies_alliedpowerplant"
+     "~ra2_allies_constructionyard",
+     "ra2_allies_powerplant"
     ],
     "queue": [
      "Building",
@@ -845,7 +845,7 @@
      "v": "5000"
     }
    },
-   "ra2_allies_alliedbattlelab": {
+   "ra2_allies_battlelab": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
@@ -876,7 +876,7 @@
     },
     "name": "Allied Battle Lab",
     "prerequisites": [
-     "~ra2_allies_alliedconstructionyard",
+     "~ra2_allies_constructionyard",
      "ra2_allies_airforcecommandhq"
     ],
     "queue": [
@@ -900,7 +900,7 @@
      "v": "10000"
     }
    },
-   "ra2_allies_alliedconstructionyard": {
+   "ra2_allies_constructionyard": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
@@ -950,221 +950,6 @@
      "v": "10000"
     }
    },
-   "ra2_allies_alliedorerefinery": {
-    "armor": {
-     "src": "inherited",
-     "v": "Concrete"
-    },
-    "build_duration": {
-     "src": "inherited",
-     "v": "750"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "inherited",
-     "v": "3000"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Building",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "hp": {
-     "src": "inherited",
-     "v": "300000"
-    },
-    "integrity_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "name": "Allied Ore Refinery",
-    "prerequisites": [
-     "~ra2_allies_alliedconstructionyard",
-     "ra2_allies_alliedpowerplant"
-    ],
-    "queue": [
-     "Building",
-     "RABuilding"
-    ],
-    "shield_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "sight": {
-     "src": "inherited",
-     "v": "6000"
-    }
-   },
-   "ra2_allies_alliedpowerplant": {
-    "armor": {
-     "src": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml#Armor.Type",
-     "v": "Wood"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml#Valued.Cost",
-     "v": "800"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Building",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "hp": {
-     "src": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml#Health.HP",
-     "v": "200000"
-    },
-    "integrity_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "name": "Allied Power Plant",
-    "prerequisites": [
-     "~ra2_allies_alliedconstructionyard"
-    ],
-    "queue": [
-     "Building",
-     "RABuilding"
-    ],
-    "shield_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "sight": {
-     "src": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml#RevealsShroud.Range",
-     "v": "4c0"
-    }
-   },
-   "ra2_allies_alliedservicedepot": {
-    "armor": {
-     "src": "inherited",
-     "v": "Concrete"
-    },
-    "build_duration": {
-     "src": "inherited",
-     "v": "750"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "inherited",
-     "v": "1000"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Building",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "hp": {
-     "src": "inherited",
-     "v": "250000"
-    },
-    "integrity_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "name": "Allied Service Depot",
-    "prerequisites": [
-     "~ra2_allies_alliedconstructionyard",
-     "ra2_allies_alliedwarfactory"
-    ],
-    "queue": [
-     "Building",
-     "RABuilding"
-    ],
-    "shield_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "sight": {
-     "src": "inherited",
-     "v": "5000"
-    }
-   },
-   "ra2_allies_alliedwarfactory": {
-    "armor": {
-     "src": "inherited",
-     "v": "Concrete"
-    },
-    "build_duration": {
-     "src": "inherited",
-     "v": "500"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "inherited",
-     "v": "2000"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Building",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "hp": {
-     "src": "inherited",
-     "v": "400000"
-    },
-    "integrity_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "name": "Allied War Factory",
-    "prerequisites": [
-     "~ra2_allies_alliedconstructionyard",
-     "ra2_allies_alliedorerefinery"
-    ],
-    "queue": [
-     "Building",
-     "RABuilding"
-    ],
-    "shield_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "sight": {
-     "src": "inherited",
-     "v": "8000"
-    }
-   },
    "ra2_allies_orepurifier": {
     "armor": {
      "src": "inherited",
@@ -1200,8 +985,8 @@
     },
     "name": "Ore Purifier",
     "prerequisites": [
-     "~ra2_allies_alliedconstructionyard",
-     "ra2_allies_alliedbattlelab"
+     "~ra2_allies_constructionyard",
+     "ra2_allies_battlelab"
     ],
     "queue": [
      "Building",
@@ -1222,6 +1007,166 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
+    }
+   },
+   "ra2_allies_orerefinery": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "3000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Allied Ore Refinery",
+    "prerequisites": [
+     "~ra2_allies_constructionyard",
+     "ra2_allies_powerplant"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    }
+   },
+   "ra2_allies_powerplant": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml#Valued.Cost",
+     "v": "800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml#Health.HP",
+     "v": "200000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Allied Power Plant",
+    "prerequisites": [
+     "~ra2_allies_constructionyard"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "4c0"
+    }
+   },
+   "ra2_allies_servicedepot": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "250000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Allied Service Depot",
+    "prerequisites": [
+     "~ra2_allies_constructionyard",
+     "ra2_allies_warfactory"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
     }
    },
    "ra2_allies_spysatelliteuplink": {
@@ -1255,8 +1200,8 @@
     },
     "name": "Spy Satellite Uplink",
     "prerequisites": [
-     "~ra2_allies_alliedconstructionyard",
-     "ra2_allies_alliedbattlelab"
+     "~ra2_allies_constructionyard",
+     "ra2_allies_battlelab"
     ],
     "queue": [
      "Building",
@@ -1277,6 +1222,61 @@
     "sight": {
      "src": "inherited",
      "v": "10000"
+    }
+   },
+   "ra2_allies_warfactory": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "400000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Allied War Factory",
+    "prerequisites": [
+     "~ra2_allies_constructionyard",
+     "ra2_allies_orerefinery"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
     }
    }
   },
@@ -1313,8 +1313,8 @@
     },
     "name": "Chronosphere",
     "prerequisites": [
-     "~ra2_allies_alliedconstructionyard",
-     "ra2_allies_alliedbattlelab",
+     "~ra2_allies_constructionyard",
+     "ra2_allies_battlelab",
      "~techlevel.superweapons",
      "!ra2_allies_chronosphere_swlimit"
     ],
@@ -1363,7 +1363,7 @@
     },
     "name": "Concrete Barrier",
     "prerequisites": [
-     "~ra2_allies_alliedconstructionyard"
+     "~ra2_allies_constructionyard"
     ],
     "queue": [
      "Defence",
@@ -1406,8 +1406,8 @@
     },
     "name": "Gap Generator",
     "prerequisites": [
-     "~ra2_allies_alliedconstructionyard",
-     "ra2_allies_alliedbattlelab"
+     "~ra2_allies_constructionyard",
+     "ra2_allies_battlelab"
     ],
     "queue": [
      "Defence",
@@ -1528,8 +1528,8 @@
     },
     "name": "Grand Cannon",
     "prerequisites": [
-     "~ra2_allies_alliedconstructionyard",
-     "ra2_allies_alliedbattlelab"
+     "~ra2_allies_constructionyard",
+     "ra2_allies_battlelab"
     ],
     "queue": [
      "Defence",
@@ -1647,7 +1647,7 @@
     },
     "name": "Patriot Missile System",
     "prerequisites": [
-     "~ra2_allies_alliedconstructionyard",
+     "~ra2_allies_constructionyard",
      "ra2_allies_airforcecommandhq"
     ],
     "queue": [
@@ -1712,8 +1712,8 @@
     },
     "name": "Pillbox",
     "prerequisites": [
-     "~ra2_allies_alliedconstructionyard",
-     "ra2_allies_alliedbarracks"
+     "~ra2_allies_constructionyard",
+     "ra2_allies_barracks"
     ],
     "queue": [
      "Defence",
@@ -1821,8 +1821,8 @@
     },
     "name": "Prism Tower",
     "prerequisites": [
-     "~ra2_allies_alliedconstructionyard",
-     "ra2_allies_alliedbattlelab"
+     "~ra2_allies_constructionyard",
+     "ra2_allies_battlelab"
     ],
     "queue": [
      "Defence",
@@ -1882,8 +1882,8 @@
     },
     "name": "Weather Control Center",
     "prerequisites": [
-     "~ra2_allies_alliedconstructionyard",
-     "ra2_allies_alliedbattlelab",
+     "~ra2_allies_constructionyard",
+     "ra2_allies_battlelab",
      "!weatherstorm",
      "~techlevel.superweapons"
     ],
@@ -2018,8 +2018,8 @@
     },
     "name": "Chrono Legionnaire",
     "prerequisites": [
-     "~ra2_allies_alliedbarracks",
-     "ra2_allies_alliedbattlelab"
+     "~ra2_allies_barracks",
+     "ra2_allies_battlelab"
     ],
     "queue": [
      "Infantry",
@@ -2099,7 +2099,7 @@
     },
     "name": "Attack Dog",
     "prerequisites": [
-     "~ra2_allies_alliedbarracks"
+     "~ra2_allies_barracks"
     ],
     "queue": [
      "Infantry",
@@ -2188,7 +2188,7 @@
     },
     "name": "Engineer",
     "prerequisites": [
-     "~ra2_allies_alliedbarracks"
+     "~ra2_allies_barracks"
     ],
     "queue": [
      "Infantry",
@@ -2368,7 +2368,7 @@
     },
     "name": "G.I.",
     "prerequisites": [
-     "~ra2_allies_alliedbarracks"
+     "~ra2_allies_barracks"
     ],
     "queue": [
      "Infantry",
@@ -2685,7 +2685,7 @@
     },
     "name": "Guardian G.I.",
     "prerequisites": [
-     "~ra2_allies_alliedbarracks"
+     "~ra2_allies_barracks"
     ],
     "queue": [
      "Infantry",
@@ -3307,8 +3307,8 @@
     },
     "name": "Sniper",
     "prerequisites": [
-     "~ra2_allies_alliedbarracks",
-     "ra2_allies_alliedbattlelab"
+     "~ra2_allies_barracks",
+     "ra2_allies_battlelab"
     ],
     "queue": [
      "Infantry",
@@ -3548,8 +3548,8 @@
     },
     "name": "Tanya II",
     "prerequisites": [
-     "~ra2_allies_alliedbarracks",
-     "ra2_allies_alliedbattlelab"
+     "~ra2_allies_barracks",
+     "ra2_allies_battlelab"
     ],
     "queue": [
      "Infantry",
@@ -3730,7 +3730,7 @@
     },
     "name": "Advanced Aeronautics",
     "prerequisites": [
-     "~ra2_allies_alliedbattlelab",
+     "~ra2_allies_battlelab",
      "!ra2_allies_upgrade_advancedaeronautics"
     ],
     "queue": [
@@ -3782,7 +3782,7 @@
     },
     "name": "Chrono Engines",
     "prerequisites": [
-     "~ra2_allies_alliedbattlelab",
+     "~ra2_allies_battlelab",
      "ra2_allies_chronosphere",
      "!ra2_allies_upgrade_chronoengine"
     ],
@@ -3809,7 +3809,7 @@
     },
     "name": "Composite Armor Plating",
     "prerequisites": [
-     "~ra2_allies_alliedbattlelab",
+     "~ra2_allies_battlelab",
      "ra2_allied_doctrine_1",
      "!ra2_allied_doctrine_2"
     ],
@@ -3862,7 +3862,7 @@
     },
     "name": "Elite Rocketeers",
     "prerequisites": [
-     "~ra2_allies_alliedbattlelab",
+     "~ra2_allies_battlelab",
      "!ra2_allies_upgrade_eliterocketeer"
     ],
     "queue": [
@@ -3888,7 +3888,7 @@
     },
     "name": "Force Shield",
     "prerequisites": [
-     "~ra2_allies_alliedbattlelab",
+     "~ra2_allies_battlelab",
      "!ra2_allies_upgrade_forceshield"
     ],
     "queue": [
@@ -3914,7 +3914,7 @@
     },
     "name": "Unlock Heavy Mirage Tanks",
     "prerequisites": [
-     "~ra2_allies_alliedbattlelab",
+     "~ra2_allies_battlelab",
      "!ra2_allies_upgrade_heavymiragetank"
     ],
     "queue": [
@@ -3966,7 +3966,7 @@
     },
     "name": "Intensified Prism Beams",
     "prerequisites": [
-     "~ra2_allies_alliedbattlelab",
+     "~ra2_allies_battlelab",
      "!ra2_allies_upgrade_intensifiedprismbeams"
     ],
     "queue": [
@@ -3992,7 +3992,7 @@
     },
     "name": "Chromium Ion Pulse Plating",
     "prerequisites": [
-     "~ra2_allies_alliedbattlelab",
+     "~ra2_allies_battlelab",
      "ra2_allied_doctrine_1",
      "!ra2_allied_doctrine_2"
     ],
@@ -4045,7 +4045,7 @@
     },
     "name": "Prismatic Barrier",
     "prerequisites": [
-     "~ra2_allies_alliedbattlelab",
+     "~ra2_allies_battlelab",
      "!ra2_allies_upgrade_prismaticbarrier"
     ],
     "queue": [
@@ -4071,7 +4071,7 @@
     },
     "name": "Prism Linking",
     "prerequisites": [
-     "~ra2_allies_alliedbattlelab",
+     "~ra2_allies_battlelab",
      "!ra2_allies_upgrade_prismlinking"
     ],
     "queue": [
@@ -4097,7 +4097,7 @@
     },
     "name": "Reflective Armor Plating",
     "prerequisites": [
-     "~ra2_allies_alliedbattlelab",
+     "~ra2_allies_battlelab",
      "ra2_allied_doctrine_1",
      "!ra2_allied_doctrine_2"
     ],
@@ -4124,7 +4124,7 @@
     },
     "name": "Tank Laser Targeting",
     "prerequisites": [
-     "~ra2_allies_alliedbattlelab",
+     "~ra2_allies_battlelab",
      "!ra2_allies_upgrade_tanklasertargeting"
     ],
     "queue": [
@@ -4150,7 +4150,7 @@
     },
     "name": "Thunderbolt Missiles",
     "prerequisites": [
-     "~ra2_allies_alliedbattlelab",
+     "~ra2_allies_battlelab",
      "!ra2_allies_upgrade_thunderboltmissiles"
     ],
     "queue": [
@@ -4185,78 +4185,6 @@
    }
   },
   "vehicles": {
-   "ra2_allies_alliedmobileconstructionvehicle": {
-    "armor": {
-     "src": "inherited",
-     "v": "Medium"
-    },
-    "build_duration": {
-     "src": "inherited",
-     "v": "1500"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "inherited",
-     "v": "5000"
-    },
-    "design": {
-     "category": "Vehicles",
-     "class_anchor": null,
-     "special": null,
-     "subtype": "SupportVehicle",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "hp": {
-     "src": "inherited",
-     "v": "300000"
-    },
-    "integrity_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "name": "Allied Mobile Construction Vehicle",
-    "prerequisites": [
-     "~ra2_allies_alliedwarfactory",
-     "ra2_allies_alliedservicedepot"
-    ],
-    "queue": [
-     "Vehicle",
-     "RAVehicle"
-    ],
-    "repairable_hp_per_step": {
-     "src": "inherited",
-     "v": "15000"
-    },
-    "self_heal_step": {
-     "src": "inherited",
-     "v": "120"
-    },
-    "shield_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "sight": {
-     "src": "inherited",
-     "v": "8000"
-    },
-    "speed": {
-     "src": "inherited",
-     "v": "75"
-    },
-    "turn_speed": {
-     "src": "inherited",
-     "v": "15"
-    }
-   },
    "ra2_allies_battlefortress": {
     "armaments": [
      {
@@ -4323,8 +4251,8 @@
     },
     "name": "Battle Fortress",
     "prerequisites": [
-     "~ra2_allies_alliedwarfactory",
-     "ra2_allies_alliedbattlelab"
+     "~ra2_allies_warfactory",
+     "ra2_allies_battlelab"
     ],
     "queue": [
      "Vehicle",
@@ -4429,7 +4357,7 @@
     },
     "name": "Battle Fortress",
     "prerequisites": [
-     "ra2_allies_alliedbattlelab",
+     "ra2_allies_battlelab",
      "~botplayer"
     ],
     "queue": [
@@ -4535,7 +4463,7 @@
     },
     "name": "Battle Fortress",
     "prerequisites": [
-     "ra2_allies_alliedbattlelab",
+     "ra2_allies_battlelab",
      "~botplayer"
     ],
     "queue": [
@@ -4608,7 +4536,7 @@
     },
     "name": "Chrono Miner",
     "prerequisites": [
-     "~ra2_allies_alliedorerefinery"
+     "~ra2_allies_orerefinery"
     ],
     "queue": [
      "Vehicle",
@@ -4743,7 +4671,7 @@
     },
     "name": "Grizzly Tank",
     "prerequisites": [
-     "~ra2_allies_alliedwarfactory"
+     "~ra2_allies_warfactory"
     ],
     "queue": [
      "Vehicle",
@@ -4918,8 +4846,8 @@
     },
     "name": "Heavy Mirage Tank",
     "prerequisites": [
-     "~ra2_allies_alliedwarfactory",
-     "ra2_allies_alliedbattlelab",
+     "~ra2_allies_warfactory",
+     "ra2_allies_battlelab",
      "~ra2_allies_upgrade_heavymiragetank"
     ],
     "queue": [
@@ -6322,7 +6250,7 @@
     },
     "name": "actor_fv.name",
     "prerequisites": [
-     "~ra2_allies_alliedwarfactory"
+     "~ra2_allies_warfactory"
     ],
     "queue": [
      "Vehicle",
@@ -7725,8 +7653,8 @@
     "name": "actor_fv.name",
     "prerequisites": [
      "~botplayer",
-     "ra2_allies_alliedbarracks",
-     "ra2_allies_alliedbattlelab"
+     "ra2_allies_barracks",
+     "ra2_allies_battlelab"
     ],
     "queue": [
      "Vehicle",
@@ -9129,7 +9057,7 @@
     "name": "actor_fv.name",
     "prerequisites": [
      "~botplayer",
-     "ra2_allies_alliedbarracks",
+     "ra2_allies_barracks",
      "ra2_allies_airforcecommandhq"
     ],
     "queue": [
@@ -10533,7 +10461,7 @@
     "name": "actor_fv.name",
     "prerequisites": [
      "~botplayer",
-     "ra2_allies_alliedbarracks"
+     "ra2_allies_barracks"
     ],
     "queue": [
      "Vehicle",
@@ -11936,7 +11864,7 @@
     "name": "actor_fv.name",
     "prerequisites": [
      "~botplayer",
-     "ra2_allies_alliedbarracks"
+     "ra2_allies_barracks"
     ],
     "queue": [
      "Vehicle",
@@ -13339,8 +13267,8 @@
     "name": "actor_fv.name",
     "prerequisites": [
      "~botplayer",
-     "ra2_allies_alliedbarracks",
-     "ra2_allies_alliedservicedepot"
+     "ra2_allies_barracks",
+     "ra2_allies_servicedepot"
     ],
     "queue": [
      "Vehicle",
@@ -13500,8 +13428,8 @@
     },
     "name": "Mirage Tank",
     "prerequisites": [
-     "~ra2_allies_alliedwarfactory",
-     "ra2_allies_alliedbattlelab",
+     "~ra2_allies_warfactory",
+     "ra2_allies_battlelab",
      "~!ra2_allies_upgrade_heavymiragetank"
     ],
     "queue": [
@@ -13540,6 +13468,78 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "18"
+    }
+   },
+   "ra2_allies_mobileconstructionvehicle": {
+    "armor": {
+     "src": "inherited",
+     "v": "Medium"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "SupportVehicle",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Allied Mobile Construction Vehicle",
+    "prerequisites": [
+     "~ra2_allies_warfactory",
+     "ra2_allies_servicedepot"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "repairable_hp_per_step": {
+     "src": "inherited",
+     "v": "15000"
+    },
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "120"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "15"
     }
    },
    "ra2_allies_prismtank": {
@@ -13680,8 +13680,8 @@
     },
     "name": "Prism Tank",
     "prerequisites": [
-     "~ra2_allies_alliedwarfactory",
-     "ra2_allies_alliedbattlelab"
+     "~ra2_allies_warfactory",
+     "ra2_allies_battlelab"
     ],
     "queue": [
      "Vehicle",
