@@ -1777,9 +1777,9 @@ USAAvengerBlueLaser:
 		Duration: 20
 		Width: 0c64
 		Color: 4FE2FF
-	Warhead@2Con: GrantExternalCondition
-		Condition: SonicDebuff
-		Duration: 20
+	Warhead@2Con: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
 		Range: 172
 		ValidTargets: Ground, Water, Structure, wall
 

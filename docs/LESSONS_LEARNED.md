@@ -2259,3 +2259,19 @@ map before diffing; residual deltas are then either seeded-field losses (restore
 ledger) or genuine staleness corrections (disclose them in the commit message). The same
 lookup-by-key trap applies to any tool that carries state forward from a committed artifact
 (`assign_references`, anchors tables, doc_claims pins).
+
+## `*ProportionalToPhysicalState` traits have non-neutral defaults on secondary channels (2026-09-23)
+
+`DamageMultiplierProportionalToPhysicalState` is neutral on every knob it doesn't take —
+but `SlowsProportionalToPhysicalState` is not: omit `TurnSpeed`/`TurretSpeed`/`ReloadDelay`
+endpoints and they default to a 100→50 slowdown curve, silently adding slows the old
+binary condition never had. When converting a `SpeedMultiplier`-only binary effect to a
+meter (the W7 `SonicDebuff` → `Resonance` conversion), pin every channel you don't intend
+to scale at `100` on both endpoints, and grep the trait's C# defaults before assuming
+"unset = unchanged". Same trap class as 8b/8c: an omitted field is a value, not an absence.
+
+Adjacent gotcha from the same conversion: `AreaDamage`'s `PhysicalStates: X: 100` scales
+the meter feed with **damage dealt**, while `ApplyPhysicalState` warheads apply a **flat
+`Amount`** — hand-tuned support grants (IonPulse rings, `Warhead@2Con` lasers) need the
+flat form; folding them into a damage node would make a support power's debuff depend on
+its damage roll. `Amount: 5000` ≈ quarter-meter on the 20000-point `Resonance` scale.

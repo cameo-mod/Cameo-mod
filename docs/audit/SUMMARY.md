@@ -100,8 +100,9 @@ promotion wiring clean · `MinRange` clean · duplicate uniquely-resolved traits
 armor-plating invariants clean · plating exclusivity clean · physical-state warheads PASS ·
 cross-document consistency 73/0 · display text 0 active findings ·
 **documentation structure 0** (`doc_health.md`, D1–D8) · **balance-ledger drift 0** ·
-**doc claims 19 of 19 match** · **generator sync drift 0** (136 shared templates, no-op
-regenerate).
+**doc claims 19 of 19 match** · **generator sync drift 184** of 158 shared templates —
+pre-existing warhead-reference-lane debt (post-#450), owned by that lane; the five
+Sonic-family blocks were re-synced by W7 (199 → 184) and are clean.
 
 ## Red right now
 
@@ -112,7 +113,9 @@ regenerate).
 | warhead-split ratchet | 921 vs baseline 921 | pre-existing W24 debt, not a regression; lower the baseline as W24 lands |
 
 Cleared since the last edition of this page: **doc claims** (was 4 of 19 drifted, now 19 of 19
-matching) and **generator sync** (was non-zero, now 0).
+matching). **Generator sync regressed to 184 drifted blocks** via the warhead-reference
+landings (#450 onward) — that lane owns the re-sync; don't claim "drift 0" until it's
+back to zero.
 
 ## Programme-scale debt
 
