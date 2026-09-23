@@ -1,6 +1,4 @@
 CHGuardRifle:
-	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
-	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
@@ -15,12 +13,61 @@ CHGuardRifle:
 # the scout anchor together with the Imperial Scoutsman's 20000/50/100.
 # Dedicated (never shared): CHGuardRifle serves civilians/other rules
 # and must not carry baseline duty.
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
+	Warhead@Bullet_Medium_Flat: AreaDamage
+	Warhead@Bullet_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 100
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 99
+			COMPOSITE: 42
+			BLAST: 68
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 150
+			None: 200
+			Flak: 160
+			Plate: 151
+			Scout: 117
+			Light: 108
+			Fighter: 99
+			Wood: 98
+			Bomber: 92
+			Heroic: 89
+			Steel: 85
+			Medium: 84
+			Helicopter: 75
+			Heavy: 67
+			Concrete: 62
+			Spaceship: 57
+			Superheavy: 55
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Steel: 11
+			Medium: 10
+			Helicopter: 9
+			Concrete: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
 japan_imperialscoutsman_rifle:
 	# Special-Forces baseline weapon (maintainer 2026-07-20): SmallArms +
 	# Chaingun + railgun-AP = 6000 dmg, precise (bullet projectile, no beam
@@ -29,6 +76,7 @@ japan_imperialscoutsman_rifle:
 	# (shield-only chip damage; ignored for pricing, per maintainer).
 	Inherits@collapsewh: ^Warhead_Bullet_Medium
 	Inherits: ^RailgunWeapon
+	Inherits@fx_cover: ^Effect_Bullet_Light
 	ReloadDelay: 50
 	Range: 6000
 	ValidTargets: Ground, Water, Air
@@ -47,7 +95,7 @@ japan_imperialscoutsman_rifle:
 # upgraded variant with it). Waveforce flavor rides the baseline stats.
 	Projectile: Bullet
 	Warhead@ChaingunPercentage: AreaDamagePercentage
-	Warhead@EffectWater: CreateEffect
+	Warhead@EffectWater:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 	Projectile:
 		Image: 50CAL
@@ -122,16 +170,16 @@ japan_imperialscoutsman_rifle:
 japan_imperialscoutsman_rifle_waveforce:
 	Inherits@xjapan_imperialscoutsman_rifle_waveforce0: ^Warhead_Railgun_Heavy
 	Inherits@xjapan_imperialscoutsman_rifle_waveforce1: ^Projectile_Railgun_Heavy
-	Inherits@xjapan_imperialscoutsman_rifle_waveforce2: ^Effect_Railgun_Heavy
+	Inherits@fx_cover: ^Effect_Emp_Fx_RA2
 	Inherits@2: japan_imperialscoutsman_rifle
 	-Warhead@Bullet_Medium:
 	Warhead@Railgun_Heavy:
 		Damage: 15000
 	Projectile: Bullet
 	Warhead@ChaingunPercentage: AreaDamagePercentage
-	Warhead@EffectWater: CreateEffect
+	Warhead@EffectWater:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 	Projectile:
 		Image: 50CAL
 		ContrailZOffset: 4000
@@ -212,13 +260,21 @@ japan_imperialscoutsman_rifle_waveforce:
 			Superheavy: 1
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
+	Warhead@Glow:
+	Warhead@Glow:
+		Color: FFB84D
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@Effect:
+		-ExplosionPalette:
+		-ImpactActors:
+	Warhead@EffectWater:
+		-ExplosionPalette:
 
 TankBusterBeamCannon:
-	Inherits@collapsewh: ^Warhead_Railgun_Heavy
-	Inherits@collapseextra: ^Warhead_Railgun_ExtraDamage
 	Inherits@collapsetargets: ^Warhead_TankBusterBeam_Unscoped_Flat
-	-TargetActorCenter:
 	Inherits@3: ^RailgunWeapon
+	Inherits@fx_cover: ^Effect_AlliedTigerCannon
 	ReloadDelay: 96
 	Range: 5190
 	Report: JUTankB_weapFire1a.wav, JUTankB_weapFire1b.wav, JUTankB_weapFire1c.wav, JUTankB_weapFire1d.wav, JUTankB_weapFire1e.wav, JUTankB_weapFire1f.wav, JUTankB_weapFire1g.wav, JUTankB_weapFire1h.wav
@@ -252,13 +308,13 @@ TankBusterBeamCannon:
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-	Warhead@Smudge: LeaveSmudge
-	Warhead@DuneRock: LeaveSmudge
-	Warhead@DuneSand: LeaveSmudge
-	Warhead@RA2Crater: LeaveSmudge
-	Warhead@EffectWater: CreateEffect
-	Warhead@EffectAir: CreateEffect
-	Warhead@Glow: GlowImpact
+	Warhead@Smudge:
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
+	Warhead@EffectWater:
+	Warhead@EffectAir:
+	Warhead@Glow:
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
 	Projectile:
 		Image: 120MM
@@ -340,6 +396,120 @@ TankBusterBeamCannon:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 		InvalidTargets: Air
+	Warhead@Concrete:
+		Damage: 100
+	Warhead@Effect:
+		Explosions: blue_med_frag
+		ImpactSounds: xplos.aud
+	Warhead@ShieldHit:
+		Duration: 15
+	ValidTargets: Ground, Water
+	Warhead@Railgun_Heavy: AreaDamage
+	Warhead@Railgun_Heavy_ExtraDamage: SpreadDamage
+	Warhead@RailgunExtraDamage_Auxiliary: SpreadDamage
+	Warhead@RailgunExtraDamage_Auxiliary:
+		ValidTargets: Ground, Water, Air
+		Spread: 500
+		Damage: 1000
+		Versus:
+			REFLECTOR: 50
+			Shield: 100
+			None: 1
+			Flak: 1
+			Plate: 1
+			Heroic: 1
+			Superheavy: 1
+			Heavy: 1
+			Medium: 1
+			Light: 1
+			Scout: 1
+			Steel: 1
+			Concrete: 1
+			Wood: 1
+			Fighter: 1
+			Bomber: 1
+			Helicopter: 1
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+	Warhead@Railgun_Heavy:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 96
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 97
+			COMPOSITE: 41
+			BLAST: 77
+			REFLECTOR: 64
+			ARMOR: 70
+			Shield: 306
+			Superheavy: 200
+			Heavy: 181
+			Medium: 156
+			Light: 123
+			Plate: 97
+			Scout: 94
+			Concrete: 92
+			Spaceship: 88
+			Flak: 83
+			Steel: 80
+			Helicopter: 79
+			Bomber: 73
+			None: 72
+			Wood: 70
+			Fighter: 66
+			Heroic: 46
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heavy: 24
+			Medium: 23
+			Light: 22
+			Scout: 21
+			Heroic: 20
+			Plate: 19
+			Flak: 18
+			None: 17
+			Concrete: 16
+			Steel: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+	Warhead@Railgun_Heavy_ExtraDamage:
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 1000
+		Falloff: 100, 75, 50, 25
+		Versus:
+			HAZMAT: 97
+			COMPOSITE: 41
+			BLAST: 77
+			REFLECTOR: 64
+			ARMOR: 70
+			Shield: 10
+			Concrete: 200
+			Steel: 175
+			Wood: 150
+			Superheavy: 125
+			Heavy: 100
+			Medium: 75
+			Light: 50
+			Scout: 25
+			None: 10
+			Flak: 10
+			Plate: 10
+			Heroic: 10
+			Fighter: 10
+			Bomber: 10
+			Helicopter: 10
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 TankBusterBeamCannonCharged:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -490,14 +660,13 @@ HeavyFlamer:
 		Inaccuracy: 900
 	Warhead@Flame_Medium:
 		Damage: 2000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: napalm
 		GlowScale: 1.5
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12
 
 HeavyPlasmaFlamer:
-	Inherits@roleflat: ^Warhead_Flame_Heavy
 	Inherits@wh: ^Warhead_Chemical_Heavy
 	Inherits@proj: ^Projectile_Chem_Heavy
 	Inherits@fx: ^Effect_Flame_Heavy
@@ -516,13 +685,65 @@ HeavyPlasmaFlamer:
 	Warhead@Chemical_Heavy:
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: blue_building_napalm
 	-Warhead@Chemical_Heavy:
 	Warhead@Flame_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
+	Warhead@Flame_Heavy: AreaDamage
+	Warhead@Flame_Heavy:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 400
+		Falloff: 100, 90, 78, 60, 0
+		Versus:
+			HAZMAT: 39
+			COMPOSITE: 77
+			BLAST: 66
+			REFLECTOR: 99
+			ARMOR: 70
+			Shield: 228
+			None: 191
+			Wood: 187
+			Flak: 162
+			Plate: 160
+			Steel: 158
+			Concrete: 122
+			Scout: 79
+			Light: 75
+			Medium: 67
+			Heavy: 66
+			Heroic: 65
+			Superheavy: 63
+			Fighter: 58
+			Bomber: 53
+			Helicopter: 49
+			Spaceship: 44
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			None: 25
+			Wood: 24
+			Flak: 23
+			Steel: 22
+			Plate: 21
+			Concrete: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
 
 SamuraiBlade:
 	Inherits@wh: ^Warhead_Melee_Medium
@@ -534,6 +755,7 @@ SamuraiBlade:
 		Damage: 10000
 SamuraiBladeCharged:
 	Inherits: ^TeslaWeapon
+	Inherits@fx_cover: ^Effect_Melee_Medium
 	ReloadDelay: 20
 	Range: 1637
 	Warhead@TeslaWeapon: SpreadDamage
@@ -634,7 +856,7 @@ SamuraiBladeCharged:
 	ValidTargets: Ground
 	Projectile: InstantHit
 	Warhead@SwordWeaponPercentage: AreaDamagePercentage
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 	Warhead@Effect:
 		ImpactSounds: pzehit00.aud
 	Warhead@ShieldHit:
@@ -695,7 +917,7 @@ JapanMaidenBow:
 		ContrailEndColor: FFFFFF
 	Warhead@Arrow_Light:
 		Damage: 40000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ValidRelationships: Neutral, Enemy
 		Explosions: blue_small_fire
 		ImpactSounds: kaboom12.aud
@@ -1422,7 +1644,6 @@ BallistaTowerMultiShotEnergized:
 	Warhead@ArrowWeaponPercentage:
 		InvalidTargets: wall, Air
 RocketAngelRockets:
-	Inherits@missilerole: ^Warhead_MissileAP_Light
 	Inherits@roleflat: ^Warhead_MissileAA_Light_Flat
 	Inherits: ^TeslaWeapon
 	ReloadDelay: 34
@@ -1677,6 +1898,51 @@ RocketAngelRockets:
 	Warhead@Smudge:
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	TargetActorCenter: true
+	Warhead@MissileAP_Light:
+		Spread: 43
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 95
+			COMPOSITE: 45
+			BLAST: 68
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 133
+			Superheavy: 172
+			Heavy: 169
+			Medium: 155
+			Light: 142
+			Scout: 130
+			Spaceship: 128
+			Helicopter: 127
+			Bomber: 113
+			Fighter: 112
+			Concrete: 70
+			Steel: 60
+			Wood: 59
+			Plate: 46
+			Flak: 43
+			None: 36
+			Heroic: 35
+		PercentageVersus:
+			Shield: 17
+			Superheavy: 16
+			Heavy: 15
+			Medium: 14
+			Light: 13
+			Scout: 12
+			Spaceship: 11
+			Helicopter: 10
+			Bomber: 9
+			Fighter: 8
+			Concrete: 7
+			Steel: 6
+			Wood: 5
+			Heroic: 4
+			Plate: 3
+			Flak: 2
+			None: 1
 
 Hakureiring:
 	# Collapsed onto the new Magic %-equalizer (maintainer 2026-08-10). Was Tesla+Magic+EMP; the exorcist
@@ -1717,7 +1983,7 @@ Hakureiring:
 		ValidTargets: Air, Ground, Water
 		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: tsring
 		ExplosionPalette: tseffect
 		ImpactSounds:
@@ -1855,10 +2121,9 @@ NambuMG:
 	Warhead@Bullet_Light:
 		Damage: 4000
 NambuMGWaveforce:
-	Inherits@roleflat: ^Warhead_Waveforce_Heavy
 	Inherits@xNambuMGWaveforce0: ^Warhead_Railgun_Heavy
 	Inherits@xNambuMGWaveforce1: ^Projectile_Railgun_Heavy
-	Inherits@xNambuMGWaveforce2: ^Effect_Railgun_Heavy
+	Inherits@fx_cover: ^Effect_Emp_Fx_RA2
 	Inherits@2: NambuMG
 	Warhead@Bullet_Light: AreaDamage
 		Damage: 2000
@@ -1871,7 +2136,7 @@ NambuMGWaveforce:
 	Warhead@Railgun_Heavy_ExtraDamage:
 		ValidTargets: Ground, Water, Air
 	Projectile: Bullet
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 	Projectile:
 		ContrailStartColor: 4488FF88
 		ContrailEndColor: FFFFFF44
@@ -1890,6 +2155,72 @@ NambuMGWaveforce:
 	Warhead@EffectWater:
 		Explosions: blue_small_fire
 		ImpactSounds: kaboom12.aud
+	Warhead@Glow:
+	Warhead@Concrete:
+	Warhead@Concrete:
+		Damage: 100
+	Warhead@Glow:
+		Color: FFB84D
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@Effect:
+		-ExplosionPalette:
+		-ImpactActors:
+	Warhead@EffectWater:
+		-ExplosionPalette:
+	Warhead@Waveforce_Heavy: AreaDamage
+	Warhead@Waveforce_Heavy:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 76
+		Falloff: 100, 81, 61, 38, 0
+		Versus:
+			HAZMAT: 61
+			COMPOSITE: 65
+			BLAST: 81
+			REFLECTOR: 74
+			ARMOR: 70
+			Shield: 282
+			Superheavy: 164
+			Plate: 148
+			Heavy: 140
+			Concrete: 131
+			Medium: 119
+			Flak: 114
+			Steel: 103
+			Light: 98
+			None: 92
+			Spaceship: 89
+			Scout: 77
+			Wood: 76
+			Heroic: 70
+			Helicopter: 69
+			Bomber: 59
+			Fighter: 49
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Temperature: 35
+			Corrosion: 20
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Heroic: 22
+			Superheavy: 22
+			Heavy: 21
+			Plate: 20
+			Flak: 19
+			Medium: 19
+			None: 18
+			Light: 18
+			Concrete: 18
+			Steel: 17
+			Scout: 16
+			Wood: 16
+			Spaceship: 14
+			Helicopter: 13
+			Bomber: 12
+			Fighter: 10
 
 ZeroFighterArrows:
 	Inherits: SkyHawkArrows
@@ -1908,6 +2239,56 @@ ZeroFighterArrows:
 		ValidTargets: Ground, Water, Air
 		Damage: 36000
 		PercentageScale: 9998
+	Warhead@Arrow_Light_Flat: AreaDamage
+	Warhead@Arrow_Light_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 59
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 102
+			COMPOSITE: 35
+			BLAST: 72
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 107
+			None: 200
+			Flak: 169
+			Plate: 137
+			Fighter: 130
+			Bomber: 103
+			Scout: 93
+			Light: 87
+			Wood: 86
+			Helicopter: 85
+			Medium: 81
+			Steel: 76
+			Spaceship: 75
+			Heavy: 74
+			Superheavy: 69
+			Concrete: 66
+			Heroic: 64
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Fighter: 12
+			Bomber: 11
+			Helicopter: 10
+			Spaceship: 9
+			Scout: 8
+			Light: 7
+			Medium: 6
+			Heavy: 5
+			Superheavy: 4
+			Wood: 3
+			Steel: 2
+			Concrete: 1
 ZeroFighterArrowsEnergized:
 	Inherits: SkyHawkArrowsEnergized
 	Range: 6615
@@ -1951,7 +2332,6 @@ ZeroFighterArrowsEnergized:
 	-Warhead@MissileHE_Medium:
 
 SkyHawkChainGun:
-	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
@@ -1964,18 +2344,17 @@ SkyHawkChainGun:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	-Warhead@Demolition_Light:
 SkyHawkChainGunWaveforce:
 	Inherits@xSkyHawkChainGunWaveforce0: ^Warhead_Railgun_Heavy
 	Inherits@xSkyHawkChainGunWaveforce1: ^Projectile_Railgun_Heavy
-	Inherits@xSkyHawkChainGunWaveforce2: ^Effect_Railgun_Heavy
+	Inherits@fx_cover: ^Effect_Emp_Fx_RA2
 	Inherits@2: SkyHawkChainGun
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 500
 	-Warhead@Bullet_Medium:
 	Warhead@Railgun_Heavy:
 		Damage: 6000
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 	Projectile:
 		ContrailStartColor: 4488FF88
 		ContrailEndColor: FFFFFF44
@@ -1995,6 +2374,16 @@ SkyHawkChainGunWaveforce:
 		ImpactSounds: kaboom12.aud
 	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
+	Warhead@Glow:
+	Warhead@Glow:
+		Color: FFB84D
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@Effect:
+		-ExplosionPalette:
+		-ImpactActors:
+	Warhead@EffectWater:
+		-ExplosionPalette:
 
 ^SkyHawkCannonLegacy:
 	Inherits@wh2: ^Warhead_CannonAP_Light
@@ -2024,7 +2413,6 @@ SkyHawkCannon:
 		Damage: 16000
 		Heaviness: 0
 SkyHawkPlasmaCannon:
-	Inherits: ^Warhead_Tesla_Heavy
 	Inherits@xSkyHawkPlasmaCannon0: ^Warhead_CannonAP_Light
 	Inherits@xSkyHawkPlasmaCannon1: ^Projectile_Shell_Light
 	Inherits@xSkyHawkPlasmaCannon2: ^Effect_CannonAP_Light
@@ -2054,10 +2442,85 @@ SkyHawkPlasmaCannon:
 	ReloadDelay: 32
 	Range: 3053
 	Report: cannon2.aud
+	Warhead@Tesla_Heavy: AreaDamage
+	Warhead@Tesla_Heavy:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 93
+		Falloff: 100, 55, 0
+		Versus:
+			HAZMAT: 61
+			COMPOSITE: 73
+			BLAST: 97
+			REFLECTOR: 50
+			ARMOR: 70
+			Shield: 368
+			Superheavy: 155
+			Plate: 146
+			Heavy: 135
+			Concrete: 129
+			Medium: 117
+			Flak: 115
+			Steel: 103
+			Light: 102
+			Spaceship: 100
+			None: 90
+			Scout: 88
+			Heroic: 83
+			Wood: 82
+			Helicopter: 61
+			Bomber: 51
+			Fighter: 44
+		IntegrityScale: 100
+		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heroic: 24
+			Heavy: 23
+			Plate: 22
+			Medium: 21
+			Flak: 20
+			Light: 19
+			None: 18
+			Scout: 17
+			Concrete: 16
+			Steel: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+	Warhead@Tesla_Heavy_ExtraDamage:
+		Spread: 200
+		Falloff: 100, 75, 50, 25
+		Versus:
+			HAZMAT: 61
+			COMPOSITE: 73
+			BLAST: 97
+			REFLECTOR: 50
+			ARMOR: 70
+			Shield: 300
+			Heroic: 200
+			Plate: 175
+			Flak: 150
+			None: 125
+			Superheavy: 100
+			Heavy: 75
+			Medium: 50
+			Light: 25
+			Scout: 10
+			Wood: 10
+			Steel: 10
+			Concrete: 10
+			Fighter: 10
+			Bomber: 10
+			Helicopter: 10
+			Spaceship: 10
 
 SkyHawkArrows:
-	Inherits@finalmain: ^Warhead_Arrow_Light_Flat
-	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@wh2: ^Warhead_Arrow_Light
 	Inherits@proj: ^Projectile_Arrow_Light
 	Inherits@fx: ^Effect_Arrow_Light
@@ -2095,6 +2558,56 @@ SkyHawkArrows:
 		ValidTargets: Ground, Water, Air
 		Damage: 64000
 		PercentageScale: 9999
+	Warhead@Arrow_Light_Flat: AreaDamage
+	Warhead@Arrow_Light_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 59
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 102
+			COMPOSITE: 35
+			BLAST: 72
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 107
+			None: 200
+			Flak: 169
+			Plate: 137
+			Fighter: 130
+			Bomber: 103
+			Scout: 93
+			Light: 87
+			Wood: 86
+			Helicopter: 85
+			Medium: 81
+			Steel: 76
+			Spaceship: 75
+			Heavy: 74
+			Superheavy: 69
+			Concrete: 66
+			Heroic: 64
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Fighter: 12
+			Bomber: 11
+			Helicopter: 10
+			Spaceship: 9
+			Scout: 8
+			Light: 7
+			Medium: 6
+			Heavy: 5
+			Superheavy: 4
+			Wood: 3
+			Steel: 2
+			Concrete: 1
 
 SkyHawkArrowsEnergized:
 	Inherits@roleflat: ^Warhead_Arrow_Medium
@@ -2925,8 +3438,6 @@ HovercraftPlasmaCannon:
 		UpdatesUnitStatistics: false
 
 JapaneseHovercraftFlak:
-	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
-	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
@@ -2946,6 +3457,56 @@ JapaneseHovercraftFlak:
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
+	Warhead@Flak_Medium_Flat: AreaDamage
+	Warhead@Flak_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 110
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Steel: 6
+			Concrete: 5
 JapaneseHovercraftFlakAA:
 	Inherits: JapaneseHovercraftFlak
 	Range: 7314
@@ -2960,6 +3521,56 @@ JapaneseHovercraftFlakAA:
 		ValidTargets: Air
 		Damage: 4000
 		PercentageScale: 9975
+	Warhead@Flak_Medium_Flat: AreaDamage
+	Warhead@Flak_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 110
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Steel: 6
+			Concrete: 5
 JapaneseHovercraftFlakWaveforce:
 	Inherits@xJapaneseHovercraftFlakWaveforce0: ^Warhead_Railgun_Heavy
 	Inherits@xJapaneseHovercraftFlakWaveforce1: ^Projectile_Railgun_Heavy
@@ -3194,8 +3805,6 @@ Type97Cannon:
 		ImpactSounds: xplosml2.aud
 
 Type97PlasmaCannon:
-	Inherits: ^Warhead_Tesla_Heavy
-	Inherits@2: ^Warhead_Railgun_Heavy
 	Inherits@3: ^Warhead_CannonHE_Heavy
 	Inherits@4: ^Projectile_Shell_Heavy
 	Inherits@5: ^Effect_CannonHE_Heavy
@@ -3226,6 +3835,115 @@ Type97PlasmaCannon:
 		Explosions: purple_plasma
 	-Warhead@Railgun_Heavy:
 	-Warhead@CannonHE_Heavy:
+	Warhead@Tesla_Heavy: AreaDamage
+	Warhead@Railgun_Heavy_ExtraDamage: SpreadDamage
+	Warhead@Railgun_Heavy_ExtraDamage:
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 1000
+		Falloff: 100, 75, 50, 25
+		Versus:
+			HAZMAT: 97
+			COMPOSITE: 41
+			BLAST: 77
+			REFLECTOR: 64
+			ARMOR: 70
+			Shield: 10
+			Concrete: 200
+			Steel: 175
+			Wood: 150
+			Superheavy: 125
+			Heavy: 100
+			Medium: 75
+			Light: 50
+			Scout: 25
+			None: 10
+			Flak: 10
+			Plate: 10
+			Heroic: 10
+			Fighter: 10
+			Bomber: 10
+			Helicopter: 10
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Tesla_Heavy:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 93
+		Falloff: 100, 55, 0
+		Versus:
+			HAZMAT: 61
+			COMPOSITE: 73
+			BLAST: 97
+			REFLECTOR: 50
+			ARMOR: 70
+			Shield: 368
+			Superheavy: 155
+			Plate: 146
+			Heavy: 135
+			Concrete: 129
+			Medium: 117
+			Flak: 115
+			Steel: 103
+			Light: 102
+			Spaceship: 100
+			None: 90
+			Scout: 88
+			Heroic: 83
+			Wood: 82
+			Helicopter: 61
+			Bomber: 51
+			Fighter: 44
+		IntegrityScale: 100
+		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heroic: 24
+			Heavy: 23
+			Plate: 22
+			Medium: 21
+			Flak: 20
+			Light: 19
+			None: 18
+			Scout: 17
+			Concrete: 16
+			Steel: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+	Warhead@Tesla_Heavy_ExtraDamage:
+		ValidTargets: Ground, Water
+		Spread: 200
+		Falloff: 100, 75, 50, 25
+		Versus:
+			HAZMAT: 61
+			COMPOSITE: 73
+			BLAST: 97
+			REFLECTOR: 50
+			ARMOR: 70
+			Shield: 300
+			Heroic: 200
+			Plate: 175
+			Flak: 150
+			None: 125
+			Superheavy: 100
+			Heavy: 75
+			Medium: 50
+			Light: 25
+			Scout: 10
+			Wood: 10
+			Steel: 10
+			Concrete: 10
+			Fighter: 10
+			Bomber: 10
+			Helicopter: 10
+			Spaceship: 10
 
 ShrineTankCannon:
 	# Shrine Minitank weapon — weaker version of Exorcist. Pure Magic (2026-08-10).
@@ -3267,7 +3985,6 @@ ShrineTankCannon:
 		ImpactSounds:
 
 WaveforceCannon:
-	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@wh2: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
@@ -3308,6 +4025,57 @@ WaveforceCannon:
 	Warhead@Railgun_Heavy_ExtraDamage:
 		ValidTargets: Ground, Water, Air
 	-Warhead@Railgun_Heavy:
+	Warhead@MissileHE_Heavy: AreaDamage
+	Warhead@MissileHE_Heavy:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 200
+		Falloff: 100, 45, 15, 0
+		Versus:
+			HAZMAT: 76
+			COMPOSITE: 89
+			BLAST: 45
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 170
+			Scout: 129
+			Wood: 128
+			Light: 126
+			Medium: 118
+			Steel: 116
+			Concrete: 115
+			Heavy: 114
+			Superheavy: 113
+			Fighter: 103
+			Bomber: 95
+			Helicopter: 85
+			None: 79
+			Spaceship: 76
+			Flak: 75
+			Plate: 63
+			Heroic: 62
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Scout: 25
+			Wood: 24
+			Light: 23
+			Steel: 22
+			Medium: 21
+			Concrete: 20
+			Heavy: 19
+			Superheavy: 18
+			Fighter: 17
+			Bomber: 16
+			Helicopter: 15
+			Spaceship: 14
+			None: 13
+			Flak: 12
+			Plate: 11
+			Heroic: 10
 
 OISmallCannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium
@@ -3488,8 +4256,6 @@ OIBigCannon:
 		ImpactSounds: xplosml2.aud
 
 OIBigPlasmaCannon:
-	Inherits: ^Warhead_Tesla_Heavy
-	Inherits@2: ^Warhead_Railgun_Heavy
 	Inherits@3: ^Warhead_CannonHE_Heavy
 	Inherits@4: ^Projectile_Shell_Heavy
 	Inherits@5: ^Effect_CannonHE_Heavy
@@ -3520,6 +4286,115 @@ OIBigPlasmaCannon:
 		Explosions: purple_plasma
 	-Warhead@Railgun_Heavy:
 	-Warhead@CannonHE_Heavy:
+	Warhead@Tesla_Heavy: AreaDamage
+	Warhead@Railgun_Heavy_ExtraDamage: SpreadDamage
+	Warhead@Railgun_Heavy_ExtraDamage:
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 1000
+		Falloff: 100, 75, 50, 25
+		Versus:
+			HAZMAT: 97
+			COMPOSITE: 41
+			BLAST: 77
+			REFLECTOR: 64
+			ARMOR: 70
+			Shield: 10
+			Concrete: 200
+			Steel: 175
+			Wood: 150
+			Superheavy: 125
+			Heavy: 100
+			Medium: 75
+			Light: 50
+			Scout: 25
+			None: 10
+			Flak: 10
+			Plate: 10
+			Heroic: 10
+			Fighter: 10
+			Bomber: 10
+			Helicopter: 10
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Tesla_Heavy:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 93
+		Falloff: 100, 55, 0
+		Versus:
+			HAZMAT: 61
+			COMPOSITE: 73
+			BLAST: 97
+			REFLECTOR: 50
+			ARMOR: 70
+			Shield: 368
+			Superheavy: 155
+			Plate: 146
+			Heavy: 135
+			Concrete: 129
+			Medium: 117
+			Flak: 115
+			Steel: 103
+			Light: 102
+			Spaceship: 100
+			None: 90
+			Scout: 88
+			Heroic: 83
+			Wood: 82
+			Helicopter: 61
+			Bomber: 51
+			Fighter: 44
+		IntegrityScale: 100
+		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heroic: 24
+			Heavy: 23
+			Plate: 22
+			Medium: 21
+			Flak: 20
+			Light: 19
+			None: 18
+			Scout: 17
+			Concrete: 16
+			Steel: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+	Warhead@Tesla_Heavy_ExtraDamage:
+		ValidTargets: Ground, Water
+		Spread: 200
+		Falloff: 100, 75, 50, 25
+		Versus:
+			HAZMAT: 61
+			COMPOSITE: 73
+			BLAST: 97
+			REFLECTOR: 50
+			ARMOR: 70
+			Shield: 300
+			Heroic: 200
+			Plate: 175
+			Flak: 150
+			None: 125
+			Superheavy: 100
+			Heavy: 75
+			Medium: 50
+			Light: 25
+			Scout: 10
+			Wood: 10
+			Steel: 10
+			Concrete: 10
+			Fighter: 10
+			Bomber: 10
+			Helicopter: 10
+			Spaceship: 10
 
 OIFlamer:
 	Inherits@wh: ^Warhead_Flame_Medium
@@ -3539,7 +4414,6 @@ OIFlamer:
 	Warhead@Flame_Medium:
 		Damage: 2000
 OIPlasmaFlamer:
-	Inherits@roleflat: ^Warhead_Flame_Heavy
 	Inherits@wh: ^Warhead_Chemical_Heavy
 	Inherits@proj: ^Projectile_Chem_Heavy
 	Inherits@fx: ^Effect_Flame_Heavy
@@ -3565,6 +4439,58 @@ OIPlasmaFlamer:
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
+	Warhead@Flame_Heavy: AreaDamage
+	Warhead@Flame_Heavy:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 400
+		Falloff: 100, 90, 78, 60, 0
+		Versus:
+			HAZMAT: 39
+			COMPOSITE: 77
+			BLAST: 66
+			REFLECTOR: 99
+			ARMOR: 70
+			Shield: 228
+			None: 191
+			Wood: 187
+			Flak: 162
+			Plate: 160
+			Steel: 158
+			Concrete: 122
+			Scout: 79
+			Light: 75
+			Medium: 67
+			Heavy: 66
+			Heroic: 65
+			Superheavy: 63
+			Fighter: 58
+			Bomber: 53
+			Helicopter: 49
+			Spaceship: 44
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			None: 25
+			Wood: 24
+			Flak: 23
+			Steel: 22
+			Plate: 21
+			Concrete: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
 
 OIHakureiring:
 	Inherits: Hakureiring
@@ -3732,14 +4658,13 @@ JapaneseHeavyBomb:
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 20000
-	Warhead@Effect1: CreateEffect
+	Warhead@Effect1:
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom15.aud
 
 JapanesePlasmaBomb:
 	Inherits@wh: ^Warhead_Plasma_Heavy
 	Inherits@proj: ^Projectile_Chem_Heavy
-	Inherits@fx: ^Effect_Flame_Heavy
 	Inherits@fx2: ^Effect_Demolition_Heavy
 	ReloadDelay: 100
 	Burst: 4
@@ -3775,10 +4700,28 @@ JapanesePlasmaBomb:
 		ValidTargets: Ground, Ship
 	Warhead@Effect2: CreateEffect
 		Explosions: blue_building_napalm
+	Warhead@Smudge: LeaveSmudge
+	Warhead@RA2Scorch: LeaveSmudge
+	Warhead@GroundFire: SpawnActor
+	Warhead@Effect:
+		ImpactActors: false
+		GlowScale: 2.0
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
+	Warhead@GroundFire:
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
 
 JHighV:
-	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
-	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
@@ -3790,17 +4733,65 @@ JHighV:
 	StartBurstReport: gun8.aud
 	Warhead@Bullet_Medium:
 		Damage: 4000
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 7488
+	Warhead@Bullet_Medium_Flat: AreaDamage
+	Warhead@Bullet_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 100
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 99
+			COMPOSITE: 42
+			BLAST: 68
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 150
+			None: 200
+			Flak: 160
+			Plate: 151
+			Scout: 117
+			Light: 108
+			Fighter: 99
+			Wood: 98
+			Bomber: 92
+			Heroic: 89
+			Steel: 85
+			Medium: 84
+			Helicopter: 75
+			Heavy: 67
+			Concrete: 62
+			Spaceship: 57
+			Superheavy: 55
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Steel: 11
+			Medium: 10
+			Helicopter: 9
+			Concrete: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
 JHighVWaveforce:
-	Inherits@roleflat: ^Warhead_Waveforce_Heavy
 	Inherits@xJHighVWaveforce0: ^Warhead_Railgun_Heavy
 	Inherits@xJHighVWaveforce1: ^Projectile_Railgun_Heavy
-	Inherits@xJHighVWaveforce2: ^Effect_Railgun_Heavy
+	Inherits@fx_cover: ^Effect_Emp_Fx_RA2
 	Inherits@2: JHighV
 	Report: bigggun1.aud
 	Warhead@Railgun_Heavy:
@@ -3818,7 +4809,7 @@ JHighVWaveforce:
 	Warhead@Railgun_Heavy_ExtraDamage:
 		ValidTargets: Ground, Water, Air
 	Projectile: Bullet
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 	Projectile:
 		ContrailStartColor: 4488FF88
 		ContrailEndColor: FFFFFF44
@@ -3837,6 +4828,69 @@ JHighVWaveforce:
 	Warhead@EffectWater:
 		Explosions: blue_small_fire
 		ImpactSounds: kaboom12.aud
+	Warhead@Glow:
+	Warhead@Glow:
+		Color: FFB84D
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@Effect:
+		-ExplosionPalette:
+		-ImpactActors:
+	Warhead@EffectWater:
+		-ExplosionPalette:
+	Warhead@Waveforce_Heavy: AreaDamage
+	Warhead@Waveforce_Heavy:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 76
+		Falloff: 100, 81, 61, 38, 0
+		Versus:
+			HAZMAT: 61
+			COMPOSITE: 65
+			BLAST: 81
+			REFLECTOR: 74
+			ARMOR: 70
+			Shield: 282
+			Superheavy: 164
+			Plate: 148
+			Heavy: 140
+			Concrete: 131
+			Medium: 119
+			Flak: 114
+			Steel: 103
+			Light: 98
+			None: 92
+			Spaceship: 89
+			Scout: 77
+			Wood: 76
+			Heroic: 70
+			Helicopter: 69
+			Bomber: 59
+			Fighter: 49
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Temperature: 35
+			Corrosion: 20
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Heroic: 22
+			Superheavy: 22
+			Heavy: 21
+			Plate: 20
+			Flak: 19
+			Medium: 19
+			None: 18
+			Light: 18
+			Concrete: 18
+			Steel: 17
+			Scout: 16
+			Wood: 16
+			Spaceship: 14
+			Helicopter: 13
+			Bomber: 12
+			Fighter: 10
 
 ExecutionerDeath:
 	Inherits: MiniNuke
@@ -3857,7 +4911,7 @@ ExecutionerSword:
 		ValidTargets: Ground, Water, Air
 		Spread: 6000
 		Damage: 600000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: mobileemp
 		ExplosionPalette: ra2unit
 		ImpactSounds: mobemp1.aud
@@ -4036,7 +5090,7 @@ NanoReturnHeal:
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
 		Damage: -10000
 		ValidRelationships: Ally
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ImpactSounds: vifvrepa.wav
 
 NanoSmokeAG:
@@ -4648,7 +5702,7 @@ ArmoredCarMG_AA:
 ArmoredCarMGWaveforce:
 	Inherits@xArmoredCarMGWaveforce0: ^Warhead_Railgun_Heavy
 	Inherits@xArmoredCarMGWaveforce1: ^Projectile_Railgun_Heavy
-	Inherits@xArmoredCarMGWaveforce2: ^Effect_Railgun_Heavy
+	Inherits@fx_cover: ^Effect_AlliedTigerCannon
 	Inherits@3: ArmoredCarMG
 	Warhead@Railgun_Heavy:
 		InvalidTargets: Air
@@ -4706,13 +5760,13 @@ ArmoredCarMGWaveforce:
 		InvalidTargets: Air
 	InvalidTargets: wall
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-	Warhead@Smudge: LeaveSmudge
-	Warhead@DuneRock: LeaveSmudge
-	Warhead@DuneSand: LeaveSmudge
-	Warhead@RA2Crater: LeaveSmudge
-	Warhead@EffectWater: CreateEffect
+	Warhead@Smudge:
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
+	Warhead@EffectWater:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 	Warhead@GrenadePercentage: AreaDamagePercentage
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
@@ -4985,7 +6039,7 @@ ArmoredCarMGWaveforce:
 ArmoredCarMGAAWaveforce:
 	Inherits@xArmoredCarMGAAWaveforce0: ^Warhead_Railgun_Heavy
 	Inherits@xArmoredCarMGAAWaveforce1: ^Projectile_Railgun_Heavy
-	Inherits@xArmoredCarMGAAWaveforce2: ^Effect_Railgun_Heavy
+	Inherits@fx_cover: ^Effect_AlliedTigerCannon
 	Inherits@3: ArmoredCarMG_AA
 	Warhead@Railgun_Heavy:
 		ValidTargets: Air
@@ -5030,13 +6084,13 @@ ArmoredCarMGAAWaveforce:
 	Warhead@ChaingunPercentage:
 		ValidTargets: Air
 	InvalidTargets: wall
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-	Warhead@Smudge: LeaveSmudge
-	Warhead@DuneRock: LeaveSmudge
-	Warhead@DuneSand: LeaveSmudge
-	Warhead@RA2Crater: LeaveSmudge
-	Warhead@EffectWater: CreateEffect
+	Warhead@Smudge:
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
+	Warhead@EffectWater:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
 	Warhead@ChaingunPercentage: AreaDamagePercentage

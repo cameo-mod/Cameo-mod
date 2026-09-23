@@ -53,8 +53,6 @@ tkm_juggernaut:
 	Warhead@Bullet_Medium:
 		Damage: 4000
 tkmjuggap:
-	Inherits@finalmain: ^Warhead_CannonAP_Light_Flat
-	Inherits: ^Warhead_Bullet_Light
 	Inherits@xtkmjuggap0: ^Warhead_Demolition_Light
 	Inherits@xtkmjuggap1: ^Projectile_Grenade_Light
 	Inherits@xtkmjuggap2: ^Effect_Bang_Large_RA2
@@ -64,15 +62,62 @@ tkmjuggap:
 	Range: 4792
 	Report: mgun11.aud
 	ValidTargets: Ground, Water
-	-Warhead@Bullet_Light:
 	-Warhead@Demolition_Light:
 	Warhead@CannonAP_Light_Flat:
 		ValidTargets: Ground, Water
 		Damage: 8000
 		PercentageScale: 9988
+	Warhead@CannonAP_Light_Flat: AreaDamage
+	Warhead@CannonAP_Light_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 80
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 92
+			COMPOSITE: 41
+			BLAST: 72
+			REFLECTOR: 75
+			ARMOR: 70
+			Shield: 132
+			Superheavy: 139
+			Concrete: 128
+			Heavy: 127
+			Medium: 123
+			Light: 119
+			Scout: 112
+			Plate: 111
+			Steel: 103
+			Flak: 91
+			Heroic: 90
+			Wood: 83
+			Spaceship: 79
+			Helicopter: 78
+			Bomber: 76
+			None: 74
+			Fighter: 68
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 17
+			Superheavy: 16
+			Heavy: 15
+			Medium: 14
+			Light: 13
+			Scout: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
+			Spaceship: 4
+			Helicopter: 3
+			Bomber: 2
+			Fighter: 1
 tkmbunkmg:
-	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
-	Inherits: ^Warhead_Bullet_Light
 	Inherits@ra2cgWh: ^Warhead_Bullet_Medium
 	Inherits@ra2cgProj: ^Projectile_Bullet_Medium
 	Inherits@ra2cgFx: ^Effect_Bullet_Medium_RA2
@@ -91,6 +136,56 @@ tkmbunkmg:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
+	Warhead@Bullet_Medium_Flat: AreaDamage
+	Warhead@Bullet_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 100
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 99
+			COMPOSITE: 42
+			BLAST: 68
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 150
+			None: 200
+			Flak: 160
+			Plate: 151
+			Scout: 117
+			Light: 108
+			Fighter: 99
+			Wood: 98
+			Bomber: 92
+			Heroic: 89
+			Steel: 85
+			Medium: 84
+			Helicopter: 75
+			Heavy: 67
+			Concrete: 62
+			Spaceship: 57
+			Superheavy: 55
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Steel: 11
+			Medium: 10
+			Helicopter: 9
+			Concrete: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
 HueyGun:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -101,9 +196,9 @@ HueyGun:
 	Report: mgun11.aud
 	Warhead@Bullet_Medium:
 		Damage: 4000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ImpactSounds: xplos.aud
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 		Explosions: ra2_piffs
 		ExplosionPalette: ra2effect
 		ValidTargets: Air
@@ -123,6 +218,56 @@ HueyMissiles:
 tkmtechnicalmgap:
 	Inherits: tkmjuggap
 	ValidTargets: Ground, Water
+	Warhead@CannonAP_Light_Flat: AreaDamage
+	Warhead@CannonAP_Light_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 80
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 92
+			COMPOSITE: 41
+			BLAST: 72
+			REFLECTOR: 75
+			ARMOR: 70
+			Shield: 132
+			Superheavy: 139
+			Concrete: 128
+			Heavy: 127
+			Medium: 123
+			Light: 119
+			Scout: 112
+			Plate: 111
+			Steel: 103
+			Flak: 91
+			Heroic: 90
+			Wood: 83
+			Spaceship: 79
+			Helicopter: 78
+			Bomber: 76
+			None: 74
+			Fighter: 68
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 17
+			Superheavy: 16
+			Heavy: 15
+			Medium: 14
+			Light: 13
+			Scout: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
+			Spaceship: 4
+			Helicopter: 3
+			Bomber: 2
+			Fighter: 1
 tkmtwinrockets:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
@@ -143,7 +288,6 @@ tkmtwinrocketstechnicaltank:
 		VerticalRateOfTurn: 20
 
 tkmfirerockets:
-	Inherits: ^Warhead_MissileAP_Light
 	Inherits@2: ^Warhead_Flame_Light
 	Inherits@3: ^Projectile_Missile_Light
 	Inherits@4: ^Effect_Flame_Light
@@ -198,7 +342,6 @@ tkm_trooper_ak:
 	Warhead@Bullet_Light:
 		Damage: 2000
 tkmakap:
-	Inherits: ^Warhead_Bullet_Light
 	Inherits@xtkmakap0: ^Warhead_Demolition_Light
 	Inherits@xtkmakap1: ^Projectile_Grenade_Light
 	Inherits@xtkmakap2: ^Effect_Bang_Large_RA2
@@ -213,6 +356,57 @@ tkmakap:
 		ValidTargets: Ground, Water
 		Damage: 2000
 	-Warhead@Demolition_Light:
+	Warhead@Bullet_Light: AreaDamage
+	Warhead@Bullet_Light:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 67
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 98
+			COMPOSITE: 43
+			BLAST: 68
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 139
+			None: 200
+			Flak: 159
+			Scout: 151
+			Plate: 127
+			Fighter: 126
+			Wood: 125
+			Light: 110
+			Heroic: 96
+			Bomber: 80
+			Steel: 72
+			Medium: 70
+			Helicopter: 66
+			Heavy: 59
+			Concrete: 57
+			Spaceship: 53
+			Superheavy: 48
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Fighter: 11
+			Wood: 10
+			Light: 9
+			Bomber: 8
+			Steel: 7
+			Medium: 6
+			Helicopter: 5
+			Concrete: 4
+			Heavy: 3
+			Spaceship: 2
+			Superheavy: 1
 tkmkord:
 	Inherits@ra2cgWh: ^Warhead_Bullet_Medium
 	Inherits@ra2cgProj: ^Projectile_Bullet_Medium
@@ -290,7 +484,6 @@ ThermoF:
 	Warhead@Flame_Medium:
 		Damage: 2000
 tkmm203:
-	Inherits: ^Warhead_Demolition_Light
 	Inherits@2: ^Warhead_Flame_Light
 	Inherits@3: ^Projectile_Grenade_Light
 	Inherits@4: ^Effect_Flame_Light
@@ -310,6 +503,58 @@ tkmm203:
 	Warhead@Flame_Light:
 		Damage: 4000
 	-Warhead@Flame_Light:
+	Warhead@Demolition_Light: AreaDamage
+	Warhead@Demolition_Light:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 233
+		Falloff: 100, 45, 18, 6, 0
+		Versus:
+			HAZMAT: 63
+			COMPOSITE: 102
+			BLAST: 41
+			REFLECTOR: 75
+			ARMOR: 70
+			Shield: 143
+			Wood: 200
+			None: 183
+			Steel: 165
+			Flak: 143
+			Concrete: 136
+			Scout: 109
+			Plate: 107
+			Light: 86
+			Fighter: 70
+			Medium: 69
+			Bomber: 62
+			Heroic: 59
+			Heavy: 58
+			Helicopter: 54
+			Superheavy: 51
+			Spaceship: 47
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 17
+			Wood: 16
+			Steel: 15
+			Concrete: 14
+			None: 13
+			Flak: 12
+			Plate: 11
+			Heroic: 10
+			Scout: 9
+			Light: 8
+			Medium: 7
+			Heavy: 6
+			Superheavy: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
 tkmrockets:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
@@ -361,8 +606,6 @@ tkmcryorockets:
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
 TKMQuadCannonAG:
-	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
-	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
@@ -391,6 +634,56 @@ TKMQuadCannonAG:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
+	Warhead@Flak_Medium_Flat: AreaDamage
+	Warhead@Flak_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 110
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Steel: 6
+			Concrete: 5
 TKMQuadCannonAA:
 	Inherits: TKMQuadCannonAG
 	Range: 7880
@@ -398,12 +691,59 @@ TKMQuadCannonAA:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
+	Warhead@Flak_Medium_Flat: AreaDamage
+	Warhead@Flak_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 110
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Steel: 6
+			Concrete: 5
 tkmturretcannon:
-	Inherits@finalmain: ^Warhead_CannonAP_Light_Flat
-	Inherits@wh: ^Warhead_CannonAP_Light
 	Inherits@wh2: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_CannonHE_Medium
 	Inherits@2: ^Effect_Clsn_Medium_RA2
 	ReloadDelay: 28
 	Range: 8683
@@ -422,10 +762,57 @@ tkmturretcannon:
 		PercentageScale: 9994
 		Spread: 300
 		Falloff: 100, 50, 20, 0
+	Warhead@CannonAP_Light_Flat: AreaDamage
+	Warhead@CannonAP_Light_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Versus:
+			HAZMAT: 92
+			COMPOSITE: 41
+			BLAST: 72
+			REFLECTOR: 75
+			ARMOR: 70
+			Shield: 132
+			Superheavy: 139
+			Concrete: 128
+			Heavy: 127
+			Medium: 123
+			Light: 119
+			Scout: 112
+			Plate: 111
+			Steel: 103
+			Flak: 91
+			Heroic: 90
+			Wood: 83
+			Spaceship: 79
+			Helicopter: 78
+			Bomber: 76
+			None: 74
+			Fighter: 68
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 17
+			Superheavy: 16
+			Heavy: 15
+			Medium: 14
+			Light: 13
+			Scout: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
+			Spaceship: 4
+			Helicopter: 3
+			Bomber: 2
+			Fighter: 1
 tkmltgun:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_CannonHE_Medium
 	Inherits@2: ^Effect_Clsn_Medium_RA2
 	ReloadDelay: 42
 	Range: 5316
@@ -437,7 +824,6 @@ tkmltgun:
 tkm2a46gun:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_CannonHE_Medium
 	Inherits@2: ^Effect_Clsn_Medium_RA2
 	ReloadDelay: 42
 	Range: 6196
@@ -447,8 +833,6 @@ tkm2a46gun:
 	Warhead@CannonHE_Medium:
 		Damage: 10000
 TKMZazaCannonAG:
-	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
-	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
@@ -477,6 +861,56 @@ TKMZazaCannonAG:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
+	Warhead@Flak_Medium_Flat: AreaDamage
+	Warhead@Flak_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 110
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Steel: 6
+			Concrete: 5
 TKMZazaCannonAA:
 	Inherits: TKMZazaCannonAG
 	Range: 7926
@@ -484,9 +918,57 @@ TKMZazaCannonAA:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
+	Warhead@Flak_Medium_Flat: AreaDamage
+	Warhead@Flak_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 110
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Steel: 6
+			Concrete: 5
 TKMAATurretCannon:
-	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
-	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
@@ -507,6 +989,56 @@ TKMAATurretCannon:
 		ValidTargets: Air
 		Damage: 4000
 		PercentageScale: 14975
+	Warhead@Flak_Medium_Flat: AreaDamage
+	Warhead@Flak_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 110
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Steel: 6
+			Concrete: 5
 tkmstrykerrockets:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
@@ -569,11 +1101,8 @@ tkmstrykermg:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 t30shell:
-	Inherits@finalmain: ^Warhead_Railgun_Heavy_Flat
-	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@wh2: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
-	Inherits@fx: ^Effect_Railgun_Heavy
 	Inherits@2: ^Effect_Explosion_Large_RA2
 	ReloadDelay: 80
 	Range: 22000
@@ -596,17 +1125,62 @@ t30shell:
 	# 	Amount: 4
 	# 	AimChance: 0
 	# 	AimTargetStances: Enemy, Neutral
-	-Warhead@Demolition_Heavy:
 	-Warhead@Railgun_Heavy:
 	Warhead@Railgun_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 80000
 		Spread: 512
 		PercentageScale: 3000
+	Warhead@Railgun_Heavy_Flat: AreaDamage
+	Warhead@Railgun_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 97
+			COMPOSITE: 41
+			BLAST: 77
+			REFLECTOR: 64
+			ARMOR: 70
+			Shield: 306
+			Superheavy: 200
+			Heavy: 181
+			Medium: 156
+			Light: 123
+			Plate: 97
+			Scout: 94
+			Concrete: 92
+			Spaceship: 88
+			Flak: 83
+			Steel: 80
+			Helicopter: 79
+			Bomber: 73
+			None: 72
+			Wood: 70
+			Fighter: 66
+			Heroic: 46
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heavy: 24
+			Medium: 23
+			Light: 22
+			Scout: 21
+			Heroic: 20
+			Plate: 19
+			Flak: 18
+			None: 17
+			Concrete: 16
+			Steel: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
 HueyCryoMissiles:
-	Inherits@roleflat: ^Warhead_Cryo_Medium_Flat
-	Inherits@wh: ^Warhead_Demolition_Light
-	Inherits@wh2: ^Warhead_MissileAP_Medium
 	Inherits@wh3: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
@@ -639,7 +1213,7 @@ HueyCryoMissiles:
 		Range: 1250
 		ValidRelationships: Enemy, Neutral, Ally
 		ValidTargets: Ground, Water, Air
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: poof
 		ImpactSounds: xplos.aud
 		ValidTargets: Ground, Ship
@@ -651,10 +1225,59 @@ HueyCryoMissiles:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
+	Warhead@Cryo_Medium_Flat: AreaDamage
+	Warhead@Cryo_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 42
+		Falloff: 100, 45, 0
+		Versus:
+			HAZMAT: 66
+			COMPOSITE: 64
+			BLAST: 92
+			REFLECTOR: 59
+			ARMOR: 70
+			Shield: 272
+			Concrete: 153
+			Plate: 151
+			Superheavy: 148
+			Heavy: 122
+			Medium: 112
+			Flak: 105
+			Light: 104
+			Steel: 103
+			Wood: 93
+			Spaceship: 87
+			Scout: 78
+			Heroic: 77
+			None: 75
+			Helicopter: 70
+			Bomber: 69
+			Fighter: 52
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PhysicalStateScale: -200
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Plate: 14
+			Heroic: 14
+			Superheavy: 14
+			Steel: 14
+			Concrete: 14
+			None: 13
+			Flak: 13
+			Medium: 13
+			Heavy: 13
+			Wood: 13
+			Scout: 12
+			Light: 12
+			Spaceship: 11
+			Helicopter: 10
+			Bomber: 8
+			Fighter: 7
 HueyTwinMissiles:
-	Inherits@finalmain: ^Warhead_MissileAP_Medium_Flat
-	Inherits@wh: ^Warhead_Demolition_Light
-	Inherits@wh2: ^Warhead_MissileAP_Medium
 	Inherits@wh3: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
@@ -673,7 +1296,7 @@ HueyTwinMissiles:
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: poof
 		ImpactSounds: xplos.aud
 		ValidTargets: Ground, Ship
@@ -687,14 +1310,62 @@ HueyTwinMissiles:
 		PercentageScale: 9984
 	Projectile: Missile
 		VerticalRateOfTurn: 16
+	Warhead@MissileAP_Medium_Flat: AreaDamage
+	Warhead@MissileAP_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 64
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 95
+			COMPOSITE: 44
+			BLAST: 68
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 145
+			Superheavy: 200
+			Heavy: 177
+			Medium: 161
+			Light: 146
+			Spaceship: 124
+			Helicopter: 123
+			Scout: 114
+			Bomber: 112
+			Concrete: 82
+			Fighter: 75
+			Plate: 64
+			Steel: 55
+			Wood: 53
+			Flak: 44
+			Heroic: 37
+			None: 33
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Superheavy: 20
+			Heavy: 19
+			Medium: 18
+			Light: 17
+			Scout: 16
+			Spaceship: 15
+			Helicopter: 14
+			Bomber: 13
+			Fighter: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
 
 sandmarinemortar:
-	Inherits@finalmain: ^Warhead_Demolition_Heavy_Flat
-	Inherits: ^Warhead_Demolition_Heavy
 	Inherits@2: ^Warhead_Flame_Medium
 	Inherits@3: ^Projectile_Flame_Medium
-	Inherits@4: ^Effect_Flame_Medium
-	Inherits@fx: ^Effect_Explosion_Large_RA2
+	Inherits@fx_cover0: ^Effect_AlliedTigerCannon
+	Inherits@fx_cover1: ^Effect_Flame_Heavy
 	ReloadDelay: 135
 	Range: 6464
 	Report: t30cannon.wav
@@ -721,13 +1392,119 @@ sandmarinemortar:
 		PercentageScale: 10000
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 50
+	Warhead@RA2Scorch:
+	Warhead@GroundFire: SpawnActor
+	Warhead@Effect:
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@GroundFire:
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
+	Warhead@EffectAir:
+	Warhead@Concrete:
+	Warhead@EffectWater:
+	Warhead@Concrete:
+		Damage: 150
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+		Explosions: ra2_large_explosion
+		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
+		ValidTargets: Ground, Ship
+		ExplosionPalette: ra2effect
+	Warhead@EffectAir:
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@EffectWater:
+		Explosions: ra2_large_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@Glow:
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHit:
+		Duration: 8
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+	Warhead@Smudge:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Demolition_Heavy_Flat: AreaDamage
+	Warhead@Demolition_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 466
+		Falloff: 100, 45, 18, 6, 0
+		Versus:
+			HAZMAT: 63
+			COMPOSITE: 101
+			BLAST: 41
+			REFLECTOR: 75
+			ARMOR: 70
+			Shield: 177
+			Wood: 195
+			Steel: 164
+			None: 154
+			Flak: 142
+			Concrete: 136
+			Plate: 124
+			Scout: 81
+			Light: 76
+			Medium: 75
+			Heavy: 74
+			Fighter: 73
+			Superheavy: 72
+			Bomber: 66
+			Helicopter: 59
+			Heroic: 52
+			Spaceship: 51
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Wood: 25
+			Steel: 24
+			Concrete: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
 bigshieemortar:
-	Inherits@finalmain: ^Warhead_Demolition_Heavy_Flat
-	Inherits: ^Warhead_Demolition_Heavy
 	Inherits@2: ^Warhead_Flame_Medium
 	Inherits@3: ^Projectile_Flame_Medium
-	Inherits@4: ^Effect_Flame_Medium
-	Inherits@fx: ^Effect_Explosion_Large_RA2
+	Inherits@fx_cover0: ^Effect_AlliedTigerCannon
+	Inherits@fx_cover1: ^Effect_Flame_Heavy
 	ReloadDelay: 86
 	Range: 7238
 	Report: t30cannon.wav
@@ -754,6 +1531,114 @@ bigshieemortar:
 		PercentageScale: 10000
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 50
+	Warhead@RA2Scorch:
+	Warhead@GroundFire: SpawnActor
+	Warhead@Effect:
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@GroundFire:
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
+	Warhead@EffectAir:
+	Warhead@Concrete:
+	Warhead@EffectWater:
+	Warhead@Concrete:
+		Damage: 150
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+		Explosions: ra2_large_explosion
+		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
+		ValidTargets: Ground, Ship
+		ExplosionPalette: ra2effect
+	Warhead@EffectAir:
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@EffectWater:
+		Explosions: ra2_large_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@Glow:
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHit:
+		Duration: 8
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+	Warhead@Smudge:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Demolition_Heavy_Flat: AreaDamage
+	Warhead@Demolition_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 466
+		Falloff: 100, 45, 18, 6, 0
+		Versus:
+			HAZMAT: 63
+			COMPOSITE: 101
+			BLAST: 41
+			REFLECTOR: 75
+			ARMOR: 70
+			Shield: 177
+			Wood: 195
+			Steel: 164
+			None: 154
+			Flak: 142
+			Concrete: 136
+			Plate: 124
+			Scout: 81
+			Light: 76
+			Medium: 75
+			Heavy: 74
+			Fighter: 73
+			Superheavy: 72
+			Bomber: 66
+			Helicopter: 59
+			Heroic: 52
+			Spaceship: 51
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Wood: 25
+			Steel: 24
+			Concrete: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
 TKMLockOn:
 	ReloadDelay: 20
 	Range: 10000
@@ -783,7 +1668,6 @@ TKMMedicHeal:
 		Damage: -1
 tkmkatyushalalauncherrockets:
 	Inherits@wh: ^Warhead_Concussion_Medium
-	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits@2: ^Effect_Clsn_Medium_RA2
 	ReloadDelay: 157
 	Burst: 8
@@ -806,6 +1690,8 @@ tkmkatyushalalauncherrockets:
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water
 		Damage: 20000
+	Warhead@Effect:
+		ImpactActors: false
 tkmkatyushalalauncherrocketscryo:
 	Inherits@2: tkmkatyushalalauncherrockets
 	Report: vintatta.wav
@@ -824,8 +1710,9 @@ tkmkatyushalalauncherrocketscryo:
 		Range: 200
 		ValidRelationships: Enemy, Neutral, Ally
 		ValidTargets: Ground, Water, Air
+	Warhead@Effect:
+		ImpactActors: false
 tkmkatyushalalauncherrocketsfire:
-	Inherits: ^Warhead_MissileAP_Light
 	Inherits@2: ^Warhead_Flame_Light
 	Inherits@flameeffect: ^Effect_Flame_Light
 	Inherits@3: tkmkatyushalalauncherrockets
@@ -853,11 +1740,12 @@ tkmkatyushalalauncherrocketsfire:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@ShieldHit:
 		InvalidTargets: Air
-	-Warhead@MissileAP_Light:
 	-Warhead@Concussion_Medium:
 tkmkatyushalalauncherrocketstwin:
 	Inherits: tkmkatyushalalauncherrockets
 	Burst: 16
+	Warhead@Effect:
+		ImpactActors: false
 ^SandmarineTuskLegacy:
 	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@wh2: ^Warhead_Concussion_Medium
@@ -876,13 +1764,10 @@ tkmkatyushalalauncherrocketstwin:
 		ValidTargets: Ground, Water
 		Damage: 40000
 SandmarineTusk:
-	Inherits@finalmain: ^Warhead_MissileHE_Heavy_Flat
-	Inherits@xSandmarineTusk0: ^Warhead_MissileHE_Heavy
 	Inherits@xSandmarineTusk1: ^Warhead_Concussion_Medium
 	Inherits@xSandmarineTusk2: ^Projectile_Missile_Heavy
 	Inherits@xSandmarineTusk3: ^Effect_Concussion_Medium
 	-Warhead@Concussion_Medium:
-	-Warhead@MissileHE_Heavy:
 	Warhead@MissileHE_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 80000
@@ -892,9 +1777,57 @@ SandmarineTusk:
 	Burst: 3
 	BurstDelays: 3
 	Report: missile6.aud
+	Warhead@MissileHE_Heavy_Flat: AreaDamage
+	Warhead@MissileHE_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 200
+		Falloff: 100, 45, 15, 0
+		Versus:
+			HAZMAT: 77
+			COMPOSITE: 88
+			BLAST: 45
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 169
+			Scout: 129
+			Wood: 128
+			Light: 126
+			Medium: 118
+			Steel: 116
+			Concrete: 115
+			Heavy: 114
+			Superheavy: 113
+			Fighter: 103
+			Bomber: 95
+			Helicopter: 85
+			None: 79
+			Spaceship: 76
+			Flak: 75
+			Plate: 63
+			Heroic: 62
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Scout: 25
+			Wood: 24
+			Light: 23
+			Steel: 22
+			Medium: 21
+			Concrete: 20
+			Heavy: 19
+			Superheavy: 18
+			Fighter: 17
+			Bomber: 16
+			Helicopter: 15
+			Spaceship: 14
+			None: 13
+			Flak: 12
+			Plate: 11
+			Heroic: 10
 BigShieeTusk:
-	Inherits@finalmain: ^Warhead_MissileHE_Heavy_Flat
-	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_Concussion_Medium
@@ -916,14 +1849,60 @@ BigShieeTusk:
 		ValidTargets: Ground, Water
 		Damage: 80000
 		PercentageScale: 9999
+	Warhead@MissileHE_Heavy_Flat: AreaDamage
+	Warhead@MissileHE_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 200
+		Falloff: 100, 45, 15, 0
+		Versus:
+			HAZMAT: 77
+			COMPOSITE: 88
+			BLAST: 45
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 169
+			Scout: 129
+			Wood: 128
+			Light: 126
+			Medium: 118
+			Steel: 116
+			Concrete: 115
+			Heavy: 114
+			Superheavy: 113
+			Fighter: 103
+			Bomber: 95
+			Helicopter: 85
+			None: 79
+			Spaceship: 76
+			Flak: 75
+			Plate: 63
+			Heroic: 62
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Scout: 25
+			Wood: 24
+			Light: 23
+			Steel: 22
+			Medium: 21
+			Concrete: 20
+			Heavy: 19
+			Superheavy: 18
+			Fighter: 17
+			Bomber: 16
+			Helicopter: 15
+			Spaceship: 14
+			None: 13
+			Flak: 12
+			Plate: 11
+			Heroic: 10
 SandmarineTuskTwin:
-	Inherits@xSandmarineTuskTwin0: ^Warhead_MissileHE_Heavy
-	Inherits@xSandmarineTuskTwin1: ^Warhead_Concussion_Medium
-	Inherits@xSandmarineTuskTwin2: ^Projectile_Missile_Heavy
-	Inherits@xSandmarineTuskTwin3: ^Effect_Concussion_Medium
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_MissileAP_Medium
+	Inherits@fx_cover: ^Effect_AlliedTigerCannon
 	ReloadDelay: 54
 	Burst: 8
 	BurstDelays: 3
@@ -959,11 +1938,62 @@ SandmarineTuskTwin:
 		Damage: 60000
 	-Warhead@FlakWeapon:
 	-Warhead@MissileHE_Heavy:
-	-Warhead@Concussion_Medium:
 	-Warhead@Grenade:
 	-Warhead@Bullet_Medium:
+	Warhead@EffectWater:
+	Warhead@Effect:
+		ImpactActors: false
+	Warhead@EffectWater:
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@Glow:
+	Warhead@Smudge:
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@ShieldHit: GrantExternalCondition
+	Warhead@Concrete:
+	Warhead@ShieldHitEffect:
+	Warhead@RA2Crater:
+	Warhead@Concrete:
+		Damage: 150
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+		Explosions: med_frag
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Water
+	Warhead@EffectAir:
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@Glow:
+		Color: FFB84D
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHit:
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Smudge:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 SandmarineTuskCryo:
 	Inherits@finalmain: ^Warhead_MissileCryo_Heavy
+	Inherits@fx_cover: ^Effect_Cryo
 	Inherits: SandmarineTusk
 	-Warhead@MissileHE_Heavy_Flat:
 	Warhead@MissileCryo_Heavy:
@@ -971,7 +2001,7 @@ SandmarineTuskCryo:
 		Damage: 80000
 		PercentageScale: 9999
 		-PhysicalStates:
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
 	Projectile:
 		TrailImage: blue_smokey
@@ -993,15 +2023,9 @@ SandmarineTuskCryo:
 		ValidRelationships: Enemy, Neutral, Ally
 		ValidTargets: Ground, Water, Air
 SandmarineTuskFire:
-	Inherits@roleflat: ^Warhead_MissileHE_Heavy_Flat
-	Inherits@missileap: ^Warhead_MissileAP_Light
-	Inherits@2: ^Warhead_Flame_Light
-	Inherits@3: ^Projectile_Missile_Light
-	Inherits@4: ^Effect_Flame_Light
-	Inherits@xSandmarineTuskFire0: ^Warhead_MissileHE_Heavy
 	Inherits@xSandmarineTuskFire1: ^Warhead_Concussion_Medium
 	Inherits@xSandmarineTuskFire2: ^Projectile_Missile_Heavy
-	Inherits@xSandmarineTuskFire3: ^Effect_Concussion_Medium
+	Inherits@fx_cover: ^Effect_AlliedTigerCannon
 	Projectile: Missile
 		TrailImage: fb2
 		TrailInterval: 1
@@ -1012,17 +2036,116 @@ SandmarineTuskFire:
 		ValidTargets: Ground, Water, Air
 		Damage: 88000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	-Warhead@MissileHE_Heavy:
 	-Warhead@Concussion_Medium:
 	Warhead@ShieldHit:
 		InvalidTargets: Air
-	-Warhead@MissileHE_Heavy_Flat:
-	-Warhead@MissileAP_Light:
 	ReloadDelay: 129
 	Range: 6464
 	Burst: 3
 	BurstDelays: 3
 	Report: missile6.aud
+	Warhead@RA2Scorch:
+	Warhead@GroundFire: SpawnActor
+	Warhead@GroundFire:
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		Chance: 15
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge:
+		Chance: 15
+	Warhead@Effect:
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@EffectWater:
+	Warhead@Concrete:
+	Warhead@Concrete:
+		Damage: 175
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+		Explosions: poof
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater:
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@Glow:
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@ShieldHit:
+		Duration: 12
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+	Warhead@Smudge:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	-Warhead@EffectAir:
+	-Warhead@RA2Crater:
+	Warhead@RA2Scorch: LeaveSmudge
+	Warhead@Effect:
+		ImpactActors: false
+	Warhead@Flame_Light: AreaDamage
+	Warhead@Flame_Light:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 200
+		Falloff: 100, 90, 78, 60, 0
+		Versus:
+			HAZMAT: 39
+			COMPOSITE: 77
+			BLAST: 66
+			REFLECTOR: 99
+			ARMOR: 70
+			Shield: 208
+			None: 200
+			Wood: 194
+			Flak: 165
+			Steel: 164
+			Scout: 117
+			Plate: 107
+			Concrete: 92
+			Light: 84
+			Fighter: 72
+			Medium: 69
+			Heroic: 63
+			Heavy: 61
+			Bomber: 59
+			Superheavy: 55
+			Helicopter: 52
+			Spaceship: 46
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 17
+			None: 16
+			Wood: 15
+			Flak: 14
+			Steel: 13
+			Plate: 12
+			Concrete: 11
+			Heroic: 10
+			Scout: 9
+			Light: 8
+			Medium: 7
+			Heavy: 6
+			Superheavy: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
 ^ViperMissilesLegacy:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Concussion_Medium
@@ -1054,13 +2177,9 @@ SandmarineTuskFire:
 		Damage: 16000
 		ValidTargets: Ground, Water, Air
 ViperMissiles:
-	Inherits@finalmain: ^Warhead_MissileAP_Medium_Flat
-	Inherits@xViperMissiles0: ^Warhead_Concussion_Medium
-	Inherits@xViperMissiles1: ^Effect_Concussion_Medium
 	Inherits@xViperMissiles2: ^Warhead_MissileAP_Medium
 	Inherits@xViperMissiles3: ^Projectile_Missile_Medium
 	Inherits@xViperMissiles4: ^Effect_Clsn_Medium_RA2
-	-Warhead@Concussion_Medium:
 	-Warhead@MissileAP_Medium:
 	Warhead@MissileAP_Medium_Flat:
 		ValidTargets: Ground, Water, Air
@@ -1087,6 +2206,58 @@ ViperMissiles:
 		TrailImage: large_trail
 		MinimumLaunchAngle: 200
 		MaximumLaunchAngle: 200
+	Warhead@Effect:
+		ImpactActors: false
+	Warhead@MissileAP_Medium_Flat: AreaDamage
+	Warhead@MissileAP_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 64
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 95
+			COMPOSITE: 44
+			BLAST: 68
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 145
+			Superheavy: 200
+			Heavy: 177
+			Medium: 161
+			Light: 146
+			Spaceship: 124
+			Helicopter: 123
+			Scout: 114
+			Bomber: 112
+			Concrete: 82
+			Fighter: 75
+			Plate: 64
+			Steel: 55
+			Wood: 53
+			Flak: 44
+			Heroic: 37
+			None: 33
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Superheavy: 20
+			Heavy: 19
+			Medium: 18
+			Light: 17
+			Scout: 16
+			Spaceship: 15
+			Helicopter: 14
+			Bomber: 13
+			Fighter: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
 ViperMissilesTwin:
 	Inherits: ViperMissiles
 	Burst: 8
@@ -1094,6 +2265,56 @@ ViperMissilesTwin:
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
 		PercentageScale: 9997
+	Warhead@MissileAP_Medium_Flat: AreaDamage
+	Warhead@MissileAP_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 64
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 95
+			COMPOSITE: 44
+			BLAST: 68
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 145
+			Superheavy: 200
+			Heavy: 177
+			Medium: 161
+			Light: 146
+			Spaceship: 124
+			Helicopter: 123
+			Scout: 114
+			Bomber: 112
+			Concrete: 82
+			Fighter: 75
+			Plate: 64
+			Steel: 55
+			Wood: 53
+			Flak: 44
+			Heroic: 37
+			None: 33
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Superheavy: 20
+			Heavy: 19
+			Medium: 18
+			Light: 17
+			Scout: 16
+			Spaceship: 15
+			Helicopter: 14
+			Bomber: 13
+			Fighter: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
 ViperMissilesCryo:
 	Inherits: ViperMissiles
 	Warhead@MissileAP_Medium_Flat:
@@ -1120,16 +2341,60 @@ ViperMissilesCryo:
 		Range: 200
 		ValidRelationships: Enemy, Neutral, Ally
 		ValidTargets: Ground, Water, Air
+	Warhead@MissileAP_Medium_Flat: AreaDamage
+	Warhead@MissileAP_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 64
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 95
+			COMPOSITE: 44
+			BLAST: 68
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 145
+			Superheavy: 200
+			Heavy: 177
+			Medium: 161
+			Light: 146
+			Spaceship: 124
+			Helicopter: 123
+			Scout: 114
+			Bomber: 112
+			Concrete: 82
+			Fighter: 75
+			Plate: 64
+			Steel: 55
+			Wood: 53
+			Flak: 44
+			Heroic: 37
+			None: 33
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Superheavy: 20
+			Heavy: 19
+			Medium: 18
+			Light: 17
+			Scout: 16
+			Spaceship: 15
+			Helicopter: 14
+			Bomber: 13
+			Fighter: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
 ViperMissilesFire:
-	Inherits@missileap: ^Warhead_MissileAP_Light
-	Inherits@2: ^Warhead_Flame_Light
-	Inherits@3: ^Projectile_Missile_Light
-	Inherits@4: ^Effect_Flame_Light
-	Inherits@xViperMissilesFire0: ^Warhead_Concussion_Medium
-	Inherits@xViperMissilesFire1: ^Effect_Concussion_Medium
 	Inherits@xViperMissilesFire2: ^Warhead_MissileAP_Medium
 	Inherits@xViperMissilesFire3: ^Projectile_Missile_Medium
-	Inherits@xViperMissilesFire4: ^Effect_Clsn_Medium_RA2
+	Inherits@fx_cover: ^Effect_AlliedTigerCannon
 	Projectile: Missile
 		TrailImage: fb2
 		TrailInterval: 1
@@ -1139,8 +2404,6 @@ ViperMissilesFire:
 		ValidTargets: Ground, Water, Air
 		Damage: 40000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	-Warhead@MissileAP_Light:
-	-Warhead@Concussion_Medium:
 	-Warhead@MissileAP_Medium:
 	ReloadDelay: 50
 	Range: 6271
@@ -1162,6 +2425,118 @@ ViperMissilesFire:
 		Palette: d2keffect
 		MinimumLaunchAngle: 200
 		MaximumLaunchAngle: 200
+	Warhead@RA2Scorch:
+	Warhead@GroundFire: SpawnActor
+	Warhead@Effect:
+		ImpactActors: false
+	Warhead@GroundFire:
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		Chance: 15
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge:
+		Chance: 15
+	Warhead@Effect:
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@EffectWater:
+	Warhead@Concrete:
+	Warhead@RA2Crater:
+	Warhead@EffectAir:
+	Warhead@Concrete:
+		Damage: 150
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+		Explosions: ra2_medium_clsn
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+		ExplosionPalette: ra2effect
+	Warhead@EffectAir:
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@EffectWater:
+		Explosions: ra2_small_watersplash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+		ExplosionPalette: ra2effect
+	Warhead@Glow:
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+	Warhead@Smudge:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Scorch: LeaveSmudge
+	Warhead@ShieldHit:
+		Duration: 10
+	Warhead@Flame_Light: AreaDamage
+	Warhead@Flame_Light:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 200
+		Falloff: 100, 90, 78, 60, 0
+		Versus:
+			HAZMAT: 39
+			COMPOSITE: 77
+			BLAST: 66
+			REFLECTOR: 99
+			ARMOR: 70
+			Shield: 208
+			None: 200
+			Wood: 194
+			Flak: 165
+			Steel: 164
+			Scout: 117
+			Plate: 107
+			Concrete: 92
+			Light: 84
+			Fighter: 72
+			Medium: 69
+			Heroic: 63
+			Heavy: 61
+			Bomber: 59
+			Superheavy: 55
+			Helicopter: 52
+			Spaceship: 46
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 17
+			None: 16
+			Wood: 15
+			Flak: 14
+			Steel: 13
+			Plate: 12
+			Concrete: 11
+			Heroic: 10
+			Scout: 9
+			Light: 8
+			Medium: 7
+			Heavy: 6
+			Superheavy: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
 DronePodTruckLaser:
 	ReloadDelay: 5
 	ValidTargets: Ground, Water
@@ -1504,7 +2879,6 @@ tkm_trooper_gp25:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 50
 tkmstrykerfirerockets:
-	Inherits: ^Warhead_MissileAP_Medium
 	Inherits@2: ^Warhead_Flame_Medium
 	Inherits@3: ^Projectile_Missile_Medium
 	Inherits@4: ^Effect_Flame_Medium
@@ -1546,7 +2920,6 @@ VanSniper:
 tkmt72cannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_CannonHE_Medium
 	Inherits@2: ^Effect_Clsn_Medium_RA2
 	ReloadDelay: 76
 	Range: 5469
@@ -1561,7 +2934,6 @@ tkmt72cannon:
 tkmabramscannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_CannonHE_Medium
 	Inherits@2: ^Effect_Clsn_Medium_RA2
 	ReloadDelay: 76
 	Range: 5469
@@ -1574,8 +2946,6 @@ tkmabramscannon:
 		PercentageScale: 5000
 		Damage: 20000
 tkmquadcannonmg:
-	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
-	Inherits: ^Warhead_Bullet_Light
 	Inherits@ra2cgWh: ^Warhead_Bullet_Medium
 	Inherits@ra2cgProj: ^Projectile_Bullet_Medium
 	Inherits@ra2cgFx: ^Effect_Bullet_Medium_RA2
@@ -1595,14 +2965,64 @@ tkmquadcannonmg:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
+	Warhead@Bullet_Medium_Flat: AreaDamage
+	Warhead@Bullet_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 100
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 99
+			COMPOSITE: 42
+			BLAST: 68
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 150
+			None: 200
+			Flak: 160
+			Plate: 151
+			Scout: 117
+			Light: 108
+			Fighter: 99
+			Wood: 98
+			Bomber: 92
+			Heroic: 89
+			Steel: 85
+			Medium: 84
+			Helicopter: 75
+			Heavy: 67
+			Concrete: 62
+			Spaceship: 57
+			Superheavy: 55
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Steel: 11
+			Medium: 10
+			Helicopter: 9
+			Concrete: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
 HeavyAATankCannontkm:
 	Inherits@collapsewh: ^Warhead_Flak_Heavy
+	Inherits@fx_cover: ^Effect_AlliedTigerCannon
 	-TargetActorCenter:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 10
@@ -1615,17 +3035,17 @@ HeavyAATankCannontkm:
 		PercentageScale: 0
 	Projectile: Bullet
 	Warhead@LightMissilePercentage: AreaDamagePercentage
-	Warhead@Smudge: LeaveSmudge
-	Warhead@DuneRock: LeaveSmudge
-	Warhead@RA2Crater: LeaveSmudge
-	Warhead@DuneSand: LeaveSmudge
-	Warhead@Effect: CreateEffect
-	Warhead@EffectAir: CreateEffect
+	Warhead@Smudge:
+	Warhead@DuneRock:
+	Warhead@RA2Crater:
+	Warhead@DuneSand:
+	Warhead@Effect:
+	Warhead@EffectAir:
 	Warhead@ShieldHit: GrantExternalCondition
-	Warhead@Concrete: DamagesConcrete
-	Warhead@ShieldHitEffect: CreateEffect
+	Warhead@Concrete:
+	Warhead@ShieldHitEffect:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
-	Warhead@EffectWater: CreateEffect
+	Warhead@EffectWater:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 	Projectile:
@@ -1784,9 +3204,13 @@ HeavyAATankCannontkm:
 	Warhead@Smudge:
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	-Warhead@Glow:
+	Warhead@EffectWater:
+		-ImpactSounds:
 
 tkmheavyaaturret:
 	Inherits@collapsewh: ^Warhead_Bullet_Medium
+	Inherits@fx_cover: ^Effect_AlliedTigerCannon
 	ValidTargets: Ground, Water, Air
 	-TargetActorCenter:
 	ReloadDelay: 10
@@ -1799,17 +3223,17 @@ tkmheavyaaturret:
 		PercentageScale: 0
 	Projectile: Bullet
 	Warhead@LightMissilePercentage: AreaDamagePercentage
-	Warhead@Smudge: LeaveSmudge
-	Warhead@DuneRock: LeaveSmudge
-	Warhead@RA2Crater: LeaveSmudge
-	Warhead@DuneSand: LeaveSmudge
-	Warhead@Effect: CreateEffect
-	Warhead@EffectAir: CreateEffect
+	Warhead@Smudge:
+	Warhead@DuneRock:
+	Warhead@RA2Crater:
+	Warhead@DuneSand:
+	Warhead@Effect:
+	Warhead@EffectAir:
 	Warhead@ShieldHit: GrantExternalCondition
-	Warhead@Concrete: DamagesConcrete
-	Warhead@ShieldHitEffect: CreateEffect
+	Warhead@Concrete:
+	Warhead@ShieldHitEffect:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
-	Warhead@EffectWater: CreateEffect
+	Warhead@EffectWater:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 	Projectile:
@@ -1968,11 +3392,13 @@ tkmheavyaaturret:
 	Warhead@Smudge:
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	-Warhead@Glow:
+	Warhead@EffectWater:
+		-ImpactSounds:
 
 tkmrh120gun:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_CannonHE_Medium
 	Inherits@2: ^Effect_Clsn_Medium_RA2
 	ReloadDelay: 46
 	Range: 5672
@@ -1982,11 +3408,8 @@ tkmrh120gun:
 	Warhead@CannonHE_Medium:
 		Damage: 12000
 tkmtrenchcannon:
-	Inherits@finalmain: ^Warhead_CannonHE_Heavy_Flat
-	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@wh2: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
-	Inherits@fx: ^Effect_CannonHE_Heavy
 	Inherits@2: ^Effect_Clsn_Medium_RA2
 	ReloadDelay: 75
 	Range: 9237
@@ -2003,6 +3426,56 @@ tkmtrenchcannon:
 		ValidTargets: Ground, Water
 		Damage: 40000
 		PercentageScale: 9998
+	Warhead@CannonHE_Heavy_Flat: AreaDamage
+	Warhead@CannonHE_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 400
+		Falloff: 100, 50, 20, 0
+		Versus:
+			HAZMAT: 71
+			COMPOSITE: 99
+			BLAST: 40
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 168
+			Wood: 136
+			Scout: 130
+			None: 121
+			Light: 120
+			Steel: 116
+			Medium: 114
+			Heavy: 107
+			Superheavy: 106
+			Concrete: 105
+			Flak: 102
+			Plate: 85
+			Heroic: 81
+			Fighter: 76
+			Bomber: 69
+			Helicopter: 67
+			Spaceship: 65
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Scout: 25
+			Wood: 24
+			Light: 23
+			Steel: 22
+			Medium: 21
+			Concrete: 20
+			Heavy: 19
+			Superheavy: 18
+			None: 17
+			Flak: 16
+			Plate: 15
+			Heroic: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
 tkmtrenchdepcannon:
 	Inherits: tkmtrenchcannon
 	ReloadDelay: 36
@@ -2011,6 +3484,56 @@ tkmtrenchdepcannon:
 		ValidTargets: Ground, Water
 		Damage: 40000
 		PercentageScale: 9998
+	Warhead@CannonHE_Heavy_Flat: AreaDamage
+	Warhead@CannonHE_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 400
+		Falloff: 100, 50, 20, 0
+		Versus:
+			HAZMAT: 71
+			COMPOSITE: 99
+			BLAST: 40
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 168
+			Wood: 136
+			Scout: 130
+			None: 121
+			Light: 120
+			Steel: 116
+			Medium: 114
+			Heavy: 107
+			Superheavy: 106
+			Concrete: 105
+			Flak: 102
+			Plate: 85
+			Heroic: 81
+			Fighter: 76
+			Bomber: 69
+			Helicopter: 67
+			Spaceship: 65
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Scout: 25
+			Wood: 24
+			Light: 23
+			Steel: 22
+			Medium: 21
+			Concrete: 20
+			Heavy: 19
+			Superheavy: 18
+			None: 17
+			Flak: 16
+			Plate: 15
+			Heroic: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
 
 TKMPDLaser:
 	Inherits: PDLaser

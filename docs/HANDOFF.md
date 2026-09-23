@@ -1608,6 +1608,19 @@ is now **27** (26 RA-family still in Nova review + `DRPlasmaTankWeapon` (Claude)
 the `tesla_bomb` verbatim exception). **2026-09-23: now 25** — #439 (NOVA batch-1)
 landed; PR #452 (NOVA batch-2) folds the RA2Mod set, leaving `DRPlasmaTankWeapon`.
 
+W23-RA status (2026-09-23, Nova, `devin/nova/w23-ra`, PR #472): all 16 owned
+RA-family weapon files retrofitted to the 3-way split across 16 boot-gated
+batches, then a same-day correction round fixed the audit regressions the
+first pass introduced. Final state: repo-wide resolved diff vs master = **0
+drifted weapons** (2149 scanned); `audit_weapon_shape` improves on master on
+every axis (W1 289/506, W2 122/281, W3 7/12, W4 42/50, W6 675/692, W8 361/672;
+W7 963 = master, stale ratchet); orphans 0, empty warheads 0, blocking
+dup-inherits 0; boot-gate PASS. Held edges awaiting Claude's ExtraDamage
+ruling: Tesla/Laser/Railgun/ChargedTesla + `^LegacyLaserChipCompatibility`,
+plus support keeps (`^SniperWeapon`, `^HealingWeapon`, `^RepairWeapon`,
+`^DogJaw`, `^NaxOxidationShells`). Correction-round lessons in
+`docs/LESSONS_LEARNED.md` ("W23-RA correction round").
+
 ### ✅ CLOSED — THE ANTI-AIR CONVENTION. Ruled by the maintainer 2026-09-08.
 
 **The law is now in `docs/DESIGN.md` ("The AA range law", which REPLACES the dual-weapon AA law of

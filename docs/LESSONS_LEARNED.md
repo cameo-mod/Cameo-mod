@@ -2244,3 +2244,44 @@ Word boundaries fix only the first. ⭐ **Every signal has a measured source: de
 weapon's `Projectile:`, element from `DamageTypes:`, platform from the actors that actually fire
 it.** Where no measurement exists, the assignment is a maintainer decision made from the compressed
 groups — never a regex over identifiers (`REFERENCE_EXTRACTION_PLAN.md` R21).
+
+## W23-RA correction round (2026-09-23, Nova) — four traps that each cost a re-pass
+
+**1. A covering `^Effect_*` edge on parent AND child is a boot crash, not a style issue.**
+When a follow-up pass adds `Inherits@fx_cover: ^Effect_X` to cover local typed
+`Warhead@` declares, check every WEAPON ancestor first: if `Parent` already
+carries (or will receive) the same `^Effect_X`, adding it to `Child` puts the
+name twice on one root-to-ancestor path — `MiniYaml.cs` throws
+"Parent type X was already inherited" at boot. `audit_duplicate_inherits.py`
+BLOCKING section reports exactly this class (not the advisory diamond section).
+Fix = drop the child's own edge; the template still reaches via the parent and
+resolution is unchanged (verified by resolved diff). ~40 W23-RA weapons needed it.
+
+**2. `^` template blocks are cross-file providers — weapon-level passes must never touch them.**
+Two separate "sweep" tools (a duplicate-warhead-edge collapse and an
+orphan-cancel remover) treated `^` blocks like concrete weapons and stripped
+their `Inherits` lines. Those templates are consumed by weapons in OTHER files
+(`GLDemolitionExplode` in the central `weapons.yaml` consumes
+`^RA2TerroristLegacy` from a ContentPack file) — the breakage surfaced as
+EMPTY-TYPE warheads in files the pass never touched. The only safe rule:
+a `^` block must stay byte-identical to HEAD unless the pass is *about* that
+template. Verify by restoring every `^` block to its `git show HEAD:` content
+and re-running the repo-wide resolved diff.
+
+**3. Git Bash `/tmp` is NOT `C:\tmp` — Python resolves it to the drive root.**
+`open('/tmp/orphans.txt')` from Python reads `C:\tmp\orphans.txt`; bash's
+`/tmp` is the user temp dir. A stale `C:\tmp\orphans.txt` from another
+worktree's session redirected a line-number-based deletion tool into that
+worktree's files. It happened to delete exactly the orphan cancels that
+worktree's own audit had flagged (positions still valid), but the hazard is
+real: **always pass `cygpath -w` paths into Python tools, and before a
+line-number deletion verify each target line actually contains the expected
+pattern** (e.g. starts with `-` for cancels). Refuse otherwise.
+
+**4. `W7_BASELINE` in `audit_weapon_shape.py` is stale on master.**
+Both master and this branch report 963 vs the hardcoded 957 — the +6 is
+fleet-wide weapon-inherit debt that landed after the ratchet was set, not a
+regression in any one branch. When a ratchet fails, first re-run the audit in
+a clean master worktree with master's own script copy (`find_repo_root`
+resolves from the script's path, NOT the cwd — running another tree's script
+silently scans the wrong tree).

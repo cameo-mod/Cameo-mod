@@ -45,8 +45,6 @@ ra1_allies_ranger_machinegun_cryo:
 		Damage: 3137
 
 ra1_allies_alliedgunturret_cannon:
-	Inherits@finalmain: ^Warhead_CannonHE_Heavy_Flat
-	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@wh2: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_CannonHE_Heavy
@@ -67,6 +65,56 @@ ra1_allies_alliedgunturret_cannon:
 		ValidTargets: Ground, Water
 		Damage: 20000
 		PercentageScale: 9995
+	Warhead@CannonHE_Heavy_Flat: AreaDamage
+	Warhead@CannonHE_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 400
+		Falloff: 100, 50, 20, 0
+		Versus:
+			HAZMAT: 71
+			COMPOSITE: 99
+			BLAST: 40
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 168
+			Wood: 136
+			Scout: 130
+			None: 121
+			Light: 120
+			Steel: 116
+			Medium: 114
+			Heavy: 107
+			Superheavy: 106
+			Concrete: 105
+			Flak: 102
+			Plate: 85
+			Heroic: 81
+			Fighter: 76
+			Bomber: 69
+			Helicopter: 67
+			Spaceship: 65
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Scout: 25
+			Wood: 24
+			Light: 23
+			Steel: 22
+			Medium: 21
+			Concrete: 20
+			Heavy: 19
+			Superheavy: 18
+			None: 17
+			Flak: 16
+			Plate: 15
+			Heroic: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
 
 ra1_allies_alliedaagun_flak:
 	Inherits@wh: ^Warhead_Flak_Medium
@@ -99,7 +147,6 @@ ra1_allies_alliedaagun_flak_cryo:
 		Damage: 4000
 
 ra1_allies_longbow_missile:
-	Inherits@missilerole: ^Warhead_MissileAP_Heavy
 	Inherits@finalmain: ^Warhead_MissileHE_Heavy_Flat
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileHE_Heavy
@@ -128,9 +175,53 @@ ra1_allies_longbow_missile:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 9994
 		PercentageSpread: 50
+	TargetActorCenter: true
+	Warhead@MissileAP_Heavy:
+		Spread: 85
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 95
+			COMPOSITE: 45
+			BLAST: 68
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 161
+			Superheavy: 160
+			Spaceship: 146
+			Heavy: 142
+			Medium: 126
+			Helicopter: 115
+			Light: 112
+			Concrete: 105
+			Scout: 99
+			Bomber: 98
+			Plate: 91
+			Steel: 82
+			Fighter: 75
+			Flak: 73
+			Wood: 66
+			Heroic: 57
+			None: 54
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heavy: 24
+			Medium: 23
+			Light: 22
+			Scout: 21
+			Spaceship: 20
+			Helicopter: 19
+			Bomber: 18
+			Fighter: 17
+			Concrete: 16
+			Steel: 15
+			Wood: 14
+			Heroic: 13
+			Plate: 12
+			Flak: 11
+			None: 10
 
 ra1_allies_longbow_missile_cryo:
-	Inherits@wh: ^Warhead_BlastCryo_Medium
 	Inherits@wh2: ^Warhead_MissileCryo_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_Cryo
@@ -149,6 +240,59 @@ ra1_allies_longbow_missile_cryo:
 
 	Projectile: Missile
 		VerticalRateOfTurn: 12
+	Warhead@BlastCryo_Medium: AreaDamage
+	Warhead@BlastCryo_Medium:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 105
+		Falloff: 100, 72, 50, 32, 19, 9, 0
+		Versus:
+			HAZMAT: 64
+			COMPOSITE: 93
+			BLAST: 59
+			REFLECTOR: 65
+			ARMOR: 70
+			Shield: 185
+			Wood: 179
+			None: 166
+			Scout: 122
+			Steel: 120
+			Concrete: 116
+			Flak: 112
+			Light: 104
+			Plate: 103
+			Medium: 94
+			Heavy: 89
+			Superheavy: 75
+			Fighter: 71
+			Heroic: 70
+			Bomber: 69
+			Helicopter: 56
+			Spaceship: 52
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Temperature: -67
+		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Wood: 17
+			None: 16
+			Steel: 16
+			Flak: 15
+			Scout: 15
+			Plate: 14
+			Concrete: 14
+			Light: 13
+			Heroic: 12
+			Medium: 12
+			Heavy: 11
+			Superheavy: 10
+			Fighter: 7
+			Bomber: 7
+			Helicopter: 7
+			Spaceship: 7
 
 ra1_allies_blackhawk_chaingun:
 	Inherits@wh: ^Warhead_Bullet_Medium
@@ -213,7 +357,6 @@ AlliedTankDestroyerCannonCryo:
 		Damage: 24000
 		ValidTargets: Ground, Water
 ra1_allies_sheridanassaulttank_cannon:
-	Inherits@wh: ^Warhead_CannonAP_Light
 	Inherits@wh2: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonHE_Medium
@@ -227,6 +370,57 @@ ra1_allies_sheridanassaulttank_cannon:
 		PercentageScale: 10000
 		Damage: 4000
 	-Warhead@CannonHE_Medium:
+	Warhead@CannonAP_Light: AreaDamage
+	Warhead@CannonAP_Light:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 80
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 92
+			COMPOSITE: 41
+			BLAST: 72
+			REFLECTOR: 75
+			ARMOR: 70
+			Shield: 132
+			Superheavy: 139
+			Concrete: 128
+			Heavy: 127
+			Medium: 123
+			Light: 119
+			Scout: 112
+			Plate: 111
+			Steel: 103
+			Flak: 91
+			Heroic: 90
+			Wood: 83
+			Spaceship: 79
+			Helicopter: 78
+			Bomber: 76
+			None: 74
+			Fighter: 68
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 17
+			Superheavy: 16
+			Heavy: 15
+			Medium: 14
+			Light: 13
+			Scout: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
+			Spaceship: 4
+			Helicopter: 3
+			Bomber: 2
+			Fighter: 1
 ra1_allies_sheridanassaulttank_cannon_cryo:
 	Inherits@wh: ^Warhead_CannonCryo_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
@@ -279,8 +473,6 @@ ra1_allies_sheridanassaulttank_missile_cryo:
 		VerticalRateOfTurn: 20
 
 ra1_allies_sheridanassaulttank_chaingun:
-	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
-	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
@@ -292,13 +484,62 @@ ra1_allies_sheridanassaulttank_chaingun:
 	ValidTargets: Ground, Water, Air
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	Warhead@Bullet_Medium_Flat:
 		PercentageDenominator: 10000
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
 		PercentageScale: 9975
+	Warhead@Bullet_Medium_Flat: AreaDamage
+	Warhead@Bullet_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 100
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 99
+			COMPOSITE: 42
+			BLAST: 68
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 150
+			None: 200
+			Flak: 160
+			Plate: 151
+			Scout: 117
+			Light: 108
+			Fighter: 99
+			Wood: 98
+			Bomber: 92
+			Heroic: 89
+			Steel: 85
+			Medium: 84
+			Helicopter: 75
+			Heavy: 67
+			Concrete: 62
+			Spaceship: 57
+			Superheavy: 55
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Steel: 11
+			Medium: 10
+			Helicopter: 9
+			Concrete: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
 ra1_allies_sheridanassaulttank_chaingun_cryo:
 	Inherits@wh: ^Warhead_BulletCryo_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -352,7 +593,6 @@ ra1_allies_rapierjumpjet_bomb_cryo:
 		Explosions: cryo_artillery
 
 ra1_allies_rapierjumpjet_missile_AA:
-	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@wh2: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileAP_Heavy
@@ -382,9 +622,58 @@ ra1_allies_rapierjumpjet_missile_AA:
 		Explosions: small_building
 		ImpactSounds: xplobig4.aud
 	-Warhead@MissileAP_Heavy:
+	Warhead@Concussion_Medium: AreaDamage
+	Warhead@Concussion_Medium:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 350
+		Falloff: 100, 72, 50, 32, 18, 8, 0
+		Versus:
+			HAZMAT: 68
+			COMPOSITE: 107
+			BLAST: 36
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 159
+			None: 151
+			Wood: 148
+			Scout: 144
+			Light: 126
+			Medium: 109
+			Flak: 107
+			Heavy: 106
+			Steel: 105
+			Plate: 92
+			Concrete: 90
+			Heroic: 88
+			Superheavy: 82
+			Fighter: 72
+			Bomber: 67
+			Helicopter: 66
+			Spaceship: 46
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Scout: 20
+			None: 19
+			Wood: 18
+			Light: 17
+			Flak: 16
+			Steel: 15
+			Medium: 14
+			Plate: 13
+			Concrete: 12
+			Heavy: 11
+			Heroic: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
 
 ra1_allies_rapierjumpjet_missile_cryo_AA:
-	Inherits@wh: ^Warhead_BlastCryo_Medium
 	Inherits@wh2: ^Warhead_MissileCryo_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_Cryo
@@ -411,9 +700,60 @@ ra1_allies_rapierjumpjet_missile_cryo_AA:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	-Warhead@MissileCryo_Heavy:
+	Warhead@BlastCryo_Medium: AreaDamage
+	Warhead@BlastCryo_Medium:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 105
+		Falloff: 100, 72, 50, 32, 19, 9, 0
+		Versus:
+			HAZMAT: 64
+			COMPOSITE: 93
+			BLAST: 59
+			REFLECTOR: 65
+			ARMOR: 70
+			Shield: 185
+			Wood: 179
+			None: 166
+			Scout: 122
+			Steel: 120
+			Concrete: 116
+			Flak: 112
+			Light: 104
+			Plate: 103
+			Medium: 94
+			Heavy: 89
+			Superheavy: 75
+			Fighter: 71
+			Heroic: 70
+			Bomber: 69
+			Helicopter: 56
+			Spaceship: 52
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Temperature: -67
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Wood: 17
+			None: 16
+			Steel: 16
+			Flak: 15
+			Scout: 15
+			Plate: 14
+			Concrete: 14
+			Light: 13
+			Heroic: 12
+			Medium: 12
+			Heavy: 11
+			Superheavy: 10
+			Fighter: 7
+			Bomber: 7
+			Helicopter: 7
+			Spaceship: 7
 
 ra1_allies_reconranger_recoillessgun:
-	Inherits@collapseflat: ^Warhead_MissileAP_Heavy_Flat
 	Inherits@6: ^RailgunWeapon
 	Inherits@xra1_allies_reconranger_recoillessgun0: ^Warhead_MissileAP_Heavy
 	Inherits@xra1_allies_reconranger_recoillessgun1: ^Projectile_Missile_Heavy_D2K_Rocket
@@ -463,7 +803,6 @@ ra1_allies_reconranger_recoillessgun:
 
 	-Warhead@RailgunWeapon:
 	-Warhead@RailgunExtraDamage:
-	-Warhead@MissileAP_Heavy_Flat:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 	Warhead@DuneRock: LeaveSmudge
 	Warhead@DuneSand: LeaveSmudge
@@ -650,6 +989,7 @@ ra1_allies_reconranger_recoillessgun:
 		UpdatesUnitStatistics: false
 ra1_allies_reconranger_recoillessgun_cryo:
 	Inherits: ra1_allies_reconranger_recoillessgun
+	Inherits@fx_cover: ^Effect_Watersplash_Huge_RA2
 	Projectile: Bullet
 		TrailImage: blue_smokey
 		TrailInterval: 0
@@ -661,14 +1001,14 @@ ra1_allies_reconranger_recoillessgun_cryo:
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
 		Amount: -32000
 	Warhead@GrenadePercentage: AreaDamagePercentage
-	Warhead@DuneRock: LeaveSmudge
-	Warhead@DuneSand: LeaveSmudge
-	Warhead@EffectWater: CreateEffect
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@EffectWater:
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-	Warhead@RA2Crater: LeaveSmudge
+	Warhead@RA2Crater:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 	Projectile:
 		ContrailZOffset: 4000
@@ -848,9 +1188,16 @@ ra1_allies_reconranger_recoillessgun_cryo:
 			Fighter: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
+	Warhead@EffectWater:
+		-ExplosionPalette:
+	Warhead@Concrete:
+		Damage: 240
+	Warhead@Smudge:
+		SmudgeType: SandCrater, RockCrater
 
 ra1_allies_phasetransport_missile:
 	Inherits@collapsewh: ^Warhead_MissileAP_Heavy
+	Inherits@fx_cover: ^Effect_AlliedTigerCannon
 	ReloadDelay: 51
 	Burst: 4
 	BurstDelays: 3
@@ -864,17 +1211,17 @@ ra1_allies_phasetransport_missile:
 	Projectile: Missile
 		VerticalRateOfTurn: 16
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-	Warhead@Smudge: LeaveSmudge
-	Warhead@DuneRock: LeaveSmudge
-	Warhead@DuneSand: LeaveSmudge
-	Warhead@RA2Crater: LeaveSmudge
-	Warhead@Effect: CreateEffect
-	Warhead@EffectWater: CreateEffect
-	Warhead@EffectAir: CreateEffect
-	Warhead@Glow: GlowImpact
+	Warhead@Smudge:
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
+	Warhead@Effect:
+	Warhead@EffectWater:
+	Warhead@EffectAir:
+	Warhead@Glow:
 	Warhead@ShieldHit: GrantExternalCondition
-	Warhead@Concrete: DamagesConcrete
-	Warhead@ShieldHitEffect: CreateEffect
+	Warhead@Concrete:
+	Warhead@ShieldHitEffect:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
@@ -1044,6 +1391,7 @@ ra1_allies_phasetransport_missile:
 
 ra1_allies_phasetransport_missile_cryo:
 	Inherits: ra1_allies_phasetransport_missile
+	Inherits@fx_cover: ^Effect_AlliedTigerCannon
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
 		Amount: -16000
 		Range: 300
@@ -1051,17 +1399,17 @@ ra1_allies_phasetransport_missile_cryo:
 	Projectile: Missile
 		VerticalRateOfTurn: 16
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-	Warhead@Smudge: LeaveSmudge
-	Warhead@DuneRock: LeaveSmudge
-	Warhead@DuneSand: LeaveSmudge
-	Warhead@RA2Crater: LeaveSmudge
-	Warhead@Effect: CreateEffect
-	Warhead@EffectWater: CreateEffect
-	Warhead@EffectAir: CreateEffect
-	Warhead@Glow: GlowImpact
+	Warhead@Smudge:
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
+	Warhead@Effect:
+	Warhead@EffectWater:
+	Warhead@EffectAir:
+	Warhead@Glow:
 	Warhead@ShieldHit: GrantExternalCondition
-	Warhead@Concrete: DamagesConcrete
-	Warhead@ShieldHitEffect: CreateEffect
+	Warhead@Concrete:
+	Warhead@ShieldHitEffect:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
@@ -1235,6 +1583,7 @@ ra1_allies_phasetransport_missile_cryo:
 
 ra1_allies_chronotank_missile:
 	Inherits@missilerole: ^Warhead_MissileAP_Heavy
+	Inherits@fx_cover: ^Effect_AlliedTigerCannon
 	ReloadDelay: 54
 	Burst: 4
 	BurstDelays: 3
@@ -1253,19 +1602,19 @@ ra1_allies_chronotank_missile:
 		PercentageScale: 0
 		PercentageSpread: 50
 	Warhead@GrenadePercentage: AreaDamagePercentage
-	Warhead@Smudge: LeaveSmudge
-	Warhead@DuneRock: LeaveSmudge
-	Warhead@DuneSand: LeaveSmudge
-	Warhead@Effect: CreateEffect
-	Warhead@EffectWater: CreateEffect
+	Warhead@Smudge:
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@Effect:
+	Warhead@EffectWater:
 	Warhead@ShieldHit: GrantExternalCondition
-	Warhead@Concrete: DamagesConcrete
-	Warhead@ShieldHitEffect: CreateEffect
+	Warhead@Concrete:
+	Warhead@ShieldHitEffect:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
-	Warhead@RA2Crater: LeaveSmudge
+	Warhead@RA2Crater:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 	Projectile:
 		Speed: 500
@@ -1450,9 +1799,11 @@ ra1_allies_chronotank_missile:
 	Warhead@Smudge:
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	-Warhead@Glow:
 
 ra1_allies_chronotank_missile_cryo:
 	Inherits: ra1_allies_chronotank_missile
+	Inherits@fx_cover: ^Effect_AlliedTigerCannon
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
 		Amount: -20000
 		Range: 400
@@ -1468,19 +1819,19 @@ ra1_allies_chronotank_missile_cryo:
 		PercentageScale: 0
 		PercentageSpread: 50
 	Warhead@GrenadePercentage: AreaDamagePercentage
-	Warhead@Smudge: LeaveSmudge
-	Warhead@DuneRock: LeaveSmudge
-	Warhead@DuneSand: LeaveSmudge
-	Warhead@Effect: CreateEffect
-	Warhead@EffectWater: CreateEffect
+	Warhead@Smudge:
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@Effect:
+	Warhead@EffectWater:
 	Warhead@ShieldHit: GrantExternalCondition
-	Warhead@Concrete: DamagesConcrete
-	Warhead@ShieldHitEffect: CreateEffect
+	Warhead@Concrete:
+	Warhead@ShieldHitEffect:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
-	Warhead@RA2Crater: LeaveSmudge
+	Warhead@RA2Crater:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 	Projectile:
 		Speed: 500
@@ -1669,6 +2020,7 @@ ra1_allies_chronotank_missile_cryo:
 	Warhead@Smudge:
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	-Warhead@Glow:
 
 155mmCryo:
 	Inherits: 155mm
@@ -1706,7 +2058,6 @@ ra1_allies_bastionartillerybunker_155mmbastioncryo:
 	MinRange: 2035
 
 25mm:
-	Inherits@collapseflat: ^Warhead_CannonHE_Medium_Flat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
@@ -1734,7 +2085,6 @@ ra1_allies_bastionartillerybunker_155mmbastioncryo:
 		ImpactActors: false
 		ValidTargets: Air
 
-	-Warhead@CannonHE_Medium_Flat:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 	InvalidTargets: wall
@@ -2002,6 +2352,7 @@ ra1_allies_tanya_pistol_cryo:
 
 ra1_allies_alliedheavyaatank_cannon:
 	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
+	Inherits@fx_cover: ^Effect_AlliedTigerCannon
 	ValidTargets: Ground, Water
 	ReloadDelay: 10
 	Range: 4746
@@ -2012,17 +2363,17 @@ ra1_allies_alliedheavyaatank_cannon:
 		PercentageScale: 0
 	Projectile: Bullet
 	Warhead@LightMissilePercentage: AreaDamagePercentage
-	Warhead@Smudge: LeaveSmudge
-	Warhead@DuneRock: LeaveSmudge
-	Warhead@RA2Crater: LeaveSmudge
-	Warhead@DuneSand: LeaveSmudge
-	Warhead@Effect: CreateEffect
-	Warhead@EffectAir: CreateEffect
+	Warhead@Smudge:
+	Warhead@DuneRock:
+	Warhead@RA2Crater:
+	Warhead@DuneSand:
+	Warhead@Effect:
+	Warhead@EffectAir:
 	Warhead@ShieldHit: GrantExternalCondition
-	Warhead@Concrete: DamagesConcrete
-	Warhead@ShieldHitEffect: CreateEffect
+	Warhead@Concrete:
+	Warhead@ShieldHitEffect:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
-	Warhead@EffectWater: CreateEffect
+	Warhead@EffectWater:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 	Projectile:
@@ -2185,6 +2536,9 @@ ra1_allies_alliedheavyaatank_cannon:
 	Warhead@Smudge:
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	-Warhead@Glow:
+	Warhead@EffectWater:
+		-ImpactSounds:
 
 ra1_allies_alliedheavyaatank_cannon_AA:
 	Inherits@roleflat: ^Warhead_Flak_Medium_Flat
@@ -2223,6 +2577,7 @@ ra1_allies_alliedheavyaatank_cannon_AA:
 	Warhead@ChaingunPercentage:
 		PercentageDenominator: 400
 		ValidTargets: Air
+	Warhead@EffectWater:
 RadarJammer:
 	ReloadDelay: 150
 	Report: jammed.aud
@@ -2241,6 +2596,56 @@ ra1_allies_alliedrocketsoldier_rocketsra:
 	Range: 7500
 	Warhead@MissileAP_Medium_Flat:
 		Damage: 11500
+	Warhead@MissileAP_Medium_Flat: AreaDamage
+	Warhead@MissileAP_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 64
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 95
+			COMPOSITE: 44
+			BLAST: 68
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 145
+			Superheavy: 200
+			Heavy: 177
+			Medium: 161
+			Light: 146
+			Spaceship: 124
+			Helicopter: 123
+			Scout: 114
+			Bomber: 112
+			Concrete: 82
+			Fighter: 75
+			Plate: 64
+			Steel: 55
+			Wood: 53
+			Flak: 44
+			Heroic: 37
+			None: 33
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Superheavy: 20
+			Heavy: 19
+			Medium: 18
+			Light: 17
+			Scout: 16
+			Spaceship: 15
+			Helicopter: 14
+			Bomber: 13
+			Fighter: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
 
 ra1_allies_alliedrocketsoldier_rocketsracryo:
 	Range: 7500
@@ -2259,6 +2664,56 @@ ra1_allies_rifleinfantry_carbine_cryo:
 
 ra1_allies_cargoplanebomber_parabomb:
 	Inherits: ParaBomb
+	Warhead@Demolition_Heavy_Flat: AreaDamage
+	Warhead@Demolition_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 466
+		Falloff: 100, 45, 18, 6, 0
+		Versus:
+			HAZMAT: 63
+			COMPOSITE: 101
+			BLAST: 41
+			REFLECTOR: 75
+			ARMOR: 70
+			Shield: 177
+			Wood: 195
+			Steel: 164
+			None: 154
+			Flak: 142
+			Concrete: 136
+			Plate: 124
+			Scout: 81
+			Light: 76
+			Medium: 75
+			Heavy: 74
+			Fighter: 73
+			Superheavy: 72
+			Bomber: 66
+			Helicopter: 59
+			Heroic: 52
+			Spaceship: 51
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Wood: 25
+			Steel: 24
+			Concrete: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
 
 ra1_allies_gunboat_depthcharge:
 	Inherits: DepthCharge
@@ -2274,6 +2729,56 @@ ra1_allies_destroyer_depthchargecryo:
 
 ra1_allies_cruiser_8inch:
 	Inherits: 8Inch
+	Warhead@Demolition_Heavy_Flat: AreaDamage
+	Warhead@Demolition_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 466
+		Falloff: 100, 45, 18, 6, 0
+		Versus:
+			HAZMAT: 63
+			COMPOSITE: 101
+			BLAST: 41
+			REFLECTOR: 75
+			ARMOR: 70
+			Shield: 177
+			Wood: 195
+			Steel: 164
+			None: 154
+			Flak: 142
+			Concrete: 136
+			Plate: 124
+			Scout: 81
+			Light: 76
+			Medium: 75
+			Heavy: 74
+			Fighter: 73
+			Superheavy: 72
+			Bomber: 66
+			Helicopter: 59
+			Heroic: 52
+			Spaceship: 51
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Wood: 25
+			Steel: 24
+			Concrete: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
 
 ra1_allies_alliedsniper_lightsniper:
 	Inherits: LightSniper
