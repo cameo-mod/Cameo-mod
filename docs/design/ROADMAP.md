@@ -139,6 +139,8 @@ the fog sequencing.
   random personalities.
 - [ ] **M** `MasterAiBotModule`: fogged per-enemy signals, main-target scoring,
   and later personality refinements.
+- [x] **M** Phase 4 main-target consumption: `SquadManagerBotModuleCA` prefers the
+  master's `MainTarget` for proactive picks when `PreferMainTarget` is enabled.
 - [ ] **M** Per-enemy pairwise damage ledger (`PlayerStatistics` is aggregate and
   cannot attribute losses to a specific opponent).
   - [x] **M** Record-only AI match logging: [`AI_MATCH_LOG.md`](AI_MATCH_LOG.md),

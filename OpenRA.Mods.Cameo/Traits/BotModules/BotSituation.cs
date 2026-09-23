@@ -114,7 +114,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public override object Create(ActorInitializer init) { return new MasterAiBotModule(init.Self, this); }
 	}
 
-	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData
+	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider
 	{
 		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller" };
 		readonly OpenRA.Player player;
@@ -142,6 +142,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		internal int DeathsCostWindow { get; private set; }
 		internal int KillsCostWindow { get; private set; }
 		internal IReadOnlyList<BotSituation> PendingSituations => pendingSituations;
+		OpenRA.Player IBotMainTargetProvider.MainTarget => IsTraitDisabled ? null : Situation?.MainTarget;
 
 		public MasterAiBotModule(Actor self, MasterAiBotModuleInfo info)
 			: base(info)
