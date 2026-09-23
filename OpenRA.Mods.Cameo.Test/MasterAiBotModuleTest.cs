@@ -347,6 +347,117 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void CounterDemandRequiresSustainedOnThreshold()
+		{
+			var info = new MasterAiBotModuleInfo();
+			var candidateSince = new Dictionary<string, int>();
+			var demand = new CounterDemand { AntiAir = info.AntiAirDemandOn };
+
+			Assert.That(MasterAiBotModule.ResolveDemands(demand, Array.Empty<string>(), 0, 100, candidateSince, info),
+				Is.Empty);
+			Assert.That(MasterAiBotModule.ResolveDemands(demand, Array.Empty<string>(), 99, 100, candidateSince, info),
+				Is.Empty);
+			Assert.That(MasterAiBotModule.ResolveDemands(demand, Array.Empty<string>(), 100, 100, candidateSince, info),
+				Is.EqualTo(new[] { "antiair" }));
+		}
+
+		[Test]
+		public void CounterDemandCandidateResetsBelowOnThreshold()
+		{
+			var info = new MasterAiBotModuleInfo();
+			var candidateSince = new Dictionary<string, int>();
+			var demand = new CounterDemand { AntiAir = info.AntiAirDemandOn };
+
+			MasterAiBotModule.ResolveDemands(demand, Array.Empty<string>(), 0, 100, candidateSince, info);
+			demand.AntiAir = info.AntiAirDemandOn - 1;
+			Assert.That(MasterAiBotModule.ResolveDemands(demand, Array.Empty<string>(), 50, 100, candidateSince, info),
+				Is.Empty);
+			demand.AntiAir = info.AntiAirDemandOn;
+			MasterAiBotModule.ResolveDemands(demand, Array.Empty<string>(), 347, 100, candidateSince, info);
+			Assert.That(MasterAiBotModule.ResolveDemands(demand, Array.Empty<string>(), 446, 100, candidateSince, info),
+				Is.Empty);
+			Assert.That(MasterAiBotModule.ResolveDemands(demand, Array.Empty<string>(), 447, 100, candidateSince, info),
+				Is.EqualTo(new[] { "antiair" }));
+		}
+
+		[Test]
+		public void CounterDemandUsesHysteresisForHeldDemand()
+		{
+			var info = new MasterAiBotModuleInfo();
+			var candidateSince = new Dictionary<string, int>();
+			var demand = new CounterDemand { AntiAir = info.AntiAirDemandOn - 1 };
+
+			Assert.That(MasterAiBotModule.ResolveDemands(demand, new[] { "antiair" }, 0, 100, candidateSince, info),
+				Is.EqualTo(new[] { "antiair" }));
+			demand.AntiAir = info.AntiAirDemandOff - 1;
+			Assert.That(MasterAiBotModule.ResolveDemands(demand, new[] { "antiair" }, 1, 100, candidateSince, info),
+				Is.Empty);
+		}
+
+		[Test]
+		public void NegativeReactionDelayDisablesCounterDemand()
+		{
+			var info = new MasterAiBotModuleInfo();
+			var candidateSince = new Dictionary<string, int> { ["antiair"] = 10 };
+			var demand = new CounterDemand
+			{
+				AntiAir = 100,
+				AntiArmour = 100,
+				AntiInfantry = 100,
+				Detector = 100,
+				Artillery = 100
+			};
+
+			Assert.That(MasterAiBotModule.ResolveDemands(demand, new[] { "antiair", "detector" }, 100, -1, candidateSince, info),
+				Is.Empty);
+			Assert.That(candidateSince, Is.Empty);
+		}
+
+		[Test]
+		public void CounterDemandCanHoldMultipleDemands()
+		{
+			var info = new MasterAiBotModuleInfo();
+			var demand = new CounterDemand
+			{
+				AntiAir = info.AntiAirDemandOn,
+				AntiArmour = info.AntiArmourDemandOn,
+				AntiInfantry = info.AntiInfantryDemandOn,
+				Detector = info.DetectorDemandOn,
+				Artillery = info.ArtilleryDemandOn
+			};
+
+			Assert.That(MasterAiBotModule.ResolveDemands(demand, Array.Empty<string>(), 0, 0,
+				new Dictionary<string, int>(), info), Is.EqualTo(new[]
+				{
+					"antiair", "antiarmour", "antiinfantry", "detector", "artillery"
+				}));
+		}
+
+		[Test]
+		public void CounterDemandStateRoundTrips()
+		{
+			var original = new MasterAiBotSavedState
+			{
+				CounterDemandCandidateSince = new Dictionary<string, int>
+				{
+					["antiair"] = 120,
+					["artillery"] = 240
+				},
+				LastIssuedCounterDemands = new[] { "antiair", "artillery" }
+			};
+			var nodes = new List<MiniYamlNode>
+			{
+				new("State", "", MasterAiBotModule.SerializeState(original))
+			};
+
+			var restored = MasterAiBotModule.DeserializeState(
+				MiniYaml.FromString(nodes.WriteToString(), "test").Single().Value);
+
+			Assert.That(restored.CounterDemandCandidateSince, Is.EqualTo(original.CounterDemandCandidateSince));
+			Assert.That(restored.LastIssuedCounterDemands, Is.EqualTo(original.LastIssuedCounterDemands));
+		}
+
+		[Test]
 		public void PreferOwnedReturnsNonEmptyFilteredSubset()
 		{
 			var candidates = new List<string> { "target", "other", "target" };

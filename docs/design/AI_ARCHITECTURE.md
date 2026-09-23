@@ -1048,8 +1048,12 @@ allow it.
    master's target for proactive, unbounded picks only when `PreferMainTarget` is
    enabled; in-radius targeting is untouched, and empty preferred results fall
    back to the existing unrestricted selection.
-5. **Counter demand and hints**, consumed by the unit builder, base builder and compositions
-   (`ProvidesPrerequisite` tokens, zero C#).
+5. **Counter demand and hints (implemented).** `MasterAiBotModule` issues the
+   `SetBotCounterDemand` order; `BotCounterDemandController` owns the synced demand conditions;
+   `ProvidesPrerequisite` maps those conditions to `demand.*` tokens, and composition
+   `Prerequisites` consume them without new consumer-side C#. Signals use hysteresis, with
+   per-tier sustained activation delays and immediate removal below the off threshold. Only a
+   small set of pilot compositions ships initially.
 6. **Fogged observation + `ScoutBotModule`.** Deliberately last among the behaviour changes,
    because it makes the bots temporarily weaker and it invalidates any tuning done against
    omniscient signals. This is the §9.1 decision; phases 1-5 are honest about being pre-fog.
