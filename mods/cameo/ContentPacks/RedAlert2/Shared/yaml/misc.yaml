@@ -116,17 +116,17 @@ ra2gacnst.infiltrated:
 		Image: ra2_allies_alliedconstructionyard
 	ProvidesPrerequisite@buildingname:
 		Prerequisite: ra2_allies_alliedconstructionyard
+
 dummy_dock:
 	Interactable:
 	Reservable:
-	GrantCondition:
-		Condition: dontmove
-	Mobile:
-		Speed: 1
-		Locomotor: wheeled
-		PauseOnCondition: dontmove
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+		AllowInvalidPlacement: true
 	Exit@1:
 	RejectsOrders:
+	Targetable:
 
 ra2gayard:
 	Inherits: ^RA2Building

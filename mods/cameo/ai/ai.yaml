@@ -3205,6 +3205,7 @@ Player:
 		Notification: notification-bot-personality-rush
 	SquadManagerBotModuleCA@rush:
 		RequiresCondition: genericbot && personality-rush
+		PreferMainTarget: true
 		MinimumAttackForceDelay: 400
 		SquadSize: 3
 		SquadSizeRandomBonus: 8
@@ -3278,6 +3279,7 @@ Player:
 		Notification: notification-bot-personality-turtle
 	SquadManagerBotModuleCA@turtle:
 		RequiresCondition: genericbot && personality-turtle
+		PreferMainTarget: true
 		MinimumAttackForceDelay: 2500
 		SquadSize: 8
 		SquadSizeRandomBonus: 20
@@ -3351,6 +3353,7 @@ Player:
 		Notification: notification-bot-personality-tech
 	SquadManagerBotModuleCA@tech:
 		RequiresCondition: genericbot && personality-tech
+		PreferMainTarget: true
 		MinimumAttackForceDelay: 1800
 		SquadSize: 6
 		SquadSizeRandomBonus: 15
@@ -3424,6 +3427,7 @@ Player:
 		Notification: notification-bot-personality-expansion
 	SquadManagerBotModuleCA@expansion:
 		RequiresCondition: genericbot && personality-expansion
+		PreferMainTarget: true
 		MinimumAttackForceDelay: 1200
 		SquadSize: 5
 		SquadSizeRandomBonus: 15
@@ -3497,6 +3501,7 @@ Player:
 		Notification: notification-bot-personality-steamroller
 	SquadManagerBotModuleCA@steamroller:
 		RequiresCondition: genericbot && personality-steamroller
+		PreferMainTarget: true
 		MinimumAttackForceDelay: 2000
 		SquadSize: 12
 		SquadSizeRandomBonus: 25

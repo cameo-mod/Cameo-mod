@@ -595,6 +595,9 @@ ra1_soviets_largesovietairfield:
 	ProvidesPrerequisite@inherits:
 		Prerequisite: ra1_soviets_airfield
 	RenderSprites:
+		Image: ra1_soviets_largesovietairfield
+		PlayerPalette: raplayer
+	RenderSprites:
 		PlayerPalette: raplayer
 
 ra1_soviets_techcenter:

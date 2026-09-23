@@ -380,6 +380,7 @@ asianalliance_airforcecommand:
 	ParatroopersPower@aaparatroopers:
 		OrderName: aaparatroopers
 		PauseOnCondition: disabled
+		Prerequisites:
 			1: asianalliance_upgrade_massparadrop
 			2: asianalliance_upgrade_massparadrop, asianalliance_promotion_fanatic
 			3: asianalliance_upgrade_massparadrop, asianalliance_promotion_plasmatrooper

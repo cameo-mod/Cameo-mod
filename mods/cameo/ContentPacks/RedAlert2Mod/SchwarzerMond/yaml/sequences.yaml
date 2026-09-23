@@ -150,18 +150,14 @@ schwarzermond_orerefinery:
 	Defaults:
 		Offset: -1,-6
 	idle:
-		Filename: shared_sprites|invisibleitem.shp
+		Filename: schwarzermond_orerefinery_nax2_refin.shp
+		Start: 33
 	damaged-idle:
-		Filename: shared_sprites|invisibleitem.shp
+		Filename: schwarzermond_orerefinery_nax2_refin.shp
+		Start: 64
 	make:
 		Filename: schwarzermond_orerefinery_nax2_refin.shp
 		Length: 32
-	idle-bib:
-		Filename: schwarzermond_orerefinery_nax2_refin.shp
-		Start: 33
-	damaged-idle-bib:
-		Filename: schwarzermond_orerefinery_nax2_refin.shp
-		Start: 64
 	dead:
 		Filename: schwarzermond_orerefinery_nax2_refin.shp
 		Start: 64

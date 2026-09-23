@@ -1,5 +1,55 @@
 # Cameo — THE HANDOFF
 
+## ⭐ 2026-09-23 — DEVIN-CLOUD (AI lane): phases 1–3 are all on master; phase 4 starts
+
+`Agent: DEVIN-CLOUD · lane: AI bot modules · working off master @ 1e27366c9`
+
+The whole observe → switch line has landed. This supersedes the phase table in my 2026-09-13
+entry below, which is now stale:
+
+| phase | state |
+|---|---|
+| 1 — record-only match logging | **landed** (#331) |
+| 2 — observe-only `MasterAiBotModule` + situation log | **landed** (#364) |
+| 3 — synced `BotPersonalityController` + dynamic switching | **landed** (#367's work reached master; #425 gate, #435 reaction delay) |
+| 4 — squads consume the master's main target | **mine, starting now** |
+| 5–9 — counter-demand hints, fog, scouting, offline eval, bandit priors | proposed |
+
+Two things changed in phase 3 that other lanes should know:
+
+* **Every difficulty switches personality now** (#435). The old `AllowPersonalitySwitching`
+  bool is gone; each of the ten `BotLimits` blocks carries `PersonalityReactionDelay`, the
+  ticks a candidate must persist *continuously* before the bot commits to it — 7500 (300 s) on
+  `easiest` down to 750 (30 s) on `cameogod`, 750 per tier, per the maintainer's linear ramp.
+  Negative disables switching. `PersonalityHoldTicks` is clamped to that delay, otherwise the
+  120 s hold would have capped the fast tiers. `tools/audit/audit_ai_personalities.py` now pins
+  all ten values — change the yaml and the audit will tell you.
+* **There is a real bot-player gate**: `python tools\tests\ai_bot_player_gate.py` launches a map
+  with a map-declared `hard` bot and reads the bot's own situation records back, so it fails if
+  no bot player is constructed or no decision is published. `boot-test.cmd` proves only that
+  OpenRA reaches the menu. Writing the gate is what caught the two defects in #425.
+
+⚠ Against the 2026-09-23 lesson "verify YOUR process made the menu marker": the AI gate does not
+rely on the shared `perf.log` at all — it asserts on its own process exit code plus records whose
+ticks come from that run — but any other lane's gate that reads `%APPDATA%/OpenRA/Logs` shared
+state should adopt the PID/lifetime check from that lesson.
+
+### Phase 4, and what I need from other lanes
+
+Phase 4 makes the master's chosen main target actually *do* something: attack squads prefer that
+player's actors when picking a proactive target, instead of always taking the nearest enemy.
+Local combat targeting inside the scan radius is untouched, and if the main target has nothing
+reachable the old nearest-enemy behaviour is the fallback. It is opt-in per
+`SquadManagerBotModuleCA` instance, so campaign/other-mod bots are unaffected.
+
+* **Faction lanes:** I still do not touch `UnitsToBuild` or build-order rows — those are yours.
+  My yaml surface is the bot-module trait wiring and the `BotLimits` personality fields.
+* **Whoever owns `mods/cameo/ai/ai.yaml` formatting:** the UTF-8 BOM I flagged on 2026-09-13 is
+  still there. Harmless today only because no audit reads the first node.
+* **Anyone claiming "the bots do not cheat":** not yet. `SquadManagerBotModuleCA` still scans
+  `World.Actors` filtering cloak but never shroud. Fog is phase 6 and it will make bots weaker
+  before it makes them better, so do not tune bot strength against pre-fog behaviour.
+
 ## 2026-09-20 — PR #407 AGGREGATE CLASSIC-FOUR MILESTONE (IN REVIEW)
 
 PR #407 on `claude/transport-chassis-classic-four-20260918` is the single
@@ -1374,7 +1424,8 @@ written.
 | 4–9 — per-enemy targeting, counter-demand, fog, scouting, offline eval, bandit priors | proposed |
 
 Phase 2 builds an immutable per-enemy snapshot every 150 ticks, picks a candidate main target and
-a candidate personality every 1500, and **writes them to a log and nothing else**: no orders, no
+a candidate personality every 1500 — a bot holding no target re-picks at the 150-tick snapshot
+instead — and **writes them to a log and nothing else**: no orders, no
 conditions, no synced state, and no module reads the snapshot yet. It is deliberately pre-fog and
 its target score deliberately omits the pairwise `w_hurt` term, because no verified per-enemy
 damage attribution hook exists before phase 4. Numbers in the log are integers only.

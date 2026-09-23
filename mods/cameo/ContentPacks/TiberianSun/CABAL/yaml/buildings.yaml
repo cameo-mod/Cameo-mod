@@ -375,6 +375,9 @@ cabal_radar:
 		SupportPowerPaletteOrder: 10
 		EffectSequence: idle
 		BlockedCursor: move-blocked
+	WithIdleOverlay@DISH:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-dish
 
 cabal_techcenter:
 	Inherits: ^BaseBuilding
