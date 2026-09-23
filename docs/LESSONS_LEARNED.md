@@ -98,6 +98,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [Cameo shadowing pitfalls — namespace `World` and explicit interface members (2026-09-22)](#cameo-shadowing-pitfalls--namespace-world-and-explicit-interface-members-2026-09-22)
 - [Trait shadows: a proof field proves the TYPE, not the DISPATCH (2026-09-23)](#trait-shadows-a-proof-field-proves-the-type-not-the-dispatch-2026-09-23)
 - [Boot-gate: verify YOUR process made the menu marker (2026-09-23)](#boot-gate-verify-your-process-made-the-menu-marker-2026-09-23)
+- [Concurrent boot-gates kill each other — and a stale shared `engine/bin` lies (2026-09-23)](#concurrent-boot-gates-kill-each-other--and-a-stale-shared-enginebin-lies-2026-09-23)
 - [The canonical engine update pipeline (binding, uniform process)](#the-canonical-engine-update-pipeline-binding-uniform-process)
 - [YAML-only AI personalities and dead squad-manager keys (2026-08-21)](#yaml-only-ai-personalities-and-dead-squad-manager-keys-2026-08-21)
 - [Opt-in AI unit compositions (2026-08-24)](#opt-in-ai-unit-compositions-2026-08-24)
@@ -2026,6 +2027,28 @@ Two launch traps surfaced the same day, both producing false confidence:
    Gate correctly: confirm the PID you launched is alive through the load AND
    the marker appears — or timestamp-check that the marker was written during
    your process's lifetime, not just "exists."
+
+## Concurrent boot-gates kill each other — and a stale shared `engine/bin` lies (2026-09-23)
+
+Same-day sequel, found when three agents gated at once:
+
+1. **The cleanup step murders other agents' games.** The gate's
+   `Stop-Process -Name OpenRA*` matches by process NAME — every agent's game
+   dies when anyone's run ends. Combined with the shared perf.log being
+   truncated per launch, a gate can look unpassable during another agent's
+   retry loop. Workaround that worked: copy `engine/bin/OpenRA.exe` to a
+   differently-named exe (e.g. `NovaGate.exe` — dodges the name-matched kill)
+   and launch with `Engine.SupportDir=<private dir>` (Game.cs reads the arg at
+   line ~364; logs, maps and settings go there instead of the shared
+   `%APPDATA%/OpenRA`). The gate skill should adopt both.
+2. **`Cannot locate type: XInfo` can mean the BINARY is stale, not the yaml.**
+   `engine/bin/OpenRA.Mods.Cameo.dll` was rebuilt from a tree that predated
+   `AiMatchLogWriter` (yaml requirement since `30acae0f0`), so every worktree
+   junctioned to it crashed at `CursorManager→LoadDefaults` — two agents
+   burned a morning in crash loops. `strings`/`grep -c` the dll for the type
+   name first; if absent, `dotnet build -c Release -p:TargetPlatform=win-x64`
+   the mod sln from a CURRENT source tree (the mod project's
+   `EngineRootPath=../engine` deploys straight into the shared `engine/bin`).
 
 ---
 

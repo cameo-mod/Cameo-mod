@@ -1,6 +1,6 @@
 # WEAPON 3-WAY SPLIT — warhead / projectile / effect layers (2026-08-02)
 
-> **Numeric evidence refresh — 2026-09-10, combined `839cdced4` plus reopened tooling.** `w24_multi_main_fed` = **290**. **2026-09-22 (DAWN lane-3): `w24_multi_main_fed` = 274** — one meter-fed multi-main folded; the rest of the drop is the W24 lanes landing. Measured on this combined tree; predicates and tolerances are unchanged. The flat-health denominator correction changes diagnostics, not live weapons or prices. Earlier branch-specific snapshots remain historical.
+> **Numeric evidence refresh — 2026-09-10, combined `839cdced4` plus reopened tooling.** `w24_multi_main_fed` = **290**. **2026-09-22 (DAWN lane-3): `w24_multi_main_fed` = 274** — one meter-fed multi-main folded; the rest of the drop is the W24 lanes landing. **2026-09-23b (post-#456/#457): = 269.** Measured on this combined tree; predicates and tolerances are unchanged. The flat-health denominator correction changes diagnostics, not live weapons or prices. Earlier branch-specific snapshots remain historical.
 
 > **Current authority (2026-09-06):** [DESIGN §11b.1](../DESIGN.md#11b1-tightened-and-enforced-binding-maintainer-2026-09-06)
 > replaces this document's older two-warhead/four-inherit model. Use one main
