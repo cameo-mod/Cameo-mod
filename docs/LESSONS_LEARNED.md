@@ -88,7 +88,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 **Process, tooling and platform**
 
 - [⛔ Folding a parent orphans its children's `-Warhead@` cancels (2026-09-22, DAWN lane-3)](#-folding-a-parent-orphans-its-childrens--warhead-cancels-2026-09-22-dawn-lane-3)
-- [^Effect_* templates inherit each other — covering pick can dup-crash a DESCENDANT (2026-09-23)](#effect_-templates-inherit-each-other--a-covering-pick-can-dup-crash-a-descendant-2026-09-23-w23-follow-up)
+- [^Effect_* templates inherit each other — covering pick can dup-crash a DESCENDANT (2026-09-23)](#effect-templates-inherit-each-other--a-covering-pick-can-dup-crash-a-descendant-2026-09-23-w23-follow-up)
 - [`^Warhead_` templates carry WEAPON-LEVEL fields, so a dead warhead node is not a dead inherit](#warhead-templates-carry-weapon-level-fields-so-a-dead-warhead-node-is-not-a-dead-inherit)
 - [A rename moves a key, so a SORTED dump reports every touched node as changed](#a-rename-moves-a-key-so-a-sorted-dump-reports-every-touched-node-as-changed)
 - [`gh` resolves the repo from the WRONG remote here, and reports the PR as nonexistent](#gh-resolves-the-repo-from-the-wrong-remote-here-and-reports-the-pr-as-nonexistent)
