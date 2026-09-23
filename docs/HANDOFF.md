@@ -1517,15 +1517,16 @@ someone else is mid-way through.**
 
 ## 2026-09-10 — source PR340 warhead-family reach measurement
 
-`warhead_family_reach` measures **1,454 distinct fired weapon identities** whose
+`warhead_family_reach` measures **1,530 distinct fired weapon identities** whose
 transitive inheritance reaches a `^Warhead_*` family in the current PR340 source.
+(2026-09-23 resync, post-#438: `unconverted_template_inheritors` = **1163**.) **2026-09-23b (post-#456 W23 retrofit): = 827.**
 The registry's previous value was 1,415; it is updated upward to this measured
 count with the same predicate and zero tolerance. Ownership wrappers can expose
 more distinct fired identities for existing family payloads: this increase does
 not establish newly converted weapons or additional gameplay balance work.
 Earlier dated snapshots below remain historical, and the only-UP rule remains.
 
-> **Numeric evidence refresh — 2026-09-10, combined `839cdced4` plus reopened tooling.** `multi_main_fired_weapons` = **120**; `unconverted_template_inheritors` = **1590**. Measured on this combined tree; predicates and tolerances are unchanged. The flat-health denominator correction changes diagnostics, not live weapons or prices. Earlier branch-specific snapshots remain historical.
+> **Numeric evidence refresh — 2026-09-10, combined `839cdced4` plus reopened tooling.** `multi_main_fired_weapons` = **120**; `unconverted_template_inheritors` = **1590**. Measured on this combined tree; predicates and tolerances are unchanged. The flat-health denominator correction changes diagnostics, not live weapons or prices. Earlier branch-specific snapshots remain historical. **2026-09-23b (post-#456/#457): `multi_main_fired_weapons` = 1** (`DRPlasmaTankWeapon` only — ruling pending); `unconverted_template_inheritors` = **827**.
 
 
 ## ⛔⛔ 2026-09-07 — READ THIS FIRST: the reference map, and one absolute rule
@@ -1604,7 +1605,8 @@ halved its damage. DAWN lane-3 then folded the remaining 27 non-RA weapons
 TiberianSun x4) at `collapse_target.py` totals — shipped totals restored where
 the master sum had drifted, twins/companions kept verbatim; `multi_main_fired_weapons`
 is now **27** (26 RA-family still in Nova review + `DRPlasmaTankWeapon` (Claude) +
-the `tesla_bomb` verbatim exception).
+the `tesla_bomb` verbatim exception). **2026-09-23: now 25** — #439 (NOVA batch-1)
+landed; PR #452 (NOVA batch-2) folds the RA2Mod set, leaving `DRPlasmaTankWeapon`.
 
 ### ✅ CLOSED — THE ANTI-AIR CONVENTION. Ruled by the maintainer 2026-09-08.
 
@@ -1886,7 +1888,7 @@ shipped that many, so RV expands the roster like CA and DTA do. `OpenRA RA2 offi
 | agent | lane |
 |---|---|
 | **Blackrobe GPT-6 Astra** | ⭐ **FINISH THE BALANCE PIPELINE** (Tasks A–G) **and inherit the AI bot modules** (Task H — Devin Cloud ran out of quota mid-merge). Full brief: [`BLACKROBE_ASTRA_BRIEF.md`](BLACKROBE_ASTRA_BRIEF.md). Branch `astra/balance-pipeline`, never master. Has **full authority including `apply_balance --confirm`**, conditional on one commit per decision and a review dossier at `audit/ASTRA_REVIEW.md`. |
-| **Aurora** | `ra1_allies` + `ra2_allies` + `ts_gdi` — **128 items**, incl. the 16 Allies sprites wearing Soviet names → `../Cameo-mod-fleet/TASK_2026-09-06_aurora.md` |
+| **Aurora** (lane retired; Ember regenerated) | `ra2_allies` + `ts_gdi` — **DONE 2026-09-23** on `devin/ember/rename-ra2ts` (8 actors + 57 assets, regenerated not cherry-picked). `ra1_allies` — held for NOVA's `RELEASE_redalert.md`; the 16 Allies sprites wearing Soviet names ride with it → `../Cameo-mod-fleet/TASK_2026-09-06_aurora.md` |
 | **Ember** | `asianalliance` — **DONE 2026-09-22**: `naming-asianalliance` `0ce8783b9` rebased + pushed (43 actors, 57 assets, ledgers re-extracted, docs propagated; boot-gated). Awaiting review/landing → `TASK_2026-09-06_ember.md` |
 | **Nova** | `ra1_soviets` — **94 items**, incl. the fluent-key leak and the 19 doubled filenames → `TASK_2026-09-06_nova.md` |
 | **Dawn** | `latinsyndicate` + `steelconsortium` + `wc2_*` + `zerg` — **79 items** → `TASK_2026-09-06_dawn.md` |

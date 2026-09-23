@@ -5893,7 +5893,7 @@
     "name": "actor_ra2carrier.name",
     "prerequisites": [
      "~ra2gayard",
-     "ra2_allies_alliedbattlelab"
+     "ra2_allies_battlelab"
     ],
     "queue": [
      "Naval",
@@ -6235,7 +6235,7 @@
     "name": "actor_dlph.name",
     "prerequisites": [
      "~ra2gayard",
-     "ra2_allies_alliedbattlelab"
+     "ra2_allies_battlelab"
     ],
     "queue": [
      "Naval",
@@ -6551,8 +6551,8 @@
     },
     "name": "Allied Naval Yard",
     "prerequisites": [
-     "~ra2_allies_alliedconstructionyard",
-     "ra2_allies_alliedorerefinery",
+     "~ra2_allies_constructionyard",
+     "ra2_allies_orerefinery",
      "~globalnaval"
     ],
     "queue": [
@@ -7800,7 +7800,7 @@
     },
     "name": "Aegis Cruiser Ground Missiles",
     "prerequisites": [
-     "~ra2_allies_alliedbattlelab",
+     "~ra2_allies_battlelab",
      "~ra2gayard",
      "!upra2aegismissiles"
     ],

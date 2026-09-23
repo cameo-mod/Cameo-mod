@@ -64,7 +64,7 @@ _none found_
 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 1662, 1668 | JapaneseHovercraftFlakAAkWaveforce | Warhead@Railgun_Heavy |
 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 2617, 2647 | ArmoredCarMGWaveforce | Warhead@Railgun_Heavy_ExtraDamage |
 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 2675, 2703 | ArmoredCarMGAAWaveforce | Warhead@Railgun_Heavy_ExtraDamage |
-| mods/cameo/ContentPacks/RedAlert2/Allies/yaml/sequences.yaml | 11, 37 | ra2_allies_alliedconstructionyard | dead |
+| mods/cameo/ContentPacks/RedAlert2/Allies/yaml/sequences.yaml | 11, 37 | ra2_allies_constructionyard | dead |
 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/sequences.yaml | 3775, 3781 | yrslav | cheer |
 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/sequences.yaml | 3914, 3918 | ra2howi | muzzle |
 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/sequences.yaml | 3927, 3931 | ra2arty | muzzle |
