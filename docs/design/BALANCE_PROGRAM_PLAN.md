@@ -95,9 +95,9 @@ nothing and informs the anchor choice. What must wait is WRITING targets and app
 | **W4** | Retire weapon-class K; charge-up becomes an ACTOR property | ✅ DONE | Claude | W1 |
 | **W5** | Missing metrics: overkill/TTK, range advantage, ValidTargets, MinRange, AttackDelay | ✅ DONE | Claude | W1 |
 | **W6** | C# `ModifiesCombatProportionalToPhysicalState` (+ pitch/glow hooks) | ✅ DONE `fc45a9632` | Claude | — |
-| **W7** | Sonic → `Resonance` meter (no new C# needed) | 🔵 **IN PROGRESS (EMBER, 2026-09-23)** — defaults + generator + shared files converted; 16 pack-side `SonicDebuff` grants handed to DAWN/NOVA via REQUEST | EMBER | — |
+| **W7** | Sonic → `Resonance` meter (no new C# needed) | 🔵 **SHARED MERGED (EMBER, #476 → `e97924d4c`)** — pack-side in flight: DAWN done on `devin/dawn/l4-fx` (`388a7dd0d`, needs PR), NOVA's 8 pending | EMBER | — |
 | **W8** | Gatling ladder → `SpinUp` meter | ✅ DONE `c0d6abf70` — all 43 actors, `GattlingSpeed` = 0 | Claude | W6 ✅ |
-| **W9** | `^Poisonable` → `Poison` meter (gas-cloud dose-response) | ⬜ READY | either | — |
+| **W9** | `^Poisonable` → `Poison` meter (gas-cloud dose-response) | 🔵 **IN PROGRESS (EMBER, 2026-09-23)** — `defaults.yaml` meter done (Corrosion clone, dose-scaled DoT); Ordos crossbow grant to DAWN via REQUEST; darkreign grant parked | EMBER | — |
 | **W10** | `^Blindable` → `Blind` meter | ⬜ READY (unblocked by W6) | either | W6 ✅ |
 | **W11** | Wire K into `fit_class.py` behind a flag; fit one class both ways and compare | ✅ BUILT, sign-off owed (+2 pipeline bugs fixed: 43% of the roster priced at zero DPS) | Claude | W3 ✅, W4 ✅, W5 ✅ |
 | **W12** | Superweapon balancing as a SEPARATE track (not unit-priced) | ⬜ READY | maintainer-led | — |
