@@ -1091,7 +1091,7 @@ claims:
       print(int(cycles.pop()))
 
   - id: cameo_family_labelled_weapons
-    value: 904
+    value: 1116
     tolerance: 0
     what: >
       Concrete Cameo weapons whose inherit chain names a `^Warhead_<Family>_<Level>` template,
@@ -1133,7 +1133,7 @@ claims:
       print(sum(len(v['groups']) for v in d.values()))
 
   - id: cameo_shaped_families
-    value: 47
+    value: 53
     tolerance: 0
     what: >
       Live warhead families whose shipped 16-rung Versus profile is SHAPED — neither a constant

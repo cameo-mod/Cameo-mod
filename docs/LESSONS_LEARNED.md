@@ -46,7 +46,6 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [⛔ A 0% compliance row is a bug report about the CHECKER (2026-09-06)](#-a-0-compliance-row-is-a-bug-report-about-the-checker-2026-09-06)
 - [A writer that "preserves line endings" but reads in text mode preserves nothing (2026-09-22)](#a-writer-that-preserves-line-endings-but-reads-in-text-mode-preserves-nothing-2026-09-22)
 - [⛔ A surviving name is not a surviving decision (2026-09-22)](#a-surviving-name-is-not-a-surviving-decision-2026-09-22)
-- [A shadow that RESOLVES is not a shadow that RUNS — `new` does not re-map an interface (2026-09-23)](#a-shadow-that-resolves-is-not-a-shadow-that-runs--new-does-not-re-map-an-interface-2026-09-23)
 - [A writer that replaces when you expect it to merge, and exits 0 (2026-09-22)](#a-writer-that-replaces-when-you-expect-it-to-merge-and-exits-0-2026-09-22)
 - [A hand-edit to generated output has a countdown on it (2026-09-05)](#a-hand-edit-to-generated-output-has-a-countdown-on-it-2026-09-05)
 - [Hand-built JSON emitters need native parse tests (2026-09-07)](#hand-built-json-emitters-need-native-parse-tests-2026-09-07)
@@ -290,34 +289,6 @@ Two habits come out of it, and they generalise past this one tool:
   different questions. Knowing which one the situation needs is the skill -- and when a
   diff is implausibly large for the edit you made, suspect encoding before suspecting the
   edit.
-
-## A shadow that RESOLVES is not a shadow that RUNS — `new` does not re-map an interface (2026-09-23)
-
-CLAUDE.md rule 7 says to prove a mod-side shadow of an engine trait "with a Cameo-only field":
-give the Cameo `...Info` a field the engine type lacks, set it in yaml and boot. That proves the
-TYPE resolved to Cameo's class. **It does not prove Cameo's code runs.**
-
-The case (PR #443, caught in review). `RenderSpritesInfo` was shadowed to render colour-picker
-previews through the live picker palette, and the new behaviour lived in
-`public new IEnumerable<IActorPreview> RenderPreview(...)`. The Cameo-only field
-`LiveColorPickerPreview` loaded and the game booted. But every caller reaches that method
-through the INTERFACE — `ActorPreviewWidget` does `TraitInfos<IRenderActorPreviewInfo>()` — and
-Common implements it NON-virtually. C# keeps the base class's interface mapping unless the
-derived class re-lists the interface, so the `new` method is dead code. Because the four clone
-actors that used to provide the live palette were deleted in the same change, the picker would
-have stopped following the slider.
-
-The same PR got it right one file over: `ColorPickerManagerInfo` re-declares
-`IColorPickerManagerInfo` and says why in its `[Desc]`.
-
-**Rules:**
-- When a shadow changes BEHAVIOUR, find how callers reach the method (`grep -rn "<Interface>>()"`
-  in `engine/`). If they call through an interface and the base method is not `virtual`,
-  re-list that interface on the Cameo class, or the override never runs.
-- `new` on a method is a red flag in a shadow. It hides for callers that hold the concrete type;
-  engine callers almost never do.
-- Prove behaviour with behaviour: a log line or a screenshot of the changed output. A field
-  that loads proves only the type.
 
 ## ⛔ A 0% compliance row is a bug report about the CHECKER (2026-09-06)
 
