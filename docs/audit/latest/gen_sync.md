@@ -101,24 +101,6 @@
       gen : 			Shield: 181
       file: 			Shield: 185
 
-[X] DRIFT in ^Warhead_BlastSonic_Heavy:
-      gen : 			COMPOSITE: 100
-      file: 			COMPOSITE: 102
-      gen : 			Shield: 221
-      file: 			Shield: 261
-
-[X] DRIFT in ^Warhead_BlastSonic_Light:
-      gen : 			COMPOSITE: 100
-      file: 			COMPOSITE: 102
-      gen : 			Shield: 174
-      file: 			Shield: 243
-
-[X] DRIFT in ^Warhead_BlastSonic_Medium:
-      gen : 			COMPOSITE: 100
-      file: 			COMPOSITE: 102
-      gen : 			Shield: 197
-      file: 			Shield: 256
-
 [X] DRIFT in ^Warhead_BulletChem_Heavy:
       gen : 			HAZMAT: 74
       file: 			HAZMAT: 75
@@ -230,30 +212,6 @@
       file: 			BLAST: 55
       gen : 			Shield: 153
       file: 			Shield: 156
-
-[X] DRIFT in ^Warhead_BulletSonic_Heavy:
-      gen : 			COMPOSITE: 69
-      file: 			COMPOSITE: 70
-      gen : 			BLAST: 64
-      file: 			BLAST: 63
-      gen : 			Shield: 235
-      file: 			Shield: 264
-
-[X] DRIFT in ^Warhead_BulletSonic_Light:
-      gen : 			COMPOSITE: 69
-      file: 			COMPOSITE: 70
-      gen : 			BLAST: 64
-      file: 			BLAST: 63
-      gen : 			Shield: 194
-      file: 			Shield: 250
-
-[X] DRIFT in ^Warhead_BulletSonic_Medium:
-      gen : 			COMPOSITE: 69
-      file: 			COMPOSITE: 70
-      gen : 			BLAST: 64
-      file: 			BLAST: 63
-      gen : 			Shield: 218
-      file: 			Shield: 260
 
 [X] DRIFT in ^Warhead_BulletTesla_Heavy:
       gen : 			HAZMAT: 79
@@ -510,30 +468,6 @@
       file: 			REFLECTOR: 76
       gen : 			Shield: 205
       file: 			Shield: 200
-
-[X] DRIFT in ^Warhead_CannonSonic_Heavy:
-      gen : 			COMPOSITE: 97
-      file: 			COMPOSITE: 98
-      gen : 			BLAST: 49
-      file: 			BLAST: 48
-      gen : 			Shield: 234
-      file: 			Shield: 263
-
-[X] DRIFT in ^Warhead_CannonSonic_Light:
-      gen : 			COMPOSITE: 97
-      file: 			COMPOSITE: 98
-      gen : 			BLAST: 49
-      file: 			BLAST: 48
-      gen : 			Shield: 192
-      file: 			Shield: 246
-
-[X] DRIFT in ^Warhead_CannonSonic_Medium:
-      gen : 			COMPOSITE: 97
-      file: 			COMPOSITE: 98
-      gen : 			BLAST: 49
-      file: 			BLAST: 48
-      gen : 			Shield: 215
-      file: 			Shield: 258
 
 [X] DRIFT in ^Warhead_CannonTesla_Heavy:
       gen : 			COMPOSITE: 56
@@ -1111,30 +1045,6 @@
       gen : 			Shield: 242
       file: 			Shield: 231
 
-[X] DRIFT in ^Warhead_MissileSonic_Heavy:
-      gen : 			COMPOSITE: 69
-      file: 			COMPOSITE: 71
-      gen : 			BLAST: 64
-      file: 			BLAST: 63
-      gen : 			Shield: 230
-      file: 			Shield: 262
-
-[X] DRIFT in ^Warhead_MissileSonic_Light:
-      gen : 			COMPOSITE: 69
-      file: 			COMPOSITE: 71
-      gen : 			BLAST: 64
-      file: 			BLAST: 63
-      gen : 			Shield: 190
-      file: 			Shield: 245
-
-[X] DRIFT in ^Warhead_MissileSonic_Medium:
-      gen : 			COMPOSITE: 69
-      file: 			COMPOSITE: 71
-      gen : 			BLAST: 64
-      file: 			BLAST: 63
-      gen : 			Shield: 213
-      file: 			Shield: 257
-
 [X] DRIFT in ^Warhead_MissileTesla_Heavy:
       gen : 			COMPOSITE: 58
       file: 			COMPOSITE: 59
@@ -1296,36 +1206,6 @@
       file: 			COMPOSITE: 41
       gen : 			BLAST: 78
       file: 			BLAST: 77
-
-[X] DRIFT in ^Warhead_Sonic_Heavy:
-      gen : 			HAZMAT: 67
-      file: 			HAZMAT: 68
-      gen : 			COMPOSITE: 95
-      file: 			COMPOSITE: 96
-      gen : 			BLAST: 58
-      file: 			BLAST: 57
-      gen : 			Shield: 259
-      file: 			Shield: 253
-
-[X] DRIFT in ^Warhead_Sonic_Light:
-      gen : 			HAZMAT: 67
-      file: 			HAZMAT: 68
-      gen : 			COMPOSITE: 95
-      file: 			COMPOSITE: 96
-      gen : 			BLAST: 58
-      file: 			BLAST: 57
-      gen : 			Shield: 237
-      file: 			Shield: 225
-
-[X] DRIFT in ^Warhead_Sonic_Medium:
-      gen : 			HAZMAT: 67
-      file: 			HAZMAT: 68
-      gen : 			COMPOSITE: 95
-      file: 			COMPOSITE: 96
-      gen : 			BLAST: 58
-      file: 			BLAST: 57
-      gen : 			Shield: 248
-      file: 			Shield: 237
 
 [X] DRIFT in ^Warhead_Storm_Heavy:
       gen : 			COMPOSITE: 74
@@ -1497,4 +1377,4 @@
       gen : 			Shield: 263
       file: 			Shield: 259
 
-checked 158 shared template(s); drift = 199
+checked 158 shared template(s); drift = 184

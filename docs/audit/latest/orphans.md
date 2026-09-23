@@ -1,6 +1,6 @@
 # audit_orphans — dead content (B10)
 
-Live weapons: **2977** — orphans: **395**, dangling weapon refs (BLOCKING): **0**, conditions granted-never-consumed: **16**
+Live weapons: **2984** — orphans: **395**, dangling weapon refs (BLOCKING): **0**, conditions granted-never-consumed: **17**
 
 
 ## O2 — dangling weapon references (crash-on-use class)
@@ -411,7 +411,7 @@ _none found_
 
 ## O3a — conditions granted but never consumed (sample)
 
-!aircraft-turning, armory-rank, chaosgas && !untargetable, corrosionmax, defensebot, disable_movement, emptesla, hnavyshield_upg, littlebuilderenable, ordos_upgrade_lightfactory, propaganda, ra2_soviets_doctrine_conscription, scaledprices, shade-ready, asianalliance_upgrade_tsunami, yuri_doctrine_psioniclegion
+!aircraft-turning, armory-rank, asianalliance_upgrade_tsunami, chaosgas && !untargetable, corrosionmax, defensebot, disable_movement, emptesla, hnavyshield_upg, littlebuilderenable, ordos_upgrade_lightfactory, propaganda, ra2_soviets_doctrine_conscription, resonancemax, scaledprices, shade-ready, yuri_doctrine_psioniclegion
 
 
 _O3b (identifiers consumed but never granted) is high-noise because RequiresCondition expressions mix conditions with prerequisite tokens; see audit_upgrades dead-wiring for the curated version._

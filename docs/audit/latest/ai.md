@@ -20,5 +20,5 @@ _none found_
 
 | referenced id | list | ai.yaml line |
 |---|---|---|
-| combat_tank.atreides | UnitsToBuild | 6024 |
+| combat_tank.atreides | UnitsToBuild | 6050 |
 

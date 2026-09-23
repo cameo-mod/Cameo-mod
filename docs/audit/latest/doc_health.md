@@ -1,6 +1,6 @@
 # audit_doc_health — is the documentation structurally sound?
 
-Documents scanned: **424**
+Documents scanned: **427**
 
 `audit_doc_claims.py` checks whether the NUMBERS are still true. This checks whether the documents themselves are intact.
 
@@ -12,7 +12,7 @@ Documents scanned: **424**
 | D4 | same-file anchor with no heading | 0 |
 | D5 | reference to a moved/removed document | 0 |
 | D6 | duplicate section id in DESIGN.md | 0 |
-| D7 | Contents index missing a section | 6 |
+| D7 | Contents index missing a section | 2 |
 | D8 | citation names a different section's law | 0 |
 
 
@@ -46,14 +46,10 @@ _clean_
 _clean_
 
 
-## D7 — Contents index out of date (6)
+## D7 — Contents index out of date (2)
 
-- `docs/LESSONS_LEARNED.md` — Contents omits `"Another class would accept it" sounds like evidence and is worth nothing — count first`
-- `docs/LESSONS_LEARNED.md` — Contents omits `A rename moves a key, so a SORTED dump reports every touched node as changed`
-- `docs/LESSONS_LEARNED.md` — Contents omits `A spread-band ratio that folds in `Shield` invents violations that do not exist`
-- `docs/LESSONS_LEARNED.md` — Contents omits ``^Warhead_` templates carry WEAPON-LEVEL fields, so a dead warhead node is not a dead inherit`
-- `docs/LESSONS_LEARNED.md` — Contents omits ``gh` resolves the repo from the WRONG remote here, and reports the PR as nonexistent`
-- `docs/LESSONS_LEARNED.md` — Contents omits ``w_damage` means different things in different sources, and reading it wrong doubles burst`
+- `docs/LESSONS_LEARNED.md` — Contents omits ``*ProportionalToPhysicalState` traits have non-neutral defaults on secondary channels (2026-09-23)`
+- `docs/LESSONS_LEARNED.md` — Contents omits ``extract_stats` carries seeded `design.*` fields forward by actor KEY — a rename silently drops them (2026-09-23)`
 
 
 ## D8 — Citation points at the wrong law (0)
@@ -61,4 +57,4 @@ _clean_
 _clean_
 
 
-**FAIL — 6 finding(s).** Fix the document; none of these are cosmetic. D1/D2 are corruption, D6 makes a cited law ambiguous, D3–D5 send a reader to the wrong place, D7 means a document is hiding its own content from the person who was told to read it, and D8 means a citation resolves — to the wrong law.
+**FAIL — 2 finding(s).** Fix the document; none of these are cosmetic. D1/D2 are corruption, D6 makes a cited law ambiguous, D3–D5 send a reader to the wrong place, D7 means a document is hiding its own content from the person who was told to read it, and D8 means a citation resolves — to the wrong law.

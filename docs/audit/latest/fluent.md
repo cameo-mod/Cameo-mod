@@ -1,6 +1,6 @@
 # audit_fluent — localization drift (B12)
 
-Fluent messages loaded: **5588** — unresolved fluent refs in rules: **0**, orphaned actor-* messages: **534**
+Fluent messages loaded: **5613** — unresolved fluent refs in rules: **0**, orphaned actor-* messages: **534**
 
 
 ## F1 — rules reference fluent keys that don't exist (shows raw key in-game)
@@ -553,18 +553,18 @@ _none found_
 | faction | fluent/total tooltips | coverage |
 |---|---|---|
 | asianalliance | 0/78 | 0% |
-| atreides | 11/32 | 34% |
+| atreides | 13/35 | 37% |
 | cabal | 0/84 | 0% |
-| corrino | 15/33 | 45% |
+| corrino | 18/37 | 48% |
 | eden | 0/45 | 0% |
 | forgotten | 78/81 | 96% |
 | futuretech | 0/59 | 0% |
-| harkonnen | 24/72 | 33% |
-| ixian | 31/88 | 35% |
+| harkonnen | 19/68 | 27% |
+| ixian | 26/82 | 31% |
 | japan | 1/76 | 1% |
 | latinsyndicate | 0/71 | 0% |
 | naxis | 0/78 | 0% |
-| ordos | 37/94 | 39% |
+| ordos | 34/90 | 37% |
 | plymouth | 0/46 | 0% |
 | protoss | 0/74 | 0% |
 | ra1_allies | 1/74 | 1% |

@@ -1,6 +1,6 @@
 # audit_stat_formulas — house stat formulas
 
-Violations: **689** across 2005 roster actors (reference-clean units: gdiarcher, raider.ordos)
+Violations: **685** across 2009 roster actors (reference-clean units: gdiarcher, raider.ordos)
 
 
 ## F1 — Repairable.HpPerStep ≠ HP/20  (44)
@@ -53,13 +53,12 @@ Violations: **689** across 2005 roster actors (reference-clean units: gdiarcher,
 | ts_nod_subterraneanapc | HpPerStep 2637 | expected 875 (HP 17500/20) |
 
 
-## F2 — SelfHealing Step ≠ HP/2500 (inf: HP/1000)  (133)
+## F2 — SelfHealing Step ≠ HP/2500 (inf: HP/1000)  (131)
 
 | actor | actual | expected |
 |---|---|---|
 | asianalliance_pulverizermecha | Step 114 | expected 285 (HP 285000/1000) |
 | atreides_combattank | Step 10 | expected 40 (HP 100000/2500) |
-| atreides_missiletank | Step 10 | expected 20 (HP 50000/2500) |
 | atreides_repairtank | Step 10 | expected 24 (HP 60000/2500) |
 | atreides_rockettrooper | Step 10 | expected 40 (HP 40000/1000) |
 | atreides_sandbike | Step 10 | expected 12 (HP 30000/2500) |
@@ -69,7 +68,6 @@ Violations: **689** across 2005 roster actors (reference-clean units: gdiarcher,
 | combat_tank.harkonnen | Step 10 | expected 28 (HP 70000/2500) |
 | corrino_bmp | Step 10 | expected 16 (HP 40000/2500) |
 | corrino_combattank | Step 10 | expected 40 (HP 100000/2500) |
-| corrino_missiletank | Step 10 | expected 20 (HP 50000/2500) |
 | corrino_sardaukar_bazooka | Step 50 | expected 120 (HP 120000/1000) |
 | corrino_sardaukar_berserker | Step 50 | expected 120 (HP 120000/1000) |
 | corrino_sardaukar_javelin | Step 50 | expected 120 (HP 120000/1000) |
@@ -365,15 +363,14 @@ _267 further infantry inherit Repairable from the infantry base template (^Defau
 | yuri_psychictower | DetectCloaked 5000 | expected 4000 (range/2) |
 
 
-## F7 — defense Power.Amount ≠ -Cost/20  (98)
+## F7 — defense Power.Amount ≠ -Cost/20  (97)
 
 | actor | actual | expected |
 |---|---|---|
 | asianalliance_advancedcommunicationcenter | Power -200 | expected -500 (-Cost/20) |
-| asianalliance_sentryflamer | Power -25 | expected -40 (-Cost/20) |
 | asianalliance_chaosstorminductor | Power -200 | expected -250 (-Cost/20) |
 | asianalliance_concretebarrier | Power missing | expected -10 |
-| atreides_palace | Power -200 | expected -500 (-Cost/20) |
+| asianalliance_sentryflamer | Power -25 | expected -40 (-Cost/20) |
 | atreides_storagesilo | Power -10 | expected -7 (-Cost/20) |
 | brik | Power missing | expected -10 |
 | corrino_storagesilo | Power -10 | expected -7 (-Cost/20) |
@@ -497,14 +494,12 @@ _267 further infantry inherit Repairable from the infantry base template (^Defau
 | harkonnen_adp | Turreted 48 vs Mobile 20 | must match |
 
 
-## F10 — turretless TurnSpeed ≠ 2×Speed/5 (artillery: Speed/5)  (13)
+## F10 — turretless TurnSpeed ≠ 2×Speed/5 (artillery: Speed/5)  (11)
 
 | actor | actual | expected |
 |---|---|---|
-| atreides_missiletank | TurnSpeed 80 (Speed 64) | expected 26 = 2 x Speed/5 (turretless) |
 | atreides_repairtank | TurnSpeed 16 (Speed 50) | expected 20 = 2 x Speed/5 (turretless) |
 | atreides_sandbike | TurnSpeed 24 (Speed 90) | expected 36 = 2 x Speed/5 (turretless) |
-| corrino_missiletank | TurnSpeed 80 (Speed 64) | expected 26 = 2 x Speed/5 (turretless) |
 | corrino_siegetank | TurnSpeed 4 (Speed 56) | expected 22 = 2 x Speed/5 (turretless) |
 | devastator | TurnSpeed 48 (Speed 33) | expected 14 = 2 x Speed/5 (turretless) |
 | harkonnen_assaulttank | TurnSpeed 13 (Speed 65) | expected 26 = 2 x Speed/5 (turretless) |
@@ -546,12 +541,13 @@ _267 further infantry inherit Repairable from the infantry base template (^Defau
 _none found_
 
 
-## F13 — advanced defense not gated by the faction's tech tier  (4)
+## F13 — advanced defense not gated by the faction's tech tier  (5)
 
 | actor | actual | expected |
 |---|---|---|
-| ordos: ordos_autogunturret | prereqs: ordos_barracks, ordos_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
+| harkonnen: harkonnen_autogunturret | prereqs: harkonnen_barracks, harkonnen_constructionyard (gate 2, radar tier 3) | advanced defense must be gated above the radar tier (tech+) |
 | ordos: ordos_chemturret | prereqs: ordos_barracks, ordos_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
+| ordos: ordos_autogunturret | prereqs: ordos_barracks, ordos_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
 | ordos: ordos_artilleryplatform | prereqs: ordos_barracks, ordos_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
 | schwarzermond: schwarzermond_lasertower | prereqs: schwarzermond_barracks, schwarzermond_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
 
