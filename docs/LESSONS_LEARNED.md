@@ -84,6 +84,16 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 
 **Process, tooling and platform**
 
+- [⛔ Folding a parent orphans its children's `-Warhead@` cancels (2026-09-22, DAWN lane-3)](#-folding-a-parent-orphans-its-childrens--warhead-cancels-2026-09-22-dawn-lane-3)
+- [`^Warhead_` templates carry WEAPON-LEVEL fields, so a dead warhead node is not a dead inherit](#warhead-templates-carry-weapon-level-fields-so-a-dead-warhead-node-is-not-a-dead-inherit)
+- [A rename moves a key, so a SORTED dump reports every touched node as changed](#a-rename-moves-a-key-so-a-sorted-dump-reports-every-touched-node-as-changed)
+- [`gh` resolves the repo from the WRONG remote here, and reports the PR as nonexistent](#gh-resolves-the-repo-from-the-wrong-remote-here-and-reports-the-pr-as-nonexistent)
+- [A spread-band ratio that folds in `Shield` invents violations that do not exist](#a-spread-band-ratio-that-folds-in-shield-invents-violations-that-do-not-exist)
+- [`w_damage` means different things in different sources, and reading it wrong doubles burst](#wdamage-means-different-things-in-different-sources-and-reading-it-wrong-doubles-burst)
+- ["Another class would accept it" sounds like evidence and is worth nothing — count first](#another-class-would-accept-it-sounds-like-evidence-and-is-worth-nothing--count-first)
+- [Cameo shadowing pitfalls — namespace `World` and explicit interface members (2026-09-22)](#cameo-shadowing-pitfalls--namespace-world-and-explicit-interface-members-2026-09-22)
+- [Trait shadows: a proof field proves the TYPE, not the DISPATCH (2026-09-23)](#trait-shadows-a-proof-field-proves-the-type-not-the-dispatch-2026-09-23)
+- [Boot-gate: verify YOUR process made the menu marker (2026-09-23)](#boot-gate-verify-your-process-made-the-menu-marker-2026-09-23)
 - [The canonical engine update pipeline (binding, uniform process)](#the-canonical-engine-update-pipeline-binding-uniform-process)
 - [YAML-only AI personalities and dead squad-manager keys (2026-08-21)](#yaml-only-ai-personalities-and-dead-squad-manager-keys-2026-08-21)
 - [Opt-in AI unit compositions (2026-08-24)](#opt-in-ai-unit-compositions-2026-08-24)
@@ -865,6 +875,23 @@ Then read `C:	mp\gate_<name>\Logs\perf.log` for
 `exception-*.log`. Kill only YOUR OpenRA process afterwards; match on
 `(Get-Process OpenRA).Path` against your own worktree, because another agent's gate may be
 mid-run and a live instance locks the next build.
+
+#### `launch-game.cmd` needs Windows `find.exe` — Git Bash shadows it
+
+**2026-09-22.** The script's engine check is `find %ENGINE_VERSION% %ENGINE_DIRECTORY%\VERSION`;
+under Git Bash, GNU `find` shadows Windows `find.exe`, the check dies with "Required engine
+files not found", and a stale `perf.log` can still read as a pass. Either run the script from
+`cmd.exe`/PowerShell, or invoke the binary directly with the same arguments the script uses:
+
+```
+cd engine && ./bin/OpenRA.exe Game.Mod=cameo Engine.EngineDir=".." \
+  Engine.LaunchPath="<abs path to launch-game.cmd>" \
+  Engine.ModSearchPaths="<worktree>\\mods,./mods"
+```
+
+`Engine.LaunchPath` must point at the launcher script (the mod worktree), NOT `engine/bin` —
+the wrong path aborts with `Unknown or invalid mod 'cameo'` and a zero-byte perf.log.
+Always confirm `perf.log` has a FRESH timestamp before trusting the menu line.
 
 ## The canonical engine update pipeline (binding, uniform process)
 
@@ -1756,6 +1783,11 @@ had shown cameo-mod's PRs moments earlier.
 report a PR or branch as missing on a bare `gh` result — check `gh repo view --json
 nameWithOwner` first, or compare with `gh api repos/cameo-mod/Cameo-mod/compare/master...<branch>`.
 
+Worse variant (hit 2026-09-22): the redirect can also **succeed silently on the wrong repo** —
+`gh pr view/comment 146` resolved to an unrelated PR on `Zeruel87/Cameo-mod` and posted a review
+there, while the real target was #431 on `cameo-mod/Cameo-mod`. Same PR number, different repo —
+no error at all. Any `gh` result without `--repo` is untrusted, including "success".
+
 ## A spread-band ratio that folds in `Shield` invents violations that do not exist
 
 `Shield` is not a normal armor. §12.0c gives it its own compressed `[100,400]` ladder, so its
@@ -1875,3 +1907,36 @@ colour-picker preview build:
   colour-picker palette subscriptions), declare `public new event ...` — the interface map
   then resolves to the event the subclass can raise. A non-`public` `new` event cannot
   satisfy the interface and subscribers silently land on the base event.
+## Trait shadows: a proof field proves the TYPE, not the DISPATCH (2026-09-23)
+
+A Cameo-only yaml field proves `ObjectCreator.FindType` resolved your shadow
+type — it says nothing about which method an interface call will hit. C# keeps
+the BASE class's interface map unless the derived class re-lists the interface,
+so `public new` on a non-virtual interface member never runs:
+`TraitInfos<IRenderActorPreviewInfo>()` dispatched to Common's `RenderPreview`
+even though the Cameo `RenderSpritesInfo` shadow defined its own. The fix is to
+re-declare the interface on the shadow (`class X : Base, IInterface`) — the map
+then rebinds every member, so any member you do NOT also override must be one
+you deliberately want the base version of. Verify with
+`type.GetInterfaceMap(iface)` — a two-line reflection check over the built dll
+prints which declaring type each member binds to. (Claude review on #443;
+the same trap was already handled for the manager's event via
+`IColorPickerManagerInfo`.)
+
+## Boot-gate: verify YOUR process made the menu marker (2026-09-23)
+
+Two launch traps surfaced the same day, both producing false confidence:
+
+1. **`Engine.ModSearchPaths` takes COMMA separators** (`mods,engine\mods` per
+   `boot-test.cmd`) — a semicolon-separated list makes `Game.Initialize` throw
+   `Unknown or invalid mod 'cameo'` before logging even initializes. Check the
+   exception log's *stack path* before assuming a crash is yours: another
+   agent's failed launch leaves the same signature in the shared
+   `%APPDATA%/OpenRA/Logs` directory.
+2. **The menu marker alone is not proof of YOUR boot.** The shared `perf.log`
+   is written by whichever OpenRA.exe is running — a crashed launch sitting
+   next to another agent's healthy boot will show a fresh
+   `MenuPostProcessEffect.PostWorldLoaded` that your process never produced.
+   Gate correctly: confirm the PID you launched is alive through the load AND
+   the marker appears — or timestamp-check that the marker was written during
+   your process's lifetime, not just "exists."
