@@ -49,6 +49,7 @@
 
 ^Effect_MissileHE_Heavy_D2K:
 	Inherits: ^Effect_MissileHE_Heavy
+	Inherits@fx: ^d2k_small_explosion
 	-Warhead@DuneRock:
 	-Warhead@DuneSand:
 	-Warhead@RA2Crater:
@@ -57,10 +58,6 @@
 		SmudgeType: SandCrater, RockCrater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@Effect: CreateEffect
-		Explosions: d2k_small_explosion
-		ImpactSounds: EXPLSML1.WAV
-		ExplosionPalette: effect75alpha
-		ImpactActors: false
 		ValidTargets: Ground, Air
 	Warhead@Concrete: DamagesConcrete
 		Damage: 750
@@ -70,6 +67,7 @@
 
 ^Effect_MissileAP_Heavy_D2K:
 	Inherits: ^Effect_MissileAP_Heavy
+	Inherits@fx: ^d2k_small_explosion
 	-Warhead@DuneRock:
 	-Warhead@DuneSand:
 	-Warhead@RA2Crater:
@@ -78,10 +76,6 @@
 		SmudgeType: SandCrater, RockCrater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@Effect: CreateEffect
-		Explosions: d2k_small_explosion
-		ImpactSounds: EXPLSML1.WAV
-		ExplosionPalette: effect75alpha
-		ImpactActors: false
 		ValidTargets: Ground, Air
 	Warhead@Concrete: DamagesConcrete
 		Damage: 750
@@ -145,14 +139,12 @@
 
 ^Effect_CannonHE_Medium_D2K:
 	Inherits: ^Effect_CannonHE_Medium
+	Inherits@fx: ^d2k_small_napalm
 	-Warhead@Concrete
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: SandCrater, RockCrater
 		InvalidTargets: Vehicle, Structure
 	Warhead@Effect: CreateEffect
-		Explosions: d2k_small_napalm
-		ExplosionPalette: effect75alpha
-		ImpactActors: false
 		ValidTargets: Ground, Ship
 	Warhead@Concrete: DamagesConcrete
 		Damage: 1000
@@ -183,16 +175,13 @@
 
 ^Effect_CannonHE_Heavy_D2K_DevBullet:
 	Inherits: ^Effect_CannonHE_Medium_D2K
+	Inherits@fx: ^d2k_shockwave
 	Warhead@Concrete: DamagesConcrete
 		Damage: 3333
 	Warhead@Glow: GlowImpact
 		Color: A060E8
 		Scale: 1.4
 		FadeFrames: 60
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_shockwave
-		ImpactSounds: EXPLMD4.WAV
-		ExplosionPalette: effect75alpha
 
 ## D2K heavy missile/rocket intermediates.
 ## These keep the per-weapon defaults (ReloadDelay, Range, Report) while pulling
@@ -500,14 +489,9 @@ D2K_TowerMissile:
 		SmudgeType: SandCrater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@Effect: CreateEffect
-		Explosions: d2k_small_explosion
-		ImpactSounds: EXPLSML1.WAV
-		ValidTargets: Ground, Air
-		ImpactActors: false
 		GlowScale: 1.5
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12
-		ExplosionPalette: effect75alpha
 	Warhead@EffectWater: CreateEffect
 		Explosions: small_splash
 		ImpactSounds: splash9.aud
@@ -569,11 +553,9 @@ mtank_pri:
 
 D2KUnitExplodeSmall:
 	Inherits: ^Explosion
+	Inherits@fx: ^d2k_self_destruct
 	Warhead@Effect: CreateEffect
-		Explosions: d2k_self_destruct
-		ImpactSounds: EXPLSML1.WAV
-		ImpactActors: false
-		ExplosionPalette: effect75alpha
+		ValidTargets: Ground, Air, Ship
 
 D2KUnitExplodeLarge:
 	Inherits: ^DamagingExplosionHE
@@ -1187,3 +1169,58 @@ d2k_laser:
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 
 D2K_155mm:	Inherits@finalmain: ^Warhead_CannonHE_Medium_Flat	Inherits: ^D2K155mmLegacy	Warhead@CollapsedD2K_155mmCannonHE_MediumPercentage: AreaDamagePercentage		ValidRelationships: Ally, Neutral, Enemy		FriendlyFireDamage: 50		FriendlyFireSpread: 50		ValidTargets: Ground, Water		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath		Damage: 600		PercentageDenominator: 10000		Versus:			Shield: 25			Scout: 20			Wood: 19			Light: 18			Steel: 17			Medium: 16			Concrete: 15			Heavy: 14			Superheavy: 13			None: 12			Flak: 11			Plate: 10			Heroic: 9			Fighter: 8			Bomber: 7			Helicopter: 6			Spaceship: 5		Falloff: 100, 50, 35		Range: 0, 300, 450	Warhead@CollapsedD2K_155mmConcussion_MediumPercentage: AreaDamagePercentage		ValidRelationships: Ally, Neutral, Enemy		FriendlyFireDamage: 50		FriendlyFireSpread: 50		ValidTargets: Ground, Water		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath		Damage: 600		PercentageDenominator: 10000		Versus:			Shield: 25			Scout: 20			None: 19			Wood: 18			Light: 17			Flak: 16			Steel: 15			Medium: 14			Plate: 13			Concrete: 12			Heavy: 11			Heroic: 10			Superheavy: 9			Fighter: 8			Bomber: 7			Helicopter: 6			Spaceship: 5		Falloff: 100, 72, 50, 32		Range: 0, 350, 700, 1050	Warhead@CollapsedD2K_155mmDemolition_HeavyPercentage: AreaDamagePercentage		ValidRelationships: Ally, Neutral, Enemy		FriendlyFireDamage: 50		FriendlyFireSpread: 50		ValidTargets: Ground, Water		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath		Damage: 600		PercentageDenominator: 10000		Versus:			Shield: 35			Wood: 25			Steel: 24			Concrete: 23			None: 22			Flak: 21			Plate: 20			Heroic: 19			Scout: 18			Light: 17			Medium: 16			Heavy: 15			Superheavy: 14			Fighter: 13			Bomber: 12			Helicopter: 11			Spaceship: 10		Falloff: 100, 45, 18		Range: 0, 466, 932	Warhead@CollapsedD2K_155mmDemolition_LightPercentage: AreaDamagePercentage		ValidRelationships: Ally, Neutral, Enemy		FriendlyFireDamage: 50		FriendlyFireSpread: 50		ValidTargets: Ground, Water		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath		Damage: 600		PercentageDenominator: 10000		Versus:			Shield: 17			Wood: 16			Steel: 15			Concrete: 14			None: 13			Flak: 12			Plate: 11			Heroic: 10			Scout: 9			Light: 8			Medium: 7			Heavy: 6			Superheavy: 5			Fighter: 4			Bomber: 3			Helicopter: 2			Spaceship: 1		Falloff: 100, 45, 18		Range: 0, 233, 466	-Warhead@CannonHE_Medium:	-Warhead@Concussion_Medium:	-Warhead@Demolition_Heavy:	-Warhead@Demolition_Light:	Warhead@CannonHE_Medium_Flat:		ValidTargets: Ground, Water		Damage: 48000		PercentageScale: 0
+## Paired effect+sound templates — D2k visuals with their canonical D2k sounds.
+## Per docs/design/EFFECT_SOUND_TEMPLATES.md: one template per real effect,
+## named after the source game and the effect's own file name, carrying BOTH
+## the visual (Explosions) and the audio (ImpactSounds) together.
+## These are the 7 UNAMBIGUOUS pairings (exactly one sound in the D2k reference).
+## Ambiguous pairings await maintainer rulings (see fleet conflict report).
+
+^d2k_devastator:
+	Warhead@Effect: CreateEffect
+		Explosions: devastator
+		ImpactSounds: EXPLLG5.WAV
+		ExplosionPalette: effect75alpha
+		ImpactActors: false
+
+^d2k_nuke:
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_nuke
+		ImpactSounds: EXPLLG2.WAV
+		ExplosionPalette: effect75alpha
+		ImpactActors: false
+
+^d2k_self_destruct:
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_self_destruct
+		ImpactSounds: EXPLSML1.WAV
+		ExplosionPalette: effect75alpha
+		ImpactActors: false
+
+^d2k_shockwave:
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_shockwave
+		ImpactSounds: EXPLMD4.WAV
+		ExplosionPalette: effect75alpha
+		ImpactActors: false
+
+^d2k_small_explosion:
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_small_explosion
+		ImpactSounds: EXPLSML1.WAV
+		ExplosionPalette: effect75alpha
+		ImpactActors: false
+
+^d2k_small_napalm:
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_small_napalm
+		ImpactSounds: EXPLSML2.WAV
+		ExplosionPalette: effect75alpha
+		ImpactActors: false
+
+^d2k_wall_explosion:
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_wall_explosion
+		ImpactSounds: EXPLHG1.WAV
+		ExplosionPalette: effect75alpha
+		ImpactActors: false
