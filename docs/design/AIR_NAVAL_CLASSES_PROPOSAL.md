@@ -25,6 +25,7 @@ the armament list carries repair/utility payloads, not real weapons.
 | `Fighter` | 22 | 7.5k–90k (37.5k) | 120–3500 (1000) | 75–260 (152) | 2000–9000 (6322) | ≈0–100k (10.1k) |
 | `Spaceship` | 21 | 125k–3750k (400k) | 1500–15000 (5000) | 25–145 (45) | 2500–10000 (7030) | 4k–408k (23.3k) |
 | `ScoutShip` | 22 | 20k–240k (95k) | 500–3600 (1300) | 55–140 (90) | 1250–24000 (8000) | 1k–118k (19.7k) |
+| `AntiAirShip` | 1 | 90k | 1400 | 90 | 9000–10000 | ≈29k |
 | `ArtilleryShip` | 16 | 70k–350k (237.5k) | 1750–4500 (3175) | 40–65 (50) | 8940–25000 (15000) | 1.5k–41.7k (32k) |
 | `BattleShip` | 10 | 25k–250k (125k) | 600–2600 (1600) | 35–125 (85) | 7168–13500 (8854) | 8.3k–114.7k (31.9k) |
 | `Harvester` | 30 | 25k–240k (110k) | 250–1200 (1000) | 38–125 (80) | 1333–5384 (1500) | (unarmed) |
@@ -43,6 +44,7 @@ payloads the estimate over-reads.
 | `bomber` | 34 | `artillery` | high-alpha delivery on a fragile platform; range/speed profile mirrors artillery's stand-off role |
 | `fighter` | 22 | `scout_vehicle` | fast, cheap, light — the air interceptor; nearest analogue by cost/speed |
 | `scout_ship` | 22 | `scout_vehicle` | cheap fast naval picket; the naval scout |
+| `anti_air_ship` | 1 | `archer`/`scout_ship` | sole member is `gunb.asian` (Asian Gun Boat — becomes `asianalliance_gunb` if #424 lands): 1400 cost, 90k HP, ~9k-range flak + heavy cannon. A one-member class is degenerate — either grant it `anti_air_ship` seeded at its own stats, or explicitly fold `AntiAirShip` into `scout_ship` (its values sit inside that envelope either way) |
 | `artillery_ship` | 16 | `artillery_tank` | long-range (15k med) slow naval bombardment — same role, water |
 | `battleship` | 10 | `mbt` | the naval line unit: medium HP, medium range, does the fighting |
 | `spaceship` | 21 | `dreadnought`/`high_tech_tank` | capital-tier: 400k-HP median, 5k-cost median — the late-game anchor class |
@@ -57,6 +59,7 @@ payloads the estimate over-reads.
 | `bomber` | 1500 | 43000 | 55000 | 6200 | 180 | alpha, not sustained — verify against tick model |
 | `fighter` | 1000 | 10000 | 37500 | 6300 | 150 | |
 | `scout_ship` | 1300 | 20000 | 95000 | 8000 | 90 | |
+| `anti_air_ship` | 1400 | 29000 | 90000 | 9000 | 90 | sole member's own stats; or fold into `scout_ship` per above |
 | `artillery_ship` | 3200 | 32000 | 240000 | 15000 | 50 | |
 | `battleship` | 1600 | 32000 | 125000 | 8850 | 85 | |
 | `spaceship` | 5000 | 23000 | 400000 | 7000 | 45 | two cost bands visible (1.5k vs 15k) — possibly two classes |
