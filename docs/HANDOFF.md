@@ -1607,6 +1607,10 @@ the master sum had drifted, twins/companions kept verbatim; `multi_main_fired_we
 is now **27** (26 RA-family still in Nova review + `DRPlasmaTankWeapon` (Claude) +
 the `tesla_bomb` verbatim exception). **2026-09-23: now 25** — #439 (NOVA batch-1)
 landed; PR #452 (NOVA batch-2) folds the RA2Mod set, leaving `DRPlasmaTankWeapon`.
+**That last one is Dark Reign's Plasma Tank weapon and is PARKED (maintainer 2026-09-23: Dark
+Reign is "something for way later").** Dark Reign is not mounted; the weapon is reachable only
+through `^IFVConditions`' `Armament@plasma`, whose `ifv-plasma` condition nothing grants (the whole
+`PassengerConditions` block is commented out), so it cannot fire in game. **W24 has no live debt.**
 
 ### ✅ CLOSED — THE ANTI-AIR CONVENTION. Ruled by the maintainer 2026-09-08.
 
