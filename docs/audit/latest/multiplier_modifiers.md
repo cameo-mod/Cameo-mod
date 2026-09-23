@@ -601,9 +601,9 @@
 | `FirepowerMultiplier@WC2SwordUpg2` |
 | `FirepowerMultiplier@airforce` |
 | `FirepowerMultiplier@artilleryjammer` |
-| `FirepowerMultiplier@asianalliance_militia` |
 | `FirepowerMultiplier@asianalliance_doctrine_heavypulverizerweapons` |
 | `FirepowerMultiplier@asianalliance_doctrine_modernizedinfantryequipment` |
+| `FirepowerMultiplier@asianalliance_militia` |
 | `FirepowerMultiplier@asianalliance_upgrade_celestialpower` |
 | `FirepowerMultiplier@asianalliance_upgrade_dragonfire` |
 | `FirepowerMultiplier@asianalliance_upgrade_wayofthedragon` |

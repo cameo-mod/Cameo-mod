@@ -1,6 +1,8 @@
 80mm_H:
 	Inherits: ^D2K_Cannon
 	ReloadDelay: 55
+	Warhead@EffectAir:
+		ImpactSounds: EXPLMD2.WAV
 
 HarkonnenFlameTurret:
 	Inherits@wh: ^Warhead_Flame_Medium
@@ -31,6 +33,8 @@ harkonnen_autogunturret:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
 
 DebrisMissile:
 	ReloadDelay: 60
@@ -85,6 +89,8 @@ harkonnen_devastatorturret:
 		Speed: 333
 		Image: doubleblastbullet
 		Palette: d2keffect
+	Warhead@EffectAir:
+		ImpactSounds: EXPLMD2.WAV
 harkonnen_inkvine_weapon:
 	Inherits@wh: ^Warhead_Chemical_Heavy
 	Inherits@proj: ^Projectile_Grenade_Light_D2K_155mm
@@ -92,6 +98,8 @@ harkonnen_inkvine_weapon:
 	ReloadDelay: 120
 	Range: 10000
 	Report: MORTAR1.WAV
+	Warhead@Effect1:
+		ImpactSounds: EXPLSML2.WAV
 
 D2K70mmH:
 	Inherits: ^D2K_Cannon
@@ -103,6 +111,8 @@ D2K70mmH:
 	BurstDelays: 0
 	Warhead@CannonHE_Medium:
 		Damage: 10250
+	Warhead@EffectAir:
+		ImpactSounds: EXPLMD2.WAV
 
 
 DevBullet:
@@ -116,6 +126,8 @@ DevBullet:
 		Speed: 333
 		Image: doubleblastbullet
 		Palette: d2keffect
+	Warhead@EffectAir:
+		ImpactSounds: EXPLMD2.WAV
 
 
 D2K_Rocket_AA:
@@ -141,6 +153,8 @@ D2K_Rocket_AA:
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Air
 		Damage: 4750
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
 
 
 PlasmaExplosion:

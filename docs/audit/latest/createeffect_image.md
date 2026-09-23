@@ -1,16 +1,16 @@
 === 52 VIOLATIONS + 0 REDUNDANT (Image: explosion) ===
 
-[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:1023  Hakureiring2  Image: hakurei_giphy
-[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:1087  ReimuYinYangDrone  Image: hakurei_giphy
-[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:1105  THMiss  Image: hakurei_dream
+[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:1016  Hakureiring2  Image: hakurei_giphy
+[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:1080  ReimuYinYangDrone  Image: hakurei_giphy
+[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:1098  THMiss  Image: hakurei_dream
 [VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:4040  RA2CorpseSpawner  Image: ra2corpse
 [VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:4076  RA2FlyingBody  Image: ra2corpse
 [VIOLATION] mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml:2425  AsianTSIonCannon  Image: tsioncannon
-[VIOLATION] mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:2071  TDIonCannon  Image: tsioncannon
-[VIOLATION] mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:2083  TDIonCannon  Image: ionsfx
-[VIOLATION] mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1207  TSIonCannon  Image: tsioncannon
-[VIOLATION] mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1381  E1Droppod  Image: tsdroppod
-[VIOLATION] mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1389  E1Droppod  Image: tsdroppod
+[VIOLATION] mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:3406  TDIonCannon  Image: tsioncannon
+[VIOLATION] mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:3418  TDIonCannon  Image: ionsfx
+[VIOLATION] mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1755  TSIonCannon  Image: tsioncannon
+[VIOLATION] mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1929  E1Droppod  Image: tsdroppod
+[VIOLATION] mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1937  E1Droppod  Image: tsdroppod
 [VIOLATION] mods\cameo\ContentPacks\Warcraft2\Humans\yaml\weapons.yaml:121  wc2paladinholyvision_hit  Image: wc2_effect_sparkle
 [VIOLATION] mods\cameo\ContentPacks\Warcraft2\Humans\yaml\weapons.yaml:151  wc2holyvisionSuper_hit  Image: wc2_effect_sparkle_circle
 [VIOLATION] mods\cameo\ContentPacks\Warcraft2\Humans\yaml\weapons.yaml:155  wc2holyvisionSuper_hit  Image: wc2_effect_sparkle_circle

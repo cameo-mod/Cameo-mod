@@ -1,3 +1,39 @@
+## Devin-DAWN (A4) — L4 FX rulings executed: canonical D2k sounds + audit exemptions (2026-09-23)
+
+**Branch:** `devin/dawn/l4-fx` rebased onto master `4fcc9f941` (post-merge-wave).
+Executes `RULING_2026-09-23_dawn_l4fx_answers.md` (all 5 answers).
+
+- **11 new `^d2k_*` templates** in `ContentPacks/D2k/Shared/yaml/weapons.yaml`
+  (tiny/rocket/med/large_explosion, building, shared_building, piffs,
+  big/med_explosion_air, small_splash, water_piffs) — maintainer-canonical
+  pairings (e.g. `rocket_explosion`→EXPLSML2, `big_explosion_air`→EXPLLG2,
+  `small_splash` keeps RA `splash9.aud`: D2k has no splash sound).
+- **220 resolved `ImpactSounds` corrections** across the six D2k packs: foreign
+  (.aud) sounds on D2k visuals replaced with D2k sounds (rule 3), silent
+  impact nodes given canonical sounds (rule 2 — incl. removing a stale
+  `-ImpactSounds:` cancel on `RashidanGun`'s water channel and the
+  `kaboom25.aud` → `EXPLLG2.WAV` fix the maintainer named on
+  `D2K_Rocket_Trooper`/`d2k_laser`).
+- **`audit_local_effect_fields.py`: ruling-4 exemption** — secondary effect
+  channels (`@2Eff`, `@EffectWater`, `@3Eff`, …) are exempt from the guard
+  ratchet but stay listed (`exempt` column, 331 rows). Re-measured:
+  L1 391 / L2 383, ratchet lowered 680/615 → 391/383.
+- **`audit_weapon_shape.py`: `^<game>_<stem>` pure-effect templates now count
+  as the effect kind** (ordered item 2 — #475 had put them in W8). Detection:
+  template whose indent-1 children are all `Warhead@*` nodes with empty or
+  effect-type inline values. W8 675→671 (ratchet lowered 858→671); W4 51 at
+  ratchet. `^ImpactGlow*`/`^CabalMissileEffect` also reclassified correctly.
+- Full-corpus resolve-diff vs master `4fcc9f941`: **175 changed weapons =
+  220 ImpactSounds + 11 new template defs. Zero other diffs.**
+- Out-of-scope finding posted to fleet: 30 silent + 79 non-EXPL pairings on
+  GENERIC visuals (`piff`, `water_piff`, `small_napalm`, `napalm`,
+  `green_small_fire`) — corpus-wide `piff`/`water_piff` are dominantly silent
+  (81:4, 94:11) so rule-2's blanket "never silent" needs a maintainer pick
+  per visual; `green_small_fire`+`kaboom12.aud` is already canonical (24:8).
+- Verification tooling note: whole-corpus compares MUST use matching
+  miniyaml module + repo root per side and a settled worktree — a stale
+  base produced phantom `@3Eff`/missing-template diffs.
+
 ## Devin-DAWN (A4) — L4 FX lane start: AURORA harvest landed, rulings requested (2026-09-23)
 
 **Branch:** `devin/dawn/l4-fx` (cut from master `7994c8784`), PR #470. Lane

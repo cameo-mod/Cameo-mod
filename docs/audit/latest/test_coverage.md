@@ -2,9 +2,9 @@
 
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
-| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (13 file(s)) | 209 | >= 24 |
-| T2 | `def test_*` in tools/tests (268 file(s)) | 2782 | >= 177 |
-| T3 | modules with no test mentioning them | 279 | <= 224 |
+| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (13 file(s)) | 226 | >= 24 |
+| T2 | `def test_*` in tools/tests (269 file(s)) | 2783 | >= 177 |
+| T3 | modules with no test mentioning them | 285 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (279)
+## T3 — untested modules (285)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -44,6 +44,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Traits/AnnounceOnDamageState.cs | AnnounceOnDamageState |
 | C# | OpenRA.Mods.Cameo/Traits/ArmorPlating.cs | ArmorPlating, ArmorPlatingInit |
 | C# | OpenRA.Mods.Cameo/Traits/Attack/AttackInfectCA.cs | AttackInfectCA |
+| C# | OpenRA.Mods.Cameo/Traits/BotCounterDemandController.cs | BotCounterDemandController |
 | C# | OpenRA.Mods.Cameo/Traits/BotGlobalUnitBudget.cs | BotGlobalUnitBudget |
 | C# | OpenRA.Mods.Cameo/Traits/BotInsurance.cs | BotInsurance |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/CratePickupBotModule.cs | CratePickupBotModule |
@@ -88,6 +89,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Traits/ProvidesTeamProxyActor.cs | ProvidesTeamProxyActor |
 | C# | OpenRA.Mods.Cameo/Traits/QuotaProductionManager.cs | QuotaProductionManager |
 | C# | OpenRA.Mods.Cameo/Traits/Render/OverlayPlayerColorPalette.cs | OverlayPlayerColorPalette |
+| C# | OpenRA.Mods.Cameo/Traits/Render/RenderSprites.cs | ColorPickerPreviewInit |
 | C# | OpenRA.Mods.Cameo/Traits/Render/SelectionDecorations.cs | SelectionDecorations |
 | C# | OpenRA.Mods.Cameo/Traits/Render/WithAlpha.cs | WithAlpha |
 | C# | OpenRA.Mods.Cameo/Traits/Render/WithBuildingBibCA.cs | WithBuildingBibCA |
@@ -155,6 +157,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Widgets/Logic/ProductionTooltipCameoLogic.cs | ProductionTooltipCameoLogic |
 | C# | OpenRA.Mods.Cameo/Widgets/Logic/ReplayControlBarLogicCameo.cs | ReplayControlBarLogicCameo |
 | C# | OpenRA.Mods.Cameo/Widgets/Logic/StarportBatchStatusLogic.cs | StarportBatchStatusLogic |
+| C# | OpenRA.Mods.Cameo/Widgets/Logic/VersusSummary.cs | VersusSummary |
 | C# | OpenRA.Mods.Cameo/Widgets/ObserverArmyValuesWidget.cs | ObserverArmyValuesWidget |
 | C# | OpenRA.Mods.Cameo/Widgets/ObserverBuildOrderIconsWidget.cs | ObserverBuildOrderIconsWidget |
 | C# | OpenRA.Mods.Cameo/Widgets/ObserverPromotionsIconsWidget.cs | ObserverPromotionsIconsWidget |
@@ -191,6 +194,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_hex_shield_routing.py | audit_hex_shield_routing |
 | python | tools/audit/audit_inherits.py | audit_inherits |
 | python | tools/audit/audit_inline_effects.py | audit_inline_effects |
+| python | tools/audit/audit_local_effect_fields.py | audit_local_effect_fields |
 | python | tools/audit/audit_map_actors.py | audit_map_actors |
 | python | tools/audit/audit_metadata.py | audit_metadata |
 | python | tools/audit/audit_meter_dilution.py | audit_meter_dilution |
@@ -200,6 +204,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_naming_damage.py | audit_naming_damage |
 | python | tools/audit/audit_nuclear_flash_bindings.py | audit_nuclear_flash_bindings |
 | python | tools/audit/audit_original_coverage.py | audit_original_coverage |
+| python | tools/audit/audit_orphan_cancels.py | audit_orphan_cancels |
 | python | tools/audit/audit_orphan_removals.py | audit_orphan_removals |
 | python | tools/audit/audit_orphans.py | audit_orphans |
 | python | tools/audit/audit_outliers.py | audit_outliers |
@@ -251,6 +256,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/apply_support_durability.py | apply_support_durability |
 | python | tools/balance/apply_transport_chassis.py | apply_transport_chassis |
 | python | tools/balance/armor_exposure.py | armor_exposure |
+| python | tools/balance/audit_active_class_coverage.py | audit_active_class_coverage |
 | python | tools/balance/audit_below_divider.py | audit_below_divider |
 | python | tools/balance/carrier_slave_ammo.py | carrier_slave_ammo |
 | python | tools/balance/collapse_target.py | collapse_target |
@@ -302,5 +308,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 279 untested > baseline 224
+- T3: 285 untested > baseline 224
 

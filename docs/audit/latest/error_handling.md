@@ -1,13 +1,13 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **702**
+Files scanned: **722**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
 | E1 | bare except / except BaseException | 5 | 2 |
-| E2 | handler discards the error | 110 | 30 |
+| E2 | handler discards the error | 122 | 30 |
 | E3 | open() without encoding= | 154 | 90 |
-| E4 | subprocess call without check= | 35 | 9 |
+| E4 | subprocess call without check= | 36 | 9 |
 
 
 ## Files that do not parse
@@ -28,7 +28,7 @@ Files scanned: **702**
 | tools/balance/apply_harvester_durability.py | 420 | `except BaseException` |
 
 
-## E2 — 110 finding(s)
+## E2 — 122 finding(s)
 
 | file | line | detail |
 |---|---|---|
@@ -75,8 +75,8 @@ Files scanned: **702**
 | tools/balance/armor_exposure.py | 105 | handler body discards the error |
 | tools/balance/armor_exposure.py | 141 | handler body discards the error |
 | tools/balance/assign_references.py | 82 | handler body discards the error |
-| tools/balance/assign_references.py | 555 | handler body discards the error |
-| tools/balance/assign_references.py | 782 | handler body discards the error |
+| tools/balance/assign_references.py | 567 | handler body discards the error |
+| tools/balance/assign_references.py | 794 | handler body discards the error |
 | tools/balance/audit_deprecated_name_lane.py | 51 | handler body discards the error |
 | tools/balance/build_armament_pairing_report.py | 138 | handler body discards the error |
 | tools/balance/build_reference_report.py | 1474 | handler body discards the error |
@@ -127,9 +127,21 @@ Files scanned: **702**
 | tools/hooks/bash_guard.py | 154 | handler body discards the error |
 | tools/hooks/bash_guard.py | 214 | handler body discards the error |
 | tools/reference/aggregate_archetype.py | 898 | handler body discards the error |
-| tools/reference/extract_peer_units.py | 921 | handler body discards the error |
-| tools/reference/extract_peer_units.py | 1021 | handler body discards the error |
+| tools/reference/compress_warheads.py | 412 | handler body discards the error |
+| tools/reference/compress_warheads.py | 430 | handler body discards the error |
+| tools/reference/extract_peer_units.py | 1008 | handler body discards the error |
+| tools/reference/extract_peer_units.py | 1124 | handler body discards the error |
+| tools/reference/extract_peer_units.py | 1212 | handler body discards the error |
+| tools/reference/extract_peer_units.py | 1265 | handler body discards the error |
+| tools/reference/extract_peer_units.py | 1303 | handler body discards the error |
 | tools/reference/extract_versus.py | 207 | handler body discards the error |
+| tools/reference/fit_families.py | 136 | handler body discards the error |
+| tools/reference/warhead_matrix.py | 434 | handler body discards the error |
+| tools/reference/warhead_matrix.py | 476 | handler body discards the error |
+| tools/reference/warhead_matrix.py | 520 | handler body discards the error |
+| tools/reference/warhead_matrix.py | 1307 | handler body discards the error |
+| tools/reference/warhead_matrix.py | 1345 | handler body discards the error |
+| tools/reference/warhead_matrix.py | 1373 | handler body discards the error |
 | tools/rename/apply.py | 178 | handler body discards the error |
 | tools/rename/safe_rename.py | 132 | handler body discards the error |
 | tools/rename/safe_rename.py | 141 | handler body discards the error |
@@ -304,7 +316,7 @@ Files scanned: **702**
 | tools/tilesets/transfer_ai_cliff_style.py | 101 | `Image.open()` without encoding= |
 
 
-## E4 — 35 finding(s)
+## E4 — 36 finding(s)
 
 | file | line | detail |
 |---|---|---|
@@ -339,6 +351,7 @@ Files scanned: **702**
 | tools/hooks/test_bash_guard.py | 58 | `subprocess.run()` without check= |
 | tools/hooks/test_bash_guard.py | 77 | `subprocess.run()` without check= |
 | tools/reference/splice_peer_section.py | 73 | `subprocess.run()` without check= |
+| tools/tests/ai_bot_player_gate.py | 86 | `subprocess.Popen()` without check= |
 | tools/tests/test_continuous_cannonap_preview.py | 106 | `subprocess.run()` without check= |
 | tools/tests/test_continuous_cannonap_preview.py | 115 | `subprocess.run()` without check= |
 | tools/tests/test_peer_export.py | 454 | `subprocess.run()` without check= |
@@ -348,8 +361,8 @@ Files scanned: **702**
 ## FAIL
 
 - E1: 5 > baseline 2
-- E2: 110 > baseline 30
+- E2: 122 > baseline 30
 - E3: 154 > baseline 90
-- E4: 35 > baseline 9
+- E4: 36 > baseline 9
 - 1 file(s) do not parse
 

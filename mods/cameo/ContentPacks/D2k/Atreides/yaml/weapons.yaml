@@ -73,6 +73,8 @@ OrniGunC:
 		ValidTargets: Ground, Air
 		Damage: 800
 	MinRange: 1200
+	Warhead@2Eff:
+		ImpactSounds: EXPLSML1.WAV
 
 
 Fremen_S:
@@ -85,6 +87,9 @@ Fremen_S:
 		Damage: 1600
 	Warhead@2Eff: CreateEffect
 		Explosions: d2k_small_explosion
+		ImpactSounds: EXPLSML1.WAV
+	Warhead@4Eff_2Water:
+		ImpactSounds: splash9.aud
 
 # Migrated from legacy mods/cameo/weapons/d2k.yaml (Ruling 9)
 # These weapons are only used by Atreides actors.
@@ -150,4 +155,6 @@ PhoenixRocket:
 		Amount: 3
 		ValidTargets: Ground, Water, Air
 	MinRange: 920
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
 
