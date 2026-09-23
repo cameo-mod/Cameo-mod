@@ -137,6 +137,10 @@ the fog sequencing.
 - [x] **M** Phase 3 synced `BotPersonalityController` and difficulty-gated dynamic
   personality switching through `SetBotPersonality`; lower tiers retain fixed
   random personalities.
+- [x] **M** Phase 4 main-target consumption: `SquadManagerBotModuleCA` prefers the
+  master's `MainTarget` for proactive picks when `PreferMainTarget` is enabled.
+- [x] **M** Phase 5 counter-demand conditions: `BotCounterDemandController` exposes
+  hysteretic, sustained `demand.*` prerequisites for pilot compositions.
 - [ ] **M** `MasterAiBotModule`: fogged per-enemy signals, main-target scoring,
   and later personality refinements.
 - [ ] **M** Per-enemy pairwise damage ledger (`PlayerStatistics` is aggregate and

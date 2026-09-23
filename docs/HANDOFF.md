@@ -1447,6 +1447,14 @@ my phase-2 branch: their eligibility rule, their tests and their contract table,
   an `IResolveOrder` bridge) because a bot module may not grant a condition. If you have already
   prototyped that bridge under Task H, say so before I write it.
 
+### Counter-demand composition opt-in
+
+Faction lanes can demand-gate a composition by adding `Prerequisites: demand.antiair` (or another
+demand name); no C# is needed. The available prerequisites are `demand.antiair`,
+`demand.antiarmour`, `demand.antiinfantry`, `demand.detector`, and `demand.artillery`.
+Thresholds are On/Off hysteresis pairs: anti-air 25/15, anti-armour 40/30, anti-infantry 40/30,
+detector 20/10, and artillery 40/25.
+
 ### And one thing I got wrong today, because the protocol says to say it
 
 I ran `git checkout origin/master -- .` in the shared checkout while a merge was in flight —

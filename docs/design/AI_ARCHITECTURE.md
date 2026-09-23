@@ -1044,9 +1044,16 @@ allow it.
    The guerrilla rule is currently a computed-but-unavailable candidate: it remains in the
    situation log's candidate field, while the active five-personality controller falls through
    to the next grantable rule.
-4. **Main target selection**, consumed by the squad managers and support powers.
-5. **Counter demand and hints**, consumed by the unit builder, base builder and compositions
-   (`ProvidesPrerequisite` tokens, zero C#).
+4. **Main target selection (implemented).** `MasterAiBotModule` exposes its main target through
+   a CA-owned provider seam. `SquadManagerBotModuleCA` uses the opt-in `PreferMainTarget` field
+   for proactive, unbounded picks only; in-radius combat targeting remains nearest-first and
+   falls back to the unrestricted candidate list when the target has no valid actors.
+5. **Counter demand and hints (implemented).** `MasterAiBotModule` issues the
+   `SetBotCounterDemand` order; `BotCounterDemandController` owns the synced demand conditions;
+   `ProvidesPrerequisite` maps those conditions to `demand.*` tokens, and composition
+   `Prerequisites` consume them without new consumer-side C#. Signals use hysteresis, with
+   per-tier sustained activation delays and immediate removal below the off threshold. Only a
+   small set of pilot compositions ships initially.
 6. **Fogged observation + `ScoutBotModule`.** Deliberately last among the behaviour changes,
    because it makes the bots temporarily weaker and it invalidates any tuning done against
    omniscient signals. This is the §9.1 decision; phases 1-5 are honest about being pre-fog.

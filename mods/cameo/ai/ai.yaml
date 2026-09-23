@@ -214,6 +214,21 @@ Player:
 	ProvidesPrerequisite@cameogodbotplayer:
 		Prerequisite: cameogodbotplayer
 		RequiresCondition: cameogodbot
+	ProvidesPrerequisite@demandantiair:
+		Prerequisite: demand.antiair
+		RequiresCondition: demand-antiair
+	ProvidesPrerequisite@demandantiarmour:
+		Prerequisite: demand.antiarmour
+		RequiresCondition: demand-antiarmour
+	ProvidesPrerequisite@demandantiinfantry:
+		Prerequisite: demand.antiinfantry
+		RequiresCondition: demand-antiinfantry
+	ProvidesPrerequisite@demanddetector:
+		Prerequisite: demand.detector
+		RequiresCondition: demand-detector
+	ProvidesPrerequisite@demandartillery:
+		Prerequisite: demand.artillery
+		RequiresCondition: demand-artillery
 	ProvidesPrerequisite@brutalorhuman:
 		Prerequisite: brutalaiorhuman
 		RequiresCondition: !easiestbot && !veryeasybot && !easybot && !mediumbot && !hardbot
@@ -3149,6 +3164,8 @@ Player:
 	BuildingRepairBotModuleCA:
 		RequiresCondition: genericbot
 	BotPersonalityController:
+		RequiresCondition: genericbot
+	BotCounterDemandController:
 		RequiresCondition: genericbot
 	MasterAiBotModule:
 		RequiresCondition: genericbot
@@ -6526,3 +6543,27 @@ World:
 				td_nod_lighttank: 20
 				td_nod_flametank: 10
 				td_nod_specterartillery: 10
+		Composition@TDGDIAntiAirDemand:
+			UnitQueues: Vehicle, RAVehicle
+			Prerequisites: td_gdi_weaponsfactory, demand.antiair
+			MinInterval: 3000
+			MaxDuration: 3000
+			EnabledChance: 100
+			UnitsToBuild:
+				td_gdi_mlrs: 100
+		Composition@TDNodAntiAirDemand:
+			UnitQueues: Vehicle, RAVehicle
+			Prerequisites: td_nod_airstrip, demand.antiair
+			MinInterval: 3000
+			MaxDuration: 3000
+			EnabledChance: 100
+			UnitsToBuild:
+				td_nod_stealthtank: 100
+		Composition@TDNodArtilleryDemand:
+			UnitQueues: Vehicle, RAVehicle
+			Prerequisites: td_nod_airstrip, demand.artillery
+			MinInterval: 3000
+			MaxDuration: 3000
+			EnabledChance: 100
+			UnitsToBuild:
+				td_nod_specterartillery: 100

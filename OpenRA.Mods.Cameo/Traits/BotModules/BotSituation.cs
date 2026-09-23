@@ -71,6 +71,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public int PersonalityCandidateSince;
 		public string PersonalityCandidate = "";
 		public bool EmergencyPersonalityHandled;
+		public Dictionary<string, int> CounterDemandCandidateSince = new(StringComparer.Ordinal);
+		public string[] LastIssuedCounterDemands = Array.Empty<string>();
 		public (int Tick, int Delta)[] LossSamples = Array.Empty<(int, int)>();
 		public (int Tick, int Delta)[] KillSamples = Array.Empty<(int, int)>();
 		public int[] ProductionLossTicks = Array.Empty<int>();
@@ -108,15 +110,52 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public readonly int RushMaxEnemyDefenceCount = 2;
 		public readonly int EliminationBuildingSaturation = 8;
 		public readonly int PersonalityHoldTicks = 3000;
-		[Desc("Fallback reaction delay in ticks when the bot player has no enabled BotLimits. Negative disables switching.")]
+		[Desc("Fallback reaction delay in ticks when the bot player has no enabled BotLimits. Negative disables personality switching and counter demand.")]
 		public readonly int DefaultPersonalityReactionDelay = 7500;
+		[Desc("Signal threshold to enable anti-air counter demand.")]
+		public readonly int AntiAirDemandOn = 25;
+		[Desc("Signal threshold below which held anti-air counter demand is removed.")]
+		public readonly int AntiAirDemandOff = 15;
+		[Desc("Signal threshold to enable anti-armour counter demand.")]
+		public readonly int AntiArmourDemandOn = 40;
+		[Desc("Signal threshold below which held anti-armour counter demand is removed.")]
+		public readonly int AntiArmourDemandOff = 30;
+		[Desc("Signal threshold to enable anti-infantry counter demand.")]
+		public readonly int AntiInfantryDemandOn = 40;
+		[Desc("Signal threshold below which held anti-infantry counter demand is removed.")]
+		public readonly int AntiInfantryDemandOff = 30;
+		[Desc("Signal threshold to enable detector counter demand.")]
+		public readonly int DetectorDemandOn = 20;
+		[Desc("Signal threshold below which held detector counter demand is removed.")]
+		public readonly int DetectorDemandOff = 10;
+		[Desc("Signal threshold to enable artillery counter demand.")]
+		public readonly int ArtilleryDemandOn = 40;
+		[Desc("Signal threshold below which held artillery counter demand is removed.")]
+		public readonly int ArtilleryDemandOff = 25;
+
+		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
+		{
+			base.RulesetLoaded(rules, ai);
+			ValidateDemandThreshold("AntiAir", AntiAirDemandOn, AntiAirDemandOff);
+			ValidateDemandThreshold("AntiArmour", AntiArmourDemandOn, AntiArmourDemandOff);
+			ValidateDemandThreshold("AntiInfantry", AntiInfantryDemandOn, AntiInfantryDemandOff);
+			ValidateDemandThreshold("Detector", DetectorDemandOn, DetectorDemandOff);
+			ValidateDemandThreshold("Artillery", ArtilleryDemandOn, ArtilleryDemandOff);
+		}
 
 		public override object Create(ActorInitializer init) { return new MasterAiBotModule(init.Self, this); }
+
+		static void ValidateDemandThreshold(string name, int on, int off)
+		{
+			if (off > on)
+				throw new YamlException($"{name}DemandOff must be less than or equal to {name}DemandOn.");
+		}
 	}
 
 	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData
 	{
 		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller" };
+		internal static readonly string[] DemandNames = { "antiair", "antiarmour", "antiinfantry", "detector", "artillery" };
 		readonly OpenRA.Player player;
 		readonly List<BotSituation> pendingSituations = [];
 		readonly Queue<(int Tick, int Delta)> lossSamples = new();
@@ -137,6 +176,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int personalityCandidateSince;
 		string sustainedCandidate = "";
 		bool emergencyPersonalityHandled;
+		readonly Dictionary<string, int> counterDemandCandidateSince = new(StringComparer.Ordinal);
+		string[] lastIssuedCounterDemands = Array.Empty<string>();
 
 		public BotSituation Situation { get; private set; }
 		internal int DeathsCostWindow { get; private set; }
@@ -251,6 +292,23 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				lastDecisionTick = tick;
 
 			var demand = BuildDemand(profiles.Values, targetProfile, enemyArmy);
+			var demandController = player.PlayerActor.TraitOrDefault<BotCounterDemandController>();
+			var activeDemands = demandController?.ActiveDemands.ToHashSet(StringComparer.Ordinal) ??
+				new HashSet<string>(StringComparer.Ordinal);
+			var heldDemands = activeDemands.Count > 0 ? activeDemands :
+				lastIssuedCounterDemands.ToHashSet(StringComparer.Ordinal);
+			var resolvedDemands = ResolveDemands(demand, heldDemands, tick, reactionDelay,
+				counterDemandCandidateSince, Info);
+			if (demandController != null && !activeDemands.SetEquals(resolvedDemands))
+			{
+				bot.QueueOrder(new Order("SetBotCounterDemand", player.PlayerActor, false)
+				{
+					TargetString = string.Join(",", resolvedDemands),
+					SuppressVisualFeedback = true
+				});
+				lastIssuedCounterDemands = resolvedDemands;
+			}
+
 			var situation = new BotSituation
 			{
 				Tick = tick,
@@ -560,6 +618,85 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			};
 		}
 
+		internal static string[] ResolveDemands(CounterDemand demand, IReadOnlyCollection<string> held,
+			int tick, int reactionDelay, IDictionary<string, int> candidateSince, MasterAiBotModuleInfo info)
+		{
+			if (reactionDelay < 0)
+			{
+				candidateSince.Clear();
+				return Array.Empty<string>();
+			}
+
+			var heldSet = held.ToHashSet(StringComparer.Ordinal);
+			var resolved = new List<string>();
+			foreach (var name in DemandNames)
+			{
+				var value = DemandValue(demand, name);
+				if (heldSet.Contains(name))
+				{
+					candidateSince.Remove(name);
+					if (value >= DemandOff(info, name))
+						resolved.Add(name);
+					continue;
+				}
+
+				if (value < DemandOn(info, name))
+				{
+					candidateSince.Remove(name);
+					continue;
+				}
+
+				if (!candidateSince.TryGetValue(name, out var since))
+					candidateSince[name] = since = tick;
+				if (tick - since >= reactionDelay)
+					resolved.Add(name);
+			}
+
+			foreach (var name in candidateSince.Keys.Where(name => !DemandNames.Contains(name, StringComparer.Ordinal)).ToArray())
+				candidateSince.Remove(name);
+
+			return resolved.ToArray();
+		}
+
+		static int DemandValue(CounterDemand demand, string name)
+		{
+			return name switch
+			{
+				"antiair" => demand?.AntiAir ?? 0,
+				"antiarmour" => demand?.AntiArmour ?? 0,
+				"antiinfantry" => demand?.AntiInfantry ?? 0,
+				"detector" => demand?.Detector ?? 0,
+				"artillery" => demand?.Artillery ?? 0,
+				_ => 0
+			};
+		}
+
+		static int DemandOn(MasterAiBotModuleInfo info, string name)
+		{
+			return name switch
+			{
+				"antiair" => info.AntiAirDemandOn,
+				"antiarmour" => info.AntiArmourDemandOn,
+				"antiinfantry" => info.AntiInfantryDemandOn,
+				"detector" => info.DetectorDemandOn,
+				"artillery" => info.ArtilleryDemandOn,
+				_ => int.MaxValue
+			};
+		}
+
+		static int DemandOff(MasterAiBotModuleInfo info, string name)
+		{
+			return name switch
+			{
+				"antiair" => info.AntiAirDemandOff,
+				"antiarmour" => info.AntiArmourDemandOff,
+				"antiinfantry" => info.AntiInfantryDemandOff,
+				"detector" => info.DetectorDemandOff,
+				"artillery" => info.ArtilleryDemandOff,
+				_ => int.MaxValue
+			};
+		}
+
 		List<MiniYamlNode> IGameSaveTraitData.IssueTraitData(Actor self)
 		{
 			if (IsTraitDisabled)
@@ -575,6 +712,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				PersonalityCandidateSince = personalityCandidateSince,
 				PersonalityCandidate = sustainedCandidate,
 				EmergencyPersonalityHandled = emergencyPersonalityHandled,
+				CounterDemandCandidateSince = new Dictionary<string, int>(counterDemandCandidateSince, StringComparer.Ordinal),
+				LastIssuedCounterDemands = lastIssuedCounterDemands.ToArray(),
 				LossSamples = lossSamples.ToArray(),
 				KillSamples = killSamples.ToArray(),
 				ProductionLossTicks = productionLossTicks.ToArray(),
@@ -596,6 +735,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			personalityCandidateSince = state.PersonalityCandidateSince;
 			sustainedCandidate = state.PersonalityCandidate;
 			emergencyPersonalityHandled = state.EmergencyPersonalityHandled;
+			counterDemandCandidateSince.Clear();
+			foreach (var candidate in state.CounterDemandCandidateSince)
+				counterDemandCandidateSince[candidate.Key] = candidate.Value;
+			lastIssuedCounterDemands = state.LastIssuedCounterDemands;
 
 			lossSamples.Clear();
 			foreach (var sample in state.LossSamples)
@@ -627,6 +770,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				new("PersonalityCandidateSince", FieldSaver.FormatValue(state.PersonalityCandidateSince)),
 				new("PersonalityCandidate", FieldSaver.FormatValue(state.PersonalityCandidate)),
 				new("EmergencyPersonalityHandled", FieldSaver.FormatValue(state.EmergencyPersonalityHandled)),
+				new("CounterDemandCandidateSince", "", state.CounterDemandCandidateSince
+					.OrderBy(candidate => candidate.Key, StringComparer.Ordinal)
+					.Select(candidate => new MiniYamlNode(candidate.Key, FieldSaver.FormatValue(candidate.Value))).ToList()),
+				new("LastIssuedCounterDemands", FieldSaver.FormatValue(state.LastIssuedCounterDemands)),
 				new("LossSamples", "", state.LossSamples.Select(SampleNode).ToList()),
 				new("KillSamples", "", state.KillSamples.Select(SampleNode).ToList()),
 				new("ProductionLossTicks", FieldSaver.FormatValue(state.ProductionLossTicks)),
@@ -654,6 +801,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				state.PersonalityCandidate = FieldLoader.GetValue<string>("PersonalityCandidate", candidateNode.Value);
 			if (nodes.TryGetValue("EmergencyPersonalityHandled", out var handledNode))
 				state.EmergencyPersonalityHandled = FieldLoader.GetValue<bool>("EmergencyPersonalityHandled", handledNode.Value);
+			if (nodes.TryGetValue("CounterDemandCandidateSince", out var demandCandidatesNode))
+				foreach (var candidate in demandCandidatesNode.Nodes)
+					state.CounterDemandCandidateSince[candidate.Key] = FieldLoader.GetValue<int>(candidate.Key, candidate.Value.Value);
+			if (nodes.TryGetValue("LastIssuedCounterDemands", out var issuedDemandsNode))
+				state.LastIssuedCounterDemands = FieldLoader.GetValue<string[]>("LastIssuedCounterDemands", issuedDemandsNode.Value);
 
 			state.LossSamples = ReadSamples(nodes, "LossSamples");
 			state.KillSamples = ReadSamples(nodes, "KillSamples");
