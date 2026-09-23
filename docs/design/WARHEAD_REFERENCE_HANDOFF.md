@@ -297,7 +297,9 @@ surviving decision, and the coverage report cannot see the difference on its own
 * **The naval ladder.** `DepthCharge`, `DoubleDepthCharge`, `SubMissile`, `TorpTube` are parked as
   `(park: naval)`. Their measured profiles are unusable anyway — all four read flat 100 because
   `ValidTargets: Submarine` makes every other armour unreachable.
-* **Spread and Falloff** were asked for per source and are not extracted yet.
+* **Spread and Falloff: EXTRACTED (R73)** — `python tools/reference/warhead_geometry.py [--write]`, per weapon and
+  per family, compared with Cameo's `PHYSICS_SHAPES`. TD/TS-era `Spread` (DTA, TI) is kept verbatim until its
+  engine formula is verified. For review only; nothing is applied.
 
 ## Traps that have already cost a session
 
