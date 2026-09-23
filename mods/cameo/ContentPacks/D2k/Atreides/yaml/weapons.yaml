@@ -45,6 +45,7 @@ OrniBombC:
 
 OrniMissile:
 	Inherits: PhoenixRocket
+	Inherits@wh: ^Warhead_MissileHE_Heavy
 	ReloadDelay: 66
 	Burst: 2
 	Range: 6666
@@ -56,17 +57,11 @@ OrniMissile:
 		Inaccuracy: 666
 		Speed: 333
 		RangeLimit: 33333
-	Warhead@1Dam: SpreadDamage
-		Damage: 12345
-		Spread: 1234
+	-Warhead@MissileAP_Heavy:
+	-Warhead@1Dam:
+	Warhead@MissileHE_Heavy:
+		Damage: 13345
 		ValidTargets: Ground, Air
-		Versus:
-			None: 25
-			Wood: 150
-			Light: 100
-			Medium: 75
-			Heavy: 50
-			Concrete: 125
 	MinRange: 1335
 
 

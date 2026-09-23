@@ -1,6 +1,6 @@
 # Physical-State System — damage-scaled status meters (design spec, rev. 2026-08-09)
 
-> **Numeric evidence refresh — 2026-09-10, combined `839cdced4` plus reopened tooling.** `meters_filling_before_death` = **310**; `w24_multi_main_fed` = **290**. Measured on this combined tree; predicates and tolerances are unchanged. The flat-health denominator correction changes diagnostics, not live weapons or prices. Earlier branch-specific snapshots remain historical.
+> **Numeric evidence refresh — 2026-09-10, combined `839cdced4` plus reopened tooling.** `meters_filling_before_death` = **310**; `w24_multi_main_fed` = **290**. **2026-09-22 (DAWN lane-3): `w24_multi_main_fed` = 274.** Measured on this combined tree; predicates and tolerances are unchanged. The flat-health denominator correction changes diagnostics, not live weapons or prices. Earlier branch-specific snapshots remain historical.
 
 Status: **The framework + the entire Temperature axis ALREADY EXIST and are wired.** This rev
 corrects the first draft, which wrongly implied a from-scratch C# build. The real remaining work is

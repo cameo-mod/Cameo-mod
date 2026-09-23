@@ -197,13 +197,17 @@ claims:
       print(n)
 
   - id: multi_main_fired_weapons
-    value: 120
+    value: 27
     tolerance: 0
     what: >
       Direct actor-armament weapons carrying MORE THAN ONE damage main under the unified W24
       predicate — W24's scope, and the reason pricing must wait for the weapon rebuild.
       Updated 2026-09-06: intentional_composites exemption repealed; all multi-main weapons
       now count as debt (was 192 with exemption filter, 856 without).
+      Updated 2026-09-22: DAWN lane-3 folded the last 27 non-RA weapons (outpost2 x10,
+      D2k packs x8, TiberianDawn x3, StarCraft x2, TiberianSun x4). The 27 remaining
+      are Nova's RA-family lane (26) + DRPlasmaTankWeapon (Claude) + the documented
+      tesla_bomb verbatim exception.
     docs: [docs/design/BALANCE_PROGRAM_PLAN.md, docs/HANDOFF.md]
     measure: |
       import sys, pathlib
@@ -328,7 +332,7 @@ claims:
                   break
       print(n)
   - id: w24_multi_main_fed
-    value: 290
+    value: 274
     tolerance: 0
     what: >
       RATCHET — damage-scaled metered weapons whose meter is fed by LESS than 100% of their

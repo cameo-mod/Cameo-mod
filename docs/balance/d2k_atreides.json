@@ -69,18 +69,11 @@
       "burstdelays": "6",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
+        "damage": "13345",
+        "falloff": "100, 45, 15, 0",
+        "spread": "200",
+        "tag": "MissileHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "12345",
-        "falloff": null,
-        "spread": "1234",
-        "tag": "1Dam",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Atreides/yaml/weapons.yaml",
@@ -91,10 +84,12 @@
       "reloaddelay": "66",
       "slot": "Armament",
       "versus_templates": [
-       "PhoenixRocket"
+       "PhoenixRocket",
+       "^Warhead_MissileHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAP_Heavy",
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "OrniMissile",
       "weapon_class_source": "template"
@@ -197,18 +192,11 @@
       "burstdelays": "6",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
+        "damage": "13345",
+        "falloff": "100, 45, 15, 0",
+        "spread": "200",
+        "tag": "MissileHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "12345",
-        "falloff": null,
-        "spread": "1234",
-        "tag": "1Dam",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Atreides/yaml/weapons.yaml",
@@ -219,10 +207,12 @@
       "reloaddelay": "66",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "PhoenixRocket"
+       "PhoenixRocket",
+       "^Warhead_MissileHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAP_Heavy",
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "OrniMissile",
       "weapon_class_source": "template"
@@ -239,7 +229,7 @@
         "type": "SpreadDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/D2k/Atreides/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "6666",
@@ -1278,7 +1268,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5475",
@@ -1307,7 +1297,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5475",
@@ -1420,7 +1410,7 @@
         "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "6185",
@@ -1477,7 +1467,7 @@
         "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
       "range": "6185",
@@ -1828,7 +1818,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/D2k/Atreides/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3072",
@@ -2008,65 +1998,16 @@
    "atreides_minotaurus": {
     "armaments": [
      {
-      "damage_warheads": [
-       {
-        "damage": "48000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Flat",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "600",
-        "falloff": "100, 50, 35",
-        "percentage_denominator": "10000",
-        "spread": null,
-        "tag": "CollapsedD2K_155mmCannonHE_MediumPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": "100, 72, 50, 32",
-        "percentage_denominator": "10000",
-        "spread": null,
-        "tag": "CollapsedD2K_155mmConcussion_MediumPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": "100, 45, 18",
-        "percentage_denominator": "10000",
-        "spread": null,
-        "tag": "CollapsedD2K_155mmDemolition_HeavyPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": "100, 45, 18",
-        "percentage_denominator": "10000",
-        "spread": null,
-        "tag": "CollapsedD2K_155mmDemolition_LightPercentage",
-        "type": "AreaDamagePercentage"
-       }
-      ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "damage_warheads": [],
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "pricing": true,
-      "range": "10000",
-      "reloaddelay": "74",
+      "extraction_note": "no_damage_warheads",
+      "pricing": false,
       "slot": "Armament",
-      "versus_templates": [
-       "^Warhead_CannonHE_Medium_Flat",
-       "^D2K155mmLegacy"
-      ],
-      "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Concussion_Medium",
-       "^Warhead_CannonHE_Medium"
-      ],
+      "versus_templates": [],
+      "warheads": [],
       "weapon": "D2K_155mm",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2142,18 +2083,11 @@
       "burstdelays": "25",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "16000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "15000",
-        "falloff": null,
-        "spread": null,
-        "tag": "1Dam",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
@@ -2315,18 +2249,11 @@
       "burstdelays": "25",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "16000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "15000",
-        "falloff": null,
-        "spread": null,
-        "tag": "1Dam",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
@@ -2535,7 +2462,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/D2k/Atreides/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3072",
@@ -2620,65 +2547,16 @@
    "atreides_siegetank": {
     "armaments": [
      {
-      "damage_warheads": [
-       {
-        "damage": "48000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Flat",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "600",
-        "falloff": "100, 50, 35",
-        "percentage_denominator": "10000",
-        "spread": null,
-        "tag": "CollapsedD2K_155mmCannonHE_MediumPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": "100, 72, 50, 32",
-        "percentage_denominator": "10000",
-        "spread": null,
-        "tag": "CollapsedD2K_155mmConcussion_MediumPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": "100, 45, 18",
-        "percentage_denominator": "10000",
-        "spread": null,
-        "tag": "CollapsedD2K_155mmDemolition_HeavyPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": "100, 45, 18",
-        "percentage_denominator": "10000",
-        "spread": null,
-        "tag": "CollapsedD2K_155mmDemolition_LightPercentage",
-        "type": "AreaDamagePercentage"
-       }
-      ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "damage_warheads": [],
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "pricing": true,
-      "range": "10000",
-      "reloaddelay": "74",
+      "extraction_note": "no_damage_warheads",
+      "pricing": false,
       "slot": "Armament",
-      "versus_templates": [
-       "^Warhead_CannonHE_Medium_Flat",
-       "^D2K155mmLegacy"
-      ],
-      "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Concussion_Medium",
-       "^Warhead_CannonHE_Medium"
-      ],
+      "versus_templates": [],
+      "warheads": [],
       "weapon": "D2K_155mm",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -2763,7 +2641,7 @@
         "type": "SpreadDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/D2k/Atreides/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "7777",

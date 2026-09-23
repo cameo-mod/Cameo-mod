@@ -556,8 +556,8 @@ mtank_pri:
 		VerticalRateOfTurn: 12
 		RangeLimit: 30c0
 		HorizontalRateOfTurn: 100
-	Warhead@1Dam: SpreadDamage
-		Damage: 15000
+	Warhead@MissileAP_Heavy:
+		Damage: 16000
 		ValidTargets: Ground, Air
 	Warhead@Concrete: DamagesConcrete
 		Damage: 1000
@@ -1138,15 +1138,11 @@ ordos_autogunturret:
 		Explosions: piffs
 	Warhead@EffectWater:
 		Explosions: water_piffs
-	Warhead@CannonHE_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Bullet_Light:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 6000
 
 
 HMG_turret:

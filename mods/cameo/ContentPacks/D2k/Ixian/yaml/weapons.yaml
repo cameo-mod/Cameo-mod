@@ -312,6 +312,7 @@ D2K_Rocket_Trooper2:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Railgun_Heavy
 	Inherits@wh3: ^Warhead_CannonHE_Medium
+	Inherits@wh4: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_CannonHE_Medium_D2K
 	ReloadDelay: 64
@@ -331,18 +332,17 @@ D2K_Rocket_Trooper2:
 		ProjectileSpeedPercentage: 10
 		LaunchAngle: 66
 		Shadow: true
-	Warhead@Demolition_Light:
+	-Warhead@Demolition_Light:
+	-Warhead@Railgun_Heavy:
+	-Warhead@CannonHE_Medium:
+	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
-	Warhead@Railgun_Heavy:
-		Damage: 8000
-	Warhead@CannonHE_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 24000
 D2K_Rocket_Trooper1:
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@wh2: ^Warhead_MissileAP_Light
 	Inherits@wh3: ^Warhead_MissileAP_Heavy
+	Inherits@wh4: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Rocket_Trooper
 	ReloadDelay: 64
@@ -364,15 +364,12 @@ D2K_Rocket_Trooper1:
 		HorizontalRateOfTurn: 22
 		VerticalRateOfTurn: 12
 		Acceleration: 6
-	Warhead@MissileAP_Light:
+	-Warhead@MissileAP_Light:
+	-Warhead@Flak_Medium:
+	-Warhead@MissileAP_Heavy:
+	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
-	Warhead@Flak_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-	Warhead@MissileAP_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 16000
+		Damage: 24000
 mtank_pri2:
 	Inherits: ^D2KMissile
 	Inherits@proj: ^Projectile_Missile_Heavy_D2K
@@ -715,9 +712,6 @@ RashidanGun_upgrade:
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@RashidanGroundCompatibility: AreaDamage
-		ValidTargets: Ground, Water
-		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -785,7 +779,7 @@ RashidanGun_upgrade:
 	-Warhead@MissileHE_Heavy:
 	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
-		Damage: 12000
+		Damage: 16000
 		PercentageScale: 0
 		FriendlyFireDamage: 67
 		FriendlyFireSpread: 67

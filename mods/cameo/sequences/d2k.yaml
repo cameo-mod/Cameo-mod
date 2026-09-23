@@ -1,3 +1,9 @@
+# sequences/d2k.yaml — DEAD INVENTORY only.
+# All live-referenced sequence images were drained into the D2k ContentPacks
+# (PR #412); the 6 core-owned effects moved to sequences/misc.yaml and
+# d2k_rpg into D2k/Ordos per the coordinator ruling (ORDERS_2026-09-22 §3.2).
+# What remains is unreferenced and held for the unused-file audit phase —
+# do not add new definitions here.
 concretea:
 	Defaults:
 		Filename: d2kconcrete.png
@@ -2436,51 +2442,6 @@ d2k_crate:
 		Start: 102
 		ZOffset: -511
 		Offset: -16,-16
-
-spicebloom:
-	Defaults:
-	grow0:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 106
-		Length: 1
-		ZOffset: -1023
-		Offset: -16,-16
-	grow1:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 107
-		Length: 1
-		ZOffset: -1023
-		Offset: -16,-16
-	grow2:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 108
-		Length: 1
-		ZOffset: -1023
-		Offset: -16,-16
-	grow3:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 109
-		Length: 1
-		ZOffset: -1023
-		Offset: -16,-16
-	spurt:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4233
-		Length: 8
-		Tick: 80
-		BlendMode: Additive
-		ZOffset: 511
-		Offset: 0, -16
 
 #moveflsh:
 #	Defaults:
@@ -5686,67 +5647,5 @@ d2k_defender:
 		Facings: -32
 	icon:
 		Filename: d2k_defender_icon.shp
-
-small_trail:
-	Defaults:
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Start: 3988
-		Length: 4
-		Tick: 80
-		BlendMode: Additive
-		ZOffset: 1023
-
-small_trail2:
-	Defaults:
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Start: 3793
-		Length: 4
-		Tick: 80
-		BlendMode: Additive
-		ZOffset: 1023
-
-d2k_rpg:
-	Defaults:
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3263
-		Facings: -32
-		ZOffset: 1023
-
-shrapnel2:
-	Defaults:
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3542
-		Length: 1
-		ZOffset: 1023
-
-shrapnel3:
-	Defaults:
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3543
-		Length: 8
-		ZOffset: 1023
-
-shrapnel4:
-	Defaults:
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3551
-		Length: 1
-		ZOffset: 1023
 
 # from tiberiansun.yaml
