@@ -166,11 +166,11 @@ latinsyndicate_latinempradar:
 		ActivationDelay: 50
 		ActivationSequence:
 		Names:
-			1: Emp Disable
+			1: power_empulse.name
 		Weapons:
 			1: Support_EMP_Bomb
 		Descriptions:
-			1: power_ioncannon.description
+			1: power_empulse.description
 		BeginChargeSpeechNotification: IonCannonCharging
 		EndChargeSpeechNotification: IonCannonReady
 		EndChargeSound:

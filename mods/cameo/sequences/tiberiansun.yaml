@@ -483,16 +483,20 @@ tsnthpadmut:
 		Tick: 400
 		# Offset: 0, -24, 3
 	idle-platform:
-		Scale: 1
 		Filename: ts_nod_helipad_bib.shp
 		ShadowStart: 3
 		ZOffset: -1c511
 	damaged-idle-platform:
-		Scale: 1
-		Filename: invisibleitem.shp
+		Filename: ts_nod_helipad_bib.shp
+		Start: 1
+		ShadowStart: 4
+		ZOffset: -1c511
 	dead-platform:
-		Scale: 1
-		Filename: invisibleitem.shp
+		Filename: ts_nod_helipad_bib.shp
+		Start: 2
+		ShadowStart: 5
+		ZOffset: -1c511
+		Tick: 400
 	idle-lights:
 		Filename: forgotten_helipad_b.shp
 		Start: 8
@@ -1099,7 +1103,6 @@ forgot_weap:
 		Filename: forgotten_warfactory_buildup.png
 		Length: 32
 	bib2:
-		Scale: 1
 		Filename: forgotten_warfactory_bottom.png
 		ZOffset: -1024
 	damaged-bib2:
@@ -1108,7 +1111,6 @@ forgot_weap:
 		Start: 1
 		ZOffset: -1024
 	dead-bib2:
-		Scale: 1
 		Filename: forgotten_warfactory_bottom.png
 		Start: 1
 		ZOffset: -1024

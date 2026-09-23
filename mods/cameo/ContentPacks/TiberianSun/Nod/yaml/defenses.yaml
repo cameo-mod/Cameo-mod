@@ -230,6 +230,7 @@ ts_nod_laserturret:
 		QuantizedFacings: 16
 	WithVoxelTurret:
 		ShowShadow: false
+		RequiresCondition: !build-incomplete
 	AutoTarget:
 	DetectCloaked:
 		Range: 3c0
@@ -280,6 +281,7 @@ ts_nod_samsite:
 		RequiresCondition: ts_nod_upgrade_tiberiumcoremissiles
 	AttackTurreted:
 	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
 	DetectCloaked:
 		Range: 4c0
 	-SpawnActorsOnSell:

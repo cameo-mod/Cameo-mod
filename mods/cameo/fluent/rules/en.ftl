@@ -18,6 +18,10 @@ power_chemicalmissile =
    .description = Tactical cluster missile with additional Tiberium-based warheads.
    Deals heavy damage in an area and leaves harmful corrosive clouds.
 
+power_empulse =
+   .name = E. M. Pulse
+   .description = Fires a pulse blast which disables all mechanical units in the area.
+
 power_nuke =
    .tdname = Nuclear Strike
    .raname = Atomic Bomb

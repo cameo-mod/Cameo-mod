@@ -176,6 +176,8 @@ ra2_soviets_orerefinery:
 		SpawnOffset: 2,2
 		Facing: 256
 	SelectionDecorations:
+	WithIdleOverlay@bib:
+		Sequence: idle-bib
 	GivesBuildableArea:
 		AreaTypes: building, cityi
 	RenderSprites:

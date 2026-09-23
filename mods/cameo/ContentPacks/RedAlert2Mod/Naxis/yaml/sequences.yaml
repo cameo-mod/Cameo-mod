@@ -170,18 +170,14 @@ naxis_orerefinery:
 	Defaults:
 		Offset: -1,-6
 	idle:
-		Filename: shared_sprites|invisibleitem.shp
+		Filename: naxis_orerefinery.shp
+		Start: 33
 	damaged-idle:
-		Filename: shared_sprites|invisibleitem.shp
+		Filename: naxis_orerefinery.shp
+		Start: 64
 	make:
 		Filename: naxis_orerefinery.shp
 		Length: 32
-	idle-bib:
-		Filename: naxis_orerefinery.shp
-		Start: 33
-	damaged-idle-bib:
-		Filename: naxis_orerefinery.shp
-		Start: 64
 	dead:
 		Filename: naxis_orerefinery.shp
 		Start: 64
