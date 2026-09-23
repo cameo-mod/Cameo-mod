@@ -3908,6 +3908,22 @@ pulse lasers: laser turrets, light laser tanks, portable lasers — CA review, w
 reserved for real prism weapons) and **`Radiation`** (item 4) were both CONFIRMED by the maintainer
 in the Combined Arms review and have no template yet. The reference assignments now use both (R70).
 
+**9. From the 17-source research (maintainer 2026-09-23, third round).** Weapon types every one of
+these mods has, which were forced into an unrelated family or dropped:
+- **`Magnetic`** — the **Magnetron** (RA2 YR / Rise of the East / RA2 Reborn / CnC Reloaded:
+  `MagneShake`, dropped as "not damage" in three sources), RA 20XX's **PS Raijin** (magnetic wave,
+  parked) and DTA's **Magnetic Water Mine**. Vehicle-only, strongest against heavy metal armour, zero
+  against infantry.
+- **`Ion`** — Twisted Insurrection's **Cyborg Templar** tachyon gun and SP's **GDI Ion Cannon
+  Turret** (filed as `Railgun` / `Laser`). An energy beam, anti-armour and strong against shields.
+- **`Gravity`** — SP's **Scrin Battleship** black hole (`Blackholeblast`, filed as `Quantum`) and Red
+  Resurrection's **Vortex Tank** (parked). Flat damage that ignores armour. (CN's ORCA Bomber
+  "gravity bomb" is only a free-fall projectile — a plain bomb, not evidence.)
+- **`Mutagen`** — Twisted Insurrection's **Infector** (toxin gun: 1000% against infantry, victims
+  mutate), the **Yuri Virus** sniper (RA 20XX; "Virus" in Mental Omega), Mental Omega's **Rahn**
+  mutation railgun. Infantry-only; the kill
+  converts the victim. (Currently `BulletChem` / `Sniper`.)
+
 **Order of work:** these are balance changes, so they follow the reference averaging (R69: which
 waits for the maintainer's review) and land in the §12.0j regeneration. Re-pointing weapons touches
 faction weapon files, so each lane's files move through that lane's owner.

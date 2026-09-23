@@ -7,7 +7,7 @@
 # HOW THIS PASS WAS MADE, so it can be audited rather than trusted:
 #   * Group rows carry a decision per measured (delivery, element) SIGNATURE, with the reasoning
 #     in `why`. A signature is what the measurement actually distinguishes.
-#   * `overrides:` holds the 15 weapons looked at individually. An override BEATS its
+#   * `overrides:` holds the 30 weapons looked at individually. An override BEATS its
 #     group, and it is keyed by WEAPON so it survives re-clustering — which matters: the first
 #     pass keyed these by GROUP and lost one within a single regrouping (R50).
 #   * Everything is `status: proposed`. NOTHING here has been reviewed by the maintainer.
@@ -3060,13 +3060,39 @@ overrides:
   AntiB:
     family: Demolition
     why: 'anti-building by name and profile: 200 on structures, nothing else'
+  AvengerWH:
+    family: Prism
+    why: 'the Allied Avenger IFV''s `AvengerLaser` (Prism Raider report; ground and air) (R71: was a signature-level
+      `Quantum` read - a flat, Verses-less laser with InfDeath=5 lumped a dozen different weapons together)'
   BlimpHE:
     family: Demolition
     why: a blimp detonating — the same weapon name as Red Resurrection's
+  BusterWH:
+    family: Cryo
+    why: 'the Allied Cryobuster''s `BusterWeapon` (`CryobusterReport`, slows 0.8x) (R71: was a signature-level
+      `Quantum` read - a flat, Verses-less laser with InfDeath=5 lumped a dozen different weapons together)'
   ChronoBeam2:
     family: '(drop: not a damage warhead)'
     why: a chrono beam — R21 names this family of weapon; it reaches buildings only and carries no damage
       ladder
+  ChronoBeamD1:
+    family: Cryo
+    why: 'the Allied Cryo Legionnaire''s `NeutronRifle` (`CryoGunShot`, `CRYOFX2`) - named chrono, a cryo
+      gun (R71: was a signature-level `Quantum` read - a flat, Verses-less laser with InfDeath=5 lumped
+      a dozen different weapons together)'
+  Comet2WH:
+    family: Laser
+    why: 'the Allied Laser Tank''s `TankLaser` (R71: was a signature-level `Quantum` read - a flat, Verses-less
+      laser with InfDeath=5 lumped a dozen different weapons together)'
+  CometWH:
+    family: Prism
+    why: 'the Allied Prism Tank''s and Shard Cruiser''s `Comet` (`PrismTankAttack`, prism fragments) -
+      a real prism weapon (R71: was a signature-level `Quantum` read - a flat, Verses-less laser with
+      InfDeath=5 lumped a dozen different weapons together)'
+  CryoBeamWH:
+    family: Cryo
+    why: 'the Allied Cryo Chopper''s `CryoBeam` (`ICEDIE`, slows) (R71: was a signature-level `Quantum`
+      read - a flat, Verses-less laser with InfDeath=5 lumped a dozen different weapons together)'
   DemoBombWHF:
     family: Demolition
     why: a demolition bomb
@@ -3077,11 +3103,43 @@ overrides:
   DisruptorWH:
     family: Sonic
     why: a disruptor — the Tiberian Sun sonic weapon
+  ElectricE:
+    family: Tesla
+    why: 'the Soviet Shock Trooper''s `ShockBurstE` (IsElectricBolt) (R71: was a signature-level `Quantum`
+      read - a flat, Verses-less laser with InfDeath=5 lumped a dozen different weapons together)'
+  ElectricEMP:
+    family: Tesla
+    why: 'the Soviet Tesla Raider''s `TeslaRaiderBolt` (IsElectricBolt) (R71: was a signature-level `Quantum`
+      read - a flat, Verses-less laser with InfDeath=5 lumped a dozen different weapons together)'
+  FleurWH2:
+    family: '(drop: not a damage warhead)'
+    why: 'Yuri Commando Fleur''s `FleurLaserN` - Damage 1, Verses 3%, an AttachEffect marker: a debuff,
+      not damage (R71: was a signature-level `Quantum` read - a flat, Verses-less laser with InfDeath=5
+      lumped a dozen different weapons together)'
+  HailWH:
+    family: Laser
+    why: 'the Allied Hailstorm Submarine''s `HailWeap` (R71: was a signature-level `Quantum` read - a
+      flat, Verses-less laser with InfDeath=5 lumped a dozen different weapons together)'
+  HoliafWH:
+    family: Laser
+    why: 'the Soviet Holiaf''s `MekhaLaser` (150 dmg, strips Iron Curtain, disarms) - a heavy laser (R71:
+      was a signature-level `Quantum` read - a flat, Verses-less laser with InfDeath=5 lumped a dozen
+      different weapons together)'
   HollowPointV:
     family: CannonAP
     why: '⚠ its measured delivery is Radiation, which a hollow-point round is not. The PROFILE decides
       (R52): 50/41/31 against infantry rising to 158/200/200 against vehicles with no building reach —
       an armour-piercing round'
+  PrismRaiderWH:
+    family: Prism
+    why: 'the Allied Prism Raider''s `ZoneLaser` and the Avenger/Bullfrog IFV special shot (R71: was a
+      signature-level `Quantum` read - a flat, Verses-less laser with InfDeath=5 lumped a dozen different
+      weapons together)'
+  PrismWarhead:
+    family: Prism
+    why: 'the Allied Prism Cannon''s `PrismShot` - a real prism weapon (CA review: Prism is reserved for
+      prism weapons) (R71: was a signature-level `Quantum` read - a flat, Verses-less laser with InfDeath=5
+      lumped a dozen different weapons together)'
   RadBeamWarhead:
     family: Radiation
     why: '`RadBeamWarhead` - the maintainer-CONFIRMED `Radiation` family (CA review: DesolatorBeam, RadTrooperBeam,
@@ -3090,6 +3148,16 @@ overrides:
     family: Railgun
     why: 'a rail shot delivered as Laser (the beam visual again, R52): 63/47/31 against infantry rising
       to 200 across every vehicle rung'
+  ScavengeWH:
+    family: '(park: REVIEW - scavenge beam that also hits allies)'
+    why: 'the Yuri Splicer''s `ScavengeWeapon` - rapid beam, `AffectsAllies=yes`, drains Iron Curtain;
+      a drain/recycle mechanic or genetic (Mutagen)? (R71: was a signature-level `Quantum` read - a flat,
+      Verses-less laser with InfDeath=5 lumped a dozen different weapons together)'
+  ShadowWH2:
+    family: '(drop: not a damage warhead)'
+    why: 'no firing unit (`CRPulverizer`, `CRChaosGun` - unused CR variants); Damage 1, Verses 3% (R71:
+      was a signature-level `Quantum` read - a flat, Verses-less laser with InfDeath=5 lumped a dozen
+      different weapons together)'
   SonicBurstWH:
     family: Sonic
     why: a resonance burst
