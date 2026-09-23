@@ -282,8 +282,9 @@ surviving decision, and the coverage report cannot see the difference on its own
 
 ## Open questions the maintainer has not ruled on
 
-* **The 50 → 32 consolidation.** Ruled to wait until every source has voted. Do not cut families
-  on one source's evidence.
+* ~~**The 50 → 32 consolidation.**~~ **SUPERSEDED 2026-09-23:** the maintainer reversed it — the
+  vocabulary GROWS (DESIGN §12.0k: `AntiAir` armour, `<Family>Air` variants, `LaserAA`/`TeslaAA`,
+  `Radiation`, `Torpedo`/`AntiSub`, anti-infantry-only `Sniper`, `AntiMaterielSniper`, `ScoutRifle`).
 * **Uniqueness.** 14 family pairs sit within 0.20 RMS log distance (`Laser`/`Tesla` 0.084,
   `Flame`/`Plasma` 0.088, `Bullet`/`Arrow` 0.105). The maintainer's rule: averaging sets position,
   separation applies only on collision, along the axis where the sources disagree most — and only

@@ -3846,6 +3846,58 @@ families then land on top of each other they are separated along the axis on whi
 disagreed MOST, because that is where the field is least certain and we have the most licence to
 choose. Authenticity decides everything it can; uniqueness decides only the collisions.
 
+### 12.0k MORE FAMILIES, AND AN `AntiAir` ARMOUR (maintainer 2026-09-23) — binding, PLANNED
+
+> *"maybe we do in fact need a lot more warhead families than we currently have … we need air
+> versions for all weapon types right? For example an air laser that deals less damage to the new
+> anti air vehicle (with a new armor type?) … We need specialist for any situation."*
+
+This REPLACES the earlier "50 → 32 consolidation" idea: the vocabulary grows instead of shrinking.
+Every family below closes a MEASURED gap (numbers from master `5380720ad` and the 17-source
+reference assignment); none exists yet. It lands with the §12.0j regeneration, through
+`gen_weapon_template.py` + `splice_templates.py --all`, never by hand, and each new family needs its
+own radius/curve (rule 8d, `audit_family_uniqueness.py`).
+
+**1. The `AntiAir` armour type.** Dedicated anti-air units (SAM sites, flak tracks, AA guns) get a
+new vehicle-ladder armour type `AntiAir`. Every GROUND-delivered family treats it exactly like
+`Light`; every AIR-delivered family (item 2) deals **50%** of its `Light` value to it — Combined
+Arms' number, expressed as a visible armour row instead of CA's hidden `DamageTypeDamageMultiplier`
+(W26/R1 forbids the multiplier). This is the ROADMAP ruling "AA takes less from aircraft weapons, as
+armour" made concrete.
+
+**2. Air-to-ground variants — `<Family>Air`.** One per family an aircraft fires: **31 today**
+(MissileAP 65 armaments, Bullet 62, Laser 46, Flame 21, Demolition 18, Chemical 17, Tesla 15, …).
+GENERATED from the ground family, identical to it except the `AntiAir` row (item 1); aircraft
+weapons are re-pointed to the `Air` variant. A generator rule, not 31 hand templates.
+
+**3. Anti-air per delivery — `LaserAA`, `TeslaAA`.** Families that rank AIR first. Measured: 17
+air-only lasers and 6 air-only teslas currently sit on GROUND-shaped families that rank air last or
+third. Air-only bullets (23) re-point to the existing `Flak`, air-only quantum missiles (3) to
+`MissileAA` — no new family needed for those.
+
+**4. `Radiation` — anti-infantry.** The Desolator's beam and eruption and other rad weapons: INF
+first, light direction, `RadiationDeath`. Measured: in **7 of 8** reference sources the weapons filed
+as `Nuclear` are anti-infantry radiation (R69), and Cameo has no such family — its own Desolator
+(`RA2RadBeamWeapon`) sits on `Chemical_Medium`, which is anti-ARMOUR. `Nuclear` stays the
+buildings-first blast.
+
+**5. Naval — `Torpedo` (anti-ship) and `AntiSub` (depth charges).** Reference mods park these; Cameo
+files depth charges under `Demolition` and torpedoes under `MissileAP`/`MissileHE`. Both only fire at
+water targets. ⚠ Cameo has no naval armour ladder yet, so their shape is an open design question.
+
+**6. Rifle sub-types.**
+- **`Sniper` becomes anti-infantry ONLY** — every reference source measures INF ≈ 200 against ≈ 10 on
+  everything else; today's `^Warhead_Sniper_*` is a legacy linear ramp (None 100 sliding to
+  Spaceship 10), which is not a sniper.
+- **`AntiMaterielSniper` (new)** — the heavy rifle: vehicle-first, heavy direction, weak against
+  infantry (DTA's anti-materiel `CommandoGrenadeAP` is INF 130% against HEAVY 1000%).
+- **`ScoutRifle` (new)** — infantry first, AIR second (it can shoot aircraft), weak against heavy
+  armour.
+
+**Order of work:** these are balance changes, so they follow the reference averaging (R69: which
+waits for the maintainer's review) and land in the §12.0j regeneration. Re-pointing weapons touches
+faction weapon files, so each lane's files move through that lane's owner.
+
 ## 16. Rank decorations, experience systems & elite weapons
 
 Cameo uses **two distinct experience systems** with different rank counts,
