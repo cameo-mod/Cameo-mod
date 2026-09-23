@@ -368,7 +368,7 @@ TSCommandoShotgun:
 		Damage: 4
 	Warhead@CannonHE_Medium:
 		InvalidTargets: Air
-		Damage: 8000
+		Damage: 48000
 	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		InvalidTargets: Air
@@ -382,22 +382,13 @@ TSCommandoShotgun:
 	Warhead@ShotgunGrenadeAlly:
 		InvalidTargets: Air
 		Damage: 4000
-	Warhead@ShotgunShrapnelEnemy:
-		InvalidTargets: Air
-		Damage: 16000
-		PercentageScale: 0
 	Warhead@ShotgunShrapnelAlly:
 		InvalidTargets: Air
 		Damage: 4000
-	Warhead@ShotgunTankDestroyer:
-		InvalidTargets: Air
-		Damage: 8000
-	Warhead@ShotgunSmallArms:
-		InvalidTargets: BulletImmune, Air
-		Damage: 8000
-	Warhead@ShotgunChaingun:
-		InvalidTargets: Air
-		Damage: 8000
+	-Warhead@ShotgunShrapnelEnemy:
+	-Warhead@ShotgunTankDestroyer:
+	-Warhead@ShotgunSmallArms:
+	-Warhead@ShotgunChaingun:
 	-Warhead@ShotgunGrenadeEnemy:
 
 	Warhead@ShieldHit:

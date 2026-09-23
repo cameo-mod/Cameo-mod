@@ -1540,7 +1540,12 @@ W24 queue update (2026-09-22): `devin/nova/w24-lane2` landed as squash-merge
 `devin/nova/w24-lane2-v2` `9303d9689` (PR #431 — review-closed by EMBER, verified by DAWN,
 resolved-diff clean vs master). `devin/nova/w24-naxi-pilot` is **superseded**: master renamed
 the NaxiWW2Machinegun family to the pct-model with two live channels; the collapse would have
-halved its damage.
+halved its damage. DAWN lane-3 then folded the remaining 27 non-RA weapons
+(`weapons/outpost2.yaml` x10, D2k packs x8, TiberianDawn/Nod x3, StarCraft/Terran x2,
+TiberianSun x4) at `collapse_target.py` totals — shipped totals restored where
+the master sum had drifted, twins/companions kept verbatim; `multi_main_fired_weapons`
+is now **27** (26 RA-family still in Nova review + `DRPlasmaTankWeapon` (Claude) +
+the `tesla_bomb` verbatim exception).
 
 ### ✅ CLOSED — THE ANTI-AIR CONVENTION. Ruled by the maintainer 2026-09-08.
 

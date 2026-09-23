@@ -5212,6 +5212,21 @@
      "Research"
     ]
    },
+   "td_gdi_upgrade_lightweightarmorplating_proxy_actor": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": false,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Lightweight Armor Plating"
+   },
    "td_gdi_upgrade_longrangesensors": {
     "build_limit": {
      "src": "inherited",
@@ -5237,21 +5252,6 @@
     "queue": [
      "Upgrades"
     ]
-   },
-   "td_gdi_upgrade_lightweightarmorplating_proxy_actor": {
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
-    "buildable": false,
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "ResearchedUpgrade",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "name": "Lightweight Armor Plating"
    }
   },
   "vehicles": {

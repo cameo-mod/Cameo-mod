@@ -135,7 +135,7 @@
         "type": "SpreadDamage"
        }
       ],
-      "defined_in": "mods/cameo/ContentPacks/D2k/Atreides/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "6666",
@@ -1332,7 +1332,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5475",
@@ -1361,7 +1361,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5475",
@@ -1474,7 +1474,7 @@
         "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "6185",
@@ -1531,7 +1531,7 @@
         "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
       "range": "6185",
@@ -1655,7 +1655,7 @@
         "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "6185",
@@ -1744,7 +1744,7 @@
         "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
       "range": "6185",
@@ -2284,7 +2284,7 @@
         "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6666",
@@ -2376,21 +2376,14 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
+        "damage": "4750",
+        "falloff": "100, 45, 15, 0",
+        "spread": "200",
+        "tag": "MissileHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "3750",
-        "falloff": null,
-        "spread": null,
-        "tag": "1Dam",
-        "type": "SpreadDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "1100",
       "pricing": true,
@@ -2398,10 +2391,12 @@
       "reloaddelay": "30",
       "slot": "Armament",
       "versus_templates": [
-       "^D2KMissile"
+       "^D2KMissile",
+       "^Warhead_MissileHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAP_Heavy",
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "D2K_Rocket_AA",
       "weapon_class_source": "template"
@@ -2581,7 +2576,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4352",
@@ -2682,7 +2677,7 @@
         "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6666",
@@ -3047,18 +3042,11 @@
       "burstdelays": "25",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "16000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "15000",
-        "falloff": null,
-        "spread": null,
-        "tag": "1Dam",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
@@ -3228,18 +3216,11 @@
       "burstdelays": "25",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "16000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "15000",
-        "falloff": null,
-        "spread": null,
-        "tag": "1Dam",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",

@@ -120,14 +120,14 @@ edenMobileLaserTiger:
 		SecondaryBeamColor: FFFFFF
 	Warhead@CannonHE_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 10000
+	-Warhead@Laser_Heavy:
 edenMobileDefenceLaser:
 	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
 	Inherits: edenMobileLaserTiger
 	ReloadDelay: 10
 	Range: 6656
 	-Warhead@CannonHE_Medium:
-	-Warhead@Laser_Heavy:
 	Warhead@Laser_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
@@ -353,20 +353,10 @@ eden_EMP:
 	Warhead@Tesla_Super:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
-		Damage: 16000
+		Damage: 18000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		IntegrityScale: 0
 		PercentageScale: 0
-	Warhead@TemperatureCompatibility: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		InvalidTargets: wall, Air
-		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@Effect: CreateEffect
 		Explosions: op2_emp_static
 		ImpactSounds: xplos.aud
@@ -412,9 +402,6 @@ eden_EMP_AA:
 	Warhead@EMPCompatibility:
 		InvalidTargets: Shielded
 		ValidTargets: Air
-	Warhead@TemperatureCompatibility:
-		InvalidTargets: wall
-		ValidTargets: Air
 edenTiger_EMP:
 	Inherits: eden_EMP
 	ReloadDelay: 41
@@ -451,9 +438,6 @@ edenTiger_EMP:
 	Warhead@EMPCompatibility:
 		InvalidTargets: Shielded, Air
 		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
-	Warhead@TemperatureCompatibility:
-		InvalidTargets: wall, Air
-		ValidTargets: Ground, Water, Air
 edenTiger_EMP_AA:
 	Inherits: edenTiger_EMP
 	Range: 9000
@@ -492,9 +476,6 @@ edenTiger_EMP_AA:
 		ValidTargets: Air
 	Warhead@EMPCompatibility:
 		InvalidTargets: Shielded
-		ValidTargets: Air
-	Warhead@TemperatureCompatibility:
-		InvalidTargets: wall
 		ValidTargets: Air
 eden_GP_EMP:
 	Inherits: plymouth_EMP
@@ -538,9 +519,6 @@ eden_GP_EMP:
 	Warhead@EMPCompatibility:
 		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
 		InvalidTargets: Shielded, Air
-	Warhead@TemperatureCompatibility:
-		ValidTargets: Ground, Water, Air
-		InvalidTargets: wall, Air
 edenMobileThorsHammer:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
@@ -726,18 +704,13 @@ plymouthStickyTiger:
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@CannonHE_Medium:
-		Damage: 4000
+		Damage: 16000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	-Warhead@MediumChemicalWeapon:
-	Warhead@Chemical_Light:
-		ValidTargets: Ground, Water
-		Damage: 14000
-		PercentageScale: 0
-	Warhead@StickyWildcardCompatibility: AreaDamage
-		Damage: 4000
+	-Warhead@Chemical_Light:
 
 plymouthStickyDefence:
 	Inherits: ^Warhead_CannonHE_Heavy
@@ -754,25 +727,16 @@ plymouthStickyDefence:
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@CannonHE_Medium: AreaDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@CannonHE_Heavy:
-		Damage: 4000
+		Damage: 12000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	-Warhead@HeavyChemicalWeapon:
-	Warhead@Chemical_Light:
-		ValidTargets: Ground, Water
-		Damage: 12000
-		PercentageScale: 0
-	Warhead@StickyWildcardCompatibility:
-		Damage: 2000
 
 plymouthRPGMines:
 	Inherits: ^BallisticWeapon
@@ -968,20 +932,10 @@ plymouth_EMP:
 	Warhead@Tesla_Super:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
-		Damage: 16000
+		Damage: 18000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		IntegrityScale: 0
 		PercentageScale: 0
-	Warhead@TemperatureCompatibility: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		InvalidTargets: wall, Air
-		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@Effect: CreateEffect
 		Explosions: op2_emp_static
 		ImpactSounds: xplos.aud
@@ -1025,9 +979,6 @@ plymouth_EMP_AA:
 	Warhead@EMPCompatibility:
 		InvalidTargets: Shielded
 		ValidTargets: Air
-	Warhead@TemperatureCompatibility:
-		InvalidTargets: wall
-		ValidTargets: Air
 plymouth_Tiger_EMP:
 	Inherits: plymouth_EMP
 	ReloadDelay: 40
@@ -1070,9 +1021,6 @@ plymouth_Tiger_EMP:
 	Warhead@EMPCompatibility:
 		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
 		InvalidTargets: Shielded, Air
-	Warhead@TemperatureCompatibility:
-		ValidTargets: Ground, Water, Air
-		InvalidTargets: wall, Air
 MiniNova:
 	Inherits: MiniNuke
 	Warhead@Effect: CreateEffect

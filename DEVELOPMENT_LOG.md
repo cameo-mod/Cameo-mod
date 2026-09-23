@@ -1,3 +1,23 @@
+## Devin-DAWN (A4) — W24 lane-3: the last 27 non-RA multi-main weapons folded (2026-09-22)
+
+**Branch:** `devin/dawn/w24-rest`. Orders: `ORDERS_2026-09-22_claude_lanes.md` §L3.
+
+- Scope per Claude: `weapons/outpost2.yaml` x10, D2k packs x8, TiberianDawn/Nod x3,
+  StarCraft/Terran x2, TiberianSun x4. Fold pattern per merged #431: one family
+  survivor at `tools/balance/collapse_target.py` total + `-Warhead@` cancels for
+  the removed mains; twins/companions verbatim.
+- `multi_main_fired_weapons` 54 -> **27** (remainder = Nova RA lane + `DRPlasmaTankWeapon`
+  + `tesla_bomb` verbatim exception). W5 216->191; D1 107->105 (six shipped-total
+  restorations: mtank_pri, both troopers, D2K_Rocket_AA, OrniMissile, both stickies).
+- Traps found: parent folds orphan children `-Warhead@` cancels
+  (`audit_orphan_removals.py` = 4 -> 0); deleting a child override RESURFACES the
+  parent node (OrniMissile `1Dam`); a new `Inherits@wh` can shift weapon-level
+  fields (D2K_Rocket_AA Range 5120 -> pinned 5500). Lesson written to
+  `docs/LESSONS_LEARNED.md`; `doc_claims` updated to 27.
+- Gates: review_resolve_diff on all 27 + children = only intended damage-multiset
+  flags; find_empty_warhead=0; duplicate_inherits 1956 = master; ledgers
+  re-extracted (34 files). Boot-gate pending.
+
 ## Devin-DAWN (A4) — D2k files closure: 522 attributed assets out of bits/d2k (2026-09-22, PR #427)
 
 **Branch:** `devin/dawn/d2k-files-closure`, stacked on `d2k-audio-closure` (#420).

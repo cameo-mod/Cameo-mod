@@ -2333,40 +2333,7 @@ CabalAscendedRockets:
 	-Warhead@FlakWeapon:
 	-Warhead@HeavyAAWeapon:
 	Warhead@MissileHE_Heavy:
-		Damage: 30000
-		PercentageScale: 0
-	Warhead@MissileHE_HeavyGroundBonus: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water
-		Spread: 200
-		Damage: 6000
-		Falloff: 100, 45, 15, 0
-		Versus:
-			HAZMAT: 77
-			COMPOSITE: 88
-			BLAST: 45
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 169
-			Scout: 129
-			Wood: 128
-			Light: 126
-			Medium: 118
-			Steel: 116
-			Concrete: 115
-			Heavy: 114
-			Superheavy: 113
-			Fighter: 103
-			Bomber: 95
-			Helicopter: 85
-			None: 79
-			Spaceship: 76
-			Flak: 75
-			Plate: 63
-			Heroic: 62
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 36000
 		PercentageScale: 0
 
 CabalRavagerPlasma:

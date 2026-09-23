@@ -342,14 +342,7 @@ td_nod_reconbike_rocket:
 	-Warhead@LightMissile:
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 7985
-		PercentageScale: 0
-	Warhead@CollapseTargetCompatibility1: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 7985
+		Damage: 15970
 		PercentageScale: 0
 
 PDLaserBike:
@@ -1627,10 +1620,9 @@ td_nod_attacksubmarine_nodtorptube:
 		Palette: cloak
 		MaximumLaunchAngle: 0
 		CruiseAltitude: 0
-	Warhead@Concussion_Light:
-		Damage: 8000
+	-Warhead@Concussion_Light:
 	Warhead@MissileHE_Heavy:
-		Damage: 8000
+		Damage: 16000
 		ValidTargets: Water, Underwater, Bridge, Structure
 	-Warhead@Smudge:
 	Warhead@Effect: CreateEffect
@@ -1671,10 +1663,9 @@ td_nod_attacksubmarine_nodtorptubeblackmarket:
 		Palette: cloak
 		MaximumLaunchAngle: 0
 		CruiseAltitude: 0
-	Warhead@Demolition_Heavy:
-		Damage: 8000
+	-Warhead@Demolition_Heavy:
 	Warhead@MissileHE_Heavy:
-		Damage: 8000
+		Damage: 16000
 		ValidTargets: Water, Underwater, Bridge, Structure
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ship, Structure, Bridge, Ground

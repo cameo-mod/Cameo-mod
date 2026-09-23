@@ -26,9 +26,7 @@ harkonnen_autogunturret:
 	ReloadDelay: 132
 	Burst: 26
 	BurstDelays: 2
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
-	-Warhead@CannonHE_Heavy:
 	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
@@ -122,7 +120,9 @@ DevBullet:
 
 D2K_Rocket_AA:
 	Inherits: ^D2KMissile
+	Inherits@wh: ^Warhead_MissileHE_Heavy
 	ValidTargets: Air
+	Range: 5500
 	ReloadDelay: 30
 	Projectile: Missile
 		VerticalRateOfTurn: 12
@@ -137,11 +137,10 @@ D2K_Rocket_AA:
 		MinRange: 256
 		Image: d2k_RPG
 		RangeLimit: 24c0
-	Warhead@1Dam: SpreadDamage
+	-Warhead@MissileAP_Heavy:
+	Warhead@MissileHE_Heavy:
 		ValidTargets: Air
-		Damage: 3750
-	Warhead@MissileAP_Heavy:
-		ValidTargets: Air
+		Damage: 4750
 
 
 PlasmaExplosion:

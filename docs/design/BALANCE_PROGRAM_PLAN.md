@@ -11,7 +11,7 @@ more distinct fired identities for existing family payloads: this increase does
 not establish newly converted weapons or additional gameplay balance work.
 Earlier dated snapshots below remain historical, and the only-UP rule remains.
 
-> **Numeric evidence refresh — 2026-09-10, combined `839cdced4` plus reopened tooling.** `multi_main_fired_weapons` = **120**; `physical_state_fired_weapons` = **542**; `unconverted_template_inheritors` = **1590**. Measured on this combined tree; predicates and tolerances are unchanged. The flat-health denominator correction changes diagnostics, not live weapons or prices. Earlier branch-specific snapshots remain historical.
+> **Numeric evidence refresh — 2026-09-10, combined `839cdced4` plus reopened tooling.** `multi_main_fired_weapons` = **120**; `physical_state_fired_weapons` = **542**; `unconverted_template_inheritors` = **1590**. Measured on this combined tree; predicates and tolerances are unchanged. The flat-health denominator correction changes diagnostics, not live weapons or prices. Earlier branch-specific snapshots remain historical. **2026-09-22 (DAWN lane-3): `multi_main_fired_weapons` = 27** — lane-3 folded the last 27 non-RA weapons; the remainder is the RA-family lane plus `DRPlasmaTankWeapon` and the `tesla_bomb` verbatim exception.
 
 
 **This file is the SINGLE SOURCE OF TRUTH for what is done, what is next, and who owns

@@ -618,7 +618,7 @@
         "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3072",
@@ -644,7 +644,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.25,
       "minrange": "975",
       "pricing": true,
@@ -722,7 +722,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5475",
@@ -751,7 +751,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4500",
@@ -784,7 +784,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5475",
@@ -814,7 +814,7 @@
         "type": "AreaDamage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": 1.125,
       "pricing": false,
       "range": "4500",
@@ -952,7 +952,7 @@
         "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": true,
       "range": "6185",
@@ -1009,7 +1009,7 @@
         "type": "AreaDamagePercentage"
        }
       ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
       "pricing": false,
       "range": "6185",
@@ -1278,65 +1278,16 @@
    "siege_tank": {
     "armaments": [
      {
-      "damage_warheads": [
-       {
-        "damage": "48000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Flat",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "600",
-        "falloff": "100, 50, 35",
-        "percentage_denominator": "10000",
-        "spread": null,
-        "tag": "CollapsedD2K_155mmCannonHE_MediumPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": "100, 72, 50, 32",
-        "percentage_denominator": "10000",
-        "spread": null,
-        "tag": "CollapsedD2K_155mmConcussion_MediumPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": "100, 45, 18",
-        "percentage_denominator": "10000",
-        "spread": null,
-        "tag": "CollapsedD2K_155mmDemolition_HeavyPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": "100, 45, 18",
-        "percentage_denominator": "10000",
-        "spread": null,
-        "tag": "CollapsedD2K_155mmDemolition_LightPercentage",
-        "type": "AreaDamagePercentage"
-       }
-      ],
-      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "damage_warheads": [],
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "pricing": true,
-      "range": "10000",
-      "reloaddelay": "74",
+      "extraction_note": "no_damage_warheads",
+      "pricing": false,
       "slot": "Armament",
-      "versus_templates": [
-       "^Warhead_CannonHE_Medium_Flat",
-       "^D2K155mmLegacy"
-      ],
-      "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Concussion_Medium",
-       "^Warhead_CannonHE_Medium"
-      ],
+      "versus_templates": [],
+      "warheads": [],
       "weapon": "D2K_155mm",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {

@@ -2040,10 +2040,6 @@ ordos_airmine:
 		Amount: 2
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
-	Warhead@1Dam: SpreadDamage
-		ValidTargets: Air
-		Spread: 0c768
-		Damage: 10000
 	-Warhead@TankDestroyerCannon:
 	-Warhead@LightChemicalWeapon:
 	-Warhead@FlakWeapon:
@@ -2051,7 +2047,7 @@ ordos_airmine:
 	-Warhead@HeavyBomb:
 	Warhead@MissileAP_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
-		Damage: 12000
+		Damage: 22000
 		PercentageScale: 1659
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	-Warhead@MissileAP_Heavy:
