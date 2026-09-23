@@ -1892,3 +1892,21 @@ you deliberately want the base version of. Verify with
 prints which declaring type each member binds to. (Claude review on #443;
 the same trap was already handled for the manager's event via
 `IColorPickerManagerInfo`.)
+
+## Boot-gate: verify YOUR process made the menu marker (2026-09-23)
+
+Two launch traps surfaced the same day, both producing false confidence:
+
+1. **`Engine.ModSearchPaths` takes COMMA separators** (`mods,engine\mods` per
+   `boot-test.cmd`) — a semicolon-separated list makes `Game.Initialize` throw
+   `Unknown or invalid mod 'cameo'` before logging even initializes. Check the
+   exception log's *stack path* before assuming a crash is yours: another
+   agent's failed launch leaves the same signature in the shared
+   `%APPDATA%/OpenRA/Logs` directory.
+2. **The menu marker alone is not proof of YOUR boot.** The shared `perf.log`
+   is written by whichever OpenRA.exe is running — a crashed launch sitting
+   next to another agent's healthy boot will show a fresh
+   `MenuPostProcessEffect.PostWorldLoaded` that your process never produced.
+   Gate correctly: confirm the PID you launched is alive through the load AND
+   the marker appears — or timestamp-check that the marker was written during
+   your process's lifetime, not just "exists."
