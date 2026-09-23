@@ -174,7 +174,7 @@ claims:
       print(n)
 
   - id: live_damage_multipliers
-    value: 327
+    value: 326
     tolerance: 0
     what: >
       DamageMultiplier declarations in LIVE files (mod.yaml's Rules list). The tree holds 683;
@@ -372,7 +372,7 @@ claims:
               n += 1
       print(n)
   - id: physical_state_fired_weapons
-    value: 533
+    value: 542
     tolerance: 0
     what: >
       FIRED weapons that deliver a PhysicalState meter (Temperature or Corrosion) and are priced

@@ -59,7 +59,7 @@
 | sequences/challenge.yaml | 15 | 0 | 15 |  |
 | sequences/civilian.yaml | 17 | 0 | 17 |  |
 | sequences/classicdoom.yaml | 46 | 0 | 46 |  |
-| sequences/d2k.yaml | 183 | 55 | 128 | D2k/Atreides, D2k/Corrino, D2k/Harkonnen, D2k/Ixian, D2k/Ordos, D2k/Shared… |
+| sequences/d2k.yaml | 176 | 50 | 126 | D2k/Atreides, D2k/Corrino, D2k/Harkonnen, D2k/Ixian, D2k/Ordos, D2k/Shared… |
 | sequences/darkreign.yaml | 245 | 1 | 244 | GLOBAL:weapons |
 | sequences/decorations.yaml | 431 | 22 | 409 | GLOBAL:misc, GLOBAL:trees |
 | sequences/dune2.yaml | 40 | 1 | 39 | RedAlert2/Allies, RedAlert2Mod/AsianAlliance |
@@ -73,7 +73,7 @@
 | sequences/keeper.yaml | 5 | 0 | 5 |  |
 | sequences/lostunits.yaml | 118 | 4 | 114 | GLOBAL:weapons, RedAlert/Soviets, RedAlert2/Soviets, RedAlert2/Yuri, TiberianDawn/GDI, TiberianDawn/Nod |
 | sequences/mindustry.yaml | 21 | 0 | 21 |  |
-| sequences/misc.yaml | 194 | 74 | 120 | Core/yaml, D2k/Atreides, D2k/Corrino, D2k/Harkonnen, D2k/Ixian, D2k/Ordos… |
+| sequences/misc.yaml | 200 | 78 | 122 | Core/yaml, D2k/Atreides, D2k/Corrino, D2k/Harkonnen, D2k/Ixian, D2k/Ordos… |
 | sequences/n64.yaml | 54 | 0 | 54 |  |
 | sequences/outpost2.yaml | 95 | 6 | 89 | D2k/Atreides, D2k/Corrino, D2k/Harkonnen, D2k/Ixian, D2k/Ordos, D2k/Shared… |
 | sequences/pokemon.yaml | 2 | 0 | 2 |  |
@@ -87,10 +87,10 @@
 | sequences/starcraft.yaml | 35 | 10 | 25 | GLOBAL:d2k, GLOBAL:starcraft, GLOBAL:weapons, StarCraft/Protoss, StarCraft/Terran, StarCraft/Zerg |
 | sequences/starcraft2.yaml | 4 | 0 | 4 |  |
 | sequences/starwars.yaml | 175 | 3 | 172 | GLOBAL:weapons |
-| sequences/structures.yaml | 53 | 3 | 50 | GLOBAL:misc, TiberianDawn/GDI, TiberianDawn/Nod |
+| sequences/structures.yaml | 53 | 2 | 51 | TiberianDawn/GDI, TiberianDawn/Nod |
 | sequences/test.yaml | 22 | 2 | 20 | GLOBAL:weapons, RedAlert2/Shared |
 | sequences/tiberiaalliances.yaml | 107 | 0 | 107 |  |
-| sequences/tiberiandawn.yaml | 81 | 11 | 70 | D2k/Atreides, D2k/Corrino, D2k/Harkonnen, D2k/Ixian, D2k/Ordos, D2k/Shared… |
+| sequences/tiberiandawn.yaml | 81 | 10 | 71 | D2k/Atreides, D2k/Corrino, D2k/Harkonnen, D2k/Ixian, D2k/Ordos, D2k/Shared… |
 | sequences/tiberiansun.yaml | 83 | 66 | 17 | GLOBAL:tiberiansun, TiberianSun/CABAL, TiberianSun/Forgotten, TiberianSun/GDI, TiberianSun/Nod, TiberianSun/Shared |
 | sequences/tomorrow.yaml | 43 | 1 | 42 | RedAlert2/Allies, RedAlert2Mod/AsianAlliance |
 | sequences/valentine.yaml | 45 | 2 | 43 | D2k/Atreides, D2k/Corrino, D2k/Harkonnen, D2k/Ixian, D2k/Ordos, D2k/Shared… |

@@ -17,7 +17,7 @@ ContentPack-migration residue. **Fix by deleting the LEGACY copy** once the pack
 | weapon | defined at |
 |---|---|
 | `ChemTibAtomic` | `ContentPacks/RedAlert/Shared/yaml/weapons.yaml:1311` · `weapons/tiberiandawn.yaml:231` |
-| `RocketsG` | `ContentPacks/RedAlert/Shared/yaml/weapons.yaml:1444` · `ContentPacks/RedAlert/Shared/yaml/weapons.yaml:1448` · `weapons/weapons.yaml:12032` |
+| `RocketsG` | `ContentPacks/RedAlert/Shared/yaml/weapons.yaml:1444` · `ContentPacks/RedAlert/Shared/yaml/weapons.yaml:1448` · `weapons/weapons.yaml:12020` |
 
 
 ## S2 — defined twice within the same tier (6)
@@ -25,8 +25,8 @@ ContentPack-migration residue. **Fix by deleting the LEGACY copy** once the pack
 | weapon | defined at |
 |---|---|
 | `Flamethrower` | `weapons/tiberiandawn.yaml:75` · `weapons/starcraft.yaml:1` |
-| `Sound2` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:2559` · `ContentPacks/D2k/Atreides/yaml/weapons.yaml:15` |
-| `ZClaw3` | `weapons/tiberiansun.yaml:1300` · `weapons/tiberiansun.yaml:1945` |
+| `Sound2` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:3239` · `ContentPacks/D2k/Atreides/yaml/weapons.yaml:15` |
+| `ZClaw3` | `weapons/tiberiansun.yaml:1294` · `weapons/tiberiansun.yaml:1939` |
 | `ra1_allies_alliedrocketsoldier_rocketsracryo` | `ContentPacks/RedAlert/Shared/yaml/weapons.yaml:210` · `ContentPacks/RedAlert/Allies/yaml/weapons.yaml:936` |
 | `ra1_allies_rifleinfantry_carbine` | `ContentPacks/RedAlert/Shared/yaml/weapons.yaml:2427` · `ContentPacks/RedAlert/Allies/yaml/weapons.yaml:941` |
 | `ra1_allies_rifleinfantry_carbine_cryo` | `ContentPacks/RedAlert/Shared/yaml/weapons.yaml:2444` · `ContentPacks/RedAlert/Allies/yaml/weapons.yaml:946` |

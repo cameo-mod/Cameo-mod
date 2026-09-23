@@ -23,7 +23,7 @@
 | Ordos Mortar Trooper | ordos_mortartrooper | Damage 40000 vs game 43000 |
 | Mortar Team | wc2_humans_mortarteam | Reload 225 vs game 200 |
 | Sonic Missile Soldier | td_gdi_sonicmissilesoldier | Damage 50000 vs game 51225 |
-| Twin Rocket Trooper | ixian_twinrockettrooper | Damage 48000 vs game 58240 |
+| Twin Rocket Trooper | ixian_twinrockettrooper | Damage 48000 vs game 50240 |
 | Lunar Rocket | schwarzermond_lunarrocket | Damage 12000 vs game 16554 |
 | Madcap | terran_madcap | Damage 6000 vs game 36200 |
 | Hydralisk | zerg_hydralisk | Damage 8000 vs game 18000 |
@@ -115,7 +115,7 @@ ambiguous: Rifle Infantry -> ra1_allies_rifleinfantry, ra1_soviets_rifleinfantry
 | Idol | protoss_idol | Damage 134000 vs game 67310 |
 | Ratte | naxis_ratte | Damage 300000 vs game 452848 |
 | Dalek | schwarzermond_dalek | Damage 300000 vs game 353100 |
-| Future Tank | futuretech_futuretank | Damage 300000 vs game 1502676 |
+| Future Tank | futuretech_futuretank | Damage 300000 vs game 1400900 |
 
 unmatched: Light Tank Mk2, Sheridan, Chi-Ha Medium Tank, Shrine Tank, Ix Combat Tank, Ordos Heavy Combat Tank (Cannon), Ordos Heavy Combat Tank (Missiles), Autogun Tank, Siege Tank (Tank Mode), Siege Tank (Siege Mode), Matador (Tank Mode), Matador (Siege Mode), Lasher Tank (Cannon), Lasher Tank (Toxic Mortar), Lasher Tank (Laser), Lynx Tank (Cannon), Lynx Tank (MG), AA Flame Tank, Rusher Tank (Cannon), Rusher Tank (Rockets), Smoker Tank (Cannon), Smoker Tank (Grenade Pack), Smoker Tank (Rockets), Cannon Attack Robot, Guardian Heavy Tank, Beta Quantum Tank, Flame Tank Mk2, Mammoth Mk3, Advanced Soviet Mammoth Tank, OI Tank ...
 
@@ -221,7 +221,7 @@ ambiguous: Ranger -> ra1_allies_ranger, wc2_humans_upgrade_ranger | Battle Fortr
 | Starship Sovereign | protoss_starshipsovereign | Damage 12000 vs game 14631 |
 | Gryphon Rider | wc2_humans_gryphonrider | Damage 40000 vs game 55270 |
 | Dragon | wc2_orcs_dragon | Damage 60000 vs game 150000 |
-| Empress Station | steelconsortium_empressstation | Damage 25000 vs game 354025 |
+| Empress Station | steelconsortium_empressstation | Damage 25000 vs game 352025 |
 | Haunebu II | schwarzermond_haunebuii | HP 375000 vs game 250000; Speed 55 vs game 66 |
 
 unmatched: Hind, Kamov, Ix Drone, Wraith (Laser), Wraith (Rockets), Sun Dog (Laser), Sun Dog (Rockets), Scout (MG), Scout (Rockets), Corsair (EMP), Corsair (AA), RA2 Hind, Pelican (Rockets), Pelican (MG), Steel Cargo Ship, Cryo Copter (Cryo Beam), Cryo Copter (Rockets), Yak (Chaingun), Yak (Bombs), Tesla Yak (Chaingun), Tesla Yak (Bombs), Tesla Yak (Tesla), Nuclear Yak (Chaingun), Nuclear Yak (Bomb), Zero Fighter (Chaingun), Zero Fighter (Arrows), Me 262 (MG), Me 262 (Rockets), Firehawk (Bombs), Firehawk (Missiles) ...
