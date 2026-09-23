@@ -1534,6 +1534,13 @@ YAML remains an explicit design decision.
   `actor-<id>.name` / `actor-<id>.description`.
 - Scheme = RA1 Soviet style: one-line role summary; ability lines as
   separate indented lines; `Strong vs …` / `Weak vs …` at the end.
+  ⭐ **DERIVED since 2026-09-23 (maintainer ruling, ROADMAP "three ideas from Combined Arms'
+  damage model").** The production tooltip computes `Strong vs` / `Weak vs`, the per-ladder
+  damage % table, the `Armor Piercing` tag (vehicle ladder peaks on `Heavy`/`Superheavy`, per
+  §12.0d) and the `Targets` line from the unit's RESOLVED warheads
+  (`OpenRA.Mods.Cameo/Widgets/Logic/VersusSummary.cs`), and hides any hand-written
+  `Strong vs` / `Weak vs` line in the description. **Do not write new ones.** Check what the
+  tooltip will say with `utility.cmd cameo --versus-summary [actor ...]`.
 - Upgrade descriptions open with the tier tag ("Tech Upgrade (Only affects
   units of own faction)" / "Team Upgrade (…)" / "Promotion Upgrade (…)"),
   then one effect per line with exact stats and affected units (grouped

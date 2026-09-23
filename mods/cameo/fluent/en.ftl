@@ -147,6 +147,28 @@ label-armor-class =
     .Superheavy = Superheavy
     .Shield = Shield
 
+## Production tooltip — damage vs armour, derived from the warheads (ProductionTooltipCameoLogic)
+label-versus-header = Damage vs
+label-versus-armor-piercing = Armor Piercing
+label-versus-cannot-attack = cannot attack
+label-versus-targets = Targets: { $targets }
+label-versus-strong = • Strong vs { $armors }
+label-versus-weak = • Weak vs { $armors }
+label-versus-cannot = • Cannot attack { $ladders }
+label-versus-infantry = Infantry
+label-versus-vehicles = Vehicles
+label-versus-buildings = Buildings
+label-versus-aircraft = Aircraft
+label-target-ground = Ground
+label-target-water = Water
+label-target-underwater = Underwater
+label-target-air = Air
+label-attribute-detector = • Detects stealth
+label-attribute-stealth = • Stealthed
+label-attribute-transport = • Carries { $count } passengers
+label-attribute-harvester = • Harvests resources
+label-attribute-shielded = • Shielded
+
 loadscreen-loading = Drag to set a formation for units when attack-moving$
    Access your Promotions tab through the star button on the sidebar$
    The promotions counter at the top edge of the screen displays your points and progress toward earning them$
