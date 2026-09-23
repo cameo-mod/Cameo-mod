@@ -7,7 +7,7 @@
 # HOW THIS PASS WAS MADE, so it can be audited rather than trusted:
 #   * Group rows carry a decision per measured (delivery, element) SIGNATURE, with the reasoning
 #     in `why`. A signature is what the measurement actually distinguishes.
-#   * `overrides:` holds the 85 weapons looked at individually. An override BEATS its
+#   * `overrides:` holds the 87 weapons looked at individually. An override BEATS its
 #     group, and it is keyed by WEAPON so it survives re-clustering — which matters: the first
 #     pass keyed these by GROUP and lost one within a single regrouping (R50).
 #   * Everything is `status: proposed`. NOTHING here has been reviewed by the maintainer.
@@ -1968,10 +1968,19 @@ overrides:
   PsychGasCreate:
     family: '(drop: not a damage warhead)'
     why: it creates gas
+  RadBeamWarhead:
+    family: Radiation
+    why: '`RadBeamWarhead` - the maintainer-CONFIRMED `Radiation` family (CA review: DesolatorBeam, RadTrooperBeam,
+      ApocRadBeamWeapon). Anti-infantry radiation, not the buildings-first `Nuclear` blast (R69/R70)'
   RadCannonWH:
     family: CannonAP
     why: '⚠ named for radiation, shaped armour-piercing (INF 93 against HEAVY 200). R52: the profile decides,
       and radiation kills people, not tanks'
+  RadEruptionWarhead:
+    family: Radiation
+    why: '`RadEruptionWarhead` - the maintainer-CONFIRMED `Radiation` family (CA review: DesolatorBeam,
+      RadTrooperBeam, ApocRadBeamWeapon). Anti-infantry radiation, not the buildings-first `Nuclear` blast
+      (R69/R70)'
   RaijinWH:
     family: '(park: REVIEW - thunder, magnetic wave or fire?)'
     why: Three readings and a flat profile that cannot choose. The name is the Japanese THUNDER god, the

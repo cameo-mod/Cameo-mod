@@ -3169,18 +3169,19 @@ overrides:
     family: BulletTesla
     why: 'anti-vehicle at 200 across light/medium/heavy: a vehicle-killing electrified round'
   NeutronWH:
-    family: Nuclear
-    why: a neutron warhead; flat 176.6 carries no shape but it is real damage
+    family: Radiation
+    why: 'a neutron weapon - anti-personnel radiation - the maintainer-CONFIRMED `Radiation` family (CA
+      review: DesolatorBeam, RadTrooperBeam, ApocRadBeamWeapon). Anti-infantry radiation, not the buildings-first
+      `Nuclear` blast (R69/R70)'
   PerunLightningWH:
     family: Tesla
     why: Perun is the thunder god — a lightning strike. Delivered vertically, which is why its signature
       says Bomb, but the payload is electric
   RadBeamWarhead:
-    family: Nuclear
-    why: 'the Desolator beam. R56 predicted this one in the extractor comment before it appeared: RR writes
-      NOTHING on it but `InfDeath=8`, because radiation and poison kill the same slow way in RA2, so the
-      new toxin fallback claims it. The profile settles it — INF 200 falling to VEH 106 and BLD 18-44
-      is radiation, not gas'
+    family: Radiation
+    why: 'the Desolator beam - the maintainer-CONFIRMED `Radiation` family (CA review: DesolatorBeam,
+      RadTrooperBeam, ApocRadBeamWeapon). Anti-infantry radiation, not the buildings-first `Nuclear` blast
+      (R69/R70)'
   SlaveMinerWH:
     family: Bullet
     why: INF 200 / VEH 94 / BLD 26 — an autocannon, not a railgun
@@ -3188,6 +3189,6 @@ overrides:
     family: '(drop: support weapon)'
     why: a repair crane
   VortexS1WH:
-    family: Nuclear
-    why: '⚠ REVIEW: measured delivery is Radiation and it is assigned on that, but the name suggests a
-      chrono vortex, which would be Quantum. Kept on the measurement rather than the name (R21)'
+    family: '(park: REVIEW - chrono vortex or radiation?)'
+    why: measured Radiation delivery, but the NAME is a vortex; neither Radiation nor Nuclear is safe
+      without a look (R70)
