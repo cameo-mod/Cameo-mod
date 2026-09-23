@@ -311,9 +311,10 @@ Whether the grip should complete faster is a BALANCE question for the ledger, no
 
 ### 4. More axes to convert
 
-Documented in `PHYSICAL_STATE_SYSTEM.md` §5 but not built: **Sonic → `Resonance`** (W7, needs no
-new C#), **Hex** (Magic: −firepower/−accuracy/disable specials), **ArmorBreach**, **Knockback**
-(needs new C#). Only **Temperature** (98.6% exposure) and **Corrosion** (45.0%) exist today.
+Documented in `PHYSICAL_STATE_SYSTEM.md` §5 but not built: **Hex** (Magic: −firepower/−accuracy/
+disable specials), **ArmorBreach**, **Knockback** (needs new C#). **Sonic → `Resonance`** (W7)
+is in progress (EMBER, `devin/ember/l6-w7-resonance` — shared side done, pack refs pending);
+**Temperature** (98.6% exposure) and **Corrosion** (45.0%) exist today.
 
 ## ✅ RULED — the "broken ladders" were never broken (2026-08-23)
 

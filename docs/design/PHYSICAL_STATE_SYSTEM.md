@@ -346,7 +346,7 @@ used for Temperature's blue cold side) AND (b) **threshold artwork** at the extr
 | Temperature hot | 🔴 red (bar exists) | overheat glow at max | red overlay exists; max-heat art TBD |
 | Temperature cold | 🔵 blue (`@CryoFreeze` overlay) | ❄ `frostspark` at `superfreeze` | **exists** |
 | **Corrosion** | 🟢 **green tint**, ever-increasing 200→20000 (`WithPhysicalStateColoredOverlay`, colour only) | the **existing pulsating corrosion effect**, played ONLY at 100% (20000) | **mostly EXISTS** — pulse effect exists; green tint is just the colour trait |
-| **Sonic** | 🔵 **looped, transparently-shifting blue** overlay (the sonic-mark visual) | — (on-hit, short duration) | **NEW art needed** — a looped shifting-blue overlay. PLACEHOLDER live now: `^SonicDebuff` uses a flat `WithColoredOverlay@SONICDEBUFF` (`0088FF40`, Multiply) — swap it for the looped overlay when the art lands. The commented-out `WithDecoration@SONICDEBUFF` in `^SonicDebuff` still points at the existing `2100commandodebuff` icon. |
+| **Sonic** | 🔵 **looped, transparently-shifting blue** overlay (the sonic-mark visual) | — (on-hit, short duration) | **NEW art needed** — a looped shifting-blue overlay. W7 PLACEHOLDER live: `^Resonant` uses a scaling `WithPhysicalStateColoredOverlay@Resonance` (blue, grows with the meter) + `PhysicalStateBar` — swap it for the looped overlay when the art lands. |
 | **Armor Breach** | very light **grey** scaling overlay | **breach icon** at 100% — a bullet punching through armor plating (when they take 200%) | **NEW art needed** — the breach icon; overlay is just grey colour |
 
 **New sprite art to create** (RGBA PngSheet per pair every new
@@ -458,7 +458,7 @@ DECIDED:
 1. **Corrosion peak** = DoT + slow + vuln (values in §2). Hazmat halves the DoT.
 2. **Cryo = a thin child of Prism** — `^Warhead_Cryo_*` inherits `^Warhead_Prism_*` and only adds Temperature −100; base Prism (Prism Tank / Athena Cannon) stays freeze-free. Prism anti-LIGHT Versus already locked.
 3. **New axes to build:** Armor Breach + Hex + Knockback (new C# `PushWarhead`) + the base wiring (Corrosion/Prism-cryo/Plasma/Sonic).
-4. **Sonic** = global `CommandoDebuff → SonicDebuff`, baked into `^Warhead_Sonic_*` (predator laser + waveforce keep applying it). **BUILT `5a14355e6`** — the family templates now grant the mark themselves; the three hand-tuned grants (GDI predator laser 22/222, Japan waveforce 222/666 + 150/1500, RA2 `IonPulseDischarge`'s 4 expanding rings) were only renamed, not folded, because converting their warheads is a separate permission-gated change.
+4. **Sonic** = global `CommandoDebuff → SonicDebuff`, baked into `^Warhead_Sonic_*` (predator laser + waveforce keep applying it). **BUILT `5a14355e6`** — superseded by **W7 (EMBER, `devin/ember/l6-w7-resonance`)**: `SonicDebuff` retired, the binary mark is now the `Resonance` meter (`^Resonant`, `PhysicalStates: Resonance: 100` on all five Sonic families via `FAMILY_PHYSICAL_STATE`; blends feed it at the per-parent-average share). The three hand-tuned grants (predator laser, waveforce, `IonPulseDischarge` rings) are now converted to `ApplyPhysicalState` flat feeds; pack-local grants go via REQUEST to the pack owners.
 5. **Every axis needs its own art** (§4b) — green pulsating corrosion overlay + armor-breach breach-icon are NEW assets.
 
 6. **Plasma Versus** = the **per-armor blend (average) of the Flame and Chemical ladders** (maintainer:
