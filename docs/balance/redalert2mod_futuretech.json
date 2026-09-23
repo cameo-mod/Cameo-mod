@@ -12,7 +12,7 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "32000",
+        "damage": "48000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium_Flat",
@@ -24,13 +24,6 @@
         "spread": "200",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "FutureCryocopterMissileAP_Medium",
-        "type": "AreaDamage"
        },
        {
         "damage": "8000",
@@ -223,14 +216,7 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "42488",
-        "falloff": "100, 89, 75, 55, 0",
-        "spread": "383",
-        "tag": "Plasma_Heavy_Flat",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "40000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
@@ -334,14 +320,7 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "42488",
-        "falloff": "100, 89, 75, 55, 0",
-        "spread": "383",
-        "tag": "Plasma_Heavy_Flat",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "46488",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
@@ -2410,7 +2389,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "12000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
@@ -2459,38 +2438,10 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunShrapnelEnemy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "ShotgunShrapnelAlly",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunTankDestroyer",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunSmallArms",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunChaingun",
         "type": "AreaDamage"
        }
       ],
@@ -2522,7 +2473,7 @@
       "armament_name": "deployed",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "12000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
@@ -2571,38 +2522,10 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunShrapnelEnemy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "ShotgunShrapnelAlly",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunTankDestroyer",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunSmallArms",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunChaingun",
         "type": "AreaDamage"
        }
       ],
@@ -2626,7 +2549,7 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "12000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
@@ -2675,38 +2598,10 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunShrapnelEnemy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "ShotgunShrapnelAlly",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunTankDestroyer",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunSmallArms",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunChaingun",
         "type": "AreaDamage"
        }
       ],
@@ -2731,7 +2626,7 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "12000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
@@ -2780,38 +2675,10 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunShrapnelEnemy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "ShotgunShrapnelAlly",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunTankDestroyer",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunSmallArms",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunChaingun",
         "type": "AreaDamage"
        }
       ],
@@ -2837,7 +2704,7 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "12000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
@@ -2886,38 +2753,10 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunShrapnelEnemy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "ShotgunShrapnelAlly",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunTankDestroyer",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunSmallArms",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunChaingun",
         "type": "AreaDamage"
        }
       ],
@@ -2943,7 +2782,7 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "12000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
@@ -2992,38 +2831,10 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunShrapnelEnemy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "ShotgunShrapnelAlly",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunTankDestroyer",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunSmallArms",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "ShotgunChaingun",
         "type": "AreaDamage"
        }
       ],
@@ -3861,17 +3672,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "12000",
         "falloff": "100, 0",
         "spread": "67",
         "tag": "Bullet_Light_Flat",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
         "type": "AreaDamage"
        },
        {
@@ -3901,13 +3705,6 @@
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
@@ -3940,17 +3737,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "12000",
         "falloff": "100, 0",
         "spread": "67",
         "tag": "Bullet_Light_Flat",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
         "type": "AreaDamage"
        },
        {
@@ -3980,13 +3770,6 @@
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
@@ -4011,17 +3794,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "12000",
         "falloff": "100, 0",
         "spread": "67",
         "tag": "Bullet_Light_Flat",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
         "type": "AreaDamage"
        },
        {
@@ -4051,13 +3827,6 @@
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
@@ -4091,17 +3860,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "12000",
         "falloff": "100, 0",
         "spread": "67",
         "tag": "Bullet_Light_Flat",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
         "type": "AreaDamage"
        },
        {
@@ -4131,13 +3893,6 @@
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
@@ -5063,7 +4818,7 @@
       "burstdelays": "10",
       "damage_warheads": [
        {
-        "damage": "550888",
+        "damage": "600000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy_Flat",
@@ -5103,13 +4858,6 @@
         "spread": "111",
         "tag": "MagicWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "100000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
@@ -5141,7 +4889,7 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "550888",
+        "damage": "650888",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy_Flat",
@@ -5181,13 +4929,6 @@
         "spread": "111",
         "tag": "MagicWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "100000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
@@ -6447,25 +6188,11 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 55, 0",
-        "spread": "93",
-        "tag": "Tesla_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Tesla_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "Laser_Heavy",
-        "type": "AreaDamage"
        },
        {
         "damage": "1000",
@@ -6475,7 +6202,7 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "8000",
+        "damage": "24000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy",
@@ -6516,25 +6243,11 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 55, 0",
-        "spread": "93",
-        "tag": "Tesla_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Tesla_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "Laser_Heavy",
-        "type": "AreaDamage"
        },
        {
         "damage": "1000",
@@ -6544,7 +6257,7 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "8000",
+        "damage": "24000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy",
