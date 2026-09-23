@@ -2214,6 +2214,26 @@ not repeatedly.
 
 Crashes and player-visible regressions jump everything below.
 
+### ⭐ LIVE LANE — warhead/armour reference averaging (Claude, updated 2026-09-23)
+
+**ON MASTER since 2026-09-23** (landed from a clean branch, `claude/warhead_reference_lane`; the old
+`claude/warhead_reference_R39_R53` was cut from an unmerged naming branch and must NOT be merged —
+it also carries AURORA's 09-07 ra1_allies/ra2_allies/ts_gdi rename, which is handed to EMBER
+separately).
+
+Read [`design/REFERENCE_EXTRACTION_PLAN.md`](design/REFERENCE_EXTRACTION_PLAN.md) **R39-R62** (the
+binding rulings) then [`design/WARHEAD_REFERENCE_HANDOFF.md`](design/WARHEAD_REFERENCE_HANDOFF.md)
+(lane state and the per-source procedure). Coverage prints from
+`python tools/reference/assignment_store.py`.
+
+State: **10 of 17 sources assigned, 2,220 of 2,554 weapons (87%).** Combined Arms is
+maintainer-REVIEWED; the other nine are `proposed`. Next: `dta_enhanced` (needs a DTA mode in
+`tools/reference/ini_lookup.py` first — DTA is read by `read_dta`, not `parse_ini`).
+
+⚠ Extractor fixes in the lane (R48, R50, R51, R54, R56, R58–R60) changed the measured corpus, so
+anything downstream of `warhead_groups.json` computed before 2026-09-23 is stale.
+
+
 ### 3.A — MULTI-AGENT COORDINATION (read this FIRST if you are an AI agent)
 
 **As of 2026-08-25, there are 5 Devin AI agents running locally.** Each agent MUST:
