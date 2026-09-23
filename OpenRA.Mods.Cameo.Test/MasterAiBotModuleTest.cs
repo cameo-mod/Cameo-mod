@@ -347,36 +347,6 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void PreferOwnedReturnsNonEmptyFilteredSubset()
-		{
-			var candidates = new List<string> { "target", "other", "target" };
-			Assert.That(SquadManagerBotModuleCA.PreferOwned(candidates, candidate => candidate == "target"),
-				Is.EqualTo(new[] { "target", "target" }));
-		}
-
-		[Test]
-		public void PreferOwnedFallsBackWhenFilteredSubsetIsEmpty()
-		{
-			var candidates = new List<string> { "target", "other" };
-			Assert.That(SquadManagerBotModuleCA.PreferOwned(candidates, candidate => candidate == "missing"),
-				Is.SameAs(candidates));
-		}
-
-		[Test]
-		public void PreferOwnedLeavesCandidatesUnchangedWithoutMainTarget()
-		{
-			var candidates = new List<string> { "target", "other" };
-			Assert.That(SquadManagerBotModuleCA.PreferOwned(candidates, null), Is.SameAs(candidates));
-		}
-
-		[Test]
-		public void PreferOwnedLeavesEmptyCandidatesEmpty()
-		{
-			var candidates = new List<string>();
-			Assert.That(SquadManagerBotModuleCA.PreferOwned(candidates, candidate => true), Is.SameAs(candidates));
-		}
-
-		[Test]
 		public void CounterDemandRequiresSustainedOnThreshold()
 		{
 			var info = new MasterAiBotModuleInfo();
@@ -485,6 +455,36 @@ namespace OpenRA.Mods.Cameo.Test
 
 			Assert.That(restored.CounterDemandCandidateSince, Is.EqualTo(original.CounterDemandCandidateSince));
 			Assert.That(restored.LastIssuedCounterDemands, Is.EqualTo(original.LastIssuedCounterDemands));
+		}
+
+		[Test]
+		public void PreferOwnedReturnsNonEmptyFilteredSubset()
+		{
+			var candidates = new List<string> { "target", "other", "target" };
+			Assert.That(SquadManagerBotModuleCA.PreferOwned(candidates, candidate => candidate == "target"),
+				Is.EqualTo(new[] { "target", "target" }));
+		}
+
+		[Test]
+		public void PreferOwnedFallsBackWhenFilteredSubsetIsEmpty()
+		{
+			var candidates = new List<string> { "target", "other" };
+			Assert.That(SquadManagerBotModuleCA.PreferOwned(candidates, candidate => candidate == "missing"),
+				Is.SameAs(candidates));
+		}
+
+		[Test]
+		public void PreferOwnedLeavesCandidatesUnchangedWithoutMainTarget()
+		{
+			var candidates = new List<string> { "target", "other" };
+			Assert.That(SquadManagerBotModuleCA.PreferOwned(candidates, null), Is.SameAs(candidates));
+		}
+
+		[Test]
+		public void PreferOwnedLeavesEmptyCandidatesEmpty()
+		{
+			var candidates = new List<string>();
+			Assert.That(SquadManagerBotModuleCA.PreferOwned(candidates, candidate => true), Is.SameAs(candidates));
 		}
 
 		[Test]

@@ -1044,10 +1044,10 @@ allow it.
    The guerrilla rule is currently a computed-but-unavailable candidate: it remains in the
    situation log's candidate field, while the active five-personality controller falls through
    to the next grantable rule.
-4. **Main target selection (implemented).** `MasterAiBotModule` exposes its main target through
-   a CA-owned provider seam. `SquadManagerBotModuleCA` uses the opt-in `PreferMainTarget` field
-   for proactive, unbounded picks only; in-radius combat targeting remains nearest-first and
-   falls back to the unrestricted candidate list when the target has no valid actors.
+4. **Main target selection (landed).** `SquadManagerBotModuleCA` consumes the
+   master's target for proactive, unbounded picks only when `PreferMainTarget` is
+   enabled; in-radius targeting is untouched, and empty preferred results fall
+   back to the existing unrestricted selection.
 5. **Counter demand and hints (implemented).** `MasterAiBotModule` issues the
    `SetBotCounterDemand` order; `BotCounterDemandController` owns the synced demand conditions;
    `ProvidesPrerequisite` maps those conditions to `demand.*` tokens, and composition
