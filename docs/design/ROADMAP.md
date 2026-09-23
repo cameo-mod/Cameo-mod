@@ -98,6 +98,36 @@ an open checkbox was moved.
 
 ---
 
+## ✅ RULED — three ideas from Combined Arms' damage model (2026-09-23)
+
+Asked by the maintainer after a Discord note from **Legato** (CA): CA has armour types only, a
+per-unit % against each, tooltips that say *"good vs heavy, weak vs infantry"*, and three extra
+rules: dedicated AA takes less from air weapons, `TankBuster` weapons deal bonus damage to 'tank'
+units, and a T3 flak-armour upgrade shields infantry from some splash. Measured against CA's source
+(`CAmod` @ `f31049d2`): all three are ONE hidden-multiplier trait, `DamageTypeDamageMultiplier`
+(`AirToGround` 50, **`TankBuster` 133 — not 150**, `FlakVestMitigated` 60 / 80), and the
+tooltips are hand-written `TooltipExtras` lines. Cameo already has the per-weapon % (the
+`^Warhead_*` families) and already prescribes `Strong vs … / Weak vs …` (DESIGN §7, 1,489 /
+1,061 live lines, **all hand-written and never checked**).
+
+**Maintainer ruling, 2026-09-23 — ADOPT:**
+
+1. **Derive `Strong vs` / `Weak vs` from each unit's resolved warhead profile** (generator or
+   audit) so §7's lines stay true as the reference averaging moves profiles. No balance change.
+   Read through `miniyaml.Ruleset.resolve_weapon` + `weapon_efficiency.versus_of`.
+2. **Dedicated AA takes less damage from aircraft weapons** — as an armour / plating class,
+   visible and priced by the pipeline. **Not** as CA's hidden multiplier: W26/R1 is retiring
+   those (*"HP is visible in the unit stat widget; a multiplier is not"*).
+3. **A TankBuster bonus against 'tank' units.** Adopted against the coordinator's advice (Cameo's
+   five-rung vehicle ladder and the AP families already peak on heavy armour). ⚠ **The FORM is not
+   ruled yet:** CA's form is the hidden multiplier W26/R1 forbids; the Cameo-native forms are a
+   Versus tilt in a `^Warhead_*` family or a 'tank' armour distinction. Ask before building.
+
+**NOT adopted:** the infantry flak-armour upgrade.
+
+None of this is built. Order: (1) first — it is balance-neutral and protects the reference
+averaging's output; (2) and (3) are balance changes and follow W24.
+
 ## ⭐ START HERE — [`BALANCE_PROGRAM_PLAN.md`](BALANCE_PROGRAM_PLAN.md)
 
 **The balance program's board, ownership and acceptance criteria live in ONE file:
