@@ -705,7 +705,7 @@ reaches a ground target.**
   same spd/rng → 2.5× cost (1200 → 3000). (Damage-per-shot is 32000, NOT 40000, because the 1.25
   weapon-class already carries part of the DPS — as you flagged.)
 
-**Members:** flame tanks (`td_nod_flametankmkii`, `forgotten_flametank`, `asianalliance_asianflametank`,
+**Members:** flame tanks (`td_nod_flametankmkii`, `forgotten_flametank`, `asianalliance_flametank`,
 `japan_hovercraftflametank`) **+ melee / very-short-range durable**: WC2 **Ogre-Mage**, WC **Knight**,
 **Zerg Ultralisk**, **Consortium Megalodon**. (Berserker / MAD Tank read as epic/suicide — flag if not.)
 **Ladder (cost):** … LineBreaker baseline **1200** (short-range brawler class; its own range ~2500,

@@ -81,8 +81,8 @@ _none found_
 | ambiance_ocean_waves | ambiance_wind | ? | ? | mods/cameo/rules/misc.yaml |
 | ambiance_rumbling | ambiance_wind | ? | ? | mods/cameo/rules/misc.yaml |
 | asianalliance_heavyrailguntank | asianalliance_railguntank | redalert2mod/asianalliance | redalert2mod/asianalliance | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml |
-| bomber_husk.asian | BADR.Husk | redalert2mod/asianalliance | ? | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
-| bomber_minebomb2.asian | bomber_minebomb.asian | redalert2mod/asianalliance | redalert2mod/asianalliance | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
+| asianalliance_bomber_husk | BADR.Husk | redalert2mod/asianalliance | ? | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
+| asianalliance_bomber_minebomb2 | asianalliance_bomber_minebomb | redalert2mod/asianalliance | redalert2mod/asianalliance | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
 | cabal_artilleryspider_backup | cabal_artilleryspider | tiberiansun/cabal | tiberiansun/cabal | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/husks.yaml |
 | cabal_avatar_backup | cabal_avatar | tiberiansun/cabal | tiberiansun/cabal | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/husks.yaml |
 | cabal_manticore_backup | cabal_manticore | tiberiansun/cabal | tiberiansun/cabal | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/husks.yaml |
@@ -125,8 +125,8 @@ _none found_
 | japan_coretechcenter | japan_corewarfactory | redalert/japan | redalert/japan | mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml |
 | japan_japanesesuperbomber | ra1_badger | redalert/shared | redalert/shared | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
 | jsuperbomber.Husk | BADR.Husk | ? | ? | mods/cameo/rules/husks.yaml |
-| kami_asdf.asian | kami.asian | redalert2mod/asianalliance | redalert2mod/asianalliance | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
-| kami_chemical.asian | kami.asian | redalert2mod/asianalliance | redalert2mod/asianalliance | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
+| asianalliance_kami_asdf | asianalliance_kami | redalert2mod/asianalliance | redalert2mod/asianalliance | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
+| asianalliance_kami_chemical | asianalliance_kami | redalert2mod/asianalliance | redalert2mod/asianalliance | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
 | modbomber.Husk | YAK.Husk | ? | ? | mods/cameo/rules/husks.yaml |
 | modkami.Husk | YAK.Husk | ? | ? | mods/cameo/rules/husks.yaml |
 | modkamimini.Husk | YAK.Husk | ? | ? | mods/cameo/rules/husks.yaml |
@@ -516,22 +516,22 @@ _none found_
 | asianalliance_advancedcommunicationcenter | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
 | asianalliance_alligator | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml |
 | asianalliance_asdf | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml |
-| asianalliance_asianairforcecommand | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
-| asianalliance_asianbarracks | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
-| asianalliance_asianbattlelab | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
-| asianalliance_asiancommando | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml |
-| asianalliance_asianconstructionyard | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
-| asianalliance_asianflametank | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml |
-| asianalliance_asianflametrooper | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml |
-| asianalliance_asianmilitia | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml |
-| asianalliance_asianmobileconstructionvehicle | 4 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml |
-| asianalliance_asianorerefinery | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
-| asianalliance_asianpetrolplant | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
-| asianalliance_asianradar | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
-| asianalliance_asiansentryflamer | 6 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
-| asianalliance_asianservicedepot | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
-| asianalliance_asiantankkiller | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml |
-| asianalliance_asianwarfactory | 6 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
+| asianalliance_airforcecommand | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
+| asianalliance_barracks | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
+| asianalliance_battlelab | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
+| asianalliance_commando | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml |
+| asianalliance_constructionyard | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
+| asianalliance_flametank | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml |
+| asianalliance_flametrooper | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml |
+| asianalliance_militia | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml |
+| asianalliance_mobileconstructionvehicle | 4 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml |
+| asianalliance_orerefinery | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
+| asianalliance_petrolplant | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
+| asianalliance_radar | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
+| asianalliance_sentryflamer | 6 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
+| asianalliance_servicedepot | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
+| asianalliance_tankkiller | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml |
+| asianalliance_warfactory | 6 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
 | asianalliance_chaosstorminductor | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
 | asianalliance_chaostower | 6 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
 | asianalliance_dragonfly | 4 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml |
@@ -594,8 +594,8 @@ _none found_
 | atreides_windtrap | 6 | mods/cameo/ContentPacks/D2k/Atreides/yaml/buildings.yaml |
 | bio | 4 | mods/cameo/rules/tech.yaml |
 | bio.Husk | 5 | mods/cameo/rules/tech.yaml |
-| bomber_husk.asian | 4 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
-| bomber_minebomb2.asian | 4 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
+| asianalliance_bomber_husk | 4 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
+| asianalliance_bomber_minebomb2 | 4 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
 | cabal_artilleryspider | 5 | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml |
 | cabal_artilleryspider_backup | 6 | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/husks.yaml |
 | cabal_ascended | 5 | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml |
@@ -662,8 +662,8 @@ _none found_
 | cabal_widow_backup | 6 | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/husks.yaml |
 | carryall | 4 | mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml |
 | carryall.paradrop | 4 | mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml |
-| cgpnch.asian | 6 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
-| cgyard.asian | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
+| asianalliance_cgpnch | 6 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
+| asianalliance_cgyard | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
 | cgyard.latin | 5 | mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml |
 | cobra.steel | 5 | mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml |
 | combat_tank.harkonnen | 5 | mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml |
@@ -824,7 +824,7 @@ _none found_
 | futuretech_twister | 4 | mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/aircraft.yaml |
 | futuretech_warpgate | 6 | mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/buildings.yaml |
 | gdirigdrone | 4 | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml |
-| gunb.asian | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml |
+| asianalliance_gunb | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml |
 | harkonnen_adp | 5 | mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml |
 | harkonnen_assaulttank | 5 | mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml |
 | harkonnen_autogunturret | 6 | mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml |
@@ -973,11 +973,11 @@ _none found_
 | junv16 | 4 | mods/cameo/rules/civilian.yaml |
 | junv17 | 4 | mods/cameo/rules/civilian.yaml |
 | junv18 | 4 | mods/cameo/rules/civilian.yaml |
-| kami.asian | 4 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
-| kami_asdf.asian | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
-| kami_chemical.asian | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
-| karrier.asian | 4 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml |
-| ksub.asian | 4 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml |
+| asianalliance_kami | 4 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
+| asianalliance_kami_asdf | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
+| asianalliance_kami_chemical | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
+| asianalliance_karrier | 4 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml |
+| asianalliance_ksub | 4 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml |
 | landcarr_drone.futu | 4 | mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/aircraft.yaml |
 | latinsyndicate_airstation | 5 | mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml |
 | latinsyndicate_bunkertower | 6 | mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml |
@@ -1023,7 +1023,7 @@ _none found_
 | latinsyndicate_tortugatank | 5 | mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml |
 | latinsyndicate_yakovlev | 4 | mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/aircraft.yaml |
 | light_inf | 5 | mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml |
-| lsub.asian | 4 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml |
+| asianalliance_lsub | 4 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml |
 | mammothbunker.husk | 5 | mods/cameo/rules/tech.yaml |
 | missile_tank | 5 | mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml |
 | modbomber.Husk | 4 | mods/cameo/rules/husks.yaml |
@@ -1144,7 +1144,7 @@ _none found_
 | ordos_tankdestroyer | 5 | mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml |
 | ordos_windtrap | 6 | mods/cameo/ContentPacks/D2k/Ordos/yaml/buildings.yaml |
 | ordos_wraith | 4 | mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml |
-| panth.asian | 4 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml |
+| asianalliance_panth | 4 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml |
 | protoss_adept | 5 | mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml |
 | protoss_amaranth | 5 | mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml |
 | protoss_analogue | 6 | mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml |
@@ -1189,8 +1189,8 @@ _none found_
 | protoss_voidray | 5 | mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml |
 | protoss_zealot | 5 | mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml |
 | protoss_zeratul | 5 | mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml |
-| ptnk.asian | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml |
-| quasfrig.asian | 4 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml |
+| asianalliance_ptnk | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml |
+| asianalliance_quasfrig | 4 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml |
 | ra1_advancedpowerplant | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml |
 | ra1_agentdelphi | 5 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml |
 | ra1_allies_alliedaagun | 5 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml |
@@ -2198,7 +2198,7 @@ _none found_
 | tsfsmoker.bomber | 4 | mods/cameo/rules/tiberiansun.yaml |
 | tsmonstermaker1 | 5 | mods/cameo/rules/tiberiansun.yaml |
 | tsprobe | 4 | mods/cameo/rules/tiberiansun.yaml |
-| tsun.asian | 4 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml |
+| asianalliance_tsun | 4 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml |
 | tsvislrg | 4 | mods/cameo/rules/tiberiansun.yaml |
 | tsvissml | 4 | mods/cameo/rules/tiberiansun.yaml |
 | wc2_critter_boar | 7 | mods/cameo/rules/warcraft2.yaml |
@@ -2449,7 +2449,7 @@ _none found_
 | harkonnen_gunship | 3 | -SpawnActorOnDeath, -WithDeathAnimation, -RevealsShroud@lockon | mods/cameo/ContentPacks/D2k/Harkonnen/yaml/aircraft.yaml |
 | ixian_stormlasher | 3 | -WithDeathAnimation, -WithWallSpriteBody, -WithSpriteTurret | mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml |
 | japan_zerofighter_slave | 4 | -UpdatesPlayerStatistics, -ActorLostNotification, -WithShadow, -MapEditorData | mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml |
-| kami.asian | 4 | -UpdatesPlayerStatistics, -ActorLostNotification, -MapEditorData, -Voiced | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
+| asianalliance_kami | 4 | -UpdatesPlayerStatistics, -ActorLostNotification, -MapEditorData, -Voiced | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
 | landcarr_drone.futu | 4 | -AutoTarget, -UpdatesPlayerStatistics, -MapEditorData, -ActorLostNotification | mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/aircraft.yaml |
 | latinsyndicate_defensebureau | 3 | -WithTurretSearchlight, -WithDeathAnimation, -QuantizeFacingsFromSequ | mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml |
 | latinsyndicate_narco | 4 | -ReloadAmmoDelayMultipli, -ReloadAmmoDelayMultipli, -ReloadAmmoDelayMultipli, -ReloadAmmoDelayMultipli | mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml |

@@ -2723,509 +2723,509 @@ asianalliance_asdf:
     -> asianalliance_asdf -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
     -> asianalliance_asdf -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
 
-asianalliance_asianairforcecommand:
+asianalliance_airforcecommand:
   parent ^^ ^globalbounty  (2 paths)
-    -> asianalliance_asianairforcecommand -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> asianalliance_asianairforcecommand -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_airforcecommand -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_airforcecommand -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> asianalliance_asianairforcecommand -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> asianalliance_asianairforcecommand -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_airforcecommand -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_airforcecommand -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^disabledoverlay  (2 paths)
-    -> asianalliance_asianairforcecommand -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> asianalliance_asianairforcecommand -> ^isaircraftfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+    -> asianalliance_airforcecommand -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> asianalliance_airforcecommand -> ^isaircraftfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
-asianalliance_asianbarracks:
+asianalliance_barracks:
   parent ^^ ^globalbounty  (2 paths)
-    -> asianalliance_asianbarracks -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> asianalliance_asianbarracks -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_barracks -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_barracks -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> asianalliance_asianbarracks -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> asianalliance_asianbarracks -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_barracks -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_barracks -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^disabledoverlay  (2 paths)
-    -> asianalliance_asianbarracks -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> asianalliance_asianbarracks -> ^isbarrack -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+    -> asianalliance_barracks -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> asianalliance_barracks -> ^isbarrack -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
-asianalliance_asianbattlelab:
+asianalliance_battlelab:
   parent ^^ ^globalbounty  (2 paths)
-    -> asianalliance_asianbattlelab -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> asianalliance_asianbattlelab -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_battlelab -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_battlelab -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> asianalliance_asianbattlelab -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> asianalliance_asianbattlelab -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_battlelab -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_battlelab -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^disabledoverlay  (2 paths)
-    -> asianalliance_asianbattlelab -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> asianalliance_asianbattlelab -> ^istechnobuilding -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+    -> asianalliance_battlelab -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> asianalliance_battlelab -> ^istechnobuilding -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
-asianalliance_asiancommando:
+asianalliance_commando:
   parent ^^ ^defaultinfantry  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
+    -> asianalliance_commando -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
   parent ^^ ^basicunit  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
   parent ^^ ^existsinworld  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
   parent ^^ ^spriteactor  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
   parent ^^ ^globalbounty  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
   parent ^^ ^selectablecombatunit  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
   parent ^^ ^botproductionbehavior  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
   parent ^^ ^acceptscloakcrate  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
   parent ^^ ^stealthgencloakable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
   parent ^^ ^shieldedshieldable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
   parent ^^ ^chronobeamable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
   parent ^^ ^base-reveal  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
   parent ^^ ^shroudable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
   parent ^^ ^snareable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
   parent ^^ ^propagandaeffectbuff  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
   parent ^^ ^cryofreezable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
   parent ^^ ^enemyinproximity  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
   parent ^^ ^affectedbyhealingfield  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
   parent ^^ ^recallable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
   parent ^^ ^mindcontrollable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
   parent ^^ ^infantrydisable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
   parent ^^ ^hospitalhealable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
   parent ^^ ^techstructurehealable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
   parent ^^ ^terrordronableinfantry  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
   parent ^^ ^terrordronable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
   parent ^^ ^cancapturedriverlessvehicles  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
   parent ^^ ^poisonable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
   parent ^^ ^gravityweighter  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> asianalliance_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> asianalliance_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
 
-asianalliance_asianconstructionyard:
+asianalliance_constructionyard:
   parent ^^ ^globalbounty  (2 paths)
-    -> asianalliance_asianconstructionyard -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> asianalliance_asianconstructionyard -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_constructionyard -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_constructionyard -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> asianalliance_asianconstructionyard -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> asianalliance_asianconstructionyard -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_constructionyard -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_constructionyard -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
-asianalliance_asianflametank:
+asianalliance_flametank:
   parent ^^ ^acceptscloakcrate  (2 paths)
-    -> asianalliance_asianflametank -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> asianalliance_asianflametank -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_flametank -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_flametank -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
-asianalliance_asianflametrooper:
+asianalliance_flametrooper:
   parent ^^ ^defaultinfantry  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
   parent ^^ ^basicunit  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
   parent ^^ ^existsinworld  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
   parent ^^ ^spriteactor  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
   parent ^^ ^globalbounty  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
   parent ^^ ^selectablecombatunit  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
   parent ^^ ^botproductionbehavior  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
   parent ^^ ^acceptscloakcrate  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
   parent ^^ ^stealthgencloakable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
   parent ^^ ^shieldedshieldable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
   parent ^^ ^chronobeamable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
   parent ^^ ^base-reveal  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
   parent ^^ ^shroudable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
   parent ^^ ^snareable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
   parent ^^ ^propagandaeffectbuff  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
   parent ^^ ^cryofreezable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
   parent ^^ ^enemyinproximity  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
   parent ^^ ^affectedbyhealingfield  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
   parent ^^ ^recallable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
   parent ^^ ^mindcontrollable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
   parent ^^ ^infantrydisable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
   parent ^^ ^hospitalhealable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
   parent ^^ ^techstructurehealable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
   parent ^^ ^terrordronableinfantry  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
   parent ^^ ^terrordronable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
   parent ^^ ^cancapturedriverlessvehicles  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
   parent ^^ ^poisonable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
   parent ^^ ^gravityweighter  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> asianalliance_flametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> asianalliance_flametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
 
-asianalliance_asianmilitia:
+asianalliance_militia:
   parent ^^ ^defaultinfantry  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
+    -> asianalliance_militia -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
   parent ^^ ^basicunit  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
   parent ^^ ^existsinworld  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
   parent ^^ ^spriteactor  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
   parent ^^ ^globalbounty  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
   parent ^^ ^selectablecombatunit  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
   parent ^^ ^botproductionbehavior  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
   parent ^^ ^acceptscloakcrate  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
   parent ^^ ^stealthgencloakable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
   parent ^^ ^shieldedshieldable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
   parent ^^ ^chronobeamable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
   parent ^^ ^base-reveal  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
   parent ^^ ^shroudable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
   parent ^^ ^snareable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
   parent ^^ ^propagandaeffectbuff  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
   parent ^^ ^cryofreezable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
   parent ^^ ^enemyinproximity  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
   parent ^^ ^affectedbyhealingfield  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
   parent ^^ ^recallable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
   parent ^^ ^mindcontrollable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
   parent ^^ ^infantrydisable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
   parent ^^ ^hospitalhealable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
   parent ^^ ^techstructurehealable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
   parent ^^ ^terrordronableinfantry  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
   parent ^^ ^terrordronable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
   parent ^^ ^cancapturedriverlessvehicles  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
   parent ^^ ^poisonable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
   parent ^^ ^gravityweighter  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> asianalliance_militia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> asianalliance_militia -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
 
-asianalliance_asianmobileconstructionvehicle:
+asianalliance_mobileconstructionvehicle:
   parent ^^ ^acceptscloakcrate  (2 paths)
-    -> asianalliance_asianmobileconstructionvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> asianalliance_asianmobileconstructionvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_mobileconstructionvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_mobileconstructionvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
-asianalliance_asianorerefinery:
+asianalliance_orerefinery:
   parent ^^ ^globalbounty  (2 paths)
-    -> asianalliance_asianorerefinery -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> asianalliance_asianorerefinery -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_orerefinery -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_orerefinery -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> asianalliance_asianorerefinery -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> asianalliance_asianorerefinery -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_orerefinery -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_orerefinery -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
-asianalliance_asianpetrolplant:
+asianalliance_petrolplant:
   parent ^^ ^globalbounty  (2 paths)
-    -> asianalliance_asianpetrolplant -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> asianalliance_asianpetrolplant -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_petrolplant -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_petrolplant -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> asianalliance_asianpetrolplant -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> asianalliance_asianpetrolplant -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_petrolplant -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_petrolplant -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
-asianalliance_asianradar:
+asianalliance_radar:
   parent ^^ ^globalbounty  (2 paths)
-    -> asianalliance_asianradar -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> asianalliance_asianradar -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_radar -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_radar -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> asianalliance_asianradar -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> asianalliance_asianradar -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_radar -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_radar -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^disabledoverlay  (3 paths)
-    -> asianalliance_asianradar -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> asianalliance_asianradar -> ^radarbuilding -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
-    -> asianalliance_asianradar -> ^radarbuilding -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+    -> asianalliance_radar -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> asianalliance_radar -> ^radarbuilding -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
+    -> asianalliance_radar -> ^radarbuilding -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
-asianalliance_asiansentryflamer:
+asianalliance_sentryflamer:
   parent ^^ ^globalbounty  (2 paths)
-    -> asianalliance_asiansentryflamer -> ^ra2defense -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> asianalliance_asiansentryflamer -> ^ra2defense -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_sentryflamer -> ^ra2defense -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_sentryflamer -> ^ra2defense -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^disabledoverlay  (2 paths)
-    -> asianalliance_asiansentryflamer -> ^ra2defense -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> asianalliance_asiansentryflamer -> ^basicdefensetemplate -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+    -> asianalliance_sentryflamer -> ^ra2defense -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> asianalliance_sentryflamer -> ^basicdefensetemplate -> ^disableonpowerdown -> Inherits:^DisabledOverlay
   parent ^^ ^gainsexperiencera2  (2 paths)
-    -> asianalliance_asiansentryflamer -> ^ra2defense -> Inherits@exp:^GainsExperienceRA2
-    -> asianalliance_asiansentryflamer -> Inherits@EXPERIENCE:^GainsExperienceRA2
+    -> asianalliance_sentryflamer -> ^ra2defense -> Inherits@exp:^GainsExperienceRA2
+    -> asianalliance_sentryflamer -> Inherits@EXPERIENCE:^GainsExperienceRA2
 
-asianalliance_asianservicedepot:
+asianalliance_servicedepot:
   parent ^^ ^globalbounty  (2 paths)
-    -> asianalliance_asianservicedepot -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> asianalliance_asianservicedepot -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_servicedepot -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_servicedepot -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> asianalliance_asianservicedepot -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> asianalliance_asianservicedepot -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_servicedepot -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_servicedepot -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^disabledoverlay  (2 paths)
-    -> asianalliance_asianservicedepot -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> asianalliance_asianservicedepot -> ^repairfacility -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+    -> asianalliance_servicedepot -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> asianalliance_servicedepot -> ^repairfacility -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
-asianalliance_asiantankkiller:
+asianalliance_tankkiller:
   parent ^^ ^defaultinfantry  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
   parent ^^ ^basicunit  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
   parent ^^ ^existsinworld  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
   parent ^^ ^spriteactor  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
   parent ^^ ^globalbounty  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
   parent ^^ ^selectablecombatunit  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
   parent ^^ ^botproductionbehavior  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
   parent ^^ ^acceptscloakcrate  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
   parent ^^ ^stealthgencloakable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
   parent ^^ ^shieldedshieldable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
   parent ^^ ^chronobeamable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
   parent ^^ ^base-reveal  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
   parent ^^ ^shroudable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
   parent ^^ ^blindable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
   parent ^^ ^snareable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
   parent ^^ ^artilleryjammable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
   parent ^^ ^propagandaeffectbuff  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
   parent ^^ ^cryofreezable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
   parent ^^ ^enemyinproximity  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
   parent ^^ ^affectedbyhealingfield  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
   parent ^^ ^recallable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
   parent ^^ ^mindcontrollable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
   parent ^^ ^infantrydisable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
   parent ^^ ^hospitalhealable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
   parent ^^ ^techstructurehealable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
   parent ^^ ^terrordronableinfantry  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
   parent ^^ ^terrordronable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
   parent ^^ ^cancapturedriverlessvehicles  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
   parent ^^ ^poisonable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
   parent ^^ ^gravityweighter  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> asianalliance_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> asianalliance_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
 
-asianalliance_asianwarfactory:
+asianalliance_warfactory:
   parent ^^ ^globalbounty  (2 paths)
-    -> asianalliance_asianwarfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> asianalliance_asianwarfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_warfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_warfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> asianalliance_asianwarfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> asianalliance_asianwarfactory -> ^ra2defaultweap -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_warfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_warfactory -> ^ra2defaultweap -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^disabledoverlay  (2 paths)
-    -> asianalliance_asianwarfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> asianalliance_asianwarfactory -> ^ra2defaultweap -> ^isweaponfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+    -> asianalliance_warfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> asianalliance_warfactory -> ^ra2defaultweap -> ^isweaponfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
 asianalliance_chaosstorminductor:
   parent ^^ ^globalbounty  (2 paths)
@@ -6819,27 +6819,27 @@ cabal_widow_backup:
     -> cabal_widow_backup -> cabal_widow -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> cabal_widow_backup -> cabal_widow -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
-cgpnch.asian:
+asianalliance_cgpnch:
   parent ^^ ^globalbounty  (2 paths)
-    -> cgpnch.asian -> ^ra2defense -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> cgpnch.asian -> ^ra2defense -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_cgpnch -> ^ra2defense -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_cgpnch -> ^ra2defense -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^disabledoverlay  (2 paths)
-    -> cgpnch.asian -> ^ra2defense -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> cgpnch.asian -> ^basicdefensetemplate -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+    -> asianalliance_cgpnch -> ^ra2defense -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> asianalliance_cgpnch -> ^basicdefensetemplate -> ^disableonpowerdown -> Inherits:^DisabledOverlay
   parent ^^ ^gainsexperiencera2  (2 paths)
-    -> cgpnch.asian -> ^ra2defense -> Inherits@exp:^GainsExperienceRA2
-    -> cgpnch.asian -> Inherits@EXPERIENCE:^GainsExperienceRA2
+    -> asianalliance_cgpnch -> ^ra2defense -> Inherits@exp:^GainsExperienceRA2
+    -> asianalliance_cgpnch -> Inherits@EXPERIENCE:^GainsExperienceRA2
 
-cgyard.asian:
+asianalliance_cgyard:
   parent ^^ ^globalbounty  (2 paths)
-    -> cgyard.asian -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> cgyard.asian -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_cgyard -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> asianalliance_cgyard -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> cgyard.asian -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> cgyard.asian -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_cgyard -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> asianalliance_cgyard -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^disabledoverlay  (2 paths)
-    -> cgyard.asian -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> cgyard.asian -> ^isshipyard -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+    -> asianalliance_cgyard -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> asianalliance_cgyard -> ^isshipyard -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
 cgyard.latin:
   parent ^^ ^globalbounty  (2 paths)
@@ -12078,10 +12078,10 @@ gdirigdrone:
     -> gdirigdrone -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
     -> gdirigdrone -> ^fightertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
 
-gunb.asian:
+asianalliance_gunb:
   parent ^^ ^acceptscloakcrate  (2 paths)
-    -> gunb.asian -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> gunb.asian -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_gunb -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_gunb -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 harkonnen_adp:
   parent ^^ ^acceptscloakcrate  (2 paths)
@@ -15206,138 +15206,138 @@ junv11:
     -> junv11 -> ^civbuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
     -> junv11 -> ^civbuilding -> ^garrisonablebuilding -> Inherits@jammable:^ArtilleryJammable
 
-kami.asian:
+asianalliance_kami:
   parent ^^ ^externalconditions  (2 paths)
-    -> kami.asian -> ^raneutralplane -> Inherits@ext:^ExternalConditions
-    -> kami.asian -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
+    -> asianalliance_kami -> ^raneutralplane -> Inherits@ext:^ExternalConditions
+    -> asianalliance_kami -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
   parent ^^ ^sonicdebuff  (2 paths)
-    -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+    -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+    -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
   parent ^^ ^defilerplague  (2 paths)
-    -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
-    -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+    -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+    -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
   parent ^^ ^commandocallable  (2 paths)
-    -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@commando:^CommandoCallable
-    -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
+    -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@commando:^CommandoCallable
+    -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
   parent ^^ ^darkswarmable  (2 paths)
-    -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
-    -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+    -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+    -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
   parent ^^ ^industryspeed  (2 paths)
-    -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@industry:^IndustrySpeed
-    -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+    -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+    -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
   parent ^^ ^citycombatcallable  (2 paths)
-    -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@police:^CityCombatCallable
-    -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
+    -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@police:^CityCombatCallable
+    -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
   parent ^^ ^berserkable  (2 paths)
-    -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@berserk:^Berserkable
-    -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
+    -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@berserk:^Berserkable
+    -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
   parent ^^ ^wc2orcsbloodluststatus  (2 paths)
-    -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
-    -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
   parent ^^ ^wc2orcshastestatus  (2 paths)
-    -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
-    -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
   parent ^^ ^wc2humansslowstatus  (2 paths)
-    -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
-    -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
   parent ^^ ^wc2humanspolymorphstatus  (2 paths)
-    -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
-    -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
   parent ^^ ^wc2humansinvisibilitystatus  (2 paths)
-    -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
-    -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
 
-kami_asdf.asian:
+asianalliance_kami_asdf:
   parent ^^ ^externalconditions  (2 paths)
-    -> kami_asdf.asian -> kami.asian -> ^raneutralplane -> Inherits@ext:^ExternalConditions
-    -> kami_asdf.asian -> kami.asian -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> Inherits@ext:^ExternalConditions
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
   parent ^^ ^sonicdebuff  (2 paths)
-    -> kami_asdf.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> kami_asdf.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
   parent ^^ ^defilerplague  (2 paths)
-    -> kami_asdf.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
-    -> kami_asdf.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
   parent ^^ ^commandocallable  (2 paths)
-    -> kami_asdf.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@commando:^CommandoCallable
-    -> kami_asdf.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@commando:^CommandoCallable
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
   parent ^^ ^darkswarmable  (2 paths)
-    -> kami_asdf.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
-    -> kami_asdf.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
   parent ^^ ^industryspeed  (2 paths)
-    -> kami_asdf.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@industry:^IndustrySpeed
-    -> kami_asdf.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
   parent ^^ ^citycombatcallable  (2 paths)
-    -> kami_asdf.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@police:^CityCombatCallable
-    -> kami_asdf.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@police:^CityCombatCallable
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
   parent ^^ ^berserkable  (2 paths)
-    -> kami_asdf.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@berserk:^Berserkable
-    -> kami_asdf.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@berserk:^Berserkable
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
   parent ^^ ^wc2orcsbloodluststatus  (2 paths)
-    -> kami_asdf.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
-    -> kami_asdf.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
   parent ^^ ^wc2orcshastestatus  (2 paths)
-    -> kami_asdf.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
-    -> kami_asdf.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
   parent ^^ ^wc2humansslowstatus  (2 paths)
-    -> kami_asdf.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
-    -> kami_asdf.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
   parent ^^ ^wc2humanspolymorphstatus  (2 paths)
-    -> kami_asdf.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
-    -> kami_asdf.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
   parent ^^ ^wc2humansinvisibilitystatus  (2 paths)
-    -> kami_asdf.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
-    -> kami_asdf.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
 
-kami_chemical.asian:
+asianalliance_kami_chemical:
   parent ^^ ^externalconditions  (2 paths)
-    -> kami_chemical.asian -> kami.asian -> ^raneutralplane -> Inherits@ext:^ExternalConditions
-    -> kami_chemical.asian -> kami.asian -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> Inherits@ext:^ExternalConditions
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
   parent ^^ ^sonicdebuff  (2 paths)
-    -> kami_chemical.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> kami_chemical.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
   parent ^^ ^defilerplague  (2 paths)
-    -> kami_chemical.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
-    -> kami_chemical.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
   parent ^^ ^commandocallable  (2 paths)
-    -> kami_chemical.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@commando:^CommandoCallable
-    -> kami_chemical.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@commando:^CommandoCallable
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
   parent ^^ ^darkswarmable  (2 paths)
-    -> kami_chemical.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
-    -> kami_chemical.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
   parent ^^ ^industryspeed  (2 paths)
-    -> kami_chemical.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@industry:^IndustrySpeed
-    -> kami_chemical.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
   parent ^^ ^citycombatcallable  (2 paths)
-    -> kami_chemical.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@police:^CityCombatCallable
-    -> kami_chemical.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@police:^CityCombatCallable
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
   parent ^^ ^berserkable  (2 paths)
-    -> kami_chemical.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@berserk:^Berserkable
-    -> kami_chemical.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@berserk:^Berserkable
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
   parent ^^ ^wc2orcsbloodluststatus  (2 paths)
-    -> kami_chemical.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
-    -> kami_chemical.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
   parent ^^ ^wc2orcshastestatus  (2 paths)
-    -> kami_chemical.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
-    -> kami_chemical.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
   parent ^^ ^wc2humansslowstatus  (2 paths)
-    -> kami_chemical.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
-    -> kami_chemical.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
   parent ^^ ^wc2humanspolymorphstatus  (2 paths)
-    -> kami_chemical.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
-    -> kami_chemical.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
   parent ^^ ^wc2humansinvisibilitystatus  (2 paths)
-    -> kami_chemical.asian -> kami.asian -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
-    -> kami_chemical.asian -> kami.asian -> ^bombertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
 
-karrier.asian:
+asianalliance_karrier:
   parent ^^ ^acceptscloakcrate  (2 paths)
-    -> karrier.asian -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> karrier.asian -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_karrier -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_karrier -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
-ksub.asian:
+asianalliance_ksub:
   parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ksub.asian -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ksub.asian -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_ksub -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_ksub -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 landcarr_drone.futu:
   parent ^^ ^externalconditions  (2 paths)
@@ -16529,10 +16529,10 @@ light_inf:
     -> light_inf -> ^d2kinfantry -> ^d2kpersonalshield -> Inherits@IxianTechnology:^D2K_AdvancedIxianTechnology
     -> light_inf -> ^d2kpersonalshield -> Inherits@IxianTechnology:^D2K_AdvancedIxianTechnology
 
-lsub.asian:
+asianalliance_lsub:
   parent ^^ ^acceptscloakcrate  (2 paths)
-    -> lsub.asian -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> lsub.asian -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_lsub -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_lsub -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 mammothbunker.husk:
   parent ^^ ^shielddomeshapevisual  (2 paths)
@@ -19918,10 +19918,10 @@ ordos_wraith:
     -> ordos_wraith -> ^spaceshiptemplate -> ^aircraftbuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
     -> ordos_wraith -> ^epicairunittemplate -> ^aircraftbuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
 
-panth.asian:
+asianalliance_panth:
   parent ^^ ^acceptscloakcrate  (2 paths)
-    -> panth.asian -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> panth.asian -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_panth -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_panth -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 protoss_analogue:
   parent ^^ ^acceptscloakcrate  (2 paths)
@@ -20682,15 +20682,15 @@ protoss_voidray:
     -> protoss_voidray -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
     -> protoss_voidray -> ^helicoptertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
 
-ptnk.asian:
+asianalliance_ptnk:
   parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ptnk.asian -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ptnk.asian -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_ptnk -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_ptnk -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
-quasfrig.asian:
+asianalliance_quasfrig:
   parent ^^ ^acceptscloakcrate  (2 paths)
-    -> quasfrig.asian -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> quasfrig.asian -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_quasfrig -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_quasfrig -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 ra1_advancedpowerplant:
   parent ^^ ^globalbounty  (2 paths)
@@ -43136,10 +43136,10 @@ tsmonstermaker1:
     -> tsmonstermaker1 -> vice -> ^viceroid -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
     -> tsmonstermaker1 -> vice -> ^viceroid -> Inherits@selection:^SelectableCombatUnit
 
-tsun.asian:
+asianalliance_tsun:
   parent ^^ ^acceptscloakcrate  (2 paths)
-    -> tsun.asian -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> tsun.asian -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_tsun -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> asianalliance_tsun -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 tsvislrg:
   parent ^^ ^selectablecombatunit  (2 paths)

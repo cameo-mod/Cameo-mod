@@ -56,7 +56,7 @@ Every classified member with its LIVE resolved-YAML stats as it ships today, sor
 | yuri_initiate | redalert2_yuri | REF | 24000 | 66 | 4440 | 200 | live resolved YAML |
 | latinsyndicate_tankkiller | redalert2mod_syndicate | FORMULA | 13000 | 53 | 6666 | 270 | live resolved YAML |
 | E3 | tiberiandawn_gdi | FORMULA | 9000 | 50 | 6368 | 300 | excluded from fit (buildable=False and no explicit balance_include) |
-| asianalliance_asiantankkiller | redalert2mod_asianalliance | REF | 17000 | 51 | 6460 | 300 | live resolved YAML |
+| asianalliance_tankkiller | redalert2mod_asianalliance | REF | 17000 | 51 | 6460 | 300 | live resolved YAML |
 | forgotten_rocketinfantry | tiberiansun_forgotten | FORMULA | 12000 | 50 | 6694 | 300 | live resolved YAML |
 | ixian_rockettrooper | d2k_ixian | FORMULA | 12000 | 48 | 6185 | 300 | live resolved YAML |
 | ordos_rockettrooper | d2k_ordos | FORMULA | 12000 | 48 | 6185 | 300 | live resolved YAML |
@@ -105,7 +105,7 @@ Read-only R4 sensitivity through reference_targets.target_for's with-Cameo resul
 | harkonnen_sardaukar | OpenRA Dune 2000/mpsardaukar; OpenRA Dune II/sardaukar | 119164 (n=2) | 46.777 (n=2) | 5597.74 (n=2) | 518.385 (n=2) | unapproved |
 | ra2_allies_guardiangi | CnC Reloaded/GGI; Mental Omega/GGI; RA2 Reborn/GGI; Red Resurrection/GGI; Romanov's Vengeance/ggi; Valiant Shades/ggi | 26404.6 (n=6) | 49.3609 (n=6) | 4527.09 (n=6) | 379.103 (n=6) | unapproved |
 | yuri_initiate | CnC Reloaded/INIT; Combined Arms/SAB; Mental Omega/INIT; RA2 0XX/INIT; RA2 Reborn/INIT; Red Resurrection/INIT | 22195.9 (n=6) | 55.9111 (n=6) | 4242.85 (n=6) | 226.014 (n=6) | unapproved |
-| asianalliance_asiantankkiller | Rise of the East/THUND | 19495.3 (n=1) | 59.5064 (n=1) | 6109.35 (n=1) | 380.722 (n=1) | unapproved |
+| asianalliance_tankkiller | Rise of the East/THUND | 19495.3 (n=1) | 59.5064 (n=1) | 6109.35 (n=1) | 380.722 (n=1) | unapproved |
 | ra1_soviets_rocketsoldier | Combined Arms/E3; DTA Enhanced/E3S; OpenRA Red Alert/E3 | 13698 (n=3) | 50.2715 (n=3) | 7157.2 (n=3) | 430.449 (n=3) | unapproved |
 | ra1_allies_alliedrocketsoldier | Combined Arms/E3; DTA Enhanced/E3A; OpenRA Red Alert/E3 | 13698 (n=3) | 50.2715 (n=3) | 7157.2 (n=3) | 430.449 (n=3) | unapproved |
 | td_gdi_rocketsoldier | Combined Arms/N3; DTA Enhanced/E3; OpenRA Tiberian Dawn/E3 | 13906.3 (n=3) | 45.2703 (n=3) | 6569.48 (n=3) | 399.798 (n=3) | unapproved |

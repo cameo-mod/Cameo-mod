@@ -4,7 +4,7 @@ anchor: `SPEC(750000,80,2500,1600,1,1600)` (cost0 1600, O0 3360.00, P0 4000.00, 
 
 | unit | cost (actual) | class-formula price | delta |
 |---|---|---|---|
-| `asianalliance_asianflametank` | 1300 | 329 | -75% ❗ |
+| `asianalliance_flametank` | 1300 | 329 | -75% ❗ |
 | `asianalliance_warturtle` | 5000 | 266 | -95% ❗ |
 | `cabal_beholder` | 2500 | 688 | -72% ❗ |
 | `cobra.steel` | 3600 | 966 | -73% ❗ |

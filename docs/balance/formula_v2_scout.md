@@ -5,7 +5,7 @@ anchor: `SPEC(20000,60,5000,60,1,100)` (cost0 100, O0 420.00, P0 168.00, Q0 28.8
 | unit | cost (actual) | class-formula price | delta |
 |---|---|---|---|
 | `E1` | 100 | 253 | +153% ❗ |
-| `asianalliance_asianmilitia` | 110 | 133 | +21% ⚠ |
+| `asianalliance_militia` | 110 | 133 | +21% ⚠ |
 | `atreides_lightinfantry` | 150 | 330 | +120% ❗ |
 | `naxis_conehead2` | 500 | 602 | +20% ⚠ |
 | `corrino_lightinfantry` | 150 | 330 | +120% ❗ |

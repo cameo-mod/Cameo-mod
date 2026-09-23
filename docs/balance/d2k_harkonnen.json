@@ -245,7 +245,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Armor.Type",
      "v": "Concrete"
     },
-    "buildable": false,
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Valued.Cost",
      "v": "1100"
@@ -269,6 +269,10 @@
     "prerequisites": [
      "~harkonnen_constructionyard",
      "harkonnen_barracks"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
     ],
     "resolved_firepower_modifiers": [],
     "self_heal_step": {
@@ -1056,7 +1060,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Armor.Type",
      "v": "Concrete"
     },
-    "buildable": false,
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Valued.Cost",
      "v": "1500"
@@ -1080,6 +1084,10 @@
     "prerequisites": [
      "~harkonnen_constructionyard",
      "harkonnen_outpost"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
     ],
     "resolved_firepower_modifiers": [],
     "self_heal_step": {
@@ -1382,7 +1390,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "None"
+     "v": "Flak"
     },
     "buildable": true,
     "cost": {
@@ -1556,7 +1564,7 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "Flak"
+     "v": "None"
     },
     "buildable": true,
     "cost": {

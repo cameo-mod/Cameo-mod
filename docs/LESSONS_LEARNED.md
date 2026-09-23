@@ -44,6 +44,9 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [⛔ `Node.child()` is an EXACT match — 97% of the mod's producers were invisible (2026-09-06)](#-nodechild-is-an-exact-match--97-of-the-mods-producers-were-invisible-2026-09-06)
 - [⛔ A ZERO-BYTE audit report is a clean green board (2026-09-06)](#-a-zero-byte-audit-report-is-a-clean-green-board-2026-09-06)
 - [⛔ A 0% compliance row is a bug report about the CHECKER (2026-09-06)](#-a-0-compliance-row-is-a-bug-report-about-the-checker-2026-09-06)
+- [A writer that "preserves line endings" but reads in text mode preserves nothing (2026-09-22)](#a-writer-that-preserves-line-endings-but-reads-in-text-mode-preserves-nothing-2026-09-22)
+- [⛔ A surviving name is not a surviving decision (2026-09-22)](#a-surviving-name-is-not-a-surviving-decision-2026-09-22)
+- [A writer that replaces when you expect it to merge, and exits 0 (2026-09-22)](#a-writer-that-replaces-when-you-expect-it-to-merge-and-exits-0-2026-09-22)
 - [A hand-edit to generated output has a countdown on it (2026-09-05)](#a-hand-edit-to-generated-output-has-a-countdown-on-it-2026-09-05)
 - [Hand-built JSON emitters need native parse tests (2026-09-07)](#hand-built-json-emitters-need-native-parse-tests-2026-09-07)
 - [Condition-gated bot delays must be relative to WorldTick (2026-09-13)](#condition-gated-bot-delays-must-be-relative-to-worldtick-2026-09-13)
@@ -84,6 +87,16 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 
 **Process, tooling and platform**
 
+- [⛔ Folding a parent orphans its children's `-Warhead@` cancels (2026-09-22, DAWN lane-3)](#-folding-a-parent-orphans-its-childrens--warhead-cancels-2026-09-22-dawn-lane-3)
+- [`^Warhead_` templates carry WEAPON-LEVEL fields, so a dead warhead node is not a dead inherit](#warhead-templates-carry-weapon-level-fields-so-a-dead-warhead-node-is-not-a-dead-inherit)
+- [A rename moves a key, so a SORTED dump reports every touched node as changed](#a-rename-moves-a-key-so-a-sorted-dump-reports-every-touched-node-as-changed)
+- [`gh` resolves the repo from the WRONG remote here, and reports the PR as nonexistent](#gh-resolves-the-repo-from-the-wrong-remote-here-and-reports-the-pr-as-nonexistent)
+- [A spread-band ratio that folds in `Shield` invents violations that do not exist](#a-spread-band-ratio-that-folds-in-shield-invents-violations-that-do-not-exist)
+- [`w_damage` means different things in different sources, and reading it wrong doubles burst](#wdamage-means-different-things-in-different-sources-and-reading-it-wrong-doubles-burst)
+- ["Another class would accept it" sounds like evidence and is worth nothing — count first](#another-class-would-accept-it-sounds-like-evidence-and-is-worth-nothing--count-first)
+- [Cameo shadowing pitfalls — namespace `World` and explicit interface members (2026-09-22)](#cameo-shadowing-pitfalls--namespace-world-and-explicit-interface-members-2026-09-22)
+- [Trait shadows: a proof field proves the TYPE, not the DISPATCH (2026-09-23)](#trait-shadows-a-proof-field-proves-the-type-not-the-dispatch-2026-09-23)
+- [Boot-gate: verify YOUR process made the menu marker (2026-09-23)](#boot-gate-verify-your-process-made-the-menu-marker-2026-09-23)
 - [The canonical engine update pipeline (binding, uniform process)](#the-canonical-engine-update-pipeline-binding-uniform-process)
 - [YAML-only AI personalities and dead squad-manager keys (2026-08-21)](#yaml-only-ai-personalities-and-dead-squad-manager-keys-2026-08-21)
 - [Opt-in AI unit compositions (2026-08-24)](#opt-in-ai-unit-compositions-2026-08-24)
@@ -98,6 +111,12 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [Two ways a gate passes its own verification and is still broken (2026-08-23)](#two-ways-a-gate-passes-its-own-verification-and-is-still-broken-2026-08-23)
 - ["Regenerable" is a claim about a tool, and it needs running (2026-08-28)](#regenerable-is-a-claim-about-a-tool-and-it-needs-running-2026-08-28)
 - ["Not found" is not "not there" — three ways a grep lies (2026-08-28)](#not-found-is-not-not-there--three-ways-a-grep-lies-2026-08-28)
+- [A default you never see is still a decision — the Aircraft-148 defect](#a-default-you-never-see-is-still-a-decision--the-aircraft-148-defect)
+- [An invariant that holds BY CONSTRUCTION cannot fail, so it is not a check](#an-invariant-that-holds-by-construction-cannot-fail-so-it-is-not-a-check)
+- [`*Death` tokens are DEATH ANIMATIONS, not damage elements](#death-tokens-are-death-animations-not-damage-elements)
+- [One weapon, one warhead — on the REFERENCE side too](#one-weapon-one-warhead--on-the-reference-side-too)
+- [A weapon's profile is the SUM of its warheads, not its biggest one](#a-weapons-profile-is-the-sum-of-its-warheads-not-its-biggest-one)
+- [Matching a warhead by its NAME fails, three different ways](#matching-a-warhead-by-its-name-fails-three-different-ways)
 
 ---
 
@@ -227,6 +246,49 @@ the threshold behavior.
 - Weapon children that need a different concrete value should override with a
   single `Warhead@Concrete:` key; matching keys merge, so only the last value
   survives.
+
+## A writer that "preserves line endings" but reads in text mode preserves nothing (2026-09-22)
+
+`splice_templates.py` contained exactly the right line:
+
+```python
+newline = "\r\n" if "\r\n" in text else "\n"
+```
+
+and it could never once have been true. The text had come from `Path.read_text()`, which
+applies universal-newline translation, so CRLF arrives already normalised and the test
+always takes the `else`. `write_text()` then translates back to `os.linesep` on the way
+out. On Windows that turns every splice into a full-file rewrite of `weapons.yaml` --
+19,882 lines touched to change 12.
+
+**The detection code looked correct in review and was inert.** Reading it teaches nothing;
+only the bytes on disk do. Both ends need `newline=""`:
+
+```python
+with F.open(encoding="utf-8", newline="") as fh:   # no translation on the way IN
+    text = fh.read()
+...
+with F.open("w", encoding="utf-8", newline="") as fh:   # nor on the way OUT
+    fh.write(newline.join(result))
+```
+
+**And then measure the consequence before writing it up.** The first version of this
+entry said the bug produced a 19,882-line COMMIT diff. It does not: `.gitattributes`
+carries `*.yaml eol=lf` and `* text=lf`, so git normalises on add and reports the same 12
+changed lines whichever ending sits on disk -- confirmed by writing CRLF deliberately and
+re-running `git diff`. The real cost is to the WORKING TREE: a plain non-git `diff`
+reports the whole file, byte-comparing tools see everything changed, and git warns on
+every touch. That is a detour, not a corruption.
+
+Two habits come out of it, and they generalise past this one tool:
+
+* **A guard that cannot fail is not a guard.** Before trusting a conditional that protects
+  something, make it fire once on purpose. This one had never fired.
+* **Diff the artifact, not the intent.** `git diff --stat` after the splice said 12 lines;
+  a raw `diff` against a pre-change copy said 19,882. Both were true and they answer
+  different questions. Knowing which one the situation needs is the skill -- and when a
+  diff is implausibly large for the edit you made, suspect encoding before suspecting the
+  edit.
 
 ## ⛔ A 0% compliance row is a bug report about the CHECKER (2026-09-06)
 
@@ -865,6 +927,23 @@ Then read `C:	mp\gate_<name>\Logs\perf.log` for
 `exception-*.log`. Kill only YOUR OpenRA process afterwards; match on
 `(Get-Process OpenRA).Path` against your own worktree, because another agent's gate may be
 mid-run and a live instance locks the next build.
+
+#### `launch-game.cmd` needs Windows `find.exe` — Git Bash shadows it
+
+**2026-09-22.** The script's engine check is `find %ENGINE_VERSION% %ENGINE_DIRECTORY%\VERSION`;
+under Git Bash, GNU `find` shadows Windows `find.exe`, the check dies with "Required engine
+files not found", and a stale `perf.log` can still read as a pass. Either run the script from
+`cmd.exe`/PowerShell, or invoke the binary directly with the same arguments the script uses:
+
+```
+cd engine && ./bin/OpenRA.exe Game.Mod=cameo Engine.EngineDir=".." \
+  Engine.LaunchPath="<abs path to launch-game.cmd>" \
+  Engine.ModSearchPaths="<worktree>\\mods,./mods"
+```
+
+`Engine.LaunchPath` must point at the launcher script (the mod worktree), NOT `engine/bin` —
+the wrong path aborts with `Unknown or invalid mod 'cameo'` and a zero-byte perf.log.
+Always confirm `perf.log` has a FRESH timestamp before trusting the menu line.
 
 ## The canonical engine update pipeline (binding, uniform process)
 
@@ -1756,6 +1835,11 @@ had shown cameo-mod's PRs moments earlier.
 report a PR or branch as missing on a bare `gh` result — check `gh repo view --json
 nameWithOwner` first, or compare with `gh api repos/cameo-mod/Cameo-mod/compare/master...<branch>`.
 
+Worse variant (hit 2026-09-22): the redirect can also **succeed silently on the wrong repo** —
+`gh pr view/comment 146` resolved to an unrelated PR on `Zeruel87/Cameo-mod` and posted a review
+there, while the real target was #431 on `cameo-mod/Cameo-mod`. Same PR number, different repo —
+no error at all. Any `gh` result without `--repo` is untrusted, including "success".
+
 ## A spread-band ratio that folds in `Shield` invents violations that do not exist
 
 `Shield` is not a normal armor. §12.0c gives it its own compressed `[100,400]` ladder, so its
@@ -1854,3 +1938,252 @@ its own language; `AiMatchLogWriterTest.cs` catches separator defects at source.
 Re-enabling a condition-gated bot module re-runs `TraitEnabled`. Any “initial” delay
 computed there is therefore reapplied on every switch; express the remaining delay
 relative to `WorldTick` instead.
+
+## Cameo shadowing pitfalls — namespace `World` and explicit interface members (2026-09-22)
+
+Two traps hit while adding the `RenderSpritesInfo`/`ColorPickerManagerInfo` shadows for the
+colour-picker preview build:
+
+- **Never create namespace `OpenRA.Mods.Cameo.Traits.World`.** Every file under
+  `OpenRA.Mods.Cameo.Traits.*` resolves the unqualified `World` type through its enclosing
+  namespace chain, and a `Traits.World` namespace shadows `OpenRA.World` for ALL of them —
+  ~94 `CS0118 'World' is a namespace` errors. Cameo's convention is the directory
+  `Traits/World/` with the FLAT namespace `OpenRA.Mods.Cameo.Traits` (see
+  `Traits/World/AutoControlGroupsManager.cs` et al.).
+- **Shadowing a class with explicit interface implementations needs the interface
+  re-declared AND re-implemented.** `RenderPreview`/`ShowColorDropDown` are explicit
+  impls — a `new` method alone does not take over the interface slot. Re-declare the
+  interface on the subclass (`class X : Base, IInterface`) and implement the member
+  explicitly there; members you don't re-implement fall back to the base's impls, which is
+  what you want. For a base-class *event* subscribers reach via the interface (the
+  colour-picker palette subscriptions), declare `public new event ...` — the interface map
+  then resolves to the event the subclass can raise. A non-`public` `new` event cannot
+  satisfy the interface and subscribers silently land on the base event.
+## Trait shadows: a proof field proves the TYPE, not the DISPATCH (2026-09-23)
+
+A Cameo-only yaml field proves `ObjectCreator.FindType` resolved your shadow
+type — it says nothing about which method an interface call will hit. C# keeps
+the BASE class's interface map unless the derived class re-lists the interface,
+so `public new` on a non-virtual interface member never runs:
+`TraitInfos<IRenderActorPreviewInfo>()` dispatched to Common's `RenderPreview`
+even though the Cameo `RenderSpritesInfo` shadow defined its own. The fix is to
+re-declare the interface on the shadow (`class X : Base, IInterface`) — the map
+then rebinds every member, so any member you do NOT also override must be one
+you deliberately want the base version of. Verify with
+`type.GetInterfaceMap(iface)` — a two-line reflection check over the built dll
+prints which declaring type each member binds to. (Claude review on #443;
+the same trap was already handled for the manager's event via
+`IColorPickerManagerInfo`.)
+
+## Boot-gate: verify YOUR process made the menu marker (2026-09-23)
+
+Two launch traps surfaced the same day, both producing false confidence:
+
+1. **`Engine.ModSearchPaths` takes COMMA separators** (`mods,engine\mods` per
+   `boot-test.cmd`) — a semicolon-separated list makes `Game.Initialize` throw
+   `Unknown or invalid mod 'cameo'` before logging even initializes. Check the
+   exception log's *stack path* before assuming a crash is yours: another
+   agent's failed launch leaves the same signature in the shared
+   `%APPDATA%/OpenRA/Logs` directory.
+2. **The menu marker alone is not proof of YOUR boot.** The shared `perf.log`
+   is written by whichever OpenRA.exe is running — a crashed launch sitting
+   next to another agent's healthy boot will show a fresh
+   `MenuPostProcessEffect.PostWorldLoaded` that your process never produced.
+   Gate correctly: confirm the PID you launched is alive through the load AND
+   the marker appears — or timestamp-check that the marker was written during
+   your process's lifetime, not just "exists."
+
+---
+
+## A default you never see is still a decision — the Aircraft-148 defect
+
+`WeaponInfo.ValidTargets` and `Warhead.ValidTargets` **both default to `new("Ground", "Water")`**
+(`WeaponInfo.cs:116`, `Warhead.cs:30`). A weapon that never mentions targeting therefore **cannot
+hit air at all** — that is 366 of Combined Arms' 695 weapons.
+
+The reference matrix filled every unstated armour row with the engine's neutral 100, including the
+aircraft rows of weapons that can never fire at aircraft. Every tank cannon in the corpus was
+entered as a competent anti-air weapon. **74% of Combined Arms' air cells were wrong, and 48% of
+Cameo's own.** The maintainer spotted it from the output: *"Aircraft148 is there always even if the
+unit cannot even hit air which is annoying and completely misrepresenting everything."*
+
+⭐ **A cell an attack cannot reach is `n/a`, and `n/a` is not `0`.** Both are excluded from every
+mean, but "immune to this armour" and "cannot target this armour" are different statements and a
+reader must be able to tell them apart. Guarded by `warhead_matrix.targetable_macros`.
+
+## An invariant that holds BY CONSTRUCTION cannot fail, so it is not a check
+
+The reference matrices are normalised so each one's geometric mean is 100 and every value lies in
+`[10, 200]`. That was verified after every change and reported as proof — *"all seven verified at
+exactly 100.00000000"*.
+
+It proved nothing. The matrix is divided **by the very centre being tested**, so the invariant is
+true whatever that centre is. It passed on six matrices whose centre had collapsed to a twentieth
+of the mod's typical value, where a real 60 and a real 100 both clamped to the ceiling and the
+whole matrix had flattened.
+
+⭐ **Check against a quantity the transform cannot move.** Here that is the source's own POSITIVE
+MEDIAN: a matrix has collapsed when its typical working value no longer fits inside its own window.
+`warhead_matrix.py --check`. The same trap is waiting wherever a value is normalised by a statistic
+derived from itself.
+
+⚠ The related numerical lesson: the window is a FIXPOINT (clamping moves the mean, which moves the
+window), and it **diverges** when the floored cells are numerous enough. Above ~13% zeros Mental
+Omega's centre marched 32.3 → 13.5 → 4.1 → 0.2 and never settled. Below ~8% it converged fine,
+which is exactly why the flaw stayed invisible until six YR mods were added at once.
+
+## `*Death` tokens are DEATH ANIMATIONS, not damage elements
+
+`DamageTypes` looks like an element tag and mostly is not. `FireDeath` means "the victim plays the
+burning death sequence" — Combined Arms' `HonestJohn` rocket artillery and `155mmSpec` both carry
+it, and neither is a fire weapon. Reading it as an element produced a warhead group named
+`LaserFire_Veh` containing `PointLaser` and `AvatarLaser`.
+
+⭐ **Split the strong signals from the animations.** `FrozenDeath`, `RadiationDeath`, `ToxinDeath`,
+`ElectricityDeath` and `AtomizedDeath` are specific enough that no ordinary weapon claims them, and
+`TankBuster` and `Incendiary` are real damage tags the engine acts on. `FireDeath`,
+`ExplosionDeath`, `BulletDeath` and `DefaultDeath` are presentation.
+
+⭐ **HOW TO TELL WHICH IS WHICH, since the name never says (R54).** List the token's CARRIERS and
+read them. A token whose carriers are all one kind of weapon is an element; a token spread across
+several kinds is an animation, no matter how elemental it sounds. Worked on all eight OpenRA
+rulesets at once, that test admitted three new spellings and rejected seven tempting ones:
+
+| token | carriers | verdict |
+|---|---|---|
+| `VirusDeath` (RV, 24 weapons) | ToxinSprayer, Virusgun, PoisonSting, ToxinBomb, CloudDamage — **all toxin** | **Toxin** |
+| `PoisonDeath` (CA, 8) | ChemDebris, CorrupterSpew, VirusCloud, and a sniper that **spawns a `viruscloud` actor** | **Toxin** |
+| `OrangeRadiationDeath` (8) | every one the Orange twin of a `RadiationDeath` weapon | **Radiation** |
+| `FlameDeath` (RV, 61) | flamethrowers — **but also** CurtainRifle, PsychicJab, MirageGun, IonCannon, every barrel explosion | animation |
+| `ElectroDeath` (RV, 73) | ElectricBolt, CoilBolt — **but also** PrismShot, Comet, DiskLaser | animation |
+| `EnergyDeath` (SP/CN/TS, 84) | lasers, plasma, ion, railgun, tesla **and artillery** | animation |
+
+⛔ **The same element is spelled differently in every mod, so the vocabulary is never finished.**
+Toxin alone has FIVE spellings across the corpus — `ToxinDeath` (CA), `TiberiumDeath` (TD/Cameo),
+`RA2VirusDeath` (Cameo), `VirusDeath` (RV), `PoisonDeath` (CA). A mod that shows **zero groups of
+an element it obviously has** is the symptom; Romanov's Vengeance had no chemical weapons on
+record while shipping a full Yuri toxin arsenal. Census the tokens before assigning the source.
+
+⚠ **Listing a token as NOISE changes no classification** — `element_of` subtracts the noise set and
+then takes the first `ELEMENT_ORDER` hit, so a token in neither list already loses every time. The
+noise set exists to record that a token was **censused and judged**, which is the only thing that
+stops the next census redoing the work. Do not mistake adding one for a fix.
+
+## A surviving name is not a surviving decision (2026-09-22)
+
+Reviewed data keyed by a GENERATED name silently rots when the generator renumbers, and the
+loader will not notice, because the name still exists.
+
+Pulling one weapon out of Combined Arms' `Bullet_Veh_7` cascaded the numbered suffixes: `_7`, `_8`
+and `_9` each inherited the next group's weapon, and three **maintainer-reviewed** decisions
+attached to weapons nobody had looked at. The coverage report said **one** row was open — the only
+one whose name had disappeared — so three wrong rows read as green.
+
+⭐ **The fix is to record the MEMBERS a decision was written about, and check them.** Every
+assignment row had always carried its weapon list, precisely so it could be audited later, and
+nothing audited it until `assignment_store.stale_rows()` did. Generalise: whenever a hand-made
+judgement is keyed by anything a tool generates, store the judgement's SUBJECT alongside the key
+and assert the two still agree.
+
+⛔ **And prove the guard on the broken state before trusting it.** `stale_rows()` was run against
+the pre-migration file first and fired on 4 rows, then against the fixed one and fired on 0. A
+guard only ever observed passing is indistinguishable from a guard that cannot fail — the same
+defect as `tolerance` set so wide no claim could miss, and as a line-ending check that could never
+trigger.
+
+## A writer that replaces when you expect it to merge, and exits 0 (2026-09-22)
+
+Three writers in one lane failed the same way: they did something destructive, reported success,
+and left no signal.
+
+* `compress_warheads.py --write` **replaces** the groups file rather than merging, while
+  `--source` **defaults to one mod**. A bare `--write` wrote 182 groups over all twenty sources,
+  destroying **1,499**, and printed `wrote docs/reference/warhead_groups.json` with exit 0.
+* `retau_assignment.py` held a **hardcoded document path** from when there was one reviewed
+  source. `--source X` switched the data but not the document, so it compared X's groups against
+  a different mod's review and reported a confident 100% migration.
+* Its own warning said *"both groupings are at tau X — nothing to migrate"*, which is false: a
+  vocabulary change regroups without touching tau.
+
+⭐ **A destructive default needs an explicit opt-in, and a report needs a number.** `--write` now
+requires `--all` and prints the group and source counts it wrote, so a wrong run is visible in its
+own output rather than in a diff nobody takes. ⭐ **Snapshot before any regrouping** — the 1,499
+lost groups were recovered from a copy taken two commands earlier, purely out of habit.
+
+## One weapon, one warhead — on the REFERENCE side too
+
+**116 of Combined Arms' 466 armed weapons carry more than one damage warhead.** Treating each node
+as its own weapon put one weapon into three groups at once and filled the generalist buckets with
+fragments — which is what the maintainer was seeing when they wrote *"these are many different
+things that have nothing to do with each other."* One row per weapon is right, and it is
+DESIGN.md §11b applied to the corpus instead of to our own tree.
+
+⛔ **The half of this entry that said HOW to pick that row was wrong and has been struck.** It
+read: *"`Warhead@1Dam` is the main in 550 of 577 weapons, so the convention decides it."* The
+count came from a scan that treated every warhead node as a weapon, and the conclusion does not
+survive contact with the corpus — see
+[A weapon's profile is the SUM of its warheads](#a-weapons-profile-is-the-sum-of-its-warheads-not-its-biggest-one).
+⭐ **Fold, do not pick.**
+
+## A weapon's profile is the SUM of its warheads, not its biggest one
+
+The maintainer reviewed 132 measured warhead groups and queried four of them in almost the same
+words — *"why is light immune? this doesn't make any sense and is a bug"*, *"how is the damage so
+low against None?"*, *"none immune is a bug, this can't be right?"*, *"are you sure that anti light
+is only at 18 while the rest is all at 176?"*. All four were one defect, in the measurement.
+
+The compressor reduced each weapon to one warhead — correctly — but picked it **by name**,
+`Warhead@1Dam` first. In Combined Arms that convention does not mean "the main one", and the extra
+warheads are routinely **complementary rather than twins**, because OpenRA fires every warhead on
+every hit:
+
+| weapon | `@1Dam` | the warhead that was discarded |
+|---|---|---|
+| `FireballLauncher` | `Light: 0` | `@2Dam` — `Light: 50`, everything else 0 |
+| `JDAM` | `None: 0` | `@2Dam` — `None: 100`, everything else 0 |
+| `MaverickSU` | `None: 0` | `@2Dam` — `None: 100`, everything else 0 |
+| `ApocRadBeamWeapon` | an infantry-only `HealthPercentageDamage` rider stating one row | `@2Dam` — the weapon's whole table |
+
+Picking one reported a **false zero**, the worst error available here: the pipeline exists to keep
+time-to-kill intact across the compression, and a zero says "this matchup never ends".
+
+⭐ The fix is arithmetic, not heuristic. Effective damage against armour `A` is what the engine
+inflicts, `sum over warheads w that reach A of damage_w x versus_w(A) / 100`, so the folded row is
+that against the weapon's own total damage `D`:
+
+```
+versus(A) = 100 x SUM( damage_w x versus_w(A) ) / D,    D = SUM( damage_w )
+```
+
+A warhead that cannot reach `A` contributes 0 to the numerator and still counts in `D`. That keeps
+the **ratios** between armour rows equal to the ratios of real effective damage. ⚠ Dividing by a
+per-armour denominator instead — a plain weighted average — silently flattens exactly the weapons
+that split their target sets: it reports `ApocRadBeamWeapon` at 2.14x infantry-vs-light where the
+truth is 2.64x. Two currencies are never summed: `HealthPercentageDamage` resolves as
+`HP x Damage/100 x Versus/100`, so `Damage: 300` is a 3x-overkill one-shot and not a 300 HP chip,
+and it folds only with its own kind.
+
+⚠ **A folded row has no node of its own, and `DamageTypes` is keyed by (weapon, node).** The first
+version of this fold dropped that key, every folded weapon came back element `Plain`, and the
+flamethrowers landed in the plain-`Bullet` group. Carry the original node list and resolve the
+element over all of them.
+
+⭐ **The maintainer's review was recorded per WEAPON, not per group, and that is why it survived.**
+Group names carry a `_2`/`_3` suffix assigned by clustering order, so fixing this defect moved 5
+group boundaries and would have invalidated a name-keyed review. `docs/reference/warhead_family_assignment.yaml`
+keeps every individually-named verdict in an `overrides:` block for exactly this reason.
+
+## Matching a warhead by its NAME fails, three different ways
+
+Three separate name-based classifications broke in one session:
+
+* `BazAP` was classified **Tesla** — `Ba`**`zAP`** contains "zap" as a substring.
+* `ChronoBeam` and `LocomotorBeam` matched **Laser** on "beam"; both are mind-control and
+  movement effects with no damage profile at all.
+* `InterloperLaser` landed in a group named `Cannon_LightVeh`, and `135mm` in one named
+  `Laser_HeavyVeh`, because the group's name was voted by whichever member matched first.
+
+Word boundaries fix only the first. ⭐ **Every signal has a measured source: delivery from the
+weapon's `Projectile:`, element from `DamageTypes:`, platform from the actors that actually fire
+it.** Where no measurement exists, the assignment is a maintainer decision made from the compressed
+groups — never a regex over identifiers (`REFERENCE_EXTRACTION_PLAN.md` R21).

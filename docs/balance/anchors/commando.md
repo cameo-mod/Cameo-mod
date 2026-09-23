@@ -50,7 +50,7 @@ Every classified member with its LIVE resolved-YAML stats as it ships today, sor
 
 | actor | faction | evidence | HP | speed | range | cost | basis |
 |---|---|---|--:|--:|--:|--:|---|
-| asianalliance_asiancommando | redalert2mod_asianalliance | REF | 50000 | 75 | 9455 | 3000 | live resolved YAML |
+| asianalliance_commando | redalert2mod_asianalliance | REF | 50000 | 75 | 9455 | 3000 | live resolved YAML |
 | japan_exorcist | redalert_japan | REF | 75000 | 60 | 6666 | 3000 | live resolved YAML |
 | latinsyndicate_freedomfighter | redalert2mod_syndicate | FORMULA | 77000 | 55 | 7130 | 3000 | live resolved YAML |
 | ra1_allies_tanya | redalert_allies | REF | 44000 | 77 | 7777 | 3000 | live resolved YAML |
@@ -93,7 +93,7 @@ Read-only R4 sensitivity through reference_targets.target_for's with-Cameo resul
 | ra2_allies_tanyaii | CnC Reloaded/TANY; Mental Omega/TANY; RA2 0XX/TANY; RA2 Reborn/TANY; Red Resurrection/TANY; Romanov's Vengeance/tany | unavailable (n=0) | unavailable (n=0) | unavailable (n=0) | unavailable (n=0) | CnC Reloaded/TANY: hero-only evidence; ordinary synthesis withheld; Mental Omega/TANY: hero-only evidence; ordinary synthesis withheld; RA2 0XX/TANY: hero-only evidence; ordinary synthesis withheld; RA2 Reborn/TANY: hero-only evidence; ordinary synthesis withheld; Red Resurrection/TANY: hero-only evidence; ordinary synthesis withheld; Romanov's Vengeance/tany: hero-only evidence; ordinary synthesis withheld; absent from ordinary reference population; hero/eligibility lane requires review |
 | ra2_soviets_boris | CnC Reloaded/BORIS; RA2 0XX/BORIS; RA2 Reborn/BORIS; Red Resurrection/BORIS; Romanov's Vengeance/boris; Valiant Shades/boris | unavailable (n=0) | unavailable (n=0) | unavailable (n=0) | unavailable (n=0) | CnC Reloaded/BORIS: hero-only evidence; ordinary synthesis withheld; RA2 0XX/BORIS: hero-only evidence; ordinary synthesis withheld; RA2 Reborn/BORIS: hero-only evidence; ordinary synthesis withheld; Red Resurrection/BORIS: hero-only evidence; ordinary synthesis withheld; Romanov's Vengeance/boris: hero-only evidence; ordinary synthesis withheld; Valiant Shades/boris: hero-only evidence; ordinary synthesis withheld; absent from ordinary reference population; hero/eligibility lane requires review |
 | yuri_yurix | CnC Reloaded/YURIPR; Combined Arms/YURI; RA2 Reborn/YURIPR; Red Resurrection/YURIPR | unavailable (n=0) | unavailable (n=0) | unavailable (n=0) | unavailable (n=0) | CnC Reloaded/YURIPR: hero-only evidence; ordinary synthesis withheld; Combined Arms/YURI: hero-only evidence; ordinary synthesis withheld; RA2 Reborn/YURIPR: hero-only evidence; ordinary synthesis withheld; Red Resurrection/YURIPR: hero-only evidence; ordinary synthesis withheld; absent from ordinary reference population; hero/eligibility lane requires review |
-| asianalliance_asiancommando | RA2 Reborn/YURIPR; Rise of the East/QUANG | unavailable (n=0) | unavailable (n=0) | unavailable (n=0) | unavailable (n=0) | RA2 Reborn/YURIPR: hero-only evidence; ordinary synthesis withheld; Rise of the East/QUANG: hero-only evidence; ordinary synthesis withheld; absent from ordinary reference population; hero/eligibility lane requires review |
+| asianalliance_commando | RA2 Reborn/YURIPR; Rise of the East/QUANG | unavailable (n=0) | unavailable (n=0) | unavailable (n=0) | unavailable (n=0) | RA2 Reborn/YURIPR: hero-only evidence; ordinary synthesis withheld; Rise of the East/QUANG: hero-only evidence; ordinary synthesis withheld; absent from ordinary reference population; hero/eligibility lane requires review |
 | steelconsortium_steelrunner |  | unavailable (n=0) | unavailable (n=0) | unavailable (n=0) | unavailable (n=0) | absent from ordinary reference population; hero/eligibility lane requires review |
 | steelconsortium_stalker |  | unavailable (n=0) | unavailable (n=0) | unavailable (n=0) | unavailable (n=0) | absent from ordinary reference population; hero/eligibility lane requires review |
 | steelconsortium_whiterabbit |  | unavailable (n=0) | unavailable (n=0) | unavailable (n=0) | unavailable (n=0) | absent from ordinary reference population; hero/eligibility lane requires review |
@@ -143,7 +143,7 @@ Ledger versus live discrepancies for classified members (absolute and percentage
 |---|--:|--:|--:|--:|
 
 W24: 6 class members with stacked mains (raw, no exemptions).
-- `asianalliance_asiancommando` / `AsianSniperLockdown`: 6 mains
+- `asianalliance_commando` / `AsianSniperLockdown`: 6 mains
 - `latinsyndicate_freedomfighter` / `RA2FreedomRocket_elite`: 2 mains
 - `tkm_von` / `VonSniperLockdown`: 6 mains
 - `ra1_soviets_volkov` / `VolkovMagneticWeaponIncendiaryTesla`: 4 mains

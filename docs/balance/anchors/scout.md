@@ -57,7 +57,7 @@ Every classified member with its LIVE resolved-YAML stats as it ships today, sor
 | ra2_soviets_conscript | redalert2_soviets | REF | 26000 | 58 | 4500 | 100 | live resolved YAML |
 | td_gdi_minigunner | tiberiandawn_gdi | REF | 31000 | 63 | 5499 | 100 | live resolved YAML |
 | td_nod_minigunner | tiberiandawn_nod | REF | 30000 | 66 | 4609 | 100 | live resolved YAML |
-| asianalliance_asianmilitia | redalert2mod_asianalliance | FORMULA | 24000 | 53 | 4500 | 110 | live resolved YAML |
+| asianalliance_militia | redalert2mod_asianalliance | FORMULA | 24000 | 53 | 4500 | 110 | live resolved YAML |
 | ordos_lightinfantry | d2k_ordos | FORMULA | 28000 | 62 | 5475 | 120 | live resolved YAML |
 | tkm_rifleman | redalert2mod_tkm | FORMULA | 29000 | 61 | 5042 | 120 | live resolved YAML |
 | ts_gdi_lightinfantry | tiberiansun_gdi | REF | 16000 | 60 | 4062 | 120 | live resolved YAML |

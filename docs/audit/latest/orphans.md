@@ -411,7 +411,7 @@ _none found_
 
 ## O3a — conditions granted but never consumed (sample)
 
-!aircraft-turning, armory-rank, chaosgas && !untargetable, corrosionmax, defensebot, disable_movement, emptesla, hnavyshield_upg, littlebuilderenable, ordos_upgrade_lightfactory, propaganda, ra2_soviets_doctrine_conscription, scaledprices, shade-ready, up_tsunami.asian, yuri_doctrine_psioniclegion
+!aircraft-turning, armory-rank, chaosgas && !untargetable, corrosionmax, defensebot, disable_movement, emptesla, hnavyshield_upg, littlebuilderenable, ordos_upgrade_lightfactory, propaganda, ra2_soviets_doctrine_conscription, scaledprices, shade-ready, asianalliance_upgrade_tsunami, yuri_doctrine_psioniclegion
 
 
 _O3b (identifiers consumed but never granted) is high-noise because RequiresCondition expressions mix conditions with prerequisite tokens; see audit_upgrades dead-wiring for the curated version._

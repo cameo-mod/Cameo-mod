@@ -4,7 +4,7 @@ anchor: `SPEC(50000,50,5000,1000,1,800)` (cost0 800, O0 1400.00, P0 2100.00, Q0 
 
 | unit | cost (actual) | class-formula price | delta |
 |---|---|---|---|
-| `asianalliance_asianflametrooper` | 400 | 195 | -51% ❗ |
+| `asianalliance_flametrooper` | 400 | 195 | -51% ❗ |
 | `asianalliance_plasmatrooper` | 500 | 335 | -33% ❗ |
 | `cabal_cyborgcommando` | 5000 | 2640 | -47% ❗ |
 | `cabal_cyborgcommandov2` | 10000 | 2942 | -71% ❗ |

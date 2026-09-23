@@ -67,8 +67,6 @@ RENAMES = {  # pre-repair key -> post-repair key
         "ra1_soviets_mobileconstructionvehicle",
     "ra2_allies_attackdog": "ra2_allies_dog",
     "ra2_soviets_attackdog": "ra2_soviets_dog",
-    "ra1_soviets_sovietmammothtank.colorpicker":
-        "ra1_soviets_mammothtank.colorpicker",
 }
 DOG_ONLY = {"ra1_soviets_actordogname", "ra2_allies_attackdog", "ra2_soviets_attackdog"}
 
@@ -141,8 +139,9 @@ class SovietRenameRepairTests(unittest.TestCase):
         return obj
 
     def test_inventory_exact(self):
-        # 31 Soviet roots + 1 colorpicker variant + 2 RA2 dogs
-        self.assertEqual(len(RENAMES), 34, "identity inventory drifted")
+        # 31 Soviet roots + 2 RA2 dogs (the colorpicker clone was deleted
+        # when ColourPickerManager began deriving real faction previews)
+        self.assertEqual(len(RENAMES), 33, "identity inventory drifted")
 
     def test_no_destination_collisions(self):
         seen = set()
