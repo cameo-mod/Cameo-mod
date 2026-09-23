@@ -35,7 +35,7 @@ SPATIAL_DAMAGE_TYPES = {
 }
 FLAT_DAMAGE_TYPES = {"AreaDamage", "SpreadDamage", "TargetDamage"}
 SNIPER_ACTORS = {
-    "AsianSniper": "asianalliance_asiancommando",
+    "AsianSniper": "asianalliance_commando",
     "GhostSniper": "terran_ghost",
     "SpecterSniper": "terran_specter",
     "VonSniper": "tkm_von",

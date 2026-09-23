@@ -137,7 +137,7 @@ class WeaponCorrectnessFollowupTests(unittest.TestCase):
         names = {
             "^BasicUnit",
             "^RAFIX",
-            "asianalliance_asianservicedepot",
+            "asianalliance_servicedepot",
             "cabal_cyborgcommando",
             "cabal_cyborgcommandov2",
             "cabal_eliminator800",
@@ -253,7 +253,7 @@ class WeaponCorrectnessFollowupTests(unittest.TestCase):
             "ts_gdi_titan": {"RenderVoxels"},
             "ts_nod_constructionyard": {"Selectable"},
             "ts_nod_mobilestealthgenerator": {"ActorStatValues"},
-            "tsun.asian": {"ActorStatValues"},
+            "asianalliance_tsun": {"ActorStatValues"},
             "wc2_humans_townhall": {"Refinery"},
             "wc2_orcs_greathall": {"Refinery"},
             "yrbpln": {"Contrail@1", "Contrail@2"},
