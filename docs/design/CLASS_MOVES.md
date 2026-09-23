@@ -541,11 +541,11 @@ Whichever way, one of the two statements in §6b has to go.
 §6b: *"Air is the special-forces class trait, baked into the baseline — hitting air is NEVER a
 per-unit special."* Sixteen of the nineteen are scouts, and the 2026-07-20 sweep already ruled
 "→ scout (lose air)" for several of them by name (`ra2_soviets_conscript`,
-`asianalliance_asianmilitia`, `latinsyndicate_latinmilitia`, `naxis_slaveoverseer`,
+`asianalliance_militia`, `latinsyndicate_latinmilitia`, `naxis_slaveoverseer`,
 `zerg_spithid`, `tkm_marine`):
 
 `futuretech_enforcer` · `heavy_inf.ixian` · `ra2_soviets_crazyivan` (melee) —
-`TSE1` · `asianalliance_asianmilitia` · `ixian_lightinfantry` · `latinsyndicate_latinmilitia` ·
+`TSE1` · `asianalliance_militia` · `ixian_lightinfantry` · `latinsyndicate_latinmilitia` ·
 `light_inf` · `naxis_slaveoverseer` · `ordos_lightinfantry` · `ra2_allies_gi` ·
 `ra2_soviets_conscript` · `ra2e2.black` · `tkm_marine` · `ts_gdi_lightinfantry` ·
 `ts_nod_lightinfantry` · `naxis_undead` · `zerg_defiler` · `zerg_spithid` (scout)

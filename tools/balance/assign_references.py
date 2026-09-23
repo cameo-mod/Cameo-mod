@@ -695,7 +695,7 @@ def assign(only_class=None, routing=True):
             #           leaving a blank, so the row exists and must announce itself)
             # ⚠ SHAPE-ONLY IS ITS OWN TIER, added after reading the first review sheet. Folding it
             # into FAIR made FAIR the biggest tier (138 against 34 STRONG in `scout`) and hid what
-            # those rows are: `asianalliance_asianmilitia` drew "sspy" at name 0.12 / role 0.93,
+            # those rows are: `asianalliance_militia` drew "sspy" at name 0.12 / role 0.93,
             # "Rebel" at 0.12, "Fremen" at 0.11. Each sits in the same place in ITS roster as the
             # militia does in ours, which is real evidence for a DISTRIBUTION method and is not a
             # claim that the two are the same unit. The reviewer has to be able to tell them apart.

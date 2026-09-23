@@ -15,7 +15,7 @@
 | `schwarzermond_drone` | 2 | 1 | 41.7% | **2.40x** |
 | `A10` | 2 | 1 | 50.0% | **2.00x** |
 | `japan_tankbuster` | 2 | 1 | 50.0% | **2.00x** |
-| `kami_chemical.asian` | 2 | 1 | 50.0% | **2.00x** |
+| `asianalliance_kami_chemical` | 2 | 1 | 50.0% | **2.00x** |
 | `terran_warhound` | 2 | 1 | 50.0% | **2.00x** |
 | `cabal_lazerboat` | 3 | 2 | 56.5% | **1.77x** |
 | `cabal_hunterkillermk1_elite` | 2 | 1 | 56.8% | **1.76x** |

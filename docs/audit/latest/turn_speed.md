@@ -40,8 +40,8 @@
    japan_exorcistoitank                 hull=10     turret=24
    japan_japanesespeedboat              hull=28     turret=56
    japan_oitank                         hull=10     turret=24
-   ksub.asian                           hull=50     turret=20
-   lsub.asian                           hull=24     turret=12
+   asianalliance_ksub                           hull=50     turret=20
+   asianalliance_lsub                           hull=24     turret=12
    naxis_assault                        hull=18     turret=16
    … and 15 more
 

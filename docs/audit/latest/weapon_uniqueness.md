@@ -8,7 +8,7 @@ damaging armament weapons checked: 1481; W1 same-faction 37, W2 cross-faction 32
 | weapon | faction(s) | actors |
 |---|---|---|
 | 80mm_h | harkonnen | combat_tank.harkonnen, harkonnen_assaulttank |
-| asianflamerturret | asianalliance | asianalliance_asianflametrooper, asianalliance_asiansentryflamer |
+| asianflamerturret | asianalliance | asianalliance_flametrooper, asianalliance_sentryflamer |
 | asianrailtank2 | asianalliance | asianalliance_heavyrailguntank, asianalliance_railguntank |
 | bcyamatocannon | terran | terran_battlecruiser, terran_phobos |
 | cabalengineerrepairbeam | cabal | cabal_engineer, cabal_repairdrone |

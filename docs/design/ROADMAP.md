@@ -1300,7 +1300,7 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   `steel_defender→steelconsortium_defenderbot`,
   `aa_samurai→asianalliance_japanesesamurai`,
   `aa_lynx→asianalliance_lynxtank`, `aa_mecha→asianalliance_pulverizermecha`,
-  `aa_flam→asianalliance_asiansentryflamer`; unresolved: `aa_archer`,
+  `aa_flam→asianalliance_sentryflamer`; unresolved: `aa_archer`,
   `aa_ftnk`, `steel_fedinf`, `steel_qinf`. Effort: S–M once decided.
 
 ### P0/P1 — User-reported issues (2026-07-15/17)

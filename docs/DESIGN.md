@@ -73,9 +73,9 @@ tech item id     :=  [game_]faction_(upgrade|promotion|doctrine)_nameinonegroup
   base actor named before it** — `camera.spysat`, `powerproxy.emp`,
   `ra2gacnst.infiltrated`, `carryall.paradrop`, `fact.colorpicker`, `hack.rank_3`
   are all legal, exactly as `.husk` always was. ⛔ **A dot may NEVER carry a
-  faction.** `ptnk.asian` and `rocket_raider.ixian` put the faction in the suffix
+  faction.** `asianalliance_ptnk` and `rocket_raider.ixian` put the faction in the suffix
   where the grammar requires it as the PREFIX, and those are the only dotted ids
-  that are renaming debt: `ptnk.asian` -> `asianalliance_plasmatank`. The rule is
+  that are renaming debt: `asianalliance_ptnk` -> `asianalliance_plasmatank`. The rule is
   what makes the two cases distinguishable by a tool rather than by taste, and
   `audit_naming_damage.py` N5 enforces exactly it. (Before this ruling, all 398
   dotted ids read as backlog; 237 were husks, 52 were variants, and only 109 were
@@ -2158,7 +2158,7 @@ ruling as written would have got wrong:
   N=2 both engagements empty it exactly: ground `10x1 + 1x10 = 20`, air `10x1 + 2x5 = 20`.
 * **Scope is 14, not 17.** 19 − 2 assumed the maintainer's two names were all the suicide
   drones; three more qualify under the same rule (`SCSCOURGEDRONE` self-destruct weapon,
-  `kami.asian` and `tsprobe` via `SpawnedExplodes`). The two NAMED ones carry no suicide trait
+  `asianalliance_kami` and `tsprobe` via `SpawnedExplodes`). The two NAMED ones carry no suicide trait
   at all — their self-destruct is in the weapon — so the explicit list and the detector are
   both required, and neither alone suffices.
 * ⚠ **`AmmoPool.Armaments` defaults to `primary, secondary`** and `AmmoPool.Attacking` only

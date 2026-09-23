@@ -35,8 +35,8 @@ _none found_
 | Aircraft.TurnSpeed | forgotten_wasp_husk | 80 | 20 | 8.1 |
 | Aircraft.TurnSpeed | RA2FALC.Husk | 80 | 20 | 8.1 |
 | Aircraft.TurnSpeed | ra2beag.Husk | 80 | 20 | 8.1 |
-| Aircraft.TurnSpeed | phoenix_husk.asian | 80 | 20 | 8.1 |
-| Aircraft.TurnSpeed | harbinger_husk.asian | 80 | 20 | 8.1 |
+| Aircraft.TurnSpeed | asianalliance_phoenix_husk | 80 | 20 | 8.1 |
+| Aircraft.TurnSpeed | asianalliance_harbinger_husk | 80 | 20 | 8.1 |
 | Aircraft.TurnSpeed | twister_husk.steel | 80 | 20 | 8.1 |
 | Aircraft.TurnSpeed | tkmdrone | 80 | 20 | 8.1 |
 | ChangesHealth.PercentageStep | wc2_orcs_deathknight | 83 | 1 | 55.3 |
