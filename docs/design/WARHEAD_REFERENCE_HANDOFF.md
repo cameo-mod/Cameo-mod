@@ -255,7 +255,7 @@ than merged, and `family_matrix` was NONDETERMINISTIC. All three are fixed — s
 `dta_classic` 38, `openra_ra` 33, `crystallized_nexus` 28, `openra_ts` 22, `openra_td` 20, `openra_d2k` 15 — 1,327 groups,
 2,542 weapons.
 
-**REMAINING: none.** The next stage is the AVERAGING: one profile per Cameo family from every
+**REMAINING: none.** ⛔ **Averaging is ON HOLD until the maintainer reviews the proposed sources (R69), and `Nuclear` must not be averaged as assigned (R69).** The next stage is the AVERAGING: one profile per Cameo family from every
 source's decided weapons. ⚠ Read R68 first — OpenRA TS carries five lowercase armour columns that
 are neutral for every family and must not be averaged as signal. Sixteen of the seventeen
 sources are still `status: proposed`; only Combined Arms is maintainer-reviewed.

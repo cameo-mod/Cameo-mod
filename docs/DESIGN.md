@@ -3809,10 +3809,18 @@ weapons that inherit a level are re-pointed. Families already carry the delivery
 re-keyed onto the **firing unit**:
 
 ```
-C = Σ(prerequisite building costs)  +  1500 × promotion tiers      ← tools/balance/tier_chain.py
+C = unit's own price  +  Σ(prerequisite building costs)  +  1500 × promotion tiers
 f(C) = 1 / (1 + (C − B) / S)                B = 9500, S = 8250     ← already shipped, already
 h = 2 × (1 − f(C))                                                   used by the pricing formula
 ```
+
+⭐ **AMENDED 2026-09-23 (maintainer): the unit's OWN PRICE is part of `C`.** *"I want the unit price
+to be included into the heaviness bell curve on top of the cost of the accumulated prerequisite
+chain (including virtual cost of the promotions)."* So two units behind the same tech chain no
+longer share one `h`: the dearer one sits further toward the heavy end. ⚠ **`B` and `S` were fitted
+to chain cost ALONE** (`tier_chain.py`); adding the unit's price shifts every unit's `C` upward, so
+they must be re-fitted on the new `C` before the regeneration runs, or the whole roster drifts heavy.
+The promotion term stays the virtual 1500 credits per tier.
 
 Barracks-only lands at `h = 0`; a Tier-4 chain approaches `h = 2`. ⭐ **The measurement layer
 already exists** — `tier_chain.py` resolves prerequisite chains to a cumulative cost and scopes
