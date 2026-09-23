@@ -35,7 +35,8 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 		"AS, CA, Cameo, Cnc, D2k, Common — so Cameo wins and every `RenderSprites:` node",
 		"gets this version with no yaml change at all. Cameo already does this for",
 		"ColorPickerColorShift, PlayerColorShift and SelectionDecorations.")]
-	public class RenderSpritesInfo : Common.Traits.Render.RenderSpritesInfo, IActorPreviewInitInfo
+	public class RenderSpritesInfo : Common.Traits.Render.RenderSpritesInfo,
+		IActorPreviewInitInfo, IRenderActorPreviewInfo
 	{
 		[Desc("Use the live colour-picker palette for ActorPreviewType.ColorPicker previews.",
 			"Set false to get Common's original behaviour back (previews render through the",
