@@ -9171,73 +9171,9 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 75, 50, 25, 0
 		Versus:
-			HAZMAT: 68
-			COMPOSITE: 96
-			BLAST: 57
-			REFLECTOR: 59
-			ARMOR: 70
-			Shield: 225
-			Bomber: 100
-			Concrete: 100
-			Fighter: 100
-			Flak: 100
-			Heavy: 100
-			Helicopter: 100
-			Heroic: 100
-			Light: 100
-			Medium: 100
-			None: 100
-			Plate: 100
-			Scout: 100
-			Spaceship: 100
-			Steel: 100
-			Superheavy: 100
-			Wood: 100
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PercentageScale: 10000
-		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 5
-			Bomber: 5
-			Concrete: 5
-			Fighter: 5
-			Flak: 5
-			Heavy: 5
-			Helicopter: 5
-			Heroic: 5
-			Light: 5
-			Medium: 5
-			None: 5
-			Plate: 5
-			Scout: 5
-			Spaceship: 5
-			Steel: 5
-			Superheavy: 5
-			Wood: 5
-	Warhead@Sonic_Light_Debuff: GrantExternalCondition
-		Condition: SonicDebuff
-		Duration: 50
-		Range: 532
-		ValidRelationships: Enemy, Neutral
-		ValidTargets: Ground, Water, Structure, wall
-
-^Warhead_Sonic_Medium:
-	ValidTargets: Ground, Water
-	ReloadDelay: 25
-	Range: 5120
-	TargetActorCenter: true
-	Warhead@Sonic_Medium: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water
-		Spread: 400
-		Damage: 2000
-		Falloff: 100, 75, 50, 25, 0
-		Versus:
-			HAZMAT: 68
-			COMPOSITE: 96
-			BLAST: 57
+			HAZMAT: 67
+			COMPOSITE: 95
+			BLAST: 58
 			REFLECTOR: 59
 			ARMOR: 70
 			Shield: 237
@@ -9258,6 +9194,68 @@ DefuseKit:
 			Superheavy: 100
 			Wood: 100
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Resonance: 100
+		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 5
+			Bomber: 5
+			Concrete: 5
+			Fighter: 5
+			Flak: 5
+			Heavy: 5
+			Helicopter: 5
+			Heroic: 5
+			Light: 5
+			Medium: 5
+			None: 5
+			Plate: 5
+			Scout: 5
+			Spaceship: 5
+			Steel: 5
+			Superheavy: 5
+			Wood: 5
+
+^Warhead_Sonic_Medium:
+	ValidTargets: Ground, Water
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Sonic_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 400
+		Damage: 2000
+		Falloff: 100, 75, 50, 25, 0
+		Versus:
+			HAZMAT: 67
+			COMPOSITE: 95
+			BLAST: 58
+			REFLECTOR: 59
+			ARMOR: 70
+			Shield: 248
+			Bomber: 100
+			Concrete: 100
+			Fighter: 100
+			Flak: 100
+			Heavy: 100
+			Helicopter: 100
+			Heroic: 100
+			Light: 100
+			Medium: 100
+			None: 100
+			Plate: 100
+			Scout: 100
+			Spaceship: 100
+			Steel: 100
+			Superheavy: 100
+			Wood: 100
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Resonance: 100
 		PercentageScale: 10000
 		PercentageSpread: 50
 		PercentageVersus:
@@ -9278,12 +9276,6 @@ DefuseKit:
 			Steel: 8
 			Superheavy: 8
 			Wood: 8
-	Warhead@Sonic_Medium_Debuff: GrantExternalCondition
-		Condition: SonicDebuff
-		Duration: 50
-		Range: 800
-		ValidRelationships: Enemy, Neutral
-		ValidTargets: Ground, Water, Structure, wall
 
 ^Warhead_Sonic_Heavy:
 	ValidTargets: Ground, Water
@@ -9299,12 +9291,12 @@ DefuseKit:
 		Damage: 2000
 		Falloff: 100, 75, 50, 25, 0
 		Versus:
-			HAZMAT: 68
-			COMPOSITE: 96
-			BLAST: 57
+			HAZMAT: 67
+			COMPOSITE: 95
+			BLAST: 58
 			REFLECTOR: 59
 			ARMOR: 70
-			Shield: 253
+			Shield: 259
 			Bomber: 100
 			Concrete: 100
 			Fighter: 100
@@ -9322,6 +9314,8 @@ DefuseKit:
 			Superheavy: 100
 			Wood: 100
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Resonance: 100
 		PercentageScale: 10000
 		PercentageSpread: 50
 		PercentageVersus:
@@ -9342,12 +9336,6 @@ DefuseKit:
 			Steel: 10
 			Superheavy: 10
 			Wood: 10
-	Warhead@Sonic_Heavy_Debuff: GrantExternalCondition
-		Condition: SonicDebuff
-		Duration: 50
-		Range: 1066
-		ValidRelationships: Enemy, Neutral
-		ValidTargets: Ground, Water, Structure, wall
 
 ###### Railgun: VEH > INF > BLD > AIR (heavy, air=False) ######
 ^Warhead_Railgun_Heavy:
@@ -18580,11 +18568,11 @@ generic_bullet_casing:
 		Falloff: 100, 75, 50, 25, 0
 		Versus:
 			HAZMAT: 83
-			COMPOSITE: 70
-			BLAST: 63
+			COMPOSITE: 69
+			BLAST: 64
 			REFLECTOR: 64
 			ARMOR: 70
-			Shield: 250
+			Shield: 194
 			None: 199
 			Flak: 152
 			Scout: 151
@@ -18602,6 +18590,8 @@ generic_bullet_casing:
 			Spaceship: 56
 			Superheavy: 53
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Resonance: 50
 		PercentageScale: 10000
 		PercentageSpread: 50
 		PercentageVersus:
@@ -18622,12 +18612,6 @@ generic_bullet_casing:
 			Concrete: 4
 			Superheavy: 3
 			Spaceship: 3
-	Warhead@BulletSonic_Light_Debuff: GrantExternalCondition
-		Condition: SonicDebuff
-		Duration: 50
-		Range: 132
-		ValidRelationships: Enemy, Neutral
-		ValidTargets: Ground, Water, Air, Structure, wall
 
 ^Warhead_BulletSonic_Medium:
 	ValidTargets: Ground, Water, Air
@@ -18644,11 +18628,11 @@ generic_bullet_casing:
 		Falloff: 100, 75, 50, 25, 0
 		Versus:
 			HAZMAT: 83
-			COMPOSITE: 70
-			BLAST: 63
+			COMPOSITE: 69
+			BLAST: 64
 			REFLECTOR: 64
 			ARMOR: 70
-			Shield: 260
+			Shield: 218
 			None: 200
 			Flak: 145
 			Plate: 137
@@ -18666,6 +18650,8 @@ generic_bullet_casing:
 			Spaceship: 64
 			Superheavy: 63
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Resonance: 50
 		PercentageScale: 10000
 		PercentageSpread: 50
 		PercentageVersus:
@@ -18686,12 +18672,6 @@ generic_bullet_casing:
 			Heavy: 7
 			Spaceship: 7
 			Superheavy: 6
-	Warhead@BulletSonic_Medium_Debuff: GrantExternalCondition
-		Condition: SonicDebuff
-		Duration: 50
-		Range: 200
-		ValidRelationships: Enemy, Neutral
-		ValidTargets: Ground, Water, Air, Structure, wall
 
 ^Warhead_BulletSonic_Heavy:
 	ValidTargets: Ground, Water, Air
@@ -18708,11 +18688,11 @@ generic_bullet_casing:
 		Falloff: 100, 75, 50, 25, 0
 		Versus:
 			HAZMAT: 83
-			COMPOSITE: 70
-			BLAST: 63
+			COMPOSITE: 69
+			BLAST: 64
 			REFLECTOR: 64
 			ARMOR: 70
-			Shield: 264
+			Shield: 235
 			None: 200
 			Flak: 171
 			Plate: 143
@@ -18730,6 +18710,8 @@ generic_bullet_casing:
 			Superheavy: 76
 			Heroic: 72
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Resonance: 50
 		PercentageScale: 10000
 		PercentageSpread: 50
 		PercentageVersus:
@@ -18750,12 +18732,6 @@ generic_bullet_casing:
 			Concrete: 11
 			Superheavy: 10
 			Spaceship: 10
-	Warhead@BulletSonic_Heavy_Debuff: GrantExternalCondition
-		Condition: SonicDebuff
-		Duration: 50
-		Range: 266
-		ValidRelationships: Enemy, Neutral
-		ValidTargets: Ground, Water, Air, Structure, wall
 
 ^Warhead_MissileSonic_Light:
 	ValidTargets: Ground, Water, Air
@@ -18772,11 +18748,11 @@ generic_bullet_casing:
 		Falloff: 100, 75, 50, 25, 0
 		Versus:
 			HAZMAT: 81
-			COMPOSITE: 71
-			BLAST: 63
+			COMPOSITE: 69
+			BLAST: 64
 			REFLECTOR: 65
 			ARMOR: 70
-			Shield: 245
+			Shield: 190
 			Superheavy: 156
 			Heavy: 152
 			Medium: 138
@@ -18794,6 +18770,8 @@ generic_bullet_casing:
 			Heroic: 51
 			None: 50
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Resonance: 50
 		PercentageScale: 10000
 		PercentageSpread: 50
 		PercentageVersus:
@@ -18814,12 +18792,6 @@ generic_bullet_casing:
 			Heroic: 4
 			None: 3
 			Flak: 3
-	Warhead@MissileSonic_Light_Debuff: GrantExternalCondition
-		Condition: SonicDebuff
-		Duration: 50
-		Range: 106
-		ValidRelationships: Enemy, Neutral
-		ValidTargets: Ground, Water, Air, Structure, wall
 
 ^Warhead_MissileSonic_Medium:
 	ValidTargets: Ground, Water, Air
@@ -18836,11 +18808,11 @@ generic_bullet_casing:
 		Falloff: 100, 75, 50, 25, 0
 		Versus:
 			HAZMAT: 81
-			COMPOSITE: 71
-			BLAST: 63
+			COMPOSITE: 69
+			BLAST: 64
 			REFLECTOR: 65
 			ARMOR: 70
-			Shield: 257
+			Shield: 213
 			Superheavy: 175
 			Heavy: 152
 			Medium: 142
@@ -18858,6 +18830,8 @@ generic_bullet_casing:
 			None: 53
 			Heroic: 52
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Resonance: 50
 		PercentageScale: 10000
 		PercentageSpread: 50
 		PercentageVersus:
@@ -18878,12 +18852,6 @@ generic_bullet_casing:
 			Flak: 7
 			Plate: 7
 			None: 6
-	Warhead@MissileSonic_Medium_Debuff: GrantExternalCondition
-		Condition: SonicDebuff
-		Duration: 50
-		Range: 160
-		ValidRelationships: Enemy, Neutral
-		ValidTargets: Ground, Water, Air, Structure, wall
 
 ^Warhead_MissileSonic_Heavy:
 	ValidTargets: Ground, Water, Air
@@ -18900,11 +18868,11 @@ generic_bullet_casing:
 		Falloff: 100, 75, 50, 25, 0
 		Versus:
 			HAZMAT: 81
-			COMPOSITE: 71
-			BLAST: 63
+			COMPOSITE: 69
+			BLAST: 64
 			REFLECTOR: 65
 			ARMOR: 70
-			Shield: 262
+			Shield: 230
 			Superheavy: 163
 			Spaceship: 147
 			Heavy: 144
@@ -18922,6 +18890,8 @@ generic_bullet_casing:
 			Heroic: 55
 			None: 54
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Resonance: 50
 		PercentageScale: 10000
 		PercentageSpread: 50
 		PercentageVersus:
@@ -18942,12 +18912,6 @@ generic_bullet_casing:
 			Heroic: 11
 			None: 10
 			Flak: 10
-	Warhead@MissileSonic_Heavy_Debuff: GrantExternalCondition
-		Condition: SonicDebuff
-		Duration: 50
-		Range: 212
-		ValidRelationships: Enemy, Neutral
-		ValidTargets: Ground, Water, Air, Structure, wall
 
 ^Warhead_CannonSonic_Light:
 	ValidTargets: Ground, Water
@@ -18964,11 +18928,11 @@ generic_bullet_casing:
 		Falloff: 100, 68, 42, 20, 0
 		Versus:
 			HAZMAT: 69
-			COMPOSITE: 98
-			BLAST: 48
+			COMPOSITE: 97
+			BLAST: 49
 			REFLECTOR: 64
 			ARMOR: 70
-			Shield: 246
+			Shield: 192
 			Scout: 185
 			Wood: 161
 			Light: 142
@@ -18986,6 +18950,8 @@ generic_bullet_casing:
 			Helicopter: 67
 			Spaceship: 51
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Resonance: 50
 		PercentageScale: 10000
 		PercentageSpread: 50
 		PercentageVersus:
@@ -19006,12 +18972,6 @@ generic_bullet_casing:
 			Bomber: 4
 			Helicopter: 3
 			Spaceship: 3
-	Warhead@CannonSonic_Light_Debuff: GrantExternalCondition
-		Condition: SonicDebuff
-		Duration: 50
-		Range: 400
-		ValidRelationships: Enemy, Neutral
-		ValidTargets: Ground, Water, Structure, wall
 
 ^Warhead_CannonSonic_Medium:
 	ValidTargets: Ground, Water
@@ -19028,11 +18988,11 @@ generic_bullet_casing:
 		Falloff: 100, 68, 42, 20, 0
 		Versus:
 			HAZMAT: 69
-			COMPOSITE: 98
-			BLAST: 48
+			COMPOSITE: 97
+			BLAST: 49
 			REFLECTOR: 64
 			ARMOR: 70
-			Shield: 258
+			Shield: 215
 			Wood: 144
 			Scout: 138
 			None: 128
@@ -19050,6 +19010,8 @@ generic_bullet_casing:
 			Heroic: 78
 			Spaceship: 58
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Resonance: 50
 		PercentageScale: 10000
 		PercentageSpread: 50
 		PercentageVersus:
@@ -19070,12 +19032,6 @@ generic_bullet_casing:
 			Bomber: 7
 			Helicopter: 7
 			Spaceship: 6
-	Warhead@CannonSonic_Medium_Debuff: GrantExternalCondition
-		Condition: SonicDebuff
-		Duration: 50
-		Range: 600
-		ValidRelationships: Enemy, Neutral
-		ValidTargets: Ground, Water, Structure, wall
 
 ^Warhead_CannonSonic_Heavy:
 	ValidTargets: Ground, Water
@@ -19092,11 +19048,11 @@ generic_bullet_casing:
 		Falloff: 100, 68, 42, 20, 0
 		Versus:
 			HAZMAT: 69
-			COMPOSITE: 98
-			BLAST: 48
+			COMPOSITE: 97
+			BLAST: 49
 			REFLECTOR: 64
 			ARMOR: 70
-			Shield: 263
+			Shield: 234
 			Wood: 139
 			Scout: 133
 			None: 125
@@ -19114,6 +19070,8 @@ generic_bullet_casing:
 			Helicopter: 72
 			Spaceship: 68
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Resonance: 50
 		PercentageScale: 10000
 		PercentageSpread: 50
 		PercentageVersus:
@@ -19134,12 +19092,6 @@ generic_bullet_casing:
 			Bomber: 11
 			Helicopter: 10
 			Spaceship: 10
-	Warhead@CannonSonic_Heavy_Debuff: GrantExternalCondition
-		Condition: SonicDebuff
-		Duration: 50
-		Range: 800
-		ValidRelationships: Enemy, Neutral
-		ValidTargets: Ground, Water, Structure, wall
 
 ^Warhead_BlastSonic_Light:
 	ValidTargets: Ground, Water
@@ -19156,11 +19108,11 @@ generic_bullet_casing:
 		Falloff: 100, 73, 51, 33, 20, 10, 0
 		Versus:
 			HAZMAT: 66
-			COMPOSITE: 102
+			COMPOSITE: 100
 			BLAST: 45
 			REFLECTOR: 68
 			ARMOR: 70
-			Shield: 243
+			Shield: 174
 			Wood: 171
 			None: 164
 			Steel: 136
@@ -19178,6 +19130,8 @@ generic_bullet_casing:
 			Helicopter: 59
 			Spaceship: 51
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Resonance: 33
 		PercentageScale: 10000
 		PercentageSpread: 50
 		PercentageVersus:
@@ -19198,12 +19152,6 @@ generic_bullet_casing:
 			Bomber: 3
 			Helicopter: 3
 			Spaceship: 2
-	Warhead@BlastSonic_Light_Debuff: GrantExternalCondition
-		Condition: SonicDebuff
-		Duration: 50
-		Range: 372
-		ValidRelationships: Enemy, Neutral
-		ValidTargets: Ground, Water, Structure, wall
 
 ^Warhead_BlastSonic_Medium:
 	ValidTargets: Ground, Water
@@ -19220,11 +19168,11 @@ generic_bullet_casing:
 		Falloff: 100, 73, 51, 33, 20, 10, 0
 		Versus:
 			HAZMAT: 66
-			COMPOSITE: 102
+			COMPOSITE: 100
 			BLAST: 45
 			REFLECTOR: 68
 			ARMOR: 70
-			Shield: 256
+			Shield: 197
 			Wood: 178
 			None: 166
 			Steel: 123
@@ -19242,6 +19190,8 @@ generic_bullet_casing:
 			Helicopter: 63
 			Spaceship: 55
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Resonance: 33
 		PercentageScale: 10000
 		PercentageSpread: 50
 		PercentageVersus:
@@ -19262,12 +19212,6 @@ generic_bullet_casing:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 6
-	Warhead@BlastSonic_Medium_Debuff: GrantExternalCondition
-		Condition: SonicDebuff
-		Duration: 50
-		Range: 558
-		ValidRelationships: Enemy, Neutral
-		ValidTargets: Ground, Water, Structure, wall
 
 ^Warhead_BlastSonic_Heavy:
 	ValidTargets: Ground, Water
@@ -19284,11 +19228,11 @@ generic_bullet_casing:
 		Falloff: 100, 73, 51, 33, 20, 10, 0
 		Versus:
 			HAZMAT: 66
-			COMPOSITE: 102
+			COMPOSITE: 100
 			BLAST: 45
 			REFLECTOR: 68
 			ARMOR: 70
-			Shield: 261
+			Shield: 221
 			Wood: 154
 			None: 140
 			Steel: 131
@@ -19306,6 +19250,8 @@ generic_bullet_casing:
 			Helicopter: 68
 			Spaceship: 63
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Resonance: 33
 		PercentageScale: 10000
 		PercentageSpread: 50
 		PercentageVersus:
@@ -19326,9 +19272,3 @@ generic_bullet_casing:
 			Bomber: 11
 			Helicopter: 10
 			Spaceship: 10
-	Warhead@BlastSonic_Heavy_Debuff: GrantExternalCondition
-		Condition: SonicDebuff
-		Duration: 50
-		Range: 744
-		ValidRelationships: Enemy, Neutral
-		ValidTargets: Ground, Water, Structure, wall

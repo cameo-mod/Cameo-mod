@@ -2270,3 +2270,34 @@ Word boundaries fix only the first. ⭐ **Every signal has a measured source: de
 weapon's `Projectile:`, element from `DamageTypes:`, platform from the actors that actually fire
 it.** Where no measurement exists, the assignment is a maintainer decision made from the compressed
 groups — never a regex over identifiers (`REFERENCE_EXTRACTION_PLAN.md` R21).
+
+## `extract_stats` carries seeded `design.*` fields forward by actor KEY — a rename silently drops them (2026-09-23)
+
+`load_existing_design` preserves judgment data (`design.category`, `unit_class`, `special`,
+`tech_tier`, `class_anchor`) by looking each actor up in the COMMITTED ledger under its live
+name. Rename `ra2_allies_alliedmobileconstructionvehicle` → `ra2_allies_mobileconstructionvehicle`
+and the lookup misses: the fresh extract regenerates the block in the CURRENT schema and the
+legacy `category: "Vehicles"` seed vanishes — a real delta hiding inside what looks like a pure
+id-renames diff.
+
+Check any extract after a rename by remapping the committed ledger's keys through the rename
+map before diffing; residual deltas are then either seeded-field losses (restore them in the
+ledger) or genuine staleness corrections (disclose them in the commit message). The same
+lookup-by-key trap applies to any tool that carries state forward from a committed artifact
+(`assign_references`, anchors tables, doc_claims pins).
+
+## `*ProportionalToPhysicalState` traits have non-neutral defaults on secondary channels (2026-09-23)
+
+`DamageMultiplierProportionalToPhysicalState` is neutral on every knob it doesn't take —
+but `SlowsProportionalToPhysicalState` is not: omit `TurnSpeed`/`TurretSpeed`/`ReloadDelay`
+endpoints and they default to a 100→50 slowdown curve, silently adding slows the old
+binary condition never had. When converting a `SpeedMultiplier`-only binary effect to a
+meter (the W7 `SonicDebuff` → `Resonance` conversion), pin every channel you don't intend
+to scale at `100` on both endpoints, and grep the trait's C# defaults before assuming
+"unset = unchanged". Same trap class as 8b/8c: an omitted field is a value, not an absence.
+
+Adjacent gotcha from the same conversion: `AreaDamage`'s `PhysicalStates: X: 100` scales
+the meter feed with **damage dealt**, while `ApplyPhysicalState` warheads apply a **flat
+`Amount`** — hand-tuned support grants (IonPulse rings, `Warhead@2Con` lasers) need the
+flat form; folding them into a damage node would make a support power's debuff depend on
+its damage roll. `Amount: 5000` ≈ quarter-meter on the 20000-point `Resonance` scale.

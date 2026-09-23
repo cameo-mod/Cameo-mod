@@ -5,9 +5,9 @@ A10Carrier:
   parent ^^ ^externalconditions  (2 paths)
     -> a10carrier -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> a10carrier -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> a10carrier -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> a10carrier -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> a10carrier -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> a10carrier -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> a10carrier -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> a10carrier -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -1360,9 +1360,9 @@ SCINTERCEPTOR:
   parent ^^ ^externalconditions  (2 paths)
     -> scinterceptor -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> scinterceptor -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> scinterceptor -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> scinterceptor -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> scinterceptor -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> scinterceptor -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> scinterceptor -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> scinterceptor -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -1401,9 +1401,9 @@ SCSCOURGEDRONE:
   parent ^^ ^externalconditions  (2 paths)
     -> scscourgedrone -> zerg_scourge -> ^airzerg -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> scscourgedrone -> zerg_scourge -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> scscourgedrone -> zerg_scourge -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> scscourgedrone -> zerg_scourge -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> scscourgedrone -> zerg_scourge -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> scscourgedrone -> zerg_scourge -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> scscourgedrone -> zerg_scourge -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> scscourgedrone -> zerg_scourge -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -1447,9 +1447,9 @@ SCWRAITHDRONE:
   parent ^^ ^externalconditions  (2 paths)
     -> scwraithdrone -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> scwraithdrone -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> scwraithdrone -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> scwraithdrone -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> scwraithdrone -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> scwraithdrone -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> scwraithdrone -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> scwraithdrone -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -1523,9 +1523,9 @@ TRAN:
   parent ^^ ^externalconditions  (2 paths)
     -> tran -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> tran -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> tran -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> tran -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> tran -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> tran -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> tran -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> tran -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -3461,9 +3461,9 @@ asianalliance_harbinger:
   parent ^^ ^externalconditions  (2 paths)
     -> asianalliance_harbinger -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> asianalliance_harbinger -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> asianalliance_harbinger -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> asianalliance_harbinger -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> asianalliance_harbinger -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> asianalliance_harbinger -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> asianalliance_harbinger -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> asianalliance_harbinger -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -3675,9 +3675,9 @@ asianalliance_pelican:
   parent ^^ ^externalconditions  (2 paths)
     -> asianalliance_pelican -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> asianalliance_pelican -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> asianalliance_pelican -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> asianalliance_pelican -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> asianalliance_pelican -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> asianalliance_pelican -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> asianalliance_pelican -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> asianalliance_pelican -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -3716,9 +3716,9 @@ asianalliance_phoenix:
   parent ^^ ^externalconditions  (2 paths)
     -> asianalliance_phoenix -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> asianalliance_phoenix -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> asianalliance_phoenix -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> asianalliance_phoenix -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> asianalliance_phoenix -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> asianalliance_phoenix -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> asianalliance_phoenix -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> asianalliance_phoenix -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -4825,9 +4825,9 @@ cabal_constructionyard:
   parent ^^ ^shielddomeshapevisual  (2 paths)
     -> cabal_constructionyard -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> cabal_constructionyard -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> cabal_constructionyard -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
-    -> cabal_constructionyard -> ^supportvehicletemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> cabal_constructionyard -> ^basebuilding -> Inherits@resonant:^Resonant
+    -> cabal_constructionyard -> ^supportvehicletemplate -> ^externalconditions -> Inherits@resonant:^Resonant
 
 cabal_core:
   parent ^^ ^globalbounty  (2 paths)
@@ -4863,9 +4863,9 @@ cabal_cyborgassassin:
   parent ^^ ^externalconditions  (2 paths)
     -> cabal_cyborgassassin -> ^jumpjetinfantry -> Inherits@ext:^ExternalConditions
     -> cabal_cyborgassassin -> ^flyinginfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> cabal_cyborgassassin -> ^jumpjetinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> cabal_cyborgassassin -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> cabal_cyborgassassin -> ^jumpjetinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> cabal_cyborgassassin -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> cabal_cyborgassassin -> ^jumpjetinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> cabal_cyborgassassin -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -5021,9 +5021,9 @@ cabal_cyborgcommando:
   parent ^^ ^externalconditions  (2 paths)
     -> cabal_cyborgcommando -> ^heavyinfantrytemplate -> Inherits@EXT:^ExternalConditions
     -> cabal_cyborgcommando -> ^heroinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> cabal_cyborgcommando -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> cabal_cyborgcommando -> ^heroinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> cabal_cyborgcommando -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> cabal_cyborgcommando -> ^heroinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> cabal_cyborgcommando -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> cabal_cyborgcommando -> ^heroinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -5203,9 +5203,9 @@ cabal_cyborgcommandov2:
   parent ^^ ^externalconditions  (2 paths)
     -> cabal_cyborgcommandov2 -> ^heavyinfantrytemplate -> Inherits@EXT:^ExternalConditions
     -> cabal_cyborgcommandov2 -> ^heroinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> cabal_cyborgcommandov2 -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> cabal_cyborgcommandov2 -> ^heroinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> cabal_cyborgcommandov2 -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> cabal_cyborgcommandov2 -> ^heroinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> cabal_cyborgcommandov2 -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> cabal_cyborgcommandov2 -> ^heroinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -6010,9 +6010,9 @@ cabal_hunterdrone:
   parent ^^ ^externalconditions  (2 paths)
     -> cabal_hunterdrone -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> cabal_hunterdrone -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> cabal_hunterdrone -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> cabal_hunterdrone -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> cabal_hunterdrone -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> cabal_hunterdrone -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> cabal_hunterdrone -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> cabal_hunterdrone -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -6051,9 +6051,9 @@ cabal_hunterdronecarrier:
   parent ^^ ^externalconditions  (2 paths)
     -> cabal_hunterdronecarrier -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> cabal_hunterdronecarrier -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> cabal_hunterdronecarrier -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> cabal_hunterdronecarrier -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> cabal_hunterdronecarrier -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> cabal_hunterdronecarrier -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> cabal_hunterdronecarrier -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> cabal_hunterdronecarrier -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -6092,9 +6092,9 @@ cabal_hunterkillermk1:
   parent ^^ ^externalconditions  (2 paths)
     -> cabal_hunterkillermk1 -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> cabal_hunterkillermk1 -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> cabal_hunterkillermk1 -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> cabal_hunterkillermk1 -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> cabal_hunterkillermk1 -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> cabal_hunterkillermk1 -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> cabal_hunterkillermk1 -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> cabal_hunterkillermk1 -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -6133,9 +6133,9 @@ cabal_hunterkillermk1_elite:
   parent ^^ ^externalconditions  (2 paths)
     -> cabal_hunterkillermk1_elite -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> cabal_hunterkillermk1_elite -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> cabal_hunterkillermk1_elite -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> cabal_hunterkillermk1_elite -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> cabal_hunterkillermk1_elite -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> cabal_hunterkillermk1_elite -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> cabal_hunterkillermk1_elite -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> cabal_hunterkillermk1_elite -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -6275,10 +6275,10 @@ cabal_mothership:
     -> cabal_mothership -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> cabal_mothership -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
     -> cabal_mothership -> ^epicairunittemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> cabal_mothership -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> cabal_mothership -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> cabal_mothership -> ^epicairunittemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> cabal_mothership -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> cabal_mothership -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> cabal_mothership -> ^epicairunittemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> cabal_mothership -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> cabal_mothership -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -6378,9 +6378,9 @@ cabal_orbdrone:
   parent ^^ ^externalconditions  (2 paths)
     -> cabal_orbdrone -> ^jumpjetinfantry -> Inherits@ext:^ExternalConditions
     -> cabal_orbdrone -> ^flyinginfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> cabal_orbdrone -> ^jumpjetinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> cabal_orbdrone -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> cabal_orbdrone -> ^jumpjetinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> cabal_orbdrone -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> cabal_orbdrone -> ^jumpjetinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> cabal_orbdrone -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -6431,9 +6431,9 @@ cabal_orbdrone_slave:
   parent ^^ ^externalconditions  (2 paths)
     -> cabal_orbdrone_slave -> cabal_orbdrone -> ^jumpjetinfantry -> Inherits@ext:^ExternalConditions
     -> cabal_orbdrone_slave -> cabal_orbdrone -> ^flyinginfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> cabal_orbdrone_slave -> cabal_orbdrone -> ^jumpjetinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> cabal_orbdrone_slave -> cabal_orbdrone -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> cabal_orbdrone_slave -> cabal_orbdrone -> ^jumpjetinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> cabal_orbdrone_slave -> cabal_orbdrone -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> cabal_orbdrone_slave -> cabal_orbdrone -> ^jumpjetinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> cabal_orbdrone_slave -> cabal_orbdrone -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -6484,9 +6484,9 @@ cabal_overkillgunship:
   parent ^^ ^externalconditions  (2 paths)
     -> cabal_overkillgunship -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> cabal_overkillgunship -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> cabal_overkillgunship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> cabal_overkillgunship -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> cabal_overkillgunship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> cabal_overkillgunship -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> cabal_overkillgunship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> cabal_overkillgunship -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -6584,9 +6584,9 @@ cabal_repairdrone:
   parent ^^ ^externalconditions  (2 paths)
     -> cabal_repairdrone -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> cabal_repairdrone -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> cabal_repairdrone -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> cabal_repairdrone -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> cabal_repairdrone -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> cabal_repairdrone -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> cabal_repairdrone -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> cabal_repairdrone -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -7644,9 +7644,9 @@ cruiser_f.steel:
   parent ^^ ^externalconditions  (2 paths)
     -> cruiser_f.steel -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> cruiser_f.steel -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> cruiser_f.steel -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> cruiser_f.steel -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> cruiser_f.steel -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> cruiser_f.steel -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> cruiser_f.steel -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> cruiser_f.steel -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -7813,9 +7813,9 @@ farasha_drone_ixian:
   parent ^^ ^externalconditions  (2 paths)
     -> farasha_drone_ixian -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> farasha_drone_ixian -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> farasha_drone_ixian -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> farasha_drone_ixian -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> farasha_drone_ixian -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> farasha_drone_ixian -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> farasha_drone_ixian -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> farasha_drone_ixian -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -7854,9 +7854,9 @@ forgotten_apache:
   parent ^^ ^externalconditions  (2 paths)
     -> forgotten_apache -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> forgotten_apache -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> forgotten_apache -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> forgotten_apache -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> forgotten_apache -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> forgotten_apache -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> forgotten_apache -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> forgotten_apache -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -7898,9 +7898,9 @@ forgotten_apctruck:
   parent ^^ ^externalconditions  (2 paths)
     -> forgotten_apctruck -> ^supportvehicletemplate -> Inherits@EXT:^ExternalConditions
     -> forgotten_apctruck -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> forgotten_apctruck -> ^supportvehicletemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> forgotten_apctruck -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> forgotten_apctruck -> ^supportvehicletemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> forgotten_apctruck -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> forgotten_apctruck -> ^supportvehicletemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> forgotten_apctruck -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -8113,9 +8113,9 @@ forgotten_cobracopter:
   parent ^^ ^externalconditions  (2 paths)
     -> forgotten_cobracopter -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> forgotten_cobracopter -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> forgotten_cobracopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> forgotten_cobracopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> forgotten_cobracopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> forgotten_cobracopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> forgotten_cobracopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> forgotten_cobracopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -8162,9 +8162,9 @@ forgotten_cropplane:
   parent ^^ ^externalconditions  (2 paths)
     -> forgotten_cropplane -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> forgotten_cropplane -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> forgotten_cropplane -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> forgotten_cropplane -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> forgotten_cropplane -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> forgotten_cropplane -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> forgotten_cropplane -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> forgotten_cropplane -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -8646,9 +8646,9 @@ forgotten_locustbomber:
   parent ^^ ^externalconditions  (2 paths)
     -> forgotten_locustbomber -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> forgotten_locustbomber -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> forgotten_locustbomber -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> forgotten_locustbomber -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> forgotten_locustbomber -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> forgotten_locustbomber -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> forgotten_locustbomber -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> forgotten_locustbomber -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -9105,9 +9105,9 @@ forgotten_mutanthijacker:
   parent ^^ ^externalconditions  (2 paths)
     -> forgotten_mutanthijacker -> ^heroinfantrytemplate -> Inherits@EXT:^ExternalConditions
     -> forgotten_mutanthijacker -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> forgotten_mutanthijacker -> ^heroinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> forgotten_mutanthijacker -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> forgotten_mutanthijacker -> ^heroinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> forgotten_mutanthijacker -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> forgotten_mutanthijacker -> ^heroinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> forgotten_mutanthijacker -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -9447,9 +9447,9 @@ forgotten_mutantsniper:
   parent ^^ ^externalconditions  (2 paths)
     -> forgotten_mutantsniper -> forgotten_mutant -> ^scoutinfantrytemplate -> Inherits@EXT:^ExternalConditions
     -> forgotten_mutantsniper -> ^sniperinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> forgotten_mutantsniper -> forgotten_mutant -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> forgotten_mutantsniper -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> forgotten_mutantsniper -> forgotten_mutant -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> forgotten_mutantsniper -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> forgotten_mutantsniper -> forgotten_mutant -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> forgotten_mutantsniper -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -9635,9 +9635,9 @@ forgotten_mutantsniper_r4:
   parent ^^ ^externalconditions  (2 paths)
     -> forgotten_mutantsniper_r4 -> forgotten_mutantsniper -> forgotten_mutant -> ^scoutinfantrytemplate -> Inherits@EXT:^ExternalConditions
     -> forgotten_mutantsniper_r4 -> forgotten_mutantsniper -> ^sniperinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> forgotten_mutantsniper_r4 -> forgotten_mutantsniper -> forgotten_mutant -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> forgotten_mutantsniper_r4 -> forgotten_mutantsniper -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> forgotten_mutantsniper_r4 -> forgotten_mutantsniper -> forgotten_mutant -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> forgotten_mutantsniper_r4 -> forgotten_mutantsniper -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> forgotten_mutantsniper_r4 -> forgotten_mutantsniper -> forgotten_mutant -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> forgotten_mutantsniper_r4 -> forgotten_mutantsniper -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -9823,9 +9823,9 @@ forgotten_mutantsniper_sp:
   parent ^^ ^externalconditions  (2 paths)
     -> forgotten_mutantsniper_sp -> forgotten_mutantsniper -> forgotten_mutant -> ^scoutinfantrytemplate -> Inherits@EXT:^ExternalConditions
     -> forgotten_mutantsniper_sp -> forgotten_mutantsniper -> ^sniperinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> forgotten_mutantsniper_sp -> forgotten_mutantsniper -> forgotten_mutant -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> forgotten_mutantsniper_sp -> forgotten_mutantsniper -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> forgotten_mutantsniper_sp -> forgotten_mutantsniper -> forgotten_mutant -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> forgotten_mutantsniper_sp -> forgotten_mutantsniper -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> forgotten_mutantsniper_sp -> forgotten_mutantsniper -> forgotten_mutant -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> forgotten_mutantsniper_sp -> forgotten_mutantsniper -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -10813,9 +10813,9 @@ forgotten_wasp:
   parent ^^ ^externalconditions  (2 paths)
     -> forgotten_wasp -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> forgotten_wasp -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> forgotten_wasp -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> forgotten_wasp -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> forgotten_wasp -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> forgotten_wasp -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> forgotten_wasp -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> forgotten_wasp -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -11138,9 +11138,9 @@ futuretech_cryocopter:
   parent ^^ ^externalconditions  (2 paths)
     -> futuretech_cryocopter -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> futuretech_cryocopter -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> futuretech_cryocopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> futuretech_cryocopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> futuretech_cryocopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> futuretech_cryocopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> futuretech_cryocopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> futuretech_cryocopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -11568,9 +11568,9 @@ futuretech_harbingergunship:
   parent ^^ ^externalconditions  (2 paths)
     -> futuretech_harbingergunship -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> futuretech_harbingergunship -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> futuretech_harbingergunship -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> futuretech_harbingergunship -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> futuretech_harbingergunship -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> futuretech_harbingergunship -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> futuretech_harbingergunship -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> futuretech_harbingergunship -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -11989,9 +11989,9 @@ futuretech_twister:
   parent ^^ ^externalconditions  (2 paths)
     -> futuretech_twister -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> futuretech_twister -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> futuretech_twister -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> futuretech_twister -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> futuretech_twister -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> futuretech_twister -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> futuretech_twister -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> futuretech_twister -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -12041,9 +12041,9 @@ gdirigdrone:
   parent ^^ ^externalconditions  (2 paths)
     -> gdirigdrone -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> gdirigdrone -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> gdirigdrone -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> gdirigdrone -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> gdirigdrone -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> gdirigdrone -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> gdirigdrone -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> gdirigdrone -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -12147,9 +12147,9 @@ harkonnen_autogunturret:
   parent ^^ ^forceshieldable  (2 paths)
     -> harkonnen_autogunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
     -> harkonnen_autogunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> harkonnen_autogunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
-    -> harkonnen_autogunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> harkonnen_autogunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@resonant:^Resonant
+    -> harkonnen_autogunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@resonant:^Resonant
   parent ^^ ^boobytrappable  (2 paths)
     -> harkonnen_autogunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@trap:^BoobyTrappable
     -> harkonnen_autogunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@trap:^BoobyTrappable
@@ -12296,9 +12296,9 @@ harkonnen_devastatorturret:
   parent ^^ ^forceshieldable  (2 paths)
     -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
     -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
-    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@resonant:^Resonant
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@resonant:^Resonant
   parent ^^ ^boobytrappable  (2 paths)
     -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@trap:^BoobyTrappable
     -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@trap:^BoobyTrappable
@@ -12388,9 +12388,9 @@ harkonnen_flameturret:
   parent ^^ ^forceshieldable  (2 paths)
     -> harkonnen_flameturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
     -> harkonnen_flameturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> harkonnen_flameturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
-    -> harkonnen_flameturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> harkonnen_flameturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@resonant:^Resonant
+    -> harkonnen_flameturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@resonant:^Resonant
   parent ^^ ^boobytrappable  (2 paths)
     -> harkonnen_flameturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@trap:^BoobyTrappable
     -> harkonnen_flameturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@trap:^BoobyTrappable
@@ -12627,9 +12627,9 @@ harkonnen_rocketturret:
   parent ^^ ^forceshieldable  (2 paths)
     -> harkonnen_rocketturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
     -> harkonnen_rocketturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> harkonnen_rocketturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
-    -> harkonnen_rocketturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> harkonnen_rocketturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@resonant:^Resonant
+    -> harkonnen_rocketturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@resonant:^Resonant
   parent ^^ ^boobytrappable  (2 paths)
     -> harkonnen_rocketturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@trap:^BoobyTrappable
     -> harkonnen_rocketturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@trap:^BoobyTrappable
@@ -12733,9 +12733,9 @@ ixian_airdrone:
   parent ^^ ^externalconditions  (2 paths)
     -> ixian_airdrone -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ixian_airdrone -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ixian_airdrone -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ixian_airdrone -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ixian_airdrone -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ixian_airdrone -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ixian_airdrone -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ixian_airdrone -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -12799,9 +12799,9 @@ ixian_empbomber:
   parent ^^ ^externalconditions  (2 paths)
     -> ixian_empbomber -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ixian_empbomber -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ixian_empbomber -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ixian_empbomber -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ixian_empbomber -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ixian_empbomber -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ixian_empbomber -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ixian_empbomber -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -12841,10 +12841,10 @@ ixian_farasha:
     -> ixian_farasha -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ixian_farasha -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
     -> ixian_farasha -> ^epicairunittemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> ixian_farasha -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ixian_farasha -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ixian_farasha -> ^epicairunittemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> ixian_farasha -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ixian_farasha -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ixian_farasha -> ^epicairunittemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> ixian_farasha -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ixian_farasha -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -12981,9 +12981,9 @@ ixian_gunturret:
   parent ^^ ^forceshieldable  (2 paths)
     -> ixian_gunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
     -> ixian_gunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ixian_gunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
-    -> ixian_gunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ixian_gunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@resonant:^Resonant
+    -> ixian_gunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@resonant:^Resonant
   parent ^^ ^boobytrappable  (2 paths)
     -> ixian_gunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@trap:^BoobyTrappable
     -> ixian_gunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@trap:^BoobyTrappable
@@ -13180,9 +13180,9 @@ ixian_machinegunturret:
   parent ^^ ^forceshieldable  (2 paths)
     -> ixian_machinegunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
     -> ixian_machinegunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ixian_machinegunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
-    -> ixian_machinegunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ixian_machinegunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@resonant:^Resonant
+    -> ixian_machinegunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@resonant:^Resonant
   parent ^^ ^boobytrappable  (2 paths)
     -> ixian_machinegunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@trap:^BoobyTrappable
     -> ixian_machinegunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@trap:^BoobyTrappable
@@ -13260,9 +13260,9 @@ ixian_railgundrone:
   parent ^^ ^externalconditions  (2 paths)
     -> ixian_railgundrone -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ixian_railgundrone -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ixian_railgundrone -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ixian_railgundrone -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ixian_railgundrone -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ixian_railgundrone -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ixian_railgundrone -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ixian_railgundrone -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -13326,9 +13326,9 @@ ixian_resonancedrone:
   parent ^^ ^externalconditions  (2 paths)
     -> ixian_resonancedrone -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ixian_resonancedrone -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ixian_resonancedrone -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ixian_resonancedrone -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ixian_resonancedrone -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ixian_resonancedrone -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ixian_resonancedrone -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ixian_resonancedrone -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -13425,9 +13425,9 @@ ixian_rocketturret:
   parent ^^ ^forceshieldable  (2 paths)
     -> ixian_rocketturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
     -> ixian_rocketturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ixian_rocketturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
-    -> ixian_rocketturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ixian_rocketturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@resonant:^Resonant
+    -> ixian_rocketturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@resonant:^Resonant
   parent ^^ ^boobytrappable  (2 paths)
     -> ixian_rocketturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@trap:^BoobyTrappable
     -> ixian_rocketturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@trap:^BoobyTrappable
@@ -13550,9 +13550,9 @@ ixian_stormlasher:
   parent ^^ ^forceshieldable  (2 paths)
     -> ixian_stormlasher -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
     -> ixian_stormlasher -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ixian_stormlasher -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
-    -> ixian_stormlasher -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ixian_stormlasher -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@resonant:^Resonant
+    -> ixian_stormlasher -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@resonant:^Resonant
   parent ^^ ^boobytrappable  (2 paths)
     -> ixian_stormlasher -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@trap:^BoobyTrappable
     -> ixian_stormlasher -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@trap:^BoobyTrappable
@@ -13758,9 +13758,9 @@ japan_archermaiden:
   parent ^^ ^externalconditions  (2 paths)
     -> japan_archermaiden -> japan_tankbuster -> ^heavyinfantrytemplate -> Inherits@EXT:^ExternalConditions
     -> japan_archermaiden -> ^sniperinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> japan_archermaiden -> japan_tankbuster -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> japan_archermaiden -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> japan_archermaiden -> japan_tankbuster -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> japan_archermaiden -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> japan_archermaiden -> japan_tankbuster -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> japan_archermaiden -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -14200,9 +14200,9 @@ japan_imperialscoutsman:
   parent ^^ ^externalconditions  (2 paths)
     -> japan_imperialscoutsman -> ^ra1alliesrifleinfantry -> ^scoutinfantrytemplate -> Inherits@EXT:^ExternalConditions
     -> japan_imperialscoutsman -> ^specialforcesinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> japan_imperialscoutsman -> ^ra1alliesrifleinfantry -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> japan_imperialscoutsman -> ^specialforcesinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> japan_imperialscoutsman -> ^ra1alliesrifleinfantry -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> japan_imperialscoutsman -> ^specialforcesinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> japan_imperialscoutsman -> ^ra1alliesrifleinfantry -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> japan_imperialscoutsman -> ^specialforcesinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -14305,9 +14305,9 @@ japan_japanesebomber:
   parent ^^ ^externalconditions  (2 paths)
     -> japan_japanesebomber -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> japan_japanesebomber -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> japan_japanesebomber -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> japan_japanesebomber -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> japan_japanesebomber -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> japan_japanesebomber -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> japan_japanesebomber -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> japan_japanesebomber -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -14621,9 +14621,9 @@ japan_rocketangel:
   parent ^^ ^externalconditions  (2 paths)
     -> japan_rocketangel -> ^jumpjetinfantry -> Inherits@ext:^ExternalConditions
     -> japan_rocketangel -> ^flyinginfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> japan_rocketangel -> ^jumpjetinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> japan_rocketangel -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> japan_rocketangel -> ^jumpjetinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> japan_rocketangel -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> japan_rocketangel -> ^jumpjetinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> japan_rocketangel -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -14796,9 +14796,9 @@ japan_skyhawk:
   parent ^^ ^externalconditions  (2 paths)
     -> japan_skyhawk -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> japan_skyhawk -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> japan_skyhawk -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> japan_skyhawk -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> japan_skyhawk -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> japan_skyhawk -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> japan_skyhawk -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> japan_skyhawk -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -14998,9 +14998,9 @@ japan_zerofighter:
   parent ^^ ^externalconditions  (2 paths)
     -> japan_zerofighter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> japan_zerofighter -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> japan_zerofighter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> japan_zerofighter -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> japan_zerofighter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> japan_zerofighter -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> japan_zerofighter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> japan_zerofighter -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -15039,9 +15039,9 @@ japan_zerofighter_slave:
   parent ^^ ^externalconditions  (2 paths)
     -> japan_zerofighter_slave -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> japan_zerofighter_slave -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> japan_zerofighter_slave -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> japan_zerofighter_slave -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> japan_zerofighter_slave -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> japan_zerofighter_slave -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> japan_zerofighter_slave -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> japan_zerofighter_slave -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -15210,9 +15210,9 @@ asianalliance_kami:
   parent ^^ ^externalconditions  (2 paths)
     -> asianalliance_kami -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> asianalliance_kami -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -15251,9 +15251,9 @@ asianalliance_kami_asdf:
   parent ^^ ^externalconditions  (2 paths)
     -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> asianalliance_kami_asdf -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> asianalliance_kami_asdf -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -15292,9 +15292,9 @@ asianalliance_kami_chemical:
   parent ^^ ^externalconditions  (2 paths)
     -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> asianalliance_kami_chemical -> asianalliance_kami -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> asianalliance_kami_chemical -> asianalliance_kami -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -15343,9 +15343,9 @@ landcarr_drone.futu:
   parent ^^ ^externalconditions  (2 paths)
     -> landcarr_drone.futu -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> landcarr_drone.futu -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> landcarr_drone.futu -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> landcarr_drone.futu -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> landcarr_drone.futu -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> landcarr_drone.futu -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> landcarr_drone.futu -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> landcarr_drone.futu -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -15691,9 +15691,9 @@ latinsyndicate_hindtransport:
   parent ^^ ^externalconditions  (2 paths)
     -> latinsyndicate_hindtransport -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> latinsyndicate_hindtransport -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> latinsyndicate_hindtransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> latinsyndicate_hindtransport -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> latinsyndicate_hindtransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> latinsyndicate_hindtransport -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> latinsyndicate_hindtransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> latinsyndicate_hindtransport -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -15976,9 +15976,9 @@ latinsyndicate_mig21:
   parent ^^ ^externalconditions  (2 paths)
     -> latinsyndicate_mig21 -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> latinsyndicate_mig21 -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> latinsyndicate_mig21 -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> latinsyndicate_mig21 -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> latinsyndicate_mig21 -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> latinsyndicate_mig21 -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> latinsyndicate_mig21 -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> latinsyndicate_mig21 -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -16484,9 +16484,9 @@ latinsyndicate_yakovlev:
   parent ^^ ^externalconditions  (2 paths)
     -> latinsyndicate_yakovlev -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> latinsyndicate_yakovlev -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> latinsyndicate_yakovlev -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> latinsyndicate_yakovlev -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> latinsyndicate_yakovlev -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> latinsyndicate_yakovlev -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> latinsyndicate_yakovlev -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> latinsyndicate_yakovlev -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -16740,9 +16740,9 @@ naxis_bf109:
   parent ^^ ^externalconditions  (2 paths)
     -> naxis_bf109 -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> naxis_bf109 -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> naxis_bf109 -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> naxis_bf109 -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> naxis_bf109 -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> naxis_bf109 -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> naxis_bf109 -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> naxis_bf109 -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -17247,9 +17247,9 @@ naxis_interceptor:
   parent ^^ ^externalconditions  (2 paths)
     -> naxis_interceptor -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> naxis_interceptor -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> naxis_interceptor -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> naxis_interceptor -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> naxis_interceptor -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> naxis_interceptor -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> naxis_interceptor -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> naxis_interceptor -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -17308,9 +17308,9 @@ naxis_me262:
   parent ^^ ^externalconditions  (2 paths)
     -> naxis_me262 -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> naxis_me262 -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> naxis_me262 -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> naxis_me262 -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> naxis_me262 -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> naxis_me262 -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> naxis_me262 -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> naxis_me262 -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -18288,9 +18288,9 @@ naxis_skymage:
   parent ^^ ^externalconditions  (2 paths)
     -> naxis_skymage -> ^jumpjetinfantry -> Inherits@ext:^ExternalConditions
     -> naxis_skymage -> ^flyinginfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> naxis_skymage -> ^jumpjetinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> naxis_skymage -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> naxis_skymage -> ^jumpjetinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> naxis_skymage -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> naxis_skymage -> ^jumpjetinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> naxis_skymage -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -18659,9 +18659,9 @@ naxis_transportzeppelin:
   parent ^^ ^externalconditions  (2 paths)
     -> naxis_transportzeppelin -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> naxis_transportzeppelin -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> naxis_transportzeppelin -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> naxis_transportzeppelin -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> naxis_transportzeppelin -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> naxis_transportzeppelin -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> naxis_transportzeppelin -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> naxis_transportzeppelin -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -18824,9 +18824,9 @@ ordos_airmine:
   parent ^^ ^externalconditions  (2 paths)
     -> ordos_airmine -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ordos_airmine -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ordos_airmine -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ordos_airmine -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ordos_airmine -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ordos_airmine -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ordos_airmine -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ordos_airmine -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -19018,9 +19018,9 @@ ordos_artilleryplatform:
   parent ^^ ^forceshieldable  (2 paths)
     -> ordos_artilleryplatform -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
     -> ordos_artilleryplatform -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ordos_artilleryplatform -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
-    -> ordos_artilleryplatform -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ordos_artilleryplatform -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@resonant:^Resonant
+    -> ordos_artilleryplatform -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@resonant:^Resonant
   parent ^^ ^boobytrappable  (2 paths)
     -> ordos_artilleryplatform -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@trap:^BoobyTrappable
     -> ordos_artilleryplatform -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@trap:^BoobyTrappable
@@ -19105,9 +19105,9 @@ ordos_autogunturret:
   parent ^^ ^forceshieldable  (2 paths)
     -> ordos_autogunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
     -> ordos_autogunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ordos_autogunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
-    -> ordos_autogunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ordos_autogunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@resonant:^Resonant
+    -> ordos_autogunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@resonant:^Resonant
   parent ^^ ^boobytrappable  (2 paths)
     -> ordos_autogunturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@trap:^BoobyTrappable
     -> ordos_autogunturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@trap:^BoobyTrappable
@@ -19142,9 +19142,9 @@ ordos_banshee:
   parent ^^ ^externalconditions  (2 paths)
     -> ordos_banshee -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ordos_banshee -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ordos_banshee -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ordos_banshee -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ordos_banshee -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ordos_banshee -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ordos_banshee -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ordos_banshee -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -19250,9 +19250,9 @@ ordos_chemturret:
   parent ^^ ^forceshieldable  (2 paths)
     -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
     -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
-    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@resonant:^Resonant
+    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@resonant:^Resonant
   parent ^^ ^boobytrappable  (2 paths)
     -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@trap:^BoobyTrappable
     -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@trap:^BoobyTrappable
@@ -19358,9 +19358,9 @@ ordos_eyeinthesky:
   parent ^^ ^externalconditions  (2 paths)
     -> ordos_eyeinthesky -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ordos_eyeinthesky -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ordos_eyeinthesky -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ordos_eyeinthesky -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ordos_eyeinthesky -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ordos_eyeinthesky -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ordos_eyeinthesky -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ordos_eyeinthesky -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -19514,9 +19514,9 @@ ordos_laserturret:
   parent ^^ ^forceshieldable  (2 paths)
     -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
     -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
-    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@resonant:^Resonant
+    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@resonant:^Resonant
   parent ^^ ^boobytrappable  (2 paths)
     -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@trap:^BoobyTrappable
     -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@trap:^BoobyTrappable
@@ -19778,9 +19778,9 @@ ordos_swarmerdrone:
   parent ^^ ^externalconditions  (2 paths)
     -> ordos_swarmerdrone -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ordos_swarmerdrone -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ordos_swarmerdrone -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ordos_swarmerdrone -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ordos_swarmerdrone -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ordos_swarmerdrone -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ordos_swarmerdrone -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ordos_swarmerdrone -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -19839,10 +19839,10 @@ ordos_wraith:
     -> ordos_wraith -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ordos_wraith -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
     -> ordos_wraith -> ^epicairunittemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> ordos_wraith -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ordos_wraith -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ordos_wraith -> ^epicairunittemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> ordos_wraith -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ordos_wraith -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ordos_wraith -> ^epicairunittemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> ordos_wraith -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ordos_wraith -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -19936,10 +19936,10 @@ protoss_arbiter:
     -> protoss_arbiter -> ^airprotoss -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> protoss_arbiter -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
     -> protoss_arbiter -> ^epicairunittemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> protoss_arbiter -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> protoss_arbiter -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> protoss_arbiter -> ^epicairunittemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> protoss_arbiter -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> protoss_arbiter -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> protoss_arbiter -> ^epicairunittemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> protoss_arbiter -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> protoss_arbiter -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -20052,9 +20052,9 @@ protoss_carrier:
   parent ^^ ^externalconditions  (2 paths)
     -> protoss_carrier -> ^airprotoss -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> protoss_carrier -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> protoss_carrier -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> protoss_carrier -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> protoss_carrier -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> protoss_carrier -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> protoss_carrier -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> protoss_carrier -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -20101,9 +20101,9 @@ protoss_corsair:
   parent ^^ ^externalconditions  (2 paths)
     -> protoss_corsair -> ^airprotoss -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> protoss_corsair -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> protoss_corsair -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> protoss_corsair -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> protoss_corsair -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> protoss_corsair -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> protoss_corsair -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> protoss_corsair -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -20158,9 +20158,9 @@ protoss_epigraph:
   parent ^^ ^externalconditions  (2 paths)
     -> protoss_epigraph -> ^airprotoss -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> protoss_epigraph -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> protoss_epigraph -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> protoss_epigraph -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> protoss_epigraph -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> protoss_epigraph -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> protoss_epigraph -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> protoss_epigraph -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -20230,9 +20230,9 @@ protoss_gladius:
   parent ^^ ^externalconditions  (2 paths)
     -> protoss_gladius -> ^airprotoss -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> protoss_gladius -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> protoss_gladius -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> protoss_gladius -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> protoss_gladius -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> protoss_gladius -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> protoss_gladius -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> protoss_gladius -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -20320,9 +20320,9 @@ protoss_observer:
   parent ^^ ^externalconditions  (2 paths)
     -> protoss_observer -> ^airprotoss -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> protoss_observer -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> protoss_observer -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> protoss_observer -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> protoss_observer -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> protoss_observer -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> protoss_observer -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> protoss_observer -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -20452,9 +20452,9 @@ protoss_scout:
   parent ^^ ^externalconditions  (2 paths)
     -> protoss_scout -> ^airprotoss -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> protoss_scout -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> protoss_scout -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> protoss_scout -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> protoss_scout -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> protoss_scout -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> protoss_scout -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> protoss_scout -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -20501,9 +20501,9 @@ protoss_shuttle:
   parent ^^ ^externalconditions  (2 paths)
     -> protoss_shuttle -> ^airprotoss -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> protoss_shuttle -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> protoss_shuttle -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> protoss_shuttle -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> protoss_shuttle -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> protoss_shuttle -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> protoss_shuttle -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> protoss_shuttle -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -20554,10 +20554,10 @@ protoss_starshipsovereign:
     -> protoss_starshipsovereign -> ^airprotoss -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> protoss_starshipsovereign -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
     -> protoss_starshipsovereign -> ^epicairunittemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> protoss_starshipsovereign -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> protoss_starshipsovereign -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> protoss_starshipsovereign -> ^epicairunittemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> protoss_starshipsovereign -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> protoss_starshipsovereign -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> protoss_starshipsovereign -> ^epicairunittemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> protoss_starshipsovereign -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> protoss_starshipsovereign -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -20645,9 +20645,9 @@ protoss_voidray:
   parent ^^ ^externalconditions  (2 paths)
     -> protoss_voidray -> ^airprotoss -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> protoss_voidray -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> protoss_voidray -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> protoss_voidray -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> protoss_voidray -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> protoss_voidray -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> protoss_voidray -> ^airprotoss -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> protoss_voidray -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -20761,9 +20761,9 @@ ra1_allies_alliedchinooktransport:
   parent ^^ ^externalconditions  (2 paths)
     -> ra1_allies_alliedchinooktransport -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra1_allies_alliedchinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra1_allies_alliedchinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_allies_alliedchinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra1_allies_alliedchinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_allies_alliedchinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra1_allies_alliedchinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra1_allies_alliedchinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -21141,9 +21141,9 @@ ra1_allies_blackhawk:
   parent ^^ ^externalconditions  (2 paths)
     -> ra1_allies_blackhawk -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra1_allies_blackhawk -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra1_allies_blackhawk -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_allies_blackhawk -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra1_allies_blackhawk -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_allies_blackhawk -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra1_allies_blackhawk -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra1_allies_blackhawk -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -21264,9 +21264,9 @@ ra1_allies_longbow:
   parent ^^ ^externalconditions  (2 paths)
     -> ra1_allies_longbow -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra1_allies_longbow -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra1_allies_longbow -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_allies_longbow -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra1_allies_longbow -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_allies_longbow -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra1_allies_longbow -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra1_allies_longbow -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -21632,9 +21632,9 @@ ra1_allies_rapierjumpjet:
   parent ^^ ^externalconditions  (2 paths)
     -> ra1_allies_rapierjumpjet -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra1_allies_rapierjumpjet -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra1_allies_rapierjumpjet -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_allies_rapierjumpjet -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra1_allies_rapierjumpjet -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_allies_rapierjumpjet -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra1_allies_rapierjumpjet -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra1_allies_rapierjumpjet -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -22226,9 +22226,9 @@ ra1_soviets_armoredyak:
   parent ^^ ^externalconditions  (2 paths)
     -> ra1_soviets_armoredyak -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra1_soviets_armoredyak -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra1_soviets_armoredyak -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_soviets_armoredyak -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra1_soviets_armoredyak -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_soviets_armoredyak -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra1_soviets_armoredyak -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra1_soviets_armoredyak -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -22879,9 +22879,9 @@ ra1_soviets_hindattackhelicopter:
   parent ^^ ^externalconditions  (2 paths)
     -> ra1_soviets_hindattackhelicopter -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra1_soviets_hindattackhelicopter -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra1_soviets_hindattackhelicopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_soviets_hindattackhelicopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra1_soviets_hindattackhelicopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_soviets_hindattackhelicopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra1_soviets_hindattackhelicopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra1_soviets_hindattackhelicopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -22920,9 +22920,9 @@ ra1_soviets_hiptransport:
   parent ^^ ^externalconditions  (2 paths)
     -> ra1_soviets_hiptransport -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra1_soviets_hiptransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra1_soviets_hiptransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_soviets_hiptransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra1_soviets_hiptransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_soviets_hiptransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra1_soviets_hiptransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra1_soviets_hiptransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -22973,9 +22973,9 @@ ra1_soviets_kamovattackhelicopter:
   parent ^^ ^externalconditions  (2 paths)
     -> ra1_soviets_kamovattackhelicopter -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra1_soviets_kamovattackhelicopter -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra1_soviets_kamovattackhelicopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_soviets_kamovattackhelicopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra1_soviets_kamovattackhelicopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_soviets_kamovattackhelicopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra1_soviets_kamovattackhelicopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra1_soviets_kamovattackhelicopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -23072,9 +23072,9 @@ ra1_soviets_migattackbomber:
   parent ^^ ^externalconditions  (2 paths)
     -> ra1_soviets_migattackbomber -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra1_soviets_migattackbomber -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra1_soviets_migattackbomber -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_soviets_migattackbomber -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra1_soviets_migattackbomber -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_soviets_migattackbomber -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra1_soviets_migattackbomber -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra1_soviets_migattackbomber -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -23383,9 +23383,9 @@ ra1_soviets_nuclearyak:
   parent ^^ ^externalconditions  (2 paths)
     -> ra1_soviets_nuclearyak -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra1_soviets_nuclearyak -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra1_soviets_nuclearyak -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_soviets_nuclearyak -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra1_soviets_nuclearyak -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_soviets_nuclearyak -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra1_soviets_nuclearyak -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra1_soviets_nuclearyak -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -23790,9 +23790,9 @@ ra1_soviets_su57attackbomber:
   parent ^^ ^externalconditions  (2 paths)
     -> ra1_soviets_su57attackbomber -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra1_soviets_su57attackbomber -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra1_soviets_su57attackbomber -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_soviets_su57attackbomber -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra1_soviets_su57attackbomber -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_soviets_su57attackbomber -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra1_soviets_su57attackbomber -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra1_soviets_su57attackbomber -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -23851,10 +23851,10 @@ ra1_soviets_supersonicnuclearbomber:
     -> ra1_soviets_supersonicnuclearbomber -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra1_soviets_supersonicnuclearbomber -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
     -> ra1_soviets_supersonicnuclearbomber -> ^epicairunittemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> ra1_soviets_supersonicnuclearbomber -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_soviets_supersonicnuclearbomber -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_soviets_supersonicnuclearbomber -> ^epicairunittemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> ra1_soviets_supersonicnuclearbomber -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_soviets_supersonicnuclearbomber -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_soviets_supersonicnuclearbomber -> ^epicairunittemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> ra1_soviets_supersonicnuclearbomber -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra1_soviets_supersonicnuclearbomber -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -23983,9 +23983,9 @@ ra1_soviets_teslayak:
   parent ^^ ^externalconditions  (2 paths)
     -> ra1_soviets_teslayak -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra1_soviets_teslayak -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra1_soviets_teslayak -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_soviets_teslayak -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra1_soviets_teslayak -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_soviets_teslayak -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra1_soviets_teslayak -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra1_soviets_teslayak -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -24200,9 +24200,9 @@ ra1_soviets_yakscoutplane:
   parent ^^ ^externalconditions  (2 paths)
     -> ra1_soviets_yakscoutplane -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra1_soviets_yakscoutplane -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra1_soviets_yakscoutplane -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra1_soviets_yakscoutplane -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra1_soviets_yakscoutplane -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra1_soviets_yakscoutplane -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra1_soviets_yakscoutplane -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra1_soviets_yakscoutplane -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -24356,82 +24356,82 @@ ra2_allies_airforcecommandhq:
     -> ra2_allies_airforcecommandhq -> ^radarbuilding -> ^disableonlowpowerorpowerdown -> Inherits@2:^DisableOnPowerDown
     -> ra2_allies_airforcecommandhq -> ^isaircraftfactory -> Inherits@DisabledOverlay:^DisableOnPowerDown
 
-ra2_allies_alliedbarracks:
+ra2_allies_barracks:
   parent ^^ ^globalbounty  (2 paths)
-    -> ra2_allies_alliedbarracks -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra2_allies_alliedbarracks -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_barracks -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_barracks -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra2_allies_alliedbarracks -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra2_allies_alliedbarracks -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_barracks -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_barracks -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^disabledoverlay  (2 paths)
-    -> ra2_allies_alliedbarracks -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra2_allies_alliedbarracks -> ^isbarrack -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+    -> ra2_allies_barracks -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra2_allies_barracks -> ^isbarrack -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
-ra2_allies_alliedbattlelab:
+ra2_allies_battlelab:
   parent ^^ ^globalbounty  (2 paths)
-    -> ra2_allies_alliedbattlelab -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra2_allies_alliedbattlelab -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_battlelab -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_battlelab -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra2_allies_alliedbattlelab -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra2_allies_alliedbattlelab -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_battlelab -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_battlelab -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^disabledoverlay  (2 paths)
-    -> ra2_allies_alliedbattlelab -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra2_allies_alliedbattlelab -> ^istechnobuilding -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+    -> ra2_allies_battlelab -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra2_allies_battlelab -> ^istechnobuilding -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
-ra2_allies_alliedconstructionyard:
+ra2_allies_constructionyard:
   parent ^^ ^globalbounty  (2 paths)
-    -> ra2_allies_alliedconstructionyard -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra2_allies_alliedconstructionyard -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_constructionyard -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_constructionyard -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra2_allies_alliedconstructionyard -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra2_allies_alliedconstructionyard -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_constructionyard -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_constructionyard -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
-ra2_allies_alliedmobileconstructionvehicle:
+ra2_allies_mobileconstructionvehicle:
   parent ^^ ^acceptscloakcrate  (2 paths)
-    -> ra2_allies_alliedmobileconstructionvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> ra2_allies_alliedmobileconstructionvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+    -> ra2_allies_mobileconstructionvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> ra2_allies_mobileconstructionvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
   parent ^^ ^enemyinproximity  (3 paths)
-    -> ra2_allies_alliedmobileconstructionvehicle -> ^vehicle -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
-    -> ra2_allies_alliedmobileconstructionvehicle -> ^ra2alliedchromiumionpulseplatings -> Inherits@EnemyInProximity:^EnemyInProximity
-    -> ra2_allies_alliedmobileconstructionvehicle -> ^ra2alliedprismaticbarrier -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> ra2_allies_mobileconstructionvehicle -> ^vehicle -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> ra2_allies_mobileconstructionvehicle -> ^ra2alliedchromiumionpulseplatings -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> ra2_allies_mobileconstructionvehicle -> ^ra2alliedprismaticbarrier -> Inherits@EnemyInProximity:^EnemyInProximity
 
-ra2_allies_alliedorerefinery:
+ra2_allies_orerefinery:
   parent ^^ ^globalbounty  (2 paths)
-    -> ra2_allies_alliedorerefinery -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra2_allies_alliedorerefinery -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_orerefinery -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_orerefinery -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra2_allies_alliedorerefinery -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra2_allies_alliedorerefinery -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_orerefinery -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_orerefinery -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
-ra2_allies_alliedpowerplant:
+ra2_allies_powerplant:
   parent ^^ ^globalbounty  (2 paths)
-    -> ra2_allies_alliedpowerplant -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra2_allies_alliedpowerplant -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_powerplant -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_powerplant -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra2_allies_alliedpowerplant -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra2_allies_alliedpowerplant -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_powerplant -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_powerplant -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
 
-ra2_allies_alliedservicedepot:
+ra2_allies_servicedepot:
   parent ^^ ^globalbounty  (2 paths)
-    -> ra2_allies_alliedservicedepot -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra2_allies_alliedservicedepot -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_servicedepot -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_servicedepot -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra2_allies_alliedservicedepot -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra2_allies_alliedservicedepot -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_servicedepot -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_servicedepot -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^disabledoverlay  (2 paths)
-    -> ra2_allies_alliedservicedepot -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra2_allies_alliedservicedepot -> ^repairfacility -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+    -> ra2_allies_servicedepot -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra2_allies_servicedepot -> ^repairfacility -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
-ra2_allies_alliedwarfactory:
+ra2_allies_warfactory:
   parent ^^ ^globalbounty  (2 paths)
-    -> ra2_allies_alliedwarfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> ra2_allies_alliedwarfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_warfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ra2_allies_warfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> Inherits@bounty:^GlobalBounty
   parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> ra2_allies_alliedwarfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> ra2_allies_alliedwarfactory -> ^ra2defaultweap -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_warfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ra2_allies_warfactory -> ^ra2defaultweap -> ^4x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
   parent ^^ ^disabledoverlay  (2 paths)
-    -> ra2_allies_alliedwarfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
-    -> ra2_allies_alliedwarfactory -> ^ra2defaultweap -> ^isweaponfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+    -> ra2_allies_warfactory -> ^ra2defaultweap -> ^ra2building -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ra2_allies_warfactory -> ^ra2defaultweap -> ^isweaponfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
 ra2_allies_battlefortress:
   parent ^^ ^acceptscloakcrate  (2 paths)
@@ -24473,9 +24473,9 @@ ra2_allies_blackeagle:
   parent ^^ ^externalconditions  (2 paths)
     -> ra2_allies_blackeagle -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra2_allies_blackeagle -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra2_allies_blackeagle -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra2_allies_blackeagle -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra2_allies_blackeagle -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra2_allies_blackeagle -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra2_allies_blackeagle -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra2_allies_blackeagle -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -24966,9 +24966,9 @@ ra2_allies_harrier:
   parent ^^ ^externalconditions  (2 paths)
     -> ra2_allies_harrier -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra2_allies_harrier -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra2_allies_harrier -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra2_allies_harrier -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra2_allies_harrier -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra2_allies_harrier -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra2_allies_harrier -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra2_allies_harrier -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -25079,9 +25079,9 @@ ra2_allies_nighthawk:
   parent ^^ ^externalconditions  (2 paths)
     -> ra2_allies_nighthawk -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra2_allies_nighthawk -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra2_allies_nighthawk -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra2_allies_nighthawk -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra2_allies_nighthawk -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra2_allies_nighthawk -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra2_allies_nighthawk -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra2_allies_nighthawk -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -25301,9 +25301,9 @@ ra2_allies_rocketeer:
   parent ^^ ^externalconditions  (2 paths)
     -> ra2_allies_rocketeer -> ^jumpjetinfantry -> Inherits@ext:^ExternalConditions
     -> ra2_allies_rocketeer -> ^flyinginfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra2_allies_rocketeer -> ^jumpjetinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra2_allies_rocketeer -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra2_allies_rocketeer -> ^jumpjetinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra2_allies_rocketeer -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra2_allies_rocketeer -> ^jumpjetinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra2_allies_rocketeer -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -27975,9 +27975,9 @@ ra2_soviets_kirovairship:
   parent ^^ ^externalconditions  (2 paths)
     -> ra2_soviets_kirovairship -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra2_soviets_kirovairship -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra2_soviets_kirovairship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra2_soviets_kirovairship -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra2_soviets_kirovairship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra2_soviets_kirovairship -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra2_soviets_kirovairship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra2_soviets_kirovairship -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -28019,9 +28019,9 @@ ra2_soviets_migbomber:
   parent ^^ ^externalconditions  (2 paths)
     -> ra2_soviets_migbomber -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra2_soviets_migbomber -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra2_soviets_migbomber -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra2_soviets_migbomber -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra2_soviets_migbomber -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra2_soviets_migbomber -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra2_soviets_migbomber -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra2_soviets_migbomber -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -28146,9 +28146,9 @@ ra2_soviets_siegechopper:
   parent ^^ ^externalconditions  (2 paths)
     -> ra2_soviets_siegechopper -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra2_soviets_siegechopper -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra2_soviets_siegechopper -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra2_soviets_siegechopper -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra2_soviets_siegechopper -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra2_soviets_siegechopper -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra2_soviets_siegechopper -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra2_soviets_siegechopper -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -28351,9 +28351,9 @@ ra2_soviets_transportkirov:
   parent ^^ ^externalconditions  (2 paths)
     -> ra2_soviets_transportkirov -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra2_soviets_transportkirov -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra2_soviets_transportkirov -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra2_soviets_transportkirov -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra2_soviets_transportkirov -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra2_soviets_transportkirov -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra2_soviets_transportkirov -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra2_soviets_transportkirov -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -28646,9 +28646,9 @@ ra2asw:
   parent ^^ ^externalconditions  (2 paths)
     -> ra2asw -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra2asw -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra2asw -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra2asw -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra2asw -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra2asw -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra2asw -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra2asw -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -29833,9 +29833,9 @@ ra2hornet:
   parent ^^ ^externalconditions  (2 paths)
     -> ra2hornet -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ra2hornet -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ra2hornet -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ra2hornet -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ra2hornet -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ra2hornet -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ra2hornet -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ra2hornet -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -30337,9 +30337,9 @@ scalpelAA.steel:
   parent ^^ ^externalconditions  (2 paths)
     -> scalpelaa.steel -> ^steeldefensivedrones -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> scalpelaa.steel -> ^steeldefensivedrones -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> scalpelaa.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> scalpelaa.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> scalpelaa.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> scalpelaa.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> scalpelaa.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> scalpelaa.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -30378,9 +30378,9 @@ scalpelMG.steel:
   parent ^^ ^externalconditions  (2 paths)
     -> scalpelmg.steel -> ^steeldefensivedrones -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> scalpelmg.steel -> ^steeldefensivedrones -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> scalpelmg.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> scalpelmg.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> scalpelmg.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> scalpelmg.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> scalpelmg.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> scalpelmg.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -30419,9 +30419,9 @@ scalpelQuantumCannon.steel:
   parent ^^ ^externalconditions  (2 paths)
     -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> scalpelquantumcannon.steel -> ^steeldefensivedrones -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -30489,9 +30489,9 @@ schwarzermond_blackbomb:
   parent ^^ ^externalconditions  (2 paths)
     -> schwarzermond_blackbomb -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> schwarzermond_blackbomb -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> schwarzermond_blackbomb -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> schwarzermond_blackbomb -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> schwarzermond_blackbomb -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> schwarzermond_blackbomb -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> schwarzermond_blackbomb -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> schwarzermond_blackbomb -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -30538,9 +30538,9 @@ schwarzermond_corruptorpiercer:
   parent ^^ ^externalconditions  (2 paths)
     -> schwarzermond_corruptorpiercer -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> schwarzermond_corruptorpiercer -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> schwarzermond_corruptorpiercer -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> schwarzermond_corruptorpiercer -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> schwarzermond_corruptorpiercer -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> schwarzermond_corruptorpiercer -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> schwarzermond_corruptorpiercer -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> schwarzermond_corruptorpiercer -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -30616,9 +30616,9 @@ schwarzermond_dieglocke:
   parent ^^ ^externalconditions  (2 paths)
     -> schwarzermond_dieglocke -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> schwarzermond_dieglocke -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> schwarzermond_dieglocke -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> schwarzermond_dieglocke -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> schwarzermond_dieglocke -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> schwarzermond_dieglocke -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> schwarzermond_dieglocke -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> schwarzermond_dieglocke -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -30657,9 +30657,9 @@ schwarzermond_drone:
   parent ^^ ^externalconditions  (2 paths)
     -> schwarzermond_drone -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> schwarzermond_drone -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> schwarzermond_drone -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> schwarzermond_drone -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> schwarzermond_drone -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> schwarzermond_drone -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> schwarzermond_drone -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> schwarzermond_drone -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -30720,9 +30720,9 @@ schwarzermond_haunebuii:
   parent ^^ ^externalconditions  (2 paths)
     -> schwarzermond_haunebuii -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> schwarzermond_haunebuii -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> schwarzermond_haunebuii -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> schwarzermond_haunebuii -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> schwarzermond_haunebuii -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> schwarzermond_haunebuii -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> schwarzermond_haunebuii -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> schwarzermond_haunebuii -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -30761,9 +30761,9 @@ schwarzermond_haunebuiii:
   parent ^^ ^externalconditions  (2 paths)
     -> schwarzermond_haunebuiii -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> schwarzermond_haunebuiii -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> schwarzermond_haunebuiii -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> schwarzermond_haunebuiii -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> schwarzermond_haunebuiii -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> schwarzermond_haunebuiii -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> schwarzermond_haunebuiii -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> schwarzermond_haunebuiii -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -31257,9 +31257,9 @@ schwarzermond_spacezeppelin:
   parent ^^ ^externalconditions  (2 paths)
     -> schwarzermond_spacezeppelin -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> schwarzermond_spacezeppelin -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> schwarzermond_spacezeppelin -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> schwarzermond_spacezeppelin -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> schwarzermond_spacezeppelin -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> schwarzermond_spacezeppelin -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> schwarzermond_spacezeppelin -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> schwarzermond_spacezeppelin -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -31706,9 +31706,9 @@ steelconsortium_cargoship:
   parent ^^ ^externalconditions  (2 paths)
     -> steelconsortium_cargoship -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> steelconsortium_cargoship -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> steelconsortium_cargoship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> steelconsortium_cargoship -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> steelconsortium_cargoship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> steelconsortium_cargoship -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> steelconsortium_cargoship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> steelconsortium_cargoship -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -31853,9 +31853,9 @@ steelconsortium_cloudbreaker:
   parent ^^ ^externalconditions  (2 paths)
     -> steelconsortium_cloudbreaker -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> steelconsortium_cloudbreaker -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> steelconsortium_cloudbreaker -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> steelconsortium_cloudbreaker -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> steelconsortium_cloudbreaker -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> steelconsortium_cloudbreaker -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> steelconsortium_cloudbreaker -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> steelconsortium_cloudbreaker -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -32022,10 +32022,10 @@ steelconsortium_empressstation:
     -> steelconsortium_empressstation -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> steelconsortium_empressstation -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
     -> steelconsortium_empressstation -> ^epicairunittemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> steelconsortium_empressstation -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> steelconsortium_empressstation -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> steelconsortium_empressstation -> ^epicairunittemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> steelconsortium_empressstation -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> steelconsortium_empressstation -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> steelconsortium_empressstation -> ^epicairunittemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> steelconsortium_empressstation -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> steelconsortium_empressstation -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -32510,9 +32510,9 @@ steelconsortium_skyhammer:
   parent ^^ ^externalconditions  (2 paths)
     -> steelconsortium_skyhammer -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> steelconsortium_skyhammer -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> steelconsortium_skyhammer -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> steelconsortium_skyhammer -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> steelconsortium_skyhammer -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> steelconsortium_skyhammer -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> steelconsortium_skyhammer -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> steelconsortium_skyhammer -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -32679,9 +32679,9 @@ steelconsortium_twister:
   parent ^^ ^externalconditions  (2 paths)
     -> steelconsortium_twister -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> steelconsortium_twister -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> steelconsortium_twister -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> steelconsortium_twister -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> steelconsortium_twister -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> steelconsortium_twister -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> steelconsortium_twister -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> steelconsortium_twister -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -32821,9 +32821,9 @@ td_gdi_chinooktransport:
   parent ^^ ^externalconditions  (2 paths)
     -> td_gdi_chinooktransport -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> td_gdi_chinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> td_gdi_chinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> td_gdi_chinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> td_gdi_chinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> td_gdi_chinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> td_gdi_chinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> td_gdi_chinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -33124,9 +33124,9 @@ td_gdi_firehawk:
   parent ^^ ^externalconditions  (2 paths)
     -> td_gdi_firehawk -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> td_gdi_firehawk -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> td_gdi_firehawk -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> td_gdi_firehawk -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> td_gdi_firehawk -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> td_gdi_firehawk -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> td_gdi_firehawk -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> td_gdi_firehawk -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -33763,9 +33763,9 @@ td_gdi_orca:
   parent ^^ ^externalconditions  (2 paths)
     -> td_gdi_orca -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> td_gdi_orca -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> td_gdi_orca -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> td_gdi_orca -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> td_gdi_orca -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> td_gdi_orca -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> td_gdi_orca -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> td_gdi_orca -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -34171,9 +34171,9 @@ td_nod_apacheattackhelicopter:
   parent ^^ ^externalconditions  (2 paths)
     -> td_nod_apacheattackhelicopter -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> td_nod_apacheattackhelicopter -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> td_nod_apacheattackhelicopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> td_nod_apacheattackhelicopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> td_nod_apacheattackhelicopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> td_nod_apacheattackhelicopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> td_nod_apacheattackhelicopter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> td_nod_apacheattackhelicopter -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -34649,9 +34649,9 @@ td_nod_chinooktransport:
   parent ^^ ^externalconditions  (2 paths)
     -> td_nod_chinooktransport -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> td_nod_chinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> td_nod_chinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> td_nod_chinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> td_nod_chinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> td_nod_chinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> td_nod_chinooktransport -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> td_nod_chinooktransport -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -35713,9 +35713,9 @@ td_nod_venom:
   parent ^^ ^externalconditions  (2 paths)
     -> td_nod_venom -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> td_nod_venom -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> td_nod_venom -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> td_nod_venom -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> td_nod_venom -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> td_nod_venom -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> td_nod_venom -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> td_nod_venom -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -35921,9 +35921,9 @@ terran_battlecruiser:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_battlecruiser -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> terran_battlecruiser -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_battlecruiser -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_battlecruiser -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_battlecruiser -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_battlecruiser -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_battlecruiser -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_battlecruiser -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -35995,9 +35995,9 @@ terran_cyclone:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_cyclone -> ^sctvehicle -> Inherits@EXT:^ExternalConditions
     -> terran_cyclone -> ^missilevehicletemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_cyclone -> ^sctvehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_cyclone -> ^missilevehicletemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_cyclone -> ^sctvehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_cyclone -> ^missilevehicletemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_cyclone -> ^sctvehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_cyclone -> ^missilevehicletemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36036,9 +36036,9 @@ terran_dropship:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_dropship -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> terran_dropship -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_dropship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_dropship -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_dropship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_dropship -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_dropship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_dropship -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36085,9 +36085,9 @@ terran_firebat:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_firebat -> ^sctinfantry -> Inherits@EXT:^ExternalConditions
     -> terran_firebat -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_firebat -> ^sctinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_firebat -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_firebat -> ^sctinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_firebat -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_firebat -> ^sctinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_firebat -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36126,9 +36126,9 @@ terran_ghost:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_ghost -> ^sctinfantry -> Inherits@EXT:^ExternalConditions
     -> terran_ghost -> ^sniperinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_ghost -> ^sctinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_ghost -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_ghost -> ^sctinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_ghost -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_ghost -> ^sctinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_ghost -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36176,9 +36176,9 @@ terran_goliath:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_goliath -> ^sctvehicle -> Inherits@EXT:^ExternalConditions
     -> terran_goliath -> ^hightechtanktemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_goliath -> ^sctvehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_goliath -> ^hightechtanktemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_goliath -> ^sctvehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_goliath -> ^hightechtanktemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_goliath -> ^sctvehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_goliath -> ^hightechtanktemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36226,9 +36226,9 @@ terran_goliathmk2:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_goliathmk2 -> ^sctvehicle -> Inherits@EXT:^ExternalConditions
     -> terran_goliathmk2 -> ^hightechtanktemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_goliathmk2 -> ^sctvehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_goliathmk2 -> ^hightechtanktemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_goliathmk2 -> ^sctvehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_goliathmk2 -> ^hightechtanktemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_goliathmk2 -> ^sctvehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_goliathmk2 -> ^hightechtanktemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36267,9 +36267,9 @@ terran_harakan:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_harakan -> ^sctinfantry -> Inherits@EXT:^ExternalConditions
     -> terran_harakan -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_harakan -> ^sctinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_harakan -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_harakan -> ^sctinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_harakan -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_harakan -> ^sctinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_harakan -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36308,9 +36308,9 @@ terran_jimraynor:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_jimraynor -> ^sctinfantry -> Inherits@EXT:^ExternalConditions
     -> terran_jimraynor -> ^heroinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_jimraynor -> ^sctinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_jimraynor -> ^heroinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_jimraynor -> ^sctinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_jimraynor -> ^heroinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_jimraynor -> ^sctinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_jimraynor -> ^heroinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36349,9 +36349,9 @@ terran_madcap:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_madcap -> ^sctinfantry -> Inherits@EXT:^ExternalConditions
     -> terran_madcap -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_madcap -> ^sctinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_madcap -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_madcap -> ^sctinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_madcap -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_madcap -> ^sctinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_madcap -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36390,9 +36390,9 @@ terran_marauder:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_marauder -> ^sctinfantry -> Inherits@EXT:^ExternalConditions
     -> terran_marauder -> ^heavyinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_marauder -> ^sctinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_marauder -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_marauder -> ^sctinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_marauder -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_marauder -> ^sctinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_marauder -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36431,9 +36431,9 @@ terran_marine:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_marine -> ^sctinfantry -> Inherits@EXT:^ExternalConditions
     -> terran_marine -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_marine -> ^sctinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_marine -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_marine -> ^sctinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_marine -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_marine -> ^sctinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_marine -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36481,9 +36481,9 @@ terran_matador:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_matador -> ^sctvehicle -> Inherits@EXT:^ExternalConditions
     -> terran_matador -> ^mainbattletanktemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_matador -> ^sctvehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_matador -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_matador -> ^sctvehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_matador -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_matador -> ^sctvehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_matador -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36522,9 +36522,9 @@ terran_medic:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_medic -> ^sctinfantry -> Inherits@EXT:^ExternalConditions
     -> terran_medic -> ^medictemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_medic -> ^sctinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_medic -> ^medictemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_medic -> ^sctinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_medic -> ^medictemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_medic -> ^sctinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_medic -> ^medictemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36563,9 +36563,9 @@ terran_medivac:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_medivac -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> terran_medivac -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_medivac -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_medivac -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_medivac -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_medivac -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_medivac -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_medivac -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36642,10 +36642,10 @@ terran_phobos:
     -> terran_phobos -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> terran_phobos -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
     -> terran_phobos -> ^epicairunittemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> terran_phobos -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_phobos -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_phobos -> ^epicairunittemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> terran_phobos -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_phobos -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_phobos -> ^epicairunittemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> terran_phobos -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_phobos -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36726,10 +36726,10 @@ terran_pythean:
     -> terran_pythean -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> terran_pythean -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
     -> terran_pythean -> ^epicairunittemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> terran_pythean -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_pythean -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_pythean -> ^epicairunittemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> terran_pythean -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_pythean -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_pythean -> ^epicairunittemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> terran_pythean -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_pythean -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36809,9 +36809,9 @@ terran_raven:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_raven -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> terran_raven -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_raven -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_raven -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_raven -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_raven -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_raven -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_raven -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36850,9 +36850,9 @@ terran_reaper:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_reaper -> ^sctinfantry -> Inherits@EXT:^ExternalConditions
     -> terran_reaper -> ^sniperinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_reaper -> ^sctinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_reaper -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_reaper -> ^sctinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_reaper -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_reaper -> ^sctinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_reaper -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36910,9 +36910,9 @@ terran_sciencevessel:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_sciencevessel -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> terran_sciencevessel -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_sciencevessel -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_sciencevessel -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_sciencevessel -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_sciencevessel -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_sciencevessel -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_sciencevessel -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -36978,9 +36978,9 @@ terran_siegetank:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_siegetank -> ^sctvehicle -> Inherits@EXT:^ExternalConditions
     -> terran_siegetank -> ^artillerytanktemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_siegetank -> ^sctvehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_siegetank -> ^artillerytanktemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_siegetank -> ^sctvehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_siegetank -> ^artillerytanktemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_siegetank -> ^sctvehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_siegetank -> ^artillerytanktemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -37019,9 +37019,9 @@ terran_specter:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_specter -> ^sctinfantry -> Inherits@EXT:^ExternalConditions
     -> terran_specter -> ^sniperinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_specter -> ^sctinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_specter -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_specter -> ^sctinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_specter -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_specter -> ^sctinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_specter -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -37071,9 +37071,9 @@ terran_sundog:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_sundog -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> terran_sundog -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_sundog -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_sundog -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_sundog -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_sundog -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_sundog -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_sundog -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -37120,9 +37120,9 @@ terran_valkyrie:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_valkyrie -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> terran_valkyrie -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_valkyrie -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_valkyrie -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_valkyrie -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_valkyrie -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_valkyrie -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_valkyrie -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -37170,9 +37170,9 @@ terran_vulture:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_vulture -> ^sctvehicle -> Inherits@EXT:^ExternalConditions
     -> terran_vulture -> ^lighttanktemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_vulture -> ^sctvehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_vulture -> ^lighttanktemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_vulture -> ^sctvehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_vulture -> ^lighttanktemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_vulture -> ^sctvehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_vulture -> ^lighttanktemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -37220,9 +37220,9 @@ terran_warhound:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_warhound -> ^sctvehicle -> Inherits@EXT:^ExternalConditions
     -> terran_warhound -> ^dreadnoughttemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_warhound -> ^sctvehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_warhound -> ^dreadnoughttemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_warhound -> ^sctvehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_warhound -> ^dreadnoughttemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_warhound -> ^sctvehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_warhound -> ^dreadnoughttemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -37272,9 +37272,9 @@ terran_wraith:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_wraith -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> terran_wraith -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_wraith -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_wraith -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_wraith -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_wraith -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_wraith -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_wraith -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -37313,9 +37313,9 @@ terran_wyvern:
   parent ^^ ^externalconditions  (2 paths)
     -> terran_wyvern -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> terran_wyvern -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> terran_wyvern -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> terran_wyvern -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> terran_wyvern -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> terran_wyvern -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> terran_wyvern -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> terran_wyvern -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -37357,9 +37357,9 @@ tkm_abrams:
   parent ^^ ^externalconditions  (2 paths)
     -> tkm_abrams -> ^mainbattletanktemplate -> Inherits@EXT:^ExternalConditions
     -> tkm_abrams -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> tkm_abrams -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> tkm_abrams -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> tkm_abrams -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> tkm_abrams -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> tkm_abrams -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> tkm_abrams -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -37602,9 +37602,9 @@ tkm_iroquois:
   parent ^^ ^externalconditions  (2 paths)
     -> tkm_iroquois -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> tkm_iroquois -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> tkm_iroquois -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> tkm_iroquois -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> tkm_iroquois -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> tkm_iroquois -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> tkm_iroquois -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> tkm_iroquois -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -38318,9 +38318,9 @@ tkm_t30:
   parent ^^ ^externalconditions  (2 paths)
     -> tkm_t30 -> ^epicvehicletemplate -> Inherits@EXT:^ExternalConditions
     -> tkm_t30 -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> tkm_t30 -> ^epicvehicletemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> tkm_t30 -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> tkm_t30 -> ^epicvehicletemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> tkm_t30 -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> tkm_t30 -> ^epicvehicletemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> tkm_t30 -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -38362,9 +38362,9 @@ tkm_t72m:
   parent ^^ ^externalconditions  (2 paths)
     -> tkm_t72m -> ^mainbattletanktemplate -> Inherits@EXT:^ExternalConditions
     -> tkm_t72m -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> tkm_t72m -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> tkm_t72m -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> tkm_t72m -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> tkm_t72m -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> tkm_t72m -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> tkm_t72m -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -38436,9 +38436,9 @@ tkm_technicaltank:
   parent ^^ ^externalconditions  (2 paths)
     -> tkm_technicaltank -> ^mainbattletanktemplate -> Inherits@EXT:^ExternalConditions
     -> tkm_technicaltank -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> tkm_technicaltank -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> tkm_technicaltank -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> tkm_technicaltank -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> tkm_technicaltank -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> tkm_technicaltank -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> tkm_technicaltank -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -38615,9 +38615,9 @@ tkm_trenchtank:
   parent ^^ ^externalconditions  (2 paths)
     -> tkm_trenchtank -> ^mainbattletanktemplate -> Inherits@EXT:^ExternalConditions
     -> tkm_trenchtank -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> tkm_trenchtank -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> tkm_trenchtank -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> tkm_trenchtank -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> tkm_trenchtank -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> tkm_trenchtank -> ^mainbattletanktemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> tkm_trenchtank -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -38659,9 +38659,9 @@ tkm_trenchtruck:
   parent ^^ ^externalconditions  (2 paths)
     -> tkm_trenchtruck -> ^supportvehicletemplate -> Inherits@EXT:^ExternalConditions
     -> tkm_trenchtruck -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> tkm_trenchtruck -> ^supportvehicletemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> tkm_trenchtruck -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> tkm_trenchtruck -> ^supportvehicletemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> tkm_trenchtruck -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> tkm_trenchtruck -> ^supportvehicletemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> tkm_trenchtruck -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -38809,9 +38809,9 @@ tkm_viper:
   parent ^^ ^externalconditions  (2 paths)
     -> tkm_viper -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> tkm_viper -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> tkm_viper -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> tkm_viper -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> tkm_viper -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> tkm_viper -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> tkm_viper -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> tkm_viper -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -38964,9 +38964,9 @@ tkmdrone:
   parent ^^ ^externalconditions  (2 paths)
     -> tkmdrone -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> tkmdrone -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> tkmdrone -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> tkmdrone -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> tkmdrone -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> tkmdrone -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> tkmdrone -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> tkmdrone -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -39036,9 +39036,9 @@ tkmsuicidedrone:
   parent ^^ ^externalconditions  (2 paths)
     -> tkmsuicidedrone -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> tkmsuicidedrone -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> tkmsuicidedrone -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> tkmsuicidedrone -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> tkmsuicidedrone -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> tkmsuicidedrone -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> tkmsuicidedrone -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> tkmsuicidedrone -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -39481,9 +39481,9 @@ ts_gdi_disruptor:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_gdi_disruptor -> ^linebreakertemplate -> Inherits@EXT:^ExternalConditions
     -> ts_gdi_disruptor -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_gdi_disruptor -> ^linebreakertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_gdi_disruptor -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_gdi_disruptor -> ^linebreakertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_gdi_disruptor -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_gdi_disruptor -> ^linebreakertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_gdi_disruptor -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -39745,9 +39745,9 @@ ts_gdi_hammerhead:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_gdi_hammerhead -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ts_gdi_hammerhead -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_gdi_hammerhead -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_gdi_hammerhead -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_gdi_hammerhead -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_gdi_hammerhead -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_gdi_hammerhead -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_gdi_hammerhead -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -39805,9 +39805,9 @@ ts_gdi_hovermlrs:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_gdi_hovermlrs -> ^missilevehicletemplate -> Inherits@EXT:^ExternalConditions
     -> ts_gdi_hovermlrs -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_gdi_hovermlrs -> ^missilevehicletemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_gdi_hovermlrs -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_gdi_hovermlrs -> ^missilevehicletemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_gdi_hovermlrs -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_gdi_hovermlrs -> ^missilevehicletemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_gdi_hovermlrs -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -39895,9 +39895,9 @@ ts_gdi_jumpjetinfantry:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_gdi_jumpjetinfantry -> ^jumpjetinfantry -> Inherits@ext:^ExternalConditions
     -> ts_gdi_jumpjetinfantry -> ^flyinginfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_gdi_jumpjetinfantry -> ^jumpjetinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_gdi_jumpjetinfantry -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_gdi_jumpjetinfantry -> ^jumpjetinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_gdi_jumpjetinfantry -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_gdi_jumpjetinfantry -> ^jumpjetinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_gdi_jumpjetinfantry -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -39949,10 +39949,10 @@ ts_gdi_kodiakcommandship:
     -> ts_gdi_kodiakcommandship -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ts_gdi_kodiakcommandship -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
     -> ts_gdi_kodiakcommandship -> ^epicairunittemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> ts_gdi_kodiakcommandship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_gdi_kodiakcommandship -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_gdi_kodiakcommandship -> ^epicairunittemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> ts_gdi_kodiakcommandship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_gdi_kodiakcommandship -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_gdi_kodiakcommandship -> ^epicairunittemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> ts_gdi_kodiakcommandship -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_gdi_kodiakcommandship -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -40133,9 +40133,9 @@ ts_gdi_mammothmkii:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_gdi_mammothmkii -> ^epicvehicletemplate -> Inherits@EXT:^ExternalConditions
     -> ts_gdi_mammothmkii -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_gdi_mammothmkii -> ^epicvehicletemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_gdi_mammothmkii -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_gdi_mammothmkii -> ^epicvehicletemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_gdi_mammothmkii -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_gdi_mammothmkii -> ^epicvehicletemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_gdi_mammothmkii -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -40186,9 +40186,9 @@ ts_gdi_mammothprototype:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_gdi_mammothprototype -> ^epicvehicletemplate -> Inherits@EXT:^ExternalConditions
     -> ts_gdi_mammothprototype -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_gdi_mammothprototype -> ^epicvehicletemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_gdi_mammothprototype -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_gdi_mammothprototype -> ^epicvehicletemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_gdi_mammothprototype -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_gdi_mammothprototype -> ^epicvehicletemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_gdi_mammothprototype -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -40360,9 +40360,9 @@ ts_gdi_orcabomber:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_gdi_orcabomber -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ts_gdi_orcabomber -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_gdi_orcabomber -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_gdi_orcabomber -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_gdi_orcabomber -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_gdi_orcabomber -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_gdi_orcabomber -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_gdi_orcabomber -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -40401,9 +40401,9 @@ ts_gdi_orcafighter:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_gdi_orcafighter -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ts_gdi_orcafighter -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_gdi_orcafighter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_gdi_orcafighter -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_gdi_orcafighter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_gdi_orcafighter -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_gdi_orcafighter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_gdi_orcafighter -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -40703,9 +40703,9 @@ ts_gdi_strike_orca:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_gdi_strike_orca -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ts_gdi_strike_orca -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_gdi_strike_orca -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_gdi_strike_orca -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_gdi_strike_orca -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_gdi_strike_orca -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_gdi_strike_orca -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_gdi_strike_orca -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -40812,9 +40812,9 @@ ts_gdi_wolverine:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_gdi_wolverine -> ^firesupporttemplate -> Inherits@EXT:^ExternalConditions
     -> ts_gdi_wolverine -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_gdi_wolverine -> ^firesupporttemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_gdi_wolverine -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_gdi_wolverine -> ^firesupporttemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_gdi_wolverine -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_gdi_wolverine -> ^firesupporttemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_gdi_wolverine -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -40883,9 +40883,9 @@ ts_gdi_wolverinemkii:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_gdi_wolverinemkii -> ^firesupporttemplate -> Inherits@EXT:^ExternalConditions
     -> ts_gdi_wolverinemkii -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_gdi_wolverinemkii -> ^firesupporttemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_gdi_wolverinemkii -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_gdi_wolverinemkii -> ^firesupporttemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_gdi_wolverinemkii -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_gdi_wolverinemkii -> ^firesupporttemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_gdi_wolverinemkii -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -40951,9 +40951,9 @@ ts_gdi_zoneorcafighter:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_gdi_zoneorcafighter -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ts_gdi_zoneorcafighter -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_gdi_zoneorcafighter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_gdi_zoneorcafighter -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_gdi_zoneorcafighter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_gdi_zoneorcafighter -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_gdi_zoneorcafighter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_gdi_zoneorcafighter -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -41123,9 +41123,9 @@ ts_nod_attackcycle:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_nod_attackcycle -> ^missilevehicletemplate -> Inherits@EXT:^ExternalConditions
     -> ts_nod_attackcycle -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_nod_attackcycle -> ^missilevehicletemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_nod_attackcycle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_nod_attackcycle -> ^missilevehicletemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_nod_attackcycle -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_nod_attackcycle -> ^missilevehicletemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_nod_attackcycle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -41164,9 +41164,9 @@ ts_nod_bansheefighter:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_nod_bansheefighter -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ts_nod_bansheefighter -> ^bombertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_nod_bansheefighter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_nod_bansheefighter -> ^bombertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_nod_bansheefighter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_nod_bansheefighter -> ^bombertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_nod_bansheefighter -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_nod_bansheefighter -> ^bombertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -41531,9 +41531,9 @@ ts_nod_harpy:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_nod_harpy -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> ts_nod_harpy -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_nod_harpy -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_nod_harpy -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_nod_harpy -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_nod_harpy -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_nod_harpy -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_nod_harpy -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -41991,9 +41991,9 @@ ts_nod_shadowteam_air:
   parent ^^ ^externalconditions  (2 paths)
     -> ts_nod_shadowteam_air -> ^jumpjetinfantry -> Inherits@ext:^ExternalConditions
     -> ts_nod_shadowteam_air -> ^flyinginfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> ts_nod_shadowteam_air -> ^jumpjetinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> ts_nod_shadowteam_air -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> ts_nod_shadowteam_air -> ^jumpjetinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> ts_nod_shadowteam_air -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> ts_nod_shadowteam_air -> ^jumpjetinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> ts_nod_shadowteam_air -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -43610,9 +43610,9 @@ wc2_human_battleship:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_human_battleship -> ^wc2ship -> Inherits@EXT:^ExternalConditions
     -> wc2_human_battleship -> ^wc2battleship -> ^battleshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_human_battleship -> ^wc2ship -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_human_battleship -> ^wc2battleship -> ^battleshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_human_battleship -> ^wc2ship -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_human_battleship -> ^wc2battleship -> ^battleshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_human_battleship -> ^wc2ship -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_human_battleship -> ^wc2battleship -> ^battleshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -43654,9 +43654,9 @@ wc2_human_elven_destroyer:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_human_elven_destroyer -> ^wc2ship -> Inherits@EXT:^ExternalConditions
     -> wc2_human_elven_destroyer -> ^wc2destroyer -> ^scoutshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_human_elven_destroyer -> ^wc2ship -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_human_elven_destroyer -> ^wc2destroyer -> ^scoutshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_human_elven_destroyer -> ^wc2ship -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_human_elven_destroyer -> ^wc2destroyer -> ^scoutshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_human_elven_destroyer -> ^wc2ship -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_human_elven_destroyer -> ^wc2destroyer -> ^scoutshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -43706,9 +43706,9 @@ wc2_human_gnomish_submarine:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_human_gnomish_submarine -> ^wc2ship -> Inherits@EXT:^ExternalConditions
     -> wc2_human_gnomish_submarine -> ^wc2submarine -> ^scoutshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_human_gnomish_submarine -> ^wc2ship -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_human_gnomish_submarine -> ^wc2submarine -> ^scoutshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_human_gnomish_submarine -> ^wc2ship -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_human_gnomish_submarine -> ^wc2submarine -> ^scoutshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_human_gnomish_submarine -> ^wc2ship -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_human_gnomish_submarine -> ^wc2submarine -> ^scoutshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -43884,9 +43884,9 @@ wc2_humans_alleria:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_alleria -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_alleria -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_alleria -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_alleria -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_alleria -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_alleria -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_alleria -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -44026,9 +44026,9 @@ wc2_humans_alleria_elite:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_alleria_elite -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_alleria_elite -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_alleria_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_alleria_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_alleria_elite -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_alleria_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -44168,9 +44168,9 @@ wc2_humans_archmage:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_archmage -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_archmage -> ^wc2mage -> ^sniperinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_archmage -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_archmage -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_archmage -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_archmage -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_archmage -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_archmage -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -44217,9 +44217,9 @@ wc2_humans_ballista:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_ballista -> ^wc2vehicle -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_ballista -> ^artillerytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_ballista -> ^wc2vehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_ballista -> ^artillerytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_ballista -> ^wc2vehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_ballista -> ^artillerytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_ballista -> ^wc2vehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_ballista -> ^artillerytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -44430,9 +44430,9 @@ wc2_humans_danath:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_danath -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_danath -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_danath -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_danath -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_danath -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_danath -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_danath -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -44572,9 +44572,9 @@ wc2_humans_danath_elite:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_danath_elite -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_danath_elite -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_danath_elite -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_danath_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_danath_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_danath_elite -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_danath_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -44714,9 +44714,9 @@ wc2_humans_demolitionsquad:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_demolitionsquad -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_demolitionsquad -> ^wc2demolitioner -> ^linebreakertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_demolitionsquad -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_demolitionsquad -> ^wc2demolitioner -> ^linebreakertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_demolitionsquad -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_demolitionsquad -> ^wc2demolitioner -> ^linebreakertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_demolitionsquad -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_demolitionsquad -> ^wc2demolitioner -> ^linebreakertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -44856,9 +44856,9 @@ wc2_humans_dwarvenrifleman:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_dwarvenrifleman -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_dwarvenrifleman -> ^heavyinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_dwarvenrifleman -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_dwarvenrifleman -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_dwarvenrifleman -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_dwarvenrifleman -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_dwarvenrifleman -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_dwarvenrifleman -> ^heavyinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -44998,9 +44998,9 @@ wc2_humans_elvenarcher:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_elvenarcher -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_elvenarcher -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_elvenarcher -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_elvenarcher -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_elvenarcher -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_elvenarcher -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_elvenarcher -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_elvenarcher -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -45148,9 +45148,9 @@ wc2_humans_elvenranger:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_elvenranger -> wc2_humans_elvenarcher -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_elvenranger -> wc2_humans_elvenarcher -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_elvenranger -> wc2_humans_elvenarcher -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_elvenranger -> wc2_humans_elvenarcher -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_elvenranger -> wc2_humans_elvenarcher -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_elvenranger -> wc2_humans_elvenarcher -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_elvenranger -> wc2_humans_elvenarcher -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_elvenranger -> wc2_humans_elvenarcher -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -45203,10 +45203,10 @@ wc2_humans_flyingmachine:
     -> wc2_humans_flyingmachine -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> wc2_humans_flyingmachine -> ^wc2airunit -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_flyingmachine -> ^wc2airscout -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> wc2_humans_flyingmachine -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_flyingmachine -> ^wc2airunit -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_flyingmachine -> ^wc2airscout -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> wc2_humans_flyingmachine -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_flyingmachine -> ^wc2airunit -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_flyingmachine -> ^wc2airscout -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> wc2_humans_flyingmachine -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_flyingmachine -> ^wc2airunit -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -45357,9 +45357,9 @@ wc2_humans_footman:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_footman -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_footman -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_footman -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_footman -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_footman -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_footman -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_footman -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_footman -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -45426,10 +45426,10 @@ wc2_humans_gryphonrider:
     -> wc2_humans_gryphonrider -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> wc2_humans_gryphonrider -> ^wc2airunit -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_gryphonrider -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> wc2_humans_gryphonrider -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_gryphonrider -> ^wc2airunit -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_gryphonrider -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> wc2_humans_gryphonrider -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_gryphonrider -> ^wc2airunit -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_gryphonrider -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> wc2_humans_gryphonrider -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_gryphonrider -> ^wc2airunit -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -45502,10 +45502,10 @@ wc2_humans_gyrocoptermachine:
     -> wc2_humans_gyrocoptermachine -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> wc2_humans_gyrocoptermachine -> ^wc2airunit -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_gyrocoptermachine -> ^wc2airscout -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> wc2_humans_gyrocoptermachine -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_gyrocoptermachine -> ^wc2airunit -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_gyrocoptermachine -> ^wc2airscout -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> wc2_humans_gyrocoptermachine -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_gyrocoptermachine -> ^wc2airunit -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_gyrocoptermachine -> ^wc2airscout -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> wc2_humans_gyrocoptermachine -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_gyrocoptermachine -> ^wc2airunit -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -45656,9 +45656,9 @@ wc2_humans_highelfpriest:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_highelfpriest -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_highelfpriest -> ^wc2mage -> ^sniperinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_highelfpriest -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_highelfpriest -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_highelfpriest -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_highelfpriest -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_highelfpriest -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_highelfpriest -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -45801,9 +45801,9 @@ wc2_humans_highelfsorceress:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_highelfsorceress -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_highelfsorceress -> ^wc2mage -> ^sniperinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_highelfsorceress -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_highelfsorceress -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_highelfsorceress -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_highelfsorceress -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_highelfsorceress -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_highelfsorceress -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -45946,9 +45946,9 @@ wc2_humans_highelvenarcher:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_highelvenarcher -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_highelvenarcher -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_highelvenarcher -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_highelvenarcher -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_highelvenarcher -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_highelvenarcher -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_highelvenarcher -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_highelvenarcher -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -46028,9 +46028,9 @@ wc2_humans_knight:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_knight -> ^wc2vehicle -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_knight -> ^linebreakertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_knight -> ^wc2vehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_knight -> ^linebreakertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_knight -> ^wc2vehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_knight -> ^linebreakertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_knight -> ^wc2vehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_knight -> ^linebreakertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -46170,9 +46170,9 @@ wc2_humans_mage:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_mage -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_mage -> ^wc2mage -> ^sniperinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_mage -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_mage -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_mage -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_mage -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_mage -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_mage -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -46329,10 +46329,10 @@ wc2_humans_militiapeasant:
     -> wc2_humans_militiapeasant -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_militiapeasant -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_militiapeasant -> ^wc2peasant -> ^harvestertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> wc2_humans_militiapeasant -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_militiapeasant -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_militiapeasant -> ^wc2peasant -> ^harvestertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> wc2_humans_militiapeasant -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_militiapeasant -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_militiapeasant -> ^wc2peasant -> ^harvestertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> wc2_humans_militiapeasant -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_militiapeasant -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -46536,9 +46536,9 @@ wc2_humans_mobileconstructionvehiclehuman:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_mobileconstructionvehiclehuman -> ^wc2vehicle -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_mobileconstructionvehiclehuman -> ^wc2mcv -> ^supportvehicletemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_mobileconstructionvehiclehuman -> ^wc2vehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_mobileconstructionvehiclehuman -> ^wc2mcv -> ^supportvehicletemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_mobileconstructionvehiclehuman -> ^wc2vehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_mobileconstructionvehiclehuman -> ^wc2mcv -> ^supportvehicletemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_mobileconstructionvehiclehuman -> ^wc2vehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_mobileconstructionvehiclehuman -> ^wc2mcv -> ^supportvehicletemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -46678,9 +46678,9 @@ wc2_humans_mortarteam:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_mortarteam -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_mortarteam -> ^mortarinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_mortarteam -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_mortarteam -> ^mortarinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_mortarteam -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_mortarteam -> ^mortarinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_mortarteam -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_mortarteam -> ^mortarinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -46727,9 +46727,9 @@ wc2_humans_paladin:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_paladin -> wc2_humans_knight -> ^wc2vehicle -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_paladin -> wc2_humans_knight -> ^linebreakertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_paladin -> wc2_humans_knight -> ^wc2vehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_paladin -> wc2_humans_knight -> ^linebreakertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_paladin -> wc2_humans_knight -> ^wc2vehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_paladin -> wc2_humans_knight -> ^linebreakertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_paladin -> wc2_humans_knight -> ^wc2vehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_paladin -> wc2_humans_knight -> ^linebreakertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -46872,9 +46872,9 @@ wc2_humans_peasant:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_peasant -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_peasant -> ^wc2peasant -> ^harvestertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_peasant -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_peasant -> ^wc2peasant -> ^harvestertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_peasant -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_peasant -> ^wc2peasant -> ^harvestertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_peasant -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_peasant -> ^wc2peasant -> ^harvestertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -46921,9 +46921,9 @@ wc2_humans_siegeengine:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_siegeengine -> ^wc2vehicle -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_siegeengine -> ^artillerytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_siegeengine -> ^wc2vehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_siegeengine -> ^artillerytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_siegeengine -> ^wc2vehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_siegeengine -> ^artillerytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_siegeengine -> ^wc2vehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_siegeengine -> ^artillerytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -47114,9 +47114,9 @@ wc2_humans_warcraft3footman:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_warcraft3footman -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_warcraft3footman -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_warcraft3footman -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_warcraft3footman -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_warcraft3footman -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_warcraft3footman -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_warcraft3footman -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_warcraft3footman -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -47163,9 +47163,9 @@ wc2_humans_warcraft3knight:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_humans_warcraft3knight -> ^wc2vehicle -> Inherits@EXT:^ExternalConditions
     -> wc2_humans_warcraft3knight -> ^linebreakertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_humans_warcraft3knight -> ^wc2vehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_humans_warcraft3knight -> ^linebreakertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_humans_warcraft3knight -> ^wc2vehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_humans_warcraft3knight -> ^linebreakertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_humans_warcraft3knight -> ^wc2vehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_humans_warcraft3knight -> ^linebreakertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -47209,9 +47209,9 @@ wc2_neutral_daemon:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_neutral_daemon -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> wc2_neutral_daemon -> ^wc2airunit -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_neutral_daemon -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_neutral_daemon -> ^wc2airunit -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_neutral_daemon -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_neutral_daemon -> ^wc2airunit -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_neutral_daemon -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_neutral_daemon -> ^wc2airunit -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -47258,9 +47258,9 @@ wc2_orc_eye_of_kilrogg:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orc_eye_of_kilrogg -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> wc2_orc_eye_of_kilrogg -> ^wc2airunit -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orc_eye_of_kilrogg -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orc_eye_of_kilrogg -> ^wc2airunit -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orc_eye_of_kilrogg -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orc_eye_of_kilrogg -> ^wc2airunit -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orc_eye_of_kilrogg -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orc_eye_of_kilrogg -> ^wc2airunit -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -47315,9 +47315,9 @@ wc2_orc_giant_turtle:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orc_giant_turtle -> ^wc2ship -> Inherits@EXT:^ExternalConditions
     -> wc2_orc_giant_turtle -> ^wc2submarine -> ^scoutshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orc_giant_turtle -> ^wc2ship -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orc_giant_turtle -> ^wc2submarine -> ^scoutshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orc_giant_turtle -> ^wc2ship -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orc_giant_turtle -> ^wc2submarine -> ^scoutshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orc_giant_turtle -> ^wc2ship -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orc_giant_turtle -> ^wc2submarine -> ^scoutshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -47359,9 +47359,9 @@ wc2_orc_ogre_juggernaught:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orc_ogre_juggernaught -> ^wc2ship -> Inherits@EXT:^ExternalConditions
     -> wc2_orc_ogre_juggernaught -> ^wc2battleship -> ^battleshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orc_ogre_juggernaught -> ^wc2ship -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orc_ogre_juggernaught -> ^wc2battleship -> ^battleshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orc_ogre_juggernaught -> ^wc2ship -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orc_ogre_juggernaught -> ^wc2battleship -> ^battleshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orc_ogre_juggernaught -> ^wc2ship -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orc_ogre_juggernaught -> ^wc2battleship -> ^battleshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -47532,9 +47532,9 @@ wc2_orc_skeleton:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orc_skeleton -> wc2_orcs_grunt -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_orc_skeleton -> wc2_orcs_grunt -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orc_skeleton -> wc2_orcs_grunt -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orc_skeleton -> wc2_orcs_grunt -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orc_skeleton -> wc2_orcs_grunt -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orc_skeleton -> wc2_orcs_grunt -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orc_skeleton -> wc2_orcs_grunt -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orc_skeleton -> wc2_orcs_grunt -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -47592,9 +47592,9 @@ wc2_orc_trolldestroyer:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orc_trolldestroyer -> ^wc2ship -> Inherits@EXT:^ExternalConditions
     -> wc2_orc_trolldestroyer -> ^wc2destroyer -> ^scoutshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orc_trolldestroyer -> ^wc2ship -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orc_trolldestroyer -> ^wc2destroyer -> ^scoutshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orc_trolldestroyer -> ^wc2ship -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orc_trolldestroyer -> ^wc2destroyer -> ^scoutshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orc_trolldestroyer -> ^wc2ship -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orc_trolldestroyer -> ^wc2destroyer -> ^scoutshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -47680,9 +47680,9 @@ wc2_orcs_catapult:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_catapult -> ^wc2vehicle -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_catapult -> ^artillerytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_catapult -> ^wc2vehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_catapult -> ^artillerytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_catapult -> ^wc2vehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_catapult -> ^artillerytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_catapult -> ^wc2vehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_catapult -> ^artillerytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -47849,9 +47849,9 @@ wc2_orcs_deathknight:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_deathknight -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_deathknight -> ^wc2mage -> ^sniperinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_deathknight -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_deathknight -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_deathknight -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_deathknight -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_deathknight -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_deathknight -> ^wc2mage -> ^sniperinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -47896,10 +47896,10 @@ wc2_orcs_dragon:
     -> wc2_orcs_dragon -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> wc2_orcs_dragon -> ^wc2airunit -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_dragon -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> wc2_orcs_dragon -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_dragon -> ^wc2airunit -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_dragon -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> wc2_orcs_dragon -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_dragon -> ^wc2airunit -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_dragon -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> wc2_orcs_dragon -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_dragon -> ^wc2airunit -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -48061,9 +48061,9 @@ wc2_orcs_goblinsappers:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_goblinsappers -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_goblinsappers -> ^wc2demolitioner -> ^linebreakertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_goblinsappers -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_goblinsappers -> ^wc2demolitioner -> ^linebreakertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_goblinsappers -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_goblinsappers -> ^wc2demolitioner -> ^linebreakertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_goblinsappers -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_goblinsappers -> ^wc2demolitioner -> ^linebreakertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -48108,10 +48108,10 @@ wc2_orcs_goblinzeppelin:
     -> wc2_orcs_goblinzeppelin -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> wc2_orcs_goblinzeppelin -> ^wc2airunit -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_goblinzeppelin -> ^wc2airscout -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (3 paths)
-    -> wc2_orcs_goblinzeppelin -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_goblinzeppelin -> ^wc2airunit -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_goblinzeppelin -> ^wc2airscout -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (3 paths)
+    -> wc2_orcs_goblinzeppelin -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_goblinzeppelin -> ^wc2airunit -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_goblinzeppelin -> ^wc2airscout -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (3 paths)
     -> wc2_orcs_goblinzeppelin -> ^wc2airunit -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_goblinzeppelin -> ^wc2airunit -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -48281,9 +48281,9 @@ wc2_orcs_grunt:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_grunt -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_grunt -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_grunt -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_grunt -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_grunt -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_grunt -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_grunt -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_grunt -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -48440,9 +48440,9 @@ wc2_orcs_hellscream:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_hellscream -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_hellscream -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_hellscream -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_hellscream -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_hellscream -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_hellscream -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_hellscream -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -48582,9 +48582,9 @@ wc2_orcs_hellscream_elite:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_hellscream_elite -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_hellscream_elite -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_hellscream_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_hellscream_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_hellscream_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -48631,9 +48631,9 @@ wc2_orcs_kodobeast:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_kodobeast -> ^wc2vehicle -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_kodobeast -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_kodobeast -> ^wc2vehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_kodobeast -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_kodobeast -> ^wc2vehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_kodobeast -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_kodobeast -> ^wc2vehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_kodobeast -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -48808,9 +48808,9 @@ wc2_orcs_mobileconstructionvehicleorc:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_mobileconstructionvehicleorc -> ^wc2vehicle -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_mobileconstructionvehicleorc -> ^wc2mcv -> ^supportvehicletemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_mobileconstructionvehicleorc -> ^wc2vehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_mobileconstructionvehicleorc -> ^wc2mcv -> ^supportvehicletemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_mobileconstructionvehicleorc -> ^wc2vehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_mobileconstructionvehicleorc -> ^wc2mcv -> ^supportvehicletemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_mobileconstructionvehicleorc -> ^wc2vehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_mobileconstructionvehicleorc -> ^wc2mcv -> ^supportvehicletemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -48857,9 +48857,9 @@ wc2_orcs_ogre:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_ogre -> ^wc2vehicle -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_ogre -> ^linebreakertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_ogre -> ^wc2vehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_ogre -> ^linebreakertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_ogre -> ^wc2vehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_ogre -> ^linebreakertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_ogre -> ^wc2vehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_ogre -> ^linebreakertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -48906,9 +48906,9 @@ wc2_orcs_ogremage:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_ogremage -> wc2_orcs_ogre -> ^wc2vehicle -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_ogremage -> wc2_orcs_ogre -> ^linebreakertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_ogremage -> wc2_orcs_ogre -> ^wc2vehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_ogremage -> wc2_orcs_ogre -> ^linebreakertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_ogremage -> wc2_orcs_ogre -> ^wc2vehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_ogremage -> wc2_orcs_ogre -> ^linebreakertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_ogremage -> wc2_orcs_ogre -> ^wc2vehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_ogremage -> wc2_orcs_ogre -> ^linebreakertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -49092,9 +49092,9 @@ wc2_orcs_peon:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_peon -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_peon -> ^wc2peasant -> ^harvestertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_peon -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_peon -> ^wc2peasant -> ^harvestertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_peon -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_peon -> ^wc2peasant -> ^harvestertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_peon -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_peon -> ^wc2peasant -> ^harvestertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -49149,9 +49149,9 @@ wc2_orcs_siegeengine:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_siegeengine -> ^wc2vehicle -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_siegeengine -> ^artillerytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_siegeengine -> ^wc2vehicle -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_siegeengine -> ^artillerytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_siegeengine -> ^wc2vehicle -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_siegeengine -> ^artillerytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_siegeengine -> ^wc2vehicle -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_siegeengine -> ^artillerytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -49334,9 +49334,9 @@ wc2_orcs_trollaxethrower:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_trollaxethrower -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_trollaxethrower -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_trollaxethrower -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_trollaxethrower -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_trollaxethrower -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -49476,9 +49476,9 @@ wc2_orcs_trollberserker:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_trollberserker -> wc2_orcs_trollaxethrower -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_trollberserker -> wc2_orcs_trollaxethrower -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_trollberserker -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_trollberserker -> wc2_orcs_trollaxethrower -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_trollberserker -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_trollberserker -> wc2_orcs_trollaxethrower -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_trollberserker -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_trollberserker -> wc2_orcs_trollaxethrower -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -49618,9 +49618,9 @@ wc2_orcs_trollheadhunter:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_trollheadhunter -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_trollheadhunter -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_trollheadhunter -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_trollheadhunter -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_trollheadhunter -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_trollheadhunter -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_trollheadhunter -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_trollheadhunter -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -49768,9 +49768,9 @@ wc2_orcs_warcraft3grunt:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_warcraft3grunt -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_warcraft3grunt -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_warcraft3grunt -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_warcraft3grunt -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_warcraft3grunt -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_warcraft3grunt -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_warcraft3grunt -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_warcraft3grunt -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -49910,9 +49910,9 @@ wc2_orcs_zuljin:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_zuljin -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_zuljin -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_zuljin -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_zuljin -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_zuljin -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_zuljin -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_zuljin -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -50052,9 +50052,9 @@ wc2_orcs_zuljin_elite:
   parent ^^ ^externalconditions  (2 paths)
     -> wc2_orcs_zuljin_elite -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
     -> wc2_orcs_zuljin_elite -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> wc2_orcs_zuljin_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> wc2_orcs_zuljin_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> wc2_orcs_zuljin_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -50650,9 +50650,9 @@ yuri_cosmonaut:
   parent ^^ ^externalconditions  (2 paths)
     -> yuri_cosmonaut -> ^jumpjetinfantry -> Inherits@ext:^ExternalConditions
     -> yuri_cosmonaut -> ^flyinginfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> yuri_cosmonaut -> ^jumpjetinfantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> yuri_cosmonaut -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> yuri_cosmonaut -> ^jumpjetinfantry -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> yuri_cosmonaut -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> yuri_cosmonaut -> ^jumpjetinfantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> yuri_cosmonaut -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -50804,9 +50804,9 @@ yuri_floatingdisk:
   parent ^^ ^externalconditions  (2 paths)
     -> yuri_floatingdisk -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> yuri_floatingdisk -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> yuri_floatingdisk -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> yuri_floatingdisk -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> yuri_floatingdisk -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> yuri_floatingdisk -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> yuri_floatingdisk -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> yuri_floatingdisk -> ^spaceshiptemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -51527,11 +51527,11 @@ zerg_behemoth:
     -> zerg_behemoth -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> zerg_behemoth -> ^spaceshiptemplate -> Inherits@EXT:^ExternalConditions
     -> zerg_behemoth -> ^epicairunittemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (4 paths)
-    -> zerg_behemoth -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_behemoth -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_behemoth -> ^spaceshiptemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_behemoth -> ^epicairunittemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (4 paths)
+    -> zerg_behemoth -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_behemoth -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_behemoth -> ^spaceshiptemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_behemoth -> ^epicairunittemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (4 paths)
     -> zerg_behemoth -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_behemoth -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -51646,9 +51646,9 @@ zerg_broodweaver:
   parent ^^ ^externalconditions  (2 paths)
     -> zerg_broodweaver -> ^airzerg -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> zerg_broodweaver -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> zerg_broodweaver -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_broodweaver -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> zerg_broodweaver -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_broodweaver -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> zerg_broodweaver -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_broodweaver -> ^unarmedtransporthelicoptertemplate -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -51687,9 +51687,9 @@ zerg_corruptor:
   parent ^^ ^externalconditions  (2 paths)
     -> zerg_corruptor -> ^airzerg -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> zerg_corruptor -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> zerg_corruptor -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_corruptor -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> zerg_corruptor -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_corruptor -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> zerg_corruptor -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_corruptor -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -51768,9 +51768,9 @@ zerg_defiler:
   parent ^^ ^externalconditions  (2 paths)
     -> zerg_defiler -> ^scoutinfantrytemplate -> Inherits@EXT:^ExternalConditions
     -> zerg_defiler -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> zerg_defiler -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_defiler -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> zerg_defiler -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_defiler -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> zerg_defiler -> ^scoutinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_defiler -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -51817,9 +51817,9 @@ zerg_devourer:
   parent ^^ ^externalconditions  (2 paths)
     -> zerg_devourer -> ^airzerg -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> zerg_devourer -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> zerg_devourer -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_devourer -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> zerg_devourer -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_devourer -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> zerg_devourer -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_devourer -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -51858,9 +51858,9 @@ zerg_dreadshroud:
   parent ^^ ^externalconditions  (2 paths)
     -> zerg_dreadshroud -> ^airzerg -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> zerg_dreadshroud -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> zerg_dreadshroud -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_dreadshroud -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> zerg_dreadshroud -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_dreadshroud -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> zerg_dreadshroud -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_dreadshroud -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -51920,9 +51920,9 @@ zerg_gorekraken:
   parent ^^ ^externalconditions  (2 paths)
     -> zerg_gorekraken -> ^airzerg -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> zerg_gorekraken -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> zerg_gorekraken -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_gorekraken -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> zerg_gorekraken -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_gorekraken -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> zerg_gorekraken -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_gorekraken -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -51972,9 +51972,9 @@ zerg_guardian:
   parent ^^ ^externalconditions  (2 paths)
     -> zerg_guardian -> ^airzerg -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> zerg_guardian -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> zerg_guardian -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_guardian -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> zerg_guardian -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_guardian -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> zerg_guardian -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_guardian -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -52061,9 +52061,9 @@ zerg_infestedterranbomber:
   parent ^^ ^externalconditions  (2 paths)
     -> zerg_infestedterranbomber -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
     -> zerg_infestedterranbomber -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> zerg_infestedterranbomber -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_infestedterranbomber -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> zerg_infestedterranbomber -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_infestedterranbomber -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> zerg_infestedterranbomber -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_infestedterranbomber -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -52152,9 +52152,9 @@ zerg_mutalisk:
   parent ^^ ^externalconditions  (2 paths)
     -> zerg_mutalisk -> ^airzerg -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> zerg_mutalisk -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> zerg_mutalisk -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_mutalisk -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> zerg_mutalisk -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_mutalisk -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> zerg_mutalisk -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_mutalisk -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -52201,9 +52201,9 @@ zerg_overlord:
   parent ^^ ^externalconditions  (2 paths)
     -> zerg_overlord -> ^airzerg -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> zerg_overlord -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> zerg_overlord -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_overlord -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> zerg_overlord -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_overlord -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> zerg_overlord -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_overlord -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -52266,9 +52266,9 @@ zerg_queen:
   parent ^^ ^externalconditions  (2 paths)
     -> zerg_queen -> ^airzerg -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> zerg_queen -> ^helicoptertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> zerg_queen -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_queen -> ^helicoptertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> zerg_queen -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_queen -> ^helicoptertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> zerg_queen -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_queen -> ^helicoptertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -52315,9 +52315,9 @@ zerg_scourge:
   parent ^^ ^externalconditions  (2 paths)
     -> zerg_scourge -> ^airzerg -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> zerg_scourge -> ^fightertemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> zerg_scourge -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_scourge -> ^fightertemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> zerg_scourge -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_scourge -> ^fightertemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> zerg_scourge -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_scourge -> ^fightertemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -52356,9 +52356,9 @@ zerg_shriek:
   parent ^^ ^externalconditions  (2 paths)
     -> zerg_shriek -> ^airzerg -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> zerg_shriek -> ^flyinginfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> zerg_shriek -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_shriek -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> zerg_shriek -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_shriek -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> zerg_shriek -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_shriek -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
@@ -52496,9 +52496,9 @@ zerg_swarmling:
   parent ^^ ^externalconditions  (2 paths)
     -> zerg_swarmling -> ^airzerg -> ^helicopter -> ^raneutralplane -> Inherits@ext:^ExternalConditions
     -> zerg_swarmling -> ^flyinginfantrytemplate -> Inherits@EXT:^ExternalConditions
-  parent ^^ ^sonicdebuff  (2 paths)
-    -> zerg_swarmling -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
-    -> zerg_swarmling -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^resonant  (2 paths)
+    -> zerg_swarmling -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@resonant:^Resonant
+    -> zerg_swarmling -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@resonant:^Resonant
   parent ^^ ^defilerplague  (2 paths)
     -> zerg_swarmling -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^externalconditions -> Inherits@defplague:^DefilerPlague
     -> zerg_swarmling -> ^flyinginfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague

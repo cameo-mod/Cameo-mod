@@ -1,4 +1,54 @@
+## Devin-DAWN (A4) — L4 FX lane start: AURORA harvest landed, rulings requested (2026-09-23)
+
+**Branch:** `devin/dawn/l4-fx` (cut from master `7994c8784`), PR #470. Lane
+reassigned from AURORA per `ORDERS_2026-09-23_three_agents.md`.
+
+- Harvested `devin/aurora/effect-sound-templates` via 3-way patch: 7 unambiguous
+  `^d2k_*` pairings (visual+canonical D2k sound in one inherit), 4
+  `^Effect_*_D2K` rewires, Ordos/d2k.yaml concrete conversions, and her
+  `audit_local_effect_fields.py` guard (wired into `run_all.sh`, ratchet
+  lowered to measured L1 680 / L2 615).
+- Resolve-diff: 26 weapons' `ImpactSounds` corrected to canonical pairing
+  (`kaboom12.aud` → `EXPLSML*.WAV` — the cross-game contamination the spec
+  exists to fix); `SardDeath` node rekey `@3Eff`→`@Effect`, identical content.
+- Boot-gate PASS using Nova's collision-proof pattern: `DawnGate.exe` copy +
+  `Engine.SupportDir=C:\tmp\dawn-logs` — private perf.log/exceptions, immune
+  to `Stop-Process -Name OpenRA`. Adopted permanently.
+- Posted `RULING_REQUEST_2026-09-23_dawn_l4fx.md` (5 questions: ambiguous
+  pairings with usage counts, 2 missing D2k sounds, cross-game contamination,
+  multi-channel `Warhead@3Eff` limitation, spec open questions). Mass
+  conversion waits on rulings.
+- Fleet `COORDINATION_2026-09-23_dawn_fleet_plan.md` posted: peer reviews
+  (all verified on artifact), collision map, per-agent sequencing notes.
+
 ## Devin-DAWN (A4) — W23 follow-up: ^Effect_* inherit retrofit, W6 737 → 692 (2026-09-23)
+## Devin-Ember — Aurora rename regeneration: ra2_allies + ts_gdi (2026-09-23, branch `devin/ember/rename-ra2ts`)
+
+**Scope:** regenerated Aurora's unlanded `118309caa` on master `7994c8784` — never cherry-picked.
+`ra1_allies` held per coordinator orders until NOVA's `RELEASE_redalert.md`.
+
+- Map `tools/rename/rename_map_ra2ts_fleet.yaml`: **8 actor ids** (`ra2_allies_alliedX` →
+  `ra2_allies_X`) + **57 files** (43 ra2_allies `allied*` assets, 4 ts_gdi doubled-id stems —
+  `ts_gdi_constructionyard_tsgtcnst_{a,b,d}` → `ts_gdi_constructionyard_{a,b,d}`,
+  `ts_gdi_engineer_tsengineer` → `ts_gdi_engineer` — plus icon/silo/dropship stems).
+- `safe_rename.py` apply: 362 replacements / 32 yaml+fluent files, `survival.oramap`
+  script.lua (10 ids), 57 `git mv`. Zero dangling refs in preflight and post-validation.
+- Zero `weapons.yaml` files touched — entire rename stays inside the Ember file-set.
+- `audit_naming_damage` regenerated `latest/naming_damage.md`: **N1 22→18, N4 251→200**
+  (ratchets PASS); ra2_allies and ts_gdi rows clean except deferred N5 `OILB.RA2`/`OILB.TS`
+  (out of Aurora's original scope — flagged, not expanded).
+- `audit_map_actors` M1=0 (rule 8h), `find_empty_warhead`=0, `audit_orphans` O2=0.
+- Ledgers re-extracted (`redalert2_allies`, `shared_redalert2`): diff is pure renames
+  except one seeded-judgment carry-forward loss (see LESSONS) restored in-ledger.
+- Fixtures: `RepairActors`/`Prerequisites` strings in the two soviet baseline fixtures +
+  two test literals updated to new ids; `allkeys` left frozen (baseline namespace).
+- `audit/latest/*` re-applied textually (8 files); `baseline/` + `noid_resolved.json`
+  + `pre_reference_20260910.json` left frozen (point-in-time evidence).
+- `mods/cameo/ai/ai.yaml` touched (id substitutions only) — flagged to Devin-Cloud lane.
+- Boot-gate: private `Engine.SupportDir`, PID-verified `EmberGateRA2TS.exe` → menu marker
+  at ~40 s, zero new exceptions; pre-existing master test failures (BotInsurance fixture
+  debt, duplicate-trait 447-diff) confirmed identical on pristine `7994c8784`.
+
 
 **Branch:** `devin/dawn/w23` — addresses PR #449 review: the W23 fidelity pins had
 raised W6 694→737 by declaring effect warheads locally; the fix inherits covering
