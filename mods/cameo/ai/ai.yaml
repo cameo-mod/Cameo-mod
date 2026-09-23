@@ -6558,7 +6558,7 @@ World:
 			MaxDuration: 3000
 			EnabledChance: 100
 			UnitsToBuild:
-				td_nod_stealthtank: 100
+				td_nod_reconbike: 100
 		Composition@TDNodArtilleryDemand:
 			UnitQueues: Vehicle, RAVehicle
 			Prerequisites: td_nod_airstrip, demand.artillery
