@@ -1044,7 +1044,10 @@ allow it.
    The guerrilla rule is currently a computed-but-unavailable candidate: it remains in the
    situation log's candidate field, while the active five-personality controller falls through
    to the next grantable rule.
-4. **Main target selection**, consumed by the squad managers and support powers.
+4. **Main target selection (landed).** `SquadManagerBotModuleCA` consumes the
+   master's target for proactive, unbounded picks only when `PreferMainTarget` is
+   enabled; in-radius targeting is untouched, and empty preferred results fall
+   back to the existing unrestricted selection.
 5. **Counter demand and hints**, consumed by the unit builder, base builder and compositions
    (`ProvidesPrerequisite` tokens, zero C#).
 6. **Fogged observation + `ScoutBotModule`.** Deliberately last among the behaviour changes,
