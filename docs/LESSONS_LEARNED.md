@@ -1876,3 +1876,19 @@ its own language; `AiMatchLogWriterTest.cs` catches separator defects at source.
 Re-enabling a condition-gated bot module re-runs `TraitEnabled`. Any “initial” delay
 computed there is therefore reapplied on every switch; express the remaining delay
 relative to `WorldTick` instead.
+
+## Trait shadows: a proof field proves the TYPE, not the DISPATCH (2026-09-23)
+
+A Cameo-only yaml field proves `ObjectCreator.FindType` resolved your shadow
+type — it says nothing about which method an interface call will hit. C# keeps
+the BASE class's interface map unless the derived class re-lists the interface,
+so `public new` on a non-virtual interface member never runs:
+`TraitInfos<IRenderActorPreviewInfo>()` dispatched to Common's `RenderPreview`
+even though the Cameo `RenderSpritesInfo` shadow defined its own. The fix is to
+re-declare the interface on the shadow (`class X : Base, IInterface`) — the map
+then rebinds every member, so any member you do NOT also override must be one
+you deliberately want the base version of. Verify with
+`type.GetInterfaceMap(iface)` — a two-line reflection check over the built dll
+prints which declaring type each member binds to. (Claude review on #443;
+the same trap was already handled for the manager's event via
+`IColorPickerManagerInfo`.)
