@@ -3084,18 +3084,18 @@ overrides:
       like an extraction fault until I read the source: `105mm` states None:20 and `105mmE` restates None:100.
       RV really does give elite shells anti-infantry capability [read as the group `BulletHE_Veh_2`]'
   120mmxRad:
-    family: Nuclear
-    why: '`120mmxRad` and its Orange twin: the radiation-upgraded tank shell, which R54 finally lets read
-      as one weapon rather than two elements [read as the group `BulletHE_Veh_8`]'
+    family: Radiation
+    why: '`120mmxRad` - the maintainer-CONFIRMED `Radiation` family (CA review: DesolatorBeam, RadTrooperBeam,
+      ApocRadBeamWeapon). Anti-infantry radiation, not the buildings-first `Nuclear` blast (R69/R70)'
   120mmxRadE:
     family: CannonHE
     why: 'the same guns'' ELITE variants. Their INF rises 27 -> 149 while VEH holds at 136, which looked
       like an extraction fault until I read the source: `105mm` states None:20 and `105mmE` restates None:100.
       RV really does give elite shells anti-infantry capability [read as the group `BulletHE_Veh_2`]'
   120mmxRadOrange:
-    family: Nuclear
-    why: '`120mmxRad` and its Orange twin: the radiation-upgraded tank shell, which R54 finally lets read
-      as one weapon rather than two elements [read as the group `BulletHE_Veh_8`]'
+    family: Radiation
+    why: '`120mmxRadOrange` - the maintainer-CONFIRMED `Radiation` family (CA review: DesolatorBeam, RadTrooperBeam,
+      ApocRadBeamWeapon). Anti-infantry radiation, not the buildings-first `Nuclear` blast (R69/R70)'
   120mmxRadOrangeE:
     family: CannonHE
     why: 'the same guns'' ELITE variants. Their INF rises 27 -> 149 while VEH holds at 136, which looked
@@ -3269,17 +3269,24 @@ overrides:
     family: '(drop: not a damage warhead)'
     why: PsychicJab on a vehicle [read as the group `Hitscan_Veh_2`]
   CRRadBeamWeapon:
-    family: Nuclear
-    why: the Desolator's vehicle mount [read as the group `Radiation_Veh`]
+    family: Radiation
+    why: '`CRRadBeamWeapon` - the maintainer-CONFIRMED `Radiation` family (CA review: DesolatorBeam, RadTrooperBeam,
+      ApocRadBeamWeapon). Anti-infantry radiation, not the buildings-first `Nuclear` blast (R69/R70)'
   CRRadBeamWeaponE:
-    family: Nuclear
-    why: the Desolator's vehicle mount [read as the group `Radiation_Veh`]
+    family: Radiation
+    why: '`CRRadBeamWeaponE` - the maintainer-CONFIRMED `Radiation` family (CA review: DesolatorBeam,
+      RadTrooperBeam, ApocRadBeamWeapon). Anti-infantry radiation, not the buildings-first `Nuclear` blast
+      (R69/R70)'
   CRRadBeamWeaponOrange:
-    family: Nuclear
-    why: the Desolator's vehicle mount [read as the group `Radiation_Veh`]
+    family: Radiation
+    why: '`CRRadBeamWeaponOrange` - the maintainer-CONFIRMED `Radiation` family (CA review: DesolatorBeam,
+      RadTrooperBeam, ApocRadBeamWeapon). Anti-infantry radiation, not the buildings-first `Nuclear` blast
+      (R69/R70)'
   CRRadBeamWeaponOrangeE:
-    family: Nuclear
-    why: the Desolator's vehicle mount [read as the group `Radiation_Veh`]
+    family: Radiation
+    why: '`CRRadBeamWeaponOrangeE` - the maintainer-CONFIRMED `Radiation` family (CA review: DesolatorBeam,
+      RadTrooperBeam, ApocRadBeamWeapon). Anti-infantry radiation, not the buildings-first `Nuclear` blast
+      (R69/R70)'
   CRToxinSprayer:
     family: BulletChem
     why: ToxinSprayer on a truck [read as the group `BulletToxin_Veh`]
@@ -3616,21 +3623,23 @@ overrides:
     family: Melee
     why: the elite contact attack
   RadBeamWeapon:
-    family: Nuclear
-    why: RadBeamWeapon, the Desolator, now ONE group with its Orange twin (R54). INF 149 falling to VEH
-      50 is what radiation does [read as the group `Radiation_Inf`]
+    family: Radiation
+    why: '`RadBeamWeapon` - the maintainer-CONFIRMED `Radiation` family (CA review: DesolatorBeam, RadTrooperBeam,
+      ApocRadBeamWeapon). Anti-infantry radiation, not the buildings-first `Nuclear` blast (R69/R70)'
   RadBeamWeaponE:
-    family: Nuclear
-    why: RadBeamWeapon, the Desolator, now ONE group with its Orange twin (R54). INF 149 falling to VEH
-      50 is what radiation does [read as the group `Radiation_Inf`]
+    family: Radiation
+    why: '`RadBeamWeaponE` - the maintainer-CONFIRMED `Radiation` family (CA review: DesolatorBeam, RadTrooperBeam,
+      ApocRadBeamWeapon). Anti-infantry radiation, not the buildings-first `Nuclear` blast (R69/R70)'
   RadBeamWeaponOrange:
-    family: Nuclear
-    why: RadBeamWeapon, the Desolator, now ONE group with its Orange twin (R54). INF 149 falling to VEH
-      50 is what radiation does [read as the group `Radiation_Inf`]
+    family: Radiation
+    why: '`RadBeamWeaponOrange` - the maintainer-CONFIRMED `Radiation` family (CA review: DesolatorBeam,
+      RadTrooperBeam, ApocRadBeamWeapon). Anti-infantry radiation, not the buildings-first `Nuclear` blast
+      (R69/R70)'
   RadBeamWeaponOrangeE:
-    family: Nuclear
-    why: RadBeamWeapon, the Desolator, now ONE group with its Orange twin (R54). INF 149 falling to VEH
-      50 is what radiation does [read as the group `Radiation_Inf`]
+    family: Radiation
+    why: '`RadBeamWeaponOrangeE` - the maintainer-CONFIRMED `Radiation` family (CA review: DesolatorBeam,
+      RadTrooperBeam, ApocRadBeamWeapon). Anti-infantry radiation, not the buildings-first `Nuclear` blast
+      (R69/R70)'
   RepairBullet:
     family: '(drop: support weapon)'
     why: launch halves (ASW/Cruise/Dred/Hornet/V3), RepairBullet, DemoTruckTargeting and GroundDummyAim
@@ -3902,21 +3911,24 @@ overrides:
     family: '(drop: not a damage warhead)'
     why: PsychicJab - mind control, not damage [read as the group `Hitscan_Inf_2`]
   UCRadBeamWeapon:
-    family: Nuclear
-    why: RadBeamWeapon, the Desolator, now ONE group with its Orange twin (R54). INF 149 falling to VEH
-      50 is what radiation does [read as the group `Radiation_Inf`]
+    family: Radiation
+    why: '`UCRadBeamWeapon` - the maintainer-CONFIRMED `Radiation` family (CA review: DesolatorBeam, RadTrooperBeam,
+      ApocRadBeamWeapon). Anti-infantry radiation, not the buildings-first `Nuclear` blast (R69/R70)'
   UCRadBeamWeaponE:
-    family: Nuclear
-    why: RadBeamWeapon, the Desolator, now ONE group with its Orange twin (R54). INF 149 falling to VEH
-      50 is what radiation does [read as the group `Radiation_Inf`]
+    family: Radiation
+    why: '`UCRadBeamWeaponE` - the maintainer-CONFIRMED `Radiation` family (CA review: DesolatorBeam,
+      RadTrooperBeam, ApocRadBeamWeapon). Anti-infantry radiation, not the buildings-first `Nuclear` blast
+      (R69/R70)'
   UCRadBeamWeaponOrange:
-    family: Nuclear
-    why: RadBeamWeapon, the Desolator, now ONE group with its Orange twin (R54). INF 149 falling to VEH
-      50 is what radiation does [read as the group `Radiation_Inf`]
+    family: Radiation
+    why: '`UCRadBeamWeaponOrange` - the maintainer-CONFIRMED `Radiation` family (CA review: DesolatorBeam,
+      RadTrooperBeam, ApocRadBeamWeapon). Anti-infantry radiation, not the buildings-first `Nuclear` blast
+      (R69/R70)'
   UCRadBeamWeaponOrangeE:
-    family: Nuclear
-    why: RadBeamWeapon, the Desolator, now ONE group with its Orange twin (R54). INF 149 falling to VEH
-      50 is what radiation does [read as the group `Radiation_Inf`]
+    family: Radiation
+    why: '`UCRadBeamWeaponOrangeE` - the maintainer-CONFIRMED `Radiation` family (CA review: DesolatorBeam,
+      RadTrooperBeam, ApocRadBeamWeapon). Anti-infantry radiation, not the buildings-first `Nuclear` blast
+      (R69/R70)'
   UCSmokeGrenade:
     family: '(drop: not a damage warhead)'
     why: the garrisoned smoke grenade

@@ -3894,6 +3894,20 @@ water targets. ⚠ Cameo has no naval armour ladder yet, so their shape is an op
 - **`ScoutRifle` (new)** — infantry first, AIR second (it can shoot aircraft), weak against heavy
   armour.
 
+**7. Specialists (maintainer 2026-09-23, second round).**
+- **`Shotgun`** — close range, anti-infantry, wide spread: 15 shotguns currently sit on `CannonHE`,
+  `Bullet` or no family at all.
+- **`PointDefense`** — interceptors that shoot down missiles and shells (7 today: the PD lasers on
+  the recon bike, GDI rig and Nod laser commando, `PointDefenseTesla`): strong against light and air
+  targets, weak against heavy.
+- **`Psychic`** — hits only living targets (infantry; zero against vehicles and buildings), as in
+  RA2. Yuri's psychic wave (`RA2PsychicJab`) currently sits on an artillery shape (`CannonHE`).
+
+**8. Confirmed in the Combined Arms review but never built.** **`LaserPulse`** (small anti-light
+pulse lasers: laser turrets, light laser tanks, portable lasers — CA review, where `Prism` is
+reserved for real prism weapons) and **`Radiation`** (item 4) were both CONFIRMED by the maintainer
+in the Combined Arms review and have no template yet. The reference assignments now use both (R70).
+
 **Order of work:** these are balance changes, so they follow the reference averaging (R69: which
 waits for the maintainer's review) and land in the §12.0j regeneration. Re-pointing weapons touches
 faction weapon files, so each lane's files move through that lane's owner.

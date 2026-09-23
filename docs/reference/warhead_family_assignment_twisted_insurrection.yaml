@@ -1349,16 +1349,17 @@ overrides:
     family: CannonAP
     why: the elite 105mm/120mm
   AntiInfLaser:
-    family: Prism
-    why: '⚠ the Laser Turret and Spider Drone. A laser, but shaped ANTI-LIGHT: INF 200 against WOOD/LIGHT
-      84 and CONCRETE 10. Cameo''s Laser is anti-HEAVY and `Prism` is the same beam mirrored to anti-light
-      - R52, the profile decides'
+    family: LaserPulse
+    why: '`AntiInfLaser` - an anti-LIGHT laser: the maintainer-CONFIRMED `LaserPulse` (CA review, where
+      `Prism` is reserved for real prism weapons). Was Prism until R70'
   AntiInfLaser2:
-    family: Prism
-    why: the Black Hand's and Hornet's anti-infantry lasers - same case
+    family: LaserPulse
+    why: '`AntiInfLaser2` - an anti-LIGHT laser: the maintainer-CONFIRMED `LaserPulse` (CA review, where
+      `Prism` is reserved for real prism weapons). Was Prism until R70'
   AntiInfLaserE:
-    family: Prism
-    why: the elite anti-infantry lasers - same case
+    family: LaserPulse
+    why: '`AntiInfLaserE` - an anti-LIGHT laser: the maintainer-CONFIRMED `LaserPulse` (CA review, where
+      `Prism` is reserved for real prism weapons). Was Prism until R70'
   ArmorBuster:
     family: CannonAP
     why: the Brawler's `TankBuster` cannon - INF 42 rising to HEAVY 200
@@ -1512,8 +1513,9 @@ overrides:
     why: the Cyborg Paladin's cannon - named plasma, fired as `IsRailgun` or `ProtonBlast`, and FLAT 200
       on every rung. A railgun is anti-armour; this is not - R52
   PollyWH:
-    family: Prism
-    why: the Sentinel's laser - INF 200 falling to CONCRETE 5, same case
+    family: LaserPulse
+    why: '`PollyWH` - an anti-LIGHT laser: the maintainer-CONFIRMED `LaserPulse` (CA review, where `Prism`
+      is reserved for real prism weapons). Was Prism until R70'
   ProtonEMPWH:
     family: '(drop: not a damage warhead)'
     why: the elite proton EMP - EMEffect
@@ -1601,11 +1603,13 @@ overrides:
     family: CannonAP
     why: the Talos Walker's cannon
   ViperEWH:
-    family: Prism
-    why: the elite Viper laser
+    family: LaserPulse
+    why: '`ViperEWH` - an anti-LIGHT laser: the maintainer-CONFIRMED `LaserPulse` (CA review, where `Prism`
+      is reserved for real prism weapons). Was Prism until R70'
   ViperWH:
-    family: Prism
-    why: the Viper Drone's laser - INF 200 against HEAVY 84
+    family: LaserPulse
+    why: '`ViperWH` - an anti-LIGHT laser: the maintainer-CONFIRMED `LaserPulse` (CA review, where `Prism`
+      is reserved for real prism weapons). Was Prism until R70'
   WardenWH:
     family: Laser
     why: the Warden Tank's laser

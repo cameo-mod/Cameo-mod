@@ -7,7 +7,7 @@
 # HOW THIS PASS WAS MADE, so it can be audited rather than trusted:
 #   * Group rows carry a decision per measured (delivery, element) SIGNATURE, with the reasoning
 #     in `why`. A signature is what the measurement actually distinguishes.
-#   * `overrides:` holds the 88 weapons looked at individually. An override BEATS its
+#   * `overrides:` holds the 90 weapons looked at individually. An override BEATS its
 #     group, and it is keyed by WEAPON so it survives re-clustering — which matters: the first
 #     pass keyed these by GROUP and lost one within a single regrouping (R50).
 #   * Everything is `status: proposed`. NOTHING here has been reviewed by the maintainer.
@@ -2292,8 +2292,10 @@ overrides:
     family: Plasma
     why: '`PlasmaWH`, with the nanite injector and reaper web riding along [read as the group `BulletHE_Inf`]'
   NeutronBombWH:
-    family: Nuclear
-    why: a neutron bomb, riding in the railgun prototype's group
+    family: Radiation
+    why: 'a neutron bomb - enhanced RADIATION by design, anti-personnel - the maintainer-CONFIRMED `Radiation`
+      family (CA review: DesolatorBeam, RadTrooperBeam, ApocRadBeamWeapon). Anti-infantry radiation, not
+      the buildings-first `Nuclear` blast (R69/R70)'
   NeverUseDummyWH:
     family: '(drop: support weapon)'
     why: '`ClawsGrabWH`, `LocomotorBeam`, `NeverUseDummyWH` (named for it), `ReckonerTargeterWH`, `ScrambleWeaponsWH`,
@@ -2357,6 +2359,16 @@ overrides:
     family: Railgun
     why: '`RAILGUNPROTOWH` and `NeutronBombWH` clustered together; the railgun prototype is the one with
       uses. ⚠ the neutron bomb rides along [read as the group `BulletTesla_Veh`]'
+  RadBeamWarhead:
+    family: Radiation
+    why: 'the Desolator''s beam - the maintainer-CONFIRMED `Radiation` family (CA review: DesolatorBeam,
+      RadTrooperBeam, ApocRadBeamWeapon). Anti-infantry radiation, not the buildings-first `Nuclear` blast
+      (R69/R70)'
+  RadEruptionWarhead:
+    family: Radiation
+    why: 'the Desolator''s eruption - the maintainer-CONFIRMED `Radiation` family (CA review: DesolatorBeam,
+      RadTrooperBeam, ApocRadBeamWeapon). Anti-infantry radiation, not the buildings-first `Nuclear` blast
+      (R69/R70)'
   RealRailShot:
     family: Railgun
     why: '`RealRailShot` [read as the group `Bullet_Inf_2`]'

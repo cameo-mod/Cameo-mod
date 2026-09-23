@@ -7,7 +7,7 @@
 # HOW THIS PASS WAS MADE, so it can be audited rather than trusted:
 #   * Group rows carry a decision per measured (delivery, element) SIGNATURE, with the reasoning
 #     in `why`. A signature is what the measurement actually distinguishes.
-#   * `overrides:` holds the 14 weapons looked at individually. An override BEATS its
+#   * `overrides:` holds the 15 weapons looked at individually. An override BEATS its
 #     group, and it is keyed by WEAPON so it survives re-clustering — which matters: the first
 #     pass keyed these by GROUP and lost one within a single regrouping (R50).
 #   * Everything is `status: proposed`. NOTHING here has been reviewed by the maintainer.
@@ -3071,9 +3071,9 @@ overrides:
     family: Demolition
     why: a demolition bomb
   DesolatorWH:
-    family: Nuclear
-    why: 'the Desolator: 200 across infantry falling to 47 against heavy, which is exactly what radiation
-      does'
+    family: Radiation
+    why: '`DesolatorWH` - the maintainer-CONFIRMED `Radiation` family (CA review: DesolatorBeam, RadTrooperBeam,
+      ApocRadBeamWeapon). Anti-infantry radiation, not the buildings-first `Nuclear` blast (R69/R70)'
   DisruptorWH:
     family: Sonic
     why: a disruptor — the Tiberian Sun sonic weapon
@@ -3082,6 +3082,10 @@ overrides:
     why: '⚠ its measured delivery is Radiation, which a hollow-point round is not. The PROFILE decides
       (R52): 50/41/31 against infantry rising to 158/200/200 against vehicles with no building reach —
       an armour-piercing round'
+  RadBeamWarhead:
+    family: Radiation
+    why: '`RadBeamWarhead` - the maintainer-CONFIRMED `Radiation` family (CA review: DesolatorBeam, RadTrooperBeam,
+      ApocRadBeamWeapon). Anti-infantry radiation, not the buildings-first `Nuclear` blast (R69/R70)'
   RailShot2:
     family: Railgun
     why: 'a rail shot delivered as Laser (the beam visual again, R52): 63/47/31 against infantry rising

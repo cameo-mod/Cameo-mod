@@ -962,10 +962,9 @@ overrides:
     family: Bullet
     why: garrisoned
   ObeliskLaserFire:
-    family: Prism
-    why: ⚠ the Obelisk of Light - a laser, but CN's shares one anti-LIGHT warhead (Infantry 200, Heavy
-      84, Superheavy 50); Cameo's Laser is anti-heavy, so this is Prism, the TI precedent (R62). R52 caught
-      it in the collapse
+    family: LaserPulse
+    why: '`ObeliskLaserFire` - CN''s shared anti-LIGHT laser warhead: the maintainer-CONFIRMED `LaserPulse`
+      (CA review; Prism is reserved for real prism weapons). Was Prism until R70'
   OrcaCannon:
     family: Bullet
     why: the ORCA's cannon
@@ -997,11 +996,13 @@ overrides:
     family: Sonic
     why: the Disruptor's sonic wave
   StingOfNodLaser:
-    family: Prism
-    why: the Sting of Nod - same warhead
+    family: LaserPulse
+    why: '`StingOfNodLaser` - CN''s shared anti-LIGHT laser warhead: the maintainer-CONFIRMED `LaserPulse`
+      (CA review; Prism is reserved for real prism weapons). Was Prism until R70'
   TurretLaserFire:
-    family: Prism
-    why: the laser turret - same warhead
+    family: LaserPulse
+    why: '`TurretLaserFire` - CN''s shared anti-LIGHT laser warhead: the maintainer-CONFIRMED `LaserPulse`
+      (CA review; Prism is reserved for real prism weapons). Was Prism until R70'
   VulcanTower:
     family: Bullet
     why: the Vulcan tower
