@@ -770,8 +770,10 @@ shaders → boot-gate → commit `mod.config`. Also in `CLAUDE.md` and the Sessi
 `ObjectCreator.FindType` returns the first assembly in `mod.yaml`'s `Assemblies` list holding
 the type name, and that order is AS, CA, **Cameo**, Cnc, D2k, Common, so an
 `OpenRA.Mods.Cameo` class of the same name replaces the engine's with **zero yaml changes**.
-Precedent: `ColorPickerColorShift`, `PlayerColorShift`, and `SelectionDecorations`
-(`57685c3a3`). Prove it with a Cameo-only field — `--docs` lists both types and proves nothing.
+Precedent: `ColorPickerColorShift`, `PlayerColorShift`, `SelectionDecorations`
+(`57685c3a3`), and now `RenderSpritesInfo` + `ColorPickerManagerInfo` (the colour-picker
+preview build, 2026-09-22). Prove it with a Cameo-only field — `--docs` lists both types
+and proves nothing.
 Memory: `cameo-engine-submodule`.
 
 ---

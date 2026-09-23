@@ -1,6 +1,49 @@
 # Colour-picker preview — every faction, no clone actors
 
-**Maintainer order, 2026-09-07.** Status: **SPECIFIED, NOT BUILT.**
+**Maintainer order, 2026-09-07.** Status: **BUILT** (Ember, 2026-09-22 — `devin/ember/colorpicker-preview`).
+
+## As implemented
+
+Two Cameo shadows, zero engine changes:
+
+1. **`OpenRA.Mods.Cameo.Traits.Render.RenderSpritesInfo`** (`OpenRA.Mods.Cameo/Traits/Render/RenderSprites.cs`)
+   shadows Common's `RenderSpritesInfo`. It implements `IActorPreviewInitInfo` and injects a
+   `ColorPickerPreviewInit` marker when `ColorPickerManager` builds a preview with
+   `ActorPreviewType.ColorPicker`. Its `RenderPreview` then resolves the **live picker
+   palette** for the actor's art family instead of the owner-locked `PlayerPalette`:
+
+   - `Palette:` (fixed) → picker whose `BasePalette` equals it, else the palette itself.
+   - `PlayerPalette:` (default `player`) → its `PlayerColorPaletteInfo.BaseName` gives the
+     `BasePalette` (the raw art palette); the `ColorPickerPalette` with the same
+     `BasePalette` is that family's picker palette.
+   - No matching picker → the normal palette, unchanged (degrades to today's behaviour,
+     never a broken preview).
+
+2. **`OpenRA.Mods.Cameo.Traits.ColorPickerManagerInfo`** (`OpenRA.Mods.Cameo/Traits/World/ColorPickerManager.cs`)
+   shadows Common's `ColorPickerManagerInfo`. When a faction has no yaml
+   `FactionPreviewActors` row it derives the preview actor from rules data:
+   `FactionInfo.InternalName` → the `StartingUnits` block listing that faction →
+   `BaseActor` (the MCV) → `TransformsInfo.IntoActor` → the construction yard.
+   `PreviewActor` (`ra1_soviets_mammothtank`, a real actor) stays the fallback for
+   `Random*`/unknown factions. The `DeriveFactionPreviewActors` field is the kill-switch
+   and the shadow proof (Common's type has no such field).
+
+   ⚠ The event subtlety: `IColorPickerManagerInfo.OnColorPickerColorUpdate` is what the
+   `ColorPickerPalette` traits subscribe to. Because the base's `ShowColorDropDown` is an
+   explicit interface implementation (not virtual), the shadow re-declares
+   `IColorPickerManagerInfo` and raises `public new event OnColorPickerColorUpdate` —
+   the interface map resolves subscribers to that event.
+
+3. **Three picker palettes added** for art families that had none — each copies the
+   `RemapIndex` of the `PlayerColorPalette` sharing its `BasePalette`:
+   `colorpickerplayer` (base `player`, in `rules/palettes.yaml`),
+   `colorpickerra2cons` + `colorpickerra2future2` (in `ContentPacks/RedAlert2Mod/Shared/yaml/templates.yaml`).
+
+Verified coverage (resolver probe, 2026-09-22): all 31 selectable factions derive a
+conyard with a live picker palette; the 10 `Random*` meta-factions have no MCV and fall
+back to `PreviewActor` as intended.
+
+## Original spec (2026-09-07)
 
 > *"I want all factions to automatically have something like that, but with a C# trait
 > that always uses the main building and recolors it instead of a separate

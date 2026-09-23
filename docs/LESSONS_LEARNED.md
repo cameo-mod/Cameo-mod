@@ -1854,3 +1854,24 @@ its own language; `AiMatchLogWriterTest.cs` catches separator defects at source.
 Re-enabling a condition-gated bot module re-runs `TraitEnabled`. Any “initial” delay
 computed there is therefore reapplied on every switch; express the remaining delay
 relative to `WorldTick` instead.
+
+## Cameo shadowing pitfalls — namespace `World` and explicit interface members (2026-09-22)
+
+Two traps hit while adding the `RenderSpritesInfo`/`ColorPickerManagerInfo` shadows for the
+colour-picker preview build:
+
+- **Never create namespace `OpenRA.Mods.Cameo.Traits.World`.** Every file under
+  `OpenRA.Mods.Cameo.Traits.*` resolves the unqualified `World` type through its enclosing
+  namespace chain, and a `Traits.World` namespace shadows `OpenRA.World` for ALL of them —
+  ~94 `CS0118 'World' is a namespace` errors. Cameo's convention is the directory
+  `Traits/World/` with the FLAT namespace `OpenRA.Mods.Cameo.Traits` (see
+  `Traits/World/AutoControlGroupsManager.cs` et al.).
+- **Shadowing a class with explicit interface implementations needs the interface
+  re-declared AND re-implemented.** `RenderPreview`/`ShowColorDropDown` are explicit
+  impls — a `new` method alone does not take over the interface slot. Re-declare the
+  interface on the subclass (`class X : Base, IInterface`) and implement the member
+  explicitly there; members you don't re-implement fall back to the base's impls, which is
+  what you want. For a base-class *event* subscribers reach via the interface (the
+  colour-picker palette subscriptions), declare `public new event ...` — the interface map
+  then resolves to the event the subclass can raise. A non-`public` `new` event cannot
+  satisfy the interface and subscribers silently land on the base event.
