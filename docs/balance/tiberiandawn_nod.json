@@ -638,10 +638,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Concussion_Medium",
-       "^ShrapnelWeapon",
-       "^Grenade",
-       "^MediumCannon",
-       "^TankDestroyerCannon"
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_Concussion_Medium"
@@ -651,20 +648,6 @@
      },
      {
       "damage_warheads": [
-       {
-        "damage": "3",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "400",
-        "tag": "HeavyBombPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "3",
-        "falloff": null,
-        "spread": "225",
-        "tag": "HeavyCannonPercentage",
-        "type": "AreaDamagePercentage"
-       },
        {
         "damage": "31000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
@@ -699,6 +682,20 @@
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "3",
+        "falloff": null,
+        "spread": "225",
+        "tag": "HeavyCannonPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
@@ -710,9 +707,8 @@
       "slot": "Armament@Upgrade",
       "versus_templates": [
        "^Warhead_Concussion_Medium_Flat",
-       "^HeavyBomb",
-       "^HeavyCannon",
-       "td_nod_gunturret_turretgun"
+       "td_nod_gunturret_turretgun",
+       "^Effect_Apoc_AP_RA2"
       ],
       "warheads": [
        "^Warhead_Concussion_Medium"
@@ -1725,9 +1721,7 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Chemical_Light",
-       "^Grenade",
-       "^LightChemicalWeapon",
-       "^LightMissile"
+       "^Effect_CannonAP_Light"
       ],
       "warheads": [
        "^Warhead_Chemical_Light"
@@ -1775,9 +1769,7 @@
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_Chemical_Light",
-       "^Grenade",
-       "^LightChemicalWeapon",
-       "^LightMissile"
+       "^Effect_CannonAP_Light"
       ],
       "warheads": [
        "^Warhead_Chemical_Light"
@@ -2465,6 +2457,14 @@
         "falloff": null,
         "percentage_denominator": "2500",
         "spread": "75",
+        "tag": "LaserWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "108",
+        "falloff": null,
+        "percentage_denominator": "2500",
+        "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
        },
@@ -2474,14 +2474,6 @@
         "percentage_denominator": "2500",
         "spread": "125",
         "tag": "FlakWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "108",
-        "falloff": null,
-        "percentage_denominator": "2500",
-        "spread": "75",
-        "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -2500,9 +2492,8 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Laser_Heavy",
-       "^TankDestroyerCannon",
-       "^FlakWeapon",
-       "^LaserWeapon"
+       "^LaserWeapon",
+       "^Effect_Watersplash_Huge_RA2"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -2525,6 +2516,14 @@
         "falloff": null,
         "percentage_denominator": "2500",
         "spread": "75",
+        "tag": "LaserWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "108",
+        "falloff": null,
+        "percentage_denominator": "2500",
+        "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
        },
@@ -2534,14 +2533,6 @@
         "percentage_denominator": "2500",
         "spread": "125",
         "tag": "FlakWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "108",
-        "falloff": null,
-        "percentage_denominator": "2500",
-        "spread": "75",
-        "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -2560,9 +2551,8 @@
       "slot": "Armament@Garrison",
       "versus_templates": [
        "^Warhead_Laser_Heavy",
-       "^TankDestroyerCannon",
-       "^FlakWeapon",
-       "^LaserWeapon"
+       "^LaserWeapon",
+       "^Effect_Watersplash_Huge_RA2"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -2716,6 +2706,14 @@
         "damage": "29",
         "falloff": null,
         "percentage_denominator": "10000",
+        "spread": "75",
+        "tag": "LaserWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "29",
+        "falloff": null,
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
@@ -2726,14 +2724,6 @@
         "percentage_denominator": "10000",
         "spread": "100",
         "tag": "ChaingunPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "29",
-        "falloff": null,
-        "percentage_denominator": "10000",
-        "spread": "75",
-        "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -2753,10 +2743,8 @@
       "slot": "Armament@Upgrade",
       "versus_templates": [
        "^Warhead_Laser_Heavy",
-       "^SmallArms",
-       "^Chaingun",
        "^LaserWeapon",
-       "^LegacyLaserChipCompatibility"
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -2780,6 +2768,14 @@
         "damage": "29",
         "falloff": null,
         "percentage_denominator": "10000",
+        "spread": "75",
+        "tag": "LaserWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "29",
+        "falloff": null,
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
@@ -2790,14 +2786,6 @@
         "percentage_denominator": "10000",
         "spread": "100",
         "tag": "ChaingunPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "29",
-        "falloff": null,
-        "percentage_denominator": "10000",
-        "spread": "75",
-        "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -2817,10 +2805,8 @@
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
        "^Warhead_Laser_Heavy",
-       "^SmallArms",
-       "^Chaingun",
        "^LaserWeapon",
-       "^LegacyLaserChipCompatibility"
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -3073,10 +3059,7 @@
       "versus_templates": [
        "^Warhead_Tesla_Super",
        "^TeslaChargedWeapon",
-       "^TankDestroyerCannon",
-       "^Chaingun",
-       "^ShrapnelWeapon",
-       "^MediumMissile"
+       "^Effect_CannonAP_Medium"
       ],
       "warheads": [
        "^Warhead_Tesla_Super"
@@ -3146,10 +3129,7 @@
       "versus_templates": [
        "^Warhead_Tesla_Super",
        "^TeslaChargedWeapon",
-       "^TankDestroyerCannon",
-       "^Chaingun",
-       "^ShrapnelWeapon",
-       "^MediumMissile"
+       "^Effect_CannonAP_Medium"
       ],
       "warheads": [
        "^Warhead_Tesla_Super"
@@ -4238,27 +4218,6 @@
        },
        {
         "damage": "3",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "3",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "3",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "3",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
@@ -4277,6 +4236,27 @@
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "3",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
@@ -4289,9 +4269,6 @@
       "slot": "Armament@Upgrade",
       "versus_templates": [
        "^Warhead_Concussion_Heavy",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^MediumChemicalWeapon",
        "^MediumFlameWeapon",
        "^MediumCannon",
        "^HeavyBomb"
@@ -4546,9 +4523,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Bullet_Medium",
-       "^HeavyCannon",
-       "^SmallArms",
-       "^Chaingun"
+       "^Effect_CannonHE_Heavy_D2K_DevBullet"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -4986,10 +4961,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_MissileChem_Medium",
-       "^TankDestroyerCannon",
-       "^LightChemicalWeapon",
-       "^FlakWeapon",
-       "^MediumMissile"
+       "^Effect_Watersplash_Huge_RA2"
       ],
       "warheads": [
        "^Warhead_MissileChem_Medium"
@@ -5237,9 +5209,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_MissileChem_Medium",
-       "^ShrapnelWeapon",
-       "^MediumChemicalWeapon",
-       "^MediumMissile"
+       "^Effect_CannonAP_Medium"
       ],
       "warheads": [
        "^Warhead_MissileChem_Medium"
@@ -5703,8 +5673,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_CannonHE_Medium",
-       "^LightChemicalWeapon",
-       "^MediumCannon"
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -5958,10 +5927,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_MissileAP_Medium",
-       "^TankDestroyerCannon",
-       "^ShrapnelWeapon",
-       "^FlakWeapon",
-       "^LightMissile"
+       "^Effect_CannonAP_Light"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -6080,13 +6046,6 @@
        },
        {
         "damage": "2",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
@@ -6104,6 +6063,13 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -6131,12 +6097,9 @@
       "slot": "Armament@Upgrade",
       "versus_templates": [
        "^Warhead_CannonHE_Heavy_Flat",
-       "^MediumChemicalWeapon",
        "^MediumFlameWeapon",
        "^HeavyBomb",
        "^TankDestroyerCannon",
-       "^MediumCannon",
-       "^HeavyCannon",
        "^SpecterArtilleryShellLegacy"
       ],
       "warheads": [
