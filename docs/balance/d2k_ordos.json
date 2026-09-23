@@ -323,7 +323,8 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy_Flat",
-       "^D2KMissile"
+       "^D2KMissile",
+       "^Effect_Apoc_AP_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -407,17 +408,17 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "6",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "5",
+        "falloff": "111, 33, 11, 3",
+        "spread": "375",
+        "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -430,7 +431,8 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Chemical_Medium",
-       "d2k_grenade"
+       "d2k_grenade",
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
        "^Warhead_Chemical_Medium",
@@ -630,20 +632,6 @@
        },
        {
         "damage": "10",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
@@ -662,6 +650,20 @@
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -671,7 +673,10 @@
       "reloaddelay": "125",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Demolition_Heavy"
+       "^Warhead_Demolition_Heavy",
+       "^MediumFlameWeapon",
+       "^ShrapnelWeapon",
+       "^HeavyBomb"
       ],
       "warheads": [
        "^Warhead_Demolition_Heavy"
@@ -2561,13 +2566,6 @@
      {
       "damage_warheads": [
        {
-        "damage": "180000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "10",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
@@ -2576,16 +2574,23 @@
        },
        {
         "damage": "10",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10",
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
         "tag": "HeavyBombPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "180000",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "10",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -2627,6 +2632,8 @@
       "versus_templates": [
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
+       "^LightFlameWeapon",
+       "^HeavyBomb",
        "^D2KMissile"
       ],
       "warheads": [
@@ -2639,13 +2646,6 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "180000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "10",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
@@ -2654,16 +2654,23 @@
        },
        {
         "damage": "10",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10",
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
         "tag": "HeavyBombPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "180000",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "10",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -2705,6 +2712,8 @@
       "versus_templates": [
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
+       "^LightFlameWeapon",
+       "^HeavyBomb",
        "^D2KMissile"
       ],
       "warheads": [
@@ -4789,7 +4798,8 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_MissileHE_Heavy",
-       "DeviatorMissile"
+       "DeviatorMissile",
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
@@ -5419,17 +5429,17 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "6",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "5",
+        "falloff": "111, 33, 11, 3",
+        "spread": "375",
+        "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -5442,7 +5452,8 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Chemical_Medium",
-       "d2k_grenade"
+       "d2k_grenade",
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
        "^Warhead_Chemical_Medium",
@@ -5664,20 +5675,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "LegacyRailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LegacyLaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
         "falloff": null,
         "spread": "125",
@@ -5690,6 +5687,20 @@
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "LegacyRailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "LegacyLaserExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -5701,7 +5712,8 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^RailgunWeapon",
-       "^LaserWeapon"
+       "^LaserWeapon",
+       "^Effect_Watersplash_Huge_RA2"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"

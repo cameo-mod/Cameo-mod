@@ -637,7 +637,8 @@
       "requires": "!td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Concussion_Medium"
+       "^Warhead_Concussion_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_Concussion_Medium"
@@ -706,7 +707,8 @@
       "slot": "Armament@Upgrade",
       "versus_templates": [
        "^Warhead_Concussion_Medium_Flat",
-       "td_nod_gunturret_turretgun"
+       "td_nod_gunturret_turretgun",
+       "^Effect_Apoc_AP_RA2"
       ],
       "warheads": [
        "^Warhead_Concussion_Medium"
@@ -1718,7 +1720,8 @@
       "reloaddelay": "54",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Chemical_Light"
+       "^Warhead_Chemical_Light",
+       "^Effect_CannonAP_Light"
       ],
       "warheads": [
        "^Warhead_Chemical_Light"
@@ -1765,7 +1768,8 @@
       "reloaddelay": "54",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_Chemical_Light"
+       "^Warhead_Chemical_Light",
+       "^Effect_CannonAP_Light"
       ],
       "warheads": [
        "^Warhead_Chemical_Light"
@@ -2488,7 +2492,8 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Laser_Heavy",
-       "^LaserWeapon"
+       "^LaserWeapon",
+       "^Effect_Watersplash_Huge_RA2"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -2546,7 +2551,8 @@
       "slot": "Armament@Garrison",
       "versus_templates": [
        "^Warhead_Laser_Heavy",
-       "^LaserWeapon"
+       "^LaserWeapon",
+       "^Effect_Watersplash_Huge_RA2"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -2737,7 +2743,8 @@
       "slot": "Armament@Upgrade",
       "versus_templates": [
        "^Warhead_Laser_Heavy",
-       "^LaserWeapon"
+       "^LaserWeapon",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -2798,7 +2805,8 @@
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
        "^Warhead_Laser_Heavy",
-       "^LaserWeapon"
+       "^LaserWeapon",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -3050,7 +3058,8 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Tesla_Super",
-       "^TeslaChargedWeapon"
+       "^TeslaChargedWeapon",
+       "^Effect_CannonAP_Medium"
       ],
       "warheads": [
        "^Warhead_Tesla_Super"
@@ -3119,7 +3128,8 @@
       "slot": "Armament@Garrison",
       "versus_templates": [
        "^Warhead_Tesla_Super",
-       "^TeslaChargedWeapon"
+       "^TeslaChargedWeapon",
+       "^Effect_CannonAP_Medium"
       ],
       "warheads": [
        "^Warhead_Tesla_Super"
@@ -4208,27 +4218,6 @@
        },
        {
         "damage": "3",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "3",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "3",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "3",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
@@ -4247,6 +4236,27 @@
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "3",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
@@ -4258,7 +4268,10 @@
       "requires": "td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Warhead_Concussion_Heavy"
+       "^Warhead_Concussion_Heavy",
+       "^MediumFlameWeapon",
+       "^MediumCannon",
+       "^HeavyBomb"
       ],
       "warheads": [
        "^Warhead_Concussion_Heavy"
@@ -4509,7 +4522,8 @@
       "reloaddelay": "60",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium"
+       "^Warhead_Bullet_Medium",
+       "^Effect_CannonHE_Heavy_D2K_DevBullet"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -4946,7 +4960,8 @@
       "reloaddelay": "70",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_MissileChem_Medium"
+       "^Warhead_MissileChem_Medium",
+       "^Effect_Watersplash_Huge_RA2"
       ],
       "warheads": [
        "^Warhead_MissileChem_Medium"
@@ -5071,7 +5086,11 @@
       "reloaddelay": "142",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_MissileChem_Heavy"
+       "^Warhead_MissileChem_Heavy",
+       "^HeavyMissile",
+       "^HeavyBomb",
+       "^HeavyFlameWeapon",
+       "^HeavyChemicalWeapon"
       ],
       "warheads": [
        "^Warhead_MissileChem_Heavy"
@@ -5189,7 +5208,8 @@
       "reloaddelay": "60",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_MissileChem_Medium"
+       "^Warhead_MissileChem_Medium",
+       "^Effect_CannonAP_Medium"
       ],
       "warheads": [
        "^Warhead_MissileChem_Medium"
@@ -5652,7 +5672,8 @@
       "reloaddelay": "35",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_CannonHE_Medium",
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -5905,7 +5926,8 @@
       "reloaddelay": "55",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_MissileAP_Medium"
+       "^Warhead_MissileAP_Medium",
+       "^Effect_CannonAP_Light"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -6024,13 +6046,6 @@
        },
        {
         "damage": "2",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
@@ -6048,6 +6063,13 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -6075,6 +6097,9 @@
       "slot": "Armament@Upgrade",
       "versus_templates": [
        "^Warhead_CannonHE_Heavy_Flat",
+       "^MediumFlameWeapon",
+       "^HeavyBomb",
+       "^TankDestroyerCannon",
        "^SpecterArtilleryShellLegacy"
       ],
       "warheads": [

@@ -25,6 +25,13 @@
        },
        {
         "damage": "2",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
+        "spread": "500",
+        "tag": "NuclearWarheadPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2",
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
@@ -32,16 +39,16 @@
        },
        {
         "damage": "2",
-        "falloff": null,
-        "spread": "75",
-        "tag": "LaserWeaponPercentage",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "2",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "500",
-        "tag": "NuclearWarheadPercentage",
+        "falloff": null,
+        "spread": "75",
+        "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -56,13 +63,6 @@
         "falloff": null,
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "400",
-        "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -91,7 +91,9 @@
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
+       "^NuclearWarhead",
        "^RailgunWeapon",
+       "^HeavyBomb",
        "^LaserWeapon"
       ],
       "warheads": [
@@ -112,6 +114,13 @@
        },
        {
         "damage": "8",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
+        "spread": "500",
+        "tag": "NuclearWarheadPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8",
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
@@ -119,16 +128,16 @@
        },
        {
         "damage": "8",
-        "falloff": null,
-        "spread": "75",
-        "tag": "LaserWeaponPercentage",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "8",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "500",
-        "tag": "NuclearWarheadPercentage",
+        "falloff": null,
+        "spread": "75",
+        "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -143,13 +152,6 @@
         "falloff": null,
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "400",
-        "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -482,6 +484,13 @@
        },
        {
         "damage": "3",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "3",
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
@@ -499,13 +508,6 @@
         "falloff": null,
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "3",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "400",
-        "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -538,6 +540,7 @@
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^RailgunWeapon",
+       "^HeavyBomb",
        "^LaserWeapon"
       ],
       "warheads": [
@@ -559,6 +562,13 @@
        },
        {
         "damage": "8",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
+        "spread": "500",
+        "tag": "NuclearWarheadPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8",
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
@@ -566,16 +576,16 @@
        },
        {
         "damage": "8",
-        "falloff": null,
-        "spread": "75",
-        "tag": "LaserWeaponPercentage",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "8",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "500",
-        "tag": "NuclearWarheadPercentage",
+        "falloff": null,
+        "spread": "75",
+        "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -590,13 +600,6 @@
         "falloff": null,
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "400",
-        "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -1278,7 +1281,8 @@
       "slot": "Armament@SECONDARY1",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
-       "^D2KRocket"
+       "^D2KRocket",
+       "^Effect_Watersplash_Huge_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy",
@@ -1329,7 +1333,8 @@
       "slot": "Armament@SECONDARY2",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
-       "^D2KRocket"
+       "^D2KRocket",
+       "^Effect_Watersplash_Huge_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy",
@@ -1601,16 +1606,16 @@
        },
        {
         "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "1",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "400",
-        "tag": "HeavyBombPercentage",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -1646,6 +1651,8 @@
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
+       "^MediumFlameWeapon",
+       "^HeavyBomb",
        "^D2KRocket"
       ],
       "warheads": [
@@ -1675,16 +1682,16 @@
        },
        {
         "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "1",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "400",
-        "tag": "HeavyBombPercentage",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -1720,6 +1727,8 @@
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
+       "^MediumFlameWeapon",
+       "^HeavyBomb",
        "^D2KRocket"
       ],
       "warheads": [
@@ -3232,7 +3241,8 @@
       "reloaddelay": "47",
       "slot": "Armament@1",
       "versus_templates": [
-       "^Warhead_Flame_Heavy"
+       "^Warhead_Flame_Heavy",
+       "^Effect_Flame_Medium"
       ],
       "warheads": [
        "^Warhead_Flame_Heavy"
@@ -3273,7 +3283,8 @@
       "reloaddelay": "47",
       "slot": "Armament@2",
       "versus_templates": [
-       "^Warhead_Flame_Heavy"
+       "^Warhead_Flame_Heavy",
+       "^Effect_Flame_Medium"
       ],
       "warheads": [
        "^Warhead_Flame_Heavy"
@@ -3315,7 +3326,8 @@
       "reloaddelay": "47",
       "slot": "Armament@GARRISONED1",
       "versus_templates": [
-       "^Warhead_Flame_Heavy"
+       "^Warhead_Flame_Heavy",
+       "^Effect_Flame_Medium"
       ],
       "warheads": [
        "^Warhead_Flame_Heavy"
@@ -3357,7 +3369,8 @@
       "reloaddelay": "47",
       "slot": "Armament@GARRISONED2",
       "versus_templates": [
-       "^Warhead_Flame_Heavy"
+       "^Warhead_Flame_Heavy",
+       "^Effect_Flame_Medium"
       ],
       "warheads": [
        "^Warhead_Flame_Heavy"
@@ -4045,7 +4058,8 @@
       "slot": "Armament@Flare",
       "versus_templates": [
        "^LaserWeapon",
-       "^Warhead_Flame_Light"
+       "^Warhead_Flame_Light",
+       "^Effect_Flak_Heavy"
       ],
       "warheads": [
        "^Warhead_Flame_Light"
@@ -4144,7 +4158,8 @@
       "slot": "Armament@FlareGARRISONED",
       "versus_templates": [
        "^LaserWeapon",
-       "^Warhead_Flame_Light"
+       "^Warhead_Flame_Light",
+       "^Effect_Flak_Heavy"
       ],
       "warheads": [
        "^Warhead_Flame_Light"
@@ -6546,6 +6561,27 @@
        },
        {
         "damage": "5",
+        "falloff": "111, 33, 11, 3",
+        "spread": "250",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "5",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "5",
+        "falloff": null,
+        "spread": "75",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "5",
         "falloff": null,
         "spread": "100",
         "tag": "LightMissilePercentage",
@@ -6570,13 +6606,6 @@
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "5",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -6609,13 +6638,6 @@
        },
        {
         "damage": "5",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "400",
-        "tag": "HeavyBombPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "5",
         "falloff": null,
         "spread": "225",
         "tag": "HeavyCannonPercentage",
@@ -6626,13 +6648,6 @@
         "falloff": null,
         "spread": "150",
         "tag": "MediumCannonPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "5",
-        "falloff": null,
-        "spread": "75",
-        "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -6645,7 +6660,11 @@
       "requires": "deployed",
       "slot": "Armament@DEPLOYED",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy_Flat"
+       "^Warhead_CannonHE_Heavy_Flat",
+       "^NuclearWarhead",
+       "^LightFlameWeapon",
+       "^HeavyBomb",
+       "^TankDestroyerCannon"
       ],
       "warheads": [],
       "weapon": "SiegeTankSiegeCannon",
@@ -6894,7 +6913,8 @@
       "slot": "Armament@Cannon",
       "versus_templates": [
        "^Warhead_CannonHE_Heavy_Flat",
-       "^RA2HeavyCannon"
+       "^RA2HeavyCannon",
+       "^Effect_Flame_Light"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"

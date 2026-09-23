@@ -389,18 +389,18 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LegacyLaserExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "LegacyLaserExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -411,7 +411,8 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Laser_Heavy",
-       "^LaserWeapon"
+       "^LaserWeapon",
+       "^Effect_Watersplash_Huge_RA2"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -480,7 +481,8 @@
       "reloaddelay": "32",
       "slot": "Armament@ROCKETS",
       "versus_templates": [
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAP_Heavy",
+       "^Effect_CannonAP_Medium"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -608,7 +610,8 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^LaserWeapon",
-       "^RailgunWeapon"
+       "^RailgunWeapon",
+       "^Effect_Watersplash_Huge_RA2"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -677,7 +680,8 @@
       "reloaddelay": "32",
       "slot": "Armament@ROCKETS",
       "versus_templates": [
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAP_Heavy",
+       "^Effect_CannonAP_Medium"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -820,16 +824,16 @@
        },
        {
         "damage": "5",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "5",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -849,7 +853,10 @@
       "slot": "Armament@ROCKETS",
       "versus_templates": [
        "^Warhead_MissileTesla_Heavy",
-       "^TeslaWeapon"
+       "^TeslaWeapon",
+       "^HeavyMissile",
+       "^MediumFlameWeapon",
+       "^Grenade"
       ],
       "warheads": [
        "^Warhead_MissileTesla_Heavy"
@@ -2022,7 +2029,8 @@
        "^Warhead_Laser_Heavy",
        "^Warhead_Laser_ExtraDamage",
        "^LaserWeapon",
-       "^TSLaserEffect"
+       "^TSLaserEffect",
+       "^Effect_Watersplash_Huge_RA2"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -2550,7 +2558,8 @@
       "versus_templates": [
        "^Warhead_MissileHE_Heavy",
        "^CabalMissileMedium",
-       "^CabalMissileEffect"
+       "^CabalMissileEffect",
+       "^Effect_MissileHE_Heavy"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy"
@@ -2622,7 +2631,8 @@
       "versus_templates": [
        "^Warhead_MissileHE_Heavy",
        "^CabalMissileMedium",
-       "^CabalMissileEffect"
+       "^CabalMissileEffect",
+       "^Effect_MissileHE_Heavy"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy"
@@ -2744,7 +2754,10 @@
       "requires": "!cabal_upgrade_neutronnuclearcatalyst",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Plasma_Heavy"
+       "^Warhead_Plasma_Heavy",
+       "^HeavyCannon",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon"
       ],
       "warheads": [
        "^Warhead_Plasma_Heavy"
@@ -2764,20 +2777,6 @@
        {
         "damage": "25",
         "falloff": null,
-        "spread": "50",
-        "tag": "TeslaWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "25",
-        "falloff": null,
-        "spread": "125",
-        "tag": "RailgunWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "25",
-        "falloff": null,
         "spread": "225",
         "tag": "HeavyCannonPercentage",
         "type": "AreaDamagePercentage"
@@ -2791,9 +2790,9 @@
        },
        {
         "damage": "25",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
+        "falloff": null,
+        "spread": "50",
+        "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -2801,6 +2800,20 @@
         "falloff": "111, 88, 44, 22, 11",
         "spread": "111",
         "tag": "MagicWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "25",
+        "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "25",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2813,7 +2826,10 @@
       "slot": "Armament@Upgraded",
       "versus_templates": [
        "^Warhead_Plasma_Heavy_Flat",
+       "^HeavyCannon",
+       "^MediumFlameWeapon",
        "^TeslaWeapon",
+       "^MagicWeapon",
        "^RailgunWeapon"
       ],
       "warheads": [],
@@ -2860,7 +2876,10 @@
       "requires": "!cabal_upgrade_neutronnuclearcatalyst",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_Plasma_Heavy"
+       "^Warhead_Plasma_Heavy",
+       "^HeavyCannon",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon"
       ],
       "warheads": [
        "^Warhead_Plasma_Heavy"
@@ -2881,20 +2900,6 @@
        {
         "damage": "25",
         "falloff": null,
-        "spread": "50",
-        "tag": "TeslaWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "25",
-        "falloff": null,
-        "spread": "125",
-        "tag": "RailgunWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "25",
-        "falloff": null,
         "spread": "225",
         "tag": "HeavyCannonPercentage",
         "type": "AreaDamagePercentage"
@@ -2908,9 +2913,9 @@
        },
        {
         "damage": "25",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
+        "falloff": null,
+        "spread": "50",
+        "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -2918,6 +2923,20 @@
         "falloff": "111, 88, 44, 22, 11",
         "spread": "111",
         "tag": "MagicWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "25",
+        "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "25",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2930,7 +2949,10 @@
       "slot": "Armament@GARRISONEDUpgraded",
       "versus_templates": [
        "^Warhead_Plasma_Heavy_Flat",
+       "^HeavyCannon",
+       "^MediumFlameWeapon",
        "^TeslaWeapon",
+       "^MagicWeapon",
        "^RailgunWeapon"
       ],
       "warheads": [],
@@ -3056,7 +3078,10 @@
       "requires": "!cabal_upgrade_neutronnuclearcatalyst",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Plasma_Heavy"
+       "^Warhead_Plasma_Heavy",
+       "^HeavyCannon",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon"
       ],
       "warheads": [
        "^Warhead_Plasma_Heavy"
@@ -3076,20 +3101,6 @@
        {
         "damage": "25",
         "falloff": null,
-        "spread": "50",
-        "tag": "TeslaWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "25",
-        "falloff": null,
-        "spread": "125",
-        "tag": "RailgunWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "25",
-        "falloff": null,
         "spread": "225",
         "tag": "HeavyCannonPercentage",
         "type": "AreaDamagePercentage"
@@ -3103,9 +3114,9 @@
        },
        {
         "damage": "25",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
+        "falloff": null,
+        "spread": "50",
+        "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -3113,6 +3124,20 @@
         "falloff": "111, 88, 44, 22, 11",
         "spread": "111",
         "tag": "MagicWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "25",
+        "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "25",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -3125,7 +3150,10 @@
       "slot": "Armament@Upgraded",
       "versus_templates": [
        "^Warhead_Plasma_Heavy_Flat",
+       "^HeavyCannon",
+       "^MediumFlameWeapon",
        "^TeslaWeapon",
+       "^MagicWeapon",
        "^RailgunWeapon"
       ],
       "warheads": [],
@@ -3172,7 +3200,10 @@
       "requires": "!cabal_upgrade_neutronnuclearcatalyst",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_Plasma_Heavy"
+       "^Warhead_Plasma_Heavy",
+       "^HeavyCannon",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon"
       ],
       "warheads": [
        "^Warhead_Plasma_Heavy"
@@ -3193,20 +3224,6 @@
        {
         "damage": "25",
         "falloff": null,
-        "spread": "50",
-        "tag": "TeslaWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "25",
-        "falloff": null,
-        "spread": "125",
-        "tag": "RailgunWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "25",
-        "falloff": null,
         "spread": "225",
         "tag": "HeavyCannonPercentage",
         "type": "AreaDamagePercentage"
@@ -3220,9 +3237,9 @@
        },
        {
         "damage": "25",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
+        "falloff": null,
+        "spread": "50",
+        "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -3230,6 +3247,20 @@
         "falloff": "111, 88, 44, 22, 11",
         "spread": "111",
         "tag": "MagicWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "25",
+        "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "25",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -3242,7 +3273,10 @@
       "slot": "Armament@GARRISONEDUpgraded",
       "versus_templates": [
        "^Warhead_Plasma_Heavy_Flat",
+       "^HeavyCannon",
+       "^MediumFlameWeapon",
        "^TeslaWeapon",
+       "^MagicWeapon",
        "^RailgunWeapon"
       ],
       "warheads": [],
@@ -3636,7 +3670,8 @@
       "reloaddelay": "4",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_CannonChem_Light"
+       "^Warhead_CannonChem_Light",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_CannonChem_Light"
@@ -4050,7 +4085,8 @@
        "^Warhead_Laser_Heavy",
        "^Warhead_Laser_ExtraDamage",
        "^LaserWeapon",
-       "^TSLaserEffect"
+       "^TSLaserEffect",
+       "^Effect_Watersplash_Huge_RA2"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -4136,7 +4172,8 @@
        "^Warhead_Laser_Heavy",
        "^Warhead_Laser_ExtraDamage",
        "^LaserWeapon",
-       "^TSLaserEffect"
+       "^TSLaserEffect",
+       "^Effect_Watersplash_Huge_RA2"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -4811,7 +4848,10 @@
       "reloaddelay": "45",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Plasma_Heavy"
+       "^Warhead_Plasma_Heavy",
+       "^HeavyCannon",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon"
       ],
       "warheads": [
        "^Warhead_Plasma_Heavy"
@@ -5748,7 +5788,8 @@
       "requires": "!cabal_upgrade_neutronnuclearcatalyst",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_CannonHE_Heavy",
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -5833,7 +5874,8 @@
       "versus_templates": [
        "^Warhead_CannonHE_Heavy_Flat",
        "^TeslaChargedWeapon",
-       "^RailgunWeapon"
+       "^RailgunWeapon",
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [],
       "weapon": "CabalArtilleryWalkerShellUpgraded",
@@ -6096,7 +6138,8 @@
        "^Warhead_Laser_Heavy_Flat",
        "^TeslaWeapon",
        "^RailgunWeapon",
-       "^LaserWeapon"
+       "^LaserWeapon",
+       "^Effect_Watersplash_Huge_RA2"
       ],
       "warheads": [],
       "weapon": "CabalBeholderLaser",

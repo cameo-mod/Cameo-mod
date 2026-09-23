@@ -1,3 +1,31 @@
+## Devin-DAWN (A4) — W23 follow-up: ^Effect_* inherit retrofit, W6 737 → 692 (2026-09-23)
+
+**Branch:** `devin/dawn/w23` — addresses PR #449 review: the W23 fidelity pins had
+raised W6 694→737 by declaring effect warheads locally; the fix inherits covering
+`^Effect_*` templates instead of pinning.
+
+- 90 weapons re-planned: **63 inherit** a covering `^Effect_*` template
+  (family-name-aware pick; extras cancelled, content diffs emitted as TYPE-LESS
+  overrides — a `Warhead@X:` node with no type token merges over the provider and
+  does not count toward W6), **27 keep-legacy** where no template covers the pin
+  set or a second `^Effect_` edge would breach W4.
+- Whole-plan pipeline: revert block to base text → re-strip the (possibly reduced)
+  drop-set → insert `Inherits: ^Effect_*` + `-K:` cancels for template-only nodes →
+  convergence loop resolves every plan weapon and emits residual corrections until
+  the resolved tree equals base. Converged in 2 iterations.
+- **New trap:** `^Effect_*` templates inherit each other — `^Effect_AlliedTigerCannon`
+  contains `^Effect_CannonHE_Heavy`. Adding the outer edge to `plymouthSticky` made
+  `plymouthStickyDefence` (already `Inherits@3: ^Effect_CannonHE_Heavy`) reach the
+  same parent twice → `audit_duplicate_inherits` BLOCKING (boot crash class).
+  Re-picked `^Effect_Apoc_Chem_RA2` (zero `^Effect_` ancestry, same Chemical family).
+- 161 dead `-Warhead@*/-field` cancels removed (providers stripped) — the same
+  orphan-cancel class the engine throws on; `audit_orphan_cancels` = 0.
+- Result: all plan weapons + children resolve **IDENTICAL** to base; corpus diff
+  shows only the 5 known dead-field drops (missile-era fields on `Bullet` nodes —
+  unreadable per rule 8b). W6 **692** < baseline 694; ratchet lowered to 692 with
+  provenance. dup_inherits 1952 = baseline, 0 blocking. Orphans 0, empty warheads 0.
+- W2/W7 FAILs are pre-existing stale ratchets, identical on master.
+
 ## Devin-DAWN (A4) — W23 legacy-template retrofit: SC/Terran + TD/GDI done, branch re-cut onto post-#438 master (2026-09-23)
 
 **Branch:** `devin/dawn/w23` — re-cut onto `origin/master` `8330a1834` after #438's

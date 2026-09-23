@@ -587,7 +587,11 @@
       "reloaddelay": "50",
       "slot": "Armament@BOMBS",
       "versus_templates": [
-       "^Warhead_Nuclear_Super"
+       "^Warhead_Nuclear_Super",
+       "^HeavyBomb",
+       "^NuclearWarhead",
+       "^ShrapnelWeapon",
+       "^MediumFlameWeapon"
       ],
       "warheads": [
        "^Warhead_Nuclear_Super"
@@ -732,7 +736,8 @@
       "requires": "!td_gdi_upgrade_advancedmissiletargeting",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAP_Heavy",
+       "^Effect_CannonAP_Medium"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -1061,7 +1066,8 @@
       "requires": "!td_gdi_upgrade_advancedmissiletargeting",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAP_Heavy",
+       "^Effect_Watersplash_Huge_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -1663,7 +1669,8 @@
       "reloaddelay": "11",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Flak_Heavy"
+       "^Warhead_Flak_Heavy",
+       "^Effect_Clsn_Small_RA2"
       ],
       "warheads": [
        "^Warhead_Flak_Heavy"
@@ -2485,6 +2492,20 @@
        },
        {
         "damage": "4",
+        "falloff": null,
+        "spread": "150",
+        "tag": "MediumCannonPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4",
+        "falloff": null,
+        "spread": "300",
+        "tag": "HeavyMissilePercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
@@ -2500,22 +2521,8 @@
        {
         "damage": "4",
         "falloff": null,
-        "spread": "150",
-        "tag": "MediumCannonPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4",
-        "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4",
-        "falloff": null,
-        "spread": "300",
-        "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2528,7 +2535,10 @@
       "versus_templates": [
        "^Warhead_Tesla_Super",
        "^TeslaChargedWeapon",
-       "^TeslaWeapon"
+       "^TeslaWeapon",
+       "^MediumFlameWeapon",
+       "^MediumCannon",
+       "^HeavyMissile"
       ],
       "warheads": [
        "^Warhead_Tesla_Super"
@@ -2569,6 +2579,20 @@
        },
        {
         "damage": "4",
+        "falloff": null,
+        "spread": "150",
+        "tag": "MediumCannonPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4",
+        "falloff": null,
+        "spread": "300",
+        "tag": "HeavyMissilePercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
@@ -2584,22 +2608,8 @@
        {
         "damage": "4",
         "falloff": null,
-        "spread": "150",
-        "tag": "MediumCannonPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4",
-        "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4",
-        "falloff": null,
-        "spread": "300",
-        "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2612,7 +2622,10 @@
       "versus_templates": [
        "^Warhead_Tesla_Super",
        "^TeslaChargedWeapon",
-       "^TeslaWeapon"
+       "^TeslaWeapon",
+       "^MediumFlameWeapon",
+       "^MediumCannon",
+       "^HeavyMissile"
       ],
       "warheads": [
        "^Warhead_Tesla_Super"
@@ -2894,7 +2907,8 @@
       "slot": "Armament@Grenade",
       "versus_templates": [
        "^Warhead_Concussion_Medium",
-       "^EMPDamage"
+       "^EMPDamage",
+       "^Effect_Concussion_Light"
       ],
       "warheads": [
        "^Warhead_Concussion_Medium"
@@ -3047,7 +3061,8 @@
       "slot": "Armament@GrenadeGARRISONED",
       "versus_templates": [
        "^Warhead_Concussion_Medium",
-       "^EMPDamage"
+       "^EMPDamage",
+       "^Effect_Concussion_Light"
       ],
       "warheads": [
        "^Warhead_Concussion_Medium"
@@ -3234,7 +3249,8 @@
       "reloaddelay": "75",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Heavy"
+       "^Warhead_Bullet_Heavy",
+       "^Effect_CannonHE_Heavy_D2K_DevBullet"
       ],
       "warheads": [
        "^Warhead_Bullet_Heavy"
@@ -3295,7 +3311,8 @@
       "reloaddelay": "75",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_Bullet_Heavy"
+       "^Warhead_Bullet_Heavy",
+       "^Effect_CannonHE_Heavy_D2K_DevBullet"
       ],
       "warheads": [
        "^Warhead_Bullet_Heavy"
@@ -4095,7 +4112,8 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
-       "^RailgunWeapon"
+       "^RailgunWeapon",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -4158,7 +4176,8 @@
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
-       "^RailgunWeapon"
+       "^RailgunWeapon",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -5347,13 +5366,6 @@
        },
        {
         "damage": "7",
-        "falloff": null,
-        "spread": "225",
-        "tag": "HeavyCannonPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "7",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
@@ -5372,6 +5384,13 @@
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "7",
+        "falloff": null,
+        "spread": "225",
+        "tag": "HeavyCannonPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -5382,7 +5401,11 @@
       "reloaddelay": "140",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Concussion_Heavy"
+       "^Warhead_Concussion_Heavy",
+       "^MediumCannon",
+       "^MediumFlameWeapon",
+       "^ShrapnelWeapon",
+       "^HeavyBomb"
       ],
       "warheads": [
        "^Warhead_Concussion_Heavy"
@@ -5933,7 +5956,8 @@
       "reloaddelay": "11",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat"
+       "^Warhead_Bullet_Medium_Flat",
+       "^Effect_CannonHE_Heavy_D2K_DevBullet"
       ],
       "warheads": [],
       "weapon": "td_gdi_boxer_boxercannonag",
@@ -6297,7 +6321,8 @@
       "requires": "undeployed",
       "slot": "Armament@mobile",
       "versus_templates": [
-       "^Warhead_Bullet_Medium"
+       "^Warhead_Bullet_Medium",
+       "^Effect_CannonHE_Heavy_D2K_DevBullet"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"

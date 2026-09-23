@@ -264,13 +264,6 @@
        },
        {
         "damage": "15",
-        "falloff": "100, 75, 50, 25",
-        "spread": "6000",
-        "tag": "TeslaChargedWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "15",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
@@ -282,6 +275,13 @@
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "15",
+        "falloff": "100, 75, 50, 25",
+        "spread": "6000",
+        "tag": "TeslaChargedWeaponPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
@@ -292,6 +292,8 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Demolition_Heavy_Flat",
+       "^MediumFlameWeapon",
+       "^HeavyBomb",
        "^TeslaChargedWeapon"
       ],
       "warheads": [],
@@ -447,7 +449,8 @@
       "versus_templates": [
        "^Warhead_Laser_Medium",
        "^TeslaWeapon",
-       "^RailgunWeapon"
+       "^RailgunWeapon",
+       "^Effect_Laser_Heavy"
       ],
       "warheads": [
        "^Warhead_Laser_Medium"
@@ -2042,7 +2045,8 @@
       "requires": "!ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Bullet_Medium"
+       "^Warhead_Bullet_Medium",
+       "^Effect_CannonHE_Heavy_D2K_DevBullet"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -2195,7 +2199,8 @@
       "requires": "!ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_Bullet_Medium"
+       "^Warhead_Bullet_Medium",
+       "^Effect_CannonHE_Heavy_D2K_DevBullet"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -3838,16 +3843,16 @@
        },
        {
         "damage": "7",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "7",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "400",
-        "tag": "HeavyBombPercentage",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -3869,6 +3874,8 @@
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
+       "^MediumFlameWeapon",
+       "^HeavyBomb",
        "^D2K_Cannon"
       ],
       "warheads": [
@@ -3941,7 +3948,8 @@
       "requires": "!ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@Guns",
       "versus_templates": [
-       "^Warhead_Bullet_Medium"
+       "^Warhead_Bullet_Medium",
+       "^Effect_CannonHE_Heavy_D2K_DevBullet"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -4823,13 +4831,6 @@
        },
        {
         "damage": "6",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
@@ -4848,6 +4849,13 @@
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "6",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
@@ -4858,6 +4866,9 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_CannonHE_Heavy",
+       "^MediumFlameWeapon",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
        "^Projectile_Grenade_Light_D2K_155mm"
       ],
       "warheads": [

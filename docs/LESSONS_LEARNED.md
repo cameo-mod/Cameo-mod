@@ -88,6 +88,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 **Process, tooling and platform**
 
 - [⛔ Folding a parent orphans its children's `-Warhead@` cancels (2026-09-22, DAWN lane-3)](#-folding-a-parent-orphans-its-childrens--warhead-cancels-2026-09-22-dawn-lane-3)
+- [^Effect_* templates inherit each other — covering pick can dup-crash a DESCENDANT (2026-09-23)](#effect_-templates-inherit-each-other--a-covering-pick-can-dup-crash-a-descendant-2026-09-23-w23-follow-up)
 - [`^Warhead_` templates carry WEAPON-LEVEL fields, so a dead warhead node is not a dead inherit](#warhead-templates-carry-weapon-level-fields-so-a-dead-warhead-node-is-not-a-dead-inherit)
 - [A rename moves a key, so a SORTED dump reports every touched node as changed](#a-rename-moves-a-key-so-a-sorted-dump-reports-every-touched-node-as-changed)
 - [`gh` resolves the repo from the WRONG remote here, and reports the PR as nonexistent](#gh-resolves-the-repo-from-the-wrong-remote-here-and-reports-the-pr-as-nonexistent)
@@ -183,6 +184,26 @@ parent's node (`OrniMissile` lost `Warhead@1Dam` -> parent `PhoenixRocket`'s
 `1Dam` @7500 came back). Removing a channel a parent also defines needs
 `-Warhead@X:`, not deletion; removing a purely inline def needs deletion, not a
 cancel. `review_resolve_diff.py` sees both classes of wrong.
+
+## `^Effect_*` templates inherit each other — a covering pick can dup-crash a DESCENDANT (2026-09-23, W23 follow-up)
+
+`^Effect_*` is not a flat list: e.g. `^Effect_AlliedTigerCannon` itself inherits
+`^Effect_CannonHE_Heavy`. When a W23-style pass adds `Inherits: ^Effect_X` to a
+weapon, every DESCENDANT that already inherits an `^Effect_` ancestor of X now
+reaches that ancestor by two paths — `audit_duplicate_inherits` reports BLOCKING
+(`Parent type X was already inherited`, a boot crash). Real case:
+`plymouthSticky` + `^Effect_AlliedTigerCannon` put `^Effect_CannonHE_Heavy` on
+`plymouthStickyDefence` twice (its own `Inherits@3` + the new chain through
+`plymouthStickyTiger`). Fixes: pick a covering template with **no `^Effect_`
+ancestry that collides with any descendant's effect edge** (the swap to
+`^Effect_Apoc_Chem_RA2` — zero ancestors — cleared it), or keep the legacy edge.
+Run `audit_duplicate_inherits.py` after ANY template-inherit retrofit, not just
+the orphan audits — resolve-diff stays green on a tree the engine refuses.
+
+Related mechanic worth remembering: a local `Warhead@X:` node with **no type
+token** merges over the inherited node as a field-level override and does NOT
+count as a locally-declared effect warhead (W6) — that is the correct way to pin
+field drift on a template-provided effect node.
 
 ---
 

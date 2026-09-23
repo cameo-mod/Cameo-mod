@@ -230,6 +230,13 @@
        },
        {
         "damage": "4",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
@@ -240,13 +247,6 @@
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "400",
-        "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -263,7 +263,8 @@
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
-       "^RailgunWeapon"
+       "^RailgunWeapon",
+       "^HeavyBomb"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -2532,7 +2533,8 @@
       "versus_templates": [
        "^Warhead_Flak_Medium",
        "^Warhead_Railgun_ExtraDamage",
-       "^RailgunWeapon"
+       "^RailgunWeapon",
+       "^Effect_Clsn_Small_RA2"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -2591,7 +2593,8 @@
       "versus_templates": [
        "^Warhead_Flak_Medium",
        "^Warhead_Railgun_ExtraDamage",
-       "^RailgunWeapon"
+       "^RailgunWeapon",
+       "^Effect_Clsn_Small_RA2"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -4074,7 +4077,8 @@
       "reloaddelay": "60",
       "slot": "Armament@QUINTA",
       "versus_templates": [
-       "^Warhead_MissileAP_Medium"
+       "^Warhead_MissileAP_Medium",
+       "^Effect_CannonAP_Medium"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -4122,7 +4126,8 @@
       "reloaddelay": "60",
       "slot": "Armament@SEXTA",
       "versus_templates": [
-       "^Warhead_MissileAP_Medium"
+       "^Warhead_MissileAP_Medium",
+       "^Effect_CannonAP_Medium"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -4236,7 +4241,8 @@
       "reloaddelay": "60",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_MissileAP_Medium"
+       "^Warhead_MissileAP_Medium",
+       "^Effect_CannonAP_Medium"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -5274,7 +5280,8 @@
       "reloaddelay": "60",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_MissileAP_Medium"
+       "^Warhead_MissileAP_Medium",
+       "^Effect_CannonAP_Medium"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
