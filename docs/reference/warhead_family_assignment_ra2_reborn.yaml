@@ -7,7 +7,7 @@
 # HOW THIS PASS WAS MADE, so it can be audited rather than trusted:
 #   * Group rows carry a decision per measured (delivery, element) SIGNATURE, with the reasoning
 #     in `why`. A signature is what the measurement actually distinguishes.
-#   * `overrides:` holds the 61 weapons looked at individually. An override BEATS its
+#   * `overrides:` holds the 60 weapons looked at individually. An override BEATS its
 #     group, and it is keyed by WEAPON so it survives re-clustering — which matters: the first
 #     pass keyed these by GROUP and lost one within a single regrouping (R50).
 #   * Everything is `status: proposed`. NOTHING here has been reviewed by the maintainer.
@@ -696,28 +696,6 @@ groups:
     weapons:
     - HGrenAP
     - TESLAAP
-  BulletSonic_Inf:
-    family: Sonic
-    status: proposed
-    why: a resonance weapon
-    band: infantry
-    delivery: Bullet
-    element: Sonic
-    uses: 2
-    members: 1
-    factor: 1.3692551541671827
-    profile:
-    - 200.0
-    - 174.9
-    - 145.8
-    - 145.8
-    - 131.2
-    - 116.6
-    - 145.8
-    - 116.6
-    - 87.5
-    weapons:
-    - TumblerWH
   HitscanFire_Inf_2:
     family: Flame
     status: proposed
@@ -1056,6 +1034,28 @@ groups:
     weapons:
     - RadBeamWarhead
     - RadEruptionWarhead
+  Sonic_Inf:
+    family: Sonic
+    status: proposed
+    why: a sonic wave weapon - `IsSonic=yes` (R60)
+    band: infantry
+    delivery: Sonic
+    element: Sonic
+    uses: 2
+    members: 1
+    factor: 1.3692551541671827
+    profile:
+    - 200.0
+    - 174.9
+    - 145.8
+    - 145.8
+    - 131.2
+    - 116.6
+    - 145.8
+    - 116.6
+    - 87.5
+    weapons:
+    - TumblerWH
   Tesla_Inf:
     family: Tesla
     status: proposed
@@ -1210,28 +1210,6 @@ groups:
     - 72.9
     weapons:
     - BiosWH
-  BulletSonic_Veh:
-    family: Sonic
-    status: proposed
-    why: a resonance weapon
-    band: vehicle
-    delivery: Bullet
-    element: Sonic
-    uses: 1
-    members: 1
-    factor: 1.2384016726074862
-    profile:
-    - 145.8
-    - 145.8
-    - 145.8
-    - 145.8
-    - 116.6
-    - 116.6
-    - 145.8
-    - 87.5
-    - 87.5
-    weapons:
-    - SonicWarhead
   Bullet_Veh:
     family: Bullet
     status: proposed
@@ -1784,6 +1762,28 @@ groups:
     - 87.5
     weapons:
     - APSplash
+  Sonic_Veh:
+    family: Sonic
+    status: proposed
+    why: a sonic wave weapon - `IsSonic=yes` (R60)
+    band: vehicle
+    delivery: Sonic
+    element: Sonic
+    uses: 1
+    members: 1
+    factor: 1.2384016726074862
+    profile:
+    - 145.8
+    - 145.8
+    - 145.8
+    - 145.8
+    - 116.6
+    - 116.6
+    - 145.8
+    - 87.5
+    - 87.5
+    weapons:
+    - SonicWarhead
   Tesla_Def_2:
     family: Tesla
     status: proposed
@@ -1989,9 +1989,6 @@ overrides:
   Snapshot:
     family: Sniper
     why: '`Snapshot` - infantry only, nothing else reachable [read as the group `Hitscan_Inf_2`]'
-  SonicWarhead:
-    family: Sonic
-    why: '`SonicWarhead` - named for what it is [read as the group `BulletSonic_Veh`]'
   Special:
     family: '(drop: not a damage warhead)'
     why: '`EMPuls` (R50), `LocomotorBeam` and `Special` - 14 uses of flat 146 [read as the group `Hitscan_Veh`]'
