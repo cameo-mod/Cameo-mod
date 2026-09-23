@@ -1305,8 +1305,9 @@ overrides:
     family: BulletFire
     why: the Heavy Raider's incendiary .50 cal (`InfDeath=4`, burst 4) - anti-personnel
   HE:
-    family: MissileHE
-    why: the drone and cluster launchers - their sub-munitions carry this explosive warhead
+    family: Cluster
+    why: 'the drone and cluster launchers (`DroneLauncherHE`, Ekranoplan drones) - their sub-munitions:
+      the maintainer-adopted `Cluster` family (§12.0k item 10); was MissileHE (R72)'
   HHA:
     family: Bullet
     why: the Apache's heavy machine gun

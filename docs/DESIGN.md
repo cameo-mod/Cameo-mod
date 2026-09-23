@@ -3924,6 +3924,15 @@ these mods has, which were forced into an unrelated family or dropped:
   mutation railgun. Infantry-only; the kill
   converts the victim. (Currently `BulletChem` / `Sniper`.)
 
+**10. Two more from the research (maintainer 2026-09-23, fourth round).**
+- **`Temporal`** — chrono weapons that erase or warp: Mental Omega's **Siren Frigate** (chrono
+  blaster) and **Charon Tank** (neutron cannon, chrono warp), RA2 Reborn's **Chrono Commander**
+  (a 9,999-damage eraser). Flat, ignores armour; pairs with the chrono-erase meter Cameo already
+  carries (Combined Arms' `WarpDamage`). Previously filed as `Quantum`.
+- **`Cluster`** — sub-munition weapons: DTA's drone and cluster launchers (`DroneLauncherHE`, the
+  Ekranoplan's drones). Many small hits over a wide area. Incendiary bomblets (DTA's A-10 and Badger
+  napalm) keep their element family, `BulletFire`.
+
 **Order of work:** these are balance changes, so they follow the reference averaging (R69: which
 waits for the maintainer's review) and land in the §12.0j regeneration. Re-pointing weapons touches
 faction weapon files, so each lane's files move through that lane's owner.
