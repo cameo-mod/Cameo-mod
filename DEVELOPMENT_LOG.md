@@ -1,3 +1,22 @@
+## Devin-DAWN (A4) — W7 pack-side: SonicDebuff → Resonance meter chain (2026-09-23)
+
+**Branch:** `devin/dawn/l4-fx`. Executes Ember's
+`REQUEST_2026-09-23_ember_to_dawn_w7_packs.md` — pack-side half of her W7
+rename (`GrantExternalCondition SonicDebuff` → `ApplyPhysicalState Resonance`).
+
+- `ContentPacks/TiberianSun/GDI/yaml/weapons.yaml`: 7 `_Debuff` nodes
+  converted (`CannonSonic_Heavy`, `MissileSonic_Medium/Heavy`,
+  `BlastSonic_Heavy`, `BulletSonic_Medium` ×3).
+- `ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml`: `Warhead@2Con` on
+  `td_gdi_mammothtankmkiii` beam weapon converted.
+- Recipe per Ember: type → `ApplyPhysicalState`, `PhysicalStateName:
+  Resonance`, `Amount: 5000`, `Range` kept per node, `Condition`/`Duration`
+  dropped, `ValidRelationships`/`ValidTargets` untouched.
+- Verified against `engine/OpenRA.Mods.Common/Warheads/
+  ApplyPhysicalStateWarhead.cs` (type + `PhysicalStateName`/`Amount`/`Range`
+  fields exist). `SonicDebuff` refs in both packs: 0. Empty warheads 0,
+  orphan cancels 0, boot-gate PASS (menu marker perf.log:519).
+
 ## Devin-DAWN (A4) — L4 FX rulings executed: canonical D2k sounds + audit exemptions (2026-09-23)
 
 **Branch:** `devin/dawn/l4-fx` rebased onto master `4fcc9f941` (post-merge-wave).
