@@ -15,6 +15,11 @@
 		BasePalette: ra2consunit
 		BaseName: playerra2cons
 		RemapIndex: 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
+	ColorPickerPalette@colorpickerra2cons:
+		Name: colorpickerra2cons
+		BasePalette: ra2consunit
+		RemapIndex: 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
+		AllowModifiers: false
 	PaletteFromFile@ra2future1:
 		Name: ra2future1
 		Filename: eapal1tem.pal
@@ -31,6 +36,11 @@
 		BasePalette: ra2future2
 		BaseName: playerra2future2
 		RemapIndex: 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
+	ColorPickerPalette@colorpickerra2future2:
+		Name: colorpickerra2future2
+		BasePalette: ra2future2
+		RemapIndex: 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
+		AllowModifiers: false
 
 ##############################################
 #   Red Alert 2 Asian Structures

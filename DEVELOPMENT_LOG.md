@@ -18,6 +18,29 @@
   flags; find_empty_warhead=0; duplicate_inherits 1956 = master; ledgers
   re-extracted (34 files). Boot-gate pending.
 
+## Devin-Ember — Colour-picker preview for every faction (2026-09-22, branch `devin/ember/colorpicker-preview`)
+
+Maintainer order 2026-09-07; overflow item claimed per Claude's lane orders (§4 first-finisher).
+
+- Two Cameo shadows, zero engine changes:
+  `OpenRA.Mods.Cameo/Traits/Render/RenderSprites.cs` (RenderSpritesInfo +
+  ColorPickerPreviewInit marker via IActorPreviewInitInfo; ColorPicker previews resolve
+  the LIVE picker palette for the actor's art family) and
+  `OpenRA.Mods.Cameo/Traits/World/ColorPickerManager.cs` (ColorPickerManagerInfo deriving
+  faction -> StartingUnits BaseActor -> Transforms.IntoActor -> conyard;
+  `public new event OnColorPickerColorUpdate` because the base members are explicit
+  interface impls).
+- Yaml: `DeriveFactionPreviewActors: true` + `PreviewActor` repointed to the real
+  `ra1_soviets_mammothtank` (Random fallback kept); deleted the 4 dead `.colorpicker`
+  clone actors in misc.yaml; added 3 missing picker palettes (`colorpickerplayer`,
+  `colorpickerra2cons`, `colorpickerra2future2`) copying their player palettes' RemapIndex.
+- Resolver probe: all 31 selectable factions derive a conyard with a live picker
+  palette; 10 `Random*` meta-factions fall back to PreviewActor as intended.
+- Build PASS (0 err), boot-gate PASS (fresh perf.log, menu ~28.5s, no new exceptions).
+- Pitfalls hit + documented in LESSONS_LEARNED: `Traits.World` namespace collides with
+  `OpenRA.World` for every `Traits.*` file (use flat `OpenRA.Mods.Cameo.Traits`);
+  explicit-interface members need the interface re-declared on the shadow.
+
 ## Devin-DAWN (A4) — D2k files closure: 522 attributed assets out of bits/d2k (2026-09-22, PR #427)
 
 **Branch:** `devin/dawn/d2k-files-closure`, stacked on `d2k-audio-closure` (#420).

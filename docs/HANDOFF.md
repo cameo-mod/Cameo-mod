@@ -2010,6 +2010,10 @@ weapons are the acceptance test.
 
 ### 2. Colour-picker preview for every faction — [`design/COLORPICKER_PREVIEW.md`](design/COLORPICKER_PREVIEW.md)
 
+**BUILT 2026-09-22 (Ember, `devin/ember/colorpicker-preview`)** — two Cameo shadows
+(`RenderSpritesInfo` + `ColorPickerManagerInfo`), data-derived faction→conyard lookup,
+three new picker palettes, four dead clones deleted. Details in the spec doc.
+
 ⚠ **The believed state was wrong.** TD/RA/Japan were not "done": `fact.colorpicker`,
 `rafact.colorpicker` and `rafactj.colorpicker` exist but are **dead — nothing references
 them**, there is **no `FactionPreviewActors` block anywhere**, and every faction currently
