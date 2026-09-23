@@ -1616,22 +1616,16 @@ RA2Robotmm:
 	Projectile: Railgun
 		BeamColor: 00EEFF88
 		Railgun: 96
-	Warhead@Tesla_Heavy:
-		InvalidTargets: Air
-		ValidTargets: Ground, Water
-		Damage: 8000
+	-Warhead@Tesla_Heavy:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 4000
-	Warhead@Laser_Heavy:
-		InvalidTargets: Air
-		ValidTargets: Ground, Water
-		Damage: 8000
+	-Warhead@Laser_Heavy:
 	Warhead@Railgun_Heavy: AreaDamage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
-		Damage: 8000
+		Damage: 24000
 	Warhead@Laser_Heavy_ExtraDamage:
 		InvalidTargets: Air
 	Warhead@EMPUnit:
@@ -1656,11 +1650,7 @@ RA2Robotmm_elite:
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water
 
-	Warhead@Tesla_Heavy:
-		InvalidTargets: Air
 	Warhead@Tesla_Heavy_ExtraDamage:
-		InvalidTargets: Air
-	Warhead@Laser_Heavy:
 		InvalidTargets: Air
 	Warhead@Laser_Heavy_ExtraDamage:
 		InvalidTargets: Air
@@ -1672,9 +1662,6 @@ RA2Robotmm_elite:
 		InvalidTargets: Air
 RA2RobotmmScatter_elite:
 	Inherits: RA2Robotmm_elite
-	Warhead@Tesla_Heavy:
-		InvalidTargets: Air
-		PercentageScale: 5000
 	Range: 2260
 	-Report:
 		Color: 00EEFF88
@@ -1683,12 +1670,9 @@ RA2RobotmmScatter_elite:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		InvalidTargets: Air
 		Damage: 2000
-	Warhead@Laser_Heavy:
-		InvalidTargets: Air
-		Damage: 4000
 	Warhead@Railgun_Heavy:
 		InvalidTargets: Air
-		Damage: 4000
+		Damage: 16000
 	-Warhead@Scatter:
 	Warhead@Effect: CreateEffect
 		Explosions: blue_med_frag

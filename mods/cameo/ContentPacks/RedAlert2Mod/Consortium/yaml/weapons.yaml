@@ -170,18 +170,14 @@ ConsortiumMissileSystem:
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air
 		Damage: 3
-	Warhead@Flak_Medium:
-		ValidTargets: Air
-		Damage: 6000
-	Warhead@MissileAP_Medium:
-		ValidTargets: Air
-		Damage: 6000
+	-Warhead@Flak_Medium:
+	-Warhead@MissileAP_Medium:
 	-Warhead@ArrowWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
 	Warhead@MissileAA_Medium_Flat:
 		ValidTargets: Air
-		Damage: 15000
+		Damage: 24000
 		PercentageScale: 0
 	Warhead@EMPUnit:
 		ValidTargets: Air
@@ -200,12 +196,6 @@ ConsortiumMissileSystem_EMP:
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Flak_Medium:
-		ValidTargets: Air
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MissileAP_Medium:
-		ValidTargets: Air
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidTargets: Air
 		Damage: 12000
@@ -215,7 +205,7 @@ ConsortiumMissileSystem_EMP:
 	-Warhead@TeslaWeapon:
 	Warhead@MissileQuantum_Medium:
 		ValidTargets: Air
-		Damage: 34000
+		Damage: 46000
 		PercentageScale: 0
 
 	Projectile: Missile
@@ -2169,7 +2159,7 @@ SteelAirTurret_EMP:
 	Inherits@2: SteelAirTurret
 	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 16000
+		Damage: 49600
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -2197,10 +2187,7 @@ SteelAirTurret_EMP:
 	-Warhead@LaserWeapon:
 	-Warhead@Laser_Heavy_Flat:
 	-Warhead@RailgunWeapon:
-	Warhead@Quantum_Heavy_Flat:
-		ValidTargets: Ground, Water, Air
-		Damage: 33600
-		PercentageScale: 0
+	-Warhead@Quantum_Heavy_Flat:
 
 SteelAirTurret_elite:
 	Inherits: SteelAirTurret_EMP
@@ -2209,8 +2196,7 @@ SteelAirTurret_elite:
 		BeamColor: 4488FFBB
 		BeamWidth: 128
 		Duration: 24
-	Warhead@Tesla_Heavy:
-		Damage: 24000
+	-Warhead@Tesla_Heavy:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 12000
@@ -2219,7 +2205,7 @@ SteelAirTurret_elite:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 12
 	Warhead@RailgunWeapon: SpreadDamage
-		Damage: 24000
+		Damage: 73600
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		Damage: 12
 	Warhead@EMPUnit: AffectsIntegrity
@@ -2234,16 +2220,9 @@ SteelAirTurret_elite:
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
 	-Warhead@LaserWeapon:
-	-Warhead@RailgunWeapon:
-	Warhead@Quantum_Heavy_Flat:
-		ValidTargets: Ground, Water, Air
-		Damage: 49600
-		PercentageScale: 0
 
 SteelAirTurretEScatter:
 	Inherits: SteelAirTurret_elite
-	Warhead@Tesla_Heavy:
-		PercentageScale: 1667
 	Range: 4500
 	-Report:
 	Projectile: LaserZap
@@ -2255,7 +2234,7 @@ SteelAirTurretEScatter:
 		DamageTypes: Tesla
 		Damage: 2000
 	Warhead@LaserWeapon: SpreadDamage
-		Damage: 4000
+		Damage: 12000
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@RailgunWeapon: SpreadDamage
@@ -2270,12 +2249,7 @@ SteelAirTurretEScatter:
 		ImpactSounds: xplos.aud
 		ImpactActors: false
 		ValidTargets: Ground, Ship
-	-Warhead@LaserWeapon:
 	-Warhead@RailgunWeapon:
-	Warhead@Quantum_Heavy_Flat:
-		ValidTargets: Ground, Water, Air
-		Damage: 9600
-		PercentageScale: 0
 
 SteelFortressWeapons:
 	Inherits: ^SteelMediumCannon
@@ -2460,7 +2434,7 @@ SteelInspectorIonCannonDamage:
 		ValidTargets: Ground, Water
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
 		Spread: 300
-		Damage: 200000
+		Damage: 250000
 		Delay: 0
 		AffectsParent: False
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
@@ -2479,14 +2453,6 @@ SteelInspectorIonCannonDamage:
 		Damage: 50000
 		Delay: 5
 		AffectsParent: False
-	Warhead@IonCannon: SpreadDamage
-		ValidTargets: Ground, Water
-		Range: 0, 600, 1200, 1800, 2400, 3000
-		Falloff: 1000, 800, 600, 400, 200, 0
-		Damage: 50000
-		Delay: 6
-		AffectsParent: False
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@IonCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 4000
@@ -2510,6 +2476,7 @@ SteelInspectorIonCannonDamage:
 		ValidTargets: Ground, Water, Air
 		ImpactActors: false
 		Volume: 5
+	-Warhead@Tesla_Heavy:
 
 SteelHoverMissile:
 	Inherits@2: ^SteelLightMissile

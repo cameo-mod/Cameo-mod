@@ -1318,11 +1318,13 @@ Lunar_GreenTigerCannon:
 	Inherits@Cannon: LunarTigerCannon
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
 	Warhead@Tesla_Heavy:
-		Damage: 4000
+		Damage: 20000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 2000
 	Report: laser_cannon3_4.wav
+
+	-Warhead@CannonHE_Medium:
 
 Lunar_GreenTigerCannon_elite:
 	Inherits@wh: ^Warhead_Tesla_Heavy
@@ -1331,11 +1333,13 @@ Lunar_GreenTigerCannon_elite:
 	Inherits@Cannon: LunarTigerCannon_elite
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
 	Warhead@Tesla_Heavy:
-		Damage: 4000
+		Damage: 20000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 2000
 	Report: laser_cannon3_4.wav
+
+	-Warhead@CannonHE_Medium:
 
 Lunar_GreenJadgDestroyer:
 	Inherits@finalmain: ^Warhead_Tesla_Heavy_Flat
@@ -1610,11 +1614,13 @@ Lunar_GreenGrilleArty:
 	Inherits@Cannon: NaxGrilleArty
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
 	Warhead@Tesla_Heavy:
-		Damage: 16000
+		Damage: 64000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 8000
 	Report: laser_cannon3_2.wav
+
+	-Warhead@CannonHE_Heavy:
 
 Lunar_GreenGrilleArty_elite:
 	Inherits@wh: ^Warhead_Tesla_Heavy
@@ -1623,11 +1629,13 @@ Lunar_GreenGrilleArty_elite:
 	Inherits@Cannon: NaxGrilleArty_elite
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
 	Warhead@Tesla_Heavy:
-		Damage: 16000
+		Damage: 64000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 8000
 	Report: laser_cannon3_2.wav
+
+	-Warhead@CannonHE_Heavy:
 
 Lunar_GreenSturmArty:
 	Inherits@wh: ^Warhead_Tesla_Heavy
@@ -1635,6 +1643,9 @@ Lunar_GreenSturmArty:
 	Inherits@fx: ^Effect_Tesla_Heavy
 	Inherits@Cannon: NaxSturmArty
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
+	-Warhead@Demolition_Heavy:
+	Warhead@Tesla_Heavy:
+		Damage: 82000
 	Report: laser_cannon3_4.wav
 schwarzermond_lunarsoldier_rifle_yellow:
 	Inherits: schwarzermond_lunarsoldier_rifle
