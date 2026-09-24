@@ -1,7 +1,7 @@
 atreides_ornithopter:
 	Inherits: ^RANeutralPlane
 	Inherits@reload: ^RearmableAircraft
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@AntiBuil: ^PrioritizeBuilding
@@ -83,7 +83,7 @@ atreides_ornithopter_husk:
 atreides_airdrone:
 	Inherits: ^RANeutralPlane
 	Inherits@reload: ^RearmableAircraft
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender

@@ -93,7 +93,7 @@ corrino_combattank:
 corrino_buggy:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^MainBattleTankTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -150,7 +150,7 @@ corrino_buggy:
 corrino_bmp:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^MainBattleTankTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -206,7 +206,7 @@ corrino_bmp:
 
 corrino_apc:
 	Inherits: ^D2KTank
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@CARGO: ^UnarmedCargoVehicle
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -248,7 +248,7 @@ corrino_apc:
 corrino_missiletank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^ArtilleryTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@AntiVeh: ^PrioritizeVehicle
@@ -295,7 +295,7 @@ corrino_missiletank:
 corrino_siegetank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^ArtilleryTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@AntiInf: ^PrioritizeInfantry

@@ -107,7 +107,7 @@ atreides_spiceharvester:
 atreides_sonictank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^MainBattleTankTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -173,7 +173,7 @@ atreides_sonic_tank_husk:
 atreides_missiletank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^ArtilleryTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@AntiVeh: ^PrioritizeVehicle
@@ -222,7 +222,7 @@ atreides_missiletank:
 atreides_siegetank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^ArtilleryTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@AntiInf: ^PrioritizeInfantry
@@ -289,7 +289,7 @@ atreides_siege_tank_husk:
 atreides_sandbike:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^ScoutVehicleTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -333,7 +333,7 @@ atreides_sandbike:
 atreides_apc:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^UnarmedCargoVehicle
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -385,7 +385,7 @@ atreides_apc:
 atreides_repairtank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^SupportVehicleTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AutoRepair: ^PrioritizeRepair
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -431,7 +431,7 @@ atreides_repairtank:
 atreides_minotaurus:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^ArtilleryTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -476,7 +476,7 @@ atreides_minotaurus:
 atreides_mongoose:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^MissileVehicleTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender

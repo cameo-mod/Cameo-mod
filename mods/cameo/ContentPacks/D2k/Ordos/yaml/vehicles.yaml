@@ -2,7 +2,7 @@ ordos_apc:
 	Inherits: ^D2KTank
 	Inherits@HoverDrive: ^Ordos_HoverDrive
 	Inherits@Template: ^SupportVehicleTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@botmicro: ^BotAutoDeployTransport
@@ -65,7 +65,7 @@ ordos_laboratorycrawler:
 	Inherits: ^D2KTank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@botmicro: ^BotAutoDeployTransport
@@ -782,7 +782,7 @@ ordos_spiceharvester:
 ordos_cobratank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^ArtilleryTankTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -896,7 +896,7 @@ ordos_pythontank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^ArtilleryTankTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -1004,7 +1004,7 @@ ordos_lasertank:
 	Inherits@HoverDrive: ^Ordos_HoverDrive
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@IXEMP: ^D2K_Ix_Turret_EMP
@@ -1064,7 +1064,7 @@ ordos_deviatortank:
 	Inherits@HoverDrive: ^Ordos_HoverDrive
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@IXEMP: ^D2K_Ix_Turret_EMP
@@ -1394,7 +1394,7 @@ ordos_raider:
 	Inherits@D2KV: ^D2KVehicle
 	Inherits@LaserGuns: ^Ordos_LaserGuns
 	Inherits@Template: ^ScoutVehicleTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -1494,7 +1494,7 @@ ordos_dustdrone:
 	Inherits@D2KV: ^D2KVehicle
 	Inherits@Template: ^MissileVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -1619,7 +1619,7 @@ ordos_deviatorartillery:
 ordos_combattank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^LightTankTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -1675,7 +1675,7 @@ ordos_heavycombattank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -1740,7 +1740,7 @@ ordos_heavycombattank:
 ordos_combatautoguntank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^MainBattleTankTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -1797,7 +1797,7 @@ ordos_heavyautoguntank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
@@ -1855,7 +1855,7 @@ ordos_heavyautoguntank:
 ordos_tankdestroyer:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^TankDestroyerTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender

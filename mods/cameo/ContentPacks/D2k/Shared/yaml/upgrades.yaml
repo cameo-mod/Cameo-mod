@@ -101,3 +101,129 @@ d2k_spice_sifter_upgrade:
 		IconPalette: d2kunit
 	RenderSprites:
 		Image: d2k_spice_sifter
+
+# D2k-local upgrade templates (renamed copies; the engineer template must not inherit TD pack defs).
+^D2KGuerillaTactics:
+	FirepowerMultiplier@td_nod_upgrade_guerillatactics:
+		RequiresCondition: td_nod_upgrade_guerillatactics
+		Modifier: 115
+	SpeedMultiplier@td_nod_upgrade_guerillatactics:
+		RequiresCondition: td_nod_upgrade_guerillatactics
+		Modifier: 110
+	RangeMultiplier@td_nod_upgrade_guerillatactics:
+		RequiresCondition: td_nod_upgrade_guerillatactics
+		Modifier: 105
+	RevealsShroudMultiplier@td_nod_upgrade_guerillatactics:
+		RequiresCondition: td_nod_upgrade_guerillatactics
+		Modifier: 105
+	DetectCloakedMultiplier@td_nod_upgrade_guerillatactics:
+		RequiresCondition: td_nod_upgrade_guerillatactics
+		Modifier: 105
+	GrantConditionOnPrerequisite@td_nod_upgrade_guerillatactics:
+		Condition: td_nod_upgrade_guerillatactics
+		Prerequisites: td_nod_upgrade_guerillatactics
+	ActorStatValues:
+		Upgrades: td_nod_upgrade_guerillatactics
+
+
+^D2KAdvancedGuerillaTactics:
+	FirepowerMultiplier@td_nod_upgrade_advancedguerillatactics:
+		RequiresCondition: td_nod_upgrade_advancedguerillatactics
+		Modifier: 115
+	SpeedMultiplier@td_nod_upgrade_advancedguerillatactics:
+		RequiresCondition: td_nod_upgrade_advancedguerillatactics
+		Modifier: 110
+	RangeMultiplier@td_nod_upgrade_advancedguerillatactics:
+		RequiresCondition: td_nod_upgrade_advancedguerillatactics
+		Modifier: 105
+	RevealsShroudMultiplier@td_nod_upgrade_advancedguerillatactics:
+		RequiresCondition: td_nod_upgrade_advancedguerillatactics
+		Modifier: 105
+	DetectCloakedMultiplier@td_nod_upgrade_advancedguerillatactics:
+		RequiresCondition: td_nod_upgrade_advancedguerillatactics
+		Modifier: 105
+	GrantConditionOnPrerequisite@td_nod_upgrade_advancedguerillatactics:
+		Condition: td_nod_upgrade_advancedguerillatactics
+		Prerequisites: td_nod_upgrade_advancedguerillatactics
+
+
+^D2KCyberneticModifications:
+	GrantConditionOnPrerequisite@td_nod_upgrade_cyberneticmodifications:
+		Condition: td_nod_upgrade_cyberneticmodifications
+		Prerequisites: td_nod_upgrade_cyberneticmodifications
+	Shielded:
+		InitialPercentageStrength: 100
+		MaxPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenAmount: 25
+		RegenInterval: 1
+		ShieldsUpCondition: armored
+		RequiresCondition: (td_nod_upgrade_cyberneticmodifications || shieldgen)
+		SelectionBarColor: FFFF88FF
+	GrantCondition@shieldpermanent:
+		Condition: shieldpermanent
+		RequiresCondition: td_nod_upgrade_cyberneticmodifications
+	Armor@td_nod_upgrade_cyberneticmodifications:
+		Type: Medium
+		RequiresCondition: armored
+	DamageMultiplier@td_nod_upgrade_cyberneticmodifications:
+		RequiresCondition: td_nod_upgrade_cyberneticmodifications
+		Modifier: 200
+	SpeedMultiplier@td_nod_upgrade_cyberneticmodifications:
+		RequiresCondition: td_nod_upgrade_cyberneticmodifications
+		Modifier: 120
+	ActorStatValues:
+		Upgrades: td_nod_upgrade_cyberneticmodifications
+
+
+^D2KTiberiumInfusion:
+	GrantConditionOnPrerequisite@td_nod_upgrade_tiberiuminfusion:
+		Condition: td_nod_upgrade_tiberiuminfusion
+		Prerequisites: td_nod_upgrade_tiberiuminfusion
+	ChangesHealth@up_tiberiuminfusion1:
+		PercentageStep: 1
+		Delay: 10
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: td_nod_upgrade_tiberiuminfusion
+	ChangesHealth@up_tiberiuminfusion2:
+		Step: 10
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: td_nod_upgrade_tiberiuminfusion
+	ReloadDelayMultiplier@td_nod_upgrade_tiberiuminfusion:
+		RequiresCondition: td_nod_upgrade_tiberiuminfusion
+		Modifier: 90
+	SpeedMultiplier@td_nod_upgrade_tiberiuminfusion:
+		RequiresCondition: td_nod_upgrade_tiberiuminfusion
+		Modifier: 110
+	DamageMultiplier@td_nod_upgrade_tiberiuminfusion:
+		RequiresCondition: td_nod_upgrade_tiberiuminfusion
+		Modifier: 90
+	ActorStatValues:
+		Upgrades: td_nod_upgrade_tiberiuminfusion
+
+
+^D2KLongRangeSensors:
+	RevealsShroudMultiplier@td_gdi_upgrade_longrangesensors:
+		RequiresCondition: td_gdi_upgrade_longrangesensors
+		Modifier: 125
+	DetectCloakedMultiplier@td_gdi_upgrade_longrangesensors:
+		RequiresCondition: td_gdi_upgrade_longrangesensors
+		Modifier: 125
+	InaccuracyMultiplier@td_gdi_upgrade_longrangesensors:
+		RequiresCondition: td_gdi_upgrade_longrangesensors
+		Modifier: 75
+	FirepowerMultiplier@td_gdi_upgrade_longrangesensors:
+		RequiresCondition: td_gdi_upgrade_longrangesensors
+		Modifier: 105
+	RangeMultiplier@td_gdi_upgrade_longrangesensors:
+		RequiresCondition: td_gdi_upgrade_longrangesensors
+		Modifier: 105
+	GrantConditionOnPrerequisite@td_gdi_upgrade_longrangesensors:
+		Condition: td_gdi_upgrade_longrangesensors
+		Prerequisites: td_gdi_upgrade_longrangesensors
+	ActorStatValues:
+		Upgrades: td_gdi_upgrade_longrangesensors
+

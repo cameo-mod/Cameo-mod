@@ -12436,3 +12436,67 @@ parent must emit ONLY as the node's type line (double-emit produced dup
 keys); parent payload fields the child already value-declares are filtered
 before emit. Verified: resolved diff vs HEAD = only TSSonicWeaponEffect
 removal; W7 804->799; empty-warhead 0; orphan-cancels 0; duplicate-keys +0.
+
+## 2026-09-26 — W7 needs_drop probe: negative result (DAWN)
+
+Tested all 35 ratchet-negative W7 edges in the lane for drop-flat conversion:
+converter applied resolved-identical forms, then per-weapon single-edge drops
+in over-limit kinds. **0/35 droppable** — every covering edge supplies
+distinct resolved nodes. All reverted clean (byte-level HEAD restore; two
+crash-residue blocks — `oDebris3/4`, `td_gdi_minigunner_minigun` — repaired
+and verified zero-diff).
+
+Also found `ordos_autogunturret` carries ~15 actor-trait templates
+(`^D2KDefense`, `^1x1Shape`, …) in a weapon block — malformed parent that
+would propagate garbage on conversion; flagged to fleet.
+
+Lane W7 remainder is now fully ruling-blocked: ~77 legacy-bundle edges,
+~35 ratchet-negative, 1 ExtraDamage-exempt, HermitExplode design call.
+See FINDING_2026-09-26_dawn_w7_needsdrop_negative.md in the fleet repo.
+
+## 2026-09-26 — D2k pack self-containment: cross-pack leak repair (DAWN)
+
+Census found **22 foreign-pack-only inherit targets** in D2k files (defs living
+in RA/RA2/TD/SC packs, violating DESIGN.md §self-containment). Repaired:
+
+**Weapons** (5 edges converted, resolved-identical via review_resolve_diff):
+- `d2kFlamegun`, `PhoenixRocketShrapnel`, `d2k_flame_tank` <- `Flamer` (RA/Shared):
+  -> `@wh ^Warhead_Flame_Light` + `@proj ^Projectile_Flame_Light`; the parent's
+  `^Effect_Flame_Light` edge folded INTO each weapon's own effect family
+  (single-fx-edge shape preserved, W4 flat).
+- `D2K_Annihilator_AA` <- `MammothTusk`: wh/proj swap; `-Warhead@MissileAP_Heavy:`
+  cancel dropped together with its provider edge (net-identical); parent's local
+  Effect/EffectWater nodes folded into `^d2k_ordos_d2k_annihilator_aa`.
+- `D2KRepair` <- `Heal`: retargeted to `Inherits: ^HealingWeapon` (core weapons.yaml
+  is always mounted) + Heal's 9 local node diffs pinned. W8-neutral.
+- `D2K_RocketsCymek` <- `^RA2MediumMissile`: `@wh/@proj` core templates +
+  Contrail pins; `-TrailImage:` deliberately NOT pinned (a cancel inside the
+  child's node kills the child's own `TrailImage` — provider-layering trap).
+
+**Effect families** — RA2-parent edges inlined into the D2k families verbatim:
+- `^d2k_ordos_ordos_airmine` <- `^Effect_Apoc_AP_RA2` (15 nodes materialized,
+  family overrides folded into the merged nodes)
+- `^d2k_ordos_ordos_lasertank` <- `^Effect_Watersplash_Huge_RA2` (-> ^Effect_MissileAP_Heavy + cancels kept, provider intact)
+- `^d2k_ixian_d2k_rocketscymek` <- `^Effect_Explosion_Large_RA2` (-> ^Effect_MissileHE_Medium + merged Effect/EffectWater nodes)
+
+**Actor layer** — 18 templates copied into D2k space under `^D2K*` names
+(verbatim content; renaming avoids same-name merge doubling + S2 findings),
+all 142 D2k-side `Inherits` refs retargeted:
+- templates.yaml: `^D2KGainsExperienceRA/RABuilding/TD`, `^D2KSpawnActorsOnSell`,
+  `^D2KTiberiumCloakAnimation`, `^D2KRA2Infantry`(+DeathAnimations/+Parachutes)
+- upgrades.yaml: `^D2KGuerillaTactics`, `^D2KAdvancedGuerillaTactics`,
+  `^D2KCyberneticModifications`, `^D2KTiberiumInfusion`, `^D2KLongRangeSensors`
+- Corrino sequences.yaml: `^D2KRA2Infantry`, `^D2KRA2BasicInfantry`,
+  `^D2KRA2InfantryDeaths`, `^D2KRA2ProneInfantry`, `^D2KRA2ArmedInfantry`,
+  `^D2KRA2MachineGunMuzzle`
+- `ixian_neocymek` dropped `^SCSmallShadow` edge, `shadow:` seq pinned
+  (parach_shadow lives in mounted sequences/misc.yaml)
+
+Verified: census now reports **0 foreign-only inherit targets** in D2k files;
+all 7 touched weapons + 4 sampled actors resolved-identical vs HEAD worktree;
+shape audit flat (W7 794, everything at/below ratchets); empty 0; orphans 0;
+no new split-defs or dup-keys.
+
+Flagged for fleet (semantic, not deps): `^D2KSpawnActorsOnSell` still spawns
+`e6, td_gdi_minigunner` (TD crew from an Ixian building) — content bug needing
+a maintainer ruling, not touched here.

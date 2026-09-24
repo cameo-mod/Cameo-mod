@@ -1,7 +1,7 @@
 harkonnen_lightinfantry:
 	Inherits: ^D2KInfantry
 	Inherits@Template: ^ScoutInfantryTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
@@ -41,7 +41,7 @@ harkonnen_lightinfantry:
 harkonnen_rockettrooper:
 	Inherits: ^D2KInfantry
 	Inherits@Template: ^RocketTrooperInfantryTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
@@ -105,7 +105,7 @@ harkonnen_engineer:
 harkonnen_sardaukar:
 	Inherits: ^D2KInfantry
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@anim: ^D2KPaletteRenderInfantry

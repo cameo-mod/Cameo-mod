@@ -162,28 +162,83 @@
 		ImpactSounds: EXPLMD2.WAV
 
 ^d2k_ordos_ordos_airmine:
-	Inherits: ^Effect_Apoc_AP_RA2
-	Warhead@Effect:
+	Inherits@glow: ^ImpactGlow
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
 		ValidTargets: Ground, Air
 		ExplosionPalette: effect75alpha
 		ImpactSounds: EXPLSML1.WAV
 		Explosions: d2k_small_explosion
-	Warhead@Effect1:
+		ImpactActors: false
+	Warhead@Effect1: CreateEffect
 		Explosions: poof
-	Warhead@EffectAir:
+		ImpactSounds: siege_impact.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
 		ImpactSounds: EXPLLG2.WAV
-	Warhead@EffectWater:
-		-ExplosionPalette:
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@EffectWater: CreateEffect
 		Explosions: large_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 15
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 250
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Smudge1: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Effect2: CreateEffect
+		Delay: 6
+		Explosions: napalm
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
 
 ^d2k_ordos_ordos_lasertank:
-	Inherits: ^Effect_Watersplash_Huge_RA2
+	Inherits: ^Effect_MissileAP_Heavy
+	-Warhead@Effect:
+	-Warhead@EffectAir:
 	Warhead@EffectAir: CreateEffect
 		ImpactSounds: EXPLLG2.WAV
-	Warhead@EffectWater:
-		-ExplosionPalette:
+	Warhead@EffectWater: CreateEffect
 		ImpactSounds: splash9.aud
 		Explosions: small_splash
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 
 ^d2k_ordos_ordos_chemturret:
 	Inherits: ^Effect_Chem_Light
@@ -195,9 +250,20 @@
 		ExplosionPalette: d2k_toxic_explosion
 
 ^d2k_ordos_d2k_annihilator_aa:
+	Inherits@fxbase: ^Effect_MissileHE_Heavy
 	Warhead@EffectAir: CreateEffect
 		ImpactSounds: EXPLLG2.WAV
 
+	Warhead@Effect: CreateEffect
+		Explosions: artillery_explosion
+		ImpactSounds: kaboom12.aud
+		ValidTargets: Ground
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 ^d2k_ordos_heavyordoscombattankrockets:
 	Inherits: ^Effect_MissileHE_Heavy_D2K
 	Warhead@EffectWater: CreateEffect
@@ -226,6 +292,7 @@
 		ImpactSounds: d2k_sardaukar_assassin_blade.wav
 
 ^d2k_ordos_d2kflamegun:
+	Inherits@fxbase: ^Effect_Flame_Light
 	Warhead@2Eff: CreateEffect
 		ExplosionPalette: effect75alpha
 		Explosions: flame
@@ -398,13 +465,25 @@
 		Scale: 0.55
 
 ^d2k_ixian_d2k_rocketscymek:
-	Inherits: ^Effect_Explosion_Large_RA2
+	Inherits: ^Effect_MissileHE_Medium
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_large_explosion
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
+		ValidTargets: Ground, Ship
+		ImpactActors: false
 	-Warhead@EffectAir:
 	Warhead@EffectAir: CreateEffect
 		Explosions: med_explosion_air
 		ImpactActors: false
 		ImpactSounds: EXPLMD2.WAV
 		ValidTargets: Air
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_large_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 
 ^d2k_ixian_d2k_stormgun:
 	Inherits: ^Effect_Magic_Heavy
@@ -1443,6 +1522,7 @@
 		SmudgeType: Scorch
 
 ^d2k_d2k_d2k_flame_tank:
+	Inherits@fxbase: ^Effect_Flame_Light
 	Warhead@2Smu: LeaveSmudge
 		InvalidTargets: Vehicle, Structure, wall
 		SmudgeType: Scorch
@@ -1843,6 +1923,7 @@
 		Damage: 800
 
 ^d2k_ordos_phoenixrocketshrapnel:
+	Inherits@fxbase: ^Effect_Flame_Light
 	Warhead@Scorch: LeaveSmudge
 		SmudgeType: Scorch
 		Size: 1

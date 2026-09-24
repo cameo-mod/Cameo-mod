@@ -1033,7 +1033,7 @@
 ^CombatTank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^MainBattleTankTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^D2KGainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -1142,3 +1142,135 @@
 ^AntiTankInfantryTemplate:
 
 ^RocketTrooperInfantryTemplate:
+
+# D2k-local trait templates (renamed copies; D2k packs must not inherit RA/TD/RA2 pack defs).
+^D2KGainsExperienceRA:
+	GainsExperience:
+		LevelUpNotification: LevelUpRA1
+		Conditions:
+			200: rank-veteran
+			400: rank-veteran
+			600: rank-veteran
+			800: rank-veteran
+
+
+^D2KGainsExperienceRABuilding:
+	GainsExperience:
+		LevelUpNotification: LevelUpRA1
+		Conditions:
+			250: rank-veteran
+			500: rank-veteran
+			750: rank-veteran
+			1000: rank-veteran
+
+####################################################################################################
+#		Red Alert
+####################################################################################################
+
+####################################################################################################
+#		Soviet Upgrade Inherits
+####################################################################################################
+
+
+^D2KGainsExperienceTD:
+	GainsExperience:
+		LevelUpNotification: LevelUp
+		Conditions:
+			200: rank-veteran
+			400: rank-veteran
+			600: rank-veteran
+			800: rank-veteran
+
+
+^D2KSpawnActorsOnSell:
+	SpawnActorsOnSell:
+		ActorTypes: e6,td_gdi_minigunner,td_gdi_minigunner,td_gdi_minigunner
+
+
+^D2KTiberiumCloakAnimation:
+	Cloak:
+		CloakStyle: Palette
+		CloakedPalette: cloak_stealth
+		IsPlayerPalette: true
+		EffectImage: stealthfade
+		EffectPalette: greenspark
+		CloakEffectSequence: reversed
+		UncloakEffectSequence: idle
+		EffectTracksActor: True
+
+
+^D2KRA2Infantry:
+	Inherits@shadow: ^D2KRA2InfantryDeathAnimations
+	Inherits@para: ^D2KRA2Parachutes
+	RenderSprites:
+		PlayerPalette: ra2infantry
+	Crushable:
+		CrushSound: igensqua.wav
+	DeathSounds@NORMAL:
+		DeathTypes: DefaultDeath, BulletDeath, SmallExplosionDeath, ExplosionDeath, RippedApartDeath
+		RequiresCondition: !chronobeamed
+	DeathSounds@ZAPPED:
+		Voice: Zapped
+		DeathTypes: ElectricityDeath
+		RequiresCondition: !chronobeamed
+	DeathSounds@radiation:
+		Voice: Poisoned
+		DeathTypes: RadiationDeath, TiberiumDeath
+		RequiresCondition: !chronobeamed
+	#DeathSounds@psychic:
+	#	Voice: PsyCrush
+	#	DeathTypes: PsychicDeath
+	#	RequiresCondition: !chronobeamed
+	#DeathSounds@virus:
+	#	Voice: Virus
+	#	DeathTypes: RA2VirusDeath
+	#	RequiresCondition: !chronobeamed
+
+
+^D2KRA2InfantryDeathAnimations:
+	WithDeathAnimation:
+		DeathSequencePalette: ra2infantry
+		DeathTypes:
+			DefaultDeath: 1
+			BulletDeath: 1
+			SmallExplosionDeath: 2
+			ExplosionDeath: 2
+			RippedApartDeath: 2
+	WithDeathAnimation@effect:
+		DeathSequencePalette: ra2effect
+		DeathPaletteIsPlayerPalette: False
+		DeathTypes:
+			RadiationDeath: 4
+			PsychicDeath: 5
+			TiberiumDeath: 7
+			ElectricityDeath: 6
+			#RA2VirusDeath: 7
+	SpawnActorOnDeath@Flameguy:
+		Probability: 100
+		Actor: RA2Flameguy
+		DeathType: FireDeath
+	FireWarheadsOnDeath@Corpse:
+		DeathTypes: DefaultDeath, BulletDeath, RippedApartDeath
+		Weapon: RA2CorpseSpawner
+		EmptyWeapon: RA2CorpseSpawner
+		RequiresCondition: !chronobeamed
+	#Explodes@CorpseThrow:
+	#	DeathTypes: ExplosionDeath
+	#	Weapon: RA2CorpseThrower
+	#	EmptyWeapon: RA2CorpseThrower
+	#	RequiresCondition: !chronobeamed
+
+
+^D2KRA2Parachutes:
+	WithParachute:
+		ShadowImage: parach_shadow
+		ShadowSequence: idle
+		Image: ra2parach
+		Sequence: idle
+		OpeningSequence: open
+		ClosingSequence: disolve
+		Offset: 0,0,427
+		RequiresCondition: parachute
+		Palette: ra2infantry
+		IsPlayerPalette: true
+

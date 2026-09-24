@@ -617,17 +617,22 @@ DroneJumpH:
 		InvalidTargets: Vehicle, Tank, Structure
 
 d2k_flame_tank:
-	Inherits: Flamer
+	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@proj: ^Projectile_Flame_Light
 	Inherits@fx: ^d2k_d2k_d2k_flame_tank
 	InvalidTargets: wall
 	ReloadDelay: 5
 	Range: 4096
 	Report: d2k_flame_tank.wav
+	Burst: 15
+	BurstDelays: 1
+	StartBurstReport: flamer2.aud
 	Projectile: Bullet
 		Speed: 300
 		TrailImage: fb2
 		Image: fb3
 		Inaccuracy: 512
+		LaunchAngle: 60
 	Warhead@Flame_Light:
 		Damage: 3250
 	ValidTargets: Ground, Water

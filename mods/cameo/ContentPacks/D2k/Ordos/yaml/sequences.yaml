@@ -696,7 +696,7 @@ ordos_light:
 		Offset: -30,-24
 
 chemtrooper:
-	Inherits@2: ^RA2MachineGunMuzzle
+	Inherits@2: ^D2KRA2MachineGunMuzzle
 	Defaults:
 		Filename: ordos_promotion_chemicaltrooper_chemtrooper.shp
 		Scale: 1.5
@@ -997,9 +997,9 @@ ordos_leech:
 		Offset: 0,0
 
 ordos_facedancer:
-	Inherits: ^RA2ArmedInfantry
+	Inherits: ^D2KRA2ArmedInfantry
 		Scale: 1
-	Inherits@2: ^RA2MachineGunMuzzle
+	Inherits@2: ^D2KRA2MachineGunMuzzle
 		Scale: 1
 	Defaults:
 		Scale: 0.61
@@ -1050,8 +1050,8 @@ ordos_facedancer:
 		Filename: ordos_facedancer_icon.shp
 
 ordos_contaminator:
-	Inherits: ^RA2ArmedInfantry
-	Inherits@2: ^RA2MachineGunMuzzle
+	Inherits: ^D2KRA2ArmedInfantry
+	Inherits@2: ^D2KRA2MachineGunMuzzle
 	Defaults:
 		Filename: ordos_promotion_contaminator_tleilax_contaminator.png
 	run:
@@ -1088,9 +1088,9 @@ ordos_contaminator:
 		Filename: ordos_promotion_contaminator_icon.shp
 
 ordos_antiairtrooper:
-	Inherits: ^RA2ArmedInfantry
+	Inherits: ^D2KRA2ArmedInfantry
 		Scale: 1
-	Inherits@2: ^RA2MachineGunMuzzle
+	Inherits@2: ^D2KRA2MachineGunMuzzle
 		Scale: 1
 	Defaults:
 		Scale: 0.76
@@ -1141,9 +1141,9 @@ ordos_antiairtrooper:
 		Filename: ordos_upgrade_antiairtrooper_icon.png
 
 ordos_mortartrooper:
-	Inherits: ^RA2ArmedInfantry
+	Inherits: ^D2KRA2ArmedInfantry
 		Scale: 1
-	Inherits@2: ^RA2MachineGunMuzzle
+	Inherits@2: ^D2KRA2MachineGunMuzzle
 		Scale: 1
 	Defaults:
 		Scale: 0.71

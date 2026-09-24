@@ -1,6 +1,6 @@
 saudakar_bazooka:
-	Inherits: ^RA2ArmedInfantry
-	Inherits@2: ^RA2MachineGunMuzzle
+	Inherits: ^D2KRA2ArmedInfantry
+	Inherits@2: ^D2KRA2MachineGunMuzzle
 	Defaults:
 		Filename: saudakar_bazooka.png
 	run:
@@ -146,8 +146,8 @@ corrino_apc:
 		Filename: corrino_apc_build_icon.png
 
 saudakar_berserker:
-	Inherits: ^RA2ArmedInfantry
-	Inherits@2: ^RA2MachineGunMuzzle
+	Inherits: ^D2KRA2ArmedInfantry
+	Inherits@2: ^D2KRA2MachineGunMuzzle
 	Defaults:
 		Filename: saudakar_berserker.png
 	run:
@@ -206,8 +206,8 @@ saudakar_berserker:
 		Length: 1
 
 saudakar_sword:
-	Inherits: ^RA2ArmedInfantry
-	Inherits@2: ^RA2MachineGunMuzzle
+	Inherits: ^D2KRA2ArmedInfantry
+	Inherits@2: ^D2KRA2MachineGunMuzzle
 	Defaults:
 		Filename: saudakar_sword.png
 	run:
@@ -266,8 +266,8 @@ saudakar_sword:
 		Length: 1
 
 saudakar_javelin:
-	Inherits: ^RA2ArmedInfantry
-	Inherits@2: ^RA2MachineGunMuzzle
+	Inherits: ^D2KRA2ArmedInfantry
+	Inherits@2: ^D2KRA2MachineGunMuzzle
 	Defaults:
 		Filename: saudakar_javelin.png
 	run:
@@ -326,8 +326,8 @@ saudakar_javelin:
 		Length: 1
 
 saudakar_laser:
-	Inherits: ^RA2ArmedInfantry
-	Inherits@2: ^RA2MachineGunMuzzle
+	Inherits: ^D2KRA2ArmedInfantry
+	Inherits@2: ^D2KRA2MachineGunMuzzle
 	Defaults:
 		Filename: saudakar_laser.png
 	run:
@@ -384,3 +384,145 @@ saudakar_laser:
 		Scale: 1
 		Start: 0
 		Length: 1
+
+# D2k-local sequence templates (renamed copies; Corrino infantry must not inherit RA2 pack defs).
+^D2KRA2Infantry:
+	Inherits: ^InfantryOverlays
+	Inherits@1: ^D2KRA2BasicInfantry
+	Inherits@2: ^D2KRA2ProneInfantry
+
+
+^D2KRA2BasicInfantry:
+	Inherits: ^D2KRA2InfantryDeaths
+	Defaults:
+		Filename: ra2gi.shp
+	stand:
+		Facings: 8
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+		Tick: 100
+	walk:
+		Start: 8
+		Length: 6
+		Facings: 8
+		Tick: 100
+	idle1:
+		Start: 56
+		Length: 15
+		Tick: 120
+	idle2:
+		Start: 71
+		Length: 15
+		Tick: 120
+	cheer:
+		Start: 245
+		Length: 8
+		Tick: 120
+	die1:
+		Start: 134
+		Length: 15
+	die2:
+		Start: 149
+		Length: 15
+	die-crushed:
+		Filename: invisibleitem.shp
+	paradrop:
+
+
+^D2KRA2InfantryDeaths:
+	die4:
+		Filename: futuretech_promotion_cryolegionnaire_ra2_nukedie.shp
+		Length: *
+		Tick: 50
+	die5:
+		Filename: futuretech_promotion_cryolegionnaire_ra2_yuridie.shp
+		Length: *
+		Tick: 80
+	die6:
+		Filename: futuretech_promotion_cryolegionnaire_ra2_electro.shp
+		Length: *
+		Tick: 80
+	die7:
+		Filename: futuretech_promotion_cryolegionnaire_yr_virusd.shp
+		Length: *
+		Tick: 80
+	die8:
+		Filename: futuretech_promotion_cryolegionnaire_yr_brutdie.shp
+		Length: *
+		Tick: 80
+
+
+^D2KRA2ProneInfantry:
+	Defaults:
+		Filename: ra2gi.shp
+	liedown:
+		Start: 212
+		Length: 2
+		Facings: 8
+	standup:
+		Start: 228
+		Length: 2
+		Facings: 8
+	prone-stand:
+		Frames: 86, 92, 98, 104, 110, 116, 122, 128
+		Facings: 8
+	prone-run:
+		Start: 86
+		Length: 6
+		Facings: 8
+		Tick: 100
+
+
+^D2KRA2ArmedInfantry:
+	Inherits: ^D2KRA2Infantry
+	shoot:
+		Start: 164
+		Length: 6
+		Facings: 8
+		Tick: 80
+	prone-shoot:
+		Start: 212
+		Length: 6
+		Facings: 8
+		Tick: 80
+	liedown:
+		Start: 260
+	standup:
+		Start: 276
+	cheer:
+		Start: 293
+
+
+^D2KRA2MachineGunMuzzle:
+	muzzle:
+		Combine:
+			0:
+				Filename: ra2_mgun_n.shp
+				Length: 6
+			1:
+				Filename: ra2_mgun_nw.shp
+				Length: 6
+			2:
+				Filename: ra2_mgun_w.shp
+				Length: 6
+			3:
+				Filename: ra2_mgun_sw.shp
+				Length: 6
+			4:
+				Filename: ra2_mgun_s.shp
+				Length: 6
+			5:
+				Filename: ra2_mgun_se.shp
+				Length: 6
+			6:
+				Filename: ra2_mgun_e.shp
+				Length: 6
+			7:
+				Filename: ra2_mgun_ne.shp
+				Length: 6
+		Facings: 8
+		Length: 6
+		Offset: 0, 0
+
