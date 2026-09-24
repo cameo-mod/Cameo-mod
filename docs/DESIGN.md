@@ -2236,6 +2236,77 @@ the seven, and if `AreaDamage`'s expanding rings reproduce it, convert — do no
 **R15 — boot-gate cadence: ONE PER COHORT.** Batch a whole cohort, verify with `resolved_gate`,
 then one boot gate and one commit; bisect within the batch if boot fails.
 
+### R16-R19 — the W7 hold rulings (maintainer, 2026-09-24)
+
+**R16 — THE VERSUS LAW, FINAL SHAPE.** Supersedes R5's "2x–8x band, 4x target":
+
+> *"it's 2x to 20x but those should be extreme edge cases, the target range should be 4x to 5x
+> for the most part with 2x to 20x being the absolute exception here for like super
+> generialistic or super specialized weapons (20x comes from the fact that the max versus value
+> is 200% and the lowest versus value is 10%). There is also another rule: All versus values of
+> a warhead must always have a geometric mean of 100% and the distribution of versus values
+> spread should roughly follow a bell curve with 4x to 5x being the top of the bell curve and
+> 2x and 20x being the asymptote (the end of the line with low occupancy)"*
+
+Mechanically, per MAIN warhead profile:
+
+* **GEOMETRIC mean of the armor rows = 100.** This is the §12.0j normalisation brought forward
+  to binding: geometric is the correct centre for multipliers (a 200/50 pair centres at 100;
+  the arithmetic mean of the same pair is 125 and silently inflates the family's contribution
+  to `K`). `mean_normalise`'s arithmetic target is superseded — the power-law machinery in
+  `gen_weapon_template` already works about the geometric mean, so this closes the last
+  inconsistency in the pipeline.
+* **Hard bound 2x–20x spread** (max:min over the armor rows). Below 2x is a flat profile — R5
+  still applies, flat does not exist. Above 20x exceeds the Versus range itself (10%–200%).
+* **Roster target: the DISTRIBUTION of family spreads is a bell curve peaking at 4x–5x**, with
+  2x (generalist) and 20x (super-specialist) as the low-occupancy asymptotes. This is a
+  population law — an individual family at 2x or 20x is legal but must be a deliberate
+  super-generalist / super-specialist, not drift.
+* Guarded by `audit_versus_profile.py` (geomean ratchet + hard band + the bell-curve census).
+
+**R17 — `ExtraDamage` DOES NOT EXIST; leftovers FOLD INTO THE MAIN WARHEAD.** The retirement
+noted at §"Template auxiliaries" is now the binding conversion rule for every held W7 edge:
+
+> *"try to fold it into the main AreaDamage warhead by adding the damage amount as it
+> currently stands. The OpenTopped damage of the sniper might be the only exception but you
+> need to research if it can be faithfully converted to be inside the AreaDamage warhead so we
+> only need one of them instead of 2 damage warheads here."*
+
+* `Warhead@*_ExtraDamage` → `main.Damage += extra.Damage`, node deleted. A folded weapon is
+  **not resolved-identical by design** — the two-node shape collapses into one; the Damage
+  total is what must match (main + extra verbatim, never re-priced).
+* **`OpenToppedDamage` CANNOT fold** (verified 2026-09-24, `OpenToppedDamageWarhead.cs`): it is
+  not a damage channel at all — it calls `INotifyPassengersDamage.DamagePassengers` to hurt
+  garrisoned/passenger actors *inside* the target. AreaDamage has no passenger path; folding
+  would redirect the damage from passengers to the vehicle itself. The 34 sniper
+  `OpenToppedDamage` twins stay as their own warhead type — the ruling's own caveat confirmed.
+
+**R18 — NO FLAT WARHEADS; `_Flat` KEEPS THE WARHEAD, GAINS THE FAMILY SHAPE.** For a weapon
+whose damage is a `*_Flat` node (no `Versus` — one number vs every armor):
+
+* Keep the warhead; **give it the family's canonical Versus table** (the `^Warhead_<Family>`
+  profile it belongs to), `Damage` preserved. Damage becomes armor-discriminating — this is
+  the intended change, not drift to pin.
+* This applies to the `_Flat` role edges the W7 sweep left in place (`^Warhead_*_Flat`
+  survivors of R4 — the ones that are real shape, not dead shims).
+
+**R19 — THE DOT GRAMMAR: `.` = bot variant or `.husk`, NOTHING ELSE.**
+
+> *"the dot must always mean a bot variant and it's the only acceptable use of a dot"*
+> *"`.husk` is also allowed"*; on `OILB.d2k`: *"should be renamed to `d2k_spicesifter` …
+> the faction name must be in the front"*
+
+* A dot is legal **only** on (a) a bot-only variant — test: the actor's `Prerequisites`
+  carry `~botplayer` / `~hardbotplayer`, i.e. buildable by no player — or (b) the `.husk`
+  husk suffix (already everywhere; the same class of "not a real actor" marker).
+* **A dot carrying a faction name is a violation** — `.atreides`, `.harkonnen`, `.cabal`,
+  `.steel`, `.d2k` etc. The faction goes in FRONT: `combat_tank_husk.atreides` →
+  `atreides_combat_tank_husk`, `OILB.d2k` → `d2k_spicesifter`. Renames must update
+  husk/upgrade references and `map.yaml`/lua placements (§14, rule 8h).
+* Other dotted variant markers (`.para`, `.power`, `.destroyed`, `.laser`, `.mutant`, …) are
+  pending maintainer eyeball per-instance — the census of uses is in the fleet board note
+  `NOTE_2026-09-24_ember_rulings.md`.
+
 #### 11b.1b `^Compatibility_*` — what it is, and why the collapse is not arithmetic
 
 > *"Any of those silly compatibility warheads must be resolved and replaced by an actual new
