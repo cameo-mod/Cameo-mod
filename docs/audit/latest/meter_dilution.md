@@ -1,4 +1,4 @@
-# audit_meter_dilution — 32 actors fire a state weapon alongside unconditional non-state weapons
+# audit_meter_dilution — 33 actors fire a state weapon alongside unconditional non-state weapons
 
 | actor | guns | with state | state guns' share | dilution |
 |---|--:|--:|--:|--:|
@@ -14,8 +14,8 @@
 | `cabal_hunterkillermk1` | 2 | 1 | 40.9% | **2.45x** |
 | `schwarzermond_drone` | 2 | 1 | 41.7% | **2.40x** |
 | `A10` | 2 | 1 | 50.0% | **2.00x** |
-| `japan_tankbuster` | 2 | 1 | 50.0% | **2.00x** |
 | `asianalliance_kami_chemical` | 2 | 1 | 50.0% | **2.00x** |
+| `japan_tankbuster` | 2 | 1 | 50.0% | **2.00x** |
 | `terran_warhound` | 2 | 1 | 50.0% | **2.00x** |
 | `cabal_lazerboat` | 3 | 2 | 56.5% | **1.77x** |
 | `cabal_hunterkillermk1_elite` | 2 | 1 | 56.8% | **1.76x** |
@@ -33,19 +33,19 @@
 | `td_nod_buggymkii` | 9 | 7 | 78.3% | **1.28x** |
 | `tkm_trooper` | 2 | 1 | 85.7% | **1.17x** |
 
-_(2 more — pass `--all`)_
+_(3 more — pass `--all`)_
 
 ## distribution
 
-- 1.0-1.5x: **7**
+- 1.0-1.5x: **8**
 - 1.5-2.0x: **10**
 - 2.0-3.0x: **6**
 - 3.0x+: **9**
 
-## condition-gated actors the model cannot judge — 187
+## condition-gated actors the model cannot judge — 192
 
 Every armament is gated, so no two can be shown to fire together. This is the IFV
 shape, DEFERRED by maintainer ruling; it needs a variant-aware model, not a count.
 
-WARN 32 diluted actors (ratchet 32)
-Lower `DILUTION_BASELINE` as carriers are reworked; never raise it.
+FAIL 33 diluted actors (ratchet 32)
+**A state carrier gained a non-feeding gun.** The fix is to make every weapon on a state unit feed the same meter, not to raise the ratchet.

@@ -22,10 +22,10 @@ these weapons loses its armor entirely rather than resisting normally.
 
 | plating | mean | min | max |
 |---|--:|--:|--:|
-| `HAZMAT` | **71.31** ⚠ | 34 | 102 |
-| `COMPOSITE` | **70.16** | 35 | 107 |
-| `BLAST` | **68.32** ⚠ | 36 | 104 |
-| `REFLECTOR` | **69.81** | 42 | 104 |
+| `HAZMAT` | **71.06** ⚠ | 34 | 102 |
+| `COMPOSITE` | **69.23** | 35 | 106 |
+| `BLAST` | **69.25** | 36 | 106 |
+| `REFLECTOR` | **70.21** | 42 | 105 |
 | `ARMOR` | **70.00** | 70 | 70 |
 
 ## I3 — closure (every family has a counter and an exposure)

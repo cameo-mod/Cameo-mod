@@ -123,6 +123,28 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 
 ---
 
+## ⛔ A tool must derive its target from its OWN worktree root — a stale path wrote into another agent's tree (2026-09-24)
+
+During the W27 batch-1 round, nine pack files in the `C:/tmp/dawn` worktree
+were found silently changed — 161 lines deleted across TD GDI+Nod, TS
+CABAL+Forgotten+Nod and D2k Ixian+Ordos, with no matching commit or stash
+entry. First blamed on a stash cycle; the real cause, disclosed by NOVA in
+`PLAN_2026-09-23_nova_w23ra.md` and confirmed by Claude-Local, was her
+orphan-cancel tool writing through a **stale hard-coded `/tmp` path** —
+Git Bash's `/tmp` and Windows' `C:\tmp` are different folders, and the
+mismatch put her writes inside DAWN's tree.
+
+**Rule:** a tool that edits the tree must resolve its target from its own
+`git rev-parse --show-toplevel` at run time — never from a hard-coded,
+remembered, or environment-derived path that can outlive the worktree it
+was captured in. Cross-check `git status` output in full (truncated status
+output hid the nine dirty files for a whole round) and, when in doubt,
+diff the worktree against `HEAD` per-file rather than trusting "I didn't
+touch that". Verified on GitHub: none of the deletions reached the pushed
+branch (0 `-Key@` removals vs master).
+
+---
+
 ## ⛔ Conflict-clean is not resolved-clean — a merge can pass every gate while damage drifts (2026-09-22)
 
 The W24 lane-2 squash-merge onto master passed yaml parse,
