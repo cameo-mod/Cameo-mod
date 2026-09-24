@@ -3030,8 +3030,8 @@ and is written out in full in `BALANCE_PROGRAM_PLAN.md` §1b):
 | item | set | note |
 |---|---|---|
 | **W7** Sonic → `Resonance` meter | D (`rules/defaults.yaml`) | **SHARED MERGED (EMBER, #476 → `e97924d4c`)** — pack-side in flight: DAWN done `388a7dd0d` on `devin/dawn/l4-fx` (needs PR), NOVA's 8 pending. ⚠ set D is ONE file — serialise W7/W9/W10, never two at once |
-| **W9** `^Poisonable` → `Poison` meter | D | **IN PROGRESS (EMBER, 2026-09-23)** — `defaults.yaml` meter done; Ordos crossbow grant to DAWN via REQUEST; darkreign parked |
-| **W10** `^Blindable` → `Blind` meter | D | unblocked, W6 shipped |
+| **W9** `^Poisonable` → `Poison` meter | D | **SHARED MERGED (EMBER, #479 → `5b89b1341`)** — Ordos crossbow grant to DAWN via REQUEST (lands with her next PR); darkreign parked |
+| **W10** `^Blindable` → `Blind` meter | D | **IN PROGRESS (EMBER, 2026-09-24)** — proportional range 100→20 via `ModifiesCombatProportionalToPhysicalState@Blind`, `|| blinded` appended to all 46 `disabled` pause sites, `RangeMultiplier@blinded` retired; SC×3 grants converted to `ApplyPhysicalState` `Amount: 20000`; RA Soviets + RA2Mod Syndicate → NOVA REQUEST |
 | **WC2 heroes** | `mods/cameo/ContentPacks/Warcraft2/Humans/**`, `Orcs/**` | **IN PROGRESS (Devin, 2026-08-25)** — porting 4 hero units + weapons + icons from `wcameo(1)` with new `wc2_<faction>_<actor>` naming. Weapons done; actors, sequences, icons in progress. Check `git log -3` and mtime before touching this set. |
 | **W12** superweapons as a separate track | — | maintainer-led; superweapons are not unit-priced |
 | **Adopt the Sonic family** | B | `^Warhead_Sonic_*` bakes the mark but **nothing inherits it**, so it is inert. Needs a maintainer warhead order (rule 4). Law: an effect upgrade ADDS `^Warhead_Sonic_*`, it never replaces the base damage TYPE. |

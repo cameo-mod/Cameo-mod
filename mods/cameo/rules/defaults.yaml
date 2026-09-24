@@ -776,7 +776,7 @@
 		CloakEffectSequence: reversed
 		UncloakEffectSequence: idle
 		EffectTracksActor: True
-		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
+		PauseOnCondition: cloak-force-disabled || base-reveal || disabled || blinded
 		RequiresCondition: cloak-crate-collected
 	ExternalCondition@CLOAK:
 		Condition: cloak-crate-collected
@@ -2586,7 +2586,7 @@
 	Mobile:
 		Locomotor: wheeled
 		TurnSpeed: 40
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 		RequiresCondition: !driver-dead && !being-captured && !beingterrordroned
 		ImmovableCondition: driver-dead
 		CanMoveBackward: false
@@ -2759,7 +2759,7 @@
 	Mobile:
 		Locomotor: naval
 		TurnSpeed: 40
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	Tooltip:
 		GenericName: Boat
 	Targetable:
@@ -2804,7 +2804,7 @@
 		InitialDelay: 0
 		CloakDelay: 50
 		CloakedCondition: underwater
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 		RequiresCondition: !cloak-force-disabled && !underbridge
 		IsPlayerPalette: true
 		UncloakSound: subshow1.aud
@@ -2813,7 +2813,7 @@
 		InitialDelay: 0
 		CloakDelay: 0
 		CloakedCondition: underwater
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 		RequiresCondition: !cloak-force-disabled && underbridge
 		CloakStyle: Alpha
 		MinCloakedAlpha: 0
@@ -2845,7 +2845,7 @@
 	Mobile:
 		Locomotor: naval
 		TurnSpeed: 40
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	Selectable:
 		Bounds: 1024, 1024
 	WithInfantryBody:
@@ -2951,7 +2951,7 @@
 		RequiresCondition: !untargetable && damaged
 		TargetTypes: SpecialRepair
 	AttackAircraft:
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	GrantConditionOnDamageState@DAMAGED:
 		Condition: damaged
 		ValidDamageStates: Light, Medium, Heavy, Critical
@@ -3166,7 +3166,7 @@
 		RequiresCondition: !airborne && !untargetable && damaged && !Healed
 		TargetTypes: Heal, Healing
 	AttackAircraft:
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	GrantConditionOnDamageState@DAMAGED:
 		Condition: damaged
 		ValidDamageStates: Light, Medium, Heavy, Critical
@@ -3309,7 +3309,7 @@
 	Mobile:
 		Locomotor: foot
 		ResponsiveBetweenCells: true
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 		RequiresCondition: !beingterrordroned
 	Selectable:
 		Bounds: 768, 768, 0, -256
@@ -3598,7 +3598,7 @@
 	RevealOnDeath:
 	AttackFrontal:
 		FacingTolerance: 8
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 
 ^Soldier:
 	Inherits: ^DefaultSoldier
@@ -3853,7 +3853,7 @@
 		Voice: Attack
 	AttackFrontal:
 		Voice: Attack
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 		FacingTolerance: 0
 	WithInfantryBody:
 		DefaultAttackSequence: attack
@@ -4404,7 +4404,7 @@
 	AttackOpenTopped:
 		Armaments: garrisoned
 		PortOffsets: 768,0,256, 448,-682,256, -448,-682,256, -768,0,256, -448,682,256, 448,682,256
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 		RequiresCondition: owned
 	ChangesHealth@regen:
 		PercentageStep: 1
@@ -5296,14 +5296,13 @@
 ^Blindable:
 	ExternalCondition@blinded:
 		Condition: blinded
-	# --- Blind METER (physical-state axis). ADDITIVE + inert until weapons migrate.
+	# --- Blind METER (physical-state axis). Meter + proportional range scaling live.
 	# W10 spec: range scales 100% -> 20% proportionally with the meter; at FULL blind
-	# the weapon is disabled, the icon shows, and the `blinded` condition applies so
-	# blinding units retarget. This block defines the meter and the full-blind
-	# condition grant; the proportional range scaling and weapon disable wiring stay
-	# with the Set B weapon migration (warheads switch from `GrantExternalCondition`
-	# `blinded` to `PhysicalStateName: Blind` / `PhysicalStateScale` and the old
-	# `RangeMultiplier@blinded` is retired). See PHYSICAL_STATE_SYSTEM.md §5 / W10.
+	# the weapon is disabled (every attack PauseOnCondition that carries `disabled`
+	# also carries `blinded`), the icon shows, and the `blinded` Targetable drops so
+	# blinding units retarget. Warheads migrate from `GrantExternalCondition`
+	# `blinded` to `PhysicalStateName: Blind` / `PhysicalStateScale`; the old binary
+	# block below stays until the pack-side grants land. See PHYSICAL_STATE_SYSTEM.md §5 / W10.
 	PhysicalState@Blind:
 		Name: Blind
 		MaxValue: 20000
@@ -5334,6 +5333,12 @@
 		MaxColor: 888888AA
 		UpperValue: 20000
 		LowerValue: 2000
+	# W10: proportional range scaling (replaces the retired RangeMultiplier@blinded,
+	# which would double-dip to 20% x 20% = 4% at full meter). All other channels of
+	# the trait default to 100 = neutral.
+	ModifiesCombatProportionalToPhysicalState@Blind:
+		PhysicalStateName: Blind
+		RangeTo: 20
 	# --- old binary condition block (preserved until Set B weapon migration).
 	TimedConditionBar@blinded:
 		Condition: blinded
@@ -5345,9 +5350,6 @@
 		RequiresCondition: blinded
 		Modifier: 20
 	DetectCloakedMultiplier@blinded:
-		RequiresCondition: blinded
-		Modifier: 20
-	RangeMultiplier@blinded:
 		RequiresCondition: blinded
 		Modifier: 20
 	WithDecoration@blinded:
@@ -6884,7 +6886,7 @@ CPQDEBUGDUMMY:
 		InitialDelay: 1
 		CloakDelay: 1
 		UncloakOn: None
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 		RequiresCondition: stashcamo
 		IsPlayerPalette: true
 	Cloak:
@@ -6894,7 +6896,7 @@ CPQDEBUGDUMMY:
 		UncloakOn: Unload, Infiltrate, Demolish, Dock, Damage, Heal, Attack
 		CloakedCondition: cloaked
 		RequiresCondition: !disabled && (stealthed || ixian_upgrade_advancedixiantechnology)
-		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
+		PauseOnCondition: cloak-force-disabled || base-reveal || disabled || blinded
 		IsPlayerPalette: true
 	WithColoredSelectionBox:
 		ColorSource: Player
@@ -7158,7 +7160,7 @@ CPQDEBUGDUMMY:
 		CloakDelay: 75
 		CloakSound: cloak5.aud
 		UncloakSound: cloak5.aud
-		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
+		PauseOnCondition: cloak-force-disabled || base-reveal || disabled || blinded
 		RequiresCondition: tscloak
 		IsPlayerPalette: true
 		# CloakStyle: Palette
@@ -7215,7 +7217,7 @@ CPQDEBUGDUMMY:
 
 ^ChargedFrontalEMP:
 	AttackFrontalCharged:
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 		FacingTolerance: 10
 		ChargeLevel: 25, 50
 		ChargingCondition: cond_charging
@@ -7236,11 +7238,11 @@ CPQDEBUGDUMMY:
 ^FrontalEMP:
 	AttackFrontal:
 		FacingTolerance: 8
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 
 ^TurretEMP:
 	AttackTurreted:
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 
 ^DefenseTurretedEMP:
 	Inherits: ^TurretEMP
@@ -7249,11 +7251,11 @@ CPQDEBUGDUMMY:
 
 ^FollowEMP:
 	AttackFollow:
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 
 ^PopupTurretEMP:
 	AttackPopupTurreted:
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 
 ^WithSwimsuit:
 	Mobile:
@@ -7753,7 +7755,7 @@ CPQDEBUGDUMMY:
 		UsePlayerColor: True
 		ValidRelationships: Ally, Enemy, Neutral
 	Transforms:
-		PauseOnCondition: disabled || terrordroned
+		PauseOnCondition: disabled || terrordroned || blinded
 		TransformTextNotification: New base hub has been deployed.
 		FlashTransformTextNotification: true
 	NewConstructionOptionsOnDeploy:
@@ -7819,7 +7821,7 @@ CPQDEBUGDUMMY:
 		RequiresCondition: !jammed && !disabled
 	Transforms:
 		RequiresCondition: factundeploy
-		PauseOnCondition: being-demolished || build-incomplete || disabled
+		PauseOnCondition: being-demolished || build-incomplete || disabled || blinded
 		IntoActor: ts_gdi_mobileconstructionvehicle
 		Offset: 1,1
 		Facing: 432
@@ -7844,11 +7846,11 @@ CPQDEBUGDUMMY:
 	Production@NORMAL:
 		Produces: Building, Defence
 		RequiresCondition: !(classicproductionqueues || hybridproductionqueues)
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	Production@CLASSICPRODUCTIONQUEUES:
 		Produces: RABuilding, RADefence
 		RequiresCondition: classicproductionqueues || hybridproductionqueues
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	ProductionQueue@Building:
 		Type: Building
 		DisplayOrder: 0
@@ -8003,11 +8005,11 @@ CPQDEBUGDUMMY:
 	Production@NORMAL:
 		Produces: Infantry, Soldier
 		RequiresCondition: !classicproductionqueues
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	Production@CLASSICPRODUCTIONQUEUES:
 		Produces: RAInfantry, Soldier
 		RequiresCondition: classicproductionqueues
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	ProductionQueue@INFANTRY:
 		Type: Infantry
 		DisplayOrder: 2
@@ -8142,11 +8144,11 @@ CPQDEBUGDUMMY:
 	Production@NORMAL:
 		Produces: Vehicle
 		RequiresCondition: !classicproductionqueues
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	Production@CLASSICPRODUCTIONQUEUES:
 		Produces: RAVehicle
 		RequiresCondition: classicproductionqueues
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	ProductionQueue@VEHICLE:
 		Type: Vehicle
 		DisplayOrder: 3
@@ -8206,7 +8208,7 @@ CPQDEBUGDUMMY:
 	# 	ReadyAudio: ReinforcementsArrived
 	# 	SpawnType: ClosestEdgeToDestination
 	# 	ProportionalSpeed: true
-	# 	PauseOnCondition: disabled
+	# 	PauseOnCondition: disabled || blinded
 	ProductionAirdropCA@CLASSIC:
 		Produces: RAVehicle
 		# RequiresCondition: classicproductionqueues
@@ -8215,7 +8217,7 @@ CPQDEBUGDUMMY:
 		ReadyAudio: ReinforcementsArrived
 		SpawnType: ClosestEdgeToDestination
 		ProportionalSpeed: true
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	-ProductionQueue@VEHICLE:
 	-ProductionBar@VEHICLE:
 	ProductionBar@RAVEHICLE:
@@ -8251,11 +8253,11 @@ CPQDEBUGDUMMY:
 	Production@NORMAL:
 		Produces: Aircraft
 		RequiresCondition: !classicproductionqueues
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	Production@CLASSICPRODUCTIONQUEUES:
 		Produces: RAAircraft
 		RequiresCondition: classicproductionqueues
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	ProductionQueue@AIRCRAFT:
 		Type: Aircraft
 		DisplayOrder: 4
@@ -8755,7 +8757,7 @@ CPQDEBUGDUMMY:
 		Delay: 50
 		Count: 1
 		ResetOnFire: True
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
@@ -8764,7 +8766,7 @@ CPQDEBUGDUMMY:
 	# RenderRangeCircle:
 	# 	RangeCircleType: pointdefense
 	# 	Color: FF000088
-	# 	PauseOnCondition: !pdammo || disabled
+	# 	PauseOnCondition: !pdammo || disabled || blinded
 
 ^CashTricklerMultipliers:
 	CashTrickler:
@@ -8811,7 +8813,7 @@ CPQDEBUGDUMMY:
 	CashTrickler:
 		Interval: 250
 		Amount: 250
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	CashTricklerBar:
 	CashTricklerMultiplier@RANK-1:
 		Modifier: 125
@@ -8829,7 +8831,7 @@ CPQDEBUGDUMMY:
 		Amount: 250
 		Interval: 1
 		InitialDelay: 1
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 		RequiresCondition: city-veteran <= 3
 	ActorStatValues:
 		Stats: Armor, Sight, CashTrickler, Power, Experience
@@ -8934,7 +8936,7 @@ CPQDEBUGDUMMY:
 		Reject: AttackMove, AssaultMove
 		RequiresCondition: !botmicro && deployed
 	GrantConditionOnDeploy:
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 		DeployedCondition: deployed
 		UndeployedCondition: undeployed
 		UndeployOnMove: true
@@ -9045,7 +9047,7 @@ CPQDEBUGDUMMY:
 		ExclusiveDeploy: false
 		DeployType: vehicle
 	Mobile:
-		PauseOnCondition: disabled || notmobile
+		PauseOnCondition: disabled || notmobile || blinded
 	ActorStatValues:
 		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange, Cargo, Kills
 	TooltipExtras@Cargo:
@@ -9125,7 +9127,7 @@ CPQDEBUGDUMMY:
 		CooldownTicks: 0
 		DeployedCondition: clearmines
 		Voice: Action
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 	ProximityExternalCondition@clearmines:
 		Condition: trap-neutralized
 		Range: 4c0
@@ -9572,7 +9574,7 @@ CPQDEBUGDUMMY:
 		Range: 12c0
 		RequiresCondition: !disabled && ifv-spy
 	SpawnActorPower@spy:
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 		RequiresCondition: ifv-spy
 		OrderName: SovietSpyPlane
 		Prerequisites:
@@ -9621,7 +9623,7 @@ CPQDEBUGDUMMY:
 		Locomotor: wheeled
 		Speed: 150
 		TurnSpeed: 30
-		PauseOnCondition: notmobile || disabled
+		PauseOnCondition: notmobile || disabled || blinded
 	Health:
 		HP: 25000
 	Repairable:
@@ -9901,7 +9903,7 @@ CPQDEBUGDUMMY:
 ^RepairsUnits:
 	RepairsUnits:
 		RepairDamageTypes: KillsDrone
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 
 ^BuildingPlug:
 	Interactable:
@@ -9954,7 +9956,7 @@ CPQDEBUGDUMMY:
 		CloakedCondition: cloaked
 		InitialDelay: 125
 		CloakDelay: 75
-		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
+		PauseOnCondition: cloak-force-disabled || base-reveal || disabled || blinded
 		IsPlayerPalette: true
 		CloakStyle: Alpha
 	WithColoredSelectionBox:
@@ -10049,7 +10051,7 @@ CPQDEBUGDUMMY:
 		Condition: triggered
 	GrantConditionOnDeploy:
 		DeployedCondition: triggered
-		PauseOnCondition: disabled
+		PauseOnCondition: disabled || blinded
 		ExclusiveDeploy: true
 		DeployType: Detonate
 	Voiced:
@@ -10082,7 +10084,7 @@ CPQDEBUGDUMMY:
 	Mobile:
 		Speed: 100
 		TurnSpeed: 20
-		PauseOnCondition: disabled || notmobile || !loaded
+		PauseOnCondition: disabled || notmobile || !loaded || blinded
 	Passenger:
 	Health:
 		HP: 25000
@@ -10100,7 +10102,7 @@ CPQDEBUGDUMMY:
 	Armament:
 		Weapon: RA220mmrapid
 		MuzzleSequence: muzzle
-		PauseOnCondition: disabled || notmobile || !loaded
+		PauseOnCondition: disabled || notmobile || !loaded || blinded
 	WithMuzzleOverlay:
 	AttackFrontal:
 		FacingTolerance: 0
