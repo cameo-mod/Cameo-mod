@@ -26,7 +26,7 @@ TS155mmFrag:
 TSCadreGrenade:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Grenade_Light
-	Inherits@fx: ^Effect_Demolition_Light
+	Inherits@fx: ^ts_nod_set14
 	ReloadDelay: 124
 	Range: 6623
 	Report: M203.aud
@@ -37,13 +37,11 @@ TSCadreGrenade:
 		ContrailWidth: 0c32
 	Warhead@Demolition_Light:
 		Damage: 36000
-	Warhead@3Eff: CreateEffect
-		ImpactSounds: expnew13.aud
 
 TSRaiderGrenade:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Grenade_Light
-	Inherits@fx: ^Effect_Demolition_Light
+	Inherits@fx: ^ts_nod_set14
 	ReloadDelay: 52
 	Range: 4787
 	Report: M203.aud
@@ -54,8 +52,6 @@ TSRaiderGrenade:
 		ContrailWidth: 0c32
 	Warhead@Demolition_Light:
 		Damage: 36000
-	Warhead@3Eff: CreateEffect
-		ImpactSounds: expnew13.aud
 
 TSProton:
 	Inherits@collapsewh: ^Warhead_Laser_Heavy
@@ -63,6 +59,7 @@ TSProton:
 	-TargetActorCenter:
 	Inherits: ^TSEnergyBlast
 	Inherits@3: ^LaserWeapon
+	Inherits@fx: ^ts_nod_tsproton
 	Range: 5414
 	Burst: 4
 	BurstDelays: 3
@@ -84,8 +81,6 @@ TSProton:
 		Damage: 30000
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 15
-	Warhead@2Eff: CreateEffect
-		Explosions: small_frag
 
 	-Warhead@LaserWeapon:
 	-Warhead@LaserExtraDamage:
@@ -96,11 +91,6 @@ TSProton:
 	InvalidTargets: wall
 	TargetActorCenter: true
 	Warhead@GroundFire: SpawnActor
-	Warhead@Effect:
-		ImpactSounds: firebl3.aud
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
 	Warhead@GroundFire:
 		Actors: groundfire
 		Range: 1
@@ -134,7 +124,7 @@ TSProton:
 TSTibBazooka:
 	Inherits@wh: ^Warhead_MissileChem_Light
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_MissileAP_Light
+	Inherits@fx: ^ts_nod_tstibbazooka
 	Report: rketinf1.aud
 	ReloadDelay: 52
 	Range: 6694
@@ -145,24 +135,10 @@ TSTibBazooka:
 	Warhead@MissileChem_Light:
 		Damage: 30000
 		FriendlyFireDamage: 90
-	Warhead@Effect: CreateEffect
-		Explosions: small_poof
-		ImpactSounds: xplos.aud
-		ValidTargets: Ground, Water
-	Warhead@EffectAir: CreateEffect
-		Explosions: med_explosion_air
-		ImpactSounds: xplos.aud
-		ValidTargets: Air
-		ImpactActors: false
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 6
 		Range: 1250
-		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 100
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 TSStankTusk:
 	Inherits@missilerole: ^Warhead_MissileAP_Medium
@@ -236,7 +212,7 @@ TSStankTibTusk:
 	Inherits@collapseflat: ^Warhead_MissileAP_Medium_Flat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
-	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@fx: ^ts_nod_tsstanktibtusk
 	Range: 6385
 	Burst: 2
 	BurstDelays: 2
@@ -284,15 +260,6 @@ TSStankTibTusk:
 		HomingActivationDelay: 2
 		RangeLimit: 25000
 		PointDefenseTypes: Missile
-	Warhead@Effect:
-		Explosions: med_frag
-		ImpactSounds: xplos.aud
-		ValidTargets: Ground, Water
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-	Warhead@EffectAir:
-		ImpactSounds: xplos.aud
 	Warhead@MediumChemicalWeaponPercentage:
 		Spread: 350
 		Falloff: 99, 66, 33
@@ -341,12 +308,15 @@ TSStankTibTusk:
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 8
 
 TSNODRedEye:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_MissileAP_Heavy
+	Inherits@fx: ^ts_nod_tsnodredeye
 	ReloadDelay: 50
 	Range: 13176
 	Report: rocket2.aud
@@ -361,9 +331,6 @@ TSNODRedEye:
 		Acceleration: 5
 		AllowSnapping: true
 		CloseEnough: 500
-	Warhead@2Eff: CreateEffect
-		ImpactSounds: expnew13.aud
-		ImpactActors: false
 	Warhead@MissileAA_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -433,7 +400,7 @@ TSLasergun:
 TSCommandoShotgun:
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
-	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@fx: ^ts_nod_tscommandoshotgun
 	ReloadDelay: 20
 	Range: 4146
 	Report: DSDSHTGN.wav
@@ -467,6 +434,10 @@ TSCommandoShotgun:
 	-Warhead@ShotgunGrenadeEnemy:
 
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Duration: 4
+		Range: 1250
+		ValidTargets: Shielded
 		InvalidTargets: Air
 	Projectile: Bullet
 	Warhead@ShotgunGrenadeAlly: AreaDamage
@@ -508,15 +479,6 @@ TSCommandoShotgun:
 		UpdatesUnitStatistics: false
 	Warhead@Concrete:
 		Damage: 25
-	Warhead@Effect:
-		Explosions: piffs
-		ImpactSounds: xplosml2.aud
-		ValidTargets: Ground, Ship, Air
-		ImpactActors: false
-	Warhead@EffectAir:
-		Explosions: big_explosion_air
-	Warhead@EffectWater:
-		Explosions: water_piffs
 	Warhead@Glow:
 		Scale: 0.8
 		FadeFrames: 15
@@ -703,7 +665,7 @@ laserelitecadregun:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@3: ^LaserWeapon
 	Inherits@4: ^TSLaserEffect
-	Inherits: ^Effect_Sniper_Light
+	Inherits@fx: ^ts_nod_laserelitecadregun
 	Projectile: LaserZap
 		Width: 36
 		Duration: 8
@@ -761,8 +723,6 @@ laserelitecadregun:
 			Steel: 8
 			Superheavy: 5
 			Wood: 14
-	Warhead@Effect:
-		Explosions: small_napalm
 	Warhead@LegacyLaserExtraDamage: SpreadDamage
 		Damage: 600
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -789,6 +749,9 @@ laserelitecadregun:
 			Superheavy: 1
 			Wood: 1
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 10
 	Warhead@ShieldHitEffect:
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
@@ -876,10 +839,8 @@ TSShadowTeamBomb:
 		ValidTargets: demolishable
 		Spread: 1000
 		Damage: 100
-	Warhead@2Eff: CreateEffect
-		Explosions: self_destruct
-		ImpactSounds: gexpcraa.wav
 
+	Inherits@fx: ^ts_nod_tsshadowteambomb
 TSShadowTeamTargeting:
 	ReloadDelay: 500
 	Range: 12000

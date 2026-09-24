@@ -4,9 +4,9 @@
 # the ratchet counts per maintainer ruling but stay listed below.
 
 Files scanned: 40
-Concrete weapons with local Explosions (L1): 337
-Concrete weapons with local ImpactSounds (L2): 339
-Exempt secondary-channel declarations (not ratcheted): 289
+Concrete weapons with local Explosions (L1): 276
+Concrete weapons with local ImpactSounds (L2): 279
+Exempt secondary-channel declarations (not ratcheted): 244
 
 | file | weapon | warhead | Explosions | ImpactSounds | line | exempt |
 |---|---|---|---|---|---|---|
@@ -370,113 +370,6 @@ Exempt secondary-channel declarations (not ratcheted): 289
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | Tentacle | Effect | YES | YES | 1194 |  |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | UltraliskHusk | Effect | - | YES | 885 |  |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | ZerglingClaw | Effect | - | YES | 11 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalArtilleryWalkerShell | Effect | YES | YES | 1589 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalArtilleryWalkerShellUpgraded | Effect | YES | YES | 1765 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalAvatarLaser | Effect | YES | YES | 2581 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalBeholderLaser | Effect | YES | YES | 4167 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalBerserkerBlades | Effect | YES | YES | 847 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalCommandoPlasma | Effect | YES | YES | 2433 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalCommandoPlasmaMk2 | Effect | YES | YES | 2480 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalCommandoPlasmaMk2Neutron | Effect | YES | YES | 4052 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalCommandoPlasmaNeutron | Effect | YES | YES | 3948 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalCoreDefenderLaser | Effect | YES | YES | 2560 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalCyborgChaingun | Effect | YES | YES | 863 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalDissolverSpray | Effect | YES | YES | 2336 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalEliminatorGatling | Effect | YES | YES | 910 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalHeavyReaperTrap | Effect | YES | YES | 1545 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalHunterKillerHeavyLaser | Effect | YES | YES | 2217 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalHunterKillerLasers | Effect | YES | YES | 2012 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalHunterKillerLasers_elite | Effect | YES | YES | 2152 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalLaserBoatLaser | Effect | YES | YES | 2282 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalLaserBoatLaser_AA | Effect | YES | YES | 2306 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalLegionGun | Effect | YES | YES | 2647 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalMagicNuke | Effect | YES | YES | 3887 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalMagicNuke | Effect2 | - | YES | 3460 | exempt |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalManticoreLaser | Effect | YES | YES | 3344 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalMantisGun | Effect | YES | YES | 2615 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalMothershipRockets | Effect | YES | YES | 2971 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalMothershipRockets | EffectAir | YES | YES | 2975 | exempt |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalOverkillCharge | Effect | YES | YES | 4251 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalOverkillDroneLaser | Effect | YES | YES | 4331 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalOverkillGunshipLaser | Effect | YES | YES | 4277 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalOverkillLaser | Effect | YES | YES | 4305 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalRavagerPlasma | Effect | YES | YES | 3305 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalRavagerPlasmaNeutron | Effect | YES | YES | 4114 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalReaperTrapAir | Effect | YES | YES | 98 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalReaperTrapGround | Effect | YES | YES | 76 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalSpiderCnc4Laser | Effect | YES | YES | 2260 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalSpiderLaser | Effect | YES | YES | 2238 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalSubmarinePlasma | Effect | YES | YES | 2532 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalWaspLaser | Effect | YES | YES | 3069 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalWaspLaserStriker | Effect | YES | YES | 3099 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalWidowPlasma | Effect | YES | YES | 3322 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | DarkObeliskLaser | Effect | YES | YES | 130 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | TSCABALDisable_EMP | Effect | YES | YES | 176 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | TSCABALEnlightedLaser | Effect | YES | YES | 653 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | TSCABALObeliskLaserFire | Effect | YES | YES | 240 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | TSDevoutChainguns | Effect | YES | YES | 887 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | TSHellfireTwin | Effect | YES | YES | 417 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | TSVulcanTower | Effect | YES | YES | 801 |  |
-| ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | eliminator_blades | Effect | YES | YES | 829 |  |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TS70mmChem | Effect | YES | YES | 27 |  |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TS70mmChem | ShieldHitEffect | - | YES | 34 | exempt |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSApacheMissile | EffectWater | YES | YES | 1751 | exempt |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSChemApacheMissile | Effect | YES | YES | 1785 |  |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSChemApacheMissile | EffectAir | YES | YES | 1793 | exempt |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSChemApacheMissile | EffectWater | YES | YES | 1798 | exempt |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSChemBazooka | Effect | YES | YES | 1254 |  |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSChemBazooka | EffectAir | YES | YES | 1258 | exempt |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSChemBazooka | ShieldHitEffect | - | YES | 1270 | exempt |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSChemCobraMissile | Effect | YES | YES | 1866 |  |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSChemCobraMissile | EffectAir | YES | YES | 1874 | exempt |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSChemCobraMissile | EffectWater | YES | YES | 1879 | exempt |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSChemJuggerboat90mm | 3Eff | - | YES | 1116 | exempt |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSChemJuggerboat90mm | EffectWater | YES | YES | 1111 | exempt |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSChemJuggerboat90mm | ShieldHitEffect | - | YES | 1118 | exempt |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSCobraMissile | EffectWater | YES | YES | 1832 | exempt |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSCropBomb | 2Eff | YES | YES | 3096 | exempt |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSCropBomb | 3EffWater | YES | YES | 3100 | exempt |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSCropBombChem | 2Eff | YES | YES | 3131 | exempt |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSCropBombChem | 3EffWater | YES | YES | 3135 | exempt |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSFiendShard | 3Eff | YES | - | 2344 | exempt |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSFiendShardBlue | 3Eff | YES | - | 2498 | exempt |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSFiendShardBlueUP | 3Eff | YES | - | 2663 | exempt |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSFiendShardUP | 3Eff | YES | - | 2383 | exempt |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSJuggerFlakAA | Effect | YES | YES | 1027 |  |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSJuggerFlakAA_boat | Effect | YES | YES | 1044 |  |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSJuggerboat90mm | 3Eff | - | YES | 1067 | exempt |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSLocustBombChem | 2Eff | YES | YES | 3168 | exempt |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSLocustBombChem | 3EffWater | YES | YES | 3172 | exempt |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSMammothTusk | EffectAir | YES | - | 1543 | exempt |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSMammothTuskChem | 2Eff | - | YES | 1425 | exempt |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSMammothTuskChem | 3Eff | YES | YES | 1428 | exempt |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSScoopDualChem | Effect | YES | YES | 315 |  |
-| ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml | TSScoopDualChem | ShieldHitEffect | - | YES | 323 | exempt |
-| ContentPacks\TiberianSun\GDI\yaml\weapons.yaml | DropPodExplode | Effect | YES | - | 1846 |  |
-| ContentPacks\TiberianSun\GDI\yaml\weapons.yaml | E1Droppod | Effect | YES | YES | 1928 |  |
-| ContentPacks\TiberianSun\GDI\yaml\weapons.yaml | E1Droppod | Effect2 | YES | - | 1936 | exempt |
-| ContentPacks\TiberianSun\GDI\yaml\weapons.yaml | TSBomb | Effect | YES | YES | 1195 |  |
-| ContentPacks\TiberianSun\GDI\yaml\weapons.yaml | TSBomb | EffectWater | YES | YES | 1199 | exempt |
-| ContentPacks\TiberianSun\GDI\yaml\weapons.yaml | TSDroppod1 | Effect | - | YES | 1899 |  |
-| ContentPacks\TiberianSun\GDI\yaml\weapons.yaml | TSGDIRedEye | 2Eff | - | YES | 1167 | exempt |
-| ContentPacks\TiberianSun\GDI\yaml\weapons.yaml | TSHellfireSonic | EffectAir | YES | YES | 1099 | exempt |
-| ContentPacks\TiberianSun\GDI\yaml\weapons.yaml | TSHellfireSonic | EffectWater | YES | YES | 1104 | exempt |
-| ContentPacks\TiberianSun\GDI\yaml\weapons.yaml | TSIonBeamMini | Effect | YES | - | 1820 |  |
-| ContentPacks\TiberianSun\GDI\yaml\weapons.yaml | TSJugg120mm | 3Eff | - | YES | 316 | exempt |
-| ContentPacks\TiberianSun\GDI\yaml\weapons.yaml | TSJugg90mm | 3Eff | - | YES | 286 | exempt |
-| ContentPacks\TiberianSun\GDI\yaml\weapons.yaml | TSMammothTusk2II_AA | EffectAir | YES | - | 1077 | exempt |
-| ContentPacks\TiberianSun\GDI\yaml\weapons.yaml | TSMammothTusk2_AA | EffectAir | YES | - | 1046 | exempt |
-| ContentPacks\TiberianSun\GDI\yaml\weapons.yaml | TSMechMGII | Effect | YES | YES | 1753 |  |
-| ContentPacks\TiberianSun\GDI\yaml\weapons.yaml | TSMine_EMP | Effect | YES | YES | 588 |  |
-| ContentPacks\TiberianSun\GDI\yaml\weapons.yaml | TSMobile_EMP | Effect | YES | YES | 1267 |  |
-| ContentPacks\TiberianSun\Nod\yaml\weapons.yaml | TSCadreGrenade | 3Eff | - | YES | 40 | exempt |
-| ContentPacks\TiberianSun\Nod\yaml\weapons.yaml | TSNODRedEye | 2Eff | - | YES | 364 | exempt |
-| ContentPacks\TiberianSun\Nod\yaml\weapons.yaml | TSProton | 2Eff | YES | - | 87 | exempt |
-| ContentPacks\TiberianSun\Nod\yaml\weapons.yaml | TSRaiderGrenade | 3Eff | - | YES | 57 | exempt |
-| ContentPacks\TiberianSun\Nod\yaml\weapons.yaml | TSShadowTeamBomb | 2Eff | YES | YES | 879 | exempt |
-| ContentPacks\TiberianSun\Nod\yaml\weapons.yaml | TSTibBazooka | Effect | YES | YES | 148 |  |
-| ContentPacks\TiberianSun\Nod\yaml\weapons.yaml | TSTibBazooka | EffectAir | YES | YES | 152 | exempt |
-| ContentPacks\TiberianSun\Nod\yaml\weapons.yaml | TSTibBazooka | ShieldHitEffect | - | YES | 164 | exempt |
 | ContentPacks\Warcraft2\Humans\yaml\weapons.yaml | MortarTeamArtilleryShell | Effect | YES | YES | 363 |  |
 | ContentPacks\Warcraft2\Humans\yaml\weapons.yaml | wc2_dwarf_Rifle | Effect | YES | YES | 55 |  |
 | ContentPacks\Warcraft2\Humans\yaml\weapons.yaml | wc2_humans_alleria_arrow | Effect | - | YES | 752 |  |
@@ -696,4 +589,4 @@ Exempt secondary-channel declarations (not ratcheted): 289
 | weapons\weapons.yaml | bowFire | 2Eff | - | YES | 13549 | exempt |
 | weapons\weapons.yaml | bowFire_AA | 2Eff | - | YES | 13524 | exempt |
 
-PASS: L1 337 <= 337, L2 339 <= 339
+PASS: L1 276 <= 276, L2 279 <= 279

@@ -11,8 +11,8 @@ TS70mm:
 TS70mmChem:
 	Inherits@wh: ^Warhead_CannonChem_Light
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_CannonHE_Medium
 	Inherits@fx2: ^TSCannonEffect
+	Inherits@fx: ^ts_forgotten_ts70mmchem
 	ReloadDelay: 24
 	Range: 5566
 	Report: flamer2.aud
@@ -24,16 +24,11 @@ TS70mmChem:
 		FriendlyFireSpread: 50
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@Effect: CreateEffect
-		Explosions: chemball
-		ImpactSounds: firebl3.aud
 	Warhead@ShieldHit: GrantExternalCondition
-		Duration: 6
-	Warhead@Concrete: DamagesConcrete
-		Damage: 100
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		Condition: shieldhit
+		Range: 1250
 		ValidTargets: Shielded
+		Duration: 6
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
 		Duration: 50
@@ -75,8 +70,8 @@ TS70mmTurChem:
 	Inherits@collapseflat: ^Warhead_CannonHE_Medium_Flat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
-	Inherits@3: ^Effect_CannonHE_Medium
 	Inherits@4: ^TSCannonEffect
+	Inherits@fx: ^ts_forgotten_ts70mmturchem
 	ReloadDelay: 10
 	Range: 6574
 	Projectile: Bullet
@@ -106,11 +101,6 @@ TS70mmTurChem:
 		Inaccuracy: 150
 	Warhead@Concrete:
 		Damage: 100
-	Warhead@Effect:
-		Explosions: poof
-		ImpactSounds: xplosml2.aud
-	Warhead@EffectAir:
-		Explosions: big_explosion_air
 	Warhead@Glow:
 		Scale: 0.8
 		FadeFrames: 15
@@ -142,6 +132,9 @@ TS70mmTurChem:
 		PhysicalStates:
 			Corrosion: 100
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 12
 	Warhead@TankDestroyerCannonPercentage:
 		ValidTargets: Ground, Water
@@ -170,8 +163,8 @@ TS70mmTurChem:
 TS120mmx:
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
-	Inherits@3: ^Effect_CannonHE_Medium
 	Inherits@4: ^TSCannon
+	Inherits@fx: ^ts_forgotten_ts120mmx
 	Range: 5677
 	ReloadDelay: 52
 	Burst: 2
@@ -182,17 +175,16 @@ TS120mmx:
 	-Warhead@1Dam:
 	Warhead@Concrete:
 		Damage: 175
-	Warhead@Effect:
-		Explosions: poof
-		ImpactActors: false
-		ImpactSounds: xplos.aud
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 12
 TSChem120mmx:
 	Inherits@chemical: ^Warhead_CannonChem_Heavy
 	Inherits@2: ^Projectile_Shell_Medium
-	Inherits@3: ^Effect_CannonHE_Medium
 	Inherits@4: ^TSCannon
+	Inherits@fx: ^ts_forgotten_tschem120mmx
 	Range: 5677
 	ReloadDelay: 52
 	Burst: 2
@@ -223,13 +215,6 @@ TSChem120mmx:
 	Report: M203.aud
 	Warhead@Concrete:
 		Damage: 175
-	Warhead@Effect:
-		Explosions: poof
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-		GlowScale: 1.5
-		ImpactActors: false
-		ImpactSounds: xplos.aud
 	Warhead@MediumChemicalWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		Falloff: 99, 66, 33
@@ -257,6 +242,9 @@ TSChem120mmx:
 			Superheavy: 20
 			Wood: 9
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 12
 	Warhead@ShrapnelWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -299,8 +287,8 @@ TSScoopDualChem:
 	# accidentally retained the alternative 30000-damage compatibility payload too.
 	Inherits@wh: ^Warhead_CannonChem_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_CannonHE_Medium
 	Inherits@fx2: ^TSCannonEffect
+	Inherits@fx: ^ts_forgotten_tsscoopdualchem
 	ReloadDelay: 60
 	Burst: 2
 	BurstDelays: 2
@@ -312,17 +300,11 @@ TSScoopDualChem:
 		Damage: 30000
 		PhysicalStates:
 			Corrosion: 100
-	Warhead@Effect: CreateEffect
-		Explosions: med_tibnapalm
-		ImpactSounds: xplobig6.aud
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
 	Warhead@ShieldHit: GrantExternalCondition
-		Duration: 8
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		Condition: shieldhit
+		Range: 1250
 		ValidTargets: Shielded
+		Duration: 8
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 2
 		Duration: 50
@@ -362,8 +344,8 @@ TSScoopDualTurChem:
 	Inherits@collapseflat: ^Warhead_CannonHE_Heavy_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
-	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@4: ^TSCannonEffect
+	Inherits@fx: ^ts_forgotten_tsscoopdualturchem
 	ReloadDelay: 48
 	Burst: 2
 	BurstDelays: 2
@@ -391,15 +373,6 @@ TSScoopDualTurChem:
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 	Warhead@Concrete:
 		Damage: 175
-	Warhead@Effect:
-		Explosions: poof
-		ImpactSounds: xplos.aud
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-		ImpactActors: false
-	Warhead@EffectWater:
-		Explosions: med_splash
 	Warhead@MediumChemicalWeaponPercentage:
 		ValidTargets: Ground, Water
 		Spread: 350
@@ -468,7 +441,7 @@ TSHighVelocity:
 TSHighVelocityChem:
 	Inherits@collapsewh: ^Warhead_CannonChem_Light
 	Inherits: ^TSCannonEffect
-	Inherits: ^Effect_AlliedTigerCannon
+	Inherits@fx: ^ts_forgotten_set18
 	ReloadDelay: 90
 	Range: 7701
 	Projectile: Bullet
@@ -498,8 +471,6 @@ TSHighVelocityChem:
 	Report: cannon1.aud
 	Warhead@Concrete:
 		Damage: 100
-	Warhead@EffectWater:
-		Explosions: med_splash
 	Warhead@LightChemicalWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		Falloff: 99, 66, 33
@@ -565,7 +536,7 @@ TSHighVelocity2:
 TSHighVelocity2Chem:
 	Inherits@collapsewh: ^Warhead_CannonChem_Light
 	Inherits: ^TSCannonEffect
-	Inherits: ^Effect_AlliedTigerCannon
+	Inherits@fx: ^ts_forgotten_set18
 	ReloadDelay: 55
 	Range: 8207
 	Projectile: Bullet
@@ -595,8 +566,6 @@ TSHighVelocity2Chem:
 	Report: cannon1.aud
 	Warhead@Concrete:
 		Damage: 100
-	Warhead@EffectWater:
-		Explosions: med_splash
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
@@ -680,7 +649,7 @@ TSBusMortar:
 		Damage: 64000
 TSBusMortarChem:
 	Inherits@collapsewh: ^Warhead_Chemical_Heavy
-	Inherits: ^Effect_Apoc_AP_RA2
+	Inherits@fx: ^ts_forgotten_tsbusmortarchem
 	-Warhead@Glow:
 	-Warhead@EffectAir:
 	ReloadDelay: 120
@@ -721,18 +690,6 @@ TSBusMortarChem:
 	InvalidTargets: wall
 	Warhead@Concrete:
 		Damage: 200
-	Warhead@Effect:
-		Explosions: big_tibnapalm
-		GlowFadeFrames: 60
-		GlowFadeInFrames: 12
-		GlowScale: 2.0
-		ImpactSounds: xplobig6.aud
-		-ExplosionPalette:
-	Warhead@Effect1:
-		Explosions: poof
-	Warhead@EffectWater:
-		Explosions: large_splash
-		-ExplosionPalette:
 	Warhead@HeavyBombPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		Falloff: 100, 50, 25, 10, 5
@@ -810,6 +767,9 @@ TSBusMortarChem:
 			Superheavy: 20
 			Wood: 9
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 10
 	Warhead@ShieldHitEffect:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
@@ -1014,7 +974,7 @@ TS120mmxChem:
 TSJuggerFlakAA:
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
-	Inherits@fx: ^Effect_Flak_Medium
+	Inherits@fx: ^ts_forgotten_set20
 	Report: jugger1.aud
 	ReloadDelay: 28
 	Burst: 3
@@ -1024,13 +984,10 @@ TSJuggerFlakAA:
 	Warhead@Flak_Medium:
 		Damage: 10000
 		ValidTargets: Air
-	Warhead@Effect: CreateEffect
-		Explosions: small_poof
-		ImpactSounds: expnew13.aud
 TSJuggerFlakAA_boat:
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
-	Inherits@fx: ^Effect_Flak_Medium
+	Inherits@fx: ^ts_forgotten_set20
 	Report: jugger1.aud
 	MinRange: 2245
 	ReloadDelay: 69
@@ -1041,13 +998,10 @@ TSJuggerFlakAA_boat:
 	Warhead@Flak_Medium:
 		Damage: 10000
 		ValidTargets: Air
-	Warhead@Effect: CreateEffect
-		Explosions: small_poof
-		ImpactSounds: expnew13.aud
 
 TSJuggerboat90mm:
 	Inherits@wh: ^Warhead_Concussion_Medium
-	Inherits@fx: ^Effect_Concussion_Medium
+	Inherits@fx: ^ts_forgotten_tsjuggerboat90mm
 	ReloadDelay: 69
 	Range: 12834
 	MinRange: 2565
@@ -1064,8 +1018,6 @@ TSJuggerboat90mm:
 	Warhead@Concussion_Medium:
 		PercentageScale: 15000
 		Damage: 20000
-	Warhead@3Eff: CreateEffect
-		ImpactSounds: expnew13.aud
 	# Warhead@3Eff: CreateEffect
 	# 	Explosions: artillery_explosion
 TSBoatcannon:
@@ -1085,7 +1037,7 @@ TSBoatcannon:
 		Damage: 18000
 TSChemJuggerboat90mm:
 	Inherits@wh: ^Warhead_CannonChem_Medium
-	Inherits@fx: ^Effect_Chem_Medium
+	Inherits@fx: ^ts_forgotten_tschemjuggerboat90mm
 	ReloadDelay: 69
 	Range: 12834
 	MinRange: 2565
@@ -1105,22 +1057,9 @@ TSChemJuggerboat90mm:
 	Warhead@CannonChem_Medium:
 		PercentageScale: 14000
 		Damage: 30000
-	Warhead@Effect: CreateEffect
-		ImpactActors: false
-		ValidTargets: Ground, Ship
-	Warhead@EffectWater: CreateEffect
-		Explosions: med_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@3Eff: CreateEffect
-		ImpactSounds: expnew13.aud
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
 TSChemBoatcannon:
 	Inherits@collapsewh: ^Warhead_Chemical_Medium
-	Inherits: ^Effect_Apoc_AP_RA2
+	Inherits@fx: ^ts_forgotten_tschemboatcannon
 	-Warhead@Glow:
 	-Warhead@EffectAir:
 	ReloadDelay: 80
@@ -1147,18 +1086,6 @@ TSChemBoatcannon:
 
 	Warhead@Concrete:
 		Damage: 150
-	Warhead@Effect:
-		Explosions: med_tibnapalm
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-		GlowScale: 1.5
-		ImpactSounds: xplobig6.aud
-		-ExplosionPalette:
-	Warhead@Effect1:
-		Explosions: poof
-	Warhead@EffectWater:
-		Explosions: large_splash
-		-ExplosionPalette:
 	Warhead@HeavyBombPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		Falloff: 100, 50, 25, 10, 5
@@ -1209,6 +1136,9 @@ TSChemBoatcannon:
 			Superheavy: 20
 			Wood: 9
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 8
 	Warhead@ShieldHitEffect:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
@@ -1240,7 +1170,7 @@ TSChemBoatcannon:
 TSChemBazooka:
 	Inherits@wh: ^Warhead_MissileChem_Light
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_MissileAP_Light
+	Inherits@fx: ^ts_forgotten_tschembazooka
 	Report: rketinf1.aud
 	ReloadDelay: 52
 	Range: 6694
@@ -1251,24 +1181,10 @@ TSChemBazooka:
 	Warhead@MissileChem_Light:
 		Damage: 30000
 		FriendlyFireDamage: 90
-	Warhead@Effect: CreateEffect
-		Explosions: small_poof
-		ImpactSounds: xplos.aud
-		ValidTargets: Ground, Water
-	Warhead@EffectAir: CreateEffect
-		Explosions: med_explosion_air
-		ImpactSounds: xplos.aud
-		ValidTargets: Air
-		ImpactActors: false
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 6
 		Range: 1250
-		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 100
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 
 	Warhead@Cloud: SpawnSmokeParticle
@@ -1303,7 +1219,7 @@ TSVanMissile:
 TSChemVanMissile:
 	Inherits@wh: ^Warhead_MissileChem_Medium
 	Inherits@proj: ^Projectile_ArtilleryRocket_Medium
-	Inherits@fx: ^Effect_Concussion_Medium
+	Inherits@fx: ^ts_forgotten_set16
 	ValidTargets: Ground, Water
 	ReloadDelay: 32
 	Burst: 2
@@ -1321,10 +1237,6 @@ TSChemVanMissile:
 	Warhead@MissileChem_Medium:
 		InvalidTargets: Air
 		Damage: 36000
-	Warhead@Effect: CreateEffect
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 2
 		Duration: 50
@@ -1337,6 +1249,10 @@ TSChemVanMissile:
 		InvalidTargets: Water
 
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Duration: 12
+		Range: 1250
+		ValidTargets: Shielded
 		InvalidTargets: Air
 TSMLRSMissile:
 	Inherits@wh: ^Warhead_Concussion_Medium
@@ -1360,7 +1276,7 @@ TSMLRSMissile:
 TSChemMLRSMissile:
 	Inherits@wh: ^Warhead_MissileChem_Medium
 	Inherits@proj: ^Projectile_ArtilleryRocket_Medium
-	Inherits@fx: ^Effect_Concussion_Medium
+	Inherits@fx: ^ts_forgotten_set16
 	ValidTargets: Ground, Water
 	ReloadDelay: 34
 	Burst: 4
@@ -1378,10 +1294,6 @@ TSChemMLRSMissile:
 	Warhead@MissileChem_Medium:
 		InvalidTargets: Air
 		Damage: 36000
-	Warhead@Effect: CreateEffect
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 2
 		Duration: 50
@@ -1394,10 +1306,14 @@ TSChemMLRSMissile:
 		InvalidTargets: Water
 
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Duration: 12
+		Range: 1250
+		ValidTargets: Shielded
 		InvalidTargets: Air
 TSMammothTuskChem:
 	Inherits@collapsewh: ^Warhead_MissileChem_Heavy
-	Inherits: ^Effect_MissileAP_Heavy
+	Inherits@fx: ^ts_forgotten_tsmammothtuskchem
 	-Warhead@Glow:
 	Range: 6172
 	ReloadDelay: 48
@@ -1422,13 +1338,6 @@ TSMammothTuskChem:
 		ContrailLength: 16
 		ContrailColor: 88BB88
 		TrailImage: green_smokey
-	Warhead@2Eff: CreateEffect
-		ImpactActors: false
-		ImpactSounds: expnew07.aud
-	Warhead@3Eff: CreateEffect
-		Explosions: chemball
-		ImpactSounds: xplosml2.aud
-		ImpactActors: false
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
@@ -1461,12 +1370,6 @@ TSMammothTuskChem:
 		PointDefenseTypes: Missile
 		Shadow: true
 		TrailInterval: 1
-	Warhead@Effect:
-		Explosions: big_tibnapalm
-		GlowFadeFrames: 60
-		GlowFadeInFrames: 12
-		GlowScale: 2.0
-		ImpactSounds: xplobig6.aud
 	Warhead@HeavyChemicalWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		Falloff: 99, 66, 33
@@ -1515,13 +1418,16 @@ TSMammothTuskChem:
 			Superheavy: 25
 			Wood: 15
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 10
 	Warhead@ShieldHitEffect:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 TSMammothTusk:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_MissileAP_Heavy
+	Inherits@fx: ^ts_forgotten_tsmammothtusk
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Speed: 500
@@ -1540,8 +1446,6 @@ TSMammothTusk:
 	Warhead@MissileAP_Heavy:
 		Damage: 60000
 		ValidTargets: Ground, Water, Air
-	Warhead@EffectAir: CreateEffect
-		Explosions: small_building
 
 TSRuinerMissile:
 	Inherits@missilerole: ^Warhead_MissileAP_Medium
@@ -1574,7 +1478,7 @@ TSRuinerMissile:
 
 TSChemRuinerMissile:
 	Inherits@collapsewh: ^Warhead_MissileChem_Medium
-	Inherits: ^Effect_CannonAP_Medium
+	Inherits@fx: ^ts_forgotten_tschemruinermissile
 	-Warhead@Glow:
 	Range: 5919
 	ReloadDelay: 50
@@ -1630,15 +1534,6 @@ TSChemRuinerMissile:
 		Shadow: true
 		Speed: 500
 		TrailInterval: 1
-	Warhead@Effect:
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-		GlowScale: 1.5
-		ImpactActors: false
-		ImpactSounds: xplos.aud
-		ValidTargets: Ground, Water
-	Warhead@EffectAir:
-		ImpactSounds: xplos.aud
 	Warhead@GrenadePercentage:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		Falloff: 100, 50, 33, 25, 20
@@ -1735,11 +1630,14 @@ TSChemRuinerMissile:
 			Superheavy: 20
 			Wood: 10
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 8
 TSApacheMissile:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_MissileAP_Medium
+	Inherits@fx: ^ts_forgotten_set12
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 15
 	Range: 4688
@@ -1748,16 +1646,10 @@ TSApacheMissile:
 		Damage: 24000
 		FriendlyFireDamage: 25
 		FriendlyFireSpread: 50
-	Warhead@EffectWater: CreateEffect
-		Explosions: med_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.8
-		FadeFrames: 15
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 8
 
 	Projectile: Missile
@@ -1766,7 +1658,7 @@ TSApacheMissile:
 TSChemApacheMissile:
 	Inherits@wh: ^Warhead_MissileChem_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_MissileAP_Medium
+	Inherits@fx: ^ts_forgotten_set15
 	ValidTargets: Ground, Water, Air
 	InvalidTargets: wall
 	ReloadDelay: 15
@@ -1782,29 +1674,10 @@ TSChemApacheMissile:
 		Spread: 700
 		Falloff: 99, 66, 33
 		InvalidTargets: wall
-	Warhead@Effect: CreateEffect
-		Explosions: med_frag
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Ground, Water
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-	Warhead@EffectAir: CreateEffect
-		Explosions: med_explosion_air
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@EffectWater: CreateEffect
-		Explosions: med_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.8
-		FadeFrames: 15
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 8
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 3
@@ -1820,7 +1693,7 @@ TSChemApacheMissile:
 TSCobraMissile:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_MissileAP_Medium
+	Inherits@fx: ^ts_forgotten_set12
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 12
 	Range: 5052
@@ -1829,16 +1702,10 @@ TSCobraMissile:
 		Damage: 24000
 		FriendlyFireDamage: 25
 		FriendlyFireSpread: 50
-	Warhead@EffectWater: CreateEffect
-		Explosions: med_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.8
-		FadeFrames: 15
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 8
 
 	Projectile: Missile
@@ -1847,7 +1714,7 @@ TSCobraMissile:
 TSChemCobraMissile:
 	Inherits@wh: ^Warhead_MissileChem_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_MissileAP_Medium
+	Inherits@fx: ^ts_forgotten_set15
 	ValidTargets: Ground, Water, Air
 	InvalidTargets: wall
 	ReloadDelay: 12
@@ -1863,29 +1730,10 @@ TSChemCobraMissile:
 		Spread: 700
 		Falloff: 99, 66, 33
 		InvalidTargets: wall
-	Warhead@Effect: CreateEffect
-		Explosions: med_frag
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Ground, Water
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-	Warhead@EffectAir: CreateEffect
-		Explosions: med_explosion_air
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@EffectWater: CreateEffect
-		Explosions: med_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.8
-		FadeFrames: 15
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 8
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 3
@@ -1946,7 +1794,7 @@ MutFlamer:
 		Damage: 28000
 MutFlamerChem:
 	Inherits@collapsewh: ^Warhead_Chemical_Medium
-	Inherits: ^Effect_Laser_Heavy
+	Inherits@fx: ^ts_forgotten_mutflamerchem
 	-Warhead@Glow:
 	-Warhead@EffectAir:
 	-TargetActorCenter:
@@ -1995,12 +1843,6 @@ MutFlamerChem:
 	TargetActorCenter: true
 	Warhead@Concrete:
 		Damage: 150
-	Warhead@Effect:
-		Explosions: med_tibnapalm
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-		GlowScale: 1.5
-		ImpactSounds: xplobig6.aud
 	Warhead@GroundFire: SpawnActor
 		Actors: groundfire
 		ForceGround: true
@@ -2058,6 +1900,9 @@ MutFlamerChem:
 			Superheavy: 9
 			Wood: 16
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 8
 	Warhead@ShieldHitEffect:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
@@ -2137,7 +1982,7 @@ MutHFlamer:
 			Wood: 16
 MutHFlamerChem:
 	Inherits@collapsewh: ^Warhead_Chemical_Heavy
-	Inherits: ^Effect_Laser_Heavy
+	Inherits@fx: ^ts_forgotten_muthflamerchem
 	-Warhead@Glow:
 	-Warhead@EffectAir:
 	-TargetActorCenter:
@@ -2206,12 +2051,6 @@ MutHFlamerChem:
 	TargetActorCenter: true
 	Warhead@Concrete:
 		Damage: 200
-	Warhead@Effect:
-		Explosions: big_tibnapalm
-		GlowFadeFrames: 60
-		GlowFadeInFrames: 12
-		GlowScale: 2.0
-		ImpactSounds: xplobig6.aud
 	Warhead@GroundFire: SpawnActor
 		Actors: groundfire
 		ForceGround: true
@@ -2326,7 +2165,7 @@ MutHFlamerChem:
 TSFiendShard:
 	Inherits@wh: ^Warhead_Chemical_Light
 	Inherits@proj: ^Projectile_Chem_Light
-	Inherits@fx: ^Effect_Chem_Light
+	Inherits@fx: ^ts_forgotten_tsfiendshard
 	ReloadDelay: 36
 	Burst: 3
 	BurstDelays: 2
@@ -2341,14 +2180,10 @@ TSFiendShard:
 	Warhead@Chemical_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
-	Warhead@3Eff: CreateEffect
-		Explosions: sczhsplash
-		ImpactActors: false
-		ValidTargets: Ground, Air
 
 TSFiendShardUP:
 	Inherits@collapsewh: ^Warhead_Chemical_Heavy
-	Inherits: ^Effect_Chem_Heavy
+	Inherits@fx: ^ts_forgotten_tsfiendshardup
 	-Warhead@Glow:
 	ReloadDelay: 36
 	Burst: 3
@@ -2380,10 +2215,6 @@ TSFiendShardUP:
 		Palette: player
 		Weapon: TSSmoke
 		InvalidTargets: Water
-	Warhead@3Eff: CreateEffect
-		Explosions: sczhsplash
-		ImpactActors: false
-		ValidTargets: Ground, Air
 
 	TargetActorCenter: false
 	Warhead@Chemical_Heavy:
@@ -2468,7 +2299,7 @@ TSFiendShardUP:
 			Wood: 9
 TSFiendShardBlue:
 	Inherits@collapsewh: ^Warhead_Chemical_Medium
-	Inherits: ^Effect_CannonAP_Medium
+	Inherits@fx: ^ts_forgotten_tsfiendshardblue
 	-Warhead@Glow:
 	-Warhead@RA2Crater:
 	-Warhead@EffectAir:
@@ -2495,10 +2326,6 @@ TSFiendShardBlue:
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
-	Warhead@3Eff: CreateEffect
-		Explosions: sczhsplash
-		ImpactActors: false
-		ValidTargets: Ground, Air
 	Warhead@Chemical_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
@@ -2509,13 +2336,6 @@ TSFiendShardBlue:
 		Blockable: false
 		Inaccuracy: 400
 		LaunchAngle: 66
-	Warhead@Effect:
-		Explosions: med_tibnapalm
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-		GlowScale: 1.5
-		ImpactActors: false
-		ImpactSounds: xplobig6.aud
 	Warhead@GrenadePercentage:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		Falloff: 100, 50, 33, 25, 20
@@ -2590,6 +2410,9 @@ TSFiendShardBlue:
 			Superheavy: 20
 			Wood: 9
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 8
 	Warhead@ShieldHitEffect:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
@@ -2618,7 +2441,7 @@ TSFiendShardBlue:
 			Wood: 18
 TSFiendShardBlueUP:
 	Inherits@collapsewh: ^Warhead_Chemical_Heavy
-	Inherits: ^Effect_Apoc_AP_RA2
+	Inherits@fx: ^ts_forgotten_tsfiendshardblueup
 	-Warhead@Glow:
 	-Warhead@EffectAir:
 	ReloadDelay: 36
@@ -2660,10 +2483,6 @@ TSFiendShardBlueUP:
 		Palette: player
 		Weapon: TSSmoke
 		InvalidTargets: Water
-	Warhead@3Eff: CreateEffect
-		Explosions: sczhsplash
-		ImpactActors: false
-		ValidTargets: Ground, Air
 	Warhead@Chemical_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 36000
@@ -2674,18 +2493,6 @@ TSFiendShardBlueUP:
 		Blockable: false
 		Inaccuracy: 400
 		LaunchAngle: 66
-	Warhead@Effect:
-		Explosions: big_tibnapalm
-		GlowFadeFrames: 60
-		GlowFadeInFrames: 12
-		GlowScale: 2.0
-		ImpactSounds: xplobig6.aud
-		-ExplosionPalette:
-	Warhead@Effect1:
-		Explosions: poof
-	Warhead@EffectWater:
-		Explosions: large_splash
-		-ExplosionPalette:
 	Warhead@GrenadePercentage:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		Falloff: 100, 50, 33, 25, 20
@@ -3081,7 +2888,7 @@ TSVisceroidSprayUP:
 			Wood: 9
 TSCropBomb:
 	Inherits@wh: ^Warhead_Demolition_Heavy
-	Inherits@fx: ^Effect_Demolition_Heavy
+	Inherits@fx: ^ts_forgotten_set3
 	ReloadDelay: 50
 	Range: 1250
 	TargetActorCenter: true
@@ -3093,21 +2900,10 @@ TSCropBomb:
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 120000
-	Warhead@2Eff: CreateEffect
-		Explosions: small_frag
-		ImpactSounds: expnew09.aud
-		ValidTargets: Ground, Air
-	Warhead@3EffWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: ssplash3.aud
-		ValidTargets: Water
-		InvalidTargets: Vehicle
-	Warhead@4Smu: LeaveSmudge
-		SmudgeType: Crater
 
 TSCropBombChem:
 	Inherits@wh: ^Warhead_Chemical_Heavy
-	Inherits@fx: ^Effect_Demolition_Heavy
+	Inherits@fx: ^ts_forgotten_set3
 	ReloadDelay: 50
 	Range: 1250
 	TargetActorCenter: true
@@ -3128,21 +2924,10 @@ TSCropBombChem:
 		Palette: player
 		Weapon: TSSmoke
 		InvalidTargets: Water
-	Warhead@2Eff: CreateEffect
-		Explosions: small_frag
-		ImpactSounds: expnew09.aud
-		ValidTargets: Ground, Air
-	Warhead@3EffWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: ssplash3.aud
-		ValidTargets: Water
-		InvalidTargets: Vehicle
-	Warhead@4Smu: LeaveSmudge
-		SmudgeType: Crater
 
 TSLocustBombChem:
 	Inherits@wh: ^Warhead_Chemical_Heavy
-	Inherits@fx: ^Effect_Demolition_Heavy
+	Inherits@fx: ^ts_forgotten_set3
 	ReloadDelay: 38
 	Burst: 5
 	BurstDelays: 3
@@ -3165,22 +2950,11 @@ TSLocustBombChem:
 		Palette: player
 		Weapon: TSSmoke
 		InvalidTargets: Water
-	Warhead@2Eff: CreateEffect
-		Explosions: small_frag
-		ImpactSounds: expnew09.aud
-		ValidTargets: Ground, Air
-	Warhead@3EffWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: ssplash3.aud
-		ValidTargets: Water
-		InvalidTargets: Vehicle
-	Warhead@4Smu: LeaveSmudge
-		SmudgeType: Crater
 
 TSMutShotgun:
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
-	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@fx: ^ts_forgotten_tsmutshotgun
 	ReloadDelay: 32
 	Range: 3112
 	Report: DSDSHTGN.wav
@@ -3199,6 +2973,10 @@ TSMutShotgun:
 	-Warhead@ShotgunGrenadeEnemy:
 
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Duration: 4
+		Range: 1250
+		ValidTargets: Shielded
 		InvalidTargets: Air
 	Projectile: Bullet
 	Warhead@GrenadePercentage: AreaDamagePercentage
@@ -3247,15 +3025,6 @@ TSMutShotgun:
 		InvalidTargets: Air
 	Warhead@Concrete:
 		Damage: 25
-	Warhead@Effect:
-		Explosions: piffs
-		ImpactSounds: xplosml2.aud
-		ValidTargets: Ground, Ship, Air
-		ImpactActors: false
-	Warhead@EffectAir:
-		Explosions: big_explosion_air
-	Warhead@EffectWater:
-		Explosions: water_piffs
 	Warhead@Glow:
 		Scale: 0.8
 		FadeFrames: 15

@@ -12051,3 +12051,31 @@ W6 644 -> **602**, L1/L2 369/360 -> **337/339** (ratchets locked lower);
 W8 637, W4 54 at ratchet; D1 6 -> **5** (rewiring td_nod_stealthsoldier_
 bhreddarts removed its ambiguous bare `Inherits` fx edge — one of NOVA's
 flagged D1 rows resolved as a side effect).
+
+## 2026-09-25 — DAWN: W27 batch-5 — TiberianSun packs (113 weapons, 84 families)
+
+**Scope:** all inline effect nodes in the four TS pack weapon files
+(CABAL, Forgotten, GDI, Nod) extracted into the new
+`mods/cameo/weapons/effects_ts.yaml` (mounted in mod.yaml after
+effects_td). 190 nodes stripped / 114 weapons scanned; 113 rewired.
+
+**New converter case — multi-fx-edge weapons:** `CabalAscendedRockets`
+carried two effect-kind parents (`^CabalMissileEffect` +
+`^Effect_MissileHE_Heavy`). A family deriving only the first silently
+drops the second's channels (`Warhead@ShieldHit` resolved typeless —
+the NRE class). `w27_wire3.py` now emits one `Inherits` per old fx edge
+in order and merges all fx parents into the pin-baseline view.
+
+**Verification:** resolve-diff 0/222 weapons; full-corpus field diff 0
+changed; orphan cancels 0; empty warheads 0; duplicate-inherits clean
+on `^ts_*` edges; W4 54 -> **53**, W6 602 -> **514**,
+L1/L2 337/339 -> **276/279** (ratchets locked lower); W7 963, W8 637
+at ratchet.
+
+**Boot-gate:** PASS — `MenuPostProcessEffect.PostWorldLoaded`, no new
+exception logs.
+
+**Fleet note:** EMBER's #488 carries the outpost2.yaml W7 conversion
+(Option A accepted — my W27 pass on that file runs after it lands).
+DAWN also accepts `tiberiandawn.yaml` + `tiberiansun.yaml` (W7 edges +
+inline effects in one batch).

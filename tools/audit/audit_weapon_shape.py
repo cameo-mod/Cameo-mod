@@ -98,7 +98,7 @@ W2_BASELINE = 281   # dual ^Warhead_ inherit; 226 -> 177 by the dead-inherit sli
                     # count is ~175, i.e. real debt IMPROVED; W23 removes the
                     # renamed _Flat/ExtraDamage shims as it lands.
 W3_BASELINE = 12    # dual ^Projectile_ inherit (21->12: same collapse)
-W4_BASELINE = 54    # dual ^Effect_ inherit; Apocalypse effect composition owns its overrides.
+W4_BASELINE = 53    # dual ^Effect_ inherit; Apocalypse effect composition owns its overrides.
                     # 51 -> 54 re-baseline 2026-09-23: effect-kind detection now
                     # recognises ^<game>_<stem> derivations (Inherits -> ^Effect_*,
                     # e.g. ^d2k_laser_heavy, ^CabalMissileEffect, ^RA2EliteEffects),
@@ -106,11 +106,10 @@ W4_BASELINE = 54    # dual ^Effect_ inherit; Apocalypse effect composition owns 
                     # the old prefix-only classifier. Same class as the W2
                     # ^Compatibility_* rename: measurement fix, not new debt.
 W5_BASELINE = 389   # more than one resolved MAIN warhead; merge-payload repairs
-W6_BASELINE = 602   # weapons declaring an effect warhead locally;
-                    # 694 -> 737 -> 692 -> 683 -> 644 -> 602: W27 batch-4 TD
-                    # nodes locally; the follow-up pass inherits covering
-                    # ^Effect_* templates and drops the typed pins, ending
-                    # two weapons below the pre-W23 baseline
+W6_BASELINE = 514   # weapons declaring an effect warhead locally;
+                    # 694 -> 737 -> 692 -> 683 -> 644 -> 602 -> 514:
+                    # W27 batches 3/4/5 extracted D2k, TD and TS pack nodes
+                    # into per-game effects_*.yaml family libraries.
 # W7/W8 added 2026-09-12 after the maintainer restated the law: the three inherits must come
 # from a TEMPLATE, "and NEVER from another weapon". Nothing measured that clause before, so
 # W1 could pass a weapon that inherits all three of its parents from other weapons. Both

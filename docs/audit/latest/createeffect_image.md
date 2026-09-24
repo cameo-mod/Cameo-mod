@@ -6,9 +6,6 @@
 [VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:4040  RA2CorpseSpawner  Image: ra2corpse
 [VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:4076  RA2FlyingBody  Image: ra2corpse
 [VIOLATION] mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml:2425  AsianTSIonCannon  Image: tsioncannon
-[VIOLATION] mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1755  TSIonCannon  Image: tsioncannon
-[VIOLATION] mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1929  E1Droppod  Image: tsdroppod
-[VIOLATION] mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1937  E1Droppod  Image: tsdroppod
 [VIOLATION] mods\cameo\ContentPacks\Warcraft2\Humans\yaml\weapons.yaml:121  wc2paladinholyvision_hit  Image: wc2_effect_sparkle
 [VIOLATION] mods\cameo\ContentPacks\Warcraft2\Humans\yaml\weapons.yaml:151  wc2holyvisionSuper_hit  Image: wc2_effect_sparkle_circle
 [VIOLATION] mods\cameo\ContentPacks\Warcraft2\Humans\yaml\weapons.yaml:155  wc2holyvisionSuper_hit  Image: wc2_effect_sparkle_circle
@@ -33,6 +30,9 @@
 [VIOLATION] mods\cameo\ContentPacks\Warcraft2\Orcs\yaml\weapons.yaml:386  wc2deathknightRaiseDead  Image: wc2_effect_sparkle
 [VIOLATION] mods\cameo\weapons\effects_td.yaml:169    Image: tsioncannon
 [VIOLATION] mods\cameo\weapons\effects_td.yaml:177    Image: ionsfx
+[VIOLATION] mods\cameo\weapons\effects_ts.yaml:593    Image: tsdroppod
+[VIOLATION] mods\cameo\weapons\effects_ts.yaml:601    Image: tsdroppod
+[VIOLATION] mods\cameo\weapons\effects_ts.yaml:1115    Image: tsioncannon
 [VIOLATION] mods\cameo\weapons\generals.yaml:2313  GLSneakAttack  Image: tsdig
 [VIOLATION] mods\cameo\weapons\heroes.yaml:811  McNealMechDrop1  Image: tspodring
 [VIOLATION] mods\cameo\weapons\heroes.yaml:816  McNealMechDrop1  Image: tsmcnealmechdrop

@@ -1,16 +1,12 @@
 # audit_duplicate_keys — duplicate keys in one node (ambiguous merges)
 
-Files scanned: **659** — D1 ambiguous inheritance labels: **5**, D2 merged duplicates: **686**
+Files scanned: **660** — D1 ambiguous inheritance labels: **1**, D2 merged duplicates: **681**
 
 
 ## D1 — duplicate inheritance labels with different parent values
 
 | file | lines | node | key | values |
 |---|---|---|---|---|
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1958, 1959 | CabalHunterKillerLasers | Inherits | ^LaserWeapon vs ^Effect_Watersplash_Huge_RA2 |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 2067, 2069 | CabalHunterKillerLasers_elite | Inherits | ^LaserWeapon vs ^Effect_Watersplash_Huge_RA2 |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 470, 471 | TSHighVelocityChem | Inherits | ^TSCannonEffect vs ^Effect_AlliedTigerCannon |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 567, 568 | TSHighVelocity2Chem | Inherits | ^TSCannonEffect vs ^Effect_AlliedTigerCannon |
 | mods/cameo/weapons/outpost2.yaml | 223, 224 | edenRailgun | Inherits | ^RailgunWeapon vs ^Effect_AlliedTigerCannon |
 
 
@@ -41,7 +37,6 @@ Files scanned: **659** — D1 ambiguous inheritance labels: **5**, D2 merged dup
 | Warhead@ShieldHit | 9 |
 | Defaults | 9 |
 | Warhead@HeavyFlameWeaponPercentage | 8 |
-| Warhead@Effect | 8 |
 | HitShape | 8 |
 | Warhead@HeavyAAWeaponPercentage | 7 |
 | Selectable | 7 |
@@ -54,6 +49,7 @@ Files scanned: **659** — D1 ambiguous inheritance labels: **5**, D2 merged dup
 | cheer | 4 |
 | SpawnActorOnDeath | 4 |
 | WithAmmoPipsDecoration | 4 |
+| Warhead@Effect | 3 |
 | Warhead@ShotgunGrenadeAlly | 3 |
 | Warhead@ShotgunShrapnelAlly | 3 |
 | GrantConditionOnPrerequisite@2 | 3 |
@@ -319,167 +315,162 @@ Files scanned: **659** — D1 ambiguous inheritance labels: **5**, D2 merged dup
 | mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2822, 2888 | td_nod_minigunner_minigun_laser | Warhead@ShieldHit |
 | mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2828, 2864 | td_nod_minigunner_minigun_laser | Warhead@LegacyLaserExtraDamage |
 | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml | 230, 268 | cabal_hunterdrone | AttackAircraft |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 194, 264 | TSCABALObeliskLaserFire | Projectile |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 211, 343 | TSCABALObeliskLaserFire | Warhead@TankDestroyerCannonPercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 226, 312 | TSCABALObeliskLaserFire | Warhead@MediumFlameWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 236, 286 | TSCABALObeliskLaserFire | Warhead@MediumChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 240, 272 | TSCABALObeliskLaserFire | Warhead@Effect |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 261, 336 | TSCABALObeliskLaserFire | Warhead@ShieldHit |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 378, 491 | TSHellfireTwin | Warhead@HeavyCannonPercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 384, 581 | TSHellfireTwin | Warhead@TankDestroyerCannonPercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 393, 558 | TSHellfireTwin | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 402, 468 | TSHellfireTwin | Warhead@GrenadePercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 408, 512 | TSHellfireTwin | Warhead@HeavyMissilePercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 414, 534 | TSHellfireTwin | Warhead@MediumMissilePercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 417, 461 | TSHellfireTwin | Warhead@Effect |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 429, 441 | TSHellfireTwin | Projectile |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 614, 681 | TSCABALEnlightedLaser | Projectile |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 624, 760 | TSCABALEnlightedLaser | Warhead@TankDestroyerCannonPercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 639, 729 | TSCABALEnlightedLaser | Warhead@MediumFlameWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 649, 703 | TSCABALEnlightedLaser | Warhead@MediumChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 653, 689 | TSCABALEnlightedLaser | Warhead@Effect |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 678, 753 | TSCABALEnlightedLaser | Warhead@ShieldHit |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1558, 1602 | CabalArtilleryWalkerShell | Projectile |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1573, 1610 | CabalArtilleryWalkerShell | Warhead@GrenadePercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1579, 1681 | CabalArtilleryWalkerShell | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1583, 1656 | CabalArtilleryWalkerShell | Warhead@MediumCannonPercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1587, 1634 | CabalArtilleryWalkerShell | Warhead@HeavyCannonPercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1589, 1606 | CabalArtilleryWalkerShell | Warhead@Effect |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1715, 1786 | CabalArtilleryWalkerShellUpgraded | Projectile |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1730, 1808 | CabalArtilleryWalkerShellUpgraded | Warhead@GrenadePercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1736, 1930 | CabalArtilleryWalkerShellUpgraded | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1740, 1879 | CabalArtilleryWalkerShellUpgraded | Warhead@MediumCannonPercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1744, 1832 | CabalArtilleryWalkerShellUpgraded | Warhead@HeavyCannonPercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1751, 1902 | CabalArtilleryWalkerShellUpgraded | Warhead@MediumChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1759, 1854 | CabalArtilleryWalkerShellUpgraded | Warhead@MagicWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1765, 1801 | CabalArtilleryWalkerShellUpgraded | Warhead@Effect |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1963, 2017 | CabalHunterKillerLasers | Projectile |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1975, 2041 | CabalHunterKillerLasers | Warhead@MediumMissilePercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 2075, 2157 | CabalHunterKillerLasers_elite | Projectile |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 2145, 2176 | CabalHunterKillerLasers_elite | Warhead@HeavyMissilePercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 2326, 2348 | CabalDissolverSpray | Warhead@LightChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 2328, 2374 | CabalDissolverSpray | Warhead@TankDestroyerCannonPercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 2937, 3017 | CabalMothershipRockets | Warhead@MediumChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 2965, 2993 | CabalMothershipRockets | Warhead@ArrowWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 3125, 3223 | CabalAscendedRockets | Warhead@LightMissilePercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 3128, 3245 | CabalAscendedRockets | Warhead@MediumMissilePercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 3131, 3201 | CabalAscendedRockets | Warhead@HeavyMissilePercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 3134, 3269 | CabalAscendedRockets | Warhead@TankDestroyerCannonPercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 3137, 3157 | CabalAscendedRockets | Warhead@FlakWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 3140, 3179 | CabalAscendedRockets | Warhead@HeavyAAWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 3930, 3970 | CabalCommandoPlasmaNeutron | Warhead@MediumChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 4034, 4074 | CabalCommandoPlasmaMk2Neutron | Warhead@MediumChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 4129, 4188 | CabalBeholderLaser | Projectile |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 4139, 4198 | CabalBeholderLaser | Warhead@HeavyCannonPercentage |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 4184, 4219 | CabalBeholderLaser | Warhead@ShieldHit |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 179, 248 | TSCABALObeliskLaserFire | Projectile |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 196, 319 | TSCABALObeliskLaserFire | Warhead@TankDestroyerCannonPercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 211, 288 | TSCABALObeliskLaserFire | Warhead@MediumFlameWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 221, 262 | TSCABALObeliskLaserFire | Warhead@MediumChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 241, 312 | TSCABALObeliskLaserFire | Warhead@ShieldHit |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 354, 459 | TSHellfireTwin | Warhead@HeavyCannonPercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 360, 552 | TSHellfireTwin | Warhead@TankDestroyerCannonPercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 369, 529 | TSHellfireTwin | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 378, 436 | TSHellfireTwin | Warhead@GrenadePercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 384, 480 | TSHellfireTwin | Warhead@HeavyMissilePercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 390, 502 | TSHellfireTwin | Warhead@MediumMissilePercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 401, 413 | TSHellfireTwin | Projectile |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 585, 651 | TSCABALEnlightedLaser | Projectile |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 595, 722 | TSCABALEnlightedLaser | Warhead@TankDestroyerCannonPercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 610, 691 | TSCABALEnlightedLaser | Warhead@MediumFlameWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 620, 665 | TSCABALEnlightedLaser | Warhead@MediumChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 644, 715 | TSCABALEnlightedLaser | Warhead@ShieldHit |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1490, 1531 | CabalArtilleryWalkerShell | Projectile |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1505, 1535 | CabalArtilleryWalkerShell | Warhead@GrenadePercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1511, 1609 | CabalArtilleryWalkerShell | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1515, 1581 | CabalArtilleryWalkerShell | Warhead@MediumCannonPercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1519, 1559 | CabalArtilleryWalkerShell | Warhead@HeavyCannonPercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1643, 1711 | CabalArtilleryWalkerShellUpgraded | Projectile |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1658, 1726 | CabalArtilleryWalkerShellUpgraded | Warhead@GrenadePercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1664, 1851 | CabalArtilleryWalkerShellUpgraded | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1668, 1797 | CabalArtilleryWalkerShellUpgraded | Warhead@MediumCannonPercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1672, 1750 | CabalArtilleryWalkerShellUpgraded | Warhead@HeavyCannonPercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1679, 1820 | CabalArtilleryWalkerShellUpgraded | Warhead@MediumChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1687, 1772 | CabalArtilleryWalkerShellUpgraded | Warhead@MagicWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1884, 1934 | CabalHunterKillerLasers | Projectile |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1896, 1955 | CabalHunterKillerLasers | Warhead@MediumMissilePercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1992, 2070 | CabalHunterKillerLasers_elite | Projectile |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 2062, 2089 | CabalHunterKillerLasers_elite | Warhead@HeavyMissilePercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 2222, 2239 | CabalDissolverSpray | Warhead@LightChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 2224, 2265 | CabalDissolverSpray | Warhead@TankDestroyerCannonPercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 2807, 2879 | CabalMothershipRockets | Warhead@MediumChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 2835, 2855 | CabalMothershipRockets | Warhead@ArrowWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 2978, 3069 | CabalAscendedRockets | Warhead@LightMissilePercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 2981, 3091 | CabalAscendedRockets | Warhead@MediumMissilePercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 2984, 3047 | CabalAscendedRockets | Warhead@HeavyMissilePercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 2987, 3118 | CabalAscendedRockets | Warhead@TankDestroyerCannonPercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 2990, 3003 | CabalAscendedRockets | Warhead@FlakWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 2993, 3025 | CabalAscendedRockets | Warhead@HeavyAAWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 3747, 3784 | CabalCommandoPlasmaNeutron | Warhead@MediumChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 3849, 3886 | CabalCommandoPlasmaMk2Neutron | Warhead@MediumChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 3938, 3997 | CabalBeholderLaser | Projectile |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 3948, 4003 | CabalBeholderLaser | Warhead@HeavyCannonPercentage |
+| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 3989, 4024 | CabalBeholderLaser | Warhead@ShieldHit |
 | mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/sequences.yaml | 62, 66 | forgotten_chemsprayinfantry | prone-shoot |
 | mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/sequences.yaml | 334, 375 | forgotten_zombiemutant | standup |
 | mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/sequences.yaml | 369, 384 | forgotten_zombiemutant | die-crushed |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 82, 105 | TS70mmTurChem | Projectile |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 103, 117 | TS70mmTurChem | Warhead@LightChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 104, 146 | TS70mmTurChem | Warhead@TankDestroyerCannonPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 200, 261 | TSChem120mmx | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 202, 233 | TSChem120mmx | Warhead@MediumChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 390, 403 | TSScoopDualTurChem | Warhead@MediumChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 391, 430 | TSScoopDualTurChem | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 474, 496 | TSHighVelocityChem | Projectile |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 476, 529 | TSHighVelocityChem | Warhead@TankDestroyerCannonPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 478, 503 | TSHighVelocityChem | Warhead@LightChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 571, 593 | TSHighVelocity2Chem | Projectile |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 573, 627 | TSHighVelocity2Chem | Warhead@TankDestroyerCannonPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 699, 816 | TSBusMortarChem | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 701, 736 | TSBusMortarChem | Warhead@HeavyBombPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 703, 786 | TSBusMortarChem | Warhead@MediumChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 705, 760 | TSBusMortarChem | Warhead@HeavyChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 1136, 1162 | TSChemBoatcannon | Warhead@HeavyBombPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 1139, 1185 | TSChemBoatcannon | Warhead@MediumChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 1408, 1454 | TSMammothTuskChem | Projectile |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 1432, 1495 | TSMammothTuskChem | Warhead@HeavyMissilePercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 1435, 1470 | TSMammothTuskChem | Warhead@HeavyChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 1582, 1614 | TSChemRuinerMissile | Projectile |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 1587, 1665 | TSChemRuinerMissile | Warhead@LightChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 1590, 1690 | TSChemRuinerMissile | Warhead@MediumChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 1593, 1642 | TSChemRuinerMissile | Warhead@GrenadePercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 1596, 1715 | TSChemRuinerMissile | Warhead@MediumMissilePercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 1963, 2036 | MutFlamerChem | Warhead@MediumFlameWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 1972, 2010 | MutFlamerChem | Warhead@MediumChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2073, 2114 | MutHFlamer | Warhead@MediumFlameWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2077, 2089 | MutHFlamer | Warhead@HeavyFlameWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2154, 2298 | MutHFlamerChem | Warhead@MediumFlameWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2165, 2247 | MutHFlamerChem | Warhead@HeavyFlameWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2174, 2272 | MutHFlamerChem | Warhead@MediumChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2181, 2221 | MutHFlamerChem | Warhead@HeavyChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2364, 2419 | TSFiendShardUP | Warhead@LightChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2367, 2444 | TSFiendShardUP | Warhead@MediumChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2370, 2394 | TSFiendShardUP | Warhead@HeavyChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2481, 2508 | TSFiendShardBlue | Projectile |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2486, 2519 | TSFiendShardBlue | Warhead@GrenadePercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2489, 2596 | TSFiendShardBlue | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2492, 2542 | TSFiendShardBlue | Warhead@LightChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2495, 2567 | TSFiendShardBlue | Warhead@MediumChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2630, 2673 | TSFiendShardBlueUP | Projectile |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2635, 2689 | TSFiendShardBlueUP | Warhead@GrenadePercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2638, 2810 | TSFiendShardBlueUP | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2641, 2760 | TSFiendShardBlueUP | Warhead@LightChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2644, 2785 | TSFiendShardBlueUP | Warhead@MediumChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2647, 2735 | TSFiendShardBlueUP | Warhead@HeavyChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2650, 2712 | TSFiendShardBlueUP | Warhead@HeavyBombPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2861, 2912 | TSChemsprayUP | Warhead@LightChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2863, 2938 | TSChemsprayUP | Warhead@MediumChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2865, 2886 | TSChemsprayUP | Warhead@HeavyChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2979, 3030 | TSVisceroidSprayUP | Warhead@LightChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2981, 3056 | TSVisceroidSprayUP | Warhead@MediumChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2983, 3004 | TSVisceroidSprayUP | Warhead@HeavyChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 3193, 3209, 3292 | TSMutShotgun | Warhead@ShotgunGrenadeAlly |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 3196, 3210, 3322 | TSMutShotgun | Warhead@ShotgunShrapnelAlly |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 3201, 3288 | TSMutShotgun | Warhead@ShieldHit |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 3203, 3211 | TSMutShotgun | Projectile |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 3204, 3262 | TSMutShotgun | Warhead@GrenadePercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 3205, 3352 | TSMutShotgun | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 3206, 3403 | TSMutShotgun | Warhead@TankDestroyerCannonPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 3207, 3378 | TSMutShotgun | Warhead@SmallArmsPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 3208, 3223 | TSMutShotgun | Warhead@ChaingunPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 77, 100 | TS70mmTurChem | Projectile |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 98, 107 | TS70mmTurChem | Warhead@LightChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 99, 139 | TS70mmTurChem | Warhead@TankDestroyerCannonPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 192, 249 | TSChem120mmx | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 194, 218 | TSChem120mmx | Warhead@MediumChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 372, 376 | TSScoopDualTurChem | Warhead@MediumChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 373, 403 | TSScoopDualTurChem | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 447, 469 | TSHighVelocityChem | Projectile |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 449, 500 | TSHighVelocityChem | Warhead@TankDestroyerCannonPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 451, 474 | TSHighVelocityChem | Warhead@LightChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 542, 564 | TSHighVelocity2Chem | Projectile |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 544, 596 | TSHighVelocity2Chem | Warhead@TankDestroyerCannonPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 668, 776 | TSBusMortarChem | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 670, 693 | TSBusMortarChem | Warhead@HeavyBombPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 672, 743 | TSBusMortarChem | Warhead@MediumChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 674, 717 | TSBusMortarChem | Warhead@HeavyChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 1075, 1089 | TSChemBoatcannon | Warhead@HeavyBombPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 1078, 1112 | TSChemBoatcannon | Warhead@MediumChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 1324, 1363 | TSMammothTuskChem | Projectile |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 1341, 1398 | TSMammothTuskChem | Warhead@HeavyMissilePercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 1344, 1373 | TSMammothTuskChem | Warhead@HeavyChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 1486, 1518 | TSChemRuinerMissile | Projectile |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 1491, 1560 | TSChemRuinerMissile | Warhead@LightChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 1494, 1585 | TSChemRuinerMissile | Warhead@MediumChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 1497, 1537 | TSChemRuinerMissile | Warhead@GrenadePercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 1500, 1610 | TSChemRuinerMissile | Warhead@MediumMissilePercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 1811, 1878 | MutFlamerChem | Warhead@MediumFlameWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 1820, 1852 | MutFlamerChem | Warhead@MediumChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 1918, 1959 | MutHFlamer | Warhead@MediumFlameWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 1922, 1934 | MutHFlamer | Warhead@HeavyFlameWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 1999, 2137 | MutHFlamerChem | Warhead@MediumFlameWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2010, 2086 | MutHFlamerChem | Warhead@HeavyFlameWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2019, 2111 | MutHFlamerChem | Warhead@MediumChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2026, 2060 | MutHFlamerChem | Warhead@HeavyChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2199, 2250 | TSFiendShardUP | Warhead@LightChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2202, 2275 | TSFiendShardUP | Warhead@MediumChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2205, 2225 | TSFiendShardUP | Warhead@HeavyChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2312, 2335 | TSFiendShardBlue | Projectile |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2317, 2339 | TSFiendShardBlue | Warhead@GrenadePercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2320, 2419 | TSFiendShardBlue | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2323, 2362 | TSFiendShardBlue | Warhead@LightChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2326, 2387 | TSFiendShardBlue | Warhead@MediumChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2453, 2492 | TSFiendShardBlueUP | Projectile |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2458, 2496 | TSFiendShardBlueUP | Warhead@GrenadePercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2461, 2617 | TSFiendShardBlueUP | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2464, 2567 | TSFiendShardBlueUP | Warhead@LightChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2467, 2592 | TSFiendShardBlueUP | Warhead@MediumChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2470, 2542 | TSFiendShardBlueUP | Warhead@HeavyChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2473, 2519 | TSFiendShardBlueUP | Warhead@HeavyBombPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2668, 2719 | TSChemsprayUP | Warhead@LightChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2670, 2745 | TSChemsprayUP | Warhead@MediumChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2672, 2693 | TSChemsprayUP | Warhead@HeavyChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2786, 2837 | TSVisceroidSprayUP | Warhead@LightChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2788, 2863 | TSVisceroidSprayUP | Warhead@MediumChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2790, 2811 | TSVisceroidSprayUP | Warhead@HeavyChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2967, 2987, 3061 | TSMutShotgun | Warhead@ShotgunGrenadeAlly |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2970, 2988, 3091 | TSMutShotgun | Warhead@ShotgunShrapnelAlly |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2975, 3057 | TSMutShotgun | Warhead@ShieldHit |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2981, 2989 | TSMutShotgun | Projectile |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2982, 3031 | TSMutShotgun | Warhead@GrenadePercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2983, 3121 | TSMutShotgun | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2984, 3172 | TSMutShotgun | Warhead@TankDestroyerCannonPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2985, 3147 | TSMutShotgun | Warhead@SmallArmsPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 2986, 3001 | TSMutShotgun | Warhead@ChaingunPercentage |
 | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 31, 65 | TS30mmRail | Projectile |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 42, 119 | TS30mmRail | Warhead@MediumMissilePercentage |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 46, 96 | TS30mmRail | Warhead@FlakWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 237, 242 | TSRPGTowerRail | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 335, 385 | KodiakCannon | Projectile |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 343, 409 | KodiakCannon | Warhead@HeavyChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 357, 434 | KodiakCannon | Warhead@HeavyMissilePercentage |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 741, 781 | TSHoverMissile | Projectile |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 749, 810 | TSHoverMissile | Warhead@FlakWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 755, 832 | TSHoverMissile | Warhead@MediumMissilePercentage |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 764, 856 | TSHoverMissile | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 889, 929 | TSDestroyerMissiles | Projectile |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 897, 958 | TSDestroyerMissiles | Warhead@FlakWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 903, 980 | TSDestroyerMissiles | Warhead@MediumMissilePercentage |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 912, 1004 | TSDestroyerMissiles | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 1288, 1304, 1387 | TSShotgun | Warhead@ShotgunGrenadeAlly |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 1291, 1305, 1417 | TSShotgun | Warhead@ShotgunShrapnelAlly |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 1296, 1383 | TSShotgun | Warhead@ShieldHit |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 1298, 1306 | TSShotgun | Projectile |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 1299, 1357 | TSShotgun | Warhead@GrenadePercentage |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 1300, 1447 | TSShotgun | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 1301, 1498 | TSShotgun | Warhead@TankDestroyerCannonPercentage |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 1302, 1473 | TSShotgun | Warhead@SmallArmsPercentage |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 1303, 1318 | TSShotgun | Warhead@ChaingunPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 78, 110 | TSProton | Warhead@MediumFlameWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 98, 104 | TSProton | Warhead@GroundFire |
-| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 245, 270 | TSStankTibTusk | Projectile |
-| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 250, 321 | TSStankTibTusk | Warhead@MediumMissilePercentage |
-| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 253, 296 | TSStankTibTusk | Warhead@MediumChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 441, 523 | TSCommandoShotgun | Warhead@GrenadePercentage |
-| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 444, 611 | TSCommandoShotgun | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 447, 658 | TSCommandoShotgun | Warhead@TankDestroyerCannonPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 453, 635 | TSCommandoShotgun | Warhead@SmallArmsPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 456, 486 | TSCommandoShotgun | Warhead@ChaingunPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 461, 472, 551 | TSCommandoShotgun | Warhead@ShotgunGrenadeAlly |
-| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 464, 473, 581 | TSCommandoShotgun | Warhead@ShotgunShrapnelAlly |
-| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 469, 547 | TSCommandoShotgun | Warhead@ShieldHit |
-| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 471, 474 | TSCommandoShotgun | Projectile |
-| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 707, 731 | laserelitecadregun | Projectile |
-| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 718, 795 | laserelitecadregun | Warhead@SmallArmsPercentage |
-| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 720, 741 | laserelitecadregun | Warhead@ChaingunPercentage |
+| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 42, 111 | TS30mmRail | Warhead@MediumMissilePercentage |
+| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 46, 88 | TS30mmRail | Warhead@FlakWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 232, 233 | TSRPGTowerRail | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 327, 381 | KodiakCannon | Projectile |
+| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 335, 398 | KodiakCannon | Warhead@HeavyChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 349, 423 | KodiakCannon | Warhead@HeavyMissilePercentage |
+| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 720, 760 | TSHoverMissile | Projectile |
+| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 728, 783 | TSHoverMissile | Warhead@FlakWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 734, 805 | TSHoverMissile | Warhead@MediumMissilePercentage |
+| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 743, 832 | TSHoverMissile | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 865, 905 | TSDestroyerMissiles | Projectile |
+| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 873, 928 | TSDestroyerMissiles | Warhead@FlakWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 879, 950 | TSDestroyerMissiles | Warhead@MediumMissilePercentage |
+| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 888, 977 | TSDestroyerMissiles | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 1229, 1249, 1323 | TSShotgun | Warhead@ShotgunGrenadeAlly |
+| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 1232, 1250, 1353 | TSShotgun | Warhead@ShotgunShrapnelAlly |
+| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 1237, 1319 | TSShotgun | Warhead@ShieldHit |
+| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 1243, 1251 | TSShotgun | Projectile |
+| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 1244, 1293 | TSShotgun | Warhead@GrenadePercentage |
+| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 1245, 1383 | TSShotgun | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 1246, 1434 | TSShotgun | Warhead@TankDestroyerCannonPercentage |
+| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 1247, 1409 | TSShotgun | Warhead@SmallArmsPercentage |
+| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 1248, 1263 | TSShotgun | Warhead@ChaingunPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 75, 100 | TSProton | Warhead@MediumFlameWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 93, 94 | TSProton | Warhead@GroundFire |
+| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 221, 246 | TSStankTibTusk | Projectile |
+| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 226, 288 | TSStankTibTusk | Warhead@MediumMissilePercentage |
+| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 229, 263 | TSStankTibTusk | Warhead@MediumChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 408, 485 | TSCommandoShotgun | Warhead@GrenadePercentage |
+| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 411, 573 | TSCommandoShotgun | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 414, 620 | TSCommandoShotgun | Warhead@TankDestroyerCannonPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 420, 597 | TSCommandoShotgun | Warhead@SmallArmsPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 423, 457 | TSCommandoShotgun | Warhead@ChaingunPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 428, 443, 513 | TSCommandoShotgun | Warhead@ShotgunGrenadeAlly |
+| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 431, 444, 543 | TSCommandoShotgun | Warhead@ShotgunShrapnelAlly |
+| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 436, 509 | TSCommandoShotgun | Warhead@ShieldHit |
+| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 442, 445 | TSCommandoShotgun | Projectile |
+| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 669, 693 | laserelitecadregun | Projectile |
+| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 680, 758 | laserelitecadregun | Warhead@SmallArmsPercentage |
+| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml | 682, 703 | laserelitecadregun | Warhead@ChaingunPercentage |
 | mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml | 990, 992 | ts_tree24.Husk | RenderSprites |
 | mods/cameo/ContentPacks/Warcraft2/Humans/yaml/sequences.yaml | 150, 153 | wc2_humans_guardtower | Defaults |
 | mods/cameo/ContentPacks/Warcraft2/Humans/yaml/sequences.yaml | 158, 161 | wc2_humans_cannontower | Defaults |
@@ -752,5 +743,5 @@ Files scanned: **659** — D1 ambiguous inheritance labels: **5**, D2 merged dup
 | mods/cameo/weapons/wh40k.yaml | 354, 357 | WH40KShootaBoyzGun | Warhead@1Dam |
 
 
-**FAIL** — D1 count 5 exceeds the baseline 0: a new ambiguous inheritance label was introduced.
+**FAIL** — D1 count 1 exceeds the baseline 0: a new ambiguous inheritance label was introduced.
 

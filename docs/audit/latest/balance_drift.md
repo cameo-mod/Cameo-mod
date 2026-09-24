@@ -1,6 +1,6 @@
 # audit_balance_drift — yaml vs committed balance ledger
 
-**8 ledger(s) drifted** — balance numbers were hand-edited in yaml, or a sanctioned apply run was not followed by re-extraction. Fix via the pipeline, never by hand:
+**12 ledger(s) drifted** — balance numbers were hand-edited in yaml, or a sanctioned apply run was not followed by re-extraction. Fix via the pipeline, never by hand:
 
 ## d2k_atreides
 
@@ -128,5 +128,73 @@
 @@ -1723,3 +1723,3 @@
         "^Warhead_Chemical_Light",
 -       "^Effect_CannonAP_Light"
+```
+
+## tiberiansun_cabal
+
+```diff
+        "^Projectile_Laser_Heavy",
+-       "^Effect_Laser_Heavy"
++       "^ts_cabal_set11"
+       ],
+@@ -149,3 +149,3 @@
+        "^Projectile_Bullet_Light",
+-       "^Effect_Bullet_Light"
++       "^ts_cabal_cabaloverkilldronelaser"
+       ],
+@@ -258,3 +258,3 @@
+        "^Projectile_Lightning_Heavy",
+-       "^Effect_Tesla_Heavy"
+```
+
+## tiberiansun_forgotten
+
+```diff
+        "^Projectile_Missile_Medium",
+-       "^Effect_MissileAP_Medium"
++       "^ts_forgotten_set12"
+       ],
+@@ -56,3 +56,3 @@
+        "^Projectile_Missile_Medium",
+-       "^Effect_MissileAP_Medium"
++       "^ts_forgotten_set15"
+       ],
+@@ -283,3 +283,3 @@
+        "^Projectile_Missile_Medium",
+-       "^Effect_MissileAP_Medium"
+```
+
+## tiberiansun_gdi
+
+```diff
+        "^Projectile_Shell_Heavy",
+-       "^Effect_CannonHE_Heavy",
+        "^RailgunWeapon",
+-       "^HeavyBomb"
++       "^HeavyBomb",
++       "^ts_gdi_kodiakcannon"
+       ],
+@@ -432,3 +432,3 @@
+        "^Warhead_Demolition_Heavy",
+-       "^Effect_Demolition_Heavy"
++       "^ts_gdi_tsbomb"
+       ],
+```
+
+## tiberiansun_nod
+
+```diff
+        "^TSEnergyBlast",
+-       "^LaserWeapon"
++       "^LaserWeapon",
++       "^ts_nod_tsproton"
+       ],
+@@ -1546,3 +1547,3 @@
+        "^Projectile_Missile_Heavy",
+-       "^Effect_MissileAP_Heavy"
++       "^ts_nod_tsnodredeye"
+       ],
+@@ -1928,3 +1929,3 @@
+        "^TSLaserEffect",
 ```
 

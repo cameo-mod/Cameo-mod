@@ -1,6 +1,6 @@
 # audit_security — credentials, code execution, supply chain
 
-Files scanned: **1983**
+Files scanned: **1984**
 
 | code | meaning | count | baseline |
 |---|---|---|---|

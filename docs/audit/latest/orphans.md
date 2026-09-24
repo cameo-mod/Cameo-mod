@@ -1,6 +1,6 @@
 # audit_orphans — dead content (B10)
 
-Live weapons: **3108** — orphans: **395**, dangling weapon refs (BLOCKING): **0**, conditions granted-never-consumed: **18**
+Live weapons: **3192** — orphans: **395**, dangling weapon refs (BLOCKING): **0**, conditions granted-never-consumed: **18**
 
 
 ## O2 — dangling weapon references (crash-on-use class)

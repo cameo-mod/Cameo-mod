@@ -4,26 +4,26 @@
 
 ⛔ This **repeals the exemption** in `tools/audit/intentional_composites.py`. Its 224 entries are no longer 'reviewed, keep' — they are the worklist. The registry data stays useful: it says which mains someone chose on purpose.
 
-concrete weapons with inherits: **2163**
+concrete weapons with inherits: **2170**
 
 W5 counts structural flat-damage nodes, including zero/healing/ally-only nodes; the split audit counts positive non-companion damage. Both resolve the full concrete weapon corpus. Use `--compare-split` for exact differences.
 
 | check | what | count | ratchet |
 |---|---|--:|--:|
-| W1 | more than 3 inherits | **506** (23.40% of 2163) | 26.16% |
+| W1 | more than 3 inherits | **505** (23.28% of 2170) | 26.16% |
 | W2 | two or more `^Warhead_*` inherits | **281** | 281 |
 | W3 | two or more `^Projectile_*` inherits | **12** | 12 |
-| W4 | two or more `^Effect_*` inherits | **54** | 54 |
+| W4 | two or more `^Effect_*` inherits | **53** | 53 |
 | W5 | more than one resolved MAIN warhead | **167** | 389 |
-| W6 | effect warheads declared LOCALLY | **602** | 602 |
+| W6 | effect warheads declared LOCALLY | **514** | 514 |
 | W7 | inherits from ANOTHER WEAPON, not a template | **963** | 963 |
 | W8 | inherits a `^Template` that is not one of the three kinds | **637** | 637 |
 
 | I7 informational — missing template | weapons |
 |---|--:|
-| no `^Effect_*` inherit | 1195 |
-| no `^Projectile_*` inherit | 1453 |
-| no `^Warhead_*` inherit | 1047 |
+| no `^Effect_*` inherit | 1185 |
+| no `^Projectile_*` inherit | 1460 |
+| no `^Warhead_*` inherit | 1054 |
 
 _I7 is a REVIEW QUEUE, not a defect count — an instant or utility weapon may legitimately have no projectile. Do not ratchet it without a per-weapon pass._
 
@@ -126,7 +126,7 @@ _... and 923 more._
 _... and 597 more._
 
 
-## W1 — more than 3 inherits (506 vs ratchet 576)
+## W1 — more than 3 inherits (505 vs ratchet 576)
 
 | weapon | inherits | first four |
 |---|---|---|
@@ -172,7 +172,7 @@ _... and 597 more._
 | `BuggyPlasmaGrenade` | 4 | `^Warhead_Plasma_Light` · `^HeavyBomb` · `^ShrapnelWeapon` · `BuggyGrenade` |
 
 
-_... and 466 more._
+_... and 465 more._
 
 
 ## W2 — two or more `^Warhead_*` inherits (281 vs ratchet 281)
@@ -242,7 +242,7 @@ _... and 241 more._
 | `ra1_soviets_siegemammothtank_ra120mm2thermobaric` | `^Projectile_Shell_Heavy` · `^Projectile_Flame_Heavy` |
 
 
-## W4 — two or more `^Effect_*` inherits (54 vs ratchet 54)
+## W4 — two or more `^Effect_*` inherits (53 vs ratchet 53)
 
 | weapon | effect templates |
 |---|---|
@@ -256,7 +256,6 @@ _... and 241 more._
 | `AsianRailgun` | `^Effect_Railgun_Heavy` · `^Effect_Explosion_Medium_RA2` |
 | `AsianSinglePlasma` | `^Effect_CannonHE_Medium` · `^Effect_Apoc_Explosion_RA2` |
 | `AsianSubmarineBomb` | `^Effect_Demolition_Heavy` · `^Effect_Twlt_Large_RA2` |
-| `CabalAscendedRockets` | `^CabalMissileEffect` · `^Effect_MissileHE_Heavy` |
 | `Flamethrower` | `^Effect_Flame_Light` · `^Effect_Flame_Light` |
 | `HeavyIxianCombatTankCannon` | `^Effect_CannonHE_Heavy` · `^Effect_CannonAP_Light` |
 | `IxianCombatTankCannon` | `^Effect_CannonHE_Heavy` · `^Effect_CannonAP_Light` |
@@ -286,9 +285,10 @@ _... and 241 more._
 | `ra120mmThermobaric` | `^Effect_CannonHE_Heavy` · `^Effect_Flame_Heavy` |
 | `ra1_soviets_kotinnucleartank_kotincannonnuclearshell` | `^Effect_CannonHE_Heavy` · `^Effect_Nuclear_Super` |
 | `ra1_soviets_monstertank_120mm_cannon` | `^Effect_CannonHE_Heavy` · `^Effect_Nuclear_Super` |
+| `ra1_soviets_monstertank_120mm_cannon_inferno` | `^Effect_CannonHE_Heavy` · `^Effect_Flame_Heavy` |
 
 
-_... and 14 more._
+_... and 13 more._
 
 
 ## W5 — more than one resolved MAIN warhead (167 vs ratchet 389)
@@ -340,7 +340,7 @@ _... and 14 more._
 _... and 127 more._
 
 
-## W6 — effect warheads declared LOCALLY (602 vs ratchet 602)
+## W6 — effect warheads declared LOCALLY (514 vs ratchet 514)
 
 | weapon | nodes | first three |
 |---|---|---|
@@ -386,7 +386,7 @@ _... and 127 more._
 | `BlackEagleThunderboltMissiles` | 6 | `Warhead@Effect: CreateEffect` · `Warhead@Smudge1: LeaveSmudge` · `Warhead@Smudge2: LeaveSmudge` |
 
 
-_... and 562 more._
+_... and 474 more._
 
 
 _all buckets at or below their ratchets_ — this is the pre-existing conversion backlog. **Lower each baseline as you convert; never raise one.**
