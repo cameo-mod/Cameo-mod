@@ -12,7 +12,7 @@
 | weapons/d2k.yaml | 80 | 1 | 79 | GLOBAL:d2k |
 | weapons/darkreign.yaml | 94 | 0 | 94 |  |
 | weapons/dune2.yaml | 16 | 0 | 16 |  |
-| weapons/effects_d2k.yaml | 110 | 0 | 110 |  |
+| weapons/effects_d2k.yaml | 111 | 0 | 111 |  |
 | weapons/effects_td.yaml | 45 | 0 | 45 |  |
 | weapons/effects_ts.yaml | 99 | 0 | 99 |  |
 | weapons/elementals.yaml | 4 | 0 | 4 |  |

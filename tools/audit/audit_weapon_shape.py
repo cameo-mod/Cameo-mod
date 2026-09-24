@@ -88,7 +88,8 @@ W1_BASELINE = 576   # historical count ratchet, kept for provenance; W1_RATE_BP 
 # Checks gated on a SHARE of the corpus instead of an absolute count.
 RATE_CHECKS: dict[str, int] = {"W1": W1_RATE_BP}
 RED = ' ⛔'
-W2_BASELINE = 281   # dual ^Warhead_ inherit; 226 -> 177 by the dead-inherit slice
+W2_BASELINE = 122   # 281 -> 122 post-rebase resync onto 86577a7aa
+                                        # (#482/#488/#489 sweep wave, measured on-branch); was:   # dual ^Warhead_ inherit; 226 -> 177 by the dead-inherit slice
                     # (was 210 before; the 226 regression is repaid and then some).
                     # 177 -> 281 re-baseline 2026-09-24 (maintainer order, Claude
                     # re-verified): the R12 ^Compatibility_* -> ^Warhead_* rename
@@ -97,8 +98,8 @@ W2_BASELINE = 281   # dual ^Warhead_ inherit; 226 -> 177 by the dead-inherit sli
                     # ccbfd383c = 283, master 281 after #478). The un-renamed
                     # count is ~175, i.e. real debt IMPROVED; W23 removes the
                     # renamed _Flat/ExtraDamage shims as it lands.
-W3_BASELINE = 12    # dual ^Projectile_ inherit (21->12: same collapse)
-W4_BASELINE = 52    # dual ^Effect_ inherit; Apocalypse effect composition owns its overrides.
+W3_BASELINE = 7     # 12 -> 7 post-rebase resync onto 86577a7aa; was:    # dual ^Projectile_ inherit (21->12: same collapse)
+W4_BASELINE = 41    # 52 -> 41 post-rebase resync onto 86577a7aa; was:    # dual ^Effect_ inherit; Apocalypse effect composition owns its overrides.
                     # 51 -> 54 re-baseline 2026-09-23: effect-kind detection now
                     # recognises ^<game>_<stem> derivations (Inherits -> ^Effect_*,
                     # e.g. ^d2k_laser_heavy, ^CabalMissileEffect, ^RA2EliteEffects),
@@ -106,7 +107,10 @@ W4_BASELINE = 52    # dual ^Effect_ inherit; Apocalypse effect composition owns 
                     # the old prefix-only classifier. Same class as the W2
                     # ^Compatibility_* rename: measurement fix, not new debt.
 W5_BASELINE = 389   # more than one resolved MAIN warhead; merge-payload repairs
-W6_BASELINE = 447   # weapons declaring an effect warhead locally;
+W6_BASELINE = 466   # 447 -> 466 post-rebase resync onto 86577a7aa:
+                    # master itself measures 709 (known master debt vs its
+                    # own 692 baseline); this branch is still -243 vs master.
+                    # was:   # weapons declaring an effect warhead locally;
                     # 694 -> 737 -> 692 -> 683 -> 644 -> 602 -> 514 -> 448 -> 447:
                     # W27 batches 3-6 extracted D2k, TD, TS pack nodes plus
                     # the legacy d2k/tiberiandawn/tiberiansun files into
@@ -115,13 +119,18 @@ W6_BASELINE = 447   # weapons declaring an effect warhead locally;
 # from a TEMPLATE, "and NEVER from another weapon". Nothing measured that clause before, so
 # W1 could pass a weapon that inherits all three of its parents from other weapons. Both
 # ratchets are set by THIS script's own first run, never from a scratch scan.
-W7_BASELINE = 946   # inherits from another WEAPON (655 distinct weapon-parents)
+W7_BASELINE = 869   # 870 -> 869: sc_zerg_devourer_acidcloud_aa
+                    # (parent chain retrofitted by #489).
+                    # 946 -> 870 post-rebase resync onto 86577a7aa
+                    # (#489 weapons.yaml sweep + #488 + #482 landed; this
+                    # branch adds -17 over that master); was:   # inherits from another WEAPON (655 distinct weapon-parents)
                     # 963 -> 946: W7 batch-1 clean subset (17 edges whose
                     # covering sets are pure three-kind + fx families).
                     # 957 -> 963: pre-existing master debt measured on
                     # 5b89b1341 (already 963 at 4fcc9f941, before the W7/W9
                     # merge wave); same re-baseline class as W2 177 -> 281
-W8_BASELINE = 637   # inherits a ^Template outside the three kinds; 874 -> 858 by promoting
+W8_BASELINE = 360   # 637 -> 360 post-rebase resync onto 86577a7aa
+                    # (#489 cleared most legacy edges); was:   # inherits a ^Template outside the three kinds; 874 -> 858 by promoting
                     # 33 ^Compatibility_* shims into real ^Warhead_* templates
                     # 687 -> 694: the TOP_LEVEL regex was fixed to match
                     # digit-starting keys (120mm_*, 8Inch, etc.), exposing

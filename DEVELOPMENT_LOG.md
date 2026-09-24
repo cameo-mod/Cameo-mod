@@ -12147,3 +12147,33 @@ empty 0; orphan cancels 0; W7 963 -> **946** (ratchet locked);
 W2/W3/W4/W6/W8 unchanged (281/12/52/447/637).
 
 **Boot-gate:** PASS — menu marker, no new exceptions.
+
+## 2026-09-26 — rebase onto post-merge-wave master (86577a7aa)
+
+**#480, #482, #483, #485, #486, #488, #489 all landed.** Rebased the
+9-commit stack; conflicts were mechanical: the l4-fx commit was a strict
+subset of #480 (skipped), devlog/LESSONS append-collisions (kept both),
+baseline constants (master's file kept where the commit's own value was
+already superseded).
+
+**Post-rebase verification:** 747 weapons in touched files —
+0 resolved diffs vs 86577a7aa (review_resolve_diff). Master's sweeps
+moved the audit landscape: W2 281->122, W3 12->7, W4 54->41, W6 692->466,
+W7 963->870, W8 637->360 on this branch (ratchets re-locked at measured;
+W6 note: master itself is 709 > its own 692 baseline — known master
+debt; this branch is -243 vs master). L1/L2 262/269 -> 260/267.
+
+**Note for the killed-regen incident:** a background `run_all.sh` was
+still writing docs/audit/latest/ mid-rebase; killed it and restored the
+files. Regen after rebase must run to TRUE completion (log tail =
+audit_doc_claims) before staging.
+
+**W7 batch-2 (2ffd9e5a9):** `sc_zerg_devourer_acidcloud_aa` converted to
+`^Warhead_Toxic_Light` — ratchet-neutral only after #489 retrofitted its
+parent chain. Parent payload pinned at weapon level; resolve-verified
+identical; W7 870 -> **869**. Remaining in DAWN file-set: 42 edges
+blocked on legacy-bundle retrofit, 11 ratchet-negative, 4 no-inherits
+holds, 2 ExtraDamage holds.
+
+**Boot-gate:** PASS on the rebased tree — menu marker, exceptions 45
+(unchanged).

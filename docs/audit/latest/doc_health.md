@@ -1,6 +1,6 @@
 # audit_doc_health — is the documentation structurally sound?
 
-Documents scanned: **430**
+Documents scanned: **431**
 
 `audit_doc_claims.py` checks whether the NUMBERS are still true. This checks whether the documents themselves are intact.
 
@@ -12,7 +12,7 @@ Documents scanned: **430**
 | D4 | same-file anchor with no heading | 0 |
 | D5 | reference to a moved/removed document | 0 |
 | D6 | duplicate section id in DESIGN.md | 0 |
-| D7 | Contents index missing a section | 4 |
+| D7 | Contents index missing a section | 6 |
 | D8 | citation names a different section's law | 0 |
 
 
@@ -46,8 +46,10 @@ _clean_
 _clean_
 
 
-## D7 — Contents index out of date (4)
+## D7 — Contents index out of date (6)
 
+- `docs/LESSONS_LEARNED.md` — Contents omits `The naming audit sees file stems only — pair it with a raw disk scan (2026-09-24)`
+- `docs/LESSONS_LEARNED.md` — Contents omits `W23-RA correction round (2026-09-23, Nova) — four traps that each cost a re-pass`
 - `docs/LESSONS_LEARNED.md` — Contents omits ``*ProportionalToPhysicalState` traits have non-neutral defaults on secondary channels (2026-09-23)`
 - `docs/LESSONS_LEARNED.md` — Contents omits ``extract_stats` carries seeded `design.*` fields forward by actor KEY — a rename silently drops them (2026-09-23)`
 - `docs/LESSONS_LEARNED.md` — Contents omits `⛔ A tool must derive its target from its OWN worktree root — a stale path wrote into another agent's tree (2026-09-24)`
@@ -59,4 +61,4 @@ _clean_
 _clean_
 
 
-**FAIL — 4 finding(s).** Fix the document; none of these are cosmetic. D1/D2 are corruption, D6 makes a cited law ambiguous, D3–D5 send a reader to the wrong place, D7 means a document is hiding its own content from the person who was told to read it, and D8 means a citation resolves — to the wrong law.
+**FAIL — 6 finding(s).** Fix the document; none of these are cosmetic. D1/D2 are corruption, D6 makes a cited law ambiguous, D3–D5 send a reader to the wrong place, D7 means a document is hiding its own content from the person who was told to read it, and D8 means a citation resolves — to the wrong law.
