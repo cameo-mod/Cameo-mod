@@ -655,7 +655,8 @@ BlackEagleMissiles:
 			Flak: 6
 			None: 5
 BlackEagleMissiles_elite:
-	Inherits: BlackEagleMissiles
+	Inherits@w70: ^Warhead_MissileAP_Medium
+	Inherits@w71: ^Projectile_Missile_Medium
 	Inherits@fx_cover: ^Effect_Apoc_AP_RA2
 	Range: 10000
 	Burst: 8
@@ -666,9 +667,6 @@ BlackEagleMissiles_elite:
 		ContrailStartColor: E60000
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-	-Warhead@CollapsedBlackEagleMissilesDemolition_HeavyPercentage:
-	-Warhead@CollapsedBlackEagleMissilesDemolition_LightPercentage:
-	-Warhead@CollapsedBlackEagleMissilesMissileAP_MediumPercentage:
 	Warhead@CollapsedBlackEagleMissiles_eliteDemolition_HeavyPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -878,6 +876,24 @@ BlackEagleMissiles_elite:
 			Plate: 7
 			Flak: 6
 			None: 5
+	ReloadDelay: 50
+	Projectile: Missile
+		Arm: 2
+		Inaccuracy: 2000
+		ContrailLength: 33
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		Speed: 400
+		Acceleration: 10
+		RangeLimit: 20000
+		Palette: d2keffect
+		MinimumLaunchAngle: 200
+		MaximumLaunchAngle: 200
+		ContrailStartWidth: 33
+		ContrailEndWidth: 1
+	BurstDelays: 2
+	Report: vbleatta.wav, vbleattb.wav
+	-Warhead@MissileAP_Medium:
 
 BlackEagleThunderboltMissiles:
 	Inherits@xBlackEagleThunderboltMissiles1: ^Projectile_Missile_Light
@@ -1286,7 +1302,6 @@ PrismCharge:
 	Warhead@1Dum: Dummy
 
 PrismTankCharge:
-	Inherits: PrismCharge
 	ReloadDelay: 100
 	Range: 10000
 	ValidTargets: PrismTowerChargeable
@@ -1299,10 +1314,49 @@ PrismTankCharge:
 		Condition: powercharged
 		ValidRelationships: Ally
 		ValidTargets: PrismTowerChargeable
+	Report: bpriat1a.wav
+	Projectile: PlasmaBeam
+		Width: 75
+		Duration: 50
+		ZOffset: 2047
+		UsePlayerColor: true
+		SecondaryBeamWidth: 50
+		SecondaryBeamZOffset: 2047
+		Colors: 88888888
+		CenterBeam: true
+		CenterBeamWidth: 50
+		CenterBeamColor: CCCCCCCC
+		SecondaryCenterBeam: true
+		SecondaryCenterBeamColor: FFFFFFFF
+	Warhead@1Dum: Dummy
 
 PrismTankCharge_elite:
-	Inherits: PrismTankCharge
 	Range: 11111
+	ReloadDelay: 100
+	ValidTargets: PrismTowerChargeable
+	Report: bpriat1a.wav
+	Projectile: PlasmaBeam
+		Width: 75
+		Duration: 50
+		ZOffset: 2047
+		UsePlayerColor: true
+		SecondaryBeamWidth: 50
+		SecondaryBeamZOffset: 2047
+		Colors: 88888888
+		CenterBeam: true
+		CenterBeamWidth: 50
+		CenterBeamColor: CCCCCCCC
+		SecondaryCenterBeam: true
+		SecondaryCenterBeamColor: FFFFFFFF
+		StartOffset: -256,0,1408
+		TargetActorCenter: false
+	Warhead@1Dum: Dummy
+	Warhead@charge: GrantExternalCondition
+		Range: 256
+		Duration: 100
+		Condition: powercharged
+		ValidRelationships: Ally
+		ValidTargets: PrismTowerChargeable
 
 RA2PrismBeam:
 	ReloadDelay: 3
@@ -1880,7 +1934,9 @@ RA2GrandCannonWeapon:
 			Helicopter: 11
 			Spaceship: 10
 RA2MirageGun_elite:
-	Inherits: RA2MirageGun
+	Inherits@w70: ^Warhead_CannonAP_Light
+	Inherits@w71: ^Projectile_Shell_Light
+	Inherits@w72: ^Effect_Iron_Fx_RA2
 	Range: 7031
 	Burst: 2
 	BurstDelays: 3
@@ -1948,6 +2004,80 @@ RA2MirageGun_elite:
 			Helicopter: 3
 			Bomber: 2
 			Fighter: 1
+	ReloadDelay: 39
+	Report: vmiratta.wav
+	Projectile: InstantHit
+		Duration: 16
+		Inaccuracy: 100
+		BeamColor: 0080FFC8
+		HelixPlayerColor: true
+		Blockable: false
+		ZOffset: 2048
+		HitAnim:
+		Speed: 3500
+	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
+		AffectsParent: false
+		Spread: 125
+		Damage: 4
+		Versus:
+			REFLECTOR: 50
+			Shield: 35
+			Superheavy: 25
+			Heavy: 24
+			Medium: 23
+			Light: 22
+			Scout: 21
+			Heroic: 20
+			Plate: 19
+			Flak: 18
+			None: 17
+			Steel: 16
+			Concrete: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+		UpdatesUnitStatistics: false
+	Warhead@Effect: CreateEffect
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@CannonAP_Light_Flat: AreaDamage
+		ValidTargets: Ground, Water
+		Damage: 25000
+		PercentageScale: 3196
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	InvalidTargets: wall
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 350
+		Damage: 4
+		Falloff: 99, 66, 33
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Plate: 19
+			Heavy: 18
+			Flak: 17
+			Medium: 16
+			None: 15
+			Light: 14
+			Heroic: 13
+			Scout: 12
+			Steel: 11
+			Concrete: 10
+			Wood: 9
+			Spaceship: 8
+			Helicopter: 7
+			Bomber: 6
+			Fighter: 5
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+	-Warhead@CannonAP_Light:
 
 RA2HeavyMirageGun:
 	Inherits: ^RailgunWeapon
@@ -2087,7 +2217,9 @@ RA2HeavyMirageGun:
 			Bomber: 2
 			Fighter: 1
 RA2HeavyMirageGun_elite:
-	Inherits: RA2HeavyMirageGun
+	Inherits@w70: ^Warhead_CannonAP_Light
+	Inherits@w71: ^Projectile_Shell_Light
+	Inherits@w72: ^Effect_Iron_Fx_RA2
 	Range: 7112
 	Burst: 2
 	BurstDelays: 3
@@ -2216,9 +2348,49 @@ RA2HeavyMirageGun_elite:
 			Helicopter: 3
 			Bomber: 2
 			Fighter: 1
+	ReloadDelay: 51
+	Report: vmiratta.wav
+	Projectile: InstantHit
+		Duration: 16
+		Inaccuracy: 100
+		BeamColor: 0080FFC8
+		HelixPlayerColor: true
+		Blockable: false
+		ZOffset: 2048
+		HitAnim:
+	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
+		AffectsParent: false
+		Spread: 125
+		Damage: 4
+		Versus:
+			REFLECTOR: 50
+			Shield: 35
+			Superheavy: 25
+			Heavy: 24
+			Medium: 23
+			Light: 22
+			Scout: 21
+			Heroic: 20
+			Plate: 19
+			Flak: 18
+			None: 17
+			Steel: 16
+			Concrete: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+		UpdatesUnitStatistics: false
+	Warhead@CannonAP_Light_Flat: AreaDamage
+		ValidTargets: Ground, Water
+		Damage: 33000
+		PercentageScale: 2422
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	-Warhead@CannonAP_Light:
 
 ChronoBeam_elite:
-	Inherits: ChronoBeam
 	Projectile: LaserZap
 		Width: 75
 		Duration: 15
@@ -2232,6 +2404,11 @@ ChronoBeam_elite:
 		Spread: 1
 		DamageTypes: ElectricityDeath
 		ValidTargets: Chronobeamable
+	ReloadDelay: 1
+	Range: 5000
+	TargetActorCenter: True
+	ValidTargets: Chronobeamable
+	InvalidTargets: Air
 
 RA2Medusa_AA:
 	Inherits@xRA2Medusa_AA0: ^Warhead_MissileAP_Medium
@@ -2309,7 +2486,8 @@ RA2Medusa_AA:
 		Falloff: 100, 70, 30, 0
 RA2MedusaAG:
 	Inherits@missilerole: ^Warhead_MissileHE_Medium
-	Inherits: RA2Medusa_AA
+	Inherits@w70: ^Projectile_Missile_Medium
+	Inherits@w71: ^Effect_Clsn_Medium_RA2
 	Range: 9000
 	InvalidTargets: Underwater, Submarine
 	ValidTargets: Ground, Water
@@ -2324,7 +2502,18 @@ RA2MedusaAG:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
-	-Warhead@MissileAA_Medium:
+	ReloadDelay: 100
+	Projectile: Missile
+		Image: patriot
+		ContrailLength: 35
+		Speed: 600
+		MinimumLaunchAngle: 60
+		ContrailStartWidth: 33
+		ContrailEndWidth: 1
+		-TrailImage:
+	Report: vaegatta.wav, vaegattb.wav
+	Burst: 3
+	BurstDelays: 13
 
 RA2M60:
 	Inherits@xRA2M600: ^Warhead_Bullet_Light
@@ -2364,7 +2553,9 @@ ra2_allies_gi_para:
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 RA2vulcan2:
-	Inherits: GuardianGIMG
+	Inherits@w70: ^Warhead_Bullet_Medium
+	Inherits@w71: ^Projectile_Bullet_Medium
+	Inherits@w72: ^Effect_Bullet_Medium_RA2
 	ReloadDelay: 25
 	Range: 5724
 	Report: bpilatta.wav, bpilattb.wav, bpilattc.wav, bpilattd.wav, bpilattc.wav
@@ -2421,6 +2612,14 @@ RA2vulcan2:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+	ValidTargets: Ground, Water
+	Burst: 3
+	BurstDelays: 2
+	Warhead@Bullet_Medium_Flat: AreaDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
+	-Warhead@Bullet_Medium:
 GuardianGIMG:
 	Inherits@xGuardianGIMG0: ^Warhead_Bullet_Medium
 	Inherits@xGuardianGIMG1: ^Projectile_Bullet_Medium
@@ -2502,12 +2701,22 @@ RA2para:
 	Warhead@Bullet_Medium:
 		Damage: 2000
 GuardianGIMG2:
-	Inherits: RA2para
+	Inherits@w70: ^Warhead_Bullet_Medium
+	Inherits@w71: ^Projectile_Bullet_Medium
+	Inherits@w72: ^Effect_Bullet_Medium_RA2
 	Warhead@Bullet_Medium:
 		InvalidTargets: Air
 		Damage: 4000
+	ValidTargets: Ground, Water
+	ReloadDelay: 19
+	Range: 4750
+	Burst: 3
+	BurstDelays: 3
+	Report: igiat2a.wav, igiat2b.wav, igiat2c.wav, igiat2d.wav
 GuardianGIMG_elite:
-	Inherits: GuardianGIMG
+	Inherits@w70: ^Warhead_Bullet_Medium
+	Inherits@w71: ^Projectile_Bullet_Medium
+	Inherits@w72: ^Effect_Bullet_Medium_RA2
 	Range: 5762
 	Burst: 6
 
@@ -2565,8 +2774,19 @@ GuardianGIMG_elite:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+	ValidTargets: Ground, Water
+	ReloadDelay: 20
+	BurstDelays: 2
+	Report: vblhatta.wav, vblhattb.wav
+	Warhead@Bullet_Medium_Flat: AreaDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
+	-Warhead@Bullet_Medium:
 GuardianGIMG2_elite:
-	Inherits: GuardianGIMG2
+	Inherits@w70: ^Warhead_Bullet_Medium
+	Inherits@w71: ^Projectile_Bullet_Medium
+	Inherits@w72: ^Effect_Bullet_Medium_RA2
 	Range: 5750
 	Burst: 6
 
@@ -2574,6 +2794,12 @@ GuardianGIMG2_elite:
 		InvalidTargets: Air
 	Warhead@ShieldHit:
 		InvalidTargets: Air
+	ValidTargets: Ground, Water
+	ReloadDelay: 19
+	Warhead@Bullet_Medium: AreaDamage
+		Damage: 4000
+	BurstDelays: 3
+	Report: igiat2a.wav, igiat2b.wav, igiat2c.wav, igiat2d.wav
 RA2DoublePistols_elite:
 	Inherits: RA2DoublePistols
 	Range: 9000
