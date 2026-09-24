@@ -591,26 +591,6 @@ HMGh:
 
 	Report: 20MMGUN1.WAV
 	Range: 3072
-DroneJump:
-	ReloadDelay: 45
-	Range: 3584
-	Report: vteratta.aud
-	Projectile: InstantHit
-	InvalidTargets: Structure
-	Warhead@1Dam: SpreadDamage
-		Spread: 0c204
-		Falloff: 100, 0
-		InvalidTargets: Structure
-		Damage: 100000
-		Versus:
-			None: 150
-			Wood: 10
-			Light: 30
-			Medium: 25
-			Heavy: 20
-			Concrete: 5
-		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
-
 DroneJumpH:
 	ReloadDelay: 45
 	Range: 3584
@@ -1192,14 +1172,6 @@ oHMG:
 oHMGo:
 	Inherits: oHMG
 	ReloadDelay: 18
-
-oHMG_muzzle:
-	ReloadDelay: 16
-	Range: 3072
-	Burst: 3
-	BurstDelays: 2
-	Projectile: InstantHit
-	Warhead@TargetValidation: SpreadDamage
 
 oHMGo_muzzle:
 	ReloadDelay: 16

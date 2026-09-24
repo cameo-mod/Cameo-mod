@@ -12369,3 +12369,11 @@ ContentPack self-containment, baseline candidate); `Flamethrower` is in
 `weapons/starcraft.yaml` (Blackrobe's file, byte-identical twin in
 tiberiandawn.yaml — safe delete, flagged to owner); `ra1_allies_*` x3 are
 NOVA's RA lane (#146). Fleet-flagged.
+
+## 2026-09-26 — dead parent cleanup (DAWN)
+
+Deleted `DroneJump` and `oHMG_muzzle` from `weapons/d2k.yaml` — inherit-only
+pseudo-templates left dead after batch-5 inlined their payloads into the
+children (`DroneJumpH`, `oHMGo_muzzle`). Verified: zero `Weapon:`/`Inherits`
+references anywhere (RA2's `RA2DroneJump` is a distinct Nova-lane weapon),
+resolved corpus diff = the two intended removals only.
