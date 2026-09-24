@@ -1,11 +1,11 @@
 # audit_release_drift - measured against the build players played
 
 
-baseline: **playtest-20260709** (`8c238ffc3`), 1912 weapons · 1343 shared with the tree · **1187 unchanged**
+baseline: **playtest-20260709** (`8c238ffc3`), 1912 weapons · 1343 shared with the tree · **1175 unchanged**
 
 | code | check | count | ratchet |  |
 |---|---|---|---|---|
-| D1 | INFLATED - deals more than it shipped | 100 | 133 | PASS |
+| D1 | INFLATED - deals more than it shipped | 112 | 133 | PASS |
 | D2 | WEAKENED - deals less than it shipped | 56 | 62 | PASS |
 | D3 | EXTREME - 3x or worse, either way | 17 | 27 | PASS |
 | D4 | UNMATCHED - in the release, gone under that name | 569 | 335 | FAIL |
@@ -44,7 +44,7 @@ Only the 194 pinned ownership renames are followed. Wrapper branches, unreviewed
 |---|---|
 | matched | 1499 |
 | unmatched | 413 |
-| inflated | 125 |
+| inflated | 137 |
 | weakened | 81 |
 | extreme | 22 |
 | accepted | 30 |

@@ -18,9 +18,9 @@ A number in prose is true only on the day it is written. These are the claims a 
 | `multi_main_fired_weapons` | 1 | 1 | ✅ |
 | `percentage_denominator_unset` | 401 | 417 | **MISMATCH** |
 | `unmigrated_scout_damage_multiplier` | 0 | 0 | ✅ |
-| `meters_filling_before_death` | 318 | 318 | ✅ |
+| `meters_filling_before_death` | 318 | 319 | **MISMATCH** |
 | `corrosion_meter_actors` | 839 | 839 | ✅ |
-| `w24_multi_main_fed` | 269 | 269 | ✅ |
+| `w24_multi_main_fed` | 269 | 265 | **MISMATCH** |
 | `physical_state_fired_weapons` | 533 | 543 | **MISMATCH** |
 | `plating_row_ties` | 0 | 0 | ✅ |
 | `plating_families` | 52 | 52 | ✅ |
@@ -45,7 +45,7 @@ A number in prose is true only on the day it is written. These are the claims a 
 | `ranged_charge_actors` | 4 | 4 | ✅ |
 | `railtower_immediate_reacquisition_period` | 210 | 210 | ✅ |
 | `tesla_coil_attack_period` | 131 | 131 | ✅ |
-| `cameo_family_labelled_weapons` | 1116 | 1220 | **MISMATCH** |
+| `cameo_family_labelled_weapons` | 1116 | 1223 | **MISMATCH** |
 | `warhead_reference_groups` | 1674 | 1674 | ✅ |
 | `cameo_shaped_families` | 53 | 53 | ✅ |
 | `cameo_element_bearing_families` | 23 | 23 | ✅ |

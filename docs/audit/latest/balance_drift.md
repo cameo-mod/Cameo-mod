@@ -372,34 +372,34 @@
 
 ```diff
         {
-+        "damage": "1000",
-+        "falloff": "100, 75, 50, 25",
-+        "spread": "200",
-+        "tag": "Railgun_Heavy_ExtraDamage",
-+        "type": "SpreadDamage"
-+       },
-+       {
-         "damage": "20000",
-@@ -5144,9 +5151,2 @@
+-        "damage": "5000",
++        "damage": "7500",
+         "falloff": "100, 75, 50, 25",
+@@ -261,9 +261,2 @@
          "type": "AreaDamage"
 -       },
+-       {
+-        "damage": "2500",
+-        "falloff": "100, 75, 50, 25",
+-        "spread": "500",
+-        "tag": "Tesla_Super_ExtraDamage",
 ```
 
 ## starcraft_terran
 
 ```diff
-         "falloff": null,
--        "spread": "50",
--        "tag": "SmallArmsPercentage",
--        "type": "AreaDamagePercentage"
+        {
+-        "damage": "100000",
++        "damage": "150000",
+         "falloff": "100, 55, 0",
+@@ -974,9 +974,2 @@
+         "type": "AreaDamage"
 -       },
 -       {
--        "damage": "1",
--        "falloff": null,
--        "spread": "100",
--        "tag": "ChaingunPercentage",
--        "type": "AreaDamagePercentage"
--       },
+-        "damage": "50000",
+-        "falloff": "100, 75, 50, 25",
+-        "spread": "400",
+-        "tag": "Tesla_Super_ExtraDamage",
 ```
 
 ## tiberiandawn_gdi

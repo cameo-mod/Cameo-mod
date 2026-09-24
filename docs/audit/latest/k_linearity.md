@@ -76,7 +76,6 @@ This residual is included in measured output but excluded from `k_flat` and `dps
 | `ra1_soviets_btr80_machinegun_tesla` | +1.7732 |
 | `ra1_soviets_btr80_machinegun_tesla_arc` | +1.7732 |
 | `Napalm` | +1.7531 |
-| `edenMobileDefenceLaser` | +1.7509 |
 | `CabalMantisGun` | +1.7102 |
 | `RA2LasherLaser` | +1.7090 |
 | `AsianChemicalBombs` | +1.6970 |
@@ -85,6 +84,7 @@ This residual is included in measured output but excluded from `k_flat` and `dps
 | `TSTurretLaser` | +1.6519 |
 | `TSCABALPlasmaFire` | +1.6519 |
 | `d2kChainGun_upgrade` | +1.6484 |
+| `edenMobileDefenceLaser` | -1.6459 |
 | `schwarzermond_lunarsoldier_rifle_yellow` | +1.6358 |
 | `schwarzermond_lunarsoldier_rifle_amplified` | +1.6358 |
 | `TSLaserTurretLaser` | +1.6188 |

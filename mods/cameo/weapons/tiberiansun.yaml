@@ -174,39 +174,13 @@ TSLaser25mmDep:
 		ValidTargets: Ground, Water, Air
 	-Warhead@LaserWeapon:
 	-Warhead@LaserExtraDamage:
-	Warhead@LegacyLaserExtraDamage: SpreadDamage
-		InvalidTargets: Air
-		ValidTargets: Ground, Water, Air
-		Spread: 300
-		Damage: 600
-		Versus:
-			REFLECTOR: 50
-			Shield: 100
-			None: 1
-			Flak: 1
-			Plate: 1
-			Heroic: 1
-			Superheavy: 1
-			Heavy: 1
-			Medium: 1
-			Light: 1
-			Scout: 1
-			Steel: 1
-			Concrete: 1
-			Wood: 1
-			Fighter: 1
-			Bomber: 1
-			Helicopter: 1
-			Spaceship: 1
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		UpdatesUnitStatistics: false
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 	Warhead@Laser_Heavy:
 		InvalidTargets: Air
-		Damage: 4000
+		Damage: 4600
 		PercentageScale: 0
 		ValidTargets: Ground, Water
 	-Warhead@Laser_Heavy_ExtraDamage:
@@ -1490,14 +1464,29 @@ TSEngineerPistol:
 		Damage: 10
 
 TSSniper_elite:
-	Inherits: TSSniper
+	Inherits@w70: ^Warhead_Sniper_Light
+	Inherits@w71: ^Projectile_Sniper_Light
+	Inherits@w72: ^Effect_Sniper_Light
 	ReloadDelay: 45
 	Range: 8704
+	Report: silencer.aud
 	Warhead@1Dam: SpreadDamage
 		Versus:
 			Light: 40
 			Medium: 30
 			Heavy: 20
+	Warhead@Sniper_Light:
+		Damage: 10000
+		Spread: 1
+		Falloff: 100, 0
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
+		Damage: 10000
+		Spread: 1
+		Falloff: 100, 0
+	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
+		Damage: 5
+		Spread: 1
+		Falloff: 100, 0
 
 forgotten_mutant_dualwield:
 	Inherits@wh: ^Warhead_Bullet_Light

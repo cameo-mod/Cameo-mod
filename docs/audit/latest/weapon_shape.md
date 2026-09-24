@@ -16,19 +16,19 @@ W5 counts structural flat-damage nodes, including zero/healing/ally-only nodes; 
 | W4 | two or more `^Effect_*` inherits | **41** | 41 |
 | W5 | more than one resolved MAIN warhead | **167** | 389 |
 | W6 | effect warheads declared LOCALLY | **442** | 442 |
-| W7 | inherits from ANOTHER WEAPON, not a template | **869** | 869 |
+| W7 | inherits from ANOTHER WEAPON, not a template | **866** | 866 |
 | W8 | inherits a `^Template` that is not one of the three kinds | **360** | 360 |
 
 | I7 informational — missing template | weapons |
 |---|--:|
-| no `^Effect_*` inherit | 890 |
-| no `^Projectile_*` inherit | 1271 |
-| no `^Warhead_*` inherit | 943 |
+| no `^Effect_*` inherit | 887 |
+| no `^Projectile_*` inherit | 1268 |
+| no `^Warhead_*` inherit | 940 |
 
 _I7 is a REVIEW QUEUE, not a defect count — an instant or utility weapon may legitimately have no projectile. Do not ratchet it without a per-weapon pass._
 
 
-## W7 — inherits from ANOTHER WEAPON, not a template (869 vs ratchet 869)
+## W7 — inherits from ANOTHER WEAPON, not a template (866 vs ratchet 866)
 
 | weapon | weapon-parents | first four |
 |---|---|---|
@@ -74,7 +74,7 @@ _I7 is a REVIEW QUEUE, not a defect count — an instant or utility weapon may l
 | `AsianPunisherAG_EMP` | 1 | `AsianPunisherAG` |
 
 
-_... and 829 more._
+_... and 826 more._
 
 
 ## W8 — inherits a `^Template` that is not one of the three kinds (360 vs ratchet 360)

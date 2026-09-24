@@ -675,14 +675,18 @@ d2k_laser_aa:
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Burst: 5
 d2k_sandworm_electricity:
-	Inherits: TeslaZap
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Heavy
 	Burst: 12
 	BurstDelays: 4
 	ReloadDelay: 100
 	Report: btesat1a.wav
+	Range: 9320
 	ValidTargets: Ground, Air, Water
 	Warhead@Tesla_Heavy:
-		Damage: 34000
+		Damage: 50000
+	-Warhead@Tesla_Heavy_ExtraDamage:
 
 d2k_chaos_lightning:
 	Range: 2048

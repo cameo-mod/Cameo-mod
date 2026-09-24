@@ -64,36 +64,11 @@ edenMobileLaser:
 		Damage: 1
 	-Warhead@LaserWeapon:
 	-Warhead@LaserExtraDamage:
-	Warhead@LegacyLaserExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Spread: 300
-		Damage: 600
-		Versus:
-			REFLECTOR: 50
-			Shield: 100
-			None: 1
-			Flak: 1
-			Plate: 1
-			Heroic: 1
-			Superheavy: 1
-			Heavy: 1
-			Medium: 1
-			Light: 1
-			Scout: 1
-			Steel: 1
-			Concrete: 1
-			Wood: 1
-			Fighter: 1
-			Bomber: 1
-			Helicopter: 1
-			Spaceship: 1
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		UpdatesUnitStatistics: false
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Laser_Heavy:
-		Damage: 8000
+		Damage: 8600
 		PercentageScale: 0
 	-Warhead@Laser_Heavy_ExtraDamage:
 
@@ -201,7 +176,7 @@ edenMobileLaserTiger:
 		SecondaryBeamColor: FFFFFF
 	Warhead@CannonHE_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 10000
+		Damage: 10600
 	-Warhead@Laser_Heavy:
 edenMobileDefenceLaser:
 	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
@@ -211,7 +186,7 @@ edenMobileDefenceLaser:
 	-Warhead@CannonHE_Medium:
 	Warhead@Laser_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
-		Damage: 10000
+		Damage: 10600
 		PercentageScale: 1990
 
 edenRailgun:
@@ -2060,12 +2035,17 @@ edenMobileThorsHammer:
 	ReloadDelay: 33
 	Report: thor.wav
 	Warhead@Tesla_Heavy:
-		Damage: 6000
-	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
-		Damage: 3000
+		Damage: 9000
+	-Warhead@Tesla_Heavy_ExtraDamage:
 edenMobileThorsHammerTiger:
-	Inherits: edenMobileThorsHammer
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Heavy
 	ReloadDelay: 19
+	Report: thor.wav
+	Warhead@Tesla_Heavy:
+		Damage: 9000
+	-Warhead@Tesla_Heavy_ExtraDamage:
 
 ####################################################################################################
 #		WEAPONS PLYMOUTH

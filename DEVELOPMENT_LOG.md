@@ -12205,3 +12205,51 @@ SC/WC2 packs + unclaimed legacy files — `shockwave` 73, `weapons.yaml`
 in my set: `ChemTibAtomic` in tiberiandawn.yaml keeps a local
 `Warhead@Effect` (chem_nuke_explosion pin) — Nova's #482 authored that
 block; extraction suggested to her rather than self-served.
+
+## 2026-09-26 (cont.) — W7 batch-3: R17 ExtraDamage folds unblock held edges
+
+Maintainer ruling R17 (fold ExtraDamage chips into main warhead,
+verbatim sum; OpenToppedDamage exempt — passenger mechanic) landed via
+fleet NOTE_2026-09-24_ember_rulings.md. Ember executed the pattern on
+wc2highArrowFire in #488. Executed the R17 set in the DAWN file-set:
+
+**Folds (deliberate resolved delta — main.Damage += chip, chip node
+removed; chip Versus/DamageTypes die with the node per ruling):**
+- outpost2: `edenMobileLaser` LegacyLaser 600 -> Laser_Heavy 8000->8600;
+  `edenMobileThorsHammer` Tesla 3000 -> 9000. Children that CANCEL the
+  folded main got pin-folds on their own effective mains:
+  `edenMobileLaserTiger` CannonHE_Medium 10000->10600,
+  `edenMobileDefenceLaser` Laser_Heavy_Flat 10000->10600.
+- tiberiansun: `TSLaser25mmDep` LegacyLaser 600 -> Laser_Heavy 4600.
+- StarCraft: `PsiStorm` +4000->12000 (propagates to dormant
+  heroes.yaml child — unmounted file, no live blast radius);
+  `PsionicShockwave` +15000->45000; `Corsair_EMP` +2500->7500;
+  `GhostSniperLockdown` +20000->44000; `SpecterSniperLockdown`
+  +40000->88000; `MedicFlare` +600->Flame_Light 7600;
+  `ScienceVessel_EMP` +50000->150000.
+
+**Edge conversions unblocked by the folds:**
+- `edenMobileThorsHammerTiger -> edenMobileThorsHammer`: -> 3 kind
+  edges + pins (Report, Tesla_Heavy.Damage 9000). Resolved-identical
+  post-fold.
+- `d2k_sandworm_electricity -> TeslaZap`: -> 3 kind edges + Range pin;
+  parent chip folded at the pin (34000->50000). Sanctioned diff only.
+- `TSSniper_elite -> TSSniper`: parent's OpenToppedDamage chip is
+  R17-exempt -> pinned VERBATIM (no fold). Resolved-identical.
+
+**Still held:** `edenMobileLaserTiger`/`edenMobileDefenceLaser` edges —
+parent covering set duplicates the child's kind slots AND carries
+`^LaserWeapon` (legacy bundle): any covering-copy lands W2/W4/W8 debt
+or re-inlines W27-extracted nodes. Structurally blocked, joins the
+legacy-bundle bucket. `eden_EMP`/`plymouth_EMP`/`VoidRayBeam`/
+`StarshipSovereignBeam` carry dead declare+self-cancel chip pairs —
+left alone (the cancels are load-bearing vs template-supplied chips;
+removing the pair would resurrect them).
+
+**Lesson recorded:** ExtraDamage chips can be TEMPLATE-supplied
+(`^Warhead_Tesla_*` carries a chip node at Damage 1000 default) —
+deleting a local chip declaration only reverts it to template defaults.
+A real fold needs `-Warhead@<chip>:` cancels. Verified resolved: every
+diff = chip->None fields + main Damage sum only; 0 unsanctioned drift.
+
+W7 869->**866**; empty 0; orphans 0; W2/W3/W4/W6/W8 unchanged.

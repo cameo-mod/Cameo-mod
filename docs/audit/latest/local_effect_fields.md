@@ -261,50 +261,50 @@ Exempt secondary-channel declarations (not ratcheted): 222
 | ContentPacks\RedAlert\Soviets\yaml\weapons.yaml | ra1_soviets_volkov_volkovmagneticweaponincendiarynuclearshells | Effect | YES | YES | 9664 |  |
 | ContentPacks\RedAlert\Soviets\yaml\weapons.yaml | ra1_soviets_volkov_volkovmagneticweaponnuclearshells | Effect | YES | YES | 9280 |  |
 | ContentPacks\RedAlert\Soviets\yaml\weapons.yaml | ra1_soviets_yakscoutplane_napalm_bomb | Effect | YES | - | 4507 |  |
-| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | AtreusMG | Effect | YES | - | 1388 |  |
-| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | BuildingExplodeProtoss | Effect | YES | - | 1123 |  |
-| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | CorsairFlash | Effect | YES | - | 832 |  |
-| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | Corsair_EMP | Effect | YES | YES | 876 |  |
-| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | EpigraphMG | Effect | YES | - | 1259 |  |
-| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | EpigraphMG | EffectAir | YES | - | 1263 | exempt |
-| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | EpigraphMG | EffectWater | YES | - | 1261 | exempt |
+| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | AtreusMG | Effect | YES | - | 1372 |  |
+| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | BuildingExplodeProtoss | Effect | YES | - | 1107 |  |
+| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | CorsairFlash | Effect | YES | - | 821 |  |
+| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | Corsair_EMP | Effect | YES | YES | 860 |  |
+| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | EpigraphMG | Effect | YES | - | 1243 |  |
+| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | EpigraphMG | EffectAir | YES | - | 1247 | exempt |
+| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | EpigraphMG | EffectWater | YES | - | 1245 | exempt |
 | ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | GladiusCannon | Effect | YES | YES | 433 |  |
-| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | ManifoldMG | Effect | YES | - | 1307 |  |
-| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | PatriarchShoot | Effect | YES | YES | 1443 |  |
-| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | PatriarchShoot | EffectAir | YES | YES | 1446 | exempt |
+| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | ManifoldMG | Effect | YES | - | 1291 |  |
+| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | PatriarchShoot | Effect | YES | YES | 1427 |  |
+| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | PatriarchShoot | EffectAir | YES | YES | 1430 | exempt |
 | ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | PositronGrenade | Effect | YES | YES | 60 |  |
-| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | PsiStormCosmetic | Effect | YES | YES | 640 |  |
-| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | PsionicShockwave | Effect | YES | - | 661 |  |
-| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | ScarabLaunch | Effect | YES | YES | 719 |  |
-| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | ScoutMG | Effect | YES | - | 1161 |  |
-| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | ScoutRockets_AA | EffectWater | YES | - | 761 | exempt |
-| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | StarshipSovereignBeam | Effect | YES | YES | 1085 |  |
-| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | StarshipSovereignBeam | EffectAir | YES | YES | 1091 | exempt |
-| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | UnitExplodeSmallProtoss | 2Eff | YES | YES | 1133 | exempt |
-| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | VoidRayBeam | Effect | YES | YES | 964 |  |
-| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | VoidRayBeam | EffectAir | YES | YES | 970 | exempt |
-| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | WarpBlade | Effect | - | YES | 776 |  |
-| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | WarpBladeAmaranth | Effect | - | YES | 789 |  |
-| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | ZeratulSlice | Effect | - | YES | 803 |  |
+| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | PsiStormCosmetic | Effect | YES | YES | 632 |  |
+| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | PsionicShockwave | Effect | YES | - | 650 |  |
+| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | ScarabLaunch | Effect | YES | YES | 708 |  |
+| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | ScoutMG | Effect | YES | - | 1145 |  |
+| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | ScoutRockets_AA | EffectWater | YES | - | 750 | exempt |
+| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | StarshipSovereignBeam | Effect | YES | YES | 1069 |  |
+| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | StarshipSovereignBeam | EffectAir | YES | YES | 1075 | exempt |
+| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | UnitExplodeSmallProtoss | 2Eff | YES | YES | 1117 | exempt |
+| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | VoidRayBeam | Effect | YES | YES | 948 |  |
+| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | VoidRayBeam | EffectAir | YES | YES | 954 | exempt |
+| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | WarpBlade | Effect | - | YES | 765 |  |
+| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | WarpBladeAmaranth | Effect | - | YES | 778 |  |
+| ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | ZeratulSlice | Effect | - | YES | 792 |  |
 | ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | psi_blades | Effect | - | YES | 594 |  |
 | ContentPacks\StarCraft\Protoss\yaml\weapons.yaml | psi_spear | Effect | - | YES | 607 |  |
-| ContentPacks\StarCraft\Terran\yaml\weapons.yaml | BCYamatoCannon | Effect | YES | YES | 2671 |  |
+| ContentPacks\StarCraft\Terran\yaml\weapons.yaml | BCYamatoCannon | Effect | YES | YES | 2659 |  |
 | ContentPacks\StarCraft\Terran\yaml\weapons.yaml | GhostSniper | Effect | YES | YES | 832 |  |
-| ContentPacks\StarCraft\Terran\yaml\weapons.yaml | GoliathMk2Rockets_AA | EffectWater | YES | - | 1969 | exempt |
-| ContentPacks\StarCraft\Terran\yaml\weapons.yaml | GoliathRockets_AA | EffectWater | YES | - | 1778 | exempt |
-| ContentPacks\StarCraft\Terran\yaml\weapons.yaml | MissileTurret | EffectWater | YES | - | 2942 | exempt |
-| ContentPacks\StarCraft\Terran\yaml\weapons.yaml | PhobosLaser | EffectAir | YES | YES | 2763 | exempt |
+| ContentPacks\StarCraft\Terran\yaml\weapons.yaml | GoliathMk2Rockets_AA | EffectWater | YES | - | 1957 | exempt |
+| ContentPacks\StarCraft\Terran\yaml\weapons.yaml | GoliathRockets_AA | EffectWater | YES | - | 1766 | exempt |
+| ContentPacks\StarCraft\Terran\yaml\weapons.yaml | MissileTurret | EffectWater | YES | - | 2930 | exempt |
+| ContentPacks\StarCraft\Terran\yaml\weapons.yaml | PhobosLaser | EffectAir | YES | YES | 2751 | exempt |
 | ContentPacks\StarCraft\Terran\yaml\weapons.yaml | ReaperGrenade | Effect | YES | YES | 690 |  |
 | ContentPacks\StarCraft\Terran\yaml\weapons.yaml | SCTyr | Effect | YES | YES | 437 |  |
-| ContentPacks\StarCraft\Terran\yaml\weapons.yaml | ScienceVesselDefenseMatrix | Effect | YES | YES | 3139 |  |
-| ContentPacks\StarCraft\Terran\yaml\weapons.yaml | ScienceVesselIrradiate | 3Eff | - | YES | 3171 | exempt |
-| ContentPacks\StarCraft\Terran\yaml\weapons.yaml | ScienceVessel_EMP | Effect | YES | YES | 3203 |  |
-| ContentPacks\StarCraft\Terran\yaml\weapons.yaml | SiegeTankSiegeCannon | Effect | YES | YES | 1448 |  |
-| ContentPacks\StarCraft\Terran\yaml\weapons.yaml | SpecterSniper | Effect | YES | YES | 1047 |  |
-| ContentPacks\StarCraft\Terran\yaml\weapons.yaml | SunDogRockets | EffectWater | YES | - | 2058 | exempt |
-| ContentPacks\StarCraft\Terran\yaml\weapons.yaml | ValkyrieRockets | EffectWater | YES | - | 2108 | exempt |
-| ContentPacks\StarCraft\Terran\yaml\weapons.yaml | VultureGrenade | Effect | - | YES | 1168 |  |
-| ContentPacks\StarCraft\Terran\yaml\weapons.yaml | WraithRockets_AA | EffectWater | YES | - | 2008 | exempt |
+| ContentPacks\StarCraft\Terran\yaml\weapons.yaml | ScienceVesselDefenseMatrix | Effect | YES | YES | 3102 |  |
+| ContentPacks\StarCraft\Terran\yaml\weapons.yaml | ScienceVesselIrradiate | 3Eff | - | YES | 3134 | exempt |
+| ContentPacks\StarCraft\Terran\yaml\weapons.yaml | ScienceVessel_EMP | Effect | YES | YES | 3163 |  |
+| ContentPacks\StarCraft\Terran\yaml\weapons.yaml | SiegeTankSiegeCannon | Effect | YES | YES | 1436 |  |
+| ContentPacks\StarCraft\Terran\yaml\weapons.yaml | SpecterSniper | Effect | YES | YES | 1041 |  |
+| ContentPacks\StarCraft\Terran\yaml\weapons.yaml | SunDogRockets | EffectWater | YES | - | 2046 | exempt |
+| ContentPacks\StarCraft\Terran\yaml\weapons.yaml | ValkyrieRockets | EffectWater | YES | - | 2096 | exempt |
+| ContentPacks\StarCraft\Terran\yaml\weapons.yaml | VultureGrenade | Effect | - | YES | 1156 |  |
+| ContentPacks\StarCraft\Terran\yaml\weapons.yaml | WraithRockets_AA | EffectWater | YES | - | 1996 | exempt |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | BehemothShoot | Effect | YES | YES | 1074 |  |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | BehemothShoot | Effect2 | YES | YES | 1078 | exempt |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | BehemothShoot | EffectAir | YES | YES | 1081 | exempt |
