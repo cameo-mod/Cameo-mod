@@ -1168,7 +1168,7 @@ BallistaSingleShotAir_AA:
 		ContrailStartColor: 77CCFF
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: blue_small_fire
 		ImpactSounds: kaboom12.aud
 		ValidTargets: Ground
@@ -2574,7 +2574,7 @@ Hakureiring2:
 		Damage: 240000
 		ValidTargets: Air, Ground, Water
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ImpactActors: false
 		Image: hakurei_giphy
 		Explosions: fades
@@ -2630,7 +2630,7 @@ ReimuDreamSeal:
 		Palette: tseffect
 		AirThreshold: 6400
 	ValidTargets: Epic, Psionic, Monster
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: fades
 		ImpactSounds: thgun.wav
 		ExplosionPalette: player
@@ -2705,7 +2705,7 @@ Hakureiring3:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	ReloadDelay: 30
 	Range: 6666
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: tsring
 		ExplosionPalette: tseffect
 	Report: thattack1.wav, thattack2.wav, thattack3.wav
@@ -2938,7 +2938,7 @@ ZeroFighterArrows:
 		ContrailStartColor: 77CCFF
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: blue_small_fire
 		ImpactSounds: kaboom12.aud
 		ValidTargets: Ground
@@ -3292,10 +3292,10 @@ SkyHawkPlasmaCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ImpactSounds: psahit00.aud
 		Explosions: purple_plasma
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 		ImpactSounds: psahit00.aud
 		Explosions: purple_plasma
 	-Warhead@CannonAP_Light:
@@ -3343,7 +3343,7 @@ SkyHawkArrows:
 		Damage: 32000
 	Warhead@Arrow_Light:
 		Damage: 32000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ValidRelationships: Neutral, Enemy
 		Explosions: blue_small_fire
 		ImpactSounds: kaboom12.aud
@@ -4474,7 +4474,7 @@ Type89Cannon:
 		Speed: 524
 	Warhead@CannonHE_Medium:
 		Damage: 10000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: small_poof
 
 Type89PlasmaCannon:
@@ -4627,7 +4627,7 @@ Type97Cannon:
 		Speed: 569
 	Warhead@CannonHE_Heavy:
 		Damage: 12000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: poof
 		ImpactSounds: xplosml2.aud
 
@@ -4721,7 +4721,7 @@ Type97PlasmaCannon:
 	Warhead@CannonHE_Heavy:
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ImpactSounds: psahit00.aud
 		Explosions: purple_plasma
 	-Warhead@Railgun_Heavy:
@@ -4805,7 +4805,7 @@ ShrineTankCannon:
 	Warhead@Magic_Heavy:
 		Damage: 24000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: tsring
 		ExplosionPalette: tseffect
 		ImpactSounds:
@@ -4913,7 +4913,7 @@ OISmallCannon:
 		Speed: 539
 	Warhead@CannonHE_Medium:
 		Damage: 8000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: small_poof
 
 OISmallPlasmaCannon:
@@ -5076,7 +5076,7 @@ OIBigCannon:
 		Speed: 539
 	Warhead@CannonHE_Heavy:
 		Damage: 24000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: poof
 		ImpactSounds: xplosml2.aud
 
@@ -5170,7 +5170,7 @@ OIBigPlasmaCannon:
 	Warhead@CannonHE_Heavy:
 		Damage: 8000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ImpactSounds: psahit00.aud
 		Explosions: purple_plasma
 	-Warhead@Railgun_Heavy:
@@ -5256,7 +5256,7 @@ OIPlasmaFlamer:
 	Warhead@Chemical_Heavy:
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: blue_building_napalm
 	-Warhead@Chemical_Heavy:
 	Warhead@Flame_Heavy:
@@ -5329,7 +5329,7 @@ OIHakureiring:
 	Warhead@Magic_Heavy: AreaDamage
 		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: tsring
 		ExplosionPalette: tseffect
 	Report: thattack1.wav, thattack2.wav, thattack3.wav
@@ -5371,7 +5371,7 @@ OIHakureiring2:
 	Warhead@Magic_Heavy: AreaDamage
 		Damage: 240000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: fades
 		ImpactSounds: thgun.wav
 		ExplosionPalette: player
@@ -6559,7 +6559,7 @@ WaveArtilleryImpact:
 		Range: 666
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ImpactSounds: psahit00.aud
 		Explosions: blue_building
 		ValidTargets: Ground, Water, Air

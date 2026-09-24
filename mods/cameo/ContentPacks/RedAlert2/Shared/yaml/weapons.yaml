@@ -1160,7 +1160,7 @@ RA2HoverMissile:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		-ImpactSounds:
 	-Warhead@Arrow_Light:
 	-Warhead@MissileAP_Light:
@@ -1368,7 +1368,7 @@ RA2HoverMissile_AA:
 		ContrailStartWidth: 25
 		ContrailEndWidth: 1
 		-TrailImage:
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		-ImpactSounds:
 	Burst: 2
 	BurstDelays: 4
@@ -2244,7 +2244,7 @@ RA2DepthCharge:
 	Warhead@Demolition_Light: AreaDamage
 		ValidTargets: Submarine, Ship, Underwater
 		Damage: 60000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ImpactActors: false
 
 RA2IMPAA:
@@ -3954,7 +3954,7 @@ MigMissiles_rad:
 		Falloff: 100, 75, 66, 50, 33, 25, 20, 10
 		Spread: 200
 		Level: 50
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: ra2radbang
 		ExplosionPalette: ra2effect
 		ImpactSounds: snukexpl.wav
@@ -3982,10 +3982,10 @@ MigMissiles_rad:
 		PercentageDenominator: 10000
 	-Warhead@MissileHE_Medium:
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
-	Warhead@Smudge1: LeaveSmudge
-	Warhead@Smudge2: LeaveSmudge
-	Warhead@Smudge2RA2: LeaveSmudge
-	Warhead@Effect2: CreateEffect
+	Warhead@Smudge1:
+	Warhead@Smudge2:
+	Warhead@Smudge2RA2:
+	Warhead@Effect2:
 	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 	Projectile:
@@ -4088,11 +4088,11 @@ MigMissiles_rad:
 		InvalidTargets: Vehicle, Structure, wall
 		Size: 2
 		Delay: 6
-	Warhead@EffectWater: CreateEffect
-	Warhead@EffectAir: CreateEffect
-	Warhead@Smudge: LeaveSmudge
-	Warhead@DuneRock: LeaveSmudge
-	Warhead@DuneSand: LeaveSmudge
+	Warhead@EffectWater:
+	Warhead@EffectAir:
+	Warhead@Smudge:
+	Warhead@DuneRock:
+	Warhead@DuneSand:
 	Warhead@Concrete:
 		Damage: 150
 	Warhead@DuneRock:

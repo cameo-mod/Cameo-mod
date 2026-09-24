@@ -171,7 +171,7 @@ AsianOilBombFragments:
 	Warhead@Flame_Light:
 		Damage: 4000
 		Falloff: 100, 50, 25, 12, 6, 3, 1
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ImpactSounds: vdemdiea.wav
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: AsianFlameFragment
@@ -501,7 +501,7 @@ SteelIonCannonDamage:
 	Inherits: IonCannon
 	Report: tesla1.aud
 	AirThreshold: 8c0
-	Warhead@3Smu_area: LeaveSmudge
+	Warhead@3Smu_area:
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Building, wall
 		Size: 3
@@ -564,9 +564,9 @@ SteelHoverMissile_elite:
 		ContrailStartWidth: 25
 		ContrailEndWidth: 1
 		ContrailEndColor: 4488FF00
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ImpactActors: false
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 		ExplosionPalette: ra2effect
 	BurstDelays: 4
 	Report: vifvatta.wav
@@ -1997,17 +1997,17 @@ Nax120mmCorrosion_elite:
 		Damage: 10000
 	Projectile: Bullet
 		Speed: 514
-	Warhead@Glow: GlowImpact
+	Warhead@Glow:
 		Scale: 0.8
 		FadeFrames: 15
-	Warhead@EffectWater: CreateEffect
+	Warhead@EffectWater:
 		Explosions: ra2_large_watersplash
 		ImpactSounds: gexpwala.wav
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 		Explosions: big_explosion_air
 	Warhead@ShieldHit: GrantExternalCondition
 		Duration: 12
-	Warhead@Concrete: DamagesConcrete
+	Warhead@Concrete:
 		Damage: 200
 	Burst: 2
 	BurstDelays: 3
@@ -2190,7 +2190,7 @@ NaxiV1Rocket:
 		TrailDelay: 0
 		TrailInterval: 1
 		SkipAscent: true
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: ra2nuke
 		ExplosionPalette: ra2effect
 		ImpactSounds: snukexpl.wav
@@ -3202,7 +3202,7 @@ LatinBuggyRocket_elite:
 		ContrailStartWidth: 33
 		ContrailEndWidth: 1
 		ContrailStartColor: 77CCFFAA
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 		ExplosionPalette: ra2effect
 	Warhead@CollapsedLatinBuggyRocketConcussion_MediumPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -3737,7 +3737,7 @@ RA2Robotmm_elite:
 		BeamColor: 4488FFBB
 		BeamWidth: 128
 		Duration: 24
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: blue_building
 		ImpactSounds: psahit00.aud
 		ExplosionPalette: effect
@@ -3856,7 +3856,7 @@ RA2RobotmmScatter_elite:
 		InvalidTargets: Air
 		Damage: 16000
 	-Warhead@Scatter:
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: blue_med_frag
 		ImpactSounds: xplos.aud
 		ImpactActors: false

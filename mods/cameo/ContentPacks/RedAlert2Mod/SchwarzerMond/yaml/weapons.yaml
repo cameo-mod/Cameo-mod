@@ -2230,7 +2230,7 @@ DalekCannonScatter:
 		ValidTargets: Ground, Water, Air
 		Damage: 50000
 	-Warhead@Scatter:
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: blue_med_frag
 		ImpactSounds: xplos.aud
 		ImpactActors: false
@@ -2578,7 +2578,7 @@ NaxCorrosionRocket:
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: nax_corr_ex
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexp14a.wav
@@ -2889,7 +2889,7 @@ NaxCorrosionRocketTrooper_elite:
 		ContrailEndColor: FFFFFF
 		ContrailStartWidth: 33
 		ContrailEndWidth: 1
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: nax_corr_ex
 	BurstDelays: 2
 	Report: nax_corrokit.wav
@@ -2982,7 +2982,7 @@ NaxCorrosionBeast:
 		ContrailEndColor: FFFFFF
 		ContrailStartWidth: 33
 		ContrailEndWidth: 1
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: nax_corr_ex
 	Report: nax_corrokit.wav
 	SoundVolume: 2.0
@@ -3075,7 +3075,7 @@ NaxCorrosionBeast_elite:
 		ContrailEndColor: FFFFFF
 		ContrailStartWidth: 33
 		ContrailEndWidth: 1
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: nax_corr_ex
 	BurstDelays: 2
 	MinRange: 1595
@@ -3139,7 +3139,7 @@ NaxDieGlocke:
 	Warhead@Chemical_Heavy:
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: demotruck_explosion
 		ExplosionPalette: ra2effect
 		ImpactSounds: vdemdiea.wav

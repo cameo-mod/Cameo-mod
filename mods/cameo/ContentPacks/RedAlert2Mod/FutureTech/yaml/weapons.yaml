@@ -2190,23 +2190,23 @@ FutureEnforcerShotgun_elite:
 		ContrailStartWidth: 40
 		ContrailEndWidth: 80
 		ContrailLength: 8
-	Warhead@Glow: GlowImpact
+	Warhead@Glow:
 		Scale: 0.8
 		FadeFrames: 15
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: piffs
 		ImpactSounds: xplosml2.aud
 		ValidTargets: Ground, Ship, Air
 		ImpactActors: false
-	Warhead@EffectWater: CreateEffect
+	Warhead@EffectWater:
 		Explosions: water_piffs
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 		Explosions: big_explosion_air
 	Warhead@ShieldHit: GrantExternalCondition
 		Duration: 4
-	Warhead@Concrete: DamagesConcrete
+	Warhead@Concrete:
 		Damage: 25
-	Warhead@ShieldHitEffect: CreateEffect
+	Warhead@ShieldHitEffect:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 	Report: DSDSHTGN.wav
 	Warhead@ShotgunGrenadeAlly: AreaDamage
@@ -2430,23 +2430,23 @@ FutureEnforcerShotgunDeployed:
 		ContrailStartWidth: 40
 		ContrailEndWidth: 80
 		ContrailLength: 8
-	Warhead@Glow: GlowImpact
+	Warhead@Glow:
 		Scale: 0.8
 		FadeFrames: 15
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: piffs
 		ImpactSounds: xplosml2.aud
 		ValidTargets: Ground, Ship, Air
 		ImpactActors: false
-	Warhead@EffectWater: CreateEffect
+	Warhead@EffectWater:
 		Explosions: water_piffs
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 		Explosions: big_explosion_air
 	Warhead@ShieldHit: GrantExternalCondition
 		Duration: 4
-	Warhead@Concrete: DamagesConcrete
+	Warhead@Concrete:
 		Damage: 25
-	Warhead@ShieldHitEffect: CreateEffect
+	Warhead@ShieldHitEffect:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 	Report: DSDSHTGN.wav
 	Warhead@ShotgunGrenadeAlly: AreaDamage
@@ -2674,23 +2674,23 @@ FutureEnforcerShotgunDeployed_elite:
 		ContrailStartWidth: 40
 		ContrailEndWidth: 80
 		ContrailLength: 8
-	Warhead@Glow: GlowImpact
+	Warhead@Glow:
 		Scale: 0.8
 		FadeFrames: 15
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: piffs
 		ImpactSounds: xplosml2.aud
 		ValidTargets: Ground, Ship, Air
 		ImpactActors: false
-	Warhead@EffectWater: CreateEffect
+	Warhead@EffectWater:
 		Explosions: water_piffs
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 		Explosions: big_explosion_air
 	Warhead@ShieldHit: GrantExternalCondition
 		Duration: 4
-	Warhead@Concrete: DamagesConcrete
+	Warhead@Concrete:
 		Damage: 25
-	Warhead@ShieldHitEffect: CreateEffect
+	Warhead@ShieldHitEffect:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 	Report: DSDSHTGN.wav
 	Warhead@ShotgunGrenadeAlly: AreaDamage
@@ -4526,7 +4526,7 @@ FutureMechPlasma_elite:
 		Inaccuracy: 400
 		ContrailStartColor: 77CCFFAA
 		ContrailEndColor: 4488FF00
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: aa_pulsexp
 		ImpactSounds: xplos.aud
 		ValidTargets: Ground, Water, Air
@@ -5830,7 +5830,7 @@ OrionRailgun:
 		Damage: 30000
 	Warhead@CannonHE_Heavy:
 		Damage: 30000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ImpactSounds: gexp14a.wav
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Railgun_Heavy:

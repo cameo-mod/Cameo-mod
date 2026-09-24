@@ -2040,7 +2040,7 @@ RA2MirageGun_elite:
 			Fighter: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 		UpdatesUnitStatistics: false
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		GlowScale: 1.5
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12

@@ -57,7 +57,7 @@ ra1_allies_alliedgunturret_cannon:
 		Damage: 10000
 	Warhead@CannonHE_Heavy:
 		Damage: 10000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: small_poof
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Concussion_Medium:
@@ -129,7 +129,7 @@ ra1_allies_alliedaagun_flak:
 	Warhead@Flak_Medium:
 		ValidTargets: Air
 		Damage: 4000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: small_poof
 
 ra1_allies_alliedaagun_flak_cryo:
@@ -587,7 +587,7 @@ ra1_allies_rapierjumpjet_bomb_cryo:
 		PercentageScale: 10000
 		ValidTargets: Ground, Ship
 		Damage: 5000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: cryo_artillery
 
 ra1_allies_rapierjumpjet_missile_AA:
@@ -657,7 +657,7 @@ ra1_allies_rapierjumpjet_missile_AA:
 		PercentageScale: 10000
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 		Explosions: small_building
 		ImpactSounds: xplobig4.aud
 	-Warhead@MissileAP_Heavy:
@@ -2712,7 +2712,7 @@ ra1_allies_alliedmediumtank_cannon:
 		Speed: 515
 	Warhead@CannonHE_Medium:
 		Damage: 14554
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: small_poof
 
 ra1_allies_alliedmediumtank_cannon_cryo:
@@ -3035,21 +3035,21 @@ ra1_allies_alliedheavyaatank_cannon_AA:
 		PercentageDenominator: 400
 		ValidTargets: Air
 	Warhead@EffectWater:
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: piffs
 		ImpactSounds: xplos.aud
 		ValidTargets: Ground, Ship, Air
-	Warhead@EffectWater: CreateEffect
+	Warhead@EffectWater:
 		Explosions: water_piffs
 		-ImpactSounds:
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 		Explosions: small_explosion_air
 		ImpactSounds: xplos.aud
 	Warhead@ShieldHit: GrantExternalCondition
 		Duration: 4
-	Warhead@Concrete: DamagesConcrete
+	Warhead@Concrete:
 		Damage: 25
-	Warhead@ShieldHitEffect: CreateEffect
+	Warhead@ShieldHitEffect:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 	ReloadDelay: 10
 	Report: gun13.aud
@@ -3320,7 +3320,7 @@ ra1_allies_cargoplanebomber_parabomb:
 			Spaceship: 10
 	ReloadDelay: 8
 	Range: 5000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom15.aud
 		ValidTargets: Ground, Ship
@@ -3351,11 +3351,11 @@ ra1_allies_gunboat_depthcharge:
 		Damage: 60000
 	Projectile: Bullet
 		Speed: 125
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: small_explosion
 		ImpactSounds: kaboom15.aud
 		ValidTargets: Submarine, Ship, Underwater
-	Warhead@EffectWater: CreateEffect
+	Warhead@EffectWater:
 		Explosions: large_splash
 		ImpactSounds: h2obomb2.aud
 	Report: M203.aud
@@ -3386,11 +3386,11 @@ ra1_allies_destroyer_depthcharge:
 		Damage: 60000
 	Projectile: Bullet
 		Speed: 125
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: small_explosion
 		ImpactSounds: kaboom15.aud
 		ValidTargets: Submarine, Ship, Underwater
-	Warhead@EffectWater: CreateEffect
+	Warhead@EffectWater:
 		Explosions: large_splash
 		ImpactSounds: h2obomb2.aud
 	Report: M203.aud

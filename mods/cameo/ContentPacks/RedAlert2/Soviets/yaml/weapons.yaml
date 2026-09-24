@@ -585,7 +585,7 @@ RA2120mm_rad_elite:
 	ReloadDelay: 54
 	Projectile: Bullet
 		Speed: 514
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		GlowScale: 1.5
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12

@@ -619,7 +619,7 @@ tkmcryorockets:
 		Damage: 12000
 		Spread: 200
 		ValidTargets: Ground, Water, Air
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: blue_med_frag
 		ImpactSounds: xplos.aud
 		ImpactActors: false
@@ -2491,7 +2491,7 @@ ViperMissilesTwin:
 		Palette: d2keffect
 		MinimumLaunchAngle: 200
 		MaximumLaunchAngle: 200
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ImpactActors: false
 	BurstDelays: 2
 	Report: vbleatta.wav, vbleattb.wav
@@ -2588,7 +2588,7 @@ ViperMissilesCryo:
 		Palette: d2keffect
 		MinimumLaunchAngle: 200
 		MaximumLaunchAngle: 200
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ImpactActors: false
 	Burst: 4
 	BurstDelays: 2
@@ -2780,7 +2780,7 @@ VonSniper:
 		Falloff: 100, 0
 		ValidTargets: Ground, Water, Air
 		Damage: 30000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
 	Warhead@SniperChaingun:
@@ -2959,7 +2959,7 @@ VonSniperAP:
 		Spread: 1
 		Falloff: 100, 0
 		Damage: 8
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom15.aud
 	Warhead@SniperChaingun:
@@ -2996,18 +2996,18 @@ VonSniperAP:
 		RangeLimit: 25000
 		PointDefenseTypes: Missile
 		ContrailZOffset: 4000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ValidTargets: Ground, Ship, Air
-	Warhead@EffectWater: CreateEffect
+	Warhead@EffectWater:
 		Explosions: water_piffs
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 		Explosions: small_explosion_air
 		ImpactSounds: xplos.aud
 	Warhead@ShieldHit: GrantExternalCondition
 		Duration: 4
-	Warhead@Concrete: DamagesConcrete
+	Warhead@Concrete:
 		Damage: 25
-	Warhead@ShieldHitEffect: CreateEffect
+	Warhead@ShieldHitEffect:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 	Report: TGhFir00.aud
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
@@ -3920,7 +3920,7 @@ TKMDroneExplosion:
 		Image: tkmdrone
 		Palette: player_rgba
 		IsPlayerPalette: true
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: med_napalm
 		GlowScale: 1.5
 		GlowFadeFrames: 30

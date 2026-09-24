@@ -1819,11 +1819,11 @@ ConsortiumMissileSystem_EMP:
 			Bomber: 11
 			Fighter: 10
 		UpdatesUnitStatistics: false
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: steel_blueexp
 		ImpactSounds: makoexplose.wav
 		ImpactActors: false
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 		Explosions: steel_blueexp
 		ImpactSounds: makoexplose.wav
 	Burst: 2
@@ -1871,7 +1871,7 @@ SteelQuantumCannon:
 	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 12000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
@@ -2128,7 +2128,7 @@ SteelQuantumCannon_elite:
 	Warhead@EMPUnit: AffectsIntegrity
 		InvalidTargets: Air
 		Damage: 18000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: blue_building
 		ImpactSounds: psahit00.aud
 		ExplosionPalette: effect
@@ -2261,7 +2261,7 @@ SteelQuantumCannonScatter_elite:
 		InvalidTargets: Air
 		Damage: 3000
 	-Warhead@Scatter:
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: blue_med_frag
 		ImpactSounds: xplos.aud
 		ImpactActors: false
@@ -2436,7 +2436,7 @@ bfg10kCannon:
 		ValidTargets: Ground, Water, Air
 		Spread: 2500
 		Damage: 125
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: ra2radbang
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
@@ -3372,7 +3372,7 @@ SteelManta_AA:
 	Report: steel_chaingunfire.wav
 	Range: 9999
 	ValidTargets: Air
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 		Explosions: steel_bluepiffs
 		ExplosionPalette: ra2effect
 		ValidTargets: Air
@@ -3380,11 +3380,11 @@ SteelManta_AA:
 		ValidTargets: Air
 		Damage: 8000
 		PercentageScale: 9988
-	Warhead@Glow: GlowImpact
-	Warhead@Smudge: LeaveSmudge
-	Warhead@DuneRock: LeaveSmudge
-	Warhead@DuneSand: LeaveSmudge
-	Warhead@RA2Crater: LeaveSmudge
+	Warhead@Glow:
+	Warhead@Smudge:
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
 	Projectile:
 		Arm: 0
 		Blockable: false
@@ -3424,7 +3424,7 @@ SteelManta_AA:
 	Warhead@Smudge:
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 	Warhead@Concrete:
 		Damage: 25
 	Warhead@Effect:
@@ -3446,7 +3446,7 @@ SteelManta_AA:
 		ContrailEndColorUsePlayerColor: true
 		Speed: 10000
 		Width: 100
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: steel_bluepiffs
 
 SteelMantaAGResonance:
@@ -4011,7 +4011,7 @@ SteelMantaAAResonance_AA:
 		ContrailEndColorUsePlayerColor: true
 		Speed: 10000
 		Width: 100
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 		ExplosionPalette: ra2effect
 	Report: steel_chaingunfire.wav
 	-Warhead@Bullet_Medium:
@@ -4146,7 +4146,7 @@ SteelMantaAAResonanceBounce1:
 		ContrailEndColorUsePlayerColor: true
 		Speed: 10000
 		Width: 100
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 		ExplosionPalette: ra2effect
 	Report: steel_chaingunfire.wav
 	Warhead@shrapnel: FireShrapnel
@@ -4285,7 +4285,7 @@ SteelMantaAAResonanceBounce2:
 		ContrailEndColorUsePlayerColor: true
 		Speed: 10000
 		Width: 100
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 		ExplosionPalette: ra2effect
 	Report: steel_chaingunfire.wav
 	-Warhead@Bullet_Medium:
@@ -5558,7 +5558,7 @@ SteelInfRailgun:
 	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
@@ -5782,7 +5782,7 @@ SteelScalpelRailgunAA:
 	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
 	Inherits: SteelInfRailgun_elite
 	ValidTargets: Air
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
@@ -6628,7 +6628,7 @@ SteelScalpelRailgun_EMP_AA:
 		Damage: 4000
 	Warhead@MissileAP_Light:
 		Damage: 4000
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
@@ -6738,11 +6738,11 @@ SteelFighterRailgun:
 	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
@@ -6928,7 +6928,7 @@ SteelMegaSword:
 	Warhead@EMPUnit: AffectsIntegrity
 		InvalidTargets: Air
 		Damage: 60000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
@@ -7035,7 +7035,7 @@ SteelMegaSword_EMP:
 	Warhead@EMPUnit: AffectsIntegrity
 		InvalidTargets: Shielded, Air
 		Damage: 90000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
@@ -7158,7 +7158,7 @@ SteelAirTurret:
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 12
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexp14a.wav
@@ -7228,7 +7228,7 @@ SteelAirTurret_elite:
 		Damage: 12
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 36000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: blue_building
 		ImpactSounds: psahit00.aud
 		ExplosionPalette: effect
@@ -7262,7 +7262,7 @@ SteelAirTurretEScatter:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 6000
 	-Warhead@Scatter:
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: blue_med_frag
 		ImpactSounds: xplos.aud
 		ImpactActors: false
@@ -7284,7 +7284,7 @@ SteelFortressWeapons:
 	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
 	Warhead@CannonHE_Medium:
 		Damage: 14000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexp14a.wav
@@ -7323,7 +7323,7 @@ SteelQuantumTurretRail:
 		Damage: 1
 	Warhead@CannonHE_Heavy:
 		Damage: 2000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
@@ -7884,7 +7884,7 @@ SteelHoverMissile:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ImpactActors: false
 
 	Projectile: Missile
@@ -7929,7 +7929,7 @@ SteelKatyCannons:
 		FriendlyFireDamage: 0
 	Warhead@Flame_Heavy:
 		Damage: 20000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: aa_pulsexp
 		ImpactSounds: xplos.aud
 		ImpactActors: false
@@ -8070,13 +8070,13 @@ SteelKatyCannons_elite:
 		ContrailStartWidth: 75
 		ContrailEndWidth: 25
 		TrailInterval: 1
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: aa_pulsexp
 		ImpactSounds: xplos.aud
 		ValidTargets: Ground, Water, Air
 		ImpactActors: false
 		ExplosionPalette: ra2effect
-	Warhead@EffectWater: CreateEffect
+	Warhead@EffectWater:
 		ImpactSounds: gexpwasa.wav
 	Report: aa_bgart.wav
 	-Warhead@Flame_Heavy:
@@ -8144,7 +8144,7 @@ SteelKatyCannons_EMP:
 		InvalidTargets: Shielded, Air
 		ValidTargets: Ground, Water
 		Damage: 25000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: aa_pulsexp
 		ImpactSounds: xplos.aud
 		ImpactActors: false
@@ -8188,7 +8188,7 @@ SteelKatyCannons_EMP:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
 		InvalidTargets: Air
-	Warhead@EffectWater: CreateEffect
+	Warhead@EffectWater:
 		ImpactSounds: gexpwasa.wav
 
 SteelKatyCannons_EMP_elite:
@@ -8313,13 +8313,13 @@ SteelKatyCannons_EMP_elite:
 			Fighter: 10
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: aa_pulsexp
 		ImpactSounds: xplos.aud
 		ValidTargets: Ground, Water, Air
 		ImpactActors: false
 		ExplosionPalette: ra2effect
-	Warhead@EffectWater: CreateEffect
+	Warhead@EffectWater:
 		ImpactSounds: gexpwasa.wav
 	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 5
@@ -8376,7 +8376,7 @@ SteelStalkerRailgun:
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 30
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
@@ -8447,7 +8447,7 @@ SteelStalkerRailgun_elite:
 		Damage: 30
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 90000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: blue_building
 		ImpactSounds: psahit00.aud
 		ExplosionPalette: effect
@@ -8485,7 +8485,7 @@ SteelStalkerRailgunEScatter:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 15000
 	-Warhead@Scatter:
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: blue_med_frag
 		ImpactSounds: xplos.aud
 		ImpactActors: false
@@ -9568,12 +9568,12 @@ SteelCruiserCannons_elite:
 		HomingActivationDelay: 1
 		RangeLimit: 20000
 		PointDefenseTypes: Missile
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: steel_bluepiffs
 		ImpactSounds: xplos.aud
-	Warhead@EffectWater: CreateEffect
+	Warhead@EffectWater:
 		-ImpactSounds:
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 		ImpactSounds: xplos.aud
 	Report: pulseturretfire.wav
 	Warhead@LightMissilePercentage: AreaDamagePercentage

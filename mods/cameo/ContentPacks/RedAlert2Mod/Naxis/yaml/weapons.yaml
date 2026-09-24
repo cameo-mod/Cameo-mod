@@ -4270,7 +4270,7 @@ NaxQuadCannon_elite:
 		HomingActivationDelay: 3
 		RangeLimit: 30000
 		PointDefenseTypes: Missile
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ImpactActors: false
 	Report: nax_aa1.wav
 	Warhead@GrenadePercentage: AreaDamagePercentage
@@ -4434,7 +4434,7 @@ NaxQuadCannon_AA:
 		Damage: 1000
 	Warhead@NaxFlakGroundWater:
 		ValidTargets: Air
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 		ValidTargets: Air
 	-Warhead@Flak_Medium:
 	-Warhead@NaxFlakGroundWater:
@@ -4445,10 +4445,10 @@ NaxQuadCannon_AA:
 
 	Warhead@ChaingunPercentage:
 		ValidTargets: Air
-	Warhead@Smudge: LeaveSmudge
-	Warhead@DuneRock: LeaveSmudge
-	Warhead@DuneSand: LeaveSmudge
-	Warhead@RA2Crater: LeaveSmudge
+	Warhead@Smudge:
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 	Warhead@NaxFlakAllyCounted: AreaDamage
 	Warhead@NaxFlakAllyUncounted: AreaDamage
@@ -4612,7 +4612,7 @@ NaxQuadCannon_AA:
 	Warhead@Smudge:
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 	Warhead@Concrete:
 		Damage: 25
 	Warhead@Effect:
@@ -4751,7 +4751,7 @@ NaxQuadCannon_AA_elite:
 		HomingActivationDelay: 3
 		RangeLimit: 30000
 		PointDefenseTypes: Missile
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ImpactActors: false
 	Report: nax_aa1.wav
 	Warhead@GrenadePercentage: AreaDamagePercentage
@@ -4951,7 +4951,7 @@ SkyMageCannon:
 		HomingActivationDelay: 3
 		RangeLimit: 30000
 		PointDefenseTypes: Missile
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ImpactActors: false
 	Report: nax_aa1.wav
 	Warhead@GrenadePercentage: AreaDamagePercentage
@@ -5148,7 +5148,7 @@ SkyMageCannon_elite:
 		HomingActivationDelay: 3
 		RangeLimit: 30000
 		PointDefenseTypes: Missile
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ImpactActors: false
 	Report: nax_aa1.wav
 	Warhead@GrenadePercentage: AreaDamagePercentage
@@ -5393,7 +5393,7 @@ SkyMageCannon_AA:
 		HomingActivationDelay: 3
 		RangeLimit: 30000
 		PointDefenseTypes: Missile
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ImpactActors: false
 	Report: nax_aa1.wav
 	Warhead@GrenadePercentage: AreaDamagePercentage
@@ -5641,7 +5641,7 @@ SkyMageCannon_AA_elite:
 		HomingActivationDelay: 3
 		RangeLimit: 30000
 		PointDefenseTypes: Missile
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ImpactActors: false
 	Report: nax_aa1.wav
 	Warhead@GrenadePercentage: AreaDamagePercentage
@@ -5896,7 +5896,7 @@ PortableFlak:
 		HomingActivationDelay: 3
 		RangeLimit: 30000
 		PointDefenseTypes: Missile
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ImpactActors: false
 	Burst: 6
 	BurstDelays: 4
@@ -6144,7 +6144,7 @@ PortableFlak_elite:
 		HomingActivationDelay: 3
 		RangeLimit: 30000
 		PointDefenseTypes: Missile
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ImpactActors: false
 	Burst: 8
 	BurstDelays: 3
@@ -6356,7 +6356,7 @@ NaxFlakAG:
 		HomingActivationDelay: 3
 		RangeLimit: 30000
 		PointDefenseTypes: Missile
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ImpactActors: false
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
@@ -6610,7 +6610,7 @@ NaxFlakAA:
 		HomingActivationDelay: 3
 		RangeLimit: 30000
 		PointDefenseTypes: Missile
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ImpactActors: false
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Air

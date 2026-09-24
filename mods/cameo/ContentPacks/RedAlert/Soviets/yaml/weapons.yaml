@@ -759,7 +759,7 @@ ra1_soviets_firerocketsoldier_firerocketsthermobaricexplode:
 	Projectile: Missile
 		TrailImage: fb2
 		TrailDelay: 0
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: med_napalm
 		GlowScale: 1.5
 		GlowFadeFrames: 30
@@ -780,7 +780,7 @@ ra1_soviets_flametower_flamethrower:
 		TrailDelay: 0
 	Warhead@Flame_Medium: AreaDamage
 		Damage: 18000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: napalm
 		GlowScale: 1.5
 		GlowFadeFrames: 30
@@ -816,7 +816,7 @@ ra1_soviets_flamethrower_fireballgun:
 		TrailDelay: 0
 	Warhead@Flame_Medium: AreaDamage
 		Damage: 8000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: napalm
 		GlowScale: 1.5
 		GlowFadeFrames: 30
@@ -836,7 +836,7 @@ ra1_soviets_flamethrower_fireballgunexplode:
 		Image: FB1
 		TrailInterval: 1
 		TrailDelay: 0
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: napalm
 	Report: flamer2.aud
 ra1_soviets_flamethrower_fireballgunthermobaric:
@@ -960,7 +960,7 @@ ra1_soviets_mortarsoldier_siegemortarthermobaricexplode:
 		ContrailLength: 10
 		ContrailStartColor: FFBB8844
 		ContrailEndColor: 33221100
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: big_napalm
 		ImpactSounds: firebl3.aud
 		ImpactActors: false
@@ -1266,7 +1266,7 @@ ra1_soviets_heatraytank_heatray2:
 	Warhead@Inferno_Heavy: AreaDamage
 		Spread: 500
 		Falloff: 111, 33, 11, 3
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: small_napalm
 		Volume: 0.25
 	Report: idesat1a.wav
@@ -1291,7 +1291,7 @@ ra1_soviets_heatraytank_heatray3:
 	Warhead@Inferno_Heavy: AreaDamage
 		Spread: 500
 		Falloff: 111, 33, 11, 3
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: small_napalm
 		Volume: 0.25
 	Report: idesat1a.wav
@@ -1316,7 +1316,7 @@ ra1_soviets_heatraytank_heatray4:
 	Warhead@Inferno_Heavy: AreaDamage
 		Spread: 500
 		Falloff: 111, 33, 11, 3
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: small_napalm
 		Volume: 0.25
 	Report: idesat1a.wav
@@ -2099,7 +2099,7 @@ ra1_soviets_nuclearv2launcher_scudnuke:
 		MaxRadius: 4500
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ImpactSounds: kaboom22.aud
 
 ra1_soviets_nuclearv2launcher_scudnukethermobaric:
@@ -2135,7 +2135,7 @@ ra1_soviets_nuclearv2launcher_scudnukethermobaric:
 		ValidRelationships: Enemy
 		AffectsParent: true
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ImpactSounds: kaboom22.aud
 	MinRange: 2510
 	Report: missile1.aud
@@ -6237,7 +6237,7 @@ ra1_soviets_hammertank_cannon:
 		Speed: 682
 	Warhead@CannonHE_Heavy:
 		Damage: 12000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: poof
 		ImpactSounds: xplosml2.aud
 
@@ -6541,7 +6541,7 @@ ra1_soviets_kotinnucleartank_kotincannon:
 		Level: 20
 		MaxLevel: 1000
 		LayerName: ra2radiation
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: poof
 		ImpactSounds: xplosml2.aud
 
@@ -11193,7 +11193,7 @@ ra1_soviets_volkov_volkovmagneticweapon:
 	Warhead@CannonHE_Heavy:
 		Damage: 30000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: poof
 		ImpactSounds: kaboom25.aud
 	InvalidTargets: wall
@@ -13165,7 +13165,7 @@ ra1_soviets_hindattackhelicopter_hindmissiles:
 	Range: 5528
 	Projectile: Missile
 		VerticalRateOfTurn: 16
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: poof
 		ValidTargets: Ground, Ship
 		ImpactActors: false
@@ -13321,7 +13321,7 @@ ra1_soviets_kamovattackhelicopter_hindmissiles:
 	Range: 5528
 	Projectile: Missile
 		VerticalRateOfTurn: 16
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: poof
 		ValidTargets: Ground, Ship
 		ImpactActors: false
@@ -13809,7 +13809,7 @@ ra1_soviets_heavytank_105mm:
 	ReloadDelay: 76
 	Projectile: Bullet
 		Speed: 546
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: small_poof
 	Burst: 2
 	BurstDelays: 5
@@ -13823,7 +13823,7 @@ ra1_soviets_gorynychtank_bigflamer:
 	Range: 2390
 	Warhead@Flame_Medium: AreaDamage
 		Damage: 14000
-	Warhead@Glow: GlowImpact
+	Warhead@Glow:
 		Color: FF6600
 		Scale: 1.5
 		FadeFrames: 90
@@ -15924,7 +15924,7 @@ ra1_soviets_mortarsoldier_siegemortarthermobaric_ExplicitDamage3of4:
 		ContrailLength: 10
 		ContrailStartColor: FFBB8844
 		ContrailEndColor: 33221100
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: big_napalm
 		ImpactSounds: firebl3.aud
 		ImpactActors: false

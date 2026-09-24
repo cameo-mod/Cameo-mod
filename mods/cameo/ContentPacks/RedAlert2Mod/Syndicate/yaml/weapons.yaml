@@ -889,7 +889,7 @@ RA2FreedomRocket_elite:
 		ContrailZOffset: 4000
 		ContrailStartWidth: 33
 		ContrailEndWidth: 1
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ImpactActors: false
 	Report: vaegatta.wav, vaegattb.wav
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
@@ -1427,15 +1427,15 @@ LatinMonkeyGrenade2:
 		ContrailEndColor: 33221100
 		ContrailStartWidth: 26
 		ContrailEndWidth: 13
-	Warhead@Smudge: LeaveSmudge
+	Warhead@Smudge:
 		SmudgeType: SandCrater
 		InvalidTargets: Vehicle, Structure
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: d2k_med_explosion
 		ImpactSounds: EXPLMD2.WAV
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
-	Warhead@Concrete: DamagesConcrete
+	Warhead@Concrete:
 		Damage: 1875
 	Report: grenadepin.wav
 	Warhead@FireShrapnel: FireShrapnel
@@ -1525,15 +1525,15 @@ LatinMonkeyGrenade3:
 		ContrailEndColor: 33221100
 		ContrailStartWidth: 26
 		ContrailEndWidth: 13
-	Warhead@Smudge: LeaveSmudge
+	Warhead@Smudge:
 		SmudgeType: SandCrater
 		InvalidTargets: Vehicle, Structure
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: d2k_med_explosion
 		ImpactSounds: EXPLMD2.WAV
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
-	Warhead@Concrete: DamagesConcrete
+	Warhead@Concrete:
 		Damage: 1875
 	Report: grenadepin.wav
 	Warhead@FireShrapnel: FireShrapnel
@@ -1623,15 +1623,15 @@ LatinMonkeyGrenadeExplode:
 		ContrailEndColor: 33221100
 		ContrailStartWidth: 26
 		ContrailEndWidth: 13
-	Warhead@Smudge: LeaveSmudge
+	Warhead@Smudge:
 		SmudgeType: SandCrater
 		InvalidTargets: Vehicle, Structure
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: d2k_med_explosion
 		ImpactSounds: EXPLMD2.WAV
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
-	Warhead@Concrete: DamagesConcrete
+	Warhead@Concrete:
 		Damage: 1875
 	MinRange: 1400
 	Report: grenadepin.wav
@@ -3297,7 +3297,7 @@ DiabloCannon_AA:
 	Report: aacanon3.aud
 	ValidTargets: Air
 	Range: 9450
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 		ValidTargets: Air
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
@@ -3312,7 +3312,7 @@ DiabloCannon_AA:
 		ValidTargets: Air
 	Warhead@Flak_Medium:
 		ValidTargets: Air
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 	Warhead@Concrete:
 		Damage: 25
 	Warhead@Effect:
@@ -6176,7 +6176,7 @@ RA2APCFlakCannonAA:
 	Report: aacanon3.aud
 	ValidTargets: Air
 	Range: 8610
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 		ValidTargets: Air
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
@@ -6191,7 +6191,7 @@ RA2APCFlakCannonAA:
 		ValidTargets: Air
 	Warhead@Flak_Medium:
 		ValidTargets: Air
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 	Warhead@Concrete:
 		Damage: 25
 	Warhead@Effect:

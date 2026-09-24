@@ -595,13 +595,13 @@ ReimuYinYangOrb:
 		ValidTargets: Air, Ground, Water
 		Spread: 320
 		Damage: 64000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ImpactSounds: thgun.wav
 
 ## Unused
 	Warhead@Magic_Heavy: AreaDamage
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: fades
 		ExplosionPalette: player
 		Image: hakurei_giphy
@@ -3019,7 +3019,7 @@ DTAtomic:
 
 ChemTibAtomic:
 	Inherits: Atomic
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: chem_nuke_explosion
 		ImpactSounds: nukexplo.aud
 		ImpactActors: false
@@ -4391,7 +4391,7 @@ MiniNuke:
 		Damage: 10000
 	Projectile: Bullet
 		Speed: 546
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: small_poof
 	Burst: 2
 	BurstDelays: 5
@@ -5063,7 +5063,7 @@ ra1_allies_destroyer_missile:
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Underwater
 		Damage: 10000
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 		Explosions: small_building
 
 ra1_allies_destroyer_missile_cryo:
@@ -5361,7 +5361,7 @@ YamatoFlak:
 	Warhead@Flak_Medium:
 		ValidTargets: Air
 		Damage: 2000
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: small_poof
 
 ChronoVortexInit:
