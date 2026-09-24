@@ -496,11 +496,8 @@ TSSonicZapWeapon:
 		TrackTarget: true
 		Color: 50F5FF45
 	Warhead@Tesla_Heavy:
-		Damage: 4000
-	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
-		DamageTypes: Tesla
-		Damage: 1000
-		ValidRelationships: Neutral, Enemy
+		Damage: 5000
+	-Warhead@Tesla_Heavy_ExtraDamage:
 TSSonicZapWeaponSonic:
 	Inherits@wh: ^Warhead_Sonic_Heavy
 	Inherits@fx: ^ts_gdi_tssoniczapweaponsonic
@@ -541,36 +538,28 @@ TSZapWeapon_EMP:
 		TrackTarget: true
 		Color: F5F5F545
 	Warhead@Tesla_Heavy:
-		Damage: 2000
-		ValidTargets: Ground, Water
-	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
-		DamageTypes: Tesla
-		Damage: 1000
-		ValidRelationships: Neutral, Enemy
+		Damage: 3000
 		ValidTargets: Ground, Water
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 10000
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water
 
+	-Warhead@Tesla_Heavy_ExtraDamage:
 TSMine_EMP:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^ts_gdi_tsmine_emp
 	Report: mineblo1.aud
 	Warhead@Tesla_Heavy:
-		Damage: 10000
-		ValidTargets: Ground, Water
-	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
-		DamageTypes: Tesla
-		Damage: 5000
-		ValidRelationships: Neutral, Enemy
+		Damage: 15000
 		ValidTargets: Ground, Water
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 50000
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water
 
+	-Warhead@Tesla_Heavy_ExtraDamage:
 TSMechRailgun:
 	Inherits@wh: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
@@ -1191,13 +1180,7 @@ TSMobile_EMP:
 	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
-		Damage: 64000
-		Spread: 813
-	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
-		DamageTypes: Tesla
-		ValidTargets: Ground, Water
-		Falloff: 100, 75, 50, 25
-		Damage: 32000
+		Damage: 96000
 		Spread: 813
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidRelationships: Neutral, Enemy
@@ -1213,6 +1196,7 @@ TSMobile_EMP:
 	# 	ValidTargets: Vehicle, Defense, Cyborg
 	# 	ValidRelationships: Neutral, Enemy
 
+	-Warhead@Tesla_Heavy_ExtraDamage:
 TSShotgun:
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
@@ -1696,11 +1680,6 @@ TSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 		Spread: 6000
 		Damage: 8
 		Delay: 108
-	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
-		DamageTypes: Tesla
-		Spread: 600
-		Damage: 8000
-		Delay: 109
 	Warhead@TeslaWeapon: SpreadDamage
 		Spread: 1600
 		Damage: 6000
@@ -1709,11 +1688,6 @@ TSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 		Spread: 6000
 		Damage: 6
 		Delay: 111
-	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
-		DamageTypes: Tesla
-		Spread: 600
-		Damage: 8000
-		Delay: 112
 	Warhead@IonCannon: SpreadDamage
 		Range: 0, 600, 1400, 2000, 2820
 		Damage: 16000
@@ -1726,6 +1700,10 @@ TSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 		Delay: 115
 	-Warhead@2Smu_impact:
 
+	Warhead@Tesla_Super:
+		Damage: 216000
+	-Warhead@Tesla_Super_ExtraDamage:
+	-Warhead@Tesla_Heavy_ExtraDamage:
 TSIonBeamMini:
 	Inherits: ^TSIonBeam
 	Inherits@fx: ^ts_gdi_tsionbeammini

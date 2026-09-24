@@ -3327,16 +3327,10 @@ TDIonCannonDamage:
 		Spread: 300
 	Warhead@TeslaChargedWeaponPercentage: AreaDamagePercentage
 		Spread: 4000
-	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
-		DamageTypes: Tesla
-		Spread: 300
 	Warhead@TeslaWeapon: SpreadDamage
 		Spread: 300
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		Spread: 4000
-	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
-		DamageTypes: Tesla
-		Spread: 300
 	Warhead@IonCannon: SpreadDamage
 		Range: 0, 600, 1200, 1800, 2400, 3000
 		Falloff: 1000, 800, 600, 400, 200, 0
@@ -3348,6 +3342,10 @@ TDIonCannonDamage:
 # CLASSIC-RIFLE FAMILY (Formula v2 scout conversion 2026-07-19): GDI
 # minigunner â€” burst 4, disciplined cadence. Paired AP variant per the
 # base+upgrade rename law. M16/M16AP stay for their other users.
+	Warhead@Tesla_Super:
+		Damage: 400000
+	-Warhead@Tesla_Super_ExtraDamage:
+	-Warhead@Tesla_Heavy_ExtraDamage:
 td_gdi_minigunner_minigun:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light

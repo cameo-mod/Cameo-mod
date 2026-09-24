@@ -622,13 +622,6 @@ IxianBomb_EMP:
 		Spread: 1500
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		InvalidTargets: Infantry
-	Warhead@TeslaChargedExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water
-		Falloff: 100, 75, 50, 25
-		Damage: 15000
-		Spread: 3000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		InvalidTargets: Infantry
 	Warhead@TeslaChargedWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
@@ -643,13 +636,13 @@ IxianBomb_EMP:
 		Spread: 4000
 	-Warhead@HeavyBomb:
 	-Warhead@MediumFlameWeapon:
-	-Warhead@TeslaChargedExtraDamage:
 	-Warhead@TeslaChargedWeapon:
 	Warhead@Demolition_Heavy_Flat:
 		ValidTargets: Ground, Water
 		Damage: 105000
 		PercentageScale: 0
 
+	-Warhead@TeslaChargedExtraDamage:
 IxianCharge_EMP:
 	ReloadDelay: 3
 	Range: 20000
@@ -683,13 +676,11 @@ IxianDisable_EMP:
 		SecondaryBeamWidth: 96
 		SecondaryBeamColor: FFFF8844
 	Warhead@Tesla_Super: AreaDamage
-		Damage: 2000
-	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
-		DamageTypes: Tesla
-		Damage: 1000
+		Damage: 3000
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 8000
 
+	-Warhead@Tesla_Super_ExtraDamage:
 d2k_munitions_explosion:
 	Inherits@wh: ^Warhead_Magic_Heavy
 	Inherits@proj: ^Projectile_Magic_Heavy
@@ -1767,10 +1758,6 @@ ixian_farasha:
 	Warhead@TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 1000
-		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
@@ -1799,7 +1786,6 @@ ixian_farasha:
 	-Warhead@HeavyFlameWeapon:
 	-Warhead@RailgunExtraDamage:
 	-Warhead@RailgunWeapon:
-	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
 	Warhead@Laser_Medium:
 		InvalidTargets: Air
@@ -1853,6 +1839,7 @@ ixian_farasha:
 		Range: 1250
 		ValidTargets: Shielded
 		Duration: 15
+	-Warhead@TeslaExtraDamage:
 d2k_farasha_aa:
 	Inherits: ixian_farasha
 	-FirstBurstTargetOffset:
@@ -1862,9 +1849,6 @@ d2k_farasha_aa:
 	ValidTargets: Air
 	Warhead@TeslaWeapon: SpreadDamage
 		ValidTargets: Air
-	Warhead@TeslaExtraDamage: SpreadDamage
-		ValidTargets: Air
-		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		-InvalidTargets:
 		ValidTargets: Air
@@ -1887,7 +1871,6 @@ d2k_farasha_aa:
 		ValidTargets: Air
 	-Warhead@HeavyFlameWeapon:
 	-Warhead@RailgunWeapon:
-	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
 	Warhead@Laser_Medium:
 		-InvalidTargets:

@@ -12253,3 +12253,33 @@ A real fold needs `-Warhead@<chip>:` cancels. Verified resolved: every
 diff = chip->None fields + main Damage sum only; 0 unsanctioned drift.
 
 W7 869->**866**; empty 0; orphans 0; W2/W3/W4/W6/W8 unchanged.
+
+## 2026-09-26 — R17 fold batch-4: pack files (DAWN)
+
+Extended the R17 ExtraDamage fold to the ContentPack weapons files in my
+file-set (D2k Ixian/Ordos, TD GDI/Nod, TS GDI/Nod/CABAL). Mechanized fold
+(`dawn_tools/r17_exec.py`): resolve -> delete local chip declare -> bump
+effective main Damage by the resolved chip sum -> re-resolve -> add
+`-Warhead@<chip>:` only where the node is template-supplied.
+
+18 weapons folded (24 chips): every resolved diff = chip fields ->None +
+exactly one main Damage bump matching the chip sum. Biggest: TDIonCannonDamage
+200000->400000, CabalMagicNuke 100000->250000, TSMobile_EMP 64000->96000.
+
+Dead-declare cleanup: IxianBomb_EMP, ixian_farasha, d2k_farasha_aa,
+CabalMothershipRockets, CabalBeholderLaser had declare+self-cancel pairs —
+deleted the declares, KEPT the cancels (they are load-bearing: they kill
+template-supplied chip nodes, deleting both resurrects the template's chip).
+One orphan cancel resulted (d2k_farasha_aa — parent cancels upstream) and was
+removed. PulseMissile's two minified declares are dead file-space (the
+d2k.yaml copy wins the duplicate race) — left alone, flagged. Same pattern in outpost2.yaml:
+eden_EMP/plymouth_EMP dead declares removed, load-bearing cancels kept.
+
+Findings: the remaining resolved chips (~50 in my file-set, e.g. every
+`Laser_Heavy_ExtraDamage` at the 1000 default) are TEMPLATE-supplied from
+`^Warhead_*` — the real kill-shot is a template-level fold in the central
+weapons file, which is shared territory -> flagged to fleet for a ruling
+rather than folding per-weapon (would leave ~50 orphan cancels when the
+template fold lands).
+
+Gates: empty 0, orphans 0, W2-W8 all at baselines (W7 stays 866).

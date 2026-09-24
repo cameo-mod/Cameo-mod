@@ -157,13 +157,11 @@ TSCABALDisable_EMP:
 		SecondaryBeamWidth: 96
 		SecondaryBeamColor: FFFF8844
 	Warhead@Tesla_Super: AreaDamage
-		Damage: 2000
-	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
-		DamageTypes: Tesla
-		Damage: 1000
+		Damage: 3000
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 2000
 
+	-Warhead@Tesla_Super_ExtraDamage:
 TSCABALObeliskLaserFire:
 	Inherits@collapsewh: ^Warhead_Laser_Heavy
 	Inherits@collapseextra: ^Warhead_Laser_ExtraDamage
@@ -1898,36 +1896,11 @@ CabalHunterKillerLasers:
 		Damage: 4
 	-Warhead@LaserWeapon:
 	-Warhead@LaserExtraDamage:
-	Warhead@LegacyLaserExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Spread: 300
-		Damage: 600
-		Versus:
-			REFLECTOR: 50
-			Shield: 100
-			None: 1
-			Flak: 1
-			Plate: 1
-			Heroic: 1
-			Superheavy: 1
-			Heavy: 1
-			Medium: 1
-			Light: 1
-			Scout: 1
-			Steel: 1
-			Concrete: 1
-			Wood: 1
-			Fighter: 1
-			Bomber: 1
-			Helicopter: 1
-			Spaceship: 1
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		UpdatesUnitStatistics: false
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@Laser_Heavy:
-		Damage: 16000
+		Damage: 16600
 		PercentageScale: 0
 	-Warhead@Laser_Heavy_ExtraDamage:
 
@@ -2001,61 +1974,11 @@ CabalHunterKillerLasers_elite:
 	TargetActorCenter: false
 	-Warhead@LaserWeapon:
 	-Warhead@LaserExtraDamage:
-	Warhead@LegacyLaserExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Spread: 300
-		Damage: 600
-		Versus:
-			REFLECTOR: 50
-			Shield: 100
-			None: 1
-			Flak: 1
-			Plate: 1
-			Heroic: 1
-			Superheavy: 1
-			Heavy: 1
-			Medium: 1
-			Light: 1
-			Scout: 1
-			Steel: 1
-			Concrete: 1
-			Wood: 1
-			Fighter: 1
-			Bomber: 1
-			Helicopter: 1
-			Spaceship: 1
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		UpdatesUnitStatistics: false
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	-Warhead@RailgunWeapon:
 	-Warhead@RailgunExtraDamage:
-	Warhead@LegacyRailgunExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Spread: 500
-		Damage: 1000
-		Versus:
-			REFLECTOR: 50
-			Shield: 100
-			None: 1
-			Flak: 1
-			Plate: 1
-			Heroic: 1
-			Superheavy: 1
-			Heavy: 1
-			Medium: 1
-			Light: 1
-			Scout: 1
-			Steel: 1
-			Concrete: 1
-			Wood: 1
-			Fighter: 1
-			Bomber: 1
-			Helicopter: 1
-			Spaceship: 1
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		UpdatesUnitStatistics: false
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
@@ -2063,7 +1986,7 @@ CabalHunterKillerLasers_elite:
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@Laser_Heavy:
-		Damage: 30000
+		Damage: 31600
 		PercentageScale: 0
 	-Warhead@Laser_Heavy_ExtraDamage:
 
@@ -2785,10 +2708,6 @@ CabalMothershipRockets:
 	Warhead@TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 5000
-		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
@@ -2844,7 +2763,6 @@ CabalMothershipRockets:
 	-Warhead@HeavyMissile:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@MediumFlameWeapon:
-	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
 	Warhead@MissileTesla_Heavy:
 		ValidTargets: Ground, Water, Air
@@ -2905,6 +2823,7 @@ CabalMothershipRockets:
 		Duration: 3
 	Warhead@ShieldHitEffect:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+	-Warhead@TeslaExtraDamage:
 CabalWaspLaser:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -2923,10 +2842,7 @@ CabalWaspLaser:
 		SecondaryBeamColor: 444488FF
 	ValidTargets: Ground, Water, Air
 	Warhead@Laser_Heavy:
-		Damage: 4000
-		ValidTargets: Ground, Water, Air
-	Warhead@LaserExtraDamage: SpreadDamage
-		Damage: 2000
+		Damage: 6000
 		ValidTargets: Ground, Water, Air
 
 CabalWaspLaserStriker:
@@ -2949,10 +2865,7 @@ CabalWaspLaserStriker:
 		SecondaryBeamColor: 444488FF
 	ValidTargets: Ground, Water, Air
 	Warhead@Laser_Heavy:
-		Damage: 4000
-		ValidTargets: Ground, Water, Air
-	Warhead@LaserExtraDamage: SpreadDamage
-		Damage: 2000
+		Damage: 6000
 		ValidTargets: Ground, Water, Air
 
 CabalAscendedRockets:
@@ -3199,27 +3112,13 @@ CabalMagicNuke:
 		Spread: 1000
 		Damage: 100000
 		Delay: 0
-	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
-		DamageTypes: Tesla
-		ValidTargets: Shielded
-		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
-		Spread: 2000
-		Damage: 50000
-		Delay: 1
 	Warhead@Tesla_Heavy:
 		PercentageScale: 2000
 		ValidTargets: Shielded
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
 		Spread: 1000
-		Damage: 100000
+		Damage: 250000
 		Delay: 4
-	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
-		DamageTypes: Tesla
-		ValidTargets: Shielded
-		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
-		Spread: 1000
-		Damage: 100000
-		Delay: 6
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 1000
 		Damage: 20000
@@ -3705,6 +3604,8 @@ CabalMagicNuke:
 		Brightness: 1.3
 		Darkness: 0.85
 
+	-Warhead@Tesla_Super_ExtraDamage:
+	-Warhead@Tesla_Heavy_ExtraDamage:
 CabalCommandoPlasmaNeutron:
 	Inherits@roleflat: ^Warhead_Plasma_Heavy_Flat
 	Inherits: ^HeavyCannon
@@ -3952,9 +3853,6 @@ CabalBeholderLaser:
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 10000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 5000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		Damage: 5
@@ -3978,7 +3876,6 @@ CabalBeholderLaser:
 	-Warhead@LaserWeapon:
 	-Warhead@RailgunExtraDamage:
 	-Warhead@RailgunWeapon:
-	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
 	Warhead@Laser_Heavy_Flat:
 		InvalidTargets: Air
@@ -4025,6 +3922,7 @@ CabalBeholderLaser:
 		Duration: 10
 	Warhead@Smudge:
 		SmudgeType: Scorch
+	-Warhead@TeslaExtraDamage:
 CabalOverkillDroneLauncher:
 	ReloadDelay: 25
 	Range: 6400

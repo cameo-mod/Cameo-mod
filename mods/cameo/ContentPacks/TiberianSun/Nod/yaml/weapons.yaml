@@ -686,7 +686,7 @@ laserelitecadregun:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@Laser_Heavy:
-		Damage: 6000
+		Damage: 6600
 		PercentageScale: 0
 	-Warhead@Laser_Heavy_ExtraDamage:
 
@@ -723,31 +723,6 @@ laserelitecadregun:
 			Steel: 8
 			Superheavy: 5
 			Wood: 14
-	Warhead@LegacyLaserExtraDamage: SpreadDamage
-		Damage: 600
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		Spread: 300
-		UpdatesUnitStatistics: false
-		ValidTargets: Ground, Water, Air
-		Versus:
-			Bomber: 1
-			Concrete: 1
-			Fighter: 1
-			Flak: 1
-			Heavy: 1
-			Helicopter: 1
-			Heroic: 1
-			Light: 1
-			Medium: 1
-			None: 1
-			Plate: 1
-			REFLECTOR: 50
-			Scout: 1
-			Shield: 100
-			Spaceship: 1
-			Steel: 1
-			Superheavy: 1
-			Wood: 1
 	Warhead@ShieldHit:
 		Condition: shieldhit
 		Range: 1250

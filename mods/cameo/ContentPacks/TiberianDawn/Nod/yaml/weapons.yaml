@@ -18,7 +18,7 @@ M16Laser:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@Laser_Heavy:
-		Damage: 6000
+		Damage: 6600
 		PercentageScale: 0
 	-Warhead@Laser_Heavy_ExtraDamage:
 
@@ -55,31 +55,6 @@ M16Laser:
 			Steel: 8
 			Superheavy: 5
 			Wood: 14
-	Warhead@LegacyLaserExtraDamage: SpreadDamage
-		Damage: 600
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		Spread: 300
-		UpdatesUnitStatistics: false
-		ValidTargets: Ground, Water, Air
-		Versus:
-			Bomber: 1
-			Concrete: 1
-			Fighter: 1
-			Flak: 1
-			Heavy: 1
-			Helicopter: 1
-			Heroic: 1
-			Light: 1
-			Medium: 1
-			None: 1
-			Plate: 1
-			REFLECTOR: 50
-			Scout: 1
-			Shield: 100
-			Spaceship: 1
-			Steel: 1
-			Superheavy: 1
-			Wood: 1
 	Warhead@ShieldHit:
 		Condition: shieldhit
 		Range: 1250
@@ -2106,37 +2081,12 @@ td_nod_lasertrooper_blackhandlaser:
 		Damage: 108
 	-Warhead@LaserWeapon:
 	-Warhead@LaserExtraDamage:
-	Warhead@LegacyLaserExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Spread: 300
-		Damage: 648
-		Versus:
-			REFLECTOR: 50
-			Shield: 100
-			None: 1
-			Flak: 1
-			Plate: 1
-			Heroic: 1
-			Superheavy: 1
-			Heavy: 1
-			Medium: 1
-			Light: 1
-			Scout: 1
-			Steel: 1
-			Concrete: 1
-			Wood: 1
-			Fighter: 1
-			Bomber: 1
-			Helicopter: 1
-			Spaceship: 1
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		UpdatesUnitStatistics: false
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		PercentageDenominator: 2500
 		ValidTargets: Ground, Water, Air
 		Damage: 108
 	Warhead@Laser_Heavy:
-		Damage: 32400
+		Damage: 33048
 		PercentageScale: 0
 	-Warhead@Laser_Heavy_ExtraDamage:
 
@@ -2816,7 +2766,7 @@ td_nod_minigunner_minigun_laser:
 		Damage: 29
 	Warhead@Laser_Heavy:
 		InvalidTargets: Air
-		Damage: 10209
+		Damage: 11230
 		PercentageScale: 0
 	-Warhead@Laser_Heavy_ExtraDamage:
 	Warhead@ShieldHit:
@@ -2824,9 +2774,6 @@ td_nod_minigunner_minigun_laser:
 		Duration: 10
 		Range: 1250
 		ValidTargets: Shielded
-		InvalidTargets: Air
-	Warhead@LegacyLaserExtraDamage:
-		Damage: 1021
 		InvalidTargets: Air
 	Projectile:
 		ContrailEndColor: 88664422
@@ -2912,3 +2859,4 @@ td_nod_minigunner_minigun_laser:
 			Steel: 7
 			Superheavy: 1
 			Wood: 10
+	-Warhead@LegacyLaserExtraDamage:
