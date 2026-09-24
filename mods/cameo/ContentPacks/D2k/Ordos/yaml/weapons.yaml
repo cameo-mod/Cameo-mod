@@ -2052,7 +2052,7 @@ GrenDeath:
 
 	Inherits@fx: ^d2k_ordos_grendeath_2
 SaboDeath:
-	Inherits: GrenDeath
+	Inherits@w71: ^d2k_ordos_grendeath_2
 	Warhead@1Dam: SpreadDamage
 		Damage: 20000
 		Spread: 0c768
@@ -2067,6 +2067,34 @@ SaboDeath:
 	Warhead@3Eff:
 		ImpactSounds: EXPLSML2.WAV
 
+	Warhead@FrndlDam: SpreadDamage
+		ValidRelationships: Ally
+		Versus:
+			Heavy: 60
+			Light: 80
+			Medium: 60
+			Wood: 60
+			Concrete: 30
+			None: 100
+		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
+		DamageCalculationType: ClosestTargetablePosition
+		Falloff: 100, 0
+		Spread: 0c512
+		Damage: 3333
+	Warhead@EnemyDam: SpreadDamage
+		Spread: 0c512
+		DamageCalculationType: ClosestTargetablePosition
+		Damage: 10000
+		Versus:
+			Heavy: 60
+			None: 100
+			Light: 80
+			Concrete: 30
+			Medium: 60
+			Wood: 60
+		ValidRelationships: Enemy, Neutral
+		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
+		Falloff: 100, 0
 HMGo:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
@@ -2082,7 +2110,9 @@ HMGo:
 		Damage: 4000
 
 ordos_raider_hmg:
-	Inherits: HMGo
+	Inherits@w71: ^Warhead_Bullet_Light
+	Inherits@w72: ^Projectile_Bullet_Light
+	Inherits@w73: ^Effect_Bullet_Light
 	Projectile: Bullet
 		-Image:
 		ProjectileStreakLength: 960
@@ -2097,6 +2127,13 @@ ordos_raider_hmg:
 		ContrailLength: 0
 		Speed: 4000
 
+	BurstDelays: 2
+	ReloadDelay: 8
+	Range: 6000
+	StartBurstReport: hmgo1.wav, hmgo2.wav
+	Warhead@Bullet_Light: AreaDamage
+		Damage: 4000
+	Burst: 9
 HMGo_upgrade:
 	Inherits: ^Warhead_Laser_Heavy
 	Inherits@2: ^Warhead_Bullet_Medium
@@ -3171,7 +3208,9 @@ d2k25mm:
 		Damage: 10000
 
 HMG_tleilaxu:
-	Inherits: HMG
+	Inherits@w71: ^Warhead_Bullet_Medium
+	Inherits@w72: ^Projectile_Bullet_Light
+	Inherits@w73: ^d2k_shared_hmg
 	ReloadDelay: 80
 	Burst: 6
 	BurstDelays: 2
@@ -3179,6 +3218,7 @@ HMG_tleilaxu:
 	Warhead@Bullet_Medium:
 		Damage: 2500
 
+	Report: 20MMGUN1.WAV
 d2k_sardaukar_elite:
 	Inherits: ordos_autogunturret
 	Burst: 5
@@ -3219,7 +3259,9 @@ Rocketeer:
 		ImpactSounds: splash9.aud
 
 Rocketeer_o:
-	Inherits: HMG
+	Inherits@w71: ^Warhead_Bullet_Medium
+	Inherits@w72: ^Projectile_Bullet_Light
+	Inherits@w73: ^d2k_shared_hmg
 	ReloadDelay: 18
 	Range: 2560
 	ValidTargets: Ground
@@ -3227,14 +3269,21 @@ Rocketeer_o:
 		Damage: 2250
 		ValidTargets: Ground
 
+	Report: 20MMGUN1.WAV
 Rocketeer_t:
-	Inherits: Rocketeer_o
+	Inherits@w71: ^Warhead_Bullet_Medium
+	Inherits@w72: ^Projectile_Bullet_Light
+	Inherits@w73: ^d2k_shared_hmg
 	Burst: 4
 	Range: 3840
 	BurstDelays: 4
 	ReloadDelay: 40
 	ValidTargets: Ground, Air
 
+	Report: 20MMGUN1.WAV
+	Warhead@Bullet_Medium: AreaDamage
+		Damage: 2250
+		ValidTargets: Ground
 D2KBuggyExplosion:
 	Inherits@fx: ^d2k_ordos_set4
 	ValidTargets: Ground, Air
@@ -3278,7 +3327,7 @@ D2KSniperRifle:
 		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
 
 D2KMarksmanRifle:
-	Inherits: D2KSniperRifle
+	Inherits@w71: ^d2k_ordos_d2ksniperrifle
 	ReloadDelay: 45
 	Range: 6656
 	Report: d2k_marksman.wav
@@ -3292,9 +3341,17 @@ D2KMarksmanRifle:
 		ValidTargets: Ground, Air
 		InvalidTargets: Water
 		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
+		Versus:
+			Heavy: 5
+			Concrete: 5
+			Light: 75
+			Medium: 15
+			Wood: 20
+			None: 100
 	Warhead@2Eff:
 		ImpactSounds: EXPLSML1.WAV
 
+	ValidTargets: Ground, Air
 emperor_sardaukar_chief_c4:
 	Inherits: GenericC4
 	Warhead@1: AttachDelayedWeapon
@@ -3310,7 +3367,9 @@ d2kFlameTurret:
 		Damage: 2800
 
 d2k_laser_qafza:
-	Inherits: d2k_laser
+	Inherits@w71: ^Warhead_Laser_Heavy
+	Inherits@w72: ^Projectile_Laser_Heavy
+	Inherits@w73: ^d2k_shared_d2k_laser
 	Report: obelray1.aud
 	StartBurstReport: d2k_laser.wav
 	Burst: 1
@@ -3326,14 +3385,42 @@ d2k_laser_qafza:
 			Wood: 30
 			Concrete: 15
 
+	BurstDelays: 0
+	Projectile: LaserZap
+		ZOffset: 2047
+		Width: 50
+		Color: FF0000
+	ValidTargets: Ground
+	Warhead@Laser_Heavy: AreaDamage
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 d2k_laser_qafza_aa:
-	Inherits: d2k_laser_qafza
+	Inherits@w71: ^Warhead_Laser_Heavy
+	Inherits@w72: ^Projectile_Laser_Heavy
+	Inherits@w73: ^d2k_shared_d2k_laser
 	Report: obelray1.aud
 	Range: 8192
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Air
+		Versus:
+			None: 100
+			Concrete: 15
+			Medium: 60
+			Wood: 30
+			Heavy: 45
+			Light: 100
+		Damage: 2500
 
+	BurstDelays: 0
+	Projectile: LaserZap
+		ZOffset: 2047
+		Width: 50
+		Color: FF0000
+	ReloadDelay: 12
+	StartBurstReport: d2k_laser.wav
+	Warhead@Laser_Heavy: AreaDamage
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	Burst: 1
 D2K_buzzsaw:
 	ValidTargets: Infantry
 	ReloadDelay: 1

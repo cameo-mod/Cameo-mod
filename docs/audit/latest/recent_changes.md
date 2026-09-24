@@ -1,19 +1,21 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **214**, files touched: **2112**
+Commits reviewed: **216**, files touched: **2112**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
-| R1 | balance yaml edited without the ledger | 12 | yes |
+| R1 | balance yaml edited without the ledger | 14 | yes |
 | R2 | audit script never run by run_all.sh | 9 | yes |
 | R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 14 | partly |
 | R4 | engine/mod.config change (needs boot gate) | 0 | no |
 
 
-## R1 — hand-edited balance numbers (12)
+## R1 — hand-edited balance numbers (14)
 
 | commit | date | subject | fields |
 |---|---|---|---|
+| 8889c7e3 | 2026-09-24 | R17 fold batch-4: 18 pack weapons, 24 chips fold | Damage |
+| e40195b1 | 2026-09-24 | W7 batch-3 + R17 folds: 12 ExtraDamage folds, 3  | Damage, Range |
 | a3bcdbb3 | 2026-09-24 | W27 batch-7: outpost2.yaml -> effects_op2.yaml ( | Range |
 | 2ffd9e5a | 2026-09-24 | W7 batch-2: sc_zerg_devourer_acidcloud_aa -> ^Wa | Damage, ReloadDelay, Spread |
 | d0f6e1e2 | 2026-09-24 | W7 batch-1: convert 17 ratchet-neutral weapon->w | Burst, BurstDelays, Damage, Range, ReloadDelay, Speed, Spread |
@@ -74,7 +76,7 @@ _none found_
 |---|---|
 | docs/HANDOFF.md | 50 |
 | docs/DESIGN.md | 43 |
-| DEVELOPMENT_LOG.md | 28 |
+| DEVELOPMENT_LOG.md | 30 |
 | docs/LESSONS_LEARNED.md | 25 |
 | docs/balance/derived/redalert_japan.json | 21 |
 | docs/balance/derived/tiberiandawn_nod.json | 21 |
@@ -100,10 +102,10 @@ _none found_
 
 ## Enforcement
 
-R1/R3 block only for commits on or after **2026-08-12**: 12 R1 and 0 R3 of 12/14 findings are in scope; the rest predate the gate.
+R1/R3 block only for commits on or after **2026-08-12**: 14 R1 and 0 R3 of 14/14 findings are in scope; the rest predate the gate.
 
 
 ## FAIL
 
-- 12 R1, 9 R2, 0 R3 blocking finding(s)
+- 14 R1, 9 R2, 0 R3 blocking finding(s)
 

@@ -41,7 +41,9 @@ td_gdi_guardtower_highv_base:
 		Damage: 2000
 
 td_gdi_guardtower_highv:
-	Inherits: td_gdi_guardtower_highv_base
+	Inherits@w71: ^Warhead_Bullet_Medium
+	Inherits@w72: ^Projectile_Bullet_Medium
+	Inherits@w73: ^Effect_Bullet_Medium
 	Projectile: Bullet
 		-Image:
 		ProjectileStreakLength: 960
@@ -56,8 +58,15 @@ td_gdi_guardtower_highv:
 		ContrailLength: 0
 		Speed: 4000
 
+	BurstDelays: 2
+	ReloadDelay: 22
+	Range: 6720
+	StartBurstReport: gun8.aud
+	Burst: 4
 td_gdi_guardtower_highvap:
-	Inherits: HighVAP
+	Inherits@w71: ^Warhead_Bullet_Medium
+	Inherits@w72: ^Projectile_Bullet_Medium
+	Inherits@w73: ^Effect_Bullet_Medium
 	Projectile: Bullet
 		-Image:
 		ProjectileStreakLength: 960
@@ -74,8 +83,15 @@ td_gdi_guardtower_highvap:
 
 	Warhead@Bullet_Medium:
 		InvalidTargets: Air
+		Damage: 4000
 	Warhead@ShieldHit:
 		InvalidTargets: Air
+	BurstDelays: 2
+	ValidTargets: Ground, Water
+	ReloadDelay: 22
+	Range: 6720
+	StartBurstReport: gun8.aud
+	Burst: 4
 td_gdi_grenadier_grenadeexplode:
 	Inherits: ^Warhead_Demolition_Light
 	Inherits@2: ^Projectile_Grenade_Light
@@ -758,9 +774,16 @@ td_gdi_battletank_m1a1missiles:
 		VerticalRateOfTurn: 16
 
 td_gdi_battletank_m1a1missilesamt:
-	Inherits: td_gdi_battletank_m1a1missiles
+	Inherits@w71: ^Warhead_MissileAP_Medium
+	Inherits@w72: ^Projectile_Missile_Medium
+	Inherits@w73: ^td_gdi_set4
 	Inherits@2: ^AMTProjectile
 
+	Report: rocket1.aud
+	ReloadDelay: 72
+	Warhead@MissileAP_Medium: AreaDamage
+		Damage: 14848
+	Range: 5145
 td_gdi_battletank_m1a1machinegun:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -814,9 +837,20 @@ td_gdi_mammothtank_mammothmissiles:
 		Damage: 13892
 
 td_gdi_mammothtank_mammothmissilesamt:
-	Inherits: td_gdi_mammothtank_mammothmissiles
+	Inherits@w71: ^Warhead_MissileAP_Heavy
+	Inherits@w72: ^Projectile_Missile_Heavy
+	Inherits@w73: ^td_gdi_set1
 	Inherits@2: ^AMTProjectile
 
+	BurstDelays: 12
+	Projectile: Missile
+		Image: DRAGON
+	Report: rocket1.aud
+	ReloadDelay: 68
+	Range: 5341
+	Warhead@MissileAP_Heavy: AreaDamage
+		Damage: 13892
+	Burst: 2
 td_gdi_mlrs_227mmamt:
 	Inherits: 227mm
 	Range: 9993
@@ -1059,10 +1093,22 @@ td_gdi_orca_orcamissiles:
 			Superheavy: 16
 			Wood: 9
 td_gdi_orca_orcamissilesamt:
-	Inherits: td_gdi_orca_orcamissiles
+	Inherits@w71: ^Warhead_MissileAP_Heavy
+	Inherits@w72: ^td_gdi_td_gdi_orca_orcamissiles
 	Inherits@2: ^AMTProjectile
 	Projectile: Missile
 		MinimumLaunchAngle: -128
+		LaunchAngle: 66
+		TrailImage: smokey
+		Arm: 0
+		CloseEnough: 500
+		Image: DRAGON
+		Shadow: true
+		RangeLimit: 25000
+		Blockable: false
+		Inaccuracy: 100
+		PointDefenseTypes: Missile
+		AllowSnapping: true
 	Warhead@MissileAP_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1073,6 +1119,156 @@ td_gdi_orca_orcamissilesamt:
 		PercentageScale: 0
 		PercentageSpread: 50
 
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+		UpdatesUnitStatistics: false
+		Versus:
+			Spaceship: 24
+			Helicopter: 22
+			Wood: 15
+			Light: 17
+			Steel: 21
+			Heroic: 10
+			Heavy: 23
+			Plate: 13
+			Superheavy: 25
+			Shield: 35
+			Fighter: 16
+			Medium: 20
+			Bomber: 19
+			Flak: 12
+			None: 11
+			Scout: 14
+			Concrete: 18
+		Spread: 300
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Versus:
+			Concrete: 13
+			Helicopter: 17
+			Heavy: 18
+			Light: 12
+			Fighter: 11
+			Bomber: 14
+			Plate: 8
+			Medium: 15
+			Superheavy: 20
+			Shield: 25
+			Spaceship: 19
+			Heroic: 5
+			None: 6
+			Wood: 10
+			Steel: 16
+			Flak: 7
+			Scout: 9
+		Damage: 1
+		Spread: 200
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@HeavyCannonPercentage: AreaDamagePercentage
+		Versus:
+			Bomber: 12
+			Medium: 21
+			Plate: 15
+			Flak: 16
+			Steel: 20
+			Light: 23
+			Heavy: 19
+			Fighter: 13
+			None: 18
+			Wood: 24
+			Concrete: 22
+			Scout: 25
+			Helicopter: 11
+			Heroic: 14
+			Superheavy: 17
+			Spaceship: 10
+		Damage: 1
+		Spread: 225
+		ValidTargets: Ground, Water, Air
+		UpdatesUnitStatistics: false
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Report: bazook1.aud
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		Versus:
+			Heavy: 15
+			Heroic: 5
+			Wood: 9
+			Concrete: 10
+			Steel: 11
+			Spaceship: 4
+			Scout: 12
+			Fighter: 1
+			Medium: 14
+			Light: 13
+			None: 6
+			Shield: 17
+			Helicopter: 3
+			Bomber: 2
+			Superheavy: 16
+			Flak: 7
+			Plate: 8
+		Spread: 75
+		UpdatesUnitStatistics: false
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Versus:
+			Superheavy: 9
+			Helicopter: 6
+			Concrete: 15
+			Heroic: 10
+			Steel: 12
+			Scout: 20
+			Shield: 25
+			Fighter: 8
+			Medium: 14
+			Heavy: 11
+			Flak: 16
+			Wood: 18
+			Light: 17
+			Bomber: 7
+			Plate: 13
+			Spaceship: 5
+			None: 19
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water, Air
+		Spread: 300
+		Falloff: 100, 75, 50, 25
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		Versus:
+			Wood: 15
+			Heavy: 10
+			Fighter: 4
+			None: 9
+			Bomber: 3
+			Medium: 12
+			Steel: 11
+			Superheavy: 8
+			Shield: 17
+			Helicopter: 2
+			Plate: 6
+			Light: 14
+			Spaceship: 1
+			Concrete: 13
+			Scout: 16
+			Flak: 7
+			Heroic: 5
+		Falloff: 100, 50, 33, 25, 20
+		ValidTargets: Ground, Water, Air
+		UpdatesUnitStatistics: false
+		Damage: 1
+		Spread: 200
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	ReloadDelay: 16
+	Warhead@ShieldHit: GrantExternalCondition
+		Duration: 8
+	Range: 5442
 Vulcan:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -1466,10 +1662,23 @@ td_gdi_advancedguardtower_towermissile:
 			Superheavy: 16
 			Wood: 9
 td_gdi_advancedguardtower_towermissileamt:
-	Inherits: td_gdi_advancedguardtower_towermissile
+	Inherits@w71: ^Warhead_MissileAP_Heavy
+	Inherits@w72: ^td_gdi_td_gdi_advancedguardtower_towermissile
 	Inherits@2: ^AMTProjectile
 	Projectile: Missile
 		VerticalRateOfTurn: 12
+		LaunchAngle: 66
+		TrailImage: smokey
+		Arm: 0
+		ContrailZOffset: 4000
+		CloseEnough: 500
+		Image: DRAGON
+		Shadow: true
+		RangeLimit: 25000
+		Blockable: false
+		Inaccuracy: 100
+		PointDefenseTypes: Missile
+		AllowSnapping: true
 	Warhead@MissileAP_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1480,6 +1689,189 @@ td_gdi_advancedguardtower_towermissileamt:
 		PercentageScale: 0
 		PercentageSpread: 50
 
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+		UpdatesUnitStatistics: false
+		Versus:
+			Spaceship: 24
+			Helicopter: 22
+			Wood: 15
+			Light: 17
+			Steel: 21
+			Heroic: 10
+			Heavy: 23
+			Plate: 13
+			Superheavy: 25
+			Shield: 35
+			Fighter: 16
+			Medium: 20
+			Bomber: 19
+			Flak: 12
+			None: 11
+			Scout: 14
+			Concrete: 18
+		Spread: 300
+		ValidTargets: Ground, Water, Air
+		ValidRelationships: Neutral, Enemy
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Versus:
+			Concrete: 13
+			Helicopter: 17
+			Heavy: 18
+			Light: 12
+			Fighter: 11
+			Bomber: 14
+			Plate: 8
+			Medium: 15
+			Superheavy: 20
+			Shield: 25
+			Spaceship: 19
+			Heroic: 5
+			None: 6
+			Wood: 10
+			Steel: 16
+			Flak: 7
+			Scout: 9
+		ValidRelationships: Neutral, Enemy
+		Damage: 1
+		Spread: 200
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		ValidRelationships: Neutral, Enemy
+		Versus:
+			Wood: 15
+			Heavy: 10
+			Fighter: 4
+			None: 9
+			Bomber: 3
+			Medium: 12
+			Steel: 11
+			Superheavy: 8
+			Shield: 17
+			Helicopter: 2
+			Plate: 6
+			Light: 14
+			Spaceship: 1
+			Concrete: 13
+			Scout: 16
+			Flak: 7
+			Heroic: 5
+		Falloff: 100, 50, 33, 25, 20
+		ValidTargets: Ground, Water, Air
+		UpdatesUnitStatistics: false
+		Damage: 1
+		Spread: 200
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	BurstDelays: 5
+	Report: rocket2.aud
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		Versus:
+			Heavy: 15
+			Heroic: 5
+			Wood: 9
+			Concrete: 10
+			Steel: 11
+			Spaceship: 4
+			Scout: 12
+			Fighter: 1
+			Medium: 14
+			Light: 13
+			None: 6
+			Shield: 17
+			Helicopter: 3
+			Bomber: 2
+			Superheavy: 16
+			Flak: 7
+			Plate: 8
+		Spread: 75
+		UpdatesUnitStatistics: false
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		ValidRelationships: Neutral, Enemy
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Versus:
+			Superheavy: 9
+			Helicopter: 6
+			Concrete: 15
+			Heroic: 10
+			Steel: 12
+			Scout: 20
+			Shield: 25
+			Fighter: 8
+			Medium: 14
+			Heavy: 11
+			Flak: 16
+			Wood: 18
+			Light: 17
+			Bomber: 7
+			Plate: 13
+			Spaceship: 5
+			None: 19
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water, Air
+		Spread: 300
+		Falloff: 100, 75, 50, 25
+		ValidRelationships: Neutral, Enemy
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		Versus:
+			Shield: 25
+			Wood: 7
+			None: 16
+			Fighter: 20
+			Concrete: 6
+			Heroic: 13
+			Medium: 10
+			Steel: 5
+			Spaceship: 17
+			Superheavy: 8
+			Flak: 15
+			Helicopter: 18
+			Bomber: 19
+			Plate: 14
+			Scout: 12
+			Heavy: 9
+			Light: 11
+		Damage: 1
+		UpdatesUnitStatistics: false
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		Spread: 125
+		ValidTargets: Ground, Water, Air
+		ValidRelationships: Neutral, Enemy
+	Warhead@ShieldHit: GrantExternalCondition
+		Duration: 8
+	Range: 8772
+	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
+		Versus:
+			Superheavy: 21
+			Shield: 35
+			Flak: 15
+			Medium: 19
+			Concrete: 11
+			Spaceship: 25
+			Helicopter: 24
+			Plate: 16
+			Heavy: 20
+			Fighter: 22
+			None: 14
+			Wood: 10
+			Scout: 17
+			Heroic: 13
+			Light: 18
+			Bomber: 23
+			Steel: 12
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
+		Spread: 250
+		Damage: 1
+		ValidTargets: Ground, Water, Air
+		ValidRelationships: Neutral, Enemy
+	Burst: 2
 td_gdi_sonicmissilesoldier_missilesoldierweapon:
 	Inherits@collapsewh: ^Warhead_MissileAP_Heavy
 	Inherits@4: ^RailgunWeapon
@@ -2023,7 +2415,9 @@ MachineGunHumvee2:
 		ValidTargets: Ground, Water
 		Damage: 2000
 MachineGunHumvee2_AA:
-	Inherits: MachineGunHumvee2
+	Inherits@w71: ^Warhead_Bullet_Light
+	Inherits@w72: ^Projectile_Bullet_Light
+	Inherits@w73: ^Effect_Bullet_Light
 	Range: 8397
 	ValidTargets: Air
 	Warhead@Bullet_Light: AreaDamage
@@ -2033,6 +2427,10 @@ MachineGunHumvee2_AA:
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 
+	BurstDelays: 4
+	Report: mgun11.aud
+	ReloadDelay: 30
+	Burst: 4
 MachineGunHumvee2AP:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -2047,11 +2445,17 @@ MachineGunHumvee2AP:
 		ValidTargets: Ground, Water
 		Damage: 2000
 MachineGunHumvee2AP_AA:
-	Inherits: MachineGunHumvee2AP
+	Inherits@w71: ^Warhead_Bullet_Medium
+	Inherits@w72: ^Projectile_Bullet_Medium
+	Inherits@w73: ^Effect_Bullet_Medium
 	Range: 8397
 	ValidTargets: Air
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
+	BurstDelays: 4
+	Report: mgun11.aud
+	ReloadDelay: 30
+	Burst: 4
 td_gdi_humveemkii_rocketshumvee2:
 	Inherits@missilerole: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
@@ -2380,9 +2784,16 @@ td_gdi_predatortank_gdipredatortankmissiles:
 		VerticalRateOfTurn: 16
 
 td_gdi_predatortank_gdipredatortankmissilesamt:
-	Inherits: td_gdi_predatortank_gdipredatortankmissiles
+	Inherits@w71: ^Warhead_MissileAP_Medium
+	Inherits@w72: ^Projectile_Missile_Medium
+	Inherits@w73: ^td_gdi_set4
 	Inherits@2: ^AMTProjectile
 
+	Report: rocket1.aud
+	ReloadDelay: 70
+	Warhead@MissileAP_Medium: AreaDamage
+		Damage: 8000
+	Range: 5880
 td_gdi_predatortank_gdipredatormachinegun:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -2458,9 +2869,20 @@ td_gdi_mammothtankmkiii_mammothtank3missiles:
 		Damage: 12000
 
 td_gdi_mammothtankmkiii_mammothtank3missilesamt:
-	Inherits: td_gdi_mammothtankmkiii_mammothtank3missiles
+	Inherits@w71: ^Warhead_MissileAP_Heavy
+	Inherits@w72: ^Projectile_Missile_Heavy
+	Inherits@w73: ^td_gdi_set1
 	Inherits@2: ^AMTProjectile
 
+	BurstDelays: 12
+	Projectile: Missile
+		Image: DRAGON
+	Report: rocket1.aud
+	ReloadDelay: 98
+	Range: 6340
+	Warhead@MissileAP_Heavy: AreaDamage
+		Damage: 12000
+	Burst: 2
 td_gdi_exosuit_exosuitrailgun:
 	Inherits@wh: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
@@ -2752,14 +3174,196 @@ GDIRigDroneTargetingTower:
 	#Range: 9350
 
 GDIRigPDLaserTower:
-	Inherits: GDIRigPDLaser
+	Inherits@w71: ^Warhead_Laser_Heavy
+	Inherits@w72: ^Projectile_Laser_Heavy
+	Inherits@w73: ^Effect_Laser_Heavy
 	Range: 9350
 
+	Report: vpalwe2d.aud
+	Projectile: LaserZap
+		ZOffset: 2047
+		SecondaryBeamZOffset: 2047
+		Duration: 3
+		Width: 25
+		Blockable: true
+		SecondaryBeamWidth: 50
+		Color: ff0000
+		SecondaryBeamColor: ff000033
+		SecondaryBeam: true
+		-HitAnim:
+	ValidTargets: Ground, Water, Air, Missile, BulletAS, BallisticMissile
+	ValidRelationships: Enemy, Neutral
 td_gdi_defenserig_gdirigphalanxtower:
-	Inherits: td_gdi_defenserig_gdirigphalanx
+	Inherits@w71: ^Warhead_Bullet_Medium
+	Inherits@w72: ^td_gdi_td_gdi_defenserig_gdirigphalanx
 	ReloadDelay: 10
 	Range: 9350
 
+	Warhead@ChaingunPercentage: AreaDamagePercentage
+		Versus:
+			Heavy: 7
+			Light: 13
+			Plate: 18
+			Helicopter: 9
+			Shield: 25
+			Heroic: 17
+			None: 20
+			Superheavy: 5
+			Steel: 8
+			Fighter: 15
+			Bomber: 12
+			Medium: 10
+			Wood: 14
+			Spaceship: 6
+			Flak: 19
+			Scout: 16
+			Concrete: 11
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+		Spread: 100
+		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
+		UpdatesUnitStatistics: false
+	Warhead@MediumCannonPercentage: AreaDamagePercentage
+		Versus:
+			Heroic: 9
+			Fighter: 8
+			Flak: 11
+			Steel: 15
+			Plate: 10
+			Shield: 25
+			Wood: 19
+			None: 13
+			Spaceship: 5
+			Light: 18
+			Scout: 20
+			Bomber: 7
+			Helicopter: 6
+			Concrete: 17
+			Heavy: 14
+			Superheavy: 12
+			Medium: 16
+		ValidTargets: Ground, Water, Air
+		Spread: 150
+		UpdatesUnitStatistics: false
+		Damage: 2
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
+	Projectile: Bullet
+		ContrailLength: 8
+		ContrailStartWidth: 40
+		ContrailStartColor: FF884488
+		ContrailEndWidth: 80
+		ContrailZOffset: 4000
+		Image: 50CAL
+		Shadow: true
+		ContrailEndColor: 00000000
+		Speed: 4000
+		Blockable: false
+		Inaccuracy: 200
+		ContrailEndColorUsePlayerColor: true
+	Report: vgatlo5a.wav, vgatlo5b.wav
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		Versus:
+			Heavy: 15
+			Heroic: 5
+			Wood: 9
+			Concrete: 10
+			Steel: 11
+			Spaceship: 4
+			Scout: 12
+			Fighter: 1
+			Medium: 14
+			Light: 13
+			None: 6
+			Shield: 17
+			Helicopter: 3
+			Bomber: 2
+			Superheavy: 16
+			Flak: 7
+			Plate: 8
+		Spread: 75
+		UpdatesUnitStatistics: false
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Versus:
+			Wood: 10
+			Shield: 17
+			Steel: 7
+			Spaceship: 2
+			None: 16
+			Heavy: 3
+			Plate: 14
+			Fighter: 11
+			Flak: 15
+			Helicopter: 5
+			Heroic: 13
+			Concrete: 4
+			Scout: 12
+			Medium: 6
+			Light: 9
+			Bomber: 8
+			Superheavy: 1
+		UpdatesUnitStatistics: false
+		Spread: 50
+		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
+		Damage: 2
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		Versus:
+			Wood: 15
+			Heavy: 10
+			Fighter: 4
+			None: 9
+			Bomber: 3
+			Medium: 12
+			Steel: 11
+			Superheavy: 8
+			Shield: 17
+			Helicopter: 2
+			Plate: 6
+			Light: 14
+			Spaceship: 1
+			Concrete: 13
+			Scout: 16
+			Flak: 7
+			Heroic: 5
+		Falloff: 100, 50, 33, 25, 20
+		ValidTargets: Ground, Water, Air
+		UpdatesUnitStatistics: false
+		Damage: 2
+		Spread: 200
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		Versus:
+			Shield: 25
+			Wood: 7
+			None: 16
+			Fighter: 20
+			Concrete: 6
+			Heroic: 13
+			Medium: 10
+			Steel: 5
+			Spaceship: 17
+			Superheavy: 8
+			Flak: 15
+			Helicopter: 18
+			Bomber: 19
+			Plate: 14
+			Scout: 12
+			Heavy: 9
+			Light: 11
+		Damage: 2
+		UpdatesUnitStatistics: false
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		Spread: 125
+		ValidTargets: Ground, Water, Air
+	Warhead@ShieldHit: GrantExternalCondition
+		Duration: 4
+	ValidRelationships: Enemy, Neutral
+	Warhead@Bullet_Medium: AreaDamage
+		PercentageScale: 0
+		Damage: 24000
 td_gdi_defenserig_gdirigrailgun:
 	Inherits@wh: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
@@ -2810,10 +3414,13 @@ td_gdi_defenserig_gdirigmissilepod:
 		PercentageSpread: 50
 
 td_gdi_defenserig_gdirigmissilepodamt:
-	Inherits: td_gdi_defenserig_gdirigmissilepod
+	Inherits@w71: ^Warhead_MissileAP_Heavy
+	Inherits@w72: ^Projectile_Missile_Medium
+	Inherits@w73: ^td_gdi_td_gdi_defenserig_gdirigmissilepod
 	Inherits@2: ^AMTProjectile
 	Projectile: Missile
 		VerticalRateOfTurn: 12
+		Inaccuracy: 800
 	Warhead@MissileAP_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2824,6 +3431,12 @@ td_gdi_defenserig_gdirigmissilepodamt:
 		PercentageScale: 10000
 		PercentageSpread: 50
 
+	BurstDelays: 5
+	Report: rocket1.aud
+	ReloadDelay: 45
+	Range: 9350
+	ValidRelationships: Enemy, Neutral
+	Burst: 4
 td_gdi_havoc_sniper:
 	Inherits@wh: ^Warhead_Bullet_Heavy
 	Inherits: ^SniperWeapon
@@ -3260,7 +3873,9 @@ td_gdi_missileboat_gunboatmissile:
 		PercentageSpread: 50
 
 td_gdi_missileboat_gunboatmissileamt:
-	Inherits: td_gdi_missileboat_gunboatmissile
+	Inherits@w71: ^Warhead_MissileHE_Medium
+	Inherits@w72: ^Projectile_Missile_Medium
+	Inherits@w73: ^Effect_MissileAP_Medium
 	Inherits@2: ^AMTProjectile
 	Warhead@MissileHE_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -3272,6 +3887,13 @@ td_gdi_missileboat_gunboatmissileamt:
 		PercentageScale: 10000
 		PercentageSpread: 50
 
+	BurstDelays: 11
+	Report: rocket2.aud
+	ValidTargets: Ground, Water
+	ReloadDelay: 33
+	Range: 6666
+	InvalidTargets: Underwater, Submarine
+	Burst: 2
 TDIonCannon:
 	Range: 12288
 	AirThreshold: 99c0
@@ -3450,40 +4072,124 @@ td_gdi_mlrs_227mm:
 		Damage: 14736
 
 td_gdi_assaultapc_machinegunhumvee2:
-	Inherits: MachineGunHumvee2
+	Inherits@w71: ^Warhead_Bullet_Light
+	Inherits@w72: ^Projectile_Bullet_Light
+	Inherits@w73: ^Effect_Bullet_Light
 
+	BurstDelays: 4
+	Report: mgun11.aud
+	ValidTargets: Ground, Water
+	Warhead@Bullet_Light: AreaDamage
+		ValidTargets: Ground, Water
+	ReloadDelay: 30
+	Range: 5598
+	Burst: 4
 td_gdi_assaultapc_machinegunhumvee2_AA:
-	Inherits: MachineGunHumvee2_AA
+	Inherits@w71: ^Warhead_Bullet_Light
+	Inherits@w72: ^Projectile_Bullet_Light
+	Inherits@w73: ^Effect_Bullet_Light
 
+	BurstDelays: 4
+	Report: mgun11.aud
+	ValidTargets: Air
+	Warhead@Bullet_Light: AreaDamage
+		ValidTargets: Air
+	ReloadDelay: 30
+	Range: 8397
+	Warhead@Bullet_Medium: AreaDamage
+		ValidTargets: Air
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
+		ValidTargets: Air
+	Burst: 4
 td_gdi_assaultapc_machinegunhumvee2ap:
-	Inherits: MachineGunHumvee2AP
+	Inherits@w71: ^Warhead_Bullet_Medium
+	Inherits@w72: ^Projectile_Bullet_Medium
+	Inherits@w73: ^Effect_Bullet_Medium
 
+	BurstDelays: 4
+	Report: mgun11.aud
+	ValidTargets: Ground, Water
+	ReloadDelay: 30
+	Range: 5598
+	Warhead@Bullet_Medium: AreaDamage
+		ValidTargets: Ground, Water
+	Burst: 4
 td_gdi_assaultapc_machinegunhumvee2ap_AA:
-	Inherits: MachineGunHumvee2AP_AA
+	Inherits@w71: ^Warhead_Bullet_Medium
+	Inherits@w72: ^Projectile_Bullet_Medium
+	Inherits@w73: ^Effect_Bullet_Medium
 
+	BurstDelays: 4
+	Report: mgun11.aud
+	ValidTargets: Air
+	ReloadDelay: 30
+	Range: 8397
+	Warhead@Bullet_Medium: AreaDamage
+		ValidTargets: Air
+	Burst: 4
 td_gdi_humveemkii_machinegunhumvee2:
-	Inherits: MachineGunHumvee2
+	Inherits@w71: ^Warhead_Bullet_Light
+	Inherits@w72: ^Projectile_Bullet_Light
+	Inherits@w73: ^Effect_Bullet_Light
 	Warhead@Bullet_Light:
 		PercentageDenominator: 10000
 		PercentageScale: 10000
 		Damage: 1000
+		ValidTargets: Ground, Water
+	BurstDelays: 4
+	Report: mgun11.aud
+	ValidTargets: Ground, Water
+	ReloadDelay: 30
+	Range: 5598
+	Burst: 4
 td_gdi_humveemkii_machinegunhumvee2ap:
-	Inherits: MachineGunHumvee2AP
+	Inherits@w71: ^Warhead_Bullet_Medium
+	Inherits@w72: ^Projectile_Bullet_Medium
+	Inherits@w73: ^Effect_Bullet_Medium
 	Warhead@Bullet_Medium:
 		PercentageDenominator: 10000
 		PercentageScale: 10000
 		Damage: 1000
+		ValidTargets: Ground, Water
+	BurstDelays: 4
+	Report: mgun11.aud
+	ValidTargets: Ground, Water
+	ReloadDelay: 30
+	Range: 5598
+	Burst: 4
 td_gdi_humveemkii_machinegunhumvee2_AA:
-	Inherits: MachineGunHumvee2_AA
+	Inherits@w71: ^Warhead_Bullet_Light
+	Inherits@w72: ^Projectile_Bullet_Light
+	Inherits@w73: ^Effect_Bullet_Light
 	Warhead@Bullet_Light:
 		PercentageDenominator: 10000
 		PercentageScale: 10000
 		Damage: 1000
+		ValidTargets: Air
+	BurstDelays: 4
+	Report: mgun11.aud
+	ValidTargets: Air
+	ReloadDelay: 30
+	Range: 8397
+	Warhead@Bullet_Medium: AreaDamage
+		ValidTargets: Air
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
+		ValidTargets: Air
+	Burst: 4
 td_gdi_humveemkii_machinegunhumvee2ap_AA:
-	Inherits: MachineGunHumvee2AP_AA
+	Inherits@w71: ^Warhead_Bullet_Medium
+	Inherits@w72: ^Projectile_Bullet_Medium
+	Inherits@w73: ^Effect_Bullet_Medium
 	Warhead@Bullet_Medium:
 		PercentageDenominator: 10000
 		PercentageScale: 10000
 		Damage: 1000
+		ValidTargets: Air
+	BurstDelays: 4
+	Report: mgun11.aud
+	ValidTargets: Air
+	ReloadDelay: 30
+	Range: 8397
+	Burst: 4
 td_gdi_missileboat_depthcharge:
 	Inherits: DepthCharge

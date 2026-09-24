@@ -422,35 +422,35 @@
 ## tiberiandawn_nod
 
 ```diff
+       "versus_templates": [
+-       "td_nod_venom_venomlaserinferno"
++       "^Warhead_Inferno_Medium",
++       "^Projectile_Laser_Heavy",
++       "^Effect_Laser_Heavy"
+       ],
+@@ -640,3 +642,3 @@
         "^Warhead_Concussion_Medium",
 -       "^Effect_AlliedTigerCannon"
 +       "^td_nod_td_nod_gunturret_turretgun"
        ],
-@@ -710,3 +710,3 @@
-        "td_nod_gunturret_turretgun",
--       "^Effect_Apoc_AP_RA2"
-+       "^td_nod_td_nod_gunturret_turretgunblackmarket"
-       ],
-@@ -1723,3 +1723,3 @@
-        "^Warhead_Chemical_Light",
--       "^Effect_CannonAP_Light"
+@@ -710,3 +712,3 @@
 ```
 
 ## tiberiansun_cabal
 
 ```diff
-        "^Projectile_Laser_Heavy",
--       "^Effect_Laser_Heavy"
-+       "^ts_cabal_set11"
-       ],
-@@ -149,3 +149,3 @@
-        "^Projectile_Bullet_Light",
--       "^Effect_Bullet_Light"
-+       "^ts_cabal_cabaloverkilldronelaser"
-       ],
-@@ -258,3 +258,3 @@
-        "^Projectile_Lightning_Heavy",
--       "^Effect_Tesla_Heavy"
+        {
+-        "damage": "4000",
++        "damage": "6000",
+         "falloff": "100, 0",
+@@ -24,9 +24,2 @@
+         "tag": "Laser_Heavy_ExtraDamage",
+-        "type": "SpreadDamage"
+-       },
+-       {
+-        "damage": "2000",
+-        "falloff": null,
+-        "spread": null,
 ```
 
 ## tiberiansun_forgotten
@@ -495,13 +495,13 @@
 +       "^LaserWeapon",
 +       "^ts_nod_tsproton"
        ],
-@@ -1288,3 +1289,4 @@
+@@ -188,3 +189,5 @@
        "versus_templates": [
--       "^TSDefaultMissile"
-+       "^TSDefaultMissile",
-+       "^ts_tiberiansun_tstacticalmissile"
+-       "TSHarpyClaw"
++       "^Warhead_Bullet_Medium",
++       "^Projectile_Bullet_Medium",
++       "^Effect_Bullet_Medium"
        ],
-@@ -1415,4 +1417,4 @@
 ```
 
 ## warcraft2_humans

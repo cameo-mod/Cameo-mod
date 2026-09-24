@@ -6,7 +6,7 @@
 | empty capacity, needs `shieldgen` | 1266 | ✔ correctly nothing | — (it has no shield) |
 | pool behind an upgrade | 233 | ✖ nothing | E5 (upgrade pricing) |
 
-Shield row mean Versus **88.08**, so one shield point is **1.1354 HP** BEFORE any shield-gated `DamageMultiplier` — measured off the live ladder every run, never frozen. The Shield row takes **1.715%** of all roster raw damage at baseline.
+Shield row mean Versus **88.08**, so one shield point is **1.1354 HP** BEFORE any shield-gated `DamageMultiplier` — measured off the live ladder every run, never frozen. The Shield row takes **1.714%** of all roster raw damage at baseline.
 
 ⚠ **Every one of these 56 actors also carries `DamageMultiplier@shielded: 150`**, so it takes 150% damage WHILE the shield holds — the deliberate counterweight to having one. That divides the pool's worth: a shield point is really **0.7569 HP**, and the roster-wide gap is 38.6% rather than the 57.8% a shield-only reading gives. `shield_damage_multiplier` and `shield_hp_per_point` are published per actor.
 

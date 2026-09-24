@@ -12283,3 +12283,40 @@ rather than folding per-weapon (would leave ~50 orphan cancels when the
 template fold lands).
 
 Gates: empty 0, orphans 0, W2-W8 all at baselines (W7 stays 866).
+
+## 2026-09-26 — W7 batch-4: mechanized conversion + dup-clobber repair (DAWN)
+
+Ran `dawn_tools/w7_conv.py` over the 69-edge clean list from the refreshed
+net-neutrality census (my file-set: D2k/TD/TS packs + d2k.yaml). 66 applied,
+2 held:
+
+- `td_nod_commando_td_gdi_commando_sniper` — parent carries
+  `OpenToppedDamage` (R17-exempt). Converted manually with the chip pinned
+  verbatim; resolved-identical.
+- `td_nod_buggymkii_laserbuggy2_AA` — parent's `Laser_Light_ExtraDamage` is
+  template-supplied; per-weapon fold leaves orphan-cancel debt when the
+  template fold lands. HELD for the fleet template-fold ruling.
+
+Post-apply audit showed W4 +4, W6 +7, W8 +3. Computed exact offender sets
+against the pre-batch state via the audit's own `scan_source()` predicates:
+8 conversions carried covering sets with legacy `^FireWeapon`/`^MissileWeapon`
+edges or duplicate kind edges. Reverted all 8 (d2k_flame_tank,
+RashidanGun_upgrade, HMG_Duelist_upgrade, PhoenixRocketShrapnel,
+td_gdi_missileboat_depthcharge, td_nod_ballisticmissilesubmarine_honestjohn,
+td_nod_ssmlauncher_honestjohn, td_nod_samsite_dragon).
+
+**Dup-clobber incident:** residual W3/W4 +1 traced to `HMG_Duelist_upgrade`
+in the Ixian file — the converter's pin-fixup wrote a SECOND copy of the
+converted block at a stale offset, overwriting and deleting 7 weapon blocks
+(d2kStormLasher, D2K_ShockGun, D2K_ShockGun2, D2K_StormGun, D2K_ShockGunInf,
+D2K_StormGunInf, D2K_StormGunCymek). Resolved-diff stayed 0 because those
+pack copies are shadowed by d2k.yaml duplicates — invisible to the resolver
+but fatal for pack self-containment. Repair: deleted the duplicate,
+re-inserted the lost blocks from HEAD. `D2K_ShockGun2`'s conversion was lost
+in the clobber; redone manually (resolved-identical).
+
+Lesson: verify top-level block parity (name multiset base-vs-head) after any
+mechanized block surgery — a resolved diff cannot see deleted dead copies.
+
+Final: W7 866->807 (−59 net), all other classes at baseline, orphans 0,
+empty 0, full-corpus resolved diff 0.

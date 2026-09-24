@@ -10,25 +10,25 @@ W5 counts structural flat-damage nodes, including zero/healing/ally-only nodes; 
 
 | check | what | count | ratchet |
 |---|---|--:|--:|
-| W1 | more than 3 inherits | **286** (13.23% of 2162) | 26.16% |
+| W1 | more than 3 inherits | **292** (13.51% of 2162) | 26.16% |
 | W2 | two or more `^Warhead_*` inherits | **122** | 122 |
 | W3 | two or more `^Projectile_*` inherits | **7** | 7 |
 | W4 | two or more `^Effect_*` inherits | **41** | 41 |
 | W5 | more than one resolved MAIN warhead | **167** | 389 |
 | W6 | effect warheads declared LOCALLY | **442** | 442 |
-| W7 | inherits from ANOTHER WEAPON, not a template | **866** | 866 |
+| W7 | inherits from ANOTHER WEAPON, not a template | **807** | 807 |
 | W8 | inherits a `^Template` that is not one of the three kinds | **360** | 360 |
 
 | I7 informational — missing template | weapons |
 |---|--:|
-| no `^Effect_*` inherit | 887 |
-| no `^Projectile_*` inherit | 1268 |
-| no `^Warhead_*` inherit | 940 |
+| no `^Effect_*` inherit | 828 |
+| no `^Projectile_*` inherit | 1225 |
+| no `^Warhead_*` inherit | 890 |
 
 _I7 is a REVIEW QUEUE, not a defect count — an instant or utility weapon may legitimately have no projectile. Do not ratchet it without a per-weapon pass._
 
 
-## W7 — inherits from ANOTHER WEAPON, not a template (866 vs ratchet 866)
+## W7 — inherits from ANOTHER WEAPON, not a template (807 vs ratchet 807)
 
 | weapon | weapon-parents | first four |
 |---|---|---|
@@ -74,7 +74,7 @@ _I7 is a REVIEW QUEUE, not a defect count — an instant or utility weapon may l
 | `AsianPunisherAG_EMP` | 1 | `AsianPunisherAG` |
 
 
-_... and 826 more._
+_... and 767 more._
 
 
 ## W8 — inherits a `^Template` that is not one of the three kinds (360 vs ratchet 360)
@@ -126,7 +126,7 @@ _... and 826 more._
 _... and 320 more._
 
 
-## W1 — more than 3 inherits (286 vs ratchet 576)
+## W1 — more than 3 inherits (292 vs ratchet 576)
 
 | weapon | inherits | first four |
 |---|---|---|
@@ -172,7 +172,7 @@ _... and 320 more._
 | `D2K_155mm2` | 6 | `^Warhead_CannonHE_Heavy` · `^MediumFlameWeapon` · `^ShrapnelWeapon` · `^HeavyBomb` |
 
 
-_... and 246 more._
+_... and 252 more._
 
 
 ## W2 — two or more `^Warhead_*` inherits (122 vs ratchet 122)

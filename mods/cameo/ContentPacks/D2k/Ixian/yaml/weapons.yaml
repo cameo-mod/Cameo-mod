@@ -1480,8 +1480,22 @@ D2K_ShockGun:
 	# Wired to Storm blend (2026-08-10). Was Railgun 20k + Tesla 20k = 40k total -> single 40k Storm.
 	# EMP now auto-scales with damage via the Storm template's IntegrityScale 50 (no flat EMPUnit).
 D2K_ShockGun2:
-	Inherits: D2K_ShockGun
+	Inherits@wh: ^Warhead_Storm_Heavy
+	Inherits@proj: ^Projectile_Railgun_Heavy
+	Inherits@fx: ^Effect_Railgun_Heavy
+	ReloadDelay: 100
 	Range: 7343
+	Report: bigggun1.aud
+	Projectile: Railgun
+		Duration: 15
+		Blockable: true
+		DamageActorsInLine: false
+		BeamColor: 0088FFCC
+		BeamWidth: 100
+	Warhead@Storm_Heavy:
+		Damage: 40000
+		Falloff: 100, 75, 50, 25
+		DamageCalculationType: ClosestTargetablePosition
 
 D2K_StormGun:
 	Inherits@wh: ^Warhead_Storm_Heavy

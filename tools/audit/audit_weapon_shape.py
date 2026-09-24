@@ -119,7 +119,7 @@ W6_BASELINE = 442   # 466 -> 442: outpost2 W27 strip (115 nodes/26 weapons)
 # from a TEMPLATE, "and NEVER from another weapon". Nothing measured that clause before, so
 # W1 could pass a weapon that inherits all three of its parents from other weapons. Both
 # ratchets are set by THIS script's own first run, never from a scratch scan.
-W7_BASELINE = 866   # 869 -> 866: R17 fold batch (sandworm/ThorsHammerTiger/TSSniper_elite)
+W7_BASELINE = 807   # 866 -> 807: W7 batch-4 mechanized conversion (59 net, 8 reverted)
                     # 870 -> 869: sc_zerg_devourer_acidcloud_aa
                     # (parent chain retrofitted by #489).
                     # 946 -> 870 post-rebase resync onto 86577a7aa

@@ -38,10 +38,14 @@ OrniBomb:
 
 
 OrniBombC:
-	Inherits: OrniBomb
+	Inherits@w71: ^Warhead_Demolition_Heavy_D2K_Orni
+	Inherits@w72: ^Projectile_GravityBomb_D2K
+	Inherits@w73: ^Effect_Demolition_Heavy_D2K_Orni
 	Range: 2500
 
 
+	BurstDelays: 5
+	Burst: 5
 OrniMissile:
 	Inherits: PhoenixRocket
 	Inherits@wh: ^Warhead_MissileHE_Heavy
@@ -65,17 +69,35 @@ OrniMissile:
 
 
 OrniGunC:
-	Inherits: OrniGun
+	Inherits@w71: ^d2k_shared_ornigun
 	Range: 6000
 	ValidTargets: Ground, Air
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Ground, Air
 		Damage: 800
+		Versus:
+			Heavy: 99
+			Concrete: 33
+			Light: 123
+			None: 333
+			Medium: 111
+			Wood: 66
+		Falloff: 100, 33
+		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
+		Spread: 333
+		DamageCalculationType: ClosestTargetablePosition
 	MinRange: 1200
 	Warhead@2Eff:
 		ImpactSounds: EXPLSML1.WAV
 
 
+	Projectile: InstantHit
+		Inaccuracy: 1c256
+		InaccuracyType: PerCellIncrement
+	BurstDelays: 2
+	Burst: 5
+	StartBurstReport: FREMODD1.WAV
+	ReloadDelay: 25
 Fremen_S:
 	Inherits: ^MG
 	Inherits@fx: ^d2k_fremen_s

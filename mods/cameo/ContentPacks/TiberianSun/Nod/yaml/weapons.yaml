@@ -342,10 +342,17 @@ TSNODRedEye:
 		PercentageSpread: 50
 
 TSNODTibRedEye:
-	Inherits: TSNODRedEye
+	Inherits@w71: ^Warhead_MissileAA_Heavy
+	Inherits@w72: ^Projectile_Missile_Heavy
+	Inherits@w73: ^ts_nod_tsnodredeye
 	Projectile: Missile
 		VerticalRateOfTurn: 12
 		TrailImage: spittrail
+		Speed: 500
+		Acceleration: 5
+		HorizontalRateOfTurn: 25
+		CloseEnough: 500
+		MinimumLaunchAngle: 75
 	Warhead@MissileAA_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -356,6 +363,12 @@ TSNODTibRedEye:
 		PercentageScale: 10000
 		PercentageSpread: 50
 
+	BurstDelays: 2
+	Report: rocket2.aud
+	ValidTargets: Air
+	ReloadDelay: 50
+	Range: 13176
+	Burst: 3
 TSFireballLauncher:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
@@ -860,7 +873,9 @@ TSHarpyClaw:
 		Damage: 4000
 		ValidTargets: Ground, Air
 TSHarpyMultiClaw:
-	Inherits: TSHarpyClaw
+	Inherits@w71: ^Warhead_Bullet_Medium
+	Inherits@w72: ^Projectile_Bullet_Medium
+	Inherits@w73: ^Effect_Bullet_Medium
 	Burst: 4
 	BurstDelays: 0
 	TargetActorCenter: true
@@ -870,11 +885,27 @@ TSHarpyMultiClaw:
 	Warhead@Bullet_Medium: AreaDamage
 		Damage: 0
 		ValidTargets: Ground, Air
+	Report: cygun1.aud
+	ValidTargets: Ground, Air
+	SoundVolume: 0.25
+	ReloadDelay: 24
+	Range: 4882
 TSHarpyAOEClaw:
-	Inherits: TSHarpyClaw
+	Inherits@w71: ^Warhead_Bullet_Medium
+	Inherits@w72: ^Projectile_Bullet_Medium
+	Inherits@w73: ^Effect_Bullet_Medium
 	Warhead@Bullet_Medium: AreaDamage
 		Spread: 300
 		Falloff: 100, 50, 25
+		Damage: 4000
+		ValidTargets: Ground, Air
+	BurstDelays: 0
+	Report: cygun1.aud
+	ValidTargets: Ground, Air
+	SoundVolume: 0.25
+	ReloadDelay: 24
+	Range: 4882
+	Burst: 5
 TSLaserHarpyClaw:
 	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
 	Inherits: ^Warhead_Bullet_Medium

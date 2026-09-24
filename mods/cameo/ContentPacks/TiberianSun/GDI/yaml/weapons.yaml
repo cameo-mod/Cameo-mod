@@ -580,11 +580,24 @@ TSMechRailgun:
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 
 TSMechRailgunRail:
-	Inherits: TSMechRailgun
+	Inherits@w71: ^Warhead_Railgun_Heavy
+	Inherits@w72: ^Projectile_Railgun_Heavy
+	Inherits@w73: ^Effect_Railgun_Heavy
 	ReloadDelay: 58
 	Projectile: Railgun
 		BeamColor: FFFF44
 
+	BurstDelays: 8
+	Report: railuse5.aud
+	Warhead@RailgunPercentage: AreaDamagePercentage
+		Damage: 20
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	Warhead@Railgun_Heavy: AreaDamage
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+		PercentageScale: 500
+		Damage: 40000
+	Range: 8409
+	Burst: 2
 TSMechRailgunII:
 	Inherits@wh: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
@@ -605,7 +618,9 @@ TSMechRailgunII:
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 
 TSMechRailgunRailII:
-	Inherits: TSMechRailgunII
+	Inherits@w71: ^Warhead_Railgun_Heavy
+	Inherits@w72: ^Projectile_Railgun_Heavy
+	Inherits@w73: ^Effect_Railgun_Heavy
 	ReloadDelay: 72
 	Projectile: Railgun
 		BeamColor: FFFF44
@@ -616,6 +631,17 @@ TSMechRailgunRailII:
 # 	Projectile: Railgun
 # 		BeamColor: FFFF44
 
+	BurstDelays: 8
+	Report: railuse5.aud
+	Warhead@RailgunPercentage: AreaDamagePercentage
+		Damage: 40
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	Warhead@Railgun_Heavy: AreaDamage
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+		PercentageScale: 250
+		Damage: 80000
+	Range: 8434
+	Burst: 2
 TSCommandoRailgun:
 	Inherits@wh: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
@@ -639,7 +665,9 @@ TSCommandoRailgun:
 		ValidTargets: Ground, Water, Air
 
 TSCommandoRailgunRail:
-	Inherits: TSCommandoRailgun
+	Inherits@w71: ^Warhead_Railgun_Heavy
+	Inherits@w72: ^Projectile_Railgun_Heavy
+	Inherits@w73: ^Effect_Railgun_Heavy
 	ReloadDelay: 52
 	Burst: 5
 	BurstDelays: 4
@@ -648,6 +676,18 @@ TSCommandoRailgunRail:
 	Warhead@Railgun_Heavy_ExtraDamage:
 		ValidTargets: Ground, Water, Air
 
+	Report: railuse5.aud
+	ValidTargets: Ground, Water, Air
+	Warhead@RailgunPercentage: AreaDamagePercentage
+		Damage: 20
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	Warhead@Railgun_Heavy: AreaDamage
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+		PercentageScale: 500
+		ValidTargets: Ground, Water, Air
+		Damage: 40000
+	Range: 7563
 TSZoneRailgun:
 	Inherits@wh: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
@@ -669,7 +709,9 @@ TSZoneRailgun:
 		ValidTargets: Ground, Water
 
 TSZoneRailgunRail:
-	Inherits: TSZoneRailgun
+	Inherits@w71: ^Warhead_Railgun_Heavy
+	Inherits@w72: ^Projectile_Railgun_Heavy
+	Inherits@w73: ^Effect_Railgun_Heavy
 	Projectile: Railgun
 		BeamColor: FFFF44
 	Warhead@Railgun_Heavy:
@@ -682,6 +724,9 @@ TSZoneRailgunRail:
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 		ValidTargets: Ground, Water
 
+	Report: railuse5.aud
+	ReloadDelay: 60
+	Range: 6230
 PitbullRockets:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
@@ -1066,13 +1111,21 @@ TSHellfireSonic:
 		ValidTargets: Ground, Water, Structure, wall
 
 TSZoneHellfire:
-	Inherits: TSHellfire
+	Inherits@w71: ^Warhead_MissileAP_Heavy
+	Inherits@w72: ^Projectile_Missile_Medium
+	Inherits@w73: ^ts_tiberiansun_tshellfire
 	ReloadDelay: 28
 	Range: 6138
 
 	Projectile: Missile
 		VerticalRateOfTurn: 16
 
+	Report: orcamis1.aud
+	Warhead@ShieldHit: GrantExternalCondition
+		Duration: 8
+	Warhead@MissileAP_Heavy: AreaDamage
+		FriendlyFireDamage: 25
+		Damage: 24000
 TSZoneHellfireSonic:
 	Inherits: TSZoneHellfire
 	Inherits@proj: ^Projectile_TS_Missile_Heavy
@@ -1794,20 +1847,47 @@ TSDroppod1:
 
 	Inherits@fx: ^ts_gdi_tsdroppod1
 TSDroppod2:
-	Inherits: TSDroppod1
+	Inherits@w71: ^ts_gdi_tsdroppod1
 	Warhead@1: FireShrapnel
 		Weapon: E2Droppod
+		ValidTargets: Infantry, Vehicle, Building, Wall, Ground, Water, Air
+		ImpactActors: false
+		AirThreshold: 8c0
+		AimChance: 25
+		Amount: 1
 
+	Range: 2500
+	Projectile: AthenaProjectile
+		Altitude: 25460
+	Warhead@Dam: TargetDamage
 TSDroppod3:
-	Inherits: TSDroppod1
+	Inherits@w71: ^ts_gdi_tsdroppod1
 	Warhead@1: FireShrapnel
 		Weapon: E3Droppod
+		ValidTargets: Infantry, Vehicle, Building, Wall, Ground, Water, Air
+		ImpactActors: false
+		AirThreshold: 8c0
+		AimChance: 25
+		Amount: 1
 
+	Range: 2500
+	Projectile: AthenaProjectile
+		Altitude: 25460
+	Warhead@Dam: TargetDamage
 TSDroppod4:
-	Inherits: TSDroppod1
+	Inherits@w71: ^ts_gdi_tsdroppod1
 	Warhead@1: FireShrapnel
 		Weapon: MediDroppod
+		ValidTargets: Infantry, Vehicle, Building, Wall, Ground, Water, Air
+		ImpactActors: false
+		AirThreshold: 8c0
+		AimChance: 25
+		Amount: 1
 
+	Range: 2500
+	Projectile: AthenaProjectile
+		Altitude: 25460
+	Warhead@Dam: TargetDamage
 E1Droppod:
 	ValidTargets: Ground, Air
 	InvalidTargets: Water
@@ -1824,16 +1904,46 @@ E1Droppod:
 
 	Inherits@fx: ^ts_gdi_e1droppod
 E2Droppod:
-	Inherits: E1Droppod
+	Inherits@w71: ^ts_gdi_e1droppod
 	Warhead@Spawn: SpawnActor
 		Actors: ts_gdi_discthrower
+		AirThreshold: 8c0
+		ImpactActors: false
+		Range: 2
 
+	Projectile: Bullet
+		TrailImage: ts_small_smoke_trail
+		Image: tsdroppod
+		Speed: 300
+		Palette: ra2
+	InvalidTargets: Water
+	ValidTargets: Ground, Air
 E3Droppod:
-	Inherits: E1Droppod
+	Inherits@w71: ^ts_gdi_e1droppod
 	Warhead@Spawn: SpawnActor
 		Actors: ts_gdi_falconenforcer
+		AirThreshold: 8c0
+		ImpactActors: false
+		Range: 2
 
+	Projectile: Bullet
+		TrailImage: ts_small_smoke_trail
+		Image: tsdroppod
+		Speed: 300
+		Palette: ra2
+	InvalidTargets: Water
+	ValidTargets: Ground, Air
 MediDroppod:
-	Inherits: E1Droppod
+	Inherits@w71: ^ts_gdi_e1droppod
 	Warhead@Spawn: SpawnActor
 		Actors: ts_gdi_medic
+		AirThreshold: 8c0
+		ImpactActors: false
+		Range: 2
+	Projectile: Bullet
+		TrailImage: ts_small_smoke_trail
+		Image: tsdroppod
+		Speed: 300
+		Palette: ra2
+	InvalidTargets: Water
+	ValidTargets: Ground, Air
