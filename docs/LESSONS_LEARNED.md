@@ -129,6 +129,32 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 
 ---
 
+## ⛔ `^` templates ARE instantiated at boot — an untyped `Warhead@` pin inside one NREs (2026-09-24)
+
+The first W27 batch-2 boot crashed in `WeaponInfo.LoadWarheads`
+(`ObjectCreator.CreateObject` with a null className) even though
+`find_empty_warhead.py` reported 0. Cause: the audit skipped `^`-prefixed
+nodes as "never instantiated", but `Ruleset.LoadDefaults` builds a
+`WeaponInfo` for **every** node in the mounted weapons files — a bare
+`Warhead@X:` pin inside a template with no typed ancestor resolves to an
+empty type and NREs exactly like a weapon-level one.
+
+Two related subtleties surfaced in the same round:
+
+- The engine's merge keeps an earlier-supplied type when a bare
+  `Warhead@X:` pin adds fields — the audit's parent-map merge used to let
+  `''` overwrite a real type (false positives on template pins).
+- Files must be enumerated from the manifest, not a hard-coded list —
+  `weapons/effects_d2k.yaml` was mounted but unscanned, hiding the types
+  the new families supply.
+
+**Rule:** every `Warhead@X:` node a template adds must either carry a type
+or inherit one — `find_empty_warhead.py` now scans templates and resolves
+files via the manifest. When extracting pins into a `^` family, declare
+the node's resolved type (usually `CreateEffect`) on the pin.
+
+---
+
 ## ⛔ A tool must derive its target from its OWN worktree root — a stale path wrote into another agent's tree (2026-09-24)
 
 During the W27 batch-1 round, nine pack files in the `C:/tmp/dawn` worktree

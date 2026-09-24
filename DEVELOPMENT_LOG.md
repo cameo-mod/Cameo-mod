@@ -40,6 +40,42 @@ Knowledge Base Manual.
 Verification: `audit_doc_health` PASS (was 5 D7), `audit_doc_claims` 42/43 green
 (`ledgers_drifted` gate intentionally left red — foreign-lane debt), boot-gate PASS.
 
+---
+
+## Devin-DAWN (A4) — W27 batch-2: Ordos pack + empty-warhead guard fix (2026-09-24)
+
+**Branch:** `devin/dawn/w27-ordos` (side branch — PR #480 still open; holds
+`devin/dawn/l4-fx` clean for review). Continuation of W27 per the same
+maintainer orders.
+
+- **Ordos pack extraction**: 84 inline `Warhead@Effect*` nodes stripped from
+  `ContentPacks/D2k/Ordos/yaml/weapons.yaml`; 21 `^d2k_ordos_*` families in
+  `weapons/effects_d2k.yaml` now carry them; 30 weapons rewired with
+  `Inherits@fx` edges. Resolved-verify: **0 diffs / 86 weapons** (whole-file
+  flat-node comparison vs HEAD).
+- **Inheritance ordering mattered**: 4 weapons drifted when the fx edge sat
+  before `^D2KMissile` — later parents re-supplied channels. Families now
+  carry full resolved channel payloads and the fx edge sits last where a
+  later parent could still contribute (`ValidTargets`/`SmudgeType` pins).
+  `Laboratory_Bioball` needed its own family — shared `flame_heavy` had
+  different resolved `ValidTargets` per consumer.
+- **`find_empty_warhead` two bugs fixed**:
+  1. Hard-coded file list missed manifest-mounted `weapons/effects_d2k.yaml`
+     → now loads the manifest like `audit_weapon_shape` (41 files).
+  2. Parent-map merge `merged[k] = t` let a template's bare pin clobber an
+     earlier type with `''` → empty no longer overwrites.
+- **Boot NRE found the audit's blind spot**: `^d2k_ordos_laser_heavy
+  @EffectWater` + `^d2k_ordos_ordos_lasertank @EffectAir` resolved empty
+  inside the TEMPLATES — the engine instantiates `^` nodes standalone
+  (`WeaponInfo.LoadWarheads`), so the audit's "templates are never
+  instantiated" skip was wrong. Nodes now declare `CreateEffect`; the audit
+  scans templates too.
+- Ratchets: W6 692→683 (Ordos extraction paydown), local-fx L1/L2 → 384/376,
+  W8 back to 637 after typing pin-only families.
+- Boot-gate PASS (perf.log `MenuPostProcessEffect.PostWorldLoaded`, no new
+  exceptions). First boot NRE'd on the two empty-type nodes — caught,
+  fixed, re-gated.
+
 ## Devin-DAWN (A4) — W9 pack-side + maintainer ruling 1 + re-baselines (2026-09-24)
 
 **Branch:** `devin/dawn/l4-fx` → round-2 PR per
