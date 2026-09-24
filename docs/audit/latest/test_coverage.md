@@ -4,7 +4,7 @@
 |---|---|---|---|
 | T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (13 file(s)) | 226 | >= 24 |
 | T2 | `def test_*` in tools/tests (269 file(s)) | 2784 | >= 177 |
-| T3 | modules with no test mentioning them | 286 | <= 224 |
+| T3 | modules with no test mentioning them | 287 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (286)
+## T3 — untested modules (287)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -229,6 +229,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_weapon_identity.py | audit_weapon_identity |
 | python | tools/audit/audit_weapon_suffixes.py | audit_weapon_suffixes |
 | python | tools/audit/audit_weapon_uniqueness.py | audit_weapon_uniqueness |
+| python | tools/audit/branch_manifest.py | branch_manifest |
 | python | tools/audit/building_shape_damage.py | building_shape_damage |
 | python | tools/audit/check_effect_audio.py | check_effect_audio |
 | python | tools/audit/collapse_dead_warhead_inherits.py | collapse_dead_warhead_inherits |
@@ -309,5 +310,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 286 untested > baseline 224
+- T3: 287 untested > baseline 224
 

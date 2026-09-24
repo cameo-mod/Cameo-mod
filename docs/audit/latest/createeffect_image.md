@@ -1,11 +1,11 @@
 === 52 VIOLATIONS + 0 REDUNDANT (Image: explosion) ===
 
-[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:1016  Hakureiring2  Image: hakurei_giphy
-[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:1080  ReimuYinYangDrone  Image: hakurei_giphy
-[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:1098  THMiss  Image: hakurei_dream
-[VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:4040  RA2CorpseSpawner  Image: ra2corpse
-[VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:4076  RA2FlyingBody  Image: ra2corpse
-[VIOLATION] mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml:2425  AsianTSIonCannon  Image: tsioncannon
+[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:2021  Hakureiring2  Image: hakurei_giphy
+[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:2085  ReimuYinYangDrone  Image: hakurei_giphy
+[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:2103  THMiss  Image: hakurei_dream
+[VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:7387  RA2CorpseSpawner  Image: ra2corpse
+[VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:7423  RA2FlyingBody  Image: ra2corpse
+[VIOLATION] mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml:5140  AsianTSIonCannon  Image: tsioncannon
 [VIOLATION] mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:3406  TDIonCannon  Image: tsioncannon
 [VIOLATION] mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:3418  TDIonCannon  Image: ionsfx
 [VIOLATION] mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1755  TSIonCannon  Image: tsioncannon
@@ -39,16 +39,16 @@
 [VIOLATION] mods\cameo\weapons\redalert2.yaml:3076  RA2CorpseSpawner  Image: ra2corpse
 [VIOLATION] mods\cameo\weapons\redalert2.yaml:3122  RA2FlyingBody  Image: ra2corpse
 [VIOLATION] mods\cameo\weapons\simcity.yaml:253  CasinoCrateSpawner  Image: tspodring
-[VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1754  MutSAPC  Image: tsdig
-[VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1830  NODMutant  Image: tsdig
-[VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1873  FloaterSpawner  Image: tsdig
-[VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1895  TunnelDisappear  Image: tsdig
-[VIOLATION] mods\cameo\weapons\warcraft2.yaml:432  wc2mageFire  Image: wc2_lightng
-[VIOLATION] mods\cameo\weapons\warcraft2.yaml:604  wc2mageBlizzard_Projectile  Image: wc2_effect_blizzard
-[VIOLATION] mods\cameo\weapons\warcraft2.yaml:723  wc2cannontowerFire  Image: wc2_cannon_impact
-[VIOLATION] mods\cameo\weapons\warcraft2.yaml:760  wc2lightshipFire  Image: wc2_cannon_impact
-[VIOLATION] mods\cameo\weapons\warcraft2.yaml:800  wc2heavyshipFire  Image: wc2_cannon_impact
-[VIOLATION] mods\cameo\weapons\warcraft2.yaml:916  wc2daemonFire  Image: wc2_effect_daemon_attack
+[VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1760  MutSAPC  Image: tsdig
+[VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1836  NODMutant  Image: tsdig
+[VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1879  FloaterSpawner  Image: tsdig
+[VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1901  TunnelDisappear  Image: tsdig
+[VIOLATION] mods\cameo\weapons\warcraft2.yaml:449  wc2mageFire  Image: wc2_lightng
+[VIOLATION] mods\cameo\weapons\warcraft2.yaml:621  wc2mageBlizzard_Projectile  Image: wc2_effect_blizzard
+[VIOLATION] mods\cameo\weapons\warcraft2.yaml:917  wc2cannontowerFire  Image: wc2_cannon_impact
+[VIOLATION] mods\cameo\weapons\warcraft2.yaml:954  wc2lightshipFire  Image: wc2_cannon_impact
+[VIOLATION] mods\cameo\weapons\warcraft2.yaml:994  wc2heavyshipFire  Image: wc2_cannon_impact
+[VIOLATION] mods\cameo\weapons\warcraft2.yaml:1110  wc2daemonFire  Image: wc2_effect_daemon_attack
 [VIOLATION] mods\cameo\weapons\wh40k.yaml:606  WH40KSneakAttack  Image: tsdig
 [VIOLATION] mods\cameo\weapons\wh40k.yaml:1071  Wh40kDeepStrikeE1Units  Image: tspodring
 [VIOLATION] mods\cameo\weapons\wh40k.yaml:1076  Wh40kDeepStrikeE1Units  Image: wh40kcapsule

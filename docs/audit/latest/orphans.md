@@ -254,7 +254,7 @@ _none found_
 | Rocketeer | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml |
 | Rocketeer_o | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml |
 | Rocketeer_t | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml |
-| RocketsG | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
+| RocketsG | mods/cameo/weapons/weapons.yaml |
 | RocketsRA | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
 | SCUD | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |
 | SCUDIrak | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |

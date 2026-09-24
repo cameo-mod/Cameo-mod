@@ -65,7 +65,9 @@ Silent bullet-puff exemptions (ruled OK): {'piffs': 113, 'water_piffs': 210, 'sm
 | `ra1_allies_destroyer_missile_cryo` | `Warhead@EffectWater` | `cryo_blast` |
 _… 336 more_
 
-## Foreign .aud sound on d2k_* visual: 9
+## Foreign .aud sound on d2k_* visual: 11
+| `NaxPlaneRockets_elite` | `Warhead@Effect` | `d2k_tiny_explosion` → `xplobig4.aud` |
+| `NaxInterceptorRockets` | `Warhead@Effect` | `d2k_tiny_explosion` → `xplobig4.aud` |
 | `Future_MultiMissile_Javelin` | `Warhead@Effect` | `d2k_tiny_explosion` → `xplobig4.aud` |
 | `FutureJavelinRockets` | `Warhead@Effect` | `d2k_tiny_explosion` → `xplobig4.aud` |
 | `FutureJavelinRockets_elite` | `Warhead@Effect` | `d2k_tiny_explosion` → `xplobig4.aud` |
@@ -76,4 +78,4 @@ _… 336 more_
 | `SwarmlingShoot` | `Warhead@EffectAir` | `d2k_med_explosion` → `zguhit00.aud` |
 | `BehemothShoot` | `Warhead@Effect` | `d2k_med_explosion` → `zguhit00.aud` |
 
-PASS: silent 396 <= 396, foreign 9 <= 9  (lower-only ratchet)
+FAIL: silent 396 <= 396, foreign 11 <= 9  (lower-only ratchet)

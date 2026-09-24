@@ -3,12 +3,8 @@
 Active concrete weapons checked: 2454
 Formula percentage templates checked: 6
 
-## FAIL (7 problem(s))
+## PASS
 
-- KodiakCannonSonic: combines damage-scaled and fixed ApplyPhysicalState for Resonance
-- TSAssaultCannonSonic: combines damage-scaled and fixed ApplyPhysicalState for Resonance
-- TSAssaultCannonTalSonic: combines damage-scaled and fixed ApplyPhysicalState for Resonance
-- TSBombSonic: combines damage-scaled and fixed ApplyPhysicalState for Resonance
-- TSHellfireSonic: combines damage-scaled and fixed ApplyPhysicalState for Resonance
-- TSVulcanGunSonic: combines damage-scaled and fixed ApplyPhysicalState for Resonance
-- TSZoneHellfireSonic: combines damage-scaled and fixed ApplyPhysicalState for Resonance
+- Flame and Chemical fold percentage damage into the main AreaDamage warhead, and it
+  feeds the matching physical-state meter.
+- No active weapon double-applies a meter through scaled and fixed warheads.

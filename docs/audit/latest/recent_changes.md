@@ -1,19 +1,22 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **198**, files touched: **2008**
+Commits reviewed: **204**, files touched: **2108**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
-| R1 | balance yaml edited without the ledger | 2 | yes |
+| R1 | balance yaml edited without the ledger | 5 | yes |
 | R2 | audit script never run by run_all.sh | 9 | yes |
 | R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 14 | partly |
 | R4 | engine/mod.config change (needs boot gate) | 0 | no |
 
 
-## R1 — hand-edited balance numbers (2)
+## R1 — hand-edited balance numbers (5)
 
 | commit | date | subject | fields |
 |---|---|---|---|
+| 86577a7a | 2026-09-24 | W7: convert unclaimed weapon-parent edges in out | Damage, Range, ReloadDelay, Speed, Spread |
+| 004a9cb8 | 2026-09-24 | W7: convert all weapon-parent edges in weapons.y | Burst, BurstDelays, Damage, MinRange, Range, ReloadDelay, Speed, Spread |
+| d36f3b0a | 2026-09-24 | W23-RA batch 1: TKM file retrofit (20/21 weapons | Damage, MinRange, Range, ReloadDelay, Speed, Spread |
 | 20e99dbc | 2026-09-13 | test(R8): add carrier ammo runtime gate | Burst, BurstDelays, HP, MinRange, Range, ReloadDelay |
 | b8c44c2c | 2026-09-10 | Added Neutral Map stuff | Damage, HP |
 
@@ -62,11 +65,12 @@ _none found_
 
 | file | commits touching it |
 |---|---|
-| docs/HANDOFF.md | 44 |
+| docs/HANDOFF.md | 49 |
 | docs/DESIGN.md | 43 |
-| DEVELOPMENT_LOG.md | 21 |
+| docs/LESSONS_LEARNED.md | 23 |
 | docs/balance/derived/redalert_japan.json | 21 |
 | docs/balance/derived/tiberiandawn_nod.json | 21 |
+| DEVELOPMENT_LOG.md | 20 |
 | docs/balance/derived/redalert2_allies.json | 20 |
 | docs/balance/derived/redalert_allies.json | 20 |
 | docs/balance/derived/redalert_soviets.json | 20 |
@@ -76,7 +80,6 @@ _none found_
 | docs/balance/derived/tiberiansun_cabal.json | 20 |
 | docs/balance/derived/tiberiansun_forgotten.json | 20 |
 | docs/balance/derived/tiberiansun_gdi.json | 20 |
-| docs/balance/derived/d2k_atreides.json | 19 |
 
 
 ## Reviewer checklist (not machine-checkable)
@@ -90,10 +93,10 @@ _none found_
 
 ## Enforcement
 
-R1/R3 block only for commits on or after **2026-08-12**: 2 R1 and 0 R3 of 2/14 findings are in scope; the rest predate the gate.
+R1/R3 block only for commits on or after **2026-08-12**: 5 R1 and 0 R3 of 5/14 findings are in scope; the rest predate the gate.
 
 
 ## FAIL
 
-- 2 R1, 9 R2, 0 R3 blocking finding(s)
+- 5 R1, 9 R2, 0 R3 blocking finding(s)
 
