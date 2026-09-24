@@ -767,6 +767,9 @@ pushed**, so every abandoned `devin/*` branch is recoverable even past GitHub's 
 ⚠ **DEVIN IS RETIRED** (maintainer, 2026-09-13). Nothing behind `devin/*` has an owner. The main
 checkout still sits on `devin/aurora/naming-ra1_allies` with **364 uncommitted files** — stranded,
 NOT live WIP. Leave it alone; preserving it to a branch is Blackrobe's call.
+(Ember 2026-09-24: the ra1_allies rename that checkout was doing is now regenerated on
+`devin/ember/ra1-allies` from Aurora's `90e27a1b3` + `rename_map_ra1_allies_n4.yaml` —
+25 actors / 30 files, `allied` strip, shared `ra1_soviets_*_ra1_allies_*` sprites left alone.)
 
 ### Open, with owners
 
