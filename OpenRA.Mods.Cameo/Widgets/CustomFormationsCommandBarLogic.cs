@@ -24,9 +24,22 @@ namespace OpenRA.Mods.Cameo.Widgets
 	/// <summary>Contains all functions that are unit-specific.</summary>
 	public class CustomFormationsCommandBarLogic : ChromeLogic
 	{
+		[FluentReference]
+		const string AttackMoveTooltip = "button-command-bar-attack-move.tooltip";
+
+		[FluentReference]
+		const string AttackMoveTooltipDesc = "button-command-bar-attack-move.tooltipdesc";
+
+		[FluentReference]
+		const string AttackMoveAsMoveTooltip = "button-command-bar-attack-move-as-move.tooltip";
+
+		[FluentReference]
+		const string AttackMoveAsMoveTooltipDesc = "button-command-bar-attack-move-as-move.tooltipdesc";
+
 		readonly World world;
 
 		int selectionHash;
+		bool attackMoveIsDefault;
 		Actor[] selectedActors = Array.Empty<Actor>();
 		bool attackMoveDisabled = true;
 		bool forceMoveDisabled = true;
@@ -58,10 +71,34 @@ namespace OpenRA.Mods.Cameo.Widgets
 			var attackMoveButton = widget.GetOrNull<ButtonWidget>("ATTACK_MOVE");
 			if (attackMoveButton != null)
 			{
+				// The tooltip is repurposed depending on the AttackMoveIsDefault setting (see below),
+				// so it can't be bound statically from the yaml TooltipText/TooltipDesc keys - it needs
+				// to switch between the two behaviours at runtime. The icon stays the same in both cases
+				// (there is no dedicated "Move" icon in the command-icons sprite sheet).
 				WidgetUtils.BindButtonIcon(attackMoveButton);
 
+				var attackMoveTooltip = FluentProvider.GetMessage(AttackMoveTooltip);
+				var attackMoveTooltipDesc = FluentProvider.GetMessage(AttackMoveTooltipDesc);
+				var attackMoveAsMoveTooltip = FluentProvider.GetMessage(AttackMoveAsMoveTooltip);
+				var attackMoveAsMoveTooltipDesc = FluentProvider.GetMessage(AttackMoveAsMoveTooltipDesc);
+
+				attackMoveButton.GetTooltipText = () => Game.Settings.Game.AttackMoveIsDefault
+					? attackMoveAsMoveTooltip
+					: attackMoveTooltip;
+				attackMoveButton.GetTooltipDesc = () => Game.Settings.Game.AttackMoveIsDefault
+					? attackMoveAsMoveTooltipDesc
+					: attackMoveTooltipDesc;
+
 				attackMoveButton.IsDisabled = () => { UpdateStateIfNecessary(); return attackMoveDisabled; };
-				attackMoveButton.IsHighlighted = () => world.OrderGenerator is CustomFormationsAttackMoveOrderGenerator;
+
+				// CustomFormationsAttackMoveOrderGenerator itself stays completely untouched and is
+				// used exactly as before when the setting is off. CustomFormationsMoveOrderGenerator
+				// is a new sibling class (not a subclass), only ever instantiated when the setting
+				// is on, so the off state never runs any of the new class's code at all - mirrors
+				// the engine's own AttackMoveOrderGenerator/MoveOrderGenerator split.
+				attackMoveButton.IsHighlighted = () => Game.Settings.Game.AttackMoveIsDefault
+					? world.OrderGenerator is CustomFormationsMoveOrderGenerator
+					: world.OrderGenerator is CustomFormationsAttackMoveOrderGenerator;
 
 				void Toggle(bool allowCancel)
 				{
@@ -70,6 +107,8 @@ namespace OpenRA.Mods.Cameo.Widgets
 						if (allowCancel)
 							world.CancelInputMode();
 					}
+					else if (Game.Settings.Game.AttackMoveIsDefault)
+						world.OrderGenerator = new CustomFormationsMoveOrderGenerator(selectedActors, Game.Settings.Game.ResolveActionButton(MouseActionType.ConfirmOrder));
 					else
 						world.OrderGenerator = new CustomFormationsAttackMoveOrderGenerator(selectedActors, Game.Settings.Game.ResolveActionButton(MouseActionType.ConfirmOrder));
 				}
@@ -285,14 +324,23 @@ namespace OpenRA.Mods.Cameo.Widgets
 
 		void UpdateStateIfNecessary()
 		{
-			if (selectionHash == world.Selection.Hash)
+			// attackMoveDisabled's eligibility test depends on the setting (see below), not just
+			// on the selection, so a setting change must invalidate the cache here too - otherwise
+			// toggling it with an unchanged selection leaves the tooltip and the disabled state
+			// disagreeing until the player reselects something.
+			var attackMoveIsDefaultNow = Game.Settings.Game.AttackMoveIsDefault;
+			if (selectionHash == world.Selection.Hash && attackMoveIsDefault == attackMoveIsDefaultNow)
 				return;
+
+			attackMoveIsDefault = attackMoveIsDefaultNow;
 
 			selectedActors = world.Selection.Actors
 				.Where(a => a.Owner == world.LocalPlayer && a.IsInWorld && !a.IsDead)
 				.ToArray();
 
-			attackMoveDisabled = !selectedActors.Any(a => a.Info.HasTraitInfo<AttackMoveInfo>() && a.Info.HasTraitInfo<AutoTargetInfo>());
+			attackMoveDisabled = attackMoveIsDefault
+				? !selectedActors.Any(a => a.Info.HasTraitInfo<IMoveInfo>())
+				: !selectedActors.Any(a => a.Info.HasTraitInfo<AttackMoveInfo>() && a.Info.HasTraitInfo<AutoTargetInfo>());
 			guardDisabled = !selectedActors.Any(a => a.Info.HasTraitInfo<GuardInfo>() && a.Info.HasTraitInfo<AutoTargetInfo>());
 			forceMoveDisabled = !selectedActors.Any(a => a.Info.HasTraitInfo<MobileInfo>() || a.Info.HasTraitInfo<AircraftInfo>());
 			forceAttackDisabled = !selectedActors.Any(a => a.Info.HasTraitInfo<AttackBaseInfo>());
