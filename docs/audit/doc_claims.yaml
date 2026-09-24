@@ -211,6 +211,13 @@ claims:
       Updated 2026-09-23: NOVA batch-1 (#439/#447) landed — JapanMaidenBowEnergized +
       teslayak tesla_bomb folded, 27→25. NOVA batch-2 PR #452 covers the 22 RA2Mod
       weapons; post-#452 residual is DRPlasmaTankWeapon (Claude) alone at 1.
+      2026-09-23 (maintainer): that 1 is DARK REIGN content and is PARKED, not debt. Dark
+      Reign's rules/weapons/sequences are commented out of mod.yaml; the weapon survives only
+      in the central weapons.yaml, listed by ^IFVConditions `Armament@plasma`
+      (RequiresCondition: ifv-plasma), and `ifv-plasma` is granted nowhere - the whole
+      PassengerConditions block is commented out. It cannot fire on any of the seven IFVs
+      that inherit the template. "This is something for way later": no fold, no exemption
+      (exemptions stay retired); the count stays 1 until Dark Reign is mounted.
     docs: [docs/design/BALANCE_PROGRAM_PLAN.md, docs/HANDOFF.md]
     measure: |
       import sys, pathlib

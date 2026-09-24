@@ -73,18 +73,21 @@ OrniGunC:
 		ValidTargets: Ground, Air
 		Damage: 800
 	MinRange: 1200
+	Warhead@2Eff:
+		ImpactSounds: EXPLSML1.WAV
 
 
 Fremen_S:
 	Inherits: ^MG
+	Inherits@fx: ^d2k_fremen_s
 	ValidTargets: Infantry
 	InvalidTargets: Vehicle, Structure, Air
 	ReloadDelay: 20
 	Report: MGUN2.WAV
 	Warhead@1Dam: SpreadDamage
 		Damage: 1600
-	Warhead@2Eff: CreateEffect
-		Explosions: d2k_small_explosion
+	Warhead@4Eff_2Water:
+		ImpactSounds: splash9.aud
 
 # Migrated from legacy mods/cameo/weapons/d2k.yaml (Ruling 9)
 # These weapons are only used by Atreides actors.
@@ -118,6 +121,7 @@ D2KRepair:
 
 PhoenixRocket:
 	Inherits: ^D2KMissile
+	Inherits@fx: ^d2k_phoenix_rocket
 	ReloadDelay: 100
 	Burst: 8
 	Range: 4608
@@ -136,13 +140,6 @@ PhoenixRocket:
 			Medium: 125
 			Heavy: 100
 			Concrete: 40
-	Warhead@3Eff: CreateEffect
-		Explosions: napalm
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-		ImpactSounds: firebl3.aud
-		ExplosionPalette: effect
 	Warhead@Concrete: DamagesConcrete
 		Damage: 1250
 	Warhead@Shrapnel: FireShrapnel

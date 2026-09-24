@@ -352,7 +352,7 @@ ra1_soviets_heavytank:
 	Voiced:
 		VoiceSet: RussianVehicleVoice
 	RenderSprites:
-		Image: ra1_soviets_sovietheavytank
+		Image: ra1_soviets_heavytank
 		PlayerPalette: raplayer
 	ActorStatValues:
 		Upgrades: ra1_soviets_doctrine_heavyarmor, ra1_soviets_doctrine_nuclearwar, ra1_soviets_upgrade_autoloaders, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_nucleartankshells
@@ -786,7 +786,7 @@ ra1_soviets_mammothtank:
 	Voiced:
 		VoiceSet: RussianVehicleVoice
 	RenderSprites:
-		Image: ra1_soviets_sovietmammothtank
+		Image: ra1_soviets_mammothtank
 		PlayerPalette: raplayer
 	ActorStatValues:
 		Upgrades: ra1_soviets_promotion_mammothtanktargetingcomputer, ra1_soviets_upgrade_teslarockets, ra1_soviets_upgrade_thermonuclearrockets, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_nucleartankshells
@@ -982,11 +982,11 @@ ra1_soviets_heavyindustrialminer:
 		Speed: 80
 		TurnSpeed: 16
 	WithHarvesterSpriteBody:
-		ImageByFullness: ra1_soviets_sovietheavyindustrialminer
+		ImageByFullness: ra1_soviets_heavyindustrialminer
 	WithDeathAnimation:
 		DeathSequencePalette: player_rgba
 	RenderSprites:
-		Image: ra1_soviets_sovietheavyindustrialminer
+		Image: ra1_soviets_heavyindustrialminer
 		PlayerPalette: player_rgba
 
 ra1_soviets_mobileconstructionvehicle:

@@ -1,6 +1,6 @@
 # audit_assets — asset format norms (B11, RAMpage)
 
-PNGs scanned: **1942** (over budget: **127**), WAVs scanned: **8540** (non-conforming: **3628**)
+PNGs scanned: **1943** (over budget: **127**), WAVs scanned: **8540** (non-conforming: **3628**)
 
 
 ## P1 — PNGs over budget (> 8 MiB or > 8192px)

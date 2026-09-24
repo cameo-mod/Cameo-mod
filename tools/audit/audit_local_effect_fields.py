@@ -111,22 +111,32 @@ def main():
             findings.append((f, weapon, wh, has_expl, has_snd, line))
 
     # Report
-    l1 = sum(1 for f in findings if f[3])  # local Explosions
-    l2 = sum(1 for f in findings if f[4])  # local ImpactSounds
+    # Ruling (RULING_2026-09-23_dawn_l4fx_answers #4): weapons with a second
+    # effect channel for another target set (Warhead@2Eff, @EffectWater, ...)
+    # are exempt from the guard counts but must remain visible in the table.
+    def primary(f):
+        return f[2] == "Effect"
+
+    l1 = sum(1 for f in findings if f[3] and primary(f))  # local Explosions
+    l2 = sum(1 for f in findings if f[4] and primary(f))  # local ImpactSounds
+    exempt = sum(1 for f in findings if not primary(f))
 
     print("# Local effect field guard — weapons declaring Explosions/ImpactSounds")
     print("# instead of inheriting from ^<game>_<effect> templates")
+    print("# Non-primary effect channels (@2Eff/@EffectWater/...) are exempt from")
+    print("# the ratchet counts per maintainer ruling but stay listed below.")
     print()
     print(f"Files scanned: {len(FILES)}")
     print(f"Concrete weapons with local Explosions (L1): {l1}")
     print(f"Concrete weapons with local ImpactSounds (L2): {l2}")
+    print(f"Exempt secondary-channel declarations (not ratcheted): {exempt}")
     print()
 
     if findings:
-        print("| file | weapon | warhead | Explosions | ImpactSounds | line |")
-        print("|---|---|---|---|---|---|")
+        print("| file | weapon | warhead | Explosions | ImpactSounds | line | exempt |")
+        print("|---|---|---|---|---|---|---|")
         for f, weapon, wh, has_expl, has_snd, line in sorted(findings):
-            print(f"| {f} | {weapon} | {wh} | {'YES' if has_expl else '-'} | {'YES' if has_snd else '-'} | {line} |")
+            print(f"| {f} | {weapon} | {wh} | {'YES' if has_expl else '-'} | {'YES' if has_snd else '-'} | {line} | {'exempt' if wh != 'Effect' else ''} |")
 
     # Ratchet check (LOWER-ONLY)
     ratchet_path = Path(__file__).parent / "ratchet_local_effect_fields.json"
