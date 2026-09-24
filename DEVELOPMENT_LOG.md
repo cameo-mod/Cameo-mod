@@ -12548,3 +12548,42 @@ into `^ts_torptube` family, orphaning the def-top-level cancel (engine
 line; `audit_orphan_cancels.py` flags it correctly when run on the final
 tree (the 17:14 suite predated the last materialization edits — procedural
 gap, not a tool gap). Relaunch: menu marker present, exceptions 46→46.
+
+## 2026-09-24 (cont.) — W7 remainder materialization batch (DAWN file-set)
+
+Branch `devin/dawn/w7-remainder` (stacked on `pack-selfcont-valuerefs`).
+
+Converted all **33** remaining DAWN-owned W7 weapon-parent edges via
+resolved materialization (`C:\tmp\dawn_tools\materialize.py`), not
+covering-edge swap — legacy-bundle parents exploded into 4-6 covering
+edges (W8 +25, W1/W2 up) under the naive approach, so it was reverted.
+
+Files: weapons/d2k.yaml 16, tiberiansun.yaml 11, starcraft.yaml 3,
+tiberiandawn.yaml 1, outpost2.yaml 2 (edenMobile chain).
+
+Per weapon: concrete parent edge dropped, resolved parent payload
+materialized inline, effect-typed Warhead@ nodes routed into a per-weapon
+`^<pk>_<file>_<weapon>` family. 6 weapons needed cleanup afterwards:
+- duplicate family defs dropped where a canonical `^*_effects_*` family
+  already existed (fremen_upg, oFremen_L, oDebris2/3, TDBuildingExplode,
+  TSRedEye2) — the emit duplicates an existing family when the parent
+  edge already carried it;
+- 6 orphan cancels removed (provider eliminated by materialization):
+  Arrakis_Tanya_Guns -InvalidTargets (+nested), d2k_kwny_fighter
+  -Warhead@Shrapnel, TSSAPCCoreMissiles -Warhead@MissileAP_Medium,
+  edenMobileLaserTiger -Warhead@Laser_Heavy, edenMobileDefenceLaser
+  -Warhead@CannonHE_Medium;
+- GhostSniperBunker: dropped stray `Range: 10c0 #8c0` — semantically dead
+  line that was a child of the removed `Inherits:` block;
+- TSGrenadeAA: removed `-Projectile:` + redundant second pin (template
+  Projectile already re-pinned by materialization; the cancel would have
+  orphaned after dedupe).
+- R17 chip-cancels: TSLaser90mmDep + edenMobile chain re-apply the
+  parent's `-Warhead@*_ExtraDamage:` cancels — resolved-identical, NOT
+  R17 folds (the fold ruling applies to defs that still carry live
+  ExtraDamage chips).
+
+Verified: all 33 resolved-identical vs pre-edit HEAD; orphan cancels 0;
+empty warheads 0; dup-keys 3968 = HEAD (0 new); split-defs S2 5 = HEAD
+(pre-existing); weapon-shape all buckets at/below ratchets —
+**W7 804→760, W6 443→442** (baselines lowered in audit_weapon_shape.py).

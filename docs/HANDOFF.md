@@ -1,5 +1,28 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-24b — DAWN: W7 remainder materialization (DAWN file-set, 33 edges)
+
+`Agent: DAWN (Devin / SWE-2 Max) · branch devin/dawn/w7-remainder · base 20254e164`
+
+All 33 remaining DAWN-owned W7 weapon-parent edges converted via resolved
+materialization (covering-edge swap rejected — legacy-bundle parents inflated
+W8 +25 / W1 / W2). Files: weapons/d2k.yaml 16, tiberiansun.yaml 11,
+starcraft.yaml 3, tiberiandawn.yaml 1, outpost2.yaml 2 (edenMobile chain —
+EMBER's #488 outpost2 hunks retained, no redo).
+
+All 33 resolved-identical vs pre-edit. Post-materialization cleanup: 6 orphan
+cancels removed, 6 duplicate family defs dropped (canonical copies already in
+effects_*.yaml), TSGrenadeAA dead pin+cancel collapsed, GhostSniperBunker stray
+dead `Range` line removed. R17 chip-cancels re-applied on TSLaser90mmDep +
+edenMobile chain (resolved-identical, not folds).
+
+Audits: orphan_cancels 0 · empty_warhead 0 · dup-keys 3968 = base · S2 5 = base
+· weapon-shape all at/below ratchets — **W7 804→760, W6 443→442** (baselines
+lowered). DAWN W7 file-set is now zero; remaining W7 census fleet-wide:
+redalert2mod ~5 (NOVA held-class) + whatever other lanes own.
+
+---
+
 ## 2026-09-24 — DAWN: value-reference self-containment (D2k/TD/TS/SC hard layer → 0)
 
 `Agent: DAWN (Devin / SWE-2 Max) · branch devin/dawn/pack-selfcont-td-ts-sc · base 24988dd8e`

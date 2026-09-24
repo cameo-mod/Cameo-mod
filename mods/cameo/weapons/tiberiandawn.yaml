@@ -28,7 +28,73 @@
 		ContrailEndWidth: 16
 
 TDBuildingExplode:
-	Inherits: BuildingExplode
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 5120
+	TargetActorCenter: true
+	Warhead@Demolition_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 233
+		Damage: 60000
+		Falloff: 100, 45, 18, 6, 0
+		Versus:
+			HAZMAT: 62
+			COMPOSITE: 100
+			BLAST: 42
+			REFLECTOR: 75
+			ARMOR: 70
+			Shield: 143
+			Wood: 200
+			None: 183
+			Steel: 165
+			Flak: 143
+			Concrete: 136
+			Scout: 109
+			Plate: 107
+			Light: 86
+			Fighter: 70
+			Medium: 69
+			Bomber: 62
+			Heroic: 59
+			Heavy: 58
+			Helicopter: 54
+			Superheavy: 51
+			Spaceship: 47
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 17
+			Wood: 16
+			Steel: 15
+			Concrete: 14
+			None: 13
+			Flak: 12
+			Plate: 11
+			Heroic: 10
+			Scout: 9
+			Light: 8
+			Medium: 7
+			Heavy: 6
+			Superheavy: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+	Projectile: Bullet
+		Speed: 150
+		Blockable: false
+		LaunchAngle: 66
+		Inaccuracy: 400
+		Image: BOMB
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
 	Inherits@fx: ^td_tiberiandawn_tdbuildingexplode
 
 M16:

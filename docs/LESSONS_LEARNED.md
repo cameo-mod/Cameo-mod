@@ -158,6 +158,18 @@ Two traps inside that emit:
   (resolved payload differed). Check the whole merged def dict for the new
   name before writing the copy.
 
+- **W7 weapon-parent edges: covering-edge swap is the WRONG default for
+  legacy-bundle parents** (2026-09-24b, W7-remainder batch). Replacing
+  `Inherits: ConcreteParent` with the parent's covering `Inherits@wh/proj/fx`
+  edges resolves identically but each legacy bundle explodes into 4-6 edges —
+  W8 +25, W1/W2 up on the first pass of the 33-edge batch. Correct pattern is
+  the same materialization used for foreign copies: drop the concrete edge,
+  inline the resolved parent payload at the edge's position, route
+  effect-typed nodes to a per-weapon family. And when the materializer emits
+  a family that ALREADY exists canonically in `effects_<file>.yaml` (because
+  the parent edge carried it), the emit duplicates the def AND the edge —
+  drop the generated copy, keep the canonical one.
+
 Also: the leak census must model the mount topology — a ref is a leak only
 when EVERY definition of the name lives in files the consumer's own
 `content.yaml` (plus its pack's `Include:` chain and core `mod.yaml` mounts)
