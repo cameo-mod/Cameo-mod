@@ -5286,9 +5286,9 @@ WaveArtilleryImpact:
 		Spread: 666
 		ValidRelationships: Enemy, Neutral
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@SonicDebuff: GrantExternalCondition
-		Condition: SonicDebuff
-		Duration: 222
+	Warhead@Resonance: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
 		Range: 666
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall
@@ -5349,8 +5349,9 @@ WaveTurretImpact:
 		Spread: 500
 		ValidRelationships: Enemy, Neutral
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@SonicDebuff: GrantExternalCondition
-		Duration: 150
+	Warhead@Resonance: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
 		Range: 1500
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall

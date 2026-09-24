@@ -3450,9 +3450,9 @@ Future_MBT_DebuffLaser:
 		Duration: 22
 		Width: 0c64
 		Color: 83B9FC
-	Warhead@2Con: GrantExternalCondition
-		Condition: SonicDebuff
-		Duration: 22
+	Warhead@2Con: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
 		Range: 172
 		ValidTargets: Ground, Water, Structure, wall
 	Warhead@Validation: TargetDamage
