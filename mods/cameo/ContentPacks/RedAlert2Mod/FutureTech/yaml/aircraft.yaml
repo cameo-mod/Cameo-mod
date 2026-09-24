@@ -54,7 +54,7 @@ futuretech_twister:
 		Delay: 42
 		Count: 1
 	SpawnActorOnDeath:
-		Actor: twister_husk.steel
+		Actor: steel_twister_husk
 	SelectionDecorations:
 	Selectable:
 		DecorationBounds: 1280, 1024
@@ -130,7 +130,7 @@ futuretech_cryocopter:
 	SelectionDecorations:
 	WithMuzzleOverlay:
 	SpawnActorOnDeath:
-		Actor: cryo_husk.futu
+		Actor: futu_cryo_husk
 	LeavesTrails:
 		Offsets: -427,0,0
 		Image: smokey
@@ -165,7 +165,7 @@ futuretech_cryocopter:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-cryo_husk.futu:
+futu_cryo_husk:
 	Inherits: ^HelicopterHusk
 	Tooltip:
 		Name: Cryocopter
@@ -243,7 +243,7 @@ futuretech_harbingergunship:
 		Modifier: 50
 	Turreted:
 	SpawnActorOnDeath:
-		Actor: harbinger_husk.futu
+		Actor: futu_harbinger_husk
 	SelectionDecorations:
 	Selectable:
 		DecorationBounds: 1280, 1024
@@ -288,7 +288,7 @@ futuretech_harbingergunship:
 		EffectPalette: ra2effect
 		RequiresCondition: spawn-cloaked
 
-harbinger_husk.futu:
+futu_harbinger_husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Harbinger Gunship
@@ -307,7 +307,7 @@ harbinger_husk.futu:
 		Image: futuretech_harbingergunship
 		PlayerPalette: player_rgba
 
-landcarr_drone.futu:
+futu_landcarr_drone:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^BomberTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2

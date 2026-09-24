@@ -42,7 +42,7 @@ cabal_silo:
 		PipCount: 5
 	RenderSprites:
 		PlayerPalette: playerra2
-		Image: tsgtsilo.cabal
+		Image: cabal_tsgtsilo
 
 cabal_missilesilo:
 	Inherits: ^BuildingPlug
@@ -63,7 +63,7 @@ cabal_missilesilo:
 		Type: cabalcore_silo
 	RenderSprites:
 		PlayerPalette: playerra2
-		Image: tsgtsilo.cabal
+		Image: cabal_tsgtsilo
 cabal_stealthgenerator:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^CABALSpawnActorsOnSell

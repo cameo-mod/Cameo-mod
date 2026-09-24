@@ -61,70 +61,70 @@ latinsyndicate_mortarbike:
 	ActorStatValues:
 		Upgrades: latinsyndicate_upgrade_cashrecovery, latinsyndicate_upgrade_sovietstolentechindustrialmethods, latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging, latinsyndicate_upgrade_asianalliancestolentechhotfire
 
-scrapcar.latin:
+latin_scrapcar:
 	Inherits: ^CivilianVehicle
 	RenderSprites:
-		Image: scrapcar.latin
+		Image: latin_scrapcar
 		PlayerPalette: playerra2
 	TransformOnCapture:
-		IntoActor: scrapcar_demo.latin
+		IntoActor: latin_scrapcar_demo
 		CaptureTypes: bombcar
 	TransformOnCapture@driveby:
-		IntoActor: scrapcar_driveby.latin
+		IntoActor: latin_scrapcar_driveby
 		CaptureTypes: driveby
 	Capturable:
 		Types: bombcar, driveby
 		ValidRelationships: Enemy, Neutral, Ally
 
-scrapcar_demo.latin:
+latin_scrapcar_demo:
 	Inherits: ^CivilianSuicideVehicle
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMP: ^FrontalEMP
 	RenderSprites:
-		Image: scrapcar.latin
+		Image: latin_scrapcar
 		PlayerPalette: playerra2
 
-scrapcar_driveby.latin:
+latin_scrapcar_driveby:
 	Inherits: ^CivilianDriveByVehicle
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMP: ^FrontalEMP
 	Cargo:
 		InitialUnits: latinsyndicate_latinmilitia, latinsyndicate_narco, latinsyndicate_latinflametrooper
 	RenderSprites:
-		Image: scrapcar.latin
+		Image: latin_scrapcar
 		PlayerPalette: playerra2
 
-scrapcar2.latin:
+latin_scrapcar2:
 	Inherits: ^CivilianVehicle
 	RenderSprites:
 		Image: ra2car
 		PlayerPalette: playerra2
 	TransformOnCapture:
-		IntoActor: scrapcar2_demo.latin
+		IntoActor: latin_scrapcar2_demo
 		CaptureTypes: bombcar
 	TransformOnCapture@driveby:
-		IntoActor: scrapcar2_driveby.latin
+		IntoActor: latin_scrapcar2_driveby
 		CaptureTypes: driveby
 	Capturable:
 		Types: bombcar, driveby
 		ValidRelationships: Enemy, Neutral, Ally
 
-scrapcar2_demo.latin:
+latin_scrapcar2_demo:
 	Inherits: ^CivilianSuicideVehicle
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMP: ^FrontalEMP
 	RenderSprites:
-		Image: scrapcar2.latin
+		Image: latin_scrapcar2
 		PlayerPalette: playerra2
 
-scrapcar2_driveby.latin:
+latin_scrapcar2_driveby:
 	Inherits: ^CivilianDriveByVehicle
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMP: ^FrontalEMP
 	Cargo:
 		InitialUnits: latinsyndicate_latinmilitia, latinsyndicate_grenademonkey, latinsyndicate_tankkiller
 	RenderSprites:
-		Image: scrapcar2.latin
+		Image: latin_scrapcar2
 		PlayerPalette: playerra2
 
 ##############################################

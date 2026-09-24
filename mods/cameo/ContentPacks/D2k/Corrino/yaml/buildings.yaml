@@ -7,7 +7,7 @@ corrino_constructionyard:
 		Offset: 1,1
 		Facing: 432
 	RenderSprites:
-		Image: conyard.harkonnen
+		Image: harkonnen_conyard
 
 corrino_windtrap:
 	Inherits: ^WindTrap
@@ -15,7 +15,7 @@ corrino_windtrap:
 		Prerequisites: ~corrino_constructionyard
 		Description: Provides power to the base.
 	RenderSprites:
-		Image: power.harkonnen
+		Image: harkonnen_power
 
 corrino_barracks:
 	Inherits: ^D2KBuilding
@@ -41,7 +41,7 @@ corrino_barracks:
 		SpawnOffset: 512,480,0
 		ExitCell: 1,2
 	RenderSprites:
-		Image: barracks.harkonnen
+		Image: harkonnen_barracks
 	ProvidesPrerequisite@d2kbarracks:
 		Prerequisite: d2k_barracks
 	ProvidesPrerequisite@barracks:
@@ -75,7 +75,7 @@ corrino_refinery:
 		DeliveringActor: carryall.reinforce
 		Facing: 160
 	RenderSprites:
-		Image: refinery.harkonnen
+		Image: harkonnen_refinery
 
 corrino_storagesilo:
 	Inherits: ^D2KSilo
@@ -83,14 +83,14 @@ corrino_storagesilo:
 		Prerequisites: ~corrino_constructionyard, corrino_refinery
 		Description: Stores excess spice.
 	RenderSprites:
-		Image: silo.harkonnen
+		Image: harkonnen_silo
 
 corrino_heavyfactory:
 	Inherits: ^HeavyFactory
 	Tooltip:
 		Name: Corrino Heavy Factory
 	RenderSprites:
-		Image: heavy.harkonnen
+		Image: harkonnen_heavy
 	Buildable:
 		Prerequisites: ~corrino_constructionyard, corrino_refinery
 		Description: Produces heavy vehicles.
@@ -128,7 +128,7 @@ corrino_lightfactory:
 		SpawnOffset: 512,480,0
 		ExitCell: 1,2
 	RenderSprites:
-		Image: light.harkonnen
+		Image: harkonnen_light
 	ProvidesPrerequisite@vehicle_production:
 		Prerequisite: corrino_light_vehicle_production
 	ProvidesPrerequisite@light:
@@ -151,7 +151,7 @@ corrino_repairpad:
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	RenderSprites:
-		Image: repair_pad.harkonnen
+		Image: harkonnen_repair_pad
 	RepairsUnits:
 		FinishRepairingNotification: Repaired
 		StartRepairingNotification: Repairing
@@ -172,7 +172,7 @@ corrino_outpost:
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	RenderSprites:
-		Image: outpost.harkonnen
+		Image: harkonnen_outpost
 	ProvidesPrerequisite@outpost:
 		Prerequisite: outpost
 	DetectCloaked:
@@ -209,7 +209,7 @@ corrino_hightechfactory:
 	ProductionTimeMultiplier@dune:
 		Multiplier: 150
 	RenderSprites:
-		Image: hightech.harkonnen
+		Image: harkonnen_hightech
 	ProvidesPrerequisite@hightech:
 		Prerequisite: hightech.corrino
 
@@ -228,7 +228,7 @@ corrino_ixresearchcenter:
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	RenderSprites:
-		Image: research.harkonnen
+		Image: harkonnen_research
 	ProvidesPrerequisite@research:
 		Prerequisite: research_centre
 
@@ -247,9 +247,9 @@ corrino_starport:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	RenderSprites:
-		Image: starport.harkonnen
+		Image: harkonnen_starport
 	ProvidesPrerequisite@starport:
-		Prerequisite: starport.corrino
+		Prerequisite: corrino_starport
 
 corrino_palace:
 	Inherits: ^D2KBuilding
@@ -266,7 +266,7 @@ corrino_palace:
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	RenderSprites:
-		Image: palace.harkonnen
+		Image: harkonnen_palace
 	ProvidesPrerequisite@palace:
 		Prerequisite: palace
 
@@ -285,7 +285,7 @@ corrino_gunturret:
 		Dimensions: 1,2
 		LocalCenterOffset: 0,-512,0
 	RenderSprites:
-		Image: gun_turret.harkonnen
+		Image: harkonnen_gun_turret
 	Armament:
 		Weapon: 110mm_Gun
 	AttackTurreted:
@@ -309,7 +309,7 @@ corrino_rocketturret:
 		Dimensions: 1,2
 		LocalCenterOffset: 0,-512,0
 	RenderSprites:
-		Image: rocket_turret.harkonnen
+		Image: harkonnen_rocket_turret
 	Armament:
 		Weapon: D2K_TowerMissile
 	AttackTurreted:

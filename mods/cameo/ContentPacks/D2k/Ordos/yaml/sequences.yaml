@@ -1,4 +1,4 @@
-﻿ordos_artilleryplatform:
+ordos_artilleryplatform:
 	Defaults:
 	invisible:
 		Filename: DATA.R16
@@ -157,7 +157,7 @@ ordos_repairpad:
 		Start: 4362
 		Offset: -30,-24
 
-research.ordos:
+ordos_research:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -281,7 +281,7 @@ ordos_starport:
 		Start: 4358
 		Offset: -30,-24
 
-power.ordos:
+ordos_power:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -465,7 +465,7 @@ ordos_refineryordos:
 		Remap: 54F94B
 		Start: 4138
 
-silo.ordos:
+ordos_silo:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -516,7 +516,7 @@ silo.ordos:
 		Start: 4350
 		Offset: -30,-24
 
-hightech.ordos:
+ordos_hightech:
 	Defaults:
 		Offset: -48,80
 	idle:
@@ -624,7 +624,7 @@ ordos_palace:
 		Start: 4368
 		Offset: -30,-24
 
-light.ordos:
+ordos_light:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -1259,7 +1259,7 @@ ordos_eyeinthesky:
 	icon:
 		Filename: ordos_eyeinthesky_icon.png
 
-swarmer_husk.ordos:
+ordos_swarmer_husk:
 	Defaults:
 	idle:
 		Filename: swarmer.shp
@@ -1463,7 +1463,7 @@ ordos_combatautoguntank:
 	icon:
 		Filename: ordos_combatautoguntank_icon.shp
 
-combat_tank_husk.ordos:
+ordos_combat_tank_husk:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -1598,7 +1598,7 @@ ordos_deviatorartillery:
 		Start: 4286
 		Offset: -30,-24
 
-deviator_husk.ordos:
+ordos_deviator_husk:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -1752,7 +1752,7 @@ ordos_chemturret:
 		Filename: ordos_chemtur_build_icon.png
 
 # --- Migrated from legacy sequences/d2k.yaml (Ruling 3, 2026-09-06) ---
-barracks.ordos:
+ordos_barracks:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -1800,7 +1800,7 @@ barracks.ordos:
 		Offset: -30,-24
 
 
-conyard.ordos:
+ordos_conyard:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -1866,7 +1866,7 @@ conyard.ordos:
 		Offset: -30,-24
 
 
-heavy.ordos:
+ordos_heavy:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -1939,8 +1939,8 @@ heavy.ordos:
 
 # Migrated from legacy mods/cameo/sequences/d2k.yaml (Ruling 9 sequences)
 
-minipower.ordos:
-	Inherits: minipower.atreides
+ordos_minipower:
+	Inherits: atreides_minipower
 	idle:
 		Filename: d2k_mini_windtrap.shp
 		Start: 2
@@ -1951,8 +1951,8 @@ minipower.ordos:
 		Filename: d2k_mini_windtrap_icon.shp
 		Start: 1
 
-d2k_munitions.ordos:
-	Inherits: d2k_munitions.atreides
+ordos_d2k_munitions:
+	Inherits: atreides_d2k_munitions
 	idle:
 		Filename: ixian_munitionssilo_d2k_munitions.shp
 		Start: 4
@@ -1967,7 +1967,7 @@ d2k_munitions.ordos:
 #		   MISC
 ####################################################
 
-faction.ordos:
+ordos_faction:
 	idle:
 		Filename: ordosicon.shp
 	icon:

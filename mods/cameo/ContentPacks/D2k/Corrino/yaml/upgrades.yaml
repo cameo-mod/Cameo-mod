@@ -1,4 +1,4 @@
-upgrade_conyard.corrino:
+corrino_upgrade_conyard:
 	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Construction Yard Upgrade
@@ -11,9 +11,9 @@ upgrade_conyard.corrino:
 	Valued:
 		Cost: 200
 	RenderSprites:
-		Image: conyard.harkonnen
+		Image: harkonnen_conyard
 
-upgrade_barracks.corrino:
+corrino_upgrade_barracks:
 	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Barracks Upgrade
@@ -26,9 +26,9 @@ upgrade_barracks.corrino:
 	Valued:
 		Cost: 200
 	RenderSprites:
-		Image: barracks.harkonnen
+		Image: harkonnen_barracks
 
-upgrade_light.corrino:
+corrino_upgrade_light:
 	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Light Factory Upgrade
@@ -41,9 +41,9 @@ upgrade_light.corrino:
 	Valued:
 		Cost: 200
 	RenderSprites:
-		Image: light.harkonnen
+		Image: harkonnen_light
 
-upgrade_heavy.corrino:
+corrino_upgrade_heavy:
 	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Heavy Factory Upgrade
@@ -56,9 +56,9 @@ upgrade_heavy.corrino:
 	Valued:
 		Cost: 400
 	RenderSprites:
-		Image: heavy.harkonnen
+		Image: harkonnen_heavy
 
-upgrade_radar.corrino:
+corrino_upgrade_radar:
 	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Radar Upgrade
@@ -71,4 +71,4 @@ upgrade_radar.corrino:
 	Valued:
 		Cost: 300
 	RenderSprites:
-		Image: outpost.harkonnen
+		Image: harkonnen_outpost

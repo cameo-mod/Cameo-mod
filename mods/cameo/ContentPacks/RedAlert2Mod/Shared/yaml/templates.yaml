@@ -390,7 +390,7 @@
 		Color: FF0000
 		#RequiresCondition: steelconsortium_upgrade_scalpeldefenders
 	DroneSpawnerMaster@steel_scalpel:
-		Actors: scalpelMG.steel
+		Actors: steel_scalpelMG
 		ArmamentNames: secondary
 		RespawnTicks: 500
 		PauseOnCondition: disabled || !steelconsortium_upgrade_scalpeldefenders

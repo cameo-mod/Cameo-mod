@@ -159,7 +159,7 @@ corrino_bmp:
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~corrino_light_vehicle_production, upgrade_light.corrino
+		Prerequisites: ~corrino_light_vehicle_production, corrino_upgrade_light
 		BuildPaletteOrder: 30
 		Description: actor_corrino_bmp.description
 		IconPalette: d2kunit
@@ -302,7 +302,7 @@ corrino_siegetank:
 	Inherits@AntiBuil: ^PrioritizeBuilding
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~corrino_vehicle_production, upgrade_heavy.corrino
+		Prerequisites: ~corrino_vehicle_production, corrino_upgrade_heavy
 		BuildPaletteOrder: 50
 		Description: actor_corrino_siegetank.description
 		IconPalette: d2kunit
@@ -326,7 +326,7 @@ corrino_siegetank:
 	AttackFrontal:
 		FacingTolerance: 0
 	SpawnActorOnDeath:
-		Actor: siege_tank_husk.corrino
+		Actor: corrino_siege_tank_husk
 	RevealsShroud:
 		Range: 5c0
 		Type: GroundPosition
@@ -340,7 +340,7 @@ corrino_siegetank:
 	MapEditorData:
 		Categories: Vehicle
 
-siege_tank_husk.corrino:
+corrino_siege_tank_husk:
 	Inherits@husk: ^D2KVehicleHusk
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Tooltip:

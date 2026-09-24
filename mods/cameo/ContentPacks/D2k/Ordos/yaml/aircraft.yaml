@@ -57,7 +57,7 @@ ordos_swarmerdrone:
 	Targetable:
 		TargetTypes: Air, Plane
 	SpawnActorOnDeath:
-		Actor: swarmer_husk.ordos
+		Actor: ordos_swarmer_husk
 	Selectable:
 		Bounds: 1280, 1024, 0, 0
 	SelectionDecorations:
@@ -197,7 +197,7 @@ ordos_eyeinthesky:
 	Targetable:
 		TargetTypes: Air, Plane
 	SpawnActorOnDeath:
-		Actor: eye_husk.ordos
+		Actor: ordos_eye_husk
 	Selectable:
 		Bounds: 1280, 1024, 0, 0
 	SelectionDecorations:
@@ -271,7 +271,7 @@ ordos_banshee:
 	Targetable:
 		TargetTypes: Air, Plane
 	SpawnActorOnDeath:
-		Actor: banshee_husk.ordos
+		Actor: ordos_banshee_husk
 	Selectable:
 		Bounds: 1280, 1024, 0, 0
 	SelectionDecorations:
@@ -349,7 +349,7 @@ ordos_wraith:
 	Selectable:
 		DecorationBounds: 1280, 1024
 	SpawnActorOnDeath:
-		Actor: wraith_husk.ordos
+		Actor: ordos_wraith_husk
 	Turreted:
 	Voiced:
 		VoiceSet: EBFDAAMine
@@ -360,7 +360,7 @@ ordos_wraith:
 	ActorStatValues:
 		Upgrades: ordos_upgrade_shields, ordos_upgrade_biologicalwarfare
 
-wraith_husk.ordos:
+ordos_wraith_husk:
 	Inherits: ^LargeHelicopterHusk
 	Tooltip:
 		Name: Wraith
@@ -417,7 +417,7 @@ wraith_husk.ordos:
 # 	Tooltip:
 # 		Name: Ornithopter
 # 	SpawnActorOnDeath:
-# 		Actor: ornithopter_husk.atreides
+# 		Actor: atreides_ornithopter_husk
 # 	RejectsOrders:
 # 	RevealOnFire:
 # 	Targetable@AIRBORNE:
@@ -518,11 +518,11 @@ wraith_husk.ordos:
 
 
 # ornithopter.controllable.husk:
-# 	Inherits: ornithopter_husk.atreides
+# 	Inherits: atreides_ornithopter_husk
 # 	Aircraft:
 # 		Speed: 156
 
-swarmer_husk.ordos:
+ordos_swarmer_husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Swarmer
@@ -535,7 +535,7 @@ swarmer_husk.ordos:
 		PlayerPalette: player_rgba
 		Image: ordos_swarmerdrone
 
-banshee_husk.ordos:
+ordos_banshee_husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Banshee
@@ -548,7 +548,7 @@ banshee_husk.ordos:
 		PlayerPalette: player_rgba
 		Image: ordos_banshee
 
-eye_husk.ordos:
+ordos_eye_husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Eye on the Sky
@@ -587,7 +587,7 @@ eye_husk.ordos:
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		BuildPaletteOrder: 40
-# 		Prerequisites: high_tech_factory, research_centre, ~faction.guild
+# 		Prerequisites: high_tech_factory, research_centre, ~guild_faction
 # 		Queue: Aircraft, RAAircraft
 # 		Description: Heavy fleet which fires multiple unguided rockets at its targets.\n Strong vs Ground targets
 # 		IconPalette: ra2
@@ -651,7 +651,7 @@ eye_husk.ordos:
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: high_tech_factory, ~faction.guild
+# 		Prerequisites: high_tech_factory, ~guild_faction
 # 		Queue: Aircraft, RAAircraft
 # 		Description: Fast Spaceship fighter used for aerial combat. Equipped with guided missiles\nStrong vs Everything
 # 		IconPalette: ra2
@@ -768,7 +768,7 @@ eye_husk.ordos:
 # 	FallsToEarth:
 # 		Explosion: D2KUnitExplodeLarge
 
-carryall_reinforce.ordos:
+ordos_carryall_reinforce:
 	Inherits: ^AirstrikePlane
 	Inherits@CLOAK: ^CloakedAircraft
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -795,10 +795,10 @@ carryall_reinforce.ordos:
 		IdleTurnSpeed: 4
 	-SpawnActorOnDeath:
 	SpawnActorOnDeath@CRUISING:
-		Actor: carryall_husk.ordos
+		Actor: ordos_carryall_husk
 		RequiresCondition: cruising
 	SpawnActorOnDeath@LANDING:
-		Actor: carryall_huskvtol.ordos
+		Actor: ordos_carryall_huskvtol
 		RequiresCondition: !cruising
 	Carryall:
 		BeforeLoadDelay: 10
@@ -877,10 +877,10 @@ ordos_advancedcarryall:
 		MinAirborneAltitude: 400
 	-SpawnActorOnDeath:
 	SpawnActorOnDeath@CRUISING:
-		Actor: carryall_husk.ordos
+		Actor: ordos_carryall_husk
 		RequiresCondition: cruising
 	SpawnActorOnDeath@LANDING:
-		Actor: carryall_huskvtol.ordos
+		Actor: ordos_carryall_huskvtol
 		RequiresCondition: !cruising
 	AutoCarryall:
 		BeforeLoadDelay: 10
@@ -928,7 +928,7 @@ ordos_advancedcarryall:
 		RequiresCondition: ordos_upgrade_lasercartridges
 	ActorStatValues:
 		Upgrades: ordos_upgrade_lasercartridges
-carryall_husk.ordos:
+ordos_carryall_husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Advanced Carryall
@@ -943,7 +943,7 @@ carryall_husk.ordos:
 	FallsToEarth:
 		Explosion: D2KUnitExplodeLarge
 
-carryall_huskvtol.ordos:
+ordos_carryall_huskvtol:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Advanced Carryall
@@ -978,7 +978,7 @@ carryall_huskvtol.ordos:
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 130
-# 		Prerequisites: ~faction.tleilaxu, d2k_tleilaxu_tech, upgrade.emperorworm
+# 		Prerequisites: ~tleilaxu_faction, d2k_tleilaxu_tech, upgrade.emperorworm
 # 		Description: Giant Sandworm
 # 		BuildLimit: 1
 # 	Inherits@EXT: ^ExternalConditions ##########
@@ -1036,7 +1036,7 @@ carryall_huskvtol.ordos:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 130
-# 		Prerequisites: ~faction.fremen, high_tech_factory, upgrade_barracks
+# 		Prerequisites: ~fremen_faction, high_tech_factory, upgrade_barracks
 # 		Description: Giant Sandworm
 # 		BuildLimit: 5
 # 	Inherits@EXT: ^ExternalConditions ##########

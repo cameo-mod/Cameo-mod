@@ -88,7 +88,7 @@ flame_turret:
 		Filename: flame_towericon.shp
 		Offset: 0,-1
 
-repair_pad.atreides:
+atreides_repair_pad:
 	Defaults:
 	make:
 		Filename: DATA.R16
@@ -144,7 +144,7 @@ repair_pad.atreides:
 		Start: 4360
 		Offset: -30,-24
 
-repair_pad.harkonnen:
+harkonnen_repair_pad:
 	Defaults:
 	make:
 		Filename: DATA.R16
@@ -201,7 +201,7 @@ repair_pad.harkonnen:
 		Offset: -30,-24
 
 repair_pad.dark:
-	Inherits: repair_pad.harkonnen
+	Inherits: harkonnen_repair_pad
 	idle:
 		Filename: d2k_dark_repair_pad.shp
 		Start: 0
@@ -215,7 +215,7 @@ repair_pad.dark:
 		Start: 0
 		Offset: 0,0
 
-starport.atreides:
+atreides_starport:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -284,7 +284,7 @@ starport.atreides:
 		Start: 4356
 		Offset: -30,-24
 
-power.atreides:
+atreides_power:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -345,7 +345,7 @@ power.atreides:
 		Start: 4320
 		Offset: -30,-24
 
-barracks.atreides:
+atreides_barracks:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -392,7 +392,7 @@ barracks.atreides:
 		Start: 4323
 		Offset: -30,-24
 
-silo.atreides:
+atreides_silo:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -443,7 +443,7 @@ silo.atreides:
 		Start: 4348
 		Offset: -30,-24
 
-hightech.atreides:
+atreides_hightech:
 	Defaults:
 		Offset: -48,80
 	idle:
@@ -507,7 +507,7 @@ hightech.atreides:
 	active:
 		Filename: invisibleitem.shp
 
-research.atreides:
+atreides_research:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -562,7 +562,7 @@ research.atreides:
 		Start: 4363
 		Offset: -30,-24
 
-research.harkonnen:
+harkonnen_research:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -617,8 +617,8 @@ research.harkonnen:
 		Start: 4364
 		Offset: -30,-24
 
-research.corrino:
-	Inherits: research.harkonnen
+corrino_research:
+	Inherits: harkonnen_research
 	idle:
 		Filename: d2k_research_center_corrino.shp
 		Start: 0
@@ -642,7 +642,7 @@ research.corrino:
 		Start: 0
 		Offset: 0,0
 
-palace.atreides:
+atreides_palace:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -695,7 +695,7 @@ palace.atreides:
 		Start: 4366
 		Offset: -30,-24
 
-light.atreides:
+atreides_light:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -776,7 +776,7 @@ light.atreides:
 		Start: 4345
 		Offset: -30,-24
 
-heavy.atreides:
+atreides_heavy:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -847,7 +847,7 @@ heavy.atreides:
 		Start: 4351
 		Offset: -30,-24
 
-conyard.harkonnen:
+harkonnen_conyard:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -912,7 +912,7 @@ conyard.harkonnen:
 		Start: 4311
 		Offset: -30,-24
 
-conyard.corrino:
+corrino_conyard:
 	Defaults:
 	idle:
 		Filename: conyard_corrino.shp
@@ -966,7 +966,7 @@ conyard.corrino:
 	icon:
 		Filename: conyard_corrino_icon.shp
 
-starport.harkonnen:
+harkonnen_starport:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -1035,7 +1035,7 @@ starport.harkonnen:
 		Start: 4357
 		Offset: -30,-24
 
-power.harkonnen:
+harkonnen_power:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -1096,7 +1096,7 @@ power.harkonnen:
 		Start: 4321
 		Offset: -30,-24
 
-barracks.harkonnen:
+harkonnen_barracks:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -1143,7 +1143,7 @@ barracks.harkonnen:
 		Start: 4324
 		Offset: -30,-24
 
-outpost.harkonnen:
+harkonnen_outpost:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -1195,7 +1195,7 @@ outpost.harkonnen:
 		Start: 4337
 		Offset: -30,-24
 
-refinery.harkonnen:
+harkonnen_refinery:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -1268,7 +1268,7 @@ refinery.harkonnen:
 		Remap: 54F94B
 		Start: 4138
 
-silo.harkonnen:
+harkonnen_silo:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -1319,7 +1319,7 @@ silo.harkonnen:
 		Start: 4349
 		Offset: -30,-24
 
-hightech.harkonnen:
+harkonnen_hightech:
 	Defaults:
 	Defaults:
 		Offset: -48,80
@@ -1375,7 +1375,7 @@ hightech.harkonnen:
 	active:
 		Filename: invisibleitem.shp
 
-palace.harkonnen:
+harkonnen_palace:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -1436,7 +1436,7 @@ palace.harkonnen:
 		Start: 4367
 		Offset: -30,-24
 
-light.harkonnen:
+harkonnen_light:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -1507,7 +1507,7 @@ light.harkonnen:
 		Start: 4346
 		Offset: -30,-24
 
-heavy.harkonnen:
+harkonnen_heavy:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -1578,7 +1578,7 @@ heavy.harkonnen:
 		Start: 4352
 		Offset: -30,-24
 
-conyard.ordos:
+ordos_conyard:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -1643,7 +1643,7 @@ conyard.ordos:
 		Start: 4312
 		Offset: -30,-24
 
-minipower.atreides:
+atreides_minipower:
 	idle:
 		Filename: d2k_mini_windtrap.shp
 		Start: 4
@@ -1671,8 +1671,8 @@ minipower.atreides:
 		Tick: 150
 		Scale: 1.2
 
-minipower.harkonnen:
-	Inherits: minipower.atreides
+harkonnen_minipower:
+	Inherits: atreides_minipower
 	idle:
 		Filename: d2k_mini_windtrap.shp
 		Start: 0
@@ -1683,8 +1683,8 @@ minipower.harkonnen:
 		Filename: d2k_mini_windtrap_icon.shp
 		Start: 0
 
-minipower.ordos:
-	Inherits: minipower.atreides
+ordos_minipower:
+	Inherits: atreides_minipower
 	idle:
 		Filename: d2k_mini_windtrap.shp
 		Start: 2
@@ -1695,7 +1695,7 @@ minipower.ordos:
 		Filename: d2k_mini_windtrap_icon.shp
 		Start: 1
 
-barracks.ordos:
+ordos_barracks:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -1742,7 +1742,7 @@ barracks.ordos:
 		Start: 4325
 		Offset: -30,-24
 
-barracks.merc:
+merc_barracks:
 	Defaults:
 	make:
 		Filename: DATA.R16
@@ -1770,7 +1770,7 @@ barracks.merc:
 	icon:
 		Filename: d2k_barracks_merc_icon.shp
 
-barracks.corrino:
+corrino_barracks:
 	Defaults:
 	make:
 		Filename: DATA.R16
@@ -1810,11 +1810,11 @@ d2k_tleilaxu_tech:
 	icon:
 		Filename: d2k_tleilaxu_tech_icon.shp
 
-upgrade.gholas:
+gholas_upgrade:
 	icon:
 		Filename: d2k_tleilaxu_ghola_icon.shp
 
-upgrade.tleilaxueyes:
+tleilaxueyes_upgrade:
 	icon:
 		Filename: d2k_tleilaxueyes.shp
 
@@ -1840,7 +1840,7 @@ d2k_sandworm_tower:
 	icon:
 		Filename: d2k_sandworm_tower_icon.shp
 
-heavy.ordos:
+ordos_heavy:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -1911,7 +1911,7 @@ heavy.ordos:
 		Start: 4353
 		Offset: -30,-24
 
-palace.corrino:
+corrino_palace:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -2002,7 +2002,7 @@ golden_lion_throne:
 	icon:
 		Filename: d2k_golden_lion_throne_icon.shp
 
-starport.corrino:
+corrino_starport:
 	Defaults:
 	idle:
 		Filename: d2k_starport_emperor.shp
@@ -2060,7 +2060,7 @@ starport.corrino:
 	icon:
 		Filename: d2k_starport_emperor_icon.shp
 
-heavy.corrino:
+corrino_heavy:
 	Defaults:
 	idle:
 		Filename: heavyfactory_corrino.shp
@@ -2162,8 +2162,8 @@ plates: # TODO: unused
 		Start: 4317
 		Offset: -30,-24
 
-d2k_munitions.harkonnen:
-	Inherits: d2k_munitions.atreides
+harkonnen_d2k_munitions:
+	Inherits: atreides_d2k_munitions
 	idle:
 		Filename: ixian_munitionssilo_d2k_munitions.shp
 		Start: 0
@@ -2174,8 +2174,8 @@ d2k_munitions.harkonnen:
 		Filename: ixian_munitionssilo_icon.shp
 		Start: 0
 
-d2k_munitions.ordos:
-	Inherits: d2k_munitions.atreides
+ordos_d2k_munitions:
+	Inherits: atreides_d2k_munitions
 	idle:
 		Filename: ixian_munitionssilo_d2k_munitions.shp
 		Start: 4
@@ -4261,13 +4261,13 @@ bene_gesserit:
 	icon:
 		Filename: bene_gesserit_icon.shp
 
-faction.ordos:
+ordos_faction:
 	idle:
 		Filename: ordosicon.shp
 	icon:
 		Filename: ordosicon.shp
 
-faction.smugglers:
+smugglers_faction:
 	idle:
 		Filename: smugglericon.shp
 	icon:
@@ -4279,43 +4279,43 @@ faction.mercenary:
 	icon:
 		Filename: mercenaryicon.shp
 
-faction.tleilaxu:
+tleilaxu_faction:
 	idle:
 		Filename: tleilaxicon.shp
 	icon:
 		Filename: tleilaxicon.shp
 
-faction.harkonnen:
+harkonnen_faction:
 	idle:
 		Filename: harkonnenicon.shp
 	icon:
 		Filename: harkonnenicon.shp
 
-faction.atreides:
+atreides_faction:
 	idle:
 		Filename: atreidesicon.shp
 	icon:
 		Filename: atreidesicon.shp
 
-faction.fremen:
+fremen_faction:
 	idle:
 		Filename: fremenicon.shp
 	icon:
 		Filename: fremenicon.shp
 
-faction.corrino:
+corrino_faction:
 	idle:
 		Filename: corrinoicon.shp
 	icon:
 		Filename: corrinoicon.shp
 
-faction.ixian:
+ixian_faction:
 	idle:
 		Filename: ixianicon.shp
 	icon:
 		Filename: ixianicon.shp
 
-faction.guild:
+guild_faction:
 	idle:
 		Filename: spacingguildicon.shp
 	icon:

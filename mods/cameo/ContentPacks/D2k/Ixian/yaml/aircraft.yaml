@@ -70,7 +70,7 @@ ixian_airdrone:
 	Selectable:
 		Bounds: 1536, 1280, 0, 0
 	SpawnActorOnDeath:
-		Actor: air_drone_husk.ixian
+		Actor: ixian_air_drone_husk
 	EjectOnDeath:
 		PilotActor: ixian_shockinfantry
 	Voiced:
@@ -90,7 +90,7 @@ ixian_airdrone:
 	ActorStatValues:
 		Upgrades: ixian_upgrade_heavymissiles, ixian_upgrade_generalpurposearmor, ixian_upgrade_tungstenneedleguns, ixian_upgrade_advancedixiantechnology
 
-air_drone_husk.ixian:
+ixian_air_drone_husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Air Drone
@@ -222,9 +222,9 @@ ixian_railgundrone:
 		Ammo: 5
 		AmmoCondition: ammo
 	SpawnActorOnDeath:
-		Actor: drone_husk.ixian
+		Actor: ixian_drone_husk
 	EjectOnDeath:
-		PilotActor: heavy_inf.ixian
+		PilotActor: ixian_heavy_inf
 	SelectionDecorations:
 	ReloadAmmoPool:
 		Delay: 48
@@ -244,7 +244,7 @@ ixian_railgundrone:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-drone_husk.ixian:
+ixian_drone_husk:
 	Inherits: ^SmallHelicopterHusk
 	Tooltip:
 		Name: Ix Railgun Drone
@@ -305,9 +305,9 @@ ixian_empbomber:
 		Position: BottomLeft
 		RequiresSelection: true
 	SpawnActorOnDeath:
-		Actor: heavydrone_husk.ixian
+		Actor: ixian_heavydrone_husk
 	EjectOnDeath:
-		PilotActor: heavy_inf.ixian
+		PilotActor: ixian_heavy_inf
 	SelectionDecorations:
 	Selectable:
 		DecorationBounds: 1280, 1024
@@ -398,7 +398,7 @@ ixian_resonancedrone:
 		PersistentTargeting: false
 		AttackType: Hover
 	SpawnActorOnDeath:
-		Actor: resonance_drone_husk.ixian
+		Actor: ixian_resonance_drone_husk
 	EjectOnDeath:
 		PilotActor: light_inf
 	SelectionDecorations:
@@ -414,7 +414,7 @@ ixian_resonancedrone:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-resonance_drone_husk.ixian:
+ixian_resonance_drone_husk:
 	Inherits: ^SmallHelicopterHusk
 	Tooltip:
 		Name: Ix Resonance Drone
@@ -534,11 +534,11 @@ ixian_farasha:
 	Voiced:
 		VoiceSet: D2KVehicleVoice
 	SpawnActorOnDeath:
-		Actor: farasha_husk.ixian
+		Actor: ixian_farasha_husk
 		OwnerType: InternalName
 		EffectiveOwnerFromOwner: true
 	EjectOnDeath:
-		PilotActor: heavy_inf.ixian
+		PilotActor: ixian_heavy_inf
 	FireProjectilesOnDeath:
 		Weapons: Debris, Debris2, Debris3, Debris4
 		Pieces: 6, 10
@@ -548,7 +548,7 @@ ixian_farasha:
 	ActorStatValues:
 		Upgrades: ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
-farasha_husk.ixian:
+ixian_farasha_husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Farasha
@@ -561,7 +561,7 @@ farasha_husk.ixian:
 	FallsToEarth:
 		Explosion: D2KUnitExplodeLarge
 
-heavydrone_husk.ixian:
+ixian_heavydrone_husk:
 	Inherits: ^SmallHelicopterHusk
 	Tooltip:
 		Name: Ix Heavy Drone
@@ -621,7 +621,7 @@ farasha_drone_ixian:
 	HitShape:
 	-MapEditorData:
 	SpawnActorOnDeath:
-		Actor: farasha_drone_husk.ixian
+		Actor: ixian_farasha_drone_husk
 		OwnerType: InternalName
 		EffectiveOwnerFromOwner: true
 	FireProjectilesOnDeath:
@@ -631,7 +631,7 @@ farasha_drone_ixian:
 	ActorStatValues:
 		Upgrades: ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
-farasha_drone_husk.ixian:
+ixian_farasha_drone_husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Alfayrus

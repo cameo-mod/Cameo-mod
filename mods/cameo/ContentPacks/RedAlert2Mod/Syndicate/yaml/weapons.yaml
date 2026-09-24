@@ -6165,6 +6165,6 @@ Rammax_Sabot:
 ScrapCarSpawner:
 	Projectile: InstantExplode
 	Warhead@1Actor: SpawnActor
-		Actors: scrapcar_driveby.latin, scrapcar2_driveby.latin
+		Actors: latin_scrapcar_driveby, latin_scrapcar2_driveby
 		Range: 5
 		ValidTargets: Air, Ground, Water

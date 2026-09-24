@@ -797,7 +797,7 @@ SteelSupportSpawner1:
 	ReloadDelay: 1
 	Projectile: InstantExplode
 	Warhead@1Actor: SpawnActor
-		Actors: cougar.steel, cougar.steel, cougar.steel, cougar.steel, cougar.steel, hummer.steel, hummer.steel
+		Actors: steel_cougar, steel_cougar, steel_cougar, steel_cougar, steel_cougar, steel_hummer, steel_hummer
 		Range: 5
 		Image: ra2_allies_chronominer
 		Sequence: warpout
@@ -809,7 +809,7 @@ SteelSupportSpawner2:
 	ReloadDelay: 1
 	Projectile: InstantExplode
 	Warhead@1Actor: SpawnActor
-		Actors: cougar.steel, cougar.steel, cougar.steel, cougar.steel, hummer.steel, hummer.steel, hummer.steel, oldqtnk.steel
+		Actors: steel_cougar, steel_cougar, steel_cougar, steel_cougar, steel_hummer, steel_hummer, steel_hummer, steel_oldqtnk
 		Range: 5
 		Image: ra2_allies_chronominer
 		Sequence: warpout
@@ -821,7 +821,7 @@ SteelSupportSpawner3:
 	ReloadDelay: 1
 	Projectile: InstantExplode
 	Warhead@1Actor: SpawnActor
-		Actors: cougar.steel, cougar.steel, cougar.steel, hummer.steel, hummer.steel, hummer.steel, hummer.steel, oldqtnk.steel, oldqtnk.steel
+		Actors: steel_cougar, steel_cougar, steel_cougar, steel_hummer, steel_hummer, steel_hummer, steel_hummer, steel_oldqtnk, steel_oldqtnk
 		Range: 5
 		Image: ra2_allies_chronominer
 		Sequence: warpout
@@ -833,7 +833,7 @@ SteelSupportSpawner4:
 	ReloadDelay: 1
 	Projectile: InstantExplode
 	Warhead@1Actor: SpawnActor
-		Actors: cougar.steel, cougar.steel, hummer.steel, hummer.steel, hummer.steel, hummer.steel, hummer.steel, oldqtnk.steel, oldqtnk.steel, cobra.steel
+		Actors: steel_cougar, steel_cougar, steel_hummer, steel_hummer, steel_hummer, steel_hummer, steel_hummer, steel_oldqtnk, steel_oldqtnk, steel_cobra
 		Range: 5
 		Image: ra2_allies_chronominer
 		Sequence: warpout

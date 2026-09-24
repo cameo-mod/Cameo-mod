@@ -264,7 +264,7 @@ ixian_ixmissiletank:
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: ~disabled, ~heavy.missile_tank, upgrade_heavy, research_centre, ~!faction.ixian, ~!faction.guild
+# 		Prerequisites: ~disabled, ~heavy.missile_tank, upgrade_heavy, research_centre, ~!ixian_faction, ~!guild_faction
 # 		BuildPaletteOrder: 60
 # 		Description: Rocket Artillery\n  Strong vs Vehicles, Buildings, Aircraft\n  Weak vs Infantry\nDetector
 # 		IconPalette: d2kunit
@@ -358,7 +358,7 @@ ixian_ixmissiletank:
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 100
-# 		Prerequisites: ~heavy.atreides, research_centre, ~!faction.ixian, ~!faction.fremen
+# 		Prerequisites: ~atreides_heavy, research_centre, ~!ixian_faction, ~!fremen_faction
 # 		BuildDuration: 500
 # 		BuildDurationModifier: 100
 # 		Description: Fires sonic shocks\n  Strong vs Infantry, Vehicles\n  Weak vs Tanks, Artillery
@@ -388,7 +388,7 @@ ixian_ixmissiletank:
 # 		Weapon: D2KUnitExplodeLarge
 # 		EmptyWeapon: D2KUnitExplodeLarge
 # 	SpawnActorOnDeath:
-# 		Actor: sonic_tank_husk.atreides
+# 		Actor: atreides_sonic_tank_husk
 # 		OwnerType: InternalName
 # 		EffectiveOwnerFromOwner: true
 # 		Intensity: 600
@@ -418,7 +418,7 @@ ixian_ixmissiletank:
 # 	RenderSprites:
 # 		Image: devastator
 
-rocket_raider.ixian:
+ixian_rocket_raider:
 	Inherits@D2KV: ^D2KVehicle
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -509,7 +509,7 @@ rocket_raider.ixian:
 	ActorStatValues:
 		Upgrades: ixian_upgrade_heavymissiles, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 	RenderSprites:
-		Image: rocket_raider.ixian
+		Image: ixian_rocket_raider
 
 ixian_shockraider:
 	Inherits@D2KV: ^D2KVehicle
@@ -742,7 +742,7 @@ ixian_heavykodatank:
 		Upgrades: ixian_upgrade_reinforcedbarrel, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
 # combat_tank_corrino:
-# 	Inherits: combat_tank.harkonnen
+# 	Inherits: harkonnen_combat_tank
 # 	Inherits@IXEMP: ^D2K_Ix_Turret_EMP
 # 	Valued:
 # 		Cost: 800
@@ -752,7 +752,7 @@ ixian_heavykodatank:
 # 		Name: Silver Lion
 # 	Buildable:
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~heavy.harkonnen_combat, ~faction.corrino
+# 		Prerequisites: ~heavy.harkonnen_combat, ~corrino_faction
 # 		Description: Corrino Multi-Purpose Main Battle Tank\nEquipped with Lower Calibre Cannon and AA/AT Missile System\n  All-Rounder
 # 	Armament:
 # 		Weapon: D2K76mm
@@ -804,7 +804,7 @@ ixian_heavykodatank:
 # 	RenderSprites:
 # 		Image: combat_tank_corrino
 # combat_tank_fremen:
-# 	Inherits: combat_tank.atreides
+# 	Inherits: atreides_combat_tank
 # 	Valued:
 # 		Cost: 650
 # 	Health:
@@ -821,7 +821,7 @@ ixian_heavykodatank:
 # 			fedaykin: fedaykinloaded
 # 			fremen: phantomloaded
 # 	Buildable:
-# 		Prerequisites: ~faction.fremen
+# 		Prerequisites: ~fremen_faction
 # 		Description: Fremen Main Battle Tank\nCan be fitted with Fremen to gain extra firepower
 # 	Armament:
 # 		Weapon: 80mm_H
@@ -891,7 +891,7 @@ ixian_heavykodatank:
 # combat_tank_fremen.bot1:
 # 	Inherits: combat_tank_fremen
 # 	Buildable:
-# 		Prerequisites: ~faction.fremen, ~botplayer
+# 		Prerequisites: ~fremen_faction, ~botplayer
 # 	ProductionCostMultiplier:
 # 		Multiplier: 125
 # 	Cargo:
@@ -1000,7 +1000,7 @@ ixian_stormraider:
 	ActorStatValues:
 		Upgrades: ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
-heavy_rocket_raider.ixian:
+ixian_heavy_rocket_raider:
 	Inherits@D2KV: ^D2KVehicle
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -1104,7 +1104,7 @@ heavy_rocket_raider.ixian:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
-		InitialUnits: heavy_inf.ixian, heavy_inf.ixian, heavy_inf.ixian, ixian_twinrockettrooper, ixian_shockinfantry
+		InitialUnits: ixian_heavy_inf, ixian_heavy_inf, ixian_heavy_inf, ixian_twinrockettrooper, ixian_shockinfantry
 		LoadingCondition: notmobile
 	WithCargoPipsDecoration:
 		Position: BottomLeft
@@ -1363,7 +1363,7 @@ ixian_ixprojector:
 		Weapon: d2k_projections
 		RequiresCondition: projection
 	DroneSpawnerMaster@steel_scalpel:
-		Actors: apparition.ixian, apparition.ixian, apparition.ixian, apparition.ixian, apparition.ixian
+		Actors: ixian_apparition, ixian_apparition, ixian_apparition, ixian_apparition, ixian_apparition
 		ArmamentNames: secondary
 		RespawnTicks: 250
 		IdleCheckTick: 75
@@ -1374,7 +1374,7 @@ ixian_ixprojector:
 	ActorStatValues:
 		Upgrades: ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
-apparition.ixian:
+ixian_apparition:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -1433,7 +1433,7 @@ apparition.ixian:
 	FireWarheadsOnDeath:
 		Weapon: d2k_basq
 	RenderSprites:
-		Image: apparition.ixian
+		Image: ixian_apparition
 		Palette: cloak
 	Cloak@TDcloak:
 
@@ -1526,7 +1526,7 @@ apparition.ixian:
 
 	### Artillery and Air Tree
 
-duelist_tank.ixian:
+ixian_duelist_tank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@exp: ^GainsExperienceRA
