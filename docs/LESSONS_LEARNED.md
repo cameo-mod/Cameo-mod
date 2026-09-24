@@ -99,6 +99,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [Trait shadows: a proof field proves the TYPE, not the DISPATCH (2026-09-23)](#trait-shadows-a-proof-field-proves-the-type-not-the-dispatch-2026-09-23)
 - [Boot-gate: verify YOUR process made the menu marker (2026-09-23)](#boot-gate-verify-your-process-made-the-menu-marker-2026-09-23)
 - [Concurrent boot-gates kill each other — and a stale shared `engine/bin` lies (2026-09-23)](#concurrent-boot-gates-kill-each-other--and-a-stale-shared-enginebin-lies-2026-09-23)
+- [⛔ The shared main checkout stays on `master` — a stale branch there looks like master renamed (2026-09-23)](#-the-shared-main-checkout-stays-on-master--a-stale-branch-there-looks-like-master-renamed-2026-09-23)
 - [The canonical engine update pipeline (binding, uniform process)](#the-canonical-engine-update-pipeline-binding-uniform-process)
 - [YAML-only AI personalities and dead squad-manager keys (2026-08-21)](#yaml-only-ai-personalities-and-dead-squad-manager-keys-2026-08-21)
 - [Opt-in AI unit compositions (2026-08-24)](#opt-in-ai-unit-compositions-2026-08-24)
@@ -119,6 +120,28 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [One weapon, one warhead — on the REFERENCE side too](#one-weapon-one-warhead--on-the-reference-side-too)
 - [A weapon's profile is the SUM of its warheads, not its biggest one](#a-weapons-profile-is-the-sum-of-its-warheads-not-its-biggest-one)
 - [Matching a warhead by its NAME fails, three different ways](#matching-a-warhead-by-its-name-fails-three-different-ways)
+
+---
+
+## ⛔ A tool must derive its target from its OWN worktree root — a stale path wrote into another agent's tree (2026-09-24)
+
+During the W27 batch-1 round, nine pack files in the `C:/tmp/dawn` worktree
+were found silently changed — 161 lines deleted across TD GDI+Nod, TS
+CABAL+Forgotten+Nod and D2k Ixian+Ordos, with no matching commit or stash
+entry. First blamed on a stash cycle; the real cause, disclosed by NOVA in
+`PLAN_2026-09-23_nova_w23ra.md` and confirmed by Claude-Local, was her
+orphan-cancel tool writing through a **stale hard-coded `/tmp` path** —
+Git Bash's `/tmp` and Windows' `C:\tmp` are different folders, and the
+mismatch put her writes inside DAWN's tree.
+
+**Rule:** a tool that edits the tree must resolve its target from its own
+`git rev-parse --show-toplevel` at run time — never from a hard-coded,
+remembered, or environment-derived path that can outlive the worktree it
+was captured in. Cross-check `git status` output in full (truncated status
+output hid the nine dirty files for a whole round) and, when in doubt,
+diff the worktree against `HEAD` per-file rather than trusting "I didn't
+touch that". Verified on GitHub: none of the deletions reached the pushed
+branch (0 `-Key@` removals vs master).
 
 ---
 
@@ -207,6 +230,31 @@ count as a locally-declared effect warhead (W6) — that is the correct way to p
 field drift on a template-provided effect node.
 
 ---
+
+## ⛔ The shared main checkout stays on `master` — a stale branch there looks like master renamed (2026-09-23)
+
+The maintainer's VS Code showed the main worktree as `devin/aurora/naming-ra1_allies` and asked why
+master had been renamed. It had not. `master` is the local branch, `origin/master` is GitHub's copy as
+last fetched, and the MAIN WORKTREE is just the folder `Documents/GitHub/Cameo-mod` — which had been
+left checked out on a disabled agent's branch, **358 commits behind master**, since 2026-09-07. So the
+maintainer's launches ran that old branch, its DLL was built from it, and 13 agent worktrees whose
+`engine/` is a junction to the main one were booting against it too.
+
+It cost more than confusion. That day another agent, looking for a commit, ran `git checkout
+origin/master -- .` and then `git reset --hard` in the main folder: six tracked files that had carried
+someone's uncommitted edits since at least 2026-09-21 (`.claude/settings.json`,
+`tools/hooks/bash_guard.py`, four Dune 2000 `rename_map_*.yaml`) came back as their committed state. No
+git object ever held those edits, so they are gone.
+
+**Rules:**
+- The main folder is `master`, fast-forwarded only, and nobody works in it — its `.agent-id` says so.
+  `Cameo-mod-fleet/sync_main_checkout.ps1` (scheduled every 15 min) fast-forwards it, rebuilds C# when
+  C# changed, and REFUSES — logging why — when the folder is on another branch or has tracked edits.
+- Work happens in a worktree of your own. Cross-tree questions use `git -C <path>` read verbs only.
+- `git checkout <ref> -- .` and `git reset --hard` overwrite tracked files with no undo. Never in a
+  folder you do not own, and in your own only after `git status` shows nothing you would miss.
+- Removing a worktree whose `engine/` is a junction: unlink the junction FIRST
+  (`[System.IO.Directory]::Delete(<path>\engine, $false)`), so nothing can recurse into the target.
 
 ## YAML-only AI personalities and dead squad-manager keys (2026-08-21)
 
@@ -2245,6 +2293,49 @@ weapon's `Projectile:`, element from `DamageTypes:`, platform from the actors th
 it.** Where no measurement exists, the assignment is a maintainer decision made from the compressed
 groups — never a regex over identifiers (`REFERENCE_EXTRACTION_PLAN.md` R21).
 
+## W23-RA correction round (2026-09-23, Nova) — four traps that each cost a re-pass
+
+**1. A covering `^Effect_*` edge on parent AND child is a boot crash, not a style issue.**
+When a follow-up pass adds `Inherits@fx_cover: ^Effect_X` to cover local typed
+`Warhead@` declares, check every WEAPON ancestor first: if `Parent` already
+carries (or will receive) the same `^Effect_X`, adding it to `Child` puts the
+name twice on one root-to-ancestor path — `MiniYaml.cs` throws
+"Parent type X was already inherited" at boot. `audit_duplicate_inherits.py`
+BLOCKING section reports exactly this class (not the advisory diamond section).
+Fix = drop the child's own edge; the template still reaches via the parent and
+resolution is unchanged (verified by resolved diff). ~40 W23-RA weapons needed it.
+
+**2. `^` template blocks are cross-file providers — weapon-level passes must never touch them.**
+Two separate "sweep" tools (a duplicate-warhead-edge collapse and an
+orphan-cancel remover) treated `^` blocks like concrete weapons and stripped
+their `Inherits` lines. Those templates are consumed by weapons in OTHER files
+(`GLDemolitionExplode` in the central `weapons.yaml` consumes
+`^RA2TerroristLegacy` from a ContentPack file) — the breakage surfaced as
+EMPTY-TYPE warheads in files the pass never touched. The only safe rule:
+a `^` block must stay byte-identical to HEAD unless the pass is *about* that
+template. Verify by restoring every `^` block to its `git show HEAD:` content
+and re-running the repo-wide resolved diff.
+
+**3. Git Bash `/tmp` is NOT `C:\tmp` — Python resolves it to the drive root.**
+`open('/tmp/orphans.txt')` from Python reads `C:\tmp\orphans.txt`; bash's
+`/tmp` is the user temp dir. A stale `C:\tmp\orphans.txt` from another
+worktree's session redirected a line-number-based deletion tool into that
+worktree's files. It happened to delete exactly the orphan cancels that
+worktree's own audit had flagged (positions still valid), but the hazard is
+real: **always pass `cygpath -w` paths into Python tools, and before a
+line-number deletion verify each target line actually contains the expected
+pattern** (e.g. starts with `-` for cancels). Refuse otherwise.
+
+**4. `W7_BASELINE` in `audit_weapon_shape.py` is stale on master.**
+Both master and this branch report 963 vs the hardcoded 957 — the +6 is
+fleet-wide weapon-inherit debt that landed after the ratchet was set, not a
+regression in any one branch. When a ratchet fails, first re-run the audit in
+a clean master worktree with master's own script copy (`find_repo_root`
+resolves from the script's path, NOT the cwd — running another tree's script
+silently scans the wrong tree).
+
+---
+
 ## `extract_stats` carries seeded `design.*` fields forward by actor KEY — a rename silently drops them (2026-09-23)
 
 `load_existing_design` preserves judgment data (`design.category`, `unit_class`, `special`,
@@ -2276,6 +2367,16 @@ the meter feed with **damage dealt**, while `ApplyPhysicalState` warheads apply 
 flat form; folding them into a damage node would make a support power's debuff depend on
 its damage roll. `Amount: 5000` ≈ quarter-meter on the 20000-point `Resonance` scale.
 
+And the follow-up trap the same conversion shipped (DAWN's double-feed finding,
+2026-09-24): a `GrantExternalCondition`/`ApplyPhysicalState` warhead with a `Range`
+wider than the damage warhead's `Spread` is an **area channel**, not "the condition
+grant the meter subsumes". The sonic `_Debuff` nodes deliberately marked a ring of
+`Range = 2×Spread` — units beyond the blast got the mark without damage. Deleting them
+(#476) shrank the mark to the damage footprint on all 15 sonic templates. When
+converting a condition grant to a meter feed, compare `Range` to the damage `Spread`:
+wider = keep as a flat feed (the ring is the payload), equal-or-smaller = redundant.
+`audit_physical_state_warheads` exempts `Range > Spread` fixed feeds for exactly this.
+
 Sign-convention trap from W9 (2026-09-23): `ChangesHealth` damages with a **negative**
 step (`PercentageStep: -1`), but `ChangesHealthProportionalToPhysicalState` damages with a
 **positive** `DamageAtMaximum` (the trait only inflicts when the interpolated amount is
@@ -2284,6 +2385,24 @@ step (`PercentageStep: -1`), but `ChangesHealthProportionalToPhysicalState` dama
 `PercentageStep: -1, Delay: 20` exactly at full dose, and scales down with the meter
 (dose-response). `DamageAtMinimum: 0` keeps a zero dose inert; `DamageThreshold: 0`
 applies whenever the meter is above zero.
+
+## The naming audit sees file stems only — pair it with a raw disk scan (2026-09-24)
+
+`audit_naming_damage.py` scans `mods/cameo/bits/**` stems through `SPRITE_EXT` and a
+known-actor-id regex. Two blind spots surfaced in the ra1_soviets cleanup: **`.tem`
+theater files are outside `SPRITE_EXT`**, and **doubled stems built from non-actor ids**
+(`ra1_soviets_promotion_unlockX`, `ra1_soviets_upgrade_X`) match no actor id so N1
+cannot see them. A `bits/` rglob found 15 more damaged files than the audit's 68 —
+always run the raw scan before writing a map. Sequence-name damage is likewise
+invisible: `ra1_soviets_sovietbarracks` as an `Image:`/`Inherits:` id flags nothing,
+but is the same redundant-word class. Sweep it in the map's `actors:` section — the
+replacer is boundary-safe and catches every reference.
+
+`tools/rename/rename_map_ra1_soviets.yaml` remains stamped STALE — DO NOT APPLY.
+`gen_rename_maps.py` cannot emit this map either: it proposes §9.1-grammar renames,
+while actor ids were already 106/106 compliant (`ad7c5e232` + revert). The applied
+artifact is the hand-derived `rename_map_ra1_soviets_n134.yaml` — 14 sequence ids +
+83 files, zero dangling refs, N1 16→0 / N3 4→0 / N4 48→0 for the faction.
 
 Three traps from W10 (2026-09-24), all the same species — "the meter is not the binary
 condition it replaced":

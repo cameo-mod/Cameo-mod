@@ -1,15 +1,15 @@
 # audit_release_drift - measured against the build players played
 
 
-baseline: **playtest-20260709** (`8c238ffc3`), 1912 weapons · 1348 shared with the tree · **1184 unchanged**
+baseline: **playtest-20260709** (`8c238ffc3`), 1912 weapons · 1343 shared with the tree · **1187 unchanged**
 
 | code | check | count | ratchet |  |
 |---|---|---|---|---|
-| D1 | INFLATED - deals more than it shipped | 108 | 133 | PASS |
+| D1 | INFLATED - deals more than it shipped | 100 | 133 | PASS |
 | D2 | WEAKENED - deals less than it shipped | 56 | 62 | PASS |
 | D3 | EXTREME - 3x or worse, either way | 17 | 27 | PASS |
-| D4 | UNMATCHED - in the release, gone under that name | 564 | 335 | FAIL |
-| D5 | ACCEPTED value edit (informational) | 33 | 43 | PASS |
+| D4 | UNMATCHED - in the release, gone under that name | 569 | 335 | FAIL |
+| D5 | ACCEPTED value edit (informational) | 29 | 43 | PASS |
 
 
 ## D3 EXTREME - 17 weapon(s) a player will feel
@@ -42,12 +42,12 @@ Only the 194 pinned ownership renames are followed. Wrapper branches, unreviewed
 
 | measure | lineage view |
 |---|---|
-| matched | 1504 |
-| unmatched | 408 |
-| inflated | 133 |
+| matched | 1499 |
+| unmatched | 413 |
+| inflated | 125 |
 | weakened | 81 |
 | extreme | 22 |
-| accepted | 34 |
+| accepted | 30 |
 
 
 Recovered **156** release identities hidden by name-only matching. Raw D4 and all ratchets above remain unchanged.

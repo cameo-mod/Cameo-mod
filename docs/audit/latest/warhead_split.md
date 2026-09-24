@@ -1,21 +1,17 @@
 # Warhead-split guard (multi-warhead over-damage)
 
 
-## FAIL 1 — broadcast fingerprint / every MAIN identical (23 vs baseline 69)
+## FAIL 1 — broadcast fingerprint / every MAIN identical (14 vs baseline 69)
 
-_at or below baseline_ — pre-existing **W24** debt (23 weapons), not a regression. The ratchet catches new broadcasts without blocking every commit on the existing pile. **Lower `BROADCAST_BASELINE` as W24 collapses weapons; never raise it.**
+_at or below baseline_ — pre-existing **W24** debt (14 weapons), not a regression. The ratchet catches new broadcasts without blocking every commit on the existing pile. **Lower `BROADCAST_BASELINE` as W24 collapses weapons; never raise it.**
 
 | weapon | mains | per_warhead | total |
 |---|---|---|---|
 | 12MissilesSpawnerScud | 4 | 24000 | 96000 |
-| D2K_Rocket_Trooper2 | 3 | 8000 | 24000 |
 | DredMissile | 3 | 30000 | 90000 |
 | IdolCannon | 4 | 10000 | 40000 |
-| JimRaynorMachineGun | 2 | 2000 | 4000 |
 | NaxiMP40 | 3 | 2000 | 6000 |
 | NaxiMP40_elite | 3 | 2000 | 6000 |
-| RA2Robotmm | 3 | 8000 | 24000 |
-| RA2Robotmm_elite | 3 | 8000 | 24000 |
 | RA2SCUD | 3 | 30000 | 90000 |
 | RA2SCUD_fire | 3 | 30000 | 90000 |
 | RA2SCUD_tesla | 3 | 30000 | 90000 |
@@ -25,11 +21,6 @@ _at or below baseline_ — pre-existing **W24** debt (23 weapons), not a regress
 | TSVulcan | 2 | 2000 | 4000 |
 | ThermobaricFlame | 2 | 2000 | 4000 |
 | V3Explode | 3 | 10000 | 30000 |
-| ordos_autogunturret | 3 | 2000 | 6000 |
-| ra1_soviets_teslayak_tesla_bomb | 4 | 10000 | 40000 |
-| td_nod_attacksubmarine_nodtorptube | 2 | 8000 | 16000 |
-| td_nod_attacksubmarine_nodtorptubeblackmarket | 2 | 8000 | 16000 |
-| td_nod_reconbike_rocket | 2 | 7985 | 15970 |
 
 
 ## Review — exact gameplay restorations (0)
@@ -49,21 +40,17 @@ _none found_
 None. ✅
 
 
-## Review — high uniform stacks (informational, 11)
+## Review — high uniform stacks (informational, 7)
 
 Allowed, but 8000+ per-warhead x N is a big total — confirm it is intended (not flattening residue).
 
 | weapon | mains | per_warhead | total |
 |---|---|---|---|
 | 12MissilesSpawnerScud | 4 | 24000 | 96000 |
-| D2K_Rocket_Trooper2 | 3 | 8000 | 24000 |
 | DredMissile | 3 | 30000 | 90000 |
 | IdolCannon | 4 | 10000 | 40000 |
-| RA2Robotmm | 3 | 8000 | 24000 |
-| RA2Robotmm_elite | 3 | 8000 | 24000 |
 | RA2SCUD | 3 | 30000 | 90000 |
 | RA2SCUD_fire | 3 | 30000 | 90000 |
 | RA2SCUD_tesla | 3 | 30000 | 90000 |
 | V3Explode | 3 | 10000 | 30000 |
-| ra1_soviets_teslayak_tesla_bomb | 4 | 10000 | 40000 |
 

@@ -20,10 +20,18 @@ wc2footmanslice:
 		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
 
 wc2peasantsmack:
-	Inherits: wc2footmanslice
+	Inherits@w70: ^Warhead_Melee_Medium
+	Inherits@w71: ^Projectile_InstantHit
+	Inherits@w72: ^Effect_Melee_Medium
 	Report: wc2_peonatak.aud
 
 # 3-9 WC2 damage. 3 Base, 6 Pierce.
+	ReloadDelay: 15
+	Range: 1333
+	Warhead@Melee_Medium: AreaDamage
+		Damage: 12000
+	Warhead@Effect: CreateEffect
+		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
 
 wc2arrowFire:
 	Inherits@collapseflat: ^Warhead_CannonHE_Medium_Flat
@@ -330,7 +338,16 @@ SiegeEngineCannon:
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 wc2demolitionsquadMelee:
-	Inherits: wc2footmanslice
+	Inherits@w70: ^Warhead_Melee_Medium
+	Inherits@w71: ^Projectile_InstantHit
+	Inherits@w72: ^Effect_Melee_Medium
+	ReloadDelay: 15
+	Range: 1333
+	Warhead@Melee_Medium: AreaDamage
+		Damage: 12000
+	Warhead@Effect: CreateEffect
+		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
 
 wc2demolitionsquadTargeting:
 	ValidTargets: Ground, Water
@@ -682,22 +699,199 @@ wc2gruntslice:
 		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
 
 wc2ogremageRunes_Hit:
-	Inherits: wc2demolitionsquadExplode
+	Inherits@w70: ^Warhead_Demolition_Heavy
+	Inherits@w71: ^Effect_Demolition_Heavy
 	Warhead@Demolition_Heavy:
 		PercentageScale: 19556
 		Damage: 101250
+	Warhead@Effect1: CreateEffect
+		Explosions: wc2_building_collapse
+		ImpactSounds: explode.aud
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@ShieldHit: GrantExternalCondition
+		Duration: 5
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Report: aacanon3.aud
+	Projectile: InstantHit
+		Image: 50CAL
+		Speed: 10000
+		Inaccuracy: 250
+		Shadow: true
+		Blockable: false
+		LaunchAngle: 66
+		Arm: 0
+		AllowSnapping: true
+		HorizontalRateOfTurn: 30
+		VerticalRateOfTurn: 30
+		TrailImage: smokey
+		TrailInterval: 1
+		ContrailLength: 10
+		ContrailZOffset: 4000
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+		ContrailStartWidth: 50
+		ContrailEndWidth: 100
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		CloseEnough: 500
+		Acceleration: 3
+		HomingActivationDelay: 2
+		RangeLimit: 25000
+		PointDefenseTypes: Missile
 wc2skeletonpunch:
-	Inherits: wc2footmanslice
+	Inherits@w70: ^Warhead_Melee_Medium
+	Inherits@w71: ^Projectile_InstantHit
+	Inherits@w72: ^Effect_Melee_Medium
 	Report: wc2_punch.aud
+	ReloadDelay: 15
+	Range: 1333
+	Warhead@Melee_Medium: AreaDamage
+		Damage: 12000
+	Warhead@Effect: CreateEffect
+		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
 
 wc2_tower_axe:
-	Inherits: wc2_tower_arrow
+	Inherits@w70: ^Warhead_Arrow_Heavy
 	Projectile:
 		Image: wc2_orc_trollaxethrower_axe
 
 ####################################################################################################
 #		WEAPONS common
 ####################################################################################################
+	ReloadDelay: 34
+	Range: 8750
+	Warhead@Arrow_Heavy: AreaDamage
+		Damage: 19000
+		PercentageScale: 0
+	Report: wc2_bowfire.aud
+	Projectile: Missile
+		Duration: 16
+		Inaccuracy: 0
+		BeamColor: 0080FFC8
+		HelixPlayerColor: true
+		Blockable: false
+		ZOffset: 2048
+		HitAnim:
+		ContrailZOffset: 4000
+		ContrailStartColor: EECCAA88
+		ContrailEndColor: 88664422
+		ContrailStartWidth: 40
+		ContrailEndWidth: 80
+		ContrailLength: 8
+		Speed: 600
+		HorizontalRateOfTurn: 60
+		VerticalRateOfTurn: 60
+		PointDefenseTypes: Missile
+		RangeLimit: 12000
+		AllowSnapping: True
+		CloseEnough: 600
+	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
+		AffectsParent: false
+		Spread: 125
+		Damage: 3
+		Versus:
+			REFLECTOR: 50
+			Shield: 35
+			Superheavy: 25
+			Heavy: 24
+			Medium: 23
+			Light: 22
+			Scout: 21
+			Heroic: 20
+			Plate: 19
+			Flak: 18
+			None: 17
+			Steel: 16
+			Concrete: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Incendiary
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water, Air
+	Warhead@Effect: CreateEffect
+		Explosions: small_poof
+		ImpactSounds: wc2_bowhit.aud
+		ValidTargets: Ground, Water, Air
+		ImpactActors: false
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 3
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@ChaingunPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 100
+		Damage: 3
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Concrete: 11
+			Medium: 10
+			Helicopter: 9
+			Steel: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
+		UpdatesUnitStatistics: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piffs
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	InvalidTargets: wall
+	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: wall
+		Spread: 35
+		Damage: 3
+		Falloff: 100, 85, 70, 55, 40, 25, 10
+		Versus:
+			Shield: 17
+			None: 16
+			Fighter: 15
+			Flak: 14
+			Bomber: 13
+			Plate: 12
+			Helicopter: 11
+			Heroic: 10
+			Spaceship: 9
+			Scout: 8
+			Light: 7
+			Medium: 6
+			Heavy: 5
+			Superheavy: 4
+			Steel: 3
+			Concrete: 2
+			Wood: 1
+		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
+		UpdatesUnitStatistics: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+	-TargetActorCenter:
 
 wc2cannontowerFire:
 	Inherits@wh: ^Warhead_CannonHE_Heavy

@@ -33,7 +33,7 @@ ra1_soviets_barracks:
 	ProvidesPrerequisite:
 		Prerequisite: rabarracks
 	RenderSprites:
-		Image: ra1_soviets_sovietbarracks
+		Image: ra1_soviets_barracks
 		PlayerPalette: raplayer
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
@@ -94,7 +94,7 @@ ra1_soviets_warfactory:
 	ProvidesPrerequisite:
 		Prerequisite: vehicleproduction
 	RenderSprites:
-		Image: ra1_soviets_sovietwarfactory
+		Image: ra1_soviets_warfactory
 		PlayerPalette: raplayer
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
@@ -135,7 +135,7 @@ ra1_soviets_largefactory:
 		Sequence: smoke
 		RequiresCondition: !build-incomplete
 	RenderSprites:
-		Image: ra1_soviets_sovietlargefactory
+		Image: ra1_soviets_largefactory
 		PlayerPalette: raplayer
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
@@ -547,7 +547,7 @@ ra1_soviets_airfield:
 		SquadOffset: 1792,1792,0
 	SupportPowerChargeBar:
 	RenderSprites:
-		Image: ra1_soviets_sovietairfield
+		Image: ra1_soviets_airfield
 		PlayerPalette: raplayer
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
@@ -624,7 +624,7 @@ ra1_soviets_techcenter:
 	Production@Research:
 		Produces: Research
 	RenderSprites:
-		Image: ra1_soviets_soviettechcenter
+		Image: ra1_soviets_techcenter
 		PlayerPalette: raplayer
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer

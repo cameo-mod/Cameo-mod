@@ -25,9 +25,9 @@
 | simcity | 0 | 4 | mods\cameo\rules\simcity.yaml |
 | wc2_critter | 0 | 4 | mods\cameo\rules\warcraft2.yaml |
 | eden | 0 | 3 | mods\cameo\rules\outpost2.yaml |
-| ra1_soviets | 121 | 3 | mods\cameo\rules\heroes.yaml |
 | sglmobilesupplytruck | 0 | 3 | mods\cameo\rules\shockwave.yaml |
 | op2 | 0 | 2 | mods\cameo\rules\outpost2.yaml |
+| ra1_soviets | 121 | 2 | mods\cameo\rules\heroes.yaml |
 | ra2_ambu | 2 | 2 | mods\cameo\rules\redalert2.yaml |
 | ra2_bcab | 2 | 2 | mods\cameo\rules\redalert2.yaml |
 | ra2_bus | 2 | 2 | mods\cameo\rules\redalert2.yaml |
@@ -93,7 +93,7 @@
 | swdroidheli | 0 | 1 | mods\cameo\rules\starwars.yaml |
 | swlaat | 0 | 1 | mods\cameo\rules\starwars.yaml |
 | swxwing | 0 | 1 | mods\cameo\rules\starwars.yaml |
-| td_nod | 69 | 1 | mods\cameo\rules\tiberiaalliances.yaml |
+| td_nod | 70 | 1 | mods\cameo\rules\tiberiaalliances.yaml |
 | ts | 39 | 1 | mods\cameo\rules\misc.yaml |
 | upsusagunship3 | 0 | 1 | mods\cameo\rules\shockwave.yaml |
 | upusaleaflet | 0 | 1 | mods\cameo\rules\generals.yaml |
@@ -116,7 +116,7 @@
 | worms | 0 | 1 | mods\cameo\rules\worms.yaml |
 | zmcv | 0 | 1 | mods\cameo\rules\z.yaml |
 
-Fully converted prefixes (83): air, asianalliance, atreides, banshee, bomber, cabal, cargoship, carryall, cgcnst, combat, corrino, cruiser, cryo, d2k, deathcash, drone, duelist, egcnst, eye, farasha, forgotten, fremen, futuretech, grun, harbinger, harkonnen, heavy, heavydrone, inspect, ixian, japan, kami, landcarr, latinsyndicate, light, mig, missile, nax, naxis, ordos, ornithopter, pelican, phoenix, protoss, qacst, ra1_allies, ra1_badger, ra2_allies, ra2_soviets, ra2_yuri, ra2hind, resonance, rocket, schwarzermond, scrapcar, scrapcar2, siege, sietch, sonic, steelconsortium, swarmer, td_gdi, team, terran, tkm, ts_bus, ts_gdi, ts_nod, ts_pickup, ts_pickupb, ts_sedan, ts_trucka, ts_truckb, ts_wini, twister, up, upgrade, wc2_humans, wc2_orcs, wraith, yakolev, yuri, zerg
+Fully converted prefixes (79): air, asianalliance, atreides, banshee, cabal, cargoship, carryall, cgcnst, combat, corrino, cruiser, cryo, d2k, deathcash, drone, duelist, egcnst, eye, farasha, forgotten, fremen, futuretech, grun, harbinger, harkonnen, heavy, heavydrone, inspect, ixian, japan, landcarr, latinsyndicate, light, mig, missile, nax, naxis, ordos, ornithopter, protoss, qacst, ra1_allies, ra1_badger, ra2_allies, ra2_soviets, ra2_yuri, ra2hind, resonance, rocket, schwarzermond, scrapcar, scrapcar2, siege, sietch, sonic, steelconsortium, swarmer, td_gdi, team, terran, tkm, ts_bus, ts_gdi, ts_nod, ts_pickup, ts_pickupb, ts_sedan, ts_trucka, ts_truckb, ts_wini, twister, up, upgrade, wc2_humans, wc2_orcs, wraith, yakolev, yuri, zerg
 
 ## P2 — actors whose id does not match the pack's dominant prefix
 
@@ -166,20 +166,6 @@ Fully converted prefixes (83): air, asianalliance, atreides, banshee, bomber, ca
 | D2k/Ordos | carryall_husk.ordos | ordos |
 | D2k/Ordos | carryall_huskvtol.ordos | ordos |
 | D2k/Ordos | team_upgrade.ordos_stealthtechnology | ordos |
-| RedAlert2Mod/AsianAlliance | asianalliance_kami_chemical | asianalliance |
-| RedAlert2Mod/AsianAlliance | asianalliance_kami_asdf | asianalliance |
-| RedAlert2Mod/AsianAlliance | asianalliance_kami_husk | asianalliance |
-| RedAlert2Mod/AsianAlliance | asianalliance_kami_chemical_husk | asianalliance |
-| RedAlert2Mod/AsianAlliance | asianalliance_phoenix_husk | asianalliance |
-| RedAlert2Mod/AsianAlliance | asianalliance_harbinger_husk | asianalliance |
-| RedAlert2Mod/AsianAlliance | asianalliance_pelican_husk | asianalliance |
-| RedAlert2Mod/AsianAlliance | asianalliance_bomber_minebomb | asianalliance |
-| RedAlert2Mod/AsianAlliance | asianalliance_bomber_minebomb2 | asianalliance |
-| RedAlert2Mod/AsianAlliance | asianalliance_bomber_husk | asianalliance |
-| RedAlert2Mod/AsianAlliance | asianalliance_cgcnst_infiltrated | asianalliance |
-| RedAlert2Mod/AsianAlliance | asianalliance_upgrade_tsunami | asianalliance |
-| RedAlert2Mod/AsianAlliance | asianalliance_upgrade_wayofthedragon_proxy_actor | asianalliance |
-| RedAlert2Mod/AsianAlliance | asianalliance_upgrade_asiandiplomacy_proxy_actor | asianalliance |
 | RedAlert2Mod/Consortium | inspect_husk.steel | steelconsortium |
 | RedAlert2Mod/Consortium | twister_husk.steel | steelconsortium |
 | RedAlert2Mod/Consortium | grun_husk.steel | steelconsortium |
@@ -205,8 +191,6 @@ Fully converted prefixes (83): air, asianalliance, atreides, banshee, bomber, ca
 | RedAlert2Mod/Syndicate | scrapcar_driveby.latin | latinsyndicate |
 | RedAlert2Mod/Syndicate | scrapcar2_demo.latin | latinsyndicate |
 | RedAlert2Mod/Syndicate | scrapcar2_driveby.latin | latinsyndicate |
-| TiberianDawn/GDI | team_upgrade.up_lightweightarmorplating | td_gdi |
-| TiberianDawn/Nod | team_upgrade.up_advancedguerillatactics | td_nod |
 
 ## P3 — content.yaml manifest vs disk / nonstandard filenames
 
@@ -220,4 +204,4 @@ Fully converted prefixes (83): air, asianalliance, atreides, banshee, bomber, ca
 
 - actor ids violating the lowercase grammar: **1537** (e.g. 1TNK.camea, 2100A2MAT, 2100A2PT, 2100A2TIT, 2100A2VET, 2100AA, 2100AACH, 2100AAMAT)
 
-Total findings: 694
+Total findings: 677

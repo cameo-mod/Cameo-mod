@@ -1,5 +1,54 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-25b — EMBER: `weapons.yaml` W7 remainder (61 edges → 0)
+
+`Agent: EMBER · branch devin/ember/w7-central · base 5b89b1341`
+
+The last unclaimed central file off NOVA's corrected census — claimed on the
+fleet board after verifying §2 set-B lock released + no live editor. All 55
+weapons / 61 weapon-parent edges converted via `nova_w7conv` (0 held — no
+resolved ExtraDamage in the set). GLA toxin/explosion cluster, SWG lasers,
+misc (`bowFire`, `wc_tower_fire`, `MADTankTargeting`, `RockDebris*`, `Spit_AA`…).
+
+Verification: flat-map resolved compare vs `5b89b1341` — 0/2,984 content diffs;
+find_empty_warhead 0; orphan_cancels 0 (6 pin-carried markers cleaned);
+find_orphan_old_keys 0 real; no multi-bare `Inherits`; boot-gate PASS.
+
+W7 weapon-parent census after this: `tiberiandawn` 1 (TD owner) ·
+`redalert2mod` 5 (NOVA held-class) · `d2k` 26 + `starcraft` 4 (DAWN) ·
+`tiberiansun` 24 (TS owner). Every other mounted central file is at zero.
+
+---
+
+## 2026-09-25 — EMBER: W7 unclaimed remainder (`outpost2.yaml` + `warcraft2.yaml`)
+
+`Agent: EMBER (Devin / SWE-2 Max) · branch devin/ember/w7-remainder · base 5b89b1341`
+
+Claimed the two unclaimed weapon-parent-edge files off NOVA's corrected census
+(`weapons.yaml` 61 stays "Claude to assign"; `tiberiandawn`/`tiberiansun`/`d2k`/`starcraft`
+stay with their owners). Ran NOVA's `nova_w7conv` pipeline verbatim (plan → apply →
+resolved-diff pin fixup) plus the orphan-cancel clean step:
+
+- **21 weapon-parent edges converted** (16 outpost2, 5 warcraft2) → last-per-kind
+  `^Warhead_*/^Projectile_*/^Effect_*` edges + verbatim pins of parent-local payloads.
+- **4 edges HELD** — resolve to `ExtraDamage` (pending Claude's A/B/C ruling):
+  `edenMobileLaserTiger`, `edenMobileDefenceLaser`, `edenMobileThorsHammerTiger`,
+  `wc2highArrowFire`.
+- **D1 fix:** `edenRailgun`'s duplicate bare `Inherits:` labelled `Inherits@fx:`
+  (merge order preserved, resolved-identical).
+- **Verification:** flat-map resolved compare vs `5b89b1341` — 0 content diffs across
+  all 2,984 weapons; `find_empty_warhead` 0; `audit_orphan_cancels` 0 (was 53 mid-flight:
+  pinned `-InvalidTargets`/`-Warhead@*` markers from parent blocks that have no provider
+  under the new `^`-only edges — deleted, still resolved-identical);
+  `find_orphan_old_keys` 0 real; boot-gate PASS.
+
+Lesson worth keeping: `nova_w7conv`'s pin fixup copies resolved subtrees verbatim —
+inherited `-Key:` cancel markers ride along as `-InvalidTargets:`/`--InvalidTargets:`
+lines that become orphans under the new parents. Always run `audit_orphan_cancels.py`
+after fixup; baseline is 0.
+
+---
+
 ## ⭐ 2026-09-23 — DEVIN-CLOUD (AI lane): phases 1–3 are all on master; phase 4 starts
 
 `Agent: DEVIN-CLOUD · lane: AI bot modules · working off master @ 1e27366c9`
@@ -1607,6 +1656,23 @@ the master sum had drifted, twins/companions kept verbatim; `multi_main_fired_we
 is now **27** (26 RA-family still in Nova review + `DRPlasmaTankWeapon` (Claude) +
 the `tesla_bomb` verbatim exception). **2026-09-23: now 25** — #439 (NOVA batch-1)
 landed; PR #452 (NOVA batch-2) folds the RA2Mod set, leaving `DRPlasmaTankWeapon`.
+**That last one is Dark Reign's Plasma Tank weapon and is PARKED (maintainer 2026-09-23: Dark
+Reign is "something for way later").** Dark Reign is not mounted; the weapon is reachable only
+through `^IFVConditions`' `Armament@plasma`, whose `ifv-plasma` condition nothing grants (the whole
+`PassengerConditions` block is commented out), so it cannot fire in game. **W24 has no live debt.**
+
+W23-RA status (2026-09-23, Nova, `devin/nova/w23-ra`, PR #472): all 16 owned
+RA-family weapon files retrofitted to the 3-way split across 16 boot-gated
+batches, then a same-day correction round fixed the audit regressions the
+first pass introduced. Final state: repo-wide resolved diff vs master = **0
+drifted weapons** (2149 scanned); `audit_weapon_shape` improves on master on
+every axis (W1 289/506, W2 122/281, W3 7/12, W4 42/50, W6 675/692, W8 361/672;
+W7 963 = master, stale ratchet); orphans 0, empty warheads 0, blocking
+dup-inherits 0; boot-gate PASS. Held edges awaiting Claude's ExtraDamage
+ruling: Tesla/Laser/Railgun/ChargedTesla + `^LegacyLaserChipCompatibility`,
+plus support keeps (`^SniperWeapon`, `^HealingWeapon`, `^RepairWeapon`,
+`^DogJaw`, `^NaxOxidationShells`). Correction-round lessons in
+`docs/LESSONS_LEARNED.md` ("W23-RA correction round").
 
 ### ✅ CLOSED — THE ANTI-AIR CONVENTION. Ruled by the maintainer 2026-09-08.
 
@@ -2070,6 +2136,14 @@ mandatory.
 
 **The rule it earns: a rename that makes an id LONGER is a regression until proven
 otherwise.** A batch that raises N4 has failed, whatever its compliance percentage says.
+
+✅ **2026-09-24 residue cleanup (EMBER):** the actor half was long since corrected —
+ids are 106/106 compliant — but the bad rename's damage survived in sequence names
+and filenames (`ra1_soviets_sovietbarracks` seqs, `actordogname` files,
+`upgrade_*upgrade`/`promotion_unlock*` doubled stems, `sovietX_ra1_allies_alliedY`
+compounds). Cleared by `tools/rename/rename_map_ra1_soviets_n134.yaml` — 14 sequence
+ids + 83 asset files, zero dangling refs, faction N1/N3/N4 all to 0. The stamped
+`rename_map_ra1_soviets.yaml` stays DO-NOT-APPLY.
 
 ## ⭐ NEW WORK SPECIFIED 2026-09-07 — two maintainer orders, neither built
 

@@ -1,6 +1,6 @@
 # audit_multiplier_modifiers — *Multiplier Modifier integer percent check
 
-*Multiplier trait families seen: 1760
+*Multiplier trait families seen: 1758
 
 | trait family |
 |---|
@@ -154,7 +154,6 @@
 | `DamageMultiplier@Runes` |
 | `DamageMultiplier@SClass` |
 | `DamageMultiplier@SIEGEMAMMOTHPARITY` |
-| `DamageMultiplier@SONICDEBUFF` |
 | `DamageMultiplier@Salvaged1` |
 | `DamageMultiplier@ScoutInfantryBuff` |
 | `DamageMultiplier@Secondary` |
@@ -601,9 +600,9 @@
 | `FirepowerMultiplier@WC2SwordUpg2` |
 | `FirepowerMultiplier@airforce` |
 | `FirepowerMultiplier@artilleryjammer` |
-| `FirepowerMultiplier@asianalliance_militia` |
 | `FirepowerMultiplier@asianalliance_doctrine_heavypulverizerweapons` |
 | `FirepowerMultiplier@asianalliance_doctrine_modernizedinfantryequipment` |
+| `FirepowerMultiplier@asianalliance_militia` |
 | `FirepowerMultiplier@asianalliance_upgrade_celestialpower` |
 | `FirepowerMultiplier@asianalliance_upgrade_dragonfire` |
 | `FirepowerMultiplier@asianalliance_upgrade_wayofthedragon` |
@@ -1574,7 +1573,6 @@
 | `SpeedMultiplier@RobotEnergizable3` |
 | `SpeedMultiplier@RobotEnergizable4` |
 | `SpeedMultiplier@RobotEnergizable5` |
-| `SpeedMultiplier@SONICDEBUFF` |
 | `SpeedMultiplier@SQUID` |
 | `SpeedMultiplier@SWTargetableWalker` |
 | `SpeedMultiplier@Salvaged1` |
