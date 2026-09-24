@@ -970,7 +970,9 @@ ra1_soviets_mortarsoldier_siegemortarthermobaricexplode:
 	MinRange: 2165
 	Report: tnkfire2.aud
 ra1_soviets_shocktrooper_portatesla_emp:
-	Inherits: PortaTesla
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Heavy
 	Range: 5932
 	Warhead@Tesla_Heavy:
 		IntegrityScale: 150
@@ -979,18 +981,37 @@ ra1_soviets_shocktrooper_portatesla_emp:
 		Damage: 4551
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 10000
+	ReloadDelay: 40
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+	Report: shktrop1.aud
 
 ra1_soviets_shocktrooper_portateslaarc_emp:
-	Inherits: ra1_soviets_shocktrooper_portatesla_emp
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Heavy
 	Warhead@TeslaArc: FireShrapnel
 		Weapon: ra1_soviets_shocktrooper_portateslafragment
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	ReloadDelay: 40
+	Range: 5932
+	Warhead@Tesla_Heavy: AreaDamage
+		Damage: 9102
+		IntegrityScale: 150
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		Damage: 4551
+		DamageTypes: Tesla
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 10000
+	Report: shktrop1.aud
 
 ra1_soviets_shocktrooper_portateslafragment:
-	Inherits: ra1_soviets_shocktrooper_portateslaarc_emp
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Heavy
 	Range: 2326
 	Warhead@Tesla_Heavy:
 		Damage: 4551
@@ -999,7 +1020,10 @@ ra1_soviets_shocktrooper_portateslafragment:
 		Damage: 2275
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 5000
-	-Warhead@TeslaArc:
+	ReloadDelay: 40
+	Warhead@Tesla_Heavy: AreaDamage
+		IntegrityScale: 150
+	Report: shktrop1.aud
 
 ra1_soviets_zapper_zapperportatesla:
 	Inherits@wh: ^Warhead_Tesla_Heavy
@@ -1017,16 +1041,30 @@ ra1_soviets_zapper_zapperportatesla:
 		Damage: 16000
 
 ra1_soviets_zapper_zapperportateslaarc:
-	Inherits: ra1_soviets_zapper_zapperportatesla
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Heavy
 	Warhead@TeslaArc: FireShrapnel
 		Weapon: ra1_soviets_zapper_zapperportateslafragment
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	ReloadDelay: 32
+	Range: 5000
+	Warhead@Tesla_Heavy: AreaDamage
+		Damage: 32000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		Damage: 16000
+		DamageTypes: Tesla
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 16000
+	Report: shktrop1.aud
 
 ra1_soviets_zapper_zapperportateslafragment:
-	Inherits: ra1_soviets_zapper_zapperportateslaarc
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Heavy
 	Range: 2500
 	Warhead@Tesla_Heavy:
 		Damage: 16000
@@ -1035,7 +1073,8 @@ ra1_soviets_zapper_zapperportateslafragment:
 		Damage: 8000
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 8000
-	-Warhead@TeslaArc:
+	ReloadDelay: 32
+	Report: shktrop1.aud
 
 PointDefenseTesla:
 	Inherits@wh: ^Warhead_Tesla_Heavy
@@ -1053,7 +1092,9 @@ PointDefenseTesla:
 		ValidTargets: Ground, Air, Missile, Bullet, BallisticMissile
 		Damage: 5000
 ra1_soviets_teslatank_ttankzap_emp:
-	Inherits: TTankZap
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Heavy
 	Range: 7898
 	Warhead@Tesla_Heavy:
 		IntegrityScale: 150
@@ -1062,18 +1103,37 @@ ra1_soviets_teslatank_ttankzap_emp:
 		Damage: 16399
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
+	ReloadDelay: 80
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+	Report: tesla1.aud
 
 ra1_soviets_teslatank_ttankzaparc_emp:
-	Inherits: ra1_soviets_teslatank_ttankzap_emp
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Heavy
 	Warhead@TeslaArc: FireShrapnel
 		Weapon: ra1_soviets_teslatank_ttankzaparcteslafragment1_emp
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	ReloadDelay: 80
+	Range: 7898
+	Warhead@Tesla_Heavy: AreaDamage
+		Damage: 32798
+		IntegrityScale: 150
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		Damage: 16399
+		DamageTypes: Tesla
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 20000
+	Report: tesla1.aud
 
 ra1_soviets_teslatank_ttankzaparcteslafragment1_emp:
-	Inherits: ra1_soviets_teslatank_ttankzaparc_emp
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Heavy
 	Range: 3650
 	Warhead@Tesla_Heavy:
 		Damage: 16399
@@ -1088,9 +1148,15 @@ ra1_soviets_teslatank_ttankzaparcteslafragment1_emp:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	ReloadDelay: 80
+	Warhead@Tesla_Heavy: AreaDamage
+		IntegrityScale: 150
+	Report: tesla1.aud
 
 ra1_soviets_teslatank_ttankzaparcteslafragment2_emp:
-	Inherits: ra1_soviets_teslatank_ttankzaparcteslafragment1_emp
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Heavy
 	Range: 1825
 	Warhead@Tesla_Heavy:
 		Damage: 8200
@@ -1099,7 +1165,10 @@ ra1_soviets_teslatank_ttankzaparcteslafragment2_emp:
 		Damage: 4100
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 5000
-	-Warhead@TeslaArc:
+	ReloadDelay: 80
+	Warhead@Tesla_Heavy: AreaDamage
+		IntegrityScale: 150
+	Report: tesla1.aud
 
 ra1_soviets_heavyteslatank_ttankzap2:
 	Inherits@wh: ^Warhead_Tesla_Super
@@ -1114,23 +1183,48 @@ ra1_soviets_heavyteslatank_ttankzap2:
 		DamageTypes: Tesla
 		Damage: 20000
 ra1_soviets_heavyteslatank_ttankzap2_emp:
-	Inherits: ra1_soviets_heavyteslatank_ttankzap2
+	Inherits@w70: ^Warhead_Tesla_Super
+	Inherits@w71: ^Projectile_Lightning_Super
+	Inherits@w72: ^Effect_Tesla_Super
 	Warhead@Tesla_Super:
 		IntegrityScale: 150
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 20000
+	ReloadDelay: 80
+	Range: 6650
+	Warhead@Tesla_Super: AreaDamage
+		Damage: 40000
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
+		Damage: 20000
+		DamageTypes: Tesla
+	Report: tesla1.aud
 
 ra1_soviets_heavyteslatank_ttankzap2arc_emp:
-	Inherits: ra1_soviets_heavyteslatank_ttankzap2_emp
+	Inherits@w70: ^Warhead_Tesla_Super
+	Inherits@w71: ^Projectile_Lightning_Super
+	Inherits@w72: ^Effect_Tesla_Super
 	Warhead@TeslaArc: FireShrapnel
 		Weapon: ra1_soviets_heavyteslatank_ttankzap2arcteslafragment1_emp
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	ReloadDelay: 80
+	Range: 6650
+	Warhead@Tesla_Super: AreaDamage
+		Damage: 40000
+		IntegrityScale: 150
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
+		Damage: 20000
+		DamageTypes: Tesla
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 20000
+	Report: tesla1.aud
 
 ra1_soviets_heavyteslatank_ttankzap2arcteslafragment1_emp:
-	Inherits: ra1_soviets_heavyteslatank_ttankzap2arc_emp
+	Inherits@w70: ^Warhead_Tesla_Super
+	Inherits@w71: ^Projectile_Lightning_Super
+	Inherits@w72: ^Effect_Tesla_Super
 	Range: 3325
 	Warhead@Tesla_Super: SpreadDamage
 		Damage: 60000
@@ -1147,9 +1241,15 @@ ra1_soviets_heavyteslatank_ttankzap2arcteslafragment1_emp:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	ReloadDelay: 80
+	Warhead@Tesla_Super: SpreadDamage
+		IntegrityScale: 150
+	Report: tesla1.aud
 
 ra1_soviets_heavyteslatank_ttankzap2arcteslafragment2_emp:
-	Inherits: ra1_soviets_heavyteslatank_ttankzap2arcteslafragment1_emp
+	Inherits@w70: ^Warhead_Tesla_Super
+	Inherits@w71: ^Projectile_Lightning_Super
+	Inherits@w72: ^Effect_Tesla_Super
 	Range: 1663
 	Warhead@Tesla_Super: SpreadDamage
 		Damage: 50000
@@ -1160,7 +1260,10 @@ ra1_soviets_heavyteslatank_ttankzap2arcteslafragment2_emp:
 		Damage: 5
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 5000
-	-Warhead@TeslaArc:
+	ReloadDelay: 80
+	Warhead@Tesla_Super: SpreadDamage
+		IntegrityScale: 150
+	Report: tesla1.aud
 
 TeslaZap:
 	Inherits@wh: ^Warhead_Tesla_Heavy
@@ -1175,23 +1278,48 @@ TeslaZap:
 		DamageTypes: Tesla
 		Damage: 16000
 ra1_soviets_teslacoil_teslazap_emp:
-	Inherits: TeslaZap
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Heavy
 	Warhead@Tesla_Heavy:
 		IntegrityScale: 150
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 16000
+	ReloadDelay: 3
+	Range: 9320
+	Warhead@Tesla_Heavy: AreaDamage
+		Damage: 32000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		Damage: 16000
+		DamageTypes: Tesla
+	Report: tesla1.aud
 
 ra1_soviets_teslacoil_teslazaparc_emp:
-	Inherits: ra1_soviets_teslacoil_teslazap_emp
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Heavy
 	Warhead@TeslaArc: FireShrapnel
 		Weapon: ra1_soviets_teslacoil_teslazaparcteslafragment1_emp
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	ReloadDelay: 3
+	Range: 9320
+	Warhead@Tesla_Heavy: AreaDamage
+		Damage: 32000
+		IntegrityScale: 150
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		Damage: 16000
+		DamageTypes: Tesla
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 16000
+	Report: tesla1.aud
 
 ra1_soviets_teslacoil_teslazaparcteslafragment1_emp:
-	Inherits: ra1_soviets_teslacoil_teslazaparc_emp
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Heavy
 	Range: 4660
 	Warhead@Tesla_Heavy:
 		Damage: 16000
@@ -1206,9 +1334,15 @@ ra1_soviets_teslacoil_teslazaparcteslafragment1_emp:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	ReloadDelay: 3
+	Warhead@Tesla_Heavy: AreaDamage
+		IntegrityScale: 150
+	Report: tesla1.aud
 
 ra1_soviets_teslacoil_teslazaparcteslafragment2_emp:
-	Inherits: ra1_soviets_teslacoil_teslazaparcteslafragment1_emp
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Heavy
 	Range: 2330
 	Warhead@Tesla_Heavy:
 		Damage: 8000
@@ -1217,7 +1351,10 @@ ra1_soviets_teslacoil_teslazaparcteslafragment2_emp:
 		Damage: 4000
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
-	-Warhead@TeslaArc:
+	ReloadDelay: 3
+	Warhead@Tesla_Heavy: AreaDamage
+		IntegrityScale: 150
+	Report: tesla1.aud
 
 ^Projectile_Inferno_Heavy_HeatRayBeam:
 	Projectile: RadBeam
@@ -2531,7 +2668,9 @@ ra1_soviets_btr80_machinegun_tesla:
 			Fighter: 10
 
 ra1_soviets_btr80_machinegun_tesla_arc:
-	Inherits: ra1_soviets_btr80_machinegun_tesla
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Impact_RA2
 	Warhead@TeslaArc: FireShrapnel
 		Weapon: ra1_soviets_btr80_btrteslamachinegunarcfragment1
 		Amount: 1
@@ -2600,15 +2739,24 @@ ra1_soviets_btr80_machinegun_tesla_arc:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+	ReloadDelay: 20
+	Range: 5454
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Burst: 4
+	BurstDelays: 4
+	Report: shktrop1.aud
+	-Warhead@Tesla_Heavy:
 ra1_soviets_btr80_btrteslamachinegunarcfragment1:
-	Inherits: ra1_soviets_btr80_machinegun_tesla_arc
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Impact_RA2
 	Range: 2727
 	Warhead@Tesla_Heavy_Flat:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
-	-Warhead@TeslaArc:
 
 	Warhead@Tesla_Heavy_ExtraDamage:
 		ValidTargets: Ground, Water, Air
@@ -2666,21 +2814,27 @@ ra1_soviets_btr80_btrteslamachinegunarcfragment1:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+	ReloadDelay: 20
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Burst: 4
+	BurstDelays: 4
+	Report: shktrop1.aud
+	-Warhead@Tesla_Heavy:
 ra1_soviets_btr80_machinegun_tesla_AA:
-	Inherits: ra1_soviets_btr80_machinegun_tesla
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Impact_RA2
 	Range: 8181
 	ValidTargets: Air
 	Warhead@Tesla_Heavy_Flat:
-		-InvalidTargets:
 		ValidTargets: Air
 		Damage: 4000
 		PercentageScale: 9975
 
 	Warhead@Tesla_Heavy_ExtraDamage:
-		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@EMPUnit:
-		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@Tesla_Heavy_Flat: AreaDamage
 	Warhead@Tesla_Heavy_Flat:
@@ -2733,8 +2887,18 @@ ra1_soviets_btr80_machinegun_tesla_AA:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+	ReloadDelay: 20
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Burst: 4
+	BurstDelays: 4
+	Report: shktrop1.aud
+	Warhead@Tesla_Heavy_Flat: AreaDamage
+	-Warhead@Tesla_Heavy:
 ra1_soviets_btr80_machinegun_tesla_arc_AA:
-	Inherits: ra1_soviets_btr80_machinegun_tesla_AA
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Impact_RA2
 	Warhead@TeslaArc: FireShrapnel
 		InvalidTargets:
 		ValidTargets: Air
@@ -2803,14 +2967,24 @@ ra1_soviets_btr80_machinegun_tesla_arc_AA:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+	ValidTargets: Air
+	ReloadDelay: 20
+	Range: 8181
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Burst: 4
+	BurstDelays: 4
+	Report: shktrop1.aud
+	-Warhead@Tesla_Heavy:
 ra1_soviets_btr80_btrteslamachinegunarcfragment1aa:
-	Inherits: ra1_soviets_btr80_machinegun_tesla_arc_AA
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Impact_RA2
 	Range: 4090
 	Warhead@Tesla_Heavy_Flat:
 		ValidTargets: Air
 		Damage: 4000
 		PercentageScale: 9975
-	-Warhead@TeslaArc:
 
 	Warhead@Tesla_Heavy_ExtraDamage:
 		ValidTargets: Air
@@ -2867,6 +3041,14 @@ ra1_soviets_btr80_btrteslamachinegunarcfragment1aa:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+	ValidTargets: Air
+	ReloadDelay: 20
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Burst: 4
+	BurstDelays: 4
+	Report: shktrop1.aud
+	-Warhead@Tesla_Heavy:
 ChainGun:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -3826,7 +4008,9 @@ ra1_soviets_kamovattackhelicopter_kamovtesla:
 			Fighter: 10
 
 ra1_soviets_kamovattackhelicopter_kamovteslaarc:
-	Inherits: ra1_soviets_kamovattackhelicopter_kamovtesla
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Impact_RA2
 	Warhead@TeslaArc: FireShrapnel
 		InvalidTargets:
 		ValidTargets: Ground, Water, Air
@@ -3893,8 +4077,21 @@ ra1_soviets_kamovattackhelicopter_kamovteslaarc:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 32
+	Range: 5528
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 16000
+		ValidTargets: Ground, Water, Air
+	Report: shktrop1.aud
+	-Warhead@Tesla_Heavy:
 ra1_soviets_kamovattackhelicopter_kamovteslaarcfragment1:
-	Inherits: ra1_soviets_kamovattackhelicopter_kamovteslaarc
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Impact_RA2
 	Range: 2764
 	Warhead@LightMissile: SpreadDamage
 		Damage: 8000
@@ -3979,9 +4176,19 @@ ra1_soviets_kamovattackhelicopter_kamovteslaarcfragment1:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 32
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
+	Warhead@EMPUnit: AffectsIntegrity
+		ValidTargets: Ground, Water, Air
+	Report: shktrop1.aud
+	-Warhead@Tesla_Heavy:
 
 ra1_soviets_kamovattackhelicopter_kamovteslaarcfragment2:
-	Inherits: ra1_soviets_kamovattackhelicopter_kamovteslaarcfragment1
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Impact_RA2
 	Range: 1382
 	Warhead@LightMissile: SpreadDamage
 		Damage: 4000
@@ -4003,7 +4210,6 @@ ra1_soviets_kamovattackhelicopter_kamovteslaarcfragment2:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		PercentageScale: 7998
-	-Warhead@TeslaArc:
 	-Warhead@LightMissile:
 	-Warhead@TeslaWeapon:
 	Warhead@Tesla_Heavy_Flat: AreaDamage
@@ -4057,6 +4263,18 @@ ra1_soviets_kamovattackhelicopter_kamovteslaarcfragment2:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 32
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
+	Warhead@EMPUnit: AffectsIntegrity
+		ValidTargets: Ground, Water, Air
+	Report: shktrop1.aud
+	Warhead@LightMissilePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+	-Warhead@Tesla_Heavy:
 
 ^Warhead_IncendiaryYakComposition:
 	Inherits@roleflat: ^Warhead_Flame_Light_Flat
@@ -4589,7 +4807,9 @@ ra1_soviets_teslayak_yakteslagun:
 			Bomber: 11
 			Fighter: 10
 ra1_soviets_teslayak_yakteslagunarc:
-	Inherits: ra1_soviets_teslayak_yakteslagun
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Impact_RA2
 	Warhead@TeslaArc: FireShrapnel
 		InvalidTargets:
 		ValidTargets: Ground, Water, Air
@@ -4659,8 +4879,23 @@ ra1_soviets_teslayak_yakteslagunarc:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 100
+	Range: 7000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 4000
+	Burst: 8
+	BurstDelays: 3
+	Report: shktrop1.aud
+	MinRange: 1400
+	-Warhead@Tesla_Heavy:
 ra1_soviets_teslayak_yakteslaarcfragment1:
-	Inherits: ra1_soviets_teslayak_yakteslagunarc
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Impact_RA2
 	Range: 3500
 	Warhead@LightMissile: SpreadDamage
 		Damage: 4000
@@ -4746,9 +4981,20 @@ ra1_soviets_teslayak_yakteslaarcfragment1:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 100
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
+	Burst: 8
+	BurstDelays: 3
+	Report: shktrop1.aud
+	MinRange: 1400
+	-Warhead@Tesla_Heavy:
 
 ra1_soviets_teslayak_yakteslaarcfragment2:
-	Inherits: ra1_soviets_teslayak_yakteslaarcfragment1
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Impact_RA2
 	Range: 1750
 	Warhead@LightMissile: SpreadDamage
 		Damage: 2000
@@ -4773,7 +5019,6 @@ ra1_soviets_teslayak_yakteslaarcfragment2:
 		ValidTargets: Ground, Water, Air
 		Damage: 5000
 		PercentageScale: 7995
-	-Warhead@TeslaArc:
 	-Warhead@LightMissile:
 	-Warhead@TeslaWeapon:
 	Warhead@Tesla_Heavy_Flat: AreaDamage
@@ -4827,6 +5072,15 @@ ra1_soviets_teslayak_yakteslaarcfragment2:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 100
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
+	Burst: 8
+	BurstDelays: 3
+	Report: shktrop1.aud
+	MinRange: 1400
+	-Warhead@Tesla_Heavy:
 
 ra1_soviets_yakscoutplane_napalm_bomb:
 	Inherits@collapsewh: ^Warhead_Flame_Heavy
@@ -5643,7 +5897,9 @@ ra1_soviets_migattackbomber_teslamaverick:
 			Fighter: 10
 
 ra1_soviets_migattackbomber_teslamaverickfragment1:
-	Inherits: ra1_soviets_migattackbomber_teslamaverick
+	Inherits@w70: ^Warhead_MissileAP_Medium
+	Inherits@w71: ^Projectile_Missile_Medium
+	Inherits@w72: ^Effect_Tesla_Impact_RA2
 	ValidTargets: Ground, Water, Air
 	Range: 2950
 	Report: shktrop1.aud
@@ -5726,9 +5982,72 @@ ra1_soviets_migattackbomber_teslamaverickfragment1:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+	ReloadDelay: 50
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 200
+		Falloff: 100, 75, 50, 25
+		Versus:
+			HAZMAT: 61
+			COMPOSITE: 72
+			BLAST: 98
+			REFLECTOR: 51
+			ARMOR: 70
+			Shield: 300
+			Heroic: 200
+			Plate: 175
+			Flak: 150
+			None: 125
+			Superheavy: 100
+			Heavy: 75
+			Medium: 50
+			Light: 25
+			Scout: 10
+			Wood: 10
+			Steel: 10
+			Concrete: 10
+			Fighter: 10
+			Bomber: 10
+			Helicopter: 10
+			Spaceship: 10
+		ValidRelationships: Neutral, Enemy
+	Projectile: LightningZap
+		ContrailLength: 10
+		Acceleration: 5
+		MaximumLaunchAngle: 128
+		Palette: d2keffect
+		ContrailStartColor: FF8844
+		TrailDelay: 1
+		ContrailEndColor: 33221100
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		ImpactSounds: xplos.aud
+	Warhead@EffectAir: CreateEffect
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+	Warhead@Concrete: DamagesConcrete
+		Damage: 150
+	Burst: 2
+	BurstDelays: 4
+	MinRange: 1180
+	Warhead@EMPUnit: AffectsIntegrity
+		ValidTargets: Ground, Water, Air
 
 ra1_soviets_migattackbomber_teslamaverickfragment2:
-	Inherits: ra1_soviets_migattackbomber_teslamaverickfragment1
+	Inherits@w70: ^Warhead_MissileAP_Medium
+	Inherits@w71: ^Projectile_Missile_Medium
+	Inherits@w72: ^Effect_Tesla_Impact_RA2
 	Range: 1475
 	Warhead@Tesla_Heavy:
 		Damage: 4000
@@ -5743,7 +6062,6 @@ ra1_soviets_migattackbomber_teslamaverickfragment2:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 9988
-	-Warhead@TeslaArc:
 	-Warhead@MissileAP_Medium:
 	-Warhead@Tesla_Heavy:
 
@@ -5801,6 +6119,70 @@ ra1_soviets_migattackbomber_teslamaverickfragment2:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+	ReloadDelay: 50
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 200
+		Falloff: 100, 75, 50, 25
+		Versus:
+			HAZMAT: 61
+			COMPOSITE: 72
+			BLAST: 98
+			REFLECTOR: 51
+			ARMOR: 70
+			Shield: 300
+			Heroic: 200
+			Plate: 175
+			Flak: 150
+			None: 125
+			Superheavy: 100
+			Heavy: 75
+			Medium: 50
+			Light: 25
+			Scout: 10
+			Wood: 10
+			Steel: 10
+			Concrete: 10
+			Fighter: 10
+			Bomber: 10
+			Helicopter: 10
+			Spaceship: 10
+		ValidRelationships: Neutral, Enemy
+	Projectile: LightningZap
+		ContrailLength: 10
+		Acceleration: 5
+		MaximumLaunchAngle: 128
+		Palette: d2keffect
+		ContrailStartColor: FF8844
+		TrailDelay: 1
+		ContrailEndColor: 33221100
+		-Image:
+		-TrailImage:
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		ImpactSounds: xplos.aud
+	Warhead@EffectAir: CreateEffect
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+	Warhead@Concrete: DamagesConcrete
+		Damage: 150
+	Burst: 2
+	BurstDelays: 4
+	MinRange: 1180
+	Report: shktrop1.aud
+	Warhead@EMPUnit: AffectsIntegrity
+		ValidTargets: Ground, Water, Air
 
 ra1_soviets_migattackbomber_thermobaricmaverick:
 	Inherits@collapsewh: ^Warhead_Thermobaric_Heavy
@@ -11330,7 +11712,9 @@ ra1_soviets_volkov_volkovmagneticweapontesla:
 	-Warhead@CannonHE_Heavy:
 
 ra1_soviets_volkov_volkovmagneticweaponteslafragment1:
-	Inherits: ra1_soviets_volkov_volkovmagneticweapontesla
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Impact_RA2
 	ValidTargets: Ground, Water
 	Range: 2830
 	Report: shktrop1.aud
@@ -11361,7 +11745,6 @@ ra1_soviets_volkov_volkovmagneticweaponteslafragment1:
 		DamageTypes: Tesla
 		Damage: 2000
 	Warhead@EMPUnit: AffectsIntegrity
-		-InvalidTargets:
 		Damage: 8000
 	Warhead@TeslaArc: FireShrapnel
 		InvalidTargets: wall
@@ -11374,10 +11757,97 @@ ra1_soviets_volkov_volkovmagneticweaponteslafragment1:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@MediumChemicalWeapon:
+	ReloadDelay: 30
+	Projectile: LightningZap
+		InaccuracyPercentage: 1
+		ProjectileSpeedPercentage: 10
+		Shadow: true
+		Speed: 5400
+		Inaccuracy: 540
+		Blockable: false
+		LaunchAngle: 66
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		ImpactSounds: kaboom25.aud
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Burst: 2
+	BurstDelays: 9
+	InvalidTargets: wall
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		Spread: 350
+		Falloff: 99, 66, 33
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Plate: 19
+			Heavy: 18
+			Flak: 17
+			Medium: 16
+			None: 15
+			Light: 14
+			Heroic: 13
+			Scout: 12
+			Steel: 11
+			Concrete: 10
+			Wood: 9
+			Spaceship: 8
+			Helicopter: 7
+			Bomber: 6
+			Fighter: 5
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		Spread: 200
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+	Warhead@Tesla_Heavy: AreaDamage
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 
 ra1_soviets_volkov_volkovmagneticweaponteslafragment2:
 	ValidTargets: Ground, Water
-	Inherits: ra1_soviets_volkov_volkovmagneticweaponteslafragment1
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Impact_RA2
 	Range: 1415
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -11407,10 +11877,95 @@ ra1_soviets_volkov_volkovmagneticweaponteslafragment2:
 		Damage: 1000
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
-	-Warhead@TeslaArc:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@MediumChemicalWeapon:
+	ReloadDelay: 30
+	Projectile: LightningZap
+		InaccuracyPercentage: 1
+		ProjectileSpeedPercentage: 10
+		Shadow: true
+		Speed: 5400
+		Inaccuracy: 540
+		Blockable: false
+		LaunchAngle: 66
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		ImpactSounds: kaboom25.aud
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Burst: 2
+	BurstDelays: 9
+	Report: shktrop1.aud
+	InvalidTargets: wall
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		Spread: 350
+		Falloff: 99, 66, 33
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Plate: 19
+			Heavy: 18
+			Flak: 17
+			Medium: 16
+			None: 15
+			Light: 14
+			Heroic: 13
+			Scout: 12
+			Steel: 11
+			Concrete: 10
+			Wood: 9
+			Spaceship: 8
+			Helicopter: 7
+			Bomber: 6
+			Fighter: 5
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		Spread: 200
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+	Warhead@Tesla_Heavy: AreaDamage
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 
 ra1_soviets_volkov_volkovmagneticweaponnuclearshells:
 	Inherits@wh: ^Warhead_Nuclear_Super
@@ -11863,7 +12418,9 @@ ra1_soviets_volkov_volkovmagneticweaponincendiarytesla:
 		ValidTargets: Air
 	Warhead@Concrete: DamagesConcrete
 ra1_soviets_volkov_volkovmagneticweaponincendiaryteslafragment1:
-	Inherits: ra1_soviets_volkov_volkovmagneticweapontesla
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Impact_RA2
 	ValidTargets: Ground, Water
 	Range: 2830
 	Report: shktrop1.aud
@@ -11898,7 +12455,6 @@ ra1_soviets_volkov_volkovmagneticweaponincendiaryteslafragment1:
 		DamageTypes: Tesla
 		Damage: 2000
 	Warhead@EMPUnit: AffectsIntegrity
-		-InvalidTargets:
 		Damage: 10000
 	Warhead@TeslaArc: FireShrapnel
 		InvalidTargets: wall
@@ -11911,10 +12467,97 @@ ra1_soviets_volkov_volkovmagneticweaponincendiaryteslafragment1:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@MediumChemicalWeapon:
+	ReloadDelay: 30
+	Projectile: LightningZap
+		InaccuracyPercentage: 1
+		ProjectileSpeedPercentage: 10
+		Shadow: true
+		Speed: 5400
+		Inaccuracy: 540
+		Blockable: false
+		LaunchAngle: 66
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		ImpactSounds: kaboom25.aud
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Burst: 2
+	BurstDelays: 9
+	InvalidTargets: wall
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		Spread: 350
+		Falloff: 99, 66, 33
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Plate: 19
+			Heavy: 18
+			Flak: 17
+			Medium: 16
+			None: 15
+			Light: 14
+			Heroic: 13
+			Scout: 12
+			Steel: 11
+			Concrete: 10
+			Wood: 9
+			Spaceship: 8
+			Helicopter: 7
+			Bomber: 6
+			Fighter: 5
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		Spread: 200
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+	Warhead@Tesla_Heavy: AreaDamage
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 
 ra1_soviets_volkov_volkovmagneticweaponincendiaryteslafragment2:
 	ValidTargets: Ground, Water
-	Inherits: ra1_soviets_volkov_volkovmagneticweaponincendiaryteslafragment1
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Impact_RA2
 	Range: 1415
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -11948,10 +12591,95 @@ ra1_soviets_volkov_volkovmagneticweaponincendiaryteslafragment2:
 		Damage: 1000
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 5000
-	-Warhead@TeslaArc:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@MediumChemicalWeapon:
+	ReloadDelay: 30
+	Projectile: LightningZap
+		InaccuracyPercentage: 1
+		ProjectileSpeedPercentage: 10
+		Shadow: true
+		Speed: 5400
+		Inaccuracy: 540
+		Blockable: false
+		LaunchAngle: 66
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		ImpactSounds: kaboom25.aud
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Burst: 2
+	BurstDelays: 9
+	Report: shktrop1.aud
+	InvalidTargets: wall
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		Spread: 350
+		Falloff: 99, 66, 33
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Plate: 19
+			Heavy: 18
+			Flak: 17
+			Medium: 16
+			None: 15
+			Light: 14
+			Heroic: 13
+			Scout: 12
+			Steel: 11
+			Concrete: 10
+			Wood: 9
+			Spaceship: 8
+			Helicopter: 7
+			Bomber: 6
+			Fighter: 5
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		Spread: 200
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+	Warhead@Tesla_Heavy: AreaDamage
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 
 ra1_soviets_volkov_volkovmagneticweaponincendiarynuclearshells:
 	Inherits@roleflat: ^Warhead_CannonNuke_Heavy
@@ -12772,7 +13500,9 @@ ra1_soviets_gatlingtank_teslaragatlingtankcannon:
 		Damage: 1000
 
 ra1_soviets_gatlingtank_teslaragatlingtankcannonarc:
-	Inherits: ra1_soviets_gatlingtank_teslaragatlingtankcannon
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Impact_RA2
 	Warhead@TeslaArc: FireShrapnel
 		Weapon: ra1_soviets_gatlingtank_teslaragatlingtankcannonarcfragment1
 		Amount: 1
@@ -12788,10 +13518,18 @@ ra1_soviets_gatlingtank_teslaragatlingtankcannonarc:
 		InvalidTargets: Air
 	Warhead@EMPUnit:
 		InvalidTargets: Air
+	ReloadDelay: 10
+	Range: 5000
+	Warhead@Tesla_Heavy: AreaDamage
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Report: shktrop1.aud
 ra1_soviets_gatlingtank_teslaragatlingtankcannonarcfragment1:
-	Inherits: ra1_soviets_gatlingtank_teslaragatlingtankcannonarc
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Impact_RA2
 	Range: 2500
-	-Warhead@TeslaArc:
 
 	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water, Air
@@ -12801,22 +13539,35 @@ ra1_soviets_gatlingtank_teslaragatlingtankcannonarcfragment1:
 		InvalidTargets: Air
 	Warhead@EMPUnit:
 		InvalidTargets: Air
+	ReloadDelay: 10
+	Warhead@Tesla_Heavy: AreaDamage
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Report: shktrop1.aud
 ra1_soviets_gatlingtank_teslaragatlingtankcannon_AA:
-	Inherits: ra1_soviets_gatlingtank_teslaragatlingtankcannon
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Impact_RA2
 	Range: 7500
 	ValidTargets: Air
 
 	Warhead@Tesla_Heavy:
-		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@Tesla_Heavy_ExtraDamage:
-		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@EMPUnit:
-		-InvalidTargets:
 		ValidTargets: Air
+	ReloadDelay: 10
+	Warhead@Tesla_Heavy: AreaDamage
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Report: shktrop1.aud
 ra1_soviets_gatlingtank_teslaragatlingtankcannonarc_AA:
-	Inherits: ra1_soviets_gatlingtank_teslaragatlingtankcannon_AA
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Impact_RA2
 	Warhead@TeslaArc: FireShrapnel
 		InvalidTargets:
 		ValidTargets: Air
@@ -12832,10 +13583,19 @@ ra1_soviets_gatlingtank_teslaragatlingtankcannonarc_AA:
 		ValidTargets: Air
 	Warhead@EMPUnit:
 		ValidTargets: Air
+	ValidTargets: Air
+	ReloadDelay: 10
+	Range: 7500
+	Warhead@Tesla_Heavy: AreaDamage
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Report: shktrop1.aud
 ra1_soviets_gatlingtank_teslaragatlingtankcannonarcfragment1aa:
-	Inherits: ra1_soviets_gatlingtank_teslaragatlingtankcannonarc_AA
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Impact_RA2
 	Range: 3750
-	-Warhead@TeslaArc:
 
 	Warhead@Tesla_Heavy:
 		ValidTargets: Air
@@ -12843,6 +13603,13 @@ ra1_soviets_gatlingtank_teslaragatlingtankcannonarcfragment1aa:
 		ValidTargets: Air
 	Warhead@EMPUnit:
 		ValidTargets: Air
+	ValidTargets: Air
+	ReloadDelay: 10
+	Warhead@Tesla_Heavy: AreaDamage
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Report: shktrop1.aud
 ra1_soviets_madtank_madtankdetonate:
 	Inherits@wh: ^Warhead_Nuclear_Super
 	Inherits@fx: ^Effect_Nuclear_Super
@@ -13625,7 +14392,17 @@ ra1_soviets_supersonicnuclearbomber_parabombnuke:
 		ValidTargets: Shielded
 	-Warhead@Nuclear_Super_Percentage:
 ra1_soviets_teslacoil_teslazap:
-	Inherits: TeslaZap
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Heavy
+	ReloadDelay: 3
+	Range: 9320
+	Warhead@Tesla_Heavy: AreaDamage
+		Damage: 32000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		Damage: 16000
+		DamageTypes: Tesla
+	Report: tesla1.aud
 
 ra1_soviets_rocketsoldier_rocketsra:
 	Inherits@w70: ^Warhead_MissileAP_Medium
@@ -13717,12 +14494,18 @@ ra1_soviets_dragunovantimaterialsniper_dragunovsniper:
 	Warhead@Effect:
 		ImpactSounds: xplos.aud
 ra1_soviets_shocktrooper_portatesla:
-	Inherits: PortaTesla
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Heavy
 	Range: 5932
 	Warhead@Tesla_Heavy:
 		Damage: 9102
 	Warhead@Tesla_Heavy_ExtraDamage:
 		Damage: 4551
+	ReloadDelay: 40
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+	Report: shktrop1.aud
 
 ra1_soviets_v2rocketlauncher_scud:
 	Inherits@w70: ^Warhead_Flame_Heavy
@@ -14727,7 +15510,9 @@ ra1_soviets_mammothtank_mammothtuskthermobaric:
 		UpdatesUnitStatistics: false
 
 ra1_soviets_teslatank_ttankzap:
-	Inherits: TTankZap
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Heavy
 	Range: 7898
 	Warhead@Tesla_Heavy:
 		Damage: 32798
@@ -14735,8 +15520,14 @@ ra1_soviets_teslatank_ttankzap:
 		Damage: 16399
 
 # Context-specific shrapnel selectors preserve each firing parent target mask.
+	ReloadDelay: 80
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+	Report: tesla1.aud
 ra1_soviets_kamovattackhelicopter_kamovmissileteslaarcfragment1:
-	Inherits: ra1_soviets_kamovattackhelicopter_kamovteslaarcfragment1
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Impact_RA2
 	ValidTargets: Ground, Water, Air
 	InvalidTargets: wall
 	Warhead@TeslaArc:
@@ -14806,8 +15597,31 @@ ra1_soviets_kamovattackhelicopter_kamovmissileteslaarcfragment1:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+	ReloadDelay: 32
+	Range: 2764
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Tesla
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 8000
+		ValidTargets: Ground, Water, Air
+	Report: shktrop1.aud
+	Warhead@Tesla_Heavy_Flat: AreaDamage
+		ValidTargets: Ground, Water, Air
+	Warhead@TeslaArc: FireShrapnel
+		Amount: 1
+		AimChance: 100
+		AllowDirectHit: true
+		AimTargetStances: Enemy, Neutral
+	Warhead@LightMissilePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+	-Warhead@Tesla_Heavy:
 ra1_soviets_kamovattackhelicopter_kamovmissileteslaarcfragment2:
-	Inherits: ra1_soviets_kamovattackhelicopter_kamovteslaarcfragment2
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Impact_RA2
 	ValidTargets: Ground, Water, Air
 	InvalidTargets: wall
 	Warhead@Tesla_Heavy_Flat:
@@ -14873,6 +15687,22 @@ ra1_soviets_kamovattackhelicopter_kamovmissileteslaarcfragment2:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+	ReloadDelay: 32
+	Range: 1382
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Tesla
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 4000
+		ValidTargets: Ground, Water, Air
+	Report: shktrop1.aud
+	Warhead@Tesla_Heavy_Flat: AreaDamage
+		ValidTargets: Ground, Water, Air
+	Warhead@LightMissilePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+	-Warhead@Tesla_Heavy:
 MammothTuskTeslaInfantryFragment1:
 	Inherits@w70: ^Warhead_MissileTesla_Heavy
 	Inherits@w71: ^Effect_Flame_Heavy

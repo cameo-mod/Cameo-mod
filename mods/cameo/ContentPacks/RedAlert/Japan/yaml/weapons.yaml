@@ -6594,7 +6594,8 @@ WaveTurretShell:
 		ImpactSounds: psahit00.aud
 		ValidTargets: Ground, Air
 WaveTurretImpact:
-	Inherits: WaveArtilleryImpact
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Effect_Railgun_Heavy
 	Projectile: InstantHit
 	Warhead@TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water
@@ -6633,6 +6634,14 @@ WaveTurretImpact:
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall
 	-Warhead@TeslaWeapon:
+	Warhead@Tesla_Heavy: AreaDamage
+		Spread: 333
+		Damage: 21000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Effect:
+		Explosions: blue_building
+		ImpactSounds: psahit00.aud
+		ValidTargets: Ground, Water, Air
 
 ArmoredCarMG:
 	Inherits@collapsewh: ^Warhead_Bullet_Medium
