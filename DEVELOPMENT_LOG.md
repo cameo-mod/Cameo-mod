@@ -12377,3 +12377,32 @@ pseudo-templates left dead after batch-5 inlined their payloads into the
 children (`DroneJumpH`, `oHMGo_muzzle`). Verified: zero `Weapon:`/`Inherits`
 references anywhere (RA2's `RA2DroneJump` is a distinct Nova-lane weapon),
 resolved corpus diff = the two intended removals only.
+
+## 2026-09-26 — D2k drain-minified weapon blocks restored (DAWN)
+
+**Finding:** the #411 pack-drain migration (`63aa990e6`) wrote three D2k
+weapon blocks as single-line tab-joined blobs. MiniYAML parses one key/value
+per line, so the engine saw each as a top-level node with a scalar value and
+ZERO children — the weapons were silently dead since the drain:
+
+- `PulseMissile` (Ixian pack) — referenced AI superweapon, 519 fields lost
+- `ixian_airdrone` (Ixian pack) — aircraft weapon, 85 fields lost
+- `D2K_155mm` (D2k Shared pack) — artillery weapon, 113 fields lost
+
+**Fix:** decoded the blobs back to expanded MiniYAML (depth = consecutive
+tab-separated empty tokens + 1; the separator after `Name:` is not a depth
+token). All three restored blocks verified **byte-content identical** to the
+pre-drain originals in `63aa990e6^`.
+
+**Ratchet impact:** restoring live content re-exposes the weapons' pre-drain
+violations that the dead blobs had masked — W2 122→123 and W6 442→443
+(PulseMissile's dual `^Warhead_Tesla_*` + 5 local effect warheads are inherent
+to its multi-warhead superweapon design), W8 360→362 (`ixian_airdrone`'s 6
+legacy bundles + `D2K_155mm`'s `^D2K155mmLegacy` — conversion awaits the
+legacy-bundle retrofit ruling). Baselines relocked with provenance comments.
+
+**Verification:** find_empty_warhead 0 (was 2 on the first decode — a
+first-token depth bug put `Inherits@collapseflat` at depth 2, which the
+audit scanner skips); orphan cancels 0; split-defs S2 unchanged at 5
+(pre-existing, owned by other lanes); resolved diff vs base = exactly the
+3 restored weapons. Boot-gate PASS.

@@ -88,7 +88,9 @@ W1_BASELINE = 576   # historical count ratchet, kept for provenance; W1_RATE_BP 
 # Checks gated on a SHARE of the corpus instead of an absolute count.
 RATE_CHECKS: dict[str, int] = {"W1": W1_RATE_BP}
 RED = ' ⛔'
-W2_BASELINE = 122   # 281 -> 122 post-rebase resync onto 86577a7aa
+W2_BASELINE = 123   # 122 -> 123: restored PulseMissile (drain-minified dead blob ->
+                    # live; dual ^Warhead_Tesla_{Heavy,Super} is inherent to its
+                    # multi-warhead superweapon design). Pre-drain debt re-exposed.
                                         # (#482/#488/#489 sweep wave, measured on-branch); was:   # dual ^Warhead_ inherit; 226 -> 177 by the dead-inherit slice
                     # (was 210 before; the 226 regression is repaid and then some).
                     # 177 -> 281 re-baseline 2026-09-24 (maintainer order, Claude
@@ -107,7 +109,8 @@ W4_BASELINE = 41    # 52 -> 41 post-rebase resync onto 86577a7aa; was:    # dual
                     # the old prefix-only classifier. Same class as the W2
                     # ^Compatibility_* rename: measurement fix, not new debt.
 W5_BASELINE = 389   # more than one resolved MAIN warhead; merge-payload repairs
-W6_BASELINE = 442   # 466 -> 442: outpost2 W27 strip (115 nodes/26 weapons)
+W6_BASELINE = 443   # 442 -> 443: restored PulseMissile re-exposes its 5 local
+                    # effect warheads (CreateEffect/LeaveSmudge/Shake). Pre-drain debt.
                     # master itself measures 709 (known master debt vs its
                     # own 692 baseline); this branch is still -243 vs master.
                     # was:   # weapons declaring an effect warhead locally;
@@ -130,7 +133,9 @@ W7_BASELINE = 804   # 807 -> 804: W7 batch-5 no-covering inlines
                     # 957 -> 963: pre-existing master debt measured on
                     # 5b89b1341 (already 963 at 4fcc9f941, before the W7/W9
                     # merge wave); same re-baseline class as W2 177 -> 281
-W8_BASELINE = 360   # 637 -> 360 post-rebase resync onto 86577a7aa
+W8_BASELINE = 362   # 360 -> 362: restored ixian_airdrone (6 legacy bundles) +
+                    # D2K_155mm (^D2K155mmLegacy) re-expose pre-drain W8 debt;
+                    # conversion awaits the legacy-bundle retrofit ruling.
                     # (#489 cleared most legacy edges); was:   # inherits a ^Template outside the three kinds; 874 -> 858 by promoting
                     # 33 ^Compatibility_* shims into real ^Warhead_* templates
                     # 687 -> 694: the TOP_LEVEL regex was fixed to match

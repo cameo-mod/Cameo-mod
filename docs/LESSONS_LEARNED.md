@@ -2499,3 +2499,16 @@ non-obvious rules, each learned from a red audit:
    audit but never enters `fx_templates` — a removal filter using only the
    fixpoint set leaves the old edge in place and the weapon grows a second
    fx edge (+1 W4 each).
+
+## Drain-migration minification hazard (2026-09-26)
+
+The pack-drain migration can emit a weapon block as ONE line of tab-separated
+`Key: value` tokens (`PulseMissile:Inherits: X\tWarhead@Y: ...`). MiniYAML
+treats the whole line as a scalar value — the weapon resolves to zero fields
+and is silently dead, while grep still "sees" the content. Census for the
+class: top-level lines containing a literal tab after the colon. Restoration:
+split on tabs, depth = run-length of empty tokens + 1, and DROP the first
+empty token (the separator after `Name:` is not depth). Verify restored blocks
+byte-identical against the pre-drain commit, then re-run find_empty_warhead —
+a wrong first-token depth parses fine for the engine but is skipped by
+indent-based audit scanners.
