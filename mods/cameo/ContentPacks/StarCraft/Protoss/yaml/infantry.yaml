@@ -2,7 +2,7 @@ protoss_zealot:
 	Inherits@protoss: ^BasicProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^MeleeInfantryTemplate
-	Inherits@exp: ^GainsExperienceTD
+	Inherits@exp: ^SCGainsExperienceTD
 	Inherits@decoration: ^ProtossRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@shadow: ^SCSmallShadow
@@ -43,7 +43,7 @@ protoss_adept:
 	Inherits@protoss: ^BasicProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HeavyInfantryTemplate
-	Inherits@exp: ^GainsExperienceTD
+	Inherits@exp: ^SCGainsExperienceTD
 	Inherits@decoration: ^ProtossRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@shadow: ^SCSmallShadow
@@ -107,7 +107,7 @@ protoss_hightemplar:
 	Inherits@protoss: ^BasicProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
-	Inherits@exp: ^GainsExperienceTD
+	Inherits@exp: ^SCGainsExperienceTD
 	Inherits@decoration: ^ProtossRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@shadow: ^SCSmallShadow
@@ -224,7 +224,7 @@ protoss_darktemplar:
 	Inherits@protoss: ^BasicProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^MeleeInfantryTemplate
-	Inherits@exp: ^GainsExperienceTD
+	Inherits@exp: ^SCGainsExperienceTD
 	Inherits@decoration: ^ProtossRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@shadow: ^SCSmallShadow
@@ -270,7 +270,7 @@ protoss_zeratul:
 	Inherits@protoss: ^BasicProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HeroInfantryTemplate
-	Inherits@exp: ^GainsExperienceTD
+	Inherits@exp: ^SCGainsExperienceTD
 	Inherits@decoration: ^ProtossRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@weapon: ^ProtossGroundWeaponUpgrades
@@ -317,7 +317,7 @@ protoss_amaranth:
 	Inherits@protoss: ^BasicProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^MeleeInfantryTemplate
-	Inherits@exp: ^GainsExperienceTD
+	Inherits@exp: ^SCGainsExperienceTD
 	Inherits@decoration: ^ProtossRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@shadow: ^SCSmallShadow
@@ -374,7 +374,7 @@ protoss_legionnaire:
 	Inherits@protoss: ^BasicProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^MeleeInfantryTemplate
-	Inherits@exp: ^GainsExperienceTD
+	Inherits@exp: ^SCGainsExperienceTD
 	Inherits@decoration: ^ProtossRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@shadow: ^SCSmallShadow
@@ -418,7 +418,7 @@ protoss_patriarch:
 	Inherits@protoss: ^BasicProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HeroInfantryTemplate
-	Inherits@exp: ^GainsExperienceTD
+	Inherits@exp: ^SCGainsExperienceTD
 	Inherits@decoration: ^ProtossRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@shadow: ^SCSmallShadow

@@ -68,7 +68,7 @@ terran_vulture:
 	Inherits@decoration: ^TerranRankDecoration
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^LightTankTemplate
-	Inherits@EXP: ^GainsExperienceTD
+	Inherits@EXP: ^SCGainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@EMP: ^FrontalEMP
@@ -141,7 +141,7 @@ terran_siegetank:
 	Inherits@decoration: ^TerranRankDecoration
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^ArtilleryTankTemplate
-	Inherits@EXP: ^GainsExperienceTD
+	Inherits@EXP: ^SCGainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@Crushes: ^VehicleCrusher
@@ -279,7 +279,7 @@ terran_matador:
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@FireActor: ^FireActor
-	Inherits@EXP: ^GainsExperienceTD
+	Inherits@EXP: ^SCGainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@announce: ^AnnounceOnBuild
@@ -409,7 +409,7 @@ terran_cyclone:
 	Inherits@decoration: ^TerranRankDecoration
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^MissileVehicleTemplate
-	Inherits@EXP: ^GainsExperienceTD
+	Inherits@EXP: ^SCGainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@EMP: ^TurretEMP
@@ -485,7 +485,7 @@ terran_goliath:
 	Inherits@decoration: ^TerranRankDecoration
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HighTechTankTemplate
-	Inherits@EXP: ^GainsExperienceTD
+	Inherits@EXP: ^SCGainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@AntiAir: ^PrioritizeAir
@@ -555,7 +555,7 @@ terran_goliathmk2:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
-	Inherits@EXP: ^GainsExperienceTD
+	Inherits@EXP: ^SCGainsExperienceTD
 	Inherits@decoration: ^TerranRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@AntiInf: ^PrioritizeInfantry
@@ -625,7 +625,7 @@ terran_warhound:
 	Inherits@SC: ^SCTVEHICLE
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^DreadnoughtTemplate
-	Inherits@exp: ^GainsExperienceTD
+	Inherits@exp: ^SCGainsExperienceTD
 	Inherits@decoration: ^TerranRankDecoration
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove

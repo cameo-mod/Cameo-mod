@@ -1,7 +1,7 @@
 cabal_overkillgunship:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@reload: ^RearmableAircraft
@@ -65,7 +65,7 @@ cabal_overkillgunship:
 cabal_hunterkillermk1:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@reload: ^RearmableAircraft
@@ -132,7 +132,7 @@ cabal_hunterkillermk1:
 cabal_hunterdronecarrier:
 	Inherits: ^Helicopter
 	Inherits@Template: ^SpaceshipTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
@@ -224,7 +224,7 @@ cabal_hunterdronecarrier:
 cabal_hunterdrone:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^BomberTemplate
-	Inherits@exp: ^GainsExperienceTD
+	Inherits@exp: ^TSGainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	AttackAircraft:
@@ -285,7 +285,7 @@ cabal_hunterdrone:
 cabal_orbdrone:
 	Inherits: ^JumpjetInfantry
 	Inherits@Template: ^FlyingInfantryTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
@@ -357,7 +357,7 @@ cabal_orbdrone_slave:
 cabal_cyborgassassin:
 	Inherits: ^JumpjetInfantry
 	Inherits@Template: ^FlyingInfantryTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
@@ -415,7 +415,7 @@ cabal_mothership:
 	Inherits: ^Helicopter
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@Epic: ^EpicAirUnitTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
@@ -454,7 +454,7 @@ cabal_mothership:
 cabal_hunterkillermk1_elite:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@reload: ^RearmableAircraft
@@ -523,7 +523,7 @@ cabal_hunterkillermk1_elite:
 cabal_repairdrone:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@repair: ^PrioritizeRepair

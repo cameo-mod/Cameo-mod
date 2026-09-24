@@ -71,7 +71,7 @@ forgotten_lcraft:
 forgotten_juggerboat:
 	Inherits: ^BoatUnit
 	Inherits@Template: ^ScoutShipTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^TSGainsExperienceRA
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiAir: ^PrioritizeAir
@@ -146,7 +146,7 @@ forgotten_juggerboat:
 forgotten_cannonboat:
 	Inherits: ^BoatUnit
 	Inherits@Template: ^BattleShipTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^TSGainsExperienceRA
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Inherits@ChemicalWeapons: ^ChemicalWeapons

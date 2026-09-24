@@ -69,7 +69,7 @@ cabal_stealthgenerator:
 	Inherits@sell: ^CABALSpawnActorsOnSell
 	Inherits@SHAPE: ^3x2Shape
 	Inherits@cloak: ^CloakedVehicle
-	Inherits@cloakanim: ^TiberiumCloakAnimation
+	Inherits@cloakanim: ^TSTiberiumCloakAnimation
 	Valued:
 		Cost: 2500
 	Tooltip:
@@ -249,7 +249,7 @@ cabal_obeliskofdarkness:
 		PlayerPalette: playerra2
 
 cabal_pillbox:
-	Inherits: ^RA2Defense
+	Inherits: ^TSRA2Defense
 	Inherits@cargo: ^ClearableGarrison
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2

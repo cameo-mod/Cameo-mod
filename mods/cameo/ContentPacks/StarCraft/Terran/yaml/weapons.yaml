@@ -526,7 +526,7 @@ SCTyr:
 		SmudgeType: Crater
 SCTyrAA:
 	Inherits@4: ^RA2MediumMissile
-	Inherits@fx: ^Effect_Explosion_Large_RA2
+	Inherits@fx: ^Effect_Explosion_Large_SC
 	ReloadDelay: 84
 	Burst: 4
 	BurstDelays: 2
@@ -1739,8 +1739,8 @@ GoliathMG:
 
 GoliathRockets_AA:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
-	Inherits@proj: ^Projectile_Missile_Heavy_D2K
-	Inherits@fx: ^Effect_MissileHE_Heavy_D2K
+	Inherits@proj: ^Projectile_Missile_Heavy_SC
+	Inherits@fx: ^Effect_MissileHE_Heavy_SC
 	Range: 6000
 	ReloadDelay: 33
 	Report: HKMISSLE.aud
@@ -1849,8 +1849,8 @@ GoliathMk2MG:
 		UpdatesUnitStatistics: false
 GoliathMk2Rockets_AA:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
-	Inherits@proj: ^Projectile_Missile_Heavy_D2K_Rocket
-	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Rocket
+	Inherits@proj: ^Projectile_Missile_Heavy_Rocket_SC
+	Inherits@fx: ^Effect_MissileAP_Heavy_Rocket_SC
 	ReloadDelay: 40
 	Range: 6479
 	Report: HKMISSLE.aud
@@ -1969,8 +1969,8 @@ GoliathMk2Rockets_AA:
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 WraithRockets_AA:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
-	Inherits@proj: ^Projectile_Missile_Heavy_D2K
-	Inherits@fx: ^Effect_MissileHE_Heavy_D2K
+	Inherits@proj: ^Projectile_Missile_Heavy_SC
+	Inherits@fx: ^Effect_MissileHE_Heavy_SC
 	Report: TPhFi200.aud
 	ReloadDelay: 24
 	Range: 5076
@@ -2019,8 +2019,8 @@ WraithLaser:
 		InvalidTargets: Air
 SunDogRockets:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
-	Inherits@proj: ^Projectile_Missile_Heavy_D2K
-	Inherits@fx: ^Effect_MissileAP_Heavy_D2K
+	Inherits@proj: ^Projectile_Missile_Heavy_SC
+	Inherits@fx: ^Effect_MissileAP_Heavy_SC
 	Report: TPhFi200.aud
 	ReloadDelay: 39
 	Range: 6060
@@ -2064,8 +2064,8 @@ SunDogLaser:
 		Damage: 16000
 ValkyrieRockets:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
-	Inherits@4: ^D2KRocket
-	Inherits: ^Effect_Watersplash_Huge_RA2
+	Inherits@4: ^SCRocket
+	Inherits: ^Effect_Watersplash_Huge_SC
 	Report: TPhFi200.aud
 	Range: 7380
 	ReloadDelay: 67
@@ -2199,7 +2199,7 @@ WyvernRockets:
 	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@4: ^MediumFlameWeapon
 	Inherits@6: ^HeavyBomb
-	Inherits@10: ^D2KRocket
+	Inherits@10: ^SCRocket
 	Report: TPhFi200.aud
 	Range: 8000
 	ReloadDelay: 90
@@ -2902,8 +2902,8 @@ PhobosLaser:
 			Wood: 15
 MissileTurret:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
-	Inherits@proj: ^Projectile_Missile_Heavy_D2K
-	Inherits@fx: ^Effect_MissileHE_Heavy_D2K
+	Inherits@proj: ^Projectile_Missile_Heavy_SC
+	Inherits@fx: ^Effect_MissileHE_Heavy_SC
 	Report: TPhFi200.aud
 	ReloadDelay: 30
 	Range: 11626

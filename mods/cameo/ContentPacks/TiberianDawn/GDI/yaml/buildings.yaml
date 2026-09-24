@@ -374,7 +374,9 @@ td_gdi_guardtower:
 
 td_gdi_skyshield:
 	Inherits: ^Defense
-	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@exp: ^GainsExperienceTDBuilding
+	GainsExperience:
+		LevelUpNotification: LevelUpRA1
 	Inherits@Template: ^AntiAirDefenseTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAir
 	Inherits@AntiAir: ^PrioritizeAir
