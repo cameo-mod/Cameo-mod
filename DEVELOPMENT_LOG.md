@@ -11813,3 +11813,20 @@ fleet board; guard added (refuse non-`-` targets).
 
 **Awaiting:** maintainer merge call on #472; Claude's ExtraDamage ruling for the held
 Tesla/Laser/Railgun/ChargedTesla edges.
+
+## 2026-09-24 — W7 weapon-parent sweep (bulk pipeline, follow-up branch)
+
+Branch `devin/nova/w23-ra-followup` (PR #482, stacked on #472), commits
+`bdbb08828`..`2f6f405c4`. Converted **426 weapon->weapon `Inherits:` edges**
+across 16 files to last-per-kind `^Warhead_*/^Projectile_*/^Effect_*` edges +
+resolved-diff pins; every weapon byte-identical vs baseline. ~120 dead
+cancels removed. Each commit boot-gated (menu marker, 0 exceptions).
+
+Held (~197 edges): all resolve through `*_ExtraDamage` SpreadDamage nodes —
+pending Claude's ExtraDamage ruling. `ChemTibAtomic` reverted (cross-file
+tandem needed with `weapons/tiberiandawn.yaml`, TD lane).
+
+Tooling (.scratch/nova_w7conv.py — uncommitted): four traps now handled —
+digit-leading block names (`155mmCryo`), bottom-up line edits (insertion
+shift), exact-run pin dedupe (substring matching false-hits indented
+prefixes), cross-file weapon-inherit skip (merged-order hazard).
