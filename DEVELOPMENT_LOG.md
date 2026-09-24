@@ -11847,3 +11847,19 @@ prefixes), cross-file weapon-inherit skip (merged-order hazard).
   The conversion restores pre-#476 debuff intent via the live channel — same for all
   sites fleet-wide. Posted `REPLY_2026-09-24_nova_to_ember_waveturret.md`; flagged on
   #482's description. Pending class-wide ruling (migration-intent vs dead-stays-dead).
+
+## 2026-09-24 (later) — sweep-review fixes + fleet ruling
+
+- EMBER's independent resolved-review (FINDING_2026-09-24) found a real
+  regression my per-batch diffs missed: `NaxiWW2KübelwagenMachinegun` lost its
+  `Inherits@roleflat: ^Warhead_Bullet_Medium_Flat` edge when the converter
+  expanded its shim edges — 48 fields gone incl. the Versus tables, and the
+  _Flat node IS the damage channel (main node cancelled). Fixed in `546b175d0`.
+- Same commit: pinned `^SteelMediumMissile`/`^RA160mmRadLegacy` template chains
+  back to self-describing (1 inert `TrailImage: smokey` residual — empty pins
+  can't blank inherited fields).
+- WaveTurretImpact: EMBER conceded — resolver proved Condition survives merge;
+  ruling A (migration-intent) landed class-wide, conversions stand.
+- Pipeline lesson recorded: shim-edge conversions escape per-weapon checklists;
+  full-tree union diff (2,984 weapons) is now the pre-PR gate — 29 diffs, all
+  accounted for (8 meters, 5 pairing fixes, 14 inert HitAnim drops, 2 templates).
