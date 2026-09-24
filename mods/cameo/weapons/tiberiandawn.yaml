@@ -229,7 +229,10 @@ HighVAP:
 		InvalidTargets: Air
 		Damage: 4000
 ChemTibAtomic:
-	Inherits: Atomic
+	Inherits: ^Warhead_Tesla_Super
+	Inherits@2: ^Projectile_Lightning_Super
+	Inherits@3: ^Effect_Tesla_Super
+	Inherits@4: ^Warhead_Nuclear_Super
 	Warhead@Effect: CreateEffect
 		Explosions: chem_nuke_explosion
 		ImpactSounds: nukexplo.aud

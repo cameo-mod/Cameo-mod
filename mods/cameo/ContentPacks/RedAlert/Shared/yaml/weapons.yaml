@@ -3018,11 +3018,92 @@ DTAtomic:
 		FlashType: Nuke
 
 ChemTibAtomic:
-	Inherits: Atomic
+	Inherits: ^Warhead_Tesla_Super
+	Inherits@2: ^Projectile_Lightning_Super
+	Inherits@3: ^Effect_Tesla_Super
+	Inherits@4: ^Warhead_Nuclear_Super
+	ValidTargets: Ground, Air
+	Report: nukemisl.aud
+	Warhead@Tesla_Super:
+		PercentageScale: 2000
+		ValidTargets: Shielded
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+		Spread: 1000
+		Damage: 200000
+		Delay: 0
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+		ValidTargets: Shielded
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+		Spread: 1000
+		Damage: 100000
+		Delay: 2
 	Warhead@Effect:
 		Explosions: chem_nuke_explosion
 		ImpactSounds: nukexplo.aud
 		ImpactActors: false
+		GlowScale: 15.0
+		GlowFadeFrames: 600
+		GlowFadeInFrames: 15
+	Warhead@GroundFireArea: SpawnActorInArea
+		Actor: groundfire
+		Range: 5
+		Chance: 50
+		ImpactActors: false
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@Distort: HeatDistortion
+		Scale: 2.0
+		FadeFrames: 420
+		FadeInFrames: 15
+	Warhead@Shock: Shockwave
+		Scale: 2.0
+		FadeFrames: 120
+		FadeInFrames: 0
+	Warhead@4Res_areanukea: DestroyResource
+		Size: 3
+		Delay: 3
+		ResourceAmount: 3
+	Warhead@5Smu_areanukea: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 5
+		Delay: 3
+	Warhead@Effect2: CreateEffect
+		ImpactSounds: xplobig4.aud
+		Delay: 3
+		ImpactActors: false
+	Warhead@8Res_areanukeb: DestroyResource
+		Size: 6
+		Delay: 6
+		ResourceAmount: 6
+	Warhead@9Smu_areanukeb: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 7
+		Delay: 6
+	Warhead@11Res_areanukec: DestroyResource
+		Size: 9
+		Delay: 9
+		ResourceAmount: 9
+	Warhead@12Smu_areanukec: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 9
+		Delay: 9
+	Warhead@Nuclear_Super:
+		Damage: 500000
+		MaxRadius: 10000
+	Warhead@Nuclear_Super_Percentage:
+		Damage: 25
+		MaxRadius: 10000
+	Warhead@13Shake: ShakeScreen
+		Duration: 20
+		Intensity: 5
+		Multiplier: 1,1
+	Warhead@FlashEffect: FlashEffect
+		Duration: 20
+		FlashType: Nuke
 	Warhead@11Res: CreateResource
 		AddsResourceType: Tiberium
 		Size: 1,1
