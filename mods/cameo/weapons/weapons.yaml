@@ -9216,6 +9216,12 @@ DefuseKit:
 			Steel: 5
 			Superheavy: 5
 			Wood: 5
+	Warhead@Sonic_Light_Debuff: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
+		Range: 532
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Structure, wall
 
 ^Warhead_Sonic_Medium:
 	ValidTargets: Ground, Water
@@ -9276,6 +9282,12 @@ DefuseKit:
 			Steel: 8
 			Superheavy: 8
 			Wood: 8
+	Warhead@Sonic_Medium_Debuff: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
+		Range: 800
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Structure, wall
 
 ^Warhead_Sonic_Heavy:
 	ValidTargets: Ground, Water
@@ -9336,6 +9348,12 @@ DefuseKit:
 			Steel: 10
 			Superheavy: 10
 			Wood: 10
+	Warhead@Sonic_Heavy_Debuff: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
+		Range: 1066
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Structure, wall
 
 ###### Railgun: VEH > INF > BLD > AIR (heavy, air=False) ######
 ^Warhead_Railgun_Heavy:
@@ -20264,6 +20282,12 @@ generic_bullet_casing:
 			Concrete: 4
 			Superheavy: 3
 			Spaceship: 3
+	Warhead@BulletSonic_Light_Debuff: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
+		Range: 132
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Air, Structure, wall
 
 ^Warhead_BulletSonic_Medium:
 	ValidTargets: Ground, Water, Air
@@ -20324,6 +20348,12 @@ generic_bullet_casing:
 			Heavy: 7
 			Spaceship: 7
 			Superheavy: 6
+	Warhead@BulletSonic_Medium_Debuff: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
+		Range: 200
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Air, Structure, wall
 
 ^Warhead_BulletSonic_Heavy:
 	ValidTargets: Ground, Water, Air
@@ -20384,6 +20414,12 @@ generic_bullet_casing:
 			Concrete: 11
 			Superheavy: 10
 			Spaceship: 10
+	Warhead@BulletSonic_Heavy_Debuff: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
+		Range: 266
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Air, Structure, wall
 
 ^Warhead_MissileSonic_Light:
 	ValidTargets: Ground, Water, Air
@@ -20444,6 +20480,12 @@ generic_bullet_casing:
 			Heroic: 4
 			None: 3
 			Flak: 3
+	Warhead@MissileSonic_Light_Debuff: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
+		Range: 106
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Air, Structure, wall
 
 ^Warhead_MissileSonic_Medium:
 	ValidTargets: Ground, Water, Air
@@ -20504,6 +20546,12 @@ generic_bullet_casing:
 			Flak: 7
 			Plate: 7
 			None: 6
+	Warhead@MissileSonic_Medium_Debuff: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
+		Range: 160
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Air, Structure, wall
 
 ^Warhead_MissileSonic_Heavy:
 	ValidTargets: Ground, Water, Air
@@ -20564,6 +20612,12 @@ generic_bullet_casing:
 			Heroic: 11
 			None: 10
 			Flak: 10
+	Warhead@MissileSonic_Heavy_Debuff: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
+		Range: 212
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Air, Structure, wall
 
 ^Warhead_CannonSonic_Light:
 	ValidTargets: Ground, Water
@@ -20624,6 +20678,12 @@ generic_bullet_casing:
 			Bomber: 4
 			Helicopter: 3
 			Spaceship: 3
+	Warhead@CannonSonic_Light_Debuff: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
+		Range: 400
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Structure, wall
 
 ^Warhead_CannonSonic_Medium:
 	ValidTargets: Ground, Water
@@ -20684,6 +20744,12 @@ generic_bullet_casing:
 			Bomber: 7
 			Helicopter: 7
 			Spaceship: 6
+	Warhead@CannonSonic_Medium_Debuff: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
+		Range: 600
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Structure, wall
 
 ^Warhead_CannonSonic_Heavy:
 	ValidTargets: Ground, Water
@@ -20744,6 +20810,12 @@ generic_bullet_casing:
 			Bomber: 11
 			Helicopter: 10
 			Spaceship: 10
+	Warhead@CannonSonic_Heavy_Debuff: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
+		Range: 800
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Structure, wall
 
 ^Warhead_BlastSonic_Light:
 	ValidTargets: Ground, Water
@@ -20804,6 +20876,12 @@ generic_bullet_casing:
 			Bomber: 3
 			Helicopter: 3
 			Spaceship: 2
+	Warhead@BlastSonic_Light_Debuff: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
+		Range: 372
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Structure, wall
 
 ^Warhead_BlastSonic_Medium:
 	ValidTargets: Ground, Water
@@ -20864,6 +20942,12 @@ generic_bullet_casing:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 6
+	Warhead@BlastSonic_Medium_Debuff: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
+		Range: 558
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Structure, wall
 
 ^Warhead_BlastSonic_Heavy:
 	ValidTargets: Ground, Water
@@ -20924,3 +21008,9 @@ generic_bullet_casing:
 			Bomber: 11
 			Helicopter: 10
 			Spaceship: 10
+	Warhead@BlastSonic_Heavy_Debuff: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
+		Range: 744
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Structure, wall

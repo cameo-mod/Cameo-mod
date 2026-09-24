@@ -1646,6 +1646,9 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         if name in FAMILY_CONDITION:  # on-hit status mark (Sonic -> SonicDebuff)
             cname, dmul, rmul = FAMILY_CONDITION[name]
             parts.append(emit_condition(tag, cname, reload * dmul, main_spread * rmul, vt))
+        if name in FAMILY_AREA_STATE:  # area meter feed over the ring beyond the damage
+            psn, amount, rmul = FAMILY_AREA_STATE[name]
+            parts.append(emit_area_state(tag, psn, amount, main_spread * rmul, vt))
         blocks.append("\n".join(parts))
     return "\n\n".join(blocks)
 
@@ -2068,6 +2071,24 @@ def undeclared_elements():
 # Resonance meter via FAMILY_PHYSICAL_STATE / BLEND_FAMILIES states instead.
 FAMILY_CONDITION = {}
 
+# Per-family AREA METER FEED (W7 follow-up). The retired `_Debuff` nodes were NOT the on-hit
+# mark — they were a second channel: `Range = range_x_spread x Spread` deliberately marked a
+# ring twice the damage radius, so the blast's outer ring debuffed without damaging. Removing
+# them silently shrank the mark to the damage footprint (FINDING_2026-09-24_dawn_w7_double_feed).
+# They now emit as flat `ApplyPhysicalState` feeds — `Amount` fills the meter regardless of the
+# damage roll, preserving the old binary "everyone in the ring is marked" shape, while the
+# damage-scaled feed on the main warhead handles the direct hit. Same-footprint fixed+scaled
+# double-apply is still flagged by audit_physical_state_warheads; the area channel is exempted
+# there by the Range > Spread rule.
+# {family: (PhysicalStateName, Amount, range_x_spread)}
+FAMILY_AREA_STATE = {
+    "Sonic": ("Resonance", 5000, 2),
+    "BulletSonic": ("Resonance", 5000, 2),
+    "MissileSonic": ("Resonance", 5000, 2),
+    "CannonSonic": ("Resonance", 5000, 2),
+    "BlastSonic": ("Resonance", 5000, 2),
+}
+
 # Per-family InvalidTargets, emitted on the weapon AND its damaging warheads.
 # WEAPON_TYPE_SYSTEM.md specifies Toxic as "no-op vs robotic": a gas kills people, so a drone
 # or a robot walks through it untouched. That is a TARGETING rule, not a Versus value — W13
@@ -2084,6 +2105,17 @@ def emit_condition(tag, cname, duration, rng, vt):
         f"\tWarhead@{tag}_Debuff: GrantExternalCondition",
         f"\t\tCondition: {cname}",
         f"\t\tDuration: {duration}",
+        f"\t\tRange: {rng}",
+        f"\t\tValidRelationships: Enemy, Neutral",
+        f"\t\tValidTargets: {vt}, Structure, wall"])
+
+
+def emit_area_state(tag, psn, amount, rng, vt):
+    """Emit the flat meter feed over the ring beyond the damage (the old _Debuff area channel)."""
+    return "\n".join([
+        f"\tWarhead@{tag}_Debuff: ApplyPhysicalState",
+        f"\t\tPhysicalStateName: {psn}",
+        f"\t\tAmount: {amount}",
         f"\t\tRange: {rng}",
         f"\t\tValidRelationships: Enemy, Neutral",
         f"\t\tValidTargets: {vt}, Structure, wall"])
