@@ -1,5 +1,26 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-25b — EMBER: `weapons.yaml` W7 remainder (61 edges → 0)
+
+`Agent: EMBER · branch devin/ember/w7-central · base 5b89b1341`
+
+The last unclaimed central file off NOVA's corrected census — claimed on the
+fleet board after verifying §2 set-B lock released + no live editor. All 55
+weapons / 61 weapon-parent edges converted via `nova_w7conv` (0 held — no
+resolved ExtraDamage in the set). GLA toxin/explosion cluster, SWG lasers,
+misc (`bowFire`, `wc_tower_fire`, `MADTankTargeting`, `RockDebris*`, `Spit_AA`…).
+
+Verification: flat-map resolved compare vs `5b89b1341` — 0/2,984 content diffs;
+find_empty_warhead 0; orphan_cancels 0 (6 pin-carried markers cleaned);
+find_orphan_old_keys 0 real; no multi-bare `Inherits`; boot-gate PASS.
+
+W7 weapon-parent census after this: `tiberiandawn` 1 (TD owner) ·
+`redalert2mod` 5 (NOVA held-class) · `d2k` 26 + `starcraft` 4 (DAWN) ·
+`tiberiansun` 24 (TS owner). Every other mounted central file is at zero.
+
+---
+
+## ⭐ 2026-09-23 — DEVIN-CLOUD (AI lane): phases 1–3 are all on master; phase 4 starts
 ## ⭐ 2026-09-23 — DEVIN-CLOUD (AI lane): phases 1–3 are all on master; phase 4 starts
 
 `Agent: DEVIN-CLOUD · lane: AI bot modules · working off master @ 1e27366c9`
