@@ -4,31 +4,31 @@
 
 ⛔ This **repeals the exemption** in `tools/audit/intentional_composites.py`. Its 224 entries are no longer 'reviewed, keep' — they are the worklist. The registry data stays useful: it says which mains someone chose on purpose.
 
-concrete weapons with inherits: **2162**
+concrete weapons with inherits: **2159**
 
 W5 counts structural flat-damage nodes, including zero/healing/ally-only nodes; the split audit counts positive non-companion damage. Both resolve the full concrete weapon corpus. Use `--compare-split` for exact differences.
 
 | check | what | count | ratchet |
 |---|---|--:|--:|
-| W1 | more than 3 inherits | **292** (13.51% of 2162) | 26.16% |
+| W1 | more than 3 inherits | **292** (13.53% of 2159) | 26.16% |
 | W2 | two or more `^Warhead_*` inherits | **122** | 122 |
 | W3 | two or more `^Projectile_*` inherits | **7** | 7 |
 | W4 | two or more `^Effect_*` inherits | **41** | 41 |
 | W5 | more than one resolved MAIN warhead | **167** | 389 |
 | W6 | effect warheads declared LOCALLY | **442** | 442 |
-| W7 | inherits from ANOTHER WEAPON, not a template | **807** | 807 |
+| W7 | inherits from ANOTHER WEAPON, not a template | **804** | 804 |
 | W8 | inherits a `^Template` that is not one of the three kinds | **360** | 360 |
 
 | I7 informational — missing template | weapons |
 |---|--:|
-| no `^Effect_*` inherit | 828 |
-| no `^Projectile_*` inherit | 1225 |
-| no `^Warhead_*` inherit | 890 |
+| no `^Effect_*` inherit | 825 |
+| no `^Projectile_*` inherit | 1222 |
+| no `^Warhead_*` inherit | 887 |
 
 _I7 is a REVIEW QUEUE, not a defect count — an instant or utility weapon may legitimately have no projectile. Do not ratchet it without a per-weapon pass._
 
 
-## W7 — inherits from ANOTHER WEAPON, not a template (807 vs ratchet 807)
+## W7 — inherits from ANOTHER WEAPON, not a template (804 vs ratchet 804)
 
 | weapon | weapon-parents | first four |
 |---|---|---|
@@ -74,7 +74,7 @@ _I7 is a REVIEW QUEUE, not a defect count — an instant or utility weapon may l
 | `AsianPunisherAG_EMP` | 1 | `AsianPunisherAG` |
 
 
-_... and 767 more._
+_... and 764 more._
 
 
 ## W8 — inherits a `^Template` that is not one of the three kinds (360 vs ratchet 360)

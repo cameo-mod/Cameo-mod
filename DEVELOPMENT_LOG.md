@@ -12320,3 +12320,31 @@ mechanized block surgery — a resolved diff cannot see deleted dead copies.
 
 Final: W7 866->807 (−59 net), all other classes at baseline, orphans 0,
 empty 0, full-corpus resolved diff 0.
+
+## 2026-09-26 — W7 batch-5: 3 no-covering edges inlined (807->804) (DAWN)
+
+Post-batch-4 census of remaining W7 edges in my file-set: 11 "kind+fx clean"
+edges all proved ratchet-negative on the per-weapon net check (multi-warhead
+covering sets would relabel W7 as W2/W3/W4 — same class as the blocked-43,
+correctly held). 4 no-covering edges remained:
+
+- `oHMGo_muzzle` <- `oHMG_muzzle` (d2k.yaml): parent is inherit-only, 6-field
+  payload inlined. Resolved-identical.
+- `DroneJumpH` <- `DroneJump` (d2k.yaml): parent inherit-only, 17 fields.
+  Resolved-identical.
+- `RemovableDebuffDummy` <- `GLAnthraxBlueLarge` (Zerg pack): parent lived in
+  central weapons.yaml — a cross-pack dependency; inlining makes the pack more
+  self-contained. Resolved-identical.
+- `HermitExplode` <- `ReactorNuke` (Zerg pack): HELD — parent is a real
+  actor-referenced RA2 nuke (223 resolved fields). Inlining a whole nuke chain
+  into the Zerg pack is a design call, not a mechanical one; flagged to fleet.
+
+Parents `DroneJump`/`oHMG_muzzle` are now dead file-space (no actor or weapon
+references them) — left in place; dead-weapon deletion is a separate cleanup
+class with its own census.
+
+Tooling notes: materialized-payload emission needs (a) leaf+node keys
+(`Warhead@X: Type` with children) handled via a sentinel, and (b) parent
+payload emitted BEFORE child overrides so last-wins favors the child.
+
+Gates: W7 804 (relocked), all other classes flat, orphans 0, empty 0.
