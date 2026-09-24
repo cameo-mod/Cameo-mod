@@ -14,7 +14,7 @@ upgrade_conyard:
 	Valued:
 		Cost: 1250
 	RenderSprites:
-		Image: conyard.ordos
+		Image: ordos_conyard
 
 upgrade_barracks:
 	Inherits: ^ResearchedUpgradeTemplate
@@ -32,7 +32,7 @@ upgrade_barracks:
 	Valued:
 		Cost: 1250
 	RenderSprites:
-		Image: barracks.ordos
+		Image: ordos_barracks
 
 upgrade_heavy:
 	Inherits: ^ResearchedUpgradeTemplate
@@ -50,7 +50,7 @@ upgrade_heavy:
 	Valued:
 		Cost: 1250
 	RenderSprites:
-		Image: heavy.ordos
+		Image: ordos_heavy
 
 upgrade_hightech:
 	Inherits: ^ResearchedUpgradeTemplate
@@ -68,7 +68,7 @@ upgrade_hightech:
 	Valued:
 		Cost: 1250
 	RenderSprites:
-		Image: hightech.atreides
+		Image: atreides_hightech
 
 d2k_wind_trap_upgrade:
 	Inherits: ^ResearchedUpgradeTemplate
@@ -83,7 +83,7 @@ d2k_wind_trap_upgrade:
 		Description: upgrade_wind_trap.description
 		IconPalette: d2kunit
 	RenderSprites:
-		Image: power.atreides
+		Image: atreides_power
 
 #   Common Upgrades
 

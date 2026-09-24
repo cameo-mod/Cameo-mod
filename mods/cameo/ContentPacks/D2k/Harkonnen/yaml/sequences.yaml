@@ -45,7 +45,7 @@ harkonnen_flameturret:
 		Filename: harkonnen_flameturret_icon.png
 
 
-combat_tank.harkonnen:
+harkonnen_combat_tank:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -88,7 +88,7 @@ harkonnen_assaulttank:
 		Filename: harkonnen_assaulttank_icon.png
 
 
-combat_tank_husk.harkonnen:
+harkonnen_combat_tank_husk:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -317,10 +317,10 @@ harkonnen_advancedcarryall:
 	icon:
 		Filename: harkonnen_advancedcarryall_icon.png
 
-gun_turret.harkonnen:
+harkonnen_gun_turret:
 	Inherits: harkonnen_flameturret
 
-rocket_turret.harkonnen:
+harkonnen_rocket_turret:
 	Inherits: harkonnen_flameturret
 
 harkonnen_sardaukar_baron_elite:

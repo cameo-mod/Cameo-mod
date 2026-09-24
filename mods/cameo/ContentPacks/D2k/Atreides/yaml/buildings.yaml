@@ -5,7 +5,7 @@ atreides_constructionyard:
 	Transforms:
 		IntoActor: atreides_mobileconstructionvehicle
 	RenderSprites:
-		Image: conyard.atreides
+		Image: atreides_conyard
 
 atreides_windtrap:
 	Inherits: ^WindTrap
@@ -14,7 +14,7 @@ atreides_windtrap:
 		Prerequisites: ~atreides_constructionyard
 		Description: Provides power to the base.
 	RenderSprites:
-		Image: power.atreides
+		Image: atreides_power
 
 atreides_refinery:
 	Inherits: ^D2KRefinery
@@ -32,7 +32,7 @@ atreides_refinery:
 		DeliveringActor: carryall.reinforce
 		Facing: 160
 	RenderSprites:
-		Image: refinery.atreides
+		Image: atreides_refinery
 
 atreides_storagesilo:
 	Inherits: ^D2KSilo
@@ -41,7 +41,7 @@ atreides_storagesilo:
 		Prerequisites: ~atreides_constructionyard, atreides_refinery
 		Description: Stores excess spice.
 	RenderSprites:
-		Image: silo.atreides
+		Image: atreides_silo
 
 atreides_barracks:
 	Inherits: ^D2KBuilding
@@ -68,7 +68,7 @@ atreides_barracks:
 		SpawnOffset: 512,480,0
 		ExitCell: 1,2
 	RenderSprites:
-		Image: barracks.atreides
+		Image: atreides_barracks
 	ProvidesPrerequisite@d2kbarracks:
 		Prerequisite: d2k_barracks
 	ProvidesPrerequisite@barracks:
@@ -76,12 +76,12 @@ atreides_barracks:
 	ProvidesPrerequisite@factionbarracks:
 		Prerequisite: atreides_barracks
 	GrantConditionOnPrerequisite@UPGRADEABLE:
-		Prerequisites: upgrade_barracks.atreides
+		Prerequisites: atreides_upgrade_barracks
 	DamageMultiplier@upgrade_barracks:
 		RequiresCondition: upgrade_barracks
 		Modifier: 75
 	ActorStatValues:
-		Upgrades: upgrade_barracks.atreides
+		Upgrades: atreides_upgrade_barracks
 	-WithDeathAnimation:
 	SpawnActorOnDeath@death1:
 		Actor: light_inf
@@ -116,27 +116,27 @@ atreides_lightfactory:
 		SpawnOffset: 512,480,0
 		ExitCell: 1,2
 	RenderSprites:
-		Image: light.atreides
+		Image: atreides_light
 	ProvidesPrerequisite@vehicle_production:
 		Prerequisite: atreides_light_vehicle_production
 	ProvidesPrerequisite@light:
-		Prerequisite: light.atreides
+		Prerequisite: atreides_light
 	ProvidesPrerequisite@factionlight:
 		Prerequisite: atreides_lightfactory
 	GrantConditionOnPrerequisite@UPGRADEABLE:
-		Prerequisites: upgrade_light.atreides
+		Prerequisites: atreides_upgrade_light
 	DamageMultiplier@upgrade_light:
 		RequiresCondition: upgrade_light
 		Modifier: 75
 	ActorStatValues:
-		Upgrades: upgrade_light.atreides
+		Upgrades: atreides_upgrade_light
 
 atreides_heavyfactory:
 	Inherits: ^HeavyFactory
 	Tooltip:
 		Name: Atreides Heavy Factory
 	RenderSprites:
-		Image: heavy.atreides
+		Image: atreides_heavy
 	Buildable:
 		Factions: atreides
 		Prerequisites: ~atreides_constructionyard, atreides_refinery
@@ -167,7 +167,7 @@ atreides_repairpad:
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	RenderSprites:
-		Image: repair_pad.atreides
+		Image: atreides_repair_pad
 	RepairsUnits:
 		FinishRepairingNotification: Repaired
 		StartRepairingNotification: Repairing
@@ -189,7 +189,7 @@ atreides_outpost:
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	RenderSprites:
-		Image: outpost.atreides
+		Image: atreides_outpost
 	ProvidesPrerequisite@outpost:
 		Prerequisite: outpost
 	DetectCloaked:
@@ -227,9 +227,9 @@ atreides_hightechfactory:
 	ProductionTimeMultiplier@dune:
 		Multiplier: 150
 	RenderSprites:
-		Image: hightech.atreides
+		Image: atreides_hightech
 	ProvidesPrerequisite@hightech:
-		Prerequisite: hightech.atreides
+		Prerequisite: atreides_hightech
 
 atreides_ixresearchcenter:
 	Inherits: ^D2KBuilding
@@ -247,7 +247,7 @@ atreides_ixresearchcenter:
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	RenderSprites:
-		Image: research.atreides
+		Image: atreides_research
 	ProvidesPrerequisite@research:
 		Prerequisite: research_centre
 
@@ -257,7 +257,7 @@ atreides_starport:
 	Inherits@shape: ^3x2Shape
 	Buildable:
 		Factions: atreides
-		Prerequisites: ~hightech.atreides, ~research_centre
+		Prerequisites: ~atreides_hightech, ~research_centre
 		Description: Orders units from orbit.
 		IconPalette: d2kunit
 	Tooltip:
@@ -267,9 +267,9 @@ atreides_starport:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	RenderSprites:
-		Image: starport.atreides
+		Image: atreides_starport
 	ProvidesPrerequisite@starport:
-		Prerequisite: starport.atreides
+		Prerequisite: atreides_starport
 
 atreides_palace:
 	Inherits: ^D2KBuilding
@@ -277,7 +277,7 @@ atreides_palace:
 	Inherits@SW: ^PrimarySuperweapon
 	Inherits@shape: ^2x2Shape
 	Buildable:
-		Prerequisites: ~hightech.atreides, ~heavy.atreides_combat, ~research_centre, !apalace, ~techlevel.superweapons
+		Prerequisites: ~atreides_hightech, ~heavy.atreides_combat, ~research_centre, !apalace, ~techlevel.superweapons
 		Description: Unlocks superweapons and elite units.
 		IconPalette: d2kunit
 	Tooltip:
@@ -287,7 +287,7 @@ atreides_palace:
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	RenderSprites:
-		Image: palace.atreides
+		Image: atreides_palace
 	ProvidesPrerequisite@palace:
 		Prerequisite: palace
 	ProvidesPrerequisite@swlimit:
@@ -364,7 +364,7 @@ atreides_gunturret:
 		Dimensions: 1,2
 		LocalCenterOffset: 0,-512,0
 	RenderSprites:
-		Image: gun_turret.atreides
+		Image: atreides_gun_turret
 	Armament:
 		Weapon: 110mm_Gun
 	AttackTurreted:
@@ -389,7 +389,7 @@ atreides_rocketturret:
 		Dimensions: 1,2
 		LocalCenterOffset: 0,-512,0
 	RenderSprites:
-		Image: rocket_turret.atreides
+		Image: atreides_rocket_turret
 	Armament:
 		Weapon: D2K_TowerMissile
 	AttackTurreted:

@@ -221,7 +221,7 @@ ixian_rocketturret:
 		Start: 4339
 		Offset: -30,-24
 
-conyard.atreides:
+atreides_conyard:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -297,7 +297,7 @@ repair_pad.gold:
 		Start: 0
 		Offset: 0,0
 
-barracks.ixian:
+ixian_barracks:
 	Defaults:
 		Scale: 1.5
 	idle:
@@ -334,7 +334,7 @@ barracks.ixian:
 	icon:
 		Filename: ixian_barracks_icon.png
 
-outpost.atreides:
+atreides_outpost:
 	Defaults:
 		Scale: 1.5
 	idle:
@@ -431,7 +431,7 @@ ixian_launchpad:
 		Offset: 0,0
 
 research.gold:
-	Inherits: research.ordos
+	Inherits: ordos_research
 	idle:
 		Filename: ixian_ixresearchcenter_d2k_research_center_gold.shp
 		Start: 0
@@ -455,7 +455,7 @@ research.gold:
 		Start: 0
 		Offset: 0,0
 
-starport.smuggler:
+smuggler_starport:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -597,7 +597,7 @@ heavy.mercenary:
 	icon:
 		Filename: ixian_advancedheavyfactory_icon.shp
 
-d2k_munitions.atreides:
+atreides_d2k_munitions:
 	Defaults:
 	idle:
 		Filename: ixian_munitionssilo_d2k_munitions.shp
@@ -752,7 +752,7 @@ ixian_twinrockettrooper:
 	icon:
 		Filename: ixian_twinrockettrooper_icon.png
 
-heavy_inf.ixian:
+ixian_heavy_inf:
 	Inherits: vordel_effect
 	Defaults:
 		Filename: ixian_promotion_rashidan_ixheavytrooper.png
@@ -1162,7 +1162,7 @@ ixian_spiceharvester:
 		Start: 4280
 		Offset: -30,-24
 
-harvester_husk.ixian:
+ixian_harvester_husk:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -1242,7 +1242,7 @@ ixian_farasha:
 	icon:
 		Filename: ixian_promotion_farasha_icon.png
 
-farasha_husk.ixian:
+ixian_farasha_husk:
 	idle:
 		Filename: d2k_farasha.shp
 		ZOffset: -512
@@ -1256,13 +1256,13 @@ farasha_drone_ixian:
 	icon:
 		Filename: d2k_farasha_icon.shp
 
-farasha_drone_husk.ixian:
+ixian_farasha_drone_husk:
 	idle:
 		Filename: d2k_farasha_drone.shp
 		ZOffset: -512
 		Facings: -32
 
-missile_tank_husk.ixian:
+ixian_missile_tank_husk:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -1299,7 +1299,7 @@ mongoose_d2k_a:
 	icon:
 		Filename: ixian_mongoose_icon.png
 
-duelist_tank.ixian:
+ixian_duelist_tank:
 	Defaults:
 	idle:
 		Filename: ixian_duelist_tank_chassis_v6.png
@@ -1328,7 +1328,7 @@ duelist_tank.ixian:
 	icon:
 		Filename: d2k_duelist_tank_icon.shp
 
-duelist_tank_husk.ixian:
+ixian_duelist_tank_husk:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -1489,7 +1489,7 @@ d2k_siege_tank_higher_range:
 	icon:
 		Filename: ixian_upgrade_reinforcedbarrel_icon.shp
 
-apparition.ixian:
+ixian_apparition:
 	Inherits: vordel_effect
 	Defaults:
 		Filename: d2k_apparition.shp
@@ -1539,7 +1539,7 @@ ixian_upgrade_tungstenneedleguns:
 	icon:
 		Filename: ixian_upgrade_tungstenneedleguns_icon.png
 
-rocket_raider.ixian:
+ixian_rocket_raider:
 	Defaults:
 	idle:
 		Filename: DATA.R16

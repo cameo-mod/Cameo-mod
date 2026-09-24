@@ -5,7 +5,7 @@ ordos_constructionyard:
 	Transforms:
 		IntoActor: ordos_mobileconstructionvehicle
 	RenderSprites:
-		Image: conyard.ordos
+		Image: ordos_conyard
 
 # Generic wind trap template. Common traits live here; each faction actor below
 # only sets its own build prerequisite (owning construction yard) and sprite image.
@@ -17,7 +17,7 @@ ordos_windtrap:
 		Prerequisites: ~ordos_constructionyard
 		Description: Provides power to the base.
 	RenderSprites:
-		Image: power.ordos
+		Image: ordos_power
 
 # d2k_mini_windtrap:
 # 	Inherits: ^D2KBuilding
@@ -52,15 +52,15 @@ ordos_windtrap:
 # 	RevealsShroud:
 # 		Range: 3c768
 # 	RenderSprites:
-# 		Image: minipower.ordos
+# 		Image: ordos_minipower
 # 		FactionImages:
-# 			atreides: minipower.atreides
-# 			fremen: minipower.atreides
-# 			ixian: minipower.atreides
-# 			harkonnen: minipower.harkonnen
-# 			corrino: minipower.harkonnen
-# 			guild: minipower.harkonnen
-# 			emperor: minipower.harkonnen
+# 			atreides: atreides_minipower
+# 			fremen: atreides_minipower
+# 			ixian: atreides_minipower
+# 			harkonnen: harkonnen_minipower
+# 			corrino: harkonnen_minipower
+# 			guild: harkonnen_minipower
+# 			emperor: harkonnen_minipower
 # 	WithIdleOverlay@ZAPS:
 # 		RequiresCondition: !build-incomplete
 # 		Sequence: idle-zaps
@@ -103,7 +103,7 @@ ordos_barracks:
 		SpawnOffset: 512,480,0
 		ExitCell: 1,2
 	RenderSprites:
-		Image: barracks.ordos
+		Image: ordos_barracks
 	ProvidesPrerequisite@d2kbarracks:
 		Prerequisite: d2k_barracks
 	ProvidesPrerequisite@barracks:
@@ -130,7 +130,7 @@ ordos_barracks:
 # 	Inherits@CPQWP: ^CPQConditionWithPrimary
 # 	Inherits@shape: ^3x2Shape
 # 	Buildable:
-# 		Prerequisites: ~faction.tleilaxu, d2k_silo_tleilaxu
+# 		Prerequisites: ~tleilaxu_faction, d2k_silo_tleilaxu
 # 		Queue: Building, RABuilding
 # 		BuildPaletteOrder: 220
 # 		BuildDuration: 500
@@ -214,7 +214,7 @@ ordos_barracks:
 # 		Dimensions: 3,3
 # 		LocalCenterOffset: 0,-512,0
 # 	Buildable:
-# 		Prerequisites: ~faction.tleilaxu, d2k_flesh_vat, !swpalace
+# 		Prerequisites: ~tleilaxu_faction, d2k_flesh_vat, !swpalace
 # 		Queue: Building, RABuilding
 # 		BuildPaletteOrder: 220
 # 		BuildDuration: 1500
@@ -247,7 +247,7 @@ ordos_barracks:
 # 		Description: Summons Tamed Sandworm anywhere on the map.\nSandworm can roam around the map and swallow enemy units\nCannot swallow big targets
 # 		SelectTargetSpeechNotification: SelectTarget
 # 		InsufficientPowerSpeechNotification: InsufficientPower
-# 		Prerequisites: ~faction.tleilaxu
+# 		Prerequisites: ~tleilaxu_faction
 # 		Actors: sandworm_tleilaxu_summon
 # 		SupportPowerPaletteOrder: 10
 # 		EffectSequence: idle
@@ -283,12 +283,12 @@ ordos_refineryordos:
 	FreeActorWithDelivery@1:
 		Actor: ordos_spiceharvester
 		DeliveryOffset: 2,2
-		DeliveringActor: carryall_reinforce.ordos
+		DeliveringActor: ordos_carryall_reinforce
 		Facing: 160
 	# FreeActorWithDelivery@2:
 	# 	Actor: ordos_spiceharvester
 	# 	DeliveryOffset: 0,2
-	# 	DeliveringActor: carryall_reinforce.ordos
+	# 	DeliveringActor: ordos_carryall_reinforce
 	# 	Facing: 160
 	RenderSprites:
 		Image: ordos_refineryordos
@@ -303,14 +303,14 @@ ordos_storagesilo:
 		Prerequisites: ~ordos_constructionyard, ordos_refineryordos
 		Description: Stores excess resources.
 	RenderSprites:
-		Image: silo.ordos
+		Image: ordos_silo
 
 ordos_lightfactory:
 	Inherits: ^LightFactory
 	Tooltip:
 		Name: Ordos Light Factory
 	RenderSprites:
-		Image: light.ordos
+		Image: ordos_light
 	Buildable:
 		Factions: ordos
 		Prerequisites: ~ordos_constructionyard, ordos_refineryordos
@@ -324,7 +324,7 @@ ordos_heavyfactory:
 	Tooltip:
 		Name: Ordos Heavy Factory
 	RenderSprites:
-		Image: heavy.ordos
+		Image: ordos_heavy
 	Buildable:
 		Factions: ordos
 		Prerequisites: ~ordos_constructionyard, ordos_refineryordos
@@ -459,7 +459,7 @@ ordos_hightechfactory:
 		Prerequisites: ~ordos_constructionyard, ordos_outpost
 		Description: Produces advanced vehicles.
 	RenderSprites:
-		Image: hightech.ordos
+		Image: ordos_hightech
 
 # Generic research centre. Common traits here; each faction actor sets its build
 # prerequisite and sprite image.
@@ -471,7 +471,7 @@ ordos_ixresearchcenter:
 		Prerequisites: ~ordos_constructionyard, ordos_outpost
 		Description: Unlocks advanced technology.
 	RenderSprites:
-		Image: research.ordos
+		Image: ordos_research
 
 # Generic high tech (aircraft) factory. Common traits here; each faction actor sets
 # its build prerequisite and sprite image.
@@ -922,7 +922,7 @@ ordos_palace:
 # 	Inherits@SW: ^PrimarySuperweapon
 # 	Inherits@shape: ^3x3Shape
 # 	Buildable:
-# 		Prerequisites: research_centre, ~faction.corrino, !swpalace
+# 		Prerequisites: research_centre, ~corrino_faction, !swpalace
 # 		Queue: Building, RABuilding
 # 		BuildPaletteOrder: 620
 # 		BuildDuration: 937
@@ -962,7 +962,7 @@ ordos_palace:
 # 	RevealsShroud:
 # 		Range: 4c768
 # 	RenderSprites:
-# 		Image: palace.corrino
+# 		Image: corrino_palace
 # 	DetonateWeaponPower@sardaukar:
 # 		Prerequisites:
 # 			1: ~techlevel.superweapons
@@ -1221,7 +1221,7 @@ ordos_palace:
 # 	Tooltip:
 # 		Name: Atreides Palace
 # 	RenderSprites:
-# 		Image: palace.atreides
+# 		Image: atreides_palace
 # 		-FactionImages:
 # 	-WithSupportPowerActivationOverlay:
 # 	Power:
@@ -1245,7 +1245,7 @@ ordos_palace:
 # 	Tooltip:
 # 		Name: Harkonnen Palace
 # 	RenderSprites:
-# 		Image: palace.harkonnen
+# 		Image: harkonnen_palace
 # 		-FactionImages:
 # 	-WithSupportPowerActivationOverlay:
 # 	Power:
@@ -1282,7 +1282,7 @@ ordos_palace:
 # 	Production@Ordos:
 # 		-RequiresCondition:
 
-# conyard.atreides:
+# atreides_conyard:
 # 	Inherits: construction_yard
 # 	Buildable:
 # 		Queue: Building, RABuilding
@@ -1291,10 +1291,10 @@ ordos_palace:
 # 		ForceFaction: atreides
 # 		IconPalette: d2kunit
 # 	RenderSprites:
-# 		Image: conyard.atreides
+# 		Image: atreides_conyard
 # 		-FactionImages:
 
-# conyard.harkonnen:
+# harkonnen_conyard:
 # 	Inherits: construction_yard
 # 	Buildable:
 # 		Queue: Building, RABuilding
@@ -1303,10 +1303,10 @@ ordos_palace:
 # 		ForceFaction: harkonnen
 # 		IconPalette: d2kunit
 # 	RenderSprites:
-# 		Image: conyard.harkonnen
+# 		Image: harkonnen_conyard
 # 		-FactionImages:
 
-# conyard.ordos:
+# ordos_conyard:
 # 	Inherits: construction_yard
 # 	Buildable:
 # 		Queue: Building, RABuilding
@@ -1315,7 +1315,7 @@ ordos_palace:
 # 		ForceFaction: ordos
 # 		IconPalette: d2kunit
 # 	RenderSprites:
-# 		Image: conyard.ordos
+# 		Image: ordos_conyard
 # 		-FactionImages:
 
 ###################################

@@ -38,11 +38,11 @@ atreides_combattank:
 	Armament:
 		Weapon: 80mm_A
 	RenderSprites:
-		Image: combat_tank.atreides
+		Image: atreides_combat_tank
 	SpawnActorOnDeath:
-		Actor: combat_tank_husk.atreides
+		Actor: atreides_combat_tank_husk
 
-combat_tank_husk.atreides:
+atreides_combat_tank_husk:
 	Inherits@husk: ^D2KVehicleHusk
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Tooltip:
@@ -50,7 +50,7 @@ combat_tank_husk.atreides:
 	TransformOnCapture:
 		IntoActor: atreides_combattank
 	RenderSprites:
-		Image: combat_tank.atreides
+		Image: atreides_combat_tank
 
 atreides_spiceharvester:
 	Inherits@D2KT: ^D2KTank
@@ -147,7 +147,7 @@ atreides_sonictank:
 		Weapon: D2KUnitExplodeLarge
 		EmptyWeapon: D2KUnitExplodeLarge
 	SpawnActorOnDeath:
-		Actor: sonic_tank_husk.atreides
+		Actor: atreides_sonic_tank_husk
 		OwnerType: InternalName
 		EffectiveOwnerFromOwner: true
 
@@ -158,7 +158,7 @@ atreides_sonictank:
 		Image: atreides_sonictank
 		PlayerPalette: player_rgba
 
-sonic_tank_husk.atreides:
+atreides_sonic_tank_husk:
 	Inherits@husk: ^D2KVehicleHusk
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Tooltip:
@@ -231,7 +231,7 @@ atreides_siegetank:
 	Buildable:
 		Factions: atreides
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~atreides_vehicle_production, upgrade_heavy.atreides
+		Prerequisites: ~atreides_vehicle_production, atreides_upgrade_heavy
 		BuildPaletteOrder: 110
 		Description: actor_atreides_siegetank.description
 		IconPalette: d2kunit
@@ -268,7 +268,7 @@ atreides_siegetank:
 	AutoTarget:
 		InitialStanceAI: Defend
 	SpawnActorOnDeath:
-		Actor: siege_tank_husk.atreides
+		Actor: atreides_siege_tank_husk
 		OwnerType: InternalName
 		EffectiveOwnerFromOwner: true
 
@@ -277,7 +277,7 @@ atreides_siegetank:
 	RenderSprites:
 		Image: siege_tank
 
-siege_tank_husk.atreides:
+atreides_siege_tank_husk:
 	Inherits@husk: ^D2KVehicleHusk
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Tooltip:
@@ -298,7 +298,7 @@ atreides_sandbike:
 		Factions: atreides
 		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 10
-		Prerequisites: ~atreides_vehicle_production, ~light.atreides
+		Prerequisites: ~atreides_vehicle_production, ~atreides_light
 		Description: actor_atreides_sandbike.description
 		IconPalette: d2kunit
 	Valued:

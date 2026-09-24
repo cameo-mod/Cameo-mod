@@ -1,4 +1,4 @@
-upgrade_conyard.atreides:
+atreides_upgrade_conyard:
 	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Construction Yard Upgrade
@@ -12,9 +12,9 @@ upgrade_conyard.atreides:
 	Valued:
 		Cost: 200
 	RenderSprites:
-		Image: conyard.atreides
+		Image: atreides_conyard
 
-upgrade_barracks.atreides:
+atreides_upgrade_barracks:
 	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Barracks Upgrade
@@ -28,9 +28,9 @@ upgrade_barracks.atreides:
 	Valued:
 		Cost: 200
 	RenderSprites:
-		Image: barracks.atreides
+		Image: atreides_barracks
 
-upgrade_light.atreides:
+atreides_upgrade_light:
 	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Light Factory Upgrade
@@ -44,9 +44,9 @@ upgrade_light.atreides:
 	Valued:
 		Cost: 200
 	RenderSprites:
-		Image: light.atreides
+		Image: atreides_light
 
-upgrade_heavy.atreides:
+atreides_upgrade_heavy:
 	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Heavy Factory Upgrade
@@ -60,9 +60,9 @@ upgrade_heavy.atreides:
 	Valued:
 		Cost: 400
 	RenderSprites:
-		Image: heavy.atreides
+		Image: atreides_heavy
 
-upgrade_radar.atreides:
+atreides_upgrade_radar:
 	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Radar Upgrade
@@ -76,4 +76,4 @@ upgrade_radar.atreides:
 	Valued:
 		Cost: 300
 	RenderSprites:
-		Image: outpost.atreides
+		Image: atreides_outpost

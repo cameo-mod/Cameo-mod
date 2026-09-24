@@ -325,7 +325,7 @@ ordos_mortartrooper:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 80
-# 		Prerequisites: ~barracks.atreides, upgrade_barracks, high_tech_factory, ~du_fremen
+# 		Prerequisites: ~atreides_barracks, upgrade_barracks, high_tech_factory, ~du_fremen
 # 		Icon: phantomicon
 # 		IconPalette: windows256
 # 		Description: Fast Elite infantry units armed with assault rifles and machine guns. When grouped, they can take down buildings extremely quickly\nDetector\n  Strong vs Buildings\n  Weak vs Infantry, Vehicles\n  Special Ability: Invisibility
@@ -597,7 +597,7 @@ ordos_contaminator:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 70
-# 		Prerequisites: ~barracks.harkonnen, upgrade_barracks, ~faction.corrino, high_tech_factory
+# 		Prerequisites: ~harkonnen_barracks, upgrade_barracks, ~corrino_faction, high_tech_factory
 # 		BuildDuration: 200
 # 		BuildDurationModifier: 100
 # 	Valued:
@@ -623,7 +623,7 @@ ordos_contaminator:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 100
-# 		Prerequisites: ~faction.corrino, palace_emperor
+# 		Prerequisites: ~corrino_faction, palace_emperor
 # 		BuildDuration: 500
 # 		BuildDurationModifier: 100
 # 		Description: Heavily Armored Elite assault infantry of Emperor's Army\nCannot lay down or be crushed\n  Strong vs Everything
@@ -680,7 +680,7 @@ ordos_contaminator:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 70
-# 		Prerequisites: ~barracks.harkonnen, upgrade_barracks, ~faction.corrino, high_tech_factory
+# 		Prerequisites: ~harkonnen_barracks, upgrade_barracks, ~corrino_faction, high_tech_factory
 # 		Description: Assassin equipped with Heat Blade and Crossbow\n  Strong vs Infantry
 # 		BuildDuration: 300
 # 		BuildDurationModifier: 100
@@ -875,7 +875,7 @@ ordos_leech:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 140
-# 		Prerequisites: ~barracks.harkonnen, upgrade_barracks, high_tech_factory
+# 		Prerequisites: ~harkonnen_barracks, upgrade_barracks, high_tech_factory
 # 		Description: Flying infantry unit armed with dual assault rifle.\n Can Attack air units.\n  Strong vs Infantry\n  Weak vs Vehicles
 # 		IconPalette: d2kunit
 # 		BuildDuration: 250
@@ -967,7 +967,7 @@ ordos_leech:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 140
-# 		Prerequisites: ~barracks.ordos, upgrade_barracks, high_tech_factory, ~!faction.tleilaxu
+# 		Prerequisites: ~ordos_barracks, upgrade_barracks, high_tech_factory, ~!tleilaxu_faction
 # 		Description: Stealth Flying infantry unit armed with deadly dual machine guns\n  Strong vs Infantry, Vehicles\n  Weak vs Air
 # 		IconPalette: d2kunit
 # 		BuildDuration: 325
@@ -1004,7 +1004,7 @@ ordos_leech:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 140
-# 		Prerequisites: d2k_tleilaxu_tech, upgrade.rocketeer, ~faction.tleilaxu
+# 		Prerequisites: d2k_tleilaxu_tech, upgrade.rocketeer, ~tleilaxu_faction
 # 		Description: Flying infantry unit armed with deadly dual machine guns\n\nMust resupply at Resource Center\n  Strong vs Infantry\n  Weak vs Vehicles Strong vs Everything
 # 		BuildDuration: 400
 # 		BuildDurationModifier: 100
@@ -1047,7 +1047,7 @@ ordos_leech:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 160
-# 		Prerequisites: ~barracks.ordos, upgrade_barracks, ~!faction.ordos. ~!faction.smugglers, high_tech_factory
+# 		Prerequisites: ~ordos_barracks, upgrade_barracks, ~!faction.ordos. ~!smugglers_faction, high_tech_factory
 # 		Description: Infantry armed with a long range rifle\nCan detect cloaked units at great distances.\nCan Deplay to grant stealth and accuracy but loses movement\n  Strong vs Infantry, Air, Vehicles\n  Weak vs Tanks\n  Special Ability: Invisibility while static
 # 		IconPalette: d2kunit
 # 		BuildDuration: 600
@@ -1122,7 +1122,7 @@ ordos_leech:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 160
-# 		Prerequisites: ~barracks.atreides, upgrade_barracks, ~!faction.ixian, ~techlevel.low
+# 		Prerequisites: ~atreides_barracks, upgrade_barracks, ~!ixian_faction, ~techlevel.low
 # 		Description: Spotter Infantry armed with a long range rifle\nCan detect cloaked units.\nCan Deplay to grant more view distance and accuracy, but loses movement\n  Strong vs Infantry, Air, Vehicles\n  Weak vs Tanks\n  Special Ability: Binoculars
 # 		IconPalette: d2kunit
 # 		BuildDuration: 400
@@ -1161,7 +1161,7 @@ ordos_leech:
 # 		BuildPaletteOrder: 40
 # 		BuildDuration: 220
 # 		BuildDurationModifier: 100
-# 		Prerequisites: ~barracks.harkonnen, upgrade_barracks, high_tech_factory, ~faction.harkonnen
+# 		Prerequisites: ~harkonnen_barracks, upgrade_barracks, high_tech_factory, ~harkonnen_faction
 # 		Description: Stealth Deadly unit.\nUndetected even when exiting vehicles and infiltrating.\n  Strong vs Infantry, Vehicles, Tanks, Buildings\n  Weak vs Siege\n  Special Ability: Invisibility
 # 		IconPalette: d2kunit
 # 	Valued:
@@ -1211,7 +1211,7 @@ ordos_leech:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 170
-# 		Prerequisites: upgrade_barracks, ~barracks.ordos, ~techlevel.low
+# 		Prerequisites: upgrade_barracks, ~ordos_barracks, ~techlevel.low
 # 		Description: Stealth unit that can hijack enemy vehicles\n  Unarmed
 # 		IconPalette: d2kunit
 # 		BuildDuration: 400
@@ -1334,7 +1334,7 @@ ordos_leech:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 100
-# 		Prerequisites: ~faction.corrino, palace_emperor
+# 		Prerequisites: ~corrino_faction, palace_emperor
 # 		BuildDuration: 500
 # 		BuildDurationModifier: 100
 # 		Description: Witch of the Imperium. Can control enemy units using The Voice and\ninstantly kill infantry with Gom Jabbar\nCannot be poisoned nor mind controlled
@@ -1487,7 +1487,7 @@ ordos_leech:
 # 		Queue: VVehicle, RAVehicle
 # 		BuildPaletteOrder: 150
 # 		BuildDurationModifier: 50
-# 		Prerequisites: ~faction.corrino, ordos_upgrade_lightfactory
+# 		Prerequisites: ~corrino_faction, ordos_upgrade_lightfactory
 # 		Description: Ultimate Transport Vehicle\nCan carry 12 passengers quickly\nLimit: 1
 # 		BuildLimit: 1
 # 	Cargo:
@@ -1552,7 +1552,7 @@ ordos_leech:
 # 		BuildPaletteOrder: 100
 # 		BuildDuration: 375
 # 		BuildDurationModifier: 100
-# 		Prerequisites: ~faction.atreides, upgrade_heavy
+# 		Prerequisites: ~atreides_faction, upgrade_heavy
 # 		Description: Stealth Heavy Carrier vehicle with machine td_nod_gunturret\nCan carry 12 passengers\nDue to its giant size its very attractive to worms
 # 		IconPalette: windows256
 # 	Valued:
@@ -1617,7 +1617,7 @@ ordos_leech:
 # d2k_atreides_apc.bot1:
 # 	Inherits: d2k_atreides_apc
 # 	Buildable:
-# 		Prerequisites: ~faction.atreides, upgrade_heavy, ~botplayer
+# 		Prerequisites: ~atreides_faction, upgrade_heavy, ~botplayer
 # 	ProductionCostMultiplier:
 # 		Multiplier: 200
 # 	Cargo:
@@ -1644,7 +1644,7 @@ ordos_leech:
 # 		BuildPaletteOrder: 80
 # 		BuildDuration: 650
 # 		BuildDurationModifier: 100
-# 		Prerequisites: ~faction.tleilaxu, upgrade.basq, d2k_tleilaxu_tech
+# 		Prerequisites: ~tleilaxu_faction, upgrade.basq, d2k_tleilaxu_tech
 # 		Description: Bio hover tank\nGood against both ground and air\nResistant against missiles and heavy calibre armaments
 # 		IconPalette: ra2
 # 	Valued:
@@ -1727,7 +1727,7 @@ ordos_leech:
 # 		BuildPaletteOrder: 110
 # 		BuildDuration: 300
 # 		BuildDurationModifier: 100
-# 		Prerequisites: ~techlevel.low, ~light.harkonnen, ordos_upgrade_lightfactory, ~faction.corrino
+# 		Prerequisites: ~techlevel.low, ~harkonnen_light, ordos_upgrade_lightfactory, ~corrino_faction
 # 		Description: Suicidal remote vehicle armed with high explosives\nHas very weak armor \n\n Requires a Light Factory in order to move.
 # 		IconPalette: d2kunit
 # 	WithColoredOverlay:
@@ -1794,7 +1794,7 @@ ordos_leech:
 # 		BuildPaletteOrder: 100
 # 		BuildDuration: 600
 # 		BuildDurationModifier: 100
-# 		Prerequisites: ~heavy.atreides, research_centre, ~faction.fremen
+# 		Prerequisites: ~atreides_heavy, research_centre, ~fremen_faction
 # 		Description: Fremen Quick Stealth tank armed with missile launcher and autocannon\nLow durability\n  Strong vs Vehicles, Air\n  Weak vs Infantry
 # 		IconPalette: d2kunit
 # 	Selectable:
@@ -1902,7 +1902,7 @@ ordos_leech:
 # 		BuildPaletteOrder: 40
 # 		BuildDuration: 325
 # 		BuildDurationModifier: 100
-# 		Prerequisites: ordos_upgrade_lightfactory, ~light.ordos, ~techlevel.low, ~!faction.tleilaxu, ~!faction.ordos
+# 		Prerequisites: ordos_upgrade_lightfactory, ~ordos_light, ~techlevel.low, ~!tleilaxu_faction, ~!ordos_faction
 # 		Description: Hit and Run Vehicle with small cannon and missile launcher\nCan carry 3 passengers
 # 		IconPalette: d2kunit
 # 	AutoDeployer:
@@ -1966,7 +1966,7 @@ ordos_leech:
 # d2k_apc.bot1:
 # 	Inherits: d2k_apc
 # 	Buildable:
-# 		Prerequisites: ordos_upgrade_lightfactory, ~light.ordos, ~techlevel.low, ~!faction.tleilaxu, ~!faction.ordos, ~botplayer
+# 		Prerequisites: ordos_upgrade_lightfactory, ~ordos_light, ~techlevel.low, ~!tleilaxu_faction, ~!ordos_faction, ~botplayer
 # 	ProductionCostMultiplier:
 # 		Multiplier: 133
 # 	Cargo:
@@ -2072,7 +2072,7 @@ ordos_saboteur:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~barracks.atreides, ~faction.fremen
+# 		Prerequisites: ~atreides_barracks, ~fremen_faction
 # 		Description: Universal Fremen infantry unit armed with assault rifle and rockets.\nCan attack air.\n  Strong vs Infantry, Vehicles\n  Weak vs Artillery
 # 		BuildDuration: 120
 # 		BuildDurationModifier: 100
@@ -2119,7 +2119,7 @@ ordos_saboteur:
 # 		BuildPaletteOrder: 100
 # 		BuildDuration: 280
 # 		BuildDurationModifier: 100
-# 		Prerequisites: ~barracks.harkonnen, upgrade_barracks, high_tech_factory, ~faction.corrino
+# 		Prerequisites: ~harkonnen_barracks, upgrade_barracks, high_tech_factory, ~corrino_faction
 # 		Description: Advanced infantry armed with a plasma ball launcher\n  Strong vs Tanks\n  Weak vs Artillery, Infantry
 # 		IconPalette: d2kunit
 # 	Valued:
@@ -2169,7 +2169,7 @@ ordos_saboteur:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 120
-# 		Prerequisites: ~barracks.atreides, upgrade_barracks, high_tech_factory, ~faction.fremen
+# 		Prerequisites: ~atreides_barracks, upgrade_barracks, high_tech_factory, ~fremen_faction
 # 		Description: Stealth Elite Fremen Guerilla infantry armed with Sonic Weapon\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Artillery, Tanks
 # 		IconPalette: d2kunit
 # 		BuildDuration: 280

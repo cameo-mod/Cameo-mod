@@ -1,4 +1,4 @@
-refinery.atreides:
+atreides_refinery:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -72,7 +72,7 @@ refinery.atreides:
 		Start: 4138
 
 
-sonic_tank_husk.atreides:
+atreides_sonic_tank_husk:
 	Defaults:
 		Filename: atreides_sonictank.png
 	idle:
@@ -82,7 +82,7 @@ sonic_tank_husk.atreides:
 		Transpose: true
 		ZOffset: -512
 
-combat_tank.atreides:
+atreides_combat_tank:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -112,7 +112,7 @@ combat_tank.atreides:
 		Offset: -30,-24
 
 
-combat_tank_husk.atreides:
+atreides_combat_tank_husk:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -351,14 +351,14 @@ atreides_airdrone:
 	icon:
 		Filename: atreides_airdrone_build_icon.png
 
-gun_turret.atreides:
+atreides_gun_turret:
 	Inherits: flame_turret
 	turret:
 		Filename: invisibleitem.shp
 		Length: *
 		Facings: 1
 
-rocket_turret.atreides:
+atreides_rocket_turret:
 	Inherits: flame_turret
 	turret:
 		Filename: invisibleitem.shp
@@ -367,7 +367,7 @@ rocket_turret.atreides:
 
 # Migrated from legacy mods/cameo/sequences/d2k.yaml (Ruling 9 sequences)
 
-repair_pad.atreides:
+atreides_repair_pad:
 	Defaults:
 	make:
 		Filename: DATA.R16
@@ -423,7 +423,7 @@ repair_pad.atreides:
 		Start: 4360
 		Offset: -30,-24
 
-starport.atreides:
+atreides_starport:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -492,7 +492,7 @@ starport.atreides:
 		Start: 4356
 		Offset: -30,-24
 
-power.atreides:
+atreides_power:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -553,7 +553,7 @@ power.atreides:
 		Start: 4320
 		Offset: -30,-24
 
-barracks.atreides:
+atreides_barracks:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -600,7 +600,7 @@ barracks.atreides:
 		Start: 4323
 		Offset: -30,-24
 
-silo.atreides:
+atreides_silo:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -651,7 +651,7 @@ silo.atreides:
 		Start: 4348
 		Offset: -30,-24
 
-hightech.atreides:
+atreides_hightech:
 	Defaults:
 		Offset: -48,80
 	idle:
@@ -715,7 +715,7 @@ hightech.atreides:
 	active:
 		Filename: invisibleitem.shp
 
-research.atreides:
+atreides_research:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -770,7 +770,7 @@ research.atreides:
 		Start: 4363
 		Offset: -30,-24
 
-palace.atreides:
+atreides_palace:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -823,7 +823,7 @@ palace.atreides:
 		Start: 4366
 		Offset: -30,-24
 
-light.atreides:
+atreides_light:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -904,7 +904,7 @@ light.atreides:
 		Start: 4345
 		Offset: -30,-24
 
-heavy.atreides:
+atreides_heavy:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -975,7 +975,7 @@ heavy.atreides:
 		Start: 4351
 		Offset: -30,-24
 
-minipower.atreides:
+atreides_minipower:
 	idle:
 		Filename: d2k_mini_windtrap.shp
 		Start: 4
@@ -1003,7 +1003,7 @@ minipower.atreides:
 		Tick: 150
 		Scale: 1.2
 
-faction.atreides:
+atreides_faction:
 	idle:
 		Filename: atreidesicon.shp
 	icon:

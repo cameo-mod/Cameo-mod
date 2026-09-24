@@ -914,13 +914,13 @@
 		Queues: Aircraft
 		Sequence: production-welding
 	ProvidesPrerequisite@upgrade3:
-		Prerequisite: hightech.harkonnen
+		Prerequisite: harkonnen_hightech
 		Factions: harkonnen, corrino, guild
 	ProvidesPrerequisite@upgrade:
-		Prerequisite: hightech.atreides
+		Prerequisite: atreides_hightech
 		Factions: atreides, ixian, fremen
 	ProvidesPrerequisite@upgrade2:
-		Prerequisite: hightech.ordos
+		Prerequisite: ordos_hightech
 		Factions: ordos, mercenary, smugglers, tleilaxu
 	ProvidesPrerequisite@buildingname:
 	ProvidesPrerequisite@high_tech_factory:
@@ -1003,13 +1003,13 @@
 		RequiresCondition: !build-incomplete
 		#Palette: starportlights
 	ProvidesPrerequisite@atreides:
-		Prerequisite: starport.atreides
+		Prerequisite: atreides_starport
 		Factions: atreides
 	ProvidesPrerequisite@ordos:
 		Prerequisite: ordos_starport
 		Factions: ordos
 	ProvidesPrerequisite@harkonnen:
-		Prerequisite: starport.harkonnen
+		Prerequisite: harkonnen_starport
 		Factions: harkonnen
 	ProvidesPrerequisite@atreides_combat:
 		Prerequisite: starport.atreides_combat

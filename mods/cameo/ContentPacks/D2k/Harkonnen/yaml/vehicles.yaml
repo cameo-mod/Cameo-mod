@@ -27,7 +27,7 @@ harkonnen_mobileconstructionvehicle:
 		Image: d2k_mcv
 
 
-combat_tank.harkonnen:
+harkonnen_combat_tank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -74,7 +74,7 @@ combat_tank.harkonnen:
 		CloakStyle: Palette
 		CloakedPalette: d2kcloak
 	RenderSprites:
-		Image: combat_tank.harkonnen
+		Image: harkonnen_combat_tank
 		PlayerPalette: player_rgba
 	Voiced:
 		VoiceSet: D2KCombatTank
@@ -258,7 +258,7 @@ devastator:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 100
-		Prerequisites: ~harkonnen_vehicle_production, ~heavy.harkonnen, research_centre
+		Prerequisites: ~harkonnen_vehicle_production, ~harkonnen_heavy, research_centre
 		BuildDuration: 1000
 		BuildDurationModifier: 100
 		Description: actor_devastator.description
@@ -355,7 +355,7 @@ harkonnen_devastatormech:
 	Inherits@AntiTank: ^PrioritizeTank
 	Buildable:
 		Queue: Vehicle, RAVehicle, Starport
-		Prerequisites: ~harkonnen_vehicle_production, ~heavy.harkonnen, research_centre, ~harkonnen_promotion_devastatormech
+		Prerequisites: ~harkonnen_vehicle_production, ~harkonnen_heavy, research_centre, ~harkonnen_promotion_devastatormech
 		BuildPaletteOrder: 105
 		BuildDuration: 1000
 		BuildDurationModifier: 100

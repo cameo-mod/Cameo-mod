@@ -1,5 +1,32 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-25c — EMBER: loaded faction-dot sweep (150 renames, R18)
+
+`Agent: EMBER · branch devin/ember/dot-faction-prefix · base a5692a5f7`
+
+Maintainer ruling: a dot in an id means **bot-only variant or `.husk`** — nothing
+else. All LOADED faction-suffix ids renamed to faction-front form via
+`tools/rename/safe_rename.py` + `tools/rename/rename_map_dot_faction.yaml`
+(150 pairs, boundary-safe, fluent-aware, `.oramap`-aware).
+
+Scope: 56 actor/upgrade defs + 96 sequence-side ids across D2k pack
+(`.atreides/.harkonnen/.ordos/.ixian/.corrino/.smugglers/.fremen/...`),
+RA2Mod pack (`.latin/.steel/.futu`), `OILB.d2k→d2k_spicesifter`,
+`OILB.TS`, `tsgtsilo.cabal→cabal_tsgtsilo`, plus all references in
+`ai.yaml`, map scripts, and 4 `.oramap` archives. `up_team_*` upgrade ids
+keep their dots per maintainer ("team upgrades are fine with the dot");
+prerequisite tokens (`fact.cabal`) and trait-instance names
+(`ProduceActorPower.Fremen`) are not actor ids — untouched.
+`tscyc2.cabal` had no def — its two dangling dict keys in
+`wh40k.yaml`/`advancewars.yaml` renamed for consistency.
+
+Verification: pre/post-rename validation clean; `audit_map_actors` M1 PASS
+(363 maps, 184k placed actors, 0 dangling); boot-gate PASS (menu marker,
+45→45 exceptions). ~500 dotted ids remain in DORMANT files (commented out of
+mod.yaml) — cosmetic debt, deferred.
+
+---
+
 ## 2026-09-25b — EMBER: `weapons.yaml` W7 remainder (61 edges → 0)
 
 `Agent: EMBER · branch devin/ember/w7-central · base 5b89b1341`

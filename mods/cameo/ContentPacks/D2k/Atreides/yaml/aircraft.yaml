@@ -14,7 +14,7 @@ atreides_ornithopter:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 60
-		Prerequisites: ~hightech.atreides, ~heavy.atreides_combat
+		Prerequisites: ~atreides_hightech, ~heavy.atreides_combat
 		Description: actor_atreides_ornithopter.description
 		IconPalette: d2kunit
 	UpdatesPlayerStatistics:
@@ -36,7 +36,7 @@ atreides_ornithopter:
 		VTOL: True
 		IdleTurnSpeed: 4
 	SpawnActorOnDeath:
-		Actor: ornithopter_husk.atreides
+		Actor: atreides_ornithopter_husk
 	Armament@PRIMARY:
 		Weapon: OrniBomb
 		LocalOffset: 0,-256,-128
@@ -68,7 +68,7 @@ atreides_ornithopter:
 	Targetable:
 		TargetTypes: Air
 
-ornithopter_husk.atreides:
+atreides_ornithopter_husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Ornithopter
@@ -96,7 +96,7 @@ atreides_airdrone:
 		Factions: atreides
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~hightech.atreides, research_centre, ~atreides_promotion_airdrone
+		Prerequisites: ~atreides_hightech, research_centre, ~atreides_promotion_airdrone
 		Description: actor_atreides_airdrone.description
 		IconPalette: d2kunit
 	UpdatesPlayerStatistics:
@@ -146,7 +146,7 @@ atreides_advancedcarryall:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 40
-		Prerequisites: ~hightech.atreides, ~heavy.atreides_combat
+		Prerequisites: ~atreides_hightech, ~heavy.atreides_combat
 		Description: actor_atreides_advancedcarryall.description
 		IconPalette: d2kunit
 	Health:

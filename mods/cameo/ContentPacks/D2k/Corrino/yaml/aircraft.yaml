@@ -26,7 +26,7 @@ corrino_carryall:
 		LocalOffset: 0,0,-256
 		CarryCondition: carrying
 	SpawnActorOnDeath:
-		Actor: carryall_husk.corrino
+		Actor: corrino_carryall_husk
 	RevealsShroud:
 		Range: 4c0
 		Type: GroundPosition
@@ -51,7 +51,7 @@ corrino_carryall:
 	MapEditorData:
 		Categories: Aircraft
 
-carryall_husk.corrino:
+corrino_carryall_husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Carryall

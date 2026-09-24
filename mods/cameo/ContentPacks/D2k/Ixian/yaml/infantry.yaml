@@ -265,7 +265,7 @@ ixian_storminfantry:
 	ActorStatValues:
 		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
-heavy_inf.ixian:
+ixian_heavy_inf:
 	Inherits: ^D2KInfantry
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff

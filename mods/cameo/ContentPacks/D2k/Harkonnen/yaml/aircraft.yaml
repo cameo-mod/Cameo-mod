@@ -26,7 +26,7 @@ harkonnen_carryall:
 		LocalOffset: 0,0,-256
 		CarryCondition: carrying
 	SpawnActorOnDeath:
-		Actor: carryall_husk.harkonnen
+		Actor: harkonnen_carryall_husk
 	RevealsShroud:
 		Range: 4c0
 		Type: GroundPosition
@@ -51,7 +51,7 @@ harkonnen_carryall:
 	MapEditorData:
 		Categories: Aircraft
 
-carryall_husk.harkonnen:
+harkonnen_carryall_husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Carryall
@@ -78,7 +78,7 @@ harkonnen_gunship:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 20
-		Prerequisites: ~hightech.harkonnen, ~harkonnen_promotion_gunship
+		Prerequisites: ~harkonnen_hightech, ~harkonnen_promotion_gunship
 		Description: actor_harkonnen_gunship.description
 		IconPalette: d2kunit
 	UpdatesPlayerStatistics:
@@ -128,7 +128,7 @@ harkonnen_advancedcarryall:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~hightech.harkonnen, ~harkonnen_promotion_advancedcarryall
+		Prerequisites: ~harkonnen_hightech, ~harkonnen_promotion_advancedcarryall
 		Description: actor_harkonnen_advancedcarryall.description
 		IconPalette: d2kunit
 	Health:
