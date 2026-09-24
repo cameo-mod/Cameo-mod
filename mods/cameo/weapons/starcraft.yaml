@@ -88,7 +88,8 @@ InterceptorCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 SCSpiderEngage:
-	Inherits: DemoTruckTargeting
+	Projectile: InstantHit
+	Warhead@1Dam: TargetDamage
 	ValidTargets: Infantry, Vehicle
 	ReloadDelay: 1
 	Range: 1536

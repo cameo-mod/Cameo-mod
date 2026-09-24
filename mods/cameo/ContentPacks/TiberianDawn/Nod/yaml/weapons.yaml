@@ -638,7 +638,23 @@ td_nod_reconbike_rocket:
 			Superheavy: 16
 			Wood: 9
 PDLaserBike:
-	Inherits: PDLaser
+	ReloadDelay: 25
+	ValidTargets: Ground, Air, Missile, BulletAS, BallisticMissile
+	InvalidTargets: Infantry, Vehicle, Tank, Structure, wall
+	Projectile: LaserZap
+		Width: 25
+		Duration: 3
+		Color: ff0000
+		ZOffset: 2047
+		SecondaryBeam: true
+		SecondaryBeamWidth: 50
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: ff000033
+		Blockable: true
+	Warhead@1Dam: SpreadDamage
+		ValidTargets: Ground, Missile, BulletAS, BallisticMissile
+		Spread: 5
+		Damage: 1
 	Range: 6000
 
 td_nod_lighttank_70mm:
@@ -2546,7 +2562,23 @@ td_nod_lighttankmkii_lighttank2missiles:
 		VerticalRateOfTurn: 16
 
 PDLaserLTNK2:
-	Inherits: PDLaser
+	ReloadDelay: 25
+	ValidTargets: Ground, Air, Missile, BulletAS, BallisticMissile
+	InvalidTargets: Infantry, Vehicle, Tank, Structure, wall
+	Projectile: LaserZap
+		Width: 25
+		Duration: 3
+		Color: ff0000
+		ZOffset: 2047
+		SecondaryBeam: true
+		SecondaryBeamWidth: 50
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: ff000033
+		Blockable: true
+	Warhead@1Dam: SpreadDamage
+		ValidTargets: Ground, Missile, BulletAS, BallisticMissile
+		Spread: 5
+		Damage: 1
 	Range: 4903
 
 td_nod_flametankmkii_bigflamer2:
