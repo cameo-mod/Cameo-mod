@@ -1899,6 +1899,9 @@ FAMILY_PHYSICAL_STATE = {
     # doubled rate is paid for and the pipeline can take the direct damage back out.
     "Cryo":     ("Temperature", _m(-2.00)),  # prism beam that freezes — 2x Flame
     "Inferno":  ("Temperature", _m(2.00)),   # prism beam that burns — 2x Flame
+    # W7: Sonic feeds the Resonance meter instead of the retired binary SonicDebuff.
+    # Pure Sonic = 100 (damage dealt fills the meter 1:1, HP-relative like Corrosion).
+    "Sonic":    {"Resonance": _m(1.00)},
     # Plasma (Temperature + Corrosion) needs two states on one warhead -> handled at family build.
 }
 
@@ -2060,13 +2063,10 @@ def undeclared_elements():
 #              couple of shots after the beam stops (the maintainer's "short duration, on hit only").
 #   Range    = range_x_spread x the main warhead Spread -> the half-damage radius of the same blast.
 # {family: (condition, duration_x_reload, range_x_spread)}
-FAMILY_CONDITION = {
-    "Sonic": ("SonicDebuff", 2, 2),
-    "BulletSonic": ("SonicDebuff", 2, 2),
-    "MissileSonic": ("SonicDebuff", 2, 2),
-    "CannonSonic": ("SonicDebuff", 2, 2),
-    "BlastSonic": ("SonicDebuff", 2, 2),
-}
+# W7: the Sonic binary mark is RETIRED — the five Sonic families emitted
+# `Warhead@<tag>_Debuff: GrantExternalCondition` (SonicDebuff) here; they now feed the
+# Resonance meter via FAMILY_PHYSICAL_STATE / BLEND_FAMILIES states instead.
+FAMILY_CONDITION = {}
 
 # Per-family InvalidTargets, emitted on the weapon AND its damaging warheads.
 # WEAPON_TYPE_SYSTEM.md specifies Toxic as "no-op vs robotic": a gas kills people, so a drone
@@ -2111,13 +2111,13 @@ def emit_inherit_family(name, parent, psn, pss, levels):
 # multi-state. Plasma = Flame x Chemical Versus + Temperature 150 + Corrosion 150 ("as close as possible
 # to the flame + chemical combo"). {name: (parents, {StateName: Scale}, levels)}.
 BLEND_FAMILIES = {
-    # Aedis 2026-09-10: delivery-specific Sonic combinations. Status remains
-    # additional to direct damage; it is not a PhysicalState meter to average.
-    "BulletSonic": (["Bullet", "Sonic"], None, L3),
-    "MissileSonic": (["MissileAP", "Sonic"], None, L3),
-    "CannonSonic": (["CannonHE", "Sonic"], None, L3),
+    # Aedis 2026-09-10: delivery-specific Sonic combinations. W7 2026-09-24: the status
+    # is now the Resonance meter at the per-parent-average share (Sonic = 1/2 or 1/3).
+    "BulletSonic": (["Bullet", "Sonic"], {"Resonance": _m(1 / 2)}, L3),
+    "MissileSonic": (["MissileAP", "Sonic"], {"Resonance": _m(1 / 2)}, L3),
+    "CannonSonic": (["CannonHE", "Sonic"], {"Resonance": _m(1 / 2)}, L3),
     # Aedis 17:38 resolves grenade delivery explicitly, like CryoBlast.
-    "BlastSonic": (["Demolition", "Concussion", "Sonic"], None, L3),
+    "BlastSonic": (["Demolition", "Concussion", "Sonic"], {"Resonance": _m(1 / 3)}, L3),
     "Plasma": (["Flame", "Chemical"], {"Temperature": _m(0.50), "Corrosion": _m(0.50)}, L3),
     # Thermobaric = fuel-air incendiary blast: the per-armor AVERAGE of Demolition + Concussion +
     # Flame ("demolition + concussion + fire"). Heat = Flame 300 / 3 parents = 100 (per-parent-average

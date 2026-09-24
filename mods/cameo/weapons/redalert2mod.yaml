@@ -16,6 +16,47 @@ AsianHowitzerSplash:
 	Inherits@xAsianHowitzerSplash1: ^Warhead_Demolition_Heavy
 	Inherits@xAsianHowitzerSplash2: ^Effect_Twlt_VeryLarge_RA2
 	Warhead@Concussion_Medium:
+		Versus:
+			None: 151
+			Light: 126
+			Medium: 109
+			Heavy: 106
+			Superheavy: 82
+			Scout: 144
+			Plate: 92
+			Concrete: 90
+			Wood: 148
+			Steel: 105
+			Flak: 107
+			Heroic: 88
+			Bomber: 67
+			Fighter: 72
+			Helicopter: 66
+			Spaceship: 46
+			ARMOR: 70
+			BLAST: 36
+			COMPOSITE: 105
+			HAZMAT: 67
+			REFLECTOR: 70
+			Shield: 166
+		PercentageVersus:
+			None: 19
+			Light: 17
+			Medium: 14
+			Heavy: 11
+			Superheavy: 9
+			Scout: 20
+			Plate: 13
+			Concrete: 12
+			Wood: 18
+			Steel: 15
+			Flak: 16
+			Heroic: 10
+			Bomber: 7
+			Fighter: 8
+			Helicopter: 6
+			Spaceship: 5
+			Shield: 25
 		Damage: 40000
 	-Warhead@Demolition_Heavy:
 	Projectile: InstantExplode
@@ -27,55 +68,54 @@ AsianHowitzerSplash:
 		ValidTargets: Ground, Water
 		Spread: 350
 		Falloff: 100, 72, 50, 32, 18, 8, 0
-		Versus:
-			HAZMAT: 68
-			COMPOSITE: 107
-			BLAST: 36
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 159
-			None: 151
-			Wood: 148
-			Scout: 144
-			Light: 126
-			Medium: 109
-			Flak: 107
-			Heavy: 106
-			Steel: 105
-			Plate: 92
-			Concrete: 90
-			Heroic: 88
-			Superheavy: 82
-			Fighter: 72
-			Bomber: 67
-			Helicopter: 66
-			Spaceship: 46
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 25
-			Scout: 20
-			None: 19
-			Wood: 18
-			Light: 17
-			Flak: 16
-			Steel: 15
-			Medium: 14
-			Plate: 13
-			Concrete: 12
-			Heavy: 11
-			Heroic: 10
-			Superheavy: 9
-			Fighter: 8
-			Bomber: 7
-			Helicopter: 6
-			Spaceship: 5
-
 RA2KirovHowitzerSplash:
 	Inherits@xRA2KirovHowitzerSplash1: ^Warhead_Demolition_Heavy
 	Inherits@xRA2KirovHowitzerSplash2: ^Effect_Twlt_VeryLarge_RA2
 	Warhead@Concussion_Medium:
+		Versus:
+			None: 151
+			Light: 126
+			Medium: 109
+			Heavy: 106
+			Superheavy: 82
+			Scout: 144
+			Plate: 92
+			Concrete: 90
+			Wood: 148
+			Steel: 105
+			Flak: 107
+			Heroic: 88
+			Bomber: 67
+			Fighter: 72
+			Helicopter: 66
+			Spaceship: 46
+			ARMOR: 70
+			BLAST: 36
+			COMPOSITE: 105
+			HAZMAT: 67
+			REFLECTOR: 70
+			Shield: 166
+		PercentageVersus:
+			None: 19
+			Light: 17
+			Medium: 14
+			Heavy: 11
+			Superheavy: 9
+			Scout: 20
+			Plate: 13
+			Concrete: 12
+			Wood: 18
+			Steel: 15
+			Flak: 16
+			Heroic: 10
+			Bomber: 7
+			Fighter: 8
+			Helicopter: 6
+			Spaceship: 5
+			Shield: 25
 		Damage: 40000
 		PercentageScale: 9998
 	-Warhead@Demolition_Heavy:
@@ -88,50 +128,8 @@ RA2KirovHowitzerSplash:
 		ValidTargets: Ground, Water
 		Spread: 350
 		Falloff: 100, 72, 50, 32, 18, 8, 0
-		Versus:
-			HAZMAT: 68
-			COMPOSITE: 107
-			BLAST: 36
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 159
-			None: 151
-			Wood: 148
-			Scout: 144
-			Light: 126
-			Medium: 109
-			Flak: 107
-			Heavy: 106
-			Steel: 105
-			Plate: 92
-			Concrete: 90
-			Heroic: 88
-			Superheavy: 82
-			Fighter: 72
-			Bomber: 67
-			Helicopter: 66
-			Spaceship: 46
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 25
-			Scout: 20
-			None: 19
-			Wood: 18
-			Light: 17
-			Flak: 16
-			Steel: 15
-			Medium: 14
-			Plate: 13
-			Concrete: 12
-			Heavy: 11
-			Heroic: 10
-			Superheavy: 9
-			Fighter: 8
-			Bomber: 7
-			Helicopter: 6
-			Spaceship: 5
-
 AsianFlameFragment:
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@proj: ^Projectile_Flame_Light
@@ -739,6 +737,29 @@ Support_EMP_Bomb:
 	ReloadDelay: 250
 	Projectile: InstantExplode
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		Versus:
+			None: 125
+			Light: 25
+			Medium: 50
+			Heavy: 75
+			Superheavy: 100
+			Scout: 10
+			Plate: 175
+			Concrete: 10
+			Wood: 10
+			Steel: 10
+			Flak: 150
+			Heroic: 200
+			Bomber: 10
+			Fighter: 10
+			Helicopter: 10
+			Spaceship: 10
+			ARMOR: 70
+			BLAST: 98
+			COMPOSITE: 72
+			HAZMAT: 61
+			REFLECTOR: 51
+			Shield: 300
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
 		Damage: 5000
@@ -770,29 +791,6 @@ Support_EMP_Bomb:
 		ImpactActors: false
 		AffectsParent: true
 	Warhead@Tesla_Heavy_ExtraDamage:
-		Versus:
-			HAZMAT: 61
-			COMPOSITE: 73
-			BLAST: 97
-			REFLECTOR: 50
-			ARMOR: 70
-			Shield: 300
-			Heroic: 200
-			Plate: 175
-			Flak: 150
-			None: 125
-			Superheavy: 100
-			Heavy: 75
-			Medium: 50
-			Light: 25
-			Scout: 10
-			Wood: 10
-			Steel: 10
-			Concrete: 10
-			Fighter: 10
-			Bomber: 10
-			Helicopter: 10
-			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Tesla
 
 SteelSupportSpawner1:
@@ -891,6 +889,47 @@ NaxGrilleArty:
 		Blockable: false
 		ContrailLength: 22
 	Warhead@CannonHE_Heavy:
+		Versus:
+			None: 121
+			Light: 120
+			Medium: 114
+			Heavy: 107
+			Superheavy: 106
+			Scout: 130
+			Plate: 85
+			Concrete: 105
+			Wood: 136
+			Steel: 116
+			Flak: 102
+			Heroic: 81
+			Bomber: 69
+			Fighter: 76
+			Helicopter: 67
+			Spaceship: 65
+			ARMOR: 70
+			BLAST: 40
+			COMPOSITE: 98
+			HAZMAT: 71
+			REFLECTOR: 70
+			Shield: 168
+		PercentageVersus:
+			None: 17
+			Light: 23
+			Medium: 21
+			Heavy: 19
+			Superheavy: 18
+			Scout: 25
+			Plate: 15
+			Concrete: 20
+			Wood: 24
+			Steel: 22
+			Flak: 16
+			Heroic: 14
+			Bomber: 12
+			Fighter: 13
+			Helicopter: 11
+			Spaceship: 10
+			Shield: 35
 		Damage: 48000
 	-Warhead@Demolition_Light:
 	Warhead@RA2Crater:
@@ -931,50 +970,9 @@ NaxGrilleArty:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Falloff: 100, 50, 20, 0
-		Versus:
-			HAZMAT: 71
-			COMPOSITE: 100
-			BLAST: 39
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 169
-			Wood: 136
-			Scout: 130
-			None: 121
-			Light: 120
-			Steel: 116
-			Medium: 114
-			Heavy: 107
-			Superheavy: 106
-			Concrete: 105
-			Flak: 102
-			Plate: 85
-			Heroic: 81
-			Fighter: 76
-			Bomber: 69
-			Helicopter: 67
-			Spaceship: 65
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 35
-			Scout: 25
-			Wood: 24
-			Light: 23
-			Steel: 22
-			Medium: 21
-			Concrete: 20
-			Heavy: 19
-			Superheavy: 18
-			None: 17
-			Flak: 16
-			Plate: 15
-			Heroic: 14
-			Fighter: 13
-			Bomber: 12
-			Helicopter: 11
-			Spaceship: 10
 NaxGrilleArty_elite:
 	Inherits: NaxGrilleArty
 	Inherits@fx_cover: ^Effect_AlliedTigerCannon
@@ -1014,6 +1012,47 @@ NaxGrilleArty_elite:
 		InvalidTargets: Ship, Structure, Bridge
 		ExplosionPalette: ra2effect
 	Warhead@CannonHE_Heavy: AreaDamage
+		Versus:
+			None: 121
+			Light: 120
+			Medium: 114
+			Heavy: 107
+			Superheavy: 106
+			Scout: 130
+			Plate: 85
+			Concrete: 105
+			Wood: 136
+			Steel: 116
+			Flak: 102
+			Heroic: 81
+			Bomber: 69
+			Fighter: 76
+			Helicopter: 67
+			Spaceship: 65
+			ARMOR: 70
+			BLAST: 40
+			COMPOSITE: 98
+			HAZMAT: 71
+			REFLECTOR: 70
+			Shield: 168
+		PercentageVersus:
+			None: 17
+			Light: 23
+			Medium: 21
+			Heavy: 19
+			Superheavy: 18
+			Scout: 25
+			Plate: 15
+			Concrete: 20
+			Wood: 24
+			Steel: 22
+			Flak: 16
+			Heroic: 14
+			Bomber: 12
+			Fighter: 13
+			Helicopter: 11
+			Spaceship: 10
+			Shield: 35
 	Warhead@CannonHE_Heavy:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1021,51 +1060,9 @@ NaxGrilleArty_elite:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Falloff: 100, 50, 20, 0
-		Versus:
-			HAZMAT: 71
-			COMPOSITE: 100
-			BLAST: 39
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 169
-			Wood: 136
-			Scout: 130
-			None: 121
-			Light: 120
-			Steel: 116
-			Medium: 114
-			Heavy: 107
-			Superheavy: 106
-			Concrete: 105
-			Flak: 102
-			Plate: 85
-			Heroic: 81
-			Fighter: 76
-			Bomber: 69
-			Helicopter: 67
-			Spaceship: 65
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 35
-			Scout: 25
-			Wood: 24
-			Light: 23
-			Steel: 22
-			Medium: 21
-			Concrete: 20
-			Heavy: 19
-			Superheavy: 18
-			None: 17
-			Flak: 16
-			Plate: 15
-			Heroic: 14
-			Fighter: 13
-			Bomber: 12
-			Helicopter: 11
-			Spaceship: 10
-
 NaxiRifle:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
@@ -1302,8 +1299,90 @@ NaxiMP40:
 		Width: 100
 		Inaccuracy: 600
 	Warhead@Concussion_Light:
+		Versus:
+			None: 149
+			Light: 129
+			Medium: 109
+			Heavy: 90
+			Superheavy: 78
+			Scout: 152
+			Plate: 84
+			Concrete: 83
+			Wood: 146
+			Steel: 112
+			Flak: 114
+			Heroic: 85
+			Bomber: 71
+			Fighter: 96
+			Helicopter: 55
+			Spaceship: 46
+			ARMOR: 70
+			BLAST: 36
+			COMPOSITE: 105
+			HAZMAT: 67
+			REFLECTOR: 70
+			Shield: 146
+		PercentageVersus:
+			None: 15
+			Light: 13
+			Medium: 10
+			Heavy: 7
+			Superheavy: 5
+			Scout: 16
+			Plate: 9
+			Concrete: 8
+			Wood: 14
+			Steel: 11
+			Flak: 12
+			Heroic: 6
+			Bomber: 3
+			Fighter: 4
+			Helicopter: 2
+			Spaceship: 1
+			Shield: 17
 		Damage: 2000
 	Warhead@CannonHE_Heavy:
+		Versus:
+			None: 121
+			Light: 120
+			Medium: 114
+			Heavy: 107
+			Superheavy: 106
+			Scout: 130
+			Plate: 85
+			Concrete: 105
+			Wood: 136
+			Steel: 116
+			Flak: 102
+			Heroic: 81
+			Bomber: 69
+			Fighter: 76
+			Helicopter: 67
+			Spaceship: 65
+			ARMOR: 70
+			BLAST: 40
+			COMPOSITE: 98
+			HAZMAT: 71
+			REFLECTOR: 70
+			Shield: 168
+		PercentageVersus:
+			None: 17
+			Light: 23
+			Medium: 21
+			Heavy: 19
+			Superheavy: 18
+			Scout: 25
+			Plate: 15
+			Concrete: 20
+			Wood: 24
+			Steel: 22
+			Flak: 16
+			Heroic: 14
+			Bomber: 12
+			Fighter: 13
+			Helicopter: 11
+			Spaceship: 10
+			Shield: 35
 		Damage: 2000
 	Warhead@Bullet_Medium: AreaDamage
 		Damage: 2000
@@ -1363,50 +1442,9 @@ NaxiMP40:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Falloff: 100, 50, 20, 0
-		Versus:
-			HAZMAT: 71
-			COMPOSITE: 100
-			BLAST: 39
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 169
-			Wood: 136
-			Scout: 130
-			None: 121
-			Light: 120
-			Steel: 116
-			Medium: 114
-			Heavy: 107
-			Superheavy: 106
-			Concrete: 105
-			Flak: 102
-			Plate: 85
-			Heroic: 81
-			Fighter: 76
-			Bomber: 69
-			Helicopter: 67
-			Spaceship: 65
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 35
-			Scout: 25
-			Wood: 24
-			Light: 23
-			Steel: 22
-			Medium: 21
-			Concrete: 20
-			Heavy: 19
-			Superheavy: 18
-			None: 17
-			Flak: 16
-			Plate: 15
-			Heroic: 14
-			Fighter: 13
-			Bomber: 12
-			Helicopter: 11
-			Spaceship: 10
 	Warhead@Concussion_Light:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1414,50 +1452,9 @@ NaxiMP40:
 		ValidTargets: Ground, Water
 		Spread: 233
 		Falloff: 100, 72, 50, 32, 18, 8, 0
-		Versus:
-			HAZMAT: 68
-			COMPOSITE: 107
-			BLAST: 36
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 146
-			Scout: 152
-			None: 149
-			Wood: 146
-			Light: 129
-			Flak: 114
-			Steel: 112
-			Medium: 109
-			Fighter: 96
-			Heavy: 90
-			Heroic: 85
-			Plate: 84
-			Concrete: 83
-			Superheavy: 78
-			Bomber: 71
-			Helicopter: 55
-			Spaceship: 46
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 17
-			Scout: 16
-			None: 15
-			Wood: 14
-			Light: 13
-			Flak: 12
-			Steel: 11
-			Medium: 10
-			Plate: 9
-			Concrete: 8
-			Heavy: 7
-			Heroic: 6
-			Superheavy: 5
-			Fighter: 4
-			Bomber: 3
-			Helicopter: 2
-			Spaceship: 1
 NaxSturmArty:
 	Inherits@xNaxSturmArty0: ^Warhead_Demolition_Light
 	Inherits@xNaxSturmArty1: ^Projectile_Grenade_Light
@@ -1483,6 +1480,47 @@ NaxSturmArty:
 		TrailImage: black_smokey
 		TrailPalette: effect75alpha
 	Warhead@Demolition_Heavy:
+		Versus:
+			None: 154
+			Light: 76
+			Medium: 75
+			Heavy: 74
+			Superheavy: 72
+			Scout: 81
+			Plate: 124
+			Concrete: 136
+			Wood: 195
+			Steel: 164
+			Flak: 142
+			Heroic: 52
+			Bomber: 66
+			Fighter: 73
+			Helicopter: 59
+			Spaceship: 51
+			ARMOR: 70
+			BLAST: 42
+			COMPOSITE: 100
+			HAZMAT: 62
+			REFLECTOR: 75
+			Shield: 178
+		PercentageVersus:
+			None: 22
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Scout: 18
+			Plate: 20
+			Concrete: 23
+			Wood: 25
+			Steel: 24
+			Flak: 21
+			Heroic: 19
+			Bomber: 12
+			Fighter: 13
+			Helicopter: 11
+			Spaceship: 10
+			Shield: 35
 		PercentageScale: 10500
 		Damage: 80000
 	-Warhead@Demolition_Light:
@@ -1547,49 +1585,8 @@ NaxSturmArty:
 		ValidTargets: Ground, Water
 		Spread: 466
 		Falloff: 100, 45, 18, 6, 0
-		Versus:
-			HAZMAT: 63
-			COMPOSITE: 102
-			BLAST: 41
-			REFLECTOR: 75
-			ARMOR: 70
-			Shield: 178
-			Wood: 195
-			Steel: 164
-			None: 154
-			Flak: 142
-			Concrete: 136
-			Plate: 124
-			Scout: 81
-			Light: 76
-			Medium: 75
-			Heavy: 74
-			Fighter: 73
-			Superheavy: 72
-			Bomber: 66
-			Helicopter: 59
-			Heroic: 52
-			Spaceship: 51
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 35
-			Wood: 25
-			Steel: 24
-			Concrete: 23
-			None: 22
-			Flak: 21
-			Plate: 20
-			Heroic: 19
-			Scout: 18
-			Light: 17
-			Medium: 16
-			Heavy: 15
-			Superheavy: 14
-			Fighter: 13
-			Bomber: 12
-			Helicopter: 11
-			Spaceship: 10
 NaxDefensivePlaneTarget:
 	ReloadDelay: 30
 	Range: 30000
@@ -1846,6 +1843,29 @@ NaxiAlienPistol:
 		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		Versus:
+			None: 125
+			Light: 25
+			Medium: 50
+			Heavy: 75
+			Superheavy: 100
+			Scout: 10
+			Plate: 175
+			Concrete: 10
+			Wood: 10
+			Steel: 10
+			Flak: 150
+			Heroic: 200
+			Bomber: 10
+			Fighter: 10
+			Helicopter: 10
+			Spaceship: 10
+			ARMOR: 70
+			BLAST: 98
+			COMPOSITE: 72
+			HAZMAT: 61
+			REFLECTOR: 51
+			Shield: 300
 		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
@@ -1865,29 +1885,6 @@ NaxiAlienPistol:
 	Warhead@Tesla_Heavy_ExtraDamage:
 		Spread: 200
 		Falloff: 100, 75, 50, 25
-		Versus:
-			HAZMAT: 61
-			COMPOSITE: 73
-			BLAST: 97
-			REFLECTOR: 50
-			ARMOR: 70
-			Shield: 300
-			Heroic: 200
-			Plate: 175
-			Flak: 150
-			None: 125
-			Superheavy: 100
-			Heavy: 75
-			Medium: 50
-			Light: 25
-			Scout: 10
-			Wood: 10
-			Steel: 10
-			Concrete: 10
-			Fighter: 10
-			Bomber: 10
-			Helicopter: 10
-			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Tesla
 
 NaxiV1Rocket:
@@ -2283,6 +2280,47 @@ NaxisBlackBombSmaller:
 #		Red Alert 2 Naxis Upgraded Weapons
 ####################################################################################################
 	Warhead@Demolition_Medium:
+		Versus:
+			None: 176
+			Light: 85
+			Medium: 84
+			Heavy: 70
+			Superheavy: 57
+			Scout: 88
+			Plate: 115
+			Concrete: 144
+			Wood: 200
+			Steel: 149
+			Flak: 138
+			Heroic: 51
+			Bomber: 66
+			Fighter: 68
+			Helicopter: 56
+			Spaceship: 53
+			ARMOR: 70
+			BLAST: 42
+			COMPOSITE: 100
+			HAZMAT: 62
+			REFLECTOR: 75
+			Shield: 154
+		PercentageVersus:
+			None: 17
+			Light: 12
+			Medium: 11
+			Heavy: 10
+			Superheavy: 9
+			Scout: 13
+			Plate: 15
+			Concrete: 18
+			Wood: 20
+			Steel: 19
+			Flak: 16
+			Heroic: 14
+			Bomber: 7
+			Fighter: 8
+			Helicopter: 6
+			Spaceship: 5
+			Shield: 25
 		ValidTargets: Ground, Water
 		Damage: 75000
 		PercentageScale: 2666
@@ -2380,50 +2418,8 @@ NaxisBlackBombSmaller:
 		FriendlyFireSpread: 50
 		Spread: 350
 		Falloff: 100, 45, 18, 6, 0
-		Versus:
-			HAZMAT: 63
-			COMPOSITE: 102
-			BLAST: 41
-			REFLECTOR: 75
-			ARMOR: 70
-			Shield: 157
-			Wood: 200
-			None: 176
-			Steel: 149
-			Concrete: 144
-			Flak: 138
-			Plate: 115
-			Scout: 88
-			Light: 85
-			Medium: 84
-			Heavy: 70
-			Fighter: 68
-			Bomber: 66
-			Superheavy: 57
-			Helicopter: 56
-			Spaceship: 53
-			Heroic: 51
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 25
-			Wood: 20
-			Steel: 19
-			Concrete: 18
-			None: 17
-			Flak: 16
-			Plate: 15
-			Heroic: 14
-			Scout: 13
-			Light: 12
-			Medium: 11
-			Heavy: 10
-			Superheavy: 9
-			Fighter: 8
-			Bomber: 7
-			Helicopter: 6
-			Spaceship: 5
-
 ^LunarNaxisUpgradedCannons:
 	Report: nax_aliengun.wav
 	Projectile: Bullet
@@ -2450,6 +2446,29 @@ Lunar_Green105mm:
 	Warhead@Tesla_Heavy:
 		Damage: 8000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		Versus:
+			None: 125
+			Light: 25
+			Medium: 50
+			Heavy: 75
+			Superheavy: 100
+			Scout: 10
+			Plate: 175
+			Concrete: 10
+			Wood: 10
+			Steel: 10
+			Flak: 150
+			Heroic: 200
+			Bomber: 10
+			Fighter: 10
+			Helicopter: 10
+			Spaceship: 10
+			ARMOR: 70
+			BLAST: 98
+			COMPOSITE: 72
+			HAZMAT: 61
+			REFLECTOR: 51
+			Shield: 300
 		Damage: 4000
 	Report: laser_cannon2_2.wav
 	-Warhead@CannonHE_Medium:
@@ -2475,29 +2494,6 @@ Lunar_Green105mm:
 		ValidTargets: Ground, Water
 		Spread: 200
 		Falloff: 100, 75, 50, 25
-		Versus:
-			HAZMAT: 61
-			COMPOSITE: 73
-			BLAST: 97
-			REFLECTOR: 50
-			ARMOR: 70
-			Shield: 300
-			Heroic: 200
-			Plate: 175
-			Flak: 150
-			None: 125
-			Superheavy: 100
-			Heavy: 75
-			Medium: 50
-			Light: 25
-			Scout: 10
-			Wood: 10
-			Steel: 10
-			Concrete: 10
-			Fighter: 10
-			Bomber: 10
-			Helicopter: 10
-			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Tesla
 	Warhead@Tesla_Heavy_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
@@ -2565,6 +2561,47 @@ SyndicateFireballLauncher:
 		Palette: tseffect
 	-Warhead@Flame_Light:
 	Warhead@Flame_Heavy:
+		Versus:
+			None: 191
+			Light: 75
+			Medium: 67
+			Heavy: 66
+			Superheavy: 63
+			Scout: 79
+			Plate: 160
+			Concrete: 122
+			Wood: 187
+			Steel: 158
+			Flak: 162
+			Heroic: 65
+			Bomber: 53
+			Fighter: 58
+			Helicopter: 49
+			Spaceship: 44
+			ARMOR: 70
+			BLAST: 67
+			COMPOSITE: 76
+			HAZMAT: 39
+			REFLECTOR: 99
+			Shield: 239
+		PercentageVersus:
+			None: 25
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Scout: 18
+			Plate: 21
+			Concrete: 20
+			Wood: 24
+			Steel: 22
+			Flak: 23
+			Heroic: 19
+			Bomber: 12
+			Fighter: 13
+			Helicopter: 11
+			Spaceship: 10
+			Shield: 35
 		ValidTargets: Ground, Water
 		Damage: 6000
 		PercentageScale: 9984
@@ -2575,51 +2612,10 @@ SyndicateFireballLauncher:
 		FriendlyFireSpread: 50
 		Spread: 400
 		Falloff: 100, 90, 78, 60, 0
-		Versus:
-			HAZMAT: 39
-			COMPOSITE: 77
-			BLAST: 66
-			REFLECTOR: 99
-			ARMOR: 70
-			Shield: 228
-			None: 191
-			Wood: 187
-			Flak: 162
-			Plate: 160
-			Steel: 158
-			Concrete: 122
-			Scout: 79
-			Light: 75
-			Medium: 67
-			Heavy: 66
-			Heroic: 65
-			Superheavy: 63
-			Fighter: 58
-			Bomber: 53
-			Helicopter: 49
-			Spaceship: 44
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 35
-			None: 25
-			Wood: 24
-			Flak: 23
-			Steel: 22
-			Plate: 21
-			Concrete: 20
-			Heroic: 19
-			Scout: 18
-			Light: 17
-			Medium: 16
-			Heavy: 15
-			Superheavy: 14
-			Fighter: 13
-			Bomber: 12
-			Helicopter: 11
-			Spaceship: 10
 RA2RTruckRocket:
 	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@proj: ^Projectile_ArtilleryRocket_Medium
@@ -2987,16 +2983,139 @@ LatinBuggyRocket_elite:
 		TrailInterval: 2
 		SkipAscent: true
 	Warhead@Demolition_Heavy:
+		Versus:
+			None: 154
+			Light: 76
+			Medium: 75
+			Heavy: 74
+			Superheavy: 72
+			Scout: 81
+			Plate: 124
+			Concrete: 136
+			Wood: 195
+			Steel: 164
+			Flak: 142
+			Heroic: 52
+			Bomber: 66
+			Fighter: 73
+			Helicopter: 59
+			Spaceship: 51
+			ARMOR: 70
+			BLAST: 42
+			COMPOSITE: 100
+			HAZMAT: 62
+			REFLECTOR: 75
+			Shield: 178
+		PercentageVersus:
+			None: 22
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Scout: 18
+			Plate: 20
+			Concrete: 23
+			Wood: 25
+			Steel: 24
+			Flak: 21
+			Heroic: 19
+			Bomber: 12
+			Fighter: 13
+			Helicopter: 11
+			Spaceship: 10
+			Shield: 35
 		PercentageScale: 6667
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
 		Spread: 4000
 	Warhead@Demolition_Light:
+		Versus:
+			None: 183
+			Light: 86
+			Medium: 69
+			Heavy: 58
+			Superheavy: 51
+			Scout: 109
+			Plate: 107
+			Concrete: 136
+			Wood: 200
+			Steel: 165
+			Flak: 143
+			Heroic: 59
+			Bomber: 62
+			Fighter: 70
+			Helicopter: 54
+			Spaceship: 47
+			ARMOR: 70
+			BLAST: 42
+			COMPOSITE: 100
+			HAZMAT: 62
+			REFLECTOR: 75
+			Shield: 143
+		PercentageVersus:
+			None: 13
+			Light: 8
+			Medium: 7
+			Heavy: 6
+			Superheavy: 5
+			Scout: 9
+			Plate: 11
+			Concrete: 14
+			Wood: 16
+			Steel: 15
+			Flak: 12
+			Heroic: 10
+			Bomber: 3
+			Fighter: 4
+			Helicopter: 2
+			Spaceship: 1
+			Shield: 17
 		PercentageScale: 6667
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
 		Spread: 8000
 	Warhead@Flame_Medium:
+		Versus:
+			None: 200
+			Light: 90
+			Medium: 87
+			Heavy: 68
+			Superheavy: 57
+			Scout: 91
+			Plate: 115
+			Concrete: 92
+			Wood: 198
+			Steel: 153
+			Flak: 155
+			Heroic: 53
+			Bomber: 64
+			Fighter: 67
+			Helicopter: 56
+			Spaceship: 51
+			ARMOR: 70
+			BLAST: 67
+			COMPOSITE: 76
+			HAZMAT: 39
+			REFLECTOR: 99
+			Shield: 225
+		PercentageVersus:
+			None: 20
+			Light: 12
+			Medium: 11
+			Heavy: 10
+			Superheavy: 9
+			Scout: 13
+			Plate: 16
+			Concrete: 15
+			Wood: 19
+			Steel: 17
+			Flak: 18
+			Heroic: 14
+			Bomber: 7
+			Fighter: 8
+			Helicopter: 6
+			Spaceship: 5
+			Shield: 25
 		PercentageScale: 6667
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
@@ -3063,148 +3182,24 @@ LatinBuggyRocket_elite:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Falloff: 100, 45, 18, 6, 0
-		Versus:
-			HAZMAT: 63
-			COMPOSITE: 102
-			BLAST: 41
-			REFLECTOR: 75
-			ARMOR: 70
-			Shield: 178
-			Wood: 195
-			Steel: 164
-			None: 154
-			Flak: 142
-			Concrete: 136
-			Plate: 124
-			Scout: 81
-			Light: 76
-			Medium: 75
-			Heavy: 74
-			Fighter: 73
-			Superheavy: 72
-			Bomber: 66
-			Helicopter: 59
-			Heroic: 52
-			Spaceship: 51
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 35
-			Wood: 25
-			Steel: 24
-			Concrete: 23
-			None: 22
-			Flak: 21
-			Plate: 20
-			Heroic: 19
-			Scout: 18
-			Light: 17
-			Medium: 16
-			Heavy: 15
-			Superheavy: 14
-			Fighter: 13
-			Bomber: 12
-			Helicopter: 11
-			Spaceship: 10
 	Warhead@Demolition_Light:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Falloff: 100, 45, 18, 6, 0
-		Versus:
-			HAZMAT: 63
-			COMPOSITE: 102
-			BLAST: 41
-			REFLECTOR: 75
-			ARMOR: 70
-			Shield: 143
-			Wood: 200
-			None: 183
-			Steel: 165
-			Flak: 143
-			Concrete: 136
-			Scout: 109
-			Plate: 107
-			Light: 86
-			Fighter: 70
-			Medium: 69
-			Bomber: 62
-			Heroic: 59
-			Heavy: 58
-			Helicopter: 54
-			Superheavy: 51
-			Spaceship: 47
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 17
-			Wood: 16
-			Steel: 15
-			Concrete: 14
-			None: 13
-			Flak: 12
-			Plate: 11
-			Heroic: 10
-			Scout: 9
-			Light: 8
-			Medium: 7
-			Heavy: 6
-			Superheavy: 5
-			Fighter: 4
-			Bomber: 3
-			Helicopter: 2
-			Spaceship: 1
 	Warhead@Flame_Medium:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Falloff: 100, 90, 78, 60, 0
-		Versus:
-			HAZMAT: 39
-			COMPOSITE: 77
-			BLAST: 66
-			REFLECTOR: 99
-			ARMOR: 70
-			Shield: 217
-			None: 200
-			Wood: 198
-			Flak: 155
-			Steel: 153
-			Plate: 115
-			Concrete: 92
-			Scout: 91
-			Light: 90
-			Medium: 87
-			Heavy: 68
-			Fighter: 67
-			Bomber: 64
-			Superheavy: 57
-			Helicopter: 56
-			Heroic: 53
-			Spaceship: 51
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 25
-			None: 20
-			Wood: 19
-			Flak: 18
-			Steel: 17
-			Plate: 16
-			Concrete: 15
-			Heroic: 14
-			Scout: 13
-			Light: 12
-			Medium: 11
-			Heavy: 10
-			Superheavy: 9
-			Fighter: 8
-			Bomber: 7
-			Helicopter: 6
-			Spaceship: 5
-
 RA2TraitorPower:
 	Warhead@Effect: CreateEffect
 		Explosions: controlwave_small
@@ -3230,6 +3225,29 @@ RA2Robotmm:
 		BeamColor: 00EEFF88
 		Railgun: 96
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		Versus:
+			None: 125
+			Light: 25
+			Medium: 50
+			Heavy: 75
+			Superheavy: 100
+			Scout: 10
+			Plate: 175
+			Concrete: 10
+			Wood: 10
+			Steel: 10
+			Flak: 150
+			Heroic: 200
+			Bomber: 10
+			Fighter: 10
+			Helicopter: 10
+			Spaceship: 10
+			ARMOR: 70
+			BLAST: 98
+			COMPOSITE: 72
+			HAZMAT: 61
+			REFLECTOR: 51
+			Shield: 300
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 4000
@@ -3238,6 +3256,29 @@ RA2Robotmm:
 		ValidTargets: Ground, Water
 		Damage: 24000
 	Warhead@Laser_Heavy_ExtraDamage:
+		Versus:
+			None: 33
+			Light: 30
+			Medium: 24
+			Heavy: 18
+			Superheavy: 12
+			Scout: 36
+			Plate: 21
+			Concrete: 9
+			Wood: 9
+			Steel: 9
+			Flak: 27
+			Heroic: 15
+			Bomber: 9
+			Fighter: 9
+			Helicopter: 9
+			Spaceship: 9
+			ARMOR: 70
+			BLAST: 96
+			COMPOSITE: 70
+			HAZMAT: 56
+			REFLECTOR: 59
+			Shield: 9
 		InvalidTargets: Air
 	Warhead@EMPUnit:
 		InvalidTargets: Shielded, Air
@@ -3256,56 +3297,10 @@ RA2Robotmm:
 		Spread: 200
 		Damage: 1000
 		Falloff: 100, 75, 50, 25
-		Versus:
-			HAZMAT: 56
-			COMPOSITE: 71
-			BLAST: 95
-			REFLECTOR: 59
-			ARMOR: 70
-			Shield: 9
-			Scout: 36
-			None: 33
-			Light: 30
-			Flak: 27
-			Medium: 24
-			Plate: 21
-			Heavy: 18
-			Heroic: 15
-			Superheavy: 12
-			Wood: 9
-			Steel: 9
-			Concrete: 9
-			Fighter: 9
-			Bomber: 9
-			Helicopter: 9
-			Spaceship: 9
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Tesla_Heavy_ExtraDamage:
 		Spread: 200
 		Falloff: 100, 75, 50, 25
-		Versus:
-			HAZMAT: 61
-			COMPOSITE: 73
-			BLAST: 97
-			REFLECTOR: 50
-			ARMOR: 70
-			Shield: 300
-			Heroic: 200
-			Plate: 175
-			Flak: 150
-			None: 125
-			Superheavy: 100
-			Heavy: 75
-			Medium: 50
-			Light: 25
-			Scout: 10
-			Wood: 10
-			Steel: 10
-			Concrete: 10
-			Fighter: 10
-			Bomber: 10
-			Helicopter: 10
-			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Tesla
 RA2Robotmm_elite:
 	Inherits: RA2Robotmm
@@ -3326,8 +3321,54 @@ RA2Robotmm_elite:
 		ValidTargets: Ground, Water
 
 	Warhead@Tesla_Heavy_ExtraDamage:
+		Versus:
+			None: 125
+			Light: 25
+			Medium: 50
+			Heavy: 75
+			Superheavy: 100
+			Scout: 10
+			Plate: 175
+			Concrete: 10
+			Wood: 10
+			Steel: 10
+			Flak: 150
+			Heroic: 200
+			Bomber: 10
+			Fighter: 10
+			Helicopter: 10
+			Spaceship: 10
+			ARMOR: 70
+			BLAST: 98
+			COMPOSITE: 72
+			HAZMAT: 61
+			REFLECTOR: 51
+			Shield: 300
 		InvalidTargets: Air
 	Warhead@Laser_Heavy_ExtraDamage:
+		Versus:
+			None: 33
+			Light: 30
+			Medium: 24
+			Heavy: 18
+			Superheavy: 12
+			Scout: 36
+			Plate: 21
+			Concrete: 9
+			Wood: 9
+			Steel: 9
+			Flak: 27
+			Heroic: 15
+			Bomber: 9
+			Fighter: 9
+			Helicopter: 9
+			Spaceship: 9
+			ARMOR: 70
+			BLAST: 96
+			COMPOSITE: 70
+			HAZMAT: 56
+			REFLECTOR: 59
+			Shield: 9
 		InvalidTargets: Air
 	Warhead@EMPUnit:
 		InvalidTargets: Shielded, Air
@@ -3345,56 +3386,10 @@ RA2Robotmm_elite:
 		Spread: 200
 		Damage: 1000
 		Falloff: 100, 75, 50, 25
-		Versus:
-			HAZMAT: 56
-			COMPOSITE: 71
-			BLAST: 95
-			REFLECTOR: 59
-			ARMOR: 70
-			Shield: 9
-			Scout: 36
-			None: 33
-			Light: 30
-			Flak: 27
-			Medium: 24
-			Plate: 21
-			Heavy: 18
-			Heroic: 15
-			Superheavy: 12
-			Wood: 9
-			Steel: 9
-			Concrete: 9
-			Fighter: 9
-			Bomber: 9
-			Helicopter: 9
-			Spaceship: 9
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Tesla_Heavy_ExtraDamage:
 		Spread: 200
 		Falloff: 100, 75, 50, 25
-		Versus:
-			HAZMAT: 61
-			COMPOSITE: 73
-			BLAST: 97
-			REFLECTOR: 50
-			ARMOR: 70
-			Shield: 300
-			Heroic: 200
-			Plate: 175
-			Flak: 150
-			None: 125
-			Superheavy: 100
-			Heavy: 75
-			Medium: 50
-			Light: 25
-			Scout: 10
-			Wood: 10
-			Steel: 10
-			Concrete: 10
-			Fighter: 10
-			Bomber: 10
-			Helicopter: 10
-			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Tesla
 RA2RobotmmScatter_elite:
 	Inherits: RA2Robotmm_elite
@@ -3404,6 +3399,29 @@ RA2RobotmmScatter_elite:
 		-HitAnim:
 		Damage: 4000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		Versus:
+			None: 125
+			Light: 25
+			Medium: 50
+			Heavy: 75
+			Superheavy: 100
+			Scout: 10
+			Plate: 175
+			Concrete: 10
+			Wood: 10
+			Steel: 10
+			Flak: 150
+			Heroic: 200
+			Bomber: 10
+			Fighter: 10
+			Helicopter: 10
+			Spaceship: 10
+			ARMOR: 70
+			BLAST: 98
+			COMPOSITE: 72
+			HAZMAT: 61
+			REFLECTOR: 51
+			Shield: 300
 		InvalidTargets: Air
 		Damage: 2000
 	Warhead@Railgun_Heavy:
@@ -3421,6 +3439,29 @@ RA2RobotmmScatter_elite:
 # burst 10 rapid spray, no-air. NaxiMP40 kept for nothing else â€” renamed
 # with its elite pair per the rename law.
 	Warhead@Laser_Heavy_ExtraDamage:
+		Versus:
+			None: 33
+			Light: 30
+			Medium: 24
+			Heavy: 18
+			Superheavy: 12
+			Scout: 36
+			Plate: 21
+			Concrete: 9
+			Wood: 9
+			Steel: 9
+			Flak: 27
+			Heroic: 15
+			Bomber: 9
+			Fighter: 9
+			Helicopter: 9
+			Spaceship: 9
+			ARMOR: 70
+			BLAST: 96
+			COMPOSITE: 70
+			HAZMAT: 56
+			REFLECTOR: 59
+			Shield: 9
 		InvalidTargets: Air
 	Warhead@EMPUnit:
 		InvalidTargets: Shielded, Air
@@ -3436,56 +3477,10 @@ RA2RobotmmScatter_elite:
 		Spread: 200
 		Damage: 1000
 		Falloff: 100, 75, 50, 25
-		Versus:
-			HAZMAT: 56
-			COMPOSITE: 71
-			BLAST: 95
-			REFLECTOR: 59
-			ARMOR: 70
-			Shield: 9
-			Scout: 36
-			None: 33
-			Light: 30
-			Flak: 27
-			Medium: 24
-			Plate: 21
-			Heavy: 18
-			Heroic: 15
-			Superheavy: 12
-			Wood: 9
-			Steel: 9
-			Concrete: 9
-			Fighter: 9
-			Bomber: 9
-			Helicopter: 9
-			Spaceship: 9
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Tesla_Heavy_ExtraDamage:
 		Spread: 200
 		Falloff: 100, 75, 50, 25
-		Versus:
-			HAZMAT: 61
-			COMPOSITE: 73
-			BLAST: 97
-			REFLECTOR: 50
-			ARMOR: 70
-			Shield: 300
-			Heroic: 200
-			Plate: 175
-			Flak: 150
-			None: 125
-			Superheavy: 100
-			Heavy: 75
-			Medium: 50
-			Light: 25
-			Scout: 10
-			Wood: 10
-			Steel: 10
-			Concrete: 10
-			Fighter: 10
-			Bomber: 10
-			Helicopter: 10
-			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Tesla
 naxis_sssoldier_smg:
 	Inherits@wh2: ^Warhead_Bullet_Medium

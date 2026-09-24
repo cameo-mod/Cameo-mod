@@ -292,6 +292,47 @@ ra1_soviets_grenadier_grenadethermobaric:
 	Warhead@Flame_Light:
 		Damage: 4000
 	Warhead@Thermobaric_Light:
+		Versus:
+			None: 196
+			Light: 96
+			Medium: 76
+			Heavy: 64
+			Superheavy: 55
+			Scout: 125
+			Plate: 99
+			Concrete: 104
+			Wood: 199
+			Steel: 157
+			Flak: 149
+			Heroic: 62
+			Bomber: 57
+			Fighter: 75
+			Helicopter: 48
+			Spaceship: 40
+			ARMOR: 70
+			BLAST: 51
+			COMPOSITE: 91
+			HAZMAT: 54
+			REFLECTOR: 84
+			Shield: 180
+		PercentageVersus:
+			None: 14
+			Light: 9
+			Medium: 8
+			Heavy: 6
+			Superheavy: 5
+			Scout: 11
+			Plate: 10
+			Concrete: 11
+			Wood: 15
+			Steel: 13
+			Flak: 12
+			Heroic: 8
+			Bomber: 3
+			Fighter: 4
+			Helicopter: 2
+			Spaceship: 1
+			Shield: 17
 		ValidTargets: Ground, Water
 		Damage: 13577
 		PercentageScale: 4994
@@ -419,51 +460,10 @@ ra1_soviets_grenadier_grenadethermobaric:
 		FriendlyFireSpread: 50
 		Spread: 169
 		Falloff: 100, 76, 57, 43, 31, 17, 0
-		Versus:
-			HAZMAT: 54
-			COMPOSITE: 93
-			BLAST: 50
-			REFLECTOR: 83
-			ARMOR: 70
-			Shield: 180
-			Wood: 199
-			None: 196
-			Steel: 157
-			Flak: 149
-			Scout: 125
-			Concrete: 104
-			Plate: 99
-			Light: 96
-			Medium: 76
-			Fighter: 75
-			Heavy: 64
-			Heroic: 62
-			Bomber: 57
-			Superheavy: 55
-			Helicopter: 48
-			Spaceship: 40
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStates:
 			Temperature: 33
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 17
-			Wood: 15
-			None: 14
-			Steel: 13
-			Flak: 12
-			Scout: 11
-			Concrete: 11
-			Plate: 10
-			Light: 9
-			Heroic: 8
-			Medium: 8
-			Heavy: 6
-			Superheavy: 5
-			Fighter: 4
-			Bomber: 3
-			Helicopter: 2
-			Spaceship: 1
 ra1_soviets_grenadier_grenadethermobaricexplode:
 	Inherits: ra1_soviets_grenadier_grenadethermobaric
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -501,6 +501,47 @@ ra1_soviets_grenadier_grenadethermobaricexplode:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@Thermobaric_Light:
+		Versus:
+			None: 196
+			Light: 96
+			Medium: 76
+			Heavy: 64
+			Superheavy: 55
+			Scout: 125
+			Plate: 99
+			Concrete: 104
+			Wood: 199
+			Steel: 157
+			Flak: 149
+			Heroic: 62
+			Bomber: 57
+			Fighter: 75
+			Helicopter: 48
+			Spaceship: 40
+			ARMOR: 70
+			BLAST: 51
+			COMPOSITE: 91
+			HAZMAT: 54
+			REFLECTOR: 84
+			Shield: 180
+		PercentageVersus:
+			None: 14
+			Light: 9
+			Medium: 8
+			Heavy: 6
+			Superheavy: 5
+			Scout: 11
+			Plate: 10
+			Concrete: 11
+			Wood: 15
+			Steel: 13
+			Flak: 12
+			Heroic: 8
+			Bomber: 3
+			Fighter: 4
+			Helicopter: 2
+			Spaceship: 1
+			Shield: 17
 		ValidTargets: Ground, Water
 		Damage: 16000
 		PercentageScale: 4994
@@ -545,52 +586,10 @@ ra1_soviets_grenadier_grenadethermobaricexplode:
 		FriendlyFireSpread: 50
 		Spread: 169
 		Falloff: 100, 76, 57, 43, 31, 17, 0
-		Versus:
-			HAZMAT: 54
-			COMPOSITE: 93
-			BLAST: 50
-			REFLECTOR: 83
-			ARMOR: 70
-			Shield: 180
-			Wood: 199
-			None: 196
-			Steel: 157
-			Flak: 149
-			Scout: 125
-			Concrete: 104
-			Plate: 99
-			Light: 96
-			Medium: 76
-			Fighter: 75
-			Heavy: 64
-			Heroic: 62
-			Bomber: 57
-			Superheavy: 55
-			Helicopter: 48
-			Spaceship: 40
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStates:
 			Temperature: 33
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 17
-			Wood: 15
-			None: 14
-			Steel: 13
-			Flak: 12
-			Scout: 11
-			Concrete: 11
-			Plate: 10
-			Light: 9
-			Heroic: 8
-			Medium: 8
-			Heavy: 6
-			Superheavy: 5
-			Fighter: 4
-			Bomber: 3
-			Helicopter: 2
-			Spaceship: 1
-
 ra1_soviets_firerocketsoldier_firerockets:
 	Inherits@wh: ^Warhead_MissileFire_Light
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -1633,6 +1632,47 @@ SCUD:
 		Shadow: True
 		LaunchAngle: 75
 	Warhead@MissileHE_Heavy:
+		Versus:
+			None: 79
+			Light: 126
+			Medium: 118
+			Heavy: 114
+			Superheavy: 113
+			Scout: 129
+			Plate: 63
+			Concrete: 115
+			Wood: 128
+			Steel: 116
+			Flak: 75
+			Heroic: 62
+			Bomber: 95
+			Fighter: 103
+			Helicopter: 85
+			Spaceship: 76
+			ARMOR: 70
+			BLAST: 45
+			COMPOSITE: 88
+			HAZMAT: 76
+			REFLECTOR: 70
+			Shield: 169
+		PercentageVersus:
+			None: 13
+			Light: 23
+			Medium: 21
+			Heavy: 19
+			Superheavy: 18
+			Scout: 25
+			Plate: 11
+			Concrete: 20
+			Wood: 24
+			Steel: 22
+			Flak: 12
+			Heroic: 10
+			Bomber: 16
+			Fighter: 17
+			Helicopter: 15
+			Spaceship: 14
+			Shield: 35
 		Damage: 120000
 	-Warhead@Flame_Heavy:
 	Warhead@MissileHE_Heavy: AreaDamage
@@ -1643,50 +1683,9 @@ SCUD:
 		ValidTargets: Ground, Water, Air
 		Spread: 200
 		Falloff: 100, 45, 15, 0
-		Versus:
-			HAZMAT: 76
-			COMPOSITE: 89
-			BLAST: 45
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 170
-			Scout: 129
-			Wood: 128
-			Light: 126
-			Medium: 118
-			Steel: 116
-			Concrete: 115
-			Heavy: 114
-			Superheavy: 113
-			Fighter: 103
-			Bomber: 95
-			Helicopter: 85
-			None: 79
-			Spaceship: 76
-			Flak: 75
-			Plate: 63
-			Heroic: 62
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 35
-			Scout: 25
-			Wood: 24
-			Light: 23
-			Steel: 22
-			Medium: 21
-			Concrete: 20
-			Heavy: 19
-			Superheavy: 18
-			Fighter: 17
-			Bomber: 16
-			Helicopter: 15
-			Spaceship: 14
-			None: 13
-			Flak: 12
-			Plate: 11
-			Heroic: 10
 ra1_soviets_v2rocketlauncher_scudthermobaric:
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@fx: ^Effect_Demolition_Heavy
@@ -2739,6 +2738,47 @@ ra1_soviets_hindattackhelicopter_hindmissilesthermobaric:
 		ImpactActors: false
 
 	Warhead@Thermobaric_Medium:
+		Versus:
+			None: 191
+			Light: 97
+			Medium: 91
+			Heavy: 76
+			Superheavy: 61
+			Scout: 102
+			Plate: 108
+			Concrete: 111
+			Wood: 200
+			Steel: 143
+			Flak: 140
+			Heroic: 55
+			Bomber: 60
+			Fighter: 64
+			Helicopter: 54
+			Spaceship: 46
+			ARMOR: 70
+			BLAST: 51
+			COMPOSITE: 91
+			HAZMAT: 54
+			REFLECTOR: 84
+			Shield: 201
+		PercentageVersus:
+			None: 18
+			Light: 13
+			Medium: 12
+			Heavy: 10
+			Superheavy: 9
+			Scout: 15
+			Plate: 14
+			Concrete: 15
+			Wood: 19
+			Steel: 17
+			Flak: 16
+			Heroic: 12
+			Bomber: 7
+			Fighter: 8
+			Helicopter: 6
+			Spaceship: 5
+			Shield: 25
 		PercentageDenominator: 10000
 		ValidTargets: Ground, Water, Air
 		Damage: 5000
@@ -2895,52 +2935,10 @@ ra1_soviets_hindattackhelicopter_hindmissilesthermobaric:
 		FriendlyFireSpread: 50
 		Spread: 253
 		Falloff: 100, 76, 57, 43, 31, 17, 0
-		Versus:
-			HAZMAT: 54
-			COMPOSITE: 93
-			BLAST: 50
-			REFLECTOR: 83
-			ARMOR: 70
-			Shield: 196
-			Wood: 200
-			None: 191
-			Steel: 143
-			Flak: 140
-			Concrete: 111
-			Plate: 108
-			Scout: 102
-			Light: 97
-			Medium: 91
-			Heavy: 76
-			Fighter: 64
-			Superheavy: 61
-			Bomber: 60
-			Heroic: 55
-			Helicopter: 54
-			Spaceship: 46
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStates:
 			Temperature: 33
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 25
-			Wood: 19
-			None: 18
-			Steel: 17
-			Flak: 16
-			Scout: 15
-			Concrete: 15
-			Plate: 14
-			Light: 13
-			Heroic: 12
-			Medium: 12
-			Heavy: 10
-			Superheavy: 9
-			Fighter: 8
-			Bomber: 7
-			Helicopter: 6
-			Spaceship: 5
-
 ra1_soviets_hindattackhelicopter_hindmissilesnuclear:
 	Inherits@collapsewh: ^Warhead_Nuclear_Super
 	ValidTargets: Ground, Water, Air
@@ -5921,6 +5919,47 @@ ShtoraLaser:
 		#ValidTargets: Vehicle, Infantry, Ship, Submarine, Defense
 
 	Warhead@Laser_Light:
+		Versus:
+			None: 78
+			Light: 101
+			Medium: 105
+			Heavy: 108
+			Superheavy: 151
+			Scout: 74
+			Plate: 102
+			Concrete: 122
+			Wood: 103
+			Steel: 111
+			Flak: 92
+			Heroic: 50
+			Bomber: 104
+			Fighter: 76
+			Helicopter: 106
+			Spaceship: 107
+			ARMOR: 70
+			BLAST: 96
+			COMPOSITE: 70
+			HAZMAT: 56
+			REFLECTOR: 59
+			Shield: 257
+		PercentageVersus:
+			None: 3
+			Light: 4
+			Medium: 8
+			Heavy: 12
+			Superheavy: 16
+			Scout: 1
+			Plate: 11
+			Concrete: 13
+			Wood: 5
+			Steel: 9
+			Flak: 7
+			Heroic: 15
+			Bomber: 6
+			Fighter: 2
+			Helicopter: 10
+			Spaceship: 14
+			Shield: 17
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 0
@@ -6017,85 +6056,44 @@ ShtoraLaser:
 		Explosions: big_explosion_air
 	Warhead@Laser_Light: AreaDamage
 	Warhead@Laser_Light_ExtraDamage: SpreadDamage
+		Versus:
+			None: 33
+			Light: 30
+			Medium: 24
+			Heavy: 18
+			Superheavy: 12
+			Scout: 36
+			Plate: 21
+			Concrete: 9
+			Wood: 9
+			Steel: 9
+			Flak: 27
+			Heroic: 15
+			Bomber: 9
+			Fighter: 9
+			Helicopter: 9
+			Spaceship: 9
+			ARMOR: 70
+			BLAST: 96
+			COMPOSITE: 70
+			HAZMAT: 56
+			REFLECTOR: 59
+			Shield: 9
 	Warhead@Laser_Light:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Spread: 32
 		Falloff: 100, 0
-		Versus:
-			HAZMAT: 56
-			COMPOSITE: 71
-			BLAST: 95
-			REFLECTOR: 59
-			ARMOR: 70
-			Shield: 249
-			Superheavy: 151
-			Concrete: 122
-			Steel: 111
-			Heavy: 108
-			Spaceship: 107
-			Helicopter: 106
-			Medium: 105
-			Bomber: 104
-			Wood: 103
-			Plate: 102
-			Light: 101
-			Flak: 92
-			None: 78
-			Fighter: 76
-			Scout: 74
-			Heroic: 50
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 75
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 17
-			Superheavy: 16
-			Heroic: 15
-			Spaceship: 14
-			Concrete: 13
-			Heavy: 12
-			Plate: 11
-			Helicopter: 10
-			Steel: 9
-			Medium: 8
-			Flak: 7
-			Bomber: 6
-			Wood: 5
-			Light: 4
-			None: 3
-			Fighter: 2
-			Scout: 1
 	Warhead@Laser_Light_ExtraDamage:
 		ValidTargets: Ground, Water, Air
 		Spread: 200
 		Damage: 1000
 		Falloff: 100, 75, 50, 25
-		Versus:
-			HAZMAT: 56
-			COMPOSITE: 71
-			BLAST: 95
-			REFLECTOR: 59
-			ARMOR: 70
-			Shield: 9
-			Scout: 36
-			None: 33
-			Light: 30
-			Flak: 27
-			Medium: 24
-			Plate: 21
-			Heavy: 18
-			Heroic: 15
-			Superheavy: 12
-			Wood: 9
-			Steel: 9
-			Concrete: 9
-			Fighter: 9
-			Bomber: 9
-			Helicopter: 9
-			Spaceship: 9
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
 ra1_soviets_kotinnucleartank_kotincannon:
@@ -8414,6 +8412,47 @@ ra1_soviets_monstertank_missile:
 		VerticalRateOfTurn: 12
 	-Warhead@MissileHE_Heavy_Flat:
 	Warhead@MissileAP_Heavy: AreaDamage
+		Versus:
+			None: 54
+			Light: 112
+			Medium: 126
+			Heavy: 142
+			Superheavy: 160
+			Scout: 99
+			Plate: 91
+			Concrete: 105
+			Wood: 66
+			Steel: 82
+			Flak: 73
+			Heroic: 57
+			Bomber: 98
+			Fighter: 75
+			Helicopter: 115
+			Spaceship: 146
+			ARMOR: 70
+			BLAST: 69
+			COMPOSITE: 44
+			HAZMAT: 94
+			REFLECTOR: 71
+			Shield: 158
+		PercentageVersus:
+			None: 10
+			Light: 22
+			Medium: 23
+			Heavy: 24
+			Superheavy: 25
+			Scout: 21
+			Plate: 12
+			Concrete: 16
+			Wood: 14
+			Steel: 15
+			Flak: 11
+			Heroic: 13
+			Bomber: 18
+			Fighter: 17
+			Helicopter: 19
+			Spaceship: 20
+			Shield: 35
 		PercentageDenominator: 10000
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -8427,48 +8466,6 @@ ra1_soviets_monstertank_missile:
 	Warhead@MissileAP_Heavy:
 		Spread: 85
 		Falloff: 100, 0
-		Versus:
-			HAZMAT: 95
-			COMPOSITE: 45
-			BLAST: 68
-			REFLECTOR: 71
-			ARMOR: 70
-			Shield: 161
-			Superheavy: 160
-			Spaceship: 146
-			Heavy: 142
-			Medium: 126
-			Helicopter: 115
-			Light: 112
-			Concrete: 105
-			Scout: 99
-			Bomber: 98
-			Plate: 91
-			Steel: 82
-			Fighter: 75
-			Flak: 73
-			Wood: 66
-			Heroic: 57
-			None: 54
-		PercentageVersus:
-			Shield: 35
-			Superheavy: 25
-			Heavy: 24
-			Medium: 23
-			Light: 22
-			Scout: 21
-			Spaceship: 20
-			Helicopter: 19
-			Bomber: 18
-			Fighter: 17
-			Concrete: 16
-			Steel: 15
-			Wood: 14
-			Heroic: 13
-			Plate: 12
-			Flak: 11
-			None: 10
-
 ra1_soviets_monstertank_missile_tesla:
 	Inherits@roleflat: ^Warhead_MissileTesla_Heavy
 	Inherits@3: ^TeslaWeapon
@@ -11064,6 +11061,47 @@ ra1_soviets_v2rocketlauncher_scud:
 	Range: 12596
 	MinRange: 2519
 	Warhead@MissileHE_Heavy:
+		Versus:
+			None: 79
+			Light: 126
+			Medium: 118
+			Heavy: 114
+			Superheavy: 113
+			Scout: 129
+			Plate: 63
+			Concrete: 115
+			Wood: 128
+			Steel: 116
+			Flak: 75
+			Heroic: 62
+			Bomber: 95
+			Fighter: 103
+			Helicopter: 85
+			Spaceship: 76
+			ARMOR: 70
+			BLAST: 45
+			COMPOSITE: 88
+			HAZMAT: 76
+			REFLECTOR: 70
+			Shield: 169
+		PercentageVersus:
+			None: 13
+			Light: 23
+			Medium: 21
+			Heavy: 19
+			Superheavy: 18
+			Scout: 25
+			Plate: 11
+			Concrete: 20
+			Wood: 24
+			Steel: 22
+			Flak: 12
+			Heroic: 10
+			Bomber: 16
+			Fighter: 17
+			Helicopter: 15
+			Spaceship: 14
+			Shield: 35
 		InvalidTargets: Air
 		Damage: 97996
 	Warhead@ShieldHit:
@@ -11076,50 +11114,9 @@ ra1_soviets_v2rocketlauncher_scud:
 		ValidTargets: Ground, Water, Air
 		Spread: 200
 		Falloff: 100, 45, 15, 0
-		Versus:
-			HAZMAT: 76
-			COMPOSITE: 89
-			BLAST: 45
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 170
-			Scout: 129
-			Wood: 128
-			Light: 126
-			Medium: 118
-			Steel: 116
-			Concrete: 115
-			Heavy: 114
-			Superheavy: 113
-			Fighter: 103
-			Bomber: 95
-			Helicopter: 85
-			None: 79
-			Spaceship: 76
-			Flak: 75
-			Plate: 63
-			Heroic: 62
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 35
-			Scout: 25
-			Wood: 24
-			Light: 23
-			Steel: 22
-			Medium: 21
-			Concrete: 20
-			Heavy: 19
-			Superheavy: 18
-			Fighter: 17
-			Bomber: 16
-			Helicopter: 15
-			Spaceship: 14
-			None: 13
-			Flak: 12
-			Plate: 11
-			Heroic: 10
 ra1_soviets_heavytank_105mm:
 	Inherits: 105mm
 	Range: 5193

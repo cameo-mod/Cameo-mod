@@ -970,6 +970,47 @@ LunarNaxiDroneMissile:
 		ContrailStartColor: EEEE00
 		ContrailEndColor: FFFFFF
 	Warhead@MissileAP_Light:
+		Versus:
+			None: 36
+			Light: 142
+			Medium: 155
+			Heavy: 169
+			Superheavy: 172
+			Scout: 130
+			Plate: 46
+			Concrete: 70
+			Wood: 59
+			Steel: 60
+			Flak: 43
+			Heroic: 35
+			Bomber: 113
+			Fighter: 112
+			Helicopter: 127
+			Spaceship: 128
+			ARMOR: 70
+			BLAST: 69
+			COMPOSITE: 44
+			HAZMAT: 94
+			REFLECTOR: 71
+			Shield: 134
+		PercentageVersus:
+			None: 1
+			Light: 13
+			Medium: 14
+			Heavy: 15
+			Superheavy: 16
+			Scout: 12
+			Plate: 3
+			Concrete: 7
+			Wood: 5
+			Steel: 6
+			Flak: 2
+			Heroic: 4
+			Bomber: 9
+			Fighter: 8
+			Helicopter: 10
+			Spaceship: 11
+			Shield: 17
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		PercentageScale: 2000
@@ -1120,48 +1161,7 @@ LunarNaxiDroneMissile:
 		FriendlyFireSpread: 50
 		Spread: 43
 		Falloff: 100, 0
-		Versus:
-			HAZMAT: 95
-			COMPOSITE: 45
-			BLAST: 68
-			REFLECTOR: 71
-			ARMOR: 70
-			Shield: 133
-			Superheavy: 172
-			Heavy: 169
-			Medium: 155
-			Light: 142
-			Scout: 130
-			Spaceship: 128
-			Helicopter: 127
-			Bomber: 113
-			Fighter: 112
-			Concrete: 70
-			Steel: 60
-			Wood: 59
-			Plate: 46
-			Flak: 43
-			None: 36
-			Heroic: 35
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 17
-			Superheavy: 16
-			Heavy: 15
-			Medium: 14
-			Light: 13
-			Scout: 12
-			Spaceship: 11
-			Helicopter: 10
-			Bomber: 9
-			Fighter: 8
-			Concrete: 7
-			Steel: 6
-			Wood: 5
-			Heroic: 4
-			Plate: 3
-			Flak: 2
-			None: 1
 NaxiMP40_elite:
 	Inherits: NaxiMP40
 	Inherits@fx_cover: ^Effect_AlliedTigerCannon
@@ -1219,7 +1219,89 @@ NaxiMP40_elite:
 	Warhead@ShieldHitEffect:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 	Warhead@Concussion_Light: AreaDamage
+		Versus:
+			None: 149
+			Light: 129
+			Medium: 109
+			Heavy: 90
+			Superheavy: 78
+			Scout: 152
+			Plate: 84
+			Concrete: 83
+			Wood: 146
+			Steel: 112
+			Flak: 114
+			Heroic: 85
+			Bomber: 71
+			Fighter: 96
+			Helicopter: 55
+			Spaceship: 46
+			ARMOR: 70
+			BLAST: 36
+			COMPOSITE: 105
+			HAZMAT: 67
+			REFLECTOR: 70
+			Shield: 146
+		PercentageVersus:
+			None: 15
+			Light: 13
+			Medium: 10
+			Heavy: 7
+			Superheavy: 5
+			Scout: 16
+			Plate: 9
+			Concrete: 8
+			Wood: 14
+			Steel: 11
+			Flak: 12
+			Heroic: 6
+			Bomber: 3
+			Fighter: 4
+			Helicopter: 2
+			Spaceship: 1
+			Shield: 17
 	Warhead@CannonHE_Heavy: AreaDamage
+		Versus:
+			None: 121
+			Light: 120
+			Medium: 114
+			Heavy: 107
+			Superheavy: 106
+			Scout: 130
+			Plate: 85
+			Concrete: 105
+			Wood: 136
+			Steel: 116
+			Flak: 102
+			Heroic: 81
+			Bomber: 69
+			Fighter: 76
+			Helicopter: 67
+			Spaceship: 65
+			ARMOR: 70
+			BLAST: 40
+			COMPOSITE: 98
+			HAZMAT: 71
+			REFLECTOR: 70
+			Shield: 168
+		PercentageVersus:
+			None: 17
+			Light: 23
+			Medium: 21
+			Heavy: 19
+			Superheavy: 18
+			Scout: 25
+			Plate: 15
+			Concrete: 20
+			Wood: 24
+			Steel: 22
+			Flak: 16
+			Heroic: 14
+			Bomber: 12
+			Fighter: 13
+			Helicopter: 11
+			Spaceship: 10
+			Shield: 35
 	Warhead@CannonHE_Heavy:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1227,50 +1309,9 @@ NaxiMP40_elite:
 		ValidTargets: Ground, Water
 		Spread: 400
 		Falloff: 100, 50, 20, 0
-		Versus:
-			HAZMAT: 71
-			COMPOSITE: 100
-			BLAST: 39
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 169
-			Wood: 136
-			Scout: 130
-			None: 121
-			Light: 120
-			Steel: 116
-			Medium: 114
-			Heavy: 107
-			Superheavy: 106
-			Concrete: 105
-			Flak: 102
-			Plate: 85
-			Heroic: 81
-			Fighter: 76
-			Bomber: 69
-			Helicopter: 67
-			Spaceship: 65
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 35
-			Scout: 25
-			Wood: 24
-			Light: 23
-			Steel: 22
-			Medium: 21
-			Concrete: 20
-			Heavy: 19
-			Superheavy: 18
-			None: 17
-			Flak: 16
-			Plate: 15
-			Heroic: 14
-			Fighter: 13
-			Bomber: 12
-			Helicopter: 11
-			Spaceship: 10
 	Warhead@Concussion_Light:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1278,51 +1319,9 @@ NaxiMP40_elite:
 		ValidTargets: Ground, Water
 		Spread: 233
 		Falloff: 100, 72, 50, 32, 18, 8, 0
-		Versus:
-			HAZMAT: 68
-			COMPOSITE: 107
-			BLAST: 36
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 146
-			Scout: 152
-			None: 149
-			Wood: 146
-			Light: 129
-			Flak: 114
-			Steel: 112
-			Medium: 109
-			Fighter: 96
-			Heavy: 90
-			Heroic: 85
-			Plate: 84
-			Concrete: 83
-			Superheavy: 78
-			Bomber: 71
-			Helicopter: 55
-			Spaceship: 46
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 17
-			Scout: 16
-			None: 15
-			Wood: 14
-			Light: 13
-			Flak: 12
-			Steel: 11
-			Medium: 10
-			Plate: 9
-			Concrete: 8
-			Heavy: 7
-			Heroic: 6
-			Superheavy: 5
-			Fighter: 4
-			Bomber: 3
-			Helicopter: 2
-			Spaceship: 1
-
 NaxiFlamerTroop:
 	Inherits: AsianFlamerTurret
 	Range: 4830
@@ -1391,6 +1390,47 @@ NaxiShrek:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 	-Warhead@MissileAP_Medium:
 	Warhead@MissileHE_Medium: AreaDamage
+		Versus:
+			None: 99
+			Light: 136
+			Medium: 135
+			Heavy: 112
+			Superheavy: 88
+			Scout: 143
+			Plate: 48
+			Concrete: 93
+			Wood: 157
+			Steel: 113
+			Flak: 69
+			Heroic: 43
+			Bomber: 97
+			Fighter: 110
+			Helicopter: 86
+			Spaceship: 70
+			ARMOR: 70
+			BLAST: 45
+			COMPOSITE: 88
+			HAZMAT: 76
+			REFLECTOR: 70
+			Shield: 148
+		PercentageVersus:
+			None: 8
+			Light: 18
+			Medium: 16
+			Heavy: 14
+			Superheavy: 13
+			Scout: 20
+			Plate: 6
+			Concrete: 15
+			Wood: 19
+			Steel: 17
+			Flak: 7
+			Heroic: 5
+			Bomber: 11
+			Fighter: 12
+			Helicopter: 10
+			Spaceship: 9
+			Shield: 25
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -1610,48 +1650,6 @@ NaxiShrek:
 	Warhead@MissileHE_Medium:
 		Spread: 150
 		Falloff: 100, 45, 15, 0
-		Versus:
-			HAZMAT: 76
-			COMPOSITE: 89
-			BLAST: 45
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 148
-			Wood: 157
-			Scout: 143
-			Light: 136
-			Medium: 135
-			Steel: 113
-			Heavy: 112
-			Fighter: 110
-			None: 99
-			Bomber: 97
-			Concrete: 93
-			Superheavy: 88
-			Helicopter: 86
-			Spaceship: 70
-			Flak: 69
-			Plate: 48
-			Heroic: 43
-		PercentageVersus:
-			Shield: 25
-			Scout: 20
-			Wood: 19
-			Light: 18
-			Steel: 17
-			Medium: 16
-			Concrete: 15
-			Heavy: 14
-			Superheavy: 13
-			Fighter: 12
-			Bomber: 11
-			Helicopter: 10
-			Spaceship: 9
-			None: 8
-			Flak: 7
-			Plate: 6
-			Heroic: 5
-
 NaxiShrek_elite:
 	Inherits: NaxiShrek
 	Report: bazook1.aud
@@ -1667,6 +1665,47 @@ NaxiShrek_elite:
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
 	Warhead@MissileHE_Medium: AreaDamage
+		Versus:
+			None: 99
+			Light: 136
+			Medium: 135
+			Heavy: 112
+			Superheavy: 88
+			Scout: 143
+			Plate: 48
+			Concrete: 93
+			Wood: 157
+			Steel: 113
+			Flak: 69
+			Heroic: 43
+			Bomber: 97
+			Fighter: 110
+			Helicopter: 86
+			Spaceship: 70
+			ARMOR: 70
+			BLAST: 45
+			COMPOSITE: 88
+			HAZMAT: 76
+			REFLECTOR: 70
+			Shield: 148
+		PercentageVersus:
+			None: 8
+			Light: 18
+			Medium: 16
+			Heavy: 14
+			Superheavy: 13
+			Scout: 20
+			Plate: 6
+			Concrete: 15
+			Wood: 19
+			Steel: 17
+			Flak: 7
+			Heroic: 5
+			Bomber: 11
+			Fighter: 12
+			Helicopter: 10
+			Spaceship: 9
+			Shield: 25
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -1696,48 +1735,6 @@ NaxiShrek_elite:
 	Warhead@MissileHE_Medium:
 		Spread: 150
 		Falloff: 100, 45, 15, 0
-		Versus:
-			HAZMAT: 76
-			COMPOSITE: 89
-			BLAST: 45
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 148
-			Wood: 157
-			Scout: 143
-			Light: 136
-			Medium: 135
-			Steel: 113
-			Heavy: 112
-			Fighter: 110
-			None: 99
-			Bomber: 97
-			Concrete: 93
-			Superheavy: 88
-			Helicopter: 86
-			Spaceship: 70
-			Flak: 69
-			Plate: 48
-			Heroic: 43
-		PercentageVersus:
-			Shield: 25
-			Scout: 20
-			Wood: 19
-			Light: 18
-			Steel: 17
-			Medium: 16
-			Concrete: 15
-			Heavy: 14
-			Superheavy: 13
-			Fighter: 12
-			Bomber: 11
-			Helicopter: 10
-			Spaceship: 9
-			None: 8
-			Flak: 7
-			Plate: 6
-			Heroic: 5
-
 NaxiShrekCons:
 	Inherits@xNaxiShrekCons0: ^Warhead_MissileAP_Medium
 	Inherits@xNaxiShrekCons1: ^Projectile_Missile_Medium
@@ -1763,6 +1760,47 @@ NaxiShrekCons:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 	-Warhead@MissileAP_Medium:
 	Warhead@MissileHE_Medium: AreaDamage
+		Versus:
+			None: 99
+			Light: 136
+			Medium: 135
+			Heavy: 112
+			Superheavy: 88
+			Scout: 143
+			Plate: 48
+			Concrete: 93
+			Wood: 157
+			Steel: 113
+			Flak: 69
+			Heroic: 43
+			Bomber: 97
+			Fighter: 110
+			Helicopter: 86
+			Spaceship: 70
+			ARMOR: 70
+			BLAST: 45
+			COMPOSITE: 88
+			HAZMAT: 76
+			REFLECTOR: 70
+			Shield: 148
+		PercentageVersus:
+			None: 8
+			Light: 18
+			Medium: 16
+			Heavy: 14
+			Superheavy: 13
+			Scout: 20
+			Plate: 6
+			Concrete: 15
+			Wood: 19
+			Steel: 17
+			Flak: 7
+			Heroic: 5
+			Bomber: 11
+			Fighter: 12
+			Helicopter: 10
+			Spaceship: 9
+			Shield: 25
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -1979,48 +2017,6 @@ NaxiShrekCons:
 	Warhead@MissileHE_Medium:
 		Spread: 150
 		Falloff: 100, 45, 15, 0
-		Versus:
-			HAZMAT: 76
-			COMPOSITE: 89
-			BLAST: 45
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 148
-			Wood: 157
-			Scout: 143
-			Light: 136
-			Medium: 135
-			Steel: 113
-			Heavy: 112
-			Fighter: 110
-			None: 99
-			Bomber: 97
-			Concrete: 93
-			Superheavy: 88
-			Helicopter: 86
-			Spaceship: 70
-			Flak: 69
-			Plate: 48
-			Heroic: 43
-		PercentageVersus:
-			Shield: 25
-			Scout: 20
-			Wood: 19
-			Light: 18
-			Steel: 17
-			Medium: 16
-			Concrete: 15
-			Heavy: 14
-			Superheavy: 13
-			Fighter: 12
-			Bomber: 11
-			Helicopter: 10
-			Spaceship: 9
-			None: 8
-			Flak: 7
-			Plate: 6
-			Heroic: 5
-
 NaxiShrekCons_elite:
 	Inherits: NaxiShrekCons
 	Report: bazook1.aud
@@ -2036,6 +2032,47 @@ NaxiShrekCons_elite:
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
 	Warhead@MissileHE_Medium: AreaDamage
+		Versus:
+			None: 99
+			Light: 136
+			Medium: 135
+			Heavy: 112
+			Superheavy: 88
+			Scout: 143
+			Plate: 48
+			Concrete: 93
+			Wood: 157
+			Steel: 113
+			Flak: 69
+			Heroic: 43
+			Bomber: 97
+			Fighter: 110
+			Helicopter: 86
+			Spaceship: 70
+			ARMOR: 70
+			BLAST: 45
+			COMPOSITE: 88
+			HAZMAT: 76
+			REFLECTOR: 70
+			Shield: 148
+		PercentageVersus:
+			None: 8
+			Light: 18
+			Medium: 16
+			Heavy: 14
+			Superheavy: 13
+			Scout: 20
+			Plate: 6
+			Concrete: 15
+			Wood: 19
+			Steel: 17
+			Flak: 7
+			Heroic: 5
+			Bomber: 11
+			Fighter: 12
+			Helicopter: 10
+			Spaceship: 9
+			Shield: 25
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -2065,48 +2102,6 @@ NaxiShrekCons_elite:
 	Warhead@MissileHE_Medium:
 		Spread: 150
 		Falloff: 100, 45, 15, 0
-		Versus:
-			HAZMAT: 76
-			COMPOSITE: 89
-			BLAST: 45
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 148
-			Wood: 157
-			Scout: 143
-			Light: 136
-			Medium: 135
-			Steel: 113
-			Heavy: 112
-			Fighter: 110
-			None: 99
-			Bomber: 97
-			Concrete: 93
-			Superheavy: 88
-			Helicopter: 86
-			Spaceship: 70
-			Flak: 69
-			Plate: 48
-			Heroic: 43
-		PercentageVersus:
-			Shield: 25
-			Scout: 20
-			Wood: 19
-			Light: 18
-			Steel: 17
-			Medium: 16
-			Concrete: 15
-			Heavy: 14
-			Superheavy: 13
-			Fighter: 12
-			Bomber: 11
-			Helicopter: 10
-			Spaceship: 9
-			None: 8
-			Flak: 7
-			Plate: 6
-			Heroic: 5
-
 NaxiHetzerDestroyer:
 	Inherits@fx: ^Effect_Explosion_Small_RA2
 	Inherits@proj: ^Projectile_Shell_Light
@@ -4934,31 +4929,31 @@ NaxiAlienPistol_elite:
 		ValidRelationships: Neutral, Enemy
 		Damage: 1000
 	Warhead@Tesla_Heavy_ExtraDamage:
-		Spread: 200
-		Falloff: 100, 75, 50, 25
 		Versus:
-			HAZMAT: 61
-			COMPOSITE: 73
-			BLAST: 97
-			REFLECTOR: 50
-			ARMOR: 70
-			Shield: 300
-			Heroic: 200
-			Plate: 175
-			Flak: 150
 			None: 125
-			Superheavy: 100
-			Heavy: 75
-			Medium: 50
 			Light: 25
+			Medium: 50
+			Heavy: 75
+			Superheavy: 100
 			Scout: 10
+			Plate: 175
+			Concrete: 10
 			Wood: 10
 			Steel: 10
-			Concrete: 10
-			Fighter: 10
+			Flak: 150
+			Heroic: 200
 			Bomber: 10
+			Fighter: 10
 			Helicopter: 10
 			Spaceship: 10
+			ARMOR: 70
+			BLAST: 98
+			COMPOSITE: 72
+			HAZMAT: 61
+			REFLECTOR: 51
+			Shield: 300
+		Spread: 200
+		Falloff: 100, 75, 50, 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Tesla
 
 NaxiMissileUboat:

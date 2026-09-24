@@ -1785,6 +1785,47 @@ RA2MammothTusk_AA:
 		VerticalRateOfTurn: 16
 	-Warhead@MissileAP_Medium:
 	Warhead@MissileAA_Medium: AreaDamage
+		Versus:
+			None: 33
+			Light: 115
+			Medium: 116
+			Heavy: 139
+			Superheavy: 144
+			Scout: 76
+			Plate: 65
+			Concrete: 83
+			Wood: 54
+			Steel: 56
+			Flak: 44
+			Heroic: 26
+			Bomber: 147
+			Fighter: 133
+			Helicopter: 177
+			Spaceship: 191
+			ARMOR: 70
+			BLAST: 56
+			COMPOSITE: 67
+			HAZMAT: 86
+			REFLECTOR: 70
+			Shield: 151
+		PercentageVersus:
+			None: 5
+			Light: 13
+			Medium: 14
+			Heavy: 15
+			Superheavy: 16
+			Scout: 12
+			Plate: 7
+			Concrete: 11
+			Wood: 9
+			Steel: 10
+			Flak: 6
+			Heroic: 8
+			Bomber: 18
+			Fighter: 17
+			Helicopter: 19
+			Spaceship: 20
+			Shield: 25
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -1801,48 +1842,6 @@ RA2MammothTusk_AA:
 	Warhead@MissileAA_Medium:
 		Spread: 300
 		Falloff: 100, 70, 30, 0
-		Versus:
-			HAZMAT: 86
-			COMPOSITE: 68
-			BLAST: 55
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 151
-			Spaceship: 191
-			Helicopter: 177
-			Bomber: 147
-			Superheavy: 144
-			Heavy: 139
-			Fighter: 133
-			Medium: 116
-			Light: 115
-			Concrete: 83
-			Scout: 76
-			Plate: 65
-			Steel: 56
-			Wood: 54
-			Flak: 44
-			None: 33
-			Heroic: 26
-		PercentageVersus:
-			Shield: 25
-			Spaceship: 20
-			Helicopter: 19
-			Bomber: 18
-			Fighter: 17
-			Superheavy: 16
-			Heavy: 15
-			Medium: 14
-			Light: 13
-			Scout: 12
-			Concrete: 11
-			Steel: 10
-			Wood: 9
-			Heroic: 8
-			Plate: 7
-			Flak: 6
-			None: 5
-
 RA2MammothTusk_AA_elite:
 	Inherits: RA2MammothTusk_AA
 	Range: 7100
@@ -1850,6 +1849,47 @@ RA2MammothTusk_AA_elite:
 	Projectile: Missile
 		VerticalRateOfTurn: 16
 	Warhead@MissileAA_Medium: AreaDamage
+		Versus:
+			None: 33
+			Light: 115
+			Medium: 116
+			Heavy: 139
+			Superheavy: 144
+			Scout: 76
+			Plate: 65
+			Concrete: 83
+			Wood: 54
+			Steel: 56
+			Flak: 44
+			Heroic: 26
+			Bomber: 147
+			Fighter: 133
+			Helicopter: 177
+			Spaceship: 191
+			ARMOR: 70
+			BLAST: 56
+			COMPOSITE: 67
+			HAZMAT: 86
+			REFLECTOR: 70
+			Shield: 151
+		PercentageVersus:
+			None: 5
+			Light: 13
+			Medium: 14
+			Heavy: 15
+			Superheavy: 16
+			Scout: 12
+			Plate: 7
+			Concrete: 11
+			Wood: 9
+			Steel: 10
+			Flak: 6
+			Heroic: 8
+			Bomber: 18
+			Fighter: 17
+			Helicopter: 19
+			Spaceship: 20
+			Shield: 25
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -1861,48 +1901,6 @@ RA2MammothTusk_AA_elite:
 	Warhead@MissileAA_Medium:
 		Spread: 300
 		Falloff: 100, 70, 30, 0
-		Versus:
-			HAZMAT: 86
-			COMPOSITE: 68
-			BLAST: 55
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 151
-			Spaceship: 191
-			Helicopter: 177
-			Bomber: 147
-			Superheavy: 144
-			Heavy: 139
-			Fighter: 133
-			Medium: 116
-			Light: 115
-			Concrete: 83
-			Scout: 76
-			Plate: 65
-			Steel: 56
-			Wood: 54
-			Flak: 44
-			None: 33
-			Heroic: 26
-		PercentageVersus:
-			Shield: 25
-			Spaceship: 20
-			Helicopter: 19
-			Bomber: 18
-			Fighter: 17
-			Superheavy: 16
-			Heavy: 15
-			Medium: 14
-			Light: 13
-			Scout: 12
-			Concrete: 11
-			Steel: 10
-			Wood: 9
-			Heroic: 8
-			Plate: 7
-			Flak: 6
-			None: 5
-
 V3Launch_elite:
 	ReloadDelay: 50
 	Range: 20000

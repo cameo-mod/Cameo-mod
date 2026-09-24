@@ -167,6 +167,47 @@ ra1_allies_longbow_missile:
 		VerticalRateOfTurn: 12
 	-Warhead@MissileHE_Heavy_Flat:
 	Warhead@MissileAP_Heavy: AreaDamage
+		Versus:
+			None: 54
+			Light: 112
+			Medium: 126
+			Heavy: 142
+			Superheavy: 160
+			Scout: 99
+			Plate: 91
+			Concrete: 105
+			Wood: 66
+			Steel: 82
+			Flak: 73
+			Heroic: 57
+			Bomber: 98
+			Fighter: 75
+			Helicopter: 115
+			Spaceship: 146
+			ARMOR: 70
+			BLAST: 69
+			COMPOSITE: 44
+			HAZMAT: 94
+			REFLECTOR: 71
+			Shield: 158
+		PercentageVersus:
+			None: 10
+			Light: 22
+			Medium: 23
+			Heavy: 24
+			Superheavy: 25
+			Scout: 21
+			Plate: 12
+			Concrete: 16
+			Wood: 14
+			Steel: 15
+			Flak: 11
+			Heroic: 13
+			Bomber: 18
+			Fighter: 17
+			Helicopter: 19
+			Spaceship: 20
+			Shield: 35
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -179,48 +220,6 @@ ra1_allies_longbow_missile:
 	Warhead@MissileAP_Heavy:
 		Spread: 85
 		Falloff: 100, 0
-		Versus:
-			HAZMAT: 95
-			COMPOSITE: 45
-			BLAST: 68
-			REFLECTOR: 71
-			ARMOR: 70
-			Shield: 161
-			Superheavy: 160
-			Spaceship: 146
-			Heavy: 142
-			Medium: 126
-			Helicopter: 115
-			Light: 112
-			Concrete: 105
-			Scout: 99
-			Bomber: 98
-			Plate: 91
-			Steel: 82
-			Fighter: 75
-			Flak: 73
-			Wood: 66
-			Heroic: 57
-			None: 54
-		PercentageVersus:
-			Shield: 35
-			Superheavy: 25
-			Heavy: 24
-			Medium: 23
-			Light: 22
-			Scout: 21
-			Spaceship: 20
-			Helicopter: 19
-			Bomber: 18
-			Fighter: 17
-			Concrete: 16
-			Steel: 15
-			Wood: 14
-			Heroic: 13
-			Plate: 12
-			Flak: 11
-			None: 10
-
 ra1_allies_longbow_missile_cryo:
 	Inherits@wh2: ^Warhead_MissileCryo_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -231,6 +230,47 @@ ra1_allies_longbow_missile_cryo:
 	MinRange: 1310
 	Report: missile6.aud
 	Warhead@BlastCryo_Medium:
+		Versus:
+			None: 166
+			Light: 104
+			Medium: 94
+			Heavy: 89
+			Superheavy: 75
+			Scout: 122
+			Plate: 103
+			Concrete: 116
+			Wood: 179
+			Steel: 120
+			Flak: 112
+			Heroic: 70
+			Bomber: 69
+			Fighter: 71
+			Helicopter: 56
+			Spaceship: 52
+			ARMOR: 70
+			BLAST: 60
+			COMPOSITE: 92
+			HAZMAT: 63
+			REFLECTOR: 65
+			Shield: 181
+		PercentageVersus:
+			None: 16
+			Light: 13
+			Medium: 12
+			Heavy: 11
+			Superheavy: 10
+			Scout: 15
+			Plate: 14
+			Concrete: 14
+			Wood: 17
+			Steel: 16
+			Flak: 15
+			Heroic: 12
+			Bomber: 7
+			Fighter: 7
+			Helicopter: 7
+			Spaceship: 7
+			Shield: 25
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 	Warhead@MissileCryo_Heavy:
@@ -247,53 +287,11 @@ ra1_allies_longbow_missile_cryo:
 		FriendlyFireSpread: 50
 		Spread: 105
 		Falloff: 100, 72, 50, 32, 19, 9, 0
-		Versus:
-			HAZMAT: 64
-			COMPOSITE: 93
-			BLAST: 59
-			REFLECTOR: 65
-			ARMOR: 70
-			Shield: 185
-			Wood: 179
-			None: 166
-			Scout: 122
-			Steel: 120
-			Concrete: 116
-			Flak: 112
-			Light: 104
-			Plate: 103
-			Medium: 94
-			Heavy: 89
-			Superheavy: 75
-			Fighter: 71
-			Heroic: 70
-			Bomber: 69
-			Helicopter: 56
-			Spaceship: 52
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Temperature: -67
 		PercentageScale: 10000
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 25
-			Wood: 17
-			None: 16
-			Steel: 16
-			Flak: 15
-			Scout: 15
-			Plate: 14
-			Concrete: 14
-			Light: 13
-			Heroic: 12
-			Medium: 12
-			Heavy: 11
-			Superheavy: 10
-			Fighter: 7
-			Bomber: 7
-			Helicopter: 7
-			Spaceship: 7
-
 ra1_allies_blackhawk_chaingun:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -366,6 +364,47 @@ ra1_allies_sheridanassaulttank_cannon:
 	Projectile: Bullet
 		Speed: 502
 	Warhead@CannonAP_Light:
+		Versus:
+			None: 74
+			Light: 119
+			Medium: 123
+			Heavy: 127
+			Superheavy: 139
+			Scout: 112
+			Plate: 111
+			Concrete: 128
+			Wood: 83
+			Steel: 103
+			Flak: 91
+			Heroic: 90
+			Bomber: 76
+			Fighter: 68
+			Helicopter: 78
+			Spaceship: 79
+			ARMOR: 70
+			BLAST: 73
+			COMPOSITE: 40
+			HAZMAT: 91
+			REFLECTOR: 75
+			Shield: 133
+		PercentageVersus:
+			None: 5
+			Light: 13
+			Medium: 14
+			Heavy: 15
+			Superheavy: 16
+			Scout: 12
+			Plate: 7
+			Concrete: 11
+			Wood: 9
+			Steel: 10
+			Flak: 6
+			Heroic: 8
+			Bomber: 2
+			Fighter: 1
+			Helicopter: 3
+			Spaceship: 4
+			Shield: 17
 		PercentageDenominator: 10000
 		PercentageScale: 10000
 		Damage: 4000
@@ -378,49 +417,8 @@ ra1_allies_sheridanassaulttank_cannon:
 		ValidTargets: Ground, Water
 		Spread: 80
 		Falloff: 100, 0
-		Versus:
-			HAZMAT: 92
-			COMPOSITE: 41
-			BLAST: 72
-			REFLECTOR: 75
-			ARMOR: 70
-			Shield: 132
-			Superheavy: 139
-			Concrete: 128
-			Heavy: 127
-			Medium: 123
-			Light: 119
-			Scout: 112
-			Plate: 111
-			Steel: 103
-			Flak: 91
-			Heroic: 90
-			Wood: 83
-			Spaceship: 79
-			Helicopter: 78
-			Bomber: 76
-			None: 74
-			Fighter: 68
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 17
-			Superheavy: 16
-			Heavy: 15
-			Medium: 14
-			Light: 13
-			Scout: 12
-			Concrete: 11
-			Steel: 10
-			Wood: 9
-			Heroic: 8
-			Plate: 7
-			Flak: 6
-			None: 5
-			Spaceship: 4
-			Helicopter: 3
-			Bomber: 2
-			Fighter: 1
 ra1_allies_sheridanassaulttank_cannon_cryo:
 	Inherits@wh: ^Warhead_CannonCryo_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
@@ -614,6 +612,47 @@ ra1_allies_rapierjumpjet_missile_AA:
 		TrailInterval: 1
 		TrailDelay: 1
 	Warhead@Concussion_Medium:
+		Versus:
+			None: 151
+			Light: 126
+			Medium: 109
+			Heavy: 106
+			Superheavy: 82
+			Scout: 144
+			Plate: 92
+			Concrete: 90
+			Wood: 148
+			Steel: 105
+			Flak: 107
+			Heroic: 88
+			Bomber: 67
+			Fighter: 72
+			Helicopter: 66
+			Spaceship: 46
+			ARMOR: 70
+			BLAST: 36
+			COMPOSITE: 105
+			HAZMAT: 67
+			REFLECTOR: 70
+			Shield: 166
+		PercentageVersus:
+			None: 19
+			Light: 17
+			Medium: 14
+			Heavy: 11
+			Superheavy: 9
+			Scout: 20
+			Plate: 13
+			Concrete: 12
+			Wood: 18
+			Steel: 15
+			Flak: 16
+			Heroic: 10
+			Bomber: 7
+			Fighter: 8
+			Helicopter: 6
+			Spaceship: 5
+			Shield: 25
 		PercentageDenominator: 10000
 		PercentageScale: 10000
 		ValidTargets: Ground, Water, Air
@@ -629,50 +668,8 @@ ra1_allies_rapierjumpjet_missile_AA:
 		FriendlyFireSpread: 50
 		Spread: 350
 		Falloff: 100, 72, 50, 32, 18, 8, 0
-		Versus:
-			HAZMAT: 68
-			COMPOSITE: 107
-			BLAST: 36
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 159
-			None: 151
-			Wood: 148
-			Scout: 144
-			Light: 126
-			Medium: 109
-			Flak: 107
-			Heavy: 106
-			Steel: 105
-			Plate: 92
-			Concrete: 90
-			Heroic: 88
-			Superheavy: 82
-			Fighter: 72
-			Bomber: 67
-			Helicopter: 66
-			Spaceship: 46
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 25
-			Scout: 20
-			None: 19
-			Wood: 18
-			Light: 17
-			Flak: 16
-			Steel: 15
-			Medium: 14
-			Plate: 13
-			Concrete: 12
-			Heavy: 11
-			Heroic: 10
-			Superheavy: 9
-			Fighter: 8
-			Bomber: 7
-			Helicopter: 6
-			Spaceship: 5
-
 ra1_allies_rapierjumpjet_missile_cryo_AA:
 	Inherits@wh2: ^Warhead_MissileCryo_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -695,6 +692,47 @@ ra1_allies_rapierjumpjet_missile_cryo_AA:
 		TrailInterval: 1
 		TrailDelay: 1
 	Warhead@BlastCryo_Medium:
+		Versus:
+			None: 166
+			Light: 104
+			Medium: 94
+			Heavy: 89
+			Superheavy: 75
+			Scout: 122
+			Plate: 103
+			Concrete: 116
+			Wood: 179
+			Steel: 120
+			Flak: 112
+			Heroic: 70
+			Bomber: 69
+			Fighter: 71
+			Helicopter: 56
+			Spaceship: 52
+			ARMOR: 70
+			BLAST: 60
+			COMPOSITE: 92
+			HAZMAT: 63
+			REFLECTOR: 65
+			Shield: 181
+		PercentageVersus:
+			None: 16
+			Light: 13
+			Medium: 12
+			Heavy: 11
+			Superheavy: 10
+			Scout: 15
+			Plate: 14
+			Concrete: 14
+			Wood: 17
+			Steel: 16
+			Flak: 15
+			Heroic: 12
+			Bomber: 7
+			Fighter: 7
+			Helicopter: 7
+			Spaceship: 7
+			Shield: 25
 		PercentageDenominator: 10000
 		PercentageScale: 10000
 		ValidTargets: Ground, Water, Air
@@ -707,52 +745,10 @@ ra1_allies_rapierjumpjet_missile_cryo_AA:
 		FriendlyFireSpread: 50
 		Spread: 105
 		Falloff: 100, 72, 50, 32, 19, 9, 0
-		Versus:
-			HAZMAT: 64
-			COMPOSITE: 93
-			BLAST: 59
-			REFLECTOR: 65
-			ARMOR: 70
-			Shield: 185
-			Wood: 179
-			None: 166
-			Scout: 122
-			Steel: 120
-			Concrete: 116
-			Flak: 112
-			Light: 104
-			Plate: 103
-			Medium: 94
-			Heavy: 89
-			Superheavy: 75
-			Fighter: 71
-			Heroic: 70
-			Bomber: 69
-			Helicopter: 56
-			Spaceship: 52
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Temperature: -67
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 25
-			Wood: 17
-			None: 16
-			Steel: 16
-			Flak: 15
-			Scout: 15
-			Plate: 14
-			Concrete: 14
-			Light: 13
-			Heroic: 12
-			Medium: 12
-			Heavy: 11
-			Superheavy: 10
-			Fighter: 7
-			Bomber: 7
-			Helicopter: 7
-			Spaceship: 7
-
 ra1_allies_reconranger_recoillessgun:
 	Inherits@6: ^RailgunWeapon
 	Inherits@xra1_allies_reconranger_recoillessgun0: ^Warhead_MissileAP_Heavy

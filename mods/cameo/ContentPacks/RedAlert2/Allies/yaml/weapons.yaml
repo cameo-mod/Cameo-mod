@@ -15,6 +15,47 @@ RA2Patriot:
 		MinimumLaunchAngle: 60
 	-Warhead@MissileAP_Medium:
 	Warhead@MissileAA_Medium: AreaDamage
+		Versus:
+			None: 33
+			Light: 115
+			Medium: 116
+			Heavy: 139
+			Superheavy: 144
+			Scout: 76
+			Plate: 65
+			Concrete: 83
+			Wood: 54
+			Steel: 56
+			Flak: 44
+			Heroic: 26
+			Bomber: 147
+			Fighter: 133
+			Helicopter: 177
+			Spaceship: 191
+			ARMOR: 70
+			BLAST: 56
+			COMPOSITE: 67
+			HAZMAT: 86
+			REFLECTOR: 70
+			Shield: 151
+		PercentageVersus:
+			None: 5
+			Light: 13
+			Medium: 14
+			Heavy: 15
+			Superheavy: 16
+			Scout: 12
+			Plate: 7
+			Concrete: 11
+			Wood: 9
+			Steel: 10
+			Flak: 6
+			Heroic: 8
+			Bomber: 18
+			Fighter: 17
+			Helicopter: 19
+			Spaceship: 20
+			Shield: 25
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -31,48 +72,6 @@ RA2Patriot:
 	Warhead@MissileAA_Medium:
 		Spread: 300
 		Falloff: 100, 70, 30, 0
-		Versus:
-			HAZMAT: 86
-			COMPOSITE: 68
-			BLAST: 55
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 151
-			Spaceship: 191
-			Helicopter: 177
-			Bomber: 147
-			Superheavy: 144
-			Heavy: 139
-			Fighter: 133
-			Medium: 116
-			Light: 115
-			Concrete: 83
-			Scout: 76
-			Plate: 65
-			Steel: 56
-			Wood: 54
-			Flak: 44
-			None: 33
-			Heroic: 26
-		PercentageVersus:
-			Shield: 25
-			Spaceship: 20
-			Helicopter: 19
-			Bomber: 18
-			Fighter: 17
-			Superheavy: 16
-			Heavy: 15
-			Medium: 14
-			Light: 13
-			Scout: 12
-			Concrete: 11
-			Steel: 10
-			Wood: 9
-			Heroic: 8
-			Plate: 7
-			Flak: 6
-			None: 5
-
 RA2PatriotThunderboltMissile:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_AA
@@ -126,6 +125,47 @@ HarrierMissiles:
 		ContrailStartColor: FF884400
 		ContrailEndColor: 000000FF
 	Warhead@MissileAP_Medium:
+		Versus:
+			None: 33
+			Light: 146
+			Medium: 161
+			Heavy: 177
+			Superheavy: 200
+			Scout: 114
+			Plate: 64
+			Concrete: 82
+			Wood: 53
+			Steel: 55
+			Flak: 44
+			Heroic: 37
+			Bomber: 112
+			Fighter: 75
+			Helicopter: 123
+			Spaceship: 124
+			ARMOR: 70
+			BLAST: 69
+			COMPOSITE: 44
+			HAZMAT: 94
+			REFLECTOR: 71
+			Shield: 145
+		PercentageVersus:
+			None: 5
+			Light: 17
+			Medium: 18
+			Heavy: 19
+			Superheavy: 20
+			Scout: 16
+			Plate: 7
+			Concrete: 11
+			Wood: 9
+			Steel: 10
+			Flak: 6
+			Heroic: 8
+			Bomber: 13
+			Fighter: 12
+			Helicopter: 14
+			Spaceship: 15
+			Shield: 25
 		ValidTargets: Ground, Water, Air
 		Damage: 18000
 		PercentageScale: 2222
@@ -304,48 +344,7 @@ HarrierMissiles:
 		FriendlyFireSpread: 50
 		Spread: 64
 		Falloff: 100, 0
-		Versus:
-			HAZMAT: 95
-			COMPOSITE: 45
-			BLAST: 68
-			REFLECTOR: 71
-			ARMOR: 70
-			Shield: 145
-			Superheavy: 200
-			Heavy: 177
-			Medium: 161
-			Light: 146
-			Spaceship: 124
-			Helicopter: 123
-			Scout: 114
-			Bomber: 112
-			Concrete: 82
-			Fighter: 75
-			Plate: 64
-			Steel: 55
-			Wood: 53
-			Flak: 44
-			Heroic: 37
-			None: 33
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 25
-			Superheavy: 20
-			Heavy: 19
-			Medium: 18
-			Light: 17
-			Scout: 16
-			Spaceship: 15
-			Helicopter: 14
-			Bomber: 13
-			Fighter: 12
-			Concrete: 11
-			Steel: 10
-			Wood: 9
-			Heroic: 8
-			Plate: 7
-			Flak: 6
-			None: 5
 HarrierMissiles_elite:
 	Inherits: HarrierMissiles
 	Burst: 8
@@ -362,55 +361,54 @@ HarrierMissiles_elite:
 		ContrailEndColor: FFFFFF
 	TargetActorCenter: true
 	Warhead@MissileAP_Medium: AreaDamage
+		Versus:
+			None: 33
+			Light: 146
+			Medium: 161
+			Heavy: 177
+			Superheavy: 200
+			Scout: 114
+			Plate: 64
+			Concrete: 82
+			Wood: 53
+			Steel: 55
+			Flak: 44
+			Heroic: 37
+			Bomber: 112
+			Fighter: 75
+			Helicopter: 123
+			Spaceship: 124
+			ARMOR: 70
+			BLAST: 69
+			COMPOSITE: 44
+			HAZMAT: 94
+			REFLECTOR: 71
+			Shield: 145
+		PercentageVersus:
+			None: 5
+			Light: 17
+			Medium: 18
+			Heavy: 19
+			Superheavy: 20
+			Scout: 16
+			Plate: 7
+			Concrete: 11
+			Wood: 9
+			Steel: 10
+			Flak: 6
+			Heroic: 8
+			Bomber: 13
+			Fighter: 12
+			Helicopter: 14
+			Spaceship: 15
+			Shield: 25
 	Warhead@MissileAP_Medium:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Spread: 64
 		Falloff: 100, 0
-		Versus:
-			HAZMAT: 95
-			COMPOSITE: 45
-			BLAST: 68
-			REFLECTOR: 71
-			ARMOR: 70
-			Shield: 145
-			Superheavy: 200
-			Heavy: 177
-			Medium: 161
-			Light: 146
-			Spaceship: 124
-			Helicopter: 123
-			Scout: 114
-			Bomber: 112
-			Concrete: 82
-			Fighter: 75
-			Plate: 64
-			Steel: 55
-			Wood: 53
-			Flak: 44
-			Heroic: 37
-			None: 33
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 25
-			Superheavy: 20
-			Heavy: 19
-			Medium: 18
-			Light: 17
-			Scout: 16
-			Spaceship: 15
-			Helicopter: 14
-			Bomber: 13
-			Fighter: 12
-			Concrete: 11
-			Steel: 10
-			Wood: 9
-			Heroic: 8
-			Plate: 7
-			Flak: 6
-			None: 5
-
 BlackEagleMissiles:
 	Inherits@xBlackEagleMissiles0: ^Warhead_MissileAP_Medium
 	Inherits@xBlackEagleMissiles1: ^Projectile_Missile_Medium
@@ -908,6 +906,47 @@ BlackEagleThunderboltMissiles:
 		ContrailStartColor: EEEE00
 		ContrailEndColor: FFFFFF
 	Warhead@MissileAP_Light:
+		Versus:
+			None: 36
+			Light: 142
+			Medium: 155
+			Heavy: 169
+			Superheavy: 172
+			Scout: 130
+			Plate: 46
+			Concrete: 70
+			Wood: 59
+			Steel: 60
+			Flak: 43
+			Heroic: 35
+			Bomber: 113
+			Fighter: 112
+			Helicopter: 127
+			Spaceship: 128
+			ARMOR: 70
+			BLAST: 69
+			COMPOSITE: 44
+			HAZMAT: 94
+			REFLECTOR: 71
+			Shield: 134
+		PercentageVersus:
+			None: 1
+			Light: 13
+			Medium: 14
+			Heavy: 15
+			Superheavy: 16
+			Scout: 12
+			Plate: 3
+			Concrete: 7
+			Wood: 5
+			Steel: 6
+			Flak: 2
+			Heroic: 4
+			Bomber: 9
+			Fighter: 8
+			Helicopter: 10
+			Spaceship: 11
+			Shield: 17
 		ValidTargets: Ground, Water, Air
 		Damage: 48000
 		PercentageScale: 1250
@@ -1162,48 +1201,7 @@ BlackEagleThunderboltMissiles:
 		FriendlyFireSpread: 50
 		Spread: 43
 		Falloff: 100, 0
-		Versus:
-			HAZMAT: 95
-			COMPOSITE: 45
-			BLAST: 68
-			REFLECTOR: 71
-			ARMOR: 70
-			Shield: 133
-			Superheavy: 172
-			Heavy: 169
-			Medium: 155
-			Light: 142
-			Scout: 130
-			Spaceship: 128
-			Helicopter: 127
-			Bomber: 113
-			Fighter: 112
-			Concrete: 70
-			Steel: 60
-			Wood: 59
-			Plate: 46
-			Flak: 43
-			None: 36
-			Heroic: 35
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 17
-			Superheavy: 16
-			Heavy: 15
-			Medium: 14
-			Light: 13
-			Scout: 12
-			Spaceship: 11
-			Helicopter: 10
-			Bomber: 9
-			Fighter: 8
-			Concrete: 7
-			Steel: 6
-			Wood: 5
-			Heroic: 4
-			Plate: 3
-			Flak: 2
-			None: 1
 BlackEagleThunderboltMissiles_elite:
 	Inherits: BlackEagleThunderboltMissiles
 	Range: 10000
@@ -1216,55 +1214,54 @@ BlackEagleThunderboltMissiles_elite:
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
 	Warhead@MissileAP_Light: AreaDamage
+		Versus:
+			None: 36
+			Light: 142
+			Medium: 155
+			Heavy: 169
+			Superheavy: 172
+			Scout: 130
+			Plate: 46
+			Concrete: 70
+			Wood: 59
+			Steel: 60
+			Flak: 43
+			Heroic: 35
+			Bomber: 113
+			Fighter: 112
+			Helicopter: 127
+			Spaceship: 128
+			ARMOR: 70
+			BLAST: 69
+			COMPOSITE: 44
+			HAZMAT: 94
+			REFLECTOR: 71
+			Shield: 134
+		PercentageVersus:
+			None: 1
+			Light: 13
+			Medium: 14
+			Heavy: 15
+			Superheavy: 16
+			Scout: 12
+			Plate: 3
+			Concrete: 7
+			Wood: 5
+			Steel: 6
+			Flak: 2
+			Heroic: 4
+			Bomber: 9
+			Fighter: 8
+			Helicopter: 10
+			Spaceship: 11
+			Shield: 17
 	Warhead@MissileAP_Light:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Spread: 43
 		Falloff: 100, 0
-		Versus:
-			HAZMAT: 95
-			COMPOSITE: 45
-			BLAST: 68
-			REFLECTOR: 71
-			ARMOR: 70
-			Shield: 133
-			Superheavy: 172
-			Heavy: 169
-			Medium: 155
-			Light: 142
-			Scout: 130
-			Spaceship: 128
-			Helicopter: 127
-			Bomber: 113
-			Fighter: 112
-			Concrete: 70
-			Steel: 60
-			Wood: 59
-			Plate: 46
-			Flak: 43
-			None: 36
-			Heroic: 35
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 17
-			Superheavy: 16
-			Heavy: 15
-			Medium: 14
-			Light: 13
-			Scout: 12
-			Spaceship: 11
-			Helicopter: 10
-			Bomber: 9
-			Fighter: 8
-			Concrete: 7
-			Steel: 6
-			Wood: 5
-			Heroic: 4
-			Plate: 3
-			Flak: 2
-			None: 1
-
 PrismCharge:
 	ReloadDelay: 3
 	Range: 9630
@@ -1397,6 +1394,47 @@ RA2Comet:
 		SecondaryBeamColor: FFFFFFFF
 		SecondaryBeamUsePlayerColor: false
 	Warhead@Demolition_Light:
+		Versus:
+			None: 183
+			Light: 86
+			Medium: 69
+			Heavy: 58
+			Superheavy: 51
+			Scout: 109
+			Plate: 107
+			Concrete: 136
+			Wood: 200
+			Steel: 165
+			Flak: 143
+			Heroic: 59
+			Bomber: 62
+			Fighter: 70
+			Helicopter: 54
+			Spaceship: 47
+			ARMOR: 70
+			BLAST: 42
+			COMPOSITE: 100
+			HAZMAT: 62
+			REFLECTOR: 75
+			Shield: 143
+		PercentageVersus:
+			None: 13
+			Light: 8
+			Medium: 7
+			Heavy: 6
+			Superheavy: 5
+			Scout: 9
+			Plate: 11
+			Concrete: 14
+			Wood: 16
+			Steel: 15
+			Flak: 12
+			Heroic: 10
+			Bomber: 3
+			Fighter: 4
+			Helicopter: 2
+			Spaceship: 1
+			Shield: 17
 		Damage: 60000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Warhead@Flame_Medium:
@@ -1475,50 +1513,8 @@ RA2Comet:
 		ValidTargets: Ground, Water
 		Spread: 233
 		Falloff: 100, 45, 18, 6, 0
-		Versus:
-			HAZMAT: 63
-			COMPOSITE: 102
-			BLAST: 41
-			REFLECTOR: 75
-			ARMOR: 70
-			Shield: 143
-			Wood: 200
-			None: 183
-			Steel: 165
-			Flak: 143
-			Concrete: 136
-			Scout: 109
-			Plate: 107
-			Light: 86
-			Fighter: 70
-			Medium: 69
-			Bomber: 62
-			Heroic: 59
-			Heavy: 58
-			Helicopter: 54
-			Superheavy: 51
-			Spaceship: 47
 		PercentageScale: 10000
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 17
-			Wood: 16
-			Steel: 15
-			Concrete: 14
-			None: 13
-			Flak: 12
-			Plate: 11
-			Heroic: 10
-			Scout: 9
-			Light: 8
-			Medium: 7
-			Heavy: 6
-			Superheavy: 5
-			Fighter: 4
-			Bomber: 3
-			Helicopter: 2
-			Spaceship: 1
-
 RA2Comet_elite:
 	Inherits: RA2Comet
 	Inherits@fx_cover: ^Effect_AlliedTigerCannon
@@ -1585,6 +1581,47 @@ RA2Comet_elite:
 	Warhead@ShieldHit:
 		Duration: 10
 	Warhead@Demolition_Light: AreaDamage
+		Versus:
+			None: 183
+			Light: 86
+			Medium: 69
+			Heavy: 58
+			Superheavy: 51
+			Scout: 109
+			Plate: 107
+			Concrete: 136
+			Wood: 200
+			Steel: 165
+			Flak: 143
+			Heroic: 59
+			Bomber: 62
+			Fighter: 70
+			Helicopter: 54
+			Spaceship: 47
+			ARMOR: 70
+			BLAST: 42
+			COMPOSITE: 100
+			HAZMAT: 62
+			REFLECTOR: 75
+			Shield: 143
+		PercentageVersus:
+			None: 13
+			Light: 8
+			Medium: 7
+			Heavy: 6
+			Superheavy: 5
+			Scout: 9
+			Plate: 11
+			Concrete: 14
+			Wood: 16
+			Steel: 15
+			Flak: 12
+			Heroic: 10
+			Bomber: 3
+			Fighter: 4
+			Helicopter: 2
+			Spaceship: 1
+			Shield: 17
 	Warhead@Demolition_Light:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1592,50 +1629,8 @@ RA2Comet_elite:
 		ValidTargets: Ground, Water
 		Spread: 233
 		Falloff: 100, 45, 18, 6, 0
-		Versus:
-			HAZMAT: 63
-			COMPOSITE: 102
-			BLAST: 41
-			REFLECTOR: 75
-			ARMOR: 70
-			Shield: 143
-			Wood: 200
-			None: 183
-			Steel: 165
-			Flak: 143
-			Concrete: 136
-			Scout: 109
-			Plate: 107
-			Light: 86
-			Fighter: 70
-			Medium: 69
-			Bomber: 62
-			Heroic: 59
-			Heavy: 58
-			Helicopter: 54
-			Superheavy: 51
-			Spaceship: 47
 		PercentageScale: 10000
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 17
-			Wood: 16
-			Steel: 15
-			Concrete: 14
-			None: 13
-			Flak: 12
-			Plate: 11
-			Heroic: 10
-			Scout: 9
-			Light: 8
-			Medium: 7
-			Heavy: 6
-			Superheavy: 5
-			Fighter: 4
-			Bomber: 3
-			Helicopter: 2
-			Spaceship: 1
-
 RA2GrandCannonWeapon:
 	Inherits@xRA2GrandCannonWeapon0: ^Warhead_Demolition_Light
 	Inherits@xRA2GrandCannonWeapon1: ^Projectile_Grenade_Light
@@ -2256,6 +2251,47 @@ RA2Medusa_AA:
 		ContrailLength: 35
 	-Warhead@MissileAP_Medium:
 	Warhead@MissileAA_Medium: AreaDamage
+		Versus:
+			None: 33
+			Light: 115
+			Medium: 116
+			Heavy: 139
+			Superheavy: 144
+			Scout: 76
+			Plate: 65
+			Concrete: 83
+			Wood: 54
+			Steel: 56
+			Flak: 44
+			Heroic: 26
+			Bomber: 147
+			Fighter: 133
+			Helicopter: 177
+			Spaceship: 191
+			ARMOR: 70
+			BLAST: 56
+			COMPOSITE: 67
+			HAZMAT: 86
+			REFLECTOR: 70
+			Shield: 151
+		PercentageVersus:
+			None: 5
+			Light: 13
+			Medium: 14
+			Heavy: 15
+			Superheavy: 16
+			Scout: 12
+			Plate: 7
+			Concrete: 11
+			Wood: 9
+			Steel: 10
+			Flak: 6
+			Heroic: 8
+			Bomber: 18
+			Fighter: 17
+			Helicopter: 19
+			Spaceship: 20
+			Shield: 25
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -2271,48 +2307,6 @@ RA2Medusa_AA:
 	Warhead@MissileAA_Medium:
 		Spread: 300
 		Falloff: 100, 70, 30, 0
-		Versus:
-			HAZMAT: 86
-			COMPOSITE: 68
-			BLAST: 55
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 151
-			Spaceship: 191
-			Helicopter: 177
-			Bomber: 147
-			Superheavy: 144
-			Heavy: 139
-			Fighter: 133
-			Medium: 116
-			Light: 115
-			Concrete: 83
-			Scout: 76
-			Plate: 65
-			Steel: 56
-			Wood: 54
-			Flak: 44
-			None: 33
-			Heroic: 26
-		PercentageVersus:
-			Shield: 25
-			Spaceship: 20
-			Helicopter: 19
-			Bomber: 18
-			Fighter: 17
-			Superheavy: 16
-			Heavy: 15
-			Medium: 14
-			Light: 13
-			Scout: 12
-			Concrete: 11
-			Steel: 10
-			Wood: 9
-			Heroic: 8
-			Plate: 7
-			Flak: 6
-			None: 5
-
 RA2MedusaAG:
 	Inherits@missilerole: ^Warhead_MissileHE_Medium
 	Inherits: RA2Medusa_AA

@@ -4064,7 +4064,7 @@
 	Inherits@bot: ^BotProductionBehavior
 	Inherits@mindcontrol: ^MindControllableStructure
 	Inherits@forceshield: ^ForceShieldable
-	Inherits@sonicdebuff: ^SonicDebuff
+	Inherits@resonant: ^Resonant
 	Inherits@trap: ^BoobyTrappable
 	Inherits@base-reveal: ^Base-reveal
 	Inherits@bounty: ^GlobalBounty
@@ -6152,25 +6152,72 @@
 		Range: 7c0
 		Condition: CommandoCall
 
-^SonicDebuff:
-	ExternalCondition@SONICDEBUFF:
-		Condition: SonicDebuff
-	WithColoredOverlay@SONICDEBUFF:
-		RequiresCondition: SonicDebuff
-		Color: 0088FF40
-		Multiply: true
-	DamageMultiplier@SONICDEBUFF:
-		Modifier: 150
-		RequiresCondition: SonicDebuff
-	SpeedMultiplier@SONICDEBUFF:
-		Modifier: 75
-		RequiresCondition: SonicDebuff
-	# WithDecoration@SONICDEBUFF:
-	# 	Image: 2100commandodebuff
-	# 	Sequence: idle
-	# 	Position: Center
-	# 	RequiresCondition: SonicDebuff
-	# 	ValidRelationships: Enemy, Neutral, Ally
+^Resonant:
+	# --- Resonance METER (physical-state axis) — the W7 sonic "spotlight". Filled by
+	# sonic-family damage (AreaDamage PhysicalStates) and flat ApplyPhysicalState marks.
+	# It deals NO damage of its own, ever — the force multiplier only. Fast decay: dies
+	# with the beam (RelaxationScaled 200 = 4x Corrosion). Effects ramp with the meter to
+	# the old binary peak (Damage 150 / Speed 75). See BALANCE_PROGRAM_PLAN.md §W7.
+	PhysicalState@Resonance:
+		Name: Resonance
+		MinValue: 0
+		MaxValue: 20000
+		RelaxedValue: 0
+		InitialValue: 0
+		RelativeToHealth: true
+		ApplyDamageModifiers: true
+		RelaxationInterval: 1
+		RelaxationDelay: 12
+		RelaxationLinear: 5
+		RelaxationScaled: 200
+	PhysicalStateBar@ResonanceBar:
+		PhysicalStateName: Resonance
+		PositiveColor: 0088FF
+		NeutralColor: 808080
+		DisplayWhenRelaxed: false
+		ShowAbsoluteValues: false
+		RequiresCondition: !ResonanceDeadzone
+	GrantConditionOnPhysicalState@ResonanceDeadzone:
+		PhysicalStateName: Resonance
+		Condition: ResonanceDeadzone
+		LowerValue: 0
+		UpperValue: 199
+	GrantConditionOnPhysicalState@Resonating:
+		PhysicalStateName: Resonance
+		Condition: Resonating
+		LowerValue: 200
+		UpperValue: 20000
+	GrantConditionOnPhysicalState@ResonanceMax:
+		PhysicalStateName: Resonance
+		Condition: ResonanceMax
+		LowerValue: 20000
+		UpperValue: 20000
+	WithPhysicalStateColoredOverlay@Resonance:
+		PhysicalStateName: Resonance
+		MinColor: 0088FF08
+		MaxColor: 0088FF40
+		LowerValue: 200
+		UpperValue: 20000
+		BlendMode: Multiply
+	DamageMultiplierProportionalToPhysicalState@Resonance:
+		PhysicalStateName: Resonance
+		DamageMultiplierAtMinimum: 100
+		DamageMultiplierAtMaximum: 150
+		UseDeviationFromRelaxed: true
+		RequiresCondition: Resonating
+	SlowsProportionalToPhysicalState@Resonance:
+		PhysicalStateName: Resonance
+		UseDeviationFromRelaxed: true
+		OnlyPositiveValues: true
+		SpeedModifierAtMinimum: 100
+		SpeedModifierAtMaximum: 75
+		TurnSpeedModifierAtMinimum: 100
+		TurnSpeedModifierAtMaximum: 100
+		TurretTurnSpeedModifierAtMinimum: 100
+		TurretTurnSpeedModifierAtMaximum: 100
+		ReloadDelayModifierAtMinimum: 100
+		ReloadDelayModifierAtMaximum: 100
+		RequiresCondition: Resonating
 
 ^CommandoCallable:
 	ExternalCondition@CommandoCall:
@@ -6563,7 +6610,7 @@
 	# 	BlinkPattern: Off, Off, On, Off
 
 ^ExternalConditions:
-	Inherits@sonicdebuff: ^SonicDebuff
+	Inherits@resonant: ^Resonant
 	Inherits@defplague: ^DefilerPlague
 	Inherits@commando: ^CommandoCallable
 	Inherits@darkswarm: ^DarkSwarmable
@@ -6855,11 +6902,11 @@ CPQDEBUGDUMMY:
 
 ^Repairable:
 	Repairable:
-		RepairActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviets_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_alliedservicedepot, asianalliance_servicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RepairActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviets_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_servicedepot, asianalliance_servicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^RearmAtServiceDepot:
 	Rearmable:
-		RearmActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviets_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_alliedservicedepot, asianalliance_servicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RearmActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviets_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_servicedepot, asianalliance_servicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^ShootableMissile:
 	Inherits@1: ^ExistsInWorld
@@ -7744,7 +7791,7 @@ CPQDEBUGDUMMY:
 		RequiresForceMove: true
 	TransformsIntoRepairable:
 		RequiresCondition: factundeploy
-		RepairActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviets_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_alliedservicedepot, asianalliance_servicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RepairActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviets_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_servicedepot, asianalliance_servicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 		RequiresForceMove: true
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability

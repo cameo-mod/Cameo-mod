@@ -2722,6 +2722,29 @@ CannonAttackRobotGun:
 		ZOffset: 2048
 	Warhead@CannonHE_Medium_Flat: AreaDamage
 	Warhead@Railgun_Heavy_ExtraDamage: SpreadDamage
+		Versus:
+			None: 10
+			Light: 50
+			Medium: 75
+			Heavy: 100
+			Superheavy: 125
+			Scout: 25
+			Plate: 10
+			Concrete: 200
+			Wood: 150
+			Steel: 175
+			Flak: 10
+			Heroic: 10
+			Bomber: 10
+			Fighter: 10
+			Helicopter: 10
+			Spaceship: 10
+			ARMOR: 70
+			BLAST: 78
+			COMPOSITE: 40
+			HAZMAT: 96
+			REFLECTOR: 64
+			Shield: 10
 	Warhead@CannonHE_Medium_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2776,29 +2799,6 @@ CannonAttackRobotGun:
 		Spread: 200
 		Damage: 1000
 		Falloff: 100, 75, 50, 25
-		Versus:
-			HAZMAT: 97
-			COMPOSITE: 41
-			BLAST: 77
-			REFLECTOR: 64
-			ARMOR: 70
-			Shield: 10
-			Concrete: 200
-			Steel: 175
-			Wood: 150
-			Superheavy: 125
-			Heavy: 100
-			Medium: 75
-			Light: 50
-			Scout: 25
-			None: 10
-			Flak: 10
-			Plate: 10
-			Heroic: 10
-			Fighter: 10
-			Bomber: 10
-			Helicopter: 10
-			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 CannonAttackRobotGun_elite:
 	Inherits: CannonAttackRobotGun
@@ -2814,6 +2814,29 @@ CannonAttackRobotGun_elite:
 		ZOffset: 2048
 	Warhead@CannonHE_Medium_Flat: AreaDamage
 	Warhead@Railgun_Heavy_ExtraDamage: SpreadDamage
+		Versus:
+			None: 10
+			Light: 50
+			Medium: 75
+			Heavy: 100
+			Superheavy: 125
+			Scout: 25
+			Plate: 10
+			Concrete: 200
+			Wood: 150
+			Steel: 175
+			Flak: 10
+			Heroic: 10
+			Bomber: 10
+			Fighter: 10
+			Helicopter: 10
+			Spaceship: 10
+			ARMOR: 70
+			BLAST: 78
+			COMPOSITE: 40
+			HAZMAT: 96
+			REFLECTOR: 64
+			Shield: 10
 	Warhead@CannonHE_Medium_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2868,29 +2891,6 @@ CannonAttackRobotGun_elite:
 		Spread: 200
 		Damage: 1000
 		Falloff: 100, 75, 50, 25
-		Versus:
-			HAZMAT: 97
-			COMPOSITE: 41
-			BLAST: 77
-			REFLECTOR: 64
-			ARMOR: 70
-			Shield: 10
-			Concrete: 200
-			Steel: 175
-			Wood: 150
-			Superheavy: 125
-			Heavy: 100
-			Medium: 75
-			Light: 50
-			Scout: 25
-			None: 10
-			Flak: 10
-			Plate: 10
-			Heroic: 10
-			Fighter: 10
-			Bomber: 10
-			Helicopter: 10
-			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
 MissileAttackRobotGun:
@@ -4129,34 +4129,34 @@ OrionRailgun:
 		ZOffset: 2048
 	Warhead@Railgun_Heavy_Flat: AreaDamage
 	Warhead@Railgun_Heavy_ExtraDamage: SpreadDamage
+		Versus:
+			None: 10
+			Light: 50
+			Medium: 75
+			Heavy: 100
+			Superheavy: 125
+			Scout: 25
+			Plate: 10
+			Concrete: 200
+			Wood: 150
+			Steel: 175
+			Flak: 10
+			Heroic: 10
+			Bomber: 10
+			Fighter: 10
+			Helicopter: 10
+			Spaceship: 10
+			ARMOR: 70
+			BLAST: 78
+			COMPOSITE: 40
+			HAZMAT: 96
+			REFLECTOR: 64
+			Shield: 10
 	Warhead@Railgun_Heavy_ExtraDamage:
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1000
 		Falloff: 100, 75, 50, 25
-		Versus:
-			HAZMAT: 97
-			COMPOSITE: 41
-			BLAST: 77
-			REFLECTOR: 64
-			ARMOR: 70
-			Shield: 10
-			Concrete: 200
-			Steel: 175
-			Wood: 150
-			Superheavy: 125
-			Heavy: 100
-			Medium: 75
-			Light: 50
-			Scout: 25
-			None: 10
-			Flak: 10
-			Plate: 10
-			Heroic: 10
-			Fighter: 10
-			Bomber: 10
-			Helicopter: 10
-			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Railgun_Heavy_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
@@ -4253,34 +4253,34 @@ OrionRailgun_elite:
 		ZOffset: 2048
 	Warhead@Railgun_Heavy_Flat: AreaDamage
 	Warhead@Railgun_Heavy_ExtraDamage: SpreadDamage
+		Versus:
+			None: 10
+			Light: 50
+			Medium: 75
+			Heavy: 100
+			Superheavy: 125
+			Scout: 25
+			Plate: 10
+			Concrete: 200
+			Wood: 150
+			Steel: 175
+			Flak: 10
+			Heroic: 10
+			Bomber: 10
+			Fighter: 10
+			Helicopter: 10
+			Spaceship: 10
+			ARMOR: 70
+			BLAST: 78
+			COMPOSITE: 40
+			HAZMAT: 96
+			REFLECTOR: 64
+			Shield: 10
 	Warhead@Railgun_Heavy_ExtraDamage:
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1000
 		Falloff: 100, 75, 50, 25
-		Versus:
-			HAZMAT: 97
-			COMPOSITE: 41
-			BLAST: 77
-			REFLECTOR: 64
-			ARMOR: 70
-			Shield: 10
-			Concrete: 200
-			Steel: 175
-			Wood: 150
-			Superheavy: 125
-			Heavy: 100
-			Medium: 75
-			Light: 50
-			Scout: 25
-			None: 10
-			Flak: 10
-			Plate: 10
-			Heroic: 10
-			Fighter: 10
-			Bomber: 10
-			Helicopter: 10
-			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Railgun_Heavy_Flat:
 		ValidRelationships: Ally, Neutral, Enemy

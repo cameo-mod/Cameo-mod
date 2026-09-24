@@ -1720,6 +1720,29 @@ DalekCannon:
 		ValidTargets: Ground, Water
 		Damage: 100000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		Versus:
+			None: 125
+			Light: 25
+			Medium: 50
+			Heavy: 75
+			Superheavy: 100
+			Scout: 10
+			Plate: 175
+			Concrete: 10
+			Wood: 10
+			Steel: 10
+			Flak: 150
+			Heroic: 200
+			Bomber: 10
+			Fighter: 10
+			Helicopter: 10
+			Spaceship: 10
+			ARMOR: 70
+			BLAST: 98
+			COMPOSITE: 72
+			HAZMAT: 61
+			REFLECTOR: 51
+			Shield: 300
 		InvalidTargets: Air
 		DamageTypes: Tesla
 		ValidTargets: Ground, Water
@@ -1752,6 +1775,29 @@ DalekCannon:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 25
 	Warhead@Laser_Heavy_ExtraDamage:
+		Versus:
+			None: 33
+			Light: 30
+			Medium: 24
+			Heavy: 18
+			Superheavy: 12
+			Scout: 36
+			Plate: 21
+			Concrete: 9
+			Wood: 9
+			Steel: 9
+			Flak: 27
+			Heroic: 15
+			Bomber: 9
+			Fighter: 9
+			Helicopter: 9
+			Spaceship: 9
+			ARMOR: 70
+			BLAST: 96
+			COMPOSITE: 70
+			HAZMAT: 56
+			REFLECTOR: 59
+			Shield: 9
 		InvalidTargets: Air
 	Warhead@EMPUnit:
 		InvalidTargets: Shielded, Air
@@ -1771,29 +1817,6 @@ DalekCannon:
 		Spread: 200
 		Damage: 1000
 		Falloff: 100, 75, 50, 25
-		Versus:
-			HAZMAT: 56
-			COMPOSITE: 71
-			BLAST: 95
-			REFLECTOR: 59
-			ARMOR: 70
-			Shield: 9
-			Scout: 36
-			None: 33
-			Light: 30
-			Flak: 27
-			Medium: 24
-			Plate: 21
-			Heavy: 18
-			Heroic: 15
-			Superheavy: 12
-			Wood: 9
-			Steel: 9
-			Concrete: 9
-			Fighter: 9
-			Bomber: 9
-			Helicopter: 9
-			Spaceship: 9
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Railgun_Heavy_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
@@ -1847,29 +1870,6 @@ DalekCannon:
 	Warhead@Tesla_Heavy_ExtraDamage:
 		Spread: 200
 		Falloff: 100, 75, 50, 25
-		Versus:
-			HAZMAT: 61
-			COMPOSITE: 73
-			BLAST: 97
-			REFLECTOR: 50
-			ARMOR: 70
-			Shield: 300
-			Heroic: 200
-			Plate: 175
-			Flak: 150
-			None: 125
-			Superheavy: 100
-			Heavy: 75
-			Medium: 50
-			Light: 25
-			Scout: 10
-			Wood: 10
-			Steel: 10
-			Concrete: 10
-			Fighter: 10
-			Bomber: 10
-			Helicopter: 10
-			Spaceship: 10
 DalekCannon_elite:
 	Inherits: DalekCannon
 	Range: 9060
@@ -1880,6 +1880,29 @@ DalekCannon_elite:
 	Warhead@Tesla_Heavy:
 		Damage: 200000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		Versus:
+			None: 125
+			Light: 25
+			Medium: 50
+			Heavy: 75
+			Superheavy: 100
+			Scout: 10
+			Plate: 175
+			Concrete: 10
+			Wood: 10
+			Steel: 10
+			Flak: 150
+			Heroic: 200
+			Bomber: 10
+			Fighter: 10
+			Helicopter: 10
+			Spaceship: 10
+			ARMOR: 70
+			BLAST: 98
+			COMPOSITE: 72
+			HAZMAT: 61
+			REFLECTOR: 51
+			Shield: 300
 		InvalidTargets: Air
 		DamageTypes: Tesla
 		Damage: 100000
@@ -1902,6 +1925,29 @@ DalekCannon_elite:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 25
 	Warhead@Laser_Heavy_ExtraDamage:
+		Versus:
+			None: 33
+			Light: 30
+			Medium: 24
+			Heavy: 18
+			Superheavy: 12
+			Scout: 36
+			Plate: 21
+			Concrete: 9
+			Wood: 9
+			Steel: 9
+			Flak: 27
+			Heroic: 15
+			Bomber: 9
+			Fighter: 9
+			Helicopter: 9
+			Spaceship: 9
+			ARMOR: 70
+			BLAST: 96
+			COMPOSITE: 70
+			HAZMAT: 56
+			REFLECTOR: 59
+			Shield: 9
 		InvalidTargets: Air
 	Warhead@EMPUnit:
 		InvalidTargets: Shielded, Air
@@ -1920,29 +1966,6 @@ DalekCannon_elite:
 		Spread: 200
 		Damage: 1000
 		Falloff: 100, 75, 50, 25
-		Versus:
-			HAZMAT: 56
-			COMPOSITE: 71
-			BLAST: 95
-			REFLECTOR: 59
-			ARMOR: 70
-			Shield: 9
-			Scout: 36
-			None: 33
-			Light: 30
-			Flak: 27
-			Medium: 24
-			Plate: 21
-			Heavy: 18
-			Heroic: 15
-			Superheavy: 12
-			Wood: 9
-			Steel: 9
-			Concrete: 9
-			Fighter: 9
-			Bomber: 9
-			Helicopter: 9
-			Spaceship: 9
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Railgun_Heavy_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
@@ -1996,29 +2019,6 @@ DalekCannon_elite:
 	Warhead@Tesla_Heavy_ExtraDamage:
 		Spread: 200
 		Falloff: 100, 75, 50, 25
-		Versus:
-			HAZMAT: 61
-			COMPOSITE: 73
-			BLAST: 97
-			REFLECTOR: 50
-			ARMOR: 70
-			Shield: 300
-			Heroic: 200
-			Plate: 175
-			Flak: 150
-			None: 125
-			Superheavy: 100
-			Heavy: 75
-			Medium: 50
-			Light: 25
-			Scout: 10
-			Wood: 10
-			Steel: 10
-			Concrete: 10
-			Fighter: 10
-			Bomber: 10
-			Helicopter: 10
-			Spaceship: 10
 DalekCannonScatter:
 	Inherits: DalekCannon
 	Warhead@Tesla_Heavy:
@@ -2032,6 +2032,29 @@ DalekCannonScatter:
 		ValidTargets: Ground, Water, Air
 		Damage: 50000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		Versus:
+			None: 125
+			Light: 25
+			Medium: 50
+			Heavy: 75
+			Superheavy: 100
+			Scout: 10
+			Plate: 175
+			Concrete: 10
+			Wood: 10
+			Steel: 10
+			Flak: 150
+			Heroic: 200
+			Bomber: 10
+			Fighter: 10
+			Helicopter: 10
+			Spaceship: 10
+			ARMOR: 70
+			BLAST: 98
+			COMPOSITE: 72
+			HAZMAT: 61
+			REFLECTOR: 51
+			Shield: 300
 		InvalidTargets: Air
 		DamageTypes: Tesla
 		ValidTargets: Ground, Water, Air
@@ -2060,6 +2083,29 @@ DalekCannonScatter:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 19
 	Warhead@Laser_Heavy_ExtraDamage:
+		Versus:
+			None: 33
+			Light: 30
+			Medium: 24
+			Heavy: 18
+			Superheavy: 12
+			Scout: 36
+			Plate: 21
+			Concrete: 9
+			Wood: 9
+			Steel: 9
+			Flak: 27
+			Heroic: 15
+			Bomber: 9
+			Fighter: 9
+			Helicopter: 9
+			Spaceship: 9
+			ARMOR: 70
+			BLAST: 96
+			COMPOSITE: 70
+			HAZMAT: 56
+			REFLECTOR: 59
+			Shield: 9
 		InvalidTargets: Air
 	Warhead@EMPUnit:
 		InvalidTargets: Shielded, Air
@@ -2076,29 +2122,6 @@ DalekCannonScatter:
 		Spread: 200
 		Damage: 1000
 		Falloff: 100, 75, 50, 25
-		Versus:
-			HAZMAT: 56
-			COMPOSITE: 71
-			BLAST: 95
-			REFLECTOR: 59
-			ARMOR: 70
-			Shield: 9
-			Scout: 36
-			None: 33
-			Light: 30
-			Flak: 27
-			Medium: 24
-			Plate: 21
-			Heavy: 18
-			Heroic: 15
-			Superheavy: 12
-			Wood: 9
-			Steel: 9
-			Concrete: 9
-			Fighter: 9
-			Bomber: 9
-			Helicopter: 9
-			Spaceship: 9
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Railgun_Heavy_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
@@ -2152,29 +2175,6 @@ DalekCannonScatter:
 	Warhead@Tesla_Heavy_ExtraDamage:
 		Spread: 200
 		Falloff: 100, 75, 50, 25
-		Versus:
-			HAZMAT: 61
-			COMPOSITE: 73
-			BLAST: 97
-			REFLECTOR: 50
-			ARMOR: 70
-			Shield: 300
-			Heroic: 200
-			Plate: 175
-			Flak: 150
-			None: 125
-			Superheavy: 100
-			Heavy: 75
-			Medium: 50
-			Light: 25
-			Scout: 10
-			Wood: 10
-			Steel: 10
-			Concrete: 10
-			Fighter: 10
-			Bomber: 10
-			Helicopter: 10
-			Spaceship: 10
 DalekCannonScatterE:
 	Inherits: DalekCannonScatter
 	Warhead@Tesla_Heavy:
@@ -2190,8 +2190,54 @@ DalekCannonScatterE:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 19
 	Warhead@Tesla_Heavy_ExtraDamage:
+		Versus:
+			None: 125
+			Light: 25
+			Medium: 50
+			Heavy: 75
+			Superheavy: 100
+			Scout: 10
+			Plate: 175
+			Concrete: 10
+			Wood: 10
+			Steel: 10
+			Flak: 150
+			Heroic: 200
+			Bomber: 10
+			Fighter: 10
+			Helicopter: 10
+			Spaceship: 10
+			ARMOR: 70
+			BLAST: 98
+			COMPOSITE: 72
+			HAZMAT: 61
+			REFLECTOR: 51
+			Shield: 300
 		InvalidTargets: Air
 	Warhead@Laser_Heavy_ExtraDamage:
+		Versus:
+			None: 33
+			Light: 30
+			Medium: 24
+			Heavy: 18
+			Superheavy: 12
+			Scout: 36
+			Plate: 21
+			Concrete: 9
+			Wood: 9
+			Steel: 9
+			Flak: 27
+			Heroic: 15
+			Bomber: 9
+			Fighter: 9
+			Helicopter: 9
+			Spaceship: 9
+			ARMOR: 70
+			BLAST: 96
+			COMPOSITE: 70
+			HAZMAT: 56
+			REFLECTOR: 59
+			Shield: 9
 		InvalidTargets: Air
 	Warhead@EMPUnit:
 		InvalidTargets: Shielded, Air
@@ -2208,29 +2254,6 @@ DalekCannonScatterE:
 		Spread: 200
 		Damage: 1000
 		Falloff: 100, 75, 50, 25
-		Versus:
-			HAZMAT: 56
-			COMPOSITE: 71
-			BLAST: 95
-			REFLECTOR: 59
-			ARMOR: 70
-			Shield: 9
-			Scout: 36
-			None: 33
-			Light: 30
-			Flak: 27
-			Medium: 24
-			Plate: 21
-			Heavy: 18
-			Heroic: 15
-			Superheavy: 12
-			Wood: 9
-			Steel: 9
-			Concrete: 9
-			Fighter: 9
-			Bomber: 9
-			Helicopter: 9
-			Spaceship: 9
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Railgun_Heavy_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
@@ -2284,29 +2307,6 @@ DalekCannonScatterE:
 	Warhead@Tesla_Heavy_ExtraDamage:
 		Spread: 200
 		Falloff: 100, 75, 50, 25
-		Versus:
-			HAZMAT: 61
-			COMPOSITE: 73
-			BLAST: 97
-			REFLECTOR: 50
-			ARMOR: 70
-			Shield: 300
-			Heroic: 200
-			Plate: 175
-			Flak: 150
-			None: 125
-			Superheavy: 100
-			Heavy: 75
-			Medium: 50
-			Light: 25
-			Scout: 10
-			Wood: 10
-			Steel: 10
-			Concrete: 10
-			Fighter: 10
-			Bomber: 10
-			Helicopter: 10
-			Spaceship: 10
 BlackHoleMaker:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -2898,6 +2898,29 @@ UbermenschLaser:
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 4000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		Versus:
+			None: 125
+			Light: 25
+			Medium: 50
+			Heavy: 75
+			Superheavy: 100
+			Scout: 10
+			Plate: 175
+			Concrete: 10
+			Wood: 10
+			Steel: 10
+			Flak: 150
+			Heroic: 200
+			Bomber: 10
+			Fighter: 10
+			Helicopter: 10
+			Spaceship: 10
+			ARMOR: 70
+			BLAST: 98
+			COMPOSITE: 72
+			HAZMAT: 61
+			REFLECTOR: 51
+			Shield: 300
 		DamageTypes: Tesla
 		Damage: 2000
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
@@ -2915,30 +2938,6 @@ UbermenschLaser:
 	Warhead@Tesla_Heavy_ExtraDamage:
 		Spread: 200
 		Falloff: 100, 75, 50, 25
-		Versus:
-			HAZMAT: 61
-			COMPOSITE: 73
-			BLAST: 97
-			REFLECTOR: 50
-			ARMOR: 70
-			Shield: 300
-			Heroic: 200
-			Plate: 175
-			Flak: 150
-			None: 125
-			Superheavy: 100
-			Heavy: 75
-			Medium: 50
-			Light: 25
-			Scout: 10
-			Wood: 10
-			Steel: 10
-			Concrete: 10
-			Fighter: 10
-			Bomber: 10
-			Helicopter: 10
-			Spaceship: 10
-
 UbermenschLaser_elite:
 	Inherits: UbermenschLaser
 	Range: 6801
@@ -2953,32 +2952,31 @@ UbermenschLaser_elite:
 		ValidRelationships: Neutral, Enemy
 		Damage: 1000
 	Warhead@Tesla_Heavy_ExtraDamage:
-		Spread: 200
-		Falloff: 100, 75, 50, 25
 		Versus:
-			HAZMAT: 61
-			COMPOSITE: 73
-			BLAST: 97
-			REFLECTOR: 50
-			ARMOR: 70
-			Shield: 300
-			Heroic: 200
-			Plate: 175
-			Flak: 150
 			None: 125
-			Superheavy: 100
-			Heavy: 75
-			Medium: 50
 			Light: 25
+			Medium: 50
+			Heavy: 75
+			Superheavy: 100
 			Scout: 10
+			Plate: 175
+			Concrete: 10
 			Wood: 10
 			Steel: 10
-			Concrete: 10
-			Fighter: 10
+			Flak: 150
+			Heroic: 200
 			Bomber: 10
+			Fighter: 10
 			Helicopter: 10
 			Spaceship: 10
-
+			ARMOR: 70
+			BLAST: 98
+			COMPOSITE: 72
+			HAZMAT: 61
+			REFLECTOR: 51
+			Shield: 300
+		Spread: 200
+		Falloff: 100, 75, 50, 25
 NaxiCowDrop:
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@2: ^Effect_Clsn_Medium_RA2
@@ -3054,32 +3052,32 @@ Lunar_Green105mm_elite:
 		Damage: 1000
 	Warhead@Tesla_Heavy_Flat: AreaDamage
 	Warhead@Tesla_Heavy_ExtraDamage:
+		Versus:
+			None: 125
+			Light: 25
+			Medium: 50
+			Heavy: 75
+			Superheavy: 100
+			Scout: 10
+			Plate: 175
+			Concrete: 10
+			Wood: 10
+			Steel: 10
+			Flak: 150
+			Heroic: 200
+			Bomber: 10
+			Fighter: 10
+			Helicopter: 10
+			Spaceship: 10
+			ARMOR: 70
+			BLAST: 98
+			COMPOSITE: 72
+			HAZMAT: 61
+			REFLECTOR: 51
+			Shield: 300
 		ValidTargets: Ground, Water
 		Spread: 200
 		Falloff: 100, 75, 50, 25
-		Versus:
-			HAZMAT: 61
-			COMPOSITE: 73
-			BLAST: 97
-			REFLECTOR: 50
-			ARMOR: 70
-			Shield: 300
-			Heroic: 200
-			Plate: 175
-			Flak: 150
-			None: 125
-			Superheavy: 100
-			Heavy: 75
-			Medium: 50
-			Light: 25
-			Scout: 10
-			Wood: 10
-			Steel: 10
-			Concrete: 10
-			Fighter: 10
-			Bomber: 10
-			Helicopter: 10
-			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Tesla
 	Warhead@Tesla_Heavy_Flat:
 		ValidRelationships: Ally, Neutral, Enemy
@@ -5655,32 +5653,31 @@ Lunar_YellowUbermenschLaser:
 		ValidRelationships: Neutral, Enemy
 		Damage: 1000
 	Warhead@Tesla_Heavy_ExtraDamage:
-		Spread: 200
-		Falloff: 100, 75, 50, 25
 		Versus:
-			HAZMAT: 61
-			COMPOSITE: 73
-			BLAST: 97
-			REFLECTOR: 50
-			ARMOR: 70
-			Shield: 300
-			Heroic: 200
-			Plate: 175
-			Flak: 150
 			None: 125
-			Superheavy: 100
-			Heavy: 75
-			Medium: 50
 			Light: 25
+			Medium: 50
+			Heavy: 75
+			Superheavy: 100
 			Scout: 10
+			Plate: 175
+			Concrete: 10
 			Wood: 10
 			Steel: 10
-			Concrete: 10
-			Fighter: 10
+			Flak: 150
+			Heroic: 200
 			Bomber: 10
+			Fighter: 10
 			Helicopter: 10
 			Spaceship: 10
-
+			ARMOR: 70
+			BLAST: 98
+			COMPOSITE: 72
+			HAZMAT: 61
+			REFLECTOR: 51
+			Shield: 300
+		Spread: 200
+		Falloff: 100, 75, 50, 25
 Lunar_YellowUbermenschLaser_elite:
 	Inherits: UbermenschLaser_elite
 	Burst: 5
@@ -5695,32 +5692,31 @@ Lunar_YellowUbermenschLaser_elite:
 		ValidRelationships: Neutral, Enemy
 		Damage: 1000
 	Warhead@Tesla_Heavy_ExtraDamage:
-		Spread: 200
-		Falloff: 100, 75, 50, 25
 		Versus:
-			HAZMAT: 61
-			COMPOSITE: 73
-			BLAST: 97
-			REFLECTOR: 50
-			ARMOR: 70
-			Shield: 300
-			Heroic: 200
-			Plate: 175
-			Flak: 150
 			None: 125
-			Superheavy: 100
-			Heavy: 75
-			Medium: 50
 			Light: 25
+			Medium: 50
+			Heavy: 75
+			Superheavy: 100
 			Scout: 10
+			Plate: 175
+			Concrete: 10
 			Wood: 10
 			Steel: 10
-			Concrete: 10
-			Fighter: 10
+			Flak: 150
+			Heroic: 200
 			Bomber: 10
+			Fighter: 10
 			Helicopter: 10
 			Spaceship: 10
-
+			ARMOR: 70
+			BLAST: 98
+			COMPOSITE: 72
+			HAZMAT: 61
+			REFLECTOR: 51
+			Shield: 300
+		Spread: 200
+		Falloff: 100, 75, 50, 25
 Lunar_AmplifiedUbermenschLaser:
 	Inherits: UbermenschLaser
 	Burst: 4
@@ -5735,32 +5731,31 @@ Lunar_AmplifiedUbermenschLaser:
 		ValidRelationships: Neutral, Enemy
 		Damage: 1000
 	Warhead@Tesla_Heavy_ExtraDamage:
-		Spread: 200
-		Falloff: 100, 75, 50, 25
 		Versus:
-			HAZMAT: 61
-			COMPOSITE: 73
-			BLAST: 97
-			REFLECTOR: 50
-			ARMOR: 70
-			Shield: 300
-			Heroic: 200
-			Plate: 175
-			Flak: 150
 			None: 125
-			Superheavy: 100
-			Heavy: 75
-			Medium: 50
 			Light: 25
+			Medium: 50
+			Heavy: 75
+			Superheavy: 100
 			Scout: 10
+			Plate: 175
+			Concrete: 10
 			Wood: 10
 			Steel: 10
-			Concrete: 10
-			Fighter: 10
+			Flak: 150
+			Heroic: 200
 			Bomber: 10
+			Fighter: 10
 			Helicopter: 10
 			Spaceship: 10
-
+			ARMOR: 70
+			BLAST: 98
+			COMPOSITE: 72
+			HAZMAT: 61
+			REFLECTOR: 51
+			Shield: 300
+		Spread: 200
+		Falloff: 100, 75, 50, 25
 Lunar_AmplifiedUbermenschLaser_elite:
 	Inherits: UbermenschLaser_elite
 	Burst: 6
@@ -5779,32 +5774,31 @@ Lunar_AmplifiedUbermenschLaser_elite:
 		ValidRelationships: Neutral, Enemy
 		Damage: 1000
 	Warhead@Tesla_Heavy_ExtraDamage:
-		Spread: 200
-		Falloff: 100, 75, 50, 25
 		Versus:
-			HAZMAT: 61
-			COMPOSITE: 73
-			BLAST: 97
-			REFLECTOR: 50
-			ARMOR: 70
-			Shield: 300
-			Heroic: 200
-			Plate: 175
-			Flak: 150
 			None: 125
-			Superheavy: 100
-			Heavy: 75
-			Medium: 50
 			Light: 25
+			Medium: 50
+			Heavy: 75
+			Superheavy: 100
 			Scout: 10
+			Plate: 175
+			Concrete: 10
 			Wood: 10
 			Steel: 10
-			Concrete: 10
-			Fighter: 10
+			Flak: 150
+			Heroic: 200
 			Bomber: 10
+			Fighter: 10
 			Helicopter: 10
 			Spaceship: 10
-
+			ARMOR: 70
+			BLAST: 98
+			COMPOSITE: 72
+			HAZMAT: 61
+			REFLECTOR: 51
+			Shield: 300
+		Spread: 200
+		Falloff: 100, 75, 50, 25
 NaxisBradleyTarget:
 	ValidTargets: Ground, Air, Water
 	ReloadDelay: 135

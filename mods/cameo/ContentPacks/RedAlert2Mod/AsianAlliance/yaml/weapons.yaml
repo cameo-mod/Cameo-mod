@@ -391,6 +391,47 @@ RA2AsianShotgunFanatic1:
 	Range: 5000
 	Report: aa_sshtgatt.wav
 	Warhead@Demolition_Light:
+		Versus:
+			None: 183
+			Light: 86
+			Medium: 69
+			Heavy: 58
+			Superheavy: 51
+			Scout: 109
+			Plate: 107
+			Concrete: 136
+			Wood: 200
+			Steel: 165
+			Flak: 143
+			Heroic: 59
+			Bomber: 62
+			Fighter: 70
+			Helicopter: 54
+			Spaceship: 47
+			ARMOR: 70
+			BLAST: 42
+			COMPOSITE: 100
+			HAZMAT: 62
+			REFLECTOR: 75
+			Shield: 143
+		PercentageVersus:
+			None: 13
+			Light: 8
+			Medium: 7
+			Heavy: 6
+			Superheavy: 5
+			Scout: 9
+			Plate: 11
+			Concrete: 14
+			Wood: 16
+			Steel: 15
+			Flak: 12
+			Heroic: 10
+			Bomber: 3
+			Fighter: 4
+			Helicopter: 2
+			Spaceship: 1
+			Shield: 17
 		Damage: 8000
 	Warhead@Concussion_Medium:
 		Damage: 2000
@@ -459,51 +500,9 @@ RA2AsianShotgunFanatic1:
 		ValidTargets: Ground, Water
 		Spread: 233
 		Falloff: 100, 45, 18, 6, 0
-		Versus:
-			HAZMAT: 63
-			COMPOSITE: 102
-			BLAST: 41
-			REFLECTOR: 75
-			ARMOR: 70
-			Shield: 143
-			Wood: 200
-			None: 183
-			Steel: 165
-			Flak: 143
-			Concrete: 136
-			Scout: 109
-			Plate: 107
-			Light: 86
-			Fighter: 70
-			Medium: 69
-			Bomber: 62
-			Heroic: 59
-			Heavy: 58
-			Helicopter: 54
-			Superheavy: 51
-			Spaceship: 47
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 17
-			Wood: 16
-			Steel: 15
-			Concrete: 14
-			None: 13
-			Flak: 12
-			Plate: 11
-			Heroic: 10
-			Scout: 9
-			Light: 8
-			Medium: 7
-			Heavy: 6
-			Superheavy: 5
-			Fighter: 4
-			Bomber: 3
-			Helicopter: 2
-			Spaceship: 1
-
 RA2AsianShotgunFanatic2:
 	Inherits: RA2AsianShotgunFanatic1
 	Inherits@fx_cover: ^Effect_AlliedTigerCannon
@@ -564,6 +563,47 @@ RA2AsianShotgunFanatic2:
 		-ImpactSounds:
 		-ValidTargets:
 	Warhead@Demolition_Light: AreaDamage
+		Versus:
+			None: 183
+			Light: 86
+			Medium: 69
+			Heavy: 58
+			Superheavy: 51
+			Scout: 109
+			Plate: 107
+			Concrete: 136
+			Wood: 200
+			Steel: 165
+			Flak: 143
+			Heroic: 59
+			Bomber: 62
+			Fighter: 70
+			Helicopter: 54
+			Spaceship: 47
+			ARMOR: 70
+			BLAST: 42
+			COMPOSITE: 100
+			HAZMAT: 62
+			REFLECTOR: 75
+			Shield: 143
+		PercentageVersus:
+			None: 13
+			Light: 8
+			Medium: 7
+			Heavy: 6
+			Superheavy: 5
+			Scout: 9
+			Plate: 11
+			Concrete: 14
+			Wood: 16
+			Steel: 15
+			Flak: 12
+			Heroic: 10
+			Bomber: 3
+			Fighter: 4
+			Helicopter: 2
+			Spaceship: 1
+			Shield: 17
 	Warhead@Demolition_Light:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -571,51 +611,9 @@ RA2AsianShotgunFanatic2:
 		ValidTargets: Ground, Water
 		Spread: 233
 		Falloff: 100, 45, 18, 6, 0
-		Versus:
-			HAZMAT: 63
-			COMPOSITE: 102
-			BLAST: 41
-			REFLECTOR: 75
-			ARMOR: 70
-			Shield: 143
-			Wood: 200
-			None: 183
-			Steel: 165
-			Flak: 143
-			Concrete: 136
-			Scout: 109
-			Plate: 107
-			Light: 86
-			Fighter: 70
-			Medium: 69
-			Bomber: 62
-			Heroic: 59
-			Heavy: 58
-			Helicopter: 54
-			Superheavy: 51
-			Spaceship: 47
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 17
-			Wood: 16
-			Steel: 15
-			Concrete: 14
-			None: 13
-			Flak: 12
-			Plate: 11
-			Heroic: 10
-			Scout: 9
-			Light: 8
-			Medium: 7
-			Heavy: 6
-			Superheavy: 5
-			Fighter: 4
-			Bomber: 3
-			Helicopter: 2
-			Spaceship: 1
-
 RA2AsianShotgunFanatic3:
 	Inherits: RA2AsianShotgunFanatic1
 	Inherits@fx_cover: ^Effect_AlliedTigerCannon
@@ -676,6 +674,47 @@ RA2AsianShotgunFanatic3:
 		-ImpactSounds:
 		-ValidTargets:
 	Warhead@Demolition_Light: AreaDamage
+		Versus:
+			None: 183
+			Light: 86
+			Medium: 69
+			Heavy: 58
+			Superheavy: 51
+			Scout: 109
+			Plate: 107
+			Concrete: 136
+			Wood: 200
+			Steel: 165
+			Flak: 143
+			Heroic: 59
+			Bomber: 62
+			Fighter: 70
+			Helicopter: 54
+			Spaceship: 47
+			ARMOR: 70
+			BLAST: 42
+			COMPOSITE: 100
+			HAZMAT: 62
+			REFLECTOR: 75
+			Shield: 143
+		PercentageVersus:
+			None: 13
+			Light: 8
+			Medium: 7
+			Heavy: 6
+			Superheavy: 5
+			Scout: 9
+			Plate: 11
+			Concrete: 14
+			Wood: 16
+			Steel: 15
+			Flak: 12
+			Heroic: 10
+			Bomber: 3
+			Fighter: 4
+			Helicopter: 2
+			Spaceship: 1
+			Shield: 17
 	Warhead@Demolition_Light:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -683,51 +722,9 @@ RA2AsianShotgunFanatic3:
 		ValidTargets: Ground, Water
 		Spread: 233
 		Falloff: 100, 45, 18, 6, 0
-		Versus:
-			HAZMAT: 63
-			COMPOSITE: 102
-			BLAST: 41
-			REFLECTOR: 75
-			ARMOR: 70
-			Shield: 143
-			Wood: 200
-			None: 183
-			Steel: 165
-			Flak: 143
-			Concrete: 136
-			Scout: 109
-			Plate: 107
-			Light: 86
-			Fighter: 70
-			Medium: 69
-			Bomber: 62
-			Heroic: 59
-			Heavy: 58
-			Helicopter: 54
-			Superheavy: 51
-			Spaceship: 47
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 17
-			Wood: 16
-			Steel: 15
-			Concrete: 14
-			None: 13
-			Flak: 12
-			Plate: 11
-			Heroic: 10
-			Scout: 9
-			Light: 8
-			Medium: 7
-			Heavy: 6
-			Superheavy: 5
-			Fighter: 4
-			Bomber: 3
-			Helicopter: 2
-			Spaceship: 1
-
 AsianSamuraiSword1:
 	Inherits@wh: ^Warhead_Melee_Medium
 	Inherits@proj: ^Projectile_InstantHit
@@ -2562,6 +2559,47 @@ AsianPunisherAG:
 		InvalidTargets: Air
 	-Warhead@MissileAP_Medium_Flat:
 	Warhead@MissileHE_Medium: AreaDamage
+		Versus:
+			None: 99
+			Light: 136
+			Medium: 135
+			Heavy: 112
+			Superheavy: 88
+			Scout: 143
+			Plate: 48
+			Concrete: 93
+			Wood: 157
+			Steel: 113
+			Flak: 69
+			Heroic: 43
+			Bomber: 97
+			Fighter: 110
+			Helicopter: 86
+			Spaceship: 70
+			ARMOR: 70
+			BLAST: 45
+			COMPOSITE: 88
+			HAZMAT: 76
+			REFLECTOR: 70
+			Shield: 148
+		PercentageVersus:
+			None: 8
+			Light: 18
+			Medium: 16
+			Heavy: 14
+			Superheavy: 13
+			Scout: 20
+			Plate: 6
+			Concrete: 15
+			Wood: 19
+			Steel: 17
+			Flak: 7
+			Heroic: 5
+			Bomber: 11
+			Fighter: 12
+			Helicopter: 10
+			Spaceship: 9
+			Shield: 25
 		Damage: 8000
 		PercentageScale: 0
 		InvalidTargets: Air
@@ -2572,50 +2610,8 @@ AsianPunisherAG:
 		ValidTargets: Ground, Water, Air
 		Spread: 150
 		Falloff: 100, 45, 15, 0
-		Versus:
-			HAZMAT: 76
-			COMPOSITE: 89
-			BLAST: 45
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 148
-			Wood: 157
-			Scout: 143
-			Light: 136
-			Medium: 135
-			Steel: 113
-			Heavy: 112
-			Fighter: 110
-			None: 99
-			Bomber: 97
-			Concrete: 93
-			Superheavy: 88
-			Helicopter: 86
-			Spaceship: 70
-			Flak: 69
-			Plate: 48
-			Heroic: 43
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 25
-			Scout: 20
-			Wood: 19
-			Light: 18
-			Steel: 17
-			Medium: 16
-			Concrete: 15
-			Heavy: 14
-			Superheavy: 13
-			Fighter: 12
-			Bomber: 11
-			Helicopter: 10
-			Spaceship: 9
-			None: 8
-			Flak: 7
-			Plate: 6
-			Heroic: 5
-
 AsianPunisherAG_EMP:
 	Inherits@finalmain: ^Warhead_MissileQuantum_Medium
 	Inherits: AsianPunisherAG
@@ -3152,6 +3148,47 @@ AsianChemicalBombs:
 		InvalidTargets: Water
 	-Warhead@CannonHE_Medium:
 	Warhead@Chemical_Heavy:
+		Versus:
+			None: 91
+			Light: 108
+			Medium: 130
+			Heavy: 147
+			Superheavy: 166
+			Scout: 83
+			Plate: 162
+			Concrete: 111
+			Wood: 60
+			Steel: 80
+			Flak: 126
+			Heroic: 81
+			Bomber: 58
+			Fighter: 49
+			Helicopter: 68
+			Spaceship: 82
+			ARMOR: 70
+			BLAST: 73
+			COMPOSITE: 61
+			HAZMAT: 51
+			REFLECTOR: 96
+			Shield: 236
+		PercentageVersus:
+			None: 18
+			Light: 19
+			Medium: 21
+			Heavy: 23
+			Superheavy: 25
+			Scout: 17
+			Plate: 22
+			Concrete: 16
+			Wood: 14
+			Steel: 15
+			Flak: 20
+			Heroic: 24
+			Bomber: 11
+			Fighter: 10
+			Helicopter: 12
+			Spaceship: 13
+			Shield: 35
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
@@ -3162,52 +3199,10 @@ AsianChemicalBombs:
 		FriendlyFireSpread: 50
 		Spread: 366
 		Falloff: 100, 88, 72, 50, 0
-		Versus:
-			HAZMAT: 51
-			COMPOSITE: 62
-			BLAST: 72
-			REFLECTOR: 95
-			ARMOR: 70
-			Shield: 226
-			Superheavy: 166
-			Plate: 162
-			Heavy: 147
-			Medium: 130
-			Flak: 126
-			Concrete: 111
-			Light: 108
-			None: 91
-			Scout: 83
-			Spaceship: 82
-			Heroic: 81
-			Steel: 80
-			Helicopter: 68
-			Wood: 60
-			Bomber: 58
-			Fighter: 49
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStates:
 			Corrosion: 100
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 35
-			Superheavy: 25
-			Heroic: 24
-			Heavy: 23
-			Plate: 22
-			Medium: 21
-			Flak: 20
-			Light: 19
-			None: 18
-			Scout: 17
-			Concrete: 16
-			Steel: 15
-			Wood: 14
-			Spaceship: 13
-			Helicopter: 12
-			Bomber: 11
-			Fighter: 10
-
 AsianHowitzerCannon:
 	Inherits@xAsianHowitzerCannon0: ^Warhead_CannonHE_Heavy
 	Inherits@xAsianHowitzerCannon1: ^Projectile_Shell_Heavy
@@ -5958,6 +5953,47 @@ AsianPhoenixRocket:
 		HorizontalRateOfTurn: 30
 		Acceleration: 5
 	Warhead@Flame_Medium:
+		Versus:
+			None: 200
+			Light: 90
+			Medium: 87
+			Heavy: 68
+			Superheavy: 57
+			Scout: 91
+			Plate: 115
+			Concrete: 92
+			Wood: 198
+			Steel: 153
+			Flak: 155
+			Heroic: 53
+			Bomber: 64
+			Fighter: 67
+			Helicopter: 56
+			Spaceship: 51
+			ARMOR: 70
+			BLAST: 67
+			COMPOSITE: 76
+			HAZMAT: 39
+			REFLECTOR: 99
+			Shield: 225
+		PercentageVersus:
+			None: 20
+			Light: 12
+			Medium: 11
+			Heavy: 10
+			Superheavy: 9
+			Scout: 13
+			Plate: 16
+			Concrete: 15
+			Wood: 19
+			Steel: 17
+			Flak: 18
+			Heroic: 14
+			Bomber: 7
+			Fighter: 8
+			Helicopter: 6
+			Spaceship: 5
+			Shield: 25
 		ValidTargets: Ground, Water, Air
 		Damage: 60000
 	Warhead@Demolition_Light:
@@ -6035,52 +6071,11 @@ AsianPhoenixRocket:
 		FriendlyFireSpread: 50
 		Spread: 300
 		Falloff: 100, 90, 78, 60, 0
-		Versus:
-			HAZMAT: 39
-			COMPOSITE: 77
-			BLAST: 66
-			REFLECTOR: 99
-			ARMOR: 70
-			Shield: 217
-			None: 200
-			Wood: 198
-			Flak: 155
-			Steel: 153
-			Plate: 115
-			Concrete: 92
-			Scout: 91
-			Light: 90
-			Medium: 87
-			Heavy: 68
-			Fighter: 67
-			Bomber: 64
-			Superheavy: 57
-			Helicopter: 56
-			Heroic: 53
-			Spaceship: 51
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 		PercentageScale: 10000
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 25
-			None: 20
-			Wood: 19
-			Flak: 18
-			Steel: 17
-			Plate: 16
-			Concrete: 15
-			Heroic: 14
-			Scout: 13
-			Light: 12
-			Medium: 11
-			Heavy: 10
-			Superheavy: 9
-			Fighter: 8
-			Bomber: 7
-			Helicopter: 6
-			Spaceship: 5
 AsianPhoenixRocket_elite:
 	Inherits: AsianPhoenixRocket
 	Inherits@fx_cover: ^Effect_AlliedTigerCannon
@@ -6160,59 +6155,58 @@ AsianPhoenixRocket_elite:
 	Warhead@Effect:
 		ImpactActors: false
 	Warhead@Flame_Medium: AreaDamage
+		Versus:
+			None: 200
+			Light: 90
+			Medium: 87
+			Heavy: 68
+			Superheavy: 57
+			Scout: 91
+			Plate: 115
+			Concrete: 92
+			Wood: 198
+			Steel: 153
+			Flak: 155
+			Heroic: 53
+			Bomber: 64
+			Fighter: 67
+			Helicopter: 56
+			Spaceship: 51
+			ARMOR: 70
+			BLAST: 67
+			COMPOSITE: 76
+			HAZMAT: 39
+			REFLECTOR: 99
+			Shield: 225
+		PercentageVersus:
+			None: 20
+			Light: 12
+			Medium: 11
+			Heavy: 10
+			Superheavy: 9
+			Scout: 13
+			Plate: 16
+			Concrete: 15
+			Wood: 19
+			Steel: 17
+			Flak: 18
+			Heroic: 14
+			Bomber: 7
+			Fighter: 8
+			Helicopter: 6
+			Spaceship: 5
+			Shield: 25
 	Warhead@Flame_Medium:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Spread: 300
 		Falloff: 100, 90, 78, 60, 0
-		Versus:
-			HAZMAT: 39
-			COMPOSITE: 77
-			BLAST: 66
-			REFLECTOR: 99
-			ARMOR: 70
-			Shield: 217
-			None: 200
-			Wood: 198
-			Flak: 155
-			Steel: 153
-			Plate: 115
-			Concrete: 92
-			Scout: 91
-			Light: 90
-			Medium: 87
-			Heavy: 68
-			Fighter: 67
-			Bomber: 64
-			Superheavy: 57
-			Helicopter: 56
-			Heroic: 53
-			Spaceship: 51
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 		PercentageScale: 10000
 		PercentageSpread: 50
-		PercentageVersus:
-			Shield: 25
-			None: 20
-			Wood: 19
-			Flak: 18
-			Steel: 17
-			Plate: 16
-			Concrete: 15
-			Heroic: 14
-			Scout: 13
-			Light: 12
-			Medium: 11
-			Heavy: 10
-			Superheavy: 9
-			Fighter: 8
-			Bomber: 7
-			Helicopter: 6
-			Spaceship: 5
-
 ASDFGun:
 	Inherits@xASDFGun0: ^Warhead_Bullet_Medium
 	Inherits@xASDFGun1: ^Projectile_Bullet_Medium
@@ -6714,6 +6708,47 @@ AsianMLRS:
 		Damage: 2000
 	-Warhead@Demolition_Light:
 	Warhead@MissileAP_Medium: AreaDamage
+		Versus:
+			None: 33
+			Light: 146
+			Medium: 161
+			Heavy: 177
+			Superheavy: 200
+			Scout: 114
+			Plate: 64
+			Concrete: 82
+			Wood: 53
+			Steel: 55
+			Flak: 44
+			Heroic: 37
+			Bomber: 112
+			Fighter: 75
+			Helicopter: 123
+			Spaceship: 124
+			ARMOR: 70
+			BLAST: 69
+			COMPOSITE: 44
+			HAZMAT: 94
+			REFLECTOR: 71
+			Shield: 145
+		PercentageVersus:
+			None: 5
+			Light: 17
+			Medium: 18
+			Heavy: 19
+			Superheavy: 20
+			Scout: 16
+			Plate: 7
+			Concrete: 11
+			Wood: 9
+			Steel: 10
+			Flak: 6
+			Heroic: 8
+			Bomber: 13
+			Fighter: 12
+			Helicopter: 14
+			Spaceship: 15
+			Shield: 25
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -6786,48 +6821,6 @@ AsianMLRS:
 	Warhead@MissileAP_Medium:
 		Spread: 64
 		Falloff: 100, 0
-		Versus:
-			HAZMAT: 95
-			COMPOSITE: 45
-			BLAST: 68
-			REFLECTOR: 71
-			ARMOR: 70
-			Shield: 145
-			Superheavy: 200
-			Heavy: 177
-			Medium: 161
-			Light: 146
-			Spaceship: 124
-			Helicopter: 123
-			Scout: 114
-			Bomber: 112
-			Concrete: 82
-			Fighter: 75
-			Plate: 64
-			Steel: 55
-			Wood: 53
-			Flak: 44
-			Heroic: 37
-			None: 33
-		PercentageVersus:
-			Shield: 25
-			Superheavy: 20
-			Heavy: 19
-			Medium: 18
-			Light: 17
-			Scout: 16
-			Spaceship: 15
-			Helicopter: 14
-			Bomber: 13
-			Fighter: 12
-			Concrete: 11
-			Steel: 10
-			Wood: 9
-			Heroic: 8
-			Plate: 7
-			Flak: 6
-			None: 5
-
 AsianSpitfireRockets:
 	Inherits: AsianMLRS
 	Inherits@fx: ^Effect_Explosion_Large_RA2
@@ -6859,6 +6852,47 @@ AsianSpitfireRockets:
 	Projectile: Missile
 		VerticalRateOfTurn: 16
 	Warhead@MissileAP_Medium: AreaDamage
+		Versus:
+			None: 33
+			Light: 146
+			Medium: 161
+			Heavy: 177
+			Superheavy: 200
+			Scout: 114
+			Plate: 64
+			Concrete: 82
+			Wood: 53
+			Steel: 55
+			Flak: 44
+			Heroic: 37
+			Bomber: 112
+			Fighter: 75
+			Helicopter: 123
+			Spaceship: 124
+			ARMOR: 70
+			BLAST: 69
+			COMPOSITE: 44
+			HAZMAT: 94
+			REFLECTOR: 71
+			Shield: 145
+		PercentageVersus:
+			None: 5
+			Light: 17
+			Medium: 18
+			Heavy: 19
+			Superheavy: 20
+			Scout: 16
+			Plate: 7
+			Concrete: 11
+			Wood: 9
+			Steel: 10
+			Flak: 6
+			Heroic: 8
+			Bomber: 13
+			Fighter: 12
+			Helicopter: 14
+			Spaceship: 15
+			Shield: 25
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -6872,48 +6906,6 @@ AsianSpitfireRockets:
 	Warhead@MissileAP_Medium:
 		Spread: 64
 		Falloff: 100, 0
-		Versus:
-			HAZMAT: 95
-			COMPOSITE: 45
-			BLAST: 68
-			REFLECTOR: 71
-			ARMOR: 70
-			Shield: 145
-			Superheavy: 200
-			Heavy: 177
-			Medium: 161
-			Light: 146
-			Spaceship: 124
-			Helicopter: 123
-			Scout: 114
-			Bomber: 112
-			Concrete: 82
-			Fighter: 75
-			Plate: 64
-			Steel: 55
-			Wood: 53
-			Flak: 44
-			Heroic: 37
-			None: 33
-		PercentageVersus:
-			Shield: 25
-			Superheavy: 20
-			Heavy: 19
-			Medium: 18
-			Light: 17
-			Scout: 16
-			Spaceship: 15
-			Helicopter: 14
-			Bomber: 13
-			Fighter: 12
-			Concrete: 11
-			Steel: 10
-			Wood: 9
-			Heroic: 8
-			Plate: 7
-			Flak: 6
-			None: 5
-
 AsianKamikazeImpactTargeting:
 	ReloadDelay: 25
 	Range: 7500

@@ -95,7 +95,7 @@ nothing and informs the anchor choice. What must wait is WRITING targets and app
 | **W4** | Retire weapon-class K; charge-up becomes an ACTOR property | ✅ DONE | Claude | W1 |
 | **W5** | Missing metrics: overkill/TTK, range advantage, ValidTargets, MinRange, AttackDelay | ✅ DONE | Claude | W1 |
 | **W6** | C# `ModifiesCombatProportionalToPhysicalState` (+ pitch/glow hooks) | ✅ DONE `fc45a9632` | Claude | — |
-| **W7** | Sonic → `Resonance` meter (no new C# needed) | ⬜ READY | either | — |
+| **W7** | Sonic → `Resonance` meter (no new C# needed) | 🔵 **IN PROGRESS (EMBER, 2026-09-23)** — defaults + generator + shared files converted; 16 pack-side `SonicDebuff` grants handed to DAWN/NOVA via REQUEST | EMBER | — |
 | **W8** | Gatling ladder → `SpinUp` meter | ✅ DONE `c0d6abf70` — all 43 actors, `GattlingSpeed` = 0 | Claude | W6 ✅ |
 | **W9** | `^Poisonable` → `Poison` meter (gas-cloud dose-response) | ⬜ READY | either | — |
 | **W10** | `^Blindable` → `Blind` meter | ⬜ READY (unblocked by W6) | either | W6 ✅ |
@@ -1019,10 +1019,26 @@ nothing).
 
 ---
 
-### W7 — Sonic → `Resonance` meter ⬜ READY · owner either
+### W7 — Sonic → `Resonance` meter 🔵 IN PROGRESS (EMBER, 2026-09-23)
 
 Needs **no new C#** — `DamageMultiplierProportionalToPhysicalState` and
 `SlowsProportionalToPhysicalState` already exist.
+
+**Landed shape** (on `devin/ember/l6-w7-resonance`): `^Resonant` in
+`mods/cameo/rules/defaults.yaml` replaces `^SonicDebuff` — `PhysicalState@Resonance`
+(±20000, `RelativeToHealth`, fast relaxation 5/50 @1t after 25t delay),
+`DamageMultiplierProportionalToPhysicalState` 100→150, `SlowsProportionalToPhysicalState`
+100→75 with turn/turret/reload pinned neutral at 100 (their defaults are NOT neutral —
+check before relying on them), `GrantConditionOnPhysicalState` thresholds
+`ResonanceDeadzone`/`Resonating`/`ResonanceMax`, `WithPhysicalStateColoredOverlay`
++ `PhysicalStateBar`. Generator emits `PhysicalStates: Resonance: 100` on all five
+Sonic families (`FAMILY_PHYSICAL_STATE` + per-parent-average on the four blends);
+`FAMILY_CONDITION` is empty. Shared hand-grants (wz2100 commando lasers, generals
+Avenger PDL, RA2 `IonPulseDischarge` rings, TS `TSGrenadeSonic`) converted to
+`ApplyPhysicalState` flat 5000 or folded. **Pack side pending:** 16 `SonicDebuff`
+grants in `ContentPacks/{TiberianSun,TiberianDawn,RedAlert,RedAlert2,RedAlert2Mod}`
+via REQUEST to DAWN/NOVA — no crash either landing order (both sides degrade to
+no-ops); zero `Inherits: ^SonicDebuff` anywhere.
 
 ```yaml
 ^Warhead_Sonic_<Level>:
