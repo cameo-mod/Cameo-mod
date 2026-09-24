@@ -4,6 +4,7 @@
 - Consumed conditions: `personality-expansion, personality-rush, personality-steamroller, personality-tech, personality-turtle`
 - Personality blocks: 5/5
 - Personality notifications: 5/5
+- BotLimits reaction delays: `7500, 6750, 6000, 5250, 4500, 3750, 3000, 2250, 1500, 750`
 - Explicit tuning allow-list: `AttackForceInterval, DangerScanRadius, IdleScanRadius, JoinGuerrilla, MaxBaseRadius, MaxGuerrillaSize, MaxIdleUnits, MinimumAttackForceDelay, ProtectUnitScanRadius, ProtectionScanRadius, SquadSize, SquadSizeRandomBonus, SquadValue, SquadValueMaxEarlyBonus, SquadValueMaxLateBonus, SquadValueMinLateBonus`
 
 ## PASS

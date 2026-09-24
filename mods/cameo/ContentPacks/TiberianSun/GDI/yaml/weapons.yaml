@@ -467,9 +467,9 @@ KodiakCannonSonic:
 		ValidTargets: Ground, Water
 		Damage: 56000
 		PercentageScale: 10000
-	Warhead@CannonSonic_Heavy_Debuff: GrantExternalCondition
-		Condition: SonicDebuff
-		Duration: 50
+	Warhead@CannonSonic_Heavy_Debuff: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
 		Range: 1066
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall
@@ -1110,9 +1110,9 @@ TSHellfireSonic:
 		ValidTargets: Ground, Water, Air
 		Damage: 42000
 		PercentageScale: 10000
-	Warhead@MissileSonic_Medium_Debuff: GrantExternalCondition
-		Condition: SonicDebuff
-		Duration: 50
+	Warhead@MissileSonic_Medium_Debuff: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
 		Range: 800
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall
@@ -1139,9 +1139,9 @@ TSZoneHellfireSonic:
 		ValidTargets: Ground, Water, Air
 		Damage: 41000
 		PercentageScale: 10000
-	Warhead@MissileSonic_Heavy_Debuff: GrantExternalCondition
-		Condition: SonicDebuff
-		Duration: 50
+	Warhead@MissileSonic_Heavy_Debuff: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
 		Range: 1066
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall
@@ -1226,9 +1226,9 @@ TSBombSonic:
 		ValidTargets: Ground, Ship
 		Damage: 30000
 		PercentageScale: 10000
-	Warhead@BlastSonic_Heavy_Debuff: GrantExternalCondition
-		Condition: SonicDebuff
-		Duration: 50
+	Warhead@BlastSonic_Heavy_Debuff: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
 		Range: 1066
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall
@@ -1565,9 +1565,9 @@ TSAssaultCannonSonic:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 4988
-	Warhead@BulletSonic_Medium_Debuff: GrantExternalCondition
-		Condition: SonicDebuff
-		Duration: 50
+	Warhead@BulletSonic_Medium_Debuff: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
 		Range: 800
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall
@@ -1604,9 +1604,9 @@ TSAssaultCannonTalSonic:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 		PercentageScale: 6244
-	Warhead@BulletSonic_Medium_Debuff: GrantExternalCondition
-		Condition: SonicDebuff
-		Duration: 50
+	Warhead@BulletSonic_Medium_Debuff: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
 		Range: 800
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall
@@ -1650,9 +1650,9 @@ TSVulcanGunSonic:
 		ValidTargets: Ground, Water
 		Damage: 16000
 		PercentageScale: 2494
-	Warhead@BulletSonic_Medium_Debuff: GrantExternalCondition
-		Condition: SonicDebuff
-		Duration: 50
+	Warhead@BulletSonic_Medium_Debuff: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
 		Range: 800
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall

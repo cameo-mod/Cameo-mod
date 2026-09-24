@@ -33,8 +33,8 @@ Of those, **17** hold only ONE shot, so no rate exists for them either.
 | rocket_raider.ixian | D2K_Bazooka2 | 1,200 | 1,350 | 1.6 s | 0.20 |
 | protoss_reaver | ScarabLaunch | 2,222 | 2,424 | 39.6 s | 0.25 |
 | ra2_allies_harrier | HarrierMissiles_elite | 1,220 | 10,286 | 0.6 s | 0.28 |
-| kami_chemical.asian | AsianKamikazeChaingun | 750 | 1,200 | 0.8 s | 0.32 |
-| asianalliance_asiancommando | AsianSniperLockdown | 2,040 | 4,080 | 4.0 s | 0.33 |
+| asianalliance_kami_chemical | AsianKamikazeChaingun | 750 | 1,200 | 0.8 s | 0.32 |
+| asianalliance_commando | AsianSniperLockdown | 2,040 | 4,080 | 4.0 s | 0.33 |
 | terran_medic | MedicFlare | 117 | 233 | 2.4 s | 0.33 |
 | futuretech_twister | SteelTwisterMissiles_elite | 733 | 894 | 6.4 s | 0.36 |
 | steelconsortium_twister | SteelTwisterMissiles_elite | 733 | 894 | 6.4 s | 0.36 |
@@ -69,7 +69,7 @@ Of those, **17** hold only ONE shot, so no rate exists for them either.
 | latinsyndicate_mig21 | MigMissiles_elite | 3,000 | 96,000 | 0.2 s |
 | td_gdi_firehawk | td_gdi_firehawk_firehawkbomb | 1,538 | 80,000 | 0.1 s |
 | ra1_allies_rapierjumpjet | ra1_allies_rapierjumpjet_bomb | 303 | 60,000 | 5.5 s |
-| atreides_airdrone | OrniMissile | 398 | 57,380 | 3.1 s |
+| atreides_airdrone | OrniMissile | 371 | 53,380 | 3.1 s |
 | atreides_ornithopter | OrniBomb | 833 | 37,500 | 0.8 s |
 
 
@@ -85,8 +85,8 @@ _All in-scope slaves carry a sized pool and a reload_ — sized by `tools/balanc
 | actor | why out of scope | pool | reload |
 |---|---|---|---|
 | SCSCOURGEDRONE | self-destruct weapon ScourgeDroneExplosion | False | False |
+| asianalliance_kami | trait SpawnedExplodes | False | False |
 | farasha_drone_ixian | named by the maintainer | False | False |
-| kami.asian | trait SpawnedExplodes | False | False |
 | tkmsuicidedrone | named by the maintainer | False | False |
 | tsprobe | trait SpawnedExplodes | False | False |
 
