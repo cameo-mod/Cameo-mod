@@ -1,7 +1,7 @@
 M16Laser:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@3: ^LaserWeapon
-	Inherits: ^Effect_Sniper_Light
+	Inherits@fx: ^td_nod_set2
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 4983
@@ -55,8 +55,6 @@ M16Laser:
 			Steel: 8
 			Superheavy: 5
 			Wood: 14
-	Warhead@Effect:
-		Explosions: small_napalm
 	Warhead@LegacyLaserExtraDamage: SpreadDamage
 		Damage: 600
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -83,6 +81,9 @@ M16Laser:
 			Superheavy: 1
 			Wood: 1
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 10
 	Warhead@ShieldHitEffect:
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
@@ -456,7 +457,7 @@ td_nod_buggy_fireballlauncherbuggy:
 		Damage: 1948
 td_nod_reconbike_rocket:
 	Inherits@collapsewh: ^Warhead_MissileAP_Medium
-	Inherits: ^Effect_CannonAP_Light
+	Inherits@fx: ^td_nod_td_nod_reconbike_rocket
 	-TargetActorCenter:
 	Burst: 2
 	BurstDelays: 10
@@ -523,14 +524,6 @@ td_nod_reconbike_rocket:
 		TrailImage: smokey
 		TrailInterval: 1
 	TargetActorCenter: true
-	Warhead@Effect:
-		Explosions: small_poof
-		ImpactActors: false
-		ImpactSounds: xplos.aud
-		ValidTargets: Ground, Water
-	Warhead@EffectAir:
-		Explosions: med_explosion_air
-		ImpactSounds: xplos.aud
 	Warhead@FlakWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		Spread: 125
@@ -581,6 +574,9 @@ td_nod_reconbike_rocket:
 			Superheavy: 16
 			Wood: 6
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 6
 	Warhead@ShrapnelWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -634,7 +630,7 @@ PDLaserBike:
 td_nod_lighttank_70mm:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_CannonHE_Medium
+	Inherits@fx: ^td_nod_td_nod_lighttank_70mm
 	ReloadDelay: 45
 	Range: 4694
 	Report: tnkfire3.aud
@@ -642,27 +638,23 @@ td_nod_lighttank_70mm:
 		Speed: 499
 	Warhead@CannonHE_Medium:
 		Damage: 14679
-	Warhead@Effect: CreateEffect
-		ImpactSounds: xplos.aud
 
 td_nod_lighttank_ltnkmissiles:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_MissileAP_Medium
+	Inherits@fx: ^td_nod_set7
 	ReloadDelay: 45
 	Range: 4694
 	Report: bazook1.aud
 	Warhead@MissileAP_Medium:
 		Damage: 14679
-	Warhead@Effect: CreateEffect
-		Explosions: small_frag
 
 	Projectile: Missile
 		VerticalRateOfTurn: 16
 
 HonestJohn:
 	Inherits@wh: ^Warhead_MissileFire_Heavy
-	Inherits@fx: ^Effect_Flame_Heavy
+	Inherits@fx: ^td_nod_honestjohn
 	ReloadDelay: 225
 	Burst: 2
 	BurstDelays: 25
@@ -686,18 +678,11 @@ HonestJohn:
 		Damage: 50000
 		FriendlyFireDamage: 30
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath, Incendiary
-	Warhead@Effect: CreateEffect
-		Explosions: med_napalm
-		ImpactSounds: firebl3.aud
-		ImpactActors: false
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
 
 td_nod_stealthtank_stealthtankmissiles:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_MissileAP_Medium
+	Inherits@fx: ^td_nod_td_nod_stealthtank_stealthtankmissiles
 	ReloadDelay: 58
 	Burst: 2
 	BurstDelays: 8
@@ -705,9 +690,6 @@ td_nod_stealthtank_stealthtankmissiles:
 	Report: rocket1.aud
 	Warhead@MissileAP_Medium:
 		Damage: 22230
-	Warhead@Effect: CreateEffect
-		Explosions: small_poof
-		ImpactSounds: xplobig4.aud
 
 	Projectile: Missile
 		VerticalRateOfTurn: 16
@@ -790,7 +772,7 @@ td_nod_apacheattackhelicopter_missile:
 
 td_nod_gunturret_turretgun:
 	Inherits@collapsewh: ^Warhead_Concussion_Medium
-	Inherits: ^Effect_AlliedTigerCannon
+	Inherits@fx: ^td_nod_td_nod_gunturret_turretgun
 	ReloadDelay: 61
 	Range: 7711
 	Report: tnkfire6.aud
@@ -816,10 +798,6 @@ td_nod_gunturret_turretgun:
 		Shadow: true
 	Warhead@Concrete:
 		Damage: 100
-	Warhead@Effect:
-		ImpactActors: false
-	Warhead@EffectWater:
-		Explosions: med_splash
 	Warhead@GrenadePercentage:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		Falloff: 100, 50, 33, 25, 20
@@ -917,7 +895,7 @@ td_nod_gunturret_turretgun:
 td_nod_gunturret_turretgunblackmarket:
 	Inherits@roleflat: ^Warhead_Concussion_Medium_Flat
 	Inherits@3: td_nod_gunturret_turretgun
-	Inherits: ^Effect_Apoc_AP_RA2
+	Inherits@fx: ^td_nod_td_nod_gunturret_turretgunblackmarket
 	-Warhead@Effect:
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 6000
@@ -940,12 +918,6 @@ td_nod_gunturret_turretgunblackmarket:
 		Shadow: true
 	Warhead@Concrete:
 		Damage: 100
-	Warhead@Effect1:
-		Explosions: poof
-	Warhead@EffectWater:
-		Explosions: med_splash
-		ImpactSounds: splash9.aud
-		-ExplosionPalette:
 	Warhead@GrenadePercentage:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		Falloff: 100, 50, 33, 25, 20
@@ -1040,6 +1012,9 @@ td_nod_gunturret_turretgunblackmarket:
 			Superheavy: 12
 			Wood: 19
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 12
 	Warhead@ShrapnelWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -1091,7 +1066,7 @@ td_nod_gunturret_turretgunblackmarket:
 Dragon:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_MissileHE_Heavy
+	Inherits@fx: ^td_nod_dragon
 	ReloadDelay: 40
 	Range: 12193
 	Report: rocket2.aud
@@ -1126,44 +1101,11 @@ Dragon:
 		MinimumLaunchAngle: 75
 	Warhead@MissileAA_Heavy:
 		Damage: 12000
-	Warhead@Effect: CreateEffect
-		Explosions: big_frag
-		ImpactSounds: xplobig4.aud
-		ValidTargets: Ground, Water
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@EffectAir: CreateEffect
-		Explosions: small_building
-		ImpactSounds: kaboom25.aud
-		ValidTargets: Air
-		ImpactActors: false
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 10
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 200
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.8
-		FadeFrames: 15
-	Warhead@Smudge: LeaveSmudge
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 td_nod_obeliskoflight_laserobelisk:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -1218,7 +1160,7 @@ td_nod_obeliskoflight_laserobeliskburning:
 		InvalidTargets: Air
 td_nod_chemicalrocketsoldier_chemrockets:
 	Inherits@collapsewh: ^Warhead_Chemical_Light
-	Inherits: ^Effect_CannonAP_Light
+	Inherits@fx: ^td_nod_td_nod_chemicalrocketsoldier_chemrockets
 	-Warhead@Glow:
 	ReloadDelay: 54
 	Range: 6006
@@ -1238,12 +1180,6 @@ td_nod_chemicalrocketsoldier_chemrockets:
 		ValidTargets: Ground, Water, Air
 		Damage: 6
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@Effect: CreateEffect
-		Explosions: chemball
-		ImpactSounds: xplos.aud
-	Warhead@EffectAir: CreateEffect
-		Explosions: chemball
-		ImpactSounds: xplos.aud
 	Warhead@Chemical_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 36000
@@ -1271,11 +1207,6 @@ td_nod_chemicalrocketsoldier_chemrockets:
 		Speed: 600
 		TrailInterval: 1
 	ValidTargets: Ground, Water, Air
-	Warhead@Effect:
-		ImpactActors: false
-		ValidTargets: Ground, Water
-	Warhead@EffectWater:
-		Explosions: med_splash
 	Warhead@GrenadePercentage:
 		Falloff: 100, 50, 33, 25, 20
 		Spread: 200
@@ -1344,6 +1275,9 @@ td_nod_chemicalrocketsoldier_chemrockets:
 			Superheavy: 16
 			Wood: 6
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 6
 td_nod_chemicalrocketsoldier_chemrocketsexplosion:
 	Inherits: td_nod_chemicalrocketsoldier_chemrockets
@@ -1365,7 +1299,7 @@ td_nod_chemicalrocketsoldier_chemrocketsexplosion:
 
 td_nod_chemicalattackbike_chemicalbikerockets:
 	Inherits@collapsewh: ^Warhead_MissileChem_Medium
-	Inherits: ^Effect_Watersplash_Huge_RA2
+	Inherits@fx: ^td_nod_td_nod_chemicalattackbike_chemicalbikerockets
 	ValidTargets: Ground, Water, Air
 	Burst: 2
 	BurstDelays: 10
@@ -1393,14 +1327,6 @@ td_nod_chemicalattackbike_chemicalbikerockets:
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@Effect: CreateEffect
-		Explosions: chemball
-		ImpactSounds: firebl3.aud
-	Warhead@EffectAir: CreateEffect
-		Explosions: chemball
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Air
 
 	TargetActorCenter: false
 	Warhead@MissileChem_Medium:
@@ -1432,12 +1358,6 @@ td_nod_chemicalattackbike_chemicalbikerockets:
 		TrailInterval: 1
 	Warhead@Concrete:
 		Damage: 150
-	Warhead@Effect:
-		ValidTargets: Ground, Water
-	Warhead@EffectWater:
-		Explosions: small_splash
-		ImpactSounds: splash9.aud
-		-ExplosionPalette:
 	Warhead@FlakWeaponPercentage:
 		Spread: 125
 		UpdatesUnitStatistics: false
@@ -1505,6 +1425,9 @@ td_nod_chemicalattackbike_chemicalbikerockets:
 			Superheavy: 20
 			Wood: 10
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 8
 	Warhead@TankDestroyerCannonPercentage:
 		Spread: 75
@@ -1538,7 +1461,7 @@ td_nod_chemicalattackbike_chemicalbikerocketsexplosion:
 
 td_nod_chemicalstealthtank_chemicalstealthtankmissiles:
 	Inherits@collapsewh: ^Warhead_MissileChem_Medium
-	Inherits: ^Effect_CannonAP_Medium
+	Inherits@fx: ^td_nod_td_nod_chemicalstealthtank_chemicalstealthtankmissiles
 	-Warhead@Glow:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 60
@@ -1560,17 +1483,6 @@ td_nod_chemicalstealthtank_chemicalstealthtankmissiles:
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@Effect: CreateEffect
-		Explosions: med_tibnapalm
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-		ImpactSounds: xplobig6.aud
-	Warhead@EffectAir: CreateEffect
-		Explosions: chemball
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Air
 
 	TargetActorCenter: false
 	Warhead@MissileChem_Medium:
@@ -1594,9 +1506,6 @@ td_nod_chemicalstealthtank_chemicalstealthtankmissiles:
 		Shadow: true
 		Speed: 500
 		TrailInterval: 1
-	Warhead@Effect:
-		ImpactActors: false
-		ValidTargets: Ground, Water
 	Warhead@MediumChemicalWeaponPercentage:
 		Falloff: 99, 66, 33
 		Spread: 350
@@ -1643,6 +1552,9 @@ td_nod_chemicalstealthtank_chemicalstealthtankmissiles:
 			Superheavy: 20
 			Wood: 10
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 8
 	Warhead@ShrapnelWeaponPercentage:
 		Falloff: 100, 75, 50, 25
@@ -1731,12 +1643,6 @@ td_nod_chemicalssmlauncher_chemicalhonestjohn:
 		ValidTargets: Ground, Water
 		Damage: 15
 	-Warhead@Effect1:
-	Warhead@Effect: CreateEffect
-		Explosions: big_tibnapalm
-		GlowScale: 2.0
-		GlowFadeFrames: 60
-		GlowFadeInFrames: 12
-		ImpactSounds: xplobig6.aud
 	-Warhead@HeavyMissile:
 	-Warhead@HeavyBomb:
 	-Warhead@HeavyFlameWeapon:
@@ -1748,7 +1654,7 @@ td_nod_chemicalssmlauncher_chemicalhonestjohn:
 
 td_nod_buggymkii_machinegunbuggy2:
 	Inherits@collapsewh: ^Warhead_Bullet_Medium
-	Inherits: ^Effect_CannonHE_Heavy_D2K_DevBullet
+	Inherits@fx: ^td_nod_td_nod_buggymkii_machinegunbuggy2
 	ReloadDelay: 60
 	Burst: 3
 	BurstDelays: 4
@@ -1810,16 +1716,6 @@ td_nod_buggymkii_machinegunbuggy2:
 			Wood: 14
 	Warhead@Concrete:
 		Damage: 25
-	Warhead@Effect:
-		Explosions: piffs
-		ImpactSounds: kaboom15.aud
-		ValidTargets: Ground, Ship, Air
-		-ExplosionPalette:
-		-ImpactActors:
-	Warhead@EffectAir:
-		Explosions: big_explosion_air
-	Warhead@EffectWater:
-		Explosions: water_piffs
 	Warhead@Glow:
 		Color: FFB84D
 		FadeFrames: 15
@@ -1846,6 +1742,9 @@ td_nod_buggymkii_machinegunbuggy2:
 			Superheavy: 17
 			Wood: 24
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 4
 	Warhead@ShieldHitEffect:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
@@ -2052,7 +1951,7 @@ td_nod_buggymkii_fireballlauncherbuggy2:
 		PercentageScale: 9984
 td_nod_lighttankmkii_lighttank2cannon:
 	Inherits@collapsewh: ^Warhead_CannonHE_Medium
-	Inherits: ^Effect_CannonHE_Heavy
+	Inherits@fx: ^td_nod_td_nod_lighttankmkii_lighttank2cannon
 	ReloadDelay: 35
 	Range: 4903
 	Report: tnkfire3.aud
@@ -2069,9 +1968,6 @@ td_nod_lighttankmkii_lighttank2cannon:
 		Damage: 4000
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@Effect: CreateEffect
-		Explosions: chemball
-		ImpactSounds: xplos.aud
 
 	-Warhead@LightChemicalWeapon:
 	-Warhead@MediumCannon:
@@ -2085,8 +1981,6 @@ td_nod_lighttankmkii_lighttank2cannon:
 		Shadow: true
 	Warhead@Concrete:
 		Damage: 150
-	Warhead@EffectWater:
-		Explosions: small_splash
 	Warhead@LightChemicalWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		Falloff: 99, 66, 33
@@ -2137,19 +2031,20 @@ td_nod_lighttankmkii_lighttank2cannon:
 			Superheavy: 12
 			Wood: 19
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 8
 td_nod_lighttankmkii_lighttank2missiles:
 	Inherits@2: ^Warhead_MissileAP_Medium
 	Inherits@3: ^Projectile_Missile_Medium
-	Inherits@4: ^Effect_MissileAP_Medium
+	Inherits@fx: ^td_nod_set7
 	ReloadDelay: 35
 	Range: 4903
 	Report: bazook1.aud
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@Effect: CreateEffect
-		Explosions: small_frag
 
 	Projectile: Missile
 		VerticalRateOfTurn: 16
@@ -2161,7 +2056,7 @@ PDLaserLTNK2:
 td_nod_flametankmkii_bigflamer2:
 	Inherits@wh: ^Warhead_Flame_Heavy
 	Inherits@proj: ^Projectile_Flame_Heavy
-	Inherits@fx: ^Effect_Flame_Heavy
+	Inherits@fx: ^td_nod_td_nod_flametankmkii_bigflamer2
 	Burst: 2
 	BurstDelays: 10
 	ReloadDelay: 54
@@ -2169,24 +2064,13 @@ td_nod_flametankmkii_bigflamer2:
 	Report: flamer2.aud
 	Warhead@Flame_Heavy:
 		Damage: 20000
-	Warhead@Glow: GlowImpact
-		Color: FF6600
-		Scale: 2.0
-		FadeFrames: 90
-		FadeInFrames: 12
 
 td_nod_flametankmkii_flametankexplode2:
 	Inherits@wh: ^Warhead_Flame_Heavy
 	Inherits@proj: ^Projectile_Flame_Heavy
-	Inherits@fx: ^Effect_Flame_Heavy
+	Inherits@fx: ^td_nod_td_nod_flametankmkii_flametankexplode2
 	Warhead@Flame_Heavy:
 		Damage: 40000
-	Warhead@Effect: CreateEffect
-		Explosions: big_napalm
-		GlowScale: 2.0
-		GlowFadeFrames: 60
-		GlowFadeInFrames: 12
-		ImpactSounds: xplobig6.aud
 
 td_nod_lasertrooper_blackhandlaser:
 	# Special-Forces T4 heavy-trooper weapon (maintainer 2026-07-20): the
@@ -2198,7 +2082,7 @@ td_nod_lasertrooper_blackhandlaser:
 	# for pricing). (^TankDestroyerCannon = interim Light CannonAP.)
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@heavy: ^LaserWeapon
-	Inherits: ^Effect_Watersplash_Huge_RA2
+	Inherits@fx: ^td_nod_td_nod_lasertrooper_blackhandlaser
 	ReloadDelay: 50
 	Range: 5524
 	Report: vfloatta.wav
@@ -2269,13 +2153,6 @@ td_nod_lasertrooper_blackhandlaser:
 		Speed: 10000
 	Warhead@Concrete:
 		Damage: 25
-	Warhead@Effect:
-		ImpactSounds: xplos.aud
-		ValidTargets: Ground, Ship
-	Warhead@EffectWater:
-		Explosions: small_splash
-		ImpactSounds: splash9.aud
-		-ExplosionPalette:
 	Warhead@FlakWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		Spread: 125
@@ -2300,6 +2177,9 @@ td_nod_lasertrooper_blackhandlaser:
 			Superheavy: 8
 			Wood: 7
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 10
 	Warhead@Smudge:
 		SmudgeType: Scorch
@@ -2350,7 +2230,7 @@ td_nod_blackhandflamer_blackhandflamerexplode:
 td_nod_stealthsoldier_bhreddarts:
 	Inherits@collapsewh: ^Warhead_Tesla_Super
 	Inherits: ^TeslaChargedWeapon
-	Inherits: ^Effect_CannonAP_Medium
+	Inherits@fx: ^td_nod_td_nod_stealthsoldier_bhreddarts
 	ReloadDelay: 90
 	Burst: 4
 	BurstDelays: 5
@@ -2406,14 +2286,6 @@ td_nod_stealthsoldier_bhreddarts:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		IntegrityScale: 0
 		PercentageScale: 0
-	Warhead@Effect: CreateEffect
-		Explosions: steel_blueexp
-		ExplosionPalette: ra2effect
-		ImpactSounds: makoexplose.wav
-	Warhead@EffectAir: CreateEffect
-		Explosions: steel_blueexp
-		ExplosionPalette: ra2effect
-		ImpactSounds: makoexplose.wav
 
 	Projectile:
 		Acceleration: 3
@@ -2455,9 +2327,6 @@ td_nod_stealthsoldier_bhreddarts:
 			Steel: 8
 			Superheavy: 5
 			Wood: 14
-	Warhead@Effect:
-		ImpactActors: false
-		ValidTargets: Ground, Water
 	Warhead@Glow:
 		FadeFrames: 15
 		Scale: 0.8
@@ -2483,6 +2352,9 @@ td_nod_stealthsoldier_bhreddarts:
 			Superheavy: 20
 			Wood: 10
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 8
 	Warhead@ShrapnelWeaponPercentage:
 		Falloff: 100, 75, 50, 25
@@ -2776,7 +2648,7 @@ td_nod_venom_laser_burning:
 td_nod_lasercommando_nodcommandolaser:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
-	Inherits@fx: ^Effect_Laser_Heavy
+	Inherits@fx: ^td_nod_td_nod_lasercommando_nodcommandolaser
 	Warhead@Laser_Heavy:
 		PercentageScale: 60000
 	ReloadDelay: 8
@@ -2797,17 +2669,12 @@ td_nod_lasercommando_nodcommandolaser:
 		-HitAnim:
 		ValidTargets: Ground, Air, Missile, BulletAS, BallisticMissile
 		Damage: 12000
-	Warhead@Effect: CreateEffect
-		ValidTargets: Ground, Air, Ship
-		Explosions: small_napalm
-		ImpactSounds: flamer2.aud
-		ImpactActors: false
 
 td_nod_attacksubmarine_nodtorptube:
 	Inherits@wh: ^Warhead_Concussion_Light
 	Inherits@wh2: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_MissileHE_Heavy
+	Inherits@fx: ^td_nod_set6
 	ReloadDelay: 64
 	Range: 8000
 	Burst: 2
@@ -2836,21 +2703,13 @@ td_nod_attacksubmarine_nodtorptube:
 		Damage: 16000
 		ValidTargets: Water, Underwater, Bridge, Structure
 	-Warhead@Smudge:
-	Warhead@Effect: CreateEffect
-		ValidTargets: Ship, Structure, Bridge, Ground
-		ImpactActors: true
 	-Warhead@EffectAir:
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
 
 td_nod_attacksubmarine_nodtorptubeblackmarket:
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@wh2: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_MissileHE_Heavy
+	Inherits@fx: ^td_nod_set6
 	ReloadDelay: 64
 	Range: 8000
 	Burst: 2
@@ -2878,14 +2737,6 @@ td_nod_attacksubmarine_nodtorptubeblackmarket:
 	Warhead@MissileHE_Heavy:
 		Damage: 16000
 		ValidTargets: Water, Underwater, Bridge, Structure
-	Warhead@Effect: CreateEffect
-		ValidTargets: Ship, Structure, Bridge, Ground
-		ImpactActors: true
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
 
 td_nod_lasercorvette_corvettelaserobelisk:
 	Inherits@wh: ^Warhead_Laser_Heavy
@@ -2899,7 +2750,7 @@ td_nod_lasercorvette_corvettelaserobelisk:
 td_nod_lasercorvette_corvettedragon:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_MissileAP_Heavy
+	Inherits@fx: ^td_nod_td_nod_lasercorvette_corvettedragon
 	ReloadDelay: 35
 	Range: 9550
 	Report: rocket2.aud
@@ -2916,8 +2767,6 @@ td_nod_lasercorvette_corvettedragon:
 	Warhead@MissileAP_Heavy:
 		Damage: 10000
 		Spread: 500
-	Warhead@EffectAir: CreateEffect
-		Explosions: small_building
 
 # CLASSIC-RIFLE FAMILY (Formula v2 scout conversion 2026-07-19): Nod
 # minigunner â€” burst 4, snappier rattle, shorter reach. Laser pair.
@@ -2941,7 +2790,7 @@ td_nod_minigunner_minigun:
 td_nod_minigunner_minigun_laser:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@3: ^LaserWeapon
-	Inherits: ^Effect_Sniper_Light
+	Inherits@fx: ^td_nod_set2
 	ValidTargets: Ground, Water
 	ReloadDelay: 40
 	Range: 4104
@@ -2971,6 +2820,10 @@ td_nod_minigunner_minigun_laser:
 		PercentageScale: 0
 	-Warhead@Laser_Heavy_ExtraDamage:
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
 		InvalidTargets: Air
 	Warhead@LegacyLaserExtraDamage:
 		Damage: 1021
@@ -3008,8 +2861,6 @@ td_nod_minigunner_minigun_laser:
 			Steel: 8
 			Superheavy: 5
 			Wood: 14
-	Warhead@Effect:
-		Explosions: small_napalm
 	Warhead@LegacyLaserExtraDamage: SpreadDamage
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		Spread: 300

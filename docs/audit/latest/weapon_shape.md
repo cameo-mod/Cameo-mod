@@ -4,26 +4,26 @@
 
 ⛔ This **repeals the exemption** in `tools/audit/intentional_composites.py`. Its 224 entries are no longer 'reviewed, keep' — they are the worklist. The registry data stays useful: it says which mains someone chose on purpose.
 
-concrete weapons with inherits: **2162**
+concrete weapons with inherits: **2163**
 
 W5 counts structural flat-damage nodes, including zero/healing/ally-only nodes; the split audit counts positive non-companion damage. Both resolve the full concrete weapon corpus. Use `--compare-split` for exact differences.
 
 | check | what | count | ratchet |
 |---|---|--:|--:|
-| W1 | more than 3 inherits | **506** (23.41% of 2162) | 26.16% |
+| W1 | more than 3 inherits | **506** (23.40% of 2163) | 26.16% |
 | W2 | two or more `^Warhead_*` inherits | **281** | 281 |
 | W3 | two or more `^Projectile_*` inherits | **12** | 12 |
 | W4 | two or more `^Effect_*` inherits | **54** | 54 |
 | W5 | more than one resolved MAIN warhead | **167** | 389 |
-| W6 | effect warheads declared LOCALLY | **644** | 644 |
+| W6 | effect warheads declared LOCALLY | **602** | 602 |
 | W7 | inherits from ANOTHER WEAPON, not a template | **963** | 963 |
 | W8 | inherits a `^Template` that is not one of the three kinds | **637** | 637 |
 
 | I7 informational — missing template | weapons |
 |---|--:|
-| no `^Effect_*` inherit | 1198 |
-| no `^Projectile_*` inherit | 1452 |
-| no `^Warhead_*` inherit | 1046 |
+| no `^Effect_*` inherit | 1195 |
+| no `^Projectile_*` inherit | 1453 |
+| no `^Warhead_*` inherit | 1047 |
 
 _I7 is a REVIEW QUEUE, not a defect count — an instant or utility weapon may legitimately have no projectile. Do not ratchet it without a per-weapon pass._
 
@@ -340,19 +340,17 @@ _... and 14 more._
 _... and 127 more._
 
 
-## W6 — effect warheads declared LOCALLY (644 vs ratchet 644)
+## W6 — effect warheads declared LOCALLY (602 vs ratchet 602)
 
 | weapon | nodes | first three |
 |---|---|---|
 | `105mm` | 1 | `Warhead@Effect: CreateEffect` |
-| `120mm` | 1 | `Warhead@Effect: CreateEffect` |
 | `12MissilesSpawnerScud` | 1 | `Warhead@Effect: CreateEffect` |
 | `155mm` | 1 | `Warhead@Effect: CreateEffect` |
 | `155mmCryo` | 1 | `Warhead@Effect: CreateEffect` |
 | `2100Tanktrap` | 1 | `Warhead@Smu: LeaveSmudge` |
 | `227mm` | 2 | `Warhead@Effect: CreateEffect` · `Warhead@EffectWater: CreateEffect` |
 | `25mm` | 2 | `Warhead@Effect: CreateEffect` · `Warhead@EffectAir: CreateEffect` |
-| `A10CarrierMissiles_AA` | 1 | `Warhead@EffectAir: CreateEffect` |
 | `AAGunBoatFlak` | 1 | `Warhead@EffectAir: CreateEffect` |
 | `ASDFKamikazeExplosion` | 1 | `Warhead@Effect: CreateEffect` |
 | `ATMine` | 3 | `Warhead@Effect: CreateEffect` · `Warhead@Smudge: LeaveSmudge` · `Warhead@Concrete: DamagesConcrete` |
@@ -384,9 +382,11 @@ _... and 127 more._
 | `BarrelExplode` | 2 | `Warhead@2Eff: CreateEffect` · `Warhead@Smu: LeaveSmudge` |
 | `BehemothShoot` | 3 | `Warhead@Effect: CreateEffect` · `Warhead@Effect2: CreateEffect` · `Warhead@EffectAir: CreateEffect` |
 | `BigChemSpray` | 1 | `Warhead@3Eff: CreateEffect` |
+| `BigFlamer` | 1 | `Warhead@Glow: GlowImpact` |
+| `BlackEagleThunderboltMissiles` | 6 | `Warhead@Effect: CreateEffect` · `Warhead@Smudge1: LeaveSmudge` · `Warhead@Smudge2: LeaveSmudge` |
 
 
-_... and 604 more._
+_... and 562 more._
 
 
 _all buckets at or below their ratchets_ — this is the pre-existing conversion backlog. **Lower each baseline as you convert; never raise one.**

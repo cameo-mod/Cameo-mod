@@ -12039,3 +12039,15 @@ Harkonnen, Ixian, Ordos and Shared pack weapon files extracted into
 batch-2 (`d8762e3d6`); push waits on PR #480 + Ember's #477 report refresh
 per landing order. Corrino required no wiring (all its stripped nodes
 resolved identically through existing parents).
+
+## 2026-09-25 — DAWN: W27 batch-4 — TiberianDawn packs (52 weapons, 40 families)
+
+**Scope:** all inline effect nodes in TD GDI + Nod pack weapon files extracted
+into the new `mods/cameo/weapons/effects_td.yaml` (mounted in mod.yaml after
+effects_d2k). 101 nodes stripped / 53 weapons scanned; 52 rewired.
+
+**Verification:** resolve-diff 0/174; orphan cancels 0; empty warheads 0;
+W6 644 -> **602**, L1/L2 369/360 -> **337/339** (ratchets locked lower);
+W8 637, W4 54 at ratchet; D1 6 -> **5** (rewiring td_nod_stealthsoldier_
+bhreddarts removed its ambiguous bare `Inherits` fx edge — one of NOVA's
+flagged D1 rows resolved as a side effect).

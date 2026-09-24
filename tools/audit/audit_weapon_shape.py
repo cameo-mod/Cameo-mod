@@ -106,8 +106,8 @@ W4_BASELINE = 54    # dual ^Effect_ inherit; Apocalypse effect composition owns 
                     # the old prefix-only classifier. Same class as the W2
                     # ^Compatibility_* rename: measurement fix, not new debt.
 W5_BASELINE = 389   # more than one resolved MAIN warhead; merge-payload repairs
-W6_BASELINE = 644   # weapons declaring an effect warhead locally;
-                    # 694 -> 737 -> 692 -> 683 -> 644: W27 batch-3 D2k packs
+W6_BASELINE = 602   # weapons declaring an effect warhead locally;
+                    # 694 -> 737 -> 692 -> 683 -> 644 -> 602: W27 batch-4 TD
                     # nodes locally; the follow-up pass inherits covering
                     # ^Effect_* templates and drops the typed pins, ending
                     # two weapons below the pre-W23 baseline

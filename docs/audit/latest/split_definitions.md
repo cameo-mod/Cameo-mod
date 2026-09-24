@@ -1,6 +1,6 @@
 # Split definitions — one weapon, two live files, one silent merge
 
-Live weapon files in the manifest: **41** · names defined more than once: **8**
+Live weapon files in the manifest: **42** · names defined more than once: **8**
 
 The engine MERGES same-named top-level nodes across files. Editing one copy leaves the other supplying its own fields, so a removal can silently do nothing — see the `HMG` incident in this file's docstring.
 

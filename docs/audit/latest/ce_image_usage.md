@@ -9,8 +9,8 @@ tsioncannon: ALSO-USED (13)
   mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml:5253: 		RingImage: tsioncannon
   mods\cameo\ContentPacks\RedAlert2Mod\Consortium\yaml\buildings.yaml:384: 		Effect: tsioncannon
 ionsfx: ALSO-USED (3)
-  mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:3446: 		Image: ionsfx
-  mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:3450: 		TrailImage: ionsfx
+  mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:3313: 		Image: ionsfx
+  mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:3317: 		TrailImage: ionsfx
   mods\cameo\sequences\misc.yaml:3472: 		Filename: ionsfx.shp
 tspodring: ALSO-USED (3)
   mods\cameo\sequences\misc.yaml:2636: 	tspodring:

@@ -1,13 +1,12 @@
 # audit_duplicate_keys — duplicate keys in one node (ambiguous merges)
 
-Files scanned: **658** — D1 ambiguous inheritance labels: **6**, D2 merged duplicates: **695**
+Files scanned: **659** — D1 ambiguous inheritance labels: **5**, D2 merged duplicates: **686**
 
 
 ## D1 — duplicate inheritance labels with different parent values
 
 | file | lines | node | key | values |
 |---|---|---|---|---|
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2352, 2353 | td_nod_stealthsoldier_bhreddarts | Inherits | ^TeslaChargedWeapon vs ^Effect_CannonAP_Medium |
 | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1958, 1959 | CabalHunterKillerLasers | Inherits | ^LaserWeapon vs ^Effect_Watersplash_Huge_RA2 |
 | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 2067, 2069 | CabalHunterKillerLasers_elite | Inherits | ^LaserWeapon vs ^Effect_Watersplash_Huge_RA2 |
 | mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 470, 471 | TSHighVelocityChem | Inherits | ^TSCannonEffect vs ^Effect_AlliedTigerCannon |
@@ -30,7 +29,6 @@ Files scanned: **658** — D1 ambiguous inheritance labels: **6**, D2 merged dup
 | Warhead@ChaingunPercentage | 21 |
 | Warhead@LightChemicalWeaponPercentage | 20 |
 | Warhead@SmallArmsPercentage | 16 |
-| Warhead@Effect | 16 |
 | Voiced | 15 |
 | Warhead@HeavyCannonPercentage | 14 |
 | RevealsShroud | 14 |
@@ -43,6 +41,7 @@ Files scanned: **658** — D1 ambiguous inheritance labels: **6**, D2 merged dup
 | Warhead@ShieldHit | 9 |
 | Defaults | 9 |
 | Warhead@HeavyFlameWeaponPercentage | 8 |
+| Warhead@Effect | 8 |
 | HitShape | 8 |
 | Warhead@HeavyAAWeaponPercentage | 7 |
 | Selectable | 7 |
@@ -207,127 +206,118 @@ Files scanned: **658** — D1 ambiguous inheritance labels: **6**, D2 merged dup
 | mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml | 2971, 3043 | MedicFlare | Projectile |
 | mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml | 2992, 3080 | MedicFlare | Warhead@LightFlameWeaponPercentage |
 | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/sequences.yaml | 388, 394 | td_gdi_advancedguardtower | muzzle |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 161, 373 | td_gdi_boxer_boxercannonag | Warhead@SmallArmsPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 168, 325 | td_gdi_boxer_boxercannonag | Warhead@LightMissilePercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 178, 302 | td_gdi_boxer_boxercannonag | Warhead@GrenadePercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 185, 347 | td_gdi_boxer_boxercannonag | Warhead@MediumCannonPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 192, 243 | td_gdi_boxer_boxercannonag | Warhead@ChaingunPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 199, 276 | td_gdi_boxer_boxercannonag | Warhead@FlakWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 460, 596 | td_gdi_skyshield_skyshieldcannon | Warhead@SmallArmsPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 466, 570 | td_gdi_skyshield_skyshieldcannon | Warhead@LightMissilePercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 472, 516 | td_gdi_skyshield_skyshieldcannon | Warhead@ChaingunPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 478, 548 | td_gdi_skyshield_skyshieldcannon | Warhead@FlakWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 649, 685 | td_gdi_archerartillery_archerartilleryshell | Warhead@HeavyCannonPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 857, 969 | td_gdi_orca_orcamissiles | Warhead@HeavyCannonPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 863, 1059 | td_gdi_orca_orcamissiles | Warhead@TankDestroyerCannonPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 872, 1036 | td_gdi_orca_orcamissiles | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 881, 946 | td_gdi_orca_orcamissiles | Warhead@GrenadePercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 887, 990 | td_gdi_orca_orcamissiles | Warhead@HeavyMissilePercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 893, 1012 | td_gdi_orca_orcamissiles | Warhead@MediumMissilePercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 904, 916 | td_gdi_orca_orcamissiles | Projectile |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1228, 1321 | td_gdi_advancedguardtower_towermissile | Projectile |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1237, 1492 | td_gdi_advancedguardtower_towermissile | Warhead@TankDestroyerCannonPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1249, 1378 | td_gdi_advancedguardtower_towermissile | Warhead@GrenadePercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1261, 1469 | td_gdi_advancedguardtower_towermissile | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1269, 1356 | td_gdi_advancedguardtower_towermissile | Warhead@FlakWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1277, 1401 | td_gdi_advancedguardtower_towermissile | Warhead@HeavyAAWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1285, 1423 | td_gdi_advancedguardtower_towermissile | Warhead@HeavyMissilePercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1293, 1445 | td_gdi_advancedguardtower_towermissile | Warhead@MediumMissilePercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1297, 1345 | td_gdi_advancedguardtower_towermissile | Warhead@Effect |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1300, 1348 | td_gdi_advancedguardtower_towermissile | Warhead@EffectAir |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1538, 1607 | td_gdi_sonicmissilesoldier_missilesoldierweapon | Projectile |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1556, 1692 | td_gdi_sonicmissilesoldier_missilesoldierweapon | Warhead@TankDestroyerCannonPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1565, 1642 | td_gdi_sonicmissilesoldier_missilesoldierweapon | Warhead@LightChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1574, 1669 | td_gdi_sonicmissilesoldier_missilesoldierweapon | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1586, 1620 | td_gdi_sonicmissilesoldier_missilesoldierweapon | Warhead@HeavyMissilePercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1589, 1616 | td_gdi_sonicmissilesoldier_missilesoldierweapon | Warhead@Effect |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1748, 1835 | td_gdi_empgrenadier_grenade_emp | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1752, 1793 | td_gdi_empgrenadier_grenade_emp | Warhead@HeavyCannonPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1760, 1813 | td_gdi_empgrenadier_grenade_emp | Warhead@MediumMissilePercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1900, 1973 | td_gdi_heavysniper_rifle | Projectile |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1909, 2057 | td_gdi_heavysniper_rifle | Warhead@SmallArmsPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1914, 2032 | td_gdi_heavysniper_rifle | Warhead@GrenadePercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1919, 2011 | td_gdi_heavysniper_rifle | Warhead@FlakWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1924, 1979 | td_gdi_heavysniper_rifle | Warhead@ChaingunPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1968, 2002 | td_gdi_heavysniper_rifle | Warhead@Effect |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2223, 2295 | TDShotgun | Warhead@GrenadePercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2225, 2346 | TDShotgun | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2227, 2396 | TDShotgun | Warhead@TankDestroyerCannonPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2229, 2319 | TDShotgun | Warhead@MediumCannonPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2231, 2370 | TDShotgun | Warhead@SmallArmsPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2233, 2257 | TDShotgun | Warhead@ChaingunPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2649, 2677 | td_gdi_defenserig_gdirigphalanx | Projectile |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2653, 2820 | td_gdi_defenserig_gdirigphalanx | Warhead@TankDestroyerCannonPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2656, 2795 | td_gdi_defenserig_gdirigphalanx | Warhead@SmallArmsPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2659, 2746 | td_gdi_defenserig_gdirigphalanx | Warhead@GrenadePercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2662, 2769 | td_gdi_defenserig_gdirigphalanx | Warhead@MediumCannonPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2665, 2720 | td_gdi_defenserig_gdirigphalanx | Warhead@FlakWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2668, 2687 | td_gdi_defenserig_gdirigphalanx | Warhead@ChaingunPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2671, 2711 | td_gdi_defenserig_gdirigphalanx | Warhead@Effect |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2937, 2994 | td_gdi_havoc_sniper | Projectile |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2979, 2997 | td_gdi_havoc_sniper | Warhead@ChaingunPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 3068, 3120 | td_gdi_havoc_grenade | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 3071, 3096 | td_gdi_havoc_grenade | Warhead@GrenadePercentage |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 3155, 3201 | td_gdi_havoc_rifle | Projectile |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 3193, 3204 | td_gdi_havoc_rifle | Warhead@ChaingunPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 164, 370 | td_gdi_boxer_boxercannonag | Warhead@SmallArmsPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 171, 319 | td_gdi_boxer_boxercannonag | Warhead@LightMissilePercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 181, 296 | td_gdi_boxer_boxercannonag | Warhead@GrenadePercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 188, 341 | td_gdi_boxer_boxercannonag | Warhead@MediumCannonPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 195, 246 | td_gdi_boxer_boxercannonag | Warhead@ChaingunPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 202, 270 | td_gdi_boxer_boxercannonag | Warhead@FlakWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 457, 588 | td_gdi_skyshield_skyshieldcannon | Warhead@SmallArmsPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 463, 559 | td_gdi_skyshield_skyshieldcannon | Warhead@LightMissilePercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 469, 513 | td_gdi_skyshield_skyshieldcannon | Warhead@ChaingunPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 475, 537 | td_gdi_skyshield_skyshieldcannon | Warhead@FlakWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 641, 677 | td_gdi_archerartillery_archerartilleryshell | Warhead@HeavyCannonPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 840, 946 | td_gdi_orca_orcamissiles | Warhead@HeavyCannonPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 846, 1039 | td_gdi_orca_orcamissiles | Warhead@TankDestroyerCannonPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 855, 1016 | td_gdi_orca_orcamissiles | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 864, 923 | td_gdi_orca_orcamissiles | Warhead@GrenadePercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 870, 967 | td_gdi_orca_orcamissiles | Warhead@HeavyMissilePercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 876, 989 | td_gdi_orca_orcamissiles | Warhead@MediumMissilePercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 887, 899 | td_gdi_orca_orcamissiles | Projectile |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1195, 1283 | td_gdi_advancedguardtower_towermissile | Projectile |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1204, 1446 | td_gdi_advancedguardtower_towermissile | Warhead@TankDestroyerCannonPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1216, 1329 | td_gdi_advancedguardtower_towermissile | Warhead@GrenadePercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1228, 1423 | td_gdi_advancedguardtower_towermissile | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1236, 1307 | td_gdi_advancedguardtower_towermissile | Warhead@FlakWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1244, 1352 | td_gdi_advancedguardtower_towermissile | Warhead@HeavyAAWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1252, 1374 | td_gdi_advancedguardtower_towermissile | Warhead@HeavyMissilePercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1260, 1396 | td_gdi_advancedguardtower_towermissile | Warhead@MediumMissilePercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1492, 1556 | td_gdi_sonicmissilesoldier_missilesoldierweapon | Projectile |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1510, 1640 | td_gdi_sonicmissilesoldier_missilesoldierweapon | Warhead@TankDestroyerCannonPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1519, 1587 | td_gdi_sonicmissilesoldier_missilesoldierweapon | Warhead@LightChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1528, 1617 | td_gdi_sonicmissilesoldier_missilesoldierweapon | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1540, 1565 | td_gdi_sonicmissilesoldier_missilesoldierweapon | Warhead@HeavyMissilePercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1697, 1779 | td_gdi_empgrenadier_grenade_emp | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1701, 1737 | td_gdi_empgrenadier_grenade_emp | Warhead@HeavyCannonPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1709, 1757 | td_gdi_empgrenadier_grenade_emp | Warhead@MediumMissilePercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1840, 1910 | td_gdi_heavysniper_rifle | Projectile |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1849, 1988 | td_gdi_heavysniper_rifle | Warhead@SmallArmsPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1854, 1960 | td_gdi_heavysniper_rifle | Warhead@GrenadePercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1859, 1939 | td_gdi_heavysniper_rifle | Warhead@FlakWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 1864, 1916 | td_gdi_heavysniper_rifle | Warhead@ChaingunPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2154, 2217 | TDShotgun | Warhead@GrenadePercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2156, 2271 | TDShotgun | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2158, 2321 | TDShotgun | Warhead@TankDestroyerCannonPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2160, 2241 | TDShotgun | Warhead@MediumCannonPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2162, 2295 | TDShotgun | Warhead@SmallArmsPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2164, 2188 | TDShotgun | Warhead@ChaingunPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2565, 2591 | td_gdi_defenserig_gdirigphalanx | Projectile |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2569, 2728 | td_gdi_defenserig_gdirigphalanx | Warhead@TankDestroyerCannonPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2572, 2703 | td_gdi_defenserig_gdirigphalanx | Warhead@SmallArmsPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2575, 2651 | td_gdi_defenserig_gdirigphalanx | Warhead@GrenadePercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2578, 2674 | td_gdi_defenserig_gdirigphalanx | Warhead@MediumCannonPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2581, 2625 | td_gdi_defenserig_gdirigphalanx | Warhead@FlakWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2584, 2601 | td_gdi_defenserig_gdirigphalanx | Warhead@ChaingunPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2836, 2890 | td_gdi_havoc_sniper | Projectile |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2878, 2893 | td_gdi_havoc_sniper | Warhead@ChaingunPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2959, 3010 | td_gdi_havoc_grenade | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 2962, 2986 | td_gdi_havoc_grenade | Warhead@GrenadePercentage |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 3045, 3091 | td_gdi_havoc_rifle | Projectile |
+| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 3083, 3094 | td_gdi_havoc_rifle | Warhead@ChaingunPercentage |
 | mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 9, 25 | M16Laser | Projectile |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 12, 89 | M16Laser | Warhead@SmallArmsPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 12, 90 | M16Laser | Warhead@SmallArmsPercentage |
 | mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 14, 35 | M16Laser | Warhead@ChaingunPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 289, 353 | td_nod_artillery_artilleryshellupgrade | Projectile |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 304, 355 | td_nod_artillery_artilleryshellupgrade | Warhead@GrenadePercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 310, 405 | td_nod_artillery_artilleryshellupgrade | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 317, 379 | td_nod_artillery_artilleryshellupgrade | Warhead@MediumChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 466, 501 | td_nod_reconbike_rocket | Projectile |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 472, 608 | td_nod_reconbike_rocket | Warhead@TankDestroyerCannonPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 479, 585 | td_nod_reconbike_rocket | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 484, 534 | td_nod_reconbike_rocket | Warhead@FlakWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 488, 560 | td_nod_reconbike_rocket | Warhead@LightMissilePercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 797, 812 | td_nod_gunturret_turretgun | Projectile |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 800, 870 | td_nod_gunturret_turretgun | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 802, 823 | td_nod_gunturret_turretgun | Warhead@GrenadePercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 804, 847 | td_nod_gunturret_turretgun | Warhead@MediumCannonPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 806, 894 | td_nod_gunturret_turretgun | Warhead@TankDestroyerCannonPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 924, 973 | td_nod_gunturret_turretgunblackmarket | Warhead@HeavyBombPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 928, 997 | td_nod_gunturret_turretgunblackmarket | Warhead@HeavyCannonPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1226, 1254 | td_nod_chemicalrocketsoldier_chemrockets | Projectile |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1229, 1279 | td_nod_chemicalrocketsoldier_chemrockets | Warhead@GrenadePercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1233, 1301 | td_nod_chemicalrocketsoldier_chemrockets | Warhead@LightChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1237, 1325 | td_nod_chemicalrocketsoldier_chemrockets | Warhead@LightMissilePercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1241, 1274 | td_nod_chemicalrocketsoldier_chemrockets | Warhead@Effect |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1375, 1410 | td_nod_chemicalattackbike_chemicalbikerockets | Projectile |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1380, 1509 | td_nod_chemicalattackbike_chemicalbikerockets | Warhead@TankDestroyerCannonPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1384, 1462 | td_nod_chemicalattackbike_chemicalbikerockets | Warhead@LightChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1388, 1441 | td_nod_chemicalattackbike_chemicalbikerockets | Warhead@FlakWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1392, 1486 | td_nod_chemicalattackbike_chemicalbikerockets | Warhead@MediumMissilePercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1396, 1435 | td_nod_chemicalattackbike_chemicalbikerockets | Warhead@Effect |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1547, 1580 | td_nod_chemicalstealthtank_chemicalstealthtankmissiles | Projectile |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1551, 1647 | td_nod_chemicalstealthtank_chemicalstealthtankmissiles | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1555, 1600 | td_nod_chemicalstealthtank_chemicalstealthtankmissiles | Warhead@MediumChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1559, 1624 | td_nod_chemicalstealthtank_chemicalstealthtankmissiles | Warhead@MediumMissilePercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1563, 1597 | td_nod_chemicalstealthtank_chemicalstealthtankmissiles | Warhead@Effect |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1758, 1827 | td_nod_buggymkii_machinegunbuggy2 | Warhead@HeavyCannonPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1762, 1852 | td_nod_buggymkii_machinegunbuggy2 | Warhead@SmallArmsPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1766, 1789 | td_nod_buggymkii_machinegunbuggy2 | Warhead@ChaingunPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2059, 2082 | td_nod_lighttankmkii_lighttank2cannon | Projectile |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2066, 2090 | td_nod_lighttankmkii_lighttank2cannon | Warhead@LightChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2070, 2116 | td_nod_lighttankmkii_lighttank2cannon | Warhead@MediumCannonPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2206, 2259 | td_nod_lasertrooper_blackhandlaser | Projectile |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2216, 2306 | td_nod_lasertrooper_blackhandlaser | Warhead@TankDestroyerCannonPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2220, 2279 | td_nod_lasertrooper_blackhandlaser | Warhead@FlakWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2360, 2418 | td_nod_stealthsoldier_bhreddarts | Projectile |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2374, 2509 | td_nod_stealthsoldier_bhreddarts | Warhead@TankDestroyerCannonPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2379, 2437 | td_nod_stealthsoldier_bhreddarts | Warhead@ChaingunPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2384, 2487 | td_nod_stealthsoldier_bhreddarts | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2389, 2464 | td_nod_stealthsoldier_bhreddarts | Warhead@MediumMissilePercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2409, 2458 | td_nod_stealthsoldier_bhreddarts | Warhead@Effect |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2590, 2678 | td_nod_specterartillery_specterartilleryshellupgrade | Warhead@MediumChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2613, 2655 | td_nod_specterartillery_specterartilleryshellupgrade | Warhead@MediumCannonPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2617, 2633 | td_nod_specterartillery_specterartilleryshellupgrade | Warhead@HeavyCannonPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2951, 2978 | td_nod_minigunner_minigun_laser | Projectile |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2954, 3041 | td_nod_minigunner_minigun_laser | Warhead@SmallArmsPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2958, 2988 | td_nod_minigunner_minigun_laser | Warhead@ChaingunPercentage |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2973, 3037 | td_nod_minigunner_minigun_laser | Warhead@ShieldHit |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2975, 3013 | td_nod_minigunner_minigun_laser | Warhead@LegacyLaserExtraDamage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 290, 354 | td_nod_artillery_artilleryshellupgrade | Projectile |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 305, 356 | td_nod_artillery_artilleryshellupgrade | Warhead@GrenadePercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 311, 406 | td_nod_artillery_artilleryshellupgrade | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 318, 380 | td_nod_artillery_artilleryshellupgrade | Warhead@MediumChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 467, 502 | td_nod_reconbike_rocket | Projectile |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 473, 604 | td_nod_reconbike_rocket | Warhead@TankDestroyerCannonPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 480, 581 | td_nod_reconbike_rocket | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 485, 527 | td_nod_reconbike_rocket | Warhead@FlakWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 489, 553 | td_nod_reconbike_rocket | Warhead@LightMissilePercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 779, 794 | td_nod_gunturret_turretgun | Projectile |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 782, 848 | td_nod_gunturret_turretgun | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 784, 801 | td_nod_gunturret_turretgun | Warhead@GrenadePercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 786, 825 | td_nod_gunturret_turretgun | Warhead@MediumCannonPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 788, 872 | td_nod_gunturret_turretgun | Warhead@TankDestroyerCannonPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 902, 945 | td_nod_gunturret_turretgunblackmarket | Warhead@HeavyBombPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 906, 969 | td_nod_gunturret_turretgunblackmarket | Warhead@HeavyCannonPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1168, 1190 | td_nod_chemicalrocketsoldier_chemrockets | Projectile |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1171, 1210 | td_nod_chemicalrocketsoldier_chemrockets | Warhead@GrenadePercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1175, 1232 | td_nod_chemicalrocketsoldier_chemrockets | Warhead@LightChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1179, 1256 | td_nod_chemicalrocketsoldier_chemrockets | Warhead@LightMissilePercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1309, 1336 | td_nod_chemicalattackbike_chemicalbikerockets | Projectile |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1314, 1432 | td_nod_chemicalattackbike_chemicalbikerockets | Warhead@TankDestroyerCannonPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1318, 1382 | td_nod_chemicalattackbike_chemicalbikerockets | Warhead@LightChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1322, 1361 | td_nod_chemicalattackbike_chemicalbikerockets | Warhead@FlakWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1326, 1406 | td_nod_chemicalattackbike_chemicalbikerockets | Warhead@MediumMissilePercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1470, 1492 | td_nod_chemicalstealthtank_chemicalstealthtankmissiles | Projectile |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1474, 1559 | td_nod_chemicalstealthtank_chemicalstealthtankmissiles | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1478, 1509 | td_nod_chemicalstealthtank_chemicalstealthtankmissiles | Warhead@MediumChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1482, 1533 | td_nod_chemicalstealthtank_chemicalstealthtankmissiles | Warhead@MediumMissilePercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1664, 1723 | td_nod_buggymkii_machinegunbuggy2 | Warhead@HeavyCannonPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1668, 1751 | td_nod_buggymkii_machinegunbuggy2 | Warhead@SmallArmsPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1672, 1695 | td_nod_buggymkii_machinegunbuggy2 | Warhead@ChaingunPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1958, 1978 | td_nod_lighttankmkii_lighttank2cannon | Projectile |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1965, 1984 | td_nod_lighttankmkii_lighttank2cannon | Warhead@LightChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 1969, 2010 | td_nod_lighttankmkii_lighttank2cannon | Warhead@MediumCannonPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2090, 2143 | td_nod_lasertrooper_blackhandlaser | Projectile |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2100, 2186 | td_nod_lasertrooper_blackhandlaser | Warhead@TankDestroyerCannonPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2104, 2156 | td_nod_lasertrooper_blackhandlaser | Warhead@FlakWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2240, 2290 | td_nod_stealthsoldier_bhreddarts | Projectile |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2254, 2381 | td_nod_stealthsoldier_bhreddarts | Warhead@TankDestroyerCannonPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2259, 2309 | td_nod_stealthsoldier_bhreddarts | Warhead@ChaingunPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2264, 2359 | td_nod_stealthsoldier_bhreddarts | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2269, 2333 | td_nod_stealthsoldier_bhreddarts | Warhead@MediumMissilePercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2462, 2550 | td_nod_specterartillery_specterartilleryshellupgrade | Warhead@MediumChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2485, 2527 | td_nod_specterartillery_specterartilleryshellupgrade | Warhead@MediumCannonPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2489, 2505 | td_nod_specterartillery_specterartilleryshellupgrade | Warhead@HeavyCannonPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2800, 2831 | td_nod_minigunner_minigun_laser | Projectile |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2803, 2892 | td_nod_minigunner_minigun_laser | Warhead@SmallArmsPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2807, 2841 | td_nod_minigunner_minigun_laser | Warhead@ChaingunPercentage |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2822, 2888 | td_nod_minigunner_minigun_laser | Warhead@ShieldHit |
+| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2828, 2864 | td_nod_minigunner_minigun_laser | Warhead@LegacyLaserExtraDamage |
 | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml | 230, 268 | cabal_hunterdrone | AttackAircraft |
 | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 194, 264 | TSCABALObeliskLaserFire | Projectile |
 | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 211, 343 | TSCABALObeliskLaserFire | Warhead@TankDestroyerCannonPercentage |
@@ -762,5 +752,5 @@ Files scanned: **658** — D1 ambiguous inheritance labels: **6**, D2 merged dup
 | mods/cameo/weapons/wh40k.yaml | 354, 357 | WH40KShootaBoyzGun | Warhead@1Dam |
 
 
-**FAIL** — D1 count 6 exceeds the baseline 0: a new ambiguous inheritance label was introduced.
+**FAIL** — D1 count 5 exceeds the baseline 0: a new ambiguous inheritance label was introduced.
 

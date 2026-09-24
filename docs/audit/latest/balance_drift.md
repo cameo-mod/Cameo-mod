@@ -1,6 +1,6 @@
 # audit_balance_drift — yaml vs committed balance ledger
 
-**6 ledger(s) drifted** — balance numbers were hand-edited in yaml, or a sanctioned apply run was not followed by re-extraction. Fix via the pipeline, never by hand:
+**8 ledger(s) drifted** — balance numbers were hand-edited in yaml, or a sanctioned apply run was not followed by re-extraction. Fix via the pipeline, never by hand:
 
 ## d2k_atreides
 
@@ -94,5 +94,39 @@
 -       "^Effect_MissileAP_Heavy"
 +       "^d2k_shared_fremen_rpg"
        ],
+```
+
+## tiberiandawn_gdi
+
+```diff
+        "^Warhead_Demolition_Heavy",
+-       "^Effect_Flame_Heavy"
++       "^td_gdi_set3"
+       ],
+@@ -172,3 +172,3 @@
+        "^Warhead_Demolition_Heavy",
+-       "^Effect_Flame_Heavy"
++       "^td_gdi_set3"
+       ],
+@@ -204,3 +204,3 @@
+        "^Projectile_Missile_Heavy",
+-       "^Effect_MissileAP_Heavy"
+```
+
+## tiberiandawn_nod
+
+```diff
+        "^Warhead_Concussion_Medium",
+-       "^Effect_AlliedTigerCannon"
++       "^td_nod_td_nod_gunturret_turretgun"
+       ],
+@@ -710,3 +710,3 @@
+        "td_nod_gunturret_turretgun",
+-       "^Effect_Apoc_AP_RA2"
++       "^td_nod_td_nod_gunturret_turretgunblackmarket"
+       ],
+@@ -1723,3 +1723,3 @@
+        "^Warhead_Chemical_Light",
+-       "^Effect_CannonAP_Light"
 ```
 

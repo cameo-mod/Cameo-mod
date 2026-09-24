@@ -4,9 +4,9 @@
 # the ratchet counts per maintainer ruling but stay listed below.
 
 Files scanned: 40
-Concrete weapons with local Explosions (L1): 369
-Concrete weapons with local ImpactSounds (L2): 360
-Exempt secondary-channel declarations (not ratcheted): 307
+Concrete weapons with local Explosions (L1): 337
+Concrete weapons with local ImpactSounds (L2): 339
+Exempt secondary-channel declarations (not ratcheted): 289
 
 | file | weapon | warhead | Explosions | ImpactSounds | line | exempt |
 |---|---|---|---|---|---|---|
@@ -370,57 +370,6 @@ Exempt secondary-channel declarations (not ratcheted): 307
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | Tentacle | Effect | YES | YES | 1194 |  |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | UltraliskHusk | Effect | - | YES | 885 |  |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | ZerglingClaw | Effect | - | YES | 11 |  |
-| ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml | 120mm | Effect | YES | - | 741 |  |
-| ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml | A10CarrierMissiles_AA | EffectAir | YES | YES | 1206 | exempt |
-| ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml | Napalm | Effect | YES | - | 1125 |  |
-| ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml | NapalmA10Carrier | Effect | YES | - | 1167 |  |
-| ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml | TDIonCannon | Effect | YES | - | 3405 |  |
-| ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml | TDIonCannon | Effect2 | YES | YES | 3417 | exempt |
-| ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml | td_gdi_advancedguardtower_towermissile | Effect | YES | YES | 1297 |  |
-| ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml | td_gdi_advancedguardtower_towermissile | EffectAir | YES | - | 1300 | exempt |
-| ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml | td_gdi_battletank_120mmhv | Effect | YES | - | 756 |  |
-| ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml | td_gdi_battletank_m1a1missiles | Effect | YES | - | 768 |  |
-| ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml | td_gdi_commando_sniper_elite | Effect1 | YES | - | 112 | exempt |
-| ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml | td_gdi_defenserig_gdirigmissilepod | Effect | YES | YES | 2894 |  |
-| ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml | td_gdi_defenserig_gdirigmissilepod | EffectWater | YES | YES | 2899 | exempt |
-| ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml | td_gdi_defenserig_gdirigphalanx | Effect | YES | - | 2671 |  |
-| ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml | td_gdi_empgrenadier_grenade_emp | Effect | YES | YES | 1787 |  |
-| ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml | td_gdi_empgrenadier_grenadeexplode_emp | Effect | YES | YES | 1885 |  |
-| ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml | td_gdi_firehawk_firehawkmissiles_AA | EffectAir | YES | YES | 3257 | exempt |
-| ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml | td_gdi_havoc_grenade | Effect | YES | YES | 3074 |  |
-| ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml | td_gdi_havoc_rocket | Effect | YES | YES | 3042 |  |
-| ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml | td_gdi_havoc_sniper | Effect | YES | YES | 2991 |  |
-| ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml | td_gdi_heavysniper_rifle | Effect | YES | YES | 1968 |  |
-| ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml | td_gdi_mammothtank_mammothmissiles | EffectAir | YES | YES | 829 | exempt |
-| ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml | td_gdi_mammothtankmkiii_mammothtank3missiles | EffectAir | YES | YES | 2540 | exempt |
-| ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml | td_gdi_predatortank_gdipredatortankcannon | Effect | YES | - | 2430 |  |
-| ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml | td_gdi_predatortank_gdipredatortankcannonhv | Effect | YES | - | 2445 |  |
-| ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml | td_gdi_predatortank_gdipredatortankmissiles | Effect | YES | - | 2457 |  |
-| ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml | td_gdi_sonicmissilesoldier_missilesoldierweapon | Effect | YES | YES | 1589 |  |
-| ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml | Dragon | Effect | YES | YES | 1129 |  |
-| ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml | Dragon | EffectAir | YES | YES | 1137 | exempt |
-| ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml | Dragon | EffectWater | YES | - | 1133 | exempt |
-| ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml | Dragon | ShieldHitEffect | - | YES | 1149 | exempt |
-| ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml | HonestJohn | Effect | YES | YES | 689 |  |
-| ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml | td_nod_attacksubmarine_nodtorptube | EffectWater | YES | YES | 2843 | exempt |
-| ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml | td_nod_attacksubmarine_nodtorptubeblackmarket | EffectWater | YES | YES | 2884 | exempt |
-| ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml | td_nod_chemicalattackbike_chemicalbikerockets | Effect | YES | YES | 1396 |  |
-| ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml | td_nod_chemicalattackbike_chemicalbikerockets | EffectAir | YES | YES | 1399 | exempt |
-| ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml | td_nod_chemicalrocketsoldier_chemrockets | Effect | YES | YES | 1241 |  |
-| ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml | td_nod_chemicalrocketsoldier_chemrockets | EffectAir | YES | YES | 1244 | exempt |
-| ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml | td_nod_chemicalssmlauncher_chemicalhonestjohn | Effect | YES | YES | 1734 |  |
-| ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml | td_nod_chemicalstealthtank_chemicalstealthtankmissiles | Effect | YES | YES | 1563 |  |
-| ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml | td_nod_chemicalstealthtank_chemicalstealthtankmissiles | EffectAir | YES | YES | 1569 | exempt |
-| ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml | td_nod_flametankmkii_flametankexplode2 | Effect | YES | YES | 2184 |  |
-| ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml | td_nod_lasercommando_nodcommandolaser | Effect | YES | YES | 2800 |  |
-| ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml | td_nod_lasercorvette_corvettedragon | EffectAir | YES | - | 2919 | exempt |
-| ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml | td_nod_lighttank_70mm | Effect | - | YES | 645 |  |
-| ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml | td_nod_lighttank_ltnkmissiles | Effect | YES | - | 657 |  |
-| ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml | td_nod_lighttankmkii_lighttank2cannon | Effect | YES | YES | 2072 |  |
-| ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml | td_nod_lighttankmkii_lighttank2missiles | Effect | YES | - | 2151 |  |
-| ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml | td_nod_stealthsoldier_bhreddarts | Effect | YES | YES | 2409 |  |
-| ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml | td_nod_stealthsoldier_bhreddarts | EffectAir | YES | YES | 2413 | exempt |
-| ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml | td_nod_stealthtank_stealthtankmissiles | Effect | YES | YES | 708 |  |
 | ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalArtilleryWalkerShell | Effect | YES | YES | 1589 |  |
 | ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalArtilleryWalkerShellUpgraded | Effect | YES | YES | 1765 |  |
 | ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml | CabalAvatarLaser | Effect | YES | YES | 2581 |  |
@@ -747,4 +696,4 @@ Exempt secondary-channel declarations (not ratcheted): 307
 | weapons\weapons.yaml | bowFire | 2Eff | - | YES | 13549 | exempt |
 | weapons\weapons.yaml | bowFire_AA | 2Eff | - | YES | 13524 | exempt |
 
-PASS: L1 369 <= 369, L2 360 <= 360
+PASS: L1 337 <= 337, L2 339 <= 339

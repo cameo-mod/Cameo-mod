@@ -90,8 +90,8 @@ RocketsAMT:
 td_gdi_commando_sniper_elite:
 	Inherits@wh: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
-	Inherits@fx: ^Effect_Railgun_Heavy
 	Inherits@2: td_gdi_commando_sniper
+	Inherits@fx: ^td_gdi_td_gdi_commando_sniper_elite
 	Projectile: Bullet
 		Speed: 10000
 		ContrailStartWidth: 40
@@ -109,9 +109,12 @@ td_gdi_commando_sniper_elite:
 		Damage: 20000
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 10
-	Warhead@Effect1: CreateEffect
-		Explosions: small_poof
 
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 4
+		Range: 1250
+		ValidTargets: Shielded
 APCGun:
 	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
 	Inherits@wh: ^Warhead_Bullet_Medium
@@ -150,7 +153,7 @@ td_gdi_apc_apcgun_AA:
 		PercentageScale: 9975
 td_gdi_boxer_boxercannonag:
 	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
-	Inherits: ^Effect_CannonHE_Heavy_D2K_DevBullet
+	Inherits@fx: ^td_gdi_td_gdi_boxer_boxercannonag
 	ValidTargets: Ground, Water
 	ReloadDelay: 11
 	Range: 4860
@@ -264,15 +267,6 @@ td_gdi_boxer_boxercannonag:
 			Wood: 14
 	Warhead@Concrete:
 		Damage: 25
-	Warhead@Effect:
-		Explosions: flak_explosion_ground
-		ImpactSounds: xplos.aud
-		-ExplosionPalette:
-	Warhead@EffectAir:
-		Explosions: small_explosion_air
-		ImpactSounds: xplos.aud
-	Warhead@EffectWater:
-		Explosions: small_splash
 	Warhead@FlakWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		Spread: 125
@@ -367,6 +361,9 @@ td_gdi_boxer_boxercannonag:
 			Superheavy: 12
 			Wood: 19
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 5
 	Warhead@ShieldHitEffect:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
@@ -447,7 +444,7 @@ td_gdi_boxer_boxercannon_AA:
 		ValidTargets: Air
 td_gdi_skyshield_skyshieldcannon:
 	Inherits@collapsewh: ^Warhead_Flak_Heavy
-	Inherits: ^Effect_Clsn_Small_RA2
+	Inherits@fx: ^td_gdi_td_gdi_skyshield_skyshieldcannon
 	-Warhead@Glow:
 	-TargetActorCenter:
 	ValidTargets: Air
@@ -537,14 +534,6 @@ td_gdi_skyshield_skyshieldcannon:
 			Wood: 14
 	Warhead@Concrete:
 		Damage: 25
-	Warhead@Effect:
-		Explosions: flak_explosion_ground
-		ImpactSounds: xplos.aud
-		-ExplosionPalette:
-	Warhead@EffectWater:
-		Explosions: small_splash
-		-ExplosionPalette:
-		-ImpactSounds:
 	Warhead@FlakWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		Spread: 125
@@ -590,6 +579,9 @@ td_gdi_skyshield_skyshieldcannon:
 			Superheavy: 16
 			Wood: 6
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 5
 	Warhead@ShieldHitEffect:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
@@ -730,7 +722,7 @@ td_gdi_humvee_machinegun_ap:
 120mm:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_CannonHE_Medium
+	Inherits@fx: ^td_gdi_set0
 	ReloadDelay: 72
 	Range: 5438
 	Report: tnkfire4.aud
@@ -738,14 +730,12 @@ td_gdi_humvee_machinegun_ap:
 		Speed: 543
 	Warhead@CannonHE_Medium:
 		Damage: 8000
-	Warhead@Effect: CreateEffect
-		Explosions: small_poof
 
 td_gdi_battletank_120mmhv:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_CannonHE_Medium
 	Inherits: ^HVProjectile
+	Inherits@fx: ^td_gdi_set0
 	ReloadDelay: 72
 	Range: 5181
 	Report: tnkfire4.aud
@@ -753,20 +743,16 @@ td_gdi_battletank_120mmhv:
 		Speed: 1086
 	Warhead@CannonHE_Medium:
 		Damage: 29696
-	Warhead@Effect: CreateEffect
-		Explosions: small_poof
 
 td_gdi_battletank_m1a1missiles:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_MissileAP_Medium
+	Inherits@fx: ^td_gdi_set4
 	ReloadDelay: 72
 	Range: 5145
 	Report: rocket1.aud
 	Warhead@MissileAP_Medium:
 		Damage: 14848
-	Warhead@Effect: CreateEffect
-		Explosions: small_frag
 
 	Projectile: Missile
 		VerticalRateOfTurn: 16
@@ -815,7 +801,7 @@ td_gdi_mammothtank_120mmdualhv:
 td_gdi_mammothtank_mammothmissiles:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_MissileAP_Heavy
+	Inherits@fx: ^td_gdi_set1
 	ReloadDelay: 68
 	Burst: 2
 	BurstDelays: 12
@@ -826,9 +812,6 @@ td_gdi_mammothtank_mammothmissiles:
 		Image: DRAGON
 	Warhead@MissileAP_Heavy:
 		Damage: 13892
-	Warhead@EffectAir: CreateEffect
-		Explosions: small_building
-		ImpactSounds: xplobig4.aud
 
 td_gdi_mammothtank_mammothmissilesamt:
 	Inherits: td_gdi_mammothtank_mammothmissiles
@@ -847,7 +830,7 @@ td_gdi_mlrs_227mmamt:
 
 td_gdi_orca_orcamissiles:
 	Inherits@missilerole: ^Warhead_MissileAP_Heavy
-	Inherits: ^Effect_CannonAP_Medium
+	Inherits@fx: ^td_gdi_td_gdi_orca_orcamissiles
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 16
 	Range: 5442
@@ -934,12 +917,6 @@ td_gdi_orca_orcamissiles:
 		TrailImage: smokey
 		TrailInterval: 1
 	Report: bazook1.aud
-	Warhead@Effect:
-		ImpactActors: false
-		ImpactSounds: xplos.aud
-		ValidTargets: Ground, Water
-	Warhead@EffectAir:
-		ImpactSounds: xplos.aud
 	Warhead@Glow:
 		FadeFrames: 15
 		Scale: 0.8
@@ -1032,6 +1009,9 @@ td_gdi_orca_orcamissiles:
 			Superheavy: 20
 			Wood: 10
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 8
 	Warhead@ShrapnelWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -1112,7 +1092,7 @@ Vulcan:
 Napalm:
 	Inherits@finalmain: ^Warhead_Flame_Heavy
 	Inherits: ^Warhead_Demolition_Heavy
-	Inherits@3: ^Effect_Flame_Heavy
+	Inherits@fx: ^td_gdi_set3
 	ReloadDelay: 2
 	Range: 2000
 	Report: flamer2.aud
@@ -1122,11 +1102,6 @@ Napalm:
 		Shadow: true
 	Warhead@Demolition_Heavy:
 		Damage: 6000
-	Warhead@Effect: CreateEffect
-		Explosions: med_napalm
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
 	-Warhead@Demolition_Heavy:
 	Warhead@Flame_Heavy:
 		ValidTargets: Ground, Water
@@ -1154,7 +1129,7 @@ VulcanA10Carrier:
 NapalmA10Carrier:
 	Inherits@roleflat: ^Warhead_Flame_Heavy
 	Inherits: ^Warhead_Demolition_Heavy
-	Inherits@3: ^Effect_Flame_Heavy
+	Inherits@fx: ^td_gdi_set3
 	ReloadDelay: 2
 	Range: 1000
 	Report: flamer2.aud
@@ -1164,11 +1139,6 @@ NapalmA10Carrier:
 		Shadow: true
 	Warhead@Demolition_Heavy:
 		Damage: 4000
-	Warhead@Effect: CreateEffect
-		Explosions: med_napalm
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
 	-Warhead@Demolition_Heavy:
 	Warhead@Flame_Heavy:
 		ValidTargets: Ground, Water
@@ -1178,7 +1148,7 @@ NapalmA10Carrier:
 A10CarrierMissiles_AA:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_MissileAP_Heavy
+	Inherits@fx: ^td_gdi_set1
 	ValidTargets: Air
 	ReloadDelay: 100
 	Range: 5000
@@ -1203,9 +1173,6 @@ A10CarrierMissiles_AA:
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
 		ContrailStartColor: FF8800AA
-	Warhead@EffectAir: CreateEffect
-		Explosions: small_building
-		ImpactSounds: xplobig4.aud
 	Warhead@MissileAA_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1218,7 +1185,7 @@ A10CarrierMissiles_AA:
 
 td_gdi_advancedguardtower_towermissile:
 	Inherits@missilerole: ^Warhead_MissileAP_Heavy
-	Inherits: ^Effect_Watersplash_Huge_RA2
+	Inherits@fx: ^td_gdi_td_gdi_advancedguardtower_towermissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Burst: 2
@@ -1294,11 +1261,6 @@ td_gdi_advancedguardtower_towermissile:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
-	Warhead@Effect: CreateEffect
-		Explosions: med_frag
-		ImpactSounds: xplobig4.aud
-	Warhead@EffectAir: CreateEffect
-		Explosions: small_building
 	-Warhead@TankDestroyerCannon:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
@@ -1342,17 +1304,6 @@ td_gdi_advancedguardtower_towermissile:
 		TrailInterval: 1
 	Warhead@Concrete:
 		Damage: 150
-	Warhead@Effect:
-		ImpactActors: false
-		ValidTargets: Ground, Water
-	Warhead@EffectAir:
-		ImpactActors: false
-		ImpactSounds: xplos.aud
-		ValidTargets: Air
-	Warhead@EffectWater:
-		Explosions: small_splash
-		ImpactSounds: splash9.aud
-		-ExplosionPalette:
 	Warhead@FlakWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		Spread: 125
@@ -1465,6 +1416,9 @@ td_gdi_advancedguardtower_towermissile:
 			Superheavy: 20
 			Wood: 10
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 8
 	Warhead@ShrapnelWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -1529,7 +1483,7 @@ td_gdi_advancedguardtower_towermissileamt:
 td_gdi_sonicmissilesoldier_missilesoldierweapon:
 	Inherits@collapsewh: ^Warhead_MissileAP_Heavy
 	Inherits@4: ^RailgunWeapon
-	Inherits: ^Effect_AlliedTigerCannon
+	Inherits@fx: ^td_gdi_td_gdi_sonicmissilesoldier_missilesoldierweapon
 	ReloadDelay: 125
 	Range: 7500
 	MinRange: 1500
@@ -1586,11 +1540,6 @@ td_gdi_sonicmissilesoldier_missilesoldierweapon:
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@Effect: CreateEffect
-		ValidRelationships: Neutral, Enemy
-		Explosions: blue_building_napalm
-		ImpactSounds: kaboom12.aud
-		ValidTargets: Ground
 	-Warhead@TankDestroyerCannon:
 	-Warhead@LightChemicalWeapon:
 	-Warhead@ShrapnelWeapon:
@@ -1613,10 +1562,6 @@ td_gdi_sonicmissilesoldier_missilesoldierweapon:
 		RangeLimit: 30000
 		Shadow: true
 		VerticalRateOfTurn: 20
-	Warhead@Effect:
-		ImpactActors: false
-	Warhead@EffectWater:
-		Explosions: med_splash
 	Warhead@HeavyMissilePercentage:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		Spread: 300
@@ -1665,6 +1610,9 @@ td_gdi_sonicmissilesoldier_missilesoldierweapon:
 			Superheavy: 16
 			Wood: 5
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 10
 	Warhead@ShrapnelWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -1718,6 +1666,7 @@ td_gdi_empgrenadier_grenade_emp:
 	Inherits@3: ^MediumFlameWeapon
 	Inherits@6: ^MediumCannon
 	Inherits@8: ^HeavyMissile
+	Inherits@fx: ^td_gdi_set5
 	ReloadDelay: 111
 	Range: 5694
 	Report: toss1.aud
@@ -1784,11 +1733,6 @@ td_gdi_empgrenadier_grenade_emp:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		IntegrityScale: 0
 		PercentageScale: 0
-	Warhead@Effect: CreateEffect
-		Explosions: blue_med_frag
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Ground, Ship
 
 	Warhead@HeavyCannonPercentage:
 		Spread: 225
@@ -1856,6 +1800,7 @@ td_gdi_empgrenadier_grenade_emp:
 			Wood: 18
 td_gdi_empgrenadier_grenadeexplode_emp:
 	Inherits: td_gdi_empgrenadier_grenade_emp
+	Inherits@fx: ^td_gdi_set5
 	Warhead@TeslaChargedWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
@@ -1882,15 +1827,10 @@ td_gdi_empgrenadier_grenadeexplode_emp:
 		Damage: 40000
 		IntegrityScale: 0
 		PercentageScale: 0
-	Warhead@Effect: CreateEffect
-		Explosions: blue_med_frag
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Ground, Ship
 
 td_gdi_heavysniper_rifle:
 	Inherits@wh: ^Warhead_Bullet_Heavy
-	Inherits: ^Effect_CannonHE_Heavy_D2K_DevBullet
+	Inherits@fx: ^td_gdi_td_gdi_heavysniper_rifle
 	-Warhead@Glow:
 	-Warhead@RA2Crater:
 	ReloadDelay: 75
@@ -1965,9 +1905,6 @@ td_gdi_heavysniper_rifle:
 			Superheavy: 65
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
-	Warhead@Effect: CreateEffect
-		Explosions: small_poof
-		ImpactSounds: xplos.aud
 	-Warhead@SniperFlak:
 
 	Projectile:
@@ -1999,15 +1936,6 @@ td_gdi_heavysniper_rifle:
 			Wood: 14
 	Warhead@Concrete:
 		Damage: 25
-	Warhead@Effect:
-		ValidTargets: Ground, Ship, Air
-		-ExplosionPalette:
-	Warhead@EffectAir:
-		Explosions: small_explosion_air
-		ImpactSounds: xplos.aud
-		-ImpactActors:
-	Warhead@EffectWater:
-		Explosions: water_piffs
 	Warhead@FlakWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		UpdatesUnitStatistics: false
@@ -2051,6 +1979,9 @@ td_gdi_heavysniper_rifle:
 			Superheavy: 8
 			Wood: 15
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 4
 	Warhead@ShieldHitEffect:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
@@ -2215,7 +2146,7 @@ td_gdi_humveemkii_rocketshumvee2amt_AA:
 TDShotgun:
 	Inherits@collapsewh: ^Warhead_Bullet_Medium
 	Inherits@collapseexplosive: ^Warhead_Concussion_Medium
-	Inherits: ^Effect_CannonHE_Heavy_D2K_DevBullet
+	Inherits@fx: ^td_gdi_tdshotgun
 	ReloadDelay: 70
 	Range: 3125
 	Report: DSDSHTGN.wav
@@ -2279,15 +2210,6 @@ TDShotgun:
 			Wood: 14
 	Warhead@Concrete:
 		Damage: 25
-	Warhead@Effect:
-		Explosions: piffs
-		ImpactSounds: kaboom12.aud
-		ValidTargets: Ground, Ship, Air
-		-ExplosionPalette:
-	Warhead@EffectAir:
-		Explosions: big_explosion_air
-	Warhead@EffectWater:
-		Explosions: water_piffs
 	Warhead@Glow:
 		Color: FFB84D
 		FadeFrames: 15
@@ -2340,6 +2262,9 @@ TDShotgun:
 			Superheavy: 12
 			Wood: 19
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 4
 	Warhead@ShieldHitEffect:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
@@ -2419,7 +2344,7 @@ TDShotgun:
 td_gdi_predatortank_gdipredatortankcannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_CannonHE_Medium
+	Inherits@fx: ^td_gdi_set0
 	ReloadDelay: 70
 	Range: 5880
 	Report: tnkfire4.aud
@@ -2427,14 +2352,12 @@ td_gdi_predatortank_gdipredatortankcannon:
 		Speed: 588
 	Warhead@CannonHE_Medium:
 		Damage: 8000
-	Warhead@Effect: CreateEffect
-		Explosions: small_poof
 
 td_gdi_predatortank_gdipredatortankcannonhv:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_CannonHE_Medium
 	Inherits: ^HVProjectile
+	Inherits@fx: ^td_gdi_set0
 	ReloadDelay: 70
 	Range: 5880
 	Report: tnkfire4.aud
@@ -2442,20 +2365,16 @@ td_gdi_predatortank_gdipredatortankcannonhv:
 		Speed: 1176
 	Warhead@CannonHE_Medium:
 		Damage: 16000
-	Warhead@Effect: CreateEffect
-		Explosions: small_poof
 
 td_gdi_predatortank_gdipredatortankmissiles:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_MissileAP_Medium
+	Inherits@fx: ^td_gdi_set4
 	ReloadDelay: 70
 	Range: 5880
 	Report: rocket1.aud
 	Warhead@MissileAP_Medium:
 		Damage: 8000
-	Warhead@Effect: CreateEffect
-		Explosions: small_frag
 
 	Projectile: Missile
 		VerticalRateOfTurn: 16
@@ -2526,7 +2445,7 @@ td_gdi_mammothtankmkiii_mammothtank3cannonshv:
 td_gdi_mammothtankmkiii_mammothtank3missiles:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_MissileAP_Heavy
+	Inherits@fx: ^td_gdi_set1
 	ReloadDelay: 98
 	Burst: 2
 	BurstDelays: 12
@@ -2537,9 +2456,6 @@ td_gdi_mammothtankmkiii_mammothtank3missiles:
 		Image: DRAGON
 	Warhead@MissileAP_Heavy:
 		Damage: 12000
-	Warhead@EffectAir: CreateEffect
-		Explosions: small_building
-		ImpactSounds: xplobig4.aud
 
 td_gdi_mammothtankmkiii_mammothtank3missilesamt:
 	Inherits: td_gdi_mammothtankmkiii_mammothtank3missiles
@@ -2640,7 +2556,7 @@ GDIRigDroneRepair:
 
 td_gdi_defenserig_gdirigphalanx:
 	Inherits@collapsewh: ^Warhead_Bullet_Medium
-	Inherits: ^Effect_CannonHE_Heavy_D2K_DevBullet
+	Inherits@fx: ^td_gdi_td_gdi_defenserig_gdirigphalanx
 	ValidTargets: Ground, Water, Air
 	ValidRelationships: Enemy, Neutral
 	ReloadDelay: 8
@@ -2668,8 +2584,6 @@ td_gdi_defenserig_gdirigphalanx:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@Effect: CreateEffect
-		Explosions: piffs
 	Warhead@Bullet_Medium:
 		Damage: 24000
 		PercentageScale: 0
@@ -2708,15 +2622,6 @@ td_gdi_defenserig_gdirigphalanx:
 			Wood: 14
 	Warhead@Concrete:
 		Damage: 25
-	Warhead@Effect:
-		ImpactSounds: xplos.aud
-		ValidTargets: Ground, Ship, Air
-		-ExplosionPalette:
-	Warhead@EffectAir:
-		Explosions: small_explosion_air
-		ImpactSounds: xplos.aud
-	Warhead@EffectWater:
-		Explosions: water_piffs
 	Warhead@FlakWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		Spread: 125
@@ -2789,6 +2694,9 @@ td_gdi_defenserig_gdirigphalanx:
 			Superheavy: 12
 			Wood: 19
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 4
 	Warhead@ShieldHitEffect:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
@@ -2870,7 +2778,7 @@ td_gdi_defenserig_gdirigrailgun:
 td_gdi_defenserig_gdirigmissilepod:
 	Inherits@missilerole: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_MissileHE_Medium
+	Inherits@fx: ^td_gdi_td_gdi_defenserig_gdirigmissilepod
 	ValidTargets: Ground, Water, Air
 	ValidRelationships: Enemy, Neutral
 	ReloadDelay: 45
@@ -2891,16 +2799,6 @@ td_gdi_defenserig_gdirigmissilepod:
 		Speed: 500
 		ContrailStartColor: FF884400
 		ContrailEndColor: 000000FF
-	Warhead@Effect: CreateEffect
-		Explosions: med_frag
-		ImpactSounds: kaboom25.aud
-		ValidTargets: Ground, Ship
-		ImpactActors: false
-	Warhead@EffectWater: CreateEffect
-		Explosions: med_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
 	Warhead@MissileAP_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2929,6 +2827,7 @@ td_gdi_defenserig_gdirigmissilepodamt:
 td_gdi_havoc_sniper:
 	Inherits@wh: ^Warhead_Bullet_Heavy
 	Inherits: ^SniperWeapon
+	Inherits@fx: ^td_gdi_td_gdi_havoc_sniper
 	ValidTargets: Ground, Water, Air
 	InvalidTargets: Structure
 	ReloadDelay: 100
@@ -2988,9 +2887,6 @@ td_gdi_havoc_sniper:
 		Falloff: 100, 0
 		Damage: 40000
 		PercentageScale: 0
-	Warhead@Effect: CreateEffect
-		Explosions: small_poof
-		ImpactSounds: xplos.aud
 	Projectile:
 		ContrailStartWidth: 40
 		ContrailEndWidth: 80
@@ -3021,7 +2917,7 @@ td_gdi_havoc_rocket:
 	Inherits@missilerole: ^Warhead_MissileAP_Medium
 	Inherits@finalmain: ^Warhead_MissileHE_Medium_Flat
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_MissileHE_Light
+	Inherits@fx: ^td_gdi_td_gdi_havoc_rocket
 	Report: bazook1.aud
 	ValidTargets: Ground, Water, Air
 	InvalidTargets: Structure
@@ -3039,11 +2935,6 @@ td_gdi_havoc_rocket:
 	Warhead@MissileHE_Medium:
 		ValidTargets: Ground, Air, Water
 		Damage: 40000
-	Warhead@Effect: CreateEffect
-		ValidRelationships: Neutral, Enemy
-		Explosions: blue_building_napalm
-		ImpactSounds: kaboom12.aud
-		ValidTargets: Ground
 	-Warhead@MissileHE_Medium:
 	-Warhead@MissileHE_Medium_Flat:
 	Warhead@MissileAP_Medium: AreaDamage
@@ -3059,7 +2950,7 @@ td_gdi_havoc_rocket:
 td_gdi_havoc_grenade:
 	Inherits@collapsewh: ^Warhead_Concussion_Medium
 	Inherits@3: ^EMPDamage
-	Inherits: ^Effect_Concussion_Light
+	Inherits@fx: ^td_gdi_td_gdi_havoc_grenade
 	-Warhead@Glow:
 	ValidTargets: Ground, Water
 	InvalidTargets: Structure
@@ -3071,11 +2962,6 @@ td_gdi_havoc_grenade:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		Damage: 10
-	Warhead@Effect: CreateEffect
-		Explosions: blue_med_frag
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Ground, Ship
 	Warhead@EMPUnit: AffectsIntegrity
 		InvalidTargets: Shielded, Air
 		Damage: 20000
@@ -3085,6 +2971,10 @@ td_gdi_havoc_grenade:
 		PercentageScale: 0
 
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
 		InvalidTargets: Air
 	Projectile: Bullet
 		Blockable: false
@@ -3228,7 +3118,7 @@ td_gdi_havoc_rifle:
 td_gdi_firehawk_firehawkmissiles_AA:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_MissileAP_Heavy
+	Inherits@fx: ^td_gdi_set1
 	ValidTargets: Air
 	ReloadDelay: 50
 	Range: 12500
@@ -3254,9 +3144,6 @@ td_gdi_firehawk_firehawkmissiles_AA:
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
 		ContrailStartColor: FF8800AA
-	Warhead@EffectAir: CreateEffect
-		Explosions: small_building
-		ImpactSounds: xplobig4.aud
 	Warhead@MissileAA_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -3402,28 +3289,8 @@ TDIonCannon:
 		ValidTargets: Ground, Water, Air
 		AirThreshold: 99c0
 		Delay: 9
-	Warhead@Effect: CreateEffect
-		Image: tsioncannon
-		Explosions: ionring
-		ExplosionPalette: tseffect
-		ImpactActors: false
-		ValidTargets: Ground, Water, Air
-		AirThreshold: 8c0
-		GlowColor: 32C8FF
-		GlowScale: 7.0
-		GlowFadeFrames: 300
-		GlowFadeInFrames: 5
-		Delay: 11
-	Warhead@Effect2: CreateEffect
-		Image: ionsfx
-		Explosions: explode
-		ExplosionPalette: tseffect
-		ImpactSounds: ion1.aud
-		ImpactActors: false
-		ValidTargets: Ground, Water, Air
-		AirThreshold: 8c0
-		Delay: 10
 
+	Inherits@fx: ^td_gdi_tdioncannon
 TDIonCannonLaunch:
 	AirThreshold: 99c0
 	Range: 101376
