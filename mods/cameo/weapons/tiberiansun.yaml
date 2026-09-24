@@ -1271,24 +1271,6 @@ TSTentacle:
 			Concrete: 10
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 
-ZClaw3:
-	ReloadDelay: 80
-	Range: 1408
-	Report: floatk1.aud
-	Projectile: InstantHit
-	InvalidTargets: wall, Bridge
-	Warhead@1Dam: SpreadDamage
-		Damage: 16000
-		InvalidTargets: wall, Bridge
-		Versus:
-			None: 60
-			Wood: 45
-			Light: 90
-			Medium: 70
-			Heavy: 55
-			Concrete: 10
-		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
-
 TSVeins:
 	ReloadDelay: 16
 	Warhead@Damage: TargetDamage
@@ -1902,13 +1884,16 @@ ZClaw2:
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 
 ZClaw3:
+	Report: floatk1.aud
 	ReloadDelay: 30
+	InvalidTargets: wall, Bridge
 	Range: 1536
 	Projectile: Bullet
 		Speed: 1c682
 	Warhead@1Dam: SpreadDamage
 		Spread: 64 #213
 		Damage: 2000
+		InvalidTargets: wall, Bridge
 		Versus:
 			None: 97
 			Wood: 30 #10

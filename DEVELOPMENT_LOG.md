@@ -12348,3 +12348,24 @@ Tooling notes: materialized-payload emission needs (a) leaf+node keys
 payload emitted BEFORE child overrides so last-wins favors the child.
 
 Gates: W7 804 (relocked), all other classes flat, orphans 0, empty 0.
+
+## 2026-09-26 — split-definition cleanup (DAWN)
+
+`audit_split_definitions` was FAIL on master (S1 1/56, S2 6/2) — landed debt,
+not from my batches. Cleared the two findings in my file-set:
+
+- `ChemTibAtomic`: legacy `weapons/tiberiandawn.yaml` copy deleted — the
+  RA/Shared pack copy (NOVA's #482) is byte-identical; the legacy file loads
+  later but supplied nothing unique. Resolved-diff NONE. S1 -> 0.
+- `ZClaw3`: same-file divergent dup in `weapons/tiberiansun.yaml` (1274 vs
+  1904 — different ReloadDelay/Range/Projectile/Damage/Versus). The resolver
+  had been silently merging them. Collapsed to one canonical block = copy2's
+  winning fields + copy1's surviving `InvalidTargets`/`Report`. Resolved-diff
+  NONE. S2 -> 5.
+
+Remaining S2 (4 findings) are foreign-lane: `Sound2` is a required cross-pack
+dup (Ordos pack must resolve it without Atreides loaded — by-design for
+ContentPack self-containment, baseline candidate); `Flamethrower` is in
+`weapons/starcraft.yaml` (Blackrobe's file, byte-identical twin in
+tiberiandawn.yaml — safe delete, flagged to owner); `ra1_allies_*` x3 are
+NOVA's RA lane (#146). Fleet-flagged.
