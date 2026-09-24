@@ -11882,3 +11882,20 @@ prefixes), cross-file weapon-inherit skip (merged-order hazard).
   pins restore — same fidelity-vs-snap ruling class, already flagged).
 - Still held (ruling pending): 90 weapons needing local `*ExtraDamage`
   node pins — see `NOTE_2026-09-24_nova_held_inventory.md`.
+
+## 2026-09-24 (night) — dead shim cleanup + central-file census correction
+
+- Deleted 35 zero-consumer legacy shim templates (`b0dcb1dda`): ^RA2TeslaWeapon,
+  ^RA2LaserWeapon, ^RA2RailgunWeapon, the ^Steel* set, *Legacy/*Compatibility
+  shims — conversion debris. Repo-wide resolved diff: 0 drift. Canonical
+  ^Effect_* lattice members with zero consumers (Brnl/Tumu/Twlt/Flak) KEPT —
+  library families, not debris.
+- CENTRAL-FILE CENSUS CORRECTION: the earlier "999 live central edges" counted
+  UNMOUNTED files. Truth: weapons/redalert.yaml + redalert2.yaml are deprecated
+  shadow copies (mod.yaml comments them out; every redalert2.yaml block is
+  duplicated in the pack files — central-only names: 0). Live mounted central
+  files: weapons.yaml 61, tiberiandawn.yaml 1, redalert2mod.yaml 5 (all held
+  class), d2k.yaml 26, starcraft.yaml 4, warcraft2.yaml 6, tiberiansun.yaml 24,
+  outpost2.yaml 19 — total ~146, most in other lanes' themes.
+- NOVA lane state: W7 412 = 90 held (ExtraDamage ruling) + ~322 support-shim
+  and cross-file keeps. Every non-held, non-shim edge is converted.
