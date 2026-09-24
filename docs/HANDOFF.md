@@ -20,7 +20,35 @@ W7 weapon-parent census after this: `tiberiandawn` 1 (TD owner) ·
 
 ---
 
-## ⭐ 2026-09-23 — DEVIN-CLOUD (AI lane): phases 1–3 are all on master; phase 4 starts
+## 2026-09-25 — EMBER: W7 unclaimed remainder (`outpost2.yaml` + `warcraft2.yaml`)
+
+`Agent: EMBER (Devin / SWE-2 Max) · branch devin/ember/w7-remainder · base 5b89b1341`
+
+Claimed the two unclaimed weapon-parent-edge files off NOVA's corrected census
+(`weapons.yaml` 61 stays "Claude to assign"; `tiberiandawn`/`tiberiansun`/`d2k`/`starcraft`
+stay with their owners). Ran NOVA's `nova_w7conv` pipeline verbatim (plan → apply →
+resolved-diff pin fixup) plus the orphan-cancel clean step:
+
+- **21 weapon-parent edges converted** (16 outpost2, 5 warcraft2) → last-per-kind
+  `^Warhead_*/^Projectile_*/^Effect_*` edges + verbatim pins of parent-local payloads.
+- **4 edges HELD** — resolve to `ExtraDamage` (pending Claude's A/B/C ruling):
+  `edenMobileLaserTiger`, `edenMobileDefenceLaser`, `edenMobileThorsHammerTiger`,
+  `wc2highArrowFire`.
+- **D1 fix:** `edenRailgun`'s duplicate bare `Inherits:` labelled `Inherits@fx:`
+  (merge order preserved, resolved-identical).
+- **Verification:** flat-map resolved compare vs `5b89b1341` — 0 content diffs across
+  all 2,984 weapons; `find_empty_warhead` 0; `audit_orphan_cancels` 0 (was 53 mid-flight:
+  pinned `-InvalidTargets`/`-Warhead@*` markers from parent blocks that have no provider
+  under the new `^`-only edges — deleted, still resolved-identical);
+  `find_orphan_old_keys` 0 real; boot-gate PASS.
+
+Lesson worth keeping: `nova_w7conv`'s pin fixup copies resolved subtrees verbatim —
+inherited `-Key:` cancel markers ride along as `-InvalidTargets:`/`--InvalidTargets:`
+lines that become orphans under the new parents. Always run `audit_orphan_cancels.py`
+after fixup; baseline is 0.
+
+---
+
 ## ⭐ 2026-09-23 — DEVIN-CLOUD (AI lane): phases 1–3 are all on master; phase 4 starts
 
 `Agent: DEVIN-CLOUD · lane: AI bot modules · working off master @ 1e27366c9`
