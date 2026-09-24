@@ -4,26 +4,26 @@
 
 Γ¢ö This **repeals the exemption** in `tools/audit/intentional_composites.py`. Its 224 entries are no longer 'reviewed, keep' ΓÇö they are the worklist. The registry data stays useful: it says which mains someone chose on purpose.
 
-concrete weapons with inherits: **2152**
+concrete weapons with inherits: **2153**
 
 W5 counts structural flat-damage nodes, including zero/healing/ally-only nodes; the split audit counts positive non-companion damage. Both resolve the full concrete weapon corpus. Use `--compare-split` for exact differences.
 
 | check | what | count | ratchet |
 |---|---|--:|--:|
-| W1 | more than 3 inherits | **506** (23.52% of 2152) | 26.16% |
-| W2 | two or more `^Warhead_*` inherits | **281** Γ¢ö | 177 |
+| W1 | more than 3 inherits | **506** (23.51% of 2153) | 26.16% |
+| W2 | two or more `^Warhead_*` inherits | **281** | 281 |
 | W3 | two or more `^Projectile_*` inherits | **12** | 12 |
-| W4 | two or more `^Effect_*` inherits | **51** | 51 |
+| W4 | two or more `^Effect_*` inherits | **54** | 54 |
 | W5 | more than one resolved MAIN warhead | **167** | 389 |
-| W6 | effect warheads declared LOCALLY | **691** | 692 |
+| W6 | effect warheads declared LOCALLY | **690** | 692 |
 | W7 | inherits from ANOTHER WEAPON, not a template | **963** Γ¢ö | 957 |
-| W8 | inherits a `^Template` that is not one of the three kinds | **671** | 671 |
+| W8 | inherits a `^Template` that is not one of the three kinds | **637** | 637 |
 
 | I7 informational ΓÇö missing template | weapons |
 |---|--:|
-| no `^Effect_*` inherit | 1248 |
-| no `^Projectile_*` inherit | 1442 |
-| no `^Warhead_*` inherit | 1036 |
+| no `^Effect_*` inherit | 1212 |
+| no `^Projectile_*` inherit | 1443 |
+| no `^Warhead_*` inherit | 1037 |
 
 _I7 is a REVIEW QUEUE, not a defect count ΓÇö an instant or utility weapon may legitimately have no projectile. Do not ratchet it without a per-weapon pass._
 
@@ -77,7 +77,7 @@ _I7 is a REVIEW QUEUE, not a defect count ΓÇö an instant or utility weapon ma
 _... and 923 more._
 
 
-## W8 ΓÇö inherits a `^Template` that is not one of the three kinds (671 vs ratchet 671)
+## W8 ΓÇö inherits a `^Template` that is not one of the three kinds (637 vs ratchet 637)
 
 | weapon | legacy templates | first four |
 |---|---|---|
@@ -92,7 +92,6 @@ _... and 923 more._
 | `80mm_A` | 1 | `^D2K_Cannon` |
 | `80mm_H` | 1 | `^D2K_Cannon` |
 | `AAGunBoatCannon` | 1 | `^RA2HeavyCannon` |
-| `AAGunBoatCannon_elite` | 1 | `^RA2EliteEffects` |
 | `AAHyperionMagnet` | 1 | `^RA2LaserWeapon` |
 | `ACV_Machinegun` | 2 | `^RA2SmallArms` · `^RA2Chaingun` |
 | `ASDFGun` | 2 | `^RA2SmallArms` · `^RA2Chaingun` |
@@ -112,18 +111,19 @@ _... and 923 more._
 | `AsianIonbeam` | 1 | `^AsianIonBeam` |
 | `AsianKamikazeChaingun` | 2 | `^RA2SmallArms` · `^RA2Chaingun` |
 | `AsianLynxMG` | 2 | `^RA2SmallArms` · `^RA2Chaingun` |
-| `AsianLynxMG_elite` | 1 | `^RA2EliteEffects` |
 | `AsianLynxTankCannon` | 6 | `^Grenade` · `^ShrapnelWeapon` · `^LightFlameWeapon` · `^MediumChemicalWeapon` |
-| `AsianLynxTankCannon_elite` | 1 | `^RA2EliteEffects` |
 | `AsianMLRS` | 4 | `^HeavyMissile` · `^FlakWeapon` · `^RA2Grenade` · `^AsianRA2MediumMissile` |
 | `AsianMaidenBow` | 2 | `^Grenade` · `^ArrowWeapon` |
 | `AsianPelicanMG` | 2 | `^RA2HeavyCannon` · `^RA2Chaingun` |
 | `AsianPelicanMissile` | 1 | `^RA2MediumMissile` |
 | `AsianPhoenixRocket` | 1 | `^RA2HeavyMissile` |
 | `AsianPhotonCannon` | 4 | `^MediumMissile` · `^FlakWeapon` · `^TeslaWeapon` · `^MagicWeapon` |
+| `AsianPulverizerGatling` | 1 | `^RA2Chaingun` |
+| `AsianPulverizerMechaGatling` | 2 | `^MediumChemicalWeapon` · `^MediumMissile` |
+| `AsianSinglePlasma` | 7 | `^LightFlameWeapon` · `^LightChemicalWeapon` · `^MediumFlameWeapon` · `^MediumChemicalWeapon` |
 
 
-_... and 631 more._
+_... and 597 more._
 
 
 ## W1 ΓÇö more than 3 inherits (506 vs ratchet 576)
@@ -175,7 +175,7 @@ _... and 631 more._
 _... and 466 more._
 
 
-## W2 ΓÇö two or more `^Warhead_*` inherits (281 vs ratchet 177)
+## W2 ΓÇö two or more `^Warhead_*` inherits (281 vs ratchet 281)
 
 | weapon | warhead templates |
 |---|---|
@@ -242,7 +242,7 @@ _... and 241 more._
 | `ra1_soviets_siegemammothtank_ra120mm2thermobaric` | `^Projectile_Shell_Heavy` ┬╖ `^Projectile_Flame_Heavy` |
 
 
-## W4 ΓÇö two or more `^Effect_*` inherits (51 vs ratchet 51)
+## W4 ΓÇö two or more `^Effect_*` inherits (54 vs ratchet 54)
 
 | weapon | effect templates |
 |---|---|
@@ -269,6 +269,9 @@ _... and 241 more._
 | `NaxiCowDrop` | `^Effect_Demolition_Heavy` ┬╖ `^Effect_Clsn_Medium_RA2` |
 | `NaxiJadgDestroyer` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Concussion_Medium` |
 | `OrionRailgun` | `^Effect_Railgun_Heavy` ┬╖ `^Effect_Explosion_Large_RA2` |
+| `RA160mmE_fire_elite` | `^RA2EliteEffects` ┬╖ `^Effect_Explosion_Large_RA2` |
+| `RA160mmE_rad_elite` | `^Effect_Nuclear_Super` ┬╖ `^RA2EliteEffects` |
+| `RA160mmE_tesla_elite` | `^RA2EliteEffects` ┬╖ `^Effect_Kirov_Tesla_RA2` |
 | `RA2FreedomAK47` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Bullet_Light_RA2` |
 | `RA2GrandCannonWeapon` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Clsn_Medium_RA2` |
 | `RA2MortarBike` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Explosion_Large_RA2` |
@@ -283,12 +286,9 @@ _... and 241 more._
 | `ra120mmThermobaric` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Flame_Heavy` |
 | `ra1_soviets_kotinnucleartank_kotincannonnuclearshell` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Nuclear_Super` |
 | `ra1_soviets_monstertank_120mm_cannon` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Nuclear_Super` |
-| `ra1_soviets_monstertank_120mm_cannon_inferno` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Flame_Heavy` |
-| `ra1_soviets_siegemammothtank_ra120mm2thermobaric` | `^Effect_CannonHE_Heavy` ┬╖ `^Effect_Flame_Heavy` |
-| `ra1_soviets_submarine_torpedo_thermobaric` | `^Effect_Nuclear_Super` ┬╖ `^Effect_MissileAP_Heavy` |
 
 
-_... and 11 more._
+_... and 14 more._
 
 
 ## W5 ΓÇö more than one resolved MAIN warhead (167 vs ratchet 389)
@@ -340,7 +340,7 @@ _... and 11 more._
 _... and 127 more._
 
 
-## W6 ΓÇö effect warheads declared LOCALLY (691 vs ratchet 692)
+## W6 ΓÇö effect warheads declared LOCALLY (690 vs ratchet 692)
 
 | weapon | nodes | first three |
 |---|---|---|
@@ -386,7 +386,7 @@ _... and 127 more._
 | `BigChemSpray` | 1 | `Warhead@3Eff: CreateEffect` |
 
 
-_... and 651 more._
+_... and 650 more._
 
 
-**FAIL ΓÇö W2, W7 rose above baseline.** A weapon was given a second warhead, projectile or effect. The law allows exactly three inherits and one main.
+**FAIL ΓÇö W7 rose above baseline.** A weapon was given a second warhead, projectile or effect. The law allows exactly three inherits and one main.

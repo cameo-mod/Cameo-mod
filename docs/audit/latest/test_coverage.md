@@ -3,8 +3,8 @@
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
 | T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (13 file(s)) | 226 | >= 24 |
-| T2 | `def test_*` in tools/tests (269 file(s)) | 2783 | >= 177 |
-| T3 | modules with no test mentioning them | 285 | <= 224 |
+| T2 | `def test_*` in tools/tests (269 file(s)) | 2784 | >= 177 |
+| T3 | modules with no test mentioning them | 286 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (285)
+## T3 — untested modules (286)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -185,6 +185,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_display_text.py | audit_display_text |
 | python | tools/audit/audit_drain_status.py | audit_drain_status |
 | python | tools/audit/audit_dune_rank_decoration.py | audit_dune_rank_decoration |
+| python | tools/audit/audit_effect_pairings.py | audit_effect_pairings |
 | python | tools/audit/audit_effect_warhead_names.py | audit_effect_warhead_names |
 | python | tools/audit/audit_elite_gating.py | audit_elite_gating |
 | python | tools/audit/audit_empty_warheads.py | audit_empty_warheads |
@@ -308,5 +309,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 285 untested > baseline 224
+- T3: 286 untested > baseline 224
 

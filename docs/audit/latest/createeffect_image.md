@@ -39,10 +39,10 @@
 [VIOLATION] mods\cameo\weapons\redalert2.yaml:3076  RA2CorpseSpawner  Image: ra2corpse
 [VIOLATION] mods\cameo\weapons\redalert2.yaml:3122  RA2FlyingBody  Image: ra2corpse
 [VIOLATION] mods\cameo\weapons\simcity.yaml:253  CasinoCrateSpawner  Image: tspodring
-[VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1760  MutSAPC  Image: tsdig
-[VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1836  NODMutant  Image: tsdig
-[VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1879  FloaterSpawner  Image: tsdig
-[VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1901  TunnelDisappear  Image: tsdig
+[VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1754  MutSAPC  Image: tsdig
+[VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1830  NODMutant  Image: tsdig
+[VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1873  FloaterSpawner  Image: tsdig
+[VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1895  TunnelDisappear  Image: tsdig
 [VIOLATION] mods\cameo\weapons\warcraft2.yaml:432  wc2mageFire  Image: wc2_lightng
 [VIOLATION] mods\cameo\weapons\warcraft2.yaml:604  wc2mageBlizzard_Projectile  Image: wc2_effect_blizzard
 [VIOLATION] mods\cameo\weapons\warcraft2.yaml:723  wc2cannontowerFire  Image: wc2_cannon_impact

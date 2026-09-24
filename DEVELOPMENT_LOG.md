@@ -1,3 +1,54 @@
+## Devin-DAWN (A4) — W9 pack-side + maintainer ruling 1 + re-baselines (2026-09-24)
+
+**Branch:** `devin/dawn/l4-fx` → round-2 PR per
+`REPLY_2026-09-24_claude_reviews_and_rulings.md`.
+
+- **W9 pack-side** (`REQUEST_2026-09-23_ember_to_dawn_w9_ordos.md`):
+  `d2k_sard_crossbow` `Warhead@1Con` converted `GrantExternalCondition/
+  poisoned/750` → `ApplyPhysicalState/Poison/Amount 5000`, Range kept.
+  `grep -c "Condition: poisoned"` → 0 in Ordos weapons.yaml.
+- **Ruling 1 encoded**: new `tools/audit/audit_effect_pairings.py` — a
+  resolved `CreateEffect` with `Explosions` but no `ImpactSounds` is a
+  defect, EXCEPT bullet-puff sprites (`*piff*`, `*poof*` family: piffs,
+  water_piffs, ra2_piffs, d2k_piffs, small_poof, blue_poof — 665 exempt
+  uses, all listed). `d2k_*` visual + `.aud` sound = foreign defect.
+  Wired into `run_all.sh`; ratchet seeded at current debt (silent 396,
+  foreign 9 — fixes distributed by file-set owner; my 4 are SC/Zerg).
+- **W2_BASELINE 177→281** per maintainer order — measurement widening from
+  the R12 `^Compatibility_*`→`^Warhead_*` rename, re-verified by Claude
+  (`ccbfd383c~1`=177, `ccbfd383c`=283, master 281 post-#478). Cites my
+  `FINDING_2026-09-23_dawn_w2w7_bisect.md`; un-renamed debt ≈175.
+- Rebased onto `797fb019f` per coordinator order.
+
+## Devin-DAWN (A4) — W27 batch-1: D2k A/C/H inline effects → families (2026-09-23)
+
+**Branch:** `devin/dawn/l4-fx`. First W27 batch per
+`ORDERS_2026-09-23b_after_cleanup.md` item 3 (move inline `Warhead@Effect*`
+nodes into `^Effect_*`/`^<game>_*` families; superweapons exempt).
+
+- **New file `mods/cameo/weapons/effects_d2k.yaml`** (mounted in `mod.yaml`)
+  per ruling 5a — first `effects_<game>.yaml` in the repo. Five family
+  templates: `^d2k_fremen_s` (@2Eff), `^d2k_phoenix_rocket` (@3Eff),
+  `^d2k_laser_heavy` (Inherits `^Effect_Laser_Heavy` + EXPLLG2.WAV pin),
+  `^d2k_explosive_debris` (@Effect), `^d2k_plasma_explosion` (@3Eff) — each
+  carries the channel's full resolved payload.
+- **14 inline effect nodes stripped** from D2k Atreides/Corrino/Harkonnen
+  `weapons.yaml` (13 weapons). 9 were redundant covers (transitive supply);
+  5 got `Inherits@fx` edges (4 new, 1 swapped `^Effect_Laser_Heavy`→
+  `^d2k_laser_heavy`). Inline-effect count in the 3 files: **0**.
+- **Resolved-identical**: all 25 weapons in the 3 files diff empty vs HEAD.
+- `audit_weapon_shape.py`: effect-kind detection now recognises family
+  derivations (`Inherits: ^Effect_*` inside a pure-effect `^` template).
+  W8 671→637 (ratchet lowered — dozens of `^<game>` shim edges reclassified).
+  W4 51→54 re-baselined: 3 pre-existing dual-effect-edge weapons surfaced
+  (`CabalAscendedRockets`, `RA160mmE_*`) — same class as the W2 rename
+  measurement, not new debt.
+- Guard L1 391→390 / L2 383→382 (ratchet lowered). Empty warheads 0,
+  orphan cancels 0. Remaining FAIL = pre-existing master W2/W7 (Nova lane).
+- Tooling: `w27_pass.py` (C:/tmp/dawn_tools) — strip→classify→report loop;
+  caught a real bug class (`DamagesConcrete`/`LeaveSmudge` are NOT
+  W27-effects; audit counts `Warhead@Effect*` keys + `CreateEffect` only).
+
 ## Devin-DAWN (A4) — W7 pack-side: SonicDebuff → Resonance meter chain (2026-09-23)
 
 **Branch:** `devin/dawn/l4-fx`. Executes Ember's

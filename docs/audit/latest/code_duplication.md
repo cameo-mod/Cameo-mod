@@ -1,6 +1,6 @@
 # audit_code_duplication — copy-paste clone groups
 
-Python files: **722** (min 5 statements), C# files: **364** (min 8 lines)
+Python files: **723** (min 5 statements), C# files: **364** (min 8 lines)
 
 
 ## Files that do not parse (not scanned)

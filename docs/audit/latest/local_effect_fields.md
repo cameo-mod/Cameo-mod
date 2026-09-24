@@ -4,16 +4,12 @@
 # the ratchet counts per maintainer ruling but stay listed below.
 
 Files scanned: 40
-Concrete weapons with local Explosions (L1): 391
-Concrete weapons with local ImpactSounds (L2): 383
-Exempt secondary-channel declarations (not ratcheted): 331
+Concrete weapons with local Explosions (L1): 390
+Concrete weapons with local ImpactSounds (L2): 382
+Exempt secondary-channel declarations (not ratcheted): 328
 
 | file | weapon | warhead | Explosions | ImpactSounds | line | exempt |
 |---|---|---|---|---|---|---|
-| ContentPacks\D2k\Atreides\yaml\weapons.yaml | Fremen_S | 2Eff | YES | YES | 88 | exempt |
-| ContentPacks\D2k\Atreides\yaml\weapons.yaml | PhoenixRocket | 3Eff | YES | YES | 144 | exempt |
-| ContentPacks\D2k\Harkonnen\yaml\weapons.yaml | ExplosiveDebris | Effect | YES | YES | 75 |  |
-| ContentPacks\D2k\Harkonnen\yaml\weapons.yaml | PlasmaExplosion | 3Eff | YES | YES | 176 | exempt |
 | ContentPacks\D2k\Ixian\yaml\weapons.yaml | D2K_155mm2 | Effect | YES | YES | 199 |  |
 | ContentPacks\D2k\Ixian\yaml\weapons.yaml | D2K_StormGun | Effect | YES | YES | 1639 |  |
 | ContentPacks\D2k\Ixian\yaml\weapons.yaml | D2K_StormGun | Effect2 | YES | YES | 1644 | exempt |
@@ -691,27 +687,27 @@ Exempt secondary-channel declarations (not ratcheted): 331
 | weapons\tiberiandawn.yaml | ChemTibAtomic | Effect | YES | YES | 233 |  |
 | weapons\tiberiandawn.yaml | FlametankExplode | Effect | YES | YES | 174 |  |
 | weapons\tiberiandawn.yaml | TDBuildingExplode | Effect | YES | YES | 32 |  |
-| weapons\tiberiansun.yaml | FloaterSpawner | 1 | YES | YES | 1878 | exempt |
-| weapons\tiberiansun.yaml | MutSAPC | Effect | YES | YES | 1759 |  |
-| weapons\tiberiansun.yaml | NODMutant | Effect | YES | YES | 1835 |  |
+| weapons\tiberiansun.yaml | FloaterSpawner | 1 | YES | YES | 1872 | exempt |
+| weapons\tiberiansun.yaml | MutSAPC | Effect | YES | YES | 1753 |  |
+| weapons\tiberiansun.yaml | NODMutant | Effect | YES | YES | 1829 |  |
 | weapons\tiberiansun.yaml | TS120mm_bluenuke | 3Eff | YES | - | 369 | exempt |
 | weapons\tiberiansun.yaml | TS155mm_bluenuke | 3Eff | YES | - | 461 | exempt |
 | weapons\tiberiansun.yaml | TSGrenade | 3Eff | - | YES | 494 | exempt |
-| weapons\tiberiansun.yaml | TSHSeekerBomb | Effect | YES | YES | 1693 |  |
-| weapons\tiberiansun.yaml | TSHellfire | EffectWater | YES | YES | 1186 | exempt |
-| weapons\tiberiansun.yaml | TSLaserObeliskLaserFire | 2Eff | YES | - | 817 | exempt |
-| weapons\tiberiansun.yaml | TSLocustBomb | 2Eff | YES | YES | 1377 | exempt |
-| weapons\tiberiansun.yaml | TSLocustBomb | 3EffWater | YES | YES | 1381 | exempt |
-| weapons\tiberiansun.yaml | TSMissileBomblet | 2Eff | YES | YES | 1621 | exempt |
-| weapons\tiberiansun.yaml | TSMissileBomblet | 3EffWater | YES | YES | 1626 | exempt |
-| weapons\tiberiansun.yaml | TSObeliskLaserFire | 2Eff | YES | - | 782 | exempt |
-| weapons\tiberiansun.yaml | TSPistola | 2Eff | YES | - | 1489 | exempt |
-| weapons\tiberiansun.yaml | TSPistola | 3EffWater | YES | - | 1491 | exempt |
-| weapons\tiberiansun.yaml | TSRedEye2 | 2Eff | - | YES | 1205 | exempt |
-| weapons\tiberiansun.yaml | TSTacticalMissile | 2Eff | YES | YES | 1574 | exempt |
-| weapons\tiberiansun.yaml | TSVeinholeSmoke | Effect | YES | - | 1345 |  |
-| weapons\tiberiansun.yaml | TSVeins | Effect | YES | - | 1323 |  |
-| weapons\tiberiansun.yaml | TunnelDisappear | 1 | YES | YES | 1900 | exempt |
+| weapons\tiberiansun.yaml | TSHSeekerBomb | Effect | YES | YES | 1687 |  |
+| weapons\tiberiansun.yaml | TSHellfire | EffectWater | YES | YES | 1180 | exempt |
+| weapons\tiberiansun.yaml | TSLaserObeliskLaserFire | 2Eff | YES | - | 811 | exempt |
+| weapons\tiberiansun.yaml | TSLocustBomb | 2Eff | YES | YES | 1371 | exempt |
+| weapons\tiberiansun.yaml | TSLocustBomb | 3EffWater | YES | YES | 1375 | exempt |
+| weapons\tiberiansun.yaml | TSMissileBomblet | 2Eff | YES | YES | 1615 | exempt |
+| weapons\tiberiansun.yaml | TSMissileBomblet | 3EffWater | YES | YES | 1620 | exempt |
+| weapons\tiberiansun.yaml | TSObeliskLaserFire | 2Eff | YES | - | 776 | exempt |
+| weapons\tiberiansun.yaml | TSPistola | 2Eff | YES | - | 1483 | exempt |
+| weapons\tiberiansun.yaml | TSPistola | 3EffWater | YES | - | 1485 | exempt |
+| weapons\tiberiansun.yaml | TSRedEye2 | 2Eff | - | YES | 1199 | exempt |
+| weapons\tiberiansun.yaml | TSTacticalMissile | 2Eff | YES | YES | 1568 | exempt |
+| weapons\tiberiansun.yaml | TSVeinholeSmoke | Effect | YES | - | 1339 |  |
+| weapons\tiberiansun.yaml | TSVeins | Effect | YES | - | 1317 |  |
+| weapons\tiberiansun.yaml | TunnelDisappear | 1 | YES | YES | 1894 | exempt |
 | weapons\warcraft2.yaml | SiegeEngineCannon | Effect | YES | YES | 301 |  |
 | weapons\warcraft2.yaml | wc2_tower_arrow | Effect | - | YES | 655 |  |
 | weapons\warcraft2.yaml | wc2arrowFire | Effect | - | YES | 88 |  |
@@ -731,67 +727,67 @@ Exempt secondary-channel declarations (not ratcheted): 331
 | weapons\warcraft2.yaml | wc2submarineFire | 2Eff | YES | YES | 838 | exempt |
 | weapons\warcraft2.yaml | wc2tornadoTest | 2Eff | - | YES | 874 | exempt |
 | weapons\warcraft2.yaml | wc2visualexplode | 2Eff | YES | YES | 921 | exempt |
-| weapons\weapons.yaml | BHBombs | 3Eff | YES | YES | 13000 | exempt |
-| weapons\weapons.yaml | BigChemSpray | 3Eff | YES | YES | 13059 | exempt |
-| weapons\weapons.yaml | BoatMissile | 3Eff | YES | - | 12053 | exempt |
-| weapons\weapons.yaml | BoatMissile | 4EffAir | YES | - | 12055 | exempt |
-| weapons\weapons.yaml | BuildingExplode | Effect | YES | - | 12001 |  |
-| weapons\weapons.yaml | C4 | 2Eff | YES | YES | 12156 | exempt |
-| weapons\weapons.yaml | CosmeticExplodeSmall | Effect | YES | YES | 11995 |  |
-| weapons\weapons.yaml | DRPlasmaTankWeapon | 2Eff | YES | - | 13628 | exempt |
-| weapons\weapons.yaml | Demolish | 2Eff | YES | YES | 12230 | exempt |
-| weapons\weapons.yaml | Fremen_L | 2Eff | YES | - | 13826 | exempt |
-| weapons\weapons.yaml | GLASCUD | 3Eff | YES | - | 13165 | exempt |
-| weapons\weapons.yaml | GLASCUDPOWER | 3Eff | YES | YES | 13189 | exempt |
-| weapons\weapons.yaml | GLASCUDPOWER | 4EffWater | YES | YES | 13192 | exempt |
-| weapons\weapons.yaml | GLASCUDPOWER2 | 3Eff | YES | - | 13208 | exempt |
-| weapons\weapons.yaml | GLASCUDPOWER2 | 4EffWater | YES | - | 13210 | exempt |
-| weapons\weapons.yaml | GLASCUDPOWER3 | 3Eff | YES | - | 13220 | exempt |
-| weapons\weapons.yaml | GLASCUDPOWER3 | 4EffWater | YES | - | 13222 | exempt |
-| weapons\weapons.yaml | GLBarrelExplode | 2Eff | YES | YES | 12564 | exempt |
-| weapons\weapons.yaml | GLBarrelExplode2 | 2Eff | YES | YES | 12583 | exempt |
-| weapons\weapons.yaml | GLDemolitionExplode | 2Eff | YES | YES | 12604 | exempt |
-| weapons\weapons.yaml | GLRebelToxin | 3Eff | YES | - | 13732 | exempt |
-| weapons\weapons.yaml | GLToxinBomb | 3Eff | YES | - | 13385 | exempt |
-| weapons\weapons.yaml | GLToxinBomb | 4EffWater | YES | - | 13387 | exempt |
-| weapons\weapons.yaml | GLToxinBombBlue | 3Eff | YES | - | 13396 | exempt |
-| weapons\weapons.yaml | GLToxinBombBlue | 4EffWater | YES | - | 13398 | exempt |
-| weapons\weapons.yaml | GLToxinBombPurple | 3Eff | YES | - | 13406 | exempt |
-| weapons\weapons.yaml | GLToxinBombPurple | 4EffWater | YES | - | 13408 | exempt |
-| weapons\weapons.yaml | GLToxinExplode | 2Eff | YES | YES | 13349 | exempt |
-| weapons\weapons.yaml | GLToxinExplodeBlue | 2Eff | YES | YES | 13361 | exempt |
-| weapons\weapons.yaml | GLToxinExplodeClust1 | 2Eff | YES | - | 13284 | exempt |
-| weapons\weapons.yaml | GLToxinExplodeClust2 | 2Eff | YES | - | 13294 | exempt |
-| weapons\weapons.yaml | GLToxinExplodeClust3 | 2Eff | YES | - | 13304 | exempt |
-| weapons\weapons.yaml | GiantArtilleryTurret | 3Eff | YES | YES | 12859 | exempt |
-| weapons\weapons.yaml | HeliCrash | Effect | YES | YES | 11922 |  |
-| weapons\weapons.yaml | HeliExplode | Effect | YES | YES | 11936 |  |
-| weapons\weapons.yaml | HeliExplode | EffectAir | YES | YES | 11940 | exempt |
-| weapons\weapons.yaml | IonCannon | Effect | - | YES | 12462 |  |
-| weapons\weapons.yaml | LargeHeliCrash | Effect | YES | YES | 11929 |  |
-| weapons\weapons.yaml | LargeHeliExplode | Effect | YES | YES | 11948 |  |
-| weapons\weapons.yaml | LargeHeliExplode | EffectAir | YES | YES | 11952 | exempt |
-| weapons\weapons.yaml | Napalm_Crate | 2Eff | YES | YES | 12018 | exempt |
-| weapons\weapons.yaml | Patriot | 4EffAir | YES | - | 12077 | exempt |
-| weapons\weapons.yaml | PlasmaPuff | Effect | YES | YES | 13500 |  |
-| weapons\weapons.yaml | RA2IMP | Effect | YES | YES | 13472 |  |
-| weapons\weapons.yaml | RockDebris | Effect | YES | - | 11884 |  |
-| weapons\weapons.yaml | RockDebris2 | Effect | YES | - | 11897 |  |
-| weapons\weapons.yaml | RockExplode | Effect | - | YES | 11854 |  |
-| weapons\weapons.yaml | RockExplode | Effect2 | YES | - | 11850 | exempt |
-| weapons\weapons.yaml | SWLaser | 2Eff | YES | - | 13638 | exempt |
-| weapons\weapons.yaml | SmallHeliCrash | Effect | YES | YES | 11915 |  |
-| weapons\weapons.yaml | SpiceExplosion | 3Eff | YES | - | 13900 | exempt |
-| weapons\weapons.yaml | Spit | 3Eff | YES | YES | 13102 | exempt |
-| weapons\weapons.yaml | TSPulseCannon_EMP | 3Eff | YES | YES | 12661 | exempt |
-| weapons\weapons.yaml | UnitExplode | Effect | - | YES | 11960 |  |
-| weapons\weapons.yaml | UnitExplodeBig | Effect | YES | YES | 11978 |  |
-| weapons\weapons.yaml | UnitExplodeHarvEmpty | Effect | YES | YES | 11990 |  |
-| weapons\weapons.yaml | UnitExplodeMech | Effect | YES | YES | 11984 |  |
-| weapons\weapons.yaml | UnitExplodeShip | Effect | YES | YES | 11965 |  |
-| weapons\weapons.yaml | UnitExplodeSmall | Effect | YES | YES | 11972 |  |
-| weapons\weapons.yaml | VolcanicBasaltExplode | Effect | YES | YES | 11859 |  |
-| weapons\weapons.yaml | bowFire | 2Eff | - | YES | 13561 | exempt |
-| weapons\weapons.yaml | bowFire_AA | 2Eff | - | YES | 13536 | exempt |
+| weapons\weapons.yaml | BHBombs | 3Eff | YES | YES | 12988 | exempt |
+| weapons\weapons.yaml | BigChemSpray | 3Eff | YES | YES | 13047 | exempt |
+| weapons\weapons.yaml | BoatMissile | 3Eff | YES | - | 12041 | exempt |
+| weapons\weapons.yaml | BoatMissile | 4EffAir | YES | - | 12043 | exempt |
+| weapons\weapons.yaml | BuildingExplode | Effect | YES | - | 11989 |  |
+| weapons\weapons.yaml | C4 | 2Eff | YES | YES | 12144 | exempt |
+| weapons\weapons.yaml | CosmeticExplodeSmall | Effect | YES | YES | 11983 |  |
+| weapons\weapons.yaml | DRPlasmaTankWeapon | 2Eff | YES | - | 13616 | exempt |
+| weapons\weapons.yaml | Demolish | 2Eff | YES | YES | 12218 | exempt |
+| weapons\weapons.yaml | Fremen_L | 2Eff | YES | - | 13814 | exempt |
+| weapons\weapons.yaml | GLASCUD | 3Eff | YES | - | 13153 | exempt |
+| weapons\weapons.yaml | GLASCUDPOWER | 3Eff | YES | YES | 13177 | exempt |
+| weapons\weapons.yaml | GLASCUDPOWER | 4EffWater | YES | YES | 13180 | exempt |
+| weapons\weapons.yaml | GLASCUDPOWER2 | 3Eff | YES | - | 13196 | exempt |
+| weapons\weapons.yaml | GLASCUDPOWER2 | 4EffWater | YES | - | 13198 | exempt |
+| weapons\weapons.yaml | GLASCUDPOWER3 | 3Eff | YES | - | 13208 | exempt |
+| weapons\weapons.yaml | GLASCUDPOWER3 | 4EffWater | YES | - | 13210 | exempt |
+| weapons\weapons.yaml | GLBarrelExplode | 2Eff | YES | YES | 12552 | exempt |
+| weapons\weapons.yaml | GLBarrelExplode2 | 2Eff | YES | YES | 12571 | exempt |
+| weapons\weapons.yaml | GLDemolitionExplode | 2Eff | YES | YES | 12592 | exempt |
+| weapons\weapons.yaml | GLRebelToxin | 3Eff | YES | - | 13720 | exempt |
+| weapons\weapons.yaml | GLToxinBomb | 3Eff | YES | - | 13373 | exempt |
+| weapons\weapons.yaml | GLToxinBomb | 4EffWater | YES | - | 13375 | exempt |
+| weapons\weapons.yaml | GLToxinBombBlue | 3Eff | YES | - | 13384 | exempt |
+| weapons\weapons.yaml | GLToxinBombBlue | 4EffWater | YES | - | 13386 | exempt |
+| weapons\weapons.yaml | GLToxinBombPurple | 3Eff | YES | - | 13394 | exempt |
+| weapons\weapons.yaml | GLToxinBombPurple | 4EffWater | YES | - | 13396 | exempt |
+| weapons\weapons.yaml | GLToxinExplode | 2Eff | YES | YES | 13337 | exempt |
+| weapons\weapons.yaml | GLToxinExplodeBlue | 2Eff | YES | YES | 13349 | exempt |
+| weapons\weapons.yaml | GLToxinExplodeClust1 | 2Eff | YES | - | 13272 | exempt |
+| weapons\weapons.yaml | GLToxinExplodeClust2 | 2Eff | YES | - | 13282 | exempt |
+| weapons\weapons.yaml | GLToxinExplodeClust3 | 2Eff | YES | - | 13292 | exempt |
+| weapons\weapons.yaml | GiantArtilleryTurret | 3Eff | YES | YES | 12847 | exempt |
+| weapons\weapons.yaml | HeliCrash | Effect | YES | YES | 11910 |  |
+| weapons\weapons.yaml | HeliExplode | Effect | YES | YES | 11924 |  |
+| weapons\weapons.yaml | HeliExplode | EffectAir | YES | YES | 11928 | exempt |
+| weapons\weapons.yaml | IonCannon | Effect | - | YES | 12450 |  |
+| weapons\weapons.yaml | LargeHeliCrash | Effect | YES | YES | 11917 |  |
+| weapons\weapons.yaml | LargeHeliExplode | Effect | YES | YES | 11936 |  |
+| weapons\weapons.yaml | LargeHeliExplode | EffectAir | YES | YES | 11940 | exempt |
+| weapons\weapons.yaml | Napalm_Crate | 2Eff | YES | YES | 12006 | exempt |
+| weapons\weapons.yaml | Patriot | 4EffAir | YES | - | 12065 | exempt |
+| weapons\weapons.yaml | PlasmaPuff | Effect | YES | YES | 13488 |  |
+| weapons\weapons.yaml | RA2IMP | Effect | YES | YES | 13460 |  |
+| weapons\weapons.yaml | RockDebris | Effect | YES | - | 11872 |  |
+| weapons\weapons.yaml | RockDebris2 | Effect | YES | - | 11885 |  |
+| weapons\weapons.yaml | RockExplode | Effect | - | YES | 11842 |  |
+| weapons\weapons.yaml | RockExplode | Effect2 | YES | - | 11838 | exempt |
+| weapons\weapons.yaml | SWLaser | 2Eff | YES | - | 13626 | exempt |
+| weapons\weapons.yaml | SmallHeliCrash | Effect | YES | YES | 11903 |  |
+| weapons\weapons.yaml | SpiceExplosion | 3Eff | YES | - | 13888 | exempt |
+| weapons\weapons.yaml | Spit | 3Eff | YES | YES | 13090 | exempt |
+| weapons\weapons.yaml | TSPulseCannon_EMP | 3Eff | YES | YES | 12649 | exempt |
+| weapons\weapons.yaml | UnitExplode | Effect | - | YES | 11948 |  |
+| weapons\weapons.yaml | UnitExplodeBig | Effect | YES | YES | 11966 |  |
+| weapons\weapons.yaml | UnitExplodeHarvEmpty | Effect | YES | YES | 11978 |  |
+| weapons\weapons.yaml | UnitExplodeMech | Effect | YES | YES | 11972 |  |
+| weapons\weapons.yaml | UnitExplodeShip | Effect | YES | YES | 11953 |  |
+| weapons\weapons.yaml | UnitExplodeSmall | Effect | YES | YES | 11960 |  |
+| weapons\weapons.yaml | VolcanicBasaltExplode | Effect | YES | YES | 11847 |  |
+| weapons\weapons.yaml | bowFire | 2Eff | - | YES | 13549 | exempt |
+| weapons\weapons.yaml | bowFire_AA | 2Eff | - | YES | 13524 | exempt |
 
-PASS: L1 391 <= 391, L2 383 <= 383
+PASS: L1 390 <= 390, L2 382 <= 382

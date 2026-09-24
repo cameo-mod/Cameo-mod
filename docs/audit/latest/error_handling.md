@@ -1,12 +1,12 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **722**
+Files scanned: **723**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
 | E1 | bare except / except BaseException | 5 | 2 |
 | E2 | handler discards the error | 122 | 30 |
-| E3 | open() without encoding= | 154 | 90 |
+| E3 | open() without encoding= | 155 | 90 |
 | E4 | subprocess call without check= | 36 | 9 |
 
 
@@ -156,11 +156,12 @@ Files scanned: **722**
 | tools/tilesets/generate_volcanic_tileset.py | 814 | handler body discards the error |
 
 
-## E3 — 154 finding(s)
+## E3 — 155 finding(s)
 
 | file | line | detail |
 |---|---|---|
 | tools/art/generate_chrome_scales.py | 149 | `Image.open()` without encoding= |
+| tools/audit/audit_effect_pairings.py | 112 | `args.baseline.read_text()` without encoding= |
 | tools/audit/collapse_dead_warhead_inherits.py | 43 | `open()` without encoding= |
 | tools/audit/collapse_dead_warhead_inherits.py | 80 | `open()` without encoding= |
 | tools/audit/infantry_artillery_pressure.py | 33 | `path.open()` without encoding= |
@@ -362,7 +363,7 @@ Files scanned: **722**
 
 - E1: 5 > baseline 2
 - E2: 122 > baseline 30
-- E3: 154 > baseline 90
+- E3: 155 > baseline 90
 - E4: 36 > baseline 9
 - 1 file(s) do not parse
 

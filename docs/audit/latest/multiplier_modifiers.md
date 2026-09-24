@@ -1,6 +1,6 @@
 # audit_multiplier_modifiers — *Multiplier Modifier integer percent check
 
-*Multiplier trait families seen: 1760
+*Multiplier trait families seen: 1758
 
 | trait family |
 |---|
@@ -154,7 +154,6 @@
 | `DamageMultiplier@Runes` |
 | `DamageMultiplier@SClass` |
 | `DamageMultiplier@SIEGEMAMMOTHPARITY` |
-| `DamageMultiplier@SONICDEBUFF` |
 | `DamageMultiplier@Salvaged1` |
 | `DamageMultiplier@ScoutInfantryBuff` |
 | `DamageMultiplier@Secondary` |
@@ -1574,7 +1573,6 @@
 | `SpeedMultiplier@RobotEnergizable3` |
 | `SpeedMultiplier@RobotEnergizable4` |
 | `SpeedMultiplier@RobotEnergizable5` |
-| `SpeedMultiplier@SONICDEBUFF` |
 | `SpeedMultiplier@SQUID` |
 | `SpeedMultiplier@SWTargetableWalker` |
 | `SpeedMultiplier@Salvaged1` |

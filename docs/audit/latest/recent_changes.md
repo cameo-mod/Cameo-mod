@@ -1,6 +1,6 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **191**, files touched: **1999**
+Commits reviewed: **198**, files touched: **2008**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
@@ -62,21 +62,21 @@ _none found_
 
 | file | commits touching it |
 |---|---|
+| docs/HANDOFF.md | 44 |
 | docs/DESIGN.md | 43 |
-| docs/HANDOFF.md | 42 |
-| docs/balance/derived/redalert_japan.json | 19 |
-| docs/balance/derived/tiberiandawn_nod.json | 19 |
-| DEVELOPMENT_LOG.md | 18 |
-| docs/balance/derived/redalert2_allies.json | 18 |
-| docs/balance/derived/redalert_allies.json | 18 |
-| docs/balance/derived/redalert_soviets.json | 18 |
-| docs/balance/derived/shared_redalert.json | 18 |
-| docs/balance/derived/starcraft_terran.json | 18 |
-| docs/balance/derived/tiberiandawn_gdi.json | 18 |
-| docs/balance/derived/tiberiansun_cabal.json | 18 |
-| docs/balance/derived/tiberiansun_forgotten.json | 18 |
-| docs/balance/derived/tiberiansun_gdi.json | 18 |
-| docs/balance/derived/d2k_atreides.json | 17 |
+| DEVELOPMENT_LOG.md | 21 |
+| docs/balance/derived/redalert_japan.json | 21 |
+| docs/balance/derived/tiberiandawn_nod.json | 21 |
+| docs/balance/derived/redalert2_allies.json | 20 |
+| docs/balance/derived/redalert_allies.json | 20 |
+| docs/balance/derived/redalert_soviets.json | 20 |
+| docs/balance/derived/shared_redalert.json | 20 |
+| docs/balance/derived/starcraft_terran.json | 20 |
+| docs/balance/derived/tiberiandawn_gdi.json | 20 |
+| docs/balance/derived/tiberiansun_cabal.json | 20 |
+| docs/balance/derived/tiberiansun_forgotten.json | 20 |
+| docs/balance/derived/tiberiansun_gdi.json | 20 |
+| docs/balance/derived/d2k_atreides.json | 19 |
 
 
 ## Reviewer checklist (not machine-checkable)

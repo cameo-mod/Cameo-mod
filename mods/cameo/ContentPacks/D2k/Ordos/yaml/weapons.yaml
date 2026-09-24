@@ -3743,9 +3743,9 @@ d2k_sard_crossbow:
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: SandCrater, RockCrater
 		InvalidTargets: Vehicle, Structure
-	Warhead@1Con: GrantExternalCondition
-		Condition: poisoned
-		Duration: 750
+	Warhead@1Con: ApplyPhysicalState
+		PhysicalStateName: Poison
+		Amount: 5000
 		Range: 60
 ###################################################
 #       OG DUNE 2000
