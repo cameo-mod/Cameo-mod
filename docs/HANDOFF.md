@@ -2071,6 +2071,14 @@ mandatory.
 **The rule it earns: a rename that makes an id LONGER is a regression until proven
 otherwise.** A batch that raises N4 has failed, whatever its compliance percentage says.
 
+✅ **2026-09-24 residue cleanup (EMBER):** the actor half was long since corrected —
+ids are 106/106 compliant — but the bad rename's damage survived in sequence names
+and filenames (`ra1_soviets_sovietbarracks` seqs, `actordogname` files,
+`upgrade_*upgrade`/`promotion_unlock*` doubled stems, `sovietX_ra1_allies_alliedY`
+compounds). Cleared by `tools/rename/rename_map_ra1_soviets_n134.yaml` — 14 sequence
+ids + 83 asset files, zero dangling refs, faction N1/N3/N4 all to 0. The stamped
+`rename_map_ra1_soviets.yaml` stays DO-NOT-APPLY.
+
 ## ⭐ NEW WORK SPECIFIED 2026-09-07 — two maintainer orders, neither built
 
 Both are written up in full, with the state verified rather than assumed. Neither is a

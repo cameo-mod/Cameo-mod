@@ -2284,3 +2284,21 @@ step (`PercentageStep: -1`), but `ChangesHealthProportionalToPhysicalState` dama
 `PercentageStep: -1, Delay: 20` exactly at full dose, and scales down with the meter
 (dose-response). `DamageAtMinimum: 0` keeps a zero dose inert; `DamageThreshold: 0`
 applies whenever the meter is above zero.
+
+## The naming audit sees file stems only — pair it with a raw disk scan (2026-09-24)
+
+`audit_naming_damage.py` scans `mods/cameo/bits/**` stems through `SPRITE_EXT` and a
+known-actor-id regex. Two blind spots surfaced in the ra1_soviets cleanup: **`.tem`
+theater files are outside `SPRITE_EXT`**, and **doubled stems built from non-actor ids**
+(`ra1_soviets_promotion_unlockX`, `ra1_soviets_upgrade_X`) match no actor id so N1
+cannot see them. A `bits/` rglob found 15 more damaged files than the audit's 68 —
+always run the raw scan before writing a map. Sequence-name damage is likewise
+invisible: `ra1_soviets_sovietbarracks` as an `Image:`/`Inherits:` id flags nothing,
+but is the same redundant-word class. Sweep it in the map's `actors:` section — the
+replacer is boundary-safe and catches every reference.
+
+`tools/rename/rename_map_ra1_soviets.yaml` remains stamped STALE — DO NOT APPLY.
+`gen_rename_maps.py` cannot emit this map either: it proposes §9.1-grammar renames,
+while actor ids were already 106/106 compliant (`ad7c5e232` + revert). The applied
+artifact is the hand-derived `rename_map_ra1_soviets_n134.yaml` — 14 sequence ids +
+83 files, zero dangling refs, N1 16→0 / N3 4→0 / N4 48→0 for the faction.
