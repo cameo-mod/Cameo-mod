@@ -82,7 +82,9 @@ NaxBrummbarArty:
 			Helicopter: 11
 			Spaceship: 10
 NaxBrummbarArty_elite:
-	Inherits: NaxBrummbarArty
+	Inherits@w70: ^Warhead_CannonHE_Heavy
+	Inherits@w71: ^Projectile_Shell_Heavy
+	Inherits@w72: ^Effect_CannonHE_Heavy
 	Range: 15000
 	Burst: 2
 	BurstDelays: 3
@@ -150,11 +152,26 @@ NaxBrummbarArty_elite:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+	ReloadDelay: 140
+	Projectile: Bullet
+		LaunchAngle: 140
+		Inaccuracy: 1400
+		Speed: 280
+		ContrailLength: 28
+		ContrailStartWidth: 70
+		ContrailEndWidth: 14
+		ContrailStartColor: AAAA4488
+		ContrailEndColor: 22222222
+		TrailImage: black_smokey
+	MinRange: 2800
+	Report: vdesatta.wav, vdesattb.wav
+	-Warhead@CannonHE_Heavy:
 
 NaxiWW2KübelwagenMachinegun:
 	Inherits@xNaxiWW2KübelwagenMachinegun0: ^Warhead_Bullet_Medium
 	Inherits@xNaxiWW2KübelwagenMachinegun1: ^Projectile_Bullet_Medium
 	Inherits@xNaxiWW2KübelwagenMachinegun2: ^Effect_Bullet_Medium_RA2
+	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
 	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
 	ReloadDelay: 80
 	Burst: 6
@@ -258,7 +275,9 @@ NaxiWW2Machinegun:
 			Spaceship: 6
 			Superheavy: 5
 NaxiWW2Machinegun_AA:
-	Inherits: NaxiWW2Machinegun
+	Inherits@w70: ^Warhead_Bullet_Medium
+	Inherits@w71: ^Projectile_Bullet_Medium
+	Inherits@w72: ^Effect_Bullet_Medium_RA2
 	Range: 8355
 	ValidTargets: Air
 	Warhead@Bullet_Medium:
@@ -318,8 +337,22 @@ NaxiWW2Machinegun_AA:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+	ReloadDelay: 60
+	Projectile: Bullet
+		Inaccuracy: 400
+		ContrailStartColor: FF9933
+		ContrailEndColor: FFFFFF
+		ContrailStartWidth: 15
+		ContrailEndColorUsePlayerColor: true
+		Speed: 10000
+		Width: 100
+	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
+	Burst: 6
+	BurstDelays: 4
 NaxiWW2MachinegunSmall:
-	Inherits: NaxiWW2Machinegun
+	Inherits@w70: ^Warhead_Bullet_Medium
+	Inherits@w71: ^Projectile_Bullet_Medium
+	Inherits@w72: ^Effect_Bullet_Medium_RA2
 	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
 	ReloadDelay: 60
 	Burst: 3
@@ -381,8 +414,21 @@ NaxiWW2MachinegunSmall:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+	ValidTargets: Ground, Water
+	Range: 5570
+	Projectile: Bullet
+		Inaccuracy: 400
+		ContrailStartColor: FF9933
+		ContrailEndColor: FFFFFF
+		ContrailStartWidth: 15
+		ContrailEndColorUsePlayerColor: true
+		Speed: 10000
+		Width: 100
+	BurstDelays: 4
 NaxiWW2MachinegunSmall_AA:
-	Inherits: NaxiWW2MachinegunSmall
+	Inherits@w70: ^Warhead_Bullet_Medium
+	Inherits@w71: ^Projectile_Bullet_Medium
+	Inherits@w72: ^Effect_Bullet_Medium_RA2
 	Range: 8355
 	ValidTargets: Air
 	Warhead@Bullet_Medium:
@@ -442,8 +488,22 @@ NaxiWW2MachinegunSmall_AA:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+	ReloadDelay: 60
+	Projectile: Bullet
+		Inaccuracy: 400
+		ContrailStartColor: FF9933
+		ContrailEndColor: FFFFFF
+		ContrailStartWidth: 15
+		ContrailEndColorUsePlayerColor: true
+		Speed: 10000
+		Width: 100
+	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
+	Burst: 3
+	BurstDelays: 4
 NaxiWW2MachinegunTop:
-	Inherits: NaxiWW2Machinegun
+	Inherits@w70: ^Warhead_Bullet_Medium
+	Inherits@w71: ^Projectile_Bullet_Medium
+	Inherits@w72: ^Effect_Bullet_Medium_RA2
 	Range: 7555
 	Report: nax_mgun3.wav
 	Warhead@Bullet_Medium_Flat: AreaDamage
@@ -496,9 +556,28 @@ NaxiWW2MachinegunTop:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+	ValidTargets: Ground, Water
+	ReloadDelay: 60
+	Projectile: Bullet
+		Inaccuracy: 400
+		ContrailStartColor: FF9933
+		ContrailEndColor: FFFFFF
+		ContrailStartWidth: 15
+		ContrailEndColorUsePlayerColor: true
+		Speed: 10000
+		Width: 100
+	Burst: 6
+	BurstDelays: 4
+	Warhead@Bullet_Medium_Flat: AreaDamage
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 9988
+	-Warhead@Bullet_Medium:
 
 NaxiWW2MachinegunTop_AA:
-	Inherits: NaxiWW2Machinegun
+	Inherits@w70: ^Warhead_Bullet_Medium
+	Inherits@w71: ^Projectile_Bullet_Medium
+	Inherits@w72: ^Effect_Bullet_Medium_RA2
 	Range: 7555
 	Report: nax_mgun3.wav
 	ValidTargets: Air
@@ -559,8 +638,21 @@ NaxiWW2MachinegunTop_AA:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+	ReloadDelay: 60
+	Projectile: Bullet
+		Inaccuracy: 400
+		ContrailStartColor: FF9933
+		ContrailEndColor: FFFFFF
+		ContrailStartWidth: 15
+		ContrailEndColorUsePlayerColor: true
+		Speed: 10000
+		Width: 100
+	Burst: 6
+	BurstDelays: 4
 NaxiWW2Machinegunner:
-	Inherits: NaxiWW2Machinegun
+	Inherits@w70: ^Warhead_Bullet_Medium
+	Inherits@w71: ^Projectile_Bullet_Medium
+	Inherits@w72: ^Effect_Bullet_Medium_RA2
 	Range: 8970
 	ReloadDelay: 90
 	Burst: 10
@@ -616,9 +708,25 @@ NaxiWW2Machinegunner:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+	ValidTargets: Ground, Water
+	Projectile: Bullet
+		Inaccuracy: 400
+		ContrailStartColor: FF9933
+		ContrailEndColor: FFFFFF
+		ContrailStartWidth: 15
+		ContrailEndColorUsePlayerColor: true
+		Speed: 10000
+		Width: 100
+	Warhead@Bullet_Medium_Flat: AreaDamage
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 9988
+	-Warhead@Bullet_Medium:
 
 NaxiWW2Machinegunner_elite:
-	Inherits: NaxiWW2Machinegunner
+	Inherits@w70: ^Warhead_Bullet_Medium
+	Inherits@w71: ^Projectile_Bullet_Medium
+	Inherits@w72: ^Effect_Bullet_Medium_RA2
 	Range: 9970
 	Report: nax_mgun3.wav
 	Burst: 20
@@ -676,6 +784,19 @@ NaxiWW2Machinegunner_elite:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+	ValidTargets: Ground, Water
+	ReloadDelay: 90
+	Projectile: Bullet
+		Inaccuracy: 400
+		ContrailStartWidth: 15
+		ContrailEndColorUsePlayerColor: true
+		Speed: 10000
+		Width: 100
+	Warhead@Bullet_Medium_Flat: AreaDamage
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 9988
+	-Warhead@Bullet_Medium:
 
 NaxiWW2MachinegunnerTargeting:
 	Range: 8970
@@ -685,13 +806,25 @@ NaxiWW2MachinegunnerTargeting:
 	Warhead@1Dam: TargetDamage
 
 NaxiRifle_elite:
-	Inherits: NaxiRifle
+	Inherits@w70: ^Warhead_Bullet_Light
+	Inherits@w71: ^Projectile_Bullet_Light
+	Inherits@w72: ^Effect_Bullet_Light
 	Range: 6621
 	Burst: 2
 	BurstDelays: 3
 	Report: nax_rifle4.wav , nax_rifle5.wav
 	Projectile: Bullet
 		ContrailStartColor: FFAA55
+	ReloadDelay: 75
+	Warhead@Bullet_Light: AreaDamage
+		Damage: 6000
+	Projectile: Bullet
+		ContrailEndColor: FFFFFF
+		ContrailLength: 20
+		ContrailEndColorUsePlayerColor: true
+		ContrailWidth: 200
+		Speed: 10000
+		Width: 50
 
 naxis_naxiriflesoldier_rifle:
 	Inherits@wh: ^Warhead_Bullet_Light
@@ -714,7 +847,9 @@ naxis_naxiriflesoldier_rifle:
 		InvalidTargets: Air
 		Damage: 4000
 naxis_naxiriflesoldier_rifle_elite:
-	Inherits: naxis_naxiriflesoldier_rifle
+	Inherits@w70: ^Warhead_Bullet_Light
+	Inherits@w71: ^Projectile_Bullet_Light
+	Inherits@w72: ^Effect_Bullet_Light
 	Range: 6500
 	Burst: 2
 	BurstDelays: 3
@@ -726,6 +861,17 @@ naxis_naxiriflesoldier_rifle_elite:
 		InvalidTargets: Air
 	Warhead@ShieldHit:
 		InvalidTargets: Air
+	ValidTargets: Ground, Water
+	ReloadDelay: 50
+	Warhead@Bullet_Light: AreaDamage
+		Damage: 4000
+	Projectile: Bullet
+		ContrailEndColor: FFFFFF
+		ContrailLength: 20
+		ContrailEndColorUsePlayerColor: true
+		ContrailWidth: 200
+		Speed: 10000
+		Width: 50
 naxis_naxiriflerecruit_rifle:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
@@ -739,7 +885,9 @@ naxis_naxiriflerecruit_rifle:
 		PercentageScale: 5000
 		Damage: 8000
 naxis_naxiriflerecruit_rifle_elite:
-	Inherits: naxis_naxiriflerecruit_rifle
+	Inherits@w70: ^Warhead_Bullet_Light
+	Inherits@w71: ^Projectile_Bullet_Light
+	Inherits@w72: ^Effect_Bullet_Light
 	Range: 6500
 	Burst: 2
 	BurstDelays: 3
@@ -748,6 +896,12 @@ naxis_naxiriflerecruit_rifle_elite:
 		InvalidTargets: Air
 	Warhead@ShieldHit:
 		InvalidTargets: Air
+	ValidTargets: Ground, Water
+	ReloadDelay: 100
+	Warhead@Bullet_Light: AreaDamage
+		Damage: 8000
+		PercentageScale: 5000
+	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
 NaxiRifleT:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
@@ -783,7 +937,9 @@ NaxiRifleCons:
 	Warhead@Bullet_Light:
 		Damage: 4000
 NaxiRifleCons_elite:
-	Inherits: NaxiRifleCons
+	Inherits@w70: ^Warhead_Bullet_Light
+	Inherits@w71: ^Projectile_Bullet_Light
+	Inherits@w72: ^Effect_Bullet_Light
 	Range: 6501
 	Burst: 2
 	BurstDelays: 3
@@ -791,6 +947,9 @@ NaxiRifleCons_elite:
 	Projectile: Bullet
 		Speed: 2000
 		ContrailStartColor: FFAA55
+	ReloadDelay: 100
+	Warhead@Bullet_Light: AreaDamage
+		Damage: 4000
 
 LunarNaxiDroneLaser:
 	Inherits@wh: ^Warhead_Laser_Heavy
@@ -1163,7 +1322,8 @@ LunarNaxiDroneMissile:
 		Falloff: 100, 0
 		PercentageSpread: 50
 NaxiMP40_elite:
-	Inherits: NaxiMP40
+	Inherits@w70: ^Warhead_Bullet_Medium
+	Inherits@w71: ^Projectile_Bullet_Medium
 	Inherits@fx_cover: ^Effect_AlliedTigerCannon
 	Range: 5000
 	Burst: 20
@@ -1322,23 +1482,84 @@ NaxiMP40_elite:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
+	ValidTargets: Ground, Water
+	ReloadDelay: 75
+	Projectile: Bullet
+		Inaccuracy: 600
+		ContrailStartWidth: 15
+		ContrailEndColorUsePlayerColor: true
+		Speed: 10000
+		Width: 100
+	Report: nax_mp40.wav
+	Warhead@Concussion_Light: AreaDamage
+		Damage: 2000
+	Warhead@CannonHE_Heavy: AreaDamage
+		Damage: 2000
 NaxiFlamerTroop:
-	Inherits: AsianFlamerTurret
+	Inherits@w70: ^Warhead_Flame_Light
+	Inherits@w71: ^Projectile_Flame_Light
+	Inherits@w72: ^Effect_Init_Fire_RA2
 	Range: 4830
 	ReloadDelay: 60
 	Burst: 3
 	BurstDelays: 3
+	Warhead@Flame_Light: AreaDamage
+		Damage: 4000
+	Projectile: Bullet
+		Speed: 180, 240
+		LaunchAngle: 10, 20
+		Image: tsflameall
+		Palette: tseffect
+	StartBurstReport: flamer2.aud
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: AsianFlameFragment
+		Amount: 2
+		AimChance: 0
+		AimTargetStances: Enemy, Neutral
 
 NaxiFlamerTroop_elite:
-	Inherits: NaxiFlamerTroop
+	Inherits@w70: ^Warhead_Flame_Light
+	Inherits@w71: ^Projectile_Flame_Light
+	Inherits@w72: ^Effect_Init_Fire_RA2
 	Range: 5830
 	Burst: 6
 	BurstDelays: 3
+	ReloadDelay: 60
+	Warhead@Flame_Light: AreaDamage
+		Damage: 4000
+	Projectile: Bullet
+		Speed: 180, 240
+		LaunchAngle: 10, 20
+		Image: tsflameall
+		Palette: tseffect
+	StartBurstReport: flamer2.aud
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: AsianFlameFragment
+		Amount: 2
+		AimChance: 0
+		AimTargetStances: Enemy, Neutral
 
 NaxiFlamerTroopExplode:
-	Inherits: AsianFlamerTurret
+	Inherits@w70: ^Warhead_Flame_Light
+	Inherits@w71: ^Projectile_Flame_Light
+	Inherits@w72: ^Effect_Init_Fire_RA2
 	Warhead@Flame_Light:
 		Damage: 6000
+	ReloadDelay: 30
+	Range: 6666
+	Projectile: Bullet
+		Speed: 180, 240
+		LaunchAngle: 10, 20
+		Image: tsflameall
+		Palette: tseffect
+	Burst: 6
+	BurstDelays: 3
+	StartBurstReport: flamer2.aud
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: AsianFlameFragment
+		Amount: 2
+		AimChance: 0
+		AimTargetStances: Enemy, Neutral
 NaxiSniper:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light
@@ -1360,11 +1581,26 @@ NaxiSniper:
 		Falloff: 100, 0
 
 NaxiSniper_elite:
-	Inherits: NaxiSniper
+	Inherits@w70: ^Warhead_Sniper_Light
+	Inherits@w71: ^Projectile_Sniper_Light
+	Inherits@w72: ^Effect_Sniper_Light
 	Report: ramgun2.aud
 	Range: 8888
 	Burst: 2
 	BurstDelays: 3
+	Warhead@Sniper_Light: AreaDamage
+		Spread: 1
+		Damage: 24000
+		Falloff: 100, 0
+	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
+		Spread: 1
+		Damage: 12
+		Falloff: 100, 0
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
+		Spread: 1
+		Damage: 24000
+		Falloff: 100, 0
+	ReloadDelay: 120
 
 NaxiShrek:
 	Inherits@xNaxiShrek0: ^Warhead_MissileAP_Medium
@@ -1651,7 +1887,9 @@ NaxiShrek:
 		Spread: 150
 		Falloff: 100, 45, 15, 0
 NaxiShrek_elite:
-	Inherits: NaxiShrek
+	Inherits@w70: ^Warhead_MissileAP_Medium
+	Inherits@w71: ^Projectile_Missile_Medium
+	Inherits@w72: ^Effect_Apoc_AP_RA2
 	Report: bazook1.aud
 	Range: 7805
 	Burst: 2
@@ -1735,6 +1973,167 @@ NaxiShrek_elite:
 	Warhead@MissileHE_Medium:
 		Spread: 150
 		Falloff: 100, 45, 15, 0
+	ValidTargets: Ground, Water
+	ReloadDelay: 124
+	Projectile: Missile
+		ContrailLength: 33
+		MinimumLaunchSpeed: 125
+		Speed: 680
+		Acceleration: 10
+		Palette: d2keffect
+		MinimumLaunchAngle: 25
+		MaximumLaunchAngle: 125
+		LaunchAngle: 66
+		ContrailStartWidth: 33
+		ContrailEndWidth: 1
+	Warhead@Effect: CreateEffect
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@ShieldHit: GrantExternalCondition
+		Duration: 10
+	Warhead@Effect1: CreateEffect
+		Explosions: poof
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Ship
+		Spread: 400
+		Damage: 4
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			Shield: 35
+			Wood: 25
+			Concrete: 24
+			Steel: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+		UpdatesUnitStatistics: false
+	InvalidTargets: wall
+	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 500
+		Damage: 4
+		Falloff: 111, 33, 11, 3
+		Versus:
+			HAZMAT: 25
+			Shield: 35
+			None: 25
+			Flak: 24
+			Plate: 23
+			Heroic: 22
+			Wood: 21
+			Concrete: 20
+			Steel: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@GroundFire: SpawnActor
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 4
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+		UpdatesUnitStatistics: false
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 75
+		Damage: 4
+		Versus:
+			Shield: 17
+			Superheavy: 16
+			Heavy: 15
+			Medium: 14
+			Light: 13
+			Scout: 12
+			Steel: 11
+			Concrete: 10
+			Wood: 9
+			Plate: 8
+			Flak: 7
+			None: 6
+			Heroic: 5
+			Spaceship: 4
+			Helicopter: 3
+			Bomber: 2
+			Fighter: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+		UpdatesUnitStatistics: false
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 350
+		Damage: 4
+		Falloff: 99, 66, 33
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Plate: 19
+			Heavy: 18
+			Flak: 17
+			Medium: 16
+			None: 15
+			Light: 14
+			Heroic: 13
+			Scout: 12
+			Steel: 11
+			Concrete: 10
+			Wood: 9
+			Spaceship: 8
+			Helicopter: 7
+			Bomber: 6
+			Fighter: 5
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+	-Warhead@MissileAP_Medium:
 NaxiShrekCons:
 	Inherits@xNaxiShrekCons0: ^Warhead_MissileAP_Medium
 	Inherits@xNaxiShrekCons1: ^Projectile_Missile_Medium
@@ -2018,7 +2417,9 @@ NaxiShrekCons:
 		Spread: 150
 		Falloff: 100, 45, 15, 0
 NaxiShrekCons_elite:
-	Inherits: NaxiShrekCons
+	Inherits@w70: ^Warhead_MissileAP_Medium
+	Inherits@w71: ^Projectile_Missile_Medium
+	Inherits@w72: ^Effect_Flame_Heavy
 	Report: bazook1.aud
 	Range: 6512
 	Burst: 2
@@ -2102,6 +2503,199 @@ NaxiShrekCons_elite:
 	Warhead@MissileHE_Medium:
 		Spread: 150
 		Falloff: 100, 45, 15, 0
+	ValidTargets: Ground, Water
+	ReloadDelay: 135
+	Projectile: Missile
+		ContrailLength: 33
+		MinimumLaunchSpeed: 125
+		Speed: 680
+		Acceleration: 10
+		Palette: d2keffect
+		MinimumLaunchAngle: 25
+		MaximumLaunchAngle: 125
+		LaunchAngle: 66
+		ContrailStartWidth: 33
+		ContrailEndWidth: 1
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		ValidTargets: Ground, Ship
+		ExplosionPalette: ra2effect
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+	Warhead@EffectWater: CreateEffect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+		ExplosionPalette: ra2effect
+	Warhead@EffectAir: CreateEffect
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@Concrete: DamagesConcrete
+	Warhead@Smudge1: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Effect1: CreateEffect
+		Explosions: poof
+		ImpactSounds: siege_impact.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+	Warhead@Effect2: CreateEffect
+		Delay: 6
+		Explosions: napalm
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Ship
+		Spread: 400
+		Damage: 3
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			Shield: 35
+			Wood: 25
+			Concrete: 24
+			Steel: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+		UpdatesUnitStatistics: false
+	InvalidTargets: wall
+	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 500
+		Damage: 3
+		Falloff: 111, 33, 11, 3
+		Versus:
+			HAZMAT: 25
+			Shield: 35
+			None: 25
+			Flak: 24
+			Plate: 23
+			Heroic: 22
+			Wood: 21
+			Concrete: 20
+			Steel: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 3
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+		UpdatesUnitStatistics: false
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 75
+		Damage: 3
+		Versus:
+			Shield: 17
+			Superheavy: 16
+			Heavy: 15
+			Medium: 14
+			Light: 13
+			Scout: 12
+			Steel: 11
+			Concrete: 10
+			Wood: 9
+			Plate: 8
+			Flak: 7
+			None: 6
+			Heroic: 5
+			Spaceship: 4
+			Helicopter: 3
+			Bomber: 2
+			Fighter: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+		UpdatesUnitStatistics: false
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 350
+		Damage: 3
+		Falloff: 99, 66, 33
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Plate: 19
+			Heavy: 18
+			Flak: 17
+			Medium: 16
+			None: 15
+			Light: 14
+			Heroic: 13
+			Scout: 12
+			Steel: 11
+			Concrete: 10
+			Wood: 9
+			Spaceship: 8
+			Helicopter: 7
+			Bomber: 6
+			Fighter: 5
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+	-Warhead@MissileAP_Medium:
 NaxiHetzerDestroyer:
 	Inherits@fx: ^Effect_Explosion_Small_RA2
 	Inherits@proj: ^Projectile_Shell_Light
@@ -2115,7 +2709,9 @@ NaxiHetzerDestroyer:
 		Damage: 40000
 		Heaviness: 0
 NaxiHetzerDestroyer_elite:
-	Inherits: NaxiHetzerDestroyer
+	Inherits@w70: ^Effect_Explosion_Small_RA2
+	Inherits@w71: ^Projectile_Shell_Light
+	Inherits@w72: ^Warhead_CannonAP
 	Report: cannon1.aud
 	Range: 6000
 	Burst: 2
@@ -2135,6 +2731,12 @@ NaxiHetzerDestroyer_elite:
 		FadeFrames: 15
 	Warhead@ShieldHit:
 		Duration: 12
+	Projectile: Bullet
+		Speed: 713
+	ReloadDelay: 80
+	Warhead@CannonAP: AreaDamage
+		Damage: 40000
+		Heaviness: 0
 
 NaxiJadgDestroyer:
 	Inherits@xNaxiJadgDestroyer0: ^Warhead_CannonAP_Light
@@ -2211,7 +2813,9 @@ NaxiJadgDestroyer:
 			Bomber: 2
 			Fighter: 1
 NaxiJadgDestroyer_elite:
-	Inherits: NaxiJadgDestroyer
+	Inherits@w70: ^Warhead_CannonAP_Light
+	Inherits@w71: ^Projectile_Shell_Light
+	Inherits@w72: ^Effect_Explosion_Small_RA2
 	Report: cannon1.aud
 	Range: 8396
 	Burst: 2
@@ -2287,6 +2891,10 @@ NaxiJadgDestroyer_elite:
 			Helicopter: 3
 			Bomber: 2
 			Fighter: 1
+	ReloadDelay: 90
+	Projectile: Bullet
+		Speed: 739
+	-Warhead@CannonAP_Light:
 
 NaxiAntiTankCannon:
 	Inherits@fx: ^Effect_Explosion_Small_RA2
@@ -2306,10 +2914,24 @@ NaxiAntiTankCannon:
 		Damage: 28000
 		Heaviness: 0
 NaxiAntiTankCannon_elite:
-	Inherits: NaxiAntiTankCannon
+	Inherits@w70: ^Effect_Explosion_Small_RA2
+	Inherits@w71: ^Projectile_Shell_Light
+	Inherits@w72: ^Warhead_CannonAP
 	Range: 8361
 	Burst: 2
 	BurstDelays: 3
+	Projectile: Bullet
+		ContrailStartColor: FF9933
+		ContrailEndColor: 000000
+		ContrailEndColorUsePlayerColor: true
+		ContrailWidth: 333
+		ContrailLength: 33
+		Speed: 3333
+	ReloadDelay: 75
+	Warhead@CannonAP: AreaDamage
+		Damage: 28000
+		Heaviness: 0
+	Report: nax_hotwizer.wav
 
 NaxMausCannon:
 	Inherits@xNaxMausCannon0: ^Warhead_CannonHE_Medium
@@ -2595,7 +3217,8 @@ NaxMausCannon:
 			Helicopter: 11
 			Spaceship: 10
 NaxMausCannon_elite:
-	Inherits: NaxMausCannon
+	Inherits@w70: ^Warhead_CannonHE_Medium
+	Inherits@w71: ^Projectile_Shell_Medium
 	Inherits@fx_cover0: ^Effect_Apoc_AP_RA2
 	Inherits@fx_cover1: ^Effect_Flame_Heavy
 	Range: 7777
@@ -2854,6 +3477,28 @@ NaxMausCannon_elite:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+	ReloadDelay: 99
+	Projectile: Bullet
+		Blockable: false
+		Speed: 666
+		ContrailLength: 66
+		LaunchAngle: 33
+		TrailImage: black_smokey
+		TrailPalette: effect75alpha
+		ContrailStartColor: DDCC99
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailDelay: 0
+		ContrailStartWidth: 111
+		ContrailEndWidth: 22
+		TrailInterval: 1
+	Report: aa_bgart.wav
+	MinRange: 1335
+	Warhead@CannonHE_Heavy_Flat: AreaDamage
+		ValidTargets: Ground, Water
+		Damage: 60000
+		PercentageScale: 1665
+	-Warhead@CannonHE_Medium:
 
 NaxRatteCannon:
 	Inherits@xNaxRatteCannon0: ^Warhead_CannonHE_Medium
@@ -3061,7 +3706,8 @@ NaxRatteCannon:
 			Helicopter: 11
 			Spaceship: 10
 NaxRatteCannon_elite:
-	Inherits: NaxRatteCannon
+	Inherits@w70: ^Warhead_CannonHE_Medium
+	Inherits@w71: ^Projectile_Shell_Medium
 	Inherits@fx_cover: ^Effect_Apoc_AP_RA2
 	Range: 7110
 	Burst: 4
@@ -3243,101 +3889,30 @@ NaxRatteCannon_elite:
 			Bomber: 12
 			Helicopter: 11
 			Spaceship: 10
+	ReloadDelay: 145
+	Projectile: Bullet
+		Blockable: false
+		Speed: 500
+		ContrailLength: 50
+		LaunchAngle: 50
+		TrailImage: black_smokey
+		TrailPalette: effect75alpha
+		ContrailStartColor: DDCC99
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailDelay: 0
+		ContrailStartWidth: 100
+		ContrailEndWidth: 20
+		TrailInterval: 1
+	Report: aa_bgart.wav
+	MinRange: 1220
+	Warhead@CannonHE_Heavy_Flat: AreaDamage
+		ValidTargets: Ground, Water
+		Damage: 150000
+		PercentageScale: 3333
+	-Warhead@CannonHE_Medium:
 
-^NaxQuadCannonFlakAllyCompatibility:
-	Warhead@NaxFlakAllyCounted: AreaDamage
-		ValidRelationships: Ally
-		ValidTargets: Ground, Water
-		Spread: 110
-		Damage: 1500
-		Falloff: 100, 58, 32, 16, 6, 0
-		Versus:
-			HAZMAT: 88
-			COMPOSITE: 64
-			BLAST: 58
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 171
-			None: 200
-			Fighter: 197
-			Bomber: 196
-			Helicopter: 155
-			Spaceship: 153
-			Flak: 149
-			Plate: 117
-			Scout: 61
-			Light: 60
-			Medium: 57
-			Wood: 54
-			Heavy: 49
-			Superheavy: 40
-			Steel: 39
-			Concrete: 37
-			Heroic: 36
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@NaxFlakAllyUncounted: AreaDamage
-		ValidRelationships: Ally
-		ValidTargets: Ground, Water
-		Spread: 110
-		Damage: 1000
-		Falloff: 100, 58, 32, 16, 6, 0
-		Versus:
-			HAZMAT: 88
-			COMPOSITE: 64
-			BLAST: 58
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 171
-			None: 200
-			Fighter: 197
-			Bomber: 196
-			Helicopter: 155
-			Spaceship: 153
-			Flak: 149
-			Plate: 117
-			Scout: 61
-			Light: 60
-			Medium: 57
-			Wood: 54
-			Heavy: 49
-			Superheavy: 40
-			Steel: 39
-			Concrete: 37
-			Heroic: 36
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		UpdatesUnitStatistics: false
 
-^NaxQuadCannonFlakGroundWaterCompatibility:
-	Warhead@NaxFlakGroundWater: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		ValidTargets: Ground, Water
-		Spread: 110
-		Damage: 2000
-		Falloff: 100, 58, 32, 16, 6, 0
-		Versus:
-			HAZMAT: 88
-			COMPOSITE: 64
-			BLAST: 58
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 171
-			None: 200
-			Fighter: 197
-			Bomber: 196
-			Helicopter: 155
-			Spaceship: 153
-			Flak: 149
-			Plate: 117
-			Scout: 61
-			Light: 60
-			Medium: 57
-			Wood: 54
-			Heavy: 49
-			Superheavy: 40
-			Steel: 39
-			Concrete: 37
-			Heroic: 36
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
 NaxQuadCannon:
 	Inherits@xNaxQuadCannon0: ^Warhead_Flak_Medium
@@ -3560,7 +4135,9 @@ NaxQuadCannon:
 	Warhead@EffectWater:
 		ExplosionPalette: ra2effect
 NaxQuadCannon_elite:
-	Inherits: NaxQuadCannon
+	Inherits@w70: ^Warhead_Flak_Medium
+	Inherits@w71: ^Projectile_Flak_Medium
+	Inherits@w72: ^Effect_AlliedTigerCannon
 	Range: 6368
 	Burst: 8
 	BurstDelays: 3
@@ -3590,10 +4167,174 @@ NaxQuadCannon_elite:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 	Warhead@EffectWater:
 		ExplosionPalette: ra2effect
+	ValidTargets: Ground, Water
+	ReloadDelay: 47
+	Warhead@Flak_Medium: AreaDamage
+		ValidTargets: Ground, Water
+		Damage: 7000
+		PercentageScale: 2857
+		PercentageDenominator: 10000
+	Projectile: Bullet
+		ValidTargets: Ground, Water
+		Damage: 2000
+		Speed: 4000
+		Blockable: false
+		Arm: 0
+		AllowSnapping: true
+		Shadow: true
+		HorizontalRateOfTurn: 20
+		VerticalRateOfTurn: 20
+		TrailImage: smokey
+		TrailInterval: 1
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		CloseEnough: 400
+		Acceleration: 2
+		HomingActivationDelay: 3
+		RangeLimit: 30000
+		PointDefenseTypes: Missile
+	Warhead@Effect:
+		ImpactActors: false
+	Report: nax_aa1.wav
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 1
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 300
+		Damage: 1
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Spaceship: 24
+			Heavy: 23
+			Helicopter: 22
+			Steel: 21
+			Medium: 20
+			Bomber: 19
+			Concrete: 18
+			Light: 17
+			Fighter: 16
+			Wood: 15
+			Scout: 14
+			Plate: 13
+			Flak: 12
+			None: 11
+			Heroic: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@ChaingunPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 100
+		Damage: 1
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Concrete: 11
+			Medium: 10
+			Helicopter: 9
+			Steel: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
+		UpdatesUnitStatistics: false
+	Warhead@NaxFlakAllyCounted: AreaDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 110
+		Damage: 1500
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@NaxFlakAllyUncounted: AreaDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 110
+		Damage: 1000
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
 
 NaxQuadCannon_AA:
 	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
-	Inherits: NaxQuadCannon
+	Inherits@w70: ^Projectile_Flak_Medium
+	Inherits@w71: ^Effect_AlliedTigerCannon
 	ValidTargets: Air
 	Range: 8052
 	Warhead@GrenadePercentage: AreaDamagePercentage
@@ -3616,7 +4357,7 @@ NaxQuadCannon_AA:
 		Damage: 1000
 	Warhead@NaxFlakGroundWater:
 		ValidTargets: Air
-	Warhead@EffectAir: CreateEffect
+	Warhead@EffectAir:
 		ValidTargets: Air
 	-Warhead@Flak_Medium:
 	-Warhead@NaxFlakGroundWater:
@@ -3627,10 +4368,10 @@ NaxQuadCannon_AA:
 
 	Warhead@ChaingunPercentage:
 		ValidTargets: Air
-	Warhead@Smudge: LeaveSmudge
-	Warhead@DuneRock: LeaveSmudge
-	Warhead@DuneSand: LeaveSmudge
-	Warhead@RA2Crater: LeaveSmudge
+	Warhead@Smudge:
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 	Warhead@NaxFlakAllyCounted: AreaDamage
 	Warhead@NaxFlakAllyUncounted: AreaDamage
@@ -3794,7 +4535,7 @@ NaxQuadCannon_AA:
 	Warhead@Smudge:
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 	Warhead@Concrete:
 		Damage: 25
 	Warhead@Effect:
@@ -3818,8 +4559,18 @@ NaxQuadCannon_AA:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 	Warhead@EffectWater:
 		ExplosionPalette: ra2effect
+	ReloadDelay: 47
+	TargetActorCenter: true
+	Projectile: Bullet
+		ValidTargets: Ground, Water
+		Damage: 2000
+	Burst: 6
+	BurstDelays: 4
+	Report: nax_aa1.wav
 NaxQuadCannon_AA_elite:
-	Inherits: NaxQuadCannon_AA
+	Inherits@w70: ^Warhead_Flak_Medium
+	Inherits@w71: ^Projectile_Flak_Medium
+	Inherits@w72: ^Effect_AlliedTigerCannon
 	Range: 9052
 	Burst: 8
 	BurstDelays: 3
@@ -3850,8 +4601,224 @@ NaxQuadCannon_AA_elite:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 	Warhead@EffectWater:
 		ExplosionPalette: ra2effect
+	Warhead@Flak_Medium_Flat: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Spread: 110
+		Damage: 7000
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 2843
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Steel: 6
+			Concrete: 5
+	ValidTargets: Air
+	ReloadDelay: 47
+	Projectile: Bullet
+		ValidTargets: Ground, Water
+		Damage: 2000
+		Speed: 4000
+		Blockable: false
+		Arm: 0
+		AllowSnapping: true
+		Shadow: true
+		HorizontalRateOfTurn: 20
+		VerticalRateOfTurn: 20
+		TrailImage: smokey
+		TrailInterval: 1
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		CloseEnough: 400
+		Acceleration: 2
+		HomingActivationDelay: 3
+		RangeLimit: 30000
+		PointDefenseTypes: Missile
+	Warhead@Effect:
+		ImpactActors: false
+	Report: nax_aa1.wav
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		ValidTargets: Air
+		Spread: 200
+		Damage: 1
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+		ValidTargets: Air
+		Spread: 300
+		Damage: 1
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Spaceship: 24
+			Heavy: 23
+			Helicopter: 22
+			Steel: 21
+			Medium: 20
+			Bomber: 19
+			Concrete: 18
+			Light: 17
+			Fighter: 16
+			Wood: 15
+			Scout: 14
+			Plate: 13
+			Flak: 12
+			None: 11
+			Heroic: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@ChaingunPercentage: AreaDamagePercentage
+		Spread: 100
+		Damage: 1
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Concrete: 11
+			Medium: 10
+			Helicopter: 9
+			Steel: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
+		UpdatesUnitStatistics: false
+	Warhead@NaxFlakAllyCounted: AreaDamage
+		ValidRelationships: Ally
+		ValidTargets: Air
+		Spread: 110
+		Damage: 1500
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@NaxFlakAllyUncounted: AreaDamage
+		ValidRelationships: Ally
+		ValidTargets: Air
+		Spread: 110
+		Damage: 1000
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@Bullet_Medium: AreaDamage
+		ValidTargets: Air
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
+		ValidTargets: Air
+	-Warhead@Flak_Medium:
 SkyMageCannon:
-	Inherits: NaxQuadCannon
+	Inherits@w70: ^Warhead_Flak_Medium
+	Inherits@w71: ^Projectile_Flak_Medium
+	Inherits@w72: ^Effect_AlliedTigerCannon
 	Range: 5000
 	ReloadDelay: 26
 	Burst: 6
@@ -3882,9 +4849,173 @@ SkyMageCannon:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 	Warhead@EffectWater:
 		ExplosionPalette: ra2effect
+	ValidTargets: Ground, Water
+	Warhead@Flak_Medium: AreaDamage
+		ValidTargets: Ground, Water
+		Damage: 7000
+		PercentageScale: 2857
+		PercentageDenominator: 10000
+	Projectile: Bullet
+		ValidTargets: Ground, Water
+		Damage: 2000
+		Speed: 4000
+		Blockable: false
+		Arm: 0
+		AllowSnapping: true
+		Shadow: true
+		HorizontalRateOfTurn: 20
+		VerticalRateOfTurn: 20
+		TrailImage: smokey
+		TrailInterval: 1
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		CloseEnough: 400
+		Acceleration: 2
+		HomingActivationDelay: 3
+		RangeLimit: 30000
+		PointDefenseTypes: Missile
+	Warhead@Effect:
+		ImpactActors: false
+	Report: nax_aa1.wav
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 1
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 300
+		Damage: 1
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Spaceship: 24
+			Heavy: 23
+			Helicopter: 22
+			Steel: 21
+			Medium: 20
+			Bomber: 19
+			Concrete: 18
+			Light: 17
+			Fighter: 16
+			Wood: 15
+			Scout: 14
+			Plate: 13
+			Flak: 12
+			None: 11
+			Heroic: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@ChaingunPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 100
+		Damage: 1
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Concrete: 11
+			Medium: 10
+			Helicopter: 9
+			Steel: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
+		UpdatesUnitStatistics: false
+	Warhead@NaxFlakAllyCounted: AreaDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 110
+		Damage: 1500
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@NaxFlakAllyUncounted: AreaDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 110
+		Damage: 1000
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
 
 SkyMageCannon_elite:
-	Inherits: SkyMageCannon
+	Inherits@w70: ^Warhead_Flak_Medium
+	Inherits@w71: ^Projectile_Flak_Medium
+	Inherits@w72: ^Effect_AlliedTigerCannon
 	Range: 6000
 	Burst: 8
 	BurstDelays: 3
@@ -3914,9 +5045,174 @@ SkyMageCannon_elite:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 	Warhead@EffectWater:
 		ExplosionPalette: ra2effect
+	ValidTargets: Ground, Water
+	ReloadDelay: 26
+	Warhead@Flak_Medium: AreaDamage
+		ValidTargets: Ground, Water
+		Damage: 7000
+		PercentageScale: 2857
+		PercentageDenominator: 10000
+	Projectile: Bullet
+		ValidTargets: Ground, Water
+		Damage: 2000
+		Speed: 4000
+		Blockable: false
+		Arm: 0
+		AllowSnapping: true
+		Shadow: true
+		HorizontalRateOfTurn: 20
+		VerticalRateOfTurn: 20
+		TrailImage: smokey
+		TrailInterval: 1
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		CloseEnough: 400
+		Acceleration: 2
+		HomingActivationDelay: 3
+		RangeLimit: 30000
+		PointDefenseTypes: Missile
+	Warhead@Effect:
+		ImpactActors: false
+	Report: nax_aa1.wav
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 1
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 300
+		Damage: 1
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Spaceship: 24
+			Heavy: 23
+			Helicopter: 22
+			Steel: 21
+			Medium: 20
+			Bomber: 19
+			Concrete: 18
+			Light: 17
+			Fighter: 16
+			Wood: 15
+			Scout: 14
+			Plate: 13
+			Flak: 12
+			None: 11
+			Heroic: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@ChaingunPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 100
+		Damage: 1
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Concrete: 11
+			Medium: 10
+			Helicopter: 9
+			Steel: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
+		UpdatesUnitStatistics: false
+	Warhead@NaxFlakAllyCounted: AreaDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 110
+		Damage: 1500
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@NaxFlakAllyUncounted: AreaDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 110
+		Damage: 1000
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
 
 SkyMageCannon_AA:
-	Inherits: NaxQuadCannon_AA
+	Inherits@w70: ^Warhead_Flak_Medium
+	Inherits@w71: ^Projectile_Flak_Medium
+	Inherits@w72: ^Effect_AlliedTigerCannon
 	Range: 7500
 	ReloadDelay: 26
 	Burst: 6
@@ -3948,8 +5244,223 @@ SkyMageCannon_AA:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 	Warhead@EffectWater:
 		ExplosionPalette: ra2effect
+	Warhead@Flak_Medium_Flat: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Spread: 110
+		Damage: 7000
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 2843
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Steel: 6
+			Concrete: 5
+	ValidTargets: Air
+	Projectile: Bullet
+		ValidTargets: Ground, Water
+		Damage: 2000
+		Speed: 4000
+		Blockable: false
+		Arm: 0
+		AllowSnapping: true
+		Shadow: true
+		HorizontalRateOfTurn: 20
+		VerticalRateOfTurn: 20
+		TrailImage: smokey
+		TrailInterval: 1
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		CloseEnough: 400
+		Acceleration: 2
+		HomingActivationDelay: 3
+		RangeLimit: 30000
+		PointDefenseTypes: Missile
+	Warhead@Effect:
+		ImpactActors: false
+	Report: nax_aa1.wav
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		ValidTargets: Air
+		Spread: 200
+		Damage: 1
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+		ValidTargets: Air
+		Spread: 300
+		Damage: 1
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Spaceship: 24
+			Heavy: 23
+			Helicopter: 22
+			Steel: 21
+			Medium: 20
+			Bomber: 19
+			Concrete: 18
+			Light: 17
+			Fighter: 16
+			Wood: 15
+			Scout: 14
+			Plate: 13
+			Flak: 12
+			None: 11
+			Heroic: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@ChaingunPercentage: AreaDamagePercentage
+		Spread: 100
+		Damage: 1
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Concrete: 11
+			Medium: 10
+			Helicopter: 9
+			Steel: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
+		UpdatesUnitStatistics: false
+	Warhead@NaxFlakAllyCounted: AreaDamage
+		ValidRelationships: Ally
+		ValidTargets: Air
+		Spread: 110
+		Damage: 1500
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@NaxFlakAllyUncounted: AreaDamage
+		ValidRelationships: Ally
+		ValidTargets: Air
+		Spread: 110
+		Damage: 1000
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@Bullet_Medium: AreaDamage
+		ValidTargets: Air
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
+		ValidTargets: Air
+	-Warhead@Flak_Medium:
 SkyMageCannon_AA_elite:
-	Inherits: SkyMageCannon_AA
+	Inherits@w70: ^Warhead_Flak_Medium
+	Inherits@w71: ^Projectile_Flak_Medium
+	Inherits@w72: ^Effect_AlliedTigerCannon
 	Range: 8500
 	Burst: 8
 	BurstDelays: 3
@@ -3980,6 +5491,220 @@ SkyMageCannon_AA_elite:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 	Warhead@EffectWater:
 		ExplosionPalette: ra2effect
+	Warhead@Flak_Medium_Flat: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Spread: 110
+		Damage: 7000
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 2843
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Steel: 6
+			Concrete: 5
+	ValidTargets: Air
+	ReloadDelay: 26
+	Projectile: Bullet
+		ValidTargets: Ground, Water
+		Damage: 2000
+		Speed: 4000
+		Blockable: false
+		Arm: 0
+		AllowSnapping: true
+		Shadow: true
+		HorizontalRateOfTurn: 20
+		VerticalRateOfTurn: 20
+		TrailImage: smokey
+		TrailInterval: 1
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		CloseEnough: 400
+		Acceleration: 2
+		HomingActivationDelay: 3
+		RangeLimit: 30000
+		PointDefenseTypes: Missile
+	Warhead@Effect:
+		ImpactActors: false
+	Report: nax_aa1.wav
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		ValidTargets: Air
+		Spread: 200
+		Damage: 1
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+		ValidTargets: Air
+		Spread: 300
+		Damage: 1
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Spaceship: 24
+			Heavy: 23
+			Helicopter: 22
+			Steel: 21
+			Medium: 20
+			Bomber: 19
+			Concrete: 18
+			Light: 17
+			Fighter: 16
+			Wood: 15
+			Scout: 14
+			Plate: 13
+			Flak: 12
+			None: 11
+			Heroic: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@ChaingunPercentage: AreaDamagePercentage
+		Spread: 100
+		Damage: 1
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Concrete: 11
+			Medium: 10
+			Helicopter: 9
+			Steel: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
+		UpdatesUnitStatistics: false
+	Warhead@NaxFlakAllyCounted: AreaDamage
+		ValidRelationships: Ally
+		ValidTargets: Air
+		Spread: 110
+		Damage: 1500
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@NaxFlakAllyUncounted: AreaDamage
+		ValidRelationships: Ally
+		ValidTargets: Air
+		Spread: 110
+		Damage: 1000
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@Bullet_Medium: AreaDamage
+		ValidTargets: Air
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
+		ValidTargets: Air
+	-Warhead@Flak_Medium:
 NaxQuadCannonTargeting:
 	Range: 8888
 	ValidTargets: Air
@@ -3990,7 +5715,9 @@ NaxQuadCannonTargeting:
 		ValidTargets: Air
 
 PortableFlak:
-	Inherits: NaxQuadCannon_AA
+	Inherits@w70: ^Warhead_Flak_Medium
+	Inherits@w71: ^Projectile_Flak_Medium
+	Inherits@w72: ^Effect_AlliedTigerCannon
 	Range: 8888
 
 	Warhead@ChaingunPercentage:
@@ -4019,8 +5746,226 @@ PortableFlak:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 	Warhead@EffectWater:
 		ExplosionPalette: ra2effect
+	Warhead@Flak_Medium_Flat: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Spread: 110
+		Damage: 7000
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 2843
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Steel: 6
+			Concrete: 5
+	ValidTargets: Air
+	ReloadDelay: 47
+	Projectile: Bullet
+		ValidTargets: Ground, Water
+		Damage: 2000
+		Speed: 4000
+		Blockable: false
+		Arm: 0
+		AllowSnapping: true
+		Shadow: true
+		HorizontalRateOfTurn: 20
+		VerticalRateOfTurn: 20
+		TrailImage: smokey
+		TrailInterval: 1
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		CloseEnough: 400
+		Acceleration: 2
+		HomingActivationDelay: 3
+		RangeLimit: 30000
+		PointDefenseTypes: Missile
+	Warhead@Effect:
+		ImpactActors: false
+	Burst: 6
+	BurstDelays: 4
+	Report: nax_aa1.wav
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		ValidTargets: Air
+		Spread: 200
+		Damage: 1
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+		ValidTargets: Air
+		Spread: 300
+		Damage: 1
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Spaceship: 24
+			Heavy: 23
+			Helicopter: 22
+			Steel: 21
+			Medium: 20
+			Bomber: 19
+			Concrete: 18
+			Light: 17
+			Fighter: 16
+			Wood: 15
+			Scout: 14
+			Plate: 13
+			Flak: 12
+			None: 11
+			Heroic: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@ChaingunPercentage: AreaDamagePercentage
+		Spread: 100
+		Damage: 1
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Concrete: 11
+			Medium: 10
+			Helicopter: 9
+			Steel: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
+		UpdatesUnitStatistics: false
+	Warhead@NaxFlakAllyCounted: AreaDamage
+		ValidRelationships: Ally
+		ValidTargets: Air
+		Spread: 110
+		Damage: 1500
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@NaxFlakAllyUncounted: AreaDamage
+		ValidRelationships: Ally
+		ValidTargets: Air
+		Spread: 110
+		Damage: 1000
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@Bullet_Medium: AreaDamage
+		ValidTargets: Air
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
+		ValidTargets: Air
+	-Warhead@Flak_Medium:
 PortableFlak_elite:
-	Inherits: NaxQuadCannon_AA_elite
+	Inherits@w70: ^Warhead_Flak_Medium
+	Inherits@w71: ^Projectile_Flak_Medium
+	Inherits@w72: ^Effect_AlliedTigerCannon
 	Range: 9999
 
 	Warhead@ChaingunPercentage:
@@ -4049,8 +5994,226 @@ PortableFlak_elite:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 	Warhead@EffectWater:
 		ExplosionPalette: ra2effect
+	Warhead@Flak_Medium_Flat: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Spread: 110
+		Damage: 7000
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 2843
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Steel: 6
+			Concrete: 5
+	ValidTargets: Air
+	ReloadDelay: 47
+	Projectile: Bullet
+		ValidTargets: Ground, Water
+		Damage: 2000
+		Speed: 4000
+		Blockable: false
+		Arm: 0
+		AllowSnapping: true
+		Shadow: true
+		HorizontalRateOfTurn: 20
+		VerticalRateOfTurn: 20
+		TrailImage: smokey
+		TrailInterval: 1
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		CloseEnough: 400
+		Acceleration: 2
+		HomingActivationDelay: 3
+		RangeLimit: 30000
+		PointDefenseTypes: Missile
+	Warhead@Effect:
+		ImpactActors: false
+	Burst: 8
+	BurstDelays: 3
+	Report: nax_aa1.wav
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		ValidTargets: Air
+		Spread: 200
+		Damage: 1
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+		ValidTargets: Air
+		Spread: 300
+		Damage: 1
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Spaceship: 24
+			Heavy: 23
+			Helicopter: 22
+			Steel: 21
+			Medium: 20
+			Bomber: 19
+			Concrete: 18
+			Light: 17
+			Fighter: 16
+			Wood: 15
+			Scout: 14
+			Plate: 13
+			Flak: 12
+			None: 11
+			Heroic: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@ChaingunPercentage: AreaDamagePercentage
+		Spread: 100
+		Damage: 1
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Concrete: 11
+			Medium: 10
+			Helicopter: 9
+			Steel: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
+		UpdatesUnitStatistics: false
+	Warhead@NaxFlakAllyCounted: AreaDamage
+		ValidRelationships: Ally
+		ValidTargets: Air
+		Spread: 110
+		Damage: 1500
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@NaxFlakAllyUncounted: AreaDamage
+		ValidRelationships: Ally
+		ValidTargets: Air
+		Spread: 110
+		Damage: 1000
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@Bullet_Medium: AreaDamage
+		ValidTargets: Air
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
+		ValidTargets: Air
+	-Warhead@Flak_Medium:
 NaxFlakAG:
-	Inherits: NaxQuadCannon
+	Inherits@w70: ^Warhead_Flak_Medium
+	Inherits@w71: ^Projectile_Flak_Medium
+	Inherits@w72: ^Effect_AlliedTigerCannon
 	ReloadDelay: 88
 	Range: 8800
 	Burst: 8
@@ -4092,9 +6255,171 @@ NaxFlakAG:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 	Warhead@EffectWater:
 		ExplosionPalette: ra2effect
+	ValidTargets: Ground, Water
+	Warhead@Flak_Medium: AreaDamage
+		ValidTargets: Ground, Water
+		Damage: 7000
+		PercentageScale: 2857
+		PercentageDenominator: 10000
+	Projectile: Bullet
+		ValidTargets: Ground, Water
+		Damage: 2000
+		Blockable: false
+		Arm: 0
+		AllowSnapping: true
+		Shadow: true
+		HorizontalRateOfTurn: 20
+		VerticalRateOfTurn: 20
+		TrailImage: smokey
+		TrailInterval: 1
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		CloseEnough: 400
+		Acceleration: 2
+		HomingActivationDelay: 3
+		RangeLimit: 30000
+		PointDefenseTypes: Missile
+	Warhead@Effect:
+		ImpactActors: false
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 1
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 300
+		Damage: 1
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Spaceship: 24
+			Heavy: 23
+			Helicopter: 22
+			Steel: 21
+			Medium: 20
+			Bomber: 19
+			Concrete: 18
+			Light: 17
+			Fighter: 16
+			Wood: 15
+			Scout: 14
+			Plate: 13
+			Flak: 12
+			None: 11
+			Heroic: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@ChaingunPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 100
+		Damage: 1
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Concrete: 11
+			Medium: 10
+			Helicopter: 9
+			Steel: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
+		UpdatesUnitStatistics: false
+	Warhead@NaxFlakAllyCounted: AreaDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 110
+		Damage: 1500
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@NaxFlakAllyUncounted: AreaDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 110
+		Damage: 1000
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
 
 NaxFlakAA:
-	Inherits: NaxQuadCannon_AA
+	Inherits@w70: ^Warhead_Flak_Medium
+	Inherits@w71: ^Projectile_Flak_Medium
+	Inherits@w72: ^Effect_AlliedTigerCannon
 	ReloadDelay: 88
 	Range: 13200
 	Burst: 8
@@ -4137,6 +6462,217 @@ NaxFlakAA:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 	Warhead@EffectWater:
 		ExplosionPalette: ra2effect
+	Warhead@Flak_Medium_Flat: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Spread: 110
+		Damage: 7000
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 2843
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Steel: 6
+			Concrete: 5
+	ValidTargets: Air
+	Projectile: Bullet
+		ValidTargets: Ground, Water
+		Damage: 2000
+		Blockable: false
+		Arm: 0
+		AllowSnapping: true
+		Shadow: true
+		HorizontalRateOfTurn: 20
+		VerticalRateOfTurn: 20
+		TrailImage: smokey
+		TrailInterval: 1
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		CloseEnough: 400
+		Acceleration: 2
+		HomingActivationDelay: 3
+		RangeLimit: 30000
+		PointDefenseTypes: Missile
+	Warhead@Effect:
+		ImpactActors: false
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		ValidTargets: Air
+		Spread: 200
+		Damage: 1
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+		ValidTargets: Air
+		Spread: 300
+		Damage: 1
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Spaceship: 24
+			Heavy: 23
+			Helicopter: 22
+			Steel: 21
+			Medium: 20
+			Bomber: 19
+			Concrete: 18
+			Light: 17
+			Fighter: 16
+			Wood: 15
+			Scout: 14
+			Plate: 13
+			Flak: 12
+			None: 11
+			Heroic: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@ChaingunPercentage: AreaDamagePercentage
+		Spread: 100
+		Damage: 1
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Concrete: 11
+			Medium: 10
+			Helicopter: 9
+			Steel: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
+		UpdatesUnitStatistics: false
+	Warhead@NaxFlakAllyCounted: AreaDamage
+		ValidRelationships: Ally
+		ValidTargets: Air
+		Spread: 110
+		Damage: 1500
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@NaxFlakAllyUncounted: AreaDamage
+		ValidRelationships: Ally
+		ValidTargets: Air
+		Spread: 110
+		Damage: 1000
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@Bullet_Medium: AreaDamage
+		ValidTargets: Air
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
+		ValidTargets: Air
+	-Warhead@Flak_Medium:
 NaxPlanegun_elite:
 	Inherits@xNaxPlanegun_elite0: ^Warhead_Bullet_Medium
 	Inherits@xNaxPlanegun_elite1: ^Projectile_Bullet_Medium
@@ -4383,14 +6919,14 @@ NaxPlaneRockets_elite:
 
 NaxInterceptorRockets:
 	Inherits@finalmain: ^Warhead_MissileAA_Heavy_Flat
-	Inherits: NaxPlaneRockets_elite
+	Inherits@w70: ^Projectile_Missile_Heavy_D2K_Rocket
+	Inherits@w71: ^Effect_MissileAP_Heavy
 	ValidTargets: Air
 	Warhead@MissileAP_Medium:
 		ValidTargets: Air
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Air
 	-Warhead@MissileAP_Heavy:
-	-Warhead@MissileAP_Heavy_Flat:
 	-Warhead@MissileAP_Medium:
 	Warhead@MissileAA_Heavy_Flat:
 		ValidTargets: Air
@@ -4432,6 +6968,18 @@ NaxInterceptorRockets:
 		ImpactActors: false
 	Warhead@Smudge:
 		SmudgeType: SandCrater, RockCrater
+	ReloadDelay: 100
+	Range: 6090
+	TargetActorCenter: true
+	Projectile: Missile
+		Acceleration: 5
+		MaximumLaunchAngle: 128
+		ContrailLength: 6
+		ContrailStartColor: 996633
+		TrailDelay: 1
+	Burst: 2
+	BurstDelays: 9
+	Report: missile7.aud
 
 NaxiInterceptorGun:
 	Inherits: ^Warhead_CannonHE_Heavy
@@ -4837,7 +7385,9 @@ NaxTigerCannon:
 	Warhead@CannonHE_Medium:
 		Damage: 10000
 NaxTigerCannon_elite:
-	Inherits: NaxTigerCannon
+	Inherits@w70: ^Warhead_CannonHE_Medium
+	Inherits@w71: ^Projectile_Shell_Medium
+	Inherits@w72: ^Effect_Explosion_Medium_RA2
 	Range: 6000
 	Burst: 2
 	BurstDelays: 3
@@ -4856,6 +7406,12 @@ NaxTigerCannon_elite:
 		FadeFrames: 15
 	Warhead@ShieldHit:
 		Duration: 12
+	ReloadDelay: 50
+	Warhead@CannonHE_Medium: AreaDamage
+		Damage: 10000
+	Projectile: Bullet
+		Speed: 500
+	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
 
 KingNaxTigerCannon:
 	Inherits@xKingNaxTigerCannon0: ^Warhead_CannonHE_Medium
@@ -4869,7 +7425,9 @@ KingNaxTigerCannon:
 	Warhead@CannonHE_Medium:
 		Damage: 20000
 KingNaxTigerCannon_elite:
-	Inherits: KingNaxTigerCannon
+	Inherits@w70: ^Warhead_CannonHE_Medium
+	Inherits@w71: ^Projectile_Shell_Medium
+	Inherits@w72: ^Effect_Explosion_Medium_RA2
 	Range: 6000
 	Burst: 2
 	BurstDelays: 3
@@ -4888,14 +7446,29 @@ KingNaxTigerCannon_elite:
 		FadeFrames: 15
 	Warhead@ShieldHit:
 		Duration: 12
+	ReloadDelay: 50
+	Warhead@CannonHE_Medium: AreaDamage
+		Damage: 20000
+	Projectile: Bullet
+		Speed: 500
+	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
 
 Nax120mmAssault:
-	Inherits: RA2120mm
+	Inherits@w70: ^Warhead_CannonHE_Medium
+	Inherits@w71: ^Projectile_Shell_Medium
+	Inherits@w72: ^Effect_Explosion_Medium_RA2
 	Range: 5200
 	ReloadDelay: 28
+	Warhead@CannonHE_Medium: AreaDamage
+		Damage: 10000
+	Projectile: Bullet
+		Speed: 514
+	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
 
 Nax120mmAssault_elite:
-	Inherits: Nax120mmAssault
+	Inherits@w70: ^Warhead_CannonHE_Medium
+	Inherits@w71: ^Projectile_Shell_Medium
+	Inherits@w72: ^Effect_Explosion_Medium_RA2
 	Range: 6200
 	Burst: 2
 	BurstDelays: 3
@@ -4914,6 +7487,12 @@ Nax120mmAssault_elite:
 		FadeFrames: 15
 	Warhead@ShieldHit:
 		Duration: 12
+	ReloadDelay: 28
+	Warhead@CannonHE_Medium: AreaDamage
+		Damage: 10000
+	Projectile: Bullet
+		Speed: 514
+	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
 
 NaxiAlienPistol_elite:
 	Inherits: NaxiAlienPistol

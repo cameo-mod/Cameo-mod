@@ -5,7 +5,7 @@
 
 `warhead_family_reach` measures **1,530 distinct fired weapon identities** whose
 transitive inheritance reaches a `^Warhead_*` family in the current PR340 source.
-(2026-09-23 resync, post-#438: `physical_state_fired_weapons` = **537**, `unconverted_template_inheritors` = **1163**.) **2026-09-23b (post-#456/#457 wave): `physical_state_fired_weapons` = 533, `unconverted_template_inheritors` = 827** — DAWN's W23 retrofit (#456) stripped most legacy template inherits; NOVA batch-2 (#457) landed the RA2Mod folds.
+(2026-09-23 resync, post-#438: `physical_state_fired_weapons` = **537**, `unconverted_template_inheritors` = **1163**.) **2026-09-23b (post-#456/#457 wave): `physical_state_fired_weapons` = 533, `unconverted_template_inheritors` = 827** — DAWN's W23 retrofit (#456) stripped most legacy template inherits; NOVA batch-2 (#457) landed the RA2Mod folds. **2026-09-24 (NOVA W23-RA sweep, `devin/nova/w23-ra-followup`): `physical_state_fired_weapons` = 546, `unconverted_template_inheritors` = 384** — ~550 weapon-parent edges converted to canonical triples, meter conversions raised the physical-state count.
 The registry's previous value was 1,415; it is updated upward to this measured
 count with the same predicate and zero tolerance. Ownership wrappers can expose
 more distinct fired identities for existing family payloads: this increase does
@@ -1896,7 +1896,7 @@ anywhere without tier restriction (W13 rule 5).
 ### W18 — Roll the basis-point unit out into yaml ⬜ READY (unblocked)
 
 Historical planning snapshot below, including the dated 2026-08-16 empty search.
-Current authored-field inventory (2026-09-22): **401** raw
+Current authored-field inventory (2026-09-22): **401** raw (**442** on devin/nova/w23-ra-followup 2026-09-24 — W7 sweep pins restate resolved denominators locally)
 `PercentageDenominator` occurrences in active weapon files, compared with 183
 on 2026-09-05. Freedom elite's explicit companion adds the single occurrence
 while preserving its prior percentage units. The registry's historical

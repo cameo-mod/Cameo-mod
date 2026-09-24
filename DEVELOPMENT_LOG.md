@@ -11813,3 +11813,104 @@ fleet board; guard added (refuse non-`-` targets).
 
 **Awaiting:** maintainer merge call on #472; Claude's ExtraDamage ruling for the held
 Tesla/Laser/Railgun/ChargedTesla edges.
+
+## 2026-09-24 — W7 weapon-parent sweep (bulk pipeline, follow-up branch)
+
+Branch `devin/nova/w23-ra-followup` (PR #482, stacked on #472), commits
+`bdbb08828`..`2f6f405c4`. Converted **426 weapon->weapon `Inherits:` edges**
+across 16 files to last-per-kind `^Warhead_*/^Projectile_*/^Effect_*` edges +
+resolved-diff pins; every weapon byte-identical vs baseline. ~120 dead
+cancels removed. Each commit boot-gated (menu marker, 0 exceptions).
+
+Held (~197 edges): all resolve through `*_ExtraDamage` SpreadDamage nodes —
+pending Claude's ExtraDamage ruling. `ChemTibAtomic` reverted (cross-file
+tandem needed with `weapons/tiberiandawn.yaml`, TD lane).
+
+Tooling (.scratch/nova_w7conv.py — uncommitted): four traps now handled —
+digit-leading block names (`155mmCryo`), bottom-up line edits (insertion
+shift), exact-run pin dedupe (substring matching false-hits indented
+prefixes), cross-file weapon-inherit skip (merged-order hazard).
+
+## 2026-09-24 (late) — W6 strip + ChemTibAtomic tandem + WaveTurretImpact ruling question
+
+- `c7fdc3293` — W6 strip: 212 typed local effect declares -> bare `Warhead@X:` where an
+  inherited `^Effect_*` already supplies the type; resolution verified identical
+  repo-wide (restore-on-drift). W6 848 -> 714; residual +22 over the 692 ratchet is
+  sole-provider/fidelity pins — flagged for Claude's fidelity-vs-snap ruling.
+- `462fb5adc` — `ChemTibAtomic` tandem conversion per EMBER's ruling (TD-side block
+  authorized). Both `Inherits: Atomic` edges -> 4-way template set; `^AtomicCore`'s
+  local payload pinned on the Shared block. Resolved-identical (261/261). Last
+  non-held W7 edge in NOVA files; remainder = held ExtraDamage/Tesla/Laser set.
+- WaveTurretImpact review item (EMBER): resolver disproves the dead-override model —
+  baseline merged node carried `Condition: SonicDebuff` (Range 1500/Duration 150);
+  the dead element was the TOKEN (zero consumers fleet-wide post-#476), not the node.
+  The conversion restores pre-#476 debuff intent via the live channel — same for all
+  sites fleet-wide. Posted `REPLY_2026-09-24_nova_to_ember_waveturret.md`; flagged on
+  #482's description. Pending class-wide ruling (migration-intent vs dead-stays-dead).
+
+## 2026-09-24 (later) — sweep-review fixes + fleet ruling
+
+- EMBER's independent resolved-review (FINDING_2026-09-24) found a real
+  regression my per-batch diffs missed: `NaxiWW2KübelwagenMachinegun` lost its
+  `Inherits@roleflat: ^Warhead_Bullet_Medium_Flat` edge when the converter
+  expanded its shim edges — 48 fields gone incl. the Versus tables, and the
+  _Flat node IS the damage channel (main node cancelled). Fixed in `546b175d0`.
+- Same commit: pinned `^SteelMediumMissile`/`^RA160mmRadLegacy` template chains
+  back to self-describing (1 inert `TrailImage: smokey` residual — empty pins
+  can't blank inherited fields).
+- WaveTurretImpact: EMBER conceded — resolver proved Condition survives merge;
+  ruling A (migration-intent) landed class-wide, conversions stand.
+- Pipeline lesson recorded: shim-edge conversions escape per-weapon checklists;
+  full-tree union diff (2,984 weapons) is now the pre-PR gate — 29 diffs, all
+  accounted for (8 meters, 5 pairing fixes, 14 inert HitAnim drops, 2 templates).
+
+## 2026-09-24 (evening) — held-edge reclassification + 102 conversions
+
+- The held-edge classifier was over-broad: it flagged all 192 weapons whose
+  resolved tree contains an `*ExtraDamage` node. Dry-run showed only 90
+  genuinely need LOCAL ExtraDamage node pins (the ruling-sensitive case);
+  the other 102 have the node supplied by a `^` template and convert with
+  scalar pins only (e.g. the ra1_soviets_gatlingtank chain: ~5 pins each).
+- Converted all 102 across 12 files in three commits (`7313a533c`,
+  `1f3eb04f3`, `77f86faaa`): every weapon resolve-verified identical vs
+  HEAD baseline; 78 dead cancel lines the fixup emitted were removed
+  (providers removed in the same pass); orphan cancels 0.
+- Incident: a scratch-file naming bug (`conv_yaml.txt` collision) ran
+  `--apply` unfiltered on Japan+Soviets, touching held weapons too —
+  caught immediately, `git checkout` revert, redo with numbered lists.
+- W7: 514 -> 412. W6 rose 714 -> 735 (sole-provider type declares the
+  pins restore — same fidelity-vs-snap ruling class, already flagged).
+- Still held (ruling pending): 90 weapons needing local `*ExtraDamage`
+  node pins — see `NOTE_2026-09-24_nova_held_inventory.md`.
+
+## 2026-09-24 (night) — dead shim cleanup + central-file census correction
+
+- Deleted 35 zero-consumer legacy shim templates (`b0dcb1dda`): ^RA2TeslaWeapon,
+  ^RA2LaserWeapon, ^RA2RailgunWeapon, the ^Steel* set, *Legacy/*Compatibility
+  shims — conversion debris. Repo-wide resolved diff: 0 drift. Canonical
+  ^Effect_* lattice members with zero consumers (Brnl/Tumu/Twlt/Flak) KEPT —
+  library families, not debris.
+- CENTRAL-FILE CENSUS CORRECTION: the earlier "999 live central edges" counted
+  UNMOUNTED files. Truth: weapons/redalert.yaml + redalert2.yaml are deprecated
+  shadow copies (mod.yaml comments them out; every redalert2.yaml block is
+  duplicated in the pack files — central-only names: 0). Live mounted central
+  files: weapons.yaml 61, tiberiandawn.yaml 1, redalert2mod.yaml 5 (all held
+  class), d2k.yaml 26, starcraft.yaml 4, warcraft2.yaml 6, tiberiansun.yaml 24,
+  outpost2.yaml 19 — total ~146, most in other lanes' themes.
+- NOVA lane state: W7 412 = 90 held (ExtraDamage ruling) + ~322 support-shim
+  and cross-file keeps. Every non-held, non-shim edge is converted.
+
+## 2026-09-24 (late night) — second supplier pass + ledger sync
+
+- Second supplier-analysis pass over the 95 remaining weapon-parent edges:
+  30 resolve their *ExtraDamage nodes through canonical ^Warhead_ templates
+  (first pass missed them — the node-key-vs-payload distinction).
+- Converted 28 resolved-identical (commit ae226621a). Reverted
+  SteelIonCannonDamage + NaxiV1Rocket: the template supplies the node KEY but
+  parents override type/payload → local node pin needed → the exact
+  ruling-blocked pattern. True held set is now 65 weapons.
+- Ledger sync: 22->6 drift; remaining 6 are foreign master drift (ledgers
+  stale since 09-23, pre-#478 splice) — flagged to owners.
+- Fleet: EMBER delivered the central W7 remainder as PR #488 using this
+  pipeline (outpost2 16 + warcraft2 5, resolved-identical, edenRailgun D1
+  fixed). Reviewed — clean. #486 (N6 sprite rename) trivial, clean.

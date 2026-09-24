@@ -2,15 +2,6 @@
 #		Red Alert 2 Asian Alliance
 ####################################################################################################
 
-^AsianHowitzerSplashLegacy:
-	Inherits@wh: ^Warhead_Concussion_Medium
-	Inherits@wh2: ^Warhead_Demolition_Heavy
-	Inherits@fx: ^Effect_Twlt_VeryLarge_RA2
-	Projectile: InstantExplode
-	Warhead@Concussion_Medium:
-		Damage: 20000
-	Warhead@Demolition_Heavy:
-		Damage: 20000
 
 AsianHowitzerSplash:
 	Inherits@xAsianHowitzerSplash1: ^Warhead_Demolition_Heavy
@@ -145,12 +136,16 @@ AsianFlameFragment:
 		AimTargetStances: Enemy, Neutral
 
 AsianFlameFragment2:
-	Inherits: AsianFlameFragment
-	-Warhead@FireShrapnel:
+	Inherits@w70: ^Warhead_Flame_Light
+	Inherits@w71: ^Projectile_Flame_Light
+	Inherits@w72: ^Effect_Init_Fire_RA2
 	Range: 3000
+	ReloadDelay: 20
 
 AsianOilBombFragments:
-	Inherits: AsianFlameFragment
+	Inherits@w70: ^Warhead_Flame_Light
+	Inherits@w71: ^Projectile_Flame_Light
+	Inherits@w72: ^Effect_Init_Fire_RA2
 	ReloadDelay: 15
 	Range: 5000
 	Projectile: Bullet
@@ -167,7 +162,7 @@ AsianOilBombFragments:
 	Warhead@Flame_Light:
 		Damage: 4000
 		Falloff: 100, 50, 25, 12, 6, 3, 1
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		ImpactSounds: vdemdiea.wav
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: AsianFlameFragment
@@ -212,24 +207,6 @@ AsianChaosSuperweapon:
 		InvalidTargets: Hero, MCImmune
 		ValidRelationships: Enemy
 
-^AsianIonBeam:
-	Inherits@wh: ^Warhead_Tesla_Super
-	Inherits@proj: ^Projectile_Lightning_Super
-	Inherits@fx: ^Effect_Tesla_Super
-	ReloadDelay: 9999
-	AirThreshold: 8c0
-	ValidTargets: Ground, Water, Air
-	Projectile: SpriteAthenaLaser
-		Image: tsioncannon
-		Sequence: ionbeam
-		Palette: shield100
-		RingImage: tsioncannon
-		RingSequence: ringmini2
-		SpriteNumber: 10
-		HeightOffset: 2546
-		StayTicks: 45
-		Speed: 0
-		ExplosionInterval: 9999
 
 AsianSmallTorpedo:
 	Inherits@xAsianSmallTorpedo0: ^Warhead_MissileAP_Heavy
@@ -328,108 +305,12 @@ AsianSmallTorpedo:
 			Flak: 11
 			None: 10
 
-^SteelSmallArms:
-	Inherits: ^RA2SmallArms
-	Report: steel_clonefire.wav
-	Projectile: Bullet
-		ContrailStartColor: 77CCFFAA
-		ContrailEndColor: 4488FF00
-		ContrailLength: 10
-		ContrailStartWidth: 20
-		ContrailEndWidth: 5
-	Warhead@Effect: CreateEffect
-		Explosions: steel_bluepiffs
 
-^SteelChaingun:
-	Inherits@x^SteelChaingun0: ^Warhead_Bullet_Medium
-	Inherits@x^SteelChaingun1: ^Projectile_Bullet_Medium
-	Inherits@x^SteelChaingun2: ^Effect_Bullet_Medium_RA2
-	Projectile: Bullet
-		ContrailStartColor: 77CCFFAA
-		ContrailEndColor: 4488FF00
-		ContrailLength: 20
-		ContrailStartWidth: 40
-		ContrailEndWidth: 10
-	Warhead@Effect: CreateEffect
-		Explosions: steel_bluepiffs
 
-^SteelLightMissile:
-	Inherits: ^RA2LightMissile
-	Projectile: Missile
-		ContrailStartColor: 77CCFFAA
-		ContrailEndColor: 4488FF00
-	Warhead@Effect: CreateEffect
-		Explosions: steel_blueexp
-		ExplosionPalette: ra2effect
-		ImpactSounds: makoexplose.wav
-	Warhead@EffectAir: CreateEffect
-		Explosions: steel_blueexp
-		ExplosionPalette: ra2effect
-		ImpactSounds: makoexplose.wav
 
-^SteelMediumMissile:
-	Inherits@x^SteelMediumMissile0: ^Warhead_MissileAP_Medium
-	Inherits@x^SteelMediumMissile1: ^Projectile_Missile_Medium
-	Inherits@x^SteelMediumMissile2: ^Effect_Clsn_Medium_RA2
-	Projectile: Missile
-		ContrailStartColor: 77CCFFAA
-		ContrailEndColor: 4488FF00
-	Warhead@Effect: CreateEffect
-		Explosions: steel_blueexp
-		ExplosionPalette: ra2effect
-		ImpactSounds: makoexplose.wav
-	Warhead@EffectAir: CreateEffect
-		Explosions: steel_blueexp
-		ExplosionPalette: ra2effect
-		ImpactSounds: makoexplose.wav
 
-^SteelHeavyMissile:
-	Inherits@x^SteelHeavyMissile0: ^Warhead_MissileAP_Heavy
-	Inherits@x^SteelHeavyMissile1: ^Projectile_Missile_Heavy
-	Inherits@x^SteelHeavyMissile2: ^Effect_Clsn_Large_RA2
-	Projectile: Missile
-		ContrailStartColor: 77CCFFAA
-		ContrailEndColor: 4488FF00
-	Warhead@Effect: CreateEffect
-		Explosions: steel_blueexp
-		ExplosionPalette: ra2effect
-		ImpactSounds: makoexplose.wav
-	Warhead@EffectAir: CreateEffect
-		Explosions: steel_blueexp
-		ExplosionPalette: ra2effect
-		ImpactSounds: makoexplose.wav
 
-^SteelMediumCannon:
-	Inherits@x^SteelMediumCannon0: ^Warhead_CannonHE_Medium
-	Inherits@x^SteelMediumCannon1: ^Projectile_Shell_Medium
-	Inherits@x^SteelMediumCannon2: ^Effect_Explosion_Medium_RA2
-	Projectile: Bullet
-		ContrailStartColor: 77CCFFAA
-		ContrailEndColor: 4488FF00
-		ContrailLength: 25
-		ContrailStartWidth: 25
-		ContrailEndWidth: 5
-	Warhead@Effect: CreateEffect
-		Explosions: steel_blueexp
-		ExplosionPalette: ra2effect
-		ImpactSounds: makoexplose.wav
 
-^SteelHeavyCannon:
-	Inherits: ^RA2HeavyCannon
-	Projectile: Bullet
-		ContrailStartColor: 77CCFFAA
-		ContrailEndColor: 4488FF00
-		ContrailLength: 25
-		ContrailStartWidth: 50
-		ContrailEndWidth: 25
-	Warhead@Effect: CreateEffect
-		Explosions: steel_blueexp
-		ExplosionPalette: ra2effect
-		ImpactSounds: makoexplose.wav
-
-####################################################################################################
-#		Red Alert 2 Steel Consortium
-####################################################################################################
 
 SteelIonCannon:
 	AirThreshold: 8c0
@@ -497,7 +378,7 @@ SteelIonCannonDamage:
 	Inherits: IonCannon
 	Report: tesla1.aud
 	AirThreshold: 8c0
-	Warhead@3Smu_area: LeaveSmudge
+	Warhead@3Smu_area:
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Building, wall
 		Size: 3
@@ -505,7 +386,7 @@ SteelIonCannonDamage:
 
 SteelHoverMissile_elite:
 	Inherits@finalmain: ^Warhead_MissileAP_Light_Flat
-	Inherits: SteelHoverMissile
+	Inherits@w70: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_Grey_Explosion_Medium_RA2
 	Range: 7000
 	Burst: 4
@@ -545,7 +426,6 @@ SteelHoverMissile_elite:
 			None: 1
 		Falloff: 100, 51
 		Range: 0, 21
-	-Warhead@MissileAP_Light:
 	Warhead@MissileAP_Light_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
@@ -553,6 +433,20 @@ SteelHoverMissile_elite:
 
 		FriendlyFireDamage: 75
 		FriendlyFireSpread: 75
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	TargetActorCenter: true
+	Projectile: Missile
+		ContrailLength: 25
+		ContrailStartWidth: 25
+		ContrailEndWidth: 1
+		ContrailEndColor: 4488FF00
+	Warhead@Effect:
+		ImpactActors: false
+	Warhead@EffectAir:
+		ExplosionPalette: ra2effect
+	BurstDelays: 4
+	Report: vifvatta.wav
 SteelTwisterMissiles:
 	Inherits@xSteelTwisterMissiles0: ^Warhead_MissileAP_Medium
 	Inherits@xSteelTwisterMissiles1: ^Projectile_Missile_Medium
@@ -716,7 +610,9 @@ SteelTwisterMissiles:
 		SmudgeType: RA2Scorch
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 SteelTwisterMissiles_elite:
-	Inherits: SteelTwisterMissiles
+	Inherits@w70: ^Warhead_MissileAP_Medium
+	Inherits@w71: ^Projectile_Missile_Medium
+	Inherits@w72: ^Effect_Clsn_Medium_RA2
 	Range: 6000
 	Burst: 10
 	Projectile: Missile
@@ -728,6 +624,144 @@ SteelTwisterMissiles_elite:
 		ContrailStartColor: E60000
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
+	ReloadDelay: 105
+	Warhead@MissileAP_Medium: AreaDamage
+		Damage: 11000
+		PercentageScale: 1810
+	Projectile: Missile
+		ContrailLength: 33
+		LaunchAngle: 66
+		ContrailZOffset: 4000
+		ContrailStartWidth: 33
+		ContrailEndWidth: 1
+	Warhead@Effect: CreateEffect
+		Explosions: steel_blueexp
+		ImpactSounds: makoexplose.wav
+		ImpactActors: false
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@EffectAir: CreateEffect
+		Explosions: steel_blueexp
+		ImpactSounds: makoexplose.wav
+		ExplosionPalette: ra2effect
+	BurstDelays: 5
+	MinRange: 1000
+	Report: twisterfire.wav
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 200
+		Damage: 1
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+		ValidRelationships: Neutral, Enemy
+	InvalidTargets: wall
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 375
+		Damage: 1
+		Falloff: 111, 33, 11, 3
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Wood: 16
+			Concrete: 15
+			Steel: 14
+			Scout: 13
+			Light: 12
+			Medium: 11
+			Heavy: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		ValidRelationships: Neutral, Enemy
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@GroundFire: SpawnActor
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 125
+		Damage: 1
+		Versus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Concrete: 6
+			Steel: 5
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
+		ValidRelationships: Neutral, Enemy
+	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 250
+		Damage: 1
+		Versus:
+			Shield: 35
+			Spaceship: 25
+			Helicopter: 24
+			Bomber: 23
+			Fighter: 22
+			Superheavy: 21
+			Heavy: 20
+			Medium: 19
+			Light: 18
+			Scout: 17
+			Plate: 16
+			Flak: 15
+			None: 14
+			Heroic: 13
+			Steel: 12
+			Concrete: 11
+			Wood: 10
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
+		ValidRelationships: Neutral, Enemy
 
 Support_EMP_Bomb:
 	Inherits@2: ^Warhead_Tesla_Super
@@ -863,12 +897,6 @@ SteelSupportSpawner4:
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: !corroded
 
-^LunarNaxGreenLasers:
-	Projectile: Bullet
-		ContrailStartColor: 8aff77AA
-		ContrailLength: 25
-		ContrailStartWidth: 25
-		ContrailEndWidth: 1
 
 NaxGrilleArty:
 	Inherits@xNaxGrilleArty0: ^Warhead_Demolition_Light
@@ -974,7 +1002,8 @@ NaxGrilleArty:
 		PercentageScale: 10000
 		PercentageSpread: 50
 NaxGrilleArty_elite:
-	Inherits: NaxGrilleArty
+	Inherits@w70: ^Warhead_Demolition_Light
+	Inherits@w71: ^Projectile_Grenade_Light
 	Inherits@fx_cover: ^Effect_AlliedTigerCannon
 	Range: 13333
 	Burst: 2
@@ -1063,6 +1092,20 @@ NaxGrilleArty_elite:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
+	ReloadDelay: 111
+	Projectile: Bullet
+		Speed: 333
+		LaunchAngle: 111
+		Inaccuracy: 1234
+		InaccuracyPercentage: 1
+		ProjectileSpeedPercentage: 10
+		Shadow: true
+		ContrailLength: 22
+	MinRange: 2470
+	Report: vdesatta.wav, vdesattb.wav
+	Warhead@CannonHE_Heavy: AreaDamage
+		Damage: 48000
+	-Warhead@Demolition_Light:
 NaxiRifle:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
@@ -1082,52 +1125,6 @@ NaxiRifle:
 		Width: 50
 	Warhead@Bullet_Light:
 		Damage: 6000
-^NaxiLegacyLaserDelivery:
-	Inherits@proj: ^Projectile_Laser_Heavy
-	Inherits@fx: ^Effect_Laser_Heavy
-	TargetActorCenter: false
-	Projectile: LaserZap
-		Image: DRAGON
-		ContrailZOffset: 4000
-		ContrailStartColor: EECCAA88
-		ContrailEndColor: 88664422
-		ContrailStartWidth: 40
-		ContrailEndWidth: 80
-		ContrailLength: 0
-		Speed: 500
-		Inaccuracy: 100
-		Arm: 0
-		Blockable: false
-		AllowSnapping: true
-		Shadow: true
-		HorizontalRateOfTurn: 30
-		VerticalRateOfTurn: 30
-		TrailImage: smokey
-		TrailInterval: 1
-		MaximumLaunchSpeed: 250
-		MinimumLaunchSpeed: 250
-		CloseEnough: 500
-		Acceleration: 3
-		HomingActivationDelay: 2
-		RangeLimit: 25000
-		PointDefenseTypes: Missile
-	-Warhead@Glow:
-	Warhead@Effect:
-		ImpactSounds: xplos.aud
-		ValidTargets: Ground, Water
-	Warhead@EffectWater: CreateEffect
-		Explosions: water_piffs
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 NaxLaserT:
 	Inherits@wh: ^Warhead_Laser_Heavy
@@ -1607,7 +1604,16 @@ NaxZombieSpawner:
 		ImpactSounds: nax_zmove1.wav, nax_zmove2.wav
 
 NaxZombieSpawnerFrank:
-	Inherits: NaxZombieSpawner
+	Projectile: InstantHit
+	Warhead@Effect: CreateEffect
+		Explosions: virusreversed
+		ExplosionPalette: ra2effect
+		ImpactSounds: gvirexpa.wav, gvirexpb.wav
+		ValidTargets: Ground, Air
+	Warhead@Effect2: CreateEffect
+		AffectsParent: true
+		ImpactActors: false
+		ImpactSounds: nax_zmove1.wav, nax_zmove2.wav
 
 NaxZombieSupportWeapon:
 	Projectile: InstantHit
@@ -1694,7 +1700,9 @@ NaxZombieSupportWeaponTanks:
 		ValidTargets: Ground, Air
 
 NaxTorpTube:
-	Inherits: RA2TorpTube
+	Inherits@w70: ^Warhead_MissileAP_Heavy
+	Inherits@w71: ^Projectile_Missile_Heavy
+	Inherits@w72: ^Effect_Watersplash_Large_RA2
 	Warhead@EffectWater: CreateEffect
 		ImpactSounds: nax_submissileexp.wav
 	Warhead@Effect:
@@ -1751,22 +1759,103 @@ NaxTorpTube:
 			Plate: 12
 			Flak: 11
 			None: 10
+	ValidTargets: Water, Underwater, Bridge
+	ReloadDelay: 90
+	Range: 9000
+	Report: vbooat2a.wav
+	Projectile: Missile
+		Image: Patriot
+		Arm: 5
+		TrailImage: bubbles
+		TrailDelay: 2
+		MaximumLaunchSpeed: 90
+		MinimumLaunchSpeed: 90
+		Speed: 180
+		Acceleration: 1
+		HorizontalRateOfTurn: 5
+		RangeLimit: 18000
+		BoundToTerrainType: Water
+		Palette: cloak
+		MaximumLaunchAngle: 0
+		CruiseAltitude: 0
+		-Blockable:
+		-AllowSnapping:
+		-Inaccuracy:
+		-Shadow:
+		-VerticalRateOfTurn:
+		-TrailInterval:
+		-ContrailLength:
+		-CloseEnough:
+		-HomingActivationDelay:
+		-PointDefenseTypes:
+	Warhead@Effect: CreateEffect
+		ValidTargets: Ship, Structure, Bridge, Ground
+		ImpactActors: true
+	Warhead@MissileAP_Heavy_Flat: AreaDamage
+		ValidTargets: Water, Underwater, Bridge, Structure
+		Damage: 36000
+		PercentageScale: 9998
+	-Warhead@MissileAP_Heavy:
+	-Warhead@Smudge:
 
 Nax120mmCorrosion:
-	Inherits: RA2120mm
+	Inherits@w70: ^Warhead_CannonHE_Medium
+	Inherits@w71: ^Projectile_Shell_Medium
+	Inherits@w72: ^Effect_Explosion_Medium_RA2
 	Inherits@Corrosion: ^NaxOxidationShells
+	ReloadDelay: 54
+	Range: 5374
+	Warhead@CannonHE_Medium: AreaDamage
+		Damage: 10000
+	Projectile: Bullet
+		Speed: 514
+	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
 
 Nax120mmCorrosion_elite:
-	Inherits: RA2120mm_elite
+	Inherits@w70: ^Warhead_CannonHE_Medium
+	Inherits@w71: ^Projectile_Shell_Medium
+	Inherits@w72: ^Effect_Explosion_Medium_RA2
 	Inherits@Corrosion: ^NaxOxidationShells
+	ReloadDelay: 54
+	Range: 6374
+	Warhead@CannonHE_Medium: AreaDamage
+		Damage: 10000
+	Projectile: Bullet
+		Speed: 514
+	Warhead@Glow:
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@EffectWater:
+		Explosions: ra2_large_watersplash
+		ImpactSounds: gexpwala.wav
+	Warhead@EffectAir:
+		Explosions: big_explosion_air
+	Warhead@ShieldHit: GrantExternalCondition
+		Duration: 12
+	Warhead@Concrete:
+		Damage: 200
+	Burst: 2
+	BurstDelays: 3
+	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
 
 NaxiHetzerDestroyerCorrosion:
-	Inherits: NaxiHetzerDestroyer
+	Inherits@w70: ^Effect_Explosion_Small_RA2
+	Inherits@w71: ^Projectile_Shell_Light
+	Inherits@w72: ^Warhead_CannonAP
 	Inherits@Corrosion: ^NaxOxidationShells
 	Report: cannon1.aud
+	Projectile: Bullet
+		Speed: 713
+	ReloadDelay: 80
+	Range: 7132
+	Warhead@CannonAP: AreaDamage
+		Damage: 40000
+		Heaviness: 0
 
 NaxiJadgDestroyerCorrosion:
-	Inherits: NaxiJadgDestroyer
+	Inherits@w70: ^Warhead_CannonAP_Light
+	Inherits@w71: ^Projectile_Shell_Light
+	Inherits@w72: ^Effect_Explosion_Small_RA2
 	Inherits@Corrosion: ^NaxOxidationShells
 	Report: cannon1.aud
 	Warhead@Effect:
@@ -1821,10 +1910,34 @@ NaxiJadgDestroyerCorrosion:
 			Helicopter: 3
 			Bomber: 2
 			Fighter: 1
+	ReloadDelay: 90
+	Range: 7396
+	Projectile: Bullet
+		Speed: 739
+	Warhead@CannonAP_Light_Flat: AreaDamage
+		ValidTargets: Ground, Water
+		Damage: 60000
+		PercentageScale: 9999
+	-Warhead@CannonAP_Light:
 
 NaxiAntiTankCannonCorrosion:
-	Inherits: NaxiAntiTankCannon
+	Inherits@w70: ^Effect_Explosion_Small_RA2
+	Inherits@w71: ^Projectile_Shell_Light
+	Inherits@w72: ^Warhead_CannonAP
 	Inherits@Corrosion: ^NaxOxidationShells
+	Projectile: Bullet
+		ContrailStartColor: FF9933
+		ContrailEndColor: 000000
+		ContrailEndColorUsePlayerColor: true
+		ContrailWidth: 333
+		ContrailLength: 33
+		Speed: 3333
+	ReloadDelay: 75
+	Range: 7361
+	Warhead@CannonAP: AreaDamage
+		Damage: 28000
+		Heaviness: 0
+	Report: nax_hotwizer.wav
 
 NaxiAlienPistol:
 	Inherits@finalmain: ^Warhead_Laser_Heavy_Flat
@@ -1902,7 +2015,7 @@ NaxiV1Rocket:
 		TrailDelay: 0
 		TrailInterval: 1
 		SkipAscent: true
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: ra2nuke
 		ExplosionPalette: ra2effect
 		ImpactSounds: snukexpl.wav
@@ -2420,17 +2533,6 @@ NaxisBlackBombSmaller:
 		Falloff: 100, 45, 18, 6, 0
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
-^LunarNaxisUpgradedCannons:
-	Report: nax_aliengun.wav
-	Projectile: Bullet
-		ContrailStartColor: 21f3b7AA
-		ContrailLength: 25
-		ContrailStartWidth: 25
-		ContrailEndWidth: 1
-	Warhead@Effect: CreateEffect
-		Explosions: steel_blueexp
-		ExplosionPalette: ra2effect
-		ImpactSounds: makoexplose.wav
 
 Lunar_Green105mm:
 	Inherits@xLunar_Green105mm0: ^Warhead_CannonHE_Medium
@@ -2833,7 +2935,9 @@ LatinBuggyRocket:
 			Flak: 6
 			None: 5
 LatinBuggyRocket_elite:
-	Inherits: LatinBuggyRocket
+	Inherits@w70: ^Warhead_MissileAP_Medium
+	Inherits@w71: ^Projectile_Missile_Medium
+	Inherits@w72: ^Effect_Explosion_Large_RA2
 	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
 	Range: 7000
 	Burst: 2
@@ -2893,6 +2997,144 @@ LatinBuggyRocket_elite:
 			Plate: 7
 			Flak: 6
 			None: 5
+	ReloadDelay: 55
+	Projectile: Missile
+		Arm: 2
+		Inaccuracy: 120
+		Image: d2k_missile2
+		TrailImage: large_trail
+		ContrailLength: 33
+		MaximumLaunchSpeed: 240
+		MinimumLaunchSpeed: 120
+		Speed: 480
+		Acceleration: 12
+		RangeLimit: 12000
+		Palette: d2keffect
+		MinimumLaunchAngle: 24
+		MaximumLaunchAngle: 120
+		ContrailEndColor: E60000
+		ContrailStartWidth: 33
+		ContrailEndWidth: 1
+		ContrailStartColor: 77CCFFAA
+	Warhead@EffectAir:
+		ExplosionPalette: ra2effect
+	Warhead@CollapsedLatinBuggyRocketConcussion_MediumPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 500
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 25
+			Scout: 20
+			None: 19
+			Wood: 18
+			Light: 17
+			Flak: 16
+			Steel: 15
+			Medium: 14
+			Plate: 13
+			Concrete: 12
+			Heavy: 11
+			Heroic: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		Falloff: 100, 72, 50, 32
+		Range: 0, 350, 700, 1050
+	Warhead@CollapsedLatinBuggyRocketDemolition_LightPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 500
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 17
+			Wood: 16
+			Steel: 15
+			Concrete: 14
+			None: 13
+			Flak: 12
+			Plate: 11
+			Heroic: 10
+			Scout: 9
+			Light: 8
+			Medium: 7
+			Heavy: 6
+			Superheavy: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		Falloff: 100, 45, 18
+		Range: 0, 233, 466
+	Warhead@CollapsedLatinBuggyRocketMissileAP_LightPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 500
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 17
+			Superheavy: 16
+			Heavy: 15
+			Medium: 14
+			Light: 13
+			Scout: 12
+			Spaceship: 11
+			Helicopter: 10
+			Bomber: 9
+			Fighter: 8
+			Concrete: 7
+			Steel: 6
+			Wood: 5
+			Heroic: 4
+			Plate: 3
+			Flak: 2
+			None: 1
+		Falloff: 100, 51
+		Range: 0, 21
+	Warhead@CollapsedLatinBuggyRocketMissileAP_MediumPercentage: AreaDamagePercentage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 500
+		PercentageDenominator: 10000
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Heavy: 19
+			Medium: 18
+			Light: 17
+			Scout: 16
+			Spaceship: 15
+			Helicopter: 14
+			Bomber: 13
+			Fighter: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
+		Falloff: 100, 50
+		Range: 0, 32
+	Warhead@MissileAP_Medium_Flat: AreaDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 40000
+		PercentageScale: 0
+	-Warhead@MissileAP_Medium:
 
 12MissilesActivate:
 	Warhead@1Dam: FireFragment
@@ -3309,7 +3551,7 @@ RA2Robotmm_elite:
 		BeamColor: 4488FFBB
 		BeamWidth: 128
 		Duration: 24
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: blue_building
 		ImpactSounds: psahit00.aud
 		ExplosionPalette: effect
@@ -3428,7 +3670,7 @@ RA2RobotmmScatter_elite:
 		InvalidTargets: Air
 		Damage: 16000
 	-Warhead@Scatter:
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: blue_med_frag
 		ImpactSounds: xplos.aud
 		ImpactActors: false
@@ -3554,7 +3796,9 @@ naxis_sssoldier_smg:
 			Spaceship: 6
 			Superheavy: 5
 naxis_sssoldier_smg_elite:
-	Inherits: naxis_sssoldier_smg
+	Inherits@w70: ^Warhead_Bullet_Medium
+	Inherits@w71: ^Projectile_Bullet_Medium
+	Inherits@w72: ^Effect_Bullet_Medium
 	Burst: 20
 	BurstDelays: 4
 	Warhead@Bullet_Medium_Flat:
@@ -3611,3 +3855,15 @@ naxis_sssoldier_smg_elite:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+	ValidTargets: Ground, Water
+	ReloadDelay: 75
+	Range: 4500
+	Projectile: Bullet
+		Inaccuracy: 600
+		Speed: 4000
+	Report: nax_mp40.wav
+	Warhead@Bullet_Medium_Flat: AreaDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
+	-Warhead@Bullet_Medium:
