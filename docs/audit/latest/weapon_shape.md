@@ -4,31 +4,31 @@
 
 ⛔ This **repeals the exemption** in `tools/audit/intentional_composites.py`. Its 224 entries are no longer 'reviewed, keep' — they are the worklist. The registry data stays useful: it says which mains someone chose on purpose.
 
-concrete weapons with inherits: **2162**
+concrete weapons with inherits: **2158**
 
 W5 counts structural flat-damage nodes, including zero/healing/ally-only nodes; the split audit counts positive non-companion damage. Both resolve the full concrete weapon corpus. Use `--compare-split` for exact differences.
 
 | check | what | count | ratchet |
 |---|---|--:|--:|
-| W1 | more than 3 inherits | **294** (13.60% of 2162) | 26.16% |
+| W1 | more than 3 inherits | **293** (13.58% of 2158) | 26.16% |
 | W2 | two or more `^Warhead_*` inherits | **123** | 123 |
 | W3 | two or more `^Projectile_*` inherits | **7** | 7 |
 | W4 | two or more `^Effect_*` inherits | **41** | 41 |
 | W5 | more than one resolved MAIN warhead | **168** | 389 |
 | W6 | effect warheads declared LOCALLY | **443** | 443 |
-| W7 | inherits from ANOTHER WEAPON, not a template | **804** | 804 |
+| W7 | inherits from ANOTHER WEAPON, not a template | **799** | 804 |
 | W8 | inherits a `^Template` that is not one of the three kinds | **362** | 362 |
 
 | I7 informational — missing template | weapons |
 |---|--:|
-| no `^Effect_*` inherit | 827 |
-| no `^Projectile_*` inherit | 1224 |
-| no `^Warhead_*` inherit | 887 |
+| no `^Effect_*` inherit | 822 |
+| no `^Projectile_*` inherit | 1220 |
+| no `^Warhead_*` inherit | 883 |
 
 _I7 is a REVIEW QUEUE, not a defect count — an instant or utility weapon may legitimately have no projectile. Do not ratchet it without a per-weapon pass._
 
 
-## W7 — inherits from ANOTHER WEAPON, not a template (804 vs ratchet 804)
+## W7 — inherits from ANOTHER WEAPON, not a template (799 vs ratchet 804)
 
 | weapon | weapon-parents | first four |
 |---|---|---|
@@ -74,7 +74,7 @@ _I7 is a REVIEW QUEUE, not a defect count — an instant or utility weapon may l
 | `AsianPunisherAG_EMP` | 1 | `AsianPunisherAG` |
 
 
-_... and 764 more._
+_... and 759 more._
 
 
 ## W8 — inherits a `^Template` that is not one of the three kinds (362 vs ratchet 362)
@@ -126,7 +126,7 @@ _... and 764 more._
 _... and 322 more._
 
 
-## W1 — more than 3 inherits (294 vs ratchet 576)
+## W1 — more than 3 inherits (293 vs ratchet 576)
 
 | weapon | inherits | first four |
 |---|---|---|
@@ -172,7 +172,7 @@ _... and 322 more._
 | `D2K_155mm2` | 6 | `^Warhead_CannonHE_Heavy` · `^MediumFlameWeapon` · `^ShrapnelWeapon` · `^HeavyBomb` |
 
 
-_... and 254 more._
+_... and 253 more._
 
 
 ## W2 — two or more `^Warhead_*` inherits (123 vs ratchet 123)
