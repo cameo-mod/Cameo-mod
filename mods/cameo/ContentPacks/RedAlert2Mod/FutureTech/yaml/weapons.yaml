@@ -1348,7 +1348,7 @@ Future_MultiMissile_Javelin:
 		InvalidTargets: Vehicle, Structure
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_tiny_explosion
-		ImpactSounds: xplobig4.aud
+		ImpactSounds: EXPLSML4.WAV
 		ExplosionPalette: effect75alpha
 		ValidTargets: Ground, Air
 		ImpactActors: false
@@ -1959,7 +1959,7 @@ FutureJavelinRockets:
 		InvalidTargets: Vehicle, Structure
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_tiny_explosion
-		ImpactSounds: xplobig4.aud
+		ImpactSounds: EXPLSML4.WAV
 		ExplosionPalette: effect75alpha
 		ValidTargets: Ground, Air
 		ImpactActors: false
