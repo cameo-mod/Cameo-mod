@@ -2965,8 +2965,8 @@ and is written out in full in `BALANCE_PROGRAM_PLAN.md` §1b):
 
 | item | set | note |
 |---|---|---|
-| **W7** Sonic → `Resonance` meter | D (`rules/defaults.yaml`) | **IN PROGRESS (EMBER, 2026-09-23)** — shared side done on `devin/ember/l6-w7-resonance`; 16 pack refs pending via REQUEST to DAWN/NOVA. ⚠ set D is ONE file — serialise W7/W9/W10, never two at once |
-| **W9** `^Poisonable` → `Poison` meter | D | same |
+| **W7** Sonic → `Resonance` meter | D (`rules/defaults.yaml`) | **SHARED MERGED (EMBER, #476 → `e97924d4c`)** — pack-side in flight: DAWN done `388a7dd0d` on `devin/dawn/l4-fx` (needs PR), NOVA's 8 pending. ⚠ set D is ONE file — serialise W7/W9/W10, never two at once |
+| **W9** `^Poisonable` → `Poison` meter | D | **IN PROGRESS (EMBER, 2026-09-23)** — `defaults.yaml` meter done; Ordos crossbow grant to DAWN via REQUEST; darkreign parked |
 | **W10** `^Blindable` → `Blind` meter | D | unblocked, W6 shipped |
 | **WC2 heroes** | `mods/cameo/ContentPacks/Warcraft2/Humans/**`, `Orcs/**` | **IN PROGRESS (Devin, 2026-08-25)** — porting 4 hero units + weapons + icons from `wcameo(1)` with new `wc2_<faction>_<actor>` naming. Weapons done; actors, sequences, icons in progress. Check `git log -3` and mtime before touching this set. |
 | **W12** superweapons as a separate track | — | maintainer-led; superweapons are not unit-priced |
