@@ -11776,3 +11776,40 @@ prerequisites and weapon/actor behavior are unchanged.
   `MenuPostProcessEffect.PostWorldLoaded` and the isolated log directory contains no
   `exception-*.log`. An initial attempt failed before engine initialization because the support
   directory had not been pre-created; the corrected run passed.
+
+## 2026-09-23 — Nova: W23-RA audit-regression correction round
+
+**Context:** PR #472 (16 batches, all 16 owned RA-family weapon files retrofitted to the
+3-way split) was reported MERGEABLE, but the fleet review found the retrofit systematically
+raised W3/W4/W6 and — worse — produced the `Parent type already inherited` boot-crash class
+via duplicate `^Effect_*` edges on parent+child pairs.
+
+**Fixes applied (all verified):**
+- Collapsed every weapon to its last-merged `^Warhead_*`/`^Projectile_*`/`^Effect_*` edge,
+  re-pinned lost fields; 244 duplicate edges removed.
+- Covered local typed effect declares with `^Effect_*` inherits (computed against each
+  weapon's full resolved effect-node set — the first pass only looked at local declares and
+  had to be redone); typed pins untyped where covered.
+- Removed 42 redundant `fx_cover` edges that duplicated an ancestor's `^Effect_*`
+  (the BLOCKING crash class) — confirmed `audit_duplicate_inherits.py` = 0 blocking.
+- Restored every `^` template block to exact HEAD content (the collapse/cancel sweeps had
+  wrongly stripped cross-file provider edges — broke `GLDemolitionExplode` etc.).
+- Removed 286 dead cancels total (225 + 61) whose providers were dropped.
+- Fixed the last EMPTY-TYPE warhead (`NaxiWW2KübelwagenMachinegun` lost its `AreaDamage`
+  provider → added local type).
+
+**Final state:** repo-wide resolved diff = 0 drifted weapons (2149 scanned; only
+master-only `heaviness_probe` map weapons differ). Audits vs master:
+W1 289/506, W2 122/281, W3 7/12, W4 42/50, W6 675/692, W8 361/672 — improved on
+every axis; W7 963 = master (stale ratchet, fleet debt). Orphans 0, empty warheads 0,
+blocking dup-inherits 0. Boot-gate PASS (`MenuPostProcessEffect.PostWorldLoaded`,
+0 exceptions, private support dir).
+
+**Incident (disclosed):** a line-number deletion tool read a stale `C:\tmp\orphans.txt`
+(Git-Bash `/tmp` vs Python `/tmp` mismatch) and wrote to `C:\tmp\dawn` — DAWN's worktree.
+Verified post-hoc that every deleted line was exactly an orphan cancel that worktree's own
+audit had already flagged (their count 161→1); no valid content lost. Disclosed on the
+fleet board; guard added (refuse non-`-` targets).
+
+**Awaiting:** maintainer merge call on #472; Claude's ExtraDamage ruling for the held
+Tesla/Laser/Railgun/ChargedTesla edges.
