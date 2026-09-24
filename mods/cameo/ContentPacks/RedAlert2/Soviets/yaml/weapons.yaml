@@ -771,8 +771,21 @@ RA160mm:
 	Inherits@x^RA160mmRadLegacy3: ^Projectile_Grenade_Light
 	Inherits@x^RA160mmRadLegacy4: ^Effect_Bang_Large_RA2
 	Inherits@rad: ^RA2RadShell
+	MinRange: 2222
+	Range: 11111
+	ReloadDelay: 88
+	Report: vdesatta.wav, vdesattb.wav
 	Projectile: Bullet
+		Image: bhreddragon
 		ContrailStartColor: 88BB66
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailLength: 25
+		ContrailStartWidth: 55
+		Inaccuracy: 1111
+		LaunchAngle: 111
+		Speed: 333
+		TrailInterval: 1
 		TrailImage: green_smokey
 		TrailPalette: effect
 	Warhead@Chemical_Light:
