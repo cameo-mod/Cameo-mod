@@ -1,7 +1,7 @@
 e1sniper:
 	Inherits: ^InfantryOverlays
 	Defaults:
-		Filename: ra1_allies_alliedsniper_e1sniper.shp
+		Filename: ra1_allies_sniper_e1sniper.shp
 		Scale: 2
 	stand:
 		Facings: 8
@@ -97,7 +97,7 @@ e1sniper:
 		Stride: 6
 		Facings: 8
 	icon:
-		Filename: ra1_allies_alliedsniper_icon.png
+		Filename: ra1_allies_sniper_icon.png
 
 ra1_allies_machinegunner:
 	Inherits: ^InfantryOverlays
@@ -464,9 +464,9 @@ ra1_allies_raspy:
 	icon:
 		Filename: ra1_allies_raspy_icon.png
 
-ra1_allies_alliedlighttank:
+ra1_allies_lighttank:
 	Defaults:
-		Filename: ra1_allies_alliedlighttank.shp
+		Filename: ra1_allies_lighttank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -478,11 +478,11 @@ ra1_allies_alliedlighttank:
 		Filename: gunfire2.shp
 		Length: 2
 	icon:
-		Filename: ra1_allies_alliedlighttank_icon.shp
+		Filename: ra1_allies_lighttank_icon.shp
 
-ra1_allies_alliedmediumtank:
+ra1_allies_mediumtank:
 	Defaults:
-		Filename: ra1_allies_alliedmediumtank.shp
+		Filename: ra1_allies_mediumtank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -494,11 +494,11 @@ ra1_allies_alliedmediumtank:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: ra1_allies_alliedmediumtank_icon.shp
+		Filename: ra1_allies_mediumtank_icon.shp
 
-ra1_allies_alliedartillery:
+ra1_allies_artillery:
 	Defaults:
-		Filename: ra1_allies_alliedartillery.shp
+		Filename: ra1_allies_artillery.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -506,7 +506,7 @@ ra1_allies_alliedartillery:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: ra1_allies_alliedartillery_icon.shp
+		Filename: ra1_allies_artillery_icon.shp
 
 ra1_allies_ranger:
 	Defaults:
@@ -620,10 +620,10 @@ ra1_allies_sheridanassaulttank:
 	icon:
 		Filename: ra1_allies_promotion_sheridan_icon.shp
 
-ra1_allies_alliedbarracks:
+ra1_allies_barracks:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: ra1_allies_alliedbarracks.shp
+		Filename: ra1_allies_barracks.shp
 		TilesetFilenames:
 			DESERT: tent.des
 			SNOW: tent.sno
@@ -639,7 +639,7 @@ ra1_allies_alliedbarracks:
 		Start: 10
 		Length: 10
 	make:
-		Filename: ra1_allies_alliedbarracks_tentmake.shp
+		Filename: ra1_allies_barracks_tentmake.shp
 		TilesetFilenames:
 			DESERT: tentmake.des
 			SNOW: tentmake.sno
@@ -653,32 +653,32 @@ ra1_allies_alliedbarracks:
 	dead:
 	bib:
 	icon:
-		Filename: ra1_allies_alliedbarracks_icon.png
+		Filename: ra1_allies_barracks_icon.png
 		TilesetFilenames:
 
-ra1_allies_alliedtechcenter:
+ra1_allies_techcenter:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: ra1_allies_alliedtechcenter.shp
+		Filename: ra1_allies_techcenter.shp
 	idle:
 	damaged-idle:
 		Start: 1
 	make:
-		Filename: ra1_allies_alliedtechcenter_atekmake.shp
+		Filename: ra1_allies_techcenter_atekmake.shp
 		Length: *
 	active:
-		Filename: ra1_allies_alliedtechcenter_sputdoor.shp
+		Filename: ra1_allies_techcenter_sputdoor.shp
 		Length: *
 		Offset: -8,0
 	dead:
 	bib:
 	icon:
-		Filename: ra1_allies_alliedtechcenter_icon.png
+		Filename: ra1_allies_techcenter_icon.png
 
-ra1_allies_alliedhelipad:
+ra1_allies_helipad:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: ra1_allies_alliedhelipad.shp
+		Filename: ra1_allies_helipad.shp
 	idle:
 		ZOffset: -1023
 	damaged-idle:
@@ -693,29 +693,29 @@ ra1_allies_alliedhelipad:
 		Length: 6
 		ZOffset: -1023
 	make:
-		Filename: ra1_allies_alliedhelipad_make.shp
+		Filename: ra1_allies_helipad_make.shp
 		Length: *
 	dead:
 	bib:
 	icon:
-		Filename: ra1_allies_alliedhelipad_icon.png
+		Filename: ra1_allies_helipad_icon.png
 
 rafixa:
 	Inherits: rafix
 	Defaults:
-		Filename: ra1_allies_alliedservicedepot_rafixa.shp
+		Filename: ra1_allies_servicedepot_rafixa.shp
 
-ra1_allies_alliedgunturret:
+ra1_allies_gunturret:
 	Inherits: ^WithBuildingBibGun
 	Defaults:
-		Filename: ra1_allies_alliedgunturret.shp
+		Filename: ra1_allies_gunturret.shp
 	idle:
 		Facings: 32
 	recoil:
 		Start: 32
 		Facings: 32
 	make:
-		Filename: ra1_allies_alliedgunturret_make.shp
+		Filename: ra1_allies_gunturret_make.shp
 		Length: *
 	damaged-idle:
 		Start: 64
@@ -730,12 +730,12 @@ ra1_allies_alliedgunturret:
 	bib:
 		Offset: -1,-1
 	icon:
-		Filename: ra1_allies_alliedgunturret_icon.png
+		Filename: ra1_allies_gunturret_icon.png
 
-ra1_allies_alliedaagun:
+ra1_allies_aagun:
 	Inherits: ^WithBuildingBibGun
 	Defaults:
-		Filename: ra1_allies_alliedaagun.shp
+		Filename: ra1_allies_aagun.shp
 		Offset: 0,-26
 	idle:
 		Facings: 32
@@ -743,7 +743,7 @@ ra1_allies_alliedaagun:
 		Start: 32
 		Facings: 32
 	make:
-		Filename: ra1_allies_alliedaagun_make.shp
+		Filename: ra1_allies_aagun_make.shp
 		Length: *
 	damaged-idle:
 		Start: 64
@@ -760,7 +760,7 @@ ra1_allies_alliedaagun:
 	bib:
 		Offset: 0,0
 	icon:
-		Filename: ra1_allies_alliedaagun_icon.png
+		Filename: ra1_allies_aagun_icon.png
 		Offset: 0,0
 
 ra1_allies_pillbox:
@@ -927,9 +927,9 @@ ra1_allies_longbow:
 	icon:
 		Filename: ra1_allies_longbow_icon.png
 
-ra1_allies_alliedchinooktransport:
+ra1_allies_chinooktransport:
 	Defaults:
-		Filename: ra1_allies_alliedchinooktransport_ratran2.shp
+		Filename: ra1_allies_chinooktransport_ratran2.shp
 		Scale: 2
 	idle:
 		Facings: 32
@@ -958,7 +958,7 @@ ra1_allies_alliedchinooktransport:
 	unload:
 		Start: 35
 	icon:
-		Filename: ra1_allies_alliedchinooktransport_icon.png
+		Filename: ra1_allies_chinooktransport_icon.png
 
 ra1_allies_blackhawk:
 	Defaults:
@@ -1000,16 +1000,16 @@ alliedtiger:
 	icon:
 		Filename: ra1_allies_promotion_tigerheavytank_icon.shp
 
-ra1_allies_alliedheavyaatank:
+ra1_allies_heavyaatank:
 	Defaults:
 		Scale: 1
 	idle:
-		Filename: ra1_allies_alliedheavyaatank_heavyantiairtankchassis.png
+		Filename: ra1_allies_heavyaatank_heavyantiairtankchassis.png
 		Facings: 64
 		#Offset: 0,0,-2048
 		Scale: 1
 	turret:
-		Filename: ra1_allies_alliedheavyaatank_heavyantiairtankturret.png
+		Filename: ra1_allies_heavyaatank_heavyantiairtankturret.png
 		Facings: 64
 		#Offset: 0,0,-4098
 		Scale: 1
@@ -1018,7 +1018,7 @@ ra1_allies_alliedheavyaatank:
 		Length: *
 		#Offset: 0,0,-4098
 	icon:
-		Filename: ra1_allies_alliedheavyaatank_icon.png
+		Filename: ra1_allies_heavyaatank_icon.png
 
 ra1_allies_reconranger:
 	Defaults:

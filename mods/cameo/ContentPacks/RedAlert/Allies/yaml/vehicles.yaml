@@ -1,4 +1,4 @@
-ra1_allies_alliedlighttank:
+ra1_allies_lighttank:
 	Inherits: ^Tank
 	Inherits@Template: ^LightTankTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -12,7 +12,7 @@ ra1_allies_alliedlighttank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~ra1_allies_alliedwarfactory, ~!ra1_allies_promotion_sheridan
+		Prerequisites: ~ra1_allies_warfactory, ~!ra1_allies_promotion_sheridan
 		Description: actor_ltnk.description
 	Valued:
 		Cost: 1040
@@ -56,7 +56,7 @@ ra1_allies_alliedlighttank:
 	ActorStatValues:
 		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
 
-ra1_allies_alliedmediumtank:
+ra1_allies_mediumtank:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -68,7 +68,7 @@ ra1_allies_alliedmediumtank:
 	Inherits@ChronoArmor: ^ChronoArmor
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~ra1_allies_alliedwarfactory, ~!ra1_allies_promotion_tigerheavytank
+		Prerequisites: ~ra1_allies_warfactory, ~!ra1_allies_promotion_tigerheavytank
 		BuildPaletteOrder: 110
 		Description: template_mbt.description
 	Valued:
@@ -121,7 +121,7 @@ ra1_allies_alliedmediumtank:
 		MuzzleSequence: muzzle
 		Weapon: ra1_allies_alliedmediumtank_cannon_cryo
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
-ra1_allies_alliedheavyaatank:
+ra1_allies_heavyaatank:
 	Inherits: ^Vehicle
 	Inherits@Template: ^AntiAirVehicleTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -137,7 +137,7 @@ ra1_allies_alliedheavyaatank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 60
-		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedradardome
+		Prerequisites: ~ra1_allies_warfactory, ra1_allies_radardome
 		Description: actor_heavyaatank.description
 	Valued:
 		Cost: 1250
@@ -167,7 +167,7 @@ ra1_allies_alliedheavyaatank:
 		Recoil: 43
 		LocalOffset: 800,80,360, 800,-80,360
 		MuzzleSequence: muzzle
-	# FirepowerMultiplier@ra1_allies_alliedheavyaatank:
+	# FirepowerMultiplier@ra1_allies_heavyaatank:
 		# Modifier: 25
 	AttackTurreted:
 	WithMuzzleOverlay:
@@ -178,7 +178,7 @@ ra1_allies_alliedheavyaatank:
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	RenderSprites:
-		Image: ra1_allies_alliedheavyaatank
+		Image: ra1_allies_heavyaatank
 		PlayerPalette: player_rgba
 	FireWarheadsOnDeath:
 		Weapon: UnitExplode
@@ -187,7 +187,7 @@ ra1_allies_alliedheavyaatank:
 	ActorStatValues:
 		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_airsuperioritydoctrine, ra1_allies_upgrade_gpssatellitesupport
 
-ra1_allies_alliedartillery:
+ra1_allies_artillery:
 	Inherits: ^Tank
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -198,7 +198,7 @@ ra1_allies_alliedartillery:
 	Inherits@CryoMissiles: ^CryoMissiles
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedradardome
+		Prerequisites: ~ra1_allies_warfactory, ra1_allies_radardome
 		BuildPaletteOrder: 70
 		Description: actor_arty.description
 	Valued:
@@ -239,14 +239,14 @@ ra1_allies_alliedartillery:
 	ActorStatValues:
 		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_gpssatellitesupport
 
-ra1_allies_alliedoretruck:
+ra1_allies_oretruck:
 	Inherits: ^RAHARV
 	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
 	Inherits@ChronoArmor: ^ChronoArmor
 	Tooltip:
 		Name: Allied Ore Truck
 	Buildable:
-		Prerequisites: ~ra1_allies_alliedorerefinery
+		Prerequisites: ~ra1_allies_orerefinery
 		Description: Harvests ore for processing.\n  Unarmed
 	Voiced:
 		VoiceSet: RAVehicleVoice
@@ -264,17 +264,17 @@ ra1_allies_alliedoretruck:
 		TurnSpeed: 16
 	Valued:
 		Cost: 1560
-ra1_allies_alliedmobileconstructionvehicle:
+ra1_allies_mobileconstructionvehicle:
 	Inherits: ^RAMCV
 	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
 	Inherits@ChronoArmor: ^ChronoArmor
 	Tooltip:
 		Name: Allied Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedservicedepot
+		Prerequisites: ~ra1_allies_warfactory, ra1_allies_servicedepot
 		Description: Deploys into a Construction Yard.\n  Unarmed
 	Transforms:
-		IntoActor: ra1_allies_alliedconstructionyard
+		IntoActor: ra1_allies_constructionyard
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	ActorStatValues:
@@ -301,7 +301,7 @@ ra1_allies_ranger:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra1_allies_alliedwarfactory
+		Prerequisites: ~ra1_allies_warfactory
 		Description: actor_jeep.description
 	Valued:
 		Cost: 510
@@ -353,7 +353,7 @@ ra1_allies_minelayer:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 310
-		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedservicedepot
+		Prerequisites: ~ra1_allies_warfactory, ra1_allies_servicedepot
 		Description: actor_mnly.description
 	Valued:
 		Cost: 800
@@ -417,7 +417,7 @@ ra1_allies_sheridanassaulttank:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~ra1_allies_alliedwarfactory, ~ra1_allies_promotion_sheridan
+		Prerequisites: ~ra1_allies_warfactory, ~ra1_allies_promotion_sheridan
 		Queue: Vehicle, RAVehicle
 		Description: actor_sheridan.description
 	Mobile:
@@ -524,7 +524,7 @@ ra1_allies_reconranger:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra1_allies_alliedwarfactory, ~ra1_allies_promotion_reconranger
+		Prerequisites: ~ra1_allies_warfactory, ~ra1_allies_promotion_reconranger
 		Description: actor_jeep.description2
 	Valued:
 		Cost: 500
@@ -603,7 +603,7 @@ ra1_allies_reconranger:
 	ActorStatValues:
 		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_gpssatellitesupport
 
-ra1_allies_alliedtigerheavytank:
+ra1_allies_tigerheavytank:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -616,7 +616,7 @@ ra1_allies_alliedtigerheavytank:
 	Inherits@ChronoArmor: ^ChronoArmor
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~ra1_allies_alliedwarfactory, ~ra1_allies_promotion_tigerheavytank
+		Prerequisites: ~ra1_allies_warfactory, ~ra1_allies_promotion_tigerheavytank
 		BuildPaletteOrder: 110
 		Description: actor_tiger.description
 	Tooltip:
@@ -667,7 +667,7 @@ ra1_allies_alliedtigerheavytank:
 		MuzzleSequence: muzzle
 		Weapon: ra1_allies_alliedtigerheavytank_cannon_cryo
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
-ra1_allies_alliedtankdestroyer:
+ra1_allies_tankdestroyer:
 	Inherits: ^Tank
 	Inherits@Template: ^TankDestroyerTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -683,7 +683,7 @@ ra1_allies_alliedtankdestroyer:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 110
 		Description: actor_tnkd.description
-		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedradardome, ~ra1_allies_promotion_tankdestroyer
+		Prerequisites: ~ra1_allies_warfactory, ra1_allies_radardome, ~ra1_allies_promotion_tankdestroyer
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -746,7 +746,7 @@ ra1_allies_chronotank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 200
-		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ~ra1_allies_promotion_chronotank
+		Prerequisites: ~ra1_allies_warfactory, ra1_allies_techcenter, ~ra1_allies_promotion_chronotank
 		Description: actor_ctnk.description
 	Valued:
 		Cost: 2000
@@ -824,7 +824,7 @@ ra1_allies_phasetransport:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 130
-		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ~ra1_allies_promotion_phasetransport
+		Prerequisites: ~ra1_allies_warfactory, ra1_allies_techcenter, ~ra1_allies_promotion_phasetransport
 		Description: actor_sapc.description
 	Valued:
 		Cost: 2150
@@ -863,7 +863,7 @@ ra1_allies_phasetransport:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
-		InitialUnits: ra1_allies_rifleinfantry, ra1_allies_alliedrocketsoldier, ra1_allies_alliedsniper, ra1_allies_medic, ra1_allies_machinegunner
+		InitialUnits: ra1_allies_rifleinfantry, ra1_allies_rocketsoldier, ra1_allies_sniper, ra1_allies_medic, ra1_allies_machinegunner
 	Cloak:
 		InitialDelay: 125
 		CloakDelay: 75
@@ -896,7 +896,7 @@ ra1_allies_mobilegapgenerator:
 		BuildDurationModifier: 100
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 150
-		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ~ra1_allies_promotion_gapgeneratorandradarjammer
+		Prerequisites: ~ra1_allies_warfactory, ra1_allies_techcenter, ~ra1_allies_promotion_gapgeneratorandradarjammer
 		Description: actor_mgg.description
 	Tooltip:
 		Name: Mobile Gap Generator
@@ -987,7 +987,7 @@ ra1_allies_mobileradarjammer:
 		BuildDurationModifier: 100
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 140
-		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ~ra1_allies_promotion_gapgeneratorandradarjammer
+		Prerequisites: ~ra1_allies_warfactory, ra1_allies_techcenter, ~ra1_allies_promotion_gapgeneratorandradarjammer
 		Description: actor_mrj.description
 	Health:
 		HP: 72000

@@ -1569,6 +1569,25 @@ A naive 3-way split onto `^Projectile_Missile_*` drops those colors and `review_
 - tools/balance/splice_templates.py ran gen_weapon_template.py with a family filter, which caused shield_uniqueness to see only a subset and emit wrong compressed Shield values. It now always runs the full generator and splices only the requested blocks, preserving the original newline style (CRLF/LF).
 - The A1a delivery-first rename proved that verify_generator_sync.py is the real source of truth for ^Warhead_* blocks: the Flame and MissileChem blocks had drifted by one Shield point and were re-synced by splicing.
 
+## Rename-tool pitfalls found on the ra1_allies pass (2026-09-24)
+
+- `safe_rename.py` silently no-op'd on files-only maps: `if not actors: return 0` fired before the
+  `files:` half ran. Now `if not actors and not files`. A map that "applied cleanly" with zero
+  output did nothing.
+- A generated `rename_map_*.yaml` can be stale/pathological: `rename_map_ra1_allies.yaml`'s file
+  targets embedded the *entire* already-doubled source names (`…_ra1_soviets_sovietX_ra1_allies_alliedY_…`
+  → tripled ids, N1 18→52, N2 unchanged). Aurora's hand-derived `rename_map_ra1_allies_n4.yaml`
+  (from `aurora/naming_ra1_allies_v2` commit `90e27a1b3`) is the authority for that faction —
+  `gen_rename_maps.py` cannot emit it because the faction's actors already satisfy the slug
+  grammar; the damage was in redundant `allied` adjectives (N4), which only the audit sees.
+- Shared sprites must NOT be renamed into one faction: the `ra1_soviets_sovietX_ra1_allies_alliedY_*`
+  files are referenced by Soviets/Japan/Shared sequences only — Allies borrows the art. Aurora's
+  precedent (ore refinery): actor renames, file keeps the shared name.
+- `extract_stats.py` preserves `design.*` judgment fields by actor NAME from the committed ledger.
+  After a rename, pre-seed the new ids into `docs/balance/*.json` BEFORE re-extracting, or every
+  renamed actor silently loses `class_anchor`/`category`/etc. Frozen dated snapshots
+  (`*_20260911*`, `checkpoints/`) must not be renamed — evidence stays frozen.
+
 ## Upgrade regressions feel like downgrades (2026-08-19)
 
 A W24 collapse can move an upgrade pair onto families with **opposite Versus profiles** and still pass every damage check, because the on-grid `Damage` total is preserved on both sides. `audit_upgrade_regression.py` was added to catch this:

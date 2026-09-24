@@ -1218,7 +1218,7 @@
       "pricing": true,
       "range": "7410",
       "reloaddelay": "24",
-      "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-healer && !ifv-chrono && !ifv-spy && !ifv-thief",
+      "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-healer && !ifv-chrono && !ifv-spy && !ifv-thief",
       "slot": "Armament@primary",
       "versus_templates": [
        "^Warhead_MissileAP_Light_Flat",
@@ -1283,7 +1283,7 @@
       "pricing": true,
       "range": "8300",
       "reloaddelay": "56",
-      "requires": "ifv-mg || ifv-hmg || ifv-repair || ifv-ra1_allies_alliedsniper || ifv-flak || ifv-tesla || ifv-chem || ifv-fire || ifv-cannon || ifv-deso || ifv-demo || ifv-healer || ifv-chrono || ifv-spy || ifv-thief",
+      "requires": "ifv-mg || ifv-hmg || ifv-repair || ifv-ra1_allies_sniper || ifv-flak || ifv-tesla || ifv-chem || ifv-fire || ifv-cannon || ifv-deso || ifv-demo || ifv-healer || ifv-chrono || ifv-spy || ifv-thief",
       "slot": "Armament@FRAG",
       "versus_templates": [
        "^Warhead_Concussion_Heavy",
@@ -7187,7 +7187,7 @@
       "pricing": true,
       "range": "5760",
       "reloaddelay": "28",
-      "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
+      "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primary",
       "versus_templates": [
        "^Warhead_MissileHE_Light",
@@ -7220,7 +7220,7 @@
       "pricing": true,
       "range": "6760",
       "reloaddelay": "28",
-      "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
+      "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryelite",
       "versus_templates": [
        "RA2HoverMissile",
@@ -7251,7 +7251,7 @@
       "pricing": true,
       "range": "8640",
       "reloaddelay": "28",
-      "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
+      "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
@@ -7284,7 +7284,7 @@
       "pricing": true,
       "range": "9640",
       "reloaddelay": "28",
-      "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
+      "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryeliteAA",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
@@ -7315,7 +7315,7 @@
       "pricing": true,
       "range": "5120",
       "reloaddelay": "25",
-      "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && ra2_allies_upgrade_thunderboltmissiles",
+      "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryThunderbolt",
       "versus_templates": [
        "^Warhead_MissileAP_Light",
@@ -7346,7 +7346,7 @@
       "pricing": true,
       "range": "6760",
       "reloaddelay": "25",
-      "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && ra2_allies_upgrade_thunderboltmissiles",
+      "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryeliteThunderbolt",
       "versus_templates": [
        "RA2ThunderboltMissile",
@@ -7374,7 +7374,7 @@
       "pricing": true,
       "range": "8640",
       "reloaddelay": "25",
-      "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && ra2_allies_upgrade_thunderboltmissiles",
+      "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryAAThunderbolt",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
@@ -7404,7 +7404,7 @@
       "pricing": true,
       "range": "9640",
       "reloaddelay": "25",
-      "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && ra2_allies_upgrade_thunderboltmissiles",
+      "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryeliteAAThunderbolt",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
@@ -7679,8 +7679,8 @@
       "pricing": true,
       "range": "10000",
       "reloaddelay": "54",
-      "requires": "ifv-ra1_allies_alliedsniper",
-      "slot": "Armament@ra1_allies_alliedsniper",
+      "requires": "ifv-ra1_allies_sniper",
+      "slot": "Armament@ra1_allies_sniper",
       "versus_templates": [
        "^Warhead_Sniper_Light",
        "^Projectile_Sniper_Light",
