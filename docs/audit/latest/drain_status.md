@@ -13,6 +13,7 @@
 | weapons/darkreign.yaml | 94 | 0 | 94 |  |
 | weapons/dune2.yaml | 16 | 0 | 16 |  |
 | weapons/effects_d2k.yaml | 111 | 0 | 111 |  |
+| weapons/effects_op2.yaml | 13 | 0 | 13 |  |
 | weapons/effects_td.yaml | 45 | 0 | 45 |  |
 | weapons/effects_ts.yaml | 99 | 0 | 99 |  |
 | weapons/elementals.yaml | 4 | 0 | 4 |  |
@@ -109,9 +110,9 @@
 | sequences/z.yaml | 33 | 0 | 33 |  |
 
 
-## R2 — zero-live files (50) — dead inventory
+## R2 — zero-live files (51) — dead inventory
 
-weapons/advacewars.yaml, weapons/advancewars.yaml, weapons/classicdoom.yaml, weapons/darkreign.yaml, weapons/dune2.yaml, weapons/effects_d2k.yaml, weapons/effects_td.yaml, weapons/effects_ts.yaml, weapons/elementals.yaml, weapons/ep315.yaml, weapons/generals.yaml, weapons/halloween.yaml, weapons/heroes.yaml, weapons/infected.yaml, weapons/iok.yaml, weapons/keeper.yaml, weapons/lostunits.yaml, weapons/mindustry.yaml, weapons/sc2k.yaml, weapons/shockwave.yaml, weapons/simcity.yaml, weapons/sow.yaml, weapons/starcraft2.yaml, weapons/tiberiaalliances.yaml, weapons/tomorrow.yaml, weapons/valentine.yaml, weapons/warcraft1.yaml, weapons/wh40k.yaml, weapons/win98.yaml, weapons/wz2100.yaml, weapons/xcom.yaml, weapons/xmas.yaml, weapons/z.yaml, sequences/actiblizz.yaml, sequences/casino.yaml, sequences/challenge.yaml, sequences/civilian.yaml, sequences/classicdoom.yaml, sequences/funpark.yaml, sequences/infected.yaml, sequences/iok.yaml, sequences/keeper.yaml, sequences/mindustry.yaml, sequences/n64.yaml, sequences/pokemon.yaml, sequences/starcraft2.yaml, sequences/tiberiaalliances.yaml, sequences/wz2100.yaml, sequences/xcom.yaml, sequences/z.yaml
+weapons/advacewars.yaml, weapons/advancewars.yaml, weapons/classicdoom.yaml, weapons/darkreign.yaml, weapons/dune2.yaml, weapons/effects_d2k.yaml, weapons/effects_op2.yaml, weapons/effects_td.yaml, weapons/effects_ts.yaml, weapons/elementals.yaml, weapons/ep315.yaml, weapons/generals.yaml, weapons/halloween.yaml, weapons/heroes.yaml, weapons/infected.yaml, weapons/iok.yaml, weapons/keeper.yaml, weapons/lostunits.yaml, weapons/mindustry.yaml, weapons/sc2k.yaml, weapons/shockwave.yaml, weapons/simcity.yaml, weapons/sow.yaml, weapons/starcraft2.yaml, weapons/tiberiaalliances.yaml, weapons/tomorrow.yaml, weapons/valentine.yaml, weapons/warcraft1.yaml, weapons/wh40k.yaml, weapons/win98.yaml, weapons/wz2100.yaml, weapons/xcom.yaml, weapons/xmas.yaml, weapons/z.yaml, sequences/actiblizz.yaml, sequences/casino.yaml, sequences/challenge.yaml, sequences/civilian.yaml, sequences/classicdoom.yaml, sequences/funpark.yaml, sequences/infected.yaml, sequences/iok.yaml, sequences/keeper.yaml, sequences/mindustry.yaml, sequences/n64.yaml, sequences/pokemon.yaml, sequences/starcraft2.yaml, sequences/tiberiaalliances.yaml, sequences/wz2100.yaml, sequences/xcom.yaml, sequences/z.yaml
 
 ## R3 — cross-theme referrers (40)
 

@@ -4,26 +4,26 @@
 
 ⛔ This **repeals the exemption** in `tools/audit/intentional_composites.py`. Its 224 entries are no longer 'reviewed, keep' — they are the worklist. The registry data stays useful: it says which mains someone chose on purpose.
 
-concrete weapons with inherits: **2152**
+concrete weapons with inherits: **2162**
 
 W5 counts structural flat-damage nodes, including zero/healing/ally-only nodes; the split audit counts positive non-companion damage. Both resolve the full concrete weapon corpus. Use `--compare-split` for exact differences.
 
 | check | what | count | ratchet |
 |---|---|--:|--:|
-| W1 | more than 3 inherits | **286** (13.29% of 2152) | 26.16% |
+| W1 | more than 3 inherits | **286** (13.23% of 2162) | 26.16% |
 | W2 | two or more `^Warhead_*` inherits | **122** | 122 |
 | W3 | two or more `^Projectile_*` inherits | **7** | 7 |
 | W4 | two or more `^Effect_*` inherits | **41** | 41 |
 | W5 | more than one resolved MAIN warhead | **167** | 389 |
-| W6 | effect warheads declared LOCALLY | **466** | 466 |
+| W6 | effect warheads declared LOCALLY | **442** | 442 |
 | W7 | inherits from ANOTHER WEAPON, not a template | **869** | 869 |
 | W8 | inherits a `^Template` that is not one of the three kinds | **360** | 360 |
 
 | I7 informational — missing template | weapons |
 |---|--:|
-| no `^Effect_*` inherit | 898 |
-| no `^Projectile_*` inherit | 1261 |
-| no `^Warhead_*` inherit | 933 |
+| no `^Effect_*` inherit | 890 |
+| no `^Projectile_*` inherit | 1271 |
+| no `^Warhead_*` inherit | 943 |
 
 _I7 is a REVIEW QUEUE, not a defect count — an instant or utility weapon may legitimately have no projectile. Do not ratchet it without a per-weapon pass._
 
@@ -335,7 +335,7 @@ _... and 1 more._
 _... and 127 more._
 
 
-## W6 — effect warheads declared LOCALLY (466 vs ratchet 466)
+## W6 — effect warheads declared LOCALLY (442 vs ratchet 442)
 
 | weapon | nodes | first three |
 |---|---|---|
@@ -381,7 +381,7 @@ _... and 127 more._
 | `C4` | 1 | `Warhead@2Eff: CreateEffect` |
 
 
-_... and 426 more._
+_... and 402 more._
 
 
 _all buckets at or below their ratchets_ — this is the pre-existing conversion backlog. **Lower each baseline as you convert; never raise one.**

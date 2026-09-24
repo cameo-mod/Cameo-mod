@@ -4,9 +4,9 @@
 # the ratchet counts per maintainer ruling but stay listed below.
 
 Files scanned: 40
-Concrete weapons with local Explosions (L1): 260
-Concrete weapons with local ImpactSounds (L2): 267
-Exempt secondary-channel declarations (not ratcheted): 254
+Concrete weapons with local Explosions (L1): 245
+Concrete weapons with local ImpactSounds (L2): 252
+Exempt secondary-channel declarations (not ratcheted): 222
 
 | file | weapon | warhead | Explosions | ImpactSounds | line | exempt |
 |---|---|---|---|---|---|---|
@@ -305,44 +305,44 @@ Exempt secondary-channel declarations (not ratcheted): 254
 | ContentPacks\StarCraft\Terran\yaml\weapons.yaml | ValkyrieRockets | EffectWater | YES | - | 2108 | exempt |
 | ContentPacks\StarCraft\Terran\yaml\weapons.yaml | VultureGrenade | Effect | - | YES | 1168 |  |
 | ContentPacks\StarCraft\Terran\yaml\weapons.yaml | WraithRockets_AA | EffectWater | YES | - | 2008 | exempt |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | BehemothShoot | Effect | YES | YES | 1066 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | BehemothShoot | Effect2 | YES | YES | 1070 | exempt |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | BehemothShoot | EffectAir | YES | YES | 1073 | exempt |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | BehemothShoot | Effect | YES | YES | 1074 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | BehemothShoot | Effect2 | YES | YES | 1078 | exempt |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | BehemothShoot | EffectAir | YES | YES | 1081 | exempt |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | CorruptorSpore | Effect | YES | YES | 265 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | DefilerPlague | Effect | YES | YES | 1270 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | DefilerPlague | Effect | YES | YES | 1278 |  |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | DreadshroudSpore | Effect | YES | YES | 348 |  |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | DreadshroudSpore | EffectAir | YES | YES | 352 | exempt |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | DroneAttack | Effect | - | YES | 1214 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | DroneAttack | Effect | - | YES | 1222 |  |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | GorekrakenClaw | Effect | - | YES | 37 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | GoremawClaw | Effect | - | YES | 897 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | GuardianShoot | Effect | YES | YES | 504 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | HermitExplode | Effect | YES | - | 571 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | HermitShoot | Effect | YES | YES | 631 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | HermitShoot | EffectAir | YES | YES | 636 | exempt |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | GoremawClaw | Effect | - | YES | 905 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | GuardianShoot | Effect | YES | YES | 512 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | HermitExplode | Effect | YES | - | 579 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | HermitShoot | Effect | YES | YES | 639 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | HermitShoot | EffectAir | YES | YES | 644 | exempt |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | HydraSpit | Effect | YES | - | 73 |  |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | HydraSpit | EffectAir | YES | - | 75 | exempt |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | InfestedExplosion | Effect | YES | YES | 966 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | LurkerSpines | Effect | YES | YES | 922 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | LurkerSpinesImpact | Effect | YES | YES | 941 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | InfestedExplosion | Effect | YES | YES | 974 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | LurkerSpines | Effect | YES | YES | 930 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | LurkerSpinesImpact | Effect | YES | YES | 949 |  |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | MutaliskSpore | Effect | YES | YES | 151 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | QueenSpine | Effect | YES | YES | 857 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | QueenSpine | EffectAir | YES | YES | 862 | exempt |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | QueenSpine | Effect | YES | YES | 865 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | QueenSpine | EffectAir | YES | YES | 870 | exempt |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SCDevourerAA | Effect | YES | YES | 397 |  |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SCDevourerAA | Effect2 | YES | YES | 408 | exempt |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SCScourgeExplosion | Effect | YES | YES | 458 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | ScourgeExplosion | Effect | YES | YES | 446 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SCScourgeExplosion | Effect | YES | YES | 466 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | ScourgeExplosion | Effect | YES | YES | 454 |  |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | ShriekStinger | Effect | - | YES | 52 |  |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SpithidSpit | Effect | YES | - | 105 |  |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SpithidSpit | EffectAir | YES | - | 107 | exempt |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | Spore_AA | Effect | YES | YES | 1160 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SporemawShoot | Effect | YES | YES | 548 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SporemawShoot | EffectWater | YES | YES | 553 | exempt |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SporemawShoot | ShieldHitEffect | - | YES | 564 | exempt |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SwarmlingShoot | Effect | YES | YES | 805 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SwarmlingShoot | EffectAir | YES | YES | 809 | exempt |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | Spore_AA | Effect | YES | YES | 1168 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SporemawShoot | Effect | YES | YES | 556 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SporemawShoot | EffectWater | YES | YES | 561 | exempt |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SporemawShoot | ShieldHitEffect | - | YES | 572 | exempt |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SwarmlingShoot | Effect | YES | YES | 813 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | SwarmlingShoot | EffectAir | YES | YES | 817 | exempt |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | TalonClaw | Effect | - | YES | 23 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | Tentacle | Effect | YES | YES | 1194 |  |
-| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | UltraliskHusk | Effect | - | YES | 885 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | Tentacle | Effect | YES | YES | 1202 |  |
+| ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | UltraliskHusk | Effect | - | YES | 893 |  |
 | ContentPacks\StarCraft\Zerg\yaml\weapons.yaml | ZerglingClaw | Effect | - | YES | 11 |  |
 | ContentPacks\Warcraft2\Humans\yaml\weapons.yaml | MortarTeamArtilleryShell | Effect | YES | YES | 363 |  |
 | ContentPacks\Warcraft2\Humans\yaml\weapons.yaml | wc2_dwarf_Rifle | Effect | YES | YES | 55 |  |
@@ -385,54 +385,6 @@ Exempt secondary-channel declarations (not ratcheted): 254
 | ContentPacks\Warcraft2\Orcs\yaml\weapons.yaml | wc2ogremageEyeOfKilrogg | 2Eff | YES | - | 65 | exempt |
 | ContentPacks\Warcraft2\Orcs\yaml\weapons.yaml | wc2ogrepunch | Effect | - | YES | 44 |  |
 | ContentPacks\Warcraft2\Orcs\yaml\weapons.yaml | wc2runesSuper | 2Eff | YES | YES | 143 | exempt |
-| weapons\outpost2.yaml | MiniNova | Effect | - | YES | 3843 |  |
-| weapons\outpost2.yaml | MiniNova | Effect | YES | - | 3791 |  |
-| weapons\outpost2.yaml | MiniNova | Effect2 | - | YES | 3880 | exempt |
-| weapons\outpost2.yaml | PLYMineExplosive | 3Eff | YES | YES | 2956 | exempt |
-| weapons\outpost2.yaml | edenDefenceRailgun | Effect | YES | YES | 659 |  |
-| weapons\outpost2.yaml | edenDefenceRailgun | EffectWater | YES | - | 665 | exempt |
-| weapons\outpost2.yaml | edenTigerRailgun | Effect | YES | YES | 470 |  |
-| weapons\outpost2.yaml | edenTigerRailgun | EffectWater | YES | - | 476 | exempt |
-| weapons\outpost2.yaml | edenTiger_EMP | Effect | YES | YES | 1456 |  |
-| weapons\outpost2.yaml | edenTiger_EMP | EffectAir | YES | YES | 1507 | exempt |
-| weapons\outpost2.yaml | edenTiger_EMP | EffectWater | YES | YES | 1502 | exempt |
-| weapons\outpost2.yaml | edenTiger_EMP | ShieldHitEffect | - | YES | 1396 | exempt |
-| weapons\outpost2.yaml | edenTiger_EMP_AA | Effect | YES | YES | 1760 |  |
-| weapons\outpost2.yaml | edenTiger_EMP_AA | EffectAir | YES | YES | 1811 | exempt |
-| weapons\outpost2.yaml | edenTiger_EMP_AA | EffectWater | YES | YES | 1806 | exempt |
-| weapons\outpost2.yaml | edenTiger_EMP_AA | ShieldHitEffect | - | YES | 1700 | exempt |
-| weapons\outpost2.yaml | eden_EMP | Effect | YES | YES | 932 |  |
-| weapons\outpost2.yaml | eden_EMP_AA | Effect | YES | YES | 1146 |  |
-| weapons\outpost2.yaml | eden_EMP_AA | EffectAir | YES | YES | 1197 | exempt |
-| weapons\outpost2.yaml | eden_EMP_AA | EffectWater | YES | YES | 1192 | exempt |
-| weapons\outpost2.yaml | eden_EMP_AA | ShieldHitEffect | - | YES | 1086 | exempt |
-| weapons\outpost2.yaml | eden_GP_EMP | Effect | YES | YES | 2077 |  |
-| weapons\outpost2.yaml | eden_GP_EMP | EffectAir | YES | YES | 2128 | exempt |
-| weapons\outpost2.yaml | eden_GP_EMP | EffectWater | YES | YES | 2123 | exempt |
-| weapons\outpost2.yaml | eden_GP_EMP | ShieldHitEffect | - | YES | 2017 | exempt |
-| weapons\outpost2.yaml | plymouthDefenceRPG | 3Eff | YES | YES | 2453 | exempt |
-| weapons\outpost2.yaml | plymouthDefenceRPG | 4EffAir | YES | YES | 2458 | exempt |
-| weapons\outpost2.yaml | plymouthRPG | 3Eff | YES | YES | 2365 | exempt |
-| weapons\outpost2.yaml | plymouthRPG | 4EffAir | YES | YES | 2370 | exempt |
-| weapons\outpost2.yaml | plymouthSticky | Effect | YES | YES | 2500 |  |
-| weapons\outpost2.yaml | plymouthStickyDefence | Effect | YES | YES | 2847 |  |
-| weapons\outpost2.yaml | plymouthStickyDefence | EffectWater | YES | - | 2852 | exempt |
-| weapons\outpost2.yaml | plymouthStickyTiger | Effect | YES | YES | 2686 |  |
-| weapons\outpost2.yaml | plymouthTigerRPG | 3Eff | YES | YES | 2409 | exempt |
-| weapons\outpost2.yaml | plymouthTigerRPG | 4EffAir | YES | YES | 2414 | exempt |
-| weapons\outpost2.yaml | plymouthTigerRPGMines | 3Eff | YES | YES | 2907 | exempt |
-| weapons\outpost2.yaml | plymouthTigerRPGMines | 4EffWater | YES | YES | 2912 | exempt |
-| weapons\outpost2.yaml | plymouth_EMP | Effect | YES | YES | 3100 |  |
-| weapons\outpost2.yaml | plymouth_EMP_AA | Effect | YES | YES | 3313 |  |
-| weapons\outpost2.yaml | plymouth_EMP_AA | EffectAir | YES | YES | 3364 | exempt |
-| weapons\outpost2.yaml | plymouth_EMP_AA | EffectWater | YES | YES | 3359 | exempt |
-| weapons\outpost2.yaml | plymouth_EMP_AA | ShieldHitEffect | - | YES | 3253 | exempt |
-| weapons\outpost2.yaml | plymouth_Tiger_EMP | Effect | YES | YES | 3630 |  |
-| weapons\outpost2.yaml | plymouth_Tiger_EMP | EffectAir | YES | YES | 3681 | exempt |
-| weapons\outpost2.yaml | plymouth_Tiger_EMP | EffectWater | YES | YES | 3676 | exempt |
-| weapons\outpost2.yaml | plymouth_Tiger_EMP | ShieldHitEffect | - | YES | 3570 | exempt |
-| weapons\outpost2.yaml | supernova_missile_super | Effect | YES | YES | 4025 |  |
-| weapons\outpost2.yaml | supernova_missile_super | Effect2 | - | YES | 4050 | exempt |
 | weapons\redalert2mod.yaml | 12MissilesSpawnerScud | Effect | YES | YES | 3128 |  |
 | weapons\redalert2mod.yaml | AsianChaosSuperweapon | 1 | YES | - | 203 | exempt |
 | weapons\redalert2mod.yaml | AsianOilBombFragments | Effect | - | YES | 170 |  |
@@ -582,4 +534,4 @@ Exempt secondary-channel declarations (not ratcheted): 254
 | weapons\weapons.yaml | bowFire_AA | 2Eff | - | YES | 14809 | exempt |
 | weapons\weapons.yaml | wc_tower_fire | 2Eff | - | YES | 14901 | exempt |
 
-PASS: L1 260 <= 260, L2 267 <= 267
+PASS: L1 245 <= 245, L2 252 <= 252

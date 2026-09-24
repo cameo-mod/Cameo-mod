@@ -107,7 +107,7 @@ W4_BASELINE = 41    # 52 -> 41 post-rebase resync onto 86577a7aa; was:    # dual
                     # the old prefix-only classifier. Same class as the W2
                     # ^Compatibility_* rename: measurement fix, not new debt.
 W5_BASELINE = 389   # more than one resolved MAIN warhead; merge-payload repairs
-W6_BASELINE = 466   # 447 -> 466 post-rebase resync onto 86577a7aa:
+W6_BASELINE = 442   # 466 -> 442: outpost2 W27 strip (115 nodes/26 weapons)
                     # master itself measures 709 (known master debt vs its
                     # own 692 baseline); this branch is still -243 vs master.
                     # was:   # weapons declaring an effect warhead locally;

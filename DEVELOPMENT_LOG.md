@@ -12177,3 +12177,31 @@ holds, 2 ExtraDamage holds.
 
 **Boot-gate:** PASS on the rebased tree — menu marker, exceptions 45
 (unchanged).
+
+## 2026-09-26 (cont.) — W27 batch-7: outpost2.yaml (last legacy weapons file)
+
+Ember's #488 landed during the merge wave, resolving the outpost2
+ownership block. Ran the standard W27 pass on
+`mods/cameo/weapons/outpost2.yaml`:
+
+- **115 inline effect nodes stripped / 26 weapons** — the largest
+  single-file extraction yet (earlier estimate of 15 was a subset
+  census; the real count includes `@EffectWater`/`@EffectAir`/
+  `@ShieldHitEffect`/`@Glow`/smudge siblings).
+- **13 new `^op2_outpost2_*` families** in new
+  `mods/cameo/weapons/effects_op2.yaml` (mounted after effects_ts in
+  mod.yaml). Two standalone (`parents=()`) where the nodes had no
+  `^Effect_*` ancestor to derive from; `edenRailgun` folds into
+  `set3` alongside `edenDefenceRailgun`/`edenTigerRailgun`.
+- RESOLVE-VERIFIED: 0 diffs full-corpus vs base (full_diff).
+- Gates: empty-warhead 0, orphan-cancels 0, dup-inherits 0 new.
+  Ratchets re-locked: W6 466->**442**, L1/L2 260/267->**245/252**.
+
+**W27 status after this:** my W27 file-set (D2k/TD/TS packs + legacy
+d2k/tiberiandawn/tiberiansun/outpost2) is fully stripped. Fleet-wide
+~1.4k local effect-class nodes remain in other lanes (RA/RA2/RA2mod/
+SC/WC2 packs + unclaimed legacy files — `shockwave` 73, `weapons.yaml`
+96, `redalert2` 67, `generals` 50 are the largest). One known straggler
+in my set: `ChemTibAtomic` in tiberiandawn.yaml keeps a local
+`Warhead@Effect` (chem_nuke_explosion pin) — Nova's #482 authored that
+block; extraction suggested to her rather than self-served.

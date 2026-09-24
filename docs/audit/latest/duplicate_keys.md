@@ -1,6 +1,6 @@
 # audit_duplicate_keys — duplicate keys in one node (ambiguous merges)
 
-Files scanned: **660** — D1 ambiguous inheritance labels: **0**, D2 merged duplicates: **3967**
+Files scanned: **661** — D1 ambiguous inheritance labels: **0**, D2 merged duplicates: **3963**
 
 
 ## D1 — duplicate inheritance labels with different parent values
@@ -13,7 +13,7 @@ _none found_
 | key | occurrences |
 |---|---|
 | Projectile | 273 |
-| Warhead@Effect | 246 |
+| Warhead@Effect | 242 |
 | Warhead@EffectWater | 186 |
 | Warhead@DuneRock | 172 |
 | Warhead@DuneSand | 172 |
@@ -3761,102 +3761,98 @@ _none found_
 | mods/cameo/weapons/monsters.yaml | 792, 798 | MothershipExplosion | Warhead@11Dam_areanuke3 |
 | mods/cameo/weapons/other.yaml | 1186, 1192 | MothershipExplosion | Warhead@11Dam_areanuke3 |
 | mods/cameo/weapons/outpost2.yaml | 47, 100 | edenMobileLaser | Projectile |
-| mods/cameo/weapons/outpost2.yaml | 56, 168 | edenMobileLaser | Warhead@TankDestroyerCannonPercentage |
+| mods/cameo/weapons/outpost2.yaml | 56, 164 | edenMobileLaser | Warhead@TankDestroyerCannonPercentage |
 | mods/cameo/weapons/outpost2.yaml | 59, 111 | edenMobileLaser | Warhead@ChaingunPercentage |
-| mods/cameo/weapons/outpost2.yaml | 62, 142 | edenMobileLaser | Warhead@FlakWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 253, 368 | edenRailgun | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 260, 317 | edenRailgun | Warhead@LightChemicalWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 264, 392 | edenRailgun | Warhead@TankDestroyerCannonPercentage |
-| mods/cameo/weapons/outpost2.yaml | 268, 343 | edenRailgun | Warhead@MediumCannonPercentage |
-| mods/cameo/weapons/outpost2.yaml | 272, 295 | edenRailgun | Warhead@HeavyCannonPercentage |
-| mods/cameo/weapons/outpost2.yaml | 865, 979 | eden_EMP | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 874, 938 | eden_EMP | Warhead@HeavyCannonPercentage |
-| mods/cameo/weapons/outpost2.yaml | 892, 958 | eden_EMP | Warhead@MediumMissilePercentage |
-| mods/cameo/weapons/outpost2.yaml | 1007, 1038 | eden_EMP_AA | Projectile |
-| mods/cameo/weapons/outpost2.yaml | 1010, 1032 | eden_EMP_AA | Warhead@Tesla_Super |
-| mods/cameo/weapons/outpost2.yaml | 1012, 1057 | eden_EMP_AA | Warhead@TeslaChargedWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 1014, 1089 | eden_EMP_AA | Warhead@TeslaWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 1016, 1114 | eden_EMP_AA | Warhead@MediumFlameWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 1018, 1231 | eden_EMP_AA | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 1020, 1255 | eden_EMP_AA | Warhead@HeavyCannonPercentage |
-| mods/cameo/weapons/outpost2.yaml | 1022, 1160 | eden_EMP_AA | Warhead@MediumCannonPercentage |
-| mods/cameo/weapons/outpost2.yaml | 1024, 1277 | eden_EMP_AA | Warhead@MediumMissilePercentage |
-| mods/cameo/weapons/outpost2.yaml | 1026, 1208 | eden_EMP_AA | Warhead@HeavyMissilePercentage |
-| mods/cameo/weapons/outpost2.yaml | 1028, 1300 | eden_EMP_AA | Warhead@EMPCompatibility |
-| mods/cameo/weapons/outpost2.yaml | 1311, 1341 | edenTiger_EMP | Warhead@Tesla_Super |
-| mods/cameo/weapons/outpost2.yaml | 1314, 1367 | edenTiger_EMP | Warhead@TeslaChargedWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 1317, 1399 | edenTiger_EMP | Warhead@TeslaWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 1320, 1424 | edenTiger_EMP | Warhead@MediumFlameWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 1323, 1541 | edenTiger_EMP | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 1326, 1565 | edenTiger_EMP | Warhead@HeavyCannonPercentage |
-| mods/cameo/weapons/outpost2.yaml | 1329, 1470 | edenTiger_EMP | Warhead@MediumCannonPercentage |
-| mods/cameo/weapons/outpost2.yaml | 1332, 1587 | edenTiger_EMP | Warhead@MediumMissilePercentage |
-| mods/cameo/weapons/outpost2.yaml | 1335, 1518 | edenTiger_EMP | Warhead@HeavyMissilePercentage |
-| mods/cameo/weapons/outpost2.yaml | 1338, 1610 | edenTiger_EMP | Warhead@EMPCompatibility |
-| mods/cameo/weapons/outpost2.yaml | 1621, 1652 | edenTiger_EMP_AA | Projectile |
-| mods/cameo/weapons/outpost2.yaml | 1624, 1646 | edenTiger_EMP_AA | Warhead@Tesla_Super |
-| mods/cameo/weapons/outpost2.yaml | 1626, 1671 | edenTiger_EMP_AA | Warhead@TeslaChargedWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 1628, 1703 | edenTiger_EMP_AA | Warhead@TeslaWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 1630, 1728 | edenTiger_EMP_AA | Warhead@MediumFlameWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 1632, 1845 | edenTiger_EMP_AA | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 1634, 1869 | edenTiger_EMP_AA | Warhead@HeavyCannonPercentage |
-| mods/cameo/weapons/outpost2.yaml | 1636, 1774 | edenTiger_EMP_AA | Warhead@MediumCannonPercentage |
-| mods/cameo/weapons/outpost2.yaml | 1638, 1891 | edenTiger_EMP_AA | Warhead@MediumMissilePercentage |
-| mods/cameo/weapons/outpost2.yaml | 1640, 1822 | edenTiger_EMP_AA | Warhead@HeavyMissilePercentage |
-| mods/cameo/weapons/outpost2.yaml | 1642, 1914 | edenTiger_EMP_AA | Warhead@EMPCompatibility |
-| mods/cameo/weapons/outpost2.yaml | 1929, 1962 | eden_GP_EMP | Warhead@Tesla_Super |
-| mods/cameo/weapons/outpost2.yaml | 1932, 1988 | eden_GP_EMP | Warhead@TeslaChargedWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 1935, 2012 | eden_GP_EMP | Warhead@ShieldHit |
-| mods/cameo/weapons/outpost2.yaml | 1937, 2020 | eden_GP_EMP | Warhead@TeslaWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 1940, 2045 | eden_GP_EMP | Warhead@MediumFlameWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 1943, 2163 | eden_GP_EMP | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 1946, 2187 | eden_GP_EMP | Warhead@HeavyCannonPercentage |
-| mods/cameo/weapons/outpost2.yaml | 1949, 2091 | eden_GP_EMP | Warhead@MediumCannonPercentage |
-| mods/cameo/weapons/outpost2.yaml | 1952, 2209 | eden_GP_EMP | Warhead@MediumMissilePercentage |
-| mods/cameo/weapons/outpost2.yaml | 1955, 2139 | eden_GP_EMP | Warhead@HeavyMissilePercentage |
-| mods/cameo/weapons/outpost2.yaml | 1958, 2232 | eden_GP_EMP | Warhead@EMPCompatibility |
-| mods/cameo/weapons/outpost2.yaml | 2379, 2385 | plymouthTigerRPG | Projectile |
-| mods/cameo/weapons/outpost2.yaml | 2425, 2429 | plymouthDefenceRPG | Projectile |
-| mods/cameo/weapons/outpost2.yaml | 2477, 2511 | plymouthSticky | Projectile |
-| mods/cameo/weapons/outpost2.yaml | 2482, 2524 | plymouthSticky | Warhead@LightChemicalWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 2485, 2551 | plymouthSticky | Warhead@TankDestroyerCannonPercentage |
-| mods/cameo/weapons/outpost2.yaml | 2500, 2515 | plymouthSticky | Warhead@Effect |
-| mods/cameo/weapons/outpost2.yaml | 2578, 2602 | plymouthStickyTiger | Warhead@LightChemicalWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 2587, 2627 | plymouthStickyTiger | Warhead@MediumChemicalWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 2588, 2656 | plymouthStickyTiger | Warhead@TankDestroyerCannonPercentage |
-| mods/cameo/weapons/outpost2.yaml | 2589, 2682 | plymouthStickyTiger | Projectile |
-| mods/cameo/weapons/outpost2.yaml | 2593, 2686 | plymouthStickyTiger | Warhead@Effect |
-| mods/cameo/weapons/outpost2.yaml | 2712, 2766 | plymouthStickyDefence | Warhead@LightChemicalWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 2718, 2791 | plymouthStickyDefence | Warhead@MediumChemicalWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 2724, 2739 | plymouthStickyDefence | Warhead@HeavyChemicalWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 2725, 2818 | plymouthStickyDefence | Warhead@TankDestroyerCannonPercentage |
-| mods/cameo/weapons/outpost2.yaml | 2726, 2843 | plymouthStickyDefence | Projectile |
-| mods/cameo/weapons/outpost2.yaml | 2730, 2847 | plymouthStickyDefence | Warhead@Effect |
-| mods/cameo/weapons/outpost2.yaml | 3033, 3147 | plymouth_EMP | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 3042, 3106 | plymouth_EMP | Warhead@HeavyCannonPercentage |
-| mods/cameo/weapons/outpost2.yaml | 3060, 3126 | plymouth_EMP | Warhead@MediumMissilePercentage |
-| mods/cameo/weapons/outpost2.yaml | 3176, 3198 | plymouth_EMP_AA | Warhead@Tesla_Super |
-| mods/cameo/weapons/outpost2.yaml | 3178, 3224 | plymouth_EMP_AA | Warhead@TeslaChargedWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 3180, 3256 | plymouth_EMP_AA | Warhead@TeslaWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 3182, 3281 | plymouth_EMP_AA | Warhead@MediumFlameWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 3184, 3398 | plymouth_EMP_AA | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 3186, 3422 | plymouth_EMP_AA | Warhead@HeavyCannonPercentage |
-| mods/cameo/weapons/outpost2.yaml | 3188, 3327 | plymouth_EMP_AA | Warhead@MediumCannonPercentage |
-| mods/cameo/weapons/outpost2.yaml | 3190, 3444 | plymouth_EMP_AA | Warhead@MediumMissilePercentage |
-| mods/cameo/weapons/outpost2.yaml | 3192, 3375 | plymouth_EMP_AA | Warhead@HeavyMissilePercentage |
-| mods/cameo/weapons/outpost2.yaml | 3194, 3467 | plymouth_EMP_AA | Warhead@EMPCompatibility |
-| mods/cameo/weapons/outpost2.yaml | 3482, 3515 | plymouth_Tiger_EMP | Warhead@Tesla_Super |
-| mods/cameo/weapons/outpost2.yaml | 3485, 3541 | plymouth_Tiger_EMP | Warhead@TeslaChargedWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 3488, 3565 | plymouth_Tiger_EMP | Warhead@ShieldHit |
-| mods/cameo/weapons/outpost2.yaml | 3490, 3573 | plymouth_Tiger_EMP | Warhead@TeslaWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 3493, 3598 | plymouth_Tiger_EMP | Warhead@MediumFlameWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 3496, 3716 | plymouth_Tiger_EMP | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/weapons/outpost2.yaml | 3499, 3740 | plymouth_Tiger_EMP | Warhead@HeavyCannonPercentage |
-| mods/cameo/weapons/outpost2.yaml | 3502, 3644 | plymouth_Tiger_EMP | Warhead@MediumCannonPercentage |
-| mods/cameo/weapons/outpost2.yaml | 3505, 3762 | plymouth_Tiger_EMP | Warhead@MediumMissilePercentage |
-| mods/cameo/weapons/outpost2.yaml | 3508, 3692 | plymouth_Tiger_EMP | Warhead@HeavyMissilePercentage |
-| mods/cameo/weapons/outpost2.yaml | 3511, 3785 | plymouth_Tiger_EMP | Warhead@EMPCompatibility |
-| mods/cameo/weapons/outpost2.yaml | 3791, 3843 | MiniNova | Warhead@Effect |
+| mods/cameo/weapons/outpost2.yaml | 62, 135 | edenMobileLaser | Warhead@FlakWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 249, 361 | edenRailgun | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 256, 307 | edenRailgun | Warhead@LightChemicalWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 260, 385 | edenRailgun | Warhead@TankDestroyerCannonPercentage |
+| mods/cameo/weapons/outpost2.yaml | 264, 333 | edenRailgun | Warhead@MediumCannonPercentage |
+| mods/cameo/weapons/outpost2.yaml | 268, 285 | edenRailgun | Warhead@HeavyCannonPercentage |
+| mods/cameo/weapons/outpost2.yaml | 853, 962 | eden_EMP | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 862, 921 | eden_EMP | Warhead@HeavyCannonPercentage |
+| mods/cameo/weapons/outpost2.yaml | 880, 941 | eden_EMP | Warhead@MediumMissilePercentage |
+| mods/cameo/weapons/outpost2.yaml | 991, 1022 | eden_EMP_AA | Projectile |
+| mods/cameo/weapons/outpost2.yaml | 994, 1016 | eden_EMP_AA | Warhead@Tesla_Super |
+| mods/cameo/weapons/outpost2.yaml | 996, 1041 | eden_EMP_AA | Warhead@TeslaChargedWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 998, 1070 | eden_EMP_AA | Warhead@TeslaWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 1000, 1095 | eden_EMP_AA | Warhead@MediumFlameWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 1002, 1173 | eden_EMP_AA | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 1004, 1197 | eden_EMP_AA | Warhead@HeavyCannonPercentage |
+| mods/cameo/weapons/outpost2.yaml | 1006, 1127 | eden_EMP_AA | Warhead@MediumCannonPercentage |
+| mods/cameo/weapons/outpost2.yaml | 1008, 1219 | eden_EMP_AA | Warhead@MediumMissilePercentage |
+| mods/cameo/weapons/outpost2.yaml | 1010, 1150 | eden_EMP_AA | Warhead@HeavyMissilePercentage |
+| mods/cameo/weapons/outpost2.yaml | 1012, 1242 | eden_EMP_AA | Warhead@EMPCompatibility |
+| mods/cameo/weapons/outpost2.yaml | 1254, 1284 | edenTiger_EMP | Warhead@Tesla_Super |
+| mods/cameo/weapons/outpost2.yaml | 1257, 1310 | edenTiger_EMP | Warhead@TeslaChargedWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 1260, 1339 | edenTiger_EMP | Warhead@TeslaWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 1263, 1364 | edenTiger_EMP | Warhead@MediumFlameWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 1266, 1442 | edenTiger_EMP | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 1269, 1466 | edenTiger_EMP | Warhead@HeavyCannonPercentage |
+| mods/cameo/weapons/outpost2.yaml | 1272, 1396 | edenTiger_EMP | Warhead@MediumCannonPercentage |
+| mods/cameo/weapons/outpost2.yaml | 1275, 1488 | edenTiger_EMP | Warhead@MediumMissilePercentage |
+| mods/cameo/weapons/outpost2.yaml | 1278, 1419 | edenTiger_EMP | Warhead@HeavyMissilePercentage |
+| mods/cameo/weapons/outpost2.yaml | 1281, 1511 | edenTiger_EMP | Warhead@EMPCompatibility |
+| mods/cameo/weapons/outpost2.yaml | 1523, 1554 | edenTiger_EMP_AA | Projectile |
+| mods/cameo/weapons/outpost2.yaml | 1526, 1548 | edenTiger_EMP_AA | Warhead@Tesla_Super |
+| mods/cameo/weapons/outpost2.yaml | 1528, 1573 | edenTiger_EMP_AA | Warhead@TeslaChargedWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 1530, 1602 | edenTiger_EMP_AA | Warhead@TeslaWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 1532, 1627 | edenTiger_EMP_AA | Warhead@MediumFlameWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 1534, 1705 | edenTiger_EMP_AA | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 1536, 1729 | edenTiger_EMP_AA | Warhead@HeavyCannonPercentage |
+| mods/cameo/weapons/outpost2.yaml | 1538, 1659 | edenTiger_EMP_AA | Warhead@MediumCannonPercentage |
+| mods/cameo/weapons/outpost2.yaml | 1540, 1751 | edenTiger_EMP_AA | Warhead@MediumMissilePercentage |
+| mods/cameo/weapons/outpost2.yaml | 1542, 1682 | edenTiger_EMP_AA | Warhead@HeavyMissilePercentage |
+| mods/cameo/weapons/outpost2.yaml | 1544, 1774 | edenTiger_EMP_AA | Warhead@EMPCompatibility |
+| mods/cameo/weapons/outpost2.yaml | 1790, 1823 | eden_GP_EMP | Warhead@Tesla_Super |
+| mods/cameo/weapons/outpost2.yaml | 1793, 1849 | eden_GP_EMP | Warhead@TeslaChargedWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 1796, 1873 | eden_GP_EMP | Warhead@ShieldHit |
+| mods/cameo/weapons/outpost2.yaml | 1798, 1878 | eden_GP_EMP | Warhead@TeslaWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 1801, 1903 | eden_GP_EMP | Warhead@MediumFlameWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 1804, 1982 | eden_GP_EMP | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 1807, 2006 | eden_GP_EMP | Warhead@HeavyCannonPercentage |
+| mods/cameo/weapons/outpost2.yaml | 1810, 1935 | eden_GP_EMP | Warhead@MediumCannonPercentage |
+| mods/cameo/weapons/outpost2.yaml | 1813, 2028 | eden_GP_EMP | Warhead@MediumMissilePercentage |
+| mods/cameo/weapons/outpost2.yaml | 1816, 1958 | eden_GP_EMP | Warhead@HeavyMissilePercentage |
+| mods/cameo/weapons/outpost2.yaml | 1819, 2051 | eden_GP_EMP | Warhead@EMPCompatibility |
+| mods/cameo/weapons/outpost2.yaml | 2178, 2184 | plymouthTigerRPG | Projectile |
+| mods/cameo/weapons/outpost2.yaml | 2212, 2216 | plymouthDefenceRPG | Projectile |
+| mods/cameo/weapons/outpost2.yaml | 2252, 2281 | plymouthSticky | Projectile |
+| mods/cameo/weapons/outpost2.yaml | 2257, 2285 | plymouthSticky | Warhead@LightChemicalWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 2260, 2315 | plymouthSticky | Warhead@TankDestroyerCannonPercentage |
+| mods/cameo/weapons/outpost2.yaml | 2342, 2360 | plymouthStickyTiger | Warhead@LightChemicalWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 2351, 2385 | plymouthStickyTiger | Warhead@MediumChemicalWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 2352, 2417 | plymouthStickyTiger | Warhead@TankDestroyerCannonPercentage |
+| mods/cameo/weapons/outpost2.yaml | 2353, 2443 | plymouthStickyTiger | Projectile |
+| mods/cameo/weapons/outpost2.yaml | 2468, 2516 | plymouthStickyDefence | Warhead@LightChemicalWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 2474, 2541 | plymouthStickyDefence | Warhead@MediumChemicalWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 2480, 2489 | plymouthStickyDefence | Warhead@HeavyChemicalWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 2481, 2568 | plymouthStickyDefence | Warhead@TankDestroyerCannonPercentage |
+| mods/cameo/weapons/outpost2.yaml | 2482, 2593 | plymouthStickyDefence | Projectile |
+| mods/cameo/weapons/outpost2.yaml | 2762, 2871 | plymouth_EMP | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 2771, 2830 | plymouth_EMP | Warhead@HeavyCannonPercentage |
+| mods/cameo/weapons/outpost2.yaml | 2789, 2850 | plymouth_EMP | Warhead@MediumMissilePercentage |
+| mods/cameo/weapons/outpost2.yaml | 2901, 2923 | plymouth_EMP_AA | Warhead@Tesla_Super |
+| mods/cameo/weapons/outpost2.yaml | 2903, 2949 | plymouth_EMP_AA | Warhead@TeslaChargedWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 2905, 2978 | plymouth_EMP_AA | Warhead@TeslaWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 2907, 3003 | plymouth_EMP_AA | Warhead@MediumFlameWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 2909, 3081 | plymouth_EMP_AA | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 2911, 3105 | plymouth_EMP_AA | Warhead@HeavyCannonPercentage |
+| mods/cameo/weapons/outpost2.yaml | 2913, 3035 | plymouth_EMP_AA | Warhead@MediumCannonPercentage |
+| mods/cameo/weapons/outpost2.yaml | 2915, 3127 | plymouth_EMP_AA | Warhead@MediumMissilePercentage |
+| mods/cameo/weapons/outpost2.yaml | 2917, 3058 | plymouth_EMP_AA | Warhead@HeavyMissilePercentage |
+| mods/cameo/weapons/outpost2.yaml | 2919, 3150 | plymouth_EMP_AA | Warhead@EMPCompatibility |
+| mods/cameo/weapons/outpost2.yaml | 3166, 3199 | plymouth_Tiger_EMP | Warhead@Tesla_Super |
+| mods/cameo/weapons/outpost2.yaml | 3169, 3225 | plymouth_Tiger_EMP | Warhead@TeslaChargedWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 3172, 3249 | plymouth_Tiger_EMP | Warhead@ShieldHit |
+| mods/cameo/weapons/outpost2.yaml | 3174, 3254 | plymouth_Tiger_EMP | Warhead@TeslaWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 3177, 3279 | plymouth_Tiger_EMP | Warhead@MediumFlameWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 3180, 3358 | plymouth_Tiger_EMP | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/weapons/outpost2.yaml | 3183, 3382 | plymouth_Tiger_EMP | Warhead@HeavyCannonPercentage |
+| mods/cameo/weapons/outpost2.yaml | 3186, 3311 | plymouth_Tiger_EMP | Warhead@MediumCannonPercentage |
+| mods/cameo/weapons/outpost2.yaml | 3189, 3404 | plymouth_Tiger_EMP | Warhead@MediumMissilePercentage |
+| mods/cameo/weapons/outpost2.yaml | 3192, 3334 | plymouth_Tiger_EMP | Warhead@HeavyMissilePercentage |
+| mods/cameo/weapons/outpost2.yaml | 3195, 3427 | plymouth_Tiger_EMP | Warhead@EMPCompatibility |
 | mods/cameo/weapons/redalert2.yaml | 2723, 2731 | LightningBolt | Warhead@TeslaChargedExtraDamage |
 | mods/cameo/weapons/redalert2mod.yaml | 18, 63, 64 | AsianHowitzerSplash | Warhead@Concussion_Medium |
 | mods/cameo/weapons/redalert2mod.yaml | 77, 123, 124 | RA2KirovHowitzerSplash | Warhead@Concussion_Medium |
@@ -4027,5 +4023,5 @@ _none found_
 | mods/cameo/weapons/wh40k.yaml | 354, 357 | WH40KShootaBoyzGun | Warhead@1Dam |
 
 
-**FAIL** — D2 count 3967 exceeds the baseline 260: a new duplicate key was introduced.
+**FAIL** — D2 count 3963 exceeds the baseline 260: a new duplicate key was introduced.
 
