@@ -410,7 +410,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "3053",
       "reloaddelay": "8",
@@ -419,12 +419,10 @@
       "versus_templates": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
-       "^Effect_Emp_Fx_RA2",
-       "SkyHawkChainGun"
+       "^Effect_Emp_Fx_RA2"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_Bullet_Medium"
+       "^Warhead_Railgun_Heavy"
       ],
       "weapon": "SkyHawkChainGunWaveforce",
       "weapon_class_source": "template"
@@ -1558,7 +1556,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6696",
       "reloaddelay": "25",
@@ -1567,12 +1565,10 @@
       "versus_templates": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
-       "^Effect_Emp_Fx_RA2",
-       "JHighV"
+       "^Effect_Emp_Fx_RA2"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_Bullet_Medium"
+       "^Warhead_Railgun_Heavy"
       ],
       "weapon": "JHighVWaveforce",
       "weapon_class_source": "template"
@@ -2346,13 +2342,6 @@
        {
         "damage": "1",
         "falloff": null,
-        "spread": "125",
-        "tag": "RailgunWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
@@ -2362,6 +2351,13 @@
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2375,12 +2371,10 @@
       "versus_templates": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
-       "^Effect_Emp_Fx_RA2",
-       "japan_imperialscoutsman_rifle"
+       "^Effect_Emp_Fx_RA2"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_Bullet_Medium"
+       "^Warhead_Railgun_Heavy"
       ],
       "weapon": "japan_imperialscoutsman_rifle_waveforce",
       "weapon_class_source": "template"
@@ -2405,13 +2399,6 @@
        {
         "damage": "1",
         "falloff": null,
-        "spread": "125",
-        "tag": "RailgunWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
@@ -2421,6 +2408,13 @@
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2434,12 +2428,10 @@
       "versus_templates": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
-       "^Effect_Emp_Fx_RA2",
-       "japan_imperialscoutsman_rifle"
+       "^Effect_Emp_Fx_RA2"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_Bullet_Medium"
+       "^Warhead_Railgun_Heavy"
       ],
       "weapon": "japan_imperialscoutsman_rifle_waveforce",
       "weapon_class_source": "template"
@@ -4066,6 +4058,14 @@
        },
        {
         "damage": "1",
+        "falloff": null,
+        "percentage_denominator": "1000",
+        "spread": "250",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
         "falloff": "100, 85, 70, 55, 40, 25, 10",
         "percentage_denominator": "1000",
         "spread": "35",
@@ -4127,18 +4127,10 @@
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "percentage_denominator": "1000",
-        "spread": "250",
-        "tag": "HeavyAAWeaponPercentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5012",
       "reloaddelay": "8",
@@ -4147,12 +4139,10 @@
       "versus_templates": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
-       "^Effect_AlliedTigerCannon",
-       "ArmoredCarMG"
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_Bullet_Medium"
+       "^Warhead_Railgun_Heavy"
       ],
       "weapon": "ArmoredCarMGWaveforce",
       "weapon_class_source": "template"
@@ -4175,34 +4165,10 @@
        },
        {
         "damage": "1",
-        "falloff": "100, 85, 70, 55, 40, 25, 10",
-        "percentage_denominator": "1000",
-        "spread": "35",
-        "tag": "ArrowWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 33, 25, 20",
-        "percentage_denominator": "1000",
-        "spread": "200",
-        "tag": "GrenadePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
         "falloff": null,
         "percentage_denominator": "1000",
-        "spread": "200",
-        "tag": "MediumMissilePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "percentage_denominator": "1000",
-        "spread": "125",
-        "tag": "FlakWeaponPercentage",
+        "spread": "250",
+        "tag": "HeavyAAWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -4239,15 +4205,39 @@
        },
        {
         "damage": "1",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "percentage_denominator": "1000",
+        "spread": "35",
+        "tag": "ArrowWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
         "falloff": null,
         "percentage_denominator": "1000",
-        "spread": "250",
-        "tag": "HeavyAAWeaponPercentage",
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 50, 33, 25, 20",
+        "percentage_denominator": "1000",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "percentage_denominator": "1000",
+        "spread": "200",
+        "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7518",
       "reloaddelay": "8",
@@ -4256,12 +4246,10 @@
       "versus_templates": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
-       "^Effect_AlliedTigerCannon",
-       "ArmoredCarMG_AA"
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_Bullet_Medium"
+       "^Warhead_Railgun_Heavy"
       ],
       "weapon": "ArmoredCarMGAAWaveforce",
       "weapon_class_source": "template"
@@ -6267,7 +6255,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "4876",
       "reloaddelay": "8",
@@ -6276,12 +6264,10 @@
       "versus_templates": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy",
-       "JapaneseHovercraftFlak"
+       "^Effect_Railgun_Heavy"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_Flak_Medium"
+       "^Warhead_Railgun_Heavy"
       ],
       "weapon": "JapaneseHovercraftFlakWaveforce",
       "weapon_class_source": "template"
@@ -6332,7 +6318,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7314",
       "reloaddelay": "8",
@@ -6341,12 +6327,10 @@
       "versus_templates": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy",
-       "JapaneseHovercraftFlakAA"
+       "^Effect_Railgun_Heavy"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_Flak_Medium"
+       "^Warhead_Railgun_Heavy"
       ],
       "weapon": "JapaneseHovercraftFlakAAkWaveforce",
       "weapon_class_source": "template"
@@ -7431,7 +7415,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5004",
       "reloaddelay": "15",
@@ -7440,12 +7424,10 @@
       "versus_templates": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
-       "^Effect_Emp_Fx_RA2",
-       "NambuMG"
+       "^Effect_Emp_Fx_RA2"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_Bullet_Light"
+       "^Warhead_Railgun_Heavy"
       ],
       "weapon": "NambuMGWaveforce",
       "weapon_class_source": "template"

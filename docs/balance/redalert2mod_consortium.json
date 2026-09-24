@@ -1244,8 +1244,7 @@
       "versus_templates": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy",
-       "SteelAirTurret"
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy"
@@ -8837,6 +8836,13 @@
        },
        {
         "damage": "15",
+        "falloff": "99, 66, 33",
+        "spread": "525",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "15",
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
@@ -8847,13 +8853,6 @@
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "15",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -8867,8 +8866,7 @@
       "versus_templates": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy",
-       "SteelMegaSword_EMP"
+       "^Effect_Railgun_Heavy"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy"
@@ -9379,8 +9377,7 @@
       "versus_templates": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy",
-       "SteelStalkerRailgun"
+       "^Effect_Tesla_Heavy"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy"

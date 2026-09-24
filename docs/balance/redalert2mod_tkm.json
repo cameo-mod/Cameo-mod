@@ -3254,7 +3254,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7879",
       "reloaddelay": "100",
@@ -3262,15 +3262,13 @@
       "versus_templates": [
        "^Warhead_Tesla_Super",
        "^Projectile_Lightning_Super",
-       "^Effect_Tesla_Super",
-       "VonSniperAP"
+       "^Effect_Tesla_Super"
       ],
       "warheads": [
-       "^Warhead_Tesla_Super",
-       "^Warhead_Bullet_Heavy"
+       "^Warhead_Tesla_Super"
       ],
       "weapon": "VonSniperLockdown",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [

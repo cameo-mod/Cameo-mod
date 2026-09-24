@@ -11899,3 +11899,18 @@ prefixes), cross-file weapon-inherit skip (merged-order hazard).
   outpost2.yaml 19 — total ~146, most in other lanes' themes.
 - NOVA lane state: W7 412 = 90 held (ExtraDamage ruling) + ~322 support-shim
   and cross-file keeps. Every non-held, non-shim edge is converted.
+
+## 2026-09-24 (late night) — second supplier pass + ledger sync
+
+- Second supplier-analysis pass over the 95 remaining weapon-parent edges:
+  30 resolve their *ExtraDamage nodes through canonical ^Warhead_ templates
+  (first pass missed them — the node-key-vs-payload distinction).
+- Converted 28 resolved-identical (commit ae226621a). Reverted
+  SteelIonCannonDamage + NaxiV1Rocket: the template supplies the node KEY but
+  parents override type/payload → local node pin needed → the exact
+  ruling-blocked pattern. True held set is now 65 weapons.
+- Ledger sync: 22->6 drift; remaining 6 are foreign master drift (ledgers
+  stale since 09-23, pre-#478 splice) — flagged to owners.
+- Fleet: EMBER delivered the central W7 remainder as PR #488 using this
+  pipeline (outpost2 16 + warcraft2 5, resolved-identical, edenRailgun D1
+  fixed). Reviewed — clean. #486 (N6 sprite rename) trivial, clean.

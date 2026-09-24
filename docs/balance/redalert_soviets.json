@@ -1552,7 +1552,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "minrange": "1180",
       "pricing": true,
       "range": "5900",
@@ -1562,12 +1562,10 @@
       "versus_templates": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
-       "ra1_soviets_migattackbomber_maverick",
        "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [
-       "^Warhead_Tesla_Heavy",
-       "^Warhead_MissileAP_Medium"
+       "^Warhead_Tesla_Heavy"
       ],
       "weapon": "ra1_soviets_migattackbomber_teslamaverick",
       "weapon_class_source": "template"
@@ -1592,7 +1590,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "minrange": "1180",
       "pricing": true,
       "range": "5900",
@@ -1602,12 +1600,10 @@
       "versus_templates": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
-       "ra1_soviets_migattackbomber_maverick",
        "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [
-       "^Warhead_Tesla_Heavy",
-       "^Warhead_MissileAP_Medium"
+       "^Warhead_Tesla_Heavy"
       ],
       "weapon": "ra1_soviets_migattackbomber_teslamaverick",
       "weapon_class_source": "template"
@@ -6104,20 +6100,6 @@
       "burstdelays": "9",
       "damage_warheads": [
        {
-        "damage": "4",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "32000",
         "falloff": "100, 55, 0",
         "spread": "93",
@@ -6130,6 +6112,20 @@
         "spread": "200",
         "tag": "Tesla_Heavy_ExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
@@ -6140,13 +6136,11 @@
       "requires": "!ra1_soviets_upgrade_incendiarybullets && ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@Tesla",
       "versus_templates": [
-       "ra1_soviets_volkov_volkovmagneticweapon",
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
        "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
        "^Warhead_Tesla_Heavy"
       ],
       "weapon": "ra1_soviets_volkov_volkovmagneticweapontesla",
@@ -6429,20 +6423,6 @@
       "burstdelays": "9",
       "damage_warheads": [
        {
-        "damage": "4",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "32000",
         "falloff": "100, 55, 0",
         "spread": "93",
@@ -6455,6 +6435,20 @@
         "spread": "200",
         "tag": "Tesla_Heavy_ExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
@@ -6465,13 +6459,11 @@
       "requires": "!ra1_soviets_upgrade_incendiarybullets && ra1_soviets_upgrade_teslaarcing",
       "slot": "Armament@GARRISONEDTesla",
       "versus_templates": [
-       "ra1_soviets_volkov_volkovmagneticweapon",
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
        "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
        "^Warhead_Tesla_Heavy"
       ],
       "weapon": "ra1_soviets_volkov_volkovmagneticweapontesla",
@@ -12425,12 +12417,10 @@
       "versus_templates": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
-       "SCUD",
        "^Effect_Kirov_Tesla_RA2"
       ],
       "warheads": [
-       "^Warhead_Tesla_Heavy",
-       "^Warhead_Flame_Heavy"
+       "^Warhead_Tesla_Heavy"
       ],
       "weapon": "ra1_soviets_v2rocketlauncher_scudtesla",
       "weapon_class_source": "template"

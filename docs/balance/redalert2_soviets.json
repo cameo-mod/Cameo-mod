@@ -106,7 +106,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "2500",
       "reloaddelay": "50",
@@ -115,15 +115,13 @@
       "versus_templates": [
        "^Warhead_Tesla_Super",
        "^Projectile_Lightning_Super",
-       "^Effect_Kirov_Tesla_RA2",
-       "RA2KirovBomb"
+       "^Effect_Kirov_Tesla_RA2"
       ],
       "warheads": [
-       "^Warhead_Tesla_Super",
-       "^Warhead_Demolition_Heavy"
+       "^Warhead_Tesla_Super"
       ],
       "weapon": "RA2KirovBomb_tesla",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
