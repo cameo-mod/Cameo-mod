@@ -99,7 +99,7 @@ reachable the old nearest-enemy behaviour is the fallback. It is opt-in per
   `World.Actors` filtering cloak but never shroud. Fog is phase 6 and it will make bots weaker
   before it makes them better, so do not tune bot strength against pre-fog behaviour.
 
-## 2026-09-20 — PR #407 AGGREGATE CLASSIC-FOUR MILESTONE (IN REVIEW)
+## 2026-09-20 — PR #407 AGGREGATE CLASSIC-FOUR MILESTONE (MERGED 2026-09)
 
 PR #407 on `claude/transport-chassis-classic-four-20260918` is the single
 aggregate review head for the classic-four harvester, pipeline, support, and
@@ -492,7 +492,7 @@ dated earlier, including the "(night)" section below, which it supersedes on the
 | | |
 |---|---|
 | the branch | `claude/armament_pairing` → **`96cefbe3b`**, off `8f9bef3b0`, pushed |
-| PR | **#375** — Astra NO-GO at `cfa8c9af9`; **all five blockers now addressed**, awaiting re-review |
+| PR | **#375** — Astra NO-GO at `cfa8c9af9`; **all five blockers now addressed** — **MERGED 2026-09** |
 | the map | **v27** — 73 originals · 116 expanded · 305 references · 45 priced by formula |
 | suite | **161 fail/error, exactly master's baseline.** 2473 tests (master 2427) |
 | doc claims | this lane's **7 of 7 green**; 11 pre-existing mismatches elsewhere, untouched |
@@ -1471,7 +1471,7 @@ written.
 | phase | state |
 |---|---|
 | 1 — record-only match logging | **landed** (PR #331, then `9ad1a5f77`, then Codex's save-exclusion in #329) |
-| 2 — observe-only `MasterAiBotModule` + situation log | **in review on my branch**, merged up to current master |
+| 2 — observe-only `MasterAiBotModule` + situation log | **landed** (#364) |
 | 3 — synced `BotPersonalityController` and dynamic switching | next, and the first phase that changes play |
 | 4–9 — per-enemy targeting, counter-demand, fog, scouting, offline eval, bandit priors | proposed |
 
@@ -1571,7 +1571,7 @@ someone else is mid-way through.**
 
 `warhead_family_reach` measures **1,530 distinct fired weapon identities** whose
 transitive inheritance reaches a `^Warhead_*` family in the current PR340 source.
-(2026-09-23 resync, post-#438: `unconverted_template_inheritors` = **1163**.) **2026-09-23b (post-#456 W23 retrofit): = 827.**
+(2026-09-23 resync, post-#438: `unconverted_template_inheritors` = **1163**.) **2026-09-23b (post-#456 W23 retrofit): = 827.** **2026-09-24b (post-merge-wave): = 385.**
 The registry's previous value was 1,415; it is updated upward to this measured
 count with the same predicate and zero tolerance. Ownership wrappers can expose
 more distinct fired identities for existing family payloads: this increase does
@@ -2057,7 +2057,7 @@ Devin Cloud designed the module architecture and stopped mid-merge when its quot
   per-module build plan, the shared snapshot, the one synced piece, and the 7-phase build
   order) and **§11** (the reconciliation of the first five-agent research round, with rejected
   claims and what falsifies each).
-* **PR #323 is OPEN and CONFLICTING** — Observer Combat Effectiveness graph, +233/−12, and it
+* **PR #323 was MERGED 2026-09** (this entry predates the merge) — Observer Combat Effectiveness graph, +233/−12, and it
   touches C#, so it needs a `dotnet build` and a boot gate, not just a merge. **Assigned to
   Astra, Task H.1.**
 * ⚠ `gh` defaults to the wrong remote in this checkout — always pass

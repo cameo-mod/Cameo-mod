@@ -26,9 +26,12 @@ and [DTA investigation](../balance/review/DTA_INI_EXTRACTOR_RESEARCH_20260909.md
 - [ ] Finish the new OpenRA all-armament evidence repair requested at 00:08 on
   10 September. Factory-ready and maximum-upgrade states remain distinct; unknown
   activation cannot be replaced with an all-conditions-false assumption.
-- [ ] Implement and validate the continuous-heaviness runtime/tool contract before
+- [x] Implement and validate the continuous-heaviness runtime/tool contract before
   scoped W24 activation (Aedis authorized implementation 00:40, interpolation 00:51);
   see [the reviewed findings](../balance/review/CONTINUOUS_HEAVINESS_REVIEW_20260910.md).
+  ✅ SHIPPED 2026-08-24 (`7704fcf67`) — `HeavinessBell.cs` wired behind the inert
+  `Heaviness` yaml field; `audit_heaviness_bell` clean. Still gated: no yaml may set
+  `Heaviness` until a maintainer orders the rollout.
 
 Completed boxes above describe reviewed local implementation, not publication, anchor
 approval or an applied rebalance. Same-base full-suite comparison at `50b7d001b` retains
@@ -143,8 +146,6 @@ the fog sequencing.
   hysteretic, sustained `demand.*` prerequisites for pilot compositions.
 - [ ] **M** `MasterAiBotModule`: fogged per-enemy signals, main-target scoring,
   and later personality refinements.
-- [x] **M** Phase 4 main-target consumption: `SquadManagerBotModuleCA` prefers the
-  master's `MainTarget` for proactive picks when `PreferMainTarget` is enabled.
 - [ ] **M** Per-enemy pairwise damage ledger (`PlayerStatistics` is aggregate and
   cannot attribute losses to a specific opponent).
   - [x] **M** Record-only AI match logging: [`AI_MATCH_LOG.md`](AI_MATCH_LOG.md),
@@ -615,8 +616,10 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
   contradicting `BALANCE_PIPELINE.md` §2; recommendation is to split them into
   `docs/balance/derived/`. Full spec + improvement roadmap:
   [`EFFECTIVE_DAMAGE.md`](EFFECTIVE_DAMAGE.md).
-- **[NEXT — needs a maintainer warhead order] Adopt the Sonic family.** `^Warhead_Sonic_*` now bakes
-  the `SonicDebuff` mark (`5a14355e6`), but **nothing inherits it**, so it is inert. Candidates:
+- **[PARTIALLY ADOPTED — recheck remaining candidates] Adopt the Sonic family.** `^Warhead_Sonic_*`
+  is now LIVE: TS GDI `TSSonicZapWeaponSonic` inherits `^Warhead_Sonic_Heavy` + `^Effect_Sonic_Heavy`,
+  and `^Warhead_CannonSonic_*`/`^Warhead_MissileSonic_*` variants are inherited across TiberianSun,
+  RedAlert, RedAlert2, and D2k packs (post-#483 Resonance/state wiring). Remaining candidates:
   TS GDI `TSSonicZapWeapon` / `TSSonicZapWeaponSonic` (the Disruptor — currently Tesla + Magic),
   the sonic UPGRADE variants `TSVulcanGunSonic` / `TSAssaultCannonSonic` / `TSAssaultCannonTalSonic` /
   `TSHellfireSonic` / `TSZoneHellfireSonic` / `TSBombSonic` / `TSGrenadeSonic` / `KodiakCannonSonic`
