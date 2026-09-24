@@ -105,11 +105,11 @@ wc2arrowFire:
 	-Warhead@ArrowWeapon:
 	-Warhead@CannonHE_Medium_Flat:
 wc2highArrowFire:
-	Inherits@collapseextra1: ^Warhead_Laser_ExtraDamage
 	Inherits: ^LaserWeapon
 	Inherits@2: ^HeavyMissile
 	Inherits@3: ^HeavyAAWeapon
-	Inherits@4: wc2arrowFire
+	Inherits@w70: ^Projectile_Shell_Medium
+	Inherits@w71: ^Effect_CannonHE_Medium
 	ReloadDelay: 35
 	Range: 7487
 	Report: wc2_bowfire.aud
@@ -149,8 +149,206 @@ wc2highArrowFire:
 	-Warhead@HeavyMissile:
 	-Warhead@HeavyAAWeapon:
 	Warhead@CannonHE_Medium:
-		Damage: 33000
+		Damage: 33600
 		PercentageScale: 1210
+	Projectile: Missile
+		Inaccuracy: 0
+		ContrailLength: 0
+		ContrailStartColor: EECCAA88
+		ContrailEndColor: 88664422
+		ContrailStartWidth: 40
+		ContrailEndWidth: 80
+		LaunchAngle: 66
+	Warhead@Effect: CreateEffect
+		Explosions: small_poof
+		ImpactSounds: wc2_bowhit.aud
+		ValidTargets: Ground, Water, Air
+	Warhead@EffectAir: CreateEffect
+		ImpactSounds: xplos.aud
+	Warhead@ShieldHit: GrantExternalCondition
+		Duration: 3
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+	TargetActorCenter: true
+	Warhead@CannonHE_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 300
+		Falloff: 100, 50, 20, 0
+		Versus:
+			HAZMAT: 71
+			COMPOSITE: 98
+			BLAST: 40
+			REFLECTOR: 70
+			ARMOR: 70
+			Shield: 147
+			Wood: 150
+			Scout: 144
+			Light: 129
+			Medium: 128
+			None: 127
+			Heavy: 111
+			Steel: 107
+			Fighter: 98
+			Concrete: 92
+			Superheavy: 90
+			Flak: 87
+			Plate: 79
+			Heroic: 76
+			Bomber: 75
+			Helicopter: 64
+			Spaceship: 41
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Scout: 20
+			Wood: 19
+			Light: 18
+			Steel: 17
+			Medium: 16
+			Concrete: 15
+			Heavy: 14
+			Superheavy: 13
+			None: 12
+			Flak: 11
+			Plate: 10
+			Heroic: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+	Warhead@Glow: GlowImpact
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 125
+		Damage: 2
+		Versus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Concrete: 6
+			Steel: 5
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
+	Warhead@ChaingunPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 100
+		Damage: 2
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Concrete: 11
+			Medium: 10
+			Helicopter: 9
+			Steel: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
+		UpdatesUnitStatistics: false
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 200
+		Damage: 2
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 75
+		Damage: 2
+		Versus:
+			Shield: 17
+			Superheavy: 16
+			Heavy: 15
+			Medium: 14
+			Light: 13
+			Scout: 12
+			Steel: 11
+			Concrete: 10
+			Wood: 9
+			Plate: 8
+			Flak: 7
+			None: 6
+			Heroic: 5
+			Spaceship: 4
+			Helicopter: 3
+			Bomber: 2
+			Fighter: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	InvalidTargets: wall
+	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: wall
+		Spread: 35
+		Damage: 2
+		Falloff: 100, 85, 70, 55, 40, 25, 10
+		Versus:
+			Shield: 17
+			None: 16
+			Fighter: 15
+			Flak: 14
+			Bomber: 13
+			Plate: 12
+			Helicopter: 11
+			Heroic: 10
+			Spaceship: 9
+			Scout: 8
+			Light: 7
+			Medium: 6
+			Heavy: 5
+			Superheavy: 4
+			Steel: 3
+			Concrete: 2
+			Wood: 1
+		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
+		UpdatesUnitStatistics: false
 SiegeEngineCannon:
 	Inherits@roleflat: ^Warhead_CannonHE_Heavy_Flat
 	Inherits: ^NuclearWarhead
