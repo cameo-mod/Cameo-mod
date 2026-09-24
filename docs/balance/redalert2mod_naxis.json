@@ -20,25 +20,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6090",
       "reloaddelay": "127",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Concussion_Light",
-       "^Warhead_CannonHE_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_Concussion_Light",
-       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxPlanegun_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -54,26 +50,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6090",
       "reloaddelay": "127",
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Concussion_Light",
-       "^Warhead_CannonHE_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_Concussion_Light",
-       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxPlanegun_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -252,11 +244,8 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Demolition_Heavy",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^MediumChemicalWeapon",
-       "^MediumFlameWeapon",
-       "^HeavyBomb"
+       "^Effect_Apoc_AP_RA2",
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
        "^Warhead_Demolition_Heavy"
@@ -321,6 +310,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "3",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "InterceptorCannonPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "1",
@@ -347,13 +343,6 @@
         "spread": "1",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "3",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "InterceptorCannonPercentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
@@ -363,13 +352,9 @@
       "reloaddelay": "100",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^FlakWeapon",
-       "^Chaingun",
-       "^SmallArms"
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -391,21 +376,19 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6090",
       "reloaddelay": "100",
       "slot": "Armament@Rockets",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy_Flat",
-       "NaxPlaneRockets_elite"
+       "^Projectile_Missile_Heavy_D2K_Rocket",
+       "^Effect_MissileAP_Heavy"
       ],
-      "warheads": [
-       "^Warhead_MissileAP_Medium",
-       "^Warhead_MissileAP_Heavy"
-      ],
+      "warheads": [],
       "weapon": "NaxInterceptorRockets",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -492,20 +475,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6090",
       "reloaddelay": "100",
       "slot": "Armament@Rockets",
       "versus_templates": [
-       "^Warhead_MissileAP_Heavy_Flat",
-       "^Warhead_MissileAP_Medium",
-       "^Projectile_Missile_Medium",
-       "^Effect_MissileAP_Medium",
-       "^D2KRocket"
+       "^Warhead_MissileAP_Heavy",
+       "^Projectile_Missile_Heavy_D2K_Rocket",
+       "^Effect_MissileAP_Heavy"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "NaxPlaneRockets_elite",
@@ -525,21 +505,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6090",
       "reloaddelay": "100",
       "requires": "rank-elite",
       "slot": "Armament@RocketsELITE",
       "versus_templates": [
-       "^Warhead_MissileAP_Heavy_Flat",
-       "^Warhead_MissileAP_Medium",
-       "^Projectile_Missile_Medium",
-       "^Effect_MissileAP_Medium",
-       "^D2KRocket"
+       "^Warhead_MissileAP_Heavy",
+       "^Projectile_Missile_Heavy_D2K_Rocket",
+       "^Effect_MissileAP_Heavy"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "NaxPlaneRockets_elite",
@@ -559,25 +536,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6090",
       "reloaddelay": "127",
       "slot": "Armament@MG",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Concussion_Light",
-       "^Warhead_CannonHE_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_Concussion_Light",
-       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxPlanegun_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -593,26 +566,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6090",
       "reloaddelay": "127",
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Concussion_Light",
-       "^Warhead_CannonHE_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_Concussion_Light",
-       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxPlanegun_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -703,6 +672,14 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
+        "damage": "7000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "percentage_denominator": "10000",
+        "spread": "110",
+        "tag": "Flak_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -722,14 +699,6 @@
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "7000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
        },
        {
         "damage": "1500",
@@ -754,11 +723,9 @@
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^Chaingun",
-       "^RA2FlakWeapon",
-       "^NaxQuadCannonFlakAllyCompatibility"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -771,6 +738,14 @@
       "burst": "8",
       "burstdelays": "3",
       "damage_warheads": [
+       {
+        "damage": "7000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "percentage_denominator": "10000",
+        "spread": "110",
+        "tag": "Flak_Medium",
+        "type": "AreaDamage"
+       },
        {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
@@ -791,14 +766,6 @@
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "7000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
        },
        {
         "damage": "1500",
@@ -823,7 +790,9 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "NaxQuadCannon"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -858,13 +827,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "ChaingunPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1500",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
@@ -877,10 +839,17 @@
         "spread": "110",
         "tag": "NaxFlakAllyUncounted",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8052",
       "reloaddelay": "47",
@@ -888,20 +857,25 @@
       "slot": "Armament@AA",
       "versus_templates": [
        "^Warhead_Flak_Medium_Flat",
-       "NaxQuadCannon",
-       "^NaxQuadCannonFlakGroundWaterCompatibility"
+       "^Projectile_Flak_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
-      "warheads": [
-       "^Warhead_Flak_Medium"
-      ],
+      "warheads": [],
       "weapon": "NaxQuadCannon_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "primary",
       "burst": "8",
       "burstdelays": "3",
       "damage_warheads": [
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "AreaDamagePercentage"
+       },
        {
         "damage": "7000",
         "falloff": "100, 58, 32, 16, 6, 0",
@@ -921,13 +895,6 @@
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -953,7 +920,9 @@
       "requires": "rank-elite",
       "slot": "Armament@eliteAA",
       "versus_templates": [
-       "NaxQuadCannon_AA"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -1356,6 +1325,13 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
+        "damage": "1",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
         "damage": "7000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
@@ -1374,13 +1350,6 @@
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -1405,7 +1374,9 @@
       "reloaddelay": "88",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "NaxQuadCannon_AA"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -1417,6 +1388,14 @@
       "burst": "8",
       "burstdelays": "0",
       "damage_warheads": [
+       {
+        "damage": "7000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "percentage_denominator": "10000",
+        "spread": "110",
+        "tag": "Flak_Medium",
+        "type": "AreaDamage"
+       },
        {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
@@ -1437,14 +1416,6 @@
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "7000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
        },
        {
         "damage": "1500",
@@ -1468,7 +1439,9 @@
       "reloaddelay": "88",
       "slot": "Armament@AA",
       "versus_templates": [
-       "NaxQuadCannon"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -1683,7 +1656,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.75,
       "minrange": "2470",
       "pricing": true,
       "range": "12345",
@@ -1691,14 +1664,11 @@
       "requires": "mortar",
       "slot": "Armament@mortar",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^Effect_Concussion_Medium",
-       "^RA2Grenade"
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "NaxGrilleArty",
@@ -1717,17 +1687,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7555",
       "reloaddelay": "60",
       "requires": "mg",
       "slot": "Armament@mg",
       "versus_templates": [
-       "NaxiWW2Machinegun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxiWW2MachinegunTop",
@@ -1737,6 +1708,13 @@
       "burst": "8",
       "burstdelays": "3",
       "damage_warheads": [
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "AreaDamagePercentage"
+       },
        {
         "damage": "7000",
         "falloff": "100, 58, 32, 16, 6, 0",
@@ -1756,13 +1734,6 @@
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -1788,7 +1759,9 @@
       "requires": "aa",
       "slot": "Armament@aa",
       "versus_templates": [
-       "NaxQuadCannon_AA"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -2365,7 +2338,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "2777",
       "reloaddelay": "54",
@@ -2376,7 +2349,6 @@
        "Lunar_Green105mm"
       ],
       "warheads": [
-       "^Warhead_Tesla_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "NaxiAlienPistol",
@@ -2409,7 +2381,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3500",
       "reloaddelay": "54",
@@ -2419,7 +2391,6 @@
        "NaxiAlienPistol"
       ],
       "warheads": [
-       "^Warhead_Tesla_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "NaxiAlienPistol_elite",
@@ -2453,7 +2424,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "2777",
       "reloaddelay": "54",
@@ -2464,7 +2435,6 @@
        "Lunar_Green105mm"
       ],
       "warheads": [
-       "^Warhead_Tesla_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "NaxiAlienPistol",
@@ -2498,7 +2468,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "3500",
       "reloaddelay": "54",
@@ -2508,7 +2478,6 @@
        "NaxiAlienPistol"
       ],
       "warheads": [
-       "^Warhead_Tesla_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "NaxiAlienPistol_elite",
@@ -2633,7 +2602,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "NaxiAntiTankCannon"
+       "^Effect_Explosion_Small_RA2",
+       "^Projectile_Shell_Light",
+       "^Warhead_CannonAP"
       ],
       "warheads": [
        "^Warhead_CannonAP"
@@ -2724,16 +2695,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5570",
       "reloaddelay": "60",
       "slot": "Armament@AG",
       "versus_templates": [
-       "NaxiWW2Machinegun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxiWW2MachinegunSmall",
@@ -2752,16 +2724,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8355",
       "reloaddelay": "60",
       "slot": "Armament@AA",
       "versus_templates": [
-       "NaxiWW2MachinegunSmall"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxiWW2MachinegunSmall_AA",
@@ -3120,7 +3093,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "NaxiRifleCons"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -3239,7 +3214,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "RA2BrutePunch"
+       "^Warhead_Melee_Medium",
+       "^Projectile_InstantHit",
+       "^Effect_Melee_Medium"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -3355,7 +3332,9 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "AsianFlamerTurret"
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Init_Fire_RA2"
       ],
       "warheads": [
        "^Warhead_Flame_Light"
@@ -3383,7 +3362,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "NaxiFlamerTroop"
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Init_Fire_RA2"
       ],
       "warheads": [
        "^Warhead_Flame_Light"
@@ -3412,7 +3393,9 @@
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "AsianFlamerTurret"
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Init_Fire_RA2"
       ],
       "warheads": [
        "^Warhead_Flame_Light"
@@ -3441,7 +3424,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "NaxiFlamerTroop"
+       "^Warhead_Flame_Light",
+       "^Projectile_Flame_Light",
+       "^Effect_Init_Fire_RA2"
       ],
       "warheads": [
        "^Warhead_Flame_Light"
@@ -3519,9 +3504,7 @@
       "reloaddelay": "50",
       "requires": "!deployed",
       "slot": "Armament@Dummy",
-      "versus_templates": [
-       "^DeployTargeting"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "NaxiWW2MachinegunnerTargeting",
       "weapon_class_source": "none"
@@ -3540,17 +3523,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8970",
       "reloaddelay": "90",
       "requires": "(deployed || undeployed) && !rank-elite",
       "slot": "Armament@Deployed",
       "versus_templates": [
-       "NaxiWW2Machinegun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxiWW2Machinegunner",
@@ -3570,17 +3554,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9970",
       "reloaddelay": "90",
       "requires": "(deployed || undeployed) && rank-elite",
       "slot": "Armament@DEPLOYEDELITE",
       "versus_templates": [
-       "NaxiWW2Machinegunner"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxiWW2Machinegunner_elite",
@@ -3600,17 +3585,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "8970",
       "reloaddelay": "90",
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "NaxiWW2Machinegun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxiWW2Machinegunner",
@@ -3630,17 +3616,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "9970",
       "reloaddelay": "90",
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "NaxiWW2Machinegunner"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxiWW2Machinegunner_elite",
@@ -3767,7 +3754,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "NaxiSniper"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -3839,7 +3828,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "NaxiSniper"
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
       ],
       "warheads": [
        "^Warhead_Sniper_Light"
@@ -3954,7 +3945,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "naxis_naxiriflerecruit_rifle"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -4012,7 +4005,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "naxis_naxiriflerecruit_rifle"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -4148,7 +4143,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "naxis_naxiriflesoldier_rifle"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -4206,7 +4203,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "naxis_naxiriflesoldier_rifle"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -4347,17 +4346,12 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileAP_Medium_Flat",
-       "^HeavyBomb",
-       "^HeavyFlameWeapon",
-       "^Grenade",
-       "^TankDestroyerCannon",
-       "^MediumChemicalWeapon",
-       "^RA2MediumMissile"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Apoc_AP_RA2",
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "NaxiShrekCons",
@@ -4418,10 +4412,11 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "NaxiShrekCons"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "NaxiShrekCons_elite",
@@ -4481,17 +4476,12 @@
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileAP_Medium_Flat",
-       "^HeavyBomb",
-       "^HeavyFlameWeapon",
-       "^Grenade",
-       "^TankDestroyerCannon",
-       "^MediumChemicalWeapon",
-       "^RA2MediumMissile"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Apoc_AP_RA2",
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "NaxiShrekCons",
@@ -4553,10 +4543,11 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "NaxiShrekCons"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "NaxiShrekCons_elite",
@@ -4673,17 +4664,11 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileAP_Medium_Flat",
-       "^HeavyBomb",
-       "^HeavyFlameWeapon",
-       "^Grenade",
-       "^TankDestroyerCannon",
-       "^MediumChemicalWeapon",
-       "^RA2MediumMissile"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Apoc_AP_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "NaxiShrek",
@@ -4744,10 +4729,11 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "NaxiShrek"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Apoc_AP_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "NaxiShrek_elite",
@@ -4807,17 +4793,11 @@
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileAP_Medium_Flat",
-       "^HeavyBomb",
-       "^HeavyFlameWeapon",
-       "^Grenade",
-       "^TankDestroyerCannon",
-       "^MediumChemicalWeapon",
-       "^RA2MediumMissile"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Apoc_AP_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "NaxiShrek",
@@ -4879,10 +4859,11 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONED_E",
       "versus_templates": [
-       "NaxiShrek"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Apoc_AP_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "NaxiShrek_elite",
@@ -4958,9 +4939,7 @@
       "reloaddelay": "50",
       "requires": "!deployed",
       "slot": "Armament@Dummy",
-      "versus_templates": [
-       "^AADeployTargeting"
-      ],
+      "versus_templates": [],
       "warheads": [],
       "weapon": "NaxQuadCannonTargeting",
       "weapon_class_source": "none"
@@ -4970,6 +4949,13 @@
       "burst": "6",
       "burstdelays": "4",
       "damage_warheads": [
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "AreaDamagePercentage"
+       },
        {
         "damage": "7000",
         "falloff": "100, 58, 32, 16, 6, 0",
@@ -4989,13 +4975,6 @@
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -5021,7 +5000,9 @@
       "requires": "(deployed || undeployed) && !rank-elite",
       "slot": "Armament@Deployed",
       "versus_templates": [
-       "NaxQuadCannon_AA"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -5034,6 +5015,13 @@
       "burst": "8",
       "burstdelays": "3",
       "damage_warheads": [
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "AreaDamagePercentage"
+       },
        {
         "damage": "7000",
         "falloff": "100, 58, 32, 16, 6, 0",
@@ -5053,13 +5041,6 @@
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -5085,7 +5066,9 @@
       "requires": "(deployed || undeployed) && rank-elite",
       "slot": "Armament@DEPLOYEDELITE",
       "versus_templates": [
-       "NaxQuadCannon_AA_elite"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -5098,6 +5081,13 @@
       "burst": "6",
       "burstdelays": "4",
       "damage_warheads": [
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "AreaDamagePercentage"
+       },
        {
         "damage": "7000",
         "falloff": "100, 58, 32, 16, 6, 0",
@@ -5117,13 +5107,6 @@
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -5149,7 +5132,9 @@
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "NaxQuadCannon_AA"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -5162,6 +5147,13 @@
       "burst": "8",
       "burstdelays": "3",
       "damage_warheads": [
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "AreaDamagePercentage"
+       },
        {
         "damage": "7000",
         "falloff": "100, 58, 32, 16, 6, 0",
@@ -5181,13 +5173,6 @@
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -5213,7 +5198,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "NaxQuadCannon_AA_elite"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -5288,6 +5275,14 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
+        "damage": "7000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "percentage_denominator": "10000",
+        "spread": "110",
+        "tag": "Flak_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -5307,14 +5302,6 @@
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "7000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
        },
        {
         "damage": "1500",
@@ -5339,7 +5326,9 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "NaxQuadCannon"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -5351,6 +5340,14 @@
       "burst": "8",
       "burstdelays": "3",
       "damage_warheads": [
+       {
+        "damage": "7000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "percentage_denominator": "10000",
+        "spread": "110",
+        "tag": "Flak_Medium",
+        "type": "AreaDamage"
+       },
        {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
@@ -5371,14 +5368,6 @@
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "7000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
        },
        {
         "damage": "1500",
@@ -5403,7 +5392,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "SkyMageCannon"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -5415,6 +5406,13 @@
       "burst": "6",
       "burstdelays": "4",
       "damage_warheads": [
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "AreaDamagePercentage"
+       },
        {
         "damage": "7000",
         "falloff": "100, 58, 32, 16, 6, 0",
@@ -5434,13 +5432,6 @@
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -5466,7 +5457,9 @@
       "requires": "!rank-elite",
       "slot": "Armament@AA",
       "versus_templates": [
-       "NaxQuadCannon_AA"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -5478,6 +5471,13 @@
       "burst": "8",
       "burstdelays": "3",
       "damage_warheads": [
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "AreaDamagePercentage"
+       },
        {
         "damage": "7000",
         "falloff": "100, 58, 32, 16, 6, 0",
@@ -5497,13 +5497,6 @@
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -5529,7 +5522,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITEAA",
       "versus_templates": [
-       "SkyMageCannon_AA"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -5798,7 +5793,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "NaxiRifle"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -5856,7 +5853,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "NaxiRifle"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -5940,21 +5939,18 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "75",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "naxis_sssoldier_smg",
@@ -5973,17 +5969,18 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "75",
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "naxis_sssoldier_smg"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "naxis_sssoldier_smg_elite",
@@ -6003,21 +6000,18 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "4500",
       "reloaddelay": "75",
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "naxis_sssoldier_smg",
@@ -6037,17 +6031,18 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "4500",
       "reloaddelay": "75",
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "naxis_sssoldier_smg"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "naxis_sssoldier_smg_elite",
@@ -6172,7 +6167,9 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "NaxiRifle"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -6230,7 +6227,9 @@
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "NaxiRifle"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -6323,7 +6322,6 @@
       "reloaddelay": "250",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Demolition_Heavy_Flat",
        "^Warhead_Demolition_Heavy",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
@@ -6354,7 +6352,6 @@
       "reloaddelay": "250",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "^Warhead_Demolition_Heavy_Flat",
        "^Warhead_Demolition_Heavy",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
@@ -6384,7 +6381,6 @@
       "reloaddelay": "250",
       "slot": "Armament@TERCERA",
       "versus_templates": [
-       "^Warhead_Demolition_Heavy_Flat",
        "^Warhead_Demolition_Heavy",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
@@ -6414,7 +6410,6 @@
       "reloaddelay": "250",
       "slot": "Armament@CUARTA",
       "versus_templates": [
-       "^Warhead_Demolition_Heavy_Flat",
        "^Warhead_Demolition_Heavy",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
@@ -6497,13 +6492,6 @@
       "burstdelays": "6",
       "damage_warheads": [
        {
-        "damage": "48000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium_Flat",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "800",
         "falloff": "100, 45, 18",
         "percentage_denominator": "10000",
@@ -6526,29 +6514,31 @@
         "spread": null,
         "tag": "CollapsedNaxiMissileUboatMissileAP_MediumPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "48000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_Medium_Flat",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "15000",
       "reloaddelay": "125",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_MissileAP_Medium_Flat",
-       "^Warhead_Demolition_Light",
-       "^Warhead_Demolition_Heavy",
-       "^Projectile_Grenade_Light",
-       "^Effect_Demolition_Heavy",
-       "^RA2MediumMissile"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Apoc_AP_RA2"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Demolition_Heavy",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "NaxiMissileUboat",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6642,19 +6632,17 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "120",
       "slot": "Armament@Torp",
       "versus_templates": [
-       "^Warhead_MissileAP_Heavy_Flat",
-       "^RA2Grenade",
-       "^RA2HeavyMissile",
+       "^Warhead_MissileAP_Heavy",
+       "^Projectile_Missile_Heavy",
        "^Effect_Watersplash_Large_RA2"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "AsianSmallTorpedo",
@@ -7274,7 +7262,9 @@
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "RA2120mm"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -7303,8 +7293,9 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "Nax120mmAssault",
-       "^RA2EliteEffects"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -7325,18 +7316,16 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5555",
       "reloaddelay": "44",
       "slot": "Armament@Flam",
       "versus_templates": [
-       "^Warhead_Flame_Heavy",
        "^Warhead_Flame_Light",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Flame_Heavy",
        "^Warhead_Flame_Light"
       ],
       "weapon": "SyndicateFireballLauncher",
@@ -7437,7 +7426,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "2800",
       "pricing": true,
       "range": "14000",
@@ -7445,21 +7434,15 @@
       "requires": "!rank-elite",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy_Flat",
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Concussion_Medium",
-       "^Effect_Concussion_Medium",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "NaxBrummbarArty",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
@@ -7474,7 +7457,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "2800",
       "pricing": true,
       "range": "15000",
@@ -7482,16 +7465,15 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "NaxBrummbarArty",
-       "^RA2EliteEffects"
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "NaxBrummbarArty_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7578,17 +7560,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7555",
       "reloaddelay": "60",
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "NaxiWW2Machinegun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxiWW2MachinegunTop",
@@ -7608,17 +7591,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7555",
       "reloaddelay": "60",
       "requires": "!rank-elite",
       "slot": "Armament@AA",
       "versus_templates": [
-       "NaxiWW2Machinegun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxiWW2MachinegunTop_AA",
@@ -7928,7 +7912,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.75,
       "minrange": "2470",
       "pricing": true,
       "range": "12345",
@@ -7936,14 +7920,11 @@
       "requires": "!rank-elite",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^Effect_Concussion_Medium",
-       "^RA2Grenade"
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "NaxGrilleArty",
@@ -7962,7 +7943,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.75,
       "minrange": "2470",
       "pricing": true,
       "range": "13333",
@@ -7970,11 +7951,11 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "NaxGrilleArty",
-       "^RA2EliteEffects"
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "NaxGrilleArty_elite",
@@ -8065,18 +8046,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5570",
       "reloaddelay": "60",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxiWW2Machinegun",
@@ -8095,16 +8075,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8355",
       "reloaddelay": "60",
       "slot": "Armament@AA",
       "versus_templates": [
-       "NaxiWW2Machinegun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxiWW2Machinegun_AA",
@@ -8236,8 +8217,9 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "NaxiHetzerDestroyer",
-       "^RA2EliteEffects"
+       "^Effect_Explosion_Small_RA2",
+       "^Projectile_Shell_Light",
+       "^Warhead_CannonAP"
       ],
       "warheads": [
        "^Warhead_CannonAP"
@@ -8328,27 +8310,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "7396",
       "reloaddelay": "90",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^Warhead_CannonAP_Light_Flat",
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^Warhead_Concussion_Medium",
-       "^Effect_Concussion_Medium",
-       "^RA2TankDestroyerCannon"
+       "^Warhead_CannonAP_Light",
+       "^Projectile_Shell_Light",
+       "^Effect_Explosion_Small_RA2"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
-       "^Warhead_Concussion_Medium",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "NaxiJadgDestroyer",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -8369,7 +8345,9 @@
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "RA2120mm"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -8398,8 +8376,9 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "Nax120mmAssault",
-       "^RA2EliteEffects"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -8489,28 +8468,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "7396",
       "reloaddelay": "90",
       "requires": "!rank-elite",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^Warhead_CannonAP_Light_Flat",
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^Warhead_Concussion_Medium",
-       "^Effect_Concussion_Medium",
-       "^RA2TankDestroyerCannon"
+       "^Warhead_CannonAP_Light",
+       "^Projectile_Shell_Light",
+       "^Effect_Explosion_Small_RA2"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
-       "^Warhead_Concussion_Medium",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "NaxiJadgDestroyer",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
@@ -8525,23 +8498,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "8396",
       "reloaddelay": "90",
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "NaxiJadgDestroyer",
-       "^RA2EliteEffects"
+       "^Warhead_CannonAP_Light",
+       "^Projectile_Shell_Light",
+       "^Effect_Explosion_Small_RA2"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
-       "^Warhead_Concussion_Medium",
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "NaxiJadgDestroyer_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -8634,7 +8606,9 @@
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "^RA2MediumCannon"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -8663,8 +8637,9 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "KingNaxTigerCannon",
-       "^RA2EliteEffects"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -8756,18 +8731,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5757",
       "reloaddelay": "80",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2",
+       "^Warhead_Bullet_Medium_Flat"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "NaxiWW2KübelwagenMachinegun",
@@ -8905,13 +8880,9 @@
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy_Flat",
-       "^LightChemicalWeapon",
-       "^HeavyFlameWeapon",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^TankDestroyerCannon",
-       "^RA2MediumCannon"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Apoc_AP_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -8924,13 +8895,6 @@
       "burst": "2",
       "burstdelays": "3",
       "damage_warheads": [
-       {
-        "damage": "60000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy_Flat",
-        "type": "AreaDamage"
-       },
        {
         "damage": "5",
         "falloff": "99, 66, 33",
@@ -8965,6 +8929,13 @@
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "60000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy_Flat",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
@@ -8976,8 +8947,10 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "NaxMausCannon",
-       "^RA2EliteEffects"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Apoc_AP_RA2",
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -9183,13 +9156,9 @@
       "reloaddelay": "99",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy_Flat",
-       "^LightChemicalWeapon",
-       "^HeavyFlameWeapon",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^TankDestroyerCannon",
-       "^RA2MediumCannon"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Apoc_AP_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -9242,22 +9211,21 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "55",
       "slot": "Armament@RK",
       "versus_templates": [
-       "LatinBuggyRocket"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Concussion_Medium",
-       "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "LatinBuggyRocket_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -9272,18 +9240,16 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5555",
       "reloaddelay": "44",
       "slot": "Armament@Flam",
       "versus_templates": [
-       "^Warhead_Flame_Heavy",
        "^Warhead_Flame_Light",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Flame_Heavy",
        "^Warhead_Flame_Light"
       ],
       "weapon": "SyndicateFireballLauncher",
@@ -9585,7 +9551,9 @@
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "^RA2MediumCannon"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -9614,8 +9582,9 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "RA2105mm",
-       "^RA2EliteEffects"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -9730,10 +9699,9 @@
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy_Flat",
-       "^LightChemicalWeapon",
-       "^HeavyBomb",
-       "^RA2MediumCannon"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Apoc_AP_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -9747,13 +9715,6 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "150000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy_Flat",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "25",
         "falloff": "99, 66, 33",
         "spread": "175",
@@ -9766,6 +9727,13 @@
         "spread": "400",
         "tag": "HeavyBombPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "150000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy_Flat",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
@@ -9777,8 +9745,9 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "NaxRatteCannon",
-       "^RA2EliteEffects"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Apoc_AP_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -9791,6 +9760,13 @@
       "burst": "8",
       "burstdelays": "3",
       "damage_warheads": [
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "AreaDamagePercentage"
+       },
        {
         "damage": "7000",
         "falloff": "100, 58, 32, 16, 6, 0",
@@ -9810,13 +9786,6 @@
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -9841,7 +9810,9 @@
       "reloaddelay": "47",
       "slot": "Armament@AA1",
       "versus_templates": [
-       "NaxQuadCannon_AA"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -9854,6 +9825,13 @@
       "burst": "8",
       "burstdelays": "3",
       "damage_warheads": [
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "AreaDamagePercentage"
+       },
        {
         "damage": "7000",
         "falloff": "100, 58, 32, 16, 6, 0",
@@ -9873,13 +9851,6 @@
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -9904,7 +9875,9 @@
       "reloaddelay": "47",
       "slot": "Armament@AA2",
       "versus_templates": [
-       "NaxQuadCannon_AA"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -10007,7 +9980,9 @@
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "^RA2MediumCannon"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -10036,8 +10011,9 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "RA2120mm",
-       "^RA2EliteEffects"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -10057,21 +10033,18 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.75,
       "minrange": "2470",
       "pricing": true,
       "range": "12345",
       "reloaddelay": "111",
       "slot": "Armament@mortar",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^Effect_Concussion_Medium",
-       "^RA2Grenade"
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "NaxGrilleArty",
@@ -10080,13 +10053,6 @@
      {
       "armament_name": "secondary",
       "damage_warheads": [
-       {
-        "damage": "24000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium_Flat",
-        "type": "AreaDamage"
-       },
        {
         "damage": "400",
         "falloff": "100, 45, 18",
@@ -10110,28 +10076,31 @@
         "spread": null,
         "tag": "CollapsedNaxShoeRocketMissileAP_MediumPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_Medium_Flat",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "250",
       "slot": "Armament@scud",
       "versus_templates": [
-       "^Warhead_MissileAP_Medium_Flat",
-       "^Warhead_Demolition_Heavy",
-       "^RA2Grenade",
-       "^RA2MediumMissile",
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
        "^Effect_Terrorist_Explosion_RA2"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "NaxShoeRocket",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -10224,25 +10193,22 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "minrange": "2800",
       "pricing": true,
       "range": "14000",
       "reloaddelay": "140",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^Warhead_Demolition_Heavy",
-       "^Effect_Demolition_Heavy",
-       "^RA2MediumCannon",
-       "^RA2Grenade"
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Apoc_AP_RA2"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_CannonHE_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "NaxSturmArty",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -10335,7 +10301,9 @@
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "^RA2MediumCannon"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -10364,8 +10332,9 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "NaxTigerCannon",
-       "^RA2EliteEffects"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -10450,6 +10419,14 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
+        "damage": "7000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "percentage_denominator": "10000",
+        "spread": "110",
+        "tag": "Flak_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -10469,14 +10446,6 @@
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "7000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
        },
        {
         "damage": "1500",
@@ -10501,11 +10470,9 @@
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "^Grenade",
-       "^HeavyMissile",
-       "^Chaingun",
-       "^RA2FlakWeapon",
-       "^NaxQuadCannonFlakAllyCompatibility"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -10518,6 +10485,14 @@
       "burst": "8",
       "burstdelays": "3",
       "damage_warheads": [
+       {
+        "damage": "7000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "percentage_denominator": "10000",
+        "spread": "110",
+        "tag": "Flak_Medium",
+        "type": "AreaDamage"
+       },
        {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
@@ -10538,14 +10513,6 @@
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "7000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
        },
        {
         "damage": "1500",
@@ -10570,7 +10537,9 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "NaxQuadCannon"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -10605,13 +10574,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "ChaingunPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1500",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
@@ -10624,10 +10586,17 @@
         "spread": "110",
         "tag": "NaxFlakAllyUncounted",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8052",
       "reloaddelay": "47",
@@ -10635,20 +10604,25 @@
       "slot": "Armament@AA",
       "versus_templates": [
        "^Warhead_Flak_Medium_Flat",
-       "NaxQuadCannon",
-       "^NaxQuadCannonFlakGroundWaterCompatibility"
+       "^Projectile_Flak_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
-      "warheads": [
-       "^Warhead_Flak_Medium"
-      ],
+      "warheads": [],
       "weapon": "NaxQuadCannon_AA",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "primary",
       "burst": "8",
       "burstdelays": "3",
       "damage_warheads": [
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "AreaDamagePercentage"
+       },
        {
         "damage": "7000",
         "falloff": "100, 58, 32, 16, 6, 0",
@@ -10668,13 +10642,6 @@
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -10700,7 +10667,9 @@
       "requires": "rank-elite",
       "slot": "Armament@eliteAA",
       "versus_templates": [
-       "NaxQuadCannon_AA"
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"

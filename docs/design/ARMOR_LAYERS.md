@@ -1,6 +1,6 @@
 # The layered defence stack — shields, Integrity, plating, and how damage lands
 
-> **Numeric evidence refresh — 2026-09-10, combined `839cdced4` plus reopened tooling.** `meters_filling_before_death` = **322**; `physical_state_fired_weapons` = **537**. Measured on this combined tree; predicates and tolerances are unchanged. The flat-health denominator correction changes diagnostics, not live weapons or prices. Earlier branch-specific snapshots remain historical. **2026-09-23b (post-#456/#457 wave): `meters_filling_before_death` = 318; `physical_state_fired_weapons` = 533; Shield Versus mean = 162.19 → shield_hp_factor = 0.617** (the reference lane's family adoptions moved the Shield ladder).
+> **Numeric evidence refresh — 2026-09-10, combined `839cdced4` plus reopened tooling.** `meters_filling_before_death` = **322**; `physical_state_fired_weapons` = **537**. Measured on this combined tree; predicates and tolerances are unchanged. The flat-health denominator correction changes diagnostics, not live weapons or prices. Earlier branch-specific snapshots remain historical. **2026-09-23b (post-#456/#457 wave): `meters_filling_before_death` = 318; `physical_state_fired_weapons` = 533; Shield Versus mean = 162.19 **2026-09-24 (NOVA W23-RA sweep branch): `physical_state_fired_weapons` = 546** (SonicDebuff→Resonance + Blind meter conversions on devin/nova/w23-ra-followup). → shield_hp_factor = 0.617** (the reference lane's family adoptions moved the Shield ladder).
 
 **One document for the whole defence stack.** It replaces five separate analyses that each
 covered one slice and repeated the others' premises. `BALANCE_PROGRAM_PLAN.md` had already
@@ -837,7 +837,7 @@ basis points. Folded `AreaDamage.PercentageScale` defaults to denominator 10000 
 the engine's rounded derived units. The shared evaluator reads each form directly; no tag
 spelling or global denominator guess is allowed.
 
-Authored-field inventory, 2026-09-22: **401** raw `PercentageDenominator`
+Authored-field inventory, 2026-09-22: **401** raw `PercentageDenominator` (**442** on devin/nova/w23-ra-followup 2026-09-24 — W7 sweep pins restate resolved denominators locally)
 occurrences in active weapon files, up from the 2026-09-05 snapshot of 183.
 The added Freedom elite explicit companion preserves its prior percentage route.
 The registry's historical `percentage_denominator_unset` name does not mean
