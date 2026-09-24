@@ -1,3 +1,45 @@
+## Devin-NOVA — documentation deep-audit + Knowledge Base v.0.6 (2026-09-24/25)
+
+**Branch:** `devin/nova/docs-deep-audit`. Docs-only pass ordered by the maintainer after
+the merge wave: audit every doc against the artifact, fix or annotate, refresh the
+Knowledge Base Manual.
+
+- **Merge wave landed first:** all 14 fleet PRs merged (#472, #474, #477, #480–#490);
+  conflicts in #488/#484/#481/#477 resolved by preserving both sides + regenerating
+  `docs/audit/latest/` on a complete tree. External #45/#133 merged; #243 salvaged as
+  #492 (Gepard/Ixian sprites, post-#484 ids).
+- **Real bug found + fixed:** #274 broke master's build (`GameSettings.AttackMoveIsDefault`
+  doesn't exist in the pinned engine) → revert PR #491 merged; master builds clean again.
+- **SUMMARY.md rewritten** from the regenerated `latest/` reports: ~25 stale counts corrected,
+  `level_ladder` retired-row removed, MinRange/B13/G1/Q reclassified from Green to Red
+  (they regressed), ledger-drift and doc-claims moved out of Green.
+- **doc_claims.yaml re-pinned** (7 claims): shield trio (post-#490 ladder move),
+  `unconverted_template_inheritors` 827→385, `physical_state_fired_weapons` →544,
+  `cameo_family_labelled_weapons` →1210, `percentage_denominator_unset` →417 —
+  each with its `docs:` co-update per the claim rule. `ledgers_drifted` left red:
+  25 foreign-lane ledgers are stale since 09-23, flagged to owners (not re-extractable
+  from my lane without clobbering).
+- **KB Manual → v.0.6:** engine pin corrected to `462fc1fc4bfc…`; phantom content
+  scrubbed (`DeployBotModule`, `ai_airforce.yaml`/`airnavalbot` are Crystallized Nexus
+  research, never shipped); tinted-cell classes repointed `OpenRA.Mods.CA`→`OpenRA.Mods.AS`
+  with a binary-only-CA path-convention note; three-assembly correction; `FactionCA`
+  repointed to `ContentPacks/*/yaml/faction.yaml`; mod.yaml line refs refreshed;
+  class count →~335; added actor-ID dot-grammar section (R19) and the
+  `OpenToppedDamageWarhead` passenger-mechanic note.
+- **Design docs synced:** AREADAMAGE header scoped (conversion PARTIAL — ~2,425
+  SpreadDamage nodes remain), WEAPON_TYPE_SYSTEM marked SHIPPED-historical,
+  WEAPON_3WAY_SPLIT ExtraDamage open-item closed by the ruling, ROADMAP heaviness
+  checkbox + dup Phase-4 + Sonic "inert"→live, BALANCE_PROGRAM_PLAN derived count
+  33→40 note.
+- **`.windsurf/rules/start-protocol.md`:** `TASK_INDEX.md` inserted at position 2
+  (canonical order per CLAUDE.md/README).
+- **HANDOFF.md:** stale PR-lifecycle claims annotated with their merged outcomes.
+- **LESSONS_LEARNED.md:** 6 missing Contents entries added → `audit_doc_health` D7 0.
+- **BRANCH_MANIFEST.md** regenerated against `a5692a5f7`.
+
+Verification: `audit_doc_health` PASS (was 5 D7), `audit_doc_claims` 42/43 green
+(`ledgers_drifted` gate intentionally left red — foreign-lane debt), boot-gate PASS.
+
 ## Devin-DAWN (A4) — W9 pack-side + maintainer ruling 1 + re-baselines (2026-09-24)
 
 **Branch:** `devin/dawn/l4-fx` → round-2 PR per

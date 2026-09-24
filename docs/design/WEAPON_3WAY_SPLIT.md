@@ -347,10 +347,19 @@ then `HeatRayBeam1/2/3/4` were fully 3-way split with `^Warhead_Inferno_Heavy` +
 `tools/audit/phase_b_survey.py` for the live work-list; the next group is at the top of
 `docs/audit/latest/phase_b_survey.md`.
 
-**ENERGY LAST** (Laser/Railgun/Tesla/TeslaCharged — BLOCKED on the ExtraDamage decision below).
+**ENERGY LAST** (Laser/Railgun/Tesla/TeslaCharged — the ExtraDamage ruling below now applies: fold into the main warhead).
 Standard self-check after each: 0 orphaned old keys, 0 layer conflicts, 0 Damage changes, boots.
 
-## OPEN DESIGN #1 — ExtraDamage rework (maintainer wants suggestions first)
+## RESOLVED DESIGN #1 — ExtraDamage rework (ruled 2026-09-25)
+**Ruling: `ExtraDamage` no longer exists as a separate mechanic.** Once `SpreadDamage` was
+converted to `AreaDamage`, the maintainer ruled that every leftover `*ExtraDamage` node must be
+folded into the weapon's main damage warhead — its damage added to the main hit. The sole
+exception is the sniper `OpenToppedDamage` node: it damages *passengers/garrisoners* via
+`DamagePassengers` (never the target actor), so it cannot fold into `AreaDamage` without losing
+the mechanic; it stays as a distinct node (renamed off the `*ExtraDamage` pattern eventually).
+Also ruled: no flat damage warheads — every warhead carries a min/max Versus table in the
+2x–10x spread band. The options below are the pre-ruling design space, kept for history.
+
 ExtraDamage = the compensation energy weapons get for their very small spread (~100, single-target)
 vs AoE weapons' large spread (multi-target). The current old-template values are ad-hoc (Tesla Shield
 300/heavy-favoring; Laser Shield 100/else-1). Needs a principled scaling. **My 3 options:**

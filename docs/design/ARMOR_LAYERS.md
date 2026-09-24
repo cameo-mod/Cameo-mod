@@ -1,6 +1,6 @@
 # The layered defence stack — shields, Integrity, plating, and how damage lands
 
-> **Numeric evidence refresh — 2026-09-10, combined `839cdced4` plus reopened tooling.** `meters_filling_before_death` = **322**; `physical_state_fired_weapons` = **537**. Measured on this combined tree; predicates and tolerances are unchanged. The flat-health denominator correction changes diagnostics, not live weapons or prices. Earlier branch-specific snapshots remain historical. **2026-09-23b (post-#456/#457 wave): `meters_filling_before_death` = 318; `physical_state_fired_weapons` = 533; Shield Versus mean = 162.19 → shield_hp_factor = 0.617** (the reference lane's family adoptions moved the Shield ladder). **2026-09-24 (post-#476/#478): `physical_state_fired_weapons` = 542** — W7's Resonance feeds put meter warheads back on fired weapons (+9).
+> **Numeric evidence refresh — 2026-09-10, combined `839cdced4` plus reopened tooling.** `meters_filling_before_death` = **322**; `physical_state_fired_weapons` = **537**. Measured on this combined tree; predicates and tolerances are unchanged. The flat-health denominator correction changes diagnostics, not live weapons or prices. Earlier branch-specific snapshots remain historical. **2026-09-23b (post-#456/#457 wave): `meters_filling_before_death` = 318; `physical_state_fired_weapons` = 533; Shield Versus mean = 162.19 → shield_hp_factor = 0.617** (the reference lane's family adoptions moved the Shield ladder). **2026-09-24 (post-#476/#478): `physical_state_fired_weapons` = 542** — W7's Resonance feeds put meter warheads back on fired weapons (+9). **2026-09-24b (post-#490 merge wave): `physical_state_fired_weapons` = 544; `shield_versus_mean` = 88.08 → `shield_hp_factor` = 1.135; `shield_damage_share` = 0.0171; `unconverted_template_inheritors` = 385; `cameo_family_labelled_weapons` = 1210; `percentage_denominator_unset` = 417.**
 
 **One document for the whole defence stack.** It replaces five separate analyses that each
 covered one slice and repeated the others' premises. `BALANCE_PROGRAM_PLAN.md` had already
@@ -619,7 +619,7 @@ Two families were credited to the wrong counter in the first draft:
 
 | layer | column mean | 1 point is worth | maintainer's estimate |
 |---|--:|--:|---|
-| `Shield` | **162.19** | **0.617 HP** | "200% shield ≈ 100% extra HP" — i.e. 0.5. **Confirmed to 11%.** |
+| `Shield` | **88.08** (was 162.19 pre-#490) | **1.135 HP** | "200% shield ≈ 100% extra HP" — i.e. 0.5. Post-#490 the measured factor overshoots: a shield point is now worth *more* than an HP point. |
 | all five platings | **100.0** | **1.000 HP** | "it evens out" — **confirmed exactly**, by construction |
 
 So the pricing rule is:

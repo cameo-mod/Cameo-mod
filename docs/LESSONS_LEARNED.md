@@ -120,6 +120,12 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [One weapon, one warhead — on the REFERENCE side too](#one-weapon-one-warhead--on-the-reference-side-too)
 - [A weapon's profile is the SUM of its warheads, not its biggest one](#a-weapons-profile-is-the-sum-of-its-warheads-not-its-biggest-one)
 - [Matching a warhead by its NAME fails, three different ways](#matching-a-warhead-by-its-name-fails-three-different-ways)
+- [A tool must derive its target from its OWN worktree root (2026-09-24)](#-a-tool-must-derive-its-target-from-its-own-worktree-root--a-stale-path-wrote-into-another-agents-tree-2026-09-24)
+- [W23-RA correction round — four traps (2026-09-23)](#w23-ra-correction-round-2026-09-23-nova--four-traps-that-each-cost-a-re-pass)
+- [`extract_stats` carries seeded `design.*` fields forward by actor KEY (2026-09-23)](#extractstats-carries-seeded-design-fields-forward-by-actor-key--a-rename-silently-drops-them-2026-09-23)
+- [`*ProportionalToPhysicalState` non-neutral defaults on secondary channels (2026-09-23)](#proportionaltophysicalstate-traits-have-non-neutral-defaults-on-secondary-channels-2026-09-23)
+- [Rename-tool pitfalls found on the ra1_allies pass (2026-09-24)](#rename-tool-pitfalls-found-on-the-ra1allies-pass-2026-09-24)
+- [The naming audit sees file stems only (2026-09-24)](#the-naming-audit-sees-file-stems-only--pair-it-with-a-raw-disk-scan-2026-09-24)
 
 ---
 
