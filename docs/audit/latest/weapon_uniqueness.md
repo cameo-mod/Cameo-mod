@@ -1,20 +1,20 @@
 # Weapon uniqueness (DESIGN.md §10 — faction identity)
 
-damaging armament weapons checked: 1482; W1 same-faction 37, W2 cross-faction 31, W3 carrier-only 89
+damaging armament weapons checked: 1484; W1 same-faction 37, W2 cross-faction 32, W3 carrier-only 89
 
 
 ## W1 — same faction, distinct actors, identical weapon (37)
 
 | weapon | faction(s) | actors |
 |---|---|---|
-| 80mm_h | harkonnen | combat_tank.harkonnen, harkonnen_assaulttank |
+| 80mm_h | harkonnen | harkonnen_assaulttank, harkonnen_combat_tank |
 | asianflamerturret | asianalliance | asianalliance_flametrooper, asianalliance_sentryflamer |
 | asianrailtank2 | asianalliance | asianalliance_heavyrailguntank, asianalliance_railguntank |
 | bcyamatocannon | terran | terran_battlecruiser, terran_phobos |
 | cabalengineerrepairbeam | cabal | cabal_engineer, cabal_repairdrone |
 | d2k_apc_rocket | ordos | ordos_apc, ordos_dustdrone |
 | d2k_apc_rocket_aa | ordos | ordos_banshee, ordos_laboratorycrawler |
-| d2k_bazooka2 | ixian | heavy_rocket_raider.ixian, rocket_raider.ixian |
+| d2k_bazooka2 | ixian | ixian_heavy_rocket_raider, ixian_rocket_raider |
 | d2k_rocket_trooper | atreides, corrino, harkonnen, ixian, ordos | atreides_rockettrooper, corrino_sardaukar_bazooka, corrino_trooper, harkonnen_rockettrooper, harkonnen_sardaukar, ixian_rockettrooper, ordos_rockettrooper, trooper |
 | d2k_towermissile | harkonnen | corrino_sardaukar_bazooka, harkonnen_rocketturret, harkonnen_sardaukar, ixian_rocketturret |
 | devbullet | harkonnen | devastator, harkonnen_devastatormech |
@@ -46,7 +46,7 @@ damaging armament weapons checked: 1482; W1 same-faction 37, W2 cross-faction 31
 | wc2paladinexorcism | wc2_humans | wc2_humans_highelfpriest, wc2_humans_highelfsorceress |
 
 
-## W2 — identical weapon across factions (31)
+## W2 — identical weapon across factions (32)
 
 | weapon | families | factions | actors |
 |---|---|---|---|
@@ -63,6 +63,7 @@ damaging armament weapons checked: 1482; W1 same-faction 37, W2 cross-faction 31
 | sealattach | 3 | futuretech, ra2_allies, tkm | futuretech_blackwidow, ra2_allies_seal, tkm_spetsnaz |
 | tsengineerpistol | 3 | forgotten, ts_gdi, ts_nod | forgotten_engineer, ts_gdi_engineer, ts_nod_engineer |
 | 80mm_a | 2 | atreides, corrino | atreides_combattank, corrino_bmp |
+| d2k_155mm | 2 | atreides, corrino | atreides_siegetank, corrino_siegetank |
 | light_inf_lmg_upgrade | 2 | atreides, corrino, harkonnen, ixian, ordos | ixian_lightinfantry, light_inf |
 | naxlasert | 2 | schwarzermond, terran | schwarzermond_lasertower, terran_sentinel |
 | naxsturmarty | 2 | naxis, schwarzermond | naxis_sturmtiger, schwarzermond_sturmcannon |

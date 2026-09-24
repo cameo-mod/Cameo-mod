@@ -37,7 +37,7 @@ _none found_
 | Aircraft.TurnSpeed | ra2beag.Husk | 80 | 20 | 8.1 |
 | Aircraft.TurnSpeed | asianalliance_phoenix_husk | 80 | 20 | 8.1 |
 | Aircraft.TurnSpeed | asianalliance_harbinger_husk | 80 | 20 | 8.1 |
-| Aircraft.TurnSpeed | twister_husk.steel | 80 | 20 | 8.1 |
+| Aircraft.TurnSpeed | steel_twister_husk | 80 | 20 | 8.1 |
 | Aircraft.TurnSpeed | tkmdrone | 80 | 20 | 8.1 |
 | ChangesHealth.PercentageStep | wc2_orcs_deathknight | 83 | 1 | 55.3 |
 | ChangesHealth.Step | terran_marine | -2000 | 20 | 68.1 |
@@ -84,7 +84,7 @@ _none found_
 | Health.HP | ra1_soviets_missilesilo | 1000000 | 55500 | 17.9 |
 | Health.HP | ra1_soviets_ironcurtain | 1000000 | 55500 | 17.9 |
 | Health.HP | ra1_soviets_monstertank | 1000000 | 55500 | 17.9 |
-| Health.HP | ra1_allies_alliedconstructionyard | 1000000 | 55500 | 17.9 |
+| Health.HP | ra1_allies_constructionyard | 1000000 | 55500 | 17.9 |
 | Health.HP | ra1_allies_chronosphere | 1000000 | 55500 | 17.9 |
 | Health.HP | TSGTCNST | 1000000 | 55500 | 17.9 |
 | Health.HP | cabal_core | 1000000 | 55500 | 17.9 |

@@ -21,7 +21,7 @@ Real factions: **31** — covered by crate: **30** — missing: **1**
 | ordos | ordos | ordos_mobileconstructionvehicle | 10000 |
 | plymouth | plymouth | PLYMOUTH_CONVEC_STRUCTURE_FACTORY | 10000 |
 | protoss | protoss | protoss_mobilenexus | 10000 |
-| ra1_allies | ra1_allies | ra1_allies_alliedmobileconstructionvehicle | 10000 |
+| ra1_allies | ra1_allies | ra1_allies_mobileconstructionvehicle | 10000 |
 | ra1_soviets | ra1_soviets | ra1_soviets_mobileconstructionvehicle | 10000 |
 | ra2_allies | ra2_allies | ra2_allies_mobileconstructionvehicle | 10000 |
 | ra2_soviets | ra2_soviets | ra2_soviets_mobileconstructionvehicle | 10000 |

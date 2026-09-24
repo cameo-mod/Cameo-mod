@@ -620,17 +620,9 @@ PsiStorm:
 		Delay: 2
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
 		Spread: 200
-		Damage: 8000
+		Damage: 12000
 		AffectsParent: True
-	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
-		DamageTypes: Tesla
-		ValidTargets: Ground, Water, Air
-		Delay: 4
-		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
-		Spread: 400
-		Damage: 4000
-		AffectsParent: True
-		ValidRelationships: Enemy, Neutral
+	-Warhead@Tesla_Heavy_ExtraDamage:
 PsiStormCosmetic:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 64
@@ -653,11 +645,8 @@ PsionicShockwave:
 	ValidTargets: Ground, Water, Air
 	Warhead@Tesla_Super:
 		ValidTargets: Ground, Water, Air
-		Damage: 30000
-	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		DamageTypes: Tesla
-		Damage: 15000
+		Damage: 45000
+	-Warhead@Tesla_Super_ExtraDamage:
 	Warhead@Effect: CreateEffect
 		Explosions: scaae
 		ValidTargets: Ground, Water, Air
@@ -856,14 +845,9 @@ Corsair_EMP:
 		PercentageScale: 20000
 		ValidTargets: Vehicle, Defense
 		Falloff: 100, 75, 50, 25
-		Damage: 5000
+		Damage: 7500
 		Spread: 250
-	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
-		DamageTypes: Tesla
-		ValidTargets: Vehicle, Defense
-		Falloff: 100, 75, 50, 25
-		Damage: 2500
-		Spread: 500
+	-Warhead@Tesla_Super_ExtraDamage:
 	Warhead@Cam: RevealShroud
 		Radius: 5000
 		Duration: 250

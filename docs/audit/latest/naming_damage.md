@@ -3,10 +3,10 @@
 | code | pathology | count | ratchet |  |
 |---|---|---|---|---|
 | N1 | DOUBLED_ID (file carries one actor id twice) | 2 | 25 | PASS |
-| N2 | CROSS_FACTION (file carries two factions' ids) | 0 | 16 | PASS |
+| N2 | CROSS_FACTION (file carries two factions' ids) | 16 | 16 | PASS |
 | N3 | FLUENT_LEAK (a fluent key became an id) | 0 | 5 | PASS |
-| N4 | REDUNDANT_WORD (faction named twice) | 152 | 345 | PASS |
-| N5 | DOTTED_FACTION (dot carries a faction, not a variant) | 82 | 109 | PASS |
+| N4 | REDUNDANT_WORD (faction named twice) | 97 | 345 | PASS |
+| N5 | DOTTED_FACTION (dot carries a faction, not a variant) | 4 | 109 | PASS |
 | N6 | HYPHEN (DESIGN rule 9) | 0 | 1 | PASS |
 
 
@@ -14,23 +14,16 @@
 
 | faction | N1 | N2 | N3 | N4 | N5 | N6 |
 |---|---|---|---|---|---|---|
-| ra1_allies | 0 | 0 | 0 | 55 | 0 | 0 |
 | japan | 0 | 0 | 0 | 49 | 0 | 0 |
-| latinsyndicate | 0 | 0 | 0 | 19 | 18 | 0 |
-| steelconsortium | 0 | 0 | 0 | 8 | 16 | 0 |
-| ixian | 0 | 0 | 0 | 0 | 11 | 0 |
-| atreides | 0 | 0 | 0 | 0 | 9 | 0 |
-| corrino | 0 | 0 | 0 | 0 | 7 | 0 |
-| harkonnen | 0 | 0 | 0 | 0 | 7 | 0 |
-| ordos | 0 | 0 | 0 | 0 | 7 | 0 |
+| latinsyndicate | 0 | 0 | 0 | 19 | 2 | 0 |
+| ra1_allies | 0 | 16 | 0 | 0 | 0 | 0 |
+| steelconsortium | 0 | 0 | 0 | 8 | 1 | 0 |
 | wc2_humans | 1 | 0 | 0 | 5 | 0 | 0 |
 | wc2_orcs | 1 | 0 | 0 | 5 | 0 | 0 |
 | zerg | 0 | 0 | 0 | 6 | 0 | 0 |
-| futuretech | 0 | 0 | 0 | 1 | 4 | 0 |
 | yuri | 0 | 0 | 0 | 4 | 0 | 0 |
-| d2k | 0 | 0 | 0 | 0 | 1 | 0 |
+| futuretech | 0 | 0 | 0 | 1 | 0 | 0 |
 | ra2_allies | 0 | 0 | 0 | 0 | 1 | 0 |
-| ts_gdi | 0 | 0 | 0 | 0 | 1 | 0 |
 
 
 **0 of 6 ratchets exceeded.**

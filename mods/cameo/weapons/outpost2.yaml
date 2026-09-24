@@ -39,7 +39,7 @@ plymouthMachineGun:
 edenMobileLaser:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@4: ^LaserWeapon
-	Inherits: ^Effect_Watersplash_Huge_RA2
+	Inherits@fx: ^op2_outpost2_edenmobilelaser
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 29
 	Range: 5280
@@ -64,36 +64,11 @@ edenMobileLaser:
 		Damage: 1
 	-Warhead@LaserWeapon:
 	-Warhead@LaserExtraDamage:
-	Warhead@LegacyLaserExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Spread: 300
-		Damage: 600
-		Versus:
-			REFLECTOR: 50
-			Shield: 100
-			None: 1
-			Flak: 1
-			Plate: 1
-			Heroic: 1
-			Superheavy: 1
-			Heavy: 1
-			Medium: 1
-			Light: 1
-			Scout: 1
-			Steel: 1
-			Concrete: 1
-			Wood: 1
-			Fighter: 1
-			Bomber: 1
-			Helicopter: 1
-			Spaceship: 1
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		UpdatesUnitStatistics: false
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Laser_Heavy:
-		Damage: 8000
+		Damage: 8600
 		PercentageScale: 0
 	-Warhead@Laser_Heavy_ExtraDamage:
 
@@ -132,13 +107,6 @@ edenMobileLaser:
 			Wood: 14
 	Warhead@Concrete:
 		Damage: 25
-	Warhead@Effect:
-		ImpactSounds: xplos.aud
-		ValidTargets: Ground, Ship
-	Warhead@EffectWater:
-		Explosions: small_splash
-		ImpactSounds: splash9.aud
-		-ExplosionPalette:
 	Warhead@FlakWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		Spread: 125
@@ -162,6 +130,9 @@ edenMobileLaser:
 			Superheavy: 8
 			Wood: 7
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 10
 	Warhead@Smudge:
 		SmudgeType: Scorch
@@ -205,7 +176,7 @@ edenMobileLaserTiger:
 		SecondaryBeamColor: FFFFFF
 	Warhead@CannonHE_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 10000
+		Damage: 10600
 	-Warhead@Laser_Heavy:
 edenMobileDefenceLaser:
 	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
@@ -215,13 +186,13 @@ edenMobileDefenceLaser:
 	-Warhead@CannonHE_Medium:
 	Warhead@Laser_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
-		Damage: 10000
+		Damage: 10600
 		PercentageScale: 1990
 
 edenRailgun:
 	Inherits@roleflat: ^Warhead_Railgun_Heavy_Flat
 	Inherits: ^RailgunWeapon
-	Inherits@fx: ^Effect_AlliedTigerCannon
+	Inherits@fx: ^op2_outpost2_set3
 	ReloadDelay: 80
 	Range: 7000
 	MinRange: 1400
@@ -286,12 +257,6 @@ edenRailgun:
 
 	InvalidTargets: wall
 	TargetActorCenter: true
-	Warhead@Effect:
-		Explosions: med_frag
-		ImpactActors: false
-		ImpactSounds: kaboom15.aud
-	Warhead@EffectWater:
-		Explosions: med_splash
 	Warhead@HeavyCannonPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		Spread: 225
@@ -364,6 +329,9 @@ edenRailgun:
 			Superheavy: 12
 			Wood: 19
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 10
 	Warhead@ShrapnelWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -414,7 +382,7 @@ edenRailgun:
 			Wood: 9
 edenTigerRailgun:
 	Inherits@w70: ^Warhead_Railgun_Heavy_Flat
-	Inherits@w71: ^Effect_AlliedTigerCannon
+	Inherits@fx: ^op2_outpost2_set3
 	ReloadDelay: 40
 	Range: 8235
 
@@ -467,14 +435,11 @@ edenTigerRailgun:
 			Fighter: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Incendiary
 		UpdatesUnitStatistics: false
-	Warhead@Effect: CreateEffect
-		Explosions: med_frag
-		ImpactSounds: kaboom15.aud
-		ImpactActors: false
 	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 10
-	Warhead@EffectWater: CreateEffect
-		Explosions: med_splash
 	ValidTargets: Ground, Water
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 2
@@ -603,7 +568,7 @@ edenTigerRailgun:
 	TargetActorCenter: true
 edenDefenceRailgun:
 	Inherits@w70: ^Warhead_Railgun_Heavy_Flat
-	Inherits@w71: ^Effect_AlliedTigerCannon
+	Inherits@fx: ^op2_outpost2_set3
 	Range: 7168
 	ReloadDelay: 50
 
@@ -656,14 +621,11 @@ edenDefenceRailgun:
 			Fighter: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Incendiary
 		UpdatesUnitStatistics: false
-	Warhead@Effect: CreateEffect
-		Explosions: med_frag
-		ImpactSounds: kaboom15.aud
-		ImpactActors: false
 	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 10
-	Warhead@EffectWater: CreateEffect
-		Explosions: med_splash
 	ValidTargets: Ground, Water
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 2
@@ -797,6 +759,7 @@ eden_EMP:
 	Inherits@3: ^MediumFlameWeapon
 	Inherits@6: ^MediumCannon
 	Inherits@8: ^HeavyMissile
+	Inherits@fx: ^op2_outpost2_set0
 	ReloadDelay: 45
 	Range: 5500
 	MinRange: 1100
@@ -816,10 +779,6 @@ eden_EMP:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaChargedExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaChargedWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
@@ -828,10 +787,6 @@ eden_EMP:
 	Warhead@TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
@@ -929,11 +884,6 @@ eden_EMP:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		IntegrityScale: 0
 		PercentageScale: 0
-	Warhead@Effect: CreateEffect
-		Explosions: op2_emp_static
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Ground, Ship, Air
 
 	Warhead@HeavyCannonPercentage:
 		Spread: 225
@@ -1000,6 +950,7 @@ eden_EMP:
 			Wood: 18
 eden_EMP_AA:
 	Inherits@w70: ^Warhead_Tesla_Super
+	Inherits@fx: ^op2_outpost2_set0
 	Range: 8250
 	MinRange: 1650
 	ValidTargets: Air
@@ -1083,9 +1034,6 @@ eden_EMP_AA:
 		Duration: 10
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		Spread: 50
 		Damage: 1
@@ -1137,20 +1085,6 @@ eden_EMP_AA:
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: op2_emp_static
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-		ValidTargets: Ground, Ship, Air
 	Warhead@GroundFire: SpawnActor
 		Actors: groundfire
 		Range: 1
@@ -1180,31 +1114,6 @@ eden_EMP_AA:
 			Spaceship: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.8
-		FadeFrames: 15
-	Warhead@Concrete: DamagesConcrete
-		Damage: 200
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		Spread: 300
 		Damage: 1
@@ -1304,6 +1213,7 @@ eden_EMP_AA:
 	-Warhead@Tesla_Super_ExtraDamage:
 edenTiger_EMP:
 	Inherits@w70: ^Warhead_Tesla_Super
+	Inherits@fx: ^op2_outpost2_set0
 	ReloadDelay: 41
 	Range: 6000
 	MinRange: 1200
@@ -1393,9 +1303,6 @@ edenTiger_EMP:
 		Duration: 10
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		Spread: 50
 		Damage: 1
@@ -1447,20 +1354,6 @@ edenTiger_EMP:
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: op2_emp_static
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-		ValidTargets: Ground, Ship, Air
 	Warhead@GroundFire: SpawnActor
 		Actors: groundfire
 		Range: 1
@@ -1490,31 +1383,6 @@ edenTiger_EMP:
 			Spaceship: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.8
-		FadeFrames: 15
-	Warhead@Concrete: DamagesConcrete
-		Damage: 200
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		Spread: 300
 		Damage: 1
@@ -1614,6 +1482,7 @@ edenTiger_EMP:
 	-Warhead@Tesla_Super_ExtraDamage:
 edenTiger_EMP_AA:
 	Inherits@w70: ^Warhead_Tesla_Super
+	Inherits@fx: ^op2_outpost2_set0
 	Range: 9000
 	MinRange: 1800
 	ValidTargets: Air
@@ -1697,9 +1566,6 @@ edenTiger_EMP_AA:
 		Duration: 10
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		Spread: 50
 		Damage: 1
@@ -1751,20 +1617,6 @@ edenTiger_EMP_AA:
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: op2_emp_static
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-		ValidTargets: Ground, Ship, Air
 	Warhead@GroundFire: SpawnActor
 		Actors: groundfire
 		Range: 1
@@ -1794,31 +1646,6 @@ edenTiger_EMP_AA:
 			Spaceship: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.8
-		FadeFrames: 15
-	Warhead@Concrete: DamagesConcrete
-		Damage: 200
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		Spread: 300
 		Damage: 1
@@ -1918,6 +1745,7 @@ edenTiger_EMP_AA:
 	-Warhead@Tesla_Super_ExtraDamage:
 eden_GP_EMP:
 	Inherits@w70: ^Warhead_Tesla_Super
+	Inherits@fx: ^op2_outpost2_set1
 	ReloadDelay: 30
 	Warhead@2Ext: GrantExternalCondition
 		InvalidTargets: Air
@@ -2014,9 +1842,6 @@ eden_GP_EMP:
 		Duration: 10
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		Spread: 50
 		Damage: 1
@@ -2068,20 +1893,6 @@ eden_GP_EMP:
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: op2_emp_static
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-		ValidTargets: Ground, Ship
 	Warhead@GroundFire: SpawnActor
 		Actors: groundfire
 		Range: 1
@@ -2111,31 +1922,6 @@ eden_GP_EMP:
 			Spaceship: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.8
-		FadeFrames: 15
-	Warhead@Concrete: DamagesConcrete
-		Damage: 200
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		Spread: 300
 		Damage: 1
@@ -2241,12 +2027,17 @@ edenMobileThorsHammer:
 	ReloadDelay: 33
 	Report: thor.wav
 	Warhead@Tesla_Heavy:
-		Damage: 6000
-	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
-		Damage: 3000
+		Damage: 9000
+	-Warhead@Tesla_Heavy_ExtraDamage:
 edenMobileThorsHammerTiger:
-	Inherits: edenMobileThorsHammer
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Heavy
 	ReloadDelay: 19
+	Report: thor.wav
+	Warhead@Tesla_Heavy:
+		Damage: 9000
+	-Warhead@Tesla_Heavy_ExtraDamage:
 
 ####################################################################################################
 #		WEAPONS PLYMOUTH
@@ -2266,10 +2057,8 @@ plymouthMobileMicrowave:
 		Versus:
 			Wood: 50
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath
-	Warhead@2Smu: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
+	Inherits@fx: ^op2_outpost2_set2
 plymouthMobileTigerMicrowave:
 	ReloadDelay: 10
 	Range: 5632
@@ -2285,10 +2074,8 @@ plymouthMobileTigerMicrowave:
 		Versus:
 			Wood: 50
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath
-	Warhead@2Smu: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
+	Inherits@fx: ^op2_outpost2_set2
 plymouthMobileDefenceMicrowave:
 	ReloadDelay: 10
 	Range: 6656
@@ -2304,10 +2091,8 @@ plymouthMobileDefenceMicrowave:
 		Versus:
 			Wood: 50
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath
-	Warhead@2Smu: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
+	Inherits@fx: ^op2_outpost2_set2
 plymouthScorpion:
 	ReloadDelay: 20
 	Range: 5632
@@ -2327,10 +2112,8 @@ plymouthScorpion:
 		Versus:
 			Wood: 50
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath
-	Warhead@2Smu: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
+	Inherits@fx: ^op2_outpost2_set2
 plymouthRPG:
 	ReloadDelay: 80
 	Range: 6144
@@ -2359,20 +2142,8 @@ plymouthRPG:
 			Light: 140
 			Heavy: 140
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-	Warhead@2Smu: LeaveSmudge
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@3Eff: CreateEffect
-		Explosions: small_frag
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Ground, Water
-	Warhead@4EffAir: CreateEffect
-		Explosions: small_poof
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Air
 
+	Inherits@fx: ^op2_outpost2_set4
 plymouthTigerRPG:
 	ReloadDelay: 40
 
@@ -2403,20 +2174,8 @@ plymouthTigerRPG:
 			Light: 140
 			Heavy: 140
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-	Warhead@2Smu: LeaveSmudge
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@3Eff: CreateEffect
-		Explosions: small_frag
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Ground, Water
-	Warhead@4EffAir: CreateEffect
-		Explosions: small_poof
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Air
 
+	Inherits@fx: ^op2_outpost2_set4
 plymouthDefenceRPG:
 	Range: 7168
 	ReloadDelay: 50
@@ -2447,23 +2206,11 @@ plymouthDefenceRPG:
 			Light: 140
 			Heavy: 140
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-	Warhead@2Smu: LeaveSmudge
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@3Eff: CreateEffect
-		Explosions: small_frag
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Ground, Water
-	Warhead@4EffAir: CreateEffect
-		Explosions: small_poof
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Air
 
+	Inherits@fx: ^op2_outpost2_set4
 plymouthSticky:
 	Inherits@collapsewh: ^Warhead_Chemical_Light
-	Inherits: ^Effect_Apoc_Chem_RA2
+	Inherits@fx: ^op2_outpost2_plymouthsticky
 	-Warhead@Smudge1:
 	-Warhead@Smudge2:
 	-Warhead@Smudge2RA2:
@@ -2497,11 +2244,6 @@ plymouthSticky:
 		Duration: 100
 		ValidTargets: snareable
 		ValidRelationships: Enemy
-	Warhead@Effect: CreateEffect
-		Explosions: op2_stickyfoam_goo
-		ImpactActors: false
-		ImpactSounds: fireweb1.aud
-		ValidTargets: Ground, Water, Air
 	Warhead@Chemical_Light:
 		ValidTargets: Ground, Water
 		Damage: 12000
@@ -2512,15 +2254,6 @@ plymouthSticky:
 		Inaccuracy: 150
 	Warhead@Concrete:
 		Damage: 100
-	Warhead@Effect:
-		-ExplosionPalette:
-		-GlowFadeFrames:
-		-GlowFadeInFrames:
-		-GlowScale:
-	Warhead@EffectWater:
-		Explosions: med_splash
-		ImpactSounds: splash9.aud
-		-ExplosionPalette:
 	Warhead@LightChemicalWeaponPercentage:
 		Falloff: 99, 66, 33
 		Spread: 175
@@ -2547,6 +2280,9 @@ plymouthSticky:
 			Superheavy: 16
 			Wood: 5
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 12
 	Warhead@TankDestroyerCannonPercentage:
 		Spread: 75
@@ -2573,7 +2309,7 @@ plymouthSticky:
 plymouthStickyTiger:
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
-	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@fx: ^op2_outpost2_plymouthstickytiger
 	ReloadDelay: 45
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
@@ -2590,12 +2326,6 @@ plymouthStickyTiger:
 		Inaccuracy: 150
 	Warhead@Concrete:
 		Damage: 100
-	Warhead@Effect:
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-	Warhead@EffectAir:
-		Explosions: big_explosion_air
 	Warhead@Glow:
 		Scale: 0.8
 		FadeFrames: 15
@@ -2652,6 +2382,9 @@ plymouthStickyTiger:
 		PhysicalStates:
 			Corrosion: 100
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 12
 	Warhead@TankDestroyerCannonPercentage:
 		ValidTargets: Ground, Water
@@ -2683,11 +2416,6 @@ plymouthStickyTiger:
 		Image: green_smokey
 		Speed: 600
 		LaunchAngle: 75
-	Warhead@Effect: CreateEffect
-		Explosions: op2_stickyfoam_goo
-		ImpactSounds: fireweb1.aud
-		ValidTargets: Ground, Water, Air
-		ImpactActors: false
 	InvalidTargets: StickyFoamed
 	Report: fireweb1.aud
 	Warhead@stickyfoam: GrantExternalCondition
@@ -2706,7 +2434,7 @@ plymouthStickyTiger:
 plymouthStickyDefence:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
-	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@fx: ^op2_outpost2_plymouthstickydefence
 	ReloadDelay: 65
 	Range: 6656
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
@@ -2727,12 +2455,6 @@ plymouthStickyDefence:
 		Inaccuracy: 150
 	Warhead@Concrete:
 		Damage: 100
-	Warhead@Effect:
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-	Warhead@EffectAir:
-		Explosions: big_explosion_air
 	Warhead@Glow:
 		Scale: 0.8
 		FadeFrames: 15
@@ -2844,13 +2566,6 @@ plymouthStickyDefence:
 		Image: green_smokey
 		Speed: 600
 		LaunchAngle: 75
-	Warhead@Effect: CreateEffect
-		Explosions: op2_stickyfoam_goo
-		ImpactSounds: fireweb1.aud
-		ValidTargets: Ground, Water, Air
-		ImpactActors: false
-	Warhead@EffectWater: CreateEffect
-		Explosions: med_splash
 	InvalidTargets: StickyFoamed
 	Report: fireweb1.aud
 	Warhead@stickyfoam: GrantExternalCondition
@@ -2901,19 +2616,6 @@ plymouthTigerRPGMines:
 			Heavy: 66
 			Concrete: 44
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@2Smu: LeaveSmudge
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@3Eff: CreateEffect
-		Explosions: small_frag
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Ground, Ship
-	Warhead@4EffWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
 	Warhead@1: FireCluster
 		Weapon: plymouthMineSpawner
 		Dimensions: 5,5
@@ -2921,6 +2623,7 @@ plymouthTigerRPGMines:
 		ValidTargets: Ground, Air, Water
 		InvalidTargets: plymouth_minv
 
+	Inherits@fx: ^op2_outpost2_plymouthtigerrpgmines
 plymouthMineSpawner:
 	Range: 4096
 	ReloadDelay: 30
@@ -2937,7 +2640,6 @@ plymouthMineSpawner:
 		InvalidTargets: plymouth_minv
 
 PLYMineExplosive:
-	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 350
 	Projectile: InstantExplode
 	Range: 1536
@@ -2953,11 +2655,9 @@ PLYMineExplosive:
 		ValidTargets: Infantry
 		ValidRelationships: Neutral, Enemy
 		DamageTypes: Prone100Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@3Eff: CreateEffect
-		Explosions: artillery_explosion
-		ImpactSounds: gexpmina.wav, gexpminb.wav
 
 #Also used by Eden
+	Inherits@fx: ^op2_outpost2_plymineexplosive
 plymouth_EMP:
 	Inherits@collapsewh: ^Warhead_Tesla_Super
 	Inherits: ^TeslaChargedWeapon
@@ -2965,6 +2665,7 @@ plymouth_EMP:
 	Inherits@3: ^MediumFlameWeapon
 	Inherits@6: ^MediumCannon
 	Inherits@8: ^HeavyMissile
+	Inherits@fx: ^op2_outpost2_set1
 	ReloadDelay: 45
 	Range: 5500
 	MinRange: 1100
@@ -2984,10 +2685,6 @@ plymouth_EMP:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaChargedExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaChargedWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
@@ -2996,10 +2693,6 @@ plymouth_EMP:
 	Warhead@TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
@@ -3097,11 +2790,6 @@ plymouth_EMP:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		IntegrityScale: 0
 		PercentageScale: 0
-	Warhead@Effect: CreateEffect
-		Explosions: op2_emp_static
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Ground, Ship
 
 	Warhead@HeavyCannonPercentage:
 		Spread: 225
@@ -3168,6 +2856,7 @@ plymouth_EMP:
 			Wood: 18
 plymouth_EMP_AA:
 	Inherits@w70: ^Warhead_Tesla_Super
+	Inherits@fx: ^op2_outpost2_set1
 	Range: 8250
 	MinRange: 1650
 	ValidTargets: Air
@@ -3250,9 +2939,6 @@ plymouth_EMP_AA:
 		Duration: 10
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		Spread: 50
 		Damage: 1
@@ -3304,20 +2990,6 @@ plymouth_EMP_AA:
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: op2_emp_static
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-		ValidTargets: Ground, Ship
 	Warhead@GroundFire: SpawnActor
 		Actors: groundfire
 		Range: 1
@@ -3347,31 +3019,6 @@ plymouth_EMP_AA:
 			Spaceship: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.8
-		FadeFrames: 15
-	Warhead@Concrete: DamagesConcrete
-		Damage: 200
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		Spread: 300
 		Damage: 1
@@ -3471,6 +3118,7 @@ plymouth_EMP_AA:
 	-Warhead@Tesla_Super_ExtraDamage:
 plymouth_Tiger_EMP:
 	Inherits@w70: ^Warhead_Tesla_Super
+	Inherits@fx: ^op2_outpost2_set1
 	ReloadDelay: 40
 	Warhead@2Ext: GrantExternalCondition
 		InvalidTargets: Air
@@ -3567,9 +3215,6 @@ plymouth_Tiger_EMP:
 		Duration: 10
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		Spread: 50
 		Damage: 1
@@ -3621,20 +3266,6 @@ plymouth_Tiger_EMP:
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: op2_emp_static
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-		ValidTargets: Ground, Ship
 	Warhead@GroundFire: SpawnActor
 		Actors: groundfire
 		Range: 1
@@ -3664,31 +3295,6 @@ plymouth_Tiger_EMP:
 			Spaceship: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		UpdatesUnitStatistics: false
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.8
-		FadeFrames: 15
-	Warhead@Concrete: DamagesConcrete
-		Damage: 200
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		Spread: 300
 		Damage: 1
@@ -3788,8 +3394,6 @@ plymouth_Tiger_EMP:
 		ValidRelationships: Neutral, Enemy
 	-Warhead@Tesla_Super_ExtraDamage:
 MiniNova:
-	Warhead@Effect: CreateEffect
-		Explosions: supernova_missile_explosion
 	ValidTargets: Ground, Water, Underwater, Air
 	Warhead@Damage: SpreadDamage
 		Spread: 1600
@@ -3840,9 +3444,6 @@ MiniNova:
 		ValidTargets: Ground, Water, Air
 		AffectsParent: true
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Effect: CreateEffect
-		ImpactSounds: kaboom1.aud
-		ImpactActors: false
 	Warhead@4Dam_areanuke1: SpreadDamage
 		Spread: 1000
 		Damage: 40000
@@ -3872,15 +3473,6 @@ MiniNova:
 		Size: 3
 		Delay: 3
 		ResourceAmount: 3
-	Warhead@5Smu_areanukea: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 1
-		Delay: 3
-	Warhead@Effect2: CreateEffect
-		ImpactSounds: kaboom22.aud
-		Delay: 5
-		ImpactActors: false
 	Warhead@7Dam_areanuke2: SpreadDamage
 		Spread: 1500
 		Damage: 20000
@@ -3910,11 +3502,6 @@ MiniNova:
 		Size: 6
 		Delay: 6
 		ResourceAmount: 6
-	Warhead@9Smu_areanukeb: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 2
-		Delay: 6
 	Warhead@8Dam_areanuke2: SpreadDamage
 		Spread: 2000
 		Damage: 10000
@@ -3943,11 +3530,6 @@ MiniNova:
 		Size: 9
 		Delay: 9
 		ResourceAmount: 9
-	Warhead@12Smu_areanukec: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 3
-		Delay: 9
 	Warhead@10Dam_areanuke3: SpreadDamage
 		Spread: 2500
 		Damage: 5000
@@ -3997,16 +3579,12 @@ MiniNova:
 		Delay: 12
 		ValidTargets: Ground, Water, Underwater, Air
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@13Smu_areanuke3: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 4
-		Delay: 12
 	Warhead@13Shake: ShakeScreen
 		Duration: 15
 		Intensity: 5
 		Multiplier: 1,1
 
+	Inherits@fx: ^op2_outpost2_mininova
 supernova_missile_super:
 	ValidTargets: Ground, Air
 	Report: nukemisl.aud
@@ -4022,10 +3600,6 @@ supernova_missile_super:
 			Light: 60
 			Heavy: 50
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Effect: CreateEffect
-		Explosions: supernova_missile_explosion
-		ImpactSounds: nukexplo.aud
-		ImpactActors: false
 	Warhead@3Dam_areanukea: SpreadDamage
 		Spread: 2c512
 		Damage: 11000
@@ -4042,15 +3616,6 @@ supernova_missile_super:
 	Warhead@4Res_areanukea: DestroyResource
 		Size: 3
 		Delay: 3
-	Warhead@5Smu_areanukea: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 3
-		Delay: 3
-	Warhead@Effect2: CreateEffect
-		ImpactSounds: xplobig4.aud
-		Delay: 3
-		ImpactActors: false
 	Warhead@7Dam_areanukeb: SpreadDamage
 		Spread: 3c768
 		Damage: 5000
@@ -4065,11 +3630,6 @@ supernova_missile_super:
 			Heavy: 50
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@8Res_areanukeb: DestroyResource
-		Size: 4
-		Delay: 6
-	Warhead@9Smu_areanukeb: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall
 		Size: 4
 		Delay: 6
 	Warhead@10Dam_areanukec: SpreadDamage
@@ -4088,12 +3648,8 @@ supernova_missile_super:
 	Warhead@11Res_areanukec: DestroyResource
 		Size: 5
 		Delay: 9
-	Warhead@12Smu_areanukec: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall
-		Size: 5
-		Delay: 9
 	Warhead@13Shake: ShakeScreen
 		Duration: 20
 		Intensity: 5
 		Multiplier: 1,1
+	Inherits@fx: ^op2_outpost2_supernova_missile_super

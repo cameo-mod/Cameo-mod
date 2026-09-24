@@ -1,10 +1,10 @@
 # audit_k_linearity — the flat K must not move when Damage moves
 
-Analysed **2145** concrete weapons.
+Analysed **2147** concrete weapons.
 
 ## L0 — every positive offensive runtime percentage application is modeled
 
-_clean_ — modeled 1573 folded and 2504 standalone applications.
+_clean_ — modeled 1575 folded and 2523 standalone applications.
 
 ## L1 — `k_flat` is invariant under a change of flat Damage
 
@@ -18,7 +18,7 @@ _clean_ — the identity holds for every analysed weapon; 11 percentage-only wea
 
 ## L3 — weapons with a standalone percentage DPS floor
 
-700 weapon(s) carry a standalone percentage hit; **182** have a floor at or above 25% of output.
+703 weapon(s) carry a standalone percentage hit; **183** have a floor at or above 25% of output.
 
 A price target below the floor is UNREACHABLE by lowering flat Damage — `required_damage()` returns None rather than a wrong positive number. To price these lower, the standalone percentage hit has to shrink.
 
@@ -55,42 +55,42 @@ A price target below the floor is UNREACHABLE by lowering flat Damage — `requi
 | `BallistaMultiShotEnergized` | 83.0% |
 | `BallistaTowerMultiShotEnergized` | 82.4% |
 
-_... and 152 more._
+_... and 153 more._
 
 ## L4 — folded runtime quantisation residual
 
-627 weapon(s) have a non-zero current folded runtime residual.
+628 weapon(s) have a non-zero current folded runtime residual.
 This residual is included in measured output but excluded from `k_flat` and `dps_floor`; recompute it after snapping a proposed Damage value.
 
 | weapon | context-adjusted residual per shot |
 |---|--:|
-| `AsianTurretPlasma` | +2.3982 |
-| `AsianTwinPlasma_elite` | +2.1462 |
-| `AsianTwinPlasma` | +2.0647 |
-| `Tentacle` | +2.0101 |
-| `ra1_soviets_migattackbomber_thermobaricmaverick` | +1.9344 |
-| `FutureMechPlasma_elite` | +1.9296 |
-| `AsianSinglePlasma_elite` | +1.9017 |
-| `FutureMechPlasma` | +1.8585 |
-| `AsianSinglePlasma` | +1.8558 |
-| `ra1_soviets_btr80_machinegun_tesla` | +1.7732 |
-| `ra1_soviets_btr80_machinegun_tesla_arc` | +1.7732 |
-| `Napalm` | +1.7531 |
-| `edenMobileDefenceLaser` | +1.7509 |
-| `CabalMantisGun` | +1.7101 |
-| `RA2LasherLaser` | +1.7089 |
-| `AsianChemicalBombs` | +1.6970 |
-| `ra1_allies_alliedgunturret_cannon` | +1.6848 |
-| `NapalmA10Carrier` | +1.6645 |
-| `TSTurretLaser` | +1.6518 |
-| `TSCABALPlasmaFire` | +1.6518 |
-| `d2kChainGun_upgrade` | +1.6484 |
-| `schwarzermond_lunarsoldier_rifle_yellow` | +1.6357 |
-| `schwarzermond_lunarsoldier_rifle_amplified` | +1.6357 |
-| `TSLaserTurretLaser` | +1.6187 |
-| `Lunar_YellowUbermenschLaser_elite` | +1.6063 |
-| `Lunar_AmplifiedUbermenschLaser_elite` | +1.6063 |
-| `schwarzermond_lunarsoldier_rifle_yellow_elite` | +1.6014 |
-| `schwarzermond_lunarsoldier_rifle_amplified_elite` | +1.6014 |
-| `TSScoopDualTur` | +1.5924 |
-| `JHighVWaveforce` | +1.5758 |
+| `AsianTurretPlasma` | +2.3987 |
+| `AsianTwinPlasma_elite` | +2.1466 |
+| `AsianTwinPlasma` | +2.0651 |
+| `Tentacle` | +2.0099 |
+| `ra1_soviets_migattackbomber_thermobaricmaverick` | +1.9335 |
+| `FutureMechPlasma_elite` | +1.9299 |
+| `AsianSinglePlasma_elite` | +1.9020 |
+| `FutureMechPlasma` | +1.8589 |
+| `AsianSinglePlasma` | +1.8562 |
+| `ra1_soviets_btr80_machinegun_tesla` | +1.7737 |
+| `ra1_soviets_btr80_machinegun_tesla_arc` | +1.7737 |
+| `Napalm` | +1.7527 |
+| `CabalMantisGun` | +1.7104 |
+| `RA2LasherLaser` | +1.7093 |
+| `AsianChemicalBombs` | +1.6974 |
+| `ra1_allies_alliedgunturret_cannon` | +1.6842 |
+| `NapalmA10Carrier` | +1.6642 |
+| `TSTurretLaser` | +1.6521 |
+| `TSCABALPlasmaFire` | +1.6521 |
+| `d2kChainGun_upgrade` | +1.6487 |
+| `edenMobileDefenceLaser` | -1.6461 |
+| `schwarzermond_lunarsoldier_rifle_yellow` | +1.6360 |
+| `schwarzermond_lunarsoldier_rifle_amplified` | +1.6360 |
+| `TSLaserTurretLaser` | +1.6190 |
+| `Lunar_YellowUbermenschLaser_elite` | +1.6065 |
+| `Lunar_AmplifiedUbermenschLaser_elite` | +1.6065 |
+| `schwarzermond_lunarsoldier_rifle_yellow_elite` | +1.6017 |
+| `schwarzermond_lunarsoldier_rifle_amplified_elite` | +1.6017 |
+| `TSScoopDualTur` | +1.5919 |
+| `JHighVWaveforce` | +1.5761 |

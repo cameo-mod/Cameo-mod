@@ -1,13 +1,13 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **724**
+Files scanned: **727**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
 | E1 | bare except / except BaseException | 5 | 2 |
 | E2 | handler discards the error | 122 | 30 |
 | E3 | open() without encoding= | 155 | 90 |
-| E4 | subprocess call without check= | 36 | 9 |
+| E4 | subprocess call without check= | 38 | 9 |
 
 
 ## Files that do not parse
@@ -317,7 +317,7 @@ Files scanned: **724**
 | tools/tilesets/transfer_ai_cliff_style.py | 101 | `Image.open()` without encoding= |
 
 
-## E4 — 36 finding(s)
+## E4 — 38 finding(s)
 
 | file | line | detail |
 |---|---|---|
@@ -351,12 +351,14 @@ Files scanned: **724**
 | tools/hooks/test_bash_guard.py | 50 | `subprocess.run()` without check= |
 | tools/hooks/test_bash_guard.py | 58 | `subprocess.run()` without check= |
 | tools/hooks/test_bash_guard.py | 77 | `subprocess.run()` without check= |
+| tools/prep_overmind_dataset.py | 132 | `subprocess.run()` without check= |
 | tools/reference/splice_peer_section.py | 73 | `subprocess.run()` without check= |
 | tools/tests/ai_bot_player_gate.py | 86 | `subprocess.Popen()` without check= |
 | tools/tests/test_continuous_cannonap_preview.py | 106 | `subprocess.run()` without check= |
 | tools/tests/test_continuous_cannonap_preview.py | 115 | `subprocess.run()` without check= |
 | tools/tests/test_peer_export.py | 454 | `subprocess.run()` without check= |
 | tools/tests/test_peer_export.py | 541 | `subprocess.run()` without check= |
+| tools/wav_to_aud.py | 128 | `subprocess.run()` without check= |
 
 
 ## FAIL
@@ -364,6 +366,6 @@ Files scanned: **724**
 - E1: 5 > baseline 2
 - E2: 122 > baseline 30
 - E3: 155 > baseline 90
-- E4: 36 > baseline 9
+- E4: 38 > baseline 9
 - 1 file(s) do not parse
 

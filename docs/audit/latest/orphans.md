@@ -1,6 +1,6 @@
 # audit_orphans — dead content (B10)
 
-Live weapons: **3000** — orphans: **395**, dangling weapon refs (BLOCKING): **0**, conditions granted-never-consumed: **18**
+Live weapons: **3261** — orphans: **393**, dangling weapon refs (BLOCKING): **0**, conditions granted-never-consumed: **18**
 
 
 ## O2 — dangling weapon references (crash-on-use class)
@@ -86,7 +86,6 @@ _none found_
 | Demolish | mods/cameo/weapons/weapons.yaml |
 | DepthChargeCryo | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
 | Dragon | mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml |
-| DroneJump | mods/cameo/weapons/d2k.yaml |
 | DroneJumpH | mods/cameo/weapons/d2k.yaml |
 | DropPodExplode | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml |
 | Emperor_Sardaukar_E | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml |
@@ -367,7 +366,6 @@ _none found_
 | oFremen_S | mods/cameo/weapons/d2k.yaml |
 | oGrenDeath | mods/cameo/weapons/d2k.yaml |
 | oHMG | mods/cameo/weapons/d2k.yaml |
-| oHMG_muzzle | mods/cameo/weapons/d2k.yaml |
 | oHMGo | mods/cameo/weapons/d2k.yaml |
 | oHMGo_muzzle | mods/cameo/weapons/d2k.yaml |
 | oLMG | mods/cameo/weapons/d2k.yaml |
@@ -391,7 +389,7 @@ _none found_
 | psireveal | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml |
 | ra120mmThermobaric | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |
 | ra120mmirak | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
-| ra1_allies_alliedsniper | mods/cameo/weapons/tiberiandawn.yaml |
+| ra1_allies_sniper | mods/cameo/weapons/tiberiandawn.yaml |
 | ra1_soviets_heavyteslatank_ttankzap2 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |
 | ra1_soviets_mortarsoldier_siegemortar | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |
 | ra1_soviets_mortarsoldier_siegemortarthermobaric | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml |

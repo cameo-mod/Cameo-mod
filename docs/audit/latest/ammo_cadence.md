@@ -21,21 +21,21 @@ Of those, **17** hold only ONE shot, so no rate exists for them either.
 |---|---|---|---|---|---|
 | A10Carrier | NapalmA10Carrier | 4,000 | 8,000 | 0.1 s | 0.04 |
 | td_nod_venom | td_nod_venom_laser_burning | 2,963 | 9,333 | 0.2 s | 0.07 |
-| terran_ghost | GhostSniperLockdown | 1,091 | 2,182 | 0.9 s | 0.08 |
+| terran_ghost | GhostSniperLockdown | 2,000 | 4,000 | 0.9 s | 0.08 |
 | ts_gdi_riottrooper | TSShotgun | 609 | 730 | 9.2 s | 0.12 |
 | latinsyndicate_yakovlev | YakovlevCannon_elite | 1,600 | 1,829 | 1.4 s | 0.12 |
-| terran_specter | SpecterSniperLockdown | 1,455 | 2,182 | 2.6 s | 0.12 |
+| terran_specter | SpecterSniperLockdown | 2,667 | 4,000 | 2.6 s | 0.12 |
 | japan_zerofighter_slave | JapanCarrierFighterBomb | 2,000 | 3,000 | 0.4 s | 0.15 |
 | asianalliance_pelican | AsianPelicanMissile_elite | 1,548 | 2,182 | 1.3 s | 0.15 |
 | td_gdi_defenserig | td_gdi_defenserig_gdirigphalanx | 3,000 | 3,136 | 7.0 s | 0.16 |
-| heavy_rocket_raider.ixian | D2K_Bazooka2 | 1,200 | 1,350 | 1.6 s | 0.20 |
+| ixian_heavy_rocket_raider | D2K_Bazooka2 | 1,200 | 1,350 | 1.6 s | 0.20 |
 | ixian_ixmissiletank | mtank_pri2 | 4,800 | 5,236 | 2.2 s | 0.20 |
-| rocket_raider.ixian | D2K_Bazooka2 | 1,200 | 1,350 | 1.6 s | 0.20 |
+| ixian_rocket_raider | D2K_Bazooka2 | 1,200 | 1,350 | 1.6 s | 0.20 |
 | protoss_reaver | ScarabLaunch | 2,222 | 2,424 | 39.6 s | 0.25 |
 | ra2_allies_harrier | HarrierMissiles_elite | 1,220 | 10,286 | 0.6 s | 0.28 |
 | asianalliance_kami_chemical | AsianKamikazeChaingun | 750 | 1,200 | 0.8 s | 0.32 |
 | asianalliance_commando | AsianSniperLockdown | 2,040 | 4,080 | 4.0 s | 0.33 |
-| terran_medic | MedicFlare | 117 | 233 | 2.4 s | 0.33 |
+| terran_medic | MedicFlare | 127 | 253 | 2.4 s | 0.33 |
 | futuretech_twister | SteelTwisterMissiles_elite | 733 | 894 | 6.4 s | 0.36 |
 | steelconsortium_twister | SteelTwisterMissiles_elite | 733 | 894 | 6.4 s | 0.36 |
 | ra2asw | RA2DepthCharge | 8,108 | 25,000 | 0.5 s | 0.37 |

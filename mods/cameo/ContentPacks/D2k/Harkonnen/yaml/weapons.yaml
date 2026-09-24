@@ -56,7 +56,7 @@ DebrisMissile:
 
 ExplosiveDebris:
 	Inherits: ^Debris2Legacy
-	Inherits@fx: ^d2k_explosive_debris
+	Inherits@fx: ^d2k_harkonnen_explosivedebris
 	Range: 7c0
 	Projectile: Bullet
 		Image: 120mm
@@ -69,8 +69,6 @@ ExplosiveDebris:
 		PercentageScale: 53333
 		Damage: 3000
 		Spread: 1c562
-	Warhead@Concrete: DamagesConcrete
-		Damage: 4500
 
 harkonnen_devastatorturret:
 	Inherits@wh: ^Warhead_CannonHE_Heavy_D2K_DevBullet
@@ -142,7 +140,6 @@ D2K_Rocket_AA:
 
 
 PlasmaExplosion:
-	Inherits@fx: ^d2k_plasma_explosion
 	Warhead@1Dam: SpreadDamage
 		Damage: 20000
 		Spread: 3c0
@@ -156,8 +153,5 @@ PlasmaExplosion:
 			Concrete: 60
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@2Smu: LeaveSmudge
-		SmudgeType: SandCrater
-	Warhead@Concrete: DamagesConcrete
-		Damage: 20000
 
+	Inherits@fx: ^d2k_harkonnen_plasmaexplosion

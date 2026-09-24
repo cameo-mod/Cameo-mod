@@ -42,7 +42,7 @@
    japan_exorcistoitank                 hull=10     turret=24
    japan_japanesespeedboat              hull=28     turret=56
    japan_oitank                         hull=10     turret=24
-   naxis_assault                        hull=18     turret=16
+   latin_sub                            hull=22     turret=11
    … and 15 more
 
 ## T4 — turreted actor with NO hull speed (immobile — own rule pending): **137** (ratchet 137) ok

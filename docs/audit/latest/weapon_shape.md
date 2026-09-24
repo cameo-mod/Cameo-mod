@@ -4,31 +4,31 @@
 
 ⛔ This **repeals the exemption** in `tools/audit/intentional_composites.py`. Its 224 entries are no longer 'reviewed, keep' — they are the worklist. The registry data stays useful: it says which mains someone chose on purpose.
 
-concrete weapons with inherits: **2105**
+concrete weapons with inherits: **2158**
 
 W5 counts structural flat-damage nodes, including zero/healing/ally-only nodes; the split audit counts positive non-companion damage. Both resolve the full concrete weapon corpus. Use `--compare-split` for exact differences.
 
 | check | what | count | ratchet |
 |---|---|--:|--:|
-| W1 | more than 3 inherits | **287** (13.64% of 2105) | 26.16% |
-| W2 | two or more `^Warhead_*` inherits | **122** | 281 |
-| W3 | two or more `^Projectile_*` inherits | **7** | 12 |
-| W4 | two or more `^Effect_*` inherits | **43** | 54 |
-| W5 | more than one resolved MAIN warhead | **167** | 389 |
-| W6 | effect warheads declared LOCALLY | **709** ⛔ | 692 |
-| W7 | inherits from ANOTHER WEAPON, not a template | **887** | 963 |
-| W8 | inherits a `^Template` that is not one of the three kinds | **360** | 637 |
+| W1 | more than 3 inherits | **293** (13.58% of 2158) | 26.16% |
+| W2 | two or more `^Warhead_*` inherits | **123** | 123 |
+| W3 | two or more `^Projectile_*` inherits | **7** | 7 |
+| W4 | two or more `^Effect_*` inherits | **41** | 41 |
+| W5 | more than one resolved MAIN warhead | **168** | 389 |
+| W6 | effect warheads declared LOCALLY | **443** | 443 |
+| W7 | inherits from ANOTHER WEAPON, not a template | **799** | 804 |
+| W8 | inherits a `^Template` that is not one of the three kinds | **362** | 362 |
 
 | I7 informational — missing template | weapons |
 |---|--:|
-| no `^Effect_*` inherit | 965 |
-| no `^Projectile_*` inherit | 1223 |
-| no `^Warhead_*` inherit | 896 |
+| no `^Effect_*` inherit | 822 |
+| no `^Projectile_*` inherit | 1220 |
+| no `^Warhead_*` inherit | 883 |
 
 _I7 is a REVIEW QUEUE, not a defect count — an instant or utility weapon may legitimately have no projectile. Do not ratchet it without a per-weapon pass._
 
 
-## W7 — inherits from ANOTHER WEAPON, not a template (887 vs ratchet 963)
+## W7 — inherits from ANOTHER WEAPON, not a template (799 vs ratchet 804)
 
 | weapon | weapon-parents | first four |
 |---|---|---|
@@ -74,10 +74,10 @@ _I7 is a REVIEW QUEUE, not a defect count — an instant or utility weapon may l
 | `AsianPunisherAG_EMP` | 1 | `AsianPunisherAG` |
 
 
-_... and 847 more._
+_... and 759 more._
 
 
-## W8 — inherits a `^Template` that is not one of the three kinds (360 vs ratchet 637)
+## W8 — inherits a `^Template` that is not one of the three kinds (362 vs ratchet 362)
 
 | weapon | legacy templates | first four |
 |---|---|---|
@@ -123,10 +123,10 @@ _... and 847 more._
 | `CryoLegionnaireAttack` | 2 | `^TeslaWeapon` · `^LaserWeapon` |
 
 
-_... and 320 more._
+_... and 322 more._
 
 
-## W1 — more than 3 inherits (287 vs ratchet 576)
+## W1 — more than 3 inherits (293 vs ratchet 576)
 
 | weapon | inherits | first four |
 |---|---|---|
@@ -146,36 +146,36 @@ _... and 320 more._
 | `BCLaser` | 8 | `^Warhead_Laser_Heavy_Flat` · `^Warhead_CannonHE_Heavy` · `^Projectile_Shell_Heavy` · `^Effect_CannonHE_Heavy` |
 | `BallistaSingleShotAirEnergized_AA` | 4 | `^Warhead_MissileAP_Light` · `^Projectile_Missile_Light` · `^Effect_MissileAP_Light` · `JapanMaidenBowEnergized` |
 | `BehemothShoot` | 7 | `^Warhead_MissileHE_Heavy` · `^LightFlameWeapon` · `^MediumChemicalWeapon` · `^HeavyMissile` |
-| `CabalArtilleryWalkerShellUpgraded` | 4 | `^Warhead_CannonHE_Heavy_Flat` · `^TeslaChargedWeapon` · `^RailgunWeapon` · `^Effect_CannonHE_Heavy` |
-| `CabalAscendedRockets` | 4 | `^Warhead_MissileHE_Heavy` · `^CabalMissileMedium` · `^CabalMissileEffect` · `^Effect_MissileHE_Heavy` |
+| `CabalArtilleryWalkerShellUpgraded` | 4 | `^Warhead_CannonHE_Heavy_Flat` · `^TeslaChargedWeapon` · `^RailgunWeapon` · `^ts_cabal_cabalartillerywalkershellupgraded` |
 | `CabalBeholderLaser` | 5 | `^Warhead_Laser_Heavy_Flat` · `^TeslaWeapon` · `^RailgunWeapon` · `^LaserWeapon` |
-| `CabalCommandoPlasma` | 4 | `^Warhead_Plasma_Heavy` · `^HeavyCannon` · `^MediumFlameWeapon` · `^MediumChemicalWeapon` |
-| `CabalCommandoPlasmaMk2` | 4 | `^Warhead_Plasma_Heavy` · `^HeavyCannon` · `^MediumFlameWeapon` · `^MediumChemicalWeapon` |
-| `CabalCommandoPlasmaMk2Neutron` | 6 | `^Warhead_Plasma_Heavy_Flat` · `^HeavyCannon` · `^MediumFlameWeapon` · `^TeslaWeapon` |
-| `CabalCommandoPlasmaNeutron` | 6 | `^Warhead_Plasma_Heavy_Flat` · `^HeavyCannon` · `^MediumFlameWeapon` · `^TeslaWeapon` |
+| `CabalCommandoPlasma` | 5 | `^Warhead_Plasma_Heavy` · `^HeavyCannon` · `^MediumFlameWeapon` · `^MediumChemicalWeapon` |
+| `CabalCommandoPlasmaMk2` | 5 | `^Warhead_Plasma_Heavy` · `^HeavyCannon` · `^MediumFlameWeapon` · `^MediumChemicalWeapon` |
+| `CabalCommandoPlasmaMk2Neutron` | 7 | `^Warhead_Plasma_Heavy_Flat` · `^HeavyCannon` · `^MediumFlameWeapon` · `^TeslaWeapon` |
+| `CabalCommandoPlasmaNeutron` | 7 | `^Warhead_Plasma_Heavy_Flat` · `^HeavyCannon` · `^MediumFlameWeapon` · `^TeslaWeapon` |
 | `CabalCyborgChaingun` | 5 | `^Warhead_Bullet_Medium_Flat` · `^Warhead_Bullet_Light` · `^Warhead_Bullet_Medium` · `^Projectile_Bullet_Medium` |
 | `CabalHeavyReaperMissiles` | 7 | `^Warhead_MissileHE_Heavy_Flat` · `^Warhead_MissileHE_Medium` · `^Warhead_MissileHE_Heavy` · `^Warhead_Demolition_Light` |
 | `CabalHeavyReaperMissiles_AA` | 7 | `^Warhead_MissileAA_Heavy_Flat` · `^Warhead_MissileHE_Medium` · `^Warhead_MissileHE_Heavy` · `^Warhead_Demolition_Light` |
-| `CabalHunterKillerLasers_elite` | 4 | `^Warhead_Laser_Heavy` · `^LaserWeapon` · `^RailgunWeapon` · `^Effect_Watersplash_Huge_RA2` |
+| `CabalHunterKillerLasers_elite` | 4 | `^Warhead_Laser_Heavy` · `^LaserWeapon` · `^RailgunWeapon` · `^ts_cabal_cabalhunterkillerlasers_elite` |
 | `CabalLegionGun` | 5 | `^Warhead_Laser_Heavy_Flat` · `^Warhead_Bullet_Light` · `^Warhead_Laser_Heavy` · `^Projectile_Bullet_Light` |
-| `CabalMagicNuke` | 4 | `^Warhead_Tesla_Heavy` · `^Warhead_Tesla_Super` · `^Projectile_Lightning_Super` · `^Effect_Tesla_Super` |
+| `CabalMagicNuke` | 4 | `^Warhead_Tesla_Heavy` · `^Warhead_Tesla_Super` · `^Projectile_Lightning_Super` · `^ts_cabal_cabalmagicnuke` |
 | `CabalMantisGun` | 5 | `^Warhead_Laser_Heavy_Flat` · `^Warhead_Bullet_Light` · `^Warhead_Laser_Heavy` · `^Projectile_Bullet_Light` |
-| `CabalMothershipRockets` | 5 | `^Warhead_MissileTesla_Heavy` · `^TeslaWeapon` · `^HeavyMissile` · `^MediumFlameWeapon` |
+| `CabalMothershipRockets` | 6 | `^Warhead_MissileTesla_Heavy` · `^TeslaWeapon` · `^HeavyMissile` · `^MediumFlameWeapon` |
 | `CabalOverkillDroneLaser` | 5 | `^Warhead_Laser_Heavy_Flat` · `^Warhead_Bullet_Light` · `^Warhead_Laser_Heavy` · `^Projectile_Bullet_Light` |
 | `CabalReaperMissiles` | 7 | `^Warhead_MissileHE_Medium_Flat` · `^Warhead_MissileHE_Light` · `^Warhead_MissileHE_Medium` · `^Warhead_Demolition_Light` |
 | `CabalReaperMissiles_AA` | 7 | `^Warhead_MissileAA_Medium_Flat` · `^Warhead_MissileHE_Light` · `^Warhead_MissileHE_Medium` · `^Warhead_Demolition_Light` |
 | `CabalRocketCyborgRockets` | 4 | `^Warhead_MissileAP_Medium` · `^Warhead_MissileHE_Medium_Flat` · `^CabalMissileLight` · `^CabalMissileEffect` |
 | `CabalRocketCyborgRocketsUpgraded` | 4 | `^Warhead_MissileAP_Medium` · `^Warhead_MissileHE_Medium_Flat` · `^CabalMissileLight` · `^CabalMissileEffect` |
-| `CabalSubmarinePlasma` | 4 | `^Warhead_Plasma_Heavy` · `^HeavyCannon` · `^MediumFlameWeapon` · `^MediumChemicalWeapon` |
+| `CabalSubmarinePlasma` | 5 | `^Warhead_Plasma_Heavy` · `^HeavyCannon` · `^MediumFlameWeapon` · `^MediumChemicalWeapon` |
 | `ConsortiumMissileSystem` | 4 | `^TeslaWeapon` · `^Warhead_MissileAP_Medium` · `^Projectile_Missile_Medium` · `^Effect_Clsn_Medium_RA2` |
 | `CorsairFlash` | 5 | `^Warhead_Flak_Medium_Flat` · `^Warhead_Flak_Medium` · `^Warhead_Demolition_Light` · `^Projectile_Flak_Medium` |
 | `CycloneRockets` | 4 | `^Warhead_MissileAP_Light` · `^Warhead_MissileHE_Light_Flat` · `^Projectile_Missile_Light` · `^Effect_MissileHE_Light` |
+| `D2K_155mm2` | 6 | `^Warhead_CannonHE_Heavy` · `^MediumFlameWeapon` · `^ShrapnelWeapon` · `^HeavyBomb` |
 
 
-_... and 247 more._
+_... and 253 more._
 
 
-## W2 — two or more `^Warhead_*` inherits (122 vs ratchet 281)
+## W2 — two or more `^Warhead_*` inherits (123 vs ratchet 123)
 
 | weapon | warhead templates |
 |---|---|
@@ -221,10 +221,10 @@ _... and 247 more._
 | `IxRailgunDroneBullet` | `^Warhead_Railgun_Heavy_Flat` · `^Warhead_Railgun_Heavy` · `^Warhead_Railgun_ExtraDamage` |
 
 
-_... and 82 more._
+_... and 83 more._
 
 
-## W3 — two or more `^Projectile_*` inherits (7 vs ratchet 12)
+## W3 — two or more `^Projectile_*` inherits (7 vs ratchet 7)
 
 | weapon | projectile templates |
 |---|---|
@@ -237,7 +237,7 @@ _... and 82 more._
 | `TS70mmTur` | `^Projectile_Shell_Medium` · `^Projectile_Shell_Light` |
 
 
-## W4 — two or more `^Effect_*` inherits (43 vs ratchet 54)
+## W4 — two or more `^Effect_*` inherits (41 vs ratchet 41)
 
 | weapon | effect templates |
 |---|---|
@@ -246,7 +246,6 @@ _... and 82 more._
 | `AsianSinglePlasma` | `^Effect_Apoc_AP_RA2` · `^Effect_Flame_Heavy` |
 | `AsianTwinPlasma` | `^Effect_Apoc_AP_RA2` · `^Effect_Flame_Heavy` |
 | `AsianTwinPlasma_elite` | `^Effect_Apoc_AP_RA2` · `^Effect_Flame_Heavy` |
-| `CabalAscendedRockets` | `^CabalMissileEffect` · `^Effect_MissileHE_Heavy` |
 | `Flamethrower` | `^Effect_Flame_Light` · `^Effect_Flame_Light` |
 | `HeavyIxianCombatTankCannon` | `^Effect_CannonHE_Heavy` · `^Effect_CannonAP_Light` |
 | `IxianCombatTankCannon` | `^Effect_CannonHE_Heavy` · `^Effect_CannonAP_Light` |
@@ -269,7 +268,6 @@ _... and 82 more._
 | `RashidanGun_upgrade` | `^Effect_CannonHE_Heavy` · `^Effect_MissileHE_Heavy` |
 | `ReaperGrenade` | `^Effect_Concussion_Medium` · `^Effect_CannonHE_Heavy` |
 | `TS70mmTur` | `^Effect_CannonHE_Medium` · `^Effect_CannonAP_Light` |
-| `TSGrenade` | `^Effect_CannonHE_Medium` · `^Effect_Concussion_Medium` |
 | `TSScoopDualTur` | `^Effect_CannonHE_Heavy` · `^Effect_Concussion_Medium` |
 | `bigshieemortar` | `^Effect_AlliedTigerCannon` · `^Effect_Flame_Heavy` |
 | `ra120mmThermobaric` | `^Effect_AlliedTigerCannon` · `^Effect_Flame_Heavy` |
@@ -281,12 +279,14 @@ _... and 82 more._
 | `ra1_soviets_siegemammothtank_ra120mm2thermobaric` | `^Effect_AlliedTigerCannon` · `^Effect_Flame_Heavy` |
 | `ra1_soviets_siegemammothtank_ra120mm2thermobarictargetingcomputer` | `^Effect_AlliedTigerCannon` · `^Effect_Flame_Heavy` |
 | `ra1_soviets_teslayak_tesla_bomb` | `^Effect_Apoc_AP_RA2` · `^Effect_Flame_Heavy` |
+| `ra1_soviets_v1rockettruck_v1rocketsthermobaric` | `^Effect_AlliedTigerCannon` · `^Effect_Flame_Heavy` |
+| `sandmarinemortar` | `^Effect_AlliedTigerCannon` · `^Effect_Flame_Heavy` |
 
 
-_... and 3 more._
+_... and 1 more._
 
 
-## W5 — more than one resolved MAIN warhead (167 vs ratchet 389)
+## W5 — more than one resolved MAIN warhead (168 vs ratchet 389)
 
 | weapon | mains | which |
 |---|---|---|
@@ -332,26 +332,22 @@ _... and 3 more._
 | `GLTerroristExplosive2` | 3 | `1Dam` · `Concussion_Medium` · `Demolition_Heavy` |
 
 
-_... and 127 more._
+_... and 128 more._
 
 
-## W6 — effect warheads declared LOCALLY (709 vs ratchet 692)
+## W6 — effect warheads declared LOCALLY (443 vs ratchet 443)
 
 | weapon | nodes | first three |
 |---|---|---|
-| `120mm` | 1 | `Warhead@Effect: CreateEffect` |
 | `12MissilesSpawnerScud` | 6 | `Warhead@Effect: CreateEffect` · `Warhead@Smudge: LeaveSmudge` · `Warhead@RA2Scorch: LeaveSmudge` |
 | `155mm` | 10 | `Warhead@Effect: CreateEffect` · `Warhead@Smudge: LeaveSmudge` · `Warhead@DuneRock: LeaveSmudge` |
 | `155mmCryo` | 1 | `Warhead@Effect: CreateEffect` |
 | `2100Tanktrap` | 1 | `Warhead@Smu: LeaveSmudge` |
-| `227mm` | 2 | `Warhead@Effect: CreateEffect` · `Warhead@EffectWater: CreateEffect` |
 | `25mm` | 3 | `Warhead@Effect: CreateEffect` · `Warhead@EffectAir: CreateEffect` · `Warhead@RA2Scorch: LeaveSmudge` |
-| `A10CarrierMissiles_AA` | 1 | `Warhead@EffectAir: CreateEffect` |
 | `AAGunBoatFlak` | 1 | `Warhead@EffectAir: CreateEffect` |
 | `ATMine` | 10 | `Warhead@Effect: CreateEffect` · `Warhead@Smudge: LeaveSmudge` · `Warhead@Concrete: DamagesConcrete` |
 | `ArmoredCarMG` | 10 | `Warhead@Effect: CreateEffect` · `Warhead@EffectAir: CreateEffect` · `Warhead@ShieldHitEffect: CreateEffect` |
 | `ArtilleryExplode` | 1 | `Warhead@2Eff: CreateEffect` |
-| `ArtilleryShell` | 1 | `Warhead@Effect: CreateEffect` |
 | `AsianChaosSuperweapon` | 1 | `Warhead@1: CreateEffect` |
 | `AsianChaosTurret` | 1 | `Warhead@Effect: CreateEffect` |
 | `AsianChemical` | 5 | `Warhead@Effect: CreateEffect` · `Warhead@Smudge1: LeaveSmudge` · `Warhead@RA2Crater: LeaveSmudge` |
@@ -376,12 +372,16 @@ _... and 127 more._
 | `BarrelExplode` | 11 | `Warhead@2Eff: CreateEffect` · `Warhead@Smu: LeaveSmudge` · `Warhead@Glow: GlowImpact` |
 | `BehemothShoot` | 3 | `Warhead@Effect: CreateEffect` · `Warhead@Effect2: CreateEffect` · `Warhead@EffectAir: CreateEffect` |
 | `BigChemSpray` | 1 | `Warhead@3Eff: CreateEffect` |
-| `BigFlamer` | 1 | `Warhead@Glow: GlowImpact` |
 | `BlackEagleThunderboltMissiles` | 6 | `Warhead@Effect: CreateEffect` · `Warhead@Smudge1: LeaveSmudge` · `Warhead@Smudge2: LeaveSmudge` |
 | `BlackHoleSuck` | 1 | `Warhead@Effect: CreateEffect` |
+| `BoatMissile` | 2 | `Warhead@3Eff: CreateEffect` · `Warhead@4EffAir: CreateEffect` |
+| `BuggyPlasmaGrenade` | 7 | `Warhead@Effect: CreateEffect` · `Warhead@Smudge1: LeaveSmudge` · `Warhead@RA2Crater: LeaveSmudge` |
+| `BuildingExplode` | 2 | `Warhead@Effect: CreateEffect` · `Warhead@Smudge: LeaveSmudge` |
+| `BuildingExplodeProtoss` | 2 | `Warhead@Effect: CreateEffect` · `Warhead@2Smu: LeaveSmudge` |
+| `C4` | 1 | `Warhead@2Eff: CreateEffect` |
 
 
-_... and 669 more._
+_... and 403 more._
 
 
-**FAIL — W6 rose above baseline.** A weapon was given a second warhead, projectile or effect. The law allows exactly three inherits and one main.
+_all buckets at or below their ratchets_ — this is the pre-existing conversion backlog. **Lower each baseline as you convert; never raise one.**

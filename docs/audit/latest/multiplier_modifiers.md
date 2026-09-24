@@ -1,6 +1,6 @@
 # audit_multiplier_modifiers — *Multiplier Modifier integer percent check
 
-*Multiplier trait families seen: 1758
+*Multiplier trait families seen: 1757
 
 | trait family |
 |---|
@@ -1170,7 +1170,6 @@
 | `RangeMultiplier@asianalliance_doctrine_modernizedinfantryequipment` |
 | `RangeMultiplier@asianalliance_upgrade_celestialpower` |
 | `RangeMultiplier@battlefortresspassenger` |
-| `RangeMultiplier@blinded` |
 | `RangeMultiplier@bows` |
 | `RangeMultiplier@casino_Range_buff_1` |
 | `RangeMultiplier@casino_Range_buff_2` |

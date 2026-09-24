@@ -8,7 +8,7 @@
 | R4 | MissileHE reachable against Air (hard rule) | 7 | 50 | PASS |
 
 
-361 concrete weapon(s) fly a Missile* main; 266 already match their role.
+362 concrete weapon(s) fly a Missile* main; 267 already match their role.
 
 
 ## custom selectors - domain verdict withheld

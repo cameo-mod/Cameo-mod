@@ -26,7 +26,7 @@ TS30mmRail:
 	Inherits@collapseextra: ^Warhead_Railgun_ExtraDamage
 	-TargetActorCenter:
 	Inherits@3: ^RailgunWeapon
-	Inherits: ^Effect_Clsn_Small_RA2
+	Inherits@fx: ^ts_gdi_ts30mmrail
 	-Warhead@Glow:
 	Projectile: Railgun
 		Duration: 8
@@ -85,14 +85,6 @@ TS30mmRail:
 		TrailImage: smokey
 		TrailInterval: 1
 		VerticalRateOfTurn: 30
-	Warhead@Effect:
-		Explosions: blue_med_frag
-		ImpactSounds: xplos.aud
-		-ExplosionPalette:
-	Warhead@EffectWater:
-		Explosions: small_splash
-		-ExplosionPalette:
-		-ImpactSounds:
 	Warhead@FlakWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		Spread: 125
@@ -140,6 +132,9 @@ TS30mmRail:
 			Superheavy: 20
 			Wood: 10
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 15
 TS120mmRail:
 	Inherits@finalmain: ^Warhead_Railgun_Heavy_Flat
@@ -222,8 +217,8 @@ TSRPGTower:
 TSRPGTowerRail:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
-	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@5: ^RailgunWeapon
+	Inherits@fx: ^ts_gdi_tsrpgtowerrail
 	ReloadDelay: 46
 	Range: 8544
 	Warhead@CannonHE_Heavy:
@@ -235,10 +230,6 @@ TSRPGTowerRail:
 	-Warhead@RailgunExtraDamage:
 	-Warhead@RailgunWeapon:
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-	Warhead@Effect:
-		ImpactActors: false
-	Warhead@EffectWater:
-		Explosions: med_splash
 	Warhead@ShrapnelWeaponPercentage:
 		ValidTargets: Ground, Water
 		Spread: 300
@@ -265,9 +256,14 @@ TSRPGTowerRail:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 15
+		Range: 1250
+		ValidTargets: Shielded
 TSJugg90mm:
 	Inherits@wh: ^Warhead_Concussion_Medium
-	Inherits@fx: ^Effect_Concussion_Medium
+	Inherits@fx: ^ts_gdi_set19
 	ReloadDelay: 69
 	Range: 12834
 	MinRange: 2565
@@ -283,8 +279,6 @@ TSJugg90mm:
 		ContrailWidth: 0c32
 	Warhead@Concussion_Medium:
 		Damage: 30000
-	Warhead@3Eff: CreateEffect
-		ImpactSounds: expnew13.aud
 	# Warhead@3Eff: CreateEffect
 	# 	Explosions: artillery_explosion
 
@@ -297,7 +291,7 @@ TSJuggTargeting:
 
 TSJugg120mm:
 	Inherits@wh: ^Warhead_Concussion_Medium
-	Inherits@fx: ^Effect_Concussion_Medium
+	Inherits@fx: ^ts_gdi_set19
 	ReloadDelay: 64
 	Range: 12860
 	MinRange: 2570
@@ -313,8 +307,6 @@ TSJugg120mm:
 		ContrailWidth: 0c32
 	Warhead@Concussion_Medium:
 		Damage: 40000
-	Warhead@3Eff: CreateEffect
-		ImpactSounds: expnew13.aud
 	# Warhead@3Eff: CreateEffect
 	# 	Explosions: artillery_explosion
 
@@ -323,9 +315,9 @@ KodiakCannon:
 	Inherits@collapseextra1: ^Warhead_Railgun_ExtraDamage
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
-	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@5: ^RailgunWeapon
 	Inherits@7: ^HeavyBomb
+	Inherits@fx: ^ts_gdi_kodiakcannon
 	Range: 9165
 	ReloadDelay: 92
 	Burst: 3
@@ -380,6 +372,10 @@ KodiakCannon:
 	Warhead@RailgunExtraDamage_Auxiliary:
 		InvalidTargets: Air
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Duration: 15
+		Range: 1250
+		ValidTargets: Shielded
 		InvalidTargets: Air
 	InvalidTargets: wall
 	Projectile:
@@ -399,13 +395,6 @@ KodiakCannon:
 		TrailImage: smokey
 		TrailInterval: 1
 		VerticalRateOfTurn: 20
-	Warhead@Effect:
-		Explosions: big_frag
-		GlowFadeFrames: 60
-		GlowFadeInFrames: 12
-		GlowScale: 2.0
-		ImpactSounds: xplobig4.aud
-		ValidTargets: Ground, Water
 	Warhead@HeavyChemicalWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		Falloff: 99, 66, 33
@@ -474,27 +463,9 @@ KodiakCannonSonic:
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall
 
-TSSonicWeaponEffect:
-	ReloadDelay: 60
-	Range: 6144
-	Report: sonic4.aud
-	Projectile: AreaBeam
-		Speed: 0c256
-		Duration: 45
-		DamageInterval: 5
-		Width: 384
-		Shape: Flat
-		ZOffset: 2047
-		BeyondTargetRange: 0c256
-		Blockable: true
-		TrackTarget: true
-		Color: 50F5FF45
-
 TSSonicZapWeapon:
 	Inherits: ^Warhead_Tesla_Heavy
-	Inherits@3: ^Effect_Magic_Heavy
-	Warhead@Effect:
-		-ImpactSounds:
+	Inherits@fx: ^ts_gdi_tssoniczapweapon
 	ReloadDelay: 60
 	Range: 4050
 	Projectile: AreaBeam
@@ -509,16 +480,11 @@ TSSonicZapWeapon:
 		TrackTarget: true
 		Color: 50F5FF45
 	Warhead@Tesla_Heavy:
-		Damage: 4000
-	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
-		DamageTypes: Tesla
-		Damage: 1000
-		ValidRelationships: Neutral, Enemy
+		Damage: 5000
+	-Warhead@Tesla_Heavy_ExtraDamage:
 TSSonicZapWeaponSonic:
 	Inherits@wh: ^Warhead_Sonic_Heavy
-	Inherits@fx: ^Effect_Sonic_Heavy
-	Warhead@Effect:
-		-ImpactSounds:
+	Inherits@fx: ^ts_gdi_tssoniczapweaponsonic
 	ReloadDelay: 60
 	Range: 4050
 	ValidTargets: Ground, Water
@@ -539,7 +505,6 @@ TSZapWeapon_EMP:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^Effect_Tesla_Heavy
-	Inherits@2: TSSonicWeaponEffect
 	ReloadDelay: 60
 	Range: 10205
 	Report: plsecan2.aud
@@ -556,42 +521,28 @@ TSZapWeapon_EMP:
 		TrackTarget: true
 		Color: F5F5F545
 	Warhead@Tesla_Heavy:
-		Damage: 2000
-		ValidTargets: Ground, Water
-	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
-		DamageTypes: Tesla
-		Damage: 1000
-		ValidRelationships: Neutral, Enemy
+		Damage: 3000
 		ValidTargets: Ground, Water
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 10000
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water
 
+	-Warhead@Tesla_Heavy_ExtraDamage:
 TSMine_EMP:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
-	Inherits@fx: ^Effect_Tesla_Heavy
+	Inherits@fx: ^ts_gdi_tsmine_emp
 	Report: mineblo1.aud
 	Warhead@Tesla_Heavy:
-		Damage: 10000
-		ValidTargets: Ground, Water
-	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
-		DamageTypes: Tesla
-		Damage: 5000
-		ValidRelationships: Neutral, Enemy
+		Damage: 15000
 		ValidTargets: Ground, Water
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 50000
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water
-	Warhead@Effect: CreateEffect
-		Explosions: large_explosion
-		ImpactSounds: mineblo1.aud
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: Crater
-		InvalidTargets: Structure, wall
 
+	-Warhead@Tesla_Heavy_ExtraDamage:
 TSMechRailgun:
 	Inherits@wh: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
@@ -612,11 +563,24 @@ TSMechRailgun:
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 
 TSMechRailgunRail:
-	Inherits: TSMechRailgun
+	Inherits@w71: ^Warhead_Railgun_Heavy
+	Inherits@w72: ^Projectile_Railgun_Heavy
+	Inherits@w73: ^Effect_Railgun_Heavy
 	ReloadDelay: 58
 	Projectile: Railgun
 		BeamColor: FFFF44
 
+	BurstDelays: 8
+	Report: railuse5.aud
+	Warhead@RailgunPercentage: AreaDamagePercentage
+		Damage: 20
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	Warhead@Railgun_Heavy: AreaDamage
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+		PercentageScale: 500
+		Damage: 40000
+	Range: 8409
+	Burst: 2
 TSMechRailgunII:
 	Inherits@wh: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
@@ -637,7 +601,9 @@ TSMechRailgunII:
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 
 TSMechRailgunRailII:
-	Inherits: TSMechRailgunII
+	Inherits@w71: ^Warhead_Railgun_Heavy
+	Inherits@w72: ^Projectile_Railgun_Heavy
+	Inherits@w73: ^Effect_Railgun_Heavy
 	ReloadDelay: 72
 	Projectile: Railgun
 		BeamColor: FFFF44
@@ -648,6 +614,17 @@ TSMechRailgunRailII:
 # 	Projectile: Railgun
 # 		BeamColor: FFFF44
 
+	BurstDelays: 8
+	Report: railuse5.aud
+	Warhead@RailgunPercentage: AreaDamagePercentage
+		Damage: 40
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	Warhead@Railgun_Heavy: AreaDamage
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+		PercentageScale: 250
+		Damage: 80000
+	Range: 8434
+	Burst: 2
 TSCommandoRailgun:
 	Inherits@wh: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
@@ -671,7 +648,9 @@ TSCommandoRailgun:
 		ValidTargets: Ground, Water, Air
 
 TSCommandoRailgunRail:
-	Inherits: TSCommandoRailgun
+	Inherits@w71: ^Warhead_Railgun_Heavy
+	Inherits@w72: ^Projectile_Railgun_Heavy
+	Inherits@w73: ^Effect_Railgun_Heavy
 	ReloadDelay: 52
 	Burst: 5
 	BurstDelays: 4
@@ -680,6 +659,18 @@ TSCommandoRailgunRail:
 	Warhead@Railgun_Heavy_ExtraDamage:
 		ValidTargets: Ground, Water, Air
 
+	Report: railuse5.aud
+	ValidTargets: Ground, Water, Air
+	Warhead@RailgunPercentage: AreaDamagePercentage
+		Damage: 20
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	Warhead@Railgun_Heavy: AreaDamage
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+		PercentageScale: 500
+		ValidTargets: Ground, Water, Air
+		Damage: 40000
+	Range: 7563
 TSZoneRailgun:
 	Inherits@wh: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
@@ -701,7 +692,9 @@ TSZoneRailgun:
 		ValidTargets: Ground, Water
 
 TSZoneRailgunRail:
-	Inherits: TSZoneRailgun
+	Inherits@w71: ^Warhead_Railgun_Heavy
+	Inherits@w72: ^Projectile_Railgun_Heavy
+	Inherits@w73: ^Effect_Railgun_Heavy
 	Projectile: Railgun
 		BeamColor: FFFF44
 	Warhead@Railgun_Heavy:
@@ -714,6 +707,9 @@ TSZoneRailgunRail:
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 		ValidTargets: Ground, Water
 
+	Report: railuse5.aud
+	ReloadDelay: 60
+	Range: 6230
 PitbullRockets:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
@@ -730,7 +726,7 @@ PitbullRockets:
 
 TSHoverMissile:
 	Inherits@missilerole: ^Warhead_MissileAP_Medium
-	Inherits: ^Effect_CannonAP_Medium
+	Inherits@fx: ^ts_gdi_set17
 	-Warhead@Glow:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 60
@@ -801,12 +797,6 @@ TSHoverMissile:
 		TrailInterval: 1
 	Warhead@Concrete:
 		Damage: 175
-	Warhead@Effect:
-		Explosions: poof
-		ImpactActors: false
-		ImpactSounds: xplos.aud
-	Warhead@EffectAir:
-		ImpactSounds: xplos.aud
 	Warhead@FlakWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		Spread: 125
@@ -852,6 +842,9 @@ TSHoverMissile:
 			Superheavy: 20
 			Wood: 10
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 12
 	Warhead@ShrapnelWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -878,7 +871,7 @@ TSHoverMissile:
 			Wood: 18
 TSDestroyerMissiles:
 	Inherits@missilerole: ^Warhead_MissileAP_Medium
-	Inherits: ^Effect_CannonAP_Medium
+	Inherits@fx: ^ts_gdi_set17
 	-Warhead@Glow:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 60
@@ -949,12 +942,6 @@ TSDestroyerMissiles:
 		TrailInterval: 1
 	Warhead@Concrete:
 		Damage: 175
-	Warhead@Effect:
-		Explosions: poof
-		ImpactActors: false
-		ImpactSounds: xplos.aud
-	Warhead@EffectAir:
-		ImpactSounds: xplos.aud
 	Warhead@FlakWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		Spread: 125
@@ -1000,6 +987,9 @@ TSDestroyerMissiles:
 			Superheavy: 20
 			Wood: 10
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 12
 	Warhead@ShrapnelWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -1027,7 +1017,7 @@ TSDestroyerMissiles:
 TSMammothTusk2_AA:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_MissileAP_Heavy
+	Inherits@fx: ^ts_gdi_set21
 	ValidTargets: Air
 	Projectile: Missile
 		Speed: 500
@@ -1043,8 +1033,6 @@ TSMammothTusk2_AA:
 	Burst: 2
 	BurstDelays: 8
 	Report: misl1.aud
-	Warhead@EffectAir: CreateEffect
-		Explosions: small_building
 	Warhead@MissileAA_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1058,7 +1046,7 @@ TSMammothTusk2_AA:
 TSMammothTusk2II_AA:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_MissileAP_Heavy
+	Inherits@fx: ^ts_gdi_set21
 	ValidTargets: Air
 	Projectile: Missile
 		Speed: 500
@@ -1074,8 +1062,6 @@ TSMammothTusk2II_AA:
 	ReloadDelay: 92
 	Burst: 2
 	BurstDelays: 8
-	Warhead@EffectAir: CreateEffect
-		Explosions: small_building
 	Warhead@MissileAA_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1096,16 +1082,6 @@ TSHellfireSonic:
 	Report: orcamis1.aud
 	ValidTargets: Ground, Water, Air
 	-Warhead@MissileAP_Heavy:
-	Warhead@EffectAir: CreateEffect
-		Explosions: med_explosion_air
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@EffectWater: CreateEffect
-		Explosions: med_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
 	Warhead@MissileSonic_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 42000
@@ -1118,13 +1094,21 @@ TSHellfireSonic:
 		ValidTargets: Ground, Water, Structure, wall
 
 TSZoneHellfire:
-	Inherits: TSHellfire
+	Inherits@w71: ^Warhead_MissileAP_Heavy
+	Inherits@w72: ^Projectile_Missile_Medium
+	Inherits@w73: ^ts_tiberiansun_tshellfire
 	ReloadDelay: 28
 	Range: 6138
 
 	Projectile: Missile
 		VerticalRateOfTurn: 16
 
+	Report: orcamis1.aud
+	Warhead@ShieldHit: GrantExternalCondition
+		Duration: 8
+	Warhead@MissileAP_Heavy: AreaDamage
+		FriendlyFireDamage: 25
+		Damage: 24000
 TSZoneHellfireSonic:
 	Inherits: TSZoneHellfire
 	Inherits@proj: ^Projectile_TS_Missile_Heavy
@@ -1149,7 +1133,7 @@ TSZoneHellfireSonic:
 TSGDIRedEye:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_MissileAP_Heavy
+	Inherits@fx: ^ts_gdi_tsgdiredeye
 	ReloadDelay: 30
 	Range: 12440
 	Report: rocket2.aud
@@ -1164,9 +1148,6 @@ TSGDIRedEye:
 		Acceleration: 5
 		AllowSnapping: true
 		CloseEnough: 500
-	Warhead@2Eff: CreateEffect
-		ImpactSounds: expnew13.aud
-		ImpactActors: false
 	Warhead@MissileAA_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1181,7 +1162,7 @@ TSBomb:
 	Inherits@finalmain: ^Warhead_Demolition_Heavy_Flat
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@wh2: ^Warhead_Demolition_Heavy
-	Inherits@fx: ^Effect_Demolition_Heavy
+	Inherits@fx: ^ts_gdi_tsbomb
 	ReloadDelay: 38
 	Burst: 5
 	BurstDelays: 3
@@ -1192,15 +1173,6 @@ TSBomb:
 		Acceleration: 0, 0, -10
 		Image: 120mm
 		Shadow: true
-	Warhead@Effect: CreateEffect
-		Explosions: small_frag
-		ImpactSounds: expnew09.aud
-		ValidTargets: Ground, Air
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: ssplash3.aud
-		ValidTargets: Water
-		InvalidTargets: Vehicle
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Heavy:
 	Warhead@Demolition_Heavy_Flat:
@@ -1236,7 +1208,7 @@ TSBombSonic:
 TSMobile_EMP:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
-	Inherits@fx: ^Effect_Tesla_Heavy
+	Inherits@fx: ^ts_gdi_tsmobile_emp
 	Report: mobemp1.aud
 	Range: 1512
 	ReloadDelay: 200
@@ -1244,38 +1216,27 @@ TSMobile_EMP:
 	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
-		Damage: 64000
-		Spread: 813
-	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
-		DamageTypes: Tesla
-		ValidTargets: Ground, Water
-		Falloff: 100, 75, 50, 25
-		Damage: 32000
+		Damage: 96000
 		Spread: 813
 	Warhead@EMPUnit: AffectsIntegrity
+		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
 		Damage: 250000
 		Spread: 813
 	# Warhead@1: TargetDamage
-	# Warhead@2Con: GrantExternalCondition
+	# Warhead@2Con: ApplyPhysicalState
 	# 	Condition: empdisable
 	# 	Duration: 240
 	# 	Range: 4c512
 	# 	ValidTargets: Vehicle, Defense, Cyborg
 	# 	ValidRelationships: Neutral, Enemy
-	Warhead@Effect: CreateEffect
-		ValidTargets: Ground, Water
-		Explosions: mobileemp
-		ExplosionPalette: ra2unit
-		ImpactSounds: mobemp1.aud
-		ImpactActors: false
-		AffectsParent: true
 
+	-Warhead@Tesla_Heavy_ExtraDamage:
 TSShotgun:
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
-	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@fx: ^ts_gdi_tsshotgun
 	ReloadDelay: 46
 	Range: 4002
 	Report: DSDSHTGN.wav
@@ -1294,6 +1255,10 @@ TSShotgun:
 	-Warhead@ShotgunGrenadeEnemy:
 
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Duration: 4
+		Range: 1250
+		ValidTargets: Shielded
 		InvalidTargets: Air
 	Projectile: Bullet
 	Warhead@GrenadePercentage: AreaDamagePercentage
@@ -1342,15 +1307,6 @@ TSShotgun:
 		InvalidTargets: Air
 	Warhead@Concrete:
 		Damage: 25
-	Warhead@Effect:
-		Explosions: piffs
-		ImpactSounds: xplosml2.aud
-		ValidTargets: Ground, Ship, Air
-		ImpactActors: false
-	Warhead@EffectAir:
-		Explosions: big_explosion_air
-	Warhead@EffectWater:
-		Explosions: water_piffs
 	Warhead@Glow:
 		Scale: 0.8
 		FadeFrames: 15
@@ -1723,6 +1679,7 @@ TSMechMGII:
 		ValidTargets: Ground, Water
 TSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 	Inherits: IonCannon
+	Inherits@fx: ^ts_gdi_tsioncannon
 	Report: tesla1.aud
 	Range: 12288
 	AirThreshold: 8c0
@@ -1745,21 +1702,6 @@ TSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 		Weapon: TSIonBeamMiniEnd
 		ValidTargets: Ground, Water, Air
 		AirThreshold: 8c0
-	Warhead@3Smu_area: LeaveSmudge
-		Delay: 110
-		SmudgeType: Scorch
-		Size: 3,2
-		AirThreshold: 8c0
-	Warhead@Effect: CreateEffect
-		Delay: 110
-		Image: tsioncannon
-		Explosions: ionring
-		ExplosionPalette: tseffect
-		ImpactSounds: ion1.aud
-		AffectsParent: true
-		ImpactActors: false
-		ValidTargets: Ground, Water, Air
-		AirThreshold: 8c0
 	Warhead@Shake: ShakeScreen
 		Duration: 15
 		Intensity: 8
@@ -1774,11 +1716,6 @@ TSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 		Spread: 6000
 		Damage: 8
 		Delay: 108
-	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
-		DamageTypes: Tesla
-		Spread: 600
-		Damage: 8000
-		Delay: 109
 	Warhead@TeslaWeapon: SpreadDamage
 		Spread: 1600
 		Damage: 6000
@@ -1787,11 +1724,6 @@ TSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 		Spread: 6000
 		Damage: 6
 		Delay: 111
-	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
-		DamageTypes: Tesla
-		Spread: 600
-		Damage: 8000
-		Delay: 112
 	Warhead@IonCannon: SpreadDamage
 		Range: 0, 600, 1400, 2000, 2820
 		Damage: 16000
@@ -1804,8 +1736,13 @@ TSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 		Delay: 115
 	-Warhead@2Smu_impact:
 
+	Warhead@Tesla_Super:
+		Damage: 216000
+	-Warhead@Tesla_Super_ExtraDamage:
+	-Warhead@Tesla_Heavy_ExtraDamage:
 TSIonBeamMini:
 	Inherits: ^TSIonBeam
+	Inherits@fx: ^ts_gdi_tsionbeammini
 	Report: tesla1.aud
 	Range: 5376
 	AirThreshold: 8c0
@@ -1817,8 +1754,6 @@ TSIonBeamMini:
 		ExplosionInterval: 3
 		Speed: 52
 		RotSpeed: 12
-	Warhead@Effect: CreateEffect
-		Explosions: blue_poof
 
 TSIonBeamMiniEnd:
 	Inherits: ^TSIonBeam
@@ -1843,12 +1778,8 @@ TSIonbeam:
 		StayTicks: 39
 
 DropPodExplode:
-	Warhead@Effect: CreateEffect
-		Explosions: tspodring
-		ExplosionPalette: tseffect
-		ValidTargets: Ground, Air, Water
-		ImpactActors: false
 
+	Inherits@fx: ^ts_gdi_droppodexplode
 TSDroppodSpawner:
 	Projectile: InstantExplode
 	ValidTargets: Ground, Water, Air
@@ -1896,25 +1827,50 @@ TSDroppod1:
 	# pods have never scattered. Removed rather than moved, because the scatter belongs on the
 	# FIRED weapon (E1Droppod) or its projectile, and neither carries one today — so putting it
 	# there would CHANGE behaviour rather than restore it. That is a balance call.
-	Warhead@Effect: CreateEffect
-		ImpactSounds: meteor1.aud, meteor2.aud
-		ValidTargets: Ground, Air, Water
 
+	Inherits@fx: ^ts_gdi_tsdroppod1
 TSDroppod2:
-	Inherits: TSDroppod1
+	Inherits@w71: ^ts_gdi_tsdroppod1
 	Warhead@1: FireShrapnel
 		Weapon: E2Droppod
+		ValidTargets: Infantry, Vehicle, Building, Wall, Ground, Water, Air
+		ImpactActors: false
+		AirThreshold: 8c0
+		AimChance: 25
+		Amount: 1
 
+	Range: 2500
+	Projectile: AthenaProjectile
+		Altitude: 25460
+	Warhead@Dam: TargetDamage
 TSDroppod3:
-	Inherits: TSDroppod1
+	Inherits@w71: ^ts_gdi_tsdroppod1
 	Warhead@1: FireShrapnel
 		Weapon: E3Droppod
+		ValidTargets: Infantry, Vehicle, Building, Wall, Ground, Water, Air
+		ImpactActors: false
+		AirThreshold: 8c0
+		AimChance: 25
+		Amount: 1
 
+	Range: 2500
+	Projectile: AthenaProjectile
+		Altitude: 25460
+	Warhead@Dam: TargetDamage
 TSDroppod4:
-	Inherits: TSDroppod1
+	Inherits@w71: ^ts_gdi_tsdroppod1
 	Warhead@1: FireShrapnel
 		Weapon: MediDroppod
+		ValidTargets: Infantry, Vehicle, Building, Wall, Ground, Water, Air
+		ImpactActors: false
+		AirThreshold: 8c0
+		AimChance: 25
+		Amount: 1
 
+	Range: 2500
+	Projectile: AthenaProjectile
+		Altitude: 25460
+	Warhead@Dam: TargetDamage
 E1Droppod:
 	ValidTargets: Ground, Air
 	InvalidTargets: Water
@@ -1923,40 +1879,54 @@ E1Droppod:
 		Image: tsdroppod
 		TrailImage: ts_small_smoke_trail
 		Palette: ra2
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: Crater
-	Warhead@Effect: CreateEffect
-		Image: tsdroppod
-		Explosions: ring
-		ExplosionPalette: tseffect
-		ImpactSounds: expnew12.aud
-		ValidTargets: Ground, Air, Water
-		ImpactActors: false
-		AirThreshold: 8c0
-	Warhead@Effect2: CreateEffect
-		Image: tsdroppod
-		Explosions: fade1, fade2
-		ExplosionPalette: tseffect
-		ValidTargets: Ground, Air, Water
-		ImpactActors: false
-		AirThreshold: 8c0
 	Warhead@Spawn: SpawnActor
 		Actors: ts_gdi_lightinfantry
 		Range: 2
 		ImpactActors: false
 		AirThreshold: 8c0
 
+	Inherits@fx: ^ts_gdi_e1droppod
 E2Droppod:
-	Inherits: E1Droppod
+	Inherits@w71: ^ts_gdi_e1droppod
 	Warhead@Spawn: SpawnActor
 		Actors: ts_gdi_discthrower
+		AirThreshold: 8c0
+		ImpactActors: false
+		Range: 2
 
+	Projectile: Bullet
+		TrailImage: ts_small_smoke_trail
+		Image: tsdroppod
+		Speed: 300
+		Palette: ra2
+	InvalidTargets: Water
+	ValidTargets: Ground, Air
 E3Droppod:
-	Inherits: E1Droppod
+	Inherits@w71: ^ts_gdi_e1droppod
 	Warhead@Spawn: SpawnActor
 		Actors: ts_gdi_falconenforcer
+		AirThreshold: 8c0
+		ImpactActors: false
+		Range: 2
 
+	Projectile: Bullet
+		TrailImage: ts_small_smoke_trail
+		Image: tsdroppod
+		Speed: 300
+		Palette: ra2
+	InvalidTargets: Water
+	ValidTargets: Ground, Air
 MediDroppod:
-	Inherits: E1Droppod
+	Inherits@w71: ^ts_gdi_e1droppod
 	Warhead@Spawn: SpawnActor
 		Actors: ts_gdi_medic
+		AirThreshold: 8c0
+		ImpactActors: false
+		Range: 2
+	Projectile: Bullet
+		TrailImage: ts_small_smoke_trail
+		Image: tsdroppod
+		Speed: 300
+		Palette: ra2
+	InvalidTargets: Water
+	ValidTargets: Ground, Air

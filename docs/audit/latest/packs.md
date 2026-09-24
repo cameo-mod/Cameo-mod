@@ -53,6 +53,7 @@
 | susacannon | 0 | 2 | mods\cameo\rules\shockwave.yaml |
 | susapower | 0 | 2 | mods\cameo\rules\shockwave.yaml |
 | susasupply | 0 | 2 | mods\cameo\rules\shockwave.yaml |
+| ts | 39 | 2 | mods\cameo\rules\misc.yaml |
 | wc2_h | 0 | 2 | mods\cameo\rules\warcraft2.yaml |
 | wc2_o | 0 | 2 | mods\cameo\rules\warcraft2.yaml |
 | win98 | 0 | 2 | mods\cameo\rules\win98.yaml |
@@ -94,7 +95,6 @@
 | swlaat | 0 | 1 | mods\cameo\rules\starwars.yaml |
 | swxwing | 0 | 1 | mods\cameo\rules\starwars.yaml |
 | td_nod | 70 | 1 | mods\cameo\rules\tiberiaalliances.yaml |
-| ts | 39 | 1 | mods\cameo\rules\misc.yaml |
 | upsusagunship3 | 0 | 1 | mods\cameo\rules\shockwave.yaml |
 | upusaleaflet | 0 | 1 | mods\cameo\rules\generals.yaml |
 | wc2 | 0 | 1 | mods\cameo\rules\warcraft2.yaml |
@@ -116,81 +116,55 @@
 | worms | 0 | 1 | mods\cameo\rules\worms.yaml |
 | zmcv | 0 | 1 | mods\cameo\rules\z.yaml |
 
-Fully converted prefixes (79): air, asianalliance, atreides, banshee, cabal, cargoship, carryall, cgcnst, combat, corrino, cruiser, cryo, d2k, deathcash, drone, duelist, egcnst, eye, farasha, forgotten, fremen, futuretech, grun, harbinger, harkonnen, heavy, heavydrone, inspect, ixian, japan, landcarr, latinsyndicate, light, mig, missile, nax, naxis, ordos, ornithopter, protoss, qacst, ra1_allies, ra1_badger, ra2_allies, ra2_soviets, ra2_yuri, ra2hind, resonance, rocket, schwarzermond, scrapcar, scrapcar2, siege, sietch, sonic, steelconsortium, swarmer, td_gdi, team, terran, tkm, ts_bus, ts_gdi, ts_nod, ts_pickup, ts_pickupb, ts_sedan, ts_trucka, ts_truckb, ts_wini, twister, up, upgrade, wc2_humans, wc2_orcs, wraith, yakolev, yuri, zerg
+Fully converted prefixes (50): asianalliance, atreides, cabal, corrino, d2k, farasha, forgotten, fremen, futu, futuretech, harkonnen, ixian, japan, latin, latinsyndicate, light, missile, nax, naxis, ordos, protoss, ra1_allies, ra1_badger, ra2_allies, ra2_soviets, ra2_yuri, schwarzermond, siege, sietch, steel, steelconsortium, td_gdi, team, terran, tkm, ts_bus, ts_gdi, ts_nod, ts_pickup, ts_pickupb, ts_sedan, ts_trucka, ts_truckb, ts_wini, up, upgrade, wc2_humans, wc2_orcs, yuri, zerg
 
 ## P2 — actors whose id does not match the pack's dominant prefix
 
 | pack | actor | dominant prefix |
 |---|---|---|
-| D2k/Atreides | ornithopter_husk.atreides | atreides |
-| D2k/Atreides | upgrade_conyard.atreides | atreides |
-| D2k/Atreides | upgrade_barracks.atreides | atreides |
-| D2k/Atreides | upgrade_light.atreides | atreides |
-| D2k/Atreides | upgrade_heavy.atreides | atreides |
-| D2k/Atreides | upgrade_radar.atreides | atreides |
-| D2k/Atreides | combat_tank_husk.atreides | atreides |
-| D2k/Atreides | sonic_tank_husk.atreides | atreides |
-| D2k/Atreides | siege_tank_husk.atreides | atreides |
-| D2k/Corrino | carryall_husk.corrino | corrino |
-| D2k/Corrino | upgrade_conyard.corrino | corrino |
-| D2k/Corrino | upgrade_barracks.corrino | corrino |
-| D2k/Corrino | upgrade_light.corrino | corrino |
-| D2k/Corrino | upgrade_heavy.corrino | corrino |
-| D2k/Corrino | upgrade_radar.corrino | corrino |
-| D2k/Corrino | siege_tank_husk.corrino | corrino |
-| D2k/Harkonnen | carryall_husk.harkonnen | harkonnen |
-| D2k/Harkonnen | upgrade_conyard.harkonnen | harkonnen |
-| D2k/Harkonnen | upgrade_barracks.harkonnen | harkonnen |
-| D2k/Harkonnen | upgrade_light.harkonnen | harkonnen |
-| D2k/Harkonnen | upgrade_heavy.harkonnen | harkonnen |
-| D2k/Harkonnen | upgrade_radar.harkonnen | harkonnen |
-| D2k/Harkonnen | combat_tank.harkonnen | harkonnen |
 | D2k/Harkonnen | missile_tank | harkonnen |
-| D2k/Ixian | air_drone_husk.ixian | ixian |
-| D2k/Ixian | drone_husk.ixian | ixian |
-| D2k/Ixian | resonance_drone_husk.ixian | ixian |
-| D2k/Ixian | farasha_husk.ixian | ixian |
-| D2k/Ixian | heavydrone_husk.ixian | ixian |
 | D2k/Ixian | farasha_drone_ixian | ixian |
-| D2k/Ixian | farasha_drone_husk.ixian | ixian |
-| D2k/Ixian | heavy_inf.ixian | ixian |
 | D2k/Ixian | team_upgrade.d2k_advanced_ixian_technology | ixian |
-| D2k/Ixian | rocket_raider.ixian | ixian |
-| D2k/Ixian | heavy_rocket_raider.ixian | ixian |
-| D2k/Ixian | duelist_tank.ixian | ixian |
-| D2k/Ordos | wraith_husk.ordos | ordos |
-| D2k/Ordos | swarmer_husk.ordos | ordos |
-| D2k/Ordos | banshee_husk.ordos | ordos |
-| D2k/Ordos | eye_husk.ordos | ordos |
-| D2k/Ordos | carryall_reinforce.ordos | ordos |
-| D2k/Ordos | carryall_husk.ordos | ordos |
-| D2k/Ordos | carryall_huskvtol.ordos | ordos |
 | D2k/Ordos | team_upgrade.ordos_stealthtechnology | ordos |
-| RedAlert2Mod/Consortium | inspect_husk.steel | steelconsortium |
-| RedAlert2Mod/Consortium | twister_husk.steel | steelconsortium |
-| RedAlert2Mod/Consortium | grun_husk.steel | steelconsortium |
-| RedAlert2Mod/Consortium | cargoship_husk.steel | steelconsortium |
-| RedAlert2Mod/Consortium | cruiser_husk.steel | steelconsortium |
-| RedAlert2Mod/Consortium | cruiser_f_husk.steel | steelconsortium |
-| RedAlert2Mod/Consortium | cruiser_f.steel | steelconsortium |
-| RedAlert2Mod/Consortium | qacst_infiltrated.steel | steelconsortium |
+| RedAlert2Mod/Consortium | steel_inspect_husk | steelconsortium |
+| RedAlert2Mod/Consortium | steel_twister_husk | steelconsortium |
+| RedAlert2Mod/Consortium | steel_grun_husk | steelconsortium |
+| RedAlert2Mod/Consortium | steel_cargoship_husk | steelconsortium |
+| RedAlert2Mod/Consortium | steel_cruiser_husk | steelconsortium |
+| RedAlert2Mod/Consortium | steel_cruiser_f_husk | steelconsortium |
+| RedAlert2Mod/Consortium | steel_cruiser_f | steelconsortium |
+| RedAlert2Mod/Consortium | steel_scalpelMG | steelconsortium |
+| RedAlert2Mod/Consortium | steel_scalpelQuantumCannon | steelconsortium |
+| RedAlert2Mod/Consortium | steel_scalpelAA | steelconsortium |
+| RedAlert2Mod/Consortium | steel_qacst_infiltrated | steelconsortium |
 | RedAlert2Mod/Consortium | up_team_shielresistance.steel | steelconsortium |
-| RedAlert2Mod/FutureTech | cryo_husk.futu | futuretech |
-| RedAlert2Mod/FutureTech | harbinger_husk.futu | futuretech |
-| RedAlert2Mod/FutureTech | landcarr_drone.futu | futuretech |
-| RedAlert2Mod/FutureTech | egcnst_infiltrated.futu | futuretech |
+| RedAlert2Mod/Consortium | steel_cougar | steelconsortium |
+| RedAlert2Mod/Consortium | steel_hummer | steelconsortium |
+| RedAlert2Mod/Consortium | steel_oldqtnk | steelconsortium |
+| RedAlert2Mod/Consortium | steel_cobra | steelconsortium |
+| RedAlert2Mod/FutureTech | futu_cryo_husk | futuretech |
+| RedAlert2Mod/FutureTech | futu_harbinger_husk | futuretech |
+| RedAlert2Mod/FutureTech | futu_landcarr_drone | futuretech |
+| RedAlert2Mod/FutureTech | futu_egcnst_infiltrated | futuretech |
 | RedAlert2Mod/Naxis | nax_bitsmark | naxis |
-| RedAlert2Mod/Syndicate | ra2hind_husk.latin | latinsyndicate |
-| RedAlert2Mod/Syndicate | yakolev_husk.latin | latinsyndicate |
-| RedAlert2Mod/Syndicate | mig_husk.latin | latinsyndicate |
-| RedAlert2Mod/Syndicate | cgcnst_infiltrated.latin | latinsyndicate |
+| RedAlert2Mod/Syndicate | latin_ra2hind_husk | latinsyndicate |
+| RedAlert2Mod/Syndicate | latin_yakolev_husk | latinsyndicate |
+| RedAlert2Mod/Syndicate | latin_mig_husk | latinsyndicate |
+| RedAlert2Mod/Syndicate | latin_cgyard | latinsyndicate |
+| RedAlert2Mod/Syndicate | latin_triton | latinsyndicate |
+| RedAlert2Mod/Syndicate | latin_sub | latinsyndicate |
+| RedAlert2Mod/Syndicate | latin_rammax | latinsyndicate |
+| RedAlert2Mod/Syndicate | latin_cgcnst_infiltrated | latinsyndicate |
 | RedAlert2Mod/Syndicate | up_team_ngbunk2.latin | latinsyndicate |
 | RedAlert2Mod/Syndicate | up_team_cashrecover.latin | latinsyndicate |
-| RedAlert2Mod/Syndicate | deathcash_small.latin | latinsyndicate |
-| RedAlert2Mod/Syndicate | scrapcar_demo.latin | latinsyndicate |
-| RedAlert2Mod/Syndicate | scrapcar_driveby.latin | latinsyndicate |
-| RedAlert2Mod/Syndicate | scrapcar2_demo.latin | latinsyndicate |
-| RedAlert2Mod/Syndicate | scrapcar2_driveby.latin | latinsyndicate |
+| RedAlert2Mod/Syndicate | latin_deathcash | latinsyndicate |
+| RedAlert2Mod/Syndicate | latin_deathcash_small | latinsyndicate |
+| RedAlert2Mod/Syndicate | latin_scrapcar | latinsyndicate |
+| RedAlert2Mod/Syndicate | latin_scrapcar_demo | latinsyndicate |
+| RedAlert2Mod/Syndicate | latin_scrapcar_driveby | latinsyndicate |
+| RedAlert2Mod/Syndicate | latin_scrapcar2 | latinsyndicate |
+| RedAlert2Mod/Syndicate | latin_scrapcar2_demo | latinsyndicate |
+| RedAlert2Mod/Syndicate | latin_scrapcar2_driveby | latinsyndicate |
 
 ## P3 — content.yaml manifest vs disk / nonstandard filenames
 
@@ -202,6 +176,6 @@ Fully converted prefixes (79): air, asianalliance, atreides, banshee, cabal, car
 
 ## P4 — naming summary (counts; details via gen_rename_maps)
 
-- actor ids violating the lowercase grammar: **1537** (e.g. 1TNK.camea, 2100A2MAT, 2100A2PT, 2100A2TIT, 2100A2VET, 2100AA, 2100AACH, 2100AAMAT)
+- actor ids violating the lowercase grammar: **1532** (e.g. 1TNK.camea, 2100A2MAT, 2100A2PT, 2100A2TIT, 2100A2VET, 2100AA, 2100AACH, 2100AAMAT)
 
-Total findings: 677
+Total findings: 652

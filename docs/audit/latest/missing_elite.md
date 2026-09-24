@@ -97,10 +97,10 @@ Buildable actors with ^GainsExperienceRA2 but NO Armament@*ELITE*: **197**
 | ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml | 385 | asianalliance_tsun | RedAlert2Mod/AsianAlliance |
 | ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml | 556 | asianalliance_type89mlrs | RedAlert2Mod/AsianAlliance |
 | ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml | 897 | asianalliance_warturtle | RedAlert2Mod/AsianAlliance |
-| ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml | 560 | cobra.steel | RedAlert2Mod/Consortium |
-| ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml | 368 | cougar.steel | RedAlert2Mod/Consortium |
-| ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml | 526 | cruiser_f.steel | RedAlert2Mod/Consortium |
-| ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml | 494 | oldqtnk.steel | RedAlert2Mod/Consortium |
+| ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml | 560 | steel_cobra | RedAlert2Mod/Consortium |
+| ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml | 368 | steel_cougar | RedAlert2Mod/Consortium |
+| ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml | 526 | steel_cruiser_f | RedAlert2Mod/Consortium |
+| ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml | 494 | steel_oldqtnk | RedAlert2Mod/Consortium |
 | ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml | 488 | steelconsortium_antiairquantummissileturret | RedAlert2Mod/Consortium |
 | ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml | 1038 | steelconsortium_barracuda | RedAlert2Mod/Consortium |
 | ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml | 640 | steelconsortium_bfg10000 | RedAlert2Mod/Consortium |
@@ -114,6 +114,7 @@ Buildable actors with ^GainsExperienceRA2 but NO Armament@*ELITE*: **197**
 | ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml | 555 | steelconsortium_quantumcannon | RedAlert2Mod/Consortium |
 | ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml | 620 | steelconsortium_supportshieldgenerator | RedAlert2Mod/Consortium |
 | ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml | 279 | steelconsortium_whiterabbit | RedAlert2Mod/Consortium |
+| ContentPacks/RedAlert2Mod/FutureTech/yaml/aircraft.yaml | 310 | futu_landcarr_drone | RedAlert2Mod/FutureTech |
 | ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml | 780 | futuretech_athenacannon | RedAlert2Mod/FutureTech |
 | ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml | 510 | futuretech_beehivedronecarrier | RedAlert2Mod/FutureTech |
 | ContentPacks/RedAlert2Mod/FutureTech/yaml/aircraft.yaml | 80 | futuretech_cryocopter | RedAlert2Mod/FutureTech |
@@ -125,7 +126,6 @@ Buildable actors with ^GainsExperienceRA2 but NO Armament@*ELITE*: **197**
 | ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml | 709 | futuretech_prospectormk2 | RedAlert2Mod/FutureTech |
 | ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml | 529 | futuretech_repairdroid | RedAlert2Mod/FutureTech |
 | ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml | 376 | futuretech_riptideacv | RedAlert2Mod/FutureTech |
-| ContentPacks/RedAlert2Mod/FutureTech/yaml/aircraft.yaml | 310 | landcarr_drone.futu | RedAlert2Mod/FutureTech |
 | ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml | 181 | naxis_airfield | RedAlert2Mod/Naxis |
 | ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml | 1168 | naxis_bmwbike | RedAlert2Mod/Naxis |
 | ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml | 1424 | naxis_car | RedAlert2Mod/Naxis |
@@ -156,6 +156,7 @@ Buildable actors with ^GainsExperienceRA2 but NO Armament@*ELITE*: **197**
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/buildings.yaml | 201 | schwarzermond_lasertower | RedAlert2Mod/SchwarzerMond |
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml | 631 | schwarzermond_mars | RedAlert2Mod/SchwarzerMond |
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/buildings.yaml | 267 | schwarzermond_sturmcannon | RedAlert2Mod/SchwarzerMond |
+| ContentPacks/RedAlert2Mod/Syndicate/yaml/naval.yaml | 80 | latin_sub | RedAlert2Mod/Syndicate |
 | ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml | 643 | latinsyndicate_bunkertower | RedAlert2Mod/Syndicate |
 | ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml | 862 | latinsyndicate_carteltruck | RedAlert2Mod/Syndicate |
 | ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml | 43 | latinsyndicate_combatbarracks | RedAlert2Mod/Syndicate |
@@ -165,7 +166,6 @@ Buildable actors with ^GainsExperienceRA2 but NO Armament@*ELITE*: **197**
 | ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml | 701 | latinsyndicate_smlturret | RedAlert2Mod/Syndicate |
 | ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml | 86 | latinsyndicate_tankkiller | RedAlert2Mod/Syndicate |
 | ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml | 1329 | latinsyndicate_topolm | RedAlert2Mod/Syndicate |
-| ContentPacks/RedAlert2Mod/Syndicate/yaml/naval.yaml | 80 | sub.latin | RedAlert2Mod/Syndicate |
 | ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml | 462 | tkm_abrams | RedAlert2Mod/TKM |
 | ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml | 83 | tkm_as42 | RedAlert2Mod/TKM |
 | ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml | 1078 | tkm_battlebus | RedAlert2Mod/TKM |
