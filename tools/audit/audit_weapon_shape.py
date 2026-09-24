@@ -106,8 +106,8 @@ W4_BASELINE = 52    # dual ^Effect_ inherit; Apocalypse effect composition owns 
                     # the old prefix-only classifier. Same class as the W2
                     # ^Compatibility_* rename: measurement fix, not new debt.
 W5_BASELINE = 389   # more than one resolved MAIN warhead; merge-payload repairs
-W6_BASELINE = 448   # weapons declaring an effect warhead locally;
-                    # 694 -> 737 -> 692 -> 683 -> 644 -> 602 -> 514 -> 448:
+W6_BASELINE = 447   # weapons declaring an effect warhead locally;
+                    # 694 -> 737 -> 692 -> 683 -> 644 -> 602 -> 514 -> 448 -> 447:
                     # W27 batches 3-6 extracted D2k, TD, TS pack nodes plus
                     # the legacy d2k/tiberiandawn/tiberiansun files into
                     # per-game effects_*.yaml family libraries.
