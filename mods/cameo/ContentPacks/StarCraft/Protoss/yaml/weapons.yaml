@@ -1264,7 +1264,7 @@ ManifoldMG:
 	Inherits: ^Warhead_Concussion_Light
 	Inherits@2: ^Warhead_CannonHE_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^RA2Chaingun
+	Inherits@4: ^SCRA2Chaingun
 	Report: blastgn2.aud
 	ValidTargets: Ground, Water
 	Range: 4780
@@ -1327,7 +1327,7 @@ AtreusMG:
 	Inherits@4: ^Grenade
 	Inherits@5: ^MediumMissile
 	Inherits@6: ^FlakWeapon
-	Inherits@7: ^RA2Chaingun
+	Inherits@7: ^SCRA2Chaingun
 	Report: blastgn2.aud
 	ValidTargets: Ground, Water, Air
 	Range: 4500
@@ -1472,3 +1472,492 @@ PatriarchShoot4:
 	Inherits: PatriarchShoot
 	Range: 1000
 	-Warhead@shrapnel:
+
+^sc_protoss_waveforcecannonchargedlaser:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@Effect: CreateEffect
+		Explosions: purple_plasma
+		ImpactSounds: psahit00.aud
+		ValidTargets: Ship, Structure, Bridge, Ground
+	Warhead@EffectAir: CreateEffect
+		ImpactSounds: psahit00.aud
+		Explosions: purple_plasma
+		ValidTargets: Air
+	Warhead@EffectWater: CreateEffect
+		ImpactSounds: psahit00.aud
+		Explosions: purple_plasma
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+
+ProtossWaveforceCannonChargedLaser:
+	Inherits@wh2: ^Warhead_Railgun_Heavy
+	Inherits@proj: ^Projectile_Railgun_Heavy
+	Inherits: ^sc_protoss_waveforcecannonchargedlaser
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 15
+		Range: 1250
+		ValidTargets: Shielded
+	Report: bigggun1.aud
+	ReloadDelay: 120
+	Range: 9343
+	ValidTargets: Ground, Water, Air
+	Projectile: LaserZap
+		Width: 256
+		Duration: 16
+		ZOffset: 2047
+		Color: 4488FF44
+		SecondaryBeam: true
+		SecondaryBeamWidth: 128
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFF
+		Inaccuracy: 100
+	Warhead@Railgun_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@MissileHE_Heavy: AreaDamage
+		Versus:
+			None: 79
+			Light: 126
+			Medium: 118
+			Heavy: 114
+			Superheavy: 113
+			Scout: 129
+			Plate: 63
+			Concrete: 115
+			Wood: 128
+			Steel: 116
+			Flak: 75
+			Heroic: 62
+			Bomber: 95
+			Fighter: 103
+			Helicopter: 85
+			Spaceship: 76
+			ARMOR: 70
+			BLAST: 45
+			COMPOSITE: 88
+			HAZMAT: 76
+			REFLECTOR: 70
+			Shield: 169
+		PercentageVersus:
+			None: 13
+			Light: 23
+			Medium: 21
+			Heavy: 19
+			Superheavy: 18
+			Scout: 25
+			Plate: 11
+			Concrete: 20
+			Wood: 24
+			Steel: 22
+			Flak: 12
+			Heroic: 10
+			Bomber: 16
+			Fighter: 17
+			Helicopter: 15
+			Spaceship: 14
+			Shield: 35
+		ValidTargets: Ground, Water, Air
+		Damage: 20000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 200
+		Falloff: 100, 45, 15, 0
+		PercentageScale: 10000
+		PercentageSpread: 50
+	Warhead@Railgun_Heavy_ExtraDamage:
+		ValidTargets: Ground, Water, Air
+	-Warhead@Railgun_Heavy:
+
+^sc_protoss_waveforcecannondistortedbeam1:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 200
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		ImpactSounds: psahit00.aud
+		Explosions: purple_plasma
+		ValidTargets: Ship, Structure, Bridge, Ground
+	Warhead@EffectAir: CreateEffect
+		ImpactSounds: psahit00.aud
+		Explosions: purple_plasma
+		ValidTargets: Air
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		ImpactSounds: psahit00.aud
+		Explosions: purple_plasma
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
+ProtossWaveforceCannonDistortedBeam1:
+	Inherits@roleflat: ^Warhead_Waveforce_Heavy
+	Inherits: ^sc_protoss_waveforcecannondistortedbeam1
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 1000
+		Spread: 1
+		InvalidTargets: Shielded
+		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
+		ValidRelationships: Neutral, Enemy
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 120
+	Range: 9343
+	Report: tnkfire6.aud
+	Projectile: KKNDLaser
+		Duration: 16
+		Color: 8844FFAA
+		InnerLightness: 160
+		OuterLightness: 80
+		Radius: 2
+		Distortion: 160
+		DistortionAnimation: 80
+		SegmentLength: 400
+		Inaccuracy: 100
+		Image: 120MM
+		Speed: 500
+		Shadow: true
+	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 50
+		Damage: 5
+		Versus:
+			REFLECTOR: 50
+			Shield: 35
+			Heroic: 25
+			Plate: 24
+			Flak: 23
+			None: 22
+			Superheavy: 21
+			Heavy: 20
+			Medium: 19
+			Light: 18
+			Scout: 17
+			Steel: 16
+			Concrete: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
+	TargetActorCenter: false
+	Warhead@TeslaWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 5000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	-Warhead@TeslaExtraDamage:
+	-Warhead@TeslaWeapon:
+	Warhead@Waveforce_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 25000
+		PercentageScale: 0
+	Warhead@HeavyCannonPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 225
+		Damage: 5
+		Versus:
+			Scout: 25
+			Wood: 24
+			Light: 23
+			Concrete: 22
+			Medium: 21
+			Steel: 20
+			Heavy: 19
+			None: 18
+			Superheavy: 17
+			Flak: 16
+			Plate: 15
+			Heroic: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
+
+^sc_protoss_waveforcecannondistortedbeam2:
+	Warhead@Effect: CreateEffect
+		Explosions: purple_plasma
+		ImpactSounds: psahit00.aud
+		ImpactActors: false
+		GlowScale: 2.0
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
+		ValidTargets: Ship, Structure, Bridge, Ground
+	Warhead@EffectAir: CreateEffect
+		ImpactSounds: psahit00.aud
+		Explosions: purple_plasma
+		ValidTargets: Air
+	Warhead@EffectWater: CreateEffect
+		ImpactSounds: psahit00.aud
+		Explosions: purple_plasma
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+
+ProtossWaveforceCannonDistortedBeam2:
+	Inherits@wh2: ^Warhead_Flame_Heavy
+	Inherits@proj: ^Projectile_Chem_Heavy
+	Inherits: ^sc_protoss_waveforcecannondistortedbeam2
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@GroundFire: SpawnActor
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Report: flamer2.aud
+	ReloadDelay: 120
+	Range: 9343
+	ValidTargets: Ground, Water, Air
+	Projectile: KKNDLaser
+		Duration: 16
+		Color: FF448888
+		InnerLightness: 80
+		OuterLightness: 40
+		Radius: 2
+		Distortion: 80
+		DistortionAnimation: 40
+		SegmentLength: 200
+		Inaccuracy: 100
+	Warhead@Chemical_Heavy: AreaDamage
+		Versus:
+			None: 91
+			Light: 108
+			Medium: 130
+			Heavy: 147
+			Superheavy: 166
+			Scout: 83
+			Plate: 162
+			Concrete: 111
+			Wood: 60
+			Steel: 80
+			Flak: 126
+			Heroic: 81
+			Bomber: 58
+			Fighter: 49
+			Helicopter: 68
+			Spaceship: 82
+			ARMOR: 70
+			BLAST: 73
+			COMPOSITE: 61
+			HAZMAT: 51
+			REFLECTOR: 96
+			Shield: 236
+		PercentageVersus:
+			None: 18
+			Light: 19
+			Medium: 21
+			Heavy: 23
+			Superheavy: 25
+			Scout: 17
+			Plate: 22
+			Concrete: 16
+			Wood: 14
+			Steel: 15
+			Flak: 20
+			Heroic: 24
+			Bomber: 11
+			Fighter: 10
+			Helicopter: 12
+			Spaceship: 13
+			Shield: 35
+		ValidTargets: Ground, Water, Air
+		Damage: 20000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 366
+		Falloff: 100, 88, 72, 50, 0
+		PhysicalStates:
+			Corrosion: 100
+		PercentageScale: 10000
+		PercentageSpread: 50
+	Warhead@Flame_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	-Warhead@Flame_Heavy:
+
+ProtossHeal:
+	ReloadDelay: 75
+	Range: 5000
+	Report: heal2.aud
+	ValidTargets: Heal, lockdowned, plagued, ivanattached
+	ValidRelationships: Ally
+	Projectile: InstantExplode
+		Width: 128
+		Duration: 12
+		ZOffset: 2047
+		Color: 44FF8888
+		SecondaryBeam: true
+		SecondaryBeamWidth: 64
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFFFF
+	Warhead@HealingWeapon: SpreadDamage
+		ValidTargets: Heal
+		ValidRelationships: Ally
+		Spread: 1000
+		Falloff: 100, 50, 33, 25, 20
+		Damage: -2000
+		Versus:
+			Shield: 140
+			Heroic: 100
+			Plate: 96
+			Flak: 92
+			None: 88
+			Superheavy: 84
+			Spaceship: 80
+			Heavy: 76
+			Helicopter: 72
+			Medium: 68
+			Bomber: 64
+			Light: 60
+			Fighter: 56
+			Scout: 52
+			Steel: 48
+			Concrete: 44
+			Wood: 40
+		DamageTypes: KillsDrone
+		DebugOverlayColor: 00FF00
+	Warhead@ExtraHealing: SpreadDamage
+		ValidTargets: Heal
+		ValidRelationships: Ally
+		Spread: 500
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+		Damage: -1000
+		Versus:
+			Shield: 100
+			Heroic: 100
+			Plate: 100
+			Flak: 100
+			None: 100
+			Superheavy: 100
+			Spaceship: 100
+			Heavy: 100
+			Helicopter: 100
+			Medium: 100
+			Bomber: 100
+			Light: 100
+			Fighter: 100
+			Scout: 100
+			Steel: 100
+			Concrete: 100
+			Wood: 100
+		DamageTypes: KillsDrone
+		UpdatesUnitStatistics: false
+		DebugOverlayColor: 00FF00
+	Warhead@HealingWeaponPercentage: AreaDamagePercentage
+		FriendlyFireDamage: 100
+		FriendlyFireSpread: 100
+		ValidTargets: Heal
+		ValidRelationships: Ally
+		Spread: 5000
+		Falloff: 100
+		Damage: -1
+		Versus:
+			Shield: 35
+			Wood: 25
+			Concrete: 24
+			Steel: 23
+			Scout: 22
+			Fighter: 21
+			Light: 20
+			Bomber: 19
+			Medium: 18
+			Helicopter: 17
+			Heavy: 16
+			Spaceship: 15
+			Superheavy: 14
+			None: 13
+			Flak: 12
+			Plate: 11
+			Heroic: 10
+		DamageTypes: KillsDrone
+		UpdatesUnitStatistics: false
+		DebugOverlayColor: 00FF00
+	Warhead@HealingField: GrantExternalCondition
+		Condition: HealingField
+		Duration: 10
+		Range: 5000
+		ValidTargets: Heal
+		ValidRelationships: Ally
+	Warhead@Healed: GrantExternalCondition
+		Condition: Healed
+		Duration: 10
+		Range: 5000
+		ValidTargets: Heal
+		ValidRelationships: Ally
+	Warhead@Defuse1: DetachDelayedWeapon
+		Range: 5000
+		Types: defilerplague
+		ValidRelationships: Ally
+	Warhead@Defuse2: DetachDelayedWeapon
+		Range: 5000
+		Types: lockdowned
+		ValidRelationships: Ally
+	Warhead@Defuse3: DetachDelayedWeapon
+		Range: 5000
+		Types: ivanbomb
+		ValidRelationships: Ally
+	Warhead@Effect: FlashTargetsInRadius
+		Explosions: green_small_fire
+		ImpactActors: true
+		Radius: 5000
+		ValidRelationships: Ally
+		ValidTargets: Heal
+

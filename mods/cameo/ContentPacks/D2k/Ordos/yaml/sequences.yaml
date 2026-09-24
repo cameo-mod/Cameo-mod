@@ -157,61 +157,6 @@ ordos_repairpad:
 		Start: 4362
 		Offset: -30,-24
 
-ordos_research:
-	Defaults:
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3237
-		Offset: -48,80
-	make:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4655
-		Length: 10
-		Offset: -48,80
-		Tick: 100
-	crumble-overlay:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4665
-		Length: 11
-		Offset: -48,80
-		Tick: 100
-	damaged-idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3238
-		Offset: -48,80
-	idle-lights:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 5024
-		Length: 60
-		Tick: 80
-		Offset: -48,80
-	bib:
-		Filename: BLOXBASE.R8
-		Frames: 611, 612, 613, 631, 632, 633
-		Length: 6
-		Offset: -16,-16
-	bib-Concrete:
-		Filename: BLOXBASE.R8
-		Frames: 643, 644, 645, 663, 664, 665
-		Length: 6
-		Offset: -16,-16
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4365
-		Offset: -30,-24
-
 ordos_starport:
 	Defaults:
 	idle:
@@ -1515,36 +1460,6 @@ ordos_raider:
 	icon:
 		Filename: ordos_raider_icon.png
 
-ordos_stealthraider:
-	Defaults:
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2421
-		Facings: -32
-	muzzle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3996
-		Tick: 50
-		Facings: -32
-		BlendMode: Additive
-	turret:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2485
-		ZOffset: -1
-		Facings: -32
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4298
-		Offset: -30,-24
-
 ordos_dustdrone:
 	Defaults:
 	idle:
@@ -1664,7 +1579,6 @@ ordos_upgrade_lasercartridges:
 	icon:
 		Filename: ordos_upgrade_lasercartridges_icon.png
 		Offset: 0,0
-
 
 ordos_upgrade_para:
 	icon:
@@ -1799,7 +1713,6 @@ ordos_barracks:
 		Start: 4325
 		Offset: -30,-24
 
-
 ordos_conyard:
 	Defaults:
 	idle:
@@ -1864,7 +1777,6 @@ ordos_conyard:
 		Remap: 54F94B
 		Start: 4312
 		Offset: -30,-24
-
 
 ordos_heavy:
 	Defaults:
@@ -1994,3 +1906,7 @@ d2k_rpg:
 		Facings: -32
 		ZOffset: 1023
 
+ordos_chaosstorm:
+	icon:
+		Filename: asianalliance_chaosstorminductor_icon.shp
+		Offset: 0,0

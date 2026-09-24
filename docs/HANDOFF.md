@@ -1,5 +1,46 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-24 — DAWN: value-reference self-containment (D2k/TD/TS/SC hard layer → 0)
+
+`Agent: DAWN (Devin / SWE-2 Max) · branch devin/dawn/pack-selfcont-td-ts-sc · base 24988dd8e`
+
+Second self-containment layer after the Inherits-edge work (#497/#498):
+value refs (`Weapon:`/`IconImage:`/`Actor:`/`ActorTypes:`/seq-name overrides)
+into pack-gated foreign defs. Mount-topology census: a ref leaks only when
+every def of the name lives outside the consumer pack's own `content.yaml` +
+`Include:` chain + core `mod.yaml` mounts. ~139 raw hits → fixed all HARD
+leaks to **0**; 45 soft `Condition:`/`ActorTypes:` strings remain, flagged
+for fleet ruling (dormant cross-faction gates, not crashes).
+
+Method: foreign defs copied into owning Shared/faction files under
+pack-prefixed names (`^TSRA2*`/`^SCRA2*`/`^TDRA2*`/`td_*`/`ts_*`/`d2k_*`/
+`Protoss*`/`SC*`), all consumers retargeted, then **each copy made
+audit-clean**: effect-typed nodes moved to 17 new per-weapon `^<pk>_<w>`
+families, dropped edges materialized inline resolved-identical, duplicate
+sibling nodes folded (`-Key:` = per-key merge barrier). New Shared mounts:
+D2k `sequences.yaml`; TD `weapons.yaml`+`sequences.yaml`; TS `weapons.yaml`;
+SC `weapons.yaml`/`sequences.yaml` additions.
+
+Verified: whole-corpus resolved diff vs `24988dd8e` — 0/3269 weapons, 0/3310
+seqs changed; 6 actor diffs are the intended icon/weapon retargets; W-shape
+all flat (W7 793); empty-warhead 0; dup-inherits and S2 unchanged; D2 +0.
+Boot-gate PASS (menu marker, 46→46 exceptions) after fixing one new dead
+cancel: materialization moved `TSTorpTube`'s effect-typed `Warhead@Smudge`
+into its family but left the top-level `-Warhead@Smudge:` — the engine's
+`ResolveInherits` throws when a `-Key:` matches nothing accumulated so far
+(parents + earlier same-def siblings). Sequential-merge dead-cancel scan:
+exactly 1 new vs HEAD's 11 pre-existing cross-file artifacts. Nested `-Key:`
+cancels are applied weakly (no throw) — only the def-top-level scope crashes.
+
+Known trap for the next copier: a verbatim copy re-adds the source's audit
+findings (both defs exist in the merged corpus) — materialize-clean it, and
+check new names against ALL mounted namespaces (`TSHeal` collided with a
+core def → renamed `TSRA2Heal`). When materializing away an inherited
+`Warhead@X`, also drop the child's `-Warhead@X:` — the Python resolver
+tolerates the orphan but the engine does not.
+
+---
+
 ## 2026-09-25c — EMBER: loaded faction-dot sweep (150 renames, R18)
 
 `Agent: EMBER · branch devin/ember/dot-faction-prefix · base a5692a5f7`

@@ -165,6 +165,22 @@ commits and reported.
 | TKM | DONE (ids) | DONE 2026-07-18 (moved into `RedAlert2Mod/TKM/`) | — | — | — |
 | Outpost2 (eden/plymouth, WIP factions) | maps drafted (~compliant) | monolith/wrapper | | | |
 
+**Cross-pack self-containment (2026-09-24):** the hard-reference layer is
+clean for D2k, TiberianDawn, TiberianSun and StarCraft — every `Inherits`,
+`Weapon:`, `IconImage:`, `Actor:`, `ActorTypes:` and sequence-name override in
+those packs resolves to a def mounted by their own `content.yaml` chain or a
+core `mod.yaml` mount (PRs #497/#498 + the value-ref batch). The remaining
+known contamination is *soft*: `Condition:`/`RequiresCondition:` strings and
+`ActorTypes:` spawn lists in `Shared/yaml/*.yaml` pointing into foreign
+namespaces — dormant without the foreign pack, awaiting a fleet ruling on
+whether they are intentional cross-faction gates. The census tooling lives in
+`tools/` (`pack_reach.py`-style mount-topology check): a def is a leak only if
+ALL its definitions sit in files the consumer's pack never mounts.
+Verbatim-copy trap: copying a foreign def re-adds its W2/W6/W7/W8 findings in
+the merged corpus — copies must be made audit-clean (effect nodes into
+per-weapon `^<pk>_<w>` families, dropped edges materialized inline,
+resolved-identical verified).
+
 Proposal maps for every faction: `tools/rename/rename_map_<faction>.yaml`
 (regenerate: `python tools/audit/gen_rename_maps.py`).
 

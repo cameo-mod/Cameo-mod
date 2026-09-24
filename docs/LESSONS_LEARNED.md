@@ -129,6 +129,43 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 
 ---
 
+## ⛔ A verbatim foreign-def copy re-adds its source's audit findings — copies must be materialized audit-clean (2026-09-24)
+
+The value-reference self-containment batch (D2k/TD/TS/SC packs) copied ~70
+foreign defs into owning packs. In the merged corpus both the copy AND the
+foreign original exist, so every W2/W6/W7/W8 finding on the source got a
+second vote — verbatim copying pushed W6 +11, W7 +5, W8 +3, W2 +1 against
+lower-only ratchets. The fix is the batch-6 materialization pattern applied
+to the copy: effect-typed `Warhead@X` nodes move into a per-weapon
+`^<pk>_<weapon>` family (standalone emit of the resolved subtree — no
+derivation needed, purity keeps it in `fx_templates` so it counts as an fx
+edge, not W8-legacy), dropped inherit edges are materialized inline AT the
+edge's position using the resolved-W subtree for keys the dropped parent
+defines (later-parent overrides are idempotent, child cancels keep working).
+
+Two traps inside that emit:
+
+- **Emitting a resolved subtree that re-states fields the child already
+  declares produces duplicate leaf keys** (audit D2 +55 on the first pass).
+  Fold duplicate sibling nodes afterward: merge same-key siblings
+  recursively, later leaf wins — but `-Key:` nodes are **per-key merge
+  barriers only**: `-Warhead@A:` consumes earlier `Warhead@A` siblings yet
+  leaves `Warhead@B` untouched, so the fold index resets per key, not per
+  barrier.
+- **New names can collide with defs in OTHER namespaces/files.** `Heal` was
+  copied to `TSHeal` while a core-mounted `weapons/tiberiansun.yaml` already
+  defined a different `TSHeal` — a split-definition the resolved diff caught
+  (resolved payload differed). Check the whole merged def dict for the new
+  name before writing the copy.
+
+Also: the leak census must model the mount topology — a ref is a leak only
+when EVERY definition of the name lives in files the consumer's own
+`content.yaml` (plus its pack's `Include:` chain and core `mod.yaml` mounts)
+never reaches. Same-file refs, `cameo|`-mounted core files, `bits/` assets
+and game-level `Shared` packs are all reachable and must not flag.
+
+---
+
 ## ⛔ `^` templates ARE instantiated at boot — an untyped `Warhead@` pin inside one NREs (2026-09-24)
 
 The first W27 batch-2 boot crashed in `WeaponInfo.LoadWarheads`
