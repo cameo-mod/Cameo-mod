@@ -12,6 +12,8 @@ IxianCombatTankCannon:
 	Warhead@CannonHE_Heavy:
 		Damage: 12000
 	-Warhead@CannonHE_Medium:
+	Warhead@EffectAir:
+		ImpactSounds: EXPLMD2.WAV
 HeavyIxianCombatTankCannon:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -26,6 +28,8 @@ HeavyIxianCombatTankCannon:
 	Warhead@CannonHE_Heavy:
 		Damage: 18000
 	-Warhead@CannonHE_Medium:
+	Warhead@EffectAir:
+		ImpactSounds: EXPLMD2.WAV
 DuelistTankCannon:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -80,7 +84,7 @@ DuelistTankCannon:
 	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_large_explosion
-		ImpactSounds: EXPLMD2.WAV
+		ImpactSounds: EXPLSML4.WAV
 		ExplosionPalette: effect75alpha
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
@@ -138,6 +142,8 @@ DuelistTankCannon:
 			Steel: 11
 			Superheavy: 16
 			Wood: 9
+	Warhead@EffectAir:
+		ImpactSounds: EXPLMD2.WAV
 D2K_155mm2:
 	Inherits@collapsewh: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^MediumFlameWeapon
@@ -192,7 +198,7 @@ D2K_155mm2:
 	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_large_explosion
-		ImpactSounds: EXPLMD2.WAV
+		ImpactSounds: EXPLSML4.WAV
 		ValidTargets: Ground, Ship
 		ImpactActors: false
 		GlowScale: 1.5
@@ -360,6 +366,8 @@ D2K_155mm3:
 		ValidTargets: Ground, Water
 		Damage: 24000
 		PercentageScale: 0
+	Warhead@Effect1:
+		ImpactSounds: EXPLSML2.WAV
 
 D2K_Bazooka2:
 	Inherits: ^D2KMissile
@@ -379,6 +387,8 @@ D2K_Bazooka2:
 	Warhead@MissileAP_Heavy:
 		Damage: 6000
 	MinRange: 1280
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
 D2K_Rocket_Trooper2:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Railgun_Heavy
@@ -409,6 +419,8 @@ D2K_Rocket_Trooper2:
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
+	Warhead@EffectAir:
+		ImpactSounds: EXPLMD2.WAV
 D2K_Rocket_Trooper1:
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@wh2: ^Warhead_MissileAP_Light
@@ -441,6 +453,10 @@ D2K_Rocket_Trooper1:
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
+	Warhead@Effect:
+		ImpactSounds: EXPLSML1.WAV
 mtank_pri2:
 	Inherits: ^D2KMissile
 	Inherits@proj: ^Projectile_Missile_Heavy_D2K
@@ -493,7 +509,7 @@ mtank_pri2:
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_med_explosion
-		ImpactSounds: EXPLSML1.WAV
+		ImpactSounds: EXPLMD2.WAV
 		ValidTargets: Ground, Air
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
@@ -514,7 +530,7 @@ mtank_pri2:
 		ValidTargets: Shielded
 	Warhead@EffectAir: CreateEffect
 		Explosions: big_explosion_air
-		ImpactSounds: kaboom25.aud
+		ImpactSounds: EXPLLG2.WAV
 		ImpactActors: false
 		ValidTargets: Air
 IxRailgunDroneBullet:
@@ -617,6 +633,8 @@ IxRailgunDroneBullet:
 			Fighter: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
+	Warhead@EffectAir:
+		ImpactSounds: EXPLMD2.WAV
 
 ResonanceDroneRepair:
 	Inherits: ^RepairWeapon
@@ -855,10 +873,10 @@ RashidanGun:
 		-ExplosionPalette:
 		-ImpactActors:
 	Warhead@EffectAir:
-		ImpactSounds: xplos.aud
+		ImpactSounds: EXPLMD2.WAV
 	Warhead@EffectWater:
 		Explosions: water_piffs
-		-ImpactSounds:
+		ImpactSounds: splash9.aud
 	Warhead@LightMissilePercentage:
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		Spread: 100
@@ -1042,6 +1060,8 @@ RaiderGuns:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
+	Warhead@EffectWater:
+		ImpactSounds: splash9.aud
 RaiderGuns_upgrade:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
@@ -1806,6 +1826,8 @@ D2K_RocketsCymek:
 			Heroic: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
+	Warhead@EffectAir:
+		ImpactSounds: EXPLMD2.WAV
 d2k_air_drone_guns:
 	Inherits: ^D2KMissile
 	Inherits@2: ^Warhead_Bullet_Medium
@@ -1824,6 +1846,10 @@ d2k_air_drone_guns:
 		Damage: 12000
 	MinRange: 1300
 	Projectile: Bullet
+	Warhead@EffectWater:
+		ImpactSounds: splash9.aud
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
 	# guidance fields. Keeps today's resolved type verbatim.
@@ -2070,6 +2096,8 @@ d2k_basq:
 		ExplosionPalette: effect75alpha
 		ImpactActors: false
 		ValidTargets: Ground
+	Warhead@EffectWater:
+		ImpactSounds: splash9.aud
 
 d2k_basq_AA:
 	Inherits: d2k_basq
@@ -2080,6 +2108,8 @@ d2k_basq_AA:
 		ValidTargets: Air
 	Warhead@Effect: CreateEffect
 		ValidTargets: Air
+	Warhead@EffectWater:
+		ImpactSounds: splash9.aud
 
 # d2k_guild_teleport:
 # 	ReloadDelay: 1
@@ -2163,7 +2193,7 @@ MongooseRocket:
 		Damage: 2
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_rocket_explosion
-		ImpactSounds: xplobig4.aud
+		ImpactSounds: EXPLSML2.WAV
 		ExplosionPalette: effect75alpha
 	Warhead@EffectWater: CreateEffect
 		Explosions: med_splash

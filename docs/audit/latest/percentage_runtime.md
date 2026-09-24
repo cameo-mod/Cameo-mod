@@ -3,9 +3,9 @@
 - Reachable direct-hit weapons activated: **195**
 - Folded direct-hit applications activated: **195**
 - Direct weapons also carrying standalone percentage hits: **7**
-- Direct weapons whose folded hit feeds physical state: **7**
+- Direct weapons whose folded hit feeds physical state: **8**
 - Direct weapons whose folded hit feeds integrity: **5**
-- Legacy Int32 overflow applications repaired: **8**
+- Legacy Int32 overflow applications repaired: **10**
 - Authored shared-mode (SharedVersus) applications: **23** (of which zero-unit: **19** — visibly listed, not counted as percentage hits)
 - Non-default direct relationship sets: **0**
 - Dispatch structural findings: **0**
@@ -21,6 +21,8 @@ A repair is ONLY a legacy Int32 wrap independent of SharedVersus. The `runtime u
 | `ExecutionerSword` | `Melee_Medium` | 8525 | 30000 | 30000 |
 | `Hakureiring2` | `Magic_Heavy` | -9474 | 12000 | 12000 |
 | `OIHakureiring2` | `Magic_Heavy` | -9474 | 12000 | 12000 |
+| `SteelInspectorIonCannon` | `Tesla_Super` | -8974 | 12500 | 12500 |
+| `SteelInspectorIonCannonDamage` | `Tesla_Super` | -8974 | 12500 | 12500 |
 | `TSLocustBombChem` | `Chemical_Heavy` | -7974 | 13500 | 13500 |
 | `d2kStormLasher` | `Storm_Heavy` | -6474 | 15000 | 15000 |
 | `sandmarinemortar` | `Demolition_Heavy_Flat` | -9474 | 12000 | 12000 |
@@ -80,7 +82,7 @@ Every authored reachable SharedVersus AreaDamage application, including zero-uni
 ## Direct-hit mixed effects
 
 - Standalone plus folded: `RA2HeavyMirageGun`, `RA2HeavyMirageGun_elite`, `RA2MirageGun`, `RA2MirageGun_elite`, `SteelMegaSword_elite`, `Tentacle`, `WaveTurretImpact`
-- Physical state: `NaxDieGlocke`, `ra1_allies_alliedaagun_flak_cryo`, `ra1_allies_blackhawk_chaingun_cryo`, `ra1_allies_machinegunner_machinegun_cryo`, `ra1_allies_ranger_machinegun_cryo`, `ra1_allies_sheridanassaulttank_chaingun_cryo`, `wc2deathknightDeathAndDecay_Hit`
+- Physical state: `NaxDieGlocke`, `TSSonicZapWeaponSonic`, `ra1_allies_alliedaagun_flak_cryo`, `ra1_allies_blackhawk_chaingun_cryo`, `ra1_allies_machinegunner_machinegun_cryo`, `ra1_allies_ranger_machinegun_cryo`, `ra1_allies_sheridanassaulttank_chaingun_cryo`, `wc2deathknightDeathAndDecay_Hit`
 - Integrity: `PsiStorm`, `RA2DiskDrain`, `TSSonicZapWeapon`, `WaveArtilleryImpact`, `WaveTurretImpact`
 
 _PASS — the active rules contain no invalid or double-percentage shapes._

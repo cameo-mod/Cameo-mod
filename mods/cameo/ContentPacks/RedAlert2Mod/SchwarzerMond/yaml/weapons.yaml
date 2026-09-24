@@ -1,8 +1,9 @@
 schwarzermond_lunarsoldier_rifle:
-	Inherits@finalmain: ^Warhead_Laser_Heavy_Flat
-	Inherits: ^Warhead_Bullet_Medium
 	Inherits@2: NaxiRifle
-	Inherits@3: ^RA2LaserWeapon
+	Inherits@xschwarzermond_lunarsoldier_rifle0: ^Warhead_Laser_Heavy
+	Inherits@xschwarzermond_lunarsoldier_rifle1: ^Projectile_Laser_Heavy
+	Inherits@fx_cover0: ^Effect_AlliedTigerCannon
+	Inherits@fx_cover1: ^Effect_Flame_Heavy
 	# SF VERIFIER weapon (maintainer 2026-07-20): SmallArms + Chaingun +
 	# Laser triad, 4000 each = 12000 @ reload 50 = 240 DPS (WC 1.0), exactly
 	# 2x the japan baseline (6000@50, 120). Range 6000, air-capable.
@@ -31,6 +32,79 @@ schwarzermond_lunarsoldier_rifle:
 		Damage: 24000
 		PercentageScale: 4996
 		PhysicalStateScale: 25
+	Warhead@Effect:
+		-GlowFadeFrames:
+		-GlowFadeInFrames:
+		-GlowScale:
+		-ImpactActors:
+		-ImpactSounds:
+		Explosions: piff
+		ValidTargets: Ground, Ship, Air
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@GroundFire:
+	-Warhead@RA2Crater:
+	Warhead@EffectWater:
+		-ImpactSounds:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@EffectWater:
+		Explosions: water_piff
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+	Warhead@Smudge:
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Laser_Heavy_Flat: AreaDamage
+	Warhead@Laser_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 64
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 56
+			COMPOSITE: 71
+			BLAST: 95
+			REFLECTOR: 59
+			ARMOR: 70
+			Shield: 294
+			Superheavy: 162
+			Spaceship: 144
+			Concrete: 141
+			Plate: 134
+			Heavy: 124
+			Helicopter: 114
+			Steel: 103
+			Medium: 100
+			Flak: 97
+			Bomber: 88
+			Light: 80
+			Wood: 75
+			None: 70
+			Fighter: 68
+			Scout: 55
+			Heroic: 45
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heroic: 24
+			Spaceship: 23
+			Concrete: 22
+			Heavy: 21
+			Plate: 20
+			Helicopter: 19
+			Steel: 18
+			Medium: 17
+			Flak: 16
+			Bomber: 15
+			Wood: 14
+			Light: 13
+			None: 12
+			Fighter: 11
+			Scout: 10
 schwarzermond_lunarsoldier_rifle_elite:
 	Inherits: schwarzermond_lunarsoldier_rifle
 	Range: 5500
@@ -41,14 +115,74 @@ schwarzermond_lunarsoldier_rifle_elite:
 		Damage: 24000
 		PercentageScale: 4996
 		PhysicalStateScale: 25
+	Warhead@Effect:
+	Warhead@Effect:
+	Warhead@EffectWater:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@EffectWater:
+		Explosions: water_piff
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+	Warhead@Smudge:
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Laser_Heavy_Flat: AreaDamage
+	Warhead@Laser_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 64
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 56
+			COMPOSITE: 71
+			BLAST: 95
+			REFLECTOR: 59
+			ARMOR: 70
+			Shield: 294
+			Superheavy: 162
+			Spaceship: 144
+			Concrete: 141
+			Plate: 134
+			Heavy: 124
+			Helicopter: 114
+			Steel: 103
+			Medium: 100
+			Flak: 97
+			Bomber: 88
+			Light: 80
+			Wood: 75
+			None: 70
+			Fighter: 68
+			Scout: 55
+			Heroic: 45
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heroic: 24
+			Spaceship: 23
+			Concrete: 22
+			Heavy: 21
+			Plate: 20
+			Helicopter: 19
+			Steel: 18
+			Medium: 17
+			Flak: 16
+			Bomber: 15
+			Wood: 14
+			Light: 13
+			None: 12
+			Fighter: 11
+			Scout: 10
 
 NaxiBeetleLaser_elite:
 	Inherits@wh: ^Warhead_Laser_Heavy
-	Inherits: ^SmallArms
-	Inherits@2: ^Chaingun
-	Inherits@3: ^MediumMissile
 	Inherits@4: ^LaserWeapon
 	Inherits@legacychip: ^LegacyLaserChipCompatibility
+	Inherits@fx_cover: ^Effect_Watersplash_Huge_RA2
 	Range: 6448
 	ReloadDelay: 60
 	Burst: 2
@@ -58,21 +192,6 @@ NaxiBeetleLaser_elite:
 	Projectile: LaserZap
 		Width: 25
 	TargetActorCenter: false
-	-Warhead@SmallArms:
-	Warhead@SmallArmsPercentage: AreaDamagePercentage
-		InvalidTargets: Air
-		Damage: 1
-		ValidTargets: Ground, Water
-	-Warhead@Chaingun:
-	Warhead@ChaingunPercentage: AreaDamagePercentage
-		InvalidTargets: Air
-		Damage: 1
-		ValidTargets: Ground, Water
-	-Warhead@MediumMissile:
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		InvalidTargets: Air
-		Damage: 1
-		ValidTargets: Ground, Water
 	-Warhead@LaserWeapon:
 	-Warhead@LaserExtraDamage:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
@@ -89,6 +208,137 @@ NaxiBeetleLaser_elite:
 	Warhead@LegacyLaserExtraDamage:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
+	Warhead@EffectWater:
+	Warhead@ChaingunPercentage: AreaDamagePercentage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
+	Projectile:
+		Image: DRAGON
+		ContrailZOffset: 4000
+		ContrailStartColor: EECCAA88
+		ContrailEndColor: 88664422
+		ContrailStartWidth: 40
+		ContrailEndWidth: 80
+		ContrailLength: 0
+		Speed: 500
+		Inaccuracy: 100
+		Arm: 0
+		AllowSnapping: true
+		Shadow: true
+		HorizontalRateOfTurn: 30
+		VerticalRateOfTurn: 30
+		TrailImage: smokey
+		TrailInterval: 1
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		CloseEnough: 500
+		Acceleration: 3
+		HomingActivationDelay: 2
+		RangeLimit: 25000
+		PointDefenseTypes: Missile
+	Warhead@ChaingunPercentage:
+		ValidTargets: Ground, Water
+		Spread: 100
+		Damage: 1
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Concrete: 11
+			Medium: 10
+			Helicopter: 9
+			Steel: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
+		UpdatesUnitStatistics: false
+		InvalidTargets: Air
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+		ValidTargets: Ground, Water
+		ImpactSounds: xplos.aud
+	Warhead@EffectWater:
+		Explosions: water_piffs
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@MediumMissilePercentage:
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 1
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Spaceship: 19
+			Heavy: 18
+			Helicopter: 17
+			Steel: 16
+			Medium: 15
+			Bomber: 14
+			Concrete: 13
+			Light: 12
+			Fighter: 11
+			Wood: 10
+			Scout: 9
+			Plate: 8
+			Flak: 7
+			None: 6
+			Heroic: 5
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
+		UpdatesUnitStatistics: false
+		InvalidTargets: Air
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@SmallArmsPercentage:
+		ValidTargets: Ground, Water
+		Spread: 50
+		Damage: 1
+		Versus:
+			Shield: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Fighter: 11
+			Wood: 10
+			Light: 9
+			Bomber: 8
+			Steel: 7
+			Medium: 6
+			Helicopter: 5
+			Concrete: 4
+			Heavy: 3
+			Spaceship: 2
+			Superheavy: 1
+		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
+		UpdatesUnitStatistics: false
+		InvalidTargets: Air
+	-Warhead@Glow:
+	Warhead@EffectWater:
+		-ExplosionPalette:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@ShieldHit:
+		Duration: 10
+	Warhead@Smudge:
+		SmudgeType: Scorch
 NaxiBeetleLaser_AA_elite:
 	Inherits: NaxiBeetleLaser_elite
 	Range: 9672
@@ -121,8 +371,17 @@ NaxiBeetleLaser_AA_elite:
 	Warhead@LegacyLaserExtraDamage:
 		-InvalidTargets:
 		ValidTargets: Air
+	Warhead@EffectWater:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@ShieldHit:
+		Duration: 10
+	Warhead@Smudge:
+		SmudgeType: Scorch
 LunarPanzerCannon:
-	Inherits: ^RA2MediumCannon
+	Inherits@xLunarPanzerCannon0: ^Warhead_CannonHE_Medium
+	Inherits@xLunarPanzerCannon1: ^Projectile_Shell_Medium
+	Inherits@xLunarPanzerCannon2: ^Effect_Explosion_Medium_RA2
 	ReloadDelay: 60
 	Range: 5121
 	Report: vgriatta.wav, vgriattb.wav, vgriattc.wav
@@ -132,18 +391,30 @@ LunarPanzerCannon:
 		Damage: 10000
 LunarPanzerCannon_elite:
 	Inherits: LunarPanzerCannon
-	Inherits@Elite: ^RA2EliteEffects
 	Range: 6121
 	Burst: 2
 	BurstDelays: 3
+	Warhead@Concrete:
+		Damage: 200
+	Warhead@Effect:
+		Explosions: ra2_elite_explosion
+		ImpactSounds: gexpapoa.wav
+	Warhead@EffectAir:
+		Explosions: big_explosion_air
+	Warhead@EffectWater:
+		Explosions: ra2_large_watersplash
+		ImpactSounds: gexpwala.wav
+	Warhead@Glow:
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@ShieldHit:
+		Duration: 12
 
 NaxiTank2Laser:
 	Inherits@wh: ^Warhead_Laser_Heavy
-	Inherits: ^SmallArms
-	Inherits@2: ^Chaingun
-	Inherits@3: ^MediumMissile
 	Inherits@4: ^LaserWeapon
 	Inherits@legacychip: ^LegacyLaserChipCompatibility
+	Inherits@fx_cover: ^Effect_Watersplash_Huge_RA2
 	Range: 6500
 	ReloadDelay: 52
 	Burst: 4
@@ -153,21 +424,6 @@ NaxiTank2Laser:
 	Projectile: LaserZap
 		Width: 25
 	TargetActorCenter: false
-	-Warhead@SmallArms:
-	Warhead@SmallArmsPercentage: AreaDamagePercentage
-		InvalidTargets: Air
-		Damage: 1
-		ValidTargets: Ground, Water
-	-Warhead@Chaingun:
-	Warhead@ChaingunPercentage: AreaDamagePercentage
-		InvalidTargets: Air
-		Damage: 1
-		ValidTargets: Ground, Water
-	-Warhead@MediumMissile:
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		InvalidTargets: Air
-		Damage: 1
-		ValidTargets: Ground, Water
 	-Warhead@LaserWeapon:
 	-Warhead@LaserExtraDamage:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
@@ -184,6 +440,137 @@ NaxiTank2Laser:
 	Warhead@LegacyLaserExtraDamage:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
+	Warhead@EffectWater:
+	Warhead@ChaingunPercentage: AreaDamagePercentage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
+	Projectile:
+		Image: DRAGON
+		ContrailZOffset: 4000
+		ContrailStartColor: EECCAA88
+		ContrailEndColor: 88664422
+		ContrailStartWidth: 40
+		ContrailEndWidth: 80
+		ContrailLength: 0
+		Speed: 500
+		Inaccuracy: 100
+		Arm: 0
+		AllowSnapping: true
+		Shadow: true
+		HorizontalRateOfTurn: 30
+		VerticalRateOfTurn: 30
+		TrailImage: smokey
+		TrailInterval: 1
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		CloseEnough: 500
+		Acceleration: 3
+		HomingActivationDelay: 2
+		RangeLimit: 25000
+		PointDefenseTypes: Missile
+	Warhead@ChaingunPercentage:
+		ValidTargets: Ground, Water
+		Spread: 100
+		Damage: 1
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Concrete: 11
+			Medium: 10
+			Helicopter: 9
+			Steel: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
+		UpdatesUnitStatistics: false
+		InvalidTargets: Air
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+		ValidTargets: Ground, Water
+		ImpactSounds: xplos.aud
+	Warhead@EffectWater:
+		Explosions: water_piffs
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@MediumMissilePercentage:
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 1
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Spaceship: 19
+			Heavy: 18
+			Helicopter: 17
+			Steel: 16
+			Medium: 15
+			Bomber: 14
+			Concrete: 13
+			Light: 12
+			Fighter: 11
+			Wood: 10
+			Scout: 9
+			Plate: 8
+			Flak: 7
+			None: 6
+			Heroic: 5
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
+		UpdatesUnitStatistics: false
+		InvalidTargets: Air
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@SmallArmsPercentage:
+		ValidTargets: Ground, Water
+		Spread: 50
+		Damage: 1
+		Versus:
+			Shield: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Fighter: 11
+			Wood: 10
+			Light: 9
+			Bomber: 8
+			Steel: 7
+			Medium: 6
+			Helicopter: 5
+			Concrete: 4
+			Heavy: 3
+			Spaceship: 2
+			Superheavy: 1
+		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
+		UpdatesUnitStatistics: false
+		InvalidTargets: Air
+	-Warhead@Glow:
+	Warhead@EffectWater:
+		-ExplosionPalette:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@ShieldHit:
+		Duration: 10
+	Warhead@Smudge:
+		SmudgeType: Scorch
 NaxiTank2Laser_AA:
 	Inherits: NaxiTank2Laser
 	Range: 9750
@@ -216,11 +603,18 @@ NaxiTank2Laser_AA:
 	Warhead@LegacyLaserExtraDamage:
 		-InvalidTargets:
 		ValidTargets: Air
+	Warhead@EffectWater:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@ShieldHit:
+		Duration: 10
+	Warhead@Smudge:
+		SmudgeType: Scorch
 NaxiMP40Laser:
-	Inherits@finalmain: ^Warhead_Laser_Heavy_Flat
-	Inherits: ^Warhead_Bullet_Light
 	Inherits@2: NaxiMP40
-	Inherits@3: ^RA2LaserWeapon
+	Inherits@xNaxiMP40Laser0: ^Warhead_Laser_Heavy
+	Inherits@xNaxiMP40Laser1: ^Projectile_Laser_Heavy
+	Inherits@fx_cover: ^Effect_AlliedTigerCannon
 	Report: vpriatta.wav
 	Range: 4384
 	ReloadDelay: 100
@@ -384,7 +778,6 @@ NaxiMP40Laser:
 			Scout: 10
 		Falloff: 100, 50
 		Range: 0, 32
-	-Warhead@Bullet_Light:
 	-Warhead@Bullet_Medium:
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Concussion_Light:
@@ -396,8 +789,99 @@ NaxiMP40Laser:
 		PercentageScale: 0
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 13
+	Warhead@Effect:
+		Explosions: ra2_piffs
+		ImpactSounds: kaboom15.aud
+		ValidTargets: Ground, Ship, Air
+		ExplosionPalette: ra2effect
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectWater:
+		ImpactSounds: splash9.aud
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectWater:
+	Warhead@RA2Scorch:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@EffectAir:
+		ExplosionPalette: ra2effect
+	Warhead@EffectWater:
+		Explosions: water_piffs
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHit:
+		Duration: 10
+	Warhead@Smudge:
+		SmudgeType: Scorch
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+	Warhead@Smudge:
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Scorch: LeaveSmudge
+	Warhead@Laser_Heavy_Flat: AreaDamage
+	Warhead@Laser_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 64
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 56
+			COMPOSITE: 71
+			BLAST: 95
+			REFLECTOR: 59
+			ARMOR: 70
+			Shield: 294
+			Superheavy: 162
+			Spaceship: 144
+			Concrete: 141
+			Plate: 134
+			Heavy: 124
+			Helicopter: 114
+			Steel: 103
+			Medium: 100
+			Flak: 97
+			Bomber: 88
+			Light: 80
+			Wood: 75
+			None: 70
+			Fighter: 68
+			Scout: 55
+			Heroic: 45
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heroic: 24
+			Spaceship: 23
+			Concrete: 22
+			Heavy: 21
+			Plate: 20
+			Helicopter: 19
+			Steel: 18
+			Medium: 17
+			Flak: 16
+			Bomber: 15
+			Wood: 14
+			Light: 13
+			None: 12
+			Fighter: 11
+			Scout: 10
 NaxiMP40Laser_elite:
 	Inherits: NaxiMP40Laser
+	Inherits@fx_cover0: ^Effect_AlliedTigerCannon
+	Inherits@fx_cover1: ^Effect_Flame_Heavy
 	Range: 5384
 	Burst: 10
 	BurstDelays: 3
@@ -555,14 +1039,104 @@ NaxiMP40Laser_elite:
 
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 13
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectWater:
+		ImpactSounds: splash9.aud
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectWater:
+	Warhead@Effect:
+	Warhead@RA2Scorch:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@EffectAir:
+		ExplosionPalette: ra2effect
+	Warhead@EffectWater:
+		Explosions: water_piffs
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHit:
+		Duration: 10
+	Warhead@Smudge:
+		SmudgeType: Scorch
+	-Warhead@GroundFire:
+	Warhead@Effect:
+		-GlowFadeFrames:
+		-GlowFadeInFrames:
+		-GlowScale:
+		-ImpactActors:
+	Warhead@Effect:
+		Explosions: ra2_piffs
+		ImpactSounds: kaboom15.aud
+		ValidTargets: Ground, Ship, Air
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+	Warhead@Smudge:
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Laser_Heavy_Flat: AreaDamage
+	Warhead@Laser_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 64
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 56
+			COMPOSITE: 71
+			BLAST: 95
+			REFLECTOR: 59
+			ARMOR: 70
+			Shield: 294
+			Superheavy: 162
+			Spaceship: 144
+			Concrete: 141
+			Plate: 134
+			Heavy: 124
+			Helicopter: 114
+			Steel: 103
+			Medium: 100
+			Flak: 97
+			Bomber: 88
+			Light: 80
+			Wood: 75
+			None: 70
+			Fighter: 68
+			Scout: 55
+			Heroic: 45
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heroic: 24
+			Spaceship: 23
+			Concrete: 22
+			Heavy: 21
+			Plate: 20
+			Helicopter: 19
+			Steel: 18
+			Medium: 17
+			Flak: 16
+			Bomber: 15
+			Wood: 14
+			Light: 13
+			None: 12
+			Fighter: 11
+			Scout: 10
 LunarNaxiJadgDestroyer:
-	Inherits@finalmain: ^Warhead_CannonAP_Light_Flat
-	Inherits: ^Warhead_CannonHE_Heavy
-	Inherits@2: ^Projectile_Shell_Heavy
-	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@wh: ^Warhead_Concussion_Medium
-	Inherits@fx: ^Effect_Concussion_Medium
-	Inherits@5: ^RA2TankDestroyerCannon
+	Inherits@xLunarNaxiJadgDestroyer0: ^Warhead_CannonAP_Light
+	Inherits@xLunarNaxiJadgDestroyer1: ^Projectile_Shell_Light
+	Inherits@xLunarNaxiJadgDestroyer2: ^Effect_Explosion_Small_RA2
 	Report: cannon1.aud
 	ReloadDelay: 90
 	Range: 7379
@@ -581,9 +1155,60 @@ LunarNaxiJadgDestroyer:
 		ValidTargets: Ground, Water
 		Damage: 90000
 		PercentageScale: 9999
+	Warhead@Effect:
+		ImpactActors: false
+	Warhead@CannonAP_Light_Flat: AreaDamage
+	Warhead@CannonAP_Light_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 80
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 92
+			COMPOSITE: 41
+			BLAST: 72
+			REFLECTOR: 75
+			ARMOR: 70
+			Shield: 132
+			Superheavy: 139
+			Concrete: 128
+			Heavy: 127
+			Medium: 123
+			Light: 119
+			Scout: 112
+			Plate: 111
+			Steel: 103
+			Flak: 91
+			Heroic: 90
+			Wood: 83
+			Spaceship: 79
+			Helicopter: 78
+			Bomber: 76
+			None: 74
+			Fighter: 68
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 17
+			Superheavy: 16
+			Heavy: 15
+			Medium: 14
+			Light: 13
+			Scout: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
+			Spaceship: 4
+			Helicopter: 3
+			Bomber: 2
+			Fighter: 1
 LunarNaxiJadgDestroyer_elite:
 	Inherits: LunarNaxiJadgDestroyer
-	Inherits@Elite: ^RA2EliteEffects
 	Report: cannon1.aud
 	Range: 8379
 	Burst: 2
@@ -592,59 +1217,261 @@ LunarNaxiJadgDestroyer_elite:
 		ValidTargets: Ground, Water
 		Damage: 90000
 		PercentageScale: 9999
+	Warhead@Concrete:
+		Damage: 200
+	Warhead@Effect:
+		Explosions: ra2_elite_explosion
+		ImpactSounds: gexpapoa.wav
+	Warhead@EffectAir:
+		Explosions: big_explosion_air
+	Warhead@EffectWater:
+		Explosions: ra2_large_watersplash
+		ImpactSounds: gexpwala.wav
+	Warhead@Glow:
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@ShieldHit:
+		Duration: 12
+	Warhead@Effect:
+		ImpactActors: false
+	Warhead@CannonAP_Light_Flat: AreaDamage
+	Warhead@CannonAP_Light_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 80
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 92
+			COMPOSITE: 41
+			BLAST: 72
+			REFLECTOR: 75
+			ARMOR: 70
+			Shield: 132
+			Superheavy: 139
+			Concrete: 128
+			Heavy: 127
+			Medium: 123
+			Light: 119
+			Scout: 112
+			Plate: 111
+			Steel: 103
+			Flak: 91
+			Heroic: 90
+			Wood: 83
+			Spaceship: 79
+			Helicopter: 78
+			Bomber: 76
+			None: 74
+			Fighter: 68
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 17
+			Superheavy: 16
+			Heavy: 15
+			Medium: 14
+			Light: 13
+			Scout: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
+			Spaceship: 4
+			Helicopter: 3
+			Bomber: 2
+			Fighter: 1
 
 LunarTigerCannon:
-	Inherits@roleflat: ^Warhead_CannonHE_Medium_Flat
-	Inherits: ^LightChemicalWeapon
-	Inherits@2: ^HeavyBomb
-	Inherits@3: ^MediumFlameWeapon
-	Inherits@4: ^RA2MediumCannon
+	Inherits@xLunarTigerCannon0: ^Warhead_CannonHE_Medium
+	Inherits@xLunarTigerCannon1: ^Projectile_Shell_Medium
+	Inherits@fx_cover0: ^Effect_Apoc_AP_RA2
+	Inherits@fx_cover1: ^Effect_Flame_Heavy
 	ReloadDelay: 80
 	Report: trashcannon.wav
 	Range: 5105
 	Projectile: Bullet
 		Speed: 510
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 4000
-	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 2
-	Warhead@HeavyBomb: SpreadDamage
-		Damage: 4000
-	Warhead@HeavyBombPercentage: AreaDamagePercentage
-		Damage: 2
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 4000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		Damage: 2
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@CannonHE_Medium:
 		PercentageScale: 2494
 		Damage: 16000
-	-Warhead@HeavyBomb:
-	-Warhead@LightChemicalWeapon:
-	-Warhead@MediumFlameWeapon:
-	-Warhead@CannonHE_Medium_Flat:
+	InvalidTargets: wall
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
+	Warhead@Smudge1:
+	Warhead@Smudge2:
+	Warhead@Smudge2RA2:
+	Warhead@Effect1:
+	Warhead@Effect2:
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+	Warhead@RA2Scorch:
+	Warhead@GroundFire: SpawnActor
+	Warhead@Effect:
+		ImpactActors: false
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@Effect1:
+		Explosions: poof
+		ImpactSounds: siege_impact.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+	Warhead@Effect2:
+		Delay: 6
+		Explosions: napalm
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@GroundFire:
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@HeavyBombPercentage:
+		ValidTargets: Ground, Ship
+		Spread: 400
+		Damage: 2
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			Shield: 35
+			Wood: 25
+			Concrete: 24
+			Steel: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+	Warhead@LightChemicalWeaponPercentage:
+		ValidTargets: Ground, Water
+		Spread: 175
+		Damage: 2
+		Falloff: 99, 66, 33
+		Versus:
+			Shield: 17
+			Superheavy: 16
+			Plate: 15
+			Heavy: 14
+			Flak: 13
+			Medium: 12
+			None: 11
+			Light: 10
+			Heroic: 9
+			Scout: 8
+			Steel: 7
+			Concrete: 6
+			Wood: 5
+			Spaceship: 4
+			Helicopter: 3
+			Bomber: 2
+			Fighter: 1
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+	Warhead@MediumFlameWeaponPercentage:
+		ValidTargets: Ground, Water
+		Spread: 375
+		Damage: 2
+		Falloff: 111, 33, 11, 3
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Wood: 16
+			Concrete: 15
+			Steel: 14
+			Scout: 13
+			Light: 12
+			Medium: 11
+			Heavy: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge1:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Concrete:
+		Damage: 150
+	Warhead@Effect:
+		Explosions: ra2_medium_explosion
+		ImpactSounds: gexp14a.wav
+	Warhead@EffectAir:
+		Explosions: med_explosion_air
+	Warhead@EffectWater:
+		Explosions: ra2_small_watersplash
+	Warhead@Glow:
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+	Warhead@Smudge:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 LunarTigerCannon_elite:
 	Inherits: LunarTigerCannon
 	Range: 6105
 	Burst: 2
 	BurstDelays: 3
+	Warhead@Concrete:
+		Damage: 150
+	Warhead@Effect:
+		Explosions: ra2_medium_explosion
+		ImpactSounds: gexp14a.wav
+	Warhead@EffectAir:
+		Explosions: med_explosion_air
+	Warhead@EffectWater:
+		Explosions: ra2_small_watersplash
+	Warhead@Glow:
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+	Warhead@Smudge:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 NaxHaenebuQuadCannon:
-	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
-	Inherits: ^Warhead_Concussion_Light
-	Inherits@2: ^Warhead_MissileAP_Heavy
-	Inherits@3: ^Effect_MissileAP_Heavy
-	Inherits@4: ^RA2FlakWeapon
+	Inherits@xNaxHaenebuQuadCannon0: ^Warhead_Flak_Medium
+	Inherits@xNaxHaenebuQuadCannon1: ^Projectile_Flak_Medium
+	Inherits@fx_cover: ^Effect_AlliedTigerCannon
 	ReloadDelay: 66
 	Range: 6666
 	Burst: 6
@@ -677,8 +1504,103 @@ NaxHaenebuQuadCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
+	Warhead@Smudge:
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectAir:
+		ImpactActors: false
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+	Warhead@EffectAir:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@Effect:
+		Explosions: ra2_flak_puff
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Ship
+		ExplosionPalette: ra2effect
+	Warhead@EffectAir:
+		Explosions: ra2_flak_puff_AA
+		ImpactSounds: xplos.aud
+		ValidTargets: Air
+		ExplosionPalette: ra2effect
+	Warhead@EffectWater:
+		Explosions: ra2_small_watersplash
+		ImpactSounds: gexpwasa.wav
+	Warhead@Glow:
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@ShieldHit:
+		Duration: 5
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+	Warhead@EffectWater:
+		ExplosionPalette: ra2effect
+	Warhead@Flak_Medium_Flat: AreaDamage
+	Warhead@Flak_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 110
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Steel: 6
+			Concrete: 5
 NaxHaenebuQuadCannon_elite:
 	Inherits: NaxHaenebuQuadCannon
+	Inherits@fx_cover: ^Effect_AlliedTigerCannon
 	Range: 7777
 	Burst: 7
 	Projectile: Bullet
@@ -688,15 +1610,105 @@ NaxHaenebuQuadCannon_elite:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
+	Warhead@Smudge:
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectAir:
+		ImpactActors: false
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+	Warhead@EffectAir:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@Effect:
+		Explosions: ra2_flak_puff
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Ship
+		ExplosionPalette: ra2effect
+	Warhead@EffectAir:
+		Explosions: ra2_flak_puff_AA
+		ImpactSounds: xplos.aud
+		ValidTargets: Air
+		ExplosionPalette: ra2effect
+	Warhead@EffectWater:
+		Explosions: ra2_small_watersplash
+		ImpactSounds: gexpwasa.wav
+	Warhead@Glow:
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@ShieldHit:
+		Duration: 5
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+	Warhead@EffectWater:
+		ExplosionPalette: ra2effect
+	Warhead@Flak_Medium_Flat: AreaDamage
+	Warhead@Flak_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 110
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Steel: 6
+			Concrete: 5
 
 DalekCannon:
-	Inherits@finalmain: ^Warhead_Railgun_Heavy_Flat
-	Inherits@wh: ^Warhead_Tesla_Heavy
-	Inherits@wh2: ^Warhead_Laser_Heavy
-	Inherits@proj: ^Projectile_Lightning_Heavy
-	Inherits@fx: ^Effect_Tesla_Heavy
-	Inherits@EMP: ^EMPDamage
-	Inherits@3: ^RA2RailgunWeapon
+	Inherits@xDalekCannon0: ^Warhead_Railgun_Heavy
+	Inherits@xDalekCannon1: ^Projectile_Railgun_Heavy
+	Inherits@xDalekCannon2: ^Effect_Bang_Small_RA2
 	ReloadDelay: 76
 	Range: 8060
 	Report: vrobatta.wav
@@ -708,6 +1720,29 @@ DalekCannon:
 		ValidTargets: Ground, Water
 		Damage: 100000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		Versus:
+			None: 125
+			Light: 25
+			Medium: 50
+			Heavy: 75
+			Superheavy: 100
+			Scout: 10
+			Plate: 175
+			Concrete: 10
+			Wood: 10
+			Steel: 10
+			Flak: 150
+			Heroic: 200
+			Bomber: 10
+			Fighter: 10
+			Helicopter: 10
+			Spaceship: 10
+			ARMOR: 70
+			BLAST: 98
+			COMPOSITE: 72
+			HAZMAT: 61
+			REFLECTOR: 51
+			Shield: 300
 		InvalidTargets: Air
 		DamageTypes: Tesla
 		ValidTargets: Ground, Water
@@ -724,7 +1759,7 @@ DalekCannon:
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water
-	Warhead@Effect: CreateEffect
+	Warhead@Effect:
 		Explosions: blue_building
 		ImpactSounds: psahit00.aud
 		ExplosionPalette: effect
@@ -740,11 +1775,101 @@ DalekCannon:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 25
 	Warhead@Laser_Heavy_ExtraDamage:
+		Versus:
+			None: 33
+			Light: 30
+			Medium: 24
+			Heavy: 18
+			Superheavy: 12
+			Scout: 36
+			Plate: 21
+			Concrete: 9
+			Wood: 9
+			Steel: 9
+			Flak: 27
+			Heroic: 15
+			Bomber: 9
+			Fighter: 9
+			Helicopter: 9
+			Spaceship: 9
+			ARMOR: 70
+			BLAST: 96
+			COMPOSITE: 70
+			HAZMAT: 56
+			REFLECTOR: 59
+			Shield: 9
 		InvalidTargets: Air
 	Warhead@EMPUnit:
 		InvalidTargets: Shielded, Air
 	Warhead@Railgun_Heavy_ExtraDamage:
 		InvalidTargets: Air
+	Warhead@EMPUnit:
+		Spread: 1
+		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
+	Warhead@EMPUnit: AffectsIntegrity
+	Warhead@EMPUnit:
+		ValidRelationships: Neutral, Enemy
+		Damage: 1000
+	Warhead@Railgun_Heavy_Flat: AreaDamage
+	Warhead@Laser_Heavy_ExtraDamage: SpreadDamage
+	Warhead@Laser_Heavy_ExtraDamage:
+		ValidTargets: Ground, Water, Air
+		Spread: 200
+		Damage: 1000
+		Falloff: 100, 75, 50, 25
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Railgun_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 96
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 97
+			COMPOSITE: 41
+			BLAST: 77
+			REFLECTOR: 64
+			ARMOR: 70
+			Shield: 306
+			Superheavy: 200
+			Heavy: 181
+			Medium: 156
+			Light: 123
+			Plate: 97
+			Scout: 94
+			Concrete: 92
+			Spaceship: 88
+			Flak: 83
+			Steel: 80
+			Helicopter: 79
+			Bomber: 73
+			None: 72
+			Wood: 70
+			Fighter: 66
+			Heroic: 46
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heavy: 24
+			Medium: 23
+			Light: 22
+			Scout: 21
+			Heroic: 20
+			Plate: 19
+			Flak: 18
+			None: 17
+			Concrete: 16
+			Steel: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+	Warhead@Tesla_Heavy_ExtraDamage:
+		Spread: 200
+		Falloff: 100, 75, 50, 25
 DalekCannon_elite:
 	Inherits: DalekCannon
 	Range: 9060
@@ -755,6 +1880,29 @@ DalekCannon_elite:
 	Warhead@Tesla_Heavy:
 		Damage: 200000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		Versus:
+			None: 125
+			Light: 25
+			Medium: 50
+			Heavy: 75
+			Superheavy: 100
+			Scout: 10
+			Plate: 175
+			Concrete: 10
+			Wood: 10
+			Steel: 10
+			Flak: 150
+			Heroic: 200
+			Bomber: 10
+			Fighter: 10
+			Helicopter: 10
+			Spaceship: 10
+			ARMOR: 70
+			BLAST: 98
+			COMPOSITE: 72
+			HAZMAT: 61
+			REFLECTOR: 51
+			Shield: 300
 		InvalidTargets: Air
 		DamageTypes: Tesla
 		Damage: 100000
@@ -777,6 +1925,29 @@ DalekCannon_elite:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 25
 	Warhead@Laser_Heavy_ExtraDamage:
+		Versus:
+			None: 33
+			Light: 30
+			Medium: 24
+			Heavy: 18
+			Superheavy: 12
+			Scout: 36
+			Plate: 21
+			Concrete: 9
+			Wood: 9
+			Steel: 9
+			Flak: 27
+			Heroic: 15
+			Bomber: 9
+			Fighter: 9
+			Helicopter: 9
+			Spaceship: 9
+			ARMOR: 70
+			BLAST: 96
+			COMPOSITE: 70
+			HAZMAT: 56
+			REFLECTOR: 59
+			Shield: 9
 		InvalidTargets: Air
 	Warhead@EMPUnit:
 		InvalidTargets: Shielded, Air
@@ -784,6 +1955,70 @@ DalekCannon_elite:
 		InvalidTargets: Air
 	Warhead@Railgun_Heavy_ExtraDamage:
 		InvalidTargets: Air
+	Warhead@EMPUnit: AffectsIntegrity
+	Warhead@EMPUnit:
+		ValidRelationships: Neutral, Enemy
+		Damage: 1000
+	Warhead@Railgun_Heavy_Flat: AreaDamage
+	Warhead@Laser_Heavy_ExtraDamage: SpreadDamage
+	Warhead@Laser_Heavy_ExtraDamage:
+		ValidTargets: Ground, Water, Air
+		Spread: 200
+		Damage: 1000
+		Falloff: 100, 75, 50, 25
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Railgun_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 96
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 97
+			COMPOSITE: 41
+			BLAST: 77
+			REFLECTOR: 64
+			ARMOR: 70
+			Shield: 306
+			Superheavy: 200
+			Heavy: 181
+			Medium: 156
+			Light: 123
+			Plate: 97
+			Scout: 94
+			Concrete: 92
+			Spaceship: 88
+			Flak: 83
+			Steel: 80
+			Helicopter: 79
+			Bomber: 73
+			None: 72
+			Wood: 70
+			Fighter: 66
+			Heroic: 46
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heavy: 24
+			Medium: 23
+			Light: 22
+			Scout: 21
+			Heroic: 20
+			Plate: 19
+			Flak: 18
+			None: 17
+			Concrete: 16
+			Steel: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+	Warhead@Tesla_Heavy_ExtraDamage:
+		Spread: 200
+		Falloff: 100, 75, 50, 25
 DalekCannonScatter:
 	Inherits: DalekCannon
 	Warhead@Tesla_Heavy:
@@ -797,6 +2032,29 @@ DalekCannonScatter:
 		ValidTargets: Ground, Water, Air
 		Damage: 50000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		Versus:
+			None: 125
+			Light: 25
+			Medium: 50
+			Heavy: 75
+			Superheavy: 100
+			Scout: 10
+			Plate: 175
+			Concrete: 10
+			Wood: 10
+			Steel: 10
+			Flak: 150
+			Heroic: 200
+			Bomber: 10
+			Fighter: 10
+			Helicopter: 10
+			Spaceship: 10
+			ARMOR: 70
+			BLAST: 98
+			COMPOSITE: 72
+			HAZMAT: 61
+			REFLECTOR: 51
+			Shield: 300
 		InvalidTargets: Air
 		DamageTypes: Tesla
 		ValidTargets: Ground, Water, Air
@@ -825,11 +2083,98 @@ DalekCannonScatter:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 19
 	Warhead@Laser_Heavy_ExtraDamage:
+		Versus:
+			None: 33
+			Light: 30
+			Medium: 24
+			Heavy: 18
+			Superheavy: 12
+			Scout: 36
+			Plate: 21
+			Concrete: 9
+			Wood: 9
+			Steel: 9
+			Flak: 27
+			Heroic: 15
+			Bomber: 9
+			Fighter: 9
+			Helicopter: 9
+			Spaceship: 9
+			ARMOR: 70
+			BLAST: 96
+			COMPOSITE: 70
+			HAZMAT: 56
+			REFLECTOR: 59
+			Shield: 9
 		InvalidTargets: Air
 	Warhead@EMPUnit:
 		InvalidTargets: Shielded, Air
 	Warhead@Railgun_Heavy_ExtraDamage:
 		InvalidTargets: Air
+	Warhead@EMPUnit: AffectsIntegrity
+	Warhead@EMPUnit:
+		ValidRelationships: Neutral, Enemy
+		Damage: 1000
+	Warhead@Railgun_Heavy_Flat: AreaDamage
+	Warhead@Laser_Heavy_ExtraDamage: SpreadDamage
+	Warhead@Laser_Heavy_ExtraDamage:
+		ValidTargets: Ground, Water, Air
+		Spread: 200
+		Damage: 1000
+		Falloff: 100, 75, 50, 25
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Railgun_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 96
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 97
+			COMPOSITE: 41
+			BLAST: 77
+			REFLECTOR: 64
+			ARMOR: 70
+			Shield: 306
+			Superheavy: 200
+			Heavy: 181
+			Medium: 156
+			Light: 123
+			Plate: 97
+			Scout: 94
+			Concrete: 92
+			Spaceship: 88
+			Flak: 83
+			Steel: 80
+			Helicopter: 79
+			Bomber: 73
+			None: 72
+			Wood: 70
+			Fighter: 66
+			Heroic: 46
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heavy: 24
+			Medium: 23
+			Light: 22
+			Scout: 21
+			Heroic: 20
+			Plate: 19
+			Flak: 18
+			None: 17
+			Concrete: 16
+			Steel: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+	Warhead@Tesla_Heavy_ExtraDamage:
+		Spread: 200
+		Falloff: 100, 75, 50, 25
 DalekCannonScatterE:
 	Inherits: DalekCannonScatter
 	Warhead@Tesla_Heavy:
@@ -845,13 +2190,123 @@ DalekCannonScatterE:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 19
 	Warhead@Tesla_Heavy_ExtraDamage:
+		Versus:
+			None: 125
+			Light: 25
+			Medium: 50
+			Heavy: 75
+			Superheavy: 100
+			Scout: 10
+			Plate: 175
+			Concrete: 10
+			Wood: 10
+			Steel: 10
+			Flak: 150
+			Heroic: 200
+			Bomber: 10
+			Fighter: 10
+			Helicopter: 10
+			Spaceship: 10
+			ARMOR: 70
+			BLAST: 98
+			COMPOSITE: 72
+			HAZMAT: 61
+			REFLECTOR: 51
+			Shield: 300
 		InvalidTargets: Air
 	Warhead@Laser_Heavy_ExtraDamage:
+		Versus:
+			None: 33
+			Light: 30
+			Medium: 24
+			Heavy: 18
+			Superheavy: 12
+			Scout: 36
+			Plate: 21
+			Concrete: 9
+			Wood: 9
+			Steel: 9
+			Flak: 27
+			Heroic: 15
+			Bomber: 9
+			Fighter: 9
+			Helicopter: 9
+			Spaceship: 9
+			ARMOR: 70
+			BLAST: 96
+			COMPOSITE: 70
+			HAZMAT: 56
+			REFLECTOR: 59
+			Shield: 9
 		InvalidTargets: Air
 	Warhead@EMPUnit:
 		InvalidTargets: Shielded, Air
 	Warhead@Railgun_Heavy_ExtraDamage:
 		InvalidTargets: Air
+	Warhead@EMPUnit: AffectsIntegrity
+	Warhead@EMPUnit:
+		ValidRelationships: Neutral, Enemy
+		Damage: 1000
+	Warhead@Railgun_Heavy_Flat: AreaDamage
+	Warhead@Laser_Heavy_ExtraDamage: SpreadDamage
+	Warhead@Laser_Heavy_ExtraDamage:
+		ValidTargets: Ground, Water, Air
+		Spread: 200
+		Damage: 1000
+		Falloff: 100, 75, 50, 25
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Railgun_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 96
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 97
+			COMPOSITE: 41
+			BLAST: 77
+			REFLECTOR: 64
+			ARMOR: 70
+			Shield: 306
+			Superheavy: 200
+			Heavy: 181
+			Medium: 156
+			Light: 123
+			Plate: 97
+			Scout: 94
+			Concrete: 92
+			Spaceship: 88
+			Flak: 83
+			Steel: 80
+			Helicopter: 79
+			Bomber: 73
+			None: 72
+			Wood: 70
+			Fighter: 66
+			Heroic: 46
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heavy: 24
+			Medium: 23
+			Light: 22
+			Scout: 21
+			Heroic: 20
+			Plate: 19
+			Flak: 18
+			None: 17
+			Concrete: 16
+			Steel: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+	Warhead@Tesla_Heavy_ExtraDamage:
+		Spread: 200
+		Falloff: 100, 75, 50, 25
 BlackHoleMaker:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -928,11 +2383,9 @@ BlackHoleSuck:
 		ImpactSounds: nax_bh_slurp_01.wav, nax_bh_slurp_02.wav, nax_bh_slurp_03.wav
 
 NaxCorrosionRocket:
-	Inherits@roleflat: ^Warhead_MissileAP_Medium_Flat
-	Inherits: ^Warhead_Concussion_Light
-	Inherits@2: ^Warhead_MissileAP_Heavy
-	Inherits@3: ^Effect_MissileAP_Heavy
-	Inherits@4: ^RA2MediumMissile
+	Inherits@xNaxCorrosionRocket0: ^Warhead_MissileAP_Medium
+	Inherits@xNaxCorrosionRocket1: ^Projectile_Missile_Medium
+	Inherits@xNaxCorrosionRocket2: ^Effect_Clsn_Medium_RA2
 	ReloadDelay: 50
 	Burst: 2
 	BurstDelays: 2
@@ -984,6 +2437,60 @@ NaxCorrosionRocket:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
+	Projectile:
+		ContrailLength: 33
+		ContrailStartWidth: 33
+		ContrailEndWidth: 1
+	Warhead@MissileAP_Medium_Flat: AreaDamage
+	Warhead@MissileAP_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 64
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 95
+			COMPOSITE: 44
+			BLAST: 68
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 145
+			Superheavy: 200
+			Heavy: 177
+			Medium: 161
+			Light: 146
+			Spaceship: 124
+			Helicopter: 123
+			Scout: 114
+			Bomber: 112
+			Concrete: 82
+			Fighter: 75
+			Plate: 64
+			Steel: 55
+			Wood: 53
+			Flak: 44
+			Heroic: 37
+			None: 33
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Superheavy: 20
+			Heavy: 19
+			Medium: 18
+			Light: 17
+			Scout: 16
+			Spaceship: 15
+			Helicopter: 14
+			Bomber: 13
+			Fighter: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
 
 NaxCorrosionExpand1:
 	ReloadDelay: 5
@@ -1155,6 +2662,54 @@ NaxCorrosionRocketTrooper_elite:
 		FriendlyFireSpread: 75
 	Projectile: Missile
 		VerticalRateOfTurn: 16
+	Warhead@MissileAP_Medium_Flat: AreaDamage
+	Warhead@MissileAP_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		Spread: 64
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 95
+			COMPOSITE: 44
+			BLAST: 68
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 145
+			Superheavy: 200
+			Heavy: 177
+			Medium: 161
+			Light: 146
+			Spaceship: 124
+			Helicopter: 123
+			Scout: 114
+			Bomber: 112
+			Concrete: 82
+			Fighter: 75
+			Plate: 64
+			Steel: 55
+			Wood: 53
+			Flak: 44
+			Heroic: 37
+			None: 33
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Superheavy: 20
+			Heavy: 19
+			Medium: 18
+			Light: 17
+			Scout: 16
+			Spaceship: 15
+			Helicopter: 14
+			Bomber: 13
+			Fighter: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
 
 NaxCorrosionBeast:
 	Inherits: NaxCorrosionRocket
@@ -1167,6 +2722,56 @@ NaxCorrosionBeast:
 		Inaccuracy: 400
 
 	MinRange: 1595
+	Warhead@MissileAP_Medium_Flat: AreaDamage
+	Warhead@MissileAP_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 64
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 95
+			COMPOSITE: 44
+			BLAST: 68
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 145
+			Superheavy: 200
+			Heavy: 177
+			Medium: 161
+			Light: 146
+			Spaceship: 124
+			Helicopter: 123
+			Scout: 114
+			Bomber: 112
+			Concrete: 82
+			Fighter: 75
+			Plate: 64
+			Steel: 55
+			Wood: 53
+			Flak: 44
+			Heroic: 37
+			None: 33
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Superheavy: 20
+			Heavy: 19
+			Medium: 18
+			Light: 17
+			Scout: 16
+			Spaceship: 15
+			Helicopter: 14
+			Bomber: 13
+			Fighter: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
 NaxCorrosionBeast_elite:
 	Inherits: NaxCorrosionBeast
 	Range: 8984
@@ -1174,6 +2779,56 @@ NaxCorrosionBeast_elite:
 
 	Projectile: Missile
 		VerticalRateOfTurn: 16
+	Warhead@MissileAP_Medium_Flat: AreaDamage
+	Warhead@MissileAP_Medium_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 64
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 95
+			COMPOSITE: 44
+			BLAST: 68
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 145
+			Superheavy: 200
+			Heavy: 177
+			Medium: 161
+			Light: 146
+			Spaceship: 124
+			Helicopter: 123
+			Scout: 114
+			Bomber: 112
+			Concrete: 82
+			Fighter: 75
+			Plate: 64
+			Steel: 55
+			Wood: 53
+			Flak: 44
+			Heroic: 37
+			None: 33
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Superheavy: 20
+			Heavy: 19
+			Medium: 18
+			Light: 17
+			Scout: 16
+			Spaceship: 15
+			Helicopter: 14
+			Bomber: 13
+			Fighter: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
 
 NaxCrystalLeech:
 	Inherits@wh: ^Warhead_Tesla_Heavy
@@ -1243,6 +2898,29 @@ UbermenschLaser:
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 4000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		Versus:
+			None: 125
+			Light: 25
+			Medium: 50
+			Heavy: 75
+			Superheavy: 100
+			Scout: 10
+			Plate: 175
+			Concrete: 10
+			Wood: 10
+			Steel: 10
+			Flak: 150
+			Heroic: 200
+			Bomber: 10
+			Fighter: 10
+			Helicopter: 10
+			Spaceship: 10
+			ARMOR: 70
+			BLAST: 98
+			COMPOSITE: 72
+			HAZMAT: 61
+			REFLECTOR: 51
+			Shield: 300
 		DamageTypes: Tesla
 		Damage: 2000
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
@@ -1253,7 +2931,13 @@ UbermenschLaser:
 		ValidTargets: Ground, Water
 		Damage: 16000
 		PercentageScale: 7494
-
+	Warhead@EMPUnit: AffectsIntegrity
+	Warhead@EMPUnit:
+		ValidRelationships: Neutral, Enemy
+		Damage: 1000
+	Warhead@Tesla_Heavy_ExtraDamage:
+		Spread: 200
+		Falloff: 100, 75, 50, 25
 UbermenschLaser_elite:
 	Inherits: UbermenschLaser
 	Range: 6801
@@ -1263,10 +2947,38 @@ UbermenschLaser_elite:
 		ValidTargets: Ground, Water
 		Damage: 16000
 		PercentageScale: 7494
-
+	Warhead@EMPUnit: AffectsIntegrity
+	Warhead@EMPUnit:
+		ValidRelationships: Neutral, Enemy
+		Damage: 1000
+	Warhead@Tesla_Heavy_ExtraDamage:
+		Versus:
+			None: 125
+			Light: 25
+			Medium: 50
+			Heavy: 75
+			Superheavy: 100
+			Scout: 10
+			Plate: 175
+			Concrete: 10
+			Wood: 10
+			Steel: 10
+			Flak: 150
+			Heroic: 200
+			Bomber: 10
+			Fighter: 10
+			Helicopter: 10
+			Spaceship: 10
+			ARMOR: 70
+			BLAST: 98
+			COMPOSITE: 72
+			HAZMAT: 61
+			REFLECTOR: 51
+			Shield: 300
+		Spread: 200
+		Falloff: 100, 75, 50, 25
 NaxiCowDrop:
 	Inherits@wh: ^Warhead_Demolition_Heavy
-	Inherits@fx: ^Effect_Demolition_Heavy
 	Inherits@2: ^Effect_Clsn_Medium_RA2
 	ReloadDelay: 50
 	Range: 2000
@@ -1288,7 +3000,6 @@ NaxiCowDrop:
 		Explosions: large_splash
 		ImpactSounds: gexpwasa.wav
 		ValidTargets: Water, Underwater
-	-Warhead@Effect1:
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 3
 		Duration: 512
@@ -1299,6 +3010,31 @@ NaxiCowDrop:
 		Palette: ra2effect
 		Weapon: RA2Cloud
 		InvalidTargets: Water
+	Warhead@Smudge1: LeaveSmudge
+	Warhead@Smudge2: LeaveSmudge
+	Warhead@Smudge2RA2: LeaveSmudge
+	Warhead@Effect2: CreateEffect
+	Warhead@Effect2:
+		Delay: 6
+		Explosions: napalm
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@Smudge1:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
 
 Lunar_Green105mm_elite:
 	Inherits: Lunar_Green105mm
@@ -1310,13 +3046,94 @@ Lunar_Green105mm_elite:
 		ValidTargets: Ground, Water
 		Damage: 16000
 		PercentageScale: 9994
+	Warhead@EMPUnit: AffectsIntegrity
+	Warhead@EMPUnit:
+		ValidRelationships: Neutral, Enemy
+		Damage: 1000
+	Warhead@Tesla_Heavy_Flat: AreaDamage
+	Warhead@Tesla_Heavy_ExtraDamage:
+		Versus:
+			None: 125
+			Light: 25
+			Medium: 50
+			Heavy: 75
+			Superheavy: 100
+			Scout: 10
+			Plate: 175
+			Concrete: 10
+			Wood: 10
+			Steel: 10
+			Flak: 150
+			Heroic: 200
+			Bomber: 10
+			Fighter: 10
+			Helicopter: 10
+			Spaceship: 10
+			ARMOR: 70
+			BLAST: 98
+			COMPOSITE: 72
+			HAZMAT: 61
+			REFLECTOR: 51
+			Shield: 300
+		ValidTargets: Ground, Water
+		Spread: 200
+		Falloff: 100, 75, 50, 25
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Tesla
+	Warhead@Tesla_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 93
+		Falloff: 100, 55, 0
+		Versus:
+			HAZMAT: 61
+			COMPOSITE: 73
+			BLAST: 97
+			REFLECTOR: 50
+			ARMOR: 70
+			Shield: 368
+			Superheavy: 155
+			Plate: 146
+			Heavy: 135
+			Concrete: 129
+			Medium: 117
+			Flak: 115
+			Steel: 103
+			Light: 102
+			Spaceship: 100
+			None: 90
+			Scout: 88
+			Heroic: 83
+			Wood: 82
+			Helicopter: 61
+			Bomber: 51
+			Fighter: 44
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
+		IntegrityScale: 100
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heroic: 24
+			Heavy: 23
+			Plate: 22
+			Medium: 21
+			Flak: 20
+			Light: 19
+			None: 18
+			Scout: 17
+			Concrete: 16
+			Steel: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
 
 Lunar_GreenTigerCannon:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
-	Inherits@fx: ^Effect_Tesla_Heavy
 	Inherits@Cannon: LunarTigerCannon
-	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
 	Warhead@Tesla_Heavy:
 		Damage: 20000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
@@ -1325,13 +3142,166 @@ Lunar_GreenTigerCannon:
 	Report: laser_cannon3_4.wav
 
 	-Warhead@CannonHE_Medium:
+	InvalidTargets: wall
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
+	Warhead@Smudge1:
+	Warhead@Smudge2:
+	Warhead@Smudge2RA2:
+	Warhead@Effect1:
+	Warhead@Effect2:
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+	Warhead@RA2Scorch:
+	Warhead@GroundFire: SpawnActor
+	Projectile:
+		ContrailStartColor: 21f3b7AA
+		ContrailLength: 25
+		ContrailStartWidth: 25
+		ContrailEndWidth: 1
+	Warhead@Effect:
+		Explosions: steel_blueexp
+		ImpactSounds: makoexplose.wav
+		ImpactActors: false
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@Effect1:
+		Explosions: poof
+		ImpactSounds: siege_impact.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+	Warhead@Effect2:
+		Delay: 6
+		Explosions: napalm
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@GroundFire:
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@HeavyBombPercentage:
+		ValidTargets: Ground, Ship
+		Spread: 400
+		Damage: 2
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			Shield: 35
+			Wood: 25
+			Concrete: 24
+			Steel: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+	Warhead@LightChemicalWeaponPercentage:
+		ValidTargets: Ground, Water
+		Spread: 175
+		Damage: 2
+		Falloff: 99, 66, 33
+		Versus:
+			Shield: 17
+			Superheavy: 16
+			Plate: 15
+			Heavy: 14
+			Flak: 13
+			Medium: 12
+			None: 11
+			Light: 10
+			Heroic: 9
+			Scout: 8
+			Steel: 7
+			Concrete: 6
+			Wood: 5
+			Spaceship: 4
+			Helicopter: 3
+			Bomber: 2
+			Fighter: 1
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+	Warhead@MediumFlameWeaponPercentage:
+		ValidTargets: Ground, Water
+		Spread: 375
+		Damage: 2
+		Falloff: 111, 33, 11, 3
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Wood: 16
+			Concrete: 15
+			Steel: 14
+			Scout: 13
+			Light: 12
+			Medium: 11
+			Heavy: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge1:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@EMPUnit: AffectsIntegrity
+	Warhead@Concrete:
+		Damage: 150
+	Warhead@EMPUnit:
+		ValidRelationships: Neutral, Enemy
+		Damage: 1000
+	Warhead@EffectAir:
+		Explosions: med_explosion_air
+	Warhead@EffectWater:
+		Explosions: ra2_small_watersplash
+	Warhead@Glow:
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+	Warhead@Smudge:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 Lunar_GreenTigerCannon_elite:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
-	Inherits@fx: ^Effect_Tesla_Heavy
 	Inherits@Cannon: LunarTigerCannon_elite
-	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
 	Warhead@Tesla_Heavy:
 		Damage: 20000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
@@ -1340,14 +3310,167 @@ Lunar_GreenTigerCannon_elite:
 	Report: laser_cannon3_4.wav
 
 	-Warhead@CannonHE_Medium:
+	InvalidTargets: wall
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
+	Warhead@Smudge1:
+	Warhead@Smudge2:
+	Warhead@Smudge2RA2:
+	Warhead@Effect1:
+	Warhead@Effect2:
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+	Warhead@RA2Scorch:
+	Warhead@GroundFire: SpawnActor
+	Projectile:
+		ContrailStartColor: 21f3b7AA
+		ContrailLength: 25
+		ContrailStartWidth: 25
+		ContrailEndWidth: 1
+	Warhead@Effect:
+		Explosions: steel_blueexp
+		ImpactSounds: makoexplose.wav
+		ImpactActors: false
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@Effect1:
+		Explosions: poof
+		ImpactSounds: siege_impact.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+	Warhead@Effect2:
+		Delay: 6
+		Explosions: napalm
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@GroundFire:
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@HeavyBombPercentage:
+		ValidTargets: Ground, Ship
+		Spread: 400
+		Damage: 2
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			Shield: 35
+			Wood: 25
+			Concrete: 24
+			Steel: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+	Warhead@LightChemicalWeaponPercentage:
+		ValidTargets: Ground, Water
+		Spread: 175
+		Damage: 2
+		Falloff: 99, 66, 33
+		Versus:
+			Shield: 17
+			Superheavy: 16
+			Plate: 15
+			Heavy: 14
+			Flak: 13
+			Medium: 12
+			None: 11
+			Light: 10
+			Heroic: 9
+			Scout: 8
+			Steel: 7
+			Concrete: 6
+			Wood: 5
+			Spaceship: 4
+			Helicopter: 3
+			Bomber: 2
+			Fighter: 1
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+	Warhead@MediumFlameWeaponPercentage:
+		ValidTargets: Ground, Water
+		Spread: 375
+		Damage: 2
+		Falloff: 111, 33, 11, 3
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Wood: 16
+			Concrete: 15
+			Steel: 14
+			Scout: 13
+			Light: 12
+			Medium: 11
+			Heavy: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge1:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@EMPUnit: AffectsIntegrity
+	Warhead@Concrete:
+		Damage: 150
+	Warhead@EMPUnit:
+		ValidRelationships: Neutral, Enemy
+		Damage: 1000
+	Warhead@EffectAir:
+		Explosions: med_explosion_air
+	Warhead@EffectWater:
+		Explosions: ra2_small_watersplash
+	Warhead@Glow:
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+	Warhead@Smudge:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 Lunar_GreenJadgDestroyer:
-	Inherits@finalmain: ^Warhead_Tesla_Heavy_Flat
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^Effect_Tesla_Heavy
 	Inherits@Cannon: LunarNaxiJadgDestroyer
-	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
 	Warhead@Tesla_Heavy:
 		Damage: 30000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
@@ -1473,14 +3596,73 @@ Lunar_GreenJadgDestroyer:
 		ValidTargets: Ground, Water
 		Damage: 120000
 		PercentageScale: 0
+	Projectile:
+		ContrailStartColor: 21f3b7AA
+		ContrailLength: 25
+		ContrailStartWidth: 25
+		ContrailEndWidth: 1
+	Warhead@Effect:
+		Explosions: steel_blueexp
+		ImpactSounds: makoexplose.wav
+	Warhead@Effect:
+		ImpactActors: false
+	Warhead@Tesla_Heavy_Flat: AreaDamage
+	Warhead@Tesla_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 93
+		Falloff: 100, 55, 0
+		Versus:
+			HAZMAT: 61
+			COMPOSITE: 73
+			BLAST: 97
+			REFLECTOR: 50
+			ARMOR: 70
+			Shield: 368
+			Superheavy: 155
+			Plate: 146
+			Heavy: 135
+			Concrete: 129
+			Medium: 117
+			Flak: 115
+			Steel: 103
+			Light: 102
+			Spaceship: 100
+			None: 90
+			Scout: 88
+			Heroic: 83
+			Wood: 82
+			Helicopter: 61
+			Bomber: 51
+			Fighter: 44
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
+		IntegrityScale: 100
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heroic: 24
+			Heavy: 23
+			Plate: 22
+			Medium: 21
+			Flak: 20
+			Light: 19
+			None: 18
+			Scout: 17
+			Concrete: 16
+			Steel: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
 
 Lunar_GreenJadgDestroyer_elite:
-	Inherits@finalmain: ^Warhead_Tesla_Heavy_Flat
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^Effect_Tesla_Heavy
 	Inherits@Cannon: LunarNaxiJadgDestroyer_elite
-	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
 	Warhead@Tesla_Heavy:
 		Damage: 30000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
@@ -1606,13 +3788,84 @@ Lunar_GreenJadgDestroyer_elite:
 		ValidTargets: Ground, Water
 		Damage: 120000
 		PercentageScale: 0
+	Projectile:
+		ContrailStartColor: 21f3b7AA
+		ContrailLength: 25
+		ContrailStartWidth: 25
+		ContrailEndWidth: 1
+	Warhead@Concrete:
+		Damage: 200
+	Warhead@Effect:
+		Explosions: steel_blueexp
+		ImpactSounds: makoexplose.wav
+	Warhead@EffectAir:
+		Explosions: big_explosion_air
+	Warhead@EffectWater:
+		Explosions: ra2_large_watersplash
+		ImpactSounds: gexpwala.wav
+	Warhead@Glow:
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@ShieldHit:
+		Duration: 12
+	Warhead@Effect:
+		ImpactActors: false
+	Warhead@Tesla_Heavy_Flat: AreaDamage
+	Warhead@Tesla_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 93
+		Falloff: 100, 55, 0
+		Versus:
+			HAZMAT: 61
+			COMPOSITE: 73
+			BLAST: 97
+			REFLECTOR: 50
+			ARMOR: 70
+			Shield: 368
+			Superheavy: 155
+			Plate: 146
+			Heavy: 135
+			Concrete: 129
+			Medium: 117
+			Flak: 115
+			Steel: 103
+			Light: 102
+			Spaceship: 100
+			None: 90
+			Scout: 88
+			Heroic: 83
+			Wood: 82
+			Helicopter: 61
+			Bomber: 51
+			Fighter: 44
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
+		IntegrityScale: 100
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heroic: 24
+			Heavy: 23
+			Plate: 22
+			Medium: 21
+			Flak: 20
+			Light: 19
+			None: 18
+			Scout: 17
+			Concrete: 16
+			Steel: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
 
 Lunar_GreenGrilleArty:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
-	Inherits@fx: ^Effect_Tesla_Heavy
 	Inherits@Cannon: NaxGrilleArty
-	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
 	Warhead@Tesla_Heavy:
 		Damage: 64000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
@@ -1621,13 +3874,51 @@ Lunar_GreenGrilleArty:
 	Report: laser_cannon3_2.wav
 
 	-Warhead@CannonHE_Heavy:
+	Projectile:
+		ContrailLength: 25
+		ContrailStartColor: 21f3b7AA
+		ContrailStartWidth: 25
+		ContrailEndWidth: 1
+	Warhead@Effect:
+		Explosions: steel_blueexp
+		ImpactSounds: makoexplose.wav
+	Warhead@RA2Crater:
+	Warhead@EffectAir:
+	Warhead@EffectAir:
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EMPUnit: AffectsIntegrity
+	Warhead@EffectWater:
+	Warhead@Concrete:
+		Damage: 100
+	Warhead@EMPUnit:
+		ValidRelationships: Neutral, Enemy
+		Damage: 1000
+	Warhead@Effect:
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+		ExplosionPalette: ra2effect
+	Warhead@EffectWater:
+		Explosions: ra2_small_watersplash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+		ExplosionPalette: ra2effect
+	Warhead@Glow:
+		Scale: 0.3
+		FadeFrames: 6
+	Warhead@ShieldHit:
+		Duration: 10
 
 Lunar_GreenGrilleArty_elite:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
-	Inherits@fx: ^Effect_Tesla_Heavy
 	Inherits@Cannon: NaxGrilleArty_elite
-	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
 	Warhead@Tesla_Heavy:
 		Damage: 64000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
@@ -1636,17 +3927,108 @@ Lunar_GreenGrilleArty_elite:
 	Report: laser_cannon3_2.wav
 
 	-Warhead@CannonHE_Heavy:
+	Projectile:
+		ContrailLength: 25
+		ContrailStartColor: 21f3b7AA
+		ContrailStartWidth: 25
+		ContrailEndWidth: 1
+	Warhead@Effect:
+		Explosions: steel_blueexp
+		ImpactSounds: makoexplose.wav
+	Warhead@RA2Crater:
+	Warhead@EffectAir:
+	Warhead@EffectAir:
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EMPUnit: AffectsIntegrity
+	Warhead@EffectWater:
+	Warhead@EMPUnit:
+		ValidRelationships: Neutral, Enemy
+		Damage: 1000
+	Warhead@Effect:
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+		ExplosionPalette: ra2effect
+	Warhead@EffectWater:
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+		ExplosionPalette: ra2effect
 
 Lunar_GreenSturmArty:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
-	Inherits@fx: ^Effect_Tesla_Heavy
 	Inherits@Cannon: NaxSturmArty
-	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
 	-Warhead@Demolition_Heavy:
 	Warhead@Tesla_Heavy:
 		Damage: 82000
 	Report: laser_cannon3_4.wav
+	Projectile:
+		ContrailLength: 25
+		ContrailStartWidth: 25
+		ContrailEndWidth: 1
+		ContrailStartColor: 21f3b7AA
+	Warhead@Effect:
+		Explosions: steel_blueexp
+		ImpactSounds: makoexplose.wav
+	Warhead@Smudge1:
+	Warhead@RA2Crater:
+	Warhead@Smudge2:
+	Warhead@Smudge2RA2:
+	Warhead@Effect1:
+	Warhead@Effect2:
+	Warhead@EffectAir:
+	Warhead@Effect1:
+		Explosions: building
+		ImpactSounds: siege_impact.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+	Warhead@Effect2:
+		Delay: 6
+		Explosions: napalm
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@EffectAir:
+		Explosions: med_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge1:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2:
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@EMPUnit: AffectsIntegrity
+	Warhead@Concrete:
+		Damage: 100
+	Warhead@EMPUnit:
+		ValidRelationships: Neutral, Enemy
+		Damage: 1000
+	Warhead@EffectWater:
+		Explosions: ra2_small_watersplash
+	Warhead@Glow:
+		Scale: 0.3
+		FadeFrames: 6
+	Warhead@ShieldHit:
+		Duration: 10
 schwarzermond_lunarsoldier_rifle_yellow:
 	Inherits: schwarzermond_lunarsoldier_rifle
 	Burst: 2
@@ -1658,6 +4040,68 @@ schwarzermond_lunarsoldier_rifle_yellow:
 		Damage: 24000
 		PercentageScale: 4996
 		PhysicalStateScale: 25
+	Warhead@Effect:
+	Warhead@Effect:
+	Warhead@EffectWater:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@EffectWater:
+		Explosions: water_piff
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+	Warhead@Smudge:
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Laser_Heavy_Flat: AreaDamage
+	Warhead@Laser_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 64
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 56
+			COMPOSITE: 71
+			BLAST: 95
+			REFLECTOR: 59
+			ARMOR: 70
+			Shield: 294
+			Superheavy: 162
+			Spaceship: 144
+			Concrete: 141
+			Plate: 134
+			Heavy: 124
+			Helicopter: 114
+			Steel: 103
+			Medium: 100
+			Flak: 97
+			Bomber: 88
+			Light: 80
+			Wood: 75
+			None: 70
+			Fighter: 68
+			Scout: 55
+			Heroic: 45
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heroic: 24
+			Spaceship: 23
+			Concrete: 22
+			Heavy: 21
+			Plate: 20
+			Helicopter: 19
+			Steel: 18
+			Medium: 17
+			Flak: 16
+			Bomber: 15
+			Wood: 14
+			Light: 13
+			None: 12
+			Fighter: 11
+			Scout: 10
 
 schwarzermond_lunarsoldier_rifle_yellow_elite:
 	Inherits: schwarzermond_lunarsoldier_rifle_elite
@@ -1670,6 +4114,68 @@ schwarzermond_lunarsoldier_rifle_yellow_elite:
 		Damage: 24000
 		PercentageScale: 4996
 		PhysicalStateScale: 25
+	Warhead@Effect:
+	Warhead@Effect:
+	Warhead@EffectWater:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@EffectWater:
+		Explosions: water_piff
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+	Warhead@Smudge:
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Laser_Heavy_Flat: AreaDamage
+	Warhead@Laser_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 64
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 56
+			COMPOSITE: 71
+			BLAST: 95
+			REFLECTOR: 59
+			ARMOR: 70
+			Shield: 294
+			Superheavy: 162
+			Spaceship: 144
+			Concrete: 141
+			Plate: 134
+			Heavy: 124
+			Helicopter: 114
+			Steel: 103
+			Medium: 100
+			Flak: 97
+			Bomber: 88
+			Light: 80
+			Wood: 75
+			None: 70
+			Fighter: 68
+			Scout: 55
+			Heroic: 45
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heroic: 24
+			Spaceship: 23
+			Concrete: 22
+			Heavy: 21
+			Plate: 20
+			Helicopter: 19
+			Steel: 18
+			Medium: 17
+			Flak: 16
+			Bomber: 15
+			Wood: 14
+			Light: 13
+			None: 12
+			Fighter: 11
+			Scout: 10
 
 schwarzermond_lunarsoldier_rifle_amplified:
 	Inherits: schwarzermond_lunarsoldier_rifle
@@ -1682,6 +4188,68 @@ schwarzermond_lunarsoldier_rifle_amplified:
 		Damage: 24000
 		PercentageScale: 4996
 		PhysicalStateScale: 25
+	Warhead@Effect:
+	Warhead@Effect:
+	Warhead@EffectWater:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@EffectWater:
+		Explosions: water_piff
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+	Warhead@Smudge:
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Laser_Heavy_Flat: AreaDamage
+	Warhead@Laser_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 64
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 56
+			COMPOSITE: 71
+			BLAST: 95
+			REFLECTOR: 59
+			ARMOR: 70
+			Shield: 294
+			Superheavy: 162
+			Spaceship: 144
+			Concrete: 141
+			Plate: 134
+			Heavy: 124
+			Helicopter: 114
+			Steel: 103
+			Medium: 100
+			Flak: 97
+			Bomber: 88
+			Light: 80
+			Wood: 75
+			None: 70
+			Fighter: 68
+			Scout: 55
+			Heroic: 45
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heroic: 24
+			Spaceship: 23
+			Concrete: 22
+			Heavy: 21
+			Plate: 20
+			Helicopter: 19
+			Steel: 18
+			Medium: 17
+			Flak: 16
+			Bomber: 15
+			Wood: 14
+			Light: 13
+			None: 12
+			Fighter: 11
+			Scout: 10
 
 schwarzermond_lunarsoldier_rifle_amplified_elite:
 	Inherits: schwarzermond_lunarsoldier_rifle_elite
@@ -1694,18 +4262,94 @@ schwarzermond_lunarsoldier_rifle_amplified_elite:
 		Damage: 24000
 		PercentageScale: 4996
 		PhysicalStateScale: 25
+	Warhead@Effect:
+	Warhead@Effect:
+	Warhead@EffectWater:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@EffectWater:
+		Explosions: water_piff
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+	Warhead@Smudge:
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Laser_Heavy_Flat: AreaDamage
+	Warhead@Laser_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 64
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 56
+			COMPOSITE: 71
+			BLAST: 95
+			REFLECTOR: 59
+			ARMOR: 70
+			Shield: 294
+			Superheavy: 162
+			Spaceship: 144
+			Concrete: 141
+			Plate: 134
+			Heavy: 124
+			Helicopter: 114
+			Steel: 103
+			Medium: 100
+			Flak: 97
+			Bomber: 88
+			Light: 80
+			Wood: 75
+			None: 70
+			Fighter: 68
+			Scout: 55
+			Heroic: 45
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heroic: 24
+			Spaceship: 23
+			Concrete: 22
+			Heavy: 21
+			Plate: 20
+			Helicopter: 19
+			Steel: 18
+			Medium: 17
+			Flak: 16
+			Bomber: 15
+			Wood: 14
+			Light: 13
+			None: 12
+			Fighter: 11
+			Scout: 10
 
 Lunar_YellowLaserT:
 	Inherits: NaxLaserT
 	Burst: 2
 	Projectile: LaserZap
 		Color: f3e021AA
+	Warhead@EffectWater:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@ShieldHit:
+		Duration: 10
+	Warhead@Smudge:
+		SmudgeType: Scorch
 
 Lunar_AmplifiedLaserT:
 	Inherits: NaxLaserT
 	Burst: 3
 	Projectile: LaserZap
 		Color: f3e021AA
+	Warhead@EffectWater:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@ShieldHit:
+		Duration: 10
+	Warhead@Smudge:
+		SmudgeType: Scorch
 
 Lunar_YellowBeetleLaser:
 	Inherits: NaxiBeetleLaser_elite
@@ -1733,6 +4377,13 @@ Lunar_YellowBeetleLaser:
 	Warhead@LegacyLaserExtraDamage:
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Air
+	Warhead@EffectWater:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@ShieldHit:
+		Duration: 10
+	Warhead@Smudge:
+		SmudgeType: Scorch
 Lunar_YellowBeetleLaser_AA:
 	Inherits: NaxiBeetleLaser_AA_elite
 	Burst: 3
@@ -1759,6 +4410,13 @@ Lunar_YellowBeetleLaser_AA:
 		ValidTargets: Air
 	Warhead@Bullet_Medium_Percentage:
 		ValidTargets: Air
+	Warhead@EffectWater:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@ShieldHit:
+		Duration: 10
+	Warhead@Smudge:
+		SmudgeType: Scorch
 Lunar_AmplifiedBeetleLaser:
 	Inherits: NaxiBeetleLaser_elite
 	Burst: 4
@@ -1785,6 +4443,13 @@ Lunar_AmplifiedBeetleLaser:
 	Warhead@LegacyLaserExtraDamage:
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Air
+	Warhead@EffectWater:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@ShieldHit:
+		Duration: 10
+	Warhead@Smudge:
+		SmudgeType: Scorch
 Lunar_AmplifiedBeetleLaser_AA:
 	Inherits: NaxiBeetleLaser_AA_elite
 	Burst: 4
@@ -1811,8 +4476,17 @@ Lunar_AmplifiedBeetleLaser_AA:
 		ValidTargets: Air
 	Warhead@Bullet_Medium_Percentage:
 		ValidTargets: Air
+	Warhead@EffectWater:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@ShieldHit:
+		Duration: 10
+	Warhead@Smudge:
+		SmudgeType: Scorch
 Lunar_YellowMP40Laser:
 	Inherits: NaxiMP40Laser
+	Inherits@fx_cover0: ^Effect_AlliedTigerCannon
+	Inherits@fx_cover1: ^Effect_Flame_Heavy
 	Burst: 6
 	BurstDelays: 3
 	Projectile: Bullet
@@ -1973,8 +4647,104 @@ Lunar_YellowMP40Laser:
 
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 13
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectWater:
+		ImpactSounds: splash9.aud
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectWater:
+	Warhead@Effect:
+	Warhead@RA2Scorch:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@EffectAir:
+		ExplosionPalette: ra2effect
+	Warhead@EffectWater:
+		Explosions: water_piffs
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHit:
+		Duration: 10
+	Warhead@Smudge:
+		SmudgeType: Scorch
+	-Warhead@GroundFire:
+	Warhead@Effect:
+		-GlowFadeFrames:
+		-GlowFadeInFrames:
+		-GlowScale:
+		-ImpactActors:
+	Warhead@Effect:
+		Explosions: ra2_piffs
+		ImpactSounds: kaboom15.aud
+		ValidTargets: Ground, Ship, Air
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+	Warhead@Smudge:
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Laser_Heavy_Flat: AreaDamage
+	Warhead@Laser_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 64
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 56
+			COMPOSITE: 71
+			BLAST: 95
+			REFLECTOR: 59
+			ARMOR: 70
+			Shield: 294
+			Superheavy: 162
+			Spaceship: 144
+			Concrete: 141
+			Plate: 134
+			Heavy: 124
+			Helicopter: 114
+			Steel: 103
+			Medium: 100
+			Flak: 97
+			Bomber: 88
+			Light: 80
+			Wood: 75
+			None: 70
+			Fighter: 68
+			Scout: 55
+			Heroic: 45
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heroic: 24
+			Spaceship: 23
+			Concrete: 22
+			Heavy: 21
+			Plate: 20
+			Helicopter: 19
+			Steel: 18
+			Medium: 17
+			Flak: 16
+			Bomber: 15
+			Wood: 14
+			Light: 13
+			None: 12
+			Fighter: 11
+			Scout: 10
 Lunar_YellowMP40Laser_elite:
 	Inherits: NaxiMP40Laser_elite
+	Inherits@fx_cover0: ^Effect_AlliedTigerCannon
+	Inherits@fx_cover1: ^Effect_Flame_Heavy
 	Burst: 11
 	BurstDelays: 3
 	-Warhead@CollapsedNaxiMP40Laser_eliteBullet_LightPercentage:
@@ -2131,8 +4901,104 @@ Lunar_YellowMP40Laser_elite:
 
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 13
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectWater:
+		ImpactSounds: splash9.aud
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectWater:
+	Warhead@Effect:
+	Warhead@RA2Scorch:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@EffectAir:
+		ExplosionPalette: ra2effect
+	Warhead@EffectWater:
+		Explosions: water_piffs
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHit:
+		Duration: 10
+	Warhead@Smudge:
+		SmudgeType: Scorch
+	-Warhead@GroundFire:
+	Warhead@Effect:
+		-GlowFadeFrames:
+		-GlowFadeInFrames:
+		-GlowScale:
+		-ImpactActors:
+	Warhead@Effect:
+		Explosions: ra2_piffs
+		ImpactSounds: kaboom15.aud
+		ValidTargets: Ground, Ship, Air
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+	Warhead@Smudge:
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Laser_Heavy_Flat: AreaDamage
+	Warhead@Laser_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 64
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 56
+			COMPOSITE: 71
+			BLAST: 95
+			REFLECTOR: 59
+			ARMOR: 70
+			Shield: 294
+			Superheavy: 162
+			Spaceship: 144
+			Concrete: 141
+			Plate: 134
+			Heavy: 124
+			Helicopter: 114
+			Steel: 103
+			Medium: 100
+			Flak: 97
+			Bomber: 88
+			Light: 80
+			Wood: 75
+			None: 70
+			Fighter: 68
+			Scout: 55
+			Heroic: 45
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heroic: 24
+			Spaceship: 23
+			Concrete: 22
+			Heavy: 21
+			Plate: 20
+			Helicopter: 19
+			Steel: 18
+			Medium: 17
+			Flak: 16
+			Bomber: 15
+			Wood: 14
+			Light: 13
+			None: 12
+			Fighter: 11
+			Scout: 10
 Lunar_AmplifiedMP40Laser:
 	Inherits: NaxiMP40Laser
+	Inherits@fx_cover0: ^Effect_AlliedTigerCannon
+	Inherits@fx_cover1: ^Effect_Flame_Heavy
 	Burst: 7
 	BurstDelays: 3
 	Projectile: Bullet
@@ -2293,8 +5159,104 @@ Lunar_AmplifiedMP40Laser:
 
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 13
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectWater:
+		ImpactSounds: splash9.aud
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectWater:
+	Warhead@Effect:
+	Warhead@RA2Scorch:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@EffectAir:
+		ExplosionPalette: ra2effect
+	Warhead@EffectWater:
+		Explosions: water_piffs
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHit:
+		Duration: 10
+	Warhead@Smudge:
+		SmudgeType: Scorch
+	-Warhead@GroundFire:
+	Warhead@Effect:
+		-GlowFadeFrames:
+		-GlowFadeInFrames:
+		-GlowScale:
+		-ImpactActors:
+	Warhead@Effect:
+		Explosions: ra2_piffs
+		ImpactSounds: kaboom15.aud
+		ValidTargets: Ground, Ship, Air
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+	Warhead@Smudge:
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Laser_Heavy_Flat: AreaDamage
+	Warhead@Laser_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 64
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 56
+			COMPOSITE: 71
+			BLAST: 95
+			REFLECTOR: 59
+			ARMOR: 70
+			Shield: 294
+			Superheavy: 162
+			Spaceship: 144
+			Concrete: 141
+			Plate: 134
+			Heavy: 124
+			Helicopter: 114
+			Steel: 103
+			Medium: 100
+			Flak: 97
+			Bomber: 88
+			Light: 80
+			Wood: 75
+			None: 70
+			Fighter: 68
+			Scout: 55
+			Heroic: 45
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heroic: 24
+			Spaceship: 23
+			Concrete: 22
+			Heavy: 21
+			Plate: 20
+			Helicopter: 19
+			Steel: 18
+			Medium: 17
+			Flak: 16
+			Bomber: 15
+			Wood: 14
+			Light: 13
+			None: 12
+			Fighter: 11
+			Scout: 10
 Lunar_AmplifiedMP40Laser_elite:
 	Inherits: NaxiMP40Laser_elite
+	Inherits@fx_cover0: ^Effect_AlliedTigerCannon
+	Inherits@fx_cover1: ^Effect_Flame_Heavy
 	Burst: 12
 	BurstDelays: 3
 	-Warhead@CollapsedNaxiMP40Laser_eliteBullet_LightPercentage:
@@ -2451,6 +5413,100 @@ Lunar_AmplifiedMP40Laser_elite:
 
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 13
+	Warhead@DuneRock:
+	Warhead@DuneSand:
+	Warhead@RA2Crater:
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectWater:
+		ImpactSounds: splash9.aud
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectWater:
+	Warhead@Effect:
+	Warhead@RA2Scorch:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@EffectAir:
+		ExplosionPalette: ra2effect
+	Warhead@EffectWater:
+		Explosions: water_piffs
+	Warhead@RA2Scorch:
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHit:
+		Duration: 10
+	Warhead@Smudge:
+		SmudgeType: Scorch
+	-Warhead@GroundFire:
+	Warhead@Effect:
+		-GlowFadeFrames:
+		-GlowFadeInFrames:
+		-GlowScale:
+		-ImpactActors:
+	Warhead@Effect:
+		Explosions: ra2_piffs
+		ImpactSounds: kaboom15.aud
+		ValidTargets: Ground, Ship, Air
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+	Warhead@Smudge:
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Laser_Heavy_Flat: AreaDamage
+	Warhead@Laser_Heavy_Flat:
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 64
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 56
+			COMPOSITE: 71
+			BLAST: 95
+			REFLECTOR: 59
+			ARMOR: 70
+			Shield: 294
+			Superheavy: 162
+			Spaceship: 144
+			Concrete: 141
+			Plate: 134
+			Heavy: 124
+			Helicopter: 114
+			Steel: 103
+			Medium: 100
+			Flak: 97
+			Bomber: 88
+			Light: 80
+			Wood: 75
+			None: 70
+			Fighter: 68
+			Scout: 55
+			Heroic: 45
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heroic: 24
+			Spaceship: 23
+			Concrete: 22
+			Heavy: 21
+			Plate: 20
+			Helicopter: 19
+			Steel: 18
+			Medium: 17
+			Flak: 16
+			Bomber: 15
+			Wood: 14
+			Light: 13
+			None: 12
+			Fighter: 11
+			Scout: 10
 Lunar_YellowTank2Laser:
 	Inherits: NaxiTank2Laser
 	Burst: 5
@@ -2477,6 +5533,13 @@ Lunar_YellowTank2Laser:
 	Warhead@LegacyLaserExtraDamage:
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Air
+	Warhead@EffectWater:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@ShieldHit:
+		Duration: 10
+	Warhead@Smudge:
+		SmudgeType: Scorch
 Lunar_YellowTank2Laser_AA:
 	Inherits: NaxiTank2Laser_AA
 	Burst: 5
@@ -2503,6 +5566,13 @@ Lunar_YellowTank2Laser_AA:
 		ValidTargets: Air
 	Warhead@Bullet_Medium_Percentage:
 		ValidTargets: Air
+	Warhead@EffectWater:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@ShieldHit:
+		Duration: 10
+	Warhead@Smudge:
+		SmudgeType: Scorch
 Lunar_AmplifiedTank2Laser:
 	Inherits: NaxiTank2Laser
 	Burst: 6
@@ -2529,6 +5599,13 @@ Lunar_AmplifiedTank2Laser:
 	Warhead@LegacyLaserExtraDamage:
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Air
+	Warhead@EffectWater:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@ShieldHit:
+		Duration: 10
+	Warhead@Smudge:
+		SmudgeType: Scorch
 Lunar_AmplifiedTank2Laser_AA:
 	Inherits: NaxiTank2Laser_AA
 	Burst: 6
@@ -2555,6 +5632,13 @@ Lunar_AmplifiedTank2Laser_AA:
 		ValidTargets: Air
 	Warhead@Bullet_Medium_Percentage:
 		ValidTargets: Air
+	Warhead@EffectWater:
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@ShieldHit:
+		Duration: 10
+	Warhead@Smudge:
+		SmudgeType: Scorch
 Lunar_YellowUbermenschLaser:
 	Inherits: UbermenschLaser
 	Burst: 3
@@ -2564,7 +5648,36 @@ Lunar_YellowUbermenschLaser:
 		ValidTargets: Ground, Water
 		Damage: 16000
 		PercentageScale: 7494
-
+	Warhead@EMPUnit: AffectsIntegrity
+	Warhead@EMPUnit:
+		ValidRelationships: Neutral, Enemy
+		Damage: 1000
+	Warhead@Tesla_Heavy_ExtraDamage:
+		Versus:
+			None: 125
+			Light: 25
+			Medium: 50
+			Heavy: 75
+			Superheavy: 100
+			Scout: 10
+			Plate: 175
+			Concrete: 10
+			Wood: 10
+			Steel: 10
+			Flak: 150
+			Heroic: 200
+			Bomber: 10
+			Fighter: 10
+			Helicopter: 10
+			Spaceship: 10
+			ARMOR: 70
+			BLAST: 98
+			COMPOSITE: 72
+			HAZMAT: 61
+			REFLECTOR: 51
+			Shield: 300
+		Spread: 200
+		Falloff: 100, 75, 50, 25
 Lunar_YellowUbermenschLaser_elite:
 	Inherits: UbermenschLaser_elite
 	Burst: 5
@@ -2574,7 +5687,36 @@ Lunar_YellowUbermenschLaser_elite:
 		ValidTargets: Ground, Water
 		Damage: 16000
 		PercentageScale: 7494
-
+	Warhead@EMPUnit: AffectsIntegrity
+	Warhead@EMPUnit:
+		ValidRelationships: Neutral, Enemy
+		Damage: 1000
+	Warhead@Tesla_Heavy_ExtraDamage:
+		Versus:
+			None: 125
+			Light: 25
+			Medium: 50
+			Heavy: 75
+			Superheavy: 100
+			Scout: 10
+			Plate: 175
+			Concrete: 10
+			Wood: 10
+			Steel: 10
+			Flak: 150
+			Heroic: 200
+			Bomber: 10
+			Fighter: 10
+			Helicopter: 10
+			Spaceship: 10
+			ARMOR: 70
+			BLAST: 98
+			COMPOSITE: 72
+			HAZMAT: 61
+			REFLECTOR: 51
+			Shield: 300
+		Spread: 200
+		Falloff: 100, 75, 50, 25
 Lunar_AmplifiedUbermenschLaser:
 	Inherits: UbermenschLaser
 	Burst: 4
@@ -2584,7 +5726,36 @@ Lunar_AmplifiedUbermenschLaser:
 		ValidTargets: Ground, Water
 		Damage: 16000
 		PercentageScale: 7494
-
+	Warhead@EMPUnit: AffectsIntegrity
+	Warhead@EMPUnit:
+		ValidRelationships: Neutral, Enemy
+		Damage: 1000
+	Warhead@Tesla_Heavy_ExtraDamage:
+		Versus:
+			None: 125
+			Light: 25
+			Medium: 50
+			Heavy: 75
+			Superheavy: 100
+			Scout: 10
+			Plate: 175
+			Concrete: 10
+			Wood: 10
+			Steel: 10
+			Flak: 150
+			Heroic: 200
+			Bomber: 10
+			Fighter: 10
+			Helicopter: 10
+			Spaceship: 10
+			ARMOR: 70
+			BLAST: 98
+			COMPOSITE: 72
+			HAZMAT: 61
+			REFLECTOR: 51
+			Shield: 300
+		Spread: 200
+		Falloff: 100, 75, 50, 25
 Lunar_AmplifiedUbermenschLaser_elite:
 	Inherits: UbermenschLaser_elite
 	Burst: 6
@@ -2598,7 +5769,36 @@ Lunar_AmplifiedUbermenschLaser_elite:
 		ValidTargets: Ground, Water
 		Damage: 16000
 		PercentageScale: 7494
-
+	Warhead@EMPUnit: AffectsIntegrity
+	Warhead@EMPUnit:
+		ValidRelationships: Neutral, Enemy
+		Damage: 1000
+	Warhead@Tesla_Heavy_ExtraDamage:
+		Versus:
+			None: 125
+			Light: 25
+			Medium: 50
+			Heavy: 75
+			Superheavy: 100
+			Scout: 10
+			Plate: 175
+			Concrete: 10
+			Wood: 10
+			Steel: 10
+			Flak: 150
+			Heroic: 200
+			Bomber: 10
+			Fighter: 10
+			Helicopter: 10
+			Spaceship: 10
+			ARMOR: 70
+			BLAST: 98
+			COMPOSITE: 72
+			HAZMAT: 61
+			REFLECTOR: 51
+			Shield: 300
+		Spread: 200
+		Falloff: 100, 75, 50, 25
 NaxisBradleyTarget:
 	ValidTargets: Ground, Air, Water
 	ReloadDelay: 135
@@ -2611,10 +5811,6 @@ NaxisBradleyTarget:
 
 Naxis_Komet:
 	Inherits@collapsewh: ^Warhead_Flak_Heavy
-	Inherits: ^FlakWeapon
-	Inherits@2: ^Grenade
-	Inherits@3: ^HeavyAAWeapon
-	Inherits@4: ^MediumMissile
 	ValidTargets: Ground, Water
 	ReloadDelay: 60
 	Range: 7825
@@ -2633,51 +5829,182 @@ Naxis_Komet:
 		MaximumLaunchAngle: 125
 		Speed: 800
 		RangeLimit: 31300
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@GrenadePercentage: AreaDamagePercentage
-		InvalidTargets: Air
-		ValidTargets: Ground, Water, Air
-		Damage: 4
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-	Warhead@FlakWeaponPercentage: AreaDamagePercentage
-		InvalidTargets: Air
-		ValidTargets: Ground, Water, Air
-		Damage: 4
-	Warhead@HeavyAAWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
-		InvalidTargets: Air
-		ValidTargets: Ground, Water, Air
-		Damage: 4
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		InvalidTargets: Air
-		ValidTargets: Ground, Water, Air
-		Damage: 4
 	Warhead@Effect: CreateEffect
 		Explosions: med_frag
 		ImpactSounds: kaboom25.aud
 		ValidTargets: Ground, Ship
-	-Warhead@FlakWeapon:
-	-Warhead@Grenade:
-	-Warhead@GrenadeFriendlyFire:
-	-Warhead@HeavyAAWeapon:
-	-Warhead@MediumMissile:
 	Warhead@Flak_Heavy:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
 		PercentageScale: 0
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+	Warhead@EffectWater: CreateEffect
+	Warhead@EffectAir: CreateEffect
+	Warhead@ShieldHit: GrantExternalCondition
+	Warhead@Concrete: DamagesConcrete
+	Warhead@ShieldHitEffect: CreateEffect
+	Warhead@GrenadePercentage: AreaDamagePercentage
+	Warhead@Smudge: LeaveSmudge
+	Warhead@DuneRock: LeaveSmudge
+	Warhead@DuneSand: LeaveSmudge
+	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
+	Warhead@RA2Crater: LeaveSmudge
+	Projectile:
+		ContrailZOffset: 4000
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+		ContrailStartWidth: 50
+		ContrailEndWidth: 100
+		ContrailLength: 0
+		LaunchAngle: 66
+		Arm: 0
+		AllowSnapping: true
+		HorizontalRateOfTurn: 30
+		VerticalRateOfTurn: 30
+		TrailInterval: 1
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		CloseEnough: 500
+		Acceleration: 3
+		HomingActivationDelay: 2
+		PointDefenseTypes: Missile
+	Warhead@Concrete:
+		Damage: 150
+	Warhead@DuneRock:
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand:
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect:
+		ImpactActors: false
+	Warhead@EffectAir:
+		Explosions: med_explosion_air
+		ValidTargets: Air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+	Warhead@EffectWater:
+		Explosions: small_splash
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+		ImpactSounds: splash9.aud
+	Warhead@FlakWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 125
+		Damage: 4
+		Versus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Concrete: 6
+			Steel: 5
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
+		InvalidTargets: Air
+	Warhead@GrenadePercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 200
+		Damage: 4
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+		InvalidTargets: Air
+	Warhead@HeavyAAWeaponPercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 250
+		Damage: 4
+		Versus:
+			Shield: 35
+			Spaceship: 25
+			Helicopter: 24
+			Bomber: 23
+			Fighter: 22
+			Superheavy: 21
+			Heavy: 20
+			Medium: 19
+			Light: 18
+			Scout: 17
+			Plate: 16
+			Flak: 15
+			None: 14
+			Heroic: 13
+			Steel: 12
+			Concrete: 11
+			Wood: 10
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
+		InvalidTargets: Air
+	Warhead@MediumMissilePercentage:
+		ValidTargets: Ground, Water, Air
+		Spread: 200
+		Damage: 4
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Spaceship: 19
+			Heavy: 18
+			Helicopter: 17
+			Steel: 16
+			Medium: 15
+			Bomber: 14
+			Concrete: 13
+			Light: 12
+			Fighter: 11
+			Wood: 10
+			Scout: 9
+			Plate: 8
+			Flak: 7
+			None: 6
+			Heroic: 5
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
+		UpdatesUnitStatistics: false
+		InvalidTargets: Air
+	Warhead@RA2Crater:
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHit:
+		Condition: shieldhit
+		Duration: 8
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Smudge:
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 Naxis_Komet_AA:
 	Inherits: Naxis_Komet

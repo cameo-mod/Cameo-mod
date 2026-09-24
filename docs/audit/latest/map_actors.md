@@ -6,7 +6,7 @@
 | M2 | UNREADABLE .oramap | 0 | 0 | PASS |
 
 
-363 map(s) scanned, 184162 placed actor(s), 3475 known actor type(s).
+363 map(s) scanned, 184162 placed actor(s), 3471 known actor type(s).
 
 
 **PASS** - 0 dangling reference(s) across 0 actor type(s).

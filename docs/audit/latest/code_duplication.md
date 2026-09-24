@@ -1,6 +1,6 @@
 # audit_code_duplication — copy-paste clone groups
 
-Python files: **702** (min 5 statements), C# files: **358** (min 8 lines)
+Python files: **723** (min 5 statements), C# files: **364** (min 8 lines)
 
 
 ## Files that do not parse (not scanned)
@@ -13,7 +13,7 @@ Python files: **702** (min 5 statements), C# files: **358** (min 8 lines)
 |---|---|---|---|
 | C1 | identical Python function bodies | 26 | 10 |
 | C2 | identical C# method bodies | 17 | 14 |
-| C3 | identical module-level literal tables | 37 | 10 |
+| C3 | identical module-level literal tables | 38 | 10 |
 
 
 ## C1 — Python function clones (26 group(s))
@@ -64,14 +64,14 @@ Python files: **702** (min 5 statements), C# files: **358** (min 8 lines)
 | 2 | 61d619290028a34b | OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1509 TryProjectOntoCenterLine(); OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1520 CalculateFalloffDistance() |
 | 2 | 88ddeee6df34ebf1 | OpenRA.Mods.Cameo/Widgets/ObserverBuildOrderIconsWidget.cs:63 ObserverBuildOrderIconsWidget(); OpenRA.Mods.Cameo/Widgets/ObserverPromotionsIconsWidget.cs:61 ObserverPromotionsIconsWidget() |
 | 2 | 918c59746a74f5f7 | OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1531 TryProjectOntoCenterLine(); OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1542 GetFalloffModifier() |
-| 2 | 949c5a8e30c0862b | OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs:441 TargetScore(); OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs:444 TargetScore() |
+| 2 | 949c5a8e30c0862b | OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs:512 TargetScore(); OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs:515 TargetScore() |
 | 2 | 9b5c59ffeffd6c33 | OpenRA.Mods.Cameo/Widgets/CommanderTreeWidget.cs:337 HandleRightClick(); OpenRA.Mods.Cameo/Widgets/CommanderTreeWidget.cs:353 HandleMiddleClick() |
 | 2 | 9f8a4e4f976a99f2 | OpenRA.Mods.CA/Traits/Render/WithColoredSelectionBox.cs:108 Update(); OpenRA.Mods.CA/Traits/Render/WithNameTagDecorationCA.cs:121 Update() |
 | 2 | d2d42569b726aee5 | OpenRA.Mods.Cameo/Traits/AiMatchLogWriter.cs:86 CaptureAndAppend(); OpenRA.Mods.Cameo/Traits/AiSituationLogWriter.cs:75 CaptureAndAppend() |
 | 2 | edf49e24a44c5bb8 | OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:825 CountQueuedBuildings(); OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:833 SellUselessRefinery() |
 
 
-## C3 — Duplicated constant tables (37 group(s))
+## C3 — Duplicated constant tables (38 group(s))
 
 | copies | fingerprint | sites |
 |---|---|---|
@@ -79,6 +79,7 @@ Python files: **702** (min 5 statements), C# files: **358** (min 8 lines)
 | 4 | 28fac3656bc8fc3b | tools/audit/find_orphan_old_keys.py:20 CENTRAL; tools/audit/find_orphan_old_keys_multi.py:18 CENTRAL; tools/balance/fix_orphan_old_keys.py:19 CENTRAL; tools/balance/fix_orphan_old_keys_multi.py:16 CENTRAL |
 | 4 | 5573ff9b5f70fe4c | tools/audit/audit_original_coverage.py:42 ORIGINAL_SOURCES; tools/balance/armament_roles.py:628 ORIGINAL_SOURCES; tools/balance/assign_references.py:166 ORIGINAL_SOURCES; tools/balance/build_reference_report.py:38 ORIGINAL_SOURCES |
 | 4 | 6c04bed7d433482f | tools/audit/audit_stat_uniqueness.py:44 STATS; tools/balance/faction_extrapolate.py:84 RATE_STATS; tools/balance/propose_reference_anchors.py:26 STATS; tools/balance/reference_targets.py:42 STATS |
+| 4 | 985c1fe34e42db41 | tools/audit/audit_local_effect_fields.py:25 CENTRAL; tools/audit/find_empty_warhead.py:16 CENTRAL; tools/audit/weapon_families.py:23 CENTRAL; tools/balance/sweep_areadamage.py:25 CENTRAL |
 | 4 | 9a62b7cb0c6b46dc | tools/audit/audit_heaviness_bell.py:99 COMPANION; tools/audit/audit_three_way_split.py:75 COMPANION_MARKERS; tools/audit/audit_tier_weapon_class.py:60 COMPANION_MARKERS; tools/balance/preview_bell.py:44 COMPANION |
 | 4 | e432ed7c8925c7bf | tools/audit/audit_promotion_superiority.py:31 FACTIONS; tools/balance/prepare_promotion_discount.py:19 FACTIONS; tools/balance/prepare_promotion_upgrade_interactions.py:26 FACTIONS; tools/balance/tier_chain.py:39 PILOT_PROMOTION_FACTIONS |
 | 4 | f9db917022226317 | tools/audit/four_source_group_inventory.py:18 SOURCES; tools/balance/explicit_voice_group_assembler.py:17 REFERENCE_SOURCES; tools/balance/four_source_synthesis_gate.py:21 SOURCES; tools/balance/reference_weapon_geometry.py:26 KNOWN_REFERENCE_SOURCES |
@@ -86,11 +87,15 @@ Python files: **702** (min 5 statements), C# files: **358** (min 8 lines)
 | 3 | 5b6fb78177b324c0 | tools/balance/dta_channel_curves.py:23 ARMOR_AXES; tools/balance/four_source_synthesis_gate.py:27 BASE_AXES; tools/balance/reference_channel_curves.py:31 ARMOR_AXES |
 | 3 | 783c5216cd3c1bf0 | tools/audit/audit_versus_profile.py:65 NON_ARMOR; tools/balance/analyse_flat_main_fold.py:55 NON_ARMOR; tools/balance/preview_bell.py:45 OFF_AXIS |
 | 3 | 926a972c11b9232c | tools/audit/audit_heaviness_bell.py:146 AXIS_ORDER; tools/balance/effective_heaviness.py:58 BELL_AXIS_ORDER; tools/balance/gen_weapon_template.py:1023 BELL_AXIS_ORDER |
-| 3 | 985c1fe34e42db41 | tools/audit/find_empty_warhead.py:16 CENTRAL; tools/audit/weapon_families.py:23 CENTRAL; tools/balance/sweep_areadamage.py:25 CENTRAL |
 | 3 | afb2195b28b1f9b9 | tools/audit/audit_bot_insurance.py:51 DIFFICULTIES; tools/balance/bot_difficulty_curve.py:49 DIFFICULTIES; tools/balance/bot_insurance_model.py:76 DIFFICULTIES |
+| 3 | b53e0f9e7578cc2a | tools/audit/audit_heaviness_bell.py:110 LADDERS; tools/reference/aggregate_archetype.py:63 CAMEO_LADDERS; tools/reference/armor_interpolate.py:42 LADDERS |
+| 3 | e82cdb37ffc15514 | tools/audit/audit_versus_profile.py:67 LADDERS; tools/balance/gen_weapon_template.py:35 LADDERS; tools/reference/warhead_workbook.py:72 LADDERS |
+| 3 | ee8795bea6c56142 | tools/audit/audit_versus_profile.py:74 LEVELS; tools/reference/cameo_families.py:38 LEVELS; tools/reference/propose_family_profiles.py:113 LEVEL_ORDER |
+| 3 | fa43615e2785b256 | tools/reference/dta_armor.py:8 VANILLA; tools/reference/extract_versus.py:48 TS_ARMORS; tools/reference/warhead_matrix.py:1079 TS_ARMORS |
 | 2 | 05b492a648a61f78 | tools/audit/audit_family_uniqueness.py:52 COMPANION; tools/audit/audit_versus_profile.py:75 COMPANION |
-| 2 | 0ec5f6758f9956dd | tools/balance/peer_corpus.py:29 ROW_PROVENANCE; tools/reference/extract_peer_units.py:1428 ROW_PROVENANCE_KEYS |
+| 2 | 0ec5f6758f9956dd | tools/balance/peer_corpus.py:29 ROW_PROVENANCE; tools/reference/extract_peer_units.py:1710 ROW_PROVENANCE_KEYS |
 | 2 | 153d4fc74c8cdd31 | tools/tilesets/build_ra_temperate_basalt_trees.py:20 ACTORS; tools/tilesets/build_volcanic_basalt_gimp_brushes.py:20 ACTORS |
+| 2 | 197ef915493c61ff | tools/reference/extract_versus.py:46 YR_ARMORS; tools/reference/warhead_matrix.py:1077 YR_ARMORS |
 | 2 | 2665d6950cd4417a | tools/audit/find_orphan_old_keys.py:27 OLD_TO_NEW; tools/balance/fix_orphan_old_keys.py:25 OLD_TO_NEW |
 | 2 | 41839a9d7e016b39 | tools/balance/consolidate_explicit_family_state_profiles.py:81 STATE_EXPANSION; tools/tests/test_explicit_family_state_profile_consolidation.py:32 EXPECTED_EXPANSION |
 | 2 | 4979d18fd8f148a1 | tools/tilesets/detect_cliff_dark_noise.py:14 BLACK; tools/tilesets/process_ai_edge_mask.py:15 BLACK |
@@ -100,23 +105,19 @@ Python files: **702** (min 5 statements), C# files: **358** (min 8 lines)
 | 2 | 7b392ae5dfabff76 | tools/tilesets/apply_ai_edge_correction.py:16 MAGENTA; tools/tilesets/process_ai_edge_mask.py:14 MAGENTA |
 | 2 | 820ecf9a9ca15705 | tools/art/generate_chrome_scales.py:46 FIELD_DENSITY; tools/audit/audit_chrome_scale_variants.py:69 DENSITY |
 | 2 | 8ad665990352733b | tools/balance/build_workbook.py:62 TYPE_ORDER; tools/balance/import_workbook.py:37 TYPE_SHEETS |
-| 2 | b53e0f9e7578cc2a | tools/audit/audit_heaviness_bell.py:110 LADDERS; tools/reference/aggregate_archetype.py:63 CAMEO_LADDERS |
 | 2 | c15459229a835d70 | tools/tilesets/build_tc_basalt_from_gimp.py:18 ACTORS; tools/tilesets/fix_tc_basalt_shadow_outlines.py:18 ACTORS |
 | 2 | de57d7955065e638 | tools/balance/gen_effects.py:38 LEVELORDER; tools/balance/gen_projectiles.py:30 LEVELORDER |
 | 2 | dfc91d27d37afdd1 | tools/balance/cameo_channel_curves.py:26 ARMOR_AXES; tools/balance/four_source_synthesis_gate.py:28 COMMON_AXES |
 | 2 | e631e1af9577a4aa | tools/balance/reference_weapon_geometry.py:29 GEOMETRY_FIELDS; tools/balance/summarize_reference_geometry.py:16 GEOMETRY_FIELDS |
-| 2 | e82cdb37ffc15514 | tools/audit/audit_versus_profile.py:67 LADDERS; tools/balance/gen_weapon_template.py:35 LADDERS |
-| 2 | eba2f9dc1c86d3e4 | tools/audit/audit_tier_weapon_class.py:64 LADDER; tools/balance/gen_weapon_template.py:2254 STORM_LEVELS |
+| 2 | eba2f9dc1c86d3e4 | tools/audit/audit_tier_weapon_class.py:64 LADDER; tools/balance/gen_weapon_template.py:2343 STORM_LEVELS |
 | 2 | ee70e291636f426f | tools/balance/build_japan_pilot.py:68 CLASSIC_FACTIONS; tools/balance/validate_reference_holdout.py:62 CLASSIC_FACTIONS |
-| 2 | ee8795bea6c56142 | tools/audit/audit_versus_profile.py:74 LEVELS; tools/reference/propose_family_profiles.py:113 LEVEL_ORDER |
 | 2 | eed204ad8ec23410 | tools/audit/propose_sonic_mapping.py:104 OLD_FAMILIES; tools/audit/weapon_families.py:29 OLD_FAMILIES |
 | 2 | efe4c032c5c937c9 | tools/audit/audit_three_way_split.py:72 MAIN_DAMAGE_TYPES; tools/audit/audit_tier_weapon_class.py:59 MAIN_DAMAGE_TYPES |
-| 2 | fa43615e2785b256 | tools/reference/dta_armor.py:8 VANILLA; tools/reference/extract_versus.py:48 TS_ARMORS |
 
 
 ## FAIL
 
 - C1: 26 > baseline 10
 - C2: 17 > baseline 14
-- C3: 37 > baseline 10
+- C3: 38 > baseline 10
 

@@ -7,6 +7,8 @@ OrdosCombatTankCannon:
 	Warhead@CannonHE_Medium:
 		PercentageScale: 10000
 		Damage: 8000
+	Warhead@EffectAir:
+		ImpactSounds: EXPLMD2.WAV
 HeavyOrdosCombatTankCannon:
 	Inherits: ^D2K_Cannon
 	Range: 6000
@@ -16,6 +18,8 @@ HeavyOrdosCombatTankCannon:
 	Warhead@CannonHE_Medium:
 		PercentageScale: 10000
 		Damage: 10000
+	Warhead@EffectAir:
+		ImpactSounds: EXPLMD2.WAV
 HeavyOrdosCombatTankRockets:
 	Inherits@missilerole: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy_D2K
@@ -45,6 +49,7 @@ HeavyOrdosCombatTankRockets:
 		ContrailEndWidth: 100
 	Warhead@EffectWater: CreateEffect
 		Explosions: small_splash
+		ImpactSounds: splash9.aud
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
 	Warhead@MissileAP_Heavy: AreaDamage
@@ -56,6 +61,8 @@ HeavyOrdosCombatTankRockets:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
 
 120mm_td:
 	Inherits@collapseflat: ^Warhead_CannonHE_Medium_Flat
@@ -87,6 +94,7 @@ HeavyOrdosCombatTankRockets:
 		GlowFadeInFrames: 12
 	Warhead@EffectAir:
 		Explosions: big_explosion_air
+		ImpactSounds: EXPLLG2.WAV
 	Warhead@Glow:
 		Scale: 0.8
 		FadeFrames: 15
@@ -320,6 +328,8 @@ HeavyOrdosCombatTankRockets:
 		Damage: 120000
 		PercentageScale: 2000
 		Heaviness: 0
+	Warhead@EffectAir:
+		ImpactSounds: EXPLMD2.WAV
 120mm_cobra_deploy:
 	Inherits: 120mm_cobra
 	Projectile: Bullet
@@ -447,6 +457,8 @@ HeavyOrdosCombatTankRockets:
 		Damage: 120000
 		PercentageScale: 2000
 		Heaviness: 0
+	Warhead@EffectAir:
+		ImpactSounds: EXPLMD2.WAV
 
 120mm_python:
 	Inherits: 120mm_cobra
@@ -587,6 +599,8 @@ HeavyOrdosCombatTankRockets:
 		Damage: 120000
 		PercentageScale: 2000
 		Heaviness: 0
+	Warhead@EffectAir:
+		ImpactSounds: EXPLMD2.WAV
 
 120mm_python_deploy:
 	Inherits: 120mm_python
@@ -715,6 +729,8 @@ HeavyOrdosCombatTankRockets:
 		Damage: 120000
 		PercentageScale: 2000
 		Heaviness: 0
+	Warhead@EffectAir:
+		ImpactSounds: EXPLMD2.WAV
 
 eye_bomberguy:
 	Inherits@collapsewh: ^Warhead_Demolition_Heavy
@@ -774,7 +790,7 @@ eye_bomberguy:
 	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_building
-		ImpactSounds: EXPLSML4.WAV
+		ImpactSounds: EXPLSML2.WAV
 		ExplosionPalette: effect75alpha
 		ImpactActors: false
 	Warhead@Concrete: DamagesConcrete
@@ -988,6 +1004,10 @@ D2K_155mm_turret:
 		ValidTargets: Ground, Water
 		Damage: 48000
 		PercentageScale: 0
+	Warhead@EffectAir:
+		ImpactSounds: EXPLMD2.WAV
+	Warhead@Effect1:
+		ImpactSounds: EXPLSML2.WAV
 
 Dune_SiegeMortar:
 	Inherits@finalmain: ^Warhead_Concussion_Medium_Flat
@@ -1139,6 +1159,8 @@ Dune_SiegeMortar:
 		ValidTargets: Ground, Water
 		Damage: 40000
 		PercentageScale: 0
+	Warhead@EffectAir:
+		ImpactSounds: EXPLMD2.WAV
 #############################
 #       MISSILES
 #############################
@@ -1173,6 +1195,10 @@ D2K_Rocket_Trooper_AGOnly:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
+	Warhead@Effect:
+		ImpactSounds: EXPLSML1.WAV
 
 D2K_Rocket_Trooper_AA:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
@@ -1200,6 +1226,8 @@ D2K_Rocket_Trooper_AA:
 	Warhead@MissileAA_Heavy:
 		ValidTargets: Air
 		Damage: 10000
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
 D2K_APC_Rocket:
 	Inherits@finalmain: ^Warhead_MissileAP_Medium_Flat
 	Inherits@wh: ^Warhead_MissileAP_Light
@@ -1310,6 +1338,10 @@ D2K_APC_Rocket:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
 		PercentageScale: 0
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
+	Warhead@Effect:
+		ImpactSounds: EXPLSML1.WAV
 D2K_APC_Rocket_AA:
 	Inherits@finalmain: ^Warhead_MissileAA_Medium_Flat
 	Inherits: D2K_APC_Rocket
@@ -1406,6 +1438,10 @@ D2K_APC_Rocket_AA:
 	-Warhead@MissileAP_Medium_Flat:
 	Projectile: Missile
 		VerticalRateOfTurn: 12
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
+	Warhead@Effect:
+		ImpactSounds: EXPLSML1.WAV
 
 
 DeviatorMissile:
@@ -1510,6 +1546,8 @@ DeviatorMissile:
 			Heroic: 5
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
 
 DeviatorMissile_Artillery:
 	Inherits@missilerole: ^Warhead_MissileHE_Heavy
@@ -1631,6 +1669,8 @@ DeviatorMissile_Artillery:
 	Warhead@Smudge:
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 		SmudgeType: SandCrater, RockCrater
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
 ^Warhead_MissileAP_Heavy_WraithOrder:
 	Inherits: ^Warhead_MissileAP_Heavy
 
@@ -1691,6 +1731,8 @@ Wraith_ToxinMissiles:
 		PercentageScale: 3332
 		PercentageSpread: 50
 	-Warhead@MissileHE_Heavy:
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
 
 contaminator_attack:
 	Inherits@wh: ^Warhead_Melee_Medium
@@ -2086,6 +2128,8 @@ facedancer_grenade:
 			Steel: 12
 			Superheavy: 9
 			Wood: 18
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
 GrenDeath:
 	Warhead@EnemyDam: SpreadDamage
 		Damage: 10000
@@ -2119,7 +2163,7 @@ GrenDeath:
 		SmudgeType: SandCrater, RockCrater
 	Warhead@3Eff: CreateEffect
 		Explosions: d2k_building
-		ImpactSounds: EXPLSML4.WAV
+		ImpactSounds: EXPLSML2.WAV
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
 	Warhead@Concrete: DamagesConcrete
@@ -2138,6 +2182,8 @@ SaboDeath:
 			Medium: 100
 			Heavy: 100
 			Concrete: 75
+	Warhead@3Eff:
+		ImpactSounds: EXPLSML2.WAV
 
 HMGo:
 	Inherits@wh: ^Warhead_Bullet_Light
@@ -2186,6 +2232,8 @@ HMGo_upgrade:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 	-Warhead@Laser_Heavy:
+	Warhead@EffectWater:
+		ImpactSounds: splash9.aud
 d2kChainGun:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -2197,6 +2245,8 @@ d2kChainGun:
 	StartBurstReport: MGUN2.WAV
 	Warhead@Bullet_Medium:
 		Damage: 4000
+	Warhead@EffectWater:
+		ImpactSounds: splash9.aud
 d2kChainGun_upgrade:
 	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
 	Inherits@wh: ^Warhead_Laser_Heavy
@@ -2218,6 +2268,10 @@ d2kChainGun_upgrade:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 9988
+	Warhead@EffectWater:
+		ImpactSounds: splash9.aud
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
 HMGstealth:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Inherits@wh: ^Warhead_Bullet_Light
@@ -2239,6 +2293,8 @@ HMGstealth:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
+	Warhead@EffectWater:
+		ImpactSounds: splash9.aud
 autogun_tank:
 	Inherits@collapseflat: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^Warhead_CannonHE_Heavy
@@ -2314,7 +2370,7 @@ autogun_tank:
 		Damage: 25
 	Warhead@EffectAir:
 		Explosions: med_explosion_air
-		ImpactSounds: xplos.aud
+		ImpactSounds: EXPLMD2.WAV
 	Warhead@EffectWater:
 		Explosions: water_piffs
 	Warhead@FlakWeaponPercentage:
@@ -2401,6 +2457,8 @@ autogun_tank_small:
 	Inherits: autogun_tank
 	Range: 6220
 	MinRange: 1245
+	Warhead@EffectAir:
+		ImpactSounds: EXPLMD2.WAV
 
 D2KAAMineExplosion:
 	ValidTargets: Air
@@ -2433,6 +2491,8 @@ d2kCarryallChainGun:
 	StartBurstReport: MGUN2.WAV
 	Warhead@Bullet_Medium:
 		Damage: 4000
+	Warhead@EffectWater:
+		ImpactSounds: splash9.aud
 ordos_airmine:
 	Inherits@collapseflat: ^Warhead_MissileAP_Heavy_Flat
 	Inherits@6: ^D2KMissile
@@ -2664,6 +2724,8 @@ ordos_airmine:
 			Steel: 11
 			Superheavy: 16
 			Wood: 9
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
 ordos_lasertank:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@3: ^RailgunWeapon
@@ -2781,6 +2843,7 @@ ordos_lasertank:
 		Damage: 25
 	Warhead@EffectWater:
 		Explosions: small_splash
+		ImpactSounds: splash9.aud
 		-ExplosionPalette:
 	Warhead@FlakWeaponPercentage:
 		Spread: 125
@@ -2828,6 +2891,8 @@ ordos_lasertank:
 		Duration: 10
 	Warhead@Smudge:
 		SmudgeType: Scorch
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
 d2k_chemgun:
 	Inherits@wh: ^Warhead_Chemical_Light
 	Inherits@proj: ^Projectile_Chem_Light
@@ -2901,6 +2966,10 @@ HMGstealth_upgrade:
 	Warhead@Laser_Heavy:
 		Damage: 6000
 	-Warhead@Bullet_Medium_Flat:
+	Warhead@EffectWater:
+		ImpactSounds: splash9.aud
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
 d2kCarryallChainGun_upgrade:
 	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
 	Inherits@wh: ^Warhead_Laser_Heavy
@@ -2921,6 +2990,10 @@ d2kCarryallChainGun_upgrade:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
+	Warhead@EffectWater:
+		ImpactSounds: splash9.aud
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
 LMG_ordos_upgrade:
 	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
 	Inherits@wh: ^Warhead_Laser_Heavy
@@ -2943,6 +3016,8 @@ LMG_ordos_upgrade:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		PercentageScale: 9984
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
 light_inf_lmg_ordos_upgrade:
 	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
 	Inherits@wh: ^Warhead_Laser_Heavy
@@ -2982,6 +3057,8 @@ light_inf_lmg_ordos_upgrade:
 		InvalidTargets: Air
 	Warhead@ShieldHit:
 		InvalidTargets: Air
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
 
 ordos_laserturret:
 	Inherits@wh: ^Warhead_Laser_Heavy
@@ -2999,6 +3076,8 @@ ordos_laserturret:
 	Warhead@Laser_Heavy:
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
 
 ^Warhead_Toxic_AntiInfantryDefense:
 	Inherits: ^Warhead_Toxic_Light
@@ -3055,6 +3134,8 @@ D2K_alshabah_autocannon:
 	ReloadDelay: 15
 	Warhead@CannonHE_Medium:
 		Damage: 11333
+	Warhead@EffectAir:
+		ImpactSounds: EXPLMD2.WAV
 
 Emperor_Sardaukar_E:
 	Inherits: ^D2K_Cannon
@@ -3063,6 +3144,8 @@ Emperor_Sardaukar_E:
 	Range: 6000
 	Warhead@CannonHE_Medium:
 		Damage: 17000
+	Warhead@EffectAir:
+		ImpactSounds: EXPLMD2.WAV
 
 PlasBullet:
 	Inherits@wh: ^Warhead_CannonHE_Heavy_D2K_DevBullet
@@ -3077,6 +3160,8 @@ PlasBullet:
 	Warhead@CannonHE_Heavy_D2K_DevBullet:
 		Damage: 12500
 		Spread: 250
+	Warhead@EffectAir:
+		ImpactSounds: EXPLMD2.WAV
 
 ^D2K155mmLegacy:
 	Inherits@wh: ^Warhead_Demolition_Light
@@ -3097,6 +3182,10 @@ PlasBullet:
 		Damage: 12000
 	Warhead@Concrete: DamagesConcrete
 		Damage: 5625
+	Warhead@EffectAir:
+		ImpactSounds: EXPLMD2.WAV
+	Warhead@Effect1:
+		ImpactSounds: EXPLSML2.WAV
 
 D2K_SiegeQuad:
 	Inherits: ^D2K155mmLegacy
@@ -3105,6 +3194,10 @@ D2K_SiegeQuad:
 	ReloadDelay: 100
 	Projectile: Bullet
 		Speed: 228
+	Warhead@EffectAir:
+		ImpactSounds: EXPLMD2.WAV
+	Warhead@Effect1:
+		ImpactSounds: EXPLSML2.WAV
 
 D2K_Rocket_Buggy:
 	Inherits: ^D2KRocket
@@ -3112,6 +3205,10 @@ D2K_Rocket_Buggy:
 	Report: d2k_buggy_rocket.wav
 	Warhead@MissileAP_Heavy:
 		Damage: 6500
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
+	Warhead@Effect:
+		ImpactSounds: EXPLSML1.WAV
 
 D2K_Combat_Fleet:
 	Inherits: ^D2KRocket
@@ -3119,6 +3216,10 @@ D2K_Combat_Fleet:
 	Burst: 10
 	BurstDelays: 2
 	ReloadDelay: 50
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
+	Warhead@Effect:
+		ImpactSounds: EXPLSML1.WAV
 
 d2k_tyrant:
 	Inherits: ^D2KMissile
@@ -3143,6 +3244,8 @@ d2k_tyrant:
 			Heavy: 100
 			Concrete: 30
 	MinRange: 1230
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
 
 
 Rocket_stealth:
@@ -3157,6 +3260,8 @@ Rocket_stealth:
 	Warhead@MissileAP_Heavy:
 		Damage: 14500
 	MinRange: 1845
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
 
 
 Rocket_stealth_AA:
@@ -3181,6 +3286,8 @@ Rocket_stealth_AA:
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Air
 		Damage: 12000
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
 
 d2k_APCo_AG:
 	Inherits: Rocket_stealth
@@ -3189,6 +3296,8 @@ d2k_APCo_AG:
 	Warhead@1Dam: SpreadDamage
 		Damage: 6000
 	MinRange: 1845
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
 
 
 d2k_APCo_AA:
@@ -3197,6 +3306,8 @@ d2k_APCo_AA:
 	ReloadDelay: 175
 	Warhead@1Dam: SpreadDamage
 		Damage: 4500
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
 ############################
 #       OTHER
 ############################
@@ -3235,6 +3346,8 @@ D2K_Annihilator_AA:
 		Damage: 28500
 		ValidTargets: Air
 		InvalidTargets: Ground, Water
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
 
 Sound2:
 	Inherits: Sound
@@ -3289,6 +3402,10 @@ M_LMG:
 	ValidTargets: Infantry
 	Warhead@1Dam: SpreadDamage
 		Damage: 2000
+	Warhead@2Eff:
+		ImpactSounds: EXPLSML1.WAV
+	Warhead@4Eff_2Water:
+		ImpactSounds: splash9.aud
 
 M_LMG_H:
 	Inherits: M_LMG
@@ -3299,10 +3416,18 @@ M_LMG_H:
 	Warhead@1Dam: SpreadDamage
 		InvalidTargets: Vehicle, Structure
 		ValidTargets: Infantry
+	Warhead@2Eff:
+		ImpactSounds: EXPLSML1.WAV
+	Warhead@4Eff_2Water:
+		ImpactSounds: splash9.aud
 
 M_HMG_H:
 	Inherits: M_HMG
 	ReloadDelay: 50
+	Warhead@2Eff:
+		ImpactSounds: EXPLSML1.WAV
+	Warhead@4Eff_2Water:
+		ImpactSounds: splash9.aud
 
 d2k25mm:
 	Inherits: ^D2K_Cannon
@@ -3312,6 +3437,8 @@ d2k25mm:
 	InvalidTargets: Air
 	Warhead@CannonHE_Medium:
 		Damage: 10000
+	Warhead@EffectAir:
+		ImpactSounds: EXPLMD2.WAV
 
 HMG_tleilaxu:
 	Inherits: HMG
@@ -3341,6 +3468,8 @@ d2k_sardaukar_elite:
 			Medium: 75
 			Heavy: 50
 			Concrete: 10
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
 
 Rocketeer:
 	Inherits: ^MG
@@ -3356,6 +3485,10 @@ Rocketeer:
 			Medium: 20
 			Heavy: 10
 			Concrete: 15
+	Warhead@2Eff:
+		ImpactSounds: EXPLSML1.WAV
+	Warhead@4Eff_2Water:
+		ImpactSounds: splash9.aud
 
 Rocketeer_o:
 	Inherits: HMG
@@ -3419,6 +3552,7 @@ D2KSniperRifle:
 		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
 	Warhead@2Eff: CreateEffect
 		Explosions: d2k_piffs
+		ImpactSounds: EXPLSML1.WAV
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
 
@@ -3437,6 +3571,8 @@ D2KMarksmanRifle:
 		ValidTargets: Ground, Air
 		InvalidTargets: Water
 		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
+	Warhead@2Eff:
+		ImpactSounds: EXPLSML1.WAV
 
 emperor_sardaukar_chief_c4:
 	Inherits: GenericC4
@@ -3468,6 +3604,8 @@ d2k_laser_qafza:
 			Heavy: 45
 			Wood: 30
 			Concrete: 15
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
 
 d2k_laser_qafza_aa:
 	Inherits: d2k_laser_qafza
@@ -3476,6 +3614,8 @@ d2k_laser_qafza_aa:
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Air
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
 
 D2K_buzzsaw:
 	ValidTargets: Infantry
@@ -3510,6 +3650,8 @@ d2k_airdefenseplatform:
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
+	Warhead@EffectWater:
+		ImpactSounds: splash9.aud
 
 D2KTheVoice:
 	ReloadDelay: 200
@@ -3601,9 +3743,9 @@ d2k_sard_crossbow:
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: SandCrater, RockCrater
 		InvalidTargets: Vehicle, Structure
-	Warhead@1Con: GrantExternalCondition
-		Condition: poisoned
-		Duration: 750
+	Warhead@1Con: ApplyPhysicalState
+		PhysicalStateName: Poison
+		Amount: 5000
 		Range: 60
 ###################################################
 #       OG DUNE 2000
@@ -3628,10 +3770,13 @@ d2k_sard_crossbow:
 		InvalidTargets: Vehicle, Structure
 	Warhead@3Eff: CreateEffect
 		Explosions: d2k_small_napalm
+		ImpactSounds: EXPLSML2.WAV
 		ExplosionPalette: effect75alpha
 		ImpactActors: false
 	Warhead@Concrete: DamagesConcrete
 		Damage: 540
+	Warhead@EffectAir:
+		ImpactSounds: EXPLMD2.WAV
 
 LMG:
 	Inherits@wh: ^Warhead_Bullet_Medium

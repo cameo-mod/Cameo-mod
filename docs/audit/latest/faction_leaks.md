@@ -1,6 +1,6 @@
 # audit_faction_leaks — cross-faction leaks (B1)
 
-Factions checked: **31** — L1 leaks: **449**, L3 concrete-inherit leaks: **20**, shared/unattributed buildables: **91**
+Factions checked: **31** — L1 leaks: **433**, L3 concrete-inherit leaks: **20**, shared/unattributed buildables: **91**
 
 
 ## L1 — buildable in faction X but owned by faction Y
@@ -180,21 +180,16 @@ Factions checked: **31** — L1 leaks: **449**, L3 concrete-inherit leaks: **20*
 | ra2_allies | ra2_allies_aegiscruiser | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/naval.yaml |
 | ra2_allies | ra2_allies_airforcecommandhq | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml |
 | ra2_allies | ra2_allies_barracks | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml |
-| ra2_allies | ra2_allies_battlelab | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml |
-| ra2_allies | ra2_allies_constructionyard | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml |
-| ra2_allies | ra2_allies_mobileconstructionvehicle | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml |
-| ra2_allies | ra2_allies_orerefinery | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml |
-| ra2_allies | ra2_allies_powerplant | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml |
-| ra2_allies | ra2_allies_servicedepot | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml |
-| ra2_allies | ra2_allies_warfactory | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml |
 | ra2_allies | ra2_allies_battlefortress | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml |
 | ra2_allies | ra2_allies_battlefortress_chrono | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml |
 | ra2_allies | ra2_allies_battlefortress_empty | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml |
+| ra2_allies | ra2_allies_battlelab | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml |
 | ra2_allies | ra2_allies_blackeagle | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/aircraft.yaml |
 | ra2_allies | ra2_allies_chronolegionnaire | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/infantry.yaml |
 | ra2_allies | ra2_allies_chronominer | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml |
 | ra2_allies | ra2_allies_chronosphere | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/defenses.yaml |
 | ra2_allies | ra2_allies_concretebarrier | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/defenses.yaml |
+| ra2_allies | ra2_allies_constructionyard | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml |
 | ra2_allies | ra2_allies_dog | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/infantry.yaml |
 | ra2_allies | ra2_allies_engineer | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/infantry.yaml |
 | ra2_allies | ra2_allies_gapgenerator | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/defenses.yaml |
@@ -211,15 +206,19 @@ Factions checked: **31** — L1 leaks: **449**, L3 concrete-inherit leaks: **20*
 | ra2_allies | ra2_allies_ifv_missile | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml |
 | ra2_allies | ra2_allies_ifv_repair | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml |
 | ra2_allies | ra2_allies_miragetank | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml |
+| ra2_allies | ra2_allies_mobileconstructionvehicle | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml |
 | ra2_allies | ra2_allies_nighthawk | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/aircraft.yaml |
 | ra2_allies | ra2_allies_orepurifier | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml |
+| ra2_allies | ra2_allies_orerefinery | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml |
 | ra2_allies | ra2_allies_patriotmissilesystem | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/defenses.yaml |
 | ra2_allies | ra2_allies_pillbox | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/defenses.yaml |
+| ra2_allies | ra2_allies_powerplant | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml |
 | ra2_allies | ra2_allies_prismtank | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml |
 | ra2_allies | ra2_allies_prismtower | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/defenses.yaml |
 | ra2_allies | ra2_allies_ra2spy | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/infantry.yaml |
 | ra2_allies | ra2_allies_rocketeer | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/infantry.yaml |
 | ra2_allies | ra2_allies_seal | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/infantry.yaml |
+| ra2_allies | ra2_allies_servicedepot | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml |
 | ra2_allies | ra2_allies_sniper | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/infantry.yaml |
 | ra2_allies | ra2_allies_spysatelliteuplink | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml |
 | ra2_allies | ra2_allies_tankdestroyer | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml |
@@ -242,6 +241,7 @@ Factions checked: **31** — L1 leaks: **449**, L3 concrete-inherit leaks: **20*
 | ra2_allies | ra2_allies_upgrade_tanklasertargeting | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/upgrades.yaml |
 | ra2_allies | ra2_allies_upgrade_thunderboltmissiles | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/upgrades.yaml |
 | ra2_allies | ra2_allies_upgrade_vanguardtraining | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/upgrades.yaml |
+| ra2_allies | ra2_allies_warfactory | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml |
 | ra2_allies | ra2_allies_weathercontrolcenter | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/defenses.yaml |
 | ra2_soviets | ra2_soviets_airfield | redalert2/soviets | mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml |
 | ra2_soviets | ra2_soviets_apocalypsetank | redalert2/soviets | mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml |
@@ -299,25 +299,9 @@ Factions checked: **31** — L1 leaks: **449**, L3 concrete-inherit leaks: **20*
 | ra2_soviets | ra2_soviets_v3rocketlauncher | redalert2/soviets | mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml |
 | ra2_soviets | ra2_soviets_warfactory | redalert2/soviets | mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml |
 | ra2_soviets | ra2_soviets_warminer | redalert2/soviets | mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml |
+| latinsyndicate | asianalliance_ptnk | redalert2mod/asianalliance | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml |
 | latinsyndicate | naxis_tiger | redalert2mod/naxis | mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml |
 | latinsyndicate | naxis_wirbelwind | redalert2mod/naxis | mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml |
-| latinsyndicate | asianalliance_ptnk | redalert2mod/asianalliance | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml |
-| ordos | atreides_advancedcarryall | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/aircraft.yaml |
-| ordos | atreides_fremen | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/infantry.yaml |
-| ordos | atreides_ornithopter | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/aircraft.yaml |
-| ordos | atreides_palace | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/buildings.yaml |
-| ixian | atreides_advancedcarryall | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/aircraft.yaml |
-| ixian | atreides_fremen | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/infantry.yaml |
-| ixian | atreides_missiletank | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/vehicles.yaml |
-| ixian | atreides_ornithopter | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/aircraft.yaml |
-| ixian | atreides_palace | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/buildings.yaml |
-| ixian | corrino_missiletank | d2k/corrino | mods/cameo/ContentPacks/D2k/Corrino/yaml/vehicles.yaml |
-| harkonnen | atreides_advancedcarryall | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/aircraft.yaml |
-| harkonnen | atreides_fremen | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/infantry.yaml |
-| harkonnen | atreides_missiletank | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/vehicles.yaml |
-| harkonnen | atreides_ornithopter | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/aircraft.yaml |
-| harkonnen | atreides_palace | d2k/atreides | mods/cameo/ContentPacks/D2k/Atreides/yaml/buildings.yaml |
-| harkonnen | corrino_missiletank | d2k/corrino | mods/cameo/ContentPacks/D2k/Corrino/yaml/vehicles.yaml |
 | harkonnen | ordos_upgrade_lightfactory | d2k/ordos | mods/cameo/ContentPacks/D2k/Ordos/yaml/upgrades.yaml |
 | wc2_humans | wc2_humans_alleria | warcraft2/humans | mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml |
 | wc2_humans | wc2_humans_alleria_elite | warcraft2/humans | mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml |

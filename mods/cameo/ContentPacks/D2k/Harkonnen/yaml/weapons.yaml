@@ -56,6 +56,7 @@ DebrisMissile:
 
 ExplosiveDebris:
 	Inherits: ^Debris2Legacy
+	Inherits@fx: ^d2k_explosive_debris
 	Range: 7c0
 	Projectile: Bullet
 		Image: 120mm
@@ -68,9 +69,6 @@ ExplosiveDebris:
 		PercentageScale: 53333
 		Damage: 3000
 		Spread: 1c562
-	Warhead@Effect: CreateEffect
-		Explosions: large_explosion
-		ImpactSounds: EXPLSML4.WAV
 	Warhead@Concrete: DamagesConcrete
 		Damage: 4500
 
@@ -144,6 +142,7 @@ D2K_Rocket_AA:
 
 
 PlasmaExplosion:
+	Inherits@fx: ^d2k_plasma_explosion
 	Warhead@1Dam: SpreadDamage
 		Damage: 20000
 		Spread: 3c0
@@ -159,10 +158,6 @@ PlasmaExplosion:
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: SandCrater
-	Warhead@3Eff: CreateEffect
-		Explosions: devastator
-		ImpactSounds: EXPLLG2.WAV
-		ExplosionPalette: effect75alpha
 	Warhead@Concrete: DamagesConcrete
 		Damage: 20000
 
