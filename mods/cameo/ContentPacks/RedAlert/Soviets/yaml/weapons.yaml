@@ -5911,9 +5911,9 @@ ShtoraLaser:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Condition: GrantExternalCondition
-		Condition: blinded
-		Duration: 50
+	Warhead@Condition: ApplyPhysicalState
+		PhysicalStateName: Blind
+		Amount: 20000
 		Range: 500
 		ValidTargets: Ground, Water, Air
 		#ValidTargets: Vehicle, Infantry, Ship, Submarine, Defense
