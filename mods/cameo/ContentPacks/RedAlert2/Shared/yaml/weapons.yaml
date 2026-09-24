@@ -827,21 +827,8 @@
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Bang_Large_RA2
 
-^RA2TeslaWeapon:
-	Inherits@wh: ^Warhead_Tesla_Heavy
-	Inherits@proj: ^Projectile_Lightning_Heavy
-	Inherits@fx: ^Effect_Tesla_Impact_RA2
 
-^RA2LaserWeapon:
-	Inherits@wh: ^Warhead_Laser_Heavy
-	Inherits@proj: ^Projectile_Laser_Heavy
-	Inherits@fx: ^Effect_Laser_Heavy
-	-Warhead@Effect:
 
-^RA2RailgunWeapon:
-	Inherits@wh: ^Warhead_Railgun_Heavy
-	Inherits@proj: ^Projectile_Railgun_Heavy
-	Inherits@fx: ^Effect_Bang_Small_RA2
 
 ^RA2EliteEffects:
 	Inherits: ^Effect_Elite_Explosion_RA2
@@ -5757,42 +5744,6 @@ DreadnoughtLaunch:
 		Inaccuracy: 1000
 	Warhead@1Dam: TargetDamage
 
-^RA2SCUDMissileCompatibility:
-	Warhead@RA2SCUDMissileAP_Heavy_NoWall: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		InvalidTargets: wall
-		Spread: 85
-		Damage: 30000
-		Falloff: 100, 0
-		Versus:
-			HAZMAT: 95
-			COMPOSITE: 44
-			BLAST: 68
-			REFLECTOR: 71
-			ARMOR: 70
-			Shield: 161
-			Superheavy: 160
-			Spaceship: 146
-			Heavy: 142
-			Medium: 126
-			Helicopter: 115
-			Light: 112
-			Concrete: 105
-			Scout: 99
-			Bomber: 98
-			Plate: 91
-			Steel: 82
-			Fighter: 75
-			Flak: 73
-			Wood: 66
-			Heroic: 57
-			None: 54
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 
 RA2SCUD:
 	Inherits@xRA2SCUD0: ^Warhead_MissileAP_Heavy

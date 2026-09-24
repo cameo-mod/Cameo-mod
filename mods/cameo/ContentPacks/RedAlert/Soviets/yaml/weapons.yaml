@@ -188,26 +188,6 @@ ra1_soviets_commissar_pistol:
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 5
 
-^GrenadeRALegacy:
-	Inherits: ^Warhead_Demolition_Light
-	Inherits@2: ^Warhead_Flame_Light
-	Inherits@3: ^Projectile_Grenade_Light
-	Inherits@4: ^Effect_Flame_Light
-	ReloadDelay: 40
-	Range: 5791
-	Report: toss1.aud
-	Projectile: Bullet
-		Speed: 150
-		LaunchAngle: 66
-		ContrailLength: 11
-		ContrailStartWidth: 66
-		ContrailEndWidth: 22
-		ContrailStartColor: FF8888FF
-		ContrailEndColor: FFFFFF22
-	Warhead@Demolition_Light: AreaDamage
-		Damage: 8000
-	Warhead@Flame_Light:
-		Damage: 8000
 
 ra1_soviets_grenadier_grenade:
 	Inherits@wh: ^Warhead_Demolition_Light

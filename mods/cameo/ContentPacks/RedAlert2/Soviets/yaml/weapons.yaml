@@ -660,31 +660,6 @@ RA2120mm_tesla_elite:
 		AimChance: 100
 		AimTargetStances: Enemy, Neutral
 
-^RA160mmLegacy:
-	Inherits@wh: ^Warhead_Concussion_Medium
-	Inherits@fx: ^Effect_Concussion_Medium
-	Inherits@2: ^RA2Grenade
-	ReloadDelay: 88
-	Range: 11111
-	MinRange: 2222
-	Report: vdesatta.wav, vdesattb.wav
-	Projectile: Bullet
-		LaunchAngle: 111
-		Inaccuracy: 1111
-		Speed: 333
-		ContrailLength: 25
-		ContrailStartColor: BB8866
-		ContrailStartWidth: 55
-		ContrailEndColor: FFFFFF
-		ContrailEndColorUsePlayerColor: true
-		Image: bhreddragon
-		TrailImage: black_smokey
-		TrailPalette: effect75alpha
-		TrailInterval: 1
-	Warhead@Concussion_Medium:
-		Damage: 60000
-	Warhead@Demolition_Light:
-		Damage: 60000
 RA160mm:
 	Inherits@xRA160mm2: ^Warhead_Demolition_Light
 	Inherits@xRA160mm3: ^Projectile_Grenade_Light
@@ -761,39 +736,6 @@ RA160mm:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
-^RA160mmRadLegacy:
-	Inherits@wh: ^Warhead_Chemical_Light
-	Inherits@proj: ^Projectile_Chem_Light
-	Inherits@fx: ^Effect_Chem_Light
-	Inherits@x^RA160mmRadLegacy0: ^Warhead_Concussion_Medium
-	Inherits@x^RA160mmRadLegacy1: ^Effect_Concussion_Medium
-	Inherits@x^RA160mmRadLegacy2: ^Warhead_Demolition_Light
-	Inherits@x^RA160mmRadLegacy3: ^Projectile_Grenade_Light
-	Inherits@x^RA160mmRadLegacy4: ^Effect_Bang_Large_RA2
-	Inherits@rad: ^RA2RadShell
-	MinRange: 2222
-	Range: 11111
-	ReloadDelay: 88
-	Report: vdesatta.wav, vdesattb.wav
-	Projectile: Bullet
-		Image: bhreddragon
-		ContrailStartColor: 88BB66
-		ContrailEndColor: FFFFFF
-		ContrailEndColorUsePlayerColor: true
-		ContrailLength: 25
-		ContrailStartWidth: 55
-		Inaccuracy: 1111
-		LaunchAngle: 111
-		Speed: 333
-		TrailInterval: 1
-		TrailImage: green_smokey
-		TrailPalette: effect
-	Warhead@Chemical_Light:
-		Damage: 36000
-	Warhead@Concussion_Medium:
-		Damage: 36000
-	Warhead@Demolition_Light:
-		Damage: 36000
 RA160mm_rad:
 	Inherits@xRA160mm_rad5: ^Warhead_Demolition_Light
 	Inherits@xRA160mm_rad6: ^Projectile_Grenade_Light

@@ -1,49 +1,4 @@
-^CryoMissileProjectile:
-	TargetActorCenter: true
-	Projectile: Missile
-		TrailImage: blue_smokey
-		TrailInterval: 1
-		ContrailStartColor: 77CCFF
-		ContrailEndColor: 33221100
-		ContrailStartWidth: 75
-		ContrailEndWidth: 25
-		ContrailLength: 15
-	Warhead@Effect: CreateEffect
-		Explosions: cryo_blast
-	Warhead@EffectWater: CreateEffect
-		Explosions: cryo_blast
-	Warhead@EffectAir: CreateEffect
-		Explosions: cryo_blast
-	Warhead@PhysicalStateCryo: ApplyPhysicalState
-		PhysicalStateName: Temperature
-		Amount: -2000
-		Range: 200
-		ValidRelationships: Enemy, Neutral, Ally
-		ValidTargets: Ground, Water, Air
 
-^WaveforceBulletProjectile:
-	TargetActorCenter: true
-	Projectile: Bullet
-		Image: 50CAL
-		ContrailStartColor: 4488FF88
-		ContrailEndColor: FFFFFF44
-		ContrailWidth: 150
-		ContrailLength: 15
-		Speed: 4000
-		Width: 40
-	Warhead@Effect: CreateEffect
-		Explosions: blue_small_fire
-		ImpactSounds: kaboom12.aud
-		ValidTargets: Ground, Ship
-	Warhead@EffectWater: CreateEffect
-		Explosions: blue_small_fire
-		ImpactSounds: kaboom12.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@EffectAir: CreateEffect
-		Explosions: blue_small_fire
-		ImpactSounds: kaboom12.aud
-		ValidTargets: Air
 
 ^IncendiaryBulletProjectile:
 	TargetActorCenter: true
@@ -56,13 +11,6 @@
 		Speed: 4000
 		Width: 40
 
-^WaveforceBulletWarhead:
-	Inherits@wh: ^Warhead_Railgun_Heavy
-	Inherits@proj: ^Projectile_Railgun_Heavy
-	Inherits@fx: ^Effect_Railgun_Heavy
-	Warhead@Railgun_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 OreExplosion:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
@@ -1267,68 +1215,6 @@ ZeroFighterChainGun:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 
-^ZeroFighterWaveforceBulletCompatibility:
-	Warhead@ZeroFighterBullet_Medium: AreaDamage
-		ValidRelationships: Neutral, Enemy
-		ValidTargets: Ground, Water
-		Spread: 100
-		Damage: 1000
-		Falloff: 100, 0
-		Versus:
-			HAZMAT: 99
-			COMPOSITE: 42
-			BLAST: 68
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 150
-			None: 200
-			Flak: 160
-			Plate: 151
-			Scout: 117
-			Light: 108
-			Fighter: 99
-			Wood: 98
-			Bomber: 92
-			Heroic: 89
-			Steel: 85
-			Medium: 84
-			Helicopter: 75
-			Heavy: 67
-			Concrete: 62
-			Spaceship: 57
-			Superheavy: 55
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@ZeroFighterBullet_MediumFriendlyFire: AreaDamage
-		ValidRelationships: Ally
-		ValidTargets: Ground, Water, Air
-		Spread: 100
-		Damage: 500
-		Falloff: 100, 0
-		Versus:
-			HAZMAT: 99
-			COMPOSITE: 42
-			BLAST: 68
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 150
-			None: 200
-			Flak: 160
-			Plate: 151
-			Scout: 117
-			Light: 108
-			Fighter: 99
-			Wood: 98
-			Bomber: 92
-			Heroic: 89
-			Steel: 85
-			Medium: 84
-			Helicopter: 75
-			Heavy: 67
-			Concrete: 62
-			Spaceship: 57
-			Superheavy: 55
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		UpdatesUnitStatistics: false
 
 ZeroFighterChainGunWaveforce:
 	Inherits@xZeroFighterChainGunWaveforce0: ^Warhead_Railgun_Heavy
@@ -3725,43 +3611,7 @@ DT120mm1:
 		Explosions: flak_explosion_ground
 		ValidTargets: Air, Ground, Water
 
-^RAHeavyMG:
-	ReloadDelay: 30
-	Range: 6144
-	Report: gun13.aud
-	Projectile: Bullet
-		Speed: 1c682
-	Warhead@1Dam: SpreadDamage
-		Spread: 128
-		Damage: 2560
-		Versus:
-			None: 120
-			Wood: 60
-			Light: 40
-			Medium: 30
-			Heavy: 20
-			Concrete: 50
-		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
-	Warhead@2Eff: CreateEffect
-		Explosions: piffs
-		ValidTargets: Ground, Ship, Air
-	Warhead@3EffWater: CreateEffect
-		Explosions: water_piffs
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
 
-^RALightMG:
-	Inherits: ^HeavyMG
-	Warhead@1Dam: SpreadDamage
-		Damage: 1000
-		Versus:
-			None: 150
-			Wood: 10
-			Light: 40
-			Medium: 25
-			Heavy: 10
-			Concrete: 10
-		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 
 ^SnipeWeapon:
 	ReloadDelay: 80
@@ -3989,40 +3839,6 @@ BarrelExplode:
 		SmudgeType: Crater
 		InvalidTargets: Structure, wall
 
-^ATMineDemolitionCompatibility:
-	Warhead@ATMineDemolition_Light: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 100
-		FriendlyFireSpread: 100
-		ValidTargets: Ground, Water
-		InvalidTargets: Mine
-		Spread: 233
-		Damage: 50000
-		Falloff: 100, 45, 18, 6, 0
-		Versus:
-			HAZMAT: 63
-			COMPOSITE: 101
-			BLAST: 41
-			REFLECTOR: 75
-			ARMOR: 70
-			Shield: 143
-			Wood: 200
-			None: 183
-			Steel: 165
-			Flak: 143
-			Concrete: 136
-			Scout: 109
-			Plate: 107
-			Light: 86
-			Fighter: 70
-			Medium: 69
-			Bomber: 62
-			Heroic: 59
-			Heavy: 58
-			Helicopter: 54
-			Superheavy: 51
-			Spaceship: 47
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
 ATMine:
 	Report: mineblo1.aud

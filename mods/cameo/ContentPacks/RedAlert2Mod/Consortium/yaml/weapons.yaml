@@ -2674,42 +2674,6 @@ superbfg10kCannon:
 		UpdatesUnitStatistics: false
 		ValidRelationships: Neutral, Enemy
 
-^SteelMakoGunCannonCompatibility:
-	Warhead@SteelMakoCannonHE_Medium_NoWall: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water
-		InvalidTargets: wall
-		Spread: 300
-		Damage: 2000
-		Falloff: 100, 50, 20, 0
-		Versus:
-			HAZMAT: 71
-			COMPOSITE: 99
-			BLAST: 40
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 147
-			Wood: 150
-			Scout: 144
-			Light: 129
-			Medium: 128
-			None: 127
-			Heavy: 111
-			Steel: 107
-			Fighter: 98
-			Concrete: 92
-			Superheavy: 90
-			Flak: 87
-			Plate: 79
-			Heroic: 76
-			Bomber: 75
-			Helicopter: 64
-			Spaceship: 41
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 
 SteelMakoGun:
 	Inherits@xSteelMakoGun0: ^Warhead_CannonHE_Medium

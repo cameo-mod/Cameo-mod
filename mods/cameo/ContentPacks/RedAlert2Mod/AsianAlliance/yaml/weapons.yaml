@@ -8552,15 +8552,6 @@ AsianSniperLockdown:
 	-Warhead@Bullet_Heavy:
 	-Warhead@Bullet_Medium:
 
-^AsianRA2MediumMissile:
-	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_Clsn_Medium_RA2
-	Projectile: Missile
-		Image: patriot
-		-TrailImage:
-		ContrailLength: 33
-		ContrailStartWidth: 33
-		ContrailEndWidth: 1
 
 AsianMLRS:
 	Inherits@xAsianMLRS0: ^Warhead_Demolition_Light

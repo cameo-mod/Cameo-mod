@@ -1866,23 +1866,6 @@ tkmkatyushalalauncherrocketstwin:
 		MaximumLaunchSpeed: 125
 		MinimumLaunchSpeed: 125
 		Acceleration: 5
-^SandmarineTuskLegacy:
-	Inherits@wh: ^Warhead_MissileHE_Heavy
-	Inherits@wh2: ^Warhead_Concussion_Medium
-	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_Concussion_Medium
-	ReloadDelay: 129
-	Burst: 3
-	BurstDelays: 3
-	Range: 6464
-	Report: missile6.aud
-	ValidTargets: Ground, Water
-	Warhead@MissileHE_Heavy:
-		ValidTargets: Ground, Water
-		Damage: 40000
-	Warhead@Concussion_Medium:
-		ValidTargets: Ground, Water
-		Damage: 40000
 SandmarineTusk:
 	Inherits@xSandmarineTusk1: ^Warhead_Concussion_Medium
 	Inherits@xSandmarineTusk2: ^Projectile_Missile_Heavy
@@ -2302,36 +2285,6 @@ SandmarineTuskFire:
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 		PercentageSpread: 50
-^ViperMissilesLegacy:
-	Inherits@wh: ^Warhead_Concussion_Medium
-	Inherits@fx: ^Effect_Concussion_Medium
-	Inherits@2: ^RA2MediumMissile
-	ReloadDelay: 50
-	Burst: 4
-	BurstDelays: 2
-	Range: 6271
-	Report: vbleatta.wav, vbleattb.wav
-	ValidTargets: Ground, Water, Air
-	TargetActorCenter: true
-	Projectile: Missile
-		Speed: 400
-		Arm: 2
-		Inaccuracy: 2000
-		RangeLimit: 20000
-		Image: d2k_missile2
-		Palette: d2keffect
-		TrailImage: large_trail
-		MinimumLaunchAngle: 200
-		MaximumLaunchAngle: 200
-		MaximumLaunchSpeed: 200
-		MinimumLaunchSpeed: 200
-		Acceleration: 10
-	Warhead@Concussion_Medium:
-		Damage: 16000
-		ValidTargets: Ground, Water, Air
-	Warhead@MissileAP_Medium:
-		Damage: 16000
-		ValidTargets: Ground, Water, Air
 ViperMissiles:
 	Inherits@xViperMissiles2: ^Warhead_MissileAP_Medium
 	Inherits@xViperMissiles3: ^Projectile_Missile_Medium

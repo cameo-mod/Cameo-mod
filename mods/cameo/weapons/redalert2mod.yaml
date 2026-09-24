@@ -2,15 +2,6 @@
 #		Red Alert 2 Asian Alliance
 ####################################################################################################
 
-^AsianHowitzerSplashLegacy:
-	Inherits@wh: ^Warhead_Concussion_Medium
-	Inherits@wh2: ^Warhead_Demolition_Heavy
-	Inherits@fx: ^Effect_Twlt_VeryLarge_RA2
-	Projectile: InstantExplode
-	Warhead@Concussion_Medium:
-		Damage: 20000
-	Warhead@Demolition_Heavy:
-		Damage: 20000
 
 AsianHowitzerSplash:
 	Inherits@xAsianHowitzerSplash1: ^Warhead_Demolition_Heavy
@@ -216,24 +207,6 @@ AsianChaosSuperweapon:
 		InvalidTargets: Hero, MCImmune
 		ValidRelationships: Enemy
 
-^AsianIonBeam:
-	Inherits@wh: ^Warhead_Tesla_Super
-	Inherits@proj: ^Projectile_Lightning_Super
-	Inherits@fx: ^Effect_Tesla_Super
-	ReloadDelay: 9999
-	AirThreshold: 8c0
-	ValidTargets: Ground, Water, Air
-	Projectile: SpriteAthenaLaser
-		Image: tsioncannon
-		Sequence: ionbeam
-		Palette: shield100
-		RingImage: tsioncannon
-		RingSequence: ringmini2
-		SpriteNumber: 10
-		HeightOffset: 2546
-		StayTicks: 45
-		Speed: 0
-		ExplosionInterval: 9999
 
 AsianSmallTorpedo:
 	Inherits@xAsianSmallTorpedo0: ^Warhead_MissileAP_Heavy
@@ -332,112 +305,12 @@ AsianSmallTorpedo:
 			Flak: 11
 			None: 10
 
-^SteelSmallArms:
-	Inherits: ^RA2SmallArms
-	Report: steel_clonefire.wav
-	Projectile: Bullet
-		ContrailStartColor: 77CCFFAA
-		ContrailEndColor: 4488FF00
-		ContrailLength: 10
-		ContrailStartWidth: 20
-		ContrailEndWidth: 5
-	Warhead@Effect: CreateEffect
-		Explosions: steel_bluepiffs
 
-^SteelChaingun:
-	Inherits@x^SteelChaingun0: ^Warhead_Bullet_Medium
-	Inherits@x^SteelChaingun1: ^Projectile_Bullet_Medium
-	Inherits@x^SteelChaingun2: ^Effect_Bullet_Medium_RA2
-	Projectile: Bullet
-		ContrailStartColor: 77CCFFAA
-		ContrailEndColor: 4488FF00
-		ContrailLength: 20
-		ContrailStartWidth: 40
-		ContrailEndWidth: 10
-	Warhead@Effect: CreateEffect
-		Explosions: steel_bluepiffs
 
-^SteelLightMissile:
-	Inherits: ^RA2LightMissile
-	Projectile: Missile
-		ContrailStartColor: 77CCFFAA
-		ContrailEndColor: 4488FF00
-	Warhead@Effect: CreateEffect
-		Explosions: steel_blueexp
-		ExplosionPalette: ra2effect
-		ImpactSounds: makoexplose.wav
-	Warhead@EffectAir: CreateEffect
-		Explosions: steel_blueexp
-		ExplosionPalette: ra2effect
-		ImpactSounds: makoexplose.wav
 
-^SteelMediumMissile:
-	Inherits@x^SteelMediumMissile0: ^Warhead_MissileAP_Medium
-	Inherits@x^SteelMediumMissile1: ^Projectile_Missile_Medium
-	Inherits@x^SteelMediumMissile2: ^Effect_Clsn_Medium_RA2
-	Projectile: Missile
-		Image: patriot
-		ContrailStartColor: 77CCFFAA
-		ContrailEndColor: 4488FF00
-		ContrailStartWidth: 33
-		ContrailEndWidth: 1
-		ContrailLength: 33
-	Warhead@Effect: CreateEffect
-		Explosions: steel_blueexp
-		ExplosionPalette: ra2effect
-		ImpactSounds: makoexplose.wav
-	Warhead@EffectAir: CreateEffect
-		Explosions: steel_blueexp
-		ExplosionPalette: ra2effect
-		ImpactSounds: makoexplose.wav
 
-^SteelHeavyMissile:
-	Inherits@x^SteelHeavyMissile0: ^Warhead_MissileAP_Heavy
-	Inherits@x^SteelHeavyMissile1: ^Projectile_Missile_Heavy
-	Inherits@x^SteelHeavyMissile2: ^Effect_Clsn_Large_RA2
-	Projectile: Missile
-		ContrailStartColor: 77CCFFAA
-		ContrailEndColor: 4488FF00
-	Warhead@Effect: CreateEffect
-		Explosions: steel_blueexp
-		ExplosionPalette: ra2effect
-		ImpactSounds: makoexplose.wav
-	Warhead@EffectAir: CreateEffect
-		Explosions: steel_blueexp
-		ExplosionPalette: ra2effect
-		ImpactSounds: makoexplose.wav
 
-^SteelMediumCannon:
-	Inherits@x^SteelMediumCannon0: ^Warhead_CannonHE_Medium
-	Inherits@x^SteelMediumCannon1: ^Projectile_Shell_Medium
-	Inherits@x^SteelMediumCannon2: ^Effect_Explosion_Medium_RA2
-	Projectile: Bullet
-		ContrailStartColor: 77CCFFAA
-		ContrailEndColor: 4488FF00
-		ContrailLength: 25
-		ContrailStartWidth: 25
-		ContrailEndWidth: 5
-	Warhead@Effect: CreateEffect
-		Explosions: steel_blueexp
-		ExplosionPalette: ra2effect
-		ImpactSounds: makoexplose.wav
 
-^SteelHeavyCannon:
-	Inherits: ^RA2HeavyCannon
-	Projectile: Bullet
-		ContrailStartColor: 77CCFFAA
-		ContrailEndColor: 4488FF00
-		ContrailLength: 25
-		ContrailStartWidth: 50
-		ContrailEndWidth: 25
-	Warhead@Effect: CreateEffect
-		Explosions: steel_blueexp
-		ExplosionPalette: ra2effect
-		ImpactSounds: makoexplose.wav
-
-####################################################################################################
-#		Red Alert 2 Steel Consortium
-####################################################################################################
 
 SteelIonCannon:
 	AirThreshold: 8c0
@@ -1024,12 +897,6 @@ SteelSupportSpawner4:
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: !corroded
 
-^LunarNaxGreenLasers:
-	Projectile: Bullet
-		ContrailStartColor: 8aff77AA
-		ContrailLength: 25
-		ContrailStartWidth: 25
-		ContrailEndWidth: 1
 
 NaxGrilleArty:
 	Inherits@xNaxGrilleArty0: ^Warhead_Demolition_Light
@@ -1258,52 +1125,6 @@ NaxiRifle:
 		Width: 50
 	Warhead@Bullet_Light:
 		Damage: 6000
-^NaxiLegacyLaserDelivery:
-	Inherits@proj: ^Projectile_Laser_Heavy
-	Inherits@fx: ^Effect_Laser_Heavy
-	TargetActorCenter: false
-	Projectile: LaserZap
-		Image: DRAGON
-		ContrailZOffset: 4000
-		ContrailStartColor: EECCAA88
-		ContrailEndColor: 88664422
-		ContrailStartWidth: 40
-		ContrailEndWidth: 80
-		ContrailLength: 0
-		Speed: 500
-		Inaccuracy: 100
-		Arm: 0
-		Blockable: false
-		AllowSnapping: true
-		Shadow: true
-		HorizontalRateOfTurn: 30
-		VerticalRateOfTurn: 30
-		TrailImage: smokey
-		TrailInterval: 1
-		MaximumLaunchSpeed: 250
-		MinimumLaunchSpeed: 250
-		CloseEnough: 500
-		Acceleration: 3
-		HomingActivationDelay: 2
-		RangeLimit: 25000
-		PointDefenseTypes: Missile
-	-Warhead@Glow:
-	Warhead@Effect:
-		ImpactSounds: xplos.aud
-		ValidTargets: Ground, Water
-	Warhead@EffectWater: CreateEffect
-		Explosions: water_piffs
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@RA2Crater: LeaveSmudge
-		SmudgeType: RA2Crater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 NaxLaserT:
 	Inherits@wh: ^Warhead_Laser_Heavy
@@ -2712,17 +2533,6 @@ NaxisBlackBombSmaller:
 		Falloff: 100, 45, 18, 6, 0
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageSpread: 50
-^LunarNaxisUpgradedCannons:
-	Report: nax_aliengun.wav
-	Projectile: Bullet
-		ContrailStartColor: 21f3b7AA
-		ContrailLength: 25
-		ContrailStartWidth: 25
-		ContrailEndWidth: 1
-	Warhead@Effect: CreateEffect
-		Explosions: steel_blueexp
-		ExplosionPalette: ra2effect
-		ImpactSounds: makoexplose.wav
 
 Lunar_Green105mm:
 	Inherits@xLunar_Green105mm0: ^Warhead_CannonHE_Medium
