@@ -5806,9 +5806,28 @@ BlackWidowPistols:
 		Damage: 5
 
 BlackWidowPistols_elite:
-	Inherits: BlackWidowPistols
+	Inherits@w70: ^Warhead_Sniper_Light
+	Inherits@w71: ^Projectile_Sniper_Light
+	Inherits@w72: ^Effect_Sniper_Light
 	Range: 6000
 	Burst: 8
+	Warhead@Sniper_Light: AreaDamage
+		Damage: 10000
+	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
+		Damage: 5
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
+		Damage: 10000
+	Projectile: Bullet
+		ContrailStartColor: 77777777
+		ContrailEndColorUsePlayerColor: false
+		ContrailStartWidth: 33
+		ContrailEndWidth: 77
+		ContrailLength: 7
+		Speed: 10000
+		ContrailEndColor: 33333333
+	Report: AUTanya_pistolFireA.wav, AUTanya_pistolFireB.wav, AUTanya_pistolFireC.wav, AUTanya_pistolFireD.wav, AUTanya_pistolFireE.wav, AUTanya_pistolFireF.wav, AUTanya_pistolFireG.wav, AUTanya_pistolFireH.wav, AUTanya_pistolFireI.wav
+	ReloadDelay: 16
+	BurstDelays: 3
 
 OrionRailgun:
 	Inherits@xOrionRailgun0: ^Warhead_CannonHE_Heavy

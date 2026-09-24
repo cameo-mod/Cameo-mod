@@ -6221,7 +6221,9 @@ AsianRailTank:
 		ValidTargets: Ground, Water
 		Damage: 24000
 AsianRailTank2:
-	Inherits: AsianRailTank
+	Inherits@w70: ^Warhead_Railgun_Heavy
+	Inherits@w71: ^Projectile_Railgun_Heavy
+	Inherits@w72: ^Effect_Clsn_Medium_RA2
 	Range: 10000
 	ReloadDelay: 75
 	Projectile: Railgun
@@ -6231,8 +6233,11 @@ AsianRailTank2:
 		HelixThickness: 48
 	Warhead@Railgun_Heavy:
 		Damage: 36000
+	Report: railuse5.aud
 AsianRailTank3:
-	Inherits: AsianRailTank
+	Inherits@w70: ^Warhead_Railgun_Heavy
+	Inherits@w71: ^Projectile_Railgun_Heavy
+	Inherits@w72: ^Effect_Clsn_Medium_RA2
 	Range: 11111
 	ReloadDelay: 90
 	Projectile: Railgun
@@ -6242,6 +6247,7 @@ AsianRailTank3:
 		HelixThickness: 64
 	Warhead@Railgun_Heavy:
 		Damage: 48000
+	Report: railuse5.aud
 AsianFlamerTank:
 	Inherits@w70: ^Warhead_Flame_Light
 	Inherits@w71: ^Projectile_Flame_Light
@@ -6408,7 +6414,9 @@ AAHyperionMagnet:
 	Warhead@Laser_Heavy_ExtraDamage:
 		ValidTargets: Air
 AsianTSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
-	Inherits: IonCannon
+	Inherits@w70: ^Warhead_Tesla_Super
+	Inherits@w71: ^Projectile_Lightning_Super
+	Inherits@w72: ^Effect_Tesla_Super
 	Report: tesla1.aud
 	Range: 12288
 	AirThreshold: 8c0
@@ -6493,8 +6501,76 @@ AsianTSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 		Delay: 16
 	Warhead@IonCannonAirPercentage: AreaDamagePercentage
 		Delay: 17
-	-Warhead@2Smu_impact:
-	-Warhead@5Smu_area2:
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		ValidTargets: Shielded
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+		Versus:
+			HAZMAT: 61
+			COMPOSITE: 72
+			BLAST: 98
+			REFLECTOR: 51
+			ARMOR: 70
+			Shield: 300
+			Heroic: 200
+			Plate: 175
+			Flak: 150
+			None: 125
+			Superheavy: 100
+			Heavy: 75
+			Medium: 50
+			Light: 25
+			Scout: 10
+			Wood: 10
+			Steel: 10
+			Concrete: 10
+			Fighter: 10
+			Bomber: 10
+			Helicopter: 10
+			Spaceship: 10
+	Warhead@Tesla_Super: AreaDamage
+		ValidTargets: Shielded
+		Spread: 1000
+		Damage: 200000
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+		PercentageScale: 2000
+		Delay: 0
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
+		ValidTargets: Shielded
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+	Warhead@IonCannon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Falloff: 1000, 750, 500, 250, 100
+		AffectsParent: True
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@IonCannonPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		AffectsParent: True
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@IonCannonAirPercentage: AreaDamagePercentage
+		ValidTargets: Vehicle, Water, Air
+		Spread: 3000
+		Damage: 50
+		AffectsParent: True
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@3Smu_area: LeaveSmudge
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Volume: 5
+	Warhead@GroundFireArea: SpawnActorInArea
+		Actor: groundfire
+		Range: 3
+		Chance: 50
+		ImpactActors: false
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@Distort: HeatDistortion
+		Scale: 1.0
+		FadeFrames: 420
+		FadeInFrames: 0
+	Warhead@Shock: Shockwave
+		Scale: 1.5
+		FadeFrames: 120
+		FadeInFrames: 0
 
 AsianIonBeamMiniStart:
 	Inherits@xAsianIonBeamMiniStart0: ^Warhead_Tesla_Super

@@ -238,10 +238,24 @@ RA2NarcoPistol:
 		Damage: 10
 
 RA2NarcoPistols_elite:
-	Inherits: RA2NarcoPistol
+	Inherits@w70: ^Warhead_Sniper_Light
+	Inherits@w71: ^Projectile_Sniper_Light
+	Inherits@w72: ^Effect_Sniper_Light
 	Range: 7300
 	Burst: 2
 	BurstDelays: 3
+	ValidTargets: Ground, Water, Garrisoned, Air
+	Warhead@Sniper_Light: AreaDamage
+		ValidTargets: Ground, Water, Garrisoned, Air
+		Damage: 20000
+	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Garrisoned, Air
+		Damage: 10
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
+		ValidTargets: Ground, Water, Garrisoned, Air
+		Damage: 20000
+	ReloadDelay: 22
+	Report: itanatta.wav, itanattb.wav
 
 NarcoGrenade:
 	Inherits@wh: ^Warhead_Demolition_Light

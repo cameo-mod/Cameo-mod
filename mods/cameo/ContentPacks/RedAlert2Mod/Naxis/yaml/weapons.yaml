@@ -1581,11 +1581,26 @@ NaxiSniper:
 		Falloff: 100, 0
 
 NaxiSniper_elite:
-	Inherits: NaxiSniper
+	Inherits@w70: ^Warhead_Sniper_Light
+	Inherits@w71: ^Projectile_Sniper_Light
+	Inherits@w72: ^Effect_Sniper_Light
 	Report: ramgun2.aud
 	Range: 8888
 	Burst: 2
 	BurstDelays: 3
+	Warhead@Sniper_Light: AreaDamage
+		Spread: 1
+		Damage: 24000
+		Falloff: 100, 0
+	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
+		Spread: 1
+		Damage: 12
+		Falloff: 100, 0
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
+		Spread: 1
+		Damage: 24000
+		Falloff: 100, 0
+	ReloadDelay: 120
 
 NaxiShrek:
 	Inherits@xNaxiShrek0: ^Warhead_MissileAP_Medium
