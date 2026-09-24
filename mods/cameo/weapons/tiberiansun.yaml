@@ -922,12 +922,18 @@ TSBazooka:
 	Warhead@MissileAP_Light:
 		Damage: 24000
 TSBazookaG:
-	Inherits: TSBazooka
+	Inherits@w71: ^Warhead_MissileAP_Light
+	Inherits@w72: ^Projectile_Missile_Light
+	Inherits@w73: ^Effect_MissileAP_Light
 	Range: 9216
 
 	Projectile: Missile
 		VerticalRateOfTurn: 40
 
+	Warhead@MissileAP_Light: AreaDamage
+		Damage: 24000
+	ReloadDelay: 52
+	Report: rketinf1.aud
 TSReaperTusk:
 	Inherits: ^TSDefaultMissile
 	ReloadDelay: 77
@@ -993,11 +999,19 @@ TSAegisMissile:
 		FriendlyFireSpread: 100
 
 TSMammothTusk_elite:
-	Inherits: TSMammothTusk2_AA
+	Inherits@w71: ^Warhead_MissileAA_Heavy
+	Inherits@w72: ^Projectile_Missile_Heavy
+	Inherits@w73: ^ts_gdi_set21
 	Burst: 8
 	Range: 9216
 	Projectile: Missile
 		VerticalRateOfTurn: 25
+		MinimumLaunchAngle: 75
+		CloseEnough: 500
+		HorizontalRateOfTurn: 25
+		Acceleration: 5
+		Speed: 500
+		TrailImage: large_trail
 	Warhead@MissileAA_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1008,6 +1022,10 @@ TSMammothTusk_elite:
 		PercentageScale: 10000
 		PercentageSpread: 50
 
+	ValidTargets: Air
+	BurstDelays: 8
+	ReloadDelay: 92
+	Report: misl1.aud
 TSBikeMissile:
 	Inherits@missilerole: ^Warhead_MissileAP_Medium
 	Inherits@finalmain: ^Warhead_MissileHE_Medium_Flat
@@ -1494,17 +1512,27 @@ forgotten_mutant_dualwield:
 		InvalidTargets: Air
 		Damage: 2000
 forgotten_mutant_dualwield_elite:
-	Inherits: forgotten_mutant_dualwield
+	Inherits@w71: ^Warhead_Bullet_Light
+	Inherits@w72: ^Projectile_Bullet_Light
+	Inherits@w73: ^Effect_Bullet_Light
 	Burst: 4
 	Range: 5120
 
 	Warhead@Bullet_Light:
 		InvalidTargets: Air
+	ValidTargets: Ground, Water
+	ReloadDelay: 18
+	Report: infgun3.aud, slvkgun1.aud
 MutAPRifle_elite:
-	Inherits: MutAPRifle
+	Inherits@w71: ^Warhead_Bullet_Light
+	Inherits@w72: ^Projectile_Bullet_Light
+	Inherits@w73: ^Effect_Bullet_Light
 	ReloadDelay: 30
 	Range: 6144
 
+	Warhead@Bullet_Light: AreaDamage
+		Damage: 4000
+	Report: jumpjet1.aud, gostgun1.aud
 TSTacticalMissile:
 	Inherits: ^TSDefaultMissile
 	Inherits@fx: ^ts_tiberiansun_tstacticalmissile
@@ -1598,7 +1626,7 @@ TSTacticalChemMissileDamage:
 		AirThreshold: 8c0
 
 TSChemBomblet:
-	Inherits: TSMissileBomblet
+	Inherits@w71: ^ts_tiberiansun_tsmissilebomblet
 	Projectile: GravityBomb
 		Velocity: 36, 0, 280
 		Acceleration: 0, 0, -12
@@ -1606,8 +1634,14 @@ TSChemBomblet:
 		Image: tsbomb
 		Sequences: idle
 		Palette: tseffect
+		Speed: 128
+		TrailImage: ts_small_smoke_trail
+		Blockable: false
 	Warhead@1Dam: SpreadDamage
 		DamageTypes: Prone50Percent, TriggerProne, TiberiumDeath
+		Damage: 26000
+		Spread: 1c0
+		ValidTargets: Ground, Water, Air
 	Warhead@5cloud: SpawnSmokeParticle
 		Count: 2
 		Weapon: TSCloud
@@ -1622,6 +1656,9 @@ TSChemBomblet:
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
 
+	ValidTargets: Ground, Water, Air
+	AirThreshold: 11c0
+	Range: 7168
 TSHSeekerBomb:
 	Range: 128
 	ReloadDelay: 120
@@ -1774,33 +1811,41 @@ NODMutant:
 
 	Inherits@fx: ^ts_tiberiansun_set1
 NODMutant1:
-	Inherits: NODMutant
+	Inherits@w71: ^ts_tiberiansun_set1
 	Warhead@2: SpawnActor
 		Actors: forgotten_mutantsoldier_sp
 		Range: 3
 		Delay: 10
 
+	Projectile: InstantHit
+	InvalidTargets: Vehicle, Structure
 NODMutant2:
-	Inherits: NODMutant
+	Inherits@w71: ^ts_tiberiansun_set1
 	Warhead@2: SpawnActor
 		Actors: forgotten_mutantsniper_sp
 		Range: 3
 		Delay: 10
 
+	Projectile: InstantHit
+	InvalidTargets: Vehicle, Structure
 NODMutant3:
-	Inherits: NODMutant
+	Inherits@w71: ^ts_tiberiansun_set1
 	Warhead@2: SpawnActor
 		Actors: forgotten_ghoststalker_sp
 		Range: 3
 		Delay: 10
 
+	Projectile: InstantHit
+	InvalidTargets: Vehicle, Structure
 NODMutant4:
-	Inherits: NODMutant
+	Inherits@w71: ^ts_tiberiansun_set1
 	Warhead@2: SpawnActor
 		Actors: forgotten_mutantsergeant
 		Range: 3
 		Delay: 10
 
+	Projectile: InstantHit
+	InvalidTargets: Vehicle, Structure
 FloaterSpawner:
 	Range: 3072
 	Projectile: InstantHit
@@ -1810,15 +1855,21 @@ FloaterSpawner:
 
 	Inherits@fx: ^ts_tiberiansun_set0
 ViscSpawner:
-	Inherits: FloaterSpawner
+	Inherits@w71: ^ts_tiberiansun_set0
 	Warhead@2: SpawnActor
 		Actors: tsvislrg
+		Delay: 5
 
+	Projectile: InstantHit
+	Range: 3072
 FiendSpawner:
-	Inherits: FloaterSpawner
+	Inherits@w71: ^ts_tiberiansun_set0
 	Warhead@2: SpawnActor
 		Actors: forgotten_tiberianfiend_wild
+		Delay: 5
 
+	Projectile: InstantHit
+	Range: 3072
 TunnelDisappear:
 	ReloadDelay: 10
 

@@ -152,10 +152,51 @@ d2k_quake_boom:
 
 	Inherits@fx: ^d2k_d2k_d2k_quake_boom
 Combat_Tank_F_Sound:
-	Inherits: Sound
+	Inherits@w71: ^d2k_shared_sound
 	Range: 5632
 	ReloadDelay: 135
 
+	Warhead@1Dam: SpreadDamage
+		Versus:
+			Heavy: 99
+			Medium: 111
+			Wood: 88
+			Concrete: 77
+			Light: 123
+			None: 333
+		Range: 0, 32
+		Damage: 3333
+		ValidRelationships: Neutral, Enemy
+		AffectsParent: false
+		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
+		Falloff: 100, 100
+	Projectile: AreaBeam
+		Duration: 4
+		InaccuracyType: PerCellIncrement
+		Falloff: 100, 75, 50
+		Shape: Flat
+		DamageInterval: 2
+		Range: 0, 7500, 15000
+		Speed: 333
+		Inaccuracy: 333
+		Width: 0c512
+		BeyondTargetRange: 1c0
+		Color: C4C9C2
+	Warhead@2Dam: SpreadDamage
+		Damage: 333
+		ValidRelationships: Ally
+		Versus:
+			Wood: 88
+			Concrete: 77
+			Light: 123
+			Medium: 111
+			None: 333
+			Heavy: 99
+		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
+		Falloff: 100, 100
+		AffectsParent: false
+		Range: 0, 32
+	Report: SONIC1.WAV
 facedancer_attack:
 	ReloadDelay: 20
 	Report: zulhit00.aud
@@ -417,10 +458,17 @@ D2kBuildingExplodeH:
 		Damage: 70000
 
 d2k_munitions_explosion_h:
-	Inherits: d2k_munitions_explosion
+	Inherits@w71: ^Warhead_Magic_Heavy
+	Inherits@w72: ^Projectile_Magic_Heavy
+	Inherits@w73: ^d2k_ixian_d2k_munitions_explosion
 	Report: 2100rotlsr.wav
 	Warhead@Magic_Heavy:
 		Damage: 92500
+		Falloff: 100, 50, 25, 0
+		DamageCalculationType: ClosestTargetablePosition
+		Delay: 20
+		Spread: 2000
+		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 
 # ghola_spawner:
 # 	Projectile: InstantHit
@@ -462,7 +510,9 @@ LMG_upgrade:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 LMG_burst:
-	Inherits: LMG
+	Inherits@w71: ^Warhead_Bullet_Medium
+	Inherits@w72: ^Projectile_Bullet_Light
+	Inherits@w73: ^Effect_Bullet_Light
 	Burst: 3
 	Range: 3840
 	BurstDelays: 3
@@ -475,9 +525,10 @@ LMG_burst:
 		Damage: 4860
 
 d2k_shotgun:
-	Inherits: LMG
+	Inherits@w71: ^Warhead_Bullet_Medium
+	Inherits@w72: ^Projectile_Bullet_Light
+	Inherits@w73: ^Effect_Bullet_Light
 	Range: 3328
-	-Report:
 	StartBurstReport: shtgunboom.wav
 	Burst: 3
 	BurstDelays: 0
@@ -493,6 +544,8 @@ d2k_shotgun:
 			Heavy: 30
 			Concrete: 50
 
+	Warhead@Bullet_Medium: AreaDamage
+		Damage: 4000
 Fremen_Upg:
 	Inherits: M_HMG
 	Inherits@fx: ^d2k_d2k_fremen_upg
@@ -525,7 +578,9 @@ Arrakis_Tanya_Guns:
 		-InvalidTargets:
 
 HMGh:
-	Inherits: HMG
+	Inherits@w71: ^Warhead_Bullet_Medium
+	Inherits@w72: ^Projectile_Bullet_Light
+	Inherits@w73: ^d2k_shared_hmg
 	ValidTargets: Ground, Vehicle
 	Burst: 2
 	BurstDelays: 1
@@ -534,6 +589,8 @@ HMGh:
 		ValidTargets: Ground
 		InvalidTargets: Infantry
 
+	Report: 20MMGUN1.WAV
+	Range: 3072
 DroneJump:
 	ReloadDelay: 45
 	Range: 3584
@@ -599,13 +656,24 @@ d2k_kwny_fighter:
 	MinRange: 920
 
 d2k_laser_aa:
-	Inherits: d2k_laser
+	Inherits@w71: ^Warhead_Laser_Heavy
+	Inherits@w72: ^Projectile_Laser_Heavy
+	Inherits@w73: ^d2k_shared_d2k_laser
 	Report: obelray1.aud
 	Range: 8192
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Air
 
+	Projectile: LaserZap
+		Width: 50
+		Color: FF0000
+		ZOffset: 2047
+	StartBurstReport: d2k_laser_tank_att.wav
+	BurstDelays: 0
+	Warhead@Laser_Heavy: AreaDamage
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	Burst: 5
 d2k_sandworm_electricity:
 	Inherits: TeslaZap
 	Burst: 12

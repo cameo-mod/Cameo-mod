@@ -26,7 +26,7 @@ ContentPack-migration residue. **Fix by deleting the LEGACY copy** once the pack
 |---|---|
 | `Flamethrower` | `weapons/tiberiandawn.yaml:72` · `weapons/starcraft.yaml:1` |
 | `Sound2` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:3141` · `ContentPacks/D2k/Atreides/yaml/weapons.yaml:15` |
-| `ZClaw3` | `weapons/tiberiansun.yaml:1276` · `weapons/tiberiansun.yaml:1858` |
+| `ZClaw3` | `weapons/tiberiansun.yaml:1294` · `weapons/tiberiansun.yaml:1909` |
 | `ra1_allies_alliedrocketsoldier_rocketsracryo` | `ContentPacks/RedAlert/Shared/yaml/weapons.yaml:210` · `ContentPacks/RedAlert/Allies/yaml/weapons.yaml:936` |
 | `ra1_allies_rifleinfantry_carbine` | `ContentPacks/RedAlert/Shared/yaml/weapons.yaml:2427` · `ContentPacks/RedAlert/Allies/yaml/weapons.yaml:941` |
 | `ra1_allies_rifleinfantry_carbine_cryo` | `ContentPacks/RedAlert/Shared/yaml/weapons.yaml:2444` · `ContentPacks/RedAlert/Allies/yaml/weapons.yaml:946` |

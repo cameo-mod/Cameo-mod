@@ -15,20 +15,20 @@ W5 counts structural flat-damage nodes, including zero/healing/ally-only nodes; 
 | W3 | two or more `^Projectile_*` inherits | **12** | 12 |
 | W4 | two or more `^Effect_*` inherits | **52** | 52 |
 | W5 | more than one resolved MAIN warhead | **167** | 389 |
-| W6 | effect warheads declared LOCALLY | **448** | 448 |
-| W7 | inherits from ANOTHER WEAPON, not a template | **963** | 963 |
+| W6 | effect warheads declared LOCALLY | **447** | 447 |
+| W7 | inherits from ANOTHER WEAPON, not a template | **946** | 946 |
 | W8 | inherits a `^Template` that is not one of the three kinds | **637** | 637 |
 
 | I7 informational — missing template | weapons |
 |---|--:|
-| no `^Effect_*` inherit | 1163 |
-| no `^Projectile_*` inherit | 1490 |
-| no `^Warhead_*` inherit | 1084 |
+| no `^Effect_*` inherit | 1145 |
+| no `^Projectile_*` inherit | 1481 |
+| no `^Warhead_*` inherit | 1075 |
 
 _I7 is a REVIEW QUEUE, not a defect count — an instant or utility weapon may legitimately have no projectile. Do not ratchet it without a per-weapon pass._
 
 
-## W7 — inherits from ANOTHER WEAPON, not a template (963 vs ratchet 963)
+## W7 — inherits from ANOTHER WEAPON, not a template (946 vs ratchet 946)
 
 | weapon | weapon-parents | first four |
 |---|---|---|
@@ -74,7 +74,7 @@ _I7 is a REVIEW QUEUE, not a defect count — an instant or utility weapon may l
 | `AsianPelicanMissile_elite` | 1 | `AsianPelicanMissile` |
 
 
-_... and 923 more._
+_... and 906 more._
 
 
 ## W8 — inherits a `^Template` that is not one of the three kinds (637 vs ratchet 637)
@@ -340,7 +340,7 @@ _... and 12 more._
 _... and 127 more._
 
 
-## W6 — effect warheads declared LOCALLY (448 vs ratchet 448)
+## W6 — effect warheads declared LOCALLY (447 vs ratchet 447)
 
 | weapon | nodes | first three |
 |---|---|---|
@@ -386,7 +386,7 @@ _... and 127 more._
 | `BuggyPlasmaGrenade` | 1 | `Warhead@Effect: CreateEffect` |
 
 
-_... and 408 more._
+_... and 407 more._
 
 
 _all buckets at or below their ratchets_ — this is the pre-existing conversion backlog. **Lower each baseline as you convert; never raise one.**

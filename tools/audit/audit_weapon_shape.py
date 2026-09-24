@@ -115,7 +115,9 @@ W6_BASELINE = 447   # weapons declaring an effect warhead locally;
 # from a TEMPLATE, "and NEVER from another weapon". Nothing measured that clause before, so
 # W1 could pass a weapon that inherits all three of its parents from other weapons. Both
 # ratchets are set by THIS script's own first run, never from a scratch scan.
-W7_BASELINE = 963   # inherits from another WEAPON (655 distinct weapon-parents)
+W7_BASELINE = 946   # inherits from another WEAPON (655 distinct weapon-parents)
+                    # 963 -> 946: W7 batch-1 clean subset (17 edges whose
+                    # covering sets are pure three-kind + fx families).
                     # 957 -> 963: pre-existing master debt measured on
                     # 5b89b1341 (already 963 at 4fcc9f941, before the W7/W9
                     # merge wave); same re-baseline class as W2 177 -> 281

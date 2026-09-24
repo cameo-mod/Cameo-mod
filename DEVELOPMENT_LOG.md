@@ -12102,3 +12102,48 @@ L1/L2 276/279 -> **262/269** (ratchets locked lower); W7 963, W8 637.
 
 **Boot-gate:** PASS — `MenuPostProcessEffect.PostWorldLoaded`, no new
 exception logs.
+
+## 2026-09-26 — W7 batch-1: clean-subset conversion (DAWN)
+
+**Task:** weapon→weapon `Inherits` edges (W7) in the DAWN file-set.
+Census: 96 edges total; 19 in outpost2.yaml are EMBER's (#488) → my
+scope 77 (d2k 26, StarCraft packs 27, tiberiandawn 1, tiberiansun 23).
+
+**Classification of the 77:** each edge's parent chain is traced to its
+COVERING template edges (recursive through weapon parents):
+- 30 chains bottom in kind templates / fx families → convertible now
+- 43 chains bottom in legacy bundle templates (^Grenade, ^FlakWeapon,
+  ^HeavyBomb, ^ShrapnelWeapon, ^MediumMissile, ^Chaingun, ^D2KMissile,
+  ^OMG, ^DamagingExplosionHE, ^PhotonCannonLegacy, ...) → BLOCKED on the
+  legacy-template retrofit (W23-class program), else W7→W8 relabeling
+- 4 parents carry NO Inherits (empty covering = full local copy) → hold
+
+**Ratchet-net filter:** of the 30 convertible, only 17 convert without
+newly tripping a kind check — a parent with 2+ same-kind edges relabels
+W7 as W2/W3/W4 on the child. Reverted: TS90mmDep, TSGrenadeAA/G,
+TSChemAdatsMissile_AA, CycloneRocketsLockOn, ScourgeExplosion,
+GhostSniperLockdown, SpecterSniperLockdown, oDebris2/3/4.
+Held inside the run: TSSniper_elite, d2k_sandworm_electricity
+(*ExtraDamage node drift — Claude ruling pending; block restored).
+
+**Converted (17, all resolved-identical):** TSBazookaG,
+TSMammothTusk_elite, forgotten_mutant_dualwield_elite, MutAPRifle_elite,
+TSChemBomblet, NODMutant1–4, ViscSpawner, FiendSpawner,
+Combat_Tank_F_Sound, d2k_munitions_explosion_h, LMG_burst, d2k_shotgun,
+HMGh, d2k_laser_aa.
+
+**Tool (`C:/tmp/dawn_tools/w7_conv.py`):** replaces each
+`Inherits: <Weapon>` with the parent's covering `^` edges (dedup'd,
+labelled w7N), then pins resolved drift at weapon level — scalars
+(Range/Report), node fields (nested emit, in-place value replace,
+`-f:` cancels for tip-only fields, `-chan:` for tip-only channels).
+Held weapons have their original block restored (edges NOT swapped).
+Gotchas: leading `/` in flat paths broke channel grouping; `-Report:`
+in d2k_shotgun was a pre-existing cancel whose provider (LMG local
+field) left with the removed edge → dead cancel dropped.
+
+**Verification:** 17/17 resolved-identical (review_resolve_diff);
+empty 0; orphan cancels 0; W7 963 -> **946** (ratchet locked);
+W2/W3/W4/W6/W8 unchanged (281/12/52/447/637).
+
+**Boot-gate:** PASS — menu marker, no new exceptions.
