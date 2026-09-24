@@ -1753,7 +1753,9 @@ YRBoomerTorpedo:
 		Speed: 4000
 
 YuriGatlingCannonMG1:
-	Inherits: RA2GattlingMG1
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium_RA2
 	Range: 7500
 	Warhead@Bullet_Medium_Flat:
 		Damage: 4000
@@ -1819,9 +1821,24 @@ YuriGatlingCannonMG1:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+	ValidTargets: Ground, Water
+	ReloadDelay: 6
+	Projectile: Bullet
+		ContrailStartColor: FFAA44
+		ContrailEndColor: FFFFFF
+		ContrailStartWidth: 15
+		ContrailEndColorUsePlayerColor: true
+		Width: 100
+	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
+	Warhead@Bullet_Medium_Flat: AreaDamage
+		ValidTargets: Ground, Water
+		PercentageScale: 9975
+	-Warhead@Bullet_Medium:
 
 YuriGatlingCannonMG1_AA:
-	Inherits: RA2GattlingMG1_AA
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium_RA2
 	Range: 10125
 	Warhead@Bullet_Medium_Flat:
 		Damage: 8000
@@ -1887,9 +1904,24 @@ YuriGatlingCannonMG1_AA:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+	ValidTargets: Air
+	ReloadDelay: 6
+	Projectile: Bullet
+		ContrailStartColor: FFAA44
+		ContrailEndColor: FFFFFF
+		ContrailStartWidth: 15
+		ContrailEndColorUsePlayerColor: true
+		Width: 100
+	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
+	Warhead@Bullet_Medium_Flat: AreaDamage
+		ValidTargets: Air
+		PercentageScale: 9988
+	-Warhead@Bullet_Medium:
 
 YuriGatlingCannonMG2:
-	Inherits: RA2GattlingMG2
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium_RA2
 	Range: 7875
 	Warhead@Bullet_Medium_Flat:
 		Damage: 4000
@@ -1955,9 +1987,24 @@ YuriGatlingCannonMG2:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+	ValidTargets: Ground, Water
+	ReloadDelay: 4
+	Projectile: Bullet
+		ContrailStartColor: FFAA44
+		ContrailEndColor: FFFFFF
+		ContrailStartWidth: 15
+		ContrailEndColorUsePlayerColor: true
+		Width: 100
+	Report: vgatlo5a.wav, vgatlo5b.wav
+	Warhead@Bullet_Medium_Flat: AreaDamage
+		ValidTargets: Ground, Water
+		PercentageScale: 9975
+	-Warhead@Bullet_Medium:
 
 YuriGatlingCannonMG2_AA:
-	Inherits: RA2GattlingMG2_AA
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium_RA2
 	Range: 11250
 	Warhead@Bullet_Medium_Flat:
 		Damage: 8000
@@ -2023,9 +2070,24 @@ YuriGatlingCannonMG2_AA:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+	ValidTargets: Air
+	ReloadDelay: 4
+	Projectile: Bullet
+		ContrailStartColor: FFAA44
+		ContrailEndColor: FFFFFF
+		ContrailStartWidth: 15
+		ContrailEndColorUsePlayerColor: true
+		Width: 100
+	Report: vgatlo5a.wav, vgatlo5b.wav
+	Warhead@Bullet_Medium_Flat: AreaDamage
+		ValidTargets: Air
+		PercentageScale: 9988
+	-Warhead@Bullet_Medium:
 
 RA2GattlingMG3:
-	Inherits: RA2GattlingMG1
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium_RA2
 	Range: 5500
 	Report: vgatlo8a.wav, vgatlo8b.wav
 	ReloadDelay: 2
@@ -2079,9 +2141,24 @@ RA2GattlingMG3:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+	ValidTargets: Ground, Water
+	Projectile: Bullet
+		ContrailStartColor: FFAA44
+		ContrailEndColor: FFFFFF
+		ContrailStartWidth: 15
+		ContrailEndColorUsePlayerColor: true
+		Speed: 10000
+		Width: 100
+	Warhead@Bullet_Medium_Flat: AreaDamage
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 9975
+	-Warhead@Bullet_Medium:
 
 RA2GattlingMG3_AA:
-	Inherits: RA2GattlingMG3
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium_RA2
 	Range: 8250
 	ValidTargets: Air
 	Warhead@Bullet_Medium:
@@ -2142,8 +2219,19 @@ RA2GattlingMG3_AA:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+	ReloadDelay: 2
+	Projectile: Bullet
+		ContrailStartColor: FFAA44
+		ContrailEndColor: FFFFFF
+		ContrailStartWidth: 15
+		ContrailEndColorUsePlayerColor: true
+		Speed: 10000
+		Width: 100
+	Report: vgatlo8a.wav, vgatlo8b.wav
 YuriGatlingCannonMG3:
-	Inherits: RA2GattlingMG3
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium_RA2
 	Range: 8250
 	Warhead@Bullet_Medium_Flat:
 		Damage: 4000
@@ -2209,9 +2297,24 @@ YuriGatlingCannonMG3:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+	ValidTargets: Ground, Water
+	Projectile: Bullet
+		ContrailStartColor: FFAA44
+		ContrailEndColor: FFFFFF
+		ContrailStartWidth: 15
+		ContrailEndColorUsePlayerColor: true
+		Width: 100
+	Warhead@Bullet_Medium_Flat: AreaDamage
+		ValidTargets: Ground, Water
+		PercentageScale: 9975
+	-Warhead@Bullet_Medium:
+	ReloadDelay: 2
+	Report: vgatlo8a.wav, vgatlo8b.wav
 
 YuriGatlingCannonMG3_AA:
-	Inherits: RA2GattlingMG3_AA
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium_RA2
 	Range: 12375
 	Warhead@Bullet_Medium_Flat:
 		Damage: 8000
@@ -2277,9 +2380,24 @@ YuriGatlingCannonMG3_AA:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+	ValidTargets: Air
+	ReloadDelay: 2
+	Projectile: Bullet
+		ContrailStartColor: FFAA44
+		ContrailEndColor: FFFFFF
+		ContrailStartWidth: 15
+		ContrailEndColorUsePlayerColor: true
+		Width: 100
+	Report: vgatlo8a.wav, vgatlo8b.wav
+	Warhead@Bullet_Medium_Flat: AreaDamage
+		ValidTargets: Air
+		PercentageScale: 9988
+	-Warhead@Bullet_Medium:
 
 YuriGatlingTankMG1:
-	Inherits: RA2GattlingMG1
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium_RA2
 	Range: 5400
 	Warhead@Bullet_Medium_Flat:
 		Damage: 3000
@@ -2333,9 +2451,25 @@ YuriGatlingTankMG1:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+	ValidTargets: Ground, Water
+	ReloadDelay: 6
+	Projectile: Bullet
+		ContrailStartColor: FFAA44
+		ContrailEndColor: FFFFFF
+		ContrailStartWidth: 15
+		ContrailEndColorUsePlayerColor: true
+		Speed: 10000
+		Width: 100
+	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
+	Warhead@Bullet_Medium_Flat: AreaDamage
+		ValidTargets: Ground, Water
+		PercentageScale: 9975
+	-Warhead@Bullet_Medium:
 
 YuriGatlingTankMG1_AA:
-	Inherits: RA2GattlingMG1_AA
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium_RA2
 	Range: 7290
 	Warhead@Bullet_Medium_Flat:
 		Damage: 6000
@@ -2389,9 +2523,25 @@ YuriGatlingTankMG1_AA:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+	ValidTargets: Air
+	ReloadDelay: 6
+	Projectile: Bullet
+		ContrailStartColor: FFAA44
+		ContrailEndColor: FFFFFF
+		ContrailStartWidth: 15
+		ContrailEndColorUsePlayerColor: true
+		Speed: 10000
+		Width: 100
+	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
+	Warhead@Bullet_Medium_Flat: AreaDamage
+		ValidTargets: Air
+		PercentageScale: 9988
+	-Warhead@Bullet_Medium:
 
 YuriGatlingTankMG2:
-	Inherits: RA2GattlingMG2
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium_RA2
 	Range: 5670
 	Warhead@Bullet_Medium_Flat:
 		Damage: 3000
@@ -2445,9 +2595,25 @@ YuriGatlingTankMG2:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+	ValidTargets: Ground, Water
+	ReloadDelay: 4
+	Projectile: Bullet
+		ContrailStartColor: FFAA44
+		ContrailEndColor: FFFFFF
+		ContrailStartWidth: 15
+		ContrailEndColorUsePlayerColor: true
+		Speed: 10000
+		Width: 100
+	Report: vgatlo5a.wav, vgatlo5b.wav
+	Warhead@Bullet_Medium_Flat: AreaDamage
+		ValidTargets: Ground, Water
+		PercentageScale: 9975
+	-Warhead@Bullet_Medium:
 
 YuriGatlingTankMG2_AA:
-	Inherits: RA2GattlingMG2_AA
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium_RA2
 	Range: 8100
 	Warhead@Bullet_Medium_Flat:
 		Damage: 6000
@@ -2501,9 +2667,25 @@ YuriGatlingTankMG2_AA:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+	ValidTargets: Air
+	ReloadDelay: 4
+	Projectile: Bullet
+		ContrailStartColor: FFAA44
+		ContrailEndColor: FFFFFF
+		ContrailStartWidth: 15
+		ContrailEndColorUsePlayerColor: true
+		Speed: 10000
+		Width: 100
+	Report: vgatlo5a.wav, vgatlo5b.wav
+	Warhead@Bullet_Medium_Flat: AreaDamage
+		ValidTargets: Air
+		PercentageScale: 9988
+	-Warhead@Bullet_Medium:
 
 YuriGatlingTankMG3:
-	Inherits: RA2GattlingMG3
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium_RA2
 	Range: 5940
 	Warhead@Bullet_Medium_Flat:
 		Damage: 3000
@@ -2557,9 +2739,25 @@ YuriGatlingTankMG3:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+	ValidTargets: Ground, Water
+	ReloadDelay: 2
+	Projectile: Bullet
+		ContrailStartColor: FFAA44
+		ContrailEndColor: FFFFFF
+		ContrailStartWidth: 15
+		ContrailEndColorUsePlayerColor: true
+		Speed: 10000
+		Width: 100
+	Report: vgatlo8a.wav, vgatlo8b.wav
+	Warhead@Bullet_Medium_Flat: AreaDamage
+		ValidTargets: Ground, Water
+		PercentageScale: 9975
+	-Warhead@Bullet_Medium:
 
 YuriGatlingTankMG3_AA:
-	Inherits: RA2GattlingMG3_AA
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium_RA2
 	Range: 8910
 	Warhead@Bullet_Medium_Flat:
 		Damage: 6000
@@ -2613,6 +2811,20 @@ YuriGatlingTankMG3_AA:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+	ValidTargets: Air
+	ReloadDelay: 2
+	Projectile: Bullet
+		ContrailStartColor: FFAA44
+		ContrailEndColor: FFFFFF
+		ContrailStartWidth: 15
+		ContrailEndColorUsePlayerColor: true
+		Speed: 10000
+		Width: 100
+	Report: vgatlo8a.wav, vgatlo8b.wav
+	Warhead@Bullet_Medium_Flat: AreaDamage
+		ValidTargets: Air
+		PercentageScale: 9988
+	-Warhead@Bullet_Medium:
 
 RA2GattlingInf:
 	Inherits@xRA2GattlingInf0: ^Warhead_Bullet_Medium

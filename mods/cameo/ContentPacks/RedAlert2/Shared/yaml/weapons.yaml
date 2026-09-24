@@ -5883,7 +5883,9 @@ RA2GattlingMG1:
 			Spaceship: 6
 			Superheavy: 5
 RA2GattlingMG1_AA:
-	Inherits: RA2GattlingMG1
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium_RA2
 	Range: 6750
 	ValidTargets: Air
 	Warhead@Bullet_Medium:
@@ -5944,8 +5946,19 @@ RA2GattlingMG1_AA:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+	ReloadDelay: 6
+	Projectile: Bullet
+		ContrailStartColor: FFAA44
+		ContrailEndColor: FFFFFF
+		ContrailStartWidth: 15
+		ContrailEndColorUsePlayerColor: true
+		Speed: 10000
+		Width: 100
+	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
 RA2GattlingMG2:
-	Inherits: RA2GattlingMG1
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium_RA2
 	Range: 5250
 	Report: vgatlo5a.wav, vgatlo5b.wav
 	ReloadDelay: 4
@@ -5999,9 +6012,24 @@ RA2GattlingMG2:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+	ValidTargets: Ground, Water
+	Projectile: Bullet
+		ContrailStartColor: FFAA44
+		ContrailEndColor: FFFFFF
+		ContrailStartWidth: 15
+		ContrailEndColorUsePlayerColor: true
+		Speed: 10000
+		Width: 100
+	Warhead@Bullet_Medium_Flat: AreaDamage
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 9975
+	-Warhead@Bullet_Medium:
 
 RA2GattlingMG2_AA:
-	Inherits: RA2GattlingMG2
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium_RA2
 	Range: 7500
 	ValidTargets: Air
 	Warhead@Bullet_Medium:
@@ -6062,6 +6090,15 @@ RA2GattlingMG2_AA:
 			Heavy: 7
 			Spaceship: 6
 			Superheavy: 5
+	ReloadDelay: 4
+	Projectile: Bullet
+		ContrailStartColor: FFAA44
+		ContrailEndColor: FFFFFF
+		ContrailStartWidth: 15
+		ContrailEndColorUsePlayerColor: true
+		Speed: 10000
+		Width: 100
+	Report: vgatlo5a.wav, vgatlo5b.wav
 RA2Cloud:
 	Inherits@xRA2Cloud0: ^Warhead_Toxic_Light
 	ReloadDelay: 1
