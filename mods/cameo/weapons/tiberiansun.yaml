@@ -522,6 +522,12 @@ TSGrenadeSonic:
 		ValidTargets: Ground, Water
 		Damage: 45000
 		PercentageScale: 10000
+	Warhead@BlastSonic_Light_Debuff: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
+		Range: 532
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Structure, wall
 
 TSGrenadeAA:
 	Inherits: TSGrenade

@@ -14,20 +14,20 @@ A number in prose is true only on the day it is written. These are the claims a 
 | `shield_damage_share` | 0.0144427 | 0.0148125 | ✅ |
 | `always_on_shield_actors` | 58 | 58 | ✅ |
 | `always_on_shielded_buildings` | 16 | 16 | ✅ |
-| `live_damage_multipliers` | 326 | 326 | ✅ |
+| `live_damage_multipliers` | 327 | 326 | **MISMATCH** |
 | `multi_main_fired_weapons` | 1 | 1 | ✅ |
 | `percentage_denominator_unset` | 401 | 401 | ✅ |
 | `unmigrated_scout_damage_multiplier` | 0 | 0 | ✅ |
 | `meters_filling_before_death` | 318 | 318 | ✅ |
 | `corrosion_meter_actors` | 839 | 839 | ✅ |
 | `w24_multi_main_fed` | 269 | 269 | ✅ |
-| `physical_state_fired_weapons` | 542 | 542 | ✅ |
+| `physical_state_fired_weapons` | 533 | 543 | **MISMATCH** |
 | `plating_row_ties` | 0 | 0 | ✅ |
 | `plating_families` | 52 | 52 | ✅ |
 | `signed_off_class_anchors` | 0 | 0 | ✅ |
 | `warhead_family_reach` | 1530 | 1530 | ✅ |
 | `unconverted_template_inheritors` | 827 | 827 | ✅ |
-| `ledgers_drifted` | 0 | 0 | ✅ |
+| `ledgers_drifted` | 0 | 2 | **MISMATCH** |
 | `armament_multi_role_actors` | 104 | 104 | ✅ |
 | `armament_air_role_invisible_to_the_name_test` | 41 | 41 | ✅ |
 | `dta_projectile_roles_resolved` | 60 | 60 | ✅ |
@@ -50,7 +50,9 @@ A number in prose is true only on the day it is written. These are the claims a 
 | `cameo_shaped_families` | 53 | 53 | ✅ |
 | `cameo_element_bearing_families` | 23 | 23 | ✅ |
 
-_clean_ — every registered claim still matches the tree.
+**FAIL — a document and the tree disagree.**
+
+Fix whichever is wrong, and if the tree is right update `value` in `doc_claims.yaml` **and every doc listed under `docs:`** in the SAME commit. That co-update is the point: it is how the `Shield = top + floor` duplication survived in two documents for weeks.
 
 ## Review cadence (for what a number cannot capture)
 

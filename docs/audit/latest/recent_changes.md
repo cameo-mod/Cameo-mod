@@ -1,6 +1,6 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **195**, files touched: **2005**
+Commits reviewed: **198**, files touched: **2008**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
@@ -64,6 +64,7 @@ _none found_
 |---|---|
 | docs/HANDOFF.md | 44 |
 | docs/DESIGN.md | 43 |
+| DEVELOPMENT_LOG.md | 21 |
 | docs/balance/derived/redalert_japan.json | 21 |
 | docs/balance/derived/tiberiandawn_nod.json | 21 |
 | docs/balance/derived/redalert2_allies.json | 20 |
@@ -76,7 +77,6 @@ _none found_
 | docs/balance/derived/tiberiansun_forgotten.json | 20 |
 | docs/balance/derived/tiberiansun_gdi.json | 20 |
 | docs/balance/derived/d2k_atreides.json | 19 |
-| docs/balance/derived/d2k_corrino.json | 19 |
 
 
 ## Reviewer checklist (not machine-checkable)

@@ -2489,9 +2489,9 @@ td_gdi_predatortank_gdipredatorbluelaser:
 		SecondaryBeamWidth: 25
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFFFF
-	Warhead@2Con: GrantExternalCondition
-		Condition: SonicDebuff
-		Duration: 22
+	Warhead@2Con: ApplyPhysicalState
+		PhysicalStateName: Resonance
+		Amount: 5000
 		Range: 222
 		ValidTargets: Ground, Water, Structure, wall
 	Warhead@Validation: TargetDamage
