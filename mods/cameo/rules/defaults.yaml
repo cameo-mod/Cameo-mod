@@ -855,17 +855,60 @@
 	# 	RequiresSelection: False
 	# 	ValidRelationships: Ally, Neutral, Enemy
 
+	# --- Poison METER (physical-state axis). Replaces the binary `poisoned` condition
+	# (retired): gas clouds / poison darts feed Poison via ApplyPhysicalState or AreaDamage
+	# PhysicalStates; the DoT below scales with dose — one dart != a lingering cloud.
+	# Infantry-only by construction — only ^DefaultInfantry inherits ^Poisonable.
+	# Corrosion clone — see docs/design/PHYSICAL_STATE_SYSTEM.md.
 ^Poisonable:
-	ChangesHealth@poison:
-		Delay: 20
-		PercentageStep: -1
-		StartIfBelow: 101
-		RequiresCondition: poisoned
-	ExternalCondition@Poisoned:
-		Condition: poisoned
-	Targetable@poisoned:
-		TargetTypes: poisoned
-		RequiresCondition: poisoned
+	PhysicalState@Poison:
+		Name: Poison
+		MaxValue: 20000
+		MinValue: -20000
+		RelaxedValue: 0
+		RelativeToHealth: true
+		RelaxationLinear: 5
+		RelaxationScaled: 50
+		RelaxationInterval: 1
+		RelaxationDelay: 25
+		InitialValue: 0
+		ApplyDamageModifiers: true
+	PhysicalStateBar@PoisonBar:
+		PhysicalStateName: Poison
+		PositiveColor: A0C020
+		NeutralColor: 808080
+		DisplayWhenRelaxed: false
+		ShowAbsoluteValues: false
+		RequiresCondition: !PoisonDeadzone
+	GrantConditionOnPhysicalState@PoisonDeadzone:
+		PhysicalStateName: Poison
+		Condition: PoisonDeadzone
+		UpperValue: 200
+		LowerValue: -200
+	GrantConditionOnPhysicalState@Poisoning:
+		PhysicalStateName: Poison
+		Condition: Poisoning
+		UpperValue: 20000
+		LowerValue: 200
+	GrantConditionOnPhysicalState@PoisonMax:
+		PhysicalStateName: Poison
+		Condition: PoisonMax
+		UpperValue: 20000
+		LowerValue: 20000
+	WithPhysicalStateColoredOverlay@Poison:
+		PhysicalStateName: Poison
+		MinColor: A0C02004
+		MaxColor: A0C0201A
+		UpperValue: 20000
+		LowerValue: 200
+	ChangesHealthProportionalToPhysicalState@Poison:
+		PhysicalStateName: Poison
+		UsePercentageDamage: true
+		DamageAtMaximum: 1
+		DamageAtMinimum: 0
+		DamageThreshold: 0
+		DamageInterval: 20
+		RequiresCondition: Poisoning
 
 ^LeechEggLayable:
 	SpawnActorOnDeath@Leech2:

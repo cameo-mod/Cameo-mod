@@ -2275,3 +2275,12 @@ the meter feed with **damage dealt**, while `ApplyPhysicalState` warheads apply 
 `Amount`** — hand-tuned support grants (IonPulse rings, `Warhead@2Con` lasers) need the
 flat form; folding them into a damage node would make a support power's debuff depend on
 its damage roll. `Amount: 5000` ≈ quarter-meter on the 20000-point `Resonance` scale.
+
+Sign-convention trap from W9 (2026-09-23): `ChangesHealth` damages with a **negative**
+step (`PercentageStep: -1`), but `ChangesHealthProportionalToPhysicalState` damages with a
+**positive** `DamageAtMaximum` (the trait only inflicts when the interpolated amount is
+`> 0`). With `UsePercentageDamage: true` the value is percent-of-max-HP per
+`DamageInterval` at full meter — `DamageAtMaximum: 1` + `DamageInterval: 20` reproduces
+`PercentageStep: -1, Delay: 20` exactly at full dose, and scales down with the meter
+(dose-response). `DamageAtMinimum: 0` keeps a zero dose inert; `DamageThreshold: 0`
+applies whenever the meter is above zero.
