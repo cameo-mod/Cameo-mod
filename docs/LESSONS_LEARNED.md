@@ -2276,6 +2276,16 @@ the meter feed with **damage dealt**, while `ApplyPhysicalState` warheads apply 
 flat form; folding them into a damage node would make a support power's debuff depend on
 its damage roll. `Amount: 5000` ≈ quarter-meter on the 20000-point `Resonance` scale.
 
+And the follow-up trap the same conversion shipped (DAWN's double-feed finding,
+2026-09-24): a `GrantExternalCondition`/`ApplyPhysicalState` warhead with a `Range`
+wider than the damage warhead's `Spread` is an **area channel**, not "the condition
+grant the meter subsumes". The sonic `_Debuff` nodes deliberately marked a ring of
+`Range = 2×Spread` — units beyond the blast got the mark without damage. Deleting them
+(#476) shrank the mark to the damage footprint on all 15 sonic templates. When
+converting a condition grant to a meter feed, compare `Range` to the damage `Spread`:
+wider = keep as a flat feed (the ring is the payload), equal-or-smaller = redundant.
+`audit_physical_state_warheads` exempts `Range > Spread` fixed feeds for exactly this.
+
 Sign-convention trap from W9 (2026-09-23): `ChangesHealth` damages with a **negative**
 step (`PercentageStep: -1`), but `ChangesHealthProportionalToPhysicalState` damages with a
 **positive** `DamageAtMaximum` (the trait only inflicts when the interpolated amount is
