@@ -3353,10 +3353,21 @@ D2KMarksmanRifle:
 
 	ValidTargets: Ground, Air
 emperor_sardaukar_chief_c4:
-	Inherits: GenericC4
+	Projectile: InstantHit
+	TargetActorCenter: true
+	Report: icraatta.wav
+	ReloadDelay: 20
+	Range: 2000
+	ValidTargets: demolishable
+	InvalidTargets: ivanattached
+	Warhead@2: TargetDamage
 	Warhead@1: AttachDelayedWeapon
 		TriggerTime: 175
 
+		Weapon: C4
+		Type: ivanbomb
+		Range: 1
+		ValidTargets: demolishable
 d2kFlameTurret:
 	Inherits: d2kFlamegun
 	ReloadDelay: 10
@@ -3600,7 +3611,23 @@ d2kFlamegun:
 
 PhoenixRocketShrapnel:
 	Inherits: Flamer
-	Inherits@Rad: CHFlameRadiation
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1, 3
+		Duration: 66
+		Speed: 8, 24
+		TurnRate: 4
+		Image: burn_l
+		Sequences: idle
+		Palette: ra_temperat
+		Weapon: CHFlame
+		InvalidTargets: Water
+	Warhead@GroundFire: SpawnActor
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Inherits@fx: ^d2k_ordos_phoenixrocketshrapnel
 	Burst: 3
 	Range: 3333
 	ValidTargets: Ground, Water, Air

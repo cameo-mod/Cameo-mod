@@ -369,7 +369,6 @@ DreadshroudSpore:
 		PercentageScale: 0
 
 SCDevourerAA:
-	Inherits@Contaminated: TractorGLAnthraxPurple
 	Inherits: MutaliskSpore
 	Report: sc_devourer_attack.aud
 	ValidTargets: Air
@@ -405,6 +404,11 @@ SCDevourerAA:
 		ValidTargets: Air
 		Duration: 100
 		Count: 1
+		Delay: 5
+		Speed: 12, 25
+		TurnRate: 5
+		Image: explosion
+		Palette: alpha25
 	Warhead@Effect2: CreateEffect
 		Explosions: nax_corr_ex
 		ExplosionPalette: ra2effect

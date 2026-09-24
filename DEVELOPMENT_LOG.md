@@ -12406,3 +12406,33 @@ first-token depth bug put `Inherits@collapseflat` at depth 2, which the
 audit scanner skips); orphan cancels 0; split-defs S2 unchanged at 5
 (pre-existing, owned by other lanes); resolved diff vs base = exactly the
 3 restored weapons. Boot-gate PASS.
+
+## 2026-09-26 — W7 batch-6: 7 no-covering inlines + Phoenix fx family (DAWN)
+
+Seven W7 edges whose parents carry zero inherits — materialized each parent's
+resolved payload into the child at the edge position (parent-first ordering),
+all resolved-identical:
+
+- `SCSpiderEngage <- DemoTruckTargeting` (starcraft.yaml)
+- `emperor_sardaukar_chief_c4 <- GenericC4` (Ordos pack)
+- `PhoenixRocketShrapnel <- CHFlameRadiation` (Ordos pack)
+- `SCDevourerAA <- TractorGLAnthraxPurple` (Zerg pack)
+- `PDLaserBike`, `PDLaserLTNK2 <- PDLaser` (TD Nod pack)
+- `TSZapWeapon_EMP <- TSSonicWeaponEffect` (TS GDI pack)
+
+Five of the six cross a pack↔legacy boundary — the inlines also remove
+pack self-containment violations. `TSSonicWeaponEffect` (inherit-only,
+zero actor refs) deleted after inlining — dead file-space, same class as
+DroneJump/oHMG_muzzle.
+
+`PhoenixRocketShrapnel`'s materialized `Warhead@Scorch: LeaveSmudge` tripped
+W6 (+1): moved it to new family `^d2k_ordos_phoenixrocketshrapnel` in
+effects_d2k.yaml behind an `Inherits@fx` edge (W6 flat). The Cloud
+(SpawnSmokeParticle) and GroundFire (SpawnActor) nodes stay local — neither
+is an audit effect type.
+
+Emitter lessons baked in: a flat path that is both a scalar leaf and a node
+parent must emit ONLY as the node's type line (double-emit produced dup
+keys); parent payload fields the child already value-declares are filtered
+before emit. Verified: resolved diff vs HEAD = only TSSonicWeaponEffect
+removal; W7 804->799; empty-warhead 0; orphan-cancels 0; duplicate-keys +0.

@@ -463,22 +463,6 @@ KodiakCannonSonic:
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall
 
-TSSonicWeaponEffect:
-	ReloadDelay: 60
-	Range: 6144
-	Report: sonic4.aud
-	Projectile: AreaBeam
-		Speed: 0c256
-		Duration: 45
-		DamageInterval: 5
-		Width: 384
-		Shape: Flat
-		ZOffset: 2047
-		BeyondTargetRange: 0c256
-		Blockable: true
-		TrackTarget: true
-		Color: 50F5FF45
-
 TSSonicZapWeapon:
 	Inherits: ^Warhead_Tesla_Heavy
 	Inherits@fx: ^ts_gdi_tssoniczapweapon
@@ -521,7 +505,6 @@ TSZapWeapon_EMP:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^Effect_Tesla_Heavy
-	Inherits@2: TSSonicWeaponEffect
 	ReloadDelay: 60
 	Range: 10205
 	Report: plsecan2.aud

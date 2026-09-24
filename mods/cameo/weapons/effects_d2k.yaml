@@ -1841,3 +1841,8 @@
 ^d2k_atreides_sound2:
 	Warhead@Concrete: DamagesConcrete
 		Damage: 800
+
+^d2k_ordos_phoenixrocketshrapnel:
+	Warhead@Scorch: LeaveSmudge
+		SmudgeType: Scorch
+		Size: 1
