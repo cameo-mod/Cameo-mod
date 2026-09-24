@@ -341,9 +341,9 @@ DreadshroudSpore:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Condition: GrantExternalCondition
-		Condition: blinded
-		Duration: 60
+	Warhead@Condition: ApplyPhysicalState
+		PhysicalStateName: Blind
+		Amount: 20000
 		Range: 600
 	Warhead@Effect: CreateEffect
 		Explosions: chemball

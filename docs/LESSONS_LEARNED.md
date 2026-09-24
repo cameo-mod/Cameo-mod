@@ -2284,3 +2284,22 @@ step (`PercentageStep: -1`), but `ChangesHealthProportionalToPhysicalState` dama
 `PercentageStep: -1, Delay: 20` exactly at full dose, and scales down with the meter
 (dose-response). `DamageAtMinimum: 0` keeps a zero dose inert; `DamageThreshold: 0`
 applies whenever the meter is above zero.
+
+Three traps from W10 (2026-09-24), all the same species — "the meter is not the binary
+condition it replaced":
+1. **Meters clamp.** `PhysicalState.ApplyChange` runs `Math.Clamp(MinValue, MaxValue)`,
+   so a converted `GrantExternalCondition` with `Duration: 125` cannot be preserved as
+   `Amount: 25000` — overshoot is discarded. When the cliff grant sits at exactly
+   `MaxValue`, full-state duration is owned by `RelaxationDelay`, not by `Amount`.
+   Per-weapon duration ordering is lost by design; use `Amount: <MaxValue>` for
+   binary-faithful instant-full and flag the ordering loss in the commit/REQUEST.
+2. **Retire the conditional multiplier the proportional trait replaces.** W10's
+   `ModifiesCombatProportionalToPhysicalState@Blind` (`RangeTo: 20`) and the old
+   `RangeMultiplier@blinded` (`Modifier: 20`) are both `IRangeModifier`s — keeping both
+   would scale range to 20%×20% = 4% at full meter. When a proportional channel goes
+   live, delete the binary-cliff multiplier for the same channel.
+3. **Condition names substring-match.** `cloak-force-disabled` *contains* `disabled` —
+   a `grep disabled` on `PauseOnCondition` lines over-matches. Split the condition
+   expression on `||`/`&&`, strip `!`, and compare whole tokens before appending
+   (`|| blinded` went to exactly the 46 sites carrying a real `disabled` token, not
+   the 48 lines grep counted).

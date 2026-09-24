@@ -868,9 +868,9 @@ Corsair_EMP:
 		Radius: 5000
 		Duration: 250
 		RevealGeneratedShroud: true
-	Warhead@Condition: GrantExternalCondition
-		Condition: blinded
-		Duration: 125
+	Warhead@Condition: ApplyPhysicalState
+		PhysicalStateName: Blind
+		Amount: 20000
 		Range: 2500
 		ValidTargets: Ground, Water
 	Warhead@Effect: CreateEffect

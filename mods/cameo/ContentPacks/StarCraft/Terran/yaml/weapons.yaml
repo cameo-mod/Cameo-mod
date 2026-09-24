@@ -3007,9 +3007,9 @@ MedicFlare:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Vehicle, Infantry, Ship, Submarine, Defense
 		Damage: 1
-	Warhead@Condition: GrantExternalCondition
-		Condition: blinded
-		Duration: 60
+	Warhead@Condition: ApplyPhysicalState
+		PhysicalStateName: Blind
+		Amount: 20000
 		Range: 1200
 		ValidTargets: Vehicle, Infantry, Ship, Submarine, Defense
 	-Warhead@LaserExtraDamage:

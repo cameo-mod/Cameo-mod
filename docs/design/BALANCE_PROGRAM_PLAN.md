@@ -97,8 +97,8 @@ nothing and informs the anchor choice. What must wait is WRITING targets and app
 | **W6** | C# `ModifiesCombatProportionalToPhysicalState` (+ pitch/glow hooks) | ✅ DONE `fc45a9632` | Claude | — |
 | **W7** | Sonic → `Resonance` meter (no new C# needed) | 🔵 **SHARED MERGED (EMBER, #476 → `e97924d4c`)** — pack-side in flight: DAWN done on `devin/dawn/l4-fx` (`388a7dd0d`, needs PR), NOVA's 8 pending | EMBER | — |
 | **W8** | Gatling ladder → `SpinUp` meter | ✅ DONE `c0d6abf70` — all 43 actors, `GattlingSpeed` = 0 | Claude | W6 ✅ |
-| **W9** | `^Poisonable` → `Poison` meter (gas-cloud dose-response) | 🔵 **IN PROGRESS (EMBER, 2026-09-23)** — `defaults.yaml` meter done (Corrosion clone, dose-scaled DoT); Ordos crossbow grant to DAWN via REQUEST; darkreign grant parked | EMBER | — |
-| **W10** | `^Blindable` → `Blind` meter | ⬜ READY (unblocked by W6) | either | W6 ✅ |
+| **W9** | `^Poisonable` → `Poison` meter (gas-cloud dose-response) | ✅ **SHARED MERGED (EMBER, #479 → `5b89b1341`)** — Ordos crossbow grant to DAWN via REQUEST; darkreign grant parked | EMBER | — |
+| **W10** | `^Blindable` → `Blind` meter | 🔵 **IN PROGRESS (EMBER, 2026-09-24)** — proportional range 100→20 wired, `|| blinded` on all 46 `disabled` pause sites, `RangeMultiplier@blinded` retired; SC×3 grants converted; RA Soviets + RA2Mod Syndicate to NOVA via REQUEST | EMBER | W6 ✅ |
 | **W11** | Wire K into `fit_class.py` behind a flag; fit one class both ways and compare | ✅ BUILT, sign-off owed (+2 pipeline bugs fixed: 43% of the roster priced at zero DPS) | Claude | W3 ✅, W4 ✅, W5 ✅ |
 | **W12** | Superweapon balancing as a SEPARATE track (not unit-priced) | ⬜ READY | maintainer-led | — |
 | **W13** | Warhead system rebuild from the 3150-profile reference corpus | 🔵 steps 1-4a DONE — **the measured profiles are LIVE** on all 10 sourced families (+ 8 blends); 4b = the 10 INVENTED families | Claude | W1, W5 |
@@ -1097,7 +1097,7 @@ are meter-based, all 47 actors verified in `review_resolve_diff`, end-points mat
 
 ---
 
-### W9 — `^Poisonable` → `Poison` meter ⬜ READY · owner either
+### W9 — `^Poisonable` → `Poison` meter ✅ SHARED MERGED (EMBER, #479 → `5b89b1341`) · pack grants pending
 
 A Corrosion clone with a different victim class: **corrosion eats vehicles, poison hurts
 infantry, flame does both** — a clean three-way split of the DoT space.
@@ -1114,16 +1114,27 @@ binary `poisoned` condition is retired, infantry-only gating verified.
 
 ---
 
-### W10 — `^Blindable` → `Blind` meter ⬜ READY (unblocked — W6 ✅) · owner either
+### W10 — `^Blindable` → `Blind` meter 🔵 IN PROGRESS (EMBER, 2026-09-24) · owner EMBER
 
-Today: binary, range/vision/detection → 20%. A cliff. Maintainer's spec:
-- scale range **100% → 20%** proportionally with the meter (20% at full blind);
-- **at FULL blind only**: disable the weapon entirely, show the `blinded_icon`
-  decoration, and apply the `blinded` **Targetable** type so blinding units retarget
-  instead of wasting shots on an already-blind target.
+Was: binary, range/vision/detection → 20%. A cliff. Maintainer's spec (now wired):
+- range scales **100% → 20%** proportionally with the meter —
+  `ModifiesCombatProportionalToPhysicalState@Blind` (`RangeTo: 20`; every other channel
+  of that trait defaults to 100 = neutral, verified against the C# before writing);
+- **at FULL blind only**: `GrantConditionOnPhysicalState@blinded` (20000/20000) grants
+  `blinded` → the weapon pauses (all 46 `PauseOnCondition: …disabled` sites carry
+  `|| blinded`), `blinded_icon` shows, and `Targetable@blindable` drops so blinders
+  retarget;
+- `RangeMultiplier@blinded` **retired** — it would double-dip the proportional channel
+  (20% × 20% = 4% at full meter);
+- meter clamps at `MaxValue` (`PhysicalState.ApplyChange`), so a hit can never overshoot
+  past full blind — migrated grants use `Amount: 20000` = binary-faithful instant full
+  blind; the old per-weapon `Duration` ordering is lost by design (uniform 25-tick hold
+  + 200/tick decay), flagged for ruling if differentiation is wanted back.
 
-Needs W6 for the proportional range scaling; the full-blind cliff stays a
-`GrantConditionOnPhysicalState` at max.
+Pack side: SC Protoss `Corsair_EMP`, SC Terran `MedicFlare`, SC Zerg `DreadshroudSpore`
+converted in-lane; RA Soviets `ShtoraLaser` + RA2Mod Syndicate `RA2GrenadePack` go to
+NOVA via REQUEST. The binary block (`ExternalCondition`, `TimedConditionBar`, cliff
+traits on `blinded`) stays until the pack grants land.
 
 **VERIFY:** `grep -c "RequiresCondition: blinded" mods/cameo/rules/defaults.yaml` → only
 the max-meter uses remain.
