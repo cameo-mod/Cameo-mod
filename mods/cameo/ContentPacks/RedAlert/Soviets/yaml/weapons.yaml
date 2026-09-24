@@ -2123,7 +2123,6 @@ ra1_soviets_v2rocketlauncher_scudthermobaric:
 ra1_soviets_v2rocketlauncher_scudtesla:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
-	Inherits@2: SCUD
 	Inherits@3: ^Effect_Kirov_Tesla_RA2
 	Range: 12596
 	MinRange: 2519
@@ -2159,12 +2158,39 @@ ra1_soviets_v2rocketlauncher_scudtesla:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
-	-Warhead@MissileHE_Heavy:
 
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 	Warhead@EMPUnit:
 		ValidRelationships: Neutral, Enemy
+	ReloadDelay: 120
+	Projectile: Bullet
+		Speed: 300
+		Blockable: false
+		TrailDelay: 2
+		TrailInterval: 1
+		Inaccuracy: 300
+		Image: V2
+		Shadow: True
+		LaunchAngle: 75
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		ImpactActors: false
+		GlowScale: 2.0
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
+	Warhead@GroundFire: SpawnActor
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Report: missile1.aud
 ra1_soviets_nuclearv2launcher_scudnuke:
 	Inherits@wh: ^Warhead_Nuclear_Super
 	Inherits@fx: ^Effect_Nuclear_Super
@@ -5781,7 +5807,6 @@ ra1_soviets_migattackbomber_maverick:
 ra1_soviets_migattackbomber_teslamaverick:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
-	Inherits@2: ra1_soviets_migattackbomber_maverick
 	Inherits@3: ^Effect_Tesla_Impact_RA2
 	Projectile: Missile
 		VerticalRateOfTurn: 16
@@ -5875,6 +5900,46 @@ ra1_soviets_migattackbomber_teslamaverick:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 50
+	Range: 5900
+	Projectile: Missile
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		Inaccuracy: 100
+		Shadow: true
+		HorizontalRateOfTurn: 30
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		Speed: 500
+		CloseEnough: 500
+		HomingActivationDelay: 2
+		RangeLimit: 25000
+		PointDefenseTypes: Missile
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		ImpactSounds: xplos.aud
+	Warhead@EffectAir: CreateEffect
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+	Warhead@Concrete: DamagesConcrete
+		Damage: 150
+	Burst: 2
+	BurstDelays: 4
+	MinRange: 1180
+	Report: missile7.aud
 
 ra1_soviets_migattackbomber_teslamaverickfragment1:
 	Inherits@w70: ^Warhead_MissileAP_Medium
@@ -11629,7 +11694,6 @@ ra1_soviets_volkov_volkovmagneticweapon:
 		Duration: 10
 
 ra1_soviets_volkov_volkovmagneticweapontesla:
-	Inherits: ra1_soviets_volkov_volkovmagneticweapon
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@2: ^Effect_Tesla_Impact_RA2
@@ -11639,7 +11703,6 @@ ra1_soviets_volkov_volkovmagneticweapontesla:
 	Burst: 2
 	BurstDelays: 9
 	Projectile: LightningZap
-		-Image:
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -11689,7 +11752,84 @@ ra1_soviets_volkov_volkovmagneticweapontesla:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@MediumChemicalWeapon:
-	-Warhead@CannonHE_Heavy:
+	Projectile: LightningZap
+		InaccuracyPercentage: 1
+		ProjectileSpeedPercentage: 10
+		Shadow: true
+		Speed: 5400
+		Inaccuracy: 540
+		Blockable: false
+		LaunchAngle: 66
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		ImpactSounds: kaboom25.aud
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	InvalidTargets: wall
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		Spread: 350
+		Falloff: 99, 66, 33
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Plate: 19
+			Heavy: 18
+			Flak: 17
+			Medium: 16
+			None: 15
+			Light: 14
+			Heroic: 13
+			Scout: 12
+			Steel: 11
+			Concrete: 10
+			Wood: 9
+			Spaceship: 8
+			Helicopter: 7
+			Bomber: 6
+			Fighter: 5
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		Spread: 200
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		UpdatesUnitStatistics: false
 
 ra1_soviets_volkov_volkovmagneticweaponteslafragment1:
 	Inherits@w70: ^Warhead_Tesla_Heavy

@@ -171,8 +171,6 @@ japan_imperialscoutsman_rifle_waveforce:
 	Inherits@xjapan_imperialscoutsman_rifle_waveforce0: ^Warhead_Railgun_Heavy
 	Inherits@xjapan_imperialscoutsman_rifle_waveforce1: ^Projectile_Railgun_Heavy
 	Inherits@fx_cover: ^Effect_Emp_Fx_RA2
-	Inherits@2: japan_imperialscoutsman_rifle
-	-Warhead@Bullet_Medium:
 	Warhead@Railgun_Heavy:
 		Damage: 15000
 	Projectile: Bullet
@@ -270,6 +268,35 @@ japan_imperialscoutsman_rifle_waveforce:
 		-ImpactActors:
 	Warhead@EffectWater:
 		-ExplosionPalette:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 50
+	Range: 6000
+	Report: iredweaa.wav, iredweab.wav, iredweac.wav, iredwead.wav
+	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
+		AffectsParent: false
+		Spread: 125
+		Damage: 1
+		Versus:
+			REFLECTOR: 50
+			Shield: 35
+			Superheavy: 25
+			Heavy: 24
+			Medium: 23
+			Light: 22
+			Scout: 21
+			Heroic: 20
+			Plate: 19
+			Flak: 18
+			None: 17
+			Steel: 16
+			Concrete: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Incendiary
+		UpdatesUnitStatistics: false
 
 TankBusterBeamCannon:
 	Inherits@collapsetargets: ^Warhead_TankBusterBeam_Unscoped_Flat
@@ -2758,7 +2785,6 @@ NambuMGWaveforce:
 	Inherits@xNambuMGWaveforce0: ^Warhead_Railgun_Heavy
 	Inherits@xNambuMGWaveforce1: ^Projectile_Railgun_Heavy
 	Inherits@fx_cover: ^Effect_Emp_Fx_RA2
-	Inherits@2: NambuMG
 	Warhead@Bullet_Light: AreaDamage
 		Damage: 2000
 	-Warhead@Bullet_Light:
@@ -2855,6 +2881,26 @@ NambuMGWaveforce:
 			Temperature: 35
 			Corrosion: 20
 		PercentageSpread: 50
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 15
+	Range: 5004
+	Projectile: Bullet
+		Inaccuracy: 67
+		Image: 50CAL
+		FakeBulletNumber: 2
+		FakeBulletSpawnInterval: 2
+		FakeBulletSpeed: 2000
+		FakeBulletInaccuracy: 48
+		ContrailZOffset: 4000
+		ContrailStartColorAlpha: 136
+		ContrailEndColorAlpha: 0
+		ContrailStartWidth: 30
+		ContrailEndWidth: 60
+	Warhead@ShieldHit: GrantExternalCondition
+		Duration: 3
+	Burst: 5
+	BurstDelays: 5
+	Report: pillbox1.aud
 ZeroFighterArrows:
 	Inherits@w70: ^Warhead_Arrow_Light
 	Inherits@w71: ^Projectile_Arrow_Light
@@ -3145,10 +3191,8 @@ SkyHawkChainGunWaveforce:
 	Inherits@xSkyHawkChainGunWaveforce0: ^Warhead_Railgun_Heavy
 	Inherits@xSkyHawkChainGunWaveforce1: ^Projectile_Railgun_Heavy
 	Inherits@fx_cover: ^Effect_Emp_Fx_RA2
-	Inherits@2: SkyHawkChainGun
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 500
-	-Warhead@Bullet_Medium:
 	Warhead@Railgun_Heavy:
 		Damage: 6000
 	Warhead@EffectAir:
@@ -3181,6 +3225,24 @@ SkyHawkChainGunWaveforce:
 		-ImpactActors:
 	Warhead@EffectWater:
 		-ExplosionPalette:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 8
+	Range: 3053
+	Projectile: Bullet
+		Image: 50CAL
+		FakeBulletNumber: 3
+		FakeBulletSpawnInterval: 2
+		FakeBulletSpeed: 4000
+		FakeBulletInaccuracy: 64
+		ContrailZOffset: 4000
+		ContrailStartColorAlpha: 136
+		ContrailEndColorAlpha: 34
+		ContrailStartWidth: 40
+		ContrailEndWidth: 80
+		Speed: 4000
+	Warhead@ShieldHit: GrantExternalCondition
+		Duration: 4
+	Report: gun13.aud
 
 SkyHawkCannon:
 	Inherits@wh: ^Warhead_CannonAP
@@ -4389,13 +4451,11 @@ JapaneseHovercraftFlakWaveforce:
 	Inherits@xJapaneseHovercraftFlakWaveforce0: ^Warhead_Railgun_Heavy
 	Inherits@xJapaneseHovercraftFlakWaveforce1: ^Projectile_Railgun_Heavy
 	Inherits@xJapaneseHovercraftFlakWaveforce2: ^Effect_Railgun_Heavy
-	Inherits@2: JapaneseHovercraftFlak
 	Warhead@Railgun_Heavy:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 6000
 		PercentageScale: 6650
-	-Warhead@Flak_Medium_Flat:
 
 	Warhead@Railgun_Heavy_ExtraDamage:
 		InvalidTargets: Air
@@ -4418,16 +4478,43 @@ JapaneseHovercraftFlakWaveforce:
 	Warhead@EffectWater:
 		Explosions: blue_small_fire
 		ImpactSounds: kaboom12.aud
+	ReloadDelay: 8
+	Range: 4876
+	Projectile: Bullet
+		Inaccuracy: 110
+		Image: 50CAL
+		FakeBulletNumber: 3
+		FakeBulletSpawnInterval: 2
+		FakeBulletSpeed: 10000
+		FakeBulletInaccuracy: 64
+		ContrailZOffset: 4000
+		ContrailStartColorAlpha: 0
+		ContrailEndColorAlpha: 255
+		ContrailStartWidth: 50
+		ContrailEndWidth: 100
+	Warhead@Glow: GlowImpact
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@ShieldHit: GrantExternalCondition
+		Duration: 5
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+	Warhead@EffectWater: CreateEffect
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		ValidTargets: Air
+	Report: gun20.aud
 JapaneseHovercraftFlakAAkWaveforce:
 	Inherits@xJapaneseHovercraftFlakAAkWaveforce0: ^Warhead_Railgun_Heavy
 	Inherits@xJapaneseHovercraftFlakAAkWaveforce1: ^Projectile_Railgun_Heavy
 	Inherits@xJapaneseHovercraftFlakAAkWaveforce2: ^Effect_Railgun_Heavy
-	Inherits@2: JapaneseHovercraftFlakAA
 	Warhead@Railgun_Heavy:
 		ValidTargets: Air
 		Damage: 6000
 		PercentageScale: 6650
-	-Warhead@Flak_Medium_Flat:
 
 	Warhead@Railgun_Heavy:
 		ValidTargets: Air
@@ -4450,6 +4537,36 @@ JapaneseHovercraftFlakAAkWaveforce:
 	Warhead@EffectWater:
 		Explosions: blue_small_fire
 		ImpactSounds: kaboom12.aud
+	ValidTargets: Air
+	ReloadDelay: 8
+	Range: 7314
+	Projectile: Bullet
+		Inaccuracy: 110
+		Image: 50CAL
+		FakeBulletNumber: 3
+		FakeBulletSpawnInterval: 2
+		FakeBulletSpeed: 10000
+		FakeBulletInaccuracy: 64
+		ContrailZOffset: 4000
+		ContrailStartColorAlpha: 0
+		ContrailEndColorAlpha: 255
+		ContrailStartWidth: 50
+		ContrailEndWidth: 100
+	Warhead@Glow: GlowImpact
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@ShieldHit: GrantExternalCondition
+		Duration: 5
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+	Warhead@EffectWater: CreateEffect
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		ValidTargets: Air
+	Report: gun20.aud
 Type89Cannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
@@ -5814,7 +5931,6 @@ JHighVWaveforce:
 	Inherits@xJHighVWaveforce0: ^Warhead_Railgun_Heavy
 	Inherits@xJHighVWaveforce1: ^Projectile_Railgun_Heavy
 	Inherits@fx_cover: ^Effect_Emp_Fx_RA2
-	Inherits@2: JHighV
 	Report: bigggun1.aud
 	Warhead@Railgun_Heavy:
 		Damage: 4000
@@ -5913,6 +6029,24 @@ JHighVWaveforce:
 			Temperature: 35
 			Corrosion: 20
 		PercentageSpread: 50
+	ValidTargets: Ground, Water, Air
+	Range: 6696
+	Projectile: Bullet
+		Image: 50CAL
+		FakeBulletNumber: 3
+		FakeBulletSpawnInterval: 2
+		FakeBulletSpeed: 4000
+		FakeBulletInaccuracy: 64
+		ContrailZOffset: 4000
+		ContrailStartColorAlpha: 136
+		ContrailEndColorAlpha: 34
+		ContrailStartWidth: 40
+		ContrailEndWidth: 80
+	Warhead@ShieldHit: GrantExternalCondition
+		Duration: 4
+	Burst: 5
+	BurstDelays: 5
+	StartBurstReport: gun8.aud
 ExecutionerDeath:
 	Report: JUShoEx_OmegaShockwaveStereo.wav
 	SoundVolume: 10
@@ -7234,14 +7368,12 @@ ArmoredCarMGWaveforce:
 	Inherits@xArmoredCarMGWaveforce0: ^Warhead_Railgun_Heavy
 	Inherits@xArmoredCarMGWaveforce1: ^Projectile_Railgun_Heavy
 	Inherits@fx_cover: ^Effect_AlliedTigerCannon
-	Inherits@3: ArmoredCarMG
 	Warhead@Railgun_Heavy:
 		InvalidTargets: Air
 		Damage: 1900
 		PercentageScale: 6667
 	Warhead@Railgun_Heavy_ExtraDamage:
 		Damage: 100
-	-Warhead@Bullet_Medium:
 	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidTargets: Ground, Water, Air
@@ -7567,18 +7699,20 @@ ArmoredCarMGWaveforce:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 		PercentageDenominator: 1000
+	ReloadDelay: 8
+	Range: 5012
+	Projectile: Bullet
+	Report: vgatlo5a.wav, vgatlo5b.wav
 ArmoredCarMGAAWaveforce:
 	Inherits@xArmoredCarMGAAWaveforce0: ^Warhead_Railgun_Heavy
 	Inherits@xArmoredCarMGAAWaveforce1: ^Projectile_Railgun_Heavy
 	Inherits@fx_cover: ^Effect_AlliedTigerCannon
-	Inherits@3: ArmoredCarMG_AA
 	Warhead@Railgun_Heavy:
 		ValidTargets: Air
 		Damage: 1900
 		PercentageScale: 6667
 	Warhead@Railgun_Heavy_ExtraDamage:
 		Damage: 100
-	-Warhead@Bullet_Medium:
 	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air
 		Spread: 250
@@ -7879,3 +8013,24 @@ ArmoredCarMGAAWaveforce:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
 		PercentageDenominator: 1000
+	ValidTargets: Air
+	ReloadDelay: 8
+	Range: 7518
+	Projectile: Bullet
+	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Air
+	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
+		ValidTargets: Air
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
+		ValidTargets: Air
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		ValidTargets: Air
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
+		ValidTargets: Air
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
+		ValidTargets: Air
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Air
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
+		ValidTargets: Air
+	Report: vgatlo5a.wav, vgatlo5b.wav

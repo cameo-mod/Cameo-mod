@@ -7054,7 +7054,6 @@ SteelMegaSword_elite:
 	Inherits@wh: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
-	Inherits@2: SteelMegaSword_EMP
 	Warhead@Railgun_Heavy:
 		InvalidTargets: Air
 		Damage: 135600
@@ -7093,12 +7092,118 @@ SteelMegaSword_elite:
 	-Warhead@LaserWeapon:
 	-Warhead@TeslaExtraDamage:
 	-Warhead@TeslaWeapon:
-	-Warhead@Quantum_Heavy_Flat:
 
 	Warhead@Railgun_Heavy_ExtraDamage:
 		InvalidTargets: Air
 	Warhead@ShieldHit:
 		InvalidTargets: Air
+	ReloadDelay: 16
+	Range: 2400
+	Projectile: InstantHit
+		ZOffset: 3000
+		HitAnim: laserfire
+		Width: 100
+		Speed: 3500
+	Warhead@Effect: CreateEffect
+		Explosions: steel_blueexp
+		ImpactSounds: makoexplose.wav
+		ImpactActors: false
+		ExplosionPalette: ra2effect
+		GlowScale: 2.0
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
+	Warhead@ShieldHit: GrantExternalCondition
+		Duration: 10
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Report: megasword.wav
+	Warhead@LaserWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 75
+		Versus:
+			REFLECTOR: 50
+			Shield: 35
+			Superheavy: 25
+			Spaceship: 24
+			Steel: 23
+			Heroic: 22
+			Heavy: 21
+			Helicopter: 20
+			Concrete: 19
+			Plate: 18
+			Medium: 17
+			Bomber: 16
+			Wood: 15
+			Flak: 14
+			Light: 13
+			Fighter: 12
+			None: 11
+			Scout: 10
+		UpdatesUnitStatistics: false
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@EMPUnit: AffectsIntegrity
+		Spread: 1
+		ValidTargets: Vehicle, Ship, Air, Cyborg, Defense, Building, Epic
+		ValidRelationships: Neutral, Enemy
+	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 50
+		Versus:
+			REFLECTOR: 50
+			Shield: 35
+			Heroic: 25
+			Plate: 24
+			Flak: 23
+			None: 22
+			Superheavy: 21
+			Heavy: 20
+			Medium: 19
+			Light: 18
+			Scout: 17
+			Steel: 16
+			Concrete: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+		UpdatesUnitStatistics: false
+	InvalidTargets: wall
+	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 525
+		Falloff: 99, 66, 33
+		Versus:
+			Shield: 35
+			Superheavy: 25
+			Plate: 24
+			Heavy: 23
+			Flak: 22
+			Medium: 21
+			None: 20
+			Light: 19
+			Heroic: 18
+			Scout: 17
+			Steel: 16
+			Concrete: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
 SteelAirTurret:
 	Inherits@roleflat: ^Warhead_Laser_Heavy_Flat
 	Inherits: ^LaserWeapon
@@ -7139,7 +7244,6 @@ SteelAirTurret_EMP:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^Effect_Tesla_Heavy
-	Inherits@2: SteelAirTurret
 	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 49600
@@ -7168,8 +7272,87 @@ SteelAirTurret_EMP:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
 	-Warhead@LaserWeapon:
-	-Warhead@Laser_Heavy_Flat:
 	-Warhead@RailgunWeapon:
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 60
+	Range: 8000
+	Projectile: Railgun
+		Width: 100
+		HitAnim: laserfire
+		ZOffset: 2048
+		Blockable: false
+		Duration: 16
+		Inaccuracy: 100
+		BeamColor: 00EEFF88
+		HelixPlayerColor: true
+		Railgun: 96
+	Warhead@ShieldHit: GrantExternalCondition
+		Duration: 15
+	Report: steel_quantumfire.wav
+	Warhead@LaserWeaponPercentage: AreaDamagePercentage
+		Spread: 75
+		Versus:
+			REFLECTOR: 50
+			Shield: 35
+			Superheavy: 25
+			Spaceship: 24
+			Steel: 23
+			Heroic: 22
+			Heavy: 21
+			Helicopter: 20
+			Concrete: 19
+			Plate: 18
+			Medium: 17
+			Bomber: 16
+			Wood: 15
+			Flak: 14
+			Light: 13
+			Fighter: 12
+			None: 11
+			Scout: 10
+		UpdatesUnitStatistics: false
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: steel_blueexp
+		ImpactActors: false
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+		ExplosionPalette: ra2effect
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
+		AffectsParent: false
+		Spread: 125
+		Versus:
+			REFLECTOR: 50
+			Shield: 35
+			Superheavy: 25
+			Heavy: 24
+			Medium: 23
+			Light: 22
+			Scout: 21
+			Heroic: 20
+			Plate: 19
+			Flak: 18
+			None: 17
+			Steel: 16
+			Concrete: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+		UpdatesUnitStatistics: false
 
 SteelAirTurret_elite:
 	Inherits@w70: ^Warhead_Laser_Heavy_Flat
@@ -8574,7 +8757,6 @@ SteelStalkerRailgun_EMP:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^Effect_Tesla_Heavy
-	Inherits@2: SteelStalkerRailgun
 	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 121600
@@ -8604,7 +8786,85 @@ SteelStalkerRailgun_EMP:
 		Damage: 60000
 	-Warhead@LaserWeapon:
 	-Warhead@RailgunWeapon:
-	-Warhead@Railgun_Heavy_Flat:
+	ReloadDelay: 103
+	Range: 9000
+	Projectile: Railgun
+		Width: 100
+		HitAnim: laserfire
+		ZOffset: 2048
+		Blockable: false
+		Duration: 16
+		Inaccuracy: 100
+		BeamColor: 00EEFF88
+		HelixPlayerColor: true
+		BeamWidth: 128
+	Warhead@ShieldHit: GrantExternalCondition
+		Duration: 15
+	Report: bigggun1.aud
+	Warhead@LaserWeaponPercentage: AreaDamagePercentage
+		Spread: 75
+		Versus:
+			REFLECTOR: 50
+			Shield: 35
+			Superheavy: 25
+			Spaceship: 24
+			Steel: 23
+			Heroic: 22
+			Heavy: 21
+			Helicopter: 20
+			Concrete: 19
+			Plate: 18
+			Medium: 17
+			Bomber: 16
+			Wood: 15
+			Flak: 14
+			Light: 13
+			Fighter: 12
+			None: 11
+			Scout: 10
+		UpdatesUnitStatistics: false
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: steel_blueexp
+		ImpactActors: false
+		ImpactSounds: makoexplose.wav
+		ValidTargets: Ground, Ship
+		ExplosionPalette: ra2effect
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
+		AffectsParent: false
+		Spread: 125
+		Versus:
+			REFLECTOR: 50
+			Shield: 35
+			Superheavy: 25
+			Heavy: 24
+			Medium: 23
+			Light: 22
+			Scout: 21
+			Heroic: 20
+			Plate: 19
+			Flak: 18
+			None: 17
+			Steel: 16
+			Concrete: 15
+			Wood: 14
+			Spaceship: 13
+			Helicopter: 12
+			Bomber: 11
+			Fighter: 10
+		UpdatesUnitStatistics: false
 
 SteelStalkerRailgun_elite:
 	Inherits@w70: ^Warhead_Railgun_Heavy_Flat

@@ -152,19 +152,49 @@ RA2KirovBomb_tesla:
 	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
 	Inherits@fx: ^Effect_Kirov_Tesla_RA2
-	Inherits@2: RA2KirovBomb
 	Warhead@Tesla_Super:
 		Damage: 160000
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 40000
-	-Warhead@Demolition_Heavy:
 	Warhead@Shrapnel: FireShrapnel
 		InvalidTargets: FireImmune
 		Weapon: TeslaFragmentLarge
 		Amount: 3
 		AimChance: 100
 		AimTargetStances: Enemy, Neutral
+	ReloadDelay: 50
+	Range: 2500
+	Projectile: GravityBomb
+		Image: ra2zbomb
+		Velocity: 0, 0, -50
+		Acceleration: 0, 0, -10
+		Palette: playerra2
+		IsPlayerPalette: true
+		Shadow: True
+	Warhead@ShieldHit: GrantExternalCondition
+		Duration: 12
+	Warhead@Concrete: DamagesConcrete
+		Damage: 200
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_verylarge_clsn
+		ImpactSounds: expnew13.wav
+		ValidTargets: Ground, Air, Water
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Report: vkiratta.wav
 
 RA2KirovBomb_nuclear:
 	Inherits@wh: ^Warhead_Nuclear_Super
