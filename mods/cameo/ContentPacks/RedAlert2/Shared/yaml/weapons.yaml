@@ -3055,7 +3055,9 @@ TeslaArmorDischargeDummy:
 		PercentageScale: 10000
 		PercentageSpread: 50
 TeslaArmorDischargeArc:
-	Inherits: TeslaArmorDischargeDummy
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Impact_RA2
 	Report: tesla1.aud
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -3127,8 +3129,27 @@ TeslaArmorDischargeArc:
 		Falloff: 100, 0
 		PercentageScale: 10000
 		PercentageSpread: 50
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 1
+	Range: 4500
+	Warhead@Tesla_Heavy: AreaDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 0
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@MissileAP_Light: AreaDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 0
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaArc: FireShrapnel
+		Amount: 1
+		AimChance: 100
+		AllowDirectHit: true
+		AimTargetStances: Enemy, Neutral
+		ValidTargets: Ground, Water, Air
 TeslaArmorDischargeFragment1:
-	Inherits: TeslaArmorDischargeArc
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Impact_RA2
 	Report: tesla1.aud
 	Range: 2250
 	Warhead@LightMissilePercentage: AreaDamagePercentage
@@ -3194,8 +3215,37 @@ TeslaArmorDischargeFragment1:
 		Falloff: 100, 0
 		PercentageScale: 10000
 		PercentageSpread: 50
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 1
+	Warhead@Tesla_Heavy: AreaDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 0
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
+	Warhead@MissileAP_Light: AreaDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 0
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaArc: FireShrapnel
+		Amount: 1
+		AimChance: 100
+		AllowDirectHit: true
+		AimTargetStances: Enemy, Neutral
+		ValidTargets: Ground, Water, Air
+	Warhead@LightMissilePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 TeslaArmorDischargeFragment2:
-	Inherits: TeslaArmorDischargeFragment1
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Impact_RA2
 	Report: tesla1.aud
 	Range: 1500
 	Warhead@LightMissilePercentage: AreaDamagePercentage
@@ -3209,7 +3259,6 @@ TeslaArmorDischargeFragment2:
 		Damage: 4
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
-	-Warhead@TeslaArc:
 	Warhead@MissileAP_Light: AreaDamage
 		Versus:
 			None: 36
@@ -3260,6 +3309,27 @@ TeslaArmorDischargeFragment2:
 		Falloff: 100, 0
 		PercentageScale: 10000
 		PercentageSpread: 50
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 1
+	Warhead@Tesla_Heavy: AreaDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 0
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
+	Warhead@MissileAP_Light: AreaDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 0
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@LightMissilePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 RA2PortaTesla:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
@@ -3273,7 +3343,9 @@ RA2PortaTesla:
 		DamageTypes: Tesla
 		Damage: 12000
 RA2PortaTesla2:
-	Inherits: RA2PortaTesla
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Heavy
 	Range: 5777
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 12000
@@ -3283,15 +3355,35 @@ RA2PortaTesla2:
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+	ReloadDelay: 100
+	Warhead@Tesla_Heavy: AreaDamage
+		Damage: 24000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		Damage: 12000
+		DamageTypes: Tesla
+	Report: itesatta.wav
 
 RA2PortaTesla3:
-	Inherits: RA2PortaTesla2
+	Inherits@w70: ^Warhead_Tesla_Heavy
+	Inherits@w71: ^Projectile_Lightning_Heavy
+	Inherits@w72: ^Effect_Tesla_Heavy
 	Range: 6222
 	Report: itesat2a.wav, itesat2b.wav
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 24000
 	Warhead@TeslaArc: FireShrapnel
 		Weapon: TeslaFragment2
+	ReloadDelay: 100
+	Warhead@Tesla_Heavy: AreaDamage
+		Damage: 24000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		Damage: 12000
+		DamageTypes: Tesla
+	Warhead@TeslaArc: FireShrapnel
+		Amount: 1
+		AimChance: 100
+		AllowDirectHit: true
+		AimTargetStances: Enemy, Neutral
 
 TeslaFragment:
 	Inherits@wh: ^Warhead_Tesla_Heavy
@@ -3937,7 +4029,6 @@ MigMissiles_rad:
 	Inherits@wh: ^Warhead_Chemical_Medium
 	Inherits@proj: ^Projectile_Chem_Medium
 	Inherits@fx: ^Effect_Chem_Medium
-	Inherits@3: MigMissiles
 	Projectile: Missile
 		VerticalRateOfTurn: 16
 		MinimumLaunchAngle: -128
@@ -4123,9 +4214,79 @@ MigMissiles_rad:
 	Warhead@Smudge:
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	ReloadDelay: 50
+	Range: 7600
+	Projectile: Missile
+		Speed: 400
+		Arm: 2
+		Blockable: false
+		AllowSnapping: true
+		Inaccuracy: 1000
+		Image: d2k_missile2
+		Shadow: true
+		HorizontalRateOfTurn: 30
+		TrailInterval: 1
+		MaximumLaunchSpeed: 384
+		MinimumLaunchSpeed: 384
+		CloseEnough: 500
+		Acceleration: 10
+		HomingActivationDelay: 2
+		RangeLimit: 15c0
+		PointDefenseTypes: Missile
+		Palette: d2keffect
+		MaximumLaunchAngle: 125
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+	Warhead@MissileAP_Medium_GroundShipExtraDamage: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 64
+		Damage: 8000
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 95
+			COMPOSITE: 44
+			BLAST: 68
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 145
+			Superheavy: 200
+			Heavy: 177
+			Medium: 161
+			Light: 146
+			Spaceship: 124
+			Helicopter: 123
+			Scout: 114
+			Bomber: 112
+			Concrete: 82
+			Fighter: 75
+			Plate: 64
+			Steel: 55
+			Wood: 53
+			Flak: 44
+			Heroic: 37
+			None: 33
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Smudge: LeaveSmudge
+	Warhead@DuneRock: LeaveSmudge
+	Warhead@DuneSand: LeaveSmudge
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@EffectWater: CreateEffect
+	Warhead@EffectAir: CreateEffect
+	Warhead@Smudge1: LeaveSmudge
+	Warhead@Smudge2: LeaveSmudge
+	Warhead@Smudge2RA2: LeaveSmudge
+	Warhead@Effect2: CreateEffect
+	Burst: 4
+	BurstDelays: 2
+	Report: vmigatta.wav
 
 MigMissiles_fire:
-	Inherits: MigMissiles
+	Inherits@w70: ^Projectile_Missile_Medium
+	Inherits@w71: ^Warhead_MissileAP_Medium_GroundShip
 	Inherits@fx_cover: ^Effect_Apoc_AP_RA2
 	Projectile: Missile
 		VerticalRateOfTurn: 16
@@ -4185,9 +4346,153 @@ MigMissiles_fire:
 	Warhead@Effect:
 		Explosions: ra2_terrorist_explosion
 	TargetActorCenter: true
+	Projectile: Missile
+		Arm: 2
+		Inaccuracy: 1000
+		Image: d2k_missile2
+		ContrailLength: 33
+		MaximumLaunchSpeed: 384
+		MinimumLaunchSpeed: 384
+		Speed: 400
+		Acceleration: 10
+		RangeLimit: 15c0
+		Palette: d2keffect
+		MaximumLaunchAngle: 125
+		ContrailZOffset: 4000
+		ContrailStartWidth: 33
+		ContrailEndWidth: 1
+	Warhead@MissileAP_Medium_GroundShipExtraDamage: AreaDamage
+		Damage: 8000
+	ReloadDelay: 50
+	Burst: 4
+	BurstDelays: 2
+	Range: 7600
+	Report: vmigatta.wav
+	ValidTargets: Ground, Water
+	Warhead@MissileHE_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 150
+		Falloff: 100, 45, 15, 0
+		Versus:
+			HAZMAT: 76
+			COMPOSITE: 89
+			BLAST: 45
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 148
+			Wood: 157
+			Scout: 143
+			Light: 136
+			Medium: 135
+			Steel: 113
+			Heavy: 112
+			Fighter: 110
+			None: 99
+			Bomber: 97
+			Concrete: 93
+			Superheavy: 88
+			Helicopter: 86
+			Spaceship: 70
+			Flak: 69
+			Plate: 48
+			Heroic: 43
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Scout: 20
+			Wood: 19
+			Light: 18
+			Steel: 17
+			Medium: 16
+			Concrete: 15
+			Heavy: 14
+			Superheavy: 13
+			Fighter: 12
+			Bomber: 11
+			Helicopter: 10
+			Spaceship: 9
+			None: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
+		Spread: 400
+		Damage: 4
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			Shield: 35
+			Wood: 25
+			Concrete: 24
+			Steel: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
+		Spread: 250
+		Damage: 4
+		Versus:
+			Shield: 35
+			Spaceship: 25
+			Helicopter: 24
+			Bomber: 23
+			Fighter: 22
+			Superheavy: 21
+			Heavy: 20
+			Medium: 19
+			Light: 18
+			Scout: 17
+			Plate: 16
+			Flak: 15
+			None: 14
+			Heroic: 13
+			Steel: 12
+			Concrete: 11
+			Wood: 10
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		Spread: 125
+		Damage: 4
+		Versus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Concrete: 6
+			Steel: 5
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
 
 MigMissiles_tesla:
-	Inherits: MigMissiles
+	Inherits@w70: ^Projectile_Missile_Medium
+	Inherits@w71: ^Warhead_MissileAP_Medium_GroundShip
 	Inherits@fx_cover: ^Effect_Apoc_AP_RA2
 	Projectile: Missile
 		VerticalRateOfTurn: 16
@@ -4249,9 +4554,154 @@ MigMissiles_tesla:
 	Warhead@EffectWater:
 		Explosions: ra2_small_watersplash
 	TargetActorCenter: true
+	Projectile: Missile
+		Arm: 2
+		Inaccuracy: 1000
+		Image: d2k_missile2
+		ContrailLength: 33
+		MaximumLaunchSpeed: 384
+		MinimumLaunchSpeed: 384
+		Speed: 400
+		Acceleration: 10
+		RangeLimit: 15c0
+		Palette: d2keffect
+		MaximumLaunchAngle: 125
+		ContrailZOffset: 4000
+		ContrailStartWidth: 33
+		ContrailEndWidth: 1
+	Warhead@MissileAP_Medium_GroundShipExtraDamage: AreaDamage
+		Damage: 8000
+	ReloadDelay: 50
+	Burst: 4
+	BurstDelays: 2
+	Range: 7600
+	Report: vmigatta.wav
+	ValidTargets: Ground, Water
+	Warhead@MissileHE_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 150
+		Falloff: 100, 45, 15, 0
+		Versus:
+			HAZMAT: 76
+			COMPOSITE: 89
+			BLAST: 45
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 148
+			Wood: 157
+			Scout: 143
+			Light: 136
+			Medium: 135
+			Steel: 113
+			Heavy: 112
+			Fighter: 110
+			None: 99
+			Bomber: 97
+			Concrete: 93
+			Superheavy: 88
+			Helicopter: 86
+			Spaceship: 70
+			Flak: 69
+			Plate: 48
+			Heroic: 43
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Scout: 20
+			Wood: 19
+			Light: 18
+			Steel: 17
+			Medium: 16
+			Concrete: 15
+			Heavy: 14
+			Superheavy: 13
+			Fighter: 12
+			Bomber: 11
+			Helicopter: 10
+			Spaceship: 9
+			None: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
+		Spread: 400
+		Damage: 4
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			Shield: 35
+			Wood: 25
+			Concrete: 24
+			Steel: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
+		Spread: 250
+		Damage: 4
+		Versus:
+			Shield: 35
+			Spaceship: 25
+			Helicopter: 24
+			Bomber: 23
+			Fighter: 22
+			Superheavy: 21
+			Heavy: 20
+			Medium: 19
+			Light: 18
+			Scout: 17
+			Plate: 16
+			Flak: 15
+			None: 14
+			Heroic: 13
+			Steel: 12
+			Concrete: 11
+			Wood: 10
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		Spread: 125
+		Damage: 4
+		Versus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Concrete: 6
+			Steel: 5
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
 
 MigMissiles_elite:
-	Inherits: MigMissiles
+	Inherits@w70: ^Projectile_Missile_Medium
+	Inherits@w71: ^Warhead_MissileAP_Medium_GroundShip
+	Inherits@w72: ^Effect_Apoc_AP_RA2
 	Range: 8600
 	Burst: 8
 	Projectile: Missile
@@ -4323,9 +4773,152 @@ MigMissiles_elite:
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	TargetActorCenter: true
+	Projectile: Missile
+		Arm: 2
+		Inaccuracy: 1000
+		ContrailLength: 33
+		MaximumLaunchSpeed: 384
+		MinimumLaunchSpeed: 384
+		Speed: 400
+		Acceleration: 10
+		RangeLimit: 15c0
+		Palette: d2keffect
+		MaximumLaunchAngle: 125
+		ContrailZOffset: 4000
+		ContrailStartWidth: 33
+		ContrailEndWidth: 1
+	Warhead@MissileAP_Medium_GroundShipExtraDamage: AreaDamage
+		Damage: 8000
+	ReloadDelay: 50
+	BurstDelays: 2
+	Report: vmigatta.wav
+	ValidTargets: Ground, Water
+	Warhead@MissileHE_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 150
+		Falloff: 100, 45, 15, 0
+		Versus:
+			HAZMAT: 76
+			COMPOSITE: 89
+			BLAST: 45
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 148
+			Wood: 157
+			Scout: 143
+			Light: 136
+			Medium: 135
+			Steel: 113
+			Heavy: 112
+			Fighter: 110
+			None: 99
+			Bomber: 97
+			Concrete: 93
+			Superheavy: 88
+			Helicopter: 86
+			Spaceship: 70
+			Flak: 69
+			Plate: 48
+			Heroic: 43
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Scout: 20
+			Wood: 19
+			Light: 18
+			Steel: 17
+			Medium: 16
+			Concrete: 15
+			Heavy: 14
+			Superheavy: 13
+			Fighter: 12
+			Bomber: 11
+			Helicopter: 10
+			Spaceship: 9
+			None: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
+		Spread: 400
+		Damage: 4
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			Shield: 35
+			Wood: 25
+			Concrete: 24
+			Steel: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
+		Spread: 250
+		Damage: 4
+		Versus:
+			Shield: 35
+			Spaceship: 25
+			Helicopter: 24
+			Bomber: 23
+			Fighter: 22
+			Superheavy: 21
+			Heavy: 20
+			Medium: 19
+			Light: 18
+			Scout: 17
+			Plate: 16
+			Flak: 15
+			None: 14
+			Heroic: 13
+			Steel: 12
+			Concrete: 11
+			Wood: 10
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		Spread: 125
+		Damage: 4
+		Versus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Concrete: 6
+			Steel: 5
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
+	-Warhead@Effect1:
 
 MigMissiles_rad_elite:
-	Inherits: MigMissiles_rad
+	Inherits@w70: ^Warhead_MissileAP_Medium_GroundShip
+	Inherits@w71: ^Projectile_Missile_Medium
+	Inherits@w72: ^Effect_Apoc_AP_RA2
 	Range: 8600
 	Burst: 8
 	Warhead@Chemical_Medium:
@@ -4397,9 +4990,174 @@ MigMissiles_rad_elite:
 	Warhead@Smudge:
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	ValidTargets: Ground, Water
+	ReloadDelay: 50
+	TargetActorCenter: true
+	Warhead@Chemical_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 275
+		Falloff: 100, 88, 72, 50, 0
+		Versus:
+			HAZMAT: 51
+			COMPOSITE: 61
+			BLAST: 73
+			REFLECTOR: 96
+			ARMOR: 70
+			Shield: 220
+			Superheavy: 183
+			Plate: 176
+			Heavy: 155
+			Medium: 134
+			Light: 127
+			Flak: 125
+			None: 100
+			Concrete: 96
+			Scout: 89
+			Heroic: 85
+			Steel: 76
+			Spaceship: 58
+			Wood: 55
+			Helicopter: 54
+			Bomber: 48
+			Fighter: 40
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		PhysicalStates:
+			Corrosion: 100
+		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Superheavy: 20
+			Heroic: 19
+			Heavy: 18
+			Plate: 17
+			Medium: 16
+			Flak: 15
+			Light: 14
+			None: 13
+			Scout: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Spaceship: 8
+			Helicopter: 7
+			Bomber: 6
+			Fighter: 5
+	Projectile: Missile
+		Speed: 400
+		Arm: 2
+		Inaccuracy: 1000
+		Image: d2k_missile2
+		TrailImage: green_smokey
+		ContrailLength: 33
+		MaximumLaunchSpeed: 384
+		MinimumLaunchSpeed: 384
+		Acceleration: 10
+		RangeLimit: 15c0
+		Palette: d2keffect
+		MaximumLaunchAngle: 125
+		ContrailStartColor: 00EE00
+		ContrailEndColor: FFFFFF
+		ContrailZOffset: 4000
+		ContrailStartWidth: 33
+		ContrailEndWidth: 1
+		TrailPalette: effect
+		ContrailEndColorUsePlayerColor: true
+	Warhead@Effect:
+		Explosions: ra2radbang
+		ImpactSounds: snukexpl.wav
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@MissileAP_Medium_GroundShipExtraDamage: AreaDamage
+		Damage: 8000
+	BurstDelays: 2
+	Report: vmigatta.wav
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
+		Spread: 400
+		Damage: 4
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			Shield: 35
+			Wood: 25
+			Concrete: 24
+			Steel: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
+		Spread: 250
+		Damage: 4
+		Versus:
+			Shield: 35
+			Spaceship: 25
+			Helicopter: 24
+			Bomber: 23
+			Fighter: 22
+			Superheavy: 21
+			Heavy: 20
+			Medium: 19
+			Light: 18
+			Scout: 17
+			Plate: 16
+			Flak: 15
+			None: 14
+			Heroic: 13
+			Steel: 12
+			Concrete: 11
+			Wood: 10
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		Spread: 125
+		Damage: 4
+		Versus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Concrete: 6
+			Steel: 5
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
+	Warhead@Radiation: CreateTintedCells
+		Falloff: 100, 75, 66, 50, 33, 25, 20, 10
+		Spread: 200
+		Level: 50
+		InvalidTargets: RadiationImmmune
+		MaxLevel: 1000
+		LayerName: ra2radiation
+	-Warhead@Effect1:
 
 MigMissiles_fire_elite:
-	Inherits: MigMissiles_fire
+	Inherits@w70: ^Projectile_Missile_Medium
+	Inherits@w71: ^Warhead_MissileAP_Medium_GroundShip
+	Inherits@w72: ^Effect_Apoc_AP_RA2
 	Range: 8600
 	Burst: 8
 
@@ -4453,10 +5211,162 @@ MigMissiles_fire_elite:
 	Warhead@Effect:
 		Explosions: ra2_terrorist_explosion
 	TargetActorCenter: true
+	Projectile: Missile
+		Arm: 2
+		Inaccuracy: 1000
+		Image: d2k_missile2
+		TrailImage: red_smokey
+		ContrailLength: 33
+		MaximumLaunchSpeed: 384
+		MinimumLaunchSpeed: 384
+		Speed: 400
+		Acceleration: 10
+		RangeLimit: 15c0
+		Palette: d2keffect
+		MaximumLaunchAngle: 125
+		ContrailStartColor: EE0000
+		ContrailEndColor: FFFFFF
+		ContrailZOffset: 4000
+		ContrailStartWidth: 33
+		ContrailEndWidth: 1
+		TrailPalette: effect
+		ContrailEndColorUsePlayerColor: true
+	Warhead@MissileAP_Medium_GroundShipExtraDamage: AreaDamage
+		Damage: 8000
+	ReloadDelay: 50
+	BurstDelays: 2
+	Report: vmigatta.wav
+	ValidTargets: Ground, Water
+	Warhead@MissileHE_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Spread: 150
+		Falloff: 100, 45, 15, 0
+		Versus:
+			HAZMAT: 76
+			COMPOSITE: 89
+			BLAST: 45
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 148
+			Wood: 157
+			Scout: 143
+			Light: 136
+			Medium: 135
+			Steel: 113
+			Heavy: 112
+			Fighter: 110
+			None: 99
+			Bomber: 97
+			Concrete: 93
+			Superheavy: 88
+			Helicopter: 86
+			Spaceship: 70
+			Flak: 69
+			Plate: 48
+			Heroic: 43
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Scout: 20
+			Wood: 19
+			Light: 18
+			Steel: 17
+			Medium: 16
+			Concrete: 15
+			Heavy: 14
+			Superheavy: 13
+			Fighter: 12
+			Bomber: 11
+			Helicopter: 10
+			Spaceship: 9
+			None: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
+		Spread: 400
+		Damage: 4
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			Shield: 35
+			Wood: 25
+			Concrete: 24
+			Steel: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
+		Spread: 250
+		Damage: 4
+		Versus:
+			Shield: 35
+			Spaceship: 25
+			Helicopter: 24
+			Bomber: 23
+			Fighter: 22
+			Superheavy: 21
+			Heavy: 20
+			Medium: 19
+			Light: 18
+			Scout: 17
+			Plate: 16
+			Flak: 15
+			None: 14
+			Heroic: 13
+			Steel: 12
+			Concrete: 11
+			Wood: 10
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		Spread: 125
+		Damage: 4
+		Versus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Concrete: 6
+			Steel: 5
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: AsianFlameFragment
+		Amount: 8
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
 
 MigMissiles_AA:
 	Inherits@heldmissilerole: ^Warhead_MissileAA_Medium
-	Inherits: MigMissiles
+	Inherits@w70: ^Projectile_Missile_Medium
+	Inherits@w71: ^Effect_Apoc_AP_RA2
 	ValidTargets: Air
 	Projectile: Missile
 		VerticalRateOfTurn: 30
@@ -4464,18 +5374,14 @@ MigMissiles_AA:
 		Speed: 500
 		Inaccuracy: 250
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
-		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
-		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
-		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@MissileAP_Medium:
 		ValidTargets: Air
 	Warhead@MissileAP_Medium_GroundShipExtraDamage:
-		-InvalidTargets:
 		ValidTargets: Air
 	-Warhead@MissileAP_Medium:
 	Warhead@MissileAA_Medium: AreaDamage
@@ -4483,7 +5389,6 @@ MigMissiles_AA:
 		Damage: 24000
 		PercentageScale: 3333
 		PercentageDenominator: 10000
-	-Warhead@MissileHE_Medium:
 	Warhead@EffectWater:
 	Warhead@EffectAir:
 	Warhead@Smudge:
@@ -4521,10 +5426,134 @@ MigMissiles_AA:
 	Warhead@Smudge:
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	ReloadDelay: 50
+	Range: 7600
+	Projectile: Missile
+		Arm: 2
+		Image: d2k_missile2
+		TrailImage: large_trail
+		ContrailLength: 33
+		MaximumLaunchSpeed: 384
+		MinimumLaunchSpeed: 384
+		Acceleration: 10
+		RangeLimit: 15c0
+		Palette: d2keffect
+		MaximumLaunchAngle: 125
+		ContrailStartColor: EEEE00
+		ContrailEndColor: FFFFFF
+		ContrailZOffset: 4000
+		ContrailStartWidth: 33
+		ContrailEndWidth: 1
+	Warhead@MissileAP_Medium_GroundShipExtraDamage: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 64
+		Damage: 8000
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 95
+			COMPOSITE: 44
+			BLAST: 68
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 145
+			Superheavy: 200
+			Heavy: 177
+			Medium: 161
+			Light: 146
+			Spaceship: 124
+			Helicopter: 123
+			Scout: 114
+			Bomber: 112
+			Concrete: 82
+			Fighter: 75
+			Plate: 64
+			Steel: 55
+			Wood: 53
+			Flak: 44
+			Heroic: 37
+			None: 33
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Burst: 4
+	BurstDelays: 2
+	Report: vmigatta.wav
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
+		Spread: 400
+		Damage: 4
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			Shield: 35
+			Wood: 25
+			Concrete: 24
+			Steel: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
+		Spread: 250
+		Damage: 4
+		Versus:
+			Shield: 35
+			Spaceship: 25
+			Helicopter: 24
+			Bomber: 23
+			Fighter: 22
+			Superheavy: 21
+			Heavy: 20
+			Medium: 19
+			Light: 18
+			Scout: 17
+			Plate: 16
+			Flak: 15
+			None: 14
+			Heroic: 13
+			Steel: 12
+			Concrete: 11
+			Wood: 10
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		Spread: 125
+		Damage: 4
+		Versus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Concrete: 6
+			Steel: 5
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
+	-Warhead@Effect1:
 
 MigMissiles_AA_elite:
 	Inherits@heldmissilerole: ^Warhead_MissileAA_Medium
-	Inherits: MigMissiles_elite
+	Inherits@w70: ^Projectile_Missile_Medium
+	Inherits@w71: ^Effect_Apoc_AP_RA2
 	ValidTargets: Air
 	Projectile: Missile
 		VerticalRateOfTurn: 30
@@ -4532,18 +5561,14 @@ MigMissiles_AA_elite:
 		Speed: 500
 		Inaccuracy: 250
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
-		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
-		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
-		-InvalidTargets:
 		ValidTargets: Air
 	Warhead@MissileAP_Medium:
 		ValidTargets: Air
 	Warhead@MissileAP_Medium_GroundShipExtraDamage:
-		-InvalidTargets:
 		ValidTargets: Air
 	-Warhead@MissileAP_Medium:
 	Warhead@MissileAA_Medium: AreaDamage
@@ -4551,7 +5576,6 @@ MigMissiles_AA_elite:
 		Damage: 24000
 		PercentageScale: 3333
 		PercentageDenominator: 10000
-	-Warhead@MissileHE_Medium:
 	Warhead@EffectWater:
 	Warhead@EffectAir:
 	Warhead@Smudge:
@@ -4589,6 +5613,131 @@ MigMissiles_AA_elite:
 	Warhead@Smudge:
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	ReloadDelay: 50
+	Range: 8600
+	Projectile: Missile
+		Arm: 2
+		Image: red_dragon
+		TrailImage: red_smokey
+		ContrailLength: 33
+		MaximumLaunchSpeed: 384
+		MinimumLaunchSpeed: 384
+		Acceleration: 10
+		RangeLimit: 15c0
+		Palette: d2keffect
+		MaximumLaunchAngle: 125
+		ContrailStartColor: E60000
+		ContrailEndColor: FFFFFF
+		ContrailZOffset: 4000
+		ContrailStartWidth: 33
+		ContrailEndWidth: 1
+		ContrailColor: e60000
+		ContrailEndColorUsePlayerColor: true
+	Warhead@MissileAP_Medium_GroundShipExtraDamage: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 64
+		Damage: 8000
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 95
+			COMPOSITE: 44
+			BLAST: 68
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 145
+			Superheavy: 200
+			Heavy: 177
+			Medium: 161
+			Light: 146
+			Spaceship: 124
+			Helicopter: 123
+			Scout: 114
+			Bomber: 112
+			Concrete: 82
+			Fighter: 75
+			Plate: 64
+			Steel: 55
+			Wood: 53
+			Flak: 44
+			Heroic: 37
+			None: 33
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Burst: 8
+	BurstDelays: 2
+	Report: vmigatta.wav
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
+		Spread: 400
+		Damage: 4
+		Falloff: 100, 50, 25, 10, 5
+		Versus:
+			Shield: 35
+			Wood: 25
+			Concrete: 24
+			Steel: 23
+			None: 22
+			Flak: 21
+			Plate: 20
+			Heroic: 19
+			Scout: 18
+			Light: 17
+			Medium: 16
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
+		Spread: 250
+		Damage: 4
+		Versus:
+			Shield: 35
+			Spaceship: 25
+			Helicopter: 24
+			Bomber: 23
+			Fighter: 22
+			Superheavy: 21
+			Heavy: 20
+			Medium: 19
+			Light: 18
+			Scout: 17
+			Plate: 16
+			Flak: 15
+			None: 14
+			Heroic: 13
+			Steel: 12
+			Concrete: 11
+			Wood: 10
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		Spread: 125
+		Damage: 4
+		Versus:
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Concrete: 6
+			Steel: 5
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
+	-Warhead@Effect1:
 
 V3Launch:
 	ReloadDelay: 50
@@ -6740,7 +7889,9 @@ RA2DoublePistols:
 		Damage: 7
 
 RA2DoublePistolsIFV:
-	Inherits: RA2DoublePistols
+	Inherits@w70: ^Warhead_Sniper_Light
+	Inherits@w71: ^Projectile_Sniper_Light
+	Inherits@w72: ^Effect_Sniper_Light
 	ValidTargets: Ground, Water, Air
 	Warhead@Sniper_Light:
 		ValidTargets: Ground, Water, Air
@@ -6748,6 +7899,25 @@ RA2DoublePistolsIFV:
 		ValidTargets: Ground, Water, Air
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
+	Warhead@Sniper_Light: AreaDamage
+		Damage: 14000
+	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
+		Damage: 7
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
+		Damage: 14000
+	Projectile: Bullet
+		ContrailStartColor: 77777777
+		ContrailEndColorUsePlayerColor: false
+		ContrailStartWidth: 33
+		ContrailEndWidth: 77
+		ContrailLength: 7
+		Speed: 10000
+		ContrailEndColor: 33333333
+	Report: itanatta.wav, itanattb.wav
+	ReloadDelay: 12
+	Burst: 2
+	BurstDelays: 3
+	Range: 8000
 
 RA2AWP:
 	Inherits@wh: ^Warhead_Sniper_Light
@@ -7983,7 +9153,8 @@ RA2Terrorist:
 		InvalidTargets: Structure, wall
 
 RA2Atomic:
-	Inherits: Atomic
+	Inherits@w70: ^Warhead_Nuclear_Super
+	Inherits@w71: ^Projectile_Lightning_Super
 	Inherits@fx: ^Effect_Nuke_Ball_RA2
 	Report: snuklaun.wav
 	Warhead@Nuclear_Super:
@@ -7998,6 +9169,159 @@ RA2Atomic:
 ####################################################################################################
 #		Red Alert 2 Addon
 ####################################################################################################
+	ValidTargets: Ground, Air
+	Warhead@Tesla_Super: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Shielded
+		Spread: 1000
+		Damage: 200000
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+		Versus:
+			HAZMAT: 61
+			COMPOSITE: 72
+			BLAST: 98
+			REFLECTOR: 51
+			ARMOR: 70
+			Shield: 400
+			Superheavy: 125
+			Heavy: 119
+			Plate: 117
+			Medium: 115
+			Flak: 114
+			Light: 113
+			None: 111
+			Scout: 109
+			Concrete: 107
+			Heroic: 102
+			Steel: 100
+			Wood: 98
+			Spaceship: 82
+			Helicopter: 66
+			Bomber: 62
+			Fighter: 61
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
+		IntegrityScale: 100
+		PercentageScale: 2000
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 45
+			Superheavy: 30
+			Heroic: 29
+			Heavy: 28
+			Plate: 27
+			Medium: 26
+			Flak: 25
+			Light: 24
+			None: 23
+			Scout: 22
+			Concrete: 21
+			Steel: 20
+			Wood: 19
+			Spaceship: 18
+			Helicopter: 17
+			Bomber: 16
+			Fighter: 15
+		Delay: 0
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
+		ValidTargets: Shielded
+		Spread: 1000
+		Damage: 100000
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+		Versus:
+			HAZMAT: 61
+			COMPOSITE: 72
+			BLAST: 98
+			REFLECTOR: 51
+			ARMOR: 70
+			Shield: 400
+			Heroic: 300
+			Plate: 275
+			Flak: 250
+			None: 225
+			Superheavy: 200
+			Heavy: 175
+			Medium: 150
+			Light: 125
+			Scout: 100
+			Steel: 75
+			Concrete: 50
+			Wood: 25
+			Fighter: 10
+			Bomber: 10
+			Helicopter: 10
+			Spaceship: 10
+		DamageTypes: Tesla
+		Delay: 2
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 2000
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Nuclear_Super: AreaDamage
+		Damage: 500000
+		MaxRadius: 10000
+	Warhead@Nuclear_Super_Percentage: AreaDamagePercentage
+		Damage: 25
+		MaxRadius: 10000
+	Warhead@Effect: CreateEffect
+		GlowScale: 15.0
+		GlowFadeFrames: 600
+		GlowFadeInFrames: 15
+	Warhead@GroundFireArea: SpawnActorInArea
+		Actor: groundfire
+		Range: 5
+		Chance: 50
+		ImpactActors: false
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@Distort: HeatDistortion
+		Scale: 2.0
+		FadeFrames: 420
+		FadeInFrames: 15
+	Warhead@Shock: Shockwave
+		Scale: 2.0
+		FadeFrames: 120
+		FadeInFrames: 0
+	Warhead@4Res_areanukea: DestroyResource
+		Size: 3
+		Delay: 3
+		ResourceAmount: 3
+	Warhead@5Smu_areanukea: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 5
+		Delay: 3
+	Warhead@Effect2: CreateEffect
+		ImpactSounds: xplobig4.aud
+		Delay: 3
+		ImpactActors: false
+	Warhead@8Res_areanukeb: DestroyResource
+		Size: 6
+		Delay: 6
+		ResourceAmount: 6
+	Warhead@9Smu_areanukeb: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 7
+		Delay: 6
+	Warhead@11Res_areanukec: DestroyResource
+		Size: 9
+		Delay: 9
+		ResourceAmount: 9
+	Warhead@12Smu_areanukec: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 9
+		Delay: 9
+	Warhead@13Shake: ShakeScreen
+		Duration: 20
+		Intensity: 5
+		Multiplier: 1,1
+	Warhead@FlashEffect: FlashEffect
+		Duration: 20
+		FlashType: Nuke
 
 RA2MODTrackMG:
 	Inherits@xRA2MODTrackMG0: ^Warhead_Bullet_Light

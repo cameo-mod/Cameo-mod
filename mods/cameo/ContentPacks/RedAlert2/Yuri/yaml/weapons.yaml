@@ -1250,7 +1250,9 @@ RA2LasherLaser:
 			Fighter: 11
 			Scout: 10
 RA2LasherLaser_elite:
-	Inherits: RA2LasherLaser
+	Inherits@w70: ^Warhead_Laser_Heavy
+	Inherits@w71: ^Projectile_Laser_Heavy
+	Inherits@w72: ^Effect_Laser_Heavy
 	Range: 8065
 	Projectile: LaserZap
 		Width: 72
@@ -1322,6 +1324,14 @@ RA2LasherLaser_elite:
 			None: 12
 			Fighter: 11
 			Scout: 10
+	ReloadDelay: 81
+	Projectile: LaserZap
+		SecondaryBeam: true
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFF88
+		UsePlayerColor: false
+	Report: vfloatta.wav
+	-Warhead@Laser_Heavy:
 
 RA2DiskLaser:
 	Inherits@wh: ^Warhead_Laser_Heavy
@@ -1345,7 +1355,9 @@ RA2DiskLaser:
 		Damage: 24000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 RA2DiskLaser_elite:
-	Inherits: RA2DiskLaser
+	Inherits@w70: ^Warhead_Laser_Heavy
+	Inherits@w71: ^Projectile_Laser_Heavy
+	Inherits@w72: ^Effect_Laser_Heavy
 	Range: 7840
 	Projectile: LaserZap
 		Width: 80
@@ -1354,6 +1366,16 @@ RA2DiskLaser_elite:
 		SecondaryBeamWidth: 40
 	Warhead@Laser_Heavy:
 		Damage: 48000
+	ReloadDelay: 40
+	Warhead@Laser_Heavy: AreaDamage
+		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
+	Projectile: LaserZap
+		SecondaryBeam: true
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFF88
+		UsePlayerColor: false
+	Report: vfloatta.wav
+	InvalidTargets: DiskSteal
 RA2DiskDrain:
 	Inherits@2: ^Warhead_Magic_Heavy
 	Inherits@3: ^Effect_Magic_Heavy
@@ -1509,7 +1531,9 @@ RA2Magnet:
 	-Warhead@EffectAir:
 
 RA2MagnetAA:
-	Inherits: RA2Magnet
+	Inherits@w70: ^Warhead_Laser_Heavy
+	Inherits@w71: ^Projectile_Laser_Heavy
+	Inherits@w72: ^Effect_Laser_Heavy
 	ValidTargets: Vehicle, Air, Structure
 	InvalidTargets: Paratrooper
 	Warhead@Laser_Heavy:
@@ -1518,15 +1542,62 @@ RA2MagnetAA:
 	Warhead@Condition: ApplyPhysicalState
 		ValidTargets: Vehicle, Air
 		InvalidTargets: Paratrooper
+	ReloadDelay: 200
+	Range: 7032
+	Warhead@Laser_Heavy: AreaDamage
+		Falloff: 100, 100
+		Range: 0, 32
+	Projectile: LaserZap
+		Width: 350
+		Shape: Flat
+		Duration: 100
+		Color: FF55F505
+		-HitAnim:
+	Burst: 100
+	BurstDelays: 1
+	Warhead@Condition: ApplyPhysicalState
+		PhysicalStateName: Magnetism
+		Amount: 200
+		ApplyFirepowerModifiers: false
+		ApplyDamageModifiers: false
+		Range: 500
+	-Warhead@Effect:
+	-Warhead@EffectAir:
 
 RA2Magnet_elite:
-	Inherits: RA2Magnet
+	Inherits@w70: ^Warhead_Laser_Heavy
+	Inherits@w71: ^Projectile_Laser_Heavy
+	Inherits@w72: ^Effect_Laser_Heavy
 	Range: 8032
 	Projectile: LaserZap
 		Color: e6000045
+	ValidTargets: Vehicle, Structure
+	ReloadDelay: 200
+	Warhead@Laser_Heavy: AreaDamage
+		ValidTargets: Vehicle, Structure
+		Falloff: 100, 100
+		Range: 0, 32
+	Projectile: LaserZap
+		Width: 350
+		Shape: Flat
+		Duration: 100
+		-HitAnim:
+	Burst: 100
+	BurstDelays: 1
+	Warhead@Condition: ApplyPhysicalState
+		PhysicalStateName: Magnetism
+		Amount: 200
+		ApplyFirepowerModifiers: false
+		ApplyDamageModifiers: false
+		Range: 500
+		ValidTargets: Vehicle
+	-Warhead@Effect:
+	-Warhead@EffectAir:
 
 RA2MagnetAA_elite:
-	Inherits: RA2Magnet_elite
+	Inherits@w70: ^Warhead_Laser_Heavy
+	Inherits@w71: ^Projectile_Laser_Heavy
+	Inherits@w72: ^Effect_Laser_Heavy
 	ValidTargets: Vehicle, Air, Structure
 	InvalidTargets: Paratrooper
 	Warhead@Laser_Heavy:
@@ -1535,6 +1606,27 @@ RA2MagnetAA_elite:
 	Warhead@Condition: ApplyPhysicalState
 		ValidTargets: Vehicle, Air
 		InvalidTargets: Paratrooper
+	ReloadDelay: 200
+	Range: 8032
+	Warhead@Laser_Heavy: AreaDamage
+		Falloff: 100, 100
+		Range: 0, 32
+	Projectile: LaserZap
+		Width: 350
+		Shape: Flat
+		Duration: 100
+		Color: e6000045
+		-HitAnim:
+	Burst: 100
+	BurstDelays: 1
+	Warhead@Condition: ApplyPhysicalState
+		PhysicalStateName: Magnetism
+		Amount: 200
+		ApplyFirepowerModifiers: false
+		ApplyDamageModifiers: false
+		Range: 500
+	-Warhead@Effect:
+	-Warhead@EffectAir:
 
 RA2PsychicJab:
 	Inherits: ^Warhead_CannonHE_Medium
