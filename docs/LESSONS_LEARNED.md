@@ -99,6 +99,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [Trait shadows: a proof field proves the TYPE, not the DISPATCH (2026-09-23)](#trait-shadows-a-proof-field-proves-the-type-not-the-dispatch-2026-09-23)
 - [Boot-gate: verify YOUR process made the menu marker (2026-09-23)](#boot-gate-verify-your-process-made-the-menu-marker-2026-09-23)
 - [Concurrent boot-gates kill each other — and a stale shared `engine/bin` lies (2026-09-23)](#concurrent-boot-gates-kill-each-other--and-a-stale-shared-enginebin-lies-2026-09-23)
+- [⛔ The shared main checkout stays on `master` — a stale branch there looks like master renamed (2026-09-23)](#-the-shared-main-checkout-stays-on-master--a-stale-branch-there-looks-like-master-renamed-2026-09-23)
 - [The canonical engine update pipeline (binding, uniform process)](#the-canonical-engine-update-pipeline-binding-uniform-process)
 - [YAML-only AI personalities and dead squad-manager keys (2026-08-21)](#yaml-only-ai-personalities-and-dead-squad-manager-keys-2026-08-21)
 - [Opt-in AI unit compositions (2026-08-24)](#opt-in-ai-unit-compositions-2026-08-24)
@@ -207,6 +208,31 @@ count as a locally-declared effect warhead (W6) — that is the correct way to p
 field drift on a template-provided effect node.
 
 ---
+
+## ⛔ The shared main checkout stays on `master` — a stale branch there looks like master renamed (2026-09-23)
+
+The maintainer's VS Code showed the main worktree as `devin/aurora/naming-ra1_allies` and asked why
+master had been renamed. It had not. `master` is the local branch, `origin/master` is GitHub's copy as
+last fetched, and the MAIN WORKTREE is just the folder `Documents/GitHub/Cameo-mod` — which had been
+left checked out on a disabled agent's branch, **358 commits behind master**, since 2026-09-07. So the
+maintainer's launches ran that old branch, its DLL was built from it, and 13 agent worktrees whose
+`engine/` is a junction to the main one were booting against it too.
+
+It cost more than confusion. That day another agent, looking for a commit, ran `git checkout
+origin/master -- .` and then `git reset --hard` in the main folder: six tracked files that had carried
+someone's uncommitted edits since at least 2026-09-21 (`.claude/settings.json`,
+`tools/hooks/bash_guard.py`, four Dune 2000 `rename_map_*.yaml`) came back as their committed state. No
+git object ever held those edits, so they are gone.
+
+**Rules:**
+- The main folder is `master`, fast-forwarded only, and nobody works in it — its `.agent-id` says so.
+  `Cameo-mod-fleet/sync_main_checkout.ps1` (scheduled every 15 min) fast-forwards it, rebuilds C# when
+  C# changed, and REFUSES — logging why — when the folder is on another branch or has tracked edits.
+- Work happens in a worktree of your own. Cross-tree questions use `git -C <path>` read verbs only.
+- `git checkout <ref> -- .` and `git reset --hard` overwrite tracked files with no undo. Never in a
+  folder you do not own, and in your own only after `git status` shows nothing you would miss.
+- Removing a worktree whose `engine/` is a junction: unlink the junction FIRST
+  (`[System.IO.Directory]::Delete(<path>\engine, $false)`), so nothing can recurse into the target.
 
 ## YAML-only AI personalities and dead squad-manager keys (2026-08-21)
 
