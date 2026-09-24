@@ -106,8 +106,8 @@ W4_BASELINE = 54    # dual ^Effect_ inherit; Apocalypse effect composition owns 
                     # the old prefix-only classifier. Same class as the W2
                     # ^Compatibility_* rename: measurement fix, not new debt.
 W5_BASELINE = 389   # more than one resolved MAIN warhead; merge-payload repairs
-W6_BASELINE = 683   # weapons declaring an effect warhead locally;
-                    # 694 -> 737 -> 692 -> 683: W27 batch-2 Ordos extraction
+W6_BASELINE = 644   # weapons declaring an effect warhead locally;
+                    # 694 -> 737 -> 692 -> 683 -> 644: W27 batch-3 D2k packs
                     # nodes locally; the follow-up pass inherits covering
                     # ^Effect_* templates and drops the typed pins, ending
                     # two weapons below the pre-W23 baseline
@@ -166,6 +166,7 @@ def scan_source():
     # ^DamagingExplosion, ...) mix Inherits/damage warheads/fields and stay
     # legacy W8 worklist items.
     fx_pure: dict[str, list[bool]] = collections.defaultdict(lambda: [False, True])
+    fx_inherits: dict[str, list[str]] = collections.defaultdict(list)
     for entry in man.weapons:
         path = pathlib.Path(str(entry))
         if not path.is_absolute():
@@ -192,8 +193,8 @@ def scan_source():
                             else:
                                 fx_pure[current][1] = False
                         # untyped Warhead@ residual pin: allowed
-                    elif mi and mi.group(2).startswith("^Effect_"):
-                        fx_pure[current][0] = True
+                    elif mi:
+                        fx_inherits[current].append(mi.group(2))
                     else:
                         fx_pure[current][1] = False
                 continue
@@ -204,7 +205,26 @@ def scan_source():
             mw = WARHEAD.match(line)
             if mw and mw.group(2) in EFFECT_TYPES:
                 local_fx[current].append(f"{mw.group(1)}: {mw.group(2)}")
-    fx_templates = {k for k, (typed, pure) in fx_pure.items() if typed and pure}
+    # a template is effect-kind when it has typed evidence (own effect-typed
+    # node or an inherit into the effect class) and every child is effect
+    # content; iterating to a fixpoint lets families derive from families
+    # (e.g. ^d2k_* -> ^d2k_*), which a single ^Effect_ pass misses.
+    fx_templates = set()
+    while True:
+        grown = set(fx_templates)
+        for t in set(fx_pure) | set(fx_inherits):
+            if t in grown:
+                continue
+            typed, pure = fx_pure[t]
+            fx_inh = [i for i in fx_inherits[t]
+                      if i.startswith("^Effect_") or i in grown]
+            other_inh = [i for i in fx_inherits[t]
+                         if not (i.startswith("^Effect_") or i in grown)]
+            if pure and not other_inh and (typed or fx_inh):
+                grown.add(t)
+        if grown == fx_templates:
+            break
+        fx_templates = grown
     return inherits, local_fx, fx_templates
 
 

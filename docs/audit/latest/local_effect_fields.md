@@ -4,41 +4,12 @@
 # the ratchet counts per maintainer ruling but stay listed below.
 
 Files scanned: 40
-Concrete weapons with local Explosions (L1): 384
-Concrete weapons with local ImpactSounds (L2): 376
-Exempt secondary-channel declarations (not ratcheted): 320
+Concrete weapons with local Explosions (L1): 369
+Concrete weapons with local ImpactSounds (L2): 360
+Exempt secondary-channel declarations (not ratcheted): 307
 
 | file | weapon | warhead | Explosions | ImpactSounds | line | exempt |
 |---|---|---|---|---|---|---|
-| ContentPacks\D2k\Ixian\yaml\weapons.yaml | D2K_155mm2 | Effect | YES | YES | 199 |  |
-| ContentPacks\D2k\Ixian\yaml\weapons.yaml | D2K_StormGun | Effect | YES | YES | 1639 |  |
-| ContentPacks\D2k\Ixian\yaml\weapons.yaml | D2K_StormGun | Effect2 | YES | YES | 1644 | exempt |
-| ContentPacks\D2k\Ixian\yaml\weapons.yaml | D2K_StormGunCymek | Effect2 | YES | YES | 1713 | exempt |
-| ContentPacks\D2k\Ixian\yaml\weapons.yaml | D2K_StormGunInf | Effect2 | YES | YES | 1686 | exempt |
-| ContentPacks\D2k\Ixian\yaml\weapons.yaml | DuelistTankCannon | Effect | YES | YES | 85 |  |
-| ContentPacks\D2k\Ixian\yaml\weapons.yaml | IxianBomb_EMP | Effect | YES | YES | 708 |  |
-| ContentPacks\D2k\Ixian\yaml\weapons.yaml | IxianDisable_EMP | Effect | YES | YES | 762 |  |
-| ContentPacks\D2k\Ixian\yaml\weapons.yaml | MongooseRocket | Effect | YES | YES | 2194 |  |
-| ContentPacks\D2k\Ixian\yaml\weapons.yaml | MongooseRocket | EffectWater | YES | YES | 2198 | exempt |
-| ContentPacks\D2k\Ixian\yaml\weapons.yaml | d2kStormLasher | Effect | YES | YES | 1579 |  |
-| ContentPacks\D2k\Ixian\yaml\weapons.yaml | d2kStormLasher | Effect2 | YES | YES | 1584 | exempt |
-| ContentPacks\D2k\Ixian\yaml\weapons.yaml | d2k_basq | Effect | YES | YES | 2093 |  |
-| ContentPacks\D2k\Ixian\yaml\weapons.yaml | d2k_munitions_explosion | Effect | YES | YES | 783 |  |
-| ContentPacks\D2k\Ixian\yaml\weapons.yaml | ixian_farasha | Effect | YES | YES | 1950 |  |
-| ContentPacks\D2k\Ixian\yaml\weapons.yaml | mtank_pri2 | Effect | YES | YES | 510 |  |
-| ContentPacks\D2k\Ixian\yaml\weapons.yaml | mtank_pri2 | EffectAir | YES | YES | 531 | exempt |
-| ContentPacks\D2k\Ixian\yaml\weapons.yaml | mtank_pri2 | EffectWater | YES | YES | 516 | exempt |
-| ContentPacks\D2k\Ixian\yaml\weapons.yaml | mtank_pri2 | ShieldHitEffect | - | YES | 528 | exempt |
-| ContentPacks\D2k\Shared\yaml\weapons.yaml | D2KUnitExplodeLarge | Effect | YES | YES | 595 |  |
-| ContentPacks\D2k\Shared\yaml\weapons.yaml | D2KUnitExplodeMed | Effect | YES | YES | 611 |  |
-| ContentPacks\D2k\Shared\yaml\weapons.yaml | D2K_TowerMissile | EffectAir | YES | YES | 550 | exempt |
-| ContentPacks\D2k\Shared\yaml\weapons.yaml | D2K_TowerMissile | EffectWater | YES | YES | 526 | exempt |
-| ContentPacks\D2k\Shared\yaml\weapons.yaml | D2K_TowerMissile | ShieldHitEffect | - | YES | 538 | exempt |
-| ContentPacks\D2k\Shared\yaml\weapons.yaml | D2kBuildingExplode | Effect | - | YES | 896 |  |
-| ContentPacks\D2k\Shared\yaml\weapons.yaml | D2kBuildingExplode | Effect2 | YES | YES | 891 | exempt |
-| ContentPacks\D2k\Shared\yaml\weapons.yaml | Fremen_RPG | Effect | YES | YES | 971 |  |
-| ContentPacks\D2k\Shared\yaml\weapons.yaml | OrniGun | 2Eff | YES | YES | 1128 | exempt |
-| ContentPacks\D2k\Shared\yaml\weapons.yaml | WallExplode | Effect | YES | YES | 901 |  |
 | ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AAHyperionMagnet | Effect | YES | YES | 2423 |  |
 | ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | ASDFKamikazeExplosion | Effect | YES | YES | 2914 |  |
 | ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianChaosTurret | Effect | YES | - | 2347 |  |
@@ -776,4 +747,4 @@ Exempt secondary-channel declarations (not ratcheted): 320
 | weapons\weapons.yaml | bowFire | 2Eff | - | YES | 13549 | exempt |
 | weapons\weapons.yaml | bowFire_AA | 2Eff | - | YES | 13524 | exempt |
 
-PASS: L1 384 <= 384, L2 376 <= 376
+PASS: L1 369 <= 369, L2 360 <= 360

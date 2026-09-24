@@ -121,7 +121,7 @@ D2KRepair:
 
 PhoenixRocket:
 	Inherits: ^D2KMissile
-	Inherits@fx: ^d2k_phoenix_rocket
+	Inherits@fx: ^d2k_atreides_phoenixrocket
 	ReloadDelay: 100
 	Burst: 8
 	Range: 4608
@@ -140,8 +140,6 @@ PhoenixRocket:
 			Medium: 125
 			Heavy: 100
 			Concrete: 40
-	Warhead@Concrete: DamagesConcrete
-		Damage: 1250
 	Warhead@Shrapnel: FireShrapnel
 		Weapon: PhoenixRocketShrapnel
 		Amount: 3

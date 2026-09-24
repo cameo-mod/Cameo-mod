@@ -1,14 +1,12 @@
 # audit_duplicate_keys — duplicate keys in one node (ambiguous merges)
 
-Files scanned: **658** — D1 ambiguous inheritance labels: **8**, D2 merged duplicates: **696**
+Files scanned: **658** — D1 ambiguous inheritance labels: **6**, D2 merged duplicates: **695**
 
 
 ## D1 — duplicate inheritance labels with different parent values
 
 | file | lines | node | key | values |
 |---|---|---|---|---|
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1891, 1893 | ixian_farasha | Inherits | ^TeslaWeapon vs ^Effect_Laser_Heavy |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 1722, 1723 | Laboratory_Bioball | Inherits | d2k_grenade vs ^d2k_ordos_flame_heavy |
 | mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 2352, 2353 | td_nod_stealthsoldier_bhreddarts | Inherits | ^TeslaChargedWeapon vs ^Effect_CannonAP_Medium |
 | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1958, 1959 | CabalHunterKillerLasers | Inherits | ^LaserWeapon vs ^Effect_Watersplash_Huge_RA2 |
 | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 2067, 2069 | CabalHunterKillerLasers_elite | Inherits | ^LaserWeapon vs ^Effect_Watersplash_Huge_RA2 |
@@ -31,8 +29,8 @@ Files scanned: **658** — D1 ambiguous inheritance labels: **8**, D2 merged dup
 | Warhead@FlakWeaponPercentage | 24 |
 | Warhead@ChaingunPercentage | 21 |
 | Warhead@LightChemicalWeaponPercentage | 20 |
-| Warhead@Effect | 17 |
 | Warhead@SmallArmsPercentage | 16 |
+| Warhead@Effect | 16 |
 | Voiced | 15 |
 | Warhead@HeavyCannonPercentage | 14 |
 | RevealsShroud | 14 |
@@ -70,72 +68,71 @@ Files scanned: **658** — D1 ambiguous inheritance labels: **8**, D2 merged dup
 | mods/cameo/chrome/ingame_observer.yaml | 316, 320 | Container@OBSERVER_WIDGETS > Children > Image@REPLAY_PLAYER | Visible |
 | mods/cameo/chrome/settings_display.yaml | 26, 80, 110, 141, 165, 191, 206, 228, 283, 344, 386, 399, 431, 444, 457, 470, 483, 496, 509 | Container@DISPLAY_PANEL > Children > ScrollPanel@SETTINGS_SCROLLPANEL > Children | Container@ROW |
 | mods/cameo/chrome/settings_display.yaml | 66, 269 | Container@DISPLAY_PANEL > Children > ScrollPanel@SETTINGS_SCROLLPANEL > Children | Container@SPACER |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 44, 95 | DuelistTankCannon | Projectile |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 70, 98 | DuelistTankCannon | Warhead@GrenadePercentage |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 78, 122 | DuelistTankCannon | Warhead@TankDestroyerCannonPercentage |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 174, 224 | D2K_155mm2 | Warhead@GrenadePercentage |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 546, 583 | IxRailgunDroneBullet | Projectile |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 581, 588 | IxRailgunDroneBullet | Warhead@FlakWeaponPercentage |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 582, 612 | IxRailgunDroneBullet | Warhead@TankDestroyerCannonPercentage |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 803, 880 | RashidanGun | Warhead@LightMissilePercentage |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 806, 902 | RashidanGun | Warhead@MediumMissilePercentage |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 809, 928 | RashidanGun | Warhead@SmallArmsPercentage |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 812, 845 | RashidanGun | Warhead@ChaingunPercentage |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1130, 1155 | HMG_Duelist | Projectile |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1133, 1259 | HMG_Duelist | Warhead@LightMissilePercentage |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1136, 1236 | HMG_Duelist | Warhead@GrenadePercentage |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1139, 1307 | HMG_Duelist | Warhead@SmallArmsPercentage |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1142, 1281 | HMG_Duelist | Warhead@MediumMissilePercentage |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1145, 1214 | HMG_Duelist | Warhead@FlakWeaponPercentage |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1148, 1180 | HMG_Duelist | Warhead@ChaingunPercentage |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1356, 1454 | HMG_Duelist_upgrade | Warhead@HeavyMissilePercentage |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1357, 1478 | HMG_Duelist_upgrade | Warhead@LightMissilePercentage |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1358, 1429 | HMG_Duelist_upgrade | Warhead@GrenadePercentage |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1359, 1530 | HMG_Duelist_upgrade | Warhead@SmallArmsPercentage |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1360, 1502 | HMG_Duelist_upgrade | Warhead@MediumMissilePercentage |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1361, 1405 | HMG_Duelist_upgrade | Warhead@FlakWeaponPercentage |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1362, 1381 | HMG_Duelist_upgrade | Warhead@ChaingunPercentage |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1729, 1753 | D2K_RocketsCymek | Projectile |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1750, 1780 | D2K_RocketsCymek | Warhead@GrenadePercentage |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1751, 1756 | D2K_RocketsCymek | Warhead@FlakWeaponPercentage |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1752, 1805 | D2K_RocketsCymek | Warhead@HeavyMissilePercentage |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1905, 1976 | ixian_farasha | Projectile |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1937, 1990 | ixian_farasha | Warhead@HeavyFlameWeaponPercentage |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1950, 1980 | ixian_farasha | Warhead@Effect |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 40, 87 | DuelistTankCannon | Projectile |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 66, 90 | DuelistTankCannon | Warhead@GrenadePercentage |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 74, 114 | DuelistTankCannon | Warhead@TankDestroyerCannonPercentage |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 170, 207 | D2K_155mm2 | Warhead@GrenadePercentage |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 483, 520 | IxRailgunDroneBullet | Projectile |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 518, 525 | IxRailgunDroneBullet | Warhead@FlakWeaponPercentage |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 519, 549 | IxRailgunDroneBullet | Warhead@TankDestroyerCannonPercentage |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 717, 783 | RashidanGun | Warhead@LightMissilePercentage |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 720, 805 | RashidanGun | Warhead@MediumMissilePercentage |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 723, 834 | RashidanGun | Warhead@SmallArmsPercentage |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 726, 759 | RashidanGun | Warhead@ChaingunPercentage |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1034, 1059 | HMG_Duelist | Projectile |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1037, 1153 | HMG_Duelist | Warhead@LightMissilePercentage |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1040, 1130 | HMG_Duelist | Warhead@GrenadePercentage |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1043, 1204 | HMG_Duelist | Warhead@SmallArmsPercentage |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1046, 1175 | HMG_Duelist | Warhead@MediumMissilePercentage |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1049, 1108 | HMG_Duelist | Warhead@FlakWeaponPercentage |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1052, 1084 | HMG_Duelist | Warhead@ChaingunPercentage |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1253, 1351 | HMG_Duelist_upgrade | Warhead@HeavyMissilePercentage |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1254, 1375 | HMG_Duelist_upgrade | Warhead@LightMissilePercentage |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1255, 1326 | HMG_Duelist_upgrade | Warhead@GrenadePercentage |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1256, 1427 | HMG_Duelist_upgrade | Warhead@SmallArmsPercentage |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1257, 1399 | HMG_Duelist_upgrade | Warhead@MediumMissilePercentage |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1258, 1302 | HMG_Duelist_upgrade | Warhead@FlakWeaponPercentage |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1259, 1278 | HMG_Duelist_upgrade | Warhead@ChaingunPercentage |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1584, 1608 | D2K_RocketsCymek | Projectile |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1605, 1635 | D2K_RocketsCymek | Warhead@GrenadePercentage |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1606, 1611 | D2K_RocketsCymek | Warhead@FlakWeaponPercentage |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1607, 1660 | D2K_RocketsCymek | Warhead@HeavyMissilePercentage |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1754, 1817 | ixian_farasha | Projectile |
+| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 1786, 1827 | ixian_farasha | Warhead@HeavyFlameWeaponPercentage |
 | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 63, 75 | 120mm_td | Projectile |
 | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 72, 109 | 120mm_td | Warhead@MediumChemicalWeaponPercentage |
 | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 73, 82 | 120mm_td | Warhead@LightChemicalWeaponPercentage |
 | mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 74, 141 | 120mm_td | Warhead@TankDestroyerCannonPercentage |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 718, 780 | eye_bomberguy | Projectile |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 733, 782 | eye_bomberguy | Warhead@GrenadePercentage |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 740, 806 | eye_bomberguy | Warhead@MediumChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 1435, 1437 | DeviatorMissile | Warhead@MediumChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 1436, 1464 | DeviatorMissile | Warhead@MediumMissilePercentage |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 1508, 1578 | DeviatorMissile_Artillery | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 1520, 1550 | DeviatorMissile_Artillery | Warhead@HeavyFlameWeaponPercentage |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 1749, 1797 | Laboratory_Bioball | Warhead@MediumChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 1763, 1821 | Laboratory_Bioball | Warhead@MediumFlameWeaponPercentage |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 1789, 1843 | Laboratory_Bioball | Warhead@ShieldHit |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 1856, 1914 | facedancer_grenade | Projectile |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 1875, 1961 | facedancer_grenade | Warhead@MediumChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 1883, 1916 | facedancer_grenade | Warhead@GrenadePercentage |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 1887, 2008 | facedancer_grenade | Warhead@ShrapnelWeaponPercentage |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 1891, 1939 | facedancer_grenade | Warhead@LightMissilePercentage |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 1895, 1986 | facedancer_grenade | Warhead@MediumMissilePercentage |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 2201, 2206 | autogun_tank | Projectile |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 2202, 2274 | autogun_tank | Warhead@HeavyAAWeaponPercentage |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 2203, 2250 | autogun_tank | Warhead@FlakWeaponPercentage |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 2204, 2298 | autogun_tank | Warhead@MediumMissilePercentage |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 2205, 2224 | autogun_tank | Warhead@ChaingunPercentage |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 2372, 2464 | ordos_airmine | Projectile |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 2394, 2564 | ordos_airmine | Warhead@TankDestroyerCannonPercentage |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 2406, 2515 | ordos_airmine | Warhead@LightChemicalWeaponPercentage |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 2416, 2472 | ordos_airmine | Warhead@FlakWeaponPercentage |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 2426, 2539 | ordos_airmine | Warhead@MediumMissilePercentage |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 2436, 2493 | ordos_airmine | Warhead@HeavyBombPercentage |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 2595, 2675 | ordos_lasertank | Projectile |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 2600, 2700 | ordos_lasertank | Warhead@FlakWeaponPercentage |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 2604, 2721 | ordos_lasertank | Warhead@MediumMissilePercentage |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 718, 778 | eye_bomberguy | Projectile |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 733, 780 | eye_bomberguy | Warhead@GrenadePercentage |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 740, 804 | eye_bomberguy | Warhead@MediumChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 1434, 1436 | DeviatorMissile | Warhead@MediumChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 1435, 1463 | DeviatorMissile | Warhead@MediumMissilePercentage |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 1507, 1577 | DeviatorMissile_Artillery | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 1519, 1549 | DeviatorMissile_Artillery | Warhead@HeavyFlameWeaponPercentage |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 1743, 1793 | Laboratory_Bioball | Warhead@MediumChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 1757, 1817 | Laboratory_Bioball | Warhead@MediumFlameWeaponPercentage |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 1781, 1839 | Laboratory_Bioball | Warhead@ShieldHit |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 1852, 1906 | facedancer_grenade | Projectile |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 1871, 1953 | facedancer_grenade | Warhead@MediumChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 1879, 1908 | facedancer_grenade | Warhead@GrenadePercentage |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 1883, 2000 | facedancer_grenade | Warhead@ShrapnelWeaponPercentage |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 1887, 1931 | facedancer_grenade | Warhead@LightMissilePercentage |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 1891, 1978 | facedancer_grenade | Warhead@MediumMissilePercentage |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 2189, 2194 | autogun_tank | Projectile |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 2190, 2262 | autogun_tank | Warhead@HeavyAAWeaponPercentage |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 2191, 2238 | autogun_tank | Warhead@FlakWeaponPercentage |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 2192, 2286 | autogun_tank | Warhead@MediumMissilePercentage |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 2193, 2212 | autogun_tank | Warhead@ChaingunPercentage |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 2360, 2452 | ordos_airmine | Projectile |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 2382, 2552 | ordos_airmine | Warhead@TankDestroyerCannonPercentage |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 2394, 2503 | ordos_airmine | Warhead@LightChemicalWeaponPercentage |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 2404, 2460 | ordos_airmine | Warhead@FlakWeaponPercentage |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 2414, 2527 | ordos_airmine | Warhead@MediumMissilePercentage |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 2424, 2481 | ordos_airmine | Warhead@HeavyBombPercentage |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 2583, 2663 | ordos_lasertank | Projectile |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 2588, 2688 | ordos_lasertank | Warhead@FlakWeaponPercentage |
+| mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml | 2592, 2709 | ordos_lasertank | Warhead@MediumMissilePercentage |
 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 1655, 1661 | JapaneseHovercraftFlakAAkWaveforce | Warhead@Railgun_Heavy |
 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 2610, 2640 | ArmoredCarMGWaveforce | Warhead@Railgun_Heavy_ExtraDamage |
 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 2668, 2696 | ArmoredCarMGAAWaveforce | Warhead@Railgun_Heavy_ExtraDamage |
@@ -765,5 +762,5 @@ Files scanned: **658** — D1 ambiguous inheritance labels: **8**, D2 merged dup
 | mods/cameo/weapons/wh40k.yaml | 354, 357 | WH40KShootaBoyzGun | Warhead@1Dam |
 
 
-**FAIL** — D1 count 8 exceeds the baseline 0: a new ambiguous inheritance label was introduced.
+**FAIL** — D1 count 6 exceeds the baseline 0: a new ambiguous inheritance label was introduced.
 

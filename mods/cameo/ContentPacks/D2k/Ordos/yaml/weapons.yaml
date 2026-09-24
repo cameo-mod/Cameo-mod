@@ -711,7 +711,7 @@ eye_bomberguy:
 	Inherits@3: ^MediumFlameWeapon
 	Inherits@4: ^ShrapnelWeapon
 	Inherits@5: ^HeavyBomb
-	Inherits@fx: ^d2k_ordos_eye_bomberguy
+	Inherits@fx: ^d2k_ordos_eye_bomberguy_2
 	ReloadDelay: 125
 	Range: 3905
 	Report: 15_UA05.wav, 15_UA00.wav, 15_UA01.wav
@@ -762,8 +762,6 @@ eye_bomberguy:
 		Damage: 10
 	-Warhead@Effect1:
 	-Warhead@Effect2:
-	Warhead@Concrete: DamagesConcrete
-		Damage: 1875
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@MediumChemicalWeapon:
@@ -835,8 +833,8 @@ D2K_155mm_turret:
 	Inherits@wh2: ^Warhead_Demolition_Heavy
 	Inherits@wh3: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Grenade_Light_D2K_155mm
-	Inherits@fx: ^Effect_Demolition_Heavy_D2K_155mm
 	Inherits@4: ^D2K_Cannon
+	Inherits@fx: ^d2k_ordos_d2k_155mm_turret
 	ReloadDelay: 74
 	Range: 10000
 	Report: MORTAR1.WAV
@@ -851,8 +849,6 @@ D2K_155mm_turret:
 	Warhead@CannonHE_Medium:
 		PercentageScale: 10000
 		Damage: 12000
-	Warhead@Concrete: DamagesConcrete
-		Damage: 5625
 	Warhead@CollapsedD2K_155mm_turretCannonHE_MediumPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -974,6 +970,11 @@ D2K_155mm_turret:
 		Damage: 48000
 		PercentageScale: 0
 
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
 Dune_SiegeMortar:
 	Inherits@finalmain: ^Warhead_Concussion_Medium_Flat
 	Inherits@wh: ^Warhead_Demolition_Light
@@ -1398,7 +1399,7 @@ DeviatorMissile:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@6: ^D2KMissile
-	Inherits@fx: ^d2k_ordos_deviatormissile
+	Inherits@fx: ^d2k_ordos_deviatormissile_2
 	ReloadDelay: 98
 	Range: 7070
 	Report: MISSLE1.WAV
@@ -1425,8 +1426,6 @@ DeviatorMissile:
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Structure, MCImmune
 		ValidRelationships: Neutral, Enemy
-	Warhead@Concrete: DamagesConcrete
-		Damage: 1000
 	MinRange: 1415
 	-Warhead@MissileAP_Heavy_Flat:
 	-Warhead@CannonHE_Heavy:
@@ -1689,7 +1688,7 @@ LeechJump:
 d2k_grenade:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Grenade_Light
-	Inherits@fx: ^d2k_ordos_d2k_grenade
+	Inherits@fx: ^d2k_ordos_d2k_grenade_2
 	ReloadDelay: 60
 	Range: 6000
 	MinRange: 1200
@@ -1711,16 +1710,11 @@ d2k_grenade:
 		ValidTargets: Ground, Water
 		Damage: 30000
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure
-	Warhead@Concrete: DamagesConcrete
-		Damage: 1875
 
 Laboratory_Bioball:
 	Inherits@collapsewh: ^Warhead_Chemical_Medium
 	Inherits: d2k_grenade
-	Inherits: ^d2k_ordos_flame_heavy
+	Inherits@fx: ^d2k_ordos_laboratory_bioball
 	ReloadDelay: 42
 	Range: 6500
 	MinRange: 1300
@@ -1767,8 +1761,6 @@ Laboratory_Bioball:
 		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@Concrete: DamagesConcrete
-		Damage: 1875
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 2
 		Duration: 50
@@ -1787,6 +1779,10 @@ Laboratory_Bioball:
 		Damage: 50000
 		PercentageScale: 0
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Duration: 8
+		Range: 1250
+		ValidTargets: Shielded
 		InvalidTargets: Air
 
 
@@ -1847,7 +1843,7 @@ facedancer_grenade:
 	Inherits@4: ^LightFlameWeapon
 	Inherits@6: ^HeavyBomb
 	Inherits@11: ^D2KMissile
-	Inherits@fx: ^d2k_ordos_facedancer_grenade
+	Inherits@fx: ^d2k_ordos_facedancer_grenade_2
 	ReloadDelay: 90
 	Range: 7250
 	MinRange: 1450
@@ -1901,10 +1897,6 @@ facedancer_grenade:
 		Damage: 180000
 		PercentageScale: 2222
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure
-		Chance: 15
 	Warhead@Concrete:
 		Damage: 750
 	-Warhead@LightFlameWeapon:
@@ -2029,7 +2021,6 @@ facedancer_grenade:
 			Superheavy: 9
 			Wood: 18
 GrenDeath:
-	Inherits@fx: ^d2k_ordos_grendeath
 	Warhead@EnemyDam: SpreadDamage
 		Damage: 10000
 		Spread: 0c512
@@ -2058,11 +2049,8 @@ GrenDeath:
 			Concrete: 30
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@2Smu: LeaveSmudge
-		SmudgeType: SandCrater, RockCrater
-	Warhead@Concrete: DamagesConcrete
-		Damage: 1875
 
+	Inherits@fx: ^d2k_ordos_grendeath_2
 SaboDeath:
 	Inherits: GrenDeath
 	Warhead@1Dam: SpreadDamage
@@ -3162,8 +3150,6 @@ Sound2:
 		Damage: 4000
 	Warhead@2Dam: SpreadDamage
 		Damage: 400
-	Warhead@Concrete: DamagesConcrete
-		Damage: 800
 
 WormSwallow:
 	ReloadDelay: 150
@@ -3177,7 +3163,6 @@ WormSwallow:
 		InvalidTargets: Structure, Air, DevourImmune
 
 SardDeath:
-	Inherits@fx: ^d2k_small_napalm
 	Warhead@1Dam: SpreadDamage
 		Damage: 3000
 		Spread: 0c256
@@ -3191,11 +3176,8 @@ SardDeath:
 			Concrete: 45
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@2Smu: LeaveSmudge
-		SmudgeType: SandCrater, RockCrater
-	Warhead@Concrete: DamagesConcrete
-		Damage: 450
 
+	Inherits@fx: ^d2k_ordos_sarddeath
 M_LMG:
 	Inherits: ^MG
 	ReloadDelay: 30
@@ -3521,9 +3503,6 @@ d2k_sard_crossbow:
 			Medium: 150
 			Heavy: 100
 		DamageTypes: TriggerProne, BulletDeath
-	Warhead@2Smu: LeaveSmudge
-		SmudgeType: SandCrater, RockCrater
-		InvalidTargets: Vehicle, Structure
 	Warhead@1Con: ApplyPhysicalState
 		PhysicalStateName: Poison
 		Amount: 5000
@@ -3532,6 +3511,7 @@ d2k_sard_crossbow:
 #       OG DUNE 2000
 ###################################################
 
+	Inherits@fx: ^d2k_ordos_d2k_sard_crossbow
 ^OCannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
@@ -3571,7 +3551,7 @@ LMG:
 
 d2kFlamegun:
 	Inherits: Flamer
-	Inherits@fx: ^d2k_ordos_d2kflamegun
+	Inherits@fx: ^d2k_ordos_d2kflamegun_2
 	ReloadDelay: 6
 	Range: 2048
 	Report: FLAMER1.WAV
@@ -3579,8 +3559,6 @@ d2kFlamegun:
 		Speed: 1c256
 	Warhead@Flame_Light:
 		Damage: 3200
-	Warhead@Concrete: DamagesConcrete
-		Damage: 100
 
 
 PhoenixRocketShrapnel:

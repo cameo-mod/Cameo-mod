@@ -463,13 +463,11 @@
 		ValidTargets: Ground, Water
 		Damage: 30000
 		PercentageScale: 9997
-	Warhead@EffectAir:
-		ImpactSounds: EXPLMD2.WAV
 
 D2K_TowerMissile:
 	Inherits: ^D2KMissile
 	Inherits@proj: ^Projectile_Missile_Heavy_D2K
-	Inherits@fx: ^Effect_MissileAP_Heavy_D2K
+	Inherits@fx: ^d2k_shared_d2k_towermissile
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 42
 	Range: 10684
@@ -510,58 +508,24 @@ D2K_TowerMissile:
 		MinimumLaunchAngle: 64
 	Warhead@MissileAP_Heavy:
 		Damage: 16000
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: SandCrater, RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneRock: LeaveSmudge
-		SmudgeType: RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@DuneSand: LeaveSmudge
-		SmudgeType: SandCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect:
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 12
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 750
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-	Warhead@RA2Scorch: LeaveSmudge
-		SmudgeType: RA2Scorch
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@GroundFire: SpawnActor
 		Actors: groundfire
 		Range: 1
 		ForceGround: true
 		OwnerType: InternalName
 		InternalOwner: Neutral
-	Warhead@EffectAir: CreateEffect
-		Explosions: big_explosion_air
-		ValidTargets: Air
-		ImpactSounds: EXPLLG2.WAV
-		ImpactActors: false
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.8
-		FadeFrames: 15
 
 # Migrated from legacy mods/cameo/weapons/d2k.yaml (Ruling 9)
 # Used by Atreides, Corrino, Harkonnen.
 
 mtank_pri:
 	Inherits: ^D2KMissile
+	Inherits@fx: ^d2k_shared_mtank_pri
 	ReloadDelay: 150
 	Burst: 4
 	BurstDelays: 25
@@ -574,12 +538,8 @@ mtank_pri:
 	Warhead@MissileAP_Heavy:
 		Damage: 16000
 		ValidTargets: Ground, Air
-	Warhead@Concrete: DamagesConcrete
-		Damage: 1000
 
 	MinRange: 2050
-	Warhead@EffectAir:
-		ImpactSounds: EXPLLG2.WAV
 
 # Migrated from legacy mods/cameo/weapons/d2k.yaml (Ruling 9)
 # Used by multiple D2k factions (explosion/death weapons).
@@ -587,32 +547,20 @@ mtank_pri:
 D2KUnitExplodeSmall:
 	Inherits: ^Explosion
 	Inherits@fx: ^d2k_self_destruct
-	Warhead@Effect:
-		ValidTargets: Ground, Air, Ship
 
 D2KUnitExplodeLarge:
 	Inherits: ^DamagingExplosionHE
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_large_explosion
-		ImpactSounds: EXPLSML4.WAV
-		ImpactActors: false
-		ExplosionPalette: effect75alpha
+	Inherits@fx: ^d2k_shared_d2kunitexplodelarge
 
 # Migrated from legacy mods/cameo/weapons/d2k.yaml (Ruling 9)
 # Used by multiple D2k factions.
 
 80mm_A:
 	Inherits: ^D2K_Cannon
-	Warhead@EffectAir:
-		ImpactSounds: EXPLMD2.WAV
 
 D2KUnitExplodeMed:
 	Inherits: ^DamagingExplosion
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_building
-		ImpactSounds: EXPLSML2.WAV
-		ImpactActors: false
-		ExplosionPalette: effect75alpha
+	Inherits@fx: ^d2k_shared_d2kunitexplodemed
 
 ^HeavyMachineGunProjectile:
 	Projectile: Bullet
@@ -652,8 +600,6 @@ Debris:
 	Warhead@Demolition_Light:
 		Damage: 16000
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@Effect:
-		ImpactSounds: EXPLSML1.WAV
 
 ^Debris2Legacy:
 	Inherits@wh: ^Warhead_Flame_Light
@@ -689,11 +635,10 @@ Debris2:
 		PercentageScale: 9997
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 50
-	Warhead@Effect:
-		ImpactSounds: EXPLSML2.WAV
 
 Debris3:
 	Inherits: Debris2
+	Inherits@fx: ^d2k_shared_debris3
 	Projectile: Bullet
 		Image: shrapnel3
 		TrailImage: small_trail2
@@ -701,8 +646,6 @@ Debris3:
 		Damage: 8000
 	Warhead@Flame_Light:
 		Damage: 8000
-	Warhead@Concrete: DamagesConcrete
-		Damage: 1350
 	-Warhead@Demolition_Light:
 	-Warhead@Flame_Light:
 	Warhead@Demolition_Light_Flat:
@@ -711,8 +654,6 @@ Debris3:
 		PercentageScale: 9994
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 50
-	Warhead@Effect:
-		ImpactSounds: EXPLSML2.WAV
 
 
 Debris4:
@@ -726,8 +667,6 @@ Debris4:
 		PercentageScale: 9997
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 50
-	Warhead@Effect:
-		ImpactSounds: EXPLSML2.WAV
 
 
 ################################
@@ -873,10 +812,6 @@ D2K_Rocket_Trooper:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
 		PercentageScale: 0
-	Warhead@EffectAir:
-		ImpactSounds: EXPLLG2.WAV
-	Warhead@Effect:
-		ImpactSounds: EXPLSML1.WAV
 
 WormJaw:
 	ReloadDelay: 10
@@ -888,23 +823,13 @@ WormJaw:
 
 D2kBuildingExplode:
 	Inherits: ^DamagingExplosionHE
-	Warhead@Effect2: CreateEffect
-		Explosions: d2k_building, d2k_self_destruct, d2k_large_explosion
-		ImpactSounds: EXPLSML4.WAV
-		ImpactActors: false
-		ExplosionPalette: effect75alpha
-	Warhead@Effect: CreateEffect
-		ImpactSounds: EXPLHG1.WAV
+	Inherits@fx: ^d2k_shared_d2kbuildingexplode
 
 
 WallExplode:
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_wall_explosion
-		ImpactSounds: EXPLHG1.WAV
-		ImpactActors: false
-		ExplosionPalette: effect75alpha
 
 
+	Inherits@fx: ^d2k_shared_wallexplode
 light_inf_lmg:
 	Inherits@finalmain: ^Warhead_Bullet_Light_Flat
 	Inherits@wh: ^Warhead_Bullet_Medium
@@ -954,7 +879,7 @@ light_inf_lmg_upgrade:
 
 Fremen_RPG:
 	Inherits: ^D2KMissile
-	Inherits@fx: ^Effect_MissileAP_Heavy
+	Inherits@fx: ^d2k_shared_fremen_rpg
 	ReloadDelay: 45
 	Range: 4864
 	ValidTargets: Air, Vehicle, Structure
@@ -965,22 +890,9 @@ Fremen_RPG:
 	-Warhead@DuneRock:
 	-Warhead@DuneSand:
 	-Warhead@RA2Crater:
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: SandCrater, RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_rocket_explosion
-		ImpactSounds: EXPLSML2.WAV
-		ExplosionPalette: effect75alpha
-		ImpactActors: false
-		ValidTargets: Ground, Air
 	Warhead@MissileAP_Heavy:
 		Damage: 4200
-	Warhead@Concrete: DamagesConcrete
-		Damage: 625
 	MinRange: 975
-	Warhead@EffectAir:
-		ImpactSounds: EXPLLG2.WAV
 
 
 HMG_fremen:
@@ -1096,11 +1008,10 @@ Sound:
 			Heavy: 99
 			Concrete: 77
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
-	Warhead@Concrete: DamagesConcrete
-		Damage: 1500
 
 
 
+	Inherits@fx: ^d2k_shared_sound
 OrniGun:
 	StartBurstReport: FREMODD1.WAV
 	Burst: 5
@@ -1125,25 +1036,17 @@ OrniGun:
 			Concrete: 33
 		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@2Eff: CreateEffect
-		Explosions: d2k_piffs
-		ImpactSounds: EXPLSML1.WAV
-		ImpactActors: false
-		ExplosionPalette: effect75alpha
-	Warhead@Concrete: DamagesConcrete
-		Damage: 1250
 
 
 
+	Inherits@fx: ^d2k_shared_ornigun
 HMG:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Light
-	Inherits@fx: ^Effect_Bullet_Light
+	Inherits@fx: ^d2k_shared_hmg
 	ReloadDelay: 20
 	Range: 3072
 	Report: 20MMGUN1.WAV
-	Warhead@Concrete: DamagesConcrete
-		Damage: 1800
 
 
 ordos_autogunturret:
@@ -1151,7 +1054,7 @@ ordos_autogunturret:
 	Inherits@2: ^Warhead_Bullet_Medium
 	Inherits@3: ^Warhead_CannonHE_Heavy
 	Inherits@4: ^Projectile_Bullet_Medium
-	Inherits@5: ^Effect_CannonHE_Heavy
+	Inherits@fx: ^d2k_shared_ordos_autogunturret
 	ReloadDelay: 22
 	Burst: 4
 	BurstDelays: 2
@@ -1171,17 +1074,11 @@ ordos_autogunturret:
 		ProjectileStreakTailColorAlpha: 176
 		ContrailLength: 0
 		Speed: 4000
-	Warhead@Effect:
-		Explosions: piffs
-	Warhead@EffectWater:
-		Explosions: water_piffs
 	-Warhead@CannonHE_Heavy:
 	-Warhead@Bullet_Light:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
-	Warhead@EffectAir:
-		ImpactSounds: EXPLLG2.WAV
 
 
 HMG_turret:
@@ -1189,7 +1086,7 @@ HMG_turret:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
-	Inherits@fx: ^Effect_Bullet_Medium
+	Inherits@fx: ^d2k_shared_hmg_turret
 	ReloadDelay: 22
 	Burst: 4
 	BurstDelays: 2
@@ -1205,13 +1102,11 @@ HMG_turret:
 		ValidTargets: Ground, Water
 		Damage: 4000
 		PercentageScale: 9975
-	Warhead@EffectWater:
-		ImpactSounds: splash9.aud
 
 d2k_laser:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
-	Inherits@fx: ^Effect_Laser_Heavy
+	Inherits@fx: ^d2k_shared_d2k_laser
 	Report: obelray1.aud
 	ReloadDelay: 25
 	Range: 7500
@@ -1226,8 +1121,6 @@ d2k_laser:
 	Warhead@Laser_Heavy:
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@EffectAir:
-		ImpactSounds: EXPLLG2.WAV
 
 D2K_155mm:	Inherits@finalmain: ^Warhead_CannonHE_Medium_Flat	Inherits: ^D2K155mmLegacy	Warhead@CollapsedD2K_155mmCannonHE_MediumPercentage: AreaDamagePercentage		ValidRelationships: Ally, Neutral, Enemy		FriendlyFireDamage: 50		FriendlyFireSpread: 50		ValidTargets: Ground, Water		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath		Damage: 600		PercentageDenominator: 10000		Versus:			Shield: 25			Scout: 20			Wood: 19			Light: 18			Steel: 17			Medium: 16			Concrete: 15			Heavy: 14			Superheavy: 13			None: 12			Flak: 11			Plate: 10			Heroic: 9			Fighter: 8			Bomber: 7			Helicopter: 6			Spaceship: 5		Falloff: 100, 50, 35		Range: 0, 300, 450	Warhead@CollapsedD2K_155mmConcussion_MediumPercentage: AreaDamagePercentage		ValidRelationships: Ally, Neutral, Enemy		FriendlyFireDamage: 50		FriendlyFireSpread: 50		ValidTargets: Ground, Water		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath		Damage: 600		PercentageDenominator: 10000		Versus:			Shield: 25			Scout: 20			None: 19			Wood: 18			Light: 17			Flak: 16			Steel: 15			Medium: 14			Plate: 13			Concrete: 12			Heavy: 11			Heroic: 10			Superheavy: 9			Fighter: 8			Bomber: 7			Helicopter: 6			Spaceship: 5		Falloff: 100, 72, 50, 32		Range: 0, 350, 700, 1050	Warhead@CollapsedD2K_155mmDemolition_HeavyPercentage: AreaDamagePercentage		ValidRelationships: Ally, Neutral, Enemy		FriendlyFireDamage: 50		FriendlyFireSpread: 50		ValidTargets: Ground, Water		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath		Damage: 600		PercentageDenominator: 10000		Versus:			Shield: 35			Wood: 25			Steel: 24			Concrete: 23			None: 22			Flak: 21			Plate: 20			Heroic: 19			Scout: 18			Light: 17			Medium: 16			Heavy: 15			Superheavy: 14			Fighter: 13			Bomber: 12			Helicopter: 11			Spaceship: 10		Falloff: 100, 45, 18		Range: 0, 466, 932	Warhead@CollapsedD2K_155mmDemolition_LightPercentage: AreaDamagePercentage		ValidRelationships: Ally, Neutral, Enemy		FriendlyFireDamage: 50		FriendlyFireSpread: 50		ValidTargets: Ground, Water		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath		Damage: 600		PercentageDenominator: 10000		Versus:			Shield: 17			Wood: 16			Steel: 15			Concrete: 14			None: 13			Flak: 12			Plate: 11			Heroic: 10			Scout: 9			Light: 8			Medium: 7			Heavy: 6			Superheavy: 5			Fighter: 4			Bomber: 3			Helicopter: 2			Spaceship: 1		Falloff: 100, 45, 18		Range: 0, 233, 466	-Warhead@CannonHE_Medium:	-Warhead@Concussion_Medium:	-Warhead@Demolition_Heavy:	-Warhead@Demolition_Light:	Warhead@CannonHE_Medium_Flat:		ValidTargets: Ground, Water		Damage: 48000		PercentageScale: 0
 ## Paired effect+sound templates — D2k visuals with their canonical D2k sounds.

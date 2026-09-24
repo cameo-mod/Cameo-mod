@@ -27,7 +27,7 @@ A number in prose is true only on the day it is written. These are the claims a 
 | `signed_off_class_anchors` | 0 | 0 | ✅ |
 | `warhead_family_reach` | 1530 | 1530 | ✅ |
 | `unconverted_template_inheritors` | 827 | 827 | ✅ |
-| `ledgers_drifted` | 0 | 3 | **MISMATCH** |
+| `ledgers_drifted` | 0 | 6 | **MISMATCH** |
 | `armament_multi_role_actors` | 104 | 104 | ✅ |
 | `armament_air_role_invisible_to_the_name_test` | 41 | 41 | ✅ |
 | `dta_projectile_roles_resolved` | 60 | 60 | ✅ |

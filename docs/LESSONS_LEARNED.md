@@ -2473,3 +2473,29 @@ condition it replaced":
    expression on `||`/`&&`, strip `!`, and compare whole tokens before appending
    (`|| blinded` went to exactly the 46 sites carrying a real `disabled` token, not
    the 48 lines grep counted).
+
+---
+
+### W27 family-extraction rules that survived verification (2026-09-25)
+
+Extracting inline `Warhead@` effect nodes into `^d2k_*` families taught four
+non-obvious rules, each learned from a red audit:
+
+1. **`-X:` cancels need a provider.** Emitting `-Warhead@X:` before every
+   redeclare inside a derivation family produced 22 orphan cancels — a
+   purely-local stripped node has no parent copy to cancel. Cancel only when
+   `parent_flat` contains the channel.
+2. **Family purity forbids non-effect types.** A pin like
+   `Warhead@ShieldHit: GrantExternalCondition` inside the family flips it to
+   "legacy" (W8). Those channels must be pinned at WEAPON level as a trailing
+   local typed node instead.
+3. **…but you cannot mask them either.** `-Warhead@X:` inside the family
+   strips the type from a bare local `Warhead@X:` pin that relied on the
+   parent for its type → empty-type NRE. Full local redeclare is the only
+   safe form.
+4. **Edge classification must match the audit's own predicate.** W4 counts
+   `^Effect_`-PREFIXED parents plus fixpoint-classified families. An impure
+   `^Effect_*` template (e.g. `^Effect_Magic_Heavy`) is an fx edge for the
+   audit but never enters `fx_templates` — a removal filter using only the
+   fixpoint set leaves the old edge in place and the weapon grows a second
+   fx edge (+1 W4 each).

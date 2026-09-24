@@ -11997,3 +11997,45 @@ fleet board; guard added (refuse non-`-` targets).
 
 **Awaiting:** maintainer merge call on #472; Claude's ExtraDamage ruling for the held
 Tesla/Laser/Railgun/ChargedTesla edges.
+## 2026-09-25 — DAWN: W27 batch-3 — all six D2k pack weapon files (47 weapons, 46 families)
+
+**Scope:** every remaining inline `Warhead@` effect node across Atreides, Corrino,
+Harkonnen, Ixian, Ordos and Shared pack weapon files extracted into
+`mods/cameo/weapons/effects_d2k.yaml`. 117 nodes stripped across 61 weapons;
+47 weapons rewired to 46 `^d2k_*` effect families.
+
+**Model that finally held (correct-by-construction):**
+- Family = `Inherits: <weapon's old fx parent>` (derivation), so channels the
+  parent supplies — including non-effect types like `GrantExternalCondition`
+  (`ShieldHit`) and `SpawnActor` (`GroundFire`) — keep flowing untouched.
+- Pin only channels where base-resolution differs from the parent AND that
+  were locally stripped or are effect-typed. Emit `-Warhead@X:` before a
+  redeclare **only when the parent actually supplies that channel** —
+  emitting it unconditionally produced 22 orphan cancels.
+- Non-effect channels whose base value differs from the parent are pinned at
+  WEAPON level (a trailing typed local node): pinning them in the family
+  breaks the shape audit's purity rule, and masking them (`-X:` with no
+  redeclare) strips the type from a bare local pin → empty-type NRE class.
+- The fx edge moves to the LAST `Inherits` slot so later bundle parents
+  (`^D2KMissile` &co.) cannot override family pins.
+- Edge detection must use the audit's own predicate (`^Effect_` prefix OR
+  fixpoint-classified family), not `in fx_templates` alone — impure
+  `^Effect_*` templates like `^Effect_Magic_Heavy` are fx edges for W4 but
+  never enter the fixpoint set.
+
+**Verification:**
+- Resolve-diff vs HEAD across all six files: **0 diffs / 177 weapons**.
+- `audit_orphan_cancels.py`: 0 (was 22 under unconditional-cancel emit).
+- `find_empty_warhead.py`: 0.
+- `audit_weapon_shape.py`: W8 637 (= ratchet), W4 54 (= ratchet),
+  W6 683 -> **644** (lower-only ratchet locked in).
+- `audit_local_effect_fields.py`: L1 384 -> **369**, L2 376 -> **360**
+  (ratchet lowered).
+- `audit_effect_pairings.py`: PASS (silent 396 <= 396, foreign 9 <= 9).
+- `audit_duplicate_inherits.py`: no weapon-chain regressions; remaining
+  findings are pre-existing actor multi-path reaches.
+
+**Fleet note:** branch `devin/dawn/w27-ordos` holds this on top of Ordos
+batch-2 (`d8762e3d6`); push waits on PR #480 + Ember's #477 report refresh
+per landing order. Corrino required no wiring (all its stripped nodes
+resolved identically through existing parents).
