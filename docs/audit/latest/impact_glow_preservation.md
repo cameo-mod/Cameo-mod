@@ -14,5 +14,5 @@ obsolete glow/no-glow effect variants: 0
 three-way weapons with inline ^ImpactGlow: 0
 bad glow-tier configuration: 0
 informational non-sprite effects: 3
-informational legacy inline glows: 2
+informational legacy inline glows: 1
 result: PASS

@@ -14,6 +14,7 @@
 
 Sound2:
 	Inherits: Sound
+	Inherits@fx: ^d2k_atreides_sound2
 	Range: 5632
 	ReloadDelay: 40
 	Projectile: AreaBeam
@@ -24,8 +25,6 @@ Sound2:
 		Damage: 4000
 	Warhead@2Dam: SpreadDamage
 		Damage: 400
-	Warhead@Concrete: DamagesConcrete
-		Damage: 800
 
 
 OrniBomb:
@@ -39,10 +38,14 @@ OrniBomb:
 
 
 OrniBombC:
-	Inherits: OrniBomb
+	Inherits@w71: ^Warhead_Demolition_Heavy_D2K_Orni
+	Inherits@w72: ^Projectile_GravityBomb_D2K
+	Inherits@w73: ^Effect_Demolition_Heavy_D2K_Orni
 	Range: 2500
 
 
+	BurstDelays: 5
+	Burst: 5
 OrniMissile:
 	Inherits: PhoenixRocket
 	Inherits@wh: ^Warhead_MissileHE_Heavy
@@ -66,17 +69,35 @@ OrniMissile:
 
 
 OrniGunC:
-	Inherits: OrniGun
+	Inherits@w71: ^d2k_shared_ornigun
 	Range: 6000
 	ValidTargets: Ground, Air
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Ground, Air
 		Damage: 800
+		Versus:
+			Heavy: 99
+			Concrete: 33
+			Light: 123
+			None: 333
+			Medium: 111
+			Wood: 66
+		Falloff: 100, 33
+		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
+		Spread: 333
+		DamageCalculationType: ClosestTargetablePosition
 	MinRange: 1200
 	Warhead@2Eff:
 		ImpactSounds: EXPLSML1.WAV
 
 
+	Projectile: InstantHit
+		Inaccuracy: 1c256
+		InaccuracyType: PerCellIncrement
+	BurstDelays: 2
+	Burst: 5
+	StartBurstReport: FREMODD1.WAV
+	ReloadDelay: 25
 Fremen_S:
 	Inherits: ^MG
 	Inherits@fx: ^d2k_fremen_s
@@ -121,7 +142,7 @@ D2KRepair:
 
 PhoenixRocket:
 	Inherits: ^D2KMissile
-	Inherits@fx: ^d2k_phoenix_rocket
+	Inherits@fx: ^d2k_atreides_phoenixrocket
 	ReloadDelay: 100
 	Burst: 8
 	Range: 4608
@@ -140,8 +161,6 @@ PhoenixRocket:
 			Medium: 125
 			Heavy: 100
 			Concrete: 40
-	Warhead@Concrete: DamagesConcrete
-		Damage: 1250
 	Warhead@Shrapnel: FireShrapnel
 		Weapon: PhoenixRocketShrapnel
 		Amount: 3

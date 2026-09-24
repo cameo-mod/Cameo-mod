@@ -64,7 +64,7 @@ This residual is included in measured output but excluded from `k_flat` and `dps
 
 | weapon | context-adjusted residual per shot |
 |---|--:|
-| `AsianTurretPlasma` | +2.3982 |
+| `AsianTurretPlasma` | +2.3983 |
 | `AsianTwinPlasma_elite` | +2.1462 |
 | `AsianTwinPlasma` | +2.0647 |
 | `Tentacle` | +2.0101 |
@@ -72,21 +72,21 @@ This residual is included in measured output but excluded from `k_flat` and `dps
 | `FutureMechPlasma_elite` | +1.9296 |
 | `AsianSinglePlasma_elite` | +1.9017 |
 | `FutureMechPlasma` | +1.8585 |
-| `AsianSinglePlasma` | +1.8558 |
+| `AsianSinglePlasma` | +1.8559 |
 | `ra1_soviets_btr80_machinegun_tesla` | +1.7732 |
 | `ra1_soviets_btr80_machinegun_tesla_arc` | +1.7732 |
 | `Napalm` | +1.7531 |
-| `edenMobileDefenceLaser` | +1.7509 |
 | `CabalMantisGun` | +1.7101 |
-| `RA2LasherLaser` | +1.7089 |
+| `RA2LasherLaser` | +1.7090 |
 | `AsianChemicalBombs` | +1.6970 |
 | `ra1_allies_alliedgunturret_cannon` | +1.6848 |
 | `NapalmA10Carrier` | +1.6645 |
 | `TSTurretLaser` | +1.6518 |
 | `TSCABALPlasmaFire` | +1.6518 |
 | `d2kChainGun_upgrade` | +1.6484 |
-| `schwarzermond_lunarsoldier_rifle_yellow` | +1.6357 |
-| `schwarzermond_lunarsoldier_rifle_amplified` | +1.6357 |
+| `edenMobileDefenceLaser` | -1.6458 |
+| `schwarzermond_lunarsoldier_rifle_yellow` | +1.6358 |
+| `schwarzermond_lunarsoldier_rifle_amplified` | +1.6358 |
 | `TSLaserTurretLaser` | +1.6187 |
 | `Lunar_YellowUbermenschLaser_elite` | +1.6063 |
 | `Lunar_AmplifiedUbermenschLaser_elite` | +1.6063 |

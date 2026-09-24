@@ -431,12 +431,20 @@ SCDevourerAA:
 	Warhead@ArrowWeaponPercentage:
 		ValidTargets: Air
 sc_zerg_devourer_acidcloud_aa:
-	Inherits: AnthraxCloudPurpleLarge
+	Inherits@w71: ^Warhead_Toxic_Light
 	ValidTargets: Air
 	# SmokeParticle impacts directly: the warhead mask controls collateral.
 	Warhead@Toxic_Light:
 		ValidTargets: Air
+		DamageTypes: Prone100Percent, TiberiumDeath, RA2VirusDeath
+		AffectsParent: True
+		Falloff: 100, 30, 10, 0
+		Spread: 666
+		Damage: 213
+		PercentageScale: 93897
 
+	Projectile: InstantExplode
+	ReloadDelay: 1
 ScourgeExplosion:
 	Inherits: SCScourgeExplosion
 	Range: 2000
@@ -1274,7 +1282,16 @@ DefilerPlague:
 		ImpactSounds: zulhit00.aud
 
 RemovableDebuffDummy:
-	Inherits: GLAnthraxBlueLarge
+	Warhead@Cloud:
+		Duration: 450
+		Sequences: blue_toxins
+		Weapon: AnthraxCloudBlueLarge
+		Delay: 5
+		Count: 1
+		Speed: 12, 25
+		TurnRate: 5
+		Image: explosion
+		Palette: alpha25
 	Warhead@Cloud: SpawnSmokeParticle
 		Duration: 175
 		Count: 1

@@ -862,15 +862,9 @@ GhostSniperLockdown:
 		Falloff: 100, 0
 		PercentageScale: 2000
 		ValidTargets: Ground, Water, Air
-		Damage: 24000
+		Damage: 44000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
-		Spread: 1
-		Falloff: 100, 0
-		ValidTargets: Ground, Water, Air
-		ValidRelationships: Enemy, Neutral
-		Damage: 20000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	-Warhead@Tesla_Super_ExtraDamage:
 	Warhead@SniperMediumMissile:
 		ValidRelationships: Enemy, Neutral
 		Damage: 20000
@@ -1077,15 +1071,9 @@ SpecterSniperLockdown:
 		Falloff: 100, 0
 		PercentageScale: 2000
 		ValidTargets: Ground, Water, Air
-		Damage: 48000
+		Damage: 88000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
-		Spread: 1
-		Falloff: 100, 0
-		ValidTargets: Ground, Water, Air
-		ValidRelationships: Enemy, Neutral
-		Damage: 40000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	-Warhead@Tesla_Super_ExtraDamage:
 	Warhead@SniperMediumMissile:
 		ValidRelationships: Enemy, Neutral
 		Damage: 40000
@@ -2997,7 +2985,7 @@ MedicFlare:
 	Warhead@Flame_Light:
 		ValidTargets: Vehicle, Infantry, Ship, Submarine, Defense
 		InvalidTargets: wall
-		Damage: 7000
+		Damage: 7600
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Vehicle, Infantry, Ship, Submarine, Defense
 		Damage: 1
@@ -3015,31 +3003,6 @@ MedicFlare:
 	-Warhead@LaserExtraDamage:
 	-Warhead@LaserWeapon:
 	-Warhead@LightFlameWeapon:
-	Warhead@PreservedFlat_LaserExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Spread: 300
-		Damage: 600
-		Versus:
-			REFLECTOR: 50
-			Shield: 100
-			None: 1
-			Flak: 1
-			Plate: 1
-			Heroic: 1
-			Superheavy: 1
-			Heavy: 1
-			Medium: 1
-			Light: 1
-			Scout: 1
-			Steel: 1
-			Concrete: 1
-			Wood: 1
-			Fighter: 1
-			Bomber: 1
-			Helicopter: 1
-			Spaceship: 1
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		UpdatesUnitStatistics: false
 	Projectile:
 		ContrailZOffset: 4000
 	Warhead@Effect:
@@ -3195,11 +3158,8 @@ ScienceVessel_EMP:
 		Spread: 2000
 	Warhead@Tesla_Super:
 		ValidTargets: Shielded
-		Damage: 100000
-	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
-		DamageTypes: Tesla
-		ValidTargets: Shielded
-		Damage: 50000
+		Damage: 150000
+	-Warhead@Tesla_Super_ExtraDamage:
 	Warhead@Effect: CreateEffect
 		Explosions: pulse_explosion
 		ExplosionPalette: tseffect

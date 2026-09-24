@@ -9,8 +9,8 @@ tsioncannon: ALSO-USED (13)
   mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml:5253: 		RingImage: tsioncannon
   mods\cameo\ContentPacks\RedAlert2Mod\Consortium\yaml\buildings.yaml:384: 		Effect: tsioncannon
 ionsfx: ALSO-USED (3)
-  mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:3446: 		Image: ionsfx
-  mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:3450: 		TrailImage: ionsfx
+  mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:3935: 		Image: ionsfx
+  mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:3939: 		TrailImage: ionsfx
   mods\cameo\sequences\misc.yaml:3472: 		Filename: ionsfx.shp
 tspodring: ALSO-USED (3)
   mods\cameo\sequences\misc.yaml:2636: 	tspodring:
@@ -18,9 +18,12 @@ tspodring: ALSO-USED (3)
   mods\cameo\weapons\redalert2mod.yaml:481: 		HelixAnimSequence: tspodring
 tsmcnealmechdrop: ALSO-USED (1)
   mods\cameo\weapons\heroes.yaml:799: 		Image: tsmcnealmechdrop
-tsdroppod: ALSO-USED (2)
+tsdroppod: ALSO-USED (5)
   mods\cameo\ContentPacks\TiberianSun\GDI\yaml\aircraft.yaml:499: 		Image: tsdroppod
-  mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1923: 		Image: tsdroppod
+  mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1896: 		Image: tsdroppod
+  mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1916: 		Image: tsdroppod
+  mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1931: 		Image: tsdroppod
+  mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1945: 		Image: tsdroppod
 hakurei_giphy: ALSO-USED (2)
   mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:2067: 		Image: hakurei_giphy
   mods\cameo\sequences\misc.yaml:4541: 		Filename: hakurei_giphy.shp

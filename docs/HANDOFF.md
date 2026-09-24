@@ -335,16 +335,19 @@ Building the map with the fold present correctly refused: *"armament_pairing.jso
 fingerprints are incomplete or stale: changed ['tools/reference/extract_ini_units.py']"*. That is
 why the fold was reverted off #393 onto its own branch.
 
-### ⛔ OPEN — `td_nod_lasercorvette`'s obelisk laser never fires
+### ✅ RESOLVED — `td_nod_lasercorvette`'s obelisk laser never fires — fixed by Codex in #395
 
-`AttackTurretedCharged.Attacking` does not filter by armament, and OpenRA notifies EVERY
+`AttackTurretedCharged.Attacking` did not filter by armament, and OpenRA notifies EVERY
 `INotifyAttack` trait when ANY armament fires; with `ShotsPerCharge` defaulting to 1, each
-**secondary** missile executes `ChargeLevel = 0`. Primary needs 50 uninterrupted ticks
+**secondary** missile executed `ChargeLevel = 0`. Primary needs 50 uninterrupted ticks
 (`ChargeLevel 50` @ `ChargeRate 1`); the secondary's longest gap is 35 (`ReloadDelay 35`,
-`Burst 2`, `BurstDelays 7`). **35 < 50 ⇒ 0 shots in 3000 simulated ticks.** CA's own trait warns
-it suits single-weapon units only. Options, none applied: `ChargeRate: 2`, `ChargeLevel: 40`, or
-a NEW Cameo trait filtering the notifier — a same-name shadow loses, since CA precedes Cameo in
-the assembly order. **Awaiting Codex's review; it is a balance value either way.**
+`Burst 2`, `BurstDelays 7`). **35 < 50 ⇒ 0 shots in 3000 simulated ticks.**
+
+**Fix (landed, `98f75ce99`):** `AttackTurretedCharged` gained
+`ChargeConsumingArmaments` — `INotifyAttack.Attacking` now returns early when the firing
+armament isn't listed, and the corvette sets `ChargeConsumingArmaments: primary`. The
+secondary missiles no longer reset the primary's charge. Verified in tree:
+`naval.yaml` carries the field and the CA trait honours it.
 
 ### ⚠ ENVIRONMENT
 

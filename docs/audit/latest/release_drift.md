@@ -1,11 +1,11 @@
 # audit_release_drift - measured against the build players played
 
 
-baseline: **playtest-20260709** (`8c238ffc3`), 1912 weapons · 1343 shared with the tree · **1187 unchanged**
+baseline: **playtest-20260709** (`8c238ffc3`), 1912 weapons · 1343 shared with the tree · **1171 unchanged**
 
 | code | check | count | ratchet |  |
 |---|---|---|---|---|
-| D1 | INFLATED - deals more than it shipped | 100 | 133 | PASS |
+| D1 | INFLATED - deals more than it shipped | 116 | 133 | PASS |
 | D2 | WEAKENED - deals less than it shipped | 56 | 62 | PASS |
 | D3 | EXTREME - 3x or worse, either way | 17 | 27 | PASS |
 | D4 | UNMATCHED - in the release, gone under that name | 569 | 335 | FAIL |
@@ -17,7 +17,7 @@ baseline: **playtest-20260709** (`8c238ffc3`), 1912 weapons · 1343 shared with 
 | weapon | shipped | now | x | mains |
 |---|---|---|---|---|
 | AsianTSIonCannon | 30000 | 230000 | 7.67 | 3 -> 4 |
-| TSIonCannon | 38000 | 238000 | 6.26 | 3 -> 4 |
+| TSIonCannon | 38000 | 254000 | 6.68 | 3 -> 4 |
 | MadcapGun | 6000 | 36000 | 6.00 | 3 -> 1 |
 | MarineMG | 6000 | 36000 | 6.00 | 3 -> 1 |
 | NaxiAlienPistol | 4000 | 24000 | 6.00 | 2 -> 1 |
@@ -44,7 +44,7 @@ Only the 194 pinned ownership renames are followed. Wrapper branches, unreviewed
 |---|---|
 | matched | 1499 |
 | unmatched | 413 |
-| inflated | 125 |
+| inflated | 141 |
 | weakened | 81 |
 | extreme | 22 |
 | accepted | 30 |
@@ -65,7 +65,7 @@ Recovered **156** release identities hidden by name-only matching. Raw D4 and al
 | 70mm | td_nod_lighttank_70mm | 6000 | 14679 | 2.45 | 1 -> 1 | inflated |
 | ArtilleryShellUpgrade | td_nod_artillery_artilleryshellupgrade | 36000 | 81296 | 2.26 | 6 -> 1 | inflated |
 | BHRedDarts | td_nod_stealthsoldier_bhreddarts | 10000 | 17820 | 1.78 | 5 -> 1 | inflated |
-| BlackHandLaser | td_nod_lasertrooper_blackhandlaser | 30000 | 32400 | 1.08 | 1 -> 1 | inflated |
+| BlackHandLaser | td_nod_lasertrooper_blackhandlaser | 30000 | 33048 | 1.10 | 1 -> 1 | inflated |
 | BoxerCannonAG | td_gdi_boxer_boxercannonag | 12000 | 6000 | 0.50 | 6 -> 1 | weakened |
 | ChemRocketsExplosion | td_nod_chemicalrocketsoldier_chemrocketsexplosion | 18000 | 12000 | 0.67 | 3 -> 1 | weakened |
 | FireballLauncherBuggy | td_nod_buggy_fireballlauncherbuggy | 2000 | 1948 | 0.97 | 1 -> 1 | weakened |

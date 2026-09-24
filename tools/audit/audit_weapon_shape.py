@@ -88,7 +88,10 @@ W1_BASELINE = 576   # historical count ratchet, kept for provenance; W1_RATE_BP 
 # Checks gated on a SHARE of the corpus instead of an absolute count.
 RATE_CHECKS: dict[str, int] = {"W1": W1_RATE_BP}
 RED = ' ⛔'
-W2_BASELINE = 281   # dual ^Warhead_ inherit; 226 -> 177 by the dead-inherit slice
+W2_BASELINE = 123   # 122 -> 123: restored PulseMissile (drain-minified dead blob ->
+                    # live; dual ^Warhead_Tesla_{Heavy,Super} is inherent to its
+                    # multi-warhead superweapon design). Pre-drain debt re-exposed.
+                                        # (#482/#488/#489 sweep wave, measured on-branch); was:   # dual ^Warhead_ inherit; 226 -> 177 by the dead-inherit slice
                     # (was 210 before; the 226 regression is repaid and then some).
                     # 177 -> 281 re-baseline 2026-09-24 (maintainer order, Claude
                     # re-verified): the R12 ^Compatibility_* -> ^Warhead_* rename
@@ -97,8 +100,8 @@ W2_BASELINE = 281   # dual ^Warhead_ inherit; 226 -> 177 by the dead-inherit sli
                     # ccbfd383c = 283, master 281 after #478). The un-renamed
                     # count is ~175, i.e. real debt IMPROVED; W23 removes the
                     # renamed _Flat/ExtraDamage shims as it lands.
-W3_BASELINE = 12    # dual ^Projectile_ inherit (21->12: same collapse)
-W4_BASELINE = 54    # dual ^Effect_ inherit; Apocalypse effect composition owns its overrides.
+W3_BASELINE = 7     # 12 -> 7 post-rebase resync onto 86577a7aa; was:    # dual ^Projectile_ inherit (21->12: same collapse)
+W4_BASELINE = 41    # 52 -> 41 post-rebase resync onto 86577a7aa; was:    # dual ^Effect_ inherit; Apocalypse effect composition owns its overrides.
                     # 51 -> 54 re-baseline 2026-09-23: effect-kind detection now
                     # recognises ^<game>_<stem> derivations (Inherits -> ^Effect_*,
                     # e.g. ^d2k_laser_heavy, ^CabalMissileEffect, ^RA2EliteEffects),
@@ -106,20 +109,34 @@ W4_BASELINE = 54    # dual ^Effect_ inherit; Apocalypse effect composition owns 
                     # the old prefix-only classifier. Same class as the W2
                     # ^Compatibility_* rename: measurement fix, not new debt.
 W5_BASELINE = 389   # more than one resolved MAIN warhead; merge-payload repairs
-W6_BASELINE = 692   # weapons declaring an effect warhead locally;
-                    # 694 -> 737 -> 692: W23 pins first declared effect
-                    # nodes locally; the follow-up pass inherits covering
-                    # ^Effect_* templates and drops the typed pins, ending
-                    # two weapons below the pre-W23 baseline
+W6_BASELINE = 443   # 442 -> 443: restored PulseMissile re-exposes its 5 local
+                    # effect warheads (CreateEffect/LeaveSmudge/Shake). Pre-drain debt.
+                    # master itself measures 709 (known master debt vs its
+                    # own 692 baseline); this branch is still -243 vs master.
+                    # was:   # weapons declaring an effect warhead locally;
+                    # 694 -> 737 -> 692 -> 683 -> 644 -> 602 -> 514 -> 448 -> 447:
+                    # W27 batches 3-6 extracted D2k, TD, TS pack nodes plus
+                    # the legacy d2k/tiberiandawn/tiberiansun files into
+                    # per-game effects_*.yaml family libraries.
 # W7/W8 added 2026-09-12 after the maintainer restated the law: the three inherits must come
 # from a TEMPLATE, "and NEVER from another weapon". Nothing measured that clause before, so
 # W1 could pass a weapon that inherits all three of its parents from other weapons. Both
 # ratchets are set by THIS script's own first run, never from a scratch scan.
-W7_BASELINE = 963   # inherits from another WEAPON (655 distinct weapon-parents)
+W7_BASELINE = 804   # 807 -> 804: W7 batch-5 no-covering inlines
+                    # 870 -> 869: sc_zerg_devourer_acidcloud_aa
+                    # (parent chain retrofitted by #489).
+                    # 946 -> 870 post-rebase resync onto 86577a7aa
+                    # (#489 weapons.yaml sweep + #488 + #482 landed; this
+                    # branch adds -17 over that master); was:   # inherits from another WEAPON (655 distinct weapon-parents)
+                    # 963 -> 946: W7 batch-1 clean subset (17 edges whose
+                    # covering sets are pure three-kind + fx families).
                     # 957 -> 963: pre-existing master debt measured on
                     # 5b89b1341 (already 963 at 4fcc9f941, before the W7/W9
                     # merge wave); same re-baseline class as W2 177 -> 281
-W8_BASELINE = 637   # inherits a ^Template outside the three kinds; 874 -> 858 by promoting
+W8_BASELINE = 362   # 360 -> 362: restored ixian_airdrone (6 legacy bundles) +
+                    # D2K_155mm (^D2K155mmLegacy) re-expose pre-drain W8 debt;
+                    # conversion awaits the legacy-bundle retrofit ruling.
+                    # (#489 cleared most legacy edges); was:   # inherits a ^Template outside the three kinds; 874 -> 858 by promoting
                     # 33 ^Compatibility_* shims into real ^Warhead_* templates
                     # 687 -> 694: the TOP_LEVEL regex was fixed to match
                     # digit-starting keys (120mm_*, 8Inch, etc.), exposing
@@ -166,6 +183,7 @@ def scan_source():
     # ^DamagingExplosion, ...) mix Inherits/damage warheads/fields and stay
     # legacy W8 worklist items.
     fx_pure: dict[str, list[bool]] = collections.defaultdict(lambda: [False, True])
+    fx_inherits: dict[str, list[str]] = collections.defaultdict(list)
     for entry in man.weapons:
         path = pathlib.Path(str(entry))
         if not path.is_absolute():
@@ -192,8 +210,8 @@ def scan_source():
                             else:
                                 fx_pure[current][1] = False
                         # untyped Warhead@ residual pin: allowed
-                    elif mi and mi.group(2).startswith("^Effect_"):
-                        fx_pure[current][0] = True
+                    elif mi:
+                        fx_inherits[current].append(mi.group(2))
                     else:
                         fx_pure[current][1] = False
                 continue
@@ -204,7 +222,26 @@ def scan_source():
             mw = WARHEAD.match(line)
             if mw and mw.group(2) in EFFECT_TYPES:
                 local_fx[current].append(f"{mw.group(1)}: {mw.group(2)}")
-    fx_templates = {k for k, (typed, pure) in fx_pure.items() if typed and pure}
+    # a template is effect-kind when it has typed evidence (own effect-typed
+    # node or an inherit into the effect class) and every child is effect
+    # content; iterating to a fixpoint lets families derive from families
+    # (e.g. ^d2k_* -> ^d2k_*), which a single ^Effect_ pass misses.
+    fx_templates = set()
+    while True:
+        grown = set(fx_templates)
+        for t in set(fx_pure) | set(fx_inherits):
+            if t in grown:
+                continue
+            typed, pure = fx_pure[t]
+            fx_inh = [i for i in fx_inherits[t]
+                      if i.startswith("^Effect_") or i in grown]
+            other_inh = [i for i in fx_inherits[t]
+                         if not (i.startswith("^Effect_") or i in grown)]
+            if pure and not other_inh and (typed or fx_inh):
+                grown.add(t)
+        if grown == fx_templates:
+            break
+        fx_templates = grown
     return inherits, local_fx, fx_templates
 
 

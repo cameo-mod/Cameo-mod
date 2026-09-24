@@ -174,39 +174,13 @@ TSLaser25mmDep:
 		ValidTargets: Ground, Water, Air
 	-Warhead@LaserWeapon:
 	-Warhead@LaserExtraDamage:
-	Warhead@LegacyLaserExtraDamage: SpreadDamage
-		InvalidTargets: Air
-		ValidTargets: Ground, Water, Air
-		Spread: 300
-		Damage: 600
-		Versus:
-			REFLECTOR: 50
-			Shield: 100
-			None: 1
-			Flak: 1
-			Plate: 1
-			Heroic: 1
-			Superheavy: 1
-			Heavy: 1
-			Medium: 1
-			Light: 1
-			Scout: 1
-			Steel: 1
-			Concrete: 1
-			Wood: 1
-			Fighter: 1
-			Bomber: 1
-			Helicopter: 1
-			Spaceship: 1
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		UpdatesUnitStatistics: false
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 	Warhead@Laser_Heavy:
 		InvalidTargets: Air
-		Damage: 4000
+		Damage: 4600
 		PercentageScale: 0
 		ValidTargets: Ground, Water
 	-Warhead@Laser_Heavy_ExtraDamage:
@@ -355,7 +329,7 @@ TS120mm_bluenuke:
 	Inherits: ^TSCannonEffect
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_CannonHE_Medium
+	Inherits@fx: ^ts_tiberiansun_ts120mm_bluenuke
 	Report: tnkfire6.aud
 	ReloadDelay: 44
 	Range: 6201
@@ -366,8 +340,6 @@ TS120mm_bluenuke:
 	Warhead@CannonHE_Medium:
 		PercentageScale: 5000
 		Damage: 24000
-	Warhead@3Eff: CreateEffect
-		Explosions: magicnuke_med
 
 TSHighVelocityTurChem:
 	Inherits@collapsewh: ^Warhead_CannonChem_Light
@@ -447,6 +419,7 @@ TS155mm:
 
 TS155mm_bluenuke:
 	Inherits: ^TS155mmLegacy
+	Inherits@fx: ^ts_tiberiansun_ts155mm_bluenuke
 	ReloadDelay: 135
 	Projectile: Bullet
 		Speed: 280
@@ -458,16 +431,13 @@ TS155mm_bluenuke:
 	Warhead@Demolition_Heavy:
 		PercentageScale: 5000
 		Damage: 60000
-	Warhead@3Eff: CreateEffect
-		Explosions: magicnuke_med
 
 TSGrenade:
 	Inherits@finalmain: ^Warhead_Concussion_Medium_Flat
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
-	Inherits@3: ^Effect_CannonHE_Medium
 	Inherits@wh: ^Warhead_Concussion_Medium
-	Inherits@fx: ^Effect_Concussion_Medium
+	Inherits@fx: ^ts_tiberiansun_tsgrenade
 	ReloadDelay: 50
 	Range: 6151
 	Report: toss1.aud
@@ -491,8 +461,6 @@ TSGrenade:
 	Warhead@MediumCannonFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 6000
-	Warhead@3Eff: CreateEffect
-		ImpactSounds: expnew13.aud
 	-Warhead@CannonHE_Medium:
 	-Warhead@Concussion_Medium:
 	Warhead@Concussion_Medium_Flat:
@@ -758,8 +726,8 @@ TurretLaserFragment:
 TSObeliskLaserFire:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
-	Inherits@fx: ^Effect_Laser_Heavy
 	Inherits@3: ^TSLaserEffect
+	Inherits@fx: ^ts_tiberiansun_set2
 	ReloadDelay: 60
 	Range: 10199
 	Report: obelray1.aud
@@ -779,22 +747,20 @@ TSObeliskLaserFire:
 	Warhead@Laser_Heavy:
 		InvalidTargets: Air
 		Damage: 104000
-	Warhead@2Eff: CreateEffect
-		Explosions: med_napalm
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-		ImpactActors: false
 
 	Warhead@Laser_Heavy_ExtraDamage:
 		InvalidTargets: Air
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
 		InvalidTargets: Air
 TSLaserObeliskLaserFire:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
-	Inherits@fx: ^Effect_Laser_Heavy
 	Inherits@3: ^TSLaserEffect
+	Inherits@fx: ^ts_tiberiansun_set2
 	ReloadDelay: 32
 	Projectile: LaserZap
 		Width: 128
@@ -814,12 +780,6 @@ TSLaserObeliskLaserFire:
 	Warhead@Laser_Heavy:
 		InvalidTargets: Air
 		Damage: 160000
-	Warhead@2Eff: CreateEffect
-		Explosions: med_napalm
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-		ImpactActors: false
 	Warhead@LaserArc: FireShrapnel
 		Weapon: ObeliskLaserFragment
 		Amount: 2
@@ -830,6 +790,10 @@ TSLaserObeliskLaserFire:
 	Warhead@Laser_Heavy_ExtraDamage:
 		InvalidTargets: Air
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
 		InvalidTargets: Air
 ObeliskLaserFragment:
 	Inherits@finalmain: ^Warhead_Laser_Heavy_Flat
@@ -932,12 +896,18 @@ TSBazooka:
 	Warhead@MissileAP_Light:
 		Damage: 24000
 TSBazookaG:
-	Inherits: TSBazooka
+	Inherits@w71: ^Warhead_MissileAP_Light
+	Inherits@w72: ^Projectile_Missile_Light
+	Inherits@w73: ^Effect_MissileAP_Light
 	Range: 9216
 
 	Projectile: Missile
 		VerticalRateOfTurn: 40
 
+	Warhead@MissileAP_Light: AreaDamage
+		Damage: 24000
+	ReloadDelay: 52
+	Report: rketinf1.aud
 TSReaperTusk:
 	Inherits: ^TSDefaultMissile
 	ReloadDelay: 77
@@ -1003,11 +973,19 @@ TSAegisMissile:
 		FriendlyFireSpread: 100
 
 TSMammothTusk_elite:
-	Inherits: TSMammothTusk2_AA
+	Inherits@w71: ^Warhead_MissileAA_Heavy
+	Inherits@w72: ^Projectile_Missile_Heavy
+	Inherits@w73: ^ts_gdi_set21
 	Burst: 8
 	Range: 9216
 	Projectile: Missile
 		VerticalRateOfTurn: 25
+		MinimumLaunchAngle: 75
+		CloseEnough: 500
+		HorizontalRateOfTurn: 25
+		Acceleration: 5
+		Speed: 500
+		TrailImage: large_trail
 	Warhead@MissileAA_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1018,6 +996,10 @@ TSMammothTusk_elite:
 		PercentageScale: 10000
 		PercentageSpread: 50
 
+	ValidTargets: Air
+	BurstDelays: 8
+	ReloadDelay: 92
+	Report: misl1.aud
 TSBikeMissile:
 	Inherits@missilerole: ^Warhead_MissileAP_Medium
 	Inherits@finalmain: ^Warhead_MissileHE_Medium_Flat
@@ -1174,7 +1156,7 @@ TSDragon:
 TSHellfire:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_MissileAP_Medium
+	Inherits@fx: ^ts_tiberiansun_tshellfire
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 32
 	Range: 5740
@@ -1183,16 +1165,10 @@ TSHellfire:
 		Damage: 24000
 		FriendlyFireDamage: 25
 		FriendlyFireSpread: 50
-	Warhead@EffectWater: CreateEffect
-		Explosions: med_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.8
-		FadeFrames: 15
 	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
 		Duration: 8
 
 	Projectile: Missile
@@ -1200,11 +1176,9 @@ TSHellfire:
 
 TSRedEye2:
 	Inherits: Dragon
+	Inherits@fx: ^ts_tiberiansun_tsredeye2
 	Report: rocket2.aud
 	ValidTargets: Air
-	Warhead@2Eff: CreateEffect
-		ImpactSounds: expnew13.aud
-		ImpactActors: false
 
 	Projectile: Missile
 		VerticalRateOfTurn: 25
@@ -1297,34 +1271,16 @@ TSTentacle:
 			Concrete: 10
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 
-ZClaw3:
-	ReloadDelay: 80
-	Range: 1408
-	Report: floatk1.aud
-	Projectile: InstantHit
-	InvalidTargets: wall, Bridge
-	Warhead@1Dam: SpreadDamage
-		Damage: 16000
-		InvalidTargets: wall, Bridge
-		Versus:
-			None: 60
-			Wood: 45
-			Light: 90
-			Medium: 70
-			Heavy: 55
-			Concrete: 10
-		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
-
 TSVeins:
 	ReloadDelay: 16
 	Warhead@Damage: TargetDamage
 		Damage: 500
 		DamageTypes: BulletDeath
-	Warhead@Effect: CreateEffect
-		Explosions: chemball
 
+	Inherits@fx: ^ts_tiberiansun_tsveins
 TSVeinholeSmoke:
 	Inherits: ^MissileWeapon
+	Inherits@fx: ^ts_tiberiansun_tsveinholesmoke
 	Range: 7168
 	Report: Munchymunchy.aud
 	ReloadDelay: 20
@@ -1342,8 +1298,6 @@ TSVeinholeSmoke:
 			Wood: 30
 			Light: 20
 			Heavy: 20
-	Warhead@Effect: CreateEffect
-		Explosions: chemball
 
 TSLimpetBomb_EMP:
 	ReloadDelay: 50
@@ -1360,7 +1314,7 @@ TSLimpetBomb_EMP:
 
 TSLocustBomb:
 	Inherits@wh: ^Warhead_Demolition_Heavy
-	Inherits@fx: ^Effect_Demolition_Heavy
+	Inherits@fx: ^ts_tiberiansun_tslocustbomb
 	ReloadDelay: 38
 	Burst: 5
 	BurstDelays: 3
@@ -1374,17 +1328,6 @@ TSLocustBomb:
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 180000
-	Warhead@2Eff: CreateEffect
-		Explosions: small_frag
-		ImpactSounds: expnew09.aud
-		ValidTargets: Ground, Air
-	Warhead@3EffWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: ssplash3.aud
-		ValidTargets: Water
-		InvalidTargets: Vehicle
-	Warhead@4Smu: LeaveSmudge
-		SmudgeType: Crater
 
 ^TSMG:
 	Inherits@wh: ^Warhead_Bullet_Light
@@ -1482,14 +1425,11 @@ TSLaserRaiderCannon:
 		PhysicalStateScale: 38
 TSPistola:
 	Inherits: ^TSMG
+	Inherits@fx: ^ts_tiberiansun_tspistola
 	Range: 3072
 	Report: gun18.aud
 	Warhead@1Dam: SpreadDamage
 		Damage: 200
-	Warhead@2Eff: CreateEffect
-		Explosions: piff
-	Warhead@3EffWater: CreateEffect
-		Explosions: water_piff
 
 TSEngineerPistol:
 	Inherits@wh: ^Warhead_Sniper_Light
@@ -1506,14 +1446,29 @@ TSEngineerPistol:
 		Damage: 10
 
 TSSniper_elite:
-	Inherits: TSSniper
+	Inherits@w70: ^Warhead_Sniper_Light
+	Inherits@w71: ^Projectile_Sniper_Light
+	Inherits@w72: ^Effect_Sniper_Light
 	ReloadDelay: 45
 	Range: 8704
+	Report: silencer.aud
 	Warhead@1Dam: SpreadDamage
 		Versus:
 			Light: 40
 			Medium: 30
 			Heavy: 20
+	Warhead@Sniper_Light:
+		Damage: 10000
+		Spread: 1
+		Falloff: 100, 0
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
+		Damage: 10000
+		Spread: 1
+		Falloff: 100, 0
+	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
+		Damage: 5
+		Spread: 1
+		Falloff: 100, 0
 
 forgotten_mutant_dualwield:
 	Inherits@wh: ^Warhead_Bullet_Light
@@ -1528,19 +1483,30 @@ forgotten_mutant_dualwield:
 		InvalidTargets: Air
 		Damage: 2000
 forgotten_mutant_dualwield_elite:
-	Inherits: forgotten_mutant_dualwield
+	Inherits@w71: ^Warhead_Bullet_Light
+	Inherits@w72: ^Projectile_Bullet_Light
+	Inherits@w73: ^Effect_Bullet_Light
 	Burst: 4
 	Range: 5120
 
 	Warhead@Bullet_Light:
 		InvalidTargets: Air
+	ValidTargets: Ground, Water
+	ReloadDelay: 18
+	Report: infgun3.aud, slvkgun1.aud
 MutAPRifle_elite:
-	Inherits: MutAPRifle
+	Inherits@w71: ^Warhead_Bullet_Light
+	Inherits@w72: ^Projectile_Bullet_Light
+	Inherits@w73: ^Effect_Bullet_Light
 	ReloadDelay: 30
 	Range: 6144
 
+	Warhead@Bullet_Light: AreaDamage
+		Damage: 4000
+	Report: jumpjet1.aud, gostgun1.aud
 TSTacticalMissile:
 	Inherits: ^TSDefaultMissile
+	Inherits@fx: ^ts_tiberiansun_tstacticalmissile
 	Report: samshot1.aud
 	ValidTargets: Ground, Water, Air
 	Range: 10238976
@@ -1571,13 +1537,6 @@ TSTacticalMissile:
 		ValidTargets: Ground, Water, Air
 		AirThreshold: 11c0
 		ImpactActors: false
-	Warhead@2Eff: CreateEffect
-		Explosions: large_twlt
-		ExplosionPalette: tseffect
-		ImpactSounds: expnew19.aud
-		ImpactActors: false
-		AirThreshold: 11c0
-		ValidTargets: Ground, Water, Air
 
 TSTacticalMissileDamage:
 	Inherits: ^TSDefaultMissile
@@ -1618,19 +1577,8 @@ TSMissileBomblet:
 		Damage: 26000
 		ValidTargets: Ground, Water, Air
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
-	Warhead@2Eff: CreateEffect
-		Explosions: small_twlt
-		ExplosionPalette: tseffect
-		ImpactSounds: expnew09.aud, expnew06.aud
-		ValidTargets: Ground, Air, Ship
-	Warhead@3EffWater: CreateEffect
-		Explosions: large_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
-	Warhead@4Smu: LeaveSmudge
-		SmudgeType: Crater
 
+	Inherits@fx: ^ts_tiberiansun_tsmissilebomblet
 TSTacticalChemMissile:
 	Inherits: TSTacticalMissile
 	Projectile: Missile
@@ -1649,7 +1597,7 @@ TSTacticalChemMissileDamage:
 		AirThreshold: 8c0
 
 TSChemBomblet:
-	Inherits: TSMissileBomblet
+	Inherits@w71: ^ts_tiberiansun_tsmissilebomblet
 	Projectile: GravityBomb
 		Velocity: 36, 0, 280
 		Acceleration: 0, 0, -12
@@ -1657,8 +1605,14 @@ TSChemBomblet:
 		Image: tsbomb
 		Sequences: idle
 		Palette: tseffect
+		Speed: 128
+		TrailImage: ts_small_smoke_trail
+		Blockable: false
 	Warhead@1Dam: SpreadDamage
 		DamageTypes: Prone50Percent, TriggerProne, TiberiumDeath
+		Damage: 26000
+		Spread: 1c0
+		ValidTargets: Ground, Water, Air
 	Warhead@5cloud: SpawnSmokeParticle
 		Count: 2
 		Weapon: TSCloud
@@ -1673,6 +1627,9 @@ TSChemBomblet:
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
 
+	ValidTargets: Ground, Water, Air
+	AirThreshold: 11c0
+	Range: 7168
 TSHSeekerBomb:
 	Range: 128
 	ReloadDelay: 120
@@ -1690,20 +1647,12 @@ TSHSeekerBomb:
 		Falloff: 100, 100
 		DamageTypes: Prone100Percent, TriggerProne, FireDeath
 		ValidTargets: Structure
-	Warhead@Effect: CreateEffect
-		Explosions: verylarge_twlt
-		ExplosionPalette: tseffect
-		ImpactSounds: expnew09.aud, expnew06.aud
-		ValidTargets: Ground, Air, Water
-	Warhead@Smu: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Building, wall
-		Size: 2
 	Warhead@Cam: RevealShroud
 		Radius: 4c0
 		RevealGeneratedShroud: true
 		Duration: 120
 
+	Inherits@fx: ^ts_tiberiansun_tshseekerbomb
 TSHSeekerTargeting:
 	ReloadDelay: 30
 	Range: 4096
@@ -1756,18 +1705,12 @@ MutSAPCSpawner:
 MutSAPC:
 	InvalidTargets: Vehicle, Structure
 	Projectile: InstantHit
-	Warhead@Effect: CreateEffect
-		Image: tsdig
-		Explosions: idle
-		ExplosionPalette: tseffect
-		ImpactSounds: subdril1.aud
-		ValidTargets: Ground, Air, Water
-		ImpactActors: false
 	Warhead@2: SpawnActor
 		Actors: forgotten_scarabapc
 		Range: 3
 		Delay: 10
 
+	Inherits@fx: ^ts_tiberiansun_set1
 MutWildlifeSpawner:
 	Projectile: InstantExplode
 	Warhead@1: FireShrapnel
@@ -1832,82 +1775,80 @@ NODMutantSpawner:
 NODMutant:
 	InvalidTargets: Vehicle, Structure
 	Projectile: InstantHit
-	Warhead@Effect: CreateEffect
-		Image: tsdig
-		Explosions: idle
-		ExplosionPalette: tseffect
-		ImpactSounds: subdril1.aud
-		ValidTargets: Ground, Air, Water
-		ImpactActors: false
 	Warhead@2: SpawnActor
 		Actors: forgotten_mutant_sp,forgotten_mutant_sp
 		Range: 3
 		Delay: 10
 
+	Inherits@fx: ^ts_tiberiansun_set1
 NODMutant1:
-	Inherits: NODMutant
+	Inherits@w71: ^ts_tiberiansun_set1
 	Warhead@2: SpawnActor
 		Actors: forgotten_mutantsoldier_sp
 		Range: 3
 		Delay: 10
 
+	Projectile: InstantHit
+	InvalidTargets: Vehicle, Structure
 NODMutant2:
-	Inherits: NODMutant
+	Inherits@w71: ^ts_tiberiansun_set1
 	Warhead@2: SpawnActor
 		Actors: forgotten_mutantsniper_sp
 		Range: 3
 		Delay: 10
 
+	Projectile: InstantHit
+	InvalidTargets: Vehicle, Structure
 NODMutant3:
-	Inherits: NODMutant
+	Inherits@w71: ^ts_tiberiansun_set1
 	Warhead@2: SpawnActor
 		Actors: forgotten_ghoststalker_sp
 		Range: 3
 		Delay: 10
 
+	Projectile: InstantHit
+	InvalidTargets: Vehicle, Structure
 NODMutant4:
-	Inherits: NODMutant
+	Inherits@w71: ^ts_tiberiansun_set1
 	Warhead@2: SpawnActor
 		Actors: forgotten_mutantsergeant
 		Range: 3
 		Delay: 10
 
+	Projectile: InstantHit
+	InvalidTargets: Vehicle, Structure
 FloaterSpawner:
 	Range: 3072
 	Projectile: InstantHit
-	Warhead@1: CreateEffect
-		Image: tsdig
-		Explosions: idle
-		ExplosionPalette: tseffect
-		ImpactSounds: subdril1.aud
-		ImpactActors: false
 	Warhead@2: SpawnActor
 		Actors: tsfloater
 		Delay: 5
 
+	Inherits@fx: ^ts_tiberiansun_set0
 ViscSpawner:
-	Inherits: FloaterSpawner
+	Inherits@w71: ^ts_tiberiansun_set0
 	Warhead@2: SpawnActor
 		Actors: tsvislrg
+		Delay: 5
 
+	Projectile: InstantHit
+	Range: 3072
 FiendSpawner:
-	Inherits: FloaterSpawner
+	Inherits@w71: ^ts_tiberiansun_set0
 	Warhead@2: SpawnActor
 		Actors: forgotten_tiberianfiend_wild
+		Delay: 5
 
+	Projectile: InstantHit
+	Range: 3072
 TunnelDisappear:
 	ReloadDelay: 10
-	Warhead@1: CreateEffect
-		Image: tsdig
-		Explosions: idle
-		ExplosionPalette: tseffect
-		ImpactSounds: subdril1.aud
-		ImpactActors: false
 
 # Viceroid claw weapons (added 2026-07-19): the loaded ruleset references
 # these via tsvissml/tsvislrg (^Viceroid) but they lived only in the
 # unloaded weapons/monsters.yaml â€” the stricter engine 2e0783c validates
 # weapon refs eagerly at load, so the mod crashed at boot without them.
+	Inherits@fx: ^ts_tiberiansun_set0
 ZClaw1:
 	ReloadDelay: 30
 	Range: 1536
@@ -1943,13 +1884,16 @@ ZClaw2:
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 
 ZClaw3:
+	Report: floatk1.aud
 	ReloadDelay: 30
+	InvalidTargets: wall, Bridge
 	Range: 1536
 	Projectile: Bullet
 		Speed: 1c682
 	Warhead@1Dam: SpreadDamage
 		Spread: 64 #213
 		Damage: 2000
+		InvalidTargets: wall, Bridge
 		Versus:
 			None: 97
 			Wood: 30 #10

@@ -129,6 +129,32 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 
 ---
 
+## ⛔ `^` templates ARE instantiated at boot — an untyped `Warhead@` pin inside one NREs (2026-09-24)
+
+The first W27 batch-2 boot crashed in `WeaponInfo.LoadWarheads`
+(`ObjectCreator.CreateObject` with a null className) even though
+`find_empty_warhead.py` reported 0. Cause: the audit skipped `^`-prefixed
+nodes as "never instantiated", but `Ruleset.LoadDefaults` builds a
+`WeaponInfo` for **every** node in the mounted weapons files — a bare
+`Warhead@X:` pin inside a template with no typed ancestor resolves to an
+empty type and NREs exactly like a weapon-level one.
+
+Two related subtleties surfaced in the same round:
+
+- The engine's merge keeps an earlier-supplied type when a bare
+  `Warhead@X:` pin adds fields — the audit's parent-map merge used to let
+  `''` overwrite a real type (false positives on template pins).
+- Files must be enumerated from the manifest, not a hard-coded list —
+  `weapons/effects_d2k.yaml` was mounted but unscanned, hiding the types
+  the new families supply.
+
+**Rule:** every `Warhead@X:` node a template adds must either carry a type
+or inherit one — `find_empty_warhead.py` now scans templates and resolves
+files via the manifest. When extracting pins into a `^` family, declare
+the node's resolved type (usually `CreateEffect`) on the pin.
+
+---
+
 ## ⛔ A tool must derive its target from its OWN worktree root — a stale path wrote into another agent's tree (2026-09-24)
 
 During the W27 batch-1 round, nine pack files in the `C:/tmp/dawn` worktree
@@ -2447,3 +2473,42 @@ condition it replaced":
    expression on `||`/`&&`, strip `!`, and compare whole tokens before appending
    (`|| blinded` went to exactly the 46 sites carrying a real `disabled` token, not
    the 48 lines grep counted).
+
+---
+
+### W27 family-extraction rules that survived verification (2026-09-25)
+
+Extracting inline `Warhead@` effect nodes into `^d2k_*` families taught four
+non-obvious rules, each learned from a red audit:
+
+1. **`-X:` cancels need a provider.** Emitting `-Warhead@X:` before every
+   redeclare inside a derivation family produced 22 orphan cancels — a
+   purely-local stripped node has no parent copy to cancel. Cancel only when
+   `parent_flat` contains the channel.
+2. **Family purity forbids non-effect types.** A pin like
+   `Warhead@ShieldHit: GrantExternalCondition` inside the family flips it to
+   "legacy" (W8). Those channels must be pinned at WEAPON level as a trailing
+   local typed node instead.
+3. **…but you cannot mask them either.** `-Warhead@X:` inside the family
+   strips the type from a bare local `Warhead@X:` pin that relied on the
+   parent for its type → empty-type NRE. Full local redeclare is the only
+   safe form.
+4. **Edge classification must match the audit's own predicate.** W4 counts
+   `^Effect_`-PREFIXED parents plus fixpoint-classified families. An impure
+   `^Effect_*` template (e.g. `^Effect_Magic_Heavy`) is an fx edge for the
+   audit but never enters `fx_templates` — a removal filter using only the
+   fixpoint set leaves the old edge in place and the weapon grows a second
+   fx edge (+1 W4 each).
+
+## Drain-migration minification hazard (2026-09-26)
+
+The pack-drain migration can emit a weapon block as ONE line of tab-separated
+`Key: value` tokens (`PulseMissile:Inherits: X\tWarhead@Y: ...`). MiniYAML
+treats the whole line as a scalar value — the weapon resolves to zero fields
+and is silently dead, while grep still "sees" the content. Census for the
+class: top-level lines containing a literal tab after the colon. Restoration:
+split on tabs, depth = run-length of empty tokens + 1, and DROP the first
+empty token (the separator after `Name:` is not depth). Verify restored blocks
+byte-identical against the pre-drain commit, then re-run find_empty_warhead —
+a wrong first-token depth parses fine for the engine but is skipped by
+indent-based audit scanners.
