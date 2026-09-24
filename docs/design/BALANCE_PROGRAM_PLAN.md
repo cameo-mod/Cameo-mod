@@ -5,7 +5,7 @@
 
 `warhead_family_reach` measures **1,530 distinct fired weapon identities** whose
 transitive inheritance reaches a `^Warhead_*` family in the current PR340 source.
-(2026-09-23 resync, post-#438: `physical_state_fired_weapons` = **537**, `unconverted_template_inheritors` = **1163**.) **2026-09-23b (post-#456/#457 wave): `physical_state_fired_weapons` = 533, `unconverted_template_inheritors` = 827** — DAWN's W23 retrofit (#456) stripped most legacy template inherits; NOVA batch-2 (#457) landed the RA2Mod folds.
+(2026-09-23 resync, post-#438: `physical_state_fired_weapons` = **537**, `unconverted_template_inheritors` = **1163**.) **2026-09-23b (post-#456/#457 wave): `physical_state_fired_weapons` = 533, `unconverted_template_inheritors` = 827** — DAWN's W23 retrofit (#456) stripped most legacy template inherits; NOVA batch-2 (#457) landed the RA2Mod folds. **2026-09-24 (post-#476/#478): `physical_state_fired_weapons` = 542** — W7's Resonance meter feeds (`ApplyPhysicalState`/`PhysicalStates`) added meter-carrying warheads back onto fired weapons; the claim's `docs:` citation and `doc_claims.yaml` were resynced to the measured value in the same commit.
 The registry's previous value was 1,415; it is updated upward to this measured
 count with the same predicate and zero tolerance. Ownership wrappers can expose
 more distinct fired identities for existing family payloads: this increase does

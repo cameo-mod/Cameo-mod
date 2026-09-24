@@ -15,5 +15,5 @@ X5 suffix ordering violations: **0**
 ## X3 — AA-only weapons not following _AA convention
 | File | Line | Weapon | ValidTargets |
 |---|---|---|---|
-| ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml | 141 | ConsortiumMissileSystem | Air |
+| ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml | 1452 | ConsortiumMissileSystem | Air |
 

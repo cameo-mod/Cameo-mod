@@ -2,12 +2,12 @@ tsdig: ALSO-USED (3)
   mods\cameo\ContentPacks\RedAlert2Mod\TKM\yaml\sequences.yaml:1309: 		Filename: tsdig.shp
   mods\cameo\ContentPacks\TiberianSun\Nod\yaml\templates.yaml:14: 		SubterraneanTransitionImage: tsdig
   mods\cameo\sequences\tiberiansun.yaml:1248: 		Filename: tsdig.shp
-tsioncannon: ALSO-USED (11)
+tsioncannon: ALSO-USED (13)
   mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\buildings.yaml:1051: 		Effect: tsioncannon
-  mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml:2514: 		RingImage: tsioncannon
+  mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml:5211: 		Image: tsioncannon
+  mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml:5213: 		RingImage: tsioncannon
+  mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml:5253: 		RingImage: tsioncannon
   mods\cameo\ContentPacks\RedAlert2Mod\Consortium\yaml\buildings.yaml:384: 		Effect: tsioncannon
-  mods\cameo\ContentPacks\StarCraft\Protoss\yaml\buildings.yaml:600: 		Effect: tsioncannon
-  mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\buildings.yaml:254: 		Effect: tsioncannon
 ionsfx: ALSO-USED (3)
   mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:3446: 		Image: ionsfx
   mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:3450: 		TrailImage: ionsfx
@@ -15,17 +15,17 @@ ionsfx: ALSO-USED (3)
 tspodring: ALSO-USED (3)
   mods\cameo\sequences\misc.yaml:2636: 	tspodring:
   mods\cameo\sequences\misc.yaml:2637: 		Filename: tspodring.shp
-  mods\cameo\weapons\redalert2mod.yaml:316: 		HelixAnimSequence: tspodring
+  mods\cameo\weapons\redalert2mod.yaml:481: 		HelixAnimSequence: tspodring
 tsmcnealmechdrop: ALSO-USED (1)
   mods\cameo\weapons\heroes.yaml:799: 		Image: tsmcnealmechdrop
 tsdroppod: ALSO-USED (2)
   mods\cameo\ContentPacks\TiberianSun\GDI\yaml\aircraft.yaml:499: 		Image: tsdroppod
   mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1923: 		Image: tsdroppod
 hakurei_giphy: ALSO-USED (2)
-  mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:1062: 		Image: hakurei_giphy
+  mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:2067: 		Image: hakurei_giphy
   mods\cameo\sequences\misc.yaml:4541: 		Filename: hakurei_giphy.shp
 hakurei_dream: ALSO-USED (2)
-  mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:1051: 		Image: hakurei_dream
+  mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:2056: 		Image: hakurei_dream
   mods\cameo\sequences\misc.yaml:4533: 		Filename: hakurei_dream.shp
 ra2corpse: CE-ONLY
 wc2_effect_sparkle: ALSO-USED (5)
@@ -47,12 +47,12 @@ wc2_building_collapse: ALSO-USED (1)
   mods\cameo\sequences\misc.yaml:3069: 	wc2_building_collapse:
 wc2_lightng: ALSO-USED (2)
   mods\cameo\sequences\warcraft2.yaml:392: 		Filename: wc2_lightng.shp
-  mods\cameo\weapons\warcraft2.yaml:424: 		Image: wc2_lightng
+  mods\cameo\weapons\warcraft2.yaml:441: 		Image: wc2_lightng
 wc2_effect_blizzard: ALSO-USED (4)
   mods\cameo\ContentPacks\Warcraft2\Humans\yaml\buildings.yaml:575: 		Effect: wc2_effect_blizzard
   mods\cameo\ContentPacks\Warcraft2\Orcs\yaml\weapons.yaml:358: 		Image: wc2_effect_blizzard
   mods\cameo\sequences\warcraft2.yaml:459: 		Filename: wc2_effect_blizzard.shp
-  mods\cameo\weapons\warcraft2.yaml:552: 		Image: wc2_effect_blizzard
+  mods\cameo\weapons\warcraft2.yaml:569: 		Image: wc2_effect_blizzard
 wc2_catapult_stone_projectile_medium: ALSO-USED (1)
   mods\cameo\sequences\warcraft2.yaml:416: 		Filename: wc2_catapult_stone_projectile_medium.shp
 wc2_effect_death_and_decay: ALSO-USED (2)
@@ -60,7 +60,7 @@ wc2_effect_death_and_decay: ALSO-USED (2)
   mods\cameo\sequences\warcraft2.yaml:514: 		Filename: wc2_effect_death_and_decay.shp
 wc2_effect_daemon_attack: ALSO-USED (2)
   mods\cameo\sequences\warcraft2.yaml:541: 		Filename: wc2_effect_daemon_attack.shp
-  mods\cameo\weapons\warcraft2.yaml:890: 		Image: wc2_effect_daemon_attack
+  mods\cameo\weapons\warcraft2.yaml:1084: 		Image: wc2_effect_daemon_attack
 wc2_cannon_impact: ALSO-USED (1)
   mods\cameo\sequences\warcraft2.yaml:559: 		Filename: wc2_cannon_impact.shp
 wh40kcapsule: ALSO-USED (1)

@@ -1,6 +1,6 @@
 # audit_code_duplication — copy-paste clone groups
 
-Python files: **723** (min 5 statements), C# files: **364** (min 8 lines)
+Python files: **724** (min 5 statements), C# files: **364** (min 8 lines)
 
 
 ## Files that do not parse (not scanned)
@@ -109,7 +109,7 @@ Python files: **723** (min 5 statements), C# files: **364** (min 8 lines)
 | 2 | de57d7955065e638 | tools/balance/gen_effects.py:38 LEVELORDER; tools/balance/gen_projectiles.py:30 LEVELORDER |
 | 2 | dfc91d27d37afdd1 | tools/balance/cameo_channel_curves.py:26 ARMOR_AXES; tools/balance/four_source_synthesis_gate.py:28 COMMON_AXES |
 | 2 | e631e1af9577a4aa | tools/balance/reference_weapon_geometry.py:29 GEOMETRY_FIELDS; tools/balance/summarize_reference_geometry.py:16 GEOMETRY_FIELDS |
-| 2 | eba2f9dc1c86d3e4 | tools/audit/audit_tier_weapon_class.py:64 LADDER; tools/balance/gen_weapon_template.py:2343 STORM_LEVELS |
+| 2 | eba2f9dc1c86d3e4 | tools/audit/audit_tier_weapon_class.py:64 LADDER; tools/balance/gen_weapon_template.py:2375 STORM_LEVELS |
 | 2 | ee70e291636f426f | tools/balance/build_japan_pilot.py:68 CLASSIC_FACTIONS; tools/balance/validate_reference_holdout.py:62 CLASSIC_FACTIONS |
 | 2 | eed204ad8ec23410 | tools/audit/propose_sonic_mapping.py:104 OLD_FAMILIES; tools/audit/weapon_families.py:29 OLD_FAMILIES |
 | 2 | efe4c032c5c937c9 | tools/audit/audit_three_way_split.py:72 MAIN_DAMAGE_TYPES; tools/audit/audit_tier_weapon_class.py:59 MAIN_DAMAGE_TYPES |

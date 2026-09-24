@@ -6,9 +6,9 @@
 | empty capacity, needs `shieldgen` | 1266 | ✔ correctly nothing | — (it has no shield) |
 | pool behind an upgrade | 233 | ✖ nothing | E5 (upgrade pricing) |
 
-Shield row mean Versus **161.83**, so one shield point is **0.6179 HP** BEFORE any shield-gated `DamageMultiplier` — measured off the live ladder every run, never frozen. The Shield row takes **1.481%** of all roster raw damage at baseline.
+Shield row mean Versus **88.08**, so one shield point is **1.1354 HP** BEFORE any shield-gated `DamageMultiplier` — measured off the live ladder every run, never frozen. The Shield row takes **1.713%** of all roster raw damage at baseline.
 
-⚠ **Every one of these 56 actors also carries `DamageMultiplier@shielded: 150`**, so it takes 150% damage WHILE the shield holds — the deliberate counterweight to having one. That divides the pool's worth: a shield point is really **0.4120 HP**, and the roster-wide gap is 38.6% rather than the 57.8% a shield-only reading gives. `shield_damage_multiplier` and `shield_hp_per_point` are published per actor.
+⚠ **Every one of these 56 actors also carries `DamageMultiplier@shielded: 150`**, so it takes 150% damage WHILE the shield holds — the deliberate counterweight to having one. That divides the pool's worth: a shield point is really **0.7569 HP**, and the roster-wide gap is 38.6% rather than the 57.8% a shield-only reading gives. `shield_damage_multiplier` and `shield_hp_per_point` are published per actor.
 
 ## The gap
 
@@ -16,7 +16,7 @@ Shield row mean Versus **161.83**, so one shield point is **0.6179 HP** BEFORE a
 * Effective HP once the pool is counted: **21,296,708** (**+66.2%**)
 * Implied price change if the formula read effective HP: median **×1.430**, max **×1.859**
 
-⚠ **Retiring the 150% multiplier is a BUFF that must be paid for.** The numbers above already account for it, so they price the game AS IT IS. Delete `DamageMultiplier@shielded` and a shield point jumps from 0.412 to 0.618 HP — the same pool becomes 1.5x more valuable and the implied price rises again. Re-extract AFTER the deletion and price once, or these units get charged for durability they no longer have (or keep durability they were never charged for).
+⚠ **Retiring the 150% multiplier is a BUFF that must be paid for.** The numbers above already account for it, so they price the game AS IT IS. Delete `DamageMultiplier@shielded` and a shield point jumps from 0.757 to 1.135 HP — the same pool becomes 1.5x more valuable and the implied price rises again. Re-extract AFTER the deletion and price once, or these units get charged for durability they no longer have (or keep durability they were never charged for).
 
 ## Per actor
 
