@@ -11830,3 +11830,20 @@ Tooling (.scratch/nova_w7conv.py — uncommitted): four traps now handled —
 digit-leading block names (`155mmCryo`), bottom-up line edits (insertion
 shift), exact-run pin dedupe (substring matching false-hits indented
 prefixes), cross-file weapon-inherit skip (merged-order hazard).
+
+## 2026-09-24 (late) — W6 strip + ChemTibAtomic tandem + WaveTurretImpact ruling question
+
+- `c7fdc3293` — W6 strip: 212 typed local effect declares -> bare `Warhead@X:` where an
+  inherited `^Effect_*` already supplies the type; resolution verified identical
+  repo-wide (restore-on-drift). W6 848 -> 714; residual +22 over the 692 ratchet is
+  sole-provider/fidelity pins — flagged for Claude's fidelity-vs-snap ruling.
+- `462fb5adc` — `ChemTibAtomic` tandem conversion per EMBER's ruling (TD-side block
+  authorized). Both `Inherits: Atomic` edges -> 4-way template set; `^AtomicCore`'s
+  local payload pinned on the Shared block. Resolved-identical (261/261). Last
+  non-held W7 edge in NOVA files; remainder = held ExtraDamage/Tesla/Laser set.
+- WaveTurretImpact review item (EMBER): resolver disproves the dead-override model —
+  baseline merged node carried `Condition: SonicDebuff` (Range 1500/Duration 150);
+  the dead element was the TOKEN (zero consumers fleet-wide post-#476), not the node.
+  The conversion restores pre-#476 debuff intent via the live channel — same for all
+  sites fleet-wide. Posted `REPLY_2026-09-24_nova_to_ember_waveturret.md`; flagged on
+  #482's description. Pending class-wide ruling (migration-intent vs dead-stays-dead).
