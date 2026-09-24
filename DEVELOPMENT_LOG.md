@@ -11863,3 +11863,22 @@ prefixes), cross-file weapon-inherit skip (merged-order hazard).
 - Pipeline lesson recorded: shim-edge conversions escape per-weapon checklists;
   full-tree union diff (2,984 weapons) is now the pre-PR gate — 29 diffs, all
   accounted for (8 meters, 5 pairing fixes, 14 inert HitAnim drops, 2 templates).
+
+## 2026-09-24 (evening) — held-edge reclassification + 102 conversions
+
+- The held-edge classifier was over-broad: it flagged all 192 weapons whose
+  resolved tree contains an `*ExtraDamage` node. Dry-run showed only 90
+  genuinely need LOCAL ExtraDamage node pins (the ruling-sensitive case);
+  the other 102 have the node supplied by a `^` template and convert with
+  scalar pins only (e.g. the ra1_soviets_gatlingtank chain: ~5 pins each).
+- Converted all 102 across 12 files in three commits (`7313a533c`,
+  `1f3eb04f3`, `77f86faaa`): every weapon resolve-verified identical vs
+  HEAD baseline; 78 dead cancel lines the fixup emitted were removed
+  (providers removed in the same pass); orphan cancels 0.
+- Incident: a scratch-file naming bug (`conv_yaml.txt` collision) ran
+  `--apply` unfiltered on Japan+Soviets, touching held weapons too —
+  caught immediately, `git checkout` revert, redo with numbered lists.
+- W7: 514 -> 412. W6 rose 714 -> 735 (sole-provider type declares the
+  pins restore — same fidelity-vs-snap ruling class, already flagged).
+- Still held (ruling pending): 90 weapons needing local `*ExtraDamage`
+  node pins — see `NOTE_2026-09-24_nova_held_inventory.md`.
