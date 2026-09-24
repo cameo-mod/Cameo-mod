@@ -1,6 +1,6 @@
 # audit_balance_drift — yaml vs committed balance ledger
 
-**12 ledger(s) drifted** — balance numbers were hand-edited in yaml, or a sanctioned apply run was not followed by re-extraction. Fix via the pipeline, never by hand:
+**14 ledger(s) drifted** — balance numbers were hand-edited in yaml, or a sanctioned apply run was not followed by re-extraction. Fix via the pipeline, never by hand:
 
 ## d2k_atreides
 
@@ -85,6 +85,32 @@
 @@ -159,3 +159,3 @@
         "^Projectile_Bullet_Medium",
 -       "^Effect_Bullet_Medium"
+```
+
+## redalert2_allies
+
+```diff
+        "^Projectile_Flame_Medium",
+-       "^Effect_Flame_Medium"
++       "^td_tiberiandawn_bigflamer"
+       ],
+@@ -6862,3 +6862,3 @@
+        "^Projectile_Flame_Medium",
+-       "^Effect_Flame_Medium"
++       "^td_tiberiandawn_bigflamer"
+       ],
+@@ -8266,3 +8266,3 @@
+        "^Projectile_Flame_Medium",
+-       "^Effect_Flame_Medium"
+```
+
+## redalert2mod_futuretech
+
+```diff
+        "^Projectile_Flame_Medium",
+-       "^Effect_Flame_Medium"
++       "^td_tiberiandawn_bigflamer"
+       ],
 ```
 
 ## shared_d2k
@@ -189,12 +215,12 @@
 +       "^LaserWeapon",
 +       "^ts_nod_tsproton"
        ],
-@@ -1546,3 +1547,3 @@
-        "^Projectile_Missile_Heavy",
--       "^Effect_MissileAP_Heavy"
-+       "^ts_nod_tsnodredeye"
+@@ -1288,3 +1289,4 @@
+       "versus_templates": [
+-       "^TSDefaultMissile"
++       "^TSDefaultMissile",
++       "^ts_tiberiansun_tstacticalmissile"
        ],
-@@ -1928,3 +1929,3 @@
-        "^TSLaserEffect",
+@@ -1415,4 +1417,4 @@
 ```
 

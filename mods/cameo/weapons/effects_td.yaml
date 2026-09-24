@@ -743,3 +743,81 @@
 		Explosions: small_poof
 		ImpactSounds: xplobig4.aud
 		ValidTargets: Ground, Water
+
+^td_tiberiandawn_227mm:
+	Inherits: ^Effect_MissileHE_Medium
+	-Warhead@Effect:
+	Warhead@Effect: CreateEffect
+		Explosions: med_frag
+		ImpactActors: false
+		ImpactSounds: kaboom25.aud
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		InvalidTargets: Ship, Structure, Bridge
+		ValidTargets: Water, Underwater
+
+^td_tiberiandawn_artilleryshell:
+	Inherits: ^Effect_Concussion_Medium
+	-Warhead@Effect:
+	Warhead@Effect: CreateEffect
+		Explosions: poof
+		ImpactActors: false
+		ImpactSounds: xplosml2.aud
+		ValidTargets: Ground, Ship
+
+^td_tiberiandawn_bigflamer:
+	Inherits: ^Effect_Flame_Medium
+	-Warhead@Glow:
+	Warhead@Glow: GlowImpact
+		Color: FF6600
+		FadeFrames: 90
+		FadeInFrames: 12
+		Scale: 1.5
+
+^td_tiberiandawn_flametankexplode:
+	Inherits: ^Effect_Flame_Medium
+	-Warhead@Effect:
+	Warhead@Effect: CreateEffect
+		Explosions: big_napalm
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
+		GlowScale: 2.0
+		ImpactActors: false
+		ImpactSounds: xplobig6.aud
+
+^td_tiberiandawn_tdbuildingexplode:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@DuneRock: LeaveSmudge
+		InvalidTargets: Structure, wall
+		SmudgeType: RockCrater
+	Warhead@DuneSand: LeaveSmudge
+		InvalidTargets: Structure, wall
+		SmudgeType: SandCrater
+	Warhead@Effect: CreateEffect
+		Delay: 0
+		Explosions: building, building_napalm, med_frag, poof, small_building
+		ImpactActors: false
+		ImpactSounds: crumble.aud, xplobig4.aud
+		ValidTargets: Ground, Air, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: large_splash
+		ImpactSounds: splash9.aud
+		InvalidTargets: Ship, Structure, Bridge
+		ValidTargets: Water, Underwater
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		FadeFrames: 6
+		Scale: 0.3
+	Warhead@RA2Crater: LeaveSmudge
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		SmudgeType: RA2Crater
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Smudge: LeaveSmudge
+		Delay: 1
+		InvalidTargets: Structure, wall
+		SmudgeType: Crater

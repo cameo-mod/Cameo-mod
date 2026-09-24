@@ -1,19 +1,20 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **201**, files touched: **2011**
+Commits reviewed: **202**, files touched: **2012**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
-| R1 | balance yaml edited without the ledger | 4 | yes |
+| R1 | balance yaml edited without the ledger | 5 | yes |
 | R2 | audit script never run by run_all.sh | 9 | yes |
 | R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 14 | partly |
 | R4 | engine/mod.config change (needs boot gate) | 0 | no |
 
 
-## R1 — hand-edited balance numbers (4)
+## R1 — hand-edited balance numbers (5)
 
 | commit | date | subject | fields |
 |---|---|---|---|
+| 30ab140b | 2026-09-24 | w27 batch-5: tiberiansun packs -> effects_ts.yam | Range |
 | d363deaa | 2026-09-24 | w27 batch-4: tiberiandawn packs -> effects_td.ya | Range |
 | 3dbf5311 | 2026-09-24 | w27 batch-3: all six d2k pack files -> effects_d | Range |
 | 20e99dbc | 2026-09-13 | test(R8): add carrier ammo runtime gate | Burst, BurstDelays, HP, MinRange, Range, ReloadDelay |
@@ -66,7 +67,7 @@ _none found_
 |---|---|
 | docs/HANDOFF.md | 45 |
 | docs/DESIGN.md | 43 |
-| DEVELOPMENT_LOG.md | 24 |
+| DEVELOPMENT_LOG.md | 25 |
 | docs/LESSONS_LEARNED.md | 21 |
 | docs/balance/derived/redalert_japan.json | 21 |
 | docs/balance/derived/tiberiandawn_nod.json | 21 |
@@ -92,10 +93,10 @@ _none found_
 
 ## Enforcement
 
-R1/R3 block only for commits on or after **2026-08-12**: 4 R1 and 0 R3 of 4/14 findings are in scope; the rest predate the gate.
+R1/R3 block only for commits on or after **2026-08-12**: 5 R1 and 0 R3 of 5/14 findings are in scope; the rest predate the gate.
 
 
 ## FAIL
 
-- 4 R1, 9 R2, 0 R3 blocking finding(s)
+- 5 R1, 9 R2, 0 R3 blocking finding(s)
 

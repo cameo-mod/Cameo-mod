@@ -29,10 +29,7 @@
 
 TDBuildingExplode:
 	Inherits: BuildingExplode
-	Warhead@Effect: CreateEffect
-		Explosions: building, building_napalm, med_frag, poof, small_building
-		ImpactSounds: crumble.aud, xplobig4.aud
-		Delay: 0
+	Inherits@fx: ^td_tiberiandawn_tdbuildingexplode
 
 M16:
 	Inherits@wh: ^Warhead_Bullet_Light
@@ -120,7 +117,7 @@ ArtilleryShell:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Grenade_Light
-	Inherits@fx: ^Effect_Concussion_Medium
+	Inherits@fx: ^td_tiberiandawn_artilleryshell
 	ReloadDelay: 112
 	Range: 12345
 	MinRange: 2470
@@ -138,9 +135,6 @@ ArtilleryShell:
 		Damage: 16000
 	Warhead@Concussion_Medium:
 		Damage: 16000
-	Warhead@Effect: CreateEffect
-		Explosions: poof
-		ImpactSounds: xplosml2.aud
 	-Warhead@Concussion_Medium:
 	-Warhead@Demolition_Light:
 	Warhead@Concussion_Medium_Flat:
@@ -151,7 +145,7 @@ ArtilleryShell:
 BigFlamer:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
-	Inherits@fx: ^Effect_Flame_Medium
+	Inherits@fx: ^td_tiberiandawn_bigflamer
 	Burst: 2
 	BurstDelays: 10
 	ReloadDelay: 50
@@ -159,29 +153,18 @@ BigFlamer:
 	Report: flamer2.aud
 	Warhead@Flame_Medium:
 		Damage: 14000
-	Warhead@Glow: GlowImpact
-		Color: FF6600
-		Scale: 1.5
-		FadeFrames: 90
-		FadeInFrames: 12
 
 FlametankExplode:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
-	Inherits@fx: ^Effect_Flame_Medium
+	Inherits@fx: ^td_tiberiandawn_flametankexplode
 	Warhead@Flame_Medium:
 		Damage: 28000
-	Warhead@Effect: CreateEffect
-		Explosions: big_napalm
-		GlowScale: 2.0
-		GlowFadeFrames: 60
-		GlowFadeInFrames: 12
-		ImpactSounds: xplobig6.aud
 
 227mm:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_MissileHE_Medium
+	Inherits@fx: ^td_tiberiandawn_227mm
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 111
 	Range: 9920
@@ -204,16 +187,6 @@ FlametankExplode:
 		ContrailEndColor: 000000FF
 	Warhead@MissileAP_Medium:
 		Damage: 8000
-	Warhead@Effect: CreateEffect
-		Explosions: med_frag
-		ImpactSounds: kaboom25.aud
-		ValidTargets: Ground, Ship
-		ImpactActors: false
-	Warhead@EffectWater: CreateEffect
-		Explosions: med_splash
-		ImpactSounds: splash9.aud
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
 
 HighVAP:
 	Inherits@wh: ^Warhead_Bullet_Medium

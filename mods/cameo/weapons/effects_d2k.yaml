@@ -1271,3 +1271,569 @@
 		ImpactSounds: splash9.aud
 		InvalidTargets: Ship, Structure, Bridge
 		ValidTargets: Water, Underwater
+
+^d2k_d2k_set0:
+	Warhead@2Eff: CreateEffect
+		ImpactSounds: CRUSH1.WAV
+
+^d2k_d2k_set1:
+	Warhead@2Eff: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: d2k_building
+		ImpactActors: false
+		ImpactSounds: EXPLLG2.WAV
+
+^d2k_d2k_set2:
+	Warhead@2Eff: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: d2k_nuke
+		ImpactActors: false
+		ImpactSounds: EXPLLG2.WAV
+
+^d2k_d2k_set3:
+	Warhead@2Smu: LeaveSmudge
+		InvalidTargets: Vehicle, Structure
+		SmudgeType: SandCrater, RockCrater
+	Warhead@3Eff: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: d2k_large_explosion
+		ImpactSounds: EXPLSML4.WAV
+	Warhead@Concrete: DamagesConcrete
+		Damage: 4500
+	Warhead@DuneRock: LeaveSmudge
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		SmudgeType: RockCrater
+	Warhead@DuneSand: LeaveSmudge
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		SmudgeType: SandCrater
+	Warhead@Effect: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: d2k_small_napalm
+		ImpactActors: false
+		ImpactSounds: EXPLSML2.WAV
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		InvalidTargets: Ship, Structure, Bridge
+		ValidTargets: Water, Underwater
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		FadeFrames: 6
+		Scale: 0.3
+	Warhead@RA2Scorch: LeaveSmudge
+		Chance: 15
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		SmudgeType: RA2Scorch
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Smudge: LeaveSmudge
+		Chance: 15
+		InvalidTargets: Vehicle, Structure
+		SmudgeType: Scorch
+
+^d2k_d2k_crateexplosion:
+	Warhead@2Eff: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: d2k_large_explosion
+		ImpactActors: false
+		ImpactSounds: EXPLSML4.WAV
+	Warhead@Concrete: DamagesConcrete
+		Damage: 4500
+
+^d2k_d2k_d2kapmine:
+	Warhead@2Eff: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: d2k_self_destruct
+		ImpactSounds: EXPLSML1.WAV
+	Warhead@3Smu: LeaveSmudge
+		InvalidTargets: Structure, wall
+		SmudgeType: Crater
+
+^d2k_d2k_d2katmine:
+	Warhead@2Eff: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: d2k_large_explosion
+		ImpactSounds: EXPLLG2.WAV
+	Warhead@3Smu: LeaveSmudge
+		InvalidTargets: Structure, wall
+		SmudgeType: Crater
+
+^d2k_d2k_d2k_personal_shield_impact:
+	Warhead@ShieldHitEffect: CreateEffect
+		Explosions: ixian_personal_shield
+		ImpactSounds: d2k_personal_shield_1.aud, d2k_personal_shield_2.aud, d2k_personal_shield_3.aud, d2k_personal_shield_4.aud, d2k_personal_shield_5.aud, d2k_personal_shield_6.aud, d2k_personal_shield_7.aud
+		Inaccuracy: 0c128
+		ValidTargets: PersonalShielded
+	Warhead@ShieldHitEffect2: CreateEffect
+		Explosions: ixian_personal_shield_sard
+		ImpactSounds: d2k_personal_shield_1.aud, d2k_personal_shield_2.aud, d2k_personal_shield_3.aud, d2k_personal_shield_4.aud, d2k_personal_shield_5.aud, d2k_personal_shield_6.aud, d2k_personal_shield_7.aud
+		Inaccuracy: 0c128
+		ValidTargets: PersonalShieldedSard
+	Warhead@ShieldHitEffect3: CreateEffect
+		Explosions: ixian_personal_shield_heavy
+		ImpactSounds: d2k_personal_shield_1_heavy.aud, d2k_personal_shield_2_heavy.aud, d2k_personal_shield_3_heavy.aud, d2k_personal_shield_4_heavy.aud, d2k_personal_shield_5_heavy.aud, d2k_personal_shield_6_heavy.aud, d2k_personal_shield_7_heavy.aud
+		Inaccuracy: 0c128
+		ValidTargets: PersonalShieldedHeavy
+
+^d2k_d2k_d2k_rocket:
+	Inherits: ^Effect_MissileAP_Heavy_D2K_Rocket_Blast
+	Warhead@Concrete: DamagesConcrete
+		Damage: 625
+
+^d2k_d2k_fremen_upg:
+	Warhead@2Eff: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: d2k_small_explosion
+		ImpactActors: false
+	Warhead@4Eff_2: CreateEffect
+		Explosions: piffs
+		ValidTargets: Ground, Ship
+	Warhead@4Eff_2Water: CreateEffect
+		Explosions: water_piffs
+		InvalidTargets: Ship, Structure, Bridge
+		ValidTargets: Water, Underwater
+	Warhead@Concrete: DamagesConcrete
+		Damage: 625
+
+^d2k_d2k_leechspit:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@DuneRock: LeaveSmudge
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		SmudgeType: RockCrater
+	Warhead@DuneSand: LeaveSmudge
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		SmudgeType: SandCrater
+	Warhead@Effect: CreateEffect
+		Explosions: sczhsplash
+		ImpactActors: false
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Water
+	Warhead@EffectAir: CreateEffect
+		Explosions: sczhsplash
+		ImpactActors: false
+		ImpactSounds: xplos.aud
+		ValidTargets: Air
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piff
+		InvalidTargets: Ship, Structure, Bridge
+		ValidTargets: Water, Underwater
+	Warhead@RA2Crater: LeaveSmudge
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		SmudgeType: RA2Crater
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Smudge: LeaveSmudge
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		SmudgeType: Crater
+
+^d2k_d2k_d2k_chaos_lightning:
+	Warhead@2Smu_impact: LeaveSmudge
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		SmudgeType: Scorch
+	Warhead@3Eff: CreateEffect
+		ImpactSounds: susaenforcerbeamimpact.wav
+	Warhead@3Smu_area: LeaveSmudge
+		Delay: 3
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		Size: 1
+		SmudgeType: Scorch
+
+^d2k_d2k_d2k_flame_tank:
+	Warhead@2Smu: LeaveSmudge
+		InvalidTargets: Vehicle, Structure, wall
+		SmudgeType: Scorch
+	Warhead@3Eff: CreateEffect
+		Explosions: napalm
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+		GlowScale: 1.5
+		ImpactActors: false
+	Warhead@Effect: CreateEffect
+		Explosions: small_napalm
+		ImpactActors: false
+		ImpactSounds: firebl3.aud
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		FadeFrames: 6
+		Scale: 0.3
+	Warhead@RA2Scorch: LeaveSmudge
+		Chance: 15
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		SmudgeType: RA2Scorch
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Smudge: LeaveSmudge
+		Chance: 15
+		InvalidTargets: Vehicle, Structure, wall
+		SmudgeType: Scorch
+
+^d2k_d2k_d2k_quake_boom:
+	Warhead@2Smu: LeaveSmudge
+		Size: 7,6
+		SmudgeType: Crater
+	Warhead@3Eff: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: d2k_large_explosion
+		ImpactSounds: EXPLLG2.WAV
+
+^d2k_d2k_d2k_quake_thump:
+	Warhead@Effect: CreateEffect
+		Explosions: med_explosion
+		ImpactActors: false
+		ImpactSounds: madexplo.aud
+
+^d2k_d2k_o110mm_gun:
+	Warhead@2Smu: LeaveSmudge
+		InvalidTargets: Vehicle, Structure
+		SmudgeType: SandCrater, RockCrater
+	Warhead@3Eff: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: d2k_small_napalm
+		ImpactActors: false
+		ImpactSounds: EXPLSML2.WAV
+	Warhead@Concrete: DamagesConcrete
+		Damage: 2900
+	Warhead@DuneRock: LeaveSmudge
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		SmudgeType: RockCrater
+	Warhead@DuneSand: LeaveSmudge
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		SmudgeType: SandCrater
+	Warhead@Effect: CreateEffect
+		Explosions: med_explosion
+		ImpactSounds: kaboom12.aud
+		ValidTargets: Ground, Ship
+	Warhead@EffectAir: CreateEffect
+		Explosions: med_explosion_air
+		ImpactActors: false
+		ImpactSounds: EXPLMD2.WAV
+		ValidTargets: Air
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		InvalidTargets: Ship, Structure, Bridge
+		ValidTargets: Water, Underwater
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		FadeFrames: 10
+		Scale: 0.55
+	Warhead@RA2Crater: LeaveSmudge
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		SmudgeType: RA2Crater
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Smudge: LeaveSmudge
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		SmudgeType: Crater
+
+^d2k_d2k_o155mm:
+	Warhead@2Smu: LeaveSmudge
+		InvalidTargets: Vehicle, Structure
+		SmudgeType: SandCrater, RockCrater
+	Warhead@3Eff: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: d2k_med_explosion
+		ImpactActors: false
+		ImpactSounds: EXPLMD2.WAV
+	Warhead@Concrete: DamagesConcrete
+		Damage: 5625
+	Warhead@DuneRock: LeaveSmudge
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		SmudgeType: RockCrater
+	Warhead@DuneSand: LeaveSmudge
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		SmudgeType: SandCrater
+	Warhead@Effect: CreateEffect
+		Explosions: med_explosion
+		ImpactSounds: kaboom12.aud
+		ValidTargets: Ground, Ship
+	Warhead@EffectAir: CreateEffect
+		Explosions: med_explosion_air
+		ImpactActors: false
+		ImpactSounds: EXPLMD2.WAV
+		ValidTargets: Air
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		InvalidTargets: Ship, Structure, Bridge
+		ValidTargets: Water, Underwater
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		FadeFrames: 10
+		Scale: 0.55
+	Warhead@RA2Crater: LeaveSmudge
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		SmudgeType: RA2Crater
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Smudge: LeaveSmudge
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		SmudgeType: Crater
+
+^d2k_d2k_obuildingexplode:
+	Warhead@Effect: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: d2k_building, d2k_self_destruct, d2k_large_explosion
+		ImpactActors: false
+
+^d2k_d2k_odebris:
+	Warhead@2Smu: LeaveSmudge
+		InvalidTargets: Vehicle, Structure
+		SmudgeType: SandCrater
+	Warhead@3Eff: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: d2k_tiny_explosion
+		ImpactActors: false
+	Warhead@Concrete: DamagesConcrete
+		Damage: 300
+
+^d2k_d2k_odebris2:
+	Warhead@2Smu: LeaveSmudge
+		InvalidTargets: Vehicle, Structure
+		SmudgeType: SandCrater
+	Warhead@3Eff: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: d2k_small_napalm
+		ImpactActors: false
+	Warhead@Concrete: DamagesConcrete
+		Damage: 2250
+
+^d2k_d2k_odebris3:
+	Warhead@2Smu: LeaveSmudge
+		InvalidTargets: Vehicle, Structure
+		SmudgeType: SandCrater
+	Warhead@3Eff: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: d2k_small_napalm
+		ImpactActors: false
+	Warhead@Concrete: DamagesConcrete
+		Damage: 1350
+
+^d2k_d2k_odevbullet:
+	Warhead@2Smu: LeaveSmudge
+		InvalidTargets: Vehicle, Structure
+		SmudgeType: SandCrater, RockCrater
+	Warhead@3Eff: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: d2k_shockwave
+		ImpactActors: false
+		ImpactSounds: EXPLMD4.WAV
+	Warhead@Concrete: DamagesConcrete
+		Damage: 3250
+	Warhead@DuneRock: LeaveSmudge
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		SmudgeType: RockCrater
+	Warhead@DuneSand: LeaveSmudge
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		SmudgeType: SandCrater
+	Warhead@Effect: CreateEffect
+		Explosions: med_explosion
+		ImpactSounds: kaboom12.aud
+		ValidTargets: Ground, Ship
+	Warhead@EffectAir: CreateEffect
+		Explosions: med_explosion_air
+		ImpactActors: false
+		ImpactSounds: EXPLMD2.WAV
+		ValidTargets: Air
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		InvalidTargets: Ship, Structure, Bridge
+		ValidTargets: Water, Underwater
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		FadeFrames: 10
+		Scale: 0.55
+	Warhead@RA2Crater: LeaveSmudge
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		SmudgeType: RA2Crater
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Smudge: LeaveSmudge
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		SmudgeType: Crater
+
+^d2k_d2k_odeviatormissile:
+	Warhead@3Eff: CreateEffect
+		ExplosionPalette: deviatorgas
+		Explosions: deviator
+		ImpactActors: false
+		UsePlayerPalette: true
+		ValidTargets: Ground, Air
+	Warhead@Concrete: DamagesConcrete
+		Damage: 1000
+	Warhead@Effect: CreateEffect
+		Explosions: big_frag
+		ImpactSounds: xplobig4.aud
+		ValidTargets: Ground, Water
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactActors: false
+		ImpactSounds: EXPLLG2.WAV
+		ValidTargets: Air
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		FadeFrames: 15
+		Scale: 0.8
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Smudge: LeaveSmudge
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		SmudgeType: SandCrater, RockCrater
+
+^d2k_d2k_ofremen_l:
+	Warhead@2Eff: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: small_explosion
+		ImpactActors: false
+	Warhead@Concrete: DamagesConcrete
+		Damage: 625
+
+^d2k_d2k_ofremen_s:
+	Warhead@2Eff: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: d2k_small_explosion
+		ImpactActors: false
+	Warhead@Concrete: DamagesConcrete
+		Damage: 1250
+
+^d2k_d2k_ogrendeath:
+	Warhead@2Smu: LeaveSmudge
+		SmudgeType: SandCrater, RockCrater
+	Warhead@3Eff: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: d2k_building
+		ImpactActors: false
+		ImpactSounds: EXPLSML4.WAV
+	Warhead@Concrete: DamagesConcrete
+		Damage: 1875
+
+^d2k_d2k_ohmg:
+	Warhead@2Eff: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: d2k_piffs
+		ImpactActors: false
+	Warhead@Concrete: DamagesConcrete
+		Damage: 1800
+
+^d2k_d2k_om_hmg:
+	Warhead@2Eff: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: d2k_piffs
+		ImpactActors: false
+	Warhead@Concrete: DamagesConcrete
+		Damage: 625
+
+^d2k_d2k_oornibomb:
+	Warhead@2Smu: LeaveSmudge
+		InvalidTargets: Vehicle, Structure
+		SmudgeType: SandCrater, RockCrater
+	Warhead@3Eff: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: d2k_large_explosion
+		ImpactActors: false
+		ImpactSounds: EXPLSML4.WAV
+	Warhead@Concrete: DamagesConcrete
+		Damage: 6750
+
+^d2k_d2k_oplasmaexplosion:
+	Warhead@2Smu: LeaveSmudge
+		SmudgeType: SandCrater
+	Warhead@3Eff: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: devastator
+	Warhead@Concrete: DamagesConcrete
+		Damage: 20000
+
+^d2k_d2k_orocket:
+	Inherits: ^Effect_MissileAP_Heavy_D2K_Rocket_Blast
+	Warhead@2Smu: LeaveSmudge
+		InvalidTargets: Vehicle, Structure
+		SmudgeType: SandCrater, RockCrater
+	Warhead@3Eff: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: d2k_tiny_explosion
+		ImpactActors: false
+		ImpactSounds: EXPLSML1.WAV
+		ValidTargets: Ground, Air
+	Warhead@Concrete: DamagesConcrete
+		Damage: 625
+
+^d2k_d2k_osarddeath:
+	Warhead@2Smu: LeaveSmudge
+		SmudgeType: SandCrater, RockCrater
+	Warhead@3Eff: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: d2k_small_napalm
+		ImpactActors: false
+		ImpactSounds: EXPLSML2.WAV
+	Warhead@Concrete: DamagesConcrete
+		Damage: 450
+
+^d2k_d2k_osound:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 1720
+
+^d2k_d2k_ounitexplodelarge:
+	Warhead@Effect: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: d2k_large_explosion
+		ImpactActors: false
+		ImpactSounds: EXPLLG2.WAV
+
+^d2k_d2k_ounitexplodemed:
+	Warhead@Effect: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: d2k_building
+		ImpactActors: false
+		ImpactSounds: EXPLSML2.WAV
+
+^d2k_d2k_ogrenade:
+	Warhead@2Smu: LeaveSmudge
+		InvalidTargets: Vehicle, Structure
+		SmudgeType: SandCrater
+	Warhead@3Eff: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: d2k_med_explosion
+		ImpactActors: false
+		ImpactSounds: EXPLMD2.WAV
+	Warhead@Concrete: DamagesConcrete
+		Damage: 1875
+
+^d2k_d2k_omtank_pri:
+	Warhead@3Eff: CreateEffect
+		ExplosionPalette: effect75alpha
+		Explosions: d2k_small_explosion
+		ImpactActors: false
+		ImpactSounds: EXPLSML1.WAV
+		ValidTargets: Ground, Air
+	Warhead@Concrete: DamagesConcrete
+		Damage: 900
+	Warhead@Effect: CreateEffect
+		Explosions: big_frag
+		ImpactSounds: xplobig4.aud
+		ValidTargets: Ground, Water
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactActors: false
+		ImpactSounds: EXPLLG2.WAV
+		ValidTargets: Air
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		FadeFrames: 15
+		Scale: 0.8
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Smudge: LeaveSmudge
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+		SmudgeType: SandCrater, RockCrater

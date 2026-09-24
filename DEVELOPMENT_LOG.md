@@ -12079,3 +12079,26 @@ exception logs.
 (Option A accepted — my W27 pass on that file runs after it lands).
 DAWN also accepts `tiberiandawn.yaml` + `tiberiansun.yaml` (W7 edges +
 inline effects in one batch).
+
+## 2026-09-25 — DAWN: W27 batch-6 — legacy files (64 weapons, 57 families)
+
+**Scope:** `mods/cameo/weapons/{tiberiansun,tiberiandawn,d2k}.yaml` —
+104 local effect nodes stripped into the per-game libraries
+(15 ^ts_tiberiansun_*, 5 ^td_tiberiandawn_*, 37 ^d2k_d2k_* families).
+outpost2.yaml deferred until EMBER's #488 lands (accepted Option A).
+
+**New converter case — stripped field cancels:** `oDeviatorMissile`'s
+local node carried `-ImpactSounds:` hiding a field a NON-fx ancestor
+(`^OMissile`) supplies. With the node stripped the field leaked back.
+Fix: the family derives nofx-ancestor fields only via its own parents;
+leaked fields get `-field:` cancels in a weapon-LOCAL bare node (family
+level would be an orphan cancel — the provider lives in the weapon's
+other ancestors). `w27_wire3.py` computes the nofx view (post-strip,
+pre-edge resolution) and emits masks per weapon.
+
+**Verification:** full-corpus field diff 0 changed; orphan cancels 0;
+empty warheads 0; W4 53 -> **52**, W6 514 -> **448**,
+L1/L2 276/279 -> **262/269** (ratchets locked lower); W7 963, W8 637.
+
+**Boot-gate:** PASS — `MenuPostProcessEffect.PostWorldLoaded`, no new
+exception logs.

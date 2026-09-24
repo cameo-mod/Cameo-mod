@@ -1,4 +1,4 @@
-=== 52 VIOLATIONS + 0 REDUNDANT (Image: explosion) ===
+=== 50 VIOLATIONS + 0 REDUNDANT (Image: explosion) ===
 
 [VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:1016  Hakureiring2  Image: hakurei_giphy
 [VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:1080  ReimuYinYangDrone  Image: hakurei_giphy
@@ -33,16 +33,14 @@
 [VIOLATION] mods\cameo\weapons\effects_ts.yaml:593    Image: tsdroppod
 [VIOLATION] mods\cameo\weapons\effects_ts.yaml:601    Image: tsdroppod
 [VIOLATION] mods\cameo\weapons\effects_ts.yaml:1115    Image: tsioncannon
+[VIOLATION] mods\cameo\weapons\effects_ts.yaml:1466    Image: tsdig
+[VIOLATION] mods\cameo\weapons\effects_ts.yaml:1474    Image: tsdig
 [VIOLATION] mods\cameo\weapons\generals.yaml:2313  GLSneakAttack  Image: tsdig
 [VIOLATION] mods\cameo\weapons\heroes.yaml:811  McNealMechDrop1  Image: tspodring
 [VIOLATION] mods\cameo\weapons\heroes.yaml:816  McNealMechDrop1  Image: tsmcnealmechdrop
 [VIOLATION] mods\cameo\weapons\redalert2.yaml:3076  RA2CorpseSpawner  Image: ra2corpse
 [VIOLATION] mods\cameo\weapons\redalert2.yaml:3122  RA2FlyingBody  Image: ra2corpse
 [VIOLATION] mods\cameo\weapons\simcity.yaml:253  CasinoCrateSpawner  Image: tspodring
-[VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1754  MutSAPC  Image: tsdig
-[VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1830  NODMutant  Image: tsdig
-[VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1873  FloaterSpawner  Image: tsdig
-[VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1895  TunnelDisappear  Image: tsdig
 [VIOLATION] mods\cameo\weapons\warcraft2.yaml:432  wc2mageFire  Image: wc2_lightng
 [VIOLATION] mods\cameo\weapons\warcraft2.yaml:604  wc2mageBlizzard_Projectile  Image: wc2_effect_blizzard
 [VIOLATION] mods\cameo\weapons\warcraft2.yaml:723  wc2cannontowerFire  Image: wc2_cannon_impact

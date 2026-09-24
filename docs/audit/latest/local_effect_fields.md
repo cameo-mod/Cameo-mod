@@ -4,9 +4,9 @@
 # the ratchet counts per maintainer ruling but stay listed below.
 
 Files scanned: 40
-Concrete weapons with local Explosions (L1): 276
-Concrete weapons with local ImpactSounds (L2): 279
-Exempt secondary-channel declarations (not ratcheted): 244
+Concrete weapons with local Explosions (L1): 262
+Concrete weapons with local ImpactSounds (L2): 269
+Exempt secondary-channel declarations (not ratcheted): 196
 
 | file | weapon | warhead | Explosions | ImpactSounds | line | exempt |
 |---|---|---|---|---|---|---|
@@ -411,42 +411,6 @@ Exempt secondary-channel declarations (not ratcheted): 244
 | ContentPacks\Warcraft2\Orcs\yaml\weapons.yaml | wc2ogremageEyeOfKilrogg | 2Eff | YES | - | 65 | exempt |
 | ContentPacks\Warcraft2\Orcs\yaml\weapons.yaml | wc2ogrepunch | Effect | - | YES | 44 |  |
 | ContentPacks\Warcraft2\Orcs\yaml\weapons.yaml | wc2runesSuper | 2Eff | YES | YES | 143 | exempt |
-| weapons\d2k.yaml | CrateExplosion | 2Eff | YES | YES | 455 | exempt |
-| weapons\d2k.yaml | Crush | 2Eff | - | YES | 249 | exempt |
-| weapons\d2k.yaml | D2KAPMine | 2Eff | YES | YES | 122 | exempt |
-| weapons\d2k.yaml | D2KATMine | 2Eff | YES | YES | 99 | exempt |
-| weapons\d2k.yaml | D2KDemolish | 2Eff | YES | YES | 255 | exempt |
-| weapons\d2k.yaml | D2K_Personal_Shield_Impact | ShieldHitEffect | YES | YES | 494 | exempt |
-| weapons\d2k.yaml | D2K_Personal_Shield_Impact | ShieldHitEffect2 | YES | YES | 499 | exempt |
-| weapons\d2k.yaml | D2K_Personal_Shield_Impact | ShieldHitEffect3 | YES | YES | 504 | exempt |
-| weapons\d2k.yaml | DeathHand | 2Eff | YES | YES | 267 | exempt |
-| weapons\d2k.yaml | DeathHandCluster | 3Eff | YES | YES | 302 | exempt |
-| weapons\d2k.yaml | Fremen_Upg | 2Eff | YES | - | 577 | exempt |
-| weapons\d2k.yaml | LeechSpit | Effect | YES | - | 231 |  |
-| weapons\d2k.yaml | LeechSpit | EffectAir | YES | - | 233 | exempt |
-| weapons\d2k.yaml | d2k_chaos_lightning | 3Eff | - | YES | 695 | exempt |
-| weapons\d2k.yaml | d2k_flame_tank | 3Eff | YES | - | 648 | exempt |
-| weapons\d2k.yaml | d2k_quake_boom | 3Eff | YES | YES | 172 | exempt |
-| weapons\d2k.yaml | d2k_quake_thump | Effect | YES | YES | 149 |  |
-| weapons\d2k.yaml | o155mm | 3Eff | YES | YES | 789 | exempt |
-| weapons\d2k.yaml | oBuildingExplode | Effect | YES | - | 1078 |  |
-| weapons\d2k.yaml | oCrush | 2Eff | - | YES | 998 | exempt |
-| weapons\d2k.yaml | oDeathHand | 2Eff | YES | YES | 1016 | exempt |
-| weapons\d2k.yaml | oDeathHandCluster | 3Eff | YES | YES | 1052 | exempt |
-| weapons\d2k.yaml | oDebris | 3Eff | YES | - | 1324 | exempt |
-| weapons\d2k.yaml | oDebris2 | 3Eff | YES | - | 1351 | exempt |
-| weapons\d2k.yaml | oDemolish | 2Eff | YES | YES | 1004 | exempt |
-| weapons\d2k.yaml | oDevBullet | 3Eff | YES | YES | 766 | exempt |
-| weapons\d2k.yaml | oDeviatorMissile | 3Eff | YES | - | 901 | exempt |
-| weapons\d2k.yaml | oFremen_L | 2Eff | YES | - | 1263 | exempt |
-| weapons\d2k.yaml | oFremen_S | 2Eff | YES | - | 1222 | exempt |
-| weapons\d2k.yaml | oGrenDeath | 3Eff | YES | YES | 1138 | exempt |
-| weapons\d2k.yaml | oOrniBomb | 3Eff | YES | YES | 986 | exempt |
-| weapons\d2k.yaml | oPlasmaExplosion | 3Eff | YES | - | 1184 | exempt |
-| weapons\d2k.yaml | oSardDeath | 3Eff | YES | YES | 1162 | exempt |
-| weapons\d2k.yaml | oUnitExplodeLarge | Effect | YES | YES | 1071 |  |
-| weapons\d2k.yaml | oUnitExplodeMed | Effect | YES | YES | 1064 |  |
-| weapons\d2k.yaml | ogrenade | 3Eff | YES | YES | 1114 | exempt |
 | weapons\outpost2.yaml | MiniNova | Effect | YES | - | 1620 |  |
 | weapons\outpost2.yaml | PLYMineExplosive | 3Eff | YES | YES | 1326 | exempt |
 | weapons\outpost2.yaml | eden_EMP | Effect | YES | YES | 566 |  |
@@ -480,33 +444,7 @@ Exempt secondary-channel declarations (not ratcheted): 244
 | weapons\starcraft.yaml | SCScourgeDroneExplosion | Effect | YES | YES | 59 |  |
 | weapons\starcraft.yaml | Scarab | 3Eff | YES | YES | 163 | exempt |
 | weapons\starcraft.yaml | ScourgeDroneExplosion | Effect | YES | YES | 47 |  |
-| weapons\tiberiandawn.yaml | 227mm | Effect | YES | YES | 207 |  |
-| weapons\tiberiandawn.yaml | 227mm | EffectWater | YES | YES | 212 | exempt |
-| weapons\tiberiandawn.yaml | ArtilleryShell | Effect | YES | YES | 141 |  |
-| weapons\tiberiandawn.yaml | ChemTibAtomic | Effect | YES | YES | 233 |  |
-| weapons\tiberiandawn.yaml | FlametankExplode | Effect | YES | YES | 174 |  |
-| weapons\tiberiandawn.yaml | TDBuildingExplode | Effect | YES | YES | 32 |  |
-| weapons\tiberiansun.yaml | FloaterSpawner | 1 | YES | YES | 1872 | exempt |
-| weapons\tiberiansun.yaml | MutSAPC | Effect | YES | YES | 1753 |  |
-| weapons\tiberiansun.yaml | NODMutant | Effect | YES | YES | 1829 |  |
-| weapons\tiberiansun.yaml | TS120mm_bluenuke | 3Eff | YES | - | 369 | exempt |
-| weapons\tiberiansun.yaml | TS155mm_bluenuke | 3Eff | YES | - | 461 | exempt |
-| weapons\tiberiansun.yaml | TSGrenade | 3Eff | - | YES | 494 | exempt |
-| weapons\tiberiansun.yaml | TSHSeekerBomb | Effect | YES | YES | 1687 |  |
-| weapons\tiberiansun.yaml | TSHellfire | EffectWater | YES | YES | 1180 | exempt |
-| weapons\tiberiansun.yaml | TSLaserObeliskLaserFire | 2Eff | YES | - | 811 | exempt |
-| weapons\tiberiansun.yaml | TSLocustBomb | 2Eff | YES | YES | 1371 | exempt |
-| weapons\tiberiansun.yaml | TSLocustBomb | 3EffWater | YES | YES | 1375 | exempt |
-| weapons\tiberiansun.yaml | TSMissileBomblet | 2Eff | YES | YES | 1615 | exempt |
-| weapons\tiberiansun.yaml | TSMissileBomblet | 3EffWater | YES | YES | 1620 | exempt |
-| weapons\tiberiansun.yaml | TSObeliskLaserFire | 2Eff | YES | - | 776 | exempt |
-| weapons\tiberiansun.yaml | TSPistola | 2Eff | YES | - | 1483 | exempt |
-| weapons\tiberiansun.yaml | TSPistola | 3EffWater | YES | - | 1485 | exempt |
-| weapons\tiberiansun.yaml | TSRedEye2 | 2Eff | - | YES | 1199 | exempt |
-| weapons\tiberiansun.yaml | TSTacticalMissile | 2Eff | YES | YES | 1568 | exempt |
-| weapons\tiberiansun.yaml | TSVeinholeSmoke | Effect | YES | - | 1339 |  |
-| weapons\tiberiansun.yaml | TSVeins | Effect | YES | - | 1317 |  |
-| weapons\tiberiansun.yaml | TunnelDisappear | 1 | YES | YES | 1894 | exempt |
+| weapons\tiberiandawn.yaml | ChemTibAtomic | Effect | YES | YES | 206 |  |
 | weapons\warcraft2.yaml | SiegeEngineCannon | Effect | YES | YES | 301 |  |
 | weapons\warcraft2.yaml | wc2_tower_arrow | Effect | - | YES | 655 |  |
 | weapons\warcraft2.yaml | wc2arrowFire | Effect | - | YES | 88 |  |
@@ -589,4 +527,4 @@ Exempt secondary-channel declarations (not ratcheted): 244
 | weapons\weapons.yaml | bowFire | 2Eff | - | YES | 13549 | exempt |
 | weapons\weapons.yaml | bowFire_AA | 2Eff | - | YES | 13524 | exempt |
 
-PASS: L1 276 <= 276, L2 279 <= 279
+PASS: L1 262 <= 262, L2 269 <= 269

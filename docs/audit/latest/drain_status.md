@@ -12,9 +12,9 @@
 | weapons/d2k.yaml | 80 | 1 | 79 | GLOBAL:d2k |
 | weapons/darkreign.yaml | 94 | 0 | 94 |  |
 | weapons/dune2.yaml | 16 | 0 | 16 |  |
-| weapons/effects_d2k.yaml | 73 | 0 | 73 |  |
-| weapons/effects_td.yaml | 40 | 0 | 40 |  |
-| weapons/effects_ts.yaml | 84 | 0 | 84 |  |
+| weapons/effects_d2k.yaml | 110 | 0 | 110 |  |
+| weapons/effects_td.yaml | 45 | 0 | 45 |  |
+| weapons/effects_ts.yaml | 99 | 0 | 99 |  |
 | weapons/elementals.yaml | 4 | 0 | 4 |  |
 | weapons/ep315.yaml | 4 | 0 | 4 |  |
 | weapons/explosions.yaml | 18 | 11 | 7 | D2k/Atreides, D2k/Corrino, D2k/Harkonnen, D2k/Ixian, D2k/Ordos, D2k/Shared… |
