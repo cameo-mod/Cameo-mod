@@ -79,15 +79,13 @@ OrniGunC:
 
 Fremen_S:
 	Inherits: ^MG
+	Inherits@fx: ^d2k_fremen_s
 	ValidTargets: Infantry
 	InvalidTargets: Vehicle, Structure, Air
 	ReloadDelay: 20
 	Report: MGUN2.WAV
 	Warhead@1Dam: SpreadDamage
 		Damage: 1600
-	Warhead@2Eff: CreateEffect
-		Explosions: d2k_small_explosion
-		ImpactSounds: EXPLSML1.WAV
 	Warhead@4Eff_2Water:
 		ImpactSounds: splash9.aud
 
@@ -123,6 +121,7 @@ D2KRepair:
 
 PhoenixRocket:
 	Inherits: ^D2KMissile
+	Inherits@fx: ^d2k_phoenix_rocket
 	ReloadDelay: 100
 	Burst: 8
 	Range: 4608
@@ -141,13 +140,6 @@ PhoenixRocket:
 			Medium: 125
 			Heavy: 100
 			Concrete: 40
-	Warhead@3Eff: CreateEffect
-		Explosions: napalm
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
-		ImpactSounds: firebl3.aud
-		ExplosionPalette: effect
 	Warhead@Concrete: DamagesConcrete
 		Damage: 1250
 	Warhead@Shrapnel: FireShrapnel
@@ -155,6 +147,4 @@ PhoenixRocket:
 		Amount: 3
 		ValidTargets: Ground, Water, Air
 	MinRange: 920
-	Warhead@EffectAir:
-		ImpactSounds: EXPLLG2.WAV
 

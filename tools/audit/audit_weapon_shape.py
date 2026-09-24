@@ -88,10 +88,23 @@ W1_BASELINE = 576   # historical count ratchet, kept for provenance; W1_RATE_BP 
 # Checks gated on a SHARE of the corpus instead of an absolute count.
 RATE_CHECKS: dict[str, int] = {"W1": W1_RATE_BP}
 RED = ' Γ¢ö'
-W2_BASELINE = 177   # dual ^Warhead_ inherit; 226 -> 177 by the dead-inherit slice
-                    # (was 210 before; the 226 regression is repaid and then some)
+W2_BASELINE = 281   # dual ^Warhead_ inherit; 226 -> 177 by the dead-inherit slice
+                    # (was 210 before; the 226 regression is repaid and then some).
+                    # 177 -> 281 re-baseline 2026-09-24 (maintainer order, Claude
+                    # re-verified): the R12 ^Compatibility_* -> ^Warhead_* rename
+                    # widened what W2 measures — see
+                    # FINDING_2026-09-23_dawn_w2w7_bisect.md (ccbfd383c~1 = 177,
+                    # ccbfd383c = 283, master 281 after #478). The un-renamed
+                    # count is ~175, i.e. real debt IMPROVED; W23 removes the
+                    # renamed _Flat/ExtraDamage shims as it lands.
 W3_BASELINE = 12    # dual ^Projectile_ inherit (21->12: same collapse)
-W4_BASELINE = 51    # dual ^Effect_ inherit; Apocalypse effect composition owns its overrides
+W4_BASELINE = 54    # dual ^Effect_ inherit; Apocalypse effect composition owns its overrides.
+                    # 51 -> 54 re-baseline 2026-09-23: effect-kind detection now
+                    # recognises ^<game>_<stem> derivations (Inherits -> ^Effect_*,
+                    # e.g. ^d2k_laser_heavy, ^CabalMissileEffect, ^RA2EliteEffects),
+                    # surfacing 3 pre-existing dual-effect-edge weapons hidden by
+                    # the old prefix-only classifier. Same class as the W2
+                    # ^Compatibility_* rename: measurement fix, not new debt.
 W5_BASELINE = 389   # more than one resolved MAIN warhead; merge-payload repairs
 W6_BASELINE = 692   # weapons declaring an effect warhead locally;
                     # 694 -> 737 -> 692: W23 pins first declared effect
@@ -103,13 +116,16 @@ W6_BASELINE = 692   # weapons declaring an effect warhead locally;
 # W1 could pass a weapon that inherits all three of its parents from other weapons. Both
 # ratchets are set by THIS script's own first run, never from a scratch scan.
 W7_BASELINE = 957   # inherits from another WEAPON (655 distinct weapon-parents)
-W8_BASELINE = 671   # inherits a ^Template outside the three kinds; 874 -> 858 by promoting
+W8_BASELINE = 637   # inherits a ^Template outside the three kinds; 874 -> 858 by promoting
                     # 33 ^Compatibility_* shims into real ^Warhead_* templates
                     # 687 -> 694: the TOP_LEVEL regex was fixed to match
                     # digit-starting keys (120mm_*, 8Inch, etc.), exposing
                     # 7 weapons previously hidden. 675 -> 671: pure-effect
                     # ^<game>_<stem> templates (^d2k_*, ^ImpactGlow*,
                     # ^CabalMissileEffect) now classify as the effect kind.
+                    # 671 -> 637: effect-kind detection now also recognises
+                    # family derivations (Inherits -> ^Effect_*), so dozens of
+                    # ^<game>_<stem> shim edges stopped counting as legacy.
                     # LOWER ONLY.
 
 KIND_PREFIXES = ("^Warhead_", "^Projectile_", "^Effect_")
@@ -139,9 +155,13 @@ def scan_source():
     local_fx: dict[str, list[str]] = collections.defaultdict(list)
     fx_templates: set[str] = set()
     # A ^<game>_<stem> effect template is PURE effect: every indent-1 child is a
-    # Warhead@* node (inline type empty or an effect type) and at least one is
-    # typed. Bundle templates (^D2KMissile, ^OCannon, ^DamagingExplosion, ...)
-    # mix Inherits/damage warheads/fields and stay legacy W8 worklist items.
+    # Warhead@* node (inline type empty or an effect type) or an Inherits* edge
+    # to an ^Effect_* family (family derivation, e.g. ^d2k_laser_heavy ->
+    # ^Effect_Laser_Heavy). Purity needs at least one typed effect Warhead@
+    # node OR an ^Effect_* inherit (a derivation that only pins residuals is
+    # still the effect kind). Bundle templates (^D2KMissile, ^OCannon,
+    # ^DamagingExplosion, ...) mix Inherits/damage warheads/fields and stay
+    # legacy W8 worklist items.
     fx_pure: dict[str, list[bool]] = collections.defaultdict(lambda: [False, True])
     for entry in man.weapons:
         path = pathlib.Path(str(entry))
@@ -161,12 +181,16 @@ def scan_source():
                 child = re.match(r"^\t([A-Za-z0-9_@]+):", line)
                 if child:
                     mw = WARHEAD.match(line)
+                    mi = INHERIT.match(line)
                     if mw:
                         if mw.group(2):
                             if mw.group(2) in EFFECT_TYPES:
                                 fx_pure[current][0] = True
                             else:
                                 fx_pure[current][1] = False
+                        # untyped Warhead@ residual pin: allowed
+                    elif mi and mi.group(2).startswith("^Effect_"):
+                        fx_pure[current][0] = True
                     else:
                         fx_pure[current][1] = False
                 continue
