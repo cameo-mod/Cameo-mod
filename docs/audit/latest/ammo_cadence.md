@@ -28,9 +28,9 @@ Of those, **17** hold only ONE shot, so no rate exists for them either.
 | japan_zerofighter_slave | JapanCarrierFighterBomb | 2,000 | 3,000 | 0.4 s | 0.15 |
 | asianalliance_pelican | AsianPelicanMissile_elite | 1,548 | 2,182 | 1.3 s | 0.15 |
 | td_gdi_defenserig | td_gdi_defenserig_gdirigphalanx | 3,000 | 3,136 | 7.0 s | 0.16 |
-| heavy_rocket_raider.ixian | D2K_Bazooka2 | 1,200 | 1,350 | 1.6 s | 0.20 |
+| ixian_heavy_rocket_raider | D2K_Bazooka2 | 1,200 | 1,350 | 1.6 s | 0.20 |
 | ixian_ixmissiletank | mtank_pri2 | 4,800 | 5,236 | 2.2 s | 0.20 |
-| rocket_raider.ixian | D2K_Bazooka2 | 1,200 | 1,350 | 1.6 s | 0.20 |
+| ixian_rocket_raider | D2K_Bazooka2 | 1,200 | 1,350 | 1.6 s | 0.20 |
 | protoss_reaver | ScarabLaunch | 2,222 | 2,424 | 39.6 s | 0.25 |
 | ra2_allies_harrier | HarrierMissiles_elite | 1,220 | 10,286 | 0.6 s | 0.28 |
 | asianalliance_kami_chemical | AsianKamikazeChaingun | 750 | 1,200 | 0.8 s | 0.32 |

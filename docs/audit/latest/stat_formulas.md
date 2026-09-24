@@ -65,7 +65,6 @@ Violations: **685** across 2009 roster actors (reference-clean units: gdiarcher,
 | atreides_siegetank | Step 10 | expected 16 (HP 40000/2500) |
 | atreides_spiceharvester | Step 80 | expected 72 (HP 180000/2500) |
 | cabal_beholder | Step 50 | expected 125 (HP 125000/1000) |
-| combat_tank.harkonnen | Step 10 | expected 28 (HP 70000/2500) |
 | corrino_bmp | Step 10 | expected 16 (HP 40000/2500) |
 | corrino_combattank | Step 10 | expected 40 (HP 100000/2500) |
 | corrino_sardaukar_bazooka | Step 50 | expected 120 (HP 120000/1000) |
@@ -91,6 +90,7 @@ Violations: **685** across 2009 roster actors (reference-clean units: gdiarcher,
 | harkonnen_adp | Step 10 | expected 20 (HP 50000/2500) |
 | harkonnen_assaulttank | Step 10 | expected 28 (HP 70000/2500) |
 | harkonnen_buzzsaw | Step 10 | expected 28 (HP 70000/2500) |
+| harkonnen_combat_tank | Step 10 | expected 28 (HP 70000/2500) |
 | harkonnen_devastatormech | Step 250 | expected 220 (HP 550000/2500) |
 | harkonnen_flametank | Step 10 | expected 28 (HP 70000/2500) |
 | harkonnen_inkvine | Step 10 | expected 18 (HP 45000/2500) |
@@ -220,7 +220,6 @@ _267 further infantry inherit Repairable from the infantry base template (^Defau
 | corrino_lightinfantry | RegenAmount 10 | expected 64 (2 x SelfHealing 32) |
 | corrino_spiceharvester | RegenAmount 10 | expected 160 (2 x SelfHealing 80) |
 | corrino_trooper | RegenAmount 10 | expected 20 (2 x SelfHealing 10) |
-| duelist_tank.ixian | RegenAmount 158 | expected 192 (2 x SelfHealing 96) |
 | eden_cargotruck_empty | RegenAmount 10 | expected 88 (2 x SelfHealing 44) |
 | forgotten_engineer | RegenAmount 25 | expected 20 (2 x SelfHealing 10) |
 | forgotten_tiberiumharvester | RegenAmount 10 | expected 120 (2 x SelfHealing 60) |
@@ -230,8 +229,9 @@ _267 further infantry inherit Repairable from the infantry base template (^Defau
 | harkonnen_rockettrooper | RegenAmount 10 | expected 20 (2 x SelfHealing 10) |
 | harkonnen_sardaukar | RegenAmount 10 | expected 100 (2 x SelfHealing 50) |
 | harkonnen_spiceharvester | RegenAmount 10 | expected 160 (2 x SelfHealing 80) |
-| heavy_inf.ixian | RegenAmount 10 | expected 64 (2 x SelfHealing 32) |
+| ixian_duelist_tank | RegenAmount 158 | expected 192 (2 x SelfHealing 96) |
 | ixian_empbomber | RegenAmount 76 | expected 88 (2 x SelfHealing 44) |
+| ixian_heavy_inf | RegenAmount 10 | expected 64 (2 x SelfHealing 32) |
 | ixian_lightinfantry | RegenAmount 10 | expected 64 (2 x SelfHealing 32) |
 | ixian_rockettrooper | RegenAmount 10 | expected 24 (2 x SelfHealing 12) |
 | ixian_shockinfantry | RegenAmount 10 | expected 72 (2 x SelfHealing 36) |
@@ -251,7 +251,7 @@ _267 further infantry inherit Repairable from the infantry base template (^Defau
 | ordos_lightinfantry | RegenAmount 10 | expected 56 (2 x SelfHealing 28) |
 | ordos_rockettrooper | RegenAmount 10 | expected 24 (2 x SelfHealing 12) |
 | plymouth_cargotruck_empty | RegenAmount 10 | expected 96 (2 x SelfHealing 48) |
-| ra1_allies_alliedoretruck | RegenAmount 10 | expected 168 (2 x SelfHealing 84) |
+| ra1_allies_oretruck | RegenAmount 10 | expected 168 (2 x SelfHealing 84) |
 | ra1_soviets_heavyindustrialminer | RegenAmount 10 | expected 108 (2 x SelfHealing 54) |
 | ra1_soviets_oretruck | RegenAmount 10 | expected 168 (2 x SelfHealing 84) |
 | ra2_allies_chronominer | RegenAmount 10 | expected 80 (2 x SelfHealing 40) |
@@ -308,7 +308,7 @@ _267 further infantry inherit Repairable from the infantry base template (^Defau
 | plymouth_gp_microwave | RevealsShroud 6144 | weapon range 6656 |
 | plymouth_gp_rpg | RevealsShroud 6144 | weapon range 7168 |
 | plymouth_gp_stickyfoam | RevealsShroud 6144 | weapon range 6656 |
-| ra1_allies_alliedgunturret | RevealsShroud 8683 | weapon range 7685 |
+| ra1_allies_gunturret | RevealsShroud 8683 | weapon range 7685 |
 | ra2_soviets_teslacoil | RevealsShroud 10000 | weapon range 8842 |
 | schwarzermond_sturmcannon | RevealsShroud 6666 | weapon range 14000 |
 | steelconsortium_antiairquantummissileturret | RevealsShroud 12000 | weapon range 15000 |
@@ -476,8 +476,8 @@ _267 further infantry inherit Repairable from the infantry base template (^Defau
 | corrino_bmp | TurnSpeed 40 (Speed 70) | expected 14 = Speed/5 |
 | corrino_buggy | TurnSpeed 60 (Speed 85) | expected 17 = Speed/5 |
 | harkonnen_adp | TurnSpeed 20 (Speed 64) | expected 13 = Speed/5 |
-| ra1_allies_alliedlighttank | TurnSpeed 24 (Speed 111) | expected 22 = Speed/5 |
-| ra1_allies_alliedmediumtank | TurnSpeed 20 (Speed 81) | expected 16 = Speed/5 |
+| ra1_allies_lighttank | TurnSpeed 24 (Speed 111) | expected 22 = Speed/5 |
+| ra1_allies_mediumtank | TurnSpeed 20 (Speed 81) | expected 16 = Speed/5 |
 | ra1_allies_ranger | TurnSpeed 35 (Speed 157) | expected 31 = Speed/5 |
 | td_gdi_mammothtank | TurnSpeed 12 (Speed 49) | expected 10 = Speed/5 |
 | td_nod_buggy | TurnSpeed 40 (Speed 161) | expected 32 = Speed/5 |
@@ -546,9 +546,9 @@ _none found_
 | actor | actual | expected |
 |---|---|---|
 | harkonnen: harkonnen_autogunturret | prereqs: harkonnen_barracks, harkonnen_constructionyard (gate 2, radar tier 3) | advanced defense must be gated above the radar tier (tech+) |
-| ordos: ordos_artilleryplatform | prereqs: ordos_barracks, ordos_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
-| ordos: ordos_chemturret | prereqs: ordos_barracks, ordos_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
 | ordos: ordos_autogunturret | prereqs: ordos_barracks, ordos_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
+| ordos: ordos_chemturret | prereqs: ordos_barracks, ordos_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
+| ordos: ordos_artilleryplatform | prereqs: ordos_barracks, ordos_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
 | schwarzermond: schwarzermond_lasertower | prereqs: schwarzermond_barracks, schwarzermond_constructionyard (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
 
 
@@ -569,7 +569,7 @@ _none found_
 | ra1_soviets: defaultsoviet | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
 | japan: defaultjapan | total cost 2390 | target ~2000 (±15%) |
 | japan: defaultjapan | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
-| japan: defaultjapan | ra1_allies_alliedrocketsoldier (cost 480) x2 vs japan_scoutcar (cost 300) x1 | pricier units must not outnumber cheaper ones |
+| japan: defaultjapan | ra1_allies_rocketsoldier (cost 480) x2 vs japan_scoutcar (cost 300) x1 | pricier units must not outnumber cheaper ones |
 | ts_gdi: defaulttsgdi | total cost 2460 | target ~2000 (±15%) |
 | ts_gdi: defaulttsgdi | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
 | ts_nod: defaulttsnod | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
@@ -650,9 +650,9 @@ _none found_
 | td_nod: heavynodb | total cost 3810 | target ~10000 (±15%) |
 | ra1_allies: heavyallies | total cost 6680 | target ~10000 (±15%) |
 | ra1_allies: heavyallies | 5 infantry : 5 vehicles | want ~5 infantry per vehicle |
-| ra1_allies: heavyallies | ra1_allies_alliedmediumtank (cost 1280) x3 vs ra1_allies_alliedrocketsoldier (cost 480) x2 | pricier units must not outnumber cheaper ones |
-| ra1_allies: heavyallies | ra1_allies_alliedmediumtank (cost 1280) x3 vs ra1_allies_ranger (cost 510) x1 | pricier units must not outnumber cheaper ones |
-| ra1_allies: heavyallies | ra1_allies_alliedmediumtank (cost 1280) x3 vs ra1_allies_alliedlighttank (cost 1040) x1 | pricier units must not outnumber cheaper ones |
+| ra1_allies: heavyallies | ra1_allies_mediumtank (cost 1280) x3 vs ra1_allies_rocketsoldier (cost 480) x2 | pricier units must not outnumber cheaper ones |
+| ra1_allies: heavyallies | ra1_allies_mediumtank (cost 1280) x3 vs ra1_allies_ranger (cost 510) x1 | pricier units must not outnumber cheaper ones |
+| ra1_allies: heavyallies | ra1_allies_mediumtank (cost 1280) x3 vs ra1_allies_lighttank (cost 1040) x1 | pricier units must not outnumber cheaper ones |
 | ra1_allies: heavyallies | all units are Tier 1 | heavy support should mix all tiers |
 | ra1_soviets: heavysoviet | total cost 6850 | target ~10000 (±15%) |
 | ra1_soviets: heavysoviet | 5 infantry : 4 vehicles | want ~5 infantry per vehicle |
@@ -660,7 +660,7 @@ _none found_
 | ra1_soviets: heavysoviet | all units are Tier 1 | heavy support should mix all tiers |
 | japan: heavyjapan | total cost 6490 | target ~10000 (±15%) |
 | japan: heavyjapan | 5 infantry : 6 vehicles | want ~5 infantry per vehicle |
-| japan: heavyjapan | ra1_allies_alliedrocketsoldier (cost 480) x2 vs japan_scoutcar (cost 300) x1 | pricier units must not outnumber cheaper ones |
+| japan: heavyjapan | ra1_allies_rocketsoldier (cost 480) x2 vs japan_scoutcar (cost 300) x1 | pricier units must not outnumber cheaper ones |
 | japan: heavyjapan | japan_igomediumtank (cost 800) x2 vs japan_scoutcar (cost 300) x1 | pricier units must not outnumber cheaper ones |
 | japan: heavyjapan | japan_grenadebuggy (cost 900) x2 vs japan_scoutcar (cost 300) x1 | pricier units must not outnumber cheaper ones |
 | japan: heavyjapan | all units are Tier 1 | heavy support should mix all tiers |
@@ -795,7 +795,7 @@ _none found_
 | harkonnen: harkonnen_flametank | unit tech tier 5 | promotion harkonnen_promotion_flametank tier 0 — must match |
 | harkonnen: harkonnen_inkvine | unit tech tier 5 | promotion harkonnen_promotion_inkvine tier 0 — must match |
 | harkonnen: harkonnen_rockettank | unit tech tier 5 | promotion harkonnen_promotion_rockettank tier 0 — must match |
-| ixian: heavy_rocket_raider.ixian | unit tech tier 5 | promotion ixian_promotion_heavyixraider tier 0 — must match |
+| ixian: ixian_heavy_rocket_raider | unit tech tier 5 | promotion ixian_promotion_heavyixraider tier 0 — must match |
 | ixian: ixian_ixprojector | unit tech tier 5 | promotion ixian_promotion_ixprojector tier 0 — must match |
 | ixian: ixian_ixsiegetank | unit tech tier 5 | promotion ixian_promotion_ixsiegetank tier 0 — must match |
 | ixian: ixian_neocymek | unit tech tier 5 | promotion ixian_promotion_neocymek tier 0 — must match |

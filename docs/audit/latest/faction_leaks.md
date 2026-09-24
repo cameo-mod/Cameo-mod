@@ -7,39 +7,32 @@ Factions checked: **31** — L1 leaks: **433**, L3 concrete-inherit leaks: **20*
 
 | faction | actor | attributed owner | file |
 |---|---|---|---|
-| ra1_allies | ra1_allies_alliedaagun | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml |
-| ra1_allies | ra1_allies_alliedartillery | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
-| ra1_allies | ra1_allies_alliedbarracks | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/buildings.yaml |
-| ra1_allies | ra1_allies_alliedchinooktransport | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml |
-| ra1_allies | ra1_allies_alliedconstructionyard | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/buildings.yaml |
-| ra1_allies | ra1_allies_alliedgunturret | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml |
-| ra1_allies | ra1_allies_alliedheavyaatank | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
-| ra1_allies | ra1_allies_alliedhelipad | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/buildings.yaml |
-| ra1_allies | ra1_allies_alliedlighttank | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
-| ra1_allies | ra1_allies_alliedmediumtank | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
-| ra1_allies | ra1_allies_alliedmobileconstructionvehicle | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
-| ra1_allies | ra1_allies_alliedorerefinery | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/buildings.yaml |
-| ra1_allies | ra1_allies_alliedoretruck | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
-| ra1_allies | ra1_allies_alliedradardome | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/buildings.yaml |
-| ra1_allies | ra1_allies_alliedservicedepot | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/buildings.yaml |
-| ra1_allies | ra1_allies_alliedsniper | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml |
-| ra1_allies | ra1_allies_alliedtankdestroyer | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
-| ra1_allies | ra1_allies_alliedtechcenter | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/buildings.yaml |
-| ra1_allies | ra1_allies_alliedtigerheavytank | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
-| ra1_allies | ra1_allies_alliedwarfactory | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/buildings.yaml |
+| ra1_allies | ra1_allies_aagun | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml |
+| ra1_allies | ra1_allies_artillery | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
+| ra1_allies | ra1_allies_barracks | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/buildings.yaml |
 | ra1_allies | ra1_allies_bastionartillerybunker | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml |
 | ra1_allies | ra1_allies_blackhawk | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml |
 | ra1_allies | ra1_allies_camopillbox | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml |
+| ra1_allies | ra1_allies_chinooktransport | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml |
 | ra1_allies | ra1_allies_chronosphere | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml |
 | ra1_allies | ra1_allies_chronotank | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
+| ra1_allies | ra1_allies_constructionyard | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/buildings.yaml |
 | ra1_allies | ra1_allies_gapgenerator | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml |
+| ra1_allies | ra1_allies_gunturret | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml |
+| ra1_allies | ra1_allies_heavyaatank | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
+| ra1_allies | ra1_allies_helipad | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/buildings.yaml |
+| ra1_allies | ra1_allies_lighttank | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
 | ra1_allies | ra1_allies_longbow | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml |
 | ra1_allies | ra1_allies_machinegunner | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml |
 | ra1_allies | ra1_allies_mechanic | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml |
 | ra1_allies | ra1_allies_medic | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml |
+| ra1_allies | ra1_allies_mediumtank | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
 | ra1_allies | ra1_allies_minelayer | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
+| ra1_allies | ra1_allies_mobileconstructionvehicle | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
 | ra1_allies | ra1_allies_mobilegapgenerator | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
 | ra1_allies | ra1_allies_mobileradarjammer | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
+| ra1_allies | ra1_allies_orerefinery | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/buildings.yaml |
+| ra1_allies | ra1_allies_oretruck | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
 | ra1_allies | ra1_allies_phasetransport | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
 | ra1_allies | ra1_allies_pillbox | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml |
 | ra1_allies | ra1_allies_promotion_bastion | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/promotions.yaml |
@@ -54,13 +47,19 @@ Factions checked: **31** — L1 leaks: **433**, L3 concrete-inherit leaks: **20*
 | ra1_allies | ra1_allies_promotion_sheridan | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/promotions.yaml |
 | ra1_allies | ra1_allies_promotion_tankdestroyer | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/promotions.yaml |
 | ra1_allies | ra1_allies_promotion_tigerheavytank | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/promotions.yaml |
+| ra1_allies | ra1_allies_radardome | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/buildings.yaml |
 | ra1_allies | ra1_allies_ranger | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
 | ra1_allies | ra1_allies_rapierjumpjet | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml |
 | ra1_allies | ra1_allies_raspy | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml |
 | ra1_allies | ra1_allies_reconranger | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
 | ra1_allies | ra1_allies_reinforcementpad | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/buildings.yaml |
+| ra1_allies | ra1_allies_servicedepot | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/buildings.yaml |
 | ra1_allies | ra1_allies_sheridanassaulttank | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
+| ra1_allies | ra1_allies_sniper | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml |
+| ra1_allies | ra1_allies_tankdestroyer | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
 | ra1_allies | ra1_allies_tanya | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml |
+| ra1_allies | ra1_allies_techcenter | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/buildings.yaml |
+| ra1_allies | ra1_allies_tigerheavytank | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
 | ra1_allies | ra1_allies_upgrade_advancedradarsystems | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/upgrades.yaml |
 | ra1_allies | ra1_allies_upgrade_airsuperioritydoctrine | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/upgrades.yaml |
 | ra1_allies | ra1_allies_upgrade_chronoarmor | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/upgrades.yaml |
@@ -69,6 +68,7 @@ Factions checked: **31** — L1 leaks: **433**, L3 concrete-inherit leaks: **20*
 | ra1_allies | ra1_allies_upgrade_infantryarmorplating | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/upgrades.yaml |
 | ra1_allies | ra1_allies_upgrade_lasertargetingsystems | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/upgrades.yaml |
 | ra1_allies | ra1_allies_upgrade_reinforcedstructures | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/upgrades.yaml |
+| ra1_allies | ra1_allies_warfactory | redalert/allies | mods/cameo/ContentPacks/RedAlert/Allies/yaml/buildings.yaml |
 | ra1_soviets | ra1_soviets_airfield | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
 | ra1_soviets | ra1_soviets_ak47conscript | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
 | ra1_soviets | ra1_soviets_armoredyak | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
@@ -518,7 +518,6 @@ Factions checked: **31** — L1 leaks: **433**, L3 concrete-inherit leaks: **20*
 | eden_tokamak | 1 | eden |
 | eden_university | 1 | eden |
 | oilb.building | 5 | japan, ra1_allies, ra1_soviets, td_gdi, td_nod |
-| oilb.ts | 3 | cabal, ts_gdi, ts_nod |
 | plymouth_agridome | 1 | plymouth |
 | plymouth_basic_lab | 1 | plymouth |
 | plymouth_cargotruck_empty | 1 | plymouth |
@@ -563,4 +562,5 @@ Factions checked: **31** — L1 leaks: **433**, L3 concrete-inherit leaks: **20*
 | plymouth_tiger_supernova | 1 | plymouth |
 | plymouth_tokamak | 1 | plymouth |
 | plymouth_university | 1 | plymouth |
+| ts_tiberiumpump | 3 | cabal, ts_gdi, ts_nod |
 

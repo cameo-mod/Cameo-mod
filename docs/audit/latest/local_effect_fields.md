@@ -6,10 +6,12 @@
 Files scanned: 40
 Concrete weapons with local Explosions (L1): 245
 Concrete weapons with local ImpactSounds (L2): 252
-Exempt secondary-channel declarations (not ratcheted): 222
+Exempt secondary-channel declarations (not ratcheted): 223
 
 | file | weapon | warhead | Explosions | ImpactSounds | line | exempt |
 |---|---|---|---|---|---|---|
+| ContentPacks\D2k\Ixian\yaml\weapons.yaml | PulseMissile | Effect | YES | YES | 2075 |  |
+| ContentPacks\D2k\Ixian\yaml\weapons.yaml | PulseMissile | Effect2 | - | YES | 2133 | exempt |
 | ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AAHyperionMagnet | Effect | YES | YES | 5138 |  |
 | ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianChaosTurret | Effect | YES | - | 5059 |  |
 | ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml | AsianChemical | Effect | YES | YES | 2813 |  |
@@ -409,7 +411,6 @@ Exempt secondary-channel declarations (not ratcheted): 222
 | weapons\starcraft.yaml | SCScourgeDroneExplosion | Effect | YES | YES | 59 |  |
 | weapons\starcraft.yaml | Scarab | 3Eff | YES | YES | 163 | exempt |
 | weapons\starcraft.yaml | ScourgeDroneExplosion | Effect | YES | YES | 47 |  |
-| weapons\tiberiandawn.yaml | ChemTibAtomic | Effect | YES | YES | 206 |  |
 | weapons\warcraft2.yaml | SiegeEngineCannon | Effect | YES | YES | 309 |  |
 | weapons\warcraft2.yaml | wc2_tower_arrow | Effect | - | YES | 672 |  |
 | weapons\warcraft2.yaml | wc2_tower_axe | Effect | YES | YES | 819 |  |

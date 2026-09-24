@@ -5,18 +5,18 @@
 ## d2k_atreides
 
 ```diff
+     "prerequisites": [
+-     "~hightech.atreides",
++     "~atreides_hightech",
+      "~heavy.atreides_combat"
+@@ -124,3 +124,3 @@
+     "prerequisites": [
+-     "~hightech.atreides",
++     "~atreides_hightech",
+      "research_centre",
+@@ -238,3 +238,5 @@
        "slot": "Armament@GUN",
 -      "versus_templates": [],
-+      "versus_templates": [
-+       "^d2k_shared_ornigun"
-+      ],
-       "warheads": [],
-@@ -911,3 +913,3 @@
-        "^Projectile_Missile_Heavy_D2K",
--       "^Effect_MissileAP_Heavy_D2K"
-+       "^d2k_shared_d2k_towermissile"
-       ],
-@@ -1182,3 +1184,4 @@
 ```
 
 ## d2k_corrino
@@ -39,40 +39,45 @@
 ## d2k_harkonnen
 
 ```diff
+     "prerequisites": [
+-     "~hightech.harkonnen",
++     "~harkonnen_hightech",
+      "~harkonnen_promotion_advancedcarryall"
+@@ -143,3 +143,5 @@
        "slot": "Armament",
 -      "versus_templates": [],
 +      "versus_templates": [
 +       "^d2k_shared_ornigun"
 +      ],
        "warheads": [],
-@@ -1049,3 +1051,3 @@
-        "^Projectile_Missile_Heavy_D2K",
--       "^Effect_MissileAP_Heavy_D2K"
-+       "^d2k_shared_d2k_towermissile"
-       ],
-@@ -1711,3 +1713,3 @@
+@@ -175,3 +177,3 @@
 ```
 
 ## d2k_ixian
 
 ```diff
-        "^Projectile_Bullet_Medium",
--       "^Effect_Bullet_Medium"
-+       "^d2k_ixian_d2k_air_drone_guns"
-       ],
-@@ -296,3 +296,4 @@
-        "^HeavyBomb",
--       "^TeslaChargedWeapon"
-+       "^TeslaChargedWeapon",
-+       "^d2k_ixian_ixianbomb_emp"
-       ],
-@@ -452,3 +453,3 @@
-        "^RailgunWeapon",
+      {
+-      "damage_warheads": [],
++      "burst": "4",
++      "burstdelays": "5",
++      "damage_warheads": [
++       {
++        "damage": "12000",
++        "falloff": "100, 0",
++        "spread": "85",
++        "tag": "MissileAP_Heavy_Flat",
++        "type": "AreaDamage"
++       },
 ```
 
 ## d2k_ordos
 
 ```diff
+   "aircraft": {
+-   "carryall_reinforce.ordos": {
++   "ordos_advancedcarryall": {
+     "armaments": [
+@@ -30,3 +30,3 @@
         "^Projectile_Bullet_Medium",
 -       "^Effect_Bullet_Medium"
 +       "^d2k_ordos_bullet_medium"
@@ -80,11 +85,6 @@
 @@ -68,3 +68,3 @@
         "^Projectile_Laser_Heavy",
 -       "^Effect_Laser_Heavy",
-+       "^d2k_ordos_laser_heavy",
-        "d2kCarryallChainGun"
-@@ -159,3 +159,3 @@
-        "^Projectile_Bullet_Medium",
--       "^Effect_Bullet_Medium"
 ```
 
 ## redalert2_allies
@@ -158,35 +158,35 @@
 ## redalert2mod_consortium
 
 ```diff
-        {
+   "aircraft": {
+-   "cruiser_f.steel": {
++   "steel_cruiser_f": {
+     "armaments": [
+@@ -12,2 +12,9 @@
+       "damage_warheads": [
++       {
 +        "damage": "1",
 +        "falloff": null,
 +        "spread": "75",
 +        "tag": "LaserWeaponPercentage",
 +        "type": "AreaDamagePercentage"
-+       },
-+       {
-         "damage": "10000",
-@@ -20,16 +27,2 @@
-        {
--        "damage": "600",
 ```
 
 ## redalert2mod_futuretech
 
 ```diff
-       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
--      "design_weapon_class": 1.125,
-+      "design_weapon_class": 1.0,
-       "pricing": true,
-@@ -42,10 +42,7 @@
-       "versus_templates": [
--       "^Warhead_MissileAP_Medium_Flat",
--       "^Grenade",
--       "^D2KRocket",
--       "^SteelMediumMissile",
--       "^FutureCryocopterRocketMissileCompatibility"
-+       "^Warhead_MissileAP_Medium",
+   "aircraft": {
++   "futu_landcarr_drone": {
++    "armaments": [
++     {
++      "damage_warheads": [
++       {
++        "damage": "6000",
++        "falloff": "100, 0",
++        "spread": "64",
++        "tag": "MissileAP_Medium_Flat",
++        "type": "AreaDamage"
++       }
 ```
 
 ## redalert2mod_naxis
@@ -311,10 +311,18 @@
 ## shared_d2k
 
 ```diff
-        "^D2KMissile",
--       "^Effect_MissileAP_Heavy"
-+       "^d2k_shared_fremen_rpg"
-       ],
+   "buildings": {
+-   "OILB.d2k": {
+-    "armor": {
+-     "src": "inherited",
+-     "v": "Wood"
+-    },
+-    "build_duration": {
+-     "src": "inherited",
+-     "v": "1500"
+-    },
+-    "buildable": true,
+-    "cost": {
 ```
 
 ## shared_redalert

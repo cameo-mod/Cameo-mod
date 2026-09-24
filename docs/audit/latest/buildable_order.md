@@ -2,7 +2,7 @@
 
 Buildable combat actors checked: **910**
 Prerequisite order violations: **1**
-Build palette order violations: **985**
+Build palette order violations: **987**
 
 
 ## Prerequisite order violations
@@ -224,7 +224,7 @@ Build palette order violations: **985**
 | harkonnen | RAAircraft | harkonnen_gunship | 3 | 1200 | 20 | should be before harkonnen_advancedcarryall (tier/cost order) |
 | harkonnen | RAInfantry | light_inf | 3 | 150 | 10 | should be before harkonnen_rockettrooper (tier/cost order) |
 | harkonnen | RAInfantry | trooper | 3 | 300 | 20 | should be before harkonnen_engineer (tier/cost order) |
-| harkonnen | RAVehicle | harkonnen_spiceharvester | 2 | 600 | 10 | should be before combat_tank.harkonnen (tier/cost order) |
+| harkonnen | RAVehicle | harkonnen_spiceharvester | 2 | 600 | 10 | should be before harkonnen_combat_tank (tier/cost order) |
 | harkonnen | RAVehicle | harkonnen_assaulttank | 3 | 600 | 50 | should be before devastator (tier/cost order) |
 | harkonnen | RAVehicle | harkonnen_flametank | 3 | 700 | 45 | should be before devastator (tier/cost order) |
 | harkonnen | RAVehicle | harkonnen_adp | 3 | 750 | 55 | should be before devastator (tier/cost order) |
@@ -232,7 +232,7 @@ Build palette order violations: **985**
 | harkonnen | RAVehicle | missile_tank | 3 | 750 | 60 | should be before devastator (tier/cost order) |
 | harkonnen | RAVehicle | harkonnen_buzzsaw | 3 | 800 | 70 | should be before devastator (tier/cost order) |
 | harkonnen | RAVehicle | harkonnen_inkvine | 3 | 900 | 65 | should be before devastator (tier/cost order) |
-| harkonnen | Starport | harkonnen_spiceharvester | 2 | 600 | 10 | should be before combat_tank.harkonnen (tier/cost order) |
+| harkonnen | Starport | harkonnen_spiceharvester | 2 | 600 | 10 | should be before harkonnen_combat_tank (tier/cost order) |
 | harkonnen | Starport | harkonnen_assaulttank | 3 | 600 | 50 | should be before harkonnen_mobileconstructionvehicle (tier/cost order) |
 | harkonnen | Starport | harkonnen_flametank | 3 | 700 | 45 | should be before harkonnen_mobileconstructionvehicle (tier/cost order) |
 | harkonnen | Starport | harkonnen_adp | 3 | 750 | 55 | should be before harkonnen_mobileconstructionvehicle (tier/cost order) |
@@ -240,7 +240,7 @@ Build palette order violations: **985**
 | harkonnen | Starport | missile_tank | 3 | 750 | 60 | should be before harkonnen_mobileconstructionvehicle (tier/cost order) |
 | harkonnen | Starport | harkonnen_buzzsaw | 3 | 800 | 70 | should be before harkonnen_mobileconstructionvehicle (tier/cost order) |
 | harkonnen | Starport | harkonnen_inkvine | 3 | 900 | 65 | should be before harkonnen_mobileconstructionvehicle (tier/cost order) |
-| harkonnen | Vehicle | harkonnen_spiceharvester | 2 | 600 | 10 | should be before combat_tank.harkonnen (tier/cost order) |
+| harkonnen | Vehicle | harkonnen_spiceharvester | 2 | 600 | 10 | should be before harkonnen_combat_tank (tier/cost order) |
 | harkonnen | Vehicle | harkonnen_assaulttank | 3 | 600 | 50 | should be before devastator (tier/cost order) |
 | harkonnen | Vehicle | harkonnen_flametank | 3 | 700 | 45 | should be before devastator (tier/cost order) |
 | harkonnen | Vehicle | harkonnen_adp | 3 | 750 | 55 | should be before devastator (tier/cost order) |
@@ -254,7 +254,7 @@ Build palette order violations: **985**
 | ixian | Infantry | light_inf | 3 | 150 | 10 | should be before engineer (tier/cost order) |
 | ixian | Infantry | ixian_rockettrooper | 3 | 300 | 20 | should be before engineer (tier/cost order) |
 | ixian | Infantry | trooper | 3 | 300 | 20 | should be before engineer (tier/cost order) |
-| ixian | Infantry | heavy_inf.ixian | 3 | 400 | 10 | should be before engineer (tier/cost order) |
+| ixian | Infantry | ixian_heavy_inf | 3 | 400 | 10 | should be before engineer (tier/cost order) |
 | ixian | Infantry | ixian_shockinfantry | 3 | 500 | 10 | should be before engineer (tier/cost order) |
 | ixian | Infantry | ixian_twinrockettrooper | 3 | 600 | 20 | should be before engineer (tier/cost order) |
 | ixian | Infantry | ixian_storminfantry | 3 | 800 | 10 | should be before engineer (tier/cost order) |
@@ -264,16 +264,16 @@ Build palette order violations: **985**
 | ixian | RAInfantry | light_inf | 3 | 150 | 10 | should be before engineer (tier/cost order) |
 | ixian | RAInfantry | ixian_rockettrooper | 3 | 300 | 20 | should be before engineer (tier/cost order) |
 | ixian | RAInfantry | trooper | 3 | 300 | 20 | should be before engineer (tier/cost order) |
-| ixian | RAInfantry | heavy_inf.ixian | 3 | 400 | 10 | should be before engineer (tier/cost order) |
+| ixian | RAInfantry | ixian_heavy_inf | 3 | 400 | 10 | should be before engineer (tier/cost order) |
 | ixian | RAInfantry | ixian_shockinfantry | 3 | 500 | 10 | should be before engineer (tier/cost order) |
 | ixian | RAInfantry | ixian_twinrockettrooper | 3 | 600 | 20 | should be before engineer (tier/cost order) |
 | ixian | RAInfantry | ixian_storminfantry | 3 | 800 | 10 | should be before engineer (tier/cost order) |
 | ixian | RAVehicle | ixian_mongoose | 2 | 1300 | 30 | should be before ixian_ixcombatsiege (tier/cost order) |
 | ixian | RAVehicle | ixian_kodatank | 3 | 800 | 40 | should be before ixian_ixmissiletank (tier/cost order) |
 | ixian | RAVehicle | ixian_heavykodatank | 3 | 1100 | 40 | should be before ixian_ixmissiletank (tier/cost order) |
-| ixian | RAVehicle | rocket_raider.ixian | 3 | 1200 | 10 | should be before ixian_ixcombatsiege (tier/cost order) |
+| ixian | RAVehicle | ixian_rocket_raider | 3 | 1200 | 10 | should be before ixian_ixcombatsiege (tier/cost order) |
 | ixian | RAVehicle | ixian_shockraider | 3 | 1300 | 10 | should be before ixian_ixcombatsiege (tier/cost order) |
-| ixian | RAVehicle | heavy_rocket_raider.ixian | 3 | 2000 | 10 | should be before ixian_ixcombatsiege (tier/cost order) |
+| ixian | RAVehicle | ixian_heavy_rocket_raider | 3 | 2000 | 10 | should be before ixian_ixcombatsiege (tier/cost order) |
 | ixian | RAVehicle | ixian_ixsiegetank | 3 | 2050 | 50 | should be before ixian_ixmissiletank (tier/cost order) |
 | ixian | RAVehicle | ixian_stormraider | 3 | 2200 | 10 | should be before ixian_ixcombatsiege (tier/cost order) |
 | ixian | RAVehicle | ixian_neocymek | 3 | 4500 | 20 | should be before ixian_ixcombatsiege (tier/cost order) |
@@ -281,9 +281,9 @@ Build palette order violations: **985**
 | ixian | Starport | ixian_mongoose | 2 | 1300 | 30 | should be before ixian_ixcombatsiege (tier/cost order) |
 | ixian | Starport | ixian_kodatank | 3 | 800 | 40 | should be before ixian_ixmissiletank (tier/cost order) |
 | ixian | Starport | ixian_heavykodatank | 3 | 1100 | 40 | should be before ixian_ixmissiletank (tier/cost order) |
-| ixian | Starport | rocket_raider.ixian | 3 | 1200 | 10 | should be before ixian_ixcombatsiege (tier/cost order) |
+| ixian | Starport | ixian_rocket_raider | 3 | 1200 | 10 | should be before ixian_ixcombatsiege (tier/cost order) |
 | ixian | Starport | ixian_shockraider | 3 | 1300 | 10 | should be before ixian_ixcombatsiege (tier/cost order) |
-| ixian | Starport | heavy_rocket_raider.ixian | 3 | 2000 | 10 | should be before ixian_ixcombatsiege (tier/cost order) |
+| ixian | Starport | ixian_heavy_rocket_raider | 3 | 2000 | 10 | should be before ixian_ixcombatsiege (tier/cost order) |
 | ixian | Starport | ixian_ixsiegetank | 3 | 2050 | 50 | should be before ixian_ixmissiletank (tier/cost order) |
 | ixian | Starport | ixian_stormraider | 3 | 2200 | 10 | should be before ixian_ixcombatsiege (tier/cost order) |
 | ixian | Starport | ixian_neocymek | 3 | 4500 | 20 | should be before ixian_ixcombatsiege (tier/cost order) |
@@ -291,15 +291,15 @@ Build palette order violations: **985**
 | ixian | Vehicle | ixian_mongoose | 2 | 1300 | 30 | should be before ixian_ixcombatsiege (tier/cost order) |
 | ixian | Vehicle | ixian_kodatank | 3 | 800 | 40 | should be before ixian_ixmissiletank (tier/cost order) |
 | ixian | Vehicle | ixian_heavykodatank | 3 | 1100 | 40 | should be before ixian_ixmissiletank (tier/cost order) |
-| ixian | Vehicle | rocket_raider.ixian | 3 | 1200 | 10 | should be before ixian_ixcombatsiege (tier/cost order) |
+| ixian | Vehicle | ixian_rocket_raider | 3 | 1200 | 10 | should be before ixian_ixcombatsiege (tier/cost order) |
 | ixian | Vehicle | ixian_shockraider | 3 | 1300 | 10 | should be before ixian_ixcombatsiege (tier/cost order) |
-| ixian | Vehicle | heavy_rocket_raider.ixian | 3 | 2000 | 10 | should be before ixian_ixcombatsiege (tier/cost order) |
+| ixian | Vehicle | ixian_heavy_rocket_raider | 3 | 2000 | 10 | should be before ixian_ixcombatsiege (tier/cost order) |
 | ixian | Vehicle | ixian_ixsiegetank | 3 | 2050 | 50 | should be before ixian_ixmissiletank (tier/cost order) |
 | ixian | Vehicle | ixian_stormraider | 3 | 2200 | 10 | should be before ixian_ixcombatsiege (tier/cost order) |
 | ixian | Vehicle | ixian_neocymek | 3 | 4500 | 20 | should be before ixian_ixcombatsiege (tier/cost order) |
 | ixian | Vehicle | ixian_ixprojector | 3 | 5000 | 60 | should be before ixian_mobileconstructionvehicle (tier/cost order) |
 | japan | Aircraft | japan_skyhawk | 2 | 2000 | 20 | should be before japan_zerofighter (tier/cost order) |
-| japan | Infantry | ra1_allies_alliedrocketsoldier | 1 | 480 | 20 | should be before japan_imperialscoutsman (tier/cost order) |
+| japan | Infantry | ra1_allies_rocketsoldier | 1 | 480 | 20 | should be before japan_imperialscoutsman (tier/cost order) |
 | japan | Infantry | japan_tankbuster | 2 | 400 | 20 | should be before japan_imperialscoutsman (tier/cost order) |
 | japan | Infantry | ra1_engineer | 2 | 500 | 30 | should be before japan_japaneseflamethrower (tier/cost order) |
 | japan | Infantry | japan_samurai | 3 | 300 | 10 | should be before japan_imperialscoutsman (tier/cost order) |
@@ -307,7 +307,7 @@ Build palette order violations: **985**
 | japan | Infantry | japan_rocketangel | 3 | 900 | 40 | should be before japan_japaneseflamethrower (tier/cost order) |
 | japan | Infantry | japan_exorcist | 3 | 3000 | 10 | should be before japan_imperialscoutsman (tier/cost order) |
 | japan | RAAircraft | japan_skyhawk | 2 | 2000 | 20 | should be before japan_zerofighter (tier/cost order) |
-| japan | RAInfantry | ra1_allies_alliedrocketsoldier | 1 | 480 | 20 | should be before japan_imperialscoutsman (tier/cost order) |
+| japan | RAInfantry | ra1_allies_rocketsoldier | 1 | 480 | 20 | should be before japan_imperialscoutsman (tier/cost order) |
 | japan | RAInfantry | japan_tankbuster | 2 | 400 | 20 | should be before japan_imperialscoutsman (tier/cost order) |
 | japan | RAInfantry | ra1_engineer | 2 | 500 | 30 | should be before japan_japaneseflamethrower (tier/cost order) |
 | japan | RAInfantry | japan_samurai | 3 | 300 | 10 | should be before japan_imperialscoutsman (tier/cost order) |
@@ -489,42 +489,44 @@ Build palette order violations: **985**
 | protoss | Vehicle | protoss_manifold | 3 | 600 | 40 | should be before protoss_mobilenexus (tier/cost order) |
 | protoss | Vehicle | protoss_analogue | 3 | 1200 | 40 | should be before protoss_mobilenexus (tier/cost order) |
 | protoss | Vehicle | protoss_positron | 3 | 1200 | 20 | should be before protoss_observer (tier/cost order) |
-| ra1_allies | Aircraft | ra1_allies_alliedchinooktransport | 1 | 4300 | 10 | should be before ra1_allies_blackhawk (tier/cost order) |
+| ra1_allies | Aircraft | ra1_allies_chinooktransport | 1 | 4300 | 10 | should be before ra1_allies_blackhawk (tier/cost order) |
 | ra1_allies | Aircraft | ra1_allies_rapierjumpjet | 3 | 1300 | 30 | should be before ra1_allies_longbow (tier/cost order) |
-| ra1_allies | Infantry | ra1_allies_raspy | 2 | 500 | 25 | should be before ra1_allies_alliedsniper (tier/cost order) |
-| ra1_allies | Infantry | ra1_engineer | 2 | 500 | 30 | should be before ra1_allies_alliedsniper (tier/cost order) |
-| ra1_allies | Infantry | ra1_allies_machinegunner | 3 | 560 | 10 | should be before ra1_allies_alliedrocketsoldier (tier/cost order) |
-| ra1_allies | RAAircraft | ra1_allies_alliedchinooktransport | 1 | 4300 | 10 | should be before ra1_allies_blackhawk (tier/cost order) |
+| ra1_allies | Infantry | ra1_allies_raspy | 2 | 500 | 25 | should be before ra1_allies_mechanic (tier/cost order) |
+| ra1_allies | Infantry | ra1_allies_sniper | 2 | 500 | 80 | should be before ra1_allies_mechanic (tier/cost order) |
+| ra1_allies | Infantry | ra1_engineer | 2 | 500 | 30 | should be before ra1_allies_mechanic (tier/cost order) |
+| ra1_allies | Infantry | ra1_allies_machinegunner | 3 | 560 | 10 | should be before ra1_allies_rocketsoldier (tier/cost order) |
+| ra1_allies | RAAircraft | ra1_allies_chinooktransport | 1 | 4300 | 10 | should be before ra1_allies_blackhawk (tier/cost order) |
 | ra1_allies | RAAircraft | ra1_allies_rapierjumpjet | 3 | 1300 | 30 | should be before ra1_allies_longbow (tier/cost order) |
-| ra1_allies | RAInfantry | ra1_allies_raspy | 2 | 500 | 25 | should be before ra1_allies_alliedsniper (tier/cost order) |
-| ra1_allies | RAInfantry | ra1_engineer | 2 | 500 | 30 | should be before ra1_allies_alliedsniper (tier/cost order) |
-| ra1_allies | RAInfantry | ra1_allies_machinegunner | 3 | 560 | 10 | should be before ra1_allies_alliedrocketsoldier (tier/cost order) |
-| ra1_allies | RAVehicle | ra1_allies_alliedartillery | 2 | 1240 | 70 | should be before ra1_allies_minelayer (tier/cost order) |
-| ra1_allies | RAVehicle | ra1_allies_alliedheavyaatank | 2 | 1250 | 60 | should be before ra1_allies_minelayer (tier/cost order) |
-| ra1_allies | RAVehicle | ra1_allies_alliedoretruck | 2 | 1560 | 10 | should be before ra1_allies_ranger (tier/cost order) |
-| ra1_allies | RAVehicle | ra1_allies_alliedmobileconstructionvehicle | 2 | 4650 | 100 | should be before ra1_allies_minelayer (tier/cost order) |
+| ra1_allies | RAInfantry | ra1_allies_raspy | 2 | 500 | 25 | should be before ra1_allies_mechanic (tier/cost order) |
+| ra1_allies | RAInfantry | ra1_allies_sniper | 2 | 500 | 80 | should be before ra1_allies_mechanic (tier/cost order) |
+| ra1_allies | RAInfantry | ra1_engineer | 2 | 500 | 30 | should be before ra1_allies_mechanic (tier/cost order) |
+| ra1_allies | RAInfantry | ra1_allies_machinegunner | 3 | 560 | 10 | should be before ra1_allies_rocketsoldier (tier/cost order) |
+| ra1_allies | RAVehicle | ra1_allies_artillery | 2 | 1240 | 70 | should be before ra1_allies_minelayer (tier/cost order) |
+| ra1_allies | RAVehicle | ra1_allies_heavyaatank | 2 | 1250 | 60 | should be before ra1_allies_minelayer (tier/cost order) |
+| ra1_allies | RAVehicle | ra1_allies_oretruck | 2 | 1560 | 10 | should be before ra1_allies_ranger (tier/cost order) |
+| ra1_allies | RAVehicle | ra1_allies_mobileconstructionvehicle | 2 | 4650 | 100 | should be before ra1_allies_minelayer (tier/cost order) |
 | ra1_allies | RAVehicle | ra1_allies_reconranger | 3 | 500 | 30 | should be before ra1_allies_minelayer (tier/cost order) |
 | ra1_allies | RAVehicle | ra1_allies_sheridanassaulttank | 3 | 600 | 40 | should be before ra1_allies_minelayer (tier/cost order) |
-| ra1_allies | RAVehicle | ra1_allies_alliedlighttank | 3 | 1040 | 50 | should be before ra1_allies_minelayer (tier/cost order) |
-| ra1_allies | RAVehicle | ra1_allies_alliedtankdestroyer | 3 | 1200 | 110 | should be before ra1_allies_minelayer (tier/cost order) |
-| ra1_allies | RAVehicle | ra1_allies_alliedmediumtank | 3 | 1280 | 110 | should be before ra1_allies_minelayer (tier/cost order) |
-| ra1_allies | RAVehicle | ra1_allies_alliedtigerheavytank | 3 | 1300 | 110 | should be before ra1_allies_minelayer (tier/cost order) |
-| ra1_allies | RAVehicle | ra1_allies_alliedapc | 3 | 1680 | 120 | should be before ra1_allies_minelayer (tier/cost order) |
+| ra1_allies | RAVehicle | ra1_allies_lighttank | 3 | 1040 | 50 | should be before ra1_allies_minelayer (tier/cost order) |
+| ra1_allies | RAVehicle | ra1_allies_tankdestroyer | 3 | 1200 | 110 | should be before ra1_allies_minelayer (tier/cost order) |
+| ra1_allies | RAVehicle | ra1_allies_mediumtank | 3 | 1280 | 110 | should be before ra1_allies_minelayer (tier/cost order) |
+| ra1_allies | RAVehicle | ra1_allies_tigerheavytank | 3 | 1300 | 110 | should be before ra1_allies_minelayer (tier/cost order) |
+| ra1_allies | RAVehicle | ra1_allies_apc | 3 | 1680 | 120 | should be before ra1_allies_minelayer (tier/cost order) |
 | ra1_allies | RAVehicle | ra1_allies_chronotank | 3 | 2000 | 200 | should be before ra1_allies_minelayer (tier/cost order) |
 | ra1_allies | RAVehicle | ra1_allies_phasetransport | 3 | 2150 | 130 | should be before ra1_allies_minelayer (tier/cost order) |
 | ra1_allies | RAVehicle | ra1_allies_mobilegapgenerator | 3 | 5000 | 150 | should be before ra1_allies_minelayer (tier/cost order) |
 | ra1_allies | RAVehicle | ra1_allies_mobileradarjammer | 3 | 5000 | 140 | should be before ra1_allies_minelayer (tier/cost order) |
-| ra1_allies | Vehicle | ra1_allies_alliedartillery | 2 | 1240 | 70 | should be before ra1_allies_minelayer (tier/cost order) |
-| ra1_allies | Vehicle | ra1_allies_alliedheavyaatank | 2 | 1250 | 60 | should be before ra1_allies_minelayer (tier/cost order) |
-| ra1_allies | Vehicle | ra1_allies_alliedoretruck | 2 | 1560 | 10 | should be before ra1_allies_ranger (tier/cost order) |
-| ra1_allies | Vehicle | ra1_allies_alliedmobileconstructionvehicle | 2 | 4650 | 100 | should be before ra1_allies_minelayer (tier/cost order) |
+| ra1_allies | Vehicle | ra1_allies_artillery | 2 | 1240 | 70 | should be before ra1_allies_minelayer (tier/cost order) |
+| ra1_allies | Vehicle | ra1_allies_heavyaatank | 2 | 1250 | 60 | should be before ra1_allies_minelayer (tier/cost order) |
+| ra1_allies | Vehicle | ra1_allies_oretruck | 2 | 1560 | 10 | should be before ra1_allies_ranger (tier/cost order) |
+| ra1_allies | Vehicle | ra1_allies_mobileconstructionvehicle | 2 | 4650 | 100 | should be before ra1_allies_minelayer (tier/cost order) |
 | ra1_allies | Vehicle | ra1_allies_reconranger | 3 | 500 | 30 | should be before ra1_allies_minelayer (tier/cost order) |
 | ra1_allies | Vehicle | ra1_allies_sheridanassaulttank | 3 | 600 | 40 | should be before ra1_allies_minelayer (tier/cost order) |
-| ra1_allies | Vehicle | ra1_allies_alliedlighttank | 3 | 1040 | 50 | should be before ra1_allies_minelayer (tier/cost order) |
-| ra1_allies | Vehicle | ra1_allies_alliedtankdestroyer | 3 | 1200 | 110 | should be before ra1_allies_minelayer (tier/cost order) |
-| ra1_allies | Vehicle | ra1_allies_alliedmediumtank | 3 | 1280 | 110 | should be before ra1_allies_minelayer (tier/cost order) |
-| ra1_allies | Vehicle | ra1_allies_alliedtigerheavytank | 3 | 1300 | 110 | should be before ra1_allies_minelayer (tier/cost order) |
-| ra1_allies | Vehicle | ra1_allies_alliedapc | 3 | 1680 | 120 | should be before ra1_allies_minelayer (tier/cost order) |
+| ra1_allies | Vehicle | ra1_allies_lighttank | 3 | 1040 | 50 | should be before ra1_allies_minelayer (tier/cost order) |
+| ra1_allies | Vehicle | ra1_allies_tankdestroyer | 3 | 1200 | 110 | should be before ra1_allies_minelayer (tier/cost order) |
+| ra1_allies | Vehicle | ra1_allies_mediumtank | 3 | 1280 | 110 | should be before ra1_allies_minelayer (tier/cost order) |
+| ra1_allies | Vehicle | ra1_allies_tigerheavytank | 3 | 1300 | 110 | should be before ra1_allies_minelayer (tier/cost order) |
+| ra1_allies | Vehicle | ra1_allies_apc | 3 | 1680 | 120 | should be before ra1_allies_minelayer (tier/cost order) |
 | ra1_allies | Vehicle | ra1_allies_chronotank | 3 | 2000 | 200 | should be before ra1_allies_minelayer (tier/cost order) |
 | ra1_allies | Vehicle | ra1_allies_phasetransport | 3 | 2150 | 130 | should be before ra1_allies_minelayer (tier/cost order) |
 | ra1_allies | Vehicle | ra1_allies_mobilegapgenerator | 3 | 5000 | 150 | should be before ra1_allies_minelayer (tier/cost order) |
@@ -535,8 +537,8 @@ Build palette order violations: **985**
 | ra1_soviets | Aircraft | ra1_soviets_teslayak | 3 | 2000 | 30 | should be before ra1_soviets_migattackbomber (tier/cost order) |
 | ra1_soviets | Aircraft | ra1_soviets_kamovattackhelicopter | 3 | 2100 | 20 | should be before ra1_soviets_yakscoutplane (tier/cost order) |
 | ra1_soviets | Infantry | ra1_engineer | 2 | 500 | 30 | should be before ra1_soviets_flamethrower (tier/cost order) |
-| ra1_soviets | Infantry | ra1_soviets_rifleinfantry | 3 | 110 | 10 | should be before ra1_allies_alliedrocketsoldier (tier/cost order) |
-| ra1_soviets | Infantry | ra1_soviets_ak47conscript | 3 | 200 | 10 | should be before ra1_allies_alliedrocketsoldier (tier/cost order) |
+| ra1_soviets | Infantry | ra1_soviets_rifleinfantry | 3 | 110 | 10 | should be before ra1_allies_rocketsoldier (tier/cost order) |
+| ra1_soviets | Infantry | ra1_soviets_ak47conscript | 3 | 200 | 10 | should be before ra1_allies_rocketsoldier (tier/cost order) |
 | ra1_soviets | Infantry | ra1_soviets_dog | 3 | 200 | 29 | should be before ra1_soviets_flamethrower (tier/cost order) |
 | ra1_soviets | Infantry | ra1_soviets_grenadier | 3 | 230 | 25 | should be before ra1_soviets_flamethrower (tier/cost order) |
 | ra1_soviets | Infantry | ra1_soviets_firerocketsoldier | 3 | 400 | 20 | should be before ra1_soviets_flamethrower (tier/cost order) |
@@ -550,8 +552,8 @@ Build palette order violations: **985**
 | ra1_soviets | RAAircraft | ra1_soviets_teslayak | 3 | 2000 | 30 | should be before ra1_soviets_migattackbomber (tier/cost order) |
 | ra1_soviets | RAAircraft | ra1_soviets_kamovattackhelicopter | 3 | 2100 | 20 | should be before ra1_soviets_yakscoutplane (tier/cost order) |
 | ra1_soviets | RAInfantry | ra1_engineer | 2 | 500 | 30 | should be before ra1_soviets_flamethrower (tier/cost order) |
-| ra1_soviets | RAInfantry | ra1_soviets_rifleinfantry | 3 | 110 | 10 | should be before ra1_allies_alliedrocketsoldier (tier/cost order) |
-| ra1_soviets | RAInfantry | ra1_soviets_ak47conscript | 3 | 200 | 10 | should be before ra1_allies_alliedrocketsoldier (tier/cost order) |
+| ra1_soviets | RAInfantry | ra1_soviets_rifleinfantry | 3 | 110 | 10 | should be before ra1_allies_rocketsoldier (tier/cost order) |
+| ra1_soviets | RAInfantry | ra1_soviets_ak47conscript | 3 | 200 | 10 | should be before ra1_allies_rocketsoldier (tier/cost order) |
 | ra1_soviets | RAInfantry | ra1_soviets_dog | 3 | 200 | 29 | should be before ra1_soviets_flamethrower (tier/cost order) |
 | ra1_soviets | RAInfantry | ra1_soviets_grenadier | 3 | 230 | 25 | should be before ra1_soviets_flamethrower (tier/cost order) |
 | ra1_soviets | RAInfantry | ra1_soviets_firerocketsoldier | 3 | 400 | 20 | should be before ra1_soviets_flamethrower (tier/cost order) |
@@ -571,7 +573,7 @@ Build palette order violations: **985**
 | ra1_soviets | RAVehicle | ra1_soviets_heavytank | 3 | 1450 | 120 | should be before ra1_soviets_gorynychtank (tier/cost order) |
 | ra1_soviets | RAVehicle | ra1_soviets_hammertank | 3 | 1500 | 120 | should be before ra1_soviets_gorynychtank (tier/cost order) |
 | ra1_soviets | RAVehicle | ra1_soviets_oretruck | 3 | 1560 | 10 | should be before ra1_soviets_gorynychtank (tier/cost order) |
-| ra1_soviets | RAVehicle | ra1_allies_alliedapc | 3 | 1680 | 120 | should be before ra1_soviets_gorynychtank (tier/cost order) |
+| ra1_soviets | RAVehicle | ra1_allies_apc | 3 | 1680 | 120 | should be before ra1_soviets_gorynychtank (tier/cost order) |
 | ra1_soviets | RAVehicle | ra1_soviets_btr80 | 3 | 1800 | 120 | should be before ra1_soviets_gorynychtank (tier/cost order) |
 | ra1_soviets | RAVehicle | ra1_soviets_kotinnucleartank | 3 | 1800 | 120 | should be before ra1_soviets_gorynychtank (tier/cost order) |
 | ra1_soviets | RAVehicle | ra1_soviets_heatraytank | 3 | 1900 | 170 | should be before ra1_soviets_gorynychtank (tier/cost order) |
@@ -592,7 +594,7 @@ Build palette order violations: **985**
 | ra1_soviets | Vehicle | ra1_soviets_heavytank | 3 | 1450 | 120 | should be before ra1_soviets_gorynychtank (tier/cost order) |
 | ra1_soviets | Vehicle | ra1_soviets_hammertank | 3 | 1500 | 120 | should be before ra1_soviets_gorynychtank (tier/cost order) |
 | ra1_soviets | Vehicle | ra1_soviets_oretruck | 3 | 1560 | 10 | should be before ra1_soviets_gorynychtank (tier/cost order) |
-| ra1_soviets | Vehicle | ra1_allies_alliedapc | 3 | 1680 | 120 | should be before ra1_soviets_gorynychtank (tier/cost order) |
+| ra1_soviets | Vehicle | ra1_allies_apc | 3 | 1680 | 120 | should be before ra1_soviets_gorynychtank (tier/cost order) |
 | ra1_soviets | Vehicle | ra1_soviets_btr80 | 3 | 1800 | 120 | should be before ra1_soviets_gorynychtank (tier/cost order) |
 | ra1_soviets | Vehicle | ra1_soviets_kotinnucleartank | 3 | 1800 | 120 | should be before ra1_soviets_gorynychtank (tier/cost order) |
 | ra1_soviets | Vehicle | ra1_soviets_heatraytank | 3 | 1900 | 170 | should be before ra1_soviets_gorynychtank (tier/cost order) |

@@ -20,8 +20,8 @@
    6x  ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg …
    3x  corrino_sardaukar_berserker, corrino_sardaukar_javelin, corrino_sardaukar_sword
    3x  ra2_allies_battlefortress, ra2_allies_battlefortress_chrono, ra2_allies_battlefortress_empty
-   2x  ra1_allies_alliedrocketsoldier, ra1_allies_alliedrocketsoldier
    2x  ra1_allies_rifleinfantry, ra1_allies_rifleinfantry
+   2x  ra1_allies_rocketsoldier, ra1_allies_rocketsoldier
    2x  protoss_probe, zerg_drone
    2x  wc2_humans_archmage, wc2_humans_mage
    2x  wc2_humans_elvenarcher, wc2_humans_elvenranger

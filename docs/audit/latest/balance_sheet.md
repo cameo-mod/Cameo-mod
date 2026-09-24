@@ -55,7 +55,7 @@
 | Zealot | protoss_zealot | Damage 8000 vs game 16000; Reload 18 vs game 36 |
 | Seal | ra2_allies_seal | HP 30000 vs game 31000; Damage 18000 vs game 24004 |
 | Black Widow | futuretech_blackwidow | Damage 20000 vs game 40010 |
-| Allied Sniper | ra1_allies_alliedsniper | Damage 30000 vs game 60015 |
+| Allied Sniper | ra1_allies_sniper | Damage 30000 vs game 60015 |
 | Ghost | terran_ghost | HP 45000 vs game 44000; Damage 10000 vs game 78064 |
 | Specter | terran_specter | Damage 20000 vs game 156078 |
 | Virus | yuri_virus | Damage 24000 vs game 144111 |
@@ -81,8 +81,8 @@ ambiguous: Rifle Infantry -> ra1_allies_rifleinfantry, ra1_soviets_rifleinfantry
 | Nod Light Tank | td_nod_lighttank | HP 80000 vs game 110000; Speed 110 vs game 89; Damage 6000 vs game 14829 |
 | Nod Flame Tank | td_nod_flametank | HP 100000 vs game 119000; Speed 80 vs game 83; Damage 28000 vs game 67284 |
 | GDI Battle Tank | td_gdi_battletank | HP 125000 vs game 151000; Speed 80 vs game 74; Damage 16000 vs game 29996 |
-| Allied Light Tank | ra1_allies_alliedlighttank | HP 50000 vs game 75000; Speed 120 vs game 111; Damage 6000 vs game 16696 |
-| Allied Medium Tank | ra1_allies_alliedmediumtank | HP 90000 vs game 127000; Speed 100 vs game 81; Damage 8000 vs game 14704 |
+| Allied Light Tank | ra1_allies_lighttank | HP 50000 vs game 75000; Speed 120 vs game 111; Damage 6000 vs game 16696 |
+| Allied Medium Tank | ra1_allies_mediumtank | HP 90000 vs game 127000; Speed 100 vs game 81; Damage 8000 vs game 14704 |
 | Soviet Heavy Tank | ra1_soviets_heavytank | HP 150000 vs game 172000; Speed 70 vs game 66; Damage 20000 vs game 38118 |
 | Ordos Combat Tank | ordos_combattank | Damage 8000 vs game 9000 |
 | Mongoose | ixian_mongoose | Damage 32000 vs game 33254 |
@@ -122,7 +122,7 @@ unmatched: Light Tank Mk2, Sheridan, Chi-Ha Medium Tank, Shrine Tank, Ix Combat 
 ambiguous: Lunar Tiger -> schwarzermond_lunartiger, schwarzermond_promotion_lunartiger | Quantum Tank -> steelconsortium_promotion_quantumtank, steelconsortium_quantumtank | Laser Tank -> ordos_lasertank, schwarzermond_lasertank, schwarzermond_promotion_lasertank | Katy Tank -> steelconsortium_katytank, steelconsortium_promotion_katytank
 
 
-## Vehicles: 97 matched, 53 mismatched, 51 unmatched, 9 ambiguous
+## Vehicles: 96 matched, 53 mismatched, 52 unmatched, 9 ambiguous
 
 | sheet unit | actor | mismatches |
 |---|---|---|
@@ -134,7 +134,7 @@ ambiguous: Lunar Tiger -> schwarzermond_lunartiger, schwarzermond_promotion_luna
 | Positron | protoss_positron | Damage 20000 vs game 40104 |
 | Flak Truck | ra1_soviets_flaktruck | Damage 4000 vs game 16100; Reload 15 vs game 10 |
 | Armored Car | japan_armoredcar | Damage 800 vs game 3266; Reload 4 vs game 8 |
-| Ix Raider | rocket_raider.ixian | Damage 6000 vs game 6750; Reload 25 vs game 5 |
+| Ix Raider | ixian_rocket_raider | Damage 6000 vs game 6750; Reload 25 vs game 5 |
 | Ordos Raider | ordos_raider | HP 35000 vs game 60000; Speed 135 vs game 180; Damage 16000 vs game 36000; Reload 53 vs game 24 |
 | Stealth Raider | ordos_stealthraider | HP 35000 vs game 60000; Speed 135 vs game 180 |
 | Ordos APC | ordos_apc | Damage 24000 vs game 25440 |
@@ -175,12 +175,12 @@ ambiguous: Lunar Tiger -> schwarzermond_lunartiger, schwarzermond_promotion_luna
 | Nod Artillery | td_nod_artillery | HP 17500 vs game 29000; Damage 32000 vs game 72438 |
 | Specter | terran_specter | HP 22500 vs game 50000; Speed 100 vs game 80; Damage 48000 vs game 156078; Reload 117 vs game 33 |
 | V2 Rocket Launcher | ra1_soviets_v2rocketlauncher | HP 30000 vs game 45000; Speed 85 vs game 67; Damage 120000 vs game 97996 |
-| Allied Artillery | ra1_allies_alliedartillery | HP 20000 vs game 30000; Speed 60 vs game 58; Damage 30000 vs game 58288 |
+| Allied Artillery | ra1_allies_artillery | HP 20000 vs game 30000; Speed 60 vs game 58; Damage 30000 vs game 58288 |
 | Brummbär | naxis_brummbar | Damage 56000 vs game 42200 |
 | Lunar Grille | schwarzermond_lunargrille | Damage 32000 vs game 121200 |
 | Burrito | latinsyndicate_burrito | Damage 240000 vs game 161248 |
 
-unmatched: IFV (default), Ordos Raider Buggy, IFV (MG), IFV (Rockets), IFV (HMG), IFV (Engineer), Syndicate Buggy (MG), Syndicate Buggy (Rockets), Syndicate Buggy (Chaingun), Scout Robot, APC (GDI), Nod Buggy Mk2, Humvee Mk2, APC (Allies), Japanese Hovercraft, Japanese Hovercraft (Flak), BTR, Heavy Ix Raider (Rockets), Heavy Ix Raider (Guns), Naxi Halftrack, RA2 Flak Track, Syndicate APC, Syndicate APC, Syndicate APC (Missiles), Soviet Gatling Tank, Experimental Exosuit, Ordos Tank Destroyer, RA2 Tank Destroyer, RA2 Tesla Tank, AA Plasma Tank ...
+unmatched: IFV (default), Ordos Raider Buggy, IFV (MG), IFV (Rockets), IFV (HMG), IFV (Engineer), Syndicate Buggy (MG), Syndicate Buggy (Rockets), Syndicate Buggy (Chaingun), Scout Robot, APC (GDI), Nod Buggy Mk2, Humvee Mk2, APC (Allies), Japanese Hovercraft, Japanese Hovercraft (Flak), BTR, Heavy Ix Raider (Rockets), Heavy Ix Raider (Guns), Naxi Halftrack, RA2 Flak Track, Syndicate APC, Syndicate APC, Syndicate APC (Missiles), Allied Heavy AA Tank, Soviet Gatling Tank, Experimental Exosuit, Ordos Tank Destroyer, RA2 Tank Destroyer, RA2 Tesla Tank ...
 
 ambiguous: Ranger -> ra1_allies_ranger, wc2_humans_upgrade_ranger | Battle Fortress -> ra2_allies_battlefortress, ra2_allies_battlefortress_chrono, ra2_allies_battlefortress_empty | Laser Tank -> ordos_lasertank, schwarzermond_lasertank, schwarzermond_promotion_lasertank | Laser Tank -> ordos_lasertank, schwarzermond_lasertank, schwarzermond_promotion_lasertank | Stealth Tank -> td_nod_stealthtank, ts_nod_stealthtank | Tesla Tank -> ra1_soviets_teslatank, ra2_soviets_teslatank | Ballista -> japan_ballista, wc2_humans_ballista | Ballista -> japan_ballista, wc2_humans_ballista | Siege Engine -> wc2_humans_siegeengine, wc2_orcs_siegeengine
 

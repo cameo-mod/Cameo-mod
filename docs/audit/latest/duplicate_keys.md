@@ -1,6 +1,6 @@
 # audit_duplicate_keys — duplicate keys in one node (ambiguous merges)
 
-Files scanned: **661** — D1 ambiguous inheritance labels: **0**, D2 merged duplicates: **3962**
+Files scanned: **661** — D1 ambiguous inheritance labels: **0**, D2 merged duplicates: **3968**
 
 
 ## D1 — duplicate inheritance labels with different parent values
@@ -47,8 +47,8 @@ _none found_
 | RenderSprites | 33 |
 | Warhead@HeavyCannonPercentage | 30 |
 | Warhead@MissileAP_Medium_Flat | 26 |
+| Warhead@1Dam | 26 |
 | Warhead@MediumCannonPercentage | 25 |
-| Warhead@1Dam | 25 |
 | Warhead@LightMissilePercentage | 24 |
 | Warhead@HeavyChemicalWeaponPercentage | 24 |
 | Warhead@EMPUnit | 23 |
@@ -3256,6 +3256,7 @@ _none found_
 | mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml | 2740, 2857 | PhobosLaser | Warhead@HeavyFlameWeaponPercentage |
 | mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml | 2959, 3006 | MedicFlare | Projectile |
 | mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml | 2980, 3043 | MedicFlare | Warhead@LightFlameWeaponPercentage |
+| mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml | 1285, 1295 | RemovableDebuffDummy | Warhead@Cloud |
 | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/sequences.yaml | 388, 394 | td_gdi_advancedguardtower | muzzle |
 | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 180, 386 | td_gdi_boxer_boxercannonag | Warhead@SmallArmsPercentage |
 | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 187, 335 | td_gdi_boxer_boxercannonag | Warhead@LightMissilePercentage |
@@ -3719,7 +3720,7 @@ _none found_
 | mods/cameo/rules/xmas.yaml | 90, 95 | EVILCRATE | GiveUnitCrateAction |
 | mods/cameo/rules/z.yaml | 1072, 1079 | zfort | ProvidesPrerequisite@buildingname |
 | mods/cameo/sequences/advancewars.yaml | 408, 411, 416 | awmegatnk | Scale |
-| mods/cameo/sequences/d2k.yaml | 1323, 1324 | hightech.harkonnen | Defaults |
+| mods/cameo/sequences/d2k.yaml | 1323, 1324 | harkonnen_hightech | Defaults |
 | mods/cameo/sequences/d2k.yaml | 2247, 2248 | d2k_editor-overlay | Defaults |
 | mods/cameo/sequences/d2k.yaml | 2480, 2481 | d2k_shroud | Defaults |
 | mods/cameo/sequences/generals.yaml | 139, 142 | glamob | stand |
@@ -3754,6 +3755,11 @@ _none found_
 | mods/cameo/weapons/classicdoom.yaml | 92, 94 | WolfenMechaHetlerMinigun | Warhead@1Dam |
 | mods/cameo/weapons/classicdoom.yaml | 101, 103 | WolfenMechaHetlerMinigun2 | Warhead@1Dam |
 | mods/cameo/weapons/classicdoom.yaml | 250, 255 | WolfenSchabbsMutate | Report |
+| mods/cameo/weapons/d2k.yaml | 595, 613 | DroneJumpH | ReloadDelay |
+| mods/cameo/weapons/d2k.yaml | 596, 614 | DroneJumpH | Range |
+| mods/cameo/weapons/d2k.yaml | 599, 615 | DroneJumpH | InvalidTargets |
+| mods/cameo/weapons/d2k.yaml | 600, 616 | DroneJumpH | Warhead@1Dam |
+| mods/cameo/weapons/d2k.yaml | 1177, 1183 | oHMGo_muzzle | ReloadDelay |
 | mods/cameo/weapons/generals.yaml | 1796, 1799 | USACrusaderCannon | Report |
 | mods/cameo/weapons/generals.yaml | 1805, 1808 | USAPaladinCannon | Report |
 | mods/cameo/weapons/lostunits.yaml | 278, 283 | InfantryExplode | Warhead@3Clust |
@@ -4022,5 +4028,5 @@ _none found_
 | mods/cameo/weapons/wh40k.yaml | 354, 357 | WH40KShootaBoyzGun | Warhead@1Dam |
 
 
-**FAIL** — D2 count 3962 exceeds the baseline 260: a new duplicate key was introduced.
+**FAIL** — D2 count 3968 exceeds the baseline 260: a new duplicate key was introduced.
 
