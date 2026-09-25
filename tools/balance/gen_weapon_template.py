@@ -1168,6 +1168,29 @@ def fit_band_floor(rows):
             for a, v in rows]
 
 
+# R16's POPULATION law (maintainer 2026-09-25, "Stretch toward 4-5x"): the family spreads
+# (max:min over the armor rows) must form a bell curve peaking at 4x-5x, with 2x and 20x the
+# low-occupancy asymptotes. The census before this step peaked at 2-4x (38 families) with only
+# 10 at 4-5x. One exponent moves the whole bell: a power law about the geometric centre,
+# `v' = G * (v/G) ** a`, raises a profile's spread to the power `a`, so every family's log-spread
+# is scaled by the same factor - the bell keeps its shape and its peak moves. It is the same
+# instrument as `fit_band_floor` and the ceiling compression: monotone (the ordering law's
+# sequence survives), geometric-mean preserving, and it keeps Heroic = Plate x Scout / peak exact.
+# Flat-by-design families (Sonic, Magic) have max == min and are untouched; the 10-200 window is
+# still enforced afterwards by `mean_normalise`'s compression.
+BELL_STRETCH_ALPHA = 1.30
+
+
+def bell_stretch(rows, alpha=BELL_STRETCH_ALPHA):
+    """Stretch a MAIN profile's spread to `spread ** alpha` about its geometric mean (R16)."""
+    idx = [i for i, (a, _) in enumerate(rows) if a not in NON_ARMOR_ROWS]
+    vals = [float(rows[i][1]) for i in idx]
+    if not vals or max(vals) <= min(vals) or alpha == 1.0:
+        return rows
+    fixed = dict((rows[i][0], v) for i, v in zip(idx, _powerlaw(vals, alpha)))
+    return [(a, fixed.get(a, v)) for a, v in rows]
+
+
 def mean_normalise(rows, target=MEAN_TARGET):
     """Rescale a MAIN profile so the GEOMETRIC mean of its armor rows is `target` (R16; see above).
 
@@ -1588,6 +1611,8 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         # See fit_band_floor: the blend-only copy inside finish_blend missed CannonAP entirely
         # and let the tilt undo it for Cryo.
         main = fit_band_floor(main)
+        # R16 population law — move the spread bell's peak to 4x-5x (see BELL_STRETCH_ALPHA).
+        main = bell_stretch(main)
         # W25 S1 — pin the profile's MEAN to 100 before anything reads it. Must run on
         # EVERY branch and BEFORE `shield_for`: Shield's structural term is
         # `sqrt((200+floor)(100+top))`, so it has to see the final ladder, not the
