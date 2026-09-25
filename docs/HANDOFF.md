@@ -1,5 +1,28 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-26b — EMBER: B13 corrino MCV crate (30/31 → 31/31)
+
+`Agent: EMBER · branch devin/ember/b13-corrino-crate · base bf8848bd2`
+
+One-stanza fix in shared `mods/cameo/rules/misc.yaml` (no lane owner,
+last touched by merged naming PRs): appended `GiveBaseBuilderCrateAction@corrino`
+granting `corrino_mobileconstructionvehicle`, same shape as the 30 siblings.
+`audit_basebuilder_crates` re-run: **31/31 covered, 0 missing**.
+
+Remaining red rows and their owners (not mine to take):
+- Q prerequisite order ×1 — `steelconsortium_consortiummobileconstructionvehicle`
+  (Consortium pack = DAWN file-set)
+- MinRange ×7 — td_gdi/td_nod ×4, ra1_allies ×2, ordos ×1 (DAWN packs; weapon-stat
+  values → balance-adjacent, needs lane-owner intent check — e.g. the
+  `ra1_allies_155mm` 2670-vs-2365 gap may be a deliberate artillery dead-zone)
+- G1 garrison ×7 — dogs (`ra1_soviets`/`ra2_allies`/`ra2_soviets`) + wc2 heroes
+  (`danath*`, `hellscream*`). Design question first: should dogs be garrison-capable
+  at all, or do they need a garrison armament? Lane-owner decision.
+- B1 6 real leaks — surfaced by my attribution fix (#502, merged); all DAWN
+  file-set, listed in `faction_leaks.md` + HANDOFF 2026-09-26a.
+
+---
+
 ## 2026-09-26a — EMBER: B1 leak-attribution fix (433 → 6 real leaks)
 
 `Agent: EMBER · branch devin/ember/faction-leak-attribution · base d46ecd9d1`

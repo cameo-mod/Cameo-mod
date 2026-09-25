@@ -207,6 +207,11 @@ CRATE:
 		NoBaseSelectionShares: 10000
 		Units: atreides_mobileconstructionvehicle
 		ValidFactions: atreides
+	GiveBaseBuilderCrateAction@corrino:
+		SelectionShares: 0
+		NoBaseSelectionShares: 10000
+		Units: corrino_mobileconstructionvehicle
+		ValidFactions: corrino
 
 WWCRATE:
 	Inherits: CRATE

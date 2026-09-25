@@ -77,14 +77,14 @@ shares.
 | B10 | dead content | 395 orphan weapons · **0** dangling refs · 18 dead conditions | `orphans.md` |
 | B11 | asset norms | 127 / 1942 PNGs over budget · 3628 / 8540 WAVs off-norm | `assets.md` |
 | B12 | localization | **0** unresolved fluent refs · 534 orphaned `actor-*` messages | `fluent.md` |
-| B13 | basebuilder crate coverage | **30/31** factions covered · **1 missing** | `basebuilder_crates.md` |
+| B13 | basebuilder crate coverage | **31/31** factions covered | `basebuilder_crates.md` |
 | R2 | stacked multipliers | 823 units over the 2.0× power budget | `power_budget.md` |
 | W | weapon uniqueness (§10) | 37 same-faction · 31 cross-faction · 89 carrier-only | `weapon_uniqueness.md` |
 | G | garrison weapons (§11) | **7 G1** · 0 G2 · 0 G3 | `garrison_weapons.md` |
 | F | house stat formulas | 685 violations across 2009 roster actors | `stat_formulas.md` |
 | E | elite / rank wiring | 197 missing elite armaments · 21 ungated ELITE blocks · 60 decoration issues | `missing_elite.md`, `elite_gating.md`, `rank_decoration.md` |
 | Q | build order | **1** prerequisite-order · 985 build-palette-order violations across 910 buildables | `buildable_order.md` |
-| D | duplicate keys | **7 D1 ambiguous labels** · 3984 D2 merged duplicates | `duplicate_keys.md` |
+| D | duplicate keys | **0 D1 ambiguous labels** · 3984 D2 merged duplicates | `duplicate_keys.md` |
 
 ## Green — and must stay green
 
@@ -103,10 +103,10 @@ bespoke-family blocks), owned by the generator lane.
 
 | check | state | what to do |
 |---|---|---|
-| duplicate keys D1 | 7 ambiguous inherit labels | each one silently drops a template — same family as the `Parent type X was already inherited` boot crash |
+| duplicate keys D1 | **0 ambiguous labels** (was 7 — cleared by the merge wave) | keep watching: this is the `Parent type X was already inherited` boot-crash family |
 | warhead-split ratchet | 14 vs baseline 69 | pre-existing W24 debt, much reduced (was 921); the 14 remaining are listed in `warhead_split.md`. Lower the baseline as W24 lands — never raise it. |
 | **MinRange** | **7 mismatches** | `min_range.md` — weapons whose `MinRange` ≠ round(Range/5) step 5 (e.g. `ra1_allies_alliedartillery_155mm` 2670 vs 2365). This row was wrongly listed under Green in the previous edition. |
-| **B13 crate coverage** | **1 missing — corrino** | `basebuilder_crates.md` — the corrino faction has no MCV crate entry. |
+| **B13 crate coverage** | **fixed 2026-09-26 — 31/31** | `basebuilder_crates.md` — corrino `GiveBaseBuilderCrateAction` added in `rules/misc.yaml`. |
 | **G1 garrison weapons** | **7 missing** | `garrison_weapons.md` — armed garrison-capable infantry without a garrison weapon (e.g. `ra1_soviets_dog`). Was 0 in the previous edition. |
 | **Q prerequisite order** | **1 violation** | `buildable_order.md` — one buildable is gated by a prerequisite ordered after it. Was 0. |
 | **balance-ledger drift** | **25 ledgers drifted** | `balance_drift.md` — yaml moved without re-extraction, or sanctioned applies missing their `extract_stats.py` follow-up. Was 0 — flagged to lane owners. |
@@ -136,11 +136,13 @@ so they cannot rot in prose again.
 
 ## Recommended fix order
 
-1. **B2b duplicate inherit paths / D1 ambiguous labels** — the class that produces
-   `Parent type X was already inherited` boot crashes and silently-dropped templates. Only the
-   boot and `audit_duplicate_inherits` can see it.
-2. **B13 corrino crate coverage (1 missing)**, **G1 garrison weapons (7)**,
-   **Q prerequisite order (1)**, **MinRange (7)** — small, bounded, player-visible.
+1. **B2b duplicate inherit paths (1,952)** — the diamond-path class; D1 ambiguous labels
+   are at 0 as of 2026-09-26. The class produces `Parent type X was already inherited`
+   boot crashes and silently-dropped templates. Only the boot and
+   `audit_duplicate_inherits` can see it.
+2. **G1 garrison weapons (7)**,
+   **Q prerequisite order (1)**, **MinRange (7)** —
+   small, bounded, player-visible. (B13 corrino crate: fixed 2026-09-26.)
 3. **balance-ledger drift (25) + doc-claims re-pins (7)** — mechanical hygiene; each drifted
    ledger needs an `extract_stats.py` run from its owning lane.
 4. **B1 cross-faction leaks (6 L1)** — attribution fixed 2026-09-26 (`audit_faction_leaks.py`
