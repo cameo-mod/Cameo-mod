@@ -65,7 +65,7 @@ shares.
 | class | what | count | report |
 |---|---|--:|---|
 | **B8** | crash-class content | **0** | — |
-| B1 | cross-faction leaks | 433 L1 · 20 L3 · 91 shared | `faction_leaks.md` |
+| B1 | cross-faction leaks | 6 L1 · 0 L3 · 91 shared | `faction_leaks.md` |
 | B2 | illegal inherits | 276 V1 · **0** V2 · **0** V3 dangling · 2094 V4 depth>3 · 102 V5 | `inherits.md` |
 | B2b | duplicate inherit paths | 1952 definitions reach a parent by >1 path | `duplicate_inherits.md` |
 | B3 | upgrade direction | 624 items · **0** inverted · 1 deferred · 10 dead · 20 dead tokens · 587 without an intent entry | `upgrades.md` |
@@ -143,8 +143,10 @@ so they cannot rot in prose again.
    **Q prerequisite order (1)**, **MinRange (7)** — small, bounded, player-visible.
 3. **balance-ledger drift (25) + doc-claims re-pins (7)** — mechanical hygiene; each drifted
    ledger needs an `extract_stats.py` run from its owning lane.
-4. **B1 cross-faction leaks (433 L1)** — the count grew because the audit's faction coverage
-   grew, not only because the tree got worse. Triage before treating it as 433 bugs.
+4. **B1 cross-faction leaks (6 L1)** — attribution fixed 2026-09-26 (`audit_faction_leaks.py`
+   aliased bare theme names only; pack owners arrive as `theme/subdir`). The old 433 were
+   namespace artifacts; the 6 survivors are real and listed in `faction_leaks.md` — each is a
+   per-lane intended-sharing decision (e.g. latinsyndicate building `naxis_*` units).
 5. **B3/B4 upgrade direction and coverage**, plus transcribing the remaining 587
    `upgrades_intent.yaml` entries so the audit can tell an intended drawback from a bug.
 6. **B10/B11 hygiene** — orphan purge, per-directory WAV normalisation. Good batch work.
