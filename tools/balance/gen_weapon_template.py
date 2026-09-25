@@ -1894,6 +1894,11 @@ FAMILY_PHYSICAL_STATE = {
     "Flame":    ("Temperature", _m(1.00)),   # heat -> overheat/pop
     "Laser":    ("Temperature", _m(0.75)),   # laser overheats (main only, chip excluded)
     "Chemical": {"Corrosion": _m(1.00)},     # acid -> corrosion meter (mapping form)
+    # W9, maintainer 2026-09-25: "Every Toxic weapon" fills the POISON meter - the gas clouds
+    # (Yuri Virus cloud, Anthrax, TS smoke, Zerg acid cloud) poison by dose, the W9 spec's
+    # "gas clouds fill the meter by dwell time". Poison exists only on ^DefaultInfantry, so on a
+    # vehicle this no-ops: corrosion eats vehicles, poison hurts infantry.
+    "Toxic":    {"Poison": _m(1.00)},
     # ⭐ SUPPORT WEAPONS, maintainer 2026-08-22: Cryo and Inferno fill the meter TWICE as fast as
     # Flame (Scale 200 vs 100), so they freeze/ignite after 25% of lethal damage instead of 50%.
     # The intent is "mostly apply the physical effect without dealing too much direct damage" —
