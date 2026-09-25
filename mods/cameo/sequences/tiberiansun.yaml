@@ -524,7 +524,7 @@ tsnthpadmut:
 		Offset: 0, 0
 		UseTilesetCode: false
 
-tsgtsilo.gdi:
+gdi_tsgtsilo:
 	Inherits: ^WithBuildingBib2
 	Defaults:
 		Scale: 1.25
@@ -577,7 +577,7 @@ tsgtsilo.gdi:
 
 #Alternative Silo for Nod, Pyramid
 
-tsgtsilo.nod:
+nod_tsgtsilo:
 	Inherits: ^WithBuildingBib2
 	Defaults:
 		Scale: 1.25

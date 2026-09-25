@@ -295,62 +295,6 @@
    }
   },
   "buildings": {
-   "OILB.d2k": {
-    "armor": {
-     "src": "inherited",
-     "v": "Wood"
-    },
-    "build_duration": {
-     "src": "inherited",
-     "v": "1500"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "inherited",
-     "v": "2500"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Building",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "hp": {
-     "src": "inherited",
-     "v": "250000"
-    },
-    "integrity_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "name": "Spice Sifter",
-    "prerequisites": [
-     "~construction_yard",
-     "research_centre",
-     "derricklimit"
-    ],
-    "queue": [
-     "Building",
-     "RABuilding"
-    ],
-    "shield_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "sight": {
-     "src": "inherited",
-     "v": "7500"
-    }
-   },
    "concreteabuilding": {
     "build_duration": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Buildable.BuildDuration",
@@ -456,6 +400,62 @@
      "Defence",
      "RADefence"
     ]
+   },
+   "d2k_spicesifter": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "250000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Spice Sifter",
+    "prerequisites": [
+     "~construction_yard",
+     "research_centre",
+     "derricklimit"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "7500"
+    }
    },
    "wall": {
     "armor": {
@@ -653,7 +653,7 @@
       "slot": "Armament@SECONDARY",
       "versus_templates": [
        "^D2KMissile",
-       "^Effect_MissileAP_Heavy"
+       "^d2k_shared_fremen_rpg"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -1278,16 +1278,65 @@
    "siege_tank": {
     "armaments": [
      {
-      "damage_warheads": [],
+      "damage_warheads": [
+       {
+        "damage": "48000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Flat",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 50, 35",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mmCannonHE_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 72, 50, 32",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mmConcussion_MediumPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mmDemolition_HeavyPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "600",
+        "falloff": "100, 45, 18",
+        "percentage_denominator": "10000",
+        "spread": null,
+        "tag": "CollapsedD2K_155mmDemolition_LightPercentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
       "design_weapon_class": null,
-      "extraction_note": "no_damage_warheads",
-      "pricing": false,
+      "pricing": true,
+      "range": "10000",
+      "reloaddelay": "74",
       "slot": "Armament",
-      "versus_templates": [],
-      "warheads": [],
+      "versus_templates": [
+       "^Warhead_CannonHE_Medium_Flat",
+       "^D2K155mmLegacy"
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Concussion_Medium",
+       "^Warhead_CannonHE_Medium"
+      ],
       "weapon": "D2K_155mm",
-      "weapon_class_source": "none"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {

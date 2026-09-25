@@ -12587,3 +12587,4 @@ Verified: all 33 resolved-identical vs pre-edit HEAD; orphan cancels 0;
 empty warheads 0; dup-keys 3968 = HEAD (0 new); split-defs S2 5 = HEAD
 (pre-existing); weapon-shape all buckets at/below ratchets —
 **W7 804→760, W6 443→442** (baselines lowered in audit_weapon_shape.py).
+

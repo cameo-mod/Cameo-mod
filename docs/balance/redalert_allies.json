@@ -280,7 +280,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "1310",
       "pricing": true,
       "range": "6540",
@@ -288,16 +288,13 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_MissileAP_Heavy",
        "^Warhead_MissileHE_Heavy_Flat",
        "^Projectile_Missile_Heavy",
        "^Effect_MissileHE_Heavy"
       ],
-      "warheads": [
-       "^Warhead_MissileAP_Heavy"
-      ],
+      "warheads": [],
       "weapon": "ra1_allies_longbow_missile",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "damage_warheads": [
@@ -310,7 +307,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "minrange": "1310",
       "pricing": true,
       "range": "6540",
@@ -318,13 +315,11 @@
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Warhead_BlastCryo_Medium",
        "^Warhead_MissileCryo_Heavy",
        "^Projectile_Missile_Heavy",
        "^Effect_Cryo"
       ],
       "warheads": [
-       "^Warhead_BlastCryo_Medium",
        "^Warhead_MissileCryo_Heavy"
       ],
       "weapon": "ra1_allies_longbow_missile_cryo",
@@ -476,20 +471,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "62",
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "^Warhead_Concussion_Medium",
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Heavy",
        "^Effect_MissileAP_Heavy"
       ],
       "warheads": [
-       "^Warhead_Concussion_Medium",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "ra1_allies_rapierjumpjet_missile_AA",
@@ -510,20 +503,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "62",
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@SECONDARYUpgrade",
       "versus_templates": [
-       "^Warhead_BlastCryo_Medium",
        "^Warhead_MissileCryo_Heavy",
        "^Projectile_Missile_Heavy",
        "^Effect_Cryo"
       ],
       "warheads": [
-       "^Warhead_BlastCryo_Medium",
        "^Warhead_MissileCryo_Heavy"
       ],
       "weapon": "ra1_allies_rapierjumpjet_missile_cryo_AA",
@@ -1582,20 +1573,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7685",
       "reloaddelay": "40",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy_Flat",
-       "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_Concussion_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "ra1_allies_alliedgunturret_cannon",
@@ -1741,21 +1729,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "48",
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ra1_allies_machinegunner_machinegun",
@@ -1776,21 +1761,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6500",
       "reloaddelay": "48",
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ra1_allies_machinegunner_machinegun",
@@ -3798,11 +3780,7 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
-       "^Grenade",
-       "^FlakWeapon",
-       "^Chaingun",
-       "^HeavyMissile",
-       "^MediumMissile"
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -3866,11 +3844,7 @@
       "slot": "Armament@SECONDARY",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
-       "^Grenade",
-       "^FlakWeapon",
-       "^Chaingun",
-       "^HeavyMissile",
-       "^MediumMissile"
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -3934,7 +3908,7 @@
       "slot": "Armament@Upgrade",
       "versus_templates": [
        "ra1_allies_chronotank_missile",
-       "^CryoMissileProjectile"
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -3998,7 +3972,7 @@
       "slot": "Armament@UpgradeSECONDARY",
       "versus_templates": [
        "ra1_allies_chronotank_missile",
-       "^CryoMissileProjectile"
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -4128,10 +4102,7 @@
       "slot": "Armament@AG",
       "versus_templates": [
        "^Warhead_Bullet_Medium_Flat",
-       "^LightMissile",
-       "^FlakWeapon",
-       "^SmallArms",
-       "^Chaingun"
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [],
       "weapon": "ra1_allies_alliedheavyaatank_cannon",
@@ -4219,7 +4190,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Allied Heavy AA Tank",
+    "name": "Flakpanzer Gepard",
     "prerequisites": [
      "~ra1_allies_warfactory",
      "ra1_allies_radardome"
@@ -4972,10 +4943,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
-       "^TankDestroyerCannon",
-       "^Grenade",
-       "^FlakWeapon",
-       "^MediumMissile"
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -5032,7 +5000,7 @@
       "slot": "Armament@Upgrade",
       "versus_templates": [
        "ra1_allies_phasetransport_missile",
-       "^CryoMissileProjectile"
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -5254,6 +5222,20 @@
       "damage_warheads": [
        {
         "damage": "2",
+        "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "33000",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
@@ -5290,23 +5272,9 @@
        {
         "damage": "2",
         "falloff": null,
-        "spread": "125",
-        "tag": "RailgunWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2",
-        "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "33000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
@@ -5317,15 +5285,10 @@
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_MissileAP_Heavy_Flat",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^Chaingun",
-       "^FlakWeapon",
-       "^TankDestroyerCannon",
        "^RailgunWeapon",
-       "^MediumMissile",
-       "^D2KRocket"
+       "^Warhead_MissileAP_Heavy",
+       "^Projectile_Missile_Heavy_D2K_Rocket",
+       "^Effect_MissileAP_Heavy_D2K_Rocket"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -5337,6 +5300,20 @@
       "damage_warheads": [
        {
         "damage": "2",
+        "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "33000",
+        "falloff": "100, 0",
+        "spread": "85",
+        "tag": "MissileAP_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
@@ -5373,23 +5350,9 @@
        {
         "damage": "2",
         "falloff": null,
-        "spread": "125",
-        "tag": "RailgunWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2",
-        "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "33000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
@@ -5401,7 +5364,7 @@
       "slot": "Armament@Upgrade",
       "versus_templates": [
        "ra1_allies_reconranger_recoillessgun",
-       "^CryoMissileProjectile"
+       "^Effect_Watersplash_Huge_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -5492,20 +5455,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5023",
       "reloaddelay": "64",
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_CannonAP_Light",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Light",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "ra1_allies_sheridanassaulttank_cannon",
@@ -5583,21 +5544,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5023",
       "reloaddelay": "58",
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@MG",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ra1_allies_sheridanassaulttank_chaingun",

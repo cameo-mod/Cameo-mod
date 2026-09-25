@@ -102,12 +102,10 @@
       "requires": "yuri_upgrade_disksiphonattack",
       "slot": "Armament@SECOND",
       "versus_templates": [
-       "^Warhead_Tesla_Heavy",
        "^Warhead_Magic_Heavy",
        "^Effect_Magic_Heavy"
       ],
       "warheads": [
-       "^Warhead_Tesla_Heavy",
        "^Warhead_Magic_Heavy"
       ],
       "weapon": "RA2DiskDrain",
@@ -820,17 +818,15 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7500",
       "reloaddelay": "6",
       "slot": "Armament@1",
       "versus_templates": [
-       "RA2GattlingMG1",
-       "^YuriGatlingCannonProjectileStreak"
+       "RA2GattlingMG1"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "YuriGatlingCannonMG1",
@@ -848,18 +844,16 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "pricing_reason": "staged_gatling_nonbaseline",
       "range": "7875",
       "reloaddelay": "4",
       "slot": "Armament@2",
       "versus_templates": [
-       "RA2GattlingMG2",
-       "^YuriGatlingCannonProjectileStreak"
+       "RA2GattlingMG2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "YuriGatlingCannonMG2",
@@ -877,18 +871,16 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "pricing_reason": "staged_gatling_nonbaseline",
       "range": "8250",
       "reloaddelay": "2",
       "slot": "Armament@3",
       "versus_templates": [
-       "RA2GattlingMG3",
-       "^YuriGatlingCannonProjectileStreak"
+       "RA2GattlingMG3"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "YuriGatlingCannonMG3",
@@ -906,18 +898,16 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "pricing_reason": "staged_gatling_nonbaseline",
       "range": "10125",
       "reloaddelay": "6",
       "slot": "Armament@1AA",
       "versus_templates": [
-       "RA2GattlingMG1_AA",
-       "^YuriGatlingCannonProjectileStreak"
+       "RA2GattlingMG1_AA"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "YuriGatlingCannonMG1_AA",
@@ -935,18 +925,16 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "pricing_reason": "staged_gatling_nonbaseline",
       "range": "11250",
       "reloaddelay": "4",
       "slot": "Armament@2AA",
       "versus_templates": [
-       "RA2GattlingMG2_AA",
-       "^YuriGatlingCannonProjectileStreak"
+       "RA2GattlingMG2_AA"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "YuriGatlingCannonMG2_AA",
@@ -964,18 +952,16 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "pricing_reason": "staged_gatling_nonbaseline",
       "range": "12375",
       "reloaddelay": "2",
       "slot": "Armament@3AA",
       "versus_templates": [
-       "RA2GattlingMG3_AA",
-       "^YuriGatlingCannonProjectileStreak"
+       "RA2GattlingMG3_AA"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "YuriGatlingCannonMG3_AA",
@@ -1249,18 +1235,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA220mmrapid",
@@ -2088,18 +2073,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5531",
       "reloaddelay": "15",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2GattlingInf",
@@ -2117,18 +2101,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5531",
       "reloaddelay": "15",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2GattlingInf",
@@ -2249,13 +2232,10 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
-       "^TankDestroyerCannon",
-       "^LightFlameWeapon",
-       "^FlakWeapon",
-       "^Effect_Init_Fire_RA2"
+       "^Effect_AlliedTigerCannon",
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -2303,13 +2283,10 @@
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_CannonHE_Medium_Flat",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
-       "^TankDestroyerCannon",
-       "^LightFlameWeapon",
-       "^FlakWeapon",
-       "^Effect_Init_Fire_RA2"
+       "^Effect_AlliedTigerCannon",
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -2504,14 +2481,14 @@
         "damage": "6",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "HeavyChemicalWeaponPercentage",
+        "tag": "SniperWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "SniperWeaponPercentage",
+        "tag": "HeavyChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2524,7 +2501,6 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Sniper_Light",
-       "^HeavyChemicalWeapon",
        "^SniperWeapon"
       ],
       "warheads": [
@@ -2546,14 +2522,14 @@
         "damage": "6",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "HeavyChemicalWeaponPercentage",
+        "tag": "SniperWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "SniperWeaponPercentage",
+        "tag": "HeavyChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2590,14 +2566,14 @@
         "damage": "6",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "HeavyChemicalWeaponPercentage",
+        "tag": "SniperWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "SniperWeaponPercentage",
+        "tag": "HeavyChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2635,14 +2611,14 @@
         "damage": "6",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "HeavyChemicalWeaponPercentage",
+        "tag": "SniperWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "SniperWeaponPercentage",
+        "tag": "HeavyChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2678,14 +2654,14 @@
         "damage": "6",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "HeavyChemicalWeaponPercentage",
+        "tag": "SniperWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "SniperWeaponPercentage",
+        "tag": "HeavyChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2698,7 +2674,6 @@
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_Sniper_Light",
-       "^HeavyChemicalWeapon",
        "^SniperWeapon"
       ],
       "warheads": [
@@ -2721,14 +2696,14 @@
         "damage": "6",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "HeavyChemicalWeaponPercentage",
+        "tag": "SniperWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "SniperWeaponPercentage",
+        "tag": "HeavyChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2766,14 +2741,14 @@
         "damage": "6",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "HeavyChemicalWeaponPercentage",
+        "tag": "SniperWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "SniperWeaponPercentage",
+        "tag": "HeavyChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2812,14 +2787,14 @@
         "damage": "6",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "HeavyChemicalWeaponPercentage",
+        "tag": "SniperWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6",
         "falloff": "100, 0",
         "spread": "1",
-        "tag": "SniperWeaponPercentage",
+        "tag": "HeavyChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -3051,20 +3026,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
       "range": "15000",
       "reloaddelay": "176",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_MissileAP_Heavy_Flat",
-       "^RA2Grenade",
-       "^RA2HeavyMissile",
+       "^Warhead_MissileAP_Heavy",
+       "^Projectile_Missile_Heavy",
        "^Effect_Watersplash_Large_RA2"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "YRBoomerTorpedo",
@@ -4088,7 +4061,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5400",
       "reloaddelay": "6",
@@ -4098,7 +4071,6 @@
        "RA2GattlingMG1"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "YuriGatlingTankMG1",
@@ -4115,7 +4087,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "pricing_reason": "staged_gatling_nonbaseline",
       "range": "5670",
@@ -4126,7 +4098,6 @@
        "RA2GattlingMG2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "YuriGatlingTankMG2",
@@ -4143,7 +4114,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "pricing_reason": "staged_gatling_nonbaseline",
       "range": "5940",
@@ -4154,7 +4125,6 @@
        "RA2GattlingMG3"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "YuriGatlingTankMG3",
@@ -4171,7 +4141,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "pricing_reason": "staged_gatling_nonbaseline",
       "range": "7290",
@@ -4182,7 +4152,6 @@
        "RA2GattlingMG1_AA"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "YuriGatlingTankMG1_AA",
@@ -4199,7 +4168,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "pricing_reason": "staged_gatling_nonbaseline",
       "range": "8100",
@@ -4210,7 +4179,6 @@
        "RA2GattlingMG2_AA"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "YuriGatlingTankMG2_AA",
@@ -4227,7 +4195,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "pricing_reason": "staged_gatling_nonbaseline",
       "range": "8910",
@@ -4238,7 +4206,6 @@
        "RA2GattlingMG3_AA"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "YuriGatlingTankMG3_AA",
@@ -4322,6 +4289,13 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
+        "damage": "12000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -4355,13 +4329,6 @@
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "12000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
@@ -4372,13 +4339,10 @@
       "requires": "!yuri_doctrine_lashertoxicgasshells && !yuri_doctrine_lasherlasercannon && !rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_CannonHE_Medium_Flat",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^LightFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^TankDestroyerCannon",
-       "^RA2MediumCannon"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_AlliedTigerCannon",
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -4392,6 +4356,13 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
+        "damage": "12000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -4425,13 +4396,6 @@
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "12000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
@@ -4443,7 +4407,8 @@
       "slot": "Armament@ELITE",
       "versus_templates": [
        "RA2LasherCannon",
-       "^RA2EliteEffects"
+       "^Effect_AlliedTigerCannon",
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -4533,16 +4498,7 @@
       "requires": "yuri_doctrine_lashertoxicgasshells && !rank-elite",
       "slot": "Armament@Toxic",
       "versus_templates": [
-       "^Warhead_CannonChem_Medium",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^LightChemicalWeapon",
-       "^MediumChemicalWeapon",
-       "^HeavyChemicalWeapon",
-       "^TankDestroyerCannon",
-       "^MediumCannon",
-       "^HeavyCannon"
+       "^Warhead_CannonChem_Medium"
       ],
       "warheads": [
        "^Warhead_CannonChem_Medium"
@@ -4665,36 +4621,33 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "16000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "Laser_Heavy_Flat",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Laser_Heavy_ExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "16000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy_Flat",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7065",
       "reloaddelay": "81",
       "requires": "yuri_doctrine_lasherlasercannon && !rank-elite",
       "slot": "Armament@Laser",
       "versus_templates": [
-       "^Warhead_Laser_Heavy_Flat",
-       "^Warhead_CannonHE_Medium",
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
        "^Effect_Laser_Heavy"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "RA2LasherLaser",
@@ -4704,18 +4657,18 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "40000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "Laser_Heavy_Flat",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Laser_Heavy_ExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy_Flat",
+        "type": "AreaDamage"
        },
        {
         "damage": "8",
@@ -4726,7 +4679,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8065",
       "reloaddelay": "81",
@@ -4736,7 +4689,6 @@
        "RA2LasherLaser"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium",
        "^Warhead_Laser_Heavy"
       ],
       "weapon": "RA2LasherLaser_elite",
@@ -4844,7 +4796,9 @@
       "requires": "!rank-elite && !yuri_upgrade_supermagnets",
       "slot": "Armament@Normal",
       "versus_templates": [
-       "^RA2LaserWeapon"
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -5219,18 +5173,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
       "slot": "Armament@primary",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA220mmrapid",

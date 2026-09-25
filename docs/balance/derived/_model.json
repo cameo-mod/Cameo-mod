@@ -113,27 +113,27 @@
    "VEH": 0.4
   },
   "armor_census": {
-   "Bomber": 61,
-   "Concrete": 322,
-   "Fighter": 20,
+   "Bomber": 64,
+   "Concrete": 323,
+   "Fighter": 23,
    "Flak": 48,
-   "Heavy": 182,
+   "Heavy": 205,
    "Helicopter": 66,
    "Heroic": 40,
-   "Light": 239,
-   "Medium": 135,
+   "Light": 255,
+   "Medium": 138,
    "None": 162,
-   "Plate": 92,
-   "Scout": 68,
+   "Plate": 94,
+   "Scout": 71,
    "Spaceship": 22,
    "Steel": 35,
-   "Superheavy": 96,
-   "Wood": 719
+   "Superheavy": 98,
+   "Wood": 722
   },
   "reference_hp": 200000,
-  "reference_hp_measured": 65625,
-  "shield_hp_factor": 0.6179,
-  "shield_versus_mean": 161.83
+  "reference_hp_measured": 65500,
+  "shield_hp_factor": 1.1301,
+  "shield_versus_mean": 88.49
  },
  "weapon_efficiency": {
   "DEADZONE_WEIGHT": 1.0,
@@ -143,7 +143,7 @@
   ],
   "RANGE_WEIGHT": 0.25,
   "TARGETS_FLOOR": 0.5,
-  "median_weapon_range": 5932.0
+  "median_weapon_range": 5932
  },
  "weapon_timing": {
   "ENGINE_DEFAULT_BURST": 1,

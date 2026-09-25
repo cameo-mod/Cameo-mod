@@ -56,7 +56,8 @@
        "^Warhead_Laser_Heavy",
        "^Warhead_Laser_ExtraDamage",
        "^TSEnergyBlast",
-       "^LaserWeapon"
+       "^LaserWeapon",
+       "^ts_nod_tsproton"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -186,7 +187,9 @@
       "requires": "!ts_nod_upgrade_tiberiumlenses && ts_nod_upgrade_auxiliaryweapon",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "TSHarpyClaw"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -214,7 +217,9 @@
       "requires": "!ts_nod_upgrade_tiberiumlenses && ts_nod_upgrade_auxiliaryweapon",
       "slot": "Armament@PRIMARYAOE",
       "versus_templates": [
-       "TSHarpyClaw"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -1286,7 +1291,8 @@
       "requires": "!ts_nod_tiberiumwastefacility",
       "slot": "Armament@superweapon1",
       "versus_templates": [
-       "^TSDefaultMissile"
+       "^TSDefaultMissile",
+       "^ts_tiberiansun_tstacticalmissile"
       ],
       "warheads": [],
       "weapon": "TSTacticalMissile",
@@ -1413,8 +1419,8 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy",
-       "^TSLaserEffect"
+       "^TSLaserEffect",
+       "^ts_tiberiansun_set2"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -1449,8 +1455,8 @@
       "versus_templates": [
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_Laser_Heavy",
-       "^TSLaserEffect"
+       "^TSLaserEffect",
+       "^ts_tiberiansun_set2"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -1544,7 +1550,7 @@
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
        "^Projectile_Missile_Heavy",
-       "^Effect_MissileAP_Heavy"
+       "^ts_nod_tsnodredeye"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
@@ -1572,7 +1578,9 @@
       "requires": "ts_nod_upgrade_tiberiumcoremissiles",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "TSNODRedEye"
+       "^Warhead_MissileAA_Heavy",
+       "^Projectile_Missile_Heavy",
+       "^ts_nod_tsnodredeye"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
@@ -1880,7 +1888,7 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "6600",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
@@ -1906,13 +1914,6 @@
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LegacyLaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
@@ -1926,7 +1927,7 @@
        "^Warhead_Laser_Heavy",
        "^LaserWeapon",
        "^TSLaserEffect",
-       "^Effect_Sniper_Light"
+       "^ts_nod_laserelitecadregun"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -1974,7 +1975,7 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "6600",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
@@ -2000,13 +2001,6 @@
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LegacyLaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
@@ -2020,7 +2014,7 @@
        "^Warhead_Laser_Heavy",
        "^LaserWeapon",
        "^TSLaserEffect",
-       "^Effect_Sniper_Light"
+       "^ts_nod_laserelitecadregun"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -2048,7 +2042,7 @@
       "versus_templates": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
-       "^Effect_Demolition_Light"
+       "^ts_nod_set14"
       ],
       "warheads": [
        "^Warhead_Demolition_Light"
@@ -2077,7 +2071,7 @@
       "versus_templates": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
-       "^Effect_Demolition_Light"
+       "^ts_nod_set14"
       ],
       "warheads": [
        "^Warhead_Demolition_Light"
@@ -2601,7 +2595,7 @@
       "versus_templates": [
        "^Warhead_MissileChem_Light",
        "^Projectile_Missile_Light",
-       "^Effect_MissileAP_Light"
+       "^ts_nod_tstibbazooka"
       ],
       "warheads": [
        "^Warhead_MissileChem_Light"
@@ -2630,7 +2624,7 @@
       "versus_templates": [
        "^Warhead_MissileChem_Light",
        "^Projectile_Missile_Light",
-       "^Effect_MissileAP_Light"
+       "^ts_nod_tstibbazooka"
       ],
       "warheads": [
        "^Warhead_MissileChem_Light"
@@ -2991,7 +2985,7 @@
       "versus_templates": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium"
+       "^ts_nod_tscommandoshotgun"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -3068,7 +3062,7 @@
       "versus_templates": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium"
+       "^ts_nod_tscommandoshotgun"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -3278,7 +3272,6 @@
       "reloaddelay": "250",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Demolition_Heavy_Flat",
        "^Warhead_Demolition_Heavy",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
@@ -3309,7 +3302,6 @@
       "reloaddelay": "250",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "^Warhead_Demolition_Heavy_Flat",
        "^Warhead_Demolition_Heavy",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
@@ -3339,7 +3331,6 @@
       "reloaddelay": "250",
       "slot": "Armament@TERCERA",
       "versus_templates": [
-       "^Warhead_Demolition_Heavy_Flat",
        "^Warhead_Demolition_Heavy",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
@@ -3369,7 +3360,6 @@
       "reloaddelay": "250",
       "slot": "Armament@CUARTA",
       "versus_templates": [
-       "^Warhead_Demolition_Heavy_Flat",
        "^Warhead_Demolition_Heavy",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
@@ -3399,7 +3389,6 @@
       "reloaddelay": "250",
       "slot": "Armament@QUINTA",
       "versus_templates": [
-       "^Warhead_Demolition_Heavy_Flat",
        "^Warhead_Demolition_Heavy",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
@@ -3614,7 +3603,7 @@
        "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium"
+       "^ts_nod_tsstanktibtusk"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -3698,20 +3687,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "90",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_MissileAP_Heavy_Flat",
-       "^RA2Grenade",
-       "^RA2HeavyMissile",
+       "^Warhead_MissileAP_Heavy",
+       "^Projectile_Missile_Heavy",
        "^Effect_Watersplash_Large_RA2"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "RA2TorpTube",
@@ -3730,7 +3717,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "90",
@@ -3740,7 +3727,6 @@
        "RA2TorpTube"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "RA2TorpTube_elite",
@@ -4275,7 +4261,7 @@
       "versus_templates": [
        "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
-       "^Effect_Demolition_Light"
+       "^ts_nod_set14"
       ],
       "warheads": [
        "^Warhead_Demolition_Light"
@@ -4928,7 +4914,7 @@
        "^Warhead_MissileAP_Medium_Flat",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium"
+       "^ts_nod_tsstanktibtusk"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -5413,7 +5399,7 @@
       "armament_name": "deployed",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "4600",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "Laser_Heavy",
@@ -5432,13 +5418,6 @@
         "spread": "75",
         "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LegacyLaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
