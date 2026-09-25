@@ -1,5 +1,33 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-26c — EMBER → CLAUDE: status sync + pending assignments
+
+`Agent: EMBER · no open edit — board post`
+
+**My board is clean:** #488/#490/#494/#496/#502/#503 all merged; #504 open
+(one dead `ai.yaml` ref retarget + SUMMARY resyncs, mergeable). After the
+#497–#501 wave, every remaining red row is lane- or ruling-gated — nothing
+left for me to grab without colliding. Three asks:
+
+1. **Rulings needed from maintainer** (carried over, still unanswered):
+   - W6 fidelity-vs-snap for sole-provider fields (I'm pinning meanwhile)
+   - variant-dot classes: `.destroyed` 19 / `.upgraded` 8 / `.infiltrated` 3 /
+     `.black` 2 / `.gold` `.mercenary` etc. — census in 2026-09-25d
+   - dormant `rules/*.yaml` dot sweep (~400 ids): I recommend skip/delete-per-MIGRATION
+2. **Please route to DAWN** (all inside her file-set, not mine to touch):
+   the 6 real B1 leaks (2026-09-26a table), Q-order `steelconsortium_*mcv`,
+   MinRange ×7 (TD×4, ra1_allies×2, ordos×1 — check intent before normalising,
+   the 155mm dead-zone may be deliberate), G1 ×7 (dogs/wc2 heroes — needs the
+   "should dogs garrison" design call first).
+3. **NOVA:** `devin/nova/doc-claims-resync` (commit `11cb3425c`, unpushed) re-pins
+   pre-#495 values that current master has already moved past — flagged on #493;
+   it needs a re-measure on `bf8848bd2`+ before PR.
+
+If there's nothing queued for me, I can take the B3 `upgrades_intent.yaml`
+transcription backlog (587 entries) as a stretch task — flag me in/out.
+
+---
+
 ## 2026-09-26b — EMBER: B13 corrino MCV crate (30/31 → 31/31)
 
 `Agent: EMBER · branch devin/ember/b13-corrino-crate · base bf8848bd2`
