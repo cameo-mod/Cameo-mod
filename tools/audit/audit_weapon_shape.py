@@ -109,7 +109,9 @@ W4_BASELINE = 41    # 52 -> 41 post-rebase resync onto 86577a7aa; was:    # dual
                     # the old prefix-only classifier. Same class as the W2
                     # ^Compatibility_* rename: measurement fix, not new debt.
 W5_BASELINE = 389   # more than one resolved MAIN warhead; merge-payload repairs
-W6_BASELINE = 443   # 442 -> 443: restored PulseMissile re-exposes its 5 local
+W6_BASELINE = 442   # 443 -> 442: W7-remainder materialization batch moved
+                    # the last local effect node on the DAWN file-set into a family.
+                    # was: 442 -> 443: restored PulseMissile re-exposes its 5 local
                     # effect warheads (CreateEffect/LeaveSmudge/Shake). Pre-drain debt.
                     # master itself measures 709 (known master debt vs its
                     # own 692 baseline); this branch is still -243 vs master.
@@ -122,7 +124,10 @@ W6_BASELINE = 443   # 442 -> 443: restored PulseMissile re-exposes its 5 local
 # from a TEMPLATE, "and NEVER from another weapon". Nothing measured that clause before, so
 # W1 could pass a weapon that inherits all three of its parents from other weapons. Both
 # ratchets are set by THIS script's own first run, never from a scratch scan.
-W7_BASELINE = 804   # 807 -> 804: W7 batch-5 no-covering inlines
+W7_BASELINE = 760   # 804 -> 760: W7-remainder materialization batch (DAWN
+                    # file-set: d2k 16 + tiberiansun 11 + starcraft 3 +
+                    # tiberiandawn 1 + outpost2 edenMobile chain 2).
+                    # was: 807 -> 804: W7 batch-5 no-covering inlines
                     # 870 -> 869: sc_zerg_devourer_acidcloud_aa
                     # (parent chain retrofitted by #489).
                     # 946 -> 870 post-rebase resync onto 86577a7aa
