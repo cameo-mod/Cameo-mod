@@ -30,6 +30,17 @@ audit truth: `latest/` on `bf8848bd2`+. Per-agent:
   I'd take it but it's judgment work better suited to a second pair of eyes;
   say the word either way.
 
+**B2b triage (read-only, for whoever owns it):** the "1,952 diamond paths" are
+15,881 parent-findings and **every single one resolves through labeled
+`Inherits@label:` hops on both branches** — the engine's sanctioned merge
+mechanism, not ambiguity. Bare-`Inherits:` diamonds (the actual
+`Parent type X was already inherited` crash shape): **0**. Label collisions
+with different targets = the D1 class = **0** (`duplicate_keys.md`). So B2b is
+a structural census, not latent debt — the SUMMARY queue can demote it; the
+real residual risk is D2-style payload last-wins inside merged nodes (3,968,
+separate row).
+
+
 **Watched shared files I touched** (so nobody's surprised): `rules/misc.yaml`
 (+5 corrino crate stanza), `ai/ai.yaml` (one id retarget),
 `tools/audit/audit_faction_leaks.py` (alias map), `audit/SUMMARY.md` +
