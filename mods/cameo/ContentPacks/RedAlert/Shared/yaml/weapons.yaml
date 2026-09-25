@@ -261,10 +261,10 @@ ra1_allies_alliedrocketsoldier_rocketsracryo:
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_Cryo
 	ReloadDelay: 50
-	Range: 6643
+	Range: 7500
 	Report: missile6.aud
 	Warhead@MissileCryo_Medium:
-		Damage: 20000
+		Damage: 11500
 		ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		VerticalRateOfTurn: 20
@@ -4462,7 +4462,7 @@ ra1_allies_rifleinfantry_carbine:
 	Inherits@proj: ^Projectile_Bullet_Light
 	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 50
-	Range: 5500
+	Range: 4778
 	ValidTargets: Ground, Water
 	Burst: 3
 	BurstDelays: 4
@@ -4471,7 +4471,7 @@ ra1_allies_rifleinfantry_carbine:
 		PercentageDenominator: 10000
 		PercentageScale: 10000
 		InvalidTargets: Air
-		Damage: 940
+		Damage: 3513
 	Warhead@ShieldHit:
 		InvalidTargets: Air
 ra1_allies_rifleinfantry_carbine_cryo:
@@ -4479,7 +4479,7 @@ ra1_allies_rifleinfantry_carbine_cryo:
 	Inherits@proj: ^Projectile_Bullet_Light
 	Inherits@fx: ^Effect_Cryo
 	ReloadDelay: 50
-	Range: 5500
+	Range: 4778
 	ValidTargets: Ground, Water
 	Burst: 3
 	BurstDelays: 4
@@ -4497,4 +4497,4 @@ ra1_allies_rifleinfantry_carbine_cryo:
 		PercentageDenominator: 10000
 		PercentageScale: 10000
 		InvalidTargets: Air
-		Damage: 940
+		Damage: 3513

@@ -1,3 +1,17 @@
+## 2026-09-26 — S2 split-def fix: 3 RA Allies weapon stubs folded (NOVA)
+
+`audit_split_definitions` flagged `ra1_allies_alliedrocketsoldier_rocketsracryo`,
+`ra1_allies_rifleinfantry_carbine`, `ra1_allies_rifleinfantry_carbine_cryo` —
+defined in both `RedAlert/Shared/yaml/weapons.yaml` (full 3-way defs) and
+`RedAlert/Allies/yaml/weapons.yaml` (bare Range+Damage stubs).
+
+Load order: Shared(152) -> Allies(155), so the Allies stubs were LIVE OVERRIDES,
+not dead residue — resolved values matched the stub values, the Shared-side
+`Damage`/`Range` were dead-masked fields. Fix: folded the live stub values into
+the canonical Shared defs, deleted the 3 stubs. All 3 weapons resolve
+byte-identical (carbine Damage 3513, cryo 3513, rocketsracryo 11500 preserved).
+S2 findings 5 -> 2 (remaining: Flamethrower + Sound2 — DAWN-lane files).
+
 ## Devin-NOVA — documentation deep-audit + Knowledge Base v.0.6 (2026-09-24/25)
 
 **Branch:** `devin/nova/docs-deep-audit`. Docs-only pass ordered by the maintainer after
