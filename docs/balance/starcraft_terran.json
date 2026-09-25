@@ -967,18 +967,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "100000",
+        "damage": "150000",
         "falloff": "100, 55, 0",
         "spread": "116",
         "tag": "Tesla_Super",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "50000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "400",
-        "tag": "Tesla_Super_ExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -1120,8 +1113,8 @@
       "slot": "Armament@SECONDARY1",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
-       "^Projectile_Missile_Heavy_D2K",
-       "^Effect_MissileAP_Heavy_D2K"
+       "^Projectile_Missile_Heavy_SC",
+       "^Effect_MissileAP_Heavy_SC"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -1147,8 +1140,8 @@
       "slot": "Armament@SECONDARY2",
       "versus_templates": [
        "^Warhead_MissileAP_Heavy",
-       "^Projectile_Missile_Heavy_D2K",
-       "^Effect_MissileAP_Heavy_D2K"
+       "^Projectile_Missile_Heavy_SC",
+       "^Effect_MissileAP_Heavy_SC"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -1281,8 +1274,8 @@
       "slot": "Armament@SECONDARY1",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
-       "^D2KRocket",
-       "^Effect_Watersplash_Huge_RA2"
+       "^SCRocket",
+       "^Effect_Watersplash_Huge_SC"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy",
@@ -1333,8 +1326,8 @@
       "slot": "Armament@SECONDARY2",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
-       "^D2KRocket",
-       "^Effect_Watersplash_Huge_RA2"
+       "^SCRocket",
+       "^Effect_Watersplash_Huge_SC"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy",
@@ -1479,8 +1472,8 @@
       "slot": "Armament@SECONDARY1",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
-       "^Projectile_Missile_Heavy_D2K",
-       "^Effect_MissileHE_Heavy_D2K"
+       "^Projectile_Missile_Heavy_SC",
+       "^Effect_MissileHE_Heavy_SC"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
@@ -1506,8 +1499,8 @@
       "slot": "Armament@SECONDARY2",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
-       "^Projectile_Missile_Heavy_D2K",
-       "^Effect_MissileHE_Heavy_D2K"
+       "^Projectile_Missile_Heavy_SC",
+       "^Effect_MissileHE_Heavy_SC"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
@@ -1653,7 +1646,7 @@
        "^Effect_CannonHE_Heavy",
        "^MediumFlameWeapon",
        "^HeavyBomb",
-       "^D2KRocket"
+       "^SCRocket"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
@@ -1729,7 +1722,7 @@
        "^Effect_CannonHE_Heavy",
        "^MediumFlameWeapon",
        "^HeavyBomb",
-       "^D2KRocket"
+       "^SCRocket"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
@@ -2537,8 +2530,8 @@
       "slot": "Armament@1",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
-       "^Projectile_Missile_Heavy_D2K",
-       "^Effect_MissileHE_Heavy_D2K"
+       "^Projectile_Missile_Heavy_SC",
+       "^Effect_MissileHE_Heavy_SC"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
@@ -2564,8 +2557,8 @@
       "slot": "Armament@2",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
-       "^Projectile_Missile_Heavy_D2K",
-       "^Effect_MissileHE_Heavy_D2K"
+       "^Projectile_Missile_Heavy_SC",
+       "^Effect_MissileHE_Heavy_SC"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
@@ -2644,6 +2637,20 @@
        {
         "damage": "1",
         "falloff": null,
+        "spread": "75",
+        "tag": "LaserWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "LegacyLaserExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
@@ -2661,20 +2668,6 @@
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "75",
-        "tag": "LaserWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LegacyLaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
@@ -2686,11 +2679,9 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Laser_Heavy",
-       "^SmallArms",
-       "^Chaingun",
-       "^MediumMissile",
        "^LaserWeapon",
-       "^LegacyLaserChipCompatibility"
+       "^LegacyLaserChipCompatibility",
+       "^Effect_Watersplash_Huge_RA2"
       ],
       "warheads": [
        "^Warhead_Laser_Heavy"
@@ -2951,18 +2942,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "24000",
+        "damage": "44000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "Tesla_Super",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Tesla_Super_ExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -4015,7 +3999,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "7000",
+        "damage": "7600",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
         "tag": "Flame_Light",
@@ -4034,13 +4018,6 @@
         "spread": null,
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "PreservedFlat_LaserExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -4115,7 +4092,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "7000",
+        "damage": "7600",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
         "tag": "Flame_Light",
@@ -4134,13 +4111,6 @@
         "spread": null,
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "PreservedFlat_LaserExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -4495,18 +4465,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "48000",
+        "damage": "88000",
         "falloff": "100, 0",
         "spread": "1",
         "tag": "Tesla_Super",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 0",
-        "spread": "1",
-        "tag": "Tesla_Super_ExtraDamage",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -5758,8 +5721,8 @@
       "slot": "Armament@A1",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
-       "^Projectile_Missile_Heavy_D2K",
-       "^Effect_MissileHE_Heavy_D2K"
+       "^Projectile_Missile_Heavy_SC",
+       "^Effect_MissileHE_Heavy_SC"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
@@ -5785,8 +5748,8 @@
       "slot": "Armament@A2",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
-       "^Projectile_Missile_Heavy_D2K",
-       "^Effect_MissileHE_Heavy_D2K"
+       "^Projectile_Missile_Heavy_SC",
+       "^Effect_MissileHE_Heavy_SC"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
@@ -6009,8 +5972,8 @@
       "slot": "Armament@A1",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
-       "^Projectile_Missile_Heavy_D2K_Rocket",
-       "^Effect_MissileAP_Heavy_D2K_Rocket"
+       "^Projectile_Missile_Heavy_Rocket_SC",
+       "^Effect_MissileAP_Heavy_Rocket_SC"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
@@ -6058,8 +6021,8 @@
       "slot": "Armament@A2",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
-       "^Projectile_Missile_Heavy_D2K_Rocket",
-       "^Effect_MissileAP_Heavy_D2K_Rocket"
+       "^Projectile_Missile_Heavy_Rocket_SC",
+       "^Effect_MissileAP_Heavy_Rocket_SC"
       ],
       "warheads": [
        "^Warhead_MissileAA_Heavy"
@@ -6965,7 +6928,7 @@
       "slot": "Armament@Rockets",
       "versus_templates": [
        "^RA2MediumMissile",
-       "^Effect_Explosion_Large_RA2"
+       "^Effect_Explosion_Large_SC"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"

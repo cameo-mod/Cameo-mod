@@ -111,11 +111,8 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Demolition_Heavy",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^MediumChemicalWeapon",
-       "^MediumFlameWeapon",
-       "^HeavyBomb"
+       "^Effect_Apoc_AP_RA2",
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
        "^Warhead_Demolition_Heavy"
@@ -251,7 +248,6 @@
        "ParaBomb"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
        "^Warhead_Flame_Heavy"
       ],
       "weapon": "ra1_allies_cargoplanebomber_parabomb",
@@ -275,7 +271,6 @@
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@Cryo",
       "versus_templates": [
-       "^ParaBombDelivery",
        "^Warhead_BlastCryo_Heavy",
        "^Effect_Cryo"
       ],
@@ -459,11 +454,10 @@
       "reloaddelay": "8",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Demolition_Heavy_Flat",
-       "^ParaBombLegacy"
+       "^Warhead_Flame_Heavy",
+       "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
        "^Warhead_Flame_Heavy"
       ],
       "weapon": "ParaBomb",
@@ -2055,21 +2049,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5750",
       "reloaddelay": "4",
       "requires": "!japan_upgrade_waveforcebullets",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "JapanSpeedBoatGun",
@@ -2078,41 +2069,39 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 81, 61, 38, 0",
-        "spread": "76",
-        "tag": "Waveforce_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 81, 61, 38, 0",
+        "spread": "76",
+        "tag": "Waveforce_Heavy",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5750",
       "reloaddelay": "4",
       "requires": "japan_upgrade_waveforcebullets",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Warhead_Waveforce_Heavy",
-       "^WaveforceBulletWarhead",
-       "JapanSpeedBoatGun",
-       "^WaveforceBulletProjectile"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Emp_Fx_RA2",
+       "JapanSpeedBoatGun"
       ],
       "warheads": [
-       "^Warhead_Waveforce_Heavy",
        "^Warhead_Railgun_Heavy",
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "JapanSpeedBoatGunWaveforce",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -2253,14 +2242,11 @@
       "reloaddelay": "125",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy_Flat",
-       "^Warhead_Demolition_Heavy",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "YamatoCannon",
@@ -2286,14 +2272,11 @@
       "reloaddelay": "125",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy_Flat",
-       "^Warhead_Demolition_Heavy",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "YamatoCannon",
@@ -2497,11 +2480,10 @@
       "requires": "japan_upgrade_waveforcebullets",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^WaveforceBulletWarhead",
-       "^Grenade",
-       "ZeroFighterChainGun",
-       "^WaveforceBulletProjectile",
-       "^ZeroFighterWaveforceBulletCompatibility"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_MissileAP_Heavy",
+       "ZeroFighterChainGun"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy",
@@ -2552,11 +2534,10 @@
       "requires": "japan_upgrade_waveforcebullets",
       "slot": "Armament@UpgradeSECONDARY",
       "versus_templates": [
-       "^WaveforceBulletWarhead",
-       "^Grenade",
-       "ZeroFighterChainGun",
-       "^WaveforceBulletProjectile",
-       "^ZeroFighterWaveforceBulletCompatibility"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_MissileAP_Heavy",
+       "ZeroFighterChainGun"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy",
@@ -3428,20 +3409,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "100",
       "requires": "!ra1_soviets_doctrine_inferno",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Concussion_Light",
        "^Warhead_MissileHE_Heavy",
        "^Projectile_Missile_Heavy",
        "^Effect_MissileHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_Concussion_Light",
        "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "ra1_soviets_submarine_torpedo",
@@ -3467,7 +3446,6 @@
       "versus_templates": [
        "^Warhead_MissileNuke_Heavy",
        "^Projectile_Missile_Heavy",
-       "^Effect_Nuclear_Super",
        "^Effect_MissileAP_Heavy"
       ],
       "warheads": [
@@ -3683,14 +3661,11 @@
       "reloaddelay": "10",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Flak_Medium_Flat",
-       "^Warhead_Bullet_Medium",
        "^Warhead_Flak_Medium",
        "^Projectile_Flak_Medium",
        "^Effect_Flak_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "ra1_allies_alliedapc_gun",
@@ -3717,7 +3692,6 @@
        "ra1_allies_alliedapc_gun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium",
        "^Warhead_Flak_Medium"
       ],
       "weapon": "ra1_allies_alliedapc_gun_AA",

@@ -4,62 +4,6 @@
  "schema": 2,
  "sections": {
   "misc": {
-   "OILB.RA2": {
-    "armor": {
-     "src": "inherited",
-     "v": "Wood"
-    },
-    "build_duration": {
-     "src": "inherited",
-     "v": "1500"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "inherited",
-     "v": "2500"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Misc",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "hp": {
-     "src": "inherited",
-     "v": "250000"
-    },
-    "integrity_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "name": "RA2 Oil Derrick",
-    "prerequisites": [
-     "~ra2oilderrick",
-     "ra2tek",
-     "derricklimit"
-    ],
-    "queue": [
-     "Building",
-     "RABuilding"
-    ],
-    "shield_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_init_flat": {
-     "src": "inherited",
-     "v": "0"
-    },
-    "shield_pct": {
-     "src": "inherited",
-     "v": "100"
-    },
-    "sight": {
-     "src": "inherited",
-     "v": "7500"
-    }
-   },
    "YRSLAV": {
     "armaments": [
      {
@@ -303,18 +247,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA220mmrapid",
@@ -549,18 +492,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA220mmrapid",
@@ -765,18 +707,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA220mmrapid",
@@ -871,7 +812,9 @@
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "^RA2MediumCannon"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -900,8 +843,7 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "RA2120mm",
-       "^RA2EliteEffects"
+       "RA2120mm"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -921,18 +863,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "6",
       "slot": "Armament@machinegun",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2GattlingMG1",
@@ -1019,19 +960,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "6",
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2GattlingMG1",
@@ -1049,7 +989,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5250",
       "reloaddelay": "4",
@@ -1059,7 +999,6 @@
        "RA2GattlingMG1"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2GattlingMG2",
@@ -1146,19 +1085,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "6",
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2GattlingMG1",
@@ -1176,7 +1114,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5250",
       "reloaddelay": "4",
@@ -1186,7 +1124,6 @@
        "RA2GattlingMG1"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2GattlingMG2",
@@ -1273,19 +1210,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "6",
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2GattlingMG1",
@@ -1303,7 +1239,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5250",
       "reloaddelay": "4",
@@ -1313,7 +1249,6 @@
        "RA2GattlingMG1"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2GattlingMG2",
@@ -1331,7 +1266,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6750",
       "reloaddelay": "6",
@@ -1341,7 +1276,6 @@
        "RA2GattlingMG1"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2GattlingMG1_AA",
@@ -1359,7 +1293,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7500",
       "reloaddelay": "4",
@@ -1369,7 +1303,6 @@
        "RA2GattlingMG2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2GattlingMG2_AA",
@@ -1573,18 +1506,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA220mmrapid",
@@ -2582,18 +2514,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA220mmrapid",
@@ -2798,18 +2729,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA220mmrapid",
@@ -3014,18 +2944,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA220mmrapid",
@@ -3230,18 +3159,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA220mmrapid",
@@ -3446,18 +3374,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA220mmrapid",
@@ -3662,18 +3589,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA220mmrapid",
@@ -3745,6 +3671,62 @@
     "turn_speed": {
      "src": "inherited",
      "v": "20"
+    }
+   },
+   "ra2_oilderrick": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Misc",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "250000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "RA2 Oil Derrick",
+    "prerequisites": [
+     "~ra2oilderrick",
+     "ra2tek",
+     "derricklimit"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "7500"
     }
    },
    "ra2_ptruck": {
@@ -3878,18 +3860,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA220mmrapid",
@@ -4094,18 +4075,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA220mmrapid",
@@ -4310,18 +4290,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA220mmrapid",
@@ -4526,18 +4505,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA220mmrapid",
@@ -4772,18 +4750,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA220mmrapid",
@@ -4988,18 +4965,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA220mmrapid",
@@ -5204,18 +5180,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA220mmrapid",
@@ -5420,18 +5395,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA220mmrapid",
@@ -5636,18 +5610,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^RA2SmallArms",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA220mmrapid",
@@ -6052,7 +6025,9 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^RA2HeavyCannon"
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_Grey_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -6081,8 +6056,7 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "RA2155mm",
-       "^RA2EliteEffects"
+       "RA2155mm"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -6381,7 +6355,9 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^RA2SmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -6431,7 +6407,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5724",
       "reloaddelay": "50",
@@ -6440,7 +6416,6 @@
        "RA2vulcan2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2vulcan3",
@@ -6589,27 +6564,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "minrange": "1000",
       "pricing": true,
       "range": "5000",
       "reloaddelay": "3",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_MissileAP_Medium_Flat",
-       "^Warhead_Demolition_Light",
-       "^Warhead_Demolition_Heavy",
-       "^Projectile_Grenade_Light",
-       "^Effect_Demolition_Heavy",
-       "^RA2MediumMissile"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Apoc_AP_RA2"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Demolition_Heavy",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "RA2HornetMissile",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6766,7 +6736,9 @@
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "^RA2MediumCannon"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -6795,8 +6767,7 @@
       "requires": "rank-elite",
       "slot": "Armament@elite",
       "versus_templates": [
-       "RA2120mm",
-       "^RA2EliteEffects"
+       "RA2120mm"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -6816,18 +6787,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "6",
       "slot": "Armament@machinegun",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^Warhead_Bullet_Light",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2GattlingMG1",
@@ -7412,7 +7382,9 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^RA2LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Clsn_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -7439,7 +7411,9 @@
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^RA2LightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Clsn_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -7670,20 +7644,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "90",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_MissileAP_Heavy_Flat",
-       "^RA2Grenade",
-       "^RA2HeavyMissile",
+       "^Warhead_MissileAP_Heavy",
+       "^Projectile_Missile_Heavy",
        "^Effect_Watersplash_Large_RA2"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "RA2TorpTube",
@@ -7702,7 +7674,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "90",
@@ -7712,7 +7684,6 @@
        "RA2TorpTube"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "RA2TorpTube_elite",
@@ -7816,6 +7787,21 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_Medium_GroundShipExtraDamage",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
+        "spread": "150",
+        "tag": "MissileHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "4",
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
@@ -7835,43 +7821,23 @@
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium_GroundShipExtraDamage",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "24000",
-        "falloff": "100, 45, 15, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "MissileHE_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7600",
       "reloaddelay": "50",
       "requires": "!ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions",
       "slot": "Armament",
       "versus_templates": [
-       "^HeavyBomb",
-       "^HeavyAAWeapon",
-       "^FlakWeapon",
-       "^RA2MediumMissile",
+       "^Projectile_Missile_Medium",
        "^Warhead_MissileAP_Medium_GroundShip",
-       "^Effect_Explosion_Large_RA2"
+       "^Effect_Apoc_AP_RA2"
       ],
-      "warheads": [
-       "^Warhead_MissileAP_Medium"
-      ],
+      "warheads": [],
       "weapon": "MigMissiles",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "primary",
@@ -7886,6 +7852,13 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_Medium_GroundShipExtraDamage",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "4",
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
@@ -7905,13 +7878,6 @@
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium_GroundShipExtraDamage",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
@@ -7925,12 +7891,10 @@
        "^Warhead_Chemical_Medium",
        "^Projectile_Chem_Medium",
        "^Effect_Chem_Medium",
-       "MigMissiles",
-       "^RA2RadShell"
+       "MigMissiles"
       ],
       "warheads": [
-       "^Warhead_Chemical_Medium",
-       "^Warhead_MissileAP_Medium"
+       "^Warhead_Chemical_Medium"
       ],
       "weapon": "MigMissiles_rad",
       "weapon_class_source": "template"
@@ -7941,6 +7905,21 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_Medium_GroundShipExtraDamage",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
+        "spread": "150",
+        "tag": "MissileHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "4",
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
@@ -7960,25 +7939,10 @@
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium_GroundShipExtraDamage",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "24000",
-        "falloff": "100, 45, 15, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "MissileHE_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7600",
       "reloaddelay": "50",
@@ -7986,19 +7950,32 @@
       "slot": "Armament@fire",
       "versus_templates": [
        "MigMissiles",
-       "^Effect_Terrorist_Explosion_RA2"
+       "^Effect_Apoc_AP_RA2"
       ],
-      "warheads": [
-       "^Warhead_MissileAP_Medium"
-      ],
+      "warheads": [],
       "weapon": "MigMissiles_fire",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      },
      {
       "armament_name": "primary",
       "burst": "4",
       "burstdelays": "2",
       "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_Medium_GroundShipExtraDamage",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
+        "spread": "150",
+        "tag": "MissileHE_Medium",
+        "type": "AreaDamage"
+       },
        {
         "damage": "4",
         "falloff": "100, 50, 25, 10, 5",
@@ -8019,25 +7996,10 @@
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium_GroundShipExtraDamage",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "24000",
-        "falloff": "100, 45, 15, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "MissileHE_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7600",
       "reloaddelay": "50",
@@ -8045,13 +8007,11 @@
       "slot": "Armament@tesla",
       "versus_templates": [
        "MigMissiles",
-       "^Effect_Kirov_Tesla_RA2"
+       "^Effect_Apoc_AP_RA2"
       ],
-      "warheads": [
-       "^Warhead_MissileAP_Medium"
-      ],
+      "warheads": [],
       "weapon": "MigMissiles_tesla",
-      "weapon_class_source": "template"
+      "weapon_class_source": "none"
      }
     ],
     "armor": {
@@ -8197,20 +8157,6 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Laser_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "24000",
         "falloff": "100, 0",
         "spread": "96",
@@ -8223,48 +8169,43 @@
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Tesla_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5780",
       "reloaddelay": "48",
       "requires": "!rank-elite",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Tesla_Heavy",
-       "^Warhead_Laser_Heavy",
-       "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy",
-       "^EMPDamage",
-       "^RA2RailgunWeapon"
+       "^Warhead_Railgun_Heavy",
+       "^Projectile_Railgun_Heavy",
+       "^Effect_Bang_Small_RA2"
       ],
       "warheads": [
-       "^Warhead_Tesla_Heavy",
-       "^Warhead_Laser_Heavy",
        "^Warhead_Railgun_Heavy"
       ],
       "weapon": "RA2Robotmm",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
       "damage_warheads": [
-       {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Laser_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
        {
         "damage": "24000",
         "falloff": "100, 0",
@@ -8278,10 +8219,24 @@
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Tesla_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6780",
       "reloaddelay": "48",
@@ -8291,12 +8246,10 @@
        "RA2Robotmm"
       ],
       "warheads": [
-       "^Warhead_Tesla_Heavy",
-       "^Warhead_Laser_Heavy",
        "^Warhead_Railgun_Heavy"
       ],
       "weapon": "RA2Robotmm_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

@@ -4,32 +4,25 @@
  "schema": 2,
  "sections": {
   "aircraft": {
-   "cruiser_f.steel": {
+   "steel_cruiser_f": {
     "armaments": [
      {
       "burst": "2",
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "Laser_Heavy_Flat",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage_Auxiliary",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy_Flat",
+        "type": "AreaDamage"
        },
        {
         "damage": "1000",
@@ -44,32 +37,32 @@
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "LaserExtraDamage_Auxiliary",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "80",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Laser_Heavy_Flat",
-       "^Warhead_Laser_Heavy",
-       "^Warhead_Laser_ExtraDamage",
        "^LaserWeapon",
-       "^RA2RailgunWeapon",
-       "^SteelMediumCannon",
-       "^TankDestroyerCannon",
-       "^SteelLightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Clsn_Small_RA2"
       ],
       "warheads": [
-       "^Warhead_Laser_Heavy",
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_CannonHE_Medium",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "SteelFighterRailgun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -79,13 +72,6 @@
         "spread": "39",
         "tag": "Quantum_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1",
@@ -107,10 +93,17 @@
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "99, 66, 33",
+        "spread": "175",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6050",
       "reloaddelay": "25",
@@ -118,18 +111,16 @@
       "slot": "Armament@Secondary",
       "versus_templates": [
        "^Warhead_Quantum_Medium",
-       "^LightChemicalWeapon",
        "^TeslaWeapon",
+       "^Effect_Flame_Heavy",
        "SteelMakoGun"
       ],
       "warheads": [
        "^Warhead_Quantum_Medium",
-       "^Warhead_Demolition_Light",
-       "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "SteelMakoGun_EMP",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -142,7 +133,6 @@
      "v": "125"
     },
     "design": {
-     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
      "subtype": "Bomber",
@@ -208,7 +198,7 @@
      "v": "25"
     }
    },
-   "scalpelAA.steel": {
+   "steel_scalpelAA": {
     "armaments": [
      {
       "burst": "4",
@@ -230,7 +220,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "48",
@@ -241,13 +231,10 @@
        "SteelInfRailgun_elite"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_Flak_Medium",
-       "^Warhead_Bullet_Medium",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "SteelScalpelRailgunAA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -259,41 +246,6 @@
         "spread": "110",
         "tag": "Flak_Medium_Flat",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "150",
-        "tag": "MediumCannonPercentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1",
@@ -329,10 +281,45 @@
         "spread": "200",
         "tag": "PreservedFlat_TeslaExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": "111, 33, 11, 3",
+        "spread": "375",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "150",
+        "tag": "MediumCannonPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "50",
@@ -343,13 +330,10 @@
        "SteelInfRailgun_EMP_elite"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_Flak_Medium",
-       "^Warhead_Bullet_Medium",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "SteelScalpelRailgun_EMP_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -362,7 +346,6 @@
      "v": "750"
     },
     "design": {
-     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
      "subtype": "Fighter",
@@ -408,7 +391,7 @@
      "v": "32"
     }
    },
-   "scalpelMG.steel": {
+   "steel_scalpelMG": {
     "armaments": [
      {
       "damage_warheads": [
@@ -421,24 +404,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "20",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^SteelLightMissile",
-       "^RA2FlakWeapon",
-       "^SteelChaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelMantaAG",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -451,7 +431,6 @@
      "v": "500"
     },
     "design": {
-     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
      "subtype": "Fighter",
@@ -497,36 +476,15 @@
      "v": "32"
     }
    },
-   "scalpelQuantumCannon.steel": {
+   "steel_scalpelQuantumCannon": {
     "armaments": [
      {
       "damage_warheads": [
-       {
-        "damage": "14600",
-        "falloff": "100, 52, 0",
-        "spread": "52",
-        "tag": "Quantum_Heavy_Flat",
-        "type": "AreaDamage"
-       },
        {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -541,6 +499,27 @@
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "14600",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_Heavy_Flat",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "99, 66, 33",
+        "spread": "525",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": "111, 33, 11, 3",
+        "spread": "500",
+        "tag": "HeavyFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -552,13 +531,12 @@
       "requires": "!steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Quantum_Heavy_Flat",
        "^TeslaWeapon",
-       "^HeavyChemicalWeapon",
-       "^HeavyFlameWeapon",
        "^LaserWeapon",
        "^RailgunWeapon",
-       "^SteelHeavyCannon"
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_Grey_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -569,31 +547,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "14600",
-        "falloff": "100, 52, 0",
-        "spread": "52",
-        "tag": "Quantum_Heavy_Flat",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -608,6 +565,27 @@
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "14600",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_Heavy_Flat",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "99, 66, 33",
+        "spread": "525",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": "111, 33, 11, 3",
+        "spread": "500",
+        "tag": "HeavyFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -638,7 +616,6 @@
      "v": "1000"
     },
     "design": {
-     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
      "subtype": "Fighter",
@@ -697,18 +674,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4750",
       "reloaddelay": "3",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^SteelSmallArms",
-       "^SteelChaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelCargoshipCannons",
@@ -795,6 +771,13 @@
      {
       "damage_warheads": [
        {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -814,13 +797,6 @@
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -831,11 +807,9 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^LightMissile",
-       "^SmallArms",
-       "^FlakWeapon",
-       "^SteelChaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
@@ -848,6 +822,13 @@
       "burstdelays": "1",
       "damage_warheads": [
        {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -867,13 +848,6 @@
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -903,7 +877,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 0.75,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -911,12 +885,11 @@
       "requires": "steelconsortium_upgrade_quantumweaponpower && !rank-elite",
       "slot": "Armament@CANNON",
       "versus_templates": [
-       "^Warhead_CannonHE_Medium_Flat",
-       "^SteelMediumCannon",
-       "^RA2Grenade"
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Bang_Large_RA2"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "SteelCruiserArtillery",
@@ -935,7 +908,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 0.75,
       "minrange": "1600",
       "pricing": true,
       "range": "8000",
@@ -943,10 +916,10 @@
       "requires": "steelconsortium_upgrade_quantumweaponpower && rank-elite",
       "slot": "Armament@CANNONELITE",
       "versus_templates": [
-       "SteelCruiserArtillery"
+       "SteelCruiserArtillery",
+       "^Effect_MissileAP_Heavy"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium",
        "^Warhead_Demolition_Light"
       ],
       "weapon": "SteelCruiserArtillery_elite",
@@ -1047,13 +1020,6 @@
      {
       "damage_warheads": [
        {
-        "damage": "50000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "200",
-        "tag": "Tesla_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "250000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
         "spread": "300",
@@ -1068,6 +1034,13 @@
         "type": "SpreadDamage"
        },
        {
+        "damage": "50000",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
+        "spread": "200",
+        "tag": "Tesla_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "25",
         "falloff": null,
         "spread": "4000",
@@ -1076,7 +1049,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "2500",
       "reloaddelay": "25",
@@ -1085,11 +1058,10 @@
        "SteelInspectorIonCannonDamage"
       ],
       "warheads": [
-       "^Warhead_Tesla_Heavy",
        "^Warhead_Tesla_Super"
       ],
       "weapon": "SteelInspectorIonCannon",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -1261,7 +1233,6 @@
       "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Warhead_Quantum_Heavy_Flat",
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
        "^Effect_Tesla_Heavy",
@@ -1405,6 +1376,13 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
+        "damage": "11000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -1431,13 +1409,6 @@
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "11000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
@@ -1449,12 +1420,9 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_MissileAP_Medium_Flat",
-       "^Grenade",
-       "^MediumFlameWeapon",
-       "^FlakWeapon",
-       "^HeavyAAWeapon",
-       "^SteelMediumMissile"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Clsn_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -1468,6 +1436,13 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
+        "damage": "11000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -1494,13 +1469,6 @@
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "11000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
@@ -1614,18 +1582,18 @@
       "burstdelays": "10",
       "damage_warheads": [
        {
-        "damage": "24000",
-        "falloff": "100, 70, 30, 0",
-        "spread": "300",
-        "tag": "MissileAA_Medium_Flat",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "3",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "300",
+        "tag": "MissileAA_Medium_Flat",
+        "type": "AreaDamage"
        },
        {
         "damage": "3",
@@ -1643,14 +1611,12 @@
       "requires": "!steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_MissileAA_Medium_Flat",
        "^TeslaWeapon",
-       "^ArrowWeapon",
-       "^RA2FlakWeapon",
-       "^SteelMediumMissile"
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Clsn_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "ConsortiumMissileSystem",
@@ -1684,7 +1650,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "60",
@@ -1696,11 +1662,10 @@
       ],
       "warheads": [
        "^Warhead_MissileQuantum_Medium",
-       "^Warhead_Flak_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "ConsortiumMissileSystem_EMP",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1792,13 +1757,6 @@
        },
        {
         "damage": "125",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "2500",
-        "tag": "MagicWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "125",
         "falloff": null,
         "spread": "2500",
         "tag": "LaserWeaponPercentage",
@@ -1809,6 +1767,13 @@
         "falloff": null,
         "spread": "2500",
         "tag": "RailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "125",
+        "falloff": "111, 88, 44, 22, 11",
+        "spread": "2500",
+        "tag": "MagicWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -1821,7 +1786,6 @@
       "versus_templates": [
        "^Warhead_Plasma_Heavy_Flat",
        "^TeslaChargedWeapon",
-       "^MagicWeapon",
        "^LaserWeapon",
        "^RailgunWeapon"
       ],
@@ -1865,13 +1829,6 @@
        },
        {
         "damage": "125",
-        "falloff": "111, 88, 44, 22, 11",
-        "spread": "2500",
-        "tag": "MagicWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "125",
         "falloff": null,
         "spread": "2500",
         "tag": "LaserWeaponPercentage",
@@ -1882,6 +1839,13 @@
         "falloff": null,
         "spread": "2500",
         "tag": "RailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "125",
+        "falloff": "111, 88, 44, 22, 11",
+        "spread": "2500",
+        "tag": "MagicWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2362,18 +2326,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "10",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^SteelHeavyCannon",
-       "^SteelChaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelVulcan",
@@ -2391,17 +2354,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "10",
       "requires": "steelconsortium_upgrade_resonanceammo",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "SteelVulcan"
+       "SteelVulcan",
+       "^Effect_Watersplash_Huge_RA2"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelVulcanResonance",
@@ -2658,31 +2621,10 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "14600",
-        "falloff": "100, 52, 0",
-        "spread": "52",
-        "tag": "Quantum_Heavy_Flat",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -2697,6 +2639,27 @@
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "14600",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_Heavy_Flat",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "99, 66, 33",
+        "spread": "525",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": "111, 33, 11, 3",
+        "spread": "500",
+        "tag": "HeavyFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2708,13 +2671,12 @@
       "requires": "!steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@1",
       "versus_templates": [
-       "^Warhead_Quantum_Heavy_Flat",
        "^TeslaWeapon",
-       "^HeavyChemicalWeapon",
-       "^HeavyFlameWeapon",
        "^LaserWeapon",
        "^RailgunWeapon",
-       "^SteelHeavyCannon"
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_Grey_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -2726,31 +2688,10 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "14600",
-        "falloff": "100, 52, 0",
-        "spread": "52",
-        "tag": "Quantum_Heavy_Flat",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -2765,6 +2706,27 @@
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "14600",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_Heavy_Flat",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "99, 66, 33",
+        "spread": "525",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": "111, 33, 11, 3",
+        "spread": "500",
+        "tag": "HeavyFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2776,13 +2738,12 @@
       "requires": "!steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@2",
       "versus_templates": [
-       "^Warhead_Quantum_Heavy_Flat",
        "^TeslaWeapon",
-       "^HeavyChemicalWeapon",
-       "^HeavyFlameWeapon",
        "^LaserWeapon",
        "^RailgunWeapon",
-       "^SteelHeavyCannon"
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_Grey_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -2794,31 +2755,10 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "14600",
-        "falloff": "100, 52, 0",
-        "spread": "52",
-        "tag": "Quantum_Heavy_Flat",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -2833,6 +2773,27 @@
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "14600",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_Heavy_Flat",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "99, 66, 33",
+        "spread": "525",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": "111, 33, 11, 3",
+        "spread": "500",
+        "tag": "HeavyFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2856,31 +2817,10 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "14600",
-        "falloff": "100, 52, 0",
-        "spread": "52",
-        "tag": "Quantum_Heavy_Flat",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -2895,6 +2835,27 @@
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "14600",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_Heavy_Flat",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "99, 66, 33",
+        "spread": "525",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": "111, 33, 11, 3",
+        "spread": "500",
+        "tag": "HeavyFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -3040,25 +3001,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6463",
       "reloaddelay": "25",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^SteelHeavyCannon",
-       "^SteelMediumMissile",
-       "^SteelSmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
-       "^Warhead_MissileAP_Medium",
        "^Warhead_Bullet_Light"
       ],
       "weapon": "SteelCloneGun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
@@ -3073,22 +3031,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "25",
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "SteelCloneGun"
+       "SteelCloneGun",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
-       "^Warhead_MissileAP_Medium",
        "^Warhead_Bullet_Light"
       ],
       "weapon": "SteelCloneGun_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -3102,25 +3059,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "6463",
       "reloaddelay": "25",
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^SteelHeavyCannon",
-       "^SteelMediumMissile",
-       "^SteelSmallArms"
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
-       "^Warhead_MissileAP_Medium",
        "^Warhead_Bullet_Light"
       ],
       "weapon": "SteelCloneGun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -3136,22 +3090,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "6000",
       "reloaddelay": "25",
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "SteelCloneGun"
+       "SteelCloneGun",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
-       "^Warhead_MissileAP_Medium",
        "^Warhead_Bullet_Light"
       ],
       "weapon": "SteelCloneGun_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -3164,22 +3117,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6463",
       "reloaddelay": "25",
       "requires": "!rank-elite && steelconsortium_upgrade_resonanceammo",
       "slot": "Armament@UpgradePRIMARY",
       "versus_templates": [
-       "SteelCloneGun"
+       "SteelCloneGun",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
-       "^Warhead_MissileAP_Medium",
        "^Warhead_Bullet_Light"
       ],
       "weapon": "SteelCloneGunResonance",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
@@ -3194,22 +3146,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "25",
       "requires": "rank-elite && steelconsortium_upgrade_resonanceammo",
       "slot": "Armament@UpgradeELITE",
       "versus_templates": [
-       "SteelCloneGun_elite"
+       "SteelCloneGun_elite",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
-       "^Warhead_MissileAP_Medium",
        "^Warhead_Bullet_Light"
       ],
       "weapon": "SteelCloneGunResonance_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -3223,22 +3174,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "6463",
       "reloaddelay": "25",
       "requires": "!rank-elite && steelconsortium_upgrade_resonanceammo",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
-       "SteelCloneGun"
+       "SteelCloneGun",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
-       "^Warhead_MissileAP_Medium",
        "^Warhead_Bullet_Light"
       ],
       "weapon": "SteelCloneGunResonance",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -3254,22 +3204,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "6000",
       "reloaddelay": "25",
       "requires": "rank-elite && steelconsortium_upgrade_resonanceammo",
       "slot": "Armament@UpgradeGARRISONEDELITE",
       "versus_templates": [
-       "SteelCloneGun_elite"
+       "SteelCloneGun_elite",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
-       "^Warhead_MissileAP_Medium",
        "^Warhead_Bullet_Light"
       ],
       "weapon": "SteelCloneGunResonance_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3456,27 +3405,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6050",
       "reloaddelay": "25",
       "requires": "!rank-elite && !steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Railgun_Heavy_Flat",
-       "^MediumFlameWeapon",
-       "^RA2Grenade",
-       "^RA2RailgunWeapon",
-       "^SteelMediumCannon",
-       "^SteelMakoGunCannonCompatibility"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "SteelMakoGun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
@@ -3505,7 +3449,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7050",
       "reloaddelay": "25",
@@ -3515,12 +3459,10 @@
        "SteelMakoGun"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "SteelMakoGun_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -3548,27 +3490,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6050",
       "reloaddelay": "25",
       "requires": "!rank-elite && !steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_Railgun_Heavy_Flat",
-       "^MediumFlameWeapon",
-       "^RA2Grenade",
-       "^RA2RailgunWeapon",
-       "^SteelMediumCannon",
-       "^SteelMakoGunCannonCompatibility"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "SteelMakoGun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -3598,7 +3535,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "7050",
       "reloaddelay": "25",
@@ -3608,12 +3545,10 @@
        "SteelMakoGun"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "SteelMakoGun_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -3623,13 +3558,6 @@
         "spread": "39",
         "tag": "Quantum_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1",
@@ -3651,10 +3579,17 @@
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "99, 66, 33",
+        "spread": "175",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6050",
       "reloaddelay": "25",
@@ -3662,18 +3597,16 @@
       "slot": "Armament@UpgradePRIMARY",
       "versus_templates": [
        "^Warhead_Quantum_Medium",
-       "^LightChemicalWeapon",
        "^TeslaWeapon",
+       "^Effect_Flame_Heavy",
        "SteelMakoGun"
       ],
       "warheads": [
        "^Warhead_Quantum_Medium",
-       "^Warhead_Demolition_Light",
-       "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "SteelMakoGun_EMP",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
@@ -3688,13 +3621,6 @@
        },
        {
         "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
@@ -3713,10 +3639,17 @@
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "99, 66, 33",
+        "spread": "175",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7050",
       "reloaddelay": "25",
@@ -3727,12 +3660,10 @@
       ],
       "warheads": [
        "^Warhead_Quantum_Medium",
-       "^Warhead_Demolition_Light",
-       "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "SteelMakoGun_EMP_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -3743,13 +3674,6 @@
         "spread": "39",
         "tag": "Quantum_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1",
@@ -3771,10 +3695,17 @@
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "99, 66, 33",
+        "spread": "175",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6050",
       "reloaddelay": "25",
@@ -3782,18 +3713,16 @@
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
        "^Warhead_Quantum_Medium",
-       "^LightChemicalWeapon",
        "^TeslaWeapon",
+       "^Effect_Flame_Heavy",
        "SteelMakoGun"
       ],
       "warheads": [
        "^Warhead_Quantum_Medium",
-       "^Warhead_Demolition_Light",
-       "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "SteelMakoGun_EMP",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -3809,13 +3738,6 @@
        },
        {
         "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
@@ -3834,10 +3756,17 @@
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "99, 66, 33",
+        "spread": "175",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "7050",
       "reloaddelay": "25",
@@ -3848,12 +3777,10 @@
       ],
       "warheads": [
        "^Warhead_Quantum_Medium",
-       "^Warhead_Demolition_Light",
-       "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "SteelMakoGun_EMP_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3946,27 +3873,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "48",
       "requires": "!deployed && !rank-elite && !steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Railgun_Heavy_Flat",
-       "^RA2RailgunWeapon",
-       "^RA2FlakWeapon",
-       "^SteelChaingun",
-       "^SteelLightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Clsn_Small_RA2"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_Flak_Medium",
-       "^Warhead_Bullet_Medium",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "SteelInfRailgun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -3988,7 +3910,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "48",
@@ -3998,13 +3920,10 @@
        "SteelInfRailgun"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_Flak_Medium",
-       "^Warhead_Bullet_Medium",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "SteelInfRailgun_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
@@ -4016,41 +3935,6 @@
         "spread": "52",
         "tag": "Quantum_Heavy_Flat",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "150",
-        "tag": "MediumCannonPercentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1",
@@ -4118,44 +4002,6 @@
         "spread": null,
         "tag": "CollapsedSteelInfRailgun_EMPRailgun_HeavyPercentage",
         "type": "AreaDamagePercentage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "8000",
-      "reloaddelay": "50",
-      "requires": "!deployed && !rank-elite && steelconsortium_upgrade_quantumweaponpower",
-      "slot": "Armament@UpgradePRIMARY",
-      "versus_templates": [
-       "^Warhead_Quantum_Heavy_Flat",
-       "^Grenade",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^ShrapnelWeapon",
-       "^MediumCannon",
-       "^TeslaWeapon",
-       "SteelInfRailgun"
-      ],
-      "warheads": [
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_Flak_Medium",
-       "^Warhead_Bullet_Medium",
-       "^Warhead_MissileAP_Light"
-      ],
-      "weapon": "SteelInfRailgun_EMP",
-      "weapon_class_source": "illegal_mix"
-     },
-     {
-      "burst": "4",
-      "burstdelays": "0",
-      "damage_warheads": [
-       {
-        "damage": "20000",
-        "falloff": "100, 52, 0",
-        "spread": "52",
-        "tag": "Quantum_Heavy_Flat",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -4191,6 +4037,37 @@
         "spread": "150",
         "tag": "MediumCannonPercentage",
         "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "8000",
+      "reloaddelay": "50",
+      "requires": "!deployed && !rank-elite && steelconsortium_upgrade_quantumweaponpower",
+      "slot": "Armament@UpgradePRIMARY",
+      "versus_templates": [
+       "^Warhead_Quantum_Heavy_Flat",
+       "^TeslaWeapon",
+       "^Effect_Flame_Heavy",
+       "SteelInfRailgun"
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "SteelInfRailgun_EMP",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "0",
+      "damage_warheads": [
+       {
+        "damage": "20000",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_Heavy_Flat",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -4228,6 +4105,41 @@
         "type": "SpreadDamage"
        },
        {
+        "damage": "1",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": "111, 33, 11, 3",
+        "spread": "375",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "150",
+        "tag": "MediumCannonPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
         "damage": "100",
         "falloff": "100, 50",
         "percentage_denominator": "10000",
@@ -4261,7 +4173,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "50",
@@ -4271,13 +4183,10 @@
        "SteelInfRailgun_EMP"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_Flak_Medium",
-       "^Warhead_Bullet_Medium",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "SteelInfRailgun_EMP_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "targeting",
@@ -4318,27 +4227,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "48",
       "requires": "deployed && !rank-elite && !steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@DEPLOYED",
       "versus_templates": [
-       "^Warhead_Railgun_Heavy_Flat",
-       "^RA2RailgunWeapon",
-       "^RA2FlakWeapon",
-       "^SteelChaingun",
-       "^SteelLightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Clsn_Small_RA2"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_Flak_Medium",
-       "^Warhead_Bullet_Medium",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "SteelInfRailgun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "deployed",
@@ -4361,7 +4265,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "48",
@@ -4371,13 +4275,10 @@
        "SteelInfRailgun"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_Flak_Medium",
-       "^Warhead_Bullet_Medium",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "SteelInfRailgun_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "deployed",
@@ -4390,41 +4291,6 @@
         "spread": "52",
         "tag": "Quantum_Heavy_Flat",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "150",
-        "tag": "MediumCannonPercentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1",
@@ -4492,45 +4358,6 @@
         "spread": null,
         "tag": "CollapsedSteelInfRailgun_EMPRailgun_HeavyPercentage",
         "type": "AreaDamagePercentage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "8000",
-      "reloaddelay": "50",
-      "requires": "deployed && !rank-elite && steelconsortium_upgrade_quantumweaponpower",
-      "slot": "Armament@UpgradeDEPLOYED",
-      "versus_templates": [
-       "^Warhead_Quantum_Heavy_Flat",
-       "^Grenade",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^ShrapnelWeapon",
-       "^MediumCannon",
-       "^TeslaWeapon",
-       "SteelInfRailgun"
-      ],
-      "warheads": [
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_Flak_Medium",
-       "^Warhead_Bullet_Medium",
-       "^Warhead_MissileAP_Light"
-      ],
-      "weapon": "SteelInfRailgun_EMP",
-      "weapon_class_source": "illegal_mix"
-     },
-     {
-      "armament_name": "deployed",
-      "burst": "4",
-      "burstdelays": "0",
-      "damage_warheads": [
-       {
-        "damage": "20000",
-        "falloff": "100, 52, 0",
-        "spread": "52",
-        "tag": "Quantum_Heavy_Flat",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -4566,6 +4393,38 @@
         "spread": "150",
         "tag": "MediumCannonPercentage",
         "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "8000",
+      "reloaddelay": "50",
+      "requires": "deployed && !rank-elite && steelconsortium_upgrade_quantumweaponpower",
+      "slot": "Armament@UpgradeDEPLOYED",
+      "versus_templates": [
+       "^Warhead_Quantum_Heavy_Flat",
+       "^TeslaWeapon",
+       "^Effect_Flame_Heavy",
+       "SteelInfRailgun"
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "SteelInfRailgun_EMP",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "deployed",
+      "burst": "4",
+      "burstdelays": "0",
+      "damage_warheads": [
+       {
+        "damage": "20000",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_Heavy_Flat",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -4603,6 +4462,41 @@
         "type": "SpreadDamage"
        },
        {
+        "damage": "1",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": "111, 33, 11, 3",
+        "spread": "375",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "150",
+        "tag": "MediumCannonPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
         "damage": "100",
         "falloff": "100, 50",
         "percentage_denominator": "10000",
@@ -4636,7 +4530,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "50",
@@ -4646,13 +4540,10 @@
        "SteelInfRailgun_EMP"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_Flak_Medium",
-       "^Warhead_Bullet_Medium",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "SteelInfRailgun_EMP_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -4675,27 +4566,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "8000",
       "reloaddelay": "48",
       "requires": "!rank-elite && !steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_Railgun_Heavy_Flat",
-       "^RA2RailgunWeapon",
-       "^RA2FlakWeapon",
-       "^SteelChaingun",
-       "^SteelLightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Clsn_Small_RA2"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_Flak_Medium",
-       "^Warhead_Bullet_Medium",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "SteelInfRailgun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -4718,7 +4604,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "9000",
       "reloaddelay": "48",
@@ -4728,13 +4614,10 @@
        "SteelInfRailgun"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_Flak_Medium",
-       "^Warhead_Bullet_Medium",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "SteelInfRailgun_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -4747,41 +4630,6 @@
         "spread": "52",
         "tag": "Quantum_Heavy_Flat",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "150",
-        "tag": "MediumCannonPercentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1",
@@ -4849,45 +4697,6 @@
         "spread": null,
         "tag": "CollapsedSteelInfRailgun_EMPRailgun_HeavyPercentage",
         "type": "AreaDamagePercentage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": false,
-      "range": "8000",
-      "reloaddelay": "50",
-      "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
-      "slot": "Armament@UpgradeGARRISONED",
-      "versus_templates": [
-       "^Warhead_Quantum_Heavy_Flat",
-       "^Grenade",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^ShrapnelWeapon",
-       "^MediumCannon",
-       "^TeslaWeapon",
-       "SteelInfRailgun"
-      ],
-      "warheads": [
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_Flak_Medium",
-       "^Warhead_Bullet_Medium",
-       "^Warhead_MissileAP_Light"
-      ],
-      "weapon": "SteelInfRailgun_EMP",
-      "weapon_class_source": "illegal_mix"
-     },
-     {
-      "armament_name": "garrisoned",
-      "burst": "4",
-      "burstdelays": "0",
-      "damage_warheads": [
-       {
-        "damage": "20000",
-        "falloff": "100, 52, 0",
-        "spread": "52",
-        "tag": "Quantum_Heavy_Flat",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -4923,6 +4732,38 @@
         "spread": "150",
         "tag": "MediumCannonPercentage",
         "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": false,
+      "range": "8000",
+      "reloaddelay": "50",
+      "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
+      "slot": "Armament@UpgradeGARRISONED",
+      "versus_templates": [
+       "^Warhead_Quantum_Heavy_Flat",
+       "^TeslaWeapon",
+       "^Effect_Flame_Heavy",
+       "SteelInfRailgun"
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "SteelInfRailgun_EMP",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "4",
+      "burstdelays": "0",
+      "damage_warheads": [
+       {
+        "damage": "20000",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_Heavy_Flat",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -4960,6 +4801,41 @@
         "type": "SpreadDamage"
        },
        {
+        "damage": "1",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": "111, 33, 11, 3",
+        "spread": "375",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "150",
+        "tag": "MediumCannonPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
         "damage": "100",
         "falloff": "100, 50",
         "percentage_denominator": "10000",
@@ -4993,7 +4869,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "9000",
       "reloaddelay": "50",
@@ -5003,13 +4879,10 @@
        "SteelInfRailgun_EMP"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_Flak_Medium",
-       "^Warhead_Bullet_Medium",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "SteelInfRailgun_EMP_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5974,7 +5847,7 @@
    }
   },
   "upgrades": {
-   "qacst_infiltrated.steel": {
+   "steel_qacst_infiltrated": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6214,36 +6087,15 @@
    }
   },
   "vehicles": {
-   "cobra.steel": {
+   "steel_cobra": {
     "armaments": [
      {
       "damage_warheads": [
-       {
-        "damage": "14600",
-        "falloff": "100, 52, 0",
-        "spread": "52",
-        "tag": "Quantum_Heavy_Flat",
-        "type": "AreaDamage"
-       },
        {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -6258,6 +6110,27 @@
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "14600",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_Heavy_Flat",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "99, 66, 33",
+        "spread": "525",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": "111, 33, 11, 3",
+        "spread": "500",
+        "tag": "HeavyFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -6279,31 +6152,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "14600",
-        "falloff": "100, 52, 0",
-        "spread": "52",
-        "tag": "Quantum_Heavy_Flat",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -6318,6 +6170,27 @@
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "14600",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_Heavy_Flat",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "99, 66, 33",
+        "spread": "525",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": "111, 33, 11, 3",
+        "spread": "500",
+        "tag": "HeavyFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -6347,12 +6220,11 @@
      "v": "3600"
     },
     "design": {
-     "category": "Tanks",
-     "class_anchor": "line_breaker",
-     "special": 1.0,
+     "class_anchor": null,
+     "special": null,
      "subtype": "LineBreaker",
-     "tech_tier": 0.75,
-     "unit_class": 1.0
+     "tech_tier": null,
+     "unit_class": null
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
@@ -6414,7 +6286,7 @@
      "v": "22"
     }
    },
-   "cougar.steel": {
+   "steel_cougar": {
     "armaments": [
      {
       "damage_warheads": [
@@ -6427,18 +6299,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "10",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^SteelHeavyCannon",
-       "^SteelChaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelVulcan",
@@ -6455,12 +6326,11 @@
      "v": "1200"
     },
     "design": {
-     "category": "Vehicles",
-     "class_anchor": "scout_vehicle",
-     "special": 1.0,
+     "class_anchor": null,
+     "special": null,
      "subtype": "ScoutVehicle",
-     "tech_tier": 1.0,
-     "unit_class": 1.0
+     "tech_tier": null,
+     "unit_class": null
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
@@ -6521,7 +6391,7 @@
      "v": "30"
     }
    },
-   "hummer.steel": {
+   "steel_hummer": {
     "armaments": [
      {
       "burst": "4",
@@ -6543,7 +6413,8 @@
       "requires": "!rank-elite",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^SteelLightMissile",
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
        "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
@@ -6601,12 +6472,11 @@
      "v": "2000"
     },
     "design": {
-     "category": "Vehicles",
      "class_anchor": null,
-     "special": 1.0,
+     "special": null,
      "subtype": "SupportVehicle",
-     "tech_tier": 1.0,
-     "unit_class": 1.0
+     "tech_tier": null,
+     "unit_class": null
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
@@ -6667,7 +6537,7 @@
      "v": "44"
     }
    },
-   "oldqtnk.steel": {
+   "steel_oldqtnk": {
     "armaments": [
      {
       "armament_name": "primary",
@@ -6677,6 +6547,13 @@
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Tesla_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
        },
        {
@@ -6691,13 +6568,6 @@
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Laser_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
        },
        {
@@ -6716,7 +6586,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "65",
@@ -6726,11 +6596,10 @@
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy",
-       "^Warhead_Laser_Heavy",
        "^Warhead_Railgun_Heavy"
       ],
       "weapon": "SteelQuantumCannon_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6743,12 +6612,11 @@
      "v": "2400"
     },
     "design": {
-     "category": "Tanks",
-     "class_anchor": "mbt",
-     "special": 1.0,
+     "class_anchor": null,
+     "special": null,
      "subtype": "MainBattleTank",
-     "tech_tier": 1.0,
-     "unit_class": 1.0
+     "tech_tier": null,
+     "unit_class": null
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
@@ -6830,12 +6698,11 @@
       "reloaddelay": "8",
       "slot": "Armament@AG1",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^RA2FlakWeapon",
-       "^SteelChaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Emp_Fx_RA2"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelMantaHunterCannons",
@@ -6859,12 +6726,11 @@
       "reloaddelay": "8",
       "slot": "Armament@AG2",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^RA2FlakWeapon",
-       "^SteelChaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Emp_Fx_RA2"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelMantaHunterCannons",
@@ -6882,23 +6748,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "12",
       "slot": "Armament@AA1",
       "versus_templates": [
-       "^Warhead_Flak_Medium_Flat",
-       "^SteelMediumMissile",
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Clsn_Medium_RA2",
        "SteelMantaHunterCannons"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium",
-       "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelMantaHunterCannons_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -6912,23 +6778,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "12",
       "slot": "Armament@AA2",
       "versus_templates": [
-       "^Warhead_Flak_Medium_Flat",
-       "^SteelMediumMissile",
+       "^Warhead_MissileAP_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_Clsn_Medium_RA2",
        "SteelMantaHunterCannons"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium",
-       "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelMantaHunterCannons_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -6949,10 +6815,10 @@
       "requires": "steelconsortium_upgrade_resonanceammo",
       "slot": "Armament@UpgradeAG1",
       "versus_templates": [
-       "SteelMantaHunterCannons"
+       "SteelMantaHunterCannons",
+       "^Effect_Emp_Fx_RA2"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelMantaHunterCannonsResonance",
@@ -6977,10 +6843,10 @@
       "requires": "steelconsortium_upgrade_resonanceammo",
       "slot": "Armament@UpgradeAG2",
       "versus_templates": [
-       "SteelMantaHunterCannons"
+       "SteelMantaHunterCannons",
+       "^Effect_Emp_Fx_RA2"
       ],
       "warheads": [
-       "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelMantaHunterCannonsResonance",
@@ -6998,7 +6864,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "12",
@@ -7009,11 +6875,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium",
-       "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelMantaHunterCannonsAAResonance_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -7027,7 +6892,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "12",
@@ -7038,11 +6903,10 @@
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium",
-       "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelMantaHunterCannonsAAResonance_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7301,7 +7165,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "minrange": "4000",
       "pricing": true,
       "range": "20000",
@@ -7309,14 +7173,11 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy_Flat",
-       "^MediumFlameWeapon",
-       "^ShrapnelWeapon",
-       "^RA2Grenade",
-       "^SteelHeavyCannon"
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_Grey_Explosion_Large_RA2"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "SteelDaggerCannon",
@@ -7349,7 +7210,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "minrange": "5000",
       "pricing": true,
       "range": "25000",
@@ -7360,7 +7221,6 @@
        "SteelDaggerCannon"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "SteelDaggerCannon_elite",
@@ -7463,27 +7323,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "48",
       "requires": "!rank-elite && !steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Railgun_Heavy_Flat",
-       "^RA2RailgunWeapon",
-       "^RA2FlakWeapon",
-       "^SteelChaingun",
-       "^SteelLightMissile"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_Clsn_Small_RA2"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_Flak_Medium",
-       "^Warhead_Bullet_Medium",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "SteelInfRailgun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -7505,7 +7360,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "48",
@@ -7515,13 +7370,10 @@
        "SteelInfRailgun"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_Flak_Medium",
-       "^Warhead_Bullet_Medium",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "SteelInfRailgun_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
@@ -7533,41 +7385,6 @@
         "spread": "52",
         "tag": "Quantum_Heavy_Flat",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "150",
-        "tag": "MediumCannonPercentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1",
@@ -7635,44 +7452,6 @@
         "spread": null,
         "tag": "CollapsedSteelInfRailgun_EMPRailgun_HeavyPercentage",
         "type": "AreaDamagePercentage"
-       }
-      ],
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
-      "pricing": true,
-      "range": "8000",
-      "reloaddelay": "50",
-      "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
-      "slot": "Armament@UpgradePRIMARY",
-      "versus_templates": [
-       "^Warhead_Quantum_Heavy_Flat",
-       "^Grenade",
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon",
-       "^ShrapnelWeapon",
-       "^MediumCannon",
-       "^TeslaWeapon",
-       "SteelInfRailgun"
-      ],
-      "warheads": [
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_Flak_Medium",
-       "^Warhead_Bullet_Medium",
-       "^Warhead_MissileAP_Light"
-      ],
-      "weapon": "SteelInfRailgun_EMP",
-      "weapon_class_source": "illegal_mix"
-     },
-     {
-      "burst": "4",
-      "burstdelays": "0",
-      "damage_warheads": [
-       {
-        "damage": "20000",
-        "falloff": "100, 52, 0",
-        "spread": "52",
-        "tag": "Quantum_Heavy_Flat",
-        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -7708,6 +7487,37 @@
         "spread": "150",
         "tag": "MediumCannonPercentage",
         "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "8000",
+      "reloaddelay": "50",
+      "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
+      "slot": "Armament@UpgradePRIMARY",
+      "versus_templates": [
+       "^Warhead_Quantum_Heavy_Flat",
+       "^TeslaWeapon",
+       "^Effect_Flame_Heavy",
+       "SteelInfRailgun"
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "SteelInfRailgun_EMP",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "0",
+      "damage_warheads": [
+       {
+        "damage": "20000",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "Quantum_Heavy_Flat",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -7745,6 +7555,41 @@
         "type": "SpreadDamage"
        },
        {
+        "damage": "1",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": "111, 33, 11, 3",
+        "spread": "375",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "150",
+        "tag": "MediumCannonPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
         "damage": "100",
         "falloff": "100, 50",
         "percentage_denominator": "10000",
@@ -7778,7 +7623,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "50",
@@ -7788,13 +7633,10 @@
        "SteelInfRailgun_EMP"
       ],
       "warheads": [
-       "^Warhead_Railgun_Heavy",
-       "^Warhead_Flak_Medium",
-       "^Warhead_Bullet_Medium",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "SteelInfRailgun_EMP_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7894,7 +7736,9 @@
       "requires": "undeployed",
       "slot": "Armament@Undeployed",
       "versus_templates": [
-       "^RA2MediumCannon"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -7913,7 +7757,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.0,
       "minrange": "2220",
       "pricing": true,
       "range": "11111",
@@ -7921,14 +7765,11 @@
       "requires": "deployed",
       "slot": "Armament@Deployed",
       "versus_templates": [
-       "^Warhead_CannonHE_Medium_Flat",
-       "^Warhead_Demolition_Heavy",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
        "^Effect_Demolition_Heavy"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "HammerheadArtillery",
@@ -8045,14 +7886,11 @@
       "requires": "!rank-elite && !steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_CannonFire_Heavy_Flat",
-       "^Warhead_CannonHE_Heavy",
        "^Warhead_Flame_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
        "^Warhead_Flame_Heavy"
       ],
       "weapon": "SteelKatyCannons",
@@ -8083,7 +7921,6 @@
        "SteelKatyCannons"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
        "^Warhead_Flame_Heavy"
       ],
       "weapon": "SteelKatyCannons_elite",
@@ -8104,13 +7941,6 @@
        {
         "damage": "5",
         "falloff": null,
-        "spread": "75",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "5",
-        "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -8128,10 +7958,17 @@
         "spread": null,
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "5",
+        "falloff": null,
+        "spread": "75",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "minrange": "1450",
       "pricing": true,
       "range": "7250",
@@ -8140,17 +7977,15 @@
       "slot": "Armament@Upgrade",
       "versus_templates": [
        "^Warhead_Quantum_Medium",
-       "^TankDestroyerCannon",
        "^TeslaWeapon",
        "SteelKatyCannons"
       ],
       "warheads": [
        "^Warhead_Quantum_Medium",
-       "^Warhead_CannonHE_Heavy",
        "^Warhead_Flame_Heavy"
       ],
       "weapon": "SteelKatyCannons_EMP",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -8167,13 +8002,6 @@
        {
         "damage": "5",
         "falloff": null,
-        "spread": "75",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "5",
-        "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
@@ -8191,10 +8019,17 @@
         "spread": null,
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "5",
+        "falloff": null,
+        "spread": "75",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "minrange": "1650",
       "pricing": true,
       "range": "8250",
@@ -8206,11 +8041,10 @@
       ],
       "warheads": [
        "^Warhead_Quantum_Medium",
-       "^Warhead_CannonHE_Heavy",
        "^Warhead_Flame_Heavy"
       ],
       "weapon": "SteelKatyCannons_EMP_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -8317,27 +8151,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6050",
       "reloaddelay": "25",
       "requires": "!rank-elite && !steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Railgun_Heavy_Flat",
-       "^MediumFlameWeapon",
-       "^RA2Grenade",
-       "^RA2RailgunWeapon",
-       "^SteelMediumCannon",
-       "^SteelMakoGunCannonCompatibility"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "SteelMakoGun",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
@@ -8366,7 +8195,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7050",
       "reloaddelay": "25",
@@ -8376,12 +8205,10 @@
        "SteelMakoGun"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "SteelMakoGun_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -8391,13 +8218,6 @@
         "spread": "39",
         "tag": "Quantum_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1",
@@ -8419,10 +8239,17 @@
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "99, 66, 33",
+        "spread": "175",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6050",
       "reloaddelay": "25",
@@ -8430,18 +8257,16 @@
       "slot": "Armament@UpgradePRIMARY",
       "versus_templates": [
        "^Warhead_Quantum_Medium",
-       "^LightChemicalWeapon",
        "^TeslaWeapon",
+       "^Effect_Flame_Heavy",
        "SteelMakoGun"
       ],
       "warheads": [
        "^Warhead_Quantum_Medium",
-       "^Warhead_Demolition_Light",
-       "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "SteelMakoGun_EMP",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
@@ -8456,13 +8281,6 @@
        },
        {
         "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "1",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
@@ -8481,10 +8299,17 @@
         "spread": "200",
         "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "99, 66, 33",
+        "spread": "175",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7050",
       "reloaddelay": "25",
@@ -8495,12 +8320,10 @@
       ],
       "warheads": [
        "^Warhead_Quantum_Medium",
-       "^Warhead_Demolition_Light",
-       "^Warhead_Railgun_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "SteelMakoGun_EMP_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -8584,24 +8407,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "20",
       "slot": "Armament@AG1",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^SteelLightMissile",
-       "^RA2FlakWeapon",
-       "^SteelChaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelMantaAG",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -8614,24 +8434,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "20",
       "slot": "Armament@AG2",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^SteelLightMissile",
-       "^RA2FlakWeapon",
-       "^SteelChaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelMantaAG",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -8644,7 +8461,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9999",
       "reloaddelay": "20",
@@ -8654,12 +8471,10 @@
        "SteelMantaAG"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelManta_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -8672,7 +8487,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9999",
       "reloaddelay": "20",
@@ -8682,12 +8497,10 @@
        "SteelMantaAG"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelManta_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -8700,22 +8513,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "20",
       "requires": "steelconsortium_upgrade_resonanceammo",
       "slot": "Armament@UpgradeAG1",
       "versus_templates": [
-       "SteelMantaAG"
+       "SteelMantaAG",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelMantaAGResonance",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -8728,22 +8540,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "20",
       "requires": "steelconsortium_upgrade_resonanceammo",
       "slot": "Armament@UpgradeAG2",
       "versus_templates": [
-       "SteelMantaAG"
+       "SteelMantaAG",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelMantaAGResonance",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -8756,22 +8567,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9999",
       "reloaddelay": "20",
       "requires": "steelconsortium_upgrade_resonanceammo",
       "slot": "Armament@UpgradeAA1",
       "versus_templates": [
-       "SteelManta_AA"
+       "SteelManta_AA",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelMantaAAResonance_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -8784,22 +8594,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9999",
       "reloaddelay": "20",
       "requires": "steelconsortium_upgrade_resonanceammo",
       "slot": "Armament@UpgradeAA2",
       "versus_templates": [
-       "SteelManta_AA"
+       "SteelManta_AA",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelMantaAAResonance_AA",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -8895,16 +8704,16 @@
        },
        {
         "damage": "10",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponPercentage",
+        "falloff": null,
+        "spread": "75",
+        "tag": "LaserWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "10",
-        "falloff": null,
-        "spread": "75",
-        "tag": "LaserWeaponPercentage",
+        "falloff": "99, 66, 33",
+        "spread": "175",
+        "tag": "LightChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -8924,9 +8733,7 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Melee_Heavy_Flat",
-       "^LightChemicalWeapon",
-       "^LaserWeapon",
-       "^SwordWeapon"
+       "^LaserWeapon"
       ],
       "warheads": [],
       "weapon": "SteelMegaSword",
@@ -8943,13 +8750,6 @@
        },
        {
         "damage": "15",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "15",
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
@@ -8960,6 +8760,13 @@
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "15",
+        "falloff": "99, 66, 33",
+        "spread": "525",
+        "tag": "HeavyChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -8972,7 +8779,6 @@
       "slot": "Armament@ELITE",
       "versus_templates": [
        "^Warhead_Quantum_Heavy_Flat",
-       "^HeavyChemicalWeapon",
        "^LaserWeapon",
        "^TeslaWeapon"
       ],
@@ -8998,13 +8804,6 @@
        },
        {
         "damage": "15",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "15",
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
@@ -9015,6 +8814,13 @@
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "15",
+        "falloff": "99, 66, 33",
+        "spread": "525",
+        "tag": "HeavyChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -9127,7 +8933,9 @@
       "reloaddelay": "41",
       "slot": "Armament@1",
       "versus_templates": [
-       "^SteelMediumCannon"
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -9218,6 +9026,13 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Railgun_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "24000",
         "falloff": "100, 52, 0",
         "spread": "52",
@@ -9230,13 +9045,6 @@
         "spread": "200",
         "tag": "Laser_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -9247,14 +9055,11 @@
       "requires": "!rank-elite && !steelconsortium_upgrade_quantumweaponpower",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Quantum_Heavy_Flat",
-       "^Warhead_Laser_Heavy",
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
        "^Effect_Railgun_Heavy"
       ],
       "warheads": [
-       "^Warhead_Laser_Heavy",
        "^Warhead_Railgun_Heavy"
       ],
       "weapon": "SteelQuantumCannon",
@@ -9268,6 +9073,13 @@
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Tesla_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
        },
        {
@@ -9285,13 +9097,6 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": null,
         "spread": null,
@@ -9307,7 +9112,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "65",
@@ -9321,11 +9126,10 @@
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy",
-       "^Warhead_Laser_Heavy",
        "^Warhead_Railgun_Heavy"
       ],
       "weapon": "SteelQuantumCannon_EMP",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -9335,6 +9139,13 @@
         "falloff": "100, 75, 50, 25",
         "spread": "200",
         "tag": "Tesla_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Railgun_Heavy_ExtraDamage",
         "type": "SpreadDamage"
        },
        {
@@ -9352,13 +9163,6 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "Railgun_Heavy_ExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "6",
         "falloff": null,
         "spread": null,
@@ -9374,7 +9178,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "65",
@@ -9385,11 +9189,10 @@
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy",
-       "^Warhead_Laser_Heavy",
        "^Warhead_Railgun_Heavy"
       ],
       "weapon": "SteelQuantumCannon_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -9775,6 +9578,13 @@
      {
       "damage_warheads": [
        {
+        "damage": "20000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2",
         "falloff": null,
         "spread": "225",
@@ -9801,13 +9611,6 @@
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -9817,12 +9620,9 @@
       "reloaddelay": "10",
       "slot": "Armament@1",
       "versus_templates": [
-       "^Warhead_Bullet_Medium_Flat",
-       "^HeavyCannon",
-       "^SmallArms",
-       "^MediumMissile",
-       "^FlakWeapon",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_AlliedTigerCannon"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
