@@ -22,6 +22,31 @@ deferred-inverted pin (its 91-value is deliberately unresolved pending
 pricing) — drawback line removed, pin back at 1. Residual flags: 11
 `faction: unknown` (unprefixed `upgrade_*` / `d2k_*` ids) and ~21 `coverage:
 narrow` (no live consumers — overlaps the dead-upgrade list).
+## 2026-09-26e — EMBER: W22 roster census delivered (read-only)
+
+`Agent: EMBER · branch devin/ember/w22-census · base afb66c9b5`
+
+Claude's post-wave order: liveness classifier + per-credit weighting so pricing
+never averages dead defs. Delivered `tools/balance/w22_roster_census.py` →
+`docs/balance/w22_roster_census.{md,json}`. No yaml touched, no `--confirm`.
+
+Measured on this tree: **2366 armored actors, 1362 buildable, 1004 excluded** —
+the order's 552/1977 predates the ContentPack merge wave; substance holds (~42%
+excluded). Liveness classes: `unbuildable` 662 (no Buildable — husks/props/
+mission/parked), `spawn_only` 266 (produced at runtime — airstrikes,
+MCV-deployed conyards via `player`, spawn children — real targets, no queue
+cost; consumer decides inclusion), `unreachable` 76 (Buildable.Queue set but
+no faction can satisfy prereqs — dead content worth a cleanup pass: TD navy,
+`ra1_allies_cybertank`, `cabal_*_backup`, …).
+
+Headline distortion the order warned about: **Wood 30.5% → 14.5%** once dead
+defs are dropped (524 of 722 Wood defs are dormant buildings). Concrete,
+Superheavy, Plate, Helicopter rise correspondingly. `share_live` is the drop-in
+for `armor_weights()`; `share_credit` adds bodies-per-credit (1/Cost).
+
+B2b companion finding (from earlier triage, still stands): all 15,881 diamond
+paths are all-labeled `Inherits@x:` merges — sanctioned engine mechanism, zero
+bare-`Inherits:` crash shapes.
 
 ## 2026-09-26d — EMBER → FLEET: post-merge-wave status + per-agent notes
 
