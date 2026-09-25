@@ -1,8 +1,8 @@
 ts_nod_hover:
 	Inherits: ^BoatUnit
 	Inherits@cargo: ^CargoVehicle
-	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^NodRankDecoration
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
+	Inherits@decoration: ^TSNodRankDecoration
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -45,8 +45,8 @@ ts_nod_hover:
 ts_nod_cruiser:
 	Inherits: ^BoatUnit
 	Inherits@Template: ^ArtilleryShipTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^NodRankDecoration
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
+	Inherits@decoration: ^TSNodRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@EMP: ^TurretEMP
 	Valued:
@@ -158,8 +158,8 @@ ts_nod_rayboat:
 	Inherits: ^BoatUnit
 	Inherits@effects: ^RA2Vehicle
 	Inherits@Template: ^ScoutShipTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^NodRankDecoration
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
+	Inherits@decoration: ^TSNodRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Inherits@sub: ^Submarine
@@ -216,8 +216,8 @@ ts_nod_submarine:
 	Inherits: ^BoatUnit
 	Inherits@effects: ^RA2Vehicle
 	Inherits@Template: ^ScoutShipTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^NodRankDecoration
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
+	Inherits@decoration: ^TSNodRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Inherits@sub: ^Submarine

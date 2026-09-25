@@ -1,0 +1,135 @@
+^Projectile_Missile_Heavy_SC:
+	Inherits: ^Projectile_Missile_Heavy
+	Projectile: Missile
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		Inaccuracy: 150
+		Image: d2k_missile2
+		Palette: d2keffect
+		Shadow: true
+		HorizontalRateOfTurn: 80
+		VerticalRateOfTurn: 20
+		TrailImage: large_trail
+		TrailInterval: 1
+		ContrailLength: 0
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		Speed: 666
+		CloseEnough: 400
+		Acceleration: 3
+		HomingActivationDelay: 3
+		RangeLimit: 33333
+		CruiseAltitude: 1000
+		MinimumLaunchAngle: 64
+		PointDefenseTypes: Missile
+
+^Projectile_Missile_Heavy_Rocket_SC:
+	Projectile: Bullet
+		Blockable: false
+		Speed: 500
+		Inaccuracy: 25
+		InaccuracyType: PerCellIncrement
+		Image: d2k_RPG
+		Palette: d2keffect
+		TrailImage: bazooka_trail2
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+		LaunchAngle: 125
+
+^Effect_MissileHE_Heavy_SC:
+	Inherits: ^Effect_MissileHE_Heavy
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@RA2Crater:
+	-Warhead@Concrete:
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: SandCrater, RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_small_explosion
+		ImpactSounds: EXPLSML1.WAV
+		ExplosionPalette: effect75alpha
+		ImpactActors: false
+		ValidTargets: Ground, Air
+	Warhead@Concrete: DamagesConcrete
+		Damage: 750
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
+
+^Effect_MissileAP_Heavy_SC:
+	Inherits: ^Effect_MissileAP_Heavy
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@RA2Crater:
+	-Warhead@Concrete:
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: SandCrater, RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_small_explosion
+		ImpactSounds: EXPLSML1.WAV
+		ExplosionPalette: effect75alpha
+		ImpactActors: false
+		ValidTargets: Ground, Air
+	Warhead@Concrete: DamagesConcrete
+		Damage: 750
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
+
+^Effect_MissileAP_Heavy_Rocket_SC:
+	Inherits: ^Effect_MissileAP_Heavy
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@RA2Crater:
+	-Warhead@Concrete:
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: SandCrater, RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_tiny_explosion
+		ImpactSounds: EXPLSML1.WAV
+		ExplosionPalette: effect75alpha
+		ImpactActors: false
+		ValidTargets: Ground, Air
+	Warhead@Concrete: DamagesConcrete
+		Damage: 240
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
+
+^SCRocket:
+	Inherits@wh: ^Warhead_MissileAP_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy_Rocket_SC
+	Inherits@fx: ^Effect_MissileAP_Heavy_Rocket_SC
+	ReloadDelay: 50
+	Range: 5000
+	Report: ROCKET1.WAV
+	Warhead@EffectAir:
+		ImpactSounds: EXPLLG2.WAV
+	Warhead@Effect:
+		ImpactSounds: EXPLSML1.WAV
+
+^Effect_Explosion_Large_SC:
+	Inherits: ^Effect_MissileHE_Medium
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_large_explosion
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_large_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Watersplash_Huge_SC:
+	Inherits: ^Effect_MissileAP_Heavy
+	-Warhead@Effect:
+	-Warhead@EffectAir:
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_huge_watersplash
+		ExplosionPalette: ra2effect
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge

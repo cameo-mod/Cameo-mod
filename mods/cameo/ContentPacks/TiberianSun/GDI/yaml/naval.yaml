@@ -1,8 +1,8 @@
 ts_gdi_hover:
 	Inherits: ^BoatUnit
 	Inherits@cargo: ^CargoVehicle
-	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^NodRankDecoration
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
+	Inherits@decoration: ^TSNodRankDecoration
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -44,8 +44,8 @@ ts_gdi_hover:
 ts_gdi_cruiser:
 	Inherits: ^BoatUnit
 	Inherits@Template: ^ArtilleryShipTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
+	Inherits@decoration: ^TSGDIRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@EMP: ^TurretEMP
 	Valued:
@@ -155,8 +155,8 @@ ts_gdi_cruiser:
 ts_gdi_carrier:
 	Inherits: ^BoatUnit
 	Inherits@Template: ^ArtilleryShipTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
+	Inherits@decoration: ^TSGDIRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@EMP: ^TurretEMP
 	Valued:
@@ -266,8 +266,8 @@ ts_gdi_carrier:
 ts_gdi_destroyer:
 	Inherits: ^BoatUnit
 	Inherits@Template: ^BattleShipTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
+	Inherits@decoration: ^TSGDIRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Valued:
@@ -330,8 +330,8 @@ ts_gdi_destroyer:
 ts_gdi_strike_orca:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^BomberTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
+	Inherits@decoration: ^TSGDIRankDecoration
 	ReloadAmmoPool:
 		Delay: 20
 		Count: 3

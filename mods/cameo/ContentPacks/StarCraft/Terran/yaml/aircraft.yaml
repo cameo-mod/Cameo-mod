@@ -3,7 +3,7 @@ terran_wraith:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@decoration: ^TerranRankDecoration
 	Inherits@Template: ^HelicopterTemplate
-	Inherits@EXP: ^GainsExperienceTD
+	Inherits@EXP: ^SCGainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@AntiAir: ^PrioritizeAir
@@ -88,7 +88,7 @@ terran_sundog:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@decoration: ^TerranRankDecoration
 	Inherits@Template: ^HelicopterTemplate
-	Inherits@EXP: ^GainsExperienceTD
+	Inherits@EXP: ^SCGainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -176,7 +176,7 @@ terran_valkyrie:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@decoration: ^TerranRankDecoration
 	Inherits@Template: ^HelicopterTemplate
-	Inherits@EXP: ^GainsExperienceTD
+	Inherits@EXP: ^SCGainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@armor: ^TerranShipWeaponUpgrades
@@ -238,7 +238,7 @@ terran_wyvern:
 	Inherits@decoration: ^TerranRankDecoration
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
-	Inherits@EXP: ^GainsExperienceTD
+	Inherits@EXP: ^SCGainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@armor: ^TerranShipWeaponUpgrades
@@ -297,7 +297,7 @@ terran_raven:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@decoration: ^TerranRankDecoration
 	Inherits@Template: ^HelicopterTemplate
-	Inherits@EXP: ^GainsExperienceTD
+	Inherits@EXP: ^SCGainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@AutoRepair: ^PrioritizeRepair
 	Inherits@CLOAK: ^CloakedAircraft
@@ -444,7 +444,7 @@ terran_pythean:
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@Epic: ^EpicAirUnitTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
-	Inherits@exp: ^GainsExperienceTD
+	Inherits@exp: ^SCGainsExperienceTD
 	Inherits@decoration: ^TerranRankDecoration
 	Inherits@cargo: ^CargoAircraft
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -612,7 +612,7 @@ terran_battlecruiser:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@decoration: ^TerranRankDecoration
 	Inherits@Template: ^SpaceshipTemplate
-	Inherits@EXP: ^GainsExperienceTD
+	Inherits@EXP: ^SCGainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@announce: ^AnnounceGlobal
 	Inherits@armor: ^TerranShipWeaponUpgrades
@@ -745,7 +745,7 @@ terran_phobos:
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@Epic: ^EpicAirUnitTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
-	Inherits@EXP: ^GainsExperienceTD
+	Inherits@EXP: ^SCGainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@announce: ^AnnounceGlobal
 	Inherits@armor: ^TerranShipWeaponUpgrades
@@ -878,7 +878,7 @@ terran_sciencevessel:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@decoration: ^TerranRankDecoration
 	Inherits@Template: ^HelicopterTemplate
-	Inherits@EXP: ^GainsExperienceTD
+	Inherits@EXP: ^SCGainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@explode: ^HeliExplodeLarge
 	Inherits@announce: ^AnnounceGlobal

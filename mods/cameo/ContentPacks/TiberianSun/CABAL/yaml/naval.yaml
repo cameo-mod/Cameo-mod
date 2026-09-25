@@ -43,7 +43,7 @@ cabal_lcraft:
 cabal_lazerboat:
 	Inherits: ^BoatUnit
 	Inherits@Template: ^ScoutShipTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^TSGainsExperienceRA
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiAir: ^PrioritizeAir
@@ -106,7 +106,7 @@ cabal_plasmasub:
 	Inherits: ^BoatUnit
 	Inherits@effects: ^RA2Vehicle
 	Inherits@Template: ^ArtilleryShipTemplate
-	Inherits@exp: ^GainsExperienceTD
+	Inherits@exp: ^TSGainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -165,7 +165,7 @@ cabal_plasmasub:
 cabal_radar_cruiser:
 	Inherits: ^BoatUnit
 	Inherits@Template: ^ScoutShipTemplate
-	Inherits@exp: ^GainsExperienceRA
+	Inherits@exp: ^TSGainsExperienceRA
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Buildable:

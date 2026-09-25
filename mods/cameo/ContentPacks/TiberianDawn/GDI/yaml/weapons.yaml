@@ -4192,4 +4192,24 @@ td_gdi_humveemkii_machinegunhumvee2ap_AA:
 	Range: 8397
 	Burst: 4
 td_gdi_missileboat_depthcharge:
-	Inherits: DepthCharge
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Demolition_Light
+	Report: M203.aud
+	ReloadDelay: 60
+	Range: 6000
+	ValidTargets: Underwater, Submarine
+	Projectile: Bullet
+		Speed: 125
+		Image: BOMB
+	Warhead@Demolition_Light:
+		Damage: 60000
+		ValidTargets: Submarine, Ship, Underwater
+	Warhead@EffectWater:
+		Explosions: large_splash
+		ImpactSounds: h2obomb2.aud
+		ValidTargets: Water, Underwater
+	Warhead@Effect:
+		Explosions: small_explosion
+		ImpactSounds: kaboom15.aud
+		ValidTargets: Submarine, Ship, Underwater

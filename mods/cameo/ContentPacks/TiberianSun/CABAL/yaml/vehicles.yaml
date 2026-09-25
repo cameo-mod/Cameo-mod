@@ -90,7 +90,7 @@ cabal_cyborgreaper:
 	Inherits: ^Walker
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@MC: ^MCImmune
 	Inherits@HackableRobot: ^HackableRobot
@@ -155,7 +155,7 @@ cabal_cyborgreaper:
 		DamageCooldown: 1
 
 cabal_tiberiumharvester:
-	Inherits: ^TDHARV
+	Inherits: ^TSTDHARV
 	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServosVehicle
 	Health:
@@ -204,7 +204,7 @@ cabal_tiberiumharvester:
 cabal_laserspider:
 	Inherits: ^Vehicle
 	Inherits@Template: ^FireSupportTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
@@ -255,7 +255,7 @@ cabal_laserspider:
 cabal_mantis:
 	Inherits: ^Vehicle
 	Inherits@Template: ^FireSupportTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
@@ -307,7 +307,7 @@ cabal_mantis:
 cabal_manticore:
 	Inherits: ^Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
@@ -359,7 +359,7 @@ cabal_manticore:
 cabal_artilleryspider:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ArtilleryTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -419,7 +419,7 @@ cabal_artilleryspider:
 cabal_tarantula:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
@@ -493,7 +493,7 @@ cabal_scarabapc:
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@cargo: ^CargoVehicle
 	Inherits@bot: ^BotAutoDeployTransport
-	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@REINFORCED: ^CabalUpgradeReinforcedChassis
 	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServosVehicle
@@ -685,7 +685,7 @@ cabal_beholder:
 cabal_spidercnc4:
 	Inherits: ^Vehicle
 	Inherits@Template: ^FireSupportTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
@@ -739,7 +739,7 @@ cabal_heavyreaper:
 	Inherits: ^Walker
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@MC: ^MCImmune
 	Inherits@HackableRobot: ^HackableRobot
@@ -806,7 +806,7 @@ cabal_heavyreaper:
 cabal_avatar:
 	Inherits: ^Vehicle
 	Inherits@Template: ^DreadnoughtTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@MOBIMATRIX: ^CabalUpgradeMobilityMatrix
@@ -860,7 +860,7 @@ cabal_avatar:
 cabal_widow:
 	Inherits: ^Vehicle
 	Inherits@Template: ^MainBattleTankTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@MOBIMATRIX: ^CabalUpgradeMobilityMatrix
@@ -911,7 +911,7 @@ cabal_coredefender:
 	Inherits: ^Vehicle
 	Inherits@Template: ^EpicVehicleTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@VOICES: ^WithFeedbackVoiceLines
@@ -1001,7 +1001,7 @@ cabal_coredefender:
 cabal_ravager:
 	Inherits: ^Walker
 	Inherits@Template: ^LightTankTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@EXPERIENCE: ^TSGainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@vo: ^AttackFrontalVoice

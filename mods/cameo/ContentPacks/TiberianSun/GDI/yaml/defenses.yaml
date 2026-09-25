@@ -1,8 +1,8 @@
 ts_gdi_vulcantower:
 	Inherits: ^Defense
 	Inherits@Template: ^BasicDefenseTemplate
-	Inherits@exp: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@exp: ^TSGainsExperienceTD
+	Inherits@decoration: ^TSGDIRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@EMP: ^DefenseTurretedEMP
@@ -62,8 +62,8 @@ ts_gdi_vulcantower:
 ts_gdi_rpgtower:
 	Inherits: ^Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
-	Inherits@exp: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@exp: ^TSGainsExperienceTD
+	Inherits@decoration: ^TSGDIRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@EMP: ^DefenseTurretedEMP
@@ -119,8 +119,8 @@ ts_gdi_rpgtower:
 ts_gdi_samtower:
 	Inherits: ^Defense
 	Inherits@Template: ^AntiAirDefenseTemplate
-	Inherits@exp: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@exp: ^TSGainsExperienceTD
+	Inherits@decoration: ^TSGDIRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@EMP: ^DefenseTurretedEMP
