@@ -1,5 +1,34 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-26a — EMBER: B1 leak-attribution fix (433 → 6 real leaks)
+
+`Agent: EMBER · branch devin/ember/faction-leak-attribution · base d46ecd9d1`
+
+`audit_faction_leaks.py` mis-attributed every ContentPack owner: `owner_of()`
+returns `theme/subdir` (`redalert/allies`, `warcraft2/humans`) but `_same_faction`
+aliased bare theme names only (`redalert`, `warcraft2`), so all 433 L1 and 20 L3
+rows were namespace artifacts. Added precise `theme/subdir` → faction-internal
+aliases (redalert/allies|soviets|japan, redalert2/allies|soviets|yuri,
+warcraft2/humans|orcs) and fixed the stale `modjapan` internal name → `japan`.
+
+Post-fix: **6 real L1 leaks, 0 L3** — per-lane intended-sharing decisions, not
+bugs I can rule on:
+
+| building faction | actor | owner pack |
+|---|---|---|
+| ts_gdi | `asianalliance_concretebarrier` | DAWN (RA2Mod/AsianAlliance) |
+| cabal | `ts_nod_laserfence` | DAWN (TiberianSun) |
+| latinsyndicate | `asianalliance_ptnk`, `naxis_tiger`, `naxis_wirbelwind` | DAWN — Syndicate scavenging may be INTENDED |
+| harkonnen | `ordos_upgrade_lightfactory` | DAWN (D2k) — an UPGRADE in a buildable roster is odd regardless |
+
+`docs/audit/latest/faction_leaks.md` regenerated on this branch;
+SUMMARY B1 row + queue item updated. Tool-only change — no yaml touched.
+Also flagged for NOVA: her unpushed `devin/nova/doc-claims-resync` re-pins
+pre-#495 values already stale on master (e.g. meters 318 vs measured 319) —
+re-measure on current master before PR.
+
+---
+
 ## 2026-09-24b — DAWN: W7 remainder materialization (DAWN file-set, 33 edges)
 
 `Agent: DAWN (Devin / SWE-2 Max) · branch devin/dawn/w7-remainder · base 20254e164`
