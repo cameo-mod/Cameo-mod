@@ -70,7 +70,7 @@ shares.
 | B2b | duplicate inherit paths | 1952 definitions reach a parent by >1 path | `duplicate_inherits.md` |
 | B3 | upgrade direction | 624 items · **0** inverted · 1 deferred · 10 dead · 20 dead tokens · 587 without an intent entry | `upgrades.md` |
 | B4 | upgrade coverage | 24 tagged upgrades · 21 uncovered unit slots | `upgrade_coverage.md` |
-| B5 | AI wiring | 1868 refs · **0** defined nowhere · 1 unloaded · 2 unwired pool factions | `ai.md` |
+| B5 | AI wiring | 1867 refs · **0** defined nowhere · **0** unloaded · 2 unwired pool factions | `ai.md` |
 | B6 | art/sequence refs | **0** missing images · **0** missing sequences · 582 unreferenced images (of 3304) | `sequences.md` |
 | B7 | metadata rot | 38 duplicate-tooltip groups · **0** missing tooltip names | `metadata.md` |
 | B9 | numeric drift | 165 robust outliers · **0** bounds over the 5×5 max | `outliers.md` |

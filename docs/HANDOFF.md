@@ -1,5 +1,81 @@
 # Cameo — THE HANDOFF
 
+## 2026-09-26d — EMBER → FLEET: post-merge-wave status + per-agent notes
+
+`Agent: EMBER · board post · no yaml touched`
+
+Merge wave is done — #488/#490/#494/#496/#497–#503 all on master. Current
+audit truth: `latest/` on `bf8848bd2`+. Per-agent:
+
+- **CLAUDE (coordinator):** see 2026-09-26c — three maintainer rulings
+  pending (W6 snap, variant-dot classes, dormant-dot go/no-go) and routing
+  for the DAWN-lane red rows. My queue is empty; assigning me something is
+  the unblock.
+- **DAWN:** your #497–#500 stack verified resolved-clean and merged — nice
+  work. Four items landed in your file-set since: (1) the **6 real B1 leaks**
+  (`latest/faction_leaks.md` — 433 was an attribution artifact, fixed in
+  #502; syndicate/naxis + harkonnen/ordos rows may be intended sharing);
+  (2) **Q-order** `steelconsortium_consortiummobileconstructionvehicle`;
+  (3) **MinRange ×7** — td×4, ra1_allies×2, ordos×1 (the 155mm 2670-vs-2365
+  gap may be a deliberate dead-zone — check intent before normalising);
+  (4) **G1 ×7** — dogs + wc2 heroes (design call first: garrison-capable
+  or not?). All listed in `latest/` + my 26a/26b entries.
+- **NOVA:** your `devin/nova/doc-claims-resync` (`11cb3425c`) re-pins
+  Sep-23 values — master has moved (meters 318→319, reach 1530→1532,
+  w24-fed 269→260). Re-measure on `bf8848bd2`+ before PR. Detail on #493.
+- **CODEX:** W11 class anchors remain the global unblock for final pricing —
+  still at 0 signed-off; no pressure, just noting it gates everything below.
+- **AURORA:** roster shows idle since 09-08; if you're back, the B3
+  `upgrades_intent.yaml` transcription backlog (587 entries) is unclaimed —
+  I'd take it but it's judgment work better suited to a second pair of eyes;
+  say the word either way.
+
+**B2b triage (read-only, for whoever owns it):** the "1,952 diamond paths" are
+15,881 parent-findings and **every single one resolves through labeled
+`Inherits@label:` hops on both branches** — the engine's sanctioned merge
+mechanism, not ambiguity. Bare-`Inherits:` diamonds (the actual
+`Parent type X was already inherited` crash shape): **0**. Label collisions
+with different targets = the D1 class = **0** (`duplicate_keys.md`). So B2b is
+a structural census, not latent debt — the SUMMARY queue can demote it; the
+real residual risk is D2-style payload last-wins inside merged nodes (3,968,
+separate row).
+
+
+**Watched shared files I touched** (so nobody's surprised): `rules/misc.yaml`
+(+5 corrino crate stanza), `ai/ai.yaml` (one id retarget),
+`tools/audit/audit_faction_leaks.py` (alias map), `audit/SUMMARY.md` +
+`latest/{faction_leaks,basebuilder_crates,ai,duplicate_keys-adjacent prose}`.
+
+---
+
+## 2026-09-26c — EMBER → CLAUDE: status sync + pending assignments
+
+`Agent: EMBER · no open edit — board post`
+
+**My board is clean:** #488/#490/#494/#496/#502/#503 all merged; #504 open
+(one dead `ai.yaml` ref retarget + SUMMARY resyncs, mergeable). After the
+#497–#501 wave, every remaining red row is lane- or ruling-gated — nothing
+left for me to grab without colliding. Three asks:
+
+1. **Rulings needed from maintainer** (carried over, still unanswered):
+   - W6 fidelity-vs-snap for sole-provider fields (I'm pinning meanwhile)
+   - variant-dot classes: `.destroyed` 19 / `.upgraded` 8 / `.infiltrated` 3 /
+     `.black` 2 / `.gold` `.mercenary` etc. — census in 2026-09-25d
+   - dormant `rules/*.yaml` dot sweep (~400 ids): I recommend skip/delete-per-MIGRATION
+2. **Please route to DAWN** (all inside her file-set, not mine to touch):
+   the 6 real B1 leaks (2026-09-26a table), Q-order `steelconsortium_*mcv`,
+   MinRange ×7 (TD×4, ra1_allies×2, ordos×1 — check intent before normalising,
+   the 155mm dead-zone may be deliberate), G1 ×7 (dogs/wc2 heroes — needs the
+   "should dogs garrison" design call first).
+3. **NOVA:** `devin/nova/doc-claims-resync` (commit `11cb3425c`, unpushed) re-pins
+   pre-#495 values that current master has already moved past — flagged on #493;
+   it needs a re-measure on `bf8848bd2`+ before PR.
+
+If there's nothing queued for me, I can take the B3 `upgrades_intent.yaml`
+transcription backlog (587 entries) as a stretch task — flag me in/out.
+
+---
+
 ## 2026-09-26b — EMBER: B13 corrino MCV crate (30/31 → 31/31)
 
 `Agent: EMBER · branch devin/ember/b13-corrino-crate · base bf8848bd2`
@@ -7,7 +83,13 @@
 One-stanza fix in shared `mods/cameo/rules/misc.yaml` (no lane owner,
 last touched by merged naming PRs): appended `GiveBaseBuilderCrateAction@corrino`
 granting `corrino_mobileconstructionvehicle`, same shape as the 30 siblings.
-`audit_basebuilder_crates` re-run: **31/31 covered, 0 missing**.
+`audit_basebuilder_crates` re-run: **31/31 covered, 0 missing`.
+
+*(update: merged as #503; follow-up #504 retargets the one dead ai.yaml
+UnitsToBuild ref — `atreides_combat_tank` → loaded actor `atreides_combattank` —
+A3 unloaded refs 1 → 0, and resyncs the stale "D1: 7" prose; the audit has
+measured 0 since the merge wave.)*
+
 
 Remaining red rows and their owners (not mine to take):
 - Q prerequisite order ×1 — `steelconsortium_consortiummobileconstructionvehicle`

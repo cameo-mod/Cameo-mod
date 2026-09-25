@@ -1,6 +1,6 @@
 # audit_ai — ai.yaml wiring (B5)
 
-IDs referenced by ai.yaml: **1868** — defined NOWHERE (BLOCKING): **0**, defined only in unloaded files (hygiene): **1**, pool factions with unwired combat units: **2**
+IDs referenced by ai.yaml: **1867** — defined NOWHERE (BLOCKING): **0**, defined only in unloaded files (hygiene): **0**, pool factions with unwired combat units: **2**
 
 
 ## A1 — ai.yaml references defined nowhere (blocking: helipad-bug class)
@@ -18,7 +18,5 @@ _none found_
 
 ## A3 — ai.yaml references to unloaded content (dead sections, hygiene)
 
-| referenced id | list | ai.yaml line |
-|---|---|---|
-| atreides_combat_tank | UnitsToBuild | 6050 |
+_none found_
 
