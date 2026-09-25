@@ -62,11 +62,12 @@ from effective_heaviness import heaviness_of as validated_heaviness
 
 # Measured through the resolver. LOWER ONLY.
 MEAN_OFFENDERS_BASELINE = 2      # Nuclear_Super + Sniper_Light, both HAND_TUNED
-GMEAN_OFFENDERS_BASELINE = 105   # R16 geomean-100, measured 2026-09-24: the tree was
-                                 # normalised to ARITHMETIC 100 (§12.0h), and AM >= GM puts
-                                 # every shaped profile at ~88-95 geometric. Paydown is the
-                                 # §12.0j regeneration (generator already works about the
-                                 # geometric mean) — never 105 hand fixes.
+GMEAN_OFFENDERS_BASELINE = 2     # R16 geomean-100. Was 105 on 2026-09-24 (the tree was
+                                 # normalised to ARITHMETIC 100, §12.0h, and AM >= GM put every
+                                 # shaped profile at ~88-95 geometric). PAID DOWN 2026-09-25 by
+                                 # `mean_normalise` targeting the GEOMETRIC mean + splice --all:
+                                 # only the two HAND_TUNED templates remain (Nuclear_Super,
+                                 # Sniper_Light). The arithmetic count is now informational.
 SPREAD_OFFENDERS_BASELINE = 0    # CLEARED 2026-08-22 by fit_band_floor in gen_weapon_template
                                  # (Nuclear and Sniper excluded: their only level is HAND_TUNED)
 FLIP_BASELINE = 0                # CLEARED 2026-08-22 — the blend tiebreak is now family-wide

@@ -1127,8 +1127,16 @@ def _powerlaw(vals, alpha):
 
 
 def _to_mean(vals, target):
-    m = statistics.fmean(vals)
-    return [v * target / m for v in vals] if m > 0 else list(vals)
+    """Scale `vals` so their GEOMETRIC mean is `target` (DESIGN R16, maintainer 2026-09-24).
+
+    *"All versus values of a warhead must always have a geometric mean of 100%."* Versus rows
+    are multipliers, so the geometric mean is their centre: a 200/50 pair centres at 100, while
+    its arithmetic mean (125) silently inflated the family's contribution to `K`. The power law
+    (`_powerlaw`) already works about the geometric mean, so this closes the last arithmetic step.
+    """
+    pos = [max(v, 1.0) for v in vals]
+    m = statistics.geometric_mean(pos) if pos else 0.0
+    return [v * target / m for v in pos] if m > 0 else list(vals)
 
 
 def fit_band_floor(rows):
@@ -1161,7 +1169,7 @@ def fit_band_floor(rows):
 
 
 def mean_normalise(rows, target=MEAN_TARGET):
-    """Rescale a MAIN profile so the MEAN of its armor rows is `target` (see above).
+    """Rescale a MAIN profile so the GEOMETRIC mean of its armor rows is `target` (R16; see above).
 
     Returns rows in the SAME ORDER — the emit order is the ordering law's output and
     `shield_for` overwrites `Shield` immediately after, so nothing here may reshuffle.
