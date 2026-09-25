@@ -12500,3 +12500,91 @@ no new split-defs or dup-keys.
 Flagged for fleet (semantic, not deps): `^D2KSpawnActorsOnSell` still spawns
 `e6, td_gdi_minigunner` (TD crew from an Ixian building) — content bug needing
 a maintainer ruling, not touched here.
+
+## 2026-09-24 — Value-reference self-containment batch (D2k/TD/TS/SC) — DAWN/A4
+
+Second-layer self-containment after the Inherits-edge work (PRs #497/#498):
+value-refs (`Weapon:`, `IconImage:`, `Actor:`, `ActorTypes:`, seq-name
+overrides) into pack-gated foreign defs. Generalized census over the mount
+topology (`pack_reach.py`: consumer file -> its pack's mounted set + core
+mounts) found ~139 hits in my four packs -> fixed the hard layer to **0**.
+
+**Method:** per leak, copy the foreign def into the owning pack (renamed
+`^TSRA2*`/`^SCRA2*`/`^TDRA2*`/`td_*`/`ts_*`/`d2k_*`/`Protoss*`/`SC*` namespaces
+to avoid same-name merge doubling), retarget all consumers, then verify
+resolved-identical vs a HEAD worktree over the WHOLE corpus.
+
+**Key new lesson — verbatim copies re-add audit findings.** A copied weapon
+re-adds its source's W2/W6/W7/W8 counts in the merged corpus (original still
+exists in the foreign pack). Ratchets are lower-only, so each copy was made
+audit-clean via materialization: effect-typed nodes moved into per-weapon
+`^<pk>_<weapon>` families (17 families created), dropped parent edges
+materialized inline (resolved-identical emit), duplicate sibling nodes folded
+(`dedupe_blocks.py` — `-Key:` nodes are per-key merge barriers, NOT global).
+
+**Name-collision trap:** copied `Heal`->`TSHeal` collided with a pre-existing
+core-mounted `TSHeal` (`weapons/tiberiansun.yaml`) — renamed mine `TSRA2Heal`.
+A "T-only" name check must include same-name-in-other-namespace, not just
+the def dict.
+
+New Shared yaml files mounted via each game's `Shared/content.yaml`:
+- D2k/Shared/yaml/sequences.yaml (19 cross-faction seqs + ^D2KRA2* infantry seq templates)
+- TD/Shared/yaml/{weapons,sequences,templates}.yaml (Tanya/Ivan bomb chain, flameguy, corpse spawner, upgrade templates)
+- TS/Shared/yaml/weapons.yaml (8Inch/APCGun/DepthCharge/CarrierTarget/TorpTube x2/Terrorist/Heal/Explode/CorpseSpawner families)
+- SC/Shared/yaml/{weapons,sequences}.yaml additions (nuke chain, ^SC* templates)
+
+Residual: 45 SOFT refs (upgrade `Condition:`/`RequiresCondition:` strings +
+`ActorTypes:` spawn lists pointing into foreign namespaces) — dormant strings,
+flagged to fleet for ruling, not hard leaks.
+
+Verified: HARD leaks 0; full-corpus resolved diff 0 weapons/0 seqs changed,
+6 actor diffs = intended icon/weapon retargets; W-shape all flat (W7 793);
+empty-warhead 0; dup-inherits unchanged; S2 5 (= pre-existing); D2 +0 net.
+
+**Boot-gate catch + fix:** first launch died on
+`TSTorpTube` `-Warhead@Smudge:` — materialization had moved the effect node
+into `^ts_torptube` family, orphaning the def-top-level cancel (engine
+`ResolveInherits` throws; nested `-Key:` are weak/no-throw). Dropped the one
+line; `audit_orphan_cancels.py` flags it correctly when run on the final
+tree (the 17:14 suite predated the last materialization edits — procedural
+gap, not a tool gap). Relaunch: menu marker present, exceptions 46→46.
+
+## 2026-09-24 (cont.) — W7 remainder materialization batch (DAWN file-set)
+
+Branch `devin/dawn/w7-remainder` (stacked on `pack-selfcont-valuerefs`).
+
+Converted all **33** remaining DAWN-owned W7 weapon-parent edges via
+resolved materialization (`C:\tmp\dawn_tools\materialize.py`), not
+covering-edge swap — legacy-bundle parents exploded into 4-6 covering
+edges (W8 +25, W1/W2 up) under the naive approach, so it was reverted.
+
+Files: weapons/d2k.yaml 16, tiberiansun.yaml 11, starcraft.yaml 3,
+tiberiandawn.yaml 1, outpost2.yaml 2 (edenMobile chain).
+
+Per weapon: concrete parent edge dropped, resolved parent payload
+materialized inline, effect-typed Warhead@ nodes routed into a per-weapon
+`^<pk>_<file>_<weapon>` family. 6 weapons needed cleanup afterwards:
+- duplicate family defs dropped where a canonical `^*_effects_*` family
+  already existed (fremen_upg, oFremen_L, oDebris2/3, TDBuildingExplode,
+  TSRedEye2) — the emit duplicates an existing family when the parent
+  edge already carried it;
+- 6 orphan cancels removed (provider eliminated by materialization):
+  Arrakis_Tanya_Guns -InvalidTargets (+nested), d2k_kwny_fighter
+  -Warhead@Shrapnel, TSSAPCCoreMissiles -Warhead@MissileAP_Medium,
+  edenMobileLaserTiger -Warhead@Laser_Heavy, edenMobileDefenceLaser
+  -Warhead@CannonHE_Medium;
+- GhostSniperBunker: dropped stray `Range: 10c0 #8c0` — semantically dead
+  line that was a child of the removed `Inherits:` block;
+- TSGrenadeAA: removed `-Projectile:` + redundant second pin (template
+  Projectile already re-pinned by materialization; the cancel would have
+  orphaned after dedupe).
+- R17 chip-cancels: TSLaser90mmDep + edenMobile chain re-apply the
+  parent's `-Warhead@*_ExtraDamage:` cancels — resolved-identical, NOT
+  R17 folds (the fold ruling applies to defs that still carry live
+  ExtraDamage chips).
+
+Verified: all 33 resolved-identical vs pre-edit HEAD; orphan cancels 0;
+empty warheads 0; dup-keys 3968 = HEAD (0 new); split-defs S2 5 = HEAD
+(pre-existing); weapon-shape all buckets at/below ratchets —
+**W7 804→760, W6 443→442** (baselines lowered in audit_weapon_shape.py).
+

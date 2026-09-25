@@ -579,7 +579,7 @@ SporemawShoot:
 	Warhead@Concrete: DamagesConcrete
 		Damage: 25
 HermitExplode:
-	Inherits: ReactorNuke
+	Inherits: SCReactorNuke
 	Warhead@Effect: CreateEffect
 		Explosions: ra2radbang
 	Warhead@shrapnel: FireShrapnel

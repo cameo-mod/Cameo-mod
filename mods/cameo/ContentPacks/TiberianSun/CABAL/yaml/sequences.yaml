@@ -1149,7 +1149,7 @@ tscrys:
 		UseTilesetCode: false
 
 cabal_pillbox:
-	Inherits: ^RA2MachineGunMuzzle
+	Inherits: ^TSRA2MachineGunMuzzle
 	Defaults:
 		Scale: 1.25
 		Offset: 0,-12
@@ -2232,7 +2232,7 @@ cabal_berserker:
 		Filename: cabal_icons|cabal_berserker_icon.shp
 
 cabal_eliminator800:
-	Inherits: ^RA2ArmedInfantry
+	Inherits: ^TSRA2ArmedInfantry
 	Defaults:
 		Filename: cabal_sprites|yuri_gatlingtrooper_arnd.shp
 	muzzle:

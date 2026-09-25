@@ -1,50 +1,3 @@
-harkonnen_flameturret:
-	Defaults:
-	invisible:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 38
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 2821, 2824, 2822, 2832, 2825, 2826, 2836, 2829, 2823, 2833, 2827, 2828, 2834, 2830, 2831, 2835
-		Length: 16
-		Offset: -24,16
-	damaged-idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 2869, 2872, 2870, 2880, 2873, 2874, 2884, 2877, 2871, 2881, 2875, 2876, 2882, 2878, 2879, 2883
-		Length: 16
-		Offset: -24,16
-	make:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4577
-		Length: 8
-		Offset: -16,16
-		ZOffset: 1024
-		Tick: 100
-	crumble-overlay:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4584
-		Length: 7
-		Offset: -16,16
-		Tick: 200
-		ZOffset: 1024
-	turret:
-		Filename: harkonnen_flameturret_head.png
-		Facings: -16
-		Offset: 0,-24
-	icon:
-		Filename: harkonnen_flameturret_icon.png
-
-
 harkonnen_combat_tank:
 	Defaults:
 	idle:
@@ -87,7 +40,6 @@ harkonnen_assaulttank:
 	icon:
 		Filename: harkonnen_assaulttank_icon.png
 
-
 harkonnen_combat_tank_husk:
 	Defaults:
 	idle:
@@ -104,40 +56,6 @@ harkonnen_combat_tank_husk:
 		Start: 2115
 		Facings: -32
 		ZOffset: -512
-
-harkonnen_spiceharvester:
-	Defaults:
-		Filename: harkonnen_harvester.png
-		Scale: 0.5
-	idle:
-		Start: 64
-		Length: 1
-		Facings: 64
-	move:
-		Start: 0
-		Length: 8
-		Facings: 8
-		Tick: 80
-	harvest:
-		Start: 128
-		Length: 8
-		Facings: 8
-		Tick: 80
-	dock:
-		Start: 64
-		Length: 1
-		Facings: 1
-	dock-loop:
-		Start: 64
-		Length: 1
-		Facings: 1
-	icon:
-		Start: 0
-		Length: 1
-		Facings: 1
-		Scale: 0.35
-		Offset: -30,-24
-
 
 harkonnen_devastatorturret:
 	Defaults:
@@ -189,7 +107,6 @@ harkonnen_rockettank:
 	icon:
 		Filename: harkonnen_rockettank_icon.png
 
-
 harkonnen_devastatormech:
 	Defaults:
 		Filename: harkonnen_devestator.png
@@ -205,7 +122,6 @@ harkonnen_devastatormech:
 		Tick: 100
 	icon:
 		Filename: harkonnen_devestator_icon.png
-
 
 harkonnen_adp:
 	Defaults:
@@ -232,7 +148,6 @@ harkonnen_adp:
 	icon:
 		Filename: harkonnen_adp_icon.png
 
-
 harkonnen_buzzsaw:
 	Defaults:
 		Filename: harkonnen_buzzsaw.png
@@ -250,7 +165,6 @@ harkonnen_buzzsaw:
 		Tick: 100
 	icon:
 		Filename: harkonnen_buzzsaw_icon.png
-
 
 harkonnen_inkvine:
 	Defaults:
@@ -270,7 +184,6 @@ harkonnen_inkvine:
 	icon:
 		Filename: harkonnen_inkvine_icon.png
 
-
 harkonnen_flametank:
 	Defaults:
 		Filename: harkonnen_flametank.png
@@ -283,45 +196,6 @@ harkonnen_flametank:
 		Tick: 80
 	icon:
 		Filename: harkonnen_flametank_icon.png
-
-
-harkonnen_gunship:
-	Defaults:
-		Filename: harkonnen_gunship.png
-	idle:
-		Start: 0
-		Facings: 32
-	move:
-		Start: 0
-		Facings: 32
-		Tick: 80
-	icon:
-		Filename: harkonnen_gunship_icon.png
-
-
-harkonnen_advancedcarryall:
-	Defaults:
-		Filename: harkonnen_advancedcarryall.png
-	idle:
-		Start: 0
-		Facings: 32
-	move:
-		Start: 0
-		Facings: 32
-		Tick: 80
-	idle-landed:
-		Start: 0
-		Length: 1
-		Facings: 32
-		Tick: 120
-	icon:
-		Filename: harkonnen_advancedcarryall_icon.png
-
-harkonnen_gun_turret:
-	Inherits: harkonnen_flameturret
-
-harkonnen_rocket_turret:
-	Inherits: harkonnen_flameturret
 
 harkonnen_sardaukar_baron_elite:
 	Defaults:

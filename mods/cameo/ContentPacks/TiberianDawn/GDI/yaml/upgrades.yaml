@@ -16,28 +16,6 @@
 		Sequence: rank-elite
 		Palette: greyscale
 
-^LongRangeSensors:
-	RevealsShroudMultiplier@td_gdi_upgrade_longrangesensors:
-		RequiresCondition: td_gdi_upgrade_longrangesensors
-		Modifier: 125
-	DetectCloakedMultiplier@td_gdi_upgrade_longrangesensors:
-		RequiresCondition: td_gdi_upgrade_longrangesensors
-		Modifier: 125
-	InaccuracyMultiplier@td_gdi_upgrade_longrangesensors:
-		RequiresCondition: td_gdi_upgrade_longrangesensors
-		Modifier: 75
-	FirepowerMultiplier@td_gdi_upgrade_longrangesensors:
-		RequiresCondition: td_gdi_upgrade_longrangesensors
-		Modifier: 105
-	RangeMultiplier@td_gdi_upgrade_longrangesensors:
-		RequiresCondition: td_gdi_upgrade_longrangesensors
-		Modifier: 105
-	GrantConditionOnPrerequisite@td_gdi_upgrade_longrangesensors:
-		Condition: td_gdi_upgrade_longrangesensors
-		Prerequisites: td_gdi_upgrade_longrangesensors
-	ActorStatValues:
-		Upgrades: td_gdi_upgrade_longrangesensors
-
 ^HeavyAircraftArmorPlating:
 	DamageMultiplier@td_gdi_upgrade_heavyaircraftarmorplating:
 		RequiresCondition: td_gdi_upgrade_heavyaircraftarmorplating

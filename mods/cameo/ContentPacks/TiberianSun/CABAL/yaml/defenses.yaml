@@ -252,7 +252,7 @@ cabal_pillbox:
 	Inherits: ^TSRA2Defense
 	Inherits@cargo: ^ClearableGarrison
 	Inherits@Template: ^BasicDefenseTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@EXPERIENCE: ^TSGainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Selectable:

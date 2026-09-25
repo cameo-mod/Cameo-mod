@@ -1478,8 +1478,8 @@ TSShotgun:
 		InvalidTargets: Air
 TSJumpCannon:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
-	Inherits: ^RA2FlakWeapon
-	Inherits@2: ^RA2Chaingun
+	Inherits: ^TSRA2FlakWeapon
+	Inherits@2: ^TSRA2Chaingun
 	ReloadDelay: 25
 	Range: 5090
 	Report: jumpjet1.aud

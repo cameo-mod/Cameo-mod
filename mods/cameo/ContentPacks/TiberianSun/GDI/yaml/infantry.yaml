@@ -28,12 +28,12 @@ ts_gdi_medic:
 	Mobile:
 		Speed: 50
 	Armament:
-		Weapon: Heal
+		Weapon: TSRA2Heal
 		TargetRelationships: Ally
 		ForceTargetRelationships: None
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: Heal
+		Weapon: TSRA2Heal
 	RenderRangeCircleCA:
 		Armaments: primary
 		RangeCircleType: heal

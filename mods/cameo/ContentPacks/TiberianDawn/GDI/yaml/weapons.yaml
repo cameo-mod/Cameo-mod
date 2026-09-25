@@ -4213,3 +4213,11 @@ td_gdi_missileboat_depthcharge:
 		Explosions: small_explosion
 		ImpactSounds: kaboom15.aud
 		ValidTargets: Submarine, Ship, Underwater
+
+td_gdi_japancarriertarget:
+	ReloadDelay: 25
+	Range: 20000
+	ValidTargets: Ground, Air, Water
+	Projectile: InstantHit
+	Warhead@1Dam: TargetDamage
+
