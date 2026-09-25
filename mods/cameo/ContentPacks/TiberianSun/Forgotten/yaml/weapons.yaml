@@ -78,6 +78,7 @@ TS70mmTurChem:
 		Speed: 850
 		Blockable: false
 		LaunchAngle: 0
+		Inaccuracy: 150
 	Warhead@CannonHE_Medium:
 		PercentageScale: 3325
 		Damage: 12000
@@ -96,15 +97,6 @@ TS70mmTurChem:
 	Report: cannon1.aud
 	InvalidTargets: wall
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
-	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-	Projectile:
-		Inaccuracy: 150
-	Warhead@Concrete:
-		Damage: 100
-	Warhead@Glow:
-		Scale: 0.8
-		FadeFrames: 15
-	Warhead@LightChemicalWeaponPercentage:
 		ValidTargets: Ground, Water
 		Spread: 175
 		Damage: 2
@@ -131,12 +123,7 @@ TS70mmTurChem:
 		UpdatesUnitStatistics: false
 		PhysicalStates:
 			Corrosion: 100
-	Warhead@ShieldHit:
-		Condition: shieldhit
-		Range: 1250
-		ValidTargets: Shielded
-		Duration: 12
-	Warhead@TankDestroyerCannonPercentage:
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 75
 		Damage: 2
@@ -160,6 +147,16 @@ TS70mmTurChem:
 			Fighter: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
+	Warhead@Concrete:
+		Damage: 100
+	Warhead@Glow:
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
+		Duration: 12
 TS120mmx:
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
@@ -191,31 +188,31 @@ TSChem120mmx:
 	BurstDelays: 4
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 15
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Falloff: 100, 75, 50, 25
+		Spread: 300
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		Versus:
+			Bomber: 7
+			Concrete: 15
+			Fighter: 8
+			Flak: 16
+			Heavy: 11
+			Helicopter: 6
+			Heroic: 10
+			Light: 17
+			Medium: 14
+			None: 19
+			Plate: 13
+			Scout: 20
+			Shield: 25
+			Spaceship: 5
+			Steel: 12
+			Superheavy: 9
+			Wood: 18
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 15
-	Warhead@Cloud: SpawnSmokeParticle
-		Count: 5
-		Duration: 50
-		Speed: 12, 25
-		TurnRate: 12
-		Image: tsveinsmoke
-		Sequences: idle
-		Palette: player
-		Weapon: TSSmoke
-		InvalidTargets: Water
-	-Warhead@1Dam:
-	Warhead@CannonChem_Heavy:
-		ValidTargets: Ground, Water
-		Damage: 93600
-		PercentageScale: 0
-
-	InvalidTargets: wall
-	Projectile:
-		Speed: 3500
-	Report: M203.aud
-	Warhead@Concrete:
-		Damage: 175
-	Warhead@MediumChemicalWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		Falloff: 99, 66, 33
 		Spread: 350
@@ -241,35 +238,33 @@ TSChem120mmx:
 			Steel: 11
 			Superheavy: 20
 			Wood: 9
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 5
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+	-Warhead@1Dam:
+	Warhead@CannonChem_Heavy:
+		ValidTargets: Ground, Water
+		Damage: 93600
+		PercentageScale: 0
+
+	InvalidTargets: wall
+	Projectile:
+		Speed: 3500
+	Report: M203.aud
+	Warhead@Concrete:
+		Damage: 175
 	Warhead@ShieldHit:
 		Condition: shieldhit
 		Range: 1250
 		ValidTargets: Shielded
 		Duration: 12
-	Warhead@ShrapnelWeaponPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		Falloff: 100, 75, 50, 25
-		Spread: 300
-		UpdatesUnitStatistics: false
-		ValidTargets: Ground, Water
-		Versus:
-			Bomber: 7
-			Concrete: 15
-			Fighter: 8
-			Flak: 16
-			Heavy: 11
-			Helicopter: 6
-			Heroic: 10
-			Light: 17
-			Medium: 14
-			None: 19
-			Plate: 13
-			Scout: 20
-			Shield: 25
-			Spaceship: 5
-			Steel: 12
-			Superheavy: 9
-			Wood: 18
 TSScoopDual:
 	Inherits: ^TSCannonEffect
 	Inherits@wh: ^Warhead_CannonHE_Medium
@@ -283,12 +278,12 @@ TSScoopDual:
 	Warhead@CannonHE_Medium:
 		Damage: 20000
 TSScoopDualChem:
-	# Restore the 30000-damage CannonChem role from a92a4bc1bf; the merge
-	# accidentally retained the alternative 30000-damage compatibility payload too.
 	Inherits@wh: ^Warhead_CannonChem_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx2: ^TSCannonEffect
 	Inherits@fx: ^ts_forgotten_tsscoopdualchem
+	# Restore the 30000-damage CannonChem role from a92a4bc1bf; the merge
+	# accidentally retained the alternative 30000-damage compatibility payload too.
 	ReloadDelay: 60
 	Burst: 2
 	BurstDelays: 2
@@ -370,10 +365,6 @@ TSScoopDualTurChem:
 	Report: M203.aud
 	InvalidTargets: wall
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-	Warhead@Concrete:
-		Damage: 175
-	Warhead@MediumChemicalWeaponPercentage:
 		ValidTargets: Ground, Water
 		Spread: 350
 		Damage: 8
@@ -400,7 +391,7 @@ TSScoopDualTurChem:
 		UpdatesUnitStatistics: false
 		PhysicalStates:
 			Corrosion: 100
-	Warhead@ShrapnelWeaponPercentage:
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 8
@@ -425,6 +416,8 @@ TSScoopDualTurChem:
 			Spaceship: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
+	Warhead@Concrete:
+		Damage: 175
 TSHighVelocity:
 	Inherits: ^TSCannonEffect
 	Inherits@wh: ^Warhead_CannonAP
@@ -446,32 +439,33 @@ TSHighVelocityChem:
 	Range: 7701
 	Projectile: Bullet
 		Speed: 850
+		Inaccuracy: 150
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 15
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Spread: 75
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		Versus:
+			Bomber: 2
+			Concrete: 10
+			Fighter: 1
+			Flak: 7
+			Heavy: 15
+			Helicopter: 3
+			Heroic: 5
+			Light: 13
+			Medium: 14
+			None: 6
+			Plate: 8
+			Scout: 12
+			Shield: 17
+			Spaceship: 4
+			Steel: 11
+			Superheavy: 16
+			Wood: 9
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 7
-	Warhead@Cloud: SpawnSmokeParticle
-		Count: 1
-		Duration: 50
-		Speed: 12, 25
-		TurnRate: 12
-		Image: tsveinsmoke
-		Sequences: idle
-		Palette: player
-		Weapon: TSSmoke
-		InvalidTargets: Water
-
-	TargetActorCenter: false
-	Warhead@CannonChem_Light:
-		Damage: 45000
-		PercentageScale: 0
-	InvalidTargets: wall
-	Projectile:
-		Inaccuracy: 150
-	Report: cannon1.aud
-	Warhead@Concrete:
-		Damage: 100
-	Warhead@LightChemicalWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		Falloff: 99, 66, 33
 		Spread: 175
@@ -497,7 +491,49 @@ TSHighVelocityChem:
 			Steel: 7
 			Superheavy: 16
 			Wood: 5
-	Warhead@TankDestroyerCannonPercentage:
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+
+	TargetActorCenter: false
+	Warhead@CannonChem_Light:
+		Damage: 45000
+		PercentageScale: 0
+	InvalidTargets: wall
+	Report: cannon1.aud
+	Warhead@Concrete:
+		Damage: 100
+TSHighVelocity2:
+	Inherits: ^TSCannonEffect
+	Inherits@wh: ^Warhead_CannonAP
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_CannonAP_Light
+	Report: cannon1.aud
+	ReloadDelay: 55
+	Range: 8207
+	Projectile: Bullet
+		Speed: 850
+	Warhead@CannonAP:
+		Damage: 40000
+		Heaviness: 0
+TSHighVelocity2Chem:
+	Inherits@collapsewh: ^Warhead_CannonChem_Light
+	Inherits: ^TSCannonEffect
+	Inherits@fx: ^ts_forgotten_set18
+	ReloadDelay: 55
+	Range: 8207
+	Projectile: Bullet
+		Speed: 850
+		Inaccuracy: 150
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		Spread: 75
 		UpdatesUnitStatistics: false
@@ -520,29 +556,6 @@ TSHighVelocityChem:
 			Steel: 11
 			Superheavy: 16
 			Wood: 9
-TSHighVelocity2:
-	Inherits: ^TSCannonEffect
-	Inherits@wh: ^Warhead_CannonAP
-	Inherits@proj: ^Projectile_Shell_Light
-	Inherits@fx: ^Effect_CannonAP_Light
-	Report: cannon1.aud
-	ReloadDelay: 55
-	Range: 8207
-	Projectile: Bullet
-		Speed: 850
-	Warhead@CannonAP:
-		Damage: 40000
-		Heaviness: 0
-TSHighVelocity2Chem:
-	Inherits@collapsewh: ^Warhead_CannonChem_Light
-	Inherits: ^TSCannonEffect
-	Inherits@fx: ^ts_forgotten_set18
-	ReloadDelay: 55
-	Range: 8207
-	Projectile: Bullet
-		Speed: 850
-	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@MLightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 10
 	Warhead@Cloud: SpawnSmokeParticle
@@ -561,8 +574,6 @@ TSHighVelocity2Chem:
 		Damage: 60000
 		PercentageScale: 0
 	InvalidTargets: wall
-	Projectile:
-		Inaccuracy: 150
 	Report: cannon1.aud
 	Warhead@Concrete:
 		Damage: 100
@@ -593,29 +604,6 @@ TSHighVelocity2Chem:
 			Steel: 7
 			Superheavy: 16
 			Wood: 5
-	Warhead@TankDestroyerCannonPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		Spread: 75
-		UpdatesUnitStatistics: false
-		ValidTargets: Ground, Water
-		Versus:
-			Bomber: 2
-			Concrete: 10
-			Fighter: 1
-			Flak: 7
-			Heavy: 15
-			Helicopter: 3
-			Heroic: 5
-			Light: 13
-			Medium: 14
-			None: 6
-			Plate: 8
-			Scout: 12
-			Shield: 17
-			Spaceship: 4
-			Steel: 11
-			Superheavy: 16
-			Wood: 9
 TSHighVelocityTur:
 	Inherits: ^TSCannonEffect
 	Inherits@wh: ^Warhead_CannonAP
@@ -667,30 +655,31 @@ TSBusMortarChem:
 		TrailImage: green_smokey
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 16
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Falloff: 100, 75, 50, 25
+		Spread: 300
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		Versus:
+			Bomber: 7
+			Concrete: 15
+			Fighter: 8
+			Flak: 16
+			Heavy: 11
+			Helicopter: 6
+			Heroic: 10
+			Light: 17
+			Medium: 14
+			None: 19
+			Plate: 13
+			Scout: 20
+			Shield: 25
+			Spaceship: 5
+			Steel: 12
+			Superheavy: 9
+			Wood: 18
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 16
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 16
-	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 16
-	Warhead@Cloud: SpawnSmokeParticle
-		Count: 1
-		Duration: 50
-		Speed: 12, 25
-		TurnRate: 12
-		Image: tsveinsmoke
-		Sequences: idle
-		Palette: player
-		Weapon: TSSmoke
-		InvalidTargets: Water
-	Warhead@Chemical_Heavy:
-		Damage: 128000
-		PercentageScale: 0
-
-	InvalidTargets: wall
-	Warhead@Concrete:
-		Damage: 200
-	Warhead@HeavyBombPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		Falloff: 100, 50, 25, 10, 5
 		Spread: 400
@@ -714,33 +703,8 @@ TSBusMortarChem:
 			Steel: 23
 			Superheavy: 14
 			Wood: 25
-	Warhead@HeavyChemicalWeaponPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		Falloff: 99, 66, 33
-		Spread: 525
-		UpdatesUnitStatistics: false
-		ValidTargets: Ground, Water
-		PhysicalStates:
-			Corrosion: 100
-		Versus:
-			Bomber: 11
-			Concrete: 15
-			Fighter: 10
-			Flak: 22
-			Heavy: 23
-			Helicopter: 12
-			Heroic: 18
-			Light: 19
-			Medium: 21
-			None: 20
-			Plate: 24
-			Scout: 17
-			Shield: 35
-			Spaceship: 13
-			Steel: 16
-			Superheavy: 25
-			Wood: 14
-	Warhead@MediumChemicalWeaponPercentage:
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		Damage: 16
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		Falloff: 99, 66, 33
 		Spread: 350
@@ -766,6 +730,50 @@ TSBusMortarChem:
 			Steel: 11
 			Superheavy: 20
 			Wood: 9
+	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
+		Damage: 16
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		Falloff: 99, 66, 33
+		Spread: 525
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		PhysicalStates:
+			Corrosion: 100
+		Versus:
+			Bomber: 11
+			Concrete: 15
+			Fighter: 10
+			Flak: 22
+			Heavy: 23
+			Helicopter: 12
+			Heroic: 18
+			Light: 19
+			Medium: 21
+			None: 20
+			Plate: 24
+			Scout: 17
+			Shield: 35
+			Spaceship: 13
+			Steel: 16
+			Superheavy: 25
+			Wood: 14
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+	Warhead@Chemical_Heavy:
+		Damage: 128000
+		PercentageScale: 0
+
+	InvalidTargets: wall
+	Warhead@Concrete:
+		Damage: 200
 	Warhead@ShieldHit:
 		Condition: shieldhit
 		Range: 1250
@@ -773,30 +781,6 @@ TSBusMortarChem:
 		Duration: 10
 	Warhead@ShieldHitEffect:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-	Warhead@ShrapnelWeaponPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		Falloff: 100, 75, 50, 25
-		Spread: 300
-		UpdatesUnitStatistics: false
-		ValidTargets: Ground, Water
-		Versus:
-			Bomber: 7
-			Concrete: 15
-			Fighter: 8
-			Flak: 16
-			Heavy: 11
-			Helicopter: 6
-			Heroic: 10
-			Light: 17
-			Medium: 14
-			None: 19
-			Plate: 13
-			Scout: 20
-			Shield: 25
-			Spaceship: 5
-			Steel: 12
-			Superheavy: 9
-			Wood: 18
 ^TSInfantryMortarLegacy:
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@wh2: ^Warhead_Concussion_Medium
@@ -1075,18 +1059,6 @@ TSChemBoatcannon:
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 8
 		Spread: 400
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 4
-	Warhead@Chemical_Medium:
-		Damage: 25000
-		PercentageScale: 0
-####################################################################################################
-#		Tiberian Sun Energy Weapons
-####################################################################################################
-
-	Warhead@Concrete:
-		Damage: 150
-	Warhead@HeavyBombPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		Falloff: 100, 50, 25, 10, 5
 		UpdatesUnitStatistics: false
@@ -1109,7 +1081,8 @@ TSChemBoatcannon:
 			Steel: 23
 			Superheavy: 14
 			Wood: 25
-	Warhead@MediumChemicalWeaponPercentage:
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		Falloff: 99, 66, 33
 		Spread: 350
@@ -1135,6 +1108,15 @@ TSChemBoatcannon:
 			Steel: 11
 			Superheavy: 20
 			Wood: 9
+	Warhead@Chemical_Medium:
+		Damage: 25000
+		PercentageScale: 0
+####################################################################################################
+#		Tiberian Sun Energy Weapons
+####################################################################################################
+
+	Warhead@Concrete:
+		Damage: 150
 	Warhead@ShieldHit:
 		Condition: shieldhit
 		Range: 1250
@@ -1338,29 +1320,6 @@ TSMammothTuskChem:
 		ContrailLength: 16
 		ContrailColor: 88BB88
 		TrailImage: green_smokey
-	Warhead@HeavyMissilePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 10
-	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 10
-	Warhead@Cloud: SpawnSmokeParticle
-		Count: 2
-		Duration: 50
-		Speed: 12, 25
-		TurnRate: 12
-		Image: tsveinsmoke
-		Sequences: idle
-		Palette: player
-		Weapon: TSSmoke
-		InvalidTargets: Water
-
-	TargetActorCenter: false
-	Warhead@MissileChem_Heavy:
-		Damage: 40000
-		PercentageScale: 0
-	InvalidTargets: wall
-	Projectile:
 		AllowSnapping: true
 		Arm: 0
 		Blockable: false
@@ -1370,7 +1329,33 @@ TSMammothTuskChem:
 		PointDefenseTypes: Missile
 		Shadow: true
 		TrailInterval: 1
-	Warhead@HeavyChemicalWeaponPercentage:
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Spread: 300
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 19
+			Concrete: 18
+			Fighter: 16
+			Flak: 12
+			Heavy: 23
+			Helicopter: 22
+			Heroic: 10
+			Light: 17
+			Medium: 20
+			None: 11
+			Plate: 13
+			Scout: 14
+			Shield: 35
+			Spaceship: 24
+			Steel: 21
+			Superheavy: 25
+			Wood: 15
+	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 10
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		Falloff: 99, 66, 33
 		Spread: 525
@@ -1395,28 +1380,22 @@ TSMammothTuskChem:
 			Steel: 16
 			Superheavy: 25
 			Wood: 14
-	Warhead@HeavyMissilePercentage:
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		Spread: 300
-		UpdatesUnitStatistics: false
-		Versus:
-			Bomber: 19
-			Concrete: 18
-			Fighter: 16
-			Flak: 12
-			Heavy: 23
-			Helicopter: 22
-			Heroic: 10
-			Light: 17
-			Medium: 20
-			None: 11
-			Plate: 13
-			Scout: 14
-			Shield: 35
-			Spaceship: 24
-			Steel: 21
-			Superheavy: 25
-			Wood: 15
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 2
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+
+	TargetActorCenter: false
+	Warhead@MissileChem_Heavy:
+		Damage: 40000
+		PercentageScale: 0
+	InvalidTargets: wall
 	Warhead@ShieldHit:
 		Condition: shieldhit
 		Range: 1250
@@ -1488,34 +1467,6 @@ TSChemRuinerMissile:
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
 		TrailImage: spittrail
-	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 5
-		ValidTargets: Ground, Water, Air
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 4
-		ValidTargets: Ground, Water, Air
-	Warhead@GrenadePercentage: AreaDamagePercentage
-		Damage: 9
-		ValidTargets: Ground, Water, Air
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		Damage: 9
-		ValidTargets: Ground, Water, Air
-	Warhead@Cloud: SpawnSmokeParticle
-		Count: 1
-		Duration: 50
-		Speed: 12, 25
-		TurnRate: 12
-		Image: tsveinsmoke
-		Sequences: idle
-		Palette: player
-		Weapon: TSSmoke
-		InvalidTargets: Water
-	Warhead@MissileChem_Medium:
-		Damage: 54000
-		PercentageScale: 0
-
-	InvalidTargets: wall
-	Projectile:
 		Acceleration: 3
 		AllowSnapping: true
 		Arm: 0
@@ -1534,30 +1485,9 @@ TSChemRuinerMissile:
 		Shadow: true
 		Speed: 500
 		TrailInterval: 1
-	Warhead@GrenadePercentage:
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		Falloff: 100, 50, 33, 25, 20
-		Spread: 200
-		UpdatesUnitStatistics: false
-		Versus:
-			Bomber: 3
-			Concrete: 13
-			Fighter: 4
-			Flak: 7
-			Heavy: 10
-			Helicopter: 2
-			Heroic: 5
-			Light: 14
-			Medium: 12
-			None: 9
-			Plate: 6
-			Scout: 16
-			Shield: 17
-			Spaceship: 1
-			Steel: 11
-			Superheavy: 8
-			Wood: 15
-	Warhead@LightChemicalWeaponPercentage:
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
+		Damage: 5
+		ValidTargets: Ground, Water, Air
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		Falloff: 99, 66, 33
 		Spread: 175
@@ -1582,7 +1512,9 @@ TSChemRuinerMissile:
 			Steel: 7
 			Superheavy: 16
 			Wood: 5
-	Warhead@MediumChemicalWeaponPercentage:
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		Damage: 4
+		ValidTargets: Ground, Water, Air
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		Falloff: 99, 66, 33
 		Spread: 350
@@ -1607,7 +1539,34 @@ TSChemRuinerMissile:
 			Steel: 11
 			Superheavy: 20
 			Wood: 9
-	Warhead@MediumMissilePercentage:
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		Damage: 9
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Falloff: 100, 50, 33, 25, 20
+		Spread: 200
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 3
+			Concrete: 13
+			Fighter: 4
+			Flak: 7
+			Heavy: 10
+			Helicopter: 2
+			Heroic: 5
+			Light: 14
+			Medium: 12
+			None: 9
+			Plate: 6
+			Scout: 16
+			Shield: 17
+			Spaceship: 1
+			Steel: 11
+			Superheavy: 8
+			Wood: 15
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
+		Damage: 9
+		ValidTargets: Ground, Water, Air
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		Spread: 200
 		UpdatesUnitStatistics: false
@@ -1629,6 +1588,21 @@ TSChemRuinerMissile:
 			Steel: 16
 			Superheavy: 20
 			Wood: 10
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+	Warhead@MissileChem_Medium:
+		Damage: 54000
+		PercentageScale: 0
+
+	InvalidTargets: wall
 	Warhead@ShieldHit:
 		Condition: shieldhit
 		Range: 1250
@@ -1770,18 +1744,77 @@ TSAdatsMissile:
 		Damage: 8000
 		PercentageScale: 9988
 		ValidTargets: Ground, Water
+^ts_forgotten_tsadatsmissile_aa:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: small_explosion
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Water
+	Warhead@EffectAir: CreateEffect
+		Explosions: small_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.3
+		FadeFrames: 6
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
 TSAdatsMissile_AA:
-	Inherits: TSAdatsMissile
 	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
-	Range: 8409
+	Inherits: ^ts_forgotten_tsadatsmissile_aa
 	ValidTargets: Air
-	-Warhead@MissileHE_Light_Flat:
+	ReloadDelay: 54
+	Range: 8409
+	TargetActorCenter: true
+	Projectile: Missile
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		Inaccuracy: 50
+		Image: DRAGON
+		Shadow: true
+		HorizontalRateOfTurn: 40
+		VerticalRateOfTurn: 20
+		TrailImage: smokey
+		TrailInterval: 1
+		ContrailLength: 0
+		MaximumLaunchSpeed: 300
+		MinimumLaunchSpeed: 300
+		Speed: 600
+		CloseEnough: 600
+		Acceleration: 4
+		HomingActivationDelay: 1
+		RangeLimit: 20000
+		PointDefenseTypes: Missile
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 6
+		Range: 1250
+		ValidTargets: Shielded
+	Burst: 4
+	BurstDelays: 2
+	Report: misl1.aud
 	Warhead@Flak_Medium_Flat:
 		Damage: 8000
 		PercentageScale: 9988
 		ValidTargets: Air
-	Projectile: Missile
-		VerticalRateOfTurn: 20
 
 MutFlamer:
 	Inherits@wh: ^Warhead_Flame_Medium
@@ -1812,6 +1845,29 @@ MutFlamerChem:
 		Damage: 14
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		Falloff: 111, 33, 11, 3
+		Spread: 375
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		Versus:
+			Bomber: 7
+			Concrete: 15
+			Fighter: 8
+			Flak: 19
+			Heavy: 10
+			Helicopter: 6
+			Heroic: 17
+			Light: 12
+			Medium: 11
+			None: 20
+			Plate: 18
+			Scout: 13
+			Shield: 25
+			Spaceship: 5
+			Steel: 14
+			Superheavy: 9
+			Wood: 16
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1819,6 +1875,31 @@ MutFlamerChem:
 		Damage: 14000
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 7
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		Falloff: 99, 66, 33
+		Spread: 350
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		PhysicalStates:
+			Corrosion: 100
+		Versus:
+			Bomber: 6
+			Concrete: 10
+			Fighter: 5
+			Flak: 17
+			Heavy: 18
+			Helicopter: 7
+			Heroic: 13
+			Light: 14
+			Medium: 16
+			None: 15
+			Plate: 19
+			Scout: 12
+			Shield: 25
+			Spaceship: 8
+			Steel: 11
+			Superheavy: 20
+			Wood: 9
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 2
 		Duration: 50
@@ -1849,7 +1930,170 @@ MutFlamerChem:
 		InternalOwner: Neutral
 		OwnerType: InternalName
 		Range: 1
-	Warhead@MediumChemicalWeaponPercentage:
+	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
+		Duration: 8
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+	Warhead@Smudge:
+		InvalidTargets: Vehicle, Structure, wall
+MutHFlamer:
+	Inherits@collapsewh: ^Warhead_Flame_Heavy
+	Inherits: ^Effect_Flame_Heavy
+	-Warhead@Glow:
+	ReloadDelay: 65
+	Range: 2425
+	Report: flamtnk1.aud
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		Damage: 10
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		Falloff: 111, 33, 11, 3
+		Spread: 375
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		Versus:
+			Bomber: 7
+			Concrete: 15
+			Fighter: 8
+			Flak: 19
+			Heavy: 10
+			Helicopter: 6
+			Heroic: 17
+			Light: 12
+			Medium: 11
+			None: 20
+			Plate: 18
+			Scout: 13
+			Shield: 25
+			Spaceship: 5
+			Steel: 14
+			Superheavy: 9
+			Wood: 16
+	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
+		Damage: 10
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		Falloff: 111, 33, 11, 3
+		Spread: 500
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		Versus:
+			Bomber: 12
+			Concrete: 20
+			Fighter: 13
+			Flak: 24
+			HAZMAT: 25
+			Heavy: 15
+			Helicopter: 11
+			Heroic: 22
+			Light: 17
+			Medium: 16
+			None: 25
+			Plate: 23
+			Scout: 18
+			Shield: 35
+			Spaceship: 10
+			Steel: 19
+			Superheavy: 14
+			Wood: 21
+
+	TargetActorCenter: false
+	Warhead@Flame_Heavy:
+		Damage: 40000
+		PercentageScale: 0
+	InvalidTargets: wall
+	Projectile: Bullet
+		Speed: 3000
+MutHFlamerChem:
+	Inherits@collapsewh: ^Warhead_Chemical_Heavy
+	Inherits@fx: ^ts_forgotten_muthflamerchem
+	-Warhead@Glow:
+	-Warhead@EffectAir:
+	-TargetActorCenter:
+	ReloadDelay: 65
+	Range: 2425
+	Report: flamtnk1.aud
+	Warhead@MediumFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Damage: 20000
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		Damage: 10
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		Falloff: 111, 33, 11, 3
+		Spread: 375
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		Versus:
+			Bomber: 7
+			Concrete: 15
+			Fighter: 8
+			Flak: 19
+			Heavy: 10
+			Helicopter: 6
+			Heroic: 17
+			Light: 12
+			Medium: 11
+			None: 20
+			Plate: 18
+			Scout: 13
+			Shield: 25
+			Spaceship: 5
+			Steel: 14
+			Superheavy: 9
+			Wood: 16
+	Warhead@HeavyFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Damage: 20000
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
+		Damage: 10
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		Falloff: 111, 33, 11, 3
+		Spread: 500
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		Versus:
+			Bomber: 12
+			Concrete: 20
+			Fighter: 13
+			Flak: 24
+			HAZMAT: 25
+			Heavy: 15
+			Helicopter: 11
+			Heroic: 22
+			Light: 17
+			Medium: 16
+			None: 25
+			Plate: 23
+			Scout: 18
+			Shield: 35
+			Spaceship: 10
+			Steel: 19
+			Superheavy: 14
+			Wood: 21
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Damage: 10000
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		Falloff: 99, 66, 33
 		Spread: 350
@@ -1875,149 +2119,6 @@ MutFlamerChem:
 			Steel: 11
 			Superheavy: 20
 			Wood: 9
-	Warhead@MediumFlameWeaponPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		Falloff: 111, 33, 11, 3
-		Spread: 375
-		UpdatesUnitStatistics: false
-		ValidTargets: Ground, Water
-		Versus:
-			Bomber: 7
-			Concrete: 15
-			Fighter: 8
-			Flak: 19
-			Heavy: 10
-			Helicopter: 6
-			Heroic: 17
-			Light: 12
-			Medium: 11
-			None: 20
-			Plate: 18
-			Scout: 13
-			Shield: 25
-			Spaceship: 5
-			Steel: 14
-			Superheavy: 9
-			Wood: 16
-	Warhead@ShieldHit:
-		Condition: shieldhit
-		Range: 1250
-		ValidTargets: Shielded
-		Duration: 8
-	Warhead@ShieldHitEffect:
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-	Warhead@Smudge:
-		InvalidTargets: Vehicle, Structure, wall
-MutHFlamer:
-	Inherits@collapsewh: ^Warhead_Flame_Heavy
-	Inherits: ^Effect_Flame_Heavy
-	-Warhead@Glow:
-	ReloadDelay: 65
-	Range: 2425
-	Report: flamtnk1.aud
-	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		Damage: 10
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
-		Damage: 10
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-
-	TargetActorCenter: false
-	Warhead@Flame_Heavy:
-		Damage: 40000
-		PercentageScale: 0
-	InvalidTargets: wall
-	Projectile: Bullet
-		Speed: 3000
-	Warhead@HeavyFlameWeaponPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		Falloff: 111, 33, 11, 3
-		Spread: 500
-		UpdatesUnitStatistics: false
-		ValidTargets: Ground, Water
-		Versus:
-			Bomber: 12
-			Concrete: 20
-			Fighter: 13
-			Flak: 24
-			HAZMAT: 25
-			Heavy: 15
-			Helicopter: 11
-			Heroic: 22
-			Light: 17
-			Medium: 16
-			None: 25
-			Plate: 23
-			Scout: 18
-			Shield: 35
-			Spaceship: 10
-			Steel: 19
-			Superheavy: 14
-			Wood: 21
-	Warhead@MediumFlameWeaponPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		Falloff: 111, 33, 11, 3
-		Spread: 375
-		UpdatesUnitStatistics: false
-		ValidTargets: Ground, Water
-		Versus:
-			Bomber: 7
-			Concrete: 15
-			Fighter: 8
-			Flak: 19
-			Heavy: 10
-			Helicopter: 6
-			Heroic: 17
-			Light: 12
-			Medium: 11
-			None: 20
-			Plate: 18
-			Scout: 13
-			Shield: 25
-			Spaceship: 5
-			Steel: 14
-			Superheavy: 9
-			Wood: 16
-MutHFlamerChem:
-	Inherits@collapsewh: ^Warhead_Chemical_Heavy
-	Inherits@fx: ^ts_forgotten_muthflamerchem
-	-Warhead@Glow:
-	-Warhead@EffectAir:
-	-TargetActorCenter:
-	ReloadDelay: 65
-	Range: 2425
-	Report: flamtnk1.aud
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 20000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		Damage: 10
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 20000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
-		Damage: 10
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 10000
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 5
 	Warhead@HeavyChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2025,6 +2126,31 @@ MutHFlamerChem:
 		Damage: 10000
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 5
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		Falloff: 99, 66, 33
+		Spread: 525
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		PhysicalStates:
+			Corrosion: 100
+		Versus:
+			Bomber: 11
+			Concrete: 15
+			Fighter: 10
+			Flak: 22
+			Heavy: 23
+			Helicopter: 12
+			Heroic: 18
+			Light: 19
+			Medium: 21
+			None: 20
+			Plate: 24
+			Scout: 17
+			Shield: 35
+			Spaceship: 13
+			Steel: 16
+			Superheavy: 25
+			Wood: 14
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 4
 		Duration: 50
@@ -2057,107 +2183,6 @@ MutHFlamerChem:
 		InternalOwner: Neutral
 		OwnerType: InternalName
 		Range: 1
-	Warhead@HeavyChemicalWeaponPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		Falloff: 99, 66, 33
-		Spread: 525
-		UpdatesUnitStatistics: false
-		ValidTargets: Ground, Water
-		PhysicalStates:
-			Corrosion: 100
-		Versus:
-			Bomber: 11
-			Concrete: 15
-			Fighter: 10
-			Flak: 22
-			Heavy: 23
-			Helicopter: 12
-			Heroic: 18
-			Light: 19
-			Medium: 21
-			None: 20
-			Plate: 24
-			Scout: 17
-			Shield: 35
-			Spaceship: 13
-			Steel: 16
-			Superheavy: 25
-			Wood: 14
-	Warhead@HeavyFlameWeaponPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		Falloff: 111, 33, 11, 3
-		Spread: 500
-		UpdatesUnitStatistics: false
-		ValidTargets: Ground, Water
-		Versus:
-			Bomber: 12
-			Concrete: 20
-			Fighter: 13
-			Flak: 24
-			HAZMAT: 25
-			Heavy: 15
-			Helicopter: 11
-			Heroic: 22
-			Light: 17
-			Medium: 16
-			None: 25
-			Plate: 23
-			Scout: 18
-			Shield: 35
-			Spaceship: 10
-			Steel: 19
-			Superheavy: 14
-			Wood: 21
-	Warhead@MediumChemicalWeaponPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		Falloff: 99, 66, 33
-		Spread: 350
-		UpdatesUnitStatistics: false
-		ValidTargets: Ground, Water
-		PhysicalStates:
-			Corrosion: 100
-		Versus:
-			Bomber: 6
-			Concrete: 10
-			Fighter: 5
-			Flak: 17
-			Heavy: 18
-			Helicopter: 7
-			Heroic: 13
-			Light: 14
-			Medium: 16
-			None: 15
-			Plate: 19
-			Scout: 12
-			Shield: 25
-			Spaceship: 8
-			Steel: 11
-			Superheavy: 20
-			Wood: 9
-	Warhead@MediumFlameWeaponPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		Falloff: 111, 33, 11, 3
-		Spread: 375
-		UpdatesUnitStatistics: false
-		ValidTargets: Ground, Water
-		Versus:
-			Bomber: 7
-			Concrete: 15
-			Fighter: 8
-			Flak: 19
-			Heavy: 10
-			Helicopter: 6
-			Heroic: 17
-			Light: 12
-			Medium: 11
-			None: 20
-			Plate: 18
-			Scout: 13
-			Shield: 25
-			Spaceship: 5
-			Steel: 14
-			Superheavy: 9
-			Wood: 16
 	Warhead@ShieldHitEffect:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 	Warhead@Smudge:
@@ -2199,30 +2224,60 @@ TSFiendShardUP:
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		Falloff: 99, 66, 33
+		Spread: 175
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+		Versus:
+			Bomber: 2
+			Concrete: 6
+			Fighter: 1
+			Flak: 13
+			Heavy: 14
+			Helicopter: 3
+			Heroic: 9
+			Light: 10
+			Medium: 12
+			None: 11
+			Plate: 15
+			Scout: 8
+			Shield: 17
+			Spaceship: 4
+			Steel: 7
+			Superheavy: 16
+			Wood: 5
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		Falloff: 99, 66, 33
+		Spread: 350
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+		Versus:
+			Bomber: 6
+			Concrete: 10
+			Fighter: 5
+			Flak: 17
+			Heavy: 18
+			Helicopter: 7
+			Heroic: 13
+			Light: 14
+			Medium: 16
+			None: 15
+			Plate: 19
+			Scout: 12
+			Shield: 25
+			Spaceship: 8
+			Steel: 11
+			Superheavy: 20
+			Wood: 9
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
-	Warhead@Cloud: SpawnSmokeParticle
-		Count: 1
-		Duration: 50
-		Speed: 12, 25
-		TurnRate: 12
-		Image: tsveinsmoke
-		Sequences: idle
-		Palette: player
-		Weapon: TSSmoke
-		InvalidTargets: Water
-
-	TargetActorCenter: false
-	Warhead@Chemical_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 18000
-		PercentageScale: 0
-	InvalidTargets: wall
-	Warhead@HeavyChemicalWeaponPercentage:
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		Falloff: 99, 66, 33
 		Spread: 525
@@ -2247,56 +2302,23 @@ TSFiendShardUP:
 			Steel: 16
 			Superheavy: 25
 			Wood: 14
-	Warhead@LightChemicalWeaponPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		Falloff: 99, 66, 33
-		Spread: 175
-		UpdatesUnitStatistics: false
-		PhysicalStates:
-			Corrosion: 100
-		Versus:
-			Bomber: 2
-			Concrete: 6
-			Fighter: 1
-			Flak: 13
-			Heavy: 14
-			Helicopter: 3
-			Heroic: 9
-			Light: 10
-			Medium: 12
-			None: 11
-			Plate: 15
-			Scout: 8
-			Shield: 17
-			Spaceship: 4
-			Steel: 7
-			Superheavy: 16
-			Wood: 5
-	Warhead@MediumChemicalWeaponPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		Falloff: 99, 66, 33
-		Spread: 350
-		UpdatesUnitStatistics: false
-		PhysicalStates:
-			Corrosion: 100
-		Versus:
-			Bomber: 6
-			Concrete: 10
-			Fighter: 5
-			Flak: 17
-			Heavy: 18
-			Helicopter: 7
-			Heroic: 13
-			Light: 14
-			Medium: 16
-			None: 15
-			Plate: 19
-			Scout: 12
-			Shield: 25
-			Spaceship: 8
-			Steel: 11
-			Superheavy: 20
-			Wood: 9
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+
+	TargetActorCenter: false
+	Warhead@Chemical_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 18000
+		PercentageScale: 0
+	InvalidTargets: wall
 TSFiendShardBlue:
 	Inherits@collapsewh: ^Warhead_Chemical_Medium
 	Inherits@fx: ^ts_forgotten_tsfiendshardblue
@@ -2314,29 +2336,12 @@ TSFiendShardBlue:
 		RangeLimit: 33333
 		Image: ra2txgasg
 		TrailImage: blue_smokey
-	Warhead@GrenadePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 3
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 3
-	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 3
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 3
-	Warhead@Chemical_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 24000
-		PercentageScale: 0
-
-	InvalidTargets: wall
-	Projectile:
 		Blockable: false
 		Inaccuracy: 400
 		LaunchAngle: 66
-	Warhead@GrenadePercentage:
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		Falloff: 100, 50, 33, 25, 20
 		Spread: 200
@@ -2359,64 +2364,9 @@ TSFiendShardBlue:
 			Steel: 11
 			Superheavy: 8
 			Wood: 15
-	Warhead@LightChemicalWeaponPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		Falloff: 99, 66, 33
-		Spread: 175
-		UpdatesUnitStatistics: false
-		PhysicalStates:
-			Corrosion: 100
-		Versus:
-			Bomber: 2
-			Concrete: 6
-			Fighter: 1
-			Flak: 13
-			Heavy: 14
-			Helicopter: 3
-			Heroic: 9
-			Light: 10
-			Medium: 12
-			None: 11
-			Plate: 15
-			Scout: 8
-			Shield: 17
-			Spaceship: 4
-			Steel: 7
-			Superheavy: 16
-			Wood: 5
-	Warhead@MediumChemicalWeaponPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		Falloff: 99, 66, 33
-		Spread: 350
-		UpdatesUnitStatistics: false
-		PhysicalStates:
-			Corrosion: 100
-		Versus:
-			Bomber: 6
-			Concrete: 10
-			Fighter: 5
-			Flak: 17
-			Heavy: 18
-			Helicopter: 7
-			Heroic: 13
-			Light: 14
-			Medium: 16
-			None: 15
-			Plate: 19
-			Scout: 12
-			Shield: 25
-			Spaceship: 8
-			Steel: 11
-			Superheavy: 20
-			Wood: 9
-	Warhead@ShieldHit:
-		Condition: shieldhit
-		Range: 1250
-		ValidTargets: Shielded
-		Duration: 8
-	Warhead@ShieldHitEffect:
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-	Warhead@ShrapnelWeaponPercentage:
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		Falloff: 100, 75, 50, 25
 		Spread: 300
@@ -2439,6 +2389,73 @@ TSFiendShardBlue:
 			Steel: 12
 			Superheavy: 9
 			Wood: 18
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 3
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		Falloff: 99, 66, 33
+		Spread: 175
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+		Versus:
+			Bomber: 2
+			Concrete: 6
+			Fighter: 1
+			Flak: 13
+			Heavy: 14
+			Helicopter: 3
+			Heroic: 9
+			Light: 10
+			Medium: 12
+			None: 11
+			Plate: 15
+			Scout: 8
+			Shield: 17
+			Spaceship: 4
+			Steel: 7
+			Superheavy: 16
+			Wood: 5
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 3
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		Falloff: 99, 66, 33
+		Spread: 350
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+		Versus:
+			Bomber: 6
+			Concrete: 10
+			Fighter: 5
+			Flak: 17
+			Heavy: 18
+			Helicopter: 7
+			Heroic: 13
+			Light: 14
+			Medium: 16
+			None: 15
+			Plate: 19
+			Scout: 12
+			Shield: 25
+			Spaceship: 8
+			Steel: 11
+			Superheavy: 20
+			Wood: 9
+	Warhead@Chemical_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 24000
+		PercentageScale: 0
+
+	InvalidTargets: wall
+	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
+		Duration: 8
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 TSFiendShardBlueUP:
 	Inherits@collapsewh: ^Warhead_Chemical_Heavy
 	Inherits@fx: ^ts_forgotten_tsfiendshardblueup
@@ -2455,45 +2472,12 @@ TSFiendShardBlueUP:
 		RangeLimit: 33333
 		Image: ra2txgasg
 		TrailImage: blue_smokey
-	Warhead@GrenadePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 3
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 3
-	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 3
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 3
-	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 3
-	Warhead@HeavyBombPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 3
-	Warhead@Cloud: SpawnSmokeParticle
-		Count: 2
-		Duration: 50
-		Speed: 12, 25
-		TurnRate: 12
-		Image: tsveinsmoke
-		Sequences: idle
-		Palette: player
-		Weapon: TSSmoke
-		InvalidTargets: Water
-	Warhead@Chemical_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 36000
-		PercentageScale: 0
-
-	InvalidTargets: wall
-	Projectile:
 		Blockable: false
 		Inaccuracy: 400
 		LaunchAngle: 66
-	Warhead@GrenadePercentage:
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		Falloff: 100, 50, 33, 25, 20
 		Spread: 200
@@ -2516,7 +2500,115 @@ TSFiendShardBlueUP:
 			Steel: 11
 			Superheavy: 8
 			Wood: 15
-	Warhead@HeavyBombPercentage:
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 3
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Falloff: 100, 75, 50, 25
+		Spread: 300
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 7
+			Concrete: 15
+			Fighter: 8
+			Flak: 16
+			Heavy: 11
+			Helicopter: 6
+			Heroic: 10
+			Light: 17
+			Medium: 14
+			None: 19
+			Plate: 13
+			Scout: 20
+			Shield: 25
+			Spaceship: 5
+			Steel: 12
+			Superheavy: 9
+			Wood: 18
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 3
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		Falloff: 99, 66, 33
+		Spread: 175
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+		Versus:
+			Bomber: 2
+			Concrete: 6
+			Fighter: 1
+			Flak: 13
+			Heavy: 14
+			Helicopter: 3
+			Heroic: 9
+			Light: 10
+			Medium: 12
+			None: 11
+			Plate: 15
+			Scout: 8
+			Shield: 17
+			Spaceship: 4
+			Steel: 7
+			Superheavy: 16
+			Wood: 5
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 3
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		Falloff: 99, 66, 33
+		Spread: 350
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+		Versus:
+			Bomber: 6
+			Concrete: 10
+			Fighter: 5
+			Flak: 17
+			Heavy: 18
+			Helicopter: 7
+			Heroic: 13
+			Light: 14
+			Medium: 16
+			None: 15
+			Plate: 19
+			Scout: 12
+			Shield: 25
+			Spaceship: 8
+			Steel: 11
+			Superheavy: 20
+			Wood: 9
+	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 3
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		Falloff: 99, 66, 33
+		Spread: 525
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+		Versus:
+			Bomber: 11
+			Concrete: 15
+			Fighter: 10
+			Flak: 22
+			Heavy: 23
+			Helicopter: 12
+			Heroic: 18
+			Light: 19
+			Medium: 21
+			None: 20
+			Plate: 24
+			Scout: 17
+			Shield: 35
+			Spaceship: 13
+			Steel: 16
+			Superheavy: 25
+			Wood: 14
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		Falloff: 100, 50, 25, 10, 5
 		Spread: 400
@@ -2539,104 +2631,22 @@ TSFiendShardBlueUP:
 			Steel: 23
 			Superheavy: 14
 			Wood: 25
-	Warhead@HeavyChemicalWeaponPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		Falloff: 99, 66, 33
-		Spread: 525
-		UpdatesUnitStatistics: false
-		PhysicalStates:
-			Corrosion: 100
-		Versus:
-			Bomber: 11
-			Concrete: 15
-			Fighter: 10
-			Flak: 22
-			Heavy: 23
-			Helicopter: 12
-			Heroic: 18
-			Light: 19
-			Medium: 21
-			None: 20
-			Plate: 24
-			Scout: 17
-			Shield: 35
-			Spaceship: 13
-			Steel: 16
-			Superheavy: 25
-			Wood: 14
-	Warhead@LightChemicalWeaponPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		Falloff: 99, 66, 33
-		Spread: 175
-		UpdatesUnitStatistics: false
-		PhysicalStates:
-			Corrosion: 100
-		Versus:
-			Bomber: 2
-			Concrete: 6
-			Fighter: 1
-			Flak: 13
-			Heavy: 14
-			Helicopter: 3
-			Heroic: 9
-			Light: 10
-			Medium: 12
-			None: 11
-			Plate: 15
-			Scout: 8
-			Shield: 17
-			Spaceship: 4
-			Steel: 7
-			Superheavy: 16
-			Wood: 5
-	Warhead@MediumChemicalWeaponPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		Falloff: 99, 66, 33
-		Spread: 350
-		UpdatesUnitStatistics: false
-		PhysicalStates:
-			Corrosion: 100
-		Versus:
-			Bomber: 6
-			Concrete: 10
-			Fighter: 5
-			Flak: 17
-			Heavy: 18
-			Helicopter: 7
-			Heroic: 13
-			Light: 14
-			Medium: 16
-			None: 15
-			Plate: 19
-			Scout: 12
-			Shield: 25
-			Spaceship: 8
-			Steel: 11
-			Superheavy: 20
-			Wood: 9
-	Warhead@ShrapnelWeaponPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		Falloff: 100, 75, 50, 25
-		Spread: 300
-		UpdatesUnitStatistics: false
-		Versus:
-			Bomber: 7
-			Concrete: 15
-			Fighter: 8
-			Flak: 16
-			Heavy: 11
-			Helicopter: 6
-			Heroic: 10
-			Light: 17
-			Medium: 14
-			None: 19
-			Plate: 13
-			Scout: 20
-			Shield: 25
-			Spaceship: 5
-			Steel: 12
-			Superheavy: 9
-			Wood: 18
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 2
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+	Warhead@Chemical_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 36000
+		PercentageScale: 0
+
+	InvalidTargets: wall
 TSZombieAttack:
 	Inherits@wh: ^Warhead_Melee_Medium
 	Inherits@proj: ^Projectile_InstantHit
@@ -2667,10 +2677,85 @@ TSChemsprayUP:
 	Range: 3183
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 16
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		Falloff: 99, 66, 33
+		Spread: 175
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		PhysicalStates:
+			Corrosion: 100
+		Versus:
+			Bomber: 2
+			Concrete: 6
+			Fighter: 1
+			Flak: 13
+			Heavy: 14
+			Helicopter: 3
+			Heroic: 9
+			Light: 10
+			Medium: 12
+			None: 11
+			Plate: 15
+			Scout: 8
+			Shield: 17
+			Spaceship: 4
+			Steel: 7
+			Superheavy: 16
+			Wood: 5
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 16
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		Falloff: 99, 66, 33
+		Spread: 350
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		PhysicalStates:
+			Corrosion: 100
+		Versus:
+			Bomber: 6
+			Concrete: 10
+			Fighter: 5
+			Flak: 17
+			Heavy: 18
+			Helicopter: 7
+			Heroic: 13
+			Light: 14
+			Medium: 16
+			None: 15
+			Plate: 19
+			Scout: 12
+			Shield: 25
+			Spaceship: 8
+			Steel: 11
+			Superheavy: 20
+			Wood: 9
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 16
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		Falloff: 99, 66, 33
+		Spread: 525
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		PhysicalStates:
+			Corrosion: 100
+		Versus:
+			Bomber: 11
+			Concrete: 15
+			Fighter: 10
+			Flak: 22
+			Heavy: 23
+			Helicopter: 12
+			Heroic: 18
+			Light: 19
+			Medium: 21
+			None: 20
+			Plate: 24
+			Scout: 17
+			Shield: 35
+			Spaceship: 13
+			Steel: 16
+			Superheavy: 25
+			Wood: 14
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 3
 		Duration: 50
@@ -2690,33 +2775,23 @@ TSChemsprayUP:
 	Projectile: Bullet
 		Speed: 3500
 	Report: flamer2.aud
-	Warhead@HeavyChemicalWeaponPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		Falloff: 99, 66, 33
-		Spread: 525
-		UpdatesUnitStatistics: false
-		ValidTargets: Ground, Water
-		PhysicalStates:
-			Corrosion: 100
-		Versus:
-			Bomber: 11
-			Concrete: 15
-			Fighter: 10
-			Flak: 22
-			Heavy: 23
-			Helicopter: 12
-			Heroic: 18
-			Light: 19
-			Medium: 21
-			None: 20
-			Plate: 24
-			Scout: 17
-			Shield: 35
-			Spaceship: 13
-			Steel: 16
-			Superheavy: 25
-			Wood: 14
-	Warhead@LightChemicalWeaponPercentage:
+TSVisceroidSpray:
+	Inherits@wh: ^Warhead_Chemical_Light
+	Inherits@proj: ^Projectile_Chem_Light
+	Inherits@fx: ^Effect_Chem_Light
+	Report: flamer2.aud
+	ReloadDelay: 25
+	Range: 1618
+	Warhead@Chemical_Light:
+		Damage: 10000
+TSVisceroidSprayUP:
+	Inherits@collapsewh: ^Warhead_Chemical_Heavy
+	Inherits: ^Effect_Chem_Heavy
+	-Warhead@Glow:
+	ReloadDelay: 25
+	Range: 1618
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
+		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		Falloff: 99, 66, 33
 		Spread: 175
@@ -2742,7 +2817,8 @@ TSChemsprayUP:
 			Steel: 7
 			Superheavy: 16
 			Wood: 5
-	Warhead@MediumChemicalWeaponPercentage:
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		Falloff: 99, 66, 33
 		Spread: 350
@@ -2768,27 +2844,33 @@ TSChemsprayUP:
 			Steel: 11
 			Superheavy: 20
 			Wood: 9
-TSVisceroidSpray:
-	Inherits@wh: ^Warhead_Chemical_Light
-	Inherits@proj: ^Projectile_Chem_Light
-	Inherits@fx: ^Effect_Chem_Light
-	Report: flamer2.aud
-	ReloadDelay: 25
-	Range: 1618
-	Warhead@Chemical_Light:
-		Damage: 10000
-TSVisceroidSprayUP:
-	Inherits@collapsewh: ^Warhead_Chemical_Heavy
-	Inherits: ^Effect_Chem_Heavy
-	-Warhead@Glow:
-	ReloadDelay: 25
-	Range: 1618
-	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 5
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 5
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 5
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		Falloff: 99, 66, 33
+		Spread: 525
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water
+		PhysicalStates:
+			Corrosion: 100
+		Versus:
+			Bomber: 11
+			Concrete: 15
+			Fighter: 10
+			Flak: 22
+			Heavy: 23
+			Helicopter: 12
+			Heroic: 18
+			Light: 19
+			Medium: 21
+			None: 20
+			Plate: 24
+			Scout: 17
+			Shield: 35
+			Spaceship: 13
+			Steel: 16
+			Superheavy: 25
+			Wood: 14
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
 		Duration: 50
@@ -2808,84 +2890,6 @@ TSVisceroidSprayUP:
 	Projectile: Bullet
 		Speed: 3500
 	Report: flamer2.aud
-	Warhead@HeavyChemicalWeaponPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		Falloff: 99, 66, 33
-		Spread: 525
-		UpdatesUnitStatistics: false
-		ValidTargets: Ground, Water
-		PhysicalStates:
-			Corrosion: 100
-		Versus:
-			Bomber: 11
-			Concrete: 15
-			Fighter: 10
-			Flak: 22
-			Heavy: 23
-			Helicopter: 12
-			Heroic: 18
-			Light: 19
-			Medium: 21
-			None: 20
-			Plate: 24
-			Scout: 17
-			Shield: 35
-			Spaceship: 13
-			Steel: 16
-			Superheavy: 25
-			Wood: 14
-	Warhead@LightChemicalWeaponPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		Falloff: 99, 66, 33
-		Spread: 175
-		UpdatesUnitStatistics: false
-		ValidTargets: Ground, Water
-		PhysicalStates:
-			Corrosion: 100
-		Versus:
-			Bomber: 2
-			Concrete: 6
-			Fighter: 1
-			Flak: 13
-			Heavy: 14
-			Helicopter: 3
-			Heroic: 9
-			Light: 10
-			Medium: 12
-			None: 11
-			Plate: 15
-			Scout: 8
-			Shield: 17
-			Spaceship: 4
-			Steel: 7
-			Superheavy: 16
-			Wood: 5
-	Warhead@MediumChemicalWeaponPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		Falloff: 99, 66, 33
-		Spread: 350
-		UpdatesUnitStatistics: false
-		ValidTargets: Ground, Water
-		PhysicalStates:
-			Corrosion: 100
-		Versus:
-			Bomber: 6
-			Concrete: 10
-			Fighter: 5
-			Flak: 17
-			Heavy: 18
-			Helicopter: 7
-			Heroic: 13
-			Light: 14
-			Medium: 16
-			None: 15
-			Plate: 19
-			Scout: 12
-			Shield: 25
-			Spaceship: 8
-			Steel: 11
-			Superheavy: 20
-			Wood: 9
 TSCropBomb:
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@fx: ^ts_forgotten_set3
@@ -2964,12 +2968,70 @@ TSMutShotgun:
 		Damage: 24000
 	Warhead@ShotgunGrenadeEnemy:
 		Damage: 4000
-	Warhead@ShotgunGrenadeAlly:
+	Warhead@ShotgunGrenadeAlly: AreaDamage
 		InvalidTargets: Air
 		Damage: 2000
-	Warhead@ShotgunShrapnelAlly:
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 300
+		Falloff: 100, 50, 20, 0
+		Versus:
+			HAZMAT: 71
+			COMPOSITE: 99
+			BLAST: 40
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 147
+			Wood: 150
+			Scout: 144
+			Light: 129
+			Medium: 128
+			None: 127
+			Heavy: 111
+			Steel: 107
+			Fighter: 98
+			Concrete: 92
+			Superheavy: 90
+			Flak: 87
+			Plate: 79
+			Heroic: 76
+			Bomber: 75
+			Helicopter: 64
+			Spaceship: 41
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@ShotgunShrapnelAlly: AreaDamage
 		InvalidTargets: Air
 		Damage: 2000
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 300
+		Falloff: 100, 50, 20, 0
+		Versus:
+			HAZMAT: 71
+			COMPOSITE: 99
+			BLAST: 40
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 147
+			Wood: 150
+			Scout: 144
+			Light: 129
+			Medium: 128
+			None: 127
+			Heavy: 111
+			Steel: 107
+			Fighter: 98
+			Concrete: 92
+			Superheavy: 90
+			Flak: 87
+			Plate: 79
+			Heroic: 76
+			Bomber: 75
+			Helicopter: 64
+			Spaceship: 41
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
 	-Warhead@ShotgunGrenadeEnemy:
 
 	Warhead@ShieldHit:
@@ -2979,14 +3041,6 @@ TSMutShotgun:
 		ValidTargets: Shielded
 		InvalidTargets: Air
 	Projectile: Bullet
-	Warhead@GrenadePercentage: AreaDamagePercentage
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-	Warhead@SmallArmsPercentage: AreaDamagePercentage
-	Warhead@ChaingunPercentage: AreaDamagePercentage
-	Warhead@ShotgunGrenadeAlly: AreaDamage
-	Warhead@ShotgunShrapnelAlly: AreaDamage
-	Projectile:
 		Image: 50CAL
 		Speed: 4000
 		Blockable: false
@@ -2998,7 +3052,109 @@ TSMutShotgun:
 		ContrailStartWidth: 40
 		ContrailEndWidth: 80
 		ContrailLength: 8
-	Warhead@ChaingunPercentage:
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 2
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+		InvalidTargets: Air
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 300
+		Damage: 2
+		Falloff: 100, 75, 50, 25
+		Versus:
+			Shield: 25
+			Scout: 20
+			None: 19
+			Wood: 18
+			Light: 17
+			Flak: 16
+			Concrete: 15
+			Medium: 14
+			Plate: 13
+			Steel: 12
+			Heavy: 11
+			Heroic: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+		InvalidTargets: Air
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 75
+		Damage: 2
+		Versus:
+			Shield: 17
+			Superheavy: 16
+			Heavy: 15
+			Medium: 14
+			Light: 13
+			Scout: 12
+			Steel: 11
+			Concrete: 10
+			Wood: 9
+			Plate: 8
+			Flak: 7
+			None: 6
+			Heroic: 5
+			Spaceship: 4
+			Helicopter: 3
+			Bomber: 2
+			Fighter: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+		InvalidTargets: Air
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 50
+		Damage: 2
+		Versus:
+			Shield: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Fighter: 11
+			Wood: 10
+			Light: 9
+			Bomber: 8
+			Steel: 7
+			Medium: 6
+			Helicopter: 5
+			Concrete: 4
+			Heavy: 3
+			Spaceship: 2
+			Superheavy: 1
+		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
+		UpdatesUnitStatistics: false
+		InvalidTargets: Air
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 100
 		Damage: 2
@@ -3028,172 +3184,8 @@ TSMutShotgun:
 	Warhead@Glow:
 		Scale: 0.8
 		FadeFrames: 15
-	Warhead@GrenadePercentage:
-		ValidTargets: Ground, Water
-		Spread: 200
-		Damage: 2
-		Falloff: 100, 50, 33, 25, 20
-		Versus:
-			Shield: 17
-			Scout: 16
-			Wood: 15
-			Light: 14
-			Concrete: 13
-			Medium: 12
-			Steel: 11
-			Heavy: 10
-			None: 9
-			Superheavy: 8
-			Flak: 7
-			Plate: 6
-			Heroic: 5
-			Fighter: 4
-			Bomber: 3
-			Helicopter: 2
-			Spaceship: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		UpdatesUnitStatistics: false
-		InvalidTargets: Air
-	Warhead@ShieldHit:
-		Duration: 4
 	Warhead@ShieldHitEffect:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-	Warhead@ShotgunGrenadeAlly:
-		ValidRelationships: Ally
-		ValidTargets: Ground, Water
-		Spread: 300
-		Falloff: 100, 50, 20, 0
-		Versus:
-			HAZMAT: 71
-			COMPOSITE: 99
-			BLAST: 40
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 147
-			Wood: 150
-			Scout: 144
-			Light: 129
-			Medium: 128
-			None: 127
-			Heavy: 111
-			Steel: 107
-			Fighter: 98
-			Concrete: 92
-			Superheavy: 90
-			Flak: 87
-			Plate: 79
-			Heroic: 76
-			Bomber: 75
-			Helicopter: 64
-			Spaceship: 41
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		UpdatesUnitStatistics: false
-	Warhead@ShotgunShrapnelAlly:
-		ValidRelationships: Ally
-		ValidTargets: Ground, Water
-		Spread: 300
-		Falloff: 100, 50, 20, 0
-		Versus:
-			HAZMAT: 71
-			COMPOSITE: 99
-			BLAST: 40
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 147
-			Wood: 150
-			Scout: 144
-			Light: 129
-			Medium: 128
-			None: 127
-			Heavy: 111
-			Steel: 107
-			Fighter: 98
-			Concrete: 92
-			Superheavy: 90
-			Flak: 87
-			Plate: 79
-			Heroic: 76
-			Bomber: 75
-			Helicopter: 64
-			Spaceship: 41
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		UpdatesUnitStatistics: false
-	Warhead@ShrapnelWeaponPercentage:
-		ValidTargets: Ground, Water
-		Spread: 300
-		Damage: 2
-		Falloff: 100, 75, 50, 25
-		Versus:
-			Shield: 25
-			Scout: 20
-			None: 19
-			Wood: 18
-			Light: 17
-			Flak: 16
-			Concrete: 15
-			Medium: 14
-			Plate: 13
-			Steel: 12
-			Heavy: 11
-			Heroic: 10
-			Superheavy: 9
-			Fighter: 8
-			Bomber: 7
-			Helicopter: 6
-			Spaceship: 5
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		UpdatesUnitStatistics: false
-		InvalidTargets: Air
-	Warhead@SmallArmsPercentage:
-		ValidTargets: Ground, Water, Air
-		Spread: 50
-		Damage: 2
-		Versus:
-			Shield: 17
-			None: 16
-			Flak: 15
-			Plate: 14
-			Heroic: 13
-			Scout: 12
-			Fighter: 11
-			Wood: 10
-			Light: 9
-			Bomber: 8
-			Steel: 7
-			Medium: 6
-			Helicopter: 5
-			Concrete: 4
-			Heavy: 3
-			Spaceship: 2
-			Superheavy: 1
-		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
-		UpdatesUnitStatistics: false
-		InvalidTargets: Air
-	Warhead@TankDestroyerCannonPercentage:
-		ValidTargets: Ground, Water
-		Spread: 75
-		Damage: 2
-		Versus:
-			Shield: 17
-			Superheavy: 16
-			Heavy: 15
-			Medium: 14
-			Light: 13
-			Scout: 12
-			Steel: 11
-			Concrete: 10
-			Wood: 9
-			Plate: 8
-			Flak: 7
-			None: 6
-			Heroic: 5
-			Spaceship: 4
-			Helicopter: 3
-			Bomber: 2
-			Fighter: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		UpdatesUnitStatistics: false
-		InvalidTargets: Air
 TSMutVulcanTurret:
 	Inherits@roleflat: ^Warhead_Bullet_Medium_Flat
 	Inherits@wh: ^Warhead_Bullet_Light

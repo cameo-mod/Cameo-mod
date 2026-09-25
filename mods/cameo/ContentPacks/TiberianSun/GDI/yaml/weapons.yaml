@@ -24,45 +24,16 @@ TS30mm:
 TS30mmRail:
 	Inherits@collapsewh: ^Warhead_Flak_Medium
 	Inherits@collapseextra: ^Warhead_Railgun_ExtraDamage
-	-TargetActorCenter:
 	Inherits@3: ^RailgunWeapon
 	Inherits@fx: ^ts_gdi_ts30mmrail
+	-TargetActorCenter:
 	-Warhead@Glow:
+
 	Projectile: Railgun
 		Duration: 8
 		BeamWidth: 32
 		HelixThickness: 12
 		HelixRadius: 16
-	ReloadDelay: 26
-	Burst: 3
-	Range: 6125
-	BurstDelays: 2
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 2000
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@FlakWeaponPercentage: AreaDamagePercentage
-		Damage: 1
-	Warhead@RailgunWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-
-	-Warhead@MediumMissile:
-	-Warhead@FlakWeapon:
-	-Warhead@RailgunWeapon:
-	-Warhead@RailgunExtraDamage:
-	Warhead@Flak_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 6000
-		PercentageScale: 0
-		FriendlyFireDamage: 56
-		FriendlyFireSpread: 56
-
-	Projectile:
 		Acceleration: 3
 		AllowSnapping: true
 		Arm: 0
@@ -85,30 +56,14 @@ TS30mmRail:
 		TrailImage: smokey
 		TrailInterval: 1
 		VerticalRateOfTurn: 30
-	Warhead@FlakWeaponPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
-		Spread: 125
-		UpdatesUnitStatistics: false
-		ValidTargets: Ground, Water, Air
-		Versus:
-			Bomber: 19
-			Concrete: 6
-			Fighter: 20
-			Flak: 15
-			Heavy: 9
-			Helicopter: 18
-			Heroic: 13
-			Light: 11
-			Medium: 10
-			None: 16
-			Plate: 14
-			Scout: 12
-			Shield: 25
-			Spaceship: 17
-			Steel: 5
-			Superheavy: 8
-			Wood: 7
-	Warhead@MediumMissilePercentage:
+	ReloadDelay: 26
+	Burst: 3
+	Range: 6125
+	BurstDelays: 2
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 2000
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
+		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		Spread: 200
 		UpdatesUnitStatistics: false
@@ -131,6 +86,48 @@ TS30mmRail:
 			Steel: 16
 			Superheavy: 20
 			Wood: 10
+	Warhead@FlakWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		Spread: 125
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water, Air
+		Versus:
+			Bomber: 19
+			Concrete: 6
+			Fighter: 20
+			Flak: 15
+			Heavy: 9
+			Helicopter: 18
+			Heroic: 13
+			Light: 11
+			Medium: 10
+			None: 16
+			Plate: 14
+			Scout: 12
+			Shield: 25
+			Spaceship: 17
+			Steel: 5
+			Superheavy: 8
+			Wood: 7
+	Warhead@RailgunWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+
+	-Warhead@MediumMissile:
+	-Warhead@FlakWeapon:
+	-Warhead@RailgunWeapon:
+	-Warhead@RailgunExtraDamage:
+	Warhead@Flak_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 0
+		FriendlyFireDamage: 56
+		FriendlyFireSpread: 56
 	Warhead@ShieldHit:
 		Condition: shieldhit
 		Range: 1250
@@ -138,11 +135,11 @@ TS30mmRail:
 		Duration: 15
 TS120mmRail:
 	Inherits@finalmain: ^Warhead_Railgun_Heavy_Flat
-	# Inherits: ^TSCannon
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@wh2: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
+	# Inherits: ^TSCannon
 	Report: bigggun1.aud
 	ReloadDelay: 44
 	Range: 6201
@@ -172,11 +169,11 @@ TS120mmTal:
 		Damage: 24000
 TS120mmTalRail:
 	Inherits@finalmain: ^Warhead_Railgun_Heavy_Flat
-	# Inherits: ^TSCannon
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@wh2: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
+	# Inherits: ^TSCannon
 	Report: bigggun1.aud
 	ReloadDelay: 50
 	Range: 6201
@@ -230,7 +227,6 @@ TSRPGTowerRail:
 	-Warhead@RailgunExtraDamage:
 	-Warhead@RailgunWeapon:
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-	Warhead@ShrapnelWeaponPercentage:
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 8
@@ -326,6 +322,22 @@ KodiakCannon:
 	ValidTargets: Ground, Water
 	Projectile: Bullet
 		Speed: 850
+		Acceleration: 2
+		AllowSnapping: true
+		Arm: 0
+		CloseEnough: 400
+		ContrailLength: 0
+		HomingActivationDelay: 3
+		HorizontalRateOfTurn: 20
+		Image: MISSILE
+		Inaccuracy: 150
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		PointDefenseTypes: Missile
+		RangeLimit: 30000
+		TrailImage: smokey
+		TrailInterval: 1
+		VerticalRateOfTurn: 20
 	Warhead@HeavyChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -336,6 +348,30 @@ KodiakCannon:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 4
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		Falloff: 99, 66, 33
+		Spread: 525
+		UpdatesUnitStatistics: false
+		PhysicalStates:
+			Corrosion: 100
+		Versus:
+			Bomber: 11
+			Concrete: 15
+			Fighter: 10
+			Flak: 22
+			Heavy: 23
+			Helicopter: 12
+			Heroic: 18
+			Light: 19
+			Medium: 21
+			None: 20
+			Plate: 24
+			Scout: 17
+			Shield: 35
+			Spaceship: 13
+			Steel: 16
+			Superheavy: 25
+			Wood: 14
 	Warhead@RailgunWeapon: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 8000
@@ -350,6 +386,27 @@ KodiakCannon:
 		InvalidTargets: Air
 		ValidTargets: Ground, Water
 		Damage: 4
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Spread: 300
+		UpdatesUnitStatistics: false
+		Versus:
+			Bomber: 19
+			Concrete: 18
+			Fighter: 16
+			Flak: 12
+			Heavy: 23
+			Helicopter: 22
+			Heroic: 10
+			Light: 17
+			Medium: 20
+			None: 11
+			Plate: 13
+			Scout: 14
+			Shield: 35
+			Spaceship: 24
+			Steel: 21
+			Superheavy: 25
+			Wood: 15
 	Warhead@CannonHE_Heavy:
 		InvalidTargets: Air
 		PercentageScale: 1998
@@ -378,70 +435,6 @@ KodiakCannon:
 		ValidTargets: Shielded
 		InvalidTargets: Air
 	InvalidTargets: wall
-	Projectile:
-		Acceleration: 2
-		AllowSnapping: true
-		Arm: 0
-		CloseEnough: 400
-		ContrailLength: 0
-		HomingActivationDelay: 3
-		HorizontalRateOfTurn: 20
-		Image: MISSILE
-		Inaccuracy: 150
-		MaximumLaunchSpeed: 200
-		MinimumLaunchSpeed: 200
-		PointDefenseTypes: Missile
-		RangeLimit: 30000
-		TrailImage: smokey
-		TrailInterval: 1
-		VerticalRateOfTurn: 20
-	Warhead@HeavyChemicalWeaponPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		Falloff: 99, 66, 33
-		Spread: 525
-		UpdatesUnitStatistics: false
-		PhysicalStates:
-			Corrosion: 100
-		Versus:
-			Bomber: 11
-			Concrete: 15
-			Fighter: 10
-			Flak: 22
-			Heavy: 23
-			Helicopter: 12
-			Heroic: 18
-			Light: 19
-			Medium: 21
-			None: 20
-			Plate: 24
-			Scout: 17
-			Shield: 35
-			Spaceship: 13
-			Steel: 16
-			Superheavy: 25
-			Wood: 14
-	Warhead@HeavyMissilePercentage:
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		Spread: 300
-		UpdatesUnitStatistics: false
-		Versus:
-			Bomber: 19
-			Concrete: 18
-			Fighter: 16
-			Flak: 12
-			Heavy: 23
-			Helicopter: 22
-			Heroic: 10
-			Light: 17
-			Medium: 20
-			None: 11
-			Plate: 13
-			Scout: 14
-			Shield: 35
-			Spaceship: 24
-			Steel: 21
-			Superheavy: 25
-			Wood: 15
 KodiakCannonSonic:
 	Inherits@proj: ^Projectile_Sonic_Shell
 	Inherits@fx: ^Effect_Sonic_Shell
@@ -734,47 +727,12 @@ TSHoverMissile:
 	BurstDelays: 8
 	Range: 8159
 	Report: hovrmis1.aud
+
 	Projectile: Missile
 		RangeLimit: 22c512
 		HorizontalRateOfTurn: 20
 		Inaccuracy: 32
 		VerticalRateOfTurn: 12
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@FlakWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	-Warhead@FlakWeapon:
-	-Warhead@MediumMissile:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	Warhead@MissileAP_Medium: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 12000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PercentageScale: 0
-		PercentageSpread: 50
-
-	Projectile:
 		Acceleration: 3
 		AllowSnapping: true
 		Arm: 0
@@ -795,9 +753,12 @@ TSHoverMissile:
 		Speed: 500
 		TrailImage: smokey
 		TrailInterval: 1
-	Warhead@Concrete:
-		Damage: 175
-	Warhead@FlakWeaponPercentage:
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		Spread: 125
 		UpdatesUnitStatistics: false
@@ -819,7 +780,12 @@ TSHoverMissile:
 			Steel: 5
 			Superheavy: 8
 			Wood: 7
-	Warhead@MediumMissilePercentage:
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		Spread: 200
 		UpdatesUnitStatistics: false
@@ -841,12 +807,15 @@ TSHoverMissile:
 			Steel: 16
 			Superheavy: 20
 			Wood: 10
-	Warhead@ShieldHit:
-		Condition: shieldhit
-		Range: 1250
-		ValidTargets: Shielded
-		Duration: 12
-	Warhead@ShrapnelWeaponPercentage:
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		Falloff: 100, 75, 50, 25
 		Spread: 300
@@ -869,6 +838,26 @@ TSHoverMissile:
 			Steel: 12
 			Superheavy: 9
 			Wood: 18
+	-Warhead@FlakWeapon:
+	-Warhead@MediumMissile:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	Warhead@MissileAP_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 0
+		PercentageSpread: 50
+	Warhead@Concrete:
+		Damage: 175
+	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
+		Duration: 12
 TSDestroyerMissiles:
 	Inherits@missilerole: ^Warhead_MissileAP_Medium
 	Inherits@fx: ^ts_gdi_set17
@@ -879,47 +868,12 @@ TSDestroyerMissiles:
 	BurstDelays: 4
 	Range: 8159
 	Report: hovrmis1.aud
+
 	Projectile: Missile
 		RangeLimit: 22c512
 		HorizontalRateOfTurn: 20
 		Inaccuracy: 32
 		VerticalRateOfTurn: 12
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@FlakWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	-Warhead@FlakWeapon:
-	-Warhead@MediumMissile:
-	-Warhead@ShrapnelWeapon:
-	-Warhead@ShrapnelWeaponFriendlyFire:
-	Warhead@MissileAP_Medium: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 12000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PercentageScale: 0
-		PercentageSpread: 50
-
-	Projectile:
 		Acceleration: 3
 		AllowSnapping: true
 		Arm: 0
@@ -940,9 +894,12 @@ TSDestroyerMissiles:
 		Speed: 500
 		TrailImage: smokey
 		TrailInterval: 1
-	Warhead@Concrete:
-		Damage: 175
-	Warhead@FlakWeaponPercentage:
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 		Spread: 125
 		UpdatesUnitStatistics: false
@@ -964,7 +921,12 @@ TSDestroyerMissiles:
 			Steel: 5
 			Superheavy: 8
 			Wood: 7
-	Warhead@MediumMissilePercentage:
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		Spread: 200
 		UpdatesUnitStatistics: false
@@ -986,12 +948,15 @@ TSDestroyerMissiles:
 			Steel: 16
 			Superheavy: 20
 			Wood: 10
-	Warhead@ShieldHit:
-		Condition: shieldhit
-		Range: 1250
-		ValidTargets: Shielded
-		Duration: 12
-	Warhead@ShrapnelWeaponPercentage:
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		Falloff: 100, 75, 50, 25
 		Spread: 300
@@ -1014,6 +979,26 @@ TSDestroyerMissiles:
 			Steel: 12
 			Superheavy: 9
 			Wood: 18
+	-Warhead@FlakWeapon:
+	-Warhead@MediumMissile:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	Warhead@MissileAP_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 0
+		PercentageSpread: 50
+	Warhead@Concrete:
+		Damage: 175
+	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
+		Duration: 12
 TSMammothTusk2_AA:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -1072,16 +1057,84 @@ TSMammothTusk2II_AA:
 		PercentageScale: 10000
 		PercentageSpread: 50
 
+^ts_gdi_tshellfiresonic:
+	Inherits: ^Effect_Sonic_Medium
+	Warhead@Concrete: DamagesConcrete
+		Damage: 150
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: blue_building_napalm
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		InvalidTargets: Ship, Structure, Bridge
+		ValidTargets: Water, Underwater
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		FadeFrames: 10
+		Scale: 0.55
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
 TSHellfireSonic:
-	Inherits: TSHellfire
 	Inherits@proj: ^Projectile_TS_Missile_Medium
-	Inherits@fx: ^Effect_Sonic_Medium
+	Inherits@fx: ^ts_gdi_tshellfiresonic
 	Inherits@sonicfamily: ^Warhead_MissileSonic_Medium
+	ValidTargets: Ground, Water, Air
 	ReloadDelay: 32
 	Range: 6144
+	TargetActorCenter: true
+	Projectile: Missile
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		Inaccuracy: 181
+		Image: DRAGON
+		Shadow: true
+		HorizontalRateOfTurn: 40
+		VerticalRateOfTurn: 40
+		TrailImage: ts_small_smoke_trail
+		TrailInterval: 1
+		ContrailLength: 0
+		MaximumLaunchSpeed: 543
+		MinimumLaunchSpeed: 301
+		Speed: 400
+		CloseEnough: 200
+		Acceleration: 3
+		HomingActivationDelay: 2
+		RangeLimit: 15360
+		PointDefenseTypes: Missile
+		TerrainHeightAware: true
+		CruiseAltitude: 6000
+		MinimumLaunchAngle: 300
+		MaximumLaunchAngle: 300
+		Palette: ra
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 8
+		Range: 1250
+		ValidTargets: Shielded
 	Report: orcamis1.aud
-	ValidTargets: Ground, Water, Air
-	-Warhead@MissileAP_Heavy:
 	Warhead@MissileSonic_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 42000
@@ -1109,16 +1162,84 @@ TSZoneHellfire:
 	Warhead@MissileAP_Heavy: AreaDamage
 		FriendlyFireDamage: 25
 		Damage: 24000
+^ts_gdi_tszonehellfiresonic:
+	Inherits: ^Effect_Sonic_Heavy
+	Warhead@Concrete: DamagesConcrete
+		Damage: 150
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: blue_building
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		InvalidTargets: Ship, Structure, Bridge
+		ValidTargets: Water, Underwater
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		FadeFrames: 15
+		Scale: 0.8
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
 TSZoneHellfireSonic:
-	Inherits: TSZoneHellfire
 	Inherits@proj: ^Projectile_TS_Missile_Heavy
-	Inherits@fx: ^Effect_Sonic_Heavy
+	Inherits@fx: ^ts_gdi_tszonehellfiresonic
 	Inherits@sonicfamily: ^Warhead_MissileSonic_Heavy
+	ValidTargets: Ground, Water, Air
 	ReloadDelay: 28
 	Range: 6138
+	TargetActorCenter: true
+	Projectile: Missile
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		Inaccuracy: 128
+		Image: DRAGON
+		Shadow: true
+		HorizontalRateOfTurn: 10
+		VerticalRateOfTurn: 40
+		TrailImage: ts_large_smoke_trail
+		TrailInterval: 1
+		ContrailLength: 0
+		MaximumLaunchSpeed: 213
+		MinimumLaunchSpeed: 301
+		Speed: 400
+		CloseEnough: 200
+		Acceleration: 3
+		HomingActivationDelay: 2
+		RangeLimit: 15360
+		PointDefenseTypes: Missile
+		TerrainHeightAware: true
+		CruiseAltitude: 6000
+		MinimumLaunchAngle: 300
+		MaximumLaunchAngle: 300
+		Palette: ra
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
 	Report: orcamis1.aud
-	ValidTargets: Ground, Water, Air
-	-Warhead@MissileAP_Heavy:
 	Warhead@MissileSonic_Heavy: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 41000
@@ -1246,12 +1367,70 @@ TSShotgun:
 		Damage: 24000
 	Warhead@ShotgunGrenadeEnemy:
 		Damage: 4000
-	Warhead@ShotgunGrenadeAlly:
+	Warhead@ShotgunGrenadeAlly: AreaDamage
 		InvalidTargets: Air
 		Damage: 2000
-	Warhead@ShotgunShrapnelAlly:
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 300
+		Falloff: 100, 50, 20, 0
+		Versus:
+			HAZMAT: 71
+			COMPOSITE: 99
+			BLAST: 40
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 147
+			Wood: 150
+			Scout: 144
+			Light: 129
+			Medium: 128
+			None: 127
+			Heavy: 111
+			Steel: 107
+			Fighter: 98
+			Concrete: 92
+			Superheavy: 90
+			Flak: 87
+			Plate: 79
+			Heroic: 76
+			Bomber: 75
+			Helicopter: 64
+			Spaceship: 41
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@ShotgunShrapnelAlly: AreaDamage
 		InvalidTargets: Air
 		Damage: 2000
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 300
+		Falloff: 100, 50, 20, 0
+		Versus:
+			HAZMAT: 71
+			COMPOSITE: 99
+			BLAST: 40
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 147
+			Wood: 150
+			Scout: 144
+			Light: 129
+			Medium: 128
+			None: 127
+			Heavy: 111
+			Steel: 107
+			Fighter: 98
+			Concrete: 92
+			Superheavy: 90
+			Flak: 87
+			Plate: 79
+			Heroic: 76
+			Bomber: 75
+			Helicopter: 64
+			Spaceship: 41
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
 	-Warhead@ShotgunGrenadeEnemy:
 
 	Warhead@ShieldHit:
@@ -1261,14 +1440,6 @@ TSShotgun:
 		ValidTargets: Shielded
 		InvalidTargets: Air
 	Projectile: Bullet
-	Warhead@GrenadePercentage: AreaDamagePercentage
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-	Warhead@SmallArmsPercentage: AreaDamagePercentage
-	Warhead@ChaingunPercentage: AreaDamagePercentage
-	Warhead@ShotgunGrenadeAlly: AreaDamage
-	Warhead@ShotgunShrapnelAlly: AreaDamage
-	Projectile:
 		Image: 50CAL
 		Speed: 4000
 		Blockable: false
@@ -1280,7 +1451,109 @@ TSShotgun:
 		ContrailStartWidth: 40
 		ContrailEndWidth: 80
 		ContrailLength: 8
-	Warhead@ChaingunPercentage:
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 2
+		Falloff: 100, 50, 33, 25, 20
+		Versus:
+			Shield: 17
+			Scout: 16
+			Wood: 15
+			Light: 14
+			Concrete: 13
+			Medium: 12
+			Steel: 11
+			Heavy: 10
+			None: 9
+			Superheavy: 8
+			Flak: 7
+			Plate: 6
+			Heroic: 5
+			Fighter: 4
+			Bomber: 3
+			Helicopter: 2
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+		InvalidTargets: Air
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 300
+		Damage: 2
+		Falloff: 100, 75, 50, 25
+		Versus:
+			Shield: 25
+			Scout: 20
+			None: 19
+			Wood: 18
+			Light: 17
+			Flak: 16
+			Concrete: 15
+			Medium: 14
+			Plate: 13
+			Steel: 12
+			Heavy: 11
+			Heroic: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+		InvalidTargets: Air
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water
+		Spread: 75
+		Damage: 2
+		Versus:
+			Shield: 17
+			Superheavy: 16
+			Heavy: 15
+			Medium: 14
+			Light: 13
+			Scout: 12
+			Steel: 11
+			Concrete: 10
+			Wood: 9
+			Plate: 8
+			Flak: 7
+			None: 6
+			Heroic: 5
+			Spaceship: 4
+			Helicopter: 3
+			Bomber: 2
+			Fighter: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+		InvalidTargets: Air
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 50
+		Damage: 2
+		Versus:
+			Shield: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Fighter: 11
+			Wood: 10
+			Light: 9
+			Bomber: 8
+			Steel: 7
+			Medium: 6
+			Helicopter: 5
+			Concrete: 4
+			Heavy: 3
+			Spaceship: 2
+			Superheavy: 1
+		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
+		UpdatesUnitStatistics: false
+		InvalidTargets: Air
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 100
 		Damage: 2
@@ -1310,172 +1583,8 @@ TSShotgun:
 	Warhead@Glow:
 		Scale: 0.8
 		FadeFrames: 15
-	Warhead@GrenadePercentage:
-		ValidTargets: Ground, Water
-		Spread: 200
-		Damage: 2
-		Falloff: 100, 50, 33, 25, 20
-		Versus:
-			Shield: 17
-			Scout: 16
-			Wood: 15
-			Light: 14
-			Concrete: 13
-			Medium: 12
-			Steel: 11
-			Heavy: 10
-			None: 9
-			Superheavy: 8
-			Flak: 7
-			Plate: 6
-			Heroic: 5
-			Fighter: 4
-			Bomber: 3
-			Helicopter: 2
-			Spaceship: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		UpdatesUnitStatistics: false
-		InvalidTargets: Air
-	Warhead@ShieldHit:
-		Duration: 4
 	Warhead@ShieldHitEffect:
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-	Warhead@ShotgunGrenadeAlly:
-		ValidRelationships: Ally
-		ValidTargets: Ground, Water
-		Spread: 300
-		Falloff: 100, 50, 20, 0
-		Versus:
-			HAZMAT: 71
-			COMPOSITE: 99
-			BLAST: 40
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 147
-			Wood: 150
-			Scout: 144
-			Light: 129
-			Medium: 128
-			None: 127
-			Heavy: 111
-			Steel: 107
-			Fighter: 98
-			Concrete: 92
-			Superheavy: 90
-			Flak: 87
-			Plate: 79
-			Heroic: 76
-			Bomber: 75
-			Helicopter: 64
-			Spaceship: 41
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		UpdatesUnitStatistics: false
-	Warhead@ShotgunShrapnelAlly:
-		ValidRelationships: Ally
-		ValidTargets: Ground, Water
-		Spread: 300
-		Falloff: 100, 50, 20, 0
-		Versus:
-			HAZMAT: 71
-			COMPOSITE: 99
-			BLAST: 40
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 147
-			Wood: 150
-			Scout: 144
-			Light: 129
-			Medium: 128
-			None: 127
-			Heavy: 111
-			Steel: 107
-			Fighter: 98
-			Concrete: 92
-			Superheavy: 90
-			Flak: 87
-			Plate: 79
-			Heroic: 76
-			Bomber: 75
-			Helicopter: 64
-			Spaceship: 41
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		UpdatesUnitStatistics: false
-	Warhead@ShrapnelWeaponPercentage:
-		ValidTargets: Ground, Water
-		Spread: 300
-		Damage: 2
-		Falloff: 100, 75, 50, 25
-		Versus:
-			Shield: 25
-			Scout: 20
-			None: 19
-			Wood: 18
-			Light: 17
-			Flak: 16
-			Concrete: 15
-			Medium: 14
-			Plate: 13
-			Steel: 12
-			Heavy: 11
-			Heroic: 10
-			Superheavy: 9
-			Fighter: 8
-			Bomber: 7
-			Helicopter: 6
-			Spaceship: 5
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		UpdatesUnitStatistics: false
-		InvalidTargets: Air
-	Warhead@SmallArmsPercentage:
-		ValidTargets: Ground, Water, Air
-		Spread: 50
-		Damage: 2
-		Versus:
-			Shield: 17
-			None: 16
-			Flak: 15
-			Plate: 14
-			Heroic: 13
-			Scout: 12
-			Fighter: 11
-			Wood: 10
-			Light: 9
-			Bomber: 8
-			Steel: 7
-			Medium: 6
-			Helicopter: 5
-			Concrete: 4
-			Heavy: 3
-			Spaceship: 2
-			Superheavy: 1
-		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
-		UpdatesUnitStatistics: false
-		InvalidTargets: Air
-	Warhead@TankDestroyerCannonPercentage:
-		ValidTargets: Ground, Water
-		Spread: 75
-		Damage: 2
-		Versus:
-			Shield: 17
-			Superheavy: 16
-			Heavy: 15
-			Medium: 14
-			Light: 13
-			Scout: 12
-			Steel: 11
-			Concrete: 10
-			Wood: 9
-			Plate: 8
-			Flak: 7
-			None: 6
-			Heroic: 5
-			Spaceship: 4
-			Helicopter: 3
-			Bomber: 2
-			Fighter: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		UpdatesUnitStatistics: false
-		InvalidTargets: Air
 TSJumpCannon:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Inherits: ^TSRA2FlakWeapon
@@ -1543,19 +1652,59 @@ TSAssaultCannonTal:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
+^ts_gdi_tsassaultcannontalsonic:
+	Inherits: ^Effect_Sonic_Shell
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@Effect: CreateEffect
+		Explosions: blue_med_frag
+		ValidTargets: Ground, Ship
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piffs
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+
 TSAssaultCannonTalSonic:
-	Inherits: TSAssaultCannonTal
 	Inherits@proj: ^Projectile_Sonic_Shell
-	Inherits@fx: ^Effect_Sonic_Shell
+	Inherits@fx: ^ts_gdi_tsassaultcannontalsonic
 	Inherits@sonicfamily: ^Warhead_BulletSonic_Medium
-	Report: 120mmf.aud
+	ValidTargets: Ground, Water, Air
 	ReloadDelay: 45
 	Range: 6520
-	ValidTargets: Ground, Water, Air
+	TargetActorCenter: true
 	Projectile: Bullet
-		Speed: 2000
+		Image: BOMB
 		Inaccuracy: 200
-	-Warhead@Bullet_Medium:
+		FakeBulletNumber: 3
+		FakeBulletSpawnInterval: 2
+		FakeBulletSpeed: 4000
+		FakeBulletInaccuracy: 64
+		ContrailZOffset: 4000
+		ContrailStartColor: 8888FFFF
+		ContrailStartColorAlpha: 136
+		ContrailEndColor: FFFFFF22
+		ContrailEndColorAlpha: 34
+		ContrailStartWidth: 128
+		ContrailEndWidth: 44
+		ContrailLength: 12
+		Speed: 2000
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 4
+		Range: 1250
+		ValidTargets: Shielded
+	Burst: 2
+	BurstDelays: 2
+	Report: 120mmf.aud
 	Warhead@BulletSonic_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
@@ -1612,7 +1761,6 @@ TSVulcanGunSonic:
 		Range: 800
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall
-
 
 KodiakAAGuns:
 	Inherits@wh: ^Warhead_Flak_Medium
@@ -1678,12 +1826,114 @@ TSMechMGII:
 		Damage: 16000
 		ValidTargets: Ground, Water
 TSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
-	Inherits: IonCannon
 	Inherits@fx: ^ts_gdi_tsioncannon
-	Report: tesla1.aud
-	Range: 12288
-	AirThreshold: 8c0
 	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 12288
+	TargetActorCenter: true
+
+	Warhead@Tesla_Super: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Shielded
+		Spread: 1000
+		Damage: 216000
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+		Versus:
+			HAZMAT: 61
+			COMPOSITE: 72
+			BLAST: 98
+			REFLECTOR: 51
+			ARMOR: 70
+			Shield: 400
+			Superheavy: 138
+			Heavy: 130
+			Plate: 126
+			Medium: 124
+			Flak: 122
+			Light: 121
+			None: 118
+			Scout: 116
+			Concrete: 113
+			Heroic: 106
+			Steel: 103
+			Wood: 101
+			Spaceship: 80
+			Helicopter: 60
+			Bomber: 55
+			Fighter: 54
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
+		IntegrityScale: 100
+		PercentageScale: 2000
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 45
+			Superheavy: 30
+			Heroic: 29
+			Heavy: 28
+			Plate: 27
+			Medium: 26
+			Flak: 25
+			Light: 24
+			None: 23
+			Scout: 22
+			Concrete: 21
+			Steel: 20
+			Wood: 19
+			Spaceship: 18
+			Helicopter: 17
+			Bomber: 16
+			Fighter: 15
+		Delay: 0
+	Projectile: LightningZap
+		Image: litning2
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 2000
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 20
+		Range: 1250
+		ValidTargets: Shielded
+	Report: tesla1.aud
+	Warhead@IonCannon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Range: 0, 600, 1400, 2000, 2820
+		Damage: 16000
+		Falloff: 1000, 750, 500, 250, 100
+		AffectsParent: True
+		Delay: 113
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@IonCannonPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 4000
+		Damage: 8
+		AffectsParent: True
+		Delay: 114
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@IonCannonAirPercentage: AreaDamagePercentage
+		ValidTargets: Vehicle, Water, Air
+		Spread: 3000
+		Damage: 50
+		AffectsParent: True
+		Delay: 115
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@GroundFireArea: SpawnActorInArea
+		Actor: groundfire
+		Range: 3
+		Chance: 50
+		ImpactActors: false
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@Distort: HeatDistortion
+		Scale: 1.0
+		FadeFrames: 420
+		FadeInFrames: 0
+	Warhead@Shock: Shockwave
+		Scale: 1.5
+		FadeFrames: 120
+		FadeInFrames: 0
+	AirThreshold: 8c0
 	Warhead@4BeamEff: FireReverseRadius
 		ValidTargets: Ground, Water, Air
 		Weapon: TSIonBeamMini
@@ -1724,22 +1974,6 @@ TSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 		Spread: 6000
 		Damage: 6
 		Delay: 111
-	Warhead@IonCannon: SpreadDamage
-		Range: 0, 600, 1400, 2000, 2820
-		Damage: 16000
-		Delay: 113
-	Warhead@IonCannonPercentage: AreaDamagePercentage
-		Spread: 4000
-		Damage: 8
-		Delay: 114
-	Warhead@IonCannonAirPercentage: AreaDamagePercentage
-		Delay: 115
-	-Warhead@2Smu_impact:
-
-	Warhead@Tesla_Super:
-		Damage: 216000
-	-Warhead@Tesla_Super_ExtraDamage:
-	-Warhead@Tesla_Heavy_ExtraDamage:
 TSIonBeamMini:
 	Inherits: ^TSIonBeam
 	Inherits@fx: ^ts_gdi_tsionbeammini
@@ -1810,6 +2044,7 @@ TSDroppodSpawner:
 		AirThreshold: 8c0
 
 TSDroppod1:
+	Inherits@fx: ^ts_gdi_tsdroppod1
 	Range: 2500
 	Projectile: AthenaProjectile
 		Altitude: 25460
@@ -1828,7 +2063,6 @@ TSDroppod1:
 	# FIRED weapon (E1Droppod) or its projectile, and neither carries one today — so putting it
 	# there would CHANGE behaviour rather than restore it. That is a balance call.
 
-	Inherits@fx: ^ts_gdi_tsdroppod1
 TSDroppod2:
 	Inherits@w71: ^ts_gdi_tsdroppod1
 	Warhead@1: FireShrapnel
@@ -1872,6 +2106,7 @@ TSDroppod4:
 		Altitude: 25460
 	Warhead@Dam: TargetDamage
 E1Droppod:
+	Inherits@fx: ^ts_gdi_e1droppod
 	ValidTargets: Ground, Air
 	InvalidTargets: Water
 	Projectile: Bullet
@@ -1885,7 +2120,6 @@ E1Droppod:
 		ImpactActors: false
 		AirThreshold: 8c0
 
-	Inherits@fx: ^ts_gdi_e1droppod
 E2Droppod:
 	Inherits@w71: ^ts_gdi_e1droppod
 	Warhead@Spawn: SpawnActor

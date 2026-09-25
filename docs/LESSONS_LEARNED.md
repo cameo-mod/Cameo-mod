@@ -158,6 +158,32 @@ Two traps inside that emit:
   (resolved payload differed). Check the whole merged def dict for the new
   name before writing the copy.
 
+- **W7 weapon-parent edges: covering-edge swap is only safe when the child
+  has no pre-existing kind edges** (2026-09-26, ContentPack batch). If the
+  child already carries a `^Warhead_*`/`^Projectile_*`/`^Effect_*` edge (or
+  an fx-pure family edge), adding the parent's covering edge duplicates the
+  kind — W2/W3/W4. Those go to materialization too. When the child has an
+  existing fx edge, the per-weapon family must DERIVE from it and the edge
+  swaps to the family (1 fx edge preserved, no W4).
+- **Materialization freezes resolved `Versus:` tables — a template regen
+  stales them** (2026-09-26, #508 rebase). Inlined `Warhead@X` pins carry the
+  Versus table resolved at emit time; when master regenerated every
+  `^Warhead_*` profile (R16, #506/#507), 33 converted weapons drifted. After
+  any base move, re-verify resolved-identity against the NEW base and re-sync
+  the baked Versus subtrees — never trust the original-base verification.
+- **`Inherits` applies at its FILE POSITION, not "parents first"** — both
+  `miniyaml.resolve` and the engine merge a parent's children into the
+  accumulated state where the Inherits line sits. Emitting materialized
+  pins or a family edge BELOW local pins lets later templates re-override
+  them. Conversely, a `-Key:` cancel sitting BETWEEN two Inherits lines is
+  load-bearing interleaving (kills an early parent's pin so later parents
+  re-provide it) — never hoist inherits across such cancels.
+- **Family-name collision check must scan `effects_*.yaml` and ALL yaml,
+  not just `man.weapons`** — the manifest's weapon list omits effects files,
+  so a weapon-only index misses canonical `^<pk>_<w>` defs there
+  (`^d2k_ordos_autogun_tank_small`, `^ts_gdi_tsioncannon`): emit → duplicate
+  def → S2/W4; fam_exists → partial family missing resolved nodes. Index
+  globally, and when the canonical family is partial, extend it.
 - **W7 weapon-parent edges: covering-edge swap is the WRONG default for
   legacy-bundle parents** (2026-09-24b, W7-remainder batch). Replacing
   `Inherits: ConcreteParent` with the parent's covering `Inherits@wh/proj/fx`

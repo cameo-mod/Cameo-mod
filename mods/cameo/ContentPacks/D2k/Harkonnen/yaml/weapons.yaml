@@ -20,13 +20,82 @@ HarkonnenFlameTurret:
 		PercentageScale: 3183
 		Damage: 25135
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+^d2k_harkonnen_harkonnen_autogunturret:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 200
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: piffs
+		ImpactSounds: kaboom15.aud
+		ValidTargets: Ground, Ship
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactActors: false
+		ImpactSounds: EXPLLG2.WAV
+		ValidTargets: Air
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piffs
+		ImpactSounds: splash9.aud
+		InvalidTargets: Ship, Structure, Bridge
+		ValidTargets: Water, Underwater
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
 harkonnen_autogunturret:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
-	Inherits: ordos_autogunturret
+	Inherits: ^d2k_harkonnen_harkonnen_autogunturret
+	ValidTargets: Ground, Water, Air
 	ReloadDelay: 132
+	Range: 7700
+	TargetActorCenter: true
+	Projectile: Bullet
+		Inaccuracy: 100
+		FakeBulletNumber: 3
+		FakeBulletSpawnInterval: 2
+		FakeBulletSpeed: 4000
+		FakeBulletInaccuracy: 64
+		ContrailZOffset: 4000
+		ContrailStartColor: EECCAA
+		ContrailStartColorAlpha: 136
+		ContrailEndColor: 886644
+		ContrailEndColorAlpha: 34
+		ContrailStartWidth: 40
+		ContrailEndWidth: 80
+		ContrailLength: 0
+		ProjectileStreakLength: 960
+		ProjectileStreakLengthVariation: 96
+		ProjectileStreakWidth: 45
+		ProjectileStreakColor: FFF4C2
+		ProjectileStreakTailWidth: 6
+		ProjectileStreakHeadWidth: 24
+		ProjectileStreakHeadTaperLength: 192
+		ProjectileStreakTailColor: FFB060
+		ProjectileStreakTailColorAlpha: 176
+		Speed: 4000
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 12
+		Range: 1250
+		ValidTargets: Shielded
 	Burst: 26
 	BurstDelays: 2
-	-Warhead@Bullet_Medium:
+	StartBurstReport: autoguntrt.wav
 	Warhead@Bullet_Medium_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
@@ -100,7 +169,6 @@ D2K70mmH:
 	Warhead@CannonHE_Medium:
 		Damage: 10250
 
-
 DevBullet:
 	Inherits@wh: ^Warhead_CannonHE_Heavy_D2K_DevBullet
 	Inherits@proj: ^Projectile_Shell_Heavy_D2K_DevBullet
@@ -112,7 +180,6 @@ DevBullet:
 		Speed: 333
 		Image: doubleblastbullet
 		Palette: d2keffect
-
 
 D2K_Rocket_AA:
 	Inherits: ^D2KMissile
@@ -138,8 +205,8 @@ D2K_Rocket_AA:
 		ValidTargets: Air
 		Damage: 4750
 
-
 PlasmaExplosion:
+	Inherits@fx: ^d2k_harkonnen_plasmaexplosion
 	Warhead@1Dam: SpreadDamage
 		Damage: 20000
 		Spread: 3c0
@@ -154,4 +221,3 @@ PlasmaExplosion:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
 
-	Inherits@fx: ^d2k_harkonnen_plasmaexplosion

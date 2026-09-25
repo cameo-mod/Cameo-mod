@@ -133,6 +133,23 @@ pre-#495 values already stale on master (e.g. meters 318 vs measured 319) —
 re-measure on current master before PR.
 
 ---
+## 2026-09-26 — DAWN: W7 ContentPack batch (97 pack-level edges)
+
+`Agent: DAWN (Devin / SWE-2 Max) · branch devin/dawn/w7-remainder · base a5ae366cc`
+
+The real W7 remainder was pack-level: 97 weapon-parent edges across the
+ContentPack weapon files (D2k 5 packs, SC Protoss/Terran/Zerg, TD GDI/Nod,
+TS GDI/Nod/Forgotten). 36 covering-swapped (clean parents), 60 materialized
+(bundle parents + children with pre-existing kind edges). Ordos `Sound2`
+held — its Atreides split-twin already carries `^d2k_atreides_sound2`, so a
+per-pack family edge would make the merged name 2 fx edges (W4) — parked
+pending the Sound2 split-def ruling.
+
+Verified: 637/637 pack weapons resolved-identical; orphan cancels 0;
+empty warheads 0; D1 0; D2 3636 (< HEAD); S2 5 = HEAD; W7 760→664,
+W4 41→40, W6 442→437 (ratchets lowered). New emitter lessons recorded in
+LESSONS_LEARNED (file-position Inherits semantics, effects_* name
+collisions, interleaved cancels).
 
 ## 2026-09-24b — DAWN: W7 remainder materialization (DAWN file-set, 33 edges)
 

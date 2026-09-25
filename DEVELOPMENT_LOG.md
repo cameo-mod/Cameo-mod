@@ -1,3 +1,21 @@
+## Devin-DAWN — W7 pack batch rebased onto post-wave master (2026-09-26)
+
+Rebase of the W7 ContentPack batch (PR #508) onto master after the merge wave
+landed #497–#500. Old commit `e7c5b60ab` cherry-picked onto `4416e43bd` as
+`9835ec4c4` on `devin/dawn/w7-packs-v2`; only docs append-races conflicted.
+
+**R16 regression trap found:** materialization bakes the resolved `Versus:`
+table into inlined `Warhead@X` nodes — when master's R16 generator regen
+(#506/#507) changed every `^Warhead_*` Versus profile, 33 of the converted
+weapons drifted (stale baked values). Fixed by syncing each materialized
+`Versus` subtree to the new master-resolved values. Any materialization batch
+that survives a Versus regen needs this re-sync — check resolved-identity
+against the NEW base, not the original one.
+
+Re-verified on the new base: 637/637 resolved-identical vs `4416e43bd`,
+orphans 0, empty 0, diamonds 15881=base, D2 3969=base, S2 5=base,
+all W-buckets at/below ratchets (W7 664). Boot-gate PASS (47->47).
+
 ## Devin-NOVA — documentation deep-audit + Knowledge Base v.0.6 (2026-09-24/25)
 
 **Branch:** `devin/nova/docs-deep-audit`. Docs-only pass ordered by the maintainer after
@@ -12588,3 +12606,46 @@ empty warheads 0; dup-keys 3968 = HEAD (0 new); split-defs S2 5 = HEAD
 (pre-existing); weapon-shape all buckets at/below ratchets —
 **W7 804→760, W6 443→442** (baselines lowered in audit_weapon_shape.py).
 
+## 2026-09-26 — W7 ContentPack batch (DAWN)
+
+97 weapon-parent edges across the ContentPack weapon files converted
+(D2k Atreides/Harkonnen/Ixian/Ordos/Shared, SC Protoss/Terran/Zerg,
+TD GDI/Nod, TS GDI/Nod/Forgotten). Two passes:
+
+- **Covering-swap (36)**: parents with clean 3-kind covering got their
+  edge swapped for the covering set — stripped class-template edges
+  (`^MissileWeapon`, `^LaserWeapon`, ...) so pins absorb them instead
+  of inflating W8.
+- **Materialize (60)**: bundle/chain parents and children that already
+  carried kind edges — covering-swap on those would duplicate the kind
+  (W2/W3/W4), so the parent's resolved non-effect payload inlined and
+  effect-typed nodes routed into a per-weapon `^<game>_<pack>_<weapon>`
+  family (deriving from the child's existing fx edge when present).
+
+Held: Ordos `Sound2` — its Atreides split-twin already edges
+`^d2k_atreides_sound2`; giving Ordos its own `^d2k_ordos_sound2` pushes
+the merged name to 2 fx edges (W4). Needs the Sound2 split-def ruling.
+
+New traps hit and fixed:
+- Resolver applies `Inherits` at its FILE POSITION — a family edge or
+  materialized pins emitted below local pins let later templates
+  override them (RashidanGun_upgrade / HMG_Duelist_upgrade / OrniMissile
+  drift). Edge order and block order must be preserved.
+- `fam_name in allnames` misses defs in `effects_*.yaml` (not in
+  man.weapons) — `^d2k_ordos_autogun_tank_small` and
+  `^ts_gdi_tsioncannon` collided; extended the former (it was a partial
+  family), deleted the emitted dup for the latter.
+- Orphan-cancel audit counts CORPUS-WIDE dead cancels incl. nested
+  `Node/-Field` — 66 removed after rematerialize; one live
+  `-Warhead@Effect:` was wrongly cut by a stale-line-number pass and
+  restored (`td_nod_gunturret_turretgunblackmarket`).
+- Dedupe pass hoisted nothing but sibling-folding PLUS the emit order
+  produced blocks with `Inherits` below locals — fixed by re-hoisting;
+  interleaved `-Key:` cancels BETWEEN Inherits lines are load-bearing
+  (`eye_bomberguy`, `SwarmlingShoot` — cancel kills an early parent's
+  pin, later parents re-provide it).
+
+Verified: 637/637 pack-file weapons resolved-identical vs HEAD;
+orphan cancels 0; empty warheads 0; D1 0; D2 3636 (< HEAD 3968);
+S2 5 = HEAD; weapon-shape all buckets at/below ratchets —
+**W7 760→664, W4 41→40, W6 442→437** (baselines lowered).

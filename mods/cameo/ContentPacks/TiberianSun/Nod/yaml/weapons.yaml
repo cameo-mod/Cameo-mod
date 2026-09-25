@@ -1,5 +1,116 @@
+^ts_nod_tsaux155mm:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 250
+	Warhead@Effect1: CreateEffect
+		Explosions: building
+		ImpactSounds: siege_impact.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+	Warhead@Effect2: CreateEffect
+		Delay: 6
+		Explosions: napalm
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@EffectWater: CreateEffect
+		Explosions: large_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Smudge1: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+
 TSAux155mm:
-	Inherits: TS155mm
+	Inherits: ^ts_nod_tsaux155mm
+	ValidTargets: Ground, Water
+	ReloadDelay: 135
+	Range: 13083
+	TargetActorCenter: true
+	Warhead@Concussion_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 350
+		Damage: 60000
+		Falloff: 100, 72, 50, 32, 18, 8, 0
+		Versus:
+			HAZMAT: 67
+			COMPOSITE: 105
+			BLAST: 36
+			REFLECTOR: 70
+			ARMOR: 70
+			Shield: 166
+			None: 181
+			Wood: 176
+			Scout: 171
+			Light: 143
+			Medium: 119
+			Flak: 116
+			Heavy: 117
+			Steel: 113
+			Plate: 95
+			Concrete: 92
+			Heroic: 90
+			Superheavy: 82
+			Fighter: 70
+			Bomber: 63
+			Helicopter: 62
+			Spaceship: 39
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Scout: 20
+			None: 19
+			Wood: 18
+			Light: 17
+			Flak: 16
+			Steel: 15
+			Medium: 14
+			Plate: 13
+			Concrete: 12
+			Heavy: 11
+			Heroic: 10
+			Superheavy: 9
+			Fighter: 8
+			Bomber: 7
+			Helicopter: 6
+			Spaceship: 5
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 15
+		Range: 1250
+		ValidTargets: Shielded
+	MinRange: 2615
+	Projectile: Bullet
+		Speed: 280
+		LaunchAngle: 165
+		ContrailLength: 30
+		ContrailWidth: 0c32
 	Warhead@3: FireShrapnel
 		Weapon: TS155mmFrag
 		Amount: 2
@@ -56,10 +167,10 @@ TSRaiderGrenade:
 TSProton:
 	Inherits@collapsewh: ^Warhead_Laser_Heavy
 	Inherits@collapseextra: ^Warhead_Laser_ExtraDamage
-	-TargetActorCenter:
 	Inherits: ^TSEnergyBlast
 	Inherits@3: ^LaserWeapon
 	Inherits@fx: ^ts_nod_tsproton
+	-TargetActorCenter:
 	Range: 5414
 	Burst: 4
 	BurstDelays: 3
@@ -77,27 +188,6 @@ TSProton:
 		Damage: 15
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 30000
-	Warhead@LaserWeaponPercentage: AreaDamagePercentage
-		Damage: 15
-
-	-Warhead@LaserWeapon:
-	-Warhead@LaserExtraDamage:
-	Warhead@Laser_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 60000
-		PercentageScale: 0
-	InvalidTargets: wall
-	TargetActorCenter: true
-	Warhead@GroundFire: SpawnActor
-	Warhead@GroundFire:
-		Actors: groundfire
-		Range: 1
-		ForceGround: true
-		OwnerType: InternalName
-		InternalOwner: Neutral
-	Warhead@MediumFlameWeaponPercentage:
 		Spread: 375
 		Falloff: 111, 33, 11, 3
 		Versus:
@@ -120,6 +210,25 @@ TSProton:
 			Spaceship: 5
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 30000
+	Warhead@LaserWeaponPercentage: AreaDamagePercentage
+		Damage: 15
+
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
+	Warhead@Laser_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 60000
+		PercentageScale: 0
+	InvalidTargets: wall
+	TargetActorCenter: true
+	Warhead@GroundFire: SpawnActor
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
 
 TSTibBazooka:
 	Inherits@wh: ^Warhead_MissileChem_Light
@@ -223,27 +332,6 @@ TSStankTibTusk:
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
 		TrailImage: spittrail
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		Damage: 5
-		ValidTargets: Ground, Water, Air
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 5
-		ValidTargets: Ground, Water, Air
-	Warhead@CannonHE_Medium:
-		Damage: 10000
-		ValidTargets: Ground, Water, Air
-	Warhead@MediumCannonFriendlyFire: SpreadDamage
-		Damage: 5000
-		ValidTargets: Ground, Water, Air
-	-Warhead@MediumCannonFriendlyFire:
-	Warhead@MissileAP_Medium_Flat:
-		ValidTargets: Ground, Water, Air
-		Damage: 35000
-		PercentageScale: 2855
-	-Warhead@CannonHE_Medium:
-	ValidTargets: Ground, Water, Air
-	InvalidTargets: wall
-	Projectile:
 		Image: DRAGON
 		Speed: 500
 		Arm: 0
@@ -260,7 +348,33 @@ TSStankTibTusk:
 		HomingActivationDelay: 2
 		RangeLimit: 25000
 		PointDefenseTypes: Missile
-	Warhead@MediumChemicalWeaponPercentage:
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
+		Damage: 5
+		ValidTargets: Ground, Water, Air
+		Spread: 200
+		Versus:
+			Shield: 25
+			Superheavy: 20
+			Spaceship: 19
+			Heavy: 18
+			Helicopter: 17
+			Steel: 16
+			Medium: 15
+			Bomber: 14
+			Concrete: 13
+			Light: 12
+			Fighter: 11
+			Wood: 10
+			Scout: 9
+			Plate: 8
+			Flak: 7
+			None: 6
+			Heroic: 5
+		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		Damage: 5
+		ValidTargets: Ground, Water, Air
 		Spread: 350
 		Falloff: 99, 66, 33
 		Versus:
@@ -285,28 +399,20 @@ TSStankTibTusk:
 		UpdatesUnitStatistics: false
 		PhysicalStates:
 			Corrosion: 100
-	Warhead@MediumMissilePercentage:
-		Spread: 200
-		Versus:
-			Shield: 25
-			Superheavy: 20
-			Spaceship: 19
-			Heavy: 18
-			Helicopter: 17
-			Steel: 16
-			Medium: 15
-			Bomber: 14
-			Concrete: 13
-			Light: 12
-			Fighter: 11
-			Wood: 10
-			Scout: 9
-			Plate: 8
-			Flak: 7
-			None: 6
-			Heroic: 5
-		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
-		UpdatesUnitStatistics: false
+	Warhead@CannonHE_Medium:
+		Damage: 10000
+		ValidTargets: Ground, Water, Air
+	Warhead@MediumCannonFriendlyFire: SpreadDamage
+		Damage: 5000
+		ValidTargets: Ground, Water, Air
+	-Warhead@MediumCannonFriendlyFire:
+	Warhead@MissileAP_Medium_Flat:
+		ValidTargets: Ground, Water, Air
+		Damage: 35000
+		PercentageScale: 2855
+	-Warhead@CannonHE_Medium:
+	ValidTargets: Ground, Water, Air
+	InvalidTargets: wall
 	Warhead@ShieldHit:
 		Condition: shieldhit
 		Range: 1250
@@ -421,81 +527,6 @@ TSCommandoShotgun:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		Damage: 4
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		InvalidTargets: Air
-		Damage: 4
-	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-		InvalidTargets: Air
-		Damage: 4
-	Warhead@CannonHE_Medium:
-		InvalidTargets: Air
-		Damage: 48000
-	Warhead@SmallArmsPercentage: AreaDamagePercentage
-		InvalidTargets: Air
-		Damage: 4
-	Warhead@ChaingunPercentage: AreaDamagePercentage
-		InvalidTargets: Air
-		Damage: 4
-	Warhead@ShotgunGrenadeEnemy:
-		Damage: 8000
-	Warhead@ShotgunGrenadeAlly:
-		InvalidTargets: Air
-		Damage: 4000
-	Warhead@ShotgunShrapnelAlly:
-		InvalidTargets: Air
-		Damage: 4000
-	-Warhead@ShotgunGrenadeEnemy:
-
-	Warhead@ShieldHit:
-		Condition: shieldhit
-		Duration: 4
-		Range: 1250
-		ValidTargets: Shielded
-		InvalidTargets: Air
-	Projectile: Bullet
-	Warhead@ShotgunGrenadeAlly: AreaDamage
-	Warhead@ShotgunShrapnelAlly: AreaDamage
-	Projectile:
-		Image: 50CAL
-		Speed: 4000
-		Blockable: false
-		LaunchAngle: 66
-		Inaccuracy: 200
-		ContrailZOffset: 4000
-		ContrailStartColor: EECCAA88
-		ContrailEndColor: 88664422
-		ContrailStartWidth: 40
-		ContrailEndWidth: 80
-		ContrailLength: 8
-	Warhead@ChaingunPercentage:
-		ValidTargets: Ground, Water, Air
-		Spread: 100
-		Versus:
-			Shield: 25
-			None: 20
-			Flak: 19
-			Plate: 18
-			Heroic: 17
-			Scout: 16
-			Fighter: 15
-			Wood: 14
-			Light: 13
-			Bomber: 12
-			Concrete: 11
-			Medium: 10
-			Helicopter: 9
-			Steel: 8
-			Heavy: 7
-			Spaceship: 6
-			Superheavy: 5
-		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
-		UpdatesUnitStatistics: false
-	Warhead@Concrete:
-		Damage: 25
-	Warhead@Glow:
-		Scale: 0.8
-		FadeFrames: 15
-	Warhead@GrenadePercentage:
 		ValidTargets: Ground, Water
 		Spread: 200
 		Falloff: 100, 50, 33, 25, 20
@@ -519,71 +550,9 @@ TSCommandoShotgun:
 			Spaceship: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
-	Warhead@ShieldHit:
-		Duration: 4
-	Warhead@ShieldHitEffect:
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
-	Warhead@ShotgunGrenadeAlly:
-		ValidRelationships: Ally
-		ValidTargets: Ground, Water
-		Spread: 300
-		Falloff: 100, 50, 20, 0
-		Versus:
-			HAZMAT: 71
-			COMPOSITE: 99
-			BLAST: 40
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 147
-			Wood: 150
-			Scout: 144
-			Light: 129
-			Medium: 128
-			None: 127
-			Heavy: 111
-			Steel: 107
-			Fighter: 98
-			Concrete: 92
-			Superheavy: 90
-			Flak: 87
-			Plate: 79
-			Heroic: 76
-			Bomber: 75
-			Helicopter: 64
-			Spaceship: 41
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		UpdatesUnitStatistics: false
-	Warhead@ShotgunShrapnelAlly:
-		ValidRelationships: Ally
-		ValidTargets: Ground, Water
-		Spread: 300
-		Falloff: 100, 50, 20, 0
-		Versus:
-			HAZMAT: 71
-			COMPOSITE: 99
-			BLAST: 40
-			REFLECTOR: 69
-			ARMOR: 70
-			Shield: 147
-			Wood: 150
-			Scout: 144
-			Light: 129
-			Medium: 128
-			None: 127
-			Heavy: 111
-			Steel: 107
-			Fighter: 98
-			Concrete: 92
-			Superheavy: 90
-			Flak: 87
-			Plate: 79
-			Heroic: 76
-			Bomber: 75
-			Helicopter: 64
-			Spaceship: 41
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		UpdatesUnitStatistics: false
-	Warhead@ShrapnelWeaponPercentage:
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		InvalidTargets: Air
+		Damage: 4
 		ValidTargets: Ground, Water
 		Spread: 300
 		Falloff: 100, 75, 50, 25
@@ -607,30 +576,9 @@ TSCommandoShotgun:
 			Spaceship: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
-	Warhead@SmallArmsPercentage:
-		ValidTargets: Ground, Water, Air
-		Spread: 50
-		Versus:
-			Shield: 17
-			None: 16
-			Flak: 15
-			Plate: 14
-			Heroic: 13
-			Scout: 12
-			Fighter: 11
-			Wood: 10
-			Light: 9
-			Bomber: 8
-			Steel: 7
-			Medium: 6
-			Helicopter: 5
-			Concrete: 4
-			Heavy: 3
-			Spaceship: 2
-			Superheavy: 1
-		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
-		UpdatesUnitStatistics: false
-	Warhead@TankDestroyerCannonPercentage:
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		InvalidTargets: Air
+		Damage: 4
 		ValidTargets: Ground, Water
 		Spread: 75
 		Versus:
@@ -653,6 +601,152 @@ TSCommandoShotgun:
 			Fighter: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
+	Warhead@CannonHE_Medium:
+		InvalidTargets: Air
+		Damage: 48000
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
+		InvalidTargets: Air
+		Damage: 4
+		ValidTargets: Ground, Water, Air
+		Spread: 50
+		Versus:
+			Shield: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Fighter: 11
+			Wood: 10
+			Light: 9
+			Bomber: 8
+			Steel: 7
+			Medium: 6
+			Helicopter: 5
+			Concrete: 4
+			Heavy: 3
+			Spaceship: 2
+			Superheavy: 1
+		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
+		UpdatesUnitStatistics: false
+	Warhead@ChaingunPercentage: AreaDamagePercentage
+		InvalidTargets: Air
+		Damage: 4
+		ValidTargets: Ground, Water, Air
+		Spread: 100
+		Versus:
+			Shield: 25
+			None: 20
+			Flak: 19
+			Plate: 18
+			Heroic: 17
+			Scout: 16
+			Fighter: 15
+			Wood: 14
+			Light: 13
+			Bomber: 12
+			Concrete: 11
+			Medium: 10
+			Helicopter: 9
+			Steel: 8
+			Heavy: 7
+			Spaceship: 6
+			Superheavy: 5
+		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
+		UpdatesUnitStatistics: false
+	Warhead@ShotgunGrenadeEnemy:
+		Damage: 8000
+	Warhead@ShotgunGrenadeAlly: AreaDamage
+		InvalidTargets: Air
+		Damage: 4000
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 300
+		Falloff: 100, 50, 20, 0
+		Versus:
+			HAZMAT: 71
+			COMPOSITE: 99
+			BLAST: 40
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 147
+			Wood: 150
+			Scout: 144
+			Light: 129
+			Medium: 128
+			None: 127
+			Heavy: 111
+			Steel: 107
+			Fighter: 98
+			Concrete: 92
+			Superheavy: 90
+			Flak: 87
+			Plate: 79
+			Heroic: 76
+			Bomber: 75
+			Helicopter: 64
+			Spaceship: 41
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	Warhead@ShotgunShrapnelAlly: AreaDamage
+		InvalidTargets: Air
+		Damage: 4000
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 300
+		Falloff: 100, 50, 20, 0
+		Versus:
+			HAZMAT: 71
+			COMPOSITE: 99
+			BLAST: 40
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 147
+			Wood: 150
+			Scout: 144
+			Light: 129
+			Medium: 128
+			None: 127
+			Heavy: 111
+			Steel: 107
+			Fighter: 98
+			Concrete: 92
+			Superheavy: 90
+			Flak: 87
+			Plate: 79
+			Heroic: 76
+			Bomber: 75
+			Helicopter: 64
+			Spaceship: 41
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+	-Warhead@ShotgunGrenadeEnemy:
+
+	Warhead@ShieldHit:
+		Condition: shieldhit
+		Duration: 4
+		Range: 1250
+		ValidTargets: Shielded
+		InvalidTargets: Air
+	Projectile: Bullet
+		Image: 50CAL
+		Speed: 4000
+		Blockable: false
+		LaunchAngle: 66
+		Inaccuracy: 200
+		ContrailZOffset: 4000
+		ContrailStartColor: EECCAA88
+		ContrailEndColor: 88664422
+		ContrailStartWidth: 40
+		ContrailEndWidth: 80
+		ContrailLength: 8
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@Glow:
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 elitecadregun:
 	Inherits@finalmain: ^Warhead_Bullet_Medium_Flat
 	Inherits@wh: ^Warhead_Bullet_Light
@@ -679,31 +773,11 @@ laserelitecadregun:
 	Inherits@3: ^LaserWeapon
 	Inherits@4: ^TSLaserEffect
 	Inherits@fx: ^ts_nod_laserelitecadregun
+
 	Projectile: LaserZap
 		Width: 36
 		Duration: 8
 		SecondaryBeamWidth: 18
-	ReloadDelay: 50
-	Burst: 5
-	BurstDelays: 2
-	Report: cygun1.aud
-	Range: 6677
-	ValidTargets: Ground, Air
-	TargetActorCenter: false
-	Warhead@SmallArmsPercentage: AreaDamagePercentage
-		Damage: 1
-	Warhead@ChaingunPercentage: AreaDamagePercentage
-		Damage: 1
-	-Warhead@LaserWeapon:
-	-Warhead@LaserExtraDamage:
-	Warhead@LaserWeaponPercentage: AreaDamagePercentage
-		Damage: 1
-	Warhead@Laser_Heavy:
-		Damage: 6600
-		PercentageScale: 0
-	-Warhead@Laser_Heavy_ExtraDamage:
-
-	Projectile:
 		ContrailEndColor: 88664422
 		ContrailEndWidth: 80
 		ContrailLength: 8
@@ -713,37 +787,15 @@ laserelitecadregun:
 		Image: 50CAL
 		Inaccuracy: 200
 		Speed: 4000
-	Warhead@ChaingunPercentage:
-		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
-		Spread: 100
-		UpdatesUnitStatistics: false
-		ValidTargets: Ground, Water, Air
-		Versus:
-			Bomber: 12
-			Concrete: 11
-			Fighter: 15
-			Flak: 19
-			Heavy: 7
-			Helicopter: 9
-			Heroic: 17
-			Light: 13
-			Medium: 10
-			None: 20
-			Plate: 18
-			Scout: 16
-			Shield: 25
-			Spaceship: 6
-			Steel: 8
-			Superheavy: 5
-			Wood: 14
-	Warhead@ShieldHit:
-		Condition: shieldhit
-		Range: 1250
-		ValidTargets: Shielded
-		Duration: 10
-	Warhead@ShieldHitEffect:
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-	Warhead@SmallArmsPercentage:
+	ReloadDelay: 50
+	Burst: 5
+	BurstDelays: 2
+	Report: cygun1.aud
+	Range: 6677
+	ValidTargets: Ground, Air
+	TargetActorCenter: false
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
+		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		Spread: 50
 		UpdatesUnitStatistics: false
@@ -766,6 +818,45 @@ laserelitecadregun:
 			Steel: 7
 			Superheavy: 1
 			Wood: 10
+	Warhead@ChaingunPercentage: AreaDamagePercentage
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
+		Spread: 100
+		UpdatesUnitStatistics: false
+		ValidTargets: Ground, Water, Air
+		Versus:
+			Bomber: 12
+			Concrete: 11
+			Fighter: 15
+			Flak: 19
+			Heavy: 7
+			Helicopter: 9
+			Heroic: 17
+			Light: 13
+			Medium: 10
+			None: 20
+			Plate: 18
+			Scout: 16
+			Shield: 25
+			Spaceship: 6
+			Steel: 8
+			Superheavy: 5
+			Wood: 14
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
+	Warhead@LaserWeaponPercentage: AreaDamagePercentage
+		Damage: 1
+	Warhead@Laser_Heavy:
+		Damage: 6600
+		PercentageScale: 0
+	-Warhead@Laser_Heavy_ExtraDamage:
+	Warhead@ShieldHit:
+		Condition: shieldhit
+		Range: 1250
+		ValidTargets: Shielded
+		Duration: 10
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 ChamBlade:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light
@@ -822,13 +913,13 @@ TSShadowTeamAttach:
 	Warhead@2: TargetDamage
 
 TSShadowTeamBomb:
+	Inherits@fx: ^ts_nod_tsshadowteambomb
 	Projectile: InstantHit
 	Warhead@1Dam: AreaDamagePercentage
 		ValidTargets: demolishable
 		Spread: 1000
 		Damage: 100
 
-	Inherits@fx: ^ts_nod_tsshadowteambomb
 TSShadowTeamTargeting:
 	ReloadDelay: 500
 	Range: 12000
@@ -936,14 +1027,142 @@ TSLaserHarpyClaw:
 		ValidTargets: Ground, Air
 		Damage: 8000
 		PercentageScale: 9988
+^ts_nod_tslaserharpymulticlaw:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@Effect: CreateEffect
+		Explosions: small_napalm
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+
 TSLaserHarpyMultiClaw:
-	Inherits: TSLaserHarpyClaw
-	Burst: 4
-	BurstDelays: 0
+	Inherits: ^ts_nod_tslaserharpymulticlaw
+	Warhead@Laser_Heavy_Flat: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Air
+		Spread: 64
+		Damage: 4000
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 56
+			COMPOSITE: 71
+			BLAST: 95
+			REFLECTOR: 59
+			ARMOR: 70
+			Shield: 294
+			Superheavy: 162
+			Spaceship: 144
+			Concrete: 141
+			Plate: 134
+			Heavy: 124
+			Helicopter: 114
+			Steel: 103
+			Medium: 100
+			Flak: 97
+			Bomber: 88
+			Light: 80
+			Wood: 75
+			None: 70
+			Fighter: 68
+			Scout: 55
+			Heroic: 45
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 75
+		PercentageScale: 9975
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heroic: 24
+			Spaceship: 23
+			Concrete: 22
+			Heavy: 21
+			Plate: 20
+			Helicopter: 19
+			Steel: 18
+			Medium: 17
+			Flak: 16
+			Bomber: 15
+			Wood: 14
+			Light: 13
+			None: 12
+			Fighter: 11
+			Scout: 10
+	ValidTargets: Ground, Air
+	ReloadDelay: 25
+	Range: 4969
 	TargetActorCenter: true
+	Warhead@Laser_Heavy_ExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 200
+		Damage: 1000
+		Falloff: 100, 75, 50, 25
+		Versus:
+			HAZMAT: 56
+			COMPOSITE: 70
+			BLAST: 96
+			REFLECTOR: 59
+			ARMOR: 70
+			Shield: 9
+			Scout: 36
+			None: 33
+			Light: 30
+			Flak: 27
+			Medium: 24
+			Plate: 21
+			Heavy: 18
+			Heroic: 15
+			Superheavy: 12
+			Wood: 9
+			Steel: 9
+			Concrete: 9
+			Fighter: 9
+			Bomber: 9
+			Helicopter: 9
+			Spaceship: 9
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Projectile: LaserZap
+		Width: 36
+		HitAnim: laserfire
+		ZOffset: 2047
+		Blockable: false
+		Duration: 8
+		Color: FF000080
+		SecondaryBeam: true
+		SecondaryBeamWidth: 18
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFF
 		Inaccuracy: 1024
 		TrackTarget: false
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
+	Burst: 4
+	BurstDelays: 0
+	Report: cygun1.aud
+	SoundVolume: 0.25
 	Warhead@Bullet_Medium: AreaDamage
 		Damage: 0
 		ValidTargets: Ground, Air
@@ -954,13 +1173,141 @@ TSLaserHarpyMultiClaw:
 		Damage: 0
 		ValidTargets: Ground, Air
 	-Warhead@Bullet_Medium:
-	Warhead@Laser_Heavy_Flat:
-		ValidTargets: Ground, Air
-		Damage: 4000
-		PercentageScale: 9975
+
+^ts_nod_tslaserharpyaoeclaw:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@Effect: CreateEffect
+		Explosions: small_napalm
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 TSLaserHarpyAOEClaw:
-	Inherits: TSLaserHarpyClaw
+	Inherits: ^ts_nod_tslaserharpyaoeclaw
+	Warhead@Laser_Heavy_Flat: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Air
+		Spread: 300
+		Damage: 8000
+		Falloff: 100, 50, 25
+		Versus:
+			HAZMAT: 56
+			COMPOSITE: 71
+			BLAST: 95
+			REFLECTOR: 59
+			ARMOR: 70
+			Shield: 294
+			Superheavy: 162
+			Spaceship: 144
+			Concrete: 141
+			Plate: 134
+			Heavy: 124
+			Helicopter: 114
+			Steel: 103
+			Medium: 100
+			Flak: 97
+			Bomber: 88
+			Light: 80
+			Wood: 75
+			None: 70
+			Fighter: 68
+			Scout: 55
+			Heroic: 45
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 75
+		PercentageScale: 9988
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Superheavy: 25
+			Heroic: 24
+			Spaceship: 23
+			Concrete: 22
+			Heavy: 21
+			Plate: 20
+			Helicopter: 19
+			Steel: 18
+			Medium: 17
+			Flak: 16
+			Bomber: 15
+			Wood: 14
+			Light: 13
+			None: 12
+			Fighter: 11
+			Scout: 10
+	ValidTargets: Ground, Air
+	ReloadDelay: 25
+	Range: 4969
+	TargetActorCenter: true
+	Warhead@Laser_Heavy_ExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 200
+		Damage: 1000
+		Falloff: 100, 75, 50, 25
+		Versus:
+			HAZMAT: 56
+			COMPOSITE: 70
+			BLAST: 96
+			REFLECTOR: 59
+			ARMOR: 70
+			Shield: 9
+			Scout: 36
+			None: 33
+			Light: 30
+			Flak: 27
+			Medium: 24
+			Plate: 21
+			Heavy: 18
+			Heroic: 15
+			Superheavy: 12
+			Wood: 9
+			Steel: 9
+			Concrete: 9
+			Fighter: 9
+			Bomber: 9
+			Helicopter: 9
+			Spaceship: 9
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Projectile: LaserZap
+		Width: 36
+		HitAnim: laserfire
+		ZOffset: 2047
+		Blockable: false
+		Duration: 8
+		Color: FF000080
+		SecondaryBeam: true
+		SecondaryBeamWidth: 18
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFF
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
+	Burst: 4
+	BurstDelays: 0
+	Report: cygun1.aud
+	SoundVolume: 0.25
 	Warhead@Bullet_Medium: AreaDamage
 		Spread: 300
 		Falloff: 100, 50, 25
@@ -971,12 +1318,6 @@ TSLaserHarpyAOEClaw:
 		Spread: 300
 		Falloff: 100, 50, 25
 	-Warhead@Bullet_Medium:
-	Warhead@Laser_Heavy_Flat:
-		Spread: 300
-		Falloff: 100, 50, 25
-		ValidTargets: Ground, Air
-		Damage: 8000
-		PercentageScale: 9988
 
 TSToxinRifle:
 	Inherits@wh: ^Warhead_Chemical_Light

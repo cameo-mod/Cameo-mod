@@ -101,7 +101,7 @@ W2_BASELINE = 123   # 122 -> 123: restored PulseMissile (drain-minified dead blo
                     # count is ~175, i.e. real debt IMPROVED; W23 removes the
                     # renamed _Flat/ExtraDamage shims as it lands.
 W3_BASELINE = 7     # 12 -> 7 post-rebase resync onto 86577a7aa; was:    # dual ^Projectile_ inherit (21->12: same collapse)
-W4_BASELINE = 41    # 52 -> 41 post-rebase resync onto 86577a7aa; was:    # dual ^Effect_ inherit; Apocalypse effect composition owns its overrides.
+W4_BASELINE = 40    # 52 -> 41 post-rebase resync onto 86577a7aa; was:    # dual ^Effect_ inherit; Apocalypse effect composition owns its overrides.
                     # 51 -> 54 re-baseline 2026-09-23: effect-kind detection now
                     # recognises ^<game>_<stem> derivations (Inherits -> ^Effect_*,
                     # e.g. ^d2k_laser_heavy, ^CabalMissileEffect, ^RA2EliteEffects),
@@ -109,7 +109,7 @@ W4_BASELINE = 41    # 52 -> 41 post-rebase resync onto 86577a7aa; was:    # dual
                     # the old prefix-only classifier. Same class as the W2
                     # ^Compatibility_* rename: measurement fix, not new debt.
 W5_BASELINE = 389   # more than one resolved MAIN warhead; merge-payload repairs
-W6_BASELINE = 442   # 443 -> 442: W7-remainder materialization batch moved
+W6_BASELINE = 437   # 443 -> 442: W7-remainder materialization batch moved
                     # the last local effect node on the DAWN file-set into a family.
                     # was: 442 -> 443: restored PulseMissile re-exposes its 5 local
                     # effect warheads (CreateEffect/LeaveSmudge/Shake). Pre-drain debt.
@@ -124,7 +124,7 @@ W6_BASELINE = 442   # 443 -> 442: W7-remainder materialization batch moved
 # from a TEMPLATE, "and NEVER from another weapon". Nothing measured that clause before, so
 # W1 could pass a weapon that inherits all three of its parents from other weapons. Both
 # ratchets are set by THIS script's own first run, never from a scratch scan.
-W7_BASELINE = 760   # 804 -> 760: W7-remainder materialization batch (DAWN
+W7_BASELINE = 664   # 804 -> 760: W7-remainder materialization batch (DAWN
                     # file-set: d2k 16 + tiberiansun 11 + starcraft 3 +
                     # tiberiandawn 1 + outpost2 edenMobile chain 2).
                     # was: 807 -> 804: W7 batch-5 no-covering inlines
