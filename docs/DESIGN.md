@@ -3546,9 +3546,13 @@ and a secondary vehicle `Armor@<role>` is added, so cyborgs count as both
 infantry and vehicles for weapon Versus tables. True vehicles and walkers do
 not use this pattern.
 
-⚠ **The two armors are AVERAGED, not multiplied** (W20/W21 R5, live since
-2026-08-15): `AreaDamageWarhead.MultiArmorCombination` defaults to `Average`,
-so `Plate` 88 with `Superheavy` 10 resolves to 49, not 8. **Never add a
+⚠ **The two armors combine by their GEOMETRIC MEAN, not multiplied** (W20/W21 R5
+"averaged, not multiplied", live since 2026-08-15; the average became GEOMETRIC by maintainer
+ruling 2026-09-25 — Versus rows are multipliers, so their centre is the geometric mean, the
+same reason R16 pins every warhead to geomean 100): `AreaDamageWarhead.MultiArmorCombination`
+defaults to `Geometric`, so `Plate` 88 with `Superheavy` 10 resolves to **30** (√880), not 49
+(the arithmetic average, where the more vulnerable body dominated) and not 8.8 (the engine's
+product). Integer-only math in the synced path. **Never add a
 `DamageMultiplier@<role>: Modifier: 200` to compensate** — that was the old
 recipe, it fought the ENGINE's multiplication rather than the design, and all
 7 instances were deleted when averaging landed. R1 abolishes `DamageMultiplier`

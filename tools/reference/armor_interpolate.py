@@ -256,8 +256,8 @@ _UNRULED_RESOLVED = {
 # ⭐ CYBORGS COUNT HALF TO EACH (maintainer's ruling, 2026-09-21). DESIGN.md's cyborg dual-armor
 # rule is explicit: a CABAL cyborg keeps its infantry-class `Armor` and adds a vehicle
 # `Armor@<role>`, "so cyborgs count as both infantry and vehicles for weapon Versus tables", and
-# the two rows are AVERAGED (`MultiArmorCombination: Average` — `Plate` 88 with `Superheavy` 10
-# resolves to 49, not 8). A cyborg is infantry x vehicle, so it casts half a vote on each ladder.
+# the two rows are combined by their GEOMETRIC mean (`MultiArmorCombination: Geometric` since
+# 2026-09-25 — `Plate` 88 with `Superheavy` 10 resolves to 30; it was the arithmetic 49 before). A cyborg is infantry x vehicle, so it casts half a vote on each ladder.
 #
 # The result weights a source's opinion about a LADDER by how much real evidence it has for that
 # ladder's rungs. Nothing is discarded — CA still speaks about infantry, just quietly.
